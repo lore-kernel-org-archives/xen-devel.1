@@ -4,47 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6606AC624D3
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 11:33:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1408307.1640938 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 54F84C624D3
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 11:40:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1408296.1640948 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2SAa-0004hv-SI; Fri, 04 Sep 2026 11:33:20 +0000
+	id 1x2SH9-000710-LG; Fri, 04 Sep 2026 11:40:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1408307.1640938; Fri, 04 Sep 2026 11:33:20 +0000
+Received: by outflank-mailman (output) from mailman id 1408296.1640948; Fri, 04 Sep 2026 11:40:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2SAa-0004ho-PG; Fri, 04 Sep 2026 11:33:20 +0000
-Received: by outflank-mailman (input) for mailman id 1408307;
- Fri, 04 Sep 2026 11:33:19 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x2SAZ-0004gi-3M
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 11:33:19 +0000
+	id 1x2SH9-00070t-IJ; Fri, 04 Sep 2026 11:40:07 +0000
+Received: by outflank-mailman (input) for mailman id 1408296;
+ Fri, 04 Sep 2026 11:25:33 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <hemanth.selam@gmail.com>) id 1x2S33-0002TS-FV
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 11:25:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x2SAX-000O2A-Ux
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 13:33:17 +0200
-Received: from [10.42.69.12] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06c31b828000c4f3@swg.vates.tech>)
- id 6a9aac71-bab6-0a2a0a5309dd-0a2a450cade0-18
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 13:33:17 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a06c31b828000c4f3@swg.vates.tech>)
- id 6a9aac7d-f479-0a2a450c0019-b9ff1c22847f-3
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 13:33:17 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a06c31b828000c4f3.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 04 Sep 2026 11:33:12 +0000
-Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id E952981E01;
- Fri,  4 Sep 2026 13:33:11 +0200 (CEST)
+ id 1x2S32-009Sod-Qy
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 13:25:32 +0200
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <hemanth.selam@gmail.com>)
+ id 6a9aaa96-8faa-0a2a0a5109dd-0a2a45068016-38
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 13:25:32 +0200
+Received: from [209.85.216.43] (helo=mail-pj1-f43.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <hemanth.selam@gmail.com>)
+ id 6a9aaaab-195a-0a2a45060019-d155d82bb0ae-3
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 13:25:32 +0200
+Received: by mail-pj1-f43.google.com with SMTP id
+ 98e67ed59e1d1-398a4dcf289so1030679a91.2
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 04:25:32 -0700 (PDT)
+Received: from volcano9f6e-hostos.amd.com ([165.204.217.251])
+ by smtp.gmail.com with ESMTPSA id
+ 5a478bee46e88-3339ac24d7esm8970969eec.15.2026.09.04.04.25.28
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 04 Sep 2026 04:25:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,160 +53,215 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=t9BuHE8obK9dSOMYNjEQsWnEnAKXBhY9xAbIFVOW7EE=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=XHWY6VqyM9PPyHiriRoCwyz0id/59azo44BfxwPELGijo5j4wO+gI4kOhic7JUj30JytzgJqh
- pepErlmG+12BLeefAH9SIi63o0GmQhxTmXqMC5XzZ+JYKMch9gFEh3QUNWC7l3+UKgHKeGzXegg
- u3ctK6cwKu7WT9SS8EjWBeeUaE+tbQiGLhzaEc9gXCnAS6YJ+ANykCblzn7RBQkeni2JBLXBT+M
- oM8EHEdXnbx/LXDB1VscO2R56wC+SpOm1PsN3oCK3izOMEsgfL/2cCtvc+4czaQBxbLNYMhCHvx
- pnJu3Qz1m9co0QL/PYHc85IFarZ7qB6mehsaVZZxQr7g==
-X-Zone-Loop: c1421a106663301ef218a06aa98c82b90cb2cf80646d
-x-campaign-type: default
-x-transaction-id: 2983af79-6a5d-445e-b1cd-36e3e0178a06
-x-swg-uid: 01-db399680-487d-4c54-a8b2-3034c74d0bbb
-X-Mailer: Sweego
-Message-ID:
- <1788521592.8631fc262581453bbf619ec5b2062170.1a06c31b828000c4f3@vates.tech>
-x-swg-bid: 1788521592.8631fc262581453bbf619ec5b2062170.1a06c31b828000c4f3
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788521131; x=1789125931; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=545O0WDL5qNzN0FtnQz+2XQixX5ANxvieXurE5YLToc=;
+        b=V8mnPLnIBndK1ZsdrmWe+sN2cqMZZq6A4T1xIQv9M1NT7a/DQQzIefD+7oAJPvlbxQ
+         UA2HIUPj7dpNxDzLT2jUwF5IfBMEAT/dmLuhNluPPOmCD5L1d7R2bbhxfmztzWunH6xN
+         5AtquoIWi6Ga5LxCrZ61E0HDvQhx+N74IQz4cH7UGuE7ywp3eJd0G7PtLoXv1B1ElaWB
+         +bSNGyAOD6ddLuOFt4TYRFXrl4TcZjmEpfU8HsIVaWjERovAY9oJ3lSHxD3bhnmefASY
+         zrnjUq/7nfCM3XWhF3ymK2weiXNG9S8CAt1ZMJY/ASSm33J5Vxs1RxV20EHCU/pzGBwr
+         4gqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788521131; x=1789125931;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=545O0WDL5qNzN0FtnQz+2XQixX5ANxvieXurE5YLToc=;
+        b=TOZPaPwb+8QEwhHDr+1ZPaxi1Yll3Kah7mjfO8xa83+UzAXPFMOOQO5oBcEoMbqeKO
+         pU1huIlR5NHA41fK5q0YaeSORfBMUpgNcnYx24wmhbwTiN4TVvM1Oo+7kCL1mztJ9TI1
+         EPFr5iVobaj/JrX6p0dmZn8ZCkADJflf6h+p02a/DPFaSVrOIDqJXvfMGBPdTy6bArL5
+         8CFAncqgSUtBzn2x9nVL4wExzdSrQ+52keQIofg7AAUejw80DPflpNxzDSSa09+JC+VU
+         ysGbvpniwidIAkcPJd3otOzO1iP5/l+lc6mGAteVnc6x/r6Gt1XM6nAEYHdGPV37vbKT
+         xipg==
+X-Forwarded-Encrypted: i=1; AKwUvBxQXQPyXtJ7QDPuUOnvF5zt+YQembMI8lsCIJRR3epS1qqzniWj1hWIPu2GonTrNCRaWqZWySekaQA=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kLx5hcjhiTmtAUhvCD2CUcrqqaLzGJ6OpgetKWRbp15iTl2A8y
+	LAzQPQaT+1SzUaCL9IPNahgj2shLSV42QSjzJ7DtL4TmvTn3unvWS8nDvxPLcvA8
+X-Gm-Gg: AYBFou0SDnTFydPnqu0fGJ4+1RA5aU/8uEIWh7VDgRsaxn46k7tppVTDzkpLZEPM6vV
+	ziUUO8mIE1o5SWUT8K3Nd59PU98SDJPV3sbhdvUehMuc5Xyxk/5HFFz2qlICp2UpTZNKFR/Zqbu
+	riOjycrWK4248lsDm42TSUtok8XQTvlkw4ZTtBEv9uZZRFWZz4HUzeiy7qbdwOxSXLJejx3Khcz
+	URRJRNxggCqQ0Eu6UNDbUfn+BO3FTIYn6PyefCQIO8WKF7W68o+gZhbu4+MBsMO2Y8pC75eHMBN
+	DwWIKKtctRvtsEZakldW1JBiC085JZIzQ1yMLuKPgjfU+tsH9axbBfINgrnCu+A9smjr4HjePuO
+	o+oagWvb/nej2TBUPaI6dtQREiclFWENI4dVR6VaMmnbiMMzeBeBVK82V1OSjXMmposW7gAVA0u
+	HgCHcHD1xV3AtLfIvHM1pa9AxIEvGtm5KZ5OwmioDmj8GAI5+RfuAmHmNsHbwWLW3dt5s//buc6
+	g2+TyVTtBVNocE=
+X-Received: by 2002:a17:90b:2b43:b0:38e:c7b0:84ad with SMTP id 98e67ed59e1d1-39b25ed34f3mr9759398a91.0.1788521130565;
+        Fri, 04 Sep 2026 04:25:30 -0700 (PDT)
+From: Hemanth Selam <hemanth.selam@gmail.com>
+To: Russell King <linux@armlinux.org.uk>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Cc: linux-kernel@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH 1/2] ARM: fix typos in comments
+Date: Fri,  4 Sep 2026 16:55:17 +0530
+Message-ID: <20260904112522.1426-2-hemanth.selam@gmail.com>
+X-Mailer: git-send-email 2.48.1
+In-Reply-To: <20260904112522.1426-1-hemanth.selam@gmail.com>
+References: <20260904112522.1426-1-hemanth.selam@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2 15/39] xen/riscv: add IMSIC vCPU context switch
- handlers
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, 
- Romain Caritey <Romain.Caritey@microchip.com>, 
- Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- Zheng Zhang <zhangzheng@iscas.ac.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <867af892784c295296cdf63e0371fa1b7ed7a1e7.1787838835.git.oleksii.kurochko@gmail.com>
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <867af892784c295296cdf63e0371fa1b7ed7a1e7.1787838835.git.oleksii.kurochko@gmail.com>
-Date: Fri, 04 Sep 2026 13:33:04 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1788521591; l=4122;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=kJkOyO+syx8smwQKel0X8vGDqkIGhKnScfznNqOrnns=;
- b=cQTPSKltBQ8XHFtji/AdOP22wZZUkOJnnb1KWruFfYoDMVbnZW0z5j7kDwQDYyIJZ1m6CD/NN
- UBwJI6X/qpEAe80isJdspzpB5sRhfQSGIzyplBxpbDzS9uUJEtlTt3k
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1788521592154
-X-purgate-ID: tlsNG-d25034/1788521597-50B3DA5B-3F773B20/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4122
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1788521132-F460277B-BA1FCDD2/0/0
+X-purgate-type: clean
+X-purgate-size: 6846
 
-> IMSIC state currently needs to track only which physical CPU owns a vCPU's
-> IMSIC guest interrupt file, as the CPU id is part of the physical address
-> the file is mapped at.
-> 
-> Add imsic_ctxt_switch_from() to record that CPU when a vCPU is switched
-> out. A vCPU running on the s/w VS-file has no h/w file bound to a CPU, so
-> there is nothing to record for it. The recorded value stays unused until
-> vCPU migration support, which needs it to find the file to move away from,
-> is added later.
-> 
-> imsic_ctxt_switch_to() has nothing to do: by the time a vCPU is switched
-> in, VGEIN is already assigned to it and its guest interrupt file is already
-> mapped. Work is only required once a vCPU can move to a different CPU,
-> which means recalculating VGEIN and remapping the file; that is handled
-> separately by the vCPU migration patches.
-> 
-> Install both as the ctxt_switch_{from,to} hooks of struct vintc_ops. MSI
-> delivery is the only mode Xen supports ( aplic_init() panics on an APLIC
-> without an "msi-parent" property, and a guest's domaincfg.DM reads back as
-> a fixed one) so the vAPLIC state to save and restore is always the IMSIC
-> one and no vAPLIC-level forwarder is needed. Being indirect call targets,
-> both handlers get cf_check.
-> 
-> Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->
-> diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-> index ad0a220eda..3787f270d8 100644
-> --- a/xen/arch/riscv/imsic.c
-> +++ b/xen/arch/riscv/imsic.c
-> @@ -20,6 +20,7 @@
->  #include <xen/init.h>
->  #include <xen/libfdt/libfdt.h>
->  #include <xen/macros.h>
-> +#include <xen/rwlock.h>
->  #include <xen/sched.h>
->  #include <xen/smp.h>
->  #include <xen/spinlock.h>
-> @@ -342,6 +343,28 @@ static int __init imsic_parse_node(const struct dt_device_node *node,
->      return 0;
->  }
->  
-> +void cf_check imsic_ctxt_switch_from(struct vcpu *v)
-> +{
-> +    struct vimsic_state *imsic_state = v->arch.vimsic_state;
-> +    unsigned long flags;
-> +
-> +    /*
-> +     * A vCPU using the s/w IMSIC VS-file (guest_file_id == 0) has no h/w
-> +     * VS-file bound to a physical CPU, so there is no location to record.
-> +     */
-> +    if ( !vcpu_guest_file_id(v) )
-> +        return;
-> +
-> +    write_lock_irqsave(&imsic_state->vsfile_lock, flags);
-> +    imsic_state->vsfile_cpu = v->processor;
-> +    write_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
-> +}
-> +
-> +void cf_check imsic_ctxt_switch_to(struct vcpu *v)
-> +{
-> +    /* Nothing to do */
-> +}
-> +
->  int cf_check vcpu_imsic_init(struct vcpu *v)
->  {
->      struct vimsic_state *imsic_state;
-> diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
-> index 93f9e44c7d..73129c3c9e 100644
-> --- a/xen/arch/riscv/include/asm/imsic.h
-> +++ b/xen/arch/riscv/include/asm/imsic.h
-> @@ -109,4 +109,7 @@ unsigned int vcpu_guest_file_id(const struct vcpu *v);
->  
->  int vimsic_make_domu_dt_node(struct kernel_info *kinfo, unsigned int *phandle);
->  
-> +void imsic_ctxt_switch_from(struct vcpu *v);
-> +void imsic_ctxt_switch_to(struct vcpu *v);
-> +
->  #endif /* ASM_RISCV_IMSIC_H */
-> diff --git a/xen/arch/riscv/vaplic.c b/xen/arch/riscv/vaplic.c
-> index 8726f7203d..6c60fe2baf 100644
-> --- a/xen/arch/riscv/vaplic.c
-> +++ b/xen/arch/riscv/vaplic.c
-> @@ -422,6 +422,13 @@ static const struct mmio_handler_ops vaplic_mmio_ops = {
->  static const struct vintc_ops vintc_ops = {
->      .vcpu_init = vcpu_imsic_init,
->      .vcpu_deinit = vcpu_imsic_deinit,
-> +    /*
-> +     * MSI delivery is the only supported mode: aplic_init() panics on an
-> +     * APLIC without an "msi-parent", so the vAPLIC state to save and restore
-> +     * is always the IMSIC one.
-> +     */
-> +    .ctxt_switch_from = imsic_ctxt_switch_from,
-> +    .ctxt_switch_to = imsic_ctxt_switch_to,
+Fix typos in comments, reported by scripts/checkpatch.pl using the
+misspelling list in scripts/spelling.txt.  Only touches comments, no code
+changes.
 
-Maybe this patch could be merged with previous one: patch 50fe9554e1c0 ("xen/riscv: introduce vintc_ctxt_switch_{from,to}()")
+Assisted-by: Cursor:claude-opus-5
+Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
+---
+ arch/arm/boot/compressed/head.S     | 2 +-
+ arch/arm/include/asm/uaccess.h      | 2 +-
+ arch/arm/kernel/cpuidle.c           | 2 +-
+ arch/arm/mm/cache-l2x0.c            | 2 +-
+ arch/arm/mm/context.c               | 4 ++--
+ arch/arm/probes/decode.h            | 2 +-
+ arch/arm/probes/kprobes/opt-arm.c   | 4 ++--
+ arch/arm/probes/kprobes/test-core.c | 2 +-
+ arch/arm/xen/hypercall.S            | 4 ++--
+ 9 files changed, 12 insertions(+), 12 deletions(-)
 
+diff --git a/arch/arm/boot/compressed/head.S b/arch/arm/boot/compressed/head.S
+index 9f406e9c0ea6..e117f2b4dea9 100644
+--- a/arch/arm/boot/compressed/head.S
++++ b/arch/arm/boot/compressed/head.S
+@@ -955,7 +955,7 @@ call_cache_fn:	adr	r12, proc_types
+ 		/*
+ 		 * On v7-M the processor id is located in the V7M_SCB_CPUID
+ 		 * register, but as cache handling is IMPLEMENTATION DEFINED on
+-		 * v7-M (if existant at all) we just return early here.
++		 * v7-M (if existent at all) we just return early here.
+ 		 * If V7M_SCB_CPUID were used the cpu ID functions (i.e.
+ 		 * __armv7_mmu_cache_{on,off,flush}) would be selected which
+ 		 * use cp15 registers that are not implemented on v7-M.
+diff --git a/arch/arm/include/asm/uaccess.h b/arch/arm/include/asm/uaccess.h
+index 1593cf3b9800..9805001f9d72 100644
+--- a/arch/arm/include/asm/uaccess.h
++++ b/arch/arm/include/asm/uaccess.h
+@@ -24,7 +24,7 @@
+  * These two functions allow hooking accesses to userspace to increase
+  * system integrity by ensuring that the kernel can not inadvertantly
+  * perform such accesses (eg, via list poison values) which could then
+- * be exploited for priviledge escalation.
++ * be exploited for privilege escalation.
+  */
+ #if defined(CONFIG_CPU_SW_DOMAIN_PAN)
+ 
+diff --git a/arch/arm/kernel/cpuidle.c b/arch/arm/kernel/cpuidle.c
+index fba1f8bb03b5..784457ac7b2b 100644
+--- a/arch/arm/kernel/cpuidle.c
++++ b/arch/arm/kernel/cpuidle.c
+@@ -79,7 +79,7 @@ static const struct cpuidle_ops *__init arm_cpuidle_get_ops(const char *method)
+  * cpuidle_ops are tagged __initconst and will be unloaded after the init
+  * process.
+  *
+- * Return 0 on sucess, -ENOENT if no 'enable-method' is defined, -EOPNOTSUPP if
++ * Return 0 on success, -ENOENT if no 'enable-method' is defined, -EOPNOTSUPP if
+  * no cpuidle_ops is registered for the 'enable-method', or if either init or
+  * suspend callback isn't defined.
+  */
+diff --git a/arch/arm/mm/cache-l2x0.c b/arch/arm/mm/cache-l2x0.c
+index 470867160076..0eaaf99d3d11 100644
+--- a/arch/arm/mm/cache-l2x0.c
++++ b/arch/arm/mm/cache-l2x0.c
+@@ -1381,7 +1381,7 @@ static void aurora_pa_range(unsigned long start, unsigned long end,
+ 	unsigned long flags;
+ 
+ 	/*
+-	 * round start and end adresses up to cache line size
++	 * round start and end addresses up to cache line size
+ 	 */
+ 	start &= ~(CACHE_LINE_SIZE - 1);
+ 	end = ALIGN(end, CACHE_LINE_SIZE);
+diff --git a/arch/arm/mm/context.c b/arch/arm/mm/context.c
+index 4204ffa2d104..95d477cab0f5 100644
+--- a/arch/arm/mm/context.c
++++ b/arch/arm/mm/context.c
+@@ -76,7 +76,7 @@ void a15_erratum_get_cpumask(int this_cpu, struct mm_struct *mm,
+ 
+ #ifdef CONFIG_ARM_LPAE
+ /*
+- * With LPAE, the ASID and page tables are updated atomicly, so there is
++ * With LPAE, the ASID and page tables are updated atomically, so there is
+  * no need for a reserved set of tables (the active ASID tracking prevents
+  * any issues across a rollover).
+  */
+@@ -243,7 +243,7 @@ void check_and_switch_context(struct mm_struct *mm, struct task_struct *tsk)
+ 	check_vmalloc_seq(mm);
+ 
+ 	/*
+-	 * We cannot update the pgd and the ASID atomicly with classic
++	 * We cannot update the pgd and the ASID atomically with classic
+ 	 * MMU, so switch exclusively to global mappings to avoid
+ 	 * speculative page table walking with the wrong TTBR.
+ 	 */
+diff --git a/arch/arm/probes/decode.h b/arch/arm/probes/decode.h
+index facc889d05ee..b09c44ba1030 100644
+--- a/arch/arm/probes/decode.h
++++ b/arch/arm/probes/decode.h
+@@ -250,7 +250,7 @@ enum decode_reg_type {
+ 	REG_TYPE_NOPCWB,   /* No PC if load/store write-back flag also set */
+ 
+ 	/* The following types are used when the encoding for PC indicates
+-	 * another instruction form. This distiction only matters for test
++	 * another instruction form. This distinction only matters for test
+ 	 * case coverage checks.
+ 	 */
+ 	REG_TYPE_NOPCX,	   /* Register must not be PC */
+diff --git a/arch/arm/probes/kprobes/opt-arm.c b/arch/arm/probes/kprobes/opt-arm.c
+index 966c6042c5ad..a3aed8c01c98 100644
+--- a/arch/arm/probes/kprobes/opt-arm.c
++++ b/arch/arm/probes/kprobes/opt-arm.c
+@@ -210,11 +210,11 @@ int arch_prepare_optimized_kprobe(struct optimized_kprobe *op, struct kprobe *or
+ 	 *
+ 	 * So the maximum forward branch should be:
+ 	 *   (0x007fffff << 2) = 0x01fffffc =  0x1fffffc
+-	 * The maximum backword branch should be:
++	 * The maximum backward branch should be:
+ 	 *   (0xff800000 << 2) = 0xfe000000 = -0x2000000
+ 	 *
+ 	 * We can simply check (rel & 0xfe000003):
+-	 *  if rel is positive, (rel & 0xfe000000) shoule be 0
++	 *  if rel is positive, (rel & 0xfe000000) should be 0
+ 	 *  if rel is negitive, (rel & 0xfe000000) should be 0xfe000000
+ 	 *  the last '3' is used for alignment checking.
+ 	 */
+diff --git a/arch/arm/probes/kprobes/test-core.c b/arch/arm/probes/kprobes/test-core.c
+index 2de28088dac8..531fec3621b8 100644
+--- a/arch/arm/probes/kprobes/test-core.c
++++ b/arch/arm/probes/kprobes/test-core.c
+@@ -125,7 +125,7 @@
+  *	.byte	ARG_TYPE_END
+  *	.byte	TEST_ISA	@ flags, including ISA being tested
+  *	.short	50f-0f		@ offset of 'test_before'
+- *	.short	2f-0f		@ offset of 'test_after2' (if relevent)
++ *	.short	2f-0f		@ offset of 'test_after2' (if relevant)
+  *	.short	99f-0f		@ offset of 'test_done'
+  *	@ start of test case code...
+  *	0:
+diff --git a/arch/arm/xen/hypercall.S b/arch/arm/xen/hypercall.S
+index f794dac9859a..b8b6192e310e 100644
+--- a/arch/arm/xen/hypercall.S
++++ b/arch/arm/xen/hypercall.S
+@@ -32,9 +32,9 @@
+ 
+ /*
+  * The Xen hypercall calling convention is very similar to the ARM
+- * procedure calling convention: the first paramter is passed in r0, the
++ * procedure calling convention: the first parameter is passed in r0, the
+  * second in r1, the third in r2 and the fourth in r3. Considering that
+- * Xen hypercalls have 5 arguments at most, the fifth paramter is passed
++ * Xen hypercalls have 5 arguments at most, the fifth parameter is passed
+  * in r4, differently from the procedure calling convention of using the
+  * stack for that case.
+  *
 -- 
-Baptiste Le Duc <baptiste.le-duc@vates.tech>
+2.48.1
+
 
