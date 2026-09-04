@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6EB53C79F80
-	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 05:47:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1407844.1640660 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 334A3C61DD3
+	for <xen-devel@archiver.kernel.org>; Fri,  4 Sep 2026 05:58:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1407853.1640670 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2Mln-0002Hn-UV; Fri, 04 Sep 2026 05:47:23 +0000
+	id 1x2MwT-00048b-Vj; Fri, 04 Sep 2026 05:58:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1407844.1640660; Fri, 04 Sep 2026 05:47:23 +0000
+Received: by outflank-mailman (output) from mailman id 1407853.1640670; Fri, 04 Sep 2026 05:58:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x2Mln-0002Hf-Pc; Fri, 04 Sep 2026 05:47:23 +0000
-Received: by outflank-mailman (input) for mailman id 1407844;
- Fri, 04 Sep 2026 05:47:23 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x2MwT-00048U-RA; Fri, 04 Sep 2026 05:58:25 +0000
+Received: by outflank-mailman (input) for mailman id 1407853;
+ Fri, 04 Sep 2026 05:58:24 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x2Mln-0002HZ-7e
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 05:47:23 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x2MwS-00048O-B7
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 05:58:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x2Mll-00Evvm-Pr
- for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 07:47:21 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x2MwR-00GkUB-2x
+ for xen-devel@lists.xenproject.org; Fri, 04 Sep 2026 07:58:23 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9a5b67-8faa-0a2a0a5109dd-0a2a450c85c8-12
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 07:47:21 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a9a5df3-e002-0a2a0a5209dd-0a2a4506ca76-18
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 07:58:22 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9a5b69-f479-0a2a450c0019-d155802ddc7e-3
- for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 07:47:21 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-49b965570d7so6680045e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 22:47:21 -0700 (PDT)
+ id 6a9a5dfe-195a-0a2a45060019-d1558031b1ba-3
+ for <xen-devel@lists.xenproject.org>; Fri, 04 Sep 2026 07:58:22 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-499ae1c6471so4931735e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 03 Sep 2026 22:58:22 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cf7710aa5sm41744705e9.7.2026.09.03.22.47.19
+ 5b1f17b1804b1-49cfbdacc45sm16518645e9.11.2026.09.03.22.58.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 03 Sep 2026 22:47:20 -0700 (PDT)
+ Thu, 03 Sep 2026 22:58:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,59 +55,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788500841; x=1789105641; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788501502; x=1789106302; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=49xhD3ztLT/F9jM3xzEFoV+axbupICEp6pC99szlEjA=;
-        b=VMNggHhZk8ODPm50SAzPzoKFBw0HUer4tYd6V2pj+dR7MloKzrvTHSQqTvGGr8JU8Z
-         UtXF2jOOaV/ps++HlSgs8+De6v8z7tAz0CzJL6Am6reRpblN3QBvklSR4IiEIlzhANtN
-         aUIXk4YImgB5b2bjetCwWs1sc2z9C+Rw9QqOH8DYkU/HKFN1k4F8vhi3ygaX3glTFUDA
-         YM/YMmJbRpANuPbd/RFyZFNOxA4lop/STymTYHt6Qm80xsKY2ho5M6udiY2XhZvk5Ik8
-         CsH+ZZg6zsbynnVGiFdDnayk5t/RLtO6vndk7wFrnfVuKs7Np0sYQJVrjvDkzuej18az
-         GEmw==
+        bh=MN8uVxAs2vhm8m1hxerJDE9AVNv1ciMaFiYvOkc+Eqw=;
+        b=UqC5D7bP8w+qtIElIv2oV60Ozyq6fbZxf137NdV0oWRiHIllGTxFyw2au1wB5JLJd8
+         c2CK8CWnpGI91WSp4j5w/EcNTD4UWiMiGMi3GfoRfR6r3PKGbVkNbkh266Rkk0RTzxTe
+         Jm999RupZw5Vax7xrkwS6H+O3w8b+Th7LMLgIf3w53VItkatWQnicHBctrHFx9WRrHhH
+         B+GF/CrxUK6MAbzotSl9pRwz0u7P89nCSa4awBtBQHvi9089OVfCrLeEKmn+LDLw+z0l
+         akufHafskca9IHuy10Cwbu+7NiumC/s6EOx7+nFIe77ONob4gaK68vBG9hWUAzgLfUhZ
+         9WjQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788500841; x=1789105641;
+        d=1e100.net; s=20251104; t=1788501502; x=1789106302;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=49xhD3ztLT/F9jM3xzEFoV+axbupICEp6pC99szlEjA=;
-        b=eJMWAaype2g/r53PPm3VZqsRHDmwK3vCAUigHWk0rjsSri6FBO1vEA8W5ChBgo0QiO
-         HmdnNqvQs3tXPXEfqQOoCTPRKs09dzPnWqbmnQFiVyXznDUEvJZplZ45R5h6FO21aXnQ
-         rPlnodVy/9Kap8Sy0swqwRowfX1A3amX3xW5qUnZp0PIXrq8vJRiI76mPwt/FPz/GnxA
-         R7uQxY2Mw1cqdLXzzBaHhcnTDJHQv/YbZslYcySQW4PSWi2BjQ44jEAu7gZKK5JoJSyd
-         Y8q41BXC6jc0RLiQxtw78uifOaIXynmDLLB5UiBaPQMrV3RhhaSbHnB6behWw20icBeP
-         K/Ig==
-X-Forwarded-Encrypted: i=1; AKwUvBwkcm0wrjnm5XXArhkKy+0tW8rWKlezkgKcr6ZLBxkFto13fLmiMAEz/uiyPJOeneAqCZ9pRfy7ino=@lists.xenproject.org
-X-Gm-Message-State: AFuF++m2lr6HTfS063SLyX39Gg367ELC75X3uH3osKtuOHcKMJG85Jh8
-	aPVyu9Kk0VeUBjFPgxt0FApOXPF7Un4aKdLqWGw+wkocCqKer+BzB8CTXJX0KAy5xw==
-X-Gm-Gg: AYBFou2z6wtZumaFK4vPVP2ptElQ65Z8H98YVv4HFBfPzUPJtNgC3Dpa4VGT/z9o/z6
-	QoH+CfZWdnk7wZPYQBIey4y6LN94P8ChobNoMTlJkOSOykIOYhsYnb8ckS4G5Iqj+e1huTS8cPq
-	97iygxHCIfT+hqVWN1jNBhOFjl5ymBB+MCh/rqmWZXEcS4P8bbHzdKJm/zmL6CfE2gTfvzB1lXy
-	1mBYkS8FwMrnjUe8uNui1Uq8JcL51W8XKoIjfhfp33KJ1A1qrJtg9ul0ZQN+G7QVtFT+zrXZ91H
-	OCZbeLDbf9tji8iSD+OwfLVVGJ/b4Vc64fC+aHAnsMR+EyWkwO/HF7JdHHvRsotGVWn2Xf+Hk/+
-	BgP0uXklyAaiGDtmnYMDTLW/47go3fnKwyrkAwThniJoPbIBBId0TYCRSmKQNPfV8pUaXlZvRQn
-	EUYsmqeZH1s1S6O/M+gbQJKRXieFMK+7j6OaQFTlKXvtU64YO321O+EgY6jXE9vHCwSRlG9Pbkw
-	Np7P8AL2kvfNuHPrGwJ4l2lsJaMyvw6LeBISFNL5MRB0Xbs9ZD3
-X-Received: by 2002:a05:600c:138a:b0:49c:fc6e:8cba with SMTP id 5b1f17b1804b1-49cfc6e8e34mr7095385e9.30.1788500840961;
-        Thu, 03 Sep 2026 22:47:20 -0700 (PDT)
-Message-ID: <5d942345-e804-400d-ad4e-e9671d8e9062@suse.com>
-Date: Fri, 4 Sep 2026 07:47:19 +0200
+        bh=MN8uVxAs2vhm8m1hxerJDE9AVNv1ciMaFiYvOkc+Eqw=;
+        b=kfmVEGP2WtRLVMNkedaKAUMpmdd+nc1cdzcBw2ux0h37DQQiK/hlHE2cLJaH1It1Oj
+         RgtRcBzp7O0ODnWYhzbOfRRlFHsGsN3q+zA4J5sLq/1UMZJPuuVLW4Qtx+H/oQDq8yLD
+         cLZQ/HEMbpwZq+2E53+V2/429gYUR1LLQJEae7KMZG9s54UBs1eboYmfzLn/DiqcphLT
+         TLdANx9xxzHDZUiL1r2BaxB0tChv2DPyI7qqZq/ApshcnJSqQh80GNF1qYMs2bWABuEC
+         17zXookNZSq8Iq1umJ9SaMNCq00398J23PBjQGibUczNjp+SmFfqbUf4P4dzbfUkEZtl
+         7GsQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzQUhTYZbsXM//lKZlDWKAhPPaesQ1Xb8Krj+yT8PMxw7A3oe9z7TBO2caMUu9qMBeW2q/MKzvOsPo=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nYgpSJQzIezfIpIj3faL38Fj+vDGJR4Euk5wRq3AI+c1R7OTig
+	4r2G8IHrq0GEMFejAAGsNNokRg5USGpslDaPtStUz5H5rriu+J9O0ovLDuNEMozY4Q==
+X-Gm-Gg: AYBFou0DGi6t0ifaHqi6XYONyQ1+LHvBaY70EMT8Eb+gY/yNumunJHpN/O0DBveisGY
+	lbhyAmj2PYDSgFSsyfd2d4oixoTkquz8B2SsM4NL5B66eZ1NxMEiXqMC/qYhpqJ/EvwAtc7PwLN
+	POI0U+LsGXK7vr40HY+id6eoCGnO/mULEJUOHA059w6crJChPkqna/btqLWETS6Usm6wX6AIcTb
+	jr/uQ0SgUDoM182k6OxMwyaZAQZEMil9WsYOlT7hq29ahgeGfINUkCguqWAYG02YAsDr1EB4+Yg
+	qxuS16wt+q4OfmwR9k2fXxouotvXZwmns7O00EPrFyXAxljnMvWb6ywRtRqpYuMHRR7wdEUpeMM
+	ZObFmaj6SHnatqs05APLh5yHWgTjxo20kyMCGrIOo9H+gjF3HUd9+aQWLm8E2tMnz7LfKcJQrQG
+	FtKGAHWVbAE3cgz8dpchgDXNLWVS0SOLQYLb7VONLXOQfQgVNfA5SbnWbRafdE1yV8xuHp1m2qZ
+	PiAzjkOU/qfF3p16zbBiIS+WyPx+RElj0cdj18lf0DWLFZbyYV4
+X-Received: by 2002:a05:600c:4515:b0:49a:252d:52f5 with SMTP id 5b1f17b1804b1-49cf8241ab8mr45185865e9.11.1788501502396;
+        Thu, 03 Sep 2026 22:58:22 -0700 (PDT)
+Message-ID: <bc9c9214-26c4-4523-9dfa-49fba3592665@suse.com>
+Date: Fri, 4 Sep 2026 07:58:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 02/14] x86/mm: introduce populate_perdomain_mapping()
 To: George Dunlap <dunlapg@umich.edu>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Alejandro Vallejo <agarciav@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- George Dunlap <gwd@xenproject.org>, xen-devel@lists.xenproject.org
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
  <20260901-asi-part2-2-ecc269f268b7@xenproject.org>
+ <5071d4da-d9b1-45cd-8e9b-778df417ee7b@suse.com>
+ <CAFLBxZZDh1TqwJNxChpk6pBWppQ5yOaDPz6V7orrHRe2uS-OEA@mail.gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -133,150 +134,20 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260901-asi-part2-2-ecc269f268b7@xenproject.org>
+In-Reply-To: <CAFLBxZZDh1TqwJNxChpk6pBWppQ5yOaDPz6V7orrHRe2uS-OEA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1788500841-50D3CA5B-93E4B1CA/0/0
+X-purgate-ID: tlsNG-16d1c6/1788501502-FE27077B-8524740A/0/0
 X-purgate-type: clean
-X-purgate-size: 5819
+X-purgate-size: 344
 
-On 02.09.2026 11:43, George Dunlap wrote:
-> --- a/xen/arch/x86/mm.c
-> +++ b/xen/arch/x86/mm.c
-> @@ -6334,6 +6334,130 @@ int create_perdomain_mapping(struct domain *d, unsigned long va,
->      return rc;
->  }
->  
-> +/*
-> + * Map @nr pages, @mfn[0..nr-1], at consecutive pages from @va in v's view of
-> + * the per-domain area, with page-table @flags.  The range must lie within a
-> + * single per-domain slot, and must already have been plumbed down to the L1
-> + * tables by create_perdomain_mapping(): missing structure is a bug.  A
-> + * present entry not owned by the area (no _PAGE_AVAIL0) is silently
-> + * replaced, as that is how callers update their mappings; a present
-> + * area-owned entry is freed and replaced, which constrains the calling
-> + * context (see the comment in the body).  No TLB flushing is done: the
-> + * caller decides whether the old translations can still be cached
-> + * anywhere.
-> + *
-> + * When v's page-tables are loaded on this pCPU the L1 entries are reached
-> + * through the recursive linear mappings; otherwise the walk maps the
-> + * per-domain page-table pages transiently with IRQs off, so it needs
-> + * nothing from the current address space and is usable from any context --
-> + * including the context switch, before the incoming vcpu's page-tables are
-> + * loaded.
-> + */
-> +void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
-> +                                const mfn_t *mfn, unsigned int nr,
-> +                                unsigned int flags)
-> +{
-> +    l1_pgentry_t *l1tab = NULL, *pl1e;
-> +    const l3_pgentry_t *l3tab;
-> +    const l2_pgentry_t *l2tab;
-> +    struct domain *d = v->domain;
-> +    unsigned long irq_flags;
-> +
-> +    ASSERT(va >= PERDOMAIN_VIRT_START &&
-> +           va < PERDOMAIN_VIRT_SLOT(PERDOMAIN_SLOTS));
-> +    ASSERT(!nr || !l3_table_offset(va ^ (va + nr * PAGE_SIZE - 1)));
-> +    /* Area-owned pages are installed by create_perdomain_mapping() only. */
-> +    ASSERT(!(flags & _PAGE_AVAIL0));
-> +
-> +    if ( likely(this_cpu(pgtable_vcpu) == v) )
-> +    {
-> +        unsigned int i;
-> +
-> +        /*
-> +         * Fast path: v's page-tables are loaded on this pCPU, so the L1
-> +         * entries can be reached using the recursive linear mappings.
-> +         */
-> +        pl1e = &__linear_l1_table[l1_linear_offset(va)];
-> +
-> +        for ( i = 0; i < nr; i++, pl1e++ )
-> +        {
-> +            /*
-> +             * An area-owned entry (installed by create_perdomain_mapping(),
-> +             * marked _PAGE_AVAIL0) holds the only reference to its page, so
-> +             * displacing it means freeing it.  Nothing in this series
-> +             * replaces area-owned backing, hence the ASSERT_UNREACHABLE();
-> +             * any future caller doing so must run where freeing is
-> +             * permitted -- IRQs enabled, not in interrupt context (see
-> +             * ASSERT_ALLOC_CONTEXT()) -- which the context switch path is
-> +             * not.
-> +             */
-> +            if ( unlikely(perdomain_l1e_needs_freeing(*pl1e)) )
-> +            {
-> +                ASSERT_UNREACHABLE();
-> +                free_domheap_page(l1e_get_page(*pl1e));
-> +            }
-> +            l1e_write(pl1e, l1e_from_mfn(mfn[i], flags));
-> +        }
-> +
-> +        return;
-> +    }
-> +
-> +    BUG_ON(!d->arch.perdomain_l3_pg);
-> +
-> +    /*
-> +     * Slow path: walk v's per-domain page-table pages.  All mappings are
-> +     * local to this function, so disabling interrupts for the duration of
-> +     * the walk satisfies the map_domain_page_irqoff() contract.  This in
-> +     * turn makes this function usable from the context switch path, where
-> +     * a plain map_domain_page() could recurse into __context_switch() via
-> +     * sync_local_execstate().
-> +     */
-> +    local_irq_save(irq_flags);
-> +
-> +    l3tab = __map_domain_page_irqoff(d->arch.perdomain_l3_pg);
-> +
-> +    /*
-> +     * Missing page-table structure is a hypervisor bug: there is no safe
-> +     * continuation, least of all from the context switch, where the next
-> +     * descriptor fetch through an unmapped GDT slot would be fatal.
-> +     */
-> +    BUG_ON(!(l3e_get_flags(l3tab[l3_table_offset(va)]) & _PAGE_PRESENT));
-> +
-> +    l2tab = map_domain_page_irqoff(l3e_get_mfn(l3tab[l3_table_offset(va)]));
-> +
-> +    for ( ; nr--; va += PAGE_SIZE, mfn++ )
-> +    {
-> +        if ( !l1tab || !l1_table_offset(va) )
-> +        {
-> +            const l2_pgentry_t *pl2e = l2tab + l2_table_offset(va);
-> +
-> +            BUG_ON(!(l2e_get_flags(*pl2e) & _PAGE_PRESENT));
-> +
-> +            unmap_domain_page_irqoff(l1tab);
-> +            l1tab = map_domain_page_irqoff(l2e_get_mfn(*pl2e));
-> +        }
-> +
-> +        pl1e = &l1tab[l1_table_offset(va)];
-> +
-> +        /*
-> +         * As the fast path -- and the slow path holds IRQs off throughout,
-> +         * so replacing area-owned backing here is never permitted.
-> +         */
-> +        if ( unlikely(perdomain_l1e_needs_freeing(*pl1e)) )
-> +        {
-> +            ASSERT_UNREACHABLE();
-> +            free_domheap_page(l1e_get_page(*pl1e));
-> +        }
+On 03.09.2026 23:27, George Dunlap wrote:
+> So I'd propose:  In both fast and slow paths, replace the free with a
+> printk (keeping the ASSERT_UNREACHABLE), with a comment explaining why
+> leaking is preferable to BUG.
 
-Just for the possible case of freeing here really becoming necessary: This
-could be deferred until ...
-
-> +        l1e_write(pl1e, l1e_from_mfn(*mfn, flags));
-> +    }
-> +
-> +    unmap_domain_page_irqoff(l1tab);
-> +    unmap_domain_page_irqoff(l2tab);
-> +    unmap_domain_page_irqoff(l3tab);
-> +
-> +    local_irq_restore(irq_flags);
-
-... here. Easily for the nr == 1 case (just requires a local variable to
-hold MFN or struct page_info *), and with a slight change to the contract
-with the caller (allowing mfn[] to be altered) also in the general case.
+Fine with me. With this and the l3tab[] unmapping moved earlier:
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
 Jan
 
