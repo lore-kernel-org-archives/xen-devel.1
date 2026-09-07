@@ -4,44 +4,64 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 518ABC79FA1
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 16:07:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1410995.1641799 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DB52C79F9E
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 21:07:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1411049.1641810 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3brx-0003ND-Dy; Mon, 07 Sep 2026 16:06:53 +0000
+	id 1x3gYS-0006UT-Jd; Mon, 07 Sep 2026 21:07:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1410995.1641799; Mon, 07 Sep 2026 16:06:53 +0000
+Received: by outflank-mailman (output) from mailman id 1411049.1641810; Mon, 07 Sep 2026 21:07:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3brx-0003N6-BO; Mon, 07 Sep 2026 16:06:53 +0000
-Received: by outflank-mailman (input) for mailman id 1410995;
- Mon, 07 Sep 2026 16:06:52 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x3gYS-0006UI-Ee; Mon, 07 Sep 2026 21:07:04 +0000
+Received: by outflank-mailman (input) for mailman id 1411049;
+ Mon, 07 Sep 2026 21:07:03 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x3brw-0003N0-8D
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 16:06:52 +0000
+ (envelope-from <dongli.zhang@oracle.com>) id 1x3gYQ-0006Ts-Kp
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 21:07:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3brv-00EMuy-L3
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 18:06:51 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x3gYP-00Au1y-Ts
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 23:07:01 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a9ee106-2eae-0a2a0a5409dd-0a2a4502849e-18
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 18:06:51 +0200
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a9ee11b-6ca4-0a2a45020019-d155dd2db4e0-3
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 18:06:51 +0200
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-48436251906so4250344f8f.0
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 09:06:51 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cfbe5b252sm276392875e9.3.2026.09.07.09.06.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Sep 2026 09:06:50 -0700 (PDT)
+ (envelope-from <dongli.zhang@oracle.com>)
+ id 6a9f2773-e002-0a2a0a5209dd-0a2a450cbf14-2
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 23:06:59 +0200
+Received: from [205.220.165.32] (helo=mx0a-00069f02.pphosted.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dongli.zhang@oracle.com>)
+ id 6a9f2772-f479-0a2a450c0019-cddca5201304-3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 23:06:59 +0200
+Received: from pps.filterd (m0246629.ppops.net [127.0.0.1])
+ by mx0b-00069f02.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 687DKLEl1981575; Mon, 7 Sep 2026 21:06:40 GMT
+Received: from iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com
+ (iadpaimrmta01.appoci.oracle.com [130.35.100.223])
+ by mx0b-00069f02.pphosted.com (PPS) with ESMTPS id 4ggbd3tanp-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Mon, 07 Sep 2026 21:06:39 +0000 (GMT)
+Received: from pps.filterd
+ (iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com [127.0.0.1])
+ by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (8.18.1.7/8.18.1.7)
+ with ESMTP id 687L5Sp9009266; Mon, 7 Sep 2026 21:06:38 GMT
+Received: from sn4pr2101cu001.outbound.protection.outlook.com
+ (mail-southcentralusazon11012005.outbound.protection.outlook.com
+ [40.93.195.5])
+ by iadpaimrmta01.imrmtpd1.prodappiadaev1.oraclevcn.com (PPS) with ESMTPS id
+ 4gh753nqhs-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=FAIL);
+ Mon, 07 Sep 2026 21:06:38 +0000 (GMT)
+Received: from CO1PR10MB5506.namprd10.prod.outlook.com (2603:10b6:303:161::7)
+ by IA1PR10MB7309.namprd10.prod.outlook.com (2603:10b6:208:3fe::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.6; Mon, 7 Sep 2026
+ 21:06:34 +0000
+Received: from CO1PR10MB5506.namprd10.prod.outlook.com
+ ([fe80::da72:a0a9:5f18:cda4]) by CO1PR10MB5506.namprd10.prod.outlook.com
+ ([fe80::da72:a0a9:5f18:cda4%6]) with mapi id 15.21.0382.007; Mon, 7 Sep 2026
+ 21:06:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,163 +73,354 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=corp-2025-04-25 header.d=oracle.com header.i="@oracle.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector2-oracle-onmicrosoft-com header.d=oracle.onmicrosoft.com header.i="@oracle.onmicrosoft.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=oracle.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	corp-2025-04-25; bh=AqmjaxDO2DAKhVCifJPQSLqdgXkmYjqs6jRh6BnFATU=; b=
+	caHkL8QlUKhZujtY4BO+uqz63mz030uAJFTwYlUhkYF6cq+sXDFQaYn3oKuDWP+b
+	1sU+/LGrlMxs+SVyYzcWmJs8KvxKyriurY9dXlN6c3/I0OYWtRqC4/QhR/K0tEYE
+	kXkfX/o4dOjy8MwGKc5cAIP6vChUGzrGvtZsZzomhuJOZUe8qUxwlf4FliMyQ5K3
+	hOgSoCiCMKJLdTvPsicnuz+BTkaFuO2js15FUOAodcmHKGjFUdRIGwJMpvuWpZx2
+	/opj6St2kDfr6s86FVSO4DaDGLav444IOaxWbQa1/DKKGFjmT7pLEvb6MSeVmAiG
+	RBeK54lGucnpW+dKboYXUg==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tDiWkKBYLhymkc3gYj5VgdJ7/3GAdjQzNE0swWgTWh2yHwFsBhA/7p9e/3vNYz3DtPQlhFOmi03Cfwu/UddwB+0ahlbGulCJYg2Au0FsLHCOXQJt/fZC9UA1uqWk1EQ+pV2F3MozuNUjAfuGj6hPB5vOm6pWzBcoHNRvdqC465bTU9cx9zLHLPObkyOFaOKtjYqhXNYSBOkJ06zpbrt6Gty7ZB8TgdWdkKUWbUSeJa6jU6mJls2KFpmPk/jT/fGfveTaN/DO7QnjL1UqiRjVkAo7Mk7HVFzemDS42xHjmeg7B5uXw5TqxMxKFTX05S0sd1x7ZPL/YstS5/g9odS0BA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=AqmjaxDO2DAKhVCifJPQSLqdgXkmYjqs6jRh6BnFATU=;
+ b=nxHVpxT1Xwv6QUnTb9WCG6/qeccM3Z/P1pgA12xdqHo7HRu1by5MRsXD5xFqKQeG5PmE0gaJHPRVr8T7GChwFXXbAe2tw1lWLyrw48RsHECIZ+Rr3L3GGgyzIaog20Bm8thIES7CizRAQa/CMB+OeZ2RvRgAT+iDHUXD1CgsAiWWqgYgsx5QNc0VGIfrGu8pFxAxwZyXhhf6OYe7REXgQXUrS0Yijnz8L2KLUIxQmQia7dAX1/EDKkCxiMX8Blg0Z5CAOi6ubOchlCYI3siNx/QZAlx9ExKu/PMCE+3fc3ocPR0KG7c3ZyAl3a3hS2pbNgPnhoViDG6URqJJzCykJA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=oracle.com; dmarc=pass action=none header.from=oracle.com;
+ dkim=pass header.d=oracle.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788797211; x=1789402011; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=CLFr3OlASOjwaBAVPfUk7hR+IE8iW3XD8/uzk2PZJjI=;
-        b=E2A5jq/KwWEMkdh1tCWcdSMiJTuyPURZs+Bn6+oXwkVNa+TYno6O4JFakI+5asdNWJ
-         71y9Il5TGbViAZhugMLam34dhQP5h7UX0J3tWkT12r8FbRywyuJVvswpgWfzpi95Fx0w
-         wM26noyNoTOpTkFsGKskvuPnR0h0vcAwPrCUyZBharYl5LGBfb78k2byi/f7ZjGTm5eJ
-         oYNEphJ73YLY9GL+vixVmekI37bJK2PFYVX4BF3UrRigaXGxWAIL4lL8ofb1XtZdTgea
-         M/ABO7nGbWSlB1hG9WK302H/f0Wg0e5jlUWnxxSylytKKg/dSf/VgL/pKOV1SgOeEN5a
-         OnPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788797211; x=1789402011;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=CLFr3OlASOjwaBAVPfUk7hR+IE8iW3XD8/uzk2PZJjI=;
-        b=PyaAa+7zJkbhVtuq/y4nCoL+6+OHyL8042n/2u9IFJqiSzqXzTbEHoauwSfbtO8DbF
-         Fc8YRBIX6gdV5KnJrhRDUL68qoaB+xPoV7g2Ro4cATymXgcrDIDMJJysS9NmdsWu+4pM
-         F3ldQsv7rQV8J0MNx5SJgmD8Zk/r+qIu3FislVJntFquhvMfy4Q/M86IzJh7YfYeC9EP
-         m+FvynOAIEe3HixcAdhiV6Zd3pg7WDnIKWa53v0WsxKKK4otPxFKNaS1yPLjWUX3Hu43
-         8GXnUgRwjjRpDrapuF1yoKccU4gwN75l25xlXdRDZLJTmL63XxXGE/grVUeLrZJBiC+w
-         dBAA==
-X-Forwarded-Encrypted: i=1; AKwUvBzXIkOmRAFpRytm8Zkz+LmovV3YCR5OZ8pSKW63VGcrp/LwVi2MpJPa1w2E8x9iSQ9dhZVTnGZ8B/Q=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nO8XAweh/Iz5cGaTnPiE8MNUnLY8/twtbehfvC7qm9SYFq9uV1
-	T1TzKKZfyClPwMZHKWS4FEiu57c6KeJAkFANExtwOQrMJOhGmGfodYqLdWON+n24GQ==
-X-Gm-Gg: AYBFou2drGbvli1IfqgdU7BjMTciMjR6DxHgaOaGrvJ1KoY3E4CvMferD1bvG9xrkgJ
-	F1644W7OEgIDPf4Q5DQvZI95U2ezasVXOIF+liq646Vmov8Uvtfzn/EYw8pGC6hsoiAeRzwp35G
-	sKqaxDgLKHcdvsRwFppewsvnKWZh1p62TMjMMNc08uS55D9Qs9hMr935yw02gnTcVO0SnZqrJcm
-	B7GKHiKkJJ9il+5dopwPAzYe5wU5b52ofAgj8jy4//O/LMkFPYO4d3ePgsJ+ZZWPHWNjc0WjJA1
-	4+iecKEhIGA4u2DZIRWE3oLqmmPMMi1ALWQyIqKHCn5yC1QMO3+N622EUelKE7yIRH/43BqObhn
-	+FaVPfW629Gfyg9k0k12bAHLc3kunY2qKwdEXUwOgE+SLK/9JB7M6g5w9Wb0ddrjyrw24euHStC
-	pvNuZn/kau8qtZHBOoabVTshGeHsGVcapRvloO349fgcbTSSWPeg84COh82DYzBVHKbNAY0mSFN
-	4l/MCsPG4XSg1dn1vxKx9ByXekcbZdEESgrhWaAM39PetxbdoXjqjMbBiJNteVA
-X-Received: by 2002:a05:600c:3485:b0:49c:cee0:e7c1 with SMTP id 5b1f17b1804b1-49cf825c119mr518591815e9.16.1788797210898;
-        Mon, 07 Sep 2026 09:06:50 -0700 (PDT)
-Message-ID: <99a68a9d-79f0-4090-b0ed-3afdddb57fd6@suse.com>
-Date: Mon, 7 Sep 2026 18:06:48 +0200
-MIME-Version: 1.0
+ d=oracle.onmicrosoft.com; s=selector2-oracle-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=AqmjaxDO2DAKhVCifJPQSLqdgXkmYjqs6jRh6BnFATU=;
+ b=XB1nI16FNhKGaI0Thw9GeGSMpSoNRaeZGqByMTOQanCG9y+R5/g7S4Dassw9F019XOEGDlW82GyniN19ae8Pls8ARAKt8rxV09Bg+F1WM1ObHY58JV0oZLdnBvJVdX+IQ6e0EL5QXTpuck8jbYiBFqYWWxi0tgFbCaHSXT7QXBw=
+Message-ID: <296a04a7-f917-4abd-b564-4a6b8fc6aace@oracle.com>
+Date: Mon, 7 Sep 2026 14:06:29 -0700
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 05/14] x86/pv: update guest LDT mappings using
- {populate,destroy}_perdomain_mapping()
-To: George Dunlap <dunlapg@umich.edu>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Alejandro Vallejo <agarciav@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- George Dunlap <gwd@xenproject.org>, xen-devel@lists.xenproject.org
-References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
- <20260901-asi-part2-5-ecc269f268b7@xenproject.org>
+Subject: Re: [PATCH 0/8] Force detach PCI devices for ACPI-based and PCIe
+ native hot-unplug
+To: "Michael S. Tsirkin" <mst@redhat.com>
+Cc: Igor Mammedov <imammedo@redhat.com>,
+        =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
+        qemu-devel@nongnu.org, qemu-s390x@nongnu.org,
+        xen-devel@lists.xenproject.org, dave@treblig.org, anisinha@redhat.com,
+        philmd@mailo.com, aurelien@aurel32.net, mjrosato@linux.ibm.com,
+        alifm@linux.ibm.com, farman@linux.ibm.com,
+        richard.henderson@linaro.org, iii@linux.ibm.com, david@kernel.org,
+        pasic@linux.ibm.com, borntraeger@linux.ibm.com, cohuck@redhat.com,
+        alex@shazbot.org, clg@redhat.com, akrowiak@linux.ibm.com,
+        jjherne@linux.ibm.com, sstabellini@kernel.org, anthony@xenproject.org,
+        edgar.iglesias@gmail.com, pbonzini@redhat.com, eblake@redhat.com,
+        armbru@redhat.com, joe.jin@oracle.com
+References: <20260824011420.752806-1-dongli.zhang@oracle.com>
+ <aoxY4Rxst2qAyn5z@redhat.com>
+ <01ee4841-76d8-4749-a80e-eb945ab8799a@oracle.com>
+ <20260903172835.0e253a25@imammedo>
+ <6154b857-16b3-476b-a2cb-8837464dd4cb@oracle.com>
+ <20260907044608-mutt-send-email-mst@kernel.org>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260901-asi-part2-5-ecc269f268b7@xenproject.org>
+From: Dongli Zhang <dongli.zhang@oracle.com>
+In-Reply-To: <20260907044608-mutt-send-email-mst@kernel.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1788797211-F28B42AC-73030BB8/0/0
+X-ClientProxiedBy: CH0PR03CA0383.namprd03.prod.outlook.com
+ (2603:10b6:610:119::18) To CO1PR10MB5506.namprd10.prod.outlook.com
+ (2603:10b6:303:161::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CO1PR10MB5506:EE_|IA1PR10MB7309:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6936be15-463b-4771-cd33-08df0d23e5f9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|7416014|376014|23010399003|366016|6133799003|10067099003|18002099003|4143699003|56012099006|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	we0aapbxGdSsA2BqMVmpSMp1XGXzIuABomJv9arPV3oLT9z3pY1W8Ht3nJdiln4zR2LPOp34vlRDnoRGdmyb7SD2G9LjKgZOi6F/iMG4R0EYeNpakDi3I8PA6NeOxJ8nG6Wl62xT/5BlEXbjJoXclBuIs2Pcf5eTphKDrutX8+ukiA3jNw/5+9/eSvrn1xFaW7kCtNVwMNQjXfcQLurKwN908iS1zCsp99Bce7orG8NSew5qGp3fi5LpWuKLw1D00lwQpbV1veBn4eJeGg/3GiHwzo0ARRMxcW8DdOoqO5rSJX2s3C0Hjde8SC+aNrEqkMbi6IH/G73GCOlQOSskUqAZ97joXIsTYLfu7kLM1NphsUWZ9hmdCGEiaGx8toDWWDAWfum382Y0Z1yXeZm/+dBfuOR3p1uQK3q9f2+VJkcxyLdIr2QJz9wpjO9hEGlsEpxwa0bg8eDdoagCOi6kmVbRjGhRJ6ZuxwttrpQUSREOMsi/05+Hv8+VnTdCFUWN2THtw25nGZJTSnz2ovNNr2qBMbwWwrpsT6PNekzYyVPJykwctwEFOgQupno8weT/XnQaHpXGzSOL2Y53Cncpx4IHTwKRrplCB/hWnhvslxV1Wn05SfpK9hLsZQi08AhHPW7vaPqPVQFvTlVZS/nS5Zmwl5MgvInrOL2N1AQh4Do=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR10MB5506.namprd10.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(23010399003)(366016)(6133799003)(10067099003)(18002099003)(4143699003)(56012099006)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?OGF2Q3NOL0R6WEpFZHJMMjA4VXVKSDVoNEJYM2ViODJSZDNZTXdjVUJNdm40?=
+ =?utf-8?B?b1BYTVNmNWJiNnc2VlNmUSs2c3AxbVZjWStoOVhsU1F0TjJYNGxxTTFkK3hQ?=
+ =?utf-8?B?dlVJT3NDZmFEaUpxNnJqWWpOZlNGWm9zS3pTa1VXZ2x3OGo4a3ppSzVwZS9R?=
+ =?utf-8?B?SW5xd3ZRUjd1ZWUxYSs5WVlnaVo3TEhIQ2VaeGRZcTVJYWtmTEtCMTNaeDUv?=
+ =?utf-8?B?ZkNoQUpzZjEvbmpDQU9mVFRzQktCZTJHM3o5dnIxYWMrcU1kUDY5REVYNEs1?=
+ =?utf-8?B?eExIdW1lTGVmY0xyazdZSjFjS1hGZUpoQmxxYkdKSlZLZ20rVTZCN0tCTFd5?=
+ =?utf-8?B?SmRFb2VLM1lzcW5BdktVb1dqNXVvL2JzZzlWOU5yQlNzd1ozR3NmVVhObjc3?=
+ =?utf-8?B?VTkrSGQvc0t0TVZPdm9OSnJGdkVUQllvN2x2aDRuUms5QzgyV21wejdqdGN5?=
+ =?utf-8?B?WmxMVFcwem0zZXRJTTJnME9wdUJQbVAxb0JhUk41RGM1VXROb1hQZUdrNXZq?=
+ =?utf-8?B?bGVKekJVQWZ4SVNMKzJYaWFFRUNGQTRkcHlZNWErMWxYV3F3WHZBNTUzVDI2?=
+ =?utf-8?B?TWlhd0hnTGdmdXpHbXlweElhcUtFTmt5UlFpUlpCMy9KTVRzUkRSKzJ0ZFRX?=
+ =?utf-8?B?VlowUGdMYlZPUkl5RExhVUxYSDNvdjl3dkcvS0Jydnp1QVIyNUszbnl6WUFO?=
+ =?utf-8?B?c1dPNFlJMk1NUjFSU2wxYkNna0Q2Q0RwTzRlclF3dmk3eHRiYW5HMEdRRWlq?=
+ =?utf-8?B?RWRQcWRMZElMaEE5UzlpM0oxTVB2RnpQdnNkNTJ0VzRRTTJaeFVHOCt0bWZo?=
+ =?utf-8?B?NElHMXJFc0xCZ2xvQi9lMkMxMzlDNHA0azZxZjdmeVJud08wT2Fiekx1alV4?=
+ =?utf-8?B?L25abUFjVUxQZjVTa1R3VFlhWXRBVFJjQnEvY0lEYzlieVVlZlJtUGJkeWEx?=
+ =?utf-8?B?K1F6Q1BtbUFDanBUN0FiSkVjeGNnb2hyS0YyK0RJZTErOUZjbFkxUDd2OElZ?=
+ =?utf-8?B?UjhXTTBoR3ppa3lzYWpSM2JNR0IwOThNRGZBWjB2Q2VOVEhhbkJpYVpZSi9B?=
+ =?utf-8?B?MVZheEpaa21sTzZXdEg4dW5XdHFxU3hEWkU4Wlo4aTFlbkROZXZJQVZ6UlFB?=
+ =?utf-8?B?enozMWNocWFYTW5mUnFFRGdHaGJCZm9lRmN4NEdRMzJZNCt6OC9GZHVwSTF4?=
+ =?utf-8?B?QnFTckNXdW5FU2tVWlZCcEVTTENjcUhCa1JYU2FBajY1czVEcFZDdzJ1NVpM?=
+ =?utf-8?B?QzFxeDZBODNTSnM2cE9kRUxkOGFUVUxRSTRGcmN6aldLa3VEUUZMVWVSSXY4?=
+ =?utf-8?B?eTFLZUxGN1IxK3JWYzNqbTZlQyt5ZkJXRlZSOU5pZm9rZVJ2Qjc2NWFxaW1H?=
+ =?utf-8?B?TUZTckFMZVJoQnFDcllzdTlnNmZLSXpwWEF6UC9TNUZVUkF3eUNtTXNBTi84?=
+ =?utf-8?B?OCtldmluclgyeHMvbEhjS1owOThZTmRLMzJKZCt6NnBtaG5UN0hmdUQrT3Rm?=
+ =?utf-8?B?WTVQeWxaWGxZZitPL3V0L213dElLOUpLVFRLclpqV0NBMFN1cGkzUi8rU1hV?=
+ =?utf-8?B?bFlsTzNpOFhBQk9kYUliRUd0TmtqY2RhbDRmd0NsY1VYeGNCYW1JYTd2TjA2?=
+ =?utf-8?B?ajRaOFpIb0tFWTdjM3pFTFk2MThRa3ZkbHA2WnVkZDBEcXhoRUVQVzZuYUZO?=
+ =?utf-8?B?NEEvRGlocWU4Y0pnbExuUkVpeThPclNWM3hSeEpvbFQ3b2d3YmVWOUVZOFR1?=
+ =?utf-8?B?WFN6OS9qMWxjY2lXWENHYjl6dmhldVhIa3J5MDRaTkdiVUdIaFc5QmhVL3cy?=
+ =?utf-8?B?RDYrbzZVSEJHRUo5bW8xSy8zVEkyU3AyNWlMdkR5V3NyZHFwclkvaGZuMUM1?=
+ =?utf-8?B?VkNpaEpvNmVxeVk3UWh1UElBazVpOXNYUElFbERtN3YzaVIvMmQ4aDFmV2t3?=
+ =?utf-8?B?TVZiNm4vM2h4b2ZxcXlVMXMzYWZiMldhUTBnNDEyUXVJN0ZQc2RVQXZraTlo?=
+ =?utf-8?B?UnowaUUzeGZYRlpEN2NjL0JEY2Y1QjRyNHg0bkFrN2ZoMmxZWVZUZk5FRlpq?=
+ =?utf-8?B?OUtQRkRjaVN4Wm4wVll1Rmc4REcySWdvaFdIQnRjZEVXTjZ6dmVsMUpMVU93?=
+ =?utf-8?B?RElranR2c1NmcEhrWTEzV0MzWWtjclRmN0FzcnVFSlBpVXYrclgydkE5cHVJ?=
+ =?utf-8?B?UktzUUJCQ1pIbUFHZTJ2UC9ySGIxRUNvRmNVUW0yek0vRTVmZSs5aGpSRGRZ?=
+ =?utf-8?B?KzJoLzZ4NWRyK0FLbTFhS2d5QnE1OEkvM2FuazMvdEtYS2FyRmJnSDJsUk1W?=
+ =?utf-8?B?NHNSdG1nOFlTMEZ2T0gyQjBLa2lxeVpGY1M5ODdlb3dVdSt0R01KUT09?=
+X-Exchange-RoutingPolicyChecked:
+	frAODmUJamSYFLDlgog3i7JWVjspfyAnMELa6UcZ9myh37UoPmcf9wrjnGXkeDYZsdN2XXbv/CIUswYFwGC9haHUqgRLvotzkkmBycs94JcZetwnPZV4xbvD+iL/zhrspEm8RKe57hi1S1Tjd0oNuuZfGDz7sGw6/SFGQtUVCyUDGjzTkGrM9g0JBI/EiSIQrlolBVTlCPy8IltuHBdFbjK90IKlAmXXzJl8xP12cfItEc0/RaJbH9JdPNXdfK/Gc2vqtfQ/GcPg8FxoQ5mB4Mdz2is0Ts4eXpllxFIA8WzrM4rgJsQ45uFZVd/UBO73JHZ/AYGMo0+6XXHHppaDvg==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	CguOmCVy7x1zTABQjWU9ZPmVdgblEUH7SmzwQzGWp9IH966cSvGrHwZPfHGnJLf/v629czoJYOOLhuVGYMCrivOeyGsnVNORWnV4oeOk9rYiIz1P/w6bL6eSBcKB14R7x3iRaILEKbFB1mye2Wl7ivmKYWuyx02oF6EzP87UnIVUufSpnOctXvd8+AdGkEoUTw8ggxdZd1kGZ7vG25uDrhoTEgJalkv1WEr5605HPCePIuxl8HahPpRAdyd2hYiOaGuwmw4WEbz6YHwEiVtL2hFlMseV7HqsN40AtLDM/VyJkbCdJZ5c6eU7Z972bUmUToyFPp9JfdpOs48emqj2e0NW/kB1tAmVAM0OYH+EWKTv+A4dfHvPOhUk0padYCoC+2Q0uBW4RlUWnXd0Tiye5Ngdi6/s0DXvhPHR7MCkdyoLfuXcn/0xY/ZXqPTe4OW7sZ0LKWK4uBgUabyfFGj8YYxLxhYfSkmEzIW7SQoOenLg8DTBxnc1MToVpM33zCYdqsdvqUDKhFLmIL1SjGiqv6qLiCM1vFzzOwKyY5CQcT36Fv8xrqqAli5JERoPHwEnL/3EeaYrYltCN6MrsJhIvqR5QVbJs/Sh73amygNyPTw=
+X-OriginatorOrg: oracle.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6936be15-463b-4771-cd33-08df0d23e5f9
+X-MS-Exchange-CrossTenant-AuthSource: CO1PR10MB5506.namprd10.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2026 21:06:34.4333
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 4e2c6054-71cb-48f1-bd6c-3a9705aca71b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ki0vWwGa7IisJmwdwxFtczCikiPysoW7Cho2gAK1kg4eod3A9dOHyk5hrab7ItIbLCNTpmvLodPhUU4FSxT7Lg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR10MB7309
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-07_06,2026-09-07_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 spamscore=0
+ adultscore=0 mlxscore=0 suspectscore=0 bulkscore=0 phishscore=0
+ malwarescore=0 lowpriorityscore=0 mlxlogscore=999 classifier=spam adjust=0
+ reason=mlx scancount=1 engine=8.19.0-2606160000 definitions=main-2609070232
+X-Authority-Analysis: v=2.4 cv=EuDiaycA c=1 sm=1 tr=0 ts=6a9f275f b=1 cx=c_pps
+ a=zPCbziy225d3KhSqZt3L1A==:117 a=zPCbziy225d3KhSqZt3L1A==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19
+ a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19 a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10
+ a=VdqzKS8jKosA:10 a=GoEa3M9JfhUA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=jiCTI4zE5U7BLdzWsZGv:22 a=EIcjfB9IiI4px24ztqRk:22 a=yPCof4ZbAAAA:8
+ a=BbSywiCuCK1ZzUgePn0A:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
+ a=5yU3S35YU4bGjq-dph-N:22 a=Bho9c0fBagfJEIQBS7DQ:22 cc=ntf awl=host:12108
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTA3MDIzMiBTYWx0ZWRfXxtDgp7iXrev0
+ Bp+dk5kCJJa9QY8R2u/IlEqSkHLsyqU95ZKDPKfqitdIV0K8u9LcwQbgFIT/TI3XyHZuVJvqLV2
+ o2+8h2+fz56K0WxSLye2fn3Xi56W1dzIgBTqcd1PXXsiG6np0xD+
+X-Proofpoint-GUID: ODkSNkRfWVZJdKO88-9-rFmAYcg7BJxx
+X-Proofpoint-ORIG-GUID: ODkSNkRfWVZJdKO88-9-rFmAYcg7BJxx
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTA3MDIzMiBTYWx0ZWRfX3WqEBjIybOIV
+ Ls7eO2FzKaX/TZlj6zddIENWKcsdSkGVTp0Ns1k0opoeE8e3bao963nLuSFJUz3MgIpR0pf1t23
+ OCdGQrINsoJrsN8QlYu/pOFpDgOipH5lzBG9E2W5DBHG4TbXlNzWmgUmPeAM77NrDS1NIw9uZbr
+ EVvYIIekBZPBoaiLJzEkE6QEsWuezjbhd9GaUExVZF3NAfUSmK6ZfsyOSpLjGjli5xSmu+emTY+
+ kUl+vLG+2CEOYfAwzaYV1IfFVrpywZxtn0Bga+/1hi0kGA8/tknen8zBrgkDvMHUVimwK6A7h7W
+ J0K0e4fjptVQOmjR8yTzs3sJ2tAfg9mWs07GvHppwarQgeLQIiSopBZmVSu0Y1IDg4pqtqyoOHI
+ 9dP1QWZiioFOFJ37lCyV5cGlt8nJLrllWOwjDD/051xVgKXJaKzpG07Kpu0ax6K9av/vcsxCXMm
+ kEdlUV3HGxmnrdD6X9UmOGt9NR0JxBQcdCAksBR0=
+X-purgate-ID: tlsNG-d25034/1788815219-02ADCA5B-7F6A9C4B/0/0
 X-purgate-type: clean
-X-purgate-size: 3148
+X-purgate-size: 8490
 
-On 02.09.2026 11:43, George Dunlap wrote:
-> From: Roger Pau Monné <roger.pau@citrix.com>
+
+
+On Mon, Sep 7, 2026 1:55:42AM -0700, Michael S. Tsirkin wrote:
+> On Mon, Sep 07, 2026 at 01:26:57AM -0700, Dongli Zhang wrote:
+>> 
+>> 
+>> On Thu, Sep 3, 2026 8:28:35AM -0700, Igor Mammedov wrote:
+>> > On Wed, 26 Aug 2026 09:15:47 -0700
+>> > Dongli Zhang <dongli.zhang@oracle.com> wrote:
+>> > 
+>> >> On Mon, Aug 24, 2026 7:44:49AM -0700, Daniel P. Berrangé wrote:
+>> >> > On Sun, Aug 23, 2026 at 06:13:30PM -0700, Dongli Zhang wrote:  
+>> >> >> Hot-unplugging a PCI device can require cooperation from the guest. For
+>> >> >> ACPI PCI hotplug, QEMU notifies the guest through ACPI and the guest
+>> >> >> eventually writes the ACPI PCI eject register. For PCIe native hotplug,
+>> >> >> QEMU notifies the guest through the PCIe hotplug mechanism and waits for
+>> >> >> the slot unplug flow to complete. Only after that completion does QEMU
+>> >> >> unrealize the device and emit DEVICE_DELETED.
+>> >> >> 
+>> >> >> This can leave a device stuck in the unplug pending state when the guest
+>> >> >> does not cooperate. Examples include:
+>> >> >> 
+>> >> >> 1. The guest has panicked, or the relevant ACPI/PCI hotplug driver is
+>> >> >> unavailable.
+>> >> >> 
+>> >> >> 2. The guest is stalled and cannot handle the hot-unplug event. For
+>> >> >> example, stalling the Linux [irq/9-acpi] kernel thread can reproduce this
+>> >> >> for ACPI-based hot-unplug.
+>> >> >> 
+>> >> >> 3. The device was attached to a slot that the guest cannot use. For
+>> >> >> example, a pcie-root-port only supports slot 0. If a device is added to a
+>> >> >> non-zero slot below a pcie-root-port, the guest may never discover the
+>> >> >> device and therefore may never complete the unplug request.
+>> > 
+>> > all of above is actually expected, no (functioning) driver => no hotplug/unplug.
+>> > it's the guest problem. Once device it exposed to guest its life-cycle
+>> > not longer owned by QEMU.
+>> > 
+>> > That's what one would see in real hw as well, you press eject button
+>> > but it will not do anything if OS doesn't process it.
+>> > also see comment at the end.
+>> 
+>> Users are generally more tolerant of issues with real hardware.
+>> 
+>> In virtualization and cloud environments, PCI hotplug is more commonly used for
+>> NICs and storage devices. Users are less tolerant of disruption or unexpected
+>> failures.
 > 
-> Until two patches ago, update_xen_slot_in_full_gdt() used the stashed
-
-With wording at the start here and ...
-
-> pointer in d->arch.pv.gdt_ldt_l1tab to update the incoming vCPU's page
-> tables with Xen's GDT; this was previously necessary because
-> map_domain_page() couldn't be called in a context switch.  Having a
-> handy pointer to an always-mapped version of the GDT/LDT L1 table,
-> other sites which modify the table started using it for convenience,
-> even if they weren't called from within a context switch.  These
-> include pv_map_ldt_shadow_page() and pv_destroy_ldt().
 > 
-> Continue the process of switching users of the stashed reference to use
-> populate_perdomain_mapping() instead.
+> Simply put, surprise removal exists in the hardware.  Emulating that
+> makes sense, at a high level. Nor is it too hard.
+> However, guests, especially Linux, do not
+> handle it all that well generally. Exactly because users
+> would tend to impatiently reach for that tool, then
+> blame QEMU after a crash, we avoided emulating that.
 > 
-> pv_map_ldt_shadow_page() is, by definition, always modifying the
-> currently-running vCPU: it runs from the #PF handler for a descriptor
-> fetch on the guest's behalf, and running the guest implies its page
-> tables are loaded.  So it could simply write the linear recursive
-> mappings directly.  Go through populate_perdomain_mapping() anyway, to
-> keep a single writer for the per-domain area.
 > 
-> For pv_destroy_ldt(), use destroy_perdomain_mapping().
+> I'd expect much more in the way of research into how guests behave,
+> perhaps some ways to limit it to devices that work well, and
+> likely some linux patches to make it work better, before we commit to
+> supporting such interfaces.
+
+Here is my summary of the current situation and plan:
+
+1. Folks are not against adding an option to force-detach a PCI device. It
+should emulate surprise removal, which exists in real hardware. This requires
+adding the emulation to QEMU.
+
+2. However, the more important issue is ensuring that surprise removal works
+well in guest operating systems, such as Linux and Windows, and for a defined
+subset of devices, including virtio devices, VFIO-assigned devices, Intel,
+Mellanox, and Broadcom NICs, and NVMe devices.
+
+From QEMU’s perspective, it is preferable not to expose an interface that may
+cause a guest crash and lead users to blame QEMU for a guest-side limitation.
+
+3. More research and development work is required to support surprise removal in
+both QEMU and guest operating systems, especially the Linux kernel.
+
+4. So far, from QEMU's perspective, everyone suggest rebooting the guest VM for
+many of the use cases I mentioned
+
+5. By instrumenting QEMU code and possibly adding additional metadata, we can
+track whether a PCI device has been accessed by the guest VM, especially during
+PCI hotplug. If the device has never been used by the guest VM, it may be safer
+to force-detach it.
+
 > 
-> Previously, pv_destroy_ldt() used the L1 LDT entries themselves to
-> determine which MFNs to drop type and count references to.  Rather
-> than reading from the stashed L1, keep the MFNs corresponding to L1
-> slots in an array in the vCPU structure, as we do in the GDT case.
-> (Note that unlike the GDT case, these are not part of a public ABI, so
-> can be mfn_t, avoiding a recast-and-copy.)
 > 
-> Note that mappings_dropped (the return value of pv_destroy_ldt()) now
-> reflects the *number of valid MFNs in this array*, not *the number of
-> non-empty L1 entries*.  This introduces an invariant we must maintain:
-> pv_map_ldt_shadow_page() writes both the array entry and the mapping,
-> and pv_destroy_ldt() clears both, so the two stay in lockstep.
+>> > 
+>> >> >> 
+>> >> >> The non-zero slot case has also been discussed in:
+>> >> >> 
+>> 
+>> [snip]
+>> 
+>> >> >   
+>> >> 
+>> >> Thank you very much!
+>> >> 
+>> >> I see that the issue has been fixed. The ticket mentions the following.
+>> >> 
+>> >> "What I am observing is that it seems when the slot ID != 0, the guest OS seems
+>> >> to ignore this and we never seem to hit ich9_pm_device_unplug_cb()."
+>> >> 
+>> >> Based on my experience and evaluation, ACPI-based hotplug is more likely to
+>> >> encounter an issue where the guest VM does not respond to an unplug operation.
+>> > 
+>> > I'm not sure it's a good idea to delete device when guest still thinks it's there
+>> > (you can make guesses on QEMU side if it's in use, how useful those are is questionable).
+>> 
+>> By instrumenting the QEMU functions related to device hotplug and PCI
+>> initialization, we may be able to make informed assumptions.
 > 
-> Also note that, unlike pv_destroy_gdt() from the previous patch,
+> So try. But just know that pci initialization is commonly done by firmware, not
+> the driver.
 
-... here adjusted as per the comment on the earlier patch, ...
+Thank you very much for the confirmation. This also provides users with
+telemetry to narrow down the potential reasons why QEMU does not send the
+DEVICE_DELETED QMP event.
 
-> pv_destroy_ldt() doesn't fill in the values with zero_l1e (see
-> 61031e64d3), so there's no change here.
 > 
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8
-> Signed-off-by: George Dunlap <gwd@xenproject.org>
+>> > 
+>> > as far as I know, ACPI hotplug has no notion of surprise removal (pls educate me if it's not the case),
+>> > so I wouldn't do what you are proposing here at all, it's basically asking for disaster to happen.
+>> > And all this is basically for dealing with abused qemu flexibility.
+>> > 
+>> > Please (re)formulate usecase and make it more clear as what is eludes me
+>> > no matter how many times i've read this cover letter.
+>> 
+>> Here are some use cases in virtualization and cloud environments:
+>> 
+>> 1. Suppose there is a QEMU user configuration error and a PCI device is attached
+>> to slot 1 of a pcie-root-port that uses ACPI-based hotplug. The device may not
+>> be detected or ejected. As a result, there is no way to detach it from the
+>> user's QEMU instance until the guest VM reboots.
+> 
+> sounds vague. if users can not configure qemu what are the chances
+> they will use force detach responsibly?
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+I should have clarified the difference between the QEMU user and the VM owner.
+The QEMU user is the software that manages VMs, such as libvirt or any other
+software that communicates with QEMU through QMP. The VM owner does not have
+access to QEMU.
 
-On the basis that ...
+However, any mistake made by the QEMU user can affect the VM owner. For example,
+if the QEMU user mistakenly adds a PCI device to slot 1 of a pcie-root-port, the
+VM owner cannot detach the device from the QEMU instance until the guest reboots.
 
-> --- a/xen/arch/x86/include/asm/domain.h
-> +++ b/xen/arch/x86/include/asm/domain.h
-> @@ -541,6 +541,8 @@ struct pv_vcpu
->      struct trap_info *trap_ctxt;
->  
->      unsigned long gdt_frames[FIRST_RESERVED_GDT_PAGE];
-> +    /* Max LDT entries is 8192, so 8192 * 8 = 64KiB (16 pages). */
-> +    mfn_t ldt_frames[16];
->      unsigned long ldt_base;
->      unsigned int gdt_ents, ldt_ents;
+In this case, the QEMU user is at fault, but the VM owner is affected.
 
-... this not really insignificant size increase is okay-ish as long as
-struct hvm_vcpu is about three times the size (i.e. is still more than
-double the size after this change).
+A force or surprise removal option helps the QEMU user recover from a
+configuration error without requiring action from the VM owner.
 
-Jan
+> 
+>> 2. For an unknown reason in the customer's guest kernel (Linux, Windows, or
+>> BSD), a PCI device may still be referenced by the guest kernel or its services.
+>> As a result, the guest never writes the eject register for ACPI-based hotplug,
+>> and QEMU cannot detach the device. The customer may blame QEMU for not removing
+>> it. A force-detach option could provide an escape hatch, with a warning that it
+>> may make the VM unstable or insecure.
+> 
+> So just reboot the guest.
+
+I agree.
+
+Sometimes, the VM owner blames QEMU for not detaching a PCI device, even though
+QEMU is technically waiting for the guest VM to write to the EJ register :(
+
+> 
+>> 3. Suppose a VM is stuck because of a guest kernel bug, such as a Linux kernel
+>> panic without a kdump kernel being triggered. The guest kernel is unresponsive.
+>> Force detach could allow the block device to be temporarily attached to another
+>> VM without resetting the currently panicked VM.
+> 
+> So just reboot the guest.
+
+I agree.
+
+Sometimes, the VM owner blames QEMU for not detaching a PCI device, even though
+QEMU is technically waiting for the guest VM to write to the EJ register :(
+
+> 
+>> 4. Provide a mechanism to demonstrate that force detach is unsafe. Otherwise,
+>> users may repeatedly attempt it and mistakenly conclude that QEMU is at fault :)
+> 
+> We have that - we don't support unsafe detach.
+
+Thank you very much!
+
+Dongli Zhang
 
