@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 965D7C79F9E
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 12:25:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1410828.1641649 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5E3EC79F9E
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 12:51:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1410842.1641658 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3YP9-0005Up-2t; Mon, 07 Sep 2026 12:24:55 +0000
+	id 1x3YoO-0002BI-24; Mon, 07 Sep 2026 12:51:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1410828.1641649; Mon, 07 Sep 2026 12:24:55 +0000
+Received: by outflank-mailman (output) from mailman id 1410842.1641658; Mon, 07 Sep 2026 12:51:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3YP8-0005Ui-W5; Mon, 07 Sep 2026 12:24:54 +0000
-Received: by outflank-mailman (input) for mailman id 1410828;
- Mon, 07 Sep 2026 12:24:54 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x3YoN-0002BB-V6; Mon, 07 Sep 2026 12:50:59 +0000
+Received: by outflank-mailman (input) for mailman id 1410842;
+ Mon, 07 Sep 2026 12:50:59 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x3YP8-0005Uc-1i
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 12:24:54 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x3YoN-0002B5-7K
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 12:50:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3YP7-00FbWY-3f
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 14:24:53 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x3YoM-009i7H-K8
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 14:50:58 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9ead09-8faa-0a2a0a5109dd-0a2a4509b37a-40
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 14:24:52 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a9eb321-8faa-0a2a0a5109dd-0a2a4508ed1a-40
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 14:50:58 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9ead14-be1a-0a2a45090019-d155802ccd4f-3
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 14:24:52 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-498028b3d5eso33191175e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 05:24:52 -0700 (PDT)
+ id 6a9eb332-f659-0a2a45080019-d155802fc166-3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 14:50:58 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-49b8687630fso30192725e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 05:50:58 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4858d312ca0sm28162430f8f.4.2026.09.07.05.24.51
+ 5b1f17b1804b1-49d057f4778sm206232265e9.8.2026.09.07.05.50.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Sep 2026 05:24:51 -0700 (PDT)
+ Mon, 07 Sep 2026 05:50:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788783892; x=1789388692; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788785458; x=1789390258; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Bl/qQ2SfhfVrk4NuGod2kJzGCRtkuRD03XNrSIn0gi4=;
-        b=BbQHTPXQT0Ba4pa30qPl2HmqMUS7GfIHMZdVEoLo4lbV6QTmcO3qZGysSHUHgAXKTs
-         QGlRMo/47mZlmQz1iyhD4o0oupZdRUVCCrgEJlGacXSbV9fdntpF2sKRuZ6UlJjj+KZ4
-         AuDnD8f6sNFl/MaKPtmE7UNKEL6qIoNJFNFoWME+DmqH0CeqsY/ji9qvojHzbA7JF4v1
-         xtBTRMOTfoLOHxqSWHjks6As1ZsAhMd9jcjZ+krrdNRahpQDVICVGLtpOI22oABr2m3w
-         Dh+j2JQSrA83V0JJFQlKAo4YmgEu1eIb0GnK14C9pH9wGgtdNrjppcuplIfFD/BqMcUq
-         e0LQ==
+        bh=KDQnOlJQJah94QU/wb3zuGNWKdlBM18vyiNCWzXsH+o=;
+        b=cHjQIUGBg09qflUncPykA1eeXnZTwyqznBpmPkoZt8ix2ZkI3FL7JA/mFRSuA3ub6B
+         /wgWzx1J073cnR3I3RoGF8WhiphHPYCPA+aWRvIttar2NCfnu5Ys33u451GiNP6cSqFw
+         uG5cyRMZo7aQT1vI3R4+Sfth5t3oWZM34GwM4yRf387NV7clcstJGPXiXdXJUBr2IwHK
+         MeGiOt2OS/CzKSMbSFNwM/2YZOVL1CReQShsT2/Z3wnMl4jG158dHWTzn1ExXT9lFeLC
+         evHPrO8Dilbpgi180Tt5J3R+3h8sOPz7Ga/RhhoiJX32nBUuOD7jn8agYAEYPS0F6HjV
+         eQ2w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788783892; x=1789388692;
+        d=1e100.net; s=20251104; t=1788785458; x=1789390258;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Bl/qQ2SfhfVrk4NuGod2kJzGCRtkuRD03XNrSIn0gi4=;
-        b=M+dEFbQLnpi5PmJks0gy272zHxztGzOEuBXNxRA71jaRNXQGJWPISeS2dBzDRo6zNh
-         M54qF4SN8Fe9o5zkUIF1qUoGRujtMm9okAwOTRnNjhRyacLpBB1Pn6y35sJ222SlhrpZ
-         lppvMy3OmE8GdY2QJ6OOhOfwxdZlaN1oa/ljtubtz5ZMUVdfFlWqVkgl5JUu5VtWTO1G
-         vvWjEhnFdbfuaIhlkrQ1mRUXD/rowEB2H2fnBCp3bU10yRPcJoNuoYbBlux01918oH+W
-         NAVqBP2Tpi1EinrQuHqjHPSTDA69cmJc/ax6O+U5EOvgNODm57RSv1d00hDiBrN6mjhK
-         CqcQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxrazheefJ9uhfhIsOcKbUUm1BsrWUx2Tq9kPUnIUox/0QTVkZRLohHA5RqifXKCREXhYzC7Hu1M0c=@lists.xenproject.org
-X-Gm-Message-State: AFuF++k/a4vRss+JX9AebEWSN5OXCqwKppP/bokGyYzMCeZ74htLeAe4
-	85JrWvAstxknuUfyaErCo4xaf11UFSbiqFC1TgXcKhA6Xa3lbR4IPqTizMc2YRIcZA==
-X-Gm-Gg: AYBFou2F+WfGXt2I7gGQpEPCASrFipfi03axMMBeqUC81bWR9NN+q6dOZKk7nnm5spm
-	kZFCaYE5PJD2xcX4Q/80SBW7dAKadMd0+ieQLWIop7lJpoT1hTpC/6i9GbO4GZX4Hk6w4SB6A9R
-	KaUar6rjfUn97lqVGL+zdgZjMImoGPR6dJPkaR0ZTdvp+VUFdnO2CxHRhFgeXx5kQr/bj7+z9io
-	suj7gKlqhjAgLAnAjpkFV8Wosm67KV4zgo2QjTwF9IIbTyLtlT1bwZLlvTtxr9sdfxyaWKD0qqH
-	epmkfyHrmoKWogZWSxfILiIr3bJT/ir3tRBZ/tYBuluqRpkKh23jOu353VeVZ8lXwGoqBV6qXHO
-	KX2SlxXDl7WvA6pn2xpVxKY4Qd59aqFXjY2teHKlIOfx4osc8VLAkWDPDBWTRkKiwlN4/oVQUHW
-	Q9uy+xSOpAJSQfQ8YNqcyH31Z2YXfXMEnNdvcPuHuaUwEhUCAzydSpL9YRRz6K3uGN6qltriLEq
-	AKeupIIfT4tR6uMHsgTq4qypHY6kXVT3PluwlmOKK9+xWAn75LU
-X-Received: by 2002:a05:600c:8708:b0:49c:fa21:1c7c with SMTP id 5b1f17b1804b1-49cfa211d48mr194996565e9.17.1788783892277;
-        Mon, 07 Sep 2026 05:24:52 -0700 (PDT)
-Message-ID: <c7c19c6e-e9d9-4941-868c-ad74815f1e6e@suse.com>
-Date: Mon, 7 Sep 2026 14:24:50 +0200
+        bh=KDQnOlJQJah94QU/wb3zuGNWKdlBM18vyiNCWzXsH+o=;
+        b=ArnLEwj/dF5yHlEWWAcR3jZAjIsUfpC6RjxbY3MLi5PiDafqXGL4zLvAwh0kqCDuJS
+         NLkyA32o0urfBMEtg+gltYsyl4oWbMqO7qoYNSGjJwqftZ9sp4tAZ4CftqyHp/irYl9K
+         1+vRNELLbnEBY+N2FD/9vG5IZAcRKxUPDMdOwN1MpOYuAMfjgjW2b55kmFaIxoGoxXZr
+         +KweHNxYqd1eIdEb6rS0owF271tICguScmKuoAiFFU9LyTnFEjUh1w7183h/zhQcgHbg
+         81qdejc3JymC43uWc5qlfuRB/HkDMx0fYeI6lNrQXdx7hmOP7/A4y2FCdhahG8f7izL3
+         KiBQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxwT7KLlEaLDmp8lzGDvs8K/MAuXAveNP9tpmWz6kFAqwMtRws7ZdwL9lMo0CzV+J6D/HY1XCrJBzo=@lists.xenproject.org
+X-Gm-Message-State: AFuF++ndPFTI/ggZ31PR+fYANQcHQhPz4W43OrfEwYGVq1SjFD84Vj1X
+	ysOqNq7s00PRqdwpAsjZFJ3SwltoOxnjYC1mDVsdiFyZPp3d0BtiGcfvZO7fCO4iyg==
+X-Gm-Gg: AYBFou3MeNa5CuywPx+asG4pIrtlQ+ub06A9Fm0tpuJNHB/bAbQyfW5PfUhyWLlnU5J
+	2kehWj1ZSHgBYWh4olzhJzduWP35VUOvwpiYQak5tRREzymFThxFWSCUA/tjdkkUdk72VPV0MDe
+	m78BAUfMQPFnR1h2iTujOAsqxxJ7GarIl0MkPawUYJeZbrLaEItz00bEVbx/ACOPMzo82f0C5cF
+	YIrsMQpifv4RTXcGoNUc55i/Skbdl4jaJB3CKE1JMoH1WaGqUzlzKEj9idiHDAZMcReIqGvJOVP
+	d3pej+LeCH+PlzopahnJ9Jqdit/7zaDzQsTZ4J/6RDSDz+h41m9rqYd7OV+QAPrB4H8XszxEFVP
+	aWHR3o1uV4FBvbctJR3Sybb7ZG9IdNiZvdZ4alUKiAAI18XC4nRDWIEC9o73+lPeMTBbDNFEnu0
+	PIn3M1fn9vpIvtrerl5pue6S/9mAAs+35pNhSrgwpvPD+f6K0A1xglHAUt7BIjSDrSno22wHTnL
+	h4zLV9CpCJM8oyBS7j63Wy9zwsyFCgSejebHB3jz/syAYG1ozckJOV+11cMeqY=
+X-Received: by 2002:a05:600c:a40f:b0:49c:fa21:e74b with SMTP id 5b1f17b1804b1-49cfa21e9a7mr152484925e9.33.1788785457867;
+        Mon, 07 Sep 2026 05:50:57 -0700 (PDT)
+Message-ID: <39118b9f-2c63-4523-a7c6-76cc25d43163@suse.com>
+Date: Mon, 7 Sep 2026 14:50:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] x86/svm: Intercept CR0 writes selectively
-To: Ross Lagerwall <ross.lagerwall@citrix.com>
+Subject: Re: [PATCH v2 04/14] x86/pv: set/clear guest GDT mappings using
+ populate_perdomain_mapping()
+To: George Dunlap <dunlapg@umich.edu>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Jason Andryuk <jason.andryuk@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
- xen-devel@lists.xenproject.org
-References: <20260904122330.306936-1-ross.lagerwall@citrix.com>
+ Alejandro Vallejo <agarciav@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ George Dunlap <gwd@xenproject.org>, xen-devel@lists.xenproject.org
+References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
+ <20260901-asi-part2-4-ecc269f268b7@xenproject.org>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,78 +134,95 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260904122330.306936-1-ross.lagerwall@citrix.com>
+In-Reply-To: <20260901-asi-part2-4-ecc269f268b7@xenproject.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1788783892-FC212034-6DA51CC8/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1788785458-CDB4987B-C402601F/0/0
 X-purgate-type: clean
-X-purgate-size: 3202
+X-purgate-size: 3879
 
-On 04.09.2026 14:23, Ross Lagerwall wrote:
-> Since 3356d685dbda ("x86/svm: Remove lazy FPU support"), Xen does not
-> need to track when the TS or MP bits change so opt to intercept CR0
-> writes selectively. Aside from potentially reducing a few VMEXITs, this
-> fixes a nested virt bug where L1 intercepts CR0_SEL_WRITE and L0
-> intercepts CR0_WRITE. The hardware prioritizes CR0_WRITE and so L1 never
-> sees any CR0 writes.
+On 02.09.2026 11:43, George Dunlap wrote:
+> From: Roger Pau Monné <roger.pau@citrix.com>
 > 
-> Since CR0 may now change behind Xen's back, sync it on VMEXIT so that
-> the emulator sees the correct value.
-> 
-> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+> Until the previous patch, update_xen_slot_in_full_gdt() used the
 
+Please can we avoid "previous patch" (also again below) and alike in
+commit messages?
+
+> stashed pointer in d->arch.pv.gdt_ldt_l1tab to update the incoming
+> vCPU's page tables with Xen's GDT; this was previously necessary
+> because map_domain_page() couldn't be called in a context switch.
+> Having a handy pointer to an always-mapped version of the GDT/LDT L1
+> table, other sites which modify the table started using it for
+> convenience, even if they weren't called from within a context switch.
+> One example is pv_{set,destroy}_gdt().
+> 
+> The previous patch switched the main user of the stashed reference to
+> use populate_perdomain_mapping() instead.  Continue that process by
+> switching both pv_{set,destroy}_gdt() to it as well.
+> 
+> pv_destroy_gdt() currently loops over the L1 entries directly,
+> extracting the MFN from each, dropping the type and reference unless
+> it was the zero page, and replacing the entry with a read-only mapping
+> of the zero page.  Rather than reading from the stashed L1, drop the
+> references using v->arch.pv.gdt_frames[] instead, and install the
+> zero-page mappings with a single populate_perdomain_mapping() call.
+> This makes gdt_frames[] consistently the source of truth for MFNs.
+> 
+> Note that we must maintain the invariant introduced in cf6d39f819
+> ("x86/PV: properly populate descriptor tables"): pv_destroy_gdt() maps
+> the zero page read-only in torn-down slots rather than unmapping them,
+> so that LAR/LSL/VERR/VERW on a selector beyond the guest's limit clear
+> ZF as on native rather than taking a #PF-converted #GP.  (And since
+> pv_set_gdt() tears down the old GDT before installing the new one,
+> guests never see unmapped entries, only zero-page entries.)
+> 
+> In the case of pv_set_gdt(), we have a slightly awkward situation with
+> types.  The ABI with the guest uses unsigned long[], but
+> populate_perdomain_mapping() wants an array of mfn_t.
+> v->arch.pv.gdt_frames being unsigned long means we can just copy from
+> it across the guest ABI with no conversions.  We could in theory
+> convert it to mfn_t[] instead, and then pass v->arch.pv.gdt_frames
+> into populate_perdomain_mapping(); but then we'd need to add a
+> conversion on all the places where frames are copied out.  We choose
+> instead to copy frames into a temporary mfn_t array on the stack to
+> pass into populate_perdomain_mapping().
+> 
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8
+> Signed-off-by: George Dunlap <gwd@xenproject.org>
+
+With the adjustment above:
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
-with two remarks (which I may take the liberty of carrying out while
-committing):
 
-> --- a/xen/arch/x86/hvm/svm/vmcb.c
-> +++ b/xen/arch/x86/hvm/svm/vmcb.c
-> @@ -50,13 +50,13 @@ static int construct_vmcb(struct vcpu *v)
->      struct vmcb_struct *vmcb = svm->vmcb;
+> --- a/xen/arch/x86/pv/descriptor-tables.c
+> +++ b/xen/arch/x86/pv/descriptor-tables.c
+> @@ -49,33 +49,42 @@ bool pv_destroy_ldt(struct vcpu *v)
 >  
->      vmcb->_general1_intercepts =
-> -        GENERAL1_INTERCEPT_INTR        | GENERAL1_INTERCEPT_NMI         |
-> -        GENERAL1_INTERCEPT_SMI         | GENERAL1_INTERCEPT_INIT        |
-> -        GENERAL1_INTERCEPT_CPUID       | GENERAL1_INTERCEPT_INVD        |
-> -        GENERAL1_INTERCEPT_HLT         | GENERAL1_INTERCEPT_INVLPG      |
-> -        GENERAL1_INTERCEPT_INVLPGA     | GENERAL1_INTERCEPT_IOIO_PROT   |
-> -        GENERAL1_INTERCEPT_MSR_PROT    | GENERAL1_INTERCEPT_SHUTDOWN_EVT|
-> -        GENERAL1_INTERCEPT_TASK_SWITCH;
-> +        GENERAL1_INTERCEPT_INTR          | GENERAL1_INTERCEPT_NMI           |
-> +        GENERAL1_INTERCEPT_SMI           | GENERAL1_INTERCEPT_INIT          |
-> +        GENERAL1_INTERCEPT_CR0_SEL_WRITE | GENERAL1_INTERCEPT_CPUID         |
-> +        GENERAL1_INTERCEPT_INVD          | GENERAL1_INTERCEPT_HLT           |
-> +        GENERAL1_INTERCEPT_INVLPG        | GENERAL1_INTERCEPT_INVLPGA       |
-> +        GENERAL1_INTERCEPT_IOIO_PROT     | GENERAL1_INTERCEPT_MSR_PROT      |
-> +        GENERAL1_INTERCEPT_TASK_SWITCH   | GENERAL1_INTERCEPT_SHUTDOWN_EVT;
+>  void pv_destroy_gdt(struct vcpu *v)
+>  {
+> -    l1_pgentry_t *pl1e = pv_gdt_ptes(v);
+> -    mfn_t zero_mfn = _mfn(virt_to_mfn(zero_page));
+> -    l1_pgentry_t zero_l1e = l1e_from_mfn(zero_mfn, __PAGE_HYPERVISOR_RO);
+> +    const mfn_t zero_mfn = _mfn(virt_to_mfn(zero_page));
+> +    mfn_t zero_mfns[ARRAY_SIZE(v->arch.pv.gdt_frames)];
 
-I think it would be nice to avoid moving the |-s out, to keep ...
+I wonder if having an initializer here might not result in better code. The
+array could likely be filled with REP STOSQ here, and ...
 
->      vmcb->_general2_intercepts =
->          GENERAL2_INTERCEPT_VMRUN       | GENERAL2_INTERCEPT_VMMCALL     |
->          GENERAL2_INTERCEPT_VMLOAD      | GENERAL2_INTERCEPT_VMSAVE      |
-
-... aligning with the ones here.
-
-> @@ -76,8 +76,12 @@ static int construct_vmcb(struct vcpu *v)
->      /* Intercept all debug-register writes. */
->      vmcb->_dr_intercepts = ~0u;
+>      unsigned int i;
 >  
-> -    /* Intercept all control-register accesses except for CR2 and CR8. */
-> -    vmcb->_cr_intercepts = ~(CR_INTERCEPT_CR2_READ |
-> +    /*
-> +     * Intercept all control-register accesses except for CR0 writes (use
-> +     * selective write instead), and CR2 and CR8 reads/writes.
-> +     */
+>      ASSERT(v == current || !vcpu_cpu_dirty(v));
+>  
+>      v->arch.pv.gdt_ents = 0;
+> -    for ( i = 0; i < FIRST_RESERVED_GDT_PAGE; i++ )
+> +
+> +    for ( i = 0; i < ARRAY_SIZE(zero_mfns); i++ )
+>      {
+> -        mfn_t mfn = l1e_get_mfn(pl1e[i]);
+> +        zero_mfns[i] = zero_mfn;
 
-Imo slightly more precise as "... (using selective write intercept instead) ..."
+... the live range of zero_mfn would reduce to about nothing.
 
 Jan
-
-> +    vmcb->_cr_intercepts = ~(CR_INTERCEPT_CR0_WRITE |
-> +                             CR_INTERCEPT_CR2_READ |
->                               CR_INTERCEPT_CR2_WRITE |
->                               CR_INTERCEPT_CR8_READ |
->                               CR_INTERCEPT_CR8_WRITE);
-
 
