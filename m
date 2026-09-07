@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE7E0C79F89
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 08:57:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1410701.1641496 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E263EC79F9E
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 09:03:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1410712.1641506 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3VA7-0005PH-Nr; Mon, 07 Sep 2026 08:57:11 +0000
+	id 1x3VFY-0007L4-Aq; Mon, 07 Sep 2026 09:02:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1410701.1641496; Mon, 07 Sep 2026 08:57:11 +0000
+Received: by outflank-mailman (output) from mailman id 1410712.1641506; Mon, 07 Sep 2026 09:02:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3VA7-0005P8-Jw; Mon, 07 Sep 2026 08:57:11 +0000
-Received: by outflank-mailman (input) for mailman id 1410701;
- Mon, 07 Sep 2026 08:57:09 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x3VFY-0007Kx-6X; Mon, 07 Sep 2026 09:02:48 +0000
+Received: by outflank-mailman (input) for mailman id 1410712;
+ Mon, 07 Sep 2026 09:02:47 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x3VA5-0005Ok-Qt
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 08:57:09 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x3VFX-0007Kr-Kf
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 09:02:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3VA4-00EsAq-Nj
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 10:57:08 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x3VFW-00CGCP-Rb
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 11:02:46 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9e7c64-e002-0a2a0a5209dd-0a2a4504ce30-4
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 10:57:08 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a9e7db0-2eae-0a2a0a5409dd-0a2a4502caee-20
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 11:02:46 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9e7c64-b57f-0a2a45040019-d1558029d949-3
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 10:57:08 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-49b96837ca3so25901435e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 01:57:08 -0700 (PDT)
+ id 6a9e7db6-6ca4-0a2a45020019-d155dd2db558-3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 11:02:46 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-485843aeab8so3660015f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 02:02:46 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cf7740d44sm654838095e9.15.2026.09.07.01.57.07
+ ffacd0b85a97d-485885bbb51sm28002855f8f.30.2026.09.07.02.02.45
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Sep 2026 01:57:07 -0700 (PDT)
+ Mon, 07 Sep 2026 02:02:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,60 +55,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788771428; x=1789376228; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788771766; x=1789376566; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=/b1TuQi8hJ+/5nCdhhrLQiTB7nR8a5uYW4Q3nMNx7rA=;
-        b=Q5+2SPeq7TrA4U1FiNCzDfZdqU9szglQ1cDDaULGwxbl0TeO70FwsdRazihcrxgF5b
-         ST/YAuOSrcBrJ9/JSRCy8Lmdt97vpR6lPvv9Tc+qEM8n6n6Y8HbByUNtGys8NguxUYkX
-         tfFwG2HNTDokUoUkPAwxmRTO7qB7406jPO4zxStGUR6Wk4OPoU/eGOYm5jhJB9s+JYuG
-         EiIT7w2GmQTaTpS5/5NUHdq5GU7SQT051OW52CNAG+MEv7VHQZJaG+TQ19r612Vkijae
-         bNvWxAhdKH49i0J4RcxTpVZxEQBL//a+T6Fvg7vHUjY8mYiLoc6FJuFnH/sy0UUmTmLO
-         2mNA==
+        bh=qsOUt6UxOYz2imrFrcbysjwwValjgsYgX7ewlR2PANM=;
+        b=Tjkc2++KcXq8NxnoHvcHQOMPXRI8prxZiObYZA9XRvvvyDSrTf4Mroz5v2uXH4hN1R
+         U8JvV1YyWJcHVmnbXLV8rmhLio/Xw1gcveBnKgUtlMws/8Os11Vv8b8pJS5C7BnAbmfU
+         SdWSmykqHKr0P37AYV4gGcO08pUR6vZrIDDdE4xyG5G+4DhqZi9j6Y4QhBj+PgCwa1/U
+         cp+1gvniDHjA65wlFKOQPX8g2kYkc0DmGa4ph94nlSRJnvQJX7YJkLnr/u0y6xD4BN+z
+         fGfs69sKGv9ZV5Ik77F4X2Ihd0ca1Cmp433k7Spnt1hnxWmHcnIeXPyMh/mkNgJ5YbPS
+         g+DA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788771428; x=1789376228;
+        d=1e100.net; s=20251104; t=1788771766; x=1789376566;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/b1TuQi8hJ+/5nCdhhrLQiTB7nR8a5uYW4Q3nMNx7rA=;
-        b=FvQfMR7xJu8xu3i4T27g0txf8Q5w+b2RUyjoaT1pv4M8WY9eHwZBHWi8J8qXuYAFXj
-         kdjiXkJOdqiQfx3kwjm1UQTq8e/jUurwDntrxjqAa/h/XMq26AYMlRQvUmNd6RIaMsLh
-         hg76/NyD2V1G0dMQ45dcE8m20dV4oIqr9dKrLbso80R6lcd+2FeFcAv+X5JRPAsJP9ik
-         zAIeDE3Y/UghK+7KmMKLQyoLtWswk+kXb9iH0upu6S9+Sj0ZahCm4Fdlly4Q1ttGk/3q
-         mkKRLRYkvGEU2ed5928SNa2pGCL39lnWrY1/DhOX7xG6OwtkqyPeYycOLLJv7wuDIZ6X
-         PGdA==
-X-Gm-Message-State: AFuF++nbY/e6M4dROB4/x0/ldlq10Kam79WIDe2pf2x1lZCDOIBmujJE
-	ISFDMiXuGzrcArIEbslqNi0lOHdevl0RbmL35oBxQobIHOneJUeiDoWgfSvDsExUIQ==
-X-Gm-Gg: AYBFou05IK7H9dHPsmJBm9ozVSFVm4Vz50aojWmljuefXdyaT5I45JzyvDEayBobsan
-	TaYc4JBmp6V4+Bl3le4l534lKe2eb1BmE+SikvdV1Eqq2mlMhBFh5LLgXXafW1oxAd9RIpd7g92
-	ScBI1Qj0rYSOPLC3UKp7G7fPxMkgOOP/74GQtg9ikfZH+X1akbycv1285SDp65YWl2Kf370D3sE
-	auAhxECApzApaaDKh7NpfkukMdUcNxZdhflzzmSXsedbgEwVXOxRe8LpGBOZFj46EJCd/4LlD2g
-	JhkW+Y3Jn1l58IjeicNJiVbcGiIRMbMhM6TxncHAbs+UWDSQmUmDk8ANvfJAJ9IfFILL7gBj9Ix
-	yv4ELBRhjyaFVAGBybqVOh+ZbSuTgU3AeMh0sK2vA3jpmLUlAQ1Fsm170liroZqlE0s7ePLv/Vv
-	TlxWRq+cmprgirzTP0YaePHpEt/QyM53D/prM3ruq9fMDoL5c1tSqENHBmf4IfmkCPEYJK1VsHV
-	CEVPMSwMsJfs98dcr9U8mo/spTYjMXsi9NVTWUYj2AdvPoJ8pea
-X-Received: by 2002:a05:600c:190d:b0:49d:72d:9ba3 with SMTP id 5b1f17b1804b1-49d072d9bccmr117813685e9.14.1788771427931;
-        Mon, 07 Sep 2026 01:57:07 -0700 (PDT)
-Message-ID: <4591a5ee-5fd9-4caa-95b3-81ef9078e600@suse.com>
-Date: Mon, 7 Sep 2026 10:57:06 +0200
+        bh=qsOUt6UxOYz2imrFrcbysjwwValjgsYgX7ewlR2PANM=;
+        b=eEo9/VvEAnBTQlXsWU5on3OaDQ2vAmKIbf20mZW72P0jBNWk6wjFwppqHIKx2PWCMS
+         mmLrBV1mdWJdM8FBlZBWyuAWtF92bM3fJl2wlrw0eG4d8riBS61wA1k9IXp53fnN5XCF
+         BMYQe1IY3kqrpCAjKh7Y5nezztg5/WhgTuvB8jB7Gntf/0Ks1v/SNZAP906HDcDyeSBz
+         VdCKkICZC/42cF7+sfXEF3GD7oFIoNC1Qkgd4qGSYKeWJ3Y7KvzuPKMJHWmcWDh2nukK
+         xq1wLjbrnRIsKt5W7mcp/dCT0QS74JKII11TkSWTY2rY66tVgP5YKzGsaazz9MdsmYnY
+         XLWQ==
+X-Forwarded-Encrypted: i=1; AKwUvByVU386WHRve6P9Mn22mrU71tCp9b9jc23MUO5k/YGWByRV0Q3GFTIkGVTK9fVQ+vXeURo3TvmrrSU=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nTSmcPudo/1RRvYncbNV6tIHRejxs99JLxfa0fH+9MxcaMU8Vs
+	cSwQPj3BV/z6/zDgpGJDnM/cvK7+hS9wmedC3F/4rLI3d9q+Z54mScnomYmSWZVwKg==
+X-Gm-Gg: AYBFou0emQoJZoBj4T6PhLQyO054Mie9yfV6TgXSCRjq++JdyYfmFTgjN/EnqtkU+2T
+	oToPzqZeBuMwq3lJ3uIxn25gLVLMxZ1hATeoVw3MK2WJUjwPV5GO3oUEWmgvPmQHUj04io9nzRE
+	B3OLCZ+6B2X6rhgb+4+4TsdZzhUge7YojW4HeJ/38a5QprNRWquvHkLbMaGsdrcUfT4uTqSCnHN
+	vFQ0GGYUlMAbpqxj6sKlS6IHcDk9EkpH8wSb2hSqWGfcud0XR1YBXrqIoxc7DHNQ+C+XopzrIW1
+	73MKFNOVTzfNm1JADCLG8Crsl2XTweo6E+qa0yj2tOA9V8LE2Ft/pZ6U6E2v1b6QIE5Au4j1T2H
+	TCOAf65vtd8XNgLbqLLPz4E+uRM2qkQ64OEgNs/loOcz1rWx1umvxgv9jAZW9ywSR/tH14zBmL4
+	fLsVEyN+S72XP1Vcdm/oNyFa5DWTpGACOf7NxpXPBqN0MLgkcjlnE+wFVXmAvJyDOX3efF2IMeK
+	cM+KVaEs95rEnQVRttXxG5TZFvlTYV+2JbGLUJm0j1zSrLf38v+
+X-Received: by 2002:a05:6000:41cb:b0:482:f61c:7cdd with SMTP id ffacd0b85a97d-48586e4a6bbmr45364305f8f.4.1788771766197;
+        Mon, 07 Sep 2026 02:02:46 -0700 (PDT)
+Message-ID: <db00bf99-31b4-4410-8a08-4b285f4f85a6@suse.com>
+Date: Mon, 7 Sep 2026 11:02:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 2/3] x86/viridian: Implement synthetic timer direct
  mode
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Ross Lagerwall <ross.lagerwall@citrix.com>
-Cc: xen-devel@lists.xenproject.org, Paul Durrant <paul@xen.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
+To: Ross Lagerwall <ross.lagerwall@citrix.com>
+Cc: Paul Durrant <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Teddy Astie <teddy.astie@vates.tech>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <20260904141516.367862-1-ross.lagerwall@citrix.com>
  <20260904141516.367862-3-ross.lagerwall@citrix.com>
- <aprgh1uBTItcDvbg@macbook.local>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,32 +133,44 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <aprgh1uBTItcDvbg@macbook.local>
+In-Reply-To: <20260904141516.367862-3-ross.lagerwall@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1788771428-526CAB50-E8F2F81B/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1788771766-F2AB52AC-34825D84/0/0
 X-purgate-type: clean
-X-purgate-size: 878
+X-purgate-size: 1235
 
-On 04.09.2026 17:15, Roger Pau Monné wrote:
-> On Fri, Sep 04, 2026 at 03:15:15PM +0100, Ross Lagerwall wrote:
->> @@ -368,11 +379,18 @@ int viridian_time_wrmsr(struct vcpu *v, uint32_t idx, uint64_t val)
->>          if ( !(viridian_feature_mask(d) & HVMPV_stimer) )
->>              return X86EMUL_EXCEPTION;
->>  
->> +        new.as_uint64 = val;
->> +        if ( new.direct_mode &&
->> +             !(viridian_feature_mask(d) & HVMPV_stimer_direct) )
->> +            return X86EMUL_EXCEPTION;
-> 
-> Do we know whether native HyperV also injects a #GP in case of setting
-> reserved bits on the register?
-> 
-> To keep the previous behavior, should Xen silently ignore the setting
-> when not supported, like it did in the past?
+On 04.09.2026 16:15, Ross Lagerwall wrote:
+> @@ -368,11 +379,18 @@ int viridian_time_wrmsr(struct vcpu *v, uint32_t idx, uint64_t val)
+>          if ( !(viridian_feature_mask(d) & HVMPV_stimer) )
+>              return X86EMUL_EXCEPTION;
+>  
+> +        new.as_uint64 = val;
+> +        if ( new.direct_mode &&
+> +             !(viridian_feature_mask(d) & HVMPV_stimer_direct) )
+> +            return X86EMUL_EXCEPTION;
+> +
+>          stop_stimer(vs);
+>  
+>          vs->config.as_uint64 = val;
+>  
+> -        if ( !vs->config.sintx || !vs->count )
+> +        if ( (vs->config.direct_mode &&
+> +              (vs->config.sintx || vs->config.apic_vector < 0x10)) ||
+> +             (!vs->config.direct_mode && !vs->config.sintx) || !vs->count )
+>              vs->config.enable = 0;
 
-I think so, yes (and I thought I had expressed this also in the v1 comments,
-but apparently not, or not sufficiently clearly).
+Personally I find conditionals like this one ((a && ...) || (!a && ...))
+pretty odd to read. Imo that's a case where the conditional operator is
+quite helpful:
+
+        if ( (vs->config.direct_mode
+              ? vs->config.sintx || vs->config.apic_vector < 0x10
+              : !vs->config.sintx) ||
+             !vs->count )
+
+(Of course further adjustments are going to be needed here to address
+Roger's comment.)
 
 Jan
 
