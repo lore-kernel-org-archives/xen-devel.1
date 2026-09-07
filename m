@@ -4,41 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 313BEC79F8C
-	for <xen-devel@archiver.kernel.org>; Sun,  6 Sep 2026 18:16:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1410465.1641362 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3666C79F89
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 05:13:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1410558.1641370 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3HPi-0008F6-83; Sun, 06 Sep 2026 18:16:22 +0000
+	id 1x3RfW-00039G-DQ; Mon, 07 Sep 2026 05:13:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1410465.1641362; Sun, 06 Sep 2026 18:16:22 +0000
+Received: by outflank-mailman (output) from mailman id 1410558.1641370; Mon, 07 Sep 2026 05:13:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3HPi-0008Ez-3Z; Sun, 06 Sep 2026 18:16:22 +0000
-Received: by outflank-mailman (input) for mailman id 1410465;
- Sun, 06 Sep 2026 18:16:20 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x3RfW-000398-8F; Mon, 07 Sep 2026 05:13:22 +0000
+Received: by outflank-mailman (input) for mailman id 1410558;
+ Mon, 07 Sep 2026 01:24:39 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hpa@zytor.com>) id 1x3HPg-0008Et-OH
- for xen-devel@lists.xenproject.org; Sun, 06 Sep 2026 18:16:20 +0000
+ (envelope-from <kmehltretter@gmail.com>) id 1x3O6B-0008CX-53
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 01:24:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3HPf-006zlu-SE
- for xen-devel@lists.xenproject.org; Sun, 06 Sep 2026 20:16:20 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x3O68-00C0s1-21
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 03:24:36 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <hpa@zytor.com>)
- id 6a9dadb8-2eae-0a2a0a5409dd-0a2a450cc842-24
- for <xen-devel@lists.xenproject.org>; Sun, 06 Sep 2026 20:16:19 +0200
-Received: from [198.137.202.136] (helo=mail.zytor.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <hpa@zytor.com>)
- id 6a9dadf1-f479-0a2a450c0019-c689ca88c9be-3
- for <xen-devel@lists.xenproject.org>; Sun, 06 Sep 2026 20:16:18 +0200
-Received: from ehlo.thunderbird.net (c-76-133-66-138.hsd1.ca.comcast.net
- [76.133.66.138]) (authenticated bits=0)
- by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 686IFdJ2989969
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
- Sun, 6 Sep 2026 11:15:39 -0700
+ (envelope-from <kmehltretter@gmail.com>)
+ id 6a9e1254-e002-0a2a0a5209dd-0a2a4506cbc8-0
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 03:24:36 +0200
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <kmehltretter@gmail.com>)
+ id 6a9e1253-195a-0a2a45060019-d155dd2cac54-3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 03:24:35 +0200
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-48444ec4fe2so1691949f8f.0
+ for <xen-devel@lists.xenproject.org>; Sun, 06 Sep 2026 18:24:35 -0700 (PDT)
+Received: from localhost.localdomain
+ (dynamic-2a02-3100-9d84-5101-9c80-d25b-14b6-410c.310.pool.telefonica.de.
+ [2a02:3100:9d84:5101:9c80:d25b:14b6:410c])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-485883be709sm25538034f8f.21.2026.09.06.18.24.33
+ (version=TLS1_3 cipher=TLS_CHACHA20_POLY1305_SHA256 bits=256/256);
+ Sun, 06 Sep 2026 18:24:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,102 +55,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=2026082801 header.d=zytor.com header.i="@zytor.com" header.h="Date:From:To:CC:Subject:In-Reply-To:References"
-DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 686IFdJ2989969
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
-	s=2026082801; t=1788718541;
-	bh=DhRKyzANNARtmaWAz4jDDix5ntjLK+kItZzluS+D+BQ=;
-	h=Date:From:To:CC:Subject:In-Reply-To:References:From;
-	b=My5wT8OQBzVZyrqJR8KvHJV9I7W4IPlJ3k+N1opZm9C4RhQbBHPkMIsiGH4D2WXmq
-	 +CYlxhppw5y9EgKmYnWHx4hLBlthWwC0uFmTSvcXgviltv2uImyN1pue9kESh+J2QJ
-	 QbqRDmoUiTUb4BfVsk+UCS1z2gix8XSM0GJW/gZA+EArA5vCCzvzd0vq0af6CWn3Sp
-	 w1loWnM91xquRmfSrUfad02Cmv3ACRf4eUTCU+rZGvw6WSTpm0/2DdkFZmDVFVF40O
-	 44I7W65KC1lgkxbo8t7DhLUe0yBiwGrDdl0yrPQBj9eirxzUMqa6iEyjlEqYdB7b0k
-	 0gTCPh/269mAA==
-Date: Sun, 06 Sep 2026 11:15:33 -0700
-From: "H. Peter Anvin" <hpa@zytor.com>
-To: Borislav Petkov <bp@alien8.de>,
-        Mauricio Faria de Oliveira <mfo@igalia.com>
-CC: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
-        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
-        Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>,
-        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-        Jan Beulich <jbeulich@suse.com>, Brian Gerst <brgerst@gmail.com>,
-        kernel-dev@igalia.com, linux-kernel@vger.kernel.org,
-        xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v9 2/5] x86/asm, x86/boot: expose inline memcmp()
-User-Agent: K-9 Mail for Android
-In-Reply-To: <20260906170116.GRap2cXOY6ENSzAXUJ@fat_crate.local>
-References: <20260822-pvh-kasan-inline-v9-0-e70ef3b75b6a@igalia.com> <20260822-pvh-kasan-inline-v9-2-e70ef3b75b6a@igalia.com> <20260906170116.GRap2cXOY6ENSzAXUJ@fat_crate.local>
-Message-ID: <E4FDF95C-3FAB-41DB-8EA0-8A26B964B38D@zytor.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788744275; x=1789349075; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=OzgRAz+t0pvu1F0bGXuWPazB1YZpsW2di9FQ9hUcZ7o=;
+        b=OG5cAlLzLJlpzxiwmTzG2FmnQHKCJaQ8GKdtIb3ouHz1N6De7R/q7L0cSdzFAsat8i
+         WgRGKGHrecQUIEb+44A1mNlXZhIdZ1sHeco9J8yza34+9Mh3CcDobZTxmZbZQuPMq3Av
+         lT6s+UY9/e+8QCRGqMz1dmPXL0QkpyKfHfY4P91s7X3JoDsxVpdEk3DCOmOHED2pH4Zt
+         y83myuM8mwrFKa7QBdPZoWsATpOFa7uYjte37uAuVmfNab//X0GUKiDAY/cQbhJfCRjW
+         npMnboIu2dbHqeftXJ5nLoF81yOjpu+F8kUuxcRmTS1iCct9nJ96fN1Qm4M6X+u+cze6
+         1QcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788744275; x=1789349075;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=OzgRAz+t0pvu1F0bGXuWPazB1YZpsW2di9FQ9hUcZ7o=;
+        b=Z9QN1bBwxMwJaQg/pdZfp4zY85Bi6B8gvKlQ+v5AJulbpAgBiUyS1Vw/gihrXWdTOc
+         ViG3vKd4iQ6MFoNUPlyKA3HlD2JeBqQq6VQMoF20dTtJ8NHCfIZi+JyVU0fnYAbKbicE
+         DS9ZATW+7dBl4kVZSqy7V6QS4AoPk+aQlMNXBItS5D6EqmAtRsSUeJyY+v7BKX/Xx7U2
+         SRAJic5Nwaq6OMxbz2fGvoh3JZC6uQx31sxh4j7rE5ribIhBW1bOc5ZJxdS7mJIsQVsz
+         u0jr08qJp2Vz0vCJvgJY1QPdiuSOuhG3y7LmwIt/Mg0S4RfUGGu4+6AEKi9M8oIlsj4G
+         vpJQ==
+X-Forwarded-Encrypted: i=1; AKwUvByrrs3uvoWdA74j/bi/uW0iTc2KBwr2LLdjHwKKOxGr4SAELiY7w4CDMZpfAdimF4QOhlfZau9rLUc=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mEkvr0BwpwsUzqYGnIMGTmzClKDC4m2umeAkfrbGNoU5ZzaDRd
+	AOVRhD98vperP4JN9z+91LbVTodj9UawSeoL3dIsjArUtP+fMzzWZL0s
+X-Gm-Gg: AYBFou00ygs5aNkVjWFG8zPv1KFhr5dn1iwf2xB/wCiEg2wjDl6nN1DLjyE1MrOaeUJ
+	CJwWG/cDFAR9kHwvDz7D1UFpuKUAXeqriLRvWO78JSfubZDb9eTL7CVCw3ffF8PHtJ/mSGWXdwe
+	9ElyGs6PaD8c1BEqrFkzwL2ZeRnR+b4rmV56+tQGCut8wfFTbvf9IgkzCBgVt2VcP1gqA6Bw8My
+	H/E+wsLt9eFZ7p7SYm4tvazGL3ppjrPt1uBlM170Rgxe0Y2xiDUuTIIkZr+Vv5P5VS0PndtuI57
+	Yuv1uAXNpsJU5yEBEHUNFLM15FVJapgR/2vUKsmrGu8sp8PT4jafIdWs2YRfTIFK71RZSzqz0RB
+	jzBRcf6phSiglCHK/PbzNzEZeXqAJuwzQ8CiFDEcy3wh75RKL4vUPwwDShcIdn84EcfgyYJahHh
+	xS9B00DqjdIehgmFwZpzGzcMj4RsmwqI+VGhgMKz/fV7FG/7VXHD+YMouZvCLx7VUaQCdIPXt/N
+	55VVmLXI0YwMbCSml3VDWx3+ow0ty+sisJPEzx9fNHJkY/HJNBOu1RT2+BAnSQHNA2IEsQ2rJXK
+	eAr23egRr6ohAPtUVl8qXeM/ZU9NS+TOw0uFkxHf1lb7WnB7pZD2EE4daehEPOthDMs=
+X-Received: by 2002:a05:6000:468a:b0:484:3310:710e with SMTP id ffacd0b85a97d-48587291a2cmr31033495f8f.26.1788744275141;
+        Sun, 06 Sep 2026 18:24:35 -0700 (PDT)
+From: Karl Mehltretter <kmehltretter@gmail.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Karl Mehltretter <kmehltretter@gmail.com>,
+	xen-devel@lists.xenproject.org,
+	linux-arm-kernel@lists.infradead.org,
+	Tejas Mutalikdesai <tejasmutalikdesai@gmail.com>
+Subject: [PATCH] arm/xen: Point the comment at the YAML binding
+Date: Mon,  7 Sep 2026 03:24:30 +0200
+Message-Id: <20260907012430.21823-1-kmehltretter@gmail.com>
+X-Mailer: git-send-email 2.39.5 (Apple Git-154)
 MIME-Version: 1.0
-Content-Type: text/plain;
- charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-d25034/1788718579-52331A5B-498861EC/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1788744275-FE87577B-EC72D5F3/0/0
 X-purgate-type: clean
-X-purgate-size: 1993
+X-purgate-size: 960
 
-On September 6, 2026 10:01:16 AM PDT, Borislav Petkov <bp@alien8=2Ede> wrot=
-e:
->On Sat, Aug 22, 2026 at 03:33:18PM -0300, Mauricio Faria de Oliveira wrot=
-e:
->> Move the inline memcmp function currently only available in 'boot/strin=
-g=2Ec'
->> into the shared string function header <asm/shared/string=2Eh> to be re=
-used=2E
->>=20
->> This is not done through <asm/string=2Eh> to avoid pulling unnecessary =
-code
->> in 'boot/string=2Ec' that causes build errors in 'boot/compressed/strin=
-g=2Ec'
->> and 'purgatory/purgatory=2Ero'=2E
->
->Please drop those '' quotes - it is perfectly clear that those are =2Ec f=
-iles=2E
->
->> No functional changes=2E
->>=20
->> Signed-off-by: Mauricio Faria de Oliveira <mfo@igalia=2Ecom>
->>=20
->> ---
->>=20
->> Thanks to David Laight for noticing the return value difference between
->> inline and regular memcmp()=2E
->> ---
->>  arch/x86/boot/string=2Ec               | 13 ++-----------
->>  arch/x86/include/asm/shared/string=2Eh | 26 ++++++++++++++++++++++++++
->>  2 files changed, 28 insertions(+), 11 deletions(-)
->
->=2E=2E=2E
->
->> diff --git a/arch/x86/include/asm/shared/string=2Eh b/arch/x86/include/=
-asm/shared/string=2Eh
->> new file mode 100644
->> index 0000000000000000000000000000000000000000=2E=2E06c1d5e5013e4d59cfb=
-49866d10e164362d2c4cc
->> --- /dev/null
->> +++ b/arch/x86/include/asm/shared/string=2Eh
->> @@ -0,0 +1,26 @@
->> +/* SPDX-License-Identifier: GPL-2=2E0 */
->> +#ifndef _ASM_X86_SHARED_STRING_H
->> +#define _ASM_X86_SHARED_STRING_H
->> +
->> +/*
->> + * This inline memcmp() returns 0 (equal) or 1 (not equal)=2E
->> + * The regular memcmp() returns <0 (less than), 0 (equal), or >0 (grea=
-ter than)
->> + * to indicate ordering as well=2E
->
->No need to overdo it:
->
->	Returns:	0 (equal)
->			1 (not equal)
->
->In contrast, the regular memcmp() follows glibc return value semantics=2E
->
->
+The binding was converted by commit 4dbfe5467485 ("dt-bindings: arm:
+xen: Convert to DT schema"), so Documentation/devicetree/bindings/arm/
+xen.txt no longer exists.
 
-Worth noting that memeq() and streq() are becoming used in other contexts,=
- e=2Eg=2E glibc=2E
+Point the comment at the YAML schema.
+
+Fixes: 4dbfe5467485 ("dt-bindings: arm: xen: Convert to DT schema")
+Assisted-by: LLM
+Signed-off-by: Karl Mehltretter <kmehltretter@gmail.com>
+---
+ arch/arm/xen/enlighten.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/arch/arm/xen/enlighten.c b/arch/arm/xen/enlighten.c
+index 25a0ce3b4584..0b7b7e3417e3 100644
+--- a/arch/arm/xen/enlighten.c
++++ b/arch/arm/xen/enlighten.c
+@@ -251,7 +251,7 @@ static int __init fdt_find_hyper_node(unsigned long node, const char *uname,
+ }
+ 
+ /*
+- * see Documentation/devicetree/bindings/arm/xen.txt for the
++ * see Documentation/devicetree/bindings/arm/xen.yaml for the
+  * documentation of the Xen Device Tree format.
+  */
+ void __init xen_early_init(void)
+-- 
+2.53.0
+
 
