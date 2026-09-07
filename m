@@ -4,62 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 32C40C79F9E
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 08:41:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1410673.1641469 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EEA25C79F9E
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 08:56:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1410686.1641479 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3Uuf-0002RV-0Y; Mon, 07 Sep 2026 08:41:13 +0000
+	id 1x3V8t-0004SN-5N; Mon, 07 Sep 2026 08:55:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1410673.1641469; Mon, 07 Sep 2026 08:41:12 +0000
+Received: by outflank-mailman (output) from mailman id 1410686.1641479; Mon, 07 Sep 2026 08:55:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3Uue-0002RO-To; Mon, 07 Sep 2026 08:41:12 +0000
-Received: by outflank-mailman (input) for mailman id 1410673;
- Mon, 07 Sep 2026 08:41:12 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x3V8t-0004SG-1l; Mon, 07 Sep 2026 08:55:55 +0000
+Received: by outflank-mailman (input) for mailman id 1410686;
+ Mon, 07 Sep 2026 08:55:53 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1x3Uud-0002RG-Vm
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 08:41:12 +0000
+ (envelope-from <mst@redhat.com>) id 1x3V8r-0004S8-Fd
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 08:55:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3Uuc-00CAzs-LN
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 10:41:10 +0200
+ id 1x3V8q-007t7b-3V
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 10:55:52 +0200
 Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a9e78a4-e002-0a2a0a5209dd-0a2a45068bbe-8
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 10:41:10 +0200
-Received: from [52.101.46.51]
- (helo=CO1PR03CU002.outbound.protection.outlook.com)
+ (envelope-from <mst@redhat.com>)
+ id 6a9e7c10-2eae-0a2a0a5409dd-0a2a45068424-26
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 10:55:51 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
  by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6a9e78a4-195a-0a2a45060019-34652e3352da-3
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 10:41:10 +0200
-Received: from SJ0PR05CA0150.namprd05.prod.outlook.com (2603:10b6:a03:33d::35)
- by CYXPR12MB9277.namprd12.prod.outlook.com (2603:10b6:930:d8::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.15; Mon, 7 Sep
- 2026 08:41:01 +0000
-Received: from MWH0EPF000A6732.namprd04.prod.outlook.com
- (2603:10b6:a03:33d:cafe::a1) by SJ0PR05CA0150.outlook.office365.com
- (2603:10b6:a03:33d::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.6 via Frontend Transport; Mon, 7
- Sep 2026 08:41:01 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- MWH0EPF000A6732.mail.protection.outlook.com (10.167.249.24) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.406.5 via Frontend Transport; Mon, 7 Sep 2026 08:41:01 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Mon, 7 Sep
- 2026 03:41:00 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Mon, 7 Sep
- 2026 03:41:00 -0500
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.46 via Frontend
- Transport; Mon, 7 Sep 2026 03:40:59 -0500
+ (envelope-from <mst@redhat.com>)
+ id 6a9e7c16-195a-0a2a45060019-aa0a817c99cf-3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 10:55:51 +0200
+Received: from mail-wr1-f71.google.com (mail-wr1-f71.google.com
+ [209.85.221.71]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-687-pH3RCcqBM0-dUY0gV0E7gg-1; Mon, 07 Sep 2026 04:55:49 -0400
+Received: by mail-wr1-f71.google.com with SMTP id
+ ffacd0b85a97d-47f4bff865cso1763819f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 01:55:48 -0700 (PDT)
+Received: from redhat.com (IGLD-80-230-79-236.inter.net.il. [80.230.79.236])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-485883c5bc5sm28593436f8f.24.2026.09.07.01.55.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 07 Sep 2026 01:55:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,220 +57,229 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EUd2HDnD1uOEDYX48Xc+iJhXXvWyc31ksSIQ53SOsvPLdtwVpTJSNH17Qu3fggSmJznUbQBiw6bU7HtES5w+Pj+kCMdt8xcfQ9gEJY7yuQSKk/mrfZFcVABzgpll6YZUeF1ygtIeQjA9eUTu43ctq0yeBm+j3vB3x84Volw3zEt183xjkC18uljmqFlUx9Wg2cwmOOa8uUjp0h8yeQ68Oajq7Vessg8Ll5ihVk00uhaNcu/bUb+7Nb+2JFBnPv1X9W81l3hqQQIGcBizgGquxriIdkvNdn15+ERne4LA0kSEo3o6S9Ofx7ydti6BdIXdLvjtw/NfWOMZ0TtnIH14WQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5rcyr3XZVhs0K1/6bEO+VbaLgOLMUp13wtOdx6oM/dc=;
- b=AWXM18w9PLRlcOJAXUEUWrvo4F4KRf/7kTR686Gv9wWyOxyRcAlHoJB5Jrx988uebn4GYRv8FRR7Pd6d2Tj5Ir/4TpXYC45qw7CS3MdajJhnyufFcwBwkr+9poDudCN89l6Uzt8bnsYA90dWkMNBNHTUW6C/cz0VVQ4lHuppL21C17gj4ZI1E/571QP11EOHc0mhrGsJ38eBsKDEbDp16JTpVrMEuenAcZ8WwlwRFI6YmpphoM9FdnNurxRsH5vlRSy9xY3oBDjm1Ng2T+0ojpKYKdj+aNOWbgnLgrz6tppMw1mhhd+8bDLTAG9c4DNFgIJqp/Ad1EUrup0LL0kPwA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5rcyr3XZVhs0K1/6bEO+VbaLgOLMUp13wtOdx6oM/dc=;
- b=rXLNncuGsH1q4J6jjCF2QIcEDxmyHxs2EIJsi3cxmiNs/xQW4NOH645MD8kotxjAiMbaVyxa72OVcimkmYkBvcfr8jhLLj3acozfRhyXDlmLJpXuqB2xRAkeoXP4sEigghmamWITxvj7nIYeQNIe7CSHyfw2/sK1qsTwGWlaYcI=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <4c8bc3eb-44a3-4c27-aa15-8dfa80faf5e4@amd.com>
-Date: Mon, 7 Sep 2026 10:40:59 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1788771350;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=z5bsH4JVOIdSG44t0GSgJUXlu2Xpc7hHFUMLKgNg5Gg=;
+	b=VvKIO4SQ64CWg7Dlsie7LC00If58JGEBJ10v7R13ocdlJ5Zi1LaJeaaUDsS/0uGEJPc4v6
+	FQ6PQE+A5IwkjszpouY32jYpGd7bdSlWMpzL4+/uOMxO41ArwZCHuDCF8IqUoJOkfaogRA
+	Zi4L4JPZgYB4yLjmbQnk4yBEE/mSXZw=
+X-MC-Unique: pH3RCcqBM0-dUY0gV0E7gg-1
+X-Mimecast-MFC-AGG-ID: pH3RCcqBM0-dUY0gV0E7gg_1788771348
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788771348; x=1789376148;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=z5bsH4JVOIdSG44t0GSgJUXlu2Xpc7hHFUMLKgNg5Gg=;
+        b=MadrBfZN6Y4Svz2uuAUlDJPLdm6RjZeFMaWaahK4b919zu1xk0M+ZusEW0vwC1Gx0+
+         uvtK/4in3IXRMfhLEZEP3b/96da4Lz92f3FpLkcMJ1zadOR/yJce4kCGslghrg5GOg/p
+         cCdXZ++BCH5HlDEIUGrBWUTfzeNycBsnG0L+hx6KBJeJ5dR9MI1p2PROoS7aYnWAqww4
+         h2NdlVWNmeXwZyYe3HxlJujuW+sM7gmOE+OiKxzJiDCxiunG1NbYUK9Rhw5fmMnVcJM1
+         +2wBrW7g/xauEamoRXwNkwIjLhjH/pfCxrjNHXSrLCWn9ZO01IPE30Hh9bHS5O7HZm3V
+         KW0A==
+X-Forwarded-Encrypted: i=1; AKwUvByulgY7aQMSWFsdilGPcTdcxMpU7rWvCF0i3e7de3NKVDn2kjjGo9va9mHRdMDutDkhS0SWaGf5Cxg=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mpOD+So4wLCLvkuM2lEplZtNCjfcoCuRaV1OPTDw8RIZXG2vMi
+	LssyaDs85m9Oc94SlSvpq8rwtrnHo6A/izu9SDtHnopJWJSkXPq5WlJAcXcGEzLCnIITNR6md89
+	PecE1loF1rjKVpO2GMgSeubmZmysmB+hT4tSPdKTiYd5zm+E/BYn9gAUMplYpiyNgDvl1
+X-Gm-Gg: AYBFou2otCaZjPeJBPO/gKnH8UEvWgqkq9YDl0MHbqBKS2/UNTk+nzEApahe8fScYd+
+	bbmrSK2+v25+Q5xfAaNbjB9zXraZqKew5DkBU1ZXG/AVAXMTwhQQ+Nx5dBEhNhKjN00pqC5Lh/g
+	UDmC3/64H3cyyqWWjABt2eG2jCwwiFmI9TBHQ+So1kWv3xOr8PFwdUI73M7kzUEalFYQTfZuNC9
+	TwN1lzeFOk2zJ8weK0tORVYJ2IaiMIA0gVTzTQy7RtSgbsKUDyXwOaqBsYwrMDvleIzprqb48OP
+	dwpOtIUCiyWpL7+W/wtvSMJuGbWHctbgXUUscHjIS/1/X9yxCjLFtWMYLe4RBjhng+RRrd4XEYO
+	NcekWonYK10KkCs178LK5aJs=
+X-Received: by 2002:a05:6000:1acb:b0:485:8b5d:96d with SMTP id ffacd0b85a97d-4858b5d0d2dmr33824029f8f.19.1788771347747;
+        Mon, 07 Sep 2026 01:55:47 -0700 (PDT)
+X-Received: by 2002:a05:6000:1acb:b0:485:8b5d:96d with SMTP id ffacd0b85a97d-4858b5d0d2dmr33823972f8f.19.1788771347225;
+        Mon, 07 Sep 2026 01:55:47 -0700 (PDT)
+Date: Mon, 7 Sep 2026 04:55:42 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: Dongli Zhang <dongli.zhang@oracle.com>
+Cc: Igor Mammedov <imammedo@redhat.com>,
+	Daniel =?iso-8859-1?Q?P=2E_Berrang=E9?= <berrange@redhat.com>,
+	qemu-devel@nongnu.org, qemu-s390x@nongnu.org,
+	xen-devel@lists.xenproject.org, dave@treblig.org,
+	anisinha@redhat.com, philmd@mailo.com, aurelien@aurel32.net,
+	mjrosato@linux.ibm.com, alifm@linux.ibm.com, farman@linux.ibm.com,
+	richard.henderson@linaro.org, iii@linux.ibm.com, david@kernel.org,
+	pasic@linux.ibm.com, borntraeger@linux.ibm.com, cohuck@redhat.com,
+	alex@shazbot.org, clg@redhat.com, akrowiak@linux.ibm.com,
+	jjherne@linux.ibm.com, sstabellini@kernel.org,
+	anthony@xenproject.org, edgar.iglesias@gmail.com,
+	pbonzini@redhat.com, eblake@redhat.com, armbru@redhat.com,
+	joe.jin@oracle.com
+Subject: Re: [PATCH 0/8] Force detach PCI devices for ACPI-based and PCIe
+ native hot-unplug
+Message-ID: <20260907044608-mutt-send-email-mst@kernel.org>
+References: <20260824011420.752806-1-dongli.zhang@oracle.com>
+ <aoxY4Rxst2qAyn5z@redhat.com>
+ <01ee4841-76d8-4749-a80e-eb945ab8799a@oracle.com>
+ <20260903172835.0e253a25@imammedo>
+ <6154b857-16b3-476b-a2cb-8837464dd4cb@oracle.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] xen/arm: smmuv3: Add support for removing devices
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Rahul Singh <rahul.singh@arm.com>,
-	Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>
-References: <56e7734d60ad8cca4279a71b4beb21ca51250386.1787303836.git.mykyta_poturai@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <56e7734d60ad8cca4279a71b4beb21ca51250386.1787303836.git.mykyta_poturai@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: MWH0EPF000A6732:EE_|CYXPR12MB9277:EE_
-X-MS-Office365-Filtering-Correlation-Id: 23bf5be2-8f84-4dd8-34ab-08df0cbbbf33
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|82310400026|36860700016|1800799024|376014|10067099003|6133799003|22082099003|18002099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info:
-	ROIclYKy5gdV7/a5f4gYYGZ4oe2odKpeOip7ETZmEaQPzc3VthSFGhtULWE8fRkrlR7r3EWMpEJntMWYdWWdC9MmqVsUHMVb3rjEH8hW2NTvhU7oiO6MwmwvsTW+dpojpSQD/V/JaNSGPr7toRkWJxUZz5i+sMWkPksmpPoBTOsG6zp4wziZekmoP2LHjnz6IFJHaYw5gETxS0y2YC+3Cl89TscD6QGko2WXVdY1aKQF7fysFHMfVsXUYS7SWdnmX0qOSEsLLdcjMuk9aA/iMkVbfWZpW68GVWZUdJqnlTrkdNG87fyiADXou+80Jto+IdF6hR++L8EkmtyTwoKbnye4mCQCon1JW6wpXGkCD70YpQ85hJCtMN/Whg/OSqg/smoEegZzJQFsMYSk4LsdDSkMr2FhcwU32zVIlU7pBdqcqah7AkzNRjhLbDoYo5+o2uqhUJ4lpKvRNmDv9bVbtq7bSao313MG+OCpQ5YHq+G2X5tVt1URvEnzxjlqBlkdmTPMNYPn9d/npXiBJzfHRLOq4659fnBPOOy9ZC5/twGJGZVQL1C57VzTHK8GcKio+wgnQ8LqueteedsRDAqMqcQaxqQu8yH8KwT11+nxTvnkioAYCAHmxfkm5mC9n5HsntOgXJAvTB1cfvKoCQu4HQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(82310400026)(36860700016)(1800799024)(376014)(10067099003)(6133799003)(22082099003)(18002099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	Ryqblx9Bccay9Lpphsi0m/d6dPI0bqvGpi1vaOLHvt4lqUiQvYA7F+gBUz0/zX/VAqJuH6crmvQ9Yh3EdQahJtLYD9I1JL7s9qRkwMSihxMEF0M3npDoZcHdRygz5YC7Dz82yhEQ445jFxYeBA+h8g8yBItXAlyOQpTQNZjUey1SXSt2FoMhz85I/mWQk3atYW/cPs1kMcNueu17bT31qoLIWwYHpOt55oLD05tNfRm9P4sKty3Zo7aSTTe3d0FlT4nUOhDeMvSMxLE1NbBUBENqaX7hxv7YVRJWVq66Vf2dgE8qhXP/TN/d1d2pm+FQFATKXzE6AOu5GCbJjZIA3lTEAmVol/Vbc4Mj8FdSXdTfdrwiaeGDeZFob+QgaDn5BJo7rfIjG+sRAvaCgmvYo2W43JnkBxxfWk4wkvgodv5YQ1faptbUhJ8YJC9LuPiU
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2026 08:41:01.5279
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 23bf5be2-8f84-4dd8-34ab-08df0cbbbf33
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	MWH0EPF000A6732.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CYXPR12MB9277
-X-purgate-ID: tlsNG-16d1c6/1788770470-F4A0477B-CF78D7D1/0/0
+In-Reply-To: <6154b857-16b3-476b-a2cb-8837464dd4cb@oracle.com>
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: EtH5O6Ew4p8Dq20iqk_OScyHyLNmcNRZFDDy31Cd6fA_1788771348
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1788771351-1FACA77B-E0EC0B94/0/0
 X-purgate-type: clean
-X-purgate-size: 4668
+X-purgate-size: 6402
+
+On Mon, Sep 07, 2026 at 01:26:57AM -0700, Dongli Zhang wrote:
+> 
+> 
+> On Thu, Sep 3, 2026 8:28:35AM -0700, Igor Mammedov wrote:
+> > On Wed, 26 Aug 2026 09:15:47 -0700
+> > Dongli Zhang <dongli.zhang@oracle.com> wrote:
+> > 
+> >> On Mon, Aug 24, 2026 7:44:49AM -0700, Daniel P. Berrangé wrote:
+> >> > On Sun, Aug 23, 2026 at 06:13:30PM -0700, Dongli Zhang wrote:  
+> >> >> Hot-unplugging a PCI device can require cooperation from the guest. For
+> >> >> ACPI PCI hotplug, QEMU notifies the guest through ACPI and the guest
+> >> >> eventually writes the ACPI PCI eject register. For PCIe native hotplug,
+> >> >> QEMU notifies the guest through the PCIe hotplug mechanism and waits for
+> >> >> the slot unplug flow to complete. Only after that completion does QEMU
+> >> >> unrealize the device and emit DEVICE_DELETED.
+> >> >> 
+> >> >> This can leave a device stuck in the unplug pending state when the guest
+> >> >> does not cooperate. Examples include:
+> >> >> 
+> >> >> 1. The guest has panicked, or the relevant ACPI/PCI hotplug driver is
+> >> >> unavailable.
+> >> >> 
+> >> >> 2. The guest is stalled and cannot handle the hot-unplug event. For
+> >> >> example, stalling the Linux [irq/9-acpi] kernel thread can reproduce this
+> >> >> for ACPI-based hot-unplug.
+> >> >> 
+> >> >> 3. The device was attached to a slot that the guest cannot use. For
+> >> >> example, a pcie-root-port only supports slot 0. If a device is added to a
+> >> >> non-zero slot below a pcie-root-port, the guest may never discover the
+> >> >> device and therefore may never complete the unplug request.
+> > 
+> > all of above is actually expected, no (functioning) driver => no hotplug/unplug.
+> > it's the guest problem. Once device it exposed to guest its life-cycle
+> > not longer owned by QEMU.
+> > 
+> > That's what one would see in real hw as well, you press eject button
+> > but it will not do anything if OS doesn't process it.
+> > also see comment at the end.
+> 
+> Users are generally more tolerant of issues with real hardware.
+> 
+> In virtualization and cloud environments, PCI hotplug is more commonly used for
+> NICs and storage devices. Users are less tolerant of disruption or unexpected
+> failures.
 
 
+Simply put, surprise removal exists in the hardware.  Emulating that
+makes sense, at a high level. Nor is it too hard.
+However, guests, especially Linux, do not
+handle it all that well generally. Exactly because users
+would tend to impatiently reach for that tool, then
+blame QEMU after a crash, we avoided emulating that.
 
-On 25-Aug-26 09:39, Mykyta Poturai wrote:
-> Allow for removing devices from SMMUv3. arm_smmu_deassign_dev handles
-> most of the work by disabling ATS and zeroing STEs. Additionally, unset
-> the dt_device_is_protected flag and free no longer needed smmu_master.
-> Free iommu_fwspec for PCI devices only, for DT devices it is handled by
-> generic IOMMU layer.
-> 
-> Rework dt_device_set_protected to accept a boolean parameter, update
-> callsites.
-> 
-> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-> ---
-> 
-> Tested on QEMU with SRIOV series[1] by repeatedly enabling/disabling
-> VFs.
-> 
-> [1]: https://patchew.org/Xen/cover.1772806036.git.mykyta._5Fpoturai@epam.com/
-> 
-> V3->V4:
-> * s/u8/uint8_t/
-> * assert pcidevs_locked
-> * assert deassignment is only reachable by PCI
-> * fix build error with HAS_PCI=n
-> 
-> V2->V3:
-> * free fwspec for pci devices
-> * remove testing note from commit message
-> 
-> V1->V2:
-> * check for phantom functions
-> * simplify pci/dt device split
-> * improve error handling
-> * don't try to free master for unprotected devices
-> * rework dt_device_set_protected
-> ---
->  xen/drivers/passthrough/arm/ipmmu-vmsa.c |  2 +-
->  xen/drivers/passthrough/arm/smmu-v3.c    | 77 +++++++++++++++++++++++-
->  xen/drivers/passthrough/arm/smmu.c       |  4 +-
->  xen/include/xen/device_tree.h            |  5 +-
->  4 files changed, 82 insertions(+), 6 deletions(-)
-> 
-> diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> index fa9ab9cb13..0648f9b407 100644
-> --- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> +++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> @@ -1367,7 +1367,7 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
->          }
->  
->          /* Let Xen know that the master device is protected by an IOMMU. */
-> -        dt_device_set_protected(dev_to_dt(dev));
-> +        dt_device_set_protected(dev_to_dt(dev), true);
->      }
->  #ifdef CONFIG_HAS_PCI
->      if ( dev_is_pci(dev) )
-> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-> index bf153227db..3578f36259 100644
-> --- a/xen/drivers/passthrough/arm/smmu-v3.c
-> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-> @@ -1493,6 +1493,80 @@ static int arm_smmu_assign_dev(struct domain *d, u8 devfn, struct device *dev,
->  static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn,
->  				 struct device *dev);
->  
-> +static int arm_smmu_remove_device(uint8_t devfn, struct device *dev)
-> +{
-> +	struct arm_smmu_master *master;
-> +	struct iommu_fwspec *fwspec;
-> +	struct domain *d = NULL;
-> +
-> +	fwspec = dev_iommu_fwspec_get(dev);
-> +	if ( !fwspec )
-> +		return -ENODEV;
-> +
-> +	master = dev_iommu_priv_get(dev);
-> +	if ( !master )
-> +		return -ENODEV;
-> +
-> +#ifdef CONFIG_HAS_PCI
-> +	if ( dev_is_pci(dev) )
-> +	{
-> +		struct pci_dev *pdev = dev_to_pci(dev);
-> +
-> +		/* Ignore calls for phantom functions */
-> +		if ( devfn != pdev->devfn )
-> +			return 0;
-> +
-> +		ASSERT(pcidevs_locked());
-> +
-> +		d = pdev->domain;
-> +	}
-> +	else
-> +#endif
-> +	{
-> +		if ( !dt_device_is_protected(dev_to_dt(dev)) )
-> +		{
-> +			dev_err(dev, "Not added to SMMUv3\n");
-> +			return -ENODEV;
-> +		}
-> +
-> +		dt_device_set_protected(dev_to_dt(dev), false);
-> +		if ( master->domain && master->domain->d )
-> +			d = master->domain->d;
-Given the comment below and `ASSERT(dev_is_pci(dev))`, `d` can never be != NULL
-in DT case, so these two lines can be dropped.
 
-> +	}
-> +
-> +	if ( d )
-> +	{
-> +		int ret;
-> +
-> +		/*
-> +		 * For DT devices, iommu_remove_dt_device() returns -EBUSY if the
-> +		 * device is still assigned, so d is always NULL on the DT path.
-> +		 */
-> +		ASSERT(dev_is_pci(dev));
-> +
-> +		ret = arm_smmu_deassign_dev(d, devfn, dev);
-> +		/* This should never fail because we already checked the domain */
-> +		ASSERT(!ret);
-You checked the domain but the assignment takes place before
-`arm_smmu_attach_dev()` can fail in .assign_device, so I think it's still
-possible and the ASSERT should be dropped.
+I'd expect much more in the way of research into how guests behave,
+perhaps some ways to limit it to devices that work well, and
+likely some linux patches to make it work better, before we commit to
+supporting such interfaces.
 
-> +	}
-> +
-> +	arm_smmu_disable_pasid(master);
-> +
-> +	dev_info(dev, "Removed master device (SMMUv3 %s StreamIds %u)\n",
-> +		 dev_name(fwspec->iommu_dev), fwspec->num_ids);
-> +
-> +	xfree(master);
-> +	dev_iommu_priv_set(dev, NULL);
-> +
-> +	/*
-> +	 * For DT devices the fwspec is freed by iommu subsystem, but for PCI
-> +	 * devices we need to free it here
-> +	 */
-> +	if ( IS_ENABLED(CONFIG_HAS_PCI) && dev_is_pci(dev) )
-No need for IS_ENABLED here.
 
-> +	    iommu_fwspec_free(dev);
-Spaces but should be tabs.
+> > 
+> >> >> 
+> >> >> The non-zero slot case has also been discussed in:
+> >> >> 
+> 
+> [snip]
+> 
+> >> >   
+> >> 
+> >> Thank you very much!
+> >> 
+> >> I see that the issue has been fixed. The ticket mentions the following.
+> >> 
+> >> "What I am observing is that it seems when the slot ID != 0, the guest OS seems
+> >> to ignore this and we never seem to hit ich9_pm_device_unplug_cb()."
+> >> 
+> >> Based on my experience and evaluation, ACPI-based hotplug is more likely to
+> >> encounter an issue where the guest VM does not respond to an unplug operation.
+> > 
+> > I'm not sure it's a good idea to delete device when guest still thinks it's there
+> > (you can make guesses on QEMU side if it's in use, how useful those are is questionable).
+> 
+> By instrumenting the QEMU functions related to device hotplug and PCI
+> initialization, we may be able to make informed assumptions.
 
-~Michal
+So try. But just know that pci initialization is commonly done by firmware, not
+the driver.
+
+> > 
+> > as far as I know, ACPI hotplug has no notion of surprise removal (pls educate me if it's not the case),
+> > so I wouldn't do what you are proposing here at all, it's basically asking for disaster to happen.
+> > And all this is basically for dealing with abused qemu flexibility.
+> > 
+> > Please (re)formulate usecase and make it more clear as what is eludes me
+> > no matter how many times i've read this cover letter.
+> 
+> Here are some use cases in virtualization and cloud environments:
+> 
+> 1. Suppose there is a QEMU user configuration error and a PCI device is attached
+> to slot 1 of a pcie-root-port that uses ACPI-based hotplug. The device may not
+> be detected or ejected. As a result, there is no way to detach it from the
+> user's QEMU instance until the guest VM reboots.
+
+sounds vague. if users can not configure qemu what are the chances
+they will use force detach responsibly?
+
+> 2. For an unknown reason in the customer's guest kernel (Linux, Windows, or
+> BSD), a PCI device may still be referenced by the guest kernel or its services.
+> As a result, the guest never writes the eject register for ACPI-based hotplug,
+> and QEMU cannot detach the device. The customer may blame QEMU for not removing
+> it. A force-detach option could provide an escape hatch, with a warning that it
+> may make the VM unstable or insecure.
+
+So just reboot the guest.
+
+> 3. Suppose a VM is stuck because of a guest kernel bug, such as a Linux kernel
+> panic without a kdump kernel being triggered. The guest kernel is unresponsive.
+> Force detach could allow the block device to be temporarily attached to another
+> VM without resetting the currently panicked VM.
+
+So just reboot the guest.
+
+> 4. Provide a mechanism to demonstrate that force detach is unsafe. Otherwise,
+> users may repeatedly attempt it and mistakenly conclude that QEMU is at fault :)
+
+We have that - we don't support unsafe detach.
+
+> Thank you very much!
+> 
+> Dongli Zhang
+> 
+> > 
+> > On positive note:
+> > 
+> > What you can try to implement is native PCI-E support for surprise removal.
+> > How hard that would be I don't know. And I would well expect if one deviates from
+> > real hw expectations/configs (such as not 0 slot/partial func removal),
+> > one would quickly stumble upon issues as  that's not what what vendors write/test
+> > drivers for.
+> > 
+> > Even if it's not likely to be used in practice (guest still might not support it),
+> > it may serve as test-bed for guest drivers.
+> > 
+> >> Thank you very much!
+> >> 
+> >> Dongli Zhang
+> >> 
+> > 
 
 
