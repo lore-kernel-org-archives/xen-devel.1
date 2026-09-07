@@ -4,46 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50944C79FA1
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 15:16:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1410941.1641746 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB2B8C79FA0
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 15:57:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1410960.1641755 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3b4l-0006b0-IX; Mon, 07 Sep 2026 15:16:03 +0000
+	id 1x3bih-0006xe-KU; Mon, 07 Sep 2026 15:57:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1410941.1641746; Mon, 07 Sep 2026 15:16:03 +0000
+Received: by outflank-mailman (output) from mailman id 1410960.1641755; Mon, 07 Sep 2026 15:57:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3b4l-0006at-FB; Mon, 07 Sep 2026 15:16:03 +0000
-Received: by outflank-mailman (input) for mailman id 1410941;
- Mon, 07 Sep 2026 15:16:02 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1x3b4k-0006al-Gv
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 15:16:02 +0000
+	id 1x3bih-0006xW-H6; Mon, 07 Sep 2026 15:57:19 +0000
+Received: by outflank-mailman (input) for mailman id 1410960;
+ Mon, 07 Sep 2026 15:57:18 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x3bif-0006xQ-P9
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 15:57:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3b4j-00ACV8-TC
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 17:16:01 +0200
-Received: from [10.42.69.12] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a9ed50f-e002-0a2a0a5209dd-0a2a450cd178-46
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 17:16:01 +0200
-Received: from [40.93.198.68]
- (helo=CY7PR03CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6a9ed530-f479-0a2a450c0019-285dc644ea79-3
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 17:16:01 +0200
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by SA2PR03MB5705.namprd03.prod.outlook.com (2603:10b6:806:11a::17)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.15; Mon, 7 Sep
- 2026 15:15:58 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0382.014; Mon, 7 Sep 2026
- 15:15:58 +0000
+ id 1x3bie-001pHD-F0
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 17:57:16 +0200
+Received: from [10.42.69.5] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a07c968185000c4f3@swg.vates.tech>)
+ id 6a9edec2-2eae-0a2a0a5409dd-0a2a4505bff4-34
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 17:57:16 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a07c968185000c4f3@swg.vates.tech>)
+ id 6a9ededb-4cb1-0a2a45050019-b9ff1c229643-3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 17:57:16 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a07c968185000c4f3.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 07 Sep 2026 15:57:13 +0000
+Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id A1D8280789;
+ Mon,  7 Sep 2026 17:57:12 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,158 +56,369 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TV5QItgNMRiZVuGiSXMdm34Qj1eTF/m+KTf+Xxk0525u6hX9rdLhJ/f3TC8guB8B6vtqedYVwfbsUzrd34OfOffHtw3VTQUmnUeoLStAKS0VSiLn0BqYUH1B2znokNTo5FJwhdfNqDCz1zLLWuQD70JyNwbBp0VxoUezH1sqA2M3p4p0GbpHbonkzgZSs/czvTP4WFjDZDBasCTrrGttngNixHUEvgGLAgT5wmdNZpzQs6Ww6N87ta0oiJgKUCMwenkXM+ficUacM+j0WUAjyW3tZD1j5EjsikGJDgekv5kAGkURUFUu5QHQa4ZKUzmFygaG5gZ+GwqdHHWsK618bQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9d7RCEnJ7qkoWNu6bXse0/3RGXFhgVEUq560o+40iGw=;
- b=INBWVxXeBW3nRBoOEwst7K/o3xMQxC67+0yHDdemBq4Jb6jn40upZboeBrge08Otih1H9Msvd9d1kOM89a5aQdtyFIeAfuRRseX0xJNZkCr/CL5NUEm42sSqZo9QozeDxR2wliL+ck8AAsrqTDNRgSR1uKG61Cc/Y74hReNNm9yisqJEHLnl6V0fjVlgi3MMo1cccKZKQGINmM6TsxQguMuaf+9+gNIAjdx/KheYmnBU9BoH6NWCNhvATuNwH47vvt324yEHGDdJeb5ZNuUCUUJIvd8/BgwCZJvKp1DqZsZyxpQEuSzr5vZ2EEaV+TW8Wt4L2mNVgojhpLrc2tEbOA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9d7RCEnJ7qkoWNu6bXse0/3RGXFhgVEUq560o+40iGw=;
- b=Gp6aG4YUDYl3m5Y0XvVeqZTUNGkWUgxroihOxy5qJQyrD98GR3iqNlAf+IMLNG4bpRZ+QDVp2XOeWUk71DdblV1YRjT3CtOk9hsod7UYdMuQsUxqZzOCVxbhRFCSj8thG6GLHvFZh5wF7vNrVh+MXuJRbGLU0ghMGq9ni/BwPOc=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <5a3b475d-6c1f-47da-89be-ae45e34c4e49@citrix.com>
-Date: Mon, 7 Sep 2026 16:15:54 +0100
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Marek Marczykowski <marmarek@invisiblethingslab.com>,
- Daniel Smith <dpsmith@apertussolutions.com>
-Subject: Re: [PATCH] EFI: don't use alias attribute for compat hypercall stubs
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <4326ea69-572c-4a1a-ba89-147fab55b2d5@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <4326ea69-572c-4a1a-ba89-147fab55b2d5@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO2P123CA0095.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:139::10) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=EgOs7JPzGam1Fpl29GasqI8GLvb/vDiU5k36KsaeRJc=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=FxqRqYxWNpprn9CCzB8aZE+zngC3YSn8Jn0lUYIjHzOSOQ47d4uO5JaK9I8VtQ69zvFuRsgbn
+ b38BtuBV47Dn2gHqWjyRYpSIOebCRw57bZHoPKauVVihUweJ7c3CDKO9MXKktniLK9Fowmh+QNl
+ 6CkxVave1KU3oHvGEWjI5pfHBqXjFGk9roTX0y7/EdCBkFubQMtr4IYh/ZlwaPfdiT+fDkDZ5Ya
+ +kV0Bwl+azsEJOINLGIooL+oc4xSrf4dIYsjRmSmKkB6j1mStxE0HiDf/USQksXgMa1Kgq1l+Ug
+ 34cRBHR78ptO0HC6MpI1+Mw7M8/A9JzoSqpAvkuoHICA==
+X-Zone-Loop: a6400040302f8247c486706b092b3b8473d38f4a5e04
+x-campaign-type: default
+x-transaction-id: edb9a02f-d5cf-468b-90ca-ff5e28aba6c3
+x-swg-uid: 01-11f25bc9-f0d2-431e-bf6f-953bbba4381b
+X-Mailer: Sweego
+Message-ID:
+ <1788796633.8631fc262581453bbf619ec5b2062170.1a07c968185000c4f3@vates.tech>
+x-swg-bid: 1788796633.8631fc262581453bbf619ec5b2062170.1a07c968185000c4f3
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SA2PR03MB5705:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4b694d65-60ad-488b-21e2-08df0cf2eb44
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|6133799003|10067099003|11063799006|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	q/uxnTi4skFYPawT6p/cyTID39qJ1lwrPxDMv7749ggVIS8SD7yKFV+JpNX3du9ylOlNXk3tC790SIiooNpWw49ZkRvt77k1dbeicDupeSD7xDeSMe1DjKDiAtzD3UnqxDHFX9tzBoDtqX44JWfm7TzCi0bJArKbe+huU8z/nzQSS83kgl83UD656UVNWax+RvNaW08yB2J+8+rik5WVtLerNAPETf6XJzUi/W7OM/r0AqwNWgXxKQPCniCtKcpb6U6zZj+sFoOchJ/yp+PYDEtQUtM8TLvzRMKHpN4YhowtC+xedOFpWLfMAC8drIcpHwbz0VW6CAzYVIWkEggEl+rcI1VIx3phNTG/UC21vucCkaa+QeWvkEUHuHJz22Ue2ieaxBwqvzUUgd6oRkoEABRwnvgx5VjrSjiU3ZK4Y9vOcFCPKBnd0BMmcBR6kWwTUDnRm1Ak9rj8QPm6N4TYFkVQ1ymj2zb2bVydrIOtXl4BU5k4rNavxQLwPgx8JuQtDM2KwAWzQgJZT1T+zLLiW7BxDjnYWkmdC3HMEntjtXQm0ajGrfuZ3+JM6heNWYbEWaMTQJximASTDGrsSlNsoQUIt5E44FOIYMhmQ0oVtEVIHKe6iwCYD1I458jgWZD0IvS/sCzygvQQbVX57pCjJz/w8dN3RtFpZ+kwJTMYMTA=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(6133799003)(10067099003)(11063799006)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?MVlNSjR3aU9aaXNsYlduNm94c2lyNTE5OUlXbXlJNk5oblNTTC9hRkZhSWdp?=
- =?utf-8?B?L3dUdzltb2hub1MwVEsxVjdrdFZTU1B6ZW5CSlp0dHpvN1paZno3SmQ0bVJi?=
- =?utf-8?B?YlM0clpHOFhIWHBVemc4SWdQeFoxdEVpWlN6a0dvQ2RIU0ZUeUU0empCbEMy?=
- =?utf-8?B?d0JkY3RDd0IrRmNoUE1rM0ZZWWh6bklyckM4Y0JhRzE1SDdXNVl6bXVVekgv?=
- =?utf-8?B?YmdPTnhQa2d0OFdRajBPT29kdmdMS1R3elJYbUtKa0RGVmRVTWx5dlJZdmZL?=
- =?utf-8?B?RHpyRTgrVjYzVnZSb29iY0ZGKzc4cFBCckFadjJVUk93MGFnbFhGTkk1cEVi?=
- =?utf-8?B?Z1VFZVk3ZHZxUkdBRHRGelkya092M3JORWZrZWt4aTliNXo0TG1YOUZkb1py?=
- =?utf-8?B?U2ozNW5TNjV2K2Y1dU5tMThCbUlUQ3VnUlYwdnFYRFpyNDNPSHV6dXJ6RlNU?=
- =?utf-8?B?UEt6NUZyeVUvUHNZZ1NwdmpsSzJSSUJ1UUYxeDNISHp6R2p5NHBRWXdmRTkz?=
- =?utf-8?B?eFhiTmpNdE0yZTlMZ1V5ZHJZRXUvR1NZWFAyY0tiekpvRmVuVFpsMGx0ak01?=
- =?utf-8?B?a2hDMkNlQzBacEt4dnJQa3hrRU1hYms1UFlaUVNlTXlrcldBV2V3b29QaTNM?=
- =?utf-8?B?VmJWaTRGNXVMb0Vld0oxaXZxZk02Zk8rY0VpaW5aWkVFRlhYN003WFRzNk8y?=
- =?utf-8?B?SWlaUGRyYXY5eVpjdkxnT3JXcFoxRWZqK1FCZXUwNDFXaHhHSkVmcTA2ZTJ1?=
- =?utf-8?B?YTJnVnEwcGl5UDJrS2l5L3UwVUdhdHZjUnRQY3lvdkZsaHhxNWM2TUYxKy90?=
- =?utf-8?B?SXFJNzJGYXQ5dy9ITExQVm5CL3FubExSYmZhT09NL1NxNEI2eCtzcHJwV1pZ?=
- =?utf-8?B?cWlUWUNGZDQ2TWJrTGt4VDFoNktLN2RoRE1pdlQ3N2NwTHV5R1lhUk52cEk0?=
- =?utf-8?B?cGcydGlseDdlOWI3TEg0OUFNcDFub2lJYU9UTlQxUU8yTzUzZ0xGYlNJWWNE?=
- =?utf-8?B?NSswZEpBZUhkcDE4bVhFR2NMY28yVWFQbmdRdmtaQnNCd0xGb3c1TGEvYTVs?=
- =?utf-8?B?Y1dUQ2NBbHFMdFFhcDdvNXJHTXM1Mm9oR0hNZVgwbjBHc3c0ZGV6SmErZlRt?=
- =?utf-8?B?NisrQUxaS2JNV1lEUitteEdlNUZwRnVGSkVDa1dCOUFFNC94TGJwQXNydXZZ?=
- =?utf-8?B?K1VZQzdYM1BWakM3OEVRZTlvMzJ0VFhBNGcxNE84cm9kdmF2MlJpRCtNL3ZZ?=
- =?utf-8?B?UEFleE1rT0pEUzkyVVB1NEZlUjhPUjZJS3g4dFJDTURqODFPOG9Td0R6Tk1Q?=
- =?utf-8?B?dU9GS1orVkp0NEo2QVpOZStaSDlHU01DWTlFQWJMVVM4YVFWZUVUYzJYZkdw?=
- =?utf-8?B?c3IxWndiRmxyR084UG4vR1R4M1VBallYNERHUUNyVklVTjU1TWxZNUV1aHYr?=
- =?utf-8?B?N1hJcjFHMG5FQmJ0Skc5aDhpL0FaaEdjeXBaMUQ3Wmd0MVpvVHdkRW1wbFVY?=
- =?utf-8?B?aFFkSXg5Y0IvMVMxQUdPTTdXcHFNVHVpTEZxbUNveDlTNTN2MG9Nbjd1dm5X?=
- =?utf-8?B?VmdDNStyc0VkblUxVkJ5cHFlWlp4QVFLc3hKbkNFZTdFdzRyOUtyYktXVXV4?=
- =?utf-8?B?NzA2dFptdGY3M1JPMkQ5dGZkcEhqRmdqWEEwYi9wNFBZRTZxMzIza1BLS0Zu?=
- =?utf-8?B?UElhTGk5R25nUEphSGo5UFBUTDdyVTFsdDg5bXBtY092cklWeE5US0l6Ykh0?=
- =?utf-8?B?cnhOM2JwcWJqbm5BVDY5VDZSZmFzYUFuMUpxbERsVGxHUEltMWVaWmM5cmVy?=
- =?utf-8?B?UndRd2RjU3YwbmIzdlJ4V2dGSW9Ya3RTOUtXVXZINjIzT1Z5Sm5qVzFTdm8r?=
- =?utf-8?B?ZHZGb2lIUDlZdzB5Q1BIeUVhS0s1eUFPNW85U3hxaWE2NDhtREhuVkxvaUF6?=
- =?utf-8?B?bmUwREVDMXNEdVhaMkVpNElDbWt4Y0dBVURtbFlQZEFNSk9qbDFrcmZteUlE?=
- =?utf-8?B?aDRPTWxmN294cmpYQlk5dEo2Y0M3WmFHK2lHRGhVK1k1aForTjA2aHQwaDRG?=
- =?utf-8?B?RkdRR0tramxwWkpwV2JxZzNWNkJCNFgyNGp2TG5BZXlyV0oxSTdZWThuNFMx?=
- =?utf-8?B?eVFrYTNuRlRJQlhwcmkxbEtQSGZQa0pNdm5FaXBvUEdwelkxaVFJWVlGaWFo?=
- =?utf-8?B?NlB2MTdHQTl4MmJsbkdHeFE4a3hBWmY1UkhidzNzdWVLK1JweksxSmJMOEdY?=
- =?utf-8?B?RXZSdTNUTFp3ZEQxNGFIMVN3bHdWVUZDbVVsODRORUVnNGs5TlNVTGVmM0dw?=
- =?utf-8?B?WllIOW5QaFBjcE0vbEFxenpabSt4Ymc2MlI0d0pCTlhNT2VCRkd3Zz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4b694d65-60ad-488b-21e2-08df0cf2eb44
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2026 15:15:57.9281
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 4I8PKKG/F1GgLxALXmqR7FxDsqoRVyLwP9+S0XW4J0G5seBcVEcHZjpVNn56R5KZCH2+sUX9Dw+v5G4pU0S9cAAx1gtw+xUMncGztIY/i/g=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA2PR03MB5705
-X-purgate-ID: tlsNG-d25034/1788794161-006CEA5B-052A99A0/0/0
-X-purgate-type: clean
-X-purgate-size: 302
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v2 16/39] xen/riscv: extend exception tables with type
+ and data fields
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org, 
+ Romain Caritey <Romain.Caritey@microchip.com>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+ Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <8aef9dfabe1d485abe4c48fd7499e09dbd8e0c27.1787838835.git.oleksii.kurochko@gmail.com>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <8aef9dfabe1d485abe4c48fd7499e09dbd8e0c27.1787838835.git.oleksii.kurochko@gmail.com>
+Date: Mon, 07 Sep 2026 17:57:03 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788796632; l=12091;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=xVbthVlFdzn4JrnWWiG8bYfo/RvVk41EN2jucCbnq1Y=;
+ b=hLOiCdH2kENcw7CLkl3au6ty0IHGv0/8a1xP5SPIlhEgu83+MwdxOxvjRYPJeOP6OzZoazF2w
+ 7DatlIM3T1RCVwt1ylskztCGo1B4R1AjvyXJGg1iw2TWpHnwSKFfZbu
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1788796632910
+X-purgate-ID: tlsNG-c201ff/1788796636-247132A1-7A469C0E/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 12091
 
-On 07/09/2026 4:14 pm, Jan Beulich wrote:
-> Recent Clang objects to types differing between alias and aliasee. Accept
-> the unnecessary overhead and make the two compat stubs real functions.
+> Extend the RISC-V exception table format to include a type and
+> auxiliary data field.
+> 
+> The existing format only supports simple fixups. Some use cases require
+> additional context from the fault (e.g. capturing trap information),
+> which cannot be expressed with the current EX_TYPE_FIXUP entries.
+> 
+> Introduce a generic ASM_EXTABLE_RAW() helper to describe entries with a
+> handler type and associated data. Reimplement ASM_EXTABLE() in terms of
+> it using EX_TYPE_FIXUP for compatibility.
+> 
+> Add EX_TYPE_TRAP_INFO to allow handlers to retrieve trap state
+> (sepc/scause/stval) and pass it to the fixup path. The data field is
+> used to encode which GPR contains a pointer to a struct trap_info.
+> 
+> Provide ASM_EXTABLE_TRAP_INFO() as a convenience wrapper for this case.
+> 
+> Also add gpr-num.h, providing symbolic GPR numbers for use in assembly
+> and inline asm. This is derived from Linux 6.16 with minor adjustments such
+> as using .irp instead of open-coding the same using a set of .equ.
+> 
+> Update the exception handling code to dispatch based on the entry type.
+> 
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 >
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> diff --git a/xen/arch/riscv/extable.c b/xen/arch/riscv/extable.c
+> index 5b89c4278c..6470198d01 100644
+> --- a/xen/arch/riscv/extable.c
+> +++ b/xen/arch/riscv/extable.c
+> @@ -6,8 +6,10 @@
+>  #include <xen/sort.h>
+>  #include <xen/virtual_region.h>
+>  
+> +#include <asm/csr.h>
+>  #include <asm/extable.h>
+>  #include <asm/processor.h>
+> +#include <asm/traps.h>
+>  
+>  #define EX_FIELD(ptr, field) ((unsigned long)&(ptr)->field + (ptr)->field)
+>  
+> @@ -32,6 +34,12 @@ static void __init cf_check swap_ex(void *a, void *b)
+>  
+>      x->fixup = y->fixup + delta;
+>      y->fixup = tmp.fixup - delta;
+> +
+> +    x->type = y->type;
+> +    y->type = tmp.type;
+> +
+> +    x->data = y->data;
+> +    y->data = tmp.data;
+>  }
+>  
+>  static int cf_check cmp_ex(const void *a, const void *b)
+> @@ -59,7 +67,49 @@ static void ex_handler_fixup(const struct exception_table_entry *ex,
+>      regs->sepc = ex_fixup(ex);
+>  }
+>  
+> -bool fixup_exception(struct cpu_user_regs *regs)
+> +#define CHECK_GPR_INDEX(num, name)                      \
+> +    BUILD_BUG_ON(offsetof(struct cpu_user_regs, name)   \
+> +                 != (num) * sizeof(unsigned long));
+> +
+> +static unsigned long regs_get_gpr(const struct cpu_user_regs *regs,
+> +                                  unsigned int num)
+> +{
+> +    /*
+> +     * The GPR number -> struct index mapping below relies on x0..x31 being
+> +     * laid out at the start of struct cpu_user_regs in architectural order,
+> +     * matching the register numbers GPR_LIST() hands to the assembler.
+> +     */
+> +    GPR_LIST(CHECK_GPR_INDEX)
+> +
+> +    ASSERT(num < 32);
+> +
+> +    return ((const unsigned long *)regs)[num];
+> +}
+> +
+> +#undef CHECK_GPR_INDEX
+> +
+> +static void ex_handler_trap_info(const struct exception_table_entry *ex,
+> +                                 struct cpu_user_regs *regs,
+> +                                 unsigned long cause)
+> +{
+> +    struct trap_info *trap_info =
+> +        (struct trap_info *)regs_get_gpr(regs, ex->data);
+> +
+> +    BUG_ON(!trap_info);
+> +
+> +    /*
+> +     * Only stval still needs a CSR read: sepc and scause were already
+> +     * captured by the trap entry path and do_trap() respectively. Latch
+> +     * trap_info->sepc before regs->sepc is pointed at the fixup code.
+> +     */
+> +    trap_info->sepc = regs->sepc;
+> +    trap_info->scause = cause;
+> +    trap_info->stval = csr_read(CSR_STVAL);
+> +
+> +    regs->sepc = ex_fixup(ex);
+> +}
+> +
+> +bool fixup_exception(struct cpu_user_regs *regs, unsigned long cause)
+>  {
+>      unsigned long pc = regs->sepc;
+>      const struct virtual_region *region = find_text_region(pc);
+> @@ -77,7 +127,23 @@ bool fixup_exception(struct cpu_user_regs *regs)
+>      if ( !ex )
+>          return false;
+>  
+> -    ex_handler_fixup(ex, regs);
+> +    switch ( ex->type )
+> +    {
+> +    case EX_TYPE_FIXUP:
+> +        ex_handler_fixup(ex, regs);
+> +        break;
+> +
+> +    case EX_TYPE_TRAP_INFO:
+> +        ex_handler_trap_info(ex, regs, cause);
+> +        break;
+> +
+> +    default:
+> +        printk(XENLOG_ERR
+> +               "Unsupported exception table entry type %u for pc %#lx\n",
+> +               ex->type, pc);
+> +
+> +        return false;
+> +    }
+>  
+>      return true;
+>  }
+> diff --git a/xen/arch/riscv/include/asm/extable.h b/xen/arch/riscv/include/asm/extable.h
+> index c0128a9181..7378f86e7e 100644
+> --- a/xen/arch/riscv/include/asm/extable.h
+> +++ b/xen/arch/riscv/include/asm/extable.h
+> @@ -3,17 +3,24 @@
+>  #ifndef ASM__RISCV__ASM_EXTABLE_H
+>  #define ASM__RISCV__ASM_EXTABLE_H
+>  
+> +#include <asm/gpr-num.h>
+> +
+> +#define EX_TYPE_FIXUP       0
+> +#define EX_TYPE_TRAP_INFO   1
+> +
+>  #ifdef __ASSEMBLER__
+>  
+> -#define ASM_EXTABLE(insn, fixup) \
+> -    .pushsection .ex_table, "a"; \
+> -    .balign     4;               \
+> -    .word       (insn) - .;      \
+> -    .word       (fixup) - .;     \
+> +#define ASM_EXTABLE_RAW(insn, fixup, type, data)    \
+> +    .pushsection .ex_table, "a";                    \
+> +    .balign     4;                                  \
+> +    .word       (insn) - .;                         \
+> +    .word       (fixup) - .;                        \
+> +    .half       (type);                             \
+> +    .half       (data);                             \
+>      .popsection
+>  
+> -.macro asm_extable, insn, fixup
+> -    ASM_EXTABLE(\insn, \fixup)
+> +.macro _asm_extable, insn, fixup
+> +    ASM_EXTABLE_RAW(\insn, \fixup, EX_TYPE_FIXUP, 0)
+>  .endm
+>  
+>  #else /* __ASSEMBLER__ */
+> @@ -23,20 +30,36 @@
+>  
+>  struct cpu_user_regs;
+>  
+> -#define ASM_EXTABLE(insn, fixup)      \
+> -    ".pushsection .ex_table, \"a\"\n" \
+> -    ".balign    4\n"                  \
+> -    ".word      (" #insn " - .)\n"    \
+> -    ".word      (" #fixup " - .)\n"   \
+> +#define ASM_EXTABLE_RAW(insn, fixup, type, data)    \
+> +    ".pushsection .ex_table, \"a\"\n"               \
+> +    ".balign    4\n"                                \
+> +    ".word      (" insn ") - .\n"                   \
+> +    ".word      (" fixup ") - .\n"                  \
+> +    ".half      (" type ")\n"                       \
+> +    ".half      (" data ")\n"                       \
+>      ".popsection\n"
+>  
+> +#define ASM_EXTABLE(insn, fixup)    \
+> +    ASM_EXTABLE_RAW(#insn, #fixup, __stringify(EX_TYPE_FIXUP), "0")
+> +
+> +#define EX_TRAP_INFO_REG(gpr)   \
+> +    "(.L_gpr_num_" #gpr ")"
+> +
+> +#define ASM_EXTABLE_TRAP_INFO(insn, fixup, data)                    \
+> +    DEFINE_ASM_GPR_NUMS                                             \
+> +    ASM_EXTABLE_RAW(#insn, #fixup, __stringify(EX_TYPE_TRAP_INFO),  \
+> +                    EX_TRAP_INFO_REG(data))
+> +
+>  /*
+> - * The exception table consists of pairs of relative offsets: the first
+> - * is the relative offset to an instruction that is allowed to fault,
+> - * and the second is the relative offset at which the program should
+> - * continue. No general-purpose registers are modified by the exception
+> - * handling mechanism itself, so it is up to the fixup code to handle
+> - * any necessary state cleanup.
+> + * Each exception table entry consists of two relative offsets and a
+> + * handler description: `insn` is the relative offset to an instruction
+> + * that is allowed to fault, `fixup` is the relative offset at which the
+> + * program should continue, `type` selects how the exception is handled
+> + * (EX_TYPE_*), and `data` holds auxiliary information for the handler
+> + * (e.g. for EX_TYPE_TRAP_INFO, the number of the GPR that contains a
+> + * pointer to a struct trap_info). No general-purpose registers are
+> + * modified by the exception handling mechanism itself, so it is up to
+> + * the fixup code to handle any necessary state cleanup.
+>   *
+>   * The exception table and fixup code live out of line with the main
+>   * instruction path. This means when everything is well, we don't even
+> @@ -45,14 +68,15 @@ struct cpu_user_regs;
+>   */
+>  struct exception_table_entry {
+>      int32_t insn, fixup;
+> +    uint16_t type, data;
+>  };
+>  
+>  extern struct exception_table_entry __start___ex_table[];
+>  extern struct exception_table_entry __stop___ex_table[];
+>  
+>  void sort_exception_tables(void);
+> -bool fixup_exception(struct cpu_user_regs *regs);
+> +bool fixup_exception(struct cpu_user_regs *regs, unsigned long cause);
+>  
+> -#endif /* __ASSEMBLY__ */
+> +#endif /* __ASSEMBLER__ */
+>  
+>  #endif /* ASM__RISCV__ASM_EXTABLE_H */
+> diff --git a/xen/arch/riscv/include/asm/gpr-num.h b/xen/arch/riscv/include/asm/gpr-num.h
+> new file mode 100644
+> index 0000000000..3b97a72e6c
+> --- /dev/null
+> +++ b/xen/arch/riscv/include/asm/gpr-num.h
+> @@ -0,0 +1,37 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +#ifndef RISCV_GPR_NUM_H
+> +#define RISCV_GPR_NUM_H
+Nit: commit message says this is derived from Linux 6.16. Other
+imported RISC-V headers here carry an in-file note (bitops.h: "Based on
+linux/arch/.../bitops.h") but this file doesn't.
+> +/*
+> + * GPRs by ABI name, together with their register number (x0 .. x31).
+> + *
+> + * This is the single source of truth for the mapping: it generates the
+> + * .L_gpr_num_<name> assembler symbols used to turn a register name emitted
+> + * by the compiler into a register number, and struct cpu_user_regs is
+> + * checked against it at build time (see regs_get_gpr()). Neither list can
+> + * therefore be changed without the other.
+> + */
+> +#define GPR_LIST(x)                                 \
+> +    x(0,  zero) x(1,  ra)  x(2,  sp)  x(3,  gp)     \
+> +    x(4,  tp)   x(5,  t0)  x(6,  t1)  x(7,  t2)     \
+> +    x(8,  s0)   x(9,  s1)  x(10, a0)  x(11, a1)     \
+> +    x(12, a2)   x(13, a3)  x(14, a4)  x(15, a5)     \
+> +    x(16, a6)   x(17, a7)  x(18, s2)  x(19, s3)     \
+> +    x(20, s4)   x(21, s5)  x(22, s6)  x(23, s7)     \
+> +    x(24, s8)   x(25, s9)  x(26, s10) x(27, s11)    \
+> +    x(28, t3)   x(29, t4)  x(30, t5)  x(31, t6)
+> +
+> +#ifdef __ASSEMBLER__
+> +
+> +#define GPR_NUM_EQU(num, name)  .equ .L_gpr_num_##name, num;
+> +GPR_LIST(GPR_NUM_EQU)
+> +#undef GPR_NUM_EQU
+> +
+> +#else /* __ASSEMBLER__ */
+> +
+> +#define GPR_NUM_EQU(num, name)  ".equ .L_gpr_num_" #name ", " #num "\n"
+> +#define DEFINE_ASM_GPR_NUMS     GPR_LIST(GPR_NUM_EQU)
+> +
+> +#endif /* __ASSEMBLER__ */
+> +
+> +#endif /* RISCV_GPR_NUM_H */
+> diff --git a/xen/arch/riscv/include/asm/processor.h b/xen/arch/riscv/include/asm/processor.h
+> index b1745c1071..e7b0f2321a 100644
+> --- a/xen/arch/riscv/include/asm/processor.h
+> +++ b/xen/arch/riscv/include/asm/processor.h
+> @@ -12,7 +12,19 @@
+>  
+>  #ifndef __ASSEMBLER__
+>  
+> -/* On stack VCPU state */
+> +/*
+> + * On stack VCPU state.
+> + *
+> + * x0..x31 must remain at the start of this structure, in architectural
+> + * register-number order: code which resolves a register number to its saved
+> + * value indexes this structure directly (instruction emulation via
+> + * REG_PTR() from asm/riscv_encoding.h, exception table fixups via
+> + * regs_get_gpr()). ->zero therefore has to stay at offset 0 and must always
+> + * read as 0, since it supplies the value of x0 when x0 is used as a source
+> + * operand. The layout is checked against GPR_LIST() at build time; see
+> + * regs_get_gpr() in extable.c. Do not reorder these fields or insert
+> + * anything between them.
+> + */
+>  {
+>      unsigned long zero;
+Comment claims ->zero "must always read as 0" as it's hard-wired to zero
+by the HW, but nothing enforces that, it's still a plain writable
+unsigned long. Maybe a write-side counterpart that special-cases num==0
+as a no-op, or with a minimum ASSERT(num != 0) / BUG_ON(num == 0) to
+anticipate any future forbidden writes.
 
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+-- 
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
