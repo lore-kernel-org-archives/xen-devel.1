@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B452C79F9E
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 06:36:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1410576.1641379 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0A8CC79F9E
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 06:36:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1410581.1641388 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3SxD-0004iT-2V; Mon, 07 Sep 2026 06:35:43 +0000
+	id 1x3Sy2-00059R-9Q; Mon, 07 Sep 2026 06:36:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1410576.1641379; Mon, 07 Sep 2026 06:35:43 +0000
+Received: by outflank-mailman (output) from mailman id 1410581.1641388; Mon, 07 Sep 2026 06:36:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3SxC-0004iL-VY; Mon, 07 Sep 2026 06:35:42 +0000
-Received: by outflank-mailman (input) for mailman id 1410576;
- Mon, 07 Sep 2026 06:35:42 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x3Sy2-00059K-6c; Mon, 07 Sep 2026 06:36:34 +0000
+Received: by outflank-mailman (input) for mailman id 1410581;
+ Mon, 07 Sep 2026 06:36:32 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <hemanth.selam@gmail.com>) id 1x3SxB-0004iD-VB
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 06:35:42 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x3Sy0-00059A-Hw
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 06:36:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3Sx9-00GrDN-1C
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 08:35:39 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x3Sxz-00EMRo-Uf
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 08:36:31 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <hemanth.selam@gmail.com>)
- id 6a9e5b35-2eae-0a2a0a5409dd-0a2a4504953c-42
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 08:35:38 +0200
-Received: from [209.85.210.177] (helo=mail-pf1-f177.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <hemanth.selam@gmail.com>)
- id 6a9e5b39-b57f-0a2a45040019-d155d2b1d1ad-3
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 08:35:38 +0200
-Received: by mail-pf1-f177.google.com with SMTP id
- d2e1a72fcca58-85377c8bc96so2873947b3a.3
- for <xen-devel@lists.xenproject.org>; Sun, 06 Sep 2026 23:35:38 -0700 (PDT)
-Received: from volcano9f6e-hostos.amd.com ([165.204.217.251])
- by smtp.gmail.com with ESMTPSA id
- 5a478bee46e88-3339aa37dbdsm21319326eec.11.2026.09.06.23.35.33
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Sun, 06 Sep 2026 23:35:36 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a9e5b6b-8faa-0a2a0a5109dd-0a2a4506e846-20
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 08:36:31 +0200
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6a9e5b6f-195a-0a2a45060019-d155dd33b004-3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 08:36:31 +0200
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-4858269e3d9so176705f8f.2
+ for <xen-devel@lists.xenproject.org>; Sun, 06 Sep 2026 23:36:31 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-485885bfdf6sm27364909f8f.34.2026.09.06.23.36.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 06 Sep 2026 23:36:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,144 +53,131 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788762937; x=1789367737; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=4J4rYjNQoetFmHhwvDThjrrPfLTRssIW7zzZbk53w90=;
-        b=UwuWVn/oINxUVovpKDiCvsZ/rd8qNTOFJV2EOfQPPlNjo9GECw+ZxY0S7SSFX7JHwd
-         ePgCKq3shzw0K8gsddgZUPFBMwx17dvGjKLurinzsPz2Q+riiDkRLzTf9ukfj+OKn2Nx
-         WYf8VDw/NqRQWhvfLiTXQk0VdYrkXch+Qq+67m5fP3QJeOjsATg3eLsj0Ylnur/2gOiX
-         6VHPkwZUmszO9ty2Tw1M9NT2CARmh5GOK/TnxFXDlD+DhIhzPftJOqSM4K0unwwbPhKK
-         zZXAljtJRIzFmxzAKRkVLZcAOY7tZhh9H/sKoZQPHLWpUgFkxBk8KrjG/jIZ3mydREYa
-         d76A==
+        d=suse.com; s=google; t=1788762991; x=1789367791; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=e7Q7QcH+rs+UC/qC/pvy536BuZ0LaD2I57YR+dceG1E=;
+        b=YzlK2oePPlCwm1nihxNKzk63DedXKfEB4iMEI5Wo7iOhylY/RdhNfzHIeumnkYQ91x
+         +o4n+tgeIsLEfp8NS5vistLmL2HRcuovek1Oup7wIPcBk4SSiWMEjsfUj56+VmNSelWJ
+         ewgiVhTyaq0Wxz3dx4y1q+nTFwTNzenypIRWQsymEHNA0ht7FxCB5W72TvM52d67vonb
+         7tk/9dxzs4AGvXxj5V6lKZj854sKxQ0VUxhejVBIumJX3XvLYYyZ42aYqvV/NYKiUPyY
+         rA1k5YgaX1w9yAVeaMPrHiJBE+0XpmFu9xd2VmUM+3ftoHlGxr7ZVdJSshsCbOGcsA8D
+         FMKw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788762937; x=1789367737;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20251104; t=1788762991; x=1789367791;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4J4rYjNQoetFmHhwvDThjrrPfLTRssIW7zzZbk53w90=;
-        b=O7ZPP0xU4ePJ95i+WsN7MyLMepuEK5atq3I0yZs19Pical5iEs+Xckoyxx9LsYtsvQ
-         7w23HX2sstw4+Tx00I1etZV0mN5R5fLFU7EfYsBAsbKkCbs2j4O22HOGbs5bXWIUw/kj
-         UYUp42agVx+ugs9v4TnlImIjTWzWBtzbjGXDP+ghEgzyhtPFqomSnu2pMs/RxufyIrJ5
-         RoI2XfcQKpXLsPiy0VwFkOGR1GJu+df0SMBRbBeLxhsZO8VUtXmB4fbtm2O57X9YzOOy
-         qOk5GZrAh/hNzqdWsjbe2ibS45nWyU3Ko4lSlVNrYBD5DmRvGNeXzf7XqGqcPA+uyEqP
-         h1kg==
-X-Gm-Message-State: AFuF++mAi9W/4YFNOBz9OWBFP8laoGmdusvYOGAYuHV4fIJNUK2CUs1Q
-	FO9Og5zLE7LNLqZahpC0lL5DN2vMKOSnnKFOIdYFb4irwAPm8znrrkZW
-X-Gm-Gg: AYBFou1CkfN/jK8c9x+aTTNw0Xn8Er1zyHyqjedIspDhYVhNeERFcNdP9XTLSs5Ilbp
-	pWohgElqLtJSAwaJv6GHEpJLr9rtmWolr5uAdsYVjyW4gnqdOWqIDQmNseZdxh60dgjj0wkDtrQ
-	G0MvQyN5nDIpMghalcwVlEWZbctjJDBsQX0mjkF7XeDtFfUDyciRd1TVVTFOsYOlKv9rltGs4pz
-	qgIDqY1AaSr4bXwqWAJhJt7xTD++vmEfRTjFme0FRzVbp6q31hpbRBSzb8SVgyOvG0KmCRMNFCo
-	0xLbZob+Ir1T30u/cj0Dlxcc7PudJ6PhWiyruWRyyzCCs2sEsgMkwhcgIgqKlmY4+DrQjXsgtgn
-	vSH7SC23rVgtizbmlqAMYL3gSNgpbjp8ayMjBj0M2RWrqiHVG/pRJnpgzT3JVhhl/y8wNWX50jj
-	se1AFI4RpBE3ZaraWbq5hBJ+aulh5197+LdVQUTHyD9wtWs5SZr+mVt4CFVnNFwNjDb8AF5chRu
-	jkkw53NziwMQA==
-X-Received: by 2002:a05:6a21:2983:b0:3d9:6f0:b42f with SMTP id adf61e73a8af0-3da39fd0822mr34557933637.17.1788762936771;
-        Sun, 06 Sep 2026 23:35:36 -0700 (PDT)
-From: Hemanth Selam <hemanth.selam@gmail.com>
-To: Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	"James E . J . Bottomley" <James.Bottomley@HansenPartnership.com>,
-	"Martin K . Petersen" <mkp@kernel.org>
-Cc: xen-devel@lists.xenproject.org,
-	linux-scsi@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] xen: fix typos in comments
-Date: Mon,  7 Sep 2026 12:05:31 +0530
-Message-ID: <20260907063531.23981-1-hemanth.selam@gmail.com>
-X-Mailer: git-send-email 2.48.1
+        bh=e7Q7QcH+rs+UC/qC/pvy536BuZ0LaD2I57YR+dceG1E=;
+        b=pNTkavzR7K02SzYkGzQ4iMogQLhMi320tcy/QdKtz/zPR8A1rlvKK75v7SKGlXR9aJ
+         /xuqPlwot19bY5nxcsvomKd2lQtceuuOC16EbOEAMsk2JtqrTYZaKbI+n1Fz1E8BHcFP
+         mhpK9Rof67SAbzEkIo3jSuU18UiajRz2uYWMKVJBtyL5FldzEgwj2VQu/6sx+fu6UW6I
+         JznGx2pF7/Fy+Wis09c5OaGULCEzU1Iuh0QtWaCSDV434UV5EGIoviRz76538W6qcS4k
+         omHuaNB+/PRZGvYTpPFBamgHucNdDUWMAmnANgbHVLzQRy86i0zfhmuoSHqbzmsE/5Bd
+         gYrg==
+X-Forwarded-Encrypted: i=1; AKwUvBx0sFKWlON4gcicxKvoUhS1OtIoIZQcRwcQj0uvCNNuoDHh8d/uT9gOmv+G5Z4Fw3eZpzWYutG/oQQ=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lxsROKwJJs7Taggy6C7t38IMM3Ewxy3rLI9H8J85Ew9/vnsnAI
+	EZEfvzZ5LzKooDDH/WAjWGpMNOpmGCc9WPRvZs5xBlFwQ8xL72/DiS0sEHh1ZF76Zg==
+X-Gm-Gg: AYBFou2+i37eTHBa4IQSxU2WS0IzM3OQkGd1m3/LJvce/oiFVNklTLX/DkYsQgHcYIB
+	8EkBHUExTioD+R8aVyayEfSNIu1lTJcxf4WbMk1QmBaLa7l+auT+FOkJoxGr2dcwcoEgk5GP6x5
+	3TbwXlhJT3E7fgSlxOQkGl/1JLGm/UEQvJyvg+zVU95PAAuVkpTtmTiZgbAXOv523GP/kN/+RJW
+	6b2mw7Qu7rx8lH5kj9gtbiNwi2oGRV/geXwP3LFLzurdyMDoLFaz5nAwmtCoGYPAgE/0fzPcvZ5
+	guMDYaIYRIVIfqnp3TVQJWH11IVd9JuGzBNrdWhzTo3+uNwmytGWu6+AnVsEP9YLCa23MhhzqIO
+	IR33txuevWVCiPUMGxsvhYwhStMPGMcVFu5yRvK5daHUKMaDwAaGRL1jMeKn/CAw6tKKwysIhvl
+	t58ll1rRcivvJA+9JiGSvlu9wLqZy04aIVte3l8didt4xSLd4eI0RVhRskxXk6zpUqYCCHIK0Iw
+	bMeeGenDEVSxfxQNb0YLhVDN5nt8zwV+J/ZQyW+IWHKaAuoFAnT
+X-Received: by 2002:a05:6000:612:b0:485:8e19:1979 with SMTP id ffacd0b85a97d-4858e191d46mr32572561f8f.11.1788762991188;
+        Sun, 06 Sep 2026 23:36:31 -0700 (PDT)
+Message-ID: <da4f1b40-b9a8-43d4-9b6e-bd666cfe7c0e@suse.com>
+Date: Mon, 7 Sep 2026 08:36:29 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1788762938-C08D9B50-967823B3/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4] x86/nSVM: Check injected event consistency
+To: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+Cc: andrew.cooper3@citrix.com, roger@xenproject.org, jason.andryuk@amd.com,
+ teddy.astie@vates.tech, xen-devel@lists.xenproject.org
+References: <20260906131117.3121334-1-abdelkareem.abdelsaamad@citrix.com>
+ <20260906132248.3121411-1-abdelkareem.abdelsaamad@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260906132248.3121411-1-abdelkareem.abdelsaamad@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1788762991-F72C677B-E0406677/0/0
 X-purgate-type: clean
-X-purgate-size: 3588
+X-purgate-size: 1750
 
-Fix typos in comments, reported by scripts/checkpatch.pl using the
-misspelling list in scripts/spelling.txt.  Only touches comments, no code
-changes.
+On 06.09.2026 15:22, Abdelkareem Abdelsaamad wrote:
+>>>> @@ -320,6 +320,44 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
+>>>>      svm_dump_sel("  TR", &vmcb->tr);
+>>>>  }
+>>>>  
+>>>> +static bool is_valid_injected_exception_vector(const struct vmcb_struct *vmcb,
+>>>> +    uint8_t vmcb_injected_vector)
+>>>> +{
+>>>> +    switch ( vmcb_injected_vector )
+>>>> +    {
+>>>> +    case X86_EXC_DE:
+>>>> +    case X86_EXC_DB:
+>>>> +    case X86_EXC_BP:
+>>>> +    case X86_EXC_UD:
+>>>> +    case X86_EXC_NM:
+>>>> +    case X86_EXC_DF:
+>>>> +    case X86_EXC_TS:
+>>>> +    case X86_EXC_NP:
+>>>> +    case X86_EXC_SS:
+>>>> +    case X86_EXC_GP:
+>>>> +    case X86_EXC_PF:
+>>>> +    case X86_EXC_MF:
+>>>> +    case X86_EXC_AC:
+>>>> +    case X86_EXC_MC:
+>>>
+>>> Is #MC valid to inject without CR4.MCE set?
+>> The testing I performed (see previous comment) does not show that set CR4.MCE
+>> is required for the valid injection.
+>>>> +    case X86_EXC_XM:
+>>>
+>>> As before: Doesn't #XM (AMD: #XF) require CR4.OSXMMEXCPT to be set?
+>> The testing I performed (see previous comment) does not show that set CR4.MCE
+>> is required for the valid injection.
+> I meant ..does not show that set CR4.OSXMMEXCPT is required.
+>>>
+>>> Again as before: Is #SX really permitted without any constraints? You did
+>>> reply to both comments on v3, but that outcome isn't reflected here. The
+>>> more that what you said there could equally apply ...
+>> The testing I performed (see the first comment) does not show that set CR4.MCE
+>> is required for the valid injection.
+> I meant ..does not show that any CR4 bit is required.
 
-Assisted-by: Cursor:claude-opus-5
-Signed-off-by: Hemanth Selam <hemanth.selam@gmail.com>
----
- drivers/scsi/xen-scsifront.c     | 2 +-
- drivers/xen/mcelog.c             | 2 +-
- include/xen/interface/platform.h | 4 ++--
- include/xen/interface/xen.h      | 2 +-
- include/xen/xenbus.h             | 2 +-
- 5 files changed, 6 insertions(+), 6 deletions(-)
+And I didn't mention CR4. I intentionally said "without any constraints".
 
-diff --git a/drivers/scsi/xen-scsifront.c b/drivers/scsi/xen-scsifront.c
-index 989bcaee42ca..f86a47056ea8 100644
---- a/drivers/scsi/xen-scsifront.c
-+++ b/drivers/scsi/xen-scsifront.c
-@@ -1076,7 +1076,7 @@ static void scsifront_do_lun_hotplug(struct vscsifrnt_info *info, int op)
- 
- 		/*
- 		 * Front device state path, used in sdev_configure called
--		 * on successfull scsi_add_device, and in sdev_destroy called
-+		 * on successful scsi_add_device, and in sdev_destroy called
- 		 * on remove of a device.
- 		 */
- 		snprintf(info->dev_state_path, sizeof(info->dev_state_path),
-diff --git a/drivers/xen/mcelog.c b/drivers/xen/mcelog.c
-index 32ab419bb503..f19cc7a67f36 100644
---- a/drivers/xen/mcelog.c
-+++ b/drivers/xen/mcelog.c
-@@ -1,6 +1,6 @@
- /******************************************************************************
-  * mcelog.c
-- * Driver for receiving and transferring machine check error infomation
-+ * Driver for receiving and transferring machine check error information
-  *
-  * Copyright (c) 2012 Intel Corporation
-  * Author: Liu, Jinsong <jinsong.liu@intel.com>
-diff --git a/include/xen/interface/platform.h b/include/xen/interface/platform.h
-index 79a443c65ea9..462e36392a9f 100644
---- a/include/xen/interface/platform.h
-+++ b/include/xen/interface/platform.h
-@@ -421,10 +421,10 @@ struct xenpf_pcpuinfo {
- 	/* IN */
- 	uint32_t xen_cpuid;
- 	/* OUT */
--	/* The maxium cpu_id that is present */
-+	/* The maximum cpu_id that is present */
- 	uint32_t max_present;
- #define XEN_PCPU_FLAGS_ONLINE   1
--	/* Correponding xen_cpuid is not present*/
-+	/* Corresponding xen_cpuid is not present*/
- #define XEN_PCPU_FLAGS_INVALID  2
- 	uint32_t flags;
- 	uint32_t apic_id;
-diff --git a/include/xen/interface/xen.h b/include/xen/interface/xen.h
-index 40c9793e9880..f9acb21875cf 100644
---- a/include/xen/interface/xen.h
-+++ b/include/xen/interface/xen.h
-@@ -94,7 +94,7 @@
- #define VIRQ_XENOPROF   7  /* V. XenOprofile interrupt: new sample available */
- #define VIRQ_CON_RING   8  /* G. (DOM0) Bytes received on console            */
- #define VIRQ_PCPU_STATE 9  /* G. (DOM0) PCPU state changed                   */
--#define VIRQ_MEM_EVENT  10 /* G. (DOM0) A memory event has occured           */
-+#define VIRQ_MEM_EVENT  10 /* G. (DOM0) A memory event has occurred           */
- #define VIRQ_XC_RESERVED 11 /* G. Reserved for XenClient                     */
- #define VIRQ_ENOMEM     12 /* G. (DOM0) Low on heap memory       */
- #define VIRQ_XENPMU     13  /* PMC interrupt                                 */
-diff --git a/include/xen/xenbus.h b/include/xen/xenbus.h
-index 8ca15743af7f..6424c5cf8ef5 100644
---- a/include/xen/xenbus.h
-+++ b/include/xen/xenbus.h
-@@ -63,7 +63,7 @@ struct xenbus_watch
- 	unsigned int nr_pending;
- 
- 	/*
--	 * Called just before enqueing new event while a spinlock is held.
-+	 * Called just before enqueuing new event while a spinlock is held.
- 	 * The event will be discarded if this callback returns false.
- 	 */
- 	bool (*will_handle)(struct xenbus_watch *,
--- 
-2.48.1
-
+Jan
 
