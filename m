@@ -4,44 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F0A8CC79F9E
-	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 06:36:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1410581.1641388 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67F3FC79FAD
+	for <xen-devel@archiver.kernel.org>; Mon,  7 Sep 2026 06:37:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1410588.1641396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3Sy2-00059R-9Q; Mon, 07 Sep 2026 06:36:34 +0000
+	id 1x3Sys-0005by-H3; Mon, 07 Sep 2026 06:37:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1410581.1641388; Mon, 07 Sep 2026 06:36:34 +0000
+Received: by outflank-mailman (output) from mailman id 1410588.1641396; Mon, 07 Sep 2026 06:37:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3Sy2-00059K-6c; Mon, 07 Sep 2026 06:36:34 +0000
-Received: by outflank-mailman (input) for mailman id 1410581;
- Mon, 07 Sep 2026 06:36:32 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x3Sys-0005br-Dg; Mon, 07 Sep 2026 06:37:26 +0000
+Received: by outflank-mailman (input) for mailman id 1410588;
+ Mon, 07 Sep 2026 06:37:25 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x3Sy0-00059A-Hw
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 06:36:32 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1x3Syr-0005bi-CM
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 06:37:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3Sxz-00EMRo-Uf
- for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 08:36:31 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1x3Syq-007N0g-PH
+ for xen-devel@lists.xenproject.org; Mon, 07 Sep 2026 08:37:24 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a9e5b6b-8faa-0a2a0a5109dd-0a2a4506e846-20
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 08:36:31 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6a9e5b6f-195a-0a2a45060019-d155dd33b004-3
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 08:36:31 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-4858269e3d9so176705f8f.2
- for <xen-devel@lists.xenproject.org>; Sun, 06 Sep 2026 23:36:31 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-485885bfdf6sm27364909f8f.34.2026.09.06.23.36.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 06 Sep 2026 23:36:30 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a9e5b97-2eae-0a2a0a5409dd-0a2a4508d1a0-46
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 08:37:24 +0200
+Received: from [40.93.198.45]
+ (helo=CY7PR03CU001.outbound.protection.outlook.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6a9e5ba2-f659-0a2a45080019-285dc62dae19-3
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 08:37:23 +0200
+Received: from BL1PR13CA0204.namprd13.prod.outlook.com (2603:10b6:208:2be::29)
+ by DS7PR12MB5837.namprd12.prod.outlook.com (2603:10b6:8:78::6) with
+ Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.382.15; Mon, 7 Sep 2026 06:37:18 +0000
+Received: from BN3PEPF0000B06C.namprd21.prod.outlook.com
+ (2603:10b6:208:2be:cafe::97) by BL1PR13CA0204.outlook.office365.com
+ (2603:10b6:208:2be::29) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.360.6 via Frontend Transport; Mon, 7
+ Sep 2026 06:37:17 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN3PEPF0000B06C.mail.protection.outlook.com (10.167.243.71) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.406.1 via Frontend Transport; Mon, 7 Sep 2026 06:37:17 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Mon, 7 Sep
+ 2026 01:37:16 -0500
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.46 via Frontend
+ Transport; Mon, 7 Sep 2026 01:37:14 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,131 +67,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788762991; x=1789367791; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=e7Q7QcH+rs+UC/qC/pvy536BuZ0LaD2I57YR+dceG1E=;
-        b=YzlK2oePPlCwm1nihxNKzk63DedXKfEB4iMEI5Wo7iOhylY/RdhNfzHIeumnkYQ91x
-         +o4n+tgeIsLEfp8NS5vistLmL2HRcuovek1Oup7wIPcBk4SSiWMEjsfUj56+VmNSelWJ
-         ewgiVhTyaq0Wxz3dx4y1q+nTFwTNzenypIRWQsymEHNA0ht7FxCB5W72TvM52d67vonb
-         7tk/9dxzs4AGvXxj5V6lKZj854sKxQ0VUxhejVBIumJX3XvLYYyZ42aYqvV/NYKiUPyY
-         rA1k5YgaX1w9yAVeaMPrHiJBE+0XpmFu9xd2VmUM+3ftoHlGxr7ZVdJSshsCbOGcsA8D
-         FMKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788762991; x=1789367791;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=e7Q7QcH+rs+UC/qC/pvy536BuZ0LaD2I57YR+dceG1E=;
-        b=pNTkavzR7K02SzYkGzQ4iMogQLhMi320tcy/QdKtz/zPR8A1rlvKK75v7SKGlXR9aJ
-         /xuqPlwot19bY5nxcsvomKd2lQtceuuOC16EbOEAMsk2JtqrTYZaKbI+n1Fz1E8BHcFP
-         mhpK9Rof67SAbzEkIo3jSuU18UiajRz2uYWMKVJBtyL5FldzEgwj2VQu/6sx+fu6UW6I
-         JznGx2pF7/Fy+Wis09c5OaGULCEzU1Iuh0QtWaCSDV434UV5EGIoviRz76538W6qcS4k
-         omHuaNB+/PRZGvYTpPFBamgHucNdDUWMAmnANgbHVLzQRy86i0zfhmuoSHqbzmsE/5Bd
-         gYrg==
-X-Forwarded-Encrypted: i=1; AKwUvBx0sFKWlON4gcicxKvoUhS1OtIoIZQcRwcQj0uvCNNuoDHh8d/uT9gOmv+G5Z4Fw3eZpzWYutG/oQQ=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lxsROKwJJs7Taggy6C7t38IMM3Ewxy3rLI9H8J85Ew9/vnsnAI
-	EZEfvzZ5LzKooDDH/WAjWGpMNOpmGCc9WPRvZs5xBlFwQ8xL72/DiS0sEHh1ZF76Zg==
-X-Gm-Gg: AYBFou2+i37eTHBa4IQSxU2WS0IzM3OQkGd1m3/LJvce/oiFVNklTLX/DkYsQgHcYIB
-	8EkBHUExTioD+R8aVyayEfSNIu1lTJcxf4WbMk1QmBaLa7l+auT+FOkJoxGr2dcwcoEgk5GP6x5
-	3TbwXlhJT3E7fgSlxOQkGl/1JLGm/UEQvJyvg+zVU95PAAuVkpTtmTiZgbAXOv523GP/kN/+RJW
-	6b2mw7Qu7rx8lH5kj9gtbiNwi2oGRV/geXwP3LFLzurdyMDoLFaz5nAwmtCoGYPAgE/0fzPcvZ5
-	guMDYaIYRIVIfqnp3TVQJWH11IVd9JuGzBNrdWhzTo3+uNwmytGWu6+AnVsEP9YLCa23MhhzqIO
-	IR33txuevWVCiPUMGxsvhYwhStMPGMcVFu5yRvK5daHUKMaDwAaGRL1jMeKn/CAw6tKKwysIhvl
-	t58ll1rRcivvJA+9JiGSvlu9wLqZy04aIVte3l8didt4xSLd4eI0RVhRskxXk6zpUqYCCHIK0Iw
-	bMeeGenDEVSxfxQNb0YLhVDN5nt8zwV+J/ZQyW+IWHKaAuoFAnT
-X-Received: by 2002:a05:6000:612:b0:485:8e19:1979 with SMTP id ffacd0b85a97d-4858e191d46mr32572561f8f.11.1788762991188;
-        Sun, 06 Sep 2026 23:36:31 -0700 (PDT)
-Message-ID: <da4f1b40-b9a8-43d4-9b6e-bd666cfe7c0e@suse.com>
-Date: Mon, 7 Sep 2026 08:36:29 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=kmRtBCmB40lpkxmj6VeGcyRKCn8GzmVc8lVGTSdPbXqMN76vQUEn6vgGT8hi3K3X6oXqZ5Fj6IqvZ6cq7e27LPNl1srUjmm/vWUEnjf+gOWTD2ZCJ72W9zT5gU7rys4d8JPdIZqYRbcnLbTUKQWZjfv32PwYjhIz6ruDf40AX8ozOAlNwUT9cp7WpND+EUllPTcAWXShhRJlI+p3fguRiKH7zn0YF1om47L8MSmhysrOHtRt9V5UM/D+/wdt3PEGasYQcEQSHZ+d+lwoEnj120mJ1z8DKSE/I/IZl2cqJ+KSjxxjgkwyuMB1QizmdKceO4DfVWyOkc+mYBTtD3Wpeg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=v4StcKgkQ4GBBNqC7rmJv1+YJwlWU0j125A71M3d4aA=;
+ b=mRyzLWO6YYrMndoYp4UUJF8oxbxlR/SoO0qtT92TEWvKnXQ78Nzf0d+hqUL7EU9eczaPNojit4JVN2nnmEoEbpbsg8g+V2mpvdgI8UqztccZzJnjNdzijdPoFeU8OL+xsLQHeCKDkJjKWI03/+LTCjzFIgR+kDTa8k815yxBowruGjWNdexOLbg742JiJQ7SHVVJ71YoMHXCe/1EOb2rTD4r+1/b48A6U6Zk48gP6BhsAcX644+11hKvgEMl2wq0WD8H3+OS/Blx+QVc9dAWrCZJlKCP4vRcNSdVO9lqc9ZwrPSywxV4ULAFQCzkfjHbu4Ho+Qpi21JiG5SVwJWzXA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=v4StcKgkQ4GBBNqC7rmJv1+YJwlWU0j125A71M3d4aA=;
+ b=M4xQOqKScxHz0mvOA4FXGIGqGASoEYU+g7jRQ4jVrv2HfLrk7bwx46rgpG1K0R6WF4XrXo2OZe433hK0ntyYlDZ1URmvIdLEsRN34xWthDbhWEdv7LSd9hb77MLh4F/6gOdd30nYgogAT5g/S4kvMs3J4RI8XUZoLzLbmJNbsOg=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <a2d18ee6-de89-4da4-bdb5-0d542d457d2c@amd.com>
+Date: Mon, 7 Sep 2026 08:37:14 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] x86/nSVM: Check injected event consistency
-To: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-Cc: andrew.cooper3@citrix.com, roger@xenproject.org, jason.andryuk@amd.com,
- teddy.astie@vates.tech, xen-devel@lists.xenproject.org
-References: <20260906131117.3121334-1-abdelkareem.abdelsaamad@citrix.com>
- <20260906132248.3121411-1-abdelkareem.abdelsaamad@citrix.com>
+Subject: Re: [PATCH 08/14] Arm/guestcopy: deviate copy_guest() uses just like
+ their x86 counterparts
+To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Nicola Vetrini <nicola.vetrini@bugseng.com>, Julien Grall
+	<julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>, Volodymyr
+ Babchuk <volodymyr_babchuk@epam.com>, Bertrand Marquis
+	<bertrand.marquis@arm.com>
+References: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
+ <a581e503-f1cc-4ae9-80ee-6b32653e8084@suse.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260906132248.3121411-1-abdelkareem.abdelsaamad@citrix.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <a581e503-f1cc-4ae9-80ee-6b32653e8084@suse.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1788762991-F72C677B-E0406677/0/0
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06C:EE_|DS7PR12MB5837:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5a4ac08d-bea6-42cf-215e-08df0caa763b
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|82310400026|36860700016|23010399003|1800799024|10067099003|56012099006|4143699003|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	p5qVCTwZ7XLdVYjJYt5yZlJKq9Ppi98fWgQKpNw/vsQ4w8Se47WXv8EnQ1fcJd6Z6H/DckdDa+mt7UPTMOq0vzVjK5UJIY92CfvpbefupILdiqh6xFi0rGgxOuyvI6ErJI4te/968qSKpszdkYx9S7vDM8J3TXmyvfIpiiZXD832fRFkWqo6Hr0QQbVKD8x2jPAsb6zCL45D8g52UNbFTtQcy8G79+gYzEdDuoGyqF8mO/rjMEyTse4jvK810gylPXNvP0WIIXZzA01BTs6RPaZQm28b8JgVlwB5fy1vi4dLpm3bvXlOOCIDOGLBagZ8d3oc7HQJK84of0w1EedsQ8OcuHEE3PbLbRYCNZHgAhxh3FolJTzHw7oNgaITuraHCR0R5dHaLp/gCmuO8tBcQhxhDpKlE9mfeXarIGaRrDnw7Hv0Pwxxq2HjEkL/w63PCHI9LfclX2SJ2xJftVLWQi/08RLTB3OfaSYVCd4tYehh7YhAgoBgAT6Ou+FXZCuT+xiIrPj3T+MMpwDQDPC2WQKaoEA5wyUg0fOTJ8etBK/BWoyNWdZ1An1gH6B2v8uVL07K9iXveS4pH817qruUySo5FTTodnEDLyjfsoWfxE+SXiPPxNTbnp4GB1ag4bwmwyvlSS/UpK7aURuNRqSwKA29lOiH9cEeIXeYw71RBzuAPPX0mA8968N/KfFE9AR+8RcDSvu+vPB5a0Rz4Fl/Ag==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700016)(23010399003)(1800799024)(10067099003)(56012099006)(4143699003)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	eeboS0hosql8OIzBOffG92MUOHYmeqvFlt0P3iY1CdkvkI0VdEWPMH5HYj2u0DJ2B1rJ/S3mXUUZubGvmIzIoqdS9VN/sZmmegofdu217tB57ySJwmuoKtvpnRU2BRXbG8rKIhZwU7o46zh9WGLv2MOH5VCh4zRcDeLpBuw1DMJvvRZFKV6asKZ2Hi0DmQz8tVJ+Ilc+2GNMm6ycE1XXj7gdeGk8a2+j9zEjgk71aa/St6QFhbP0flMEDr4Lq5uUg1RSSdw05Y3VBWEMHikj0b96GTyOiBnOYqI3/yqglRRfAWFuoGT0e/iPPeDmC6RucYlyMN1HJnQfkk0NJEuVupShYqsKlNLlP8jIY3xDh2bTGkMtkby4PlWYmymYJhMeqkN6TRq4IEVIkM0ZQHR6ogsVzdqc6iu3Qe+OzIL/Bzmd8f/YFgepMSZiIylBt3P6
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Sep 2026 06:37:17.7042
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5a4ac08d-bea6-42cf-215e-08df0caa763b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN3PEPF0000B06C.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5837
+X-purgate-ID: tlsNG-c1860d/1788763044-CDB4987B-B84D59A4/0/0
 X-purgate-type: clean
-X-purgate-size: 1750
+X-purgate-size: 432
 
-On 06.09.2026 15:22, Abdelkareem Abdelsaamad wrote:
->>>> @@ -320,6 +320,44 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
->>>>      svm_dump_sel("  TR", &vmcb->tr);
->>>>  }
->>>>  
->>>> +static bool is_valid_injected_exception_vector(const struct vmcb_struct *vmcb,
->>>> +    uint8_t vmcb_injected_vector)
->>>> +{
->>>> +    switch ( vmcb_injected_vector )
->>>> +    {
->>>> +    case X86_EXC_DE:
->>>> +    case X86_EXC_DB:
->>>> +    case X86_EXC_BP:
->>>> +    case X86_EXC_UD:
->>>> +    case X86_EXC_NM:
->>>> +    case X86_EXC_DF:
->>>> +    case X86_EXC_TS:
->>>> +    case X86_EXC_NP:
->>>> +    case X86_EXC_SS:
->>>> +    case X86_EXC_GP:
->>>> +    case X86_EXC_PF:
->>>> +    case X86_EXC_MF:
->>>> +    case X86_EXC_AC:
->>>> +    case X86_EXC_MC:
->>>
->>> Is #MC valid to inject without CR4.MCE set?
->> The testing I performed (see previous comment) does not show that set CR4.MCE
->> is required for the valid injection.
->>>> +    case X86_EXC_XM:
->>>
->>> As before: Doesn't #XM (AMD: #XF) require CR4.OSXMMEXCPT to be set?
->> The testing I performed (see previous comment) does not show that set CR4.MCE
->> is required for the valid injection.
-> I meant ..does not show that set CR4.OSXMMEXCPT is required.
->>>
->>> Again as before: Is #SX really permitted without any constraints? You did
->>> reply to both comments on v3, but that outcome isn't reflected here. The
->>> more that what you said there could equally apply ...
->> The testing I performed (see the first comment) does not show that set CR4.MCE
->> is required for the valid injection.
-> I meant ..does not show that any CR4 bit is required.
 
-And I didn't mention CR4. I intentionally said "without any constraints".
 
-Jan
+On 02-Sep-26 08:33, Jan Beulich wrote:
+> Like x86/HVM's __hvm_copy(), Arm's copy_guest() is used for both to-guest
+> and from-guest copying. Naturally in the latter case the hypervisor buffer
+> needs writing to, hence the function parameter cannot be pointer-to-const.
+> 
+> No functional change intended.
+> 
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+
+~Michal
+
 
