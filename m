@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 804D6C79F99
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 14:29:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1412115.1642603 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89846C79F9E
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 14:39:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1412138.1642631 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3wot-0006Gm-L6; Tue, 08 Sep 2026 14:29:07 +0000
+	id 1x3wyY-0008FQ-Qi; Tue, 08 Sep 2026 14:39:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1412115.1642603; Tue, 08 Sep 2026 14:29:07 +0000
+Received: by outflank-mailman (output) from mailman id 1412138.1642631; Tue, 08 Sep 2026 14:39:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3wot-0006Gf-HS; Tue, 08 Sep 2026 14:29:07 +0000
-Received: by outflank-mailman (input) for mailman id 1412115;
- Tue, 08 Sep 2026 14:29:06 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x3wyY-0008FJ-Nz; Tue, 08 Sep 2026 14:39:06 +0000
+Received: by outflank-mailman (input) for mailman id 1412138;
+ Tue, 08 Sep 2026 14:39:05 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x3wos-0006GT-98
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 14:29:06 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x3wyX-0008F7-5i
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 14:39:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3wor-00ASxI-0l
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 16:29:05 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x3wyW-004N4E-Cl
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 16:39:04 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa01ba7-8faa-0a2a0a5109dd-0a2a45029f92-10
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 16:29:04 +0200
-Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa01df5-bab6-0a2a0a5309dd-0a2a45089d02-30
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 16:39:04 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa01bb0-6ca4-0a2a45020019-d155dd2ed9ae-3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 16:29:04 +0200
-Received: by mail-wr1-f46.google.com with SMTP id
- ffacd0b85a97d-485850cf499so3112412f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 07:29:04 -0700 (PDT)
+ id 6aa01e07-f659-0a2a45080019-d155dd31bced-3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 16:39:04 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-47f96c5b722so3339353f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 07:39:04 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4858e239862sm31233518f8f.9.2026.09.08.07.29.03
+ ffacd0b85a97d-485885bfdf6sm37621260f8f.34.2026.09.08.07.39.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Sep 2026 07:29:03 -0700 (PDT)
+ Tue, 08 Sep 2026 07:39:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,50 +55,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788877744; x=1789482544; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788878343; x=1789483143; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=LqPm/7OXv4D6CUb3M2PsRvj/xLPM7MkqPNPKCiLldDg=;
-        b=Lf629HStqKGcpsla3/zE4BQiRFPi47MJEKFNdoZ24tqeQmDU89WBcg8ngLQLd6mFzs
-         jsE5wjeRjZ2TZ1CVrjzAIsK7hchcO/5s/qA/XTsIRSuaW2nY4iviVjvbR7ov87po6uX2
-         6cuuiTN5i1+ilH1VbL2DRBmxXaxK3bsGfZYT/GPoI2A8vRYkFe4SLJYWTQ8GbLKSS6n5
-         K99Ry9ZokTwGhETMct6IJ787Iraud2yjXRa5+mJK5XHnqnhsO6o4i1P+OehYSLYzfC0V
-         S9GCvDDcvxDogDDhVdmOZyDECcvrcRbFdE1djsguNgoX+PSPyd2t/UjAZiTZNkG1f3lt
-         klmw==
+        bh=u73mHx95QTyprz2OlvWoAsMRAPhleXlRiwoawDxfZog=;
+        b=LN+SBbZY4zPtWjPb8RQkQ7Q97WehNpfjogmq7wqezRZK+Qo7tUoaJFMeBnlDKYieEC
+         3syA2ZuDthatUtn0i1sIq1dkK9nDWRxVH/8nKdn6YL1Tb8a4jCHLZo6wRXFSkLhY2uOW
+         K5/jsV1wwNdmpy/ciJg9iwBcv7dxg6V/6pV1avWGSzMKOsS6S7Y5hkOa1yrJeV9PM6/w
+         /DMchc/rjBpZn2m2JjYK5hQl7ZPML88WyGhXZ1aI56RyxvMKVvGspME2zSkIDFh1NGhE
+         YX6I7MSLyAfI0VyY0S5s1s9nV482jgJDKxWH3XowWfi/2TqwFqAf9bbobz2L38OdGwm5
+         aQiQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788877744; x=1789482544;
+        d=1e100.net; s=20251104; t=1788878343; x=1789483143;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LqPm/7OXv4D6CUb3M2PsRvj/xLPM7MkqPNPKCiLldDg=;
-        b=shQ7DGf78v02U15aWm+uDduQtMnmiGzvl0XIb70iZecLlybPgvZ9ODz1nvGewyw0ca
-         /Bmi/IRl5kT4vIfbP3WqgSpf4v8aWyiMswNW0CPJZVNYUCn3w/x1oSXj/ojc/aw4dDKK
-         d42TMj1nBg8ad2avj+jHegskYelLa+SACc+bnswcnVuW8FfDQBjgE9lek+HycqivPd/i
-         kqfERUAEw4wA41W7tqs2ForqlHadi/vmJnwk1trrpCjQwrsy1UGjv4uZfU9cbuv0dBio
-         Y6C181MM79WhUO8oKK0pwxvC9kTyS9Zvk9yWndLPTiK7Ocrrg7b6AyVyHSQ5r5qOHyOf
-         Xjbw==
-X-Forwarded-Encrypted: i=1; AKwUvBxtYzSbGXw6c0Ky/j+IMdcm33TaNrQ66sLMXKPHmKrb5Sw/k2B29vXNmerJLY5xQbY9YhiV0V5si6k=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mwxLoKfeXf7l5EUNHQnV3WzwHm5yGxKaqnhrGmxyzsRrc2+zHH
-	koEvhfomUfahIK66Zj8G/y0vSdkWYIthkumQBO9qmiT3o6oK7Dxmu1esg41R4YZdBA==
-X-Gm-Gg: AYBFou3uYMNJsafBvN3c4+bRbNKsVoX5PZEahOqL7bZzfNtHQiOG1MrWw34n1E+05FH
-	HZj3jMbzeFIBnmydKN4m9Ol/X+yMYWJDKqRSX4lr0Dg6Yty+sb9wQaxTp6C/oxnwpr37bHYLksn
-	w67FEFg0TYSdB8sF1Os9higjcrrmlUJZe0Ta6XbLUexK75ebsnzZ1Js61o1scC9p/NLYGN/mxyj
-	D8vmcNXwc12F5998+qUPThxeBwDA4KWbmyvuHTANXU+17F0p0LoeDDRikDCUOXz3H8etRaQS4F5
-	lCD3m0hXE6FwTMmcD/YH1Mk3Oozve6CfOyneIVn5QMkHUrBZZsYsP5bQPJUgb1A4FV5VsWIz2nh
-	pxVqVBxmgXBg6hoeHwvB2ZKqaFLAcL2jMOoSTCLsqwStenq8La1N1a1tZRoFcM8lmHovEy1lO8V
-	1Kv0+Zxslka5vDc+e8oMy4+XwsMK/hrq9HXomIJv4tGNsUSKpTp5DXNJIBGSVUABdiLmzAsbKd1
-	J93LDTWbfGzs4KzRc2PCxs0xMIfeMXAUn2nCXnhcTchoGsTGtEwm/sANk50f3g=
-X-Received: by 2002:a05:6000:25fc:b0:47f:e886:6dff with SMTP id ffacd0b85a97d-48587087196mr32260366f8f.4.1788877744289;
-        Tue, 08 Sep 2026 07:29:04 -0700 (PDT)
-Message-ID: <3c5dab15-3daa-4941-a09a-29ca7d7a370f@suse.com>
-Date: Tue, 8 Sep 2026 16:29:02 +0200
+        bh=u73mHx95QTyprz2OlvWoAsMRAPhleXlRiwoawDxfZog=;
+        b=f8TzZtkeg8rsthOZhmNOQG2fQiUIooBtY4Kjy+vzkxqXncS6nwjdH0pJWg9VcJgIQD
+         EnWG3pmd+rEk27zJfiOhbzqCEwBsUw7q//tyJ3TtLvVIy/p+VbebP3iGJH8LHeNeFfSs
+         wk6EQEKBCOu0t7cGweMBg2qujVN0qgmUuJOj3W2dpEq7+mCMXSrAWkg5kLdBQnwmbJ3A
+         uERMmuIYmjmO5v2tnJTiYuIHUpSETu7elPkAOssGLBaV/7M2iTa+pM0E4CdCBwk8SsAs
+         Itq6JIiWFNOv2ixeU5kjrMdV404M5lme3eODhSUqUzFdF/lgLlEKcvLOCPgSKD7ihRRV
+         mD+g==
+X-Forwarded-Encrypted: i=1; AKwUvBzlO3Zk9P2Bu/M5Qja/geCCiT5oNHaYoPeZl8R9QjW28wtsVgE5OWWR+gvZ/LfdWYqfsyKAWgMhdQw=@lists.xenproject.org
+X-Gm-Message-State: AFuF++n3rddzSedY+co/JJCR5+09jrfiIWpXqvStZilmu+JMgYSAQyeK
+	F757vRujShDyXzgCJL+/3xv4z5pywEQ6L08N3Ob8DFJRas9J79YRI+/gZKvgxcnT5g==
+X-Gm-Gg: AYBFou0k1fLqyE30OyFFmB1ZLjpq8lMF77ZKJuMP1SHrO7FNjvFb8/aC0T/SpypouHj
+	Ej63k+0oUjQ/m7JjbyPDCWzdXvDY2++y9S3z81PhqdyD0VFc2x+e5u20kLT/bzTHH3raytlLcQo
+	DyLf2bikjzrcsv0VMXj//3fkBqkDb6vsetIA4rOXOnl8HrfXflQvgAhlELZdBUxDzLh7zELtvkI
+	ooZVy8QQ0IPm18O4UO5A1HH7Id6TygmTcsWPPliXsdecMauBkJdGB8Qu33XSmjjCrQo0uhM6qtj
+	+5QKKSWjH+SwRL0sMgIFfYDkNk7gFNthdv+lPW3AD5JnRxnQpS1K2pfACAMTtFl36HROEtyVA+e
+	+hS/nei4gLn8E6JwWGw1gcePmnREbAAneG4SFjiBc9bDmJUqP7ZyGeyePDgNgMRYpXQJDyv/Ugh
+	d5xuUT6aJJXaavDC0Flokgch6mtDFFMiFJYwxIr8lu4trsiCTl4Lnn/JLcME89KCqrwqpSFty5E
+	yTVNlDbiwsAHhh3QIToiHEFn2Es4ZWINJA/CVENfmh+cZjidLz+
+X-Received: by 2002:a05:6000:4a16:b0:485:8a47:5b98 with SMTP id ffacd0b85a97d-4858a475d20mr27381493f8f.53.1788878343531;
+        Tue, 08 Sep 2026 07:39:03 -0700 (PDT)
+Message-ID: <6a2b153f-e823-454c-a449-9683c76aae9a@suse.com>
+Date: Tue, 8 Sep 2026 16:39:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 06/14] x86/pv: remove stashing of GDT/LDT L1
- page-tables
+Subject: Re: [PATCH v2 07/14] x86/mm: simplify create_perdomain_mapping()
+ interface
 To: George Dunlap <dunlapg@umich.edu>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
@@ -108,7 +108,7 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
  George Dunlap <gwd@xenproject.org>, xen-devel@lists.xenproject.org
 References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
- <20260901-asi-part2-6-ecc269f268b7@xenproject.org>
+ <20260901-asi-part2-7-ecc269f268b7@xenproject.org>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,33 +134,52 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260901-asi-part2-6-ecc269f268b7@xenproject.org>
+In-Reply-To: <20260901-asi-part2-7-ecc269f268b7@xenproject.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1788877744-F38BC2AC-53E9AA05/0/0
+X-purgate-ID: tlsNG-c1860d/1788878344-D735D87B-22CE9049/0/0
 X-purgate-type: clean
-X-purgate-size: 1232
+X-purgate-size: 2358
 
 On 02.09.2026 11:43, George Dunlap wrote:
 > From: Roger Pau Monné <roger.pau@citrix.com>
 > 
-> There are no remaining users of the stashed L1 page-tables in
-> pv_domain.gdt_ldt_l1tab.  Remove it, and all helpers.  This removes a
-> globally-mapped xenheap allocation, and sets the stage for per-vCPU
-> root page tables.
+> create_perdomain_mapping()'s interface is richer than any caller needs.
+> The paging structure for the requested range is built to a depth
+> selected by the pl1tab and ppg arguments, each of which distinguishes
+> NULL from NIL() from a real pointer:
 > 
-> pv_create_gdt_ldt_l1tab() now passes NIL() rather than the stash
-> array.  This will cause create_perdomain_mapping() to still eagerly
-> allocate the L1 tables covering the GDT/LDT range; but their addresses
-> are no longer handed back.  Doing this is necessary because
-> populate_perdomain_mapping() only fills existing tables, and treats
-> missing structure as a bug.
+>  - nr == 0: only ensure the per-domain L3 exists; nothing else is
+>    allocated, and the other arguments are ignored.
+>  - pl1tab == a pointer: allocate the L1 tables covering the range from
+>    the *xenheap*, and return their (stable, direct-map) addresses in
+>    the array -- the mode that existed to build the GDT/LDT stash.
+>  - pl1tab == NIL(): allocate the L1 tables from the domain heap, and
+>    return nothing.
+>  - pl1tab == NULL: do not plumb L1 tables for their own sake (they are
+>    still allocated on demand if data-page population requires them).
+>  - ppg == a pointer: allocate and install zeroed data pages across the
+>    range, and return their struct page_info pointers in the array.
+>  - ppg == NIL(): allocate and install the zeroed data pages, but hand
+>    nothing back; the pages are reachable only through the mapping.
+>  - ppg == NULL: do not allocate data pages.
+>  - both NULL, nr > 0: stop after the slot's L2; do not plumb L1 tables
+>    at all.
 > 
-> Another side effect of passing NIL() rather than a pointer is that the
-> L1 tables move from the xenheap to the domheap.  Residing in the
-> xenheap was only ever a requirement when the stashed pointer had to
-> stay usable; with that requirement dropped, we can relax the
-> allocation requirement as well.
+> Very few of these modes have users now.  The last user of the
+> pl1tab capture mode was removed when we removed the GDT/LDT stash.
+> The ppg capture mode never had any users.  Nothing uses the both-NULL
+> L2-only mode with nr != 0.  What remains is exactly one bit of
+> information: whether the caller wants the range populated with zeroed,
+> area-owned data pages, or merely plumbed down to the L1 tables, ready
+> for populate_perdomain_mapping() to install caller-owned pages.
+> 
+> Replace the two arguments with a boolean expressing that bit.  With the
+> stashing mode gone the NIL()/IS_NIL() macros lose their last user, so
+> drop them as well; and document the resulting interface.
+> 
+> No caller changes behaviour: every existing call maps onto the boolean
+> exactly.
 > 
 > Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
 > Assisted-by: Claude Code:claude-fable-5
