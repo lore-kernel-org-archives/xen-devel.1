@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 525DDC79F82
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 15:36:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1412217.1642743 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA3BC79F82
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 15:45:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1412231.1642771 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3xsA-0003Ck-LD; Tue, 08 Sep 2026 15:36:34 +0000
+	id 1x3y0H-0005GW-K6; Tue, 08 Sep 2026 15:44:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1412217.1642743; Tue, 08 Sep 2026 15:36:34 +0000
+Received: by outflank-mailman (output) from mailman id 1412231.1642771; Tue, 08 Sep 2026 15:44:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3xsA-0003Cd-IY; Tue, 08 Sep 2026 15:36:34 +0000
-Received: by outflank-mailman (input) for mailman id 1412217;
- Tue, 08 Sep 2026 15:36:33 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x3y0H-0005GP-HD; Tue, 08 Sep 2026 15:44:57 +0000
+Received: by outflank-mailman (input) for mailman id 1412231;
+ Tue, 08 Sep 2026 15:44:56 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x3xs9-0003CX-Fb
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 15:36:33 +0000
+ (envelope-from <ziy@nvidia.com>) id 1x3y0G-0005GH-8q
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 15:44:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3xs8-00H12z-SW
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 17:36:32 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x3y0F-004Xzh-Lf
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 17:44:55 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa02b5e-e002-0a2a0a5209dd-0a2a45028040-32
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 17:36:32 +0200
-Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa02b80-6ca4-0a2a45020019-d155dd31a8df-3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 17:36:32 +0200
-Received: by mail-wr1-f49.google.com with SMTP id
- ffacd0b85a97d-48431648f33so3801247f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 08:36:32 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-485883c074asm35967770f8f.23.2026.09.08.08.36.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Sep 2026 08:36:31 -0700 (PDT)
+ (envelope-from <ziy@nvidia.com>)
+ id 6aa02d72-2eae-0a2a0a5409dd-0a2a4507b41a-10
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 17:44:55 +0200
+Received: from [52.101.52.42]
+ (helo=BL2PR02CU003.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ziy@nvidia.com>)
+ id 6aa02d76-b4ea-0a2a45070019-3465342a76b5-3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 17:44:55 +0200
+Received: from IA0PR12MB8374.namprd12.prod.outlook.com (2603:10b6:208:40e::7)
+ by DSSPR12MB999211.namprd12.prod.outlook.com (2603:10b6:8:375::19)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.7; Tue, 8 Sep 2026
+ 15:44:48 +0000
+Received: from IA0PR12MB8374.namprd12.prod.outlook.com
+ ([fe80::d85f:4c87:ae84:3f16]) by IA0PR12MB8374.namprd12.prod.outlook.com
+ ([fe80::d85f:4c87:ae84:3f16%5]) with mapi id 15.21.0406.005; Tue, 8 Sep 2026
+ 15:44:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,175 +55,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788881792; x=1789486592; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=eHZqF9+F1KWCj3lF8faY6w+JvEdXiNbJY2NR6FAt3RY=;
-        b=GyzLBpv+Djiy2Gh97VZ2a/CPCgVVkYPS7GJ9xjOvU48UWYizyc4SA+o+V0XFN0MlFb
-         HZdNF1obxA9S7qcaRWvJFcanZ7gRuK1E7L7nM4EKQarQAxd6wIZp/U/cDZXfa5NaP1zj
-         IUBRBxmb+UQONBmMw+izodne+qVSezB0engYfAOwwdq5LsdIFURDmkliVUeEMI+81myd
-         nAdqwP1hSJOUIZveDhdmSAuiTKAcbwrQtQnNQ2gdsWYuSIsaRGWY+HwUROCta+sKurRR
-         sI+UPBoJkBGSTCKFvRmv4Tm/KG0oNjR/07Sef2pW+Cq9tpzKQAT1mqHbpfgCpKLwCXif
-         PPPw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788881792; x=1789486592;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eHZqF9+F1KWCj3lF8faY6w+JvEdXiNbJY2NR6FAt3RY=;
-        b=AjN4cb1INr7DdJUG5zT9Q/Q53E/GqwSZwdJ1kjYtHetK7C6+c4xLASUiNYdCXMTBOQ
-         j8JWTzhYelSq4INftjyTHXi4RQm+iFs9+1EiL6iDSbzOzf3qbeFOTg1RDjpTvbxLYpeA
-         l0Zumpw/mn+QZmC9uh501jtFjKXVX8mZ/zntYYg2RjoLVv99ZJ9x2+Se0eT5Y8v5E4/C
-         /BTvkjEHNtsxbrh1QejYXibMkL4+tLROKQBqawaWRIEy//ZkP785GiPvyH4Ulx/AW1Gx
-         RBYTCQ9bKEeq7IpEo0Jd4d8ecSMrgwlqdiqXg2ar5oP+p6m2+lqDFv8MvC3ieeFpSEmf
-         m5kg==
-X-Forwarded-Encrypted: i=1; AKwUvBwFDyNooXhMBLu13I03BhPZaYak+BWSbcg9penaF/LaoaFDoPGP/kRgUP0ENTWJbfyMKSbGezN72aE=@lists.xenproject.org
-X-Gm-Message-State: AFuF++m3qVuFn/bJq03D/Gp7OwDhvjQHJlMW6t0PA6BLb9rcAJQfeA6F
-	fGRBczBtcRVkq41otMaKQNcGu+5BxsSXeGXROQ25pzPfUhUKyJCkXWRqBlzeeRm3zQ==
-X-Gm-Gg: AYBFou3R+xoJ0+ArfuU+kKUUbcfz4dwLxV5tKynBdVURdaPz5m0jIZO3hb0ZwvKUA+t
-	u9vNMprG2lRC3ocpoCFwhcS4Qz8PzNQ3m1vJ2NFGIsG2dnQdGmLIcZY1x5GvQhWewCNI6gsjatY
-	rmog+xX9eZnnruMcAMRHfISE65CDJYftZgeGyh5NfrxXWfgbn6TMsiCYcon1cYmyUxZBSB+NSe2
-	AAnaprn3ZeV/luuvbFny6BzwgxqzXKsBmUHjlYpUTr/j8spsvx/GGaI2Z/wWKQXAUjzUF26bZ8S
-	J7C8a2pd5b+M4uB6Elj7cOxQMRSJSCeqvdrZrx1HFrbz2O0P9Vbwl622kcvZO26tksuQ6zmc+0W
-	1k4jRhhdEdLO+NfPDYawRFSDvakplM4MrKuAzXyTVb3dufBrhqeWia6OTEyD29qH94pwaWxWG8q
-	RxJxYP216x8WrXSCugx+bjy9r57JGw+731B1iavvWpW//mD141f5MFUFRlJo1uTPh6sLq2gAd3I
-	eVPuOP0PU+XM5UdBpvPG5I25dQNDAWwAHW5hIcofel+C9jlY4QY
-X-Received: by 2002:a05:6000:2008:b0:485:8226:c69d with SMTP id ffacd0b85a97d-4858226c991mr37825225f8f.28.1788881792212;
-        Tue, 08 Sep 2026 08:36:32 -0700 (PDT)
-Message-ID: <97a420e4-87d3-4600-b169-8ec7e5f62a21@suse.com>
-Date: Tue, 8 Sep 2026 17:36:30 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 09/14] x86/mm: prepare destroy_perdomain_mapping() for
- per-vCPU perdomain areas
-To: George Dunlap <dunlapg@umich.edu>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Alejandro Vallejo <agarciav@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- George Dunlap <gwd@xenproject.org>, xen-devel@lists.xenproject.org
-References: <20260901-asi-part2-0-ecc269f268b7@xenproject.org>
- <20260901-asi-part2-9-ecc269f268b7@xenproject.org>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260901-asi-part2-9-ecc269f268b7@xenproject.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=selector2 header.d=Nvidia.com header.i="@Nvidia.com"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=XNXTeJn3wAg9WXnadc23COLow0t+fVtyrSLdBMioSg5aXICV5bD0aB1n3v39op2ITN6V93hppovIIPHIo5pRlumrqSHEI+ea/kevee/IT8UhCPUEsHmKkJ3mldz8BUGhQFkOKIhnuU+5dzAeMHXChSYWnx1wzVI8YtvxQXedsdGOLpMznnnFdC3PSbxZTDnbT0q2phGAf4VOiNRHMUsx0yfwwccG4NMp+sP6YPQhl7nTlH7z/6gBnKLwHt9JDV2cRwt4PUajH8ySLywTgqKbCK/CyUDqHyr4ueNvyUHJ0r4g5oos9Zhm3Wzk/L32ldFSKpDkNo6kB5sP36NhVPkBJg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wUonv+1fXdqRVR64AjAKSh8fzS4K5yeQQGpHI4+sTZ8=;
+ b=PikpR45oEYt7MOJrMl878COZoD2IIZKHqiCAwU58mVam3iieo2TBvGtCh/j9um5cL1A2iMlsqPQgLVZwEQua7eA9S9omvpF6t1V3OCx4Mgztnm7AaLNbw0BfjhZsaAYaFADhkaZyeLC+6n4/Nm3qCyw3ewxvpFS8Oz0+LncaaO14l3spbkJWmM/tFP9jCHoJ8J8O1Lvi0ZWDc4L54MCSLAA/qE//ge7iFLRVkV+LiH/QL129zXUPD221WRuRtjvV83Q1RlbYUYJIrbBqsSV+6srlsuFiVfETaAS5WS6Pywl0QJNH9gYXo0ENyLzrZ0NpVt7s7JcTaFMcm2qZtma4ZA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wUonv+1fXdqRVR64AjAKSh8fzS4K5yeQQGpHI4+sTZ8=;
+ b=VQx6+JOEraj6F3kNb1lGvXWTN1o/WItmH/zgpXqIqgTvd/xwyfGVpRMN0IejkRjKj63anvIeHtak/4zmN8cbKRHU8FWG6ZPn4b95MnE5BZT44qeeX5g0aRmbUs9Az8hhZVOjxpCbmIS1diERpW2YQoiPHHeE/rgLtMuqFwL1aILcIyVB0p8kP45bWm9efkuBk8zAg2gZkv5JVszC6sGzooeOg6mt9Uuo96TjleJWDGc9uowAsXgQdIPRbPTbTNelpaAMktdLfNTvkwwDGZt4ki+hBH4p8/+d3JcF9iMclf11k/r9zoCPHrG6ydqkAxF6AB5rHTLHQU7AP7zyZ0FTfQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1788881792-F3CBA2AC-4DB3A1A3/0/0
+Date: Tue, 08 Sep 2026 11:44:46 -0400
+Message-Id: <DLA1UH74Q0WX.1D02BUATXHDG6@nvidia.com>
+From: "Zi Yan" <ziy@nvidia.com>
+Subject: Re: [PATCH v3 03/14] xen/grant-table: stop setting PG_private on
+ pages for grant mapping
+Cc: <linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>, "Juergen Gross"
+ <jgross@suse.com>, "Stefano Stabellini" <sstabellini@kernel.org>,
+ "Oleksandr Tyshchenko" <oleksandr_tyshchenko@epam.com>,
+ <xen-devel@lists.xenproject.org>
+To: "David Hildenbrand (Arm)" <david@kernel.org>, "Matthew Wilcox (Oracle)"
+ <willy@infradead.org>, "Andrew Morton" <akpm@linux-foundation.org>, "Muchun
+ Song" <muchun.song@linux.dev>, "Lorenzo Stoakes" <ljs@kernel.org>, "Liam R.
+ Howlett" <liam@infradead.org>, "Vlastimil Babka" <vbabka@kernel.org>, "Mike
+ Rapoport" <rppt@kernel.org>, "Suren Baghdasaryan" <surenb@google.com>,
+ "Michal Hocko" <mhocko@suse.com>, "Baolin Wang"
+ <baolin.wang@linux.alibaba.com>, "Nico Pache" <nico.pache@linux.dev>, "Ryan
+ Roberts" <ryan.roberts@arm.com>, "Dev Jain" <dev.jain@arm.com>, "Barry
+ Song" <baohua@kernel.org>, "Lance Yang" <lance.yang@linux.dev>, "Usama
+ Arif" <usama.arif@linux.dev>, "Gregory Price" <gourry@gourry.net>, "Ying
+ Huang" <ying.huang@linux.alibaba.com>, "Alistair Popple"
+ <apopple@nvidia.com>, "Johannes Weiner" <hannes@cmpxchg.org>, "Qi Zheng"
+ <qi.zheng@linux.dev>, "Shakeel Butt" <shakeel.butt@linux.dev>, "Kairui
+ Song" <kasong@tencent.com>
+X-Mailer: aerc 0.22.0
+References: <20260907-remove-pg_private-v3-0-6ae22f9d9272@nvidia.com>
+ <20260907-remove-pg_private-v3-3-6ae22f9d9272@nvidia.com>
+ <fb8ab0ac-87b8-44ea-87d2-006a7a7569f1@kernel.org>
+In-Reply-To: <fb8ab0ac-87b8-44ea-87d2-006a7a7569f1@kernel.org>
+X-ClientProxiedBy: YQBPR0101CA0188.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:f::31) To IA0PR12MB8374.namprd12.prod.outlook.com
+ (2603:10b6:208:40e::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA0PR12MB8374:EE_|DSSPR12MB999211:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2942c721-1277-418e-bc0f-08df0dc01d2a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|376014|23010399003|7416014|1800799024|921020|18002099003|22082099003|56012099006|4143699003|11063799006|10067099003;
+X-Microsoft-Antispam-Message-Info:
+	XaYRZ3hMQP1dy8zHLVQuJFN5za1QToGQt9Np4pUCVCDk0m5zU5/n9F7pr0ubBVv20NDKcCih2Whe8JgqBx+5Ca5Q747AsQ5Lv38E96I82nShv7lgit+PCqqwNXuDrCm4aaZvCrplHUZjpp1SmNciGZvIftAkkXsg5Yh5IY8/MrwlIvsWHVmcm8mQxJnOPceQYiJxM/03zdLcdcv/At02p7ThuMRAHUEe566VIP/OcD++mMgGnHLJ7ixzSXCnt6Jl5xxJw9PoUiDw8vZYAVvRuo7SJOmjRR6hcOqKg7IOMbo2ZvRy1eJxYTaCY43yeaQuhbvbKoUKCQsxRsATmIGRsUsgtGqImuf4v23nNxoj7h/GPjSvL3ejGU0QeuQdXCMGmT6GjVMh8K/Pi10q34gW/yghJU/wBuhaMrEATFRoLtJ+l9qPEnTQwjErQT8KkkvDOja6zS3h25UELh4VCZVwg3D3ndPYJN7gBt0a8lUJ7NGItcGExgsRAcMpSkBMcKVV62FCDJnK//N4c0VMsnBHcvsLygFdSHc0CYpLZVPosIaHl/mgM0ET4wh/DmPS/6UJsX8HhgLnGH38TnO+NL6eusjsHFYnjWj+qqtveTG+gPhI/tnqsUIMa1c+mWhOAcDwn0JCE5clzRqvJjqm30WObf813onLye+4tPFXdlxaQLJ8yiwcTxX1N2aQfHLYfuvS1r1DESH47op/YTAN3zQl3g==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR12MB8374.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(23010399003)(7416014)(1800799024)(921020)(18002099003)(22082099003)(56012099006)(4143699003)(11063799006)(10067099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?bG1QZHNEaEpGdWJNK3ZaZXhKbFFSQzdXak1CdUJYZkw1VnQwWlN4aWFGemxJ?=
+ =?utf-8?B?MjlpUmJVeWVjRFpaYXpWUVAyQkFGMW8xR3pDRGtxY0ErcFVwazhlZXZSWG9M?=
+ =?utf-8?B?bXVNUnBsUURZZy96QnY1YXpVVlJ0YitXaEhwL3NNTEt2KzlWOEZ5S1Z4WDhZ?=
+ =?utf-8?B?SzNsNVBYYlF0REpXOVdpTjQ0R3dXOFFLNVp2ODlHT1BBT1JwT2U5TDBhMVBw?=
+ =?utf-8?B?alcrUzVaWUlHRVN1MkxaWWNCOEN1VlQ2Vy8zR25EVkkvQ0FROUVZM3hZaVVx?=
+ =?utf-8?B?bEcxeUphc05SYXdML0tGTVl0ZFJDMWxJWm95UWNxWk5ZR3dqTXBXZ0hvdWwy?=
+ =?utf-8?B?bk9VNGpDbzV4SzZMakR3UFlDK0dURVNVTlUxMmtOUFE1RHJ1ejc3SXBvNXZ4?=
+ =?utf-8?B?WWxvWUR4S0RuMjZtTlNoVnBHQVJ2RWJ1aC9udjZNRmhOcXF2K0lpTGUxRFo2?=
+ =?utf-8?B?NTJmVzhoN2ZoS2IzOCsySlpCQVlVbFhsTGVXWDV1dUZTMEtoYWllSXI5cXdy?=
+ =?utf-8?B?cmlOcHVPcEFkNXJpQklVeXNoK2dPK0E4SWEwMTllTzRoa0Zwb1JTcDVEa1kv?=
+ =?utf-8?B?ZmNGTTF3TzgwVGRVd3hQMWZsMVRhbmp1S1lwVTJqWllucU8vL1ErOVpXV1dl?=
+ =?utf-8?B?OE5adjcwS0xJbVp3a002aGJJMnNjNmtxbXN1NUhMVmlERDRaaFlubFY1Y0ZC?=
+ =?utf-8?B?Y0xOU044MmxEdXdoVzQ2WHBYRXhMbWVENU4wajEvNkJrWkpLY0t3bkNsbnkr?=
+ =?utf-8?B?eUMxZkY1Y0pRODJOUHUxK0RXbm00M05TaGIyVGZteDBBR0tKejliai9VeW5x?=
+ =?utf-8?B?b3ZBczlUMU9TNmxBUmFveElEY3JITXhTRDJTYkdVMzdSZWNPdGV5cVVqZ2pQ?=
+ =?utf-8?B?Vis5UHRvN3U4U2Z3OXNiRWZVdVIxL216QllOb0d6YjFmcXpHcW0zMWZ1Mytv?=
+ =?utf-8?B?RW0raURBYWFXamNKK3BDVzlCalFIaW5tQk45cHZzK1VXSFRQTkUvajBPUGZj?=
+ =?utf-8?B?VkxrWHNmMVVJcjZ3cUMwcFZtWmdtaUJud1hxdTlhMWtIM2lhZVpxU0R4QnZu?=
+ =?utf-8?B?Mi9NQlR2elpPTnZIa1VuTWp6N1FyYUU5SW5tUERYOFRkMStmb3NIcGRVMHhC?=
+ =?utf-8?B?NVJ2NFV1aEZNK2VzeGhHdUJjeDZrRUIyQ0hCV2l6VEEvbTBrWkxxdkh4MUpO?=
+ =?utf-8?B?NWw2QWp5RnZvN0x4V1lKTHUzenpzbkpTK0MzbHQwYVU3dFBZcTRsZzNCNk02?=
+ =?utf-8?B?UHBqS0k4cGFvbTVWc2k0TjhUOXM1RGVkeDhQdklWK2VsR0dnRG1WZEFTM1p0?=
+ =?utf-8?B?WThIVnhwOVNDcFVPeER2dWtyWlE2QnNaRi9INWVMSVlTUkNwYU9DTDR4cTIx?=
+ =?utf-8?B?Z1o4Y042YUFEMGVVeWg2dzJHZWcvazVhM1JweTlsRWVtT2dCT0ZFYTY5aXJ4?=
+ =?utf-8?B?alNqMXJUbVZYQmx4VVBhZGl3Rjg5aEZaTnRTdG4vMFRiamtxMnhUNmsrVlBv?=
+ =?utf-8?B?M2F6NVdjdGFqWTRBaGZnTy9EYXhEWnY5allHWUlqR3pyTjlQMHc3SUJvc21l?=
+ =?utf-8?B?RzZjdzIyVUFEZ05MZmcvdVBtbVErS0ZINGtFZGsybEgxWkVGeHFJK0NhaGIy?=
+ =?utf-8?B?cWsySmNPaHdCOUFTbC9jU1FhcVRlaG5Pc3l2Nk5NZngwY2xvY0VqbXoyMFdS?=
+ =?utf-8?B?REFSbU9YS2pia256amJJY3JXTzg1U1FhQmJWOXFvT2ZvUU1XZjlNNjUvVXR2?=
+ =?utf-8?B?a2lGVTJQODJudUJTZFRPMHdNaC9EWWxJQ0NuUk9UZXF5aXhIc2NzVG5wekh5?=
+ =?utf-8?B?b2plSjRMQlAwVWllS1RId1AxR3M4K1RBWWRrWm1td3ZrQzZUd0pCSlF5dElj?=
+ =?utf-8?B?ekVtTENtdUtiYmNCcWdXSG9iaExoS0VZUGttODIyc3FWR2s5Ylp4cUZQLzR0?=
+ =?utf-8?B?T3Y4em02aXNGcUhWMTcwYXhiYkhsNWVhZTJWSU1VL0hGS3ZSUXcvZjFjMnVq?=
+ =?utf-8?B?ZmU2SFd2NXdMRS9VdkxNRzFxOEN1TXdFWjFOcXdRamQxZGM4Vk1QQkprb21u?=
+ =?utf-8?B?Vi8wSllnRmw4Qk9DN3RnSGRDQU9QOXpDd2E3YVV5bFp0Zk5rdmRrTHowdmR6?=
+ =?utf-8?B?cHdEUDlIZ2IrVVM0R09SN29kTWx6N0tMa1VYcHJDVldkV3RTVmlkMmtrNUFa?=
+ =?utf-8?B?cTU0SVE2bnlvMnBMNjlVMUNUZm5sRzZIKzN6QklsR25Md2RocjcwZ1RpOW83?=
+ =?utf-8?B?K3V0YWxPZ0dkdmxwNDUwZEJLT2lnZHFtd2liTnYxVndtRk5pUnp3Y0JJVHlz?=
+ =?utf-8?Q?c0ed76aK3anHzx1UPS?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2942c721-1277-418e-bc0f-08df0dc01d2a
+X-MS-Exchange-CrossTenant-AuthSource: IA0PR12MB8374.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2026 15:44:48.5324
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: sfRJXV2NR0FgilVsT6+QHdVji/HcNkfjCIduQjGWJd6mj1bOCPnzJy91HGcXIOh9
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSSPR12MB999211
+X-purgate-ID: tlsNG-ef75cf/1788882295-A7ED6AE4-AC36BC75/0/0
 X-purgate-type: clean
-X-purgate-size: 3077
+X-purgate-size: 1937
 
-On 02.09.2026 11:43, George Dunlap wrote:
-> --- a/xen/arch/x86/mm.c
-> +++ b/xen/arch/x86/mm.c
-> @@ -6456,10 +6456,11 @@ void populate_perdomain_mapping(const struct vcpu *v, unsigned long va,
->      local_irq_restore(irq_flags);
->  }
->  
-> -void destroy_perdomain_mapping(struct domain *d, unsigned long va,
-> +void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
->                                 unsigned int nr)
->  {
->      const l3_pgentry_t *l3tab, *pl3e;
-> +    const struct domain *d = v->domain;
->  
->      ASSERT(va >= PERDOMAIN_VIRT_START &&
->             va < PERDOMAIN_VIRT_SLOT(PERDOMAIN_SLOTS));
-> @@ -6468,6 +6469,26 @@ void destroy_perdomain_mapping(struct domain *d, unsigned long va,
->      if ( !d->arch.perdomain_l3_pg )
->          return;
->  
-> +    if ( likely(this_cpu(pgtable_vcpu) == v) )
+On Tue Sep 8, 2026 at 11:16 AM EDT, David Hildenbrand (Arm) wrote:
+> On 9/8/26 04:56, Zi Yan wrote:
+>> gnttab_alloc_pages() stores xen_page_foreign in page->private. On 32-bit=
+, a
+>> pointer to an allocated xen_page_foreign is stored; on 64-bit,
+>> xen_page_foreign is stored inline. Checking page->private !=3D NULL is e=
+nough
+>> to tell whether a xen_page_foreign needs to be freed on 32-bit and
+>> page->private is zeroed unconditionally on 64-bit.
+>>=20
+>> It prepares for a future commit that remove PG_private.
+>>=20
+>> No functional change intended.
+>>=20
+>> Assisted-by: Claude:claude-opus-4-8
+>> Assisted-by: Codex:gpt-5
+>> Signed-off-by: Zi Yan <ziy@nvidia.com>
+>> To: Juergen Gross <jgross@suse.com>
+>> To: Stefano Stabellini <sstabellini@kernel.org>
+>> Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+>> Cc: xen-devel@lists.xenproject.org
+>> Cc: linux-kernel@vger.kernel.org
+>> ---
+>>  drivers/xen/balloon.c     |  5 +++++
+>>  drivers/xen/grant-table.c | 11 +++++------
+>>  2 files changed, 10 insertions(+), 6 deletions(-)
+>>=20
+>> diff --git a/drivers/xen/balloon.c b/drivers/xen/balloon.c
+>> index e7f74ea7cd5eb..fdb18348cfdfe 100644
+>> --- a/drivers/xen/balloon.c
+>> +++ b/drivers/xen/balloon.c
+>> @@ -182,6 +182,11 @@ static struct page *balloon_retrieve(bool require_l=
+owmem)
+>> =20
+>>  	__ClearPageOffline(page);
+>>  	dec_node_page_state(page, NR_BALLOON_PAGES);
+>> +	/*
+>> +	 * clear page->private before giving it out, since it might be used to
+>> +	 * store xen_page_foreign info.
+>> +	 */
+>> +	set_page_private(page, 0);
+>
+> Who would have set it to !=3D 0 in the first place?
 
-Right now this looks to be relevant only to some of the call sites of
-pv_destroy_ldt(). I expect this is going to change down the road?
+No one else, except
+>
+> e.g., gnttab_free_pages() resets it to 0 now before calling
+> xen_free_unpopulated_pages().
 
-> +    {
-> +        l1_pgentry_t *pl1e;
-> +
-> +        /*
-> +         * Fast path: v's page-tables are loaded on this pCPU, so the L1
-> +         * entries can be zapped using the recursive linear mappings.
-> +         */
-> +        pl1e = &__linear_l1_table[l1_linear_offset(va)];
-> +
-> +        for ( ; nr--; pl1e++ )
-> +        {
-> +            if ( perdomain_l1e_needs_freeing(*pl1e) )
-> +                free_domheap_page(l1e_get_page(*pl1e));
-> +            l1e_write(pl1e, l1e_empty());
-> +        }
-> +
-> +        return;
-> +    }
-> +
->      l3tab = __map_domain_page(d->arch.perdomain_l3_pg);
->      pl3e = l3tab + l3_table_offset(va);
+After reading more, I agree with you that the above change is unnecesary
+and will remove it in the next version. Thanks.
 
-The slow path is resilient against an area never having been mapped. This
-fast path looks like it would crash on a missing L2 or L1 table. I.e. for
-domain cleanup (and error handling during domain creation) we'd
-implicitly rely on those never taking the fast path. May be worth making
-explicit in the description.
+--=20
+Best Regards,
+Yan, Zi
 
-> --- a/xen/arch/x86/pv/domain.c
-> +++ b/xen/arch/x86/pv/domain.c
-> @@ -319,8 +319,7 @@ static int pv_create_gdt_ldt_l1tab(struct vcpu *v)
->  
->  static void pv_destroy_gdt_ldt_l1tab(struct vcpu *v)
->  {
-> -    destroy_perdomain_mapping(v->domain, GDT_VIRT_START(v),
-> -                              1U << GDT_LDT_VCPU_SHIFT);
-> +    destroy_perdomain_mapping(v, GDT_VIRT_START(v), 1U << GDT_LDT_VCPU_SHIFT);
->  }
-
-Considering what patch 08 does - is this explicit call really needed?
-There are no pages to free here, unlike ...
-
-> --- a/xen/arch/x86/x86_64/mm.c
-> +++ b/xen/arch/x86/x86_64/mm.c
-> @@ -738,7 +738,7 @@ int setup_compat_arg_xlat(struct vcpu *v)
->  
->  void free_compat_arg_xlat(struct vcpu *v)
->  {
-> -    destroy_perdomain_mapping(v->domain, ARG_XLAT_START(v),
-> +    destroy_perdomain_mapping(v, ARG_XLAT_START(v),
->                                PFN_UP(COMPAT_ARG_XLAT_SIZE));
->  }
-
-... here. Then again even the freeing is taken care of by
-free_perdomain_mappings(), so even for this one the question arises
-whether it's actually needed.
-
-Jan
 
