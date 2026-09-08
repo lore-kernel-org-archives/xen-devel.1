@@ -4,44 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5CEAC79F82
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 21:57:52 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1412429.1642899 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90689C79F82
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 23:18:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1412474.1642934 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x43op-0003nF-KJ; Tue, 08 Sep 2026 21:57:31 +0000
+	id 1x454R-0000Vq-0a; Tue, 08 Sep 2026 23:17:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1412429.1642899; Tue, 08 Sep 2026 21:57:31 +0000
+Received: by outflank-mailman (output) from mailman id 1412474.1642934; Tue, 08 Sep 2026 23:17:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x43op-0003n8-GT; Tue, 08 Sep 2026 21:57:31 +0000
-Received: by outflank-mailman (input) for mailman id 1412429;
- Tue, 08 Sep 2026 21:57:29 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x454Q-0000Vj-TN; Tue, 08 Sep 2026 23:17:42 +0000
+Received: by outflank-mailman (input) for mailman id 1412474;
+ Tue, 08 Sep 2026 23:17:41 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper3@citrix.com>) id 1x43on-0003mq-Ky
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 21:57:29 +0000
+ (envelope-from <hpa@zytor.com>) id 1x454O-0000Vc-NO
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 23:17:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x43ol-005f1W-9b
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 23:57:27 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x454N-0031pj-JD
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 01:17:39 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6aa08450-bab6-0a2a0a5309dd-0a2a4505ac84-42
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 23:57:27 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper3@citrix.com>)
- id 6aa084c7-4cb1-0a2a45050019-d155802dbd26-3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 23:57:27 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-49556f97a9dso43358935e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 14:57:27 -0700 (PDT)
-Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
- [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-485883927a3sm30151604f8f.11.2026.09.08.14.57.25
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 08 Sep 2026 14:57:25 -0700 (PDT)
+ (envelope-from <hpa@zytor.com>)
+ id 6aa0978e-e002-0a2a0a5209dd-0a2a4508d874-16
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 01:17:39 +0200
+Received: from [198.137.202.136] (helo=mail.zytor.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <hpa@zytor.com>)
+ id 6aa09791-f659-0a2a45080019-c689ca88a178-3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 01:17:38 +0200
+Received: from [IPV6:2601:646:8081:8d71:e98b:813a:9897:e5d1]
+ ([IPv6:2601:646:8081:8d71:e98b:813a:9897:e5d1])
+ (authenticated bits=0)
+ by mail.zytor.com (8.18.1/8.17.1) with ESMTPSA id 688NGusI2287284
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NO);
+ Tue, 8 Sep 2026 16:16:56 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,78 +51,134 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=citrix.com; s=google; t=1788904647; x=1789509447; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=YHVAeT2GPyQVTW/x3ZgZmuDMoOXPzwlAseIbiz+kT/w=;
-        b=G5nDTKRzNn6Pszq2a5nU5C06KQEwVOuOLRSSefD4qgWCzvbOWJHkDjL+oXMaKEVsss
-         PqC6Y+Dl/zaf7uiuxpqehxZs4h84W+ZGVkssvrBl68I2T9DA1p7t4/ygJlSEJTUeScF1
-         1iSBGuMoiAFzcWLgSWY/izSjT0+s3lH4wQXz4=
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788904647; x=1789509447;
-        h=content-transfer-encoding:content-type:mime-version:message-id:date
-         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=YHVAeT2GPyQVTW/x3ZgZmuDMoOXPzwlAseIbiz+kT/w=;
-        b=i2U9Moobk7DrJsSe4YoS/ILo92LcP+/VlTv1TJyc/OXNTqXWZ4tw4j3Hhuz3WKnEkt
-         lIU6zBtgHAmN4qSdMl6rZKVzBR0cNCrs+dHI7dtGPo4fn2oaK60jG2ddbpMNx6MAGjNl
-         Az3HbWVhZ2wNY77TYHZ10fpSQLLPo9x9epDcAKYhwYIhZV6XqdltKvAlqNhmnveK6YUs
-         Vb9Zw0ElL1I7breo5F2bXkxjxg86UfBV+AZi2G8I7CJ6AtH9qX1qySaH7yytAs89AVe1
-         bUpBW+E0QuvrWKKZdvMEu5KsxZZeakhZCM4lpmdiUUduSMNWCaE6e6/cLN3eC7yFqP3j
-         ZmuQ==
-X-Gm-Message-State: AFuF++leM3jR5fVEkeokhXaiRvhk5Xf+8z2LrG3qPWiFIIeZTdn5JgX9
-	BenojUyznZyiICcLw34hmEYVFn6CFZXJz3PTAcP5vNhb6XjHXHnoW555GJ14vKaXBaWd2mtg75Q
-	btHtEe3g=
-X-Gm-Gg: AYBFou2Xu/mFMG4Qq5IxKJFarX31c4nMRlnsAiq+3356o9L6scPXtt//QQ35JiM3Dko
-	mkvdDFtoClxxZhdwRCOzpXiCksSaBLxju0aRZUod2OsuMt+yqqYyhGp79lcbRqt2Wg8VUFl7WLn
-	PMRwo/GS5Taon41QjivWMNf/fw2olc/zc132yffEaoAobjEDOLYdUpZXO+LYfE1/sU0JHp/ZKMQ
-	YdsDsl1dRccf2hlWwlAng1a8m0v9qr8dQcpzizDtq9O+SayMaiihtyHk8aRNrNypXt9AtpEcPcu
-	f+/lOpHdIpGHophP8hCwDpSviTyO+UoYYRPPd6JhP/qRt12bKh7RD0t79YqDyXqfI1z1UWMgAPH
-	5WuDD7PGxLVtH8DUCjo+2E6HV+st1BKXojpGjEH/Lej6dnuReY++3B+tZzkbaPsKj7Ix+rGoCAB
-	pD2OTPfP2Fj9IPanI6aB9tvgwkkM/x2kBzhddVKly9SDw4606TZWVltqm0mTMZokiDZAFnOmuEs
-	xLNpVUpHqfKi3ymBjL09XtI/TnMVxoy/ek6DrU=
-X-Received: by 2002:a05:600c:6089:b0:49c:fa21:e73f with SMTP id 5b1f17b1804b1-49cfa21e8b9mr277475065e9.21.1788904645803;
-        Tue, 08 Sep 2026 14:57:25 -0700 (PDT)
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-To: Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH 0/3] x86: Fixes for not-quite-XSA in pci_conf_write_intercept()
-Date: Tue,  8 Sep 2026 22:57:18 +0100
-Message-Id: <20260908215721.3346842-1-andrew.cooper3@citrix.com>
-X-Mailer: git-send-email 2.39.5
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=2026082801 header.d=zytor.com header.i="@zytor.com" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
+DKIM-Filter: OpenDKIM Filter v2.11.0 mail.zytor.com 688NGusI2287284
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=zytor.com;
+	s=2026082801; t=1788909420;
+	bh=YxvPbk1+TIa+eRjm3uzymXdFyg0V4mRSsiJGDFWOH4c=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
+	b=DhyEuYlJaKlD5Kqmx1TR6UbWQOE2kUzui755tS5hezt4IAReRx2LCRaz8exC7PYiV
+	 2tY6rnOGQK3M9ywC0h8kXKEFjc2o6kFF6poiyH9WdyWsr2+QlZxds+1u2MwrHSfwG+
+	 XLbKaeii0VHMChicpduK82c3XGU/pKMi5DDWa4O6CWkTWkZFzkg45hbAk2FmaT2ka8
+	 xenh3PCD3NouI+Xtx0kVqsAN2RA7rQ5EGQv7eglg8KNs8Hfcv2rZP7c0guZx/YQOIJ
+	 n4zWBf7ULs/igJ9KZOSWOg/f+/eKClMasKTWLS0RWqOHcG4Q4tjgRcow7mDQy8vCA3
+	 IyQJ4H5mGZ+pQ==
+Message-ID: <e74c5a6b-ed9c-40c6-b9d7-ff04ee8c099e@zytor.com>
+Date: Tue, 8 Sep 2026 16:16:51 -0700
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 2/5] x86/asm, x86/boot: expose inline memcmp()
+To: Borislav Petkov <bp@alien8.de>,
+        Mauricio Faria de Oliveira <mfo@igalia.com>
+Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+        Dave Hansen <dave.hansen@linux.intel.com>, x86@kernel.org,
+        Juergen Gross <jgross@suse.com>, Alexey Dobriyan <adobriyan@gmail.com>,
+        Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+        Jan Beulich
+ <jbeulich@suse.com>, Brian Gerst <brgerst@gmail.com>,
+        kernel-dev@igalia.com, linux-kernel@vger.kernel.org,
+        xen-devel@lists.xenproject.org
+References: <20260822-pvh-kasan-inline-v9-0-e70ef3b75b6a@igalia.com>
+ <20260822-pvh-kasan-inline-v9-2-e70ef3b75b6a@igalia.com>
+ <20260906170116.GRap2cXOY6ENSzAXUJ@fat_crate.local>
+ <E4FDF95C-3FAB-41DB-8EA0-8A26B964B38D@zytor.com>
+ <d1b9ff734b918889eaf8885d64141bc3@igalia.com>
+ <20260908193229.GFaqBizWcssBoewNSo@fat_crate.local>
+Content-Language: en-US, sv-SE
+From: "H. Peter Anvin" <hpa@zytor.com>
+In-Reply-To: <20260908193229.GFaqBizWcssBoewNSo@fat_crate.local>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1788904647-732B32A1-FE1CBD7B/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1788909459-D514E87B-3C234374/0/0
 X-purgate-type: clean
-X-purgate-size: 831
+X-purgate-size: 3246
 
-Plumb pci_sbdf_t up and down the callchain to simplify parameter passing and
-make it harder to forget the segment.
+On 2026-09-08 12:32, Borislav Petkov wrote:
+> On Tue, Sep 08, 2026 at 03:04:53PM -0300, Mauricio Faria de Oliveira wrote:
+>> Boris, perhaps the approach here could be changed to add an actual
+>> memcmp()-like inline implementation (e.g., as provided in a previous
+>> revision, without return value differences), or continue with the
+>> memeq()-like memcmp() from arch/x86/boot/ but rename it to memeq() ?
+> 
+> Nah, new functionality is not needed. We can add it later when it is really needed.
+> 
 
-Andrew Cooper (3):
-  x86/pv: Convert struct mmio_ro_emulate_ctxt to use pci_sbdf_t
-  x86/pci: Convert pci_mmcfg_{read,write}() to use pci_sbdf_t
-  x86/pci: Update pci_conf_write_intercept() to use pci_sbdf_t
+I personally think it would be a good reason to explicitly rename it memeq(),
+after all it indicates what it actually *does*.
 
- xen/arch/x86/include/asm/pci.h    |  5 ++---
- xen/arch/x86/pci.c                |  6 ++----
- xen/arch/x86/pv/emul-priv-op.c    | 10 +++++-----
- xen/arch/x86/pv/ro-page-fault.c   | 18 ++++++++++--------
- xen/arch/x86/x86_64/mmconfig_64.c | 18 ++++++++----------
- xen/arch/x86/x86_64/pci.c         | 12 ++++++------
- xen/include/xen/pci.h             |  8 ++++----
- 7 files changed, 37 insertions(+), 40 deletions(-)
+	bool memeq(const void *m1, const void *m2, size_t n);
+
+Note, however, that the sense of the return value is opposite -- true means
+equal, so !memcmp(...) needs to be replaced with memeq(...) and vice versa.
+
+The other issue is when gcc/clang wants to call memcmp() out of line. Although
+a theoretical concern, there really isn't any reason not to DTRT there since
+there is only one instance in the code, ever.
+
+Here is an out-of-line compact memcmp() which works for both 16/32 and 64 bits:
+
+int memcmp(const void *s1, const void *s2, size_t len)
+{
+	int rv;
+
+	asm volatile("xor %0,%0 ; "
+		     "test %3, %3 ; "	/* Handle len == 0 correctly */
+		     "repe cmpsb ; "}g
+		     "setz %b0 ; "
+		     "sbb $0, %0"
+		: "=&r" (rv), "+D" (s1), "+S" (s2), "+c" (len)
+		: : "cc", "memory");
+
+	return rv;
+}
+
+On 64 bits it compiles to:
+
+0000000000000000 <memcmp>:
+   0:   48 89 d1                mov    %rdx,%rcx
+   3:   31 d2                   xor    %edx,%edx
+   5:   31 c0                   xor    %eax,%eax
+   7:   f3 a6                   repz cmpsb (%rdi),(%rsi)
+   9:   0f 97 c2                seta   %dl
+   c:   0f 92 c0                setb   %al
+   f:   29 d0                   sub    %edx,%eax
+  11:   c3                      ret
+
+On 32 bits (-mregparm=3):
+
+00000000 <memcmp>:
+   0:   57                      push   %edi
+   1:   56                      push   %esi
+   2:   89 c7                   mov    %eax,%edi
+   4:   89 d6                   mov    %edx,%esi
+   6:   31 d2                   xor    %edx,%edx
+   8:   31 c0                   xor    %eax,%eax
+   a:   f3 a6                   repz cmpsb %es:(%edi),%ds:(%esi)
+   c:   0f 97 c2                seta   %dl
+   f:   0f 92 c0                setb   %al
+  12:   29 d0                   sub    %edx,%eax
+  14:   5e                      pop    %esi
+  15:   5f                      pop    %edi
+  16:   c3                      ret
 
 
-base-commit: a2ca4f8b9890899ca89d6116002e7a9c5957d8c6
--- 
-2.39.5
+On 16 bits:
+
+00000000 <memcmp>:
+   0:   66 57                   push   %edi
+   2:   66 56                   push   %esi
+   4:   66 89 c7                mov    %eax,%edi
+   7:   66 89 d6                mov    %edx,%esi
+   a:   66 31 d2                xor    %edx,%edx
+   d:   66 31 c0                xor    %eax,%eax
+  10:   f3 a6                   repz cmpsb %es:(%di),%ds:(%si)
+  12:   0f 97 c2                seta   %dl
+  15:   0f 92 c0                setb   %al
+  18:   66 29 d0                sub    %edx,%eax
+  1b:   66 5e                   pop    %esi
+  1d:   66 5f                   pop    %edi
+  1f:   66 c3                   retl
+
+	-hpa
 
 
