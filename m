@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8DBC8C79FA0
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 09:27:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1411221.1641920 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8168DC79F82
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 09:34:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1411229.1641929 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3s6V-0005oN-To; Tue, 08 Sep 2026 09:26:59 +0000
+	id 1x3sDj-0007St-Jp; Tue, 08 Sep 2026 09:34:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1411221.1641920; Tue, 08 Sep 2026 09:26:59 +0000
+Received: by outflank-mailman (output) from mailman id 1411229.1641929; Tue, 08 Sep 2026 09:34:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3s6V-0005oG-Qw; Tue, 08 Sep 2026 09:26:59 +0000
-Received: by outflank-mailman (input) for mailman id 1411221;
- Tue, 08 Sep 2026 09:26:58 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1x3s6U-0005oA-6f
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 09:26:58 +0000
+	id 1x3sDj-0007Sm-H7; Tue, 08 Sep 2026 09:34:27 +0000
+Received: by outflank-mailman (input) for mailman id 1411229;
+ Tue, 08 Sep 2026 09:34:26 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x3sDi-0007Sg-1c
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 09:34:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3s6T-003LQY-JN
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 11:26:57 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x3sDh-00GY4f-8A
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 11:34:25 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6a9fd4db-e002-0a2a0a5209dd-0a2a4504b176-38
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 11:26:57 +0200
-Received: from [52.101.62.6]
- (helo=DM5PR21CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6a9fd4df-b57f-0a2a45040019-34653e067d64-4
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 11:26:57 +0200
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
- by LV8PR03MB7376.namprd03.prod.outlook.com (2603:10b6:408:18b::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.6; Tue, 8 Sep 2026
- 09:26:53 +0000
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0382.014; Tue, 8 Sep 2026
- 09:26:53 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9fd69c-8faa-0a2a0a5109dd-0a2a4509e0ba-26
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 11:34:25 +0200
+Received: from [209.85.218.41] (helo=mail-ej1-f41.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6a9fd6a1-be1a-0a2a45090019-d155da29b03f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 11:34:25 +0200
+Received: by mail-ej1-f41.google.com with SMTP id
+ a640c23a62f3a-c2533d83e3bso754715066b.2
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 02:34:25 -0700 (PDT)
+Received: from [172.19.143.248] (IW396200.net.t-com.hr. [195.29.234.54])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c26e956ea81sm376416966b.33.2026.09.08.02.34.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 08 Sep 2026 02:34:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,152 +52,180 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=j8/lBlIEjayLSegD7LL5zfUp9GIM/aRy/qo/uBBUFPvY70InDJEdQIXTs2KgZSt6C7zjZgHkBZBgoYvUIWOU8uouCvJJ5Q3SGWPIllQcNBwdckUokhLl6W98YYN0OX+WCAY8k+Uyj19NafZEMLbdbvo6y2NUVw8auLVOtYv/GN5FfEsJDbzBYxrLD+/q1jn0itnWLNKQBcdJI6YUcD+YhEWcPQ3yYRoObHVhC9FKs6hq8uBioq8OVstU8oh7vBqtTe5BwEHqlLW9KMfeGXBrnwXhV+VOn6h70qI8/FGKezcLQuprul9l4GXRjVXvl1QRQTKpuPNPLeGhOMAYby/wiA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XG3OLYfogiIpj1NnZTtoGu3tcU7fDM3bO+5n2zd3SYs=;
- b=h4/EgOJTHyUH+j7KkZmuZi5K9WkACmrgDWvLPTaWzYFODEk4D9ZdiUqkBuG1rCYHmXZpImeXzx1BZmYfuhZ5WBRsD2ETUClbf8biIfWO4HgRUQ+4KUGmWSAfGWniGg2CS2jLZR+9hpw/06uwFYbyI21qbtbkEw1O/Wja3R40EPj+Shq9YqV47SH544VdKJZI7rRh1HFtl7UF8sc0uRRJ0QeffnOtx4etGWIjFH7YLynMK+xabTwwgshRziNW/uihhPHtwwywLEcJ66FAyQ063kBvI0AkpfANofd8QE9kIO8KjOEB7w+cPlcEYPFFyDf0muSBHVIU+uaxrLBR/NmGKQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XG3OLYfogiIpj1NnZTtoGu3tcU7fDM3bO+5n2zd3SYs=;
- b=yg5hEKmvu2rFkdD1XW0TO0KwADGbHyQ4rJEX1xfycQlZDlHXHyAJrvTRZ3ya0NEp4tNYbyPbBAzHX6yJ2/Ovtj7QD9c1iu5wekToup1mRFroM6WTQ9Th+r/UdBc0mmZBbK1W6LTIwRZiuKEiAC2FbCMz4QoVzYebWCuxXdI5IzI=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <3b899e5e-b434-40b4-a87c-0a4984462689@citrix.com>
-Date: Tue, 8 Sep 2026 10:26:48 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788860065; x=1789464865; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=jIXQVEUqa9D7i03beXcgoj5TiD/kN8vTM/UcnAY9lCs=;
+        b=InxJHVkSRkPDv9aXQW763zbjTJ3RMhGjblRYYRgup2yMQk3x49BDsyYusT+yuhfTYp
+         YIHDggYb6l7HJkOv3PuxD9FMPPFwM7D4wExZJQVUWF+933qtkunDehFs0NEpIQ2x35aI
+         6Y0R6yz6fvENfQ1txHUS5DzAx9RA4nHuWrnd9ZKgNITvQfC8OjP8gcZDnKgg4sJ3Odwr
+         YhuHDBjWCeMD5j14Z17RpCxaX0s9yRU+n7f1BSc5JtkUk7kZEn6YulJZHNYhwGF88ZaN
+         1VOzWSDuBL8M2PFI1tPrWNngYA3g6bL7z/P3Lu+z/uXRLp+nltXvKvut37kD+oOmDRu4
+         ZRpA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788860065; x=1789464865;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jIXQVEUqa9D7i03beXcgoj5TiD/kN8vTM/UcnAY9lCs=;
+        b=Orz0xg6U2J4PKWVKPMygxl65Aj7oJtXNnOOJs+bzs/AkEuXK8SYt1RTcUEnOztgIF1
+         Bg+8lz6RJVS6ARykEKNJdeCIY56RU2zyDe8dtlnEvuqiAj7/crF9tqUfQ5rtS/etfE2/
+         9pmi+SUY2ff4/MSUGtsHJ/wh2gZPT7/CIn5+figp4slJDE1BD7h/hpr8c8dN25yvxeub
+         lh7JulGV+KtFYnSTjSY+r8REpswzW99SXJbHEMrK9DKHAlvbrp+MuVCdRmYIkRS5nRFm
+         HQQ7nr0ZpHy0RK314DTEIbajRnrfPtD+a++2Y1dtnuUYsWtM144g2eorCQR+WkHrfDyS
+         MVdg==
+X-Gm-Message-State: AFuF++lWMjlZTtbIqfIu+Zxog47jSPvWyFTeKUTfluQ5TEXA3x9oF38h
+	qDQpvyOiW7wfMhXi0jJclRLnVCuuNEKSaubeaBwNsK/7+sm7ItjwzUZt
+X-Gm-Gg: AYBFou3+h3jICC9wQ+H0YZyxL167fKxy1ArLafPS2eVZ8dAZYqYAY1H2lkp6C0R+Efb
+	SWBkJ4Y1hYQvg2Phq/U5sQGSxodjbDsA/T+7m4tnV2l6ujG5LUxKOxxGAG9SV55dOsxtL8C8cYG
+	242uN7b0yUNQ/XTqC4v4so/cPStKzFTWzxdjkmYrGSKQvwB0LRm19aNPKZsM4JKiIztel6Hr0Tq
+	5GcpY2VixzrWMqmRFEPRks69DSOFH+78CGrxyZArQnbvf/tLLTrSsAT8zOwYgXpj5igBNCC0ZIZ
+	p4KlSlEjQ3JflR0ipd9GTZQcxnXPQ4xeRthjZ2BP8yTrlipJ9fURbHVbgmPTs1GXbJ4x3w6za67
+	ZJ98aJJtT8vZl2Q3YS7bpxD/dKF+YeAJbjIGWMb2xJRxboKfykvZKz1tO7cfUS/YXgNzlypT+ep
+	PNkqOaqSzWQyzlP781xCHGJJUAR3zomBHeeMiN/h5lfYQER0rLaymJRdhPQlbaIdQwPnG5R+hiz
+	4KV2bBdPdU4NHbQVbzMkQ==
+X-Received: by 2002:a17:907:1c25:b0:c26:337e:7e05 with SMTP id a640c23a62f3a-c26337ea2f5mr1272648166b.4.1788860064524;
+        Tue, 08 Sep 2026 02:34:24 -0700 (PDT)
+Message-ID: <9a7dea59-be4a-4dbd-9935-f48e24adc009@gmail.com>
+Date: Tue, 8 Sep 2026 11:34:20 +0200
+MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] x86/viridian: Workaround Hyper-V GP fault writing
- to MSR
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: xen-devel@lists.xenproject.org, Paul Durrant <paul@xen.org>,
- Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>
-References: <20260904141516.367862-1-ross.lagerwall@citrix.com>
- <20260904141516.367862-2-ross.lagerwall@citrix.com>
- <aprbab18qnndUhnM@macbook.local>
+Subject: Re: [PATCH v2 17/39] xen/riscv: decouple INSN_PSEUDO_VS_* from the
+ hypervisor's XLEN
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <2a69992aa02ff114237ec27204cfac0f8278b1d6.1787838835.git.oleksii.kurochko@gmail.com>
+ <1788796633.8631fc262581453bbf619ec5b2062170.1a07c9682ec000c4f3@vates.tech>
 Content-Language: en-US
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-In-Reply-To: <aprbab18qnndUhnM@macbook.local>
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1788796633.8631fc262581453bbf619ec5b2062170.1a07c9682ec000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0056.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:153::7) To CH8PR03MB8274.namprd03.prod.outlook.com
- (2603:10b6:610:2ba::5)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|LV8PR03MB7376:EE_
-X-MS-Office365-Filtering-Correlation-Id: c92e8efd-9a6a-425a-f4d1-08df0d8b51ab
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|376014|366016|10067099003|18002099003|22082099003|11063799006|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	k9tglt9ivsnnD9vTvH90CLeIqkMSsSGZHZHAsEv7PBYQA68ydBZBOLKhS1pnLAZGyDiWCVsg7xJOGNg6oY3yMvtoMvWoSt9Ng1bWtNwlKsR7K1WyoD1nFb7cNGejGebapQ386ovcYRTk8oqqIxPaTqAbvLIuUQueZMpIwKoPWixgXSc1JxFWA4hTHCU88dcp0e0HHJgIVoqUtrIWZVZxVG8qW5NH2v+Bdzp8Wn6L4+lV1XS3Erfa5Wuj+CCzIvZ0uE+moA/7ehDt29bmt9Ht1aeAuKSgBZLoYGyN3KyF4v0oBGrlPqTh0I8WTzqmsM2B2jgcyiXkVXH0jqlctM5WPiW0H8TdX6J2LSgpiGW/F6iqm2AZVI65Ca8gCDHucVHJYpNksETdrb438k52lNVyHsXoz5TbHxxifk6SsnvnFoJ3AbDSPnP31hmJnhb+MMxZQaBCWBWqirX4286p0sX9f0DlJHPNgGUMo0OCUTTCHxjmUoTGgN+T2g4KVfbqndyn5vQRQ30eWN1DARY9/7YJUBhEErUJ8lmALKTJdrmPYJhOsZAW63+zH63VkjiJ4FajD+DHRwpVtdBFZmNH0z40lqkGxcR/2kKfcpFANeM/7tKbxIg1q0AL1qtYxZVAazB630lIrz8PFD8a8zjlyvnWbA==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(10067099003)(18002099003)(22082099003)(11063799006)(4143699003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?anQ5RzAvWEYxVUdlUFk1MnByVE0rUm1iWS9NbzNjVjMza0kzVldoZXNvNmhJ?=
- =?utf-8?B?amZxdUZWQ2d3N2NzbURib29qd1NTVStBZGl5dkdjSXNDUWNhUEFSNldnNlRx?=
- =?utf-8?B?TEMrKy9nNU0zaU56S2ppMDFFUytlajlreFUvaVR6ZGFvQm9HQmdpUHZiU0kw?=
- =?utf-8?B?VkRWSi9Sc1VWclY1VHVpZjg4N0FVZ1lpRWpYdGx1VlVQT0NOZ3FKTnVTbCtX?=
- =?utf-8?B?dFZaY2pSckhMYit5TXBVTkFtYS92OEdZeDgxandYUWExQk4vOE1vaVNONGRL?=
- =?utf-8?B?VzBpQ1N6M25NWVR6Q0M1dVZiZEtaU1EwRzJwN0NqVk9RcVBYODdDS1Jic0s1?=
- =?utf-8?B?aTU1Z0NoUVoraTZVY21yeEkwVGpJaGNrMEF4czVEY201UkxOU0c2WUZQY25r?=
- =?utf-8?B?VkhqcVo4bHFoNkdLak5QbGRlZ3RsdUtDQm9WRDMxWlp5cisvZU04aWhjK2Y1?=
- =?utf-8?B?eWRBeUxwYUk0R2UvRWJzOEROV2psUytvL2U4MEZ6NWVGSW5KS0pVR2pIblVt?=
- =?utf-8?B?bHdlS3ZEaEJZNUkwMlI5RnRndmNWZHBHNVVoMjRDTEJiUVdMOW12QjdaMU9Y?=
- =?utf-8?B?eURFMnJJK2doREJYdDVIN0IxYUJabGJUSGF5Uldpek8wVzhKM0huYmFyZ3ds?=
- =?utf-8?B?SmtIVkFwcXF3b0tDcVlqSVE1SzJHTnpKVHo5SEo1RWFZL0xoNUtnR3ZXYXhu?=
- =?utf-8?B?MSt3ZlhWb3FKVWlMeFU1SU9aZ0tSQWJncVRVVnBBV01OaTl6ekJ0ZGJYYktO?=
- =?utf-8?B?S2pFcUpXS0g4SVRieENMcXEwSEJSWEdWVkZnWDVwNlJjRmhsalpJNGJ3WmRP?=
- =?utf-8?B?MXo0Q3FUVmtZNCttMzRscERlVzVMRENIVHcxOE9XY21kSElBZ3lTNUw1UlVo?=
- =?utf-8?B?VGpnR0hpNTB5MEpQcHh1eEtGK2Nxc09rUVU4TkEzeVhEWlJWcXdIUE1SV1dS?=
- =?utf-8?B?VDk0OGdrem9zTkpheENpWndwU21IblRiYUJ4NFJUQXA3cmJPRlB6R0JpY0Ju?=
- =?utf-8?B?SElHQi9oNS9GbXBNMXU4a3ZRV0cwcWZNVzFBL0YraGJ6U1F1WGE2V1lKeU9M?=
- =?utf-8?B?b1FlTzVPbllrZURXb1JxVnluM3RyYUNwWlBjVlI0L09zUGRBRnZ3SXVxeGVa?=
- =?utf-8?B?bnBMQzhoRmg2UDAvbWJjTlhlV3UvajRKL2M1WVBLZU5zcSsrVmo3SVJjdGp6?=
- =?utf-8?B?R0p2TjFSTms2aVFWNzhUc2Z1TWs0cnlPZm1UeHF0eTZudnBpSE5EUzZvaFpW?=
- =?utf-8?B?VXZCWHkyVWs4YjZlSENPV3FGNXFrbDloOWJLdjhMZXV2bHhPa1QrczhvOVNS?=
- =?utf-8?B?UU9tdGsyMUJUU0Q5TjdYN1haL2pNcDBUbHBRSlF3dmZaYlZaNFZsSW1WakN1?=
- =?utf-8?B?MTFqU05DNE00NEVYZ3h6Wk53V1ozUnVkdVR6Nzc2aGJDQ085dFpLK2RYSEpU?=
- =?utf-8?B?NzdFSzc5bjFoekRFc3hiOW51V2FqNU5FSFN5NmhOMFdSR0k4U2pEa21KUDJR?=
- =?utf-8?B?bTlEcUl6U0dZQ1ZJZXZpcWFCMDhNR1h2WGg0RjBmMzA3TU9ucDBZMjBQRFp4?=
- =?utf-8?B?aXloOE9zSTBIWDI3MWNqa0JSYzlEOGVKMWpLS0NtaklVK0FRdTFrWEw5aWl2?=
- =?utf-8?B?T1g1TVhvUFNHbmxmejNuUk5BblQ5NDJEZkluQlF5RlFYR2RtWGV5eU9TS2w2?=
- =?utf-8?B?VTFIbkQ4ZGd3STFybGw2MHhWQ3RVRjJkN1ljVXZxKzNick1KQVVQWmttdmth?=
- =?utf-8?B?Z3d3MWtpRkF2SWJDTDJMOFE5Y0dvREZMZVhUajhyUTNiR0krM3VjSFhBbmE5?=
- =?utf-8?B?WlNoVDBjN09UaW15QVo1MENtdzcya3k4RzlhU25VT0JMNEJKaUZuMUVpT2lB?=
- =?utf-8?B?Z00zOTkxL3I4dkhNT1gxV21yU3BJVGxFVXl4WC9RY1E2THN0dll4SlFxRzVB?=
- =?utf-8?B?MSs5TDh3TzhkeVZiT3BnQ1JJWWpDM1lOYjJ0ZnI5azU1MDB5b3duL1ZaSlhC?=
- =?utf-8?B?Ri9ub0tiNWJHeDYzYnoxVU54SVdEOEE2SENzanZJeTkrZ1NkdjVwR3Y2SnRl?=
- =?utf-8?B?WTN0bCtPOGdiWEExYUdPTnR5SDZsb3drcCtWN29UbmowbGZHUldFeGtPQXdh?=
- =?utf-8?B?RGZtUHkvWWFhVDhtRm9hODJ6RlJUWjNSbGwxWE5iQlcrQSt0cnM5bjJOZVhZ?=
- =?utf-8?B?b3BoRUxXZVpOeVVSTHN3bHBxbElUU0dvNW13ZUl1cmM5cDVsZ0xYUkxwVldk?=
- =?utf-8?B?QnRxQ3BYWlhvZVdpWVhuc3FBKzFDMlc0VEpwUk9iSDhoVDQ1SVlKZWVuWlpi?=
- =?utf-8?B?cXJuTlMrM1JsdWhFaVo4MXlUVlMzVmd3d3BlMVRNYkJDR3hEOFR3YVE5aDU5?=
- =?utf-8?Q?4dx+y2oR22VBzY2c=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c92e8efd-9a6a-425a-f4d1-08df0d8b51ab
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2026 09:26:53.3632
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fsMz6SqEnuyYEMnR9dnI+/RyGf3nDbuZc3yaYBHwmmbl1JH5NjH/YGYj3AtuvZZZTlmdivLsvfMnkcc6S9wTUhJkD71hk4/gcRXjdxjRKtU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR03MB7376
-X-purgate-ID: tlsNG-ebf023/1788859617-585C7B50-A659879C/0/0
-X-purgate-type: clean
-X-purgate-size: 1736
+X-purgate-ID: tlsNG-bad1c0/1788860065-3BCD7034-BE982E63/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 4721
 
-On 9/4/26 3:53 PM, Roger Pau Monné wrote:
-> On Fri, Sep 04, 2026 at 03:15:14PM +0100, Ross Lagerwall wrote:
->> The Viridian spec requires the vector to be >= 0x10 when writing to the
->> SINTx MSR, otherwise it should #GP fault.
->> The spec-defined initial value is 0x0000000000010000, i.e. the vector is
->> 0. On startup, for some reason Windows 11 Hyper-V tries to set the MSR to
->> the spec-defined initial value and since the vector is 0, it GP faults.
->> To workaround this, treat the write as a no-op if the value is
->> unchanged.
+
+
+On 9/7/26 5:57 PM, Baptiste Le Duc wrote:
+>> htinst reports a pseudoinstruction when a guest page fault is taken on an
+>> implicit memory access done for VS-stage address translation. Four such
+>> values are defined, differing in the access type (read or write) and in the
+>> access width: 4 bytes (0x2000/0x2020) or 8 bytes (0x3000/0x3020).
 >>
->> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
->> Acked-by: Jan Beulich <jbeulich@suse.com>
->> ---
->>
->> In v2: Added a comment to clarify
->>
->>   xen/arch/x86/hvm/viridian/synic.c | 8 ++++++++
->>   1 file changed, 8 insertions(+)
->>
->> diff --git a/xen/arch/x86/hvm/viridian/synic.c b/xen/arch/x86/hvm/viridian/synic.c
->> index e6cba7548f1b..75b004440e58 100644
->> --- a/xen/arch/x86/hvm/viridian/synic.c
->> +++ b/xen/arch/x86/hvm/viridian/synic.c
->> @@ -157,6 +157,14 @@ int viridian_synic_wrmsr(struct vcpu *v, uint32_t idx, uint64_t val)
->>           if ( !(viridian_feature_mask(d) & HVMPV_synic) )
->>               return X86EMUL_EXCEPTION;
->>   
->> +        /*
->> +         * Windows 11 Hyper-V (26H1) has been seen to write this MSR to
->> +         * its default value, despite not being a spec compliant value.
->> +         * Tolerate writes which have no change in value.
->> +         */
->> +        if ( val == vs->as_uint64 )
->> +            break;
+>> That width is the width of a VS-stage PTE, i.e. it follows the guest's
+>> paging mode (4 bytes for Sv32, 8 bytes for Sv39 and wider) and has nothing
+>> to do with the XLEN Xen itself is built for. Selecting just one pair with
+>> where a guest running with VSXL=32 and Sv32 in vsatp produces the 4-byte
+> Sentence is broken. Guess you mean "Selecting just one pair based on Xen's XLEN misses the case where
+> …".
+
+Likely it is becuase of my low level English but it seems that original 
+version wast okay and what you added is just a part from prev. sentence 
+but I will add your suggestion for better clearness. Thanks for noticing 
+that!
+
 > 
-> To make this a bit less workaround like, could we ignore the vector if
-> the SINT is masked (bit 16 set)?
+>> forms. Such an htinst would not be recognized as a pseudoinstruction and the
+>> fault would be mistaken for an ordinary MMIO trap: Xen would fetch and
+>> decode whatever instruction sepc happens to point at (unrelated to the
+>> access which faulted) and emulate it against a guest physical address
+>> derived from htval, which for an implicit access holds the address of a
+>> VS-stage PTE rather than of any access the guest performed.
+>>
+>> Define all four values unconditionally instead, named after the access width
+>> they encode rather than after the build's XLEN. On RV32 the 8-byte forms
+>> simply never occur, so recognizing them costs nothing.
+>>
+>> Dropping the ladder loses no build-time coverage: a build for an XLEN other
+>> than 32 or 64 already fails on the equivalent ladders in asm/asm.h and
+>> asm/config.h, so no replacement #error is needed here. Adding one keyed on
+>> CONFIG_RISCV_* would in any case re-introduce exactly the conflation this
+>> patch removes.
+>>
+>> This diverges from the imported version of riscv_encoding.h.
+>>
+>> No functional change: the values have no user yet.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>>
+>> diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
+>> index c63e5e3046..2d2e7e11b3 100644
+>> --- a/xen/arch/riscv/include/asm/riscv_encoding.h
+>> +++ b/xen/arch/riscv/include/asm/riscv_encoding.h
+>> @@ -839,25 +839,17 @@
+>>   #define INSN_MASK_FENCE_TSO		0xffffffff
+>>   #define INSN_MATCH_FENCE_TSO		0x8330000f
+>>   
+>> -#if __riscv_xlen == 64
+>> -
+>>   /* 64-bit read for VS-stage address translation (RV64) */
+>> -#define INSN_PSEUDO_VS_LOAD		0x00003000
+>> +#define INSN_PSEUDO_VS_LOAD64		0x00003000
+>>   
+>>   /* 64-bit write for VS-stage address translation (RV64) */
+>> -#define INSN_PSEUDO_VS_STORE	0x00003020
+>> -
+>> -#elif __riscv_xlen == 32
+>> +#define INSN_PSEUDO_VS_STORE64		0x00003020
+>>   
+>>   /* 32-bit read for VS-stage address translation (RV32) */
+>> -#define INSN_PSEUDO_VS_LOAD		0x00002000
+>> +#define INSN_PSEUDO_VS_LOAD32		0x00002000
+>>   
+>>   /* 32-bit write for VS-stage address translation (RV32) */
+>> -#define INSN_PSEUDO_VS_STORE	0x00002020
+>> -
+> Whole point of patch is these no longer depend on build XLEN, yet
+> comments still say "(RV64)"/"(RV32)" which could be confusing. Maybe it
+> should be better to indicate, as the spec does, that RV32 values are
+> used when VSXLEN=32 (only sv32 paging mode) and RV64 values when
+> VSXLEN=64 (sv39+ paging modes).
+> 
 
-Yes, that might be better and it appears to be what KVM does.
+Could you please clarify to me what in the spec it is?
 
-Ross
+This comments are just copy from the spec:
+
+Table 39. Special pseudoinstruction values for guest-page faults. The 
+RV32 values are used when VSXLEN=32, and the RV64 values when VSXLEN=64.
+Value           Meaning
+0x00002000      32-bit read for VS-stage address translation (RV32)
+0x00002020      32-bit write for VS-stage address translation (RV32)
+
+Value           Meaning
+0x00003000      64-bit read for VS-stage address translation (RV64)
+0x00003020      64-bit write for VS-stage address translation (RV64)
+
+So the comments are just copy of "Meaning" column from the spec.
+
+And I think that Meaning column is fine here as we could have a case of 
+when hypervisor has XLEN=64 but guests could be on it RV32 and RV64 and 
+if a guest is RV32 (what means VSXLEN=32) then the comment above 
+defintion mean that we hav 32-bit read/write VS-stage address 
+translation for (RV32) guest and the similar is for RV64.
+
+Do I miss something? Is a comments make more sense now or I have to 
+still update them in some way?
+
+Thanks!
+
+~ Oleksii
+
+
 
