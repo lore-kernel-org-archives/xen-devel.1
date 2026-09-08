@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8168DC79F82
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 09:34:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1411229.1641929 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C61CC79F82
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 09:50:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1411235.1641938 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3sDj-0007St-Jp; Tue, 08 Sep 2026 09:34:27 +0000
+	id 1x3sSg-0000xM-Pv; Tue, 08 Sep 2026 09:49:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1411229.1641929; Tue, 08 Sep 2026 09:34:27 +0000
+Received: by outflank-mailman (output) from mailman id 1411235.1641938; Tue, 08 Sep 2026 09:49:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3sDj-0007Sm-H7; Tue, 08 Sep 2026 09:34:27 +0000
-Received: by outflank-mailman (input) for mailman id 1411229;
- Tue, 08 Sep 2026 09:34:26 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x3sDi-0007Sg-1c
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 09:34:26 +0000
+	id 1x3sSg-0000xF-Ml; Tue, 08 Sep 2026 09:49:54 +0000
+Received: by outflank-mailman (input) for mailman id 1411235;
+ Tue, 08 Sep 2026 09:49:53 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x3sSf-0000x9-Dm
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 09:49:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3sDh-00GY4f-8A
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 11:34:25 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x3sSe-009c86-1X
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 11:49:52 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a9fd69c-8faa-0a2a0a5109dd-0a2a4509e0ba-26
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 11:34:25 +0200
-Received: from [209.85.218.41] (helo=mail-ej1-f41.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a9fda2d-2eae-0a2a0a5409dd-0a2a450c9540-32
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 11:49:51 +0200
+Received: from [209.85.218.54] (helo=mail-ej1-f54.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6a9fd6a1-be1a-0a2a45090019-d155da29b03f-3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 11:34:25 +0200
-Received: by mail-ej1-f41.google.com with SMTP id
- a640c23a62f3a-c2533d83e3bso754715066b.2
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 02:34:25 -0700 (PDT)
+ id 6a9fda3f-f479-0a2a450c0019-d155da36cd79-3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 11:49:51 +0200
+Received: by mail-ej1-f54.google.com with SMTP id
+ a640c23a62f3a-c1677c91969so435334466b.1
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 02:49:51 -0700 (PDT)
 Received: from [172.19.143.248] (IW396200.net.t-com.hr. [195.29.234.54])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c26e956ea81sm376416966b.33.2026.09.08.02.34.21
+ a640c23a62f3a-c2621d3f5b6sm473789266b.45.2026.09.08.02.49.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Sep 2026 02:34:23 -0700 (PDT)
+ Tue, 08 Sep 2026 02:49:50 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,49 +54,48 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788860065; x=1789464865; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1788860991; x=1789465791; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=jIXQVEUqa9D7i03beXcgoj5TiD/kN8vTM/UcnAY9lCs=;
-        b=InxJHVkSRkPDv9aXQW763zbjTJ3RMhGjblRYYRgup2yMQk3x49BDsyYusT+yuhfTYp
-         YIHDggYb6l7HJkOv3PuxD9FMPPFwM7D4wExZJQVUWF+933qtkunDehFs0NEpIQ2x35aI
-         6Y0R6yz6fvENfQ1txHUS5DzAx9RA4nHuWrnd9ZKgNITvQfC8OjP8gcZDnKgg4sJ3Odwr
-         YhuHDBjWCeMD5j14Z17RpCxaX0s9yRU+n7f1BSc5JtkUk7kZEn6YulJZHNYhwGF88ZaN
-         1VOzWSDuBL8M2PFI1tPrWNngYA3g6bL7z/P3Lu+z/uXRLp+nltXvKvut37kD+oOmDRu4
-         ZRpA==
+        bh=AIntCyxA5t+PensHW3kaaYXckrxkH4l4HmN3LUFeYcI=;
+        b=jaa80YMAhcapfH7UsBs3OmQhHi4+Ymg5cMi9/J0I9AKnaDkIKAwkQtSdsIMYLxprZl
+         vsQr3NAzV+RT7ogLw63Ga42cO7p2ghokhFvOaDe320BRatITtbNswI/iueMEKEYJ3QUu
+         JrDCtsKNYrzfWP27gPGW/vFFByRN3xTJ4a0XD25ver28AMsb7fDph6Tt9eoShVYAT9aS
+         DrsxmhUcM78ltBaTTRpMJ+mSZjY0qsU6lkOaYxyhh4fDbE6gSlNRmAftqzaWiRI5vaJq
+         XuiEi0FnKZsO8ANE0mw97m1mFYj+ffmdIJcTMbTcmH+VcYMDqIfFEl1uZmh5Istuisac
+         r/Ag==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788860065; x=1789464865;
+        d=1e100.net; s=20251104; t=1788860991; x=1789465791;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=jIXQVEUqa9D7i03beXcgoj5TiD/kN8vTM/UcnAY9lCs=;
-        b=Orz0xg6U2J4PKWVKPMygxl65Aj7oJtXNnOOJs+bzs/AkEuXK8SYt1RTcUEnOztgIF1
-         Bg+8lz6RJVS6ARykEKNJdeCIY56RU2zyDe8dtlnEvuqiAj7/crF9tqUfQ5rtS/etfE2/
-         9pmi+SUY2ff4/MSUGtsHJ/wh2gZPT7/CIn5+figp4slJDE1BD7h/hpr8c8dN25yvxeub
-         lh7JulGV+KtFYnSTjSY+r8REpswzW99SXJbHEMrK9DKHAlvbrp+MuVCdRmYIkRS5nRFm
-         HQQ7nr0ZpHy0RK314DTEIbajRnrfPtD+a++2Y1dtnuUYsWtM144g2eorCQR+WkHrfDyS
-         MVdg==
-X-Gm-Message-State: AFuF++lWMjlZTtbIqfIu+Zxog47jSPvWyFTeKUTfluQ5TEXA3x9oF38h
-	qDQpvyOiW7wfMhXi0jJclRLnVCuuNEKSaubeaBwNsK/7+sm7ItjwzUZt
-X-Gm-Gg: AYBFou3+h3jICC9wQ+H0YZyxL167fKxy1ArLafPS2eVZ8dAZYqYAY1H2lkp6C0R+Efb
-	SWBkJ4Y1hYQvg2Phq/U5sQGSxodjbDsA/T+7m4tnV2l6ujG5LUxKOxxGAG9SV55dOsxtL8C8cYG
-	242uN7b0yUNQ/XTqC4v4so/cPStKzFTWzxdjkmYrGSKQvwB0LRm19aNPKZsM4JKiIztel6Hr0Tq
-	5GcpY2VixzrWMqmRFEPRks69DSOFH+78CGrxyZArQnbvf/tLLTrSsAT8zOwYgXpj5igBNCC0ZIZ
-	p4KlSlEjQ3JflR0ipd9GTZQcxnXPQ4xeRthjZ2BP8yTrlipJ9fURbHVbgmPTs1GXbJ4x3w6za67
-	ZJ98aJJtT8vZl2Q3YS7bpxD/dKF+YeAJbjIGWMb2xJRxboKfykvZKz1tO7cfUS/YXgNzlypT+ep
-	PNkqOaqSzWQyzlP781xCHGJJUAR3zomBHeeMiN/h5lfYQER0rLaymJRdhPQlbaIdQwPnG5R+hiz
-	4KV2bBdPdU4NHbQVbzMkQ==
-X-Received: by 2002:a17:907:1c25:b0:c26:337e:7e05 with SMTP id a640c23a62f3a-c26337ea2f5mr1272648166b.4.1788860064524;
-        Tue, 08 Sep 2026 02:34:24 -0700 (PDT)
-Message-ID: <9a7dea59-be4a-4dbd-9935-f48e24adc009@gmail.com>
-Date: Tue, 8 Sep 2026 11:34:20 +0200
+        bh=AIntCyxA5t+PensHW3kaaYXckrxkH4l4HmN3LUFeYcI=;
+        b=Dl6mDWNqpoPAXXiZFVgmTVtW8BwixWaMvBJbB9d9Z2Tdp21CETVKDv+tLGO81cHDqX
+         Ai9sTWt0MuD05RXYpF+pY/EN2HTslRbmI/t3a+LE7A+1IywjBT20qIjjmqzuC51iriBa
+         keIj9vj8F39GzcoMXbOEGL10dlteyu/KVPlpf/QZ5HWvA8n0MnaKJI0shuC9lEB/S7Zm
+         g9iFKMNGZsjle3wv2J8xmBfHuN8zX/9fLq3NQyQmWBAeYoy67XxkDZU3WKlgQVk2nUs6
+         JAUlt+qRaAwfJW09WOgP6tyirfW92H1HAzm4UDqYQVXmcev4uMXtztJKSrJqJlFzXV6w
+         hYbA==
+X-Gm-Message-State: AFuF++nUQxZ3LJjbdjAdI4bb5Tb2ZmfRkmd67puQw8F+tm6LK04HG4CT
+	rRUBGreSFkR9S2SbIv8yPewEigPLfzNk1/yhoGepNnCjyJPSyoPs89Sp
+X-Gm-Gg: AYBFou0Yxo8OWQfuBALtJcmCHMeI6n2DWKBeJEhdqPAbwn+0ulHF6qLX4SyJM/E5Zrm
+	w6KjFlakeLKJD3lLZebAaXbXXogDQ80UrB5/r4vhrDnFq9KMsUICQaxVhzjntwPnunHQIioxOvK
+	ntdghwTDtsRdj6uESimoGBXrhEOmA/vcSCcgZIvlcQTSiEeDDwVi5QzG42WLJqP3dnC6KjILFuj
+	Dhtj4iYsEyjq2sE4DdiLyxoonbstDaZJ6McdKzLRYvdEco/FPWrzt+WIv9DGn93rqogAZgXwoDF
+	E+dhCUZ6kcrMVQOUKyzdG8Z3AU3d+uuLGZnRdPyfRa4a7VuP3kCdy8MK3FSAZ07DrgfCfhs7IOS
+	2WogWnAgdEVHWghHUb802T58F4BO2vTGHLdD0uSU2y/73eGV4NZ0b+lUcyPqJvYxnDlX5qjLuNJ
+	mJhmQUPgdfoOzMA1mdsYIGEXLLSTAM0NoySgRE+sBZq27QtRPo+m5xQ8FRc9/Anir4QdHo8glWA
+	9N+W1xzL8qCexlfpN5p7ZQElUkrstH3NaQ=
+X-Received: by 2002:a17:907:1c22:b0:c26:1649:47a8 with SMTP id a640c23a62f3a-c26164956d1mr947596266b.30.1788860991058;
+        Tue, 08 Sep 2026 02:49:51 -0700 (PDT)
+Message-ID: <6d0a9922-a970-469c-b946-2f3c0deeb0e9@gmail.com>
+Date: Tue, 8 Sep 2026 11:49:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 17/39] xen/riscv: decouple INSN_PSEUDO_VS_* from the
- hypervisor's XLEN
+Subject: Re: [PATCH v2 18/39] xen/riscv: add guest page fault handling stub
 To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Cc: xen-devel@lists.xenproject.org,
  Romain Caritey <Romain.Caritey@microchip.com>,
@@ -109,123 +108,117 @@ Cc: xen-devel@lists.xenproject.org,
  Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <2a69992aa02ff114237ec27204cfac0f8278b1d6.1787838835.git.oleksii.kurochko@gmail.com>
- <1788796633.8631fc262581453bbf619ec5b2062170.1a07c9682ec000c4f3@vates.tech>
+ <42e37df518f1eda9579264b4bae9db3521e1042a.1787838835.git.oleksii.kurochko@gmail.com>
+ <1788796634.8631fc262581453bbf619ec5b2062170.1a07c9684ae000c4f3@vates.tech>
 Content-Language: en-US
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1788796633.8631fc262581453bbf619ec5b2062170.1a07c9682ec000c4f3@vates.tech>
+In-Reply-To: <1788796634.8631fc262581453bbf619ec5b2062170.1a07c9684ae000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1788860065-3BCD7034-BE982E63/10/73395122804
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1788860991-52331A5B-6D45A3EA/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 4721
+X-purgate-size: 4973
 
 
 
 On 9/7/26 5:57 PM, Baptiste Le Duc wrote:
->> htinst reports a pseudoinstruction when a guest page fault is taken on an
->> implicit memory access done for VS-stage address translation. Four such
->> values are defined, differing in the access type (read or write) and in the
->> access width: 4 bytes (0x2000/0x2020) or 8 bytes (0x3000/0x3020).
+>> Add a handler for guest page faults and hook it into the trap path,
+>> providing the trap-side entry point which will later feed the MMIO
+>> dispatch.
 >>
->> That width is the width of a VS-stage PTE, i.e. it follows the guest's
->> paging mode (4 bytes for Sv32, 8 bytes for Sv39 and wider) and has nothing
->> to do with the XLEN Xen itself is built for. Selecting just one pair with
->> where a guest running with VSXL=32 and Sv32 in vsatp produces the 4-byte
-> Sentence is broken. Guess you mean "Selecting just one pair based on Xen's XLEN misses the case where
-> …".
-
-Likely it is becuase of my low level English but it seems that original 
-version wast okay and what you added is just a part from prev. sentence 
-but I will add your suggestion for better clearness. Thanks for noticing 
-that!
-
-> 
->> forms. Such an htinst would not be recognized as a pseudoinstruction and the
->> fault would be mistaken for an ordinary MMIO trap: Xen would fetch and
->> decode whatever instruction sepc happens to point at (unrelated to the
->> access which faulted) and emulate it against a guest physical address
->> derived from htval, which for an implicit access holds the address of a
->> VS-stage PTE rather than of any access the guest performed.
+>> This will be used, for example, to trap accesses to APLIC registers so
+>> that a guest can initialize and drive an emulated interrupt controller.
 >>
->> Define all four values unconditionally instead, named after the access width
->> they encode rather than after the build's XLEN. On RV32 the 8-byte forms
->> simply never occur, so recognizing them costs nothing.
+>> Two of the situations handled here are already decided, as neither can
+>> ever be turned into an emulated access:
 >>
->> Dropping the ladder loses no build-time coverage: a build for an XLEN other
->> than 32 or 64 already fails on the equivalent ladders in asm/asm.h and
->> asm/config.h, so no replacement #error is needed here. Adding one keyed on
->> CONFIG_RISCV_* would in any case re-introduce exactly the conflation this
->> patch removes.
+>>   - A fault reported with a pseudoinstruction in htinst was taken on an
+>>     implicit access made for VS-stage address translation, so htval holds
+>>     the address of a VS-stage PTE rather than of anything the guest asked
+>>     for, and the guest physical address behind the original access is not
+>>     known. This is orthogonal to the cause and can accompany any of the
+>>     three, which is why it is checked first. scause keeps reporting the
+>>     type of the original access, and on bare hardware a PTE which cannot
+>>     be read raises an access fault of exactly that type, so reflect one
+>>     back to the guest.
 >>
->> This diverges from the imported version of riscv_encoding.h.
+>>   - A fetch fault means the guest tried to execute from a guest physical
+>>     address which is unmapped or which G-stage does not allow to be
+>>     executed. On bare hardware a fetch from physical memory which does
+>>     not exist, or which may not be executed, raises an instruction access
+>>     fault, so reflect one back too.
 >>
->> No functional change: the values have no user yet.
+>> Explicit loads and stores are where MMIO emulation will hook in.
+>>
+>> Neither of the two paths above consults the p2m first, and neither will
+>> the MMIO one: RISC-V has no populate-on-demand, no paging and no
+>> mem_access, so every guest mapping is established eagerly and a G-stage
+>> fault never denotes a mapping Xen could install to let the faulting
+>> access complete.
+>>
+>> Both of the helpers this leans on, resolve_faulting_gpa() and
+>> trap_redirect(), are BUG_ON() placeholders for now, so each of the three
+>> causes currently takes the host down rather than the domain. That is no
+>> worse than before this patch, where the same causes fell through to
+>> do_unexpected_trap() and die(). Implementing the helpers is left to
+>> later patches.
 >>
 >> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 >>
->> diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
->> index c63e5e3046..2d2e7e11b3 100644
->> --- a/xen/arch/riscv/include/asm/riscv_encoding.h
->> +++ b/xen/arch/riscv/include/asm/riscv_encoding.h
->> @@ -839,25 +839,17 @@
->>   #define INSN_MASK_FENCE_TSO		0xffffffff
->>   #define INSN_MATCH_FENCE_TSO		0x8330000f
->>   
->> -#if __riscv_xlen == 64
->> -
->>   /* 64-bit read for VS-stage address translation (RV64) */
->> -#define INSN_PSEUDO_VS_LOAD		0x00003000
->> +#define INSN_PSEUDO_VS_LOAD64		0x00003000
->>   
->>   /* 64-bit write for VS-stage address translation (RV64) */
->> -#define INSN_PSEUDO_VS_STORE	0x00003020
->> -
->> -#elif __riscv_xlen == 32
->> +#define INSN_PSEUDO_VS_STORE64		0x00003020
->>   
->>   /* 32-bit read for VS-stage address translation (RV32) */
->> -#define INSN_PSEUDO_VS_LOAD		0x00002000
->> +#define INSN_PSEUDO_VS_LOAD32		0x00002000
->>   
->>   /* 32-bit write for VS-stage address translation (RV32) */
->> -#define INSN_PSEUDO_VS_STORE	0x00002020
->> -
-> Whole point of patch is these no longer depend on build XLEN, yet
-> comments still say "(RV64)"/"(RV32)" which could be confusing. Maybe it
-> should be better to indicate, as the spec does, that RV32 values are
-> used when VSXLEN=32 (only sv32 paging mode) and RV64 values when
-> VSXLEN=64 (sv39+ paging modes).
 > 
+> I think the commit message it not very clear as it conflates two
+> different countable things (the 3 fault causes reported via scause vs.
+> the pseudoinstruction condition, which is orthogonal and can accompany
+> any of them), which makes "two situations decided" or "any of the three"
+> hard to follow on first read.
+> 
+> Here is a proposition with a split to distinguish fetch-fault and
+> pseudoinstruction cases into explicit bullets with their outcome stated
+> ("Decided here"), and added spec-mentioned conditions about the
+> pseudoinstruction's existence conditions:
+> ```
+>      Add a handler for guest page faults and hook it into the trap path,
+>      providing the trap-side entry point which will later feed the MMIO
+>      dispatch.
+> 
+>      This will be used, for example, to trap accesses to APLIC registers so
+>      that a guest can initialize and drive an emulated interrupt controller.
+> 
+>      A G-stage (stage-2) fault has one of three causes, reported via scause:
+> 
+>          - Fetch fault: guest tried to execute from a guest-physical address
+>          that is unmapped or that G-stage marks non-executable. Never
+>          emulatable (nothing to emulate a fetch into). On real hardware
+>          this raises an instruction access fault, so Xen reflects the same
+>          fault back to the guest. Decided here.
+> 
+>          - Load fault / Store fault: left undecided by this patch, this is
+>          where MMIO emulation will hook in later.
+> 
+>      Any of these three faults can instead be reported via a pseudoinstruction
+>      in htinst, when both:
+> 
+>          (a) the fault occurred on an implicit access Xen made to walk a
+>              VS-stage page table, and
+>          (b) htval holds a nonzero value: the guest-physical address of that
+>              VS-stage PTE, not of the guest's original access.
+> 
+>      However, none of these paths consult the p2m first, and the future MMIO path
+>      won't either: RISC-V has no populate-on-demand, no paging, and no
+>      mem_access, so every guest mapping is established eagerly. A G-stage
+>      fault therefore never indicates a mapping Xen could lazily resolve to
+>      let the access complete.
+> 
+>      Both helpers this handler relies on, resolve_faulting_gpa() and
+>      trap_redirect(), are BUG_ON() placeholders for now, so all three causes
+>      currently take the host down instead of just the guest. This is no worse
+>      than before this patch, where these traps fell through to
+>      do_unexpected_trap() and die().
+> ```
 
-Could you please clarify to me what in the spec it is?
+I will apply your suggestion.
 
-This comments are just copy from the spec:
-
-Table 39. Special pseudoinstruction values for guest-page faults. The 
-RV32 values are used when VSXLEN=32, and the RV64 values when VSXLEN=64.
-Value           Meaning
-0x00002000      32-bit read for VS-stage address translation (RV32)
-0x00002020      32-bit write for VS-stage address translation (RV32)
-
-Value           Meaning
-0x00003000      64-bit read for VS-stage address translation (RV64)
-0x00003020      64-bit write for VS-stage address translation (RV64)
-
-So the comments are just copy of "Meaning" column from the spec.
-
-And I think that Meaning column is fine here as we could have a case of 
-when hypervisor has XLEN=64 but guests could be on it RV32 and RV64 and 
-if a guest is RV32 (what means VSXLEN=32) then the comment above 
-defintion mean that we hav 32-bit read/write VS-stage address 
-translation for (RV32) guest and the similar is for RV64.
-
-Do I miss something? Is a comments make more sense now or I have to 
-still update them in some way?
-
-Thanks!
+Thanks.
 
 ~ Oleksii
-
-
 
