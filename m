@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA610C79F99
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 13:01:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1411983.1642456 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 933C6C79F82
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 13:02:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1411986.1642463 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3vS7-0005fZ-MB; Tue, 08 Sep 2026 13:01:31 +0000
+	id 1x3vSW-000627-08; Tue, 08 Sep 2026 13:01:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1411983.1642456; Tue, 08 Sep 2026 13:01:31 +0000
+Received: by outflank-mailman (output) from mailman id 1411986.1642463; Tue, 08 Sep 2026 13:01:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3vS7-0005fS-Ie; Tue, 08 Sep 2026 13:01:31 +0000
-Received: by outflank-mailman (input) for mailman id 1411983;
- Tue, 08 Sep 2026 13:01:30 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x3vSV-000620-Tj; Tue, 08 Sep 2026 13:01:55 +0000
+Received: by outflank-mailman (input) for mailman id 1411986;
+ Tue, 08 Sep 2026 13:01:54 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x3vS6-0005fK-JV
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 13:01:30 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x3vSU-00061b-Eq
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 13:01:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3vS6-00Btv0-0D
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 15:01:30 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x3vST-00DNLB-Rr
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 15:01:53 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa00724-8faa-0a2a0a5109dd-0a2a450ae664-26
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:01:29 +0200
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa00737-bab6-0a2a0a5309dd-0a2a450be5a4-12
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:01:53 +0200
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa00729-f2d2-0a2a450a0019-d155dd2be8da-3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:01:29 +0200
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-482e4998d28so3686925f8f.2
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 06:01:29 -0700 (PDT)
+ id 6aa00741-b7e8-0a2a450b0019-d155dd2cd582-3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:01:53 +0200
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-482f2ee53e7so3444471f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 06:01:53 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-485883a9b49sm30584345f8f.17.2026.09.08.06.01.28
+ ffacd0b85a97d-485883acd33sm35297675f8f.18.2026.09.08.06.01.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Sep 2026 06:01:28 -0700 (PDT)
+ Tue, 08 Sep 2026 06:01:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,55 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788872489; x=1789477289; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788872513; x=1789477313; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=wCtbma6yni6NMPug+FRpjh+vc4wJezGbeyKqAGWmcyU=;
-        b=NqGiAJ3K27SAv1I8ywaqWfqMw0PM5zWq7t3hCRS5WEH1MYW8mZo1Tm3OzNgMuQJUu6
-         Ww4A7d6v2NuoPKRHXZxRmEjS2t+rpIbmDSewsiM5ka2eTkQun08bewwymYNMuvPFr2PX
-         SPJh0L1r2+wKxCo5qLzHTAB1LLuHOPOi7Vrj5egOcPe451KuUmM5dTv7QkxemZ24Inys
-         tq3UNLQwegQSqXXUCaCrYhMZP4s9IQPPRTETEmXpUxM7FCn9ajuwRZAb/bjEf+cTJ+cD
-         tlk+OEg/9VUj0sLPUNZnffrUEbEPwf/t4DLqtenBosidl4Qltctvp0ggqWftrd7Fk43/
-         1K4g==
+        bh=lvz8MuJ79mtzbquJ0FCpYwwGJ4AQQZ5W74E+80dtosw=;
+        b=XZ40PVwrt54TAzK9r8GF2EStGV0rkTsXvIChD3Ajv9PJLYxb/lornSZxGcES828LE+
+         1yUmi6RntQ87WEXoC17bUQTngweYGKMN8gEmmzagSrO1TUoGkVBCIEUMGXQ0nS0v8k8M
+         Ucb7k7UR9OveY4qFc8T0YBu8lKCVD3dvjN67dbSxbJfhp9LbWs0enOKZz97qH727bk/I
+         ZA0bAcSJtC/vNfAbeGdFvGMJV8pv1v4UQx+zzRPWyQhI9zcRyhn3/AmAwVhgCgEpJo7k
+         7Q/ehlqRKuzklyJqq3bf1PnbmxWvTtNsSmXT4jtWhjAcKO/H2wxG0OsLgY7r0nfPdugy
+         jESA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788872489; x=1789477289;
+        d=1e100.net; s=20251104; t=1788872513; x=1789477313;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=wCtbma6yni6NMPug+FRpjh+vc4wJezGbeyKqAGWmcyU=;
-        b=n4MUSUDq/1wRtVav25HBsSS/xCtSJ/SbDNNBNEnG2WbtgaqlFcQAum9njUERyERwvw
-         WD90uJxBaryklJzwnRVSALi8ONUAXZ8zHdtL8f1SLhFrsFPwlu28R8lQvtHlmQQNrgXx
-         826pr9nqQys8eaWRPA+FfpfMNXg+Lc/Gp/HWtelW/++keg9+1nWGzjJu47/OytGLg06J
-         Qg5Nrh+3SsFemP8cReWVv4KjvifmzhWl91hyBAbTM883GRWHyLXiidbg8+MosLU2R9xW
-         RyCXVmjLBptaVH+xZa0AQyOkYCywV58VdN8c72jjNm3KdH+nuu4by7n/KE12Gk+qlKBG
-         wIsw==
-X-Gm-Message-State: AFuF++luu+mKhsnF8M2vtNekcPwUTMRqgI5CxKUYj2fqwxOTdilxziEj
-	/VMTsZQAG70us1byARUJL+by6bhYmu0gMvMQJ8natKxpmwMf9mR0uG28exxmJYgFT/1J8h/axY0
-	e7uNRyg==
-X-Gm-Gg: AYBFou2C6vQt5ebHlL4R2iU42rercu4OxnryG8PElwW1Z2UoNPL8is4Yjl+bazFyhWE
-	1pXbCHLqjmhtXGLAB5qOlX5RMu+rKGkvvBrdfLAxH7kAc4M8MS8GpuORiuasshP+9AsG0l6tFFq
-	xCt0TQeOh2Jbm+f0+rixm+Bcpocl27yXjTuoLkS2CXOaHNhQYtvS2zEMb83gvQ2DDhYDBifNiDQ
-	Pu/xnIZuFgPOHSTi/XgFZpIOqsnkcuYnDsmK+e/zBgIoq1yLxT/FijmSsySPY3lOAvLTJ7wKLnf
-	JeACdaNW/HzWkRJTY0h11OqNmp/hGbqpdMLU37bgLEV2jr1qWe2wUa6/TO6JM1ZtkmRxbB7iHBl
-	l0J2IN8VSCarOjtP7EWq92OnsVTGOLbXrdJfoB5T2Ws23UXVlsNOTxPrKBWnzq3uxZ8/FOzjnx/
-	bsrJ93K7FK91R/Q76u5ACMNBIPa6ICuMnLVoHBHobVMu6P9ETUCBw+NvVHw6y1VjJkqgvD2r0ey
-	nwQP7TBcGAcBKeDCbthH2e9vFjjYKZozLKk5yz9NBf0rSedJnmjmQ==
-X-Received: by 2002:a05:6000:2381:b0:485:8c16:a353 with SMTP id ffacd0b85a97d-4858c16a639mr25518802f8f.43.1788872489153;
-        Tue, 08 Sep 2026 06:01:29 -0700 (PDT)
-Message-ID: <7618c144-2f4a-483c-b078-0d9100b9f251@suse.com>
-Date: Tue, 8 Sep 2026 15:01:27 +0200
+        bh=lvz8MuJ79mtzbquJ0FCpYwwGJ4AQQZ5W74E+80dtosw=;
+        b=TFjRQ4yUjbvibogYgghShOetjsPBIO2e8J4ZH2GMc+2y8ML9gFzGEOUuv7oi43gLiT
+         5CJChw8vs+H27aBgFC/wfj0mDWf8cSWxjY6BQUjQx26Xur+JXmbJBkqIoprUjbY0hyMV
+         rZ/kFMF39BTKd6MQUVrORVc7k+bTtu1lOq9YvBTrltfUCoWAQFLpbrQzSMhDIimU2pCj
+         6olawee1wYRjA6qe3rxOSd6Ptv2VF8cQDgwezhmv7eZW8WaOD+2+ZsfTQ24yFouzLqzr
+         WlS9bbdgPwIenwLZp1kw+YNGS4YTm5lxMCUJSVtXs6muxDkE9XrXuVCWKv0PKbwg6d50
+         a1Wg==
+X-Gm-Message-State: AFuF++m/fy2ZEjLx7PXFlorLS34Ixnk6YU5Mqt4gkJL5SoNJETONDUzz
+	P0++OuNWynezLfd1Sp6AtFEGVrIQ12mHxiWPaaY4ki5JGz7X6+fvGXIhcF0+snaUcc3Ol4M7k5D
+	JfLTSew==
+X-Gm-Gg: AYBFou2sTmGfnd9bD7X3Jc8y1ZFHJF7Lwy/XT+XgrFWWzt/V3DOOUQ6wwiBMG0VGeeT
+	IdZ/UbC7H953Ejlkm6MVn5gyBuwNMtFUJye7zOlxBScGQJ51fS97+LVjvQcKuYtfbKEM3v4q9V2
+	bmzNFlUNM/zvE/t5uyyvQFO5G7uL/gD7ovnZe8MLFSE4BHUc1ENPsUGM+uRp2hKsRMf98/b6AKs
+	+zy6UUm1LHfruM5ycUtUKqOgFBy9FRt+G94kQMp1EU/O8+jOfUBXz5PpR6eimD3yNJChsgk/VRX
+	tWzsLe/tycO6JwHQO0DwlZIgwUnBu8gmK2fz+MgVACGE9Ihgc60qXynvtuvSmDxkpZAxyhAlIQD
+	KcQL01MPdJlJyqcQXXqjrfW3s2LFROxhDPJIBCIoJ1bybq7rr+HV8CAsCIVlqh2Un/rD0W08sFV
+	GtPQrDQl+hIubepbJQhJAcEYwuhAJXWCTqf26wzf+4rFTIkBb800XWZmuCCd8Yb6gFcD7sHapIq
+	OAevWEa2LrWefejnYJAP3zgFrpcuJrQ5gLh7M/zVaUPuvMeNHuH
+X-Received: by 2002:adf:fd81:0:b0:482:fbb0:a262 with SMTP id ffacd0b85a97d-485872abe78mr23925428f8f.20.1788872513184;
+        Tue, 08 Sep 2026 06:01:53 -0700 (PDT)
+Message-ID: <92b0a72a-44df-424f-acbe-58d7167f1c4d@suse.com>
+Date: Tue, 8 Sep 2026 15:01:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 1/6] x86/pass-through: defer event unlock in
- pt_irq_create_bind()
+Subject: [PATCH 2/6] x86/pass-through: no locking around
+ pt_irq_{create,destroy}_bind()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
+ <roger@xenproject.org>, Julian Vetter <julian.vetter@vates.tech>
 References: <eb5925e4-2409-452c-8768-4ca6717eb156@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -132,95 +132,59 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <eb5925e4-2409-452c-8768-4ca6717eb156@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1788872489-50CCBCFC-FDC2351B/0/0
+X-purgate-ID: tlsNG-42698a/1788872513-196C29EA-04DCD6D1/0/0
 X-purgate-type: clean
-X-purgate-size: 3280
+X-purgate-size: 1703
 
-The radix tree holding struct pirq * as obtained by pirq_get_info() is
-protected by the domain's event lock. The result ("info") and the derived
-"pirq_dpci" therefore may not be de-referenced past the dropping of that
-lock. Moving the unlock down is safe, but perhaps not obviously so:
-- vector_hashing_dest() does a memory allocation, but core event channel
-  code does so too while holding the lock; the call to
-  vlapic_match_dest() doesn't involve any further locking,
-- hvm_migrate_pirq() operates on the corresponding IRQ descriptor, where
-  obtaining of its lock is of course fine (those locks always nest inside
-  the event lock),
-- {hvm,vmx}_pi_update_irte() are very similar to hvm_migrate_pirq()
-  locking-wise,
-- the locking around guest_mask_msi_irq() is the same as in the earlier
-  two bullet points.
+The questionable use of pcidevs_lock() there was discussed more than once.
+It really is pointless: The functions synchronize primarily via the per-
+domain event lock. They also may already be called with the global PCI
+devices lock not held: See hvm/vmsi.c:vpci_msi_update(),
+hvm/vmsi.c:vpci_msi_arch_update(), and hvm/vmsi.c:vpci_msi_disable().
 
-As long as the PCI-devs lock is held around both
-pt_irq_{create,destroy}_bind(), this is only a latent issue.
-
-Fixes: 35a1caf8b6b5 ("pass-through: update IRTE according to guest interrupt config changes")
-Fixes: 1066331913c9 ("passthrough: don't migrate pirq when it is delivered through VT-d PI")
-Fixes: 782cf8ba4678 ("pass-through: adjust pIRQ migration")
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-The last two unlocks could be done a little more efficiently, but then
-also in a little less straightforward a way:
 
-        if ( pt_irq_bind->u.msi.gflags & XEN_DOMCTL_VMSI_X86_UNMASKED )
-        {
-            unsigned long flags;
-            struct irq_desc *desc = pirq_spin_lock_irq_desc(info, &flags);
-
-            write_unlock(&d->event_lock);
-
-            if ( !desc )
-            {
-                pt_irq_destroy_bind(d, pt_irq_bind);
-                return -EINVAL;
-            }
-
-            guest_mask_msi_irq(desc, false);
-            spin_unlock_irqrestore(&desc->lock, flags);
-        }
-        else
-            write_unlock(&d->event_lock);
-
-        break;
-
-Seeing that the IRQ descriptor lock is taken up to three times in a row,
-I wonder whether we shouldn't consolidate this (by obtaining desc once and
-then passing it into hvm_migrate_pirq() (or a suitable new sibling
-thereof) and hvm_pi_update_irte()).
-
---- a/xen/drivers/passthrough/x86/hvm.c
-+++ b/xen/drivers/passthrough/x86/hvm.c
-@@ -371,7 +371,6 @@ int pt_irq_create_bind(
- 
-         dest_vcpu_id = hvm_girq_dest_2_vcpu_id(d, dest, dest_mode);
-         pirq_dpci->gmsi.dest_vcpu_id = dest_vcpu_id;
--        write_unlock(&d->event_lock);
- 
-         pirq_dpci->gmsi.posted = false;
-         vcpu = (dest_vcpu_id >= 0) ? d->vcpu[dest_vcpu_id] : NULL;
-@@ -393,6 +392,7 @@ int pt_irq_create_bind(
- 
-             if ( rc )
-             {
-+                write_unlock(&d->event_lock);
-                 pt_irq_destroy_bind(d, pt_irq_bind);
-                 return rc;
-             }
-@@ -405,6 +405,7 @@ int pt_irq_create_bind(
- 
-             if ( !desc )
-             {
-+                write_unlock(&d->event_lock);
-                 pt_irq_destroy_bind(d, pt_irq_bind);
-                 return -EINVAL;
-             }
-@@ -413,6 +414,7 @@ int pt_irq_create_bind(
-             spin_unlock_irqrestore(&desc->lock, flags);
-         }
- 
-+        write_unlock(&d->event_lock);
-         break;
+--- a/xen/arch/x86/domctl.c
++++ b/xen/arch/x86/domctl.c
+@@ -636,10 +636,7 @@ long arch_do_domctl(
+             ret = -EPERM;
+         else if ( is_iommu_enabled(d) )
+         {
+-            pcidevs_lock();
+             ret = pt_irq_create_bind(d, bind);
+-            pcidevs_unlock();
+-
+             if ( ret < 0 )
+                 printk(XENLOG_G_ERR "pt_irq_create_bind failed (%ld) for %pd\n",
+                        ret, d);
+@@ -670,10 +667,7 @@ long arch_do_domctl(
+             ret = -EPERM;
+         else if ( is_iommu_enabled(d) )
+         {
+-            pcidevs_lock();
+             ret = pt_irq_destroy_bind(d, bind);
+-            pcidevs_unlock();
+-
+             if ( ret < 0 )
+                 printk(XENLOG_G_ERR "pt_irq_destroy_bind failed (%ld) for %pd\n",
+                        ret, d);
+--- a/xen/arch/x86/hvm/vioapic.c
++++ b/xen/arch/x86/hvm/vioapic.c
+@@ -197,7 +197,6 @@ static int vioapic_hwdom_map_gsi(unsigne
+         return ret;
      }
  
+-    pcidevs_lock();
+     ret = pt_irq_create_bind(currd, &pt_irq_bind);
+     if ( ret )
+     {
+@@ -207,7 +206,6 @@ static int vioapic_hwdom_map_gsi(unsigne
+         unmap_domain_pirq(currd, pirq);
+         write_unlock(&currd->event_lock);
+     }
+-    pcidevs_unlock();
+ 
+     return ret;
+ }
 
 
