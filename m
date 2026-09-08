@@ -4,46 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3AA3BC79F82
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 15:45:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1412231.1642771 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED78BC79F82
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 15:47:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1412240.1642780 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3y0H-0005GW-K6; Tue, 08 Sep 2026 15:44:57 +0000
+	id 1x3y2v-0005qj-3w; Tue, 08 Sep 2026 15:47:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1412231.1642771; Tue, 08 Sep 2026 15:44:57 +0000
+Received: by outflank-mailman (output) from mailman id 1412240.1642780; Tue, 08 Sep 2026 15:47:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3y0H-0005GP-HD; Tue, 08 Sep 2026 15:44:57 +0000
-Received: by outflank-mailman (input) for mailman id 1412231;
- Tue, 08 Sep 2026 15:44:56 +0000
+	id 1x3y2v-0005qc-19; Tue, 08 Sep 2026 15:47:41 +0000
+Received: by outflank-mailman (input) for mailman id 1412240;
+ Tue, 08 Sep 2026 15:47:39 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ziy@nvidia.com>) id 1x3y0G-0005GH-8q
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 15:44:56 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a081b40589000c4f3@swg.vates.tech>)
+ id 1x3y2t-0005qW-7h
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 15:47:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3y0F-004Xzh-Lf
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 17:44:55 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ziy@nvidia.com>)
- id 6aa02d72-2eae-0a2a0a5409dd-0a2a4507b41a-10
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 17:44:55 +0200
-Received: from [52.101.52.42]
- (helo=BL2PR02CU003.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ziy@nvidia.com>)
- id 6aa02d76-b4ea-0a2a45070019-3465342a76b5-3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 17:44:55 +0200
-Received: from IA0PR12MB8374.namprd12.prod.outlook.com (2603:10b6:208:40e::7)
- by DSSPR12MB999211.namprd12.prod.outlook.com (2603:10b6:8:375::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.7; Tue, 8 Sep 2026
- 15:44:48 +0000
-Received: from IA0PR12MB8374.namprd12.prod.outlook.com
- ([fe80::d85f:4c87:ae84:3f16]) by IA0PR12MB8374.namprd12.prod.outlook.com
- ([fe80::d85f:4c87:ae84:3f16%5]) with mapi id 15.21.0406.005; Tue, 8 Sep 2026
- 15:44:48 +0000
+ id 1x3y2s-004YPJ-Cn
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 17:47:38 +0200
+Received: from [10.42.69.5] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a081b40589000c4f3@swg.vates.tech>)
+ id 6aa02e17-bab6-0a2a0a5309dd-0a2a4505b926-6
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 17:47:38 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a081b40589000c4f3@swg.vates.tech>)
+ id 6aa02e19-4cb1-0a2a45050019-b9ff1c229485-3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 17:47:38 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a081b40589000c4f3.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Tue, 08 Sep 2026 15:47:33 +0000
+Received: from [192.168.1.37] (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
+ [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 0EF7E81E3D;
+ Tue,  8 Sep 2026 17:47:33 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,179 +58,111 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=selector2 header.d=Nvidia.com header.i="@Nvidia.com"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=XNXTeJn3wAg9WXnadc23COLow0t+fVtyrSLdBMioSg5aXICV5bD0aB1n3v39op2ITN6V93hppovIIPHIo5pRlumrqSHEI+ea/kevee/IT8UhCPUEsHmKkJ3mldz8BUGhQFkOKIhnuU+5dzAeMHXChSYWnx1wzVI8YtvxQXedsdGOLpMznnnFdC3PSbxZTDnbT0q2phGAf4VOiNRHMUsx0yfwwccG4NMp+sP6YPQhl7nTlH7z/6gBnKLwHt9JDV2cRwt4PUajH8ySLywTgqKbCK/CyUDqHyr4ueNvyUHJ0r4g5oos9Zhm3Wzk/L32ldFSKpDkNo6kB5sP36NhVPkBJg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wUonv+1fXdqRVR64AjAKSh8fzS4K5yeQQGpHI4+sTZ8=;
- b=PikpR45oEYt7MOJrMl878COZoD2IIZKHqiCAwU58mVam3iieo2TBvGtCh/j9um5cL1A2iMlsqPQgLVZwEQua7eA9S9omvpF6t1V3OCx4Mgztnm7AaLNbw0BfjhZsaAYaFADhkaZyeLC+6n4/Nm3qCyw3ewxvpFS8Oz0+LncaaO14l3spbkJWmM/tFP9jCHoJ8J8O1Lvi0ZWDc4L54MCSLAA/qE//ge7iFLRVkV+LiH/QL129zXUPD221WRuRtjvV83Q1RlbYUYJIrbBqsSV+6srlsuFiVfETaAS5WS6Pywl0QJNH9gYXo0ENyLzrZ0NpVt7s7JcTaFMcm2qZtma4ZA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wUonv+1fXdqRVR64AjAKSh8fzS4K5yeQQGpHI4+sTZ8=;
- b=VQx6+JOEraj6F3kNb1lGvXWTN1o/WItmH/zgpXqIqgTvd/xwyfGVpRMN0IejkRjKj63anvIeHtak/4zmN8cbKRHU8FWG6ZPn4b95MnE5BZT44qeeX5g0aRmbUs9Az8hhZVOjxpCbmIS1diERpW2YQoiPHHeE/rgLtMuqFwL1aILcIyVB0p8kP45bWm9efkuBk8zAg2gZkv5JVszC6sGzooeOg6mt9Uuo96TjleJWDGc9uowAsXgQdIPRbPTbTNelpaAMktdLfNTvkwwDGZt4ki+hBH4p8/+d3JcF9iMclf11k/r9zoCPHrG6ydqkAxF6AB5rHTLHQU7AP7zyZ0FTfQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 08 Sep 2026 11:44:46 -0400
-Message-Id: <DLA1UH74Q0WX.1D02BUATXHDG6@nvidia.com>
-From: "Zi Yan" <ziy@nvidia.com>
-Subject: Re: [PATCH v3 03/14] xen/grant-table: stop setting PG_private on
- pages for grant mapping
-Cc: <linux-mm@kvack.org>, <linux-kernel@vger.kernel.org>, "Juergen Gross"
- <jgross@suse.com>, "Stefano Stabellini" <sstabellini@kernel.org>,
- "Oleksandr Tyshchenko" <oleksandr_tyshchenko@epam.com>,
- <xen-devel@lists.xenproject.org>
-To: "David Hildenbrand (Arm)" <david@kernel.org>, "Matthew Wilcox (Oracle)"
- <willy@infradead.org>, "Andrew Morton" <akpm@linux-foundation.org>, "Muchun
- Song" <muchun.song@linux.dev>, "Lorenzo Stoakes" <ljs@kernel.org>, "Liam R.
- Howlett" <liam@infradead.org>, "Vlastimil Babka" <vbabka@kernel.org>, "Mike
- Rapoport" <rppt@kernel.org>, "Suren Baghdasaryan" <surenb@google.com>,
- "Michal Hocko" <mhocko@suse.com>, "Baolin Wang"
- <baolin.wang@linux.alibaba.com>, "Nico Pache" <nico.pache@linux.dev>, "Ryan
- Roberts" <ryan.roberts@arm.com>, "Dev Jain" <dev.jain@arm.com>, "Barry
- Song" <baohua@kernel.org>, "Lance Yang" <lance.yang@linux.dev>, "Usama
- Arif" <usama.arif@linux.dev>, "Gregory Price" <gourry@gourry.net>, "Ying
- Huang" <ying.huang@linux.alibaba.com>, "Alistair Popple"
- <apopple@nvidia.com>, "Johannes Weiner" <hannes@cmpxchg.org>, "Qi Zheng"
- <qi.zheng@linux.dev>, "Shakeel Butt" <shakeel.butt@linux.dev>, "Kairui
- Song" <kasong@tencent.com>
-X-Mailer: aerc 0.22.0
-References: <20260907-remove-pg_private-v3-0-6ae22f9d9272@nvidia.com>
- <20260907-remove-pg_private-v3-3-6ae22f9d9272@nvidia.com>
- <fb8ab0ac-87b8-44ea-87d2-006a7a7569f1@kernel.org>
-In-Reply-To: <fb8ab0ac-87b8-44ea-87d2-006a7a7569f1@kernel.org>
-X-ClientProxiedBy: YQBPR0101CA0188.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:c01:f::31) To IA0PR12MB8374.namprd12.prod.outlook.com
- (2603:10b6:208:40e::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=iobqbY4hXcgl0TKnlbtRriDRQECHZAFhR21sU2egqo8=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=M77+4bfeJKBHs1i4JrFEU/y33odOEEHf+CVU+JKewss7AsLK65CkHDNZstBW89t4A0R9rjXP/
+ xWzNE2OEudGUT5g606CpxC8wBW5z+38l/r+lQ1I3JW9rTi85m2yYpoKp5gADrHpFfyXXzAypaBX
+ Vt2Xbb0wYFMl2M1A6dCJtnnLQVvK1J2LRlpnxr4CnTOVNEJ5HIMbwZDgOyMF/wXAWFQTipAFiT/
+ l1YNtRDTpqfLUHQeJ+kJ7Jt1U6RhKTiwhUxgVCg5RsD2SEx0IB+pYLwCLuJuJxL/T1XlBAouu+g
+ DaVblQ/795DA2a71lf9NTxcj7+NBLAFOr42lwqq08FtQ==
+X-Zone-Loop: 970be37ace34271542d862f43924bebadcc113fba6b1
+x-campaign-type: default
+x-transaction-id: a4c5344e-8a63-4b2c-a7a8-2ba981e482a5
+x-swg-uid: 01-8ca27ab0-8393-4503-b7a4-20a5be144845
+X-Mailer: Sweego
+Message-ID:
+ <1788882453.8631fc262581453bbf619ec5b2062170.1a081b40589000c4f3@vates.tech>
+x-swg-bid: 1788882453.8631fc262581453bbf619ec5b2062170.1a081b40589000c4f3
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA0PR12MB8374:EE_|DSSPR12MB999211:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2942c721-1277-418e-bc0f-08df0dc01d2a
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|376014|23010399003|7416014|1800799024|921020|18002099003|22082099003|56012099006|4143699003|11063799006|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	XaYRZ3hMQP1dy8zHLVQuJFN5za1QToGQt9Np4pUCVCDk0m5zU5/n9F7pr0ubBVv20NDKcCih2Whe8JgqBx+5Ca5Q747AsQ5Lv38E96I82nShv7lgit+PCqqwNXuDrCm4aaZvCrplHUZjpp1SmNciGZvIftAkkXsg5Yh5IY8/MrwlIvsWHVmcm8mQxJnOPceQYiJxM/03zdLcdcv/At02p7ThuMRAHUEe566VIP/OcD++mMgGnHLJ7ixzSXCnt6Jl5xxJw9PoUiDw8vZYAVvRuo7SJOmjRR6hcOqKg7IOMbo2ZvRy1eJxYTaCY43yeaQuhbvbKoUKCQsxRsATmIGRsUsgtGqImuf4v23nNxoj7h/GPjSvL3ejGU0QeuQdXCMGmT6GjVMh8K/Pi10q34gW/yghJU/wBuhaMrEATFRoLtJ+l9qPEnTQwjErQT8KkkvDOja6zS3h25UELh4VCZVwg3D3ndPYJN7gBt0a8lUJ7NGItcGExgsRAcMpSkBMcKVV62FCDJnK//N4c0VMsnBHcvsLygFdSHc0CYpLZVPosIaHl/mgM0ET4wh/DmPS/6UJsX8HhgLnGH38TnO+NL6eusjsHFYnjWj+qqtveTG+gPhI/tnqsUIMa1c+mWhOAcDwn0JCE5clzRqvJjqm30WObf813onLye+4tPFXdlxaQLJ8yiwcTxX1N2aQfHLYfuvS1r1DESH47op/YTAN3zQl3g==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR12MB8374.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(23010399003)(7416014)(1800799024)(921020)(18002099003)(22082099003)(56012099006)(4143699003)(11063799006)(10067099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?bG1QZHNEaEpGdWJNK3ZaZXhKbFFSQzdXak1CdUJYZkw1VnQwWlN4aWFGemxJ?=
- =?utf-8?B?MjlpUmJVeWVjRFpaYXpWUVAyQkFGMW8xR3pDRGtxY0ErcFVwazhlZXZSWG9M?=
- =?utf-8?B?bXVNUnBsUURZZy96QnY1YXpVVlJ0YitXaEhwL3NNTEt2KzlWOEZ5S1Z4WDhZ?=
- =?utf-8?B?SzNsNVBYYlF0REpXOVdpTjQ0R3dXOFFLNVp2ODlHT1BBT1JwT2U5TDBhMVBw?=
- =?utf-8?B?alcrUzVaWUlHRVN1MkxaWWNCOEN1VlQ2Vy8zR25EVkkvQ0FROUVZM3hZaVVx?=
- =?utf-8?B?bEcxeUphc05SYXdML0tGTVl0ZFJDMWxJWm95UWNxWk5ZR3dqTXBXZ0hvdWwy?=
- =?utf-8?B?bk9VNGpDbzV4SzZMakR3UFlDK0dURVNVTlUxMmtOUFE1RHJ1ejc3SXBvNXZ4?=
- =?utf-8?B?WWxvWUR4S0RuMjZtTlNoVnBHQVJ2RWJ1aC9udjZNRmhOcXF2K0lpTGUxRFo2?=
- =?utf-8?B?NTJmVzhoN2ZoS2IzOCsySlpCQVlVbFhsTGVXWDV1dUZTMEtoYWllSXI5cXdy?=
- =?utf-8?B?cmlOcHVPcEFkNXJpQklVeXNoK2dPK0E4SWEwMTllTzRoa0Zwb1JTcDVEa1kv?=
- =?utf-8?B?ZmNGTTF3TzgwVGRVd3hQMWZsMVRhbmp1S1lwVTJqWllucU8vL1ErOVpXV1dl?=
- =?utf-8?B?OE5adjcwS0xJbVp3a002aGJJMnNjNmtxbXN1NUhMVmlERDRaaFlubFY1Y0ZC?=
- =?utf-8?B?Y0xOU044MmxEdXdoVzQ2WHBYRXhMbWVENU4wajEvNkJrWkpLY0t3bkNsbnkr?=
- =?utf-8?B?eUMxZkY1Y0pRODJOUHUxK0RXbm00M05TaGIyVGZteDBBR0tKejliai9VeW5x?=
- =?utf-8?B?b3ZBczlUMU9TNmxBUmFveElEY3JITXhTRDJTYkdVMzdSZWNPdGV5cVVqZ2pQ?=
- =?utf-8?B?Vis5UHRvN3U4U2Z3OXNiRWZVdVIxL216QllOb0d6YjFmcXpHcW0zMWZ1Mytv?=
- =?utf-8?B?RW0raURBYWFXamNKK3BDVzlCalFIaW5tQk45cHZzK1VXSFRQTkUvajBPUGZj?=
- =?utf-8?B?VkxrWHNmMVVJcjZ3cUMwcFZtWmdtaUJud1hxdTlhMWtIM2lhZVpxU0R4QnZu?=
- =?utf-8?B?Mi9NQlR2elpPTnZIa1VuTWp6N1FyYUU5SW5tUERYOFRkMStmb3NIcGRVMHhC?=
- =?utf-8?B?NVJ2NFV1aEZNK2VzeGhHdUJjeDZrRUIyQ0hCV2l6VEEvbTBrWkxxdkh4MUpO?=
- =?utf-8?B?NWw2QWp5RnZvN0x4V1lKTHUzenpzbkpTK0MzbHQwYVU3dFBZcTRsZzNCNk02?=
- =?utf-8?B?UHBqS0k4cGFvbTVWc2k0TjhUOXM1RGVkeDhQdklWK2VsR0dnRG1WZEFTM1p0?=
- =?utf-8?B?WThIVnhwOVNDcFVPeER2dWtyWlE2QnNaRi9INWVMSVlTUkNwYU9DTDR4cTIx?=
- =?utf-8?B?Z1o4Y042YUFEMGVVeWg2dzJHZWcvazVhM1JweTlsRWVtT2dCT0ZFYTY5aXJ4?=
- =?utf-8?B?alNqMXJUbVZYQmx4VVBhZGl3Rjg5aEZaTnRTdG4vMFRiamtxMnhUNmsrVlBv?=
- =?utf-8?B?M2F6NVdjdGFqWTRBaGZnTy9EYXhEWnY5allHWUlqR3pyTjlQMHc3SUJvc21l?=
- =?utf-8?B?RzZjdzIyVUFEZ05MZmcvdVBtbVErS0ZINGtFZGsybEgxWkVGeHFJK0NhaGIy?=
- =?utf-8?B?cWsySmNPaHdCOUFTbC9jU1FhcVRlaG5Pc3l2Nk5NZngwY2xvY0VqbXoyMFdS?=
- =?utf-8?B?REFSbU9YS2pia256amJJY3JXTzg1U1FhQmJWOXFvT2ZvUU1XZjlNNjUvVXR2?=
- =?utf-8?B?a2lGVTJQODJudUJTZFRPMHdNaC9EWWxJQ0NuUk9UZXF5aXhIc2NzVG5wekh5?=
- =?utf-8?B?b2plSjRMQlAwVWllS1RId1AxR3M4K1RBWWRrWm1td3ZrQzZUd0pCSlF5dElj?=
- =?utf-8?B?ekVtTENtdUtiYmNCcWdXSG9iaExoS0VZUGttODIyc3FWR2s5Ylp4cUZQLzR0?=
- =?utf-8?B?T3Y4em02aXNGcUhWMTcwYXhiYkhsNWVhZTJWSU1VL0hGS3ZSUXcvZjFjMnVq?=
- =?utf-8?B?ZmU2SFd2NXdMRS9VdkxNRzFxOEN1TXdFWjFOcXdRamQxZGM4Vk1QQkprb21u?=
- =?utf-8?B?Vi8wSllnRmw4Qk9DN3RnSGRDQU9QOXpDd2E3YVV5bFp0Zk5rdmRrTHowdmR6?=
- =?utf-8?B?cHdEUDlIZ2IrVVM0R09SN29kTWx6N0tMa1VYcHJDVldkV3RTVmlkMmtrNUFa?=
- =?utf-8?B?cTU0SVE2bnlvMnBMNjlVMUNUZm5sRzZIKzN6QklsR25Md2RocjcwZ1RpOW83?=
- =?utf-8?B?K3V0YWxPZ0dkdmxwNDUwZEJLT2lnZHFtd2liTnYxVndtRk5pUnp3Y0JJVHlz?=
- =?utf-8?Q?c0ed76aK3anHzx1UPS?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2942c721-1277-418e-bc0f-08df0dc01d2a
-X-MS-Exchange-CrossTenant-AuthSource: IA0PR12MB8374.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2026 15:44:48.5324
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: sfRJXV2NR0FgilVsT6+QHdVji/HcNkfjCIduQjGWJd6mj1bOCPnzJy91HGcXIOh9
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSSPR12MB999211
-X-purgate-ID: tlsNG-ef75cf/1788882295-A7ED6AE4-AC36BC75/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2 19/39] xen/riscv: implement trap redirection to a
+ guest
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+ xen-devel@lists.xenproject.org, 
+ Romain Caritey <Romain.Caritey@microchip.com>, 
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>
+In-Reply-To: <da081e7c-eca8-48bc-b62d-bc84a9c09d7f@suse.com>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <583b0a190bad7121eae9bc99bd1e13dc1743efe4.1787838835.git.oleksii.kurochko@gmail.com>
+ <1788796634.8631fc262581453bbf619ec5b2062170.1a07c96862b000c4f3@vates.tech>
+ <2f734f0a-7f3e-4e27-82ed-52ccf72fe49a@gmail.com>
+ <72b89a0c-ad0e-4c1d-97f7-92f49ede7a55@gmail.com>
+ <da081e7c-eca8-48bc-b62d-bc84a9c09d7f@suse.com>
+Date: Tue, 08 Sep 2026 17:47:27 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1788882453; l=2072;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=uRTs1NB5ei0hRJUPFWWuFHGD3/kb2+HU9VJNB94eJB0=;
+ b=BCr0SMUn08tyEsLZRlDyLA9W2rb5XPa0z6+BNe/xmOIeQpR/2Za9vcCVumPPIfYk5GVWpXCJ9
+ RmqpyLKl1/cDEURihL+na/Q0R4on3by0fm6ZAkIxdevoEGpwODJQU4d
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1788882453275
+X-purgate-ID: tlsNG-c201ff/1788882458-720AA2A1-FA8700D6/0/0
 X-purgate-type: clean
-X-purgate-size: 1937
+X-purgate-size: 2076
 
-On Tue Sep 8, 2026 at 11:16 AM EDT, David Hildenbrand (Arm) wrote:
-> On 9/8/26 04:56, Zi Yan wrote:
->> gnttab_alloc_pages() stores xen_page_foreign in page->private. On 32-bit=
-, a
->> pointer to an allocated xen_page_foreign is stored; on 64-bit,
->> xen_page_foreign is stored inline. Checking page->private !=3D NULL is e=
-nough
->> to tell whether a xen_page_foreign needs to be freed on 32-bit and
->> page->private is zeroed unconditionally on 64-bit.
->>=20
->> It prepares for a future commit that remove PG_private.
->>=20
->> No functional change intended.
->>=20
->> Assisted-by: Claude:claude-opus-4-8
->> Assisted-by: Codex:gpt-5
->> Signed-off-by: Zi Yan <ziy@nvidia.com>
->> To: Juergen Gross <jgross@suse.com>
->> To: Stefano Stabellini <sstabellini@kernel.org>
->> Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
->> Cc: xen-devel@lists.xenproject.org
->> Cc: linux-kernel@vger.kernel.org
->> ---
->>  drivers/xen/balloon.c     |  5 +++++
->>  drivers/xen/grant-table.c | 11 +++++------
->>  2 files changed, 10 insertions(+), 6 deletions(-)
->>=20
->> diff --git a/drivers/xen/balloon.c b/drivers/xen/balloon.c
->> index e7f74ea7cd5eb..fdb18348cfdfe 100644
->> --- a/drivers/xen/balloon.c
->> +++ b/drivers/xen/balloon.c
->> @@ -182,6 +182,11 @@ static struct page *balloon_retrieve(bool require_l=
-owmem)
->> =20
->>  	__ClearPageOffline(page);
->>  	dec_node_page_state(page, NR_BALLOON_PAGES);
->> +	/*
->> +	 * clear page->private before giving it out, since it might be used to
->> +	 * store xen_page_foreign info.
->> +	 */
->> +	set_page_private(page, 0);
+On 2026-09-08 17:05 +0200, Jan Beulich wrote:
+> On 08.09.2026 16:58, Oleksii Kurochko wrote:
+> > On 9/8/26 12:01 PM, Oleksii Kurochko wrote:
+> >> On 9/7/26 5:57 PM, Baptiste Le Duc wrote:
+> >>>> --- a/xen/arch/riscv/include/asm/riscv_encoding.h
+> >>>> +++ b/xen/arch/riscv/include/asm/riscv_encoding.h
+> >>>> @@ -109,6 +109,12 @@
+> >>>>   #define SIP_SSIP            MIP_SSIP
+> >>>>   #define SIP_STIP            MIP_STIP
+> >>>> +/* stvec/vstvec: MODE is bits [1:0], BASE is bits [XLEN-1:2] */
+> >>>> +#define STVEC_MODE_MASK            _UL(0x3)
+> >>>> +#define STVEC_MODE_DIRECT        _UL(0x0)
+> >>>> +#define STVEC_MODE_VECTORED        _UL(0x1)
+> >>>> +#define STVEC_BASE_MASK            (~STVEC_MODE_MASK)
+> >>> Nit: STVEC_MODE_DIRECT and STVEC_MODE_VECTORED aren't used anywhere in
+> >>> this patch (only STVEC_BASE_MASK is). Either use them where you decide
+> >>> exceptions always target BASE regardless of MODE, or drop them until a
+> >>> patch that needs them.
+> >>
+> >> IMO it is fine to introduce *_DIRECT/VECORED here as they are used 
+> >> implicitly through STVEC_BASE_MASK and thereby it will be better to 
+> >> introduce them here now instead of open-code them and then just update 
+> >> STVEC_BASE_MASK again when *_DIRECT/VECORED will be re-introduced.
+> >>
+> > 
+> > Oh, sorry, you are right. STVEC_MODE_DIRECT and STVEC_MODE_VECTORED are 
+> > really not used here (in this implementation). I planned to do:
+> > 
+> > #define STVEC_MODE_MASK (STVEC_MODE_DIRECT | STVEC_MODE_VECTORED)
+> > 
+> > But I missed to do in that way.
+> > 
+> > I will update the defintion of STVEC_MODE_MASK in suggested above way.
+> 
+> But that's yield a mask value of 1, when you want it to be 3. That ORing
+> together looks bogus to me anyway.
 >
-> Who would have set it to !=3D 0 in the first place?
+Yes I agree. It might be enough, for the moment, to only keep #define
+STVEC_MODE_MASK _UL(3) and drop the others defines (even STVEC_BASE_MASK as Jan
+mentioned the comment in the caller is already precise enough).
+> 
+> Jan
+> 
+> 
 
-No one else, except
->
-> e.g., gnttab_free_pages() resets it to 0 now before calling
-> xen_free_unpopulated_pages().
-
-After reading more, I agree with you that the above change is unnecesary
-and will remove it in the next version. Thanks.
-
---=20
-Best Regards,
-Yan, Zi
 
 
