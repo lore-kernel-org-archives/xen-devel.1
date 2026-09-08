@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC822C79FA0
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 06:07:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1411122.1641854 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53E5AC79FA0
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 06:26:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1411129.1641864 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3oyY-00016Y-Of; Tue, 08 Sep 2026 06:06:34 +0000
+	id 1x3pHw-0005UZ-BC; Tue, 08 Sep 2026 06:26:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1411122.1641854; Tue, 08 Sep 2026 06:06:34 +0000
+Received: by outflank-mailman (output) from mailman id 1411129.1641864; Tue, 08 Sep 2026 06:26:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3oyY-00016R-Lv; Tue, 08 Sep 2026 06:06:34 +0000
-Received: by outflank-mailman (input) for mailman id 1411122;
- Tue, 08 Sep 2026 06:06:32 +0000
+	id 1x3pHw-0005US-7I; Tue, 08 Sep 2026 06:26:36 +0000
+Received: by outflank-mailman (input) for mailman id 1411129;
+ Tue, 08 Sep 2026 06:26:34 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x3oyW-00016L-N9
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 06:06:32 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x3pHu-0005UK-Hg
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 06:26:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3oyV-000Fbl-Jh
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 08:06:31 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x3pHt-008uw5-5i
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 08:26:33 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9fa5d9-bab6-0a2a0a5309dd-0a2a45048688-32
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 08:06:31 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6a9faa98-8faa-0a2a0a5109dd-0a2a4505c5fc-2
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 08:26:33 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6a9fa5e7-b57f-0a2a45040019-d155dd33e56f-3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 08:06:31 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-48441a2ba1bso3022747f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 23:06:31 -0700 (PDT)
+ id 6a9faa98-4cb1-0a2a45050019-d155dd2dbd0e-3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 08:26:33 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-4859245e493so2038395f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 07 Sep 2026 23:26:32 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4858ab73c2bsm32003538f8f.22.2026.09.07.23.06.29
+ 5b1f17b1804b1-49ce46696e8sm318885975e9.0.2026.09.07.23.26.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 07 Sep 2026 23:06:30 -0700 (PDT)
+ Mon, 07 Sep 2026 23:26:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,64 +55,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788847591; x=1789452391; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788848792; x=1789453592; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=fToW8Qfa/ir2WdXjPYveDRJbLRU0M7rdpYwMx0TEukg=;
-        b=CTGBvRJk9x7ATEpc295VK9SB87dxR3ZImsgw24jEg9s3kEIhYsZNw0a2aIhM1Z8bTl
-         sgngVLfow970oepi2544c7L+ZvArOr9BTfs9lRfZg1BbSupO1FB0+ZrqknmWgfUllmta
-         7JTc1NGHJMk0V7lADdHDbuXRVLCRTqXepoG7Fg4NOM3Q0daIlZLPDUqBnCwsudu9lskt
-         shLzhhjJMIAAdVSUNm+vwV4f4zzDYqRMeXANK/csBRk86uvbrR49L0rWOTzP59K6sdtJ
-         5CCfwtWTexFqwthharpJ5m6l11omx/jOsBGyJ2JJEQVDoX6uODkkv68uXANLpFiiH6RW
-         6RBQ==
+        bh=NCGHLLm0dUzJmFJNvDd/j288PmHir+QouhzLPNUm8nY=;
+        b=VfwWWWmx4OXLevCN5iLZMX8RdslKEtMb/v0wyvFXJ7AP4gHtmV2HcrUdc37Ezu0pnN
+         j8GIgd42SUXjHH/+JhSABOURxiBbwZpinM0cRHFDvEo176R/5Xmgl13H9Cmj5yBLpED2
+         jSQuAGXmg66RdoMYWdpGHdRON5LSV+eXMg0P2Q6LOMF2XGBAofAlRMMyXtByFgh3afmA
+         c9JcPJAxNDo7+rAsQh+5NXRn+NFVDQ2petHf5x2fbt5fy5/UehRkcMEVFo86se9ZXatm
+         i9SWR+ukatviCMG3R9SuCPeybMrEsm5E/eQiOqzP6at2AxAM5rx08UYuRslFRGJFwcTK
+         45vA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788847591; x=1789452391;
+        d=1e100.net; s=20251104; t=1788848792; x=1789453592;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fToW8Qfa/ir2WdXjPYveDRJbLRU0M7rdpYwMx0TEukg=;
-        b=FYKlBA5+kJ1qei3C5Yb5R4qBFTKf4AjdzsTvDexblqfTFcsIdYOhocgKaJzGAZLc/a
-         axjRPhxOi7T/VEbM+nB2ixLXmTFH/fmaur46kbBCxKjlrDPMjfATvHJnXKp8fRMfJt2L
-         2nFJiCHYudoExl8Iw7Fo+9rDjhQTbP4OOy50hzQb3POhA/AtkV3OnoAlv3Y2JGxvGAEO
-         M3uEyEVF+6BzRK69nAec6LoOVbR9k0+SmU3WCp/3uKF36cen9iOJNDX8yZjExHmgOIRf
-         YJzhP61iZqRuaixzebQj9oCgnE0d6Mvk+yALsaaU02+dym4YBJFKX+2eWgKnVbA8h/O7
-         TSZQ==
-X-Gm-Message-State: AFuF++lWnMyFJMG307N8pHt+wHlRfVWZT4e+h2uCfAXRzNxUS6zYzVP5
-	2ZEKgRmCUtZ+IYROI70fjmMtkmdfPglaPIVvWi5VW7msfnmodHqx4ha7zRRmWiu4Sw==
-X-Gm-Gg: AYBFou1sj+MFEybV298gj/Q0ylDZz+i2qzR+qh9SQmNqPvkQmEVtyEMa6tNe/ajoIAw
-	YR5roIpNfIdmnMT7yHCMLcQmldWsZbNvlzAGspfkvNSjQDSR1jIs6V1E/7Akw7HHzkmqenPeVxF
-	/ZTPFT3Xcoub8mO04WMdfpIpVyKmwrXkWvnRxi2lfTWG7YsHnOpxrGcwmIef5gRMtDH6Spf4EL7
-	YXJSutnYS0lLxCLXooyMgreY+5SHgH77SOYEFed8TkpFAjvMYk5kOISkLttwBiPQESRlqajRAfE
-	uxJKsJvVUwwrTWKCQ2zDMUWeJ3QhfcbiBQKp+lWlYGa9TDRXb2lQCGO0++QUt9/1STliNbkHphv
-	+B60TVtTpIP1WQZezGV6LP8gg1q6DqrPn4lVgOU2fh9YXC9l28DL2JNdtYpp85CqsFaljU6sJj4
-	WnvjjJPg2YCPs9xlnmthj4Pu+acuJvvrAQ3XoNqcJGxQr5YWzLhpoaboZqpjOGeMdBo3TbA+bzj
-	FeeyBS9nu8hACoqTqW+EDQCOurXusZUzhANUazYsNylrnvtkX+Z
-X-Received: by 2002:a05:6000:4819:b0:485:8c16:a347 with SMTP id ffacd0b85a97d-4858c16a542mr22692240f8f.31.1788847590898;
-        Mon, 07 Sep 2026 23:06:30 -0700 (PDT)
-Message-ID: <9123f379-6f87-4116-95d4-982e55f27053@suse.com>
-Date: Tue, 8 Sep 2026 08:06:29 +0200
+        bh=NCGHLLm0dUzJmFJNvDd/j288PmHir+QouhzLPNUm8nY=;
+        b=gC1G+yiS+FPP8isPxIjkQolqu7oHbJmM1D9situmYl9/JfTJIzI45LSskKM6BZeUb1
+         Em2s8sdwL0T3n77RJyzF2ViiMBOcCjWundOHhtqrBf7tvE2wzU/nIu19DmXDmHT4Q6PS
+         nzDcKja2idzFgQ/TW4vim5GgvPD8MALTUcvKk0MiWJCmtIyDsXwFuQQJpMqBIrUB1MTX
+         /nean8olYR8ZUNyI+Ab4iVj4d9kVoCK2LstG4GcMBtZcaBbf5ZCzzzmZXwVQr7Q6WCVe
+         RbSCOvQdu1P4dQ3ws7t9s0cZB2GWh4XbgM9gZUYcWavTFVfCGbvUipfJ4epG8ZkcnI0b
+         8fQg==
+X-Forwarded-Encrypted: i=1; AKwUvByMPrnVE9JeVCyQBC9ad/dAmOwfVeqMEN4js2AzEioxHAkbubHqjF9PmOsghs+Wfn4IRohZ049xr8k=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lozKdx7Y3LTV7BqPBobJV59B0LksoXAPfbfIw90Rt2bbbTh7Hg
+	xYK+WLuyMdeH3VIO9x8qvYtZPuxGLCtGQ6yKIHd3MrBKejsW26hsTuyTG2vmLizOBA==
+X-Gm-Gg: AYBFou3ySyraH7boK3bwHD27Y6K4sAsTaQAkFUnI+LF4hSUhBkCxAQbfD+HnZhW/Nhp
+	hPOSjHGNlvgC2QtTG3NvBbGHliHJ963c/1olmczXZsLwR6FQ6Q/Uo9pfJdUy8yD2/A04IiIA/Q7
+	nQ0tqFlEmwZlJaM/gaek58gKZxCLX4lXq+GUcOBj6gxorJOX5fqNn2ujObwxJNz5z/kspJLDZVA
+	EiA6ZdrcRgWSltOqWmayM3+B116eJdgN65YJeBb85pgbveRuJPrMHl3g178PYL876Ox6WVeQe9r
+	ZgnXQeoeruOEuVajoAsbhKB5iX8m8t7oCukgpjRF3Titmj/UvX0RIFBjrIEmjQtX60Pd5B1usT8
+	/nVPp0IMrUWcZNd9112sqPlNXqex8j3TolU+qkiz5dlkr2FaJj9Zs7EUSOUAoneM8zzJPLOZwS0
+	Do5bBN0Zk58dzZRYyZRwasKE9xrHs2AjnmuIvJQlK26aiQqqf0+T6Isb8uZDCFeAx5TkG8rVgO0
+	ioU7hKnsHeL58Hamwvhileak/p74wUws40J0QtcRg6PyHmri+LW
+X-Received: by 2002:a05:600d:4444:20b0:49c:fa21:e74a with SMTP id 5b1f17b1804b1-49cfa21e8c9mr176786235e9.32.1788848792483;
+        Mon, 07 Sep 2026 23:26:32 -0700 (PDT)
+Message-ID: <a11ec239-460b-4509-beee-4f65063ef336@suse.com>
+Date: Tue, 8 Sep 2026 08:26:30 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 16/39] xen/riscv: extend exception tables with type and
- data fields
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org,
- Romain Caritey <Romain.Caritey@microchip.com>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <8aef9dfabe1d485abe4c48fd7499e09dbd8e0c27.1787838835.git.oleksii.kurochko@gmail.com>
- <1788796633.8631fc262581453bbf619ec5b2062170.1a07c968185000c4f3@vates.tech>
+Subject: Re: [PATCH v2] x86/ucode: Work around Granite Rapids erraturm GNR98
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20260907213231.3159241-1-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -138,43 +128,66 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1788796633.8631fc262581453bbf619ec5b2062170.1a07c968185000c4f3@vates.tech>
+In-Reply-To: <20260907213231.3159241-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1788847591-C24CBB50-79E9ABA1/0/0
+X-purgate-ID: tlsNG-c201ff/1788848793-F4AA72A1-23E0712B/0/0
 X-purgate-type: clean
-X-purgate-size: 1353
+X-purgate-size: 2359
 
-On 07.09.2026 17:57, Baptiste Le Duc wrote:
->> --- a/xen/arch/riscv/include/asm/processor.h
->> +++ b/xen/arch/riscv/include/asm/processor.h
->> @@ -12,7 +12,19 @@
->>  
->>  #ifndef __ASSEMBLER__
->>  
->> -/* On stack VCPU state */
->> +/*
->> + * On stack VCPU state.
->> + *
->> + * x0..x31 must remain at the start of this structure, in architectural
->> + * register-number order: code which resolves a register number to its saved
->> + * value indexes this structure directly (instruction emulation via
->> + * REG_PTR() from asm/riscv_encoding.h, exception table fixups via
->> + * regs_get_gpr()). ->zero therefore has to stay at offset 0 and must always
->> + * read as 0, since it supplies the value of x0 when x0 is used as a source
->> + * operand. The layout is checked against GPR_LIST() at build time; see
->> + * regs_get_gpr() in extable.c. Do not reorder these fields or insert
->> + * anything between them.
->> + */
->>  {
->>      unsigned long zero;
-> Comment claims ->zero "must always read as 0" as it's hard-wired to zero
-> by the HW, but nothing enforces that, it's still a plain writable
-> unsigned long. Maybe a write-side counterpart that special-cases num==0
-> as a no-op, or with a minimum ASSERT(num != 0) / BUG_ON(num == 0) to
-> anticipate any future forbidden writes.
+On 07.09.2026 23:32, Andrew Cooper wrote:
+> @@ -273,6 +274,44 @@ static bool microcode_fits_cpu(const struct microcode_patch *mc)
+>      return false;
+>  }
+>  
+> +static bool microcode_safe_to_load(const struct microcode_patch *mc)
+> +{
+> +    struct cpu_signature *cpu_sig = &this_cpu(cpu_sig);
+> +
+> +    /*
+> +     * Treat pre-production as always safe - anyone using pre-production
+> +     * microcode knows what they are doing, and can keep any resulting pieces.
+> +     */
+> +    if ( (int)cpu_sig->rev < 0 || mc->rev < 0 )
+> +        return true;
+> +
+> +    /*
+> +     * GNR98 states that Granite Rapids systems hang when loading new ucode on
+> +     * sufficiently old firmware.  GNR101 retroactively declares that one
+> +     * ucode had incorrect min_rev fields, in light of discovering GNR98.
 
-With polarity inverted, though.
+We still have no min_rev field, so imo a reference to it wants some
+clarification. Really I first meant to ask why there's no use of that field,
+to merely make that one exception.
+
+> +     * Both are incomplete statements of the problem.
+> +     *
+> +     * At the time of writing (August 2026), the believed safe sequence is:
+> +     *   0x01000370 -> [0x01000380...0x010003f3] -> 0x01000405 -> any later
+> +     *
+> +     * Disallow known-unsafe loads while permitting believed-safe loads.  For
+> +     * GNR, this allows multi-hop loading to get up to the latest.
+> +     */
+> +    if ( boot_cpu_data.vfm == INTEL_GRANITERAPIDS_X &&
+> +         boot_cpu_data.stepping == 1 && (cpu_sig->pf & 0x95) &&
+> +         ((cpu_sig->rev < 0x01000380 && mc->rev >= 0x01000405) ||
+
+This is odd: The lhs of && uses the lower bound of the inner permitted
+range, while the rhs of the && doesn't use the upper one. If it's intended
+that way, I think this also needs clarifying in the comment. Otherwise imo
+lhs and rhs better would be consistent in this regard.
+
+> +          (cpu_sig->rev < 0x01000405 && mc->rev >  0x01000405)) )
+
+This one, otoh, fully matches the comment.
+
+> +    {
+> +        printk_once(XENLOG_WARNING
+> +                    "microcode: Granite Rapids erratum GNR98 detected.  Skipping ucode 0x%08x\n"
+> +                    "microcode: Firmware update recommended\n", mc->rev);
+
+I think a 2nd XENLOG_WARNING is wanted after the inner \n (or none at all,
+to use the default for both).
 
 Jan
 
