@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4796C79F82
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 13:44:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1412056.1642536 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87F19C79F82
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 13:57:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1412066.1642559 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3w7a-0005kV-3a; Tue, 08 Sep 2026 13:44:22 +0000
+	id 1x3wK4-0007ap-BA; Tue, 08 Sep 2026 13:57:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1412056.1642536; Tue, 08 Sep 2026 13:44:22 +0000
+Received: by outflank-mailman (output) from mailman id 1412066.1642559; Tue, 08 Sep 2026 13:57:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3w7a-0005kO-0X; Tue, 08 Sep 2026 13:44:22 +0000
-Received: by outflank-mailman (input) for mailman id 1412056;
- Tue, 08 Sep 2026 13:44:20 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x3wK4-0007ai-6y; Tue, 08 Sep 2026 13:57:16 +0000
+Received: by outflank-mailman (input) for mailman id 1412066;
+ Tue, 08 Sep 2026 13:57:14 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x3w7Y-0005kF-86
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 13:44:20 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1x3wK2-0007aJ-Ae
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 13:57:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3w7X-0091en-0o
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 15:44:19 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x3wK1-004j65-2i
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 15:57:13 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa01129-8faa-0a2a0a5109dd-0a2a450a83dc-10
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:44:13 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa0112d-f2d2-0a2a450a0019-d155802ce1c7-3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:44:13 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-49d0da752ffso25320195e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 06:44:13 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49d03543064sm302982865e9.13.2026.09.08.06.44.11
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Sep 2026 06:44:12 -0700 (PDT)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6aa01429-bab6-0a2a0a5309dd-0a2a4506d750-36
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:57:12 +0200
+Received: from [52.101.61.4]
+ (helo=DM1PR04CU001.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6aa01437-195a-0a2a45060019-34653d04ab6b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:57:12 +0200
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by CH7PR03MB7980.namprd03.prod.outlook.com (2603:10b6:610:249::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.15; Tue, 8 Sep
+ 2026 13:57:08 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0382.014; Tue, 8 Sep 2026
+ 13:57:08 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,262 +55,186 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788875053; x=1789479853; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=jkSMrQgpk18fZwC2aPVLtuqV8lZqxCdCFIjkgd3VC04=;
-        b=HxxFFlOfiTOUAV7RPB0T/ghvKCbHvF07SvNOuFvFQuKS43xo7G5zp2tOeVZn1PivdX
-         doxWRq5Mg8zJy6wkXGnW8I8Eq0ieDlAZyYcosx3f1+crPFeoSWZvmCvSIjxSN0YNV/5M
-         GGKwZ9hpOc239iD113If7PLh0Njff2ZIQFERCrs0bTHyuz5TFKE13PAYSh5G1ax7IMJI
-         C7xIVtNQz4aCcHEuihtKk3mI5EH3z+jcyIPSTdi8yG5t/DVBj4EIoocnlwmD0M/OwG7W
-         obr+BB50Q1dcZPS/kaPJp/1F9OHM0DX6Jd9NjX4Hqgk5FwaLizFYaMfP0c/G89ZIJSVA
-         fXGQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788875053; x=1789479853;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=jkSMrQgpk18fZwC2aPVLtuqV8lZqxCdCFIjkgd3VC04=;
-        b=Seuf0RFFI3ZxbxLthGcsUGlIn+8rD8wpJ2blhtSidiQopjD7/U45ZCGhblgXzaiJKD
-         V0KHy2Bg9PGh64tNoyMy14CCOzfWdUdUe6jsbe00tGCuxEoVGtclrhpfdKsRmSCDQxb/
-         hRId5AR6qSwtMpQZBgA7gSAzjk2RVyI29yqhnHehMd3g9E7E79VPxHT8mit2LFcNO4ZR
-         Gl6twwlJ7aHlZ/148OK6NhoLM6MkcDwGLPrHeGcV4a51sj6mrstSW1KgKBiC5yOGCH/j
-         yfvlfgse2GA7swdps3uKOGiq2VbErcsrbLWB6wSIzIJciDxY1gb/iTebjURrVZPe/O7p
-         RSMw==
-X-Forwarded-Encrypted: i=1; AKwUvBzP+yCLzenv1Hvqcg5eAFz4qKLnFRNMsCGGlRwmiMwFJ/8H0qpqtHABDQvpDYPHtD+VlMDb/yUybkI=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nJaHJo8qRY3btRJ5TYzoa6buPUtm0Bdc4BDqvhjsbbM6+q60b0
-	jTJIPaxxdtL8HI3fMm3HyezPbfKfSjJyEt/0YnolJlG32okuCUHZ2FyL3DRruZg8Pw==
-X-Gm-Gg: AYBFou0xQUEV5YE5cYkjYx4exlySfXMUMcXep9jck9z+bB5s+iVnqMBbbA3HkJRdga/
-	wTgVDs+6P6WfLVrgEQ40Nb38vp/I3jpAnrYiaVYgaBP32+rUwJ/P9gpPQqXm5lOsBSiBldhwYiR
-	zI7ngRcizL2OenjCku0MQgboN4yyb27hT7SS/yfRYWFVN8wYkN4gKe4OlZd1BRpjWCO4WVpyMsm
-	NO8V0vQEFOpg2dXt+7E/BGm1LIyakRcnYTQog6Jap1KJmTXQGr1YUormolVgrtn4mJ6nsxv5xgL
-	X7dcRrCGct/eDYfUChcoANjTFhJQuNgJbC4kVzQ1FUscPyzO/GSqcyU9V95MbOnMZH/tEDaq025
-	0vfYaoRdt07CUeJ3TnqgAP4GtIV8PYODyY1TkwhRLkkDyGwbZyjczupjYZ+bHsDhRYQRFjtZ3YN
-	LmFWh1+EcvQNQopTJR5qc4qVx/sAHpqJzjYfjqR40CkzaAAQ3PBqY0uVCF/UCXz3NDUmlIUczYR
-	4h6jf1Qhnklc27fw/hM+40plLODadRyZQ/Rq1feCnbZZxzVN475kePBWTK1HvE=
-X-Received: by 2002:a05:600c:4fc9:b0:49c:fc6e:8cb9 with SMTP id 5b1f17b1804b1-49cfc6e8e1emr259560385e9.29.1788875053057;
-        Tue, 08 Sep 2026 06:44:13 -0700 (PDT)
-Message-ID: <39841f44-2b18-4368-a9f8-7c0db307ff6d@suse.com>
-Date: Tue, 8 Sep 2026 15:44:11 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EPDTlBNd6SFlSubrN/OFn1/9sqpVRCzbU3hPnQBt1duxrpXxj3ZmPN0m5evosqjCaAcSjmHFzLfvkfoxv+OwhBb7UbBubgp5NShlIg+5/etzACLfxqTEN4zAHH/5xq6WtFZlAk/87HVuOSKBn5kroWxsxI91Py6IVk+GNvLUPjjLaNrj9F5G04/j+xlLn9P+2FaTt+eeCJVT+oEuRWLl/fm5sslD74RBt4+CnjA7FnEn0YJqd4zYPgLMZ8U+miKqyemlNxlylYmePkxN2hTYU/B1I8n0BmWxVINn6K0MPtuOSJr7IxhfqKcTugFdVIYm+9no/TbR/HI7yp11muWwLg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IyY/cLIvGbmFJPpTHDCnZ6kLwWjrCl/J+pPigG+JXCI=;
+ b=HXu48m4Sy4F/Yj9Vx9NUGAEvnc8txhWEQnmA4xpYP9O5rDOAIeJUXlRlVPe8uI5JZu6EvfKUMo4FZa1KW0rjPYDyXDBbO2YPfe2ulk3JMotFirDxLQf8no61d0fvmemLAeCSbC5ai1bZyBb1tgnxVB0Uh6PUE51GEcZA3BfohLz3zkNq2RMZuT3699hZRFK3MCfRDeNOKCZmIPi9mbVgVhQuPTQsClWIbGreOcjQ4MW40zEfD+rgqYll4+t9DjMf1Wy8uzBKy/scfQlcCVJciysEM+qjIbE0jn7TCR20tlm0T81RAK5YVaUqIKbv+fOnrBLrzhce5CGjtr8eFnYU2Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IyY/cLIvGbmFJPpTHDCnZ6kLwWjrCl/J+pPigG+JXCI=;
+ b=wnFZMc8utVp6t8+Akqrr9Gi9gaHm7movv6iign5ILgDx+VI5Ari6pga45iV01yo/g576e/CVd5A6HY8GrZzvreX0NF333t9gmXqoNnVDB3hgABS0tothh5kutzpQbtZz1XIGLpahlj+TitcXjOvw7TT9soSt7yRSo/JVE4+d+Jo=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <ef71d534-1bd2-4837-90d4-adf1822fc4ba@citrix.com>
+Date: Tue, 8 Sep 2026 14:57:05 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 16/39] xen/riscv: extend exception tables with type and
- data fields
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <8aef9dfabe1d485abe4c48fd7499e09dbd8e0c27.1787838835.git.oleksii.kurochko@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <8aef9dfabe1d485abe4c48fd7499e09dbd8e0c27.1787838835.git.oleksii.kurochko@gmail.com>
+ Jason Andryuk <jason.andryuk@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
+ xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v2] x86/svm: Intercept CR0 writes selectively
+To: Jan Beulich <jbeulich@suse.com>,
+ Ross Lagerwall <ross.lagerwall@citrix.com>
+References: <20260904122330.306936-1-ross.lagerwall@citrix.com>
+ <8fbc99b1-d98b-4f52-b9ea-bd84e8bfa2ca@suse.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <8fbc99b1-d98b-4f52-b9ea-bd84e8bfa2ca@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1788875053-504CFCFC-D4C222CD/0/0
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO6P123CA0023.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:313::9) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|CH7PR03MB7980:EE_
+X-MS-Office365-Filtering-Correlation-Id: a85841f5-51c2-4534-a117-08df0db112b9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|10067099003|4143699003|11063799006|56012099006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	XwiQc3sKTd0G/2M73CID8lbZfWvASzx8VNVoJC81coswKxkNoMH3FfL4YgYeXGf8mmWXKh7oNRRGtLBLnDVRP+xDyzg4NrD9qz+ZHFaS9VqCqucX1lBup2sJYt98MXgai4h7a3UR71w2k+VjCBtHoSUA7MLAUke2ll0d/A6FvE2C6SmIUbGMGuNsNzzNoYryqFgEznCQMSwld9nLisFN4e+EVeC3db+QKw0asuhYd504K5xloRqSSg0zjJmkoJ6NUDecASsJm4sgyeuZO0DbfWGyndNhXsG807a2B1l/OPcpFfLQl88AnN5XFw1DvOhJ/3qdDMr4EP38SPANH5C6AZrq/wYpi5BQSF6t0tGfYVPITMPosSB5NV0K/KSG3fSdJwBxRTbiTcVO5U7Kr6MzglneRw4yIjr40DaFLPGW3hHuPg9E1Bx6VGKb5M8EDi94IwEmIGk91GLq8vUeutoR+m/IF2e1vIViFmluUSP/mbiEF/3ac+p1kRR2EDuPZmSJ7AX3bjNfFGcKZPTe8qnNkJ12ySHSBwMnyxmU+mhUPACNz8KtPqH7XDCISkp7DdVAp0HHmdQuvp0MGBzgUaWbnhV2r5xrxKTnbLNdjgmuE5aL8UY8Fox8sPwru66zI+a7oAFNhYhJULb4HLKUQ/4saVIDgWYVaggKmWJyb6Aifr0=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(10067099003)(4143699003)(11063799006)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?aG85MElQcWFqRmZoWXUzV0FzZy9jcVJ2VlBpdlZVSkhacUR1Tm1NSFBwM2Nx?=
+ =?utf-8?B?WVdSY0pDUlhtZmZjdUlSYlBJMGNpbVlFWkZhZFVUYzgwd1lkNEgrUEFON09s?=
+ =?utf-8?B?RjZITFBVb05EU0hSYzFCcG1mVVlyUk5DeHBzU2NXUEZudjF4U1FDeUJnOTJm?=
+ =?utf-8?B?dFNzaTBtckN0MzNORXNBNitidTFyYzJ2cG1oRFB5dXJYa0ZReEFSeXMvcFNU?=
+ =?utf-8?B?UzYzR0NEK2ZIRytsWHpoV1UrZmxjVzM4SGRwMFBhV0xYdlR2N3NZVDg3YTdj?=
+ =?utf-8?B?WjJXZG45ZDNkd3pSMHNkcTc5UnozOGVac0RZUFVkengyRmZaMXVFS3ZTRVNZ?=
+ =?utf-8?B?T1U3ZnNtd1RXQS96ZVVqM0Z3SXdHUHlmT1U0S2JsM05ZMXJQZzQ1NGRaN3NN?=
+ =?utf-8?B?TzJVeWtSSTdYekdRdkVHRjd5bVdpMlBYQmx2S2RYY0Y1c056ekVYYkZJRjdZ?=
+ =?utf-8?B?aUd3OGp5ZDVNbmhaWGZnYTIzREZ6RkgzNkNROHVzVjZJaEpHTmZtbE5uL3Bv?=
+ =?utf-8?B?UERIcDVTd0MveTU3U0VHMXRjYVB0eXhLWnJncTNNZUhhNmV0cUI1S3MrTUJi?=
+ =?utf-8?B?S014c0xJelpKZXBETmg2WWs0N3ljRlh1VjMwT1JzUXlXL0J4QVpSVVNiMnlF?=
+ =?utf-8?B?ZFcweWxvcmlhMVZQNWNseHVpUUJBRGszd0QvVnNZMnhISStTeG5wZ0YvM042?=
+ =?utf-8?B?eHdnVXRZZ25PU3l1RDFqT1RwNUd3LzhrakxIblVkTHdPMXYyVlh4WmpwNVVM?=
+ =?utf-8?B?S0loR2t2K0tvQ1g5ek51TVYvRUdicERuSXFzMEpkeGxYaXZrTno4d2Z1QzNE?=
+ =?utf-8?B?Um9OZStjVEljNk1Wd0RZYTlnbWQ2STFXMFM5RUo5bC9yU0F0VVMwRGpGZzMr?=
+ =?utf-8?B?TjFWZWlFcG8wYWZ0dFBuUDlqWVI5ODlUZjdObVNTNHdoV3EwMVlpaFI4UGs0?=
+ =?utf-8?B?QW5KZGd6ZnBZOGV0aHppemdjTUkwZ0d2c0ZGdHZzK2VVSmFyK3hLeEV1RHZN?=
+ =?utf-8?B?MUJhcm9VSWQ3R1ppTy8xVmRMckR5bndxR2p0cDdTblhZaUZCUm5uUkpaN2p4?=
+ =?utf-8?B?TkV2Ym5VVlJLYnZaYVAwL3BYaVpUVjdnQnBEcUtRdVh6RGp4bzNHYmlMdWRJ?=
+ =?utf-8?B?QXdPdGNhSDQ4elVtRTJXUFU5N2hMNWNML3MwWGhYQUxSSm0zWmtoT0pDZjk0?=
+ =?utf-8?B?T25UcFhvbzB6NDc3dkp3QmxNcHVlTU5IcFpMSm1adTlRTTRKNUJ5VkNlRHNU?=
+ =?utf-8?B?bG5SdTdHRDZvY0RvcFVveVhuL25QM1lzOTRQVFExNzVSZk1EQnI3clFiV3VG?=
+ =?utf-8?B?T3NRaXArQjlkcFVCaXBRdHhSNUIwem5maWd3elc0S0p0SlpWaEE1d2V6bVpQ?=
+ =?utf-8?B?SkF4K2RzMHlDVjdXYVNnQmhZaWNEV05LQ0QrbElHMmlWczBTcmE1TE9hZXl1?=
+ =?utf-8?B?VXp1ZHdUZlNobTFDei83aHZkMjZVUnlWMS9xREZxZHNrSmtKL0ovUTR3cjAz?=
+ =?utf-8?B?bXdVa3dNQXc4TVUzWEVpL3dhb29waUpWM0ZHb0tnZGlYQTBVS1ZoV1BSMlB4?=
+ =?utf-8?B?ZzNhSCtUWkJaTUFUMlN6WkF0QnVmaGJrNGtkSlFLUFJzV1lzdlN1V0JrMmdE?=
+ =?utf-8?B?VWxXYVRzdXlEbkY0cHBaZmRvZFJTTW03Mkp3RWFHWHF1YXRrblFFRDQyWWl3?=
+ =?utf-8?B?d2h4cmhPaXY3cHZHNHFJYkRtalcyOXBvMU1lQ2piYXVYTVk3MWNld3JjY2Zh?=
+ =?utf-8?B?QnBUeXdVMWxBS29pMzhteVBNS0dzbVkwWWZNYmN6ZjNlbUhscFdaM3JFeURu?=
+ =?utf-8?B?RkxrU2hRektZWGo1QXB5MWdUdFovRGJIRWNqbjQ5U21DWTViaVdSY0NxYjFv?=
+ =?utf-8?B?L1dENjRwWlRjdjVucUxnSDViNHNxYmhnSEVaZVYvRmdvSlhvcW9BemFZK3JB?=
+ =?utf-8?B?aGZrS29CVVZRNDlOZEh2QStXbWhWYW93Rjg3Q0VrbEk2a2dPdkJiUnpCTXVn?=
+ =?utf-8?B?UW9xZHNZdktyT2VWOVphVDhmRDlybVZlT2VQeFFlUGxrTEllU1NSSXdzM3Zv?=
+ =?utf-8?B?eFVpODRVSmxkVmFFRXJEd3h6Nmd3Y3o1TUN6YVh4bkd4b0ZDWVpXTEhVeHo1?=
+ =?utf-8?B?VlJkN0FvdEw3ZCtrdnludjFrc2xEWnIxN0dLa0dCSEFhMlhpUWNvTENRTi8z?=
+ =?utf-8?B?NmtSN1cwQ0ZjRkxYc3Y1bzUvdW11VHFram81bFRTRjBHZ3dhVDBWc2d6OUd6?=
+ =?utf-8?B?M2hrVjZid0JpWWlYN3hmcGdCNEtKaVg2K3huQk5RWlVBOGVVWkY0VlBlYVQ3?=
+ =?utf-8?B?NHR5NjByb0xUeDZtakhscDRhV085Y2ZqSEVtQUNmTUxVSk5PUEFKQT09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: a85841f5-51c2-4534-a117-08df0db112b9
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Sep 2026 13:57:08.5364
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FMh9V03g1bHuBxS4RQERuWmjx2VGnBz6FYd7Ct0DKnSkmt5Z2wlxfEIFxJkX9MXeN39GuPFqDWN8UjZgqaLIqmyZKqJ3FVSRmH2EruOvNYg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH7PR03MB7980
+X-purgate-ID: tlsNG-16d1c6/1788875832-F5E0E77B-F171FC4C/0/0
 X-purgate-type: clean
-X-purgate-size: 6373
+X-purgate-size: 1480
 
-On 27.08.2026 17:21, Oleksii Kurochko wrote:
-> @@ -59,7 +67,49 @@ static void ex_handler_fixup(const struct exception_table_entry *ex,
->      regs->sepc = ex_fixup(ex);
->  }
->  
-> -bool fixup_exception(struct cpu_user_regs *regs)
-> +#define CHECK_GPR_INDEX(num, name)                      \
-> +    BUILD_BUG_ON(offsetof(struct cpu_user_regs, name)   \
-> +                 != (num) * sizeof(unsigned long));
+On 08/09/2026 9:44 am, Jan Beulich wrote:
+> On 04.09.2026 14:23, Ross Lagerwall wrote:
+>> @@ -2517,6 +2518,7 @@ void asmlinkage svm_vmexit_handler(void)
+>>      hvm_sanitize_regs_fields(
+>>          regs, !(vmcb_get_efer(vmcb) & EFER_LMA) || !(vmcb->cs.l));
+>>  
+>> +    v->arch.hvm.guest_cr[0] = vmcb_get_cr0(vmcb);
+>>      v->arch.hvm.guest_cr[2] = vmcb_get_cr2(vmcb);
+>>      if ( paging_mode_hap(v->domain) )
+>>          v->arch.hvm.guest_cr[3] = v->arch.hvm.hw_cr[3] = vmcb_get_cr3(vmcb);
+> gitlab-CI says no to this patch [1], and I think it's the change above which
+> gets in the way of running guests in shadow mode (as is the case for the two
+> qemu-smoke-x86_64-*-pvh tests). svm_update_guest_cr() has
+>
+>         value = v->arch.hvm.guest_cr[0];
+>         if ( paging_mode_shadow(v->domain) )
+>             value |= X86_CR0_PG | X86_CR0_WP;
+>         vmcb_set_cr0(vmcb, value);
+>
+> i.e. upon reading back the guest's CR0 value we would wrongly record it
+> having PG (and WP) enabled, at which point shadow code would try to use the
+> still-zero CR3 as page table base. I think values need merging here, with
+> only TS and MP taken from what vmcb_get_cr0() returns.
 
-Nit: Placement of the !=. Also there should be no semicolon here; it wants
-to ...
+Yes this is broken for Shadow.
 
-> +static unsigned long regs_get_gpr(const struct cpu_user_regs *regs,
-> +                                  unsigned int num)
-> +{
-> +    /*
-> +     * The GPR number -> struct index mapping below relies on x0..x31 being
-> +     * laid out at the start of struct cpu_user_regs in architectural order,
-> +     * matching the register numbers GPR_LIST() hands to the assembler.
-> +     */
-> +    GPR_LIST(CHECK_GPR_INDEX)
+Shadow shouldn't be trying to use CR0_WRITE_SEL.  What's in the VMCB is
+unrelated to the guest's choice of value, and reverse engineering it is
+fragile.
 
-... appear here instead, for this to actually look like a statement.
+Use full CR0_WRITE for Shadow guests, and use CR0_WRITE_SEL for HAP only.
 
-> +    ASSERT(num < 32);
-> +
-> +    return ((const unsigned long *)regs)[num];
-
-What about release builds? You'd happily overrun the array there. Maybe
-(ab)use array_index_nospec() here?
-
-> +}
-> +
-> +#undef CHECK_GPR_INDEX
-
-If the sole use of the macro is in a single function, it wants #define-ing
-(and #undef-ing) there, not outside of it.
-
-> +static void ex_handler_trap_info(const struct exception_table_entry *ex,
-> +                                 struct cpu_user_regs *regs,
-> +                                 unsigned long cause)
-> +{
-> +    struct trap_info *trap_info =
-> +        (struct trap_info *)regs_get_gpr(regs, ex->data);
-> +
-> +    BUG_ON(!trap_info);
-
-This feels extremely weak. As you're fetching from a GPR, the majority of
-possible values stored in GPRs is going to be invalid, not just NULL. And
-while the accesses below would trap on NULL anyway, whether other bogus
-values would trap is pretty hard to predict. If trap_info is expected to
-always live on the stack, why not check for that (perhaps also check that
-the low few bits are clear)?
-
-> @@ -23,20 +30,36 @@
->  
->  struct cpu_user_regs;
->  
-> -#define ASM_EXTABLE(insn, fixup)      \
-> -    ".pushsection .ex_table, \"a\"\n" \
-> -    ".balign    4\n"                  \
-> -    ".word      (" #insn " - .)\n"    \
-> -    ".word      (" #fixup " - .)\n"   \
-> +#define ASM_EXTABLE_RAW(insn, fixup, type, data)    \
-> +    ".pushsection .ex_table, \"a\"\n"               \
-> +    ".balign    4\n"                                \
-> +    ".word      (" insn ") - .\n"                   \
-> +    ".word      (" fixup ") - .\n"                  \
-> +    ".half      (" type ")\n"                       \
-> +    ".half      (" data ")\n"                       \
->      ".popsection\n"
->  
-> +#define ASM_EXTABLE(insn, fixup)    \
-> +    ASM_EXTABLE_RAW(#insn, #fixup, __stringify(EX_TYPE_FIXUP), "0")
-> +
-> +#define EX_TRAP_INFO_REG(gpr)   \
-> +    "(.L_gpr_num_" #gpr ")"
-
-This doesn't need to be wrapped across lines, does it?
-
-> +#define ASM_EXTABLE_TRAP_INFO(insn, fixup, data)                    \
-> +    DEFINE_ASM_GPR_NUMS                                             \
-> +    ASM_EXTABLE_RAW(#insn, #fixup, __stringify(EX_TYPE_TRAP_INFO),  \
-> +                    EX_TRAP_INFO_REG(data))
-
-There's no visible statement separator between DEFINE_ASM_GPR_NUMS and
-ASM_EXTABLE_RAW(), which only works because DEFINE_ASM_GPR_NUMS appends
-a separator also at the very end of its expansion. I think that better
-would be changed, such that at use sites such as this one a separator
-becomes mandatory.
-
->  /*
-> - * The exception table consists of pairs of relative offsets: the first
-> - * is the relative offset to an instruction that is allowed to fault,
-> - * and the second is the relative offset at which the program should
-> - * continue. No general-purpose registers are modified by the exception
-> - * handling mechanism itself, so it is up to the fixup code to handle
-> - * any necessary state cleanup.
-> + * Each exception table entry consists of two relative offsets and a
-> + * handler description: `insn` is the relative offset to an instruction
-> + * that is allowed to fault, `fixup` is the relative offset at which the
-> + * program should continue,
-
-"... in case of a fault, ..."
-
-> --- /dev/null
-> +++ b/xen/arch/riscv/include/asm/gpr-num.h
-> @@ -0,0 +1,37 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +#ifndef RISCV_GPR_NUM_H
-> +#define RISCV_GPR_NUM_H
-> +
-> +/*
-> + * GPRs by ABI name, together with their register number (x0 .. x31).
-> + *
-> + * This is the single source of truth for the mapping:
-
-True until here, but ...
-
-> it generates the
-> + * .L_gpr_num_<name> assembler symbols
-
-... no, it doesn't. It's ...
-
-> used to turn a register name emitted
-> + * by the compiler into a register number, and struct cpu_user_regs is
-> + * checked against it at build time (see regs_get_gpr()). Neither list can
-> + * therefore be changed without the other.
-> + */
-> +#define GPR_LIST(x)                                 \
-> +    x(0,  zero) x(1,  ra)  x(2,  sp)  x(3,  gp)     \
-> +    x(4,  tp)   x(5,  t0)  x(6,  t1)  x(7,  t2)     \
-> +    x(8,  s0)   x(9,  s1)  x(10, a0)  x(11, a1)     \
-> +    x(12, a2)   x(13, a3)  x(14, a4)  x(15, a5)     \
-> +    x(16, a6)   x(17, a7)  x(18, s2)  x(19, s3)     \
-> +    x(20, s4)   x(21, s5)  x(22, s6)  x(23, s7)     \
-> +    x(24, s8)   x(25, s9)  x(26, s10) x(27, s11)    \
-> +    x(28, t3)   x(29, t4)  x(30, t5)  x(31, t6)
-> +
-> +#ifdef __ASSEMBLER__
-> +
-> +#define GPR_NUM_EQU(num, name)  .equ .L_gpr_num_##name, num;
-> +GPR_LIST(GPR_NUM_EQU)
-> +#undef GPR_NUM_EQU
-
-... this construct which does. This is relevant to separate, since
-GPR_LIST() is also used elsewhere.
-
-> --- a/xen/arch/riscv/include/asm/processor.h
-> +++ b/xen/arch/riscv/include/asm/processor.h
-> @@ -12,7 +12,19 @@
->  
->  #ifndef __ASSEMBLER__
->  
-> -/* On stack VCPU state */
-> +/*
-> + * On stack VCPU state.
-> + *
-> + * x0..x31 must remain at the start of this structure, in architectural
-> + * register-number order:
-
-I understand that the order need retaining. But why would it being at the
-start of the struct be (overly) relevant? You could use the "zero" field
-as the anchor for calculations.
-
-Jan
+~Andrew
 
