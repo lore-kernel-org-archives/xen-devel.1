@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00C48C79F99
-	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 13:02:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1411995.1642472 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CFCEC79F99
+	for <xen-devel@archiver.kernel.org>; Tue,  8 Sep 2026 13:03:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1412010.1642482 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3vSx-0006VR-70; Tue, 08 Sep 2026 13:02:23 +0000
+	id 1x3vTu-0007CS-Et; Tue, 08 Sep 2026 13:03:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1411995.1642472; Tue, 08 Sep 2026 13:02:23 +0000
+Received: by outflank-mailman (output) from mailman id 1412010.1642482; Tue, 08 Sep 2026 13:03:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x3vSx-0006VK-4L; Tue, 08 Sep 2026 13:02:23 +0000
-Received: by outflank-mailman (input) for mailman id 1411995;
- Tue, 08 Sep 2026 13:02:21 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x3vTu-0007CL-CG; Tue, 08 Sep 2026 13:03:22 +0000
+Received: by outflank-mailman (input) for mailman id 1412010;
+ Tue, 08 Sep 2026 13:03:20 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x3vSv-0006V6-Ok
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 13:02:21 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x3vTs-0007CD-Ou
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 13:03:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x3vSv-00BuDp-5C
- for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 15:02:21 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x3vTs-004ZPd-55
+ for xen-devel@lists.xenproject.org; Tue, 08 Sep 2026 15:03:20 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa00759-8faa-0a2a0a5109dd-0a2a4508a30e-26
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:02:21 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa00793-8faa-0a2a0a5109dd-0a2a4503a44e-18
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:03:20 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa0075c-f659-0a2a45080019-4a7de18c96d2-3
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:02:21 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49cd6185db7so6626425e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 06:02:20 -0700 (PDT)
+ id 6aa00797-fae8-0a2a45030019-d155dd2dddc9-3
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 15:03:20 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-482f9309813so4256037f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 06:03:20 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49ce5952560sm435083775e9.3.2026.09.08.06.02.19
+ 5b1f17b1804b1-49cee6158e9sm478335795e9.12.2026.09.08.06.03.17
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Sep 2026 06:02:20 -0700 (PDT)
+ Tue, 08 Sep 2026 06:03:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,54 +55,53 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788872540; x=1789477340; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788872599; x=1789477399; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=o0d1D4rqSgyoha+rBAysFKG64mCQkEkUN/Iu3QpC/L0=;
-        b=cohtIV/Ai114lus60zViohoPaSkSFgfaUoZuTmSpb3/wJYTg9EKvOYyeZ0Hb4xu2Ux
-         v595O1UDzYf0Ak5wKydWxYwr4AtpbQQGM72r527YgKJcR1Vr6LN6DHtKM6mmJrAMUoYK
-         UsmN88dFuFW2WUlbL5GsBW8IFpwGw44JwCefm263d0MoqzGIhAmn16PesALzLjSzQbHv
-         jdxCTFcUQQQvz/scA8QCpxAn6i43K6Nqit/pVcEv4SeUQMMgNaTD56ONh3Lp9ZY/uszl
-         S+XxPNJYaLGmcnk0tDSEsXq9wQUN9YN5YXyo+lOzmNRJ08tHzxBm9z0utYmKSA4LDyKx
-         qWPg==
+        bh=UD/LJtaYXoAHqAilG4ijFKHbuTzxrL9p3CeWMQG+5VI=;
+        b=MXu0T5l5CqFEdlbnSYrD/iWXpHImoYVJGEEobPOxmsTvzGYhVv7lxq9nPuWfVrW2Q3
+         DyPUgVFigt2KC/Gv+vNfV/vh43VEEPKcdmn5ixVsU12P76wVbRjAHcRWhvhhAfscm0AS
+         QSk1dGYs6pgvRlFtZb5oDLNABqF2hEyOKSPRkS1hSRBZhdbbwUI7KvQFto1veY2Ipdlq
+         d10la64P+DeJRYC6svT8NdPTlpI+jox7k9fMiirDlcahbyEDW054beSfNelE2JEzN8jm
+         sGxFdtoLeL8ObWKBY1Wm/65J+OW93RSaS50GYve5JdAEhyjXv+DA7W1JyJ081z91Q/PW
+         XAQQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788872540; x=1789477340;
+        d=1e100.net; s=20251104; t=1788872599; x=1789477399;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=o0d1D4rqSgyoha+rBAysFKG64mCQkEkUN/Iu3QpC/L0=;
-        b=qjsobDUd56ztLbo3/pEFwxX9AVf/2CIu4OW2FkShgyO+n68ttxkS6S9CpNQNINrkEH
-         XCt7XXJht2xOWwvGzyCvqejPJ+bMa8JfrX1ffaAs1NAcdIc/UMPbdaMu5OJh5ngK1X9j
-         Sh5aZLyIm0gFnJt4sRmco9/6P/pDWoW8MbQmaF9j6n+jkfYddD/IKQ0FykZszewDU59u
-         aWiME7Nj3TAf5ql7znr6WgMCEZ7hbYQszcsCFTSlgFfVnQK4pSwiVC4HC+2UbmSXnnz8
-         F8iKd8g+zHbt05eRh+ZgLIH8gbI6SIXsErGvLprWFApYzJvWL1Z/n5D5j1Ug1fMSid8x
-         3r4g==
-X-Gm-Message-State: AFuF++m4BXjlUx5YvQXTY3TY6nY6Ts2OtLVXKXjjp4+S3VlU5FG/vquC
-	R8kzR1ojxRJRs97b2vJd31EIY7PqqjGgt2fNxIe8J5mOy1mvDr+w4Oatdh3i10gyaD11yglzswg
-	ijX83IQ==
-X-Gm-Gg: AYBFou3C3TMW/AM9tYecKW8SdIlwD8ASrcjMBnIbfEDxQ9gNUMAf8sc6n+zEq15GUNZ
-	wB1nLd430GCbM4XKVNb5I6Npf8CQ6jOQ0q5neGd2qGap671AtcXuefL/09OYCsG/sODqmdCzJ2i
-	B+WYGuL/oYHUliNEghILI9iP0jTreg8LHZortauFlGkOmPiLsX2zeRLeGNidkRY7/8pTuE2OBep
-	GuN8rvlcnJS9lXREJnOLxPjId2NHebsf63sy9M6tEZBKfF6Dn6f3sfAfcVBBaAtXGw1chdyWicL
-	abBHKLFICVht92BusBCz0/e6x/4m9mcmTT85SB/f+cO+hRWGbfxknr3NBaWLEoE/6AUxBcySPYa
-	EbFXMXp+v6Eldfgn5L/QOAdl5WPUPjo+lmnR/zLM0T1kptMrsLheIkVuPrrYx58Hs/o1xIMrcID
-	kEJPDEkpbyHsc5irq5JxlSsPnZ2wYb4OYdkCyh9VUxaodyVhJfRdhR9hkr/lfV+EzjdUJDWq55U
-	G/Eu+2ETuoN2aB4HsHrrrQZ4aOkBMrV/99+5Nd8+RUh30bs8IZN
-X-Received: by 2002:a05:600c:1c21:b0:49d:1e79:35d6 with SMTP id 5b1f17b1804b1-49d1e79368dmr199645e9.14.1788872540374;
-        Tue, 08 Sep 2026 06:02:20 -0700 (PDT)
-Message-ID: <1b8c4276-0031-4a19-9663-b63799f5cf81@suse.com>
-Date: Tue, 8 Sep 2026 15:02:19 +0200
+        bh=UD/LJtaYXoAHqAilG4ijFKHbuTzxrL9p3CeWMQG+5VI=;
+        b=ZtrLH27oo8g8mG5ey/ejJyetxdxXAbioSn4ExOSvDLsONgSm7OAh1BGIwalLvtMVnF
+         9SWcxbj9rjpGZgKqUC3gDPyT7QzAiRJF1fAAgNwgfKHYAAoJK7KhI0zfgIbP4DZzDZ8U
+         dOJHEkmR2o/KMbqArs6m46gYnGRCqVQWAAEuS92Ho7755cF2TEgw425CPmxVtt3sFyyu
+         +T0v00RasLBLuKXFHjbgKB6Xqsc5Vp+Qo0Hakx9RvO7RAu1sRdha2wxvdj1xmOFuLnRR
+         /pdow2iUvXWne3efpnyAdiUk/JiTllW/V0MFrNoeh3WagQqvGCfJnCIQojjP6rGwlf2A
+         QFyQ==
+X-Gm-Message-State: AFuF++le6KnXyHviL4VO7ZytQzfmAQphAtwwxyITYydcsfsy51UceghS
+	m9So/5ckRR0wdo1VUUbr5TTRm2GS1gwJiU5PxTaGDrBbGzhpNwj2DTT7JKcvTj6gsse7k0hDjn3
+	MD8U9dQ==
+X-Gm-Gg: AYBFou2MEZV3QH5KLpyAOKXxER7CnqmlNL8Y8fvoeVuGHU2k/Yk/gDgjFkKlBtndN1c
+	hX24r1vmhouNWhBCYsJR3Qt5DIEaAnae9BTtHoX2ItU1nWEtjqqMEwEBlBtxKwAmz51w+Btfcvx
+	jJPANSoEXtk2DJGfPu0qlUcwhQsjvNgJOe/tTDpcyWXA7lvcfVm9wUplMxqADSSCcov8wzXdV8i
+	SycrgUyz8RxTl80x3a7tgWJCpiZj7+XbTEoERJd9Ey6NvaQzbmhFcPQAjB0LK9Y+vylfgyT5eJr
+	b2EtvW6hMSDQSm0q7XAratM/gg3/3MtW1Fxie38X23S93WaEFDQZEDlusKgqV/Hg+XQCYWpXu+p
+	R7WQkjE075Aj+kspbtiOW9lMuq2NHKGTp5I2u38A+Y2ywC8faeO3Vo6PS0unY7R6G7TZboSRVIz
+	6J6M6Im6bvQ08ZHRRPP+Y+oL6Qc1AOQiXYVkdvEvaSRmB8Viwfb5KOFexhqnQT36EsuviATF6zD
+	A5DW7XddrkFlUjF0dHQPClTCeSTyntMUKgJZmoWin+07g3felH1
+X-Received: by 2002:a05:600c:3551:b0:49d:16df:8521 with SMTP id 5b1f17b1804b1-49d16df85a8mr77640395e9.4.1788872598900;
+        Tue, 08 Sep 2026 06:03:18 -0700 (PDT)
+Message-ID: <a6766b40-7798-472a-9f61-dc96aa6b59d0@suse.com>
+Date: Tue, 8 Sep 2026 15:03:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 3/6] x86/vPCI: tighten locking assertions
+Subject: [PATCH 4/6] vPCI: drop bogus locking assertion
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stewart Hildebrand <stewart.hildebrand@amd.com>
 References: <eb5925e4-2409-452c-8768-4ca6717eb156@suse.com>
 Content-Language: en-US
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,86 +130,27 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <eb5925e4-2409-452c-8768-4ca6717eb156@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1788872541-CD74B87B-912D8256/0/0
+X-purgate-ID: tlsNG-33051d/1788872600-77EC24E9-83652250/0/0
 X-purgate-type: clean
-X-purgate-size: 2867
+X-purgate-size: 647
 
-Already when they were introduced, they seemed overly lax. In particular
-anything invoked solely from vpci_{read,write}() can check that the per-
-domain PCI r/w lock is held. There's no need to permit the alternative of
-holding the global PCI devices lock.
-
-vpci_msi_arch_update()'s sole call site is update_msi(), which in turn is
-solely called from write handling hooks.
-
-vpci_msi_update(), besides being called from vpci_msi_arch_update() (see
-above), has two further call sites:
-- vpci_msi_arch_enable(), called upon control register writes,
-- vpci_msix_arch_enable_entry(), called solely from update_entry(), which
-  in turn is again called upon control register writes, plus from
-  msix_write(), which read-locks the domain's PCI lock.
-Both arch_enable functions therefore can also have their assertions
-adjusted.
-
-vpci_msi_disable() is called from
-- vpci_msi_arch_disable(), called upon control register writes, 
-- vpci_msix_arch_enable_entry(), covered above,
-- vpci_msix_arch_disable_entry(), called update_entry() (see above) and
-  upon control register writes.
+msix_find() is a local helper, with all callers explicitly acquiring the
+per-domain PCI r/w lock. The checking, which should never have included
+the alternative of holding the global PCI devices lock, therefore is
+pretty much pointless.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-With this perhaps the comment near the top of vpci_msix_arch_print() might
-better go away. Thoughts?
 
---- a/xen/arch/x86/hvm/vmsi.c
-+++ b/xen/arch/x86/hvm/vmsi.c
-@@ -837,7 +837,7 @@ static int vpci_msi_update(const struct
+--- a/xen/drivers/vpci/msix.c
++++ b/xen/drivers/vpci/msix.c
+@@ -158,8 +158,6 @@ static struct vpci_msix *msix_find(const
  {
-     unsigned int i;
+     struct vpci_msix *msix;
  
--    ASSERT_PDEV_LIST_IS_READ_LOCKED(pdev->domain);
-+    ASSERT(rw_is_locked(&pdev->domain->pci_lock));
- 
-     if ( (address & MSI_ADDR_BASE_MASK) != MSI_ADDR_HEADER )
+-    ASSERT_PDEV_LIST_IS_READ_LOCKED(d);
+-
+     list_for_each_entry ( msix, &d->arch.hvm.msix_tables, next )
      {
-@@ -878,7 +878,7 @@ void vpci_msi_arch_update(struct vpci_ms
-     int rc;
- 
-     ASSERT(msi->arch.pirq != INVALID_PIRQ);
--    ASSERT_PDEV_LIST_IS_READ_LOCKED(pdev->domain);
-+    ASSERT(rw_is_locked(&pdev->domain->pci_lock));
- 
-     for ( i = 0; i < msi->vectors && msi->arch.bound; i++ )
-     {
-@@ -930,7 +930,8 @@ int vpci_msi_arch_enable(struct vpci_msi
-     int rc;
- 
-     ASSERT(msi->arch.pirq == INVALID_PIRQ);
--    ASSERT_PDEV_LIST_IS_READ_LOCKED(pdev->domain);
-+    ASSERT(rw_is_locked(&pdev->domain->pci_lock));
-+
-     rc = vpci_msi_enable(pdev, vectors, 0);
-     if ( rc < 0 )
-         return rc;
-@@ -948,7 +949,7 @@ static void vpci_msi_disable(const struc
-     unsigned int i;
- 
-     ASSERT(pirq != INVALID_PIRQ);
--    ASSERT_PDEV_LIST_IS_READ_LOCKED(pdev->domain);
-+    ASSERT(rw_is_locked(&pdev->domain->pci_lock));
- 
-     for ( i = 0; i < nr && bound; i++ )
-     {
-@@ -1004,7 +1005,8 @@ int vpci_msix_arch_enable_entry(struct v
-     int rc;
- 
-     ASSERT(entry->arch.pirq == INVALID_PIRQ);
--    ASSERT_PDEV_LIST_IS_READ_LOCKED(pdev->domain);
-+    ASSERT(rw_is_locked(&pdev->domain->pci_lock));
-+
-     rc = vpci_msi_enable(pdev, vmsix_entry_nr(pdev->vpci->msix, entry),
-                          table_base);
-     if ( rc < 0 )
+         const struct vpci_bar *bars = msix->pdev->vpci->header.bars;
 
 
