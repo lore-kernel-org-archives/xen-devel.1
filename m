@@ -4,44 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 61D13C79F8C
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 06:40:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1412593.1642987 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77BEBC79FB5
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 07:11:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1412604.1642998 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4ByQ-0004WF-48; Wed, 09 Sep 2026 06:39:58 +0000
+	id 1x4CSA-000225-GC; Wed, 09 Sep 2026 07:10:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1412593.1642987; Wed, 09 Sep 2026 06:39:58 +0000
+Received: by outflank-mailman (output) from mailman id 1412604.1642998; Wed, 09 Sep 2026 07:10:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4ByQ-0004W8-13; Wed, 09 Sep 2026 06:39:58 +0000
-Received: by outflank-mailman (input) for mailman id 1412593;
- Wed, 09 Sep 2026 06:39:57 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x4CSA-00021y-CW; Wed, 09 Sep 2026 07:10:42 +0000
+Received: by outflank-mailman (input) for mailman id 1412604;
+ Wed, 09 Sep 2026 07:10:41 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x4ByP-0004W2-8N
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 06:39:57 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4ByO-00BBNE-Hk
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 08:39:56 +0200
-Received: from [10.42.69.11] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa0ff2f-e002-0a2a0a5209dd-0a2a450bb530-14
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 08:39:56 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa0ff3c-b7e8-0a2a450b0019-4a7de14caf11-3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 08:39:56 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-482f6356256so807711f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 08 Sep 2026 23:39:56 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cee7fec25sm625008065e9.13.2026.09.08.23.39.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 08 Sep 2026 23:39:55 -0700 (PDT)
+ (envelope-from <julien@xen.org>) id 1x4CS9-00021s-Qn
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 07:10:41 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1x4CS8-006KcO-1K;
+ Wed, 09 Sep 2026 07:10:40 +0000
+Received: from [2a02:8012:3a1:0:111e:e427:1551:134]
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <julien@xen.org>) id 1x4CS9-006Qxe-06;
+ Wed, 09 Sep 2026 07:10:40 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,99 +41,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788935996; x=1789540796; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=pk0Y7Ri/0c66D0rPaxC/+e1fmcCnGHtLIj5KUnOiFQ0=;
-        b=DV6g3HqGoWxwbaMmwOUYqoVKbhQanr1oE2ITocaYq8hH7vXHelqk5nxTGFz/cNutyx
-         u72N/sAfPFp6lgld9xdFiyLC0pzqCTtCv6lw5Deb1qqP2VK1XJRO4T6cWB8l8NSIwdJ6
-         ugX+IeS2Lht+UqIVbM9F1KtKf8Nk5GJqhH3L5Cv6YNdMs/kTp66MFFjIAtZcQe22KqQA
-         6Omp3vNWyidBGy5SZO94sBGi1hhTXya1M1XWIcioAgbmlFC6zeGgt1UAVQ3hOvMmz4zA
-         hs6AKGmAuqKnM7ay8LjAH4ejtgc04Cd21pIP0jB3Quddkd3Aj8HgCV9gszSKKrefe3d+
-         xIqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788935996; x=1789540796;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=pk0Y7Ri/0c66D0rPaxC/+e1fmcCnGHtLIj5KUnOiFQ0=;
-        b=GMU2klYZ0OEfeoMIjoVJ5JLiZln/rGq6/CoZBTiL71olC3L1OOzoBq03qYIYaiQ9ho
-         7lAk9HBNpedek4DelxZKSYJTk06zokTjlB26fCMkBt00BYdoLo8O4WVseJWW1FmosRrH
-         W71auXBk6xKOoYNnmBV+EWzmv692YBOifu25Ma+DYM5xqpyvQaaBvoo3QBRzCKZqQkbZ
-         xbkLUm85vDQcbmzx4dBwInWfgd1diIi+PW5oulftrGzVqdi0iB1+TG/99q5gRSIC8o1S
-         gcHOcjSkEMR/MFnK+hX1FvHvBNkLi9qRqXkF5J8oyMly991YhokiLy6KRn8lhCPJZqvz
-         T9qg==
-X-Forwarded-Encrypted: i=1; AKwUvBwpvoxtAb1Jsu5iNE9SPvHrvXnVXuJvUZ5DuP6Od0qTW1/4Jl6P/mQfjReqEio7obrSUHbjAl9TQmE=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kvWPjZt65X+68JkjUty3tX66mIkgcKn4ZGMc592ZwySPMEvQxM
-	+pDzQ0zaaCVPHcZ38E17vc/AC1mGJSRwhrUgpn8/fu/sxY6chSG/6YS3aiDHAXiMGgua2k7yWZ3
-	crTRQsg==
-X-Gm-Gg: AYBFou2tAN4knIxAHPHhLl7OL5BsHabtfpH6z+CwlDHYfm5YWWK3QImz1R0rReV0XA0
-	flNvWAWaBay3QObgRxC+4dRMHLxsV9eMaGXvU/i3jXl/Um1hG+2uF59UoMiU5b+eEhKO45NcLsW
-	j1dwKDhGzlyX1gBv/uuaUQE/K4Zgo3SDF+gopgFSkw8xRXvEi27HTomYLYrlHrCmmiHYtzfvpTv
-	zkdEn0LsBy9Y3CWmqqLDzWFmHmWxd6+N7C3a2qDc4iDdddoqKeGOqBhEmaU7DtlYNDbfiA+kw+8
-	QQoapJ6EPIIHf1y246fiQRwFvVsK1g6nGAF8sEn6ZR3MTw86pBU0r3NhwNq9GlkPJDW7614l7rq
-	H94XhVCSoXXpuoXvBjk8D6mOlggLH8thoPUYvQD4qBvBVzdy2KD6iBV+U7hbd/d9J1H0nLqfDuX
-	M4QSRjiM+2bOt7+5wAX9bMKyfQxmo9KjxXUTW1J0LOWFSgtFeLcL1mqX1RmivKRxMzd2fNoeH4D
-	zuzf0spHtsvZvel/8uRJAbsMKqdywOlglcgb3kgnUACYqzy5CvqKAJzb9pIjzGV
-X-Received: by 2002:a05:600c:8b12:b0:49c:f13e:e4d with SMTP id 5b1f17b1804b1-49d17572958mr113105835e9.10.1788935995876;
-        Tue, 08 Sep 2026 23:39:55 -0700 (PDT)
-Message-ID: <891c139a-d6b3-4293-8eb5-7c0af82fd80c@suse.com>
-Date: Wed, 9 Sep 2026 08:39:54 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
+	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
+	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
+	bh=79YGx68BM0QGfMeF3+qw2QlvE/vUpsEo3n5u+HdzZOM=; b=06XibakQADxRmKc77/Msef9sAO
+	BLRStR3Uth4MNXAuDPfl08+Nzx0FxA3wKo737cCeYmwaHKALss35+Ud3VMvbNdUp720mZM5WMjLNy
+	Op7TgRqArRdVrtM7dovCiDGEQRPWI+eT1MLkZnaBgy6TDpjONgGgipuwZeBNEvLfVOJU=;
+Message-ID: <a78545a9-a6e0-4591-9ead-2b11e2153d2f@xen.org>
+Date: Wed, 9 Sep 2026 08:10:38 +0100
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 0/3] x86: Fixes for not-quite-XSA in
- pci_conf_write_intercept()
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20260908215721.3346842-1-andrew.cooper3@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260908215721.3346842-1-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8
+Subject: Re: [PATCH v2] xen/arm64/atomic: Clear exclusive monitor on cmpxchg
+ failure
+To: Ryoji Okamoto <okamoto@valinux.co.jp>, xen-devel@lists.xenproject.org
+Cc: Hirokazu Takahashi <taka@valinux.co.jp>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20260909061253.546312-1-okamoto@valinux.co.jp>
+Content-Language: en-GB
+From: Julien Grall <julien@xen.org>
+In-Reply-To: <20260909061253.546312-1-okamoto@valinux.co.jp>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1788935996-ABCD79EA-0A3D56B8/0/0
-X-purgate-type: clean
-X-purgate-size: 438
 
-On 08.09.2026 23:57, Andrew Cooper wrote:
-> Plumb pci_sbdf_t up and down the callchain to simplify parameter passing and
-> make it harder to forget the segment.
+Hi Ryoji,
+
+On 09/09/2026 08:12, Ryoji Okamoto wrote:
+> When the value comparison fails in atomic_cmpxchg, the code branches
+> out without executing stxr, leaving the exclusive monitor in the
+> exclusive state set by ldxr.
 > 
-> Andrew Cooper (3):
->   x86/pv: Convert struct mmio_ro_emulate_ctxt to use pci_sbdf_t
->   x86/pci: Convert pci_mmcfg_{read,write}() to use pci_sbdf_t
->   x86/pci: Update pci_conf_write_intercept() to use pci_sbdf_t
+> Add `clrex` to the failure path to explicitly clear the exclusive
+> monitor.
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+The Xen atomics operations were originally taken from Linux. Looking at 
+the implementation there, I don't see a clrex on the failure path. Do 
+you have more details why we would want it?
+
+Also, if this is necessary on arm64, then we most likely we want the 
+same for the arm32 implementation (including __atomic_add_unless()).
+	
+
+Cheers,
+
+-- 
+Julien Grall
 
 
