@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 93EF3C79FB7
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 15:09:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1413284.1643563 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE912C79FB6
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 15:09:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1413281.1643554 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4Juv-0004F1-H9; Wed, 09 Sep 2026 15:08:53 +0000
+	id 1x4Juu-0003zJ-7Z; Wed, 09 Sep 2026 15:08:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1413284.1643563; Wed, 09 Sep 2026 15:08:53 +0000
+Received: by outflank-mailman (output) from mailman id 1413281.1643554; Wed, 09 Sep 2026 15:08:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4Juv-0004Eq-DU; Wed, 09 Sep 2026 15:08:53 +0000
-Received: by outflank-mailman (input) for mailman id 1413284;
- Wed, 09 Sep 2026 15:08:52 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x4Juu-0003yx-6p
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 15:08:52 +0000
+	id 1x4Juu-0003z8-3a; Wed, 09 Sep 2026 15:08:52 +0000
+Received: by outflank-mailman (input) for mailman id 1413281;
+ Wed, 09 Sep 2026 15:08:51 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x4Jus-0003ra-VY
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 15:08:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4Jut-007z99-Jn
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 17:08:51 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x4Jus-00DoNW-CD
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 17:08:50 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa17682-8faa-0a2a0a5109dd-0a2a450c8274-2
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 17:08:51 +0200
-Received: from [74.125.228.140] (helo=mail-ej2-f12.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa17680-e002-0a2a0a5209dd-0a2a45048b98-12
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 17:08:50 +0200
+Received: from [209.85.218.46] (helo=mail-ej1-f46.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa17683-f479-0a2a450c0019-4a7de48c9210-3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 17:08:51 +0200
-Received: by mail-ej2-f12.google.com with SMTP id
- a640c23a62f3a-c294496989aso15911166b.3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 08:08:51 -0700 (PDT)
+ id 6aa17681-b57f-0a2a45040019-d155da2ed9b8-3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 17:08:49 +0200
+Received: by mail-ej1-f46.google.com with SMTP id
+ a640c23a62f3a-c255c58156bso1230116666b.3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 08:08:49 -0700 (PDT)
 Received: from fedora (IW396200.net.t-com.hr. [195.29.234.54])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c261f673000sm709991666b.24.2026.09.09.08.08.49
+ a640c23a62f3a-c261f673000sm709991666b.24.2026.09.09.08.08.47
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Sep 2026 08:08:50 -0700 (PDT)
+ Wed, 09 Sep 2026 08:08:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788966531; x=1789571331; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1788966529; x=1789571329; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=XBmqn5QW1wcqH90/ZG0vHM4CgtbXqvupt8SmP6XIcus=;
-        b=NZsNTGh80mlwrtH2WIm2Z+8QvqQhqheAerJa0op/12z2uUpkFGimIqnpTP0s8qJmtk
-         12hUKIMIoatn28V7Jgz8BDV4TmZD/ClcgQ9Uw7HrhGwCUqOgB7PMJRVaU/HXgTZY6FsP
-         trbbUXzAoKKzpr7eEqb8L3kczfDAtbR+3jX1Y8ZyIyaOuB1LWJbZR7rGqrY2hvkijAfN
-         RBadKHfLZUiNxCuuieASXfcH91YnmHqRZSQ+ITPSU6A7ZM7cEHk/4LDVQ+j+DSaQjyFg
-         7wfD107cOI5/oyH1m1JfZWvFSIexFXobwuNNfo7PraAIP8MGwrimPsZ7rvM+IccaoIen
-         K+9g==
+        bh=Dt+oJbLlbJOl272w2oSgdeAx/VzdS+DDC/2pUVZckDs=;
+        b=HuAUpCbos4lRFB/J4xlcz5OHPjwi6dJTZ2LdcaqS/jtojHTrsiX4aQ8BSQ+K88RyCY
+         gkQWXGQf0uxh3KgAc5lQEM+M8LbKp7FfyA/CEnxchQwov3oWlc7BMmpzMhsJjMgUAx6B
+         JWnW4v3kIMzlQKsnn/Lsj43FEKRuHWvQuOxURFXxATfbCaKtyujVShXvqC7qTENfU2Ux
+         GwuzICfLP2mpl+lZIKCnz+oaF3JZolusN0zuBmDbeWjDSH1RXJCCaPhpeF5PsfVk3t8H
+         5CAq7y4z7EHdxVbtu+h5ut0mRMsXvAy0jvxyHgH39x6wDIOpBDLYYD8M+QW5HZF4AEYp
+         iBsg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788966531; x=1789571331;
+        d=1e100.net; s=20251104; t=1788966529; x=1789571329;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=XBmqn5QW1wcqH90/ZG0vHM4CgtbXqvupt8SmP6XIcus=;
-        b=LzaVE5MtE70gHZtyMxWRYkF2hyuEhQf5eQ1Vz5lyEbBCysbjBvqGblH8O31TdD1rqL
-         4e+/ZhuspbSw1M3xSDYFgMJ685IPpnqq1+xlf58l/Vn3znD1mexWHj0tKgRqGfIZQ9AD
-         LCm3EmFdtzFAxz171mR8IS56cUpiqGRP+l/ABvTvmVzX29RSiXf1Qq5b60fbi3qFNaqL
-         /gCQynDirjGOyU4hW2FzLbm14Ad9/U4YQMxZnnU9tCSfkMHYJdUHoQnsof0bzGJlaWhm
-         6AjC2g3cQOsxMmYKF6zn486g3+85vDi97bxTs2n4Yi9clhvo/gOezOs2uT7vLHKd5fWs
-         gVnw==
-X-Gm-Message-State: AFuF++ngALNpHhJm8Ni9dblpLNjoAIZ8XM+fNX9Gkm7qCIwEtilPtgOd
-	yxQho2h5RL7qib6MJowVRxKNO4ATth02DkE0uJVEjFoUVkzNekZSx7bTvTdpxon/
-X-Gm-Gg: AYBFou0O06SpyLSIRg272zvXlRtyeLDuwaMTE+jnCoKgd1uNPYPdbEigGXW6q/fAyB5
-	S+QPD2MHVDImZUJ66Sy+6pmcZ/mrYIqsBJWUjjf8hHhUP98xFpcD2wfYszEOiT1Ap63KIDTkQnK
-	N+0up77wfKZ9wLOX5fH+bqcOC6U/tqQ55k3PmPtwHe8CFup6BhwmvjS7nLJ9plJiejCF1QjlkgX
-	fCQGUKwtrvFfCXhvJNaz8H5gB+gKEp4C1zVSmv+Fuh/Mwl7N1Urj3fViruDa7I/ko8KsxJuKAZt
-	LfA1g7DIwkDYZa1HkNbi37sQLHQq8zKn9LxGEuOhExnOzt3Mw8N81EWKjzYWiT+mCSVt5PL7OXy
-	WMitO00HpeFRYafcSqutvtGjgVK+V2fOXx5Axg6+1NP+Lz6PVK4VG4NoNmWq/vKUXYguQvAVw4Y
-	KuRC1qimFPrixyavk4zwFTWucvRmXYE+bTApfqgA700t91zLOheCKwIc2WgPfWc+WnxcMDkWh2N
-	AbcShW2NpcqqUGKGZ4=
-X-Received: by 2002:a17:907:c244:b0:c26:1648:a076 with SMTP id a640c23a62f3a-c2941be4cc7mr63914866b.49.1788966530979;
-        Wed, 09 Sep 2026 08:08:50 -0700 (PDT)
+        bh=Dt+oJbLlbJOl272w2oSgdeAx/VzdS+DDC/2pUVZckDs=;
+        b=No5rS1RqeeHTXdw8UixBNHCdnwGxDg3WhHHyzoUkL8iW0lxZDjzDWZlBTl3SfqQm0X
+         mq+c2iMY4p/a8iapfId+N908YFVqjyI9s7fqajGPYULSZOLeYlzICnY30XmNioH7JbTj
+         Zv6iWxMEWnWd7XEoA23tiJN40LwHWZ7oBQVRs+f9vl0Gb/dkVUbokbijtyO7smowLfZ3
+         kknx26CnzkApBTUc0yOrBxk4JcfCeg/Y2/GBxIpg6BHy0aOtD2gmIXxrQreJC2zodaGK
+         3LuOOaP0uRc+Hn6mKf9GwzJkq9bMbwRVyE5kPV2ZzOS2nR5cNAvWXFIFaxliM3z/8Nx5
+         hzew==
+X-Gm-Message-State: AFuF++lhXknTGnHfIAAXNCGdnAQLx5e8VZpYHIlgAkjTkkiXFbqLrEHP
+	Oeqi+4DihaXuYyY14FR5E4G2VELdalOoJB/nGtgGJTOLEkRvSRKCG4riEVD4EDWk
+X-Gm-Gg: AYBFou0+COdw4Sn2jRA9SBTumHmuW8fHzK3IIJeXTmNVTg5PMAvbPLeJhXVmEkfBNOi
+	Kic9d8bNYjxit3p7b0QY3ULaR/Io+cwWqGAbd4QLoPJ1wO6cUs+iGMp3KqpDCrZ+U01MXiCeMeE
+	jXn3R3IlcU4x0zm13l7d1px4AkRMl+vE5kxmea+6FCvrcrr6Jx94UU+SebjPtyuIJG4HdG8gegc
+	FrfrkgjoZq9wAazpHi6mpLJ99Gl2ZSt1PdnQfVyD+VRUcAFnDJR6LSZj7l8bZIxIdBnk9kVQb1M
+	CNkEVYhke7zD0FW/e7rUuJGaXCTYZfbWSFH5ODwxaS2LbQ+lPDMTXAe70alXtPUF6TKXztrFM9P
+	xuE0xiJPran90lgm92ardK6TDQLSX5WmYE2KIquX4VdXtlwhKNTyzUsgCTfxz80sqTsQzpP4Tw8
+	71baRLTwDwkjuMrm61Eh65Amwp+auPOZMaZTjeEuEvvzFPzIw0XlwbA5ZTTSxoAqzTwGMUt4CrT
+	FCxLhFg+KNaNAJcfEmPMmNWZDqaUw==
+X-Received: by 2002:a17:907:d90:b0:c24:6985:d7a1 with SMTP id a640c23a62f3a-c260c7aa1d2mr1326746266b.7.1788966529239;
+        Wed, 09 Sep 2026 08:08:49 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -104,153 +104,336 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v9 13/20] xen/riscv: introduce (de)initialization helpers for vINTC
-Date: Wed,  9 Sep 2026 17:07:31 +0200
-Message-ID: <bd88906b7f36af7e973d7b4fcdda2c571e0845fc.1788876411.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v9 12/20] xen/riscv: introduce minimal virtual APLIC (vAPLIC) infrastructure
+Date: Wed,  9 Sep 2026 17:07:30 +0200
+Message-ID: <2317c9e591944d29f77d5759f2b4c7570186e6cf.1788876411.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1788876411.git.oleksii.kurochko@gmail.com>
 References: <cover.1788876411.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1788966531-768DDA5B-AB41261D/10/73395122804
+X-purgate-ID: tlsNG-ebf023/1788966529-508D9B50-9E6824E9/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 4217
+X-purgate-size: 10434
 
-Add common helpers domain_vintc_init() and domain_vintc_deinit() to
-allocate and deallocate a virtual interrupt controller (vINTC)
-structure and initialize basic virtual interrupt controller registers.
+At the current development stage, only domain vINTC init and deinit
+operations are required, so implement those first.
 
-domain_vintc_deinit() isn't called at the moment as arch_domain_destroy()
-is implemented as stub at the moment.
+Initialize vAPLIC's domaincfg to with the interrupt-enable bit set and
+MSI delivery mode selected as the current solution is exepcted to have
+always IMSIC, and initialize vintc->ops.
 
+Other operations such as emulate_load(), emulate_store(), and is_access()
+will be needed once guests are running and MMIO accesses to APLIC MMIO
+range must be handled. These will be introduced separately later.
+
+Introduce a structure to describe a virtual interrupt controller (vINTC)
+and a vintc_ops structure, which provides operations to emulate load and
+store accesses to interrupt controller MMIOs and to check whether a given
+address falls within the MMIO range of a specific virtual interrupt
+controller.
+Note that already existed init_ops field in struct vintc will be init-ed
+for APLIC in the follow up patch.
+
+The vAPLIC implementation of these operations will be provided later
+once guests can be run and these operations are actually needed.
+
+Introduce these structures here as they are required for the implementation
+of domain_vaplic_init() and domain_vaplic_alloc(). Also, introduce
+vaplic_init() and init vintc_ops->vcpu_init() with it.
+
+Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Acked-by: Jan Beulich <jbeulich@suse.com>
 ---
 Changes in v9:
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+ - Nothing changed. Only rebase.
 ---
 Changes in v8:
- - Add call of domain_vintc_deinit() to arch_domain_destroy().
- - Update printk message.
- - Drop Acked-by.
+ - Drop vaplic_init() and vcpu_imsic_deinit() as they are just calling
+   IMSIC related files as we are expecting to work only MSI mode.
+ - And add cf_check for vcpu_imsic_(de)init as they are directly used now
+   for vintc_ops->vcpu_(de)init.
 ---
-Changes in v6-7:
+Changes in v7:
+ - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+ - Update the comment above init_ops member of vintc structure.
+---
+Changes in v6:
  - Nothing changed. Only rebase.
 ---
 Changes in v5:
- - s/printk/printk_once().
- - Add Acked-by: Jan Beulich <jbeulich@suse.com>.
+ - Add explanational comments for fields in struct vintc.
+ - Drop unnessary empty line in asm/aplic.h.
+ - Update the commit message to tell that init_ops will be init-ed later
+   in follow up patch.
+ - Init. .domaincfg with only APLIC_DOMAINCFG_RO.
+ - Update the comment above APLIC_DOMAINCFG_RO.
+ - Add defintion for APLIC_DOMAINCFG_BE.
 ---
 Changes in v4:
- - Drop the comment from domain_vintc_init() about guests receiving a
-   virtual interrupt controller that mirrors the host hardware as there
-   can (and eventually should) be alternatives.
- - Finish renaming intc_version to intc_variant in domain_vintc_(de)init()
-   (enum intc_variant, info->hw_variant, local variable) started in the
-   prev patch.
+ - Change subject of the commit.
+ - s/APLIC_DOMAINCFG_RO80/APLIC_DOMAINCFG_RO + added a comment above definition.
+ - Drop unnessary blank lines.
 ---
 Changes in v3:
- - Drop redundant printk() from domain_vintc_deinit()'s default case to
-   avoid duplicate messages when init fails.
- - Add a comment to domain_vintc_init() clarifying that guests currently
-   receive a virtual interrupt controller that mirrors the host hardware.
+ - Drop ASSERT() before vintc->ops->vcpu_init() in arch_vcpu_create(); a
+   NULL deref already produces a sufficient backtrace.
+ - Parenthesize macro argument in to_vaplic().
+ - Drop __init from domain_vaplic_init() and domain_vaplic_deinit() since
+   the caller domain_vintc_init() (follow-up patch) is not __init.
+ - Remove pointless zero-initializer for rc in vcpu_vaplic_init().
+ - Fix domain_vaplic_deinit() to null d->arch.vintc before freeing, making
+   the function idempotent.
+ - Drop intc_irq_nums(), (*nr_irqs)(void) hook from intc_hw_operations,
+   aplic_nr_irqs(), and vintc->nr_irqs field entirely.
+ - Rename vcpu_vaplic_init() to vaplic_init() and drop vgein_assign() and
+   imsic_set_guest_file_id() calls; those will be introduced/called later,
+   where for sure we will know on which pCPU vCPU as it is required for
+   proper h/w IMSIC interrupt file calculation, to have this initialization
+   in one place.
+ - Introduce vaplic_deinit().
 ---
 Changes in v2:
- - Drop __init for domain_vintc_(de)init().
- - Update the commit message.
+ - s/vcpu/v for function arguments in struct vintc_ops().
+ - Update the comment above is_access() and drop const for addr argument.
+ - Update to_vaplic() to work with 'struct domain *'.
+ - Drop smsiaddrcfg{h} from vaplic_regs struct as they aren't used for now.
+ - Drop inclusion of xen/schec.h from intc.c.
+ - use result of xvzalloc() as initializer in vpalic_alloc().
+ - Drop goto in domain_vaplic_init().
+ - s/XVFREE/xvfree.
+ - s/aplic/vintc.
+ - Drop __init for vcpu_vaplic_init() as it could be called for secondary CPU bring up.
+ - Drop vaplic_alloc().
+ - Drop vintc_ops struct, embed callbacks iniside struct vintc.
+ - Introduce and init vintc irqs for vAPLIC.
+ - Introduce intc_irq_nums() to properly initialize number of vAPLIC's irqs.
 ---
 ---
- xen/arch/riscv/domain.c           |  7 ++++++-
- xen/arch/riscv/include/asm/intc.h |  3 +++
- xen/arch/riscv/intc.c             | 35 +++++++++++++++++++++++++++++++
- 3 files changed, 44 insertions(+), 1 deletion(-)
+ xen/arch/riscv/Makefile             |  1 +
+ xen/arch/riscv/domain.c             | 11 ++----
+ xen/arch/riscv/imsic.c              |  4 +--
+ xen/arch/riscv/include/asm/aplic.h  |  7 ++++
+ xen/arch/riscv/include/asm/intc.h   | 12 +++++++
+ xen/arch/riscv/include/asm/vaplic.h | 34 +++++++++++++++++++
+ xen/arch/riscv/vaplic.c             | 52 +++++++++++++++++++++++++++++
+ 7 files changed, 111 insertions(+), 10 deletions(-)
+ create mode 100644 xen/arch/riscv/include/asm/vaplic.h
+ create mode 100644 xen/arch/riscv/vaplic.c
 
+diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
+index 8e7a6370eee2..fcd73c7a2dd5 100644
+--- a/xen/arch/riscv/Makefile
++++ b/xen/arch/riscv/Makefile
+@@ -25,6 +25,7 @@ obj-y += smpboot.o
+ obj-y += stubs.o
+ obj-y += time.o
+ obj-y += traps.o
++obj-y += vaplic.o
+ obj-y += vmid.o
+ obj-y += vm_event.o
+ obj-y += vsbi/
 diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-index 45712d305975..d94652809e36 100644
+index c9933147595e..45712d305975 100644
 --- a/xen/arch/riscv/domain.c
 +++ b/xen/arch/riscv/domain.c
-@@ -291,7 +291,9 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+@@ -11,6 +11,7 @@
+ #include <asm/bitops.h>
+ #include <asm/cpufeature.h>
+ #include <asm/csr.h>
++#include <asm/intc.h>
+ #include <asm/riscv_encoding.h>
+ #include <asm/vtimer.h>
  
- void arch_domain_destroy(struct domain *d)
- {
--    printk(XENLOG_WARNING "%s: unimplemented\n", __func__);
-+    printk(XENLOG_WARNING "%s: not fully implemented\n", __func__);
-+
-+    domain_vintc_deinit(d);
- }
- 
- int arch_domain_create(struct domain *d,
-@@ -308,6 +310,9 @@ int arch_domain_create(struct domain *d,
-     if ( (rc = p2m_init(d, config)) != 0)
+@@ -155,14 +156,8 @@ int arch_vcpu_create(struct vcpu *v)
+     if ( (rc = vcpu_vtimer_init(v)) )
          goto fail;
  
-+    if ( (rc = domain_vintc_init(d)) )
+-    /*
+-     * As interrupt controller (IC) is not yet implemented,
+-     * return an error.
+-     *
+-     * TODO: Drop this once IC is implemented.
+-     */
+-    rc = -EOPNOTSUPP;
+-    goto fail;
++    if ( (rc = v->domain->arch.vintc->ops->vcpu_init(v)) )
 +        goto fail;
-+
+ 
      return rc;
  
-  fail:
+diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
+index 4a2ef5069d0c..809f29af860a 100644
+--- a/xen/arch/riscv/imsic.c
++++ b/xen/arch/riscv/imsic.c
+@@ -318,7 +318,7 @@ static int imsic_parse_node(const struct dt_device_node *node,
+     return 0;
+ }
+ 
+-int vcpu_imsic_init(struct vcpu *v)
++int cf_check vcpu_imsic_init(struct vcpu *v)
+ {
+     struct vimsic_state *imsic_state;
+ 
+@@ -342,7 +342,7 @@ int vcpu_imsic_init(struct vcpu *v)
+     return 0;
+ }
+ 
+-void vcpu_imsic_deinit(struct vcpu *v)
++void cf_check vcpu_imsic_deinit(struct vcpu *v)
+ {
+     XVFREE(v->arch.vimsic_state);
+ }
+diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
+index b0724fe6f360..5a7fcb6ec4f1 100644
+--- a/xen/arch/riscv/include/asm/aplic.h
++++ b/xen/arch/riscv/include/asm/aplic.h
+@@ -15,8 +15,15 @@
+ 
+ #include <asm/imsic.h>
+ 
++/*
++ * domaincfg read-only fields (AIA spec):
++ *  - bits [31:24] -> read-only 0x80
++ *  - bit 7        -> read-only 0
++ */
++#define APLIC_DOMAINCFG_RO      (0x80U << 24)
+ #define APLIC_DOMAINCFG_IE      BIT(8, U)
+ #define APLIC_DOMAINCFG_DM      BIT(2, U)
++#define APLIC_DOMAINCFG_BE      BIT(0, U)
+ 
+ #define APLIC_SOURCECFG_SM_INACTIVE     0x0
+ #define APLIC_SOURCECFG_SM_DETACH       0x1
 diff --git a/xen/arch/riscv/include/asm/intc.h b/xen/arch/riscv/include/asm/intc.h
-index 875728885292..6fc0e620e937 100644
+index a4e678fad90b..875728885292 100644
 --- a/xen/arch/riscv/include/asm/intc.h
 +++ b/xen/arch/riscv/include/asm/intc.h
-@@ -79,4 +79,7 @@ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority);
+@@ -17,6 +17,7 @@ enum intc_variant {
+ struct cpu_user_regs;
+ struct irq_desc;
+ struct kernel_info;
++struct vcpu;
  
- void intc_handle_external_irqs(struct cpu_user_regs *regs);
+ struct intc_info {
+     enum intc_variant hw_variant;
+@@ -53,8 +54,19 @@ struct vintc_init_ops {
+     int (*make_domu_dt_node)(struct kernel_info *kinfo);
+ };
  
-+int domain_vintc_init(struct domain *d);
-+void domain_vintc_deinit(struct domain *d);
++struct vintc_ops {
++    /* Initialize some vINTC-related stuff for a vCPU */
++    int (*vcpu_init)(struct vcpu *v);
 +
- #endif /* ASM__RISCV__INTERRUPT_CONTOLLER_H */
-diff --git a/xen/arch/riscv/intc.c b/xen/arch/riscv/intc.c
-index 2864a896b677..f5c8af6ddea4 100644
---- a/xen/arch/riscv/intc.c
-+++ b/xen/arch/riscv/intc.c
-@@ -11,6 +11,7 @@
++    /* Deinitialize some vINTC-related stuff for a vCPU */
++    void (*vcpu_deinit)(struct vcpu *v);
++};
++
+ struct vintc {
++    /* Callbacks invoked during domain construction only. */
+     const struct vintc_init_ops *init_ops;
++    /* Runtime callbacks used for the lifetime of the guest. */
++    const struct vintc_ops *ops;
+ };
  
- #include <asm/aia.h>
- #include <asm/intc.h>
+ void intc_preinit(void);
+diff --git a/xen/arch/riscv/include/asm/vaplic.h b/xen/arch/riscv/include/asm/vaplic.h
+new file mode 100644
+index 000000000000..96080bfbc23b
+--- /dev/null
++++ b/xen/arch/riscv/include/asm/vaplic.h
+@@ -0,0 +1,34 @@
++/* SPDX-License-Identifier: MIT */
++/*
++ * xen/arch/riscv/vaplic.c
++ *
++ * Virtual RISC-V Advanced Platform-Level Interrupt Controller support
++ *
++ * Copyright (c) Microchip.
++ */
++
++#ifndef ASM__RISCV__VAPLIC_H
++#define ASM__RISCV__VAPLIC_H
++
++#include <xen/kernel.h>
++#include <xen/types.h>
++
++#include <asm/intc.h>
++
++struct domain;
++
++#define to_vaplic(d) container_of((d)->arch.vintc, struct vaplic, vintc)
++
++struct vaplic_regs {
++    uint32_t domaincfg;
++};
++
++struct vaplic {
++    struct vintc vintc;
++    struct vaplic_regs regs;
++};
++
++int domain_vaplic_init(struct domain *d);
++void domain_vaplic_deinit(struct domain *d);
++
++#endif /* ASM__RISCV__VAPLIC_H */
+diff --git a/xen/arch/riscv/vaplic.c b/xen/arch/riscv/vaplic.c
+new file mode 100644
+index 000000000000..c9f188b989a3
+--- /dev/null
++++ b/xen/arch/riscv/vaplic.c
+@@ -0,0 +1,52 @@
++/* SPDX-License-Identifier: MIT */
++/*
++ * xen/arch/riscv/vaplic.c
++ *
++ * Virtual RISC-V Advanced Platform-Level Interrupt Controller support
++ *
++ * Copyright (c) Microchip.
++ * Copyright (c) Vates
++ */
++
++#include <xen/errno.h>
++#include <xen/sched.h>
++#include <xen/xvmalloc.h>
++
++#include <asm/aia.h>
++#include <asm/imsic.h>
++#include <asm/intc.h>
 +#include <asm/vaplic.h>
- 
- static const struct intc_hw_operations *__ro_after_init intc_hw_ops;
- 
-@@ -83,3 +84,37 @@ int __init make_intc_domU_node(struct kernel_info *kinfo)
- 
-     return vintc->init_ops->make_domu_dt_node(kinfo);
- }
 +
-+int domain_vintc_init(struct domain *d)
++#include "aplic-priv.h"
++
++static const struct vintc_ops vintc_ops = {
++    .vcpu_init = vcpu_imsic_init,
++    .vcpu_deinit = vcpu_imsic_deinit,
++};
++
++int domain_vaplic_init(struct domain *d)
 +{
-+    int ret = -EOPNOTSUPP;
-+    const enum intc_variant variant = intc_hw_ops->info->hw_variant;
++    struct vaplic *vaplic = xvzalloc(struct vaplic);
 +
-+    switch ( variant )
-+    {
-+    case INTC_APLIC:
-+        ret = domain_vaplic_init(d);
-+        break;
++    if ( !vaplic )
++        return -ENOMEM;
 +
-+    default:
-+        printk_once("vintc (variant:%d) isn't implemented\n", variant);
-+        break;
-+    }
++    d->arch.vintc = &vaplic->vintc;
++    d->arch.vintc->ops = &vintc_ops;
 +
-+    return ret;
++    vaplic->regs.domaincfg = APLIC_DOMAINCFG_RO;
++
++    return 0;
 +}
 +
-+void domain_vintc_deinit(struct domain *d)
++void domain_vaplic_deinit(struct domain *d)
 +{
-+    const enum intc_variant variant = intc_hw_ops->info->hw_variant;
++    struct vaplic *vaplic;
 +
-+    switch ( variant )
-+    {
-+    case INTC_APLIC:
-+        domain_vaplic_deinit(d);
-+        break;
++    if ( !d->arch.vintc )
++        return;
 +
-+    default:
-+        break;
-+    }
++    vaplic = to_vaplic(d);
++    d->arch.vintc = NULL;
++    xvfree(vaplic);
 +}
 -- 
 2.55.0
