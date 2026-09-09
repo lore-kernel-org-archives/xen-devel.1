@@ -4,32 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C6ABC79FAD
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 13:10:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1413055.1643320 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1081CC79FAD
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 13:13:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1413073.1643330 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4I3p-0001P0-3s; Wed, 09 Sep 2026 13:09:57 +0000
+	id 1x4I72-00034K-Hx; Wed, 09 Sep 2026 13:13:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1413055.1643320; Wed, 09 Sep 2026 13:09:57 +0000
+Received: by outflank-mailman (output) from mailman id 1413073.1643330; Wed, 09 Sep 2026 13:13:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4I3p-0001Ot-1C; Wed, 09 Sep 2026 13:09:57 +0000
-Received: by outflank-mailman (input) for mailman id 1413055;
- Wed, 09 Sep 2026 13:09:56 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1x4I72-00034D-F3; Wed, 09 Sep 2026 13:13:16 +0000
+Received: by outflank-mailman (input) for mailman id 1413073;
+ Wed, 09 Sep 2026 13:13:15 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger@xenproject.org>) id 1x4I3o-0001Og-6D
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 13:09:56 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1x4I3k-006RyC-0G;
- Wed, 09 Sep 2026 13:09:52 +0000
-Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
- helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1x4I3k-004CwE-1m;
- Wed, 09 Sep 2026 13:09:52 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1x4I71-000347-Oc
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 13:13:15 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1x4I70-00GyZs-T9
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 15:13:14 +0200
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6aa15b5f-bab6-0a2a0a5309dd-0a2a4506e2e4-16
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 15:13:14 +0200
+Received: from [162.55.131.47] (helo=support.bugseng.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6aa15b6a-195a-0a2a45060019-a237832fbe66-3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 15:13:14 +0200
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id 6FD744EE0060;
+ Wed,  9 Sep 2026 15:13:14 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,81 +49,117 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date;
-	bh=oCWPexW5I9t37fhWl80Bh7/TVolgvm8ds9NR6cfQVGA=; b=xlKIV3rzict+yorOV66U0Fa2VZ
-	wqb00/kjKIhm+BwzKbYaMa9Zg9K0M8VZcU4dj23PhFI+4BwhbKWDHSVAyNuuW0dE72SE5Z5xUvV8F
-	k6s0pul9kZ4ISBL1O/fhCS0vLZDFh3rj/gYIZQbndUuE1TcZe0QuEChMwuaMem08VHTA=;
-Date: Wed, 9 Sep 2026 15:09:43 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] x86/mm: limit deferred TLB flushing to PV owned pages
-Message-ID: <aqFalyxQtfoKJto5@macbook.local>
-References: <20260909072451.67324-1-roger@xenproject.org>
- <1cadfc6c-efc1-4e23-b778-1df97fd0fa4d@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1788959594;
+	b=hixid/nfu0DeRYxpIsUpAiRXT5SrL/MUPtnaebYcpk2lR8OpTMcw36XASYvZ9hu60ff4
+	 w6MM3Aoq6CO46VugUnNss5dLiX2uj9CcLMD3MFDfY4C+t7yf7QPLsAjUUjucMSAHUgTeh
+	 YgETkrIvyYPf8I5hKQspJcuMO/nvc99MeFuyiWqg/57EsoP4/k761CmzYhH9Bia3vXWeE
+	 G+EDwXrPT1xY0t6MjgPi+ym3D7pUqug36ksqAplLqoAjdvEm4W/qpUliJi53pAUpgO8Nv
+	 SU23N1KH6fEak9pp6tQ2e7hEJBYNUqJjPTuRj0f14yRtZUDRsa5eZLg47r+50J4X8aLfG
+	 rbtIm5XqfzIUCWLWRN1ecyIulS5hNHxU6TcasBlfu/yFGdGwt2A1EKmEAlPrCM3KBniXw
+	 Qi9BPxthyDl/NpgTv4CQ4E6uJcUqKZ26+FYLRDg5vBTuJsBU3QWkCbmepc1pK/LiznKXO
+	 CBElrFJnaNnfKsubSLMmZYmmR3u9ETop39cc175ZM7AGSU9yzj6UXeNq7q9CTqJyB1pjc
+	 UBRevfXD316L9fOEt79XgyrloPBg0dsgD9YN7K+O6IeHSti0fc4dgNrL3LaHXCKRSezUn
+	 em4lrbHLbHZG9l/ZLUu7CjX9xm1K9gtFRqikv2uKMyM7qiBwobTcfILdg/kUDrY=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1788959594;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=N45BUT9bQLoOghpSgU8eM6kYG4cRMsUb3+R1YEfzTmw=;
+	b=o9Cx/eci/4ZwjzPT9HCbJl4VQeuwBPTASDgcz2hxDZtc4H5kZnAQj1GV2hY1xacX29H6
+	 ZnLihVPRfhUWxFEvgROIvUye1GzAnJhuTdPXKVXGpBHuuverKCP3QER4J3NcEWopmFcR9
+	 r3gyLhiUPdpF10SNygRe8GcQ6lK3otWW3GNfNLMujZqee1yYJgVf1R4+rGpvCvrRyqdsf
+	 lECZIh+LHR3vfQLB7eekeRs6pf0YHFtS1odb3GqN7X4xT5sE1j/jc0yprCC2hougjheSv
+	 PngNmwWJkG/xXYvWAj3zDG90UM7WnOfrQk55rtrjgStm5Mx0jmomHOYINTZzPJz/AxhwN
+	 B7j+rpC+Z+vtw1OGTAZlG1jpI9nK01Mwl+jP/5ityZvl2U9akBF9PdMYlKjU6Di4aEBWs
+	 XGgpK/teOMfrF/cMGDtDD8LhiXvGUGWrGf1e9G5HIioIw/GJrpl0wFmB9kY53p94li6gD
+	 ti6IhmYf0pm6amJxCQcfFgbIM9g0WN6LSOq4mQwoJunZ3Wdq1YWU8Er0m34XqCPfJEKF4
+	 MbvFjM5AvJXkO+rT+xY18un0sMDKSBKLyEBvH01mCcE5OeWJf2YvRx9S/BAb7rhl0yZdG
+	 F7+PwwPF25aqF1O3x2NfW4hAYjFZ/pa8XjbUX5HNSMDJGXu4kgp/GeHJC/3BClE=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <1cadfc6c-efc1-4e23-b778-1df97fd0fa4d@suse.com>
+Date: Wed, 09 Sep 2026 15:13:14 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Subject: Re: [PATCH 5/6] x86/Viridian: annotate Eclair false-positives for
+ rule 18.2
+In-Reply-To: <08038aa9-6902-4070-b49c-0a9ff113c786@suse.com>
+References: <c3614ea0-e5b3-4cfd-820b-9320ac327292@suse.com>
+ <08038aa9-6902-4070-b49c-0a9ff113c786@suse.com>
+Message-ID: <c9c787931b19aeff84a5aaabe557c7fb@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1788959594-F667277B-BCC0AE2A/0/0
+X-purgate-type: clean
+X-purgate-size: 2399
 
-On Wed, Sep 09, 2026 at 11:21:51AM +0200, Jan Beulich wrote:
-> On 09.09.2026 09:24, Roger Pau Monne wrote:
-> > The current logic on x86 will mark all domain owned pages as needed a TLB
-> > flush before being re-used.  However such TLB flushing is only strictly
-> > needed for PV domain owned pages, as those can keep a reference to the page
-> > in the TLB after it has been freed.
+On 2026-09-09 15:01, Jan Beulich wrote:
+> "Subtraction between pointers shall only be applied to pointers that
+> address elements of the same array" is not violated here: 
+> start_stimer()
+> is only ever passed a sane argument, and stimer_expire() is either 
+> called
+> from start_stimer() (using its parameter as argument) or as a callback,
+> where a sane callback argument is also guaranteed to be set up.
 > 
-> What about HVM-owned ones which a PV domain has grant- or foreign-mapped?
+> Suggested-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> As per Nicola Eclair 16.0.0 has this fixed.
 
-I've looked at grant pages, and that's handled correctly, a TLB flush
-is strictly done when the pages are unmapped, so there are no stale
-references in the receiver TLB one the grant is released (see
-gnttab_flush_tlb()).
+Perhaps I didn't express clearly that the remark was about the violation 
+annotated in patch 4/6. Here instead, a suitable reproducer is not yet 
+available. Nevertheless, if the claim is true the approach to address 
+the violation is still ok.
 
-However I cannot find any forced TLB flush for foreign mappings, I
-assume this is fine because foreign mappings are not controlled by the
-source domain, and hence there's no need to forcefully purge any TLB
-references.  However there isn't much that can be done here: forcing a
-flush on unmap in do_mmu_update() itself would be a high performance
-penalty.
-
-> > --- a/xen/common/page_alloc.c
-> > +++ b/xen/common/page_alloc.c
-> > @@ -1501,6 +1501,7 @@ bool scrub_free_pages(void)
-> >  
-> >  static bool mark_page_free(struct page_info *pg, mfn_t mfn)
-> >  {
-> > +    const struct domain *owner = page_get_owner(pg);
-> >      bool pg_offlined = false;
-> >  
-> >      ASSERT(mfn_x(mfn) == mfn_x(page_to_mfn(pg)));
-> > @@ -1539,7 +1540,7 @@ static bool mark_page_free(struct page_info *pg, mfn_t mfn)
-> >      }
-> >  
-> >      /* If a page has no owner it will need no safety TLB flush. */
-> > -    pg->u.free.need_tlbflush = (page_get_owner(pg) != NULL);
-> > +    pg->u.free.need_tlbflush = owner && is_pv_domain(owner);
-
-I guess I will need to adjust this to:
-
-pg->u.free.need_tlbflush = owner && IS_ENABLED(CONFIG_PV);
-
-As keeping track of whether a page has been ever mapped by a PV domain
-seems overly complicated, and not worth it.
-
-> >      if ( pg->u.free.need_tlbflush )
-> >          page_set_tlbflush_timestamp(pg);
 > 
-> Imo whichever change it is going to be here, it definitely also requires
-> the comment to be kept in sync.
+> --- a/docs/misra/false-positive-eclair.json
+> +++ b/docs/misra/false-positive-eclair.json
+> @@ -10,6 +10,13 @@
+>          },
+>          {
+>              "id": "SAF-1-false-positive-eclair",
+> +            "violation-id": "MC3A2.R18.2",
+> +            "tool-version": "3.14.0",
+> +            "name": "Rule 18.2: pointer subtraction",
+> +            "text": "Viridian stimer index calculations use sane 
+> pointers"
+> +        },
+> +        {
+> +            "id": "SAF-2-false-positive-eclair",
+>              "violation-id": "",
+>              "tool-version": "",
+>              "name": "Sentinel",
+> --- a/xen/arch/x86/hvm/viridian/time.c
+> +++ b/xen/arch/x86/hvm/viridian/time.c
+> @@ -136,6 +136,7 @@ static void cf_check stimer_expire(void
+>      struct viridian_stimer *vs = data;
+>      struct vcpu *v = vs->v;
+>      struct viridian_vcpu *vv = v->arch.hvm.viridian;
+> +    /* SAF-1-false-positive-eclair vs is always sane */
+>      unsigned int stimerx = vs - &vv->stimer[0];
+> 
+>      set_bit(stimerx, &vv->stimer_pending);
+> @@ -146,6 +147,7 @@ static void start_stimer(struct viridian
+>  {
+>      const struct vcpu *v = vs->v;
+>      struct viridian_vcpu *vv = v->arch.hvm.viridian;
+> +    /* SAF-1-false-positive-eclair vs is always sane */
+>      unsigned int stimerx = vs - &vv->stimer[0];
+>      int64_t now = time_ref_count(v->domain);
+>      int64_t expiration;
 
-Ops, yes, should adjust the comment.
-
-Thanks, Roger.
+-- 
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
