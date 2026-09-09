@@ -4,62 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2CCA0C79FB6
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 20:08:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1413664.1643762 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE0FDC79FB7
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 21:40:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1413715.1643771 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4OaE-0006Cc-PS; Wed, 09 Sep 2026 20:07:50 +0000
+	id 1x4Q1M-0001Ch-4D; Wed, 09 Sep 2026 21:39:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1413664.1643762; Wed, 09 Sep 2026 20:07:50 +0000
+Received: by outflank-mailman (output) from mailman id 1413715.1643771; Wed, 09 Sep 2026 21:39:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4OaE-0006CU-M8; Wed, 09 Sep 2026 20:07:50 +0000
-Received: by outflank-mailman (input) for mailman id 1413664;
- Wed, 09 Sep 2026 20:07:48 +0000
+	id 1x4Q1M-0001Ca-0e; Wed, 09 Sep 2026 21:39:56 +0000
+Received: by outflank-mailman (input) for mailman id 1413715;
+ Wed, 09 Sep 2026 21:39:55 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Jason.Andryuk@amd.com>) id 1x4OaC-0006CG-MP
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 20:07:48 +0000
+ (envelope-from <david.laight.linux@gmail.com>) id 1x4Q1L-0001CP-1X
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 21:39:55 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4OaC-003nvY-2k
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 22:07:48 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x4Q1J-00DcVO-MJ
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 23:39:53 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6aa1bc64-bab6-0a2a0a5309dd-0a2a450bce7a-28
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 22:07:47 +0200
-Received: from [52.101.56.15]
- (helo=BN1PR04CU002.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6aa1bc92-b7e8-0a2a450b0019-3465380fbe6b-3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 22:07:47 +0200
-Received: from BL1PR13CA0099.namprd13.prod.outlook.com (2603:10b6:208:2b9::14)
- by SJ0PR12MB6927.namprd12.prod.outlook.com (2603:10b6:a03:483::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.8; Wed, 9 Sep 2026
- 20:07:40 +0000
-Received: from BN1PEPF00005FFD.namprd05.prod.outlook.com
- (2603:10b6:208:2b9:cafe::8a) by BL1PR13CA0099.outlook.office365.com
- (2603:10b6:208:2b9::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.5 via Frontend Transport; Wed, 9
- Sep 2026 20:07:39 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN1PEPF00005FFD.mail.protection.outlook.com (10.167.243.229) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.406.5 via Frontend Transport; Wed, 9 Sep 2026 20:07:39 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Wed, 9 Sep
- 2026 15:07:39 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Wed, 9 Sep
- 2026 15:07:38 -0500
-Received: from [192.168.19.2] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.46 via Frontend
- Transport; Wed, 9 Sep 2026 15:07:38 -0500
+ (envelope-from <david.laight.linux@gmail.com>)
+ id 6aa1d1c8-e002-0a2a0a5209dd-0a2a4506e4ac-42
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 23:39:53 +0200
+Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <david.laight.linux@gmail.com>)
+ id 6aa1d229-195a-0a2a45060019-4a7de14caf29-3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 23:39:53 +0200
+Received: by mail-wr2-f12.google.com with SMTP id
+ ffacd0b85a97d-482f6356256so1157387f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 14:39:53 -0700 (PDT)
+Received: from pumpkin (82-69-66-36.dsl.in-addr.zen.co.uk. [82.69.66.36])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4859162f354sm38982359f8f.20.2026.09.09.14.39.51
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 09 Sep 2026 14:39:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,124 +53,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=r645R55wjpqgnhqxdzM/ms7FZSpnLRXeNWiZEt5YC2SQx2oUUPoEbRxWGJPZMapxIH8bPDHp4thObFYBYz1eFfaDQhMqHu6vJ6A0s067mFhgt3i1Aaan1bcYW675lFGb41udb0TWs/AqZXarlgmrkCwSsZkLPJcSBSgbMWQTUoBQJwBUvxfuWNO8lhZelexI1imPdQqeAEd64A2hhbxSsODOTG2hEEQyK6lDIqPp1FzzCFrnRd01R+ZH74/evtxdfp01Un4jK4XirNx0kQus4IMwaNut4LKdH7DbK5h9ZNHY0SiC46nLLP38zvr1xTqtew5GtNbsNUKbxDn0OghX6g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/0gX/DTWEj0mwqiaGPrnbN628OX8x2I7RIGGS0EYmiQ=;
- b=rEQ9LzKW/dVssnGIvjEHTD6bdXswL6QU3+c+R8rPyfrjQ1FU1A1ysA7q8RRAxsNWc/AQb6KmcNxOnTOr1/8H0dJZ1tjKny1jCPkxcLDYyGv1r7WyrOt6jPEpvVMqpFi/XIj7bA3pnceCMUzdwdkOMe/bid0g+ILglcH0ZyZaN40lJsdvk6DIS2Qlo55Q+CCXVoMhuiOoC7lziOaUfpHPXq4YfZ8lOL40mT/QrM85wNL4+Nl8WzHLBHTRTv9aQ7vaXjvyt7Q3wTRILIG1l6kb2qkfqxbD2ACDeeLdfpVeTCpDycosXdER5wEmksAZFwi4mfMu8zy8RRChZcwuuv0Qmw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/0gX/DTWEj0mwqiaGPrnbN628OX8x2I7RIGGS0EYmiQ=;
- b=va25Tgt5o6NRiAoYWAgJNvy5/EfvaaPR+tkMTQf1njAH/9Xk8OIhnW3Gv+++9/rHwRU+n+73D9bUsjE7/zvSn08BUPzQfno6/9TPeEr35EBzApwbiAhL5H1gSiRfmwkqZkIEH8cJeP6YgwBQtFt/GR867cGmC4gsDNM5jFNsScg=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <22028c12-2400-4131-8e5e-b2dc7a65326f@amd.com>
-Date: Wed, 9 Sep 2026 16:07:32 -0400
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Subject:Cc:To:From:Date"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1788989993; x=1789594793; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=GEVD0ONiRBgZcGn2NlyLse7rj8h6967aW8UFFN5/dyY=;
+        b=KkQ+6j3mSfvIznSip3tN9o6tjzAfJ4pifM2kJR1AnSJYonMXwh1Wx0KVTV30Owezh/
+         f1j1+gjD/CibEvT1KCs6oMa1VEEjN5TravUSvJ6SespW13xFlt3XNLAmJeFLA9ojeTRx
+         /Gn0DpvKzIXGIE5zys1egE9yStBnUY9xMuMAWgoe/02cEm7t/EAnFPuivWqu+trx5ePT
+         T/EirEnF5To/EVmXeiFwDD4+cnfAuuXMfdT9RK4ob5qWSFnaurH/Q594KsH70HSWYW+n
+         MNoxuPijULnvmtwIVhKnsedJdZtuwCuspLOYTdLTKW26bGWgAQoxPzozJcr2MZeJyNrS
+         FoiA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1788989993; x=1789594793;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=GEVD0ONiRBgZcGn2NlyLse7rj8h6967aW8UFFN5/dyY=;
+        b=HTkzvYEZa8KyIfllap4/w/co0KrFod3X0xSyECvo8VDelT52qIcpOwjcZTJalX05h5
+         q70q79+i5eHFriUGUTJr8+UHgB9O+//5N+E2KS7w5BVb3n5CP/zKEuKDoxhXFy5dNg8U
+         UPz5BpZNYzBnshAfBXJ5KkE68VDMeTBu/++0D2mm+aLcXpcn8N3XRvUWhsYK0cUyzI0i
+         XbI8uv3TB7Gy79UZKZN8RGTzfsE2/5XNow3b4ZrD/UK1PkR0u286rNqAGsgXAvLJWRf8
+         NtLzT+mRCRyxjSVi7z1jj7r0itUeI7koFfZlDk8uIj5QF58np6Xwtj29eTGo+fRWauI6
+         ClFQ==
+X-Forwarded-Encrypted: i=1; AKwUvBw3Xx3Oc7JcVvbo6+DACFo5+N/KMqlThUJTfqOE1UKSSDaxjyxQfr7yMDvDW0gY7NU/ezIJHeuDXII=@lists.xenproject.org
+X-Gm-Message-State: AFuF++m63X2NyzPrN+QP6pwoDPuyPYTB8AHZtDvQSyGqELEo/Z8yoaET
+	FYmU9h7dNJvvyTZ1BdGF4YWIKKlp/Tcsbft9LZyi0vPROP9zClOssRRu
+X-Gm-Gg: AYBFou0UJj+K0l6wKgf92Q501Hn5L08bUYPvvHXZsjn9XOaa8F9j4cExzrT9rQ1OiT7
+	hKR+XQltcP+qNXgow7o+j/HNU41Rejk/0N6Zl//2nG6nbKpECV3hNF2WUzmVM50k1Fewzyt+JOB
+	qtzOoiV1PMeyAiu0vX/Mkrzdlin84b2CdeZBJD1iKmUUY4ZcG9JyErM3Q7QSrqsrZvGb2rHwfjM
+	RRIYYLjWTjqT7sP+ConHi+qIeXB8/zfVVMQ2ITJjKGRKvRko1W3Jm4kWZH9JXZgv/MZN+sRIyCI
+	p9H/9OskKy9+Z/Ge5rbENTfgQxetjJLGmh5HtpsjESGLND/xupHaoIxbjoxIMy2v5R5iiaSVAV0
+	uS6hYLO+D0t7ukjATZJczv9ztPpSuW4tn1Xw/wcl64lLBdzobQMmBDetgtkK/dA3hGrb8l8c3Nh
+	4GKCOgaYCjPMHfHsCoC57gcAes4kr3Oh9hebxl/fhJq1wzd4iQtZBKXAaofcQGb83YZgHkvcyO7
+	Rq7nBbaN6IXpSL+u53i0UJ13dHHYYmyB/7m
+X-Received: by 2002:a05:6000:4607:b0:485:a32b:1ee8 with SMTP id ffacd0b85a97d-486e0fa01ecmr1480012f8f.20.1788989992817;
+        Wed, 09 Sep 2026 14:39:52 -0700 (PDT)
+Date: Wed, 9 Sep 2026 22:39:51 +0100
+From: David Laight <david.laight.linux@gmail.com>
+To: "H. Peter Anvin" <hpa@zytor.com>
+Cc: Borislav Petkov <bp@alien8.de>, Mauricio Faria de Oliveira
+ <mfo@igalia.com>, Thomas Gleixner <tglx@kernel.org>, Ingo Molnar
+ <mingo@redhat.com>, Dave Hansen <dave.hansen@linux.intel.com>,
+ x86@kernel.org, Juergen Gross <jgross@suse.com>, Alexey Dobriyan
+ <adobriyan@gmail.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Jan
+ Beulich <jbeulich@suse.com>, Brian Gerst <brgerst@gmail.com>,
+ kernel-dev@igalia.com, linux-kernel@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v9 2/5] x86/asm, x86/boot: expose inline memcmp()
+Message-ID: <20260909223951.1fe5fe25@pumpkin>
+In-Reply-To: <95D5AACE-1D91-402A-9B6B-8D03C3D90705@zytor.com>
+References: <20260822-pvh-kasan-inline-v9-0-e70ef3b75b6a@igalia.com>
+	<20260822-pvh-kasan-inline-v9-2-e70ef3b75b6a@igalia.com>
+	<20260906170116.GRap2cXOY6ENSzAXUJ@fat_crate.local>
+	<E4FDF95C-3FAB-41DB-8EA0-8A26B964B38D@zytor.com>
+	<d1b9ff734b918889eaf8885d64141bc3@igalia.com>
+	<20260908193229.GFaqBizWcssBoewNSo@fat_crate.local>
+	<e74c5a6b-ed9c-40c6-b9d7-ff04ee8c099e@zytor.com>
+	<20260909093831.095b89cb@pumpkin>
+	<8b00b7d2-2bd3-4871-9908-9fe1568d2690@zytor.com>
+	<20260909202838.28071bff@pumpkin>
+	<95D5AACE-1D91-402A-9B6B-8D03C3D90705@zytor.com>
+X-Mailer: Claws Mail 4.1.1 (GTK 3.24.38; arm-unknown-linux-gnueabihf)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] x86/mm: limit deferred TLB flushing to PV domain
- support
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, Jan Beulich
-	<jbeulich@suse.com>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
- Grall" <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>,
-	<xen-devel@lists.xenproject.org>
-References: <20260909140500.73483-1-roger@xenproject.org>
- <92c9bf4b-5171-4a26-a62e-f2a7b1cb89ef@suse.com>
- <aqGJJTbVNID0Rq6w@macbook.local>
-Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <aqGJJTbVNID0Rq6w@macbook.local>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00005FFD:EE_|SJ0PR12MB6927:EE_
-X-MS-Office365-Filtering-Correlation-Id: aba6d6ff-9017-447a-6607-08df0eadffc1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|82310400026|1800799024|36860700016|6133799003|10067099003|11063799006|4143699003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	CvVI/nvndqp7wsWqPayQEv954hMYkt9Sc1dqkl2fYGOAcaEmSSSMAQgJgHUr7jVEEdkOGwKkrxs6LlQlS1DmIACcHwAK+BwMq5V8SxwR6dkePEDW9K+0bqWG3ch8XpbxMzQVO5bpmkjkXwvQ4m6Y6NB2wBnFYDgS5iSnC3LfK3FSGTSn6qdBaJYaFeR2ujMa9hu1+I0dI/AQqOLl2t8ZWqq0ow/7wtU/IyAIZnu5qH8wZ/Hj9FtbW9I24lQTfOxV2ZUM9orU2O82B2Ay0wEvQmlXMKMuQNClFtxbhuCR3qr8qShWqJgl8u9h4eGjK/ZDdnppfHynVz252w70NEsGOaYMzmQ61VKWHCnx6Ki7GLbPN4oS3vnTMUKjiimceLpmQp8xLgqxO/HZNX7xkHc/kR9RFkAmdrhdD+F7LL5bqmuZP/hiBRKCLqE91QGEpjlYzNQa3LvChmoobA+1w2et1AN0jKJfn601UvBKGU87FeABaH7U1iUHwg0vfpTFk74j8Li+3upYYnu5L+hOfdU4PiPgoa8JLOSRb3+ZHtxtMKfc6Gq5dn5oZVxm2IlZbQnXw4UgTU9omLvew4ciD9CqdWjg7T42CLJScO1VcZjsI4FnSVENImiKZUrY217ndiDClNg8htP7ki3v9jzciilgW+7tpBGpJJtCLhRt1DaMQTCnuLNZhoBM2usWM1qpg7ccj593CviUoEYJUmjQsOWeGA==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(23010399003)(82310400026)(1800799024)(36860700016)(6133799003)(10067099003)(11063799006)(4143699003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	TuqQFBcxa5b8YsbsaQhhR1D1r5PupoqJ0ofHY3tFnVskzHKvA6bgbQCaZaDXDCrEPH+JFJeuroYASW4poZYU5eJM/P4BbQhEjYonmbSKZWDtVJh6UghlmskZLto942djsqhy5jAdP9rvS0YCIuK1CsCofHoWWzkNinfEKHi6zUE5kKDlSau8LvMuGP+TTmnuuGWnnKrn+jkb5qhNa8yDZcTTSc/+A1oIpu77Jlv5j30wbjnxQp1TZI8nBZthNEhKR6NnGC0WI41NA3ZyTxL5KpZ6Z5DnAhYec69NFlAkww1w9XPqRod/kmXoHjAm56YitXbccDrGRikV0XhXOqZrnk0tnk9h/LZ5sO5BqvTi0vzEZv3UpdTSAl/H7K1EFaA5L+zF08/nyoPybJBEuEj4s9MNotcHbbYmY9pOeX2YBGXOaC4B5F2q8FstUrSN0Ui4
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Sep 2026 20:07:39.2494
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: aba6d6ff-9017-447a-6607-08df0eadffc1
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN1PEPF00005FFD.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6927
-X-purgate-ID: tlsNG-42698a/1788984467-1B4D39EA-79AF346B/0/0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1788989993-1F4C977B-9668A1B8/0/0
 X-purgate-type: clean
-X-purgate-size: 2206
+X-purgate-size: 2982
 
-On 2026-09-09 12:28, Roger Pau Monné wrote:
-> On Wed, Sep 09, 2026 at 04:46:01PM +0200, Jan Beulich wrote:
->> On 09.09.2026 16:05, Roger Pau Monne wrote:
->>> --- a/xen/common/page_alloc.c
->>> +++ b/xen/common/page_alloc.c
->>> @@ -1538,8 +1538,11 @@ static bool mark_page_free(struct page_info *pg, mfn_t mfn)
->>>           BUG();
->>>       }
->>>   
->>> -    /* If a page has no owner it will need no safety TLB flush. */
->>> -    pg->u.free.need_tlbflush = (page_get_owner(pg) != NULL);
->>> +    /*
->>> +     * If a page has no owner and there's no PV domain support it will need no
->>> +     * safety TLB flush, there can be no stale TLB entries.
->>> +     */
->>> +    pg->u.free.need_tlbflush = IS_ENABLED(CONFIG_PV) && page_get_owner(pg);
->>>       if ( pg->u.free.need_tlbflush )
->>>           page_set_tlbflush_timestamp(pg);
->>
->> I'm okay with the code change now, but the comment is still concerning me.
->> All by itself there is no reason why stale TLB entries couldn't also exist
->> for HVM guests. It's just that (a) only the host TLBs are flushed by
->> filtered_flush_tlb_mask() and (b) flushes of guest TLBs occur when pages
->> are removed from their P2Ms (aiui; hopefully true also for Arm). IOW what
->> the comment says looks to be correct, just that it leaves too much to be
->> figured out by the reader. At the very least I'd suggest "..., there can
->> be no stale (host) TLB entries." Thoughts?
+On Wed, 09 Sep 2026 12:33:40 -0700
+"H. Peter Anvin" <hpa@zytor.com> wrote:
+
+> On September 9, 2026 12:28:38 PM PDT, David Laight <david.laight.linux@gmail.com> wrote:
+> >On Wed, 9 Sep 2026 06:43:01 -0700
+> >"H. Peter Anvin" <hpa@zytor.com> wrote:
+> >  
+> >> On 2026-09-09 01:38, David Laight wrote:  
+> >> >>
+> >> >> Here is an out-of-line compact memcmp() which works for both 16/32 and 64 bits:
+> >> >>    
+> >> <broken code removed>
+> >>   
+> >> >>
+> >> >> On 64 bits it compiles to:
+> >> >>
+> >> >> 0000000000000000 <memcmp>:
+> >> >>    0:   48 89 d1                mov    %rdx,%rcx
+> >> >>    3:   31 d2                   xor    %edx,%edx
+> >> >>    5:   31 c0                   xor    %eax,%eax
+> >> >>    7:   f3 a6                   repz cmpsb (%rdi),(%rsi)
+> >> >>    9:   0f 97 c2                seta   %dl
+> >> >>    c:   0f 92 c0                setb   %al
+> >> >>    f:   29 d0                   sub    %edx,%eax    
+> >> > 
+> >> > That isn't the object code from the source ...
+> >> >     
+> >> And that's the ultimate hint that a cut and paste error had happened.
+> >> 
+> >> This was the actual source code.
+> >> 
+> >> int memcmp(const void *s1, const void *s2, size_t len)
+> >> {
+> >>     int lt, gt;
+> >> 
+> >>     /*
+> >>      * Note: for the benefit of 64-bit code, xDI and xSI are reversed
+> >>      * compared with what CMPSB uses; hence SETA and SETB are also reversed.
+> >>      *
+> >>      * The XOR statements set ZF = 1, CF = 0, which is required to handle
+> >>      * the case len == 0 correctly.
+> >>      */
+> >>     asm volatile("xor %[lt],%[lt] ; "
+> >>                  "xor %[gt],%[gt] ; "
+> >>                  "repe cmpsb ; "
+> >>                  "seta %b[lt] ; "
+> >>                  "setb %b[gt]"
+> >>                  : "+D" (s1), "+S" (s2), "+c" (len),
+> >>                    [lt] "=&q" (lt), [gt] "=&q" (gt)
+> >>                  : : "cc", "memory");
+> >>     return gt - lt;
+> >> }
+> >>   
+> >
+> >Try:
+> >
+> >int memcmp_2(const void *s1, const void *s2, unsigned long len)
+> >{
+> >    signed char lt, gt;
+> >
+> >    asm volatile("repe cmpsb ; "
+> >                 "seta %[lt] ; "
+> >                 "setb %[gt]"
+> >                 : "+D" (s1), "+S" (s2), "+c" (len),
+> >                   [lt] "=&q" (lt), [gt] "=&q" (gt)
+> >                 : : "cc", "memory");
+> >    return (signed char)(gt - lt);
+> >}
+> >
+> >https://www.godbolt.org/z/6hrxGxb18
+> >
+> >Saves the XORs - go away completely in the usual case of 'if (memcpy(....))'.
+> >The 'mess' on the return statement moves the sign extend after the
+> >subtract.
+> >
+> >David  
 > 
-> Hm, I find adding "(host)" to also be slightly confusing, as I would
-> usually associate host TLB with Xen context TLB state.  Which is also
-> made more confusing by how PV guests share the page-tables with Xen.
+> The xors are explicitly in the asm to deal with the len = 0 case (this is for the out of line version!)
 > 
-> "If a page has no owner and there's no PV domain support it will need
-> no safety TLB flush.  PV domains are the only domain types that can
-> keep stale entries on the TLB, as they have (limited) control over the
-> host MMU and when flushes are performed"
-I find "will need no" a little awkward.  Maybe:
+> We need to enter with ZF = 1 CF = 0.
 
-"If a page has no owner and there's no PV domain support it does not 
-need a safety TLB flush."
+And, of course, I knew that.
+They also zero the high 24bits of the registers.
+Given the setup cost of 'repe cmpsb' I suspect the xor just add code
+bytes.
 
-or:
+David
 
-"If a page has no owner and there's no PV domain support, then a safety 
-TLB flush is not needed."
 
-Regards,
-Jason
 
