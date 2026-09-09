@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19CD6C79FBD
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 15:09:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1413319.1643626 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8C6BC79FB7
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 15:09:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1413338.1643635 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4JvK-0007H0-9D; Wed, 09 Sep 2026 15:09:18 +0000
+	id 1x4JvT-00087s-Pr; Wed, 09 Sep 2026 15:09:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1413319.1643626; Wed, 09 Sep 2026 15:09:18 +0000
+Received: by outflank-mailman (output) from mailman id 1413338.1643635; Wed, 09 Sep 2026 15:09:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4JvK-0007GJ-4m; Wed, 09 Sep 2026 15:09:18 +0000
-Received: by outflank-mailman (input) for mailman id 1413319;
- Wed, 09 Sep 2026 15:09:16 +0000
+	id 1x4JvT-00087a-Lk; Wed, 09 Sep 2026 15:09:27 +0000
+Received: by outflank-mailman (input) for mailman id 1413338;
+ Wed, 09 Sep 2026 15:09:26 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x4JvI-000724-6b
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 15:09:16 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x4JvS-00081n-9c
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 15:09:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4JvH-007zEL-JX
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 17:09:15 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x4JvR-007zGT-MU
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 17:09:25 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa17690-2eae-0a2a0a5409dd-0a2a450ad276-22
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 17:09:15 +0200
+ id 6aa1769d-bab6-0a2a0a5309dd-0a2a4505abf2-34
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 17:09:25 +0200
 Received: from [74.125.228.140] (helo=mail-ej2-f12.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa1769b-f2d2-0a2a450a0019-4a7de48ca1bb-3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 17:09:15 +0200
+ id 6aa176a5-4cb1-0a2a45050019-4a7de48c9c46-3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 17:09:25 +0200
 Received: by mail-ej2-f12.google.com with SMTP id
- a640c23a62f3a-c254f8694aeso186373966b.0
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 08:09:15 -0700 (PDT)
-Received: from fedora (IW396200.net.t-com.hr. [195.29.234.54])
+ a640c23a62f3a-c254f705534so63176466b.2
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 08:09:25 -0700 (PDT)
+Received: from [172.19.143.248] (IW396200.net.t-com.hr. [195.29.234.54])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c261f673000sm709991666b.24.2026.09.09.08.09.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 09 Sep 2026 08:09:13 -0700 (PDT)
+ a640c23a62f3a-c260d55b306sm792717866b.36.2026.09.09.08.09.21
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 09 Sep 2026 08:09:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,243 +52,328 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1788966554; x=1789571354; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=0ob9SOR6fkbhNbTtoSGEUBOvglDU9/ukL9qvQqIiBtg=;
-        b=E9mYlKZpnx2qYl+g28RrvGiIRdnB9Uw3FR62pmuXncQnbtBGz8TWsQ0B9OcvRx5aXU
-         qYTk+aV0ZdMYmCJaSPj8EUQyf8ZhcKDApmpzTriqtujOJ6r/80b5059FAHty6USXeMKN
-         QE2PAj30WHjlvHaRUb+Q4fC0GNRkcKz7ODc7HEiKP64zDuP3813TcRqxhtVMEDJgt+xg
-         eZU3QBuCTIpFei9sOIlReYPnDvywgfLLGylXwo3SO39bArIZgm+UZ4dgRumD53C/DQ/J
-         RDdCP1SzDHU3sDn1StKnV85LsaidnfxPpQIqR3ZVtk2RdAW03k7TNWF9OdqmHkJ9TvwQ
-         1NHQ==
+        d=gmail.com; s=20251104; t=1788966565; x=1789571365; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=kR7V91A5R6Cs/mRRpc93dDWh4xXmrh8wNkBOBaA0yQs=;
+        b=I0KOT90hWIQRGNXzHbmMQHfroBuPMc9X8UrpfhGWVDOKJxB9UkPrFOCf1QOSf71Ok2
+         Ggo9bbYFgppk5o2Kd6Y8y9zHHqJ8APFIX1FbaQxqEJ6tUViEJ/yYMGUwjCLg2u27OI5P
+         LN0ZOCKGLCp7eL8ZjhDCw+icRqpsjavqtusjmEBDJY6W4yBOpnsb/IsL3em7PruJjMOh
+         g0DjkSM2CTlPbbJAnPM6GfyXK6S+vIvZLOrDcv+VE2ycIxbuF8J0y5k+Qs/t993u3HNM
+         YzRbnQKM07ohYv+158oqMxORgFhZucjQiKt1wB1cGuKNfaP+bE161iw3ut8kjoLhMPRZ
+         Fu/A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788966554; x=1789571354;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=0ob9SOR6fkbhNbTtoSGEUBOvglDU9/ukL9qvQqIiBtg=;
-        b=JqReOxjI9XSddQR1x7Lwagnq7Lsg1f0XR4rqzQwlMDFQAJPt2Se9agkthboHbbMWb1
-         HX2tgsE2l1UiEU34f9QluMA8FqhZ04fwn8YbCB89HUupl2J5hNnclzulgsxcfh1sx0lc
-         HtWX/sKV4v/69UtyFEHYUyGrIebq2kEWo0peHlI4FppIyNDKh4bd725QQAb7ShO0zgjZ
-         3cOWBep9h608DU4Gz6nSCqzJZj7nLP+G5+CHx5rh3l5tYUoMKah3bt/8HB0Uv1iVzf4A
-         UkO0XjTZIiw4NOPhvWVjCaXc+/19WCmVri6X5LCa+YEoWrhLdhmM4lMx0Kie3WmLhVfR
-         OZ8Q==
-X-Gm-Message-State: AFuF++kgWA4KF04RsHBmZgiTOgf/w92ZKUza3vv58OHX/HGScJwa4ngj
-	swL7mdtG4FY+inrfLkMpHrnDGE2sAdr6QflN1uJqZTuvF6Ca05SMfnrxNGAeG9Xt
-X-Gm-Gg: AYBFou3LUaX/7RVj1XA8I2fRIHpFyUbeQVO5wWDmrGCoKaCVW0LlqtPsH9wCN6/Kpsl
-	tjiSQo/0ZJEQ4EfMjkVyc95TKSjkArVq+8KBnZxdEF2bAMNNpNGxxGYemS4hDbB+Za0ehPxqyDJ
-	Ls0WcYLQhBg2Rd3zAlh6ZTQXmRhYMAl3kzMrp9J6g1D0T87RMnuHH8qbp0Vh4QG5Rhy/TLPlCc8
-	8ZZ8SPEZXJBfiHdgIqLiUGGu/Sq7l+seOXmmKCGfkQkYLVHugGywAsL82xAtRaiO9UnTyOhA26W
-	KHnMhjQwIwTXUThK0rNZmsu1Lyq5uEqkgdiaE4wT+iWbFZxaTo/vrmMlr0dVjdIIJfj0qbaVSYQ
-	xyLL0eUAOL/4nGJ0Jg+wLLlqt10HiENg6GiMj8DqKyIJ14beNiL3K1cXgKNCKbm3yRzR7HSNgq7
-	aDg6YOtY8q7yAc3bo7sPi52op9WKsUM2rAHeOiXLGsaXeu1Id4O0Z0YM/6QwgzQqK8azZddliS3
-	+0qUNmaDFpUY5DEWek=
-X-Received: by 2002:a17:907:84e:b0:c25:35cd:fdb2 with SMTP id a640c23a62f3a-c29042fd596mr642560666b.7.1788966553927;
-        Wed, 09 Sep 2026 08:09:13 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
-	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
-	Zheng Zhang <zhangzheng@iscas.ac.cn>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v9 20/20] xen/riscv: add initial dom0less infrastructure support
-Date: Wed,  9 Sep 2026 17:07:38 +0200
-Message-ID: <913c29fc85190a131e88dc7bf300ab734e570ebb.1788876411.git.oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <cover.1788876411.git.oleksii.kurochko@gmail.com>
-References: <cover.1788876411.git.oleksii.kurochko@gmail.com>
+        d=1e100.net; s=20251104; t=1788966565; x=1789571365;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=kR7V91A5R6Cs/mRRpc93dDWh4xXmrh8wNkBOBaA0yQs=;
+        b=fskfZMJK4ip8hjieVWhH36N2cX9LwCRc7JS+gV8ObpvPWFpkt0nATFJr+cwyMdW6aT
+         GWTbOQ2SHajFlzlmEXPt2V0ybfgUwG4eBsz+1DYB59p3svfeFUAGFVkSnX2ECUz9vOGV
+         d+S/JtM4SEw2ztLiH5NW4Y0223usxiPseFfR+pG17Pw2XAE1XDbl0NGnW94/xdFCnJ6k
+         lw43tBhiJh44ZrvRh7UPxc553lZ7K5BUuwS314bLWfJP+l87rGCjLTp6TU+OIBz7X8KD
+         mtGUAHAUQgg7jbkuNYHgVxdF07tARW8XgNjlGWdj18gy0tBGnybHoRJFgw97AUxEHdoV
+         XB1g==
+X-Forwarded-Encrypted: i=1; AKwUvBwrnz4LENMuahdEsGM/qK5GBssMBF4pvJUXMEHghUCn6uM4NLcdrMPAkxCpsf0DFoVENANPWV3PX94=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kGdstDKqCwdqGanJ+k1gKo1jsW0Yc+dVJMXyR4UCdoox2MiePJ
+	Jg/GSVi/+lLz2NzNogAynHbI5slrEpBl+oE7bjbYeu45eESA+eWSJkF+
+X-Gm-Gg: AYBFou0jclP4/d/JbAE6bi5VhnttqUsrmp98sHGC6Eno+E0G1uwhfk6kSJF9VGxqm/n
+	zhlILSw/JMBKmixmgqE+N2ZXYxG1iu1bG2lSyh8gMvRoE3X8kcDMSNWWVRoiEWHxv0ubuva9MTZ
+	qs+5HkuOuMcgsbGVpWW8cqpoEqEQ7BwJe9U52e0qWqXsHf/fW8gJQuLtP/cLgcmscam3F1N8YxF
+	heCqRdKSSnse/hF1ActKcY9gL0xZTx9U69csk0g4j+aEnAt6b8uOQAk3wWqe7mMFh3u+9sJXzct
+	qqr2paOFjOSESbRa0Z2hVShVIuC0nwgLgVIP51ngOJ1c7f2BN3zmTZjakP6Y1XUVzG21DP2Lv82
+	ArTz5odW+Bo2HkiCghnOWqrSPwF0eEvnopzxSr3DV0mL935pQuW2dtJzCrYh5FcDAukMxrH+Uwx
+	7iGPMgz/WmXpflon4mnKLg/9BparOaJMrvDvbOibOYxBGneXXwFAhYlCJssc1oFCqgos2BpzwK4
+	DkidecEs5YfAw/l4dRM7bCARAIuY8Y4
+X-Received: by 2002:a17:907:c244:b0:c26:1648:a076 with SMTP id a640c23a62f3a-c2941be4cc7mr64078666b.49.1788966565018;
+        Wed, 09 Sep 2026 08:09:25 -0700 (PDT)
+Message-ID: <19aae90d-bd5b-4637-828c-bb5164ba4191@gmail.com>
+Date: Wed, 9 Sep 2026 17:09:14 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1788966555-51EC2CFC-9AC3BCFD/10/73395122804
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 18/39] xen/riscv: add guest page fault handling stub
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <42e37df518f1eda9579264b4bae9db3521e1042a.1787838835.git.oleksii.kurochko@gmail.com>
+ <35aecc68-d16e-4350-9aca-101de2b21c1f@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <35aecc68-d16e-4350-9aca-101de2b21c1f@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c201ff/1788966565-F76BD2A1-0321CD91/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 7399
+X-purgate-size: 8318
 
-Enable dom0less support for RISC-V by selecting HAS_DOM0LESS and
-providing the minimal architecture hooks required by the common
-dom0less infrastructure.
 
-Add stub implementations for architecture-specific helpers used when
-building domains from the device tree. These allow the generic
-dom0less code to build and let a basic DomU be constructed on RISC-V.
-construct_hwdom() and make_hypervisor_node() are still stubs returning
-an error: Dom0/hwdom construction isn't supported yet, and the
-hypervisor node generation (needed by domains with
-DOM0LESS_ENHANCED_NO_XS set) is not implemented. Both are marked with
-a TODO and are not reached by the currently supported configurations.
 
-Provide missing helpers and definitions required by the domain
-construction code, including domain bitness helpers and the
-p2m_set_allocation() prototype.
+On 9/8/26 4:10 PM, Jan Beulich wrote:
+> On 27.08.2026 17:21, Oleksii Kurochko wrote:
+>> --- /dev/null
+>> +++ b/xen/arch/riscv/emulate.c
+>> @@ -0,0 +1,179 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+>> +
+>> +/*
+>> + * RISC-V instruction emulation for trapped guest accesses
+>> + */
+>> +
+>> +#include <xen/bug.h>
+>> +#include <xen/errno.h>
+>> +#include <xen/sched.h>
+>> +#include <xen/types.h>
+>> +
+>> +#include <asm/csr.h>
+>> +#include <asm/current.h>
+>> +#include <asm/emulate.h>
+>> +#include <asm/riscv_encoding.h>
+>> +#include <asm/traps.h>
+>> +
+>> +/*
+>> + * The hardware-reported details of a guest page fault, gathered once by
+>> + * handle_guest_page_fault() and passed down to the emulation of the faulted
+>> + * access.
+>> + */
+>> +struct guest_fault {
+>> +    /* The guest register state as saved on entry to do_trap(). */
+>> +    struct cpu_user_regs *regs;
+> 
+> If the comment was true, this could be pointer-to-const.
 
-Additionally define the guest magic memory region (GUEST_MAGIC_BASE /
-GUEST_MAGIC_SIZE) in asm/guest-layout.h. The base is arbitrary; the
-only constraint is that the region must not overlap guest RAM or the
-emulated device regions. It is placed in the unused gap below
-GUEST_RAM0_BASE (0x80000000); the constraints are documented next to
-the #define-s.
+I think it can't be pointer-to-const as emulate_load/store functions 
+wants to change PC register after MMIO access emulation is finished to 
+not trap again.
 
-A separate region for grant tables will be introduced at the same time as
-the introduction of the grant table for RISC-V.
+Regarding the comment itself I agree that it isn't fully true right now 
+because there is no trap from guest and so no guest registers 
+save/restore but it will for sure be and we can't not to save/restore 
+guest registers when do_trap() happens.
 
-Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Acked-by: Jan Beulich <jbeulich@suse.com>
----
-Changes in v8-9:
- - Nothing changed. Only rebase.
----
-Changes in v6-7:
- - Acked-by: Jan Beulich <jbeulich@suse.com>.
----
-Changes in v5:
- - Reword the comment above defintion of GUEST_MAGIC_BASE.
- - Shrunk the size of GUEST_MAGIC_SIZE to 2Mb as looking on the Arm
-   only 4 pages are used and there is no technical reason to have 16Mb for
-   that region. (Maybe in case of Arm it is connected that Arm has these
-   definitions in public header so more space is reserved to not "break"
-   public API in future)
- - Update the commit message with a remark about grant table region
-   in guest-layout.h.
----
-Changes in v4:
-  - Reword the description: the stubs do not let dom0less fully "run"
-    since construct_hwdom() and make_hypervisor_node() return an error;
-    spell out these limitations instead.
-  - Add a TODO comment to construct_hwdom() explaining that Dom0/hwdom
-    construction isn't supported yet.
-  - Add a TODO comment to make_hypervisor_node() explaining that
-    returning an error breaks building of domains with
-    DOM0LESS_ENHANCED_NO_XS set, and why that is harmless for now.
-  - Document the constraints on GUEST_MAGIC_BASE/GUEST_MAGIC_SIZE next
-    to the #define-s and drop the QEMU-based justification (QEMU is not
-    involved); the base is simply an arbitrary non-overlapping address.
-Changes in v3:
-  - Add /* Nothing specific to do for now */ comment to
-    arch_handle_passthrough_prop().
-  - Use _ULL() instead of xen_mk_ullong() for GUEST_MAGIC_BASE and
-    GUEST_MAGIC_SIZE (xen_mk_ullong() is intended for public headers only).
-  - Fix GUEST_MAGIC_BASE from 0x39000000 to 0x79000000 to avoid the
-    QEMU RISC-V virt machine PCIE_ECAM range.
-  - Drop CONFIG_STATIC_MEMORY=n from the CI randconfig; now redundant
-    since STATIC_MEMORY depends on HAS_STATIC_MEMORY which RISC-V does
-    not select.
-Changes in v2:
-  - Move declaration of p2m_set_allocation() to p2m-common.h.
-  - Add __initdata for max_init_domid and drop initalizer for it.
-  - Add CONFIG_STATIC_MEMORY=n to CI's randconfig to avoid
-    compilation error because of guest_physmap_add_pages()
-    isn't provided.
----
- xen/arch/riscv/Kconfig                    |  2 ++
- xen/arch/riscv/dom0less-build.c           |  7 ++++++
- xen/arch/riscv/domain-build.c             | 28 +++++++++++++++++++++++
- xen/arch/riscv/include/asm/guest-layout.h | 12 ++++++++++
- 4 files changed, 49 insertions(+)
+I will re-word it to:
 
-diff --git a/xen/arch/riscv/Kconfig b/xen/arch/riscv/Kconfig
-index 48520588fe40..d8a348c0cf07 100644
---- a/xen/arch/riscv/Kconfig
-+++ b/xen/arch/riscv/Kconfig
-@@ -6,6 +6,8 @@ config RISCV
- 	select GENERIC_BUG_FRAME
- 	select GENERIC_UART_INIT
- 	select HAS_DEVICE_TREE_DISCOVERY
-+	select HAS_DOM0LESS
-+	select HAS_DOMAIN_TYPE
- 	select HAS_EX_TABLE
- 	select HAS_PMAP
- 	select HAS_UBSAN
-diff --git a/xen/arch/riscv/dom0less-build.c b/xen/arch/riscv/dom0less-build.c
-index d1a51b92936a..0801d7e25059 100644
---- a/xen/arch/riscv/dom0less-build.c
-+++ b/xen/arch/riscv/dom0less-build.c
-@@ -102,3 +102,10 @@ int __init arch_parse_dom0less_node(struct dt_device_node *node,
- 
-     return 0;
- }
-+
-+int __init arch_handle_passthrough_prop(struct kernel_info *kinfo,
-+                                        struct dt_device_node *node)
-+{
-+    /* Nothing specific to do for now */
-+    return 0;
-+}
-diff --git a/xen/arch/riscv/domain-build.c b/xen/arch/riscv/domain-build.c
-index d7613721db95..1e3abe259ccd 100644
---- a/xen/arch/riscv/domain-build.c
-+++ b/xen/arch/riscv/domain-build.c
-@@ -156,9 +156,37 @@ int __init make_cpus_node(const struct domain *d, struct kernel_info *kinfo)
-     return fdt_end_node(fdt);
- }
- 
-+int __init construct_hwdom(struct kernel_info *kinfo,
-+                           const struct dt_device_node *node)
-+{
-+    /*
-+     * TODO: Dom0/hwdom construction isn't supported on RISC-V yet, so this
-+     * is a stub returning an error. It must be implemented before a hardware
-+     * domain can be built from the device tree.
-+     */
-+
-+    return -EOPNOTSUPP;
-+}
-+
- int __init make_timer_node(const struct kernel_info *kinfo)
- {
-     /* There is no need for timer node for RISC-V. */
- 
-     return 0;
- }
-+
-+int __init make_hypervisor_node(struct domain *d,
-+                                const struct kernel_info *kinfo,
-+                                int addrcells, int sizecells)
-+{
-+    /*
-+     * TODO: Generating the hypervisor node isn't implemented yet. Returning
-+     * an error here breaks building of any domain (DomU included) whose
-+     * dom0less_feature has DOM0LESS_ENHANCED_NO_XS set. This is harmless for
-+     * now because Dom0/hwdom construction isn't supported on RISC-V yet
-+     * either, and no RISC-V DomU sets that flag, so this path is never taken.
-+     * It must be implemented before DOM0LESS_ENHANCED_NO_XS is used.
-+     */
-+
-+    return -EOPNOTSUPP;
-+}
-diff --git a/xen/arch/riscv/include/asm/guest-layout.h b/xen/arch/riscv/include/asm/guest-layout.h
-index 90603f06bb91..ceed9125e7e2 100644
---- a/xen/arch/riscv/include/asm/guest-layout.h
-+++ b/xen/arch/riscv/include/asm/guest-layout.h
-@@ -32,4 +32,16 @@
- #define GUEST_RAM_BANK_BASES   { GUEST_RAM0_BASE, GUEST_RAM1_BASE }
- #define GUEST_RAM_BANK_SIZES   { GUEST_RAM0_SIZE, GUEST_RAM1_SIZE }
- 
-+/*
-+ * The guest magic region holds the Xen-reserved pages mapped into the
-+ * guest's physical address space. The only real constraint on
-+ * GUEST_MAGIC_BASE/SIZE is that the region must not overlap guest RAM
-+ * (the GUEST_RAMx banks) or the emulated device regions defined above;
-+ * the exact base is otherwise arbitrary. Here it is placed in the unused gap
-+ * below GUEST_RAM0_BASE (0x80000000), but a hole after a RAM bank would work
-+ * equally well.
-+ */
-+#define GUEST_MAGIC_BASE  _UL(0x79000000)
-+#define GUEST_MAGIC_SIZE  _UL(0x00200000)
-+
- #endif /* ASM_RISCV_GUEST_LAYOUT_H */
--- 
-2.55.0
+/* The guest register state */
 
+> 
+>> +    /* scause: a fetch, a load or a store/AMO guest page fault. */
+>> +    unsigned long cause;
+>> +    /*
+>> +     * htinst: the trapped instruction in its transformed form, or one of the
+>> +     * special values (zero, or a pseudoinstruction).
+>> +     */
+>> +    unsigned long htinst;
+>> +    /* htval: as written by hardware; see resolve_faulting_gpa(). */
+>> +    unsigned long htval;
+>> +    /* stval: the guest virtual address of the faulting access. */
+>> +    unsigned long stval;
+>> +    /* The faulting guest physical address, filled by resolve_faulting_gpa(). */
+>> +    paddr_t gpa;
+>> +};
+>> +
+>> +/*
+>> + * Is @htinst one of the pseudoinstructions reported for a guest page fault
+>> + * taken on an implicit memory access done for VS-stage address translation?
+>> + *
+>> + * All four values are recognized regardless of the hypervisor's XLEN: the
+>> + * width they encode is that of a VS-stage PTE, i.e. it follows the guest's
+>> + * paging mode (4 bytes for Sv32, 8 otherwise). On RV32 the 64-bit forms
+>> + * simply never occur.
+>> + */
+>> +static bool htinst_is_pseudo(unsigned long htinst)
+>> +{
+>> +    switch ( htinst )
+>> +    {
+>> +    case INSN_PSEUDO_VS_LOAD32:
+>> +    case INSN_PSEUDO_VS_STORE32:
+>> +    case INSN_PSEUDO_VS_LOAD64:
+>> +    case INSN_PSEUDO_VS_STORE64:
+>> +        return true;
+>> +
+>> +    default:
+>> +        return false;
+>> +    }
+>> +}
+> 
+> This feels fragile. New pseudo-insns can appear at any time. If the value as
+> a whole is non-zero, aiui the low two bits being zero indicate a pseudo-insn.
+> In which case enumerating pseudo-insns we are currently aware of isn't
+> necessary.
+
+I will write it simpler	 then:
+
+/*
+  * Is @htinst one of the special pseudoinstruction values, reported for 
+a guest
+  * page fault taken on an implicit memory access done for VS-stage address
+  * translation?
+  *
+  * It is enough to check only bits[1:0] as according to the spec:
+  *
+  * The value is one of the special pseudoinstructions defined later, all of
+  * which have bits 1:0 equal to 00.
+  */
+static bool htinst_is_pseudo(unsigned long htinst)
+{
+     return htinst && ((htinst & 3) == 0);
+}
+
+> 
+>> +static void inject_access_fault(const struct guest_fault *gf)
+>> +{
+>> +    struct trap_info utrap = {};
+>> +
+>> +    switch ( gf->cause )
+>> +    {
+>> +    case CAUSE_FETCH_GUEST_PAGE_FAULT:
+>> +        utrap.scause = CAUSE_FETCH_ACCESS;
+>> +        break;
+>> +
+>> +    case CAUSE_LOAD_GUEST_PAGE_FAULT:
+>> +        utrap.scause = CAUSE_LOAD_ACCESS;
+>> +        break;
+>> +
+>> +    case CAUSE_STORE_GUEST_PAGE_FAULT:
+>> +        utrap.scause = CAUSE_STORE_ACCESS;
+>> +        break;
+>> +
+>> +    default:
+>> +        domain_crash(current->domain, "Impossible cause (%#lx) in %s?\n",
+>> +                     gf->cause, __func__);
+>> +        return;
+>> +    }
+>> +
+>> +    utrap.sepc = gf->regs->sepc;
+>> +    utrap.stval = gf->stval;
+> 
+> Would there be anything wrong with putting these in utrap's initializer?
+
+It could be initializers. I will use utrap's initializer.
+
+> 
+>> +    trap_redirect(&utrap);
+>> +}
+>> +
+>> +void handle_guest_page_fault(struct cpu_user_regs *regs, unsigned long cause)
+>> +{
+>> +    struct guest_fault gf = {
+>> +        .regs = regs,
+>> +        .cause = cause,
+>> +        .htinst = csr_read(CSR_HTINST),
+>> +        .htval = csr_read(CSR_HTVAL),
+>> +        .stval = csr_read(CSR_STVAL),
+>> +        .gpa = INVALID_PADDR,
+>> +    };
+> 
+> At some point RISC-V code will (very likely) also be scanned for Misra violations.
+> The csr_read()s here violate rule 13.1 ("Initializer lists shall not contain
+> persistent side effects"), and I think it would be better if such was avoided from
+> the start.
+
+I will do the following then:
+
+struct guest_fault gf = {
+     .regs = regs,
+     .cause = cause,
+     .gpa = INVALID_PADDR,
+};
+int rc;
+
+gf.htinst = csr_read(CSR_HTINST);
+gf.htval = csr_read(CSR_HTVAL);
+gf.stval = csr_read(CSR_STVAL);
+
+> 
+>> +    int rc;
+>> +
+>> +    /*
+>> +     * A guest-page fault may arise due to an implicit memory access during
+>> +     * first-stage (VS-stage) address translation, in which case a guest
+>> +     * physical address written to htval is that of the implicit memory
+>> +     * access that faulted - for example, the address of a VS-level page
+>> +     * table entry that could not be read. (The guest physical address
+>> +     * corresponding to the original virtual address is unknown when
+>> +     * VS-stage translation fails to complete)
+>> +     *
+>> +     * In such cases htinst reports one of the pseudoinstructions recognized
+>> +     * by htinst_is_pseudo(), and the fault requires separate handling (since
+>> +     * G-stage translation failed on an unpopulated/unmapped guest physical
+>> +     * address during a hardware page-table walk). To match bare hardware
+>> +     * behavior, we must inject an access fault of the ORIGINAL access type
+>> +     * (Instruction, Load, or Store/AMO) that initiated the address
+>> +     * translation.
+>> +     */
+>> +    if ( htinst_is_pseudo(gf.htinst) )
+>> +    {
+>> +        inject_access_fault(&gf);
+>> +
+>> +        return;
+>> +    }
+> 
+> I.e. you imply that guests won't put their page tables in MMIO? That's
+> fragile imo; I have seen OSes to use video frame buffers for all kinds
+> of (transient) purposes, for example.
+
+I think it is okay for now and if it will a real use case then an update 
+of this code will be needed.
+
+> 
+>> +    resolve_faulting_gpa(&gf);
+> 
+> Since the function is only a stub right now - how is one to tell whether
+> this indeed can never fail?
+
+It can't be tell. But what is wrong if it could fail? (Actually with 
+current implementation introduced in later patches you can find it can 
+fail if a necessary extension or software page walk isn't introduced).
+
+If we can't resolve faulting GPA address then we can't continue to work 
+and so at least domain should be crashed.
+
+> 
+>> +    switch ( cause )
+>> +    {
+>> +    case CAUSE_LOAD_GUEST_PAGE_FAULT:
+>> +        rc = emulate_load(&gf);
+>> +        break;
+>> +
+>> +    case CAUSE_STORE_GUEST_PAGE_FAULT:
+>> +        rc = emulate_store(&gf);
+>> +        break;
+>> +
+>> +    case CAUSE_FETCH_GUEST_PAGE_FAULT:
+>> +        /*
+>> +         * Guest is trying to reach unmapped/unpopulated or G-stage PTE doesn't
+>> +         * allow execution (X=0). Generate fetch fault in this case.
+>> +         */
+> 
+> Is there perhaps a comma missing before "or", to help parsing the sentence?
+
+I will add one.
+
+> 
+>> +        inject_access_fault(&gf);
+>> +        rc = 0;
+>> +        break;
+> 
+> Simply "return" instead of the latter two statements?
+
+It makes sense. I will do just return.
+
+Thanks.
+
+~ Oleksii
 
