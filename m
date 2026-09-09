@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 49479C79FB7
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 13:01:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1413009.1643294 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8482C79FAD
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 13:01:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1413013.1643302 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4Huw-0007Ug-RM; Wed, 09 Sep 2026 13:00:46 +0000
+	id 1x4HvI-0007si-22; Wed, 09 Sep 2026 13:01:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1413009.1643294; Wed, 09 Sep 2026 13:00:46 +0000
+Received: by outflank-mailman (output) from mailman id 1413013.1643302; Wed, 09 Sep 2026 13:01:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4Huw-0007UZ-Oq; Wed, 09 Sep 2026 13:00:46 +0000
-Received: by outflank-mailman (input) for mailman id 1413009;
- Wed, 09 Sep 2026 13:00:45 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x4HvH-0007sZ-Vf; Wed, 09 Sep 2026 13:01:07 +0000
+Received: by outflank-mailman (input) for mailman id 1413013;
+ Wed, 09 Sep 2026 13:01:06 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x4Huv-0007U9-Cl
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 13:00:45 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x4HvG-0007rs-6S
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 13:01:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4Huu-00GvQy-Ps
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 15:00:44 +0200
+ id 1x4HvF-005AXD-JE
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 15:01:05 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa15878-bab6-0a2a0a5309dd-0a2a4505ae82-14
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 15:00:44 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ id 6aa15887-2eae-0a2a0a5409dd-0a2a4505b5de-44
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 15:01:05 +0200
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa1587c-4cb1-0a2a45050019-d155802ad0fb-3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 15:00:44 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-49b392ccaacso84559025e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 06:00:44 -0700 (PDT)
+ id 6aa15891-4cb1-0a2a45050019-d155dd36d5a1-3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 15:01:05 +0200
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-482f2ee53e7so4308877f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 06:01:05 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cfbdacc45sm443341775e9.11.2026.09.09.06.00.43
+ ffacd0b85a97d-4859162f354sm36448884f8f.20.2026.09.09.06.01.04
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Sep 2026 06:00:43 -0700 (PDT)
+ Wed, 09 Sep 2026 06:01:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788958844; x=1789563644; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788958865; x=1789563665; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=2hiugmH/DfrkMOq2Rrm79IM9Vi54MWLDW0uP3xzNUMw=;
-        b=O59Mh62IrcM7NczrKaQbC8ZS7fQ9R4IrhfEKLKb3olmsvJ6nmr8H+oBl2ZE3LCv88e
-         VLNCssv1PXwEYm62mnQ6U9J/Bv8Z76EN+7YzErjFXiGTje4IgzDuNP7vYjNdieUgcABi
-         y4PZ2RAqwtQCGqxDIJyFT9Hti+B9Y+bAaMF1knZNgoBkeTpbK6+xdo5amgRlcEjkh+eT
-         05jcrPMl+kzaud9iWd3JQNOHhG+rq+8ChZLRpzFmt1Nf9rO7UOPqpbDJdxYO5l1Z7pYc
-         71sJ0R0DHC7Bn1lK1g2grh1i+MPpgYybIXjiUTsEFheZ0io6RjuzANjkpHXp4rsl2Ca1
-         AxvQ==
+        bh=RIlpRmcgmO+OHiE8JCj69D3pFRhEmMDX/T6up7aFl3o=;
+        b=MJXRQgADLxW7XGDeadnxnsR+6jrttTbdcOkAPL/BfERs684KpfF1GDp4LaH6FptC+Z
+         9eyKo8rQv02Rev8qhsoAHyJKW+gJHKtWVoEBsB/oTfj6rGtSFd9ei2pf+wH5znz2RSIX
+         DPqakSKhC9+MRFyQOtyg5HjmzpPfG7OIzUj5Q8bZLjLc04g4nBHl9ZCPMzbgkNi3soCh
+         BIP1wrU6DkeUQ9+r7IB9wUbaAWCOr2UQVqkRt2qmVSX235zzqSlfDpnRvoOcX9q6CJZe
+         MZ86O4lcpP8uVKQZWDqoeq2fm7VFoQBt8qfxcPxn3eJ5FekVp6lG7wIlDFWu12lRjuUE
+         uVsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788958844; x=1789563644;
+        d=1e100.net; s=20251104; t=1788958865; x=1789563665;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=2hiugmH/DfrkMOq2Rrm79IM9Vi54MWLDW0uP3xzNUMw=;
-        b=Lt23S2cXQ/8sX3SiElPjLUw8tTKVixe5+3eo8TJ3U+MyJw6lpMG51C0+8sE8mq+CT+
-         l0F0gmadZCT+gUBuln8lz6Y4aSso8+HhyDWmgIRFMU/JUYetNGOGVsWZjHPAsgrk5MNR
-         JzQg8gNVNa7gWl+OYnT1AJaBJ0gt4Gui7x5LicqY4dtpqIyUHHK66QuxyM9lgJWBW7u4
-         UON8DIIBBerInoH1H6NZQ+Q7OlI1KLe65iIB3fpGa1W2vPkbTa4f2dBthUaxK8Y16Nrg
-         PAELfuuRQP4+UqqAf1v7bsS1Id02E+txBZuLG0faLZdnaFcOszqlfSQHeplPHbpXqW6q
-         eJxw==
-X-Gm-Message-State: AFuF++le/TWNnGFCQqkxC6RIMqttCXvvbU1GczLgeJBpNA448J5P29J9
-	usoCPMol/0y+VXFf9PbW/iOUpxbQ8ovdWu5Cz9hbQ7hqkgQmDHXy1h9rLifpenQAJq64blLucfz
-	6tQLgPA==
-X-Gm-Gg: AYBFou1O9C4JAI+ngXmiIUnnMeBxYLeOrwPyRDIUc3hsUQbhyoEbBNUvcWD5W+yea8z
-	rUbhZ8h+pnSut9zcBO1/Rhg6vZ1tf1opDW31AYaNo3i/9BhKP+zMCUYf0YIhIMJqvBw0DAPdayg
-	GpRCa8C0zEn4Amx27ampa7uu0xX+zuH/5TaFVG1u6mCAAf7aUEZvVaBx5tcqcpQaH8b++AOHlgO
-	O00GfI+GaRuLsGMnDtCGSYrxIXoemU55GAiYK7lL+ijhPyPSQdFIZufXB1J+IGQBbBiGaoXnlA0
-	8Jkl0GviSIYw+fVkRnGJO1NlKtgKgu7v/Z7LQRkmW4qkFURsddt5FqYSHs9oYu01TDK+Lx2Dxxq
-	3Lf0B9AFeyV1jZT3WJUrxfGgDmRyZgaYnA5/7CgHGlOP7fGEyxXDJJ7TZ0LN/PmdCfoAydAyWJ4
-	1HBnI0W9TQ5I0tEcJUl6mHHGZjuDQZnrBxEAo93jovMLp65CzBmBDp/5pZb4h3GdG08nTQnXyRo
-	7NLPY8Ct7nq+fKzTlNW9UGCZrST5X1WqWqYQ0v7kg3ixOvrSWb1me2oosE8FXY=
-X-Received: by 2002:a05:600c:3b18:b0:49c:fa21:1c8a with SMTP id 5b1f17b1804b1-49cfa211d97mr298047735e9.31.1788958843949;
-        Wed, 09 Sep 2026 06:00:43 -0700 (PDT)
-Message-ID: <6fe2a230-4c36-48ce-93c0-ee8d75500d3a@suse.com>
-Date: Wed, 9 Sep 2026 15:00:42 +0200
+        bh=RIlpRmcgmO+OHiE8JCj69D3pFRhEmMDX/T6up7aFl3o=;
+        b=XzCLUgistFGxUWFA0ovMWbZDjw5FbTIaNutQtCLy5BCX6CTmdH4bLh8IBfNI/1AGBw
+         oLDwwrAj5VR398VdbOtuxu/NieWNQmPlk5W6jOU8vhPHrfPcCZfxTxbQCm2rasCMdi3e
+         1zn004++PwjgC/m3It+plVvTGHfd7MXANizyjc7f3FT1ocm+OBf3bjdcTeS/kqR+jwuG
+         U29LS1aIrF3eQQqEocRJFD4IbNqT6P9MQTZPUR2hoFC4JPZMeOXBVpMq0HQX/REbJrV5
+         DvEzB+TPsRUTQ+1uSNxZw6M1KxBc818XBbITVrK1/TSuV1K4RQo7r3OuPY+bJ1/g/63r
+         AHww==
+X-Gm-Message-State: AFuF++mB13+RPpGEL1pSERPbnT42B0zAk+Uey4EjltVNCbVi/+kOAOY7
+	xYX0pcmWWKQoQHh5lwh1+J1cmoLDE13PedQIGHBioYytXpSb7Si3/HnYoCqz9nT2CNWplbZIoGU
+	YWK/nHg==
+X-Gm-Gg: AYBFou2s0NlvcYpcNINXm/wNstmxm9tHuDwO/OMgKQmG+uUGbFWfkI+SPKzHFce8sBs
+	/2prFGURtBcvJr8szR4B/zbB0MFWVcct2V24UryvFyEJyUXl+9z2wKcwTG+pmiliTFncLdEE2DE
+	Gr5nOBh3sr/1RwUrOsRu8VT3v86ucgmqGZSsq+DWwl4aTvrK8mLpc9dk1+J9948vOefg4gXMogT
+	7PxwUe2RdWPwIuF60p0DYVipFrFOIPnxkXtTdG18oSFeYDBcHvobqAMhYi+oRB1UbJ/jTRF2Q66
+	MGtDEldddofudLIPT1g/zQo1mF+owz9LQLrxUxypoLvx9Y3bAHLS6HrI962CcCHz+kUiiK6oHrS
+	x+HbPeRXWBPXtO0cPuH0pzg/9cUsNOaO95fFwGPoUlIDSUaL+vriaeDG5fDVz+zq9wElpy37pGy
+	zhdrsZ2p1h86ctXbDVvYU8RJnwjLjhaPa0i/op+J/qOY5lZWH+X2RBAmdAiTPppFVgjrvy72cGo
+	VLmGoy/PTTyiTchBtR5KlEeDu2MxGvd6J9M+S4RUKuHjLwkz1G7XljfcCn5zWA=
+X-Received: by 2002:a05:6000:2584:b0:482:b813:8315 with SMTP id ffacd0b85a97d-485872ac3b1mr39548042f8f.21.1788958864913;
+        Wed, 09 Sep 2026 06:01:04 -0700 (PDT)
+Message-ID: <08038aa9-6902-4070-b49c-0a9ff113c786@suse.com>
+Date: Wed, 9 Sep 2026 15:01:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 4/6] x86/cpufreq: annotate Eclair false-positives for rule
+Subject: [PATCH 5/6] x86/Viridian: annotate Eclair false-positives for rule
  18.2
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
@@ -132,14 +132,15 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <c3614ea0-e5b3-4cfd-820b-9320ac327292@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1788958844-724B42A1-9A133E62/0/0
+X-purgate-ID: tlsNG-c201ff/1788958865-F4EA12A1-AA17D865/0/0
 X-purgate-type: clean
-X-purgate-size: 1941
+X-purgate-size: 1863
 
 "Subtraction between pointers shall only be applied to pointers that
-address elements of the same array" is not violated here. Elsewhere, on
-simple "e - s" Eclair manages to notice this; apparently "(end ?: e)" is
-too complex ("end" being derived from "s" a few lines earlier).
+address elements of the same array" is not violated here: start_stimer()
+is only ever passed a sane argument, and stimer_expire() is either called
+from start_stimer() (using its parameter as argument) or as a callback,
+where a sane callback argument is also guaranteed to be set up.
 
 Suggested-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
@@ -148,39 +149,37 @@ As per Nicola Eclair 16.0.0 has this fixed.
 
 --- a/docs/misra/false-positive-eclair.json
 +++ b/docs/misra/false-positive-eclair.json
-@@ -3,6 +3,13 @@
-     "content": [
+@@ -10,6 +10,13 @@
+         },
          {
-             "id": "SAF-0-false-positive-eclair",
+             "id": "SAF-1-false-positive-eclair",
 +            "violation-id": "MC3A2.R18.2",
 +            "tool-version": "3.14.0",
 +            "name": "Rule 18.2: pointer subtraction",
-+            "text": "Cmdline parsing start/end pointers point into the same array"
++            "text": "Viridian stimer index calculations use sane pointers"
 +        },
 +        {
-+            "id": "SAF-1-false-positive-eclair",
++            "id": "SAF-2-false-positive-eclair",
              "violation-id": "",
              "tool-version": "",
              "name": "Sentinel",
---- a/xen/arch/x86/acpi/cpufreq/amd-cppc.c
-+++ b/xen/arch/x86/acpi/cpufreq/amd-cppc.c
-@@ -67,6 +67,7 @@ int __init amd_cppc_cmdline_parse(const
-         {
-             printk(XENLOG_WARNING
-                    "cpufreq/amd-cppc: option '%.*s' not recognized\n",
-+                   /* SAF-0-false-positive-eclair s, e, and end point into the cmdline array */
-                    (int)((end ?: e) - s), s);
+--- a/xen/arch/x86/hvm/viridian/time.c
++++ b/xen/arch/x86/hvm/viridian/time.c
+@@ -136,6 +136,7 @@ static void cf_check stimer_expire(void
+     struct viridian_stimer *vs = data;
+     struct vcpu *v = vs->v;
+     struct viridian_vcpu *vv = v->arch.hvm.viridian;
++    /* SAF-1-false-positive-eclair vs is always sane */
+     unsigned int stimerx = vs - &vv->stimer[0];
  
-             return -EINVAL;
---- a/xen/arch/x86/acpi/cpufreq/hwp.c
-+++ b/xen/arch/x86/acpi/cpufreq/hwp.c
-@@ -85,6 +85,7 @@ int __init hwp_cmdline_parse(const char
-         if ( !hwp_handle_option(s, end) )
-         {
-             printk(XENLOG_WARNING "cpufreq/hwp: option '%.*s' not recognized\n",
-+                   /* SAF-0-false-positive-eclair s, e, and end point into the cmdline array */
-                    (int)((end ?: e) - s), s);
- 
-             return -EINVAL;
+     set_bit(stimerx, &vv->stimer_pending);
+@@ -146,6 +147,7 @@ static void start_stimer(struct viridian
+ {
+     const struct vcpu *v = vs->v;
+     struct viridian_vcpu *vv = v->arch.hvm.viridian;
++    /* SAF-1-false-positive-eclair vs is always sane */
+     unsigned int stimerx = vs - &vv->stimer[0];
+     int64_t now = time_ref_count(v->domain);
+     int64_t expiration;
 
 
