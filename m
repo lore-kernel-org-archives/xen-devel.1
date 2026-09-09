@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 86051C79FB7
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 13:47:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1413129.1643373 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DCA05C79FB6
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 13:54:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1413140.1643384 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4Ie7-0000w6-Nn; Wed, 09 Sep 2026 13:47:27 +0000
+	id 1x4Ikg-0002fl-Da; Wed, 09 Sep 2026 13:54:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1413129.1643373; Wed, 09 Sep 2026 13:47:27 +0000
+Received: by outflank-mailman (output) from mailman id 1413140.1643384; Wed, 09 Sep 2026 13:54:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4Ie7-0000vz-L3; Wed, 09 Sep 2026 13:47:27 +0000
-Received: by outflank-mailman (input) for mailman id 1413129;
- Wed, 09 Sep 2026 13:47:26 +0000
+	id 1x4Ikg-0002fe-A5; Wed, 09 Sep 2026 13:54:14 +0000
+Received: by outflank-mailman (input) for mailman id 1413140;
+ Wed, 09 Sep 2026 13:54:13 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0866c5bfe000c4f3@swg.vates.tech>)
- id 1x4Ie6-0000vt-5Q
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 13:47:26 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1x4Ikf-0002fY-K7
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 13:54:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4Ie5-007u7Q-I9
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 15:47:25 +0200
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0866c5bfe000c4f3@swg.vates.tech>)
- id 6aa1636d-e002-0a2a0a5209dd-0a2a4503eca4-2
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 15:47:25 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0866c5bfe000c4f3@swg.vates.tech>)
- id 6aa1636d-fae8-0a2a45030019-b9ff1c238095-3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 15:47:25 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0866c5bfe000c4f3.004 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 09 Sep 2026 13:47:23 +0000
-Received: from l14 (areims-651-1-80-194.w90-18.abo.wanadoo.fr [90.18.187.194])
- (Authenticated sender: anthony.perard)
- by mail2.vates.fr (Postfix) with ESMTPSA id 92BC281D2F;
- Wed,  9 Sep 2026 15:47:22 +0200 (CEST)
+ id 1x4Ike-002XOx-0w
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 15:54:12 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6aa164f4-8faa-0a2a0a5109dd-0a2a450bdee4-18
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 15:54:11 +0200
+Received: from [202.12.124.148] (helo=fout-b5-smtp.messagingengine.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6aa16502-b7e8-0a2a450b0019-ca0c7c94d141-3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 15:54:11 +0200
+Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
+ by mailfout.stl.internal (Postfix) with ESMTP id C7D5C1D000CC;
+ Wed,  9 Sep 2026 09:54:09 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-03.internal (MEProxy); Wed, 09 Sep 2026 09:54:10 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 9 Sep 2026 09:54:07 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,83 +52,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=30FDC8+SyZ8JvOgAC8CWDsrwu0Mz5znm0ZmniOiLZ2Q=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=RwPTFOFpIH32R4ZS1A/8RxnAcESF1T0iKGc5P8tY5IsRbDOvW8Bllb34ASHyOqkprZKGQJM47
- vU5+1FxLMEHuD+taO/c2NZ9lvtqZH6qKRJ+jdx+WSK08dWaCOEw2AKB6cNflzGIyC29ogFyfOQJ
- 0438WUGdDPr9JlSmHVIOP+wY/iIEtFyDGvqScbU2uq4VLtWWC3v0f8kD2pGQohv1USSrmBui7Yk
- 5A+46kOBZmgSJH1i8ezWXe6cSwVy8JMPxY8TPiD+ipx+NORRnyJl55D4lUL5ZkJu5ty8oaspz7m
- kPk7Vcqz0G/F1ooYxXFm7ar8J/BPS71duVl94v1qoyjA==
-X-Zone-Loop: 13474b69ce2261f95457bcd23a0374c6ef00aeaa4519
-x-campaign-type: default
-x-transaction-id: 0bc88b75-d9a1-48fe-bc60-09de4a5adae1
-x-swg-uid: 01-08037513-d8df-4681-92df-9b999cb01863
-X-Mailer: Sweego
-Message-ID:
- <1788961643.8631fc262581453bbf619ec5b2062170.1a0866c5bfe000c4f3@vates.tech>
-x-swg-bid: 1788961643.8631fc262581453bbf619ec5b2062170.1a0866c5bfe000c4f3
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Wed, 9 Sep 2026 15:47:22 +0200
-From: Anthony PERARD <anthony.perard@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm1 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
+	:references:reply-to:subject:subject:to:to; s=fm1; t=1788962049;
+	 x=1789048449; bh=VMvOOyY9mcnhXRYtdukfXBzrxZKMNsKzYYKcZnz3G+s=; b=
+	cFdKeLDAzC9n8RycW3FnwasBMZtWVWrwPdAnAGh++ATUnInltOuq0175DlK6qgiI
+	ifDQO52ZX1k6hknsu8XFZ/AIt5ufUdgLhlpzCk9Et7DmvFARShrWTknhy2hWef/b
+	SsIiHsfAAr++XD+EeZMbrOMHFwpv/kp6Hj4ZjNndyvw464pQGg9Va3k1wn8kX97T
+	1zyW1qSZa3S6U4OlREoH8300qTqg0j/bE9/05AgslyPDH6TuEdgyDq7rvBmR9SuO
+	5I+E0yqlbjdwPxlaDFGnhud0Y7yarYiPECclV214/AeoQr4eNDYowv8DgzxZMgED
+	a5nTwguAwnaB/KvQX4CEwQ==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
+	:message-id:mime-version:references:reply-to:subject:subject:to
+	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
+	1788962049; x=1789048449; bh=VMvOOyY9mcnhXRYtdukfXBzrxZKMNsKzYYK
+	cZnz3G+s=; b=wj3UTmfX3a79OeucEgObnXUYyvflVaPAvpDJQB/nV8V3awp6Sad
+	w893/LuTM6Hub7vNSOvkro2NXEBRSO4ks73oSyy0QGzfTfwEzUB3IGGMfQmA8NqQ
+	A8vWeTrBU8JX4dlQyc1nKR1ksBc9iqihwGb+RAzlLlmTL5ve4tJoWdS2D6Hd4yA2
+	RoSpWRLQ2mpi9AQ9rbR/si05PZuTiyzbnqPJjAq275B9TsV7M3jlseJ/iVSYQE96
+	i4i3aHYK9+BchYGXNkFaFFgo2qA+qXfNzIyFLH6AeoeYxcpuqWGNvqyNAEgOHsSU
+	+11hmfbYGDWCB9mJqua9qrjg5x73TYE3WqQ==
+X-ME-Sender: <xms:AWWhanSsfsZj78tYC-pnCyoEzm0xlYzmIG6sMPAsqQNCAHRmz3gUNQ>
+    <xme:AWWharCpneRkDAs7pUrwq9EdseWLuKrPd9vs_fb6TWhxoXx0fgx_cf2w--R2XLD3w
+    cTGQu2VtWmwdSGwte6b6TY59dXPhYtWd6DHJJiLgCn6cjkjicO1>
+X-ME-Received: <xmr:AWWhavE7GfeiQmdf75G7ftPaPbT4pY5xJK4rVb91JXcECQDfAI-DtSpSrIjwFWMflYRF3FYuU3-6IaQRFHPqmY6Qt72gOS6UK-o>
+X-ME-Proxy-Cause: dmFkZTG1NR6sYhmdAkE1G2MkdeeKu4jVrYRkLE+37adJBo113bK+to5NDDf+ghPO9tSip/
+    X+IqF6wjFEy8ucFVUFtMYO7pD1t4HhAN4Ye7ePD/gxRahrkAnsSRRks7MUyRgXSZ9iK3OD
+    aMNSi69kA6RwA/DCdxuNQp4zt60RpZBXxUWWlMJNQUg/b1cpWqT3Mtp+OGROAUM5eZ4FK7
+    lx8kub0cIm7J/uuT0lt2zUEWe4Hm39qm4ZejJkLoHcIEGFftyuNxT9xIWtvI6nplC9i3Qb
+    +2ZQtT/snmRtEU34Olv0Xu28IR0+SmP3lOT1ZdqoeFVbhctgrsfpS1jb2oEfa1H9/DeWLr
+    wy8/bEeQewVJrDGL0gs9Gl/fTIm8GAz8FTHTjwKJgsBBHJvJZNtaDm9F2gcSGgqwT41sEW
+    g8LYkQiod8tAU9YsMWzMuKNAPADXuvIjZuZFm4TjyjUcqW8H52iTd3vwitGg6B7O1V879p
+    PSbmu2GQTDk6tpyYdqdPk4DC89sjs7wg7nfBdptxa6TsA/DHB1/zLDmlmnM6oV3S8mF0Zu
+    OiKO0UBY5LKK2hdtgUgjf4w5a8nc893IREEn2ZYWcRT0qaU2Gt8t+ZJDV1G2N2YHFcD2E8
+    Ph3ijsyBocl061IoW5/JPcEdHQTPvXKinNihhI9uuZNvm/a/BQpdmpyvzgUg
+X-ME-Proxy: <xmx:AWWhatB5dLBtgqTwAE650jkuLF7kC_xppoZ9VsWPc7Je4C1JMzymNA>
+    <xmx:AWWhavWRfbqHFkmZGIrE3JWBq4G27SVxKpvPZO9u4jHSFxbX_m_PKQ>
+    <xmx:AWWhahqjwo7sf3_P96Qxf_S_s2tet6tKKBNTvRJZS6I6loki5l3CWA>
+    <xmx:AWWharQpOwNnxFWsGw5ZJuHTWFF3gEKOrI-Oh-XpdAu2TkPVWK-kWA>
+    <xmx:AWWham2k7Xqpk030Pj9N7pky-SYvVO5kKrBRNPcBX2Xnhrq1A1EXr-0x>
+Feedback-ID: i1568416f:Fastmail
+Date: Wed, 9 Sep 2026 15:54:05 +0200
+From: Marek Marczykowski <marmarek@invisiblethingslab.com>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH v3 1/6] x86: split xen-syms/xen.efi linking rules
-References: <153fd1b8-810a-4091-84d5-5395d83f2ee9@suse.com>
- <fa4251ce-4e78-4724-836f-0b46cf37a25f@suse.com>
+	Teddy Astie <teddy.astie@vates.tech>,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Daniel Smith <dpsmith@apertussolutions.com>
+Subject: Re: [PATCH 3/6] x86/EFI: adjust efi_multiboot2_prelude() to comply
+ to Misra rule 18.2
+Message-ID: <aqFk_TWlwE6yHO9N@mail-itl>
+References: <c3614ea0-e5b3-4cfd-820b-9320ac327292@suse.com>
+ <25c71873-9043-40c7-a514-c7cd557f91d1@suse.com>
 MIME-Version: 1.0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="YnbfIwn8Kgs20i6B"
 Content-Disposition: inline
-In-Reply-To: <fa4251ce-4e78-4724-836f-0b46cf37a25f@suse.com>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.40.8ad13e28d3b61d08.1a0866c58f1.730368a99bde9348=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1788961642738
-X-purgate-ID: tlsNG-33051d/1788961645-75C804E9-A8FAD571/0/0
+In-Reply-To: <25c71873-9043-40c7-a514-c7cd557f91d1@suse.com>
+X-purgate-ID: tlsNG-42698a/1788962051-196C29EA-3D851B37/0/0
 X-purgate-type: clean
-X-purgate-size: 1131
+X-purgate-size: 2089
 
----=Part.40.8ad13e28d3b61d08.1a0866c58f1.730368a99bde9348=-
-Content-Type: text/plain; charset=utf-8
+--YnbfIwn8Kgs20i6B
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: quoted-printable
+Date: Wed, 9 Sep 2026 15:54:05 +0200
+From: Marek Marczykowski <marmarek@invisiblethingslab.com>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Roger Pau =?utf-8?B?PT91dGYtOD9CP1RXOXVic09wPz0=?= <roger@xenproject.org>,
+	Nicola Vetrini <nicola.vetrini@bugseng.com>,
+	Daniel Smith <dpsmith@apertussolutions.com>
+Subject: Re: [PATCH 3/6] x86/EFI: adjust efi_multiboot2_prelude() to comply
+ to Misra rule 18.2
 
-On Tue, Sep 08, 2026 at 02:28:07PM +0200, Jan Beulich wrote:
-> Doing so, besides (hopefully) adding clarity (not the least by way of
-> using pattern rules where possible), also avoids explicit recursive
-> $(MAKE) invocations=2E For xen-syms move re-usable helper rules to a new
-> scripts/Makefile=2Elink=2E
+On Wed, Sep 09, 2026 at 03:00:21PM +0200, Jan Beulich wrote:
+> While casting to pointer types may be more natural there, the subtraction
+> then ends up violating "Subtraction between pointers shall only be applied
+> to pointers that address elements of the same array". Use unsigned long
+> arithmetic instead.
 >=20
-> While doing so, re-order =2Emap file creation (which can in principle fa=
-il)
-> and check-endbr=2Esh invocation ahead of putting in place the final imag=
-e
-> (which is now the result of a simple rename)=2E
+> No functional change intended.
 >=20
-> Also drop --source-name=3D from the tools/symbols invocation which has
-> --empty passed, for being meaningless there=2E
->=20
-> Signed-off-by: Jan Beulich <jbeulich@suse=2Ecom>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Reviewed-by: Anthony PERARD <anthony=2Eperard@vates=2Etech>
+I was going to propose pre-calculating mbi_raw + mbi->total_size and
+checking against that, but then checking for overflow would need to be
+explicit. So, your version indeed looks better.
 
-Thanks,
+Acked-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
 
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
 
--- 
-Anthony Perard | Vates XCP-ng Developer
+--YnbfIwn8Kgs20i6B
+Content-Type: application/pgp-signature; name=signature.asc
 
-XCP-ng & Xen Orchestra - Vate=
-s solutions
+-----BEGIN PGP SIGNATURE-----
 
-web: https://vates=2Etech
----=Part.40.8ad13e28d3b61d08.1a0866c58f1.730368a99bde9348=---
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmqhZP0ACgkQ24/THMrX
+1yzFPAf/Yt2/hgR5XfVVB9l3qHX9tFd58Y5hGtiiG3nk0GLhIXfp8aaYuz0FDgRB
+2Je1t408daMmm4euc5vqzCjtrq2ie5hE7HAoO9zEU7v7jRtTjjh4yzbGQxrqiekG
+/6mySuCGS3S7xReQhj/ZnWP3NHA5phNLSuZyMiFso/80FaYn92ffeTmjRvPy5t0e
+VUZWN07Od14OkcXIw7EPZl98/06k837cPmXgTyxb2jAv4ajP0fhV1ssPmFZyIRNe
+vp8m9Vmobq9tQC7Lbnos9Gy/G1bsjSeKIzXrF6Eyqj9A/eyA8bpOy1vNpVesG/YB
+rKbviNmnQEvCb/+9H8+3nKfRwi6Jvg==
+=K9n7
+-----END PGP SIGNATURE-----
+
+--YnbfIwn8Kgs20i6B--
 
