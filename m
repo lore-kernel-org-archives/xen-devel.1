@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89D44C79FB7
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 14:51:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1413217.1643437 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68636C79FB7
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 14:53:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1413222.1643446 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4Jdl-0005Wb-Fb; Wed, 09 Sep 2026 14:51:09 +0000
+	id 1x4JfQ-00060j-Pb; Wed, 09 Sep 2026 14:52:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1413217.1643437; Wed, 09 Sep 2026 14:51:09 +0000
+Received: by outflank-mailman (output) from mailman id 1413222.1643446; Wed, 09 Sep 2026 14:52:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4Jdl-0005WU-Co; Wed, 09 Sep 2026 14:51:09 +0000
-Received: by outflank-mailman (input) for mailman id 1413217;
- Wed, 09 Sep 2026 14:51:08 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x4Jdk-0005VJ-LD
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 14:51:08 +0000
+	id 1x4JfQ-00060c-Mw; Wed, 09 Sep 2026 14:52:52 +0000
+Received: by outflank-mailman (input) for mailman id 1413222;
+ Wed, 09 Sep 2026 14:52:51 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1x4JfP-00060W-7B
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 14:52:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4Jdk-0039a4-1b
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 16:51:08 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1x4JfO-00DlEY-5L
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 16:52:50 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa1724b-8faa-0a2a0a5109dd-0a2a4503aac8-24
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 16:51:02 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa172b9-8faa-0a2a0a5109dd-0a2a4507ca6a-14
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 16:52:50 +0200
+Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa17256-fae8-0a2a45030019-d1558035d8d9-3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 16:51:02 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-49b0d78a801so59275265e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 07:51:02 -0700 (PDT)
+ id 6aa172c1-b4ea-0a2a45070019-4a7de14cb9bb-3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 16:52:50 +0200
+Received: by mail-wr2-f12.google.com with SMTP id
+ ffacd0b85a97d-4834977ae75so695894f8f.3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 07:52:50 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49cf7740d44sm1037476305e9.15.2026.09.09.07.51.01
+ ffacd0b85a97d-485883c074asm43508683f8f.23.2026.09.09.07.52.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Sep 2026 07:51:01 -0700 (PDT)
+ Wed, 09 Sep 2026 07:52:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,53 +55,53 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788965462; x=1789570262; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788965569; x=1789570369; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=gUYQi1MVI1FsspeqjeqM6EEgqL7Bgt2IUomotef3ofI=;
-        b=RuYuh3ubU6Epm5IQcJ5aBgJvxkfyAlvimnpNjUlXiNn6XxQhnWiydxp7K456xGyT/M
-         46YJJy/PsqboYe1QJwdzYHggwyexhyRBXRLRmR+tCeHOFlH8ocggsRWrm+6sV3b9ICud
-         RBKOzEbzLPwyaJgHEybXmgHBCsOdF5pfZfvHWPAEdlSdRp9MooR+sph02sTSZOW+qCVL
-         0lQFdcl8bgcmKrvbDEKZkWeF+XX7Du8bJAkFTL7+Xz2Rnc8r/53QtF8NHqcNAlqAiyi/
-         NH07s/rm8AfJEE0idOhbB08ekX31dII9nZpsr6OOFPn53mXbmCF8nDCfDsZic3O7ccLA
-         k/EQ==
+        bh=7MTDuaKiColxHVcHeUOieknlvsgeaH6ki8cCSq2F2+I=;
+        b=c1BTG2g44ZzihEAAX561N4XqmrNrIAdYYFuYJlUBMj6xTSmyJm0x+H6xJq3gBkBdFT
+         UI2eBIdCE9f5AM91I1st1/YjY8UTTan99sEht0qloO3w92tbdOVl0cZRr74oGdaaUhzA
+         AeKLXBAnXXAcYGF5nksSnltDQ0if6/gIF8opQckUXzsg6NKuMz0fSghfR52arMYDbla9
+         2eDjw6h30AwhTEdFf25DkO9bvKngMOstDytEfbAo+s0AD/uXGF9mxYnUGd5EkcXHLLT0
+         WcRevn+DkeBy7lCpGyfapWVhxLLKPKo8XHSx93cZ3S0BUcjKZTRS9xgWGu7M/iWFNosr
+         1Pmg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788965462; x=1789570262;
+        d=1e100.net; s=20251104; t=1788965569; x=1789570369;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gUYQi1MVI1FsspeqjeqM6EEgqL7Bgt2IUomotef3ofI=;
-        b=A0fFpGs9H0QlhhYq5ej8toGbpimJrw8y5yp7yCIU5ULewNvk0ND+Ib270oe4AK5bTa
-         M+44h+h+H9Q0gHt0BdsWX5JI3wdi2NXNrVfndmCZYVpaPrXV0WYHwFCRY0XaIQQTxJf9
-         KCob02zgCFMtBpYAWWpR0XhcPV+H9F8/gOkptPL2mKNMpMIGWWoVE6AOn/9A2XTQ26M3
-         qA1BJb5+rsuWHlXZZ1SF/nQPUgNjjzr0g9SgS1MDqYU0F3HWTvqRfL+NCg1KBAZ+X/Wf
-         1KcPiikpztRDUAMRrKr8saw4kJA1f21G6D8jQ7geAnDTZUoUQsjFU/U9QSwMdM324b5a
-         IYBA==
-X-Gm-Message-State: AFuF++lACA4gLjTI4Swd893yZ/17VtKDg0RMH+wTTxcEAyG4Bg4N1dMc
-	gBABCjZ6/RHjKk/AvdTGXOuB0oFb/WbcVO8yLptT5/ukwm/Bzp24EqzXeG4BRRtUJg==
-X-Gm-Gg: AYBFou2R88bun00fPu5/AVXsJKdVwUnrU06Dmt02ko4TYLWXruR/HBrmLLeBA97u9M8
-	MKz+TS7e9+t/zQly6yACF4wQfaWGqvH7XfH1iUxZjW0YmvXQtKYnSK1nBsUMkS+KXEmHkuyQRV0
-	NnxwZM+cTwtX+73rQd1R//504/4K8GIwj+A9Fl4FHSBn3ZDsQi2fWdzuVSI3NSxXOWfEvmrWpmS
-	7EM540kNrquRLDQnfet3700m42JlkEOD51/TKtNRVD94zznH2huwnq3pwTE0WB2YL5WtJc5Dtie
-	ScfKj/v71FM9TVQHKz4HYgq4pP6qz4NFIvctI8MwW1AsH82WYm6Fzdrb7x7L+yXcdB2qdDs7+L7
-	WhnaZvuyoQhYPOvkoDuQn84pvT2IDSOWv40H12CY36y8ecBY46D9IyW9su5f5SgSey5Qx+Ye3uY
-	tYViHstSYI++X0PWRtNMqNRdM/KFGjzDE5UtXcLv3a3Jln605MNm384kHPCBFD1Taj4kwr1ESiD
-	N6Vu2xd2aA2fjvPuptNGQoo17APn8aDhqXryFRkcuPOX/Ntdh8sV/LBxmF9LNA=
-X-Received: by 2002:a05:600c:6098:b0:49c:fc6c:be05 with SMTP id 5b1f17b1804b1-49cfc6cbfdbmr379845445e9.28.1788965462046;
-        Wed, 09 Sep 2026 07:51:02 -0700 (PDT)
-Message-ID: <e11bcc01-7a5b-4138-b5d8-8856ff4aa977@suse.com>
-Date: Wed, 9 Sep 2026 16:51:00 +0200
+        bh=7MTDuaKiColxHVcHeUOieknlvsgeaH6ki8cCSq2F2+I=;
+        b=UTT5NYYkerHA526zlK8R4G08dv7nAM8OfQJBzKm4bDsXDLAwK0QR8s1YiDzOeA+chZ
+         Ar8awB8HcsaExqFGBGrDKH/epMlfxL0N4jssnhoCClO2gGeUKnLLhg9DpJSwRTv3uecB
+         WOSFxLrQfMqsf5ZTIYKsAj3kmAmpa0wEmgqe5IQJLhDtu+3EYHNWpP+pwPaW1PKGuIrq
+         efRBIY0jQrtMMZnll25/xIG2dS4vvIQ/+JnyVXFiyKq+XnI7UdGw/gxzEHDk/vFIPgYH
+         pSXbY0l3NbPQgV1e4MUxhP8ew5OuImJbHPMohHrruQQAgBLJqY9RTQGOLTnGsT5z/ACU
+         jAXQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxhtXVgJ3fkd73vduQO9V5X8gTyy/uoRPkUtHaGZusmTRIUwLLBV2qx3tB/FcsQ76XeerugO9yq4Yo=@lists.xenproject.org
+X-Gm-Message-State: AFuF++k2QCYtBGJXSJBpgthTgj6dErJ9m1XhIZ5RFGj6m8DAVvR62zxa
+	hf66oq21zu9qU5ARRyWI8WMb2wPN4ZFnfspsTeiCBRWJO0FNwnnCCxUWsm6qFf5k0A==
+X-Gm-Gg: AYBFou0n4yGcrtu2ttbrFL2Fib/0WLGbJgA4di9K+/mJ8o4JOo0/+dLB1z11xWyNxWF
+	j0ayR77J36uFanQGrQPxSaxVN8M2wHXMDDsdiNLG50W7zhSum7CN9Jp/jbRFAxfgUofKcdeQMpZ
+	gya+hUE+loMV25vLybJ91m2yb7LhMdGSb1gRP/7kk46AkuQOOabz4idq6I/Ovga1oqAA9he6Cy1
+	F5plvZtoIezjo5WiXoYyP1L7VuqYymTV9DmU1TzuDUu/Zsih4/q2sGkIm7ByrqH3Gjs9HOTe91D
+	JwcONhOtd/NhUGrfGfCUP7bs2e19EHYlP7zw5u3K9XoZ38IEKI34+c1ahvE9LG1ZcQ8wlYb7gex
+	IHEZJvryLGV5xwbMhd+Hm1/fHL0OOkkuLA6+QfJiFwjUcqzP2uocNdT0zwzOB2pnwhHAiF6eLM4
+	NNjFSDrWJ5IEiLq/I70tHsf7GQB62xggvQoletyWrhpkkuAEmbQn3+fKLmP5lbKcFMshJRm7GAr
+	bIVmAacvFhnUL0X8e6hmuNWaqbRHKNWdqZhMvirauODKxZcZkQWAmdhRsoLKH4=
+X-Received: by 2002:a05:6000:402c:b0:485:acfd:4fa2 with SMTP id ffacd0b85a97d-485acfd572dmr9381409f8f.28.1788965569410;
+        Wed, 09 Sep 2026 07:52:49 -0700 (PDT)
+Message-ID: <a7935767-97f3-46b6-a737-b11fa6dcfd33@suse.com>
+Date: Wed, 9 Sep 2026 16:52:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 10/39] xen/riscv: build the target hart index via
  aplic_hart_field()
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org,
- Romain Caritey <Romain.Caritey@microchip.com>,
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
  Zheng Zhang <zhangzheng@iscas.ac.cn>,
  Alistair Francis <alistair.francis@wdc.com>,
  Connor Davis <connojdavis@gmail.com>,
@@ -108,10 +109,9 @@ Cc: xen-devel@lists.xenproject.org,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
  <3c7418d64a730ec5e4b2cfd0ecfbbbc6fe0bf7d8.1787838835.git.oleksii.kurochko@gmail.com>
- <1788510380.8631fc262581453bbf619ec5b2062170.1a06b869ff7000c4f3@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -137,31 +137,50 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1788510380.8631fc262581453bbf619ec5b2062170.1a06b869ff7000c4f3@vates.tech>
+In-Reply-To: <3c7418d64a730ec5e4b2cfd0ecfbbbc6fe0bf7d8.1787838835.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1788965462-77AF14E9-C1051B53/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 808
+X-purgate-ID: tlsNG-ef75cf/1788965570-A4AC8AE4-E96C8034/0/0
+X-purgate-type: clean
+X-purgate-size: 1761
 
-On 04.09.2026 10:26, Baptiste Le Duc wrote:
-> On Thu, 27 Aug 2026 17:20:54 +0200, Oleksii Kurochko <oleksii.kurochko@gmail.com> wrote:
->> aplic_set_irq_affinity() open-coded the packing of the group and hart
->> indices into the target register, and got two things wrong along the
->> way:
->>
->>  - imsic_config.msi[] is indexed by logical CPU id, but the index was
->>    run through cpuid_to_hartid() first. On any platform where the two
->>    spaces differ this picks another CPU's interrupt file, or reads past
->>    the array;
->>
->> [...]
-> 
-> Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+On 27.08.2026 17:20, Oleksii Kurochko wrote:
+> @@ -340,27 +338,11 @@ static void cf_check aplic_set_irq_affinity(struct irq_desc *desc, const cpumask
+>  
+>      ASSERT(spin_is_locked(&desc->lock));
+>  
+> -    cpu = cpuid_to_hartid(aplic_get_cpu_from_mask(mask));
+> -    hhxw = imsic->group_index_bits;
+> -    lhxw = imsic->hart_index_bits;
+> -    /*
+> -     * Although this variable is used only once in the calculation of
+> -     * group_index, and it might seem that hhxs could be defined as:
+> -     *   hhxs = imsic->group_index_shift - IMSIC_MMIO_PAGE_SHIFT;
+> -     * and then the addition of IMSIC_MMIO_PAGE_SHIFT could be omitted
+> -     * when calculating the group index.
+> -     * It was done intentionally this way to follow the formula from
+> -     * the AIA specification for calculating the MSI address.
+> -     */
+> -    hhxs = imsic->group_index_shift - IMSIC_MMIO_PAGE_SHIFT * 2;
+> -    base_ppn = imsic->msi[cpu].base_addr >> IMSIC_MMIO_PAGE_SHIFT;
+> -
+> -    /* Update hart and EEID in the target register */
+> -    group_index = (base_ppn >> (hhxs + IMSIC_MMIO_PAGE_SHIFT)) &
+> -                  (BIT(hhxw, UL) - 1);
+> -    value = desc->irq;
 
-I'm puzzled by this being unconditional, considering the naming comment
-you gave on patch 09. With the (aiui now agreed upon) renaming:
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Hmm, only after sending the ack I noticed that there's no masking here, ...
+
+> -    value |= cpu << APLIC_TARGET_HART_IDX_SHIFT;
+> -    value |= group_index << (lhxw + APLIC_TARGET_HART_IDX_SHIFT);
+> +    cpu = aplic_get_cpu_from_mask(mask);
+> +
+> +    /* Update hart index and EIID in the target register */
+> +    value = MASK_INSR(aplic_hart_field(cpu), APLIC_TARGET_HART_IDX) |
+> +            (desc->irq & APLIC_TARGET_EIID);
+
+... but there is masking here. Chopping off bits doesn't look as if it can
+lead to anything good. What's the deal here?
 
 Jan
 
