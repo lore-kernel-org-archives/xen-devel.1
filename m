@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E39F9C79FB6
-	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 14:46:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1413209.1643428 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89D44C79FB7
+	for <xen-devel@archiver.kernel.org>; Wed,  9 Sep 2026 14:51:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1413217.1643437 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4JYr-0003o3-VA; Wed, 09 Sep 2026 14:46:05 +0000
+	id 1x4Jdl-0005Wb-Fb; Wed, 09 Sep 2026 14:51:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1413209.1643428; Wed, 09 Sep 2026 14:46:05 +0000
+Received: by outflank-mailman (output) from mailman id 1413217.1643437; Wed, 09 Sep 2026 14:51:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4JYr-0003nw-RR; Wed, 09 Sep 2026 14:46:05 +0000
-Received: by outflank-mailman (input) for mailman id 1413209;
- Wed, 09 Sep 2026 14:46:04 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x4JYq-0003nq-R1
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 14:46:04 +0000
+	id 1x4Jdl-0005WU-Co; Wed, 09 Sep 2026 14:51:09 +0000
+Received: by outflank-mailman (input) for mailman id 1413217;
+ Wed, 09 Sep 2026 14:51:08 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x4Jdk-0005VJ-LD
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 14:51:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4JYp-00HGRr-Me
- for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 16:46:03 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x4Jdk-0039a4-1b
+ for xen-devel@lists.xenproject.org; Wed, 09 Sep 2026 16:51:08 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa1711d-e002-0a2a0a5209dd-0a2a4501c0a2-32
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 16:46:03 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa1724b-8faa-0a2a0a5109dd-0a2a4503aac8-24
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 16:51:02 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa1712b-5984-0a2a45010019-4a7de14cb59a-3
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 16:46:03 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-485b1d2874aso288674f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 07:46:03 -0700 (PDT)
+ id 6aa17256-fae8-0a2a45030019-d1558035d8d9-3
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 16:51:02 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-49b0d78a801so59275265e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 07:51:02 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4858bc74298sm40334717f8f.6.2026.09.09.07.46.02
+ 5b1f17b1804b1-49cf7740d44sm1037476305e9.15.2026.09.09.07.51.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Sep 2026 07:46:02 -0700 (PDT)
+ Wed, 09 Sep 2026 07:51:01 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,56 +54,64 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1788965163; x=1789569963; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1788965462; x=1789570262; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Lgbui3E8HMFt4aMlGQ4+Kjn+ED8eLzo4WfdkMfbAOdc=;
-        b=FOyHtH88gSSCFmntT1pmqWfkSX/GRNiuSkqcg3grolq6wb6QTfDApkOxMWy+X8kOCb
-         qPgR8vP7YiaX84vB50eRCONJ4uSoGItXQXzLGDWxefMkF5zEiWMKhiErFaHRdmadYF4g
-         0hQdqzmszwsOFNxKxSVIboJ5g7vA3i08qTqFhY1DRnqgcwoxW+lKg/rgUesxt4rUhGln
-         XKa7Fjd5b2enedQqc2dvw1fPlJgaIedwOdolxVa5NAlvOcm/FekjO+SjQJS23Q8zdUoX
-         letE+WwlG7mKcs24s15041qUCk0OtwCVdtbXr66+PIO9WFBkP/Hnsd7M39lZ5vbU177k
-         syJg==
+        bh=gUYQi1MVI1FsspeqjeqM6EEgqL7Bgt2IUomotef3ofI=;
+        b=RuYuh3ubU6Epm5IQcJ5aBgJvxkfyAlvimnpNjUlXiNn6XxQhnWiydxp7K456xGyT/M
+         46YJJy/PsqboYe1QJwdzYHggwyexhyRBXRLRmR+tCeHOFlH8ocggsRWrm+6sV3b9ICud
+         RBKOzEbzLPwyaJgHEybXmgHBCsOdF5pfZfvHWPAEdlSdRp9MooR+sph02sTSZOW+qCVL
+         0lQFdcl8bgcmKrvbDEKZkWeF+XX7Du8bJAkFTL7+Xz2Rnc8r/53QtF8NHqcNAlqAiyi/
+         NH07s/rm8AfJEE0idOhbB08ekX31dII9nZpsr6OOFPn53mXbmCF8nDCfDsZic3O7ccLA
+         k/EQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1788965163; x=1789569963;
+        d=1e100.net; s=20251104; t=1788965462; x=1789570262;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Lgbui3E8HMFt4aMlGQ4+Kjn+ED8eLzo4WfdkMfbAOdc=;
-        b=rFLv7O66g7Y1dxQyNgTyx9dRddqhC/1lXAEKzR9oBJ9k8oaH3ZlO1J3tmOTgPLR/Q1
-         L5hG22lFJj2/Di5kMqtsIFjY6QOSWxHPoCPnlh2HmO4zgQd0Nyy1p3VUQNP4NCfVk3lk
-         BLYGPq7A76AoUKcrt9oKxlw7hT+8nkSCC5drJDzxAxpCMzCOr9T973VCqFRn2jbrvpZ5
-         0ljrsVowvabkTWUMKeG0CdJsEV6kde9oEc97buktBGFCNurD8jH8q+lIgbmXTvk91klq
-         VbGG4PGpD6wBo8KRVWAldLgNp1amRQOyKw6SmwxY/exH9yWGeSaPyhkz8YnNCwhlUDeP
-         Lchw==
-X-Forwarded-Encrypted: i=1; AKwUvBx96pcbgxo9PXHGLwGIHT3iklQ9KL8yjkS+UYDWXHHk8KesQie6IMjPiZKAEabVQEi3F9AjknevRNw=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nxJcdLDgRPS1gVlxLPBczxJZGapPRnui5v7N2MmgkrSkfxwJ7H
-	ehRZtvSRU+xOkGivS6eIVlY79zmO+ZySWKno2WWxPN3ORnSQ9l91Fqydn3h2diIdkQ==
-X-Gm-Gg: AYBFou3IDNiqqhy02BDv8oOoqgG7ZzQhP5oWzQYlboEtOEt73ewKrElxauFhqdton6R
-	YggtsVL9yev+HhYwtz8590EN5x/9FKmqQg468p62ABaEvFeiK0rqGp31yVKierFNboZgj42hKtY
-	hcyOYPK0mzUoo7F40Pf3fe90XYVar1bMn9luScUvLtDB8IBsJJpwx3j1ySzbEjjIp9JpH2bkZFl
-	i6XVT6LukgHjD/IAon/0EfIMoUh+iBOdwXuFGybDYwiMvR1nPy0bDYY/fHQb4wc6BjTS8gN+Pub
-	4Ul8Sbo/0dZdtqwK5H9CH891khun/0QpHeZlLq9CVYbaWeYaK+CnX64qVPXftShm0kjm9r00HtQ
-	Ut96wsvu+iAtKXJYO1h/nGp5SmnOQZHVyzzZZOKnnzHLXCGrIHe8B7aXfoin3BPWO+xLePUcv4p
-	7W36dz0psGo81lklqN5n8shUmueiuEXf4XXzmDAC+KiuEOHTzoJ5KV9w0ZbLtcylP2k3WyHxkfz
-	UZtJlrPuqGylTp1yg1ovoifHefxWBkfvus9SZOt3BgaGYapxOjDaIBIYBUojqY=
-X-Received: by 2002:a5d:584f:0:b0:484:3314:eff6 with SMTP id ffacd0b85a97d-485c240e5a3mr3515484f8f.28.1788965162908;
-        Wed, 09 Sep 2026 07:46:02 -0700 (PDT)
-Message-ID: <92c9bf4b-5171-4a26-a62e-f2a7b1cb89ef@suse.com>
-Date: Wed, 9 Sep 2026 16:46:01 +0200
+        bh=gUYQi1MVI1FsspeqjeqM6EEgqL7Bgt2IUomotef3ofI=;
+        b=A0fFpGs9H0QlhhYq5ej8toGbpimJrw8y5yp7yCIU5ULewNvk0ND+Ib270oe4AK5bTa
+         M+44h+h+H9Q0gHt0BdsWX5JI3wdi2NXNrVfndmCZYVpaPrXV0WYHwFCRY0XaIQQTxJf9
+         KCob02zgCFMtBpYAWWpR0XhcPV+H9F8/gOkptPL2mKNMpMIGWWoVE6AOn/9A2XTQ26M3
+         qA1BJb5+rsuWHlXZZ1SF/nQPUgNjjzr0g9SgS1MDqYU0F3HWTvqRfL+NCg1KBAZ+X/Wf
+         1KcPiikpztRDUAMRrKr8saw4kJA1f21G6D8jQ7geAnDTZUoUQsjFU/U9QSwMdM324b5a
+         IYBA==
+X-Gm-Message-State: AFuF++lACA4gLjTI4Swd893yZ/17VtKDg0RMH+wTTxcEAyG4Bg4N1dMc
+	gBABCjZ6/RHjKk/AvdTGXOuB0oFb/WbcVO8yLptT5/ukwm/Bzp24EqzXeG4BRRtUJg==
+X-Gm-Gg: AYBFou2R88bun00fPu5/AVXsJKdVwUnrU06Dmt02ko4TYLWXruR/HBrmLLeBA97u9M8
+	MKz+TS7e9+t/zQly6yACF4wQfaWGqvH7XfH1iUxZjW0YmvXQtKYnSK1nBsUMkS+KXEmHkuyQRV0
+	NnxwZM+cTwtX+73rQd1R//504/4K8GIwj+A9Fl4FHSBn3ZDsQi2fWdzuVSI3NSxXOWfEvmrWpmS
+	7EM540kNrquRLDQnfet3700m42JlkEOD51/TKtNRVD94zznH2huwnq3pwTE0WB2YL5WtJc5Dtie
+	ScfKj/v71FM9TVQHKz4HYgq4pP6qz4NFIvctI8MwW1AsH82WYm6Fzdrb7x7L+yXcdB2qdDs7+L7
+	WhnaZvuyoQhYPOvkoDuQn84pvT2IDSOWv40H12CY36y8ecBY46D9IyW9su5f5SgSey5Qx+Ye3uY
+	tYViHstSYI++X0PWRtNMqNRdM/KFGjzDE5UtXcLv3a3Jln605MNm384kHPCBFD1Taj4kwr1ESiD
+	N6Vu2xd2aA2fjvPuptNGQoo17APn8aDhqXryFRkcuPOX/Ntdh8sV/LBxmF9LNA=
+X-Received: by 2002:a05:600c:6098:b0:49c:fc6c:be05 with SMTP id 5b1f17b1804b1-49cfc6cbfdbmr379845445e9.28.1788965462046;
+        Wed, 09 Sep 2026 07:51:02 -0700 (PDT)
+Message-ID: <e11bcc01-7a5b-4138-b5d8-8856ff4aa977@suse.com>
+Date: Wed, 9 Sep 2026 16:51:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] x86/mm: limit deferred TLB flushing to PV domain
- support
-To: Roger Pau Monne <roger@xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Subject: Re: [PATCH v2 10/39] xen/riscv: build the target hart index via
+ aplic_hart_field()
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20260909140500.73483-1-roger@xenproject.org>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <3c7418d64a730ec5e4b2cfd0ecfbbbc6fe0bf7d8.1787838835.git.oleksii.kurochko@gmail.com>
+ <1788510380.8631fc262581453bbf619ec5b2062170.1a06b869ff7000c4f3@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,38 +137,31 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260909140500.73483-1-roger@xenproject.org>
+In-Reply-To: <1788510380.8631fc262581453bbf619ec5b2062170.1a06b869ff7000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1788965163-C4359757-5C97A854/0/0
-X-purgate-type: clean
-X-purgate-size: 1274
+X-purgate-ID: tlsNG-33051d/1788965462-77AF14E9-C1051B53/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 808
 
-On 09.09.2026 16:05, Roger Pau Monne wrote:
-> --- a/xen/common/page_alloc.c
-> +++ b/xen/common/page_alloc.c
-> @@ -1538,8 +1538,11 @@ static bool mark_page_free(struct page_info *pg, mfn_t mfn)
->          BUG();
->      }
->  
-> -    /* If a page has no owner it will need no safety TLB flush. */
-> -    pg->u.free.need_tlbflush = (page_get_owner(pg) != NULL);
-> +    /*
-> +     * If a page has no owner and there's no PV domain support it will need no
-> +     * safety TLB flush, there can be no stale TLB entries.
-> +     */
-> +    pg->u.free.need_tlbflush = IS_ENABLED(CONFIG_PV) && page_get_owner(pg);
->      if ( pg->u.free.need_tlbflush )
->          page_set_tlbflush_timestamp(pg);
+On 04.09.2026 10:26, Baptiste Le Duc wrote:
+> On Thu, 27 Aug 2026 17:20:54 +0200, Oleksii Kurochko <oleksii.kurochko@gmail.com> wrote:
+>> aplic_set_irq_affinity() open-coded the packing of the group and hart
+>> indices into the target register, and got two things wrong along the
+>> way:
+>>
+>>  - imsic_config.msi[] is indexed by logical CPU id, but the index was
+>>    run through cpuid_to_hartid() first. On any platform where the two
+>>    spaces differ this picks another CPU's interrupt file, or reads past
+>>    the array;
+>>
+>> [...]
+> 
+> Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
-I'm okay with the code change now, but the comment is still concerning me.
-All by itself there is no reason why stale TLB entries couldn't also exist
-for HVM guests. It's just that (a) only the host TLBs are flushed by
-filtered_flush_tlb_mask() and (b) flushes of guest TLBs occur when pages
-are removed from their P2Ms (aiui; hopefully true also for Arm). IOW what
-the comment says looks to be correct, just that it leaves too much to be
-figured out by the reader. At the very least I'd suggest "..., there can
-be no stale (host) TLB entries." Thoughts?
+I'm puzzled by this being unconditional, considering the naming comment
+you gave on patch 09. With the (aiui now agreed upon) renaming:
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
 Jan
 
