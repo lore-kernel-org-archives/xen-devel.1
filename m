@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82E54C79F9F
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 09:46:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1414276.1644054 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 248EBC79F9F
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 09:48:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1414285.1644063 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4bMX-0007bg-CR; Thu, 10 Sep 2026 09:46:33 +0000
+	id 1x4bNz-0008Ab-Lh; Thu, 10 Sep 2026 09:48:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1414276.1644054; Thu, 10 Sep 2026 09:46:33 +0000
+Received: by outflank-mailman (output) from mailman id 1414285.1644063; Thu, 10 Sep 2026 09:48:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4bMX-0007bZ-9t; Thu, 10 Sep 2026 09:46:33 +0000
-Received: by outflank-mailman (input) for mailman id 1414276;
- Thu, 10 Sep 2026 09:46:32 +0000
+	id 1x4bNz-0008AU-IX; Thu, 10 Sep 2026 09:48:03 +0000
+Received: by outflank-mailman (input) for mailman id 1414285;
+ Thu, 10 Sep 2026 09:48:02 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x4bMW-0007bT-37
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 09:46:32 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x4bNy-000899-Df
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 09:48:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4bMU-00AEjn-NE
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 11:46:30 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x4bNx-0025Nl-Qe
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 11:48:01 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa27c75-2eae-0a2a0a5409dd-0a2a450bd5e2-8
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:46:30 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa27cce-8faa-0a2a0a5109dd-0a2a450285ee-8
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:48:01 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa27c76-b7e8-0a2a450b0019-4a7de18c9bc4-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:46:30 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49ccfd61ecaso12661305e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 02:46:30 -0700 (PDT)
+ id 6aa27cd1-6ca4-0a2a45020019-d155802ce485-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:48:01 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-49cca4ffdcfso56534765e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 02:48:01 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-485883c6ba4sm55085318f8f.25.2026.09.10.02.46.29
+ 5b1f17b1804b1-49d26c06f04sm64243345e9.13.2026.09.10.02.48.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Sep 2026 02:46:29 -0700 (PDT)
+ Thu, 10 Sep 2026 02:48:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,56 +52,64 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789033590; x=1789638390; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1789033681; x=1789638481; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=RWICW0eODkNw0pMXItBLQ++rYqChoX6o+XJRj72Bgp8=;
-        b=EmPS0B6Hk97fx3pqtkn9letU3JlYOPNL4EJoy9RQdVCF8QsBp38uBPBWYmvHomRm3f
-         Q985dGOC7x2NVNHhYdawJXjWSo3wUgSfQN6sVfkdHdeosEVtGCnU4j/T+8inldckbpkU
-         SLQrO9sy2Hjnu2FUQ6WO8CE5w+zdC+0vWAN4Le1IR/FtQ0B+3AdZJrvnvayJS2TGV+sM
-         ul/zDbWcacY/8ku9ZB4GOzzCN3cZJMquk9H81LTD3f+3CHPQgG9G0fzKebMcEohKNvLJ
-         JBGvgIEVlk/c0Ho+jQKXBarkC5zNI+bpCz7pcjLwCe50Jf+6vA5hxSPO56hFPPtxdxo+
-         xocA==
+        bh=dLXmqrgSVLlstBLicQkdZBAUJ+mHmKliLnE6FFI7R3E=;
+        b=Rk7gvoLDp7od5o2Ho3diCkOF1OSG5u0tTcICjxZ5iikOlaU9qwojf5f9SZ5V7m5kGi
+         /JbgHOEqdTiterYdPQ9LPDwwcKK5QbizH59hNur1iFG+RzLpq8nwdm++ZHfXPQWeIISr
+         j1rAkLpFfnKVawWP1+Ce4wBGRjdjyWBv5drDVWGPtk2sXHpzNplfrQHmm73nnHzvfkge
+         xokAiPPosRY3gqsYZ6B+9/KLKVP1YfREl272gjC1v5CQgAiXkmxtNcu3htDRyOq52XHt
+         kUsq3bH8J42ldgZpDgTT0S6g6+Kw3pq47PXAZ7GkUVfFo8CtKfZ3MdcdnU8jMunzfeIg
+         S5bQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789033590; x=1789638390;
+        d=1e100.net; s=20251104; t=1789033681; x=1789638481;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=RWICW0eODkNw0pMXItBLQ++rYqChoX6o+XJRj72Bgp8=;
-        b=jVokG5svhM3uqJqLtga7VtiIzAaMiJQU3Y0DTq2349ei9tPwVbMLXGzWUWUcHIKAGd
-         PCQlDcciaCP1BkKFI+P6ILPqjwOkgnNoHxZexpegmmr89bCoYNjeXXrWV2gT1DihZRTl
-         R3KqpXXkgOuHE2vs/f3aQSintUBRlF/o+f/6W9JLAXmjvbANklEdorgYeut7Gwv4aaNL
-         g/r8aDlGhKBMuLetaCUNjOzJNROqkbe6u0gtKLFMHNQTRlIZcH4z+KicJ1ckxChaKdt6
-         i2huQXPYBuyQiGWDq69jRcdmzsMbo/sVytGfvKGOaQ0JRQrKGnERVMbLK0YbNPJ92h6T
-         WOwg==
-X-Gm-Message-State: AFuF++k+RSqBICtQ10uymQYjv6jau+J/Ke4+FSMzynIqQ1/zLs/nZX0U
-	G+qbJnqZSu407+B7qQ4VaORNuoPENbXFO4VaD325ouUMHqPcL/dlcj5QBEj0Jtu+7g==
-X-Gm-Gg: AYBFou2oI5x7g1n2AGRMDNLnl9Q0wabPBIzG0mBlXSeAYF14/7KohLDCEP7F4hl5S2V
-	UphCQsXG41VyDCDQWSZVKsDVMBgLVl/f75Ml5w1PL/4C4+1BiRc3RPAx1UbcOudC3nHHqXvOAXX
-	ITI9siIlfYahbHC2t0kCrmbTcMjLpsn1WIafyx9licv0s+HowDHuU0eSefGjECsyCxegk33FtOJ
-	CDw+NLmqQ37CWyjLzuv08z9ZNUgFISKF6uZM9gySWL5rwH7vczoB6JOayy2jjvDsZ0SwznEtId3
-	BfWIRn2r2PwPjFxJOEUMWrs8ozHToPA7z+UXSsCL4LPABU5qeAsmD2VJScPwi4bpf78fZGhEsHS
-	JFX3ju/wf184czmvPqyLDZ59CqyUbunNqwuFYlLyiYy2pHRkswlwFa2J7j2qm4nQmATU4gAnJ2X
-	j2wvdiTJNlfTrv/ALKuZdM7jlvDszqaSKbAIH0wnOUY1EQQ9wgo+wc95a+sQFOzevqx2s9DwgYL
-	UhlLNt3NohSsBkU9jY2oPQUR7+W1n/PfY1sbr5dG3IiU07v6JPfTtDMzlij69k=
-X-Received: by 2002:a05:6000:46c3:b0:486:e594:a6ce with SMTP id ffacd0b85a97d-486e594a8c3mr1330062f8f.35.1789033589890;
-        Thu, 10 Sep 2026 02:46:29 -0700 (PDT)
-Message-ID: <768c0fb8-cf54-49af-a529-8a59cbc9aaeb@suse.com>
-Date: Thu, 10 Sep 2026 11:46:28 +0200
+        bh=dLXmqrgSVLlstBLicQkdZBAUJ+mHmKliLnE6FFI7R3E=;
+        b=eFb4rlAPZUu0t3YDS+xHwcKrLe4rwBbSe2XekrpHurD6T8KwNoxcjPdtrdINoFppd3
+         rSDWc3qwNoKtVo37cFnu7VpAR8MZSixrKQga5RZwSV4UJJ2sNllKJtJXQnNkzlXxvYWk
+         LClak+LgcP8m2a35qPf/OjDOfJz6oukUvCqfaqYiARJz6n4rREanTnnPOrMbH9HC45A4
+         /19XA8fF26JSxWaafKoYnTtvgP9DJ60p3IKdSQMYtTEazKZvEaSNJH1TcDfhhlBIP61u
+         BLg6/7usYThH4UsdZsk7jXqx+2mWS8qKPG7wBPFzD3KIgSZVTYu6K3PWQ3tm7T5MfQmC
+         hOQQ==
+X-Gm-Message-State: AFuF++ljly1/4v7tC0jXR0Kl0+R4WkMcuIWSzWcDsA0H8wfD/dh4OgzW
+	o8cZyv9slpB7FR52IE/DkPANHzzsLuJ60fH/h0Rugo983yckzX/F5bmtqfCrt84lYZgwZHVb5RX
+	QlADYtw==
+X-Gm-Gg: AYBFou16ZSqmIOinkFAz/w0kjqNouN1Fhv7qlC8onoGSNDfPmXcQVLgaBjl5AgqdEJN
+	GeQk+CvQjsfIo386qqDNCfz8M5cEcg6dvYrnyt3/4fSuBx14YB4HrX/ON6pF5au0DDNhso6hI/n
+	m5UFkmoJ833tX+ociVIcC98DjUtusiMU5Z7QQ2fvbtScye5Krrrl7FQPUMhAMihgTW762xGdMwx
+	Jnf9A6xx/k5A+Cl9N8/YnZ/wUpWiv988h66P5Hhz7tNiQV/MaS6f7LMBjCGypZ/1YWALda7Mvw2
+	tVcxoC/MghjjAy5OiGDx87qPOMsvFe/uXys74HbvSI7g1W/heNY7R6gkihwTmuHk9SDigx877DF
+	4GkIr/Gvz2RITo3wiB/C13CSqapvRMNIddEI5inzANGy2xfdVWjJ4tyj+cMkbpb8aLFzNdUdcUM
+	3Pjp+cP5TuwOAfb5dxqCwmf5MCALcu5HCoR4IhmjRd4sL3TEQKq6zhi7pBQB3+tCLy0El9UWYLS
+	IH4gy7cXUk/IqWdJLJSgof2ajiOBl5ydRQLnu3KUxNHJo87ySfVTSmxy2tgbXc=
+X-Received: by 2002:a05:600c:4f12:b0:499:da8b:1476 with SMTP id 5b1f17b1804b1-49cf825a5bcmr425426845e9.14.1789033681231;
+        Thu, 10 Sep 2026 02:48:01 -0700 (PDT)
+Message-ID: <a857c595-53ca-4848-ba1a-e0cc5da572c0@suse.com>
+Date: Thu, 10 Sep 2026 11:47:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] stubdom: Fix GCC 14 -Wmemset-elt-size compiler
- warnings in PolarSSL
-To: Andrew Mbugua <andrewprecious388@gmail.com>
-References: <37902bbd-1ab9-4b49-8f94-4b788b3620d9@suse.com>
- <20260910091414.22966-1-andrewprecious388@gmail.com>
+Subject: Re: [PATCH v2 0/6] xen/riscv: fix boot on missing extensions and MMU
+ setup bugs
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org, Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
 Content-Language: en-US
-Cc: xen-devel@lists.xenproject.org
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -127,77 +134,54 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260910091414.22966-1-andrewprecious388@gmail.com>
+In-Reply-To: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1789033590-1AEDE9EA-850543A7/0/0
-X-purgate-type: clean
-X-purgate-size: 2784
+X-purgate-ID: tlsNG-720697/1789033681-670B02AC-3D16F129/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 1849
 
-On 10.09.2026 11:14, Andrew Mbugua wrote:
-> A followup to the email thread with the previously suggested changes.
+On 10.09.2026 11:30, Baptiste Le Duc wrote:
+> This series introduces bugs fixes that were found while bringing up CI
+> support for the HiFive Premier P550 board with a basic smoke test. The
+> board-support series itself will follow separately as it depends on
+> PLIC/vPLIC and dom0less support that have not been upstreamed yet. This
+> series carries only the independent fixes found along the way, none of them
+> need the board-support series to apply.
 > 
-> I have:
-> 1. Added the patch reference to the Makefile
-> 2. Removed the new subdirectory I created.
-> 3. Formatted patch message to be <75 characters per line
-
-For one, none of the above should be part of the commit message. Such wants
-to move past the first --- separator.
-
-Then: While I see you did 2, I don't think you really did 1 and 3. As to 3,
-...
-
-> When compiling Xen with GCC 14, I get a compiler warning originating from the /polarssl-x86_64/library about a memset element size mismatch:
-
-... this is still in need of wrapping, whereas ...
-
-> ssl_tls.c: In function ‘ssl_session_reset’:
-> ssl_tls.c:1778:5: warning: ‘memset’ used with length equal to number of elements without multiplication by element size [-Wmemset-elt-size]
-> 1778 |     memset( ssl->ctx_enc, 0, 128 );
-> |     ^~~~~~
-> ssl_tls.c:1779:5: warning: ‘memset’ used with length equal to number of elements without multiplication by element size [-Wmemset-elt-size]
-> 1779 |     memset( ssl->ctx_dec, 0, 128 );
-> |     ^~~~~~
-
-... compiler output may be kept as is (imo).
-
-> This patch introduces a build-time patch to PolarSSL that replaces the hardcoded
-> 128 byte length with sizeof() allowing clean compilation without warnings.
-
-This again looks to need suitable wrapping. Furthermore, isn't there a little
-more to be said here? After all sizeof(ssl->ctx_enc) != 128, afaict.
-
-> Signed-off-by: Andrew Mbugua <andrewprecious388@gmail.com>
+> This series:
+>     1: Fix Svade/Svadu A/D bit handling
+>     2: Set A/D bits in Xen's own page-table mappings under Svade
+>     3: Make Svpbmt no longer a required extension
+>     4: Make Zihintpause no longer a required extension
+>     5: Flush speculatively cached Bare-mode TLB entries in turn_on_mmu()
+>     6: Fix level_map_mask truncation on load_start
+> 
+> CI pipeline:
+> https://gitlab.com/xen-project/people/baptleduc/xen/-/pipelines/2836284276
+> 
 > ---
->  stubdom/v2-0001-PATCH-stubdom-Fix-GCC-14-Wmemset-elt-size-compile.patch | 13 +++++++++++++
->  1 file changed, 13 insertions(+)
->  create mode 100644 stubdom/v2-0001-PATCH-stubdom-Fix-GCC-14-Wmemset-elt-size-compile.patch
+> Changes since v1:
+> - address ML comments
+> - rename some patchs
+> - add new patch-fix: 242dd1f890e4 ("xen/riscv: fix level_map_mask
+>   truncation on load_start") discovered when working on Spacemit K3 support
+> 
+> To: Zheng Zhang <Zheng Zhang <zhangzheng@iscas.ac.cn>
+> To: Alistair Francis <alistair.francis@wdc.com>
+> To: Connor Davis <connojdavis@gmail.com>
+> To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> To: Andrew Cooper <andrew.cooper3@citrix.com>
+> To: Anthony PERARD <anthony.perard@vates.tech>
+> To: Michal Orzel <michal.orzel@amd.com>
+> To: Jan Beulich <jbeulich@suse.com>
+> To: Julien Grall <julien@xen.org>
+> To: Roger Pau Monné <roger@xenproject.org>
+> To: Stefano Stabellini <sstabellini@kernel.org>
+> Cc: xen-devel@lists.xenproject.org
 
-In line with other patches we have there, maybe better name this e.g.
-polarssl-gcc14.patch?
-
-> --- /dev/null
-> +++ b/stubdom/v2-0001-PATCH-stubdom-Fix-GCC-14-Wmemset-elt-size-compile.patch
-> @@ -0,0 +1,13 @@
-> +--- a/library/ssl_tls.c
-> ++++ b/library/ssl_tls.c
-> +@@ -1775,8 +1775,8 @@
-> + 	memset( ssl->iv_dec, 0, 16 );
-> + 	memset( ssl->mac_enc, 0, 32 );
-> + 	memset( ssl->mac_dec, 0, 32 );
-> +-    memset( ssl->ctx_enc, 0, 128 );
-> +-    memset( ssl->ctx_dec, 0, 128 );
-> ++    memset( ssl->ctx_enc, 0, sizeof( ssl->ctx_enc ) );
-> ++    memset( ssl->ctx_dec, 0, sizeof( ssl->ctx_dec ) );
-> + 
-> + 	md5_starts( &ssl->fin_md5  );
-> + 	sha1_starts( &ssl->fin_sha1 );
-
-I haven't tried it out, but I can't help the impression that this patch is
-not going to apply. The source code I'm looking at has no use of hard tabs,
-yet there are hard tabs on the patch context lines above (yet interestingly
-not on the lines actually altered).
+Please can you adhere to patch submission rules? Patches are to be sent To:
+the list, with relevant people Cc:-ed.
 
 Jan
 
