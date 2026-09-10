@@ -4,44 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA69AC79F9F
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 09:55:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1414301.1644085 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DA38C79FB9
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 09:56:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1414316.1644111 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4bUs-00026b-J6; Thu, 10 Sep 2026 09:55:10 +0000
+	id 1x4bVx-0002mf-6Q; Thu, 10 Sep 2026 09:56:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1414301.1644085; Thu, 10 Sep 2026 09:55:10 +0000
+Received: by outflank-mailman (output) from mailman id 1414316.1644111; Thu, 10 Sep 2026 09:56:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4bUs-00026U-Ga; Thu, 10 Sep 2026 09:55:10 +0000
-Received: by outflank-mailman (input) for mailman id 1414301;
- Thu, 10 Sep 2026 09:55:09 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x4bUr-00026F-3M
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 09:55:09 +0000
+	id 1x4bVx-0002mY-2n; Thu, 10 Sep 2026 09:56:17 +0000
+Received: by outflank-mailman (input) for mailman id 1414316;
+ Thu, 10 Sep 2026 09:56:15 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x4bVv-0002mO-OV
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 09:56:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4bUq-00AOig-GJ
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 11:55:08 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa27e6a-e002-0a2a0a5209dd-0a2a4502802c-44
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:55:08 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa27e7c-6ca4-0a2a45020019-4a7de14caf29-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:55:08 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-482f6356256so1300018f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 02:55:08 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49d26bdbb02sm55396955e9.3.2026.09.10.02.55.07
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Sep 2026 02:55:07 -0700 (PDT)
+ id 1x4bVv-0008gj-4G
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 11:56:15 +0200
+Received: from [10.42.69.5] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a08abf05da000c4f3@swg.vates.tech>)
+ id 6aa27eb2-2eae-0a2a0a5409dd-0a2a4505dec6-40
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:56:15 +0200
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a08abf05da000c4f3@swg.vates.tech>)
+ id 6aa27ebe-4cb1-0a2a45050019-b9ff1c23abcb-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:56:15 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a08abf05da000c4f3.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 10 Sep 2026 09:56:09 +0000
+Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 8F3B2815B7;
+ Thu, 10 Sep 2026 11:56:08 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,110 +56,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789034108; x=1789638908; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=p8PLS0B/eOL2vcsxGj2sSaIE6QRFDPlPY0srq63ErSQ=;
-        b=OdcmY2TDMkIfzSgAeSHO5SYyKh6Uz5rKqNu18CqkJM9HZsm+Q/4YUeTFNwc9wKk9Rd
-         meeKHkham5P2JmsX3579kJhaT9vyCzu63I3K7PPbLIFU8GDcuYBqLuj1R7H1kK0ACo28
-         eSjo5gDdfTAaRc66J5yGEPC4FpK0A07DamoOg8VQKztBUeWG2BBKOX0KPwVdAFc+qVVv
-         2+ej/wW+oiDJxtcW0zIBzy7R2fT0lU+TFk2t+obryav1wf+3CvURlGFp3b4+hLBf0wyt
-         6m6K1M1/ct5dp9bYaYVGUNhabIcEKp1K8JD4c1QlzNxTZvFlXK9fk265M4F8YcgLS26G
-         mkjg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789034108; x=1789638908;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=p8PLS0B/eOL2vcsxGj2sSaIE6QRFDPlPY0srq63ErSQ=;
-        b=lRbQuzsfbuGRbNTLmbqbepsp6W3hXhIlZeQvKSxdjAQE0k40K1qNQIUIOqX+m8wRG3
-         2lvn9CK2KDgY3ve5k2LDTM300nFKmR2LnliAEpx08XjD02suIqiizv4y4fysm15jAMxo
-         b+6YeCx1X3ENWgwF849uwG7Xsk1lCdfZjKohHF0WimVNOGxPihCNNh1PNw8CimFZP7Ih
-         bqd+4khDAVjibQRs468tjrWGfZMZF5AGNpPkNuNOFgUN1kiOekyAJG8FLOwo9o9qNIP9
-         t2peaUlg+nc1n1fiOzm8tVMbC4AQfvRW12CDmaHOKAAY54r/mT43Iqfj4sqPaQguLmWm
-         DL/g==
-X-Gm-Message-State: AFuF++l4fjv7N28EhnvwBjrFhtW06xc4xh8tFDECYXsvExEbEy8d2nLl
-	ERPJpwVsUwvltMrybYU6bpVqtHghf1bCe8YMzVWg0CmKewcjNtJ8T1OBLW9UzCfCgP3k0jsz9n0
-	kE7/j/A==
-X-Gm-Gg: AYBFou05bAB2a+j7QL+2nRteqOxIt24uRDwsA0pgLYH/EyQe7yKA6CvsWEPkaT7+v/h
-	vQA/o5W1dZPeClZNl1fp0ccRTiZ/U4InG4qwVyz5HHaRpVjLQW7cQLVKu2paVdfg8UTkt+bo89j
-	nkWKYUxzwy+a1Fj113EfEzhTqYaheaYAl6CrqFq/ETm5pu7NQk46LrWrK7BTSF0xFGeO+vktQce
-	JFuLVDrmZZBBDheO9bNXOzEusNbUFLDS74lvvyAUIjOsI8t+2AfZRwfwiwe0t+8woX85XnHhq09
-	bQUjN26kg7IOfZg5ZogIPT7inzoOq+c4m7fWDFtDsNAzgXnjFQkV44cxWvctz9kDgq89vsyEXY0
-	zificVQ4rgXYTos8jkGORt7ql+91Z2KNhV3RWPVhkGKpM52DBnYDVBXDcHwZ33FFUhZm/zZteFn
-	CQ+/SuV0jc40et4z/fyNjgBLUfIB+Fg6XAYHGFLhLP654R8sxITqvxZUMHvH60kBYvdw0QJmg22
-	cGW3WU+JECDq8dn7kPD+gEKOTtVE3BY3xzTx9lJTHf5t36j/OkxAdsbnfPblY8jcfv1us9lhQ==
-X-Received: by 2002:a05:600c:4592:b0:49c:ee3b:723d with SMTP id 5b1f17b1804b1-49d26c3081fmr38960535e9.0.1789034107817;
-        Thu, 10 Sep 2026 02:55:07 -0700 (PDT)
-Message-ID: <19fff81a-5920-4c9b-be8f-74354f88bb69@suse.com>
-Date: Thu, 10 Sep 2026 11:55:06 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=lBEogv02IQ/RjcN//vVO5A/mS9eBVXtNGDN/7rY8ezQ=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=KJ+uthc36pPK3xmvvubFvbrIi/NfzBKTwu8fb308ZGRE8AQaRJL4ZMm1A3/ejx0oDxykUkKdU
+ byaEjrfcWEM9EUmUlDdB1YccvOvCn3UVAWDnHa1sNEU4L2tV5egnBiMOz68u03XppDQ7dCH0FPg
+ RHfhRsRHvzUylARAjY8l7Sf5tvWpRCIWskJx2zkZNBzvgJPWmO+7EmGMOcVMoSsRSGqIilSKyU3
+ 6Dvuzs4tZVafnC7CPLWRR/XcAz0hf6xB+KRqNYE8PeYC+6oW5eQH6OvtlwE/2LoV3tko5x4UqY5
+ r78z/0LAWP0kPgYNAIuWbJHfYrLkOvU2cFI7HqvJQf2A==
+X-Zone-Loop: 5e4246ad2319e4cdf9745d930b2b32f5a05e25efc3e6
+x-campaign-type: default
+x-transaction-id: e0aac2ce-5db8-4456-a809-042823fa4981
+x-swg-uid: 01-a848026c-4e75-4616-b468-d6f545542ba2
+X-Mailer: Sweego
+Message-ID:
+ <1789034169.8631fc262581453bbf619ec5b2062170.1a08abf05da000c4f3@vates.tech>
+x-swg-bid: 1789034169.8631fc262581453bbf619ec5b2062170.1a08abf05da000c4f3
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] Eclair: re-enable scanning of the (almost) final linking step
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1789034108-31BC82AC-2F19C3C5/0/0
-X-purgate-type: clean
-X-purgate-size: 1121
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2 0/6] xen/riscv: fix boot on missing extensions and
+ MMU setup bugs
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ xen-devel@lists.xenproject.org, Zheng Zhang <zhangzheng@iscas.ac.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <a857c595-53ca-4848-ba1a-e0cc5da572c0@suse.com>
+References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
+ <a857c595-53ca-4848-ba1a-e0cc5da572c0@suse.com>
+Date: Thu, 10 Sep 2026 11:56:03 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789034168; l=2230;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=r2qWR2lokpGc90Yxnlr9AvFDQNPvU2bqxZYSTc5oCbU=;
+ b=Ytz6+f8rhXm/2JYntkAuYvAHJJaK/MwnurGSSEuvp/l1ZIKQyoqbVbdc6xRfO5t87OFWyZ6lu
+ gZHw7sTBvskANukekYrmlJWpd6Xp5SHEHimCmhXx+VqnHh8pUgp2XEw
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1789034169122
+X-purgate-ID: tlsNG-c201ff/1789034175-F4EA12A1-ABA62935/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 2234
 
-The real final binaries are now no longer created by a linker invocation,
-but by renaming an intermediate file (each). Arrange for linking pass 2
-outputs to be scanned instead, yet continue to exclude the auxiliary
-.xen.efi.alt.* binaries.
+On 2026-09-10 11:47 +0200, Jan Beulich wrote:
+> On 10.09.2026 11:30, Baptiste Le Duc wrote:
+> > This series introduces bugs fixes that were found while bringing up CI
+> > support for the HiFive Premier P550 board with a basic smoke test. The
+> > board-support series itself will follow separately as it depends on
+> > PLIC/vPLIC and dom0less support that have not been upstreamed yet. This
+> > series carries only the independent fixes found along the way, none of them
+> > need the board-support series to apply.
+> > 
+> > This series:
+> >     1: Fix Svade/Svadu A/D bit handling
+> >     2: Set A/D bits in Xen's own page-table mappings under Svade
+> >     3: Make Svpbmt no longer a required extension
+> >     4: Make Zihintpause no longer a required extension
+> >     5: Flush speculatively cached Bare-mode TLB entries in turn_on_mmu()
+> >     6: Fix level_map_mask truncation on load_start
+> > 
+> > CI pipeline:
+> > https://gitlab.com/xen-project/people/baptleduc/xen/-/pipelines/2836284276
+> > 
+> > ---
+> > Changes since v1:
+> > - address ML comments
+> > - rename some patchs
+> > - add new patch-fix: 242dd1f890e4 ("xen/riscv: fix level_map_mask
+> >   truncation on load_start") discovered when working on Spacemit K3 support
+> > 
+> > To: Zheng Zhang <Zheng Zhang <zhangzheng@iscas.ac.cn>
+> > To: Alistair Francis <alistair.francis@wdc.com>
+> > To: Connor Davis <connojdavis@gmail.com>
+> > To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> > To: Andrew Cooper <andrew.cooper3@citrix.com>
+> > To: Anthony PERARD <anthony.perard@vates.tech>
+> > To: Michal Orzel <michal.orzel@amd.com>
+> > To: Jan Beulich <jbeulich@suse.com>
+> > To: Julien Grall <julien@xen.org>
+> > To: Roger Pau Monné <roger@xenproject.org>
+> > To: Stefano Stabellini <sstabellini@kernel.org>
+> > Cc: xen-devel@lists.xenproject.org
+> 
+> Please can you adhere to patch submission rules? Patches are to be sent To:
+> the list, with relevant people Cc:-ed.
+> 
+Sorry, first time I used b4 tool which automatically added the To: and I
+missed that during the dry-run... I'd like to do a .b4-config with the
+submission rules that could be added in the repo, do you think it could
+be a good idea?
+> Jan
+> 
+> 
+> 
 
-Fixes: da944a72fdf4 ("x86: split xen-syms/xen.efi linking rules"))
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-Sadly for Arm64, until "Arm: split xen-syms linking rule" has gone in,
-this will slow down analysis jobs.
 
---- a/automation/eclair_analysis/ECLAIR/analysis.ecl
-+++ b/automation/eclair_analysis/ECLAIR/analysis.ecl
-@@ -36,8 +36,8 @@ their Standard Library equivalents."
- 
- -doc_begin="Do not analyze intermediate linking artifacts, as they do not differ from their final
- counterparts for the purposes of MISRA C static analysis."
---file_tag+={xen_efi_tmp, "^xen/\\.xen\\.efi\\..*$"}
---file_tag+={xen_syms_tmp, "^xen/\\.xen-syms\\..*$"}
-+-file_tag+={xen_efi_tmp, "^xen/\\.xen\\.efi\\.([01]|alt\\..*)$"}
-+-file_tag+={xen_syms_tmp, "^xen/\\.xen-syms\\.[013]$"}
- -frames+={hide, "kind(program)&&target(xen_syms_tmp||xen_efi_tmp)"}
- -doc_end
- 
 
