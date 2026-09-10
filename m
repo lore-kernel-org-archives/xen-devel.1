@@ -4,44 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45FF4C79FBF
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 18:51:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415168.1644732 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4419CC79F9F
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 19:44:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1415303.1644759 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4jrg-0007Fn-UG; Thu, 10 Sep 2026 18:51:16 +0000
+	id 1x4kgX-0006Yy-K3; Thu, 10 Sep 2026 19:43:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415168.1644732; Thu, 10 Sep 2026 18:51:16 +0000
+Received: by outflank-mailman (output) from mailman id 1415303.1644759; Thu, 10 Sep 2026 19:43:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4jrg-0007Fc-Ow; Thu, 10 Sep 2026 18:51:16 +0000
-Received: by outflank-mailman (input) for mailman id 1415168;
- Thu, 10 Sep 2026 18:51:15 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x4kgX-0006Yr-GY; Thu, 10 Sep 2026 19:43:49 +0000
+Received: by outflank-mailman (input) for mailman id 1415303;
+ Thu, 10 Sep 2026 19:43:48 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1x4jrf-0006xY-DN
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 18:51:15 +0000
+ (envelope-from <rostedt@goodmis.org>) id 1x4kgV-0006Yj-T8
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 19:43:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4jre-00BfN4-Pl
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 20:51:14 +0200
+ id 1x4kgU-006O7N-II
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 21:43:46 +0200
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6aa2fc1e-e002-0a2a0a5209dd-0a2a450bc178-6
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:51:14 +0200
-Received: from [209.85.222.54] (helo=mail-ua1-f54.google.com)
+ (envelope-from <rostedt@goodmis.org>)
+ id 6aa3085e-8faa-0a2a0a5109dd-0a2a450becf2-8
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 21:43:45 +0200
+Received: from [216.40.44.12] (helo=relay.hostedemail.com)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6aa2fc21-b7e8-0a2a450b0019-d155de36cd42-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:51:14 +0200
-Received: by mail-ua1-f54.google.com with SMTP id
- a1e0cc1a2514c-97ca74bd6e0so133957241.1
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:51:14 -0700 (PDT)
-Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
- [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-9120f47aeb7sm2503906d6.24.2026.09.10.11.51.12
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 11:51:12 -0700 (PDT)
+ (envelope-from <rostedt@goodmis.org>)
+ id 6aa30870-b7e8-0a2a450b0019-d8282c0cceb3-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 21:43:45 +0200
+Received: from omf03.hostedemail.com (lb01a-stub [10.200.18.249])
+ by unirelay07.hostedemail.com (Postfix) with ESMTP id 39693160690;
+ Thu, 10 Sep 2026 19:43:40 +0000 (UTC)
+Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by
+ omf03.hostedemail.com (Postfix) with ESMTPA id 30FD46000B; 
+ Thu, 10 Sep 2026 19:43:32 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,433 +51,168 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1789066273; x=1789671073; darn=lists.xenproject.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=32pR0m9lJbbl6oefWflQ2FM2YWt9ii7Ub9HEHMaojiA=;
-        b=Kadw4Z2/sWrsZQ4RBjIq1A92bzOgmRIDQFsHMY6ls3XPG0iNxF5uxa7iMsUnuY8SgZ
-         o+OHhjrVZj4ZM8zm1qkwxROheA0c8H7zbOIOwOH7qTBHAerKPw1ZuI6E11giqZE2FmDO
-         hszt4sTydrMqO1LakF+p+iCMHZhOPWMBkA9LQ2yDGY43m8uPcUVO8CBszR3oR8mamZh3
-         TJI8v+05wegGK5Tv/Q0OFTKF5XZP4TwOESIVh/sY6Eatwc+bpgBMSS3zvjSmtwlXpTuM
-         UyJqt5zn1HKGnSgVlllwhUVMKxMpVe1lOoRVigJnXHMXPc0QpcAfLKnxAsdMRJS3RJCs
-         /xHg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789066273; x=1789671073;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=32pR0m9lJbbl6oefWflQ2FM2YWt9ii7Ub9HEHMaojiA=;
-        b=hGi7HXzkLZuNsReNiltvSGQbu5eCiP8RmUZh6mQPFbGwU63PWmWmpUJurwrWOdWGj+
-         S55eKzxAo3Lp79uwQVr8VPkMaISysGV8DuwghLdq71jgq0g1Wgjp1e7ApFpEEG3Rm5YT
-         yWUuzxNlUcLL3u6JbE6k3sGPMwnzt58X6Zq8HOfXfEdaL6fQyl8eVGvVF9Ekas+Kgws3
-         0pZVxtxsWv11Oa5BHQN/LgDeC/FqN5Kw474nkQytDj4uSSTf5tJztWcYPFEOTK601ZLN
-         SLL655hgz3aVLuV3V2TUasQ7sXYa8hkVeXY0ywbkAccsPOhpkhGIogThsvg1vyk0suw4
-         +y1g==
-X-Forwarded-Encrypted: i=1; AKwUvBzYkdbJ7tkyDkC0O19yN5SKLSNjBAG+f5j2fzue5tXr9COkWmqD9W8jY/KrWJY9qU66J6ULr/VJIUA=@lists.xenproject.org
-X-Gm-Message-State: AFuF++k+xU9P+v4vkW4oHRhyZFVDAaMcnxbAc9B6hEBcZff6yjH8lI1A
-	xJSEJ8VpnITkAR9vun65CFac2drfdJb7LpuFc5+u9ADGW60fjy/NMfdJQtWiS26Mbu8=
-X-Gm-Gg: AYBFou0tkze9Gmwd9Bt7+qMEdHbnGZKE50+alExBvQg8gwvsWtEFvj9+siV8r6ugCEw
-	63OJEHdgqy9IaZXjsYYPUqzNwim/GaNA+wVm9Ayy0oRkOclCCj45yfP+Noyb0Bla3ry6QxnYGv6
-	inuZ/r1lpKNC84UF6fqcUVDMs2ZE+76c5spAjY7zUcv7HwvdmQ/Ie+5gnp/4zaDVwT5PCOsn4UY
-	GRzzAPkVHQlQnK4gNuvU+uR77bkunp3fBhalXlcDVxsLfCajkUePle7b2aVh98pXX1irkz3C6wj
-	5bojXZC4iNZsRMamHedpXQ9ONe7uEQ5+0cklfhOXoze/wl3dK7sWrt77HDnULmaU4I49o4Ff77p
-	RYsAX5GVMzJY8LRhKa3Aj44+dDOS+de8gliQ0nU4imFjog+LxmEP5uiDHVJxKznm7As421xMT7M
-	2T0UcVNiBAahB6ktYsKnY772W7vN9BnNXVm6ghKNlXZa6kqZnkN24Bvekg5RxMGfK5b4iSd6ltk
-	2rfR/HfE+ImC1SScl0znN9faSqjLtRmWAetp4WjvLqXtBeuQ7AYLNdj
-X-Received: by 2002:a67:e117:0:b0:790:f691:2d5b with SMTP id ada2fe7eead31-792a5b8b8a7mr1152469137.4.1789066272932;
-        Thu, 10 Sep 2026 11:51:12 -0700 (PDT)
-From: Josef Bacik <josef@toxicpanda.com>
-Date: Thu, 10 Sep 2026 18:50:34 +0000
-Subject: [PATCH RFC 11/13] samples: ftrace: Maintain Tasks RCU trampoline
- nesting in direct-call trampolines
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260910-b4-rcu-tasks-preempt-qs-v1-11-d4469f4cc101@toxicpanda.com>
-References: <20260910-b4-rcu-tasks-preempt-qs-v1-0-d4469f4cc101@toxicpanda.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=dkim1 header.d=goodmis.org header.i="@goodmis.org" header.h="Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:MIME-Version:Content-Type:Content-Transfer-Encoding"
+Date: Thu, 10 Sep 2026 15:44:50 -0400
+From: Steven Rostedt <rostedt@goodmis.org>
+To: Josef Bacik <josef@toxicpanda.com>
+Cc: "Paul E. McKenney" <paulmck@kernel.org>, Frederic Weisbecker
+ <frederic@kernel.org>, Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, Joel
+ Fernandes <joelagnelf@nvidia.com>, Boqun Feng <boqun@kernel.org>, Thomas
+ Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Masami
+ Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>, Jiri
+ Olsa <jolsa@kernel.org>, Alexei Starovoitov <ast@kernel.org>, Daniel
+ Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>,
+ x86@kernel.org, Catalin Marinas <catalin.marinas@arm.com>, Will Deacon
+ <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>, Xu Kuohai
+ <xukuohai@huaweicloud.com>, Andy Lutomirski <luto@kernel.org>, Josh
+ Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>,
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Lai Jiangshan
+ <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, Juergen Gross
+ <jgross@suse.com>, Luis Chamberlain <mcgrof@kernel.org>, Ihor Solodrai
+ <ihor.solodrai@linux.dev>, linux-kernel@vger.kernel.org,
+ rcu@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
+ bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
+ xen-devel@lists.xenproject.org
+Subject: Re: [PATCH RFC 00/13] rcu-tasks: let preemption outside trampolines
+ be a quiescent state
+Message-ID: <20260910154450.7b770882@gandalf.local.home>
 In-Reply-To: <20260910-b4-rcu-tasks-preempt-qs-v1-0-d4469f4cc101@toxicpanda.com>
-To: "Paul E. McKenney" <paulmck@kernel.org>, 
- Frederic Weisbecker <frederic@kernel.org>, 
- Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Boqun Feng <boqun@kernel.org>, 
- Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
- Steven Rostedt <rostedt@goodmis.org>, 
- Masami Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
- Jiri Olsa <jolsa@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
- Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, 
- x86@kernel.org, Catalin Marinas <catalin.marinas@arm.com>, 
- Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>, 
- Xu Kuohai <xukuohai@huaweicloud.com>
-Cc: Andy Lutomirski <luto@kernel.org>, 
- Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, 
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
- Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, 
- Juergen Gross <jgross@suse.com>, Luis Chamberlain <mcgrof@kernel.org>, 
- Ihor Solodrai <ihor.solodrai@linux.dev>, linux-kernel@vger.kernel.org, 
- rcu@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
- bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
-X-Mailer: b4 0.15.2
-X-purgate-ID: tlsNG-42698a/1789066274-AA4DB9EA-9A047A62/0/0
+References: <20260910-b4-rcu-tasks-preempt-qs-v1-0-d4469f4cc101@toxicpanda.com>
+X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+MIME-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-Rspamd-Server: rspamout05
+X-Rspamd-Queue-Id: 30FD46000B
+X-Stat-Signature: q4rice5dx4toq6agt9e6os3uux3h5f5q
+X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
+X-Session-ID: U2FsdGVkX1/TvSOAPfmV5w9v9DlVemvWAF7fAQiQXhI=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=goodmis.org; h=date:from:to:cc:subject:message-id:in-reply-to:references:mime-version:content-type:content-transfer-encoding; s=dkim1; bh=0G8Y9/xY0kMl88nV4+aK7L6N6EzC6UwclJFLiIWbzwM=; b=XDaxsPusoW6gsn6QQqwKwtOsezn5XGTPhAZBWTmLI2a3wTTy4g9M8GxTBfx7IxRyYNyRuYQGkIUa70KldFVZ7BxD/P2CsoJAlMMiCFX8YSS1drmpdXopT7vrVM/O17FPu1+y62DsM8b0wE++rILKnKFPiYk8n6rvTHLZaMP183M=
+X-HE-Tag: 1789069412-378097
+X-HE-Meta: U2FsdGVkX1+2Ct3iQoLtuMkYa1cI50miBEnTqrhRYa+BXsr0BkuI+iyjkwhW+Ob8C5dT11n+jxKJvSyznZnLsxh0O/QKV9P9WQecOj/+21jACCNK26r6q8zwQqBN/ayZXuQ+GMG++J9Taw+/zJCowVnrggoyzv6dApRYuUizRVkjRykDXYfNTF0KQwLTeMZALOSsT8m10cqWJg1D25InukFaP+COzppk9X5R5JJAc9OQyO5V0RV7ia7UcNgjuOHSeTTxARbLsAo0lo+Cw5KvWdAoNn3RpyiQlWsoqM2E7xoqV45XznycLnrdwTWnybGDasUZEZxhn2u7O6k5MAY1bcSxESD/EVVf6gvruYYB/+VKBnRpc7lRNYR8i0iaqzQA
+X-purgate-ID: tlsNG-42698a/1789069425-A82F49EA-069F0036/0/0
 X-purgate-type: clean
-X-purgate-size: 10813
+X-purgate-size: 6841
 
-Follow the register_ftrace_direct() contract in the sample modules: on
-x86-64 and arm64, have each hand-written trampoline increment
-current->rcu_tramp_nesting before calling its C handler and decrement it
-before returning, via a small shared samples/ftrace/ftrace-direct.h.
-%r11 and x12/w13 are used as scratch; both are caller-saved, non-argument
-registers and therefore dead on entry to and exit from an fentry
-trampoline.
+On Thu, 10 Sep 2026 18:50:23 +0000
+Josef Bacik <josef@toxicpanda.com> wrote:
 
-The header pulls in the generated asm-offsets.h only on those two
-architectures, since it is not generally safe to include from C (PPC32's
-TASK_SIZE and arm64's TRAMP_VALIAS clash with the C definitions; the
-latter is worked around locally with push_macro/pop_macro).  Other
-architectures get empty macros and are unchanged.
+> Tasks RCU only treats a voluntary context switch, usermode or idle as a
+> quiescent state, because a preempted task may be sitting in a trampoline
+> that is about to be freed. That was a fine trade when PREEMPT_NONE
+> servers compiled Tasks RCU away and PREEMPT desktops rarely ran
+> long-lived in-kernel loops. PREEMPT_LAZY changes both halves at once:
+> Tasks RCU is now real on server configs, and cond_resched() is a no-op,
+> so a CPU-bound kthread or kworker only ever loses the CPU by being
+> preempted, which is exactly the event Tasks RCU refuses to count.
+> 
+> The way this showed up for us was a cgroup writeback worker draining a
+> very large cgwb for around eleven minutes on an arm64 box. Nothing wrong
 
-Assisted-by: LLM
-Signed-off-by: Josef Bacik <josef@toxicpanda.com>
----
- samples/ftrace/ftrace-direct-modify.c       |  9 ++++
- samples/ftrace/ftrace-direct-multi-modify.c |  9 ++++
- samples/ftrace/ftrace-direct-multi.c        |  5 +++
- samples/ftrace/ftrace-direct-too.c          |  5 +++
- samples/ftrace/ftrace-direct.c              |  5 +++
- samples/ftrace/ftrace-direct.h              | 64 +++++++++++++++++++++++++++++
- 6 files changed, 97 insertions(+)
+So you have a kernel thread running for 11 minutes without a schedule?
 
-diff --git a/samples/ftrace/ftrace-direct-modify.c b/samples/ftrace/ftrace-direct-modify.c
-index 164d9dd6fd92..eb8230fa4242 100644
---- a/samples/ftrace/ftrace-direct-modify.c
-+++ b/samples/ftrace/ftrace-direct-modify.c
-@@ -2,6 +2,7 @@
- #include <linux/module.h>
- #include <linux/kthread.h>
- #include <linux/ftrace.h>
-+#include "ftrace-direct.h"
- #if !defined(CONFIG_ARM64) && !defined(CONFIG_PPC32)
- #include <asm/asm-offsets.h>
- #endif
-@@ -73,7 +74,9 @@ asm (
- "	pushq %rbp\n"
- "	movq %rsp, %rbp\n"
- 	CALL_DEPTH_ACCOUNT
-+	RCU_TASKS_TRAMP_ENTER
- "	call my_direct_func1\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	leave\n"
- 	ASM_RET
- "	.size		my_tramp1, .-my_tramp1\n"
-@@ -85,7 +88,9 @@ asm (
- "	pushq %rbp\n"
- "	movq %rsp, %rbp\n"
- 	CALL_DEPTH_ACCOUNT
-+	RCU_TASKS_TRAMP_ENTER
- "	call my_direct_func2\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	leave\n"
- 	ASM_RET
- "	.size		my_tramp2, .-my_tramp2\n"
-@@ -141,11 +146,13 @@ asm (
- "	.globl		my_tramp1\n"
- "   my_tramp1:"
- "	hint	34\n" // bti	c
-+	RCU_TASKS_TRAMP_ENTER
- "	sub	sp, sp, #16\n"
- "	stp	x9, x30, [sp]\n"
- "	bl	my_direct_func1\n"
- "	ldp	x30, x9, [sp]\n"
- "	add	sp, sp, #16\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	ret	x9\n"
- "	.size		my_tramp1, .-my_tramp1\n"
- 
-@@ -153,11 +160,13 @@ asm (
- "	.globl		my_tramp2\n"
- "   my_tramp2:"
- "	hint	34\n" // bti	c
-+	RCU_TASKS_TRAMP_ENTER
- "	sub	sp, sp, #16\n"
- "	stp	x9, x30, [sp]\n"
- "	bl	my_direct_func2\n"
- "	ldp	x30, x9, [sp]\n"
- "	add	sp, sp, #16\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	ret	x9\n"
- "	.size		my_tramp2, .-my_tramp2\n"
- "	.popsection\n"
-diff --git a/samples/ftrace/ftrace-direct-multi-modify.c b/samples/ftrace/ftrace-direct-multi-modify.c
-index b03766c6217b..c8f1062e5d1a 100644
---- a/samples/ftrace/ftrace-direct-multi-modify.c
-+++ b/samples/ftrace/ftrace-direct-multi-modify.c
-@@ -2,6 +2,7 @@
- #include <linux/module.h>
- #include <linux/kthread.h>
- #include <linux/ftrace.h>
-+#include "ftrace-direct.h"
- #if !defined(CONFIG_ARM64) && !defined(CONFIG_PPC32)
- #include <asm/asm-offsets.h>
- #endif
-@@ -77,10 +78,12 @@ asm (
- "	pushq %rbp\n"
- "	movq %rsp, %rbp\n"
- 	CALL_DEPTH_ACCOUNT
-+	RCU_TASKS_TRAMP_ENTER
- "	pushq %rdi\n"
- "	movq 8(%rbp), %rdi\n"
- "	call my_direct_func1\n"
- "	popq %rdi\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	leave\n"
- 	ASM_RET
- "	.size		my_tramp1, .-my_tramp1\n"
-@@ -92,10 +95,12 @@ asm (
- "	pushq %rbp\n"
- "	movq %rsp, %rbp\n"
- 	CALL_DEPTH_ACCOUNT
-+	RCU_TASKS_TRAMP_ENTER
- "	pushq %rdi\n"
- "	movq 8(%rbp), %rdi\n"
- "	call my_direct_func2\n"
- "	popq %rdi\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	leave\n"
- 	ASM_RET
- "	.size		my_tramp2, .-my_tramp2\n"
-@@ -154,6 +159,7 @@ asm (
- "	.globl		my_tramp1\n"
- "   my_tramp1:"
- "	hint	34\n" // bti	c
-+	RCU_TASKS_TRAMP_ENTER
- "	sub	sp, sp, #32\n"
- "	stp	x9, x30, [sp]\n"
- "	str	x0, [sp, #16]\n"
-@@ -162,6 +168,7 @@ asm (
- "	ldp	x30, x9, [sp]\n"
- "	ldr	x0, [sp, #16]\n"
- "	add	sp, sp, #32\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	ret	x9\n"
- "	.size		my_tramp1, .-my_tramp1\n"
- 
-@@ -169,6 +176,7 @@ asm (
- "	.globl		my_tramp2\n"
- "   my_tramp2:"
- "	hint	34\n" // bti	c
-+	RCU_TASKS_TRAMP_ENTER
- "	sub	sp, sp, #32\n"
- "	stp	x9, x30, [sp]\n"
- "	str	x0, [sp, #16]\n"
-@@ -177,6 +185,7 @@ asm (
- "	ldp	x30, x9, [sp]\n"
- "	ldr	x0, [sp, #16]\n"
- "	add	sp, sp, #32\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	ret	x9\n"
- "	.size		my_tramp2, .-my_tramp2\n"
- "	.popsection\n"
-diff --git a/samples/ftrace/ftrace-direct-multi.c b/samples/ftrace/ftrace-direct-multi.c
-index 3fe6ddaf0b69..bc6a88dd4ffc 100644
---- a/samples/ftrace/ftrace-direct-multi.c
-+++ b/samples/ftrace/ftrace-direct-multi.c
-@@ -3,6 +3,7 @@
- 
- #include <linux/mm.h> /* for handle_mm_fault() */
- #include <linux/ftrace.h>
-+#include "ftrace-direct.h"
- #include <linux/sched/stat.h>
- #if !defined(CONFIG_ARM64) && !defined(CONFIG_PPC32)
- #include <asm/asm-offsets.h>
-@@ -56,10 +57,12 @@ asm (
- "	pushq %rbp\n"
- "	movq %rsp, %rbp\n"
- 	CALL_DEPTH_ACCOUNT
-+	RCU_TASKS_TRAMP_ENTER
- "	pushq %rdi\n"
- "	movq 8(%rbp), %rdi\n"
- "	call my_direct_func\n"
- "	popq %rdi\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	leave\n"
- 	ASM_RET
- "	.size		my_tramp, .-my_tramp\n"
-@@ -101,6 +104,7 @@ asm (
- "	.globl		my_tramp\n"
- "   my_tramp:"
- "	hint	34\n" // bti	c
-+	RCU_TASKS_TRAMP_ENTER
- "	sub	sp, sp, #32\n"
- "	stp	x9, x30, [sp]\n"
- "	str	x0, [sp, #16]\n"
-@@ -109,6 +113,7 @@ asm (
- "	ldp	x30, x9, [sp]\n"
- "	ldr	x0, [sp, #16]\n"
- "	add	sp, sp, #32\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	ret	x9\n"
- "	.size		my_tramp, .-my_tramp\n"
- "	.popsection\n"
-diff --git a/samples/ftrace/ftrace-direct-too.c b/samples/ftrace/ftrace-direct-too.c
-index bf2411aa6fd7..247e418644a2 100644
---- a/samples/ftrace/ftrace-direct-too.c
-+++ b/samples/ftrace/ftrace-direct-too.c
-@@ -3,6 +3,7 @@
- 
- #include <linux/mm.h> /* for handle_mm_fault() */
- #include <linux/ftrace.h>
-+#include "ftrace-direct.h"
- #if !defined(CONFIG_ARM64) && !defined(CONFIG_PPC32)
- #include <asm/asm-offsets.h>
- #endif
-@@ -61,6 +62,7 @@ asm (
- "	pushq %rbp\n"
- "	movq %rsp, %rbp\n"
- 	CALL_DEPTH_ACCOUNT
-+	RCU_TASKS_TRAMP_ENTER
- "	pushq %rdi\n"
- "	pushq %rsi\n"
- "	pushq %rdx\n"
-@@ -70,6 +72,7 @@ asm (
- "	popq %rdx\n"
- "	popq %rsi\n"
- "	popq %rdi\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	leave\n"
- 	ASM_RET
- "	.size		my_tramp, .-my_tramp\n"
-@@ -110,6 +113,7 @@ asm (
- "	.globl		my_tramp\n"
- "   my_tramp:"
- "	hint	34\n" // bti	c
-+	RCU_TASKS_TRAMP_ENTER
- "	sub	sp, sp, #48\n"
- "	stp	x9, x30, [sp]\n"
- "	stp	x0, x1, [sp, #16]\n"
-@@ -119,6 +123,7 @@ asm (
- "	ldp	x0, x1, [sp, #16]\n"
- "	ldp	x2, x3, [sp, #32]\n"
- "	add	sp, sp, #48\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	ret	x9\n"
- "	.size		my_tramp, .-my_tramp\n"
- "	.popsection\n"
-diff --git a/samples/ftrace/ftrace-direct.c b/samples/ftrace/ftrace-direct.c
-index 5368c8c39cbb..9e1964baf28b 100644
---- a/samples/ftrace/ftrace-direct.c
-+++ b/samples/ftrace/ftrace-direct.c
-@@ -3,6 +3,7 @@
- 
- #include <linux/sched.h> /* for wake_up_process() */
- #include <linux/ftrace.h>
-+#include "ftrace-direct.h"
- #if !defined(CONFIG_ARM64) && !defined(CONFIG_PPC32)
- #include <asm/asm-offsets.h>
- #endif
-@@ -54,9 +55,11 @@ asm (
- "	pushq %rbp\n"
- "	movq %rsp, %rbp\n"
- 	CALL_DEPTH_ACCOUNT
-+	RCU_TASKS_TRAMP_ENTER
- "	pushq %rdi\n"
- "	call my_direct_func\n"
- "	popq %rdi\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	leave\n"
- 	ASM_RET
- "	.size		my_tramp, .-my_tramp\n"
-@@ -97,6 +100,7 @@ asm (
- "	.globl		my_tramp\n"
- "   my_tramp:"
- "	hint	34\n" // bti	c
-+	RCU_TASKS_TRAMP_ENTER
- "	sub	sp, sp, #32\n"
- "	stp	x9, x30, [sp]\n"
- "	str	x0, [sp, #16]\n"
-@@ -104,6 +108,7 @@ asm (
- "	ldp	x30, x9, [sp]\n"
- "	ldr	x0, [sp, #16]\n"
- "	add	sp, sp, #32\n"
-+	RCU_TASKS_TRAMP_EXIT
- "	ret	x9\n"
- "	.size		my_tramp, .-my_tramp\n"
- "	.popsection\n"
-diff --git a/samples/ftrace/ftrace-direct.h b/samples/ftrace/ftrace-direct.h
-new file mode 100644
-index 000000000000..d0313f33f47f
---- /dev/null
-+++ b/samples/ftrace/ftrace-direct.h
-@@ -0,0 +1,64 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#ifndef _SAMPLES_FTRACE_DIRECT_H
-+#define _SAMPLES_FTRACE_DIRECT_H
-+
-+#include <linux/stringify.h>
-+
-+/*
-+ * A direct-call trampoline is entered with no lock, refcount or RCU marker
-+ * held; only Tasks RCU keeps it (and, for a module, its text) alive while a
-+ * task is inside it or preempted in something it called.  On architectures
-+ * that select ARCH_HAS_RCU_TASKS_PREEMPT_QS a preemption is a Tasks RCU
-+ * quiescent state unless current->rcu_tramp_nesting is non-zero, so the
-+ * trampoline must raise it before calling out and drop it afterwards, exactly
-+ * like the ftrace and BPF trampolines do.  See rcu_tasks_trampoline_enter()
-+ * and register_ftrace_direct().  The instructions before the increment and
-+ * after the decrement are covered by ftrace_direct_mark_module().
-+ *
-+ * These expand to instruction strings for use inside the samples' asm()
-+ * trampolines.  The scratch register is caller-saved and not an argument
-+ * register, so it is dead on entry to and exit from an fentry trampoline.
-+ *
-+ * The generated asm-offsets.h is only pulled in on the architectures that need
-+ * it here: it is not generally safe to include from C (e.g. PPC32's TASK_SIZE
-+ * and arm64's TRAMP_VALIAS clash with the C definitions), which is why the
-+ * samples themselves guard their own include of it.
-+ */
-+#if defined(CONFIG_TASKS_RCU) && defined(CONFIG_X86_64)
-+
-+#include <asm/asm-offsets.h>
-+
-+#define RCU_TASKS_TRAMP_ENTER						\
-+	"	movq %gs:current_task(%rip), %r11\n"				\
-+	"	incl " __stringify(TASK_rcu_tramp_nesting) "(%r11)\n"
-+#define RCU_TASKS_TRAMP_EXIT						\
-+	"	movq %gs:current_task(%rip), %r11\n"				\
-+	"	decl " __stringify(TASK_rcu_tramp_nesting) "(%r11)\n"
-+
-+#elif defined(CONFIG_TASKS_RCU) && defined(CONFIG_ARM64)
-+
-+/* arm64's asm-offsets.h redefines TRAMP_VALIAS from <asm/fixmap.h>. */
-+#pragma push_macro("TRAMP_VALIAS")
-+#undef TRAMP_VALIAS
-+#include <asm/asm-offsets.h>
-+#pragma pop_macro("TRAMP_VALIAS")
-+
-+#define RCU_TASKS_TRAMP_ENTER						\
-+	"	mrs	x12, sp_el0\n"						\
-+	"	ldr	w13, [x12, #" __stringify(TSK_RCU_TRAMP_NESTING) "]\n"	\
-+	"	add	w13, w13, #1\n"						\
-+	"	str	w13, [x12, #" __stringify(TSK_RCU_TRAMP_NESTING) "]\n"
-+#define RCU_TASKS_TRAMP_EXIT						\
-+	"	mrs	x12, sp_el0\n"						\
-+	"	ldr	w13, [x12, #" __stringify(TSK_RCU_TRAMP_NESTING) "]\n"	\
-+	"	sub	w13, w13, #1\n"						\
-+	"	str	w13, [x12, #" __stringify(TSK_RCU_TRAMP_NESTING) "]\n"
-+
-+#else
-+
-+#define RCU_TASKS_TRAMP_ENTER
-+#define RCU_TASKS_TRAMP_EXIT
-+
-+#endif
-+
-+#endif /* _SAMPLES_FTRACE_DIRECT_H */
+You could still put in a cond_resched_tasks_rcu_qs() in that loop. But I
+guess you are trying to get rid of doing that too.
 
--- 
-2.55.0
+> with that on its own, but a BPF program detach on another CPU went
+> bpf_trampoline_update() -> ftrace_shutdown() -> synchronize_rcu_tasks()
+> while holding trampoline_mutex, forty-odd tasks piled up behind the
+> mutex, and the hung task detector panicked the machine. The kprobe jump
+> optimizer is worse in principle: it does synchronize_rcu_tasks() under
+> kprobe_mutex, text_mutex and cpus_read_lock(), so one long-running
+> kthread can stall static key updates and CPU hotplug for its whole run.
+> The current answer is to find each such loop and add
+> cond_resched_tasks_rcu_qs() to it, which is the kind of annotation
+> PREEMPT_LAZY was supposed to let us stop writing.
+> 
+> This series tries the other direction: have the trampolines say when a
+> task is inside them, so that a preemption anywhere else can be a
+> quiescent state.
+> 
+>  - task_struct grows an int, rcu_tramp_nesting. Every trampoline whose
+>    lifetime Tasks RCU guards increments it before calling out and
+>    decrements it before returning: ftrace_caller and its dynamic copies,
+>    the BPF trampoline (which drops it again around the call to the
+>    original function, since im->pcref covers that), the x86 optprobe
+>    template, and out-of-line register_ftrace_direct() trampolines. Only
+>    current writes it and nested users are balanced, so it is a plain
+>    non-atomic inc/dec, one load of current plus one RMW per entry/exit.
+> 
+>  - The inc/dec are inside the trampoline, so there is a window of a few
+>    instructions on each side where the count is zero but the task is in
+>    (or on its way into) trampoline text. Nothing there can be preempted
+>    synchronously, only from an interrupt, so the irq-exit preemption path
+>    looks at regs->ip and holds the count across preempt_schedule_irq()
+>    when the IP is somewhere the counter cannot cover: outside core and
+>    module text (all the dynamically allocated trampolines and slots), in
+>    the static ftrace stubs or the x86 return thunks that still hold a
+>    direct-call target, in a module that hosts its own direct trampoline,
+>    or inside the bytes after a kprobe that the jump optimizer may be
+>    about to rewrite (the one synchronize_rcu_tasks() user that is not
+>    about trampolines at all).
 
+So basically if the preemption happens outside of core or module text
+(which should be the case of any dynamically allocated trampoline), the
+task is marked to be in the grace period across its schedule, so that the
+RCU_TASK cannot move forward?
+
+> 
+>  - With those in place, rcu_tasks_classic_qs() also clears the holdout
+>    flag on a preemption when the count is zero, on architectures that
+>    opt in. x86-64 and arm64 do so here. Everyone else keeps the
+>    voluntary-only rule and is untouched apart from the (unused) field.
+> 
+> A running holdout already gets poked via rcu_request_urgent_qs_task(),
+> which makes the next tick set NEED_RESCHED, so with this the resulting
+> preemption retires it and a Tasks RCU grace period is bounded by roughly
+> a tick plus the longest preempt-off section rather than by the longest
+> stretch without a voluntary schedule().
+> 
+> Patches 1-12 are scaffolding and change no behaviour on their own; patch
+> 13 flips the rule and selects the option for the two architectures.
+> 
+> Testing so far is QEMU only: x86-64, PREEMPT_LAZY with PREEMPT_RCU=n,
+> PROVE_RCU and lockdep, with and without PREEMPT_DYNAMIC. A kthread
+> spinning in-kernel for 30s with the function tracer, an ftrace kprobe,
+> an optimized kprobe and fentry/fexit programs attached:
+> synchronize_rcu_tasks() goes from 29.7s to 0.1-0.3s, tearing down a
+> DYNAMIC ftrace_ops (tracefs instance function -> nop) from 27s to
+> 0.2-0.8s, and the ftrace-direct sample modules load, fire and unload in
+> about 2.5s each while the spinner runs, with no warnings and the new
+> return-to-user assertion quiet. arm64 is build-tested only at this
+> point; real hardware numbers for both are the obvious next step and I
+> did not want to sit on the idea waiting for them.
+> 
+> Things I would particularly like opinions on:
+> 
+>  - Whether hooking rcu_tasks_classic_qs() is the right place, or whether
+>    Paul would rather see this expressed differently inside Tasks RCU.
+>  - return_to_handler and the rethook/kretprobe trampolines are not
+>    instrumented. Their C callees take the ftrace recursion lock before
+>    touching any ops and the trampolines themselves are static text, so I
+>    believe they do not need it, but I would like Steven and Masami to
+>    confirm.
+
+Note, there has been some work in the past (and may happen again in the
+future) that will remove the preempt_disable() from the trace_recursion
+locking. If that happens, then I believe the trace_recursion would need to
+increment (and decrement) your counter. Probably need a comment there to
+let whomever know about it if they decide to remove the preempt_disable().
+
+>  - The register_ftrace_direct() contract change: out-of-line direct
+>    trampolines now have to maintain the count themselves (the samples
+>    are converted). I do not know of out-of-tree users beyond BPF, but
+>    this is the one place an existing user could be silently weakened.
+>  - Whether arm64 folks are comfortable with the ldr/add/str in
+>    ftrace_caller and the BPF trampoline, and with treating all of
+>    ftrace_caller as trampoline text for the IP check.
+>  - If this holds up, cond_resched_tasks_rcu_qs() and
+>    rcu_softirq_qs_periodic() become unnecessary on the opted-in
+>    architectures; I have not touched them here.
+
+I don't know. It may work, but I have a feeling there's a devil in the
+details here that is waiting to bite us in the underside when we are not
+(RCU) watching.
+
+-- Steve
 
