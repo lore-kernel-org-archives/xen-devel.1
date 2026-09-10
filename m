@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B458C79FB9
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 08:42:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1414165.1643964 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 650BEC79F9F
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 09:15:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1414196.1643973 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4aMc-0002yg-KR; Thu, 10 Sep 2026 08:42:34 +0000
+	id 1x4asG-0007ZE-08; Thu, 10 Sep 2026 09:15:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1414165.1643964; Thu, 10 Sep 2026 08:42:34 +0000
+Received: by outflank-mailman (output) from mailman id 1414196.1643973; Thu, 10 Sep 2026 09:15:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4aMc-0002yY-HQ; Thu, 10 Sep 2026 08:42:34 +0000
-Received: by outflank-mailman (input) for mailman id 1414165;
- Thu, 10 Sep 2026 08:42:32 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x4asF-0007Z7-Tb; Thu, 10 Sep 2026 09:15:15 +0000
+Received: by outflank-mailman (input) for mailman id 1414196;
+ Thu, 10 Sep 2026 09:15:14 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x4aMa-0002yQ-N4
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 08:42:32 +0000
+ (envelope-from <andrewprecious388@gmail.com>) id 1x4asE-0007Z0-EN
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 09:15:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4aMa-005HuE-3k
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 10:42:32 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1x4asD-00G3Ul-Q4
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 11:15:13 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa26d6f-bab6-0a2a0a5309dd-0a2a4507a658-30
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 10:42:32 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa26d77-b4ea-0a2a45070019-4a7de14c8c82-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 10:42:32 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-4843172bff4so605485f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 01:42:32 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48588390e30sm47425843f8f.7.2026.09.10.01.42.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Sep 2026 01:42:31 -0700 (PDT)
+ (envelope-from <andrewprecious388@gmail.com>)
+ id 6aa2751c-bab6-0a2a0a5309dd-0a2a450bd7c0-18
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:15:13 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrewprecious388@gmail.com>)
+ id 6aa27521-b7e8-0a2a450b0019-4a7de18c8d90-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:15:13 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49d097b4939so5960005e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 02:15:13 -0700 (PDT)
+Received: from debian.debian ([102.213.48.6]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49d26c38e3asm64476215e9.9.2026.09.10.02.15.11
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Sep 2026 02:15:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,112 +52,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789029751; x=1789634551; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=1pWuZG3C9ZMCfHNOsmsZlnGOIA4yXPpXBgL2cwq5Bkc=;
-        b=KJTOEuwSUP99YkaPecKiibamO1m70hGtY0nSkiB++upCP5lrN2K4K9iiAimqtq4RQL
-         8MSbCVNzRXGbUt+AdFz02CO2KISpYEQJgQyi+gfPFP+EcKYmKugfxGkBX/Z99G66BVAd
-         r/xspqbyBFcfKEudzyvmcefXR/cov20agR5HSpJRKVpQRh+2VHSJFu1EoyXWQmThC06N
-         mfI+2aBnPwrCNculTsYTYCeGtwZIZTV1RgWlWXCL2JJSbk9GfIxrCX+xHS1WkCzKthg5
-         vwRJODSRqYZhxvwQGJDkSLBLceLPC6XpLSPcZzGXE+RV4EZGFDv62/1mC8jjt+Kew9b+
-         iFGg==
+        d=gmail.com; s=20251104; t=1789031713; x=1789636513; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Hk6ntHXUeJYTRX8HAaEa/PKmgwGWJjC3R3z8/hR5mi8=;
+        b=ELxyRKE9rY7of6aqO9oGMuSs8wH4R0bo/XeWsV0/QUrzYL4TWCembP/nSIWrEyhrKk
+         vHo08wbvepAZRXMW9GxVqf2x+JJQB5hU5duWKjP23GKlY9n0EOk2AAjs8X2KA/bvlx25
+         5/8c37cXlKfNyxrLGp7DsnvieINOWA1HlLc+JZnbwfuIpPh09EYe+pJK1tEAXAIH/4xC
+         LmgjnIeUDOUR5pnaFJmW8tyRTQY6j1OHqtTXE6sb2cnjvemMY+194xDRzXUK/dkecU56
+         +E2kN5ul1Qvlx8r/h6+ehTzvQYDp6CNA3ae7+KKKTJGDHUy1HxCNzatN1WZEPGmgebTi
+         NHdg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789029751; x=1789634551;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=1pWuZG3C9ZMCfHNOsmsZlnGOIA4yXPpXBgL2cwq5Bkc=;
-        b=GMXl8gG+QaGJx7iqCRzBc+bLuKLVGUrowaYSjoRJbblyGm4uFZ6PPwgl3h/U09MNqK
-         Ll8OFHNpfwcjMvYzbqe48zE/n5dS4t27eJO1Xf4iEEBONthD1uJiMyAJZUOMD9UOd7sd
-         KTPiCgv+bcQynol7SSfydwdynh8k7L0bGZjEfgWyiS+8zzkRTOwlKx0s4Sm2KgEjoNXG
-         dztkSvHqR/e/ws2+NDArZs662HuDEDFHHbbckpHDUDD2UcWvE+6tea8Zw+y7SYBKQMDH
-         yWxN//DfX1glvUTNyS1XJSg3LjVHUHSRjn+mGjImNRnYKuku8OjbEqzhktAAVUvw+dpU
-         gAjg==
-X-Gm-Message-State: AFuF++msFw4dA9gCbO/xJoKr5I4VY36GWXCEZArvUWH2O+Os2h9gy3QR
-	mlJZy63TswfFX0Pnz6pE2Ee9jvgqVhlCavGYJcCImsECa9VaZmFNytTs2SSYDzSpHA==
-X-Gm-Gg: AYBFou2xBv6x8WTwOnk2LQsNy9LC+/FPDxf/G6YIHnMyPzdWLeHCnPHV4YbZlB6fWMW
-	0vnVn3lUiANh4oSvg2OXtFc8bLS0y9+hx+40oWbKkqmATl7d9jkewJJj4XRyMJ5fFUPSZB46n/0
-	8rUG0KYWI7uKA++uIHUVPB41+gbJSzzZFVl0R9TZ71otbfBt4bCFZL7Bf/izejGdcOSQbAq3YyB
-	P3exXHO6bamH0qZytNMF98tY+J75D4MA5zbVHbhP3AVWi5mN+j/5xMdfD3ryMKz45le6Zi+mhtY
-	AqBfzpSyDwrYzb06+g+9O23SZAxbLWeWWSldIL3Ly9Co1eNyJlK+4dFTNB+9BVdFV/ylXRPB4F0
-	60PJO0jLMjWRYXG5oQ6ecc3fO+ns1BgxRZWtobGXCaLb+AWbCraX01/unyTPx7b7ylyys/EEulL
-	zATPtXbOWuXmAd5MTeVKVmqmQ4hW0h3AFTzxOX/BphmQTeI3mtYP51mjxS5zAbxTjxvG80GwxO9
-	MO9orQr1ZaOgv5tKr0IDmJBCrdahBuk8IVFa45EWzVzg+oZlerhbaBUCOT8Nvs=
-X-Received: by 2002:a05:6000:4020:b0:485:8f37:79b7 with SMTP id ffacd0b85a97d-485c23d66camr5721741f8f.33.1789029751489;
-        Thu, 10 Sep 2026 01:42:31 -0700 (PDT)
-Message-ID: <8bf3576c-2d76-49c2-9df1-a8303f0090d2@suse.com>
-Date: Thu, 10 Sep 2026 10:42:30 +0200
+        d=1e100.net; s=20251104; t=1789031713; x=1789636513;
+        h=content-transfer-encoding:content-type:mime-version:references
+         :in-reply-to:message-id:date:subject:cc:to:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Hk6ntHXUeJYTRX8HAaEa/PKmgwGWJjC3R3z8/hR5mi8=;
+        b=GgoPdomsacTRlo1oNuUKWffccftqMEyGUtryvsit9pTB0Qa6VDippFdKTtIiLjsW/3
+         Uiu94ImSIaDB7X0XDdo3chsvzfmGe914iUyaqiXnooxGwUaK8jgyFVXyKwn+KyxxkLXq
+         yRa9GScHsDyv4rXwZUVKIAghB4Fj79YnN6d3i/+bikJw6YHIold7eQG2y2xRmoS6LndY
+         vxqnKO5c+pQPW6YWlm0hMXz6V9FE5hvMaQk8lt1vlmSNJCXrK+qzsPnfSyFSveDn91RB
+         SJor9fjpYvPXv2W7y8yWghJpD9B+nTIZD4QDoLS02c6NTB3HG1oPVqiBXWDopb+1f3hj
+         86mg==
+X-Gm-Message-State: AFuF++kdN80hDB7KvkPXnFWS2FYs61lLLsNW/riJeRMJThNCYI1VB85a
+	h21/ZtvYbvlc7iJSC2pk+xv+DvriiPwh7JqLxKoF9oFcAnOb9oOX87wenKGT+T0j
+X-Gm-Gg: AYBFou0YXPLPJ8XyKaeGjx3pnfFzQkxJwmL4cbVMSsDtqyPhGnYyaySUcsPRobLeNiK
+	cmsf1myLSRYprpIRu5QldaCJ8gOhdDlFcRUqXIJzR5nNY8MGZtZwTVMQLMh/iIa7raUt4dhG60E
+	QuovSpHA45PWUGSBXBp55io3JJ3diCNePzqS69gOlcm2oileh31CslKF5ceRkOVkLgdQQdDaimp
+	EIgBHETTccXHSCOuZP/x8tjZ9K3LtHVKKzuZh9e9IGItKw4+av/ZJ0+8ctkm4mQEQLf+HD4fw7S
+	nbLBgcDfu3P2MQI3nKY+6VnY7NdLscdrKwn6lhc0r+mnshrMjgcZS9HUzIwOmAeetpcUlfpfWOe
+	LwUpUI7MKTd+8kCVpgxiaT0gMcPBnTcRz+v/7HbTYw1YdbZvJKImwJDrNvPqLA/13SzO0C7qcvu
+	oZlwURsyn201XWj98YWV6JY1ehkmyqRTOllaOVCc5oUAkI3VGstRHoolNm8gn2qDrA396g35EWg
+	VKAukE=
+X-Received: by 2002:a05:600c:310f:b0:499:b65d:124f with SMTP id 5b1f17b1804b1-49d258d85b5mr55939695e9.11.1789031712832;
+        Thu, 10 Sep 2026 02:15:12 -0700 (PDT)
+From: Andrew Mbugua <andrewprecious388@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Mbugua <andrewprecious388@gmail.com>
+Subject: [PATCH v2] stubdom: Fix GCC 14 -Wmemset-elt-size compiler warnings in PolarSSL
+Date: Thu, 10 Sep 2026 12:14:14 +0300
+Message-ID: <20260910091414.22966-1-andrewprecious388@gmail.com>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <37902bbd-1ab9-4b49-8f94-4b788b3620d9@suse.com>
+References: <37902bbd-1ab9-4b49-8f94-4b788b3620d9@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 12/12] x86/nSVM: address Misra 2.1 rule violation
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>
-References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
- <b5601922-1f8b-46ff-ac3d-0e4310773f85@suse.com>
- <aqJfx8-8t1I-wtAn@macbook.local>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <aqJfx8-8t1I-wtAn@macbook.local>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1789029752-37CD7AE4-0C473EED/0/0
+X-purgate-ID: tlsNG-42698a/1789031713-A9CC79EA-C264F4A6/0/0
 X-purgate-type: clean
-X-purgate-size: 881
+X-purgate-size: 2067
 
-On 10.09.2026 09:44, Roger Pau Monné wrote:
-> On Fri, Aug 28, 2026 at 09:06:20AM +0200, Jan Beulich wrote:
->> The 16-bit range of "port" is fully handled by the switch(). Therefore the
->> default: case is reported unreachable by Eclair. Insert BUILD_ERROR() to
->> annotate this for Eclair.
->>
->> No functional change.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-> 
-> Acked-by: Roger Pau Monné <roger@xenproject.org>
+A followup to the email thread with the previously suggested changes.
 
-Thanks.
+I have:
+1. Added the patch reference to the Makefile
+2. Removed the new subdirectory I created.
+3. Formatted patch message to be <75 characters per line
 
-> That however is a bit weird IMO, as we have usually said we would
-> prefer not to use fixed width types in general, and hence one might
-> argue that port should be unsigned int. Then the BUILD_ERROR() might
-> trigger?
+When compiling Xen with GCC 14, I get a compiler warning originating from the /polarssl-x86_64/library about a memset element size mismatch:
 
-Yes, such a type change would need accompanying by removal of that
-BUILD_ERROR(). The default: case then also wouldn't be deemed
-unreachable anymore (even though in practice it still would be).
+ssl_tls.c: In function ‘ssl_session_reset’:
+ssl_tls.c:1778:5: warning: ‘memset’ used with length equal to number of elements without multiplication by element size [-Wmemset-elt-size]
+1778 |     memset( ssl->ctx_enc, 0, 128 );
+|     ^~~~~~
+ssl_tls.c:1779:5: warning: ‘memset’ used with length equal to number of elements without multiplication by element size [-Wmemset-elt-size]
+1779 |     memset( ssl->ctx_dec, 0, 128 );
+|     ^~~~~~
 
-Jan
+This patch introduces a build-time patch to PolarSSL that replaces the hardcoded
+128 byte length with sizeof() allowing clean compilation without warnings.
+
+Signed-off-by: Andrew Mbugua <andrewprecious388@gmail.com>
+---
+ stubdom/v2-0001-PATCH-stubdom-Fix-GCC-14-Wmemset-elt-size-compile.patch | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+ create mode 100644 stubdom/v2-0001-PATCH-stubdom-Fix-GCC-14-Wmemset-elt-size-compile.patch
+
+diff --git a/stubdom/v2-0001-PATCH-stubdom-Fix-GCC-14-Wmemset-elt-size-compile.patch b/stubdom/v2-0001-PATCH-stubdom-Fix-GCC-14-Wmemset-elt-size-compile.patch
+new file mode 100644
+index 0000000000..3528f2817a
+--- /dev/null
++++ b/stubdom/v2-0001-PATCH-stubdom-Fix-GCC-14-Wmemset-elt-size-compile.patch
+@@ -0,0 +1,13 @@
++--- a/library/ssl_tls.c
+++++ b/library/ssl_tls.c
++@@ -1775,8 +1775,8 @@
++ 	memset( ssl->iv_dec, 0, 16 );
++ 	memset( ssl->mac_enc, 0, 32 );
++ 	memset( ssl->mac_dec, 0, 32 );
++-    memset( ssl->ctx_enc, 0, 128 );
++-    memset( ssl->ctx_dec, 0, 128 );
+++    memset( ssl->ctx_enc, 0, sizeof( ssl->ctx_enc ) );
+++    memset( ssl->ctx_dec, 0, sizeof( ssl->ctx_dec ) );
++ 
++ 	md5_starts( &ssl->fin_md5  );
++ 	sha1_starts( &ssl->fin_sha1 );
+-- 
+2.47.3
+
 
