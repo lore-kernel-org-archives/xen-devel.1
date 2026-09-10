@@ -4,42 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4419CC79F9F
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 19:44:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415303.1644759 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A460C88E41
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 20:12:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1415320.1644768 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4kgX-0006Yy-K3; Thu, 10 Sep 2026 19:43:49 +0000
+	id 1x4l8B-0004eY-MJ; Thu, 10 Sep 2026 20:12:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415303.1644759; Thu, 10 Sep 2026 19:43:49 +0000
+Received: by outflank-mailman (output) from mailman id 1415320.1644768; Thu, 10 Sep 2026 20:12:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4kgX-0006Yr-GY; Thu, 10 Sep 2026 19:43:49 +0000
-Received: by outflank-mailman (input) for mailman id 1415303;
- Thu, 10 Sep 2026 19:43:48 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x4l8B-0004eR-JZ; Thu, 10 Sep 2026 20:12:23 +0000
+Received: by outflank-mailman (input) for mailman id 1415320;
+ Thu, 10 Sep 2026 20:12:22 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <rostedt@goodmis.org>) id 1x4kgV-0006Yj-T8
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 19:43:48 +0000
+ (envelope-from <mst@redhat.com>) id 1x4l89-0004eL-Ny
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 20:12:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4kgU-006O7N-II
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 21:43:46 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x4l88-00GmME-Uq
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 22:12:20 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <rostedt@goodmis.org>)
- id 6aa3085e-8faa-0a2a0a5109dd-0a2a450becf2-8
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 21:43:45 +0200
-Received: from [216.40.44.12] (helo=relay.hostedemail.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <rostedt@goodmis.org>)
- id 6aa30870-b7e8-0a2a450b0019-d8282c0cceb3-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 21:43:45 +0200
-Received: from omf03.hostedemail.com (lb01a-stub [10.200.18.249])
- by unirelay07.hostedemail.com (Postfix) with ESMTP id 39693160690;
- Thu, 10 Sep 2026 19:43:40 +0000 (UTC)
-Received: from [HIDDEN] (Authenticated sender: rostedt@goodmis.org) by
- omf03.hostedemail.com (Postfix) with ESMTPA id 30FD46000B; 
- Thu, 10 Sep 2026 19:43:32 +0000 (UTC)
+ (envelope-from <mst@redhat.com>)
+ id 6aa30f0b-bab6-0a2a0a5309dd-0a2a4505b7b2-18
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 22:12:20 +0200
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <mst@redhat.com>)
+ id 6aa30f22-4cb1-0a2a45050019-aa0a857c8189-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 22:12:19 +0200
+Received: from mail-wm1-f69.google.com (mail-wm1-f69.google.com
+ [209.85.128.69]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-90-lDK37aFsOmSoGhOGRUYthg-1; Thu, 10 Sep 2026 16:12:17 -0400
+Received: by mail-wm1-f69.google.com with SMTP id
+ 5b1f17b1804b1-495474a5fbcso2069515e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 13:12:17 -0700 (PDT)
+Received: from redhat.com (IGLD-80-230-79-236.inter.net.il. [80.230.79.236])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49e62121747sm1798195e9.2.2026.09.10.13.12.12
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Sep 2026 13:12:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,168 +57,349 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=dkim1 header.d=goodmis.org header.i="@goodmis.org" header.h="Date:From:To:Cc:Subject:Message-ID:In-Reply-To:References:MIME-Version:Content-Type:Content-Transfer-Encoding"
-Date: Thu, 10 Sep 2026 15:44:50 -0400
-From: Steven Rostedt <rostedt@goodmis.org>
-To: Josef Bacik <josef@toxicpanda.com>
-Cc: "Paul E. McKenney" <paulmck@kernel.org>, Frederic Weisbecker
- <frederic@kernel.org>, Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, Joel
- Fernandes <joelagnelf@nvidia.com>, Boqun Feng <boqun@kernel.org>, Thomas
- Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, Masami
- Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>, Jiri
- Olsa <jolsa@kernel.org>, Alexei Starovoitov <ast@kernel.org>, Daniel
- Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>,
- x86@kernel.org, Catalin Marinas <catalin.marinas@arm.com>, Will Deacon
- <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>, Xu Kuohai
- <xukuohai@huaweicloud.com>, Andy Lutomirski <luto@kernel.org>, Josh
- Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, Lai Jiangshan
- <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, Juergen Gross
- <jgross@suse.com>, Luis Chamberlain <mcgrof@kernel.org>, Ihor Solodrai
- <ihor.solodrai@linux.dev>, linux-kernel@vger.kernel.org,
- rcu@vger.kernel.org, linux-trace-kernel@vger.kernel.org,
- bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org,
- xen-devel@lists.xenproject.org
-Subject: Re: [PATCH RFC 00/13] rcu-tasks: let preemption outside trampolines
- be a quiescent state
-Message-ID: <20260910154450.7b770882@gandalf.local.home>
-In-Reply-To: <20260910-b4-rcu-tasks-preempt-qs-v1-0-d4469f4cc101@toxicpanda.com>
-References: <20260910-b4-rcu-tasks-preempt-qs-v1-0-d4469f4cc101@toxicpanda.com>
-X-Mailer: Claws Mail 3.20.0git84 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1789071138;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=g9mLgS0ybrUUaTMFusFVuyMEvSQGJ2PNYaEiCYholds=;
+	b=i653n/VOhca+FLMIKoLwfxg51OwIncc7/bzU6xsrjt+nYsZGMC0fSUDqUHnWq0hVbBe5H5
+	0Zgc9vEbYxIka9B1oQtiLCXWrCILG26DDc9POhh+9aRKpZwKHE42azm/fCBLCDEbrl4teT
+	4v42u+R3jcPXsYCNwI0T3jTjkpZfyak=
+X-MC-Unique: lDK37aFsOmSoGhOGRUYthg-1
+X-Mimecast-MFC-AGG-ID: lDK37aFsOmSoGhOGRUYthg_1789071136
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789071136; x=1789675936;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=g9mLgS0ybrUUaTMFusFVuyMEvSQGJ2PNYaEiCYholds=;
+        b=EgTwWcFhwcLrfwbcsHli876Tp8IRGXfUGLQlESnY+dJBvYwCxgI6QjXNgKB9lkHfh8
+         kA0eK8MNXTPo+avql/aVDSDhpf+czSlOPOhAdYD56cTu2YBgnqwt2m5fx4USe4KM+BC5
+         BP7beVYmYMnlZpXnAtsouYqYc261cmNtibkHAtHDUT8S0Q5PIRwVnLC3y4CCMBrky8bx
+         p18q7gWgEw/exTXa6ML7cDKfdtiFwu76e6zrbCpbasE90PogW4QOjJqfUtH06osBriSy
+         Ydv7kSWV43xnCVbQjmwj76589bpHCR0Fa1DqE0rxGQDNGcgq/2/bDDuDbcAug92yt8ll
+         86xA==
+X-Forwarded-Encrypted: i=1; AKwUvByN5lvjTjikgnQdU73YG7cQAqppbML8AZUu6/X3aIYg0NaG3NYAMuA8T/3nGUdOJr+362srs0MS8ic=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lk8GAK3gU4YUEbSYXhcgZ4vfkbI/USovL03Ccuv95GZHXrwacl
+	5RfQQCRhSQX8thLIOZ/AoH3Uw2e4d7P54YbwhwtlB4E/JnTuH08viJW3xt+r0afIV/WEHrNnHhs
+	uDAqsqW3ZPYRPwqch2uNd22LZ87ewha+jY1Y5AlI8qaY3VXRdthGq7MkyPIG524XxGtV3
+X-Gm-Gg: AYBFou3bajYhATSk8Kp9x5LdzV3wegP5iNUun6NU44+CeU8p6qz6h+8AJQh8hYzOB9w
+	ohm45eZwHfmdPwnazRPrzKcGBy4SoDg1lrkQlAZhp5THkLTQNM1aS4fzKBKc+xnMK6vM/uJl4tb
+	4D5UWE/uDOyHpWL/PH4OLSv79cpzA12r+vzxqh1LNYN7OkjDJcQrUls88SgdZoJH5OomXRAqMV9
+	oeToQmheVD1Qe45sL6Dg3ayVASuBhlhdNePuUDlExyfOBVhNdnKkS70TSHM8FkLr+mqbtHiMZfN
+	ZUgNEnu+ZR9/zO2bcPcC6McBJSdZYV1TGF1r16L7uxfR+CG0G9QBGYEL2y8NZNSdLpGS90VG52s
+	dypsHlsLbadbwULPsDBgy4DA=
+X-Received: by 2002:a05:600d:8498:10b0:49d:1842:f001 with SMTP id 5b1f17b1804b1-49e6198f7bamr5892335e9.14.1789071135745;
+        Thu, 10 Sep 2026 13:12:15 -0700 (PDT)
+X-Received: by 2002:a05:600d:8498:10b0:49d:1842:f001 with SMTP id 5b1f17b1804b1-49e6198f7bamr5891645e9.14.1789071134907;
+        Thu, 10 Sep 2026 13:12:14 -0700 (PDT)
+Date: Thu, 10 Sep 2026 16:12:11 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+	Ben Chaney <bchaney@akamai.com>,
+	Markus Armbruster <armbru@redhat.com>,
+	Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+	Sergio Lopez <slp@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+	Zhao Liu <zhao1.liu@intel.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony@xenproject.org>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	Bernhard Beschow <shentey@gmail.com>,
+	Conor Dooley <conor@kernel.org>,
+	Sebastian Huber <sebastian.huber@embedded-brains.de>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Jason Wang <jasowangio@gmail.com>, Eric Blake <eblake@redhat.com>,
+	devel@lists.libvirt.org, xen-devel@lists.xenproject.org,
+	qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
+Subject: [PULL 21/90] net/tap: deprecate "no" as special value for
+ script/downscript
+Message-ID: <bfe7dde12fc4f38e489fa0f747090184420d9f5b.1789071042.git.mst@redhat.com>
+References: <cover.1789071042.git.mst@redhat.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-Rspamd-Server: rspamout05
-X-Rspamd-Queue-Id: 30FD46000B
-X-Stat-Signature: q4rice5dx4toq6agt9e6os3uux3h5f5q
-X-Session-Marker: 726F737465647440676F6F646D69732E6F7267
-X-Session-ID: U2FsdGVkX1/TvSOAPfmV5w9v9DlVemvWAF7fAQiQXhI=
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=goodmis.org; h=date:from:to:cc:subject:message-id:in-reply-to:references:mime-version:content-type:content-transfer-encoding; s=dkim1; bh=0G8Y9/xY0kMl88nV4+aK7L6N6EzC6UwclJFLiIWbzwM=; b=XDaxsPusoW6gsn6QQqwKwtOsezn5XGTPhAZBWTmLI2a3wTTy4g9M8GxTBfx7IxRyYNyRuYQGkIUa70KldFVZ7BxD/P2CsoJAlMMiCFX8YSS1drmpdXopT7vrVM/O17FPu1+y62DsM8b0wE++rILKnKFPiYk8n6rvTHLZaMP183M=
-X-HE-Tag: 1789069412-378097
-X-HE-Meta: U2FsdGVkX1+2Ct3iQoLtuMkYa1cI50miBEnTqrhRYa+BXsr0BkuI+iyjkwhW+Ob8C5dT11n+jxKJvSyznZnLsxh0O/QKV9P9WQecOj/+21jACCNK26r6q8zwQqBN/ayZXuQ+GMG++J9Taw+/zJCowVnrggoyzv6dApRYuUizRVkjRykDXYfNTF0KQwLTeMZALOSsT8m10cqWJg1D25InukFaP+COzppk9X5R5JJAc9OQyO5V0RV7ia7UcNgjuOHSeTTxARbLsAo0lo+Cw5KvWdAoNn3RpyiQlWsoqM2E7xoqV45XznycLnrdwTWnybGDasUZEZxhn2u7O6k5MAY1bcSxESD/EVVf6gvruYYB/+VKBnRpc7lRNYR8i0iaqzQA
-X-purgate-ID: tlsNG-42698a/1789069425-A82F49EA-069F0036/0/0
+In-Reply-To: <cover.1789071042.git.mst@redhat.com>
+X-Mailer: git-send-email 2.51.2.2891.g4157995a80.dirty
+X-Mutt-Fcc: =sent
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: aw8ScHP_1bRBB_6QEQJQpPbPZoRVirTD24WSLuz3FB4_1789071136
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1789071140-71CA82A1-E5941498/0/0
 X-purgate-type: clean
-X-purgate-size: 6841
+X-purgate-size: 12712
 
-On Thu, 10 Sep 2026 18:50:23 +0000
-Josef Bacik <josef@toxicpanda.com> wrote:
+From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
 
-> Tasks RCU only treats a voluntary context switch, usermode or idle as a
-> quiescent state, because a preempted task may be sitting in a trampoline
-> that is about to be freed. That was a fine trade when PREEMPT_NONE
-> servers compiled Tasks RCU away and PREEMPT desktops rarely ran
-> long-lived in-kernel loops. PREEMPT_LAZY changes both halves at once:
-> Tasks RCU is now real on server configs, and cond_resched() is a no-op,
-> so a CPU-bound kthread or kworker only ever loses the CPU by being
-> preempted, which is exactly the event Tasks RCU refuses to count.
-> 
-> The way this showed up for us was a cgroup writeback worker draining a
-> very large cgwb for around eleven minutes on an arm64 box. Nothing wrong
+The interface is ambiguous, as "no" is valid file name. So,
+using "no" as a special value to disable script is deprecated.
+Use an empty string ("script=" / "downscript=") instead.
 
-So you have a kernel thread running for 11 minutes without a schedule?
+In a future version, "no" will be treated as a plain file name, just
+like any other non-empty value.
 
-You could still put in a cond_resched_tasks_rcu_qs() in that loop. But I
-guess you are trying to get rid of doing that too.
+Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
+and qemu-options.hx. Update other docs to use empty string instead of
+"no". Add a warning.
 
-> with that on its own, but a BPF program detach on another CPU went
-> bpf_trampoline_update() -> ftrace_shutdown() -> synchronize_rcu_tasks()
-> while holding trampoline_mutex, forty-odd tasks piled up behind the
-> mutex, and the hung task detector panicked the machine. The kprobe jump
-> optimizer is worse in principle: it does synchronize_rcu_tasks() under
-> kprobe_mutex, text_mutex and cpus_read_lock(), so one long-running
-> kthread can stall static key updates and CPU hotplug for its whole run.
-> The current answer is to find each such loop and add
-> cond_resched_tasks_rcu_qs() to it, which is the kind of annotation
-> PREEMPT_LAZY was supposed to let us stop writing.
-> 
-> This series tries the other direction: have the trampolines say when a
-> task is inside them, so that a preemption anywhere else can be a
-> quiescent state.
-> 
->  - task_struct grows an int, rcu_tramp_nesting. Every trampoline whose
->    lifetime Tasks RCU guards increments it before calling out and
->    decrements it before returning: ftrace_caller and its dynamic copies,
->    the BPF trampoline (which drops it again around the call to the
->    original function, since im->pcref covers that), the x86 optprobe
->    template, and out-of-line register_ftrace_direct() trampolines. Only
->    current writes it and nested users are balanced, so it is a plain
->    non-atomic inc/dec, one load of current plus one RMW per entry/exit.
-> 
->  - The inc/dec are inside the trampoline, so there is a window of a few
->    instructions on each side where the count is zero but the task is in
->    (or on its way into) trampoline text. Nothing there can be preempted
->    synchronously, only from an interrupt, so the irq-exit preemption path
->    looks at regs->ip and holds the count across preempt_schedule_irq()
->    when the IP is somewhere the counter cannot cover: outside core and
->    module text (all the dynamically allocated trampolines and slots), in
->    the static ftrace stubs or the x86 return thunks that still hold a
->    direct-call target, in a module that hosts its own direct trampoline,
->    or inside the bytes after a kprobe that the jump optimizer may be
->    about to rewrite (the one synchronize_rcu_tasks() user that is not
->    about trampolines at all).
+Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+Reviewed-by: Ben Chaney <bchaney@akamai.com>
+Reviewed-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+Message-ID: <20260819180201.1970193-4-vsementsov@yandex-team.ru>
+---
+ docs/about/deprecated.rst                  | 18 ++++++++++++++++++
+ docs/system/i386/microvm.rst               |  4 ++--
+ docs/system/i386/xenpvh.rst                |  2 +-
+ docs/system/ppc/ppce500.rst                |  4 ++--
+ docs/system/riscv/microchip-icicle-kit.rst |  2 +-
+ docs/system/riscv/sifive_u.rst             |  2 +-
+ qapi/net.json                              | 14 ++++++++++----
+ net/tap.c                                  | 17 +++++++++++------
+ qemu-options.hx                            |  8 ++++++--
+ 9 files changed, 52 insertions(+), 19 deletions(-)
 
-So basically if the preemption happens outside of core or module text
-(which should be the case of any dynamically allocated trampoline), the
-task is marked to be in the grace period across its schedule, so that the
-RCU_TASK cannot move forward?
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index 98c32991c9..61e775373d 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -71,6 +71,15 @@ flexible enough. The monitor objects have been converted to QOM, so
+ ``-mon mode=control`` is replaced by ``-object monitor-qmp``. The
+ short convenience options are not deprecated, only ``-mon``.
+ 
++``script=no`` and ``downscript=no`` for ``-netdev tap`` (since 11.2)
++'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++The special value ``"no"`` for the ``script`` and ``downscript``
++parameters of ``-netdev tap`` disables script execution.  This special
++treatment of ``"no"`` is deprecated.  Use an empty string (``script=``
++or ``downscript=``) to disable script execution instead.  In a future
++version, ``"no"`` will be treated as a plain file name.
++
+ QEMU Machine Protocol (QMP) commands
+ ------------------------------------
+ 
+@@ -164,6 +173,15 @@ Use ``job-finalize`` instead.
+ 
+ Use ``query-accelerators`` instead.
+ 
++``"no"`` as value of ``script``/``downscript`` for tap in ``netdev_add`` (since 11.2)
++'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++The special value ``"no"`` for the ``script`` and ``downscript``
++parameters of ``netdev_add`` with ``type=tap`` disables script
++execution.  This special treatment of ``"no"`` is deprecated.  Use an
++empty string instead.  In a future version, ``"no"`` will be treated as
++a plain file name.
++
+ Human Machine Protocol (HMP) commands
+ -------------------------------------
+ 
+diff --git a/docs/system/i386/microvm.rst b/docs/system/i386/microvm.rst
+index 1675e37d3e..077ea15751 100644
+--- a/docs/system/i386/microvm.rst
++++ b/docs/system/i386/microvm.rst
+@@ -79,7 +79,7 @@ legacy ``ISA serial`` device as console::
+      -serial stdio \
+      -drive id=test,file=test.img,format=raw,if=none \
+      -device virtio-blk-device,drive=test \
+-     -netdev tap,id=tap0,script=no,downscript=no \
++     -netdev tap,id=tap0,script=,downscript= \
+      -device virtio-net-device,netdev=tap0
+ 
+ While the example above works, you might be interested in reducing the
+@@ -103,7 +103,7 @@ disabled::
+      -device virtconsole,chardev=virtiocon0 \
+      -drive id=test,file=test.img,format=raw,if=none \
+      -device virtio-blk-device,drive=test \
+-     -netdev tap,id=tap0,script=no,downscript=no \
++     -netdev tap,id=tap0,script=,downscript= \
+      -device virtio-net-device,netdev=tap0
+ 
+ 
+diff --git a/docs/system/i386/xenpvh.rst b/docs/system/i386/xenpvh.rst
+index 904778e3f5..862f38830b 100644
+--- a/docs/system/i386/xenpvh.rst
++++ b/docs/system/i386/xenpvh.rst
+@@ -42,7 +42,7 @@ case you need to construct one manually:
+       -vnc none                                       \
+       -display none                                   \
+       -device virtio-net-pci,id=nic0,netdev=net0,mac=00:16:3e:5c:81:78 \
+-      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=no,downscript=no \
++      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=,downscript= \
+       -smp 4,maxcpus=4                                \
+       -nographic                                      \
+       -machine xenpvh,ram-low-base=0,ram-low-size=2147483648,ram-high-base=4294967296,ram-high-size=2147483648,pci-ecam-base=824633720832,pci-ecam-size=268435456,pci-mmio-base=4026531840,pci-mmio-size=33554432,pci-mmio-high-base=824902156288,pci-mmio-high-size=68719476736 \
+diff --git a/docs/system/ppc/ppce500.rst b/docs/system/ppc/ppce500.rst
+index c9fe0915dc..ec5aaf14fd 100644
+--- a/docs/system/ppc/ppce500.rst
++++ b/docs/system/ppc/ppce500.rst
+@@ -158,14 +158,14 @@ interface at PCI address 0.1.0, but we can switch that to an e1000 NIC by:
+   $ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \
+                       -display none -serial stdio \
+                       -bios u-boot \
+-                      -nic tap,ifname=tap0,script=no,downscript=no,model=e1000
++                      -nic tap,ifname=tap0,script=,downscript=,model=e1000
+ 
+ The QEMU ``ppce500`` machine can also dynamically instantiate an eTSEC device
+ if “-device eTSEC” is given to QEMU:
+ 
+ .. code-block:: bash
+ 
+-  -netdev tap,ifname=tap0,script=no,downscript=no,id=net0 -device eTSEC,netdev=net0
++  -netdev tap,ifname=tap0,script=,downscript=,id=net0 -device eTSEC,netdev=net0
+ 
+ Root file system on flash drive
+ -------------------------------
+diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
+index 9809e94b84..7fdb96601a 100644
+--- a/docs/system/riscv/microchip-icicle-kit.rst
++++ b/docs/system/riscv/microchip-icicle-kit.rst
+@@ -84,7 +84,7 @@ Then we can boot the machine by:
+   $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
+       -sd path/to/sdcard.img \
+       -nic user,model=cadence_gem \
+-      -nic tap,ifname=tap,model=cadence_gem,script=no \
++      -nic tap,ifname=tap,model=cadence_gem,script= \
+       -display none -serial stdio \
+       -kernel path/to/u-boot/build/dir/u-boot.bin \
+       -dtb path/to/u-boot/build/dir/u-boot.dtb
+diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
+index 8f55ae8e31..0e4dcf3e70 100644
+--- a/docs/system/riscv/sifive_u.rst
++++ b/docs/system/riscv/sifive_u.rst
+@@ -199,7 +199,7 @@ To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
+ 
+   $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
+       -display none -serial stdio \
+-      -nic tap,ifname=tap0,script=no,downscript=no \
++      -nic tap,ifname=tap0,script=,downscript= \
+       -kernel /path/to/vxWorks \
+       -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
+ 
+diff --git a/qapi/net.json b/qapi/net.json
+index ab8ed9c086..dccf95bbbc 100644
+--- a/qapi/net.json
++++ b/qapi/net.json
+@@ -399,15 +399,21 @@
+ # @fds: multiple file descriptors of already opened multiqueue capable
+ #     tap
+ #
+-# @script: script to initialize the interface.  An empty string or
+-#     "no" disables script execution.  Defaults to
++# @script: script to initialize the interface.  An empty string
++#     disables script execution.  Defaults to
+ #     ``<sysconfdir>/qemu-ifup``, where ``<sysconfdir>`` is the
+ #     system configuration directory at build time (typically /etc).
++#     Using "no" to disable script execution is deprecated (since
++#     11.2); use an empty string instead.  In a future version, "no"
++#     will be treated as a plain file name.
+ #
+-# @downscript: script to shut down the interface.  An empty string or
+-#     "no" disables script execution.  Defaults to
++# @downscript: script to shut down the interface.  An empty string
++#     disables script execution.  Defaults to
+ #     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the
+ #     system configuration directory at build time (typically /etc).
++#     Using "no" to disable script execution is deprecated (since
++#     11.2); use an empty string instead.  In a future version, "no"
++#     will be treated as a plain file name.
+ #
+ # @br: bridge name (since 2.8)
+ #
+diff --git a/net/tap.c b/net/tap.c
+index 2076f5b780..f4051e8d4b 100644
+--- a/net/tap.c
++++ b/net/tap.c
+@@ -92,7 +92,8 @@ static void launch_script(const char *setup_script, const char *ifname,
+ static void tap_send(void *opaque);
+ static void tap_writable(void *opaque);
+ 
+-static bool tap_is_explicit_no_script(const char *script_arg_value)
++static bool tap_is_explicit_no_script(const char *script_arg_name,
++                                      const char *script_arg_value)
+ {
+     if (!script_arg_value) {
+         return false;
+@@ -103,16 +104,19 @@ static bool tap_is_explicit_no_script(const char *script_arg_value)
+     }
+ 
+     if (strcmp(script_arg_value, "no") == 0) {
++        warn_report("'%s=no' is deprecated; use '%s=' instead",
++                    script_arg_name, script_arg_name);
+         return true;
+     }
+ 
+     return false;
+ }
+ 
+-static char *tap_parse_script(const char *script_arg_value,
++static char *tap_parse_script(const char *script_arg_name,
++                              const char *script_arg_value,
+                               const char *default_path)
+ {
+-    if (tap_is_explicit_no_script(script_arg_value)) {
++    if (tap_is_explicit_no_script(script_arg_name, script_arg_value)) {
+         return NULL;
+     }
+ 
+@@ -741,7 +745,7 @@ static bool net_init_tap_one(const NetdevTapOptions *tap, NetClientState *peer,
+         qemu_set_info_str(&s->nc, "helper=%s", tap->helper);
+     } else {
+         qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
+-                          script ?: "no", downscript ?: "no");
++                          script ?: "", downscript ?: "");
+ 
+         if (downscript) {
+             snprintf(s->down_script, sizeof(s->down_script), "%s", downscript);
+@@ -947,9 +951,10 @@ int net_init_tap(const Netdev *netdev, const char *name,
+         }
+     } else {
+         g_autofree char *script =
+-            tap_parse_script(tap->script, DEFAULT_NETWORK_SCRIPT);
++            tap_parse_script("script", tap->script, DEFAULT_NETWORK_SCRIPT);
+         g_autofree char *downscript =
+-            tap_parse_script(tap->downscript, DEFAULT_NETWORK_DOWN_SCRIPT);
++            tap_parse_script("downscript", tap->downscript,
++                             DEFAULT_NETWORK_DOWN_SCRIPT);
+ 
+         if (tap->ifname) {
+             pstrcpy(ifname, sizeof ifname, tap->ifname);
+diff --git a/qemu-options.hx b/qemu-options.hx
+index 16ef7d5455..2f6863180b 100644
+--- a/qemu-options.hx
++++ b/qemu-options.hx
+@@ -3022,7 +3022,8 @@ DEF("netdev", HAS_ARG, QEMU_OPTION_netdev,
+     "                use network scripts 'file' (default=" DEFAULT_NETWORK_SCRIPT ")\n"
+     "                to configure it and 'dfile' (default=" DEFAULT_NETWORK_DOWN_SCRIPT ")\n"
+     "                to deconfigure it\n"
+-    "                use '[down]script=no' or '[down]script=' to disable script execution\n"
++    "                use '[down]script=' to disable script execution\n"
++    "                ('[down]script=no' is deprecated and will be treated as a file name in future)\n"
+     "                use network helper 'helper' (default=" DEFAULT_BRIDGE_HELPER ") to\n"
+     "                configure it\n"
+     "                use 'fd=h' to connect to an already opened TAP interface\n"
+@@ -3561,7 +3562,10 @@ SRST
+     ``<sysconfdir>/qemu-ifup`` and the default network deconfigure script is
+     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the system
+     configuration directory at build time (typically ``/etc``).
+-    Use ``[down]script=no`` or ``[down]script=`` to disable script execution.
++    Use ``[down]script=`` to disable script execution.
++    Using ``[down]script=no`` is deprecated; it disables script
++    execution now, but in a future version it will be treated as a
++    plain file name.
+ 
+     If running QEMU as an unprivileged user, use the network helper
+     to configure the TAP interface and attach it to the bridge.
+-- 
+MST
 
-> 
->  - With those in place, rcu_tasks_classic_qs() also clears the holdout
->    flag on a preemption when the count is zero, on architectures that
->    opt in. x86-64 and arm64 do so here. Everyone else keeps the
->    voluntary-only rule and is untouched apart from the (unused) field.
-> 
-> A running holdout already gets poked via rcu_request_urgent_qs_task(),
-> which makes the next tick set NEED_RESCHED, so with this the resulting
-> preemption retires it and a Tasks RCU grace period is bounded by roughly
-> a tick plus the longest preempt-off section rather than by the longest
-> stretch without a voluntary schedule().
-> 
-> Patches 1-12 are scaffolding and change no behaviour on their own; patch
-> 13 flips the rule and selects the option for the two architectures.
-> 
-> Testing so far is QEMU only: x86-64, PREEMPT_LAZY with PREEMPT_RCU=n,
-> PROVE_RCU and lockdep, with and without PREEMPT_DYNAMIC. A kthread
-> spinning in-kernel for 30s with the function tracer, an ftrace kprobe,
-> an optimized kprobe and fentry/fexit programs attached:
-> synchronize_rcu_tasks() goes from 29.7s to 0.1-0.3s, tearing down a
-> DYNAMIC ftrace_ops (tracefs instance function -> nop) from 27s to
-> 0.2-0.8s, and the ftrace-direct sample modules load, fire and unload in
-> about 2.5s each while the spinner runs, with no warnings and the new
-> return-to-user assertion quiet. arm64 is build-tested only at this
-> point; real hardware numbers for both are the obvious next step and I
-> did not want to sit on the idea waiting for them.
-> 
-> Things I would particularly like opinions on:
-> 
->  - Whether hooking rcu_tasks_classic_qs() is the right place, or whether
->    Paul would rather see this expressed differently inside Tasks RCU.
->  - return_to_handler and the rethook/kretprobe trampolines are not
->    instrumented. Their C callees take the ftrace recursion lock before
->    touching any ops and the trampolines themselves are static text, so I
->    believe they do not need it, but I would like Steven and Masami to
->    confirm.
-
-Note, there has been some work in the past (and may happen again in the
-future) that will remove the preempt_disable() from the trace_recursion
-locking. If that happens, then I believe the trace_recursion would need to
-increment (and decrement) your counter. Probably need a comment there to
-let whomever know about it if they decide to remove the preempt_disable().
-
->  - The register_ftrace_direct() contract change: out-of-line direct
->    trampolines now have to maintain the count themselves (the samples
->    are converted). I do not know of out-of-tree users beyond BPF, but
->    this is the one place an existing user could be silently weakened.
->  - Whether arm64 folks are comfortable with the ldr/add/str in
->    ftrace_caller and the BPF trampoline, and with treating all of
->    ftrace_caller as trampoline text for the IP check.
->  - If this holds up, cond_resched_tasks_rcu_qs() and
->    rcu_softirq_qs_periodic() become unnecessary on the opted-in
->    architectures; I have not touched them here.
-
-I don't know. It may work, but I have a feeling there's a devil in the
-details here that is waiting to bite us in the underside when we are not
-(RCU) watching.
-
--- Steve
 
