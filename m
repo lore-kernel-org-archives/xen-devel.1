@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BC6CDC79F9F
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 10:59:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1414428.1644228 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE914C79FB9
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 11:14:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1414449.1644250 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4cVB-00055R-Nn; Thu, 10 Sep 2026 10:59:33 +0000
+	id 1x4cjP-0008FH-05; Thu, 10 Sep 2026 11:14:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1414428.1644228; Thu, 10 Sep 2026 10:59:33 +0000
+Received: by outflank-mailman (output) from mailman id 1414449.1644250; Thu, 10 Sep 2026 11:14:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4cVB-00055K-LA; Thu, 10 Sep 2026 10:59:33 +0000
-Received: by outflank-mailman (input) for mailman id 1414428;
- Thu, 10 Sep 2026 10:59:32 +0000
+	id 1x4cjO-0008FA-SY; Thu, 10 Sep 2026 11:14:14 +0000
+Received: by outflank-mailman (input) for mailman id 1414449;
+ Thu, 10 Sep 2026 11:14:14 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x4cVA-00055E-CD
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 10:59:32 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1x4cjO-0008F4-21
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 11:14:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4cV9-002JFT-6A
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 12:59:31 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1x4cjN-00AUOK-Er
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 13:14:13 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa28d8a-2eae-0a2a0a5409dd-0a2a4503827a-42
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 12:59:31 +0200
-Received: from [74.125.228.140] (helo=mail-ej2-f12.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa28d92-fae8-0a2a45030019-4a7de48cb08c-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 12:59:30 +0200
-Received: by mail-ej2-f12.google.com with SMTP id
- a640c23a62f3a-c254fa663bfso246516366b.1
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 03:59:30 -0700 (PDT)
-Received: from [172.19.143.248] (IW396200.net.t-com.hr. [195.29.234.54])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c260d4a98efsm914196766b.14.2026.09.10.03.59.29
+ (envelope-from <jbeulich@suse.com>)
+ id 6aa29103-e002-0a2a0a5209dd-0a2a450abf68-10
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 13:14:13 +0200
+Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6aa29105-f2d2-0a2a450a0019-d155dd30d905-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 13:14:13 +0200
+Received: by mail-wr1-f48.google.com with SMTP id
+ ffacd0b85a97d-485850cf499so4934416f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 04:14:13 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-485aa2c9acasm14609400f8f.36.2026.09.10.04.14.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Sep 2026 03:59:29 -0700 (PDT)
+ Thu, 10 Sep 2026 04:14:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,53 +53,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789037970; x=1789642770; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=suse.com; s=google; t=1789038853; x=1789643653; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=GzF0hWwqUwZEdjHGiY5HXumqIinPxR0gbzSyfXGV5Lk=;
-        b=li5tlNihl9LHdWhI8h1P2bpTNEPvqrHhntSjKQPpAlSma/ugMeCG3hXkWBGh/tBqKD
-         tbZDU0TnSjyf8N68SK8wR9FrI3JbvIPcMPut5fPhZPCyy6iyk2IaH7wyDYASee2Qe77S
-         uUDc/JcB6DR91n5CuMJ2/a1M9iv+3DFBAbIKGUXQousL4fejDsZYzB3PPFRa+ses0dKL
-         HaApD6axxCvLzfqJbMKTWMphz4Qz1H5KrpCVp7rp8urZODfA+pMK1kK28c+KwhXan+3+
-         K5B8Bm3qynAfyLo8clsGBJU0bCvHu8CXliI6w5wu/RY733qhg9tHm3aLuI9+Hr1pbILu
-         H6wg==
+        bh=z99gJD+4P3UGzaQaOpYwFdUWyOKXoViqFl639x5XqwI=;
+        b=DZ2cemw0hmrdnOjzWMJ+drHpeg0hfQFO/0/TMmPAy1GkbUjI8s5Kz3WzXbcgEIOstb
+         ekFcrFJfS0Kbri+SgQSMTSttBBiAVIAGfjJKt+HLtU92k7OIp+13maY2r2l9NYxCGT5k
+         rjytgFUBWFj2TGU1wpb+vUGOSun4MzrcRuXcWPTwceolA28zHiV7KKQxvjN+Pk37BoVv
+         vD45IXy6iYpXGDiavELa/TXCw+BhN9LWzpJUqltF+AhwEF3c5SEFZK1aK/capXXKVcFn
+         yU240niCCRMnZgsDLCa9iEtNl7j4a/bM6VP1jYEbayea/a/NvyHI+QurFYB3/RKUgZH0
+         YvUg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789037970; x=1789642770;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=1e100.net; s=20251104; t=1789038853; x=1789643653;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=GzF0hWwqUwZEdjHGiY5HXumqIinPxR0gbzSyfXGV5Lk=;
-        b=Uj5xAWIYPqAWhTgBW7fEWkl2pr4VAGIw/YP9yZnS4R3sviRNvIUdJ8q8xaLOwUN3zj
-         k0xcpxkoO2rOcp0HhApS7xi+3B4PfoUMBQarM9+ehOUfXFzlc2rOGkxwPYRteDZIsb+i
-         ONApvpLkv/cLLmsrcPAV03XQBpEiTuJUUdF40HtOojz5fSsVpTGu8ZMNUHU6VBV4KMHD
-         PVQxUL2OgSfFitahfWH0ernQzCixmDtxvx8yfonBMM+P+scqZYg2/r+yKDt61XNjEUbW
-         K4tOMMux0J5r/mI45WNvoD+qLK+QBaafLA2RaJDviJqDnWqkETseflQq7UCbn8yf/7pN
-         q1pw==
-X-Forwarded-Encrypted: i=1; AKwUvByE+hymD7shfW+mmEpkU8de/zRmupCaKcQR0cUUJkxs0GZSETElKCPLeJjv+q88dU31iLVPox7Uzx4=@lists.xenproject.org
-X-Gm-Message-State: AFuF++llo+5kHz4x8ksZWSVzvCFyCyPW5Pzva6DgsAmUNOyrJiEyw5iu
-	XhmhpJVXl2oPFygOGz17uEu2LcQmbBoVkhyfY6+YpJKIp2wtDGJ6Az7Y
-X-Gm-Gg: AYBFou2tFXibYyL8Cx6ABzAsp2mOnYDzbAYkIYOFgAU6Ebq+p2gIuo9QYXZtnTxkPYO
-	Fk0+zTn27Ds0BSO+VnOTnVzOasnghVnhNdjxQRO4pBpYdvTyU1jKAcqb0UjzBmaiCHzocKI1NT0
-	PMRnjklO4KB6JCDVw3foycl2qQTQ1DgtSAY7JOv0oUUfuGy14WItn7EI1cGoxM96/wfjH58ZuJA
-	QAUupkibS8415t/5wQcRqGUpIIcCUk6/nVpqkT+iiqJjY5wvbYI6UwhxqSTnYRJnWxq53U67TFK
-	dcHP+Do6yvzarBhSK4AvA5iCNYDkWXsHUN1XrIcFB4Kzc+BeDh/yChCAKomK8QjK22bCcYnXviN
-	Q3xn3FGmVVDh+yv+AondEEHhwoIOjM2/OlANURAfgryesN6VlWJFRhDSWHnr5P8bsuy19O6Wker
-	btT/YfV/wIXNgKqPLeImEuD5QVVqRh1slOS8hr5fHbU9LrPDfyzasnjnDlTGWKRVTV7tpetOV3W
-	QLTv5+O1yXn9EYtBwIFulH3DRUTYTrqcw==
-X-Received: by 2002:a17:907:728f:b0:c25:362e:fb8b with SMTP id a640c23a62f3a-c29419f9643mr611700866b.7.1789037970246;
-        Thu, 10 Sep 2026 03:59:30 -0700 (PDT)
-Message-ID: <487a7efa-e83d-4ae2-8f39-33483161a64d@gmail.com>
-Date: Thu, 10 Sep 2026 12:59:28 +0200
+        bh=z99gJD+4P3UGzaQaOpYwFdUWyOKXoViqFl639x5XqwI=;
+        b=Ml+xPnKTKywh5cbTwSZNv4rW2sE6ZTljGDOfvSH+foBQDGmjR72pnag7riFptCUvL/
+         ATPi8+mYWGXI6c2KvOX66cCq/T/n62xYmsHgconcXwzmGCiEq5456dW/UuIFVcJ/9xB0
+         RFxAbVaju5Si1kDhg8//eS2f6A8L1zEEkDWsQ97Uc/HmUHChn+8nrl8dq2iqX+Iixzmh
+         gLvT6i1pdReuB5T83CFkqA8KYmtvBXIYfljblSDLsQij3z/P66lJfEqftfI93N45rQ5u
+         aY6Rzc/ixi9RvXmF8kPSdTGcfduu+PP1OIKlfrqGLEyvxlS6lEszdDUxD2T2Z36kCWcT
+         Upbg==
+X-Forwarded-Encrypted: i=1; AKwUvBwcp5XwGS95leNTfH67Ytniqv3sxniq8BijPvsR5XEHejzjD/+/p0ime4nzz7eGQ4eIUgReDUL7Gig=@lists.xenproject.org
+X-Gm-Message-State: AFuF++klchZXsMsUocvr3lLjT2Lj6WEBCrX8mmTvcGkmWFTKfYmMTv0L
+	vaOSUs4jUZoWNylgqoXJRPjrVHjF0VFgS2DUZV4CWVSvBVA3Y+00seoxSQ5W0WB9yQ==
+X-Gm-Gg: AYBFou2dU68KB2wFzH1U5mzt2UUR0BiSYeabeZ79c/d+vDX4u4tI8x2ZVCINh+zszpO
+	cg9GBZWq4eOXMDIAjNEQIDBRXPX8cxl3Yl5NqCy04x8cPzvHsEGFhfJrPLgnfD1Eq8UTEuN0eDA
+	ITs9CmXoXa1LxKszTygwPruCa9PQ7wBeKEGsJg67eVyliAVwEx2CCWX4JYaWxWRtqLp7lmWFoHb
+	ZLCkDTO5j8twwfoOhmOxs7/KsDvdeiIENyqFvx7t+dZYRnzViCvyitOkMudPX0yvLBul7QZ9mdL
+	LPjVrnttjisFa0y7HuFBrYsJ8Ua4U+7UnylyBn7dwfkLfOtwgvJWNXB26IP/L3UMi4VIAguYPAI
+	VGoEx5MkRWGhHp4NCkCDi9QfywCxA1yhrQUZaUcV64N8MXX+WuyxIV4JxQ4JTMOnVDM8qEp3w4W
+	MkIO5G9R4SRwUyng3bIzMWG+fZID7fw0FLT6+LYFwHbUiADYgkZfZTWjrWHH2LITgfXj2IXRp+2
+	OyIw/mZk1uXQhbKZCPpawgqMAE8ulaBGKMYpIKna2jyjnQ/iQT2zNNQxCUvCfk=
+X-Received: by 2002:a05:6000:46c6:b0:485:8edf:8354 with SMTP id ffacd0b85a97d-4858edf846cmr26246781f8f.43.1789038852530;
+        Thu, 10 Sep 2026 04:14:12 -0700 (PDT)
+Message-ID: <48857983-ac79-44a0-8a11-93f62ac3d0c4@suse.com>
+Date: Thu, 10 Sep 2026 13:14:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 10/39] xen/riscv: build the target hart index via
- aplic_hart_field()
-To: Jan Beulich <jbeulich@suse.com>
+Subject: Re: [PATCH v2 09/39] xen/riscv: implement virtual APLIC MMIO
+ emulation
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
  Zheng Zhang <zhangzheng@iscas.ac.cn>,
@@ -110,73 +111,91 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <3c7418d64a730ec5e4b2cfd0ecfbbbc6fe0bf7d8.1787838835.git.oleksii.kurochko@gmail.com>
- <a7935767-97f3-46b6-a737-b11fa6dcfd33@suse.com>
+ <4413e157dfe67167f651df1ea92ab61ca4182723.1787838835.git.oleksii.kurochko@gmail.com>
+ <68ab5241-7301-4988-9420-bcccc4b16e3d@suse.com>
+ <071ed630-4c72-4df1-b15e-3037e3f076ba@gmail.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <a7935767-97f3-46b6-a737-b11fa6dcfd33@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <071ed630-4c72-4df1-b15e-3037e3f076ba@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1789037970-6CCDB4E9-020F4BF4/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2248
+X-purgate-ID: tlsNG-4011c0/1789038853-583CCCFC-1C14FD73/0/0
+X-purgate-type: clean
+X-purgate-size: 2245
 
-
-
-On 9/9/26 4:52 PM, Jan Beulich wrote:
-> On 27.08.2026 17:20, Oleksii Kurochko wrote:
->> @@ -340,27 +338,11 @@ static void cf_check aplic_set_irq_affinity(struct irq_desc *desc, const cpumask
->>   
->>       ASSERT(spin_is_locked(&desc->lock));
->>   
->> -    cpu = cpuid_to_hartid(aplic_get_cpu_from_mask(mask));
->> -    hhxw = imsic->group_index_bits;
->> -    lhxw = imsic->hart_index_bits;
->> -    /*
->> -     * Although this variable is used only once in the calculation of
->> -     * group_index, and it might seem that hhxs could be defined as:
->> -     *   hhxs = imsic->group_index_shift - IMSIC_MMIO_PAGE_SHIFT;
->> -     * and then the addition of IMSIC_MMIO_PAGE_SHIFT could be omitted
->> -     * when calculating the group index.
->> -     * It was done intentionally this way to follow the formula from
->> -     * the AIA specification for calculating the MSI address.
->> -     */
->> -    hhxs = imsic->group_index_shift - IMSIC_MMIO_PAGE_SHIFT * 2;
->> -    base_ppn = imsic->msi[cpu].base_addr >> IMSIC_MMIO_PAGE_SHIFT;
->> -
->> -    /* Update hart and EEID in the target register */
->> -    group_index = (base_ppn >> (hhxs + IMSIC_MMIO_PAGE_SHIFT)) &
->> -                  (BIT(hhxw, UL) - 1);
->> -    value = desc->irq;
+On 10.09.2026 12:37, Oleksii Kurochko wrote:
+> On 9/9/26 4:26 PM, Jan Beulich wrote:
+>> On 27.08.2026 17:20, Oleksii Kurochko wrote:
+>>> +uint32_t aplic_msi_target_gen(const struct vcpu *target_vcpu,
+>>> +                              uint32_t base_val)
+>>> +{
+>>> +    unsigned int guest_id = vcpu_guest_file_id(target_vcpu);
+>>> +    unsigned long hart_field = aplic_hart_field(target_vcpu->processor);
+>>
+>> What guarantees target_vcpu's ->processor field to be meaningful at this
+>> point? 
 > 
-> Hmm, only after sending the ack I noticed that there's no masking here, ...
+> Good question. Considering the places where it is called, I would expect 
+> target_vcpu->processor to have something meaningful, since it is called 
+> from a place that can only be reached when the guest is running.
 > 
->> -    value |= cpu << APLIC_TARGET_HART_IDX_SHIFT;
->> -    value |= group_index << (lhxw + APLIC_TARGET_HART_IDX_SHIFT);
->> +    cpu = aplic_get_cpu_from_mask(mask);
->> +
->> +    /* Update hart index and EIID in the target register */
->> +    value = MASK_INSR(aplic_hart_field(cpu), APLIC_TARGET_HART_IDX) |
->> +            (desc->irq & APLIC_TARGET_EIID);
+> Even without that, I don't think there is a big issue here, as 
+> ->processor is initialized to 0 at allocation time. This means that the 
+> target register will be configured in such a way that CPU 0 will handle 
+> such IRQs.
+
+I may not have been explicit enough then: Whether the guest (as a whole)
+is running is of no interest. If the specific vCPU is running, all is fine.
+If the specific vCPU is in the process of being moved to a different CPU,
+and if you read ->processor just before the new value is put there, is
+all going to be fine as well? I doubt that.
+
+>>> --- a/xen/arch/riscv/include/asm/vaplic.h
+>>> +++ b/xen/arch/riscv/include/asm/vaplic.h
+>>> @@ -21,11 +21,16 @@ struct domain;
+>>>   
+>>>   struct vaplic_regs {
+>>>       uint32_t domaincfg;
+>>> +
+>>> +    uint32_t *target;
+>>>   };
+>>
+>> A pointer in this structure is odd, as this (supposedly) is a set of
+>> guest register values. The field name also doesn't clarify its purpose.
+>> All in all: Likely a comment is needed here.
 > 
-> ... but there is masking here. Chopping off bits doesn't look as if it can
-> lead to anything good. What's the deal here?
+> It is a pointer because I tried to save some memory and allocate 
+> register target based on how many irqs a guest really needed.
+> 
+> As an option I can allocate that statically and use the value from AIA
+> spec: target[1]-target[1023]. Would it better?
 
-The mask is a no-op: desc->irq < NR_IRQS (1024) always fits the 11-bit 
-EIID field, so I'll drop it and add a BUILD_BUG_ON() instead.
+No, I think dynamic allocation is justified here. (Question is whether it
+should be struct vaplic_regs as a whole, but that depends on whether
+another runtime-sized array may need adding to it later on.)
 
-Would it be better to:
-
-+    /* desc->irq < NR_IRQS, so it always fits the EIID field */
-+    BUILD_BUG_ON(NR_IRQS - 1 > APLIC_TARGET_EIID);
-+
-+    value = MASK_INSR(aplic_hart_index(cpu), APLIC_TARGET_HART_IDX) | 
-desc->irq;
-
-?
-
-Thanks.
-
-~ Oleksii
-
+Jan
 
