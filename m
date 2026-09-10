@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51F16C79FB9
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 06:38:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1413969.1643835 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47ECBC79FB9
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 06:44:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1413980.1643846 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4YQR-0005Nc-Cg; Thu, 10 Sep 2026 06:38:23 +0000
+	id 1x4YVm-00070b-Vn; Thu, 10 Sep 2026 06:43:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1413969.1643835; Thu, 10 Sep 2026 06:38:23 +0000
+Received: by outflank-mailman (output) from mailman id 1413980.1643846; Thu, 10 Sep 2026 06:43:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4YQR-0005NV-9m; Thu, 10 Sep 2026 06:38:23 +0000
-Received: by outflank-mailman (input) for mailman id 1413969;
- Thu, 10 Sep 2026 06:38:21 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x4YVm-00070U-S1; Thu, 10 Sep 2026 06:43:54 +0000
+Received: by outflank-mailman (input) for mailman id 1413980;
+ Thu, 10 Sep 2026 06:43:53 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x4YQP-0005NP-N2
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 06:38:21 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x4YVl-00070L-B2
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 06:43:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4YQP-004LiJ-3T
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 08:38:21 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x4YVk-007B1V-Bf
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 08:43:52 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa25053-bab6-0a2a0a5309dd-0a2a45098d2e-10
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 08:38:16 +0200
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa25195-8faa-0a2a0a5109dd-0a2a450aa434-38
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 08:43:52 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa25057-be1a-0a2a45090019-d155dd2bc81d-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 08:38:16 +0200
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-4859b45abadso626043f8f.2
- for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 23:38:15 -0700 (PDT)
+ id 6aa251a8-f2d2-0a2a450a0019-d1558032cccb-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 08:43:52 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-49d0b98d6d0so46595815e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 09 Sep 2026 23:43:52 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-485883a9b49sm41005570f8f.17.2026.09.09.23.38.13
+ 5b1f17b1804b1-49d26c437besm49078465e9.11.2026.09.09.23.43.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 09 Sep 2026 23:38:14 -0700 (PDT)
+ Wed, 09 Sep 2026 23:43:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,64 +55,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789022295; x=1789627095; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1789022632; x=1789627432; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=3NX0OxbB28DbZIwihOdfCW5vty+HHgQZ6fPgsUPCvWg=;
-        b=R7rHPkKYYN6r+VW7kcfBDnEFm6hoC8yglGw2279WuzM9VuFeqNHVnAaaylAWNxLsqH
-         EhIqQPHZF+0PHOiOl/AVsWRfMR4hz/m3NoCv5QfLjC57PN+7B6evB5q4ypQontYV2v4t
-         gkDGjfYvrAuCNFczrM9YnEh42DDWCaVKdhZbHHfPEaaWLsY4KY/1+CaCwrzxfwqhmGyC
-         O6PYdxjXzdZQerLN+0Y5BM/0YBzWRi/KQJ3X0qGd07xntHgJV5ZcONSExQztaK3EQR2C
-         0pJ7H8R+cbV+G6TMd9xgPHkpsape4gU9aXusPMiC0nzWMDELhIy8+jCXWtXLx5D9sgjM
-         zkxA==
+        bh=YqPiClyDQWL2eh7tbuvmcAWQELtxg+LbHOcj6JzGFpY=;
+        b=Zj3XteF/7CqYY1lJ7a5pySGc9nI7QOY2LbraoVcqRBlqxX7LLKEjpIw9ZX/tR+obM1
+         tpXdjR+C7azapvimCHB8Yz/5H11Ng1zb5vtYIFqk+utl8BRyHLnt1oXhnBkLdIYKF8ls
+         VuXMlJInxr6WDYLieveArse8Fa4PsEzs7BFPZXUhZeYhUEe+I7ANCJQ192Nfu1lVz7lp
+         g+LdvszOigAcPSdhRyyf03WuHwf9GX0ZrTNmdiT7dOIJbOfp4ci2oqlb/ptQluDUWhlu
+         cS9DIUVnomPCFAVIPi5PpKcXnvAqt4bBOgXX0I8fhjhuVL27F6C0D3X5oFgaESPDco/h
+         GS7A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789022295; x=1789627095;
+        d=1e100.net; s=20251104; t=1789022632; x=1789627432;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3NX0OxbB28DbZIwihOdfCW5vty+HHgQZ6fPgsUPCvWg=;
-        b=oJF3rqXPuogABsSDdtMnG1xZ5aP4zurypZFj6kJXf9r5+cdQj3C8wmO3w3kobJUR3z
-         bVSXokn7aDa/8FV+1L2r83fgXcmEEDDiwLDA2EVjh+jzKV1qLeDMdqV3ZzqSGGaPbkaW
-         2Id0qjUR32ofvU2eu2Wfl2Zk+sinm9WqDpR3O76i9H2HLQKgX6/H0YsU5hg4VqjYAtdO
-         atAa7D7NYf/YmwMq2Rq3n1UW8k0lrl25WClgvVhXJ/iw4YiUKVwy8AwiPbUQCSSaOBqz
-         Wqy5KwzJHxz330PFKdzGxXSTeMUQtyITbit+LNUjRGeVHLzM/fDgadpurUoxWOdh81fl
-         XBMw==
-X-Forwarded-Encrypted: i=1; AKwUvBxsLiSp2CIvxgT6QIAUUevOhKxqzoeZdM4AqgwAqtKHu6jtBAa2GeFivxYIVHXOGPbQHgddDE93Wcc=@lists.xenproject.org
-X-Gm-Message-State: AFuF++k9AXyFhK2S7vg0F0EIFtSiJncUm8EfwO/WX3sMrklFEka+ufe8
-	h3qz581zFjyzG17GpyXxXcSz+P49RcM7uPKs36cyD3FovfnTqbe7m0aat+oAyQY8UQ==
-X-Gm-Gg: AYBFou2Qw7LDO/JQIkB2PLJtL3a0yz+eXi8UEYFb43uGY7nBePsbxNEz3j4frFGUAK8
-	k/6xh8XU6qLsa/Va23JgIx6SJwZdNaQBkwnX9VBae+MKn1kZE4pLVtUnvTQb8+7OTDzGIUpyqOW
-	mFVP2g04aeoh0NnKwtO+9X0gitYfZmr0MSrp/ysWsnW+4XzkF5Og66z+wYwbnQpzZyzqzRWCzc6
-	Z2BYM4ur+scSe7BRXbixa87rFQ2L+JxMpRLLlsvibd4NT6eyuAkOJalMPg41KPdh2VLgFeT+Dsz
-	jszuX3isSDlnToETlw70iN+Ls3R24Bb3qmJYwSfXBxcDEPx3Hqvy7UaOY2p1My16j72NGZYWrj+
-	HvPdEcd3vBT4EP1S3b9vz6A7hFmdKukahe0kk0dUDk4wzuz/U7mSQcuBCBswtssGn1lRg3sD+xt
-	izmDWxpES9S98uMW93JxX6MHFd57TWkSJxEW03Zpi7Rd6BVtm5Fwg0VTMNXLrnyRconfS4h3pFX
-	7sHwEo1qrel8ozyaVqGChpl5NqhqhG4kBnaVeWDPV3tD0wcHmXo6EZFS/MIZUoV1ERWmYC4VA==
-X-Received: by 2002:a05:6000:420b:b0:485:ac3b:4a79 with SMTP id ffacd0b85a97d-485ac3b4b63mr9046278f8f.43.1789022295471;
-        Wed, 09 Sep 2026 23:38:15 -0700 (PDT)
-Message-ID: <e91e5b49-b6b6-429f-a1b2-b9e555e19f92@suse.com>
-Date: Thu, 10 Sep 2026 08:38:13 +0200
+        bh=YqPiClyDQWL2eh7tbuvmcAWQELtxg+LbHOcj6JzGFpY=;
+        b=LCPe1rbjjq6bGPdbioLkYaLV/ftcApr68uHKLqe0j+OvvJ2jL0R9aGqByEHU7dtj2j
+         sw5U8aWn04C33D3u+S5zunpwoz7yCLaOnlXi5ioH5kAYoKvHIiiz/3G6yfakps0qiMyL
+         eLuUnYC8sGZ0iA6r9XyNFDxjunZQLswTu0qax2VsiCUx4Xt9meK5Hr4CO1ybwENNOpTY
+         buW7JuXf3avJWqIp5oPKUipLEVo7DTKBg3UPMBvr/JhJtYbHqQwcV6SxiJ9MeUbhM01p
+         3jvLHxiIVrV1x/xTEM6dOgre6czimDyeMfEFbupyl5h+vBzV7DDA2ROSv9/RzUuMQv4+
+         HxWA==
+X-Forwarded-Encrypted: i=1; AKwUvBzkrabhQKiRqkYNiBNOa5WRLzAOZsl1p9+9MmJM+qMyuF8vP12hhUHVoDIDTUgh3q2rIqbi/ew9yN0=@lists.xenproject.org
+X-Gm-Message-State: AFuF++k3RCxIKLG0JAotzIJEdpwiGeElTR3qdHX30zbJ8goOOWV9ti2x
+	QPB5UsmA5sRA7oj7CemlqWQy4FgYmCcL5pYGw36vWZ4WZT+kj3tVc0hjqL6wQRnVrg==
+X-Gm-Gg: AYBFou2pmPeKfB/MTc8/O8rzdqeG7qY7Ak9baeHnWwEoOkS84cP8NnzxAhssb3f+WxE
+	uWtqdBZk5PBwPpyHMSCruc5z2SxGAAHJ6HuFtM2+scVieRAlynl0TftnF6QhRtwTGEPLx1z2qcq
+	fbv+OO9dGswph1xvXkvrk6EFrlCRU/7PH6Yvpt9pnrLaqpcOA3lw3jpqiKoog/rOHhwcI+JHg/h
+	pP6PKEDPSEPf1O6ENf9gIznaWC57mPPK2PSGSrrubjNahga7ng5rdkwS/ouyQ9ZCR3DBlXhALes
+	xyJg/Kvg6nqd2pe8AN/PCK3LSdLM4BfSqOqEYtwUYFDzIpIR6uIy1F3tdX0Z9gkCccTeWvdM0lb
+	CZLXx5EwnaCZiBT3ffln9crWVazNOtpbe5EzZbrcTSQF/mcXOsNuheEpw+/yL1PGLmd+I4+Vvpm
+	9ZnTnCv3iUvsCCLqlTICt6c2T34l0EawhvILshKU3cQbDyi0+DE9TrZRbsVLfeGpF2hxUTWZIxE
+	eWYVMSgdKNe0jC/KhX/kYJFytNapHegwL+pkp00f2+4wSIp9IDpDLSjsr3Z9Zc=
+X-Received: by 2002:a05:600c:5492:b0:49c:fa21:1c7e with SMTP id 5b1f17b1804b1-49cfa211d31mr361861905e9.19.1789022631724;
+        Wed, 09 Sep 2026 23:43:51 -0700 (PDT)
+Message-ID: <26a57fab-955a-4de6-b17b-eb57aa1f014b@suse.com>
+Date: Thu, 10 Sep 2026 08:43:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 18/39] xen/riscv: add guest page fault handling stub
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
+Subject: Re: [PATCH 04/12] x86: add noreturn in a few more places
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+Cc: Teddy Astie <teddy.astie@vates.tech>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <42e37df518f1eda9579264b4bae9db3521e1042a.1787838835.git.oleksii.kurochko@gmail.com>
- <35aecc68-d16e-4350-9aca-101de2b21c1f@suse.com>
- <19aae90d-bd5b-4637-828c-bb5164ba4191@gmail.com>
+ xen-devel@lists.xenproject.org
+References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
+ <d0f991de-db67-4f49-aef0-25c590b3889e@suse.com>
+ <66fc1415-df9e-41c2-b3ae-78305814cbfc@citrix.com>
+ <d08b2d8a-d363-49d5-965f-f954c79fe04c@suse.com>
+ <320b920b3e673671eddceccb4b86f211@bugseng.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -138,165 +134,88 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <19aae90d-bd5b-4637-828c-bb5164ba4191@gmail.com>
+In-Reply-To: <320b920b3e673671eddceccb4b86f211@bugseng.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1789022296-3B2DC034-15BE0AA9/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1789022632-5A9D9CFC-7E53D6FC/0/0
 X-purgate-type: clean
-X-purgate-size: 5707
+X-purgate-size: 3383
 
-On 09.09.2026 17:09, Oleksii Kurochko wrote:
-> On 9/8/26 4:10 PM, Jan Beulich wrote:
->> On 27.08.2026 17:21, Oleksii Kurochko wrote:
->>> --- /dev/null
->>> +++ b/xen/arch/riscv/emulate.c
->>> @@ -0,0 +1,179 @@
->>> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->>> +
->>> +/*
->>> + * RISC-V instruction emulation for trapped guest accesses
->>> + */
->>> +
->>> +#include <xen/bug.h>
->>> +#include <xen/errno.h>
->>> +#include <xen/sched.h>
->>> +#include <xen/types.h>
->>> +
->>> +#include <asm/csr.h>
->>> +#include <asm/current.h>
->>> +#include <asm/emulate.h>
->>> +#include <asm/riscv_encoding.h>
->>> +#include <asm/traps.h>
->>> +
->>> +/*
->>> + * The hardware-reported details of a guest page fault, gathered once by
->>> + * handle_guest_page_fault() and passed down to the emulation of the faulted
->>> + * access.
->>> + */
->>> +struct guest_fault {
->>> +    /* The guest register state as saved on entry to do_trap(). */
->>> +    struct cpu_user_regs *regs;
+On 09.09.2026 21:07, Nicola Vetrini wrote:
+> On 2026-09-01 08:26, Jan Beulich wrote:
+>> On 31.08.2026 21:13, Andrew Cooper wrote:
+>>> On 28/08/2026 8:01 am, Jan Beulich wrote:
+>>>> --- a/xen/arch/x86/traps.c
+>>>> +++ b/xen/arch/x86/traps.c
+>>>> @@ -2304,7 +2304,7 @@ void asmlinkage entry_from_pv(struct cpu
+>>>>      case X86_ET_HW_EXC:
+>>>>          switch ( vec )
+>>>>          {
+>>>> -        case X86_EXC_DF: return do_double_fault(regs);
+>>>> +        case X86_EXC_DF: do_double_fault(regs); /* noreturn */
+>>>>          case X86_EXC_MC: return do_machine_check(regs);
+>>>>          }
+>>>>          break;
+>>>> @@ -2615,7 +2615,7 @@ void asmlinkage entry_from_xen(struct cp
+>>>>      case X86_ET_HW_EXC:
+>>>>          switch ( regs->fred_ss.vector )
+>>>>          {
+>>>> -        case X86_EXC_DF: return do_double_fault(regs);
+>>>> +        case X86_EXC_DF: do_double_fault(regs); /* noreturn */
+>>>>          case X86_EXC_MC: return do_machine_check(regs);
+>>>>          }
+>>>>          break;
+>>>>
+>>>
+>>> For starters you're missing a break, and the only reason this isn't a
+>>> compile error is the trailing comment.
 >>
->> If the comment was true, this could be pointer-to-const.
-> 
-> I think it can't be pointer-to-const as emulate_load/store functions 
-> wants to change PC register after MMIO access emulation is finished to 
-> not trap again.
-
-Of course, hence how I started the sentence.
-
->>> +    /* scause: a fetch, a load or a store/AMO guest page fault. */
->>> +    unsigned long cause;
->>> +    /*
->>> +     * htinst: the trapped instruction in its transformed form, or one of the
->>> +     * special values (zero, or a pseudoinstruction).
->>> +     */
->>> +    unsigned long htinst;
->>> +    /* htval: as written by hardware; see resolve_faulting_gpa(). */
->>> +    unsigned long htval;
->>> +    /* stval: the guest virtual address of the faulting access. */
->>> +    unsigned long stval;
->>> +    /* The faulting guest physical address, filled by resolve_faulting_gpa(). */
->>> +    paddr_t gpa;
->>> +};
->>> +
->>> +/*
->>> + * Is @htinst one of the pseudoinstructions reported for a guest page fault
->>> + * taken on an implicit memory access done for VS-stage address translation?
->>> + *
->>> + * All four values are recognized regardless of the hypervisor's XLEN: the
->>> + * width they encode is that of a VS-stage PTE, i.e. it follows the guest's
->>> + * paging mode (4 bytes for Sv32, 8 otherwise). On RV32 the 64-bit forms
->>> + * simply never occur.
->>> + */
->>> +static bool htinst_is_pseudo(unsigned long htinst)
->>> +{
->>> +    switch ( htinst )
->>> +    {
->>> +    case INSN_PSEUDO_VS_LOAD32:
->>> +    case INSN_PSEUDO_VS_STORE32:
->>> +    case INSN_PSEUDO_VS_LOAD64:
->>> +    case INSN_PSEUDO_VS_STORE64:
->>> +        return true;
->>> +
->>> +    default:
->>> +        return false;
->>> +    }
->>> +}
+>> "break" there would again be unreachable, though.
 >>
->> This feels fragile. New pseudo-insns can appear at any time. If the value as
->> a whole is non-zero, aiui the low two bits being zero indicate a pseudo-insn.
->> In which case enumerating pseudo-insns we are currently aware of isn't
->> necessary.
-> 
-> I will write it simpler	 then:
-> 
-> /*
->   * Is @htinst one of the special pseudoinstruction values, reported for 
-> a guest
->   * page fault taken on an implicit memory access done for VS-stage address
->   * translation?
->   *
->   * It is enough to check only bits[1:0] as according to the spec:
->   *
->   * The value is one of the special pseudoinstructions defined later, all of
->   * which have bits 1:0 equal to 00.
->   */
-> static bool htinst_is_pseudo(unsigned long htinst)
-> {
->      return htinst && ((htinst & 3) == 0);
-> }
-
-And preferably
-
-     return htinst && !(htinst & 3);
-
-to be self-consistent.
-
->>> +    /*
->>> +     * A guest-page fault may arise due to an implicit memory access during
->>> +     * first-stage (VS-stage) address translation, in which case a guest
->>> +     * physical address written to htval is that of the implicit memory
->>> +     * access that faulted - for example, the address of a VS-level page
->>> +     * table entry that could not be read. (The guest physical address
->>> +     * corresponding to the original virtual address is unknown when
->>> +     * VS-stage translation fails to complete)
->>> +     *
->>> +     * In such cases htinst reports one of the pseudoinstructions recognized
->>> +     * by htinst_is_pseudo(), and the fault requires separate handling (since
->>> +     * G-stage translation failed on an unpopulated/unmapped guest physical
->>> +     * address during a hardware page-table walk). To match bare hardware
->>> +     * behavior, we must inject an access fault of the ORIGINAL access type
->>> +     * (Instruction, Load, or Store/AMO) that initiated the address
->>> +     * translation.
->>> +     */
->>> +    if ( htinst_is_pseudo(gf.htinst) )
->>> +    {
->>> +        inject_access_fault(&gf);
->>> +
->>> +        return;
->>> +    }
+>>>   Second, it's a tailcall anyway. 
+>>> There really is nothing unreachable anywhere in this construct.
 >>
->> I.e. you imply that guests won't put their page tables in MMIO? That's
->> fragile imo; I have seen OSes to use video frame buffers for all kinds
->> of (transient) purposes, for example.
-> 
-> I think it is okay for now and if it will a real use case then an update 
-> of this code will be needed.
-
-May I then ask that you leave a remark (maybe even fixme) to this effect?
-
->>> +    resolve_faulting_gpa(&gf);
+>> Just that the concept of "tailcall" is an optimization, not something
+>> inherent to the language.
 >>
->> Since the function is only a stub right now - how is one to tell whether
->> this indeed can never fail?
+>>> But by far the most important, it the singular noreturn attribute on
+>>> do_double_fault() (elsewhere, and not visible when reading these two
+>>> functions) which is preventing #DF falling into #MC.   This introduces
+>>> fragility which did not exist previously.
+>>
+>> I realized that when making the patch, yet what do you do when the rule
+>> is as it is? Hence why I added the comment, really.
+>>
+>>> do_double_fault() would conditionally return if we ever got around to
+>>> fixing espfix64.
+>>
+>> And hence would have to lose its "noreturn". At which point call sites
+>> would need inspecting. (As said - yes, I do realize the fragility.)
+>>
+>>> So no - I'm going to insist that Eclair is taught to accept "return
+>>> some_noreturn_fn();" as intentional.  It is objectively less fragile
+>>> than the MISRA-preferred option.
+>>
+>> Nicola, thoughts?
 > 
-> It can't be tell. But what is wrong if it could fail? (Actually with 
-> current implementation introduced in later patches you can find it can 
-> fail if a necessary extension or software page walk isn't introduced).
+> If you find a suitable argument from the toolchain that the generated 
+> code is correct even though you return from a function where you 
+> promised not to return in its declaration, I suppose that's fine, but 
+> that MISRA Rule I mentioned ("A function declared with a _Noreturn 
+> function specifier shall not return to its caller"), which is not (yet) 
+> applied to Xen exists to defend from stumbling on UB 71 of C11: A 
+> function declared with a _Noreturn function specifier shall not return 
+> to its caller.
+> 
+> So in general ECLAIR should not accept this by default. What you can do 
+> is deviate these (hopefully few) cases if you have backing evidence of 
+> the correct behavior.
 
-Well, quite obviously if it can fail, its return value would need checking
-here.
+The disagreement between you suggesting a deviation and Andrew demanding
+"that Eclair is taught to accept ..." will need resolving. The argument
+towards the code being overall less fragile in its original shape cannot
+easily be put away. And Misra demanding code to be made more fragile
+than it needs to be cannot really be the goal either.
 
 Jan
 
