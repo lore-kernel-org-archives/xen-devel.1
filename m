@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C81C2C79FBF
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 18:51:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415150.1644650 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D72C7C79FBF
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 18:51:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1415152.1644669 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4jrO-0004kf-PT; Thu, 10 Sep 2026 18:50:58 +0000
+	id 1x4jrS-0005DS-7Q; Thu, 10 Sep 2026 18:51:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415150.1644650; Thu, 10 Sep 2026 18:50:58 +0000
+Received: by outflank-mailman (output) from mailman id 1415152.1644669; Thu, 10 Sep 2026 18:51:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4jrO-0004kY-Mp; Thu, 10 Sep 2026 18:50:58 +0000
-Received: by outflank-mailman (input) for mailman id 1415150;
- Thu, 10 Sep 2026 18:50:57 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x4jrS-0005DJ-4I; Thu, 10 Sep 2026 18:51:02 +0000
+Received: by outflank-mailman (input) for mailman id 1415152;
+ Thu, 10 Sep 2026 18:51:01 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1x4jrN-0004eI-2o
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 18:50:57 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1x4jrQ-0004zA-U2
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 18:51:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4jrM-00GcVR-Fk
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 20:50:56 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x4jrQ-00BoS1-Am
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 20:51:00 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa2fbc3-bab6-0a2a0a5309dd-0a2a4501c7de-46
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:50:56 +0200
-Received: from [209.85.219.52] (helo=mail-qv1-f52.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa2fbd5-e002-0a2a0a5209dd-0a2a4504b836-42
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:51:00 +0200
+Received: from [209.85.222.174] (helo=mail-qk1-f174.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa2fc0f-5984-0a2a45010019-d155db34cc92-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:50:56 +0200
-Received: by mail-qv1-f52.google.com with SMTP id
- 6a1803df08f44-90cc39e06bdso569076d6.0
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:50:55 -0700 (PDT)
+ id 6aa2fc13-b57f-0a2a45040019-d155deaeec8c-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:51:00 +0200
+Received: by mail-qk1-f174.google.com with SMTP id
+ af79cd13be357-92e85499ffbso1147785a.0
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:50:59 -0700 (PDT)
 Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
  [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-939e8bf9d51sm34965885a.14.2026.09.10.11.50.53
+ af79cd13be357-939e807eba7sm47389685a.29.2026.09.10.11.50.57
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 11:50:53 -0700 (PDT)
+ Thu, 10 Sep 2026 11:50:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,51 +55,51 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1789066255; x=1789671055; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1789066259; x=1789671059; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=dxBJRgyuHY3W/iJApny4mLX1c4wnn/TYh39J8mu564M=;
-        b=qZ4kkEzaVD5EgqYkuvzJR0rh3kr43L38Y9KsooAwlzNbXwSgGYpoVimRX4tD3AHCR3
-         r7DOLAIbdTC22OQi9+UBQnDMkp9upzu82IMCvOA4eZH2YtP7okowTR5d7Qvv8bBYCOhR
-         iQzoe4cPytufFkpkvBxaaD8cA36sVB0JkiBS0oZdNLK9oTLK0VRCJuj7pwgr8XcwHXFg
-         n5wMgJkZ777AOLa3LNlLBUK33hDSVVE8n6KyH/HSi1IRNgtHlBP93zKGTuqcp6dCqM3E
-         l4tHJXuMzTPhKcF+DaqlzupEnwVNndvNjpRu1o8gN4tMrtMkqb/oP8YZXdnuctFN9/5m
-         +ILQ==
+        bh=aLCJ034DJzI4gEh3LNSHB0+4siN8J5WsqqEdRoq/eTA=;
+        b=WxQ3hfhb6GZ0qAc8VKLjFNT/T/sLaymAqWoXJTyrD6ltoe3GbJmEnK2pM0FoIvS+gU
+         ZRW/viscNX7K0Rbz2z7+P6YxJ7H1I4DhJzQcplGU78OG4K6eMSU+xMXqMvgYSSlh+0ss
+         Oh6oYK7FLke6Uz7Md5gBfUxusrFrIa6i0foszxiwUTOHZClKVSRUbUvC1+d11u+i+y1i
+         Hvjx+C2ZSPqan/NeTlspOSlTcpnkyoZumyjfM5PGJmaw5qi0gkj1vQOR00lOA6OuTvBQ
+         dhK6BN9Qc3Wlchdc++1LlY1T5X49G3xbQiBdYdLphDwpbz1ASFamQd8Rw/G4TXFCD7bi
+         zBqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789066255; x=1789671055;
+        d=1e100.net; s=20251104; t=1789066259; x=1789671059;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=dxBJRgyuHY3W/iJApny4mLX1c4wnn/TYh39J8mu564M=;
-        b=sTNbfU93Mxp54VoEGtB/BKrsUkSoaNMEFMQMmOOV1gtPZb1dJoK12XCK4vKZpWY/Xe
-         Hb9SZKMuJC9PgkOo3M1gOhCkoq6LF+J2/K1LsaTot3/H5FJosBa4WIHAkMzcNTkIRHXY
-         TBudaRcPY2f7O7OwAnSMV7HZYiYAxsPkecL22iqZZfR90AaUL0jWL36juO0PFG+MLCVM
-         zfi9faO+zNJs16aA+AcpNjYRGOKPb7exy3P8ukorQm4Zp7TZHRMcVWRc1OsKTG5/rU7M
-         So8ynfWzy8AXv3iHC0/UZyux4XGubATnlTP8Dcb4yamaHEw0kUUeowuiQC1rLBTSKJy5
-         ZUrw==
-X-Forwarded-Encrypted: i=1; AKwUvBzxbHUAJsmEHZfjZTyekggmfIaAuGxwBGdjiZJkoFLZ+Z8zVFnjGpsZ1930pha/2o4FseIAprQ7Tf8=@lists.xenproject.org
-X-Gm-Message-State: AFuF++l9hA2tKsgG/bIv7x2xiemmRZJ/ZMpm9Reg5ZWg102sTYBWQgqK
-	iZBvqERejyzoU+sxZYXeJp1W1nwiCVNjzbH4cpfJKRH4b+Bwy35s1Px9AreUkWViVVE=
-X-Gm-Gg: AYBFou1B8ABJWvYDLakBiwvvATzGxYlInAvOxnL41zTb03hGMx4bm/RR+XMJDJ5TxCV
-	8A/aET1HGsnjp8B/wDQ6M7//cIIfXwwmIrD+4XEBL2qa3wJSbXR4lH2F0+cq8HymALgTDMS1DJw
-	yH9xbnp5LB3gJ1C3IlyI13t7OpFipmiaaeJsozLf0hALeo8cqGfF6F04Zk7CCm+2/G+XDw93xUU
-	w/2QVu0f5wZ+K9kevSHxKaUGTFtvlEnHNGp6CMo/gLvBQkNEwWeF8zK+GUgM7yY/JZ8SuEP2GkI
-	KhXO0twbeoAsx88nklqPqEhS9vwI4fU3emtHPcQhNKkyokZe72sk4IFvciY3cVFQzhMHLsihJUS
-	g7HzfdKA2hbgcNrpMLiWEzoTOHrUe2z4j8k01gPa/qkQgr6UOQOEIdz3oUW6+lknPXcBb1jfj4S
-	7G8vjj4qzENDycQJBmDfW96mHlqLQlB6AdKOMekt8SHVqexwLuE1afeoS3zoCL5512xLe1Hb0ed
-	ad5bF+SWTojZFy4jQqLKL/LUDeluyWn2GZlDciJMR7gdL45AXdEA5C6
-X-Received: by 2002:a05:620a:280d:b0:939:78ab:3c5f with SMTP id af79cd13be357-939ea0137a8mr26249085a.9.1789066254480;
-        Thu, 10 Sep 2026 11:50:54 -0700 (PDT)
+        bh=aLCJ034DJzI4gEh3LNSHB0+4siN8J5WsqqEdRoq/eTA=;
+        b=jfodkSJdE8UvQUn8BRqsotdbRVR8C6Rn/zJFmovxcNe9CvgttcYdQVJFU6/S5C9yHc
+         5CFBFKRY4MbeaqomTBWpxr2AnHZvlXC8yJ+ik9vi09nx1sQcbXRDZCuvqqgpUmCEr9/R
+         k5ahjXcj2MUN1KEuGxLJleulg6hV2ziFDhQL1jmnZOGD0CoQcAO771bLhRPknbEUG7LL
+         AtnF6JrxLKLYbhk6rvxQiYyk3NOf+cVnkOgeq6En6TfizhdpRdmor7FDyonQND6aFqoe
+         IOR4zb0t0c82u8MoUJWkYOz6hLxTTKO93GL6JM9uYSQw96chGhIaH36CJLYf9Z3QfR8C
+         bwyQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwwAS451I2hV6DnFtesynT6nXWqhd4vcb9EB6NqbUuwt8REfcQVWiK2QliPqBwkS/QJ73EJZ8Usf1M=@lists.xenproject.org
+X-Gm-Message-State: AFuF++k4w6w0ZNablti72nTbe6gctKtGanumT5Usx3x45/QW6OTw6Ezx
+	gMCnAUMTWM9sGN8IZkJN3mwIdVOOfcrSmEIP0JevkK6RUaPTv1Lqtfzt33UEL8SG5SI=
+X-Gm-Gg: AYBFou1nL2Jcdtykfa1RP/q3/NnkDrpC0ZwP9wUQT85bweHZFOTcEU31DBlTzwXWuHW
+	hYQ76aR4kUavujGfFt7NuYZElWwMJIT3NY+bVNsmYTon3F6NBuDfn/rHX8vMWdvUf5JjxxLUElB
+	tTQ874Yx9CdEvrtNVk7du9pKw9ckhefV7mj4ByZuyEBykvatwdh2Etqw96uDfchfrDEAyAEwxSp
+	bXsRnu2vKoPOnmcAg2j91LyWE/yOH+/PfAdxFHL0cdyYycyDxRFAwzMu+vb6Z9KDZWds6lTZMJy
+	0BjcVOQF6Dssf5jsv6MaZaIv/hq2NH6n+nsGXTTFgM4j0olnOivAQbOTDvyICPsOrYCI0k6eIJo
+	OulpkmsI756lrSfftqCHlTL4V/JOaD6B6AN6dQIL8ta1IR3brR4yElcz7NtGHeA47uoICanz+22
+	BgprT5rhvIVxXIUCLCTT8GEIOC/GE9gp1PaKhwrZUDTNOb1S6hIzDerd3K8YxpI1skTc+8XuvH4
+	uDJuMf3xxjn26rHz7Gz1UXioF5A+9ctbBx66YJVk+PTVvh8wYz1o5Q/iB0gUbm0U3Q=
+X-Received: by 2002:a05:620a:6191:b0:939:a6e4:2267 with SMTP id af79cd13be357-939ea2bff00mr14491685a.50.1789066258414;
+        Thu, 10 Sep 2026 11:50:58 -0700 (PDT)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Thu, 10 Sep 2026 18:50:25 +0000
-Subject: [PATCH RFC 02/13] entry: Pass pt_regs to
- irqentry_exit_cond_resched()
+Date: Thu, 10 Sep 2026 18:50:27 +0000
+Subject: [PATCH RFC 04/13] kprobes: Let Tasks RCU recognise tasks preempted
+ in an optprobe jump window
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260910-b4-rcu-tasks-preempt-qs-v1-2-d4469f4cc101@toxicpanda.com>
+Message-Id: <20260910-b4-rcu-tasks-preempt-qs-v1-4-d4469f4cc101@toxicpanda.com>
 References: <20260910-b4-rcu-tasks-preempt-qs-v1-0-d4469f4cc101@toxicpanda.com>
 In-Reply-To: <20260910-b4-rcu-tasks-preempt-qs-v1-0-d4469f4cc101@toxicpanda.com>
 To: "Paul E. McKenney" <paulmck@kernel.org>, 
@@ -124,108 +124,131 @@ Cc: Andy Lutomirski <luto@kernel.org>,
  bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-purgate-ID: tlsNG-d62444/1789066256-C5146757-93FF6A3D/0/0
+X-purgate-ID: tlsNG-ebf023/1789066260-C20D5B50-279DC295/0/0
 X-purgate-type: clean
-X-purgate-size: 4151
+X-purgate-size: 5160
 
-The irq-exit preemption path is about to need the interrupted context's
-registers to decide whether the preemption may be reported to Tasks RCU
-as a quiescent state.  irqentry_exit_to_kernel_mode_preempt() already
-has them; hand them down through irqentry_exit_cond_resched(), its
-PREEMPT_DYNAMIC static-call and static-key variants, and
-raw_irqentry_exit_cond_resched().  The only caller outside the generic
-entry code is Xen PV's upcall handler, which has regs as well.
+kprobe_optimizer() is the one synchronize_rcu_tasks() user that is not
+about trampoline text: it waits for tasks that were preempted on an
+instruction boundary inside the bytes it is about to overwrite with the
+optimized jump, so that none of them resumes into the middle of the new
+instruction.  Such a task sits in ordinary kernel or module text with
+rcu_tramp_nesting == 0, and can only have got there via an irq-exit
+preemption.
 
-No functional change.
+Add kprobe_in_optimized_region(), a lockless and conservative form of
+get_optimized_kprobe() that reports whether any registered kprobe lies
+within MAX_OPTIMIZED_LENGTH before the given address regardless of its
+optimization state, and have rcu_tasks_ip_in_trampoline() consult it so
+that a task interrupted there keeps holding off the Tasks RCU grace
+period once preemption becomes a quiescent state.
 
 Assisted-by: LLM
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- arch/x86/xen/enlighten_pv.c      |  2 +-
- include/linux/irq-entry-common.h | 12 ++++++------
- kernel/entry/common.c            |  6 +++---
- 3 files changed, 10 insertions(+), 10 deletions(-)
+ include/linux/kprobes.h  |  8 +++++++-
+ include/linux/rcupdate.h |  4 +++-
+ kernel/kprobes.c         | 24 ++++++++++++++++++++++++
+ kernel/rcu/tasks.h       |  6 ++++++
+ 4 files changed, 40 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 2c64b388f616..3d85035f5624 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -739,7 +739,7 @@ __visible noinstr void xen_pv_evtchn_do_upcall(struct pt_regs *regs)
+diff --git a/include/linux/kprobes.h b/include/linux/kprobes.h
+index e6de7ae55bda..74cc48c04417 100644
+--- a/include/linux/kprobes.h
++++ b/include/linux/kprobes.h
+@@ -530,11 +530,17 @@ static inline bool is_kprobe_insn_slot(unsigned long addr)
+ }
+ #endif /* !CONFIG_KPROBES */
  
- 	inhcall = get_and_clear_inhcall();
- 	if (inhcall && !WARN_ON_ONCE(state.exit_rcu)) {
--		irqentry_exit_cond_resched();
-+		irqentry_exit_cond_resched(regs);
- 		instrumentation_end();
- 		restore_inhcall(inhcall);
- 	} else {
-diff --git a/include/linux/irq-entry-common.h b/include/linux/irq-entry-common.h
-index 8da571622000..fc04725ae46b 100644
---- a/include/linux/irq-entry-common.h
-+++ b/include/linux/irq-entry-common.h
-@@ -348,21 +348,21 @@ typedef struct irqentry_state {
+-#ifndef CONFIG_OPTPROBES
++#ifdef CONFIG_OPTPROBES
++bool kprobe_in_optimized_region(unsigned long addr);
++#else /* !CONFIG_OPTPROBES */
+ static inline bool is_kprobe_optinsn_slot(unsigned long addr)
+ {
+ 	return false;
+ }
++static inline bool kprobe_in_optimized_region(unsigned long addr)
++{
++	return false;
++}
+ #endif /* !CONFIG_OPTPROBES */
+ 
+ #ifdef CONFIG_KRETPROBES
+diff --git a/include/linux/rcupdate.h b/include/linux/rcupdate.h
+index 0a408e36ea15..e9afbbb1b061 100644
+--- a/include/linux/rcupdate.h
++++ b/include/linux/rcupdate.h
+@@ -200,7 +200,9 @@ bool arch_rcu_tasks_ip_in_trampoline(unsigned long ip);
+  * cannot be preempted synchronously, only from an interrupt, so the irq-exit
+  * preemption path covers it by checking regs->ip with
+  * rcu_tasks_ip_in_trampoline() and holding the count elevated across
+- * preempt_schedule_irq() when it matches.
++ * preempt_schedule_irq() when it matches.  The same check covers the one
++ * non-trampoline user, kprobe jump optimization, which waits for tasks
++ * preempted inside the instruction bytes it is about to overwrite.
   *
-  * Conditional reschedule with additional sanity checks.
+  * Only current writes the count and only current (or an interrupt on the same
+  * CPU) reads it, so plain accesses suffice.
+diff --git a/kernel/kprobes.c b/kernel/kprobes.c
+index 6337da5cab9e..76f146edb0e5 100644
+--- a/kernel/kprobes.c
++++ b/kernel/kprobes.c
+@@ -511,6 +511,30 @@ static struct kprobe *get_optimized_kprobe(kprobe_opcode_t *addr)
+ 	return NULL;
+ }
+ 
++/**
++ * kprobe_in_optimized_region - Could @addr be inside bytes a jump-optimized
++ *	kprobe replaces?
++ * @addr: kernel text address, typically an interrupted instruction pointer
++ *
++ * kprobe_optimizer() relies on synchronize_rcu_tasks() to wait for tasks that
++ * were preempted on an instruction boundary inside the region about to be
++ * overwritten by the optimized jump; such a task must not report a Tasks RCU
++ * quiescent state when it is preempted (see rcu_tasks_ip_in_trampoline()).
++ * This is the lockless, conservative form of get_optimized_kprobe(): it does
++ * not care whether the kprobe found is, or ever will be, optimized.  May be
++ * called from any context with preemption disabled.
++ */
++bool kprobe_in_optimized_region(unsigned long addr)
++{
++	int i;
++
++	for (i = 1; i < MAX_OPTIMIZED_LENGTH / sizeof(kprobe_opcode_t); i++)
++		if (get_kprobe((kprobe_opcode_t *)addr - i))
++			return true;
++	return false;
++}
++NOKPROBE_SYMBOL(kprobe_in_optimized_region);
++
+ /* Optimization staging list, protected by 'kprobe_mutex' */
+ static LIST_HEAD(optimizing_list);
+ static LIST_HEAD(unoptimizing_list);
+diff --git a/kernel/rcu/tasks.h b/kernel/rcu/tasks.h
+index a801ec4a951b..a55dc2a20fb7 100644
+--- a/kernel/rcu/tasks.h
++++ b/kernel/rcu/tasks.h
+@@ -1114,6 +1114,9 @@ bool __weak arch_rcu_tasks_ip_in_trampoline(unsigned long ip)
+  *    deliberately does not consult is_ftrace_trampoline() and friends: text
+  *    being torn down may already be unregistered there while a task still
+  *    stands on it;
++ *  - inside the bytes following a registered kprobe that jump optimization
++ *    may overwrite, which kprobe_optimizer() protects with
++ *    synchronize_rcu_tasks();
+  *  - in core text the architecture flags via arch_rcu_tasks_ip_in_trampoline().
+  *
+  * A false positive only defers the quiescent state to the task's next
+@@ -1121,6 +1124,9 @@ bool __weak arch_rcu_tasks_ip_in_trampoline(unsigned long ip)
   */
--void raw_irqentry_exit_cond_resched(void);
-+void raw_irqentry_exit_cond_resched(struct pt_regs *regs);
- 
- #ifdef CONFIG_PREEMPT_DYNAMIC
- #if defined(CONFIG_HAVE_PREEMPT_DYNAMIC_CALL)
- #define irqentry_exit_cond_resched_dynamic_enabled	raw_irqentry_exit_cond_resched
- #define irqentry_exit_cond_resched_dynamic_disabled	NULL
- DECLARE_STATIC_CALL(irqentry_exit_cond_resched, raw_irqentry_exit_cond_resched);
--#define irqentry_exit_cond_resched()	static_call(irqentry_exit_cond_resched)()
-+#define irqentry_exit_cond_resched(regs)	static_call(irqentry_exit_cond_resched)(regs)
- #elif defined(CONFIG_HAVE_PREEMPT_DYNAMIC_KEY)
- DECLARE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
--void dynamic_irqentry_exit_cond_resched(void);
--#define irqentry_exit_cond_resched()	dynamic_irqentry_exit_cond_resched()
-+void dynamic_irqentry_exit_cond_resched(struct pt_regs *regs);
-+#define irqentry_exit_cond_resched(regs)	dynamic_irqentry_exit_cond_resched(regs)
- #endif
- #else /* CONFIG_PREEMPT_DYNAMIC */
--#define irqentry_exit_cond_resched()	raw_irqentry_exit_cond_resched()
-+#define irqentry_exit_cond_resched(regs)	raw_irqentry_exit_cond_resched(regs)
- #endif /* CONFIG_PREEMPT_DYNAMIC */
- 
- /**
-@@ -467,7 +467,7 @@ static inline void irqentry_exit_to_kernel_mode_preempt(struct pt_regs *regs,
- 		return;
- 
- 	if (IS_ENABLED(CONFIG_PREEMPTION))
--		irqentry_exit_cond_resched();
-+		irqentry_exit_cond_resched(regs);
- }
- 
- /**
-diff --git a/kernel/entry/common.c b/kernel/entry/common.c
-index e3d381fd3d25..e4acd50bd81a 100644
---- a/kernel/entry/common.c
-+++ b/kernel/entry/common.c
-@@ -134,7 +134,7 @@ static inline bool arch_irqentry_exit_need_resched(void);
- static inline bool arch_irqentry_exit_need_resched(void) { return true; }
- #endif
- 
--void raw_irqentry_exit_cond_resched(void)
-+void raw_irqentry_exit_cond_resched(struct pt_regs *regs)
+ bool rcu_tasks_ip_in_trampoline(unsigned long ip)
  {
- 	if (!preempt_count()) {
- 		/* Sanity check RCU and thread stack */
-@@ -150,11 +150,11 @@ void raw_irqentry_exit_cond_resched(void)
- DEFINE_STATIC_CALL(irqentry_exit_cond_resched, raw_irqentry_exit_cond_resched);
- #elif defined(CONFIG_HAVE_PREEMPT_DYNAMIC_KEY)
- DEFINE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
--void dynamic_irqentry_exit_cond_resched(void)
-+void dynamic_irqentry_exit_cond_resched(struct pt_regs *regs)
- {
- 	if (!static_branch_unlikely(&sk_dynamic_irqentry_exit_cond_resched))
- 		return;
--	raw_irqentry_exit_cond_resched();
-+	raw_irqentry_exit_cond_resched(regs);
- }
- #endif
- #endif
++	if (kprobe_in_optimized_region(ip))
++		return true;
++
+ 	if (core_kernel_text(ip))
+ 		return arch_rcu_tasks_ip_in_trampoline(ip);
+ 	return !is_module_text_address(ip);
 
 -- 
 2.55.0
