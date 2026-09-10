@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0139BC79F9F
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 12:53:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1414594.1644340 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD3EBC79F9F
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 12:57:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1414644.1644396 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4eH9-0000X0-Kq; Thu, 10 Sep 2026 12:53:11 +0000
+	id 1x4eLb-0001nF-Ms; Thu, 10 Sep 2026 12:57:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1414594.1644340; Thu, 10 Sep 2026 12:53:11 +0000
+Received: by outflank-mailman (output) from mailman id 1414644.1644396; Thu, 10 Sep 2026 12:57:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4eH9-0000Wt-HX; Thu, 10 Sep 2026 12:53:11 +0000
-Received: by outflank-mailman (input) for mailman id 1414594;
- Thu, 10 Sep 2026 12:53:10 +0000
+	id 1x4eLb-0001n8-Jb; Thu, 10 Sep 2026 12:57:47 +0000
+Received: by outflank-mailman (input) for mailman id 1414644;
+ Thu, 10 Sep 2026 12:57:46 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x4eH8-0000Wn-0a
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 12:53:10 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x4eLa-0001n2-Lk
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 12:57:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4eH7-00AnLu-4q
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 14:53:09 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x4eLa-002i4Q-2O
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 14:57:46 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa2a820-bab6-0a2a0a5309dd-0a2a45049dcc-36
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 14:53:09 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa2a939-8faa-0a2a0a5109dd-0a2a4506d836-38
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 14:57:46 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa2a834-b57f-0a2a45040019-d155dd33c90a-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 14:53:08 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-48441fa5c37so4973741f8f.3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 05:53:08 -0700 (PDT)
+ id 6aa2a949-195a-0a2a45060019-d155dd31e8b6-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 14:57:46 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-486e70f2457so158273f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 05:57:45 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-485885be01bsm49092335f8f.31.2026.09.10.05.53.07
+ ffacd0b85a97d-485aa2c9acasm15171542f8f.36.2026.09.10.05.57.43
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Sep 2026 05:53:08 -0700 (PDT)
+ Thu, 10 Sep 2026 05:57:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,64 +55,68 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789044788; x=1789649588; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1789045065; x=1789649865; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=3OZQiX16Un81CpdtvuHndGBWmAvi5bEUyfkFhTR+Kig=;
-        b=YSedXQfGJj2Uo2Bj++/cchpAGNrZXcD0RtDVZ6FPzh5Fz5S6pOCWawOFc7UspXudHe
-         sExSnvNzu4KclgobVi8r36v0wFizsr5dPE1moYvKI56e11pAe+JgXnTDA5WBPP6/da+c
-         dCSCH4sfTaRtx8LnPdwMfDNBq9NktUWzaSCZucR7UFRjM0mYW61rcl1FQyMQeESk26bB
-         UDTvNCxZwMjnVo8iOVVt6XO+LaTtvSwkTwWNXxo23iXXY4y8hQ9rnSBiQXg6PjWrFKCD
-         CQfh16YW1NH29a7IqXRDfxuw8wQcB/ze8dar5sjzHLYPcoG2dI0zlOTqgznnHAQs+eyY
-         IRBQ==
+        bh=VnB6m+As0X/AvYGSKFo+NvntiLQqCpYe6s61xqPX97M=;
+        b=THXnBbtF5TfqBNag2jsW/8uCxBb33ylDuhKJm4p2tyjGnfLUkhEhKw2niG/SMO3CPa
+         MqGP5tjDRuHdNHWEM9h3VA1KMcfKwKBgGgwsDNDJPiYo0bLTCiyizSm+m+o/RwvRGyxr
+         bNUvK6JPa7zFGzdlnoX//1AXrQGqAIclBkB256enkm/jEnGrUcXMRE/EjD+5VWjnqmXC
+         xHhdp5RAVB6p1GFS1NPGEVa72VxMQoflmPpFtoymQ2WEUiUoazESM75Snt+HhkgGhgqt
+         TQ+/jPtC11TsR5qO7vh8Y5+6/acLbhNm+AY1dcnQT6htv09GILOK49iJ6Amk6JL42YTo
+         JiGw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789044788; x=1789649588;
+        d=1e100.net; s=20251104; t=1789045065; x=1789649865;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=3OZQiX16Un81CpdtvuHndGBWmAvi5bEUyfkFhTR+Kig=;
-        b=NEA9NU6iA8fxnbGvsYVQiXXI4sFTyhPQf+B1wdfXBye6k4ldkPQbltItDT+t6uDhi4
-         RY1DmTG0ooFekWM9R+5yYmC53FY0M3y33frPZ5UcUQwW2Fzg3NqYrodeMCu2eMFeLAa2
-         JYVFnYQnkgon+LWcz3awyA8g5ZVHpGovt4cyKAzSEGFSYhDg52B0vlfOIUFFp480QC2G
-         zy8ZY434yAeVGpDAaPa5M1h7K0HvqFVYIjmTuqSZDqQ1SyKR5ureN0i5b1izaY0cm2i1
-         0BL1xLp9OvWwaohnRkXoi9ZiCBFWwe2Kc92su9Za4E71VR5HAa70mrPm4KY947Z0fCIV
-         /hjQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxWi9WJHvrgx6DVnV+iySOsEsjQBH1yaHheZQ3tAJ8xTfBP2BHggCfdQZrf5IKGVjN5Y9IjHP8krV4=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kyKrQyA8Bn/Hn56YnleU7tM8xQrMr6C2n4DkAqUzsFVljOiCjw
-	E14Cgbw2KUsKM2969et4HG3b4CgD4RFcEN/HUGEyo6NSq1PtHkqXO7jJyiUe9RkFFA==
-X-Gm-Gg: AYBFou2SZVXySCxEez2s7jK7tYjGbynbXSxqMdBlV0IYfiMAOSgTq4vjdavYfj6b4dD
-	tpTmNpZHZ4gqVzqCG+OlpX8TCTwDClwG59Nqxo7fN5yHA3ak454ofspNmYbwiyCVLSDk81oPh4+
-	blj7iwls1RLiILYm0LUTbI3UoCp6wXXwbMKbE1q8IXfCbASSLBfAnl5lfPPdeMpGlD0Nr1MfNNR
-	QvnEHAeq1f+YoPq+JqU9cFicssRjbKZZKx4nvxLt4dtXoxmYNwsfMuNaLho9WabP+yUKTrVigO7
-	BuLKICubxDFrvAv1qaAUioEHpthKTfv6RVIQPyFd16T4BRDILnaE50ERmf8xetYsCACNtUZUXT6
-	8CM/94nUgEnEB7tvTGGHrREvc7ja5y75YNkZulhIU6o3kHNEdgqZzBSaZBZhx2SgbFEXD93sns8
-	9tgnwI+2mu87jtmy4W6bECXOJfONdCrHYtJtD13BYk5B4z5JKJ+Y+dVxegEyZ1M8kju7TcVjhCS
-	G/AKv/DSgCrYtMb3Jd/qRMGJODGeGc9gbCpnffx3bLq1gvc2Laja5tzDxoGbhsW
-X-Received: by 2002:a5d:588b:0:b0:485:ac96:7263 with SMTP id ffacd0b85a97d-485ac9673b3mr10591953f8f.12.1789044788381;
-        Thu, 10 Sep 2026 05:53:08 -0700 (PDT)
-Message-ID: <e1d611bc-115d-4050-89c9-9781e9900ea1@suse.com>
-Date: Thu, 10 Sep 2026 14:53:07 +0200
+        bh=VnB6m+As0X/AvYGSKFo+NvntiLQqCpYe6s61xqPX97M=;
+        b=oEXeVOW5V6sc2KJ+yH+1lEDeC4cTke6P2KzyL14dB2KDDh9J1bscYoVnngK3IK3qzl
+         lDpOZlT6oAQfqWocj09DE8yuaStln10sndIHGYoVSl15TX1SnaEIFrysQ55cgnqEJyom
+         EfDPPvhmdrW2JOxmYC6irVrMZZmI97FKuqpDlie1CcDfTnmxbgmtyPPoJeeA3xHMFysH
+         pOqKbErtZvFHf+RuQSKYTqF6+cFshMsGdK8LvZY9FKh8w8REwM5pw41e62d9eSZs7zyR
+         HdcNUDaJFUe67cR25GKjznWlo6Kf0ZVmnMVaUPX5LcST0SFM7N1LLP3Q7O7UVPy6COjG
+         g8ZQ==
+X-Forwarded-Encrypted: i=1; AKwUvByvNuENVkVCsDGZkTJxMdOHHJ1QKLlDeNVvLNQ5PKVqrSStERORMDTY4vEujqVjGdTdtFv+GbR3f8U=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kBgRhusk4I4u7VpqISd9D6wYg51cQwW0k3meiOXyqtBeWR8zSh
+	+wXDk0RFk5q1UWJ0zds42+J18aKzha+UBJHmGFdFUkR3LFsQjIIQnCzT5QJLODDFkgtRfNeNUg6
+	rYY257g==
+X-Gm-Gg: AYBFou198VKQKkStpRe137sc2Gewyuu9SKjBp2YFIionydicnmgka8CiW6uN21Z9ZIH
+	ThxSBtRXIzVFHRHPOU3tSeRzo5t0CDmsAcXUMVREShJ9gKAqJ7oEMRPp3OhFo4dvp7dXVn8dqA/
+	m5ldhfgWsFVAaeeVhP9edpL27xmXJwq5I05cFpeK5qTdRIuImrME1o6xMPPP1kEAZ+WkF/hF2Jy
+	GAHBPYGMNOU+VbsbYWWiVvgV5TtWra7bRlsJjDs5kSNcQVc5PIJvWSnU9q15H2s0PqCQrjJlwC7
+	hMRtF3I5RyNRKgC8lfzw03fVcSwHGCDy0iHTy14BoeIH7hxOyyZjcTQGagl/69LQ1R86yTbGX7w
+	pV5LAa5cHMD9LL71rMulSecQN02lv+Lb3zI6h/zrcgiNMJuL6ea8ag3IxYYFG8XVY98HNzrIG+l
+	4qPHWqnm9YU3mDRsA00N7K1/iG+I1afoX5EG72EfWBvCw26etXdN+0oxFFS7oLHKmpQsEkzc9Pm
+	P/4j882m68e1P7AoGE2z9ASGMo60huKNPIfhtPmz2cnZKpMaK7ndRDUXr1XGkw=
+X-Received: by 2002:a05:6000:2311:b0:485:8bc6:3caa with SMTP id ffacd0b85a97d-4858bc63de5mr36335441f8f.16.1789045065484;
+        Thu, 10 Sep 2026 05:57:45 -0700 (PDT)
+Message-ID: <7731e7b5-d5cb-4ba2-a53c-06b5ca019ccf@suse.com>
+Date: Thu, 10 Sep 2026 14:57:43 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 16/20] xen/riscv: implement IRQ routing for device
- passthrough
+Subject: Re: [PATCH v2 10/39] xen/riscv: build the target hart index via
+ aplic_hart_field()
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
  Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
  Alistair Francis <alistair.francis@wdc.com>,
  Connor Davis <connojdavis@gmail.com>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
-References: <cover.1788876411.git.oleksii.kurochko@gmail.com>
- <afef58245a58f4084e38ea1d9880282a8e8beeef.1788876411.git.oleksii.kurochko@gmail.com>
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <3c7418d64a730ec5e4b2cfd0ecfbbbc6fe0bf7d8.1787838835.git.oleksii.kurochko@gmail.com>
+ <a7935767-97f3-46b6-a737-b11fa6dcfd33@suse.com>
+ <487a7efa-e83d-4ae2-8f39-33483161a64d@gmail.com>
+ <9f2245d8-faef-4608-a179-b8e942fdfc1d@suse.com>
+ <744f17cb-de7b-499a-83cb-9f0a122a4605@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -138,142 +142,90 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <afef58245a58f4084e38ea1d9880282a8e8beeef.1788876411.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <744f17cb-de7b-499a-83cb-9f0a122a4605@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1789044788-C20D5B50-51A4FEBD/0/0
+X-purgate-ID: tlsNG-16d1c6/1789045066-1FACA77B-36F7352B/0/0
 X-purgate-type: clean
-X-purgate-size: 4035
+X-purgate-size: 3533
 
-On 09.09.2026 17:07, Oleksii Kurochko wrote:
-> --- a/xen/arch/arm/irq.c
-> +++ b/xen/arch/arm/irq.c
-> @@ -205,7 +205,7 @@ void __init init_IRQ(void)
->  static inline struct irq_guest *irq_get_guest_info(struct irq_desc *desc)
->  {
->      ASSERT(spin_is_locked(&desc->lock));
-> -    ASSERT(test_bit(_IRQ_GUEST, &desc->status));
-> +    ASSERT(desc->status & IRQ_GUEST);
->      ASSERT(desc->action != NULL);
->  
->      return desc->action->dev_id;
+On 10.09.2026 14:44, Oleksii Kurochko wrote:
+> 
+> 
+> On 9/10/26 1:23 PM, Jan Beulich wrote:
+>> On 10.09.2026 12:59, Oleksii Kurochko wrote:
+>>> On 9/9/26 4:52 PM, Jan Beulich wrote:
+>>>> On 27.08.2026 17:20, Oleksii Kurochko wrote:
+>>>>> @@ -340,27 +338,11 @@ static void cf_check aplic_set_irq_affinity(struct irq_desc *desc, const cpumask
+>>>>>    
+>>>>>        ASSERT(spin_is_locked(&desc->lock));
+>>>>>    
+>>>>> -    cpu = cpuid_to_hartid(aplic_get_cpu_from_mask(mask));
+>>>>> -    hhxw = imsic->group_index_bits;
+>>>>> -    lhxw = imsic->hart_index_bits;
+>>>>> -    /*
+>>>>> -     * Although this variable is used only once in the calculation of
+>>>>> -     * group_index, and it might seem that hhxs could be defined as:
+>>>>> -     *   hhxs = imsic->group_index_shift - IMSIC_MMIO_PAGE_SHIFT;
+>>>>> -     * and then the addition of IMSIC_MMIO_PAGE_SHIFT could be omitted
+>>>>> -     * when calculating the group index.
+>>>>> -     * It was done intentionally this way to follow the formula from
+>>>>> -     * the AIA specification for calculating the MSI address.
+>>>>> -     */
+>>>>> -    hhxs = imsic->group_index_shift - IMSIC_MMIO_PAGE_SHIFT * 2;
+>>>>> -    base_ppn = imsic->msi[cpu].base_addr >> IMSIC_MMIO_PAGE_SHIFT;
+>>>>> -
+>>>>> -    /* Update hart and EEID in the target register */
+>>>>> -    group_index = (base_ppn >> (hhxs + IMSIC_MMIO_PAGE_SHIFT)) &
+>>>>> -                  (BIT(hhxw, UL) - 1);
+>>>>> -    value = desc->irq;
+>>>>
+>>>> Hmm, only after sending the ack I noticed that there's no masking here, ...
+>>>>
+>>>>> -    value |= cpu << APLIC_TARGET_HART_IDX_SHIFT;
+>>>>> -    value |= group_index << (lhxw + APLIC_TARGET_HART_IDX_SHIFT);
+>>>>> +    cpu = aplic_get_cpu_from_mask(mask);
+>>>>> +
+>>>>> +    /* Update hart index and EIID in the target register */
+>>>>> +    value = MASK_INSR(aplic_hart_field(cpu), APLIC_TARGET_HART_IDX) |
+>>>>> +            (desc->irq & APLIC_TARGET_EIID);
+>>>>
+>>>> ... but there is masking here. Chopping off bits doesn't look as if it can
+>>>> lead to anything good. What's the deal here?
+>>>
+>>> The mask is a no-op: desc->irq < NR_IRQS (1024) always fits the 11-bit
+>>> EIID field, so I'll drop it and add a BUILD_BUG_ON() instead.
+>>>
+>>> Would it be better to:
+>>>
+>>> +    /* desc->irq < NR_IRQS, so it always fits the EIID field */
+>>> +    BUILD_BUG_ON(NR_IRQS - 1 > APLIC_TARGET_EIID);
+>>
+>> If the question is whether to prefer BUILD_BUG_ON() over BUG_ON(), then:
+>> Yes please. However, APLIC_TARGET_EIID is a mask (despite its name not
+>> indicating that), which only happens to start at bit 0. This kind of
+>> assumption would better be avoided.
+> 
+> Then BUILD_BUG_on should be updated to:
+> 
+>   /* desc->irq < NR_IRQS, so it always fits the EIID field */
+>      BUILD_BUG_ON(NR_IRQS - 1 > MASK_EXTR(~0U, APLIC_TARGET_EIID));
+> 
+> 
+>>
+>> This raises another question though: No matter how big a RISC-V system
+>> is, it can only ever have 1k IRQs? How does that work with a single
+>> MSI-X device having up to 2k MSIs?
+> 
+> Device MSIs never pass through the APLIC. They are written straight into 
+> an IMSIC interrupt file. The ID space belongs to each file, so each hart 
+> has up to 2047 IDs (IMSIC_MAX_ID).
+> 
+> 1k it is limitation for wired interrupts (which could be delivered in 
+> MSI mode where APLIC + IMSIC is needed) which are going through APLIC.
 
-Why did an Arm change slip into a RISC-V patch?
-
-> --- a/xen/arch/riscv/aplic.c
-> +++ b/xen/arch/riscv/aplic.c
-> @@ -325,9 +325,40 @@ static const hw_irq_controller aplic_xen_irq_type = {
->      .set_affinity = aplic_set_irq_affinity,
->  };
->  
-> +static unsigned int cf_check aplic_guest_irq_startup(struct irq_desc *desc)
-> +{
-> +    BUG_ON("unimplemented");
-> +}
-> +
-> +/*
-> + * Shared by ->shutdown(), ->enable(), ->disable() and ->end(), which have
-> + * no state.
-> + */
-> +static void cf_check aplic_guest_irq_stub(struct irq_desc *desc)
-> +{
-> +    BUG_ON("unimplemented");
-> +}
-> +
-> +static void cf_check aplic_guest_set_irq_affinity(struct irq_desc *desc,
-> +                                                  const cpumask_t *mask)
-> +{
-> +    BUG_ON("unimplemented");
-> +}
-> +
-> +static const hw_irq_controller aplic_guest = {
-> +    .typename     = "aplic",
-
-This is indistinguishable from aplic_xen_irq_type. Naming of both variables
-also isn't consistent
-
-> --- a/xen/arch/riscv/include/asm/intc.h
-> +++ b/xen/arch/riscv/include/asm/intc.h
-> @@ -15,6 +15,7 @@ enum intc_variant {
->  };
->  
->  struct cpu_user_regs;
-> +struct domain;
->  struct irq_desc;
->  struct kernel_info;
->  struct vcpu;
-
-Why is this suddenly necessary? There are ...
-
-> @@ -76,10 +82,13 @@ void register_intc_ops(const struct intc_hw_init_ops *init_ops);
->  void intc_init(void);
->  
->  void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority);
-> +int intc_route_irq_to_guest(struct irq_desc *desc, unsigned int priority);
->  
->  void intc_handle_external_irqs(struct cpu_user_regs *regs);
->  
->  int domain_vintc_init(struct domain *d);
->  void domain_vintc_deinit(struct domain *d);
->  
-> +int vintc_reserve_virq(const struct domain *d, unsigned int virq);
-
-... existing uses of struct domain already, immediately ahead of this added
-line.
-
-> @@ -78,6 +82,22 @@ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority)
->      intc_set_irq_priority(desc, priority);
->  }
->  
-> +int intc_route_irq_to_guest(struct irq_desc *desc,
-> +                            unsigned int priority)
-> +{
-> +    ASSERT(spin_is_locked(&desc->lock));
-> +
-> +    ASSERT(intc_hw_ops->guest_irq_type);
-> +
-> +    desc->handler = intc_hw_ops->guest_irq_type;
-> +    __set_bit(_IRQ_GUEST, &desc->status);
-
-The revlog says you replaced all of these bitops.
-
-> @@ -227,3 +251,240 @@ void do_IRQ(struct cpu_user_regs *regs, unsigned int irq)
->      spin_unlock(&desc->lock);
->      irq_exit();
->  }
-> +
-> +static struct irq_guest *irq_get_guest_info(struct irq_desc *desc)
-> +{
-> +    ASSERT(spin_is_locked(&desc->lock));
-> +    ASSERT(test_bit(_IRQ_GUEST, &desc->status));
-
-Same here. And more elsewhere.
-
-> +/* Route an IRQ to a specific guest */
-> +int route_irq_to_guest(struct domain *d, unsigned int virq,
-> +                       unsigned int irq, const char *devname)
-> +{
-> +    struct irq_guest *info;
-> +    struct irq_desc *desc = irq_to_desc(irq);
-> +    unsigned long flags;
-> +    int retval = 0;
-> +
-> +    if ( d->is_dying )
-> +        return -EINVAL;
-> +
-> +    info = xvzalloc(struct irq_guest);
-> +    if ( !info )
-> +        return -ENOMEM;
-> +
-> +    info->d = d;
-> +    info->virq = virq;
-> +
-> +    info->action.dev_id = info;
-> +    info->action.name = devname;
-> +    /* The action is part of 'info', thus it is freed together with it. */
-> +    info->action.free_on_release = false;
-
-The revlog says this line doesn't exist anymore.
+But desc->irq and NR_IRQS have to represent both. Which then puts the
+BUILD_BUG_ON() above under question.
 
 Jan
 
