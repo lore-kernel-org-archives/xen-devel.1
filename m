@@ -4,47 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DA38C79FB9
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 09:56:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1414316.1644111 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DC922C79FB9
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 10:14:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1414330.1644131 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4bVx-0002mf-6Q; Thu, 10 Sep 2026 09:56:17 +0000
+	id 1x4bn8-0006dh-MW; Thu, 10 Sep 2026 10:14:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1414316.1644111; Thu, 10 Sep 2026 09:56:17 +0000
+Received: by outflank-mailman (output) from mailman id 1414330.1644131; Thu, 10 Sep 2026 10:14:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4bVx-0002mY-2n; Thu, 10 Sep 2026 09:56:17 +0000
-Received: by outflank-mailman (input) for mailman id 1414316;
- Thu, 10 Sep 2026 09:56:15 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x4bVv-0002mO-OV
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 09:56:15 +0000
+	id 1x4bn8-0006da-Js; Thu, 10 Sep 2026 10:14:02 +0000
+Received: by outflank-mailman (input) for mailman id 1414330;
+ Thu, 10 Sep 2026 10:00:29 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <zhangzheng@iscas.ac.cn>) id 1x4ba1-0004uR-6p
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 10:00:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4bVv-0008gj-4G
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 11:56:15 +0200
-Received: from [10.42.69.5] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a08abf05da000c4f3@swg.vates.tech>)
- id 6aa27eb2-2eae-0a2a0a5409dd-0a2a4505dec6-40
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:56:15 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a08abf05da000c4f3@swg.vates.tech>)
- id 6aa27ebe-4cb1-0a2a45050019-b9ff1c23abcb-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:56:15 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a08abf05da000c4f3.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 10 Sep 2026 09:56:09 +0000
-Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 8F3B2815B7;
- Thu, 10 Sep 2026 11:56:08 +0200 (CEST)
+ id 1x4ba0-0050qw-Jb
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 12:00:28 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <zhangzheng@iscas.ac.cn>)
+ id 6aa27fb7-2eae-0a2a0a5409dd-0a2a4508a918-24
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 12:00:25 +0200
+Received: from [159.226.251.21] (helo=cstnet.cn)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <zhangzheng@iscas.ac.cn>)
+ id 6aa27fb6-f659-0a2a45080019-9fe2fb15b84c-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 12:00:25 +0200
+Received: from iscas-ws (unknown [36.110.52.2])
+ by APP-01 (Coremail) with SMTP id qwCowAAX7O+0f6JqWJeYBw--.31307S2;
+ Thu, 10 Sep 2026 18:00:21 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,112 +48,242 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=lBEogv02IQ/RjcN//vVO5A/mS9eBVXtNGDN/7rY8ezQ=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=KJ+uthc36pPK3xmvvubFvbrIi/NfzBKTwu8fb308ZGRE8AQaRJL4ZMm1A3/ejx0oDxykUkKdU
- byaEjrfcWEM9EUmUlDdB1YccvOvCn3UVAWDnHa1sNEU4L2tV5egnBiMOz68u03XppDQ7dCH0FPg
- RHfhRsRHvzUylARAjY8l7Sf5tvWpRCIWskJx2zkZNBzvgJPWmO+7EmGMOcVMoSsRSGqIilSKyU3
- 6Dvuzs4tZVafnC7CPLWRR/XcAz0hf6xB+KRqNYE8PeYC+6oW5eQH6OvtlwE/2LoV3tko5x4UqY5
- r78z/0LAWP0kPgYNAIuWbJHfYrLkOvU2cFI7HqvJQf2A==
-X-Zone-Loop: 5e4246ad2319e4cdf9745d930b2b32f5a05e25efc3e6
-x-campaign-type: default
-x-transaction-id: e0aac2ce-5db8-4456-a809-042823fa4981
-x-swg-uid: 01-a848026c-4e75-4616-b468-d6f545542ba2
-X-Mailer: Sweego
-Message-ID:
- <1789034169.8631fc262581453bbf619ec5b2062170.1a08abf05da000c4f3@vates.tech>
-x-swg-bid: 1789034169.8631fc262581453bbf619ec5b2062170.1a08abf05da000c4f3
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Date: Thu, 10 Sep 2026 18:00:52 +0800
+From: Zhang Zheng <zhangzheng@iscas.ac.cn>
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2 2/6] automation/qtb: add jinja2 device trees for
+ riscv64 smoke tests
+Message-ID: <aqJ9MeHe7RWfZekS@iscas-ws>
+References: <1787823334.8631fc262581453bbf619ec5b2062170.1a04293255c000c4f3@vates.tech>
+ <1787823788.8631fc262581453bbf619ec5b2062170.1a0429a1050000c4f3@vates.tech>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v2 0/6] xen/riscv: fix boot on missing extensions and
- MMU setup bugs
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- xen-devel@lists.xenproject.org, Zheng Zhang <zhangzheng@iscas.ac.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <a857c595-53ca-4848-ba1a-e0cc5da572c0@suse.com>
-References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
- <a857c595-53ca-4848-ba1a-e0cc5da572c0@suse.com>
-Date: Thu, 10 Sep 2026 11:56:03 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789034168; l=2230;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=r2qWR2lokpGc90Yxnlr9AvFDQNPvU2bqxZYSTc5oCbU=;
- b=Ytz6+f8rhXm/2JYntkAuYvAHJJaK/MwnurGSSEuvp/l1ZIKQyoqbVbdc6xRfO5t87OFWyZ6lu
- gZHw7sTBvskANukekYrmlJWpd6Xp5SHEHimCmhXx+VqnHh8pUgp2XEw
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1789034169122
-X-purgate-ID: tlsNG-c201ff/1789034175-F4EA12A1-ABA62935/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2234
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <1787823788.8631fc262581453bbf619ec5b2062170.1a0429a1050000c4f3@vates.tech>
+X-CM-TRANSID:qwCowAAX7O+0f6JqWJeYBw--.31307S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3WFyDur4ftr1DWrW5GF17ZFb_yoWxGFyDpw
+	srG39ruFs7tr47Kws8Wa1UGrn7CanYkFWrur1UJryUAryqgr40vrnxKw48Cr4xKr1kJ342
+	vF4ruF1j9wsxJ3DanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUyFb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r1j6r4UM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_GcCE3s1l84ACjcxK6I
+	8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
+	64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r126r1DMcIj6I8E87Iv67AKxVW8Jr0_Cr
+	1UMcvjeVCFs4IE7xkEbVWUJVW8JwACjcxG0xvEwIxGrwCF04k20xvY0x0EwIxGrwCFx2Iq
+	xVCFs4IE7xkEbVWUJVW8JwC20s026c02F40E14v26r1j6r18MI8I3I0E7480Y4vE14v26r
+	106r1rMI8E67AF67kF1VAFwI0_JF0_Jw1lIxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AK
+	xVWUJVWUCwCI42IY6xIIjxv20xvEc7CjxVAFwI0_Jr0_Gr1lIxAIcVCF04k26cxKx2IYs7
+	xG6r1j6r1xMIIF0xvEx4A2jsIE14v26r1j6r4UMIIF0xvEx4A2jsIEc7CjxVAFwI0_Jr0_
+	GrUvcSsGvfC2KfnxnUUI43ZEXa7IU5ksqtUUUUU==
+X-Originating-IP: [36.110.52.2]
+X-CM-SenderInfo: x2kd0wx2kh0w46lvutnvoduhdfq/
+X-purgate-ID: tlsNG-c1860d/1789034425-CED4087B-D1700052/0/0
+X-purgate-type: clean
+X-purgate-size: 7629
 
-On 2026-09-10 11:47 +0200, Jan Beulich wrote:
-> On 10.09.2026 11:30, Baptiste Le Duc wrote:
-> > This series introduces bugs fixes that were found while bringing up CI
-> > support for the HiFive Premier P550 board with a basic smoke test. The
-> > board-support series itself will follow separately as it depends on
-> > PLIC/vPLIC and dom0less support that have not been upstreamed yet. This
-> > series carries only the independent fixes found along the way, none of them
-> > need the board-support series to apply.
-> > 
-> > This series:
-> >     1: Fix Svade/Svadu A/D bit handling
-> >     2: Set A/D bits in Xen's own page-table mappings under Svade
-> >     3: Make Svpbmt no longer a required extension
-> >     4: Make Zihintpause no longer a required extension
-> >     5: Flush speculatively cached Bare-mode TLB entries in turn_on_mmu()
-> >     6: Fix level_map_mask truncation on load_start
-> > 
-> > CI pipeline:
-> > https://gitlab.com/xen-project/people/baptleduc/xen/-/pipelines/2836284276
-> > 
-> > ---
-> > Changes since v1:
-> > - address ML comments
-> > - rename some patchs
-> > - add new patch-fix: 242dd1f890e4 ("xen/riscv: fix level_map_mask
-> >   truncation on load_start") discovered when working on Spacemit K3 support
-> > 
-> > To: Zheng Zhang <Zheng Zhang <zhangzheng@iscas.ac.cn>
-> > To: Alistair Francis <alistair.francis@wdc.com>
-> > To: Connor Davis <connojdavis@gmail.com>
-> > To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> > To: Andrew Cooper <andrew.cooper3@citrix.com>
-> > To: Anthony PERARD <anthony.perard@vates.tech>
-> > To: Michal Orzel <michal.orzel@amd.com>
-> > To: Jan Beulich <jbeulich@suse.com>
-> > To: Julien Grall <julien@xen.org>
-> > To: Roger Pau Monné <roger@xenproject.org>
-> > To: Stefano Stabellini <sstabellini@kernel.org>
-> > Cc: xen-devel@lists.xenproject.org
+On Thu, Aug 27, 2026 at 11:42:48AM +0200, Baptiste Le Duc wrote:
+> The dom0less RISC-V smoke tests need a host device tree describing the
+> platform (CPUs, APLIC/IMSIC, uart). It varies per machine (hart count, MMU
+> type), so a single static .dts cannot cover the test matrix.
 > 
-> Please can you adhere to patch submission rules? Patches are to be sent To:
-> the list, with relevant people Cc:-ed.
+> Add dts/qemu-host.dts.j2, a template of the QEMU virt platform in
+> aia=aplic-imsic mode: per-hart cpu/cpu-intc nodes, the M- and S-mode APLIC
+> and IMSIC pairs, CLINT and the ns16550a uart. It takes ncpus, mmu_type and
+> xen_bootargs as arguments.
 > 
-Sorry, first time I used b4 tool which automatically added the To: and I
-missed that during the dry-run... I'd like to do a .b4-config with the
-submission rules that could be added in the repo, do you think it could
-be a good idea?
-> Jan
+> Values QEMU hardcodes are set as named constants matching their source
+> symbols (QEMU_UART0_IRQ, QEMU_IRQCHIP_NUM_SOURCES, ...) rather than
+> open-coded, so a QEMU-side change is easy to trace.
 > 
+> The template is inert on its own: the generated dtb will be used in next
+> patch.
 > 
+> Assisted-by: Claude:claude-opus-5
+> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> ---
+>  .../scripts/qtb/riscv/dts/qemu-host.dts.j2    | 160 ++++++++++++++++++
+>  1 file changed, 160 insertions(+)
+>  create mode 100644 automation/scripts/qtb/riscv/dts/qemu-host.dts.j2
+> 
+> diff --git a/automation/scripts/qtb/riscv/dts/qemu-host.dts.j2 b/automation/scripts/qtb/riscv/dts/qemu-host.dts.j2
+> new file mode 100644
+> index 0000000000..13a8e983ce
+> --- /dev/null
+> +++ b/automation/scripts/qtb/riscv/dts/qemu-host.dts.j2
+> @@ -0,0 +1,160 @@
+> +/dts-v1/;
+> +
+> +{#-
+> + * Jinja2 QEMU "virt" platform device tree for Xen RISC-V tests.
+> + *
+> + * Interrupt controller: APLIC in MSI mode + IMSIC
+> + * (QEMU -M virt,aia=aplic-imsic).
+> + *
+> + * Rendered by xen_dt.py.
+> + *
+> + * Variables:
+> + *   ncpus        - number of physical harts                (int, >= 1)
+> + *   mmu_type     - Xen host MMU type, e.g. "sv39"          (string)
+> + *   xen_bootargs - Xen command line                        (string)
+> + *
+> + * Per-hart nodes are labelled cpu<i> / cpu<i>_intc and referenced with &label.
+> + *
+> + * No `aia-guests=N`, so no VS-mode guest files: IMSIC reg size is
+> + * ncpus * page size.
+> +-#}
+> +{#- Values QEMU hardcodes, need to be described to Xen -#}
+> +{%- set QEMU_TIMEBASE_FREQUENCY = 10000000 %}   {#- RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ -#}
+> +{%- set QEMU_IRQCHIP_NUM_SOURCES = 96 %}        {#- VIRT_IRQCHIP_NUM_SOURCES (virt.h) -#}
+> +{%- set QEMU_IRQCHIP_NUM_MSIS = 255 %}          {#- VIRT_IRQCHIP_NUM_MSIS -#}
+> +{%- set QEMU_UART_CLOCK_FREQUENCY = 3686400 %}  {#- create_fdt_uart() -#}
+> +{%- set QEMU_UART0_IRQ = 10 %}                  {#- UART0_IRQ -#}
+> +{%- set QEMU_IMSIC_PAGE_SZ = 0x1000 %}          {#- IMSIC_MMIO_PAGE_SZ -#}
+> +
+> +{%- set IRQ_TYPE_LEVEL_HIGH = 4 %}
+> +{%- set APLIC_IRQ_CELLS = 2 %}
+> +
+> +{%- set IRQ_M_SOFT = 3 %}
+> +{%- set IRQ_M_TIMER = 7 %}
+> +{%- set IRQ_S_EXT = 9 %}
+> +{%- set IRQ_M_EXT = 11 %}
+> +
+> +/ {
+> +    #address-cells = <0x02>;
+> +    #size-cells = <0x02>;
+> +    compatible = "riscv-virtio";
+> +    model = "riscv-virtio,qemu";
+> +
+> +    memory@80000000 {
+> +        device_type = "memory";
+> +        reg = <0x00 0x80000000 0x00 0x80000000>;
+> +    };
+> +
+> +    cpus {
+> +        #address-cells = <0x01>;
+> +        #size-cells = <0x00>;
+> +        timebase-frequency = <{{ QEMU_TIMEBASE_FREQUENCY }}>;
+> +{% for i in range(ncpus) %}
+> +        cpu{{ i }}: cpu@{{ i }} {
+> +            device_type = "cpu";
+> +            reg = <0x{{ '%x' % i }}>;
+> +            status = "okay";
+> +            compatible = "riscv";
+> +            riscv,cbop-block-size = <0x40>;
+> +            riscv,cboz-block-size = <0x40>;
+> +            riscv,cbom-block-size = <0x40>;
+> +            riscv,isa = "rv64imafdch_zicntr_zicsr_zifencei_zihintpause_zihpm_zba_zbb_zbs_smstateen_svpbmt_smaia_ssaia";
+> +            mmu-type = "riscv,{{ mmu_type }}";
+> +
+> +            cpu{{ i }}_intc: interrupt-controller@{{ i }} {
+> +                #interrupt-cells = <0x01>;
+> +                interrupt-controller;
+> +                compatible = "riscv,cpu-intc";
+> +            };
+> +        };
+> +{% endfor %}
+> +        cpu-map {
+> +
+> +            cluster0 {
+> +{% for i in range(ncpus) %}
+> +                core{{ i }} {
+> +                    cpu = <&cpu{{ i }}>;
+> +                };
+> +{% endfor %}
+> +            };
+> +        };
+> +    };
+> +
+> +    soc {
+> +        #address-cells = <0x02>;
+> +        #size-cells = <0x02>;
+> +        compatible = "simple-bus";
+> +        ranges;
+> +
+> +        serial@10000000 {
+> +            interrupts = <{{ QEMU_UART0_IRQ }} {{ IRQ_TYPE_LEVEL_HIGH }}>;
+> +            interrupt-parent = <&aplic_s>;
+> +            clock-frequency = <{{ QEMU_UART_CLOCK_FREQUENCY }}>;
+> +            reg = <0x00 0x10000000 0x00 0x100>;
+> +            compatible = "ns16550a";
+> +        };
+> +
+> +        aplic_s: aplic@d000000 {
+> +            riscv,num-sources = <{{ QEMU_IRQCHIP_NUM_SOURCES }}>;
+> +            reg = <0x00 0xd000000 0x00 0x8000>;
+> +            msi-parent = <&imsic_s>;
+> +            interrupt-controller;
+> +            #interrupt-cells = <{{ APLIC_IRQ_CELLS }}>;
+> +            compatible = "riscv,aplic";
+> +        };
+> +
+> +        aplic@c000000 {
+> +            riscv,delegate = <&aplic_s 0x01 {{ QEMU_IRQCHIP_NUM_SOURCES }}>;
+
+It seems like `riscv,delegate` was deprecated in QEMU 9.1 and has been removed in QEMU 11.0. The
+property defined by the APLIC device-tree binding is `riscv,delegation`.
+
+See:
+https://lists.gnu.org/archive/html/qemu-devel/2026-03/msg01459.html
+
+> +            riscv,children = <&aplic_s>;
+> +            riscv,num-sources = <{{ QEMU_IRQCHIP_NUM_SOURCES }}>;
+> +            reg = <0x00 0xc000000 0x00 0x8000>;
+> +            msi-parent = <&imsic_m>;
+> +            interrupt-controller;
+> +            #interrupt-cells = <{{ APLIC_IRQ_CELLS }}>;
+> +            compatible = "riscv,aplic";
+> +        };
+> +
+> +        imsic_s: imsics@28000000 {
+> +            riscv,num-ids = <{{ QEMU_IRQCHIP_NUM_MSIS }}>;
+> +            reg = <0x00 0x28000000 0x00 0x{{ '%x' % (ncpus * QEMU_IMSIC_PAGE_SZ) }}>;
+> +            interrupts-extended = <
+> +                {%- for i in range(ncpus) %}
+> +                    &cpu{{ i }}_intc {{ IRQ_S_EXT }}
+> +                {%- endfor %}
+> +            >;
+> +            msi-controller;
+> +            interrupt-controller;
+> +            #interrupt-cells = <0x00>;
+> +            compatible = "riscv,imsics";
+> +        };
+> +
+> +        imsic_m: imsics@24000000 {
+> +            riscv,num-ids = <{{ QEMU_IRQCHIP_NUM_MSIS }}>;
+> +            reg = <0x00 0x24000000 0x00 0x{{ '%x' % (ncpus * QEMU_IMSIC_PAGE_SZ) }}>;
+> +            interrupts-extended = <
+> +                {%- for i in range(ncpus) %}
+> +                    &cpu{{ i }}_intc {{ IRQ_M_EXT }}
+> +                {%- endfor %}
+> +            >;
+> +            msi-controller;
+> +            interrupt-controller;
+> +            #interrupt-cells = <0x00>;
+> +            compatible = "riscv,imsics";
+> +        };
+> +
+> +        clint@2000000 {
+> +            interrupts-extended = <
+> +                {%- for i in range(ncpus) %}
+> +                    &cpu{{ i }}_intc {{ IRQ_M_SOFT }} &cpu{{ i }}_intc {{ IRQ_M_TIMER }}
+> +                {%- endfor %}
+> +            >;
+> +            reg = <0x00 0x2000000 0x00 0x10000>;
+> +            compatible = "sifive,clint0", "riscv,clint0";
+> +        };
+> +    };
+> +
+> +    chosen {
+> +        stdout-path = "/soc/serial@10000000";
+> +        xen,xen-bootargs = "{{ xen_bootargs }}";
+> +    };
+> +};
 > 
 
+Zhang
 
 
