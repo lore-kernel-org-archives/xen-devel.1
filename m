@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 248EBC79F9F
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 09:48:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1414285.1644063 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22503C79F9F
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 09:52:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1414292.1644072 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4bNz-0008Ab-Lh; Thu, 10 Sep 2026 09:48:03 +0000
+	id 1x4bS2-0001YY-5e; Thu, 10 Sep 2026 09:52:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1414285.1644063; Thu, 10 Sep 2026 09:48:03 +0000
+Received: by outflank-mailman (output) from mailman id 1414292.1644072; Thu, 10 Sep 2026 09:52:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4bNz-0008AU-IX; Thu, 10 Sep 2026 09:48:03 +0000
-Received: by outflank-mailman (input) for mailman id 1414285;
- Thu, 10 Sep 2026 09:48:02 +0000
+	id 1x4bS2-0001YR-2q; Thu, 10 Sep 2026 09:52:14 +0000
+Received: by outflank-mailman (input) for mailman id 1414292;
+ Thu, 10 Sep 2026 09:52:12 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x4bNy-000899-Df
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 09:48:02 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1x4bS0-0001YL-UQ
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 09:52:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4bNx-0025Nl-Qe
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 11:48:01 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x4bS0-00AG8B-70
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 11:52:12 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa27cce-8faa-0a2a0a5109dd-0a2a450285ee-8
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:48:01 +0200
+ id 6aa27dca-e002-0a2a0a5209dd-0a2a45058ca4-6
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:52:12 +0200
 Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa27cd1-6ca4-0a2a45020019-d155802ce485-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:48:01 +0200
+ id 6aa27dcb-4cb1-0a2a45050019-d155802cd49b-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:52:12 +0200
 Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-49cca4ffdcfso56534765e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 02:48:01 -0700 (PDT)
+ 5b1f17b1804b1-49954b88fffso50180805e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 02:52:12 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49d26c06f04sm64243345e9.13.2026.09.10.02.48.00
+ ffacd0b85a97d-485958f1493sm38170192f8f.37.2026.09.10.02.52.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Sep 2026 02:48:00 -0700 (PDT)
+ Thu, 10 Sep 2026 02:52:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,61 +55,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789033681; x=1789638481; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1789033931; x=1789638731; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=dLXmqrgSVLlstBLicQkdZBAUJ+mHmKliLnE6FFI7R3E=;
-        b=Rk7gvoLDp7od5o2Ho3diCkOF1OSG5u0tTcICjxZ5iikOlaU9qwojf5f9SZ5V7m5kGi
-         /JbgHOEqdTiterYdPQ9LPDwwcKK5QbizH59hNur1iFG+RzLpq8nwdm++ZHfXPQWeIISr
-         j1rAkLpFfnKVawWP1+Ce4wBGRjdjyWBv5drDVWGPtk2sXHpzNplfrQHmm73nnHzvfkge
-         xokAiPPosRY3gqsYZ6B+9/KLKVP1YfREl272gjC1v5CQgAiXkmxtNcu3htDRyOq52XHt
-         kUsq3bH8J42ldgZpDgTT0S6g6+Kw3pq47PXAZ7GkUVfFo8CtKfZ3MdcdnU8jMunzfeIg
-         S5bQ==
+        bh=X3SFNLvQSoJtBjgqhOMA4Ch6yzscJjCRZhPApbgo4IE=;
+        b=eJQe54Pe3MaPzxWhvvH560Wl8g54wKiH20AuW2ZpZfYdDoeR8noSMeRnhcS71TBgHD
+         j8S3CMMdjp9jepdNMbcUcTcznoQQK241EfXZSW/bF872oYWvOzQAAnEIFjuynSTQLIxi
+         CeMmN74IX7+2O4iqm9DZkNPcoCZBCzKLzI3KMcKz74R/asiypDD/1Z2ZShJcI6WETVyw
+         8qvhnxYQiWdzx93BABxjDw2RRm4HDPz4ZGvkcU2zDdEofEQfVCsTRiEBgIEA/enIWh/Y
+         vGUczqnttEjBV5flnwOCBax9b+JaDsEAybdAsKvktO+nOvEUBzBpHJpOfQ7KrXkp1PRE
+         0L6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789033681; x=1789638481;
+        d=1e100.net; s=20251104; t=1789033931; x=1789638731;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=dLXmqrgSVLlstBLicQkdZBAUJ+mHmKliLnE6FFI7R3E=;
-        b=eFb4rlAPZUu0t3YDS+xHwcKrLe4rwBbSe2XekrpHurD6T8KwNoxcjPdtrdINoFppd3
-         rSDWc3qwNoKtVo37cFnu7VpAR8MZSixrKQga5RZwSV4UJJ2sNllKJtJXQnNkzlXxvYWk
-         LClak+LgcP8m2a35qPf/OjDOfJz6oukUvCqfaqYiARJz6n4rREanTnnPOrMbH9HC45A4
-         /19XA8fF26JSxWaafKoYnTtvgP9DJ60p3IKdSQMYtTEazKZvEaSNJH1TcDfhhlBIP61u
-         BLg6/7usYThH4UsdZsk7jXqx+2mWS8qKPG7wBPFzD3KIgSZVTYu6K3PWQ3tm7T5MfQmC
-         hOQQ==
-X-Gm-Message-State: AFuF++ljly1/4v7tC0jXR0Kl0+R4WkMcuIWSzWcDsA0H8wfD/dh4OgzW
-	o8cZyv9slpB7FR52IE/DkPANHzzsLuJ60fH/h0Rugo983yckzX/F5bmtqfCrt84lYZgwZHVb5RX
-	QlADYtw==
-X-Gm-Gg: AYBFou16ZSqmIOinkFAz/w0kjqNouN1Fhv7qlC8onoGSNDfPmXcQVLgaBjl5AgqdEJN
-	GeQk+CvQjsfIo386qqDNCfz8M5cEcg6dvYrnyt3/4fSuBx14YB4HrX/ON6pF5au0DDNhso6hI/n
-	m5UFkmoJ833tX+ociVIcC98DjUtusiMU5Z7QQ2fvbtScye5Krrrl7FQPUMhAMihgTW762xGdMwx
-	Jnf9A6xx/k5A+Cl9N8/YnZ/wUpWiv988h66P5Hhz7tNiQV/MaS6f7LMBjCGypZ/1YWALda7Mvw2
-	tVcxoC/MghjjAy5OiGDx87qPOMsvFe/uXys74HbvSI7g1W/heNY7R6gkihwTmuHk9SDigx877DF
-	4GkIr/Gvz2RITo3wiB/C13CSqapvRMNIddEI5inzANGy2xfdVWjJ4tyj+cMkbpb8aLFzNdUdcUM
-	3Pjp+cP5TuwOAfb5dxqCwmf5MCALcu5HCoR4IhmjRd4sL3TEQKq6zhi7pBQB3+tCLy0El9UWYLS
-	IH4gy7cXUk/IqWdJLJSgof2ajiOBl5ydRQLnu3KUxNHJo87ySfVTSmxy2tgbXc=
-X-Received: by 2002:a05:600c:4f12:b0:499:da8b:1476 with SMTP id 5b1f17b1804b1-49cf825a5bcmr425426845e9.14.1789033681231;
-        Thu, 10 Sep 2026 02:48:01 -0700 (PDT)
-Message-ID: <a857c595-53ca-4848-ba1a-e0cc5da572c0@suse.com>
-Date: Thu, 10 Sep 2026 11:47:59 +0200
+        bh=X3SFNLvQSoJtBjgqhOMA4Ch6yzscJjCRZhPApbgo4IE=;
+        b=aB0lZCdll2rPvqmOvMF4I8BHA7nPV6wAUZD+FezV30Nr+guTuEvQVre9kgvM7byZA0
+         Cr1qPsi/z/7zF9tdwpoJtRzvzGfUrmUJ0ST7PBRzSROtN4S8bGe1rT2py2PU3twDv3tA
+         bHMGMHs3MIuEslOLl4JBGyV+orJIjwyVz1y3LysP8th9fw1QECghY1Wi8E+08f0VOOV8
+         UOkNYHwu/YUmJUSbcUu07/ZirEbt9+yyKPdvN+xO+GCLDMlJ3orEX3Ba/CzJgxfR1iJN
+         DKskE+MdOs2mG+siCdcJso1/XHHahUImjOQP1gAW4F1tQg4uAjdWwZJUoSJFs1ZmenPq
+         Lk0Q==
+X-Gm-Message-State: AFuF++mYfZbmQ7ReTa4/yuZPfZh3FeKgTOFmLfOSEKKT6s217bXzXo9L
+	FcNl7QQNLd62BMrOcn+U58/Lof4mD7cFZbTt513Pg6Snd/rdAnrCC3ulg5ghHTJ8PA==
+X-Gm-Gg: AYBFou1gmWUTRzoDHbOo0+cJAhBe0Vy4aDiI92pwXGI0AbpXKnvxypwrUTSkGaB9vDB
+	t6dQrq2dpcZxax7c7uEeykVOA7xypUvZQoRNUk4G1IxAyUsoIda0PfSICqEbA8XiWsBpz/Mrk9/
+	G2xg3jAZUcghozO80I0uznOis13/0Di+LZa4ovrLAwY14GROeVG1xSBW18xu7IilF+DbNXIA5kc
+	FCjr9kq8cXmm0pFHarOhz658o4f4k8Z9lf3qml36GeLUQmKdTuv0m2OKLZiqQF8X2kEhEfbE/Y0
+	7+vE5SEvRMAidLZ5RT663+KxdqCgIzV5q54iK/+i1398g3yOMTkfam50MEEBzPZ84bYo3fUq6Lt
+	4YMAil4xIoL/8HFkXA6PBGsgqKV5r4ijEbGrbRaJmMKPxuY5E16/mFVpuOXdMHt2AqCbfHDafuD
+	r0lNAhNwDGGkjN+9JSIq2nbW0aKsInljATz1bnTcn1wbSDO8lf5YPRKS2cYXLyT1FRdncf2eZN4
+	+ejFCPGHTeswETOjT+vud0TPOn6mHAXejhVnsK4cOpNJr3bKRGk8kZOJJP0dZI=
+X-Received: by 2002:a05:600c:b93:b0:49d:17c5:8f7a with SMTP id 5b1f17b1804b1-49d17c58fa8mr175719285e9.18.1789033931576;
+        Thu, 10 Sep 2026 02:52:11 -0700 (PDT)
+Message-ID: <f51588b3-4100-4353-a35d-ac0780f2aab0@suse.com>
+Date: Thu, 10 Sep 2026 11:52:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 0/6] xen/riscv: fix boot on missing extensions and MMU
- setup bugs
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org, Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+Subject: Re: [PATCH 05/12] x86/crash: address Misra 2.1 rule violation
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Nicola Vetrini <nicola.vetrini@bugseng.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
+ Teddy Astie <teddy.astie@vates.tech>
+References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
+ <96de425a-29f7-4759-8466-b72bbe40b90b@suse.com>
+ <aqJhJO2FtkrJCabM@macbook.local>
+ <f17563f9-3a42-4002-afa0-b763e125dcd6@suse.com>
+ <aqJ4myv4_II75W5K@macbook.local>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,54 +132,38 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
+In-Reply-To: <aqJ4myv4_II75W5K@macbook.local>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1789033681-670B02AC-3D16F129/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 1849
+X-purgate-ID: tlsNG-c201ff/1789033932-71CA82A1-A8F500FD/0/0
+X-purgate-type: clean
+X-purgate-size: 1112
 
-On 10.09.2026 11:30, Baptiste Le Duc wrote:
-> This series introduces bugs fixes that were found while bringing up CI
-> support for the HiFive Premier P550 board with a basic smoke test. The
-> board-support series itself will follow separately as it depends on
-> PLIC/vPLIC and dom0less support that have not been upstreamed yet. This
-> series carries only the independent fixes found along the way, none of them
-> need the board-support series to apply.
+On 10.09.2026 11:30, Roger Pau Monné wrote:
+> On Thu, Sep 10, 2026 at 10:38:34AM +0200, Jan Beulich wrote:
+>> On 10.09.2026 09:49, Roger Pau Monné wrote:
+>>> On Fri, Aug 28, 2026 at 09:02:18AM +0200, Jan Beulich wrote:
+>>>> The use of unreachable(), when unreachability is visible to Eclair (and
+>>>> compilers), is deemed a violation. Drop the redundant statement.
+>>>
+>>> Urg, isn't that something that should be fixed in Eclair then?
+>>> Otherwise all the unreachable() calls in our codebase are likely to be
+>>> found by Eclair sooner or later, and will need to be removed.
+>>
+>> No, aiui most are covered by deviations. In particular ones in BUG() and
+>> ASSERT_UNREACHABLE().
 > 
-> This series:
->     1: Fix Svade/Svadu A/D bit handling
->     2: Set A/D bits in Xen's own page-table mappings under Svade
->     3: Make Svpbmt no longer a required extension
->     4: Make Zihintpause no longer a required extension
->     5: Flush speculatively cached Bare-mode TLB entries in turn_on_mmu()
->     6: Fix level_map_mask truncation on load_start
-> 
-> CI pipeline:
-> https://gitlab.com/xen-project/people/baptleduc/xen/-/pipelines/2836284276
-> 
-> ---
-> Changes since v1:
-> - address ML comments
-> - rename some patchs
-> - add new patch-fix: 242dd1f890e4 ("xen/riscv: fix level_map_mask
->   truncation on load_start") discovered when working on Spacemit K3 support
-> 
-> To: Zheng Zhang <Zheng Zhang <zhangzheng@iscas.ac.cn>
-> To: Alistair Francis <alistair.francis@wdc.com>
-> To: Connor Davis <connojdavis@gmail.com>
-> To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> To: Andrew Cooper <andrew.cooper3@citrix.com>
-> To: Anthony PERARD <anthony.perard@vates.tech>
-> To: Michal Orzel <michal.orzel@amd.com>
-> To: Jan Beulich <jbeulich@suse.com>
-> To: Julien Grall <julien@xen.org>
-> To: Roger Pau Monné <roger@xenproject.org>
-> To: Stefano Stabellini <sstabellini@kernel.org>
-> Cc: xen-devel@lists.xenproject.org
+> Shouldn't this be a deviation then also?
 
-Please can you adhere to patch submission rules? Patches are to be sent To:
-the list, with relevant people Cc:-ed.
+Maybe, just that I had no good idea how to express such a deviation (preferably
+without a SAF comment).
+
+>  Maybe it would be helpful if
+> the commit message states why this is handled differently from other
+> unreachable() instances then.
+
+I've added "..., , and the one here isn't covered by a deviation" to the first
+sentence. Will that suffice?
 
 Jan
 
