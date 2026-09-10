@@ -4,42 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B950EC79F9F
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 18:37:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415131.1644623 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23D63C79FBF
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 18:51:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1415148.1644634 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4je4-0001EY-67; Thu, 10 Sep 2026 18:37:12 +0000
+	id 1x4jrJ-0004K8-A3; Thu, 10 Sep 2026 18:50:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415131.1644623; Thu, 10 Sep 2026 18:37:12 +0000
+Received: by outflank-mailman (output) from mailman id 1415148.1644634; Thu, 10 Sep 2026 18:50:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4je4-0001ER-3V; Thu, 10 Sep 2026 18:37:12 +0000
-Received: by outflank-mailman (input) for mailman id 1415131;
- Thu, 10 Sep 2026 18:37:11 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <BATV+c28c88ced4143c0ac227+8418+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 1x4je1-0001At-P4
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 18:37:11 +0000
+	id 1x4jrJ-0004K1-69; Thu, 10 Sep 2026 18:50:53 +0000
+Received: by outflank-mailman (input) for mailman id 1415148;
+ Thu, 10 Sep 2026 18:50:52 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <josef@toxicpanda.com>) id 1x4jrI-0004Jv-3v
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 18:50:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4je0-003VvC-7p
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 20:37:08 +0200
-Received: from [10.42.69.8] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <BATV+c28c88ced4143c0ac227+8418+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6aa2f8b9-bab6-0a2a0a5309dd-0a2a4508c346-34
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:37:07 +0200
-Received: from [90.155.50.34] (helo=casper.infradead.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <BATV+c28c88ced4143c0ac227+8418+infradead.org+dwmw2@casper.srs.infradead.org>)
- id 6aa2f8d2-f659-0a2a45080019-5a9b3222c314-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:37:06 +0200
-Received: from [2001:8b0:10b:5:a10:bfc:a858:f6d3]
- (helo=u09cd745991455d.ant.amazon.com)
- by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
- id 1x4jdj-00000002wwG-35Wi; Thu, 10 Sep 2026 18:36:52 +0000
+ id 1x4jrH-001Y5I-A4
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 20:50:51 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <josef@toxicpanda.com>)
+ id 6aa2fbe6-2eae-0a2a0a5409dd-0a2a450b9c5c-26
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:50:51 +0200
+Received: from [209.85.222.178] (helo=mail-qk1-f178.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <josef@toxicpanda.com>)
+ id 6aa2fc09-b7e8-0a2a450b0019-d155deb2d178-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:50:50 +0200
+Received: by mail-qk1-f178.google.com with SMTP id
+ af79cd13be357-939d917fee3so120930485a.3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:50:50 -0700 (PDT)
+Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
+ [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
+ af79cd13be357-939e86b7424sm40754785a.32.2026.09.10.11.50.48
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 10 Sep 2026 11:50:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,211 +53,234 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:To:From:Subject:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
-	In-Reply-To:Date:To:From:Subject:Message-ID:Sender:Reply-To:Cc:
-	Content-Transfer-Encoding:Content-ID:Content-Description;
-	bh=wOS95Ra8vpgZqPPtuGigA2/jRdxnP7FegxOh9WR7HSk=; b=Na7DaqpOQpVs8/QFZ01yiPibu9
-	j0jxll2rBp9W+CxW3On84+Gp0ttYkZrEf+41K9VqQmyv2ncgjYUM27ph53mbamt3q1bA0lNqlPsbG
-	KFuCJ/MsLVuLdKH23azJcAR2zaD28qtIEtL4Iz1e9OSwZ07mjITENaTX8yWQ4mAvq6AafmmnRoV66
-	QCob0faL4ovWeBAvsGTPknmeuOH0yn9s7/dUSlWicfmGvdo2GuPp2FQGBc83+DnDqpv1/pOnhzCR7
-	/YhMsFdOvisPcRb5GnB5HjXGYdAQ7QnRdmI6kIrxEcYCBPu0d4AskIDTyyDlw1i9uF8JZs9NyiH1o
-	roJ4dWsQ==;
-Message-ID: <c9a6455eb88c24d4271b7a7c86f7a4e90799e40a.camel@infradead.org>
-Subject: Re: [PATCH v6 00/51] x86: Try to wrangle PV clocks vs. TSC
-From: David Woodhouse <dwmw2@infradead.org>
-To: Sean Christopherson <seanjc@google.com>, Kiryl Shutsemau
- <kas@kernel.org>,  Rick Edgecombe <rick.p.edgecombe@intel.com>, Paolo
- Bonzini <pbonzini@redhat.com>, "K. Y. Srinivasan"	 <kys@microsoft.com>,
- Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu	 <wei.liu@kernel.org>,
- Dexuan Cui <decui@microsoft.com>, Long Li	 <longli@microsoft.com>, Ajay
- Kaher <ajay.kaher@broadcom.com>, Alexey Makhalov	
- <alexey.makhalov@broadcom.com>, Jan Kiszka <jan.kiszka@siemens.com>, Dave
- Hansen <dave.hansen@linux.intel.com>, Andy Lutomirski <luto@kernel.org>,
- Peter Zijlstra	 <peterz@infradead.org>, Juergen Gross <jgross@suse.com>,
- Daniel Lezcano	 <daniel.lezcano@kernel.org>, Thomas Gleixner
- <tglx@kernel.org>, John Stultz	 <jstultz@google.com>, Vitaly Kuznetsov
- <vkuznets@redhat.com>, Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Boris Ostrovsky
- <boris.ostrovsky@oracle.com>, Stephen Boyd	 <sboyd@kernel.org>, Miroslav
- Lichvar <mlichvar@redhat.com>, x86@kernel.org, 	linux-coco@lists.linux.dev,
- kvm@vger.kernel.org, linux-hyperv@vger.kernel.org, 
-	virtualization@lists.linux.dev, linux-kernel@vger.kernel.org, 
-	xen-devel@lists.xenproject.org, Michael Kelley <mhklinux@outlook.com>, Tom
- Lendacky <thomas.lendacky@amd.com>, Nikunj A Dadhania <nikunj@amd.com>,
- Thomas Gleixner	 <tglx@linutronix.de>
-Date: Thu, 10 Sep 2026 19:36:22 +0100
-In-Reply-To: <aqLv9GwBNymyHs8q@google.com>
-References: <20260806233609.212337-1-seanjc@google.com>
-	 <aqLv9GwBNymyHs8q@google.com>
-Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
-	boundary="=-mC8wbvMi0aPBUSksNuNl"
-User-Agent: Evolution 3.60.3-0ubuntu1~ppa10~24.04 
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=toxicpanda.com; s=google; t=1789066249; x=1789671049; darn=lists.xenproject.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=04sGP5fC6+EWQ5zQqoL4aDa3rNDPdOaXISOWt+zm6Kw=;
+        b=sHi5l6vW/ws9gKot/0r+h96HKEKRNnJ70w/dCoaMPNqnNokjueYWVEo3tE4DvNT16r
+         NDWRp8l22MRiFCJZKzH+y2mGYcRWCl39J37cGRtLcVWB/Sow7CTy49DGyPL0nR6o+BV1
+         dtw9QzqocVCg49KwwNcXPNn6jQEW3cwLq/jlwuPOwvPMcxPgL5PEr8/EgvGGqcRlvNFw
+         buld7yyUP33wMtJoVIuT3rH7HMV3OGKETz186Rw4yu4wr80ZxR6LJVnG+4lwF8Ws1jQs
+         jB9tGk7ZB7j96myrxTI4d4X3jgR7apKtfUYvTnrTEmy3JyyVlrA6s9tW8QuoxNzerJva
+         l0Xg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789066249; x=1789671049;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=04sGP5fC6+EWQ5zQqoL4aDa3rNDPdOaXISOWt+zm6Kw=;
+        b=ZYb6oEsaIY/QVOcxQHwXJAtzZic7scY5JtV+rUhknkptiAM7j7Oiuq5QcGEtw6bqFu
+         C+RA4bysdcYo8/oKsPU+88FkYX0JN741pzSp7Y0aPDMTqjfbg4FteYy0Hr4rUy2VcONi
+         f7ZyvDu8w9FQedhJ54M8xVeNukraP1ITHPhq3gA2HyZ8qeYqLJ+r2t4WY0owKrAi7vV+
+         Mh8bs46ELl7Zy5ld9fvow23Ic9HQJjbuMkt4J62lZFMWZgqChO3QsFWNpQDzWUSjGlKj
+         wlVTVgPfd163FweUxtQukzb2C9pw6VgpQ0YFFdSE13CSXdWG0LYS6h0oKWD9Xtmz1ZtH
+         ubog==
+X-Forwarded-Encrypted: i=1; AKwUvBwcoDaffj2RfTNUgLIlF7OJQbt21eqz12+6oNDt7kgvj156km5hVMn3TdV+lEuSptd3uwyrav/wOaQ=@lists.xenproject.org
+X-Gm-Message-State: AFuF++muWBoGxeXveqXV9JaD76PXkkA0sDhav8HKp2ZymyB2cp/n6djX
+	Q1T8vXEWQrKVHWFNqSYSTzmF0rV0q8ZWUCx1xTh1Y3LJcsyXNcz5dXKkibfS2JgRod0=
+X-Gm-Gg: AYBFou2JhdCJlD71BGJZULpwG394iXY7VAPw0LNlMwIs/vEXufOLvCC1cWoZx1buqF7
+	7BSOzvKAJaOWr6JiIfUS+E0drLVz4kaO4Iykuf+aOJcTwj/iyKRHoBzsLK7KjT7FEdFOXXJ1B7d
+	oZHHX7A4HeuZhAprpO+nGXw6yMf2peCmCb1b726qHxCBjtbCkZDV7KDTvEJ2OJbhdJLEy3Fobqs
+	grrDfTSs/mjLhNfDwTK2zY7sSWSp+TWrdJS2GiVlKU785IaZRbXNDYuno2dRDUbaNIFgGxcQYd+
+	6yu9TxoDO5ctxeyxAoOytWDfIy1C7FC49b1QiIBxS7Hr8njIlVu1usssBQrgL/bOzBmVBfodHpS
+	QuOiB5RDvO6VMBnpT+6sw9alzkqkOOl1VuatPm7OdLOVgZqtoBGchXt0IqEDgwf7LGOT9fpLwuP
+	sRx5CsolOhayqPPFTUIp4f5ZD6vcGSBAjvUg4mdPashZF00RZBpquvl4R+qsmGgMSR8LLelswNj
+	K8oo8ZQk3VwFOXhdMCa629cZOA50d9t8HgAjsd8bDsmceBiCP2KEfGj
+X-Received: by 2002:a05:620a:454a:b0:939:8e05:27e0 with SMTP id af79cd13be357-939ea013111mr26869085a.1.1789066249021;
+        Thu, 10 Sep 2026 11:50:49 -0700 (PDT)
+From: Josef Bacik <josef@toxicpanda.com>
+Subject: [PATCH RFC 00/13] rcu-tasks: let preemption outside trampolines be
+ a quiescent state
+Date: Thu, 10 Sep 2026 18:50:23 +0000
+Message-Id: <20260910-b4-rcu-tasks-preempt-qs-v1-0-d4469f4cc101@toxicpanda.com>
 MIME-Version: 1.0
-X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
-X-purgate-ID: tlsNG-c1860d/1789065427-D634587B-57FA7DF9/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+X-B4-Tracking: v=1; b=H4sIAPH7omoC/22Nyw7CIBBFf6WZtZPShtbo1sQPcGtcAA4WH4gMN
+ SZN/12oW5f33NcETNERw7aaINLbsXv6LJpVBWZQ/kLozllDK9pebBqBWmI0IybFN8YQiR4h4Yt
+ RisZa2cm+M2vI7WxZ91mWj3DY7+D0gzzqK5lUNktMKybUUXkzFHQPtZb1Av+9wDx/AYKBPpKyA
+ AAA
+X-Change-ID: 20260910-b4-rcu-tasks-preempt-qs-401ff45465c7
+To: "Paul E. McKenney" <paulmck@kernel.org>, 
+ Frederic Weisbecker <frederic@kernel.org>, 
+ Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, 
+ Joel Fernandes <joelagnelf@nvidia.com>, Boqun Feng <boqun@kernel.org>, 
+ Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+ Steven Rostedt <rostedt@goodmis.org>, 
+ Masami Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
+ Jiri Olsa <jolsa@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
+ Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, 
+ x86@kernel.org, Catalin Marinas <catalin.marinas@arm.com>, 
+ Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>, 
+ Xu Kuohai <xukuohai@huaweicloud.com>
+Cc: Andy Lutomirski <luto@kernel.org>, 
+ Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, 
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+ Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, 
+ Juergen Gross <jgross@suse.com>, Luis Chamberlain <mcgrof@kernel.org>, 
+ Ihor Solodrai <ihor.solodrai@linux.dev>, linux-kernel@vger.kernel.org, 
+ rcu@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
+ bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
+X-Mailer: b4 0.15.2
+X-purgate-ID: tlsNG-42698a/1789066251-A9AC09EA-7AC9F295/0/0
 X-purgate-type: clean
-X-purgate-size: 10235
+X-purgate-size: 8754
 
+Tasks RCU only treats a voluntary context switch, usermode or idle as a
+quiescent state, because a preempted task may be sitting in a trampoline
+that is about to be freed. That was a fine trade when PREEMPT_NONE
+servers compiled Tasks RCU away and PREEMPT desktops rarely ran
+long-lived in-kernel loops. PREEMPT_LAZY changes both halves at once:
+Tasks RCU is now real on server configs, and cond_resched() is a no-op,
+so a CPU-bound kthread or kworker only ever loses the CPU by being
+preempted, which is exactly the event Tasks RCU refuses to count.
 
---=-mC8wbvMi0aPBUSksNuNl
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+The way this showed up for us was a cgroup writeback worker draining a
+very large cgwb for around eleven minutes on an arm64 box. Nothing wrong
+with that on its own, but a BPF program detach on another CPU went
+bpf_trampoline_update() -> ftrace_shutdown() -> synchronize_rcu_tasks()
+while holding trampoline_mutex, forty-odd tasks piled up behind the
+mutex, and the hung task detector panicked the machine. The kprobe jump
+optimizer is worse in principle: it does synchronize_rcu_tasks() under
+kprobe_mutex, text_mutex and cpus_read_lock(), so one long-running
+kthread can stall static key updates and CPU hotplug for its whole run.
+The current answer is to find each such loop and add
+cond_resched_tasks_rcu_qs() to it, which is the kind of annotation
+PREEMPT_LAZY was supposed to let us stop writing.
 
-On Thu, 2026-09-10 at 10:59 -0700, Sean Christopherson wrote:
-> On Thu, Aug 06, 2026, Sean Christopherson wrote:
-> > The primary goal of this series to fix flaws with SNP and TDX guests wh=
-ere a
-> > PV clock provided by the untrusted hypervisor is used instead of the se=
-cure
-> > TSC that is controlled by trusted firmware.
-> >=20
-> > The secondary goal is modernize running under KVM.=C2=A0 Currently, KVM=
- guests will
-> > use TSC for clocksource, but not sched_clock.=C2=A0 And Linux-as-a-KVM-=
-guest doesn't
-> > support paravirt enumeration of the TSC/APIC frequencies, even though Q=
-EMU
-> > provides that information by default.
-> >=20
-> > The tertiary goal is to clean up the PV clock code to deduplicate logic=
- across
-> > hypervisors, and to hopefully make it all easier to maintain going forw=
-ard.
-> >=20
-> > The quaternary goal is to clean up the TSC calibration code, which was =
-made
-> > stupidly hard to follow by hypervisor code mixing in with the native
-> > calibration routines, instead of being implemented as a pure alternativ=
-e.
-> >=20
-> > Note, the VMware and Xen changes still probably should get acks from th=
-ose
-> > maintainers, as my understanding of what they're trying to do may be fl=
-awed.
->=20
-> This (thankfully) still applies cleanly.=C2=A0 What can I do to help move=
- this forward?
+This series tries the other direction: have the trampolines say when a
+task is inside them, so that a preemption anywhere else can be a
+quiescent state.
 
-Nudge Thomas to spot that this is guest-side and we want him to pick it up,=
- I guess?
+ - task_struct grows an int, rcu_tramp_nesting. Every trampoline whose
+   lifetime Tasks RCU guards increments it before calling out and
+   decrements it before returning: ftrace_caller and its dynamic copies,
+   the BPF trampoline (which drops it again around the call to the
+   original function, since im->pcref covers that), the x86 optprobe
+   template, and out-of-line register_ftrace_direct() trampolines. Only
+   current writes it and nested users are balanced, so it is a plain
+   non-atomic inc/dec, one load of current plus one RMW per entry/exit.
 
---=-mC8wbvMi0aPBUSksNuNl
-Content-Type: application/pkcs7-signature; name="smime.p7s"
-Content-Disposition: attachment; filename="smime.p7s"
-Content-Transfer-Encoding: base64
+ - The inc/dec are inside the trampoline, so there is a window of a few
+   instructions on each side where the count is zero but the task is in
+   (or on its way into) trampoline text. Nothing there can be preempted
+   synchronously, only from an interrupt, so the irq-exit preemption path
+   looks at regs->ip and holds the count across preempt_schedule_irq()
+   when the IP is somewhere the counter cannot cover: outside core and
+   module text (all the dynamically allocated trampolines and slots), in
+   the static ftrace stubs or the x86 return thunks that still hold a
+   direct-call target, in a module that hosts its own direct trampoline,
+   or inside the bytes after a kprobe that the jump optimizer may be
+   about to rewrite (the one synchronize_rcu_tasks() user that is not
+   about trampolines at all).
 
-MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCE8Ew
-ggWvMIIEl6ADAgECAhANkOKMSmGXhF5eMl0rsRhvMA0GCSqGSIb3DQEBDAUAMGUxCzAJBgNVBAYT
-AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
-BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBHMjAeFw0yNDAzMTMwMDAwMDBaFw0zNDAz
-MTIyMzU5NTlaMGIxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UE
-AxMxRGlnaUNlcnQgQXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTCCAiIw
-DQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAOfSIeC0vv1xPQ+dgSxbIIrkaru6skAWJYaGFzmv
-q4Kq+2wU2jxhcWlJg/JeP5jEkq/LM3pn5aaLao79j+XRmS7J1ZpJKUODJVoM4s9MQJhTMvo4qS5Z
-S64g6QR7Obkz3I1Lr3aWeSBmDDEyzue+NKtuWZ1Cxy3RdXo/w5HgRc3l2AercOM3Gt1XonTzEtTb
-Z/Hwc0Sn9Gz8RmGRK6Ka4hVDl8q/2l110KaV233Kh5etP0csXS8MIMdVRfRu3sc5hp13DG7lCKzK
-72a2GEpI8Wpl26G6I1/LMzz/98T+FqjTqxsdquk7Cj7m2vKGLW1BorpQH7WFGPdJQXJe1hfbfiZA
-CcVdCtl4nAacFacmsiArZBfX7AQGL7isvHUwwYFEtcApyGW4p2Lt+t8nvU0CANA6BHOpOz1xOP8W
-mAESbUriIjyuTUf3fJ9oDNCurVqhASMJCDaWI3lYX/QAoiAzt6akqbbZxo2ujW7mGGqc0KxqE2cs
-h2T79v7pC8aUtHBfwNrTR19GnZVxE0eQ7ViIQhR6mpSaUQFA9sG+cmD2G8TnCgYsLa0q8De6F61a
-CBevQGHNzrbZ3JAMneveYg/Jy1XxQHDRcvrMfWKe0jjcWbdKYlaGVPm5V1ILwYz7Yv5ewo3NUrxI
-GJiywe9qPhuJSDZs7VehTuI0FxGIsgKzVjgbAgMBAAGjggFcMIIBWDASBgNVHRMBAf8ECDAGAQH/
-AgEAMB0GA1UdDgQWBBT3m6JO05fF9DQPQw6Bhc6RkzKv+TAfBgNVHSMEGDAWgBTOw0q5mVXyuNtg
-v6l+vVa1lzan1jAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
-MHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMG
-CCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURS
-b290RzIuY3J0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdp
-Q2VydEFzc3VyZWRJRFJvb3RHMi5jcmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUA
-A4IBAQA+b8Uw53sDspdZgukU+qzLyyHkcjlxGGhHlP+zrmDLKm1wEFvCRS2pili3Hy67i8N4N5NU
-vw5Rg6kv3lxb9S9Rktxk43k+tvm68pl7OxQE55ZjVY87P0lUPGwEqOOwLLyH02ZQcsfq5p5LrOH9
-0JvmvZ1yy73HS+VpDAqOlytE0NSvTIRqFFkKQGQwfjvtql9YflujuNNvJztjBaHKYZsnNSg+J38o
-jYq4TP3pSg3UdVH0PncVjPQyqxC9xef5Xae92Kbkzol3x7Nel3A1bwAkalrDMspvTHvey6LfiBks
-FIqviTnoy7fgjaRAJgHS+RXx/cmuRd3rUAclSVVrYu8RMIIHAzCCBOugAwIBAgIQAzUotrsybJHx
-HTjKOIVdIDANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQs
-IEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQg
-MjAyNCBDQTEwHhcNMjYwNzE4MDAwMDAwWhcNMjgwMTA0MjM1OTU5WjAeMRwwGgYDVQQDDBNkd213
-MkBpbmZyYWRlYWQub3JnMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2pYux73kdbYX
-sWF8f1u6DJP91qcqaZetsyfPkZk0B+MmXmAEv0kVes5n15V2mbDThOnpoPFly0UugQO9JYqLfrtD
-tKD5yL58fgrDB9Dw+LQikgrHafl6YSCds5AvUu/8hw2J6noKrcOLJpKlKn9Fl/4IB9Q3JIdLx5aa
-EtTqMalIPqHFOlgrJ7s+aua8xbB8YQ9ahqYBXWRJNv3P/2b1DYtdrz1oqZPE3CcB8Pc6Gf2a1Tcm
-6TAgtEx7Cf1BFcrsrMz7TWHmGQITieNb2r9UYWSc2Gp+GtYFNJCgT0JJXKUBIauPMKBLteYrL8Fo
-ff/uY44dC/mDWjdCP/5x0qelPQjlBvWdHL5zvBTOj06rJ0m3HNI/hnIcDh0Qu2j9reb9rLVcdym6
-bWmBM4uDEB8Zv9Ph0KTBFSy1IosyakuD1j1Os30EzjGfbi0EUXIvnOcYbTBAbM5UAzrxEHMhBvoX
-Pvnx+OyvjJmc9tWxTX6AcSz+m40esbT17URBeZS18afgieiikm5TynlUYP1LciR3hSgGVzvGXnKO
-02VDFR5itGWdRKZ2W5wIShNfWfhSa0D0K5UdIDt5Qc7sjzwK1Yb1sY5Tu0uA5mhIS82q1ov83uxB
-sFkriNnhGv/M1NCDVLBiOMsHu73qUM+yKmgKLwF9Hfn9WI25glbAMI4S5r3hYzcCAwEAAaOCAfcw
-ggHzMB8GA1UdIwQYMBaAFPebok7Tl8X0NA9DDoGFzpGTMq/5MB0GA1UdDgQWBBRcYhqbcGzn1jrT
-JOZaB8O7qllDpzAwBgNVHREEKTAngRNkd213MkBpbmZyYWRlYWQub3JngRBkYXZpZEB3b29kaG91
-LnNlMBQGA1UdIAQNMAswCQYHZ4EMAQUBAjAOBgNVHQ8BAf8EBAMCBeAwHQYDVR0lBBYwFAYIKwYB
-BQUHAwIGCCsGAQUFBwMEMIGpBgNVHR8EgaEwgZ4wTaBLoEmGR2h0dHA6Ly9jcmwzLmRpZ2ljZXJ0
-LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsME2gS6BJ
-hkdodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZT
-SEEzODQyMDI0Q0ExLmNybDCBjQYIKwYBBQUHAQEEgYAwfjAkBggrBgEFBQcwAYYYaHR0cDovL29j
-c3AuZGlnaWNlcnQuY29tMFYGCCsGAQUFBzAChkpodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20v
-RGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZTSEEzODQyMDI0Q0ExLmNydDANBgkqhkiG9w0B
-AQsFAAOCAgEAocabrh1cPd5s3vY5rnlBVQSTc7zs2ZWs67dAIltR+05WELrYClVzzUhMs/LOJPlr
-EUo45UDDomXq38DxFepaPd9+iNLjXfn33EX/IG44j04lU/oF/Rg9VeQILkYLbCZ/x9wOjNHZc4SN
-ydY7Dhvf/sT5aBz88u7D5+azZJ7Qf1U57wYseCH1Mt0nDrtr5y19IJ8D9xJJ33RFL6vfpHZBBAQ8
-+3RqkKNxLoV2aFvQhxdhjNLDqTv3LjUIdicwPraN7JkxEu7CV2Lka7eRqJgkWL7SK0YmBjGpRafs
-+icP/ON5RCCKTTb6VlX8eTG2sJJfsFhvJNCCt6xexbWzWtIrfP7NvPBvwBB737AyEGBZkS5aNizT
-McURJGTv9UKvBh1LF/+tNhYtLvPCN7oecGzhCHht9jcwSkygTo3Y6YlK3QgOu+ncmiBbfeuwlLZ1
-LxbYvG6hgNqXv7u6YyADbYajAQJXJ2OQen39pm3Q/AQSyLYG+B8lDglWsM8tYXPlEdrYJcksGK6F
-nqIX6Bumn43rBooLJdiZp4WmfWdL2pxe+LxRDjprmqu1WprixDxULSTOKJZoqTlugs6y3Bc+if+s
-gHnBBtz9WQ6MtPHkh7zONDAFIKcBmv8OqPQCx0F3Wv3OEybwMpXx0OsKgK8wLldaX1pXcMuyDgTL
-Sqs0AV0OHUgwggcDMIIE66ADAgECAhADNSi2uzJskfEdOMo4hV0gMA0GCSqGSIb3DQEBCwUAMGIx
-CzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UEAxMxRGlnaUNlcnQg
-QXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTAeFw0yNjA3MTgwMDAwMDBa
-Fw0yODAxMDQyMzU5NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqG
-SIb3DQEBAQUAA4ICDwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZe
-YAS/SRV6zmfXlXaZsNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2z
-kC9S7/yHDYnqegqtw4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qG
-pgFdZEk2/c//ZvUNi12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41va
-v1RhZJzYan4a1gU0kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0c
-vnO8FM6PTqsnSbcc0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PW
-PU6zfQTOMZ9uLQRRci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXt
-REF5lLXxp+CJ6KKSblPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQr
-lR0gO3lBzuyPPArVhvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7Iq
-aAovAX0d+f1YjbmCVsAwjhLmveFjNwIDAQABo4IB9zCCAfMwHwYDVR0jBBgwFoAU95uiTtOXxfQ0
-D0MOgYXOkZMyr/kwHQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3
-bXcyQGluZnJhZGVhZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEC
-MA4GA1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgakGA1UdHwSB
-oTCBnjBNoEugSYZHaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZEcyU01J
-TUVSU0E0MDk2U0hBMzg0MjAyNENBMS5jcmwwTaBLoEmGR2h0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNv
-bS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsMIGNBggrBgEF
-BQcBAQSBgDB+MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wVgYIKwYBBQUH
-MAKGSmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNB
-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
-vqwhYUQUCosmYZzhbUT9y9AAAAAAAAA=
+ - With those in place, rcu_tasks_classic_qs() also clears the holdout
+   flag on a preemption when the count is zero, on architectures that
+   opt in. x86-64 and arm64 do so here. Everyone else keeps the
+   voluntary-only rule and is untouched apart from the (unused) field.
 
+A running holdout already gets poked via rcu_request_urgent_qs_task(),
+which makes the next tick set NEED_RESCHED, so with this the resulting
+preemption retires it and a Tasks RCU grace period is bounded by roughly
+a tick plus the longest preempt-off section rather than by the longest
+stretch without a voluntary schedule().
 
---=-mC8wbvMi0aPBUSksNuNl--
+Patches 1-12 are scaffolding and change no behaviour on their own; patch
+13 flips the rule and selects the option for the two architectures.
+
+Testing so far is QEMU only: x86-64, PREEMPT_LAZY with PREEMPT_RCU=n,
+PROVE_RCU and lockdep, with and without PREEMPT_DYNAMIC. A kthread
+spinning in-kernel for 30s with the function tracer, an ftrace kprobe,
+an optimized kprobe and fentry/fexit programs attached:
+synchronize_rcu_tasks() goes from 29.7s to 0.1-0.3s, tearing down a
+DYNAMIC ftrace_ops (tracefs instance function -> nop) from 27s to
+0.2-0.8s, and the ftrace-direct sample modules load, fire and unload in
+about 2.5s each while the spinner runs, with no warnings and the new
+return-to-user assertion quiet. arm64 is build-tested only at this
+point; real hardware numbers for both are the obvious next step and I
+did not want to sit on the idea waiting for them.
+
+Things I would particularly like opinions on:
+
+ - Whether hooking rcu_tasks_classic_qs() is the right place, or whether
+   Paul would rather see this expressed differently inside Tasks RCU.
+ - return_to_handler and the rethook/kretprobe trampolines are not
+   instrumented. Their C callees take the ftrace recursion lock before
+   touching any ops and the trampolines themselves are static text, so I
+   believe they do not need it, but I would like Steven and Masami to
+   confirm.
+ - The register_ftrace_direct() contract change: out-of-line direct
+   trampolines now have to maintain the count themselves (the samples
+   are converted). I do not know of out-of-tree users beyond BPF, but
+   this is the one place an existing user could be silently weakened.
+ - Whether arm64 folks are comfortable with the ldr/add/str in
+   ftrace_caller and the BPF trampoline, and with treating all of
+   ftrace_caller as trampoline text for the IP check.
+ - If this holds up, cond_resched_tasks_rcu_qs() and
+   rcu_softirq_qs_periodic() become unnecessary on the opted-in
+   architectures; I have not touched them here.
+
+Based on v7.3-rc2+ (893e11787f78).
+
+---
+Josef Bacik (13):
+      rcu-tasks: Add per-task trampoline nesting count
+      entry: Pass pt_regs to irqentry_exit_cond_resched()
+      rcu-tasks: Hold trampoline nesting across irq-exit preemption in trampoline text
+      kprobes: Let Tasks RCU recognise tasks preempted in an optprobe jump window
+      ftrace: Mark modules hosting direct-call trampolines for Tasks RCU
+      x86/ftrace: Maintain Tasks RCU trampoline nesting in ftrace_caller
+      x86/kprobes: Maintain Tasks RCU trampoline nesting in the optprobe template
+      bpf, x86: Maintain Tasks RCU trampoline nesting in the BPF trampoline
+      arm64: ftrace: Maintain Tasks RCU trampoline nesting in ftrace_caller
+      bpf, arm64: Maintain Tasks RCU trampoline nesting in the BPF trampoline
+      samples: ftrace: Maintain Tasks RCU trampoline nesting in direct-call trampolines
+      rcutorture: Bracket Tasks RCU readers with trampoline nesting
+      rcu-tasks: Treat preemption outside trampolines as a quiescent state
+
+ arch/arm64/Kconfig                          |  1 +
+ arch/arm64/kernel/asm-offsets.c             |  3 ++
+ arch/arm64/kernel/entry-ftrace.S            | 35 +++++++++++++
+ arch/arm64/kernel/ftrace.c                  | 16 ++++++
+ arch/arm64/net/bpf_jit_comp.c               | 46 ++++++++++++++++
+ arch/x86/Kconfig                            |  1 +
+ arch/x86/kernel/asm-offsets.c               |  3 ++
+ arch/x86/kernel/ftrace.c                    | 37 +++++++++++++
+ arch/x86/kernel/ftrace_64.S                 | 43 +++++++++++++++
+ arch/x86/kernel/kprobes/opt.c               | 20 +++++++
+ arch/x86/kernel/vmlinux.lds.S               |  4 ++
+ arch/x86/net/bpf_jit_comp.c                 | 43 +++++++++++++++
+ arch/x86/xen/enlighten_pv.c                 |  2 +-
+ include/linux/irq-entry-common.h            | 14 ++---
+ include/linux/kprobes.h                     |  8 ++-
+ include/linux/module.h                      |  7 +++
+ include/linux/rcupdate.h                    | 70 ++++++++++++++++++++++++-
+ include/linux/sched.h                       |  1 +
+ kernel/entry/common.c                       | 29 +++++++++--
+ kernel/fork.c                               |  1 +
+ kernel/kprobes.c                            | 24 +++++++++
+ kernel/rcu/Kconfig                          | 17 ++++--
+ kernel/rcu/rcutorture.c                     |  6 +++
+ kernel/rcu/tasks.h                          | 81 +++++++++++++++++++++++++++--
+ kernel/rcu/update.c                         |  2 +
+ kernel/trace/ftrace.c                       | 39 ++++++++++++++
+ samples/ftrace/ftrace-direct-modify.c       |  9 ++++
+ samples/ftrace/ftrace-direct-multi-modify.c |  9 ++++
+ samples/ftrace/ftrace-direct-multi.c        |  5 ++
+ samples/ftrace/ftrace-direct-too.c          |  5 ++
+ samples/ftrace/ftrace-direct.c              |  5 ++
+ samples/ftrace/ftrace-direct.h              | 64 +++++++++++++++++++++++
+ 32 files changed, 629 insertions(+), 21 deletions(-)
+---
+base-commit: 893e11787f78e43b534e252249ac3fff4d1333f8
+change-id: 20260910-b4-rcu-tasks-preempt-qs-401ff45465c7
+
+Best regards,
+--  
+Josef Bacik <josef@toxicpanda.com>
+
 
