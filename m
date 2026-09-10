@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05C46C79FBF
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 15:31:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1414907.1644577 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 615BDC79F9F
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 15:43:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1414934.1644585 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4gkV-0005S3-0c; Thu, 10 Sep 2026 15:31:39 +0000
+	id 1x4gvg-0007e0-Uf; Thu, 10 Sep 2026 15:43:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1414907.1644577; Thu, 10 Sep 2026 15:31:38 +0000
+Received: by outflank-mailman (output) from mailman id 1414934.1644585; Thu, 10 Sep 2026 15:43:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4gkU-0005Rw-T7; Thu, 10 Sep 2026 15:31:38 +0000
-Received: by outflank-mailman (input) for mailman id 1414907;
- Thu, 10 Sep 2026 15:31:37 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x4gkT-0005Rq-Fm
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 15:31:37 +0000
+	id 1x4gvg-0007ds-Rc; Thu, 10 Sep 2026 15:43:12 +0000
+Received: by outflank-mailman (input) for mailman id 1414934;
+ Thu, 10 Sep 2026 15:43:11 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1x4gvf-0007dm-FF
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 15:43:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4gkS-00BQ39-Ah
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 17:31:36 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x4gve-00BHK8-S1
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 17:43:10 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa2cd54-2eae-0a2a0a5409dd-0a2a4508d1fc-18
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 17:31:36 +0200
+ id 6aa2d00c-8faa-0a2a0a5109dd-0a2a45039b58-10
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 17:43:10 +0200
 Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa2cd58-f659-0a2a45080019-4a7de18c9b75-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 17:31:36 +0200
+ id 6aa2d00e-fae8-0a2a45030019-4a7de18caa3a-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 17:43:10 +0200
 Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49ccfd61ecaso16734105e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 08:31:36 -0700 (PDT)
+ 5b1f17b1804b1-49cd5462b69so15524655e9.1
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 08:43:10 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49e60acff8bsm2327695e9.9.2026.09.10.08.31.34
+ ffacd0b85a97d-486e6eeadb5sm2510570f8f.16.2026.09.10.08.43.09
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 10 Sep 2026 08:31:35 -0700 (PDT)
+ Thu, 10 Sep 2026 08:43:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,63 +55,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789054296; x=1789659096; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1789054990; x=1789659790; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=x4SPLbzlCvwgwrhKUAWcpiIrjD9PKd3A7Z3K0mUUna0=;
-        b=NaNXnuhM2b2iK6iMTI8JOi1TbswxAhRFPh0ZH10p0paQtCa4OU2zWTjwYSeVn3fPap
-         8APWkYDdHeeWWxEUM94qeHNUO2ViLoGSusnXsSoCIHKKLbLGNiPSulZkC36HAtcnyHfg
-         flehqC8kiuBecMgE7j5NYm2WwPCbkDTZCXQNjgvjyCBTAGvbrmibpzlTw/F1LK72BLq9
-         KBpcu9lFVt0zgaOpp3eatbPdVj3pLeix6P3ufddPHCteLq3DuUz3GTYUbUk5nWpr7GJp
-         OTqIxX6lwNvsYfgDRdNJmy3f6rXt/qRtKO2zNpiJh1tAtBUhwvXoTvULIOSs4HEwXkuC
-         XboA==
+        bh=lUXWFktijKPivybQktG6INfkLCcNzEC3V3paUeV5EbM=;
+        b=LF88qWF9t6f4Loeine9eUASPpDo9SNUr3ydbuKPeDIOmJQLU+TclSW9VZX9j54iMK8
+         N58i6Z3ndc2ca335YPqMObHb66nPov7+5nxJOw6EgSiTISIspWI8I+WJJnJ2b8U/gppM
+         YYn9SfGKDrsHrKQi5xO/OuzdnB/JUTLh8Sji01jp5fk9HeIIsjAv2xnMc4aCTT/Anuch
+         iTVPRzJv16WvLF+Hmwo5LAuxlBepo9F5zVm3JjJNYxGNHs8uZ/MZoSBSCrM/nYlQDoUh
+         NOi9eCpTnb8gkauJhUvpmHJFydPrfb3COeZNpP6MDfJwrxCaUwZRL0fHTNMFWKVGhoUG
+         Cbew==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789054296; x=1789659096;
+        d=1e100.net; s=20251104; t=1789054990; x=1789659790;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=x4SPLbzlCvwgwrhKUAWcpiIrjD9PKd3A7Z3K0mUUna0=;
-        b=cQvoPsNGQ4ebLQjMqfKgEnhEXpnJ/dx9UcQho75cgPRscY09hOYvURFsKhf+RA99xd
-         aoSWK4hDlO57xCKEKOTudhcciz/564jhUadjd1if0JH21XC5oNS6N93B88dM/EPo0egR
-         Ha9pOoWpy+sPikSLstCyB2tPxGgHdqumXOzwfx1uL7RDeCJ8Ttr3iXxMNccTcNe8HaIV
-         opGqv7IsiRvSMR1UpOV1Tf7uNRozQAahb5gZeTJMqae1xDJepbI3S0MZGXjVKwY+m1b1
-         e3dUtCSncwDPY4p+aNxUQUp1WwAq8HYywkD2lBVjcA42g8shEkJNYiBkyOd2GbukftGz
-         s4zA==
-X-Forwarded-Encrypted: i=1; AKwUvBzf2NJYgZrqm5VVj4qDKwlMgy71ybXla1EDnnEzqlSTTrijTfvFt1SfPGDU+CLM+UXpib3HJ4sgtUk=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lm0i8KtDNLpro7u0CArMIzUkgfrms8oFhuDL8CUnxtuUVtidih
-	qOnbLyoUKcoQ9ph49BwujFXIyxoZ71hejrocEscPa+9i5kdfv1Xky3hh+DIrYDxivg==
-X-Gm-Gg: AYBFou3doC8J7aK5oLo4MuX243ZJKeUUW7UE9EKnXkCJ8hbpWvwWx+cn8S5zAoQ4NH8
-	y8vGZ7o3hpEDSylwffjvpjBhMvPqErwd8k3kshRsMIjiVs8Hg9enPSdcslMu14LhFxfgpIMNPqw
-	1ACxG1MnFDOwhk4QUMU7LbE3M2RWcPeIHP4La0pjLGtVHXxrw9JK3C7Zw8WZEKUPAd8/llOBETC
-	aelxd1OOizhX0YsVr0q14fGwlQXG05YO98sdsmQ+yBrxHJame2u9Gs80eZsMiP7fLnuAOu8pJYN
-	uAvgr5CLCHsNcqlSrs2pWyL9Q32WolxPPOz8S/jFk2VbzFaBAKBxLey5ZXdGzV/kMM3F6+DrAhz
-	2qoQoT5TrvEHSdGIwbz8IRuMrOQN+UfvOuB2ysGMEEhDax9V5gte0xIXUn7a4PUfY+PaVB1z0fX
-	6xUMomfFqNhy/0ryKycsbSZeYUlevamL9vCUHBJMFaJsqMCQNg3fvnPST+GBqOzbERCSxKEuYPM
-	8KFbwnjcEEtOxPpzbWj8far90Yk+5sCQU9tppNP1khlITqdrU6hsysfZd5JCw8=
-X-Received: by 2002:a05:600c:c48f:b0:499:4e47:eaf2 with SMTP id 5b1f17b1804b1-49d258cda4emr80092025e9.6.1789054295628;
-        Thu, 10 Sep 2026 08:31:35 -0700 (PDT)
-Message-ID: <9d80640b-5e55-43b3-b4f5-fa91b1fd0bd8@suse.com>
-Date: Thu, 10 Sep 2026 17:31:34 +0200
+        bh=lUXWFktijKPivybQktG6INfkLCcNzEC3V3paUeV5EbM=;
+        b=RDeZf5o5eDeEhlmcoEpQckYrCUOblwLl2uD3LvViIzk86oIA1j7rSWCWOKnZI2Ms4/
+         XYrZj5W92BHJopNgRFTo8vf7d7LVFCiwUl8wqE90lzBlwGw71IpRXS7R5LQ+goh3MSnW
+         v8Z8NEZJnVcA9cm4ObtO8kSasUtKd1+UN//Bw43sIbhfJouIivP/6sApdi79MCY1czIg
+         5CnrWtqi8UDHHXTw+uKVVNLbMUbxoE+kJcO4g0kcI86wcWB0buPU3bJhmLxl9UW/d9Ml
+         f26o/aFf8kWd5s/dNi2u5y459pmLTckv49Yi92+QfvILUnO6FVuvgiXSltZeSSaqp4EJ
+         /0EQ==
+X-Forwarded-Encrypted: i=1; AKwUvBy3tE82bYgcmXxqQwm9gCvzQA/8wBWdDv9IDRaEBlDQms+qti63kNWMaPKyU6i9IRYNiuSY1GM3Y3Q=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nI6yK8xQKghI+Ab1rJ8lUnjUfDjWhh3UpyJNerbNttttL7FLqh
+	tYa6g7GDxQTqF/PlOFfpCYW3WwEsoSNgXeSNOiA905hgMd+j/P7fpjA50aM8GjcgcA==
+X-Gm-Gg: AYBFou1DEKUUuZY96N32elYFrmodu34Q+tF57+nwFxTaa4jp6DXwJx57bc4OlrwQ7Pu
+	sU0sdKEGQXDRjdZvPS17LHk4F9HhoWEMI3+OY4H/WuPLaobT+gf7GOODBewnKwiWIip+B6/Pgcr
+	2DZFwOr1GcSuQBvGNjdjaUDh0PPqL8GHyIWbS+FTYbyARjnGxkP3xMR8/ITp6KXZwpUfua8n+Jb
+	HC+q4ATQwfJcR6yRIX3jzkydmfdR7GuFyvyWv921CgSTXJK/0Eyn0GTztd/kXoaJsU/q1YKKHol
+	s7wodCvTss5ZPu4hT1memDjtu230x/iIZ51wh+5F6w2fNFWSQuyTsgTG+AVJ6KFBGCmR+Zua02Y
+	jzyFZZZk2+jzrXL7Qn4UUr3ZrQrFbiFXRNs7BnPXjXIwkS6umqzipCF8E+8yaN0kA5hi4o/ANbP
+	18KpEds+Hlbe187xG2DbfqsGVlapUesNtqlXdP2OsQDZavBiTfGbn6grxi98F+i1IvrOWbSP/Op
+	cpPJrb93AEha4vuMvD+xiXK/1710QUFgrJ8YrdhOkO0F3iamrdoZh72ru+3n68XtJqETBJAxw==
+X-Received: by 2002:a05:600c:698c:b0:49c:edfe:d525 with SMTP id 5b1f17b1804b1-49d1f35366fmr294544695e9.10.1789054990252;
+        Thu, 10 Sep 2026 08:43:10 -0700 (PDT)
+Message-ID: <1a42fad1-922d-441d-9837-f4c43854a5b1@suse.com>
+Date: Thu, 10 Sep 2026 17:43:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 23/39] xen/riscv: look up the exception table for any
- trap taken in Xen context
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+Subject: Re: [PATCH v2 1/5] vmx: Refactor vpid_sync_vcpu_gva()
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <c8c767e5932057e1fe3ca7756246ded691adad4f.1787838835.git.oleksii.kurochko@gmail.com>
+ xen-devel@lists.xenproject.org
+References: <1785509179.8631fc262581453bbf619ec5b2062170.19fb8a3efe8000e099@vates.tech>
+ <1785509305.8631fc262581453bbf619ec5b2062170.19fb8a5db67000e099@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -136,44 +129,44 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <c8c767e5932057e1fe3ca7756246ded691adad4f.1787838835.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <1785509305.8631fc262581453bbf619ec5b2062170.19fb8a5db67000e099@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1789054296-CFED287B-08D6841E/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 1572
+X-purgate-ID: tlsNG-33051d/1789054990-6F0C94E9-395B03D6/0/0
+X-purgate-type: clean
+X-purgate-size: 1302
 
-On 27.08.2026 17:21, Oleksii Kurochko wrote:
-> do_trap() consulted the exception table only for CAUSE_ILLEGAL_INSTRUCTION,
-> which covers csr_read_safe() but not the hlv/hlvx sequences reading guest
-> memory: those fault with load/store (guest) page fault causes and would
-> reach do_unexpected_trap() instead of their fixup.
-> 
-> Move the lookup ahead of the cause switch, and gate it on the trap having
-> been taken in Xen context and not being an interrupt:
-> 
-> - sepc of a trap taken from the guest is a guest VA/PA, which the
->   guest can point at an address listed in the exception table; Xen would
->   then act on that entry and, for EX_TYPE_TRAP_INFO, write through a
->   pointer fully under guest control. Entries are matched by exact address,
->   so this needs no more than a numerical collision.
-> 
-> - an interrupt taken at an address listed in the table would otherwise be
->   "fixed up" as if the access itself had faulted, silently skipping it and
->   handing the caller the interrupt's scause as a fault cause.
-> 
-> Returning early skips check_for_pcpu_work(), which is correct: that only
-> runs for traps taken from the guest.
-> 
-> With that in place a G-stage fault reaching the switch can no longer have
-> been caused by an hlv/hlvx covered by an entry, so anything left must have
-> come from the guest; assert as much.
-> 
-> Cache the "trap came from the guest" test in a local, it is now used four
-> times.
-> 
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+On 31.07.2026 16:46, Teddy Astie wrote:
+> --- a/xen/arch/x86/include/asm/hvm/vmx/vmx.h
+> +++ b/xen/arch/x86/include/asm/hvm/vmx/vmx.h
+> @@ -460,19 +460,16 @@ static inline void vpid_sync_vcpu_gva(struct vcpu *v, unsigned long gva)
+>       * If individual address invalidation is not supported, we escalate to
+>       * use single context invalidation.
+>       */
+> -    if ( likely(cpu_has_vmx_vpid_invvpid_individual_addr) )
+> -        goto execute_invvpid;
+> -
+> -    type = INVVPID_SINGLE_CONTEXT;
+> +    if ( unlikely(!cpu_has_vmx_vpid_invvpid_individual_addr) )
+> +        type = INVVPID_SINGLE_CONTEXT;
+>  
+>      /*
+>       * If single context invalidation is not supported, we escalate to
+>       * use all context invalidation.
+>       */
+> -    if ( !cpu_has_vmx_vpid_invvpid_single_context )
+> +    if ( unlikely(!cpu_has_vmx_vpid_invvpid_single_context) )
+>          type = INVVPID_ALL_CONTEXT;
+>  
+> -execute_invvpid:
+>      __invvpid(type, v->arch.hvm.n1asid.asid, (u64)gva);
+>  }
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+But this isn't functionally identical to the original, at least in the
+cpu_has_vmx_vpid_invvpid_individual_addr &&
+!cpu_has_vmx_vpid_invvpid_single_context case. We'd now end up using
+INVVPID_ALL_CONTEXT there, when it wants to continue to be
+INVVPID_INDIVIDUAL_ADDR.
 
+Jan
 
