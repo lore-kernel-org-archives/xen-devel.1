@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A13EC88E41
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E56A1C88E42
 	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 18:51:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415154.1644688 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1415153.1644678 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4jrW-0005lY-W2; Thu, 10 Sep 2026 18:51:06 +0000
+	id 1x4jrU-0005UO-KM; Thu, 10 Sep 2026 18:51:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415154.1644688; Thu, 10 Sep 2026 18:51:06 +0000
+Received: by outflank-mailman (output) from mailman id 1415153.1644678; Thu, 10 Sep 2026 18:51:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4jrW-0005lL-Qf; Thu, 10 Sep 2026 18:51:06 +0000
-Received: by outflank-mailman (input) for mailman id 1415154;
- Thu, 10 Sep 2026 18:51:05 +0000
+	id 1x4jrU-0005UB-HA; Thu, 10 Sep 2026 18:51:04 +0000
+Received: by outflank-mailman (input) for mailman id 1415153;
+ Thu, 10 Sep 2026 18:51:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1x4jrV-0005XH-0p
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 18:51:05 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1x4jrS-0005Jj-Qg
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 18:51:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4jrU-00GcVR-DT
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 20:51:04 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x4jrS-001Y5I-6h
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 20:51:02 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa2fc02-bab6-0a2a0a5309dd-0a2a4505895e-24
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:51:04 +0200
-Received: from [209.85.160.175] (helo=mail-qt1-f175.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa2fbe6-2eae-0a2a0a5409dd-0a2a450b9c5c-44
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:51:02 +0200
+Received: from [209.85.160.172] (helo=mail-qt1-f172.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa2fc17-4cb1-0a2a45050019-d155a0afe0fa-3
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:51:04 +0200
-Received: by mail-qt1-f175.google.com with SMTP id
- d75a77b69052e-5306d609317so1134411cf.2
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:51:03 -0700 (PDT)
+ id 6aa2fc15-b7e8-0a2a450b0019-d155a0aca9f1-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 20:51:02 +0200
+Received: by mail-qt1-f172.google.com with SMTP id
+ d75a77b69052e-52fa9c055b5so15088301cf.1
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 11:51:01 -0700 (PDT)
 Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
  [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-9120f45a780sm2547836d6.10.2026.09.10.11.51.01
+ d75a77b69052e-530ca45bbd7sm230971cf.8.2026.09.10.11.50.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 10 Sep 2026 11:51:01 -0700 (PDT)
+ Thu, 10 Sep 2026 11:50:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,51 +55,51 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1789066263; x=1789671063; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1789066260; x=1789671060; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=sAaaOhrJ7Jcw63o+Xz8kKBY4jQKDr2HCsih3+9envV4=;
-        b=iMdfafnxHmbTYoQLU5GtDkFqgWcS9zyZTR6ftc+GmmdOJzaZZG+SXqYLtWTaurTkrO
-         eJEGeV6ENiZWYXHBlfoyEor5VIJcGMRtWRHNjfo1uPOntmfmGeUqxWUD7BrXgn/tWbun
-         hYZF8cAysRcbJJCC5iVZH/oN7WFVLY9cZFQAmFgPcinc1h7aqLKbVlDjvgTylwLDEUHL
-         /b4PoGO1Mbx8y5M0cf8H2dQkGk/d7ViGDoAnmPcpyWOQLejgcmvgLPFRFkdqggaUnXCW
-         kHTtsqrmzyk+THRkWTUNDMHoZsIgP92KrA6o14bkZvBGs8PPJWHWg3cLJ7hOzXAMXSZO
-         zITQ==
+        bh=+J5TsPokEtcBZgoC4/eVwMDHhzV3+rip9BUfjH6oWiE=;
+        b=k2R7qgxLhaHpZMFV/FyIOtpDdDYG7ItfL9mSXNlvwpkXAdW03/OTnYYWXvByjTyssM
+         3KNGBgdzufCpH+kpKr2qrqcYaxOSqT5LYw0nKbpDUv033fnfAlir1Qhf6/YLs0GDQ/+j
+         395RLubVGLbincc4DSqwSnkWvYYT7mvbPD/sWDoKXIWNnh6QDILp3GK1TQSfVVbG7yu3
+         6EIyo8xBhleT7oEXJW2I91L48zMHrY/LuRhk2107nspNYaNCxib7rfppkpReHw+CI1zr
+         YbgmgVh8GLTmW9xi/x293MLfuMRVD2C3ucShGQ2Ezf5RALWXpFlTyZkv4CUYQtA4SdDg
+         jGZw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789066263; x=1789671063;
+        d=1e100.net; s=20251104; t=1789066260; x=1789671060;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=sAaaOhrJ7Jcw63o+Xz8kKBY4jQKDr2HCsih3+9envV4=;
-        b=ZXqyKIkYdPfwEKLl2m8HDiUkv9sv/VAp3qkDC1b/5g1EUbsWE02PQXeHE5boM6/31i
-         DLFBFaRnW6ZsygnQLsET4p5AA3cjoQn2sX8iO3JyCYM4GIcdIHcFSAy6pPVpR2XZsi6s
-         p6sScywp+JNSfgvxufgPTLWmoxw/6kqJ5r4RiRwPdtJ51M1xZl29CrygMLp0BE621j5J
-         HBzyQBfvSUbg4rUxY/2OGLguX6waYPT6wylZyHIC4SFqjPvyaVTffqX0MkfeGujKcrC/
-         WSe5OIPOlKY3zPb9yKFVMB2oGHyGp/wVygP6ZQdHs2Ra9/6H/q24tKgtgMguUlKazZo4
-         hI5Q==
-X-Forwarded-Encrypted: i=1; AKwUvBwaV3L/XH7uGrlBizYSPSeQHF0vZ0R2yUHlIZjuEQvm/eFBcqtboc8XSR8426e5u3kj8MEBq7Zql6M=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kjGdFcpOrK4jMIqZMCwvWLe+ltLtvVzYjVfhdbUQWj32AMUT/U
-	h8f+sDaYDMamgYd93CWvlcKEZpKuZTJjye1DuGjOqIOox8UdvolHPRVPurxhiGp2WMk=
-X-Gm-Gg: AYBFou11C1PEK0++Iz+yGR5aJiOkpt+em+ikRflk7ENIW9GblQHtcmdtvjrOoNzWlwd
-	VfON1BiY0RVWE/n/19JyvMTPDfXVi9hadinKI/RqWEQmkztujBhi1pXxo7SKXOnEPVi+EUUSbFk
-	9R8hpItcfaXYfbIiuj1dAAXrLRotGr68QfmXSzBEYFlcGt06APvodelp88C2GyEnpRfigmIqSeX
-	+1Bw/58qw6iCv8Y6hzYVN+Dv4P+Hy8VLKTqXXGp4ZwqeItwi+TGDOdRMBrWNlJXt0kBYq8OSiPj
-	NdDbBILdVlUFq+NnXZCF8HAI8dEvzdtSAa1W4rf/PBTxga0oUSXjoAilJy3vnm4WYqLw0NRpKHz
-	jqYIk0WqrByS6Ef5UTJws36QDnOdBO60YzE1AQqalG1fHO7NoVCCkgW0bKjDlLYMTAGSrd7+qnm
-	pZTMqwAi41t3q5UEdOGoAhNmFbNNC5/2IYB34Z/FVOmwuZ7+e1POtimxyrYd1NMesJdNpPGB6tg
-	cMO9aBD5Xl9yUQG79aiC5cOHLV1OnDSgQ/mBz9T21QHWXM89tkHzCxH
-X-Received: by 2002:a05:622a:1309:b0:530:42d4:4c98 with SMTP id d75a77b69052e-530c8756e8amr10238141cf.42.1789066262237;
-        Thu, 10 Sep 2026 11:51:02 -0700 (PDT)
+        bh=+J5TsPokEtcBZgoC4/eVwMDHhzV3+rip9BUfjH6oWiE=;
+        b=eSk5sFgApxPkP5RDZE4teOHL+1jfD0MKJNyJJDvK36JbdPr74HDHlUF02AhdxdvJu3
+         H4WMXzoi66Ws8yIxnBCV//FPzScwY2EFG68cBI1Z5amKDF+ZxTcGSEzCv6wQmqVdKZDt
+         nN31xlPXQK/Rxj00Ypr6iRvJ1p0XG+tuhXUOoFK0A8Mx5LQyz0ojaSqTL3jv7UBW/NZD
+         JXEzafclB3v28v9dLry2np+rL7nb6RBKHP7dUyK6Y0695t/bQwWZtneCvoDg6u8aNRwH
+         rBRmEQYRBDDrtrqU0n13TVFxB5pVfTKwI+5CrnK05LZRV2aai78IPJEc1mliKdk7zneX
+         pWzA==
+X-Forwarded-Encrypted: i=1; AKwUvBzR6wGBwNRucABzd8SheaRAeYyVmx6LjFfTdV2Jm1BPZYtROM4ZqVRPkUttRFOITAQKysBZA9KR5O0=@lists.xenproject.org
+X-Gm-Message-State: AFuF++meniDitsiMzoGgliQSbhZMDvZV9azrOfhe1iiEz4hiiMwhC2R5
+	R4PKFYID/MH3tUUd/8eds+PIgpxY3oAfOhHZiLLO5YRKOuJ0YyR4MmXpd/RbSfKx4tI=
+X-Gm-Gg: AYBFou2JcePGI8RETKalPi96RUeBHawaENDHZ0dl1fguPumgQnPy9XAbXO/GTmNxHE7
+	IXE61XlnDtj02rIaSySn+LheCLlJqKKmyfQj5XYS45jYHep/+N7DJGFpL8qmWDgaNjvTsjhGm3+
+	t3GSLGuTSlAz3V4XAF2DhKEs0+Nq4KgFVhItvY8tfK0cAGBt3ojAZOtEzkrEJNJhvfJBv5xOU7c
+	mVL9udXJyFfUHilXNk5/q6ZY4+wCY8U1kH/9NYju7bdwBUldy3bNrcPxogbO1BmVrnoDOMHeq/k
+	UXfsXyZGa+Sz9PCHISFrCpK3XQVVR8brXtVfUfpk4aW+mIId+6yEWLL+Th36WEmKPjPEHdNv3BZ
+	tCxDmc4DinylRnYt0fn5Hpnf9WbtnchNrlDQzAFkUbuG50fc4pgo/ErgWKNCiHR0Lt4lZuqGKEf
+	XyWxFRal2DRZWrsNSQ/iTG+I8khf4olbVM7ER632U5xBcg6HcgMbvjSWVxvDIvSJY7wjfFyYugF
+	gZ8Qs8Z/Yhr+L2XR4aMvF8DxuZ1hDCwoE6DIKCEGoazfLROQ8HHSc2w
+X-Received: by 2002:ac8:6f19:0:b0:530:4773:113d with SMTP id d75a77b69052e-530b35ec4f6mr85380621cf.27.1789066260401;
+        Thu, 10 Sep 2026 11:51:00 -0700 (PDT)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Thu, 10 Sep 2026 18:50:29 +0000
-Subject: [PATCH RFC 06/13] x86/ftrace: Maintain Tasks RCU trampoline
- nesting in ftrace_caller
+Date: Thu, 10 Sep 2026 18:50:28 +0000
+Subject: [PATCH RFC 05/13] ftrace: Mark modules hosting direct-call
+ trampolines for Tasks RCU
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260910-b4-rcu-tasks-preempt-qs-v1-6-d4469f4cc101@toxicpanda.com>
+Message-Id: <20260910-b4-rcu-tasks-preempt-qs-v1-5-d4469f4cc101@toxicpanda.com>
 References: <20260910-b4-rcu-tasks-preempt-qs-v1-0-d4469f4cc101@toxicpanda.com>
 In-Reply-To: <20260910-b4-rcu-tasks-preempt-qs-v1-0-d4469f4cc101@toxicpanda.com>
 To: "Paul E. McKenney" <paulmck@kernel.org>, 
@@ -124,225 +124,183 @@ Cc: Andy Lutomirski <luto@kernel.org>,
  bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-purgate-ID: tlsNG-c201ff/1789066264-72EB12A1-9D871752/0/0
+X-purgate-ID: tlsNG-42698a/1789066262-AB0DD9EA-7F2523CD/0/0
 X-purgate-type: clean
-X-purgate-size: 7824
+X-purgate-size: 7070
 
-Bracket the call out to the ftrace_ops callback in ftrace_caller and
-ftrace_regs_caller with an increment/decrement of
-current->rcu_tramp_nesting.  The instructions sit inside the region that
-create_trampoline() copies for per-ops dynamic trampolines, so those
-inherit them; the %rip-relative per-CPU reference to current_task is
-fixed up by text_poke_apply_relocation() like CALL_DEPTH_ACCOUNT's.
-%rdx is dead at both points (about to be loaded with the ops pointer on
-entry, restored by restore_mcount_regs on exit).
+An out-of-line direct trampoline registered with register_ftrace_direct()
+is kept alive only by Tasks RCU while a task executes it or is preempted
+in something it called; ftrace_shutdown()'s synchronize_rcu_tasks() is
+what stops rmmod freeing it under such a task.  Once preemption becomes a
+Tasks RCU quiescent state, such a trampoline must hold
+current->rcu_tramp_nesting across its call-out like the ftrace and BPF
+trampolines do, so document that in register_ftrace_direct().
 
-Two pieces of core text still run with the count at zero while holding
-the address of a Tasks-RCU-protected trampoline they are about to
-enter: the static stubs themselves, whose direct-call tails keep a BPF
-trampoline address on the stack until the final RET, and, under
-CONFIG_MITIGATION_RETHUNK, the return thunk that RET expands to.  Add an
-ftrace_static_tramp_end marker after ftrace_stub_direct_tramp and linker
-symbols around .text..__x86.return_thunk and .text..__x86.rethunk_safe,
-and provide arch_rcu_tasks_ip_in_trampoline() covering
-[ftrace_caller, ftrace_static_tramp_end) and both thunk ranges so the
-irq-exit check treats a task interrupted there as still inside a
-trampoline.
-
-The hook is built only under CONFIG_RCU_TASKS_PREEMPT_QS, which x86 does
-not select until a later patch.
+That still leaves the few instructions before the increment and after
+the decrement.  For BPF images those are in dynamically allocated text
+that rcu_tasks_ip_in_trampoline() already treats as protected, but the
+in-tree samples (and any similar user) place their trampolines in module
+.text.  Add a sticky module::ftrace_direct_tramp flag, set by every
+register/modify path when the direct address is module text, and have
+rcu_tasks_ip_in_trampoline() treat a task interrupted anywhere in such a
+module as a potential reader.  Other modules' text is unaffected.
 
 Assisted-by: LLM
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- arch/x86/kernel/asm-offsets.c |  3 +++
- arch/x86/kernel/ftrace.c      | 37 +++++++++++++++++++++++++++++++++++++
- arch/x86/kernel/ftrace_64.S   | 43 +++++++++++++++++++++++++++++++++++++++++++
- arch/x86/kernel/vmlinux.lds.S |  4 ++++
- 4 files changed, 87 insertions(+)
+ include/linux/module.h |  7 +++++++
+ kernel/rcu/tasks.h     | 23 +++++++++++++++++++++--
+ kernel/trace/ftrace.c  | 39 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 67 insertions(+), 2 deletions(-)
 
-diff --git a/arch/x86/kernel/asm-offsets.c b/arch/x86/kernel/asm-offsets.c
-index 081816888f7a..4f3b1caa5a30 100644
---- a/arch/x86/kernel/asm-offsets.c
-+++ b/arch/x86/kernel/asm-offsets.c
-@@ -46,6 +46,9 @@ static void __used common(void)
- #ifdef CONFIG_STACKPROTECTOR
- 	OFFSET(TASK_stack_canary, task_struct, stack_canary);
+diff --git a/include/linux/module.h b/include/linux/module.h
+index 96cc98568eea..ea4727f53fab 100644
+--- a/include/linux/module.h
++++ b/include/linux/module.h
+@@ -521,6 +521,13 @@ struct module {
+ 	unsigned int num_ftrace_callsites;
+ 	unsigned long *ftrace_callsites;
  #endif
-+#ifdef CONFIG_TASKS_RCU
-+	OFFSET(TASK_rcu_tramp_nesting, task_struct, rcu_tramp_nesting);
++#ifdef CONFIG_DYNAMIC_FTRACE_WITH_DIRECT_CALLS
++	/*
++	 * An ftrace direct-call trampoline lives in this module's text; see
++	 * rcu_tasks_ip_in_trampoline().  Sticky once set.
++	 */
++	bool ftrace_direct_tramp;
 +#endif
+ #ifdef CONFIG_KPROBES
+ 	void *kprobes_text_start;
+ 	unsigned int kprobes_text_size;
+diff --git a/kernel/rcu/tasks.h b/kernel/rcu/tasks.h
+index a55dc2a20fb7..df68a330769a 100644
+--- a/kernel/rcu/tasks.h
++++ b/kernel/rcu/tasks.h
+@@ -1117,19 +1117,38 @@ bool __weak arch_rcu_tasks_ip_in_trampoline(unsigned long ip)
+  *  - inside the bytes following a registered kprobe that jump optimization
+  *    may overwrite, which kprobe_optimizer() protects with
+  *    synchronize_rcu_tasks();
+- *  - in core text the architecture flags via arch_rcu_tasks_ip_in_trampoline().
++ *  - in core text the architecture flags via arch_rcu_tasks_ip_in_trampoline();
++ *  - in the text of a module that hosts an ftrace direct-call trampoline,
++ *    which covers the instructions before that trampoline's increment and
++ *    after its decrement (see ftrace_direct_mark_module()).
+  *
+  * A false positive only defers the quiescent state to the task's next
+  * context switch.
+  */
+ bool rcu_tasks_ip_in_trampoline(unsigned long ip)
+ {
++	bool ret = true;
++
+ 	if (kprobe_in_optimized_region(ip))
+ 		return true;
  
- 	BLANK();
- 	OFFSET(pbe_address, pbe, address);
-diff --git a/arch/x86/kernel/ftrace.c b/arch/x86/kernel/ftrace.c
-index 17d6edfcb7e0..8f63cd4b543c 100644
---- a/arch/x86/kernel/ftrace.c
-+++ b/arch/x86/kernel/ftrace.c
-@@ -275,6 +275,43 @@ static inline void tramp_free(void *tramp)
- 	execmem_free(tramp);
+ 	if (core_kernel_text(ip))
+ 		return arch_rcu_tasks_ip_in_trampoline(ip);
+-	return !is_module_text_address(ip);
++
++#ifdef CONFIG_MODULES
++	scoped_guard(rcu) {
++		struct module *mod = __module_text_address(ip);
++
++#ifdef CONFIG_DYNAMIC_FTRACE_WITH_DIRECT_CALLS
++		if (mod)
++			ret = READ_ONCE(mod->ftrace_direct_tramp);
++#else
++		if (mod)
++			ret = false;
++#endif
++	}
++#endif
++	return ret;
+ }
+ NOKPROBE_SYMBOL(rcu_tasks_ip_in_trampoline);
+ 
+diff --git a/kernel/trace/ftrace.c b/kernel/trace/ftrace.c
+index 53d5db60bfa5..14f27b887231 100644
+--- a/kernel/trace/ftrace.c
++++ b/kernel/trace/ftrace.c
+@@ -6076,6 +6076,29 @@ static void reset_direct(struct ftrace_ops *ops, unsigned long addr)
+ 	ops->trampoline = 0;
  }
  
-+#ifdef CONFIG_RCU_TASKS_PREEMPT_QS
-+extern void ftrace_static_tramp_end(void);
-+extern char __return_thunk_start[], __return_thunk_end[];
-+extern char __rethunk_safe_start[], __rethunk_safe_end[];
-+
 +/*
-+ * See rcu_tasks_ip_in_trampoline().  Some core kernel text behaves like a
-+ * trampoline for Tasks RCU purposes because a task executing there with
-+ * rcu_tramp_nesting == 0 may still be about to enter a Tasks-RCU-protected
-+ * trampoline whose address it already holds:
-+ *
-+ *  - the static ftrace_caller / ftrace_regs_caller / ftrace_stub_direct_tramp
-+ *    stubs, which carry a direct-call target on the stack until their final
-+ *    RET, and
-+ *  - the return thunks that RET expands to under CONFIG_MITIGATION_RETHUNK,
-+ *    which run after leaving the stubs above and before landing in that
-+ *    target.
++ * A direct trampoline may live in module text rather than in dynamically
++ * allocated text that rcu_tasks_ip_in_trampoline() recognises on its own (see
++ * samples/ftrace/ftrace-direct*.c).  The trampoline itself must hold
++ * current->rcu_tramp_nesting across its call-out (see register_ftrace_direct());
++ * marking the owning module here covers the instructions before that increment
++ * and after the decrement, where a task interrupted in the module's text must
++ * not be treated as Tasks-RCU quiescent, so that ftrace_shutdown()'s
++ * synchronize_rcu_tasks() still keeps the module text from being freed under
++ * it.
 + */
-+bool arch_rcu_tasks_ip_in_trampoline(unsigned long ip)
++static void ftrace_direct_mark_module(unsigned long addr)
 +{
-+	if (ip >= (unsigned long)ftrace_caller &&
-+	    ip <  (unsigned long)ftrace_static_tramp_end)
-+		return true;
-+#ifdef CONFIG_MITIGATION_RETPOLINE
-+	if (ip >= (unsigned long)__return_thunk_start &&
-+	    ip <  (unsigned long)__return_thunk_end)
-+		return true;
++#ifdef CONFIG_MODULES
++	struct module *mod;
++
++	guard(rcu)();
++	mod = __module_text_address(addr);
++	if (mod)
++		WRITE_ONCE(mod->ftrace_direct_tramp, true);
 +#endif
-+#ifdef CONFIG_MITIGATION_SRSO
-+	if (ip >= (unsigned long)__rethunk_safe_start &&
-+	    ip <  (unsigned long)__rethunk_safe_end)
-+		return true;
-+#endif
-+	return false;
 +}
-+#endif /* CONFIG_RCU_TASKS_PREEMPT_QS */
 +
- /* Defined as markers to the end of the ftrace default trampolines */
- extern void ftrace_regs_caller_end(void);
- extern void ftrace_caller_end(void);
-diff --git a/arch/x86/kernel/ftrace_64.S b/arch/x86/kernel/ftrace_64.S
-index 62c1c93aa1c6..902472c41798 100644
---- a/arch/x86/kernel/ftrace_64.S
-+++ b/arch/x86/kernel/ftrace_64.S
-@@ -7,6 +7,7 @@
- #include <linux/cfi_types.h>
- #include <linux/linkage.h>
- #include <asm/asm-offsets.h>
-+#include <asm/percpu.h>
- #include <asm/ptrace.h>
- #include <asm/ftrace.h>
- #include <asm/nospec-branch.h>
-@@ -145,6 +146,27 @@ SYM_FUNC_END(ftrace_stub_graph)
+ /**
+  * register_ftrace_direct - Call a custom trampoline directly
+  * for multiple functions registered in @ops
+@@ -6090,6 +6113,17 @@ static void reset_direct(struct ftrace_ops *ops, unsigned long addr)
+  * and save the parameters of the function being traced, and restore them
+  * (or inject new ones if needed), before returning.
+  *
++ * Nothing but Tasks RCU keeps the trampoline at @addr alive while a task is
++ * executing it or is preempted in something it called.  On architectures that
++ * select ARCH_HAS_RCU_TASKS_PREEMPT_QS a preemption is a Tasks RCU quiescent
++ * state unless current->rcu_tramp_nesting is non-zero, so the trampoline must
++ * increment it before calling out and decrement it before returning, as the
++ * ftrace and BPF trampolines do (see rcu_tasks_trampoline_enter() and
++ * samples/ftrace/ftrace-direct.h).  The few instructions before the increment
++ * and after the decrement are covered by the irq-exit IP check: automatically
++ * for trampolines outside kernel and module text (e.g. BPF images), and via
++ * ftrace_direct_mark_module() for trampolines in module text.
++ *
+  * Returns:
+  *  0 on success
+  *  -EINVAL  - The @ops object was already registered with this call or
+@@ -6169,6 +6203,7 @@ int register_ftrace_direct(struct ftrace_ops *ops, unsigned long addr)
+ 	ops->flags |= MULTI_FLAGS;
+ 	ops->trampoline = FTRACE_REGS_ADDR;
+ 	ops->direct_call = addr;
++	ftrace_direct_mark_module(addr);
  
- #ifdef CONFIG_DYNAMIC_FTRACE
+ 	err = register_ftrace_function_nolock(ops);
+ 	if (err)
+@@ -6237,6 +6272,8 @@ __modify_ftrace_direct(struct ftrace_ops *ops, unsigned long addr)
  
-+/*
-+ * Tasks RCU trampoline nesting, see rcu_tasks_trampoline_enter().  These live
-+ * inside the region copied into dynamic trampolines; the %rip-relative per-CPU
-+ * reference is fixed up by text_poke_apply_relocation() in create_trampoline().
-+ * The increment must precede the function_trace_op load: between that load and
-+ * the call, the ops pointer in %rdx is protected only by Tasks RCU.
-+ */
-+.macro RCU_TASKS_TRAMP_ENTER reg:req
-+#ifdef CONFIG_TASKS_RCU
-+	movq PER_CPU_VAR(current_task), \reg
-+	incl TASK_rcu_tramp_nesting(\reg)
-+#endif
-+.endm
+ 	lockdep_assert_held_once(&direct_mutex);
+ 
++	ftrace_direct_mark_module(addr);
 +
-+.macro RCU_TASKS_TRAMP_EXIT reg:req
-+#ifdef CONFIG_TASKS_RCU
-+	movq PER_CPU_VAR(current_task), \reg
-+	decl TASK_rcu_tramp_nesting(\reg)
-+#endif
-+.endm
-+
- SYM_FUNC_START(__fentry__)
- 	ANNOTATE_NOENDBR
- 	CALL_DEPTH_ACCOUNT
-@@ -163,6 +185,8 @@ SYM_FUNC_START(ftrace_caller)
- 	leaq MCOUNT_REG_SIZE+8(%rsp), %rcx
- 	movq %rcx, RSP(%rsp)
+ 	/* Enable the tmp_ops to have the same functions as the direct ops */
+ 	ftrace_ops_init(&tmp_ops);
+ 	tmp_ops.func_hash = ops->func_hash;
+@@ -6419,6 +6456,7 @@ int update_ftrace_direct_add(struct ftrace_ops *ops, struct ftrace_hash *hash)
+ 		hlist_for_each_entry(entry, &hash->buckets[i], hlist) {
+ 			if (__ftrace_lookup_ip(direct_functions, entry->ip))
+ 				goto out_unlock;
++			ftrace_direct_mark_module(entry->direct);
+ 		}
+ 	}
  
-+	RCU_TASKS_TRAMP_ENTER %rdx
-+
- SYM_INNER_LABEL(ftrace_caller_op_ptr, SYM_L_GLOBAL)
- 	ANNOTATE_NOENDBR
- 	/* Load the ftrace_ops into the 3rd parameter */
-@@ -181,6 +205,8 @@ SYM_INNER_LABEL(ftrace_call, SYM_L_GLOBAL)
- 	ANNOTATE_NOENDBR
- 	call ftrace_stub
- 
-+	RCU_TASKS_TRAMP_EXIT %rdx
-+
- 	/* Handlers can change the RIP */
- 	movq RIP(%rsp), %rax
- 	movq %rax, MCOUNT_REG_SIZE(%rsp)
-@@ -209,6 +235,8 @@ SYM_FUNC_START(ftrace_regs_caller)
- 
- 	CALL_DEPTH_ACCOUNT
- 
-+	RCU_TASKS_TRAMP_ENTER %rdx
-+
- SYM_INNER_LABEL(ftrace_regs_caller_op_ptr, SYM_L_GLOBAL)
- 	ANNOTATE_NOENDBR
- 	/* Load the ftrace_ops into the 3rd parameter */
-@@ -246,6 +274,8 @@ SYM_INNER_LABEL(ftrace_regs_call, SYM_L_GLOBAL)
- 	ANNOTATE_NOENDBR
- 	call ftrace_stub
- 
-+	RCU_TASKS_TRAMP_EXIT %rdx
-+
- 	/* Copy flags back to SS, to restore them */
- 	movq EFLAGS(%rsp), %rax
- 	movq %rax, MCOUNT_REG_SIZE(%rsp)
-@@ -328,6 +358,19 @@ SYM_FUNC_START(ftrace_stub_direct_tramp)
- 	RET
- SYM_FUNC_END(ftrace_stub_direct_tramp)
- 
-+/*
-+ * [ftrace_caller, ftrace_static_tramp_end) is treated as trampoline text by
-+ * rcu_tasks_ip_in_trampoline(): after RCU_TASKS_TRAMP_EXIT the stubs may
-+ * still hold a direct-call target (a BPF trampoline) on the stack until the
-+ * final RET, and that target's lifetime is guarded by Tasks RCU.  With
-+ * return thunks the RET itself runs elsewhere; arch_rcu_tasks_ip_in_trampoline()
-+ * covers the thunk text too.
-+ */
-+SYM_CODE_START_NOALIGN(ftrace_static_tramp_end)
-+	UNWIND_HINT_UNDEFINED
-+	ANNOTATE_NOENDBR
-+SYM_CODE_END(ftrace_static_tramp_end)
-+
- #else /* ! CONFIG_DYNAMIC_FTRACE */
- 
- SYM_FUNC_START(__fentry__)
-diff --git a/arch/x86/kernel/vmlinux.lds.S b/arch/x86/kernel/vmlinux.lds.S
-index 2438b89a4620..e546283dc267 100644
---- a/arch/x86/kernel/vmlinux.lds.S
-+++ b/arch/x86/kernel/vmlinux.lds.S
-@@ -151,7 +151,9 @@ SECTIONS
- 		 * definition.
- 		 */
- 		. = srso_alias_untrain_ret | (1 << 2) | (1 << 8) | (1 << 14) | (1 << 20);
-+		__rethunk_safe_start = .;
- 		*(.text..__x86.rethunk_safe)
-+		__rethunk_safe_end = .;
- #endif
- 		ALIGN_ENTRY_TEXT_END
- 
-@@ -162,7 +164,9 @@ SECTIONS
- 		SOFTIRQENTRY_TEXT
- #ifdef CONFIG_MITIGATION_RETPOLINE
- 		*(.text..__x86.indirect_thunk)
-+		__return_thunk_start = .;
- 		*(.text..__x86.return_thunk)
-+		__return_thunk_end = .;
- #endif
- 		STATIC_CALL_TEXT
- 		*(.gnu.warning)
+@@ -6702,6 +6740,7 @@ int update_ftrace_direct_mod(struct ftrace_ops *ops, struct ftrace_hash *hash, b
+ 			tmp = __ftrace_lookup_ip(direct_hash, entry->ip);
+ 			if (!tmp)
+ 				continue;
++			ftrace_direct_mark_module(entry->direct);
+ 			tmp->direct = entry->direct;
+ 		}
+ 	}
 
 -- 
 2.55.0
