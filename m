@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68C5BC88E41
-	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 20:29:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415362.1644827 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03812C88E41
+	for <xen-devel@archiver.kernel.org>; Thu, 10 Sep 2026 20:30:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1415367.1644839 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4lOz-0000xw-Rp; Thu, 10 Sep 2026 20:29:45 +0000
+	id 1x4lP6-0001WS-3a; Thu, 10 Sep 2026 20:29:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415362.1644827; Thu, 10 Sep 2026 20:29:45 +0000
+Received: by outflank-mailman (output) from mailman id 1415367.1644839; Thu, 10 Sep 2026 20:29:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4lOz-0000wr-Ng; Thu, 10 Sep 2026 20:29:45 +0000
-Received: by outflank-mailman (input) for mailman id 1415362;
- Thu, 10 Sep 2026 20:29:44 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x4lP6-0001WL-0a; Thu, 10 Sep 2026 20:29:52 +0000
+Received: by outflank-mailman (input) for mailman id 1415367;
+ Thu, 10 Sep 2026 20:29:50 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <kevin.lampis@citrix.com>) id 1x4lOy-0000pt-BC
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 20:29:44 +0000
+ (envelope-from <kevin.lampis@citrix.com>) id 1x4lP4-0001Pg-9L
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 20:29:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4lOx-001ixY-NR
- for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 22:29:43 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x4lP3-009Pyo-MW
+ for xen-devel@lists.xenproject.org; Thu, 10 Sep 2026 22:29:49 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <kevin.lampis@citrix.com>)
- id 6aa31318-e002-0a2a0a5209dd-0a2a45048eee-40
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 22:29:43 +0200
-Received: from [52.101.43.50]
- (helo=SJ2PR03CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa31323-8faa-0a2a0a5109dd-0a2a4503c878-20
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 22:29:49 +0200
+Received: from [52.101.201.11]
+ (helo=PH7PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <kevin.lampis@citrix.com>)
- id 6aa31334-b57f-0a2a45040019-34652b32efb2-5
- for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 22:29:43 +0200
+ id 6aa3133c-fae8-0a2a45030019-3465c90b4ef2-3
+ for <xen-devel@lists.xenproject.org>; Thu, 10 Sep 2026 22:29:49 +0200
 Received: from BY1PR03MB7996.namprd03.prod.outlook.com (2603:10b6:a03:5b2::8)
  by LV5PR03MB8433.namprd03.prod.outlook.com (2603:10b6:408:361::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.9; Thu, 10 Sep
- 2026 20:29:41 +0000
+ 2026 20:29:46 +0000
 Received: from BY1PR03MB7996.namprd03.prod.outlook.com
  ([fe80::5068:e1b5:b478:8d07]) by BY1PR03MB7996.namprd03.prod.outlook.com
  ([fe80::5068:e1b5:b478:8d07%6]) with mapi id 15.21.0406.007; Thu, 10 Sep 2026
- 20:29:41 +0000
+ 20:29:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ceBxpU+qmzyTFxqWrmw0ZDlcv2YfwyKl9jAtshhLOf7UJfrDd1WF72FJ04tbpoO8Ld9sXC9YVwOv/c/swmyrjAMwlqmhbg9F+J/d6Wg3lz8khxvgl/Wd0+X1JWAB5vTfaRI9VCs9Mp902Q4xFS0u78zJv/B7sbS8s8EnRAmX6t7On3KEicF77uR1JheFDu9JTS8A4GubSM7Ekqc+JP0ercgZEjCK/2SSpRikvdrVDF6RNuPTuoPQTKnUSMOJj1DNJfj+IZhJ/o4AEBdY4af+ljuNI3ZDu1H0bPNyWLRrWL1uvnl1vbsDgLfdYfN0N0+pgZczxDZ/wq5zLt1jvYc58Q==
+ b=ZGcAE1nabQSJCg4idVFZUBIqfvhOVsBKkt0mw2dbi2VGzFpLVrgjY8IN04qL2nMNpYBEBYM1zk6QCRu+ALO0/lNa/HGoBCyAkDOhLTg2KqW7qPum+CjyP6mQn/lNIn7tKpY0E9zcXi0Mjxx3xhEWyMZcGpkPZAD6LVsZZsluJYm8pA6oc2aVT+fDZfQeFXgutvQue78qObY54QDT7RQmVE94AywxxwU4urtUB5OKgU5hPvDattT8iA9fCRplnWHOUZi/wJPguVFV0t9jLN9NiPDBUalfBvGk4tvKFcoWHY0kY1ZZDz4vZCwd4cKFYBcX3OOrvpYOFdv2WH1tMriZqg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZRMOrcUBuKZGWJ4fSy5SoqfBgF/O6euKv4pLdi6oABw=;
- b=Ql0IQeIclGCrEsV2RPNJbYTjXT1g43iFNLssc3QqGGzjilwqaTyJlm0JfY2A3D7lnYKtQz42ISa6l5jbGaeeHY+1U3DJ6clDW8AxqhFUfUppWUNvuZ/YrNabZGLM8qKefLvHawzOIPWCqLCVtDFo3cYeIwoLLMtfTCpj2f7fkU1QZKheSUmin783t2swSR7U5imftFEsFVyWUXdMTdi4l/RNhVUSKYpGE5gUsrS+mDKk+DRbRoATrppl/xPrXgxlRIaIOIKSENYNtj+RiTl5FcOxLQ3TMdNu0LWQn62Nf0DmQivBN7iEinZ2J20Uz64TWluYWU9kf0nzBHwLJVMkMQ==
+ bh=XeS3HADGVZC3svsA8mdXVt6dTdJRoxy4Cwr2pNlCGck=;
+ b=o0KJ6fyFiK48aM+1qxqdJq1lEQeWHgRpRa7iIyn27owuQDyM+DWZuVe6m09Y3x1EYdFtvSkjvIrX8+QnlSWulIEn3ETnJ3ohn8uPfEirorCFiemYGgSAGNjr7KpbnNtRtlaaBvPoC3wgZG7Tyb4dB1NTSD+AL1+yyS2V2yE5QMdqEMbFCI/5G9tm2Ti9Z2LtkHYlY6/oMbzEOrCErU69tmK/n+7gM3iNkchlf0ZAfvQLitVpTPpoV69JtEg9T1eKl90E9M5eg7NbitJWdT8Z6C1LfCkBMA7/h6q0yW+rAtA4NLAm3W4MTfTpJ9kPCi3zWmvWYLC7aWA47DrAAY7k9g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZRMOrcUBuKZGWJ4fSy5SoqfBgF/O6euKv4pLdi6oABw=;
- b=PBoEr2rEnbvZZdQakJqTTDXUnJCQuaUyq4RFdEzBCH7Q/6n+bzp0Jz22phlU1TylR3VC7FCwvSZFzP62LUnczYPikj1JOXgAfKN4Ke8vopeCNBmCW37gFUCfxVpAMYRDisMD1+tirk8jRAhGW8Zoh9DUGnTvA1ba27EjqGdgyqQ=
+ bh=XeS3HADGVZC3svsA8mdXVt6dTdJRoxy4Cwr2pNlCGck=;
+ b=jb2z7wj0uVY1/kjVNoTMBdpCi9eUD/r/x9xGxLHYcBxlojivxh1Lj9IZAFCE7uaDcF9ub1Ls9AAe0Hf2G2UC3QhwHN4h2zm+QNzEJ9cZrrb8e9ySax1lolElCCOdoul2utxgzg0ZwnMEzeydICEn2RKK1GutxdVxt+1dK1s/9Cc=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 From: Kevin Lampis <kevin.lampis@citrix.com>
@@ -79,159 +79,224 @@ Cc: jbeulich@suse.com,
 	andrew.cooper3@citrix.com,
 	teddy.astie@vates.tech,
 	Kevin Lampis <kevin.lampis@citrix.com>
-Subject: [PATCH v2 4/7] x86: extend mod_l1_entry() to optionally return the old PTE value
-Date: Thu, 10 Sep 2026 21:31:10 +0100
-Message-ID: <20260910203113.462943-5-kevin.lampis@citrix.com>
+Subject: [PATCH v2 5/7] x86: extend do_mmu_update() to support returning the old PTE value
+Date: Thu, 10 Sep 2026 21:31:11 +0100
+Message-ID: <20260910203113.462943-6-kevin.lampis@citrix.com>
 X-Mailer: git-send-email 2.52.0
 In-Reply-To: <20260910203113.462943-1-kevin.lampis@citrix.com>
 References: <20260910203113.462943-1-kevin.lampis@citrix.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: LO4P123CA0079.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:190::12) To BY1PR03MB7996.namprd03.prod.outlook.com
+X-ClientProxiedBy: LO4P123CA0655.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:316::9) To BY1PR03MB7996.namprd03.prod.outlook.com
  (2603:10b6:a03:5b2::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: BY1PR03MB7996:EE_|LV5PR03MB8433:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7e6e19c0-dafe-4112-6f52-08df0f7a3e21
+X-MS-Office365-Filtering-Correlation-Id: f128ecf8-1af3-4b02-0d5f-08df0f7a4127
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|11063799006|56012099006|10067099003|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	iNRfAir0NI7rQSNTW6zVsZHzr/SbY0vSPnsrpR4Vna4M6ZTfqw9vZKrrBaCU4rNrwmPixdHH50UFmHSy3QRRptsH4JvoyGyESP5JRjRypT0kCuztFQ5nZYJHWovVhsKupUI6VaXzYDpGqkNjJ73+tRC+lev8UvLT/FA3VqQtxauIuSJPXmMYTQW9SImPKSNG8guiyG+9NDqkDO0BpGq+nRCAui8l9xgUOfpXfGbyIci0nuvQHYuBB/45ODlEelkXf0esqrGXdOG1ix+QoCXOFIwHxjiYPBXEGhxQyvmctIYZHnCgx7sm1gCSdV+2sB9aaNnYAjtmggflveZGlw5VbAnuF/dvqA/TTJBoVsLCVo9vbzyd1cizc66Dom2CPtMLeysYcTStAH5iYsqCtL1pPrM/IwFuDjUGIWlSTC2PmJfFGKvSXvIVTqsMIgBY3JajBlsiTRysqFiexITLqYO90bwZmei7AH1WIAOjd3NYzWSSi0WhDuIPMP49kKN1samDgWiZjd38bAgHyLRk6jCEXdcchB4WQZreNuKY7vPmzkz70UjYdWNHSk4EC5Q3NouM1JQgY1ASmaPmoYXVCAYpr47jhfhy+NKRXyJr6cL6xtmoskZjKguqDVSOd5E5rdOGpkW3RcaSt1G84OoYZ1edacH8PTbxHoWQh+yWQiZklOc=
+	9rtd7mQ58Mm7HtpktbYPOnO4l1wrB8GdjEZhnD0xRoTMvgYwYxQhofPLVSN3Kqw/mWU1OoVjAipVOXNsgtsEXTZZXAnloVNX9lzL3nrbcyHDiKxtVEMmzNn0PBpTtL7CN6PBLQCvBaMeyD0+cUqak78xD6N2T4BfGzapjqsHjxKq5uKjUIqvDCJPeIXDeH61GmGa3LIaWQwHquQhtvLX7QNlePtXm2Cx1ZDyPxj6U/3rOMzokYHkTo2XnfToPTADZaTg4ISStFfLuuLGM9Ct/A9d32eBhyzvGePtjOd0zkZ3CTCYV1ihuz2k2/vPuNf+Q80ee0ko51Ob6TsvA23N/RsbCTYu2dvqMRi2WTYEoYoBxdrjNzTXKJ0mohsLdpuieThrllx+MvlhsExdpf/96qYB/YDn42R6sPl0yZSJ5hPLa0W1i+X8eXlfX+ywNA7MOKIVd+aYZ5e1gv5/xPBUo0Owbr0ARswXrh1lGmHJ/XjJ4c/GuYhKgARns2OtJXAG9TWc6WdUxb/Z4rFyd032tMoCO2l4Zvn1xwEIElWn/jQlXz85Hg33pDLhWgqr27J8QWi9OwmpHJG3jv/6sNggUt2mZ4CM4egqQXwoeV0cUg067OgKIZdsKsKfn6I2miG3fs6YlZhozq31K2HXFQczwQvczBjaq5fos5pOe8s+nww=
 X-Forefront-Antispam-Report:
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY1PR03MB7996.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(11063799006)(56012099006)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?2O+S/Vun0/xXYZrOyVIrXO/FX0MUEhnM9kviWv+9LXfOGj042yxr5IBsO9Bo?=
- =?us-ascii?Q?DSNMFVo1WG8tlYQwkKP+pq7DIjMCn4P6nHUfjWujbD61BGfQklXFuvguXLws?=
- =?us-ascii?Q?r38ZDI+1GyK0fD/cQ8hQE+mh+4cuy0iBpY2yP8Ong1HABB/Jkisojj1eRknP?=
- =?us-ascii?Q?nuyaHt5pujcEpTdhlAl9HekWMoiU+imPN99qyz/WPOJ6OqeTP/O7nMr22BGd?=
- =?us-ascii?Q?3BfP6HthMRSC9OCr52yW0UV2whp/QLTzo0gMUh3Ven/0w9EZU2CY4UOfY0eC?=
- =?us-ascii?Q?dj1oTSzo2bXc3lmOdtrXDNrRiE35j09pJzi4U6WPygnPQhGL28+ilOYx+rfZ?=
- =?us-ascii?Q?Z2ZibjVCV4KgRffojPo5XuF7vPGYLdzQtm1wdbqMQLYGZu4p4Lm2+aZMYAw8?=
- =?us-ascii?Q?sdMCaOcF04PqpLWftYJ4AgLtHENIjjLybzorRGWX6+L/U1NTwSJoYoF30/4r?=
- =?us-ascii?Q?vQwQzr75FIrqWx43JchiJ0E18pVddJi6ULhVX0SoueON6338rE+0lRRZE5oY?=
- =?us-ascii?Q?bhG8YgwToB5pzK2anweMGRi6YeKxvmIydxwusj4jLmf2iah3g6lRAcfDi+iH?=
- =?us-ascii?Q?JWUczo/77OzuVQ94MmVPYiO/cNw3JoShPeG5pLXY1BUfITax/45PK1AgwLHn?=
- =?us-ascii?Q?/Z3zXwwxh32cBHp+2uHJXN8eXj227JYmNYn13RTDjrX7thXK7k5FJ1jGXbit?=
- =?us-ascii?Q?ZboBn209yqp2COcwDbF9FmLiOwv/bLr+rQeLHGEnuqNijSJKt+TR3cIU6B9U?=
- =?us-ascii?Q?+ShaBg4jwVvFInaU3clcaCp3Fc22rM/3jq81ww382Y4VV/l82FFgrRFDotLG?=
- =?us-ascii?Q?NPBrUxFW8lfSTM+Q1c/X0J/6Kk6kHIS1rHDysIrVDcX5teoAevYc/xZOZJ0z?=
- =?us-ascii?Q?VbclOXj1KLiMqj7p2b4OSdpPimCJdTh+sX03BLXMBwJj6DS+N/xoZQiNVyDG?=
- =?us-ascii?Q?R/Vzw8LcQMrigvHi2ItRgxnrGYCj6myK8MH41SVE+YHXYdgu4FLRT1erilIP?=
- =?us-ascii?Q?i3ygXd5ynG/sSRM/+wSq6Z/uVOYFHKg/T+0MvbxILLI8gnxMc3rZ6b8dN6Vj?=
- =?us-ascii?Q?yQj3kbukDQVFLRalxhlOhN+wAbZ1d/QUheyNF4T3JgNjW3obpZfXlL4QO4q1?=
- =?us-ascii?Q?NdzVMA83cQB+G5dD+u1t/4z5KQQ46IuQUat5GQfAJDkYtQDzaqnZPdS1lxwa?=
- =?us-ascii?Q?C8KCDsc4Oqk4LrPGU3LqY0dFwJuyL+ml8tkVe9K3QPUxbvMU6a+ItbJ5u9Mh?=
- =?us-ascii?Q?BajyOF52+oUorqR7Qmm7tR/FHVU3y5o87lM4j9JeMAlv32u5dBosKZQjxT9P?=
- =?us-ascii?Q?EqEmUN1QOWtyfYgDxIaDnwT+xyTpOpf8bmazQuXyOuG26lnu//Taj1vRYyQA?=
- =?us-ascii?Q?bnZmN7SKWMrW+8n9S/plHGuujAqKgcuAQWbHsw3NasJhTeHRJcgUzfCV7YLF?=
- =?us-ascii?Q?0DnpXKLceDIfsnd6ajNs1HWTCib9V/bBMxHqmMAixAZbCprOYEY3s1496LTp?=
- =?us-ascii?Q?GJR9EBVWcCgvIn73f+l9pS0SOH+BU5WXjtAL0A3llMqr2+7/BRedNxEW+VZ5?=
- =?us-ascii?Q?Fc4Rzt6blYZGuDm1nkzXOqeZE7es+LrnF9wjOeSUCaOAKRniEAMyTxF2LQ9n?=
- =?us-ascii?Q?YPCrrFSodvhU8/+dGbAn8kIPVudeN2jxUOkIRgxvkRlygt58iA2Ly56Pmkwi?=
- =?us-ascii?Q?0LjYw9gGsRRWY+KbB3IVFwTJua0uQ8dKrITjuaykHQ6BGm5wSFZjfwSUSk+C?=
- =?us-ascii?Q?WWGxpM8XaA=3D=3D?=
+	=?us-ascii?Q?FH8xrQVK5qNUHJOxjjbZViifiWaH1ocEo1SMdAOqSfxEXCu91E8l3ELhHoSC?=
+ =?us-ascii?Q?S/0D3k6oOqgQOselEfnVkBbcrzK7rtsIZdImRsO/XVn/RT1OioZeGAgyf4VF?=
+ =?us-ascii?Q?wt1sA0ka9qZGKjwv4jiUxkchHb5eRdehOe43SafRXvaopcQB+ytgwgLGXYL+?=
+ =?us-ascii?Q?vqxKDwShIfQYQaQDWq6Xh201dt/oprojR5TxZPGAJ7XE8gXRHilprUjqgesk?=
+ =?us-ascii?Q?WpApRc0WjU8vHNbnT01Lek/ABqkEU484/38IQXolC25UEt4bItXbyFmSeqBO?=
+ =?us-ascii?Q?l29FsPdmhfwd9Q66S9jw2Qowo/zE7cJ7ipQmxF+75gtXGCxXx55VolDkr1vI?=
+ =?us-ascii?Q?ut52htYZH2Yc+rx/nW/YCfhUZMT5bnfR6F3D1a15ljORah2IlGPWNc6IiUNF?=
+ =?us-ascii?Q?PkLO+dS+75EyCAN3MADHZc9gX0VGMhOxVRGI2TJVbe9snDfynXYmLbHF/7Tz?=
+ =?us-ascii?Q?ugxM3bemZlsLJTnOkac9XdBzVSKYInuFAzrIgjj6FpxrhxNAc53V7udOl2xw?=
+ =?us-ascii?Q?fav50RuhKSztYdt5HdibPxTrvEsyFb2QaMd3DfhsoBeeOUh2xdAuEjX0kCdg?=
+ =?us-ascii?Q?Gn5GYhq9ZaVc66iPOgthXLhdmMZmfDwvkVcS6RdUP5HW/sIARDlYjlS5Xu8X?=
+ =?us-ascii?Q?J6vriapIDpX0se9UWuJksA5RsFYxRqm/NWy+aQiKrF7VQ92G8DafgsaQAsBK?=
+ =?us-ascii?Q?1E0kwl2w5WoA3IvYVExnmiVoMx94SWWJ6kRp4MsyuYE3osYw65XpKO49BiLZ?=
+ =?us-ascii?Q?5hQpPecMSJqEi0UsCN76NiMDqWFXEelHzMRKN63lkSfL4deqYZB5F5MJX20a?=
+ =?us-ascii?Q?oX78gPu/gbViajrgvYCxv5QxCO+3Rbqz9PALHLCGjDHTx6mhxEJ3kZ5kjNUZ?=
+ =?us-ascii?Q?qm9Qf6KE4Vv5FQNjtpbd6zL1qbd9asqnoDJQK4jR1zv3bS1GBZDjdXyq3t6Z?=
+ =?us-ascii?Q?nux/DD/Nwvt822zCmy6TRr4/ARF3qNYDSJjpj6zvszcuKE+cpq1m1ix1pvMK?=
+ =?us-ascii?Q?gdFuebhpKtOnDQwJv7kBlFjg9tSP6eJo7z3uszRJhKPOg6nzOnKKbD8aprrW?=
+ =?us-ascii?Q?SHd6OGjRdZNkNJoj24dw+DUgLEd8+GTAzDgTNJb68Hk1xER5di2GhTHGJfDJ?=
+ =?us-ascii?Q?mgbrHpGyez7vVKkg4CyYy9QbIuMBXBykYi5lsjYzX2J2FiUwg3IV+1D6zsav?=
+ =?us-ascii?Q?ncox5MyadWrIEvgdGHyfLHBAa4An8tOkSq6u+OIzSkHjCv9LxSfU+j/2MijZ?=
+ =?us-ascii?Q?SBYIT6KuK1tJv4o+MbVK+9floEaxbRsUneqJBVJjtdivUp+iDkbkavfv5gyY?=
+ =?us-ascii?Q?LsGX6TlQ6bHVrZjjQBbXVRvF7QdGxV3v920biWAnCQ5W1FuWG3uyQX1M+UCp?=
+ =?us-ascii?Q?c/qv2VdLMJTwj5h9E0MIYqiz+mkOkpgbNxNshpGXXl2/sjVmt4mlPo3PHa0l?=
+ =?us-ascii?Q?4M5XM8UdCqpyXTw6EgtOhvPUG9VaK9e2TH1nHu8HCEPuTZXd4efaEKijHR6o?=
+ =?us-ascii?Q?wMAxeZoCEG47wOOAfG+HvP+bfmjl/KCeSPEVBxmoxTkEx65imGxt+LsNUzts?=
+ =?us-ascii?Q?Qbg+EYQfVAwFHJw1pftt/1hfciVezv79gEf2vsgGjQhN5ORC0CVCXpqrefAj?=
+ =?us-ascii?Q?DUsBXgghPFSP6V8dAkyr5iGedFllKUokX8imylo+7Rdr2em2a2gtEqZ71ARI?=
+ =?us-ascii?Q?/LQXlBsDp1lYlM6Z9G3ldOXp4pja7xdfbjiGi6lgMKeArWbKBxLCnEW1qdKN?=
+ =?us-ascii?Q?IT5qnadxaw=3D=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7e6e19c0-dafe-4112-6f52-08df0f7a3e21
+X-MS-Exchange-CrossTenant-Network-Message-Id: f128ecf8-1af3-4b02-0d5f-08df0f7a4127
 X-MS-Exchange-CrossTenant-AuthSource: BY1PR03MB7996.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2026 20:29:41.3453
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Sep 2026 20:29:46.4242
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: jJMNS9WapxuYo9knz0E3pfYs67jtqwt25oRq35mvfzXJcCbF6qvDwd60RSxbgbb4wmNiHYunfj5DJCl762C1HQ==
+X-MS-Exchange-CrossTenant-UserPrincipalName: igLld+7+vgiDunaj5Xte6bHEce/qNZUJKH3ZJEAkChH0VIRbaNzVIsR7hJwmXpGOdD7u2a+oFCAPFsyxQW4Jgw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV5PR03MB8433
-X-purgate-ID: tlsNG-ebf023/1789072183-C1CD7B50-DC8DEC67/0/0
+X-purgate-ID: tlsNG-33051d/1789072189-758824E9-068030D2/0/0
 X-purgate-type: clean
-X-purgate-size: 3287
+X-purgate-size: 6168
 
-Calling mod_l1_entry() with a valid ol1e_out pointer will do an atomic xchg to
-set the new pte value and return the old pte value through the ol1e_out
-pointer. If the ol1e_out pointer is NULL then old behavior is preserved.
+A new sub-op MMU_PT_UPDATE_SWAP when used will do an atomic swap to set
+the new value and return the old PTE value through the req.val field.
+
+- The new PTE value in req.val must be 0, at the moment this is intended
+  for clearing only.
+
+- Only l1 PTEs are supported because they are the most frequent and have the
+  biggest performance impact.
+
+- The old PTE value is passed back to the guest through the req.val field
+
+If MMU_PT_UPDATE_SWAP is not set then the old behavior is preserved
+  do_mmu_update -> mod_l1_entry -> UPDATE_ENTRY -> paging_write_guest_entry
+
+The new MMU_PT_UPDATE_SWAP call chain looks like this
+  do_mmu_update -> mod_l1_entry -> UPDATE_ENTRY -> paging_cmpxchg_guest_entry
 
 Signed-off-by: Kevin Lampis <kevin.lampis@citrix.com>
 ---
 Changes in v2:
-- UPDATE_ENTRY now returns the old pte value instead of using an out
-  pointer
+- Add a sub-op to mmu_update instead of new hypercall
+- Rename to "swap" instead of "clear", although only `0` is accepted
+- Remove spurious curly brace from `case PGT_l1_page_table:`
+- Restructure `case PGT_l1_page_table:` to avoid diff churn
+- Add missing `MMU_PT_UPDATE_SWAP` check for the second
+  `PGT_writable_page` block
+
+(Jan) I decided not to remove the `rc = -EINVAL` lines. Even though `rc`
+already has this value I think it's more readable like this. Let me know
+if I misunderstood the issue.
 ---
- xen/arch/x86/mm.c | 23 +++++++++++++++++------
- 1 file changed, 17 insertions(+), 6 deletions(-)
+ xen/arch/x86/mm.c        | 48 +++++++++++++++++++++++++++++++++++++++-
+ xen/include/public/xen.h |  1 +
+ 2 files changed, 48 insertions(+), 1 deletion(-)
 
 diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index dcbc44f57c54..59ad5ce16486 100644
+index 59ad5ce16486..b498a8460935 100644
 --- a/xen/arch/x86/mm.c
 +++ b/xen/arch/x86/mm.c
-@@ -2150,7 +2150,8 @@ static void l3t_unlock(struct page_info *page)
- /* Update the L1 entry at pl1e to new value nl1e. */
- static int mod_l1_entry(l1_pgentry_t *pl1e, l1_pgentry_t nl1e,
-                         mfn_t gl1mfn, unsigned int update_flags,
--                        struct vcpu *pt_vcpu, struct domain *pg_dom)
-+                        struct vcpu *pt_vcpu, struct domain *pg_dom,
-+                        l1_pgentry_t *ol1e_out)
- {
-     l1_pgentry_t ol1e = l1e_read(pl1e);
-     struct domain *pt_dom = pt_vcpu->domain;
-@@ -2211,9 +2212,12 @@ static int mod_l1_entry(l1_pgentry_t *pl1e, l1_pgentry_t nl1e,
-         /* Fast path for sufficiently-similar mappings. */
-         if ( !l1e_has_changed(ol1e, nl1e, ~FASTPATH_FLAG_WHITELIST) )
+@@ -4055,6 +4055,7 @@ long do_mmu_update(
+         case MMU_NORMAL_PT_UPDATE:
+         case MMU_PT_UPDATE_PRESERVE_AD:
+         case MMU_PT_UPDATE_NO_TRANSLATE:
++        case MMU_PT_UPDATE_SWAP:
          {
--            UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu, update_flags);
-+            ol1e.l1 = UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu,
-+                                   update_flags);
-             if ( page )
-                 put_page(page);
-+            if ( ol1e_out )
-+                *ol1e_out = ol1e;
-             return 0;
-         }
+             p2m_type_t p2mt;
  
-@@ -2234,14 +2238,20 @@ static int mod_l1_entry(l1_pgentry_t *pl1e, l1_pgentry_t nl1e,
-         if ( page )
-             put_page(page);
- 
--        UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu, update_flags);
-+        ol1e.l1 = UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu,
-+                               update_flags);
-     }
-     else if ( pv_l1tf_check_l1e(pt_dom, nl1e) )
-         return -ERESTART;
-     else
--        UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu, update_flags);
-+        ol1e.l1 = UPDATE_ENTRY(l1, pl1e, ol1e, nl1e, gl1mfn, pt_vcpu,
-+                               update_flags);
- 
-     put_page_from_l1e(ol1e, pt_dom);
-+
-+    if ( !rc && ol1e_out )
-+        *ol1e_out = ol1e;
-+
-     return rc;
- }
- 
-@@ -4109,7 +4119,7 @@ long do_mmu_update(
+@@ -4118,6 +4119,30 @@ long do_mmu_update(
+                 switch ( page->u.inuse.type_info & PGT_type_mask )
                  {
                  case PGT_l1_page_table:
++                    if ( cmd == MMU_PT_UPDATE_SWAP )
++                    {
++                        l1_pgentry_t ol1e;
++
++                        if ( unlikely(req.val != 0) )
++                        {
++                            rc = -EINVAL;
++                            break;
++                        }
++
++                        update_flags |= PTE_UPDATE_SWAP;
++
++                        rc = mod_l1_entry(va, l1e_from_intpte(req.val), mfn,
++                                          update_flags, v, pg_owner, &ol1e);
++
++                        if ( !rc )
++                        {
++                            req.val = ol1e.l1;
++                            if ( unlikely(copy_to_guest(ureqs, &req, 1)) )
++                                rc = -EFAULT;
++                        }
++                        break;
++                    }
++
                      rc = mod_l1_entry(va, l1e_from_intpte(req.val), mfn,
--                                      update_flags, v, pg_owner);
-+                                      update_flags, v, pg_owner, NULL);
+                                       update_flags, v, pg_owner, NULL);
+                     break;
+@@ -4125,6 +4150,11 @@ long do_mmu_update(
+                 case PGT_l2_page_table:
+                     if ( unlikely(pg_owner != pt_owner) )
+                         break;
++                    if ( unlikely(cmd == MMU_PT_UPDATE_SWAP) )
++                    {
++                        rc = -EINVAL;
++                        break;
++                    }
+                     rc = mod_l2_entry(va, l2e_from_intpte(req.val), mfn,
+                                       update_flags, v);
+                     if ( !rc )
+@@ -4134,6 +4164,11 @@ long do_mmu_update(
+                 case PGT_l3_page_table:
+                     if ( unlikely(pg_owner != pt_owner) )
+                         break;
++                    if ( unlikely(cmd == MMU_PT_UPDATE_SWAP) )
++                    {
++                        rc = -EINVAL;
++                        break;
++                    }
+                     rc = mod_l3_entry(va, l3e_from_intpte(req.val), mfn,
+                                       update_flags, v);
+                     if ( !rc )
+@@ -4143,6 +4178,11 @@ long do_mmu_update(
+                 case PGT_l4_page_table:
+                     if ( unlikely(pg_owner != pt_owner) )
+                         break;
++                    if ( unlikely(cmd == MMU_PT_UPDATE_SWAP) )
++                    {
++                        rc = -EINVAL;
++                        break;
++                    }
+                     rc = mod_l4_entry(va, l4e_from_intpte(req.val), mfn,
+                                       update_flags, v);
+                     if ( !rc )
+@@ -4172,6 +4212,11 @@ long do_mmu_update(
                      break;
  
-                 case PGT_l2_page_table:
-@@ -4474,7 +4484,8 @@ static int __do_update_va_mapping(
-         goto out;
-     }
+                 case PGT_writable_page:
++                    if ( unlikely(cmd == MMU_PT_UPDATE_SWAP) )
++                    {
++                        rc = -EINVAL;
++                        break;
++                    }
+                     perfc_incr(writable_mmu_updates);
+                     paging_write_guest_entry(v, va, req.val, mfn);
+                     rc = 0;
+@@ -4181,7 +4226,8 @@ long do_mmu_update(
+                 if ( rc == -EINTR )
+                     rc = -ERESTART;
+             }
+-            else if ( get_page_type(page, PGT_writable_page) )
++            else if ( likely(cmd != MMU_PT_UPDATE_SWAP) &&
++                      get_page_type(page, PGT_writable_page) )
+             {
+                 perfc_incr(writable_mmu_updates);
+                 paging_write_guest_entry(v, va, req.val, mfn);
+diff --git a/xen/include/public/xen.h b/xen/include/public/xen.h
+index 2149b8dd3808..559190688a1e 100644
+--- a/xen/include/public/xen.h
++++ b/xen/include/public/xen.h
+@@ -349,6 +349,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
+ #define MMU_PT_UPDATE_PRESERVE_AD  2 /* atomically: *ptr = val | (*ptr&(A|D)) */
+ #define MMU_PT_UPDATE_NO_TRANSLATE 3 /* checked '*ptr = val'. ptr is MA.      */
+                                      /* val never translated.                 */
++#define MMU_PT_UPDATE_SWAP         4
  
--    rc = mod_l1_entry(pl1e, val, gl1mfn, MMU_NORMAL_PT_UPDATE, v, pg_owner);
-+    rc = mod_l1_entry(pl1e, val, gl1mfn, MMU_NORMAL_PT_UPDATE, v, pg_owner,
-+                      NULL);
- 
-     page_unlock(gl1pg);
-     put_page(gl1pg);
+ /*
+  * MMU EXTENDED OPERATIONS
 -- 
 2.52.0
 
