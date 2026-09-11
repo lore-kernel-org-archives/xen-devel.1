@@ -4,46 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E50CC88E50
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 08:43:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415989.1645160 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A8761C88E4C
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 08:43:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1416007.1645178 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4wqH-0007v2-FP; Fri, 11 Sep 2026 08:42:41 +0000
+	id 1x4wr9-0000c5-2B; Fri, 11 Sep 2026 08:43:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415989.1645160; Fri, 11 Sep 2026 08:42:41 +0000
+Received: by outflank-mailman (output) from mailman id 1416007.1645178; Fri, 11 Sep 2026 08:43:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4wqH-0007uq-CM; Fri, 11 Sep 2026 08:42:41 +0000
-Received: by outflank-mailman (input) for mailman id 1415989;
- Fri, 11 Sep 2026 08:42:40 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x4wr8-0000by-V1; Fri, 11 Sep 2026 08:43:34 +0000
+Received: by outflank-mailman (input) for mailman id 1416007;
+ Fri, 11 Sep 2026 08:43:33 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <okamoto@valinux.co.jp>) id 1x4wqG-0007uK-1C
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 08:42:40 +0000
+ (envelope-from <jgross@suse.com>) id 1x4wr7-0000bY-8S
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 08:43:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4wqF-008YCw-E3
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 10:42:39 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x4wr6-00AnFg-8f
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 10:43:32 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <okamoto@valinux.co.jp>)
- id 6aa3befd-8faa-0a2a0a5109dd-0a2a45098678-8
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 10:42:39 +0200
-Received: from [52.101.125.131]
- (helo=TYVP286CU001.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <okamoto@valinux.co.jp>)
- id 6aa3bef7-be1a-0a2a45090019-34657d8322b8-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 10:42:34 +0200
-Received: from TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:af::12)
- by OS7P286MB7475.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:43d::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.9; Fri, 11 Sep
- 2026 08:42:29 +0000
-Received: from TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM
- ([fe80::2067:ff0e:4c3:ad0b]) by TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM
- ([fe80::2067:ff0e:4c3:ad0b%5]) with mapi id 15.21.0406.007; Fri, 11 Sep 2026
- 08:42:29 +0000
+ (envelope-from <jgross@suse.com>)
+ id 6aa3bf25-bab6-0a2a0a5309dd-0a2a4507940c-46
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 10:43:32 +0200
+Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6aa3bf34-b4ea-0a2a45070019-c387df83884a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 10:43:32 +0200
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 98F131FA79;
+ Fri, 11 Sep 2026 08:43:23 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 11536132D3;
+ Fri, 11 Sep 2026 08:43:23 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id tXzkAiu/o2odFgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 11 Sep 2026 08:43:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,157 +60,338 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=YolJ/IqbHOHj6kUFJYbEhQq+UDnlOhn/HozNapF+i7PyWP3Brpr03VZMCF7Q/WnozE7VPvBhtlhgE0474z1tDm9f2h641o9UUDHzf0ddZ4UQBBV8TxQW4C983IgdOhm6qmbj/oDRH7hy+vTcVXGIj9Thob/7x9VDSqx3Hzg8I8vvO1N1KfonDGIOXdeFk/MWqOGally3UusHvZzOTPIeDWFz+hBDDpWH1Ly1hSHKNPZAJ8QJK4AfLFdF75R4KhujjHIs5Ruyb4xRE1VoVBuhk/DPIqPS8i1ddpbVNsUK2vBvmwBjAM7DQtr/XzuP8XN5cBkn6Qk+yGqMVOPdf0FGdg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=VPJ5QY+3kppKZ4cOZLPHOJhBzEo2t1v/O8J4BX58dRs=;
- b=fyg9RcfBf5oFQAluszgqDmPUsn+h4MrZrewHUTtqgstpZ+8F8bu5pg1TBfFwQcx3EctHcKHZ+BLf5dM2ERbZgGNURBrAbebjUr70X/GuiRKhoFVYeqOLHxKKHdJGxchUpztHUdaEGYDyGEoQW4IxTmBy8ThuGioI+OmWv/NRUpEhCuFp0zKpXSBD4Q/1t9AtbfslJ1GbuR+77Pmeuqa7+38yBKlKNbv9vUz09LHLaHHxrU6bZdLKkkXiqdCxBS1n0cb6rADBi8X7GW4cUJhVVBADQywQY1DAkmlzJAXJbF4iU2wjJzsMbDVrmMx/An1Ig9W9OAbcpmfgxDGq06XzaA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
- header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=VPJ5QY+3kppKZ4cOZLPHOJhBzEo2t1v/O8J4BX58dRs=;
- b=TogDKm4ldSlIzKG7NplS/ZVyep+e9WqMupw2HlQHUEilZ0c/FQEsBYuwIAOh2qX2bbM1x8/T9o4Y8ylDYn0YeGsKoN/XyIkXfTz8mrTZ5l4yHho528Q1i/XK5NcHrobJcApVYl7sXEJ0zCFdySKYoITc4G748Xgp0T0kygUSjvY=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=valinux.co.jp;
-Message-ID: <8a74abbb-c890-4872-88de-7cc01a3da4cf@valinux.co.jp>
-Date: Fri, 11 Sep 2026 17:42:28 +0900
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen/arm64/atomic: Clear exclusive monitor on cmpxchg
- failure
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Hirokazu Takahashi <taka@valinux.co.jp>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- xen-devel@lists.xenproject.org
-References: <20260909061253.546312-1-okamoto@valinux.co.jp>
- <60532fdb-616d-4a25-8c7f-fd5cdc558787@suse.com>
-Content-Language: en-US
-From: ryoj <okamoto@valinux.co.jp>
-In-Reply-To: <60532fdb-616d-4a25-8c7f-fd5cdc558787@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: TYCP286CA0051.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:2b5::14) To TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:af::12)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1789116207; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=y/JsZQGyUXG2PbaQKxJnt1DssgKzKUnZGz0wBmIldJU=;
+	b=K2ym+chdvp4AOLx7hkxPAOXGGkVqFjIwBO9J5eYiDHaqbG0tAeUekjwPw1enesmOmkvpbb
+	60J62JjW2kbAONrRWP2I4xEvPu2HolP1M+HFk/LKa50fHZp6nuQTkaBSMvDwaXGYKL+Mag
+	GcRxrTsJHmSDk3XBZtwilU2ydL4nGmM=
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1789116203; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=y/JsZQGyUXG2PbaQKxJnt1DssgKzKUnZGz0wBmIldJU=;
+	b=FbfwFv85BO4Lxu6VbQS451GwDDEmZSiFnVhP+ZEMXMkCC4ikbs9v0r/FjQR3mWFpjf0TmZ
+	L7QidEp3rxrjzR1mcTx3zjxQjYzGnTk8S4X2HyKk3oxdwLdM0rUhIobEQUL6hT/voPzpLw
+	GEhuzD1Hyktm7Yj3T5pIddq8QY0s1VQ=
+From: Juergen Gross <jgross@suse.com>
+To: linux-kernel@vger.kernel.org,
+	x86@kernel.org,
+	virtualization@lists.linux.dev
+Cc: Juergen Gross <jgross@suse.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Ajay Kaher <ajay.kaher@broadcom.com>,
+	Alexey Makhalov <alexey.makhalov@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v5 12/17] x86/paravirt: Split off MSR related hooks into new header
+Date: Fri, 11 Sep 2026 10:42:06 +0200
+Message-ID: <20260911084211.3149957-13-jgross@suse.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260911084211.3149957-1-jgross@suse.com>
+References: <20260911084211.3149957-1-jgross@suse.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TYCP286MB1053:EE_|OS7P286MB7475:EE_
-X-MS-Office365-Filtering-Correlation-Id: 146e0c8a-7153-4514-f587-08df0fe09cd2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|10070799003|23010399003|376014|366016|4143699003|56012099006|10067099003|18002099003|22082099003|43062017;
-X-Microsoft-Antispam-Message-Info:
-	3nyy9UNWSTVAcRGa9viv812yyxoMS0YrhFU94FZIVrjJpPAb/xmGTcF/T0MV9x7ymTSdIMJkJHUYOPqL52r70958U+dIMMDeFZbdnYxVpIaM58lf2Z6uJDRqY6njmjmnNeFc9RX4EkAQqQO670Bz2u9Pa506i7x9YJg6N538SzXnFrdrp2qQZUzax7LUXsXLmI1dVJqTQOWgyWU5+xhQfibwVuJtfGOakZarY7nA4V1dRIDE2BoZqK5bdPBb7DsTA7nfbBAAOGacLRutvMmKmtT8iR143pOIMyu/OqVHDA0O+cuRM4Qg9xUcAyZHe61wisocYXwDxNgaESsi7bfuzqgozNvTjtXEDL6OFTx9g+9kk9u6ui1TAxFOFnwRFL8pIc7qt0lUWrM8lR02KyL2G7+ex/zAw6vkxpdlAp1tvOGc4cNhAobgA4v8qf1GGBMAgshKI8VDujZCUwqYH+dy38G4sX2ckGE+OJFUwH9R6gbphaEfrxfoXNV1IPcY08zXwM5i7n8NFVUqX5fliVxJOmdKjw4nwVhodlea0sMEKDq4+7cpfoBflDvNASfSln5xpYaMP0pEVknWIwGu7Y7Z/RP+u07OTE3d8aJIpVOR7GVqyRE7R666nQe/kYMY+pERpYlFpvWUie03soB1DGtuzvtEilDFOcbdUyZLB0WxwPmP/zG11nl3+WlFsNy+Kp8noj8VsUlbhTuyeB2UMRDi3A==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(23010399003)(376014)(366016)(4143699003)(56012099006)(10067099003)(18002099003)(22082099003)(43062017);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 2
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?ejdZc1hsbFkwbEFPVnZjcUJHbW9tc1pHNlFsSnpKQmR1S1kxQTE0dVAvbWRN?=
- =?utf-8?B?TGUwVUh4QTBpdWFjdW1NVFpMZFY1cnFyMTFPeWI3aTQwMkNVc21ROTh1L0tu?=
- =?utf-8?B?OUpReUxZbFVKeENsSjBsZ1QxeCt5S3FzOFBRMFJsdlc1OUR4bUt0OGJUKzRN?=
- =?utf-8?B?UTlGczU5NDhtVkdwTUVlQk0weEI4d05tcHp3dTVPWjR5NUhhcFhOUnNnRnB5?=
- =?utf-8?B?ZFNvVUFKQklaS2x6REZMaDg0MWJ3aEZ3RFRjK1JxR01CRVg2NWhwZGpUYmVz?=
- =?utf-8?B?aTBxbnYwcExkRjFWMFZGTFAycXdTUThLa01VYXYvT1hpb3Rrd0lRTmtSR0dw?=
- =?utf-8?B?Qyt5dDhrNEdTUGRDZlo2T25QdlhRam1NUjhEZW91a0g2d0ZZMTl4a0xSQTAy?=
- =?utf-8?B?S08yS21uS1JWWTMyZkYzNUhZMnRyeW5SeEhZeHN1MnBxN1R0MndWeERoLzJm?=
- =?utf-8?B?UXdqYitHdjRYMVExRVFKcjUzcFFLSXBCWE1IRUZDUzhHK21Da0xhSzZSMzBk?=
- =?utf-8?B?Z2paZWs0YzVhcld6QWJKVzFjdzRlZzZCdHdsYklIMmVONE0yQ3pKZEpiS2ox?=
- =?utf-8?B?ZTNTVWZ4ZlovVGl5L1kvOG0xZUVOeHd0RWRZaUdocTF3VGkxUEF3MytMVnpK?=
- =?utf-8?B?RUlXL3FUcno1bkdhVmJhSEVzU1BHTSsvTE5QMC9aL2dLcno4bTB2VTNxMUJp?=
- =?utf-8?B?eEZhMkMyTWpoMmlFWGtUVkZCMmM5UFBXUXhscit5K3RFUjdSNFFVRFBiZFVa?=
- =?utf-8?B?K1FRbnJjT0R3Y1JGZ0FKUkk0dERBNGI0RUhJZXdva01GZ2ptaCs2MDREc1Y0?=
- =?utf-8?B?c0dzK01Eb1luRDBVWkswdUNXSHpUWWg0Y3pqN25pOU55VEhEL0tDeXpDWUJy?=
- =?utf-8?B?TzZNOFJ4ZlRyeU93OTVqSnZLckxodHNLbXliRlczS2MvbjBVTnhoazkwUFhx?=
- =?utf-8?B?YUpZTy9HT3h4c05rekNKeVoraHRKZjRZNFZOUGxNK1NmNnh3WXdtSG44THBI?=
- =?utf-8?B?N3BPTkc0T25pQzFudFJ2N1IycW1UYVI0d1JIdXhONlNhSGpHWVJMdzFtN1Bn?=
- =?utf-8?B?Y2hUUGNvQ0JQWngyTlpqa1FiSVUvN2tGcGtncWVscitRQ0RkM1pVd2lRZk0w?=
- =?utf-8?B?NFFVWVUxU0FuR3NkQ1FuamRoU1FNcmFwVWJKMGUxeEZzRjh0dzE1VkJlRXJx?=
- =?utf-8?B?cmE3STM4WVVuZjI5N21xNjBKcWpxYXJxcC9Ra1I3TVcvWjg0UVJ0SkhHaC9U?=
- =?utf-8?B?VGxxZlpqQ2VzVGVpbGJ5dWVwR2ROc1ZxcHVRZ25HR2E3QWhqaDFwRVRrcWVq?=
- =?utf-8?B?UkFHRWp5K0ZTOWtseWRmYUlidTNSYzBHTzZaN2NmQ0RJdnRFbGRzR0tFODY1?=
- =?utf-8?B?bjFUd2toSjI5cG5CY2t4Nk9hT05ldlNiMUxLRDhtOEJRSC9hdTdrN2RsZDBW?=
- =?utf-8?B?dUFOaEdtTFlwbzlTVllGUEJWeXY1MllRT0JjUXZRRlhZdFhUeFM4WWVnaE9T?=
- =?utf-8?B?SHNRNy9ic0VMdlErSFhYdmgxcmp2UTM3QzFzQTcxK01sTURjQjNkWnFrRDJq?=
- =?utf-8?B?d1duc0dYUS9xUjRBN2RxaEJkeUlEeDJ6bHJVVnExdTI1bXVMa3U3MUJpelZV?=
- =?utf-8?B?VEtXRkRkN0FpNTJTQk1qUE9HSEp6dCtJL1E0VmRDY1BSNWR4VWtiL0lwQ3ZU?=
- =?utf-8?B?Vk40bFRjTWE4R1NQTGlGRnNkd09UNXdlZkx4ZmhuSXE5dlZHS0ExS2JNdmVM?=
- =?utf-8?B?enJlcUQ3U1M2eVVXOVM0bU51TEVxdC9XY2pIK0ZxK1J2ZGwzR1MrRS9qd3Nq?=
- =?utf-8?B?bStTWFFTdGtHS3ZUVEVoZHlRTENIT2pIb3ZzOHd3YmhVQmlaRGZoazBheWlr?=
- =?utf-8?B?eC9MUWJzMktXSlRXb0pxd0ZlVS9RV2pDbjYzZ090U1ZBelQ5VytUOE5CQmc1?=
- =?utf-8?B?eGpXV3I5aHpYZWQydmdNQmI2OEdHa1NjOStPQ1dEQVYvNUtGbFdqVU1Ma0dC?=
- =?utf-8?B?RWNLeVJlYjRCeXlZakhOTi81dWRLMFFRejd5b1I0dW01ZWRNMGxyNjN2c2xZ?=
- =?utf-8?B?UDZiZ1dPUEJRSDlEZjI5YXFzbHhYS3JFUVZxQ3AraVVrS0pmaTNTdy9jcmxz?=
- =?utf-8?B?N2J4NnBJOHYyTlVNbDVUdmF4ZEV1aG50UUh0MFI1UmNkSmc4VjVjb1NYTWNL?=
- =?utf-8?B?bVUzM1dma21WUFRJbm82ZlZWMUtCUDNJQUwvNVF3d1hWYUNkdkR6ekluam9J?=
- =?utf-8?B?OWNnc3FQY2V3QXJFdFlqalNHQ2tsVFN3TEM2RFFRbFJBUlhFanFXWFdUTFdY?=
- =?utf-8?B?cGpIbE8yM2Q2QXczNWhVbCtOMlhaRG9xOTgyM1E2VTQ3TG53bVFJSmhhN1Zh?=
- =?utf-8?Q?y6pmIBmpbvJYQU/7Lp/oo4+Kh8KIPbgJi+Dd+LQGr0pLc?=
-X-MS-Exchange-AntiSpam-MessageData-1: wNUP+yf01fzajg==
-X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 146e0c8a-7153-4514-f587-08df0fe09cd2
-X-MS-Exchange-CrossTenant-AuthSource: TYCP286MB1053.JPNP286.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 08:42:28.9882
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: ggjE6RrWfA5PDXesx7i1r7OEM4X/VFxg1x91wmtdN2xxdvnYzf/vp8AdW83g3D24EZ+xl6qzX8G3v6qSOAfeWQ==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: OS7P286MB7475
-X-purgate-ID: tlsNG-bad1c0/1789116159-BFAD0034-6A3B1FC5/0/0
+Content-Transfer-Encoding: 8bit
+X-Spamd-Result: default: False [-6.80 / 50.00];
+	REPLY(-4.00)[];
+	BAYES_HAM(-3.00)[100.00%];
+	MID_CONTAINS_FROM(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_MISSING_CHARSET(0.50)[];
+	NEURAL_HAM_SHORT(-0.20)[-0.997];
+	MIME_GOOD(-0.10)[text/plain];
+	RCVD_COUNT_TWO(0.00)[2];
+	MIME_TRACE(0.00)[0:+];
+	FROM_HAS_DN(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[16];
+	TO_DN_SOME(0.00)[];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	ARC_NA(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	R_RATELIMIT(0.00)[to_ip_from(RLfdszjqhz8kzzb9uwpzdm8png)];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,suse.com:mid,imap1.dmz-prg2.suse.org:helo];
+	RCVD_TLS_ALL(0.00)[]
+X-purgate-ID: tlsNG-ef75cf/1789116212-A64DBAE4-5D0BC8C6/0/0
 X-purgate-type: clean
-X-purgate-size: 1086
+X-purgate-size: 8115
 
-On 9/9/26 15:31, Jan Beulich wrote:
-> On 09.09.2026 08:12, Ryoji Okamoto wrote:
->> When the value comparison fails in atomic_cmpxchg, the code branches
->> out without executing stxr, leaving the exclusive monitor in the
->> exclusive state set by ldxr.
->>
->> Add `clrex` to the failure path to explicitly clear the exclusive
->> monitor.
->>
->> Fixes: d2654a556835 ("xen: arm64: atomics")
->> Signed-off-by: Ryoji Okamoto <okamoto@valinux.co.jp>
->> ---
->> v2: Use tabs for indentation instead of spaces
-> 
-> Well, ...
-> 
->> --- a/xen/arch/arm/include/asm/arm64/atomic.h
->> +++ b/xen/arch/arm/include/asm/arm64/atomic.h
->> @@ -118,7 +118,9 @@ static inline int atomic_cmpxchg(atomic_t *v, int old, int new)
->>   "	b.ne	2f\n"
->>   "	stxr	%w0, %w4, %2\n"
->>   "	cbnz	%w0, 1b\n"
->> -"2:"
->> +"	b	3f\n"
-> 
-> ... you now do here, but ...
-> 
->> +"2: clrex\n"
-> 
-> ... still not here.
-> 
-> Jan
+Move the WRMSR, RDMSR and RDPMC related parts of paravirt.h and
+paravirt_types.h into a new header file paravirt-msr.h.
 
-Hi Jan,
+Switch all moved helper functions to __always_inline.
 
-Thanks for the feedback on the indentation.
-I'm withdrawing this patch, but I'll definitely keep this in mind for 
-the next time.
+Signed-off-by: Juergen Gross <jgross@suse.com>
+---
+V3:
+- new patch
+V4:
+- always use __always_inline
+---
+ arch/x86/include/asm/msr.h            |  2 +-
+ arch/x86/include/asm/paravirt-msr.h   | 56 +++++++++++++++++++++++++++
+ arch/x86/include/asm/paravirt.h       | 55 --------------------------
+ arch/x86/include/asm/paravirt_types.h | 13 -------
+ arch/x86/kernel/paravirt.c            | 14 ++++---
+ arch/x86/xen/enlighten_pv.c           | 11 +++---
+ tools/objtool/check.c                 |  1 +
+ 7 files changed, 73 insertions(+), 79 deletions(-)
+ create mode 100644 arch/x86/include/asm/paravirt-msr.h
 
-Regards,
-
+diff --git a/arch/x86/include/asm/msr.h b/arch/x86/include/asm/msr.h
+index fb1027dc7f64..f7ad6d25bb65 100644
+--- a/arch/x86/include/asm/msr.h
++++ b/arch/x86/include/asm/msr.h
+@@ -323,7 +323,7 @@ static inline u64 native_read_pmc(int counter)
+ }
+ 
+ #ifdef CONFIG_PARAVIRT_XXL
+-#include <asm/paravirt.h>
++#include <asm/paravirt-msr.h>
+ #else
+ static __always_inline u64 read_msr(u32 msr)
+ {
+diff --git a/arch/x86/include/asm/paravirt-msr.h b/arch/x86/include/asm/paravirt-msr.h
+new file mode 100644
+index 000000000000..3e31648316a8
+--- /dev/null
++++ b/arch/x86/include/asm/paravirt-msr.h
+@@ -0,0 +1,56 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef _ASM_X86_PARAVIRT_MSR_H
++#define _ASM_X86_PARAVIRT_MSR_H
++
++#include <asm/paravirt_types.h>
++
++struct pv_msr_ops {
++	/* Unsafe MSR operations.  These will warn or panic on failure. */
++	u64 (*read_msr)(u32 msr);
++	void (*write_msr)(u32 msr, u64 val);
++
++	/* Safe MSR operations.  Returns 0 or -EIO. */
++	int (*read_msr_safe)(u32 msr, u64 *val);
++	int (*write_msr_safe)(u32 msr, u64 val);
++
++	u64 (*read_pmc)(int counter);
++} __no_randomize_layout;
++
++extern struct pv_msr_ops pv_ops_msr;
++
++static __always_inline u64 read_msr(u32 msr)
++{
++	return PVOP_CALL1(u64, pv_ops_msr, read_msr, msr);
++}
++
++static __always_inline void write_msr(u32 msr, u64 val)
++{
++	PVOP_VCALL2(pv_ops_msr, write_msr, msr, val);
++}
++
++static __always_inline void write_msrns(u32 msr, u64 val)
++{
++	PVOP_VCALL2(pv_ops_msr, write_msr, msr, val);
++}
++
++static __always_inline int read_msr_safe(u32 msr, u64 *val)
++{
++	return PVOP_CALL2(int, pv_ops_msr, read_msr_safe, msr, val);
++}
++
++static __always_inline int write_msr_safe(u32 msr, u64 val)
++{
++	return PVOP_CALL2(int, pv_ops_msr, write_msr_safe, msr, val);
++}
++
++static __always_inline int write_msrns_safe(u32 msr, u64 val)
++{
++	return PVOP_CALL2(int, pv_ops_msr, write_msr_safe, msr, val);
++}
++
++static __always_inline u64 rdpmc(int counter)
++{
++	return PVOP_CALL1(u64, pv_ops_msr, read_pmc, counter);
++}
++
++#endif /* _ASM_X86_PARAVIRT_MSR_H */
+diff --git a/arch/x86/include/asm/paravirt.h b/arch/x86/include/asm/paravirt.h
+index b0c740316cf7..eb16d55f94d3 100644
+--- a/arch/x86/include/asm/paravirt.h
++++ b/arch/x86/include/asm/paravirt.h
+@@ -130,61 +130,6 @@ static inline void __write_cr4(unsigned long x)
+ 	PVOP_VCALL1(pv_ops, cpu.write_cr4, x);
+ }
+ 
+-static inline u64 paravirt_read_msr(u32 msr)
+-{
+-	return PVOP_CALL1(u64, pv_ops, cpu.read_msr, msr);
+-}
+-
+-static inline void paravirt_write_msr(u32 msr, u64 val)
+-{
+-	PVOP_VCALL2(pv_ops, cpu.write_msr, msr, val);
+-}
+-
+-static inline int paravirt_read_msr_safe(u32 msr, u64 *val)
+-{
+-	return PVOP_CALL2(int, pv_ops, cpu.read_msr_safe, msr, val);
+-}
+-
+-static inline int paravirt_write_msr_safe(u32 msr, u64 val)
+-{
+-	return PVOP_CALL2(int, pv_ops, cpu.write_msr_safe, msr, val);
+-}
+-
+-static __always_inline u64 read_msr(u32 msr)
+-{
+-	return paravirt_read_msr(msr);
+-}
+-
+-static inline void write_msr(u32 msr, u64 val)
+-{
+-	paravirt_write_msr(msr, val);
+-}
+-
+-static __always_inline void write_msrns(u32 msr, u64 val)
+-{
+-	paravirt_write_msr(msr, val);
+-}
+-
+-static inline int write_msr_safe(u32 msr, u64 val)
+-{
+-	return paravirt_write_msr_safe(msr, val);
+-}
+-
+-static __always_inline int write_msrns_safe(u32 msr, u64 val)
+-{
+-	return paravirt_write_msr_safe(msr, val);
+-}
+-
+-static __always_inline int read_msr_safe(u32 msr, u64 *p)
+-{
+-	return paravirt_read_msr_safe(msr, p);
+-}
+-
+-static __always_inline u64 rdpmc(int counter)
+-{
+-	return PVOP_CALL1(u64, pv_ops, cpu.read_pmc, counter);
+-}
+-
+ static inline void paravirt_alloc_ldt(struct desc_struct *ldt, unsigned entries)
+ {
+ 	PVOP_VCALL2(pv_ops, cpu.alloc_ldt, ldt, entries);
+diff --git a/arch/x86/include/asm/paravirt_types.h b/arch/x86/include/asm/paravirt_types.h
+index b4c4a23e77a1..2459163fa196 100644
+--- a/arch/x86/include/asm/paravirt_types.h
++++ b/arch/x86/include/asm/paravirt_types.h
+@@ -58,19 +58,6 @@ struct pv_cpu_ops {
+ 	void (*cpuid)(unsigned int *eax, unsigned int *ebx,
+ 		      unsigned int *ecx, unsigned int *edx);
+ 
+-	/* Unsafe MSR operations.  These will warn or panic on failure. */
+-	u64 (*read_msr)(u32 msr);
+-	void (*write_msr)(u32 msr, u64 val);
+-
+-	/*
+-	 * Safe MSR operations.
+-	 * Returns 0 or -EIO.
+-	 */
+-	int (*read_msr_safe)(u32 msr, u64 *val);
+-	int (*write_msr_safe)(u32 msr, u64 val);
+-
+-	u64 (*read_pmc)(int counter);
+-
+ 	void (*start_context_switch)(struct task_struct *prev);
+ 	void (*end_context_switch)(struct task_struct *next);
+ #endif
+diff --git a/arch/x86/kernel/paravirt.c b/arch/x86/kernel/paravirt.c
+index 00b59d774389..739dbfd8aadf 100644
+--- a/arch/x86/kernel/paravirt.c
++++ b/arch/x86/kernel/paravirt.c
+@@ -110,11 +110,6 @@ struct paravirt_patch_template pv_ops = {
+ 	.cpu.read_cr0		= native_read_cr0,
+ 	.cpu.write_cr0		= native_write_cr0,
+ 	.cpu.write_cr4		= native_write_cr4,
+-	.cpu.read_msr		= native_read_msr,
+-	.cpu.write_msr		= native_write_msr,
+-	.cpu.read_msr_safe	= native_read_msr_safe,
+-	.cpu.write_msr_safe	= native_write_msr_safe,
+-	.cpu.read_pmc		= native_read_pmc,
+ 	.cpu.load_tr_desc	= native_load_tr_desc,
+ 	.cpu.set_ldt		= native_set_ldt,
+ 	.cpu.load_gdt		= native_load_gdt,
+@@ -212,6 +207,15 @@ struct paravirt_patch_template pv_ops = {
+ };
+ 
+ #ifdef CONFIG_PARAVIRT_XXL
++struct pv_msr_ops pv_ops_msr = {
++	.read_msr	= native_read_msr,
++	.write_msr	= native_write_msr,
++	.read_msr_safe	= native_read_msr_safe,
++	.write_msr_safe	= native_write_msr_safe,
++	.read_pmc	= native_read_pmc,
++};
++EXPORT_SYMBOL(pv_ops_msr);
++
+ NOKPROBE_SYMBOL(native_load_idt);
+ #endif
+ 
+diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+index 2c64b388f616..bf81e84ff261 100644
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -1360,11 +1360,6 @@ asmlinkage __visible void __init xen_start_kernel(struct start_info *si)
+ 	pv_ops.cpu.read_cr0 = xen_read_cr0;
+ 	pv_ops.cpu.write_cr0 = xen_write_cr0;
+ 	pv_ops.cpu.write_cr4 = xen_write_cr4;
+-	pv_ops.cpu.read_msr = xen_read_msr;
+-	pv_ops.cpu.write_msr = xen_write_msr;
+-	pv_ops.cpu.read_msr_safe = xen_read_msr_safe;
+-	pv_ops.cpu.write_msr_safe = xen_write_msr_safe;
+-	pv_ops.cpu.read_pmc = xen_read_pmc;
+ 	pv_ops.cpu.load_tr_desc = paravirt_nop;
+ 	pv_ops.cpu.set_ldt = xen_set_ldt;
+ 	pv_ops.cpu.load_gdt = xen_load_gdt;
+@@ -1385,6 +1380,12 @@ asmlinkage __visible void __init xen_start_kernel(struct start_info *si)
+ 	pv_ops.cpu.start_context_switch = xen_start_context_switch;
+ 	pv_ops.cpu.end_context_switch = xen_end_context_switch;
+ 
++	pv_ops_msr.read_msr = xen_read_msr;
++	pv_ops_msr.write_msr = xen_write_msr;
++	pv_ops_msr.read_msr_safe = xen_read_msr_safe;
++	pv_ops_msr.write_msr_safe = xen_write_msr_safe;
++	pv_ops_msr.read_pmc = xen_read_pmc;
++
+ 	xen_init_irq_ops();
+ 
+ 	/*
+diff --git a/tools/objtool/check.c b/tools/objtool/check.c
+index 464f6c9d9ff0..6c47d650b20e 100644
+--- a/tools/objtool/check.c
++++ b/tools/objtool/check.c
+@@ -529,6 +529,7 @@ static struct {
+ } pv_ops_tables[] = {
+ 	{ .name = "pv_ops", },
+ 	{ .name = "pv_ops_lock", },
++	{ .name = "pv_ops_msr", },
+ 	{ .name = NULL, .idx_off = -1 }
+ };
+ 
 -- 
-Ryoji
+2.55.0
+
 
