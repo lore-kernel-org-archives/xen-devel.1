@@ -4,52 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C80F8C88E50
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 08:44:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1416009.1645196 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AA8E5C88E50
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 09:02:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1416038.1645206 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4wrH-00018t-Hq; Fri, 11 Sep 2026 08:43:43 +0000
+	id 1x4x8r-00055N-3Z; Fri, 11 Sep 2026 09:01:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1416009.1645196; Fri, 11 Sep 2026 08:43:43 +0000
+Received: by outflank-mailman (output) from mailman id 1416038.1645206; Fri, 11 Sep 2026 09:01:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4wrH-00018h-E7; Fri, 11 Sep 2026 08:43:43 +0000
-Received: by outflank-mailman (input) for mailman id 1416009;
- Fri, 11 Sep 2026 08:43:42 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x4x8q-00055G-Vr; Fri, 11 Sep 2026 09:01:52 +0000
+Received: by outflank-mailman (input) for mailman id 1416038;
+ Fri, 11 Sep 2026 09:01:51 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1x4wrG-000173-0l
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 08:43:42 +0000
+ (envelope-from <mst@redhat.com>) id 1x4x8p-000559-Mp
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:01:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4wrF-000daV-DM
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 10:43:41 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x4x8p-007pxH-1z
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 11:01:51 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6aa3bf37-2eae-0a2a0a5409dd-0a2a4508ac42-14
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 10:43:41 +0200
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6aa3bf3d-f659-0a2a45080019-c387df82cae4-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 10:43:41 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id ED47721B99;
- Fri, 11 Sep 2026 08:43:40 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 84F33132D3;
- Fri, 11 Sep 2026 08:43:40 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id RvYTHzy/o2pSFgAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 11 Sep 2026 08:43:40 +0000
+ (envelope-from <mst@redhat.com>)
+ id 6aa3c37a-e002-0a2a0a5209dd-0a2a4501d846-22
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 11:01:50 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <mst@redhat.com>)
+ id 6aa3c37d-5984-0a2a45010019-aa0a817c7281-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 11:01:50 +0200
+Received: from mail-wm1-f72.google.com (mail-wm1-f72.google.com
+ [209.85.128.72]) by relay.mimecast.com with ESMTP with STARTTLS
+ (version=TLSv1.3, cipher=TLS_AES_256_GCM_SHA384) id
+ us-mta-465-2EAmKVKxMTmiFB9fcY4olA-1; Fri, 11 Sep 2026 05:01:47 -0400
+Received: by mail-wm1-f72.google.com with SMTP id
+ 5b1f17b1804b1-495689bfcc8so4972605e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 02:01:47 -0700 (PDT)
+Received: from redhat.com (IGLD-80-230-79-236.inter.net.il. [80.230.79.236])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49e61a32803sm43926005e9.0.2026.09.11.02.01.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 11 Sep 2026 02:01:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,120 +57,349 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Authentication-Results: smtp-out1.suse.de;
-	none
-From: Juergen Gross <jgross@suse.com>
-To: linux-kernel@vger.kernel.org,
-	x86@kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v5 15/17] x86/msr: Reduce number of low level MSR access helpers
-Date: Fri, 11 Sep 2026 10:42:09 +0200
-Message-ID: <20260911084211.3149957-16-jgross@suse.com>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260911084211.3149957-1-jgross@suse.com>
-References: <20260911084211.3149957-1-jgross@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1789117309;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=g9mLgS0ybrUUaTMFusFVuyMEvSQGJ2PNYaEiCYholds=;
+	b=Tc+5QtfAP0yomD5Z9QaVRpEVwav0vAsYZiS6/THJZvoJ9KD3FWTt+Whp/3ldpzlMkyV69S
+	e5CX54UGa2u421g8Y9lsamXfloY+a5lIlGPgZPESGEeqf5Fz0CRFr5XE8kUtAuQPW7RGF3
+	w/T1x1TlqTSUNK03cNcr36DA73ffFPo=
+X-MC-Unique: 2EAmKVKxMTmiFB9fcY4olA-1
+X-Mimecast-MFC-AGG-ID: 2EAmKVKxMTmiFB9fcY4olA_1789117307
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789117306; x=1789722106;
+        h=in-reply-to:content-transfer-encoding:content-disposition
+         :content-type:mime-version:references:message-id:subject:cc:to:from
+         :date:x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=g9mLgS0ybrUUaTMFusFVuyMEvSQGJ2PNYaEiCYholds=;
+        b=Ea9DiW08z4W5m/tB7Ijj55400vFTB6QRc5o7BokaiqvePM9D6LyTIs2oS1ljw8zkrx
+         R69vpslY6cOzawyHT1DQgeXcJtVkAPAEWdr8Ys7oAaCBFjODNBVvO/TwsK0vCFVFECnQ
+         cY7jyeopy4byYV5nyaTlIwd1765daU3XwbxNu+6RuKRjVWp2OGbPQ+LrbvSfIZqSvewT
+         a3c5Y0wz1qXVdUEMdlQst3IhbkzkYoRKuPK8ZTmsw+IVxasY87+W9nVK7c5tHFAlDRmV
+         NDpANJVwNZj84cApmeO0k1uDI4qasADc5MVrG23aBEoGj9sqVml63blIyDMPBK1YvGrW
+         ojxA==
+X-Forwarded-Encrypted: i=1; AKwUvByNXsPg+Dwsuy9rIWJn5QnUOW3PPtwLKNMt6/952knWzLphRt7TX/K2DJO1drhs7KCGNK/ODG25O3c=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lq5oY/wUPtqynT7L31Ft5YM1wW8ZnEuhCq8dQC1KVvJUsdEjZz
+	0JCxc2WtuJtkneliu/4tQwZNDJPUHntL9RNr2DU/qbL8tqNfkyT/AHAJn8XoJQzuFSu78TLc4B3
+	j13tOYvZPYM4gO5SzTNn2NumKiAbphaP/vJ80FYz0GWWrmFIcr1Ch6ZhRwjIhc1+nkfXS
+X-Gm-Gg: AYBFou1kXZ1C0RRgEEOoTVZ9PUZ7M8wMqm2HejZ9Bo7OwH9i8L4fjk9MNOAg0RHx8vJ
+	aRKjbDcILgpNRGhK9pjgLyq/p+CHOA3l7kgJSQa0vR2HG5mjzKjdJAmE8XAn2cd4RvA0vTYjaKc
+	MtvMXv5y0rDM8ThWB4ajfWaIpKp0myNyhblOpq2Pj/sH7CG9vfBzeh2MxJy3byszWVwsFJnSUUz
+	N1PtZEvGD6cvepHepUcXoL7QwtA9HAnpuBWt6HyKpsQEn3qj2eAaQqe9+4ddI2gIsWWeVCpYkJ3
+	PLsHdsWz0i/JN4OoL3ySdXMoMlAu637O+ftQlxiklvT01zp9I+Rp/hCTVEFeTG84dBz89Nr1MkL
+	CIe40znHntWNGpFkj04Ol0FI=
+X-Received: by 2002:a05:600c:6289:b0:49c:de80:b833 with SMTP id 5b1f17b1804b1-49e61983067mr32623595e9.2.1789117306102;
+        Fri, 11 Sep 2026 02:01:46 -0700 (PDT)
+X-Received: by 2002:a05:600c:6289:b0:49c:de80:b833 with SMTP id 5b1f17b1804b1-49e61983067mr32623015e9.2.1789117305570;
+        Fri, 11 Sep 2026 02:01:45 -0700 (PDT)
+Date: Fri, 11 Sep 2026 05:01:42 -0400
+From: "Michael S. Tsirkin" <mst@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Peter Maydell <peter.maydell@linaro.org>,
+	Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>,
+	Ben Chaney <bchaney@akamai.com>,
+	Markus Armbruster <armbru@redhat.com>,
+	Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+	Sergio Lopez <slp@redhat.com>, Paolo Bonzini <pbonzini@redhat.com>,
+	Zhao Liu <zhao1.liu@intel.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony@xenproject.org>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	Bernhard Beschow <shentey@gmail.com>,
+	Conor Dooley <conor@kernel.org>,
+	Sebastian Huber <sebastian.huber@embedded-brains.de>,
+	Alistair Francis <Alistair.Francis@wdc.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Jason Wang <jasowangio@gmail.com>, Eric Blake <eblake@redhat.com>,
+	devel@lists.libvirt.org, xen-devel@lists.xenproject.org,
+	qemu-ppc@nongnu.org, qemu-riscv@nongnu.org
+Subject: [PULL v2 11/75] net/tap: deprecate "no" as special value for
+ script/downscript
+Message-ID: <3e4c54739a7e3409a477197fa300104202eb3570.1789117222.git.mst@redhat.com>
+References: <cover.1789117222.git.mst@redhat.com>
 MIME-Version: 1.0
+In-Reply-To: <cover.1789117222.git.mst@redhat.com>
+X-Mailer: git-send-email 2.51.2.2891.g4157995a80.dirty
+X-Mutt-Fcc: =sent
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: dUpS0tgg2_cUp1glRC8Crui4Sxo7JiuobiHLMIcqWUw_1789117307
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: ED47721B99
-X-Rspamd-Pre-Result: action=no action;
-	module=replies;
-	Message is reply to one we originated
-X-Spamd-Result: default: False [-4.00 / 50.00];
-	REPLY(-4.00)[]
-X-Rspamd-Action: no action
-X-purgate-ID: tlsNG-c1860d/1789116221-DFED287B-01351793/0/0
+X-purgate-ID: tlsNG-d62444/1789117310-C495A757-A50FD0FD/0/0
 X-purgate-type: clean
-X-purgate-size: 2269
+X-purgate-size: 12712
 
-Some MSR access helpers are redundant now, so remove the no longer
-needed ones.
+From: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
 
-Signed-off-by: Juergen Gross <jgross@suse.com>
+The interface is ambiguous, as "no" is valid file name. So,
+using "no" as a special value to disable script is deprecated.
+Use an empty string ("script=" / "downscript=") instead.
+
+In a future version, "no" will be treated as a plain file name, just
+like any other non-empty value.
+
+Document the deprecation in docs/about/deprecated.rst, qapi/net.json,
+and qemu-options.hx. Update other docs to use empty string instead of
+"no". Add a warning.
+
+Signed-off-by: Vladimir Sementsov-Ogievskiy <vsementsov@yandex-team.ru>
+Reviewed-by: Ben Chaney <bchaney@akamai.com>
+Reviewed-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Michael S. Tsirkin <mst@redhat.com>
+Signed-off-by: Michael S. Tsirkin <mst@redhat.com>
+Message-ID: <20260819180201.1970193-4-vsementsov@yandex-team.ru>
 ---
- arch/x86/include/asm/msr.h  | 15 ++-------------
- arch/x86/xen/enlighten_pv.c |  4 ++--
- 2 files changed, 4 insertions(+), 15 deletions(-)
+ docs/about/deprecated.rst                  | 18 ++++++++++++++++++
+ docs/system/i386/microvm.rst               |  4 ++--
+ docs/system/i386/xenpvh.rst                |  2 +-
+ docs/system/ppc/ppce500.rst                |  4 ++--
+ docs/system/riscv/microchip-icicle-kit.rst |  2 +-
+ docs/system/riscv/sifive_u.rst             |  2 +-
+ qapi/net.json                              | 14 ++++++++++----
+ net/tap.c                                  | 17 +++++++++++------
+ qemu-options.hx                            |  8 ++++++--
+ 9 files changed, 52 insertions(+), 19 deletions(-)
 
-diff --git a/arch/x86/include/asm/msr.h b/arch/x86/include/asm/msr.h
-index f7ad6d25bb65..dbc24550a504 100644
---- a/arch/x86/include/asm/msr.h
-+++ b/arch/x86/include/asm/msr.h
-@@ -269,22 +269,11 @@ static __always_inline void native_wrmsrq(u32 msr, u64 val)
- 	__wrmsrq(msr, val);
- }
+diff --git a/docs/about/deprecated.rst b/docs/about/deprecated.rst
+index 98c32991c9..61e775373d 100644
+--- a/docs/about/deprecated.rst
++++ b/docs/about/deprecated.rst
+@@ -71,6 +71,15 @@ flexible enough. The monitor objects have been converted to QOM, so
+ ``-mon mode=control`` is replaced by ``-object monitor-qmp``. The
+ short convenience options are not deprecated, only ``-mon``.
  
--static inline u64 native_read_msr(u32 msr)
--{
--	return native_rdmsrq(msr);
--}
--
- static inline int native_read_msr_safe(u32 msr, u64 *val)
++``script=no`` and ``downscript=no`` for ``-netdev tap`` (since 11.2)
++'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++The special value ``"no"`` for the ``script`` and ``downscript``
++parameters of ``-netdev tap`` disables script execution.  This special
++treatment of ``"no"`` is deprecated.  Use an empty string (``script=``
++or ``downscript=``) to disable script execution instead.  In a future
++version, ``"no"`` will be treated as a plain file name.
++
+ QEMU Machine Protocol (QMP) commands
+ ------------------------------------
+ 
+@@ -164,6 +173,15 @@ Use ``job-finalize`` instead.
+ 
+ Use ``query-accelerators`` instead.
+ 
++``"no"`` as value of ``script``/``downscript`` for tap in ``netdev_add`` (since 11.2)
++'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
++
++The special value ``"no"`` for the ``script`` and ``downscript``
++parameters of ``netdev_add`` with ``type=tap`` disables script
++execution.  This special treatment of ``"no"`` is deprecated.  Use an
++empty string instead.  In a future version, ``"no"`` will be treated as
++a plain file name.
++
+ Human Machine Protocol (HMP) commands
+ -------------------------------------
+ 
+diff --git a/docs/system/i386/microvm.rst b/docs/system/i386/microvm.rst
+index 1675e37d3e..077ea15751 100644
+--- a/docs/system/i386/microvm.rst
++++ b/docs/system/i386/microvm.rst
+@@ -79,7 +79,7 @@ legacy ``ISA serial`` device as console::
+      -serial stdio \
+      -drive id=test,file=test.img,format=raw,if=none \
+      -device virtio-blk-device,drive=test \
+-     -netdev tap,id=tap0,script=no,downscript=no \
++     -netdev tap,id=tap0,script=,downscript= \
+      -device virtio-net-device,netdev=tap0
+ 
+ While the example above works, you might be interested in reducing the
+@@ -103,7 +103,7 @@ disabled::
+      -device virtconsole,chardev=virtiocon0 \
+      -drive id=test,file=test.img,format=raw,if=none \
+      -device virtio-blk-device,drive=test \
+-     -netdev tap,id=tap0,script=no,downscript=no \
++     -netdev tap,id=tap0,script=,downscript= \
+      -device virtio-net-device,netdev=tap0
+ 
+ 
+diff --git a/docs/system/i386/xenpvh.rst b/docs/system/i386/xenpvh.rst
+index 904778e3f5..862f38830b 100644
+--- a/docs/system/i386/xenpvh.rst
++++ b/docs/system/i386/xenpvh.rst
+@@ -42,7 +42,7 @@ case you need to construct one manually:
+       -vnc none                                       \
+       -display none                                   \
+       -device virtio-net-pci,id=nic0,netdev=net0,mac=00:16:3e:5c:81:78 \
+-      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=no,downscript=no \
++      -netdev type=tap,id=net0,ifname=vif3.0-emu,br=xenbr0,script=,downscript= \
+       -smp 4,maxcpus=4                                \
+       -nographic                                      \
+       -machine xenpvh,ram-low-base=0,ram-low-size=2147483648,ram-high-base=4294967296,ram-high-size=2147483648,pci-ecam-base=824633720832,pci-ecam-size=268435456,pci-mmio-base=4026531840,pci-mmio-size=33554432,pci-mmio-high-base=824902156288,pci-mmio-high-size=68719476736 \
+diff --git a/docs/system/ppc/ppce500.rst b/docs/system/ppc/ppce500.rst
+index c9fe0915dc..ec5aaf14fd 100644
+--- a/docs/system/ppc/ppce500.rst
++++ b/docs/system/ppc/ppce500.rst
+@@ -158,14 +158,14 @@ interface at PCI address 0.1.0, but we can switch that to an e1000 NIC by:
+   $ qemu-system-ppc64 -M ppce500 -smp 4 -m 2G \
+                       -display none -serial stdio \
+                       -bios u-boot \
+-                      -nic tap,ifname=tap0,script=no,downscript=no,model=e1000
++                      -nic tap,ifname=tap0,script=,downscript=,model=e1000
+ 
+ The QEMU ``ppce500`` machine can also dynamically instantiate an eTSEC device
+ if “-device eTSEC” is given to QEMU:
+ 
+ .. code-block:: bash
+ 
+-  -netdev tap,ifname=tap0,script=no,downscript=no,id=net0 -device eTSEC,netdev=net0
++  -netdev tap,ifname=tap0,script=,downscript=,id=net0 -device eTSEC,netdev=net0
+ 
+ Root file system on flash drive
+ -------------------------------
+diff --git a/docs/system/riscv/microchip-icicle-kit.rst b/docs/system/riscv/microchip-icicle-kit.rst
+index 9809e94b84..7fdb96601a 100644
+--- a/docs/system/riscv/microchip-icicle-kit.rst
++++ b/docs/system/riscv/microchip-icicle-kit.rst
+@@ -84,7 +84,7 @@ Then we can boot the machine by:
+   $ qemu-system-riscv64 -M microchip-icicle-kit -smp 5 -m 2G \
+       -sd path/to/sdcard.img \
+       -nic user,model=cadence_gem \
+-      -nic tap,ifname=tap,model=cadence_gem,script=no \
++      -nic tap,ifname=tap,model=cadence_gem,script= \
+       -display none -serial stdio \
+       -kernel path/to/u-boot/build/dir/u-boot.bin \
+       -dtb path/to/u-boot/build/dir/u-boot.dtb
+diff --git a/docs/system/riscv/sifive_u.rst b/docs/system/riscv/sifive_u.rst
+index 8f55ae8e31..0e4dcf3e70 100644
+--- a/docs/system/riscv/sifive_u.rst
++++ b/docs/system/riscv/sifive_u.rst
+@@ -199,7 +199,7 @@ To boot the VxWorks kernel in QEMU with the ``sifive_u`` machine, use:
+ 
+   $ qemu-system-riscv64 -M sifive_u -smp 5 -m 2G \
+       -display none -serial stdio \
+-      -nic tap,ifname=tap0,script=no,downscript=no \
++      -nic tap,ifname=tap0,script=,downscript= \
+       -kernel /path/to/vxWorks \
+       -append "gem(0,0)host:vxWorks h=192.168.200.1 e=192.168.200.2:ffffff00 u=target pw=vxTarget f=0x01"
+ 
+diff --git a/qapi/net.json b/qapi/net.json
+index ab8ed9c086..dccf95bbbc 100644
+--- a/qapi/net.json
++++ b/qapi/net.json
+@@ -399,15 +399,21 @@
+ # @fds: multiple file descriptors of already opened multiqueue capable
+ #     tap
+ #
+-# @script: script to initialize the interface.  An empty string or
+-#     "no" disables script execution.  Defaults to
++# @script: script to initialize the interface.  An empty string
++#     disables script execution.  Defaults to
+ #     ``<sysconfdir>/qemu-ifup``, where ``<sysconfdir>`` is the
+ #     system configuration directory at build time (typically /etc).
++#     Using "no" to disable script execution is deprecated (since
++#     11.2); use an empty string instead.  In a future version, "no"
++#     will be treated as a plain file name.
+ #
+-# @downscript: script to shut down the interface.  An empty string or
+-#     "no" disables script execution.  Defaults to
++# @downscript: script to shut down the interface.  An empty string
++#     disables script execution.  Defaults to
+ #     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the
+ #     system configuration directory at build time (typically /etc).
++#     Using "no" to disable script execution is deprecated (since
++#     11.2); use an empty string instead.  In a future version, "no"
++#     will be treated as a plain file name.
+ #
+ # @br: bridge name (since 2.8)
+ #
+diff --git a/net/tap.c b/net/tap.c
+index 2076f5b780..f4051e8d4b 100644
+--- a/net/tap.c
++++ b/net/tap.c
+@@ -92,7 +92,8 @@ static void launch_script(const char *setup_script, const char *ifname,
+ static void tap_send(void *opaque);
+ static void tap_writable(void *opaque);
+ 
+-static bool tap_is_explicit_no_script(const char *script_arg_value)
++static bool tap_is_explicit_no_script(const char *script_arg_name,
++                                      const char *script_arg_value)
  {
- 	return __rdmsr(msr, val, EX_TYPE_RDMSR_SAFE) ? -EIO : 0;
+     if (!script_arg_value) {
+         return false;
+@@ -103,16 +104,19 @@ static bool tap_is_explicit_no_script(const char *script_arg_value)
+     }
+ 
+     if (strcmp(script_arg_value, "no") == 0) {
++        warn_report("'%s=no' is deprecated; use '%s=' instead",
++                    script_arg_name, script_arg_name);
+         return true;
+     }
+ 
+     return false;
  }
  
--/* Can be uninlined because referenced by paravirt */
--static inline void notrace native_write_msr(u32 msr, u64 val)
--{
--	native_wrmsrq(msr, val);
--}
--
- /* Can be uninlined because referenced by paravirt */
- static inline int notrace native_write_msr_safe(u32 msr, u64 val)
+-static char *tap_parse_script(const char *script_arg_value,
++static char *tap_parse_script(const char *script_arg_name,
++                              const char *script_arg_value,
+                               const char *default_path)
  {
-@@ -327,7 +316,7 @@ static inline u64 native_read_pmc(int counter)
- #else
- static __always_inline u64 read_msr(u32 msr)
- {
--	return native_read_msr(msr);
-+	return native_rdmsrq(msr);
- }
+-    if (tap_is_explicit_no_script(script_arg_value)) {
++    if (tap_is_explicit_no_script(script_arg_name, script_arg_value)) {
+         return NULL;
+     }
  
- static __always_inline int read_msr_safe(u32 msr, u64 *p)
-@@ -337,7 +326,7 @@ static __always_inline int read_msr_safe(u32 msr, u64 *p)
+@@ -741,7 +745,7 @@ static bool net_init_tap_one(const NetdevTapOptions *tap, NetClientState *peer,
+         qemu_set_info_str(&s->nc, "helper=%s", tap->helper);
+     } else {
+         qemu_set_info_str(&s->nc, "ifname=%s,script=%s,downscript=%s", ifname,
+-                          script ?: "no", downscript ?: "no");
++                          script ?: "", downscript ?: "");
  
- static __always_inline void write_msr(u32 msr, u64 val)
- {
--	native_write_msr(msr, val);
-+	native_wrmsrq(msr, val);
- }
+         if (downscript) {
+             snprintf(s->down_script, sizeof(s->down_script), "%s", downscript);
+@@ -947,9 +951,10 @@ int net_init_tap(const Netdev *netdev, const char *name,
+         }
+     } else {
+         g_autofree char *script =
+-            tap_parse_script(tap->script, DEFAULT_NETWORK_SCRIPT);
++            tap_parse_script("script", tap->script, DEFAULT_NETWORK_SCRIPT);
+         g_autofree char *downscript =
+-            tap_parse_script(tap->downscript, DEFAULT_NETWORK_DOWN_SCRIPT);
++            tap_parse_script("downscript", tap->downscript,
++                             DEFAULT_NETWORK_DOWN_SCRIPT);
  
- static __always_inline int write_msr_safe(u32 msr, u64 val)
-diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
-index 505a85c3869e..bc572ca49a2c 100644
---- a/arch/x86/xen/enlighten_pv.c
-+++ b/arch/x86/xen/enlighten_pv.c
-@@ -1085,7 +1085,7 @@ static u64 xen_do_read_msr(u32 msr, int *err)
- 	if (err)
- 		*err = native_read_msr_safe(msr, &val);
- 	else
--		val = native_read_msr(msr);
-+		val = native_rdmsrq(msr);
+         if (tap->ifname) {
+             pstrcpy(ifname, sizeof ifname, tap->ifname);
+diff --git a/qemu-options.hx b/qemu-options.hx
+index 16ef7d5455..2f6863180b 100644
+--- a/qemu-options.hx
++++ b/qemu-options.hx
+@@ -3022,7 +3022,8 @@ DEF("netdev", HAS_ARG, QEMU_OPTION_netdev,
+     "                use network scripts 'file' (default=" DEFAULT_NETWORK_SCRIPT ")\n"
+     "                to configure it and 'dfile' (default=" DEFAULT_NETWORK_DOWN_SCRIPT ")\n"
+     "                to deconfigure it\n"
+-    "                use '[down]script=no' or '[down]script=' to disable script execution\n"
++    "                use '[down]script=' to disable script execution\n"
++    "                ('[down]script=no' is deprecated and will be treated as a file name in future)\n"
+     "                use network helper 'helper' (default=" DEFAULT_BRIDGE_HELPER ") to\n"
+     "                configure it\n"
+     "                use 'fd=h' to connect to an already opened TAP interface\n"
+@@ -3561,7 +3562,10 @@ SRST
+     ``<sysconfdir>/qemu-ifup`` and the default network deconfigure script is
+     ``<sysconfdir>/qemu-ifdown``, where ``<sysconfdir>`` is the system
+     configuration directory at build time (typically ``/etc``).
+-    Use ``[down]script=no`` or ``[down]script=`` to disable script execution.
++    Use ``[down]script=`` to disable script execution.
++    Using ``[down]script=no`` is deprecated; it disables script
++    execution now, but in a future version it will be treated as a
++    plain file name.
  
- 	switch (msr) {
- 	case MSR_IA32_APICBASE:
-@@ -1144,7 +1144,7 @@ static void xen_do_write_msr(u32 msr, u64 val, int *err)
- 		if (err)
- 			*err = native_write_msr_safe(msr, val);
- 		else
--			native_write_msr(msr, val);
-+			native_wrmsrq(msr, val);
- 	}
- }
- 
+     If running QEMU as an unprivileged user, use the network helper
+     to configure the TAP interface and attach it to the bridge.
 -- 
-2.55.0
+MST
 
 
