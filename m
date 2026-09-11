@@ -4,43 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 892ACC88E50
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:29:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1417010.1645909 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF985C88E45
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:32:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1417024.1645918 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x52FU-0008A7-FV; Fri, 11 Sep 2026 14:29:04 +0000
+	id 1x52Ie-0001cc-S3; Fri, 11 Sep 2026 14:32:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1417010.1645909; Fri, 11 Sep 2026 14:29:04 +0000
+Received: by outflank-mailman (output) from mailman id 1417024.1645918; Fri, 11 Sep 2026 14:32:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x52FU-0008A0-Cu; Fri, 11 Sep 2026 14:29:04 +0000
-Received: by outflank-mailman (input) for mailman id 1417010;
- Fri, 11 Sep 2026 14:29:03 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x52FT-00089u-PO
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:29:03 +0000
+	id 1x52Ie-0001cV-Oz; Fri, 11 Sep 2026 14:32:20 +0000
+Received: by outflank-mailman (input) for mailman id 1417024;
+ Fri, 11 Sep 2026 14:32:19 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <berrange@redhat.com>) id 1x52Id-0001cP-F6
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:32:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x52FT-00ECNC-6I
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:29:03 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x52Ic-001dPR-Rx
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:32:18 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa4102f-8faa-0a2a0a5109dd-0a2a4504cc28-0
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:29:03 +0200
-Received: from [74.125.228.140] (helo=mail-ej2-f12.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa4102f-b57f-0a2a45040019-4a7de48ca8ea-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:29:03 +0200
-Received: by mail-ej2-f12.google.com with SMTP id
- a640c23a62f3a-c254f9f0b1fso160762966b.2
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 07:29:03 -0700 (PDT)
-Received: from [172.19.143.248] (IW396200.net.t-com.hr. [195.29.234.54])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c2965c56183sm86227066b.3.2026.09.11.07.29.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 11 Sep 2026 07:29:02 -0700 (PDT)
+ (envelope-from <berrange@redhat.com>)
+ id 6aa410f0-2eae-0a2a0a5409dd-0a2a4508b16c-10
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:32:18 +0200
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <berrange@redhat.com>)
+ id 6aa410f0-f659-0a2a45080019-aa0a857c50c1-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:32:17 +0200
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-278-kouePLKLNBuFsDVFxTXoEg-1; Fri,
+ 11 Sep 2026 10:32:10 -0400
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 2B1131801352; Fri, 11 Sep 2026 14:32:09 +0000 (UTC)
+Received: from berrange.csb (headnet05.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.117])
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id E12F718002B7; Fri, 11 Sep 2026 14:32:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,165 +61,339 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789136943; x=1789741743; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=G+Su9/ororVSrSvSKFxvSUCr8vqUu4bBOy683FkbG3Y=;
-        b=NRcRUfI5ZMBPiiuRWG3i4AZa9awH2PTFIY5mmTD4VlREdzlH3DRreL1LkWimwLInFq
-         appzzZHfTUEMxaWtYpWZ+o2EA9xmPS0u4SFAoU4SwhQRfOlDNcJPN+OP9cT7LLnjkAes
-         d0t2dXZ8k8UbuV5IteEiMmQo7yAVq5LZ9t84J9Vt9pcXCWvYWBQbzI8OZtbZt9Un35Je
-         i8C0q8mhnYnnGuEbTgJpL9I+9LvlZfeO0PUB442nY6PniBMgV97TjObQaXFEJFIFHzmq
-         9khgvqnvpAhXsdwInbzsEkGZ1PTwTB/IW4ch0j0bXxP8gGHR/hz5Zga11jr40X9plHx6
-         P2lg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789136943; x=1789741743;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=G+Su9/ororVSrSvSKFxvSUCr8vqUu4bBOy683FkbG3Y=;
-        b=CatNtUtqDO9dqYGNZO45epdfZ50U24tuRdH0P1u9uetpc19R6b573lqWSOyJ96WMA0
-         MM/mIGeT1pb7J22mjRDw8UorRYN+U2AnZ9F3oiS07SvHUuCZKuOi5u5D87JYTA9dn7N5
-         fu1t7ykC1hueHhNQJi5/9kVbiT8G6thZkzoAr2m+OrS0Auw7uDJ4kdGwAfHw5Veb17zg
-         UAHlxNb8b/TV0ERx6VLpZ4aXkLF7gc+61ynj7OhBccMhDmZuRgDUGeu6/7BmEXnGdKiG
-         d6GV83zeivJrestIWgqAgfyFws3SSpXqOvH0jG6U7G8FdfBj/u3mEnY/spDS8xQzi8Hx
-         ob0Q==
-X-Forwarded-Encrypted: i=1; AKwUvBx1CGGxYo3lmCDGUCYk30gebLeQrqHtUSBPjkTaMlPUoYmnXad4Hhrf80BmLYH17GnVlUziMMDrzX8=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kvIqhHDThjzaElPujFPElS1LqNRGBo4uF1s2kAbb2aTJaClVqD
-	F6ItQa4Jy+LcBayy2xk+x32PTbhowQR0HIs//Jsd8XiN34v7nuOwCl5q
-X-Gm-Gg: AYBFou2iLsV+CqVG1yKTR+xL4syFAFIMr8S5P5x/Wn9rqK68XosZ++DMcN67ybVe/T5
-	o2n7PvatzYkBgDstGat4JKX70L+5WUe91R6r4a0g2bqxkbdItrApM3eeoyx/Lv33z0wW+FJ8htz
-	kmy8rHPlSb150sWVUkZaxRn0D1s4YguHuAg4GtkByshXC3zz3pPsVOcpnR6P7+Hv33FrG55HXVW
-	mJi5qDTE2IuiBYma5KUV4LvVykjQm+E0l5z6WXRjFiFV3cZySNg6RcnwIHYQSI+h6MsCG7BWa/G
-	KgdBFtCponeOVQTPh6OretpAS6W+ZsDruurQ/nrzMNie67dwfpokH6XxE7eLT4SbeUdNy1onG4I
-	hUdgrOiN80Orgk5ZhAI8LhOuPfNa85TlauOKyE+B7AeJJLYML/7JLClQHITsEXU4sNNVHEHkX9L
-	CdkaM+1sisx4JOBu3TBX7ZfENSlvWzRqEq2eP1yPa8RYEBrCojd5v4s1I5pCnzPFCPsF7T0ntT8
-	abSPLcaFFQtAjsIjCZr1V60CDxgqeJ3
-X-Received: by 2002:a17:906:c103:b0:c25:58e:83ff with SMTP id a640c23a62f3a-c29666203f5mr346374266b.10.1789136942481;
-        Fri, 11 Sep 2026 07:29:02 -0700 (PDT)
-Message-ID: <5332f8e9-e745-43e3-8928-1d2e425ea567@gmail.com>
-Date: Fri, 11 Sep 2026 16:29:00 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1789137136;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=FgcxXaX7vV4QKY5AmHCuTifN6aisrzplu/ekuc9/1QQ=;
+	b=Cv+hhmCq/b2mKdsMQ/LrGF5m5NoL4djo/PEV0Y7YLOelt2/raV5x0qzppqE9xoVlKPMTfh
+	/9S84U05L3nPiiAkMa5ILBVVKjyDSxavZGcVgUsfM0p3uKoTdgyvtvxOzMDaRSxZRQSQKa
+	DgpqbIQpraxRxSZGdS4U/pC3B3mhuVk=
+X-MC-Unique: kouePLKLNBuFsDVFxTXoEg-1
+X-Mimecast-MFC-AGG-ID: kouePLKLNBuFsDVFxTXoEg_1789137129
+From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: qemu-s390x@nongnu.org,
+	qemu-ppc@nongnu.org,
+	qemu-block@nongnu.org,
+	qemu-arm@nongnu.org,
+	xen-devel@lists.xenproject.org,
+	qemu-riscv@nongnu.org,
+	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
+Subject: [PATCH 00/29] Mark user creatable devices for secure for virt use case
+Date: Fri, 11 Sep 2026 15:31:36 +0100
+Message-ID: <20260911143205.2736968-1-berrange@redhat.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 22/39] xen/riscv: add guest memory read helper
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <b68a29b7ef5b2cb83fde405b3854c94a2f44f4d0.1787838835.git.oleksii.kurochko@gmail.com>
- <e1b02a7a-24b4-4500-a690-313c823280f6@suse.com>
- <895ad4e5-37cd-4a1e-bc49-9a69ab00a920@gmail.com>
- <36c57293-1448-4283-ac85-5507d9cc637a@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <36c57293-1448-4283-ac85-5507d9cc637a@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1789136943-C20D5B50-9259D9E0/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4093
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: agu8hRciYIOpp38akb635qED07y2iMNUy-QOFil3qe8_1789137129
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1789137137-D4D7087B-479E1C6F/0/0
+X-purgate-type: clean
+X-purgate-size: 13452
 
+This (largish) series undertakes the task of marking devices
+secure, if they are intended to be used a virtualization
+use case.
 
+NB, the maintainer CC list was way too huge to include every
+individual, so I've trimmed to just the mailing list CCs.
 
-On 9/11/26 4:00 PM, Jan Beulich wrote:
-> On 11.09.2026 15:57, Oleksii Kurochko wrote:
->>
->>
->> On 9/10/26 5:28 PM, Jan Beulich wrote:
->>> On 27.08.2026 17:21, Oleksii Kurochko wrote:
->>>> @@ -114,3 +115,89 @@ unsigned long copy_to_guest_phys(struct domain *d, paddr_t gpa, void *buf,
->>>>        return copy_guest(buf, gpa, len, GPA_INFO(d),
->>>>                          COPY_to_guest | COPY_gpa);
->>>>    }
->>>> +
->>>> +/*
->>>> + * Read machine word from guest memory
->>>> + *
->>>> + * @guest_addr: Guest address to read
->>>> + * @read_insn: Flag representing whether we are reading instruction
->>>> + * @trap: Output pointer to trap details if something went wrong during read
->>>> + *
->>>> + * The hlv/hlvx instructions translate guest_addr through the live
->>>> + * vsatp/hgatp CSRs, so the read is only meaningful for the address
->>>> + * space of the currently running vCPU.
->>>> + *
->>>> + * At most two halfwords are fetched when @read_insn is true, i.e. encodings
->>>> + * wider than 32 bits are not supported. Such an encoding cannot be completed
->>>> + * by calling this function again at @guest_addr + 4: the length check is
->>>> + * applied to the first halfword read, which would then be a continuation of
->>>> + * the instruction rather than its opcode. It is up to the caller to reject
->>>> + * anything that is neither a 16- nor a 32-bit encoding.
->>>> + */
->>>> +unsigned long riscv_read_guest(unsigned long guest_addr, bool read_insn,
->>>> +                               struct trap_info *trap)
->>>> +{
->>>> +    /*
->>>> +     * Poison the result: if the very first access faults, the fixup skips
->>>> +     * over the loads without writing it. Callers must check trap->scause.
->>>> +     */
->>>> +    unsigned long val = ~0UL, tmp;
->>>> +
->>>> +    /*
->>>> +     * hlv/hlvx use hstatus.SPVP for the privilege of the access, and the
->>>> +     * live vsatp/hgatp for the translation. Xen never installs a value of
->>>> +     * its own in hstatus (it is only saved on trap entry and restored
->>>> +     * before sret) and it doesn't reschedule before returning to the
->>>> +     * guest, so all three still belong to the vCPU which trapped.
->>>> +     *
->>>> +     * Check the saved copy rather than the live CSR: a nested trap taken
->>>> +     * from HS-mode clears hstatus.SPV in the CSR (but leaves SPVP alone).
->>>> +     */
->>>> +    ASSERT(vcpu_guest_cpu_user_regs(current)->hstatus & HSTATUS_SPV);
->>> [...]
->>> Question being of how much value
->>> that checking is: vcpu_guest_cpu_user_regs(current)->hstatus can't possibly
->>> have SPV clear, can it? Only nested exception frames could.
->>
->> Given that vcpu_guest_cpu_user_regs(current)->hstatus will always have
->> SPV set for any valid guest trap frame, the ASSERT is purely a defensive
->> sanity check to ensure riscv_read_guest() is never called outside a
->> guest trap context.
-> 
-> It is not, afaict: vcpu_guest_cpu_user_regs(current) will give you the guest
-> frame no matter what context you're in. For what you want, you'd need to
-> pass struct cpu_user_regs * into here.
+The approach taken was iterative as follows
 
-Agree, struct cpu_user_regs * will be required.
+ * Machines listed in
 
-But I am looking at how read_guest() is used and it shouldn't be used 
-when nested HS trap happen never and it seems like it is too much to 
-pass struct cpu_user_regs * just to check that.
+    https://www.qemu.org/docs/master/system/security.html#virtualization-use-case
 
-I think it is enough just to have:
+ * All virtio/vhost/vfio/xen related devices
 
-     case CAUSE_FETCH_GUEST_PAGE_FAULT:
-     case CAUSE_LOAD_GUEST_PAGE_FAULT:
-     case CAUSE_STORE_GUEST_PAGE_FAULT:
-         /*
-          * A guest page fault taken in Xen context comes from an hlv/hlvx
-          * access made on a vCPU's behalf and is dealt with by the
-          * fixup_exception() above, so only a guest can get here.
-          */
-         BUG_ON(!from_guest);
+ * Most PCI related devices/controllers/bridges
 
-where we already checked that when riscv_read_guest() is used then it 
-isn't nested HS trap.
+I then used the RHEL builds of QEMU as an approximation for
+what should be considered "virtualization use case", since
+they cut out a huge pile of devices from the build. IOW,
+more or less everything that RHEL builds for x86_64, ppc64,
+aarch64, s390x gets included. Notably since RHEL does not
+yet ship riscv or loongarch, I've possibly missed some
+devices that ought to be in scope.
 
-So it looks like we could just drop the ASSERT() and probably update the 
-comment above function and mention that riscv_read_guest() shouldn't be 
-called in nested HS trap.
+Devices are marked secure *regardless* of their maintainer
+status, if they are relevant to virt. Notably all the USB
+stuff is included despite USB being orphaned. An exception
+is CXL which is arguably relevant to virt, but maintainers
+agreed it is too immature to include so far.
 
-~ Oleksii
+IOW, the "secure" flag as set in this series mostly avoids
+saying anything about the support status of the object types.
+
+Over the long term, IMHO, the set of devices we declare as
+providing a security boundary needs to be stable. We should
+not declare a device out of scope for the virt use case simply
+because a maintainer steps aside. The device doesn't become
+instantly less secure. It does mean bug fixes may not be
+timely enough, and rely on the goodwill of other contributors
+or maintainers to step up and fix.
+
+Or to put it another way. "secure = true" does not guarantee
+that the device is secure, but it states our intent that we
+*want* it to be secure, as opposed to "secure = false" which
+indicates we just don't care either way.
+
+The intersection of (secure, orphaned) highlights to QEMU
+contributors or corporate sponsors, where they might step
+up their effort / investment.
+
+Finally this is just user creatable devices. Use of these
+devices implies use of many more non-user creatable devices.
+
+I don't have a good way to enumerate those yet, and while
+the end user doesn't care at runtime, as maintainers we
+want to be clear if all devices are in scope for CVE
+handling or not.
+
+Based-on: <20260910103628.2326622-1-berrange@redhat.com>
+
+Daniel P. Berrangé (29):
+  hw: mark secure machines for x86, s390, ppc, arm, loonarch, riscv
+  accel: mark kvm and xen accelerators as secure
+  hw: mark all virtio PCI devices as secure
+  hw: mark all virtio CCW devices as secure
+  hw: mark all vhost devices a secure
+  hw: mark all remaining virtio object types as secure
+  hw/vfio: mark all VFIO object classes as secure
+  hw/xen: mark all Xen related object types as being secure
+  hw/net: mark e1000, e1000e, IGB, rtl8139 & sPAPR VLAN as secure
+  hw/usb: mark commonly used USB devices/hosts as secure
+  hw/watchdog: mark some watchdog devices as secure
+  hw/scsi: mark spapr and vmware SCSI controllers as secure
+  hw/scsi: mark SCSI disk endpoint devices as secure
+  hw/ide: mark ICH9 and ide-hd/ide-cd as secure
+  hw: define most common PCI types as secure
+  hw/pci-host: mark common x86, ppc, arm and s390 PCI hosts as secure
+  hw/display: mark bochs, cirrus, qxl, VGA, ramfb as secure
+  hw/tpm: mark all TPM implementations as secure
+  hw/misc: mark pvpanic, vmcoreinfo as secure
+  hw/audio: mark Intel HDA devices & codecs as secure
+  hw/char: mark common serial / console devicess a secure
+  hw/mem: mark nvdimm, pc-dimm & spapr-nvdimm devices as secure
+  hw/uefi: mark the EFI vars service as secure
+  hw/acpi: mark erst, vmclock and vmgenid devices as secure
+  hw: mark KVM clock and RTC devices as secure
+  hw: device AMD, Intel and ARM IOMMUs as secure
+  hw/input: mark PS/2 and PC Keyboard devices as secure
+  hw/i386: mark vmmouse / vmport as secure
+  tests/tcg: improve check for working cross compilers
+
+ accel/accel-common.c                 | 2 ++
+ accel/accel-system.c                 | 1 +
+ accel/kvm/kvm-accel-ops.c            | 1 +
+ accel/kvm/kvm-all.c                  | 1 +
+ accel/xen/xen-all.c                  | 2 ++
+ hw/9pfs/virtio-9p-device.c           | 1 +
+ hw/acpi/erst.c                       | 1 +
+ hw/acpi/vmclock.c                    | 1 +
+ hw/acpi/vmgenid.c                    | 1 +
+ hw/arm/smmu-common.c                 | 1 +
+ hw/arm/smmuv3.c                      | 2 ++
+ hw/arm/virt.c                        | 1 +
+ hw/arm/xen-pvh.c                     | 1 +
+ hw/audio/hda-codec.c                 | 4 ++++
+ hw/audio/intel-hda.c                 | 5 +++++
+ hw/audio/virtio-snd.c                | 1 +
+ hw/block/vhost-user-blk.c            | 1 +
+ hw/block/virtio-blk.c                | 1 +
+ hw/block/xen-block.c                 | 3 +++
+ hw/char/debugcon.c                   | 1 +
+ hw/char/sclpconsole-lm.c             | 1 +
+ hw/char/sclpconsole.c                | 1 +
+ hw/char/serial-isa.c                 | 1 +
+ hw/char/serial-pci.c                 | 1 +
+ hw/char/serial.c                     | 1 +
+ hw/char/spapr_vty.c                  | 1 +
+ hw/char/virtio-console.c             | 2 ++
+ hw/char/virtio-serial-bus.c          | 3 +++
+ hw/char/xen_console.c                | 1 +
+ hw/display/bochs-display.c           | 1 +
+ hw/display/cirrus_vga.c              | 1 +
+ hw/display/qxl.c                     | 3 +++
+ hw/display/ramfb-standalone.c        | 1 +
+ hw/display/vga-mmio.c                | 1 +
+ hw/display/vga-pci.c                 | 3 +++
+ hw/display/vhost-user-gpu.c          | 1 +
+ hw/display/virtio-gpu-base.c         | 3 ++-
+ hw/display/virtio-gpu-gl.c           | 1 +
+ hw/display/virtio-gpu-pci-rutabaga.c | 1 +
+ hw/display/virtio-gpu-pci.c          | 3 ++-
+ hw/display/virtio-gpu-rutabaga.c     | 1 +
+ hw/display/virtio-gpu.c              | 1 +
+ hw/i386/amd_iommu.c                  | 4 +++-
+ hw/i386/intel_iommu.c                | 1 +
+ hw/i386/kvm/clock.c                  | 1 +
+ hw/i386/microvm.c                    | 1 +
+ hw/i386/pc_piix.c                    | 4 ++--
+ hw/i386/vmmouse.c                    | 1 +
+ hw/i386/vmport.c                     | 1 +
+ hw/i386/xen/xen-pvh.c                | 1 +
+ hw/i386/xen/xen_platform.c           | 1 +
+ hw/i386/xen/xen_pvdevice.c           | 1 +
+ hw/ide/ich.c                         | 1 +
+ hw/ide/ide-dev.c                     | 3 +++
+ hw/ide/piix.c                        | 2 ++
+ hw/input/pckbd.c                     | 3 ++-
+ hw/input/ps2.c                       | 9 ++++++---
+ hw/input/virtio-input-hid.c          | 5 +++++
+ hw/input/virtio-input-host.c         | 1 +
+ hw/input/virtio-input.c              | 1 +
+ hw/loongarch/virt.c                  | 2 ++
+ hw/mem/nvdimm.c                      | 1 +
+ hw/mem/pc-dimm.c                     | 1 +
+ hw/misc/pvpanic-isa.c                | 1 +
+ hw/misc/pvpanic-mmio.c               | 1 +
+ hw/misc/pvpanic-pci.c                | 1 +
+ hw/misc/vmcoreinfo.c                 | 1 +
+ hw/net/e1000.c                       | 1 +
+ hw/net/e1000e.c                      | 1 +
+ hw/net/igb.c                         | 1 +
+ hw/net/rtl8139.c                     | 1 +
+ hw/net/spapr_llan.c                  | 1 +
+ hw/net/virtio-net.c                  | 1 +
+ hw/net/xen_nic.c                     | 1 +
+ hw/pci-bridge/gen_pcie_root_port.c   | 1 +
+ hw/pci-bridge/i82801b11.c            | 1 +
+ hw/pci-bridge/ioh3420.c              | 1 +
+ hw/pci-bridge/pci_bridge_dev.c       | 2 ++
+ hw/pci-bridge/pci_expander_bridge.c  | 8 ++++++++
+ hw/pci-bridge/pcie_pci_bridge.c      | 1 +
+ hw/pci-bridge/pcie_root_port.c       | 1 +
+ hw/pci-bridge/xio3130_downstream.c   | 1 +
+ hw/pci-bridge/xio3130_upstream.c     | 1 +
+ hw/pci-host/gpex.c                   | 2 ++
+ hw/pci-host/i440fx.c                 | 2 ++
+ hw/pci-host/pnv_phb.c                | 2 ++
+ hw/pci-host/pnv_phb3.c               | 3 +++
+ hw/pci-host/pnv_phb3_msi.c           | 1 +
+ hw/pci-host/pnv_phb3_pbcq.c          | 1 +
+ hw/pci-host/pnv_phb4.c               | 4 +++-
+ hw/pci-host/pnv_phb4_pec.c           | 1 +
+ hw/pci-host/q35.c                    | 2 ++
+ hw/pci-host/remote.c                 | 1 +
+ hw/pci-host/xen_igd_pt.c             | 1 +
+ hw/pci/pci.c                         | 7 +++++++
+ hw/pci/pci_bridge.c                  | 1 +
+ hw/pci/pci_host.c                    | 1 +
+ hw/pci/pcie_host.c                   | 1 +
+ hw/pci/pcie_port.c                   | 1 +
+ hw/ppc/spapr.c                       | 1 +
+ hw/ppc/spapr_nvdimm.c                | 1 +
+ hw/ppc/spapr_pci.c                   | 1 +
+ hw/ppc/spapr_tpm_proxy.c             | 1 +
+ hw/riscv/virt.c                      | 1 +
+ hw/rtc/mc146818rtc.c                 | 1 +
+ hw/s390x/s390-pci-bus.c              | 4 ++++
+ hw/s390x/s390-virtio-ccw.c           | 1 +
+ hw/s390x/vhost-scsi-ccw.c            | 1 +
+ hw/s390x/vhost-user-fs-ccw.c         | 1 +
+ hw/s390x/vhost-vsock-ccw.c           | 1 +
+ hw/s390x/virtio-ccw-9p.c             | 1 +
+ hw/s390x/virtio-ccw-balloon.c        | 1 +
+ hw/s390x/virtio-ccw-blk.c            | 1 +
+ hw/s390x/virtio-ccw-crypto.c         | 1 +
+ hw/s390x/virtio-ccw-gpu.c            | 1 +
+ hw/s390x/virtio-ccw-input.c          | 5 +++++
+ hw/s390x/virtio-ccw-md.c             | 1 +
+ hw/s390x/virtio-ccw-mem.c            | 1 +
+ hw/s390x/virtio-ccw-net.c            | 1 +
+ hw/s390x/virtio-ccw-rng.c            | 1 +
+ hw/s390x/virtio-ccw-scsi.c           | 1 +
+ hw/s390x/virtio-ccw-serial.c         | 1 +
+ hw/s390x/virtio-ccw.c                | 1 +
+ hw/scsi/scsi-disk.c                  | 4 ++++
+ hw/scsi/scsi-generic.c               | 1 +
+ hw/scsi/spapr_vscsi.c                | 1 +
+ hw/scsi/vhost-scsi-common.c          | 1 +
+ hw/scsi/vhost-scsi.c                 | 1 +
+ hw/scsi/vhost-user-scsi.c            | 1 +
+ hw/scsi/virtio-scsi.c                | 2 ++
+ hw/scsi/vmw_pvscsi.c                 | 1 +
+ hw/tpm/tpm_crb.c                     | 1 +
+ hw/tpm/tpm_spapr.c                   | 1 +
+ hw/tpm/tpm_tis_i2c.c                 | 1 +
+ hw/tpm/tpm_tis_isa.c                 | 1 +
+ hw/tpm/tpm_tis_sysbus.c              | 1 +
+ hw/uefi/var-service-sysbus.c         | 2 ++
+ hw/usb/ccid-card-emulated.c          | 1 +
+ hw/usb/ccid-card-passthru.c          | 1 +
+ hw/usb/dev-hid.c                     | 4 ++++
+ hw/usb/dev-hub.c                     | 1 +
+ hw/usb/dev-smartcard-reader.c        | 3 +++
+ hw/usb/dev-storage-bot.c             | 1 +
+ hw/usb/dev-storage-classic.c         | 1 +
+ hw/usb/dev-storage.c                 | 1 +
+ hw/usb/hcd-ehci-pci.c                | 2 ++
+ hw/usb/hcd-ehci-sysbus.c             | 8 ++++++++
+ hw/usb/hcd-ohci-pci.c                | 1 +
+ hw/usb/hcd-ohci-sysbus.c             | 1 +
+ hw/usb/hcd-uhci.c                    | 2 ++
+ hw/usb/hcd-xhci-nec.c                | 1 +
+ hw/usb/hcd-xhci-pci.c                | 2 ++
+ hw/usb/hcd-xhci-sysbus.c             | 3 ++-
+ hw/usb/hcd-xhci.c                    | 1 +
+ hw/usb/host-libusb.c                 | 1 +
+ hw/usb/redirect.c                    | 1 +
+ hw/vfio-user/pci.c                   | 1 +
+ hw/vfio/ap.c                         | 1 +
+ hw/vfio/ccw.c                        | 1 +
+ hw/vfio/container.c                  | 1 +
+ hw/vfio/igd.c                        | 1 +
+ hw/vfio/iommufd.c                    | 2 ++
+ hw/vfio/pci.c                        | 3 +++
+ hw/vfio/spapr.c                      | 1 +
+ hw/virtio/vdpa-dev.c                 | 1 +
+ hw/virtio/vhost-user-base.c          | 3 ++-
+ hw/virtio/vhost-user-fs.c            | 1 +
+ hw/virtio/vhost-user-gpio.c          | 1 +
+ hw/virtio/vhost-user-i2c.c           | 1 +
+ hw/virtio/vhost-user-input.c         | 1 +
+ hw/virtio/vhost-user-rng.c           | 1 +
+ hw/virtio/vhost-user-rtc.c           | 1 +
+ hw/virtio/vhost-user-scmi.c          | 1 +
+ hw/virtio/vhost-user-snd.c           | 1 +
+ hw/virtio/vhost-user-spi.c           | 1 +
+ hw/virtio/vhost-user-test-device.c   | 1 +
+ hw/virtio/vhost-user-vsock.c         | 1 +
+ hw/virtio/vhost-vsock-common.c       | 1 +
+ hw/virtio/vhost-vsock.c              | 1 +
+ hw/virtio/virtio-balloon.c           | 1 +
+ hw/virtio/virtio-bus.c               | 1 +
+ hw/virtio/virtio-crypto.c            | 1 +
+ hw/virtio/virtio-input-pci.c         | 2 ++
+ hw/virtio/virtio-iommu.c             | 2 ++
+ hw/virtio/virtio-md-pci.c            | 1 +
+ hw/virtio/virtio-mem.c               | 1 +
+ hw/virtio/virtio-mmio.c              | 2 ++
+ hw/virtio/virtio-nsm.c               | 1 +
+ hw/virtio/virtio-pci.c               | 3 +++
+ hw/virtio/virtio-pmem.c              | 1 +
+ hw/virtio/virtio-rng.c               | 1 +
+ hw/virtio/virtio-rtc.c               | 1 +
+ hw/watchdog/sbsa_gwdt.c              | 1 +
+ hw/watchdog/spapr_watchdog.c         | 1 +
+ hw/watchdog/wdt_diag288.c            | 1 +
+ hw/watchdog/wdt_i6300esb.c           | 1 +
+ hw/watchdog/wdt_ib700.c              | 1 +
+ hw/xen/xen-bus.c                     | 3 +++
+ hw/xen/xen-legacy-backend.c          | 3 +++
+ hw/xen/xen-pvh-common.c              | 1 +
+ hw/xen/xen_pt.c                      | 1 +
+ hw/xenpv/xen_machine_pv.c            | 2 +-
+ include/hw/i386/pc.h                 | 1 +
+ tests/tcg/test_cc.c                  | 6 +++++-
+ 204 files changed, 309 insertions(+), 14 deletions(-)
+
+-- 
+2.55.0
+
 
