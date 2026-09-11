@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CACA6C88E45
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 07:25:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415730.1644975 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E4AFC88E50
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 07:25:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1415725.1644934 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4vdI-0000It-Tm; Fri, 11 Sep 2026 07:25:12 +0000
+	id 1x4vd9-0007kP-DG; Fri, 11 Sep 2026 07:25:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415730.1644975; Fri, 11 Sep 2026 07:25:12 +0000
+Received: by outflank-mailman (output) from mailman id 1415725.1644934; Fri, 11 Sep 2026 07:25:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4vdI-0000IO-LJ; Fri, 11 Sep 2026 07:25:12 +0000
-Received: by outflank-mailman (input) for mailman id 1415730;
- Fri, 11 Sep 2026 07:25:10 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x4vd9-0007kI-8k; Fri, 11 Sep 2026 07:25:03 +0000
+Received: by outflank-mailman (input) for mailman id 1415725;
+ Fri, 11 Sep 2026 07:25:02 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1x4vdG-0000CO-HV
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 07:25:10 +0000
+ (envelope-from <brchuckz@aol.com>) id 1x4vd7-0007k6-Qe
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 07:25:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4vdF-00CxOg-Ua
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:25:09 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x4vd6-000Pkt-Kg
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:25:00 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <brchuckz@aol.com>)
- id 6aa3acd5-8faa-0a2a0a5109dd-0a2a450cd35c-0
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:25:09 +0200
+ id 6aa3acc4-2eae-0a2a0a5409dd-0a2a4505d46a-28
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:24:59 +0200
 Received: from [98.137.68.146] (helo=sonic302-20.consmr.mail.gq1.yahoo.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <brchuckz@aol.com>)
- id 6aa3acd4-f479-0a2a450c0019-628944928126-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:25:09 +0200
+ id 6aa3acca-4cb1-0a2a45050019-628944928914-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:24:59 +0200
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic302.consmr.mail.gq1.yahoo.com with HTTP; Fri, 11 Sep 2026 07:25:07 +0000
+ sonic302.consmr.mail.gq1.yahoo.com with HTTP; Fri, 11 Sep 2026 07:24:57 +0000
 Received: by hermes--production-bf1-54b5569bdc-fv65m (Yahoo Inc. Hermes SMTP
  Server) with ESMTPA ID c4451c0cd4386c4b1051306e68eb9ea1; 
- Fri, 11 Sep 2026 07:25:02 +0000 (UTC)
+ Fri, 11 Sep 2026 07:24:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,42 +50,42 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1789111507; bh=7fxAXafCgkhWXQ8Bsf9UiQyUsF3UYEGG0N1eLLgC4dY=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=MY3bu1YIRCtta03Rlipjs9jUs1884+HtWo02dPwMqdNiXfGND5jbWoQQ73rVvmFAxfMh1rSKNCMmUuv0f3O3nJaF48sza9pov6e+l+5/jgrWX/pDVibkOPsfi8YIe/y/Pho4nZxTqjiYEEXkYQ7WTBu9rkKWm87rccHdDwVCWORazLPteYYxrU9xB8A1WWaALgrm/4WGLNNraisbgpawWT4yCiTwKRcRrUB5TrtBlF+L+XCD94/0oIWScWB/ITGti3+FA+DWEgJt/bbxP3uxArBWxuz8LXVFcbMm3e1FfLCVqskURWa6ycZ2qiubUAeiISzjx7yLDbKf/tpHsLRAtA==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1789111507; bh=R67dZrL14KOXcf7Htx14zdMHg64juJit3yfZK6RHShP=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=AVymKrAS51hbwh2XQ86S1xqC2/S/pId39gT5gLi9EPmC71kvDOIoMtCHjmQ0PH4HOd+kd6qEJZU+yw/oy0ad+Qvtk702yzQybpE6w/IqgP1gLD6AXQobKic6oJhhJWIlVR17YeqUSBUR4CUm5lPlm/JIROPRDo8QGGTkGQiqgltSSOzirGDFTEsuQKYe2TuNRZ+mnjMLF3cr/7BWPkcCSdrM8kHBdMU5yBJd7NuTbIdU/nNsLL7hj5U+Tqb7Jw//ua2OA1oyDj71El72Kz7vwvadsgsTLd6HMj49tWedkm+wJti/4yyh/YTzmlckEeZt6J3UDL/ydHB33+3RVC3pnw==
-X-YMail-OSG: TdyjS4QVM1mzgjCy7Bu9yrDGtN03HRem.ZApojprzrTauLRU_qRx8ZdHoeHoqCD
- GkHGfbcRZq.i8qBkyw4lCGycdR05XEXRvmdVNSsikGRGea0dTk88CSfUW3s6heH_3QZnzWXs6GdQ
- NLxGswdBbMVOpcUC0vkK.4lLgp4djlVgRM7gE7If6O_BznhDZL8DYK82Z6t7v66XAkw.4LDTvcrB
- UyZn_72P0P8pDfEwVEtEdoiRd2VPVDJvRh_iWfPl1M0O.KX6t.k6xxK8L0UrLd0W3f.2EJIAGT8c
- PCFqOgAOXkNQJ4teAXfcPmKUEk9Vuu3VSJ0Ko6hZSU2i2a3o2Y2fGlKGZkIqPJPW8_EABKXiOLb8
- o52MOFncWd.G9BSIQbykStHE3QBPT23Jdi0Zin3hCzJrV4IvXw9wnMmBTRZI2qYrtYuTCZh5vt81
- fVnRQxVU5vZBv8w8Sk6OBtsdtpurGw4xu.8gfzR1M3aEY30fZFSuNQQZKl4u8dc1G5bKBMYpVm7m
- zZC75fXyvAs4xHf6xJh3n5gtnAIMM9XHtueD7A_GrLqwnehfl0nnMa7VwKznvGZf_fLqKGW13ra4
- FU2dCPp0scZ17M6MY3JCqAOT4DbHMa666NEb5hkJZnfBbRd3_2bCcBBePQyXXglA2kvOhx843lBH
- hF9cWSSdsjjIyX6mgM8HNv2s6Yfk68MdkmFwjqx3Kzut0qgXaTkMGuuPr8b9q_P3jhnk6tOKUUeF
- l5PJaLsZAAvyEWHhqCJcaQVRtbwtVisxQycWSE_gw5dmVyoVYafo3MZy4HL4n_eaD3Ca5PX5rnJE
- 11.iKSyc934Np0Fu1MFvYIr8ipjBclV8Oq11aOVcC1wFUuXudA_dIKetPC4Oy0cyVvB9NcvtBvYy
- LXrxxLMV10IxeaDWIYjVaHCf6rRam76iRnL6V08O7Gp_uawCbf39GOJOr6sa7ofFrETh5T9ttB.N
- uJR8Kq7PEll0Gg0B4imOv_7Po8xYPDUyCkZNmmYvQISjEiDFO0dq3CbT_vyc22973u.SmyxSyK.Y
- AuZInZx.1Gss1mk6_fUB.ND427nRqT2bskv9DllP8EgabRreNXPPxM9RHUxoQq0dEOJpE_jZwmPL
- s12KL78vGzXk63ykngyGvXt9nz_KXD_CvdXP1Q5N.fQfmJkBP7V21m7uEuZVepcIGe.D_V9bVAPn
- hY8EmtelGU38PLOJ8viOY7q1nX6wFcY_NTwwhEgc5xTA9zfWXA.g369HgX__btM.2EgvTGeJsga.
- YhzvES6ch1o_PDRnGF7Nd3txH4PVfLWr9v6A2GmkksZdmF3SqPkiaN3OGaUXiwuRgxIIZKQ2gby1
- IKwVOp5_NYW3RAQIpJOoiKA9fqSKUtRt.AOvfGqUnoCOmOoHnAnSjSblzDb2Qu9sl0m6A13Kp38e
- ztjcuZy4c9lZbrDnXDyFqPIPZu8urSM0r72k13r9C43BFI38dXYstM0JWb6j3fh55e0ToP6GGjV7
- qZYN42BpJkAMPZa6ZK.kzVP5yNx7pbka2tQY_RLuYySZrCaVjd5Fuu0HyzNg3RicioN4VReJ.LeR
- bUJIWcPZKnSXZ1EJrnTfoT5sTcnEvgq4MuND87Pqt8QeBwdwGQoQSFp8gvaCXK2XMqrtgImZ4eZE
- CaDNS1uJnrCU0q8e_GrAmRQW8wt5BDfuKx8xJzb3V4nwqh9T_prl2UWrtvwNpAnA4cmD7Vx_gXr4
- 1cVONYmkDtZIw0SaBGjiTJqNkG2zhyrpQnsjjO_dP8G7bNm90ZR2z87ENT.GXNy956r.jdKm2fr0
- brGW4Vk4Xrl7oRDmVBVpLAMnW60JhPLNmlcb_sO8VjoyBWzN6knLDKJ0a_jlO0OGUSqxi9fszjib
- pwhfLZmjJpJritfFzDXpA3aXm8wiwj3PE1WfDf9dMAZG.qikmErSwUaYxuPFDXi4gVFiOzYAb.Bh
- UUKwEHw09TIosrYue9dS3SHIoKpfcM2Fbqvp7sTkmgpI8teKKcnSOa5BwYCoBFbQFZtNyzwgQB5B
- _W42OaX50UnCcZdluogrDALWQJzAjR3lA203vnwq9T0JwZzDO.bddyQror5LeqyjT_IGrJDcTQC9
- 1fGMaMjgz4PWUZumDIC2X9V4PcVgrNPrt1mAwC70Bk.Ppm1pRnaYMotUDPPkYpFYrhKWMIW7W56K
- lZBvMm4hzUfzaA0L_VYTrYicIndZr9sCX0OJR6ftEi_V5c0QGrkfibd446UstF7V2WSQZydIxl89
- 6EkOkHMCQuUFD7NxxzrvPohsIUxZLYMcorCrf
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="From:To:Cc:Subject:Date:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1789111497; bh=en0biDtErIDPX8Wy4OEtT0eKAnvLP1ybw8oQxmME/08=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=laak+G0vWbOik+u36BuweJGPG0wcd4JF4bJPee99r9l/nDc5lEPnNL8m5qSuh6+lQ5v7p3xubs+Ncz+weeFAmkdVHg5rLHDp9M1Qg8Zb89NXr2xYbcVQs1ToDeOiuvXKrN6ZByU7Mw/NE8ZL4gHjSkrfGtAjB6EkBNuK2Cuq5wU8ToXCLR6Sulg/k7HZmBikYEyLA6Vwmnf4Nd/4H5tFLuJyzKnlMPjwhKDmUZrBceX/+CivCrJHbFDFJN4MgOwAlFc1d/lXCblFmKY73fe6PW+vFUIvYIl7pBU6ASk9Ao/E85EmD26/HYAbuRpaArKMYl3JXNEEOrzL8dNfE4rupg==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1789111497; bh=m/ERkDdEk+T4YnfpCna6g0mZv+xiWufY6rwsf2afODF=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=IgEnuBz0CV9X3w9UNvXidtV0ZwXWZ26E4Q/UMDTPLfzlC4qJwK15uFxk50ln/WcLstkXZ7KGACkHUQlEJJCkhoEcDSa9e+gwyJczTOvkB9TntgTyIaTcwfaf83zmBOFANOc8fBLjPiC/1HTzV57DEt+8opigivEptEmGwKNZm1x7rCaOi4LBbDPFqGyYdC5itZbVpm2rMUC6e05HyX9IUcQYJM9GeB6D3D5e/RprRlE5l+7oZ5+mim+V1KtAupmz0HV8eFp/i9CCSMYeKmLo3dAo6udgWIRd/bGzwGnaby36mMf6SM2iAmxJZj5JM38dXj9OIHNVLXalutCRmVDchw==
+X-YMail-OSG: 0EFgvdUVM1nTA_43UU_dkhx.RMQF9.A4zr8vZPXj1UprNjjQRWLMTFDc8Qfkbzi
+ jj7oxWgOFXKqbrX6rfdz_YcuG9KNRtg8Wo7NSUkaPE.MTcR4H8JMnYc_il85gVA_0I4HZWvObdg6
+ kz6t4TgtE69jkQsh1ITX1eI1kZ8qB.5WP9Aa5XeHHeXc7WHMBacjuXqhQbMeEt1R0xPnQP0f3LXx
+ .ULAn.918HWdNr3eajcx0p7xgn1FoR.HUbiA3mN8Hz8lZODi_OKPO9HOOCmGGKmyZSokF2LHQmGw
+ I82Q4z.4vTGVR0ZVHLlMQs2NVoVBvsTkfdZD1Mh2pLBh22Q7Yb_ZZTkuerGlV4bexWdrggUVVzBb
+ MEOxCplRixUEXAwO96UIv7HDuoYaOPnPPs6faTTralBDWQ0GDwa0Y7yCNITyo.S4vuDr26ZHipW4
+ GFW2lS8Jzf7wPs1mLGV._UWZGvWGOhHfmtyI.6xerzuP.dXj1p5_Ra_sVNANBdSirJIwWBL7M0Zw
+ uFjoCWuMzE7rF.Z8Cmwf3.VehGn302OQAfbxgsReAL4zgXCI6CUnE55Vwsh7tn5yu2Rzt2myjW.k
+ k8u83hyt_1x52jwaipYtmpNS5AXxx9eAFP8g4SxUMnZkxrscrgwYjvxFOfRLuOUheuwtqxqPLgbc
+ Ny.WBiFLfCEDGPjWCGM3AkG0IF8WyEA8C1PTRlcACwDItC3mjwMZwExVampamYzITnI7Jd2hrrGN
+ tqgHbwIfivGtpuLh7dASJU8thNdvVY7cODg4p0Wc.6sz2UdwhOSAguxlmW91asoUx1LP8dEMDLnC
+ KZy9Iz9GEs7UnPVMSypKHSjLof7B7QAKGMlprPT5t_TPL7rVDltifQNeCElRSCVyTP.Vz2caZjMK
+ 3lcKt6FrOarImMjdecde51UclYbLxfDutRjvk2b_.0suEONhdF6zdG3oHpmJflzQnOWuHWi8_tN1
+ sevN2axosa3erbYz1F..UnQOLH0OYD2DmRA0mPGS1O_K6OMfuEVncxmEzynfiazCBz1etNwU7E_Y
+ NiFaLQsVQARMsZY6.mxS2bsN6Z3faU2XdjHRy_nlpydUEh00V2IJ6V8Fx2r1Gi8hwIWB1HzU6gg3
+ PrpOZidJLEv0HfycnFMwU.2TpF9FN7Bd00aFyqktD1F0JOgm5Pu3r08QmkegQTc6VV2eTOccfDgM
+ 38TJeBFfCTfqAAmRKMh7UKHhnKtXCNsjvu8zJyF3WnwV8KOFmLR9TGwBd1T8i1V1DohC8oK4veaO
+ g4nihugWtY6Lt7F.EmczJSMr8_lxa3BVvddMVmf22cJr7mfcrJqcMKiGhFey83vIOsYoGtveaBva
+ _1bdaJk5KBZTPX590bTjaLCGVLrY4XKLYu9G4wi4C.OzzeKtQyNptUedDzfoLQCdIxLz2.Vq4AhR
+ mCQbgOFP.L9W_bAbRc1P5FGSFucCwFsKA27zovnLS5o.YKeBGY_yYEXWNteJtAoAxW3GfKBiagwT
+ iTuoLk7WvJejLOOeoJClKXWbtKUvtJsZ4imBSjJxYXKVW8JJ8B4NSbpEpqfQoAxcZmgp1hzfYcP4
+ inBelBoyeuReNp6iKXlXuOO19iVsIc9tGREQybAa0xXkSQ4YkFlsQKRpeVVm33nn.aRiRjwRickW
+ d_OGwd1pXRDjErSfTiJbGH78u.547GL3C2Sqqve8P4TabaZF5vKPNVafZ3bPkeTm6Ttw9DLuYiwO
+ PlWLPt.8J_PQsYWv1oDt5f0dDKaePBdVUW_GGj84BjXm5b5lDFKcnM4He5w7ABAr7vHr8CqrdC7v
+ reNbIQqAZ5aLi.tgY_MS7pF1y2c3EmTDCabGsYik7yXka7mOZHh1gjzUtpvSFv5azsuXx8x0Sx1P
+ 4d7FHevzwWezqjdbGtXg_FRl5nLmKXhpJeT7f.jdGUAl4f_yRQeDZM3jmLABURfmCSFA5UWOZE1v
+ Z8lUjeV2z1bKCkw5GdI10C7ZIftqrGaJg35db2zdMhInb6ACvpaBwze2bSzftWIlKnjC2Eiwzs17
+ MIifqbx0vstvzbarTBsU2XWw.Q1dRe9yHYrn7SOuP2NTVnQnNAcECmMAOz.xlqAX6_G5Xi9XafVh
+ luPD1aZC7uDyjYZVRnDaSui.R7srO_YgdCYdqfj0pbcgItB7kjEsLa0OTdZMtEwnsoI4ggnA3EO_
+ L7oFk.cuoQh__56gnu8sO3KOEsXTJx.Unk2MUnrFN12fxLDlvcdWUSFf3c1Ka_IDiyvd6UxzSQji
+ 3wVc3biZg9Es1j33FN8C9cltc
 X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: 4e403500-ce38-485d-8ff9-5e41d4fcae22
+X-Sonic-ID: d05bd7e6-d197-4edf-9dd5-7cb81c3707fe
 From: Chuck Zmudzinski <brchuckz@aol.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-stable@nongnu.org,
@@ -94,129 +94,132 @@ Cc: qemu-stable@nongnu.org,
 	Anthony PERARD <anthony@xenproject.org>,
 	"Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
 	Tomita Moeko <tomitamoeko@gmail.com>
-Subject: [PATCH v6 4/7] xen/igd: enable guest creation when ROM read fails
-Date: Fri, 11 Sep 2026 03:24:50 -0400
-Message-ID: <20260911072453.46256-5-brchuckz@aol.com>
+Subject: [PATCH v6 0/7] xen/igd: fixes for Intel IGD passthrough
+Date: Fri, 11 Sep 2026 03:24:46 -0400
+Message-ID: <20260911072453.46256-1-brchuckz@aol.com>
 X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260911072453.46256-1-brchuckz@aol.com>
-References: <20260911072453.46256-1-brchuckz@aol.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1789111509-002F0A5B-C52202A5/0/0
+References: <20260911072453.46256-1-brchuckz.ref@aol.com>
+X-purgate-ID: tlsNG-c201ff/1789111499-72AB72A1-6D3568BF/0/0
 X-purgate-type: clean
-X-purgate-size: 5062
+X-purgate-size: 5501
 
-For newer IGD devices, the host option ROM is not readable from sysfs
-and this results in a call to error_fail() that causes Qemu to
-exit(1) so guest creation fails with the current implementation for
-many newer IGD devices. But this read failure need not be a fatal
-error causing guest creation to fail because the guest does not need
-the option ROM to successfully boot and run. The guest only needs the
-option ROM for getting graphics output from the guest during early
-boot before the guest OS loads the Intel IGD graphics drivers.
+Please note that Patch 6 of this series requires a patch to hvmloader of
+Xen for the new support to take effect. Also please note that earlier
+versions of the patch to hvmloader are not compatible with this version
+of Patch 6. Please look for v3 of the "tools/hvmloader: implement Intel IGD
+extended VBT support" patch that will be posted shortly to both the xen-devel
+and qemu-devel mailing lists.
 
-To fix this, allow guest creation to continue by avoiding setting errp
-if the attempt to read the host ROM file from sysfs fails. In this case,
-the memory for the guest option ROM has been allocated so free that
-memory by calling object_unparent(OBJECT(&s->dev.rom)) before
-continuing.
+This patch series aims to fix long-standing bugs that need to be backported
+to all currently supported stable versions in order to support passthrough of
+both older and modern Intel IGD devices to Xen HVM guests. This patch series
+also provides a patch (Patch 6) that adds support for newer devices that have
+an extended video bios table (VBT).
 
-Replace the error_report() and error_printf() messages for this case
-when the option ROM cannot be read via sysfs with a suitable
-info_report() message.
+These patches fix several bugs that cause problems
+ranging from a dark screen in the guest until the guest OS
+graphics are loaded to an assert failure or other failures
+in newer devices that in many cases prevent guest creation
+from succeeding or cause other problems such as code 43
+errors in Windows guests.
 
-In the case when the host option ROM cannot be read via the sysfs
-interface, xen_pt_register_regions() will attempt to setup the option
-ROM for the guest the same way it would for any other Xen passthrough
-PCI device that has an option ROM.
+To test the the third patch and verify it fixes the bug of
+no video output from Seabios, it is necessary to test
+with older Intel IGD devices that have support for legacy
+VGA bios (Seabios) because the newer devices, as far as I
+can tell, are not compatible with legacy VGA BIOS.
 
-Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
----
+The first three patches have been tested using Xen 4.21 and
+Seabios 1.17 on Fedora 44 using an older Intel NUC7i5BNK with
+an i5-7260U processor and have been verified to fix the bugs
+described in the individual patches. This device is compatible
+with legacy VGA BIOS and Seabios.
+
+With the fourth through seventh patches applied, it is possible to
+use/test with newer devices since, with those patches applied, the
+bugs that prevent guest creation from succeeding with many newer
+devices are fixed. All seven patches have been tested on both the
+older Intel NUC7i5BNK mentioned above and a newer 14th Gen i5-14500
+Raptor Lake processor in an ASRock board that, as far as I can
+tell, is not compatible with legacy VGA BIOS and Seabios, which
+means that, although one can successfully create a guest with
+Seabios for the guest with the newer device, there will be no
+graphics output from the guest until the guest OS loads the
+graphics drivers when using the newer device with Seabios.
+
+The seventh patch is provided for use with newer devices that require
+an EFI graphics output protocol (GOP) driver for graphics output
+during early boot. For more details, read the commit message and
+the accompanying notes in Patch 7.
+
+Two hints to help configuring Xen HVM guests with Intel IGD passthrough:
+
+  - Increase the value of mmio_hole from its default value of
+    256 to at least 512 using the mmio_hole setting in the guest
+    config. The value of 512 works well when the stolen memory is
+    256 MiB. If more stolen memory is used, the mmio_hole may need
+    to be increased even more.
+
+  - If there are rdm conflicts, lower the rdm_mem_boundary setting
+    in the guest config from its default value of 2048 to a
+    value at which all rdm conflicts are resolved. I have discovered
+    that lowering it in 128 MiB increments works well. With the older
+    device I needed to lower it to 1792 and with the newer one I
+    needed to lower it to 1664. See the description of the rdm_mem_boundary
+    setting in the xl.cfg(5) man page for more details.
+
 Changes in v6:
-  - No changes to this patch in this version
+  - Added Patch 5 to make better use of the xen_igd.h header file
+  - Patch 6 (Patch 5 in v5) has been totally re-worked after considering
+    comments made on v2 of the companion patch to hvmloader. See Patch 6
+    for more details.
+  - With the addition of Patch 5, Patch 6 in v5 is bumped to Patch 7 in v6
 
 Changes in v5:
-  - Shorten info_report message to resolve checkpatch line length warning
+  - fix style problems reported by checkpatch (see each patch for details)
+  - update the link to the companion patch for Xen hvmloader
 
 Changes in v4:
-  - v4 is the first version of the series that has this patch
+  - add three patches to provide support for newer Intel IGD devices
+  - edit the commit messages for better consistency of style
+  - use 12 digits instead of 7 when referencing commit hashes
+  - re-write xen_pt_get_host_pch_info() in patch 1 using the
+    functions declared in xen-host-pci-device.h
+  - handle errors in patch 1 that in previous versions of that
+    patch were not handled
+  - add a Fixes tag to the third patch
+  - add two hints in the cover letter to help those who are trying
+    to configure Xen HVM guests with an Intel IGD passed through
 
-This patch provides initial support for many newer Intel IGD devices
-so, at least, guest creation will not fail if such newer Intel
-IGD devices are passed through to a Xen HVM guest. But this patch
-alone is not sufficient for proper operation of the Intel IGD
-for many, if not all, of the newer Intel IGD devices when passed
-through to a Xen HVM guest.
+Changes in v3:
+  - whitespace fix in first patch
+  - fix Cc address for qemu-stable
 
-There are two main problems with more recent, modern devices:
+Changes in v2:
+  - close open files before setting errp
+  - improvements to readability and style
+  - small corrections to the commit messages
+  - add stable to Cc list
 
-1. The newer divices might require patches to the Intel OpRegion
-   and also an extended video bios table (VBT). Without support
-   for these aspects of the newer devices, the experience will
-   not be great and in many cases the Intel IGD still will not
-   function properly in the guest.
+Chuck Zmudzinski (7):
+  xen/igd: get PCH info from host sysfs
+  xen/igd: don't register rom bar twice
+  xen/igd: fixup device id before registering rom
+  xen/igd: enable guest creation when ROM read fails
+  xen/igd: use igd header for IGD related definitions
+  xen/igd: implement support for extended VBT
+  xen/igd: use custom option ROM if provided
 
-2. The newer devices only work with UEFI AFAICT, and the Ovmf*
-   platforms provided by the upsream edk2 project do not provide
-   support for the Intel IGD. It appears the problem is that the
-   ekd2 project deems the fact that the hardware manufacturer does
-   not provide the necessary firmware, the EFI graphics output
-   protocol (GOP) driver, in the ordinary way by making the EFI
-   GOP driver accessible in virtual environments via the option
-   ROM of the real PCI device, to be a reason to reject patches
-   that add support for the Intel IGD. This, however, is not a
-   fatal problem since it only affects the guest during early boot
-   when OVMF or the bootloader is running and the guest OS
-   graphics drivers have not yet been loaded. Lack of support
-   for the Intel IGD in OVMF does not seem to affect the experience
-   negatively once the guest OS graphics drivers have been loaded.
-   So efforts to address this problem are only important in cases
-   when it is necessary to get graphics output from OVMF and/or
-   the guest bootloader.
+ hw/xen/xen_pt.c             |  13 +-
+ hw/xen/xen_pt.h             |   9 -
+ hw/xen/xen_pt_config_init.c |   8 +-
+ hw/xen/xen_pt_graphics.c    | 323 ++++++++++++++++++++++++++++++++++--
+ hw/xen/xen_pt_load_rom.c    |  64 ++++---
+ include/hw/xen/xen_igd.h    |  19 ++-
+ 6 files changed, 380 insertions(+), 56 deletions(-)
 
-The last two patches in this patchset address these two problems.
-Of those two patches, the first one is more necessary, and the
-second of those two patches is only needed to provide graphics output
-from the guest during early boot.
-
- hw/xen/xen_pt_graphics.c | 7 +++++++
- hw/xen/xen_pt_load_rom.c | 5 +----
- 2 files changed, 8 insertions(+), 4 deletions(-)
-
-diff --git a/hw/xen/xen_pt_graphics.c b/hw/xen/xen_pt_graphics.c
-index c5ab23e..c5c2d47 100644
---- a/hw/xen/xen_pt_graphics.c
-+++ b/hw/xen/xen_pt_graphics.c
-@@ -187,6 +187,13 @@ void xen_pt_setup_vga(XenPCIPassthroughState *s, XenHostPCIDevice *dev,
-         return;
-     }
- 
-+    /* Case when the host ROM file from sysfs could not be read */
-+    if (!bios_size) {
-+        object_unparent(OBJECT(&s->dev.rom));
-+        bios = NULL;
-+        return;
-+    }
-+
-     if (bios_size < sizeof(struct rom_header)) {
-         error_setg(errp, "VGA: VBIOS image corrupt (too small)");
-         return;
-diff --git a/hw/xen/xen_pt_load_rom.c b/hw/xen/xen_pt_load_rom.c
-index 407b630..f136f13 100644
---- a/hw/xen/xen_pt_load_rom.c
-+++ b/hw/xen/xen_pt_load_rom.c
-@@ -77,10 +77,7 @@ void *pci_assign_dev_load_option_rom(PCIDevice *dev,
-     memset(ptr, 0xff, dev->romsize);
- 
-     if (!fread(ptr, 1, st.st_size, fp)) {
--        error_report("pci-assign: Cannot read from host %s", rom_file);
--        error_printf("Device option ROM contents are probably invalid "
--                     "(check dmesg).\nSkip option ROM probe with rombar=0, "
--                     "or load from file with romfile=\n");
-+        info_report("pci-assign: Can't read Option ROM %s from host", rom_file);
-         goto close_rom;
-     }
- 
 -- 
 2.52.0
 
