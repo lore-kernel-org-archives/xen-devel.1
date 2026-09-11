@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A3FBC88E45
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:37:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1417052.1645990 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A517C88E50
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:37:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1417061.1646017 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x52N4-0004Su-Ao; Fri, 11 Sep 2026 14:36:54 +0000
+	id 1x52NA-0005S6-JZ; Fri, 11 Sep 2026 14:37:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1417052.1645990; Fri, 11 Sep 2026 14:36:54 +0000
+Received: by outflank-mailman (output) from mailman id 1417061.1646017; Fri, 11 Sep 2026 14:37:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x52N4-0004Sf-6H; Fri, 11 Sep 2026 14:36:54 +0000
-Received: by outflank-mailman (input) for mailman id 1417052;
- Fri, 11 Sep 2026 14:36:52 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x52NA-0005Rq-FG; Fri, 11 Sep 2026 14:37:00 +0000
+Received: by outflank-mailman (input) for mailman id 1417061;
+ Fri, 11 Sep 2026 14:36:58 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <berrange@redhat.com>) id 1x52N2-0004OG-6P
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:36:52 +0000
+ (envelope-from <berrange@redhat.com>) id 1x52N8-0005KK-NP
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:36:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x52N1-008jWV-Jb
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:36:51 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x52N8-009XnU-48
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:36:58 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <berrange@redhat.com>)
- id 6aa411fb-bab6-0a2a0a5309dd-0a2a450295c6-16
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:36:51 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa411ff-e002-0a2a0a5209dd-0a2a450a88f0-20
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:36:58 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <berrange@redhat.com>)
- id 6aa41202-6ca4-0a2a45020019-aa0a857cc8bf-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:36:51 +0200
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ id 6aa41208-f2d2-0a2a450a0019-aa0a817cce3b-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:36:57 +0200
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-474-r_vv3jVcPcaZDrubIcVqRg-1; Fri,
- 11 Sep 2026 10:36:45 -0400
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-199-27VQIONhO4KFnGqpGIUqNw-1; Fri,
+ 11 Sep 2026 10:36:54 -0400
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 2C87F19539AB; Fri, 11 Sep 2026 14:36:44 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 1D0951955D88; Fri, 11 Sep 2026 14:36:53 +0000 (UTC)
 Received: from berrange.csb (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 32CA3300022B; Fri, 11 Sep 2026 14:36:42 +0000 (UTC)
+ id 286133000229; Fri, 11 Sep 2026 14:36:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,17 +63,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1789137410;
+	s=mimecast20190719; t=1789137416;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=1yZ5P8bgdNVXz/IjME/g+paRrVamgXXAKRQr0EaewDE=;
-	b=a4Ohp12JRxRyeAj9aOmK39sJin8SMYeSQVpTyFK+DuD/OFTq8noXDGsXDP4cqkcYb72XJK
-	O00DtXlUDgBSc4eF83LjxStO4z9J9HIFNzAQF/7OeSpYhELPj/kFWpChUNJtX6n/HnYzux
-	ChTTr+cLgyXwcLLTEVAvwqjIjJCEvW4=
-X-MC-Unique: r_vv3jVcPcaZDrubIcVqRg-1
-X-Mimecast-MFC-AGG-ID: r_vv3jVcPcaZDrubIcVqRg_1789137404
+	bh=1RHIZmJ27HpBLHk1UKD1lxc6VROjUi/8BfHOVvo5jR8=;
+	b=HYtyfdyqVB/bLr4hTWEDi5IyTj7xiyCGYiie0TKjijceTdz5Yxm2YazUD5dLjvvphX9lRv
+	gf77CeE4tECwNCdCyb9u8WFXbk7ggmlATIAc5C4VKC0eRiZPzhmmiEb55VUG3y0n1ofqAv
+	cr1cH7bHZ5zaB/ZGKggQ5EefeFJjBfM=
+X-MC-Unique: 27VQIONhO4KFnGqpGIUqNw-1
+X-Mimecast-MFC-AGG-ID: 27VQIONhO4KFnGqpGIUqNw_1789137413
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: xen-devel@lists.xenproject.org,
@@ -83,468 +83,395 @@ Cc: xen-devel@lists.xenproject.org,
 	qemu-s390x@nongnu.org,
 	qemu-arm@nongnu.org,
 	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 06/28] hw: mark all remaining virtio object types as secure
-Date: Fri, 11 Sep 2026 15:36:05 +0100
-Message-ID: <20260911143627.2743803-7-berrange@redhat.com>
+Subject: [PATCH 10/28] hw/usb: mark commonly used USB devices/hosts as secure
+Date: Fri, 11 Sep 2026 15:36:09 +0100
+Message-ID: <20260911143627.2743803-11-berrange@redhat.com>
 In-Reply-To: <20260911143627.2743803-1-berrange@redhat.com>
 References: <20260911143627.2743803-1-berrange@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: ZHcdJfV1F6X-kBRbEX3gE7sF2-jBlLaTi0x-hErFUEg_1789137404
+X-Mimecast-MFC-PROC-ID: fMivSlL4ySWGL5XZ66YqlueQUHrzopr13tR0RjRlRLY_1789137413
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1789137411-F2EB32AC-BB71FAF5/0/0
+X-purgate-ID: tlsNG-4011c0/1789137418-585CBCFC-B5F80DC6/0/0
 X-purgate-type: clean
-X-purgate-size: 16806
+X-purgate-size: 13625
 
-These are all intended for use in a virtualization scenario and must
-provide a security boundary.
+Most of the standardized  USB1/2/3 host controllers are relevant
+for virtualization use cases, so should be declared secure. The
+"NEC" XHCI variant is slightly non-standard, but since it is a
+trivial sub-class of the generic XHCI, there's no reason to
+exclude it.
+
+The set of devices that are expected to be used is HID (mouse,
+tablet, keyboard), host passthrough, CCID (smartcard), hub,
+storage and the redirect tunnelling.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/9pfs/virtio-9p-device.c       | 1 +
- hw/audio/virtio-snd.c            | 1 +
- hw/block/virtio-blk.c            | 1 +
- hw/char/virtio-console.c         | 2 ++
- hw/char/virtio-serial-bus.c      | 3 +++
- hw/display/virtio-gpu-base.c     | 3 ++-
- hw/display/virtio-gpu-gl.c       | 1 +
- hw/display/virtio-gpu-rutabaga.c | 1 +
- hw/display/virtio-gpu.c          | 1 +
- hw/input/virtio-input-hid.c      | 5 +++++
- hw/input/virtio-input-host.c     | 1 +
- hw/input/virtio-input.c          | 1 +
- hw/net/virtio-net.c              | 1 +
- hw/scsi/virtio-scsi.c            | 2 ++
- hw/virtio/vdpa-dev.c             | 1 +
- hw/virtio/virtio-balloon.c       | 1 +
- hw/virtio/virtio-bus.c           | 1 +
- hw/virtio/virtio-crypto.c        | 1 +
- hw/virtio/virtio-input-pci.c     | 2 ++
- hw/virtio/virtio-iommu.c         | 2 ++
- hw/virtio/virtio-md-pci.c        | 1 +
- hw/virtio/virtio-mem.c           | 1 +
- hw/virtio/virtio-mmio.c          | 2 ++
- hw/virtio/virtio-nsm.c           | 1 +
- hw/virtio/virtio-pmem.c          | 1 +
- hw/virtio/virtio-rng.c           | 1 +
- hw/virtio/virtio-rtc.c           | 1 +
- 27 files changed, 39 insertions(+), 1 deletion(-)
+ hw/usb/ccid-card-emulated.c   | 1 +
+ hw/usb/ccid-card-passthru.c   | 1 +
+ hw/usb/dev-hid.c              | 4 ++++
+ hw/usb/dev-hub.c              | 1 +
+ hw/usb/dev-smartcard-reader.c | 3 +++
+ hw/usb/dev-storage-bot.c      | 1 +
+ hw/usb/dev-storage-classic.c  | 1 +
+ hw/usb/dev-storage.c          | 1 +
+ hw/usb/hcd-ehci-pci.c         | 2 ++
+ hw/usb/hcd-ehci-sysbus.c      | 8 ++++++++
+ hw/usb/hcd-ohci-pci.c         | 1 +
+ hw/usb/hcd-ohci-sysbus.c      | 1 +
+ hw/usb/hcd-uhci.c             | 2 ++
+ hw/usb/hcd-xhci-nec.c         | 1 +
+ hw/usb/hcd-xhci-pci.c         | 2 ++
+ hw/usb/hcd-xhci-sysbus.c      | 3 ++-
+ hw/usb/hcd-xhci.c             | 1 +
+ hw/usb/host-libusb.c          | 1 +
+ hw/usb/redirect.c             | 1 +
+ 19 files changed, 35 insertions(+), 1 deletion(-)
 
-diff --git a/hw/9pfs/virtio-9p-device.c b/hw/9pfs/virtio-9p-device.c
-index 2774fc2290..a4572c851d 100644
---- a/hw/9pfs/virtio-9p-device.c
-+++ b/hw/9pfs/virtio-9p-device.c
-@@ -288,6 +288,7 @@ static const TypeInfo virtio_device_info = {
-     .parent = TYPE_VIRTIO_DEVICE,
-     .instance_size = sizeof(V9fsVirtioState),
-     .class_init = virtio_9p_class_init,
-+    .secure = true,
- };
- 
- static void virtio_9p_register_types(void)
-diff --git a/hw/audio/virtio-snd.c b/hw/audio/virtio-snd.c
-index 694bcebb60..eacabca5eb 100644
---- a/hw/audio/virtio-snd.c
-+++ b/hw/audio/virtio-snd.c
-@@ -1410,6 +1410,7 @@ static const TypeInfo virtio_snd_types[] = {
-       .parent        = TYPE_VIRTIO_DEVICE,
-       .instance_size = sizeof(VirtIOSound),
-       .class_init    = virtio_snd_class_init,
-+      .secure        = true,
-     }
- };
- 
-diff --git a/hw/block/virtio-blk.c b/hw/block/virtio-blk.c
-index 6b92066aff..bcd252482d 100644
---- a/hw/block/virtio-blk.c
-+++ b/hw/block/virtio-blk.c
-@@ -1951,6 +1951,7 @@ static const TypeInfo virtio_blk_info = {
-     .instance_init = virtio_blk_instance_init,
-     .class_init = virtio_blk_class_init,
-     .class_size = sizeof(VirtIOBlkClass),
-+    .secure = true,
- };
- 
- static void virtio_register_types(void)
-diff --git a/hw/char/virtio-console.c b/hw/char/virtio-console.c
-index 4737b9a56e..e5798a5f4b 100644
---- a/hw/char/virtio-console.c
-+++ b/hw/char/virtio-console.c
-@@ -266,6 +266,7 @@ static const TypeInfo virtconsole_info = {
-     .name          = "virtconsole",
-     .parent        = TYPE_VIRTIO_CONSOLE_SERIAL_PORT,
-     .class_init    = virtconsole_class_init,
+diff --git a/hw/usb/ccid-card-emulated.c b/hw/usb/ccid-card-emulated.c
+index 985f21997a..f10295c675 100644
+--- a/hw/usb/ccid-card-emulated.c
++++ b/hw/usb/ccid-card-emulated.c
+@@ -610,6 +610,7 @@ static const TypeInfo emulated_card_info = {
+     .parent        = TYPE_CCID_CARD,
+     .instance_size = sizeof(EmulatedState),
+     .class_init    = emulated_class_initfn,
 +    .secure        = true,
  };
- 
- static const Property virtserialport_properties[] = {
-@@ -291,6 +292,7 @@ static const TypeInfo virtserialport_info = {
-     .parent        = TYPE_VIRTIO_SERIAL_PORT,
-     .instance_size = sizeof(VirtConsole),
-     .class_init    = virtserialport_class_init,
+ module_obj(TYPE_EMULATED_CCID);
+ module_kconfig(USB);
+diff --git a/hw/usb/ccid-card-passthru.c b/hw/usb/ccid-card-passthru.c
+index 5ab7855272..b91f32ebd6 100644
+--- a/hw/usb/ccid-card-passthru.c
++++ b/hw/usb/ccid-card-passthru.c
+@@ -412,6 +412,7 @@ static const TypeInfo passthru_card_info = {
+     .parent        = TYPE_CCID_CARD,
+     .instance_size = sizeof(PassthruState),
+     .class_init    = passthru_class_initfn,
 +    .secure        = true,
  };
- 
- static void virtconsole_register_types(void)
-diff --git a/hw/char/virtio-serial-bus.c b/hw/char/virtio-serial-bus.c
-index 83a033ce85..60ef9c4f10 100644
---- a/hw/char/virtio-serial-bus.c
-+++ b/hw/char/virtio-serial-bus.c
-@@ -836,6 +836,7 @@ static const TypeInfo virtser_bus_info = {
-     .parent = TYPE_BUS,
-     .instance_size = sizeof(VirtIOSerialBus),
-     .class_init = virtser_bus_class_init,
-+    .secure = true,
- };
- 
- #ifdef CONFIG_HMP
-@@ -1091,6 +1092,7 @@ static const TypeInfo virtio_serial_port_type_info = {
-     .parent = TYPE_DEVICE,
-     .instance_size = sizeof(VirtIOSerialPort),
+ module_obj(TYPE_CCID_PASSTHRU);
+ module_kconfig(USB);
+diff --git a/hw/usb/dev-hid.c b/hw/usb/dev-hid.c
+index ae19d60203..7fa9a4b010 100644
+--- a/hw/usb/dev-hid.c
++++ b/hw/usb/dev-hid.c
+@@ -790,6 +790,7 @@ static const TypeInfo usb_hid_type_info = {
+     .parent = TYPE_USB_DEVICE,
+     .instance_size = sizeof(USBHIDState),
      .abstract = true,
 +    .secure = true,
-     .class_size = sizeof(VirtIOSerialPortClass),
-     .class_init = virtio_serial_port_class_init,
+     .class_init = usb_hid_class_initfn,
  };
-@@ -1169,6 +1171,7 @@ static const TypeInfo virtio_device_info = {
-     .parent = TYPE_VIRTIO_DEVICE,
-     .instance_size = sizeof(VirtIOSerial),
-     .class_init = virtio_serial_class_init,
+ 
+@@ -815,6 +816,7 @@ static const TypeInfo usb_tablet_info = {
+     .name          = "usb-tablet",
+     .parent        = TYPE_USB_HID,
+     .class_init    = usb_tablet_class_initfn,
++    .secure        = true,
+ };
+ 
+ static const Property usb_mouse_properties[] = {
+@@ -837,6 +839,7 @@ static const TypeInfo usb_mouse_info = {
+     .name          = "usb-mouse",
+     .parent        = TYPE_USB_HID,
+     .class_init    = usb_mouse_class_initfn,
++    .secure        = true,
+ };
+ 
+ static const Property usb_keyboard_properties[] = {
+@@ -860,6 +863,7 @@ static const TypeInfo usb_keyboard_info = {
+     .name          = "usb-kbd",
+     .parent        = TYPE_USB_HID,
+     .class_init    = usb_keyboard_class_initfn,
++    .secure        = true,
+ };
+ 
+ static void usb_hid_register_types(void)
+diff --git a/hw/usb/dev-hub.c b/hw/usb/dev-hub.c
+index b45d571fa8..7017b4fbc7 100644
+--- a/hw/usb/dev-hub.c
++++ b/hw/usb/dev-hub.c
+@@ -694,6 +694,7 @@ static const TypeInfo hub_info = {
+     .parent        = TYPE_USB_DEVICE,
+     .instance_size = sizeof(USBHubState),
+     .class_init    = usb_hub_class_initfn,
++    .secure        = true,
+ };
+ 
+ static void usb_hub_register_types(void)
+diff --git a/hw/usb/dev-smartcard-reader.c b/hw/usb/dev-smartcard-reader.c
+index 964c142d10..d661c7687f 100644
+--- a/hw/usb/dev-smartcard-reader.c
++++ b/hw/usb/dev-smartcard-reader.c
+@@ -1178,6 +1178,7 @@ static const TypeInfo ccid_bus_info = {
+     .name = TYPE_CCID_BUS,
+     .parent = TYPE_BUS,
+     .instance_size = sizeof(CCIDBus),
 +    .secure = true,
+ };
+ 
+ void ccid_card_send_apdu_to_guest(CCIDCardState *card,
+@@ -1458,6 +1459,7 @@ static const TypeInfo ccid_info = {
+     .parent        = TYPE_USB_DEVICE,
+     .instance_size = sizeof(USBCCIDState),
+     .class_init    = ccid_class_initfn,
++    .secure        = true,
      .interfaces = (const InterfaceInfo[]) {
          { TYPE_HOTPLUG_HANDLER },
          { }
-diff --git a/hw/display/virtio-gpu-base.c b/hw/display/virtio-gpu-base.c
-index 270fbaae10..7a78d1ee83 100644
---- a/hw/display/virtio-gpu-base.c
-+++ b/hw/display/virtio-gpu-base.c
-@@ -320,7 +320,8 @@ static const TypeInfo virtio_gpu_base_info = {
-     .instance_size = sizeof(VirtIOGPUBase),
-     .class_size = sizeof(VirtIOGPUBaseClass),
-     .class_init = virtio_gpu_base_class_init,
--    .abstract = true
-+    .abstract = true,
+@@ -1478,6 +1480,7 @@ static const TypeInfo ccid_card_type_info = {
+     .parent = TYPE_DEVICE,
+     .instance_size = sizeof(CCIDCardState),
+     .abstract = true,
++    .secure = true,
+     .class_size = sizeof(CCIDCardClass),
+     .class_init = ccid_card_class_init,
+ };
+diff --git a/hw/usb/dev-storage-bot.c b/hw/usb/dev-storage-bot.c
+index a7f8d80c17..b156f1c5c9 100644
+--- a/hw/usb/dev-storage-bot.c
++++ b/hw/usb/dev-storage-bot.c
+@@ -52,6 +52,7 @@ static const TypeInfo bot_info = {
+     .name          = "usb-bot",
+     .parent        = TYPE_USB_STORAGE,
+     .class_init    = usb_msd_class_bot_initfn,
++    .secure        = true,
+ };
+ 
+ static void register_types(void)
+diff --git a/hw/usb/dev-storage-classic.c b/hw/usb/dev-storage-classic.c
+index 977151c4a0..7e0699cb51 100644
+--- a/hw/usb/dev-storage-classic.c
++++ b/hw/usb/dev-storage-classic.c
+@@ -133,6 +133,7 @@ static const TypeInfo msd_info = {
+     .parent        = TYPE_USB_STORAGE,
+     .class_init    = usb_msd_class_storage_initfn,
+     .instance_init = usb_msd_instance_init,
++    .secure        = true,
+ };
+ 
+ static void register_types(void)
+diff --git a/hw/usb/dev-storage.c b/hw/usb/dev-storage.c
+index 040cf15051..f964d0c9dc 100644
+--- a/hw/usb/dev-storage.c
++++ b/hw/usb/dev-storage.c
+@@ -608,6 +608,7 @@ static const TypeInfo usb_storage_dev_type_info = {
+     .instance_size = sizeof(MSDState),
+     .abstract = true,
+     .class_init = usb_msd_class_initfn_common,
 +    .secure = true,
  };
- module_obj(TYPE_VIRTIO_GPU_BASE);
- module_kconfig(VIRTIO_GPU);
-diff --git a/hw/display/virtio-gpu-gl.c b/hw/display/virtio-gpu-gl.c
-index 2b7a41c466..75174b6731 100644
---- a/hw/display/virtio-gpu-gl.c
-+++ b/hw/display/virtio-gpu-gl.c
-@@ -233,6 +233,7 @@ static const TypeInfo virtio_gpu_gl_info = {
-     .parent = TYPE_VIRTIO_GPU,
-     .instance_size = sizeof(VirtIOGPUGL),
-     .class_init = virtio_gpu_gl_class_init,
+ 
+ static void usb_msd_register_types(void)
+diff --git a/hw/usb/hcd-ehci-pci.c b/hw/usb/hcd-ehci-pci.c
+index fd35d25340..d735d75956 100644
+--- a/hw/usb/hcd-ehci-pci.c
++++ b/hw/usb/hcd-ehci-pci.c
+@@ -171,6 +171,7 @@ static const TypeInfo ehci_pci_type_info = {
+     .instance_init = usb_ehci_pci_init,
+     .instance_finalize = usb_ehci_pci_finalize,
+     .abstract = true,
 +    .secure = true,
- };
- module_obj(TYPE_VIRTIO_GPU_GL);
- module_kconfig(VIRTIO_GPU);
-diff --git a/hw/display/virtio-gpu-rutabaga.c b/hw/display/virtio-gpu-rutabaga.c
-index 041216a10d..aba37efec5 100644
---- a/hw/display/virtio-gpu-rutabaga.c
-+++ b/hw/display/virtio-gpu-rutabaga.c
-@@ -1170,6 +1170,7 @@ static const TypeInfo virtio_gpu_rutabaga_info[] = {
-         .parent = TYPE_VIRTIO_GPU,
-         .instance_size = sizeof(VirtIOGPURutabaga),
-         .class_init = virtio_gpu_rutabaga_class_init,
-+        .secure = true,
+     .class_init = ehci_class_init,
+     .interfaces = (const InterfaceInfo[]) {
+         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
+@@ -219,6 +220,7 @@ static void ehci_pci_register_types(void)
+     TypeInfo ehci_type_info = {
+         .parent        = TYPE_PCI_EHCI,
+         .class_init    = ehci_data_class_init,
++        .secure        = true,
+     };
+     int i;
+ 
+diff --git a/hw/usb/hcd-ehci-sysbus.c b/hw/usb/hcd-ehci-sysbus.c
+index 7f7c7f8a2f..0946d5a004 100644
+--- a/hw/usb/hcd-ehci-sysbus.c
++++ b/hw/usb/hcd-ehci-sysbus.c
+@@ -240,6 +240,7 @@ static const TypeInfo ehci_sysbus_types[] = {
+         .instance_init = ehci_sysbus_init,
+         .instance_finalize = ehci_sysbus_finalize,
+         .abstract      = true,
++        .secure        = true,
+         .class_init    = ehci_sysbus_class_init,
+         .class_size    = sizeof(SysBusEHCIClass),
+     },
+@@ -247,32 +248,38 @@ static const TypeInfo ehci_sysbus_types[] = {
+         .name          = TYPE_PLATFORM_EHCI,
+         .parent        = TYPE_SYS_BUS_EHCI,
+         .class_init    = ehci_platform_class_init,
++        .secure        = true,
+     },
+     {
+         .name          = TYPE_EXYNOS4210_EHCI,
+         .parent        = TYPE_SYS_BUS_EHCI,
+         .class_init    = ehci_exynos4210_class_init,
++        .secure        = true,
+     },
+     {
+         .name          = TYPE_AW_H3_EHCI,
+         .parent        = TYPE_SYS_BUS_EHCI,
+         .class_init    = ehci_aw_h3_class_init,
++        .secure        = true,
+     },
+     {
+         .name          = TYPE_NPCM7XX_EHCI,
+         .parent        = TYPE_SYS_BUS_EHCI,
+         .class_init    = ehci_npcm7xx_class_init,
++        .secure        = true,
+     },
+     {
+         .name          = TYPE_TEGRA2_EHCI,
+         .parent        = TYPE_SYS_BUS_EHCI,
+         .class_init    = ehci_tegra2_class_init,
++        .secure        = true,
+     },
+     {
+         .name          = TYPE_PPC4xx_EHCI,
+         .parent        = TYPE_SYS_BUS_EHCI,
+         .class_init    = ehci_ppc4xx_class_init,
+         .instance_init = ehci_ppc4xx_init,
++        .secure        = true,
+     },
+     {
+         .name          = TYPE_FUSBH200_EHCI,
+@@ -280,6 +287,7 @@ static const TypeInfo ehci_sysbus_types[] = {
+         .instance_size = sizeof(FUSBH200EHCIState),
+         .instance_init = fusbh200_ehci_init,
+         .class_init    = fusbh200_ehci_class_init,
++        .secure        = true,
      },
  };
  
-diff --git a/hw/display/virtio-gpu.c b/hw/display/virtio-gpu.c
-index 55a1c7f80f..b1629a28f1 100644
---- a/hw/display/virtio-gpu.c
-+++ b/hw/display/virtio-gpu.c
-@@ -1915,6 +1915,7 @@ static const TypeInfo virtio_gpu_info = {
-     .instance_size = sizeof(VirtIOGPU),
-     .class_size = sizeof(VirtIOGPUClass),
-     .class_init = virtio_gpu_class_init,
-+    .secure = true,
- };
- module_obj(TYPE_VIRTIO_GPU);
- module_kconfig(VIRTIO_GPU);
-diff --git a/hw/input/virtio-input-hid.c b/hw/input/virtio-input-hid.c
-index 1019d6b2e5..4854860807 100644
---- a/hw/input/virtio-input-hid.c
-+++ b/hw/input/virtio-input-hid.c
-@@ -242,6 +242,7 @@ static const TypeInfo virtio_input_hid_info = {
-     .instance_size = sizeof(VirtIOInputHID),
-     .class_init    = virtio_input_hid_class_init,
-     .abstract      = true,
+diff --git a/hw/usb/hcd-ohci-pci.c b/hw/usb/hcd-ohci-pci.c
+index 70c9e9ac4f..cf0746aa00 100644
+--- a/hw/usb/hcd-ohci-pci.c
++++ b/hw/usb/hcd-ohci-pci.c
+@@ -148,6 +148,7 @@ static const TypeInfo ohci_pci_info = {
+     .parent        = TYPE_PCI_DEVICE,
+     .instance_size = sizeof(OHCIPCIState),
+     .class_init    = ohci_pci_class_init,
 +    .secure        = true,
+     .interfaces = (const InterfaceInfo[]) {
+         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
+         { },
+diff --git a/hw/usb/hcd-ohci-sysbus.c b/hw/usb/hcd-ohci-sysbus.c
+index 4f51eebccb..fd04e918e8 100644
+--- a/hw/usb/hcd-ohci-sysbus.c
++++ b/hw/usb/hcd-ohci-sysbus.c
+@@ -80,6 +80,7 @@ static const TypeInfo ohci_sysbus_types[] = {
+         .parent        = TYPE_SYS_BUS_DEVICE,
+         .instance_size = sizeof(OHCISysBusState),
+         .class_init    = ohci_sysbus_class_init,
++        .secure        = true,
+     },
  };
  
- /* ----------------------------------------------------------------- */
-@@ -315,6 +316,7 @@ static const TypeInfo virtio_keyboard_info = {
-     .parent        = TYPE_VIRTIO_INPUT_HID,
-     .instance_size = sizeof(VirtIOInputHID),
-     .instance_init = virtio_keyboard_init,
-+    .secure        = true,
- };
- 
- /* ----------------------------------------------------------------- */
-@@ -369,6 +371,7 @@ static const TypeInfo virtio_mouse_info = {
-     .parent        = TYPE_VIRTIO_INPUT_HID,
-     .instance_size = sizeof(VirtIOInputHID),
-     .instance_init = virtio_mouse_init,
-+    .secure        = true,
- };
- 
- /* ----------------------------------------------------------------- */
-@@ -442,6 +445,7 @@ static const TypeInfo virtio_tablet_info = {
-     .parent        = TYPE_VIRTIO_INPUT_HID,
-     .instance_size = sizeof(VirtIOInputHID),
-     .instance_init = virtio_tablet_init,
-+    .secure        = true,
- };
- 
- /* ----------------------------------------------------------------- */
-@@ -527,6 +531,7 @@ static const TypeInfo virtio_multitouch_info = {
-     .parent        = TYPE_VIRTIO_INPUT_HID,
-     .instance_size = sizeof(VirtIOInputHID),
-     .instance_init = virtio_multitouch_init,
-+    .secure        = true,
- };
- 
- /* ----------------------------------------------------------------- */
-diff --git a/hw/input/virtio-input-host.c b/hw/input/virtio-input-host.c
-index 633547cc4f..0d01e00cfc 100644
---- a/hw/input/virtio-input-host.c
-+++ b/hw/input/virtio-input-host.c
-@@ -248,6 +248,7 @@ static const TypeInfo virtio_input_host_info = {
-     .instance_size = sizeof(VirtIOInputHost),
-     .instance_init = virtio_input_host_init,
-     .class_init    = virtio_input_host_class_init,
-+    .secure        = true,
- };
- 
- /* ----------------------------------------------------------------- */
-diff --git a/hw/input/virtio-input.c b/hw/input/virtio-input.c
-index 6494cfbbe8..cccbeec1e3 100644
---- a/hw/input/virtio-input.c
-+++ b/hw/input/virtio-input.c
-@@ -329,6 +329,7 @@ static const TypeInfo virtio_input_info = {
-     .class_size    = sizeof(VirtIOInputClass),
-     .class_init    = virtio_input_class_init,
-     .abstract      = true,
-+    .secure        = true,
-     .instance_finalize = virtio_input_finalize,
- };
- 
-diff --git a/hw/net/virtio-net.c b/hw/net/virtio-net.c
-index 814b99a43d..506a0366dc 100644
---- a/hw/net/virtio-net.c
-+++ b/hw/net/virtio-net.c
-@@ -4374,6 +4374,7 @@ static const TypeInfo virtio_net_info = {
-     .instance_size = sizeof(VirtIONet),
-     .instance_init = virtio_net_instance_init,
-     .class_init = virtio_net_class_init,
-+    .secure = true,
- };
- 
- static void virtio_register_types(void)
-diff --git a/hw/scsi/virtio-scsi.c b/hw/scsi/virtio-scsi.c
-index bf64d1231a..0fa3f11a43 100644
---- a/hw/scsi/virtio-scsi.c
-+++ b/hw/scsi/virtio-scsi.c
-@@ -1444,6 +1444,7 @@ static const TypeInfo virtio_scsi_common_info = {
-     .parent = TYPE_VIRTIO_DEVICE,
-     .instance_size = sizeof(VirtIOSCSICommon),
+diff --git a/hw/usb/hcd-uhci.c b/hw/usb/hcd-uhci.c
+index a7b9fe1317..cd34680f46 100644
+--- a/hw/usb/hcd-uhci.c
++++ b/hw/usb/hcd-uhci.c
+@@ -1283,6 +1283,7 @@ static const TypeInfo uhci_pci_type_info = {
+     .instance_size = sizeof(UHCIState),
+     .class_size    = sizeof(UHCIPCIDeviceClass),
      .abstract = true,
 +    .secure = true,
-     .class_init = virtio_scsi_common_class_init,
- };
- 
-@@ -1452,6 +1453,7 @@ static const TypeInfo virtio_scsi_info = {
-     .parent = TYPE_VIRTIO_SCSI_COMMON,
-     .instance_size = sizeof(VirtIOSCSI),
-     .class_init = virtio_scsi_class_init,
-+    .secure = true,
+     .class_init = uhci_class_init,
      .interfaces = (const InterfaceInfo[]) {
-         { TYPE_HOTPLUG_HANDLER },
-         { }
-diff --git a/hw/virtio/vdpa-dev.c b/hw/virtio/vdpa-dev.c
-index 6dc684ab09..bd95467652 100644
---- a/hw/virtio/vdpa-dev.c
-+++ b/hw/virtio/vdpa-dev.c
-@@ -392,6 +392,7 @@ static const TypeInfo vhost_vdpa_device_info = {
-     .instance_size = sizeof(VhostVdpaDevice),
-     .class_init = vhost_vdpa_device_class_init,
-     .instance_init = vhost_vdpa_device_instance_init,
-+    .secure = true,
- };
+         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
+@@ -1380,6 +1381,7 @@ static void uhci_register_types(void)
+     TypeInfo uhci_type_info = {
+         .parent        = TYPE_UHCI,
+         .class_init    = uhci_data_class_init,
++        .secure        = true,
+     };
+     int i;
  
- static void register_vhost_vdpa_device_type(void)
-diff --git a/hw/virtio/virtio-balloon.c b/hw/virtio/virtio-balloon.c
-index 4c5f486ba2..4d1c81e7d6 100644
---- a/hw/virtio/virtio-balloon.c
-+++ b/hw/virtio/virtio-balloon.c
-@@ -1083,6 +1083,7 @@ static const TypeInfo virtio_balloon_info = {
-     .instance_size = sizeof(VirtIOBalloon),
-     .instance_init = virtio_balloon_instance_init,
-     .class_init = virtio_balloon_class_init,
-+    .secure = true,
- };
- 
- static void virtio_register_types(void)
-diff --git a/hw/virtio/virtio-bus.c b/hw/virtio/virtio-bus.c
-index 9b545acda3..9bf62a7060 100644
---- a/hw/virtio/virtio-bus.c
-+++ b/hw/virtio/virtio-bus.c
-@@ -363,6 +363,7 @@ static const TypeInfo virtio_bus_info = {
-     .parent = TYPE_BUS,
-     .instance_size = sizeof(VirtioBusState),
-     .abstract = true,
-+    .secure = true,
-     .class_size = sizeof(VirtioBusClass),
-     .class_init = virtio_bus_class_init
- };
-diff --git a/hw/virtio/virtio-crypto.c b/hw/virtio/virtio-crypto.c
-index 79e2acb56c..7d4c944f35 100644
---- a/hw/virtio/virtio-crypto.c
-+++ b/hw/virtio/virtio-crypto.c
-@@ -1314,6 +1314,7 @@ static const TypeInfo virtio_crypto_info = {
-     .instance_size = sizeof(VirtIOCrypto),
-     .instance_init = virtio_crypto_instance_init,
-     .class_init = virtio_crypto_class_init,
-+    .secure = true,
- };
- 
- static void virtio_register_types(void)
-diff --git a/hw/virtio/virtio-input-pci.c b/hw/virtio/virtio-input-pci.c
-index cd35608460..3605f990fd 100644
---- a/hw/virtio/virtio-input-pci.c
-+++ b/hw/virtio/virtio-input-pci.c
-@@ -117,6 +117,7 @@ static const TypeInfo virtio_input_pci_info = {
-     .instance_size = sizeof(VirtIOInputPCI),
-     .class_init    = virtio_input_pci_class_init,
-     .abstract      = true,
+diff --git a/hw/usb/hcd-xhci-nec.c b/hw/usb/hcd-xhci-nec.c
+index 46839911f3..070732be9a 100644
+--- a/hw/usb/hcd-xhci-nec.c
++++ b/hw/usb/hcd-xhci-nec.c
+@@ -67,6 +67,7 @@ static const TypeInfo nec_xhci_info = {
+     .instance_size = sizeof(XHCINecState),
+     .instance_init = nec_xhci_instance_init,
+     .class_init    = nec_xhci_class_init,
 +    .secure        = true,
  };
  
- static const TypeInfo virtio_input_hid_pci_info = {
-@@ -124,6 +125,7 @@ static const TypeInfo virtio_input_hid_pci_info = {
-     .parent        = TYPE_VIRTIO_INPUT_PCI,
-     .instance_size = sizeof(VirtIOInputHIDPCI),
+ static void nec_xhci_register_types(void)
+diff --git a/hw/usb/hcd-xhci-pci.c b/hw/usb/hcd-xhci-pci.c
+index b124251ae3..5d0fd851ca 100644
+--- a/hw/usb/hcd-xhci-pci.c
++++ b/hw/usb/hcd-xhci-pci.c
+@@ -266,6 +266,7 @@ static const TypeInfo xhci_pci_info = {
+     .class_init    = xhci_class_init,
+     .instance_init = xhci_instance_init,
      .abstract      = true,
++    .secure        = true,
+     .interfaces = (const InterfaceInfo[]) {
+         { INTERFACE_PCIE_DEVICE },
+         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
+@@ -298,6 +299,7 @@ static const TypeInfo qemu_xhci_info = {
+     .parent        = TYPE_XHCI_PCI,
+     .class_init    = qemu_xhci_class_init,
+     .instance_init = qemu_xhci_instance_init,
 +    .secure        = true,
  };
  
- static const VirtioPCIDeviceTypeInfo virtio_keyboard_pci_info = {
-diff --git a/hw/virtio/virtio-iommu.c b/hw/virtio/virtio-iommu.c
-index 533bd5073f..5f1920253b 100644
---- a/hw/virtio/virtio-iommu.c
-+++ b/hw/virtio/virtio-iommu.c
-@@ -1734,12 +1734,14 @@ static const TypeInfo virtio_iommu_info = {
-     .instance_size = sizeof(VirtIOIOMMU),
-     .instance_init = virtio_iommu_instance_init,
-     .class_init = virtio_iommu_class_init,
-+    .secure = true,
- };
- 
- static const TypeInfo virtio_iommu_memory_region_info = {
-     .parent = TYPE_IOMMU_MEMORY_REGION,
-     .name = TYPE_VIRTIO_IOMMU_MEMORY_REGION,
-     .class_init = virtio_iommu_memory_region_class_init,
-+    .secure = true,
- };
- 
- static void virtio_register_types(void)
-diff --git a/hw/virtio/virtio-md-pci.c b/hw/virtio/virtio-md-pci.c
-index 9278b32cf8..9eefb84daa 100644
---- a/hw/virtio/virtio-md-pci.c
-+++ b/hw/virtio/virtio-md-pci.c
-@@ -138,6 +138,7 @@ static const TypeInfo virtio_md_pci_info = {
-     .instance_size = sizeof(VirtIOMDPCI),
-     .class_size = sizeof(VirtIOMDPCIClass),
-     .abstract = true,
-+    .secure = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { TYPE_MEMORY_DEVICE },
-         { }
-diff --git a/hw/virtio/virtio-mem.c b/hw/virtio/virtio-mem.c
-index 7130ed852d..edad9465cb 100644
---- a/hw/virtio/virtio-mem.c
-+++ b/hw/virtio/virtio-mem.c
-@@ -1668,6 +1668,7 @@ static const TypeInfo virtio_mem_info = {
-     .instance_finalize = virtio_mem_instance_finalize,
-     .class_init = virtio_mem_class_init,
-     .class_size = sizeof(VirtIOMEMClass),
-+    .secure = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { TYPE_RAM_DISCARD_SOURCE },
-         { }
-diff --git a/hw/virtio/virtio-mmio.c b/hw/virtio/virtio-mmio.c
-index 55ceaeef5f..f51c8d17b9 100644
---- a/hw/virtio/virtio-mmio.c
-+++ b/hw/virtio/virtio-mmio.c
-@@ -779,6 +779,7 @@ static const TypeInfo virtio_mmio_info = {
+ static void xhci_register_types(void)
+diff --git a/hw/usb/hcd-xhci-sysbus.c b/hw/usb/hcd-xhci-sysbus.c
+index bbdd5fd64a..8dd50fbbf1 100644
+--- a/hw/usb/hcd-xhci-sysbus.c
++++ b/hw/usb/hcd-xhci-sysbus.c
+@@ -112,7 +112,8 @@ static const TypeInfo xhci_sysbus_info = {
      .parent        = TYPE_SYS_BUS_DEVICE,
-     .instance_size = sizeof(VirtIOMMIOProxy),
-     .class_init    = virtio_mmio_class_init,
+     .instance_size = sizeof(XHCISysbusState),
+     .class_init    = xhci_sysbus_class_init,
+-    .instance_init = xhci_sysbus_instance_init
++    .instance_init = xhci_sysbus_instance_init,
 +    .secure        = true,
  };
  
- /* virtio-mmio-bus. */
-@@ -848,6 +849,7 @@ static const TypeInfo virtio_mmio_bus_info = {
-     .parent        = TYPE_VIRTIO_BUS,
-     .instance_size = sizeof(VirtioBusState),
-     .class_init    = virtio_mmio_bus_class_init,
+ static void xhci_sysbus_register_types(void)
+diff --git a/hw/usb/hcd-xhci.c b/hw/usb/hcd-xhci.c
+index d342aa2739..aa6c8a0fdd 100644
+--- a/hw/usb/hcd-xhci.c
++++ b/hw/usb/hcd-xhci.c
+@@ -3676,6 +3676,7 @@ static const TypeInfo xhci_info = {
+     .parent        = TYPE_DEVICE,
+     .instance_size = sizeof(XHCIState),
+     .class_init    = xhci_class_init,
 +    .secure        = true,
  };
  
- static void virtio_mmio_register_types(void)
-diff --git a/hw/virtio/virtio-nsm.c b/hw/virtio/virtio-nsm.c
-index 3bf5e7009a..099342f379 100644
---- a/hw/virtio/virtio-nsm.c
-+++ b/hw/virtio/virtio-nsm.c
-@@ -1727,6 +1727,7 @@ static const TypeInfo virtio_nsm_info = {
-     .parent = TYPE_VIRTIO_DEVICE,
-     .instance_size = sizeof(VirtIONSM),
-     .class_init = virtio_nsm_class_init,
-+    .secure = true,
- };
- 
- static void virtio_register_types(void)
-diff --git a/hw/virtio/virtio-pmem.c b/hw/virtio/virtio-pmem.c
-index 6f7271c140..1a414d7ba2 100644
---- a/hw/virtio/virtio-pmem.c
-+++ b/hw/virtio/virtio-pmem.c
-@@ -196,6 +196,7 @@ static const TypeInfo virtio_pmem_info = {
-     .class_size    = sizeof(VirtIOPMEMClass),
-     .class_init    = virtio_pmem_class_init,
-     .instance_size = sizeof(VirtIOPMEM),
+ static void xhci_register_types(void)
+diff --git a/hw/usb/host-libusb.c b/hw/usb/host-libusb.c
+index 564fe9a547..c845778a54 100644
+--- a/hw/usb/host-libusb.c
++++ b/hw/usb/host-libusb.c
+@@ -1810,6 +1810,7 @@ static const TypeInfo usb_host_dev_info = {
+     .instance_size = sizeof(USBHostDevice),
+     .class_init    = usb_host_class_initfn,
+     .instance_init = usb_host_instance_init,
 +    .secure        = true,
  };
- 
- static void virtio_register_types(void)
-diff --git a/hw/virtio/virtio-rng.c b/hw/virtio/virtio-rng.c
-index d68d901195..ba80138179 100644
---- a/hw/virtio/virtio-rng.c
-+++ b/hw/virtio/virtio-rng.c
-@@ -282,6 +282,7 @@ static const TypeInfo virtio_rng_info = {
-     .parent = TYPE_VIRTIO_DEVICE,
-     .instance_size = sizeof(VirtIORNG),
-     .class_init = virtio_rng_class_init,
-+    .secure = true,
+ module_obj(TYPE_USB_HOST_DEVICE);
+ module_kconfig(USB);
+diff --git a/hw/usb/redirect.c b/hw/usb/redirect.c
+index dfd9e8bb50..2d56ba329a 100644
+--- a/hw/usb/redirect.c
++++ b/hw/usb/redirect.c
+@@ -2654,6 +2654,7 @@ static const TypeInfo usbredir_dev_info = {
+     .instance_size = sizeof(USBRedirDevice),
+     .class_init    = usbredir_class_initfn,
+     .instance_init = usbredir_instance_init,
++    .secure        = true,
  };
- 
- static void virtio_register_types(void)
-diff --git a/hw/virtio/virtio-rtc.c b/hw/virtio/virtio-rtc.c
-index 32de9c1650..08071aadb5 100644
---- a/hw/virtio/virtio-rtc.c
-+++ b/hw/virtio/virtio-rtc.c
-@@ -180,6 +180,7 @@ static const TypeInfo virtio_rtc_info = {
-     .parent = TYPE_VIRTIO_DEVICE,
-     .instance_size = sizeof(VirtIORtc),
-     .class_init = virtio_rtc_class_init,
-+    .secure = true,
- };
- 
- static void virtio_rtc_register_types(void)
+ module_obj(TYPE_USB_REDIR);
+ module_kconfig(USB);
 -- 
 2.55.0
 
