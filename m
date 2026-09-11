@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 70CF0C88E50
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:10:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1416856.1645792 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62336C88E45
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:10:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1416861.1645834 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x51wy-0005jf-Md; Fri, 11 Sep 2026 14:09:56 +0000
+	id 1x51xE-0007z0-BC; Fri, 11 Sep 2026 14:10:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1416856.1645792; Fri, 11 Sep 2026 14:09:56 +0000
+Received: by outflank-mailman (output) from mailman id 1416861.1645834; Fri, 11 Sep 2026 14:10:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x51wy-0005jY-J0; Fri, 11 Sep 2026 14:09:56 +0000
-Received: by outflank-mailman (input) for mailman id 1416856;
- Fri, 11 Sep 2026 14:09:55 +0000
+	id 1x51xE-0007yW-1P; Fri, 11 Sep 2026 14:10:12 +0000
+Received: by outflank-mailman (input) for mailman id 1416861;
+ Fri, 11 Sep 2026 14:10:10 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1x51wx-0005he-Bp
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:09:55 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1x51xC-0007sY-Lf
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:10:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x51ww-00E9V9-Oz
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:09:54 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x51xC-00E9cU-2O
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:10:10 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa40b97-2eae-0a2a0a5409dd-0a2a450bac0c-30
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:09:54 +0200
-Received: from [209.85.160.178] (helo=mail-qt1-f178.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa40bc0-bab6-0a2a0a5309dd-0a2a4508af86-6
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:10:10 +0200
+Received: from [209.85.219.52] (helo=mail-qv1-f52.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa40bb1-b7e8-0a2a450b0019-d155a0b2c932-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:09:54 +0200
-Received: by mail-qt1-f178.google.com with SMTP id
- d75a77b69052e-5218927884fso15772411cf.3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 07:09:54 -0700 (PDT)
+ id 6aa40bc1-f659-0a2a45080019-d155db34f044-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:10:09 +0200
+Received: by mail-qv1-f52.google.com with SMTP id
+ 6a1803df08f44-910316a2fc9so11546576d6.2
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 07:10:09 -0700 (PDT)
 Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
  [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-530ca50cd05sm20570811cf.29.2026.09.11.07.09.51
+ af79cd13be357-939e7f184d9sm254193785a.12.2026.09.11.07.10.04
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Sep 2026 07:09:51 -0700 (PDT)
+ Fri, 11 Sep 2026 07:10:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,51 +55,51 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1789135793; x=1789740593; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1789135808; x=1789740608; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Vr/1/6kD89CuecwWXrcFDfjNkcZoJvv75czWOOFkQAs=;
-        b=kVyTMRfXf7wDivyTuDFHix8y410Go95Qeg51c+AX3MnfvkkY67XHNgz6JLU11gfjgN
-         wQyLDpEjKI1HAugLWm4hy61wyzWo6+Gix4YyB3I/rAb+6IdV3vArQMrUoZSWwdQdMkj0
-         bHsXPCj7+gtu7h3jku1mYZAy7K9y312ayhpwGTf3fiIZU+33NNPeACN1RIoQQ3T4fXk8
-         HeaoAJfSytexb0q29w1OOvAIx6XlkpQYw/TMkhi8JUbloH/mvf51lKXIDDHMyr8Wwn/z
-         gtF8U2NTFpKThApkE+ou8dNxMER4TcifpnALQN8Xkwb/KGA0aKrmnF4x/716vePMfzpF
-         lA8A==
+        bh=7VM45t8rF8CqlHWPsaSwdk7BD4ox5LDNpAeDrj6m5qM=;
+        b=ZbHGPsWwzRok43ZcjJKavwsPNS6W0mLdK9348ZPWknyWWlld1xfZCspzjln3natrNC
+         fLPC4iTskVhP4u303UmjS+g0Ip/p/VhH7SO2uyC/vNl/uM3oZuYvO5smkIN8jQ0BQNUU
+         +L04CtvCiDJjyTDTRNrR18hJVI6xXOF7OSvu3RLpX0rpp83yDGrkle2BErDx8pXnVvZj
+         W/nuPUeBb5BbtwiF+baCgXI4BqNs3bzacBuBGqZqMkrbqISQYKKXu+fVdrofH1dy/jVe
+         In6ZuqGyNu9ihBM+XHQZ7vpyquj3dNRiF1xnAElzj6wrMigAVXg055zkKu6thr4ArAl8
+         9Z/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789135793; x=1789740593;
+        d=1e100.net; s=20251104; t=1789135808; x=1789740608;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Vr/1/6kD89CuecwWXrcFDfjNkcZoJvv75czWOOFkQAs=;
-        b=aPMDRb8l99PXZ2lejYyyjz+WfA0LqkdCX4BtTXmKf/UvulSH2NwTHJIx68qtOf0TVP
-         KAQmY6S7V8VHkUt5Nv2aLqG8By99mpPMsEdTphB8eI2aOguSbj+sFWVY2YHxUittea2O
-         ebPPM4s+4h0Cpwv/+uD7LOLaCa+bH5j6ApY62JXV3IxI9BFmXgeBEMk4WHYbjJU3Fjdp
-         OP3WJChKXlrDKKRYqoigFZhIjb7eRTEkbVpiTqmmDHbP7m+x9hvnd03PS9ws2Jt/6iHY
-         WRkLyHQ9JJ/Ew7V/OyOUzwTOryH+frV272GINI+WLqZKndbWnHKeBuLYGcsmCmO8Ro64
-         jXhg==
-X-Forwarded-Encrypted: i=1; AKwUvByS7FOFs8iYgb83Hu1dSf0udJ2piFkLPf4cULguS7+GhoC2/VaNUvmVp7bCcfBCLBdLsSLKFAH9u/o=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kWmTkN4yeHuWBMZuHPy7qV0ujP1lS2Z61N34rb9aVtn6Xo+/rJ
-	fejW6jpD2eia/A2oBU2gRDgfvIl9k2BgtGW43e4Ea+btAm2ZfUYG2ZcFU1W/8kUrPrI=
-X-Gm-Gg: AYBFou0L4xVRysNwCwNIV1VB6TUqp4WRry6x+CdZknZmHb48my5v4yDD7lJPMilojWa
-	IJKimIIiIWpf29NjxI6TA74FPwhg7CLnbwdWxzc1a70v71a50Z6pTre+kNHY18CVr80fXV5XxVh
-	FnHnPdr+HscODCSgeN60vqjevwop/cMgqiviuznGDzkxRM6zLFsCi1ChOzk660K0UoirX9h2crt
-	qL8M0kgO3fBsWEZgJS6Jus49F4Go9yF3iUAsWsq2KOqKNXTXrB9WZE0tO6HpTuBdKLY0r5DEXiH
-	o83o5UlKlmUE+/cfVcYpk7n7fZsq+EqLrlFe3qW1U8j++CtKgxo31eOC5e9i9NEBZ7CcXDgUI/g
-	tpKmViiS6PCK0QFX+Xowo7RdsP9pAUPKz+rG8WGaqhQ0oqR0XYPe8KX/3CaHhVmd2caicDN1pg6
-	i+MZGAvABAUn1JHuK80n2nY4kp/lkVA1RH8O921r+gghFjuskUk+2lhhODrvT/wOuSVa8sF7k8F
-	Qn9d2HkIj+/ZxgyWCfzjrCAWS1FQOjxny5Al43P7WeimH8ji2nYF6Qc
-X-Received: by 2002:a05:622a:393:b0:530:a441:c52d with SMTP id d75a77b69052e-530c876307fmr64046411cf.46.1789135792869;
-        Fri, 11 Sep 2026 07:09:52 -0700 (PDT)
+        bh=7VM45t8rF8CqlHWPsaSwdk7BD4ox5LDNpAeDrj6m5qM=;
+        b=DYencswdLXs79jqpcedU1zonAw8jAn64Xd6zQlbtl6Xz0/SHVVI+tQl3hLqhuyQkDb
+         E+aRazfDRKRrOeSMD2vzwUbwBoobg3DLZQyA9KeQ0acYNA0EVnoovyaVbh9A6gd4VplC
+         4kKX85VzV2l/6XD7TF4VDFZn+VdRHNywHRpIt94eQbCCugCPJy4ZDqy9Xqzano8Oopnr
+         BCwSCZ1hs3C2Sy5/ofUlGncWH9AJNXkOGsRq3RShB3BposrFJC+CWDFcNguXnnSUE3gC
+         AOeU2sI+8WPlAcHHmzVaBzwqRK0Vx/IGPKcluW7iqjY+uoFBWZE85YEhFvmih2aZ2ZMY
+         5Abw==
+X-Forwarded-Encrypted: i=1; AKwUvBxDFulrSOLP+mobzBfJjiUa35QNVvt/1/g2LcPqiboC4BPgK8oot9XqfTeGdLvyoRG0oZ3mZHZLefM=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kwY+LsWxZk/DcFIZCSGQ1cE+dbnraXA/jRBSTlFkNRlADKYbYF
+	uYfugZDObyQrzSeyCFu7mi6oefjAHR2s2DSEdeaaANPNp0YXszo+5KnEWf7ELabFFNk=
+X-Gm-Gg: AYBFou2zm2M8ndv9oDjqiJ87taADzhsT0zlBzBRt4Hw+XnWX+snZJKvv21pZYQIirTK
+	kGSi9GnyT5i3kNlofAHxpADALiUfXrxR5baWX1VRIt3FoUHcopBwTWbOnc/8EilBgAZk6nj/9Ri
+	KJobqeuGchU87v5BA2BXQggAn8Gi/8tImrbDvDWHF0Mp7iSx4ZwV+72xS96m7uySIpL/o1AI/Ux
+	DhtDiX1RzKu7mx3jiGBMgV2T5z/xbXg3zyDuOZnxcNtRUCxBPI2zqxoziGY62nI89LqnQTHXtof
+	HiWzt1TFcQsmTJ41QzOpJgZymyHdk78XNqJhwuOT49JB/HmTB+bxgp8JCxzU3tTy7xUc0s2E/PU
+	qOzkK7Oomoy3G8vjfzS3ciIfETlUY3AAxeT86FjVzlQRk6llgD0meba8Ze9nd+gpAHF6hE1Kcb9
+	CoMlXxgATEzyp4ng52V2LTV/+1SMzQaZTTA5tR6N2LTD6J/0YEzme73A+D1nPDu57vr+jAKqi4/
+	J5k0uMSlPktP94jTCN2eijN967nt7w8Ug3DRR13Yl/PUfJ8DcODbXvB
+X-Received: by 2002:a05:620a:25c7:b0:939:bd4e:b2fe with SMTP id af79cd13be357-939ea2877e9mr555790285a.40.1789135808266;
+        Fri, 11 Sep 2026 07:10:08 -0700 (PDT)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Fri, 11 Sep 2026 14:08:41 +0000
-Subject: [PATCH RFC v2 03/15] rcu-tasks: Hold trampoline nesting across
- irq-exit preemption in trampoline text
+Date: Fri, 11 Sep 2026 14:08:46 +0000
+Subject: [PATCH RFC v2 08/15] bpf, x86: Maintain Tasks RCU trampoline
+ nesting in the BPF trampoline
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260911-b4-rcu-tasks-preempt-qs-v2-3-eaaa61ed2da4@toxicpanda.com>
+Message-Id: <20260911-b4-rcu-tasks-preempt-qs-v2-8-eaaa61ed2da4@toxicpanda.com>
 References: <20260911-b4-rcu-tasks-preempt-qs-v2-0-eaaa61ed2da4@toxicpanda.com>
 In-Reply-To: <20260911-b4-rcu-tasks-preempt-qs-v2-0-eaaa61ed2da4@toxicpanda.com>
 To: "Paul E. McKenney" <paulmck@kernel.org>, 
@@ -124,231 +124,126 @@ Cc: Andy Lutomirski <luto@kernel.org>,
  bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1789135736; l=9197;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1789135736; l=4464;
  i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=CNudSyp9EGSFLIPrtB5sqvKMksuv/pGd9p7EfdyuASs=;
+ bh=ZoHASPcgXPkyj8nhWq6Qxe/k1AFcC7iFexyU3IrpvR8=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
  JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QDP3NG/b7q989dUqjalqec1jdmkHZIx2wGCVq3J1Gir+zOd7a4FhOwI8Us9/xLubjdPD5eVSQFN
- Ltn5AyJDBWwY=
+ QNGMQXlnJ9mLTB5EylkME94aCeeA53rjkqD+SHndTEJHVSfeCPYIUtSGAIP6GARv7tJy5dM1hBK
+ jP1T+H+zt3A0=
 X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
  fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-42698a/1789135794-182F49EA-ECC8F3A6/0/0
+X-purgate-ID: tlsNG-c1860d/1789135810-D534D87B-3E826EF8/0/0
 X-purgate-type: clean
-X-purgate-size: 9199
+X-purgate-size: 4466
 
-A trampoline's own rcu_tramp_nesting increment and decrement live inside
-the trampoline, so there is a window of a few instructions on entry and
-exit where the count is zero while the CPU is executing trampoline text
-(or text on the way into one, such as a static ftrace stub holding a
-direct-call target).  In that window the task has not called out, so it
-can only be preempted from an interrupt, and the interrupted instruction
-pointer identifies where it is.
+Emit an increment of current->rcu_tramp_nesting once the trampoline's
+frame is set up and a decrement before the final register restore, so
+that a task preempted while running fentry/fexit/fmod_ret/LSM programs
+or the __bpf_tramp_enter()/__bpf_tramp_exit() glue is not treated as
+Tasks-RCU quiescent.  Drop the count around the call to the original
+function: that may run arbitrarily long without sleeping and must not pin
+a Tasks RCU grace period, and the trampoline frame above it is held by
+im->pcref rather than by Tasks RCU (see bpf_tramp_image_put()).  The
+fmod_ret early-exit branch and the ip_after_call -> ip_epilogue poke both
+skip the decrement/increment pair around the original call, so the count
+stays balanced on every path.
 
-Add rcu_tasks_ip_in_trampoline(), which treats any IP outside core
-kernel and module text as potentially Tasks-RCU-protected (ftrace
-trampolines, BPF images and programs, kprobe slots are all dynamically
-allocated text; is_ftrace_trampoline() and friends are deliberately not
-used because text being torn down may already be unregistered from them
-while a task still stands on it), plus a __weak
-arch_rcu_tasks_ip_in_trampoline() for core text an architecture needs
-to flag.  On irq-exit preemption, if the IP matches, hold the count
-elevated across preempt_schedule_irq().
-
-Introduce ARCH_HAS_RCU_TASKS_PREEMPT_QS / RCU_TASKS_PREEMPT_QS to gate
-this; no architecture selects it yet, so the check compiles away and
-there is no functional change.
+The sequence is "mov r11, gs:[current_task]; inc/dec dword [r11 + off]";
+r11 is scratch at every emission point and (u32)&current_task is a valid
+sign-extended %gs-absolute with the current per-CPU layout, the same form
+the JIT already uses for this_cpu_off.  The image is dynamically
+allocated text, so the instructions outside the bracketed region are
+covered by the irq-exit IP check.
 
 Assisted-by: LLM
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- include/linux/rcupdate.h | 17 +++++++++++++++++
- kernel/entry/common.c    | 23 ++++++++++++++++++++++-
- kernel/rcu/Kconfig       | 10 ++++++++++
- kernel/rcu/tasks.h       | 38 ++++++++++++++++++++++++++++++++++++++
- kernel/rcu/update.c      |  2 ++
- 5 files changed, 89 insertions(+), 1 deletion(-)
+ arch/x86/net/bpf_jit_comp.c | 43 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 43 insertions(+)
 
-diff --git a/include/linux/rcupdate.h b/include/linux/rcupdate.h
-index b5c666c82479..0a408e36ea15 100644
---- a/include/linux/rcupdate.h
-+++ b/include/linux/rcupdate.h
-@@ -173,6 +173,9 @@ static inline void rcu_nocb_flush_deferred_wakeup(void) { }
- 
- #endif /* #else #ifdef CONFIG_RCU_NOCB_CPU */
- 
-+/* Arch hook for rcu_tasks_ip_in_trampoline(); see kernel/rcu/tasks.h. */
-+bool arch_rcu_tasks_ip_in_trampoline(unsigned long ip);
-+
- /*
-  * Note a quasi-voluntary context switch for RCU-tasks's benefit.
-  * This is a macro rather than an inline function to avoid #include hell.
-@@ -189,6 +192,16 @@ static inline void rcu_nocb_flush_deferred_wakeup(void) { }
-  * or was called from, such text and an involuntary context switch must not be
-  * treated as a Tasks RCU quiescent state.
-  *
-+ * The increment and decrement themselves live inside the trampoline, so there
-+ * is a window of a few instructions at entry (before the increment) and exit
-+ * (after the decrement) where the count is zero but the CPU is executing
-+ * trampoline text, or text on the way into one (a static ftrace stub or a
-+ * return thunk holding the trampoline's address).  In that window the task
-+ * cannot be preempted synchronously, only from an interrupt, so the irq-exit
-+ * preemption path covers it by checking regs->ip with
-+ * rcu_tasks_ip_in_trampoline() and holding the count elevated across
-+ * preempt_schedule_irq() when it matches.
-+ *
-  * Only current writes the count and only current (or an interrupt on the same
-  * CPU) reads it, so plain accesses suffice.
-  */
-@@ -211,6 +224,8 @@ static __always_inline void rcu_tasks_trampoline_assert_none(void)
- 		WARN_ON_ONCE(current->rcu_tramp_nesting);
+diff --git a/arch/x86/net/bpf_jit_comp.c b/arch/x86/net/bpf_jit_comp.c
+index 2853e87797a7..a375c1b7bd50 100644
+--- a/arch/x86/net/bpf_jit_comp.c
++++ b/arch/x86/net/bpf_jit_comp.c
+@@ -722,6 +722,31 @@ static void emit_indirect_jump(u8 **pprog, int bpf_reg, u8 *ip)
+ 	*pprog = prog;
  }
  
-+bool rcu_tasks_ip_in_trampoline(unsigned long ip);
-+
- # define rcu_tasks_classic_qs(t, preempt)				\
- 	do {								\
- 		if (!(preempt) && READ_ONCE((t)->rcu_tasks_holdout))	\
-@@ -226,6 +241,7 @@ void rcu_tasks_torture_stats_print(char *tt, char *tf);
- static inline void rcu_tasks_trampoline_enter(void) { }
- static inline void rcu_tasks_trampoline_exit(void) { }
- static inline void rcu_tasks_trampoline_assert_none(void) { }
-+static inline bool rcu_tasks_ip_in_trampoline(unsigned long ip) { return false; }
- # endif
- 
- #define rcu_tasks_qs(t, preempt) rcu_tasks_classic_qs((t), (preempt))
-@@ -245,6 +261,7 @@ void exit_tasks_rcu_finish(void);
- static inline void rcu_tasks_trampoline_enter(void) { }
- static inline void rcu_tasks_trampoline_exit(void) { }
- static inline void rcu_tasks_trampoline_assert_none(void) { }
-+static inline bool rcu_tasks_ip_in_trampoline(unsigned long ip) { return false; }
- #define call_rcu_tasks call_rcu
- #define synchronize_rcu_tasks synchronize_rcu
- static inline void exit_tasks_rcu_start(void) { }
-diff --git a/kernel/entry/common.c b/kernel/entry/common.c
-index e4acd50bd81a..cd3feaca6420 100644
---- a/kernel/entry/common.c
-+++ b/kernel/entry/common.c
-@@ -134,6 +134,27 @@ static inline bool arch_irqentry_exit_need_resched(void);
- static inline bool arch_irqentry_exit_need_resched(void) { return true; }
- #endif
- 
 +/*
-+ * Preempt the interrupted kernel context.  If the interrupt landed in text
-+ * that may be a Tasks-RCU-protected trampoline (see
-+ * rcu_tasks_trampoline_enter()), hold current->rcu_tramp_nesting elevated
-+ * across the context switch so that it is not mistaken for a Tasks RCU
-+ * quiescent state.  This closes the few-instruction windows at trampoline
-+ * entry/exit where the trampoline's own increment has not yet run or its
-+ * decrement already has.
++ * Tasks RCU trampoline nesting, see rcu_tasks_trampoline_enter().
++ *
++ *   mov r11, QWORD PTR gs:[current_task]
++ *   inc/dec DWORD PTR [r11 + offsetof(struct task_struct, rcu_tramp_nesting)]
++ *
++ * r11 (AUX_REG) is scratch in the trampoline at every point this is emitted.
 + */
-+static void irqentry_preempt(struct pt_regs *regs)
++static void emit_rcu_tasks_tramp_nesting(u8 **pprog, bool enter)
 +{
-+	bool in_tramp = IS_ENABLED(CONFIG_RCU_TASKS_PREEMPT_QS) &&
-+			rcu_tasks_ip_in_trampoline(instruction_pointer(regs));
++#ifdef CONFIG_TASKS_RCU
++	u8 *prog = *pprog;
 +
-+	if (in_tramp)
-+		rcu_tasks_trampoline_enter();
-+	preempt_schedule_irq();
-+	if (in_tramp)
-+		rcu_tasks_trampoline_exit();
++	/* mov r11, gs:[abs32] */
++	EMIT2(0x65, 0x4C);
++	EMIT3(0x8B, 0x1C, 0x25);
++	EMIT((u32)(unsigned long)&current_task, 4);
++	/* inc/dec dword ptr [r11 + disp32] */
++	EMIT3(0x41, 0xFF, enter ? 0x83 : 0x8B);
++	EMIT(offsetof(struct task_struct, rcu_tramp_nesting), 4);
++
++	*pprog = prog;
++#endif
 +}
 +
- void raw_irqentry_exit_cond_resched(struct pt_regs *regs)
+ static void emit_return(u8 **pprog, u8 *ip)
  {
- 	if (!preempt_count()) {
-@@ -142,7 +163,7 @@ void raw_irqentry_exit_cond_resched(struct pt_regs *regs)
- 		if (IS_ENABLED(CONFIG_DEBUG_ENTRY))
- 			WARN_ON_ONCE(!on_thread_stack());
- 		if (need_resched() && arch_irqentry_exit_need_resched())
--			preempt_schedule_irq();
-+			irqentry_preempt(regs);
- 	}
- }
- #ifdef CONFIG_PREEMPT_DYNAMIC
-diff --git a/kernel/rcu/Kconfig b/kernel/rcu/Kconfig
-index 332df7a7a634..999f8228a13d 100644
---- a/kernel/rcu/Kconfig
-+++ b/kernel/rcu/Kconfig
-@@ -107,6 +107,16 @@ config TASKS_RCU
- 	default NEED_TASKS_RCU && PREEMPTION
- 	select IRQ_WORK
+ 	u8 *prog = *pprog;
+@@ -3610,6 +3635,13 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
+ 	/* mov QWORD PTR [rbp - rbx_off], rbx */
+ 	emit_stx(&prog, BPF_DW, BPF_REG_FP, BPF_REG_6, -rbx_off);
  
-+# Selected by architectures whose ftrace, BPF and kprobe trampolines maintain
-+# current->rcu_tramp_nesting and which use the generic irqentry code, so that
-+# a preemption outside any trampoline can be treated as a Tasks RCU
-+# quiescent state.  See rcu_tasks_trampoline_enter().
-+config ARCH_HAS_RCU_TASKS_PREEMPT_QS
-+	bool
++	/*
++	 * From here until the matching decrement before the final return, a
++	 * preemption of this task is not a Tasks RCU quiescent state.  The
++	 * instructions above this point are covered by the irq-exit IP check.
++	 */
++	emit_rcu_tasks_tramp_nesting(&prog, true);
 +
-+config RCU_TASKS_PREEMPT_QS
-+	def_bool TASKS_RCU && ARCH_HAS_RCU_TASKS_PREEMPT_QS && GENERIC_IRQ_ENTRY
-+
- config FORCE_TASKS_RUDE_RCU
- 	bool "Force selection of Tasks Rude RCU"
- 	depends on RCU_EXPERT
-diff --git a/kernel/rcu/tasks.h b/kernel/rcu/tasks.h
-index 1662ba18bf34..a801ec4a951b 100644
---- a/kernel/rcu/tasks.h
-+++ b/kernel/rcu/tasks.h
-@@ -1089,6 +1089,44 @@ static void rcu_tasks_postscan(struct list_head *hop)
- 		timer_delete_sync(&tasks_rcu_exit_stall_timer);
- }
+ 	func_meta = nr_regs;
+ 	/* Store number of argument registers of the traced function */
+ 	emit_store_stack_imm64(&prog, BPF_REG_0, -func_meta_off, func_meta);
+@@ -3670,6 +3702,13 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
+ 			LOAD_TRAMP_TAIL_CALL_CNT_PTR(stack_size);
+ 		}
  
-+/*
-+ * Architectures selecting ARCH_HAS_RCU_TASKS_PREEMPT_QS override this to flag
-+ * core kernel text that must be treated like a trampoline, e.g. static ftrace
-+ * entry stubs and return thunks that run with a trampoline address in hand.
-+ */
-+bool __weak arch_rcu_tasks_ip_in_trampoline(unsigned long ip)
-+{
-+	return false;
-+}
++		/*
++		 * The original function may run for a long time without
++		 * sleeping; do not let it pin a Tasks RCU grace period.  The
++		 * trampoline frame above it is held by im->pcref
++		 * (__bpf_tramp_enter()), not by Tasks RCU, across the call.
++		 */
++		emit_rcu_tasks_tramp_nesting(&prog, false);
+ 		if (flags & BPF_TRAMP_F_ORIG_STACK) {
+ 			emit_ldx(&prog, BPF_DW, BPF_REG_6, BPF_REG_FP, 8);
+ 			EMIT2(0xff, 0xd3); /* call *rbx */
+@@ -3680,6 +3719,7 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
+ 				goto cleanup;
+ 			}
+ 		}
++		emit_rcu_tasks_tramp_nesting(&prog, true);
+ 		/* remember return value in a stack for bpf prog to access */
+ 		emit_stx(&prog, BPF_DW, BPF_REG_FP, BPF_REG_0, -8);
+ 		im->ip_after_call = image + (prog - (u8 *)rw_image);
+@@ -3741,6 +3781,9 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
+ 	if (save_ret)
+ 		emit_ldx(&prog, BPF_DW, BPF_REG_0, BPF_REG_FP, -8);
+ 
++	/* Remaining instructions are covered by the irq-exit IP check. */
++	emit_rcu_tasks_tramp_nesting(&prog, false);
 +
-+/**
-+ * rcu_tasks_ip_in_trampoline - Could a task interrupted at @ip be a Tasks RCU reader?
-+ * @ip: interrupted instruction pointer
-+ *
-+ * Called from the irq-exit preemption path with interrupts disabled, to decide
-+ * whether the imminent preemption may be reported as a Tasks RCU quiescent
-+ * state when current->rcu_tramp_nesting is zero.  Returns true, meaning "do
-+ * not report", when @ip is:
-+ *
-+ *  - outside static kernel and module text, i.e. possibly in an ftrace
-+ *    trampoline, BPF trampoline image or program, kprobe insn/optinsn slot or
-+ *    other dynamically allocated text whose lifetime Tasks RCU guards.  This
-+ *    deliberately does not consult is_ftrace_trampoline() and friends: text
-+ *    being torn down may already be unregistered there while a task still
-+ *    stands on it;
-+ *  - in core text the architecture flags via arch_rcu_tasks_ip_in_trampoline().
-+ *
-+ * A false positive only defers the quiescent state to the task's next
-+ * context switch.
-+ */
-+bool rcu_tasks_ip_in_trampoline(unsigned long ip)
-+{
-+	if (core_kernel_text(ip))
-+		return arch_rcu_tasks_ip_in_trampoline(ip);
-+	return !is_module_text_address(ip);
-+}
-+NOKPROBE_SYMBOL(rcu_tasks_ip_in_trampoline);
-+
- /* See if tasks are still holding out, complain if so. */
- static void check_holdout_task(struct task_struct *t,
- 			       bool needreport, bool *firstreport)
-diff --git a/kernel/rcu/update.c b/kernel/rcu/update.c
-index b62735a67884..23be7e97c3b5 100644
---- a/kernel/rcu/update.c
-+++ b/kernel/rcu/update.c
-@@ -41,6 +41,8 @@
- #include <linux/rcupdate_wait.h>
- #include <linux/sched/isolation.h>
- #include <linux/kprobes.h>
-+#include <linux/kallsyms.h>
-+#include <linux/module.h>
- #include <linux/slab.h>
- #include <linux/irq_work.h>
- #include <linux/rcupdate_trace.h>
+ 	emit_ldx(&prog, BPF_DW, BPF_REG_6, BPF_REG_FP, -rbx_off);
+ 
+ 	EMIT1(0xC9); /* leave */
 
 -- 
 2.55.0
