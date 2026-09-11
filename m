@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62336C88E45
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:10:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1416861.1645834 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2803C88E50
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:10:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1416867.1645846 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x51xE-0007z0-BC; Fri, 11 Sep 2026 14:10:12 +0000
+	id 1x51xH-00004y-TO; Fri, 11 Sep 2026 14:10:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1416861.1645834; Fri, 11 Sep 2026 14:10:12 +0000
+Received: by outflank-mailman (output) from mailman id 1416867.1645846; Fri, 11 Sep 2026 14:10:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x51xE-0007yW-1P; Fri, 11 Sep 2026 14:10:12 +0000
-Received: by outflank-mailman (input) for mailman id 1416861;
- Fri, 11 Sep 2026 14:10:10 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x51xH-0008WP-PP; Fri, 11 Sep 2026 14:10:15 +0000
+Received: by outflank-mailman (input) for mailman id 1416867;
+ Fri, 11 Sep 2026 14:10:15 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1x51xC-0007sY-Lf
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:10:10 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1x51xG-0008Tg-Vn
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:10:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x51xC-00E9cU-2O
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:10:10 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x51xG-008fmm-Cd
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:10:14 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa40bc0-bab6-0a2a0a5309dd-0a2a4508af86-6
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:10:10 +0200
-Received: from [209.85.219.52] (helo=mail-qv1-f52.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa40bbd-8faa-0a2a0a5109dd-0a2a4503e874-18
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:10:14 +0200
+Received: from [209.85.222.173] (helo=mail-qk1-f173.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa40bc1-f659-0a2a45080019-d155db34f044-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:10:09 +0200
-Received: by mail-qv1-f52.google.com with SMTP id
- 6a1803df08f44-910316a2fc9so11546576d6.2
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 07:10:09 -0700 (PDT)
+ id 6aa40bc5-fae8-0a2a45030019-d155deadcd88-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:10:14 +0200
+Received: by mail-qk1-f173.google.com with SMTP id
+ af79cd13be357-9399daa3c8eso76787585a.1
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 07:10:13 -0700 (PDT)
 Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
  [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-939e7f184d9sm254193785a.12.2026.09.11.07.10.04
+ af79cd13be357-939e80bbab7sm247620785a.34.2026.09.11.07.10.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Sep 2026 07:10:05 -0700 (PDT)
+ Fri, 11 Sep 2026 07:10:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,51 +55,51 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1789135808; x=1789740608; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1789135813; x=1789740613; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=7VM45t8rF8CqlHWPsaSwdk7BD4ox5LDNpAeDrj6m5qM=;
-        b=ZbHGPsWwzRok43ZcjJKavwsPNS6W0mLdK9348ZPWknyWWlld1xfZCspzjln3natrNC
-         fLPC4iTskVhP4u303UmjS+g0Ip/p/VhH7SO2uyC/vNl/uM3oZuYvO5smkIN8jQ0BQNUU
-         +L04CtvCiDJjyTDTRNrR18hJVI6xXOF7OSvu3RLpX0rpp83yDGrkle2BErDx8pXnVvZj
-         W/nuPUeBb5BbtwiF+baCgXI4BqNs3bzacBuBGqZqMkrbqISQYKKXu+fVdrofH1dy/jVe
-         In6ZuqGyNu9ihBM+XHQZ7vpyquj3dNRiF1xnAElzj6wrMigAVXg055zkKu6thr4ArAl8
-         9Z/w==
+        bh=q0Z6kl89L/mcJKSDFUzFWtYRNb/tGGuag8yv3GYWCr4=;
+        b=hDRH6FkptkFY7seA7FA+CzfUh0fszWEekSFRmK5JJWfmON4+SoA9SEMygdwnpnWJZs
+         JXMqNZ2HNy5MkffJohqDAA6KTYaafqxeBd77MyLrHU3w8dylYf8U99KFlKx0Na2xBM9P
+         VB1aYoZrsxbQdsN9O8fuGhF4tMMQMpRqDhLWCkU687ghQR/HtilJmIU05WBDcs2hAncQ
+         szvHd29hj7vj+GQ67jDZE3DVKhbnvM3Eyy9ao3U+dRvNWGOTuh/sJ8OsGJRIK5Dc2XvX
+         f3czILiZ8C8bRQmGGRLKrILqaZusZbXepAlV0OQmLFRmKsLCABNdcgKIkUR0ldtO2x5x
+         HspQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789135808; x=1789740608;
+        d=1e100.net; s=20251104; t=1789135813; x=1789740613;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=7VM45t8rF8CqlHWPsaSwdk7BD4ox5LDNpAeDrj6m5qM=;
-        b=DYencswdLXs79jqpcedU1zonAw8jAn64Xd6zQlbtl6Xz0/SHVVI+tQl3hLqhuyQkDb
-         E+aRazfDRKRrOeSMD2vzwUbwBoobg3DLZQyA9KeQ0acYNA0EVnoovyaVbh9A6gd4VplC
-         4kKX85VzV2l/6XD7TF4VDFZn+VdRHNywHRpIt94eQbCCugCPJy4ZDqy9Xqzano8Oopnr
-         BCwSCZ1hs3C2Sy5/ofUlGncWH9AJNXkOGsRq3RShB3BposrFJC+CWDFcNguXnnSUE3gC
-         AOeU2sI+8WPlAcHHmzVaBzwqRK0Vx/IGPKcluW7iqjY+uoFBWZE85YEhFvmih2aZ2ZMY
-         5Abw==
-X-Forwarded-Encrypted: i=1; AKwUvBxDFulrSOLP+mobzBfJjiUa35QNVvt/1/g2LcPqiboC4BPgK8oot9XqfTeGdLvyoRG0oZ3mZHZLefM=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kwY+LsWxZk/DcFIZCSGQ1cE+dbnraXA/jRBSTlFkNRlADKYbYF
-	uYfugZDObyQrzSeyCFu7mi6oefjAHR2s2DSEdeaaANPNp0YXszo+5KnEWf7ELabFFNk=
-X-Gm-Gg: AYBFou2zm2M8ndv9oDjqiJ87taADzhsT0zlBzBRt4Hw+XnWX+snZJKvv21pZYQIirTK
-	kGSi9GnyT5i3kNlofAHxpADALiUfXrxR5baWX1VRIt3FoUHcopBwTWbOnc/8EilBgAZk6nj/9Ri
-	KJobqeuGchU87v5BA2BXQggAn8Gi/8tImrbDvDWHF0Mp7iSx4ZwV+72xS96m7uySIpL/o1AI/Ux
-	DhtDiX1RzKu7mx3jiGBMgV2T5z/xbXg3zyDuOZnxcNtRUCxBPI2zqxoziGY62nI89LqnQTHXtof
-	HiWzt1TFcQsmTJ41QzOpJgZymyHdk78XNqJhwuOT49JB/HmTB+bxgp8JCxzU3tTy7xUc0s2E/PU
-	qOzkK7Oomoy3G8vjfzS3ciIfETlUY3AAxeT86FjVzlQRk6llgD0meba8Ze9nd+gpAHF6hE1Kcb9
-	CoMlXxgATEzyp4ng52V2LTV/+1SMzQaZTTA5tR6N2LTD6J/0YEzme73A+D1nPDu57vr+jAKqi4/
-	J5k0uMSlPktP94jTCN2eijN967nt7w8Ug3DRR13Yl/PUfJ8DcODbXvB
-X-Received: by 2002:a05:620a:25c7:b0:939:bd4e:b2fe with SMTP id af79cd13be357-939ea2877e9mr555790285a.40.1789135808266;
-        Fri, 11 Sep 2026 07:10:08 -0700 (PDT)
+        bh=q0Z6kl89L/mcJKSDFUzFWtYRNb/tGGuag8yv3GYWCr4=;
+        b=Gx9QiVygWmlJfKcunaw+2/UxTOgFPSeh270lqfRj792y3o0Q7hsbDkG28f4UGALNOr
+         xn54U+8GzQvUBHgVVunNn/vz4874ALlgnbyJPps9IRR1mNdbGpQXV0GrdJDNWGkOrgC4
+         lJpinUiOcpUBhpFBOFeWhVxTPTuczaYvNL/3J8EC1jPijczTpPkCe/Y+1roUZRPaJbcI
+         vmtEEeSDYbEGWsxmoc3C/3K/cQ1Ky1IElllJI2PE3Hoxet+D40dzb4Zmb/V1mph4UMn/
+         AQLfYAtE/ZR7PT0d6f5jt9MHtLxxl3ROsIFwVZzC4+f8J5KH3kAUPdpNVK3BK3It17ju
+         CxtA==
+X-Forwarded-Encrypted: i=1; AKwUvBzXVQwSH98q+8N32VHBsnt8ftsuRm3S2hMeuXT9gTmuJ0ZUQQW2mW8B+LrAgLGDQxPSBmm1vxuwPvU=@lists.xenproject.org
+X-Gm-Message-State: AFuF++m/HrIwpijQ9He3OiqRBG+3sGu0I8kYQicqiNdKpDIiy8lnMhp2
+	5OoquqHC7IdoLVwlho2rxoL7UMGg4mQIB5nselUby8RcezPOPPD9Axs8PwJf+wrSQcI=
+X-Gm-Gg: AYBFou29Qqs6x56ks4KAXZs1xVbxu3A+8xPf5hVZOX/amvuZoPSktNwxAtX/fg4mkMe
+	kAvCO8+RaN/oZmAi0zYOj5BIiNdi6TrPc+1Gg2g+m/gxmFLGeaq5OJPaivm16INymyKNgkeugQQ
+	+D4EhLGkXKaCpx+pSO/fUgLP+80wMpaqfceDOfoklErpHdD9duKoFc+QQhcfIrzo8QLbMw7vMUH
+	VQtQMLVMJBmr+bMYoKBGO2xq6AFwed1mfu3FSP3dAxAmfEt839QAHS+g4/9OUK7Yc8w+cnlgJKT
+	RWikp71M7xtBgoTlTc15GqfFRVWaMre6Q6O7WX6XGm1Dcs7KocdlUi15Npp8PXaFN1acujlyDEY
+	YYWS45qx/ptVF9fa+guX4MDYNqlZks44U8pIlMfWomzWlk0QB7MZ79MkqBflAZfQsPv73Bdlfr+
+	Qm4THu2Sq0SbF/m74QMf6kFx0oGh/RWFp7MhEYVC0iToDJtzjQ/yJY+dfYlwkxzDQ69MlVSn9wY
+	3w6Zcz52NpcvUIeZanFK0+te8h+p8NdAiJn9DTdBfqaM8dsajDoP2TX
+X-Received: by 2002:a05:620a:6287:b0:939:6dea:374b with SMTP id af79cd13be357-939ea1af385mr553869585a.47.1789135812492;
+        Fri, 11 Sep 2026 07:10:12 -0700 (PDT)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Fri, 11 Sep 2026 14:08:46 +0000
-Subject: [PATCH RFC v2 08/15] bpf, x86: Maintain Tasks RCU trampoline
- nesting in the BPF trampoline
+Date: Fri, 11 Sep 2026 14:08:47 +0000
+Subject: [PATCH RFC v2 09/15] arm64: ftrace: Maintain Tasks RCU trampoline
+ nesting in ftrace_caller
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260911-b4-rcu-tasks-preempt-qs-v2-8-eaaa61ed2da4@toxicpanda.com>
+Message-Id: <20260911-b4-rcu-tasks-preempt-qs-v2-9-eaaa61ed2da4@toxicpanda.com>
 References: <20260911-b4-rcu-tasks-preempt-qs-v2-0-eaaa61ed2da4@toxicpanda.com>
 In-Reply-To: <20260911-b4-rcu-tasks-preempt-qs-v2-0-eaaa61ed2da4@toxicpanda.com>
 To: "Paul E. McKenney" <paulmck@kernel.org>, 
@@ -124,126 +124,152 @@ Cc: Andy Lutomirski <luto@kernel.org>,
  bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1789135736; l=4464;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1789135736; l=5217;
  i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=ZoHASPcgXPkyj8nhWq6Qxe/k1AFcC7iFexyU3IrpvR8=;
+ bh=xqTPn5S4ER1XAZhtIYfJFNG5V6jdP8hXJAwXIfHAJeM=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
  JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QNGMQXlnJ9mLTB5EylkME94aCeeA53rjkqD+SHndTEJHVSfeCPYIUtSGAIP6GARv7tJy5dM1hBK
- jP1T+H+zt3A0=
+ QDdDEdIwM05h7b7JvpgB0Ncpvko1HStiAd9VzLg7h8HjWsQnjthe7VWx1bLRiDUbfVMTbRgUiKe
+ YsgeGrk28wQI=
 X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
  fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-c1860d/1789135810-D534D87B-3E826EF8/0/0
+X-purgate-ID: tlsNG-33051d/1789135814-6C2E04E9-D183B6A6/0/0
 X-purgate-type: clean
-X-purgate-size: 4466
+X-purgate-size: 5219
 
-Emit an increment of current->rcu_tramp_nesting once the trampoline's
-frame is set up and a decrement before the final register restore, so
-that a task preempted while running fentry/fexit/fmod_ret/LSM programs
-or the __bpf_tramp_enter()/__bpf_tramp_exit() glue is not treated as
-Tasks-RCU quiescent.  Drop the count around the call to the original
-function: that may run arbitrarily long without sleeping and must not pin
-a Tasks RCU grace period, and the trampoline frame above it is held by
-im->pcref rather than by Tasks RCU (see bpf_tramp_image_put()).  The
-fmod_ret early-exit branch and the ip_after_call -> ip_epilogue poke both
-skip the decrement/increment pair around the original call, so the count
-stays balanced on every path.
+Bracket the call out to the ftrace_ops callback in ftrace_caller with an
+increment/decrement of current->rcu_tramp_nesting, using x12/w13 which
+are scratch there.  The read-modify-write is not atomic, but only current
+modifies the count and every interrupting user is balanced, so nothing is
+lost.
 
-The sequence is "mov r11, gs:[current_task]; inc/dec dword [r11 + off]";
-r11 is scratch at every emission point and (u32)&current_task is a valid
-sign-extended %gs-absolute with the current per-CPU layout, the same form
-the JIT already uses for this_cpu_off.  The image is dynamically
-allocated text, so the instructions outside the bracketed region are
-covered by the irq-exit IP check.
+ftrace_caller itself, including the early CALL_OPS direct path and the
+late direct tail that carry a BPF trampoline address in x17 with the
+count at zero, is static kernel text: add an ftrace_static_tramp_end
+marker after ftrace_stub_direct_tramp and provide
+arch_rcu_tasks_ip_in_trampoline() covering
+[ftrace_caller, ftrace_static_tramp_end) so the irq-exit check treats a
+task interrupted anywhere in it as inside a trampoline.
+
+The hook is built only under CONFIG_RCU_TASKS_PREEMPT_QS, which arm64
+does not select until a later patch.
 
 Assisted-by: LLM
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- arch/x86/net/bpf_jit_comp.c | 43 +++++++++++++++++++++++++++++++++++++++++++
- 1 file changed, 43 insertions(+)
+ arch/arm64/kernel/asm-offsets.c  |  3 +++
+ arch/arm64/kernel/entry-ftrace.S | 35 +++++++++++++++++++++++++++++++++++
+ arch/arm64/kernel/ftrace.c       | 16 ++++++++++++++++
+ 3 files changed, 54 insertions(+)
 
-diff --git a/arch/x86/net/bpf_jit_comp.c b/arch/x86/net/bpf_jit_comp.c
-index 2853e87797a7..a375c1b7bd50 100644
---- a/arch/x86/net/bpf_jit_comp.c
-+++ b/arch/x86/net/bpf_jit_comp.c
-@@ -722,6 +722,31 @@ static void emit_indirect_jump(u8 **pprog, int bpf_reg, u8 *ip)
- 	*pprog = prog;
- }
- 
-+/*
-+ * Tasks RCU trampoline nesting, see rcu_tasks_trampoline_enter().
-+ *
-+ *   mov r11, QWORD PTR gs:[current_task]
-+ *   inc/dec DWORD PTR [r11 + offsetof(struct task_struct, rcu_tramp_nesting)]
-+ *
-+ * r11 (AUX_REG) is scratch in the trampoline at every point this is emitted.
-+ */
-+static void emit_rcu_tasks_tramp_nesting(u8 **pprog, bool enter)
-+{
-+#ifdef CONFIG_TASKS_RCU
-+	u8 *prog = *pprog;
-+
-+	/* mov r11, gs:[abs32] */
-+	EMIT2(0x65, 0x4C);
-+	EMIT3(0x8B, 0x1C, 0x25);
-+	EMIT((u32)(unsigned long)&current_task, 4);
-+	/* inc/dec dword ptr [r11 + disp32] */
-+	EMIT3(0x41, 0xFF, enter ? 0x83 : 0x8B);
-+	EMIT(offsetof(struct task_struct, rcu_tramp_nesting), 4);
-+
-+	*pprog = prog;
+diff --git a/arch/arm64/kernel/asm-offsets.c b/arch/arm64/kernel/asm-offsets.c
+index 9c853ed3ceab..f6655a284f18 100644
+--- a/arch/arm64/kernel/asm-offsets.c
++++ b/arch/arm64/kernel/asm-offsets.c
+@@ -39,6 +39,9 @@ int main(void)
+   DEFINE(TSK_STACK,		offsetof(struct task_struct, stack));
+ #ifdef CONFIG_STACKPROTECTOR
+   DEFINE(TSK_STACK_CANARY,	offsetof(struct task_struct, stack_canary));
 +#endif
++#ifdef CONFIG_TASKS_RCU
++  DEFINE(TSK_RCU_TRAMP_NESTING,	offsetof(struct task_struct, rcu_tramp_nesting));
+ #endif
+   BLANK();
+   DEFINE(THREAD_CPU_CONTEXT,	offsetof(struct task_struct, thread.cpu_context));
+diff --git a/arch/arm64/kernel/entry-ftrace.S b/arch/arm64/kernel/entry-ftrace.S
+index 025140caafe7..46a102e7199a 100644
+--- a/arch/arm64/kernel/entry-ftrace.S
++++ b/arch/arm64/kernel/entry-ftrace.S
+@@ -14,6 +14,33 @@
+ #include <asm/insn.h>
+ 
+ #ifdef CONFIG_DYNAMIC_FTRACE_WITH_ARGS
++/*
++ * Tasks RCU trampoline nesting, see rcu_tasks_trampoline_enter().  The whole
++ * of ftrace_caller is treated as trampoline text by the irq-exit IP check (see
++ * arch_rcu_tasks_ip_in_trampoline()), so these only need to bracket the call
++ * out to ops->func; everything before the increment and after the decrement,
++ * including the direct-call tails that carry a BPF trampoline address in x17,
++ * is covered by that.  The count is only modified by current and every nested
++ * user (interrupts) is balanced, so a plain ldr/add/str is sufficient.
++ */
++	.macro rcu_tasks_tramp_enter, tsk:req, tmp:req
++#ifdef CONFIG_TASKS_RCU
++	mrs	\tsk, sp_el0
++	ldr	\tmp, [\tsk, #TSK_RCU_TRAMP_NESTING]
++	add	\tmp, \tmp, #1
++	str	\tmp, [\tsk, #TSK_RCU_TRAMP_NESTING]
++#endif
++	.endm
++
++	.macro rcu_tasks_tramp_exit, tsk:req, tmp:req
++#ifdef CONFIG_TASKS_RCU
++	mrs	\tsk, sp_el0
++	ldr	\tmp, [\tsk, #TSK_RCU_TRAMP_NESTING]
++	sub	\tmp, \tmp, #1
++	str	\tmp, [\tsk, #TSK_RCU_TRAMP_NESTING]
++#endif
++	.endm
++
+ /*
+  * Due to -fpatchable-function-entry=2, the compiler has placed two NOPs before
+  * the regular function prologue. For an enabled callsite, ftrace_init_nop() and
+@@ -94,6 +121,8 @@ SYM_CODE_START(ftrace_caller)
+ 	stp	x29, x30, [sp, #FREGS_SIZE]
+ 	add	x29, sp, #FREGS_SIZE
+ 
++	rcu_tasks_tramp_enter x12, w13
++
+ 	/* Prepare arguments for the tracer func */
+ 	sub	x0, x30, #AARCH64_INSN_SIZE		// ip (callsite's BL insn)
+ 	mov	x1, x9					// parent_ip (callsite's LR)
+@@ -111,6 +140,8 @@ SYM_INNER_LABEL(ftrace_call, SYM_L_GLOBAL)
+ 	bl      ftrace_stub				// func(ip, parent_ip, op, regs)
+ #endif
+ 
++	rcu_tasks_tramp_exit x12, w13
++
+ /*
+  * At the callsite x0-x8 and x19-x30 were live. Any C code will have preserved
+  * x19-x29 per the AAPCS, and we created frame records upon entry, so we need
+@@ -178,6 +209,10 @@ SYM_CODE_START(ftrace_stub_direct_tramp)
+ SYM_CODE_END(ftrace_stub_direct_tramp)
+ #endif /* CONFIG_DYNAMIC_FTRACE_WITH_DIRECT_CALLS */
+ 
++/* End of [ftrace_caller, ...) for arch_rcu_tasks_ip_in_trampoline(). */
++SYM_CODE_START(ftrace_static_tramp_end)
++SYM_CODE_END(ftrace_static_tramp_end)
++
+ #else /* CONFIG_DYNAMIC_FTRACE_WITH_ARGS */
+ 
+ /*
+diff --git a/arch/arm64/kernel/ftrace.c b/arch/arm64/kernel/ftrace.c
+index e1a3c0b3a051..1b7ac2afed0d 100644
+--- a/arch/arm64/kernel/ftrace.c
++++ b/arch/arm64/kernel/ftrace.c
+@@ -17,6 +17,22 @@
+ #include <asm/insn.h>
+ #include <asm/text-patching.h>
+ 
++#ifdef CONFIG_RCU_TASKS_PREEMPT_QS
++extern void ftrace_static_tramp_end(void);
++
++/*
++ * See rcu_tasks_ip_in_trampoline().  ftrace_caller and ftrace_stub_direct_tramp
++ * are core kernel text but must be treated as trampolines: a task preempted in
++ * them may be carrying an ops pointer (x11) or a direct-call BPF trampoline
++ * address (x17) whose lifetime is guarded only by Tasks RCU.
++ */
++bool arch_rcu_tasks_ip_in_trampoline(unsigned long ip)
++{
++	return ip >= (unsigned long)ftrace_caller &&
++	       ip <  (unsigned long)ftrace_static_tramp_end;
 +}
++#endif
 +
- static void emit_return(u8 **pprog, u8 *ip)
- {
- 	u8 *prog = *pprog;
-@@ -3610,6 +3635,13 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
- 	/* mov QWORD PTR [rbp - rbx_off], rbx */
- 	emit_stx(&prog, BPF_DW, BPF_REG_FP, BPF_REG_6, -rbx_off);
- 
-+	/*
-+	 * From here until the matching decrement before the final return, a
-+	 * preemption of this task is not a Tasks RCU quiescent state.  The
-+	 * instructions above this point are covered by the irq-exit IP check.
-+	 */
-+	emit_rcu_tasks_tramp_nesting(&prog, true);
-+
- 	func_meta = nr_regs;
- 	/* Store number of argument registers of the traced function */
- 	emit_store_stack_imm64(&prog, BPF_REG_0, -func_meta_off, func_meta);
-@@ -3670,6 +3702,13 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
- 			LOAD_TRAMP_TAIL_CALL_CNT_PTR(stack_size);
- 		}
- 
-+		/*
-+		 * The original function may run for a long time without
-+		 * sleeping; do not let it pin a Tasks RCU grace period.  The
-+		 * trampoline frame above it is held by im->pcref
-+		 * (__bpf_tramp_enter()), not by Tasks RCU, across the call.
-+		 */
-+		emit_rcu_tasks_tramp_nesting(&prog, false);
- 		if (flags & BPF_TRAMP_F_ORIG_STACK) {
- 			emit_ldx(&prog, BPF_DW, BPF_REG_6, BPF_REG_FP, 8);
- 			EMIT2(0xff, 0xd3); /* call *rbx */
-@@ -3680,6 +3719,7 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
- 				goto cleanup;
- 			}
- 		}
-+		emit_rcu_tasks_tramp_nesting(&prog, true);
- 		/* remember return value in a stack for bpf prog to access */
- 		emit_stx(&prog, BPF_DW, BPF_REG_FP, BPF_REG_0, -8);
- 		im->ip_after_call = image + (prog - (u8 *)rw_image);
-@@ -3741,6 +3781,9 @@ static int __arch_prepare_bpf_trampoline(struct bpf_tramp_image *im, void *rw_im
- 	if (save_ret)
- 		emit_ldx(&prog, BPF_DW, BPF_REG_0, BPF_REG_FP, -8);
- 
-+	/* Remaining instructions are covered by the irq-exit IP check. */
-+	emit_rcu_tasks_tramp_nesting(&prog, false);
-+
- 	emit_ldx(&prog, BPF_DW, BPF_REG_6, BPF_REG_FP, -rbx_off);
- 
- 	EMIT1(0xC9); /* leave */
+ #ifdef CONFIG_DYNAMIC_FTRACE_WITH_ARGS
+ struct fregs_offset {
+ 	const char *name;
 
 -- 
 2.55.0
