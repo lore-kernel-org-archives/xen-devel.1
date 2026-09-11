@@ -4,52 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77D1EC88E50
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 12:53:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1416616.1645586 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D13A4C88E4D
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 12:57:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1416627.1645595 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x50l7-0000O0-7L; Fri, 11 Sep 2026 12:53:37 +0000
+	id 1x50oN-0000we-Kz; Fri, 11 Sep 2026 12:56:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1416616.1645586; Fri, 11 Sep 2026 12:53:37 +0000
+Received: by outflank-mailman (output) from mailman id 1416627.1645595; Fri, 11 Sep 2026 12:56:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x50l7-0000Nt-3L; Fri, 11 Sep 2026 12:53:37 +0000
-Received: by outflank-mailman (input) for mailman id 1416616;
- Fri, 11 Sep 2026 12:53:35 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <tzimmermann@suse.de>) id 1x50l5-0000Nh-6g
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 12:53:35 +0000
+	id 1x50oN-0000wX-Fz; Fri, 11 Sep 2026 12:56:59 +0000
+Received: by outflank-mailman (input) for mailman id 1416627;
+ Fri, 11 Sep 2026 12:56:57 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x50oL-0000wP-BS
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 12:56:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x50l4-009H6T-EV
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:53:34 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x50oK-00E9pL-OU
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:56:56 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <tzimmermann@suse.de>)
- id 6aa3f9c1-e002-0a2a0a5209dd-0a2a450ca83c-18
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 14:53:34 +0200
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <tzimmermann@suse.de>)
- id 6aa3f9ce-f479-0a2a450c0019-c387df82dbae-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 14:53:34 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 7F3CE21D68;
- Fri, 11 Sep 2026 12:53:25 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id C4224132D3;
- Fri, 11 Sep 2026 12:53:24 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id ZWqjKMT5o2oZGQAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Fri, 11 Sep 2026 12:53:24 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aa3fa7f-8faa-0a2a0a5109dd-0a2a4502c0be-40
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 14:56:56 +0200
+Received: from [209.85.208.44] (helo=mail-ed1-f44.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aa3fa98-6ca4-0a2a45020019-d155d02ce0d0-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 14:56:56 +0200
+Received: by mail-ed1-f44.google.com with SMTP id
+ 4fb4d7f45d1cf-6a20319d030so1333898a12.2
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 05:56:56 -0700 (PDT)
+Received: from [172.19.143.248] (IW396200.net.t-com.hr. [195.29.234.54])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c2966022298sm75617566b.17.2026.09.11.05.56.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 11 Sep 2026 05:56:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,372 +52,195 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1789131209; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=7cPvMY85MgtxziRNodVv1JV9DMlJY8hzgkmogmM3/aM=;
-	b=OKa28g7Hz0OZmTxpxbpvJiL1SyqvtmVIe/gf45xG1+SxTIecPkIgCeO8e7jRWT9Edp3Nzp
-	kkpDUSHEkFxg+ALv2/KSLSoGO51AyulIooWXSpc4q7FBhAQ1leB1PNryHjs1oED/dpaA9f
-	WSpvX7HTjB9bgGhS2z6f7fcRJ2INMPA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1789131209;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=7cPvMY85MgtxziRNodVv1JV9DMlJY8hzgkmogmM3/aM=;
-	b=EQZ92462m3in2rUsjklW3jBlyIsr1knMJo/htxMFY23i5ahmZwmQTGQZeUnppwahHJvOU+
-	yCXL+gJvdiqqttCw==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=CkqBOwP6;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=Drw68AFG
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1789131205; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=7cPvMY85MgtxziRNodVv1JV9DMlJY8hzgkmogmM3/aM=;
-	b=CkqBOwP6HJ3/Q+s0PlQlwnlubuR8qyHDf4uhhTD3QpwY7B2ElmDAgxuiVOpfjXRoKwYloW
-	Ft4hJEiveX5RygG334lKs0CAyAm54+FtUtwpRlKSwnGHjKOhw/D7AuJuNe5V4E5WR/kR5G
-	pjOcRlb1TS1aSybQhyHLTUtQyGNcWcw=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1789131205;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=7cPvMY85MgtxziRNodVv1JV9DMlJY8hzgkmogmM3/aM=;
-	b=Drw68AFGuLEDDqN21X4UVjPrXe9/lZMq6jUIfXO0Lp4J5cU0HFSJa7BQqfAY14Q7MsZMjS
-	s8rMYcd82ZevW1CA==
-Message-ID: <72ac181e-51f9-408e-8c5d-cb24e553a0f8@suse.de>
-Date: Fri, 11 Sep 2026 14:53:24 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789131416; x=1789736216; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=FyjXMl5Q8kG/H2J4L7UK8gHoWxwkk2OabczX9ehfwRw=;
+        b=NqHg8GHn18tYIgtZ8Dn/5fOH0LLriEeuVGdWd7iaTpD80JP7fI7ZyBXr2jPalm8rxl
+         RECFI+8kSUIBZkrv6x8WKxNCsy1pKnNuQ9Zfvq5EkuLJNtz48zd+cZSvW+BE+VvKZDrd
+         Ei0pX7Q+TusFSMf5EoFL1cY95Zmm1Wiz10MB/2gCop7b29Qd3nEOH0bttrKJxH81ctJx
+         cnvi50mM8yeRKvcS6DElepEa7Kr4nO+Kv5/yd7Yii6ogJTg3+WDMb5Kq/PDyVVL48a3J
+         5kFJjataH3V1JoRIxAPG8KOBIrh0S3OVq/KH1Al9pzl03pHtp/i8A0TweLH/Bxi/zkcA
+         iA6w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789131416; x=1789736216;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=FyjXMl5Q8kG/H2J4L7UK8gHoWxwkk2OabczX9ehfwRw=;
+        b=bVUmWDh7wrncsP4DLHHD3Q+FLgjRIPdmXVg2zcHaqS43JD7vggiHyQ/z9689WY3jUm
+         iRdJvoP2B1eRjosuz9rTaxg6iWpIO9Y2haoY1G3k2sOCDoQv7hjfUquFnjxbnqucowYR
+         NXpruM/Xom2jzsEvJqtpvAvB+a8arhUZW84dGI6o2qFjJ2hGne0ethDlIUunygN5MhIn
+         5JbDEjsHPpE1WOIMPaHmyeRePFG8C1zgiM27LyLV2vwxs63ansW+ifeXcjEjw9cB0IS4
+         x18MFPUCVgYWsvtnSuUl7Y000XtrfgYsJQ/inLjgGz7sqxMsj6pKs41Lt1xQnh7lSacT
+         tRrA==
+X-Gm-Message-State: AFuF++muR03xykoOnxfewkI8IvO+wA2mjakMdQ1bOSLB+ojOcDPUUko/
+	nVN8TcjTzEpyugNzSNSgzOj0mT9HHSOALUzaiVisw/T7IHBaHj/nloUY
+X-Gm-Gg: AYBFou3gESevI2Jyiapw9B3MAsZMhblitwDOuvRojtuNrUDTPoNvZSxOt0Grj9vUxPR
+	i/9qvD5gmXEXRomsyA1+2rGtHXRR9T7W5oNOJ6JtkGjuX9XgYw+nhV+WCKQDwPeLGTYnJ39Zf12
+	RimMP/+1UeBGOjAw0dHRsHD453webHFtIC+CCOA+42ydotfiEFi3Ag90/Q2B60WCAf2c3e4EFX7
+	/YCL5BSeE7DqF7qMoEwmmx6E5gTNgkBeC8dH4I15pLrHcCpq6zGyxQ6B1zzRVo9IN2HNCUtmZy3
+	XIis8NhkG3mp7koGXUkQCgMF1BPnHpzs+2ZGf4fbVwI4RsIzUihyNfDSFTf35+TN4KSKKAHNHoG
+	Dbam78KcJ6t38YJfbxxjUeZpsxkJInDaxZClCOYulog1K+6V/mImApeIm2N0/SGUf2s3b6ZyEw4
+	tX2HAoHreaMAEryBvTZQQhVmGgaMmrGe28RLbi6IkfpTPKzX79vyhzwqmXqihWEfs5uAnsq5KSP
+	YJr1cBe3JBWn1qm4XKh5q3X81P+LXeP
+X-Received: by 2002:a17:906:6a0a:b0:c20:1c9d:8d4b with SMTP id a640c23a62f3a-c2966535268mr176537766b.2.1789131416018;
+        Fri, 11 Sep 2026 05:56:56 -0700 (PDT)
+Message-ID: <42ea4b01-422f-436f-b7bc-8b4f31283386@gmail.com>
+Date: Fri, 11 Sep 2026 14:56:54 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/8] drm/gm12u320: replace struct
- drm_simple_display_pipe with regular atomic helpers
-To: Ze Huang <ze.huang@oss.qualcomm.com>,
- Alexey Brodkin <abrodkin@synopsys.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Joel Stanley <joel@jms.id.au>,
- Andrew Jeffery <andrew@codeconstruct.com.au>, Frank Li <Frank.Li@nxp.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Linus Walleij <linusw@kernel.org>,
- Hans de Goede <hansg@kernel.org>, Alex Lanzano <lanzano.alex@gmail.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org,
- imx@lists.linux.dev, xen-devel@lists.xenproject.org
-References: <20260727-drm-simple-kms-removal-v3-0-cd5dc89858c6@oss.qualcomm.com>
- <20260727-drm-simple-kms-removal-v3-5-cd5dc89858c6@oss.qualcomm.com>
+Subject: Re: [PATCH v2 21/39] xen/riscv: resolve the faulting guest physical
+ address
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <c7975a131c229c721b2d4fe81c13fecd8deb4329.1787838835.git.oleksii.kurochko@gmail.com>
+ <1788955499.8631fc262581453bbf619ec5b2062170.1a0860e9a70000c4f3@vates.tech>
 Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <20260727-drm-simple-kms-removal-v3-5-cd5dc89858c6@oss.qualcomm.com>
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1788955499.8631fc262581453bbf619ec5b2062170.1a0860e9a70000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: 7F3CE21D68
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	FREEMAIL_TO(0.00)[oss.qualcomm.com,synopsys.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,jms.id.au,codeconstruct.com.au,nxp.com,pengutronix.de,epam.com];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.de:dkim,suse.de:email,suse.de:mid]
-X-purgate-ID: tlsNG-d25034/1789131214-766DEA5B-152CB0C7/0/0
-X-purgate-type: clean
-X-purgate-size: 9204
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1789131416-F0EA32AC-B3F1F23A/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 5435
 
-Hi
 
-Am 26.07.26 um 21:45 schrieb Ze Huang:
-> Convert gm12u320 to direct primary plane, CRTC and encoder setup.
->
-> Keep shadow-plane helper state, framebuffer access helpers and
-> no-scaling plane-state check from simple-KMS path.
->
-> Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Tested-by: Thomas Zimmermann <tzimmermann@suse.de>
-> Signed-off-by: Ze Huang <ze.huang@oss.qualcomm.com>
 
-I have added this patch to drm-misc-next.
+On 9/9/26 2:04 PM, Baptiste Le Duc wrote:
+>> Take the guest physical address from htval and stval: on a guest-page fault
+>> htval holds it shifted right by 2, so that an address wider than XLEN fits,
+>> and stval holds the faulting guest virtual address, whose two least
+>> significant bits are those of the guest physical address. The shift is done
+>> on paddr_t rather than on the raw register: a guest physical address is 34
+>> bits wide on RV32 with Sv32x4, so shifting an XLEN-wide value would drop its
+>> top two bits.
+>>
+>> Those two low bits come from stval only for a fault on an explicit access.
+>> Where one is taken on an implicit access made for VS-stage translation htval
+>> holds the address of the VS-stage PTE which could not be read, while stval
+>> still holds the guest virtual address which started the walk, and the low
+>> bits of the address written to htval are zero instead. htinst tells the two
+>> apart, which is what the spec points at it for.
+>>
+> I'd just precise (the spec is also not clear on this point though), what
+> is "current XLEN" here, clearly indicate that htval holds the GPA >> 2 and
 
-Best regards
-Thomas
+My understanding was that "current XLEN" == hypervisor XLEN as htval is 
+hypervisor register and has HSXLEN size so it was okay for me to have 
+just XLEN in the original commit message. But I am okay to use your 
+suggestion ...
 
->
-> ---
-> Changes in v3:
-> - Use commit-local plane state in the CRTC enable path when marking the first
->    frame dirty.
-> - Make the gm12u320 container helper static inline.
-> ---
->   drivers/gpu/drm/tiny/gm12u320.c | 138 ++++++++++++++++++++++++++++++++--------
->   1 file changed, 111 insertions(+), 27 deletions(-)
->
-> diff --git a/drivers/gpu/drm/tiny/gm12u320.c b/drivers/gpu/drm/tiny/gm12u320.c
-> index d73dfebb4353..afcf0dfff14b 100644
-> --- a/drivers/gpu/drm/tiny/gm12u320.c
-> +++ b/drivers/gpu/drm/tiny/gm12u320.c
-> @@ -8,6 +8,7 @@
->   #include <linux/usb.h>
->   
->   #include <drm/clients/drm_client_setup.h>
-> +#include <drm/drm_atomic.h>
->   #include <drm/drm_atomic_helper.h>
->   #include <drm/drm_atomic_state_helper.h>
->   #include <drm/drm_connector.h>
-> @@ -27,7 +28,6 @@
->   #include <drm/drm_modeset_helper_vtables.h>
->   #include <drm/drm_print.h>
->   #include <drm/drm_probe_helper.h>
-> -#include <drm/drm_simple_kms_helper.h>
->   
->   static bool eco_mode;
->   module_param(eco_mode, bool, 0644);
-> @@ -87,7 +87,9 @@ MODULE_PARM_DESC(eco_mode, "Turn on Eco mode (less bright, more silent)");
->   
->   struct gm12u320_device {
->   	struct drm_device	         dev;
-> -	struct drm_simple_display_pipe   pipe;
-> +	struct drm_plane	         plane;
-> +	struct drm_crtc		         crtc;
-> +	struct drm_encoder	         encoder;
->   	struct drm_connector	         conn;
->   	unsigned char                   *cmd_buf;
->   	unsigned char                   *data_buf[GM12U320_BLOCK_COUNT];
-> @@ -102,7 +104,10 @@ struct gm12u320_device {
->   	} fb_update;
->   };
->   
-> -#define to_gm12u320(__dev) container_of(__dev, struct gm12u320_device, dev)
-> +static inline struct gm12u320_device *to_gm12u320(struct drm_device *__dev)
-> +{
-> +	return container_of(__dev, struct gm12u320_device, dev);
-> +}
->   
->   static const char cmd_data[CMD_SIZE] = {
->   	0x55, 0x53, 0x42, 0x43, 0x00, 0x00, 0x00, 0x00,
-> @@ -554,43 +559,106 @@ static int gm12u320_conn_init(struct gm12u320_device *gm12u320)
->   }
->   
->   /* ------------------------------------------------------------------ */
-> -/* gm12u320 (simple) display pipe				      */
-> +/* gm12u320 display pipe					      */
->   
-> -static void gm12u320_pipe_enable(struct drm_simple_display_pipe *pipe,
-> -				 struct drm_crtc_state *crtc_state,
-> -				 struct drm_plane_state *plane_state)
-> +static void gm12u320_crtc_helper_atomic_enable(struct drm_crtc *crtc,
-> +					       struct drm_atomic_commit *commit)
->   {
->   	struct drm_rect rect = { 0, 0, GM12U320_USER_WIDTH, GM12U320_HEIGHT };
-> -	struct gm12u320_device *gm12u320 = to_gm12u320(pipe->crtc.dev);
-> -	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(plane_state);
-> +	struct gm12u320_device *gm12u320 = to_gm12u320(crtc->dev);
-> +	struct drm_plane_state *pstate = drm_atomic_get_new_plane_state(commit, &gm12u320->plane);
-> +	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(pstate);
->   
->   	gm12u320->fb_update.draw_status_timeout = FIRST_FRAME_TIMEOUT;
-> -	gm12u320_fb_mark_dirty(plane_state->fb, &shadow_plane_state->data[0], &rect);
-> +	gm12u320_fb_mark_dirty(pstate->fb, &shadow_plane_state->data[0], &rect);
->   }
->   
-> -static void gm12u320_pipe_disable(struct drm_simple_display_pipe *pipe)
-> +static void gm12u320_crtc_helper_atomic_disable(struct drm_crtc *crtc,
-> +						struct drm_atomic_commit *commit)
->   {
-> -	struct gm12u320_device *gm12u320 = to_gm12u320(pipe->crtc.dev);
-> +	struct gm12u320_device *gm12u320 = to_gm12u320(crtc->dev);
->   
->   	gm12u320_stop_fb_update(gm12u320);
->   }
->   
-> -static void gm12u320_pipe_update(struct drm_simple_display_pipe *pipe,
-> -				 struct drm_plane_state *old_state)
-> +static void gm12u320_plane_helper_atomic_update(struct drm_plane *plane,
-> +						struct drm_atomic_commit *commit)
->   {
-> -	struct drm_plane_state *state = pipe->plane.state;
-> +	struct drm_plane_state *old_state = drm_atomic_get_old_plane_state(commit, plane);
-> +	struct drm_plane_state *state = drm_atomic_get_new_plane_state(commit, plane);
->   	struct drm_shadow_plane_state *shadow_plane_state = to_drm_shadow_plane_state(state);
->   	struct drm_rect rect;
->   
-> +	if (!state->fb)
-> +		return;
-> +
->   	if (drm_atomic_helper_damage_merged(old_state, state, &rect))
->   		gm12u320_fb_mark_dirty(state->fb, &shadow_plane_state->data[0], &rect);
->   }
->   
-> -static const struct drm_simple_display_pipe_funcs gm12u320_pipe_funcs = {
-> -	.enable	    = gm12u320_pipe_enable,
-> -	.disable    = gm12u320_pipe_disable,
-> -	.update	    = gm12u320_pipe_update,
-> -	DRM_GEM_SIMPLE_DISPLAY_PIPE_SHADOW_PLANE_FUNCS,
-> +static const struct drm_plane_funcs gm12u320_plane_funcs = {
-> +	.update_plane	= drm_atomic_helper_update_plane,
-> +	.disable_plane	= drm_atomic_helper_disable_plane,
-> +	.destroy	= drm_plane_cleanup,
-> +	DRM_GEM_SHADOW_PLANE_FUNCS,
-> +};
-> +
-> +static int gm12u320_plane_helper_atomic_check(struct drm_plane *plane,
-> +					      struct drm_atomic_commit *commit)
-> +{
-> +	struct drm_plane_state *plane_state = drm_atomic_get_new_plane_state(commit, plane);
-> +	struct drm_crtc_state *crtc_state = NULL;
-> +
-> +	if (plane_state->crtc) {
-> +		crtc_state = drm_atomic_get_crtc_state(commit, plane_state->crtc);
-> +		if (IS_ERR(crtc_state))
-> +			return PTR_ERR(crtc_state);
-> +	}
-> +
-> +	return drm_atomic_helper_check_plane_state(plane_state, crtc_state,
-> +						   DRM_PLANE_NO_SCALING,
-> +						   DRM_PLANE_NO_SCALING,
-> +						   false, false);
-> +}
-> +
-> +static const struct drm_plane_helper_funcs gm12u320_plane_helper_funcs = {
-> +	DRM_GEM_SHADOW_PLANE_HELPER_FUNCS,
-> +	.atomic_check	= gm12u320_plane_helper_atomic_check,
-> +	.atomic_update	= gm12u320_plane_helper_atomic_update,
-> +};
-> +
-> +static int gm12u320_crtc_helper_atomic_check(struct drm_crtc *crtc,
-> +					     struct drm_atomic_commit *commit)
-> +{
-> +	struct drm_crtc_state *crtc_state = drm_atomic_get_new_crtc_state(commit, crtc);
-> +	int ret;
-> +
-> +	if (crtc_state->enable) {
-> +		ret = drm_atomic_helper_check_crtc_primary_plane(crtc_state);
-> +		if (ret)
-> +			return ret;
-> +	}
-> +
-> +	return drm_atomic_add_affected_planes(commit, crtc);
-> +}
-> +
-> +static const struct drm_crtc_helper_funcs gm12u320_crtc_helper_funcs = {
-> +	.atomic_check	= gm12u320_crtc_helper_atomic_check,
-> +	.atomic_enable	= gm12u320_crtc_helper_atomic_enable,
-> +	.atomic_disable	= gm12u320_crtc_helper_atomic_disable,
-> +};
-> +
-> +static const struct drm_crtc_funcs gm12u320_crtc_funcs = {
-> +	.set_config		= drm_atomic_helper_set_config,
-> +	.page_flip		= drm_atomic_helper_page_flip,
-> +	.reset			= drm_atomic_helper_crtc_reset,
-> +	.destroy		= drm_crtc_cleanup,
-> +	.atomic_duplicate_state	= drm_atomic_helper_crtc_duplicate_state,
-> +	.atomic_destroy_state	= drm_atomic_helper_crtc_destroy_state,
-> +};
-> +
-> +static const struct drm_encoder_funcs gm12u320_encoder_funcs = {
-> +	.destroy = drm_encoder_cleanup,
->   };
->   
->   static const uint32_t gm12u320_pipe_formats[] = {
-> @@ -677,13 +745,29 @@ static int gm12u320_usb_probe(struct usb_interface *interface,
->   	if (ret)
->   		return ret;
->   
-> -	ret = drm_simple_display_pipe_init(&gm12u320->dev,
-> -					   &gm12u320->pipe,
-> -					   &gm12u320_pipe_funcs,
-> -					   gm12u320_pipe_formats,
-> -					   ARRAY_SIZE(gm12u320_pipe_formats),
-> -					   gm12u320_pipe_modifiers,
-> -					   &gm12u320->conn);
-> +	ret = drm_universal_plane_init(dev, &gm12u320->plane, 0,
-> +				       &gm12u320_plane_funcs,
-> +				       gm12u320_pipe_formats,
-> +				       ARRAY_SIZE(gm12u320_pipe_formats),
-> +				       gm12u320_pipe_modifiers,
-> +				       DRM_PLANE_TYPE_PRIMARY, NULL);
-> +	if (ret)
-> +		return ret;
-> +	drm_plane_helper_add(&gm12u320->plane, &gm12u320_plane_helper_funcs);
-> +
-> +	ret = drm_crtc_init_with_planes(dev, &gm12u320->crtc, &gm12u320->plane, NULL,
-> +					&gm12u320_crtc_funcs, NULL);
-> +	if (ret)
-> +		return ret;
-> +	drm_crtc_helper_add(&gm12u320->crtc, &gm12u320_crtc_helper_funcs);
-> +
-> +	ret = drm_encoder_init(dev, &gm12u320->encoder, &gm12u320_encoder_funcs,
-> +			       DRM_MODE_ENCODER_NONE, NULL);
-> +	if (ret)
-> +		return ret;
-> +	gm12u320->encoder.possible_crtcs = drm_crtc_mask(&gm12u320->crtc);
-> +
-> +	ret = drm_connector_attach_encoder(&gm12u320->conn, &gm12u320->encoder);
->   	if (ret)
->   		return ret;
->   
->
+> stval holds VGA and also put the two different cases we need to
+> distinguish clearly:
+> ```
+> Recover the guest physical address from htval and stval. On a guest-page
+> fault to hypervisor, htval holds the guest physical address shifted
+> right by 2, so that an address wider than HSXLEN fits, and stval holds
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
-GF: Jochen Jaser, Andrew McDonald, (HRB 36809, AG Nürnberg)
+... here.
 
+> the faulting guest virtual address. The shift is done on paddr_t rather
+> than on the raw register: a guest physical address is 34 bits wide on
+> RV32 with Sv32x4, so shifting an XLEN-wide value would drop its top two
+> bits.
+> 
+> However, there are two cases to distinguish when recovering the
+> faulting GPA:
+>      - Explicit memory access: we use the two least significant bits of
+>      stval, which are the same as those of the guest physical
+>      address.
+>      - Implicit memory access for VS-stage translation: the two least
+>      significant bits of htval are zero.
+
+The original phrasing "the two least significant bits of htval are zero" 
+is inaccurate for the following reasons:
+- htval holds a shifted address (GPA >> 2): The htval CSR stores the 
+faulting Guest Physical Address (GPA) shifted right by 2 bits. As a 
+result, the two least significant bits of htval (htval[1:0]) actually 
+correspond to bits 2 and 3 of the original GPA (GPA[3:2]).
+
+- htval bits are not guaranteed to be zero: Implicit memory accesses 
+during VS-stage address translation fetch PTEs that are 4-byte aligned 
+(Sv32) or 8-byte aligned (Sv39/Sv48/Sv57). Since PTEs can reside at 
+offsets like 0x04, 0x08, or 0x0C, GPA (and therefore htval[1:0]) can be 
+non-zero.
+
+- What is actually guaranteed to be zero: Because all VS-stage PTE 
+accesses are at least 4-byte aligned, it is the lowest two bits of the 
+unshifted Guest Physical Address (GPA[1:0]) that are guaranteed to be 
+00, not the low bits of htval.
+
+So here I think we want to clarify then:
+```
+Implicit memory access for VS-stage translation: the two least 
+significant bits of the guest physical address (GPA[1:0]) are zero
+```
+
+> 
+> These two cases can be distinguished using the value provided in
+> register htinst.
+> ```
+>>
+>> stval needs no check against an ISA extension: a guest-page fault writes it
+>> with the faulting guest virtual address regardless. Sstvala would not be the
+>> right thing to test for either (it covers stval across every trap type
+>> which writes it, a wider guarantee than what is needed here).
+>>
+>> htval does need one. The H extension lets an implementation write it with
+>> either the faulting address or zero, so without Shtvala a zero htval cannot
+>> be told apart from a genuine fault on guest physical address 0-3, and the
+>> address has to be recovered by decoding the access and walking the VS-stage
+>> page tables in software instead. That is left as a TODO, and until it is
+>> written such hardware panics rather than acting on an address which may not
+>> be the one which faulted.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>>
+>> diff --git a/xen/arch/riscv/emulate.c b/xen/arch/riscv/emulate.c
+>> index f9da075104..ff530ef2df 100644
+>> --- a/xen/arch/riscv/emulate.c
+>> +++ b/xen/arch/riscv/emulate.c
+>> @@ -9,6 +9,7 @@
+>>   #include <xen/sched.h>
+>>   #include <xen/types.h>
+>>   
+>> +#include <asm/cpufeature.h>
+>>   #include <asm/csr.h>
+>>   #include <asm/current.h>
+>>   #include <asm/emulate.h>
+>> @@ -62,10 +63,28 @@ static bool htinst_is_pseudo(unsigned long htinst)
+>>       }
+>>   }
+>>   
+>> -/* Reconstruct the guest physical address of the access which faulted. */
+>> +/* Resolves the guest physical address the access faulted on into @gf->gpa. */
+> Why did you change the comment apart for adding @gf->gpa? I think the
+> "reconstruct" is more clear but there might be another reason why you
+> changed it.
+> 
+
+I thought that it will just a little bit clearer (and anyway it should a 
+part of another patch...) so I will revert the change here and go with 
+"reconstruct".
+
+Thanks.
+
+~ Oleksii
 
 
