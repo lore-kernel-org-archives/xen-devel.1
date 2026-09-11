@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7CAA4C88E45
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:10:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1416857.1645801 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64D7FC88E59
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:10:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1416858.1645810 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x51x0-0005ws-TH; Fri, 11 Sep 2026 14:09:58 +0000
+	id 1x51x3-0006Br-9p; Fri, 11 Sep 2026 14:10:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1416857.1645801; Fri, 11 Sep 2026 14:09:58 +0000
+Received: by outflank-mailman (output) from mailman id 1416858.1645810; Fri, 11 Sep 2026 14:10:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x51x0-0005wl-Pl; Fri, 11 Sep 2026 14:09:58 +0000
-Received: by outflank-mailman (input) for mailman id 1416857;
- Fri, 11 Sep 2026 14:09:57 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x51x3-0006Bi-61; Fri, 11 Sep 2026 14:10:01 +0000
+Received: by outflank-mailman (input) for mailman id 1416858;
+ Fri, 11 Sep 2026 14:10:00 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1x51wz-0005wJ-Q3
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:09:57 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1x51x2-00069z-28
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:10:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x51wz-009TfM-74
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:09:57 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x51x1-00E9V9-FE
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:09:59 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa40b98-bab6-0a2a0a5309dd-0a2a4509a768-46
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:09:57 +0200
-Received: from [209.85.128.179] (helo=mail-yw1-f179.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa40bb2-2eae-0a2a0a5409dd-0a2a450497e8-20
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:09:59 +0200
+Received: from [209.85.128.178] (helo=mail-yw1-f178.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa40bb4-be1a-0a2a45090019-d15580b3d16e-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:09:57 +0200
-Received: by mail-yw1-f179.google.com with SMTP id
- 00721157ae682-8664769db58so7635247b3.3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 07:09:56 -0700 (PDT)
+ id 6aa40bb6-b57f-0a2a45040019-d15580b2c9a0-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:09:59 +0200
+Received: by mail-yw1-f178.google.com with SMTP id
+ 00721157ae682-86c0e4dd49cso9235347b3.3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 07:09:58 -0700 (PDT)
 Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
  [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-9120f4d0700sm22061896d6.38.2026.09.11.07.09.53
+ af79cd13be357-939e8047a4dsm255725685a.23.2026.09.11.07.09.56
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 11 Sep 2026 07:09:53 -0700 (PDT)
+ Fri, 11 Sep 2026 07:09:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,51 +55,51 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1789135795; x=1789740595; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1789135798; x=1789740598; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=5run1FbtWhLPrIbIpcsdoDpDcAIfw1LixKxJKXXjMZI=;
-        b=jc1RD6ctevXEPgn+sQIvLqY7WwEgJkddRw6MasTL4Xn9a5+TFC16wWwWMTnuyTrxOo
-         gh4aCNpDC10bh0OWzBsA3aaO6iuSllQncokB6ZlhBYSg/TV/n3sk62NPPI0K+0RRwJ3t
-         a+7XBZFHNz2hebuHzIS6jY7MuzS20+H7uE1TPmaW1TTj8h6MyTL6NKd4t63FLksP/4DS
-         PrAVafVIWZxf41WWC37cs9UaZUbJTNYcYRrnKdI7GI4kafjAdzmaxe2EzANM7M+fUzlM
-         fz4Hs258ubG5K8GtRLrB94G5bF7j98DcyohhTmhQeFGc5ZTOSPFIB5zr3fq3EymfT5Cg
-         qs/A==
+        bh=dPfI0hp8i5ODnb7Ti+2mvm8Dl2bKUUBUiZ4EzuwrKLQ=;
+        b=NiE7GNK5Xk8hFJegGxEnIGYK9q7Gp54jBAMQnpFvn5tlf0pr4bh/q5kTIwv2dX54gN
+         iYUGX2k3NxDC09CYG478fRCWm0zxLdSHnlUzCHXqnQuUJDFkajKBIDyH+WZqxBTPuIvm
+         e6XJsFYOCETuU+DUKHhva7e+OFb2whbU9brY/H2FlGFQ1/9cPkf08EQV3IhtuVdcgNIf
+         c3F/OX5QXcdlDegna68S3DUoD3DtujQrAPUU13ZfAOaA79ZcuscVuFOJ5f8aaIgc/R+G
+         dJdWukyO/pYMhlMxSMkRJiMTZjPs7r4p3edv9W2/eB70UrckNicUwNcJ6heVFqJtoTGt
+         e5UQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789135795; x=1789740595;
+        d=1e100.net; s=20251104; t=1789135798; x=1789740598;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=5run1FbtWhLPrIbIpcsdoDpDcAIfw1LixKxJKXXjMZI=;
-        b=Qb8PPgpBCePXjJ39MoCoHPNUm8DM+5dTe21DwO/KoEMH6LzV1j1xeUkgCY/DbMIqnx
-         kWAk2KXf9gXg2eysWeenhw8DA/VOHxJQqrJ1qbMI+82k6jyZx5lRa4i1kcBb0QbqL8cZ
-         ap1fcCV7oOYvMHjuRwu1UjBDW5ZFMGK4Tf4Hlu3ANkgco4m9WD23f1PtnHkiWAGpWFae
-         WmIFZAIXXktjiNJOAc4sNT3p+K+w6C80NAIV78JU5Uf4FpWaHl4/ctgVSuSbY4wVW4zl
-         A+LxhpPwXjnw4MHdjuznq4rYZWzac4mnCKm7iMCQOH34KcE7T7Xj4qTZR4Zvk8vzfJyK
-         jLNQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzAHPG39eyYt2GYBdHHVC8NgoSk2iZnhyOcjIeW9YtZIyefNseZ7aFCtDHqaavJmLckLwRTS0GIPrg=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kZS4YupNoVo5gY8ICfgO55+2Oc6mqhDDpO4vHu35Aj3FyioLh5
-	oCEa16gZj7hZ42hlhICAJuQftwyWNn9wZ1PBC1wkywRC/ZgNyrizvWg/wFYbcayul0k=
-X-Gm-Gg: AYBFou13e50IkhAYgclDyCIpfBoiYyf5ZJhndj7mirPnAq01sXkw4USzuD8R8XiJSWd
-	bMsFB8Xr/53UmfTDM3by1cDW7+4JnjV0kJWkpB5hy5BcTCAk5WCPphgDqezqNxCjmAifS8L9ta5
-	Zv8dtUdq3tH79hIwjrz51VeE6xJX+cXwrpNw4NL7l+yhntNd5WMFRHIxMwyG3gKNDWHMkHrGrzo
-	Hi7WuV7LflmwNiMD21PnGO58PXx51x/72zliZnSsqPSzlP7PMNvrar0O3MN9VQp865/WbmNwWj+
-	/n8K9SG2Wzx53csnnzmec/BDsCkU7ZBDeMOuWvGN14vO3ggOp+B/qaMCCu1xTJ8haiNFB8bkGj3
-	bMRdvD3kFN23eix/r6IueoF2S9ahY/RV3v5H/cc3HuHzNfU+/B/K/ZmtjGyc+5/1QJbQ7viV4lM
-	CBRUipdafQyB1t4idoSlqUtWzNXPpjhx2qwG3V7f+pIXmjjWXML6WoKnEcZGLZNwLxHzbeEutJU
-	auwv6ViM/sEwWkcGuIGcRhZsPZsqYCaXlyduzWUJfH8O/f65OvyrMBA
-X-Received: by 2002:a05:690c:10c:b0:873:5c0f:27f with SMTP id 00721157ae682-884b183fa8fmr15728927b3.41.1789135795285;
-        Fri, 11 Sep 2026 07:09:55 -0700 (PDT)
+        bh=dPfI0hp8i5ODnb7Ti+2mvm8Dl2bKUUBUiZ4EzuwrKLQ=;
+        b=HBaaLJS5G4VAf23aqx/A+Rb8K2L5rXzsLluHzAbGgIe6EPszG5N1U5l7SSK+cIVV9a
+         pxXpCWNOz5W3Qze27z0UThcLlfvcsbHPBl8fSE2xI7clm1H33p9NL/MXKFHTSecNBr+4
+         R5me2dMPcfJ+QqScIsFNU7odJcyQ7XogXqiCgQT55hBK1b6cRvVbhhykN1P1v+WO8VrP
+         xDb5TUTjZ6s+f0qb8Xlk9R6mOophuGacQqesFzWwZmRuYUcN+dOy0pKlut+mkcCeLApN
+         Efxq9kY6PYDjAhJG8aBGcZ22fQeBQ2Am3L3mAr1hnwDklXe+J+Qen4tQpUy6kXKK/3uZ
+         sVFA==
+X-Forwarded-Encrypted: i=1; AKwUvBywBBhhciAi3Bif872zNSZwKIGvB97r1I7/TWSWgFvPyifKMKSw76JBcp7Jo+PVDfaJLKvGitMNs50=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kiNOV7fNu7BdPAYrrz4OqNX3v5xOO/BE+zRIf0NrW1ebgDJ7ko
+	eh3oDtdel9tcz0i55DIiE0jJYRfkmHOWPo5aWTq4jZjxH1LL2PW/TqFpNcU78cbw9Ko=
+X-Gm-Gg: AYBFou2/X3RlO0N4k4HhMGC7t6iSnPxL0pFsVO4ZtHYof8qeUEv7DCsWHe4hig34ifg
+	rHqwNJBSh3wQfOHGT3pHEoMrNzMT4eSVc6m0Q7j3x8XTy9oh36S91yasP6Ub0/097c/cp8titbo
+	CkxFzf4CF7GnvCw5OkMUinAJ0ZUYkcvGpoYbvNcLtrxVAEnY/7yjDei+C5Xp6fKFm2jkExMQ5nA
+	JDdDmjxNbu5yJJHqJJgoU4yCs8xMDgdTBf3mhynaQZTwJCi+gTySfaVyGmNZEsVAH7hfXmvQWSQ
+	A2vTApnmjzImxE25DsLb06u40z+mZ9z5Z+7s/LcegxBECP3H6gJv+4VE6zkrwbszO7fcCwHHcEw
+	Ueuzd0bhJ6V19qHbTRTvVuE8XtFwWpc/MJdZEJIcsJ/Q2NzeQJRwC9U+HvPMcvbKUWiHoYM3aSh
+	Ln/7IdKxoeOCP4Pr3RlC70Xwtii6JY+3eLoiUNsZjrnqALjh2Rsh8zggPHicEkYqcVihMnweARh
+	NsdgKSB1aeezig4KTRsQzUqPdQkEHtI7tNtTtPVa94D7o5LRcCjgiBm
+X-Received: by 2002:a05:690c:e64c:20b0:873:5c7b:c107 with SMTP id 00721157ae682-884b338f76bmr10673077b3.63.1789135797554;
+        Fri, 11 Sep 2026 07:09:57 -0700 (PDT)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Fri, 11 Sep 2026 14:08:42 +0000
-Subject: [PATCH RFC v2 04/15] kprobes: Let Tasks RCU recognise tasks
- preempted in an optprobe jump window
+Date: Fri, 11 Sep 2026 14:08:43 +0000
+Subject: [PATCH RFC v2 05/15] ftrace: Mark modules hosting direct-call
+ trampolines for Tasks RCU
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260911-b4-rcu-tasks-preempt-qs-v2-4-eaaa61ed2da4@toxicpanda.com>
+Message-Id: <20260911-b4-rcu-tasks-preempt-qs-v2-5-eaaa61ed2da4@toxicpanda.com>
 References: <20260911-b4-rcu-tasks-preempt-qs-v2-0-eaaa61ed2da4@toxicpanda.com>
 In-Reply-To: <20260911-b4-rcu-tasks-preempt-qs-v2-0-eaaa61ed2da4@toxicpanda.com>
 To: "Paul E. McKenney" <paulmck@kernel.org>, 
@@ -124,292 +124,189 @@ Cc: Andy Lutomirski <luto@kernel.org>,
  bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1789135736; l=12385;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1789135736; l=7014;
  i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=zaxzL0DRdr6YBFEcTSGtZpzKzuVZf+tDLqNK8lLQ3vQ=;
+ bh=0t7KiskdL/z6tLq58DM0lyjoNIyrb4NbcoG2+xIJz7Y=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
  JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QDkHo+7Zxxr001o9pThi3R9UNNh0hJGGQszxQdwGKWyIfzZokuP81SU5bPZjsOb84RB2Rvd/rcr
- ztRWEWANpTgE=
+ QIYpNGNhK8IIkgKHr1QxZn5VS4Cl+AINmPPfcsvZi4ZGk+7mTHv8oPmVPnKO/4ckp4yjA+b+rY+
+ zCDlRK/TVmQM=
 X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
  fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-bad1c0/1789135797-BF4D3034-B7F0E660/0/0
+X-purgate-ID: tlsNG-ebf023/1789135799-C36C2B50-0FAA8C3D/0/0
 X-purgate-type: clean
-X-purgate-size: 12387
+X-purgate-size: 7016
 
-kprobe_optimizer() is the one synchronize_rcu_tasks() user that is not
-about trampoline text: it waits for tasks that were preempted on an
-instruction boundary inside the bytes it is about to overwrite with the
-optimized jump, so that none of them resumes into the middle of the new
-instruction.  Such a task sits in ordinary kernel or module text with
-rcu_tramp_nesting == 0, and can only have got there via an irq-exit
-preemption.
+An out-of-line direct trampoline registered with register_ftrace_direct()
+is kept alive only by Tasks RCU while a task executes it or is preempted
+in something it called; ftrace_shutdown()'s synchronize_rcu_tasks() is
+what stops rmmod freeing it under such a task.  Once preemption becomes a
+Tasks RCU quiescent state, such a trampoline must hold
+current->rcu_tramp_nesting across its call-out like the ftrace and BPF
+trampolines do, so document that in register_ftrace_direct().
 
-Add kprobe_in_optimized_region(), a lockless and conservative form of
-get_optimized_kprobe() that reports whether any registered kprobe lies
-within MAX_OPTIMIZED_LENGTH before the given address regardless of its
-optimization state.  The hash walk is only done while kprobe_optimizer()
-is actually inside its synchronize_rcu_tasks(), tracked by a flag it sets
-around the call; otherwise the check is a single load.  The kprobe hash
-is RCU-protected and every free path waits for a grace period after
-unhashing, so the lockless walk is safe from any context with preemption
-disabled.
-
-Unlike trampoline text, which a task can only be interrupted in while
-the trampoline exists, these bytes are ordinary text a task may have
-been parked in since before the kprobe was registered, and the optimizer
-may start waiting while that task is already switched out.  So the check
-cannot be made once at preemption time the way the trampoline cases are:
-have irqentry_preempt() record the interrupted IP in
-current->rcu_tasks_irq_ip for the duration of the preemption, and add
-rcu_tasks_irq_ip_holds() to test it, to be evaluated at every
-quiescent-state decision once preemption becomes a quiescent state --
-each pass through __schedule() in preempt_schedule_irq()'s loop as well
-as any remote check.  A task switched out synchronously cannot have a
-resume point inside such a window (a call there returns beyond it), so
-only the irq-exit IP needs checking, and preempt_schedule_irq() cannot
-nest, so one slot per task suffices.
+That still leaves the few instructions before the increment and after
+the decrement.  For BPF images those are in dynamically allocated text
+that rcu_tasks_ip_in_trampoline() already treats as protected, but the
+in-tree samples (and any similar user) place their trampolines in module
+.text.  Add a sticky module::ftrace_direct_tramp flag, set by every
+register/modify path when the direct address is module text, and have
+rcu_tasks_ip_in_trampoline() treat a task interrupted anywhere in such a
+module as a potential reader.  Other modules' text is unaffected.
 
 Assisted-by: LLM
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- include/linux/kprobes.h  |  8 +++++++-
- include/linux/rcupdate.h | 17 +++++++++++++++++
- include/linux/sched.h    |  1 +
- kernel/entry/common.c    | 13 +++++++++++--
- kernel/fork.c            |  1 +
- kernel/kprobes.c         | 46 ++++++++++++++++++++++++++++++++++++++++++++++
- kernel/rcu/tasks.h       | 23 +++++++++++++++++++++++
- 7 files changed, 106 insertions(+), 3 deletions(-)
+ include/linux/module.h |  7 +++++++
+ kernel/rcu/tasks.h     | 23 +++++++++++++++++++++--
+ kernel/trace/ftrace.c  | 39 +++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 67 insertions(+), 2 deletions(-)
 
-diff --git a/include/linux/kprobes.h b/include/linux/kprobes.h
-index e6de7ae55bda..74cc48c04417 100644
---- a/include/linux/kprobes.h
-+++ b/include/linux/kprobes.h
-@@ -530,11 +530,17 @@ static inline bool is_kprobe_insn_slot(unsigned long addr)
- }
- #endif /* !CONFIG_KPROBES */
- 
--#ifndef CONFIG_OPTPROBES
-+#ifdef CONFIG_OPTPROBES
-+bool kprobe_in_optimized_region(unsigned long addr);
-+#else /* !CONFIG_OPTPROBES */
- static inline bool is_kprobe_optinsn_slot(unsigned long addr)
- {
- 	return false;
- }
-+static inline bool kprobe_in_optimized_region(unsigned long addr)
-+{
-+	return false;
-+}
- #endif /* !CONFIG_OPTPROBES */
- 
- #ifdef CONFIG_KRETPROBES
-diff --git a/include/linux/rcupdate.h b/include/linux/rcupdate.h
-index 0a408e36ea15..4cfe096d624f 100644
---- a/include/linux/rcupdate.h
-+++ b/include/linux/rcupdate.h
-@@ -202,6 +202,14 @@ bool arch_rcu_tasks_ip_in_trampoline(unsigned long ip);
-  * rcu_tasks_ip_in_trampoline() and holding the count elevated across
-  * preempt_schedule_irq() when it matches.
-  *
-+ * The one non-trampoline user, kprobe jump optimization, waits for tasks
-+ * preempted inside ordinary instruction bytes it is about to overwrite.  A
-+ * task can be parked there from before the kprobe even existed, so that
-+ * cannot be decided once at preemption time: irqentry_preempt() records the
-+ * interrupted IP in current->rcu_tasks_irq_ip for the duration of the
-+ * preemption and rcu_tasks_irq_ip_holds() checks it at every quiescent-state
-+ * decision, locally and from the grace-period kthread.
-+ *
-  * Only current writes the count and only current (or an interrupt on the same
-  * CPU) reads it, so plain accesses suffice.
-  */
-@@ -225,6 +233,13 @@ static __always_inline void rcu_tasks_trampoline_assert_none(void)
- }
- 
- bool rcu_tasks_ip_in_trampoline(unsigned long ip);
-+bool rcu_tasks_irq_ip_holds(struct task_struct *t);
-+
-+/* Record where current is being irq-preempted; 0 once it has resumed. */
-+static __always_inline void rcu_tasks_note_irq_ip(unsigned long ip)
-+{
-+	WRITE_ONCE(current->rcu_tasks_irq_ip, ip);
-+}
- 
- # define rcu_tasks_classic_qs(t, preempt)				\
- 	do {								\
-@@ -242,6 +257,7 @@ static inline void rcu_tasks_trampoline_enter(void) { }
- static inline void rcu_tasks_trampoline_exit(void) { }
- static inline void rcu_tasks_trampoline_assert_none(void) { }
- static inline bool rcu_tasks_ip_in_trampoline(unsigned long ip) { return false; }
-+static inline void rcu_tasks_note_irq_ip(unsigned long ip) { }
- # endif
- 
- #define rcu_tasks_qs(t, preempt) rcu_tasks_classic_qs((t), (preempt))
-@@ -262,6 +278,7 @@ static inline void rcu_tasks_trampoline_enter(void) { }
- static inline void rcu_tasks_trampoline_exit(void) { }
- static inline void rcu_tasks_trampoline_assert_none(void) { }
- static inline bool rcu_tasks_ip_in_trampoline(unsigned long ip) { return false; }
-+static inline void rcu_tasks_note_irq_ip(unsigned long ip) { }
- #define call_rcu_tasks call_rcu
- #define synchronize_rcu_tasks synchronize_rcu
- static inline void exit_tasks_rcu_start(void) { }
-diff --git a/include/linux/sched.h b/include/linux/sched.h
-index d2e7b1b3c9d2..7f0bdc81fba3 100644
---- a/include/linux/sched.h
-+++ b/include/linux/sched.h
-@@ -957,6 +957,7 @@ struct task_struct {
- 	u8				rcu_tasks_holdout;
- 	u8				rcu_tasks_idx;
- 	int				rcu_tramp_nesting;
-+	unsigned long			rcu_tasks_irq_ip;
- 	int				rcu_tasks_idle_cpu;
- 	struct list_head		rcu_tasks_holdout_list;
- 	int				rcu_tasks_exit_cpu;
-diff --git a/kernel/entry/common.c b/kernel/entry/common.c
-index cd3feaca6420..b372f2670d4f 100644
---- a/kernel/entry/common.c
-+++ b/kernel/entry/common.c
-@@ -141,16 +141,25 @@ static inline bool arch_irqentry_exit_need_resched(void) { return true; }
-  * across the context switch so that it is not mistaken for a Tasks RCU
-  * quiescent state.  This closes the few-instruction windows at trampoline
-  * entry/exit where the trampoline's own increment has not yet run or its
-- * decrement already has.
-+ * decrement already has.  The interrupted IP is also recorded for the
-+ * duration, for conditions that must be re-evaluated at each quiescent-state
-+ * decision rather than once here (see rcu_tasks_irq_ip_holds()); nested
-+ * irq-exit preemption cannot happen inside preempt_schedule_irq(), so one
-+ * slot per task is enough.
-  */
- static void irqentry_preempt(struct pt_regs *regs)
- {
-+	unsigned long ip = instruction_pointer(regs);
- 	bool in_tramp = IS_ENABLED(CONFIG_RCU_TASKS_PREEMPT_QS) &&
--			rcu_tasks_ip_in_trampoline(instruction_pointer(regs));
-+			rcu_tasks_ip_in_trampoline(ip);
- 
- 	if (in_tramp)
- 		rcu_tasks_trampoline_enter();
-+	if (IS_ENABLED(CONFIG_RCU_TASKS_PREEMPT_QS))
-+		rcu_tasks_note_irq_ip(ip);
- 	preempt_schedule_irq();
-+	if (IS_ENABLED(CONFIG_RCU_TASKS_PREEMPT_QS))
-+		rcu_tasks_note_irq_ip(0);
- 	if (in_tramp)
- 		rcu_tasks_trampoline_exit();
- }
-diff --git a/kernel/fork.c b/kernel/fork.c
-index cfe3a8e53fbd..1277603bc472 100644
---- a/kernel/fork.c
-+++ b/kernel/fork.c
-@@ -1870,6 +1870,7 @@ static inline void rcu_copy_process(struct task_struct *p)
- #ifdef CONFIG_TASKS_RCU
- 	p->rcu_tasks_holdout = false;
- 	p->rcu_tramp_nesting = 0;
-+	p->rcu_tasks_irq_ip = 0;
- 	INIT_LIST_HEAD(&p->rcu_tasks_holdout_list);
- 	p->rcu_tasks_idle_cpu = -1;
- 	INIT_LIST_HEAD(&p->rcu_tasks_exit_list);
-diff --git a/kernel/kprobes.c b/kernel/kprobes.c
-index 6337da5cab9e..cf2ea278fdf5 100644
---- a/kernel/kprobes.c
-+++ b/kernel/kprobes.c
-@@ -511,6 +511,48 @@ static struct kprobe *get_optimized_kprobe(kprobe_opcode_t *addr)
- 	return NULL;
- }
- 
-+/*
-+ * True while kprobe_optimizer() is waiting for its Tasks RCU grace period.
-+ * Only in that window can a preemption inside an optprobe's jump region
-+ * matter to it, so kprobe_in_optimized_region() does no work otherwise.
-+ */
-+static bool kprobe_optimizer_waiting;
-+
-+/**
-+ * kprobe_in_optimized_region - Could @addr be inside bytes a jump-optimized
-+ *	kprobe replaces?
-+ * @addr: kernel text address, typically an interrupted instruction pointer
-+ *
-+ * kprobe_optimizer() relies on synchronize_rcu_tasks() to wait for tasks that
-+ * were preempted on an instruction boundary inside the region about to be
-+ * overwritten by the optimized jump; such a task must not report a Tasks RCU
-+ * quiescent state when it is preempted (see rcu_tasks_ip_in_trampoline()).
-+ * This is the lockless, conservative form of get_optimized_kprobe(): it does
-+ * not care whether the kprobe found is, or ever will be, optimized.  May be
-+ * called from any context with preemption disabled; the kprobe hash is
-+ * RCU-protected and every free path waits for a grace period after unhashing.
-+ *
-+ * The hash walk only runs while the optimizer is actually waiting.  A
-+ * preemption that does not observe kprobe_optimizer_waiting predates the
-+ * grace period (its leading synchronize_rcu() publishes the store to every
-+ * interrupts-disabled reader before any task is sampled as a holdout); such a
-+ * task is then an ordinary preempted holdout, and the jump is not written
-+ * until it has run again and left the region.
-+ */
-+bool kprobe_in_optimized_region(unsigned long addr)
-+{
-+	int i;
-+
-+	if (!READ_ONCE(kprobe_optimizer_waiting))
-+		return false;
-+
-+	for (i = 1; i < MAX_OPTIMIZED_LENGTH / sizeof(kprobe_opcode_t); i++)
-+		if (get_kprobe((kprobe_opcode_t *)addr - i))
-+			return true;
-+	return false;
-+}
-+NOKPROBE_SYMBOL(kprobe_in_optimized_region);
-+
- /* Optimization staging list, protected by 'kprobe_mutex' */
- static LIST_HEAD(optimizing_list);
- static LIST_HEAD(unoptimizing_list);
-@@ -644,8 +686,12 @@ static void kprobe_optimizer(void)
- 		 * to 2nd-Nth byte of jump instruction. This wait is for avoiding it.
- 		 * Note that on non-preemptive kernel, this is transparently converted
- 		 * to synchronoze_sched() to wait for all interrupts to have completed.
-+		 * kprobe_optimizer_waiting lets Tasks RCU recognise tasks preempted
-+		 * in such a region while we wait, see kprobe_in_optimized_region().
- 		 */
-+		WRITE_ONCE(kprobe_optimizer_waiting, true);
- 		synchronize_rcu_tasks();
-+		WRITE_ONCE(kprobe_optimizer_waiting, false);
- 
- 		/* Step 3: Optimize kprobes after quiesence period */
- 		do_optimize_kprobes();
+diff --git a/include/linux/module.h b/include/linux/module.h
+index 96cc98568eea..ea4727f53fab 100644
+--- a/include/linux/module.h
++++ b/include/linux/module.h
+@@ -521,6 +521,13 @@ struct module {
+ 	unsigned int num_ftrace_callsites;
+ 	unsigned long *ftrace_callsites;
+ #endif
++#ifdef CONFIG_DYNAMIC_FTRACE_WITH_DIRECT_CALLS
++	/*
++	 * An ftrace direct-call trampoline lives in this module's text; see
++	 * rcu_tasks_ip_in_trampoline().  Sticky once set.
++	 */
++	bool ftrace_direct_tramp;
++#endif
+ #ifdef CONFIG_KPROBES
+ 	void *kprobes_text_start;
+ 	unsigned int kprobes_text_size;
 diff --git a/kernel/rcu/tasks.h b/kernel/rcu/tasks.h
-index a801ec4a951b..0e46d8fe4d8e 100644
+index 0e46d8fe4d8e..1b9fe1bfa591 100644
 --- a/kernel/rcu/tasks.h
 +++ b/kernel/rcu/tasks.h
-@@ -1127,6 +1127,29 @@ bool rcu_tasks_ip_in_trampoline(unsigned long ip)
+@@ -1114,16 +1114,35 @@ bool __weak arch_rcu_tasks_ip_in_trampoline(unsigned long ip)
+  *    deliberately does not consult is_ftrace_trampoline() and friends: text
+  *    being torn down may already be unregistered there while a task still
+  *    stands on it;
+- *  - in core text the architecture flags via arch_rcu_tasks_ip_in_trampoline().
++ *  - in core text the architecture flags via arch_rcu_tasks_ip_in_trampoline();
++ *  - in the text of a module that hosts an ftrace direct-call trampoline,
++ *    which covers the instructions before that trampoline's increment and
++ *    after its decrement (see ftrace_direct_mark_module()).
+  *
+  * A false positive only defers the quiescent state to the task's next
+  * context switch.
+  */
+ bool rcu_tasks_ip_in_trampoline(unsigned long ip)
+ {
++	bool ret = true;
++
+ 	if (core_kernel_text(ip))
+ 		return arch_rcu_tasks_ip_in_trampoline(ip);
+-	return !is_module_text_address(ip);
++
++#ifdef CONFIG_MODULES
++	scoped_guard(rcu) {
++		struct module *mod = __module_text_address(ip);
++
++#ifdef CONFIG_DYNAMIC_FTRACE_WITH_DIRECT_CALLS
++		if (mod)
++			ret = READ_ONCE(mod->ftrace_direct_tramp);
++#else
++		if (mod)
++			ret = false;
++#endif
++	}
++#endif
++	return ret;
  }
  NOKPROBE_SYMBOL(rcu_tasks_ip_in_trampoline);
  
-+/**
-+ * rcu_tasks_irq_ip_holds - Is @t irq-preempted somewhere that must hold off Tasks RCU?
-+ * @t: a task inside preempt_schedule_irq() (t->rcu_tasks_irq_ip != 0), or not
-+ *
-+ * Unlike trampoline text, which a task can only be interrupted in while the
-+ * trampoline exists, the bytes kprobe_optimizer() is about to overwrite with a
-+ * jump are ordinary text a task may have been parked in since before the
-+ * kprobe was registered, and the optimizer may start waiting while the task is
-+ * already switched out.  So this is evaluated against the IP recorded by
-+ * irqentry_preempt() at every quiescent-state decision -- each pass through
-+ * __schedule() in preempt_schedule_irq()'s loop, and the grace-period
-+ * kthread's scans -- rather than once at preemption time.  A task switched out
-+ * synchronously cannot have a resume point inside such a window (a call there
-+ * returns beyond it), so only the irq-exit IP needs checking.
+diff --git a/kernel/trace/ftrace.c b/kernel/trace/ftrace.c
+index 53d5db60bfa5..14f27b887231 100644
+--- a/kernel/trace/ftrace.c
++++ b/kernel/trace/ftrace.c
+@@ -6076,6 +6076,29 @@ static void reset_direct(struct ftrace_ops *ops, unsigned long addr)
+ 	ops->trampoline = 0;
+ }
+ 
++/*
++ * A direct trampoline may live in module text rather than in dynamically
++ * allocated text that rcu_tasks_ip_in_trampoline() recognises on its own (see
++ * samples/ftrace/ftrace-direct*.c).  The trampoline itself must hold
++ * current->rcu_tramp_nesting across its call-out (see register_ftrace_direct());
++ * marking the owning module here covers the instructions before that increment
++ * and after the decrement, where a task interrupted in the module's text must
++ * not be treated as Tasks-RCU quiescent, so that ftrace_shutdown()'s
++ * synchronize_rcu_tasks() still keeps the module text from being freed under
++ * it.
 + */
-+bool rcu_tasks_irq_ip_holds(struct task_struct *t)
++static void ftrace_direct_mark_module(unsigned long addr)
 +{
-+	unsigned long ip = READ_ONCE(t->rcu_tasks_irq_ip);
++#ifdef CONFIG_MODULES
++	struct module *mod;
 +
-+	return ip && kprobe_in_optimized_region(ip);
++	guard(rcu)();
++	mod = __module_text_address(addr);
++	if (mod)
++		WRITE_ONCE(mod->ftrace_direct_tramp, true);
++#endif
 +}
-+NOKPROBE_SYMBOL(rcu_tasks_irq_ip_holds);
 +
- /* See if tasks are still holding out, complain if so. */
- static void check_holdout_task(struct task_struct *t,
- 			       bool needreport, bool *firstreport)
+ /**
+  * register_ftrace_direct - Call a custom trampoline directly
+  * for multiple functions registered in @ops
+@@ -6090,6 +6113,17 @@ static void reset_direct(struct ftrace_ops *ops, unsigned long addr)
+  * and save the parameters of the function being traced, and restore them
+  * (or inject new ones if needed), before returning.
+  *
++ * Nothing but Tasks RCU keeps the trampoline at @addr alive while a task is
++ * executing it or is preempted in something it called.  On architectures that
++ * select ARCH_HAS_RCU_TASKS_PREEMPT_QS a preemption is a Tasks RCU quiescent
++ * state unless current->rcu_tramp_nesting is non-zero, so the trampoline must
++ * increment it before calling out and decrement it before returning, as the
++ * ftrace and BPF trampolines do (see rcu_tasks_trampoline_enter() and
++ * samples/ftrace/ftrace-direct.h).  The few instructions before the increment
++ * and after the decrement are covered by the irq-exit IP check: automatically
++ * for trampolines outside kernel and module text (e.g. BPF images), and via
++ * ftrace_direct_mark_module() for trampolines in module text.
++ *
+  * Returns:
+  *  0 on success
+  *  -EINVAL  - The @ops object was already registered with this call or
+@@ -6169,6 +6203,7 @@ int register_ftrace_direct(struct ftrace_ops *ops, unsigned long addr)
+ 	ops->flags |= MULTI_FLAGS;
+ 	ops->trampoline = FTRACE_REGS_ADDR;
+ 	ops->direct_call = addr;
++	ftrace_direct_mark_module(addr);
+ 
+ 	err = register_ftrace_function_nolock(ops);
+ 	if (err)
+@@ -6237,6 +6272,8 @@ __modify_ftrace_direct(struct ftrace_ops *ops, unsigned long addr)
+ 
+ 	lockdep_assert_held_once(&direct_mutex);
+ 
++	ftrace_direct_mark_module(addr);
++
+ 	/* Enable the tmp_ops to have the same functions as the direct ops */
+ 	ftrace_ops_init(&tmp_ops);
+ 	tmp_ops.func_hash = ops->func_hash;
+@@ -6419,6 +6456,7 @@ int update_ftrace_direct_add(struct ftrace_ops *ops, struct ftrace_hash *hash)
+ 		hlist_for_each_entry(entry, &hash->buckets[i], hlist) {
+ 			if (__ftrace_lookup_ip(direct_functions, entry->ip))
+ 				goto out_unlock;
++			ftrace_direct_mark_module(entry->direct);
+ 		}
+ 	}
+ 
+@@ -6702,6 +6740,7 @@ int update_ftrace_direct_mod(struct ftrace_ops *ops, struct ftrace_hash *hash, b
+ 			tmp = __ftrace_lookup_ip(direct_hash, entry->ip);
+ 			if (!tmp)
+ 				continue;
++			ftrace_direct_mark_module(entry->direct);
+ 			tmp->direct = entry->direct;
+ 		}
+ 	}
 
 -- 
 2.55.0
