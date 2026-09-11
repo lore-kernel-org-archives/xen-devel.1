@@ -4,58 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E681C88E4C
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 11:03:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1416386.1645450 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5EFAC88E4A
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 11:14:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1416409.1645460 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4z2h-0002v8-So; Fri, 11 Sep 2026 11:03:39 +0000
+	id 1x4zCp-000542-Qe; Fri, 11 Sep 2026 11:14:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1416386.1645450; Fri, 11 Sep 2026 11:03:39 +0000
+Received: by outflank-mailman (output) from mailman id 1416409.1645460; Fri, 11 Sep 2026 11:14:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4z2h-0002v1-Q7; Fri, 11 Sep 2026 11:03:39 +0000
-Received: by outflank-mailman (input) for mailman id 1416386;
- Fri, 11 Sep 2026 11:03:38 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x4zCp-00053v-Mq; Fri, 11 Sep 2026 11:14:07 +0000
+Received: by outflank-mailman (input) for mailman id 1416409;
+ Fri, 11 Sep 2026 11:14:06 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1x4z2g-0002uv-86
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 11:03:38 +0000
+ (envelope-from <ross.lagerwall@citrix.com>) id 1x4zCo-00053p-50
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 11:14:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4z2f-00144p-L8
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 13:03:37 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x4zCn-005VpV-Hy
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 13:14:05 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6aa3e001-8faa-0a2a0a5109dd-0a2a4508ca52-24
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 13:03:37 +0200
-Received: from [52.101.52.24]
- (helo=BL2PR02CU003.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6aa3e007-f659-0a2a45080019-346534185a6c-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 13:03:36 +0200
-Received: from MW4P223CA0015.NAMP223.PROD.OUTLOOK.COM (2603:10b6:303:80::20)
- by DM4PR12MB7624.namprd12.prod.outlook.com (2603:10b6:8:107::11) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.10; Fri, 11 Sep
- 2026 11:03:30 +0000
-Received: from CO1PEPF000075F4.namprd03.prod.outlook.com
- (2603:10b6:303:80:cafe::8a) by MW4P223CA0015.outlook.office365.com
- (2603:10b6:303:80::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.10 via Frontend Transport; Fri,
- 11 Sep 2026 11:03:29 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CO1PEPF000075F4.mail.protection.outlook.com (10.167.249.43) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.406.5 via Frontend Transport; Fri, 11 Sep 2026 11:03:29 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Fri, 11 Sep
- 2026 06:03:29 -0500
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Fri, 11 Sep 2026 06:03:28 -0500
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6aa3e26e-8faa-0a2a0a5109dd-0a2a4509e576-38
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 13:14:05 +0200
+Received: from [52.101.46.12]
+ (helo=CO1PR03CU002.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6aa3e27b-be1a-0a2a45090019-34652e0c2baf-4
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 13:14:05 +0200
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
+ by SA1PR03MB6435.namprd03.prod.outlook.com (2603:10b6:806:1c2::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.9; Fri, 11 Sep
+ 2026 11:14:00 +0000
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0406.007; Fri, 11 Sep 2026
+ 11:14:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,159 +55,169 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=J7AOgJc8Un7D7+CMG4PirKd0+2jcLaHSGwli0wGPLSMAQIRJSRd0O+WXozxrbGs+blEeFECzj/ri6l8zrjRIQtTZZi5Yw3SpJYtKye6WPCkdh8AIfL/ySWfYgbctpqt/5p+4AJJZhIrPFoCHgir9XK3IVlIV0NKMgpDjTQfWraub6aduEMv/NWcVtHL94lgCyNNwPACRFqGWGk6YrTzPl4JvqM+ys6WqKJLF5yq4hIElyZ/PX7/GgnV6iwY58cJqa1On4CYOYt8uzgvReba/s6Dnml+ecKz2v6JqLPVBApT2L/aMjiRGV1hrKFdb+ghZtK8gbcBYzhOCuQxN1PMDzA==
+ b=f0fyzPXtQc7rXWByvpcdFAY5r7OPBeAVPo3r+nByDrAdBrlNFVZnuqgFosih8o6Iu2VZBpFT0Mn9uXNJ6SEQHzCJ8CCmLN/w358YLJQfC1rHb87YdlT2KTXVTe1WcXdyN2pfycXsTqP1DJY45qzl5iYuZUANt3VvHnNATrNBgFs7pWMgoCuodWBLzn+FlOmG8F2WPDAImAL9W/lbfHtQiRx9x07T4rTvvrrWJo08LI+DATTdIjT33mWmjJxBHbHHqXtiV4cTuaBQ5EBhRpJQVuWnCVjZfh9R7ztQ55jK8C1xv28ZItvzh4bRHjMohjljKec9SFftEeROGhfWKo+UBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/ecex6EjQ7/nbKiyjI7EhIgLYA7bPmZOxJAuA8lE0sc=;
- b=jgyb30lEM0Wf7TJkF8actGz5XljAILAfZeejfpgfxKVa5iGgjjNUksrMCnm3VT7gxgZXW0P4rz0eG/tCaLpEZLyw1Zt0/Jqx59yMIOTIjsGanFdLn0+opXyjw7I+Nr6uzj+Wry6qSHvIUgb0YJ/iDx/fLOMv/FjiM9D/GB9szhhMpscDeYm998e5PRQOFvIyYHtsg5Y8WNwXgzdGF1N4PRizK8Ps6OIreuk1MaGKHAEb7M6PhNHoe9RSssotek2pga4ZwMJ3H+1VjZv05HFCMk0MagpbD9utZc2MEmVASb1VRo/7T+mYG9Sy2CUUmHC6z2t+L1ChbKeqRr3O/1guuw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=yTOA312Mu0a3gMt/IzddjVv8a+YbDC1M4IugOsgTUbk=;
+ b=R+Gptu/ulti0TSOwPfCiWt5u4fwtAlggP7n8hsQhBrhyLSgnZxElZB1dDsfMJveL2SM3oIr8SM55eyoIMS6J9q839x4rCXd//xV7fls3jMG4tRRnarJEK4SZk4ggr4WvCVpotYgxd2KL0DNC9gZseeyKEDsvTJiI/n+kD2LMOGYSPVIv3Fj0TSNNg9K7HpEzQNydO4/hGizs36I91hm9lcBRsqfdIfWa8emKD6DnUPd0XcyJc4FfjYP5MHl6/qiflx2gpNIeF/B+ovKq8L85WhFMYjyuRKDKqGCdgPI3P9ooDms+v1Od54OyEgtqZ5n7K8fN+Lw3wwao6YV+9VqAgQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/ecex6EjQ7/nbKiyjI7EhIgLYA7bPmZOxJAuA8lE0sc=;
- b=hwFdQ4YJKtXMxvqRr21NOoqe3iGypoFNRV8kHInc6SFvucwQHEwuxEBF2W/XBWr4BCHn4iJNLVuzFxkqIOMO9gwig2f6cajnuimS5W5RxXEpqExIGS1GJsE27om0wP6JLwMfIcqYsj8HzclFQ6DMxLURaNe/kmyHmgdw3GO5ANo=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <fc7d64e7-1de3-4d8a-ae88-abfbc2735624@amd.com>
-Date: Fri, 11 Sep 2026 13:03:28 +0200
-MIME-Version: 1.0
+ bh=yTOA312Mu0a3gMt/IzddjVv8a+YbDC1M4IugOsgTUbk=;
+ b=yLiQAFAXbBNb/zIPHnyKmdbOtnUa8ZcPJJtbmaALkLCs7TQ4kfmjB7VkUUvtcHfqm1cRQNaOyM+XkB17cgskZrZgW/E6Ii2s+EVC2jRHRRelWBQa4w6+DZ2wgMTGvYiO7v7YcwMK8emhvz+YQNO+BtdKS1+dRjD0kJnToG8AWxY=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <9cdd2386-7331-49f0-a67e-da4592d4c1a9@citrix.com>
+Date: Fri, 11 Sep 2026 12:13:56 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/4] xen/arm: make is_espi() a pure range predicate
-To: Mykola Kvach <mykola_kvach@epam.com>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1787050437.git.mykola_kvach@epam.com>
- <8e42437f8abca2722f1a2e2568bbb5b938c23e85.1787050437.git.mykola_kvach@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH v1] nestedsvm: Fix multi-byte IO port intercept check
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Jason Andryuk <jason.andryuk@amd.com>,
+ Teddy Astie <teddy.astie@vates.tech>
+References: <20260910163955.1005097-1-ross.lagerwall@citrix.com>
+ <df8b4a30-4598-45b9-997c-fabdd42b8105@citrix.com>
 Content-Language: en-US
-In-Reply-To: <8e42437f8abca2722f1a2e2568bbb5b938c23e85.1787050437.git.mykola_kvach@epam.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+In-Reply-To: <df8b4a30-4598-45b9-997c-fabdd42b8105@citrix.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
+X-ClientProxiedBy: DUZPR01CA0298.eurprd01.prod.exchangelabs.com
+ (2603:10a6:10:4b7::15) To CH8PR03MB8274.namprd03.prod.outlook.com
+ (2603:10b6:610:2ba::5)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF000075F4:EE_|DM4PR12MB7624:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1df4e77b-4bec-4e05-8bdb-08df0ff44ff2
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|SA1PR03MB6435:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0d4bbe9b-8fd5-4dec-bb58-08df0ff5c79b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|36860700016|376014|82310400026|1800799024|4143699003|10067099003|5023799004|11063799006|56012099006|6133799003|22082099003|18002099003;
+	BCL:0;ARA:13230040|366016|23010399003|1800799024|376014|4143699003|10067099003|22082099003|18002099003|5023799004|11063799006|56012099006;
 X-Microsoft-Antispam-Message-Info:
-	hrQvIuLTN0EoaMXEEloJ2NCJgy3QVM+DgDvYZHdiWgloNKyxSElNhx9Wxyf4DK/n8b1TGcbar8BrpHK1gVSILTT+swzPhF75390gnQPgakUBptNe7nZ1O9MfrieDHxO3gnPc9t/EdC2iVwlSXBuxO4Xg9aQ7jHcZwTUYw5NR13DTPjTOuvYOXpB7+kIyQT86DIqd4K4QeyGAmdsRiyBQWZSqPxYq/GDHFeTy6lMtmr92YKNxvUkMFn3r0BcD/e9HE90XvLxHjq3mvo3eYHtpROO085e/wW/kuwLpSUGmifQBtEXQtuqFMyW1aBRoXyV896HgaWAEzawNVSdyFnrYFxtRFG+g3o1GNwTYHj0aJz2NS+Lbh/TRgjR54rTv31wOGq2+4sCAGrOYr0lbsvSIMCocEGLWMFuktwWb8IU5NNedRjcDGMi9NPAq9Vl/aIK4iVPr+vvQg4F598fO1eTXLV0IeB94IhXjgQib9tmOhY+JThKwZ5zTam1kVbsMeuHip/MAN7iIXbVDA+8egIaiRoHKVzkylMtkNMTVJR+VFdIj/VnK6J2a6BXqvI8lyeRL4RyV72429TeNEzD7rM37fkYkdk4qBtgdZSi7zfZP2a+ugL4lJeHyV7T9TLEZ/X0wS2a1wieDe4fB9y5+qpkqizd/YN4FHclHT3aNpmxKmyfAEAth79TS1e/a+parxL+35e/ff9JUGim3CJReDLOaqg==
+	HOqUuGYXzZTJwNEwAfla8UwQ0OfAtbX2q7GwIY/WCv7ysLP9ZqdIrkwn4zRaii9jqW3ozuLh96A6e4iL3xJteec9YnsRLhMD73+8jB4AafNZKVZHaWOBW5548+67qSGvTbApmITA50cFhKbSOlDwknMiTx2LqyTxJ2+vDBVhMLiiehiT50QwTCo6DUuBCjUJDlxDQ2AfMy2TfF/3SlaM0CuNJiZHG8joTE/NhS+gNgZsRvVvgqL5Jl3avXtyJKlZ4/k/8pfzSj2e9OSTad1i8mlh78oTr0ko4sPJayAt3D1dzjXMDwKJyGtaP8tmKVMK8BHBQ6eO14Q4538n2UVAv9QR1yJBjgHGxMP2eAmwurhVzW1kUsQko55ZjlDN2fczDkuVMcBk01j2jVijmKf/EobRwFPz+WIWAaNQ+FwizOBqAjC+omG5N8fFyOS1A22NGesoS09USa0BBw2AwHEk8wzY2Bmbm2GFvK2Cn3Jdq2ylmDJYVwXZzxgKCvR+FBiBOP3w8Ue1uRNbwXFkGygtQKSXqDguRMJchZFzHs5zhJJhpNyGeJxN++M31dPrWfBomTMXXsvuCqt+xVqZohD7kgBItsUGCEgMjKycNW6BppNvD8iXe+gcmFfZHZdElIM2r6rvqi259HQm73ycHUrQWjTngTkYPzqb87K56bnMhRA=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(36860700016)(376014)(82310400026)(1800799024)(4143699003)(10067099003)(5023799004)(11063799006)(56012099006)(6133799003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(4143699003)(10067099003)(22082099003)(18002099003)(5023799004)(11063799006)(56012099006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	kh8yKfrlhX2qCMqOGKuOTFHfjhRcNR/S/gpbJo9hVXIjzLNKArnvpEKE8qDjXTc9I84LaI4LbToHodeBlIhpJQ5fMHiz7UUZYwS6P9qlq2HM5sy04wXbTIKs6CtDj8q1AWr5w521o2BmH8Xt8aFsVzu+u3tzvj9IpYOnKq5HGW+YLgBlIjcJPYdJ7Ztg7cUuGol8ZiEQA6ubWNu09UioWAzkU3w5DueseCb3mEmQ8jWsJcWCSfb7E0bZOqup80oFBaycJyN+25fQhAhxAjdRADTJgBvE3aREMmRL4CzPerlsXHAs78XgxcuA0HEFp08C7kxA0W8UjfP44htbtVrPk5z/yNIOAhuFPJkKx4WpCHYk/bnfys4JIbdn5idI8ZamcnV2YPy1mMNhLzewwtGSogVNMOguo4g6KT9HuOiz4KOGK/cgNVrMzB/LVwly2by2
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 11:03:29.6919
+	=?utf-8?B?Umo2RFpkTWFvZndCSVNtMFZzc1ZaMmdGWFlYV0VrdHpLS2RPais1bFFSRjI3?=
+ =?utf-8?B?cmQ1STN5WGZwZTgvaFlrbXIwTXF6bStnU05VWXJLbWhSbVkvdjNPRmc1MGxl?=
+ =?utf-8?B?YjdMVFRLZjFiemdaK0w3azZNMS9yc3BIMWZHdnFVMTBscHVBOFhZa2dScm9l?=
+ =?utf-8?B?Qk9qTGRFdG12NTRqVytUQjVraHBkM0p0TjViN3k1NXFzc2tKMTBmOEtKT1hR?=
+ =?utf-8?B?UVlJV3dLZlE4d1pCL1NCZXlkcC81NVpneTdRSmRKZWdBRkxYNDc3RzhhT0dk?=
+ =?utf-8?B?NUpxTEsrT29BM3ZpdkJDOUxTS3Z3NUd5cURZelQzVFloZTB3RlIvQ29ML1lz?=
+ =?utf-8?B?cGNCbmJrcFlHSi8wbUZSSDVOeGUyQi9uQlZGMFhBMmhPSHUwLytxWmhEcjVj?=
+ =?utf-8?B?RklhU2tHWlh0R3czUDhhcWlhcjhMWGxuYmxQR2tDOGZ5WG1zQkVORldOQm1X?=
+ =?utf-8?B?Y25IZVV5d0kxdGhvclBOWHNVQmlXdEdnV1lxcDlCVll5bStrd0dPL3l3cUNu?=
+ =?utf-8?B?VVJnV2NDNlZpSUpZamxDWTNvV2xYbmNFamg2Sm1vYmdXbVNCdnRBQ1JtblpG?=
+ =?utf-8?B?NWluUmh1b0R5QTRWVE9iQTFpK3dtM0RiV3ZiWm56c3ZNT1c4MnkybzlXN2w0?=
+ =?utf-8?B?Wk5uRHl3WXZ0MkJlZTRLb3NpaERIMm5Nb21DelV2TlRWS0orR2ZWQmZDWXdv?=
+ =?utf-8?B?U2o0Zm1qbUJVdGtsUVRBbUtPQjhVbnJiTXVpZEV4bGZxZHA0d1RESFFTYm9x?=
+ =?utf-8?B?b2lPZS85U1ZUdEZxRlU1UDB5RURrRzNrR3ppV05BZ3JaYSs3eEduQWErM3dO?=
+ =?utf-8?B?L1ZDN1lDNlByazR5NzRSWitvV2NjMGRkUjM3bEVyRFRIWFJXYm1WdVVlTlZP?=
+ =?utf-8?B?UEMxR29pVlNCUHNKd3FDTVNEdk9FTmMzdlJyYmVaRjEwcmt5US9xNEFvaXlv?=
+ =?utf-8?B?ZnlXZnpnOFZLS2xRSkdNSWpWNUhZWTJZM3gyejlpYjZvbDBJRnhJb1ZZSEJZ?=
+ =?utf-8?B?NDB1SU4yTTIrMzVqQXNnYVdiYUxzZGN6SU5lZUdFcmd3UVJBK1R1SGQyUFF4?=
+ =?utf-8?B?blk4Y25TcDJzOVQzMGlWZ2x2bnJWV0Z0WGxoV0VFcWErUjlUMzNQbXNPWjBL?=
+ =?utf-8?B?M2Y4U09HWnNvbFNZTWpKUityZlBoblhuYWs1V3FlVU02VVl4MHh0R3pmM2JC?=
+ =?utf-8?B?ODJiUmZDK2VaU050MFN4UWxJVHlXT00vY1kzY3lRbG9OTy9iRCs4WSsvcFlV?=
+ =?utf-8?B?K0NJVXVMZmhFSUpSUy9ObVlpNVBGcFkxcXpvQ2hrSkN5WjVtVGhEdmZFMXBa?=
+ =?utf-8?B?RVBoaHl5eWJVeVNRS09NSnFLU0Fmb0JKcGsxUHYzNzNYYWEwbndtUXUyUUFZ?=
+ =?utf-8?B?dzBvNDIxNXNuRzZWMzVsNlEyNmNqUy9HVS9ENTNGaHhhWitjdGp2U2V5enQ2?=
+ =?utf-8?B?QTRObWhmM3NIOXlsUHZtVXI2MS9mbEhIc3ZWd2RMY3pmRHBKRzRyREZOVjMx?=
+ =?utf-8?B?YXhIVXlNMlA2bDFBUWsvQ0hRQTJHemVMZ0VUS0t6TDZHYTEyMHREbjdnVy81?=
+ =?utf-8?B?NzM2U3lMdHhXRC9VZGxGQnhnWkY0MmM2ME5TQmhtTXU1Y1hUdmFmLzArVUd5?=
+ =?utf-8?B?NkxTWUFSUjR1c2k5R3dXZWZFMTZ4K1hCLzAzZzlWMW5FUVUzdFh0TVUvR3JG?=
+ =?utf-8?B?SjNEeGVmUVpNaWlnL21mdmNKWWpOYmlJdGR3OTFNMWozQWc3dE9ZU0N6NkpJ?=
+ =?utf-8?B?dlJ4eGN4MXF6R1dwN2swMDQ4MEVuclVQU0dEaUV0UkxDcXluL1pFZ0hiV2Vl?=
+ =?utf-8?B?a01tVjczTVJXK2MwUW44by9tcEIzaDVXR1ZKTEJqQ0pFU3JiamRkTFQ3RkM0?=
+ =?utf-8?B?eFNZRHpzYlRmTzRORUhDUW9NRTN3S1FYdXlHaXlzbXo0K0wzd0g0Nk83Um9S?=
+ =?utf-8?B?SlYyVTVQbVJzcDY2MTdRU3o2Sk5SdkFkUE42VENKVDYyY21NVkNRLzFQbU1J?=
+ =?utf-8?B?OUhIQ2RkcFh4RkFGeHR3a3lVdSs5bkRwUTRhMXk4clRDdUdaWlNIWU5QUldM?=
+ =?utf-8?B?R3RTelJrZytCSnlLTHp0NnFhTnNmREpBaUl1R0ViSkxXWVZFaDhET3F4QXJ0?=
+ =?utf-8?B?cnZyQ3RTREJMSWxaaXY0U1daOUJiaGtULzE3cng0bG5zMEtHdGZWYjBXMTdq?=
+ =?utf-8?B?eVRLaGQxYWdzSEh0OVF3WlJLem5SenFzZXhyZWFESWNuOFZHSnJJTEN3Q2p1?=
+ =?utf-8?B?ZFBrc2JpbGJERGRGTmlJNmxMU3BGYXdGOUxHaHlJT0wwWitpZ0UxQytzbnkv?=
+ =?utf-8?B?S1htV3FPZmFuTWplOHNGa1RmNllwWnRtMS9nV3ptalR0RzdUbjlRU1BwN0Jt?=
+ =?utf-8?Q?NgiBoKEbBkGi6fRk=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0d4bbe9b-8fd5-4dec-bb58-08df0ff5c79b
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 11:14:00.1698
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1df4e77b-4bec-4e05-8bdb-08df0ff44ff2
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF000075F4.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7624
-X-purgate-ID: tlsNG-c1860d/1789124617-D634587B-0F8DC02A/0/0
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: VHUY1BPGMJUrIOiKwV9WaW8Zf0UJ+JXI4JQwgfUT6+ccAP+oiyq/1MhNuFQGQhXPq2AG6ffPQRsyTPkTbyVxexJR+8r+U+2shvrooYbMNOk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB6435
+X-purgate-ID: tlsNG-bad1c0/1789125245-3BED6034-E9294ECB/0/0
 X-purgate-type: clean
-X-purgate-size: 3592
+X-purgate-size: 2514
 
-
-
-On 18-Aug-26 13:32, Mykola Kvach wrote:
-> is_espi() currently changes its result according to CONFIG_GICV3_ESPI
-> and asserts when an eSPI INTID is passed to a build without eSPI
-> support. This makes a range predicate carry configuration policy and
-> causes callers to depend on its hidden side effects.
+On 9/11/26 11:06 AM, Andrew Cooper wrote:
+> On 10/09/2026 5:39 pm, Ross Lagerwall wrote:
+>> For multi-byte IO port accesses, the APM says that SVM should intercept
+>> if any of the corresponding permission bits are set. However, the code
+>> has this backwards and only intercepts if all the permission bits are
+>> set.
 > 
-> Make is_espi() report only whether an INTID is in the architectural
-> eSPI range. Gate eSPI handling explicitly at call sites and preserve
-> the debug checks on paths where an eSPI is invalid without compiled-in
-> support.
+> By any chance is this for the root partition, with 0xcf9 permitted but
+> 0xcf8,a,b intercepted?
+
+Yes, for the root partition. It intercepts 0xcf8,c,d,e,f and permits
+0xcf9,a,b.
+
+>>
+>> This affects Hyper-V since it does not generally set all the permission
+>> bits of the multi-byte ports it allows its root partition to access.
+>> This results in an L2 root partition that cannot do PCI config space
+>> accesses and therefore cannot access its NVMe disk to continue booting.
+>>
+>> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+>> ---
+>>   xen/arch/x86/hvm/svm/nestedsvm.c | 2 +-
+>>   1 file changed, 1 insertion(+), 1 deletion(-)
+>>
+>> diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+>> index 5adb1bd72c4d..249fde43b5be 100644
+>> --- a/xen/arch/x86/hvm/svm/nestedsvm.c
+>> +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+>> @@ -852,7 +852,7 @@ nsvm_vmcb_guest_intercepts_ioio(paddr_t iopm_pa, uint64_t exitinfo1)
+>>       for ( io_bitmap = hvm_map_guest_frame_ro(gfn, 0); ; )
+>>       {
+>>           enabled = io_bitmap && test_bit(port, io_bitmap);
+>> -        if ( !enabled || !--size )
+>> +        if ( enabled || !--size )
+>>               break;
+>>           if ( unlikely(++port == 8 * PAGE_SIZE) )
+>>           {
 > 
-> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> ---
-> Changes in v3:
-> - New preparatory cleanup requested during review.
-> ---
->  xen/arch/arm/gic.c             |  5 ++++-
->  xen/arch/arm/include/asm/irq.h | 11 -----------
->  xen/arch/arm/vgic.c            |  4 ++--
->  3 files changed, 6 insertions(+), 14 deletions(-)
+> While this does fix a bug, I think the behaviour is still unsafe.
 > 
-> diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
-> index 078049e741..075e1d2c50 100644
-> --- a/xen/arch/arm/gic.c
-> +++ b/xen/arch/arm/gic.c
-> @@ -348,7 +348,10 @@ void gic_interrupt(struct cpu_user_regs *regs, int is_fiq)
->          /* Reading IRQ will ACK it */
->          irq = gic_hw_ops->read_irq();
->  
-> -        if ( likely(irq >= GIC_SGI_STATIC_MAX && irq < 1020) || is_espi(irq) )
-> +        ASSERT(IS_ENABLED(CONFIG_GICV3_ESPI) || !is_espi(irq));
-> +
-> +        if ( likely(irq >= GIC_SGI_STATIC_MAX && irq < 1020) ||
-> +             (IS_ENABLED(CONFIG_GICV3_ESPI) && is_espi(irq)) )
-Take a look at LPIs that are also protected by CONFIG option. We don't ASSERT
-because they are gone in a release build. We want to BUG() for eSPIs same as for
-LPIs if we cannot continue with this condition (we haven't configured/enabled
-them, so it's impossible condition where something went wrong). Here you should
-just BUG().
+> For starters, 'enabled' is a terrible name and is probably a major
+> factor in getting this wrong.  It should be 'intercepted'.
+> 
+> hvm_map_guest_frame_ro() can return NULL for several reasons[1],
+> including ballooned out frames/etc.  It is not by accident that a set
+> bit means intercept; it's for the same reason that the byte sequence FF
+> FF is #UD (with the PUSH that should have been in that position moving
+> elsewhere in the opcode table), and that's because ~0 is the return
+> value for "nothing here on the memory bus".
+> 
+> Either way, if io_bitmap is NULL, the port should be intercepted rather
+> than access being permitted, so the other prior line needs to be of the
+> form:
+> 
+>      intercepted = !io_bitmap || test_bit(port, io_bitmap);
+> 
 
->          {
->              isb();
->              do_IRQ(regs, irq, is_fiq);
-> diff --git a/xen/arch/arm/include/asm/irq.h b/xen/arch/arm/include/asm/irq.h
-> index 09788dbfeb..c29f3d04a3 100644
-> --- a/xen/arch/arm/include/asm/irq.h
-> +++ b/xen/arch/arm/include/asm/irq.h
-> @@ -66,18 +66,7 @@ static inline bool is_lpi(unsigned int irq)
->  
->  static inline bool is_espi(unsigned int irq)
->  {
-> -#ifdef CONFIG_GICV3_ESPI
->      return irq >= ESPI_BASE_INTID && irq <= ESPI_MAX_INTID;
-> -#else
-> -    /*
-> -     * The function should not be called for eSPIs when CONFIG_GICV3_ESPI is
-> -     * disabled. Returning false allows the compiler to optimize the code
-> -     * when the config is disabled, while the assert ensures that out-of-range
-> -     * array resources are not accessed.
-> -     */
-> -    ASSERT(!(irq >= ESPI_BASE_INTID && irq <= ESPI_MAX_INTID));
-> -    return false;
-> -#endif
->  }
->  
->  static inline unsigned int espi_intid_to_idx(unsigned int intid)
-> diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
-> index e5aca17dcb..e14123a30a 100644
-> --- a/xen/arch/arm/vgic.c
-> +++ b/xen/arch/arm/vgic.c
-> @@ -718,8 +718,9 @@ struct pending_irq *spi_to_pending(struct domain *d, unsigned int irq)
->      unsigned int idx;
->  
->      ASSERT(irq >= NR_LOCAL_IRQS);
-> +    ASSERT(IS_ENABLED(CONFIG_GICV3_ESPI) || !is_espi(irq));
->  
-> -    if ( is_espi(irq) )
-> +    if ( IS_ENABLED(CONFIG_GICV3_ESPI) && is_espi(irq) )
-Following the LPIs, irq_to_pending() returns NULL if they are not supported and
-we somehow ended up here. We should do the same here without using IS_ENABLED
-and ASSERT. Note though that for that, some call sites need to be enabled not to
-dereference NULL.
+OK, I'll send an updated patch.
 
-~Michal
-
+Ross
 
