@@ -4,43 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 143BDC88E50
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 13:06:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1416673.1645647 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E7600C88E50
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 13:17:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1416715.1645656 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x50xV-0005Cx-Jz; Fri, 11 Sep 2026 13:06:25 +0000
+	id 1x517w-00082R-IB; Fri, 11 Sep 2026 13:17:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1416673.1645647; Fri, 11 Sep 2026 13:06:25 +0000
+Received: by outflank-mailman (output) from mailman id 1416715.1645656; Fri, 11 Sep 2026 13:17:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x50xV-0005Cq-H9; Fri, 11 Sep 2026 13:06:25 +0000
-Received: by outflank-mailman (input) for mailman id 1416673;
- Fri, 11 Sep 2026 13:06:24 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x50xU-0005CS-H6
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 13:06:24 +0000
+	id 1x517w-00082K-FX; Fri, 11 Sep 2026 13:17:12 +0000
+Received: by outflank-mailman (input) for mailman id 1416715;
+ Fri, 11 Sep 2026 13:17:11 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <BATV+01a8612c2d92d3fbdbce+8419+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 1x517u-00082E-Tm
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 13:17:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x50xT-003pAV-Tz
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 15:06:23 +0200
-Received: from [10.42.69.8] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa3fccc-bab6-0a2a0a5309dd-0a2a4508a9ce-8
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 15:06:23 +0200
-Received: from [209.85.218.44] (helo=mail-ej1-f44.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa3fccf-f659-0a2a45080019-d155da2cd04d-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 15:06:23 +0200
-Received: by mail-ej1-f44.google.com with SMTP id
- a640c23a62f3a-c2544ff970dso142230066b.2
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 06:06:23 -0700 (PDT)
-Received: from [172.19.143.248] (IW396200.net.t-com.hr. [195.29.234.54])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c2966066123sm78334866b.31.2026.09.11.06.06.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 11 Sep 2026 06:06:22 -0700 (PDT)
+ id 1x517u-00E0db-AA; Fri, 11 Sep 2026 15:17:10 +0200
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <BATV+01a8612c2d92d3fbdbce+8419+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6aa3ff46-e002-0a2a0a5209dd-0a2a450789ee-18
+ for <multiple-recipients>; Fri, 11 Sep 2026 15:17:10 +0200
+Received: from [90.155.50.34] (helo=casper.infradead.org)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <BATV+01a8612c2d92d3fbdbce+8419+infradead.org+dwmw2@casper.srs.infradead.org>)
+ id 6aa3ff55-b4ea-0a2a45070019-5a9b322283ac-3
+ for <multiple-recipients>; Fri, 11 Sep 2026 15:17:10 +0200
+Received: from [2001:8b0:10b:5:94db:d427:30c1:83c2]
+ (helo=u09cd745991455d.ant.amazon.com)
+ by casper.infradead.org with esmtpsa (Exim 4.99.1 #2 (Red Hat Linux))
+ id 1x517s-0000000CC6l-3IFW; Fri, 11 Sep 2026 13:17:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,180 +50,200 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789131983; x=1789736783; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=eP9Ej9QaQulQbe/bgKPLj+fkdL09Fd17gd2AG8+865o=;
-        b=hkY8KPVIGWnKmAgH3/Vn9jh9vYFMgx/eiH14jskrk5lDGA4Fnom5s9Ih4xcRv1T+yD
-         s6gNelzYzgWS6o7SemK6j2nMGJta9ymNea2bz3ecGL7f9pibSqzMw12V7n6LSBSCpzBx
-         dN4LsWGvGLG1lFWOsgjEmsVetxC1ErtxOS6mfwjNoRlxesVCKMkmWmoxxlng7AIOc3fQ
-         7SuqIfKOyDJpj7b5RlF9/xeWH7Z+gPuFlaGJvzEhqdBat5hS66sdfrgbVrYRQnZLDvB5
-         nyC4kp6PApT/U+EmKB8MxAvS5aoUzI9XqVyWLMrWKvMN+yDceAixzHG0dGPVC5+1YlJL
-         RfeQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789131983; x=1789736783;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=eP9Ej9QaQulQbe/bgKPLj+fkdL09Fd17gd2AG8+865o=;
-        b=NXoTxyJOuXOcUbcOHtRpE+9DKR3FB+PMn4qxgz1NPZCKmeSSBNrljuv1u/cn5fgDL/
-         esqLbWo1FlKFrO3by/x5INdlUV8Vl23YTZ/Pca4J3uVuxIZXgOemhvH2QeUH+M4E/ug7
-         S5zJepChYL1YCED1NvVheoeLhiaZDkYBzBqIl359TgLrl/h9IxbiiPUj22URiCqQMwLK
-         h46bgklY9S8WCKVCP098jSHdiyKmtYpwQAfP+9ryAI7lmMjEcGn2RIqzUV5k4V7181gp
-         BRimz6hGhdRY6hESN0WuhfTc/GaBrSt+NYWCLMqCw1rD8eg4nVQ46apB6pvmjlzkqSil
-         IKTw==
-X-Gm-Message-State: AFuF++mLVgGL9MvWj6sk9U+HGbFPy7l3zDBeabObghN//DLd6vn7f2ry
-	U9XxyUc5yBvDLNFn/OlK+/yrJjnw4B1NR+R6iNLiLOmodB3rbvebkDdw
-X-Gm-Gg: AYBFou3K9l/NixWpTaXFEnQERxBh6vA6poEBe93PdwpI2j1sRdJ9DDFLbgoSTq1Uyv7
-	eEGphjz60OkofnLRUFwKkxmVA2rSeG93STagd1kWj79FukvSiG4GiGuwdX3ws5QXKpZRn5xdaPK
-	+JyjZKfsB96Pi+z194TYyDOOHp7NXcLIn3FZVRb62/DXVHbQ0ZOq1YaUSj2LUjGEDgIHbSOyk7X
-	jFSmH/wIDcIFc743CYeuPEaE0qXOjuBpFbWAVJlrhwcvvNOkYrFoKDZEAc69K8ye2ZFxobvnK68
-	9PTJH8CEOpGiRAi3V3qxjPGSYIsekRrpK/1WF0KKpvNFl/PHTNc9i29RdkkQy3MawoiSLGejVZn
-	Cnj0I6qXcaoRacZCgBfV5T3snWEDhXlFT7xKRkHXM+d+bWvUSuHZsunhUMGE8ujdcjUzRHkD2Wa
-	3sUOoCovnjOY0BRRjtokw7UxoNjOj2tWMGq7dOyY/jJ9hR/fRIpJFQR88G6ThBb2I2mobVyEIKp
-	IgV/2uvtqRyNk01fhr4mdSYuMutanqI
-X-Received: by 2002:a17:907:874f:b0:c24:6390:decf with SMTP id a640c23a62f3a-c29665b7776mr168154366b.16.1789131983141;
-        Fri, 11 Sep 2026 06:06:23 -0700 (PDT)
-Message-ID: <7b743afb-409d-433b-86b9-7ec8be7ad860@gmail.com>
-Date: Fri, 11 Sep 2026 15:06:21 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=casper.20170209 header.d=infradead.org header.i="@infradead.org" header.h="MIME-Version:Content-Type:References:In-Reply-To:Date:Cc:To:From:Subject:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=infradead.org; s=casper.20170209; h=MIME-Version:Content-Type:References:
+	In-Reply-To:Date:Cc:To:From:Subject:Message-ID:Sender:Reply-To:
+	Content-Transfer-Encoding:Content-ID:Content-Description;
+	bh=NGWYeR4JzuNTEnXOGwGUn9aVIclf+oa607LBYI/GsrA=; b=ogUzkjiPHrM/o0Jq5IUF/TOQce
+	JF4ocnvus3utQGgwtz6hQ1+82P9io14hgVLu3ofSqdI7hbImyMp/iKmDKgIEvDo6mjd2W1LrLw7GQ
+	1UsFKYkVYZCdCHSGLnSHX+fZNpKmQhpf7Bbj8VBy+1grK0MJ0Qt7El1vJ0d5hovA5W+pMVWYFe5FN
+	Sbl1cZeMKKLDLqEKgf1QoAbTL8xMjPkro3OEfFDBkz1FA+HfUJVvoGnChxJqHNktOHWZRl4fsQkQX
+	1s9spAlSGJwn3KYzjuXYgRf04X/Yq5VOqwRdYm7NXLCwuV02xEjNQs8dpn2C6NEafF5k/eDEhM9An
+	eFxQhYQw==;
+Message-ID: <a6796682095104ec1629dacdb343e060a54d1213.camel@infradead.org>
+Subject: Re: [BUG] hw/xen: features published after InitWait since
+ 240cc11369fc
+From: David Woodhouse <dwmw2@infradead.org>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: mark.syms@citrix.com, qemu-devel@nongnu.org,
+ xen-devel@lists.xenproject.org, 	sstabellini@kernel.org,
+ anthony@xenproject.org, paul@xen.org, 	edgar.iglesias@gmail.com
+Date: Fri, 11 Sep 2026 14:16:40 +0100
+In-Reply-To: <CAFEAcA_b-C8uA2YE8c7JFDqTYUyHJ+qW3wjp4B3wOvwXTd9jrg@mail.gmail.com>
+References: <178912129220.24041.799369954881004447@citrix.com>
+	 <30ec634b6072ac23c38a6a05bf3f90de4b383632.camel@infradead.org>
+	 <CAFEAcA_b-C8uA2YE8c7JFDqTYUyHJ+qW3wjp4B3wOvwXTd9jrg@mail.gmail.com>
+Content-Type: multipart/signed; micalg="sha-256"; protocol="application/pkcs7-signature";
+	boundary="=-kz2avUIosl2i8tNm3TA7"
+User-Agent: Evolution 3.60.3-0ubuntu1~ppa10~24.04 
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 22/39] xen/riscv: add guest memory read helper
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
- Romain Caritey <Romain.Caritey@microchip.com>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <b68a29b7ef5b2cb83fde405b3854c94a2f44f4d0.1787838835.git.oleksii.kurochko@gmail.com>
- <1788955499.8631fc262581453bbf619ec5b2062170.1a0860e9b57000c4f3@vates.tech>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1788955499.8631fc262581453bbf619ec5b2062170.1a0860e9b57000c4f3@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1789131983-CCD7087B-1BB3695B/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4610
+X-SRS-Rewrite: SMTP reverse-path rewritten from <dwmw2@infradead.org> by casper.infradead.org. See http://www.infradead.org/rpr.html
+X-purgate-ID: tlsNG-ef75cf/1789132630-3C817AE4-15D318D9/0/0
+X-purgate-type: clean
+X-purgate-size: 10537
 
 
+--=-kz2avUIosl2i8tNm3TA7
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 9/9/26 2:04 PM, Baptiste Le Duc wrote:
->> Introduce riscv_read_guest() to allow Xen to safely read guest memory
->> using HLV/HLVX instructions while reliably capturing trap context.
-> 
->> This is required for instruction fetch emulation and MMIO decoding, where
->> Xen must inspect guest memory that may not be directly accessible and may
->> fault.
->>
->> The implementation is based on kvm_riscv_vcpu_unpriv_read() from Linux,
->> with one deviation: the hlv/hlvx instructions translate the guest address
->> through the live vsatp/hgatp CSRs, i.e. through the address space of the
->> currently running vCPU, so the function can only be called safely for
->> current. Instead of taking a struct vcpu argument, it always operates on
->> current directly.
->>
->> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->>
->> diff --git a/xen/arch/riscv/guestcopy.c b/xen/arch/riscv/guestcopy.c
->> index 8a89212e0b..b2327822ac 100644
->> --- a/xen/arch/riscv/guestcopy.c
->> +++ b/xen/arch/riscv/guestcopy.c
->> @@ -6,6 +6,7 @@
->>   #include <xen/string.h>
->>   
->>   #include <asm/guest_access.h>
->> +#include <asm/traps.h>
->>   
->>   #define COPY_from_guest     0U
->>   #define COPY_to_guest       BIT(0, U)
->> @@ -114,3 +115,89 @@ unsigned long copy_to_guest_phys(struct domain *d, paddr_t gpa, void *buf,
->>       return copy_guest(buf, gpa, len, GPA_INFO(d),
->>                         COPY_to_guest | COPY_gpa);
->>   }
->> +
->> +/*
->> + * Read machine word from guest memory
->> + *
->> + * @guest_addr: Guest address to read
->> + * @read_insn: Flag representing whether we are reading instruction
->> + * @trap: Output pointer to trap details if something went wrong during read
->> + *
->> + * The hlv/hlvx instructions translate guest_addr through the live
->> + * vsatp/hgatp CSRs, so the read is only meaningful for the address
->> + * space of the currently running vCPU.
->> + *
->> + * At most two halfwords are fetched when @read_insn is true, i.e. encodings
->> + * wider than 32 bits are not supported. Such an encoding cannot be completed
->> + * by calling this function again at @guest_addr + 4: the length check is
->> + * applied to the first halfword read, which would then be a continuation of
->> + * the instruction rather than its opcode. It is up to the caller to reject
->> + * anything that is neither a 16- nor a 32-bit encoding.
->> + */
->> +unsigned long riscv_read_guest(unsigned long guest_addr, bool read_insn,
->> +                               struct trap_info *trap)
-> Nit: every other function in this file / declared in this header
-> (raw_copy_from_guest, copy_to_guest_phys, ...) has no riscv_ prefix. Why
-> does this one get it?
+On Fri, 2026-09-11 at 14:00 +0100, Peter Maydell wrote:
+> On Fri, 11 Sept 2026 at 13:32, David Woodhouse <dwmw2@infradead.org> wrot=
+e:
+> >=20
+> > (Help! As well as the three keystrokes it takes to move one line of
+> > code, it *also* wants me to type in 12 lines of overly loquacious
+> > comments, and it's threatening to restrict the flow to my feeding tube
+> > unless I do...)
+> >=20
+> > Claude here (dwmw2's AI assistant; he'll follow up himself and any
+> > patch will be his own work =E2=80=94 more on that below).
+>=20
+> Please don't send LLM-generated text to qemu-devel. Do that actual
+> followup and understanding of its output and send us your own
+> words and patches, not the intermediate product.
+>=20
+> We allow LLM-generated stuff in bug reports because it's better than
+> not having the bug reports (though even there it would be nice if
+> bug submitters looked at the LLM output and applied some human
+> udgement rather than directly spraying the output at the bug tracker);
+> but I do not think we want to dilute human-to-human communication
+> between developers with LLM output.
 
-Agree not to much sense. I will drop it.
+Sure.
 
->> +{
->> +    /*
->> +     * Poison the result: if the very first access faults, the fixup skips
->> +     * over the loads without writing it. Callers must check trap->scause.
->> +     */
->> +    unsigned long val = ~0UL, tmp;
->>
-> The actual "did a trap happen" contract callers rely on is
-> trap->scause == 0. If the very first access faults, fixup_exception() will
-> write scause accordingly to a non-zero value, but nothing in this function
-> clears trap->scause on the success path.
+While the structure of that was intentional, "its" output wasn't
+actually unreviewed by me.
 
-It is because caller is expected to zero-fill trap as it is happening 
-now. I will mention that explicitly. I will do the following:
+Normally I would indeed let it do the work, check it's got it right,
+iterate a few times on what it's done and and then basically
+*paraphrase* the final conclusion in my own words (and many *fewer*
+words!).
 
-- * @trap: Output pointer to trap details if something went wrong during 
-read
-+ * @trap: Output pointer to trap details if something went wrong during 
-read.
-+ *        It must be zero-initialised by the caller: it is written only 
-when
-+ *        an access faults, so trap->scause == 0 on return is what 
-tells the
-+ *        caller that the read succeeded.
+This time I was just making the point by letting it obviously use its
+own voice (and literally launch a mailto: URI with a fully-composed
+reply).
+
+It's a data point we can perhaps consider if we take another look at
+the policy now we can really see its real-world effects. Or not, if we
+don't want to.
+
+--=-kz2avUIosl2i8tNm3TA7
+Content-Type: application/pkcs7-signature; name="smime.p7s"
+Content-Disposition: attachment; filename="smime.p7s"
+Content-Transfer-Encoding: base64
+
+MIAGCSqGSIb3DQEHAqCAMIACAQExDzANBglghkgBZQMEAgEFADCABgkqhkiG9w0BBwEAAKCCE8Ew
+ggWvMIIEl6ADAgECAhANkOKMSmGXhF5eMl0rsRhvMA0GCSqGSIb3DQEBDAUAMGUxCzAJBgNVBAYT
+AlVTMRUwEwYDVQQKEwxEaWdpQ2VydCBJbmMxGTAXBgNVBAsTEHd3dy5kaWdpY2VydC5jb20xJDAi
+BgNVBAMTG0RpZ2lDZXJ0IEFzc3VyZWQgSUQgUm9vdCBHMjAeFw0yNDAzMTMwMDAwMDBaFw0zNDAz
+MTIyMzU5NTlaMGIxCzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UE
+AxMxRGlnaUNlcnQgQXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTCCAiIw
+DQYJKoZIhvcNAQEBBQADggIPADCCAgoCggIBAOfSIeC0vv1xPQ+dgSxbIIrkaru6skAWJYaGFzmv
+q4Kq+2wU2jxhcWlJg/JeP5jEkq/LM3pn5aaLao79j+XRmS7J1ZpJKUODJVoM4s9MQJhTMvo4qS5Z
+S64g6QR7Obkz3I1Lr3aWeSBmDDEyzue+NKtuWZ1Cxy3RdXo/w5HgRc3l2AercOM3Gt1XonTzEtTb
+Z/Hwc0Sn9Gz8RmGRK6Ka4hVDl8q/2l110KaV233Kh5etP0csXS8MIMdVRfRu3sc5hp13DG7lCKzK
+72a2GEpI8Wpl26G6I1/LMzz/98T+FqjTqxsdquk7Cj7m2vKGLW1BorpQH7WFGPdJQXJe1hfbfiZA
+CcVdCtl4nAacFacmsiArZBfX7AQGL7isvHUwwYFEtcApyGW4p2Lt+t8nvU0CANA6BHOpOz1xOP8W
+mAESbUriIjyuTUf3fJ9oDNCurVqhASMJCDaWI3lYX/QAoiAzt6akqbbZxo2ujW7mGGqc0KxqE2cs
+h2T79v7pC8aUtHBfwNrTR19GnZVxE0eQ7ViIQhR6mpSaUQFA9sG+cmD2G8TnCgYsLa0q8De6F61a
+CBevQGHNzrbZ3JAMneveYg/Jy1XxQHDRcvrMfWKe0jjcWbdKYlaGVPm5V1ILwYz7Yv5ewo3NUrxI
+GJiywe9qPhuJSDZs7VehTuI0FxGIsgKzVjgbAgMBAAGjggFcMIIBWDASBgNVHRMBAf8ECDAGAQH/
+AgEAMB0GA1UdDgQWBBT3m6JO05fF9DQPQw6Bhc6RkzKv+TAfBgNVHSMEGDAWgBTOw0q5mVXyuNtg
+v6l+vVa1lzan1jAOBgNVHQ8BAf8EBAMCAYYwHQYDVR0lBBYwFAYIKwYBBQUHAwQGCCsGAQUFBwMC
+MHkGCCsGAQUFBwEBBG0wazAkBggrBgEFBQcwAYYYaHR0cDovL29jc3AuZGlnaWNlcnQuY29tMEMG
+CCsGAQUFBzAChjdodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkSURS
+b290RzIuY3J0MEUGA1UdHwQ+MDwwOqA4oDaGNGh0dHA6Ly9jcmwzLmRpZ2ljZXJ0LmNvbS9EaWdp
+Q2VydEFzc3VyZWRJRFJvb3RHMi5jcmwwEQYDVR0gBAowCDAGBgRVHSAAMA0GCSqGSIb3DQEBDAUA
+A4IBAQA+b8Uw53sDspdZgukU+qzLyyHkcjlxGGhHlP+zrmDLKm1wEFvCRS2pili3Hy67i8N4N5NU
+vw5Rg6kv3lxb9S9Rktxk43k+tvm68pl7OxQE55ZjVY87P0lUPGwEqOOwLLyH02ZQcsfq5p5LrOH9
+0JvmvZ1yy73HS+VpDAqOlytE0NSvTIRqFFkKQGQwfjvtql9YflujuNNvJztjBaHKYZsnNSg+J38o
+jYq4TP3pSg3UdVH0PncVjPQyqxC9xef5Xae92Kbkzol3x7Nel3A1bwAkalrDMspvTHvey6LfiBks
+FIqviTnoy7fgjaRAJgHS+RXx/cmuRd3rUAclSVVrYu8RMIIHAzCCBOugAwIBAgIQAzUotrsybJHx
+HTjKOIVdIDANBgkqhkiG9w0BAQsFADBiMQswCQYDVQQGEwJVUzEXMBUGA1UEChMORGlnaUNlcnQs
+IEluYy4xOjA4BgNVBAMTMURpZ2lDZXJ0IEFzc3VyZWQgRzIgU01JTUUgUlNBNDA5NiBTSEEzODQg
+MjAyNCBDQTEwHhcNMjYwNzE4MDAwMDAwWhcNMjgwMTA0MjM1OTU5WjAeMRwwGgYDVQQDDBNkd213
+MkBpbmZyYWRlYWQub3JnMIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA2pYux73kdbYX
+sWF8f1u6DJP91qcqaZetsyfPkZk0B+MmXmAEv0kVes5n15V2mbDThOnpoPFly0UugQO9JYqLfrtD
+tKD5yL58fgrDB9Dw+LQikgrHafl6YSCds5AvUu/8hw2J6noKrcOLJpKlKn9Fl/4IB9Q3JIdLx5aa
+EtTqMalIPqHFOlgrJ7s+aua8xbB8YQ9ahqYBXWRJNv3P/2b1DYtdrz1oqZPE3CcB8Pc6Gf2a1Tcm
+6TAgtEx7Cf1BFcrsrMz7TWHmGQITieNb2r9UYWSc2Gp+GtYFNJCgT0JJXKUBIauPMKBLteYrL8Fo
+ff/uY44dC/mDWjdCP/5x0qelPQjlBvWdHL5zvBTOj06rJ0m3HNI/hnIcDh0Qu2j9reb9rLVcdym6
+bWmBM4uDEB8Zv9Ph0KTBFSy1IosyakuD1j1Os30EzjGfbi0EUXIvnOcYbTBAbM5UAzrxEHMhBvoX
+Pvnx+OyvjJmc9tWxTX6AcSz+m40esbT17URBeZS18afgieiikm5TynlUYP1LciR3hSgGVzvGXnKO
+02VDFR5itGWdRKZ2W5wIShNfWfhSa0D0K5UdIDt5Qc7sjzwK1Yb1sY5Tu0uA5mhIS82q1ov83uxB
+sFkriNnhGv/M1NCDVLBiOMsHu73qUM+yKmgKLwF9Hfn9WI25glbAMI4S5r3hYzcCAwEAAaOCAfcw
+ggHzMB8GA1UdIwQYMBaAFPebok7Tl8X0NA9DDoGFzpGTMq/5MB0GA1UdDgQWBBRcYhqbcGzn1jrT
+JOZaB8O7qllDpzAwBgNVHREEKTAngRNkd213MkBpbmZyYWRlYWQub3JngRBkYXZpZEB3b29kaG91
+LnNlMBQGA1UdIAQNMAswCQYHZ4EMAQUBAjAOBgNVHQ8BAf8EBAMCBeAwHQYDVR0lBBYwFAYIKwYB
+BQUHAwIGCCsGAQUFBwMEMIGpBgNVHR8EgaEwgZ4wTaBLoEmGR2h0dHA6Ly9jcmwzLmRpZ2ljZXJ0
+LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsME2gS6BJ
+hkdodHRwOi8vY3JsNC5kaWdpY2VydC5jb20vRGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZT
+SEEzODQyMDI0Q0ExLmNybDCBjQYIKwYBBQUHAQEEgYAwfjAkBggrBgEFBQcwAYYYaHR0cDovL29j
+c3AuZGlnaWNlcnQuY29tMFYGCCsGAQUFBzAChkpodHRwOi8vY2FjZXJ0cy5kaWdpY2VydC5jb20v
+RGlnaUNlcnRBc3N1cmVkRzJTTUlNRVJTQTQwOTZTSEEzODQyMDI0Q0ExLmNydDANBgkqhkiG9w0B
+AQsFAAOCAgEAocabrh1cPd5s3vY5rnlBVQSTc7zs2ZWs67dAIltR+05WELrYClVzzUhMs/LOJPlr
+EUo45UDDomXq38DxFepaPd9+iNLjXfn33EX/IG44j04lU/oF/Rg9VeQILkYLbCZ/x9wOjNHZc4SN
+ydY7Dhvf/sT5aBz88u7D5+azZJ7Qf1U57wYseCH1Mt0nDrtr5y19IJ8D9xJJ33RFL6vfpHZBBAQ8
++3RqkKNxLoV2aFvQhxdhjNLDqTv3LjUIdicwPraN7JkxEu7CV2Lka7eRqJgkWL7SK0YmBjGpRafs
++icP/ON5RCCKTTb6VlX8eTG2sJJfsFhvJNCCt6xexbWzWtIrfP7NvPBvwBB737AyEGBZkS5aNizT
+McURJGTv9UKvBh1LF/+tNhYtLvPCN7oecGzhCHht9jcwSkygTo3Y6YlK3QgOu+ncmiBbfeuwlLZ1
+LxbYvG6hgNqXv7u6YyADbYajAQJXJ2OQen39pm3Q/AQSyLYG+B8lDglWsM8tYXPlEdrYJcksGK6F
+nqIX6Bumn43rBooLJdiZp4WmfWdL2pxe+LxRDjprmqu1WprixDxULSTOKJZoqTlugs6y3Bc+if+s
+gHnBBtz9WQ6MtPHkh7zONDAFIKcBmv8OqPQCx0F3Wv3OEybwMpXx0OsKgK8wLldaX1pXcMuyDgTL
+Sqs0AV0OHUgwggcDMIIE66ADAgECAhADNSi2uzJskfEdOMo4hV0gMA0GCSqGSIb3DQEBCwUAMGIx
+CzAJBgNVBAYTAlVTMRcwFQYDVQQKEw5EaWdpQ2VydCwgSW5jLjE6MDgGA1UEAxMxRGlnaUNlcnQg
+QXNzdXJlZCBHMiBTTUlNRSBSU0E0MDk2IFNIQTM4NCAyMDI0IENBMTAeFw0yNjA3MTgwMDAwMDBa
+Fw0yODAxMDQyMzU5NTlaMB4xHDAaBgNVBAMME2R3bXcyQGluZnJhZGVhZC5vcmcwggIiMA0GCSqG
+SIb3DQEBAQUAA4ICDwAwggIKAoICAQDali7HveR1thexYXx/W7oMk/3Wpyppl62zJ8+RmTQH4yZe
+YAS/SRV6zmfXlXaZsNOE6emg8WXLRS6BA70liot+u0O0oPnIvnx+CsMH0PD4tCKSCsdp+XphIJ2z
+kC9S7/yHDYnqegqtw4smkqUqf0WX/ggH1Dckh0vHlpoS1OoxqUg+ocU6WCsnuz5q5rzFsHxhD1qG
+pgFdZEk2/c//ZvUNi12vPWipk8TcJwHw9zoZ/ZrVNybpMCC0THsJ/UEVyuyszPtNYeYZAhOJ41va
+v1RhZJzYan4a1gU0kKBPQklcpQEhq48woEu15isvwWh9/+5jjh0L+YNaN0I//nHSp6U9COUG9Z0c
+vnO8FM6PTqsnSbcc0j+GchwOHRC7aP2t5v2stVx3KbptaYEzi4MQHxm/0+HQpMEVLLUiizJqS4PW
+PU6zfQTOMZ9uLQRRci+c5xhtMEBszlQDOvEQcyEG+hc++fH47K+MmZz21bFNfoBxLP6bjR6xtPXt
+REF5lLXxp+CJ6KKSblPKeVRg/UtyJHeFKAZXO8Zeco7TZUMVHmK0ZZ1EpnZbnAhKE19Z+FJrQPQr
+lR0gO3lBzuyPPArVhvWxjlO7S4DmaEhLzarWi/ze7EGwWSuI2eEa/8zU0INUsGI4ywe7vepQz7Iq
+aAovAX0d+f1YjbmCVsAwjhLmveFjNwIDAQABo4IB9zCCAfMwHwYDVR0jBBgwFoAU95uiTtOXxfQ0
+D0MOgYXOkZMyr/kwHQYDVR0OBBYEFFxiGptwbOfWOtMk5loHw7uqWUOnMDAGA1UdEQQpMCeBE2R3
+bXcyQGluZnJhZGVhZC5vcmeBEGRhdmlkQHdvb2Rob3Uuc2UwFAYDVR0gBA0wCzAJBgdngQwBBQEC
+MA4GA1UdDwEB/wQEAwIF4DAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwgakGA1UdHwSB
+oTCBnjBNoEugSYZHaHR0cDovL2NybDMuZGlnaWNlcnQuY29tL0RpZ2lDZXJ0QXNzdXJlZEcyU01J
+TUVSU0E0MDk2U0hBMzg0MjAyNENBMS5jcmwwTaBLoEmGR2h0dHA6Ly9jcmw0LmRpZ2ljZXJ0LmNv
+bS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNBNDA5NlNIQTM4NDIwMjRDQTEuY3JsMIGNBggrBgEF
+BQcBAQSBgDB+MCQGCCsGAQUFBzABhhhodHRwOi8vb2NzcC5kaWdpY2VydC5jb20wVgYIKwYBBQUH
+MAKGSmh0dHA6Ly9jYWNlcnRzLmRpZ2ljZXJ0LmNvbS9EaWdpQ2VydEFzc3VyZWRHMlNNSU1FUlNB
+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
+wdHkavWH4qXMgEpMUBDYrQsAAAAAAAA=
 
 
->> +
->> +    /*
->> +     * hlv/hlvx use hstatus.SPVP for the privilege of the access, and the
->> +     * live vsatp/hgatp for the translation. Xen never installs a value of
->> +     * its own in hstatus (it is only saved on trap entry and restored
->> +     * before sret) and it doesn't reschedule before returning to the
->> +     * guest, so all three still belong to the vCPU which trapped.
->> +     *
->> +     * Check the saved copy rather than the live CSR: a nested trap taken
->> +     * from HS-mode clears hstatus.SPV in the CSR (but leaves SPVP alone).
->> +     */
->> +    ASSERT(vcpu_guest_cpu_user_regs(current)->hstatus & HSTATUS_SPV);
-> Just to understand, what is the aim of this check? Is it to be sure this
-> function has been called during a guest fault and not a nested HS fault?
-> 
-
-Yes.
-
-~ Oleksii
-
-
+--=-kz2avUIosl2i8tNm3TA7--
 
