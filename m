@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB7F2C88E45
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 07:25:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415734.1644996 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C60AC79FA1
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 07:25:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1415732.1644979 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4vdM-00011g-ML; Fri, 11 Sep 2026 07:25:16 +0000
+	id 1x4vdJ-0000Op-Ab; Fri, 11 Sep 2026 07:25:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415734.1644996; Fri, 11 Sep 2026 07:25:16 +0000
+Received: by outflank-mailman (output) from mailman id 1415732.1644979; Fri, 11 Sep 2026 07:25:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4vdM-00011R-IQ; Fri, 11 Sep 2026 07:25:16 +0000
-Received: by outflank-mailman (input) for mailman id 1415734;
- Fri, 11 Sep 2026 07:25:15 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x4vdJ-0000Nd-2y; Fri, 11 Sep 2026 07:25:13 +0000
+Received: by outflank-mailman (input) for mailman id 1415732;
+ Fri, 11 Sep 2026 07:25:11 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1x4vdL-0000xE-2e
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 07:25:15 +0000
+ (envelope-from <brchuckz@aol.com>) id 1x4vdH-0000Dh-Bl
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 07:25:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4vdK-001KTX-FF
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:25:14 +0200
+ id 1x4vdG-004oXr-Og
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:25:10 +0200
 Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <brchuckz@aol.com>)
- id 6aa3acd9-e002-0a2a0a5209dd-0a2a4501afc4-2
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:25:13 +0200
-Received: from [98.137.68.204] (helo=sonic304-23.consmr.mail.gq1.yahoo.com)
+ id 6aa3acc5-bab6-0a2a0a5309dd-0a2a45018eba-38
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:25:10 +0200
+Received: from [98.137.68.30] (helo=sonic308-54.consmr.mail.gq1.yahoo.com)
  by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <brchuckz@aol.com>)
- id 6aa3acd8-5984-0a2a45010019-628944cc8388-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:25:13 +0200
+ id 6aa3acd4-5984-0a2a45010019-6289441eb6a5-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:25:10 +0200
 Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic304.consmr.mail.gq1.yahoo.com with HTTP; Fri, 11 Sep 2026 07:25:11 +0000
+ sonic308.consmr.mail.gq1.yahoo.com with HTTP; Fri, 11 Sep 2026 07:25:08 +0000
 Received: by hermes--production-bf1-54b5569bdc-fv65m (Yahoo Inc. Hermes SMTP
  Server) with ESMTPA ID c4451c0cd4386c4b1051306e68eb9ea1; 
- Fri, 11 Sep 2026 07:25:07 +0000 (UTC)
+ Fri, 11 Sep 2026 07:25:05 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,41 +51,41 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1789111511; bh=/3QUpHGBKJbXOgu22YsrlVzjiLJDOg/MMxR0FeGG6pI=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=QzLynmg1rRqy0YClCOWLrr8VWVC6sWeJSBGxWL6YF6ByqXU4gz3UFrDSBn7pY7HyldKC8tF24T1ERoXKLQsPTB0RNpWn+TwECHyowTJjRRLU6+Dax1G8FtcEd7Kwbhp2kG5k2icMHwbs2zwanyYHazp5LNqj668XirOZ7gxIn1FWwcm4L4DwDqgUpaw9xs1FlETWVJzvnw/cYCIPxBR4XuNNtHGcFyr2rRtDjxlAltEC7KZcvX79YCbwUzuIgPzymlsBdSOL6pM3yWfjwOdPhP+ywLdwHyl3Cw5Fo6DSYxy7aJg/9vwNB4OcWAgXkS4AYsB8/o/9xAvzqyd6yVNF3A==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1789111511; bh=I/ssSFpkQARF6S3fHwCeJAKASsjOH/PQdGIY+FxDhMt=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=fGeWUDeT/Dl0luu+OzhPIKUY2cctSYE2PH0khHZp3jKrzF2MITJLQd12UiAOwzFE7G7GOLufQaoeYBSJrbKcHdl+MZhHPOfiCpoSrl4UdT+bNVC0vGmV2CVxbjunxe5mR5kXM9BtDOhk3OFZ7PB4ovLbH1TK7Jb7VbZt8FIOJUyJ4fWroJpFHN6CxcYiZpnbH2WkLm0JzSYVJoburY1jkT3FKfOnh72EzDjWLyv6rx+z9n8RX1HyI+GYi8KOj8KXtvb4hHoLzqfhi/XNeOLYYIxgrVZ6etHo1Ek3HYpWZR7Vrcoz9x1dPNae9nxoBQlQLicW6nR7/99j5AktpLLeHA==
-X-YMail-OSG: 3ceA1NIVM1lx65qhP6Zop48W1CPeK8he9I_xCzv.80GxYfw0Dfz_nsufQwxudhy
- zTEZi9MkHkbiBFnXI3fOl2tw_GVcCO3uJTOKSEylFd8XGL8fXmyvJSvcknA.kvy_sm6Ghfvj54Nx
- zpo68YIzYaSwxcxPpLxai4kcgJwHRvspGgdoffPz5fLwSFRB_axL9c2.neIjoDyKgx7GY4praZi0
- jG.4ZD0JChGLGYwGAc8Bax3vX79SblGLoDX49wenKNqfOxV8DRNKBRZ7NpxRw_F7MCFAQ30tPhc.
- OTA.In6HLCUfRve5Rpom5fQjsr6z3ZWnp_E59pIctu8rPn1pAQDWHq.FHeH3jVI7aZl4rc9FObVx
- yYRoUDRlUza32VlGgHvnzuDh9ATM1DAf5LLbak50OtrAcjSpnWpB1QVu6UF5ikVFHqK03KL5Aur0
- Gm79tSZ9Uuai1tDPnCTTDku8f9ehJW6H_5rro0qPZrBg8kPOJwABhEBLlG9Tgjfyc_Bi8v_YWOhN
- ggBG.NEGjNT3QSpzD4oO2.ztqe4.CRy1j.N7j5gJt8h3bJ06cezAVS.ILZ56iphLih3lXySGGtSe
- zeHTZYbP4ItkUUavstg_yZ.KJLN318LCouSNb0_BFqnbdgB5I4bAC5nVrbOHm9TKkGyVgkeYEkll
- pKysm.4dFGwqZvW.t.d07az5iUyw8xHyc99rXCrSM3w0uN4ZScmSNM4e24WFLwWy5ReBTiaPiFgO
- sWqg799kqxwXIWEC7aBA.aYTNhv._pKXMr1gHDFcWUXF01Ec95JAuHqtN5mYWHf780BHjtbao0ix
- tXfQlGEani0_XJSO5ifj1O4wvtFgIYgKkiDKTEDB8Qc7N3.3RLRyNoDyNevDvSavVVoP0qLiZNf3
- MXQKTTzyII0pW9UwAKvcVFFJRjz8A0TB325ov0czg3DCYh7.sIz9REEFuEXSS5dFJ4rcsVv6irMQ
- eJwvwDhbIaSMtotqA5I0JlruX6rouxo_PAiYbk.Sldn4GsJCgG2FbbYgBy6bcBRmZAO9yC0lseUX
- pvPZSBU7GU7e1aUUBGrUu6Y0x_znGTczo5PlhAlVsHz9w_B4jHzspxR8CmJsf_bqrej3Amwa3DMV
- AKD2apFGZaS8JCH16slc7Awsh9KYiIedQajsWmHkpvl.tuYeg6fNxsHAEn7TifDYlFnHfvNPd4yN
- DNyQmA85icJjAfETk.Y5uTKqimnfa0cydm4G1OBoZwyuwfIIBFUKM.OiJCAF0cfsYVEcH6aya0Am
- .advDQbWEI41RYP8LFCUw0.pTcFJpd4oczm5qc_HqFBb7PdsDjB3D1bbew4I2kDLy0zyJbi1SHaw
- Bp8MPNUT08HYGW.r4zWSUIzon.2xjnlCEsBkOTiGsH6D_oVLvbFiu4a9J0GX5uSb4mpid.LDLexs
- 9r9AOvB3F5C.7RHpGmlfXqNo4KcAlY14wsYA1Oc2gjWWM1k8fk6jt3012uulM.Wlt7iQOEsRvQvu
- ffEPxHGt5peIDve_Ngn4XPJ22AgUaBSFSiDvaHHcdNW_Ls_Epfx9dJP22RzGAtKTjO289hNWWfSj
- jXATt5Zx9VWnnPkpBzOEsuB1ThkySY4DLfofOh9pDBNMlxQCBelddd5AJwfPV1D.ogUEauarhvbz
- ZUr0R_QjX6EAoEaJ9o5mZJsP4j7WglWvxi7byKLJ1_APzEOC7kcamaoShdi.NaM7Y9yDxR6yv7Fi
- HpFQoa6YU6AjDf7UlCb81gkLLOECXL.VWXcK699HH98uMkdwhIYwHUw04OSRJcuqNS47KwPbDhVA
- rUcND9SS9YKR9jpzcLRjVdjHfiq8J13rd9BCq0OwoU8kwSpnpp9ZMT5y5EWmikAOq97CBZGSt9jM
- _FpFF5SXIPZ57U74UZ4PsPAGDaFPZmo5E6eYkscFnf6c0qZ4cOwpsypR3WYbWbQzsnnkPCawjNwc
- ckZC6Qhv_k3L5o9v8hW6I_mKOLcGqE94o3w9pFsH1R04OrbYhL2E4nZvTyxzvh6SOS7SWTpyR9Lb
- e_fd36IK.ICTB8XxPRhZI_aO3klCqffAbmvw1MtspGD7HPAURRTdIC1Ymrzig8FFZqlQeysiUex6
- NAO17PvGdsPm9ZdDw_N5x33.ay63SipsSCmt7kQ4btMb83HnggaR.1yd31vjKmKOXNfAIj_yPvwf
- M5VPQ19qF8fqwJrOiFKAZhzj.OAlUYU86.ndcP5QYkIL2yUpbww1D2T8EunkDkBCLUe6ClOjioYa
- s4UnnCDsC2GNsHdAneIkjmFSNYFTxP.Z6PEx4aA--
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1789111508; bh=DeHWtm/4lazeyWTmPQN/A4L8FgKiSJ5/rJS30RCGUio=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=Jb7KTCTUxUSCZGuTZ+5vpdZaXU06xDRRrhILVWrEN0jPCXsWA8pBJa/v5/zApM2cCjoD9ovYrmCgVLcn7DLThZPgyrMTB4QvwA0vbTPcXw36KQyf9YfL27R0VMDCtzXJNx006L9c0Yqx3vmM3bNDChyGnnQ0M3+AUPtyPSn46qRdSaiIKipQYAMZjW2/eobDB16t9QEohMab0Bd8VwE1YyAVvCZJNaO/jjk8REtinLgYpzCy4hJZHeEIQpwhu0WhF4fKJMYNCV201FpW9njGNQfJK+HoZp+cgVKX9ipbzHMUcykTHQKMwtOqZaOIFUXHCiAtaz31h/hWTFHSt32H6Q==
+X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1789111508; bh=XDUvK9dnrR6LWxdmuI8cqstojs0dq6l/sUU74yykL4R=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=R8/7T6s2jmdskd+WpLwBRmEIHoy7lTd7NvV6soh7068hB5LpdmUVw4UevbkxWQXrnT3RodPIY8e21iu0C9FvrfY/0to7cz9/i1HuGTptfqAd1yW/a9LSpTKGvBdhdCnIOCs7VS56NmONijlTX1BJYQ7yL4VutOuvLfcXRNnImrUvIsO8/8FUAEt4mvoONnhqO14dSBQdUxk23cgv5hpRCpwxmnDKwwjvLwkKXJ8Y6VpMn4Et1gMx2Qowy9qbPWzVIfMstHLjg76z5NCUZxZD8atK1eshCXtbj2q8XWWrwqnkNaHTXG+t0XCqlBLhx8nlTcaKVIbgu4tpz+CxIF+sow==
+X-YMail-OSG: Z7iXECgVM1kh.PBsb9xU6VBSCWRl0Z.FykmxECXqYgL8N3_qv60M7XLD.tfdt_1
+ DSOfNx2YmBFVV_0zguET9QI.6TbtBCAogZXOuma.hHLQODnROXpEXKIqJXxt52.tI9LYCd6vA5Us
+ BXRnxf.ogSX0KjOScs9OqLPl8LLC4DwwC0_eelM1hnVd7WokECt6DpqzDSw0KGML.8eBbNfjTWhC
+ GQbJFdC60cUCdeEzLhaYBd8ngMpN8ABWowENgs_zg4T8bhdCeC90J4jIgFeZgZT_NqmxtvMe2vrD
+ an5lZe3xzMCG21VfJDkMxCGfpSGimAASnPIkxcu7iXtXV7xH0AMCYAhMQjJWDGRAeCZOdHhu.2d3
+ SskuwusqBjzdDaLkh7uq23xS52OxaUhRI3nDJ9cJbOGVtjTNCBpAUHZ9be746CX6VFEH.NeV8eVM
+ Drg3E5ghnuexAJPP9BWitaoXtUH_HS72JsWWam4FTN5Dm3r9DOKvvc7DNEW7A7ICLXlf36vltUvk
+ t8BsUNIIEjVZ0HxM9zt9WWEyMDkwWqkV_Kn9iKFNF14uu1Ur5XQ0haMG_3WpSXonnmV.8A6uoNzy
+ PRg.QSImPiWusYu6Su3g1yLkSRAAbUKHAZMqJonvyZIeSCp0r0fyKTTWRfP1DdzI6zq7BLBUMHHb
+ CMyuXq72XHzhHXtDAFCOxRRwk7vh5KKZvT10UEbhajMC9FmUQ3bzgj7VGmiu293k5VV8xUYPglbo
+ 4c2KbOdG9p0eg0Zc95CY3WwQhv3qBJRAbAF5p1_wLFXfksE1s9f4tm8543zGZxxZtIj8kp8WwQAA
+ 4MO7Mf400P4rzop7m6GuNZw2MCqbKhqxGQvNPe3yKSLJUGqOCaXuG5wJiOQHWzG5vPxT_mCFot7N
+ vb1DZ38rt7QzlWPwn3esbsmKjoSNgNAQoNPmEe.HFUgfcikSYtCisqCRrEd78rRD9m7nsweGbm7R
+ LY40C8Xk2HmqA6x4lA3qmEZPh3zySQsDHB5CTB_AJBOI1pasFYgHkn54YKX2JG1ZjQXNoNyecMN_
+ vW.qvy1LcVKk_fZyZjAObF3XQuonwv_tkl.c0KhSLL9inNmubYAH8vFVb1cWrm7FSCfcJ.EWu4hg
+ BywvFKin5y7ecgwqg4byGrbRZqwPmxgidNGk_baC9c2UUYzRT_8FxqH3.9YPse9q0ZLzJNUJmDI1
+ YyoXZ1cVP2Phs3SxtiFIdVuuiVYTEbYowFPfhHCGkJPYuD5p301cCLQKal38iBIEQO3ghuvOjKvt
+ XjE15DxbpTqdcyQRiIWhgCDOfxR_oMz1EkvP6Ac5oFkBbZNRuhT.AViiWSQvclN_HYwPeDO61xLQ
+ qiDP69W4_DOczpFG4a2g7pmb7uZsLvlkKjpxIZ3DhJuZcAN31PpoKQvdHR12vSkuQZsPoVB8ngg7
+ vpi14Ob2CKM.BmISz4gshTFqpHQ5.0Bmmdp0d9jodRjTDMMH9WAgcIwJOxJJkeHpua9Ex5vEsS2m
+ QoJGKHoZ.ndNNSaIL1NfLkxJRZhEp9ol65ADtg_Pm4wK7q2dVYeyPW_S1ydSxfKbulhu0sKIyd59
+ tGkt6iSb2kDbB3PBdF0Tchzh88_Td5myRXvMjETUA.K.PF4iCF6mGNpJSnurRkRiJ8EwfVV8GO4N
+ TzYGTz5Z9Oosh6F3XUqIFwHDDzWlHhxMnbncCJM7GSpeiubhXw7szvIeUUVisk0.XjAxI3A5bMq6
+ oBncDBtvymv19EvoyLdZyjOZCT3Szc8WJv0yPo22iiQZlqx2H0ev1BYAJkWsIZYOnLONLpQ3J99n
+ 6.fmpen7rf1BHQV64PVRdmdV.DICd1X1nwnDyGZZ_3KuDn26fX90sy5RD5xEkjKHNwYTKv91i4h1
+ lShNSKKUYXl.iZ43ytbQUfhezEbDfq1nV3bhxh.33k7f8GJtr_IvviIMpP5vIAptvSZrNe2wXCKg
+ tYuL5DmwR0HJCaU3MdmZn.H3NlIP6tDfXRYzAvWY0EAUOKBm0rO16drr_AdhgBXWPk0DBpgV6MjA
+ NfL182rb2xzq0XoDrK_ONABB_Ku23aXuDgF6XkMyX._gbwO4Zz.SBELNrc4DXvWZWHC_3WovjBrA
+ 8nG3sdNiJHVlhFpfZnU5z38462dxPpPIDlQLatMdfAbYsVL1c1BJk22WI1QYFKut8hcmWMYLgikn
+ OS2wd.dG.K8tNMP5s4XzNInIIb70uF6mqTdn1JlTOHXj69k6zk_MplSJx3mikL1fxPKtBGaJk5HL
+ hmop9D3rB2HxUTN.XRHW9iR5EhAFH7msxGnbqjw--
 X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: 325b1927-76c2-4939-b9b7-27b409399d56
+X-Sonic-ID: 1fa54d50-63c0-4570-a09f-9e5053848e1e
 From: Chuck Zmudzinski <brchuckz@aol.com>
 To: qemu-devel@nongnu.org
 Cc: qemu-stable@nongnu.org,
@@ -94,234 +94,553 @@ Cc: qemu-stable@nongnu.org,
 	Anthony PERARD <anthony@xenproject.org>,
 	"Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
 	Tomita Moeko <tomitamoeko@gmail.com>
-Subject: [PATCH v6 7/7] xen/igd: use custom option ROM if provided
-Date: Fri, 11 Sep 2026 03:24:53 -0400
-Message-ID: <20260911072453.46256-8-brchuckz@aol.com>
+Subject: [PATCH v6 6/7] xen/igd: implement support for extended VBT
+Date: Fri, 11 Sep 2026 03:24:52 -0400
+Message-ID: <20260911072453.46256-7-brchuckz@aol.com>
 X-Mailer: git-send-email 2.47.3
 In-Reply-To: <20260911072453.46256-1-brchuckz@aol.com>
 References: <20260911072453.46256-1-brchuckz@aol.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1789111513-1E465757-8660A9D4/0/0
+X-purgate-ID: tlsNG-d62444/1789111510-1FC69757-D2080B6D/0/0
 X-purgate-type: clean
-X-purgate-size: 9276
+X-purgate-size: 26534
 
-Since in some cases the option ROM is not readable from sysfs
-on the host, provide the option to use a custom option ROM file
-instead that, for example, could be extracted from BIOS or UEFI
-firmware and modified as needed for use with a particular Intel
-IGD device.
+The current implementation of support for Intel IGD passthrough to a Xen HVM
+guest relies on directly mapping the host OpRegion to the guest, and although
+the OpRegion is 2 pages in size, it is not always page-aligned so an extra
+page needs to be mapped to fully map it to the guest. This results in an extra
+page of host memory mapped into the guest that should remain confidential to
+the host. This is also why XEN_PCI_IGD_OPREGION_PAGES is currently set to 3
+even though the size of the OpRegion is only 2 pages. So in this new
+implementation avoid this confusion by redefining XEN_PCI_IGD_OPREGION_PAGES
+to 2, the actual size of the OpRegion.
 
-The file must be named "igd.rom" and be located in a directory
-configured at build time as a Qemu firmware directory and its
-size should be a power of two, and it must be compatible with
-the particular Intel IGD device being passed through.
+The current implementation also does not foresee the possibility that the
+video bios table (VBT) might not be embedded as part of the 2-page OpRegion
+but instead added on as an extended region beyond the 2 pages of the OpRegion.
+In such cases, the 3 pages that are mapped in the current implementation are
+not enough to hold both the OpRegion and the extended VBT.
 
-If provided, the "igd.rom" file will be used as the option ROM
-instead of the option ROM file epxosed in the host sysfs.
+The current implementation of support for Intel IGD passthrough to a Xen HVM
+guest also relies on a position-independent OpRegion so the unmodified host
+OpRegion can be mapped to a different address in the guest. However, as
+indicated in the Link tags below referencing support for the Intel IGD in the
+Linux kernel vfio driver, since the addition of devices with an extended VBT
+the OpRegion is not always position-independent. That is, when the OpRegion
+for such a device is mapped in the guest at a different address, it will not
+work correctly in the guest. This position-dependent behavior arises from the
+fact that the the address of an extended VBT is stored in the OpRegion in the
+RVDA field of the OpRegion and in some cases that address is an absolute
+address, not an address relative to the OpRegion base address, and in other
+cases the extended VBT is not contiguous after the OpRegion in the host so in
+such cases even a relative RVDA address would need to be adjusted for the
+OpRegion to be compatible with the desired memory map in the guest where the
+extended VBT would be contiguous with the OpRegion.
 
-If no "igd.rom" file is provided, this patch has no effect.
+To overcome these problems, this new implementation exposes an emulated
+OpRegion and VBT to the guest instead of directly mapping the host OpRegion to
+the guest and also implements a protocol for communication between hvmloader
+and Qemu so both the device model and hvmloader agree on the number of pages
+to reserve for the OpRegion and VBT which varies depending on the size of
+the extended VBT instead of being the constant value of 3 as in the current
+implementation. In this new implemetation, Qemu reads the host OpRegion to
+determine if there is an extended VBT and if so, how large it is and how many
+pages are needed in the guest E820 map to accomodate both the OpRegion and
+extended VBT. Also, in this new implementation, Qemu zero-pads the extraneous
+memory in the areas before or after a non-page-aligned OpRegion or VBT to
+avoid exposing memory to the guest that should be confidential to the host.
 
+This implementation depends on compatible support in hvmloader and also
+provides for backward compatibility and fallback to the old protocol when
+either hvmloader or Qemu cannot fulfill the requirements of this new protocol.
+
+This new protocol begins as follows: Before writing a value to the register
+that stores the address of the OpRegion that Intel has defined as the ASLS
+register and is identified in Qemu code as XEN_PCI_IGD_OPREGION, hvmloader
+reads from the ASLS register and Qemu, in the case when Qemu detects a read
+of the ASLS register before a write to the ASLS register, returns the number
+of pages that hvmloader needs to reserve for the OpRegion and VBT in the guest
+E820 map. With that information, hvmloader computes the address of the page
+base of the OpRegion in the guest and writes that value to the ASLS register.
+Then Qemu responds to this write to the ASLS register by computing the correct
+value for the ASLS register so that future reads of the ASLS register return
+that value to the guest. Qemu also responds to this write by constructing the
+OpRegion and VBT for the guest, patching the RVDA value in the OpRegion if
+necessary, and making the OpRegion and VBT a single continuous region
+accessible to the guest at the address stored in the ASLS register using
+Qemu's ioreq server.
+
+If for any reason Qemu is unable to access the host OpRegion and is also
+therefore unable to determine if there is an extended VBT and also unable to
+compute how many pages are needed for the OpRegion and extended VBT, Qemu
+falls back to the old protocol and direct maps the 3 pages from the host to
+the guest that are needed to fully map a non-page-aligned host OpRegion. In
+this case Qemu also returns 0 instead of the number of pages to reserve in the
+E820 map which communicates to hvmloader that hvmloader should fall back to
+the old protocol and assume 3 pages for the OpRegion and expect Qemu to
+directly map the host OpRegion rather than expose an emulated OpRegion and VBT
+using Qemu's ioreq server.
+
+Qemu can fail to access the host OpRegion because Qemu's access to the host
+OpRegion depends on Linux kernel support for this. Typically the Linux kernel
+exposes device IO regions in the Linux sysfs filesystem, but in the case of
+the OpRegion and VBT, these regions are only exposed in the Linux debugfs and
+then only when the Intel IGD is bound to the i915 driver. This means that Qemu
+does not have access to the OpRegion and VBT via the debugfs when the Intel
+IGD is bound to the xen-pciback driver. So it is necessary that the OpRegion
+and VBT be placed into the host filesystem where Qemu can access them when
+the Intel IGD is bound to the xen-pciback driver. In this implementation,
+the OpRegion and VBT files are searched for in files named "intel-opregion"
+and "intel-vbt" in the directories configured by Qemu as firmware directories.
+These files can be automatically placed into a suitable location in the host
+filesystem when the Intel IGD is made assignable to a Xen guest with a
+suitable patch to libxl or they can be manually placed into the host
+filesystem by copying them from the debugfs to the "intel-opregion" and
+"intel-vbt" files located in an appropriate Qemu firmware directory when the
+Intel IGD is bound to the Linux kernel i915 driver. Assuming the Intel IGD is
+at dri0 when bound to the Linux kernel i915 driver, the files in the debugfs
+where the OpRegion and VBT are exposed on the host can be found at
+
+/sys/kernel/debug/dri/0/i915_opregion
+
+and
+
+/sys/kernel/debug/dri/0/i915_vbt, respectively.
+
+Another case that can occur is when hvmloader lacks support for this new
+protocol. Qemu detects this case when hvmloader writes to the ASLS register
+before the guest reads the register. In this case Qemu assumes hvmloader lacks
+support for allocating more than 3 pages for the OpRegion so Qemu in this case
+falls back to the old protocol of direct mapping the 3 host pages to the guest
+that are needed to fully map a non-page-aligned host OpRegion to the guest.
+
+This new protocol also requires that after Qemu makes the OpRegion and VBT
+accessible to the guest via its ioreq server, hvmloader makes a copy of the
+OpRegion and VBT and writes the address of the OpRegion back to the ASLS
+register. Qemu responds to this second write of the OpRegion address to the
+ASLS register by unmapping the pages containing the OpRegion and VBT from the
+ioreq server. This makes it possible for hvmloader to back the pages that
+store the OpRegion and VBT with RAM allocated to the guest. This last part of
+the protocol is required to support Windows guests because testing indicates
+the Windows graphics drivers are unable to access the OpRegion and VBT when
+the OpRegion and VBT are exposed to the guest via Qemu's ioreq server, while
+the Windows graphics drivers are able to access the OpRegion and VBT when the
+pages that store them are backed by RAM allocated to the guest. After the
+second write to the ASLS register which causes Qemu to unmap the OpRegion and
+VBT from the ioreq server, Qemu ignores all subsequent writes to the ASLS
+register from the guest. In this way the Windows IGD graphics drivers work
+as expected.
+
+Also ensure that in xen_pt_unregister_vga_regions the call to unmap the
+OpRegion is only made in cases when we fall back to direct mapping of the
+host OpRegion. We could keep the constant 3 for the number of pages to unnap
+there since the number of pages to unmap will always be 3, but instead we use
+the value of opregion_vbt_pages there which also will always be 3 when we fall
+back to direct mapping of the host OpRegion to the guest.
+
+Link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/vfio/pci/vfio_pci_igd.c?id=bab2c1990b78
+Link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/vfio/pci/vfio_pci_igd.c?id=49ba1a2976c8
 Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
 ---
+The comapnion patch to hvmloader will be posted to the xen-devel and qemu-devel
+mailing lists shortly after this patch is posted. It is v3 of the patch
+"tools/hvmloader: implement Intel IGD extended VBT support". Please note that
+previous versions of that patch to hvmloader are not compatible with this
+patch.
+
 Changes in v6:
-  - Added a link to Tomita's edk2 patches for the OvmfX64 platform
-    for KVM/VFIO guests in this additional notes section
+  - After considering comments on v2 of the companion patch to hvmloader, this
+    patch has been totally re-worked. The work of reading the OpRegion,
+    discovering if there is an extended VBT and how many pages of memory are
+    needed to accomodate it, and patching the OpRegion if necessary, has been
+    moved from hvmloader to Qemu since v5. There are some simplifications,
+    such as the bitmask to communicate if extended VBT and OpRegion 2+ is
+    supported has been replaced with a simpler protocol that involves Qemu
+    noticing if the guest reads the OpRegion register before writing to it
+    and hvmloader noticing if Qemu returns 0 or the number of pages needed for
+    the OpRegion and VBT if hvmloader reads the OpRegion register before
+    writing to it. Another simplification is that the complicated
+    communication protocol with four extra writes to the OpRegion register
+    has been mostly removed and replaced with ontly two writes, with the
+    reason for the second write explained below.
+
+  - All the code that involves reading the OpRegion, discovering if there is
+    a VBT, how many pages are needed for the OpRegion + VBT, and patching the
+    OpRegion if necessary has been moved from hvmloader to Qemu.
+
+  - In contrast to v5 and the current implementation, the host OpRegion is
+    never directly exposed to the guest. Instead, an emulated copy, patched if
+    necessary, is exposed to the guest using Qemu's ioreq server.
+
+  - Because Windows IGD drivers cannot access the OpRegion and VBT when it is
+    exposed to the guest by the ioreq server, a second write to the OpRegion
+    register from hvmloader is processed by Qemu to indicate to Qemu that the
+    OpRegion and VBT must be unmapped from the ioreq server which allows
+    hvmloader to configure the guest to use its own copy of the OpRegion + VBT
+    that is backed by guest RAM. With this configuration in place, both
+    Windows and Linux guests are able to access the OpRegion and VBT and work
+    as expected.
 
 Changes in v5:
-  - Fix wrong whitespace in three places in a conditional block
+  - fix style by adding braces to two if blocks and not initializing
+    two static boolean variables to false
+  - update the link to the companion patch for Xen hvmloader
 
- Changes in v4:
+Changes in v4:
   - v4 is the first version of the series that has this patch
 
-Sorry for the length of these notes but there are many things
-to say about this patch that are not obvious to persons without
-some experience of actually trying to use the option ROM of an
-Intel IGD when it is passed through to a Xen HVM guest.
+ hw/xen/xen_pt_graphics.c | 266 +++++++++++++++++++++++++++++++++++++--
+ include/hw/xen/xen_igd.h |   2 +-
+ 2 files changed, 257 insertions(+), 11 deletions(-)
 
-This patch is primarily for providing a way to add Intel IGD
-support for the OvmfXen platform to get graphics output during
-early boot from modern Intel IGD devices that are only compatible
-with UEFI for graphics output during early boot.
-
-Note this patch is not necessary for successful operation of the
-Intel IGD in the guest once the guest OS drivers have loaded. It
-is only needed as part of the patchset necessary to provide
-graphics output from the Intel IGD in the guest during early
-boot when using newer devices that are only compatible with UEFI
-for graphics output during early boot. Most older devices that are
-compatible with legacy VGA BIOS will work with Seabios without
-this patch, but they will need Patch 3 of this patchset to work
-with Seabios.
-
-Some notes on adding Intel IGD support for the OvmfXen platform:
-
-It is necessary to provide an EFI graphics output protocol (GOP)
-driver to the guest to get output from the Intel IGD before the
-guest OS loads the graphics drivers when the guest uses UEFI.
-This GOP driver is essentially the replacement of the VBIOS
-driver that applied to older devices that use legacy bios, as
-described here:
-
-https://www.intel.com/content/www/us/en/support/articles/000005749/graphics.html
-
-Unfortunately, with modern Intel IGD devices, the EFI GOP driver
-is not provided to the guest in the usual way of providing firmware
-for a PCI device in the option ROM of the real PCI device. So I
-included this patch in this patchset to provide a way to expose
-the EFI GOP driver to the guest. I was able to extract the
-GOP driver for my device using the UEFI bios update file from
-the motherboard manufacturer and the UEFITool available here:
-
-https://github.com/longsoft/uefitool
-
-That EFI driver can be wrapped into an option ROM using the
-EfiRom bin wrapper that is part of the edk2 project:
-
-https://github.com/tianocore/edk2/blob/master/BaseTools/BinWrappers/PosixLike/EfiRom
-
-I tried setting the 'romfile' member of the PCIDevice struct that
-is used by KVM/VFIO Qemu devices and emulated Qemu PCI devices, but
-that did not work with Xen PCI passthrough devices. Neither Seabios
-nor the OvmfXen platform could detect the option ROM in the guest
-with that method of exposing an option ROM to the guest. So I
-implemented this approach of substituting the 'rom' file exposed by
-sysfs with an administrator-provided file instead of using 'romfile'.
-
-In the commit message I mentioned the size of the rom file "should"
-be a power of two. I mentioned this because the code in pci.c that
-handles the 'romfile' setting for PCI devices enforces this
-requirement strictly on the romfile that Qemu emulated or VFIO
-devices use. However, I do not know for sure whether or not the rom 
-file is strictly required to have a size of a power of two, so that
-is why I say it should be a power of two. In my testing, I zero pad
-the "igd.rom" file so it has a size of a power of two. I will accept
-the suggestions of experts on this question about the appropriate size
-of the option ROM file (I am not such an expert!).
-
-As mentioned in the message accompanying Patch 4 of this patchset,
-the official edk2 project does not provide support for the Intel
-IGD, but some OVMF patches for Intel IGD support are available
-online for KVM/VFIO guests, such as at the links below (they apply
-to the OvmfPkgX64 platform):
-
-https://github.com/tomitamoeko/VfioIgdPkg
-https://github.com/cmd2001/build-edk2-gvtd
-https://eci.intel.com/docs/3.3/components/kvm-hypervisor.html#build-ovmf-fd-for-kvm
-https://github.com/LongQT-sea/intel-igpu-passthru
-
-With such patches it is reported that the passed through Intel
-IGD device lights up the display during early boot from OVMF
-and the guest bootloader in KVM/VFIO guests provided that the
-administrator provides the correct ROM file via the 'romfile'
-setting for the passed thorugh Intel iGD device and applies
-appropriate patches to the OvmfPkgX64 platform.
-
-It should also be possible to add Intel IGD support for the OvmfXen
-platform also but I have not seen any such patches online for OvmfXen
-and if anyone knows of such patches online I would be interested to
-be informed about them. I am also working on my own patches to
-add Intel IGD support to the OvmfXen platform, in private for now.
-If anyone is interested, I can make the work I have done so far
-toward this goal avalable online.
-
-hw/xen/xen_pt_load_rom.c | 47 +++++++++++++++++++++++++++-------------
- 1 file changed, 32 insertions(+), 15 deletions(-)
-
-diff --git a/hw/xen/xen_pt_load_rom.c b/hw/xen/xen_pt_load_rom.c
-index f136f13..ab448f4 100644
---- a/hw/xen/xen_pt_load_rom.c
-+++ b/hw/xen/xen_pt_load_rom.c
-@@ -2,6 +2,7 @@
-  * This is splited from hw/i386/kvm/pci-assign.c
-  */
+diff --git a/hw/xen/xen_pt_graphics.c b/hw/xen/xen_pt_graphics.c
+index be71989..7136669 100644
+--- a/hw/xen/xen_pt_graphics.c
++++ b/hw/xen/xen_pt_graphics.c
+@@ -4,13 +4,27 @@
  #include "qemu/osdep.h"
-+#include "qemu/datadir.h"
- #include "qapi/error.h"
  #include "qemu/error-report.h"
- #include "hw/pci/pci.h"
-@@ -13,9 +14,9 @@
-  * need to be modified.
-  *
-  * For such cases, use this function to get a pointer to the option ROM
-- * from sysfs. Caller has the responsibility to edit the option ROM as
-- * needed, call pci_register_bar to register the modified option ROM,
-- * and set has_rom to true for the PCI device.
-+ * from a user provided romfile or sysfs. Caller has the responsibility
-+ * to edit the option ROM as needed, call pci_register_bar to register
-+ * the modified option ROM, and set has_rom to true for the PCI device.
-  *
-  * This function must be called before xen_pt_register_regions is called
-  * because if xen_pt_register_regions is called first, it will register
-@@ -32,17 +33,27 @@ void *pci_assign_dev_load_option_rom(PCIDevice *dev,
-     struct stat st;
-     void *ptr = NULL;
-     Object *owner = OBJECT(dev);
-+    g_autofree const char *fname = g_strdup("igd.rom");
-+    g_autofree const char *path = qemu_find_file(QEMU_FILE_TYPE_BIOS, fname);
-+    bool sysfs = false;
+ #include "qapi/error.h"
++#include "qemu/datadir.h"
+ #include "hw/xen/xen_pt.h"
+ #include "hw/xen/xen_igd.h"
++#include "hw/xen/xen-hvm-common.h"
+ #include "xen-host-pci-device.h"
+ #include "system/physmem.h"
  
-     /* If loading ROM from file, pci handles it */
-     if (dev->romfile || !dev->rom_bar) {
-         return NULL;
+ static unsigned long igd_guest_opregion;
+ static unsigned long igd_host_opregion;
++static uint8_t *opregion_vbt; /* pointer to OpRegion + VBT */
++/*
++ * If there is an extended VBT or if the OpRegion is not aligned on a page
++ * boundary, we will need extra pages for the OpRegion + VBT.
++ */
++static unsigned int extra_opregion_pages;
++static unsigned long opregion_vbt_pages; /* # of pages for OpRegion + VBT */
++static uint16_t version; /* OpRegion version */
++static uint32_t rvds; /* VBT size */
++static unsigned long rvda_host; /* VBT address in host */
++static bool opregion_is_direct_mapped;
++MemoryRegion mr_opregion;
+ 
+ typedef struct VGARegion {
+     int type;           /* Memory or port I/O */
+@@ -115,12 +129,11 @@ int xen_pt_unregister_vga_regions(XenHostPCIDevice *dev)
+         }
      }
  
--    snprintf(rom_file, sizeof(rom_file),
--             "/sys/bus/pci/devices/%04x:%02x:%02x.%01x/rom",
--             domain, bus, slot, function);
-+    if (path) {
-+        snprintf(rom_file, sizeof(rom_file), "%s", path);
-+        XEN_PT_LOG(dev, "Using Intel IGD romfile %s "
-+                   "(administratior provided)\n", path);
-+    } else {
-+        snprintf(rom_file, sizeof(rom_file),
-+                 "/sys/bus/pci/devices/%04x:%02x:%02x.%01x/rom",
-+                 domain, bus, slot, function);
-+        sysfs = true;
-+        XEN_PT_LOG(dev, "Using Intel IGD romfile from host sysfs\n");
+-    if (igd_guest_opregion) {
++    if (opregion_is_direct_mapped && igd_guest_opregion) {
+         ret = xc_domain_memory_mapping(xen_xc, xen_domid,
+                 (unsigned long)(igd_guest_opregion >> XC_PAGE_SHIFT),
+                 (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT),
+-                3,
+-                DPCI_REMOVE_MAPPING);
++                opregion_vbt_pages, DPCI_REMOVE_MAPPING);
+         if (ret) {
+             return ret;
+         }
+@@ -237,8 +250,158 @@ void xen_pt_setup_vga(XenPCIPassthroughState *s, XenHostPCIDevice *dev,
+ 
+ uint32_t igd_read_opregion(XenPCIPassthroughState *s)
+ {
++    char opregion_file[64], vbt_file[64];
++    FILE *fp = NULL;
++    struct stat st;
++    uint8_t *opregion = NULL, *vbt = NULL;
++    void *ptr = NULL;
+     uint32_t val = 0;
+ 
++    if (!igd_host_opregion) {
++        /* We just work with LE. */
++        xen_host_pci_get_block(&s->real_device, XEN_PCI_IGD_OPREGION,
++                               (uint8_t *)&igd_host_opregion, 4);
++
++        g_autofree const char *fname1 = g_strdup("intel-opregion");
++        g_autofree const char *path1 = qemu_find_file(QEMU_FILE_TYPE_BIOS,
++                                                      fname1);
++        /*
++         * If getting the OpRegion or VBT from the host filesystem fails,
++         * fallback to direct mapping of the host OpRegion to the guest.
++         */
++        if (!path1) {
++            XEN_PT_WARN(&s->dev, "OpRegion host file \"%s\" not found\n",
++                        fname1);
++            goto fallback;
++        }
++        snprintf(opregion_file, sizeof(opregion_file), "%s", path1);
++        fp = fopen(opregion_file, "r");
++        if (fp == NULL) {
++            if (errno != ENOENT) {
++                XEN_PT_WARN(&s->dev, "Cannot open %s: %s\n",
++                            opregion_file, strerror(errno));
++            }
++            goto fallback;
++        }
++        if (fstat(fileno(fp), &st) == -1) {
++            XEN_PT_WARN(&s->dev, "Cannot stat %s: %s\n",
++                        opregion_file, strerror(errno));
++            goto fallback;
++        }
++        if (st.st_size != XEN_PCI_IGD_OPREGION_PAGES << XC_PAGE_SHIFT) {
++            XEN_PT_WARN(&s->dev, "Invalid OpRegion size (%u)\n", st.st_size);
++            goto fallback;
++        }
++        opregion = g_new0(uint8_t, st.st_size);
++        ptr = (void *)opregion;
++        if (fread(ptr, 1, st.st_size, fp) != st.st_size) {
++            XEN_PT_WARN(&s->dev, "Can't read host OpRegion %s\n",
++                        opregion_file);
++            goto fallback;
++        }
++        if (memcmp(ptr, XEN_PCI_IGD_OPREGION_SIGNATURE, 16)) {
++            XEN_PT_WARN(&s->dev, "Invalid OpRegion signature\n");
++            goto fallback;
++        }
++        fclose(fp);
++
++        version = *(uint16_t *)(opregion +
++                                XEN_PCI_IGD_OPREGION_VERSION);
++        XEN_PT_LOG(&s->dev, "OpRegion version: 0x%x\n", version);
++        if (version >= 0x0200) {
++            rvda_host = *(unsigned long *)(opregion +
++                                           XEN_PCI_IGD_OPREGION_RVDA);
++            /* It is convenient to make rvda_host absolute */
++            if (version > 0x0200) {
++                rvda_host += igd_host_opregion;
++            }
++            XEN_PT_LOG(&s->dev, "host VBT address: 0x%lx\n", rvda_host);
++            rvds = *(uint32_t *)(opregion +
++                                 XEN_PCI_IGD_OPREGION_RVDS);
++            XEN_PT_LOG(&s->dev, "VBT size: 0x%x\n", rvds);
++        }
++
++        if (rvds && rvda_host) {
++            g_autofree const char *fname2 = g_strdup("intel-vbt");
++            g_autofree const char *path2 = qemu_find_file(QEMU_FILE_TYPE_BIOS,
++                                                          fname2);
++            if (!path2) {
++                XEN_PT_WARN(&s->dev, "VBT host file \"%s\" not found\n",
++                            fname2);
++            goto fallback;
++            }
++            snprintf(vbt_file, sizeof(vbt_file), "%s", path2);
++            fp = fopen(vbt_file, "r");
++            if (fp == NULL) {
++                if (errno != ENOENT) {
++                    XEN_PT_WARN(&s->dev, "Cannot open %s: %s\n",
++                                vbt_file, strerror(errno));
++                }
++                goto fallback;
++            }
++            if (fstat(fileno(fp), &st) == -1) {
++                XEN_PT_WARN(&s->dev, "Cannot stat %s: %s\n",
++                            vbt_file, strerror(errno));
++                goto fallback;
++            }
++            if (st.st_size != rvds) {
++                XEN_PT_WARN(&s->dev, "Invalid VBT size (%u)\n", st.st_size);
++                goto fallback;
++            }
++            vbt = g_new0(uint8_t, st.st_size);
++            ptr = (void *)vbt;
++            if (fread(ptr, 1, st.st_size, fp) != st.st_size) {
++                XEN_PT_WARN(&s->dev, "Can't read host VBT %s\n",
++                            vbt_file);
++                goto fallback;
++            }
++            if (memcmp(ptr, XEN_PCI_IGD_VBT_SIGNATURE, 4)) {
++                XEN_PT_WARN(&s->dev, "Invalid VBT signature\n");
++                goto fallback;
++            }
++            fclose(fp);
++            extra_opregion_pages = rvds >> XC_PAGE_SHIFT;
++            if (rvds & XEN_PCI_IGD_OPREGION_MASK) {
++                extra_opregion_pages++;
++            }
++            if (((igd_host_opregion & XEN_PCI_IGD_OPREGION_MASK) +
++                (rvds & XEN_PCI_IGD_OPREGION_MASK)) >
++                (1 << XC_PAGE_SHIFT)) {
++                extra_opregion_pages++;
++            }
++        } else {
++            rvda_host = 0;
++            rvds = 0;
++            if (igd_host_opregion & XEN_PCI_IGD_OPREGION_MASK) {
++                extra_opregion_pages = 1;
++            }
++        }
++
++        opregion_vbt_pages = XEN_PCI_IGD_OPREGION_PAGES +
++                             extra_opregion_pages;
++        opregion_vbt = g_new0(uint8_t,
++                              opregion_vbt_pages << XC_PAGE_SHIFT);
++        ptr = (void *)(opregion_vbt +
++                       (igd_host_opregion & XEN_PCI_IGD_OPREGION_MASK));
++        memcpy(ptr, (void *)opregion,
++               XEN_PCI_IGD_OPREGION_PAGES << XC_PAGE_SHIFT);
++        if (rvds) {
++            ptr += (XEN_PCI_IGD_OPREGION_PAGES << XC_PAGE_SHIFT);
++            memcpy(ptr, (void *)vbt, rvds);
++        }
++        g_free(opregion);
++        g_free(vbt);
++        /*
++         * By returning the size of the OpRegion + VBT here instead of 0, we
++         * indicate to hvmloader that we support an extended VBT and we give
++         * hvmloader the information it needs to place the OpRegion + VBT in
++         * the E820 map. Also, in this case the guest read the OpRegion
++         * register before writing to it, which means the guest supports
++         * an extended VBT.
++         */
++        return opregion_vbt_pages;
++    }
++
+     if (!igd_guest_opregion) {
+         return val;
+     }
+@@ -247,11 +410,38 @@ uint32_t igd_read_opregion(XenPCIPassthroughState *s)
+ 
+     XEN_PT_LOG(&s->dev, "Read opregion val=%x\n", val);
+     return val;
++
++fallback:
++    XEN_PT_LOG(&s->dev, "Fallback to host OpRegion mapping\n");
++    opregion_is_direct_mapped = true;
++    if (fp) {
++        fclose(fp);
++    }
++    g_free(opregion);
++    g_free(vbt);
++    return val;
+ }
+ 
+ void igd_write_opregion(XenPCIPassthroughState *s, uint32_t val)
+ {
+     int ret;
++    static bool opregion_is_ioreq_mapped;
++    static unsigned long igd_guest_opregion_pgbase;
++
++    if (opregion_is_ioreq_mapped && (val == igd_guest_opregion)) {
++        /*
++         * To support Windows IGD drivers that don't work with the OpRegion
++         * and VBT when they are mapped to an ioreq server, hvmloader writes
++         * the value of igd_guest_opregion a second time to signal it is time
++         * to unmap the OpRegion from the ioreq server. Hvmloader has made
++         * a copy of the OpRegion and will configure the guest to use its
++         * copy. In this way, the Windows IGD drivers work as expected.
++         */
++        memory_region_del_subregion(get_system_memory(), &mr_opregion);
++        object_unparent(OBJECT(&mr_opregion));
++        opregion_is_ioreq_mapped = false;
++        XEN_PT_LOG(&s->dev, "Successfully configured emulated OpRegion\n");
 +    }
  
--    /* Write "1" to the ROM file to enable it */
-     fp = fopen(rom_file, "r+");
-     if (fp == NULL) {
-         if (errno != ENOENT) {
-@@ -55,10 +66,14 @@ void *pci_assign_dev_load_option_rom(PCIDevice *dev,
-         goto close_rom;
+     if (igd_guest_opregion) {
+         XEN_PT_LOG(&s->dev, "opregion register already been set, ignoring %x\n",
+@@ -259,16 +449,73 @@ void igd_write_opregion(XenPCIPassthroughState *s, uint32_t val)
+         return;
      }
  
--    val = 1;
--    if (fwrite(&val, 1, 1, fp) != 1) {
--        goto close_rom;
-+    /* Write "1" to the ROM file to enable it if using ROM from sysfs */
-+    if (sysfs) {
-+        val = 1;
-+        if (fwrite(&val, 1, 1, fp) != 1) {
-+            goto close_rom;
-+       }
-     }
+-    /* We just work with LE. */
+-    xen_host_pci_get_block(&s->real_device, XEN_PCI_IGD_OPREGION,
+-            (uint8_t *)&igd_host_opregion, 4);
++    if (!igd_host_opregion) {
++        /* We just work with LE. */
++        xen_host_pci_get_block(&s->real_device, XEN_PCI_IGD_OPREGION,
++                               (uint8_t *)&igd_host_opregion, 4);
++        opregion_is_direct_mapped = true;
++    }
+     igd_guest_opregion = (unsigned long)(val & ~XEN_PCI_IGD_OPREGION_MASK)
+                             | (igd_host_opregion & XEN_PCI_IGD_OPREGION_MASK);
++    igd_guest_opregion_pgbase = igd_guest_opregion &
++                                ~XEN_PCI_IGD_OPREGION_MASK;
 +
-     fseek(fp, 0, SEEK_SET);
- 
-     if (dev->romsize != UINT_MAX) {
-@@ -83,11 +98,13 @@ void *pci_assign_dev_load_option_rom(PCIDevice *dev,
- 
-     *size = st.st_size;
- close_rom:
--    /* Write "0" to disable ROM */
--    fseek(fp, 0, SEEK_SET);
--    val = 0;
--    if (!fwrite(&val, 1, 1, fp)) {
--        XEN_PT_WARN(dev, "%s\n", "Failed to disable pci-sysfs rom file");
-+    /* Write "0" to disable ROM if using ROM from sysfs */
-+    if (sysfs) {
-+        fseek(fp, 0, SEEK_SET);
-+        val = 0;
-+        if (!fwrite(&val, 1, 1, fp)) {
-+            XEN_PT_WARN(dev, "%s\n", "Failed to disable pci-sysfs rom file");
++    if (opregion_is_direct_mapped) {
++        XEN_PT_LOG(&s->dev, "hvmloader lacks extended VBT support, "
++                   "continuing with legacy support only\n");
++        /*
++         * In this case we need to direct map the OpRegion because either we
++         * failed to get a copy of the OpRegion from the host filesystem or
++         * the guest does not support an extended VBT. In this case we also
++         * assume we need an extra page because the OpRegion is not always
++         * aligned on a page boundary.
++         */
++        extra_opregion_pages = 1;
++        opregion_vbt_pages = XEN_PCI_IGD_OPREGION_PAGES +
++                             extra_opregion_pages;
++        goto map;
++    } else {
++        Object *owner = OBJECT(&s->dev);
++        unsigned long rvda_guest = 0; /* VBT address in guest */
++
++        /* Compute rvda value for the guest */
++        if (rvds && (version > 0x0200)) {
++            if (version == 0x0200) {
++                rvda_guest = igd_guest_opregion +
++                             (XEN_PCI_IGD_OPREGION_PAGES << XC_PAGE_SHIFT);
++            } else {
++                /* Convert to relative address */
++                rvda_guest = XEN_PCI_IGD_OPREGION_PAGES << XC_PAGE_SHIFT;
++                rvda_host -= igd_host_opregion;
++            }
 +        }
-     }
-     fclose(fp);
++
++        /* Patch the OpRegion with the correct rvda value for the guest */
++        if (rvds && (rvda_guest != rvda_host)) {
++            *(unsigned long *)(opregion_vbt + (igd_guest_opregion &
++                               XEN_PCI_IGD_OPREGION_MASK) +
++                               XEN_PCI_IGD_OPREGION_RVDA) = rvda_guest;
++            XEN_PT_LOG(&s->dev, "Patched OpRegion with guest rvda = 0x%lx\n",
++                       rvda_guest);
++        }
++
++        /* Configure ioreq server for the emulated OpRegion */
++        memory_region_init_ram(&mr_opregion, owner, "xen.intel.opregion",
++                               opregion_vbt_pages << XC_PAGE_SHIFT,
++                               &error_fatal);
++        memory_region_add_subregion(get_system_memory(),
++                                    igd_guest_opregion_pgbase, &mr_opregion);
++        void *ptr = memory_region_get_ram_ptr(&mr_opregion);
++        memcpy(ptr, (void *)opregion_vbt, opregion_vbt_pages << XC_PAGE_SHIFT);
++        g_free(opregion_vbt);
++        opregion_is_ioreq_mapped = true;
++        return;
++    }
  
++map:
+     ret = xc_domain_iomem_permission(xen_xc, xen_domid,
+             (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT),
+-            XEN_PCI_IGD_OPREGION_PAGES,
+-            XEN_PCI_IGD_OPREGION_ENABLE_ACCESSED);
++            opregion_vbt_pages, XEN_PCI_IGD_OPREGION_ENABLE_ACCESSED);
+ 
+     if (ret) {
+         XEN_PT_ERR(&s->dev, "[%d]:Can't enable to access IGD host opregion:"
+@@ -281,8 +528,7 @@ void igd_write_opregion(XenPCIPassthroughState *s, uint32_t val)
+     ret = xc_domain_memory_mapping(xen_xc, xen_domid,
+             (unsigned long)(igd_guest_opregion >> XC_PAGE_SHIFT),
+             (unsigned long)(igd_host_opregion >> XC_PAGE_SHIFT),
+-            XEN_PCI_IGD_OPREGION_PAGES,
+-            DPCI_ADD_MAPPING);
++            opregion_vbt_pages, DPCI_ADD_MAPPING);
+ 
+     if (ret) {
+         XEN_PT_ERR(&s->dev, "[%d]:Can't map IGD host opregion:0x%lx to"
+diff --git a/include/hw/xen/xen_igd.h b/include/hw/xen/xen_igd.h
+index 469171c..e66b3a3 100644
+--- a/include/hw/xen/xen_igd.h
++++ b/include/hw/xen/xen_igd.h
+@@ -13,7 +13,7 @@
+ 
+ #define XEN_PCI_IGD_OPREGION 0xfc
+ #define XEN_PCI_IGD_OPREGION_MASK 0xfff
+-#define XEN_PCI_IGD_OPREGION_PAGES 0x3
++#define XEN_PCI_IGD_OPREGION_PAGES 0x2
+ #define XEN_PCI_IGD_OPREGION_ENABLE_ACCESSED 0x1
+ #define XEN_PCI_IGD_OPREGION_SIGNATURE "IntelGraphicsMem"
+ #define XEN_PCI_IGD_VBT_SIGNATURE "$VBT"
 -- 
 2.52.0
 
