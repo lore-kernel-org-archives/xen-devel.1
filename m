@@ -4,41 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80403C79FA1
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 07:31:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415853.1645067 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41F8BC88E4C
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 07:46:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1415867.1645077 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4vj8-00006l-6g; Fri, 11 Sep 2026 07:31:14 +0000
+	id 1x4vxE-0002Sx-BU; Fri, 11 Sep 2026 07:45:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415853.1645067; Fri, 11 Sep 2026 07:31:14 +0000
+Received: by outflank-mailman (output) from mailman id 1415867.1645077; Fri, 11 Sep 2026 07:45:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4vj8-00006e-3z; Fri, 11 Sep 2026 07:31:14 +0000
-Received: by outflank-mailman (input) for mailman id 1415853;
- Fri, 11 Sep 2026 07:31:12 +0000
+	id 1x4vxE-0002Sq-8r; Fri, 11 Sep 2026 07:45:48 +0000
+Received: by outflank-mailman (input) for mailman id 1415867;
+ Fri, 11 Sep 2026 07:45:46 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1x4vj6-00006Y-91
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 07:31:12 +0000
+ (envelope-from <jgross@suse.com>) id 1x4vxC-0002Sk-DO
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 07:45:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4vj5-002sJW-Lw
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:31:11 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x4vxB-002uwp-1f
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:45:45 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6aa3ae3d-e002-0a2a0a5209dd-0a2a450bd05e-4
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:31:10 +0200
-Received: from [98.137.65.204] (helo=sonic311-23.consmr.mail.gq1.yahoo.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@aol.com>)
- id 6aa3ae3c-b7e8-0a2a450b0019-628941ccab8d-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:31:10 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic311.consmr.mail.gq1.yahoo.com with HTTP; Fri, 11 Sep 2026 07:31:08 +0000
-Received: by hermes--production-ne1-6dbcb84f44-gmhd4 (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 35c30668e815a5a8f301e7d03e7151e1; 
- Fri, 11 Sep 2026 07:31:05 +0000 (UTC)
+ (envelope-from <jgross@suse.com>)
+ id 6aa3b19d-8faa-0a2a0a5109dd-0a2a4508b71a-22
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:45:44 +0200
+Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6aa3b1a8-f659-0a2a45080019-c387df83e8b0-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:45:44 +0200
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 2C7051FD65;
+ Fri, 11 Sep 2026 07:45:36 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id CBE9B136ED;
+ Fri, 11 Sep 2026 07:45:33 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id SsloMJ2xo2qtWAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 11 Sep 2026 07:45:33 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,462 +60,348 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="From:To:Cc:Subject:Date:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1789111868; bh=oEF+IFkFwoafYiOJyTp5xRVvzljf8kYJMfjjfTEgYx8=; h=From:To:Cc:Subject:Date:References:From:Subject:Reply-To; b=uQyO/jnbFDn1KmlolUDK8qcfswHROsABC2yFuVRU8bzkitANFZLxTghrGonAvdrjXjkLItVLK/E6Ngy2TzyNX8PvZI+t6rzNnDWn7OBVHsoYnHj0SONu0STuk5DorETV+Cdr58J8qtHZoDkhGPVfADnMgqgfvDchRBPrBulmfP+x1c0TzAZps5MYRoQGvs1VnWEFiNFTq3s+iYqa1SEbVt5Dv+U5hpAXtlMiZ9fJPdlWg4zYyhmMb3jb+dGAVmkYSf7g/1Sdo/Kxkle4I2JVBCIhBaa9Ux+/V++VoOG7pVO9Esi0vt2TRqhnNTHbiFJ4BO/XDOBiZFjFaG7vmeFNMg==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1789111868; bh=Imkblp6PdzvIL8+yX02ciwbI/w5m1cEMrfyThSPk6Tf=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=DwUXATuAHsmRLXv4gvas+2gGKXDrlUH1DaaK94OvJa3hiUWBtrhul/eoRYUd53sfmxubu+VbHpBSOX4Lu7FKVPinbBjKyy9GkuoUVXqaiXSwD7cO9D7biBu+YKZaPqh774u8QBKCn0t6nr+4vHM3BmpiJ39hKxIwnZZfXzvNDVWkDj8u87arLplqjqgtEzvN6LTNFDndg2GnRiaHG5LPd1IweDH34SN8cr0YVO9vUinJbNKBFXB0mZV+6z+0WYZhXjAVJJ5WGh9r8LAdaEEVz9nAj7Rh4vKv4DbgjV3rp0gO8Dq6PTO2knGREytYexuOECXtsAbQHUgnmO3d+fb8MA==
-X-YMail-OSG: _hsesV8VM1nGiipDOsndukFlWUf3W1f1496y6RhLwLRX_6t_R7ZCgvp2qVc2JPS
- bBD.N1ARLeEhXCmfEN7642NHXoAiiWfLdHY2z_AAS7S3YIRk3DcnRp1wu5aU95kRf1rA3ZYfSea2
- Vn3fzG3O9vLAr3YmYRNgdytgckSZ7cFiTk0o59EkyATuXQ_QnNAHHzgHMpkzpIW12smnm7Xvn.PI
- RPZ0Tb3NacoMajfozP0JblHpOoyThe05SA2eoRJYvJU42r.5Q7F9onMBEr2dGa6XitSUnEeOgdMw
- 7TpjRB.9ViDOrKJSOrUuAbWdotNrAdXWFwZ7U31ypryhdfjl5kcvBOBmfs7Q.8HtyE1Rbq86GVQA
- AVYHrvpW3bNypDs.c_ZZIqbHH0W7UtHqqhvN_U_7uhy6iNFPYpjwrRTwlFzBSuk5MaPI_VKLfueT
- Yty0BADVhnqOf3k.Myxtfd123b.O5V22PBtdPcyfS6xAaKzd.tEc8VrAOIMjDOupD9mvVfi4Ni3f
- 1BrEwA86gU3o5_bvWOlon3ACpAp3ZD5tzaOEfT7RvrH9NGzZ0xP.E.VByJQ.eTXNUNVCtQRQa6uB
- jN0x2dMg4q4W5dHJ.n9QUrdBTnXvmfU.4pfF1H5J0Ly4gaqC59lG_tO8ArOANZYIV82LXGNhM2gn
- 2.4MhYiVDB0Yj6bfHqrqTNE7cL8Yp_J6gfMhctj4MbERxX8ZSYfpySVYG2k2kSf6fVDrA0qgPYRK
- ZlsPkoVQZvU.o23hxeip8hAGGF.pzCDlOHSqf8DY6A_w_q41l9CCyYSd4jRkA1X1q0vpZ0ODYuCl
- pw.SwhPJ7rX0BpPAa56Kf.8ysKghrFw2G5eeGfwJEDZL1Dqksls9BlP81OpFEYorP8OEBfc8T916
- eYV0kjJg6gfxkm9.GL8SCrYeXHBLJ5no6Y7EJYSiLM5erZO7UxBQe3ey0h5wl0DCRqZfQSvHkJc_
- fnJZgtCmgTILJo5rlta50SDmw4i2bQzI8T3BQX9jwttBOqgxFDo5WG4qGT3.Xv9OGt1eWQTMeWjc
- MNHef.uxOw.B1mhUqw1lUoDWEHi9vg7FJkAj9c5vcis3VBQGip0xgy5vG4u6EMy4Rk6Gv5xEnKZX
- IMxhgtyubI5k0LhzjvgYQPCA6dG6IhawfMEqg7JGLL1m3OCB7a1g5q8hT8tlNQAdexIyK40qGMZ2
- jfBZCiemA4wIHahPTytz7jpdxJTQ3.uNiWuQzafZjkSTTmtMDMUEiDZsGZIPvuxS8Yhyc7Y8ttRC
- zIQnwLQSBNznVjk.Yk7CrAAXy8qUjmE2P26tII4OzF5mdPpAK9gfpJkFkymUcX0YXnoWFxWMPdSE
- 7_JdGI89vV88mEeemnn7q6Y1M8XH2czRcqcpP9sfTbiHkhFeYhDvsOxeKECn94o6SeClgDUzpTrk
- np_Jt.tsfOr508omr8NGG6P.g6c.ezsoX2mPPjd5FBfl.XtO5upH0Ja9icXqHNmglsP6N8nwKvs3
- ED74BwOZgMUmW4ogQeg1oSTr8OmcHQ9a8uesJHKUoLyvlJiFsNIPNe6wB1r.avwWXIi_CcuI1kbI
- 02RO03wqhUnoWEjMsx5NLCfn0IOtX26eJKcGVmA7o5YQuMFTrztbcFtOpLZxOFosaHywde6UrmF6
- k3YUNsZ0sb1E1wS7.ixAFdR2u8lswJ9NTNjtMK1gjtulh66jh09lQuYhdf58SwIMrpWVMWQVhIo9
- S6TsPzyKRFbOBIdg7kOpVpUW9H3oaLouaxhVanPs6q5_GH4FQG6quCbN1OSwHDIo1Rj7sdW0OUQL
- UiZACgzloD9CJhoZLzMva7E6BmS5sOJ7Z0uS8_iY8zyXWl71YH81O72m_u0uuKR_IuStiE3z8G3m
- 4MJOceeKJejs9izJFPVmcgbPwje43788GVMkBcn65sL1McZtaQMEYkbzaDrpq2R5YwKgOWt54ysX
- NcrJgZokS.qSUgPPNsfCSLYhH4gwPkSpIf5E5kCX_PLR.mPpR2Pr3qXdkIz47tAqdaIt1E01vd2E
- AzfO4qsmlgnOBSCIAfrwoKtTxEFBxFL9i7HwpSVvQ5AnkP4QgGrBjT7cqKiCJumTd6PEM3Ske3i_
- xP7g4r6NZe5a6GoQnWvuqCScUSWLGNazmDx617DUmAzg1wvWGlH5P8TCznqzVjKE_1gECz5orJOO
- 4lE1xj7qWs6DKx2cIhBi2x4lnIAEcmUKrlhZ1dEJ5DoMj3ynPptJZpvX8ZMPeCUQ7kprpYrEWRDG
- HyDcSaFVmc61j8nnRPS5Ci9FVpr2Nns0Ko5c41Q--
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: b036158c-adfc-485b-9f97-582b3a4c444c
-From: Chuck Zmudzinski <brchuckz@aol.com>
-To: xen-devel@lists.xenproject.org
-Cc: qemu-devel@nongnu.org,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v3] tools/hvmloader: implement Intel IGD extended VBT support
-Date: Fri, 11 Sep 2026 03:31:03 -0400
-Message-ID: <20260911073103.46745-1-brchuckz@aol.com>
-X-Mailer: git-send-email 2.47.3
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1789112740; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=1QSWKaNZ65L3rk2qSG3qEF6vvEFGDlwFz8pe7qA3wNk=;
+	b=T8vJzNG0WjXD9oew4znbnpRhNr4cduF4wX0/G5JWBAhNh6q/VIfpYf/fUBkcVm6cROP8wL
+	d7Tw6tNJd2/Uc1yaaCnSKMf45wB90ggC7/6aHgHKt1AvwLS+V6Grbb4BaDss/ymuQh3uLX
+	R/JPn7ajI9jOWOy+wgo92RQhnyBQ8B8=
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1789112736; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
+	bh=1QSWKaNZ65L3rk2qSG3qEF6vvEFGDlwFz8pe7qA3wNk=;
+	b=ZSaFHXZmagMuB8+hqr9P5F1w2lKBV8EJ76ulznETppNd368ICMAo96FZHFm26sndOkLQBp
+	DO+Ed5uvBjbKGWvwO62oqlUwSJ+KvFdOyo/zUKikLlBjGWA7ZER+RlKfHf4bve8r2bw+Br
+	b2AR8rC+XGluiV1AFzZUGzhvWzUsaEo=
+From: Juergen Gross <jgross@suse.com>
+To: linux-kernel@vger.kernel.org,
+	x86@kernel.org,
+	virtualization@lists.linux.dev,
+	linux-ide@vger.kernel.org,
+	dri-devel@lists.freedesktop.org,
+	linux-fbdev@vger.kernel.org,
+	linux-crypto@vger.kernel.org,
+	linux-gpio@vger.kernel.org,
+	linux-perf-users@vger.kernel.org,
+	linux-hyperv@vger.kernel.org,
+	kvm@vger.kernel.org,
+	linux-edac@vger.kernel.org,
+	linux-pci@vger.kernel.org,
+	linux-pm@vger.kernel.org,
+	linux-coco@lists.linux.dev,
+	linux-acpi@vger.kernel.org,
+	linux-hwmon@vger.kernel.org,
+	linux-mtd@lists.infradead.org,
+	platform-driver-x86@vger.kernel.org
+Cc: Juergen Gross <jgross@suse.com>,
+	Thomas Gleixner <tglx@kernel.org>,
+	Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Ajay Kaher <ajay.kaher@broadcom.com>,
+	Alexey Makhalov <alexey.makhalov@broadcom.com>,
+	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
+	Damien Le Moal <dlemoal@kernel.org>,
+	Niklas Cassel <cassel@kernel.org>,
+	David Airlie <airlied@redhat.com>,
+	Helge Deller <deller@gmx.de>,
+	linux-geode@lists.infradead.org,
+	Olivia Mackall <olivia@selenic.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	Linus Walleij <linusw@kernel.org>,
+	Bartosz Golaszewski <brgl@kernel.org>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>,
+	Namhyung Kim <namhyung@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>,
+	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+	Jiri Olsa <jolsa@kernel.org>,
+	Ian Rogers <irogers@google.com>,
+	Adrian Hunter <adrian.hunter@intel.com>,
+	James Clark <james.clark@linaro.org>,
+	"K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>,
+	Wei Liu <wei.liu@kernel.org>,
+	Dexuan Cui <decui@microsoft.com>,
+	Long Li <longli@microsoft.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Josh Poimboeuf <jpoimboe@kernel.org>,
+	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+	Pu Wen <puwen@hygon.cn>,
+	Tony Luck <tony.luck@intel.com>,
+	Reinette Chatre <reinette.chatre@intel.com>,
+	Dave Martin <Dave.Martin@arm.com>,
+	James Morse <james.morse@arm.com>,
+	Babu Moger <babu.moger@amd.com>,
+	Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>,
+	Vitaly Kuznetsov <vkuznets@redhat.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	"Rafael J. Wysocki" <rafael@kernel.org>,
+	Pavel Machek <pavel@kernel.org>,
+	Kiryl Shutsemau <kas@kernel.org>,
+	Rick Edgecombe <rick.p.edgecombe@intel.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+	Len Brown <lenb@kernel.org>,
+	Viresh Kumar <viresh.kumar@linaro.org>,
+	Huang Rui <ray.huang@amd.com>,
+	Mario Limonciello <mario.limonciello@amd.com>,
+	Perry Yuan <perry.yuan@amd.com>,
+	K Prateek Nayak <kprateek.nayak@amd.com>,
+	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+	Yazen Ghannam <yazen.ghannam@amd.com>,
+	Guenter Roeck <linux@roeck-us.net>,
+	Artem Bityutskiy <artem.bityutskiy@linux.intel.com>,
+	Artem Bityutskiy <dedekind1@gmail.com>,
+	Miquel Raynal <miquel.raynal@bootlin.com>,
+	Richard Weinberger <richard@nod.at>,
+	Vignesh Raghavendra <vigneshr@ti.com>,
+	Ashok Raj <ashok.raj.linux@gmail.com>,
+	Hans de Goede <hansg@kernel.org>,
+	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
+	Rajneesh Bhardwaj <irenic.rajneesh@gmail.com>,
+	Xi Pardee <xi.pardee@linux.intel.com>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>,
+	Zhang Rui <rui.zhang@intel.com>,
+	Lukasz Luba <lukasz.luba@arm.com>,
+	xen-devel@lists.xenproject.org
+Subject: [PATCH v3 00/13] x86/msr: Drop 32-bit MSR interfaces
+Date: Fri, 11 Sep 2026 09:45:17 +0200
+Message-ID: <20260911074530.3140830-1-jgross@suse.com>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-References: <20260911073103.46745-1-brchuckz.ref@aol.com>
-X-purgate-ID: tlsNG-42698a/1789111870-18CCF9EA-C46561BA/0/0
+X-Spamd-Result: default: False [-1.30 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	MID_CONTAINS_FROM(1.00)[];
+	R_MISSING_CHARSET(0.50)[];
+	NEURAL_HAM_SHORT(-0.20)[-0.999];
+	MIME_GOOD(-0.10)[text/plain];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TO_DN_SOME(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	ARC_NA(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:mid];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[suse.com,kernel.org,redhat.com,alien8.de,linux.intel.com,zytor.com,broadcom.com,gmx.de,lists.infradead.org,selenic.com,gondor.apana.org.au,arndb.de,linuxfoundation.org,infradead.org,arm.com,google.com,intel.com,linaro.org,microsoft.com,hygon.cn,amd.com,zhaoxin.com,oracle.com,roeck-us.net,gmail.com,bootlin.com,nod.at,ti.com,lists.xenproject.org];
+	R_RATELIMIT(0.00)[to_ip_from(RLbixyxwsf3a5i7e4ez64ejni4)];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_SOME(0.00)[];
+	RCPT_COUNT_GT_50(0.00)[95];
+	RCVD_TLS_ALL(0.00)[]
+X-purgate-ID: tlsNG-c1860d/1789112744-CCF4F87B-AF2A2B64/0/0
 X-purgate-type: clean
-X-purgate-size: 21957
+X-purgate-size: 10159
 
-Modern Intel IGD devices do not work well with the current implementation of
-support for the Intel IGD in hvmloader because it lacks support for an
-extended video bios table (VBT).
+For accessing the MSR registers on the local CPU, there are 2 types of
+interfaces: the "modern" 64-bit ones (rdmsrq() etc.) and the 32-bit
+ones (rdmsr() etc.) which are using the upper and lower 32-bit halves
+of the 64-bit wide MSR register values.
 
-Code 43 errors in Windows guests and failure of the guest screen to light up
-are some of the problems that occur with the current implementation.
+The 32-bit interfaces are not optimal for 3 reasons:
 
-To address this problem, this patch implements support for Intel IGD devices
-with an extended VBT and OpRegion version 2+ which is required for most modern
-Intel IGD devices, as noted in the Linux kernel vfio commits referenced in the
-Link tags below. This patch ports support for devices with an extended VBT and
-OpRegion 2+ which was added in those commits for KVM/vfio, but adapted for Xen
-HVM guests with PCI passthrough.
+- They are based on primitives using 64-bit sized values anyway.
 
-This patch depends on compatible support in the device model. If hvmloader
-detects the device model lacks such support, it will fall back to the
-currently implemented protocol for configuring the OpRegion to provide
-backward compatibiltiy for systems that lack a device model with support for
-an extended VBT.
+- Modern x86 CPUs have added support for MSR access instructions using
+  an immediate value instead of a register for addressing the MSR,
+  while the value is in a 64-bit register.
 
-The primary reason the OpRegion needs to be patched in some cases is that with
-the addition of the RVDA and RVDS fields to the OpRegion, the OpRegion is not
-position-independent and may need to be patched if it is moved to a different
-address in the guest. This means the current protocol of having the device
-model directly map the unmodified host OpRegion to the guest is not compatible
-with the requiremnts of the newer devices that in some cases require that the
-OpRegion be modified for it to be compatible with the guest address space.
+- rdmsr() is a macro storing the upper and lower 32-bit halves in
+  variables specified as macro parameters. This is obscuring variable
+  assignment through a macro. Additionally rdmsrq() is mimicking this
+  pattern by being a macro, too, with the target variable specified as
+  a parameter as well.
 
-In this implementation, the device model has the responsibility to read the
-host OpRegion and patch it as needed before exposing it to the guest. Since an
-extended VBT means more pages are needed for the OpRegion, depending on the
-size of the extended VBT, hvmloader has the responsibility to edit the E820
-map to accomodate the additional pages needed to contain the OpRegion + VBT.
+For those reasons drop the 32-bit interfaces for accessing the x86 MSR
+registers completely and only use the 64-bit variants.
 
-To implement this in hvmloader, use a variable, igd_opregion_e820_pages,
-instead of the constant, IGD_OPREGION_PAGES, to represent the number of pages
-to reserve in the E820 map for the OpRegion + VBT. Also, to remove the
-confusion introduced by setting IGD_OPREGION_PAGES to 3 in an earlier patch
-to account for the fact that the OpRegion is not guaranteed to be aligned on
-a page boundary, reset IGD_OPREGION_PAGES to 2 so it matches the actual size
-of the OpRegion.
+This allows to switch all "high-level" MSR access macros to inline
+functions in the end.
 
-Instead of only writing to the PCI_INTEL_OPREGION register, first read from it
-to provide a way for both hvmloader and the device model to discover if both
-components have support for an extended VBT and more than 3 pages reserved for
-the OpRegion + VBT. The device model detects the read of the register before
-the write to learn that hvmloader has support, and hvmoader detects that the
-device model returns the number of pages to reserve for the OpRegion + VBT
-instead of 0 when it first reads the register to learn that that the device
-model has support. When this new protocol is supported by both hvmloader and
-the device model, the device model will not expose the host OpRegion directly
-to the guest via a direct mapping as the old protocol does but instead exposes
-an emulated copy of the OpRegion and VBT using its ioreq server. This has the
-added beneift of preventing extraneous host memory in the regions before or
-after a non-page-aligned OpRegion that should be confidential to the host from
-being exposed to the guest.
+This series will be used as the base for further reorganisation of the
+MSR access functions, especially for completely inlining the MSR
+access instructions even with paravirtualization being active.
 
-Testing reveals that when the device model exposes the OpRegion to the guest
-by mapping it to the device model's ioreq server, the Windows Intel IGD
-graphics dirvers are unable to access the OpRegion and report Code 43 errors
-with the result being that the guest screen never lights up. So after the
-device model exposes the OpRegion to the guest using its ioreq server, make a
-copy of it and use a copy of the OpRegion and VBT which is backed by RAM
-allocated to the guest instead of mapped via the ioreq server. This fixes the
-Code 43 errors reported by the Windows IGD graphics drivers.
+Based on kernel 7.3 as of 2026-09-11.
 
-Link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/vfio/pci/vfio_pci_igd.c?id=bab2c1990b78
-Link: https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/vfio/pci/vfio_pci_igd.c?id=49ba1a2976c8
-Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
----
-The companion patchset for the device model (DM) is available here:
+Changes in V2:
+- dropped already applied patches
+- added patch 1
+- rebased
 
-https://lore.kernel.org/qemu-devel/20260911072453.46256-7-brchuckz@aol.com/
+Changes in V3:
+- small fixes in patches 4 and 13
+- rebased
 
-Note that this patch uses an approach that is not compatible with earlier
-versions of the patchset for the DM. The version of that patchset that is
-compatible with this patch is v6.
+Juergen Gross (13):
+  x86/cpu: Fix coding style violation
+  x86/msr: Remove wrmsr_safe()
+  x86/msr: Remove rdmsr_safe()
+  drivers/ata: Stop using 32-bit MSR interfaces
+  agp/nvidia: Stop using 32-bit MSR interfaces
+  fbdev/geode: Stop using 32-bit MSR interfaces
+  hw_random/via-rng: Stop using 32-bit MSR interfaces
+  drivers/gpio: Stop using 32-bit MSR interfaces
+  drivers/misc: Stop using 32-bit MSR interfaces
+  x86/msr: Remove wrmsr()
+  x86/msr: Remove rdmsr()
+  treewide: convert rdmsrq() from a macro to an inline function
+  x86/msr: Simplify some rdmsrq() use cases
 
-Up-to-date specifications for the Intel IGD are not available to the public
-but an older version is available from Intel here:
+ arch/x86/coco/sev/core.c                      |  2 +-
+ arch/x86/events/amd/brs.c                     |  4 +-
+ arch/x86/events/amd/core.c                    |  8 +--
+ arch/x86/events/amd/ibs.c                     | 18 +++----
+ arch/x86/events/amd/lbr.c                     | 16 ++----
+ arch/x86/events/amd/power.c                   |  8 +--
+ arch/x86/events/amd/uncore.c                  |  4 +-
+ arch/x86/events/core.c                        | 20 ++++----
+ arch/x86/events/intel/core.c                  | 15 ++----
+ arch/x86/events/intel/cstate.c                |  5 +-
+ arch/x86/events/intel/ds.c                    |  2 +-
+ arch/x86/events/intel/knc.c                   | 10 ++--
+ arch/x86/events/intel/lbr.c                   | 25 +++-------
+ arch/x86/events/intel/p4.c                    |  6 +--
+ arch/x86/events/intel/p6.c                    |  4 +-
+ arch/x86/events/intel/pt.c                    | 12 ++---
+ arch/x86/events/intel/uncore.c                |  6 +--
+ arch/x86/events/intel/uncore_nhmex.c          |  4 +-
+ arch/x86/events/intel/uncore_snb.c            |  2 +-
+ arch/x86/events/intel/uncore_snbep.c          |  6 +--
+ arch/x86/events/msr.c                         |  2 +-
+ arch/x86/events/perf_event.h                  |  6 +--
+ arch/x86/events/rapl.c                        |  6 +--
+ arch/x86/events/zhaoxin/core.c                | 10 ++--
+ arch/x86/hyperv/hv_apic.c                     |  9 ++--
+ arch/x86/hyperv/hv_init.c                     | 26 +++++-----
+ arch/x86/hyperv/hv_spinlock.c                 |  2 +-
+ arch/x86/include/asm/apic.h                   |  7 +--
+ arch/x86/include/asm/debugreg.h               |  6 +--
+ arch/x86/include/asm/fsgsbase.h               |  2 +-
+ arch/x86/include/asm/kvm_host.h               | 10 ----
+ arch/x86/include/asm/msr.h                    | 39 ++-------------
+ arch/x86/include/asm/paravirt.h               | 26 +---------
+ arch/x86/kernel/apic/apic.c                   | 14 +++---
+ arch/x86/kernel/apic/apic_numachip.c          |  6 +--
+ arch/x86/kernel/cet.c                         |  2 +-
+ arch/x86/kernel/cpu/amd.c                     | 14 +++---
+ arch/x86/kernel/cpu/aperfmperf.c              |  8 +--
+ arch/x86/kernel/cpu/bugs.c                    | 12 ++---
+ arch/x86/kernel/cpu/bus_lock.c                |  8 +--
+ arch/x86/kernel/cpu/centaur.c                 |  8 +--
+ arch/x86/kernel/cpu/common.c                  | 12 ++---
+ arch/x86/kernel/cpu/feat_ctl.c                |  4 +-
+ arch/x86/kernel/cpu/hygon.c                   |  4 +-
+ arch/x86/kernel/cpu/intel.c                   |  6 +--
+ arch/x86/kernel/cpu/intel_epb.c               |  4 +-
+ arch/x86/kernel/cpu/mce/amd.c                 |  4 +-
+ arch/x86/kernel/cpu/mce/core.c                |  8 +--
+ arch/x86/kernel/cpu/mce/inject.c              |  2 +-
+ arch/x86/kernel/cpu/mce/intel.c               | 18 +++----
+ arch/x86/kernel/cpu/mce/p5.c                  |  8 +--
+ arch/x86/kernel/cpu/mce/winchip.c             |  2 +-
+ arch/x86/kernel/cpu/microcode/intel.c         |  2 +-
+ arch/x86/kernel/cpu/mshyperv.c                |  6 +--
+ arch/x86/kernel/cpu/mtrr/amd.c                |  4 +-
+ arch/x86/kernel/cpu/mtrr/cleanup.c            |  4 +-
+ arch/x86/kernel/cpu/mtrr/generic.c            | 32 ++++++------
+ arch/x86/kernel/cpu/mtrr/mtrr.c               |  2 +-
+ arch/x86/kernel/cpu/resctrl/core.c            |  2 +-
+ arch/x86/kernel/cpu/resctrl/monitor.c         |  4 +-
+ arch/x86/kernel/cpu/resctrl/pseudo_lock.c     |  4 +-
+ arch/x86/kernel/cpu/resctrl/rdtgroup.c        |  2 +-
+ arch/x86/kernel/cpu/topology.c                |  2 +-
+ arch/x86/kernel/cpu/topology_amd.c            |  4 +-
+ arch/x86/kernel/cpu/transmeta.c               |  8 +--
+ arch/x86/kernel/cpu/tsx.c                     | 10 ++--
+ arch/x86/kernel/cpu/umwait.c                  |  2 +-
+ arch/x86/kernel/cpu/zhaoxin.c                 |  4 +-
+ arch/x86/kernel/fpu/core.c                    |  2 +-
+ arch/x86/kernel/hpet.c                        |  2 +-
+ arch/x86/kernel/kvm.c                         |  2 +-
+ arch/x86/kernel/mmconf-fam10h_64.c            |  6 +--
+ arch/x86/kernel/process.c                     |  4 +-
+ arch/x86/kernel/process_64.c                  | 14 +++---
+ arch/x86/kernel/shstk.c                       |  8 +--
+ arch/x86/kernel/traps.c                       |  4 +-
+ arch/x86/kernel/tsc.c                         |  2 +-
+ arch/x86/kernel/tsc_msr.c                     |  6 +--
+ arch/x86/kernel/tsc_sync.c                    |  6 +--
+ arch/x86/kvm/msrs.c                           |  2 +-
+ arch/x86/kvm/svm/pmu.c                        |  4 +-
+ arch/x86/kvm/svm/svm.c                        |  4 +-
+ arch/x86/kvm/vmx/nested.c                     |  4 +-
+ arch/x86/kvm/vmx/pmu_intel.c                  |  8 +--
+ arch/x86/kvm/vmx/sgx.c                        |  6 +--
+ arch/x86/kvm/vmx/tdx.c                        |  2 +-
+ arch/x86/kvm/vmx/vmx.c                        | 42 ++++++++--------
+ arch/x86/kvm/x86.c                            |  6 +--
+ arch/x86/lib/insn-eval.c                      |  6 +--
+ arch/x86/lib/msr-smp.c                        |  2 +-
+ arch/x86/mm/pat/memtype.c                     |  2 +-
+ arch/x86/pci/amd_bus.c                        |  8 +--
+ arch/x86/platform/olpc/olpc-xo1-rtc.c         |  6 +--
+ arch/x86/platform/olpc/olpc-xo1-sci.c         |  2 +-
+ arch/x86/power/cpu.c                          | 10 ++--
+ arch/x86/realmode/init.c                      |  2 +-
+ arch/x86/virt/hw.c                            |  8 +--
+ arch/x86/virt/svm/sev.c                       | 18 +++----
+ arch/x86/virt/vmx/tdx/tdx.c                   |  2 +-
+ arch/x86/xen/suspend.c                        |  2 +-
+ drivers/acpi/processor_perflib.c              |  2 +-
+ drivers/ata/pata_cs5535.c                     | 24 ++++-----
+ drivers/ata/pata_cs5536.c                     | 17 +++----
+ drivers/char/agp/nvidia-agp.c                 | 32 ++++++------
+ drivers/char/hw_random/via-rng.c              | 29 +++++------
+ drivers/cpufreq/acpi-cpufreq.c                |  8 +--
+ drivers/cpufreq/amd-pstate.c                  |  4 +-
+ drivers/cpufreq/e_powersaver.c                | 20 ++++----
+ drivers/cpufreq/intel_pstate.c                | 28 +++++------
+ drivers/cpufreq/longhaul.c                    | 12 ++---
+ drivers/cpufreq/longrun.c                     | 16 +++---
+ drivers/cpufreq/powernow-k7.c                 | 10 ++--
+ drivers/cpufreq/powernow-k8.c                 |  8 +--
+ drivers/cpufreq/speedstep-centrino.c          |  4 +-
+ drivers/cpufreq/speedstep-lib.c               | 14 +++---
+ drivers/edac/amd64_edac.c                     |  6 +--
+ drivers/gpio/gpio-cs5535.c                    | 10 ++--
+ drivers/hv/mshv_vtl_main.c                    |  2 +-
+ drivers/hwmon/hwmon-vid.c                     |  4 +-
+ drivers/idle/intel_idle.c                     | 26 +++++-----
+ drivers/misc/cs5535-mfgpt.c                   | 33 ++++++------
+ drivers/mtd/nand/raw/cs553x_nand.c            |  6 +--
+ drivers/platform/x86/intel/ifs/load.c         | 10 ++--
+ drivers/platform/x86/intel/ifs/runtest.c      |  8 +--
+ drivers/platform/x86/intel/pmc/cnp.c          |  2 +-
+ .../intel/speed_select_if/isst_if_mbox_msr.c  |  6 +--
+ .../intel/speed_select_if/isst_tpmi_core.c    |  2 +-
+ drivers/platform/x86/intel_ips.c              | 20 ++++----
+ drivers/powercap/intel_rapl_msr.c             |  2 +-
+ drivers/thermal/intel/intel_hfi.c             |  8 +--
+ drivers/thermal/intel/therm_throt.c           | 22 ++++----
+ drivers/thermal/intel/x86_pkg_temp_thermal.c  |  6 +--
+ drivers/video/fbdev/geode/display_gx.c        |  8 +--
+ drivers/video/fbdev/geode/gxfb_core.c         |  2 +-
+ drivers/video/fbdev/geode/lxfb_ops.c          | 50 +++++++++----------
+ drivers/video/fbdev/geode/suspend_gx.c        | 24 +++++----
+ drivers/video/fbdev/geode/video_gx.c          |  8 +--
+ include/linux/cs5535.h                        | 10 ++--
+ 138 files changed, 575 insertions(+), 694 deletions(-)
 
-https://www.intel.com/content/www/us/en/docs/graphics-for-linux/developer-reference/1-0/opregion-specification.html
-
-This patch derives the specifications for the OpRegion that are needed to
-add support for an extended VBT from the patches to the Linux kernel vfio
-driver. This mainly consists of the RVDA and RVDS fieds of the OpRegion which
-store the address and size of the extended VBT, respectively. See the links
-in the commit message which provide links to the vfio patches that added
-support for this feature to KVM/VFIO guests for more details.
-
-There is an undocumented setting that works in the xl.cfg(5) domain
-configuration file, firmware_override, that makes it possible to use
-a patched version of hvmloader alongside an installation of unpatched
-upstream Xen or a version of Xen packaged by a distro. So one can
-download the source for one's installed version of Xen, apply this
-patch and build just hvmloader and then install the patched version of
-hvmloader with a different filename, such as hvmloader-igd-testing, into
-the same directory where hvmloader is installed (usually something like
-/usr/libexec/xen/boot) and then one can configure a guest to use the patched
-version of hvmloader with one's installed version of Xen by adding a line
-like this to the domain xl.cfg file:
-
-firmware_override = 'hvmloader-igd-testing'
-
-The compatible patch for the DM is part of a larger patchset that fixes
-many of the problems that currently affect the feature of Intel IGD
-passthrough to Xen HVM guests. This patch should be considered as a companion
-patch to that patchset for the DM. Do not try to test this patch with a real
-Intel IGD device without also applying the patchset for the DM because without
-those patches, the guest will most likely fail to start if an Intel IGD is
-passed through to the guest.
-
-Changes in v3:
-  - The patch has been substantially re-worked. Most of the implementation
-    of support for Intel IGD in v2 that could be implemented in the DM
-    instead of in hvmloader has been moved to the DM. Specifically, the
-    responsibility to read the OpRegion and patch it if necessary is done in
-    the DM instead of in hvmloader. This change is in response to the
-    comments that were made on v2 of this patch.
-
-  - In contrast to both the current implementation and the implementation
-    in v2, the host OpRegion is never directly exposed to the guest. Instead,
-    the DM exposes an emulated copy of the OpRegion to the guest, patched
-    appropriately for the guest, using the DM's ioreq server.
-
-  - Hvmloader's main responsibility is to allocate enough pages in the E820
-    map to accomodate both the OpRegion and the extended VBT. In v3, hvmloader
-    relies on the DM to communicate the number of pages that are needed for
-    the OpRegion + VBT, and this change means all the code in v2 related to
-    discovering the size of the extended VBT has been removed from hvmloader
-    in v3 and moved to the DM.
-
-  - Backward compatibility with versions of the DM that do not support
-    an extended VBT has been simplified. There is no need for a bitmask
-    setting to indicate support for extended VBT and OpRegion 2 and higher.
-    Instead, the DM learns that hvmloader has support by detecting a read of
-    the OpRegion register before a write to it, and hvmloader learns that the
-    DM has support if the DM returns a non-zero value, the number of pages
-    needed for the OpRegion + VBT, in response to the first read by hvmloader.
-
-  - It was necessary to retain the code that populates the pages allocated for
-    the OpRegion and VBT with guest RAM and copying the OpRegion and VBT to
-    that guest RAM because testing revealed that when the OpRegion and VBT are
-    exposed to the guest by the DM's ioreq server, Windows graphics drivers
-    are unable to access the OpRegion and VBT.
-
-  - To remove the confusion with the value of IGD_OPREGION_PAGES that is
-    currently set to 3 to account for the fact that the OpRegion is not always
-    aligned on a page boundary, it has been changed in v3 to 2, the actual
-    number of pages needed for the OpRegion (not including an extended VBT).
-
-  - Added a check on the number of pages needed for the OpRegion + VBT to
-    ensure the region does not take up an unreasonably large percentage of the
-    reserved dynamic memory range.
-
-I also provide the following table that hopefully helps illustrate how v3
-of this patch differs from v2:
-
-Resource/Description          Proposed in v2            Proposed in v3
-------------------------------------------------------------------------------
-OpRegion register             Emulated in DM            Emulated in DM
-------------------------------------------------------------------------------
-OpRegion                      Emulated (hvmloader       Emulated in DM (guest
-                              makes a copy from direct  accesses emulated copy
-                              mapped host OpRegion      provided by DM and
-                              and from then on guest    from then on guest
-                              accesses its own copy     accesses its own copy
-                              stored in guest memory)   stored in guest memory)
-------------------------------------------------------------------------------
-Extended VBT                  Emulated (hvmloader       Emulated in DM (guest
-                              makes a copy from direct  accesses emulated copy
-                              mapped host VBT and       provided by DM and from
-                              from then on guest        then on guest accesses
-                              accesses its own copy     its own copy stored in
-                              stored in guest memory)   guest memory)
-------------------------------------------------------------------------------
-E820 pages allocated          Depends on extended VBT   Depends on extended VBT
-                              size if there is an       size if there is an
-                              extended VBT              extended VBT
-------------------------------------------------------------------------------
-If OpRegion needs patching    hvmloader patches it      DM patches it
-------------------------------------------------------------------------------
-Setting the OpRegion          Done by DM after complex  Done by DM with hint
-register                      communication protocol    from hvmloader which
-                              with hvmloader completes  provides DM with page
-                                                        base address of
-                                                        OpRegion in guest
-------------------------------------------------------------------------------
-
-Changes in v2:
-  - Correct the name of the new function in the commit message
-    opregion_setup() -> intel_opregion_setup()
-
-  - Add a link to the companion patchset for the device model
-
-  - Describe how to use the firmware_override setting in xl.cfg(5)
-    to simplify testing of this patch.
-
-  - Correct a logical flaw that in case the size of the extended VBT
-    is <= 2 pages, an extra, unnecessary page would be allocated in
-    the memory hole. This correction is in the intel_opregion.c file.
-
-    This code:
-
-    /* Update the number of pages we need for the E820 map */
-    igd_opregion_e820_pages = pages_needed;
-
-    /*
-     * So far we have allocated vbt_pages_needed
-     * and we will likely need to allocate more
-     * pages to fully contain OpRegion + VBT.
-     */
-    if ( pages_needed > vbt_pages_needed )
-        igd_opregion_pgbase = mem_hole_alloc
-                              (pages_needed - vbt_pages_needed);
-
-    Is replaced with this code:
-
-    /*
-     * So far we have allocated igd_opregion_e820_pages
-     * and we will likely need to allocate more
-     * pages to fully contain OpRegion + VBT.
-     */
-    if ( pages_needed > igd_opregion_e820_pages )
-        igd_opregion_pgbase = mem_hole_alloc
-                              (pages_needed - igd_opregion_e820_pages);
-
-    /* Update the number of pages we need for the E820 map */
-    igd_opregion_e820_pages = pages_needed;
-
- tools/firmware/hvmloader/config.h |  6 +-
- tools/firmware/hvmloader/e820.c   |  4 +-
- tools/firmware/hvmloader/pci.c    | 96 ++++++++++++++++++++++++++++++-
- 3 files changed, 100 insertions(+), 6 deletions(-)
-
-diff --git a/tools/firmware/hvmloader/config.h b/tools/firmware/hvmloader/config.h
-index c159db3..edc3a8d 100644
---- a/tools/firmware/hvmloader/config.h
-+++ b/tools/firmware/hvmloader/config.h
-@@ -8,7 +8,8 @@ enum virtual_vga { VGA_none, VGA_std, VGA_cirrus, VGA_pt };
- extern enum virtual_vga virtual_vga;
- 
- extern unsigned long igd_opregion_pgbase;
--#define IGD_OPREGION_PAGES 3
-+extern unsigned int igd_opregion_e820_pages;
-+#define IGD_OPREGION_PAGES 2
- 
- struct bios_config {
-     const char *name;
-@@ -75,6 +76,9 @@ extern bool acpi_enabled;
- #define ACPI_MEMORY_DYNAMIC_START     0xFC001000
- #define RESERVED_MEMORY_DYNAMIC_START 0xFC100000
- #define RESERVED_MEMORY_DYNAMIC_END   0xFE000000
-+#define RESERVED_MEMORY_DYNAMIC_PAGES (RESERVED_MEMORY_DYNAMIC_END - \
-+                                       RESERVED_MEMORY_DYNAMIC_START) >> \
-+                                       PAGE_SHIFT
- /*
-  * GUEST_RESERVED: Physical address space reserved for guest use.
-  * This is not dynamically advertised to guests, so this range must *never*
-diff --git a/tools/firmware/hvmloader/e820.c b/tools/firmware/hvmloader/e820.c
-index 86d3954..97a234e 100644
---- a/tools/firmware/hvmloader/e820.c
-+++ b/tools/firmware/hvmloader/e820.c
-@@ -243,11 +243,11 @@ int build_e820_table(struct e820entry *e820,
-         nr++;
- 
-         e820[nr].addr = igd_opregion_base;
--        e820[nr].size = IGD_OPREGION_PAGES * PAGE_SIZE;
-+        e820[nr].size = igd_opregion_e820_pages * PAGE_SIZE;
-         e820[nr].type = E820_NVS;
-         nr++;
- 
--        e820[nr].addr = igd_opregion_base + IGD_OPREGION_PAGES * PAGE_SIZE;
-+        e820[nr].addr = igd_opregion_base + igd_opregion_e820_pages * PAGE_SIZE;
-         e820[nr].size = (uint32_t)-e820[nr].addr;
-         e820[nr].type = E820_RESERVED;
-         nr++;
-diff --git a/tools/firmware/hvmloader/pci.c b/tools/firmware/hvmloader/pci.c
-index c41c8d9..efe6b68 100644
---- a/tools/firmware/hvmloader/pci.c
-+++ b/tools/firmware/hvmloader/pci.c
-@@ -44,6 +44,7 @@ uint64_t pci_hi_mem_start = 0, pci_hi_mem_end = 0;
- 
- enum virtual_vga virtual_vga = VGA_none;
- unsigned long igd_opregion_pgbase = 0;
-+unsigned int igd_opregion_e820_pages = 0;
- 
- /* Check if the specified range conflicts with any reserved device memory. */
- static bool check_overlap_all(uint64_t start, uint64_t size)
-@@ -93,6 +94,9 @@ void pci_setup(void)
-     uint16_t class, vendor_id, device_id;
-     unsigned int bar, pin, link, isa_irq;
-     uint8_t pci_devfn_decode_type[256] = {};
-+    uint32_t igd_opregion;
-+    void *opregion_vbt_scratch;
-+    bool opregion_is_direct_mapped;
- 
-     /* Resources assignable to PCI devices via BARs. */
-     struct resource {
-@@ -192,12 +196,98 @@ void pci_setup(void)
-                 {
-                     igd_opregion_pgbase = mem_hole_alloc(IGD_OPREGION_PAGES);
-                     /*
--                     * Write the the OpRegion offset to give the opregion
--                     * address to the device model. The device model will trap 
--                     * and map the OpRegion at the give address.
-+                     * To be compatible with this interface for programming the
-+                     * the PCI_INTEL_OPREGION register, the device model must
-+                     * check if the guest reads the register before it writes
-+                     * to the register. To indicate to the device model that
-+                     * we have support for an extended VBT, we read the
-+                     * PCI_INTEL_OPREGION register before writing to it. If the
-+                     * device model supports an extended VBT, it will return
-+                     * the number of pages needed for the OpRegion + VBT. If
-+                     * not, it will return 0 which indicates that it does not
-+                     * implement this interface for supporting an extended VBT.
-+                     */
-+                    igd_opregion_e820_pages = pci_readl(vga_devfn,
-+                                                        PCI_INTEL_OPREGION);
-+                    if ( !igd_opregion_e820_pages )
-+                    {
-+                        /*
-+                         * This case provides backward compatibility with
-+                         * device model versions that lack support for an
-+                         * extended VBT. In this case the device model
-+                         * expects us to allocate an extra page in case the
-+                         * OpRegion is not aligned on a page boundary. Also,
-+                         * in this case, the host OpRegion is direct mapped
-+                         * into the guest.
-+                         */
-+                        igd_opregion_pgbase = mem_hole_alloc(1);
-+                        igd_opregion_e820_pages = IGD_OPREGION_PAGES + 1;
-+                        opregion_is_direct_mapped = true;
-+                    }
-+                    else
-+                    {
-+                        /* Allocate extra pages for an extended VBT */
-+                        if ( igd_opregion_e820_pages > IGD_OPREGION_PAGES )
-+                        {
-+                            igd_opregion_pgbase =
-+                                mem_hole_alloc(igd_opregion_e820_pages -
-+                                               IGD_OPREGION_PAGES);
-+                        }
-+                        opregion_is_direct_mapped = false;
-+                    }
-+                    /*
-+                     * This ensures the OpRegion + VBT does not take up more
-+                     * than 1/32 of the reserved region. Also, we must reject
-+                     * a value of 1 for igd_opregion_e820_pages.
-+                     */
-+                    if ( igd_opregion_e820_pages >
-+                        RESERVED_MEMORY_DYNAMIC_PAGES >> 5 ||
-+                        igd_opregion_e820_pages == 1 )
-+                    {
-+                        printf("too many or too few pages (%u) for OpRegion\n",
-+                               igd_opregion_e820_pages);
-+                        BUG();
-+                    }
-+                    /*
-+                     * Write the the OpRegion offset to give the OpRegion
-+                     * address to the device model. The device model will trap
-+                     * and make the OpRegion accessible at the given address.
-+                     * The device model is also expected to verify that the
-+                     * OpRegion is compatible with the guest address space and
-+                     * patch it if necessary to make it compatible.
-                      */
-                     pci_writel(vga_devfn, PCI_INTEL_OPREGION,
-                                igd_opregion_pgbase << PAGE_SHIFT);
-+
-+                    /* Don't use our own copy if OpRegion is direct mapped */
-+                    if ( opregion_is_direct_mapped )
-+                        break;
-+
-+                    /*
-+                     * Windows IGD drivers do not work properly when the
-+                     * OpRegion is exposed by the device model's ioreq server,
-+                     * so make a copy of the OpRegion and use that copy which
-+                     * will be backed by RAM allocated to the guest.
-+                     */
-+                    opregion_vbt_scratch =
-+                        scratch_alloc(igd_opregion_e820_pages <<
-+                                      PAGE_SHIFT, 0);
-+                    memcpy(opregion_vbt_scratch,
-+                           (void *)(igd_opregion_pgbase << PAGE_SHIFT),
-+                           igd_opregion_e820_pages << PAGE_SHIFT);
-+
-+                    igd_opregion = pci_readl(vga_devfn, PCI_INTEL_OPREGION);
-+                    /*
-+                     * The device model will unmap the OpRegion from the ioreq
-+                     * server so we can use our own copy of the OpRegion.
-+                     */
-+                    pci_writel(vga_devfn, PCI_INTEL_OPREGION, igd_opregion);
-+
-+                    mem_hole_populate_ram(igd_opregion_pgbase,
-+                                          igd_opregion_e820_pages);
-+                    memcpy((void *)(igd_opregion_pgbase << PAGE_SHIFT),
-+                           opregion_vbt_scratch,
-+                           igd_opregion_e820_pages << PAGE_SHIFT);
-                 }
-             }
-             break;
 -- 
-2.52.0
+2.55.0
 
 
