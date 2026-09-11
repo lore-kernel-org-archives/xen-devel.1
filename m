@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2346DC88E53
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 07:26:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415789.1645043 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DEA4C79FA1
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 07:26:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1415786.1645016 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4veW-0003yo-3J; Fri, 11 Sep 2026 07:26:28 +0000
+	id 1x4veS-0003FN-Kj; Fri, 11 Sep 2026 07:26:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415789.1645043; Fri, 11 Sep 2026 07:26:28 +0000
+Received: by outflank-mailman (output) from mailman id 1415786.1645016; Fri, 11 Sep 2026 07:26:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4veV-0003x8-TI; Fri, 11 Sep 2026 07:26:27 +0000
-Received: by outflank-mailman (input) for mailman id 1415789;
- Fri, 11 Sep 2026 07:26:26 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x4veS-0003EM-FH; Fri, 11 Sep 2026 07:26:24 +0000
+Received: by outflank-mailman (input) for mailman id 1415786;
+ Fri, 11 Sep 2026 07:26:23 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Oleksii_Moisieiev@epam.com>) id 1x4veU-0003lV-LS
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 07:26:26 +0000
+ (envelope-from <Oleksii_Moisieiev@epam.com>) id 1x4veR-00036T-IE
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 07:26:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4veU-002rD1-23
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:26:26 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x4veQ-001KmU-UL
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:26:22 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Oleksii_Moisieiev@epam.com>)
- id 6aa3ad19-2eae-0a2a0a5409dd-0a2a450a8f38-36
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:26:26 +0200
-Received: from [52.101.83.103]
- (helo=GVXPR05CU001.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa3ad17-e002-0a2a0a5209dd-0a2a4507c276-20
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:26:22 +0200
+Received: from [52.101.70.117]
+ (helo=AS8PR04CU009.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Oleksii_Moisieiev@epam.com>)
- id 6aa3ad21-f2d2-0a2a450a0019-346553679a5e-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:26:25 +0200
+ id 6aa3ad1d-b4ea-0a2a45070019-3465467530e0-5
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:26:22 +0200
 Received: from DU5PR03MB10263.eurprd03.prod.outlook.com (2603:10a6:10:519::5)
  by AM9PR03MB8025.eurprd03.prod.outlook.com (2603:10a6:20b:43c::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.9; Fri, 11 Sep
- 2026 07:26:21 +0000
+ 2026 07:26:20 +0000
 Received: from DU5PR03MB10263.eurprd03.prod.outlook.com
  ([fe80::8c9e:b301:61c0:3908]) by DU5PR03MB10263.eurprd03.prod.outlook.com
  ([fe80::8c9e:b301:61c0:3908%5]) with mapi id 15.21.0406.005; Fri, 11 Sep 2026
- 07:26:21 +0000
+ 07:26:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,19 +57,19 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=RgAKAFsTJVhjZbZwZjTyl3PbSXVjHNA6qMZmlnm7nono9+qa+0SPldVcFiqJhcsdthZnQQkC7WL3ak7y34zW4T6fQ1RATN4rToYj0CZNByxKOafVzuSYsm/Jsk5nVMAYQR96O85RcdzaechtdcxyqQBLLtCyRxEPLxj5o36NDw/SU1E/go4P0eQ8DCyacjPVPd3KQsRQUoV8gB35i0xxZ3FKW36sTz1VMKatB+oxKZLp3An6duNI3W1McJ5X2/GbN/4qCusJMVwiOuOJx3eQml8aIzC7KXIyWRFpfljBqGdJMOflo3e/efvgbeDPv6xygCCW2d5Tga5HWY/eiuJ+tg==
+ b=tZEGvXD53Jo1RdSsy9s8JKQwSQm/FOCAO3Zq6LsLPYJZ9quTeqZptEqHzkHgTuEFngsgPRPw49lXV2Nu0RJOvc6bzV9qUz2wo+muDtcmEZjoNJdlKoEGD0xU3hh1UjHZeE60mwhH7usdHwm0nciJxLkBxNnRd9N1RXdJh6bKHrEn8nU6x816yD/4GI77jtXy3FIJj0zHDLn2fQYLhJtiWixobXdCMPBbxskLv7BWVaouxRLTjz1J1li4YvZ+HMzQiMsIIet4aszklolmJi/nuxff5QEPqsh6QdLI9sLOpTebF2TMl626dAezTlqeC6jiOZ4ZeqrS3gcTyAEHfSZPZQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=YEB1ygg7k6uOLA8RSrzyTOVwxUCmQNEb0WWQgAfiVjU=;
- b=bAR0og0XmIQSOTLriN0ORw6Dixk8Vq1nNlv32NdZcB0gEGj2WN6jZOtIWzkTJwSuJ69/LLvYnuaeU6h3K5q1oqWIz2SHj1eWl9l3Iq6jtTkb1naN3tYnUfzrvkjYDB/VKXTrqg/D2QWrCaj7WM/EetbXHFFpuffTNGNWB0fTOIDSkdB9rn+nHEiIiXiBp0uJ7U2iZSdrYJI0r5e+lqHjgjM8Tm5WPen+rNe5KEXVyJjGb7lssh0dfAYZ90hB6X24OSYGVcgeFem34AqGSxB2TnAEmxIvOs2hswUU1y6rYvVVZVZVr7oEqGRuObkP9zU8vlNmwvx9qGTGLzQ+gqVbrA==
+ bh=Ej35jXrH9F2Cgm3HWS9Pvfb26eAYGC6ez9jDhksRBPQ=;
+ b=kB3zgg5b1QpukN6CjWGVMPVIgD0vvIh/ua2cpXhscZh/I4jizEWQGFvSFkoNhIePcbkS+lJTYtuXELEOIumgxoU2mJnQaCuiQnrt2eaLSjsa43A0UbxnJ/iVI3rxpOWldXd0P3uIyUO/zK+3o2ttCAjCNtUWW6TkEF7GkdF7tpXNXwCEfJ9xHUX4Y910DFpqmcxExvc4adCKYMdq1T/QVY58NjUB5bXQe5fx/Ktih5Qf1FYLzgrvcZKk8UWvGmDgdSLUeBgrY0dxIacH4WdpD0w7zQNCJN0JVw8KsgIdnHmrmVLvZjdwmOqjv8B4eK2EUSbGrxi/A+vA6NHrc2hTvg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=YEB1ygg7k6uOLA8RSrzyTOVwxUCmQNEb0WWQgAfiVjU=;
- b=rh+NHbTK/mOMgY0KVg9tNtU4HUt08dS8AjnU2RbJNI3Cv3vUPR9Guhl7zL7eyDTSKqxOlCJY9SZj49NDsix+BUIcQy7MQDUmKmU7stjV/mL4/kcMu27aoFaClVMFLLTBmnH6g4PlW2H2/kHr+rsRARjLEuhAqkYVAYkr5XpuF78GA157hJ+tRQSF+XF/Tel26/ShvrDw6oXyBjYRZ70lTLSHGg3FRhQsXeRlznqrXTj2G5ZVqQDIPWNRcI39Y7aEKkOp/1oY9OC7yBB4qH9CiSrPYTaa2+a2JxFiMJ/KHLXdHXaaD34gBO/qt2PhZHItegH1377JXN56FHvEYUJBfw==
+ bh=Ej35jXrH9F2Cgm3HWS9Pvfb26eAYGC6ez9jDhksRBPQ=;
+ b=swIhuMvI7gLAQCfaxRF2iu6xNdjTsXDFa6QCuMGlvob67UTlVQu9KVbp6wvyqHiv3viVsMfdD8K6cw1tzn9lu7mJ4V8ZFGFO4JbWilUOGrkVDuEPoZVVlJUmHMuLJE/Z6ySZWp0WXn8Ex7Uzah+261o29qLh7Mf2kaYKsp2IxH+8QLyCRDwhjP0FJJRN3F3kVRtd8SeL9hjFJhQGHAlyiatqt6DDA3yNpldDmCtapUEq/vkH1PynCeOwaGL1HqxXvCfnfH0dpRlgcloL15gpUKCdc3diFpPSRRfS3UkobzBqm378rQLOoVbaS7IKlCfUeQtHj0ZgNrJ8e87brqSkzA==
 From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
@@ -80,14 +80,12 @@ CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
 	<roger.pau@citrix.com>, Stefano Stabellini <sstabellini@kernel.org>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Grygorii Strashko
 	<grygorii_strashko@epam.com>
-Subject: [PATCH v12 5/6] tools/xl/libxl: wire up SCMI SMC multi-agent
- configuration
-Thread-Topic: [PATCH v12 5/6] tools/xl/libxl: wire up SCMI SMC multi-agent
- configuration
-Thread-Index: AQHdQb7XToeGpjO4Y0i7HZGVFc1Wmg==
-Date: Fri, 11 Sep 2026 07:26:21 +0000
+Subject: [PATCH v12 3/6] lib/arm: Add I/O memory copy helpers
+Thread-Topic: [PATCH v12 3/6] lib/arm: Add I/O memory copy helpers
+Thread-Index: AQHdQb7XwQvbnxLqDEGK19PLXXgaew==
+Date: Fri, 11 Sep 2026 07:26:20 +0000
 Message-ID:
- <d11996ff36ca08932daec1ea699faa40fb55c3fc.1789055542.git.oleksii_moisieiev@epam.com>
+ <6bf8f9dd61da4d0fbea096b863f51db08df46c56.1789055542.git.oleksii_moisieiev@epam.com>
 References: <cover.1789055542.git.oleksii_moisieiev@epam.com>
 In-Reply-To: <cover.1789055542.git.oleksii_moisieiev@epam.com>
 Accept-Language: en-US
@@ -98,273 +96,325 @@ authentication-results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: DU5PR03MB10263:EE_|AM9PR03MB8025:EE_
-x-ms-office365-filtering-correlation-id: b0e4f619-9e45-47e0-fac1-08df0fd5fa45
+x-ms-office365-filtering-correlation-id: 14479ef4-56a3-43f6-d369-08df0fd5f9ca
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
  BCL:0;ARA:13230040|1800799024|7416014|376014|23010399003|366016|10067099003|6133799003|18002099003|22082099003|56012099006|11063799006|38070700021;
 x-microsoft-antispam-message-info:
- FtwgBI0jjz8d0AVrCEyZG4ZKJFNL+zodgehiFgow3wjRoKyuw8AzGeI9Oz9wxJpZRzZM4i/mpt0at4ps+BxiJZMcgpRfxTfkGcTbH3lryX3Wpd8D6uKBWUKfvqEblF0BVoZa9SEW/6IyQxuolR55elefrbvmrCKxuidmIeZowBt7rTli+8x/Z1/uuCSFu426RuthhXfLPYccrPGK3+utmIJRBXmQwXJFM7m4KGZ5Ujw1b75GpJd8gJCHBHxI6OfQko39vkGm1ZKaUP3lIoGmLaCzdi/LdQpPlVv4WCkkxaGZp0Ob0jtMu0FlqNyuLrAYA7ynWilcx9LMulBfwvvaDODbG3qpkqdZDK7mDypKURLojX88bcvZ4GAz92YsfasANnlopfVnIjrYIevafOv+Adg3pTyEfeZJ27Qv8dkEzXz1JKEylnozDIJK/MkUTe+p8sQPVAXm/iwkMMbyQUOc9gUzhYNnuFyiLzo2QiH59jqO6VTF60uODSc47/hnfVmfaShUe2kzk9jtQ9KWMcvtvIbEXDyS2a2InlYuJfvOvQhOzLb4B6K1HsP9K5Bsw8Sg9Bv/apLUcc0DvJuNXyRvfVZQBryUHrUIs99T6IfGr2hPodv/ComeMwFOqLmBtlF/BvprqwM2tNelcfi1+DjNd2hsp5U6pcv9P+9oawx9yzU1MTzNjzUWmItUCGMS8Mi9loiDS5jwDBD5J7LWaSrlZ6NBjBCIJsPhTiVF5VkJw9k=
+ /Any2wm0K3F1eSgh7+5mLMMrtKTeWulnGxApORo+9NBD+T7p66AV0ojwc6SWlAIRTygefuvhKCFCByFb7bnAQampp7hUSn2vdRRe5oik9+X50+cwNwdpe74JFEjERJ8DJnRWcOwQ9QNPYpdwIv5OtlWSyFw1J7dYcFx4Mz5+UMGRnul3sgRAojz83MQt8Dy6tXkZ0ax2/qHQCqo1+W5dmkgQ3wlCzlCM1IaLoubaalrvDxGt0ILX0kYZMU2TB9UIhf4xxLE5zxOYV3jj7e+QdCedpQ6D8b/cuO4V2n69whZgX9HaLvGVLDRdyB2kI5gJ0M6ec8ufUtj58rt06/NS5N0sGBgZHK2yETV7eFEDD5RL7kEcBWxKVAFbsfU/fJr8t4Gyn1JubZ9oc5RnjoluDRq8aHAQHoM047FeCU+6NbPL5AoirnpkR0ruwuKt1j1WRdH+OtxRZ983jRMkuha6+QUwqmN+mIGh7F3MhTRSydEhH5qetJ3QPLalQiSD86tf2habqP2frmp255pM3uM7QwbE4vMdn0D68L4Y3eIZYHVQhE1z5+pqNa1VkDk0lg7XzJsvR3uwgTcc3LfjMsV/t3WMz9WCmqaX/tlk3TfCizjSYcFF055T3yf+Cxwr/QOThlGmNA3cdlbQEkaCIVZF4yAYzuHbHAN222N9S8KyPShsIPfhxiHFl1IkKn6LfnROccXwOoV0eZaVRVRuuQmq9nQ3M575rT/KsyYEQLLaliA=
 x-forefront-antispam-report:
  CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DU5PR03MB10263.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(23010399003)(366016)(10067099003)(6133799003)(18002099003)(22082099003)(56012099006)(11063799006)(38070700021);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?ClA3Tf5hszpjOCNaVvW/GrWGRWoN+Jg9ZsD/xRa0sc5KKxcfN15qyknODg?=
- =?iso-8859-1?Q?UBn/ireCWclUeN6ElN5VP4a360Mr22NjnnOQhEXwdWcEUK6W15rq3htTBX?=
- =?iso-8859-1?Q?1p97fKjLmSzJ2rPiqOHPT3EZmTr9Mwwxw7T9WIt+kZInWdNDtZFVZba6Uq?=
- =?iso-8859-1?Q?Y2hFw8NIKY+QEBohYr96/MGTLXlb6a5gjrnMu1XIoOk1UGzbiB/P5JjKw+?=
- =?iso-8859-1?Q?F04n+5qvt2l1kSUpmfCLktXtWbMUaoHQpVIa200Jc3WJc0FqJIzpGDFPKE?=
- =?iso-8859-1?Q?kUFGJdzCiWEPGyWTsYFWFgnQ34c45/1FeDeENBlk8HmyS5DfuNkBtvDPZv?=
- =?iso-8859-1?Q?vJHlf3fX1bTL0hxv5qQjzy71Np+dUDjNuE/0BmRkPPX8tmXRSn4hAjTC2Q?=
- =?iso-8859-1?Q?R/rrvs3sWZfJc/3RyHJbgeLCtVvMTxPZ3L1/PIqhOzwuK9EOAq2aZpY7sY?=
- =?iso-8859-1?Q?AKgXORTrTn9t3MPC4oGIrVbq+a21Wx055P6oTFr2DZ99eR9Bd6fniPhgts?=
- =?iso-8859-1?Q?r8QNfB2l+E0E8F7JlGtPLPgBqnyUzHemjOatwj01Zhq31lltwoZY8HmySv?=
- =?iso-8859-1?Q?7gWIlg9wg7RQbgswjdfR9/qcaBeLA073jA7a391+qaZBI5nf7FnJs77ahG?=
- =?iso-8859-1?Q?uD+4TI3HPYCQU5x8/HzgOkxwWsHse2AyK980t11456x0PZ2Ur8z+LOFFSB?=
- =?iso-8859-1?Q?k7tZFlQoE3XXWcu30uehfzABtQyanhAoWE6/5zK3WBjWULMoJgATmzA+OA?=
- =?iso-8859-1?Q?+zpjpAisCaVeOTNwU2RvxjEd4Jfgru9SShPXygj3ke2SAMDsI8WGTmhcTH?=
- =?iso-8859-1?Q?z16cZ51f0LTTgVUd/eqAympwHoV3cElk7KbOgxZCBnMXhAAMrwR8TGw7VE?=
- =?iso-8859-1?Q?z7eKKpM993Y6kJwE4DOkduiB+P2y5AOZeYat0Wt4yQkPeIbgXnwn1o93Og?=
- =?iso-8859-1?Q?U1uwOPmsw8lnmt10yApiVtFT+EQKpYuKaWNiARLgYdEo9Pe+dtaPea20Iq?=
- =?iso-8859-1?Q?2bH5xPwpcVHDXW9r0qiIGdeGPRyzYVme6F8TmpYXFfg9RlXD51ZpDX2S8Q?=
- =?iso-8859-1?Q?YKi1mMT8LFYf0w+wu2XHIH6ZWsPGa1cqQT2kYg6XogOQ0ocl0Ij2tjr7aS?=
- =?iso-8859-1?Q?joLrqg80Qntr9b3f+LRzDSVO1ZQV2wt7Y7v8ukvX3eiYfeaA2BXYuCe6+T?=
- =?iso-8859-1?Q?trHOc1kbGXJmpigXo2hzlqrEZ+5/Nan/ULvxp8XwgVxw+ZjpWDO86nyAwf?=
- =?iso-8859-1?Q?NqFQNq5NuxSju3B4LN+RIjXL3kwOwNiVs1F5QHnAXKxg6z9w56dhB79xTe?=
- =?iso-8859-1?Q?LvTFK2V2KDwH1nLIhhAUkgwe8OS9PbU+M5FdLtaDuG/1gzMMmlD/6r7VdF?=
- =?iso-8859-1?Q?A8ogO4hQYGOEAmf7pz7MI06FuhdvZo0KsvBkiBBMsusyFYL2iszOhwPAG0?=
- =?iso-8859-1?Q?L9Curm71JrAcFSCAURK5O8c0P31E9Scicp/ixt7E8z2n+BEpT22jq+QSWv?=
- =?iso-8859-1?Q?qnaMubItIAq3AjdDZmqc7qMWg6N6gJfMvUC28PtHNZKZZI1RTev71WpDNg?=
- =?iso-8859-1?Q?ro1dTdOMqHY0xSgeMQ9lmiEOSHnKadJjGZqwzGUh4St/iG/Kpovb+j1pFh?=
- =?iso-8859-1?Q?OWRkOuGnJMBYO4wqgMvZeRziEFrFKa9COqOaHeQADx4xiv0VGilPxYCqU5?=
- =?iso-8859-1?Q?hNydChXmADKzsNwsi3awmDxM8MMeEZ5VqzBwgYD3vsGsOFXZpgpHymKm+H?=
- =?iso-8859-1?Q?5PTXbbfCDze9nurdLtHLyiQPq8PfrKTDnIerp2/BydR+eLwW2qBmWKlreM?=
- =?iso-8859-1?Q?io3iTY8Yi8mBj/YepMO4gojLxmgFmI8=3D?=
+ =?iso-8859-1?Q?emnrZ+LMu2WA2ElvjGAdfurkPE+3oIkwN0Ye59NXFn9bOxhiNpZ+2B2Ujp?=
+ =?iso-8859-1?Q?t6FylnA3OW/ELhiFNh0bmFL18+iGsZmvaYkDCxIg2OUzNCsw33Bwzs+2FE?=
+ =?iso-8859-1?Q?ddERfNXVCiLl7sE+WsV4trjPX1nRgryd3n6hulXtT50CCgq9pSAPyoWfRI?=
+ =?iso-8859-1?Q?8nOdrST0mFXnHYD4tYJdvX9snC0tMe+4ewxnq0GMDfw4FhnM645m6/yzrN?=
+ =?iso-8859-1?Q?GhnUVWfnJkEkzc9Pqgpbcrqts0ErKTqmHwO57VLmljrueZ6soNa4M9QVRB?=
+ =?iso-8859-1?Q?EY2tqZ91ysOVi1wVQMeBS4s+P0w4PwFamTvlQKRvDEYQfOvPuf4M0JeCXU?=
+ =?iso-8859-1?Q?gXrv7KHUByvAaMJleazMim5U03IMsTUEnXiMXX0dVs3EPfPSYcFSM5ApJU?=
+ =?iso-8859-1?Q?XQqhi0100j+CrVsrIW9JDK0rL6Gk8WoOWH5CMPrnY9P0KPhzjShnCthaX0?=
+ =?iso-8859-1?Q?hYG+1vFzJMJTfcWK6FxFazwDAQuGEFdHY4ERdGJ1UL2yDt35LGsyYeASUd?=
+ =?iso-8859-1?Q?p9TVN3cHwIXG4DDyWB2dnRbkcOFaKQeyMS82wIX/Tq7Q5TsUxzlfKL9WaJ?=
+ =?iso-8859-1?Q?ty0gJpkggs4C5wAsiSuVF/O34Gqk9Hu1BNYIwMrZPPeDy8FfVUWd4s9J3R?=
+ =?iso-8859-1?Q?V8AWE5lPZvmJlDtFQeDivEruL2l3X99QCZm/D/38n7bonDp0iI4AWMpeMb?=
+ =?iso-8859-1?Q?gm/SxOiZa3aXIIXHexEdYal6XBb1xo3Z2nfTU79ljGgte7zE19KeOHrJX2?=
+ =?iso-8859-1?Q?4KmWm1PnleXNyX6WkE//JXaTA64uBrY7iP++zzWic2cubr+4dLxZW9eQVT?=
+ =?iso-8859-1?Q?zO+u0o9vw+sWyOv/k8xjLDErWAgNclQN24qcBr5gxcTjQcht9mSNFdiv5b?=
+ =?iso-8859-1?Q?iZmDiv9IziAVgQr7cmyleE5YtoxFCm2xcPakDtr7ezlGgJFRFqLe+s4gnb?=
+ =?iso-8859-1?Q?RLvWwI/m28LtkW3q0LrXIKYhMVJfXSsqCXQ9ye/hENDyDZiYauQyb0Ee6D?=
+ =?iso-8859-1?Q?1BIrAsNVcjyMFcrkvDRxbulZB93b9XPw66zHYGTAlRPRniVon5MBI52596?=
+ =?iso-8859-1?Q?lb3eCKGsdVoYJ++0DWom8OfudqgQSFiWy09lYKEutgxWvvhA6V+LVCnu9X?=
+ =?iso-8859-1?Q?59r+Vt6Z7jEJWfKKBw3+z89rl+SWDWeVcMms6Z8quHU0GuSiWBcbsjszzt?=
+ =?iso-8859-1?Q?B5xKZSoktgh/z9R0iVrcdTMspfvJt1Ecw6QtVQSrNoBsLSwDlxIQV/EhuY?=
+ =?iso-8859-1?Q?V2r54tcQ1hdo69D0rETtsdR/NAmUNeaIzaLYj19mGidCFKaIOdZOhmyrv0?=
+ =?iso-8859-1?Q?hwHO9/BHvDE78E9N1QnB80u5tCFIv1HIY9CnXFl8ECXnRiLQoaTZjEmRYK?=
+ =?iso-8859-1?Q?GdNUXYa3fZMoKKXodn0atikKnbrVEzoTXuSVvXAW5ay3+b7qx3nKS/5wKo?=
+ =?iso-8859-1?Q?gNPoM+8HnWo/GdsnIZEhiiyHjRizckVIzZUH25stIIvMJnKSG2AdBH26n4?=
+ =?iso-8859-1?Q?rkZdeRH8a50583cJNtxERhbPi7EsCkomzG/eFPyEtNYtOYmKL2d2NN3gAo?=
+ =?iso-8859-1?Q?AEq0lvdQuvtub08/6k5KeATZfpM7u9Zzcht3x3GefaqAZCBADOFySgEvLb?=
+ =?iso-8859-1?Q?nfSKUZ4WlzdGvym8opV1YY/BcMmkKCGMCXZX0H77C0FQSyvBJsyo7XezbE?=
+ =?iso-8859-1?Q?06ku1JK+h0rzqk4Wns0qc1yGaqrPwEOmErSWF81YPs+4qwgDp/DUbTRD0P?=
+ =?iso-8859-1?Q?5HZtlPx5yzuRiPrTRPusOVJfC0bNJM8tOAkxGxdS2DMpDeIIDJgoNra4/B?=
+ =?iso-8859-1?Q?dUuT6B5n7nMpikLbuGKK7P8bOZtg2xI=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: DU5PR03MB10263.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b0e4f619-9e45-47e0-fac1-08df0fd5fa45
-X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Sep 2026 07:26:21.1044
+X-MS-Exchange-CrossTenant-Network-Message-Id: 14479ef4-56a3-43f6-d369-08df0fd5f9ca
+X-MS-Exchange-CrossTenant-originalarrivaltime: 11 Sep 2026 07:26:20.2723
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: bBvZt3vdiuxl7DCUKkvYK6UTrsLgtclrf1CdfZrMfi2SDm4QNybC5p357mouEvdWPPlXgeXB7axtty9Z8atyi2l9j/YbuEbme/OdSSUzsCg=
+X-MS-Exchange-CrossTenant-userprincipalname: 2Su+lf2zuaHt0ltVyvyQtf3Sf29oQtQ7nnJwQWlWr9N8ot6MH2eTcg7TVwPC0PhfVeQENEAgc6KXlgbvpHmtjvtUIWegCjP7I2ZLONlM/u0=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR03MB8025
-X-purgate-ID: tlsNG-4011c0/1789111586-5A9D9CFC-54D4495C/0/0
+X-purgate-ID: tlsNG-ef75cf/1789111582-3C610AE4-7128A54C/0/0
 X-purgate-type: clean
-X-purgate-size: 7327
+X-purgate-size: 8704
 
-Plumb the SCMI SMC multi-agent type through the toolstack:
+Introduce memcpy_fromio() and memcpy_toio() helpers to copy between
+regular memory and MMIO space on Arm. The generic prototypes live in
+io.h so other architectures can provide their own implementations.
 
-- Extend libxl_arm_sci_type enumeration with scmi_smc_multiagent (value 2)
-- Add agent_id field to libxl_arm_sci structure for per-domain agent assign=
-ment
-- Update libxl_arm.c to translate libxl config to XEN_DOMCTL_CONFIG_ARM_SCI=
-_SCMI_SMC_MA
-  and pass agent_id to the hypervisor via xen_domctl_createdomain
-- Add xl.cfg parsing for arm_sci=3D"type=3Dscmi_smc_multiagent,agent_id=3DN=
-"
-- Document the new xl.cfg options in xl.cfg.5.pod.in
+These helpers handle alignment safely by using ordered byte accesses for
+any leading/trailing unaligned bytes and ordered 32-bit accesses for the
+aligned bulk transfer. Using the ordered `readb/readl` and
+`writeb/writel` accessors avoids unintended endianness conversion while
+respecting device ordering requirements on ARM32/ARM64 hardware that may
+not support 64-bit MMIO atomically.
 
-This completes the userspace side of multi-agent SCMI, allowing xl create
-and dom0less configurations to assign unique agent_id values to domains.
+The interface lives in the generic header so other architectures can
+provide their own implementations (as macros or functions). The ARM
+implementation is placed under `arch/arm/lib/` (mirroring the x86
+reference layout) and is split into separate compilation units added via
+the architecture-specific lib Makefile.
 
-Series-changes 12:
-- reject agent_id in xl.cfg when the ARM_SCI type is not
-  scmi_smc_multiagent, instead of parsing it and discarding it
-- perform the check after the option loop, as type and agent_id may be
-  given in either order
-
-Signed-off-by: Grygorii Strashko <grygorii_strashko@epam.com>
 Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
+Reviewed-by: Stefano Stabellini <sstabellini@kernel.org>
 ---
 
-(no changes since v11)
-
-Changes in v11:
-- Fix agent_id documentation: clarify it applies to SCMI SMC
-multi-agent support only, not plain SCMI SMC (reviewer feedback)
-- Remove "non-zero" from agent_id description to match accepted
-range [0..254]
-- Remove "UINT8_MAX (255) is treated as invalid" from user
-documentation as unnecessary implementation detail
-- Add LIBXL_HAVE_SCMI_SMC_MULTIAGENT feature macro in libxl.h to
-advertise the new scmi_smc_multiagent type and agent_id field
-- Add agent_id validation in
-libxl__arch_domain_build_info_setdefault() to reject invalid values at
-the libxl level, not only in xl
+Changes in v12:
+- Add missed R-B
+- correct the Emacs footer of both files, which asked for 8 column
+tab indentation while the code is in 4 column Xen style
 
 Changes in v10:
-- Split hypervisor and toolstack changes into separate commits
+- removed extra include in memcpy-{to/from}io.c files
 
- docs/man/xl.cfg.5.pod.in         | 13 +++++++++++++
- tools/include/libxl.h            |  8 ++++++++
- tools/libs/light/libxl_arm.c     | 13 +++++++++++++
- tools/libs/light/libxl_types.idl |  4 +++-
- tools/xl/xl_parse.c              | 27 +++++++++++++++++++++++++++
- 5 files changed, 64 insertions(+), 1 deletion(-)
+Changes in v9:
+- reword commit description to refer to memcpy_fromio and memcpy_toio
+- ordering obj-y in Makefile
+- rename ALL_LIBS to ARCH_LIBS
+- drop io.h and move definitions to the common header, fix comments to
+be arch neutral
+- update comments for memcpy_{from/to}io implementation
 
-diff --git a/docs/man/xl.cfg.5.pod.in b/docs/man/xl.cfg.5.pod.in
-index d34951edb9..1dec511f20 100644
---- a/docs/man/xl.cfg.5.pod.in
-+++ b/docs/man/xl.cfg.5.pod.in
-@@ -3179,8 +3179,21 @@ single SCMI OSPM agent support.
- Should be used together with B<scmi-smc-passthrough> Xen command line
- option.
+Changes in v8:
+- switched to ordered accessors to address the ordering and barrier
+concerns.
+- updated the documentation to match the implementation and explicitly
+state the supported access sizes and granularity.
+- rename memcpy_* implementation files to memcpu-* to follow naming
+convension
+- fix indentation to match Xen style
+- fix intendation to match Xen style
+- move memcpy-{from/to}io to more convenient library place
+
+Changes in v7:
+- x86 guidance: removed the speculative note; header now just says
+  each arch supplies its own implementation or macro.
+- name spacing: dropped the double-underscore; the helpers are now
+  memcpy_fromio / memcpy_toio. The header also explicitly allows an
+  arch to define these as macros before including it.
+- updated io.c to keep 32-bit transfers safe on arm32
+- moved to __raw_read*/__raw_write* accessors to avoid endianness conversio=
+n.
+- split the helpers into separate compilation units
+
+Changes in v6:
+- sorted objs in Makefile alhabetically
+- added newline at the end of Makefile
+- used uint{N}_t intead of u{N}
+- add comment about why 32 bit IO operations were used
+- updated cast opertaions to avoid dropping constness which is wrong
+- move function definitions to generic place so the could be reused by
+other arch
+- add SPDX tag to io.c
+
+Changes in v5:
+- move memcpy_toio/fromio to the generic place
+
+ xen/arch/arm/Makefile            |  1 +
+ xen/arch/arm/arch.mk             |  1 +
+ xen/arch/arm/lib/Makefile        |  2 ++
+ xen/arch/arm/lib/memcpy-fromio.c | 55 ++++++++++++++++++++++++++++++++
+ xen/arch/arm/lib/memcpy-toio.c   | 55 ++++++++++++++++++++++++++++++++
+ xen/include/xen/io.h             | 10 ++++++
+ 6 files changed, 124 insertions(+)
+ create mode 100644 xen/arch/arm/lib/Makefile
+ create mode 100644 xen/arch/arm/lib/memcpy-fromio.c
+ create mode 100644 xen/arch/arm/lib/memcpy-toio.c
+
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index b7afd3e58c..e448e69014 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -8,6 +8,7 @@ ifneq ($(CONFIG_NO_PLAT),y)
+ obj-y +=3D platforms/
+ endif
+ obj-y +=3D firmware/
++obj-y +=3D lib/
+ obj-$(CONFIG_TEE) +=3D tee/
+ obj-$(CONFIG_HAS_VPCI) +=3D vpci.o
 =20
-+=3Ditem B<scmi_smc_multiagent>
-+
-+Enables ARM SCMI SMC multi-agent support for the guest by enabling SCMI ov=
-er
-+SMC calls forwarding from domain to the EL3 firmware (like Trusted Firmwar=
-e-A)
-+with a multi SCMI OSPM agent support. The SCMI B<agent_id> should be
-+specified for the guest.
-+
- =3Dback
+diff --git a/xen/arch/arm/arch.mk b/xen/arch/arm/arch.mk
+index dea8dbd18a..009bb22c45 100644
+--- a/xen/arch/arm/arch.mk
++++ b/xen/arch/arm/arch.mk
+@@ -2,6 +2,7 @@
+ # arm-specific definitions
 =20
-+=3Ditem B<agent_id=3DNUMBER>
-+
-+Specifies an ARM SCI agent id for the guest. This option is mandatory
-+if the SCMI SMC multi-agent support is enabled for the guest. The agent id=
-s of
-+domains existing on a single host must be unique and in the range [0..254]=
-.
-+
- =3Dback
+ ARCH_LIBS-y +=3D arch/arm/$(ARCH)/lib/lib.a
++ARCH_LIBS-y +=3D arch/arm/lib/lib.a
 =20
- =3Dback
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 7c098edab6..9f46566739 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -318,6 +318,14 @@
-  */
- #define LIBXL_HAVE_BUILDINFO_ARCH_ARM_SCI 1
+ $(call cc-options-add,CFLAGS,CC,$(EMBEDDED_EXTRA_CFLAGS))
+ $(call cc-option-add,CFLAGS,CC,-Wnested-externs)
+diff --git a/xen/arch/arm/lib/Makefile b/xen/arch/arm/lib/Makefile
+new file mode 100644
+index 0000000000..07a0d9186c
+--- /dev/null
++++ b/xen/arch/arm/lib/Makefile
+@@ -0,0 +1,2 @@
++lib-y +=3D memcpy-fromio.o
++lib-y +=3D memcpy-toio.o
+diff --git a/xen/arch/arm/lib/memcpy-fromio.c b/xen/arch/arm/lib/memcpy-fro=
+mio.c
+new file mode 100644
+index 0000000000..d8d6a5f557
+--- /dev/null
++++ b/xen/arch/arm/lib/memcpy-fromio.c
+@@ -0,0 +1,55 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <xen/io.h>
++
++/*
++ * Arm implementation notes / limitations:
++ * - Uses ordered 8-bit for leading/trailing unaligned bytes and ordered
++ *   32-bit accesses for the aligned bulk; no wider accesses are issued.
++ * - Only suitable for devices that tolerate 8-bit and 32-bit accesses;
++ *   do not use with devices requiring strictly 16-bit or 64-bit accesses.
++ * - MMIO must be mapped with appropriate device attributes to preserve
++ *   ordering; no extra barriers beyond the ordered accessors are added.
++ * - If source or destination is misaligned, leading bytes are copied
++ *   byte-by-byte until both sides are 32-bit aligned, then bulk copy uses
++ *   32-bit accesses.
++ */
++
++void memcpy_fromio(void *to, const volatile void __iomem *from,
++                   size_t count)
++{
++    while ( count && (!IS_ALIGNED((unsigned long)from, 4) ||
++                      !IS_ALIGNED((unsigned long)to, 4)) )
++    {
++        *(uint8_t *)to =3D readb(from);
++        from++;
++        to++;
++        count--;
++    }
++
++    while ( count >=3D 4 )
++    {
++        *(uint32_t *)to =3D readl(from);
++        from +=3D 4;
++        to +=3D 4;
++        count -=3D 4;
++    }
++
++    while ( count )
++    {
++        *(uint8_t *)to =3D readb(from);
++        from++;
++        to++;
++        count--;
++    }
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/arch/arm/lib/memcpy-toio.c b/xen/arch/arm/lib/memcpy-toio.=
+c
+new file mode 100644
+index 0000000000..5115489326
+--- /dev/null
++++ b/xen/arch/arm/lib/memcpy-toio.c
+@@ -0,0 +1,55 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <xen/io.h>
++
++/*
++ * Arm implementation notes / limitations:
++ * - Uses ordered 8-bit for leading/trailing unaligned bytes and ordered
++ *   32-bit accesses for the aligned bulk; no wider accesses are issued.
++ * - Only suitable for devices that tolerate 8-bit and 32-bit accesses;
++ *   do not use with devices requiring strictly 16-bit or 64-bit accesses.
++ * - MMIO must be mapped with appropriate device attributes to preserve
++ *   ordering; no extra barriers beyond the ordered accessors are added.
++ * - If source or destination is misaligned, leading bytes are copied
++ *   byte-by-byte until both sides are 32-bit aligned, then bulk copy uses
++ *   32-bit accesses.
++ */
++
++void memcpy_toio(volatile void __iomem *to, const void *from,
++                 size_t count)
++{
++    while ( count && (!IS_ALIGNED((unsigned long)to, 4) ||
++                      !IS_ALIGNED((unsigned long)from, 4)) )
++    {
++        writeb(*(const uint8_t *)from, to);
++        from++;
++        to++;
++        count--;
++    }
++
++    while ( count >=3D 4 )
++    {
++        writel(*(const uint32_t *)from, to);
++        from +=3D 4;
++        to +=3D 4;
++        count -=3D 4;
++    }
++
++    while ( count )
++    {
++        writeb(*(const uint8_t *)from, to);
++        from++;
++        to++;
++        count--;
++    }
++}
++
++/*
++ * Local variables:
++ * mode: C
++ * c-file-style: "BSD"
++ * c-basic-offset: 4
++ * tab-width: 4
++ * indent-tabs-mode: nil
++ * End:
++ */
+diff --git a/xen/include/xen/io.h b/xen/include/xen/io.h
+index 164a20c5d7..1bb164b6ef 100644
+--- a/xen/include/xen/io.h
++++ b/xen/include/xen/io.h
+@@ -67,4 +67,14 @@ static inline bool write_mmio(volatile void __iomem *mem=
+, unsigned long data,
+     return true;
+ }
 =20
 +/*
-+ * LIBXL_HAVE_SCMI_SMC_MULTIAGENT indicates that the
-+ * LIBXL_ARM_SCI_TYPE_SCMI_SMC_MULTIAGENT value is available in the
-+ * libxl_arm_sci_type enumeration and the agent_id field is available
-+ * in the libxl_arm_sci structure.
++ * Copy between regular memory and MMIO space.  Implementations are
++ * architecture-specific and must use appropriate MMIO accessors for
++ * their memory and I/O models.
 + */
-+#define LIBXL_HAVE_SCMI_SMC_MULTIAGENT 1
++void memcpy_fromio(void *to, const volatile void __iomem *from,
++                   size_t count);
++void memcpy_toio(volatile void __iomem *to, const void *from,
++                 size_t count);
 +
- /*
-  * LIBXL_HAVE_SOFT_RESET indicates that libxl supports performing
-  * 'soft reset' for domains and there is 'soft_reset' shutdown reason
-diff --git a/tools/libs/light/libxl_arm.c b/tools/libs/light/libxl_arm.c
-index e4407d6e3f..3adb90c286 100644
---- a/tools/libs/light/libxl_arm.c
-+++ b/tools/libs/light/libxl_arm.c
-@@ -240,6 +240,10 @@ int libxl__arch_domain_prepare_config(libxl__gc *gc,
-     case LIBXL_ARM_SCI_TYPE_SCMI_SMC:
-         config->arch.arm_sci_type =3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC;
-         break;
-+    case LIBXL_ARM_SCI_TYPE_SCMI_SMC_MULTIAGENT:
-+        config->arch.arm_sci_type =3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC_M=
-A;
-+        config->arch.arm_sci_agent_id =3D d_config->b_info.arch_arm.arm_sc=
-i.agent_id;
-+        break;
-     default:
-         LOG(ERROR, "Unknown ARM_SCI type %d",
-             d_config->b_info.arch_arm.arm_sci.type);
-@@ -1837,6 +1841,15 @@ int libxl__arch_domain_build_info_setdefault(libxl__=
-gc *gc,
-         }
-     }
-=20
-+    /* Sanitise ARM SCI agent_id parameter */
-+    if (b_info->arch_arm.arm_sci.type =3D=3D LIBXL_ARM_SCI_TYPE_SCMI_SMC_M=
-ULTIAGENT &&
-+        b_info->arch_arm.arm_sci.agent_id >=3D UINT8_MAX) {
-+        LOG(ERROR,
-+            "Invalid ARM SCI agent_id: %u. Valid range is [0..254]",
-+            b_info->arch_arm.arm_sci.agent_id);
-+        return ERROR_FAIL;
-+    }
-+
-     if (b_info->type !=3D LIBXL_DOMAIN_TYPE_PV)
-         return 0;
-=20
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_type=
-s.idl
-index 3c35f873df..9830671ca4 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -554,11 +554,13 @@ libxl_sve_type =3D Enumeration("sve_type", [
-=20
- libxl_arm_sci_type =3D Enumeration("arm_sci_type", [
-     (0, "none"),
--    (1, "scmi_smc")
-+    (1, "scmi_smc"),
-+    (2, "scmi_smc_multiagent")
-     ], init_val =3D "LIBXL_ARM_SCI_TYPE_NONE")
-=20
- libxl_arm_sci =3D Struct("arm_sci", [
-     ("type", libxl_arm_sci_type),
-+    ("agent_id", uint8)
-     ])
-=20
- libxl_rdm_reserve =3D Struct("rdm_reserve", [
-diff --git a/tools/xl/xl_parse.c b/tools/xl/xl_parse.c
-index 01783731b5..6bb3325c98 100644
---- a/tools/xl/xl_parse.c
-+++ b/tools/xl/xl_parse.c
-@@ -1290,6 +1290,7 @@ static int parse_arm_sci_config(XLU_Config *cfg, libx=
-l_arm_sci *arm_sci,
-                                 const char *str)
- {
-     int ret =3D 0;
-+    int agent_id_set =3D 0;
-     char *buf2, *ptr;
-     char *oparg;
-=20
-@@ -1308,9 +1309,35 @@ static int parse_arm_sci_config(XLU_Config *cfg, lib=
-xl_arm_sci *arm_sci,
-             }
-         }
-=20
-+        if (MATCH_OPTION("agent_id", ptr, oparg)) {
-+            unsigned long val =3D parse_ulong(oparg);
-+
-+            if ( val >=3D UINT8_MAX ) {
-+                fprintf(stderr, "An invalid ARM_SCI agent_id specified (%l=
-u). Valid range [0..254]\n",
-+                        val);
-+                ret =3D ERROR_INVAL;
-+                goto out;
-+            }
-+            arm_sci->agent_id =3D val;
-+            agent_id_set =3D 1;
-+        }
-+
-         ptr =3D strtok(NULL, ",");
-     }
-=20
-+    /*
-+     * agent_id only means something to the multi-agent driver, and
-+     * libxl__arch_domain_prepare_config() only reads it for that type.
-+     * Reject it elsewhere instead of silently dropping it. The check is d=
-one
-+     * after the loop because the options may be given in any order.
-+     */
-+    if (agent_id_set &&
-+        arm_sci->type !=3D LIBXL_ARM_SCI_TYPE_SCMI_SMC_MULTIAGENT) {
-+        fprintf(stderr,
-+                "ARM_SCI agent_id is only supported with type=3Dscmi_smc_m=
-ultiagent\n");
-+        ret =3D ERROR_INVAL;
-+    }
-+
- out:
-     free(buf2);
-     return ret;
+ #endif /* XEN_IO_H */
 --=20
 2.43.0
 
