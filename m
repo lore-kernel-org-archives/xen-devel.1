@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0D015C88E50
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:37:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1417058.1646009 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04DAEC88E58
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:37:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1417076.1646049 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x52N7-00052r-9S; Fri, 11 Sep 2026 14:36:57 +0000
+	id 1x52NJ-0006pN-B1; Fri, 11 Sep 2026 14:37:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1417058.1646009; Fri, 11 Sep 2026 14:36:57 +0000
+Received: by outflank-mailman (output) from mailman id 1417076.1646049; Fri, 11 Sep 2026 14:37:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x52N7-00052X-4V; Fri, 11 Sep 2026 14:36:57 +0000
-Received: by outflank-mailman (input) for mailman id 1417058;
- Fri, 11 Sep 2026 14:36:55 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x52NJ-0006oM-0z; Fri, 11 Sep 2026 14:37:09 +0000
+Received: by outflank-mailman (input) for mailman id 1417076;
+ Fri, 11 Sep 2026 14:37:07 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <berrange@redhat.com>) id 1x52N5-0004ic-Kq
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:36:55 +0000
+ (envelope-from <berrange@redhat.com>) id 1x52NH-0006fT-Od
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:37:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x52N5-008jZK-1L
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:36:55 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x52NH-009XnU-5H
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:37:07 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <berrange@redhat.com>)
- id 6aa41202-2eae-0a2a0a5409dd-0a2a4501e918-16
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:36:54 +0200
+ id 6aa41210-e002-0a2a0a5209dd-0a2a4502c8a4-6
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:37:07 +0200
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <berrange@redhat.com>)
- id 6aa41205-5984-0a2a45010019-aa0a817ce18d-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:36:54 +0200
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ id 6aa41211-6ca4-0a2a45020019-aa0a817cbd89-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:37:06 +0200
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-1-RjoLMoGTNgqEVSmrTvbZWw-1; Fri,
- 11 Sep 2026 10:36:50 -0400
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-649-xHo6mdTZMTKAVWBSvC2yUw-1; Fri,
+ 11 Sep 2026 10:36:59 -0400
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 888A219539B0; Fri, 11 Sep 2026 14:36:48 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id D7F641801352; Fri, 11 Sep 2026 14:36:57 +0000 (UTC)
 Received: from berrange.csb (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id B23C63000229; Fri, 11 Sep 2026 14:36:46 +0000 (UTC)
+ id 82D103000229; Fri, 11 Sep 2026 14:36:55 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,17 +63,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1789137413;
+	s=mimecast20190719; t=1789137425;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=wcQmW3FrWiONRvVo20iIDURaSW8/Kg4toOjkYAWSQ3E=;
-	b=i4qh9euHANItTbnaqhWCAM4HuHrWfSy0uXD21oLpi3VzniLI3hsLmW44CkdnVyf7Qgp+LK
-	l13aVc/h1zEKYbWl1T0mGDWHEFRY5SFh9vZ1Q5rMs+JK2R7VbPiEKY+SA+Xixx0fAp+U9k
-	dHuRu64QB2enjFUiLk9hAx1Dkzwf4nw=
-X-MC-Unique: RjoLMoGTNgqEVSmrTvbZWw-1
-X-Mimecast-MFC-AGG-ID: RjoLMoGTNgqEVSmrTvbZWw_1789137408
+	bh=LU2oz7xA3+OY2WcVfZSc+OLR7VAsrbJYBWSzg698kcA=;
+	b=ZtTY1ULFdgpXW3HorKgf0rCy67ZZCi0xyN/ZN4tGTFonVEhG0PTOnS5Co1iRpfPRX3YNPb
+	wJeIynTgk7uDJGLnWBHjCWmZM4onN8X74Mj+2UB3YMsbooknvQuMUVBl7nGECzfKiHjnRO
+	t+cisMMdbNaf+dxFtWL1YHZN8fYx9sI=
+X-MC-Unique: xHo6mdTZMTKAVWBSvC2yUw-1
+X-Mimecast-MFC-AGG-ID: xHo6mdTZMTKAVWBSvC2yUw_1789137418
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: xen-devel@lists.xenproject.org,
@@ -83,180 +83,55 @@ Cc: xen-devel@lists.xenproject.org,
 	qemu-s390x@nongnu.org,
 	qemu-arm@nongnu.org,
 	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 08/28] hw/xen: mark all Xen related object types as being secure
-Date: Fri, 11 Sep 2026 15:36:07 +0100
-Message-ID: <20260911143627.2743803-9-berrange@redhat.com>
+Subject: [PATCH 12/28] hw/scsi: mark spapr and vmware SCSI controllers as secure
+Date: Fri, 11 Sep 2026 15:36:11 +0100
+Message-ID: <20260911143627.2743803-13-berrange@redhat.com>
 In-Reply-To: <20260911143627.2743803-1-berrange@redhat.com>
 References: <20260911143627.2743803-1-berrange@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: b99NS5PvbIuiEzMRq8r1ZzSP_E6qXnefuOEc50IDb9E_1789137408
+X-Mimecast-MFC-PROC-ID: 5x3rV3bvcSOi1bhHBcZFKMSjNU1du5Gh3sSHjelpaTY_1789137418
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1789137414-C4B45757-E36DEFD3/0/0
+X-purgate-ID: tlsNG-720697/1789137427-F04A62AC-0C6DD099/0/0
 X-purgate-type: clean
-X-purgate-size: 5925
+X-purgate-size: 1271
 
-All Xen paravirtualized devices are intended to provide a host /
-guest security barrier, so mark all Xen object types as scure.
+The spapr vscsi controller is used by default with spapr machines
+in a virtualization use case. The vmware SCSI controller supports
+a virtualization use case.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/block/xen-block.c        | 3 +++
- hw/char/xen_console.c       | 1 +
- hw/i386/xen/xen_platform.c  | 1 +
- hw/i386/xen/xen_pvdevice.c  | 1 +
- hw/net/xen_nic.c            | 1 +
- hw/xen/xen-bus.c            | 3 +++
- hw/xen/xen-legacy-backend.c | 3 +++
- hw/xen/xen_pt.c             | 1 +
- 8 files changed, 14 insertions(+)
+ hw/scsi/spapr_vscsi.c | 1 +
+ hw/scsi/vmw_pvscsi.c  | 1 +
+ 2 files changed, 2 insertions(+)
 
-diff --git a/hw/block/xen-block.c b/hw/block/xen-block.c
-index 474c12fe4a..3296e591d4 100644
---- a/hw/block/xen-block.c
-+++ b/hw/block/xen-block.c
-@@ -699,6 +699,7 @@ static const TypeInfo xen_block_type_info = {
-     .parent = TYPE_XEN_DEVICE,
-     .instance_size = sizeof(XenBlockDevice),
-     .abstract = true,
-+    .secure = true,
-     .class_size = sizeof(XenBlockDeviceClass),
-     .class_init = xen_block_class_init,
- };
-@@ -740,6 +741,7 @@ static const TypeInfo xen_disk_type_info = {
-     .parent = TYPE_XEN_BLOCK_DEVICE,
-     .instance_size = sizeof(XenDiskDevice),
-     .class_init = xen_disk_class_init,
-+    .secure = true,
- };
- 
- static void xen_cdrom_unrealize(XenBlockDevice *blockdev)
-@@ -787,6 +789,7 @@ static const TypeInfo xen_cdrom_type_info = {
-     .parent = TYPE_XEN_BLOCK_DEVICE,
-     .instance_size = sizeof(XenCDRomDevice),
-     .class_init = xen_cdrom_class_init,
-+    .secure = true,
- };
- 
- static void xen_block_register_types(void)
-diff --git a/hw/char/xen_console.c b/hw/char/xen_console.c
-index bdeb76dc87..df6a708494 100644
---- a/hw/char/xen_console.c
-+++ b/hw/char/xen_console.c
-@@ -513,6 +513,7 @@ static const TypeInfo xen_console_type_info = {
-     .parent = TYPE_XEN_DEVICE,
-     .instance_size = sizeof(XenConsole),
-     .class_init = xen_console_class_init,
-+    .secure = true,
- };
- 
- static void xen_console_register_types(void)
-diff --git a/hw/i386/xen/xen_platform.c b/hw/i386/xen/xen_platform.c
-index c8b852be0c..ec0084d6fb 100644
---- a/hw/i386/xen/xen_platform.c
-+++ b/hw/i386/xen/xen_platform.c
-@@ -604,6 +604,7 @@ static const TypeInfo xen_platform_info = {
-     .parent        = TYPE_PCI_DEVICE,
-     .instance_size = sizeof(PCIXenPlatformState),
-     .class_init    = xen_platform_class_init,
+diff --git a/hw/scsi/spapr_vscsi.c b/hw/scsi/spapr_vscsi.c
+index b4c8f94d22..f029a7da93 100644
+--- a/hw/scsi/spapr_vscsi.c
++++ b/hw/scsi/spapr_vscsi.c
+@@ -1298,6 +1298,7 @@ static const TypeInfo spapr_vscsi_info = {
+     .parent        = TYPE_VIO_SPAPR_DEVICE,
+     .instance_size = sizeof(VSCSIState),
+     .class_init    = spapr_vscsi_class_init,
 +    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-         { },
-diff --git a/hw/i386/xen/xen_pvdevice.c b/hw/i386/xen/xen_pvdevice.c
-index fab26a06af..74636046d0 100644
---- a/hw/i386/xen/xen_pvdevice.c
-+++ b/hw/i386/xen/xen_pvdevice.c
-@@ -139,6 +139,7 @@ static const TypeInfo xen_pv_type_info = {
-     .parent        = TYPE_PCI_DEVICE,
-     .instance_size = sizeof(XenPVDevice),
-     .class_init    = xen_pv_class_init,
-+    .secure        = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
-         { },
-diff --git a/hw/net/xen_nic.c b/hw/net/xen_nic.c
-index f4d0b06013..e615303da6 100644
---- a/hw/net/xen_nic.c
-+++ b/hw/net/xen_nic.c
-@@ -579,6 +579,7 @@ static const TypeInfo xen_net_type_info = {
-     .parent = TYPE_XEN_DEVICE,
-     .instance_size = sizeof(XenNetDev),
-     .class_init = xen_netdev_class_init,
-+    .secure = true,
  };
  
- static void xen_net_register_types(void)
-diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
-index 1762816bf4..4623995e2c 100644
---- a/hw/xen/xen-bus.c
-+++ b/hw/xen/xen-bus.c
-@@ -404,6 +404,7 @@ static const TypeInfo xen_bus_type_info = {
-     .instance_size = sizeof(XenBus),
-     .class_size = sizeof(XenBusClass),
-     .class_init = xen_bus_class_init,
-+    .secure = true,
+ static void spapr_vscsi_register_types(void)
+diff --git a/hw/scsi/vmw_pvscsi.c b/hw/scsi/vmw_pvscsi.c
+index 05f93171cd..9974930634 100644
+--- a/hw/scsi/vmw_pvscsi.c
++++ b/hw/scsi/vmw_pvscsi.c
+@@ -1355,6 +1355,7 @@ static const TypeInfo pvscsi_info = {
+     .instance_size = sizeof(PVSCSIState),
+     .class_init    = pvscsi_class_init,
+     .instance_init = pvscsi_instance_init,
++    .secure        = true,
      .interfaces = (const InterfaceInfo[]) {
          { TYPE_HOTPLUG_HANDLER },
-         { }
-@@ -1127,6 +1128,7 @@ static const TypeInfo xen_device_type_info = {
-     .parent = TYPE_DEVICE,
-     .instance_size = sizeof(XenDevice),
-     .abstract = true,
-+    .secure = true,
-     .class_size = sizeof(XenDeviceClass),
-     .class_init = xen_device_class_init,
- };
-@@ -1141,6 +1143,7 @@ static const TypeInfo xen_bridge_type_info = {
-     .name = TYPE_XEN_BRIDGE,
-     .parent = TYPE_SYS_BUS_DEVICE,
-     .instance_size = sizeof(XenBridge),
-+    .secure = true,
- };
- 
- static void xen_register_types(void)
-diff --git a/hw/xen/xen-legacy-backend.c b/hw/xen/xen-legacy-backend.c
-index 7977b52712..75f8ac7efd 100644
---- a/hw/xen/xen-legacy-backend.c
-+++ b/hw/xen/xen-legacy-backend.c
-@@ -648,6 +648,7 @@ static const TypeInfo xendev_type_info = {
-     .parent        = TYPE_DYNAMIC_SYS_BUS_DEVICE,
-     .class_init    = xendev_class_init,
-     .instance_size = sizeof(XenLegacyDevice),
-+    .secure        = true,
- };
- 
- static void xen_sysbus_class_init(ObjectClass *klass, const void *data)
-@@ -661,6 +662,7 @@ static const TypeInfo xensysbus_info = {
-     .name       = TYPE_XENSYSBUS,
-     .parent     = TYPE_BUS,
-     .class_init = xen_sysbus_class_init,
-+    .secure     = true,
-     .interfaces = (const InterfaceInfo[]) {
-         { TYPE_HOTPLUG_HANDLER },
-         { }
-@@ -670,6 +672,7 @@ static const TypeInfo xensysbus_info = {
- static const TypeInfo xensysdev_info = {
-     .name          = TYPE_XENSYSDEV,
-     .parent        = TYPE_SYS_BUS_DEVICE,
-+    .secure        = true,
- };
- 
- static void xenbe_register_types(void)
-diff --git a/hw/xen/xen_pt.c b/hw/xen/xen_pt.c
-index 0fe9c0aada..504c559318 100644
---- a/hw/xen/xen_pt.c
-+++ b/hw/xen/xen_pt.c
-@@ -1079,6 +1079,7 @@ static const TypeInfo xen_pci_passthrough_info = {
-     .instance_finalize = xen_pci_passthrough_finalize,
-     .class_init = xen_pci_passthrough_class_init,
-     .class_size = sizeof(XenPTDeviceClass),
-+    .secure = true,
-     .instance_init = xen_pci_passthrough_instance_init,
-     .interfaces = (const InterfaceInfo[]) {
-         { INTERFACE_CONVENTIONAL_PCI_DEVICE },
+         { INTERFACE_PCIE_DEVICE },
 -- 
 2.55.0
 
