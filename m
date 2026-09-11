@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BE98C88E4D
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 10:58:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1416357.1645432 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D0DFEC88E4A
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 11:00:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1416375.1645441 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4yx5-0000Ps-1B; Fri, 11 Sep 2026 10:57:51 +0000
+	id 1x4yzv-0002Gv-Dm; Fri, 11 Sep 2026 11:00:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1416357.1645432; Fri, 11 Sep 2026 10:57:51 +0000
+Received: by outflank-mailman (output) from mailman id 1416375.1645441; Fri, 11 Sep 2026 11:00:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4yx4-0000Pl-Ue; Fri, 11 Sep 2026 10:57:50 +0000
-Received: by outflank-mailman (input) for mailman id 1416357;
- Fri, 11 Sep 2026 10:57:48 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x4yzv-0002Go-B8; Fri, 11 Sep 2026 11:00:47 +0000
+Received: by outflank-mailman (input) for mailman id 1416375;
+ Fri, 11 Sep 2026 11:00:46 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x4yx2-0000Mn-SG
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 10:57:48 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x4yzu-0002Gi-1b
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 11:00:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4yx2-00DmiI-9E
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 12:57:48 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x4yzt-0013Iv-Eb
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 13:00:45 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa3dea3-bab6-0a2a0a5309dd-0a2a450b9c32-20
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 12:57:48 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa3df58-2eae-0a2a0a5409dd-0a2a4507e75e-16
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 13:00:45 +0200
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa3deac-b7e8-0a2a450b0019-4a7de18caf02-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 12:57:48 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49b912e2406so3468285e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 03:57:48 -0700 (PDT)
+ id 6aa3df5d-b4ea-0a2a45070019-d155802be92b-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 13:00:45 +0200
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-49cd77e0f95so6335215e9.3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 04:00:45 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49d26c1bfc1sm169531255e9.4.2026.09.11.03.57.46
+ 5b1f17b1804b1-49e60ad0614sm70116235e9.10.2026.09.11.04.00.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 11 Sep 2026 03:57:47 -0700 (PDT)
+ Fri, 11 Sep 2026 04:00:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,57 +55,56 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789124268; x=1789729068; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1789124445; x=1789729245; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=NiiTZt++Bgak0agl4uqB6Sx2DVjDFtRD+ugJ6G8+EnE=;
-        b=K0I5QSPJgXqGvg+QvQfXcw9LzYg5qOI5HfOXLnAgw0pKKmB2fnXPKPshYTUTbDFtEW
-         zVY/vEc/BSrhWJbrZ0oAtlBzTD0FdSGOTLeT2BCeh7q4toXX/TO0sTAM9MeKtrpXH46w
-         sv+mkXuHfM3no9kEzbLqwxAdhBoqlu7Kp5ZbtfvDzcnDsuCwUKE3uPJ2XVdyn913pyge
-         gm/hSsW8HWzQJFJhmkWL1smScv+/Bg5wbdr13wPaRmebBhU1Bqipb59J/UIdixg4S0an
-         xJByLjKYBrF+HcCv36lfhCbgaKuHK0pbCSWAmQ9pvWRw+YNPyqDZoF94wXu3qJzOSzgY
-         AKPw==
+        bh=A8PdBJR7CzaykuyZqgUz+eOqrsIDkGTM21u88RGF+wk=;
+        b=LZYDsFoOakGFjs6nGhGP7TqV1LJOsfizZ9AUr6cgWVjNIx8T2/x+TVaNPSmFr2Fk9t
+         6cvxf7UduKVMumN9E1EKYNJkhbMYQMDk80O7sOfBn7qGqDDg76VP2pZQFgL4vjU5WyDN
+         zqlz66FOqurvhonuvZFE6h9TKwjJJwoprOnmhaCrz6TgtYlgfGWIK08LYmBvNjZm0ILr
+         UZ30cKTRnfKWzlR1PyWH4nNLq6N3F88FbjPOm1mhw7FA4ahhiYWeFROEBu2bJDfsadM3
+         zgSf3wJr2j/kRVR71CuCq+e4g9nzpZG/sBBYJNJAQJkMkAVpPUmA1BxtMDSWE2B83gBE
+         RJfw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789124268; x=1789729068;
+        d=1e100.net; s=20251104; t=1789124445; x=1789729245;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=NiiTZt++Bgak0agl4uqB6Sx2DVjDFtRD+ugJ6G8+EnE=;
-        b=hdoMowNfY4zCMkwEMrSUslkyH/0D+DIfLmV0f1YrncBs0N1JPRX5s//Tie1D3ernwi
-         pMSA/FBP0OhphVHapCBwrrdw16QRpHA4OzRSTMgbxHYar61KPKqjCXM5I+aLn7Ap2oC/
-         nRl2ZOA2M84awG/smqifnx7OK7jPbQYNX9a+MvG/1M6Zv6spXAemZ0ijvtsxfJLkuAON
-         0hsZirVLw4MxTtZrzsCoPM6mL3S8+7F/kIUlcEbC0/ARmXwY4SfbWRrRTFGqTzOzh0Jm
-         mvENWscx0HMyWv23iUBF6VVSylzcaVy0Svsaon9cAP6KUUUYXsasTKr2aLSOAnQ5iCKG
-         gLrQ==
-X-Forwarded-Encrypted: i=1; AKwUvBz+7C1DVgKtSeLDzBcVyibVcXPFBkTg59YXjJ2uOJu3942dewmg62sQUtOYCbgEJpkBLwiEDpdjrww=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nLxd9nf0v4/QgVmjSa1MFIrbsmMxYa0KMYwY+yf90psIkA5SoE
-	pq8/VF10dDnEGxrowrc5AlYDbIqmvDGfmpYss1n6XGjDlnRfR5qgmsCOABXwHPy13A==
-X-Gm-Gg: AYBFou3O5FW+B7dXL19u6bCxxbXPl+e4gDAN3Nddl44reA7e9KIB2ow1oYlBzhmNhml
-	U1Ycev1Sjw9k5oNoTEZojOJNOjUKL4oVYKDQbP8FPzrjcHQB8bTK8KSxGldc2dqGmWE3TxfOtmI
-	XwO3bvFRjy5/Uf4uSptjrQ0LakBf64ECh3iZsDC7LiU5bqVEvxXR3gEK0WwqLJ5yENFv7kh2Z3h
-	NwyAr3LBLm0duq9dz6+dIALE0Uzhg86pmH5S4veok11g7vtJiLDJMrZnSNHgQLY/8noUzvpQWWk
-	SYODm5K0f53JZ1+BnQgV4Zi/tKaXBainav//hY15kSpk1lRYG3hfn6VgcwkJ/tL7jtVCk6Zu4Yz
-	4wK4kVt3/V0CSsk0VwIWIEIK4htRpDqVFiX62etG9oyqMqoimJY6fPkUgODW1XKDdW5GqPtHIPT
-	GphvDwyR4UvPvRUA3jamFQD2ZuzE9p0KryPUPQNqNVcQPrAXv2+Ti6s8Q8+TDYbT4JFgCFtxbS7
-	cWEtO470NPVrNH8f1xMNnywpjzP10qQMoucgDw5m4Ll9shVAabZ1dNzH4R/duY=
-X-Received: by 2002:a05:600c:698d:b0:49e:6865:904e with SMTP id 5b1f17b1804b1-49e6865921amr4416355e9.12.1789124267613;
-        Fri, 11 Sep 2026 03:57:47 -0700 (PDT)
-Message-ID: <f465b398-db5b-4d81-9eeb-fb0de158d041@suse.com>
-Date: Fri, 11 Sep 2026 12:57:46 +0200
+        bh=A8PdBJR7CzaykuyZqgUz+eOqrsIDkGTM21u88RGF+wk=;
+        b=PNdK+pVIgSQtosfeJ1GwlbDnYrGEHNyu2ZgFK3Yh0nijod41YLO+Vzo1fEHvIxVa2f
+         EiZ3ydzQ/8djnPhSALn+PAabBysb9z6/UalvDZNXVfsvyLsHdN7iL7IfQO5g7yJop7Ou
+         58pUyvEo1Xet6I2ylfh2WJeIXRL2esDFT4+WVeRL6J8PDxhOoIijT3ua7yscb598j8hf
+         N+lbOQQFnb/jUG6DerWGtoPMfUDx5I1Bd/jmPODD1K3chJawLCKjRVbNx5Bs2UuvTyoW
+         qquKZJfLqcZNXnEJc/NVDuKcjAY3GAe3u0LJG4RpaNnLtDSccP8hSIjI0C/8E/caWy8Q
+         ulNw==
+X-Forwarded-Encrypted: i=1; AKwUvBzI/bkBqXgv6nIOCk9omK3kwib2Z8nQHNtThBtjNRp4tcLg6EaCTOUskWjKqXIuk5EGxgWsC9cFhI0=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kmDOhtuKdrhF41u56hJP9KOhe3LQZESY8Hq/U7z5AEhYdBDhnR
+	qvAeVvfdkBfbaZFo7oVN0RRDw554/9ik4Xo6VYqlTb6lnJ4ym+E/xBDbHi03j8fjiA==
+X-Gm-Gg: AYBFou3ggGNU4wWhIuR7pIlH/kULeNjc1/e9BB5ANsaK9MStwZegaEtciohYPKsZZv2
+	DDgfQ3hQKeE9hH4Sk7lZZ4Qj5R12+Cnx6WaYJqmlcqwQI0kE7yeBE9qv/v5Nmg6MYy/U0NurUDX
+	v/x6IO87axs7rhqBPwgSunld9q1bkKZJo0FXU7Dav8/9Zr6JOfWu+08cFWWLxz5gcNYEZ1j1KBV
+	BWW5KDLz205ZSSP4s0jbs5yaLX6EtR10zGSftR4eqLWCXxfjD+XFuUO3RCfpu3JnTTfj4yG5M8N
+	pDN4tvyLryEiDr30JS+0gJ8KH94DoeFwhDufowtWhl+Z2EbEZARBcnMyF2neBry1MUOH/TEDNPY
+	CbkNsUkwAo6asDaS5e0bPua38xVExvHcmINF9LOPN9x6ZKVH0NLHYOmaGW/fp63IBy96Tlc/arK
+	La8+JFnEcxZJ5/uvrlu1FojPrhrvhzXvKmlqaRP74U7a3ex/5+AIq6U5i/O6ltmfT0LVPr+r5JR
+	axdBcIbWC0QzTDXqXzF9yuR7yGxD6rRTQSSZdFRIfoKPO/+u7foSBnnOnAS+awc
+X-Received: by 2002:a05:600d:8490:20b0:49d:e0c:e560 with SMTP id 5b1f17b1804b1-49e61983771mr31443445e9.4.1789124443474;
+        Fri, 11 Sep 2026 04:00:43 -0700 (PDT)
+Message-ID: <87a733b3-4647-4fe7-84f3-10280a4e077d@suse.com>
+Date: Fri, 11 Sep 2026 13:00:42 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/7] x86: make UPDATE_ENTRY() allow for multiple
- operation flags
-To: Teddy Astie <teddy.astie@vates.tech>
-Cc: andrew.cooper3@citrix.com, George Dunlap <gwd@xenproject.org>,
- Kevin Lampis <kevin.lampis@citrix.com>, xen-devel@lists.xenproject.org,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-References: <20260910203113.462943-1-kevin.lampis@citrix.com>
- <20260910203113.462943-2-kevin.lampis@citrix.com>
- <1789119951.8631fc262581453bbf619ec5b2062170.1a08fdbf3c0000c4f3@vates.tech>
+Subject: Re: [PATCH] x86: Rename X86_ET_EXT_INTR to X86_ET_INTR and fix
+ function names
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Jason Andryuk <jason.andryuk@amd.com>,
+ Ross Lagerwall <ross.lagerwall@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20260911105728.3633306-1-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,38 +130,32 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1789119951.8631fc262581453bbf619ec5b2062170.1a08fdbf3c0000c4f3@vates.tech>
+In-Reply-To: <20260911105728.3633306-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1789124268-AB2DC9EA-891894A2/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1789124445-358C1AE4-B07EEFC5/0/0
 X-purgate-type: clean
-X-purgate-size: 1120
+X-purgate-size: 868
 
-On 11.09.2026 11:45, Teddy Astie wrote:
-> Le 10/09/2026 à 22:31, Kevin Lampis a>> @@ -4135,18 +4134,23 @@ long do_mmu_update(
->>   
->>               if ( page_lock(page) )
->>               {
->> +                unsigned int update_flags = (cmd == MMU_PT_UPDATE_PRESERVE_AD)
->> +                                            ? PTE_UPDATE_PRESERVE_AD
->> +                                            : (cmd == MMU_PT_UPDATE_NO_TRANSLATE)
->> +                                              ? PTE_UPDATE_NO_TRANSLATE : 0;
->> +
+On 11.09.2026 12:57, Andrew Cooper wrote:
+> The name X86_ET_EXT_INTR came from the VT-x code originally, but it's not
+> really correct.
 > 
-> I'm not fully convinced by the double-ternary operator here. While it's 
-> a bit more compact, I don't find it very readable, I would prefer 
-> something like
+> The SDM doens't give a concrete name, and only describes the fields as
+> "external interrupts".  The APM does give a concrete name of INTR, and both
+> Intel and AMD use the name INTR for related purposes elsewhere; the name
+> derives originally from #INTR which was a real pin on early processors.
 > 
-> unsigned int update_flags = 0;
-> if ( cmd == MMU_PT_UPDATE_PRESERVE_AD )
->      update_flags = PTE_UPDATE_PRESERVE_AD;
-> if ( cmd == MMU_PT_UPDATE_NO_TRANSLATE )
->      update_flags = PTE_UPDATE_NO_TRANSLATE;
+> Very importantly, this is distinct from ExtINT which is a type of maskable
+> interrupt which can be sent in an x86 system.
 > 
-> Which is one line longer, but looks to me more clear on what it does.
+> Therefore rename all {svm,vmx}_*_extint() to {svm,vmx}_*_intr(), as they
+> pertain to all maskable interrupts, not only to ExtINT interrupts.
+> 
+> No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-If you wanted it like this, switch() would be the way to go. Imo
-undesirable here, hence why I wrote it as it is.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
 
