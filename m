@@ -4,51 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 41F8BC88E4C
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 07:46:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1415867.1645077 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E973DC88E4C
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 07:46:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1415868.1645086 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4vxE-0002Sx-BU; Fri, 11 Sep 2026 07:45:48 +0000
+	id 1x4vxV-0002il-Mo; Fri, 11 Sep 2026 07:46:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1415867.1645077; Fri, 11 Sep 2026 07:45:48 +0000
+Received: by outflank-mailman (output) from mailman id 1415868.1645086; Fri, 11 Sep 2026 07:46:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4vxE-0002Sq-8r; Fri, 11 Sep 2026 07:45:48 +0000
-Received: by outflank-mailman (input) for mailman id 1415867;
- Fri, 11 Sep 2026 07:45:46 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x4vxV-0002ie-JU; Fri, 11 Sep 2026 07:46:05 +0000
+Received: by outflank-mailman (input) for mailman id 1415868;
+ Fri, 11 Sep 2026 07:46:04 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1x4vxC-0002Sk-DO
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 07:45:46 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1x4vxU-0002i1-7l
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 07:46:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4vxB-002uwp-1f
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:45:45 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x4vxT-004rrI-11
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:46:03 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6aa3b19d-8faa-0a2a0a5109dd-0a2a4508b71a-22
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:45:44 +0200
-Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6aa3b1a8-f659-0a2a45080019-c387df83e8b0-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:45:44 +0200
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 2C7051FD65;
- Fri, 11 Sep 2026 07:45:36 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id CBE9B136ED;
- Fri, 11 Sep 2026 07:45:33 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id SsloMJ2xo2qtWAAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 11 Sep 2026 07:45:33 +0000
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6aa3b1a7-2eae-0a2a0a5409dd-0a2a45018e6e-44
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:46:01 +0200
+Received: from [40.107.208.53]
+ (helo=PH0PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6aa3b1b8-5984-0a2a45010019-286bd035ac58-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 09:46:01 +0200
+Received: from SJ0PR13CA0015.namprd13.prod.outlook.com (2603:10b6:a03:2c0::20)
+ by SJ5PPF28EF61683.namprd12.prod.outlook.com
+ (2603:10b6:a0f:fc02::98e) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.9; Fri, 11 Sep
+ 2026 07:45:56 +0000
+Received: from BY1PEPF0001AE1A.namprd04.prod.outlook.com
+ (2603:10b6:a03:2c0:cafe::8e) by SJ0PR13CA0015.outlook.office365.com
+ (2603:10b6:a03:2c0::20) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.5 via Frontend Transport; Fri, 11
+ Sep 2026 07:45:56 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BY1PEPF0001AE1A.mail.protection.outlook.com (10.167.242.102) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.406.5 via Frontend Transport; Fri, 11 Sep 2026 07:45:56 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.46; Fri, 11 Sep
+ 2026 02:45:55 -0500
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.46 via Frontend
+ Transport; Fri, 11 Sep 2026 02:45:54 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,348 +67,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1789112740; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=1QSWKaNZ65L3rk2qSG3qEF6vvEFGDlwFz8pe7qA3wNk=;
-	b=T8vJzNG0WjXD9oew4znbnpRhNr4cduF4wX0/G5JWBAhNh6q/VIfpYf/fUBkcVm6cROP8wL
-	d7Tw6tNJd2/Uc1yaaCnSKMf45wB90ggC7/6aHgHKt1AvwLS+V6Grbb4BaDss/ymuQh3uLX
-	R/JPn7ajI9jOWOy+wgo92RQhnyBQ8B8=
-Authentication-Results: smtp-out2.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1789112736; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:  content-transfer-encoding:content-transfer-encoding;
-	bh=1QSWKaNZ65L3rk2qSG3qEF6vvEFGDlwFz8pe7qA3wNk=;
-	b=ZSaFHXZmagMuB8+hqr9P5F1w2lKBV8EJ76ulznETppNd368ICMAo96FZHFm26sndOkLQBp
-	DO+Ed5uvBjbKGWvwO62oqlUwSJ+KvFdOyo/zUKikLlBjGWA7ZER+RlKfHf4bve8r2bw+Br
-	b2AR8rC+XGluiV1AFzZUGzhvWzUsaEo=
-From: Juergen Gross <jgross@suse.com>
-To: linux-kernel@vger.kernel.org,
-	x86@kernel.org,
-	virtualization@lists.linux.dev,
-	linux-ide@vger.kernel.org,
-	dri-devel@lists.freedesktop.org,
-	linux-fbdev@vger.kernel.org,
-	linux-crypto@vger.kernel.org,
-	linux-gpio@vger.kernel.org,
-	linux-perf-users@vger.kernel.org,
-	linux-hyperv@vger.kernel.org,
-	kvm@vger.kernel.org,
-	linux-edac@vger.kernel.org,
-	linux-pci@vger.kernel.org,
-	linux-pm@vger.kernel.org,
-	linux-coco@lists.linux.dev,
-	linux-acpi@vger.kernel.org,
-	linux-hwmon@vger.kernel.org,
-	linux-mtd@lists.infradead.org,
-	platform-driver-x86@vger.kernel.org
-Cc: Juergen Gross <jgross@suse.com>,
-	Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>,
-	Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Ajay Kaher <ajay.kaher@broadcom.com>,
-	Alexey Makhalov <alexey.makhalov@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Damien Le Moal <dlemoal@kernel.org>,
-	Niklas Cassel <cassel@kernel.org>,
-	David Airlie <airlied@redhat.com>,
-	Helge Deller <deller@gmx.de>,
-	linux-geode@lists.infradead.org,
-	Olivia Mackall <olivia@selenic.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>,
-	Namhyung Kim <namhyung@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Jiri Olsa <jolsa@kernel.org>,
-	Ian Rogers <irogers@google.com>,
-	Adrian Hunter <adrian.hunter@intel.com>,
-	James Clark <james.clark@linaro.org>,
-	"K. Y. Srinivasan" <kys@microsoft.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Wei Liu <wei.liu@kernel.org>,
-	Dexuan Cui <decui@microsoft.com>,
-	Long Li <longli@microsoft.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-	Pu Wen <puwen@hygon.cn>,
-	Tony Luck <tony.luck@intel.com>,
-	Reinette Chatre <reinette.chatre@intel.com>,
-	Dave Martin <Dave.Martin@arm.com>,
-	James Morse <james.morse@arm.com>,
-	Babu Moger <babu.moger@amd.com>,
-	Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Pavel Machek <pavel@kernel.org>,
-	Kiryl Shutsemau <kas@kernel.org>,
-	Rick Edgecombe <rick.p.edgecombe@intel.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Len Brown <lenb@kernel.org>,
-	Viresh Kumar <viresh.kumar@linaro.org>,
-	Huang Rui <ray.huang@amd.com>,
-	Mario Limonciello <mario.limonciello@amd.com>,
-	Perry Yuan <perry.yuan@amd.com>,
-	K Prateek Nayak <kprateek.nayak@amd.com>,
-	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
-	Yazen Ghannam <yazen.ghannam@amd.com>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Artem Bityutskiy <artem.bityutskiy@linux.intel.com>,
-	Artem Bityutskiy <dedekind1@gmail.com>,
-	Miquel Raynal <miquel.raynal@bootlin.com>,
-	Richard Weinberger <richard@nod.at>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Ashok Raj <ashok.raj.linux@gmail.com>,
-	Hans de Goede <hansg@kernel.org>,
-	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Rajneesh Bhardwaj <irenic.rajneesh@gmail.com>,
-	Xi Pardee <xi.pardee@linux.intel.com>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>,
-	Lukasz Luba <lukasz.luba@arm.com>,
-	xen-devel@lists.xenproject.org
-Subject: [PATCH v3 00/13] x86/msr: Drop 32-bit MSR interfaces
-Date: Fri, 11 Sep 2026 09:45:17 +0200
-Message-ID: <20260911074530.3140830-1-jgross@suse.com>
-X-Mailer: git-send-email 2.55.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QZLq2Qkva7XrY8DRa+nSGZ3pq8ys+xXRY8KIfdhvL5MyiQ17CivT+cl5xamPv7dhHE46TrZdnV5R+6A83e9+NO/Sde8QcEnfCLhPuvcgduAKAdDqwi7nkiVNrvSMPWieEZn4eLesL22z86he1thkC20m6TdypOoZeo0dslD6mRO7bkJGijRMTjMR4vXeu74MsOe7TWbCZMIEz5gQqFcWddkfTSDc0mmnA46JzJy48VgPWyj06gs54sZPIJgl/U2iTJ6R+A4i9O2pzOE5r+fS4V7Wi3Bxn7sZr3to/QSs2ruBhYQ4kcXtNUs2f5BL0GVZgepEeF+P8wI74jmw8NgMjw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=XPpZeASj8xaVi2SPpnUHB0COXTDtAPNvOV/tuXEQzN4=;
+ b=R23ENLFNqsjZXX0oqrAm1H1Ipwppfcs6XdcTBWTkqzt21z6wfVp4+n35y2Jkm/h/s8zfg60s9f+5Q/7Eg4NX1Y38WYuWxDQmKkSl1s2RZQmO8ZXGtIGDy/4rKqkOFe7CuO1M8VDi6tTibw6aOjfEsIp/5hscFdEg/9na9h0qIag6PB5rpyD9N0rRhxqCMdjHVTpMJFJJWsvdY+LtKp/AQdIGuwt1EAgmVojWdJjBQcHHosVzP7U/bWDr3J7TLf8Gz5LpslLNkveZsQABtt+CA0tOOKc1/T2Bnhjn3NDr5M27Xw+jDeYyy5X8OF8QAFom5gJ2h0z7AkPL9Z77EVK17Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=citrix.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=XPpZeASj8xaVi2SPpnUHB0COXTDtAPNvOV/tuXEQzN4=;
+ b=iT8+LZZX22NSTRneFndBzAxhMcfrVbdeVFUj9BuADmnXibaCHzyso00iu69FDdvcWDEpEh81ULuHOIFyqdxGsMsN/4eqGa8pRvW7lXJBRPKnx1Y5lZCjVnhIwaOTgF3JWHQn5cnbWEXNubg90EKWnCCV/5e9MJw76XdFUFqyk8M=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <d734d097-be4d-4fd0-9e61-3209f11d82b5@amd.com>
+Date: Fri, 11 Sep 2026 09:45:49 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-Spamd-Result: default: False [-1.30 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	MID_CONTAINS_FROM(1.00)[];
-	R_MISSING_CHARSET(0.50)[];
-	NEURAL_HAM_SHORT(-0.20)[-0.999];
-	MIME_GOOD(-0.10)[text/plain];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TO_DN_SOME(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:mid];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[suse.com,kernel.org,redhat.com,alien8.de,linux.intel.com,zytor.com,broadcom.com,gmx.de,lists.infradead.org,selenic.com,gondor.apana.org.au,arndb.de,linuxfoundation.org,infradead.org,arm.com,google.com,intel.com,linaro.org,microsoft.com,hygon.cn,amd.com,zhaoxin.com,oracle.com,roeck-us.net,gmail.com,bootlin.com,nod.at,ti.com,lists.xenproject.org];
-	R_RATELIMIT(0.00)[to_ip_from(RLbixyxwsf3a5i7e4ez64ejni4)];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[95];
-	RCVD_TLS_ALL(0.00)[]
-X-purgate-ID: tlsNG-c1860d/1789112744-CCF4F87B-AF2A2B64/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen: Use __has_include() in xen/percpu.h
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Xen-devel
+	<xen-devel@lists.xenproject.org>
+CC: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>, Stefano
+ Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <20260909115342.3376342-1-andrew.cooper3@citrix.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <20260909115342.3376342-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY1PEPF0001AE1A:EE_|SJ5PPF28EF61683:EE_
+X-MS-Office365-Filtering-Correlation-Id: a8962232-5110-4aa1-a61f-08df0fd8b6b8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|36860700016|1800799024|82310400026|376014|7416014|10067099003|18002099003|22082099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info:
+	UNd49sBtAzb6dXgMsZdbYHLHoStc4vuLtRrYPy/uwOZVh2Vl/aW2LGPL3gJ8DyID8FpTiq8NRutOWhaQ95nmnr8q8ytf2D4nKKv8uuCyzm8qNFjt04JFEOFf7AqddsDNP/3Dt2VjzVpxuVznpeuvxD7+MPILNbz+5RIkdTak9JLkG8UEWfVYbVeYDNIN/TKCBRs7GxmUyqvKglZxVvOhBSRqwp1mLgJGnaZsZk/ECeAQuGCOgT26wL0otRM4vV+TZrDm8eskGP6n8FjWcoOSqAKzysedzYxTFAxV7aayCGuKmH5Vr6HZE2WVphYic6QYYE3EJTlhpmSbScu5geUiRd0UcBdEj5jrnEK4QEJGNIT+mlBLHv1mOS9hoIBHGC3lkM0Dy36Xkj/pAYEMigvUHVuxmyKgrW3TgzfAFrGsl2sFixczfY0mfND51QhndzGrrn9y1LEj91TVT9XMUd9kkHHi2EC0G4ncyJl98bXJvSlyC4qkuQV4hHWs0XGbMNku0a4hawT1Eb8kohiXKUJimjNkwhyF7tdBTJp87oyBJNISZ2aZwQ4sxT0SCFsMluWd5vPuWA4hQPXT6lGiHh4UBPuz0s8a0MG34meqa4ULg4WZQJYTIRi2oIrnvXW6O9np8HOicMzoFtDo7WaDZxd/UzMWF9QcAKaKUuUmL4tykM08jLTiI+uKkG3IrXNBFdjCg22aCwtD/pgXNO21rV2CoQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(36860700016)(1800799024)(82310400026)(376014)(7416014)(10067099003)(18002099003)(22082099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	ubmE7bkPsMzLOcTPIT/HgL2/2p8mIO4k6Mmq6QonDM1CP/nJiy3tdiZOYRBklVrglnXOjm3bZcKRPC9bc+1R3RpGVlUKnIKPrLjWL26zvNABSmH79h29MHlDE9n3YiSYkCGsXWcFHBtwshqQFoNnPcKt+SMfjHJlnNlR5GtaFisqEjwlWetSo227sMlyO6/oLtAxEBfmKk+tlNevp7HRwr8+2O8cWzJL6su9U4Ftjr0h4InWHoJGuZ6sWn1KgOLlPKu0TN1TW7U7Day5jHksX3CCknJwGsotGD97NPXM+srZ3nMJe2IvukfoglFFLceEXsnZ7bsPitCAzvN5VXb3StSrAmqj6zlgJDkIJA3ptDhbjDxHHrZ7KoXfW4k9bGq4QAsQ9lfRA6V+eYgksBrCmnvfmGgV+3u9r/IOZnvYpli6k/y/rTSZhIP3rhwo5Not
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 07:45:56.1554
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a8962232-5110-4aa1-a61f-08df0fd8b6b8
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BY1PEPF0001AE1A.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ5PPF28EF61683
+X-purgate-ID: tlsNG-d62444/1789112761-1F66C757-13D0C235/0/0
 X-purgate-type: clean
-X-purgate-size: 10159
+X-purgate-size: 328
 
-For accessing the MSR registers on the local CPU, there are 2 types of
-interfaces: the "modern" 64-bit ones (rdmsrq() etc.) and the 32-bit
-ones (rdmsr() etc.) which are using the upper and lower 32-bit halves
-of the 64-bit wide MSR register values.
 
-The 32-bit interfaces are not optimal for 3 reasons:
 
-- They are based on primitives using 64-bit sized values anyway.
+On 09-Sep-26 13:53, Andrew Cooper wrote:
+> Only x86 has an asm/percpu.h.  Have the compiler only include it if it's
+> present, rather than symlinking an empty file.
+> 
+> No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
-- Modern x86 CPUs have added support for MSR access instructions using
-  an immediate value instead of a register for addressing the MSR,
-  while the value is in a 64-bit register.
-
-- rdmsr() is a macro storing the upper and lower 32-bit halves in
-  variables specified as macro parameters. This is obscuring variable
-  assignment through a macro. Additionally rdmsrq() is mimicking this
-  pattern by being a macro, too, with the target variable specified as
-  a parameter as well.
-
-For those reasons drop the 32-bit interfaces for accessing the x86 MSR
-registers completely and only use the 64-bit variants.
-
-This allows to switch all "high-level" MSR access macros to inline
-functions in the end.
-
-This series will be used as the base for further reorganisation of the
-MSR access functions, especially for completely inlining the MSR
-access instructions even with paravirtualization being active.
-
-Based on kernel 7.3 as of 2026-09-11.
-
-Changes in V2:
-- dropped already applied patches
-- added patch 1
-- rebased
-
-Changes in V3:
-- small fixes in patches 4 and 13
-- rebased
-
-Juergen Gross (13):
-  x86/cpu: Fix coding style violation
-  x86/msr: Remove wrmsr_safe()
-  x86/msr: Remove rdmsr_safe()
-  drivers/ata: Stop using 32-bit MSR interfaces
-  agp/nvidia: Stop using 32-bit MSR interfaces
-  fbdev/geode: Stop using 32-bit MSR interfaces
-  hw_random/via-rng: Stop using 32-bit MSR interfaces
-  drivers/gpio: Stop using 32-bit MSR interfaces
-  drivers/misc: Stop using 32-bit MSR interfaces
-  x86/msr: Remove wrmsr()
-  x86/msr: Remove rdmsr()
-  treewide: convert rdmsrq() from a macro to an inline function
-  x86/msr: Simplify some rdmsrq() use cases
-
- arch/x86/coco/sev/core.c                      |  2 +-
- arch/x86/events/amd/brs.c                     |  4 +-
- arch/x86/events/amd/core.c                    |  8 +--
- arch/x86/events/amd/ibs.c                     | 18 +++----
- arch/x86/events/amd/lbr.c                     | 16 ++----
- arch/x86/events/amd/power.c                   |  8 +--
- arch/x86/events/amd/uncore.c                  |  4 +-
- arch/x86/events/core.c                        | 20 ++++----
- arch/x86/events/intel/core.c                  | 15 ++----
- arch/x86/events/intel/cstate.c                |  5 +-
- arch/x86/events/intel/ds.c                    |  2 +-
- arch/x86/events/intel/knc.c                   | 10 ++--
- arch/x86/events/intel/lbr.c                   | 25 +++-------
- arch/x86/events/intel/p4.c                    |  6 +--
- arch/x86/events/intel/p6.c                    |  4 +-
- arch/x86/events/intel/pt.c                    | 12 ++---
- arch/x86/events/intel/uncore.c                |  6 +--
- arch/x86/events/intel/uncore_nhmex.c          |  4 +-
- arch/x86/events/intel/uncore_snb.c            |  2 +-
- arch/x86/events/intel/uncore_snbep.c          |  6 +--
- arch/x86/events/msr.c                         |  2 +-
- arch/x86/events/perf_event.h                  |  6 +--
- arch/x86/events/rapl.c                        |  6 +--
- arch/x86/events/zhaoxin/core.c                | 10 ++--
- arch/x86/hyperv/hv_apic.c                     |  9 ++--
- arch/x86/hyperv/hv_init.c                     | 26 +++++-----
- arch/x86/hyperv/hv_spinlock.c                 |  2 +-
- arch/x86/include/asm/apic.h                   |  7 +--
- arch/x86/include/asm/debugreg.h               |  6 +--
- arch/x86/include/asm/fsgsbase.h               |  2 +-
- arch/x86/include/asm/kvm_host.h               | 10 ----
- arch/x86/include/asm/msr.h                    | 39 ++-------------
- arch/x86/include/asm/paravirt.h               | 26 +---------
- arch/x86/kernel/apic/apic.c                   | 14 +++---
- arch/x86/kernel/apic/apic_numachip.c          |  6 +--
- arch/x86/kernel/cet.c                         |  2 +-
- arch/x86/kernel/cpu/amd.c                     | 14 +++---
- arch/x86/kernel/cpu/aperfmperf.c              |  8 +--
- arch/x86/kernel/cpu/bugs.c                    | 12 ++---
- arch/x86/kernel/cpu/bus_lock.c                |  8 +--
- arch/x86/kernel/cpu/centaur.c                 |  8 +--
- arch/x86/kernel/cpu/common.c                  | 12 ++---
- arch/x86/kernel/cpu/feat_ctl.c                |  4 +-
- arch/x86/kernel/cpu/hygon.c                   |  4 +-
- arch/x86/kernel/cpu/intel.c                   |  6 +--
- arch/x86/kernel/cpu/intel_epb.c               |  4 +-
- arch/x86/kernel/cpu/mce/amd.c                 |  4 +-
- arch/x86/kernel/cpu/mce/core.c                |  8 +--
- arch/x86/kernel/cpu/mce/inject.c              |  2 +-
- arch/x86/kernel/cpu/mce/intel.c               | 18 +++----
- arch/x86/kernel/cpu/mce/p5.c                  |  8 +--
- arch/x86/kernel/cpu/mce/winchip.c             |  2 +-
- arch/x86/kernel/cpu/microcode/intel.c         |  2 +-
- arch/x86/kernel/cpu/mshyperv.c                |  6 +--
- arch/x86/kernel/cpu/mtrr/amd.c                |  4 +-
- arch/x86/kernel/cpu/mtrr/cleanup.c            |  4 +-
- arch/x86/kernel/cpu/mtrr/generic.c            | 32 ++++++------
- arch/x86/kernel/cpu/mtrr/mtrr.c               |  2 +-
- arch/x86/kernel/cpu/resctrl/core.c            |  2 +-
- arch/x86/kernel/cpu/resctrl/monitor.c         |  4 +-
- arch/x86/kernel/cpu/resctrl/pseudo_lock.c     |  4 +-
- arch/x86/kernel/cpu/resctrl/rdtgroup.c        |  2 +-
- arch/x86/kernel/cpu/topology.c                |  2 +-
- arch/x86/kernel/cpu/topology_amd.c            |  4 +-
- arch/x86/kernel/cpu/transmeta.c               |  8 +--
- arch/x86/kernel/cpu/tsx.c                     | 10 ++--
- arch/x86/kernel/cpu/umwait.c                  |  2 +-
- arch/x86/kernel/cpu/zhaoxin.c                 |  4 +-
- arch/x86/kernel/fpu/core.c                    |  2 +-
- arch/x86/kernel/hpet.c                        |  2 +-
- arch/x86/kernel/kvm.c                         |  2 +-
- arch/x86/kernel/mmconf-fam10h_64.c            |  6 +--
- arch/x86/kernel/process.c                     |  4 +-
- arch/x86/kernel/process_64.c                  | 14 +++---
- arch/x86/kernel/shstk.c                       |  8 +--
- arch/x86/kernel/traps.c                       |  4 +-
- arch/x86/kernel/tsc.c                         |  2 +-
- arch/x86/kernel/tsc_msr.c                     |  6 +--
- arch/x86/kernel/tsc_sync.c                    |  6 +--
- arch/x86/kvm/msrs.c                           |  2 +-
- arch/x86/kvm/svm/pmu.c                        |  4 +-
- arch/x86/kvm/svm/svm.c                        |  4 +-
- arch/x86/kvm/vmx/nested.c                     |  4 +-
- arch/x86/kvm/vmx/pmu_intel.c                  |  8 +--
- arch/x86/kvm/vmx/sgx.c                        |  6 +--
- arch/x86/kvm/vmx/tdx.c                        |  2 +-
- arch/x86/kvm/vmx/vmx.c                        | 42 ++++++++--------
- arch/x86/kvm/x86.c                            |  6 +--
- arch/x86/lib/insn-eval.c                      |  6 +--
- arch/x86/lib/msr-smp.c                        |  2 +-
- arch/x86/mm/pat/memtype.c                     |  2 +-
- arch/x86/pci/amd_bus.c                        |  8 +--
- arch/x86/platform/olpc/olpc-xo1-rtc.c         |  6 +--
- arch/x86/platform/olpc/olpc-xo1-sci.c         |  2 +-
- arch/x86/power/cpu.c                          | 10 ++--
- arch/x86/realmode/init.c                      |  2 +-
- arch/x86/virt/hw.c                            |  8 +--
- arch/x86/virt/svm/sev.c                       | 18 +++----
- arch/x86/virt/vmx/tdx/tdx.c                   |  2 +-
- arch/x86/xen/suspend.c                        |  2 +-
- drivers/acpi/processor_perflib.c              |  2 +-
- drivers/ata/pata_cs5535.c                     | 24 ++++-----
- drivers/ata/pata_cs5536.c                     | 17 +++----
- drivers/char/agp/nvidia-agp.c                 | 32 ++++++------
- drivers/char/hw_random/via-rng.c              | 29 +++++------
- drivers/cpufreq/acpi-cpufreq.c                |  8 +--
- drivers/cpufreq/amd-pstate.c                  |  4 +-
- drivers/cpufreq/e_powersaver.c                | 20 ++++----
- drivers/cpufreq/intel_pstate.c                | 28 +++++------
- drivers/cpufreq/longhaul.c                    | 12 ++---
- drivers/cpufreq/longrun.c                     | 16 +++---
- drivers/cpufreq/powernow-k7.c                 | 10 ++--
- drivers/cpufreq/powernow-k8.c                 |  8 +--
- drivers/cpufreq/speedstep-centrino.c          |  4 +-
- drivers/cpufreq/speedstep-lib.c               | 14 +++---
- drivers/edac/amd64_edac.c                     |  6 +--
- drivers/gpio/gpio-cs5535.c                    | 10 ++--
- drivers/hv/mshv_vtl_main.c                    |  2 +-
- drivers/hwmon/hwmon-vid.c                     |  4 +-
- drivers/idle/intel_idle.c                     | 26 +++++-----
- drivers/misc/cs5535-mfgpt.c                   | 33 ++++++------
- drivers/mtd/nand/raw/cs553x_nand.c            |  6 +--
- drivers/platform/x86/intel/ifs/load.c         | 10 ++--
- drivers/platform/x86/intel/ifs/runtest.c      |  8 +--
- drivers/platform/x86/intel/pmc/cnp.c          |  2 +-
- .../intel/speed_select_if/isst_if_mbox_msr.c  |  6 +--
- .../intel/speed_select_if/isst_tpmi_core.c    |  2 +-
- drivers/platform/x86/intel_ips.c              | 20 ++++----
- drivers/powercap/intel_rapl_msr.c             |  2 +-
- drivers/thermal/intel/intel_hfi.c             |  8 +--
- drivers/thermal/intel/therm_throt.c           | 22 ++++----
- drivers/thermal/intel/x86_pkg_temp_thermal.c  |  6 +--
- drivers/video/fbdev/geode/display_gx.c        |  8 +--
- drivers/video/fbdev/geode/gxfb_core.c         |  2 +-
- drivers/video/fbdev/geode/lxfb_ops.c          | 50 +++++++++----------
- drivers/video/fbdev/geode/suspend_gx.c        | 24 +++++----
- drivers/video/fbdev/geode/video_gx.c          |  8 +--
- include/linux/cs5535.h                        | 10 ++--
- 138 files changed, 575 insertions(+), 694 deletions(-)
-
--- 
-2.55.0
+~Michal
 
 
