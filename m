@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BBB9C88E50
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 15:13:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1417352.1646225 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A78B6C88E50
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 15:13:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1417353.1646233 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x52vv-000763-Vr; Fri, 11 Sep 2026 15:12:55 +0000
+	id 1x52w5-0007W2-6F; Fri, 11 Sep 2026 15:13:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1417352.1646225; Fri, 11 Sep 2026 15:12:55 +0000
+Received: by outflank-mailman (output) from mailman id 1417353.1646233; Fri, 11 Sep 2026 15:13:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x52vv-00075w-Ry; Fri, 11 Sep 2026 15:12:55 +0000
-Received: by outflank-mailman (input) for mailman id 1417352;
- Fri, 11 Sep 2026 15:12:54 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x52w5-0007Vr-1o; Fri, 11 Sep 2026 15:13:05 +0000
+Received: by outflank-mailman (input) for mailman id 1417353;
+ Fri, 11 Sep 2026 15:13:03 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1x52vu-000727-K4
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 15:12:54 +0000
+ (envelope-from <ross.lagerwall@citrix.com>) id 1x52w3-0007SM-AK
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 15:13:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x52vt-006AOs-LB
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 17:12:53 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x52w2-00EUk4-7s
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 17:13:02 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6aa41a5b-2eae-0a2a0a5409dd-0a2a450bcef6-32
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 17:12:53 +0200
-Received: from [40.93.195.59]
- (helo=SN4PR2101CU001.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6aa41a73-b7e8-0a2a450b0019-285dc33b12bb-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 17:12:52 +0200
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by MW4PR03MB6924.namprd03.prod.outlook.com (2603:10b6:303:1bb::10)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6aa41a6f-8faa-0a2a0a5109dd-0a2a4508b546-16
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 17:13:02 +0200
+Received: from [52.101.193.13]
+ (helo=CH1PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6aa41a7c-f659-0a2a45080019-3465c10d2421-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 17:13:01 +0200
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
+ by MWHPR03MB989453.namprd03.prod.outlook.com (2603:10b6:303:2ab::6)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.6; Fri, 11 Sep
- 2026 15:12:46 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0406.007; Fri, 11 Sep 2026
- 15:12:46 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.10; Fri, 11 Sep
+ 2026 15:12:57 +0000
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0406.007; Fri, 11 Sep 2026
+ 15:12:57 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,171 +57,542 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=sLvWXGi71qYmcOvGtqC6WtO6QYYV9Hlfou8NQS9DjLts+EJPpx6BZzKHdIlZGMNbXrFmFBjErSCbxmLH9pkCQkZVHeTNO/qWkyqVk4Axw97wwspUX3Uq7jlGn1itiTFNbI1UbmTPN8qtySGEZwQKb5m3jHbznDk6qQrsA4XeJbCzjAWg3tW21qXzInGxwkn6mXXcECxEHY1bIqLH1vgSzPfpcPy8nf1FsNf7Oj2l7lSN1s2MwIF2WCql8C200g8YSzukjCnpeiLAiPnB7G1jrT/JlDgzCHFd8OfwA6g+z8JJW/F/7g3qmQa5jA8ifC0IsSQxr/BlT+9fMD7ggCo9cQ==
+ b=XACV1Dp/0OXidJjp7aDYt8AQSHc10Iz+JemK114FUHpsQGS4ddsuSWjlQ1J/u2jg7ytmkvMu9iB4vwphZV76TE9CEEMz2swcTtIhAv3MRPCHlZDPzzSr5C7C4lrvwH/Q3HTZCP6yz6g6gKBMokkNSDpREvFact6a1y4HucjMHQoN9Ux0zxJC8oGfDm/B0vRmC0IMv7JbKTGwP/ktW3AVW4sfdKe0uL68snj+kLX/eIIdff+nLE8y7FZ5ae6vFVGuWNpkwepnbpONys+OmuOTte4vf9F9cooREWDTS96CW70zSifTnMFvDPEhQ5fHNVo1+tEqP1DatBosr6mj8Y+kRw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ySR8o1TKI8v10yWCw67hEJPO+S7CIf5hx7qyuznbsAg=;
- b=hkt6uGCKNCAtNGLymcQomnlWgTB3N1o5ez9o6hwRn0Xrcayv4i/mv/OhVfTwUQoH+KgStWVtlTq6TwDeb6LuPzOxrjq7vrvCn4OzhhxIAZMeHKtwcUpqi35VDpfnEDX60Q/Qo65l/NWiCLd4yLx0eIuS+3PVbiyfAPjBaNyG2dQaYgFRoG+N8yA5bNod4a1A4wBGVitp7t82+eJ5ZNqgq+BCKuHf2KTcFJEafxaU/9de3EmwHIQ4Aqj0TvtBI+IozN2ROXGn4WnrRKW8CwiBKGdfyPbl23NfpXLCpB7BJjkRmLNcXhpVokZuBVU4r3mYmymOoYlJ/jX6ubdmv5qEBA==
+ bh=9Qjj83BN1FMLCqIaOx3847RbdtvdTFxorGBeyNGoUOg=;
+ b=fp6BQ9wXXfb5Sf8cmHho9sQMrl3TDWTvFlUZHnG8IU46F/1OzVAcPDywXQXoW0QEeRClkdWrC4JYkNyii4qki17+ToSb9/d6aO7Q0/xzXU627zUFPEfRvG5WhQzK9l2IYzY1NIfnHV4fVwm5gi22Tfe+Cm9vfCJ85ibFzJooffx3XRr8gctSNDxiM0LuS9DL8VplBc6PcGVFGX898EjzJpT6Hxa55YtE/mRsEjZHuA2ndjH0TSRtD4Wc4L4BbxBVCIwbBb4zJla23W9K08N0/M1cd5TYmeHHk9WCO7ASaf/hC3t9dqEp5C9XJJqjH+YF1uDe5PzZCD1+7as7pBkPtg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ySR8o1TKI8v10yWCw67hEJPO+S7CIf5hx7qyuznbsAg=;
- b=K17iLX0cnE3MUCPTK0JblcnOIvMQ8Lno15eIPEfSaNigifg0Y4sx7DUHYuaQiHHKyWE9Dn8ixvtjPLs9N+YMo4W5rp1dSKVIAeSRbJ/bYXU9ILKOjXXoLTi/aAfmp/cW5wLQudCpzI2hb68lFpwdpFEHfwbkHPLdYjTlsvcob9A=
+ bh=9Qjj83BN1FMLCqIaOx3847RbdtvdTFxorGBeyNGoUOg=;
+ b=Ooum52/+jj2CZE0Q8gp13yfpRLFcYfOuwXIvMplWUlMXpKW6DwGwVYk4JmtPLP4hq6+RtGrU1IiqDe4VTaYUBbXUkxudpam0Pa/oijKvW/5aojiMeqnHnkyD0TaGjTATseo4mFq7NnihKI7abQOSpKSipxgikjjxouw4bcorefw=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <9da3d6e7-f4db-43c7-b13d-2bf3830caef5@citrix.com>
-Date: Fri, 11 Sep 2026 16:12:43 +0100
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, jbeulich@suse.com
-Subject: Re: [PATCH v2 5/7] x86: extend do_mmu_update() to support returning
- the old PTE value
-To: Teddy Astie <teddy.astie@vates.tech>,
- Kevin Lampis <kevin.lampis@citrix.com>, xen-devel@lists.xenproject.org
-References: <20260910203113.462943-1-kevin.lampis@citrix.com>
- <20260910203113.462943-6-kevin.lampis@citrix.com>
- <1789129949.8631fc262581453bbf619ec5b2062170.1a09074801c000c4f3@vates.tech>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <1789129949.8631fc262581453bbf619ec5b2062170.1a09074801c000c4f3@vates.tech>
-Content-Type: text/plain; charset=UTF-8
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Jason Andryuk <jason.andryuk@amd.com>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH v1] x86/svm: Fix VMLOAD/VMSAVE state handling when using nested virt
+Date: Fri, 11 Sep 2026 16:12:50 +0100
+Message-ID: <20260911151250.1232332-1-ross.lagerwall@citrix.com>
+X-Mailer: git-send-email 2.53.0
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO6P123CA0043.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:2fe::17) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Content-Type: text/plain
+X-ClientProxiedBy: LO4P123CA0002.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:150::7) To CH8PR03MB8274.namprd03.prod.outlook.com
+ (2603:10b6:610:2ba::5)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|MW4PR03MB6924:EE_
-X-MS-Office365-Filtering-Correlation-Id: 70ec5732-84f7-4e55-35d0-08df1017229b
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|MWHPR03MB989453:EE_
+X-MS-Office365-Filtering-Correlation-Id: b6f31031-ffb8-4ac5-09a1-08df1017290d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|23010399003|366016|10067099003|56012099006|11063799006|4143699003|3023799007|18002099003|22082099003;
+	BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|10067099003|6133799003|18002099003|11063799006|56012099006;
 X-Microsoft-Antispam-Message-Info:
-	IhqXEsI7ezP9yPj3d12qXu9K7+U3n302tA/pOdIFn6NtV3pO4/zNtTfVghABxoOLVeOkVWDC5zdNtPPZ0f5C1zmb72T2dNW5ag53PlbaCRJJ3bOW7yhsUlbTXXywIeXz291jImRqqg0nc/MU0r1jlkFgEp44lBQ/XKVqpgROKAuVBlgGWcGa9AzsNPaptBKtICql4QkbWYrTEv8QoKsHd8YugDou8Z+BD7jDki5dJ53acrbX0Yt9SUhgvtiEs/nOYbV6OYMm8p3qeS+ZjUVqulm5uxyT0G40Wxe5UnLbRY8oxS0tfrUzH/OAQgYyWDBAlJkNRIyZqcb2u4hFMHds3OHOLQUrQ30jmusbk/Ctaar66vkYpPo4C/00yz6qrGK01o/QwFS2WTYCwJGnN2lIIiS+TS/mnbtRVzq3o15eNcD4pWtECeu1dfSStKUmdd3ZEzO2oedOxvvsHF3vVseQTMPaEJjy6Gc6DXR5XqlyROeGMv7zGSCGsSPNDaYNtGeFCHZNyZtln0OxGDdeTJHSJfTvz+C+Bz7xzbzLIcKPE6zrIc8B10v88Dg2ztjbWTdY0aqVNtAvLGLCZ3UoUk2MTZahJBfvpVWFixBnOktRsBChJpe1gWeBor6IbdZdZUwVCVL0Qn+9cig378Sy7zIEwqaN8IaTXD/QLATeWqTsUvo=
+	VaBuLAIJr0RXPGbd15g/7lBbO7HzWpYWlU3TPIn5SR4a7ZenI3kpzPznfLWq+Isnmrfl7V83QK2AxW6zanhiT6OfbPklvR4zOtlgAipO6a4inWQZ1gufhYJLFC8DluyvOC+RiSY/inEF1xhfLQ1IXlmQJlNZNwYBZwmQusadfEaNF6OT4xs7xD+9Y1FW+t2HBgTPYymJydlmw1wNQ9/yWZiRWftkk2gXlTHQtU8QHX9fEZ7jQpUw9l9hDVoA+tnnJqH9H0FclLogtoFduKeaWRo3E5W72Khzyzj3LD7158xVqm9R4AW8+l6yHUYlVq2x036nSKY6kUb8loEvUFK7ruPiH9uk7WfpJUm4rd1hx67aEnxTWZVzGBAxb6cMeSurdcuqMB9ZiJMpWyXfD4+we+xPjh0hktlWCBqddLED630rIPHmvKopTFBENXIVrWwleUhMp2ad1hxEZ+nXmTCG/kaaqr6u8C+s2vJppa8WZVw0RbTIIzlxlodSCn6+sFFLYMXPHbceHZdjkPO56XRDxOpQN0KY6iPyNr9G/fpaBf0AjRdUpLeRa1LfxecOzGLyPpqZ3OujEGWVsa4w4GkMdIhQE/4oanQigtMZOuSdP7Qb8pqqbssXeUBRvmqJbul98vCph9qlWzkJ9ZLMJZcZisFVRgLrtIUXS8AwHNCIh4g=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(23010399003)(366016)(10067099003)(56012099006)(11063799006)(4143699003)(3023799007)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(10067099003)(6133799003)(18002099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?UXNDMU5GakRvRkRtR3BaV0pTYnpLRE95VE9Dci9nTmRqM1hFVFdFUzBBUHBP?=
- =?utf-8?B?djAwYjVTMlRCcXQ2bXExRlVYZjlRb1U2UDZhZU4xT012ek92bldnMVhGb2hW?=
- =?utf-8?B?ank3WjFicGZiMmtFS2JFNXBHYjUxU0NQZVRDZEdoTUVaazNRQVJOdUtxOGRh?=
- =?utf-8?B?QTBxNzcxUmxjVjk5bzYwS3lTOFVRUEtlY0NzVzg1VFhTM2FpR3VQcGtUcWt1?=
- =?utf-8?B?alNweThDOXdxY09OUDc2ejlRVDk2eTBJa1M0M0R5NXRMQm8rWUFvYUN2Q3Ns?=
- =?utf-8?B?RVkyVTlXRms5UkZtTUx4aDlFOWNCMEl5L1F5ampCV3NHV2xhTjQzbXAzSXg1?=
- =?utf-8?B?Nkw5dDVOVERrMWRzTlc1TW9LVXJoVWR2d2pGazJrM2c4S3hQSkZ3cjJkTkNP?=
- =?utf-8?B?bktKSjlnc1dMQTBPTk96alFCSVQyb1ZWbUl1bVRVZkQxQXMvSGtTNmlpVzA2?=
- =?utf-8?B?akZqVkZ6R3lYQWRPVU8rb2sxT1Z3YlpwMTdEMk5uODBCcEg3aE5PWHFSNTZK?=
- =?utf-8?B?T0dGVWp4UDByNklJWS8xSi9PdUlIUlR5SHNaa0oxek9GNDFQS0VyUmxhMjNK?=
- =?utf-8?B?YnFiNkh6dDhZbkx6VFQzbzVYeEk5S3hSWWl6amhCbnJ0Y0pEVDQwZDR0akhH?=
- =?utf-8?B?R21ZczFnbzhwT1NNUWtCdndjOVJKR0xKQnd3eC80RTNvSlVWUVZETVRFRGds?=
- =?utf-8?B?MlhRcHVyc3pmWVAvR0grOGNxV1d1THpZR1IzS2FzOHh1eklzbXJpVXNlL3Yv?=
- =?utf-8?B?ZWZyK0xBUFI0cUFucVp3Q245enV5bUxRb01ocFA2YnROT3JSRXdod3plNysr?=
- =?utf-8?B?ME1oaDBHMjhjZHd3ZWp3dzVxMUVvZ21BSDFrTnFQMUU3a1hsNlBucGdQV1JO?=
- =?utf-8?B?QllJRlhnRG5Wa25uTEJ1dFNaOVFSTXNJZGtMMS9LNVg4Y2hIakNPYUk4bU5n?=
- =?utf-8?B?SGsxeW1JMFZTQ1FybUxCOHRvYXhzcTg3WHZSN3p6ZWh1TE5scDAvamU1UytB?=
- =?utf-8?B?SmVHRUUxWFh2SGRVYjRYckMzRms5eHZPWG9KWVEwN3djOXhaUENCVit4Q2Ur?=
- =?utf-8?B?Z2dhSSt2cU40dTVOOWFYcE5DWEZ3dzkrMDI3d1pWUm1OUlhseFd3NDlJaksy?=
- =?utf-8?B?MDduamNwaFY5WGtRbUlXR2VQd1RVc1FLZzNzVVM5akJ3UFJrbVUwaDV0alU1?=
- =?utf-8?B?SEFwZ1hNREhTZTJrZHdFZGZESUhKRldGL3d6R0NvZ0VneTcrRWJyTWcyVTd4?=
- =?utf-8?B?eUgvd0gvQTlSWWlhbU1ZMkFnckRpSmEyNzRVdzZXUFJXb2tSTVc3V25GSllS?=
- =?utf-8?B?RUNSWkpyd1BZNjdxS1RRN2h2VE9UVGFLWFh3alpRK1ZCRmpkZ2s5ak1MZEp4?=
- =?utf-8?B?V2VpZHYzYUh6MG04WTkzbEc2YTBpOWtocmlRd1VVdms5MzdYVWExN0FRanRU?=
- =?utf-8?B?MU5PVm1QQ2dhdDdlMFN6US8rd254d3hmT0Y2Qm15MFFobDZnSGxQZDVMazNQ?=
- =?utf-8?B?L05meUlqaURWS3VzbGpWQUhTUm9NUDNxdnlmODBLM3lVQlVsYUdSRE45bHdF?=
- =?utf-8?B?YkNWRThja3VTS2Q4cG4zK1NFWVRxS2RIY0o1T1d4aGxQZnZkcEUwS2VmNjF4?=
- =?utf-8?B?QmxhUGUzZUp4VmNxaG9NRjZIRG1NNjkxdjRybHlxV2dmT2hYVkZKTkhwTHhS?=
- =?utf-8?B?bW8zbHpQb0tVaGJNVVRTMjdVb1ZQSEFvRDNFamZLWUlVRWVMcnNCdy85U2Rl?=
- =?utf-8?B?Q011MUhhWnhDbnFBOFNhYzU2MTJzRWlicDUvWm9NNy9ua2tMeHNmejNURnM0?=
- =?utf-8?B?NTZBNmtiQTh4UXVpaHZ3bS9HTSs2dFRzdnhsd3lvSk9jdTFPNXJzVmFvWE1W?=
- =?utf-8?B?S1IvQzNzU0hxVU5QaU1ZNGp5Wmh1WDMxVDNManJQN2NjMVZWb3I1YzJwVm5J?=
- =?utf-8?B?c0h0THh2NGJXenNjbHN0Z29rQXRWZUVMWm4zU1NiKzJmMmdWTFBLOVJMUlZk?=
- =?utf-8?B?VWZSZkhNUTJ5TGVaVW1Ia0ZlREJYSER1Nm1BQUtNaHVZMEg3U2hUNnFjVlRW?=
- =?utf-8?B?SlRXY0hxUmpGdDdVd1BEbFUzYWR6Yll5Q1dQaVpHakRwSFlPK3J3b3VWZkNN?=
- =?utf-8?B?OGo3N0pNLzY0MC9hSnRENzVJQWdERkdZVnVOVm85VWx5MnBaUEhTK1pDTitD?=
- =?utf-8?B?Wm5GVVlPM1JaTzNBZUE3WnJnNU12N04rWEFZS25UVXoyNE0vRnNzazFxWXN6?=
- =?utf-8?B?bE9pQk5uaWdQNytRQ2luY0ZER0tBZG5iWlNwdS9ab0Z0S05LNU5XZ1lRcTdh?=
- =?utf-8?B?NXgwVlh1czYyVXVaT0krMklRQVVhRXJnYTJBSjZRZ1NOUlV4alQ0Ty9QSUZT?=
- =?utf-8?Q?6SQYiCwAdXcoZMKM=3D?=
+	=?us-ascii?Q?UQ9iZnZ146qeWj7N5OE5LU5ocjpmpIce7gBonAPLSfDR2oApC9KbA5eva+Xd?=
+ =?us-ascii?Q?XwRNZKxJh0JNMFsEFEOYobLB2jw2hEoIO8D+R456ieVYoIjx0sflerocMaAi?=
+ =?us-ascii?Q?Mimlj4hMvrXPqs0YJr5QqmILWVy2XWQB2kQBz6Ummb1nKpYt0voWqaEDmMEH?=
+ =?us-ascii?Q?l8HCqW9LVCtnkWGFWlcVZInSTa+W44WFuovs9YA/ZjRqzd9UwKlcaBkCoUhj?=
+ =?us-ascii?Q?yhn5m8KTAEed0ajGTWCEX/6tzPrPlLc9kwAi06fJNAVnrggvoLBSPU+igNdu?=
+ =?us-ascii?Q?3aNOxGp6B/PM3DHCMKMbSPdn7RxbmjbgoxQfrNCg+D/Pl4EYtHlwOh3EG1PK?=
+ =?us-ascii?Q?Mj7Ctgq8+E/QDRMXUUEmKMTIVi68/unJyL0WWPkD1XT1hzavuWWXA8KBqTZz?=
+ =?us-ascii?Q?cDi6ohuOz6Ofz97yaa0yeaC2z78rvfSaCjhpWf9VheHz/3Ot2GsuUMzSp5jD?=
+ =?us-ascii?Q?aZdZyGlDNIIxVc85QdEgGohc9Yx0aT6v8h5y8m5fnDgvoGwp+HE7XfbBHzbz?=
+ =?us-ascii?Q?4ffFAMgz4EWY3xXyXyOrjCstTa21JgcWl9bDl29ajXxv6vEJRUL0I4RQbyyu?=
+ =?us-ascii?Q?ni/sZuLNrtTcsXsERIrLZMp6b/RMmnybhaTvpQrFxK0YzirOZMFWvN+ynz5i?=
+ =?us-ascii?Q?hCoZLdPjacwGiXdQWWC+EnnpZTUzXCsRhmRoxMonLKIJoD0oyhMI+geiTrcd?=
+ =?us-ascii?Q?NsUpwl3mTK1Idh9OxU9rJQwhy4QUEHOoQKcYo1oifRPL+gk6UEFXRoCDF6QW?=
+ =?us-ascii?Q?cVjN8RFchiULERmg3LuhiMDNbuzGmzAgR67WnQ01Al7NRCPwXiZYuEahrG2/?=
+ =?us-ascii?Q?3J9ZQEEK04vfDqfMOGu3IEWgwmYBtxUPCsrw/xLGbTdu31SAEDW4Um0BoxX3?=
+ =?us-ascii?Q?0yFzk/eVoaOg172g7YX4nMa8C7dOtOOLzrHKotCMKZbDq44rwY2FrmyH8ieB?=
+ =?us-ascii?Q?I+cWBcc+x8bdW0nTcMFjCCS9CbhJm+W4bOZPhDhd7QsvObngcRVcQfSLA88a?=
+ =?us-ascii?Q?dtfEXbXwRVLrB6rS3TpYrUd9DU/FDQFE0FAsE/yKj55zlYzyht2QXgd4Qrh6?=
+ =?us-ascii?Q?paLCx24pzQ33x0jFLv5vbo1bMqkYmE/he32qIXuLiwJQLs0WPIiWTTs2afnX?=
+ =?us-ascii?Q?auye87miaHf8PqnVJ+Jj+TntEVrYFQBQCjgUpDWzsziIJxb55OaH7K1KqDMa?=
+ =?us-ascii?Q?aSY3XgsulQxHSYuhBO4oCKAlfAUwtT6CpZULG7LTnbNMY0TPe9n3GMWMHLBd?=
+ =?us-ascii?Q?3dHoDP4i8iluxfqKsROpMb14DU/ZQTVkD6PGXKSu6jugu+ceuiKlMYV92YRd?=
+ =?us-ascii?Q?6+3+JTtAMjQz4mr3av6eeLe++3uJQVKnX5nR5KqVF1k5JHgm2VA2utDGoP1x?=
+ =?us-ascii?Q?Q19/z3Xt73RA5CeP3Rdd6Bf/I3cMUtFzaaREL4QECNSoigItH8SxRb3v0Ngk?=
+ =?us-ascii?Q?/V/Z31KcV12WZqWUHwGoU/3SZ9VySPwRhdNsSc8Vsp06a7E8YkcSz4yGttjR?=
+ =?us-ascii?Q?+wQtZ335ATUSMWEjsmiDQ/YTlu5i1iNcGMXq1TPCK+a3W69WU8eMlc34A1Mj?=
+ =?us-ascii?Q?xe3+qGASc38Bb56EQB26V40vXd3arYRQIxVe12Iq6ayXivfrBou5Nnl4gqds?=
+ =?us-ascii?Q?NEBZyce64CdbfkTomuiwP8cnx9MYmIyDpEH0SvmX+xQZCPaUfGn7pKrZ1SLH?=
+ =?us-ascii?Q?IHUcVfWjk1zF+kx3sbV47OfOIPCsyRGlIr9QkQt+1PjfafrwbQhaHxDv6M6E?=
+ =?us-ascii?Q?74VdKcC7+UeUjG2et5O+rgkRgBwQBNU=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 70ec5732-84f7-4e55-35d0-08df1017229b
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b6f31031-ffb8-4ac5-09a1-08df1017290d
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 15:12:46.1613
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 15:12:56.9968
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: QK9o1xdN0y9lOTel/xAJCasGGqKHcrgOsD66i7Z1SpVAEYmzjcWfzVW2eH1UnLn+WDJKD0Ays3t+J7y0c2ODEzlnF7nLQaas7YuwxtVjzMA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR03MB6924
-X-purgate-ID: tlsNG-42698a/1789139572-A88C99EA-DD916D2D/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: QDHAQinmeCuL/EpaISjzfHCPIEzIcygQvo/jkImzJXvr/ZYzWVB9Rw8gxz7HiloQYq6YXsvMAmnNAA+z80XQ4HtjiRx3ZNeVjv1XNi/lZMQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MWHPR03MB989453
+X-purgate-ID: tlsNG-c1860d/1789139582-D775B87B-322BD34C/0/0
 X-purgate-type: clean
-X-purgate-size: 855
+X-purgate-size: 16702
 
-On 11/09/2026 1:32 pm, Teddy Astie wrote:
-> Le 10/09/2026 à 22:31, Kevin Lampis a écrit :
->> A new sub-op MMU_PT_UPDATE_SWAP when used will do an atomic swap to set
->> the new value and return the old PTE value through the req.val field.
->>
->> - The new PTE value in req.val must be 0, at the moment this is intended
->>    for clearing only.
->>
->
-> I'm not sure this is a good idea to restrict the feature for only 0.
-> If in the future we want to expand this to non-0 values, we will need
-> to advertise this property to the guest as well (so that it knows if
-> non-0 values are supported). I don't know what supporting !0 would
-> require (but it could be useful to get a idea of it).
+Currently, the SVM VMLOAD/VMSAVE state handling always uses the vCPU's
+active VMCB to load/store the state. The active VMCB changes depending
+on whether or not the vCPU is in guest mode yet the state is not
+properly copied between VMCB(0-1) and VMCB(0-2) nor is the
+vmcb_sync_state updated when switching active VMCB.
 
-Going further, this cannot be limited to 0 as an input, or to only L1e's.
+The most common way this fails is when context switching to a vCPU in
+guest mode and immediately taking a VMEXIT (e.g. due to an interrupt for
+L1 having arrived in the meantime). The code issues an unconditional
+VMSAVE into VMCB(0-1) but the state has not yet been loaded since
+context switching which results in garbage in VMCB(0-1). The garbage
+state is then (re-)loaded from VMCB(0-1) shortly before VMRUN. This
+results in frequent, random crashes in L2.
 
-What I don't see is why you need any restrictions at all ?
+Since the state covered by VMLOAD/VMSAVE is a property of the vCPU and
+is not affected by switches to and from guest mode, always use VMCB(0-1)
+to store and retrieve it. This avoids the need to synchronize state
+between VMCBs and fixes the random crashes. L1 itself is responsible for
+using VMLOAD/VMSAVE to load/save the state from hardware into its own
+VMCB(1-2) and this change does not affect that.
 
-~Andrew
+Fixes: 9a779e4fc161 ("Implement SVM specific part for Nested Virtualization")
+Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+---
+ xen/arch/x86/hvm/svm/nestedsvm.c |   7 --
+ xen/arch/x86/hvm/svm/svm.c       | 107 +++++++++++++++++--------------
+ xen/arch/x86/hvm/svm/vmcb.c      |  26 ++++----
+ xen/arch/x86/hvm/svm/vmcb.h      |   3 +-
+ 4 files changed, 75 insertions(+), 68 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index 5adb1bd72c4d..c2250b85cf28 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+@@ -198,11 +198,6 @@ static int nsvm_vcpu_hostrestore(struct vcpu *v, struct cpu_user_regs *regs)
+     ASSERT(n1vmcb != NULL);
+     ASSERT(n2vmcb != NULL);
+ 
+-    /*
+-     * nsvm_vmcb_prepare4vmexit() already saved register values
+-     * handled by VMSAVE/VMLOAD into n1vmcb directly.
+-     */
+-
+     /* switch vmcb to l1 guest's vmcb */
+     v->arch.hvm.svm.vmcb = n1vmcb;
+     v->arch.hvm.svm.vmcb_pa = nv->nv_n1vmcx_pa;
+@@ -969,8 +964,6 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
+     struct vmcb_struct *ns_vmcb = nv->nv_vvmcx;
+     struct vmcb_struct *n2vmcb = nv->nv_n2vmcx;
+ 
+-    svm_vmsave_pa(nv->nv_n1vmcx_pa);
+-
+     /* Cache guest physical address of virtual vmcb
+      * for VMCB Cleanbit emulation.
+      */
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 5f5d903d872d..50822eebd7cf 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -444,30 +444,30 @@ static int svm_vmcb_restore(struct vcpu *v, struct hvm_hw_cpu *c)
+ 
+ static void svm_save_cpu_state(struct vcpu *v, struct hvm_hw_cpu *data)
+ {
+-    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
++    struct vmcb_struct *n1_vmcb = vcpu_nestedhvm(v).nv_n1vmcx;
+ 
+-    data->sysenter_cs      = vmcb->sysenter_cs;
+-    data->sysenter_esp     = vmcb->sysenter_esp;
+-    data->sysenter_eip     = vmcb->sysenter_eip;
+-    data->shadow_gs        = vmcb->kerngsbase;
+-    data->msr_lstar        = vmcb->lstar;
+-    data->msr_star         = vmcb->star;
+-    data->msr_cstar        = vmcb->cstar;
+-    data->msr_syscall_mask = vmcb->sfmask;
++    data->sysenter_cs      = n1_vmcb->sysenter_cs;
++    data->sysenter_esp     = n1_vmcb->sysenter_esp;
++    data->sysenter_eip     = n1_vmcb->sysenter_eip;
++    data->shadow_gs        = n1_vmcb->kerngsbase;
++    data->msr_lstar        = n1_vmcb->lstar;
++    data->msr_star         = n1_vmcb->star;
++    data->msr_cstar        = n1_vmcb->cstar;
++    data->msr_syscall_mask = n1_vmcb->sfmask;
+ }
+ 
+ static void svm_load_cpu_state(struct vcpu *v, struct hvm_hw_cpu *data)
+ {
+-    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
++    struct vmcb_struct *n1_vmcb = vcpu_nestedhvm(v).nv_n1vmcx;
+ 
+-    vmcb->lstar        = data->msr_lstar;
+-    vmcb->star         = data->msr_star;
+-    vmcb->cstar        = data->msr_cstar;
+-    vmcb->sfmask       = data->msr_syscall_mask;
+-    vmcb->kerngsbase   = data->shadow_gs;
+-    vmcb->sysenter_cs  = data->sysenter_cs;
+-    vmcb->sysenter_esp = data->sysenter_esp;
+-    vmcb->sysenter_eip = data->sysenter_eip;
++    n1_vmcb->lstar        = data->msr_lstar;
++    n1_vmcb->star         = data->msr_star;
++    n1_vmcb->cstar        = data->msr_cstar;
++    n1_vmcb->sfmask       = data->msr_syscall_mask;
++    n1_vmcb->kerngsbase   = data->shadow_gs;
++    n1_vmcb->sysenter_cs  = data->sysenter_cs;
++    n1_vmcb->sysenter_esp = data->sysenter_esp;
++    n1_vmcb->sysenter_eip = data->sysenter_eip;
+     v->arch.hvm.guest_efer = data->msr_efer;
+     svm_update_guest_efer(v);
+ }
+@@ -579,18 +579,19 @@ static void cf_check svm_cpuid_policy_changed(struct vcpu *v)
+ void svm_sync_vmcb(struct vcpu *v, enum vmcb_sync_state new_state)
+ {
+     struct svm_vcpu *svm = &v->arch.hvm.svm;
++    struct nestedvcpu *nv = &vcpu_nestedhvm(v);
+ 
+     if ( new_state == vmcb_needs_vmsave )
+     {
+         if ( svm->vmcb_sync_state == vmcb_needs_vmload )
+-            svm_vmload_pa(svm->vmcb_pa);
++            svm_vmload_pa(nv->nv_n1vmcx_pa);
+ 
+         svm->vmcb_sync_state = new_state;
+     }
+     else
+     {
+         if ( svm->vmcb_sync_state == vmcb_needs_vmsave )
+-            svm_vmsave_pa(svm->vmcb_pa);
++            svm_vmsave_pa(nv->nv_n1vmcx_pa);
+ 
+         if ( svm->vmcb_sync_state != vmcb_needs_vmload )
+             svm->vmcb_sync_state = new_state;
+@@ -606,6 +607,7 @@ static void cf_check svm_get_segment_register(
+     struct vcpu *v, enum x86_segment seg, struct segment_register *reg)
+ {
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
++    struct vmcb_struct *n1_vmcb = vcpu_nestedhvm(v).nv_n1vmcx;
+ 
+     ASSERT((v == current) || !vcpu_runnable(v));
+ 
+@@ -613,8 +615,9 @@ static void cf_check svm_get_segment_register(
+     {
+     case x86_seg_fs ... x86_seg_gs:
+         svm_sync_vmcb(v, vmcb_in_sync);
++        *reg = n1_vmcb->sreg[seg];
++        break;
+ 
+-        /* Fallthrough. */
+     case x86_seg_es ... x86_seg_ds:
+         *reg = vmcb->sreg[seg];
+ 
+@@ -624,7 +627,7 @@ static void cf_check svm_get_segment_register(
+ 
+     case x86_seg_tss:
+         svm_sync_vmcb(v, vmcb_in_sync);
+-        *reg = vmcb->tr;
++        *reg = n1_vmcb->tr;
+         break;
+ 
+     case x86_seg_gdt:
+@@ -637,7 +640,7 @@ static void cf_check svm_get_segment_register(
+ 
+     case x86_seg_ldt:
+         svm_sync_vmcb(v, vmcb_in_sync);
+-        *reg = vmcb->ldtr;
++        *reg = n1_vmcb->ldtr;
+         break;
+ 
+     default:
+@@ -652,6 +655,7 @@ static void cf_check svm_set_segment_register(
+     struct vcpu *v, enum x86_segment seg, struct segment_register *reg)
+ {
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
++    struct vmcb_struct *n1_vmcb = vcpu_nestedhvm(v).nv_n1vmcx;
+ 
+     ASSERT((v == current) || !vcpu_runnable(v));
+ 
+@@ -690,12 +694,16 @@ static void cf_check svm_set_segment_register(
+ 
+         /* Fallthrough */
+     case x86_seg_es ... x86_seg_cs:
+-    case x86_seg_ds ... x86_seg_gs:
++    case x86_seg_ds:
+         vmcb->sreg[seg] = *reg;
+         break;
+ 
++    case x86_seg_fs ... x86_seg_gs:
++        n1_vmcb->sreg[seg] = *reg;
++        break;
++
+     case x86_seg_tss:
+-        vmcb->tr = *reg;
++        n1_vmcb->tr = *reg;
+         break;
+ 
+     case x86_seg_gdt:
+@@ -709,7 +717,7 @@ static void cf_check svm_set_segment_register(
+         break;
+ 
+     case x86_seg_ldt:
+-        vmcb->ldtr = *reg;
++        n1_vmcb->ldtr = *reg;
+         break;
+ 
+     case x86_seg_sys:
+@@ -1665,6 +1673,7 @@ static int cf_check svm_msr_read_intercept(
+     struct vcpu *v = current;
+     const struct domain *d = v->domain;
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
++    struct vmcb_struct *n1_vmcb = vcpu_nestedhvm(v).nv_n1vmcx;
+     const struct nestedsvm *nsvm = &vcpu_nestedsvm(v);
+     uint64_t tmp;
+ 
+@@ -1687,43 +1696,43 @@ static int cf_check svm_msr_read_intercept(
+     switch ( msr )
+     {
+     case MSR_IA32_SYSENTER_CS:
+-        *msr_content = vmcb->sysenter_cs;
++        *msr_content = n1_vmcb->sysenter_cs;
+         break;
+ 
+     case MSR_IA32_SYSENTER_ESP:
+-        *msr_content = vmcb->sysenter_esp;
++        *msr_content = n1_vmcb->sysenter_esp;
+         break;
+ 
+     case MSR_IA32_SYSENTER_EIP:
+-        *msr_content = vmcb->sysenter_eip;
++        *msr_content = n1_vmcb->sysenter_eip;
+         break;
+ 
+     case MSR_STAR:
+-        *msr_content = vmcb->star;
++        *msr_content = n1_vmcb->star;
+         break;
+ 
+     case MSR_LSTAR:
+-        *msr_content = vmcb->lstar;
++        *msr_content = n1_vmcb->lstar;
+         break;
+ 
+     case MSR_CSTAR:
+-        *msr_content = vmcb->cstar;
++        *msr_content = n1_vmcb->cstar;
+         break;
+ 
+     case MSR_SYSCALL_MASK:
+-        *msr_content = vmcb->sfmask;
++        *msr_content = n1_vmcb->sfmask;
+         break;
+ 
+     case MSR_FS_BASE:
+-        *msr_content = vmcb->fs.base;
++        *msr_content = n1_vmcb->fs.base;
+         break;
+ 
+     case MSR_GS_BASE:
+-        *msr_content = vmcb->gs.base;
++        *msr_content = n1_vmcb->gs.base;
+         break;
+ 
+     case MSR_SHADOW_GS_BASE:
+-        *msr_content = vmcb->kerngsbase;
++        *msr_content = n1_vmcb->kerngsbase;
+         break;
+ 
+     case MSR_IA32_MCx_MISC(4): /* Threshold register */
+@@ -1856,6 +1865,7 @@ static int cf_check svm_msr_write_intercept(
+     struct vcpu *v = current;
+     struct domain *d = v->domain;
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
++    struct vmcb_struct *n1_vmcb = vcpu_nestedhvm(v).nv_n1vmcx;
+     struct nestedsvm *nsvm = &vcpu_nestedsvm(v);
+ 
+     switch ( msr )
+@@ -1889,45 +1899,45 @@ static int cf_check svm_msr_write_intercept(
+         switch ( msr )
+         {
+         case MSR_IA32_SYSENTER_ESP:
+-            vmcb->sysenter_esp = msr_content;
++            n1_vmcb->sysenter_esp = msr_content;
+             break;
+ 
+         case MSR_IA32_SYSENTER_EIP:
+-            vmcb->sysenter_eip = msr_content;
++            n1_vmcb->sysenter_eip = msr_content;
+             break;
+ 
+         case MSR_LSTAR:
+-            vmcb->lstar = msr_content;
++            n1_vmcb->lstar = msr_content;
+             break;
+ 
+         case MSR_CSTAR:
+-            vmcb->cstar = msr_content;
++            n1_vmcb->cstar = msr_content;
+             break;
+ 
+         case MSR_FS_BASE:
+-            vmcb->fs.base = msr_content;
++            n1_vmcb->fs.base = msr_content;
+             break;
+ 
+         case MSR_GS_BASE:
+-            vmcb->gs.base = msr_content;
++            n1_vmcb->gs.base = msr_content;
+             break;
+ 
+         case MSR_SHADOW_GS_BASE:
+-            vmcb->kerngsbase = msr_content;
++            n1_vmcb->kerngsbase = msr_content;
+             break;
+         }
+         break;
+ 
+     case MSR_IA32_SYSENTER_CS:
+-        vmcb->sysenter_cs = msr_content;
++        n1_vmcb->sysenter_cs = msr_content;
+         break;
+ 
+     case MSR_STAR:
+-        vmcb->star = msr_content;
++        n1_vmcb->star = msr_content;
+         break;
+ 
+     case MSR_SYSCALL_MASK:
+-        vmcb->sfmask = msr_content;
++        n1_vmcb->sfmask = msr_content;
+         break;
+ 
+     case MSR_IA32_DEBUGCTLMSR:
+@@ -2333,6 +2343,7 @@ static bool cf_check svm_get_pending_event(
+ static uint64_t cf_check svm_get_reg(struct vcpu *v, unsigned int reg)
+ {
+     struct vcpu *curr = current;
++    struct vmcb_struct *n1_vmcb = vcpu_nestedhvm(v).nv_n1vmcx;
+     const struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+     struct domain *d = v->domain;
+ 
+@@ -2344,7 +2355,7 @@ static uint64_t cf_check svm_get_reg(struct vcpu *v, unsigned int reg)
+     case MSR_SHADOW_GS_BASE:
+         if ( v == curr )
+             svm_sync_vmcb(v, vmcb_in_sync);
+-        return vmcb->kerngsbase;
++        return n1_vmcb->kerngsbase;
+ 
+     default:
+         printk(XENLOG_G_ERR "%s(%pv, 0x%08x) Bad register\n",
+@@ -2617,7 +2628,7 @@ void asmlinkage svm_vmexit_handler(void)
+     if ( unlikely(exit_reason == VMEXIT_INVALID) )
+     {
+         gdprintk(XENLOG_ERR, "invalid VMCB state:\n");
+-        svm_vmcb_dump(__func__, vmcb);
++        svm_vmcb_dump(__func__, v, vmcb);
+         domain_crash(v->domain);
+         goto out;
+     }
+diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
+index 975a1eaef806..6e2a45ff3c4b 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.c
++++ b/xen/arch/x86/hvm/svm/vmcb.c
+@@ -243,16 +243,17 @@ static void svm_dump_sel(const char *name, const struct segment_register *s)
+            name, s->sel, s->attr, s->limit, s->base);
+ }
+ 
+-void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
++void svm_vmcb_dump(const char *from, struct vcpu *v,
++                   const struct vmcb_struct *vmcb)
+ {
+-    struct vcpu *curr = current;
++    struct vmcb_struct *n1_vmcb = vcpu_nestedhvm(v).nv_n1vmcx;
+ 
+     /*
+      * If we are dumping the VMCB currently in context, some guest state may
+      * still be cached in hardware.  Retrieve it.
+      */
+-    if ( vmcb == curr->arch.hvm.svm.vmcb )
+-        svm_sync_vmcb(curr, vmcb_in_sync);
++    if ( v == current )
++        svm_sync_vmcb(v, vmcb_in_sync);
+ 
+     printk("Dumping guest's current state at %s...\n", from);
+     printk("Size of VMCB = %zu, paddr = %"PRIpaddr", vaddr = %p\n",
+@@ -286,7 +287,8 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
+     printk("virtual vmload/vmsave = %d, virt_ext = %#"PRIx64"\n",
+            vmcb->virt_ext.fields.vloadsave_enable, vmcb->virt_ext.bytes);
+     printk("cpl = %d efer = %#"PRIx64" star = %#"PRIx64" lstar = %#"PRIx64"\n",
+-           vmcb_get_cpl(vmcb), vmcb_get_efer(vmcb), vmcb->star, vmcb->lstar);
++           vmcb_get_cpl(vmcb), vmcb_get_efer(vmcb), n1_vmcb->star,
++           n1_vmcb->lstar);
+     printk("CR0 = 0x%016"PRIx64" CR2 = 0x%016"PRIx64"\n",
+            vmcb_get_cr0(vmcb), vmcb_get_cr2(vmcb));
+     printk("CR3 = 0x%016"PRIx64" CR4 = 0x%016"PRIx64"\n",
+@@ -298,9 +300,9 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
+     printk("DR6 = 0x%016"PRIx64", DR7 = 0x%016"PRIx64"\n",
+            vmcb_get_dr6(vmcb), vmcb_get_dr7(vmcb));
+     printk("CSTAR = 0x%016"PRIx64" SFMask = 0x%016"PRIx64"\n",
+-           vmcb->cstar, vmcb->sfmask);
++           n1_vmcb->cstar, n1_vmcb->sfmask);
+     printk("KernGSBase = 0x%016"PRIx64" PAT = 0x%016"PRIx64"\n",
+-           vmcb->kerngsbase, vmcb_get_g_pat(vmcb));
++           n1_vmcb->kerngsbase, vmcb_get_g_pat(vmcb));
+     printk("SSP = 0x%016"PRIx64" S_CET = 0x%016"PRIx64" ISST = 0x%016"PRIx64"\n",
+            vmcb->_ssp, vmcb->_msr_s_cet, vmcb->_msr_isst);
+     printk("H_CR3 = 0x%016"PRIx64" CleanBits = %#x\n",
+@@ -312,12 +314,12 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
+     svm_dump_sel("  DS", &vmcb->ds);
+     svm_dump_sel("  SS", &vmcb->ss);
+     svm_dump_sel("  ES", &vmcb->es);
+-    svm_dump_sel("  FS", &vmcb->fs);
+-    svm_dump_sel("  GS", &vmcb->gs);
++    svm_dump_sel("  FS", &n1_vmcb->fs);
++    svm_dump_sel("  GS", &n1_vmcb->gs);
+     svm_dump_sel("GDTR", &vmcb->gdtr);
+-    svm_dump_sel("LDTR", &vmcb->ldtr);
++    svm_dump_sel("LDTR", &n1_vmcb->ldtr);
+     svm_dump_sel("IDTR", &vmcb->idtr);
+-    svm_dump_sel("  TR", &vmcb->tr);
++    svm_dump_sel("  TR", &n1_vmcb->tr);
+ }
+ 
+ bool svm_vmcb_isvalid(
+@@ -418,7 +420,7 @@ static void cf_check vmcb_dump(unsigned char ch)
+                 continue;
+             }
+             printk("\tVCPU %d\n", v->vcpu_id);
+-            svm_vmcb_dump("key_handler", v->arch.hvm.svm.vmcb);
++            svm_vmcb_dump("key_handler", v, v->arch.hvm.svm.vmcb);
+ 
+             process_pending_softirqs();
+         }
+diff --git a/xen/arch/x86/hvm/svm/vmcb.h b/xen/arch/x86/hvm/svm/vmcb.h
+index 3760f71a8625..2bae45e41971 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.h
++++ b/xen/arch/x86/hvm/svm/vmcb.h
+@@ -563,7 +563,8 @@ int  svm_create_vmcb(struct vcpu *v);
+ void svm_destroy_vmcb(struct vcpu *v);
+ 
+ void setup_vmcb_dump(void);
+-void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb);
++void svm_vmcb_dump(const char *from, struct vcpu *v,
++                   const struct vmcb_struct *vmcb);
+ bool svm_vmcb_isvalid(const char *from, const struct vmcb_struct *vmcb,
+                       const struct vcpu *v, bool verbose);
+ 
+-- 
+2.53.0
+
 
