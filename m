@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 254EFC88E4D
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 17:00:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1417633.1646331 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6312AC88E58
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 17:10:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1417645.1646341 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x54cJ-0000SZ-5p; Fri, 11 Sep 2026 17:00:47 +0000
+	id 1x54lJ-0002n7-3w; Fri, 11 Sep 2026 17:10:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1417633.1646331; Fri, 11 Sep 2026 17:00:47 +0000
+Received: by outflank-mailman (output) from mailman id 1417645.1646341; Fri, 11 Sep 2026 17:10:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x54cJ-0000SS-3D; Fri, 11 Sep 2026 17:00:47 +0000
-Received: by outflank-mailman (input) for mailman id 1417633;
- Fri, 11 Sep 2026 17:00:46 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x54lJ-0002mt-0i; Fri, 11 Sep 2026 17:10:05 +0000
+Received: by outflank-mailman (input) for mailman id 1417645;
+ Fri, 11 Sep 2026 17:10:04 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <david@kernel.org>) id 1x54cI-0000SK-DG
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 17:00:46 +0000
+ (envelope-from <david@kernel.org>) id 1x54lH-0002TA-RK
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 17:10:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x54cH-00EgWR-QD
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 19:00:45 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x54lH-00C6CV-0Z
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 19:10:03 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <david@kernel.org>)
- id 6aa433bb-e002-0a2a0a5209dd-0a2a4502c060-6
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 19:00:45 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa435e6-bab6-0a2a0a5309dd-0a2a4508b882-10
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 19:10:02 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <david@kernel.org>)
- id 6aa433bc-6ca4-0a2a45020019-aceafc1fd3a2-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 19:00:45 +0200
+ id 6aa435e9-f659-0a2a45080019-ac6904feb662-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 19:10:02 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 718C64376E;
- Fri, 11 Sep 2026 17:00:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 803B11F000FF;
- Fri, 11 Sep 2026 17:00:27 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 48B9160008;
+ Fri, 11 Sep 2026 17:10:00 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 22A101F000FF;
+ Fri, 11 Sep 2026 17:09:43 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,21 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789146043;
-	bh=SDhdb+1yueFGYCfGv2/iY4/JhNsnY4MHmhr2o01xj7U=;
+	s=k20260515; t=1789146600;
+	bh=wtZVEwngtJNDR7Dil3pjiAKeqFlagckAJ2vKOo34aps=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=dqzLbr7PT9UPg2vyaVcVWkqDnTJLnNl/+9rbrIO5j+Xc/wJPxcpDAZtHGb0O5p3wx
-	 xxwXDj+5wfoXizGaX4IUDbtQjoGNGIBmbFh9r+Ih/Swh0lmJo1x2rXjXAotQlrIA5i
-	 8CALl0IKEmojHmvftuOoofMkLRwZj2jPgwYN/P9EP0Ge2Yy2o0vx9O1Tc9LnRc7d8a
-	 ECioA+6R8JEa+dnDWQvYkyKqpHAO81tDbTlKvOLsbaMVoBHTGt5Y2bsOxTUhPmn5m/
-	 bZSIlx+oLSNnrcP6gkKiSYENsTC+1lLLRiHh3dEhvB47zpFmLxPKtk1t4g8IwsgehU
-	 sPQt4Xy2dY91w==
-Message-ID: <e430cbf2-52a0-4fee-8730-06bb9496c1f1@kernel.org>
-Date: Fri, 11 Sep 2026 19:00:24 +0200
+	b=o3L2NdFMRQT+LpNVPaEJvUSryJiMtoEVuBlhvOpTUX3u5oD1j+1IZzuRmDPssCOD4
+	 3TfJgTwz9pU1ve9tosOWOXJWeO5W5V83R7OCQQ9yL2AVj6egbjS8vXSL82EbvGhM3T
+	 X1XDCLrsl04F+9gry2WDolIIzJu6dcCWuJB5K5pbIbQMAi2KKSjOs3tL2GGoqQq/Wi
+	 xq+SIi39yxW4XtIwV3PkGvVjCoZTgE4SSw6GvxZx1Nypqi8hRWSbbhUoNXXZ0lhxcQ
+	 kqmPeMm2P5VW+rdouLiwMZzBs9F3xluAom1Yg/u88m56rjWUU4zcY2OLNDN0AVIlpJ
+	 G63yfKeDG5URw==
+Message-ID: <85ea78b6-f3c7-4a9b-b25d-1fe2ecbf3b40@kernel.org>
+Date: Fri, 11 Sep 2026 19:01:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/8] mm: introduce hw_pte_t for PTE table storage
+Subject: Re: [PATCH v2 2/8] mm: rename pointers to software PTE values as
+ ptentp
 To: Muhammad Usama Anjum <usama.anjum@arm.com>,
  Jani Nikula <jani.nikula@linux.intel.com>,
  Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
@@ -106,7 +107,7 @@ Cc: linux-kernel@vger.kernel.org, intel-gfx@lists.freedesktop.org,
  kasan-dev@googlegroups.com, linux-trace-kernel@vger.kernel.org,
  bpf@vger.kernel.org, linux-perf-users@vger.kernel.org, damon@lists.linux.dev
 References: <20260903103002.1091859-1-usama.anjum@arm.com>
- <20260903103002.1091859-2-usama.anjum@arm.com>
+ <20260903103002.1091859-3-usama.anjum@arm.com>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -153,32 +154,29 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <20260903103002.1091859-2-usama.anjum@arm.com>
+In-Reply-To: <20260903103002.1091859-3-usama.anjum@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1789146045-F34BE2AC-D33B003C/0/0
+X-purgate-ID: tlsNG-c1860d/1789146602-D4F4F87B-3C4F540C/0/0
 X-purgate-type: clean
-X-purgate-size: 1229
+X-purgate-size: 922
 
 On 9/3/26 12:29, Muhammad Usama Anjum wrote:
-> pte_t is used both for software PTE values and for entries stored in a PTE
-> table, so pte_t * does not distinguish a pointer to a software PTE
-> value from a pointer to table storage.
+> Some interfaces use pte_t * for a software PTE value rather than for an
+> entry stored in a PTE table. These pointers must remain pte_t * when
+> pointers to PTE table storage are converted to hw_pte_t *.
 > 
-> Introduce hw_pte_t as the generic name for a PTE table element. Define it
-> as a macro alias of pte_t by default. When an architecture selects
-> ARCH_HAS_HW_PTE_T, define it as a structure containing a pte_t instead.
-> This preserves the representation while allowing converted architectures
-> to enforce the distinction at compile time.
+> Rename these parameters in the install_pte callback,
+> write_protect_page(), and guard_install_set_pte() to ptentp. The later
+> Coccinelle conversion skips pointers named ptentp, allowing it to convert
+> the remaining PTE table pointers without changing these interfaces.
 > 
-> Name the generic wrapper structure __hw_pte_t so architectures can
-> forward-declare it when pgtable_t must be defined before the generic
-> hw_pte_t typedef is visible. This avoids header-order dependencies.
+> Some functions already use ptentp for such pointers, including:
+> - madvise_folio_pte_batch()
+> - folio_pte_batch_flags()
+> No need to rename them.
 > 
-> Keep the C type definitions behind an __ASSEMBLY__ check because
-> architecture assembly sources can include this header indirectly. Include
-> asm/page.h so consumers such as linux/vmalloc.h retain the page definitions
-> they previously obtained from that header.
+> This patch only renames parameters and makes no functional change.
 > 
 > Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
 > ---
