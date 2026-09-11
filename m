@@ -4,46 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48B08C88E4C
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 09:13:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1416068.1645241 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4CA7C88E4C
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 09:35:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1416119.1645280 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4xJw-00089s-TC; Fri, 11 Sep 2026 09:13:20 +0000
+	id 1x4xey-0004PZ-3J; Fri, 11 Sep 2026 09:35:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1416068.1645241; Fri, 11 Sep 2026 09:13:20 +0000
+Received: by outflank-mailman (output) from mailman id 1416119.1645280; Fri, 11 Sep 2026 09:35:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4xJw-00089l-QM; Fri, 11 Sep 2026 09:13:20 +0000
-Received: by outflank-mailman (input) for mailman id 1416068;
- Fri, 11 Sep 2026 09:13:20 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1x4xJv-00088z-Rf
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:13:19 +0000
+	id 1x4xex-0004PS-Vr; Fri, 11 Sep 2026 09:35:03 +0000
+Received: by outflank-mailman (input) for mailman id 1416119;
+ Fri, 11 Sep 2026 09:35:02 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a08fd1f824000c4f3@swg.vates.tech>)
+ id 1x4xew-0004PM-1L
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 09:35:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4xJv-00AssA-7x
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 11:13:19 +0200
-Received: from [10.42.69.11] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6aa3c62a-bab6-0a2a0a5309dd-0a2a450ba2d8-18
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 11:13:19 +0200
-Received: from [40.93.195.12]
- (helo=SN4PR2101CU001.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6aa3c62d-b7e8-0a2a450b0019-285dc30cfd72-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 11:13:19 +0200
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
- by SA0PR03MB5548.namprd03.prod.outlook.com (2603:10b6:806:c3::8) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.7; Fri, 11 Sep
- 2026 09:13:16 +0000
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0406.007; Fri, 11 Sep 2026
- 09:13:16 +0000
+ id 1x4xev-00DN2F-EK
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 11:35:01 +0200
+Received: from [10.42.69.4] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a08fd1f824000c4f3@swg.vates.tech>)
+ id 6aa3cb40-bab6-0a2a0a5309dd-0a2a4504e7ca-16
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 11:35:01 +0200
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a08fd1f824000c4f3@swg.vates.tech>)
+ id 6aa3cb44-b57f-0a2a45040019-b9ff1c239559-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 11:35:00 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a08fd1f824000c4f3.002 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Fri, 11 Sep 2026 09:34:57 +0000
+Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
+ (Authenticated sender: teddy.astie)
+ by mail2.vates.fr (Postfix) with ESMTPSA id CD60B81DE6;
+ Fri, 11 Sep 2026 11:34:56 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,266 +58,213 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=S9hJJF7rGVqZ9JjUrTGIAeQCaSpL1EZAtzj0IxN8T4o2YDk/TOxXBvbzlciStAfk1AvsYR6YiEKDc/tBBJZ1i37CcYjI4ud+0AzkftWcSc09lekAs44rO3hsUBjhEqgu9uoGji5RqB32d+/scVsS+pXzrHeyh636Xhfuux2eqq265yXTDCoBfgmXofuwyJ/Q3Q6NF0wYmrBpZy21Z1EBI9B1j+U93ccLp/6Jiv9QZ6NT3hZQdZpZjH87tJxzJLHNl6BSgjDrNGDUhiyjd1o+z39RHVfMfSlpdZac71QMQgRIViBartdF/N1jA/syg5lCqiZkNqyDEgTyOXtwS30OsA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tYKIlUdhkoJoNa0kISGZ4/ZymHnUZqUNnA5Zqk/4p2s=;
- b=gSnlytOKqzoOaLmj/Q/ik2y2VFCw8skCSrdqKRIwbqPMXDO550NTXbOU4YCtZY1dQIvjnW21OQmCWw58T7QuKRCUVmyFGzy881H7+SLTIWnMjEUDwOZqaON4rrDAKKODrJa0U0x4aaWdsah+rdDoKpfG/DHmGXIQXxPoxqQcK/A8rzYU0J5/8gL6kcCr0WtW1MNj/mAMf6tFKbVgWu65xravKX09Uas9Yd4KtGry1OqXXsOfhUgidS5wCs00VnWmz6FTmCIQeM0tGy5r6IdBGwJNQ24+YJWdFAXiz1tXx2p77HXE+4sSh1RdrzjZ1pQmdHbNSMkhGK7l5PviDPyxCQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tYKIlUdhkoJoNa0kISGZ4/ZymHnUZqUNnA5Zqk/4p2s=;
- b=wW2lFbQFv5JLzSns61xc29i4G3QgAGCtx02IkadLTO5nYvqZ6njat7xpkWPyhx2KwgA17WcFcTCq7f5cdutYD3D2dWcKRjNKgMo5EyuGExY5PAOx4AoNaq4q7iwdFSmc/MqkWKahXUsZ7eivb/Gi7DWPV/f6eneGUijtac0T0+Q=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Paul Durrant <paul@xen.org>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Julien Grall <julien@xen.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 2/3] x86/viridian: Implement synthetic timer direct mode
-Date: Fri, 11 Sep 2026 10:12:43 +0100
-Message-ID: <20260911091244.1165516-3-ross.lagerwall@citrix.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <20260911091244.1165516-1-ross.lagerwall@citrix.com>
-References: <20260911091244.1165516-1-ross.lagerwall@citrix.com>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: DUZPR01CA0284.eurprd01.prod.exchangelabs.com
- (2603:10a6:10:4b7::22) To CH8PR03MB8274.namprd03.prod.outlook.com
- (2603:10b6:610:2ba::5)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=V6ehQ3GislKOhcMO53ERQFc16kU74eLe/iSxzYSjlyk=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=dLjbqi4pvdNficxU+mrYf+99rP6sn5lBDjiUVRvydqbqs8qompgvZoTlF0kM1nIttS0gYuhVU
+ 96PMyN/qOC8UBTMqlGtXgzec0+qc7VdvSydkNnx9X44HNTeU0RRYQB8XxYBpUs9aec2R1fEK3/H
+ ybVpyNz3L72kWN7z7RtRNyDaX7c0cfIAhjxUv9A9sv5M739513G5t3uV8CbYg2NN6+Dc42SkhH7
+ Z/juQMMfCdlu3QwjD5IZ6/6rcNQH9gvROpyj/vcKkxhCGcbLu8UsS90mlNsbsgDAqTNS8Qn1lHu
+ xF6V//ej5yvI4J5MlDjndrntwd1t2iy9QuZv2xbvUaAg==
+X-Zone-Loop: 982c0ac3840f1e1bc86806bed730b104eb9ce1601069
+x-campaign-type: default
+x-transaction-id: d2faae3c-1351-47eb-946f-dbc3df930418
+x-swg-uid: 01-6dc1cc93-3672-4030-8084-a6adfcc263b6
+X-Mailer: Sweego
+Message-ID:
+ <1789119297.8631fc262581453bbf619ec5b2062170.1a08fd1f824000c4f3@vates.tech>
+x-swg-bid: 1789119297.8631fc262581453bbf619ec5b2062170.1a08fd1f824000c4f3
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Fri, 11 Sep 2026 11:34:56 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|SA0PR03MB5548:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2d33197b-9631-4823-359e-08df0fe4ea16
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|10067099003|11063799006|56012099006|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	BiPyTTITRFDepBqf/ARiPHDOfPg5WTuNDtrwyTAP8lxw6Et5tz53nLhsagHfGs+CuqfsPwE0hIe510ThhovwesOOY0DHEnlun1IZuRmcaJIB9N51DABM8ecuFUQw2cITLcFj1xsz3nZ3NtGZfoPqtV2tAyg3v8ysBCi3g/G0bZc9JJ1j1ABGMzYJmBmoFxMWCHSHVaVe/xIwEiZgN00E5h+9+1Suv1qRFx5MRzziQ+xRSKlUP5u0v3foMpPvQIpbn5Zc5PR1fsFxB8vNnSwio9CtwslyUugXW2g8AFJRdBJWAB5SBPJY8ozAt+od/OxGaIw3CCHCU9HI2ZhGadfQVhtq+CE2kJWV8dpiXkJwJr6uw7dW4D+q7yy91UZbGc53H7U2w35md0Yy5FTeeUFW8F7pDK3YUj+104IV3zbt+RfMYeLP52x2bkrPiD9hrPgeMqEfxHzK95A/Mdaooyvy1H/nA/nDbq//MQh8o/0xhAFhjYEm8Lea1GrhM+gC0/oW+BFrx66i0hM6s5uE2ycO4k4B02SAVaQfJAxBM9yzFCE0agf2zq39KOySvN9TkmeUBFZ4YIKO/2iaiGbsnKzc2Y6L8ANT2wKGzmIz6OsKU7DTxGz+dfQabFMA4IPxvxYw3ygW3/ZIeeYbqp8oEdIz0gSl0KEdjLGTGxG6bbDsZnE=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(10067099003)(11063799006)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?hc1RMrP9UHzqUAHp05fnUhOS2clpRPOOmleKmBSwkW0U2DGzOOynkWUg3Nml?=
- =?us-ascii?Q?IzazbaSq0E5C0UbzSu0qQhX2Xpwz3KssxK3CgaEHr5EKnyTiwXhTnTFqHO/y?=
- =?us-ascii?Q?NQhY0OhVtsWwDF5cEd5ozpzWyx71TYVyhoHs7a2PGift8096WwMnamqEBST5?=
- =?us-ascii?Q?MfMprcedZN3JvaKMw7vxJvQFmtQ1MWg7BVKNk6ktl/+uPUPt94UikwC/84Eb?=
- =?us-ascii?Q?913GA1IvQzM0FxqNmdNTk/Rh1GRWuZgIDQgsCExxOs/Qfp7hpPJ9mJrbdPlk?=
- =?us-ascii?Q?lreRrz2W3loABDpwnl7k/RyOMwxdiVfJkl1NlupEQJngUNOlsPoy7ovr1yEq?=
- =?us-ascii?Q?KNJwssmREJSCmZKfV3K3oQYXpfyDQc+Y7Mq6vyu+7ny6u74k0pPasl1fldtm?=
- =?us-ascii?Q?VlFM/e2yBeFnJ6X65rfzcExp80dTlOBS1EtW3nKAbFRAACez+xFf2MExpXx6?=
- =?us-ascii?Q?T/4pG1DDZWIpdNFqiAdf5EJVkXL4s5AZ6Ug5omsRxYYRcMbFX3a5rtc6iceT?=
- =?us-ascii?Q?oqJ6evHwzs3lDwTWkPAHIASkur5lVYQMtoXTBo5iWNsJGx1OM1fqhZ39z8IQ?=
- =?us-ascii?Q?Mo/mcv2NrZS2wcFSrF1QWOxciGiT7mWZQIqJ2iujjnK53859FWTwvJFKOTsC?=
- =?us-ascii?Q?0WXQaT/vgUmrhaS7G/ZCTFRZuyeTAi/T7TJoWw2z/Olb8ajK72gzw/qceLGA?=
- =?us-ascii?Q?N5G2nWBQxTU+r7TU8NQxfEPYQIGtsTHXthEhh8r0DP3BWIYEgPcxAiqw+qU3?=
- =?us-ascii?Q?RpiwoPK0k/zcLlSw2fF/dnDmzjv0DTJCf3gl7rSB/KSzOa4Whzuz8Ig36MtS?=
- =?us-ascii?Q?QBD4lvoJ91ynOxHSpTWbAgDLIQv9ZTs6eSJf6Ord6yLFXrVwdQq0fYTa9dS5?=
- =?us-ascii?Q?JXQFxmqmhH0dqbnH9a/Z1yrdO4Xcixek0Fy7HcCc7aJhd1ipVpsKXGNCkwZF?=
- =?us-ascii?Q?PsyVsapEwrVgLAK1LHV81qMDgUVF6KX5xFFLcVkkLEUvFjrhCAvHktgyK16O?=
- =?us-ascii?Q?T8nD5oJZGn32ExuNJcO+0VeQrltVqnxYfB1jHbjmMmfNVVOF8ufaUJad+pj+?=
- =?us-ascii?Q?DNrxIC6uUdDKH+ZFjz3ntLZI9Ksbc4NQVnkkXUiXPWfZdgHZFfGLRE8/QAJg?=
- =?us-ascii?Q?7yNFmC21AFFs804Hf9KZR/7AFMLIogyR/lsuUkat2s2XlgOt6d9bsrXZ7Q/t?=
- =?us-ascii?Q?1VBJfFuprxDe/L5Zg85EQeZIJyzI1oMAsrDaF2oAsL4svUejhmeaGd/1R4Qe?=
- =?us-ascii?Q?eh1/BUixYNzmX4y7PJ+NJ0hjpJ+oftgDTAG4kvzFwi4BBy4IyAP15WUBiJYL?=
- =?us-ascii?Q?kRREmd+qHkxuqafNpPQEsYr7lRmiGgiY4wgWRWfYglXAc3Ar61qF38R/VS2m?=
- =?us-ascii?Q?cSQ7aWN/aVOsuDVO4Wrx65hBLCO1Ftl9dguPqaJhjYQ5xwoYJZLKUcmit7Dj?=
- =?us-ascii?Q?OuIa8yBKncVnb9DKCvYenUXJ7zTglz4mjFI3xzV5UCXdl2j8W4eGzEz2qy44?=
- =?us-ascii?Q?5eZ50+elT80BKIfbyhfo0+fBZ9oH9m2BibNK6qt6u5HcwyZ1wSyp4u1w6MeU?=
- =?us-ascii?Q?pEl1lTz3mTGXjalJ5EKxFQXUXhi+/dqg31ewI9VRCxdvRzyMNJSdn5ld2mpf?=
- =?us-ascii?Q?M6bZY3XEFQCdKZh04tN4mhXCKZGRObbWb3AIviDGbEk8uLQYk1kZNQ15W4XT?=
- =?us-ascii?Q?9CxGfFSnJ3NSRYkbKro3fpUdskxvmgflc3soU/gcLrkeZbPYx/jM4+hXXj8I?=
- =?us-ascii?Q?j2PbEdbLiJksSQdnGq+eKf7Q73uTBh0=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2d33197b-9631-4823-359e-08df0fe4ea16
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 09:13:16.5681
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: nONw5+Ls/F9MF1j6SdZSJej5ozcT5ujkUWA99qaQ/C/+t3zTtwPGSFOs+MCPQEi6qwmw1FKCKp5QlMyPec/o+1mn1WyrJ7pnhwMHqZxex4s=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR03MB5548
-X-purgate-ID: tlsNG-42698a/1789117999-1ACDF9EA-E379AD41/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] vmx: Refactor vpid_sync_vcpu_gva()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ xen-devel@lists.xenproject.org
+References: <1785509179.8631fc262581453bbf619ec5b2062170.19fb8a3efe8000e099@vates.tech>
+ <1785509305.8631fc262581453bbf619ec5b2062170.19fb8a5db67000e099@vates.tech>
+ <1a42fad1-922d-441d-9837-f4c43854a5b1@suse.com>
+Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+Autocrypt: addr=teddy.astie@vates.tech; keydata=
+ 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
+ x9fhaZEsniw8/bYgC3igkk5YJiOa
+In-Reply-To: <1a42fad1-922d-441d-9837-f4c43854a5b1@suse.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------diKt5bgiUxQOPK85h8LhfW89"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1789119296947
+X-purgate-ID: tlsNG-ebf023/1789119301-51AD0B50-962C882B/0/0
 X-purgate-type: clean
-X-purgate-size: 6181
+X-purgate-size: 8310
 
-In direct mode, the timer asserts an interrupt on expiration rather than
-using a SynIC message. It is useful to implement this since Windows 11's
-Hyper-V can only use synthetic timers in direct mode.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------diKt5bgiUxQOPK85h8LhfW89
+Content-Type: multipart/mixed; boundary="------------cdWuHpJTJGfKkHXL2uBsgWx0";
+ protected-headers="v1"; hp="clear"
+Message-ID: <bc54033b-a813-4349-928b-15c96dc2e032@vates.tech>
+Date: Fri, 11 Sep 2026 11:34:56 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] vmx: Refactor vpid_sync_vcpu_gva()
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ xen-devel@lists.xenproject.org
+References: <1785509179.8631fc262581453bbf619ec5b2062170.19fb8a3efe8000e099@vates.tech>
+ <1785509305.8631fc262581453bbf619ec5b2062170.19fb8a5db67000e099@vates.tech>
+ <1a42fad1-922d-441d-9837-f4c43854a5b1@suse.com>
+Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+Autocrypt: addr=teddy.astie@vates.tech; keydata=
+ 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
+ x9fhaZEsniw8/bYgC3igkk5YJiOa
+In-Reply-To: <1a42fad1-922d-441d-9837-f4c43854a5b1@suse.com>
 
-To avoid changing behaviour in existing guests, add a new Viridian flag,
-stimer_direct, to control whether this feature is visible and usable.
+--------------cdWuHpJTJGfKkHXL2uBsgWx0
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-At the same time, check that the reserved bits are zero and the APIC
-vector is only set when using direct mode since this is enforced by
-Hyper-V (although not mentioned in the spec).
+TGUgMTAvMDkvMjAyNiDDoCAxNzo0NSwgSmFuIEJldWxpY2ggYSDDqWNyaXTCoDoNCj4gT24g
+MzEuMDcuMjAyNiAxNjo0NiwgVGVkZHkgQXN0aWUgd3JvdGU6DQo+PiAtLS0gYS94ZW4vYXJj
+aC94ODYvaW5jbHVkZS9hc20vaHZtL3ZteC92bXguaA0KPj4gKysrIGIveGVuL2FyY2gveDg2
+L2luY2x1ZGUvYXNtL2h2bS92bXgvdm14LmgNCj4+IEBAIC00NjAsMTkgKzQ2MCwxNiBAQCBz
+dGF0aWMgaW5saW5lIHZvaWQgdnBpZF9zeW5jX3ZjcHVfZ3ZhKHN0cnVjdCB2Y3B1ICp2LCB1
+bnNpZ25lZCBsb25nIGd2YSkNCj4+ICAgICAgICAqIElmIGluZGl2aWR1YWwgYWRkcmVzcyBp
+bnZhbGlkYXRpb24gaXMgbm90IHN1cHBvcnRlZCwgd2UgZXNjYWxhdGUgdG8NCj4+ICAgICAg
+ICAqIHVzZSBzaW5nbGUgY29udGV4dCBpbnZhbGlkYXRpb24uDQo+PiAgICAgICAgKi8NCj4+
+IC0gICAgaWYgKCBsaWtlbHkoY3B1X2hhc192bXhfdnBpZF9pbnZ2cGlkX2luZGl2aWR1YWxf
+YWRkcikgKQ0KPj4gLSAgICAgICAgZ290byBleGVjdXRlX2ludnZwaWQ7DQo+PiAtDQo+PiAt
+ICAgIHR5cGUgPSBJTlZWUElEX1NJTkdMRV9DT05URVhUOw0KPj4gKyAgICBpZiAoIHVubGlr
+ZWx5KCFjcHVfaGFzX3ZteF92cGlkX2ludnZwaWRfaW5kaXZpZHVhbF9hZGRyKSApDQo+PiAr
+ICAgICAgICB0eXBlID0gSU5WVlBJRF9TSU5HTEVfQ09OVEVYVDsNCj4+ICAgDQo+PiAgICAg
+ICAvKg0KPj4gICAgICAgICogSWYgc2luZ2xlIGNvbnRleHQgaW52YWxpZGF0aW9uIGlzIG5v
+dCBzdXBwb3J0ZWQsIHdlIGVzY2FsYXRlIHRvDQo+PiAgICAgICAgKiB1c2UgYWxsIGNvbnRl
+eHQgaW52YWxpZGF0aW9uLg0KPj4gICAgICAgICovDQo+PiAtICAgIGlmICggIWNwdV9oYXNf
+dm14X3ZwaWRfaW52dnBpZF9zaW5nbGVfY29udGV4dCApDQo+PiArICAgIGlmICggdW5saWtl
+bHkoIWNwdV9oYXNfdm14X3ZwaWRfaW52dnBpZF9zaW5nbGVfY29udGV4dCkgKQ0KPj4gICAg
+ICAgICAgIHR5cGUgPSBJTlZWUElEX0FMTF9DT05URVhUOw0KPj4gICANCj4+IC1leGVjdXRl
+X2ludnZwaWQ6DQo+PiAgICAgICBfX2ludnZwaWQodHlwZSwgdi0+YXJjaC5odm0ubjFhc2lk
+LmFzaWQsICh1NjQpZ3ZhKTsNCj4+ICAgfQ0KPiANCj4gQnV0IHRoaXMgaXNuJ3QgZnVuY3Rp
+b25hbGx5IGlkZW50aWNhbCB0byB0aGUgb3JpZ2luYWwsIGF0IGxlYXN0IGluIHRoZQ0KPiBj
+cHVfaGFzX3ZteF92cGlkX2ludnZwaWRfaW5kaXZpZHVhbF9hZGRyICYmDQo+ICFjcHVfaGFz
+X3ZteF92cGlkX2ludnZwaWRfc2luZ2xlX2NvbnRleHQgY2FzZS4gV2UnZCBub3cgZW5kIHVw
+IHVzaW5nDQo+IElOVlZQSURfQUxMX0NPTlRFWFQgdGhlcmUsIHdoZW4gaXQgd2FudHMgdG8g
+Y29udGludWUgdG8gYmUNCj4gSU5WVlBJRF9JTkRJVklEVUFMX0FERFIuDQo+IA0KDQpZZXMs
+IHRob3VnaCBhIGdvb2QgcXVlc3Rpb24gaXMgdG8ga25vdyBpZiB0aGVyZSBleGlzdCBhIENQ
+VSB0aGF0IGhhcyANCklOVlZQSURfSU5ESVZJRFVBTF9BRERSIHdpdGhvdXQgSU5WVlBJRF9T
+SU5HTEVfQ09OVEVYVDsgb3RoZXJ3aXNlLCB3ZSANCmNhbiBqdXN0IHNheSB0aGF0IHRoaXMg
+aXMgbm90IHN1cHBvc2VkIHRvIGhhcHBlbi4NCg0KT25lIGFsdGVybmF0aXZlIEkgaGF2ZSBp
+biBtaW5kIHdvdWxkIGJlIHRvIGhhdmUgY2FzY2FkaW5nIGZhbGxiYWNrcyB0byANCiJsYXJn
+ZXIgc2NvcGUiIGFsdGVybmF0aXZlcy4NCg0KaS5lDQoNCnN0YXRpYyBpbmxpbmUgdm9pZCB2
+cGlkX3N5bmNfYWxsKHZvaWQpDQp7DQogICAgIF9faW52dnBpZChJTlZWUElEX0FMTF9DT05U
+RVhULCAwLCAwKTsNCn0NCg0Kc3RhdGljIGlubGluZSB2b2lkIHZwaWRfc3luY192Y3B1X2Nv
+bnRleHQoY29uc3Qgc3RydWN0IHZjcHUgKnYpDQp7DQogICAgIC8qDQogICAgICAqIElmIHNp
+bmdsZSBjb250ZXh0IGludmFsaWRhdGlvbiBpcyBub3Qgc3VwcG9ydGVkLCB3ZSBlc2NhbGF0
+ZSB0bw0KICAgICAgKiB1c2UgYWxsIGNvbnRleHQgaW52YWxpZGF0aW9uLg0KICAgICAgKi8N
+CiAgICAgaWYgKCB1bmxpa2VseSghY3B1X2hhc192bXhfdnBpZF9pbnZ2cGlkX3NpbmdsZV9j
+b250ZXh0KSApDQogICAgICAgICByZXR1cm4gdnBpZF9zeW5jX2FsbCgpOw0KDQogICAgIF9f
+aW52dnBpZChJTlZWUElEX1NJTkdMRV9DT05URVhULCB2LT5hcmNoLmh2bS5uMWFzaWQuYXNp
+ZCwgMCk7DQp9DQoNCnN0YXRpYyBpbmxpbmUgdm9pZCB2cGlkX3N5bmNfdmNwdV9ndmEoc3Ry
+dWN0IHZjcHUgKnYsIHVuc2lnbmVkIGxvbmcgZ3ZhKQ0Kew0KICAgICAvKg0KICAgICAgKiBJ
+ZiBpbmRpdmlkdWFsIGFkZHJlc3MgaW52YWxpZGF0aW9uIGlzIG5vdCBzdXBwb3J0ZWQsIHdl
+IGVzY2FsYXRlIHRvDQogICAgICAqIHVzZSBzaW5nbGUgY29udGV4dCBpbnZhbGlkYXRpb24u
+DQogICAgICAqLw0KICAgICBpZiAoIHVubGlrZWx5KCFjcHVfaGFzX3ZteF92cGlkX2ludnZw
+aWRfaW5kaXZpZHVhbF9hZGRyKSApDQogICAgICAgICByZXR1cm4gdnBpZF9zeW5jX3ZjcHVf
+Y29udGV4dCh2KTsNCg0KICAgICBfX2ludnZwaWQoSU5WVlBJRF9JTkRJVklEVUFMX0FERFIs
+IHYtPmFyY2guaHZtLm4xYXNpZC5hc2lkLCAodTY0KWd2YSk7DQp9DQoNClRoYXQgcmVxdWly
+ZXMgaW50cm9kdWNpbmcgdnBpZF9zeW5jX3ZjcHVfY29udGV4dCgpIGFoZWFkLCBidXQgd291
+bGQgDQphdm9pZCB0aGUgY29ybmVyIGNhc2Ugd2l0aG91dCBtYWtpbmcgdGhpbmdzIHRvbyBj
+b21wbGV4Lg0KDQo+IEphbg0KDQpUZWRkeQ0K
 
-Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
----
+--------------cdWuHpJTJGfKkHXL2uBsgWx0--
 
-In v3:
+--------------diKt5bgiUxQOPK85h8LhfW89
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-* For compatibility, keep the existing behaviour when the
-  feature flag is not enabled.
-* GP fault if reserved bits are set.
-* GP fault if APIC vector is set when !direct.
+-----BEGIN PGP SIGNATURE-----
 
- xen/arch/x86/hvm/viridian/time.c     | 44 ++++++++++++++++++++++++----
- xen/arch/x86/hvm/viridian/viridian.c |  3 ++
- xen/include/public/hvm/params.h      |  7 ++++-
- 3 files changed, 47 insertions(+), 7 deletions(-)
+wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmqjy0AFAwAAAAAACgkQZg+p0QLLz9BR
+LQwAkp3KeVor4hR32DbMDuwGgOSye0kEZucv30/cDP2QJ3cusq50PMIpx28zT+p30iHcjuuqv8lg
+o+Rw+zJDktUCDlN4DqywcqbB/rV0eZZefiQOoIQN0YSdSKrcXrCvKQ/MQicywqxI73iFQ5cpCZUT
+iIzwpqXu7sJOVspoVT7uMttXQBlaqY+eYYsAmyWbg/Xzx2gws3zpPPlBJH8CI2rX3QPYjULv6NWu
++xhCE8EeKktpbakqFJWVbgkQNB1/JMuznOaDRQYSoPRyU+ZQVOf4C1t/qXdx7p/t0dVEUETLnvQq
+pzCP41PnkoLLHczLAbh936gb+9E8Qu1r/XiXmtd6ukGSJ3kTyBmLhiFbErq0r1eXg1+XldJbWlI7
+h/BiemZ8o+QBg/S9/wZupgSMToHMYTg1pLyEcIsnalE3N4AoBhZXHPZOF/lm3Q5DySdv+/aZ5Mhl
+e77XawD105+ct7x/57jXNKEdlAonI4FRUoK7pKAZcjuMpxL6QQYvfNHUB7Dv
+=zp7d
+-----END PGP SIGNATURE-----
 
-diff --git a/xen/arch/x86/hvm/viridian/time.c b/xen/arch/x86/hvm/viridian/time.c
-index 082528dc9416..65654cf96937 100644
---- a/xen/arch/x86/hvm/viridian/time.c
-+++ b/xen/arch/x86/hvm/viridian/time.c
-@@ -223,6 +223,21 @@ static void start_stimer(struct viridian_stimer *vs)
-     set_timer(&vs->timer, timeout + NOW());
- }
- 
-+static bool stimer_direct_mode(const struct vcpu *v,
-+                               const union hv_stimer_config *config)
-+{
-+    return (viridian_feature_mask(v->domain) & HVMPV_stimer_direct) &&
-+           config->direct_mode;
-+}
-+
-+static void stimer_deliver_direct(struct vcpu *v, const struct viridian_stimer *vs)
-+{
-+    struct vlapic *vlapic = vcpu_vlapic(v);
-+
-+    if ( vlapic_enabled(vlapic) )
-+        vlapic_set_irq(vlapic, vs->config.apic_vector, 0);
-+}
-+
- static void poll_stimer(struct vcpu *v, unsigned int stimerx)
- {
-     struct viridian_vcpu *vv = v->arch.hvm.viridian;
-@@ -242,9 +257,11 @@ static void poll_stimer(struct vcpu *v, unsigned int stimerx)
-     if ( !test_bit(stimerx, &vv->stimer_pending) )
-         return;
- 
--    if ( !viridian_synic_deliver_timer_msg(v, vs->config.sintx,
--                                           stimerx, vs->expiration,
--                                           time_ref_count(v->domain)) )
-+    if ( stimer_direct_mode(v, &vs->config) )
-+        stimer_deliver_direct(v, vs);
-+    else if ( !viridian_synic_deliver_timer_msg(v, vs->config.sintx,
-+                                                stimerx, vs->expiration,
-+                                                time_ref_count(v->domain)) )
-         return;
- 
-     clear_bit(stimerx, &vv->stimer_pending);
-@@ -361,6 +378,7 @@ int viridian_time_wrmsr(struct vcpu *v, uint32_t idx, uint64_t val)
-     case HV_X64_MSR_STIMER2_CONFIG:
-     case HV_X64_MSR_STIMER3_CONFIG:
-     {
-+        union hv_stimer_config new;
-         unsigned int stimerx = (idx - HV_X64_MSR_STIMER0_CONFIG) / 2;
-         struct viridian_stimer *vs =
-             &array_access_nospec(vv->stimer, stimerx);
-@@ -368,11 +386,21 @@ int viridian_time_wrmsr(struct vcpu *v, uint32_t idx, uint64_t val)
-         if ( !(viridian_feature_mask(d) & HVMPV_stimer) )
-             return X86EMUL_EXCEPTION;
- 
-+        new.as_uint64 = val;
-+
-+        if ( new.reserved_z0 || new.reserved_z1 )
-+            return X86EMUL_EXCEPTION;
-+
-+        if ( stimer_direct_mode(v, &new) ?
-+             new.apic_vector < 0x10 : new.apic_vector )
-+            return X86EMUL_EXCEPTION;
-+
-         stop_stimer(vs);
- 
-         vs->config.as_uint64 = val;
- 
--        if ( !vs->config.sintx || !vs->count )
-+        if ( (!stimer_direct_mode(v, &vs->config) && !vs->config.sintx) ||
-+             !vs->count )
-             vs->config.enable = 0;
- 
-         if ( vs->config.enable )
-@@ -583,8 +611,12 @@ void viridian_time_load_vcpu_ctxt(
- 
-         vs->config.as_uint64 = ctxt->stimer_config_msr[i];
-         vs->count = ctxt->stimer_count_msr[i];
--        if ( !vs->config.sintx || !vs->count )
--            /* Reject enabling with a zero sintx or count fields. */
-+        if ( (!stimer_direct_mode(v, &vs->config) && !vs->config.sintx) ||
-+             !vs->count )
-+            /*
-+             * Reject enabling with a zero sintx (if not using direct mode) or
-+             * zero count field.
-+             */
-             vs->config.enable = 0;
-     }
- }
-diff --git a/xen/arch/x86/hvm/viridian/viridian.c b/xen/arch/x86/hvm/viridian/viridian.c
-index 90e749ceb581..90be5842b995 100644
---- a/xen/arch/x86/hvm/viridian/viridian.c
-+++ b/xen/arch/x86/hvm/viridian/viridian.c
-@@ -78,6 +78,7 @@ typedef union _HV_CRASH_CTL_REG_CONTENTS
- #define CPUID3D_CPU_DYNAMIC_PARTITIONING (1 << 3)
- #define CPUID3D_CRASH_MSRS (1 << 10)
- #define CPUID3D_SINT_POLLING (1 << 17)
-+#define CPUID3D_STIMER_DIRECT_MODE (1 << 19)
- 
- /* Viridian CPUID leaf 4: Implementation Recommendations. */
- #define CPUID4A_HCALL_REMOTE_TLB_FLUSH (1 << 2)
-@@ -185,6 +186,8 @@ void cpuid_viridian_leaves(const struct vcpu *v, uint32_t leaf,
-             res->d |= CPUID3D_CRASH_MSRS;
-         if ( viridian_feature_mask(d) & HVMPV_synic )
-             res->d |= CPUID3D_SINT_POLLING;
-+        if ( viridian_feature_mask(d) & HVMPV_stimer_direct )
-+            res->d |= CPUID3D_STIMER_DIRECT_MODE;
- 
-         break;
-     }
-diff --git a/xen/include/public/hvm/params.h b/xen/include/public/hvm/params.h
-index 99c40b4287f1..4db5142970c2 100644
---- a/xen/include/public/hvm/params.h
-+++ b/xen/include/public/hvm/params.h
-@@ -159,6 +159,10 @@
- #define _HVMPV_cpu_hotplug 12
- #define HVMPV_cpu_hotplug (1 << _HVMPV_cpu_hotplug)
- 
-+/* Enable STIMER direct mode */
-+#define _HVMPV_stimer_direct 13
-+#define HVMPV_stimer_direct (1 << _HVMPV_stimer_direct)
-+
- #define HVMPV_feature_mask \
-         (HVMPV_base_freq | \
-          HVMPV_no_freq | \
-@@ -172,7 +176,8 @@
-          HVMPV_hcall_ipi | \
-          HVMPV_ex_processor_masks | \
-          HVMPV_no_vp_limit | \
--         HVMPV_cpu_hotplug)
-+         HVMPV_cpu_hotplug | \
-+         HVMPV_stimer_direct)
- 
- #endif
- 
--- 
-2.53.0
-
+--------------diKt5bgiUxQOPK85h8LhfW89--
 
