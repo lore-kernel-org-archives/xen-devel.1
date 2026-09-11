@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 054B4C88E53
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 16:56:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1417614.1646313 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B6A2DC88E4D
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 16:59:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1417622.1646322 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x54XP-00065T-FX; Fri, 11 Sep 2026 16:55:43 +0000
+	id 1x54b4-00077H-Tx; Fri, 11 Sep 2026 16:59:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1417614.1646313; Fri, 11 Sep 2026 16:55:43 +0000
+Received: by outflank-mailman (output) from mailman id 1417622.1646322; Fri, 11 Sep 2026 16:59:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x54XP-00065M-Cl; Fri, 11 Sep 2026 16:55:43 +0000
-Received: by outflank-mailman (input) for mailman id 1417614;
- Fri, 11 Sep 2026 16:55:42 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x54b4-00077A-Qv; Fri, 11 Sep 2026 16:59:30 +0000
+Received: by outflank-mailman (input) for mailman id 1417622;
+ Fri, 11 Sep 2026 16:59:30 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <david@kernel.org>) id 1x54XN-00065E-Ry
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:55:42 +0000
+ (envelope-from <david@kernel.org>) id 1x54b4-000770-3Y
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:59:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x54XN-00EURr-7w
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 18:55:41 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x54b3-001wIo-GV
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 18:59:29 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <david@kernel.org>)
- id 6aa4326e-8faa-0a2a0a5109dd-0a2a4508e826-18
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 18:55:41 +0200
+ id 6aa43365-2eae-0a2a0a5409dd-0a2a4501d9f8-20
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 18:59:29 +0200
 Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <david@kernel.org>)
- id 6aa4328b-f659-0a2a45080019-aceafc1fcf78-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 18:55:40 +0200
+ id 6aa4336f-5984-0a2a45010019-aceafc1fd7b4-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 18:59:29 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 7B0824005A;
- Fri, 11 Sep 2026 16:55:38 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7EEC91F00893;
- Fri, 11 Sep 2026 16:55:21 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 27F0C447B3;
+ Fri, 11 Sep 2026 16:59:27 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 379961F00898;
+ Fri, 11 Sep 2026 16:59:11 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,17 +52,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789145738;
-	bh=yE+7Pez0ot5mrGbBn0XwFu3bOI3y9SJeDDhq4Pq3Cgc=;
+	s=k20260515; t=1789145967;
+	bh=qM4x/VyJS4MpFkPRmtAp/dwZSEf7BNj/Y7zsnmyHsqg=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=c0NoZhUuLC8eojSn10Dl+/6UkGx8wGOb/eBDtEA0CIyk1hQ6mP9dgGNHHGBX3N7yA
-	 X71r+aiXtzF4bhp3C1o/xG+WbKq9dsGWuGA3Hu4bxgxtDeR0HzLHnKDlSwnkTzN4I0
-	 yNFvdrydYpmyeMrh9F90cWrJC226CBBW/A2ArZjcVPRInVrizb9o3/D2/gMDnyMPx1
-	 YbCSjQU+p0HSOBH8E3Fyc1mpmYrLR8tCHSP8jSjf3gDgXExbXqvDifcxjWpIDa/PKf
-	 vZyITqtq+KtGCpN47eXarSnhSRPzuOIVrud/pd7SbcUw4idHZQTzpTNbHJv4fgl0sg
-	 qtZmvLKps6t8w==
-Message-ID: <dd6ecac2-9bd2-4184-a034-9e13afa614bb@kernel.org>
-Date: Fri, 11 Sep 2026 18:55:18 +0200
+	b=Ou4A8YC2F6O1EQtFW1YZOr6bVr2+s+ihTPkOTXSuzLWS+Cc6eD6PIOzLJeuiKIyvQ
+	 JwxsyI6YUXmX45BBAQxB8OYi/wyHeoP2FZWOx4kh82jj8klR9F/LQ8bOCWxW/Oo6Re
+	 Eo8mW9QEcAaGuTtykPlAmcPJuXu5gk0wxaGfd2AVAWl/D2lawDmMhQg3iDYUwUuHYw
+	 zuWtfU0zvPCWxENsoROZd8H/uu73aHGKmzvV36atSCabSMGxHjg64KkTpB12LVGbzh
+	 HWFSQPEDWDvZ5Hi73zQYh3QYUlItPYuBwtcY1gGae8CFr1qGgQfyIGrRgrWzKBkGHM
+	 6ZbPiVuTm6ijA==
+Message-ID: <d5093fa7-d057-471d-9c50-f53e6fe267df@kernel.org>
+Date: Fri, 11 Sep 2026 18:59:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v2 0/8] mm: distinguish PTE table storage from PTE values
@@ -155,76 +155,18 @@ Autocrypt: addr=david@kernel.org; keydata=
 In-Reply-To: <20260903103002.1091859-1-usama.anjum@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1789145741-D634587B-F23CD767/0/0
+X-purgate-ID: tlsNG-d62444/1789145969-1DC79757-6ED03AA5/0/0
 X-purgate-type: clean
-X-purgate-size: 3414
+X-purgate-size: 224
 
 On 9/3/26 12:29, Muhammad Usama Anjum wrote:
 > Hi,
-> 
-> pte_t currently describes both a software PTE value and an element stored
-> in a PTE table. Consequently, pte_t * can point either to a software PTE
-> value, often a stack copy, or to a PTE-table slot. The compiler cannot
-> distinguish these cases. A value pointer can therefore be passed to an
-> interface that expects table storage, while table storage can be read by
-> direct dereference instead of the architecture accessor.
-> 
-> This series begins a staged conversion at the PTE level. It introduces
-> hw_pte_t as the element type for PTE-table storage and converts generic
-> MM to use hw_pte_t *. Software PTE values remain pte_t. Interfaces that
-> intentionally return a value through pte_t *, such as install_pte,
-> remain value interfaces; the relevant parameters are named ptentp to
-> make that distinction explicit.
-> 
-> The generic definition aliases hw_pte_t to pte_t unless an architecture
-> selects ARCH_HAS_HW_PTE_T, which enables a distinct generic wrapper named
-> __hw_pte_t. Some architectures define pgtable_t in headers parsed before
-> the generic hw_pte_t typedef is visible. The structure tag allows those
-> headers to define pgtable_t as struct __hw_pte_t * without creating an
-> include-order dependency. This is required when converting s390, m68k,
-> powerpc and sparc.
-> 
-> No architecture selects ARCH_HAS_HW_PTE_T in this series, so the
-> representation and behavior of every architecture are preserved. ptep_get()
-> keeps its existing READ_ONCE() semantics and converts the stored element
-> through __pte_from_hw(). An architecture can later select the option and
-> convert its PTE interfaces to make the distinction compiler-enforced.
-> Architecture PTE implementations and most architecture code are
-> deliberately left for those later opt-in conversions.
-> 
-> Here, hw_pte_t identifies PTE-table storage rather than table lifetime:
-> complete PTE tables use hw_pte_t whether or not they are currently
-> linked into a page-table hierarchy, while software PTE values use
-> pte_t. The distinction between complete but unlinked tables and
-> hardware-reachable tables was raised during discussion and remains an
-> important point for review.
-> 
-> PMD, PUD, P4D and PGD storage are deliberately out of scope. They can be
-> converted in later series after the PTE boundary is agreed, avoiding the
-> PMD-specific cases that made an all-level conversion difficult to
-> review.
-> 
-> Most mechanical pointer conversions were generated with the Coccinelle
-> script included below, then audited and fixed by hand.
-> 
-> This series does not add a second ptep_get_once() accessor and does not
-> remove or replace STRICT_MM_TYPECHECKS.
-> 
-> The design discussion is available at [1]; while the original idea came
-> from [2].
-> 
-> I've the patches here [3] for arm64 conversion which I used to find
-> usages in generic code which I missed during development. These would be
-> sent separately.
 
-Unless there is more feedback on the overall approach, the next step for this is
-to have at least one architecture support posted.
+Btw, I was wonder whether the subject would be better as
 
-We should only merge this if at least one architecture (better two? :) arm64 and
-s390x? ) would merge the architecture bits.
+"mm: distinguish HW PTE pointers from SW PTE value pointers"
 
-That is, we should get an ACK from the arch maintainer son the common code bits
-and the arch bits.
+or sth. like that.
 
 -- 
 Cheers,
