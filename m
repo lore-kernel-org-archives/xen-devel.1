@@ -4,45 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E9D7C88E4D
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 18:46:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1417762.1646391 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38087C88E4D
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 18:53:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1417786.1646401 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x56Gb-0002M2-CR; Fri, 11 Sep 2026 18:46:29 +0000
+	id 1x56NE-000463-1r; Fri, 11 Sep 2026 18:53:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1417762.1646391; Fri, 11 Sep 2026 18:46:29 +0000
+Received: by outflank-mailman (output) from mailman id 1417786.1646401; Fri, 11 Sep 2026 18:53:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x56Gb-0002Lv-9m; Fri, 11 Sep 2026 18:46:29 +0000
-Received: by outflank-mailman (input) for mailman id 1417762;
- Fri, 11 Sep 2026 18:46:28 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=MCJj=HD=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
- id 1x56Ga-0002Ln-56
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 18:46:28 +0000
+	id 1x56ND-00045w-Uv; Fri, 11 Sep 2026 18:53:19 +0000
+Received: by outflank-mailman (input) for mailman id 1417786;
+ Fri, 11 Sep 2026 18:53:19 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1x56ND-00045q-7p
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 18:53:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x56GY-006Y5d-U3
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 20:46:26 +0200
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <SRS0=MCJj=HD=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
- id 6aa44c7e-8faa-0a2a0a5109dd-0a2a4503d480-8
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 20:46:26 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <SRS0=MCJj=HD=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
- id 6aa44c81-fae8-0a2a45030019-aceafc1f9768-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 20:46:26 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 79CD3410C6;
- Fri, 11 Sep 2026 18:46:24 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 52E991F000FF;
- Fri, 11 Sep 2026 18:46:24 +0000 (UTC)
-Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
- id 17178CE1902; Fri, 11 Sep 2026 11:46:24 -0700 (PDT)
+ id 1x56NC-0033NG-Fs
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 20:53:18 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6aa44e1c-8faa-0a2a0a5109dd-0a2a4501d5e2-4
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 20:53:18 +0200
+Received: from [162.55.131.47] (helo=support.bugseng.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6aa44e1e-5984-0a2a45010019-a237832fbf7c-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 20:53:18 +0200
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id EF2BC4EE01FE;
+ Fri, 11 Sep 2026 20:53:17 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,148 +49,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789152384;
-	bh=BEH5L0y3LixWWPpE999YsoF8vwfZIA/JtkIUSaMP+LE=;
-	h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To;
-	b=M9R+fJHeZmy6WEfJ+D6CNLH+c3kjB5rut7ErP2+h8nVsKa7j3etNfbwtdp8rS80MS
-	 fPhFABuFdrUdvOlZdTQAQCr61orU4wm/RjC2OU7poW1VrwvZyfgZGrC+qE1sarkPq0
-	 QuxzQZPObBkWqJyMQach0VVskbIlHcGS9oQDOKxfOvJgnVD5bycCjFRDIgaYdLH17Q
-	 UJmHrZwzXcEdIcRWoMRdQtTKfYNAHGRWaw/E2J3Bjse6JBE5JIuSHCfhhwe6AtNnRq
-	 Z179pIn76KHvhsX6T+IKzErceu3YloUEBWmwjn5CgynJh7djSuiFdwsOpDYYGmPtoi
-	 fH4mBz7X+Zqjw==
-Date: Fri, 11 Sep 2026 11:46:24 -0700
-From: "Paul E. McKenney" <paulmck@kernel.org>
-To: Josef Bacik <josef@toxicpanda.com>
-Cc: Frederic Weisbecker <frederic@kernel.org>,
-	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
-	Joel Fernandes <joelagnelf@nvidia.com>,
-	Boqun Feng <boqun@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>, Jiri Olsa <jolsa@kernel.org>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	Andrii Nakryiko <andrii@kernel.org>, x86@kernel.org,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>,
-	Xu Kuohai <xukuohai@huaweicloud.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Josh Triplett <josh@joshtriplett.org>,
-	Uladzislau Rezki <urezki@gmail.com>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Lai Jiangshan <jiangshanlai@gmail.com>,
-	Zqiang <qiang.zhang@linux.dev>, Juergen Gross <jgross@suse.com>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Ihor Solodrai <ihor.solodrai@linux.dev>,
-	linux-kernel@vger.kernel.org, rcu@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH RFC v2 15/15] rcu-tasks: Kick running holdouts through
- the scheduler
-Message-ID: <78c438b0-9c9a-4307-a6f7-19e69adc20c0@paulmck-laptop>
-Reply-To: paulmck@kernel.org
-References: <20260911-b4-rcu-tasks-preempt-qs-v2-0-eaaa61ed2da4@toxicpanda.com>
- <20260911-b4-rcu-tasks-preempt-qs-v2-15-eaaa61ed2da4@toxicpanda.com>
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1789152798;
+	b=NFGGyry99wHxT89hqTXy6eIQDuDC0zg6dv+ZvKqXpfEdWnzDqEYI9I35Jz3z4BNifFP8
+	 EAGiJ5+SUSK8NjkFnGbMEU02Y6DEGnh8m/wh1y5j1zhMh1jzKVnURIjLtAvrVWHluRYSA
+	 7uVZx7EEn45BZSyP5xddcMMAi6CMOQau5jg46jH14XIWOF8X1nO+XsKTvZIC5UyF7UW6l
+	 lfJ/jdGlhqWw6P4tyd5bXEyRGrW+wZqoH2eJ0Q0qHTQuHNq0KFp14gxfRJDEHz4QOhbH5
+	 FgjwS/FMpmqr6wn9vTEKN+xWKE2Wt5rCWa2eExGyuBzqyC8zsRR8g6EZC+b1kPLM3y7TO
+	 m229J0+Mv18vuFn300VWRQEr1chqMKZfh2Hl783mGMvB19EVoxxcrABeaCoeJMeRu+P3X
+	 OHBsykeoxLWWTV9OzYJRB6ZpcWja8fPdAoL8rJ+EafUK+4MyKgrQncg+7s6k81WXZDvCu
+	 /eoYnn2OI04MDRE8MdFtSjpoPCB7wA20y6mYRm4letMt7sL7+1kx9I7cB906HEeEUgEQT
+	 VzbNXq3pKceyZLXjSem2Epo62NRHWj/rK16h9LZL+tvlr7VWhJ1HrEfRobrrBMq0Puc2c
+	 V7g9R+PXLgQMWZ1cIRelDn91bSK68SJmnBifVDjaYZCumElRr090xzFGJdFH944=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1789152798;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=/Nl/bXoLlpRodQiguxc1BmSbW9w9homJBvBgY3Cas0s=;
+	b=YWIne7AgnBevLcbDiNdGiNA6bj6VBfqjURLyj8Vxc7rZyifFoKsuS3CnPJWcqVr16hoX
+	 GrDWChT7wQsZL97iy2ulvAcjl/qObxaGCj2NX1wzTGr9AKZ7Qo0maLEXH2CiQwSQ8TZJB
+	 udAE1gUfDRWVJAzszsy7kByM7u27KIvJ7O4q7FC8hyrtClDUSpA28+HwFUCcHp+EG+9yf
+	 7y7g0LraJyAM9IsWyRjmyEiTt4U4t4cgYPDm4GVORL3ykCG085Gfog4EL8zYtz7wUA9hA
+	 zFXLL4mwHWkIMtVgJBaNmPqaagQMfLvLIsKZsis5qpJji0a1Xg92+SzjenEzKzTpDTkGd
+	 eS9xCpAV1LsPi9RTsWQKt9Hk8BOOK44caXeezMFSqTmwHnWvotTVN5PT6kFhbtR/FkjJF
+	 ykJM7Z4inbTiN5p6oEy/K9MVhxc1Md5I0DfCg2nup/BKoj/1IKyO2+fyZI1GFmiPNFaU0
+	 1I6WKJQNU5d20CLSQaYUDUp1T/hGrxNS/Oj57uvwmS2Lsy66w99RKVkj4ZeDvichEgcx+
+	 3DM7OVFyi0FqLrAJzhzCemEhp9vfSSI30Q3iy0ztCxnHtwhufGyPhLlySAmlGOgNHecAN
+	 9f3h72gTfxZ2TSXuIjhYTs0H40tkw+IppsuyCTXsYuW4XapUl83BKMzMqrsbQqU=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260911-b4-rcu-tasks-preempt-qs-v2-15-eaaa61ed2da4@toxicpanda.com>
-X-purgate-ID: tlsNG-33051d/1789152386-6C8DD4E9-89564143/0/0
+Date: Fri, 11 Sep 2026 20:53:17 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: Jan Beulich <jbeulich@suse.com>, xen-devel@lists.xenproject.org, Andrew
+ Cooper <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>
+Subject: Re: [PATCH 05/12] x86/crash: address Misra 2.1 rule violation
+In-Reply-To: <aqKikxvL_6SCs_Cj@macbook.local>
+References: <90d0e3d6-2e12-43f1-815d-7936ca4c5fc6@suse.com>
+ <96de425a-29f7-4759-8466-b72bbe40b90b@suse.com>
+ <aqJhJO2FtkrJCabM@macbook.local>
+ <f17563f9-3a42-4002-afa0-b763e125dcd6@suse.com>
+ <aqJ4myv4_II75W5K@macbook.local>
+ <f51588b3-4100-4353-a35d-ac0780f2aab0@suse.com>
+ <aqKikxvL_6SCs_Cj@macbook.local>
+Message-ID: <46dcfb81294d6f644a4d3f3c11b1f47e@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1789152798-BCF47757-0521F5DA/0/0
 X-purgate-type: clean
-X-purgate-size: 3285
+X-purgate-size: 2351
 
-On Fri, Sep 11, 2026 at 02:08:53PM +0000, Josef Bacik wrote:
-> A holdout that is running on a CPU with nothing else runnable is only
-> preempted if the tick acts on rcu_request_urgent_qs_task()'s flag, and
-> there may be no tick.  Now that a preemption outside a trampoline is a
-> quiescent state, have check_holdout_task() call resched_cpu() on a
-> running holdout as well, so the scheduler IPIs it and it goes through
-> __schedule() and reports (or, if it is inside a trampoline, does not
-> report) its own state with purely local ordering.  Nothing reads a
-> running task's rcu_tramp_nesting remotely.
+On 2026-09-10 14:29, Roger Pau Monné wrote:
+> On Thu, Sep 10, 2026 at 11:52:10AM +0200, Jan Beulich wrote:
+>> On 10.09.2026 11:30, Roger Pau Monné wrote:
+>> > On Thu, Sep 10, 2026 at 10:38:34AM +0200, Jan Beulich wrote:
+>> >> On 10.09.2026 09:49, Roger Pau Monné wrote:
+>> >>> On Fri, Aug 28, 2026 at 09:02:18AM +0200, Jan Beulich wrote:
+>> >>>> The use of unreachable(), when unreachability is visible to Eclair (and
+>> >>>> compilers), is deemed a violation. Drop the redundant statement.
+>> >>>
+>> >>> Urg, isn't that something that should be fixed in Eclair then?
+>> >>> Otherwise all the unreachable() calls in our codebase are likely to be
+>> >>> found by Eclair sooner or later, and will need to be removed.
+>> >>
+>> >> No, aiui most are covered by deviations. In particular ones in BUG() and
+>> >> ASSERT_UNREACHABLE().
+>> >
+>> > Shouldn't this be a deviation then also?
+>> 
+>> Maybe, just that I had no good idea how to express such a deviation 
+>> (preferably
+>> without a SAF comment).
+>> 
+>> >  Maybe it would be helpful if
+>> > the commit message states why this is handled differently from other
+>> > unreachable() instances then.
+>> 
+>> I've added "..., , and the one here isn't covered by a deviation" to 
+>> the first
+>> sentence. Will that suffice?
 > 
-> Only under CONFIG_RCU_TASKS_PREEMPT_QS; other architectures are
-> unchanged.
+> TBH, the handling of unreachable() feels inconsistent to me.  I don't
+> blame you for this, I know you are just trying to fix the remaining
+> issues.
 > 
-> Suggested-by: Paul E. McKenney <paulmck@kernel.org>
-> Assisted-by: LLM
-> Signed-off-by: Josef Bacik <josef@toxicpanda.com>
-
-Much better!  But please see below.
-
-							Thanx, Paul
-
-> ---
->  kernel/rcu/tasks.h | 11 +++++++++++
->  1 file changed, 11 insertions(+)
+> I guess I will defer the change to someone more familiar with MISRA
+> and why some unreachable() usages are covered by deviations while
+> others aren't.
 > 
-> diff --git a/kernel/rcu/tasks.h b/kernel/rcu/tasks.h
-> index ba432bd922e2..02d2592ab7a3 100644
-> --- a/kernel/rcu/tasks.h
-> +++ b/kernel/rcu/tasks.h
-> @@ -1038,8 +1038,18 @@ static bool rcu_tasks_preempted_qs(struct task_struct *t)
->  {
->  	return task_call_func(t, rcu_tasks_switched_out_clean, NULL);
->  }
-> +
-> +/* Make a running holdout pass through __schedule() soon, tick or no tick. */
-> +static void rcu_tasks_kick_running(struct task_struct *t)
-> +{
-> +	int cpu = task_cpu(t);
-> +
-> +	if (task_curr(t) && cpu_online(cpu))
-> +		resched_cpu(cpu);
-> +}
->  #else
->  static bool rcu_tasks_preempted_qs(struct task_struct *t) { return false; }
-> +static void rcu_tasks_kick_running(struct task_struct *t) { }
->  #endif
->  
->  /* Per-task initial processing. */
-> @@ -1219,6 +1229,7 @@ static void check_holdout_task(struct task_struct *t,
->  		return;
->  	}
->  	rcu_request_urgent_qs_task(t);
-> +	rcu_tasks_kick_running(t);
-
-Something I learned the hard way, though Google paid most of the tuition
-for this lesson:  There can be a *lot* of tasks on large systems, as
-in hundreds of thousands of them.  If these tasks are consuming CPU in
-very short bursts, we could easily repeatedly invoke resched_cpu() on
-the same CPU, and all invocations other than the last one are redundant.
-
-I instead suggest doing something similar to force_qs_rnp(), where a
-cpumask is accumulated and at the end resched_cpu() is invoked for each
-CPU with a bit set in that mask.
-
-Of course, if a CPU appears twice while traversing the tasks list, then
-each of those tasks did a context switch, which would have reported a
-Tasks RCU quiescent state.  Unless those tasks happened to have non-zero
-->rcu_tramp_nesting at that time.
-
-Which suggests that each task have a pair of counters.  Or that
-rcu_tasks_trampoline_exit() should check for zero ->rcu_tramp_nesting,
-and report a quiescent state at that point.
-
-Either way, if a CPU appears only once in the tasks_list traversal,
-hitting it with resched_cpu() makes sense.  Though we might also
-need to suppress calls to resched_cpu() for grace periods that are
-(say) less than one second old.
-
-Thoughts?
-
-							Thanx, Paul
-
->  	if (!needreport)
->  		return;
->  	if (*firstreport) {
+> I think the point of adding something to the commit message is to
+> justify why this is removed vs a deviation being added.
 > 
-> -- 
-> 2.55.0
-> 
-> 
+
+Actually this should be done with a deviation, and I thought it was 
+already taken care of by
+
+-config=MC3A2.R2.1,statements+={deliberate, 
+"call(decl(name(__builtin_unreachable||panic||do_unexpected_trap||machine_halt||machine_restart||reboot_or_halt)))"}
+
+namely because unreachable() expands to a call to 
+__builtin_unreachable(). It might be worth checking why that is not the 
+case. Probably the configuration needs a slight tweaking.
+
+-- 
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
