@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EF3AC88E45
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71475C88E58
 	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 14:37:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1417071.1646035 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1417062.1646022 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x52NF-0006G3-Ku; Fri, 11 Sep 2026 14:37:05 +0000
+	id 1x52NB-0005Zr-9B; Fri, 11 Sep 2026 14:37:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1417071.1646035; Fri, 11 Sep 2026 14:37:05 +0000
+Received: by outflank-mailman (output) from mailman id 1417062.1646022; Fri, 11 Sep 2026 14:37:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x52NF-0006FY-ED; Fri, 11 Sep 2026 14:37:05 +0000
-Received: by outflank-mailman (input) for mailman id 1417071;
- Fri, 11 Sep 2026 14:37:03 +0000
+	id 1x52NB-0005XW-2p; Fri, 11 Sep 2026 14:37:01 +0000
+Received: by outflank-mailman (input) for mailman id 1417062;
+ Fri, 11 Sep 2026 14:36:59 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <berrange@redhat.com>) id 1x52ND-00067i-R9
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:37:03 +0000
+ (envelope-from <berrange@redhat.com>) id 1x52N9-0005P3-T7
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 14:36:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x52ND-00EPyQ-7N
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:37:03 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x52N9-008jaJ-9u
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 16:36:59 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <berrange@redhat.com>)
- id 6aa411f1-8faa-0a2a0a5109dd-0a2a45049838-46
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:37:03 +0200
+ id 6aa411fb-bab6-0a2a0a5309dd-0a2a450295c6-40
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:36:59 +0200
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <berrange@redhat.com>)
- id 6aa4120d-b57f-0a2a45040019-aa0a817c6de1-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:37:03 +0200
+ id 6aa41209-6ca4-0a2a45020019-aa0a817c4fd9-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 16:36:59 +0200
 Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-531-wrbZ1KXtOUmB-87brWnyCw-1; Fri,
- 11 Sep 2026 10:36:56 -0400
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-349-qBu9J0pJONqD0PZySyKfFg-1; Fri,
+ 11 Sep 2026 10:36:52 -0400
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 2FA881955BF8; Fri, 11 Sep 2026 14:36:55 +0000 (UTC)
+ id C8F771955DD4; Fri, 11 Sep 2026 14:36:50 +0000 (UTC)
 Received: from berrange.csb (headnet05.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.117])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 5989F3000229; Fri, 11 Sep 2026 14:36:53 +0000 (UTC)
+ id DA2B53000229; Fri, 11 Sep 2026 14:36:48 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,17 +63,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1789137421;
+	s=mimecast20190719; t=1789137417;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=PkE3LclKvU9GiqQKtRj7Fj+wyH19sYMsxkpF53QZWX4=;
-	b=C9ab3bM5maw/uL9vXD2PLK/umYyGIwwgduEKF8GRmR4JOdhF9UBL4OUiPaiWpXViqXwMur
-	Z6QbdixJ7beZ/sVQxDoDJBRhqnpfh613zIAKUmgSAXaTsEaXNnVLAYJTcoJVAEolO+9wc6
-	OyNCJKHjmDmCcNH14UVHnUeaaiyK2Eo=
-X-MC-Unique: wrbZ1KXtOUmB-87brWnyCw-1
-X-Mimecast-MFC-AGG-ID: wrbZ1KXtOUmB-87brWnyCw_1789137415
+	bh=m7+eb5JfGTqk31BVerDj3cabnDcqZzH0Cz7nFGxKH54=;
+	b=V173gYvimKrFl352BnzcuE8Ae8XlNmgCu92t/RBBpL7quNYDZ4PW/HsW+id22Ji4uVb43Y
+	6mxuMbPUnZttf10XGgQxklQzoesLXwvFKKl41Kc9j00HY570hcywzsf0lDCJPonDG8RrBb
+	8RKJenB7NXcHDv993h4iA1RLdeadUUE=
+X-MC-Unique: qBu9J0pJONqD0PZySyKfFg-1
+X-Mimecast-MFC-AGG-ID: qBu9J0pJONqD0PZySyKfFg_1789137410
 From: =?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
 To: qemu-devel@nongnu.org
 Cc: xen-devel@lists.xenproject.org,
@@ -83,95 +83,105 @@ Cc: xen-devel@lists.xenproject.org,
 	qemu-s390x@nongnu.org,
 	qemu-arm@nongnu.org,
 	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>
-Subject: [PATCH 11/28] hw/watchdog: mark some watchdog devices as secure
-Date: Fri, 11 Sep 2026 15:36:10 +0100
-Message-ID: <20260911143627.2743803-12-berrange@redhat.com>
+Subject: [PATCH 09/28] hw/net: mark e1000, e1000e, IGB, rtl8139 & sPAPR VLAN as secure
+Date: Fri, 11 Sep 2026 15:36:08 +0100
+Message-ID: <20260911143627.2743803-10-berrange@redhat.com>
 In-Reply-To: <20260911143627.2743803-1-berrange@redhat.com>
 References: <20260911143627.2743803-1-berrange@redhat.com>
 MIME-Version: 1.0
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: dYANc0Ge3XFlqyIult2wRomxZKZRO5Q5r2jN6ooQbqM_1789137415
+X-Mimecast-MFC-PROC-ID: wCgxuSa6BO8o7rX8hyTtWH1NlYavtTT_j47SdGnnTt0_1789137410
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1789137423-526CAB50-F2472737/0/0
+X-purgate-ID: tlsNG-720697/1789137419-303C42AC-7DB0B079/0/0
 X-purgate-type: clean
-X-purgate-size: 2833
+X-purgate-size: 2990
 
-The ib700, i6300esb, gwdt, spapr and diag288 watchdog devices are marked
-as secure since they have traditionally been, or are intended to be,
-used in virtualization use cases on x86, arm, ppc and s390x architectures
-respectively. Other watchdogs are primarily for emulation.
+Historically most NICs are only interesting for non-virtualization
+use cases and have not been written with malicious guests in mind.
+
+As a general rule either virtio-net or xen-net should be used in
+all virtualized guests requiring a security boundary.
+
+There are a handful of exceptions resulting from historical usage
+in the x86 world, to support virtualized guests lacking virtio
+support.
+
+Thus the rtl8139, e1000, e1000e & IGB NICs are declared to provide
+a security boundary.
+
+The PPC sPAPR Virutal LAN device is also marked secure.
 
 Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
 ---
- hw/watchdog/sbsa_gwdt.c      | 1 +
- hw/watchdog/spapr_watchdog.c | 1 +
- hw/watchdog/wdt_diag288.c    | 1 +
- hw/watchdog/wdt_i6300esb.c   | 1 +
- hw/watchdog/wdt_ib700.c      | 1 +
+ hw/net/e1000.c      | 1 +
+ hw/net/e1000e.c     | 1 +
+ hw/net/igb.c        | 1 +
+ hw/net/rtl8139.c    | 1 +
+ hw/net/spapr_llan.c | 1 +
  5 files changed, 5 insertions(+)
 
-diff --git a/hw/watchdog/sbsa_gwdt.c b/hw/watchdog/sbsa_gwdt.c
-index 330a74798a..8a05b02c4f 100644
---- a/hw/watchdog/sbsa_gwdt.c
-+++ b/hw/watchdog/sbsa_gwdt.c
-@@ -307,6 +307,7 @@ static const TypeInfo wdt_sbsa_gwdt_info = {
-     .parent = TYPE_SYS_BUS_DEVICE,
-     .name  = TYPE_WDT_SBSA,
-     .instance_size  = sizeof(SBSA_GWDTState),
+diff --git a/hw/net/e1000.c b/hw/net/e1000.c
+index 202ad40401..da0667c40e 100644
+--- a/hw/net/e1000.c
++++ b/hw/net/e1000.c
+@@ -1759,6 +1759,7 @@ static void e1000_register_types(void)
+         type_info.parent = TYPE_E1000_BASE;
+         type_info.class_data = info;
+         type_info.class_init = e1000_class_init;
++        type_info.secure = true,
+ 
+         type_register_static(&type_info);
+     }
+diff --git a/hw/net/e1000e.c b/hw/net/e1000e.c
+index 9faf0c74c3..96737ddb51 100644
+--- a/hw/net/e1000e.c
++++ b/hw/net/e1000e.c
+@@ -721,6 +721,7 @@ static const TypeInfo e1000e_info = {
+     .instance_size = sizeof(E1000EState),
+     .class_init = e1000e_class_init,
+     .instance_init = e1000e_instance_init,
 +    .secure = true,
- };
- 
- static void wdt_sbsa_gwdt_register_types(void)
-diff --git a/hw/watchdog/spapr_watchdog.c b/hw/watchdog/spapr_watchdog.c
-index 5a72896066..0e45e9b4a6 100644
---- a/hw/watchdog/spapr_watchdog.c
-+++ b/hw/watchdog/spapr_watchdog.c
-@@ -269,6 +269,7 @@ static const TypeInfo spapr_wdt_info = {
-     .parent        = TYPE_DEVICE,
-     .instance_size = sizeof(SpaprWatchdog),
-     .class_init    = spapr_wdt_class_init,
-+    .secure        = true,
- };
- 
- static void spapr_watchdog_register_types(void)
-diff --git a/hw/watchdog/wdt_diag288.c b/hw/watchdog/wdt_diag288.c
-index 1275353e8e..85e4f56e1d 100644
---- a/hw/watchdog/wdt_diag288.c
-+++ b/hw/watchdog/wdt_diag288.c
-@@ -129,6 +129,7 @@ static const TypeInfo wdt_diag288_info = {
-     .name  = TYPE_WDT_DIAG288,
-     .instance_size  = sizeof(DIAG288State),
-     .class_size = sizeof(DIAG288Class),
+     .interfaces = (const InterfaceInfo[]) {
+         { INTERFACE_PCIE_DEVICE },
+         { }
+diff --git a/hw/net/igb.c b/hw/net/igb.c
+index c076807e71..0bd03efea0 100644
+--- a/hw/net/igb.c
++++ b/hw/net/igb.c
+@@ -635,6 +635,7 @@ static const TypeInfo igb_info = {
+     .instance_size = sizeof(IGBState),
+     .class_init = igb_class_init,
+     .instance_init = igb_instance_init,
 +    .secure = true,
- };
- 
- static void wdt_diag288_register_types(void)
-diff --git a/hw/watchdog/wdt_i6300esb.c b/hw/watchdog/wdt_i6300esb.c
-index 3aa01b8d68..05aa20fab1 100644
---- a/hw/watchdog/wdt_i6300esb.c
-+++ b/hw/watchdog/wdt_i6300esb.c
-@@ -480,6 +480,7 @@ static const TypeInfo i6300esb_info = {
-     .parent        = TYPE_PCI_DEVICE,
-     .instance_size = sizeof(I6300State),
-     .class_init    = i6300esb_class_init,
+     .interfaces = (const InterfaceInfo[]) {
+         { INTERFACE_PCIE_DEVICE },
+         { }
+diff --git a/hw/net/rtl8139.c b/hw/net/rtl8139.c
+index 16479284ee..38bc16f312 100644
+--- a/hw/net/rtl8139.c
++++ b/hw/net/rtl8139.c
+@@ -3450,6 +3450,7 @@ static const TypeInfo rtl8139_info = {
+     .instance_size = sizeof(RTL8139State),
+     .class_init    = rtl8139_class_init,
+     .instance_init = rtl8139_instance_init,
 +    .secure        = true,
      .interfaces = (const InterfaceInfo[]) {
          { INTERFACE_CONVENTIONAL_PCI_DEVICE },
          { },
-diff --git a/hw/watchdog/wdt_ib700.c b/hw/watchdog/wdt_ib700.c
-index 51a26a4cbb..8bf2b2fbf9 100644
---- a/hw/watchdog/wdt_ib700.c
-+++ b/hw/watchdog/wdt_ib700.c
-@@ -144,6 +144,7 @@ static const TypeInfo wdt_ib700_info = {
-     .parent        = TYPE_ISA_DEVICE,
-     .instance_size = sizeof(IB700State),
-     .class_init    = wdt_ib700_class_init,
+diff --git a/hw/net/spapr_llan.c b/hw/net/spapr_llan.c
+index 550848307d..c7ac58273c 100644
+--- a/hw/net/spapr_llan.c
++++ b/hw/net/spapr_llan.c
+@@ -873,6 +873,7 @@ static const TypeInfo spapr_vlan_info = {
+     .class_init    = spapr_vlan_class_init,
+     .instance_init = spapr_vlan_instance_init,
+     .instance_finalize = spapr_vlan_instance_finalize,
 +    .secure        = true,
  };
  
- static void wdt_ib700_register_types(void)
+ static void spapr_vlan_register_types(void)
 -- 
 2.55.0
 
