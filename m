@@ -4,43 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AFB4FC88E4A
-	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 10:44:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1416333.1645405 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85C9DC88E4A
+	for <xen-devel@archiver.kernel.org>; Fri, 11 Sep 2026 10:57:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1416345.1645414 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4yjS-00068x-Dp; Fri, 11 Sep 2026 10:43:46 +0000
+	id 1x4ywP-0007yJ-G4; Fri, 11 Sep 2026 10:57:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1416333.1645405; Fri, 11 Sep 2026 10:43:46 +0000
+Received: by outflank-mailman (output) from mailman id 1416345.1645414; Fri, 11 Sep 2026 10:57:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x4yjS-00068q-A8; Fri, 11 Sep 2026 10:43:46 +0000
-Received: by outflank-mailman (input) for mailman id 1416333;
- Fri, 11 Sep 2026 10:43:45 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x4yjR-00068j-8c
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 10:43:45 +0000
+	id 1x4ywP-0007yC-D2; Fri, 11 Sep 2026 10:57:09 +0000
+Received: by outflank-mailman (input) for mailman id 1416345;
+ Fri, 11 Sep 2026 10:57:08 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <andrew.cooper@citrix.com>) id 1x4ywN-0007y6-Sr
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 10:57:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x4yjQ-000zbS-0x
- for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 12:43:44 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x4ywN-008BeG-4U
+ for xen-devel@lists.xenproject.org; Fri, 11 Sep 2026 12:57:07 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa3db4b-e002-0a2a0a5209dd-0a2a450c858e-22
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 12:43:43 +0200
-Received: from [209.85.208.42] (helo=mail-ed1-f42.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aa3db5f-f479-0a2a450c0019-d155d02ac573-3
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 12:43:43 +0200
-Received: by mail-ed1-f42.google.com with SMTP id
- 4fb4d7f45d1cf-6a9b4e73feaso1141810a12.1
- for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 03:43:43 -0700 (PDT)
-Received: from [172.19.143.248] (IW396200.net.t-com.hr. [195.29.234.54])
- by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6a9b594f0fasm688499a12.25.2026.09.11.03.43.41
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 11 Sep 2026 03:43:42 -0700 (PDT)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6aa3de7c-2eae-0a2a0a5409dd-0a2a4502857c-36
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 12:57:06 +0200
+Received: from [40.107.208.28]
+ (helo=PH0PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6aa3de81-6ca4-0a2a45020019-286bd01c7e09-3
+ for <xen-devel@lists.xenproject.org>; Fri, 11 Sep 2026 12:57:06 +0200
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by DSVPR03MB989240.namprd03.prod.outlook.com (2603:10b6:8:3ab::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.382.15; Fri, 11 Sep
+ 2026 10:57:03 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0406.007; Fri, 11 Sep 2026
+ 10:57:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,363 +55,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789123423; x=1789728223; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=xSkdOFVgx9Y/tZ2KFB46VUO+inbqTTv16Au0ym3z5tE=;
-        b=KTyjj+iCijCws9GBfO2L2vmKyQOY/EnJE4AelG3GZcqQCK05nCanUCkeQNUe/VYUjY
-         FxOPMKq8nUfbOphzgaMkAYMySUXYxX4YKcZ2I7ORkq1OcphtzyquGFaxWIy9qnSCAJYE
-         LJ2FPwFQEHdM37pThiY3/36SWPaa5dOHtVL6v8F8rCWXWco5VePO860lxXlZ27NwvN0o
-         DhSzC544zRDE89iVCCpKS2z30meg/JwoRhkPbmsFvhoeKV9yJHaej44uXxt+a8d8Kb6i
-         Ip1jqiT4xU29ta16OZbm5DrVnxkCSIW+/MnCXG1u56dz8zMo54ODg0H7Ws8bSpOaEX2a
-         o+rQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789123423; x=1789728223;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=xSkdOFVgx9Y/tZ2KFB46VUO+inbqTTv16Au0ym3z5tE=;
-        b=sBby8Md+h1ir1niKUkMx4bG2kRXey6XDwVhru0vczPB52KT6S243QFwArtWLZYcPFX
-         W2N3cwoKANVs7LcpIv27hLMxfjmMaUmoPcGEDVokcQWYwwrtRFereaVTuY8pwvIodBXC
-         uPl+Fr13hObsx1fB0zRPgKJx5TmmLiaKHjltc0e0rIQ7BZH9wHg3PTTPUqT6CddAKf50
-         9JO9Rw3lkZJPUhh9S0nOz010kd3nRqgSuxXvR1duR9NssT2nlAaWJdOSV82V4x1Pa8BM
-         amkIbkaz4F1I3IEhWEXkCigWuIRILLGL7rg6++XugfID4G6d/l7lvcN5wKQAvkG6dVps
-         WF/A==
-X-Forwarded-Encrypted: i=1; AKwUvBxUe2RH8Htbw4RyRhb9x9VOE9kruU+tdw7k55k44OVja6vo0AHJY8dBTWe/e8DTaSbKdiiiEmAz0bY=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lKi/1EF9M+HuK+NEMV7X9hCCuqxyMUaRjge5vcL+gvVSd9eePI
-	9KtMfkP2YPrQxOcZLumdy39EtPHpM0DC8YBZik35OH4xmzMG0nF52+Qd
-X-Gm-Gg: AYBFou1EgEdgWrOhn6lnZE0apshK1AjdCeWGHu0/HcFOzW2KRJtE+z0px9qW2GMxR5T
-	TfkT1y8ui/rqg9ZBDUhTXly/oZiqTHz+WGaY/XYtpqFEPanFYI96ilMXAjU8bcapTHNJ2wcYgX4
-	pnlDkQ4DVQ1ZQzM+Vb0AgxuhmuO1wYCv4NawnV5UZhToPgEw3L09F67gtb4tdgSH3TD9UrfL6wC
-	DJUUjl8y6hBNEJX4sLKi6KoJPOFzyN1yiitNv2gO04W/PGz0MI2cONBPu+Ex5wdRdFYMcCoPHSE
-	gvwoSnBAnyGZiZR61/IrYkbZL+rQpc6xh0h3rjCQ5XA1IjOZ79da8yluY9qTzqB0qLeEEESLDdO
-	nx648MrnpI1iezDb999EjH7Z20rkmtjmM8FCBB7JQdBDeR7rnh6Pfv3YEkryTABj5/hNshniPvU
-	ZaYtvYddvzFRr/+qxCfRGd2LeOSjEZYQbpRDZCf7MvNNzZ4uGdJN/x+NLMCH+2/PoGETUuTtWPI
-	55w9bLTR1qJAGkE/IacSUPj/pz5//CI
-X-Received: by 2002:a05:6402:3788:b0:6a6:32fa:54f4 with SMTP id 4fb4d7f45d1cf-6a9b565304emr1582881a12.19.1789123423166;
-        Fri, 11 Sep 2026 03:43:43 -0700 (PDT)
-Message-ID: <09bf2c58-de60-46a5-ab74-909814ae9bad@gmail.com>
-Date: Fri, 11 Sep 2026 12:43:40 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=bQ6jLbeF8MNyBrW/bsvqauCr1W1CDC/Gn9TEYw5a8/Ehm6ZGRLMi3EmtN+0KqveV8VbyFBfsVZpK5G45Bjpc1XHJQxS/Jnz8tI4O1j/wNw6YmcYvwJzUpX8z/TFZYn5nREHj79LLM6DojF9wVjktdWg2Djq4gBFzYsvp80mbbnMlYmdzX4mMAMhCXEGb5qCmyfHzfdp4qy3Kug1AdTbnf/g73L+9JEJM6osMU5r4/G0jxrjNKkzIAP2H8mI6BA/g8C/3/SVBdlmCiNd/fWeCFkL866MNm75Sk1IluRs9PNS0XMOEwdTaOqT4MqQmChiV1ckEMLxxk+mwGH1gjbbELA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nljzzvqJPfRDHGVDkaJ1LYB8iAC199hjhwim6D3fWf0=;
+ b=nryx0qu/bW1R/abONW8njdgiuPdMSk9M0M0/x2MP6ckUDZt7tdUJoRDsgkCrmxGBg9fXzyctWMR9anYi95Yi3Tl0kg5ZiBxnAXb04EEPHjPM6Lc9Z10MEGfWibt0U6K+LYjjZSNurAYNHZ3E2iKT+mES7WxmFrB2kf8TwNATnRHg+4azxtn/+ON66XyuBwaQxkotE/aXa37/Hp/YFMJkYr9g3mxfzWHvwLuu5ubpA+qG+SvKMbZd2YovY5CCDzk6CbonrMl7CjSrKEyDe4zkODTA/IJOnOkgMsUPiDWbrTdg9DvZPm3Ru+FcTdcqMpOz4HyR+ikNLLckljkbTAuIYA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=nljzzvqJPfRDHGVDkaJ1LYB8iAC199hjhwim6D3fWf0=;
+ b=KbrYMBZd/aoCEcQx+slqPY+sIOJ5e3dkFeHy5EFPa2axecLP1M6yit27FzM12AfbC+iySoZk/CxzVNapjiImWw38KHVd48SjDtH2ppg967d2DoKKSvj8RbgnUbGBljMZSwXCDtVleSx9zjLD+5EizbSgOW9EOvIgVs+XUCX17P8=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <d064ccbc-c414-4be7-af1e-e8b0c39b136e@citrix.com>
+Date: Fri, 11 Sep 2026 11:56:59 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 12/39] xen/riscv: implement vCPU context switching
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <8848874c69f00fbfcf6ad75a39e28479a4cdd08b.1787838835.git.oleksii.kurochko@gmail.com>
- <2eb325d0-8f53-4790-889d-d68a03da0784@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <2eb325d0-8f53-4790-889d-d68a03da0784@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1789123423-5270FA5B-8188E1DF/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 11244
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+ <jbeulich@suse.com>, Jason Andryuk <jason.andryuk@amd.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+Subject: Re: [PATCH v1 5/6] nestedsvm: Fix deferred event injection
+To: Ross Lagerwall <ross.lagerwall@citrix.com>, xen-devel@lists.xenproject.org
+References: <20260526124027.573412-1-ross.lagerwall@citrix.com>
+ <20260526124027.573412-6-ross.lagerwall@citrix.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <20260526124027.573412-6-ross.lagerwall@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P123CA0622.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:294::7) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|DSVPR03MB989240:EE_
+X-MS-Office365-Filtering-Correlation-Id: 12555fc8-b981-4804-e577-08df0ff3697e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|4143699003|11063799006|56012099006|22082099003|18002099003|10067099003;
+X-Microsoft-Antispam-Message-Info:
+	gqduyZYcqV6WYFNGv2GYNR2KcncSZFGbBqOSysegX1TM+U/YpUI4bu7PRv4h2/A4umpHdWyq4Pt2kwH2MQ9V7IQILb1WULgKJCIvgJXVrMl0I/EVo/bJYE3bdxTkPaVzhwXeaXxDiTf/AKASube6EqsArmHwC9td0SUNTs3R5WlAV0cgRQK+oTqN7DbK1ORwpPjxVmxGkZo5Gy5jYYsH37MHl3D3wK1yCWx2PqVH1P3tVoFJGnSE1Uqt9Q1GdBPnROUmKCUqMGw1k/OZtVA3MeNyBynJoPfsvVwA5qaUP2bBCSBQTjKiqwTigFrfGqDbtH77Y+xd+h8Z71hnxcBDURKUmj7GJSHFUwn2ubDBHfopX6z5AvkyzyINp3zNGMz4AAstfuatyIt1oc6/eiy2sPjiPXMP765dSRmYA9ExvDzDKF3a3vl4U/8x4jeJvF2tqxDg1w3LX0QjgJvQWGZC/QPCODvIWune+o7JGwKsd30qm2+GmrSKQ+UkwcM/UvfCUQh04Y2f8INEpw3D7g8bUqCGxj900wVW4ulgbs2fm/FWUNsCUOMDxxnj3Exfr/WsdZHjY1UzkTQF2Joau+aP3LMyYTDIpCPGRGsxlLS6q/fE4aFxbcx0ae/dVhg5kenjg41BlsyxqGW4aM/ZBjc3pv4zff83LEHm1olsPdjGthk=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(4143699003)(11063799006)(56012099006)(22082099003)(18002099003)(10067099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?K3l3K3lxR09mK2NrWXJ5SXk0RmtDc1BnaWFqbFZZSFJVRDRJdERncnBRRkNL?=
+ =?utf-8?B?UDd3K1krR25sRTVYdjdQeUtGMVYrbjJYYTNuNW12NFUxVnpPMnhiSFJmK3VY?=
+ =?utf-8?B?MlFZOHdrK1BRT3lIaXdyZnk1emd5Q0NaL2w5U09ReDZSOUEzVWs2UGFNcmlF?=
+ =?utf-8?B?MTJINzhGSWl0d2I3SVZ3aEp2Vmk5d1hWWDFiZU5OSGZPS0hWQTRpRXpxbEk5?=
+ =?utf-8?B?UldUc09QK1grdlhjbHoxd1dEU05sM29ROFBIQlZvei9oUUxVVEVrdXhKamEr?=
+ =?utf-8?B?QkpUVTdTV0JuYWMvQWRXaGNkU1B0UkpSWGpNQ2FNMFlvYzBheVlXTGdiL0xJ?=
+ =?utf-8?B?UGdsSFVNRVZhOHZOUzE3aGNIRHZWY0VSREpTdXhlWVFvTFRTNFA2TDk2c1dK?=
+ =?utf-8?B?c0U5TE9UaTVpL2t5cnFNeGxkMUJjZHUwRzRMeTlvbnNGc0o3a3hwejJNQW4x?=
+ =?utf-8?B?d05ReHJkYTBQeXZaR1J0eGdoaTJQbDZTbGM4SFRPTytoUjRVV09tZVl4RlIw?=
+ =?utf-8?B?dE9nVUtmNWRMNDBPWTFhYWRjcnJFdG1TcDRuSTkyZnVScGNEYTR6L3VSOStZ?=
+ =?utf-8?B?dndnRXpBNU91RGVUTWN1b2tYVTh3elJJMUx5L0x6UEJ4cHVKeGtUU0J3Q0s0?=
+ =?utf-8?B?UHB0NmMxeVk2dGpSS3UrTDBnZGxFem9oRjVYVHR1aTNoU01SUjVFWVd2eTdD?=
+ =?utf-8?B?bllCVDlWODR2QkM1VVZncTJqdW53VGNNaVVMZ09HQXBIdFhFQVdkOHZkNHFh?=
+ =?utf-8?B?NVJKcHNESXllNFE5VHRyYkpJMFhreVg4anJvWE8zQmVVRXBERXBITFdjbUI1?=
+ =?utf-8?B?bVcydm0wOGlDOTFoVnJrMXRaZGR5SFdiNjZZdUxZNDFFSnBUaDFBekx0Titx?=
+ =?utf-8?B?WHloZlhLdE9GRklxRDRuSlNrb011R1BwTGNmZzdrN0RBWThZNVgzbk5aeDg1?=
+ =?utf-8?B?VE5lcVhpbG91OW1tczJwSnFSNU8vWWp0NWZNTytRTFIxVk1iTTJKc0RXb2VS?=
+ =?utf-8?B?eElweTNqRnY0L1d3ME1ndnhJenJ4amRLWGJsOEFIRkJDc3IrbG1GWE5BMlZK?=
+ =?utf-8?B?T20xOWI3MVU5TVRBS0IycHZ4NzRLa0szM3pnSHdGQUpXQ1ZHb2dpSHpHQmxO?=
+ =?utf-8?B?SjlKSS9PQ1ZNeWFXaGkvQldiQ3VlemZWVVFUemZLQkxXdTZCSDhBVCtheXIy?=
+ =?utf-8?B?ZmRWU3FqbkxMVU00dGljbmZpbExTYS8vcExvN3FkT1lHYmVmbVpxOFRwNmJj?=
+ =?utf-8?B?U1FPbURyOHpWSGV3cW9BZ09tTUJLRUdiaXUzU0c4ak84dkZBbUtwa3hFenNH?=
+ =?utf-8?B?WTNCTEVUK0JnZWwya1pUZlh0Q3BRVTNibGxrbUV3dUhKUEd0aFMzZTJaQzlK?=
+ =?utf-8?B?T2VmMVNxTFZhWnJRblZMTUlZQXJrQjNvMXhkeHVxVUV0YnE3MGRRMGVRelNF?=
+ =?utf-8?B?UUprL3FpQjRIL0g1ci9VdEdidmlMVFozR2J2RS9zaHo3djNYcWRvbVpjLzFE?=
+ =?utf-8?B?RVoyK3IzWmhtelNRVlE3RkJxWWgyUGprK1M1c0M0VTdxLzFiZDVmb3lUQnNy?=
+ =?utf-8?B?TFk5NjMyWXJuVHQ1NG5teVIvcVlUVElFUUJiVk9GZU5LQ2xkRWlOVHFNY013?=
+ =?utf-8?B?aWRiTE55ODY5UStWdUlPSGVhOENlM2k5OWpXNk56bjVMQlJIV08rM0RkNWls?=
+ =?utf-8?B?bWRXc3hCTFVSNWhzWU94SDJmdDhURnMycVBZMUF6R25hWkpTWXdIcU9wdkIx?=
+ =?utf-8?B?U2wyNXprbGZCNUhESFdsSzlqaTJTN1VHZmZxaXBVWERBdWFjSzRkbFEwdmtp?=
+ =?utf-8?B?MkQyaWFqUklsMmxZODZUVmZYQzAweFIvYW81WDl5aGw0aGVCejFKRTJURjRt?=
+ =?utf-8?B?ZGJ5RHhVSXRKVThpU3h6RTBxT1E1a1dUdDVHOXp1VExsaGRwNWJNZlNIWEdu?=
+ =?utf-8?B?SHppNlhTWEtPRWE5QmxTVlhrSjlTa1ZlM1dJRmhtSERySVBsOERCdHBEMmhD?=
+ =?utf-8?B?WFJIcmlrc3ZvUFRJeHlraWtIN3pJcm9zaGRuQlV3d1ZtV29EU3dwam50MUxG?=
+ =?utf-8?B?SEJHN2pXMnh0cU9YeUdpU1hhZTNsM0dMY2RhZDdJMThtNkhmWGlDa05GdEZW?=
+ =?utf-8?B?SkRZWGxtdEl0bVdYM2dZTWozS01kcStPTU1TNGpRM2YySEdBQ3EvZ1FiWG5P?=
+ =?utf-8?B?aUJuZlV5cEZnUkhOUVY3N2xoSU0rbUk0UUV2NUNJU1pDd005b3hFWThhZ2Qr?=
+ =?utf-8?B?YnZGdFp2SmZxcFdYUTJXSHdvMldCLzBJODhxNkZ2anlNdWRHb0l4Q2xweXJU?=
+ =?utf-8?B?dWtzeTM0VS9MQlhpbzc3dThEcGlKbVp2amJjQTBZYys5VGdiNVJFQT09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 12555fc8-b981-4804-e577-08df0ff3697e
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 10:57:03.2262
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: LmXFk5/FI3+Y2LOeDBx/1V5y+/RbIX3UKzZ7Dtn/7q5VOasjAADLuN2ljCoDUrr8nMjP1kCwXuZP24aeUcWHO/LTH6MMRiIQOwE37bML5wU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DSVPR03MB989240
+X-purgate-ID: tlsNG-720697/1789124226-F0EA32AC-B8711640/0/0
+X-purgate-type: clean
+X-purgate-size: 875
 
+On 26/05/2026 1:40 pm, Ross Lagerwall wrote:
+> If an event for L1 occurs while L2 is running, Xen should inject
+> VMEXIT_INTR and the event into L1.
+>
+> nestedsvm_vcpu_interrupt() and nestedsvm_vmexit_defer() set this up to
+> be handled later by nsvm_vcpu_vmexit_inject() after the switch back to
+> L1. However, the code there appears to be bogus and completely ignores
+> the source/vector set up in the first place. Fix this by using the
+> values to properly inject the event.
+>
+> Fixes: 9a779e4fc161 ("Implement SVM specific part for Nested Virtualization")
+> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 
+I'm reasonably sure this will be unnecessary when we fix the underlying
+problem of deferred entry/exit.
 
-On 9/10/26 3:29 PM, Jan Beulich wrote:
-> On 27.08.2026 17:20, Oleksii Kurochko wrote:
->> +static void ctxt_switch_from(struct vcpu *p)
->> +{
->> +    /*
->> +     * When the idle VCPU is running, Xen will always stay in hypervisor
->> +     * mode.
->> +     * Therefore we don't need to save the context of an idle VCPU.
->> +     */
->> +    if ( is_idle_vcpu(p) )
->> +        return;
->> +
->> +    p2m_ctxt_switch_from(p);
->> +
->> +    vtimer_ctxt_switch_from(p);
->> +
->> +    save_csr_regs(p);
->> +}
->> +
->> +static void ctxt_switch_to(struct vcpu *n)
->> +{
->> +    /*
->> +     * When the idle VCPU is running, Xen will always stay in hypervisor
->> +     * mode.
->> +     * Therefore we don't need to restore the context of an idle VCPU.
->> +     */
->> +    if ( is_idle_vcpu(n) )
->> +        return;
->> +
->> +    /*
->> +     * If this vCPU last ran on a different pCPU, invalidate its VMID so
->> +     * vmid_handle_vmenter() assigns a fresh one from the current pCPU's pool.
->> +     * Without this, two pCPUs could independently assign the same
->> +     * (generation, vmid) pair, generation counters start at the same value
->> +     * on all pCPUs and increment independently, causing TLB contamination.
->> +     */
->> +    if ( n->arch.last_cpu != smp_processor_id() )
->> +        vmid_flush_vcpu(n);
-> 
-> I wonder why you need this, when we don't have anything similar in x86/HVM
-> (and at the first glance Arm doesn't have anything similar either).
+In the meantime, while reviewing this I found a systematic naming error
+in the code.  I've submitted a fix separately.
 
-x86 does have the equivalent: vmx_do_resume() calls 
-hvm_asid_flush_vcpu() in the active_cpu != smp_processor_id() branch, 
-and svm_do_resume() does the same when launch_core != smp_processor_id() 
-("Migrating to another ASID domain. Request a new ASID."). The RISC-V 
-VMID allocator follows the x86 ASID scheme: VMIDs are a per-pCPU 
-resource with a per-pCPU generation, so a (generation, vmid) pair 
-obtained on one pCPU means nothing on another. Arm doesn't need this 
-because it allocates a single VMID per domain from a global bitmap.
-
-Also, note that I've update a little bit how VMIDs are flushed here [1]
-but this check still present IIURC.
-
-[1] 
-https://lore.kernel.org/xen-devel/cover.1787838835.git.oleksii.kurochko@gmail.com/T/#m2c06e58c03a09022af112388be3585bf3ae6e4dc
-
-> 
->> +    vtimer_ctxt_switch_to(n);
->> +
->> +    restore_csr_regs(n);
->> +
->> +    p2m_ctxt_switch_to(n);
->> +}
-> 
-> In the absenmce of a comment towards the need for this specific order I'd
-> expect these three calls to be ordered the opposite of their counterparts
-> in ctxt_switch_from().
-
-I will put restore_csr_regs(n) (and rename it to 
-csr_regs_ctxt_switch_to(n)) before vtimer_ctxt_switch_to(). There is no 
-any specific requirement to be ordered in the way it is now.
-
-> 
->> +static void schedule_tail(struct vcpu *prev)
->> +{
->> +    unsigned int cpu = smp_processor_id();
->> +
->> +    ASSERT(prev != current);
->> +
->> +    ctxt_switch_from(prev);
->> +
->> +    /*
->> +     * Mark this CPU in next domain's dirty cpumasks before calling
->> +     * ctxt_switch_to(). This avoids a race on things like p2m flushing,
->> +     * which is synchronised on that function.
->> +     */
->> +    if ( prev->domain != current->domain )
->> +    {
->> +        cpumask_set_cpu(cpu, current->domain->dirty_cpumask);
->> +
->> +        /*
->> +         * Once this hart drops out of prev's dirty_cpumask it stops being a
->> +         * target of p2m_tlb_flush(), while its TLB may still hold G-stage
->> +         * translations of prev's domain: neither the vCPU which just ran nor
->> +         * any other vCPU of that domain which ran here earlier has had its
->> +         * VMID invalidated. Move the hart to a new VMID generation so that
->> +         * none of them can be reached again.
->> +         *
->> +         * Switching away from the idle vCPU needs no bump: the idle domain
->> +         * has no p2m of its own, and whatever G-stage entries this hart may
->> +         * still hold (or speculatively create while HGATP keeps pointing at
->> +         * the last guest's p2m) are tagged with a VMID which was already made
->> +         * stale when that guest was switched out. Skipping the bump here also
->> +         * avoids burning a generation on every pass through idle.
->> +         */
->> +        if ( !is_idle_vcpu(prev) )
->> +            vmid_flush_hart();
->> +
->> +        cpumask_clear_cpu(cpu, prev->domain->dirty_cpumask);
->> +    }
->> +    write_atomic(&current->dirty_cpu, cpu);
->> +
->> +    ctxt_switch_to(current);
->> +
->> +    write_atomic(&prev->dirty_cpu, VCPU_CPU_CLEAN);
->> +
->> +    current->arch.last_cpu = cpu;
->> +
->> +    /*
->> +     * sched_context_switched() internally uses a spinlock,
->> +     * which requires interrupts to be enabled.
->> +     */
->> +    local_irq_enable();
->> +
->> +    sched_context_switched(prev, current);
->> +}
->> +
->> +void context_switch(struct vcpu *prev, struct vcpu *next)
->> +{
->> +    ASSERT(local_irq_is_enabled());
->> +    ASSERT(prev != next);
->> +    ASSERT(!vcpu_cpu_dirty(next));
->> +
->> +    local_irq_disable();
->> +
->> +    set_current(next);
->> +
->> +    prev = __context_switch(prev, next);
->> +
->> +    schedule_tail(prev);
->> +}
-> 
-> __context_switch() switches stacks, which can easily collide with code the
-> compiler has emitted. For example, the call to schedule_tail() may not be
-> a tail call, and context_switch()'s return address may have been spilled
-> to the stack (or into one of the s<N> registers). There's a reason Arm and
-> x86 have reset_stack_and_jump().
-
-RISC-V will have reset_stack_and_jump() that too but just introduced 
-later and will be used for different use case (in continue_new_vcpu() 
-introduced later in this patch series). But as the Arm RISC-V doesn't 
-use reset_stack_and_jump() in context_switch().
-
-This follows the Arm model: every vCPU has its own Xen stack, and from 
-the incoming vCPU's point of view __context_switch() is ABI-conforming. 
-It restores exactly the sp/ra/s0-s11 that vCPU had when it itself called 
-__context_switch() from context_switch(). So after the return we are in 
-next's own context_switch() frame, and anything the compiler spilled 
-there (ra included) belongs to next. The only exception is a vCPU which 
-has never run: its ra points at continue_new_vcpu() on an empty stack, 
-and that's where reset_stack_and_jump() is needed, as on Arm. I'll make 
-continue_new_vcpu() noreturn accordingly. x86 differs because its stacks 
-are per-pCPU (IIUC), hence its context_switch() can't return.
-
-Here is some diagram for better understanding:
-vCPU A (stack A)                vCPU B (stack B, switched out earlier)
-schedule()                      schedule()
-  `- context_switch(A, B)         `- context_switch(B, X)
-      [A's frame: ra, s-regs]         [B's frame: ra, s-regs]
-      `- __context_switch() --------> "returns" here
-         (save A, load B)             schedule_tail(prev = A)
-                                      ld ra <- B's frame (B's own ra)
-                                      ret -> B's sched_context_switch()
-                                          -> ... -> back into B
-
-
-> 
->> --- a/xen/arch/riscv/entry.S
->> +++ b/xen/arch/riscv/entry.S
->> @@ -99,3 +99,47 @@ restore_registers:
->>   
->>           sret
->>   END(handle_trap)
->> +
->> +/*
->> + * struct vcpu *__context_switch(struct vcpu *prev, struct vcpu *next)
->> + *
->> + * This is called on prev's stack, and returns on next's.
-> 
-> With ra being switched it may also return to other than the caller. If
-> that's really intended, I think it also needs calling out here.
-
-Yes, it's intended. Normally it returns into next's own context_switch()
-(where next itself last called __context_switch()), and for a vCPU
-which has never run it returns to continue_new_vcpu(). I'll update the
-comment to:
-
-  * This is called on prev's stack, and returns on next's. As ra is
-  * switched too, it doesn't return to its caller: it returns to where
-  * next last called it from, i.e. into next's own context_switch(), or,
-  * for a vCPU which has never run, to continue_new_vcpu() with an empty
-  * stack.
-
-
-> 
->> + * a0 - prev
->> + * a1 - next
->> + *
->> + * Returns prev in a0
->> + */
->> +FUNC(__context_switch)
->> +        REG_S   s0, VCPU_XEN_SAVED_CONTEXT_S0(a0)
->> +        REG_S   s1, VCPU_XEN_SAVED_CONTEXT_S1(a0)
->> +        REG_S   s2, VCPU_XEN_SAVED_CONTEXT_S2(a0)
->> +        REG_S   s3, VCPU_XEN_SAVED_CONTEXT_S3(a0)
->> +        REG_S   s4, VCPU_XEN_SAVED_CONTEXT_S4(a0)
->> +        REG_S   s5, VCPU_XEN_SAVED_CONTEXT_S5(a0)
->> +        REG_S   s6, VCPU_XEN_SAVED_CONTEXT_S6(a0)
->> +        REG_S   s7, VCPU_XEN_SAVED_CONTEXT_S7(a0)
->> +        REG_S   s8, VCPU_XEN_SAVED_CONTEXT_S8(a0)
->> +        REG_S   s9, VCPU_XEN_SAVED_CONTEXT_S9(a0)
->> +        REG_S   s10, VCPU_XEN_SAVED_CONTEXT_S10(a0)
->> +        REG_S   s11, VCPU_XEN_SAVED_CONTEXT_S11(a0)
->> +        REG_S   sp, VCPU_XEN_SAVED_CONTEXT_SP(a0)
->> +        REG_S   ra, VCPU_XEN_SAVED_CONTEXT_RA(a0)
->> +
->> +        REG_L   s0, VCPU_XEN_SAVED_CONTEXT_S0(a1)
->> +        REG_L   s1, VCPU_XEN_SAVED_CONTEXT_S1(a1)
->> +        REG_L   s2, VCPU_XEN_SAVED_CONTEXT_S2(a1)
->> +        REG_L   s3, VCPU_XEN_SAVED_CONTEXT_S3(a1)
->> +        REG_L   s4, VCPU_XEN_SAVED_CONTEXT_S4(a1)
->> +        REG_L   s5, VCPU_XEN_SAVED_CONTEXT_S5(a1)
->> +        REG_L   s6, VCPU_XEN_SAVED_CONTEXT_S6(a1)
->> +        REG_L   s7, VCPU_XEN_SAVED_CONTEXT_S7(a1)
->> +        REG_L   s8, VCPU_XEN_SAVED_CONTEXT_S8(a1)
->> +        REG_L   s9, VCPU_XEN_SAVED_CONTEXT_S9(a1)
->> +        REG_L   s10, VCPU_XEN_SAVED_CONTEXT_S10(a1)
->> +        REG_L   s11, VCPU_XEN_SAVED_CONTEXT_S11(a1)
->> +        REG_L   sp, VCPU_XEN_SAVED_CONTEXT_SP(a1)
->> +        REG_L   ra, VCPU_XEN_SAVED_CONTEXT_RA(a1)
->> +
->> +        ret
->> +END(__context_switch)
-> 
-> What about gp and tp?
-
-tp points to this hart's pcpu_info (set up once per hart by
-setup_tp()), i.e. it's per-pCPU rather than per-vCPU state.
-__context_switch() starts and ends on the same hart, so tp has to be
-left alone.
-
-gp isn't used by Xen at all: there's no __global_pointer$ in the
-linker script, so no gp-relative relaxation happens, and the compiler
-never allocates gp.
-
-Neither of them is callee-saved per the psABI, so there's nothing to
-preserve across the call. The guest's gp/tp are part of the guest
-state and are going to be saved/restored via cpu_user_regs by the
-trap entry/exit path.
-
-
-> 
->> --- a/xen/arch/riscv/include/asm/system.h
->> +++ b/xen/arch/riscv/include/asm/system.h
->> @@ -76,6 +76,10 @@ static inline bool local_irq_is_enabled(void)
->>   
->>   #define arch_fetch_and_add(x, v) __sync_fetch_and_add(x, v)
->>   
->> +struct vcpu;
-> 
-> I don't think this is needed, as ...
-> 
->> +struct vcpu *__context_switch(struct vcpu *prev, struct vcpu *next);
-> 
-> ... parsing of the return type will make the struct known (before
-> parameters are parsed).
-
-Make sense to me. I will drop forward declaration.
-
-> 
-> Also - can't next be pointer-to-const?
-It could be. I will add  const.
-
-Thanks!
-
-~ Oleksii
-
-
+~Andrew
 
