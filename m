@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B37DC88E59
-	for <xen-devel@archiver.kernel.org>; Sat, 12 Sep 2026 15:19:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1418811.1646518 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C381FC88E56
+	for <xen-devel@archiver.kernel.org>; Sat, 12 Sep 2026 16:05:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1418927.1646527 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5PVV-0000uQ-Ah; Sat, 12 Sep 2026 15:19:09 +0000
+	id 1x5QDe-0000bv-Dt; Sat, 12 Sep 2026 16:04:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1418811.1646518; Sat, 12 Sep 2026 15:19:09 +0000
+Received: by outflank-mailman (output) from mailman id 1418927.1646527; Sat, 12 Sep 2026 16:04:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5PVV-0000uJ-7k; Sat, 12 Sep 2026 15:19:09 +0000
-Received: by outflank-mailman (input) for mailman id 1418811;
- Sat, 12 Sep 2026 15:19:08 +0000
+	id 1x5QDe-0000bo-Ao; Sat, 12 Sep 2026 16:04:46 +0000
+Received: by outflank-mailman (input) for mailman id 1418927;
+ Sat, 12 Sep 2026 16:04:45 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <nicola.vetrini@bugseng.com>) id 1x5PVT-0000uD-Un
- for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 15:19:07 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1x5QDd-0000bi-9l
+ for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 16:04:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x5PVT-008RIY-BZ
- for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 17:19:07 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x5QDc-00GbKq-N9
+ for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 18:04:44 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <nicola.vetrini@bugseng.com>)
- id 6aa56d54-8faa-0a2a0a5109dd-0a2a45088ccc-6
- for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 17:19:07 +0200
+ id 6aa57816-8faa-0a2a0a5109dd-0a2a45018db2-6
+ for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 18:04:44 +0200
 Received: from [162.55.131.47] (helo=support.bugseng.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <nicola.vetrini@bugseng.com>)
- id 6aa56d6b-f659-0a2a45080019-a237832f9664-3
- for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 17:19:07 +0200
+ id 6aa5781c-5984-0a2a45010019-a237832fa8fa-3
+ for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 18:04:44 +0200
 Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
  (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id 9B9354EE0097;
- Sat, 12 Sep 2026 17:19:06 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPA id D5A264EE0097;
+ Sat, 12 Sep 2026 18:04:43 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,36 +51,36 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
 Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1789226347;
-	b=iUrDSMC74cO5fN28iRhreFSW2d3E86DsXTCf5JA43hm67QfyTzb2xN50zWlTok7ZUJxm
-	 mzDU10ToAtPlEUymCqsRUOlpT+c2iOhX6AS6hWMgmc3HO6AlGJSN8R1fZAEduTZ8qquTS
-	 I7zhZCZS4oRoX+nF3TYBN4MsX5cYCzGkXGfduen1F4F2oUuFEYJHv4ExbJXToT2zbs5ud
-	 m4v6b86O2eB2TKdibGxVN2L7BrQNfRbI2nLNq9BvOUhFELpVDeGntDQmd6GIyEGjTRHJQ
-	 R0PJlbw32tcqOVAu82anIaBgt2GgckaOToIZ3snxxis2zph6qhwN5V7K5arYpbF3m11QC
-	 ibyfFJL0Sm/sWCpebuNa8Jni7e6Q6tRKYoJS1L5mV7LwvBL/SbFuN4k9Ptw/M/7SFZHFi
-	 jIyG1pANxcH08xOmBaYnKivqoCyBtlEvZFKboTm4hrSJQUe5UEn4WvLDggIeWJ7BdaVMd
-	 6dAOQaukKelj6nC4ea3sOboBzfHxGWsfK2F9chKIeiwqCWJ1mMh/mFy6sxN2JR835dXL/
-	 WiDqKCr6kTYYv9rkOv02BoySetjEZ6gu/8oEGYPymBworF1LVBE9QXSrJ6xu/SZFZ/UKA
-	 bXCCAvNsLawZIStJCwb/fjTA4HC0v0uLb3EECKb5MIopfKbMhQasah3NhYoYN+M=
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1789229084;
+	b=vqX4ekhseKRR1gUd9RPLYpOH3LwX5gQzzdFkL34pkJtaczQCdDPsUKgEVMUUNY+YreNc
+	 R9Y0O9vOcsyhro25u+8dl4dq/DqYHt3y6+qRLN7hl6CJqWujFYVMb7SeEDo7ZrIXK3JZ2
+	 zPxmMcJMOftJezLNzVLPP08FJaMt0umvZgsWvaycNcMMa4Enyg5AMHG3txhsI2W1OyEFK
+	 bW+nXHWn91cWjs36PGUg5W+K03trRUAM6b4PUgWRyA2TRPs64mfhdHFaj5X2fYzQrqkhM
+	 RJO3OupKyhB/vFVc6ajtAyimomG+9Th9Vb7piDyT1ClzA4gRxfT6Z1ZG+BtUkydvcJs4q
+	 p9MezPflcoLA1UU4DXYpkHGmaJ/SIf21lULFCtCz5FTXkApoxdYDzUsyEWYutlcHBf2W+
+	 Wo6Il3e6QCiidnSfZr4ewUMpWK0JJ3SQ326O0NuUJzPmjWXMlHVZqSr0bcw5hUftDQH9i
+	 UGhmeW6Jr2/O3i7S9tTNC6qwu5MU7OBQc+fWBA8VF05ZxME8gBqXWnMrq+mukXabO/Okn
+	 E+T4bGL8CwHINLJmqh9d7NwfElZelMfSKhLKyIwpSL/ntGtNPeAfhkxxVyhqAvTt3etjK
+	 MmWNfG2cNC0Dktw8sbBvHVvN+Tf6EAbJ28jUAmaVC40ZQ1uxZrfmP0FdbmmSgb4=
 ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789226347;
+	c=relaxed/relaxed; t=1789229084;
 	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
 	 Message-ID:X-Sender:Organization:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=CI1LScU60Qem93FxM837FcjNQm4bgRcPvDdHg5ZULys=;
-	b=Ls8RdDDvZwwWMItVsOS4BL/8Vav/3LCbLy5xeQHZ5klnqYNesa0mIrJPVT7TNQNeSb5l
-	 YHqcyeJOgvy8888MnC+g7AORPPCQ72wQnuD8KiJANqGP2RbhJrg7Cdqch8AsbTNxSu5XO
-	 qYSKvfPBtd3gkgwswUEUkAsZ9E7QJDcQXC6+pRvqW1A0FfdL1yNOf7fnI94vgLEwsyyno
-	 MQ+ndDLcZZXHtOb9Ixgo3nNLMohgfYmCalcFjwT0CCkKa73PKWUBY8i/5itVSj5So5xsP
-	 PEgKScOyHa15FQLiXRZCZknsRs+dR/lcILItL2W7dERruTR3fvNb8+Q0nFrqnAMgQmlnQ
-	 pBdj7z/1FiDG3whU7GU9QuYkPkVNlxuCBpcXctVNdPi25OKS+RpQJaEk5Y3Gy3lUtek4T
-	 N120oCFwYkiGAF8kzMcgAai7ShDKeW3uZ5GF4fg54zbYpzMdPQjOLFuNEnBcWC4zxRlTp
-	 QWoK6iYZbBJ1DuNFdL6eJVB7EKnITdB37imZ+P2IcmGjf6rN6XndoQl3gECOHMPIVVlPw
-	 phcXDoUMr9IZ3jsKhtXIHyYmXwG3iSEGW2PmrSz4YxiTitRraTb/SBDWbFFZLfO5pXrTZ
-	 Wy1wPhnUjrlI3ZyKzOc6okO793wMWmSOOozPrcuY+CeaH7QmDnb9S4gV0l89Gks=
+	bh=cSv9l7Vk40fvDBSyCpP8B5XBYa3nkzrOqrr558Ucmlk=;
+	b=01fa0IFXT9AmqOdCGXfyhBD4Y7WKlOejaOba4HO6EutZeETGIe7cTc4UQS+o5MOniECk
+	 +GMdvg/Z7k77IsjuYrbFhC+0W9usWP0sVmGz20XAcpH9NPLk3IcvlzNeOZuPzwFXOjG3E
+	 VidIbnI04ppaZqu676UO/hetqK9HS+wy/nx5vqqGpBHov5SENbkBWBEwobhM3WR7xOTkr
+	 3O7vGcvL0qjbe0PR8GxYrRIxA5V15h9Nq2iZxgNlhT49RXXlQgPDJ2sRnfgqLuHaBaynv
+	 CzSVifN9wcLM6SZEqSbe/Ljnct0TXFi2WO/q81O0DdtwOBBDC7MZx48V7KUdiIZsPdw1O
+	 tpg7mHbPL1MEZxn1jsFwpVs+/yThCmDwpVAAK+4WW0tvKv7fRVMmsh4gp5FCtn0TkjUir
+	 1WMyh3+5S4WJlmL+IqIhRkq3gsfZbLvfT5kb6s5bYPadsA2S+GpIh0sP6jGz5M6FZJmAh
+	 gjCROkOUVLYPcw1AwnV4UqmqgBqpDzBOiJjc9LjMlX7GdKcGjjRnMxAQY37fE1dX4s8BQ
+	 PGhEq0g4fajCK1rxRERSZXoKIlN+SdxSzKni5Lt0zx88r98A5yGN8cUel90QCLHsTmQdT
+	 pNu/KWQ+Ea3Y5zOXgjzBVugyysl2Vq1mosVyhwVj11vH0kcB+pmK0yvspvg0554=
 ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-Date: Sat, 12 Sep 2026 17:19:06 +0200
+Date: Sat, 12 Sep 2026 18:04:43 +0200
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: xen-devel@lists.xenproject.org, Andrew Cooper
@@ -88,93 +88,102 @@ Cc: xen-devel@lists.xenproject.org, Andrew Cooper
  Stabellini <sstabellini@kernel.org>, Anthony PERARD
  <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Subject: Re: [PATCH 2/4] Eclair: relax long <-> function-pointer conversion
+Subject: Re: [PATCH 3/4] Eclair: relax "noreturn" function-pointer conversion
  deviation
-In-Reply-To: <fca27ac3-95c9-4177-a9cd-673f07230889@suse.com>
+In-Reply-To: <4cca58b6-b555-4064-aa26-5204dc4b99cc@suse.com>
 References: <6d212d60-5c0b-4909-996d-5d6a4906b7e1@suse.com>
- <fca27ac3-95c9-4177-a9cd-673f07230889@suse.com>
-Message-ID: <43e412de9e5165f33c572841bfc58dc9@bugseng.com>
+ <4cca58b6-b555-4064-aa26-5204dc4b99cc@suse.com>
+Message-ID: <3d473b8a85331856ea2b95f9448f2d6c@bugseng.com>
 X-Sender: nicola.vetrini@bugseng.com
 Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
+Content-Type: text/plain; charset=UTF-8;
  format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1789226347-D437587B-3E9E04CA/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1789229084-C5341757-4EDCF6CF/0/0
 X-purgate-type: clean
-X-purgate-size: 2931
+X-purgate-size: 3219
 
-On 2026-09-03 13:43, Jan Beulich wrote:
-> What is true for unsigned long is also true for plain/signed long, thus
-> also taking care of two instances of __x86_return_thunk() being cast to
-> long.
+On 2026-09-03 13:44, Jan Beulich wrote:
+> Like misra/rules.rst says, function arguments other than "void *" are 
+> okay
+> as well.
 > 
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> I can't explain why this covers the violation in mce.c:mce_callbacks'es
+> initializer, but not the one in mce.c:default_handler's.
+> 
 
-Reviewed-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Possibly differing attributes (e.g. cf_check vs section attributes)? 
+Just a guess that would need to be tested, though.
 
-Some nits below:
+> As a result of 6852334f8416 ("Arm/GIC: add noreturn in a few more
+> places"), vgic_v2_lpi_to_pending() and vgic_v2_lpi_get_priority() (both
+> returning non-void) would also need covering. (As said in a remark 
+> there,
+> non-void together with noreturn is somewhat odd.)
+> 
+
+Indeed
+
+> Really before and after this change there's no checking that parameter 
+> and
+> return types actually match. I have no clue how one would express such
+> checks.
+
+The presence of a bitcast indicates that the two types do not match 
+exactly. Typically function attributes are not relevant towards 
+determining a type difference, but different compilers may model 
+non-standard features differently (rightly so), in such a way that some 
+make a difference in the AST, and others do not.
+
+To check for compatibility of function pointers I would try activating 
+service STD.funptrcv, which essentially mirrors 
+-Wincompatible-pointer-types:
+
+caution for rule STD.funptrcv: (rule) A pointer is used to call a 
+function whose type is not compatible with the pointed-to type. 
+(untagged)
+p.c:8.8-8.8: Loc #1 [culprit: implicit cast converts from `void(*)(int)' 
+to `__typeof__(@EXPR@)*' (that is `void(*)(void)')]
+   qq = m;
+        ^
+p.c: In function ‘h’:
+p.c:8:6: error: assignment to ‘void (*)(void)’ from incompatible pointer 
+type ‘void (*)(int)’ [-Wincompatible-pointer-types]
+     8 |   qq = m;
+       |      ^
+p.c:3:6: note: ‘m’ declared here
+     3 | void m(int x);
+       |      ^
+
 
 > 
 > --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
 > +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-> @@ -368,17 +368,17 @@ constant expressions are required.\""
->  # Series 11
->  #
-> 
-> --doc_begin="The conversion from a function pointer to unsigned long or 
-> (void *) does not lose any information, provided that the target type 
-> has enough bits to store it."
-> +-doc_begin="The conversion from a function pointer to [unsigned] long 
-> or (void *) does not lose any information, provided that the target 
-> type has enough bits to store it."
->  -config=MC3A2.R11.1,casts+={safe,
->    "from(type(canonical(__function_pointer_types)))
-> -   &&to(type(canonical(builtin(unsigned 
-> long)||pointer(builtin(void)))))
-> +   &&to(type(canonical(builtin(long)||builtin(unsigned 
-> long)||pointer(builtin(void)))))
->     &&relation(definitely_preserves_value)"
+> @@ -391,11 +391,11 @@ constant expressions are required.\""
 >  }
-
-could be canonical(builtin(long||unsigned long))||pointer(builtin(void))
-
 >  -doc_end
 > 
-> --doc_begin="Conversion from unsigned long or (void *) to a function 
-> pointer can restore full information, provided that the source type has 
-> enough bits to restore it."
-> +-doc_begin="Conversion from [unsigned] long or (void *) to a function 
-> pointer can restore full information, provided that the source type has 
-> enough bits to restore it."
+> --doc_begin="The conversion from 'void noreturn (*)(void *)' to 'void 
+> (*)(void *)' is safe
+> +-doc_begin="The conversion from 'void noreturn (*)(...)' to 'void 
+> (*)(...)' is safe
+>  because the semantics of the 'noreturn' attribute do not alter the 
+> calling convention or behavior of the resulting code."
 >  -config=MC3A2.R11.1,casts+={safe,
-> -  "from(type(canonical(builtin(unsigned 
-> long)||pointer(builtin(void)))))
-> +  "from(type(canonical(builtin(long)||builtin(unsigned 
-> long)||pointer(builtin(void)))))
->     &&to(type(canonical(__function_pointer_types)))
->     &&relation(definitely_preserves_value)"
->  }
-
-Same as above
-
-> --- a/docs/misra/rules.rst
-> +++ b/docs/misra/rules.rst
-> @@ -432,8 +432,8 @@ maintainers if you want to suggest a cha
->       - All conversions to integer types are permitted if the 
-> destination
->         type has enough bits to hold the entire value. Conversions to 
-> bool
->         and void* are permitted. Conversions from 'void noreturn 
-> (*)(...)'
-> -       to 'void (*)(...)' are permitted. Conversions from unsigned 
-> long or
-> -       '(void *)' to a function pointer are permitted.
-> +       to 'void (*)(...)' are permitted. Conversions from [unsigned] 
-> long
-> +       or '(void *)' to a function pointer are permitted.
->         Example::
+> -  
+> "kind(bitcast)&&to(type(pointer(inner(return(builtin(void))&&all_param(1, 
+> pointer(builtin(void)))))))&&from(expr(skip(!syntactic(),
+> -   ref(property(noreturn)))))"}
+> +  
+> "kind(bitcast)&&to(type(pointer(inner(return(builtin(void))))))&&from(expr(skip(!syntactic(),ref(property(noreturn)))))"
+> +}
+>  -doc_end
 > 
->             unsigned long func_addr = (unsigned long)&some_function;
+>  -doc_begin="The conversion from a pointer to an incomplete type to 
+> unsigned long does not lose any information, provided that the target 
+> type has enough bits to store it."
 
 -- 
 Nicola Vetrini, B.Sc.
