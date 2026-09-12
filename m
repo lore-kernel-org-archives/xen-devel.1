@@ -4,40 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94EF8C88E53
-	for <xen-devel@archiver.kernel.org>; Sat, 12 Sep 2026 15:09:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1418790.1646509 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B37DC88E59
+	for <xen-devel@archiver.kernel.org>; Sat, 12 Sep 2026 15:19:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1418811.1646518 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5PLm-0007gq-9J; Sat, 12 Sep 2026 15:09:06 +0000
+	id 1x5PVV-0000uQ-Ah; Sat, 12 Sep 2026 15:19:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1418790.1646509; Sat, 12 Sep 2026 15:09:06 +0000
+Received: by outflank-mailman (output) from mailman id 1418811.1646518; Sat, 12 Sep 2026 15:19:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5PLm-0007gj-6H; Sat, 12 Sep 2026 15:09:06 +0000
-Received: by outflank-mailman (input) for mailman id 1418790;
- Sat, 12 Sep 2026 15:09:05 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x5PVV-0000uJ-7k; Sat, 12 Sep 2026 15:19:09 +0000
+Received: by outflank-mailman (input) for mailman id 1418811;
+ Sat, 12 Sep 2026 15:19:08 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <nicola.vetrini@bugseng.com>) id 1x5PLl-0007gd-4y
- for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 15:09:05 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1x5PVT-0000uD-Un
+ for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 15:19:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x5PLk-0042ST-ID
- for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 17:09:04 +0200
+ id 1x5PVT-008RIY-BZ
+ for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 17:19:07 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <nicola.vetrini@bugseng.com>)
- id 6aa56ae9-8faa-0a2a0a5109dd-0a2a4508e81e-14
- for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 17:09:04 +0200
+ id 6aa56d54-8faa-0a2a0a5109dd-0a2a45088ccc-6
+ for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 17:19:07 +0200
 Received: from [162.55.131.47] (helo=support.bugseng.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <nicola.vetrini@bugseng.com>)
- id 6aa56b10-f659-0a2a45080019-a237832f8d60-3
- for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 17:09:04 +0200
+ id 6aa56d6b-f659-0a2a45080019-a237832f9664-3
+ for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 17:19:07 +0200
 Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
  (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id 170184EE0097;
- Sat, 12 Sep 2026 17:09:04 +0200 (CEST)
+ by support.bugseng.com (Postfix) with ESMTPA id 9B9354EE0097;
+ Sat, 12 Sep 2026 17:19:06 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,103 +51,130 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
 Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1789225744;
-	b=LJYESk4J4p+XnQTbNXqgJGilJi312ySvRVaXS2sIk7mVZMqluWb/UlH8HVj70u4k408B
-	 +gHytz7aqKfvSCg4g6ORBAkpL3PBi1gBIyexuxu+CTgVd0aY4qVr1KmgyLKXfHrMq5HBz
-	 KPjUX6fyyGgxorZTc8QsNxEkodjkayxBReEPK3zmllu2M5yGWZ4Uv09ZitnhC4t5r9giq
-	 xPG61BoAa18lvgKMhy66UNHfoOhS5COY8NFQN825GjKLA6AIhBL1n/wyiUPXULbLSX1TB
-	 uvL5knFivPXA1c+fakh1Xh3jFTR8b+D1L20eQW4G2jIt3SODK72/wEtH3z1GT3bJz+sIR
-	 gC/lXMCJenlzTBdTQdbKGhHHcpGZ+upBE0FoaNKenXLWJ4lZGrPxHrUzWlwE4vjRVoeOE
-	 +uVXYgrPmkn+dB070HE5xvjAxnPXpEtJ+nYxrLFCc918eWhv++oy+x4tMD/mdFZyNie9r
-	 uF7X9b1/CsRn+ZpUgOnsRKF8cyIGl2zunS3pGi74tRMKm/goHRGnNqrz6rsxf814lekki
-	 ocsWMMxS8Nw6kLEa6IzNB8jM62FdMSMr6P1JfmZJS/rJn0ip6BJDb5buhU32WeG6hRdcf
-	 f0N+EocVjCyNKFf53JkY6UoFso5HcNSiAcLku2FWH1+y08UqBBnmcas0E/nGC0w=
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1789226347;
+	b=iUrDSMC74cO5fN28iRhreFSW2d3E86DsXTCf5JA43hm67QfyTzb2xN50zWlTok7ZUJxm
+	 mzDU10ToAtPlEUymCqsRUOlpT+c2iOhX6AS6hWMgmc3HO6AlGJSN8R1fZAEduTZ8qquTS
+	 I7zhZCZS4oRoX+nF3TYBN4MsX5cYCzGkXGfduen1F4F2oUuFEYJHv4ExbJXToT2zbs5ud
+	 m4v6b86O2eB2TKdibGxVN2L7BrQNfRbI2nLNq9BvOUhFELpVDeGntDQmd6GIyEGjTRHJQ
+	 R0PJlbw32tcqOVAu82anIaBgt2GgckaOToIZ3snxxis2zph6qhwN5V7K5arYpbF3m11QC
+	 ibyfFJL0Sm/sWCpebuNa8Jni7e6Q6tRKYoJS1L5mV7LwvBL/SbFuN4k9Ptw/M/7SFZHFi
+	 jIyG1pANxcH08xOmBaYnKivqoCyBtlEvZFKboTm4hrSJQUe5UEn4WvLDggIeWJ7BdaVMd
+	 6dAOQaukKelj6nC4ea3sOboBzfHxGWsfK2F9chKIeiwqCWJ1mMh/mFy6sxN2JR835dXL/
+	 WiDqKCr6kTYYv9rkOv02BoySetjEZ6gu/8oEGYPymBworF1LVBE9QXSrJ6xu/SZFZ/UKA
+	 bXCCAvNsLawZIStJCwb/fjTA4HC0v0uLb3EECKb5MIopfKbMhQasah3NhYoYN+M=
 ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789225744;
+	c=relaxed/relaxed; t=1789226347;
 	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
 	 Message-ID:X-Sender:Organization:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=ejPTY9h43ECeayBtlQG6CqAEIQZT5Y2gmubrHLJQH+M=;
-	b=417MyG5HjfeqkAlSV9uyMZmU5bUrY4HF2/kRZxo535W3w9fkwXJeZ12dZB+Jf944ZCJX
-	 ehFdlpEUasQWdAvAKbyrU/sXKYfFJwevUK8kaptjOHBJkZ8lswtsT6MBPUVJ2kGGQEsyQ
-	 wTKOadBapvaCHA3efHCK1/0tli/dy/q2dbJEdLaYWSr6GtUxnf/TDJZ913G0ohZOeAiwX
-	 Zdo9qr0snHsoXFXnKdnCYK+O9UjMopdFr84ZbBzUs/cjOTgHFgDPWoMbmB+88WwXtctal
-	 hBnUfnePbmmSZIt5mlADuN9scCTK7qPYZl587m3XJEL9BvpxNkn4HKvKTnAq8YtIhhNjX
-	 bGc9ElqWspObrNx6aN7YubJwiiLMnYGNywZjcGNyPzj/epULqwvVLatfccOP8OqnycdOH
-	 pzCDDkz15Y0VnESiaurHcz66DucBk2etHgDpOFPEVByu4C3pnECPSCXGnpttUOaTJMCeo
-	 JxwAwiTph15Ybqa/+lG6DpDaOzWIJVish1EqTws8hDo2sHpv/dIBmeO0G6ddV6KC6U+8c
-	 c20DsohYGtA/gtTjS85t52vgYtERypB6ta1PL5Q1CZj0T0bS5SG5HweJW08SfvtHldMSZ
-	 PKATo8sASDQ9PQDvrACY5QGCxOHbkE/NYNnzfVpTHfZqqJbR5k2JGPq/ZPWqPs8=
+	bh=CI1LScU60Qem93FxM837FcjNQm4bgRcPvDdHg5ZULys=;
+	b=Ls8RdDDvZwwWMItVsOS4BL/8Vav/3LCbLy5xeQHZ5klnqYNesa0mIrJPVT7TNQNeSb5l
+	 YHqcyeJOgvy8888MnC+g7AORPPCQ72wQnuD8KiJANqGP2RbhJrg7Cdqch8AsbTNxSu5XO
+	 qYSKvfPBtd3gkgwswUEUkAsZ9E7QJDcQXC6+pRvqW1A0FfdL1yNOf7fnI94vgLEwsyyno
+	 MQ+ndDLcZZXHtOb9Ixgo3nNLMohgfYmCalcFjwT0CCkKa73PKWUBY8i/5itVSj5So5xsP
+	 PEgKScOyHa15FQLiXRZCZknsRs+dR/lcILItL2W7dERruTR3fvNb8+Q0nFrqnAMgQmlnQ
+	 pBdj7z/1FiDG3whU7GU9QuYkPkVNlxuCBpcXctVNdPi25OKS+RpQJaEk5Y3Gy3lUtek4T
+	 N120oCFwYkiGAF8kzMcgAai7ShDKeW3uZ5GF4fg54zbYpzMdPQjOLFuNEnBcWC4zxRlTp
+	 QWoK6iYZbBJ1DuNFdL6eJVB7EKnITdB37imZ+P2IcmGjf6rN6XndoQl3gECOHMPIVVlPw
+	 phcXDoUMr9IZ3jsKhtXIHyYmXwG3iSEGW2PmrSz4YxiTitRraTb/SBDWbFFZLfO5pXrTZ
+	 Wy1wPhnUjrlI3ZyKzOc6okO793wMWmSOOozPrcuY+CeaH7QmDnb9S4gV0l89Gks=
 ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-Date: Sat, 12 Sep 2026 17:09:04 +0200
+Date: Sat, 12 Sep 2026 17:19:06 +0200
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>,
+ <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Anthony PERARD
+ <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Subject: Re: [PATCH 1/4] x86/domain: address Misra rule 11.1 violation in
- reset_stack_and_call_ind()
-In-Reply-To: <be5f65cc-332e-4292-9b63-33196cc8ce81@suse.com>
+Subject: Re: [PATCH 2/4] Eclair: relax long <-> function-pointer conversion
+ deviation
+In-Reply-To: <fca27ac3-95c9-4177-a9cd-673f07230889@suse.com>
 References: <6d212d60-5c0b-4909-996d-5d6a4906b7e1@suse.com>
- <be5f65cc-332e-4292-9b63-33196cc8ce81@suse.com>
-Message-ID: <bddc66b1fc0936a9a85365969f17254c@bugseng.com>
+ <fca27ac3-95c9-4177-a9cd-673f07230889@suse.com>
+Message-ID: <43e412de9e5165f33c572841bfc58dc9@bugseng.com>
 X-Sender: nicola.vetrini@bugseng.com
 Organization: BUGSENG s.r.l.
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1789225744-D694287B-7BAF051A/0/0
+X-purgate-ID: tlsNG-c1860d/1789226347-D437587B-3E9E04CA/0/0
 X-purgate-type: clean
-X-purgate-size: 2071
+X-purgate-size: 2931
 
 On 2026-09-03 13:43, Jan Beulich wrote:
-> Eclair dislikes both sides of the comparison to differ in noreturn
-> attributes, thus deeming this a violation of "Conversions shall not be
-> performed between a pointer to a function and any other type". Since 
-> gcc
-> doesn't permit use of "noreturn" types used in a typecast, resort to
-> typeof().
-> 
-> No functional change intended.
+> What is true for unsigned long is also true for plain/signed long, thus
+> also taking care of two instances of __x86_return_thunk() being cast to
+> long.
 > 
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
 Reviewed-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 
-> ---
-> Really Eclair's diagnosis is misleading here, and not only because of 
-> the
-> missing "noreturn" there, making both sides be identical: There are no
-> implicit conversions performed on this kind of pointer operands of an
-> equality expression. A diagnosis of "comparison of pointers to 
-> different
-> types", along the lines of what compilers use, would be more to the 
-> point.
+Some nits below:
+
 > 
+> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
+> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+> @@ -368,17 +368,17 @@ constant expressions are required.\""
+>  # Series 11
+>  #
+> 
+> --doc_begin="The conversion from a function pointer to unsigned long or 
+> (void *) does not lose any information, provided that the target type 
+> has enough bits to store it."
+> +-doc_begin="The conversion from a function pointer to [unsigned] long 
+> or (void *) does not lose any information, provided that the target 
+> type has enough bits to store it."
+>  -config=MC3A2.R11.1,casts+={safe,
+>    "from(type(canonical(__function_pointer_types)))
+> -   &&to(type(canonical(builtin(unsigned 
+> long)||pointer(builtin(void)))))
+> +   &&to(type(canonical(builtin(long)||builtin(unsigned 
+> long)||pointer(builtin(void)))))
+>     &&relation(definitely_preserves_value)"
+>  }
 
-The point here is that the types are not identical, if you consider 
-noreturn as part of the function type (as clang does) or not (as GCC 
-does). This is the reason why we err on the side of caution and diagnose 
-this, and it's not likely to change in the near future. Perhaps we could 
-make the violation message more explicit about the motivation of the 
-mismatch.
+could be canonical(builtin(long||unsigned long))||pointer(builtin(void))
 
-> --- a/xen/arch/x86/include/asm/current.h
-> +++ b/xen/arch/x86/include/asm/current.h
-> @@ -208,7 +208,7 @@ unsigned long get_stack_dump_bottom (uns
->  /* The constraint may only specify non-call-clobbered registers. */
->  #define reset_stack_and_call_ind(fn)                                   
->  \
->      ({                                                                 
->  \
-> -        (void)((fn) == (void (*)(void))NULL);                          
->  \
-> +        (void)((fn) == (typeof(dom_xen->arch.ctxt_switch->tail))NULL); 
->  \
->          switch_stack_and_jump(fn, "INDIRECT_CALL %", "b");             
->  \
->      })
+>  -doc_end
+> 
+> --doc_begin="Conversion from unsigned long or (void *) to a function 
+> pointer can restore full information, provided that the source type has 
+> enough bits to restore it."
+> +-doc_begin="Conversion from [unsigned] long or (void *) to a function 
+> pointer can restore full information, provided that the source type has 
+> enough bits to restore it."
+>  -config=MC3A2.R11.1,casts+={safe,
+> -  "from(type(canonical(builtin(unsigned 
+> long)||pointer(builtin(void)))))
+> +  "from(type(canonical(builtin(long)||builtin(unsigned 
+> long)||pointer(builtin(void)))))
+>     &&to(type(canonical(__function_pointer_types)))
+>     &&relation(definitely_preserves_value)"
+>  }
+
+Same as above
+
+> --- a/docs/misra/rules.rst
+> +++ b/docs/misra/rules.rst
+> @@ -432,8 +432,8 @@ maintainers if you want to suggest a cha
+>       - All conversions to integer types are permitted if the 
+> destination
+>         type has enough bits to hold the entire value. Conversions to 
+> bool
+>         and void* are permitted. Conversions from 'void noreturn 
+> (*)(...)'
+> -       to 'void (*)(...)' are permitted. Conversions from unsigned 
+> long or
+> -       '(void *)' to a function pointer are permitted.
+> +       to 'void (*)(...)' are permitted. Conversions from [unsigned] 
+> long
+> +       or '(void *)' to a function pointer are permitted.
+>         Example::
+> 
+>             unsigned long func_addr = (unsigned long)&some_function;
 
 -- 
 Nicola Vetrini, B.Sc.
