@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 42257C79FB6
-	for <xen-devel@archiver.kernel.org>; Sat, 12 Sep 2026 08:49:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1418292.1646465 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A15C9C88E53
+	for <xen-devel@archiver.kernel.org>; Sat, 12 Sep 2026 09:20:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1418305.1646473 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5JQN-0003z9-HK; Sat, 12 Sep 2026 08:49:27 +0000
+	id 1x5JuA-00015p-Qb; Sat, 12 Sep 2026 09:20:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1418292.1646465; Sat, 12 Sep 2026 08:49:27 +0000
+Received: by outflank-mailman (output) from mailman id 1418305.1646473; Sat, 12 Sep 2026 09:20:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5JQN-0003z1-Cv; Sat, 12 Sep 2026 08:49:27 +0000
-Received: by outflank-mailman (input) for mailman id 1418292;
- Sat, 12 Sep 2026 08:49:26 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a094ce8ccb000c4f3@swg.vates.tech>)
- id 1x5JQM-0003yv-5H
- for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 08:49:26 +0000
+	id 1x5JuA-00015i-NP; Sat, 12 Sep 2026 09:20:14 +0000
+Received: by outflank-mailman (input) for mailman id 1418305;
+ Sat, 12 Sep 2026 08:50:31 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <suunj1331@gmail.com>) id 1x5JRP-0005Pj-8L
+ for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 08:50:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x5JQL-004L2T-FE
- for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 10:49:25 +0200
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a094ce8ccb000c4f3@swg.vates.tech>)
- id 6aa511eb-8faa-0a2a0a5109dd-0a2a4509d364-22
- for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 10:49:25 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a094ce8ccb000c4f3@swg.vates.tech>)
- id 6aa51213-be1a-0a2a45090019-b9ff1c22a2cb-3
- for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 10:49:24 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a094ce8ccb000c4f3.004 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Sat, 12 Sep 2026 08:49:19 +0000
-Received: from [192.168.1.46] (88-183-178-13.subs.proxad.net [88.183.178.13])
- (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id C8C3581C9B;
- Sat, 12 Sep 2026 10:49:14 +0200 (CEST)
+ id 1x5JRO-00ASB2-LY
+ for xen-devel@lists.xenproject.org; Sat, 12 Sep 2026 10:50:30 +0200
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <suunj1331@gmail.com>)
+ id 6aa51240-e002-0a2a0a5209dd-0a2a4507c87c-20
+ for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 10:50:25 +0200
+Received: from [74.125.227.140] (helo=mail-pj2-f12.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <suunj1331@gmail.com>)
+ id 6aa51250-b4ea-0a2a45070019-4a7de38cfb6c-3
+ for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 10:50:25 +0200
+Received: by mail-pj2-f12.google.com with SMTP id
+ d9443c01a7336-2d8fb334ddcso7035685ad.0
+ for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 01:50:25 -0700 (PDT)
+Received: from fedora ([61.74.238.173]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2dd2ccaceafsm21924715ad.9.2026.09.12.01.50.20
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Sat, 12 Sep 2026 01:50:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,123 +52,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=9ds9os1bCD8ftijN8a/IzEw6y6RSqfDObnnO6Ib1gzg=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=Hew6zxYX2tI0AT5t8KCA5AzMRIl9tjbIjAvEHuQkgkV/ZGMHb9DxsWXdEYN1uc7Uj6kovi4hs
- wvOngk3YyCePN+xDpdzS6/sG/v0A5TSde4Hs7WGZ5bML//SMtPJOiHYOXfbgsvEuAh8D84kL52W
- RqObMTe7a3mSfodydFMgadPq5YDYfT1Jg3dFqlIWedEBRkfrlYObmdpxTivO/6teVMGaygix+S1
- J93On+IEwTLCiiplJws98FblfbZWwOiZ6XVs7jXkqjlRQV+xV3nXy7MHTGZJFs6otD8lS9imtut
- rhk7ZsktmzC2snD/PFEt358IKzrXZRXd0qWNR2DESbQw==
-X-Zone-Loop: 23f04bb1aedf245a9df8f5ce3f5877ad2fc6eaee4665
-x-campaign-type: default
-x-transaction-id: bb7b05b2-88f9-4ad1-9db6-bfbca1634416
-x-swg-uid: 01-0203a3e2-e025-4893-a6c7-2687883c8a24
-X-Mailer: Sweego
-Message-ID:
- <1789202959.8631fc262581453bbf619ec5b2062170.1a094ce8ccb000c4f3@vates.tech>
-x-swg-bid: 1789202959.8631fc262581453bbf619ec5b2062170.1a094ce8ccb000c4f3
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="In-Reply-To:Content-Disposition:Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789203024; x=1789807824; darn=lists.xenproject.org;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=F06q9s994N2wdwEDu0iitxn9mZtTsmX3Vz77YooKqCM=;
+        b=oBSomCXAyZIeeZmsDIkJd+3U+ivimm1iSt6LlVGg9LfSLBgJaACAiyxNUs6GAn6LWV
+         ySRH5U3TXz3YBpLarXKF8JA8ZGJtOCPCvoKma3VZDFQoNyTud114gf4vHM/ilbQY/Kj6
+         bMShdpcJV4SsBRi3I0bsxx9KSjgabvGVQqM5T/zyt3o1DjPT0KrWY7nIhNIs1PnIx2Ks
+         8JkdC6f47LwYYpz+0qVSVmTVbwey9ywcekWHsp3NwUvXgiqoK39YOhKFYGBRWhjuVRoI
+         5hsbEqashAfjziBSdS2IKBSFTdJiCfP+WkR3geVRXr128/ymZGiVfIlgtRP+Wx+as2A8
+         pNqg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789203024; x=1789807824;
+        h=in-reply-to:content-disposition:content-type:mime-version
+         :references:message-id:subject:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=F06q9s994N2wdwEDu0iitxn9mZtTsmX3Vz77YooKqCM=;
+        b=hWH8S+t39Lz0FI+6ZyR+B+VHtimV7cZIuudqkuLaqa2hosz1lNEyCVDAWidmgxTcqc
+         XoRokGFByyImwCYhmhz5/BPbtSm8EeawuZJ1PfFxFLh3jzODSr+H10ZG+dDC7+h1hdDn
+         zJTTNnCWigX3MIg3aGwoRv9fLcXxTmw/jDUxith5mtnTiMV5w1z61mfBpndYxCJyt3F5
+         4MGRy94yH/X9+E2vSnxTZ142b8x3brKyTBaoLexD8MS2dIGLteL5CELFcfHhz1ohrxpJ
+         ATp1/7oMwn2iYy7bf8qj/DRC+YFSFtdwl82cWpeJUS8tcviXwsSf9QfTW864Aj0LA1bG
+         twiQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwRdepfvdwGNMBJGwJP4Bj36Os+vruoRI+AbntkBoWgJGvtbwBcOyRKsxoQnmdcwNhvOu8Lie0WwDQ=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mt0MsMFBAVx5hQTQNnTHV2e+DlahLEnttY/0a+3xt2a29jf6io
+	hfi60/hVPkWazojXLuqT36RJ5fYpZ3oBheuSbD3lo/c6KS99lBwXBm2N
+X-Gm-Gg: AYBFou2QTXfSMQRVCofJnsATw7aqrC6V36ZzrzoIEu3+XDdHhlkBmAE2ikjx8/P8ERN
+	lxnUoBFOc/4rP7FQF33RTR0oTryQTUQ1PU2OMhH8j0X0D0oks6mw2vCFrdB9NVSfsq/j8GZUCAj
+	Coj1nmT+RBgY4mS/HcMNa4Yb94OCwl7PBi9/ZCXvWVEDdnpmxvvN2zkn4aL+GOga9rdoMS4/YdP
+	vJuumv6PxFCXEDI1vG3vmAVJ3lKybI0MuaPWMAuybr34sU0FQCwh46Qa6MqJargJxaa3NKepzTt
+	coGObS7x6uUiO4uWVLrnEzhx8RRW2WDlwpApGPvMhDTjFfOUK98Aqpf4+gX2m6cJtqy3/pwIOhw
+	71vh0Yw66gD3/WZYqgbazHFv+tmz7TI9DP6yilsXB6TzyZN/X7nGnVu0ynvWNxOMR6kjZF+oaL9
+	8tX99X5KHcmrsAN+vCXQRdDmRIIHF+6Lqr8RQolxpdNjlujRsLSpc9cWKu8G4ysmLeVEkzjSEAL
+	yNojpcFSHhKazCIdU0PRdY=
+X-Received: by 2002:a17:902:f60d:b0:2db:5c0a:f184 with SMTP id d9443c01a7336-2dd2a34fd91mr152629015ad.17.1789203023740;
+        Sat, 12 Sep 2026 01:50:23 -0700 (PDT)
+Date: Sat, 12 Sep 2026 17:50:18 +0900
+From: SeungJu Cheon <suunj1331@gmail.com>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Jan Beulich <jbeulich@suse.com>, 
+	Romain Caritey <Romain.Caritey@microchip.com>, Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+	Zheng Zhang <zhangzheng@iscas.ac.cn>, Alistair Francis <alistair.francis@wdc.com>, 
+	Connor Davis <connojdavis@gmail.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
+	Julien Grall <julien@xen.org>, Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v2 09/39] xen/riscv: implement virtual APLIC MMIO
+ emulation
+Message-ID: <aqUO_u-Spcmjcy8P@fedora>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <4413e157dfe67167f651df1ea92ab61ca4182723.1787838835.git.oleksii.kurochko@gmail.com>
+ <68ab5241-7301-4988-9420-bcccc4b16e3d@suse.com>
+ <071ed630-4c72-4df1-b15e-3037e3f076ba@gmail.com>
+ <48857983-ac79-44a0-8a11-93f62ac3d0c4@suse.com>
+ <efd67e96-e24f-4bfb-b484-51514c5fc18b@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH] Add basic b4 config file
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <89c7c026-3986-440a-b2d1-158eb5f0fbbe@citrix.com>
-References: <1789133309.8631fc262581453bbf619ec5b2062170.1a090a7c48d000c4f3@vates.tech>
- <89c7c026-3986-440a-b2d1-158eb5f0fbbe@citrix.com>
-Date: Sat, 12 Sep 2026 10:49:07 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789202947; l=2458;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=ZYeDOhJpAcGq2IenvR4OpMIVcfyFogtM5bp2pwbw9ZQ=;
- b=CRrz4yyPdLuNkcuZooo5xpZJQGC53XsXqHaR8wWw54vkzr7vAF5rBK/HBmUA0H7B1OIZPMOEb
- SJ6C+q0LCoHBslUvxPspTRlgiSkcZf9pJoD/zVJU7T1gB5T2ziGBcgN
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1789202958849
-X-purgate-ID: tlsNG-bad1c0/1789202965-3A8D9034-7FE7CECF/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <efd67e96-e24f-4bfb-b484-51514c5fc18b@gmail.com>
+X-purgate-ID: tlsNG-ef75cf/1789203025-A74D3AE4-AB735BDF/0/0
 X-purgate-type: clean
-X-purgate-size: 2462
+X-purgate-size: 2133
 
-On 2026-09-11 17:45:37+01:00, Andrew Cooper wrote:
-> On 11/09/2026 2:28 pm, Baptiste Le Duc wrote:
+On Thu, Sep 10, 2026 at 04:24:06PM +0200, Oleksii Kurochko wrote:
+[...]
+> In v3 I'll (a) stop using ->processor and take the (guest_file_id,
+> vsfile_cpu) pair, which imsic_update_state() updates atomically under
+> vsfile_lock, and (b) do the snapshot plus the h/w TARGET write under
+> aplic.lock, which aplic_reconfigure_target() also holds. As
+> imsic_update_state() completes before aplic_reconfigure_target() (also that
+> could be checked in this patch series and is introduced a little bit later.
+> Probably I have to re-order some patches again) takes the lock, the emulated
+> write either happens before the scan (and gets fixed up, or skipped as
+> already correct) or after it (and sees the new location).
 > 
-> > b4[1] is a convenient tool for mail-based contribution. A config file[2]
-> > tracked in the tree lets the project ship a few defaults that match the Xen
-> > patch submission rules.
-> >
-> > This aims to help new contributors who have never used a mailing list avoid
-> > mistakes when sending their patch series.
-> >
-> > The tree has no scripts/checkpatch.pl or equivalent, so there is nothing
-> > for b4 to run per patch. Disable the needs-checking pre-flight check so a
-> > series can be sent without first running b4 prep --check.
-> >
-> > [1] https://pypi.org/project/b4/
-> > [2] https://b4.docs.kernel.org/en/latest/config.html
-> >
-> > Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-> 
-> I don't use b4 for preparing series myself, but I can see how this would
-> be useful for newcomers.
-> 
-> > ---
-> >  .b4-config | 13 +++++++++++++
-> >  1 file changed, 13 insertions(+)
-> >
-> > diff --git a/.b4-config b/.b4-config
-> > new file mode 100644
-> > index 0000000000..1ca1f0625e
-> > --- /dev/null
-> > +++ b/.b4-config
-> > @@ -0,0 +1,13 @@
-> > +#
-> > +# Common b4 settings for sending patches to the Xen Project upstream.
-> > +# https://b4.docs.kernel.org/
-> > +#
-> > +# See docs/process/sending-patches.pandoc for the patch submission rules
-> > +# these settings implement.
-> 
-> I doubt people will be reading this file to discover how to send
-> patches, and that piece of documentation is in the process of moving
-> into the handbook.
-> 
-> I suggest dropping this sentence.  All that's going to happen to it is
-> becoming stale shortly.
-You're right, I'll drop it in v2, thanks.
-> 
-> > +#
-> > +
-> > +[b4]
-> > +	send-series-to = xen-devel@lists.xenproject.org
-> > +	send-auto-to-cmd = echo
-> > +	send-auto-cc-cmd = ./scripts/get_maintainer.pl --noroles --norolestats --nogit --nogit-fallback
-> 
-> Where did this come from?   Because it didn't come from Xen's version of
-> get_maintainers, which is a long way removed from Linux's
+> Any better option I have now?
 
-It came from QEMU. I double-checked, and indeed Xen's get_maintainer.pl
-doesn't support the negated form of these options, except for --nogit.
-However, --nogit is already part of the default options, so none of
-these flags are actually needed. I'd suggest:
+Unless I am missing something, the snapshot also needs to handle the
+case where the target vCPU has not been attached yet:
+vcpu_guest_file_id() returns zero until the vCPU has gone through
+imsic_vsfile_attach(), i.e. until it is scheduled for the first time,
+and vsfile_cpu is NR_CPUS until then.
 
-  send-auto-cc-cmd = ./scripts/get_maintainer.pl
+With the current code, a write targeting such a vCPU makes
+aplic_msi_target_gen() program Guest Index 0 into the physical APLIC
+target register. According to AIA section 4.5.16, Guest Index 0 selects
+the hart's supervisor-level interrupt file rather than a VS-level guest
+interrupt file. Could this cause the MSI to be delivered to Xen's own
+interrupt file with the EIID supplied by the guest?
 
-What do you think?
-> 
-> ~Andrew
+I also could not find where such a target would be updated once the
+VS-file is attached. imsic_migrate_vcpu() reprograms the relevant
+targets during migration, but the initial imsic_vsfile_attach() path
+does not appear to replay targets which were written before the
+attachment.
 
+Whether a write targeting an unattached vCPU should be supported seems
+like a separate question. Independently of that choice, would it make
+sense to avoid programming the physical TARGET register while
+guest_file_id is zero? The virtual target could either be rejected, or
+retained in the shadow target[] and programmed once the VS-file is
+attached.
 
+Thanks,
+SeungJu
 
