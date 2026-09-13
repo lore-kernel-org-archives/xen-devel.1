@@ -4,41 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85546C88E40
-	for <xen-devel@archiver.kernel.org>; Sun, 13 Sep 2026 03:27:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1419482.1646635 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F099C88E40
+	for <xen-devel@archiver.kernel.org>; Sun, 13 Sep 2026 05:37:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1419538.1646645 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5asW-0003TR-6X; Sun, 13 Sep 2026 03:27:40 +0000
+	id 1x5ctD-0003rX-U8; Sun, 13 Sep 2026 05:36:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1419482.1646635; Sun, 13 Sep 2026 03:27:40 +0000
+Received: by outflank-mailman (output) from mailman id 1419538.1646645; Sun, 13 Sep 2026 05:36:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5asW-0003TK-37; Sun, 13 Sep 2026 03:27:40 +0000
-Received: by outflank-mailman (input) for mailman id 1419482;
- Sun, 13 Sep 2026 03:27:38 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x5ctD-0003rQ-QJ; Sun, 13 Sep 2026 05:36:31 +0000
+Received: by outflank-mailman (input) for mailman id 1419538;
+ Sun, 13 Sep 2026 05:36:31 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1x5asU-0003Rk-5h
- for xen-devel@lists.xenproject.org; Sun, 13 Sep 2026 03:27:38 +0000
+ (envelope-from <jgross@suse.com>) id 1x5ctC-0003rK-Vh
+ for xen-devel@lists.xenproject.org; Sun, 13 Sep 2026 05:36:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x5asT-00Cx8K-Ix
- for xen-devel@lists.xenproject.org; Sun, 13 Sep 2026 05:27:37 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x5ctC-00FLur-1l
+ for xen-devel@lists.xenproject.org; Sun, 13 Sep 2026 07:36:30 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6aa61794-2eae-0a2a0a5409dd-0a2a4509c456-28
- for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 05:27:36 +0200
-Received: from [98.137.64.146] (helo=sonic301-20.consmr.mail.gq1.yahoo.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@aol.com>)
- id 6aa61827-be1a-0a2a45090019-628940928ec7-3
- for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 05:27:36 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic301.consmr.mail.gq1.yahoo.com with HTTP; Sun, 13 Sep 2026 03:27:34 +0000
-Received: by hermes--production-ne1-6dbcb84f44-w9zrq (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID 14c5b846713c82b711c43225786a63a7; 
- Sun, 13 Sep 2026 03:27:28 +0000 (UTC)
+ (envelope-from <jgross@suse.com>)
+ id 6aa6365d-e002-0a2a0a5209dd-0a2a4503c1dc-2
+ for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 07:36:29 +0200
+Received: from [74.125.228.140] (helo=mail-ej2-f12.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6aa6365d-fae8-0a2a45030019-4a7de48ce250-3
+ for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 07:36:29 +0200
+Received: by mail-ej2-f12.google.com with SMTP id
+ a640c23a62f3a-c2940ef15d3so151912466b.2
+ for <xen-devel@lists.xenproject.org>; Sat, 12 Sep 2026 22:36:29 -0700 (PDT)
+Received: from ?IPV6:2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112?
+ (2a00-12d0-af5d-ad01-5d3f-14e6-9bcb-5112.ip.tng.de.
+ [2a00:12d0:af5d:ad01:5d3f:14e6:9bcb:5112])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c2966066b75sm264030566b.29.2026.09.12.22.36.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sat, 12 Sep 2026 22:36:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,229 +55,328 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="From:To:Cc:Subject:Date:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1789270054; bh=Hevw5B+Wr7DTBK/0kWmrMKgRnH/bAgiz5/Fykn/Eyuo=; h=From:To:Cc:Subject:Date:In-Reply-To:References:From:Subject:Reply-To; b=uY2lp5G1atnaUMVr0UscmeYJdwP0iwLvqcIb5ek5Yx7Jk04f2MuLHly8JbL038h+Dz5j6g00HJB53lMFolBUFiKDhenuE7OiftMW4oGSWCLXAz/rgz7srt4ORRoMNHPi0ZyUYUHbULJ5saf9Vmel1wTVrZqa12gn3FCD82QDCTz5cfPK8ItEOP60DItPbd6AUkxKy6VEn3phhH2oZiyDtcc7yvFT+duXFP5c7u7QuWVdHnTVaBpvidn4Jrmd2ksOS/OPudnFvgKG5IR4TkWbz+t8alo65i/KFbd0p3VcgElxW/LJNaHDOlJ68pMhM9HaNhMVtgb0IbEKtRsAyanuAQ==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1789270054; bh=L/S97QuLM5PBrc49OcJhPUSRtUyjGcV/+NyI/8Pj037=; h=X-Sonic-MF:From:To:Subject:Date:From:Subject; b=UFQlu9zugYRcYYk+bet5IhgBoCs09GbijWWiC0cZ6E4Sa9RvGmLfeVf0VGi4FEOq4hhKDCRB7wyiPNeE4uNy3FpOKw0sCO1YxrKHRv2cI3YV6cQWjaKbhEc9OVuJE+WYVkDwe+ddLqhCb2dF8kreSccF+saeBDml0OOnhX/SrUhDjd7nUGmZCeYpNx/7nDa+cqOXgdS6bz8yKG1tXmzxkmXhOy5NmD/+bPhVP6NV3rE/8ztPXeC28PY005Mc/HelGrHw7+dLLFrfWygeyptEofMfbo8+R47yId1S8Fj2xA3T1e/R/lMBz46PbOLt4UzgwmHiym0Q5nTOtru6DLahtw==
-X-YMail-OSG: MABzF34VM1kLtJmAr1eV5IlNnii6cA6572ltl2Ut9a2FKZEgqP8dpOG53E35F9Q
- MMEkiElQEqUu3q9MJtkEUHjtnWQGqJXvzvWvnnhuyXVfbrX0CWnnmJeGgTU3W48tLC2Z5X8S8xwB
- wGiEsHHWI3zf0txp_8LyQB52YzEjUFuGqIq7DWtsmYzm7DKGcpYT8jqd223hI3sjQcx5Qa9krlIL
- diwlzVjPA3_uB.lDeyGeeG8NTRCATq.YYg7OtOr01JR1I13zeW.5wdAIpF79ssQKbIQ1Gj0ylNtN
- hF4tsLDZtSr4HjNOTuD6x93jdODa3YUpCS9QuURhjELyJw8T9YXnwyfIM.CrKtCrqazvPx.d6lhE
- SOoUBFuA80Uy4YAKxqFvM1hadL1XahH1My_bHZ4QVfYCrgaAoX0YaR_7rpMV76tPjs4_z9LvHwWC
- reRq54QDMluMPyQUUO4GFzEpCS3G7VVZNlJvJt8AcjsR9U1sLZZJ0qdR1t9HfGSRJOddPTXlX0Ts
- LEVKkb8ZoQqg0HjU_F3SuV.xHs2nC8W.TVgGQMGEHpV.6.0CDJxOH1kDfM5VIKbEzpiYrUuuSYkU
- ydUVqIzlrUcw9gXtAUFrDdTl9G6JQ_5U0b4MDQYm32K98Ub5GGk9kJy0wkV2udEO8QjpCT1DhTqR
- 8sU0L7AvFTu.SpydNBvHhVeDJFQDAoharDvTz8dQmJI5ha1j0Ay8PsXB00y82mjAglPsXEZ4oPjD
- SJRVM7MFYtlpths95YmXGJYMGHw78PPsBKxvfUYJnvzx8u3hYRqK4UjLwWz1caWG1DRSdDtVkNNQ
- .7Km9kc43nQcFKm2ToSTaaKaAMuu7N8ThN14KUHv2r37BEtXJHbG.vyClLPoyMhLfyARdkC9A7WZ
- 2rxniiviN8w_P7WSrQxZyglyNIKqIByvI4lptHSLCmF_miPu27BEQNcNYyDPyqhMGtHCmBSy.dsM
- gecEXRynxPBOAlCTKeQLQ3A6RM8_TLq4yb7CzLzqoB3IlZFWbCa7kR7r6OYLiFR7Dt8K8fO9yyRl
- czxC0t06WLjcjuJK_uZbBTcFRjUWEIwyGKVfBDHUomVCyyGG1eY4nllRLbIMkz2ECuT2sAEl8l3j
- 5UoZ17yWD4CRB0RLXDljPBroJKW3AOD2yhzfcxdX2Ak89evT3sdeXzCTWhtT1e8PcZmw7n2wDHz_
- 0Sgn7Uu4bWSAdwpALaFqBEyD9BFFfQzfXsNulmf1QqyqKcpR1SIpxr3HyPL0D.ZqAFWC0AVX0jm.
- AVvvCwQtN7briAtzjGJ_CNL8qrZZz.OZh.q3EjYedFjFfY_Mq7jHn8DHWqIQM1v_kzl_NSAxn_H0
- cjyqFy98NgcCDhd9_3r86H6NSkt6g9j2OZ3aX8j_x.MwGbAGD_qHiJnHH4ToQMJdTZgItsRddjm9
- j_g0Y7fttDMw8PlYJMNw4SlPemyURDpQGUUY2YWTyDjQFqk9b8zbMcSv6WE_P5AtOsZjRy_aFWB3
- UbRceVrRb6MpxiN6JBp3GQACgBE9Hh6l52osbv1ybWa2VXEqfsUr2AS6aWJfUWE4RAm5VIru49Xa
- prVQjhXynxxi1c3K2Nd1fOzbEgJrHPSxCaGC2KJ.yrtUtmVogp_CXA8L475NMxZ4lNxrkKnZiWVA
- Rx_i56tvlWWmzvTRBB61k1FPgjnd2pqcVAmx5ypcds2bLaB4puHzS6_St2joQ2Cc5mnkoJtTL4p0
- 5tkOzdFr3Tv1.efS8bxZAmiW1L.K0ZQIdbFmg3R2RBU4GyZsczCsEMJssfHoq5KbfIEB6UpocOmt
- SWOP38VFcWk3._iVmVFv9X7UF.edlDzXbwNOZ0Ed6Igk5HoSPTkrNu4ARCFGS5PtKsfXWwFuYVJR
- 3LCAzeqg3FtCJGzu.ymwnpxwqtS.88ksc152oaa99FT5K5k0n9FAJB_ORVYbYJukgjjaxTPaAXES
- Opk0xGvy3SjlKpZ0_mPDqij3SjJkTqgvBQ.v3oLXtr4XFHVIu18mdOCYLcb0bj6pH8kae8Zti1wb
- WFxJaYpUB2ztgxGxoXpllYRp5GmcvgBc3tTBFWGMKbRw_GaHxR89xb5NWXtInszNSwR0NYHOxi8o
- b4rs5n5Oc.zlbbBasnOhvphFbVK9.A6YN_fZF4Zgu.1gsFN.f6EVRseumFdKgN2R.yh6iM6.pD5o
- znmoIKD96PiOmj6L9lebFHVejVFSSG10uLMZBp7tm.9ZQgRxgJ3WzZ3o88_.kXzbeBZAlhVLY_Tq
- D..zwK7DEpCKjGU..8rRyQAP2P8fAQ14GJ9M-
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: 25657ca0-4f28-40f3-9cdb-11cc86d67d9e
-From: Chuck Zmudzinski <brchuckz@aol.com>
-To: xen-devel@lists.xenproject.org
-Cc: qemu-devel@nongnu.org,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Juergen Gross <jgross@suse.com>
-Subject: [PATCH v4 2/2] libxl: add OpRegion and VBT to firmware when assigning IGD
-Date: Sat, 12 Sep 2026 23:27:24 -0400
-Message-ID: <20260913032724.62438-3-brchuckz@aol.com>
-X-Mailer: git-send-email 2.47.3
-In-Reply-To: <20260913032724.62438-1-brchuckz@aol.com>
-References: <20260913032724.62438-1-brchuckz@aol.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1789277789; x=1789882589; darn=lists.xenproject.org;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=x33SXcGKJZwybp329vf09l/E4GjWsK3N79Z1GJxL4P0=;
+        b=LlYXKMk/jIRgTfafyLrBI6QkNqAAcF7wAOGxwRFzB7dAXdyF/WdHvGgj6SPKLh7/dy
+         RKVRO2XSLO5uYmV6IdbJJdsoB8mo7KGF7fILyUT3Ik0xMDnbQVcgthFf91LOQqGMaQVY
+         3DDDeRexrmUqntGE3NEH42QFtKRZYHiyxK1i66hqdiwLQCo6mobpjz8Vu1PYf1xq2vq7
+         EiliRxUSNcQU5u7pJ+qIjEKIaBPEEJVlI0JqiNJVt96NYgW/2qj6VRpQ2Hbc2Dw8E0pd
+         INiQhJL5UQwGKbbFGvO52AVe6m1CRjUSLJ9hlmhdETgxYSwaB4zm7U+YYY2d0S7HdOJT
+         pycw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789277789; x=1789882589;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=x33SXcGKJZwybp329vf09l/E4GjWsK3N79Z1GJxL4P0=;
+        b=L7ODPhtBNp6aq15x+h0fQ++JcvTvsBUBWV0Zud5aLxuYsWLugEOBcnO8cE1o4uVe4P
+         3ey71ZceSYPgIjJjpEBl8r/usXC+B4LjC+8BJha5Noxb721k8mnVsNh6GXNyhZ28pMP5
+         ODSw3zTW2+YHN4AHwaAZoUMsA5F+7oOJc8BLVwyH7bcV+CS0eTeGatxEMypKBRTTyKFG
+         z5b6Mduz7bfpGP7HBK98ILiRkI4r0UV2L3GDqWpJYMkBqbL9Z3EG6D8jlJNPkDWwVyHA
+         OlUbyAK5McQJXIi1q8M12SCQHVNJvJQ0pMPxCYAhwsU8XmvB3knA/KOn4cvSywyG616i
+         JOCA==
+X-Forwarded-Encrypted: i=1; AKwUvBzOlB8bGDC4Xn7WV1yKdWxu4AO6mwqgTDn9Cjg3NCvdBwTA6fwWLFvulOm92qCK+y4EYatqnBft+hc=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mkPmLH+R8kAL9YuHOAZ1pQiCKcHE7azQv/uBKHGPddpYG3a1vu
+	Qj3kYqSff9vK+4aYKJi9/1MLXQkyuhXFhSJWZP0iuQgI+HP+mUg3uXUDbrEteTokqD0=
+X-Gm-Gg: AYBFou0bsELL05th6or69o09e7BuLfqakoicB1RQEdzY3cKd5ydQrVtf4GP1YIMgNcA
+	VXQeTkWlrc2CZoRsRQdCyd0COldpFeMGQ1AZrehP4cugCvBqV4Io4HGZTFWAv7V8/keZrwj+KMt
+	ETEkmOmlTfOw5G0y6MSpxwoXDg3206bkk55bgxKwzsE6mjhPpGLjKPCCjsJCkyggRK5buqyBDER
+	YcOAm26M6FzoS0v6SBVVaSbYDOXPHjTjoix0HDrkJXUUYHPkPrm+DSLgXF/x4wa1wiDDLfp8AMI
+	pH0DDkRcAX0/Me+kS2WDjgNaz8h83fsJ0aIGGszpQ0amRfA4dzPOyrauhKdAuhO5M7RB5QLqSMS
+	0vr9itaewo/kNHq8clR6waAhe5fb7quCtN00dG3Gszv6AGp2VuQYkUukCqg/H8ctTwwjgmhv9LD
+	QBCPI81BM22//dI2vPf2tHFgOpb5kfLmMA4Tdc8tF1qbu2SkVqITZ80FP59IBprpGjPA7TxNPrg
+	gyAyC5L4+SZvFTy6j71C/scVEpYFajNlOTVnjWqNbDblNnsScddhb/MwL1218W4oyD+mEZWJyLi
+	mSLRwF2MItWyqaAEwuhAoTmA
+X-Received: by 2002:a17:907:e895:b0:c20:1bc5:7002 with SMTP id a640c23a62f3a-c29665414f1mr1041706166b.3.1789277789216;
+        Sat, 12 Sep 2026 22:36:29 -0700 (PDT)
+Message-ID: <170d06eb-5cc7-41f0-a0e0-0eeca77307c7@suse.com>
+Date: Sun, 13 Sep 2026 07:36:26 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1789270056-BD4C3034-45F313F0/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 12/13] treewide: convert rdmsrq() from a macro to an
+ inline function
+To: =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Cc: LKML <linux-kernel@vger.kernel.org>, x86@kernel.org,
+ linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
+ kvm@vger.kernel.org, virtualization@lists.linux.dev,
+ linux-edac@vger.kernel.org, linux-pci@vger.kernel.org,
+ linux-pm@vger.kernel.org, linux-coco@lists.linux.dev,
+ linux-acpi@vger.kernel.org, linux-ide@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-crypto@vger.kernel.org,
+ linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org,
+ linux-mtd@lists.infradead.org, platform-driver-x86@vger.kernel.org,
+ linux-fbdev@vger.kernel.org, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>,
+ Peter Zijlstra <peterz@infradead.org>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
+ Adrian Hunter <adrian.hunter@intel.com>, James Clark
+ <james.clark@linaro.org>, "K. Y. Srinivasan" <kys@microsoft.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
+ Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>,
+ Sean Christopherson <seanjc@google.com>, Paolo Bonzini
+ <pbonzini@redhat.com>, Ajay Kaher <ajay.kaher@broadcom.com>,
+ Alexey Makhalov <alexey.makhalov@broadcom.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>, Josh Poimboeuf
+ <jpoimboe@kernel.org>, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+ Pu Wen <puwen@hygon.cn>, Tony Luck <tony.luck@intel.com>,
+ Reinette Chatre <reinette.chatre@intel.com>,
+ Dave Martin <Dave.Martin@arm.com>, James Morse <james.morse@arm.com>,
+ Babu Moger <babu.moger@amd.com>, Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>,
+ Vitaly Kuznetsov <vkuznets@redhat.com>, Andy Lutomirski <luto@kernel.org>,
+ Bjorn Helgaas <bhelgaas@google.com>, "Rafael J. Wysocki"
+ <rafael@kernel.org>, Pavel Machek <pavel@kernel.org>,
+ Kiryl Shutsemau <kas@kernel.org>, Rick Edgecombe
+ <rick.p.edgecombe@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Len Brown <lenb@kernel.org>, Damien Le Moal <dlemoal@kernel.org>,
+ Niklas Cassel <cassel@kernel.org>, David Airlie <airlied@redhat.com>,
+ Olivia Mackall <olivia@selenic.com>, Herbert Xu
+ <herbert@gondor.apana.org.au>, Viresh Kumar <viresh.kumar@linaro.org>,
+ Huang Rui <ray.huang@amd.com>, Mario Limonciello
+ <mario.limonciello@amd.com>, Perry Yuan <perry.yuan@amd.com>,
+ K Prateek Nayak <kprateek.nayak@amd.com>,
+ Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+ Yazen Ghannam <yazen.ghannam@amd.com>, Linus Walleij <linusw@kernel.org>,
+ Bartosz Golaszewski <brgl@kernel.org>, Guenter Roeck <linux@roeck-us.net>,
+ Artem Bityutskiy <artem.bityutskiy@linux.intel.com>,
+ Artem Bityutskiy <dedekind1@gmail.com>, Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Ashok Raj <ashok.raj.linux@gmail.com>, Hans de Goede <hansg@kernel.org>,
+ Rajneesh Bhardwaj <irenic.rajneesh@gmail.com>,
+ Xi Pardee <xi.pardee@linux.intel.com>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Helge Deller <deller@gmx.de>,
+ xen-devel@lists.xenproject.org, linux-geode@lists.infradead.org,
+ Michael Kelley <mhklinux@outlook.com>
+References: <20260911074530.3140830-1-jgross@suse.com>
+ <20260911074530.3140830-13-jgross@suse.com>
+ <b2baa471-0f6b-84e8-bda1-ae0964b72b04@linux.intel.com>
+Content-Language: en-US
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <b2baa471-0f6b-84e8-bda1-ae0964b72b04@linux.intel.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------eaM1imaen800kHMvvuISziE6"
+X-purgate-ID: tlsNG-33051d/1789277789-6EACC4E9-536B3C0B/0/0
 X-purgate-type: clean
-X-purgate-size: 7795
+X-purgate-size: 10620
 
-To provide support for newer IGD devices with an extended video bios table
-(VBT), the device model needs to access the host OpRegion and VBT when the
-IGD is bound to the xen-pciback driver but the Linux kernel only exposes
-them in the debugfs when the IGD is bound to the i915 driver. Although the
-OpRegion and VBT can be manually copied to a firmware directory from the
-debugfs to a directory where the device model can access them when the IGD
-is bound to the xen-pciback driver, libxl can do this automatically by
-copying the OpRegion and VBT from the Linux debugfs to the Xen firmware
-directory before unbinding the IGD from the i915 driver. Since the copying
-of the OpRegion and VBT are not required for the device to be made assignable,
-don't return an error if the only error is that the attempt to copy the
-OpRegion and/or the VBT to the Xen firmware directory failed.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------eaM1imaen800kHMvvuISziE6
+Content-Type: multipart/mixed; boundary="------------NEp702byBysSRAjr2vYU7iXA";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>
+Cc: LKML <linux-kernel@vger.kernel.org>, x86@kernel.org,
+ linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
+ kvm@vger.kernel.org, virtualization@lists.linux.dev,
+ linux-edac@vger.kernel.org, linux-pci@vger.kernel.org,
+ linux-pm@vger.kernel.org, linux-coco@lists.linux.dev,
+ linux-acpi@vger.kernel.org, linux-ide@vger.kernel.org,
+ dri-devel@lists.freedesktop.org, linux-crypto@vger.kernel.org,
+ linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org,
+ linux-mtd@lists.infradead.org, platform-driver-x86@vger.kernel.org,
+ linux-fbdev@vger.kernel.org, Thomas Gleixner <tglx@kernel.org>,
+ Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
+ Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>,
+ Peter Zijlstra <peterz@infradead.org>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
+ Adrian Hunter <adrian.hunter@intel.com>, James Clark
+ <james.clark@linaro.org>, "K. Y. Srinivasan" <kys@microsoft.com>,
+ Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
+ Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>,
+ Sean Christopherson <seanjc@google.com>, Paolo Bonzini
+ <pbonzini@redhat.com>, Ajay Kaher <ajay.kaher@broadcom.com>,
+ Alexey Makhalov <alexey.makhalov@broadcom.com>,
+ Broadcom internal kernel review list
+ <bcm-kernel-feedback-list@broadcom.com>, Josh Poimboeuf
+ <jpoimboe@kernel.org>, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
+ Pu Wen <puwen@hygon.cn>, Tony Luck <tony.luck@intel.com>,
+ Reinette Chatre <reinette.chatre@intel.com>,
+ Dave Martin <Dave.Martin@arm.com>, James Morse <james.morse@arm.com>,
+ Babu Moger <babu.moger@amd.com>, Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>,
+ Vitaly Kuznetsov <vkuznets@redhat.com>, Andy Lutomirski <luto@kernel.org>,
+ Bjorn Helgaas <bhelgaas@google.com>, "Rafael J. Wysocki"
+ <rafael@kernel.org>, Pavel Machek <pavel@kernel.org>,
+ Kiryl Shutsemau <kas@kernel.org>, Rick Edgecombe
+ <rick.p.edgecombe@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Len Brown <lenb@kernel.org>, Damien Le Moal <dlemoal@kernel.org>,
+ Niklas Cassel <cassel@kernel.org>, David Airlie <airlied@redhat.com>,
+ Olivia Mackall <olivia@selenic.com>, Herbert Xu
+ <herbert@gondor.apana.org.au>, Viresh Kumar <viresh.kumar@linaro.org>,
+ Huang Rui <ray.huang@amd.com>, Mario Limonciello
+ <mario.limonciello@amd.com>, Perry Yuan <perry.yuan@amd.com>,
+ K Prateek Nayak <kprateek.nayak@amd.com>,
+ Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
+ Yazen Ghannam <yazen.ghannam@amd.com>, Linus Walleij <linusw@kernel.org>,
+ Bartosz Golaszewski <brgl@kernel.org>, Guenter Roeck <linux@roeck-us.net>,
+ Artem Bityutskiy <artem.bityutskiy@linux.intel.com>,
+ Artem Bityutskiy <dedekind1@gmail.com>, Arnd Bergmann <arnd@arndb.de>,
+ Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+ Miquel Raynal <miquel.raynal@bootlin.com>,
+ Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+ Ashok Raj <ashok.raj.linux@gmail.com>, Hans de Goede <hansg@kernel.org>,
+ Rajneesh Bhardwaj <irenic.rajneesh@gmail.com>,
+ Xi Pardee <xi.pardee@linux.intel.com>,
+ Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+ Lukasz Luba <lukasz.luba@arm.com>, Helge Deller <deller@gmx.de>,
+ xen-devel@lists.xenproject.org, linux-geode@lists.infradead.org,
+ Michael Kelley <mhklinux@outlook.com>
+Message-ID: <170d06eb-5cc7-41f0-a0e0-0eeca77307c7@suse.com>
+Subject: Re: [PATCH v3 12/13] treewide: convert rdmsrq() from a macro to an
+ inline function
+References: <20260911074530.3140830-1-jgross@suse.com>
+ <20260911074530.3140830-13-jgross@suse.com>
+ <b2baa471-0f6b-84e8-bda1-ae0964b72b04@linux.intel.com>
+In-Reply-To: <b2baa471-0f6b-84e8-bda1-ae0964b72b04@linux.intel.com>
 
-It is necessary to read the RVDS field of the OpRegion which stores the
-size of the extended VBT. We cannot rely on stat(2) for this which returns
-a value of 0 for the size of files stored in the Linux debugfs. This patch
-relies on lstat(2) only to determine if the OpRegion and VBT files already
-exist in the Xen firmware directory. If the value stored in the RVDS field
-is 0, then there is no extended VBT and the VBT is embedded within mailbox
-# 4 of the OpRegion, in which case we can assume the size of the VBT is 6
-KiB.
+--------------NEp702byBysSRAjr2vYU7iXA
+Content-Type: multipart/mixed; boundary="------------JHou3VyeAHLBdBUp1ZKQPjhy"
 
-For users of the Qemu device model, if the Xen firmware directory is not
-configured as one of the Qemu firmware directories, the "intel-opregion"
-and "intel-vbt" files must be moved or copied to a Qemu firmware directory
-to provide proper support for an IGD with an extended VBT that is passed
-through to a Xen HVM guest.
+--------------JHou3VyeAHLBdBUp1ZKQPjhy
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Chuck Zmudzinski <brchuckz@aol.com>
----
-This patch also depends on the companion patch for the Qemu device model
-available here:
+T24gMTEuMDkuMjYgMTE6MzcsIElscG8gSsOkcnZpbmVuIHdyb3RlOg0KPiBPbiBGcmksIDEx
+IFNlcCAyMDI2LCBKdWVyZ2VuIEdyb3NzIHdyb3RlOg0KPiANCj4+IFRvZGF5IHJkbXNycSgp
+IGlzIGEgbWFjcm8gdXNpbmcgaXRzIHNlY29uZCBwYXJhbWV0ZXIgYXMgdGhlIHRhcmdldCBm
+b3INCj4+IHN0b3JpbmcgdGhlIHJlYWQgTVNSIHZhbHVlLg0KPj4NCj4+IENvbnZlcnQgcmRt
+c3JxKCkgdG8gYW4gaW5saW5lIGZ1bmN0aW9uIHJldHVybmluZyB0aGUgTVNSIHZhbHVlLg0K
+Pj4NCj4+IFRoZSB1c2VycyBoYXZlIGJlZW4gY29udmVydGVkIHVzaW5nIHRoZSBmb2xsb3dp
+bmcgc2VtYW50aWMgcGF0Y2g6DQo+Pg0KPj4gICAgLy8gT3B0aW9uczogLS1pbmNsdWRlLWhl
+YWRlcnMNCj4+DQo+PiAgICB2aXJ0dWFsIHBhdGNoDQo+PiAgICB2aXJ0dWFsIHJlcG9ydA0K
+Pj4NCj4+ICAgIEBADQo+PiAgICBleHByZXNzaW9uIG1zciwgdmFsOw0KPj4gICAgQEANCj4+
+ICAgICgNCj4+ICAgIC0gcmRtc3JxKG1zcix2YWwpDQo+PiAgICArIHZhbCA9IHJkbXNycSht
+c3IpDQo+PiAgICApDQo+Pg0KPj4gU2lnbmVkLW9mZi1ieTogSnVlcmdlbiBHcm9zcyA8amdy
+b3NzQHN1c2UuY29tPg0KPj4gQWNrZWQtYnk6IERhbWllbiBMZSBNb2FsIDxkbGVtb2FsQGtl
+cm5lbC5vcmc+ICAgICAgIyBBVEENCj4gDQo+IEFja2VkLWJ5OiBJbHBvIErDpHJ2aW5lbiA8
+aWxwby5qYXJ2aW5lbkBsaW51eC5pbnRlbC5jb20+CQkjIHBkeDg2DQo+IA0KPiBXaGF0IGlz
+IHRoZSBwbGFuIGZvciBtZXJnaW5nIHRoaXM/DQoNCkluZ28gd2FudGVkIHRvIHRha2UgdGhl
+IHdob2xlIHNlcmllcyB2aWEgdGhlIHRpcCB0cmVlLg0KDQoNCkp1ZXJnZW4NCg==
+--------------JHou3VyeAHLBdBUp1ZKQPjhy
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-https://lore.kernel.org/qemu-devel/20260911072453.46256-7-brchuckz@aol.com/
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-There is not an up-to-date specification for the OpRegion and VBT available
-to the public online but an older version is available here:
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
 
-https://www.intel.com/content/www/us/en/docs/graphics-for-linux/developer-reference/1-0/opregion-specification.html
+--------------JHou3VyeAHLBdBUp1ZKQPjhy--
 
-Despite the fact that we do not have an up-to-date specification, patches
-to the Linux kernel i915 driver and the igd-related files of the Linux kernel
-vfio driver provide enough information about the specification to provide
-support for the Intel IGD in Xen HVM guests. These patches to the Linux
-kernel vfio driver were particularly helpful for this series of patches to
-fix support for IGD passthrough for Xen HVM guests:
+--------------NEp702byBysSRAjr2vYU7iXA--
 
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/vfio/pci/vfio_pci_igd.c?id=bab2c1990b78
-https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/drivers/vfio/pci/vfio_pci_igd.c?id=49ba1a2976c8
+--------------eaM1imaen800kHMvvuISziE6
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Many more details about the support for Intel IGD passthrough to Xen guests
-is available in the other patch in this series and the 7 patches of the
-companion patch series for the device model. Please refer to those patches
-before asking questions that might be answered by reading through those
-other patches.
+-----BEGIN PGP SIGNATURE-----
 
-Changes in v4:
-  - This is the first version of this series of IGD fixes with this patch
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmqmNlsFAwAAAAAACgkQsN6d1ii/Ey+b
+zwf+OzaU6Petyp2h+7lmUlJdSjc0eGdEi1rB0ocVzj1kZHlAYaJJchfEYlr+cy0jrRbAJUqhocOe
+c/DNBw8RSCwubb6xG6QmMEUtKIZLM+wjc/7U/S+ijRfm4cSHAnOr3Vh6jffSSW0G96X5SzsCpC5v
+vC2SBDQjyP+kgsXS4vGBrhBzRC4SXsIHwOmVNJWDkTlpnzTh0joIXofqOrNHKQMcGuBpxJCHDYSL
+NkUzegBFSRDKWDqtEOP5DrbpgeJEve03txe84l6HRyCVozjsba1pS2fehrmMh9+xRi40lMnxGRKq
+EiFbizqDTM71Fgp15B9MKWAg+6FGtcM7TKtwsc/reQ==
+=agVt
+-----END PGP SIGNATURE-----
 
- tools/libs/light/libxl_pci.c | 82 ++++++++++++++++++++++++++++++++++++
- 1 file changed, 82 insertions(+)
-
-diff --git a/tools/libs/light/libxl_pci.c b/tools/libs/light/libxl_pci.c
-index 49d272d..ff28387 100644
---- a/tools/libs/light/libxl_pci.c
-+++ b/tools/libs/light/libxl_pci.c
-@@ -25,6 +25,9 @@
- #define PCI_OPTIONS            "msitranslate=%d,power_mgmt=%d"
- #define PCI_BDF_XSPATH         "%04x-%02x-%02x-%01x"
- #define PCI_PT_QDEV_ID         "pci-pt-%02x_%02x.%01x"
-+#define PCI_OPREGION_SIZE      0x2000
-+#define PCI_OPREGION_RVDS      0x3c2 /* offset of RVDS in OpRegion */
-+#define PCI_VBT_MBOX4_SIZE     0x1800
- 
- /* PCI Interrupt Line is an 8-bit value, 0xff means disconnected. */
- #define PCI_IRQ_LINE_LIMIT     0xff
-@@ -765,6 +768,17 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-     const char *name;
-     int rc;
-     struct stat st;
-+    uint32_t rvds = 0; /* Intel VBT size */
-+    int fd = -1;
-+    char *spath1 = NULL;
-+    char *dpath1 = NULL;
-+    char *spath2 = NULL;
-+    char *dpath2 = NULL;
-+    uint8_t *buf1 = NULL;
-+    uint8_t *buf2 = NULL;
-+    uint16_t pt_vendor = 0xffff;
-+    uint16_t pt_device = 0xffff;
-+    unsigned long class = 0;
- 
-     /* Local copy for convenience */
-     dom = pci->domain;
-@@ -797,6 +811,74 @@ static int libxl__device_pci_assignable_add(libxl__gc *gc,
-         return ERROR_FAIL;
-     }
- 
-+    pt_vendor = sysfs_dev_get_vendor(gc, pci);
-+    pt_device = sysfs_dev_get_device(gc, pci);
-+
-+    /* Check if the device is an Intel IGD */
-+    if ( pt_vendor != 0x8086 || pt_device == 0xffff ||
-+        sysfs_dev_get_class(gc, pci, &class) ||
-+        (class != 0x030000 && class != 0x038000) )
-+        goto skipigd;
-+
-+    /* These filenames match the filenames used in the device model */
-+    dpath1 = libxl__abs_path(gc, "intel-opregion",
-+                             libxl__xenfirmwaredir_path());
-+    dpath2 = libxl__abs_path(gc, "intel-vbt",
-+                             libxl__xenfirmwaredir_path());
-+
-+    /* Check if the OpRegion and VBT files are already present */
-+    if ( !lstat(dpath1, &st) && !lstat(dpath2, &st) )
-+        goto skipigd;
-+
-+    spath1 = GCSPRINTF("/sys/kernel/debug/dri/"PCI_BDF"/i915_opregion",
-+                       dom, bus, dev, func);
-+    spath2 = GCSPRINTF("/sys/kernel/debug/dri/"PCI_BDF"/i915_vbt",
-+                       dom, bus, dev, func);
-+
-+    /*
-+     * Try to copy the OpRegion and VBT while IGD is bound to i915 driver
-+     * but don't return an error if one or both of the copies fail.
-+     */
-+    if ( !lstat(spath1, &st) && !lstat(spath2, &st) ) {
-+        fd = open(spath1, O_RDONLY);
-+        GCNEW_ARRAY(buf1, PCI_OPREGION_SIZE);
-+        rc = libxl_read_exactly(ctx, fd, (void *)buf1, PCI_OPREGION_SIZE,
-+                                spath1, NULL);
-+        close(fd);
-+        if ( !rc ) {
-+            fd = open(dpath1, O_CREAT|O_WRONLY|O_TRUNC, 0644);
-+            rc = libxl_write_exactly(ctx, fd, (void *)buf1,
-+                                     PCI_OPREGION_SIZE, dpath1, NULL);
-+            close(fd);
-+            if ( !rc ) {
-+                rvds = *(uint32_t *)(buf1 + PCI_OPREGION_RVDS);
-+                if ( !rvds ) /* VBT is embedded in the OpRegion */
-+                    rvds = PCI_VBT_MBOX4_SIZE;
-+                fd = open(spath2, O_RDONLY);
-+                GCNEW_ARRAY(buf2, rvds);
-+                rc = libxl_read_exactly(ctx, fd, (void *)buf2, rvds,
-+                                        spath2, NULL);
-+                close(fd);
-+                if ( !rc ) {
-+                    fd = open(dpath2, O_CREAT|O_WRONLY|O_TRUNC, 0644);
-+                    rc = libxl_write_exactly(ctx, fd, (void *)buf2,
-+                                             rvds, dpath2, NULL);
-+                    close(fd);
-+                    if ( rc ) {
-+                        LOG(INFO, "Failed to copy VBT");
-+                    }
-+                } else {
-+                    LOG(INFO, "Failed to read VBT from debugfs");
-+                }
-+            } else {
-+                LOG(INFO, "Failed to copy OpRegion");
-+            }
-+        } else {
-+            LOG(INFO, "Failed to read OpRegion from debugfs");
-+        }
-+    }
-+
-+skipigd:
-     /* Check to see if it's already assigned to pciback */
-     rc = pciback_dev_is_assigned(gc, pci);
-     if ( rc < 0 ) {
--- 
-2.52.0
-
+--------------eaM1imaen800kHMvvuISziE6--
 
