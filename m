@@ -4,41 +4,45 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DAD8C88E5C
-	for <xen-devel@archiver.kernel.org>; Sun, 13 Sep 2026 15:31:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1419986.1646690 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DF50FC88E63
+	for <xen-devel@archiver.kernel.org>; Sun, 13 Sep 2026 18:20:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420158.1646698 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5mAH-0004T5-P3; Sun, 13 Sep 2026 15:30:45 +0000
+	id 1x5ooE-0001Ij-VA; Sun, 13 Sep 2026 18:20:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1419986.1646690; Sun, 13 Sep 2026 15:30:45 +0000
+Received: by outflank-mailman (output) from mailman id 1420158.1646698; Sun, 13 Sep 2026 18:20:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5mAH-0004Sy-KF; Sun, 13 Sep 2026 15:30:45 +0000
-Received: by outflank-mailman (input) for mailman id 1419986;
- Sun, 13 Sep 2026 15:30:43 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <brchuckz@aol.com>) id 1x5mAF-0004Sq-KE
- for xen-devel@lists.xenproject.org; Sun, 13 Sep 2026 15:30:43 +0000
+	id 1x5ooE-0001Ic-SZ; Sun, 13 Sep 2026 18:20:10 +0000
+Received: by outflank-mailman (input) for mailman id 1420158;
+ Sun, 13 Sep 2026 18:20:09 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <SRS0=KGsc=HF=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
+ id 1x5ooD-0001IR-Iu
+ for xen-devel@lists.xenproject.org; Sun, 13 Sep 2026 18:20:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x5mAF-00AbE3-13
- for xen-devel@lists.xenproject.org; Sun, 13 Sep 2026 17:30:43 +0200
-Received: from [10.42.69.12] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <brchuckz@aol.com>)
- id 6aa6c184-bab6-0a2a0a5309dd-0a2a450cdd0a-38
- for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 17:30:42 +0200
-Received: from [98.137.64.147] (helo=sonic301-21.consmr.mail.gq1.yahoo.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <brchuckz@aol.com>)
- id 6aa6c1a0-f479-0a2a450c0019-6289409389b3-3
- for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 17:30:42 +0200
-Received: from sonic.gate.mail.ne1.yahoo.com by
- sonic301.consmr.mail.gq1.yahoo.com with HTTP; Sun, 13 Sep 2026 15:30:40 +0000
-Received: by hermes--production-bf1-54b5569bdc-kpwjr (Yahoo Inc. Hermes SMTP
- Server) with ESMTPA ID b73119bad5fb74a8759bef838f1a5a2f; 
- Sun, 13 Sep 2026 15:30:37 +0000 (UTC)
+ id 1x5ooC-008ayP-Am
+ for xen-devel@lists.xenproject.org; Sun, 13 Sep 2026 20:20:08 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <SRS0=KGsc=HF=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
+ id 6aa6e948-8faa-0a2a0a5109dd-0a2a4501a57a-16
+ for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 20:20:08 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <SRS0=KGsc=HF=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
+ id 6aa6e956-5984-0a2a45010019-ac6904fed6a4-3
+ for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 20:20:07 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 40B0360F86;
+ Sun, 13 Sep 2026 18:20:06 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id E1B411F000FF;
+ Sun, 13 Sep 2026 18:20:05 +0000 (UTC)
+Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
+ id 53A0ACE107B; Sun, 13 Sep 2026 11:20:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,75 +54,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=a2048 header.d=aol.com header.i="@aol.com" header.h="Date:Subject:From:To:Cc:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=aol.com; s=a2048; t=1789313440; bh=WjVc1WV5HjxlepYVAOj2MxPOACO6Ln4vDXN/9QU4OGI=; h=Date:Subject:From:To:Cc:References:In-Reply-To:From:Subject:Reply-To; b=s5U2JBr98QU6D8PWdOhGbE6czcJ35/Q5upzqJimrC9pZxJXDyVJV4dMYBB3e1U72jVYGjPWzfS2cRQ0G8kvsvMDNbVKvEOTobtGFMBsr+MvTP5E3FGyvp/DB/LXfaQP8Uq2kXQK+IMQQXpdxXEzWgYMw0H5fl6HREJpcqssbgUZGrT+WldHBM/NIVyCWSLdEPHA2KAyMdZN6NV1YHd6CKXPIcS5rZDxeGgksay3b+kEjZgHx8Nu9bEXynPBKTQfcdKSOPT52qiYXIyS6KFu0Ws1Fah75j8T56AkzVhg1Tsx0fqyzcCVe5eqr0tHX88AImKAhPOQyzaaxfMyyjmytkQ==
-X-SONIC-DKIM-SIGN: v=1; a=rsa-sha256; c=relaxed/relaxed; d=yahoo.com; s=s2048; t=1789313440; bh=Ip8+thPGd7Mrzfd8SOzn832puZCCUDGlBUGR0cCuoTr=; h=X-Sonic-MF:Date:Subject:From:To:From:Subject; b=V6sUv46uqg4S2sXnTj5JZYij7ZtsTzuoXzFnb/JicdXFdrUuEVQtZMhd5uHCBYv8uoN5ZKFLhFz45/TlSbMWe390Qg/rboXT9I1/DmOaJWXhyQ1z7XNjgb6bIDr/Xzsvav6NJchzhSNgDHtQ9FR44ZCRUokz/i2T+MazdCOT++LXdUEWxaS1YhRiDh7/VlcrLDEuA7ZWDcXXTb3pPo9SNdPeYLT6Qo+6mOKE4AOI4NcqHIWhXA+wQfCcC9SwGGT1n8lxUWenMh1zTFUfwg0ch5IwCzp0f3rMHm/hdnyUraKARDWVWzr9uSnidzghihr9hgKXNERNxnbhUuFUja+tIg==
-X-YMail-OSG: VKOP9XoVM1m7xVi__8IWekBGavhQta5fbjb6mrCYNSRpgld.VeRZC22I1HY3gKn
- 57lq.ww4D0o5VNpmdoCsx8wgSEnAXbS7xSulI1CfU1jzSQ0V9z_EFI6ZOqJLEaKs9wRtVJVXGtzK
- Xk.EowitHSY73y1JUhxWigsa4DW4Ey0VFIX85PfVxufGZjwAaeAbS11sC8n3NRNSfuC3BdIUI4RX
- IHmWI1u_cFNt6VG5yDLNFhnExSiuwM3_aL607Vwa14lKjZwsh4K20lnVEfRL34aFwZTaZC6DV9N1
- 6y2eBaoSS.aEvSo2U1MQR.IyR822JUk8nrA41ocX8Ud6j_7iTkI1i9MrqPCQLcMIUBSli5JLmkSs
- Sl2zDylM3Ml4lW_cBqSOVvLkbeoZbMAqstbaw36cdkAooHbyxqFcboJ60WB3qmyacPAHsoDeW_OB
- GvIEquwm0rlvw3hKoYM0BVrHQAwDnpfmD16kxNrFQ.w_x_5IIVuAFrFzQttUAnexONls7TcR5brp
- _Gdt_q1Zrdz48OV9etLCHsw_dRJoazoY7VRixw45i9_jZMikE88gtiU4XGuQ9h1cs4iLskEgjHcy
- B3KniMRYV.94k5EmfSxO3ydDrT.48vjeuhUogPgvn4Dab._.YtyWKT9dkUDybavJMWN8dRTKUA.Q
- 6HLoOAuA4eQeAQ2f1mo_CP6NRjDa6SmumnYumLTz9fcUbvZJvm74ACW4MnAlBt0aCVR6fUuzrbHn
- LeC5_NAChOZBPuN_nof7.5zreXrDFk8DDx2Mbsx46jqELij_wr9xxvIHG8q52gpMuYgnIK6aQSko
- rypegAcNwzU2czVOFbZ3_vJzP5M6vZZueixvB4FgG.JHFMzpPvQMbJ6cUuoodryXJObJHuGPIfss
- PADAY5Z8eopH1pYFpgqrIvlL4BUiIgIRBX_rv5ra1dpoNN.IrJF0_aSEp2iUKfASCD.IPx_SIwoc
- nC8P9DUk1P_zKIvZuvUy64C_N_RZV1Np0k_weSiDWre7K.efIdzhlEf1VBTFphs_ausCPe8gX70C
- Djj.5Pb8d7jmbpOb7QEvOWIBMHnaNBqwZV6fnTB21kwWCoTgquZ9MzNfpv_41FF4U.6Hb.fWaAW9
- 0fCNwBHIqSLsmUypf6d7qk4ZT7gKEHuqqINMpvh5oHHghSzD8OGpq3.OEB3ZH.8ZJty8OWTeRSHb
- HkkpRkaIX0A7Cc6Ul4C8UoRXjnSw6AxH0iURwScvGR6dcJ09rL.ymDwMXnrnr5R4UujrRpiF5x23
- iKhWHQ9FhtAWef.wUAZ1RJ5PHxtJ8FX6L1Ptc5ITPn6aJq5XryqR6XY5TVtWGncY.LaGOJZxn.Uy
- nJpSz0V1mTO5kLT_euYkpxfdEraBvFyBXQ7OonXzFV.RAzP_KHl81N30gXb0CG3SglpBmIUV8a7Z
- MNwx_0IYAziDwAJ.Ib22AdaJNOPr2Y4qhzAxOfYgUZHxmeqynPwN25MuAN2s2J91XWGNxQiOYIX6
- 1g1Mxuqr08a99MufjG2zuDNfGkHyGR39T04b3m8R9urEU8ueVO6ZUA74rpmIiMXEdtWcyfoleEf0
- 2wk8Paudnu1sm1HkdeScMRalpZeSJA6fDcG2RKPqb.2iASgUBOdzG0MAMvPv_4vjGbdRTwHKJ_wc
- wpqDvSkngYJuhFWwXZLTKi48cdGnmT1uGGivB22jc7UEHmuTuB5eCiSjHtZ5YJwbZriKGgHX_.A7
- ptckyBlNghrC3F6um99EvZ9LtFQ9ihUTtSyIYSAp4A23LjeSuHSvldtn2aYgloTkkVp5XLqGmlAL
- UhVkzgKz4FQFNBX1U6PeD8co9_3bnpzhVqK9_g1YtsXmgR1bz41I.7MCHPn7Q4BwgXlg_GELM4TP
- wla7lRVfH_WzD8eumfZVpCgX74Ph84AIjkSM_NfzJQwzILov5jv68iklKoRlOwTn3D16Z8ZPI2Ax
- KgjmUGZGRO.MrgoupAapPheQNJ8bLNuCbYPHhwmyCGTHqdIC7gM5rdcAmbCP.OtLPWCAOPCCQP3e
- eV6d_7QbUAb7DKnbTR.bHlXz8knfVqV.wSXM77qG_OnAbQv.BvLEcwzSBwvhajBE1SAPRtmjL1Wm
- RVkQMaBqLDAQWyK.zO270s_YPtb_eoEbjYu5WU8mZAiGSucOak8W2BWR1hTzPuwopFN44RakS7ba
- .4o4wsEIckQLKG6sJyNIxyy.xQQQmCHlsyJByzlJVNJGms0dKhHZz.dND1KmMRwX9Sz1ENkIflWh
- 21Gv0rLl1fv3zozVKDdSHimFPJ.Fr74ATxP1vL45FeVtH
-X-Sonic-MF: <brchuckz@aol.com>
-X-Sonic-ID: ab88ba77-23ca-4dcf-88d5-66067669b80b
-Message-ID: <59c57e60-a677-4ae6-938f-fc533ca82468@aol.com>
-Date: Sun, 13 Sep 2026 11:30:36 -0400
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789323606;
+	bh=NVD5gFDBWDGN0X6QVeDbX5tNYhDXBkX15MX3Yd3diVU=;
+	h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To;
+	b=mJ27Jmv/mJW2LDKw6I+T6hZEXq/ZvlwdOOJIHR64P4TERWpoC7uE4AYU4tWeybXKS
+	 IhEEGOMy0Mt1H/gMxVqeZRc1xjWs0hG72HL8fR9lzWZCJc+s6AutqyHSEJpptygnro
+	 0ujyQ1jCJ2NdnkjiFiXL8AbMmC7IeFuaFqdm2wUUxnfYQ0605UquUF6v3IpXy6Hh9K
+	 ExMw4X6yCJv4rFys9evu9uD9jNFtrK5cQCDs3clrr7SgfUfCJke6/bv86T4a0uTWDQ
+	 s4J25tAJVZdbivSXe28DjPBWF9KgO0IoG9LWXGLAfbcUZYrE/yT1BmJCadTMNrOycI
+	 H5sJ25eSRm+gQ==
+Date: Sun, 13 Sep 2026 11:20:05 -0700
+From: "Paul E. McKenney" <paulmck@kernel.org>
+To: David Laight <david.laight.linux@gmail.com>
+Cc: Alexei Starovoitov <alexei.starovoitov@gmail.com>,
+	Josef Bacik <josef@toxicpanda.com>,
+	Frederic Weisbecker <frederic@kernel.org>,
+	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
+	Joel Fernandes <joelagnelf@nvidia.com>,
+	Boqun Feng <boqun@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>, Jiri Olsa <jolsa@kernel.org>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Andrii Nakryiko <andrii@kernel.org>, x86@kernel.org,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>,
+	Xu Kuohai <xukuohai@huaweicloud.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Josh Triplett <josh@joshtriplett.org>,
+	Uladzislau Rezki <urezki@gmail.com>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Lai Jiangshan <jiangshanlai@gmail.com>,
+	Zqiang <qiang.zhang@linux.dev>, Juergen Gross <jgross@suse.com>,
+	Luis Chamberlain <mcgrof@kernel.org>,
+	Ihor Solodrai <ihor.solodrai@linux.dev>,
+	linux-kernel@vger.kernel.org, rcu@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH RFC v2 08/15] bpf, x86: Maintain Tasks RCU trampoline
+ nesting in the BPF trampoline
+Message-ID: <e88514c6-296f-431f-a7bc-7429967b01a9@paulmck-laptop>
+Reply-To: paulmck@kernel.org
+References: <20260911-b4-rcu-tasks-preempt-qs-v2-0-eaaa61ed2da4@toxicpanda.com>
+ <20260911-b4-rcu-tasks-preempt-qs-v2-8-eaaa61ed2da4@toxicpanda.com>
+ <DLD0OHX8C4ME.VNR49VC2UYH4@gmail.com>
+ <14cb8a91-497d-49f5-aa20-c6cb8b9a27fc@paulmck-laptop>
+ <DLDICNLENSRI.2R6EJ0ZFJE45T@gmail.com>
+ <8c51a669-eb6b-455b-a829-b537da5209f8@paulmck-laptop>
+ <20260912221400.4045198b@pumpkin>
+ <ffffa178-c475-4249-a609-c5d222704987@paulmck-laptop>
+ <20260913122859.4d5067cd@pumpkin>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 6/7] xen/igd: implement support for extended VBT
-From: Chuck Zmudzinski <brchuckz@aol.com>
-To: qemu-devel@nongnu.org
-Cc: qemu-stable@nongnu.org, xen-devel@lists.xenproject.org,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony@xenproject.org>,
- "Edgar E . Iglesias" <edgar.iglesias@gmail.com>,
- Tomita Moeko <tomitamoeko@gmail.com>
-References: <20260911072453.46256-1-brchuckz@aol.com>
- <20260911072453.46256-7-brchuckz@aol.com>
-Content-Language: en-US
-In-Reply-To: <20260911072453.46256-7-brchuckz@aol.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-Mailer: WebService/1.1.26525 mail.backend.jedi.jws.acl:role.jedi.acl.token.atz.jws.hermes.aol
-X-purgate-ID: tlsNG-d25034/1789313442-50520A5B-8209CA28/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260913122859.4d5067cd@pumpkin>
+X-purgate-ID: tlsNG-d62444/1789323608-BE07B757-0531400C/0/0
 X-purgate-type: clean
-X-purgate-size: 596
+X-purgate-size: 1492
 
-On 9/11/2026 3:24 AM, Chuck Zmudzinski wrote:
-> --- snip ---
-> The companion patch to hvmloader will be posted to the xen-devel and qemu-devel
-> mailing lists shortly after this patch is posted. It is v3 of the patch
-> "tools/hvmloader: implement Intel IGD extended VBT support". Please note that
-> previous versions of that patch to hvmloader are not compatible with this
-> patch.
+On Sun, Sep 13, 2026 at 12:28:59PM +0100, David Laight wrote:
+> On Sat, 12 Sep 2026 15:31:24 -0700
+> "Paul E. McKenney" <paulmck@kernel.org> wrote:
+> 
+> > On Sat, Sep 12, 2026 at 10:14:00PM +0100, David Laight wrote:
+> > > On Sat, 12 Sep 2026 11:03:34 -0700
+> > > "Paul E. McKenney" <paulmck@kernel.org> wrote:
+> > >   
+> > > > In the old kernels, yes, we have current->trc_reader_nesting++.
+> > > > In the newer kernels, Tasks Trace RCU is instead implemented in terms
+> > > > of SRCU-fast, which instead increments per-CPU counters.  Which among
+> > > > other thins is a bit faster and does not need to hook into the scheduler.  
+> > > 
+> > > Isn't that rather architecture dependant?
+> > > It is fine on x86, but on arm incrementing a per-cpu variable is
+> > > significantly expensive.  
+> > 
+> > Last I heard, slow ARM increments of per-CPU variables were to be a
+> > transitory phenomemon.  Plus changes late last year greatly sped up the
+> > per-CPU increment operations.
+> 
+> There are some unapplied patches to improve per-cpu operations for both
+> arm64 and s390.
+> Without those preemption has to be disabled (in current->xxx) which requires
+> a conditional call in the preempt enable path.
 
-The companion patch to hvmloader that is needed for this patch to take effect
-has been upgraded to v4 and is available here:
+These are on top of the patches that provided an order of magnitude
+improvement late last year?  Very cool if so!
 
-https://lore.kernel.org/xen-devel/20260913032724.62438-2-brchuckz@aol.com/
+							Thanx, Paul
+
+> David
+> 
+> > Plus this change removed some hundreds
+> > of lines of RCU code.
+> > 
+> > 							Thanx, Paul
+> > 
+> 
 
