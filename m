@@ -4,44 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 962C6C88E65
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 10:46:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420739.1646976 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4F94C88E65
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 10:52:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420752.1646985 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x64CA-0005f0-Pw; Mon, 14 Sep 2026 10:45:54 +0000
+	id 1x64I2-0007VX-EW; Mon, 14 Sep 2026 10:51:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420739.1646976; Mon, 14 Sep 2026 10:45:54 +0000
+Received: by outflank-mailman (output) from mailman id 1420752.1646985; Mon, 14 Sep 2026 10:51:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x64CA-0005et-N8; Mon, 14 Sep 2026 10:45:54 +0000
-Received: by outflank-mailman (input) for mailman id 1420739;
- Mon, 14 Sep 2026 10:45:53 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x64I2-0007VQ-Bf; Mon, 14 Sep 2026 10:51:58 +0000
+Received: by outflank-mailman (input) for mailman id 1420752;
+ Mon, 14 Sep 2026 10:51:56 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <frn1furkan10@gmail.com>) id 1x64C9-0005en-MO
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 10:45:53 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1x64I0-0007VI-So
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 10:51:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x64C8-009VsU-VX
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 12:45:52 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x64I0-00Aa2z-5q
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 12:51:56 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6aa7d052-8faa-0a2a0a5109dd-0a2a4505d122-42
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 12:45:52 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6aa7d060-4cb1-0a2a45050019-4a7de14cb5be-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 12:45:52 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-485b1d2874aso1486356f8f.1
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 03:45:52 -0700 (PDT)
-Received: from [192.168.1.109] ([85.107.101.239])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-486eb34e4b5sm25755895f8f.22.2026.09.14.03.45.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Sep 2026 03:45:51 -0700 (PDT)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6aa7d1c0-2eae-0a2a0a5409dd-0a2a4508abd4-42
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 12:51:56 +0200
+Received: from [162.55.131.47] (helo=support.bugseng.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6aa7d1cb-f659-0a2a45080019-a237832faf18-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 12:51:55 +0200
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id BF81A4EE00AD;
+ Mon, 14 Sep 2026 12:51:54 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,119 +49,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789382752; x=1789987552; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=JynjUxuKg39+UQ6kN2RPzfnI+Q+Me2MxlG+FxFUg+Jk=;
-        b=Z6vM5uUVMQDsDNkRIOS8B0eC6YmUeXV3TZu8VQ/XLA6MPo/zoiuXYPfZa8cmvW8sU/
-         /9BDr50rjfAnBwZQCZUDdZ2Jo7IjlKt2lrpGXWqS3RkQu36nNPiu6EvmTnWa80ddAf2H
-         HVoPrx6aJUSRn255iy5Btox663sAyrDE8mOyb+p2xz29cKQZ2RwP6vgmaAOxJjfC3GPv
-         o76JlfSpVAWJmdXqSM0O8jexfHpSVKDO0NgqA/ZFrSjWtWNxuiWSSMksMOyRblu289Uj
-         LX1sN9CK69rSYXq2BPLdHS6ljAOavDexNKlzaw3nTeM0V0OXE/1c0gY5/sQAARhXUJbr
-         9mMQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789382752; x=1789987552;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=JynjUxuKg39+UQ6kN2RPzfnI+Q+Me2MxlG+FxFUg+Jk=;
-        b=DJQpW6X0tUK+aAZwjfILMUjnyP5/hOcmPMXqXIAVNAYOmlZGYiOja8XKVYZ9uL3rt9
-         tgfL3AMt4xys6UPqIhprNbsmDi/1Ia70Ccsb1onszOZxysD8H8PwEKSlUjhf8tW5wcFo
-         PREYdzxWWaSMSxUMgo/bi4QJHMQ9jHVgbh/1iXhAm6G6oAfkW4VU1KtMtjQV51sNDrGT
-         MGmTYp5Rpdm1VAEXlkUXzC+0kZASN0XVOmgoPe7sdDH+fRAJe36ruC2k0Gf9YVhS34LO
-         ERFuG61e2m6MgysCIuDF13i/eoZZkq+MkRvpOLhwKOkoLMGryxDcneCgAVXlcs1cX7mG
-         ZQfg==
-X-Forwarded-Encrypted: i=1; AKwUvBwNpBJnNOkeJosfgHtIoUbHO1CmodtEB4U2rXI1BT5bYg5lsf90yTG/dY9lppXJ0zgWpWQuQ41TSs4=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mCZIMoiH54WgjSt7tgB+laqtMHhquZfgM6Buck5J3IZ/LryL2n
-	UvnUaGh5FgrJaWC7bVTnak5Z3wyK5Vpoa8qNSZxsefpbwV95IeZrsPf17IkWwA==
-X-Gm-Gg: AYBFou2v/Mz1jGoC85TGv1WV3KWdoUFQZoq5XROzj0cWe0XF62rMpfmyA/JRZm2ZEK7
-	xNtoSCRLa20WNn+Wwrr6mZBDs7GUbVMkoY7/TCWrgqVBKeNytwZDKEDh9/dp3iyMJSoCA0sq1Qn
-	N01tPXHJQSW/f2Hq/wsik/VdLPlGPiGwBQzbILUjSaEo9y70q8muzNWYIW+6e1RpDM4KYWnvAcj
-	NCXQ1KP56hEJ8ujouDj9HshVsUQeaGpy7/ix8E23ieBOYPN6CRyIlyKpgUsUwwwXGgo1HfTeUfG
-	WFWiSaZbiK/E/Gt6JnovDRBh/yp0p0ls64KyNJVIhnt3QraDZL10dvnEK1pDmF5+za38bpchuWb
-	kM5ahj6kNPEEWNH7LWYGblSDxa64NEqmg1wDPrQ0cDzjR7j5nfo5Y0+iv1h6Mn6+D9gtuGCs/9x
-	N4oi/plZmzt73yd0LXMwCotwbkmIW+yi81kWlPdulSw/NYMVLLea/faKw7u2lxFW56RJLnwkmpP
-	OBkbXs=
-X-Received: by 2002:a05:6000:186c:b0:486:f45a:57a7 with SMTP id ffacd0b85a97d-48702b0902amr4128597f8f.16.1789382752155;
-        Mon, 14 Sep 2026 03:45:52 -0700 (PDT)
-Message-ID: <c1d9c2c7-aed3-470a-afaa-4d114a6081d4@gmail.com>
-Date: Mon, 14 Sep 2026 13:45:48 +0300
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1789383115;
+	b=LTDIOYct3sI4In+uKmvU78owhQTUqUzyeZ9ptMZCtMArMSraXIKLsV95hZZxBn0upZtf
+	 p9cIFzJdDdnjkJSqMmMqjIkvdPagVDLKt9SZvr5iMr9Kz0BZWnNw++t1JnBRWaHZ2Camf
+	 SF9MuI4MxGUI/H6NdQCKL+lje7CsSHPcCaxeHd3IHNhhT3QCXlKt7FxNd1niI93b864Kb
+	 UEMMSGQ688ggDZsYQS7JXbmSGz/sutSkklmOX59Mm363se47VuyUewDarELyHsDzA32Y5
+	 rD1zH77/KBF+I6DNzxpsD75Em/Gy54rJRDDPG0bWLlaWqu+pYexqSukFEvTeXGEBFTFOo
+	 jpO9xOkeuZkwQ3/m/oFxSpdaLmOTEwVWlY9srW24ZGx1WvQ4k5XahVeLixnP9GKEGz7GY
+	 wVvWeW+57jiSeAFCvlfzbQaIwUhh4hgPotugKXuHWGJubj31uQOJVt51MxtG3lXTA8y5Y
+	 nHaItVYiHyobzH96shQee5YZ4IxZd7y9ern2zFyLOpPg9KESEKIPeV9+t/epX9mlpe+eE
+	 KXrBw47dRrp87vTRTax3idoOb47D7ekIWip2LvcCzfvwNjm9MR5TQEttCWoOl+llGdRdU
+	 +1vruPE+xEXKDC3PbRcr1WvuKi6goFkfempuIDXQtz8qrFMFN9JlSkb0I5dlDc0=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1789383115;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=SgNyosp90VH7eDQuiqttRwIXiW7vZ1s+1MzF9mXojdU=;
+	b=zlLEW+L9x4CfRq2onNhjk0ZOsqUYsS2rOl3slHb2ZNTNdUsIqt3ZelYIVSj46mSbf3y5
+	 TUFIQplr7bP3F3h9EZOcaaVdNLiJ8/amaSLjsSIQtvLBIFBanaT9hXxIszQFTuPaSuy0D
+	 3KexA3JknT1NsjrH2AOvIbRwyRN2dRu9aef5m8Q6ARsKsxZ55gMZfRXCDoH5Ku6kHPlxr
+	 fMwQ2BmehRCDHE+dWiev+DGGhx+snK+sjqcz/jVRpYVnzdjchXqxibLO589u38YSYEBZ2
+	 E+IPrF7LKWrb2BZyhrFI1Ms/CffryehEK/3vMqvEXJPJwEL/h9EFJMzwD6pJVaMb80uLY
+	 HOa3dWPXPy791ofaEA4wCKrR551sM0ch3eib0/F4CDVUqzo5HCBDSfdtlT378lRgPwVrd
+	 KeYs+wxWoGRWJXuL2P7FGFn6qYVNrchDe6OpkB2BSEaZ4Kb53vcb/GMvyIFTiZHT5sXLG
+	 zTXKiRLm3aspjP7ts6BHjmzS3SgRpFA42ZFDGqF5aQZ4y6qlwClrSSVCIauv5Dqn6QU2y
+	 7qmwNwVWmjHxEZC8we3XpY8wJIrSMaZT6xF5YuFzJjuyfK77xGjcRdG8SRY+TGDQw31sv
+	 Km/vR1AcABeMOgqJrXFI5Hhym2cRu6BhrV61M0eLvDim3RErwn2pA5eDslwbMXc=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 4/5] xen/sched: rtds: make admission control cpupool-wide
- toggleable
+Date: Mon, 14 Sep 2026 12:51:54 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: Jan Beulich <jbeulich@suse.com>
-Cc: jgross@suse.com, andrew.cooper3@citrix.com, roger@xenproject.org,
- dfaggioli@suse.com, anthony.perard@vates.tech, julien@xen.org,
- sstabellini@kernel.org, gwd@xenproject.org, enr0n@ubuntu.com,
- michal.orzel@amd.com, xen-devel@lists.xenproject.org
-References: <20260826045720.5779-1-frn1furkan10@gmail.com>
- <20260826045720.5779-5-frn1furkan10@gmail.com>
- <deeae7d9-b37e-4d60-95fe-a87b7ef59859@suse.com>
-Content-Language: en-US
-From: =?UTF-8?B?RnVya2FuIMOHYWzEscWfa2Fu?= <frn1furkan10@gmail.com>
-In-Reply-To: <deeae7d9-b37e-4d60-95fe-a87b7ef59859@suse.com>
-Content-Type: text/plain; charset=UTF-8
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Anthony PERARD
+ <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Subject: Re: [PATCH 2/4] Eclair: relax long <-> function-pointer conversion
+ deviation
+In-Reply-To: <3b6b2796-b532-4b6b-8b04-8edce203ad3d@suse.com>
+References: <6d212d60-5c0b-4909-996d-5d6a4906b7e1@suse.com>
+ <fca27ac3-95c9-4177-a9cd-673f07230889@suse.com>
+ <43e412de9e5165f33c572841bfc58dc9@bugseng.com>
+ <3b6b2796-b532-4b6b-8b04-8edce203ad3d@suse.com>
+Message-ID: <1410bb68c5bf5715690a542585834e9f@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1789382752-73EB92A1-8C393110/0/0
+X-purgate-ID: tlsNG-c1860d/1789383115-D5B4987B-170C9A70/0/0
 X-purgate-type: clean
-X-purgate-size: 1611
+X-purgate-size: 516
 
 
-On 8/26/26 09:14, Jan Beulich wrote:
-> On 26.08.2026 06:57, Furkan Caliskan wrote:
->> @@ -1691,6 +1709,33 @@ rt_dom_cntl(
->>      return rc;
->>  }
->>  
->> +#ifdef CONFIG_SYSCTL
->> +static int cf_check
->> +rt_sys_cntl(const struct scheduler *ops,
->> +             struct xen_sysctl_scheduler_op *sc)
->> +{
->> +    struct xen_sysctl_rtds_schedule *params = &sc->u.sched_rtds;
->> +    struct rt_private *prv = rt_priv(ops);
->> +    unsigned long flags;
->> +
->> +    switch ( sc->cmd )
->> +    {
->> +    case XEN_SYSCTL_SCHEDOP_putinfo:
->> +        spin_lock_irqsave(&prv->lock, flags);
->> +        prv->admission_control_enabled = params->admission_control_enabled;
->> +        spin_unlock_irqrestore(&prv->lock, flags);
->> +        break;
->> +    case XEN_SYSCTL_SCHEDOP_getinfo:
->> +        spin_lock_irqsave(&prv->lock, flags);
->> +        params->admission_control_enabled = prv->admission_control_enabled;
->> +        spin_unlock_irqrestore(&prv->lock, flags);
->> +        break;
->> +    }
+>> Same as above
 > 
-> Blank line please between non-fall-through case blocks.
+> Okay, I'll happily adjust. As I have no reference for the syntax, I 
+> just
+> have to guess when making changes.
 > 
->> --- a/xen/include/public/sysctl.h
->> +++ b/xen/include/public/sysctl.h
->> @@ -814,6 +814,10 @@ struct xen_sysctl_credit2_schedule {
->>      uint32_t ratelimit_us;
->>  };
->>  
->> +struct xen_sysctl_rtds_schedule {
->> +    bool admission_control_enabled;
->> +};
-> 
-> In the public headers only fixed-width types may be used. The width of
-> bool is ABI-dependent (no matter that it's exceedingly unlikely to ever
-> be other than the same size as char).
-> 
-> Jan
 
-Thanks, I'll fix these in v2.
+We'd be glad to share the ECLAIR User Manual with the Xen maintainers. 
+In fact, the ECLAIR installation on the testing machines has already a 
+copy of it. Anthony should be able to make it available to you and 
+others.
 
-Furkan
-
+-- 
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
