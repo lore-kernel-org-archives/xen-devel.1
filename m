@@ -4,44 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E6FC88E75
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 15:15:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421083.1647212 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 989BFC88E75
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 15:21:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421092.1647221 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x68P0-0001SA-E4; Mon, 14 Sep 2026 15:15:26 +0000
+	id 1x68UJ-0003FI-Vr; Mon, 14 Sep 2026 15:20:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421083.1647212; Mon, 14 Sep 2026 15:15:26 +0000
+Received: by outflank-mailman (output) from mailman id 1421092.1647221; Mon, 14 Sep 2026 15:20:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x68P0-0001S3-B1; Mon, 14 Sep 2026 15:15:26 +0000
-Received: by outflank-mailman (input) for mailman id 1421083;
- Mon, 14 Sep 2026 15:15:25 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x68UJ-0003FB-T8; Mon, 14 Sep 2026 15:20:55 +0000
+Received: by outflank-mailman (input) for mailman id 1421092;
+ Mon, 14 Sep 2026 15:20:55 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x68Oz-0001Rx-5x
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 15:15:25 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1x68UI-0003E0-S3
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 15:20:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x68Oy-00HFR2-1S
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 17:15:24 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x68UG-001jua-Vi
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 17:20:52 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa80f7c-e002-0a2a0a5209dd-0a2a4508e680-26
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:15:23 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa80f8b-f659-0a2a45080019-4a7de14cb474-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:15:23 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-485984ebf5cso1731564f8f.0
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:15:23 -0700 (PDT)
-Received: from [172.18.123.208] ([185.104.138.149])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-486eb32e8d1sm28048390f8f.11.2026.09.14.08.15.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Sep 2026 08:15:22 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6aa810d2-8faa-0a2a0a5109dd-0a2a4509cabc-6
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:20:52 +0200
+Received: from [52.101.52.54]
+ (helo=BL2PR02CU003.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6aa810d2-be1a-0a2a45090019-34653436e8f9-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:20:51 +0200
+Received: from MN0PR04CA0029.namprd04.prod.outlook.com (2603:10b6:208:52d::34)
+ by SA1PR12MB7038.namprd12.prod.outlook.com (2603:10b6:806:24d::10)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.11; Mon, 14 Sep
+ 2026 15:20:47 +0000
+Received: from BN1PEPF00018548.namprd05.prod.outlook.com
+ (2603:10b6:208:52d:cafe::7d) by MN0PR04CA0029.outlook.office365.com
+ (2603:10b6:208:52d::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.12 via Frontend Transport; Mon,
+ 14 Sep 2026 15:20:47 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN1PEPF00018548.mail.protection.outlook.com (10.167.248.7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.428.7 via Frontend Transport; Mon, 14 Sep 2026 15:20:47 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Mon, 14 Sep
+ 2026 10:20:46 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Mon, 14 Sep
+ 2026 10:20:46 -0500
+Received: from [172.20.10.246] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
+ Transport; Mon, 14 Sep 2026 10:20:44 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,160 +71,207 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789398923; x=1790003723; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=NuF/cpRbw+GzcHinI5yNpRgxXswL5i7y2FE8bwjfAKY=;
-        b=c/T8N/ezeRO+0sn3gec80chBKgNkMY9Ezi2Cg82DB7ASWv97jhTAHuTGdUUaIYVMF1
-         xJZjq0cZFujjpd8h8T+xtijnFvXj35X4YE717RGzE00b79voyCvZSEhlIZgTVHNAGrvq
-         pqPdpYxqlP88H/W+MmNfR54zrG0wWaCzNa904StXQ0fdeFevvUFJJmQanjFKmOIs+UcB
-         3TKCvdg+Sm4fxmx1u2tEvH13du+/TQ2wlSfq/BbQhvVbKqnAwSS480FgTuoBBQfQNxHU
-         vYEJCaN3dayDLfgjhnY9p0o3p/pegthx+ZkqNE3w7whrjkDR3UxuW1T8/CkO9TOEGVqS
-         C9gA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789398923; x=1790003723;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=NuF/cpRbw+GzcHinI5yNpRgxXswL5i7y2FE8bwjfAKY=;
-        b=p/+chJAmoHnAj51IdJGB9SljmYIR8197McIpNqjSSvTdU3HXxrLdz62YetpMRjQwRO
-         hrnVXiXlNTJPzQykiB02sJiDz6F1RUFXFQ0rt+7e/CQoROnDLj4Yu0mIPq9g032grHsC
-         7gylDDdu27R2M1oP0ZhPTJzyCOtKXTOF8BY5dnu23Qv7nDEd67M16t9rlwfcN06yqhDd
-         eE8ztMG52rUJj46NmOwR9BBDPkxnmYUboc+joGGSnxaFob6j+GksCIMIUbASh/8PLLzL
-         kkeUchNdtMfm09V2m5/G0iZeGf/YUoGnuMS53m0KRlLdp98YSPEIFhsDs6Dtt2Ele8+x
-         QddA==
-X-Forwarded-Encrypted: i=1; AKwUvBxw1VrjcFnLaLxX+UZvD4nMNX0zyZcDXvvsL+yG+/x/ZRa15+COVMSdqmZ1OEiGTlAEaAE2pHaBAbQ=@lists.xenproject.org
-X-Gm-Message-State: AFuF++n3RC1UbjzydDU0L/4wrYHXoGj1/YjgJLCVxRGGc7w4jH5XwJBC
-	WYfJHI2u4J2CbaSo4ApW1MB9l/yVNajhoPkJSXSDWy8hNQqt/ylQ2z9jFpe68IkYJQ==
-X-Gm-Gg: AYBFou23JTksErlh61izXNdTAsS9kXgrWSKvgQzy75wbCU6Omy7bmBUfZsuG1yh4Tqe
-	pHMJHGO39QkSqFBJe65rp74qJbL68YCxK0tS/L8t1nRvmVkbnJ6d5uVFmlS14KpTf+9h0MQaPs8
-	Y2bStucgBrx+kXQ/Pu/YmamTsxzHJU0bkHn/LNfPcnpr9E2W/f8Mp4wQB1gWFA3N53iA9GEfXFE
-	URZomd4Bvf43RzESGkJoooxf7Qew5ssdvExOmnuFE+UVAlOKccJZk2Hpkum6Z8qHeMWMjhl+GmM
-	tOUQu/t/MEC89UWISokwjsbZfSZ3zWwcmhdPmpA87xxVLn0UO0+uTw6jmIBgc9aMGcDL1dTnmwJ
-	p5EkRAa7grtgKPbfJB//xrWp7CILVaPCneQFHy2A8zHpNZoftZd362RpMPhOjBZEl+WjjpYNebt
-	GPvxyZ1ZZqixHk6Iq4SAbojo4qGniK3Vew7tHLszlCMCRhTFpVKnNPt3ajfLch+BahngdgU9ZGM
-	HM6hhFl45Et
-X-Received: by 2002:a05:6000:1861:b0:485:9b35:a20e with SMTP id ffacd0b85a97d-48702b30773mr3580941f8f.56.1789398923193;
-        Mon, 14 Sep 2026 08:15:23 -0700 (PDT)
-Message-ID: <f8a2c7b7-7872-424c-89e0-5d81a29b77f4@suse.com>
-Date: Mon, 14 Sep 2026 17:15:15 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=koz6YBslh5yElXpnMEkAgKBM115n+TwRrDaMXW9mZhAPkRft/qYWwx6gTF9Lt+QGHobVgwaN5L0usBoG5DqrsJhoEi0NepQ2SXpneyAOWJKa5p+BsCDEZHFcTpteH03ph3E7k2BJiF5gRArn9f8FfV17OHVFyuSCofzCi+QRBlZJtszPIVP5e1KDkO+buFY0p0ycS+fdpE8V4+gBgCTC7PElgkuwpzYOHOB4WDgABc8RQsfWjWzF/Iqw6eJqYw9+rkACGGbOYCrtGbci19Yl5vJ++66Icd/M7JGMr38j+gdouNbBf7/ofBtzwe5kaYXKNk491985UjShTVEDnXk1/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oXkx4OuIL7Nj9mL0UTRvfUTVTmUATYBGM+v3BpJscII=;
+ b=Ln5gUqjdaOQazOah2fstPc1z7NCqSq0OBaublKrZsN2e1xDCW6NqLdIMRdrJ5hL9sGriZdUmOppWWN1tF4jbCUFLhJS9IixhqW3Ytj8IFjIGT3oVv8sw7569Su7xrJGvo03lX1vNyCRUv/m/N6A9xirSyMtd+gO44K21GlV8ZMJZF7nBlmkpzrpjY9LXcOHr93ahGsRFC1U6qx4WkhZ1hjjGadfThcSabLCRCap60wdHY+BbL7Vp8hbRp+fkdNO+5s4OssUiF7knhYm5qsDXl1a6HnKPyjwJHAPtcVp2H1F5ZYKK/NFPvbDSnA141u/JxKaN4TrVasJRoXJhPP1pdA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oXkx4OuIL7Nj9mL0UTRvfUTVTmUATYBGM+v3BpJscII=;
+ b=B3HpVuDR2jw0MqFGgQWRAhSog/tWAXlBXZXzBuD4DMkEki1jh3kXQKBKOVoxCS3Or3Ks6nhrSe+wDaDP2LUpZzz0F0Sf7/sUifUfHIUY9K/RTsxOywF74JfF9ZQxygybQDyJGyrZsRrDGkMn6sShysSFLFlLyaiatLvtdwxXMN4=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <4eba243f-01cb-49a6-9f6f-edab49d5901b@amd.com>
+Date: Mon, 14 Sep 2026 17:20:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 33/39] xen/riscv: dump old interrupt file to memory
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <efecffa9cd7c4bb6e9ed51b7fd084328fcd4611e.1787838835.git.oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH v3 2/4] xen/arm: validate IRQs before descriptor lookup
+To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Mykola Kvach
+	<Mykola_Kvach@epam.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"Stefano Stabellini" <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+	"Bertrand Marquis" <bertrand.marquis@arm.com>
+References: <cover.1787050437.git.mykola_kvach@epam.com>
+ <355ff5a0aab671894a527ccb7b5999db6b168de3.1787050437.git.mykola_kvach@epam.com>
+ <87fr03xcr1.fsf@epam.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <efecffa9cd7c4bb6e9ed51b7fd084328fcd4611e.1787838835.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <87fr03xcr1.fsf@epam.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1789398923-D694287B-276EDC7B/0/0
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF00018548:EE_|SA1PR12MB7038:EE_
+X-MS-Office365-Filtering-Correlation-Id: d555130e-7224-4c24-9004-08df1273c095
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|36860700016|23010399003|82310400026|376014|10067099003|56012099006|11063799006|4143699003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	3MVWk0A/4VW3bK98e8c/TVK+EQ7+mXJkCrPn4XlzkCBYNfH2J2csOkS3cEN/X5QNoiGXIwNWV/ICEHxiyhuy05HGtDcYWrcfIjVBRgjCMY3LRUlxHprSHo8xorn0c1yA+HqU9WmRhMlKV0TaW+Bm+LtEDP12iLE6a/EbMBzFybZ3F50hYGIm3XW0Yh/UdVh2UjZIrT8NJynA9tiqd8pEZEAQtyBfGO80Alv8W7A92Gl2dmSApLQuWw22zBbVQtWyRqdgPjpA9ALXZIpl1vSIDnrvgK5Ziu7TLzwomdoBJdzxAyi6KK3GypMQbFr5fADa4RbesJCnC7PmK4DMpJyDIjxCoBliTnKA/QTAJwZjE1rcjH1aX3galHGdMGwAm0FTpVA+coD65NL0H0O1csJ0/UuT6RIRcM4jYT7xO1NJd4oFoaYm64X6eoJaRwr34QF0BwQ6paM4P3ckSgRSQF589JhM44pAvtokig17TQsLhU3yC68t0FwvB2GY0YO12hWMljgvdt7SKRlav+GG5TBl7YFVWUSSQdFbGYgoMtGSyuzj/qvMUOgHeQRDESpXec87kuBRP+93djk2SegHd3oeNGMCyylg0ajPhobKK7NVNe1SY/MOEfxaSggZ++DOA4GFr9nAPOvnBtzW9YFiWxOyIhLVLZTW+E0wyN4x9vMW3+V8XaN+X4Konqwkf0rTMPLw9hQx0n/KEXYAyFFyL8/VqA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(23010399003)(82310400026)(376014)(10067099003)(56012099006)(11063799006)(4143699003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	y33GOMOFIvYZP3wkCFqcP8e6hXmxlutS/GutnfONw14q7brKh9gApyEYEuEMKMizVDYLL4Y1KABt5coYYHCr15eJBv03yHp9NLZKkdz6nKYPFNF/h3Y3+JPXduBdaBT2j+RVG4QkXmnTD6d5sn1BV4r+gAOe3XcMEFRvh6rYErttLigaOTlMjKEnbuz8+lNCJMsgUYA5MEIAV/GBOqpFZDEdAgOi7maAVQpdfxYG0ocfMlNmxfWX6595LIuPJHq5R2cCq/zlxS2DHFbppyPxHxeAtSjC2vWyN0eDVJT3a+vfGg0dmeaXbJXF2QLX3f63uHIQMTkcsz4SgdKGk4+tr42Z6aM2QCjwI+WEFT5jKAlT1+MwVa5ny5XkA+CwNNFSavmEZO6JrGeDuUcOxH/6XX+V7iB7E8ZLsrBHNbSLVNVz+bhNh/MpG7DW6Hn94YVw
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 15:20:47.1038
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d555130e-7224-4c24-9004-08df1273c095
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN1PEPF00018548.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7038
+X-purgate-ID: tlsNG-bad1c0/1789399252-FD86F034-B141FD1D/0/0
 X-purgate-type: clean
-X-purgate-size: 3213
+X-purgate-size: 4604
 
-On 27.08.2026 17:21, Oleksii Kurochko wrote:
-> At the old interrupt file, dump to memory all the eip and eie arrays).
-> After this step is done, the old interrupt file is no longer in use so
-> old intrrupt file VGEIN could be released.
+
+
+On 25-Aug-26 02:30, Volodymyr Babchuk wrote:
+> Hi,
 > 
-> Restoring of old interrupt file state will be done in follow-up
-> patch.
+> Mykola Kvach <mykola_kvach@epam.com> writes:
 > 
-> There are cases where it is needed to specify on which cpu it is
-> necessary to VGEIN should be released so update vgein_release() to
-> deal with that.
-
-Beside this being difficult to parse, it looks like it is inapplicable? As
-said ...
-
-> Keep BUG_ON("unimplemented") placeholder in imsic_migrate_vcpu() to guard
-> against silent incorrect behaviour or unexpected panics in guest VMs until
-> the function is fully implemented.
+>> GICv3 eSPI support makes nr_irqs span the architectural INTID namespace
+>> through ESPI_MAX_INTID, but descriptor storage is sparse. local_irq_desc[]
+>> and irq_desc[] cover INTIDs below NR_IRQS, while espi_desc[] covers eSPIs.
+>> INTIDs 1024 through 4095 have no backing descriptors.
+>>
+>> Validation based only on nr_irqs accepts an INTID in this gap.
+>> __irq_to_desc() then indexes beyond irq_desc[], and callers may lock or
+>> update unrelated Xen memory.
+>>
+>> Reject INTIDs that the GIC reports as unimplemented in setup_irq() before
+>> looking up a descriptor. irq_set_spi_type() can run before the implemented
+>> GIC line counts are available, so validate descriptor-backed ranges there
+>> before looking up a descriptor.
+>>
+>> Assert the regular descriptor bound in __irq_to_desc() so direct callers
+>> cannot silently index the sparse gap in debug builds.
+>>
+>> Fixes: 98f7060b9ed5 ("xen/arm/irq: add handling for IRQs in the eSPI range")
+>> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+>> ---
+>> Changes in v3:
+>> - Add the requested bound assertion and retain the SPI-only comment.
+>>
+>> Changes in v2:
+>> - Validate descriptor-backed ranges in irq_set_spi_type().
+>> - Validate implemented GIC lines in setup_irq().
+>> - Preserve is_espi() validation with CONFIG_GICV3_ESPI disabled.
+>> ---
+>>  xen/arch/arm/irq.c | 26 ++++++++++++++++++++++----
+>>  1 file changed, 22 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
+>> index 73e58a5108..bf14180f97 100644
+>> --- a/xen/arch/arm/irq.c
+>> +++ b/xen/arch/arm/irq.c
+>> @@ -23,6 +23,12 @@ const unsigned int nr_irqs = IS_ENABLED(CONFIG_GICV3_ESPI) ?
+>>                                          (ESPI_MAX_INTID + 1) :
+>>                                          NR_IRQS;
+>>  
+>> +static bool irq_has_desc(unsigned int irq)
 > 
-> vgein_release() is stub for now and will be introduced later.
+> You are using this function only in one place, where you are actually
+> testing for SPI. So, maybe introduce irq_is_spi() helper instead? And
+> use it below?
+It can stay as is but:
+ - move it next to __irq_to_desc(),
+ - use it also as ASSERT(irq_has_desc(irq)) in __irq_to_desc() instead of the
+assertion you just added.
+This way the two stay in sync.
 
-... also here?
+> 
+>> +{
+>> +    return irq < NR_IRQS ||
+>> +           (IS_ENABLED(CONFIG_GICV3_ESPI) && is_espi(irq));
+>> +}
+>> +
+>>  static unsigned int local_irqs_type[NR_LOCAL_IRQS];
+>>  static DEFINE_SPINLOCK(local_irqs_type_lock);
+>>  
+>> @@ -76,7 +82,6 @@ static int __init init_espi_data(void)
+>>      return 0;
+>>  }
+>>  #else
+>> -
+> 
+> Please, no unnecessary changes
+> 
+>>  static int __init init_espi_data(void)
+>>  {
+>>      return 0;
+>> @@ -95,6 +100,8 @@ struct irq_desc *__irq_to_desc(unsigned int irq)
+>>          return espi_to_desc(irq);
+>>  #endif
+>>  
+>> +    ASSERT(irq < NR_IRQS);
+check_timer_irq_cfg() in time.c calls irq_to_desc() on timer_irq[], and on the
+GTDT path those are not validated.
 
-> --- a/xen/arch/riscv/imsic.c
-> +++ b/xen/arch/riscv/imsic.c
-> @@ -56,6 +56,24 @@ static unsigned int __ro_after_init guest_num_msis;
->   */
->  #define GUEST_IMSIC_MAX_MSIS 255U
->  
-> +/*
-> + * The interrupt identities an IMSIC interrupt file provides are 0 (which is
-> + * never valid, but still occupies a bit) up to IMSIC_MAX_ID inclusive, so
-> + * IMSIC_MAX_ID + 1 bits have to be covered.
-> + */
-> +#define IMSIC_MAX_EIX DIV_ROUND_UP(IMSIC_MAX_ID + 1, BITS_PER_TYPE(uint64_t))
+>> +
+>>      return &irq_desc[irq-NR_LOCAL_IRQS];
+>>  }
+>>  
+>> @@ -416,6 +423,9 @@ int setup_irq(unsigned int irq, unsigned int irqflags, struct irqaction *new)
+>>      struct irq_desc *desc;
+>>      bool disabled;
+>>  
+>> +    if ( !gic_is_valid_line(irq) )
+Please add a printk message to inform the user.
 
-As before - plain 64 please, or it needs to become clear where the uint64_t
-is actually coming from.
+>> +        return -EINVAL;
+>> +
+>>      desc = irq_to_desc(irq);
+>>  
+>>      spin_lock_irqsave(&desc->lock, flags);
+>> @@ -647,13 +657,21 @@ static bool irq_validate_new_type(unsigned int curr, unsigned int new)
+>>  int irq_set_spi_type(unsigned int spi, unsigned int type)
+>>  {
+>>      unsigned long flags;
+>> -    struct irq_desc *desc = irq_to_desc(spi);
+>> +    struct irq_desc *desc;
+>>      int ret = -EBUSY;
+>>  
+>> -    /* This function should not be used for other than SPIs */
+>> -    if ( spi < NR_LOCAL_IRQS )
+>> +    /*
+>> +     * This function should not be used for other than SPIs.
+>> +     *
+>> +     * The implemented GIC line counts are not available when early
+>> +     * callers configure IRQ types. Check descriptor storage here; setup_irq()
+>> +     * validates the implemented line before the interrupt is used.
+>> +     */
+>> +    if ( spi < NR_LOCAL_IRQS || !irq_has_desc(spi) )
+> 
+> So here you can just call if ( !irq_is_spi(spi) )
+> 
+>>          return -EINVAL;
+>>  
+>> +    desc = irq_to_desc(spi);
+>> +
+>>      spin_lock_irqsave(&desc->lock, flags);
+>>  
+>>      if ( !irq_validate_new_type(desc->arch.type, type) )
+> 
 
-> +struct imsic_mrif_eix {
-> +    unsigned long eip[BITS_PER_TYPE(uint64_t) / BITS_PER_LONG];
-> +    unsigned long eie[BITS_PER_TYPE(uint64_t) / BITS_PER_LONG];
+~Michal
 
-Same here. Yet better may be to use DECLARE_BITMAP()?
-
-> @@ -85,6 +103,15 @@ do {                            \
->      csr_clear(CSR_SIREG, v);    \
->  } while (0)
->  
-> +#define imsic_vs_csr_swap(c, v)     \
-> +({                                  \
-> +    unsigned long r_;               \
-> +                                    \
-> +    csr_write(CSR_VSISELECT, (c));  \
-> +    r_ = csr_swap(CSR_VSIREG, (v)); \
-> +    r_;                             \
-> +})
-
-Excess parentheses again. Plus - what use is r_ here?
-
-> @@ -130,6 +157,21 @@ do {                                \
->      imsic_switchcase_32(F, ireg + 0, ##__VA_ARGS__) \
->      imsic_switchcase_32(F, ireg + 32, ##__VA_ARGS__)
->  
-> +static unsigned long imsic_eix_swap(unsigned int ireg, unsigned long val)
-> +{
-> +    switch ( ireg )
-> +    {
-> +    imsic_switchcase_64(imsic_switchcase_ret, IMSIC_EIP0,
-> +                        imsic_vs_csr_swap, val)
-> +    imsic_switchcase_64(imsic_switchcase_ret, IMSIC_EIE0,
-> +                        imsic_vs_csr_swap, val)
-> +    default:
-> +        ASSERT_UNREACHABLE();
-> +    }
-
-There still wants to "break" in the default case.
-
-> @@ -973,5 +1071,11 @@ void imsic_migrate_vcpu(struct vcpu *v)
->       * to the new IMSIC VS-file.
->       */
->  
-> +    /* Read and clear register state from old IMSIC VS-file */
-> +    imsic_vsfile_read_clear(old_vsfile_id, old_vsfile_cpu, nr_hw_eix, &tmrif);
-
-Why is &tmrif being passed into the function, when it's not otherwise used
-here? The function could itself have a suitable local var.
-
-Jan
 
