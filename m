@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10566C88E50
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 09:45:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420650.1646906 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0185C88E64
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 09:49:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420659.1646913 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x63Fu-0001Ak-8u; Mon, 14 Sep 2026 09:45:42 +0000
+	id 1x63JU-0001vg-PD; Mon, 14 Sep 2026 09:49:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420650.1646906; Mon, 14 Sep 2026 09:45:42 +0000
+Received: by outflank-mailman (output) from mailman id 1420659.1646913; Mon, 14 Sep 2026 09:49:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x63Fu-0001Ab-44; Mon, 14 Sep 2026 09:45:42 +0000
-Received: by outflank-mailman (input) for mailman id 1420650;
- Mon, 14 Sep 2026 09:45:41 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x63JU-0001vZ-MC; Mon, 14 Sep 2026 09:49:24 +0000
+Received: by outflank-mailman (input) for mailman id 1420659;
+ Mon, 14 Sep 2026 09:49:23 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x63Ft-0001AT-8y
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 09:45:41 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x63JT-0001vT-RB
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 09:49:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x63Fs-008Gtu-Lf
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 11:45:40 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1x63JT-00CoBE-40
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 11:49:23 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa7c232-2eae-0a2a0a5409dd-0a2a45069f2c-36
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 11:45:40 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa7c31e-8faa-0a2a0a5109dd-0a2a4502a574-14
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 11:49:23 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa7c242-195a-0a2a45060019-d155802ae4dc-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 11:45:38 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-49e717c9841so10033815e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 02:45:38 -0700 (PDT)
+ id 6aa7c322-6ca4-0a2a45020019-4a7de18d8aa9-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 11:49:23 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49e6b885ef8so7498195e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 02:49:22 -0700 (PDT)
 Received: from [172.18.123.208] ([185.104.138.131])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49e62230e72sm174875655e9.4.2026.09.14.02.45.32
+ ffacd0b85a97d-486eb2ecfc3sm24826006f8f.4.2026.09.14.02.49.21
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Sep 2026 02:45:37 -0700 (PDT)
+ Mon, 14 Sep 2026 02:49:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,96 +55,75 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789379138; x=1789983938; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1789379362; x=1789984162; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=yd+U0uxXX2y/ff3PnmrBy5y8mugIAsOf37cpwL0J0hI=;
-        b=Iw2hqwF5CBLLUvxrSjMzeViv5onycjzO1Gwagbt+DdOy5HZIRdjToP04e54A88BFo9
-         5Lc48U8GQ9LqwGc61DbcoszzYaOrkrZXHsiWKByvf2Jjomb1hCV/EWu0h5tVvzN0Alto
-         ugxE3lc9MUOprLCUi24OYGpmopemlDpYj66TQEowNyLoYeJw08vtaYGYg8AilohdNZHY
-         7IslrrAiscJNJWziKcH+7i8Fqvz/RSct3iWXJqB508wj8dcbZGVIWXSaxBBnXH+zuUb1
-         xvyJcZgDzGDsVXpPVNXpWyWon6QvOsjgBbrKBs4JTaQ1MhzTKhjiVrmiQquZfKUE3p0v
-         1KuQ==
+        bh=JcnnsXW0NCPzXOWQCXzIot1QQ8b1TbROnhwSccF9ATc=;
+        b=Y1+KVKOOb6nl+FhhJmizpoMQwiiM3F46aZC1RhuhpBIuXECV9fpAIQEFunJuZmh5Qo
+         1b2dCDgpaM6ExWLhGDboGKZY+WXnAZ3wN8MFCkUXiAYOURrQSf6T+NXbbf8Nu0CHAbG+
+         4GOwl2FnBaDdDaaCaViLag8NbymtAF4ZouzRqjIZz858Lnx4fYjbttJq3CjFGLXfKLVU
+         T8SOxgJro0pHHCcS5WbDuzxSqgxLKYOWWZKo+a1otwdgw6Eh0Bljm+mTTRfvfz29/WTX
+         bf/RtcTBajSpwnDuHckZEJxLtdGrATWEra1YDJVAkIYo82CY5grz1h8Awt4ol5gSGDqr
+         uiVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789379138; x=1789983938;
+        d=1e100.net; s=20251104; t=1789379362; x=1789984162;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=yd+U0uxXX2y/ff3PnmrBy5y8mugIAsOf37cpwL0J0hI=;
-        b=FnWd5kYXf0kMcPmo+NWD1XVZP2rHqaK9mH4plDaCJUBFP5F8xBW4f/op0+jwd/PhwA
-         PFJX/RywjU08/lUWXZ1yfSRedidHqF+4WEDNn8d0/xT1iwYZIJrhTh6YQvQccBlytBh5
-         TC3OkVYp8nQ2EVpUfyBwiDej+PtWqOrT+bTawvt9XNXUzgxuDjeKiXacd6K5Z2a3Wthm
-         zWf9dLJMuq14mpxgQ/A6DmgxAnwZyZrTm0TyFI8N3Q3cZ6/O6GWluH11/ZCIgrCF94Tw
-         i9byCDYEQkisZ/7N9XX98z+vqRHu4WAcok01A5tP4J9H2bXIq/wi5bhDe62rTOYyRCVV
-         BZrg==
-X-Forwarded-Encrypted: i=1; AKwUvBxeiTU+T0d08tGyG7MvJEJmmoK6crZ6A94U8IkqEF4GyJaP1is9WeBYKFuvnaoTi4IaAD8ycSDfVMM=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lyfHxPys15VQDIRq7yIhDg8hkKjOaYlh6bAzxkAIL3JRZhKR/7
-	i9polMEi2YFKQzRxw+T83RlaV/ZoACxj0swkF/alre7xXjxaE5eZYXrGwZAqW0n9JA==
-X-Gm-Gg: AYBFou03Ipa0Ph4uuZDG6ANGNNqWk/KfxFgwhaCsnL4ZY7KdRUlOhw4+hX6rlWBoDt/
-	0rHDhdZyDt3k35oLqpykHDCGqw9KHrJbbwW4teFdfsEjsEo2O6AqX8nPFbAEETy8tP8sgUo2w8R
-	fP2bpkoTRjA1QfO/p5OmQFaRd2WbdR7ppXeOqs9q/hWXps6JlAIkFn4X33rgqZOKZLectMkdoh1
-	jhCACIHy7cSdI8rXVkUNxgS7+VcURWzcNvrpJNuzI0EDijmfLG0ET4Pd6lkwQbOVBoR4zy7wVlP
-	+8/ek9PyYXEm3rHTEnKJEiJaHhxIHLGGl3MwzOncHgrh4BxXVR6LVPSsuPDg0f7slT3C8ozoNz8
-	WM2mR1WJ34iASqSHzDntWj7MQIzD+1vx9xGQns10oqT4cSGhG6nkLBwIFBX0q6Zuzq/qgWponrj
-	xtHTP+KMJUiNQQc1+pgxTZK6kgSLxIkSTT3FXVVIWVOF6/Fm2Pxs1TJ4khFnXmgzvHaeu01zQSF
-	s5ovBaldFr1
-X-Received: by 2002:a05:600c:3586:b0:49d:15b9:2a2a with SMTP id 5b1f17b1804b1-49e7a64ea8fmr24842895e9.10.1789379138262;
-        Mon, 14 Sep 2026 02:45:38 -0700 (PDT)
-Message-ID: <67395a7d-ccd7-41a3-a925-8679e5d37911@suse.com>
-Date: Mon, 14 Sep 2026 11:45:27 +0200
+        bh=JcnnsXW0NCPzXOWQCXzIot1QQ8b1TbROnhwSccF9ATc=;
+        b=IJSZVgVU9xHzGQG9B5Gc4gazB54kKU67ke51PGnbMnVgrWlRbiand3wWtWk+vwCXNy
+         EtUFbFgJjrY9Mw+4DzZvT2roAJpuSn+0ISkT9zaXcsNRvad0cWCix+r2VU4plpqWqJBB
+         brS7BydbSnoYPb6FB9ypB+ZrV2oXYMZ/DmnDRtVvwaBGxjj/MlfC0v/IHxbEZJMTvcQw
+         yVRbRSxfn5MfgblNwmjqp10RqF+UAufbIIojXifKt56rad/7MU5m8ghEllLLyNqY7bo2
+         CWnFeTsfLvRlVaLUMVK+v5NBe2ZV0ylWBragRnJEGoPZw768un2rEXSExR6qHZ3OYYi+
+         VbEA==
+X-Forwarded-Encrypted: i=1; AKwUvBy+/arWzBIeYqWE6E+Xc+rVjjQSKKamlegGx9ZUjDzqfqSnKynqtTQu7dn58IxZNmccn/0KEq6ljzQ=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mVyuw6gObgsHfCqleqCKlDI4KQAdrdTxaTS6jzxtIzWnkvhFGS
+	y+ejCliFApF8MrAJyxq6oNGq9ov8qkiBP8sLuw9Vevvwi1eDikbr3g7fVdLREqoc/A==
+X-Gm-Gg: AYBFou18XDxGcYjWQYHOvNahyxjO7rl1VahDrwxPEPETQkm8cijzeZmRSzE/DxnP0jl
+	qhxZP177EHcXH/WXI4h7YQ17Qtk53KnUKN8IbHjcFenHDERK7PVIX07dB7YltWqqfWGEfZF2mvL
+	mLKBOLZLmW5PcCbsqbFmdD7tS8j1jJB/YEGKbEkwXA8AZC9ZUvlyoXfaWvYpInQrhJwsZR5VhgG
+	kHjhEcwTGuyvq9ogESdIgqrmVU+sjt1mVRFRkBM7OemosT97rzbvvVDroPaWGhmkibE1zHASNx3
+	R3Un6v0x3QslipEKNQbXK381PPp/yslgL/vDVxxRCWiJSuQt0gMmQVJ94VzjpkXv2/HLfZqPuOO
+	ov4eXnohqpikEMmjtkh5qxfFJp8/85IVya0Nqf/P0SKNwJsVZiaA5fdbcIffjI6/3RwMxqxKmMe
+	YWM7+99TwIjob4aBAQpHmFIOwRulKCCw/5dfI8DXcaLDTECZ1K3a/Z7O0Tt4mmmHnhAX5uBA==
+X-Received: by 2002:a05:600c:548b:b0:498:952:e276 with SMTP id 5b1f17b1804b1-49e7a6625aamr19728365e9.8.1789379362532;
+        Mon, 14 Sep 2026 02:49:22 -0700 (PDT)
+Message-ID: <e9b0678a-a05a-4a26-b8f7-6331ebbe0dcd@suse.com>
+Date: Mon, 14 Sep 2026 11:49:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] xen/sched: rtds: add global-EDF utilization admission
- control
-To: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Cc: andrew.cooper3@citrix.com, roger@xenproject.org, dfaggioli@suse.com,
- anthony.perard@vates.tech, julien@xen.org, sstabellini@kernel.org,
- gwd@xenproject.org, enr0n@ubuntu.com, michal.orzel@amd.com,
- xen-devel@lists.xenproject.org, Furkan Caliskan <frn1furkan10@gmail.com>
-References: <20260826045720.5779-1-frn1furkan10@gmail.com>
- <20260826045720.5779-2-frn1furkan10@gmail.com>
- <371537bb-7c12-4630-bb1f-57e301b1fbf2@suse.com>
- <325f2b44-ea61-45e8-a681-c0bb08d5766a@suse.com>
- <6fc3aa29-f6b5-43fd-893c-f4cbab0b5c84@suse.com>
+Subject: Re: [PATCH v3 1/3] x86/viridian: Workaround Hyper-V GP fault writing
+ to MSR
+To: Ross Lagerwall <ross.lagerwall@citrix.com>
+Cc: Paul Durrant <paul@xen.org>, Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20260911091244.1165516-1-ross.lagerwall@citrix.com>
+ <20260911091244.1165516-2-ross.lagerwall@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <6fc3aa29-f6b5-43fd-893c-f4cbab0b5c84@suse.com>
+In-Reply-To: <20260911091244.1165516-2-ross.lagerwall@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1789379138-FDA0C77B-729DECA9/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1789379363-F02992AC-82C126BF/0/0
 X-purgate-type: clean
-X-purgate-size: 1092
+X-purgate-size: 576
 
-On 14.09.2026 11:33, Jürgen Groß wrote:
-> On 14.09.26 11:13, Jan Beulich wrote:
->> On 14.09.2026 11:10, Juergen Gross wrote:
->>> On 26.08.26 06:57, Furkan Caliskan wrote:
->>>> @@ -892,8 +983,19 @@ rt_alloc_udata(const struct scheduler *ops, struct sched_unit *unit, void *dd)
->>>>    static void cf_check
->>>>    rt_free_udata(const struct scheduler *ops, void *priv)
->>>>    {
->>>> +    struct rt_private *prv = rt_priv(ops);
->>>>        struct rt_unit *svc = priv;
->>>>    
->>>> +    if ( svc && !is_idle_unit(svc->unit) )
->>>> +    {
->>>> +        unsigned long flags;
->>>> +
->>>> +        spin_lock_irqsave(&prv->lock, flags);
->>>> +        rt_admission_test(prv, svc->unit->domain,
->>>> +                           svc->period, svc->budget, 0, 0);
->>>
->>> This use case clearly shows you are not only testing. :-)
->>
->> Yet at the same time ignoring possible errors.
+On 11.09.2026 11:12, Ross Lagerwall wrote:
+> The Viridian spec requires the vector to be >= 0x10 when writing to the
+> SINTx MSR, otherwise it should #GP fault.
+> The spec-defined initial value is 0x10000, i.e. the vector is 0. On
+> startup, for some reason Windows 11 Hyper-V tries to set the MSR to
+> the spec-defined initial value and since the vector is 0, it GP faults.
+> Fix this by doing as Hyper-V does and only fault if the SINT is
+> unmasked.
 > 
-> I don't see how this could happen, as new_period and new_budget are both 0 here.
+> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 
-Okay, that's simply entirely invisible here. So before freeing the two
-items are somehow zeroed?
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
 
