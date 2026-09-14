@@ -4,52 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BB381C88E50
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 12:04:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420859.1647076 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0DFA0C88E50
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 12:07:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420868.1647084 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x65Q2-0006Qc-IK; Mon, 14 Sep 2026 12:04:18 +0000
+	id 1x65T0-000763-Th; Mon, 14 Sep 2026 12:07:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420859.1647076; Mon, 14 Sep 2026 12:04:18 +0000
+Received: by outflank-mailman (output) from mailman id 1420868.1647084; Mon, 14 Sep 2026 12:07:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x65Q2-0006QU-EQ; Mon, 14 Sep 2026 12:04:18 +0000
-Received: by outflank-mailman (input) for mailman id 1420859;
- Mon, 14 Sep 2026 12:04:17 +0000
+	id 1x65T0-00075w-Qy; Mon, 14 Sep 2026 12:07:22 +0000
+Received: by outflank-mailman (input) for mailman id 1420868;
+ Mon, 14 Sep 2026 12:07:21 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <tzimmermann@suse.de>) id 1x65Q1-0006QL-Bq
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 12:04:17 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x65Sz-00074l-R1
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 12:07:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x65Q0-003d50-O7
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 14:04:16 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x65Sz-00FeEC-7a
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 14:07:21 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <tzimmermann@suse.de>)
- id 6aa7e2bb-bab6-0a2a0a5309dd-0a2a4501dd68-26
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 14:04:16 +0200
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <tzimmermann@suse.de>)
- id 6aa7e2c0-5984-0a2a45010019-c387df82e1c6-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 14:04:16 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id C998C21CB3;
- Mon, 14 Sep 2026 12:04:07 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 220F513693;
- Mon, 14 Sep 2026 12:04:06 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id 7pSXO7bip2ooAgAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Mon, 14 Sep 2026 12:04:06 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6aa7e373-8faa-0a2a0a5109dd-0a2a450ca88c-34
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 14:07:21 +0200
+Received: from [74.125.228.140] (helo=mail-ej2-f12.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6aa7e378-f479-0a2a450c0019-4a7de48c9bc6-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 14:07:20 +0200
+Received: by mail-ej2-f12.google.com with SMTP id
+ a640c23a62f3a-c254f705536so461333666b.1
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 05:07:20 -0700 (PDT)
+Received: from [172.18.123.208] ([185.104.138.131])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c2966147b46sm415673566b.60.2026.09.14.05.07.14
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 14 Sep 2026 05:07:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,263 +53,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1789387451; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=oGAjaTYW9+9pgn++AOoLz4Ni470k5ZTJydWoPlVjGtw=;
-	b=s/8xx6Phz3C7iM/cwG9s8JXgPeKzTtz4W6E9+Uhp6s9Gs/q4fMObgrEZD/4NxhHiFsdcf2
-	ZM6Qh/tVSkNxYVtWGvCqBcxrhMdAFYPiSEMCYMZJMlDj0tz/5VUQ+bZH8pksfb2JVTG+5w
-	FfgjqwkQnXAe+9Pxe4TxSaAh9X5JSww=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1789387451;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=oGAjaTYW9+9pgn++AOoLz4Ni470k5ZTJydWoPlVjGtw=;
-	b=2aIGkYQw+Hgr38Ip6uo267G6WZ91VP7Dxuxusffo6tKuVt3zNSusGXVLwZxJU/AZQyjlmC
-	6f5pD3OuLxnFrEAQ==
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b=Skls9UdH;
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=VcjQ+Hdk
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1789387447; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=oGAjaTYW9+9pgn++AOoLz4Ni470k5ZTJydWoPlVjGtw=;
-	b=Skls9UdHYfdXyf1+XvkwS6SIvprCy3p2rJCF1FKee5E3K2ZBAldyVbo19v4UyM2suOo0hX
-	K1Un2SuqyTqASEvDn26RzJnN3TfWDLVGzrBodBbs+iYxanHJ5/zGZ4PWWdHYpkFSSMovwZ
-	Rfv6uXQrwIIC4TLWe35YbO0yxYhEw08=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1789387447;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=oGAjaTYW9+9pgn++AOoLz4Ni470k5ZTJydWoPlVjGtw=;
-	b=VcjQ+HdkXxscPpMhk3xwqyl+LRC6Nrunw9/MnWxAoModxunwDKnTQyOJaYV9MteRSadyKe
-	8Hi/lZQaLkSsc5Bw==
-Message-ID: <b422004f-870c-4622-95c3-536798bb14ab@suse.de>
-Date: Mon, 14 Sep 2026 14:04:06 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1789387640; x=1789992440; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=HA60+e5Pq/r/yiWzjxDAI87jtQZSqdkKSGgJz/Lj8Mc=;
+        b=dFSYtQO+khXtHTnXrctWU1ML88MPggEpc1UNLZoXMxlYB7evz1aqNKFHKxFuN9dCIH
+         rHLRr7hejQrwCqsuCO7bCXotRPsfBMk1QO9HvJ17LGY4DibPbrcUNtsU1mAgd9WXCY63
+         vfQyNYRoN+YzAjhqx5BFBXTCk1fkQhSycJ6fk7FdJ1UbXBmvTXnv6wVX4RSswoxncoF5
+         nM54fLOqbnF6UHHxnznk6cmmuRcXjYsmRdWUFcjscQscJT++Fi6RlpF9Q4ZWP1BobZ8l
+         Xotmj8rbfLQyQjyGOW3ZBeaYkB/foEfGg1HkG03Bykmo8XRWSr9ua/MZiB+PgRKbejr2
+         ehTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789387640; x=1789992440;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=HA60+e5Pq/r/yiWzjxDAI87jtQZSqdkKSGgJz/Lj8Mc=;
+        b=L15HHcq/cQUSOm5MWxFLUwklW23f2QhLzbQliLRv/06mELR9/hyWVVLHONXm1tu2F0
+         Q5V0BSY39tBp6fvqcw7Lcrb6jIB4TX2bJccgF1hR3tcIOXq41FkgJhrk/vp1CmlRLQpG
+         Be94H6CcBSivAyNrS5vaC6LIJ/srvOxqFFbfzfRHTROtgcJke8BQIYiRGUsDBRkjx4GQ
+         Kbm7hMUIUAuQHYNSfrNZ5VNr/XlEHRwkVohta9oVv0wxBNoEPj84QY0u/FEEnVhAPyvs
+         dKGZqTJGacEzWaqAtV/9JDQTwKXvC1w2emndg2pSOx8GMejzzcSNQ6Daqj8QZ5fXk4Xn
+         0NXw==
+X-Forwarded-Encrypted: i=1; AKwUvBzDCQDYOq7bWvR+mQ6mImSX7JDHvXKqxIqlpaxhDTuA8lPZ1n+7RN4RlLNe31CUZLucnM/nBIja1zg=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mc/g2nyMtRpIfoiMlrMSGWFHqO17vjmrv+btfIJJficBBNbgfG
+	hips7XWTmm8K5jj3Pp3hO5mVL9/z3Hh8DpcvWwRdWcePur0IGk8FT4ikU2xREZyodQ==
+X-Gm-Gg: AYBFou2WEnCR+pWD0RK13uAF+JO71Qh7yjn9tTPFPWTWx0Uar38XHnDAzwUtRLb+pAE
+	CmNIji/cwki+a1OhRvE0wNV98jHLgIFn843we8E8k4iZBAkh7lER6IrJgD+szT6lstgXgJESUmM
+	/jmUk4jeOs8T2SkzLYBiCrrquoQUWpEgLpI1NJL0UO0CGgKmBvWSHzxZTntsMLi2njYAwsFCE5p
+	pBgRQiuMhZkjK+BXrrjV+8ljsDdH6TlVJLpi+8H3mKLW/HCQA2+Xx00ECvmz8/Zl9y7/8pw2std
+	OGJMpqNdvPhjtySESWL5GFijFsZ4D98/vUw5JiqzxpaPFdZSFHhBuMblPf3qOrum0Wd7PD4WNVf
+	X0PC1GT+hrHquB4BzAR5A9NxPDdZbmwvaoY1m/K2zbcUtaeORvD5Y1wK7JTBEa/zPfu2B97K+pH
+	3dX8T4lEvt9d0WNohbj8lhx7Hcbyuoin1eHpyrMj3z9OSytDDn6De4FZ+wMU4Qu91d8obWUu6zH
+	XDNroy43n2i
+X-Received: by 2002:a17:907:7ba1:b0:c29:591a:d247 with SMTP id a640c23a62f3a-c29b87259fcmr155760966b.30.1789387640437;
+        Mon, 14 Sep 2026 05:07:20 -0700 (PDT)
+Message-ID: <cbebe81e-1c68-452e-9442-8c817bd68a29@suse.com>
+Date: Mon, 14 Sep 2026 14:07:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/8] drm: replace simple display pipe users with atomic
- helpers
-To: Ze Huang <ze.huang@oss.qualcomm.com>,
- Alexey Brodkin <abrodkin@synopsys.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Joel Stanley <joel@jms.id.au>,
- Andrew Jeffery <andrew@codeconstruct.com.au>, Frank Li <Frank.Li@nxp.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Linus Walleij <linusw@kernel.org>,
- Hans de Goede <hansg@kernel.org>, Alex Lanzano <lanzano.alex@gmail.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>
-Cc: dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org,
- imx@lists.linux.dev, xen-devel@lists.xenproject.org
-References: <20260727-drm-simple-kms-removal-v3-0-cd5dc89858c6@oss.qualcomm.com>
+Subject: Re: [PATCH v2 27/39] xen/riscv: introduce arch_move_irqs()
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <df3d3e1be48d9e46e4884c8573550b242efe26db.1787838835.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <20260727-drm-simple-kms-removal-v3-0-cd5dc89858c6@oss.qualcomm.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: C998C21CB3
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	FREEMAIL_TO(0.00)[oss.qualcomm.com,synopsys.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,jms.id.au,codeconstruct.com.au,nxp.com,pengutronix.de,epam.com];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,suse.de:dkim,suse.de:email,suse.de:mid,suse.com:url,msgid.link:url,imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo]
-X-purgate-ID: tlsNG-d62444/1789387456-1F063757-86B02AFF/0/0
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <df3d3e1be48d9e46e4884c8573550b242efe26db.1787838835.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1789387640-02EDAA5B-2BCA926A/0/0
 X-purgate-type: clean
-X-purgate-size: 5711
+X-purgate-size: 1701
 
-Hi
+On 27.08.2026 17:21, Oleksii Kurochko wrote:
+> When migrating a vCPU between pCPUs the hypervisor must also migrate
+> the associated virtual interrupt state. arch_move_irqs() is the
+> per-arch hook called by generic code to trigger that.
+> 
+> Replace the static inline BUG_ON placeholder in asm/irq.h with a real
+> implementation in intc.c dispatching through a new move_irqs vintc_ops
+> callback. Wire it up in vAPLIC, which delegates to imsic_migrate_vcpu()
+> which itself still a stub to be implemented in follow-up patches.
+> 
+> Note that technically ASSERT() in arch_move_irqs() could be skipped as
+> it will be anyway NULL pointer dereference (and a trap will occur) if
+> something isn't properly initialized but sometimes it is harder to
+> find place where NULL pointer derefence happened as it isn't
+> guaraunted that all necessary registers will be filled with something
+> useful.
+> As at the moment I don't find any case when ->move_irqs() could be
+> skipped, the check that ->move_irq isn't NULL is added to ASSERT()
+> instead of adding "if ( ...->move_irq) vitnc->ops->move_irqs(v)".
 
-Am 26.07.26 um 21:45 schrieb Ze Huang:
-> struct drm_simple_display_pipe was meant to simplify simple DRM
-> drivers, but instead adds an extra wrapper around normal DRM atomic
-> helper setup. As noted in Documentation/gpu/todo.rst, remaining users
-> should be converted to regular atomic helpers and stop depending on the
-> simple-KMS interfaces.
->
-> This series converts the following drivers:
->
->    - arcpgu
->    - aspeed
->    - mcde
->    - repaper
->    - tve200
->    - xen frontend
+All of these two paragraphs look stale / inapllicable; ...
 
-For these drivers:
+> --- a/xen/arch/riscv/intc.c
+> +++ b/xen/arch/riscv/intc.c
+> @@ -192,3 +192,11 @@ void vintc_ctxt_switch_to(struct vcpu *v)
+>  
+>      ops->ctxt_switch_to(v);
+>  }
+> +
+> +/* Move vCPU's IRQs from one pCPU to another */
+> +void arch_move_irqs(struct vcpu *v)
+> +{
+> +    const struct vintc_ops *ops = v->domain->arch.vintc->ops;
+> +
+> +    ops->move_irqs(v);
+> +}
 
-Reviewed-by: Thomas Zimmermann <tzimmermann@suse.de>
+There's no ASSERT() here (and I'd prefer if none was added). With the
+description pruned:
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-I've taken the rest of the series into drm-misc-next. We had 2 drivers 
-tested and the others are variants of the same.
-
-Best regards
-Thomas
-
-
->
-> Each patch replaces drm_simple_display_pipe_init() with explicit
-> primary plane, CRTC and encoder setup, and moves the old simple-pipe
-> callbacks into regular plane and CRTC helper callbacks named according
-> to local driver conventions.
->
-> The conversions preserve helper behavior that used to be implicit in
-> drm_simple_kms_helper.c, including plane-state validation, CRTC
-> primary-plane checks, affected-plane propagation, framebuffer prepare
-> handling, and existing event/vblank flow where applicable.
->
-> Result is less helper indirection and more explicit driver-side atomic
-> wiring, with no remaining simple-KMS dependency in these drivers.
->
-> Except for gm12u320, no hardware testing was performed.
->
-> This series is based on drm-next-2026-06-27.
->
-> AI usage disclosure:
-> - I wrote the first two commits myself. The remaining patches were completed
->    with assistance from AI tools.
-> - AI tools were also used to review the code and suggest code changes for
->    the DRM atomic conversion.
->
-> Thanks,
-> Ze Huang
->
-> Signed-off-by: Ze Huang <ze.huang@oss.qualcomm.com>
-> ---
-> Changes in v3:
-> - Use atomic state from the commit path consistently in converted helpers:
->    fetch new CRTC/plane state from the commit in enable/update/flush paths, and
->    use drm_atomic_get_crtc_state() with PTR_ERR() handling in plane atomic_check
->    hooks before drm_atomic_helper_check_plane_state().
-> - Move MCDE one-shot flow start from plane atomic_update() to CRTC
->    atomic_flush(), after pending vblank event handling.
-> - Fix repaper damage update path to skip updates unless CRTC is active.
-> - Fix arcpgu missing remote encoder node handling and lock CRTC state access in
->    debugfs.
-> - Make container helpers static inline.
-> - Link to v2: https://lore.kernel.org/r/20260716-drm-simple-kms-removal-v2-0-1133a8fc3785@oss.qualcomm.com
->
-> Changes in v2:
-> - common changes:
-> - create upcast helpers
-> - use 'commit' as name of struct drm_atomic_commit in atomic helpers
-> - improve control flow in *_crtc_helper_atomic_check() and
->    *_plane_helper_atomic_check()
-> - Moved page-flip/vblank event handling out of plane update paths and into
->    CRTC atomic_flush(), using atomic_flush and disable paths for mcde,
->    pl111 and tve200
-> - arcpgu:
->      - remove reduntant mod_supported helper
->      - change obsolete mode field to crtc->state->mode
-> - mcde:
->      - drop attach of unused encoder
-> - tve200:
->      - reorder connector/bridge attach
-> - xen:
->      - change possible_crtcs mask to 0
-> - Link to v1: https://patch.msgid.link/20260705-drm-simple-kms-removal-v1-0-b4e1ca053623@oss.qualcomm.com
->
-> ---
-> Ze Huang (8):
->        drm/arcpgu: replace struct drm_simple_display_pipe with regular atomic helpers
->        drm/aspeed: replace struct drm_simple_display_pipe with regular atomic helpers
->        drm/mcde: replace struct drm_simple_display_pipe with regular atomic helpers
->        drm/pl111: replace struct drm_simple_display_pipe with regular atomic helpers
->        drm/gm12u320: replace struct drm_simple_display_pipe with regular atomic helpers
->        drm/repaper: replace struct drm_simple_display_pipe with regular atomic helpers
->        drm/tve200: replace struct drm_simple_display_pipe with regular atomic helpers
->        drm/xen: replace struct drm_simple_display_pipe with regular atomic helpers
->
->   drivers/gpu/drm/aspeed/aspeed_gfx.h      |  11 +-
->   drivers/gpu/drm/aspeed/aspeed_gfx_crtc.c | 203 ++++++++++++++++++-------
->   drivers/gpu/drm/aspeed/aspeed_gfx_drv.c  |   3 +-
->   drivers/gpu/drm/mcde/mcde_display.c      | 248 ++++++++++++++++++++-----------
->   drivers/gpu/drm/mcde/mcde_drm.h          |  12 +-
->   drivers/gpu/drm/mcde/mcde_drv.c          |   3 +-
->   drivers/gpu/drm/pl111/pl111_display.c    | 199 ++++++++++++++++++-------
->   drivers/gpu/drm/pl111/pl111_drm.h        |   5 +-
->   drivers/gpu/drm/pl111/pl111_drv.c        |   3 +-
->   drivers/gpu/drm/tiny/arcpgu.c            | 201 +++++++++++++++++++------
->   drivers/gpu/drm/tiny/gm12u320.c          | 138 +++++++++++++----
->   drivers/gpu/drm/tiny/repaper.c           | 138 +++++++++++++----
->   drivers/gpu/drm/tve200/tve200_display.c  | 219 ++++++++++++++++++---------
->   drivers/gpu/drm/tve200/tve200_drm.h      |   6 +-
->   drivers/gpu/drm/tve200/tve200_drv.c      |  12 +-
->   drivers/gpu/drm/xen/xen_drm_front.h      |   6 +-
->   drivers/gpu/drm/xen/xen_drm_front_kms.c  | 188 ++++++++++++++++-------
->   17 files changed, 1155 insertions(+), 440 deletions(-)
-> ---
-> base-commit: 3696d07837d1df13a5603d77f667685e7dfb3c53
-> change-id: 20260704-drm-simple-kms-removal-01a031c6a129
->
-> Best regards,
-
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
-GF: Jochen Jaser, Andrew McDonald, (HRB 36809, AG Nürnberg)
-
-
+Jan
 
