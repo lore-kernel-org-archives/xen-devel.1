@@ -4,40 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4F94C88E65
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 10:52:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420752.1646985 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5C722C88E65
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 10:54:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420762.1646993 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x64I2-0007VX-EW; Mon, 14 Sep 2026 10:51:58 +0000
+	id 1x64Kc-000839-QI; Mon, 14 Sep 2026 10:54:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420752.1646985; Mon, 14 Sep 2026 10:51:58 +0000
+Received: by outflank-mailman (output) from mailman id 1420762.1646993; Mon, 14 Sep 2026 10:54:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x64I2-0007VQ-Bf; Mon, 14 Sep 2026 10:51:58 +0000
-Received: by outflank-mailman (input) for mailman id 1420752;
- Mon, 14 Sep 2026 10:51:56 +0000
+	id 1x64Kc-000832-NK; Mon, 14 Sep 2026 10:54:38 +0000
+Received: by outflank-mailman (input) for mailman id 1420762;
+ Mon, 14 Sep 2026 10:54:37 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <nicola.vetrini@bugseng.com>) id 1x64I0-0007VI-So
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 10:51:56 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x64Kb-00082w-Jn
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 10:54:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x64I0-00Aa2z-5q
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 12:51:56 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x64Kb-008TLc-00
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 12:54:37 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <nicola.vetrini@bugseng.com>)
- id 6aa7d1c0-2eae-0a2a0a5409dd-0a2a4508abd4-42
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 12:51:56 +0200
-Received: from [162.55.131.47] (helo=support.bugseng.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <nicola.vetrini@bugseng.com>)
- id 6aa7d1cb-f659-0a2a45080019-a237832faf18-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 12:51:55 +0200
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id BF81A4EE00AD;
- Mon, 14 Sep 2026 12:51:54 +0200 (CEST)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aa7d266-e002-0a2a0a5209dd-0a2a4505a158-6
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 12:54:36 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6aa7d26c-4cb1-0a2a45050019-4a7de18cbfd2-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 12:54:36 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49cd38e0f79so9360205e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 03:54:36 -0700 (PDT)
+Received: from ?IPV6:2a02:778:142:8f01:2700:bad4:284c:5aa5?
+ ([2a02:778:142:8f01:2700:bad4:284c:5aa5])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49e60ac411asm294572305e9.8.2026.09.14.03.54.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 14 Sep 2026 03:54:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,78 +53,260 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1789383115;
-	b=LTDIOYct3sI4In+uKmvU78owhQTUqUzyeZ9ptMZCtMArMSraXIKLsV95hZZxBn0upZtf
-	 p9cIFzJdDdnjkJSqMmMqjIkvdPagVDLKt9SZvr5iMr9Kz0BZWnNw++t1JnBRWaHZ2Camf
-	 SF9MuI4MxGUI/H6NdQCKL+lje7CsSHPcCaxeHd3IHNhhT3QCXlKt7FxNd1niI93b864Kb
-	 UEMMSGQ688ggDZsYQS7JXbmSGz/sutSkklmOX59Mm363se47VuyUewDarELyHsDzA32Y5
-	 rD1zH77/KBF+I6DNzxpsD75Em/Gy54rJRDDPG0bWLlaWqu+pYexqSukFEvTeXGEBFTFOo
-	 jpO9xOkeuZkwQ3/m/oFxSpdaLmOTEwVWlY9srW24ZGx1WvQ4k5XahVeLixnP9GKEGz7GY
-	 wVvWeW+57jiSeAFCvlfzbQaIwUhh4hgPotugKXuHWGJubj31uQOJVt51MxtG3lXTA8y5Y
-	 nHaItVYiHyobzH96shQee5YZ4IxZd7y9ern2zFyLOpPg9KESEKIPeV9+t/epX9mlpe+eE
-	 KXrBw47dRrp87vTRTax3idoOb47D7ekIWip2LvcCzfvwNjm9MR5TQEttCWoOl+llGdRdU
-	 +1vruPE+xEXKDC3PbRcr1WvuKi6goFkfempuIDXQtz8qrFMFN9JlSkb0I5dlDc0=
-ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1789383115;
-	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
-	 Message-ID:X-Sender:Organization:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=SgNyosp90VH7eDQuiqttRwIXiW7vZ1s+1MzF9mXojdU=;
-	b=zlLEW+L9x4CfRq2onNhjk0ZOsqUYsS2rOl3slHb2ZNTNdUsIqt3ZelYIVSj46mSbf3y5
-	 TUFIQplr7bP3F3h9EZOcaaVdNLiJ8/amaSLjsSIQtvLBIFBanaT9hXxIszQFTuPaSuy0D
-	 3KexA3JknT1NsjrH2AOvIbRwyRN2dRu9aef5m8Q6ARsKsxZ55gMZfRXCDoH5Ku6kHPlxr
-	 fMwQ2BmehRCDHE+dWiev+DGGhx+snK+sjqcz/jVRpYVnzdjchXqxibLO589u38YSYEBZ2
-	 E+IPrF7LKWrb2BZyhrFI1Ms/CffryehEK/3vMqvEXJPJwEL/h9EFJMzwD6pJVaMb80uLY
-	 HOa3dWPXPy791ofaEA4wCKrR551sM0ch3eib0/F4CDVUqzo5HCBDSfdtlT378lRgPwVrd
-	 KeYs+wxWoGRWJXuL2P7FGFn6qYVNrchDe6OpkB2BSEaZ4Kb53vcb/GMvyIFTiZHT5sXLG
-	 zTXKiRLm3aspjP7ts6BHjmzS3SgRpFA42ZFDGqF5aQZ4y6qlwClrSSVCIauv5Dqn6QU2y
-	 7qmwNwVWmjHxEZC8we3XpY8wJIrSMaZT6xF5YuFzJjuyfK77xGjcRdG8SRY+TGDQw31sv
-	 Km/vR1AcABeMOgqJrXFI5Hhym2cRu6BhrV61M0eLvDim3RErwn2pA5eDslwbMXc=
-ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1789383276; x=1789988076; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=uR4S+flbKftxTsnvkVTTjO2b1d5a5haTCsx34TGyzE0=;
+        b=Qv52MuuW+Wbym+rURLozpSAaJhn/hRbXoJefIroMZ7x4Xe3XIHraI63SFHHFTDTdic
+         sSraelUVt2eA3ZmfmKEE7L8DGl3El/VWBAC9GJi+/mVrk9Ao8dp9432fOjiasxAd5We1
+         MMzifvqgTszsMwsYz6MjJVWBMnVdSxpxM3BS3OtcU/6/prlEmeBaYjXXy94VlWf3TDAM
+         zS6cYTCVCEvsx5UZj8MURlu6LyrfhxTpsARfP8U4RjEhzirSAZkyJF4RNazPDOBIk4s+
+         9AYFovpdhO4fjFL+x+oIUcWNXxKA863+Yus5WsVMlAEZLGR93gS8LeSGH2+GuR+KSisX
+         C8cA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789383276; x=1789988076;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=uR4S+flbKftxTsnvkVTTjO2b1d5a5haTCsx34TGyzE0=;
+        b=Tno5hLq1SE7IjIgBPIho9ojyphvxtn5W1NBI5bsOGuHB8XzAKpWG7FNu3FwgeR/IsO
+         GWkmisvnzHy7YxItmB8sPqhtUc/FuXBocQHVJBbWxAwcUhce4o/AEJPF8MMsCsEFvgZl
+         6siND9wOPFliayTZ3Mk1/AKBuiV3FDjeI74y9RtY1lCm+W4Y9YVRED/xx3LE1Vp+XbGa
+         6pVFaDDmQ+jWi9VUzwJ7x4g7Vdr6vQvxpnWDnW2nKDGcfxjvh8jpmtRWudUbAyQp8KiO
+         SX7pZ8GWQ+0iJ6J5bTKRYlOnDST91+SZKx9nNrVT9XeI6J+OrDpUsfhwhuU8e3vdA4Ba
+         jjEw==
+X-Forwarded-Encrypted: i=1; AKwUvByQYYqJHSCGwRyj9fz09o+amF5S2SF0ZfdXLU0RxPVy/c1LMe9ylK7Xyw5H+HY2jvGSnTte2P7b4qc=@lists.xenproject.org
+X-Gm-Message-State: AFuF++khQQubBupK3Bu74+0Jvvh117RE/SYogOtJgeSN6RF46iGZpB96
+	L7jQ1kjqWHSuHvpoaIarg1/smSDI2uNnluf8OOOfKPWTsQRROzIuCfA8rzzV2m5o
+X-Gm-Gg: AYBFou0VGcYOUvZAOxs22Puhdxi0Yol+6RhZZNaGNCNsTUvDMLyR/UBl6AtFC2CkiCt
+	BmLUcKU2B1Rkpk8tiJ0NDJKY8m+i0vzZaQdiOPUWoZBx1xCEy3bRKny+d5+MOd/9V3VA+DrWnrG
+	PSJG9Wjlbhx+HBxMtXMG6k9Zi2ksFfhs2m1EJPKgVzxBJ/7s3xk+ioXk8hC91/qg1taRaPhe7iv
+	s6+hRLLLyK00sp9m2E7jXtCn8YZHXKwERshvIZP0LDB6271cUlF3abmxmD7Ul5zZi4wvDVpSbSB
+	m+zGT1uoEZQGLn2ynmlM5HfvYDzRaj9+RthuPANL2JvXP87TGPtKW97YaEu0SHx1ONU6y3gAAks
+	ff1be1fx3NxSWCWUTTndfGKygOO5hvzZ0k3WQ+qzb9Jvl11NRmSES0noM8aCZjmm0HbX1CBhP+3
+	4RIr7bmOSvd/Op7vv7VSa65B3UlKaY1S1JeYVzoSViNouPiY0J44XlzPIJiPM0PlYs4DfIMcpIS
+	tmp7aXU4r/DAQd17HY/TK0UWQ4R2r0tbjk935lfr/EhcbpqqeBLo8nYYezOQAR5zQ==
+X-Received: by 2002:a05:600c:8b74:b0:49c:ee20:e787 with SMTP id 5b1f17b1804b1-49e7a658021mr43224175e9.1.1789383276208;
+        Mon, 14 Sep 2026 03:54:36 -0700 (PDT)
+Message-ID: <d8f7e714-4c62-41a3-9a1b-aed30f4f586e@gmail.com>
+Date: Mon, 14 Sep 2026 12:54:35 +0200
 MIME-Version: 1.0
-Date: Mon, 14 Sep 2026 12:51:54 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v9 16/20] xen/riscv: implement IRQ routing for device
+ passthrough
 To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Anthony PERARD
- <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Subject: Re: [PATCH 2/4] Eclair: relax long <-> function-pointer conversion
- deviation
-In-Reply-To: <3b6b2796-b532-4b6b-8b04-8edce203ad3d@suse.com>
-References: <6d212d60-5c0b-4909-996d-5d6a4906b7e1@suse.com>
- <fca27ac3-95c9-4177-a9cd-673f07230889@suse.com>
- <43e412de9e5165f33c572841bfc58dc9@bugseng.com>
- <3b6b2796-b532-4b6b-8b04-8edce203ad3d@suse.com>
-Message-ID: <1410bb68c5bf5715690a542585834e9f@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ xen-devel@lists.xenproject.org
+References: <cover.1788876411.git.oleksii.kurochko@gmail.com>
+ <afef58245a58f4084e38ea1d9880282a8e8beeef.1788876411.git.oleksii.kurochko@gmail.com>
+ <e1d611bc-115d-4050-89c9-9781e9900ea1@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <e1d611bc-115d-4050-89c9-9781e9900ea1@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1789383115-D5B4987B-170C9A70/0/0
-X-purgate-type: clean
-X-purgate-size: 516
+X-purgate-ID: tlsNG-c201ff/1789383276-24B1D2A1-C43D94B2/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 6148
 
 
->> Same as above
+
+On 9/10/26 2:53 PM, Jan Beulich wrote:
+> On 09.09.2026 17:07, Oleksii Kurochko wrote:
+>> --- a/xen/arch/arm/irq.c
+>> +++ b/xen/arch/arm/irq.c
+>> @@ -205,7 +205,7 @@ void __init init_IRQ(void)
+>>   static inline struct irq_guest *irq_get_guest_info(struct irq_desc *desc)
+>>   {
+>>       ASSERT(spin_is_locked(&desc->lock));
+>> -    ASSERT(test_bit(_IRQ_GUEST, &desc->status));
+>> +    ASSERT(desc->status & IRQ_GUEST);
+>>       ASSERT(desc->action != NULL);
+>>   
+>>       return desc->action->dev_id;
 > 
-> Okay, I'll happily adjust. As I have no reference for the syntax, I 
-> just
-> have to guess when making changes.
+> Why did an Arm change slip into a RISC-V patch?
+
+Considering that this code is executed under the spinlock it is fine to 
+not use test_bit() so it is part of dropping of bitops functions.
+
 > 
+>> --- a/xen/arch/riscv/aplic.c
+>> +++ b/xen/arch/riscv/aplic.c
+>> @@ -325,9 +325,40 @@ static const hw_irq_controller aplic_xen_irq_type = {
+>>       .set_affinity = aplic_set_irq_affinity,
+>>   };
+>>   
+>> +static unsigned int cf_check aplic_guest_irq_startup(struct irq_desc *desc)
+>> +{
+>> +    BUG_ON("unimplemented");
+>> +}
+>> +
+>> +/*
+>> + * Shared by ->shutdown(), ->enable(), ->disable() and ->end(), which have
+>> + * no state.
+>> + */
+>> +static void cf_check aplic_guest_irq_stub(struct irq_desc *desc)
+>> +{
+>> +    BUG_ON("unimplemented");
+>> +}
+>> +
+>> +static void cf_check aplic_guest_set_irq_affinity(struct irq_desc *desc,
+>> +                                                  const cpumask_t *mask)
+>> +{
+>> +    BUG_ON("unimplemented");
+>> +}
+>> +
+>> +static const hw_irq_controller aplic_guest = {
+>> +    .typename     = "aplic",
+> 
+> This is indistinguishable from aplic_xen_irq_type. Naming of both variables
+> also isn't consistent
 
-We'd be glad to share the ECLAIR User Manual with the Xen maintainers. 
-In fact, the ECLAIR installation on the testing machines has already a 
-copy of it. Anthony should be able to make it available to you and 
-others.
+I will align names properly:
 
--- 
-Nicola Vetrini, B.Sc.
-Software Engineer
-BUGSENG (https://bugseng.com)
-LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
+--- a/xen/arch/riscv/aplic.c
++++ b/xen/arch/riscv/aplic.c
+@@ -316,8 +316,8 @@ static void cf_check aplic_set_irq_type(struct 
+irq_desc *desc,
+      spin_unlock(&aplic.lock);
+  }
+
+-static const hw_irq_controller aplic_xen_irq_type = {
+-    .typename     = "aplic",
++static const hw_irq_controller aplic_host_irq_type = {
++    .typename     = "aplic-host",
+      .startup      = aplic_irq_startup,
+      .shutdown     = aplic_irq_disable,
+      .enable       = aplic_irq_enable,
+@@ -345,8 +345,8 @@ static void cf_check 
+aplic_guest_set_irq_affinity(struct irq_desc *desc,
+      BUG_ON("unimplemented");
+  }
+
+-static const hw_irq_controller aplic_guest = {
+-    .typename     = "aplic",
++static const hw_irq_controller aplic_guest_irq_type = {
++    .typename     = "aplic-guest",
+      .startup      = aplic_guest_irq_startup,
+      .shutdown     = aplic_guest_irq_stub,
+      .enable       = aplic_guest_irq_stub,
+@@ -357,8 +357,8 @@ static const hw_irq_controller aplic_guest = {
+
+  static const struct intc_hw_operations aplic_ops = {
+      .info                = &aplic_info,
+-    .host_irq_type       = &aplic_xen_irq_type,
+-    .guest_irq_type      = &aplic_guest,
++    .host_irq_type       = &aplic_host_irq_type,
++    .guest_irq_type      = &aplic_guest_irq_type,
+      .handle_interrupt    = aplic_handle_interrupt,
+      .set_irq_type        = aplic_set_irq_type,
+  };
+
+> 
+>> --- a/xen/arch/riscv/include/asm/intc.h
+>> +++ b/xen/arch/riscv/include/asm/intc.h
+>> @@ -15,6 +15,7 @@ enum intc_variant {
+>>   };
+>>   
+>>   struct cpu_user_regs;
+>> +struct domain;
+>>   struct irq_desc;
+>>   struct kernel_info;
+>>   struct vcpu;
+> 
+> Why is this suddenly necessary? There are ...
+> 
+>> @@ -76,10 +82,13 @@ void register_intc_ops(const struct intc_hw_init_ops *init_ops);
+>>   void intc_init(void);
+>>   
+>>   void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority);
+>> +int intc_route_irq_to_guest(struct irq_desc *desc, unsigned int priority);
+>>   
+>>   void intc_handle_external_irqs(struct cpu_user_regs *regs);
+>>   
+>>   int domain_vintc_init(struct domain *d);
+>>   void domain_vintc_deinit(struct domain *d);
+>>   
+>> +int vintc_reserve_virq(const struct domain *d, unsigned int virq);
+> 
+> ... existing uses of struct domain already, immediately ahead of this added
+> line.
+
+Forward declaration of 'sturct domain' was missed before so it was added 
+with this change. I can drop forward declaration as you noticed that it 
+hasn't been needed before this change but it still make sense to add IMO.
+
+> 
+>> @@ -78,6 +82,22 @@ void intc_route_irq_to_xen(struct irq_desc *desc, unsigned int priority)
+>>       intc_set_irq_priority(desc, priority);
+>>   }
+>>   
+>> +int intc_route_irq_to_guest(struct irq_desc *desc,
+>> +                            unsigned int priority)
+>> +{
+>> +    ASSERT(spin_is_locked(&desc->lock));
+>> +
+>> +    ASSERT(intc_hw_ops->guest_irq_type);
+>> +
+>> +    desc->handler = intc_hw_ops->guest_irq_type;
+>> +    __set_bit(_IRQ_GUEST, &desc->status);
+> 
+> The revlog says you replaced all of these bitops.
+> 
+>> @@ -227,3 +251,240 @@ void do_IRQ(struct cpu_user_regs *regs, unsigned int irq)
+>>       spin_unlock(&desc->lock);
+>>       irq_exit();
+>>   }
+>> +
+>> +static struct irq_guest *irq_get_guest_info(struct irq_desc *desc)
+>> +{
+>> +    ASSERT(spin_is_locked(&desc->lock));
+>> +    ASSERT(test_bit(_IRQ_GUEST, &desc->status));
+> 
+> Same here. And more elsewhere.
+> 
+>> +/* Route an IRQ to a specific guest */
+>> +int route_irq_to_guest(struct domain *d, unsigned int virq,
+>> +                       unsigned int irq, const char *devname)
+>> +{
+>> +    struct irq_guest *info;
+>> +    struct irq_desc *desc = irq_to_desc(irq);
+>> +    unsigned long flags;
+>> +    int retval = 0;
+>> +
+>> +    if ( d->is_dying )
+>> +        return -EINVAL;
+>> +
+>> +    info = xvzalloc(struct irq_guest);
+>> +    if ( !info )
+>> +        return -ENOMEM;
+>> +
+>> +    info->d = d;
+>> +    info->virq = virq;
+>> +
+>> +    info->action.dev_id = info;
+>> +    info->action.name = devname;
+>> +    /* The action is part of 'info', thus it is freed together with it. */
+>> +    info->action.free_on_release = false;
+> 
+> The revlog says this line doesn't exist anymore.
+> 
+I will double check all the places before sending v10.
+
+Thanks.
 
