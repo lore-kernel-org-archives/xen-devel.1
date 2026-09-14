@@ -4,52 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50FA1C88E67
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 06:33:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420477.1646779 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9AA9CC88E50
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 06:40:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420484.1646787 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x60G3-00030h-QJ; Mon, 14 Sep 2026 06:33:39 +0000
+	id 1x60MR-0004iR-FN; Mon, 14 Sep 2026 06:40:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420477.1646779; Mon, 14 Sep 2026 06:33:39 +0000
+Received: by outflank-mailman (output) from mailman id 1420484.1646787; Mon, 14 Sep 2026 06:40:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x60G3-00030a-NK; Mon, 14 Sep 2026 06:33:39 +0000
-Received: by outflank-mailman (input) for mailman id 1420477;
- Mon, 14 Sep 2026 06:33:38 +0000
+	id 1x60MR-0004iK-Cj; Mon, 14 Sep 2026 06:40:15 +0000
+Received: by outflank-mailman (input) for mailman id 1420484;
+ Mon, 14 Sep 2026 06:40:14 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <tzimmermann@suse.de>) id 1x60G2-00030T-97
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 06:33:38 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x60MQ-0004iE-Em
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 06:40:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x60G1-002Txc-EJ
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 08:33:37 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1x60MP-002VMJ-Br
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 08:40:13 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <tzimmermann@suse.de>)
- id 6aa79539-bab6-0a2a0a5309dd-0a2a4507d028-24
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:33:37 +0200
-Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <tzimmermann@suse.de>)
- id 6aa79541-b4ea-0a2a45070019-c387df83e0c0-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:33:37 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id AF4E51F388;
- Mon, 14 Sep 2026 06:33:28 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 08DF813693;
- Mon, 14 Sep 2026 06:33:27 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id OLQQMjeVp2qFEgAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Mon, 14 Sep 2026 06:33:27 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6aa796c6-8faa-0a2a0a5109dd-0a2a4502b454-28
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:40:13 +0200
+Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6aa796cd-6ca4-0a2a45020019-4a7de14c9f6f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:40:13 +0200
+Received: by mail-wr2-f12.google.com with SMTP id
+ ffacd0b85a97d-482f6350f88so791182f8f.2
+ for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 23:40:13 -0700 (PDT)
+Received: from ?IPV6:2003:ca:b735:686c:f5c4:7858:246b:ca62?
+ (p200300cab735686cf5c47858246bca62.dip0.t-ipconnect.de.
+ [2003:ca:b735:686c:f5c4:7858:246b:ca62])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-486eb32d3c7sm22890239f8f.10.2026.09.13.23.40.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Sun, 13 Sep 2026 23:40:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,161 +55,102 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1789367612; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=ovBBaSgMLmlbSMqeNsjr5N8eDdz6l1RmmoDSShj29wE=;
-	b=b16Odrj6bv0wp8OuyHaqBtpbaOjGnP9oDUkPm+RnEC2D3gQBz58ZPlxWU/CttnYcihdRLB
-	W9ckoJDdVx6dO7vo2kVy82bj6PNrKQfv3GtcQ+ydcHEYIk1aK+5a1aeKXOtO+U3RRPmCCK
-	c75mgcfRyGTh09JACGkenPbWXqI+yOM=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1789367612;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=ovBBaSgMLmlbSMqeNsjr5N8eDdz6l1RmmoDSShj29wE=;
-	b=h6IyQ2X3/hGfWruBjt45Bpjm6R/rVrgm2ZI/TWGL/4k6lMvTM7+LcT+bkGZQQ9FfVt1/XJ
-	hDct8kTxT4gIkEAw==
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b="ov/teEO7";
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=MuewFzNW
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1789367608; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=ovBBaSgMLmlbSMqeNsjr5N8eDdz6l1RmmoDSShj29wE=;
-	b=ov/teEO7U6AxQHEQtbeVuit6+Esb59jvvHc1wnp8vKLnWpfaXRnJSRiSJXNbrsxGrERqD3
-	D0mM3mmD8XaIRjaEIHsJFOtRxdYqrJ3+DwrfaTqRiF+FmnHQR8cXA+Y7NE6h66cztla/pU
-	0BQtBNTOLhrKHZrOmvapY0G9AWkuTy8=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1789367608;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=ovBBaSgMLmlbSMqeNsjr5N8eDdz6l1RmmoDSShj29wE=;
-	b=MuewFzNWGNAVPk7ko9iJTbOoyxG+Ut0iz5lpJBigNxT3SjHYUKwlRHFh24JiMS5BoVGv5Q
-	1gdeuU5ohpB39OAQ==
-Message-ID: <bf9f900c-39d4-4571-ae4b-3896c5ce8610@suse.de>
-Date: Mon, 14 Sep 2026 08:33:27 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1789368013; x=1789972813; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=lpdzU9Y4yRt3tzkevqO7DUbsMCpycKpfrbImX2nQAjI=;
+        b=LODrf3exWzIRdaSPX6PCsxK7xR1i6lp1FHuSLyEqOha8ILUm9Vgk+9OTeO6BLHmMaX
+         EhUvefj0ZBLVzhiSD8iInc5syAIbh9Ozo77cwFPRs7Ss69/mI6OaQ/LjiNW9rIUFU+B7
+         sjGqhuMJBqI/uzJYiXY5qq6RLhVfu24GdA3ZHnwepKEOtIDTP+vN8TVfGv9gWmI9XpOy
+         NORaDLxXL86kpbqSXmW34LQdhT1T5D1Q2WiVmXug0KskVoNdwUpDHMZgNBaNunrNYAVY
+         nhiTAfw3lMjsj6KzW5YkXy87o0Ke6S5eSsVTK7PyhtEmVPhcpVEodBFWtuZIbea0cGXL
+         6DCw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789368013; x=1789972813;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=lpdzU9Y4yRt3tzkevqO7DUbsMCpycKpfrbImX2nQAjI=;
+        b=fgjZo4waFjZKk46G5z+ow79X+/j/qKRfwPKsGnz8yN3V5TxPEha7ugcOlKbJZmTG2z
+         n6uJ02nga52M/bGldlhsEYYLuDQYEdywq40Dwd/fTI24KhIyoXRa2hV0GHXkPFQ4CMkt
+         TCAr165lX8KfDUPRbDQcEq1BdYj6kpt3SklGXPpgbwEW13GUbBOKHDwJ9fH+qyJAuMLL
+         raUXVV3ZhnS9egUk8uyuI0lQk8rnswOuYOMCij1wdxA2K+zMK2/8sG/uFEZc7fwfU4s2
+         8vcpKP2MSC0LEPXqYbZqnLlYgbxpQg56VU3vGUQZsh4RKVSCn5epVk7Q1kHsJn1mt4en
+         j2wA==
+X-Forwarded-Encrypted: i=1; AKwUvByMvilXbLz0nQVPMBXEMZtoyH0Ikfrz43UpieZcz/iRSFUMC3TA7WmyAOPdlktFTZ3Yobz/1J2zCy4=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mRAzQ6i6f74bCOk+TqvJrc0EMDeDNZpeA45bknBIinPH5cFRcX
+	z1Naiex4xlYpV8CBbeRz8MkIhe9/Sgjk2jmWJiktef9ABVQ+mCT+Fj3zaxVOToYVXA==
+X-Gm-Gg: AYBFou1i+vJBdsjVxqNHHUBa+3Y2JEXlzk9eBtD2C/vNRKa0P4WWCgeaNKIXY5fu66o
+	uyJW5xU2lJCfMbXSv98kMYVtHcmdyLFtCQuhPPwDWtkEI8Ueml7U8DoWeAFi2SNtmibnFciFwCv
+	2IrCHiELk3kzZX6LhXAhq0HWjNQSa3oqYPuJnFALU7ZGu5OiD6HCvAJv7r137mJho5YFhFgcUx2
+	GSWlZHCTQCVOJD67weD8TQ+zQ+VJGgFuTlYbwolCWF47Zl+pA8wF0lgh34PsDuaAA5+50Q4/+1k
+	3o1H0/rIJyFEP2jDGVNlMlf7cKwmdTjSWmRz8/R9o2TRZqzVHwqTas0wte3YeJkddBqWTMvRUvQ
+	sT4Ttu547DMaY5S80F+1DAQQ4mUFQo2NAABebjpihFuwS0G4wKPTRsoU0CWXGzAbrNFIQYdvT1s
+	Y2fzTdg/f6VbY0CEfkAlW3tdyotW5XSxzI/5vGl2KmhskhXs+Z6V5F3tvKFd3y8lWSykXpp3jxC
+	lJ1G8FW0bneVIWIdM8deeXcJbmryyNlD8u9XFraHcH1R+PvFir7U0OhKH7bzlC5UkaAiHW7esBM
+	TtmV0JjclED/zyt6l+Hn3R7Vxrflgc8=
+X-Received: by 2002:a05:6000:4281:b0:485:8c17:9761 with SMTP id ffacd0b85a97d-48702aff858mr1201254f8f.35.1789368012751;
+        Sun, 13 Sep 2026 23:40:12 -0700 (PDT)
+Message-ID: <05aebcad-fb84-4f11-ace2-80c0da7f0e9e@suse.com>
+Date: Mon, 14 Sep 2026 08:40:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/8] drm/pl111: replace struct drm_simple_display_pipe
- with regular atomic helpers
-To: Linus Walleij <linusw@kernel.org>, Ze Huang <ze.huang@oss.qualcomm.com>
-Cc: Alexey Brodkin <abrodkin@synopsys.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Joel Stanley <joel@jms.id.au>,
- Andrew Jeffery <andrew@codeconstruct.com.au>, Frank Li <Frank.Li@nxp.com>,
- Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Hans de Goede <hansg@kernel.org>,
- Alex Lanzano <lanzano.alex@gmail.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
- linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org,
- imx@lists.linux.dev, xen-devel@lists.xenproject.org
-References: <20260727-drm-simple-kms-removal-v3-0-cd5dc89858c6@oss.qualcomm.com>
- <20260727-drm-simple-kms-removal-v3-4-cd5dc89858c6@oss.qualcomm.com>
- <CAD++jLnN-dhwxWwgmWYVD7COhvVsTxbiexHwoFkzgv8ucGhxqw@mail.gmail.com>
+Subject: Re: [PATCH] x86/build: Remove leading space in xen.efi.S rule
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20260911201601.3682596-1-andrew.cooper3@citrix.com>
 Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <CAD++jLnN-dhwxWwgmWYVD7COhvVsTxbiexHwoFkzgv8ucGhxqw@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Queue-Id: AF4E51F388
-X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
-X-Rspamd-Action: no action
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	RCVD_TLS_ALL(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	ARC_NA(0.00)[];
-	RCPT_COUNT_TWELVE(0.00)[22];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[synopsys.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,jms.id.au,codeconstruct.com.au,nxp.com,pengutronix.de,epam.com,lists.freedesktop.org,vger.kernel.org,lists.ozlabs.org,lists.infradead.org,lists.linux.dev,lists.xenproject.org];
-	TO_DN_SOME(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,suse.com:url,suse.de:dkim,suse.de:mid,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	DKIM_TRACE(0.00)[suse.de:+]
-X-purgate-ID: tlsNG-ef75cf/1789367617-34CCFAE4-78530B26/0/0
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260911201601.3682596-1-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1789368013-F26B72AC-93B5CAAB/0/0
 X-purgate-type: clean
-X-purgate-size: 857
+X-purgate-size: 405
 
-Hi
+On 11.09.2026 22:16, Andrew Cooper wrote:
+> It happens to be benign, but it causes emacs to ask:
+> 
+>   Suspicious line 194. Save anyway? (y or n)
+> 
+> whenever saving the file.
+> 
+> Fixes: da944a72fdf4 ("x86: split xen-syms/xen.efi linking rules")
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 
-Am 14.09.26 um 01:33 schrieb Linus Walleij:
-> On Sun, Jul 26, 2026 at 9:46 PM Ze Huang <ze.huang@oss.qualcomm.com> wrote:
->
->> Replace the PL111 simple display pipe with explicit plane, CRTC and
->> encoder objects.
->>
->> Move the existing timing, format and pitch validation into explicit
->> atomic check paths. Use commit-local plane state in the CRTC enable path
->> when reading framebuffer format state.
->>
->> Move page-flip event handling to the CRTC commit path.
->>
->> Signed-off-by: Ze Huang <ze.huang@oss.qualcomm.com>
-> This patch 4/8 applied for next.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Great, thanks a lot!
+No idea how that had slipped in.
 
->
-> Yours,
-> Linus Walleij
-
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
-GF: Jochen Jaser, Andrew McDonald, (HRB 36809, AG Nürnberg)
-
-
+Jan
 
