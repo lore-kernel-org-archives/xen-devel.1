@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1BC6DC88E72
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 15:22:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421101.1647230 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2323C88E72
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 15:31:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421117.1647240 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x68V6-0003ml-AO; Mon, 14 Sep 2026 15:21:44 +0000
+	id 1x68eV-0005tN-7H; Mon, 14 Sep 2026 15:31:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421101.1647230; Mon, 14 Sep 2026 15:21:44 +0000
+Received: by outflank-mailman (output) from mailman id 1421117.1647240; Mon, 14 Sep 2026 15:31:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x68V6-0003me-7b; Mon, 14 Sep 2026 15:21:44 +0000
-Received: by outflank-mailman (input) for mailman id 1421101;
- Mon, 14 Sep 2026 15:21:42 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x68eV-0005tC-23; Mon, 14 Sep 2026 15:31:27 +0000
+Received: by outflank-mailman (input) for mailman id 1421117;
+ Mon, 14 Sep 2026 15:31:25 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x68V4-0003mV-Io
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 15:21:42 +0000
+ (envelope-from <patchwork-bot+f2fs@kernel.org>) id 1x68eT-0005t1-6V
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 15:31:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x68V3-004Cpx-VX
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 17:21:41 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1x68eS-009Jyg-JM
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 17:31:24 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa81102-bab6-0a2a0a5309dd-0a2a45068a3c-8
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:21:41 +0200
-Received: from [74.125.228.76] (helo=mail-ed2-f12.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa81105-195a-0a2a45060019-4a7de44c9d02-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:21:41 +0200
-Received: by mail-ed2-f12.google.com with SMTP id
- 4fb4d7f45d1cf-6a98604f6b4so3021600a12.2
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:21:41 -0700 (PDT)
-Received: from [172.18.123.208] ([185.104.138.149])
- by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c29ad3e033asm166766666b.47.2026.09.14.08.21.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Sep 2026 08:21:40 -0700 (PDT)
+ (envelope-from <patchwork-bot+f2fs@kernel.org>)
+ id 6aa8134c-8faa-0a2a0a5109dd-0a2a4505a88e-4
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:31:24 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <patchwork-bot+f2fs@kernel.org>)
+ id 6aa8134a-4cb1-0a2a45050019-aceafc1f874e-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:31:24 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 2734740124;
+ Mon, 14 Sep 2026 15:31:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 03D7F1F00893;
+ Mon, 14 Sep 2026 15:31:22 +0000 (UTC)
+Received: from [10.30.226.235] (localhost [IPv6:::1])
+ by aws-us-west-2-korg-oddjob-rhel9-1.codeaurora.org (Postfix) with ESMTP id
+ 56B213924A79; Mon, 14 Sep 2026 15:30:18 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,118 +53,89 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789399301; x=1790004101; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=BOTx3sWZgl50ibr0pIUML6XT/6YYqGuo6aTW43iDchk=;
-        b=SNhSkVSSjjoq0/icnlWqzNTX3oyLDTH2VME8xisjdGJB9BdKdDIK/3mxLI27txoRMp
-         jS3q9UKxRO3oxkH/pCwDETQsVCy3oxAMlbtDg/BUTp2AuHvmw7iVlQGsRfWPsE++351S
-         W9sno4hq4hTxN2aRdfRadEbyCRz306dkjYywRJFkl81m3pX7/HRccXnBVgcF0Z/Vj+eL
-         zwfYfXKFdbcygqRXBQPIDjxbcfc+S8V63uBdmWocrR620tPaoVXoimlWO1p4pUkAq8dQ
-         LSw/9HeiEz/YMSvS8HGjLQ92de2He2auz3iokS1T/JpQWx3GpzKIGnE4LiHA69OoFX4e
-         bT/w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789399301; x=1790004101;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=BOTx3sWZgl50ibr0pIUML6XT/6YYqGuo6aTW43iDchk=;
-        b=oqQHjCky/KPgACwAhKSfwh8P8OPTVMETzf8iEPQoWF/bf3mOVugZjBUDZJogWFhSuG
-         O/SQI40dTwbE2Zw3Gkks0ABYhGOW+Ci79zpYCom6FCyHDU849CCQzDb8znAa7GTzrZ1m
-         ExiUwY9dWwbk3nXOFLZuRM4cNAQe1gtUTL7qeQjFYQnV/ZbwKlYO19FMdEH/TPdQY5Cv
-         dLxujwVAgfbq7QRr/lCvGjQfDW4TMZBnVfn7+UQJL/y3gmipSW4oMKNqRViuvGB3NTXK
-         KQ6rQJ/nQq3NOliHaZLnBJNxFECeijJ5dtfOoWCe6OpCwkdMDW7ABbttBTzhonLfC8zM
-         xE5g==
-X-Forwarded-Encrypted: i=1; AKwUvBwvl8ODN+p/xcIrginoa5h1PR2dt2C0HjIKptf/UQPTKWpjityScsAwVvoIoJvCs16GiYI6wQOQkUk=@lists.xenproject.org
-X-Gm-Message-State: AFuF++l68qAd9eC5EZ7KrH8eI1Rb/DvOjzkyQcgsjH6+5DA7Tr4dDOkX
-	9DSWx+PNuJrBO3zFNyKgiEeCr4Vi6o3z1bi6utVzXozn8CTARQ2LgTu8vNKqy1uK8Q==
-X-Gm-Gg: AYBFou1G6/GzaHInA+MJo86Q0V1gs931l6jiCrUTHFV4hVFnMEtIucW9HC1JpfCgdZL
-	JnoQ8+9D1o2cMHG4cdHOLcE/cv23g0ybUYWquC/C0BZUR9IlqbSYt5G68pfJ8eh2KvLUiJkkrgw
-	vFsav1N3GObA6KvTTfF6Qs2alwyZa0KlIpsWhjacMjlueLOfhxCeNtdlnluGpodLHdq5e8+7ZTr
-	DYiDS+kKmNhHFzdzHN25ELBiC3y2wRN4sy5ZsD8Txd2+hN+c88S1H+4+D9eSZ+8zRMZUxgys67t
-	Pcl3tNxtlJCc+rNqS36ClrsRZn6OsPsEN46PaLajCwXT7EQyQ9aV1XUXwgzvWki6aq78aASJiMW
-	0Fka/R4Ug5/3H43bRHuxl2HiyCs+F6Jfw8Alh/mBwWCPDlakBqaB05I0mdqW0OOlBfrX+81NNNS
-	z7ltTX+PYf1nmKtnZ48dDJ2L9VTYbEyU8g6jP3tgP59POqq+Af50Kci3AZr+vVJmXKPoNnIG49V
-	cwENK2CiDHzvO4zvhtMh8Q=
-X-Received: by 2002:a17:907:845:b0:c26:19de:9ad1 with SMTP id a640c23a62f3a-c29b871d15amr212063166b.41.1789399301487;
-        Mon, 14 Sep 2026 08:21:41 -0700 (PDT)
-Message-ID: <8672bc80-38a5-43b5-a5d0-40a33dcb01dd@suse.com>
-Date: Mon, 14 Sep 2026 17:21:33 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Subject:From:Date:References:In-Reply-To:To:Cc"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789399882;
+	bh=6YNBDNqtv3G7fIIrCWxRo+R7rFxECIiWXZYEw0TsCm8=;
+	h=Subject:From:Date:References:In-Reply-To:To:Cc;
+	b=oafm7V4RKsPy/Q1nCVBWDqYf7CzIKQWwzaAUfYXO4K5blgVLNKT30EOhNjyiJ68b4
+	 EmE0pg7kCS+rsBO2hQhqAcC1jDNgaAjoHfS35HWN3j5jboLSqfna8lVYkkpRTOVBLm
+	 z7XrVJIhN7zqa0ZqIGC7moq0IJyRMgoMb82ImK4Ze2REEcVBWDrF/nBND+suW7cTj+
+	 wRFmHT2zlonTyo+1brM1i34j0QTrbmA5FknqN7kXJ9bimmAF15wqhMttnovE1K17hY
+	 mCHO/L8QQoVL9DoTMRTdTxGNm4LGmdWMH05qUrovm9ES8pb0mcHRy3YO183W8YwGVi
+	 tCv3P8ki+lNgA==
+Content-Type: text/plain; charset="utf-8"
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 34/39] xen/riscv: restore register state in the new
- IMSIC VS-file
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <c7000473af04e618a340270398fb85fffb46ca05.1787838835.git.oleksii.kurochko@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <c7000473af04e618a340270398fb85fffb46ca05.1787838835.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1789399301-FCC0777B-AB378AE7/0/0
+Content-Transfer-Encoding: 8bit
+Subject: Re: [f2fs-dev] [PATCH v3 00/14] Remove PG_private by using
+ page/folio->private checks instead
+From: patchwork-bot+f2fs@kernel.org
+Message-Id: 
+ <178939981687.647967.15609695091265022344.git-patchwork-notify@kernel.org>
+Date: Mon, 14 Sep 2026 15:30:16 +0000
+References: <20260907-remove-pg_private-v3-0-6ae22f9d9272@nvidia.com>
+In-Reply-To: <20260907-remove-pg_private-v3-0-6ae22f9d9272@nvidia.com>
+To: Zi Yan <ziy@nvidia.com>
+Cc: david@kernel.org, willy@infradead.org, akpm@linux-foundation.org,
+ muchun.song@linux.dev, ljs@kernel.org, liam@infradead.org, vbabka@kernel.org,
+ rppt@kernel.org, surenb@google.com, mhocko@suse.com,
+ baolin.wang@linux.alibaba.com, nico.pache@linux.dev, ryan.roberts@arm.com,
+ dev.jain@arm.com, baohua@kernel.org, lance.yang@linux.dev,
+ usama.arif@linux.dev, gourry@gourry.net, ying.huang@linux.alibaba.com,
+ apopple@nvidia.com, hannes@cmpxchg.org, qi.zheng@linux.dev,
+ shakeel.butt@linux.dev, kasong@tencent.com, mark.rutland@arm.com,
+ irogers@google.com, jack@suse.cz, linux-doc@vger.kernel.org,
+ amarkuze@redhat.com, peterz@infradead.org, kexec@lists.infradead.org,
+ dave.hansen@linux.intel.com, ruirui.yang@linux.dev, adrian.hunter@intel.com,
+ linux-mm@kvack.org, hongbohbli@tencent.com, hpa@zytor.com,
+ guochunhai@vivo.com, skhan@linuxfoundation.org, ceph-devel@vger.kernel.org,
+ baoquan.he@linux.dev, matthew.brost@intel.com, anna@kernel.org,
+ sstabellini@kernel.org, zbestahu@gmail.com, rakie.kim@sk.com,
+ minchan@kernel.org, richard@nod.at, x86@kernel.org, ebiggers@kernel.org,
+ alexander.shishkin@linux.intel.com, mingo@redhat.com, slava@dubeyko.com,
+ weixugc@google.com, yukuai@fygo.io, xen-devel@lists.xenproject.org,
+ xiang@kernel.org, magiclinan@didiglobal.com, mhiramat@kernel.org,
+ joshua.hahnjy@gmail.com, xiao@kernel.org, byungchul@sk.com,
+ james.clark@linaro.org, acme@kernel.org, linux-raid@vger.kernel.org,
+ linux-fscrypt@vger.kernel.org, bp@alien8.de, rostedt@goodmis.org,
+ linux-mtd@lists.infradead.org, axelrasmussen@google.com,
+ jefflexu@linux.alibaba.com, namhyung@kernel.org, jaegeuk@kernel.org,
+ yuanchu@google.com, idryomov@gmail.com, osalvador@suse.de, jgross@suse.com,
+ pratyush@kernel.org, linux-nfs@vger.kernel.org, tytso@mit.edu,
+ oleksandr_tyshchenko@epam.com, song@kernel.org, corbet@lwn.net,
+ pasha.tatashin@soleen.com, linux-kernel@vger.kernel.org,
+ linux-f2fs-devel@lists.sourceforge.net, linux-perf-users@vger.kernel.org,
+ senozhatsky@chromium.org, tglx@kernel.org, jolsa@kernel.org,
+ linux-fsdevel@vger.kernel.org, mathieu.desnoyers@efficios.com,
+ linux-trace-kernel@vger.kernel.org, linux-erofs@lists.ozlabs.org,
+ trondmy@kernel.org
+X-purgate-ID: tlsNG-c201ff/1789399884-F58AE2A1-F8F9ECC3/0/0
 X-purgate-type: clean
-X-purgate-size: 1756
+X-purgate-size: 707
 
-On 27.08.2026 17:21, Oleksii Kurochko wrote:
-> @@ -630,13 +649,13 @@ static void cf_check imsic_vsfile_local_read_clear(void *data)
->      old_vsiselect = csr_read(CSR_VSISELECT);
->      old_hstatus = csr_read(CSR_HSTATUS);
->      new_hstatus = old_hstatus & ~HSTATUS_VGEIN;
-> -    new_hstatus |= ((unsigned long)idata->hgei) << HSTATUS_VGEIN_SHIFT;
-> +    new_hstatus |= MASK_INSR(idata->hgei, HSTATUS_VGEIN);
+Hello:
 
-Please put into final shape upon introduction.
+This patch was applied to jaegeuk/f2fs.git (dev)
+by Jaegeuk Kim <jaegeuk@kernel.org>:
 
->      csr_write(CSR_HSTATUS, new_hstatus);
->  
->      /*
-> -     * There is no need to use atomic functions version to store
-> -     * values in MRIF because imsic_vsfile_read_clear() is always called
-> -     * with pointer to temporary MRIF on stack.
-> +     * No atomic accessors are needed to store the values into the MRIF here,
-> +     * as imsic_vsfile_read_clear() is always called with a pointer to a
-> +     * temporary MRIF on the stack.
->       */
+On Mon, 07 Sep 2026 22:56:07 -0400 you wrote:
+> Hi all,
+> 
+> This patchset removes PG_private to make space for upcoming PG_folio
+> (reserved as __PG_folio) for identifying pages from a folio (more details
+> in Note below). Instead of checking PG_private, all code is changed to
+> check page/folio->private != NULL instead.
+> 
+> [...]
 
-Same for this comment perhaps.
+Here is the summary with links:
+  - [f2fs-dev,v3,06/14] f2fs: stop using PG_private
+    https://git.kernel.org/jaegeuk/f2fs/c/60105162524e
 
-> @@ -1077,5 +1140,12 @@ void imsic_migrate_vcpu(struct vcpu *v)
->      /* Free-up old IMSIC VS-file */
->      vgein_release(v, old_vsfile_id, old_vsfile_cpu);
->  
-> -    BUG_ON("unimplemented");
-> +    /* Restore register state in the new IMSIC VS-file */
-> +    vsfile_data.mrif = &tmrif;
+You are awesome, thank you!
+-- 
+Deet-doot-dot, I am a bot.
+https://korg.docs.kernel.org/patchwork/pwbot.html
 
-Ah, here &tmrif is used a 2nd time.
 
-> +    imsic_call_on_cpu(new_vsfile_cpu, imsic_vsfile_local_update, &vsfile_data);
-> +
-> +    /* Set VCPU HSTATUS.VGEIN to new IMSIC VS-file */
-> +    vcpu_guest_cpu_user_regs(v)->hstatus &= ~HSTATUS_VGEIN;
-> +    vcpu_guest_cpu_user_regs(v)->hstatus |=
-> +            MASK_INSR(new_vsfile_hgei, HSTATUS_VGEIN);
-
-Nit: Indentation.
-
-Other comments on earlier patches apply here (and possibly elsewhere) as
-well. Just ftaod.
-
-Jan
 
