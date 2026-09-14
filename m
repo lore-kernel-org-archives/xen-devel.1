@@ -4,59 +4,63 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6701EC88E73
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 21:38:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420749.1647274 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 65E69C88E73
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 21:38:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421151.1647284 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6EN1-0005b3-I3; Mon, 14 Sep 2026 21:37:47 +0000
+	id 1x6ENA-0005pX-TA; Mon, 14 Sep 2026 21:37:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420749.1647274; Mon, 14 Sep 2026 21:37:47 +0000
+Received: by outflank-mailman (output) from mailman id 1421151.1647284; Mon, 14 Sep 2026 21:37:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6EN1-0005av-Dk; Mon, 14 Sep 2026 21:37:47 +0000
-Received: by outflank-mailman (input) for mailman id 1420749;
- Mon, 14 Sep 2026 10:50:12 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x6ENA-0005pQ-PU; Mon, 14 Sep 2026 21:37:56 +0000
+Received: by outflank-mailman (input) for mailman id 1421151;
+ Mon, 14 Sep 2026 15:55:03 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Lei.Huang@amd.com>) id 1x64GK-0007R8-AL
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 10:50:12 +0000
+ (envelope-from <reinette.chatre@intel.com>) id 1x691K-0002B7-Sa
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 15:55:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x64GJ-00FQGd-64
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 12:50:11 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x691J-00DrMg-PI
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 17:55:01 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Lei.Huang@amd.com>)
- id 6aa7d153-e002-0a2a0a5209dd-0a2a4501dfa0-34
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 12:50:10 +0200
-Received: from [40.107.200.21]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Lei.Huang@amd.com>)
- id 6aa7d160-5984-0a2a45010019-286bc815b109-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 12:50:10 +0200
-Received: from PH1PEPF0001330C.namprd07.prod.outlook.com (2603:10b6:518:1::1b)
- by SJ2PR12MB8650.namprd12.prod.outlook.com (2603:10b6:a03:544::13)
+ (envelope-from <reinette.chatre@intel.com>)
+ id 6aa818b5-2eae-0a2a0a5409dd-0a2a45078726-46
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:55:00 +0200
+Received: from [192.198.163.18] (helo=mgamail.intel.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <reinette.chatre@intel.com>)
+ id 6aa818d1-b4ea-0a2a45070019-c0c6a312c3f5-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:54:59 +0200
+Received: from fmviesa003.fm.intel.com ([10.60.135.143])
+ by fmvoesa112.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Sep 2026 08:54:54 -0700
+Received: from orsmsx902.amr.corp.intel.com ([10.22.229.24])
+ by fmviesa003.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 14 Sep 2026 08:54:53 -0700
+Received: from ORSMSX901.amr.corp.intel.com (10.22.229.23) by
+ ORSMSX902.amr.corp.intel.com (10.22.229.24) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.46; Mon, 14 Sep 2026 08:54:52 -0700
+Received: from ORSEDG901.ED.cps.intel.com (10.7.248.11) by
+ ORSMSX901.amr.corp.intel.com (10.22.229.23) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.46 via Frontend Transport; Mon, 14 Sep 2026 08:54:52 -0700
+Received: from DM5PR21CU001.outbound.protection.outlook.com (52.101.62.69) by
+ edgegateway.intel.com (134.134.137.111) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.46; Mon, 14 Sep 2026 08:54:52 -0700
+Received: from SJ2PR11MB8370.namprd11.prod.outlook.com (2603:10b6:a03:540::20)
+ by SA3PR11MB566415.namprd11.prod.outlook.com (2603:10b6:806:589::13)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.11; Mon, 14 Sep
- 2026 10:50:00 +0000
-Received: from SJ1PEPF000023D1.namprd02.prod.outlook.com
- (2a01:111:f403:c902::7) by PH1PEPF0001330C.outlook.office365.com
- (2603:1036:903:47::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.9 via Frontend Transport; Mon, 14
- Sep 2026 10:50:00 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ1PEPF000023D1.mail.protection.outlook.com (10.167.244.7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.428.7 via Frontend Transport; Mon, 14 Sep 2026 10:50:00 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Mon, 14 Sep
- 2026 05:49:59 -0500
-Received: from localhost.amd.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49 via Frontend
- Transport; Mon, 14 Sep 2026 05:49:57 -0500
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 14 Sep
+ 2026 15:54:50 +0000
+Received: from SJ2PR11MB8370.namprd11.prod.outlook.com
+ ([fe80::b6cf:ce77:3cdf:7cc]) by SJ2PR11MB8370.namprd11.prod.outlook.com
+ ([fe80::b6cf:ce77:3cdf:7cc%5]) with mapi id 15.21.0406.007; Mon, 14 Sep 2026
+ 15:54:49 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -68,223 +72,209 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=Intel header.d=intel.com header.i="@intel.com" header.h="Message-ID:Date:Subject:To:CC:References:From:In-Reply-To:Content-Transfer-Encoding:MIME-Version"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1789401299; x=1820937299;
+  h=message-id:date:subject:to:cc:references:from:
+   in-reply-to:content-transfer-encoding:mime-version;
+  bh=tz0kGCFO8UJKs7OlRSI5fOcp+hF2EbB44q3ez+I5y2s=;
+  b=FFqUGfh8dDe0wLWp5CBK6wwcegAxgI4TQegI1J8Mz6iLYhZmQRpXx//3
+   zePpeTp9HKW257Ab8Lvsl53QC1cxIv84UGniopFbjIdoWWI2PfR7LOYkG
+   YgRsGOBELZ7ToGcYQ1YsZuO9PeGKX4FC7tJ+/WPwyqXahuL95fyUfF19f
+   9aJgLg4L6BUlsXH/iHIN3J9InZn0mRCP5YWxnO4yBVN4waNG+EpPLOoGv
+   b+q3t6pbN1jZ7meS/Mfm1aYbE5LuFe8nVOFJnntMqigMiYZGdh086/DcI
+   xmBcn+QRln1gf3tp+4IoPkVHwxLmc1gnCDQSagh1TYfMEflG+Q02nZSNZ
+   Q==;
+X-CSE-ConnectionGUID: Ut9j+PadQWqZ9kT2wYpWhg==
+X-CSE-MsgGUID: On3S1WY0TpGjnIBbi8h+Pg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11905"; a="88893859"
+X-IronPort-AV: E=Sophos;i="6.27,103,1787036400"; 
+   d="scan'208";a="88893859"
+X-CSE-ConnectionGUID: GAKaSmkeRIeb/AsJULLdIw==
+X-CSE-MsgGUID: xOuHZigwRJOE7FyzMD2fgA==
+X-ExtLoop1: 1
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=xQ9tOJm+K6dWjjze29Dbch5nS/aX3hVLlSii86/apwzsSjA+4LyyE4jWrkfHaYjaHz2ZgsbQguOsmRuczF8zdGZD7xjHejWeTp/SOocO46Cv52VYj9N7WkJRzC/jVfZDcq8FsMBBaO9Lwq9S06y7ctd3crVZ41NQjGkrFu2CEIyQ5BUzpR2VGxnsgK/0rtY9wl8NzL3STqSD7x89U/oSSinY4tdJBJh+lUKrDgwc8nwAFfBZR/CNXZm+svI87DyyFROhGsmPc0rtR5UxWXFvMx4yUNnuJMURy9opwvwTef+pfhM+K49vijR1KwTw1lfxaAxbwgILsn3u+F+qa/C7OQ==
+ b=X6IjsL3/Dl7c+Bonbh13vnjEG/5KJJhyeUqwy1KVmGBwKkGVyg4sdQcGUOJOrRKTfP137+nJAP8i8WTKT6fV932YRiU2WCc2iQs14oJz7FKVw5zSns2aVfZpKyzLnn9xJLDqdupUekrWFaqRGhRLgBcfy7XWt+y8qbmtgkOR1SkhyPrBkUQubG08CO8fTo2fkpEfR+dWkVTm3uiX+9OMhz/5H99HafC2G4fN/YosTvZJMwZCLTKgC8maYYxCjUdvAwkwChaUAKOdnbIqk7M+4wwaE9u7Ext7SbYw/eicLM7atRC5Lb88ohdsZd03l/gYB8OkR31hqhn93CWMNlyaQw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=JmMNrl28IFnlEeTDxgaWxQyRK4ELYjXjpeG1ntvUuIk=;
- b=ht3YLv2woc0ZTw7W4egqmS85qhglS5DLWdqDq2iPT6G3d+9OtFf5O3HQEn/35rlH0IyA+VoMe6WcltKdhsWosdQj4cF3Tq5Sg/93iRRarquNEEyK7o+4bvyC1TBtJMPE/VwVlDDwVPt20i93SrEmOYRm9Oh29RsSgtaMc0RS1ZS7BXAEUSNPnG+0dhn9TMn86axeWB2IvIth/0oqa6T1cItglqbiUyKHSxhvIFyVsJOYG62Iq2/r51tYlknp+2V0g+/+6czedNA1KrPUpwhp9/kc4S5Z8UvnxRBHRtgabjCA9jo39hqAxpMaiX98R8JOOeDN8dbfcEPucTYUecbelw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=JmMNrl28IFnlEeTDxgaWxQyRK4ELYjXjpeG1ntvUuIk=;
- b=Jl0fEjIb4iPLwwYuzGL1KDh2woqfkR4bRVcGGrUKyyfXad4bx8EPIJQMR2RluRT0NZddoka0QVslC7J5kj1r6p11UEiPNXpMHiS7jqDwqSbEoDRZHbhtiwP2mhD1Bu+/MF/DebxnCG5SI+5qEFy5wGNIpa4eCwQRzJU4UCrm+Rc=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Huang Lei <Lei.Huang@amd.com>
-To: Juergen Gross <jgross@suse.com>, Stefano Stabellini
-	<sstabellini@kernel.org>
-CC: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Jonathan Corbet
-	<corbet@lwn.net>, Shuah Khan <skhan@linuxfoundation.org>,
-	<xen-devel@lists.xenproject.org>, <linux-doc@vger.kernel.org>,
-	<linux-kernel@vger.kernel.org>, <Lei.Huang@amd.com>
-Subject: [RFC PATCH] xen/manage: allow forcing shutdown without a userspace helper
-Date: Mon, 14 Sep 2026 18:49:45 +0800
-Message-ID: <20260914104945.637-1-Lei.Huang@amd.com>
-X-Mailer: git-send-email 2.25.1
+ bh=YJywIoQ62JkPFaRDKdqkSpKHrELoIjFnIMHh4GDwy5M=;
+ b=TMNampOHWSONDb5XzQ+gnvcDil50bPYlhc6VxF4OTqh2BbnhLyzQXjNHuAD74WzyJPe3UfWZ/WYCF3A0xVDjIW/paprfTNR+tG5QM45qYT00y1zN/zQ+71EiEwZTUc9obti8oGkm+1NyIXQcXFhA6AKyxjmxAnF91iCYXrr3Hg2LKVcwGZwrR1LH8Dhj/wZT1Y9KNvqQXgryLUrIUNo8z4lXv265nZBrfuEM3vsi6t1nLOm7/OA/L3QPqxgPn/hGKSRGXITdshy8GkDh+pKvDkpcTSj3DLk4eX2DlPBxQxbFod8LkQe/Pkd4Yxl2q9a7RTNlKSe93fd5e8wMkQoWww==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intel.com; dmarc=pass action=none header.from=intel.com;
+ dkim=pass header.d=intel.com; arc=none
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intel.com;
+Message-ID: <13c52f11-61c9-48a4-ab6c-3ebe7676fdda@intel.com>
+Date: Mon, 14 Sep 2026 08:54:42 -0700
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 12/13] treewide: convert rdmsrq() from a macro to an
+ inline function
+To: Juergen Gross <jgross@suse.com>, <linux-kernel@vger.kernel.org>,
+	<x86@kernel.org>, <linux-perf-users@vger.kernel.org>,
+	<linux-hyperv@vger.kernel.org>, <kvm@vger.kernel.org>,
+	<virtualization@lists.linux.dev>, <linux-edac@vger.kernel.org>,
+	<linux-pci@vger.kernel.org>, <linux-pm@vger.kernel.org>,
+	<linux-coco@lists.linux.dev>, <linux-acpi@vger.kernel.org>,
+	<linux-ide@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+	<linux-crypto@vger.kernel.org>, <linux-gpio@vger.kernel.org>,
+	<linux-hwmon@vger.kernel.org>, <linux-mtd@lists.infradead.org>,
+	<platform-driver-x86@vger.kernel.org>, <linux-fbdev@vger.kernel.org>
+CC: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>, Peter Zijlstra <peterz@infradead.org>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim
+	<namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>, "Alexander
+ Shishkin" <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>,
+	Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>,
+	James Clark <james.clark@linaro.org>, "K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, "Dexuan
+ Cui" <decui@microsoft.com>, Long Li <longli@microsoft.com>, "Sean
+ Christopherson" <seanjc@google.com>, Paolo Bonzini <pbonzini@redhat.com>,
+	"Ajay Kaher" <ajay.kaher@broadcom.com>, Alexey Makhalov
+	<alexey.makhalov@broadcom.com>, Broadcom internal kernel review list
+	<bcm-kernel-feedback-list@broadcom.com>, Josh Poimboeuf
+	<jpoimboe@kernel.org>, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, "Pu
+ Wen" <puwen@hygon.cn>, Tony Luck <tony.luck@intel.com>, Dave Martin
+	<Dave.Martin@arm.com>, James Morse <james.morse@arm.com>, Babu Moger
+	<babu.moger@amd.com>, Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>, "Vitaly
+ Kuznetsov" <vkuznets@redhat.com>, Andy Lutomirski <luto@kernel.org>, "Bjorn
+ Helgaas" <bhelgaas@google.com>, "Rafael J. Wysocki" <rafael@kernel.org>,
+	"Pavel Machek" <pavel@kernel.org>, Kiryl Shutsemau <kas@kernel.org>, Rick
+ Edgecombe <rick.p.edgecombe@intel.com>, Boris Ostrovsky
+	<boris.ostrovsky@oracle.com>, Len Brown <lenb@kernel.org>, Damien Le Moal
+	<dlemoal@kernel.org>, "Niklas Cassel" <cassel@kernel.org>, David Airlie
+	<airlied@redhat.com>, Olivia Mackall <olivia@selenic.com>, Herbert Xu
+	<herbert@gondor.apana.org.au>, Viresh Kumar <viresh.kumar@linaro.org>, Huang
+ Rui <ray.huang@amd.com>, Mario Limonciello <mario.limonciello@amd.com>, Perry
+ Yuan <perry.yuan@amd.com>, K Prateek Nayak <kprateek.nayak@amd.com>, Srinivas
+ Pandruvada <srinivas.pandruvada@linux.intel.com>, Yazen Ghannam
+	<yazen.ghannam@amd.com>, Linus Walleij <linusw@kernel.org>, Bartosz
+ Golaszewski <brgl@kernel.org>, Guenter Roeck <linux@roeck-us.net>, Artem
+ Bityutskiy <artem.bityutskiy@linux.intel.com>, Artem Bityutskiy
+	<dedekind1@gmail.com>, Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman
+	<gregkh@linuxfoundation.org>, Miquel Raynal <miquel.raynal@bootlin.com>,
+	Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+	Ashok Raj <ashok.raj.linux@gmail.com>, Hans de Goede <hansg@kernel.org>,
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, "Rajneesh
+ Bhardwaj" <irenic.rajneesh@gmail.com>, Xi Pardee <xi.pardee@linux.intel.com>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+	Lukasz Luba <lukasz.luba@arm.com>, Helge Deller <deller@gmx.de>,
+	<xen-devel@lists.xenproject.org>, <linux-geode@lists.infradead.org>, "Michael
+ Kelley" <mhklinux@outlook.com>
+References: <20260911074530.3140830-1-jgross@suse.com>
+ <20260911074530.3140830-13-jgross@suse.com>
+From: Reinette Chatre <reinette.chatre@intel.com>
+Content-Language: en-US
+In-Reply-To: <20260911074530.3140830-13-jgross@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: MW4PR03CA0053.namprd03.prod.outlook.com
+ (2603:10b6:303:8e::28) To SJ2PR11MB8370.namprd11.prod.outlook.com
+ (2603:10b6:a03:540::20)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000023D1:EE_|SJ2PR12MB8650:EE_
-X-MS-Office365-Filtering-Correlation-Id: f7e4f340-7021-4ae0-2a3e-08df124dec9d
+X-MS-TrafficTypeDiagnostic: SJ2PR11MB8370:EE_|SA3PR11MB566415:EE_
+X-MS-Office365-Filtering-Correlation-Id: 551bf591-1ca3-475a-2be7-08df127881ec
+X-LD-Processed: 46c98d88-e344-4ed4-8496-4ed7712e255d,ExtAddr
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|82310400026|36860700016|376014|11063799006|56012099006|6133799003|3023799007|10067099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	gXExf+TgtiNmjVO4iBrwlEnf0HIrY5FHbJrpc9QovqsACB8CifaKkI9N3ztVreeje90+631/Ma0Um8QnacXCiNkNORDyBvjUnh/VwxMXEEun3HqNMFbSdmEHt8GfGlvmhJYPtW0Twhlfu/QLTyCBSEXNgltq7RI2YhwRktMxh1RBiQkC1mnrpgsrp2YbLDrrXiW25T0kMTCSMPAKUvM+iqTYsVPOEQBSWPzxlGY1+MpZ32ykGP5EesGAJZxNvpp3yMNXF2G3TXt3wVAHj6RSsl0PIwqIgIGSo6zjDybDzZDwOAJLgsAgvYO2Qnq3EZfblo63yDFyfr7SNEf7dZ5hMYoDurCDk7AAjC6SrprJ4l/gxxZSGJe8NNYbqjPRm/XTtcg/g+Nrgmt8r/EwAdphQ9x7lpuzd2WFzeUKSj2noLPyIA3dbTjJA0/fpXW04mNJKqGSrSNmTHNTmjlSDlVmdSoyk5OelSomENVCx7kBDU1VBpLa9rRLaHpJScH1B8TX2/244SbgwLGe0GO8tknJBYLvLrjOMKXPWCDbkTLhK0llxbz7kBNrcVEYcglQ27YaGb7qMRYwE29XyUKj8vUSTmpvFz/CNdlZoGEzeZZEeC0e5NCdsXkbmBXrAi5hAPcAZLe4OcEssoqQaE3UFUCXgRwRMvyzLgZRO2qemvf8ERgiBCej+FYbw1neaKZY4eUSUhj2uyefqjiDNbgMfTeY/A==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(82310400026)(36860700016)(376014)(11063799006)(56012099006)(6133799003)(3023799007)(10067099003)(18002099003);DIR:OUT;SFP:1101;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|23010399003|7416014|366016|376014|1800799024|22082099003|18002099003|921020|4143699003|10067099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info: FCdcRAsMIgf1njP/rTi6g0mD5FTBwjqPKJlKMfYLIzHABACl3yu+Bp9ABUa4YIxLOSf0A4/1LlfPNfOdSCAagLX6RNR5w/+ZgtlriDS3e8Ti8P7F5MiclfyTSBUc26pDgq0FXpleG0oOAIb21Lenjsm6+eE8MHtwetKU9nH2yPusdp8tmbXqUEjEUtE/3hWH4X4oRvaLaFcohO36Xw4xt5MfwuZtVLhw3Zh0T8J9Z3zVuD5tuGDpLG3NZ8Xh/uBJq+9WXtZFbJPvUTb82v+WUBmHQ7/+emn6VBPh5kEsl9e0p4EUe+gIN5EBx/SckIUTh2+Pfh4Hp9CibOxmo4FI5ejLXsjJpc2uzA5zWmYkVZUBskPNqr/Ce39z3Pth0MTdfwlwzV6voFNyCZCTVTwVORyollyZlS/MfkDul9lHdqhaytdpeVZe316vpXH2UcUga8Iscx3Hl8pvjXyKhORvWGP3muHgAMsRa/RXgHwEzjOJLsJCvZgYPOszsq8iteGLFEQd8JLAAjzX0xmBnLUtLpGvJKy6f2zFtsms3NjiLqoNXkxqQEfytQhOwgFt6i10KrP4H/5cvwqr03FJz3Vldkddg7sqR/f10LoY6Fw73QQrit7NZYQyej5ZfjArn9hQQD3beKMjL0YWKO1Cs+OAFqQ/DnoxSvrg0+YIOX/N0ynQgrUJZ3zVYBUS6cP1N31ZkmfNaPDsQdZ6IEZoL44uOg==
+X-Forefront-Antispam-Report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SJ2PR11MB8370.namprd11.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(366016)(376014)(1800799024)(22082099003)(18002099003)(921020)(4143699003)(10067099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	tycHTZ6SmRmI1kW0J1GTaABI+Q1qGQhTtEn+nmmtBO/HjudM3mWcrKBU1LTZJu/MgMqbhlfvaCuNt4F+sJIZUV8NDPoXhZ4JQ8gCnsY7l1lPpF09ztMoTE/2dXbSjs9qKRuVuAdLpB8gMskcJuGRg9joKiN1+YpB5tibf98bSca4P6T6nlBrwbmKU9IvFIGHleY5i0hzenwy20uwez/O/46WEQ3yqb4U8l2+itNJjAskXeXW/6D0jYs0E+enp2146uS2OXKHah2/Q32f+FS2hw9uFkfvAOqR6BWfbHRNpQo4hcu7QywcJl3aQLH6GGWAeWWh3hVHfUBMd9s2bJfKtEAU6qFlVy7MFDBCT9ODn8cAdDfxhz08JMXfwyYsE1UGnhIEAbZ4K4cn4fbSI1QWkkBlFWGOFkgx3R1GeafkZFKg6Tb1opslsR1W10VbYOIH
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 10:50:00.0617
+X-MS-Exchange-AntiSpam-MessageData-0: =?utf-8?B?blV5NUQ2NHJ2ZThBNHlRSDlwbE83YzhWd2RKV0pTNkJwTGVITnVqZ3FvWTVm?=
+ =?utf-8?B?TDlzNXZwRFkyWkxKYVk3bklTNktuNFF3MWVRZTJkbUkwR28zRitueXBjUC9z?=
+ =?utf-8?B?cHpRRlFwa21hcGdUakRndjEvNE9vbWNTK3dFNXI1NEt6d0s3ajFuTVY1c2tR?=
+ =?utf-8?B?Rk9HbEpqcEN2UlhoRDhUOC9tM1c3NmFrL3V2UjRQQ1QybEI1VG5WeVZ1eEll?=
+ =?utf-8?B?N0FKWnp3UDUwUmkrcjFhNnVDcEN2REZzbEpnMFdTdG9mcEhTOGRFc0dlTGJR?=
+ =?utf-8?B?eHZJaXpBWENBd28yYnp1cGQ1T1pjNjlJNWJ2bzYrZlhhU3VrMGZFeVZiNTVo?=
+ =?utf-8?B?T0hDUFNqaVdMcXZRc3lTMFBIbE5CQzdsenJzT3QxbFF0UGlhN0kyS2thMDhh?=
+ =?utf-8?B?VkNiME1ZZEhOVUJ1Q2hCMm9DYUNFemlBWDVpdG9NYnJDa3RQUkZ4akNVNXZS?=
+ =?utf-8?B?V0NWRnhBcWtMQzBFTTREbVZ1SmZ6YjdmampncFJxR2xvMWdSYmRUdy9kNlJw?=
+ =?utf-8?B?SWtGOEc5QUt1V1F6Z3A2YmR2bnFRVDZMQ1FZd0VQckxCRkpUVEhQcVFwWCtn?=
+ =?utf-8?B?YUc0T3pRWHNvd1JzYVVkaWxmZHRYQ3ZBalZ1a3FuazNyNjVIajNpNFNkT2Zh?=
+ =?utf-8?B?RTJsUVVSR3ZuME12a1k3Y21XWWJGKzR3TmQ1bkpUZHJ2cFZZbHpFeDJybyt3?=
+ =?utf-8?B?enk3N01DL2syc2tTeUlKdG1aaGN4S25TWG9wS0hwcHFNeGJRV0oyTVl6TThJ?=
+ =?utf-8?B?WnJMaFBDMjFXNndNb1hxQitNLzJqM2E2WFZjTWNwVDlXbVpLTGtzWDJWb0g2?=
+ =?utf-8?B?V0s2Q1E3STZ5UklOSE5HSzR5UUJEaXpkVFNRRVRCVDBTczdiZ0U1NVF6YVE2?=
+ =?utf-8?B?K3cxMjFIZTVLRUorWTdzK3M0QmRVNFFMSDk5T0JNL240SlhhQi9ieFo4SWxn?=
+ =?utf-8?B?eStPOGZMeUVwQnhRTkg3M0ZyM3NaWnQybTZGbnJ1VXg3a2RTdWo5ODBIbDJ6?=
+ =?utf-8?B?YmxUeHBYcFpmdzZvZS9sM25ZWC84SHV3Q2tvZ0s5b0Y1K3NzV3ZMRmhtVExu?=
+ =?utf-8?B?VEU1OFdpdnZqZzFabi90SHVla25CeEVWZDdwOE9DY2EvT2ZZVk1FL0ovSXho?=
+ =?utf-8?B?QXdybWVKM00yNEVPSWsyUzUwcUJGOHp2VUFVM1lQTWZncUZYaWxaaG9LL0Jk?=
+ =?utf-8?B?QStDRUlJaVM3YmhVb3RiRXhkVEZQbmdxczlub1NFbkl1RzByWHJvWW5FUm1Q?=
+ =?utf-8?B?UFlwejJ6UnE1RGV4aGQ1a2NGYlliT3U1VjZRL25LekJhKzZIVWRkQ0M2YVdU?=
+ =?utf-8?B?QXhRc040MWJ3aDRUSmtuZzMwZ1JKaHg0QXBLUXNlWDE5UHdMQVlPSFhyUkRt?=
+ =?utf-8?B?cEIyak13UGtmcnU2UmxVVlVXVnEwVzhzR1c1NWpsYlJqNWsvQUtyMUlJUHN5?=
+ =?utf-8?B?bkxrRlVJWU05akJoRkd3WGE0TVhubU15OHZtTjJCYlRwVERFSHUxZkdYL2JI?=
+ =?utf-8?B?SFNMVkVsT3R6WlFMeFpZSXlFTGl0ZWxjaFl6OUx0SFVVNzYydXJodkRwS2ZH?=
+ =?utf-8?B?YVZHUC9RQ0g4ZGZ4K0VGYUlpOEZFbmJxempscUg4NFpMaEpWSlBzckovQ08y?=
+ =?utf-8?B?UXRibTNOSHNJdnRrV3Vtdkl6YmRLNE9jZnRvS3A3MG04V1pQUWFpN2NtekNT?=
+ =?utf-8?B?ZldPdkU0R2owYldDYzdwQWdIdVdEU2RPdFVaUlRHL1FMTmxsZmNhdDZvMFo4?=
+ =?utf-8?B?bkJ1U1BCY2JVUFJURW50Z1ppS3ZhTVBqcWNVSTNUbW9vdnNQNHNveVB1UThI?=
+ =?utf-8?B?SGp1YkZhYzBsenB0YVpwN2NzQkVhaGJwNDFiU3lMYk9WSWhIZlgzSThWSElW?=
+ =?utf-8?B?UGdEYlQ1NHNoNmRuMG5CZlU5dVFEYVdiaG1oRUp3VUhvUHpMMG1ZUGlWRmli?=
+ =?utf-8?B?RGNEVWVselVGSzJkVUFjWFVkQmpzVU1PVktPcGRJd0NlT0hiUlB2RWU1SUZY?=
+ =?utf-8?B?OCs2ak1RSXlsajlxUXlkdGFBckRZYVQ0RlFHUGcvd0RiNGs1eTBPMTc4ZHJi?=
+ =?utf-8?B?cnNVeU15by9wUXl1QVpxZWlyUCtjOWdyOXpJSU4xb0tiUXZ1M0FLV1Z3VGVy?=
+ =?utf-8?B?ODNTOEM3ckg0cklNelRmOWxTQlAyWUI0c01hSG1oVGFqRnh0aUM4djVQMW9T?=
+ =?utf-8?B?Z2V2NHFERkpYaXpROHZYOXpOQnNyRW5QQ2hwTCtuZW5PT1N0ZWpPU2tFdU95?=
+ =?utf-8?B?YjRUU0phOXhSK29pa2xadXRsYmZmVC93aWh1eUxEQkZWbW51Tm10ZjJPVmpj?=
+ =?utf-8?B?WXFqSVRJTGtiZ3R5R0RNTXNVc1J6VVNyWmowVEJpcnYwemlmR09NajZIV2R1?=
+ =?utf-8?Q?wLXmYqB+hVXFJCZQ=3D?=
+X-Exchange-RoutingPolicyChecked: cyJqkjq6LyZ2s/C+Xz7GWP1SYjQVauCVMSHvaQuLdJ+lkqMVaOgWZxc0DGnNUiNWVwimNV2eSi6F0Gre6pt6CeAetaTxAiW7qjQ82x/dc2LflDMjYvQzKoek1JsM0VXNKs4/nbh/qNYCXy92HxilQngMPjr7og596FIb+ZRQlVkbp/LKWvzvLnenDaaN2uOZ5Re1g7yzInlf2pPBx0AkkUuVxJyRE4/c4e2+bpvoXElbhjoWUiKW7HPqwV1j8mvsvDc5S0kORlABwth4SuwapiMqpm5AedSpNYZiuiIVqQORwovJaRjSsQzA5TkohpYyNIp1YWPObfx+EVzLYznZJA==
+X-MS-Exchange-CrossTenant-Network-Message-Id: 551bf591-1ca3-475a-2be7-08df127881ec
+X-MS-Exchange-CrossTenant-AuthSource: SJ2PR11MB8370.namprd11.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 15:54:49.7466
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f7e4f340-7021-4ae0-2a3e-08df124dec9d
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF000023D1.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8650
-X-purgate-ID: tlsNG-d62444/1789383010-BC359757-5874B308/0/0
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 46c98d88-e344-4ed4-8496-4ed7712e255d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: SaRdg+Ghp5yz6Z/XSmHZMZPrm05TT0dIoDTHljLMsUnfo0Fa/XkbNuA7gxHhR3aB8ylqcr2YZxDn7J7qkI77a4ZJFExbfFgBGARpRscpYkw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA3PR11MB566415
+X-OriginatorOrg: intel.com
+X-purgate-ID: tlsNG-ef75cf/1789401300-A68D9AE4-317794BE/0/0
 X-purgate-type: clean
-X-purgate-size: 5274
+X-purgate-size: 1012
 
-From: Lei Huang <Lei.Huang@amd.com>
+Hi Juergen,
 
-Xen poweroff, halt and reboot requests are normally forwarded to a
-userspace helper so that the guest can perform an orderly shutdown. Some
-guests cannot provide a functional helper, for example when their security
-policy prevents a kernel-initiated helper from completing the operation.
+On 9/11/26 12:45 AM, Juergen Gross wrote:
+> Today rdmsrq() is a macro using its second parameter as the target for
+> storing the read MSR value.
+> 
+> Convert rdmsrq() to an inline function returning the MSR value.
+> 
+> The users have been converted using the following semantic patch:
+> 
+>   // Options: --include-headers
+> 
+>   virtual patch
+>   virtual report
+> 
+>   @@
+>   expression msr, val;
+>   @@
+>   (
+>   - rdmsrq(msr,val)
+>   + val = rdmsrq(msr)
+>   )
+> 
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Acked-by: Damien Le Moal <dlemoal@kernel.org>      # ATA
+> Reviewed-by: Michael Kelley <mhklinux@outlook.com> # Hyper-V
+> ---
 
-Add the xen.force_shutdown parameter to let such guests handle toolstack
-shutdown requests in workqueue context. Flush filesystems synchronously
-before performing the transition directly in the kernel.
+...
+>  arch/x86/kernel/cpu/resctrl/core.c            |  2 +->  arch/x86/kernel/cpu/resctrl/monitor.c         |  4 +--
+>  arch/x86/kernel/cpu/resctrl/pseudo_lock.c     |  4 +--
+>  arch/x86/kernel/cpu/resctrl/rdtgroup.c        |  2 +-
+Thank you.
 
-This is an explicit bypass rather than a timeout fallback: once a userspace
-helper has been executed successfully, the kernel cannot determine whether
-it will eventually complete the shutdown.
+Acked-by: Reinette Chatre <reinette.chatre@intel.com> # resctrl
 
-Keep the parameter disabled by default so existing guests retain the
-opportunity to perform userspace cleanup or reject a shutdown request.
-Enabling the parameter explicitly accepts the risk of losing userspace data
-which has not been committed before the request.
-
-Signed-off-by: Lei Huang <Lei.Huang@amd.com>
----
-
-Notes:
-    RFC:
-    
-    This is an opt-in bypass rather than a timeout fallback. Once a
-    userspace helper has been executed successfully, the kernel cannot
-    determine whether it will eventually complete the shutdown.
-    
-    Would a kernel command-line opt-in be acceptable for this case, or
-    should the policy be represented through XenStore instead?
-    
-    Test status:
-    
-    This exact xen.force_shutdown=1 version was built and booted on a
-    Celadon Android Xen PVH guest. An xl shutdown request successfully
-    powered off the guest through the direct kernel shutdown path.
-
- .../admin-guide/kernel-parameters.txt         |  7 +++
- drivers/xen/manage.c                          | 45 +++++++++++++++++--
- 2 files changed, 49 insertions(+), 3 deletions(-)
-
-diff --git a/Documentation/admin-guide/kernel-parameters.txt b/Documentation/admin-guide/kernel-parameters.txt
-index b5493a7f8f2..6beda2f3d5b 100644
---- a/Documentation/admin-guide/kernel-parameters.txt
-+++ b/Documentation/admin-guide/kernel-parameters.txt
-@@ -8623,6 +8623,13 @@ Kernel parameters
- 			fairer and the number of possible event channels is
- 			much higher. Default is on (use fifo events).
- 
-+	xen.force_shutdown=	[XEN]
-+			Force Xen toolstack poweroff, halt and reboot requests in
-+			the kernel instead of invoking a userspace helper. This can
-+			cause the loss of uncommitted userspace data and should only
-+			be enabled for guests without a functional userspace shutdown
-+			helper. The default is off.
-+
- 	xirc2ps_cs=	[NET,PCMCIA]
- 			Format:
- 			<irq>,<irq_mask>,<io>,<full_duplex>,<do_sound>,<lockup_hack>[,<irq2>[,<irq3>[,<irq4>]]]
-diff --git a/drivers/xen/manage.c b/drivers/xen/manage.c
-index 05d7de128e7..a86426c8671 100644
---- a/drivers/xen/manage.c
-+++ b/drivers/xen/manage.c
-@@ -7,14 +7,17 @@
- 
- #include <linux/kernel.h>
- #include <linux/err.h>
-+#include <linux/moduleparam.h>
- #include <linux/slab.h>
- #include <linux/reboot.h>
-+#include <linux/syscalls.h>
- #include <linux/sysrq.h>
- #include <linux/stop_machine.h>
- #include <linux/suspend.h>
- #include <linux/freezer.h>
- #include <linux/syscore_ops.h>
- #include <linux/export.h>
-+#include <linux/workqueue.h>
- 
- #include <xen/xen.h>
- #include <xen/xenbus.h>
-@@ -38,6 +41,14 @@ enum shutdown_state {
- 	 SHUTDOWN_HALT = 4,
- };
- 
-+#undef MODULE_PARAM_PREFIX
-+#define MODULE_PARAM_PREFIX "xen."
-+
-+static bool xen_force_shutdown;
-+module_param_named(force_shutdown, xen_force_shutdown, bool, 0444);
-+MODULE_PARM_DESC(force_shutdown,
-+		 "Force Xen poweroff, halt and reboot requests without a userspace helper");
-+
- /* Ignore multiple shutdown requests. */
- static enum shutdown_state shutting_down = SHUTDOWN_INVALID;
- 
-@@ -189,15 +200,40 @@ static int poweroff_nb(struct notifier_block *cb, unsigned long code, void *unus
- 	}
- 	return NOTIFY_DONE;
- }
-+
-+static void xen_poweroff_work_func(struct work_struct *work)
-+{
-+	pr_warn("Forcing Xen toolstack shutdown without userspace cleanup\n");
-+	ksys_sync();
-+	kernel_power_off();
-+}
-+
-+static DECLARE_WORK(xen_poweroff_work, xen_poweroff_work_func);
-+
-+static void xen_reboot_work_func(struct work_struct *work)
-+{
-+	pr_warn("Forcing Xen toolstack reboot without userspace cleanup\n");
-+	ksys_sync();
-+	kernel_restart(NULL);
-+}
-+
-+static DECLARE_WORK(xen_reboot_work, xen_reboot_work_func);
-+
- static void do_poweroff(void)
- {
- 	switch (system_state) {
- 	case SYSTEM_BOOTING:
- 	case SYSTEM_SCHEDULING:
--		orderly_poweroff(true);
-+		if (xen_force_shutdown)
-+			schedule_work(&xen_poweroff_work);
-+		else
-+			orderly_poweroff(true);
- 		break;
- 	case SYSTEM_RUNNING:
--		orderly_poweroff(false);
-+		if (xen_force_shutdown)
-+			schedule_work(&xen_poweroff_work);
-+		else
-+			orderly_poweroff(false);
- 		break;
- 	default:
- 		/* Don't do it when we are halting/rebooting. */
-@@ -209,7 +245,10 @@ static void do_poweroff(void)
- static void do_reboot(void)
- {
- 	shutting_down = SHUTDOWN_POWEROFF; /* ? */
--	orderly_reboot();
-+	if (xen_force_shutdown)
-+		schedule_work(&xen_reboot_work);
-+	else
-+		orderly_reboot();
- }
- 
- static const struct shutdown_handler shutdown_handlers[] = {
+Reinette
 
