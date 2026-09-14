@@ -4,41 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C9E1AC88E50
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 13:11:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420933.1647128 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F27D5C88E64
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 13:13:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420940.1647136 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x66T3-000397-5T; Mon, 14 Sep 2026 13:11:29 +0000
+	id 1x66VC-0003dC-FU; Mon, 14 Sep 2026 13:13:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420933.1647128; Mon, 14 Sep 2026 13:11:29 +0000
+Received: by outflank-mailman (output) from mailman id 1420940.1647136; Mon, 14 Sep 2026 13:13:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x66T3-000390-22; Mon, 14 Sep 2026 13:11:29 +0000
-Received: by outflank-mailman (input) for mailman id 1420933;
- Mon, 14 Sep 2026 13:11:27 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x66VC-0003d5-Ck; Mon, 14 Sep 2026 13:13:42 +0000
+Received: by outflank-mailman (input) for mailman id 1420940;
+ Mon, 14 Sep 2026 13:13:41 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <david@kernel.org>) id 1x66T1-00037a-MB
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 13:11:27 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x66VA-0003cy-Ve
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 13:13:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x66T1-001NHh-1N
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 15:11:27 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1x66VA-00GsrM-Bk
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 15:13:40 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <david@kernel.org>)
- id 6aa7f27e-e002-0a2a0a5209dd-0a2a4507c5be-2
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 15:11:26 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <david@kernel.org>)
- id 6aa7f27d-b4ea-0a2a45070019-ac6904febb6e-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 15:11:26 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 3558160120;
- Mon, 14 Sep 2026 13:11:25 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 65F6B1F000FF;
- Mon, 14 Sep 2026 13:11:01 +0000 (UTC)
+ (envelope-from <jbeulich@suse.com>)
+ id 6aa7f2f2-2eae-0a2a0a5409dd-0a2a450b974e-36
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 15:13:40 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6aa7f304-b7e8-0a2a450b0019-d1558031e0e4-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 15:13:40 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-49e78adf099so12412825e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 06:13:40 -0700 (PDT)
+Received: from [172.18.123.208] ([185.104.138.131])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49e60ad0614sm339581965e9.10.2026.09.14.06.13.37
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 14 Sep 2026 06:13:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,151 +53,251 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789391484;
-	bh=HMEr8VxikyVfU6qvEUZWpmfPP3XV/5sFL4uxF81JxCA=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=CJKJt+kIe+hjf+CMIokL8p95jJbZP9ztsmmxzZVo1NFVjWTN+jeWfJ8gkpM0krJT8
-	 Utjnt2XRl1o23z+XgGILQt1K7qKpVap9QKwfAQ3Pbw7Nb1qdciasZLG+bCxX6W8crk
-	 mB6ySTVDkFOyHlizGE9wPiKXzd5ZoeQzUUHq4GK3Az9uzbVLKJs+jLvaWj//Z7s9yJ
-	 26BLl4l4JsAZDlTiLo0F5mBC0VkJP+XRzFeBS+pwUeA7vgq+fA4Y2VALNJVCMnpA9v
-	 1Oa2VfL25A9Rb97s1Afe8qFm5GadjQrDawLd5iUENfXkRUR76/6j5S6iZTu65TIRWr
-	 3oGpW4Ax822zA==
-Message-ID: <066c3b3b-e5a7-4cbb-b077-26c78cfc07ac@kernel.org>
-Date: Mon, 14 Sep 2026 15:10:57 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1789391619; x=1789996419; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Y5CB6YBam0fmqhE0ijkrGF3sE995xttITmudScBDlcc=;
+        b=FSI44xCOvPRRcPjG861CS/0WJ/Z6FIQTvh4GAwp9l+SqFy3vm+EFSIFo3FBLzaBYae
+         HrDFkReB6rg4QVhcD6S4toHoS1XfYU299dVELsSYCzbP5U6tj7M/MNQMoYxGeajIkfwG
+         NAKwP3fcJvXvBCMLoCQ8Ucd5O7ZVhAK1bHiYOHyxe8f1b/0EKnWj8wYOgs+HhVY+Pyrc
+         Ty1kvH2eXjKy7uVzvzaeU5uPE0vRzcVTYWcSJFyccG90fOrhCADIj6AkYEu+nJO32y4Y
+         oh46k5iVVo5OY84Ol902fQuyNc4wq82IeLzbEOAKFz3FRGboLLS7LeQH2iI5SGJH9buH
+         h6cg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789391619; x=1789996419;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Y5CB6YBam0fmqhE0ijkrGF3sE995xttITmudScBDlcc=;
+        b=KdVbGYjsqO9evId+wzuC94rfJeaeDAxtt2gBtca32lyyIUA9BIN2fcWVu5JmTaxuIh
+         y//lcaE0SVKmnYsl8BbHKSkcuwrK4wVKHFNMUmQfZ6vvk0GvwDi8XNNgLtWvznTzKbKB
+         gQ8e7965mqbynsT3ywPfT+ApAXuhl3Eq3L7kutuiYyGGWNO5IcBo+D/sfn5uhR4x4yv9
+         gCGVEr9jSmq22PbefIfArMjc9uJP2r+K/0a0XwQf6mJc5y2Cr6uL49EFLJPR/w7oo0wY
+         4OrEpuY/Gd21QdDA7nKTpGPr6K/WUX29d0prpgW8ez/oqs+nu5vP3YQ2bAbUbkai5XNt
+         Vhvg==
+X-Forwarded-Encrypted: i=1; AKwUvBzmuD9bWHQpbww+3oBzgGH/M7rKXSXXt2Opeayv7Rln++wSuL6xyUY7HQjt8JNo3G77yKlQd2o8ags=@lists.xenproject.org
+X-Gm-Message-State: AFuF++ko75xzkp9JlgW02XxGJM40I6ZYi2c5vl/MZ38Wsx0b9LQzQdCY
+	lpj+1F3Wj4u7ymbflu2yfF1Y0CdfI5zzJSgss7zzfkM/d7O+k8l6/B5906Zhxd9dSQ==
+X-Gm-Gg: AYBFou1B8OXbmZPN72rQ9/pr95QeruCxTVGJ0mXbWMJQnMORwrvupuI2ZhwsoxNTorp
+	dXcUAptO4HyK6RhR4dA4ElB6LWxx3XyBnk8VxS4AcmGvVfbJy7ZAZx1VapfuHbKmKlit3yO5TB1
+	1MmXc9yCcCMP2Ke3k7C/Sx2zYdY1RgWzJGrV24176HAqBIb/t1UMu059+IAKtYzDx6FkoQcNF5U
+	W5xJxBgy9fHbRRQOE93dd3BHbs8aBZaUhfIpYTSoBxfT4FdcP7U5Cw7fVPx3YTWzM1rQ1Y7xST4
+	hmz2eFx48Q/HhhonTLryH61UntiDkcx2xh9LPFMH0/AUOWjZGUfX+hBEdUGHO5/1odJ5SgTrh0j
+	3fNfAxVn0RmjSkMRcOBUkE68u9+gAdcZYwAt3mkvYysC9x4WR7jvGXNTgTO4x4tV6lrkb7ng33f
+	d0HlWVHEWIysXSK88XwU73KFMTOISNjsDZCu+AwPKlM+FsA4Gbd66fkG98oTac2ecap62Upr9dN
+	py1KLqQTOBFvw==
+X-Received: by 2002:a05:600c:860b:b0:49e:79c5:ee93 with SMTP id 5b1f17b1804b1-49e7a64b4dbmr28601075e9.8.1789391619585;
+        Mon, 14 Sep 2026 06:13:39 -0700 (PDT)
+Message-ID: <2ea26d3b-6413-410f-9cb1-59645cf594e2@suse.com>
+Date: Mon, 14 Sep 2026 15:13:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 00/16] Remove PG_private by using page/folio->private
- checks instead
-To: Matthew Wilcox <willy@infradead.org>, Zi Yan <ziy@nvidia.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- Muchun Song <muchun.song@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>,
- "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
- Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Michal Hocko <mhocko@suse.com>, Baolin Wang <baolin.wang@linux.alibaba.com>,
- Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>,
- Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>,
- Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>,
- Gregory Price <gourry@gourry.net>, Ying Huang
- <ying.huang@linux.alibaba.com>, Alistair Popple <apopple@nvidia.com>,
- Johannes Weiner <hannes@cmpxchg.org>, Qi Zheng <qi.zheng@linux.dev>,
- Shakeel Butt <shakeel.butt@linux.dev>, Kairui Song <kasong@tencent.com>,
- linux-mm@kvack.org, linux-kernel@vger.kernel.org,
- Minchan Kim <minchan@kernel.org>,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
- Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- x86@kernel.org, Mark Rutland <mark.rutland@arm.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
- Adrian Hunter <adrian.hunter@intel.com>, James Clark
- <james.clark@linaro.org>, "H. Peter Anvin" <hpa@zytor.com>,
- linux-perf-users@vger.kernel.org, Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- xen-devel@lists.xenproject.org, Eric Biggers <ebiggers@kernel.org>,
- "Theodore Y. Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-fscrypt@vger.kernel.org, Oscar Salvador <osalvador@suse.de>,
- Chao Yu <chao@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- Tal Zussman <tz2294@columbia.edu>, Gao Xiang <xiang@kernel.org>,
- Jan Kara <jack@suse.cz>, Yue Hu <zbestahu@gmail.com>,
- Jeffle Xu <jefflexu@linux.alibaba.com>, Sandeep Dhavale
- <dhavale@google.com>, Hongbo Li <hongbohbli@tencent.com>,
- Chunhai Guo <guochunhai@vivo.com>, linux-erofs@lists.ozlabs.org,
- linux-fsdevel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>,
- Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Matthew Brost <matthew.brost@intel.com>,
- Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
- Byungchul Park <byungchul@sk.com>, Axel Rasmussen
- <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
- Wei Xu <weixugc@google.com>, linux-trace-kernel@vger.kernel.org,
- Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>,
- linux-nfs@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>,
- Alex Markuze <amarkuze@redhat.com>, Viacheslav Dubeyko <slava@dubeyko.com>,
- ceph-devel@vger.kernel.org, Song Liu <song@kernel.org>,
- Yu Kuai <yukuai@fygo.io>, Li Nan <magiclinan@didiglobal.com>,
- Xiao Ni <xiao@kernel.org>, linux-raid@vger.kernel.org,
- Richard Weinberger <richard@nod.at>, Zhihao Cheng <chengzhihao1@huawei.com>,
- linux-mtd@lists.infradead.org, Baoquan He <baoquan.he@linux.dev>,
- Pasha Tatashin <pasha.tatashin@soleen.com>,
- Pratyush Yadav <pratyush@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Dave Young <ruirui.yang@linux.dev>, Shuah Khan <skhan@linuxfoundation.org>,
- kexec@lists.infradead.org, linux-doc@vger.kernel.org
-References: <20260913-remove-pg_private-v4-0-848550f7574e@nvidia.com>
- <aqd2N1J3ui1llWWG@casper.infradead.org>
-From: "David Hildenbrand (Arm)" <david@kernel.org>
+Subject: Re: [PATCH v2 30/39] xen/riscv: prepare new IMSIC VS-file
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <440bc07dfb72d09da72b49ded6f78dc1f54a3ad5.1787838835.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
-Autocrypt: addr=david@kernel.org; keydata=
- xsFNBFXLn5EBEAC+zYvAFJxCBY9Tr1xZgcESmxVNI/0ffzE/ZQOiHJl6mGkmA1R7/uUpiCjJ
- dBrn+lhhOYjjNefFQou6478faXE6o2AhmebqT4KiQoUQFV4R7y1KMEKoSyy8hQaK1umALTdL
- QZLQMzNE74ap+GDK0wnacPQFpcG1AE9RMq3aeErY5tujekBS32jfC/7AnH7I0v1v1TbbK3Gp
- XNeiN4QroO+5qaSr0ID2sz5jtBLRb15RMre27E1ImpaIv2Jw8NJgW0k/D1RyKCwaTsgRdwuK
- Kx/Y91XuSBdz0uOyU/S8kM1+ag0wvsGlpBVxRR/xw/E8M7TEwuCZQArqqTCmkG6HGcXFT0V9
- PXFNNgV5jXMQRwU0O/ztJIQqsE5LsUomE//bLwzj9IVsaQpKDqW6TAPjcdBDPLHvriq7kGjt
- WhVhdl0qEYB8lkBEU7V2Yb+SYhmhpDrti9Fq1EsmhiHSkxJcGREoMK/63r9WLZYI3+4W2rAc
- UucZa4OT27U5ZISjNg3Ev0rxU5UH2/pT4wJCfxwocmqaRr6UYmrtZmND89X0KigoFD/XSeVv
- jwBRNjPAubK9/k5NoRrYqztM9W6sJqrH8+UWZ1Idd/DdmogJh0gNC0+N42Za9yBRURfIdKSb
- B3JfpUqcWwE7vUaYrHG1nw54pLUoPG6sAA7Mehl3nd4pZUALHwARAQABzS5EYXZpZCBIaWxk
- ZW5icmFuZCAoQ3VycmVudCkgPGRhdmlkQGtlcm5lbC5vcmc+wsGQBBMBCAA6AhsDBQkmWAik
- AgsJBBUKCQgCFgICHgUCF4AWIQQb2cqtc1xMOkYN/MpN3hD3AP+DWgUCaYJt/AIZAQAKCRBN
- 3hD3AP+DWriiD/9BLGEKG+N8L2AXhikJg6YmXom9ytRwPqDgpHpVg2xdhopoWdMRXjzOrIKD
- g4LSnFaKneQD0hZhoArEeamG5tyo32xoRsPwkbpIzL0OKSZ8G6mVbFGpjmyDLQCAxteXCLXz
- ZI0VbsuJKelYnKcXWOIndOrNRvE5eoOfTt2XfBnAapxMYY2IsV+qaUXlO63GgfIOg8RBaj7x
- 3NxkI3rV0SHhI4GU9K6jCvGghxeS1QX6L/XI9mfAYaIwGy5B68kF26piAVYv/QZDEVIpo3t7
- /fjSpxKT8plJH6rhhR0epy8dWRHk3qT5tk2P85twasdloWtkMZ7FsCJRKWscm1BLpsDn6EQ4
- jeMHECiY9kGKKi8dQpv3FRyo2QApZ49NNDbwcR0ZndK0XFo15iH708H5Qja/8TuXCwnPWAcJ
- DQoNIDFyaxe26Rx3ZwUkRALa3iPcVjE0//TrQ4KnFf+lMBSrS33xDDBfevW9+Dk6IISmDH1R
- HFq2jpkN+FX/PE8eVhV68B2DsAPZ5rUwyCKUXPTJ/irrCCmAAb5Jpv11S7hUSpqtM/6oVESC
- 3z/7CzrVtRODzLtNgV4r5EI+wAv/3PgJLlMwgJM90Fb3CB2IgbxhjvmB1WNdvXACVydx55V7
- LPPKodSTF29rlnQAf9HLgCphuuSrrPn5VQDaYZl4N/7zc2wcWM7BTQRVy5+RARAA59fefSDR
- 9nMGCb9LbMX+TFAoIQo/wgP5XPyzLYakO+94GrgfZjfhdaxPXMsl2+o8jhp/hlIzG56taNdt
- VZtPp3ih1AgbR8rHgXw1xwOpuAd5lE1qNd54ndHuADO9a9A0vPimIes78Hi1/yy+ZEEvRkHk
- /kDa6F3AtTc1m4rbbOk2fiKzzsE9YXweFjQvl9p+AMw6qd/iC4lUk9g0+FQXNdRs+o4o6Qvy
- iOQJfGQ4UcBuOy1IrkJrd8qq5jet1fcM2j4QvsW8CLDWZS1L7kZ5gT5EycMKxUWb8LuRjxzZ
- 3QY1aQH2kkzn6acigU3HLtgFyV1gBNV44ehjgvJpRY2cC8VhanTx0dZ9mj1YKIky5N+C0f21
- zvntBqcxV0+3p8MrxRRcgEtDZNav+xAoT3G0W4SahAaUTWXpsZoOecwtxi74CyneQNPTDjNg
- azHmvpdBVEfj7k3p4dmJp5i0U66Onmf6mMFpArvBRSMOKU9DlAzMi4IvhiNWjKVaIE2Se9BY
- FdKVAJaZq85P2y20ZBd08ILnKcj7XKZkLU5FkoA0udEBvQ0f9QLNyyy3DZMCQWcwRuj1m73D
- sq8DEFBdZ5eEkj1dCyx+t/ga6x2rHyc8Sl86oK1tvAkwBNsfKou3v+jP/l14a7DGBvrmlYjO
- 59o3t6inu6H7pt7OL6u6BQj7DoMAEQEAAcLBfAQYAQgAJgIbDBYhBBvZyq1zXEw6Rg38yk3e
- EPcA/4NaBQJonNqrBQkmWAihAAoJEE3eEPcA/4NaKtMQALAJ8PzprBEXbXcEXwDKQu+P/vts
- IfUb1UNMfMV76BicGa5NCZnJNQASDP/+bFg6O3gx5NbhHHPeaWz/VxlOmYHokHodOvtL0WCC
- 8A5PEP8tOk6029Z+J+xUcMrJClNVFpzVvOpb1lCbhjwAV465Hy+NUSbbUiRxdzNQtLtgZzOV
- Zw7jxUCs4UUZLQTCuBpFgb15bBxYZ/BL9MbzxPxvfUQIPbnzQMcqtpUs21CMK2PdfCh5c4gS
- sDci6D5/ZIBw94UQWmGpM/O1ilGXde2ZzzGYl64glmccD8e87OnEgKnH3FbnJnT4iJchtSvx
- yJNi1+t0+qDti4m88+/9IuPqCKb6Stl+s2dnLtJNrjXBGJtsQG/sRpqsJz5x1/2nPJSRMsx9
- 5YfqbdrJSOFXDzZ8/r82HgQEtUvlSXNaXCa95ez0UkOG7+bDm2b3s0XahBQeLVCH0mw3RAQg
- r7xDAYKIrAwfHHmMTnBQDPJwVqxJjVNr7yBic4yfzVWGCGNE4DnOW0vcIeoyhy9vnIa3w1uZ
- 3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
- CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
- qIws/H2t
-In-Reply-To: <aqd2N1J3ui1llWWG@casper.infradead.org>
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <440bc07dfb72d09da72b49ded6f78dc1f54a3ad5.1787838835.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1789391486-362C4AE4-7786B2AB/0/0
+X-purgate-ID: tlsNG-42698a/1789391620-A96C29EA-43E18A0D/0/0
 X-purgate-type: clean
-X-purgate-size: 660
+X-purgate-size: 6288
 
-On 9/14/26 06:21, Matthew Wilcox wrote:
-> On Sun, Sep 13, 2026 at 10:23:58PM -0400, Zi Yan wrote:
->>       md/md-bitmap: replace PagePrivate() with page_private()
->>       buffer: replace page_buffer() with page_private() and delete it
-> 
-> Sorry, looks like I screwed up git send-email usage.  I'm proposing
-> replacing these two patches wth the three I sent.
+On 27.08.2026 17:21, Oleksii Kurochko wrote:
+> @@ -77,6 +78,64 @@ do {                            \
+>      csr_clear(CSR_SIREG, v);    \
+>  } while (0)
+>  
+> +#define imsic_vs_csr_write(c, v)    \
+> +do {                                \
+> +    csr_write(CSR_VSISELECT, (c));  \
+> +    csr_write(CSR_VSIREG, (v));     \
 
-For everybody CCed wondering "which patches":
+As patch context also tells: Excess parentheses.
 
-https://lore.kernel.org/r/20260914041830.2072626-1-willy@infradead.org
-https://lore.kernel.org/r/20260914041830.2072626-2-willy@infradead.org
-https://lore.kernel.org/r/20260914041830.2072626-3-willy@infradead.org
+> +} while ( 0 )
+> +
+> +/*
+> + * Generic switchcase expansion pyramid.
+> + * F is the per-operation leaf macro, ireg is the base register index.
+> + * Optional extra args (e.g. an operation and/or a value) are forwarded to F
+> + * via __VA_ARGS__.
 
--- 
-Cheers,
+Just that there's no F below.
 
-David
+> + * imsic_switchcase_break(ireg, op, v) - emit "case ireg: op(ireg,v); break;"
+> + * imsic_switchcase_ret(ireg, op, ...) - emit "case ireg: return op(ireg[,v]);"
+> + *   The variadic tail is optional so the same leaf works for both read (no v)
+> + *   and swap (with v).
+> + */
+> +#define imsic_switchcase_break(ireg, op, v) \
+> +    case ireg:                              \
+> +        op(ireg, v);                        \
+> +        break;
+> +
+> +#define imsic_switchcase_ret(ireg, op, ...) \
+> +    case ireg:                              \
+> +        return op(ireg, ##__VA_ARGS__);
+> +
+> +#define imsic_switchcase_2(F, ireg, ...)    \
+> +    F(ireg + 0, ##__VA_ARGS__)              \
+> +    F(ireg + 1, ##__VA_ARGS__)
+
+Ah, there is an F here.
+
+This (recurring below) shows another problem: The two F invocations
+look syntacticlly incorrect, due to the missing semicolon. Semicolon
+use wants redoing everywhere here.
+
+Further (and again throughout) I think we'd be better off using either
+standard C constructs (e.g. __VA_ARGS__) or the gcc extension
+permitting use of ## after a comma. A mix of both always looks odd
+(to me at least).
+
+Finally, unlike further up, here (and below) ireg wants parenthesizing.
+
+> @@ -389,6 +448,76 @@ int cf_check vcpu_imsic_init(struct vcpu *v)
+>      return 0;
+>  }
+>  
+> +/*
+> + * Arguments of the imsic_vsfile_local_*() helpers, which are executed by the
+> + * pCPU owning the interrupt file, thereby through imsic_call_on_cpu().
+> + */
+> +struct imsic_vsfile_data {
+> +    unsigned int hgei;
+> +    unsigned int nr_eix;
+> +    struct imsic_mrif *mrif;
+
+I can't spot any use of this field (and hence I also can't judge
+whether const wants adding).
+
+> +};
+> +
+> +/*
+> + * Execute func() on the pCPU which owns the IMSIC interrupt file func() is
+> + * going to work with.
+> + *
+> + * An IMSIC VS-file is reachable only through hstatus.VGEIN of the hart the
+> + * file belongs to, and a guest interrupt file index is meaningless on any
+> + * other hart, so such work always has to be done by that very hart.
+> + *
+> + * The local case runs with IRQs disabled to provide func() with the same
+> + * environment it is given when it is called from the function call IPI
+> + * handler.
+> + */
+> +static void imsic_call_on_cpu(unsigned int cpu, void (*func)(void *),
+> +                              void *data)
+
+If this is supposed to be passed struct imsic_vsfile_data *, why not say
+so here? Be as type-safe as possible. Of course the callback function
+has to use void *.
+
+> +static void cf_check imsic_vsfile_local_clear(void *data)
+> +{
+> +    unsigned int i;
+> +    const struct imsic_vsfile_data *idata = data;
+> +    unsigned long new_hstatus, old_hstatus, old_vsiselect;
+> +
+> +    /* We can only zero-out if we have a IMSIC VS-file */
+> +    if ( !idata->hgei )
+> +        return;
+
+Wouldn't it make sense to avoid the call here altogether then?
+
+> +    old_vsiselect = csr_read(CSR_VSISELECT);
+
+Likely obvious to you, but I can't spot why vsiselect would need saving
+here. If you want me to ack such code, please add at least brief comments.
+
+> +    old_hstatus = csr_read(CSR_HSTATUS);
+> +    new_hstatus = old_hstatus & ~HSTATUS_VGEIN;
+> +    new_hstatus |= MASK_INSR(idata->hgei, HSTATUS_VGEIN);
+> +    csr_write(CSR_HSTATUS, new_hstatus);
+> +
+> +    imsic_vs_csr_write(IMSIC_EIDELIVERY, 0);
+> +    imsic_vs_csr_write(IMSIC_EITHRESHOLD, 0);
+> +
+> +    for ( i = 0; i < idata->nr_eix; i++ )
+> +    {
+> +        imsic_eix_write(IMSIC_EIP0 + i * 2, 0);
+> +        imsic_eix_write(IMSIC_EIE0 + i * 2, 0);
+> +#ifdef CONFIG_RISCV_32
+> +        imsic_eix_write(IMSIC_EIP0 + i * 2 + 1, 0);
+> +        imsic_eix_write(IMSIC_EIE0 + i * 2 + 1, 0);
+> +#endif
+
+In asm/imsic.h I see
+
+#define IMSIC_EIPx_BITS         32
+
+Why is the number of CSR writes different here for RV32 vs RV64? And
+if so, why would you not use the 64-bit write function, allowing the
+#ifdef to be omitted?
+
+> @@ -689,6 +818,14 @@ int __init vimsic_make_domu_dt_node(struct kernel_info *kinfo,
+>  
+>  void imsic_migrate_vcpu(struct vcpu *v)
+>  {
+> +    unsigned int new_vsfile_hgei;
+> +    unsigned int new_vsfile_cpu;
+> +    unsigned int nr_hw_eix = DIV_ROUND_UP(imsic_cfg.nr_ids + 1,
+> +                                          BITS_PER_TYPE(uint64_t));
+
+As written, this could also be 64. uint64_t is a fixed-width type after
+all. The question here is: Which variable's type do you really mean
+here?
+
+> +    struct imsic_vsfile_data vsfile_data = {
+> +        .nr_eix = nr_hw_eix,
+
+The local variable looks to be used only here. Is there really a need
+for such a local variable?
+
+> @@ -699,5 +836,27 @@ void imsic_migrate_vcpu(struct vcpu *v)
+>      if ( v->arch.last_cpu == NR_CPUS )
+>          return;
+>  
+> +    /*
+> +     * At this point, all interrupt producers are still using the old IMSIC
+> +     * VS-file.
+> +     */
+> +
+> +    /*
+> +     * Latch the pCPU the new interrupt file is taken from: vgein_assign()
+> +     * allocates it from v->processor's pool of guest interrupt files, and
+> +     * only that hart can access the file afterwards.
+> +     */
+> +    new_vsfile_cpu = v->processor;
+
+Same here: Is this variable really needed? And what exactly is the comment
+telling me?
+
+> +    new_vsfile_hgei = vgein_assign(v);
+> +
+> +    /* We don't support SW interrupt files at the moment. */
+> +    BUG_ON(!new_vsfile_hgei);
+> +
+> +    vsfile_data.hgei = new_vsfile_hgei;
+
+And again - any real need for the separate local variable?
+
+Jan
 
