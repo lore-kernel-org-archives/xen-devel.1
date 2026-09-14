@@ -4,57 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0183CC88E73
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 14:33:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421015.1647194 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4921FC88E72
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 15:02:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421063.1647202 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x67k7-0001vA-4x; Mon, 14 Sep 2026 14:33:11 +0000
+	id 1x68CY-0007mR-CX; Mon, 14 Sep 2026 15:02:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421015.1647194; Mon, 14 Sep 2026 14:33:11 +0000
+Received: by outflank-mailman (output) from mailman id 1421063.1647202; Mon, 14 Sep 2026 15:02:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x67k7-0001v2-1w; Mon, 14 Sep 2026 14:33:11 +0000
-Received: by outflank-mailman (input) for mailman id 1421015;
- Mon, 14 Sep 2026 14:33:09 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x67k4-0001uw-Pb
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 14:33:09 +0000
+	id 1x68CY-0007mK-9X; Mon, 14 Sep 2026 15:02:34 +0000
+Received: by outflank-mailman (input) for mailman id 1421063;
+ Mon, 14 Sep 2026 15:02:33 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1x68CX-0007mE-JS
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 15:02:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x67k3-00AEEo-OY
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 16:33:07 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x68CW-00HCzN-JA
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 17:02:32 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6aa80597-2eae-0a2a0a5409dd-0a2a450a97a2-40
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 16:33:07 +0200
-Received: from [52.101.57.32]
- (helo=BN8PR05CU002.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6aa805a2-f2d2-0a2a450a0019-346539202a16-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 16:33:06 +0200
-Received: from MN2PR14CA0018.namprd14.prod.outlook.com (2603:10b6:208:23e::23)
- by BL1PR12MB5826.namprd12.prod.outlook.com (2603:10b6:208:395::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 14 Sep
- 2026 14:32:54 +0000
-Received: from BN3PEPF00022BCB.namprd03.prod.outlook.com
- (2603:10b6:208:23e:cafe::68) by MN2PR14CA0018.outlook.office365.com
- (2603:10b6:208:23e::23) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.12 via Frontend Transport; Mon,
- 14 Sep 2026 14:32:54 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BN3PEPF00022BCB.mail.protection.outlook.com (10.167.248.168) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.428.7 via Frontend Transport; Mon, 14 Sep 2026 14:32:54 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Mon, 14 Sep
- 2026 09:32:54 -0500
-Received: from [172.20.10.246] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Mon, 14 Sep 2026 09:32:52 -0500
+ (envelope-from <jbeulich@suse.com>)
+ id 6aa80c83-e002-0a2a0a5209dd-0a2a450bcdbc-22
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:02:32 +0200
+Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6aa80c87-b7e8-0a2a450b0019-4a7de14ce8e8-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:02:32 +0200
+Received: by mail-wr2-f12.google.com with SMTP id
+ ffacd0b85a97d-4834977ae75so1180753f8f.3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:02:31 -0700 (PDT)
+Received: from [172.18.123.208] ([185.104.138.149])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-486eb2ecf2esm27574599f8f.2.2026.09.14.08.02.28
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 14 Sep 2026 08:02:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,133 +53,180 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=P7mJTt209GHhz8k+14/GlHVQtav9EV5QD/AmEUw7pA2KOJ6IYICIMgM4NPUVA5TzFl8ybRmY4+wpuI2Nv3G9F55iSmQPaoZLgoaM490z8JYaYPwTHMu2m4b6shxjPLvmBwQCB50BNOtO3aJn6x8gsskwJ7Ps0DMa3rI2JZVjiGgMONWj55hdaDSYfB/xMZkjJBQYXQlIElbBlwJ1og275nZUenMTrN2RwY5heXFafpPhOPbzb4vHciAMbVnwLX3A02eSi97NwcTFX1Q2fGi8xyRbeJV4joGIUHOpY82CylbdkFiP9UT2Op2l2SwQIvNWl8JNHjf4WPks5vwJ+hkkCA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=jtEkKwmNvCfF5torAU4XaBwSUSR88U+gxejZ7gt4JHY=;
- b=YYH3QM+sns6pFxV7FqX0G1taFgb2a+MqxJK0y2Du/jY/GuYYftGCY+kGuf54ntOPjdm1zoKgRCoQY2EK/FEEVif52+gPjpXpXx8ds+S+Txy5H/qSxBeDar/JaZd3o+7az8AYmKImxhLexal4f+VJXb32zENX3XLFiben09RMZAPIgB6Jil2RYZMvFBpHcYGONrJHwCrr0SUerxIMGxSFOlGrX0pFTbxgPnXogFJ93akp7zxnaBgnZueByStMPceyg5G38bUs628QVdFDM50vACWgobRHSARXXI049O7BplkeSZeUJ8iWow794zWhOoWoQu5gva9sxy9mb1QlxhHWxA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=jtEkKwmNvCfF5torAU4XaBwSUSR88U+gxejZ7gt4JHY=;
- b=nZ+HRRbEaXBJfD4QD06Sx39peqLbIP7VwNBr1Ckqw7FAewjMma41mowoZD4HjzoNQf9hGZ0XMQ5DRAYfU0rYxfDzkcUHIYYSmgQXjsbl1O1BzEVWV/fP14GxFxUAwI8XzArUoXkDcn9yXs4xk2KPtT74+aUmzbHEyysRRWzeeLI=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <e3125438-fc9a-4358-b201-5ae320cfc6df@amd.com>
-Date: Mon, 14 Sep 2026 16:32:46 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1789398151; x=1790002951; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=SiHZaQhv67cyk4hXA/7ZoxNWw/khsJFenYx83nLehNk=;
+        b=DK/8zIHDjPP1PGPU2k3KFJUY/v+MNKEuvw7/KI/ZnyEwBDkP1hwLa4s67ggExSWTPK
+         7l0p+wdS8GmziAwz6QrDRu76YA1up8zUCIk7l2+Xy7cUBpZ10d+YgL5OnW580NG5FiVi
+         UUQH9NALHJWXwZ1L9zTb1hO7X2m74lVkIprdMIG6v2VoO2Sj/iWkMaEqnNDRpncYIrP3
+         IJLF1NDjHmW2wfbgNahkP8c+qCQb2RbhL8iMtIYzgu9gDckG+o4X+2jXKJjOdcD7O/Kb
+         ALt+30cJdWdNy2CuANixFEynhyf3jg2hEAc/fYCytxd0yt0vGcXVlMyJohal+86EgJ3h
+         edcQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789398151; x=1790002951;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=SiHZaQhv67cyk4hXA/7ZoxNWw/khsJFenYx83nLehNk=;
+        b=mN9rG5jos8GGs76h+K4ktYbcM62mISL8mk3ndVp1AQOPxWvV86w0KOqTJth4/sQMXG
+         6ICKv9/AYsF2UWEZ22S+kjSVJpfSvM51vQpawSqQ9w2IiLdwxz/6Ja+L0NQziBluVg8N
+         gkGukzfLkJ888b9PzROzC9ZMauwG38L/XGsrzfZt43M6V1sAqD+OMhQhaDInxzIBtUeb
+         SO9UBg+4i2RkRnYL63aJf/AfRyKl3/Ju9qFiM9xLlTO2Aj/3qwoLkNfpEDS4PBT9n+Fw
+         w7QjUlYbN1ftw4JTUbWOGAXK7uZNXCtNUGykAP4Q+fnKrNEFTDX7WJyin0dqZSa0QKJG
+         T8/A==
+X-Forwarded-Encrypted: i=1; AKwUvBzZ5613IErjwy40y6gbDW6LHidoKxY5Nxb3ikpVynUs0EovamNuNgCWEZDkwmkBeat/QiPdLK4Gcdo=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lBT5UfN0ZDP70f5tRO5UOoKsTfnU/ZuLaK0RdpnYfNsjIeggEc
+	Z+Lmvss1x93gETm8O3P3gCWYPlmsOx57i2bNVR66MHf3g7YqV/XJ9mgIvwN+z35yhg==
+X-Gm-Gg: AYBFou2sfmtkArCTgbF70QBnSLYiH6JfNoBE/DJNR9Geq+cQcbEsxuMoxwPqA9g47sT
+	6GhwACmBEao0GqG2DXB52BKebbgeq54xvOiVouIru1tDXWS98va9NU3Clzsfa0ypjphLATKmafn
+	1on/eE8LCgbGrkkYB2gsn7RP7+Y+LINJZXCpLkgoBeTk03TNON42nN5Cxx1gXxDN2F4vWpRIDH0
+	15/Ifu2I8+liq/Iiug6FMJuM9ZePjdIzzaeURL/dJRxr7lZyfusLH2+k9xbZcUKZ9mn3laJNmXH
+	Z6rjx33Ij6vVAWacOQiVtnt1odX9Lmayqz3vH+CjSp48w02AjPgBIvaXh+KRvrFt8l+nIfww8Gc
+	6T3UeFav8vGChRzHkzyxrBhQVAAE/IfiwvcuPf2E33ltMdxckgzNdxGJAGGOTGFHinJtgoXCZ25
+	x0SuYkT63Gz9ae5Wn0gH0tuan/5YQp8FgxdXeMq2NJAztzW9qKN0tek8P4KoZGS4mi6/oXaa4Nh
+	HiPyYd3Lr1j
+X-Received: by 2002:a05:6000:4b05:b0:485:acdd:1524 with SMTP id ffacd0b85a97d-48702afdde6mr3943134f8f.11.1789398151205;
+        Mon, 14 Sep 2026 08:02:31 -0700 (PDT)
+Message-ID: <2394a616-16be-4657-be17-0a2dafebaeee@suse.com>
+Date: Mon, 14 Sep 2026 17:02:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v9 01/20] xen: introduce CONFIG_HAS_SHARED_INFO for archs
- without a shared page
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	<xen-devel@lists.xenproject.org>
-CC: Romain Caritey <Romain.Caritey@microchip.com>, Baptiste Le Duc
-	<baptiste.le-duc@vates.tech>, Zheng Zhang <zhangzheng@iscas.ac.cn>, Stefano
- Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
- Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk
-	<Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, Teddy Astie
-	<teddy.astie@vates.tech>
-References: <cover.1788876411.git.oleksii.kurochko@gmail.com>
- <e7a9fd1c4bac8f2dc635423bb4d038dbf0fc4ada.1788876411.git.oleksii.kurochko@gmail.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH v2 32/39] xen/riscv: remap interrupts to new IMSIC VS-file
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <948e94b6610586b84626c98da033d301335dc7b0.1787838835.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
-In-Reply-To: <e7a9fd1c4bac8f2dc635423bb4d038dbf0fc4ada.1788876411.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Jan Beulich <jbeulich@suse.com>
+In-Reply-To: <948e94b6610586b84626c98da033d301335dc7b0.1787838835.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF00022BCB:EE_|BL1PR12MB5826:EE_
-X-MS-Office365-Filtering-Correlation-Id: f0f73f0e-70d0-4848-2772-08df126d1085
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|7416014|376014|1800799024|82310400026|36860700016|22082099003|18002099003|4143699003|10067099003|56012099006|11063799006|5023799004;
-X-Microsoft-Antispam-Message-Info:
-	mkPuD9TrbEdT0uL8rNE8XAjXs0Y2tsU8dkp0ol6N7fvggbtZWqrnqmPA30oiqGM1HEir77OHXSuAQ7UmzxowgBhyIuRJOTP/wTtyMkzHlePrBPh/JWtPKQiDu687CK+oMnuPTmmLMRxtANdCfssxduBl2Zw6vUJKlZ8td7EEm0vn16pE4HCOjdTOuMEuOQJHEd3MVrNC3olZFRncX6VFNEf+RY9zggWVjirXqdvoZy/xmwpSTLz8gButayglEh9V08giw/Xh2GR0S/3DZkd9926y+Tjbs+1AjZfNpOEwb0DaLLRDxRUaEbSbGhsCPVuNcwx/2WMywArDuTk0P2ulpoVQhR8F70txfICIU3dCfOB2/ghrZsmFouacgOak9ruR+11ToS4c++wZ9asWAH9FCuX4btGKgYV/9bIlIv0ehJw38xBL2Gg6UWehzqh2/OQ7PT+Farbh+LtUrrK29RzdqG4sPMAmRKODZop0BpNzF9rZd/5NMK7uy6LJ6/IwYA6BjxjSyL+YDJspn/8aJ1YV8yhR6Z5fXSN52a5dETyyWmufmYgnWcr2e0nXZuLYfCKJVPo99ZLum7+p1k7BfKYJO5FNZIQLgGV1bUp3FecPZmAj9ASK60DuvDfjGCdG+9LvHCa2vWW5vtleNpHa1VfYQnGNTCb4CChg2jIVAKc8UVLTHfdsElqA5NIE88dD8X0l
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(376014)(1800799024)(82310400026)(36860700016)(22082099003)(18002099003)(4143699003)(10067099003)(56012099006)(11063799006)(5023799004);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	4rGSga3CxuxW+HV1+EYTt1PZGFG9LHLiRQVWZEmvI2MPUO8c/8Ch14vQHCz6nnhjkbl3VfI4ee6uF46SIMeSyfQdM5bSqBdTiLR7b2ND1ykd5I4dKN0ivGEaM0MdHcqk+rDdAcSir8u9vPVb5UOOumteyxX2E2BbWGJu4JUJarMMyRK03CpMZ+J/uQWTfxp9JkKaNguy+C3Fv7oOf3lfkqr4pJU5EsCiVazrx42j5Nw6f3UFD9T0Cg/W/YiW2fVAeDNtjXvfWFxxbtTxbt7m11ysIiL8sN0qi3kbG6ju9hVj1ZZDcof0StnVhdSmk4m4j195RNdukVGtz3tl6hEZ51OqoOTTBYUhn9aqOQXXU0l9Ix7rowsX9nMzXDeyNuuNVCUPTUXHky5cVgM7Wwv7dY+r67mz2mNLVrpUO9Erdd9AdrNyHF7AoWP2K2CGWdeV
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 14:32:54.7360
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f0f73f0e-70d0-4848-2772-08df126d1085
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN3PEPF00022BCB.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5826
-X-purgate-ID: tlsNG-4011c0/1789396387-506CECFC-669C85EE/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2801
+X-purgate-ID: tlsNG-42698a/1789398152-1A4DB9EA-6D178448/0/0
+X-purgate-type: clean
+X-purgate-size: 4044
 
+On 27.08.2026 17:21, Oleksii Kurochko wrote:
+> @@ -60,6 +61,12 @@ static unsigned int __ro_after_init guest_num_msis;
+>  #define IMSIC_DISABLE_EITHRESHOLD   1
+>  #define IMSIC_ENABLE_EITHRESHOLD    0
+>  
+> +#define imsic_csr_read(c)           \
+> +({                                  \
+> +    csr_write(CSR_SISELECT, (c));   \
 
+Nit: Excess parentheses again.
 
-On 09-Sep-26 17:07, Oleksii Kurochko wrote:
-> On architectures that run guests in dom0less mode without the PV ABI
-> (currently RISC-V), no shared_info page is allocated and d->shared_info
-> remains NULL throughout the domain lifetime.  Several places in common
-> code access d->shared_info through the shared_info() macro or directly,
-> causing UBSAN null-pointer errors on such architectures.
-> 
-> Rather than adding runtime NULL guards that are logically unreachable
-> on x86 and Arm (where shared_info is always allocated), introduce a new
-> Kconfig symbol CONFIG_HAS_SHARED_INFO selected by x86 and Arm.
-> 
-> On !HAS_SHARED_INFO the shared_info() macro expands to a dereference
-> of shared_info_absent, an extern pointer that is declared but
-> intentionally never defined.  Any use of shared_info() that is not
-> dead-code-eliminated will therefore cause a link-time failure, making
-> missed guards impossible to overlook.
-> 
-> The 2L event-channel ops call shared_info() and must not be compiled on
-> architectures without a shared_info page, so event_2l.o is gated on
-> CONFIG_HAS_SHARED_INFO.  On such architectures evtchn_init() installs the
-> FIFO ops as a placeholder instead, so that a later guest opt-in to the
-> FIFO ABI via EVTCHNOP_init_control has no special-casing to do; if FIFO
-> support itself is also unavailable (!CONFIG_EVTCHN_FIFO), a dedicated
-> no-op evtchn_port_ops_none table is installed instead, so that
-> d->evtchn_port_ops is never NULL.  evtchn_fifo_word_from_port() is
-> guarded against uninitialised d->evtchn_fifo so the FIFO ops are safe
-> before evtchn_fifo_init_control() is called by the guest.
-> 
-> With CONFIG_HAS_SHARED_INFO=n all vCPUs fall back to the global
-> dummy_vcpu_info, so writes through vcpu_info() could leak data between
-> vCPUs. Reviewing the write paths in common code: the write in
-> map_guest_area() stores the constant ~0 so nothing serious would happen
-> if it were leaked; the event_2l.c paths are not compiled on
-> !HAS_SHARED_INFO, as event_2l.o is gated on CONFIG_HAS_SHARED_INFO; the
-> write in vcpu_info_populate() targets the new mapping buffer, not
-> dummy_vcpu_info.
-> 
-> Outside common code, the remaining writes are x86 PV-specific, for which
-> CONFIG_HAS_SHARED_INFO=y. No code changes are needed.
-> 
-> Finally, struct domain's shared_info field itself is gated on
-> CONFIG_HAS_SHARED_INFO, as it would otherwise be a permanently NULL
-> pointer: every user of it is either arch code for an architecture that
-> selects HAS_SHARED_INFO, or common code already guarded by the same
-> Kconfig symbol.
-> 
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-Acked-by: Michal Orzel <michal.orzel@amd.com> #Arm
+> @@ -242,6 +254,15 @@ void imsic_irq_disable(unsigned int irq)
+>      spin_unlock(&imsic_cfg.lock);
+>  }
+>  
+> +static bool imsic_local_is_pending(unsigned int id)
+> +{
+> +    unsigned long isel =
+> +        (id / BITS_PER_LONG) * (BITS_PER_LONG / IMSIC_EIPx_BITS) + IMSIC_EIP0;
+> +    unsigned long bit = BIT(id % BITS_PER_LONG, UL);
 
-~Michal
+Both can be unsigned int, can't they?
 
+> +    return !!(imsic_csr_read(isel) & bit);
+> +}
+
+No need for !! here.
+
+What about endianness, btw? Does the IMSIC always match the CPU (and
+its setting)?
+
+Overall, what does "local" in the function name signify? (For a static
+function, the "imsic" prefix may also be unnecessary.)
+
+> @@ -497,6 +523,27 @@ static void imsic_call_on_cpu(unsigned int cpu, void (*func)(void *),
+>          on_selected_cpus(cpumask_of(cpu), func, data, 1);
+>  }
+>  
+> +/*
+> + * Ensure that all the MSIs the APLIC has already generated for the hart this
+> + * runs on have really reached the hart's IMSIC.
+> + *
+> + * The barrier is the one described by the AIA specification in
+> + * "Synchronizing interactions between a hart and the APLIC": ask the APLIC to
+> + * send an MSI to the hart itself and wait until it shows up as pending in the
+> + * hart's own interrupt file. As it says nothing about MSIs on their way to
+> + * any other hart, it has to be executed by the pCPU owning the interrupt file
+> + * the MSIs were being sent to.
+> + */
+> +static void cf_check imsic_aplic_sync(void *data)
+
+If the parameter isn't used, maybe best to name it "unused"?
+
+> @@ -848,8 +899,22 @@ void imsic_migrate_vcpu(struct vcpu *v)
+>      if ( v->arch.last_cpu == NR_CPUS )
+>          return;
+>  
+> +    read_lock_irqsave(&imsic_state->vsfile_lock, flags);
+> +    old_vsfile_id = imsic_state->guest_file_id;
+> +    old_vsfile_cpu = imsic_state->vsfile_cpu;
+> +    read_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
+> +
+> +    /*
+> +     * We don't support SW interrupt files at the moment. Bail out before
+> +     * anything is touched, as the old file has no owning pCPU in that case
+> +     * and there is nothing to retarget the producers away from.
+> +     */
+> +    if ( old_vsfile_cpu == NR_CPUS )
+> +        panic("IMSIC SW-file isn't supported\n");
+> +
+>      /*
+>       * At this point, all interrupt producers are still using the old IMSIC
+> +     * VS-file so we first move all interrupt producers to the new IMSIC
+>       * VS-file.
+>       */
+
+Isn't the new part of the comment premature? Moving doesn't start until ...
+
+> @@ -870,5 +935,43 @@ void imsic_migrate_vcpu(struct vcpu *v)
+>      /* Zero-out new IMSIC VS-file */
+>      imsic_call_on_cpu(new_vsfile_cpu, imsic_vsfile_local_clear, &vsfile_data);
+>  
+> +    /* Update G-stage mapping for the new IMSIC VS-file */
+> +    if ( imsic_map_guest_file(v, new_vsfile_hgei) )
+> +    {
+> +        domain_crash(v->domain, "Migration to hw interrupt file failed\n");
+> +
+> +        return;
+> +    }
+> +
+> +    imsic_update_state(v, new_vsfile_hgei);
+> +
+> +    /*
+> +     * TODO: Modify the relevant translation tables at all IOMMUs so that MSIs
+> +     *       for this virtual interrupt file are now sent to the new physical
+> +     *       interrupt file.
+> +     */
+> +    if ( iommu_enabled )
+> +        printk_once("IMSIC: IOMMU MSI retargeting is not implemented\n");
+> +
+> +    /*
+> +     * If any interrupts at an APLIC are forwarded by MSIs to the old interrupt
+> +     * file, reconfigure the APLIC to send them to the new interrupt file.
+> +     */
+> +    aplic_reconfigure_target(v, old_vsfile_id, old_vsfile_cpu);
+
+... here, as it looks.
+
+Jan
 
