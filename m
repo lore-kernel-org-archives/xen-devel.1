@@ -4,46 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1D51C88E50
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 06:27:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420465.1646771 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50FA1C88E67
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 06:33:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420477.1646779 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x60AK-0001I9-4x; Mon, 14 Sep 2026 06:27:44 +0000
+	id 1x60G3-00030h-QJ; Mon, 14 Sep 2026 06:33:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420465.1646771; Mon, 14 Sep 2026 06:27:44 +0000
+Received: by outflank-mailman (output) from mailman id 1420477.1646779; Mon, 14 Sep 2026 06:33:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x60AK-0001I2-1i; Mon, 14 Sep 2026 06:27:44 +0000
-Received: by outflank-mailman (input) for mailman id 1420465;
- Mon, 14 Sep 2026 06:27:42 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x60G3-00030a-NK; Mon, 14 Sep 2026 06:33:39 +0000
+Received: by outflank-mailman (input) for mailman id 1420477;
+ Mon, 14 Sep 2026 06:33:38 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x60AI-0001Go-9k
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 06:27:42 +0000
+ (envelope-from <tzimmermann@suse.de>) id 1x60G2-00030T-97
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 06:33:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x60AH-00EaWK-MZ
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 08:27:41 +0200
+ id 1x60G1-002Txc-EJ
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 08:33:37 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa793dc-e002-0a2a0a5209dd-0a2a45079318-14
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:27:41 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
+ (envelope-from <tzimmermann@suse.de>)
+ id 6aa79539-bab6-0a2a0a5309dd-0a2a4507d028-24
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:33:37 +0200
+Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa793dd-b4ea-0a2a45070019-4a7de14cde45-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:27:41 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-484366874b0so849581f8f.2
- for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 23:27:41 -0700 (PDT)
-Received: from ?IPV6:2003:ca:b735:686c:f5c4:7858:246b:ca62?
- (p200300cab735686cf5c47858246bca62.dip0.t-ipconnect.de.
- [2003:ca:b735:686c:f5c4:7858:246b:ca62])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-486eb33ee8bsm24661901f8f.15.2026.09.13.23.27.40
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sun, 13 Sep 2026 23:27:40 -0700 (PDT)
+ (envelope-from <tzimmermann@suse.de>)
+ id 6aa79541-b4ea-0a2a45070019-c387df83e0c0-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:33:37 +0200
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id AF4E51F388;
+ Mon, 14 Sep 2026 06:33:28 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 08DF813693;
+ Mon, 14 Sep 2026 06:33:27 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id OLQQMjeVp2qFEgAAD6G6ig
+ (envelope-from <tzimmermann@suse.de>); Mon, 14 Sep 2026 06:33:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,157 +61,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789367261; x=1789972061; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=mwmp9WPS7lTMWpQjfMoDaH5ulNLhnKsAqa1YMjCOZ5E=;
-        b=gr8Gp2nm9zTBC/QdNaLxiGD48Ox1tOSI0FdKfW39U25/BAFXUiBDF4j3zoBMBgeJ/Z
-         WPu0lzsn5DwWRa1/drSOp3wCfo7otkpnowXu9hPOfgpS8LAfs9hkToyGH3w8H9zCECsh
-         b6aQv1xaagiRpJ1WTaxmlcny4bjl+thsXwH/ZqhLAX/1V6dvU5Ib73sbPeH6IzifErwr
-         T7CrdgX364Ebn/JaOoWEoUUQ9mpquSBtyXQTGEio9pgONnJM6baD75nPE+XlZ+jDAEKg
-         qcZ835MTXbqNKSOdutku4w5NPv2Uv2ZToQpczJ5p+BMteClqX8UqC5VTUfXb9vo1s7EZ
-         J/Eg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789367261; x=1789972061;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=mwmp9WPS7lTMWpQjfMoDaH5ulNLhnKsAqa1YMjCOZ5E=;
-        b=schyUZpmvUbWCr8r3E8Xs7QPnbWUIvms2Dl2sxpuyzzYPgzC7DD9Mw0m+0DNkeW84+
-         56fJ6gYxuoHkqianyS3l0ILdKjpzAsTEQrbzUeLP8+YsQ2C8bQVopiiIEv+o+z+RlQVP
-         pPEDKAxBI2kiq10pV1YZaOXcRizuJRW7cBQ8nAWkWcZQvJyMOzASlqeRQYOsIDRKBgpW
-         lYtCQEciiHavznrcPsd0kG9fRTlYsrA3P5nfrjKOoPcRbTFfcSm3M5dckfUzec39rKXE
-         OGnktcXldBJ/77iCjGUHRY+FinisvcFLM6xzDlNzlx1GA+iznIarP0YNrSiD2YJPSQx5
-         wxew==
-X-Gm-Message-State: AFuF++lhdy4Iv6qpNZlP1DkWVanBM/LWNBrAyr3UceDH3RG0QRttRNtR
-	mzYG+PVrOtkxl6oPjmutckX6SEQT8QxHmIwleQ39PG6ffWwW9QVuKRZ8Opj2W0jcLA==
-X-Gm-Gg: AYBFou0uZUhtELDNoU/DPqvFCVcogG5WzLHX363h6EUtTRXE6i4hJXKwZv+9Vk5nFRS
-	zA/0dFwPemQSypI3SGrd/ETcDFgkIgKUCEuI/113s01rp6+mtXYAvm27wLPOtPcf0tCa9pGxyPT
-	znHryzVr3q9kY9CHIaHZwto3f9R7clF34x6DTpV67O4SqTQ4jr9a/bZd9HjHLFyAOzmxg+7r/WC
-	jzzU4SitLG5Exg4JhnLSHy7aVsoW1R5IU+f5tmyrMdlN+Ko0RPQA9vwifCDhqbEddI4oTM31gCe
-	zuhn3/3hCl2SvdihOMGwn1+u1S6GHcT7OBGALTPC6Ptlsp9ywKqvaJ3WDwRrj3RoCQJ7bVxyXq+
-	QPtMpNh+zsvTciIuJUI+vw0Dm1teFUO+XfH9d08nPeZxeFuUSTPx5eKeB5mwYvGDX0rvkF+PktE
-	aGiYnS597gQ5p7C1mFk0mbG+hYfVAGUF/Sj75gsWOVRYjJRPYiM+9lSdLM0nFcPTGFDk0i351io
-	2C0ln2s7sHYIR8hg5I2JsaH0vG4fjEES8RgbLpJrMsbajOnT5A6ggr4k0oT5bKvz0cQ4BMvW7AH
-	UyZRdLBuTFL4XwljhVHy+R56nSbPadA=
-X-Received: by 2002:a05:6000:2403:b0:485:943c:886d with SMTP id ffacd0b85a97d-48702ad29bemr2153065f8f.7.1789367260972;
-        Sun, 13 Sep 2026 23:27:40 -0700 (PDT)
-Message-ID: <e511c588-215e-4e73-9ba4-a0a79cee4478@suse.com>
-Date: Mon, 14 Sep 2026 08:27:39 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1789367612; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=ovBBaSgMLmlbSMqeNsjr5N8eDdz6l1RmmoDSShj29wE=;
+	b=b16Odrj6bv0wp8OuyHaqBtpbaOjGnP9oDUkPm+RnEC2D3gQBz58ZPlxWU/CttnYcihdRLB
+	W9ckoJDdVx6dO7vo2kVy82bj6PNrKQfv3GtcQ+ydcHEYIk1aK+5a1aeKXOtO+U3RRPmCCK
+	c75mgcfRyGTh09JACGkenPbWXqI+yOM=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1789367612;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=ovBBaSgMLmlbSMqeNsjr5N8eDdz6l1RmmoDSShj29wE=;
+	b=h6IyQ2X3/hGfWruBjt45Bpjm6R/rVrgm2ZI/TWGL/4k6lMvTM7+LcT+bkGZQQ9FfVt1/XJ
+	hDct8kTxT4gIkEAw==
+Authentication-Results: smtp-out2.suse.de;
+	dkim=pass header.d=suse.de header.s=susede2_rsa header.b="ov/teEO7";
+	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=MuewFzNW
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1789367608; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=ovBBaSgMLmlbSMqeNsjr5N8eDdz6l1RmmoDSShj29wE=;
+	b=ov/teEO7U6AxQHEQtbeVuit6+Esb59jvvHc1wnp8vKLnWpfaXRnJSRiSJXNbrsxGrERqD3
+	D0mM3mmD8XaIRjaEIHsJFOtRxdYqrJ3+DwrfaTqRiF+FmnHQR8cXA+Y7NE6h66cztla/pU
+	0BQtBNTOLhrKHZrOmvapY0G9AWkuTy8=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1789367608;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=ovBBaSgMLmlbSMqeNsjr5N8eDdz6l1RmmoDSShj29wE=;
+	b=MuewFzNWGNAVPk7ko9iJTbOoyxG+Ut0iz5lpJBigNxT3SjHYUKwlRHFh24JiMS5BoVGv5Q
+	1gdeuU5ohpB39OAQ==
+Message-ID: <bf9f900c-39d4-4571-ae4b-3896c5ce8610@suse.de>
+Date: Mon, 14 Sep 2026 08:33:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 3/4] Eclair: relax "noreturn" function-pointer conversion
- deviation
-To: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-References: <6d212d60-5c0b-4909-996d-5d6a4906b7e1@suse.com>
- <4cca58b6-b555-4064-aa26-5204dc4b99cc@suse.com>
- <3d473b8a85331856ea2b95f9448f2d6c@bugseng.com>
+Subject: Re: [PATCH v3 4/8] drm/pl111: replace struct drm_simple_display_pipe
+ with regular atomic helpers
+To: Linus Walleij <linusw@kernel.org>, Ze Huang <ze.huang@oss.qualcomm.com>
+Cc: Alexey Brodkin <abrodkin@synopsys.com>,
+ Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
+ Maxime Ripard <mripard@kernel.org>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Joel Stanley <joel@jms.id.au>,
+ Andrew Jeffery <andrew@codeconstruct.com.au>, Frank Li <Frank.Li@nxp.com>,
+ Sascha Hauer <s.hauer@pengutronix.de>,
+ Pengutronix Kernel Team <kernel@pengutronix.de>,
+ Fabio Estevam <festevam@gmail.com>, Hans de Goede <hansg@kernel.org>,
+ Alex Lanzano <lanzano.alex@gmail.com>,
+ Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
+ dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org,
+ linux-aspeed@lists.ozlabs.org, linux-arm-kernel@lists.infradead.org,
+ imx@lists.linux.dev, xen-devel@lists.xenproject.org
+References: <20260727-drm-simple-kms-removal-v3-0-cd5dc89858c6@oss.qualcomm.com>
+ <20260727-drm-simple-kms-removal-v3-4-cd5dc89858c6@oss.qualcomm.com>
+ <CAD++jLnN-dhwxWwgmWYVD7COhvVsTxbiexHwoFkzgv8ucGhxqw@mail.gmail.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <3d473b8a85331856ea2b95f9448f2d6c@bugseng.com>
-Content-Type: text/plain; charset=UTF-8
+From: Thomas Zimmermann <tzimmermann@suse.de>
+Autocrypt: addr=tzimmermann@suse.de; keydata=
+ xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
+ XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
+ BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
+ hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
+ 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
+ AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
+ AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
+ AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
+ lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
+ U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
+ vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
+ 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
+ j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
+ T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
+ 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
+ GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
+ hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
+ EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
+ C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
+ yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
+ SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
+ Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
+ 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
+In-Reply-To: <CAD++jLnN-dhwxWwgmWYVD7COhvVsTxbiexHwoFkzgv8ucGhxqw@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1789367261-A60C5AE4-A74A6474/0/0
+X-Rspamd-Queue-Id: AF4E51F388
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-Rspamd-Action: no action
+X-Spamd-Result: default: False [-3.01 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	MX_GOOD(-0.01)[];
+	RCVD_TLS_ALL(0.00)[];
+	TAGGED_RCPT(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	ARC_NA(0.00)[];
+	RCPT_COUNT_TWELVE(0.00)[22];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[synopsys.com,linux.intel.com,kernel.org,gmail.com,ffwll.ch,jms.id.au,codeconstruct.com.au,nxp.com,pengutronix.de,epam.com,lists.freedesktop.org,vger.kernel.org,lists.ozlabs.org,lists.infradead.org,lists.linux.dev,lists.xenproject.org];
+	TO_DN_SOME(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[qualcomm.com:email,suse.com:url,suse.de:dkim,suse.de:mid,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	SPAMHAUS_XBL(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	DKIM_TRACE(0.00)[suse.de:+]
+X-purgate-ID: tlsNG-ef75cf/1789367617-34CCFAE4-78530B26/0/0
 X-purgate-type: clean
-X-purgate-size: 3211
+X-purgate-size: 857
 
-On 12.09.2026 18:04, Nicola Vetrini wrote:
-> On 2026-09-03 13:44, Jan Beulich wrote:
->> Like misra/rules.rst says, function arguments other than "void *" are okay
->> as well.
+Hi
+
+Am 14.09.26 um 01:33 schrieb Linus Walleij:
+> On Sun, Jul 26, 2026 at 9:46 PM Ze Huang <ze.huang@oss.qualcomm.com> wrote:
+>
+>> Replace the PL111 simple display pipe with explicit plane, CRTC and
+>> encoder objects.
 >>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->> ---
->> I can't explain why this covers the violation in mce.c:mce_callbacks'es
->> initializer, but not the one in mce.c:default_handler's.
-> 
-> Possibly differing attributes (e.g. cf_check vs section attributes)? Just a guess that would need to be tested, though.
-
-As long as its guesswork, it could end up being many (expensive) tries.
-
->> As a result of 6852334f8416 ("Arm/GIC: add noreturn in a few more
->> places"), vgic_v2_lpi_to_pending() and vgic_v2_lpi_get_priority() (both
->> returning non-void) would also need covering. (As said in a remark there,
->> non-void together with noreturn is somewhat odd.)
-> 
-> Indeed
-> 
->> Really before and after this change there's no checking that parameter and
->> return types actually match. I have no clue how one would express such
->> checks.
-
-With this last sentence in mind ...
-
-> The presence of a bitcast indicates that the two types do not match exactly. Typically function attributes are not relevant towards determining a type difference, but different compilers may model non-standard features differently (rightly so), in such a way that some make a difference in the AST, and others do not.
-> 
-> To check for compatibility of function pointers I would try activating service STD.funptrcv, which essentially mirrors -Wincompatible-pointer-types:
-> 
-> caution for rule STD.funptrcv: (rule) A pointer is used to call a function whose type is not compatible with the pointed-to type. (untagged)
-> p.c:8.8-8.8: Loc #1 [culprit: implicit cast converts from `void(*)(int)' to `__typeof__(@EXPR@)*' (that is `void(*)(void)')]
->   qq = m;
->        ^
-> p.c: In function ‘h’:
-> p.c:8:6: error: assignment to ‘void (*)(void)’ from incompatible pointer type ‘void (*)(int)’ [-Wincompatible-pointer-types]
->     8 |   qq = m;
->       |      ^
-> p.c:3:6: note: ‘m’ declared here
->     3 | void m(int x);
->       |      ^
-
-... - well, fine, but ...
-
->> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
->> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
->> @@ -391,11 +391,11 @@ constant expressions are required.\""
->>  }
->>  -doc_end
+>> Move the existing timing, format and pitch validation into explicit
+>> atomic check paths. Use commit-local plane state in the CRTC enable path
+>> when reading framebuffer format state.
 >>
->> --doc_begin="The conversion from 'void noreturn (*)(void *)' to 'void (*)(void *)' is safe
->> +-doc_begin="The conversion from 'void noreturn (*)(...)' to 'void (*)(...)' is safe
->>  because the semantics of the 'noreturn' attribute do not alter the calling convention or behavior of the resulting code."
->>  -config=MC3A2.R11.1,casts+={safe,
->> -  "kind(bitcast)&&to(type(pointer(inner(return(builtin(void))&&all_param(1, pointer(builtin(void)))))))&&from(expr(skip(!syntactic(),
->> -   ref(property(noreturn)))))"}
->> +  "kind(bitcast)&&to(type(pointer(inner(return(builtin(void))))))&&from(expr(skip(!syntactic(),ref(property(noreturn)))))"
->> +}
->>  -doc_end
+>> Move page-flip event handling to the CRTC commit path.
+>>
+>> Signed-off-by: Ze Huang <ze.huang@oss.qualcomm.com>
+> This patch 4/8 applied for next.
 
-... how would this be expressed here? Perhaps best if you would make an
-alternative patch?
+Great, thanks a lot!
 
-Jan
+>
+> Yours,
+> Linus Walleij
+
+-- 
+--
+Thomas Zimmermann
+Graphics Driver Developer
+SUSE Software Solutions Germany GmbH
+Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
+GF: Jochen Jaser, Andrew McDonald, (HRB 36809, AG Nürnberg)
+
+
 
