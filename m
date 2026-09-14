@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8F8EAC88E65
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 11:03:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420775.1647003 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94C24C88E64
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 11:15:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420789.1647013 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x64T9-0001pt-P6; Mon, 14 Sep 2026 11:03:27 +0000
+	id 1x64ek-0003jC-Pg; Mon, 14 Sep 2026 11:15:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420775.1647003; Mon, 14 Sep 2026 11:03:27 +0000
+Received: by outflank-mailman (output) from mailman id 1420789.1647013; Mon, 14 Sep 2026 11:15:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x64T9-0001pm-MQ; Mon, 14 Sep 2026 11:03:27 +0000
-Received: by outflank-mailman (input) for mailman id 1420775;
- Mon, 14 Sep 2026 11:03:26 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x64ek-0003j5-MF; Mon, 14 Sep 2026 11:15:26 +0000
+Received: by outflank-mailman (input) for mailman id 1420789;
+ Mon, 14 Sep 2026 11:15:26 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x64T8-0001pg-Q8
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 11:03:26 +0000
+ (envelope-from <frn1furkan10@gmail.com>) id 1x64ej-0003iz-TL
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 11:15:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x64T8-00D35q-33
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 13:03:26 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x64ej-008Xww-9j
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 13:15:25 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa7d473-8faa-0a2a0a5109dd-0a2a450add0c-20
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 13:03:20 +0200
-Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aa7d478-f2d2-0a2a450a0019-4a7de18d9ad2-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 13:03:20 +0200
-Received: by mail-wm2-f13.google.com with SMTP id
- 5b1f17b1804b1-49e7355e411so12394565e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 04:03:20 -0700 (PDT)
-Received: from [172.18.123.208] ([185.104.138.131])
+ (envelope-from <frn1furkan10@gmail.com>)
+ id 6aa7d746-8faa-0a2a0a5109dd-0a2a450bc820-34
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 13:15:25 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <frn1furkan10@gmail.com>)
+ id 6aa7d74c-b7e8-0a2a450b0019-4a7de18cf653-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 13:15:25 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49ccff31419so15569625e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 04:15:25 -0700 (PDT)
+Received: from [192.168.1.109] ([85.107.101.239])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49e62232cb7sm241487115e9.4.2026.09.14.04.03.18
+ 5b1f17b1804b1-49e6fe9d3e3sm127666515e9.0.2026.09.14.04.15.22
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Sep 2026 04:03:19 -0700 (PDT)
+ Mon, 14 Sep 2026 04:15:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,388 +53,281 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789383800; x=1789988600; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1789384524; x=1789989324; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=VosfrI+8RtvxpWlfnnw7Xr/+ZAYLsvan3hsjL08KQUI=;
-        b=g/8l7F7dknPb8xezowlQctydj+maX/PCM7LsApVUDacotRFMEmo4c00vNA9g9Yb44z
-         4o6V6DNbhSBriMg5mrkh6SDD/AQi4LBY0CjwNdphHmkpezjtQ5QbnC5+kWVp/jhqx2BZ
-         ktJhMp3enMEPA5Sr+HNmkIX0q5Hx5ZBEsMgjbCzfhEpGKRhEJboV6ungGr8eAttm9EbP
-         S+LxDqTzR7x2Kvx3k671i5BmjFtEhWDr/pFR35heaZIU9Vdm+tsVUUFKvC4zsbPQIUvh
-         4jo/vZq9AuFfY7F0fiinK494RuN3S2abpuYYtWnXYOAUG/bC1iEybgwgVEgbw86JIqWS
-         MUUQ==
+        bh=LbuipxVR0TzPXP53d+scSiLX1pqUdF3Ft9Tt//zTHeM=;
+        b=HK69w/MwOrFhPYIuUClS+s/SZ8SVHG7ZOjrNYFnH1kcTSN9B4K/TuDr9woVOXB/QrP
+         MFMTRDjsVlVV1qw5rM8aFTSZFzPouLgTEABh2zzw5YLEeUm3tUhy5wKj+fnt5u6ekfMR
+         dQtiRSbBil0+WVjiJF3AajWwUPhPXV1vdTh7/0Q7Lsm9pGS5B4vtCZwsWouzCB4nM1mZ
+         Ie9URnw8eAkpjxxiauFNO+8A7JNueRLPvhPmStl08nxnABwirp+K/2jNva74enaSbPMo
+         unfsoGSOsb+uE0L3NBkUXsY/DbW+QikBgegDaKT1TBoiqj9nROZu6LLQoAD/lH/sS0UA
+         HZMg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789383800; x=1789988600;
+        d=1e100.net; s=20251104; t=1789384524; x=1789989324;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=VosfrI+8RtvxpWlfnnw7Xr/+ZAYLsvan3hsjL08KQUI=;
-        b=OSq7plBCblUxk3TCGRnhVXTw+nfutc3FeeFQNoQPrXvF92Ts9w4Y1kRjlQ9e4Ir4Wj
-         6fIQb8rqBS8p6Hrhu8fmMtml8PG2KWF2K4rE02yhfcBVfleuPT9AXUImOI2v2KJ2kDyT
-         /9bSP1iLEdlOuFzDUL98eu2IKWFkrl+yzYEDPgacpglJv7j8FaXQxmyvftJVbO3sQqD7
-         iM7Diw01QBM1mP8qthYoijfaj35sMwLgf2oIrytr/eLgXaAADqx3li29PjE3DMsMbLKf
-         2Bnm/SnK6WoztuxtioT086Q2BHFPdCW1okKK/aZe0uxTBZFr19DOgf/77Aqm509Tk9oF
-         e+8A==
-X-Forwarded-Encrypted: i=1; AKwUvBzX6i9dEZwIKkDkc4E6Wq3siDeByZ6baKe5FN9ktTmZMu+yEGoErOgOCVJQV9xrIPJiky1gyGVvUhY=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lcs+z3TlgFf2PFRaiJihw4MKrdOzl3H0F4xvcPXcDUFLXlocsM
-	QvjWS/gMJzm4jIDAptb2mWZJCKl1Oc1VYcqfUxmFyaCevWTdetdNPkkmZR1NUVGelA==
-X-Gm-Gg: AYBFou2h7260waN8DnQxCXuaUREcZiE91x9XENuOoWP76uSOcxhLll6xyqkGRoBC1V3
-	omiPCKG5Ft2FjXZIO0oRWhLjg3MqeH0PjKqlrE/9u7IQvVrC13YPdS8lUdmjrp4UleSLczOcWbp
-	49n/epiOL3YyiumbTZ379CoLwm8B+F4W+uGJaTGLFJZvS9vZN4FMCjPqKSTCofduM19qOdTWXVL
-	VirSKrCwX67xQvHoVCt97oyXW3viYDBXrFq7ggBRpBZS4PgmjlFST50zPY/sP9Ud6k2S5zuUUVu
-	w/lC7l0H1r9bcYbR7mQteL6uDAqx05/01cj2eaVTIo8ZV9AtJpG4kkvs8M31C6iWIug3Lx6rtsl
-	FnkbNWhCssFN7dIoYKNv2o4kYknAgsGb1NziZM9QQR/ZfCZaEif1nauKfnAwnKUaRPUk8AqoQob
-	bX7m0cX9bOZwsI832QhtkHwI/Z6rmJt4KjX0XQpBv1EdQkvrZvlBgvFBMjgU1MpjC19Q+x4sxEV
-	aYoe52TVKnGJVbiJqeAXls=
-X-Received: by 2002:a05:600c:8b6b:b0:49c:d52e:d0ea with SMTP id 5b1f17b1804b1-49e7a64acc2mr53511275e9.4.1789383800100;
-        Mon, 14 Sep 2026 04:03:20 -0700 (PDT)
-Message-ID: <895a427d-1adb-43cb-a2bb-e0e9d50791db@suse.com>
-Date: Mon, 14 Sep 2026 13:03:13 +0200
+        bh=LbuipxVR0TzPXP53d+scSiLX1pqUdF3Ft9Tt//zTHeM=;
+        b=A6Njxahobo9pQoCQPyeLUyEfbG8gIx7qH1ZZs1nmMO3olckGnLnR4m/5Ypwc04WKsa
+         eMK9wSLFb1TPyiTGRY8/6wjmzPdcFr3jd48sFaRhefd0/6WMH01VDJkxuI1V4l5kVEDY
+         46AO8eLdx664oSz7m3XqfrvpkdcJ7w+5oatH+js1wR1T/zyZANSgu4+kjOspZCNannH0
+         tF2At1iPwZtLDGf3A9S3mnaCOl+eISwZLN8ztFWTyFVSCmPKTCHruBaasZ+ef3sfMLaD
+         B3Gq3iLxxYj7QHmTKAOt6nhQGYG638CZXQ3M7UnsJrKhksID2Wf617B+/1e1N5pHmmsh
+         DGEg==
+X-Forwarded-Encrypted: i=1; AKwUvBx+cSup3FYCsBDqMKbiIdY9cMVEAnQQAxVuPNYqDw4BEde7Ivk3RkkUlNHWRPHZPIrmucDvt/GMgng=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nv5NS0Wivv5o6fP411PVOGKZoB9ikMwAQp83jOUTa2GOgkAvpL
+	5VWBr/vFW91w/JmiIxsdE569id6dSFUwPsbh7m6Wn6SQ0U5Iua39iowx
+X-Gm-Gg: AYBFou3lnnkCxv99CoKAV3pi3zx0TUUfSSmAhe75GGhWaMdO6mG/BjnylBT7vGDUvUh
+	8i/zEwqZbjDmQQPvwohKMTFxh+ixfJWBCKkss6nxNksHmsNQuTWbkdtGXbwt3SgyzPE8rWnu05O
+	8r2Ta28Xmjh5lEPYPZJuWy1I+FtdAyPWlfWIknIuloE0Ce3jlM9MAo01s1p5hLx/XAnYsuuvcgz
+	hBwwU0jrsaJFBAIxE3y1gJcVNIZ3rL5IBFpU+iBl64wUsDk9EsmwIAvYeKs8fZPlDvGPGEPWaSn
+	mR3JeoNJJTyxURP/F/K+PFfeohYhICVLygg9xUsexvm61rnVJ7X3YGjWOvtofk4NYhzMhUlGhMg
+	g2+Ce/DQjeMQBn+MhXowDfVRreHVamHpZ0i9NPyVUxmm4jwWdi1gcF6YZpXWEFIfhlNvJcIqj+Q
+	JIqlcOmAbnVfaWbCXbmzNZiO2xLcuC8t/camNWH1x86FgWBj2l10uuw4O2zwsLe5x89RUr+by1m
+	ivm9Q/3
+X-Received: by 2002:a05:600c:698d:b0:49d:827:e5b6 with SMTP id 5b1f17b1804b1-49e7a68cc4cmr25373795e9.20.1789384524460;
+        Mon, 14 Sep 2026 04:15:24 -0700 (PDT)
+Message-ID: <f1841dcc-0a17-43c4-9759-db2c11d75ec4@gmail.com>
+Date: Mon, 14 Sep 2026 14:15:20 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 24/39] xen/riscv: add helpers for decoding a trapped
- load or store
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <4c5361bda56e97f5338f4bc561498e018adbf618.1787838835.git.oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH 1/5] xen/sched: rtds: add global-EDF utilization admission
+ control
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, roger@xenproject.org,
+ dfaggioli@suse.com, anthony.perard@vates.tech, julien@xen.org,
+ sstabellini@kernel.org, gwd@xenproject.org, enr0n@ubuntu.com,
+ michal.orzel@amd.com
+References: <20260826045720.5779-1-frn1furkan10@gmail.com>
+ <20260826045720.5779-2-frn1furkan10@gmail.com>
+ <371537bb-7c12-4630-bb1f-57e301b1fbf2@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <4c5361bda56e97f5338f4bc561498e018adbf618.1787838835.git.oleksii.kurochko@gmail.com>
+From: =?UTF-8?B?RnVya2FuIMOHYWzEscWfa2Fu?= <frn1furkan10@gmail.com>
+In-Reply-To: <371537bb-7c12-4630-bb1f-57e301b1fbf2@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1789383800-532D8CFC-40C8ABBC/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1789384525-188C99EA-8840692F/0/0
 X-purgate-type: clean
-X-purgate-size: 12186
+X-purgate-size: 8932
 
-On 27.08.2026 17:21, Oleksii Kurochko wrote:
-> emulate_load() and emulate_store() will both need to obtain the
-> instruction which caused a guest MMIO trap, decode it, and locate the
-> register operand it names. Add what the two share, ahead of either of
-> them being implemented: struct decoded_insn, insn_fetch_faulted(),
-> decode_ldst_insn(), guest_xlen(), guest_gpr() and advance_pc().
+
+On 9/14/26 12:10, Juergen Gross wrote:
+> On 26.08.26 06:57, Furkan Caliskan wrote:
+>> RTDS has no admission control: nothing stops the sum of all admitted
+>> units' (budget/period) reservations in a cpupool from exceeding
+>> what its pCPUs can actually provide. Once that happens, none of the
+>> EDF deadline guarantees this scheduler is built around still hold
+>> for the units sharing that pool.
+>>
+>> Introduce admission control to prevent this: reject a reservation
+>> whenever admitting it would push a cpupool's units over its capacity.
+>> Track a running utilization total per cpupool, and enforce it in
+>> rt_alloc_udata()/rt_free_udata(), the paired lifecycle hooks for a
+>> unit's creation and destruction. This catches the default
+>> period/budget every new unit gets.
+>>
+>> Utilization is represented as a fixed-point value: budget is
+>> left shifted by RTDS_UTIL_SHIFT (20 bits) and divided by period.
+>> A plain "(budget << RTDS_UTIL_SHIFT) / period" risks overflowing
+>> the multiply for large enough budgets. Rather than widen the
+>> arithmetic to tolerate any input, the input itself is bounded:
+>> rt_validate_params() rejects any budget above RTDS_MAX_BUDGET,
+>> chosen as the largest value that can be left-shifted by
+>> RTDS_UTIL_SHIFT without overflowing 64 bits, so the shift in
+>> rt_unit_utilization() can never overflow.
+>>
+>> A cpupool's capacity rt_utilization_cap() scales with the number of
+>> scheduling resources in it. It is calculated as:
+>> (number of sched_resources * RTDS_UTIL_SCALE * RTDS_UTIL_CAP_PCT / 100),
+>> where RTDS_UTIL_CAP_PCT controls how much of that capacity can
+>> actually be reserved; at 100% (its current value), all of it can be.
+>>
+>> Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
+>> ---
+>>   xen/common/sched/rt.c | 105 +++++++++++++++++++++++++++++++++++++++++-
+>>   1 file changed, 104 insertions(+), 1 deletion(-)
+>>
+>> diff --git a/xen/common/sched/rt.c b/xen/common/sched/rt.c
+>> index 0e9f04ea72..9126320801 100644
+>> --- a/xen/common/sched/rt.c
+>> +++ b/xen/common/sched/rt.c
+>> @@ -114,6 +114,24 @@
+>>    */
+>>   #define RTDS_MAX_PRIORITY_LEVEL (~0U)
+>>   +/*
+>> + * Fixed-point scale for utilization (budget/period)
+>> + */
+>> +#define RTDS_UTIL_SHIFT     20
+>> +#define RTDS_UTIL_SCALE     (1ULL << RTDS_UTIL_SHIFT)
+>> +
+>> +/*
+>> + * Largest budget safe to left-shift by RTDS_UTIL_SHIFT without
+>> + * overflowing 64 bits. Enforced in rt_validate_params().
+>> + */
+>> +#define RTDS_MAX_BUDGET_BITS  (64 - RTDS_UTIL_SHIFT)
+>> +#define RTDS_MAX_BUDGET       ((1ULL << RTDS_MAX_BUDGET_BITS) - 1)
+>> +
+>> +/*
+>> + * % of a cpupool's sched_resource capacity admitted units may sum up to.
+>> + */
+>> +#define RTDS_UTIL_CAP_PCT   100
+>> +
+>>   /*
+>>    * UPDATE_LIMIT_SHIFT: a constant used in rt_update_deadline(). When finding
+>>    * the next deadline, performing addition could be faster if the difference
+>> @@ -195,6 +213,9 @@ struct rt_private {
+>>       struct list_head replq;     /* ordered list of units that need replenishment */
+>>         cpumask_t tickled;          /* cpus been tickled */
+>> +
+>> +    /* Sum of admitted units' (budget/period), scaled by RTDS_UTIL_SCALE */
+>> +    uint64_t utilization;
+>>   };
+>>     /*
+>> @@ -635,6 +656,54 @@ replq_reinsert(const struct scheduler *ops, struct rt_unit *svc)
+>>           set_timer(&rt_priv(ops)->repl_timer, rearm_svc->cur_deadline);
+>>   }
+>>   +/*
+>> + * budget << RTDS_UTIL_SHIFT can't overflow: rt_validate_params()
+>> + * caps budget at RTDS_MAX_BUDGET. period == 0 means "no
+>> + * reservation" (a unit being removed), not an error.
+>> + */
+>> +static uint64_t
+>> +rt_unit_utilization(s_time_t period, s_time_t budget)
+>> +{
+>> +    if ( period <= 0 )
+>> +        return 0;
+>> +
+>> +    return ((uint64_t)budget << RTDS_UTIL_SHIFT) / (uint64_t)period;
+>> +}
+>> +
+>> +/*
+>> + * Utilization capacity of the cpupool domain d resides in.
+>> + */
+>> +static uint64_t
+>> +rt_utilization_cap(const struct domain *d)
+>> +{
+>> +    unsigned int cpus = cpumask_weight(cpupool_domain_master_cpumask(d));
+>> +
+>> +    return (uint64_t)cpus * RTDS_UTIL_SCALE * RTDS_UTIL_CAP_PCT / 100;
+>> +}
+>> +
+>> +/*
+>> + * Replaces a unit's reservation and updates prv->utilization
+>> + * to match. Growth that would push utilization over the
+>> + * cpupool's cap is refused. Removing a unit or shrinking
+>> + * a unit's reservation always succeed.
+>> + */
+>> +static int
+>> +rt_admission_test(struct rt_private *prv, const struct domain *d,
+>> +           s_time_t old_period, s_time_t old_budget,
+>> +           s_time_t new_period, s_time_t new_budget)
 > 
-> The mask/match chain is adapted from Linux's KVM RISC-V implementation.
+> I think the function name isn't appropriate. The function doesn't test only, it
+> is setting the utilization, too.
 > 
-> Nothing calls any of this yet, so tag the functions __maybe_unused to
-> keep the build going; the tags go away once emulate_load() and
-> emulate_store() gain their bodies later.
+> What about rt_try_set_utilization() instead? And make the return type bool
+> (true on success).
+> 
+>> +{
+>> +    uint64_t old_util = rt_unit_utilization(old_period, old_budget);
+>> +    uint64_t new_util = rt_unit_utilization(new_period, new_budget);
+>> +    uint64_t total    = prv->utilization - old_util + new_util;
+>> +
+>> +    if ( new_util > old_util && total > rt_utilization_cap(d) )
+>> +        return -EINVAL;
+>> +
+>> +    prv->utilization = total;
+>> +
+>> +    return 0;
+>> +}
+>> +
+>>   /*
+>>    * Pick a valid resource for the unit vc
+>>    * Valid resource of an unit is intesection of unit's affinity
+>> @@ -864,6 +933,7 @@ rt_free_domdata(const struct scheduler *ops, void *data)
+>>   static void * cf_check
+>>   rt_alloc_udata(const struct scheduler *ops, struct sched_unit *unit, void *dd)
+>>   {
+>> +    struct rt_private *prv = rt_priv(ops);
+>>       struct rt_unit *svc;
+>>         /* Allocate per-UNIT info */
+>> @@ -881,9 +951,30 @@ rt_alloc_udata(const struct scheduler *ops, struct sched_unit *unit, void *dd)
+>>       __set_bit(__RTDS_extratime, &svc->flags);
+>>       svc->priority_level = 0;
+>>       svc->period = RTDS_DEFAULT_PERIOD;
+>> +
+>>       if ( !is_idle_unit(unit) )
+>> +    {
+>> +        unsigned long flags;
+>> +        int rc;
+>> +
+>>           svc->budget = RTDS_DEFAULT_BUDGET;
+>>   +        spin_lock_irqsave(&prv->lock, flags);
+>> +        rc = rt_admission_test(prv, unit->domain, 0, 0,
+>> +                                svc->period, svc->budget);
+>> +        spin_unlock_irqrestore(&prv->lock, flags);
+>> +
+>> +        if ( rc )
+>> +        {
+>> +            printk(XENLOG_WARNING
+>> +                   "RTDS: ADMISSION CONTROL: refusing unit %u of d%d,"
+>> +                   " would exceed utilization capacity of the cpupool\n",
+>> +                   unit->unit_id, unit->domain->domain_id);
+>> +            xfree(svc);
+>> +            return NULL;
+>> +        }
+>> +    }
+>> +
+>>       SCHED_STAT_CRANK(unit_alloc);
+>>         return svc;
+>> @@ -892,8 +983,19 @@ rt_alloc_udata(const struct scheduler *ops, struct sched_unit *unit, void *dd)
+>>   static void cf_check
+>>   rt_free_udata(const struct scheduler *ops, void *priv)
+>>   {
+>> +    struct rt_private *prv = rt_priv(ops);
+>>       struct rt_unit *svc = priv;
+>>   +    if ( svc && !is_idle_unit(svc->unit) )
+>> +    {
+>> +        unsigned long flags;
+>> +
+>> +        spin_lock_irqsave(&prv->lock, flags);
+>> +        rt_admission_test(prv, svc->unit->domain,
+>> +                           svc->period, svc->budget, 0, 0);
+> 
+> This use case clearly shows you are not only testing. :-)
+> 
+>> +        spin_unlock_irqrestore(&prv->lock, flags);
+>> +    }
+>> +
+>>       xfree(svc);
+>>   }
+>>   @@ -1389,7 +1491,8 @@ rt_validate_params(const struct xen_domctl_sched_rtds *rtds,
+>>       s_time_t b = MICROSECS(rtds->budget);
+>>         if ( p < RTDS_MIN_PERIOD || p > RTDS_MAX_PERIOD ||
+>> -         b < RTDS_MIN_BUDGET || b > p )
+>> +         b < RTDS_MIN_BUDGET || b > p ||
+>> +         b > (s_time_t)RTDS_MAX_BUDGET )
+>>           return -EINVAL;
+>>         *period = p;
+> 
+> 
+> Juergen
+> 
 
-That'll be a lot of churn to drop those __maybe_unused again. As this
-is merely transient, did you consider putting
+BTW, if the rt_admission_test() returns false in rt_alloc_udata(), 
+vcpu_create() will fail too. This will cause the d->vcpu[i] to become null, 
+and it will crash in sched_move_domain().
 
-   (void)is_load_guest_page_fault;
+So to avoid the crash, this patch needs the v2 of my fix for that.
+https://lore.kernel.org/xen-devel/20260819051532.9197-2-frn1furkan10@gmail.com/
 
-etc in e.g. emulate_load()?
+Juergen, what do you say to acking that v2 fix?
 
-> @@ -13,9 +14,29 @@
->  #include <asm/csr.h>
->  #include <asm/current.h>
->  #include <asm/emulate.h>
-> +#include <asm/guest_access.h>
-> +#include <asm/processor.h>
->  #include <asm/riscv_encoding.h>
->  #include <asm/traps.h>
->  
-> +/*
-> + * Determine the trapped load or store instruction which caused a guest MMIO
-> + * trap.
-> + */
-> +struct decoded_insn {
-> +    /* The instruction itself, and its length in bytes. */
-> +    unsigned long insn;
-> +    unsigned int insn_len;
-> +    /* Width of the memory access, in bytes. */
-> +    unsigned int len;
-> +    /* Number of the register operand: rd for a load, rs2 for a store. */
-> +    unsigned int reg;
-> +    /* The access is a store rather than a load. */
-> +    bool is_write;
-> +    /* The load zero-extends its result rather than sign-extending it. */
-> +    bool is_unsigned;
-> +};
-
-I wonder how efficient this is. With use of bitfield the size of this struct
-can likely be more than halved. With suitable choice of widths this may not
-even cause significantly worse generated code.
-
-One thing in any event: Why would the insn field need to be wider than 32
-bits?
-
-> @@ -39,6 +60,71 @@ struct guest_fault {
->      paddr_t gpa;
->  };
->  
-> +static bool is_load_guest_page_fault(unsigned long scause)
-> +{
-> +    return scause == CAUSE_LOAD_GUEST_PAGE_FAULT;
-> +}
-
-With no "store" counterpart this may end up being a little fragile (at the
-use site(s)).
-
-> +/*
-> + * The effective XLEN of the guest at the point of the trap: hstatus.VSXL for a
-> + * trap taken from VS-mode, vsstatus.UXL for one taken from VU-mode.
-> + *
-> + * VSXL is consulted whichever mode the trap came from, as it also gives the
-> + * width of vsstatus itself: where VSXL says 32, that register has no UXL field
-> + * to consult and VU-mode is 32-bit as well, there being nothing to configure.
-> + *
-> + * It is needed to decode a trapped instruction: the encodings which exist only
-> + * for XLEN=64 must not be recognized for a 32-bit guest. Besides those simply
-> + * being reserved there, the compressed ones are ambiguous: C.LD and C.FLW
-> + * share the encoding 0x6000 (mask 0xe003), and likewise C.SD/C.FSW,
-> + * C.LDSP/C.FLWSP and C.SDSP/C.FSWSP.
-> + *
-> + * IS_ENABLED() can't be used here as HSTATUS_VSXL is defined for
-> + * __riscv_xlen == 64 only, the field not existing on RV32 in the first place.
-> + */
-> +static __maybe_unused unsigned int guest_xlen(const struct cpu_user_regs *regs)
-> +{
-> +#ifdef CONFIG_RISCV_32
-> +    return 32;
-> +#else
-> +    unsigned long xl = MASK_EXTR(regs->hstatus, HSTATUS_VSXL);
-> +
-> +    if ( (xl == XLEN_FIELD_64) && !(regs->sstatus & SSTATUS_SPP) )
-
-How about xl > XLEN_FIELD_32 here, to be RV128-compatible?
-
-> @@ -87,6 +173,250 @@ static void resolve_faulting_gpa(struct guest_fault *gf)
->                (htinst_is_pseudo(gf->htinst) ? 0 : (gf->stval & 3));
->  }
->  
-> +/*
-> + * Where the value of a decoded instruction's register operand is held.
-> + *
-> + * Relies on x0..x31 being laid out at the start of struct cpu_user_regs in
-> + * architectural register-number order; see the comment there.
-> + */
-> +static __maybe_unused unsigned long *guest_gpr(struct cpu_user_regs *regs,
-> +                                               unsigned int reg)
-> +{
-> +    ASSERT(reg < 32);
-> +
-> +    return REG_PTR(reg, 0, regs);
-> +}
-
-For future callers of this: For 32-bit environments hardware guarantees
-upper halves of registers to be zero?
-
-> +/*
-> + * Obtain the instruction which caused a guest MMIO trap, filling in
-> + * @di->insn and @di->insn_len. It either comes transformed in htinst, or has
-> + * to be fetched from guest memory.
-> + *
-> + * Returns true if the fetch faulted in turn; the resulting trap has then
-> + * already been redirected to the guest and there is nothing further for the
-> + * caller to do. Where it returns false, @di has been filled in and emulation
-> + * is to continue.
-> + */
-> +static bool __maybe_unused insn_fetch_faulted(const struct guest_fault *gf,
-> +                                              struct decoded_insn *di)
-> +{
-> +    unsigned long htinst = gf->htinst;
-> +
-> +    /*
-> +     * A pseudoinstruction says nothing about the instruction the guest was
-> +     * executing, and comes with a guest physical address which isn't the one
-> +     * that instruction accessed. handle_guest_page_fault() deals with such a
-> +     * fault on its own, so no emulation can ever start for one.
-> +     */
-> +    ASSERT(!htinst_is_pseudo(htinst));
-> +
-> +    if ( htinst & BIT(0, UL) )
-> +    {
-> +        /*
-> +         * Bit[0] == 1 implies trapped instruction value is
-> +         * transformed instruction or custom instruction.
-> +         *
-> +         * The transformation always yields the 32-bit format, with bits[1:0]
-> +         * holding a marker instead of the original opcode bits: bit[0] set to
-> +         * flag the transformation, bit[1] clear if the trapped instruction
-> +         * was a compressed one. Restoring the opcode bits makes the value the
-> +         * valid 32-bit encoding decode_ldst_insn() matches against. Its
-> +         * INSN_MASK_C_* cases exist for the branch below, where a compressed
-> +         * instruction is read from guest memory as is: a trapped one arrives
-> +         * here already expanded to its 32-bit equivalent, and the opcode bits
-> +         * just restored keep it from matching those cases anyway.
-> +         *
-> +         * The length then cannot come from the value anymore, only from
-> +         * bit[1]. And only a 16- or a 32-bit instruction is ever reported
-> +         * this way: the standard load and store instructions the hardware
-> +         * transforms are all of one of these two lengths, anything else comes
-> +         * as the zero special value handled below.
-> +         */
-> +        di->insn = htinst | INSN_16BIT_MASK;
-> +        di->insn_len = (htinst & BIT(1, UL)) ? 4 : 2;
-
-Hmm, so ->insn_len doesn't describe ->insn, as suggested by the comment in
-the struct. That wants clarifying there.
-
-> +    }
-> +    else
-> +    {
-> +        const struct cpu_user_regs *regs = gf->regs;
-> +        struct trap_info utrap = {};
-> +
-> +        /*
-> +         * Bit[0] == 0 implies trapped instruction value is
-> +         * zero or special value. With the pseudoinstructions ruled out
-> +         * above, only zero is left: the instruction has to be read from
-> +         * guest memory.
-> +         */
-> +
-> +        di->insn = riscv_read_guest(regs->sepc, true, &utrap);
-> +        if ( utrap.scause )
-> +        {
-> +            /*
-> +             * If during getting of trapped instruction a fault happen in
-> +             * G-stage translation then CAUSE_LOAD_GUEST_PAGE_FAULT is
-> +             * generated. Such faults during this operation is considered as
-> +             * bus error.
-> +             */
-> +            if ( is_load_guest_page_fault(utrap.scause) )
-> +                utrap.scause = CAUSE_FETCH_ACCESS;
-> +
-> +            utrap.sepc = regs->sepc;
-
-Couldn't this be part of the initializer of utrap? Or does read_guest()
-alter the field?
-
-> +            trap_redirect(&utrap);
-> +
-> +            return true;
-> +        }
-> +
-> +        /*
-> +         * riscv_read_guest() fetches at most two halfwords, so a wider
-> +         * encoding has been read in part only and cannot be decoded here.
-> +         *
-> +         * Report an illegal instruction, which is what the guest would have
-> +         * got for such an encoding anyway: the ISA defines no instruction
-> +         * wider than 32 bits.
-> +         */
-
-Such wording is at risk of going stale. Better say that no guest-exposed
-extensions have wider than 32-bit insns.
-
-> +        if ( !INSN_IS_16BIT(di->insn) && !INSN_IS_32BIT(di->insn) )
-> +        {
-> +            utrap.sepc = regs->sepc;
-
-With the earlier remark this may then also not be needed here.
-
-> +            utrap.scause = CAUSE_ILLEGAL_INSTRUCTION;
-> +            /*
-> +             * stval is left zero: the spec allows that for an illegal
-> +             * instruction, and only part of the instruction is in hand.
-> +             */
-
-Not just this - stval may also not be wide enough to hold the full insn.
-
-> +            trap_redirect(&utrap);
-> +
-> +            return true;
-> +        }
-> +
-> +        di->insn_len = INSN_LEN(di->insn);
-
-If you moved this up a little, you could avoid the separate use of
-INSN_{32,64}BIT_MASK above, by going from the value calculated here.
-
-> +    }
-> +
-> +    return false;
-> +}
-> +
-> +/*
-> + * Decode the load or store instruction fetched into @di, filling in the
-> + * remaining fields of it (@di->insn and @di->insn_len are filled by
-> + * insn_fetch_faulted()).
-> + *
-> + * @xlen is the effective XLEN of the guest, needed as
-> + * the encodings which exist for XLEN=64 only must not be recognized for a
-> + * 32-bit guest.
-> + *
-> + * Returns false if the instruction is not a load or store which can be
-> + * emulated here.
-> + */
-> +static __maybe_unused bool decode_ldst_insn(struct decoded_insn *di,
-> +                                            unsigned int xlen)
-> +{
-> +    unsigned long insn = di->insn;
-> +    /* Register fields of the uncompressed forms ... */
-> +    unsigned int rd = RV_RD(insn);
-> +    unsigned int rs2 = RV_RS2(insn);
-> +    /*
-> +     * ... and of the compressed ones, where the 3-bit field selects one of
-> +     * x8..x15, while the stack-pointer-relative forms have a full-width one.
-> +     */
-> +    unsigned int rs2s = RVC_RS2S(insn);
-> +    unsigned int rs2c = RVC_RS2(insn);
-> +
-> +    di->is_write = false;
-> +    di->is_unsigned = false;
-
-Elsewhere we established that the whole struct has to start out zeroed.
-Why not leverage that also here?
-
-> +    di->reg = rd;
-> +
-> +    if ( (insn & INSN_MASK_LB) == INSN_MATCH_LB )
-> +        di->len = 1;
-> +    else if ( (insn & INSN_MASK_LBU) == INSN_MATCH_LBU )
-> +    {
-> +        di->len = 1;
-> +        di->is_unsigned = true;
-> +    }
-> +    else if ( (insn & INSN_MASK_LH) == INSN_MATCH_LH )
-> +        di->len = 2;
-> +    else if ( (insn & INSN_MASK_LHU) == INSN_MATCH_LHU )
-> +    {
-> +        di->len = 2;
-> +        di->is_unsigned = true;
-> +    }
-> +    else if ( (insn & INSN_MASK_LW) == INSN_MATCH_LW )
-> +        di->len = 4;
-> +    else if ( xlen == 64 && (insn & INSN_MASK_LWU) == INSN_MATCH_LWU )
-> +    {
-> +        di->len = 4;
-> +        di->is_unsigned = true;
-> +    }
-> +    else if ( (insn & INSN_MASK_C_LW) == INSN_MATCH_C_LW )
-> +    {
-> +        di->len = 4;
-> +        di->reg = rs2s;
-> +    }
-
-These insns encode the access width uniformly, i.e. doing things the
-way done above is rather inefficient.
-
-> +    /* c.lwsp and c.ldsp are reserved with rd being x0. */
-> +    else if ( (insn & INSN_MASK_C_LWSP) == INSN_MATCH_C_LWSP && rd )
-> +        di->len = 4;
-
-Careful with insns not part of the base ISA: Between the trap and you
-getting to fetch and decode, the in-memory insn may have changed. You
-posibly set yourself up for vulnerabilities if you permit C encodings
-for guests not having C exposed to them.
-
-Jan
+Furkan
 
