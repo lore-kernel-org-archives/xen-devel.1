@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2870DC88E5C
-	for <xen-devel@archiver.kernel.org>; Sun, 13 Sep 2026 23:34:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420317.1646707 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9293C88E64
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 02:25:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420363.1646716 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5thy-0008Nz-Ra; Sun, 13 Sep 2026 23:34:02 +0000
+	id 1x5wMt-0005Ja-GJ; Mon, 14 Sep 2026 02:24:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420317.1646707; Sun, 13 Sep 2026 23:34:02 +0000
+Received: by outflank-mailman (output) from mailman id 1420363.1646716; Mon, 14 Sep 2026 02:24:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5thy-0008Nf-MD; Sun, 13 Sep 2026 23:34:02 +0000
-Received: by outflank-mailman (input) for mailman id 1420317;
- Sun, 13 Sep 2026 23:34:02 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x5wMt-0005JS-BT; Mon, 14 Sep 2026 02:24:27 +0000
+Received: by outflank-mailman (input) for mailman id 1420363;
+ Mon, 14 Sep 2026 02:24:26 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <linusw@kernel.org>) id 1x5thy-0008NZ-2U
- for xen-devel@lists.xenproject.org; Sun, 13 Sep 2026 23:34:02 +0000
+ (envelope-from <ziy@nvidia.com>) id 1x5wMs-0005JM-0s
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 02:24:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x5thw-001sao-MF
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 01:34:00 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x5wMr-001z90-60
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 04:24:25 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <linusw@kernel.org>)
- id 6aa732e3-2eae-0a2a0a5409dd-0a2a4509c6ba-8
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 01:34:00 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <linusw@kernel.org>)
- id 6aa732e7-be1a-0a2a45090019-ac6904fe9282-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 01:34:00 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id BB0D16101B
- for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 23:33:58 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 72CEF1F00893
- for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 23:33:58 +0000 (UTC)
-Received: by mail-lf2-f13.google.com with SMTP id
- 2adb3069b0e04-5b5e4f1651bso1130426e87.3
- for <xen-devel@lists.xenproject.org>; Sun, 13 Sep 2026 16:33:58 -0700 (PDT)
+ (envelope-from <ziy@nvidia.com>)
+ id 6aa75a3f-bab6-0a2a0a5309dd-0a2a45019464-30
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 04:24:24 +0200
+Received: from [40.107.209.26]
+ (helo=PH8PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ziy@nvidia.com>)
+ id 6aa75ad7-5984-0a2a45010019-286bd11ac12a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 04:24:24 +0200
+Received: from IA0PR12MB8374.namprd12.prod.outlook.com (2603:10b6:208:40e::7)
+ by DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 14 Sep
+ 2026 02:24:17 +0000
+Received: from IA0PR12MB8374.namprd12.prod.outlook.com
+ ([fe80::d85f:4c87:ae84:3f16]) by IA0PR12MB8374.namprd12.prod.outlook.com
+ ([fe80::d85f:4c87:ae84:3f16%5]) with mapi id 15.21.0406.007; Mon, 14 Sep 2026
+ 02:24:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,69 +55,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="References:In-Reply-To:From:Date:Subject:To:Cc"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789342438;
-	bh=zng3/lheQcHYHRf6apSQbhsdybFIgxHykd4cCeRSALs=;
-	h=References:In-Reply-To:From:Date:Subject:To:Cc;
-	b=DIuwo+91E9j6P8gcffxeTWibtVYK84E/K0zWh6s/Yed5HdTiBGh4yJD4g8Yy7YMzp
-	 Zmb9UrM8SFiukhfEjKlqn74cChv71bxCDBhiCj/l/UQfge2Dm3qkgzsFbSGyqVSqpp
-	 Udm+lm2P+eabpV3YMbxtjsRr06pb7oVPf73ngoGqP6jy/KVGDLhpFrdPO/yuSXNhqF
-	 P/mNOKNoJ2KD2X8EoD31TZAHK6RsTWpDJuSUh375d6tPe7PrV/jmdpTbTzJGdzxjb1
-	 iEp1c93xdl5nZIFDK9qu4pTXYFgqdfiS/ApZ0qsmVcVZZzCDaVwmiBwLQzxdIQXZR+
-	 f0lsIW/5EvTVw==
-X-Forwarded-Encrypted: i=1; AKwUvBwNjz62Bw2CcTiU5HLAm59nqbqAe1R9fUULTmWYLyhBAZGDa06XjddaWy25vTLiv4VxFftJ82hFAFE=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kgomAbfK0xV+tcc50biQYM3nwfInS8PxmJukPUFICxgzvBL7dJ
-	GiG+6wA9KTOoHavgc2pgR84J/a7aEUFVRnMRCTQcjxDCntpMy+BvPCxjq++70UntaZgf6E87El1
-	JZW5diflde9Qy371+g47xyp0AHudl5G0=
-X-Received: by 2002:a05:6512:2204:b0:5b8:9a2d:38d with SMTP id
- 2adb3069b0e04-5b8ae8a73aemr7507e87.56.1789342437102; Sun, 13 Sep 2026
- 16:33:57 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=selector2 header.d=Nvidia.com header.i="@Nvidia.com"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Sp7a8N+W7oK58Yehu//myQNUCEHc92N00qTl7DWhS6ZgaVp3rm9mH4wVZ4kamCZuFW+GhJHHvuOL5XY03V/qqD57s1xEq7tUkGZJ+Wk9dtuCjMuDHmenCi/jcMxL65PCZC7jIz97Q17pEztE6F/6BdK/8UmDH5UlVdqi3w6XDDfXNRsyex9A7LFj1h3j3pG9GsQHO2enNWIxUF0CytI+5wYJFWxaEnOkQvUuMT8TyYK0qdavlbRiaoiZy9pA/fLAUpzWYIiiJYocriY8ewSci9lNcKud1Bvh6pd9IuN0srN/deH3+Ux2Kf9lFKxXyd6gpKNDwbOaCCmTdEQ+mhOJrQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=zUjuXILVzjba9z+thh3HvZCbjHvrFmluDi/6zJAquZA=;
+ b=FWDgr3fAx2uhKI0H/zwX6hCAP85EASuBYBwbUAZ9do28DW3Zch4cQF9EdDp2FZqUwp/8tOyF4xnmDk22PwTvG5q++i2fBpyrAObzieiodpsWDQGvNz0aLHFAYuNubuySRLeJQAB+WcTlsMaCDmafgLq+tNz+ZVPbv4mfRx7GU8Y4FIy+8T/tMwbWa3apqA8Zkii1S8RDVSldX0TaYOXtycda33UQvtOzYOD/MxSUHZJ4oBI9lr7iarVo7GLWlaKU9RHIlYx7+sxAWOf1zT7er+/OEQk3fZ9aM3B8GYRZCm+/s8/UAXWpszDSWYhXBGM/IBCX5uFdhMZcEKCQHkvLqQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=zUjuXILVzjba9z+thh3HvZCbjHvrFmluDi/6zJAquZA=;
+ b=tgTgabpyBmDE0mCjoSaz7la/NJHpLJTA0QNH8L/8JGOH/adKuXwr99veXr6SGMiuvlV0V6m07iB3Nh2WHjkXuLGoC4FsaMZvcc4M3uArrl6yOCiuTzPT1zwPqvCjvNyBmcZwHw67y2gKDu/AlQhrhITRjCoYCZycgjANQLBHkGipxhW/XJpfvBXiBFQ57DRQqDbi/IZTe5cpWZrS8pAqzHRHqm83h6AAgQ1Z0ltHLJ9V2o7hWVoTHh1XocrzjJaHD2p1KTNLfKnLJ+HSNNpoyJN6SL9F+cbrG138oVtt/i/eVg1fxbDZD/26wMNE/RsjnZZoWft6maCaDTSbX/MMfQ==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+From: Zi Yan <ziy@nvidia.com>
+Date: Sun, 13 Sep 2026 22:24:01 -0400
+Subject: [PATCH v4 03/16] xen/grant-table: stop setting PG_private on pages
+ for grant mapping
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260913-remove-pg_private-v4-3-848550f7574e@nvidia.com>
+References: <20260913-remove-pg_private-v4-0-848550f7574e@nvidia.com>
+In-Reply-To: <20260913-remove-pg_private-v4-0-848550f7574e@nvidia.com>
+To: David Hildenbrand <david@kernel.org>, 
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>, 
+ Andrew Morton <akpm@linux-foundation.org>, 
+ Muchun Song <muchun.song@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>, 
+ "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
+ Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+ Michal Hocko <mhocko@suse.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+ Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>, 
+ Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, 
+ Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>, 
+ Gregory Price <gourry@gourry.net>, 
+ Ying Huang <ying.huang@linux.alibaba.com>, 
+ Alistair Popple <apopple@nvidia.com>, Johannes Weiner <hannes@cmpxchg.org>, 
+ Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+ Kairui Song <kasong@tencent.com>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+ Zi Yan <ziy@nvidia.com>, Juergen Gross <jgross@suse.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
+ xen-devel@lists.xenproject.org
+X-Mailer: b4 0.16.0
+X-ClientProxiedBy: MN0PR03CA0020.namprd03.prod.outlook.com
+ (2603:10b6:208:52f::27) To IA0PR12MB8374.namprd12.prod.outlook.com
+ (2603:10b6:208:40e::7)
 MIME-Version: 1.0
-References: <20260727-drm-simple-kms-removal-v3-0-cd5dc89858c6@oss.qualcomm.com>
- <20260727-drm-simple-kms-removal-v3-4-cd5dc89858c6@oss.qualcomm.com>
-In-Reply-To: <20260727-drm-simple-kms-removal-v3-4-cd5dc89858c6@oss.qualcomm.com>
-From: Linus Walleij <linusw@kernel.org>
-Date: Mon, 14 Sep 2026 01:33:45 +0200
-X-Gmail-Original-Message-ID: <CAD++jLnN-dhwxWwgmWYVD7COhvVsTxbiexHwoFkzgv8ucGhxqw@mail.gmail.com>
-X-Gm-Features: AcwNN1XTt4ClabPMabRSeCfNHr3d8Y53WJSzGM-8HBGT1SAK6TVjQKD-jMPJbKA
-Message-ID: <CAD++jLnN-dhwxWwgmWYVD7COhvVsTxbiexHwoFkzgv8ucGhxqw@mail.gmail.com>
-Subject: Re: [PATCH v3 4/8] drm/pl111: replace struct drm_simple_display_pipe
- with regular atomic helpers
-To: Ze Huang <ze.huang@oss.qualcomm.com>
-Cc: Alexey Brodkin <abrodkin@synopsys.com>, 
-	Maarten Lankhorst <maarten.lankhorst@linux.intel.com>, Maxime Ripard <mripard@kernel.org>, 
-	Thomas Zimmermann <tzimmermann@suse.de>, David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, 
-	Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@codeconstruct.com.au>, 
-	Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>, 
-	Pengutronix Kernel Team <kernel@pengutronix.de>, Fabio Estevam <festevam@gmail.com>, 
-	Hans de Goede <hansg@kernel.org>, Alex Lanzano <lanzano.alex@gmail.com>, 
-	Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>, dri-devel@lists.freedesktop.org, 
-	linux-kernel@vger.kernel.org, linux-aspeed@lists.ozlabs.org, 
-	linux-arm-kernel@lists.infradead.org, imx@lists.linux.dev, 
-	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-bad1c0/1789342440-BDEC6034-4CD608EF/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA0PR12MB8374:EE_|DS0PR12MB6486:EE_
+X-MS-Office365-Filtering-Correlation-Id: 982e5414-cdc7-43f1-3bd0-08df12074690
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|7416014|366016|376014|1800799024|22082099003|18002099003|921020|10067099003|56012099006|11063799006;
+X-Microsoft-Antispam-Message-Info:
+	z/p1/yzLc53JZYZ53rmd6dC7B8L8w49/gMQIhGR5QrVHUh2j7O2ONa48qlZznHbJHHion+Ak5rQoMEcxqjOhfla0nLfQWree90L1bause5fzWfCVNwirnthORJ/vBOEdWOo/WN0TvQ28YG7CsUhHx3biEDWDj/LZvwryd8xnuJS7ils5oqyvcwMcg2G8ICND4SdpKu1YVKrgJOeOioarOycaux98PW1Q0BJheuya+ZsQ1mjgx1xgoIOxqChcGDYp+Txu5XZiGLY8rPLk83FChwpnRooWCdqHKN7XAzLsM4b4ZFhJx/H6iYIQDqpxo0lcYijMmvsmuu6LlVFe8nTS5YoJQBlBT3B0Zy9xoBfqDzWTzPrq45OxQz/7Ni+ec0Tr2matRDgbNGlwXnaoXREkaICDQpmzBrMBp4fdtLBWw9ALUbLeOTwxrovQdO1P+ruGEnbuUtFF+kv3jcyklVGeIxpcivXGGuRamiLh9EFo3fhAvQIt9RU4+3VFWJyMKFgJ15BTNiVw6cYbIQ3U4pmb5krdyStnzoiVVxo0MmJqKkZ3bS6q0Zv53zw1EvqdXQ8AhvzUhbMEq/Hav4OeRn6ODjh+00SWRsjdsOZj6/3PbNYdsw2lv03YYQ9IBWKYLY6htsIyyCu67XGkVVFqJdacMGqIGIz9obMZadbHmiBqPcI1VqKXA5qIfBWvUUfSIHrqPg0beVreRPsMdUy3scJ3zQ==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR12MB8374.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(366016)(376014)(1800799024)(22082099003)(18002099003)(921020)(10067099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?d0dPWnF2NWlvUmZxaW5RcnRkWDRxUU1jOTA3Z2l5eVF6cDBHalkzaDQ5cXlP?=
+ =?utf-8?B?a2JBUUlRTUtJM3F3R01BWHdBZkRNa0paMFN2b1BQckJjNGxaUmJnb053YVJG?=
+ =?utf-8?B?bU5IbWxJb1M4N1RnaWlndmIrdVVyMWhLS1hNbEk4ZGh4TGN0N3M5bk1uSjNP?=
+ =?utf-8?B?V01XWVNxSkh2bFVOZm5pWGtIVUttQ1d5a0hMQy95dGt5QWZGVUNzOGplTWhF?=
+ =?utf-8?B?U2NabUxSdE9GemxsdlMzdjNVMFZqS2ZiN2d2ZUljekQ4NUZXTmRpSzZqZmMz?=
+ =?utf-8?B?Um1GM013YmhINUd0Q0d1aHl3ZVFBWnFOVnpJSGJIUEZrWkVWTzFhdnJZZVNs?=
+ =?utf-8?B?UGlrdmRncEFDOW13Y25LOXZQRmlwaTdFbHhqTGY4MTRrT1BLSnNLams5SEdU?=
+ =?utf-8?B?a1VlTlduLy8vZmRkeXNpTm5VTDU5MFRmS2JPUkZ0YzJ6bGNJNnBiVmtkMjJY?=
+ =?utf-8?B?RjcxdGphRjZ2M0lSTFY3UVN4cTA2SVhRUG5QWDdmaTk4cTlnRVMwUGtTamlr?=
+ =?utf-8?B?TUFETjY2UVllTVFTRFlCQUlGTG9KdHpzdUdVeGhPRjNwMFl2RzB0Mkk3UVg0?=
+ =?utf-8?B?bHlNT1hVMGRhZEtwVTRub1A3VjZkMjBhc0VmdG94L2xseW8wZFN4bnZtd1Qr?=
+ =?utf-8?B?MGIxS2JJZXROSHFvNElvYjZMVVJFeTlPWWNVUndjRnB1UGZxMXNXb20wNVFw?=
+ =?utf-8?B?V3laUnZBQk03ZzQxRGUxODRDSXFLTnErcEZEcFZBUHZZbVlwMnk5UWRVZXRk?=
+ =?utf-8?B?b2F2L055K00wYVB3VHhvTy9JaUhOME8xWFlIVDZBZTRidUsvNm9iak8rYy93?=
+ =?utf-8?B?NUdCTDhEUzVVQzZCUnpCMzJzN1phaWxtai94dkYxZS9BTENTbUM2ZElVMkpY?=
+ =?utf-8?B?NlFTQm1CQ0w3SjdVcWYwVFcrL3ZXdmJvZy81YnpMZEpFRFc5Rm5ZU0FUcC8w?=
+ =?utf-8?B?Qk8rQmRYc0tiaVdVUmFleXFjZytPMUlGRGZpbGlMdHR1dElVU2VXTEtQcE1Q?=
+ =?utf-8?B?dDFxa1ZiNEVhN0pVcUxodnY0QXFOZFFmQ1cySEtnWlVSb25ieGsxUWhxUWtE?=
+ =?utf-8?B?anNQdEdQRHk5Ymt2aWl3K0Vkb1ROVnJMOVdxVFhwZG9uTmVqUTE5eVRZbkNv?=
+ =?utf-8?B?bGliQ3VpVDZlTnl2NDZXTFE5RTRqRHMyQnBjUVgwZnpwdUFCNWg2WEMxazAx?=
+ =?utf-8?B?U2I3V0tEajNHNS9jVDZxVTA2UlZPM0VCWWhlaDNkanBQc1JDaWhHWktaellz?=
+ =?utf-8?B?eE5JMEVVYSt5eGxGL0JUMnNOQnBJRXJ0NU13SWpYaGN0Tml0WU14YWh2dGU2?=
+ =?utf-8?B?d2tSU1RmS1VDS2VTREJRSkJGSWt6TXl0V3BBd054d0VaQVlySVVKcHoxNFBi?=
+ =?utf-8?B?VlAxSWE4NklwYllYV051SC9xQXJGZ3MzMi9OOG1rVlpBK2YwOUJFSHh0RURX?=
+ =?utf-8?B?bUx4Z1RLd1p3dnhBUDRUZFV3bGNodFJjZWNOSW0zM21aMENldlZGYUNUNHhW?=
+ =?utf-8?B?cmtkRHdKZTcyMHFkeEdpVWJiQlpWaHRLUjJja0sxYmNudFB0WU1ZS0VNKzdN?=
+ =?utf-8?B?U2h3ZjV5VW0xQVVBRmlmaEtnRk1IRW1teGE3ODF4b1ZPRWh1TXVGUnFyTndv?=
+ =?utf-8?B?cE9CYWhxU2lWOTJTb1ZzTjE0M3J5NW16ZGJlK050Rzd5blQ2ZGhvTDJObTd6?=
+ =?utf-8?B?blJlNm5naGpmdnpOZHM3NzdsQkVPZTZCa1RwSjYzVnNCODRtSGpOMHJFVmZ2?=
+ =?utf-8?B?cWpRUEozcGR1RkJ0Rm5ERzNINHJZVFZqd2N2VzFLbzY3V0p3R0ttNDIrSzlt?=
+ =?utf-8?B?OTNWVFNOKzFXNzZjMlhuWGZrejBZd1ROQ0Q0RnFyak96TGtuZ1RFdmdUdVNr?=
+ =?utf-8?B?RWc0d09vZ1VjNGQ1UFJQb3l2VlV2RVJoR1lnUmswUjFYZURUUVhXVmE1QU1O?=
+ =?utf-8?B?QU50V1F2NG5oS3NpQ0xkek40RkFnQVV6cVBKdFJSV3Fod2hwQkNIKzVWQzBR?=
+ =?utf-8?B?QStNTDJSZ00velBQKzNMVXQvYlpRYUY1ZWtVQTJCVjBQK3ZvLytMRVNhRkt0?=
+ =?utf-8?B?QzBiaDJZZHhGNWtreFZyemw0UkZGS1htRjZXZzRZaEk4Rys3bUlObWZGWjVX?=
+ =?utf-8?B?eEttRGVDYkUyRFgwREJrZVpTTWhoK2RYWlhVQ2xlZlVEdlYzNlFGSldhWG5w?=
+ =?utf-8?B?M0dMbFR5dWVZZGZIeWt5aWFqeVNheXczM2k0dUdFQ2VrMkU4VzBWSU02dU04?=
+ =?utf-8?B?Tit5QU9UeWx1VGptSHFMd2EzcElRaHEwVUpJbS8xNXV0TllYMGhNMGxUOXpn?=
+ =?utf-8?Q?ja6n8QxfWm22fveCv8?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 982e5414-cdc7-43f1-3bd0-08df12074690
+X-MS-Exchange-CrossTenant-AuthSource: IA0PR12MB8374.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 02:24:16.8986
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: To3O9zZcW/LMdCtzpMacLnBBGk++x3Djb34juhRZC6KxlJaWhOUdimgBAOw6n/v2
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6486
+X-purgate-ID: tlsNG-d62444/1789352664-1FE68757-B19921BA/0/0
 X-purgate-type: clean
-X-purgate-size: 553
+X-purgate-size: 2028
 
-On Sun, Jul 26, 2026 at 9:46=E2=80=AFPM Ze Huang <ze.huang@oss.qualcomm.com=
-> wrote:
+gnttab_alloc_pages() stores xen_page_foreign in page->private. On 32-bit, a
+pointer to an allocated xen_page_foreign is stored; on 64-bit,
+xen_page_foreign is stored inline. Checking page->private != NULL is enough
+to tell whether a xen_page_foreign needs to be freed on 32-bit and
+page->private is zeroed unconditionally on 64-bit.
 
-> Replace the PL111 simple display pipe with explicit plane, CRTC and
-> encoder objects.
->
-> Move the existing timing, format and pitch validation into explicit
-> atomic check paths. Use commit-local plane state in the CRTC enable path
-> when reading framebuffer format state.
->
-> Move page-flip event handling to the CRTC commit path.
->
-> Signed-off-by: Ze Huang <ze.huang@oss.qualcomm.com>
+It prepares for a future commit that remove PG_private.
 
-This patch 4/8 applied for next.
+No functional change intended.
 
-Yours,
-Linus Walleij
+Assisted-by: LLM
+Signed-off-by: Zi Yan <ziy@nvidia.com>
+To: Juergen Gross <jgross@suse.com>
+To: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: xen-devel@lists.xenproject.org
+Cc: linux-kernel@vger.kernel.org
+---
+ drivers/xen/grant-table.c | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/drivers/xen/grant-table.c b/drivers/xen/grant-table.c
+index 69922be28b54c..993f89f048e21 100644
+--- a/drivers/xen/grant-table.c
++++ b/drivers/xen/grant-table.c
+@@ -863,10 +863,10 @@ EXPORT_SYMBOL_GPL(gnttab_free_auto_xlat_frames);
+ 
+ int gnttab_pages_set_private(int nr_pages, struct page **pages)
+ {
++#if BITS_PER_LONG < 64
+ 	int i;
+ 
+ 	for (i = 0; i < nr_pages; i++) {
+-#if BITS_PER_LONG < 64
+ 		struct xen_page_foreign *foreign;
+ 
+ 		foreign = kzalloc_obj(*foreign);
+@@ -874,9 +874,9 @@ int gnttab_pages_set_private(int nr_pages, struct page **pages)
+ 			return -ENOMEM;
+ 
+ 		set_page_private(pages[i], (unsigned long)foreign);
+-#endif
+-		SetPagePrivate(pages[i]);
+ 	}
++#endif
++	/* Data is stored in page->private on 64-bit */
+ 
+ 	return 0;
+ }
+@@ -1031,12 +1031,11 @@ void gnttab_pages_clear_private(int nr_pages, struct page **pages)
+ 	int i;
+ 
+ 	for (i = 0; i < nr_pages; i++) {
+-		if (PagePrivate(pages[i])) {
+ #if BITS_PER_LONG < 64
++		if (page_private(pages[i]))
+ 			kfree((void *)page_private(pages[i]));
+ #endif
+-			ClearPagePrivate(pages[i]);
+-		}
++		set_page_private(pages[i], 0);
+ 	}
+ }
+ EXPORT_SYMBOL_GPL(gnttab_pages_clear_private);
+
+-- 
+2.53.0
+
 
