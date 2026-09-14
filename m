@@ -4,46 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B9293C88E64
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 02:25:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420363.1646716 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67158C88E50
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 03:40:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420382.1646726 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5wMt-0005Ja-GJ; Mon, 14 Sep 2026 02:24:27 +0000
+	id 1x5xY9-0008Pl-Po; Mon, 14 Sep 2026 03:40:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420363.1646716; Mon, 14 Sep 2026 02:24:27 +0000
+Received: by outflank-mailman (output) from mailman id 1420382.1646726; Mon, 14 Sep 2026 03:40:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x5wMt-0005JS-BT; Mon, 14 Sep 2026 02:24:27 +0000
-Received: by outflank-mailman (input) for mailman id 1420363;
- Mon, 14 Sep 2026 02:24:26 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x5xY9-0008Pd-MH; Mon, 14 Sep 2026 03:40:09 +0000
+Received: by outflank-mailman (input) for mailman id 1420382;
+ Mon, 14 Sep 2026 03:40:08 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ziy@nvidia.com>) id 1x5wMs-0005JM-0s
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 02:24:26 +0000
+ (envelope-from <akpm@linux-foundation.org>) id 1x5xY8-0008OS-2w
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 03:40:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x5wMr-001z90-60
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 04:24:25 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x5xY7-002Eii-1N
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 05:40:07 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ziy@nvidia.com>)
- id 6aa75a3f-bab6-0a2a0a5309dd-0a2a45019464-30
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 04:24:24 +0200
-Received: from [40.107.209.26]
- (helo=PH8PR06CU001.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ziy@nvidia.com>)
- id 6aa75ad7-5984-0a2a45010019-286bd11ac12a-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 04:24:24 +0200
-Received: from IA0PR12MB8374.namprd12.prod.outlook.com (2603:10b6:208:40e::7)
- by DS0PR12MB6486.namprd12.prod.outlook.com (2603:10b6:8:c5::21) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Mon, 14 Sep
- 2026 02:24:17 +0000
-Received: from IA0PR12MB8374.namprd12.prod.outlook.com
- ([fe80::d85f:4c87:ae84:3f16]) by IA0PR12MB8374.namprd12.prod.outlook.com
- ([fe80::d85f:4c87:ae84:3f16%5]) with mapi id 15.21.0406.007; Mon, 14 Sep 2026
- 02:24:17 +0000
+ (envelope-from <akpm@linux-foundation.org>)
+ id 6aa76c81-bab6-0a2a0a5309dd-0a2a4508a836-12
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 05:40:06 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <akpm@linux-foundation.org>)
+ id 6aa76c93-f659-0a2a45080019-aceafc1f9d02-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 05:40:05 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 8DFC540A5C;
+ Mon, 14 Sep 2026 03:40:02 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 92FF91F000FF;
+ Mon, 14 Sep 2026 03:39:59 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,191 +50,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=selector2 header.d=Nvidia.com header.i="@Nvidia.com"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Sp7a8N+W7oK58Yehu//myQNUCEHc92N00qTl7DWhS6ZgaVp3rm9mH4wVZ4kamCZuFW+GhJHHvuOL5XY03V/qqD57s1xEq7tUkGZJ+Wk9dtuCjMuDHmenCi/jcMxL65PCZC7jIz97Q17pEztE6F/6BdK/8UmDH5UlVdqi3w6XDDfXNRsyex9A7LFj1h3j3pG9GsQHO2enNWIxUF0CytI+5wYJFWxaEnOkQvUuMT8TyYK0qdavlbRiaoiZy9pA/fLAUpzWYIiiJYocriY8ewSci9lNcKud1Bvh6pd9IuN0srN/deH3+Ux2Kf9lFKxXyd6gpKNDwbOaCCmTdEQ+mhOJrQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=zUjuXILVzjba9z+thh3HvZCbjHvrFmluDi/6zJAquZA=;
- b=FWDgr3fAx2uhKI0H/zwX6hCAP85EASuBYBwbUAZ9do28DW3Zch4cQF9EdDp2FZqUwp/8tOyF4xnmDk22PwTvG5q++i2fBpyrAObzieiodpsWDQGvNz0aLHFAYuNubuySRLeJQAB+WcTlsMaCDmafgLq+tNz+ZVPbv4mfRx7GU8Y4FIy+8T/tMwbWa3apqA8Zkii1S8RDVSldX0TaYOXtycda33UQvtOzYOD/MxSUHZJ4oBI9lr7iarVo7GLWlaKU9RHIlYx7+sxAWOf1zT7er+/OEQk3fZ9aM3B8GYRZCm+/s8/UAXWpszDSWYhXBGM/IBCX5uFdhMZcEKCQHkvLqQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=zUjuXILVzjba9z+thh3HvZCbjHvrFmluDi/6zJAquZA=;
- b=tgTgabpyBmDE0mCjoSaz7la/NJHpLJTA0QNH8L/8JGOH/adKuXwr99veXr6SGMiuvlV0V6m07iB3Nh2WHjkXuLGoC4FsaMZvcc4M3uArrl6yOCiuTzPT1zwPqvCjvNyBmcZwHw67y2gKDu/AlQhrhITRjCoYCZycgjANQLBHkGipxhW/XJpfvBXiBFQ57DRQqDbi/IZTe5cpWZrS8pAqzHRHqm83h6AAgQ1Z0ltHLJ9V2o7hWVoTHh1XocrzjJaHD2p1KTNLfKnLJ+HSNNpoyJN6SL9F+cbrG138oVtt/i/eVg1fxbDZD/26wMNE/RsjnZZoWft6maCaDTSbX/MMfQ==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-From: Zi Yan <ziy@nvidia.com>
-Date: Sun, 13 Sep 2026 22:24:01 -0400
-Subject: [PATCH v4 03/16] xen/grant-table: stop setting PG_private on pages
- for grant mapping
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260913-remove-pg_private-v4-3-848550f7574e@nvidia.com>
-References: <20260913-remove-pg_private-v4-0-848550f7574e@nvidia.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=korg header.d=linux-foundation.org header.i="@linux-foundation.org" header.h="Date:From:To:Cc:Subject:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+	d=linux-foundation.org; s=korg; t=1789357202;
+	bh=x5zisV7HoQ8XMweM1XOT4E07P1NlnKsteMfQzVmO4Js=;
+	h=Date:From:To:Cc:Subject:In-Reply-To:References;
+	b=pHy6fbeflVTU8QtsqFS5eh8OvOR3ntwRr+lHZYMkoAT3ltm91/zKHpwN5XKZntEOS
+	 ILIVvwKavB+/VLgc77oFP5R90/PbqE2ALcouMF/TdFK9XZ9ovr5QioyLZB1yLh6r2e
+	 gdt1bOJXa+0zPlb1i7I7WNxSlmbqXRfHn0UsNCp4=
+Date: Sun, 13 Sep 2026 20:39:59 -0700
+From: Andrew Morton <akpm@linux-foundation.org>
+To: Zi Yan <ziy@nvidia.com>
+Cc: David Hildenbrand <david@kernel.org>, "Matthew Wilcox (Oracle)"
+ <willy@infradead.org>, Muchun Song <muchun.song@linux.dev>, Lorenzo Stoakes
+ <ljs@kernel.org>, "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka
+ <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan
+ <surenb@google.com>, Michal Hocko <mhocko@suse.com>, Baolin Wang
+ <baolin.wang@linux.alibaba.com>, Nico Pache <nico.pache@linux.dev>, Ryan
+ Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>, Barry Song
+ <baohua@kernel.org>, Lance Yang <lance.yang@linux.dev>, Usama Arif
+ <usama.arif@linux.dev>, Gregory Price <gourry@gourry.net>, Ying Huang
+ <ying.huang@linux.alibaba.com>, Alistair Popple <apopple@nvidia.com>,
+ Johannes Weiner <hannes@cmpxchg.org>, Qi Zheng <qi.zheng@linux.dev>,
+ Shakeel Butt <shakeel.butt@linux.dev>, Kairui Song <kasong@tencent.com>,
+ linux-mm@kvack.org, linux-kernel@vger.kernel.org, Minchan Kim
+ <minchan@kernel.org>, Sergey Senozhatsky <senozhatsky@chromium.org>, Peter
+ Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, Arnaldo
+ Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>,
+ Thomas Gleixner <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>, Dave
+ Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, Mark Rutland
+ <mark.rutland@arm.com>, Alexander Shishkin
+ <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>, Ian
+ Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>, James
+ Clark <james.clark@linaro.org>, "H. Peter Anvin" <hpa@zytor.com>,
+ linux-perf-users@vger.kernel.org, Juergen Gross <jgross@suse.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko
+ <oleksandr_tyshchenko@epam.com>, xen-devel@lists.xenproject.org, Eric
+ Biggers <ebiggers@kernel.org>, "Theodore Y. Ts'o" <tytso@mit.edu>, Jaegeuk
+ Kim <jaegeuk@kernel.org>, linux-fscrypt@vger.kernel.org, Oscar Salvador
+ <osalvador@suse.de>, Chao Yu <chao@kernel.org>,
+ linux-f2fs-devel@lists.sourceforge.net, Tal Zussman <tz2294@columbia.edu>,
+ Gao Xiang <xiang@kernel.org>, Jan Kara <jack@suse.cz>, Yue Hu
+ <zbestahu@gmail.com>, Jeffle Xu <jefflexu@linux.alibaba.com>, Sandeep
+ Dhavale <dhavale@google.com>, Hongbo Li <hongbohbli@tencent.com>, Chunhai
+ Guo <guochunhai@vivo.com>, linux-erofs@lists.ozlabs.org,
+ linux-fsdevel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>, Masami
+ Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers
+ <mathieu.desnoyers@efficios.com>, Matthew Brost <matthew.brost@intel.com>,
+ Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
+ Byungchul Park <byungchul@sk.com>, Axel Rasmussen
+ <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, Wei Xu
+ <weixugc@google.com>, linux-trace-kernel@vger.kernel.org, Trond Myklebust
+ <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>,
+ linux-nfs@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>, Alex Markuze
+ <amarkuze@redhat.com>, Viacheslav Dubeyko <slava@dubeyko.com>,
+ ceph-devel@vger.kernel.org, Song Liu <song@kernel.org>, Yu Kuai
+ <yukuai@fygo.io>, Li Nan <magiclinan@didiglobal.com>, Xiao Ni
+ <xiao@kernel.org>, linux-raid@vger.kernel.org, Richard Weinberger
+ <richard@nod.at>, Zhihao Cheng <chengzhihao1@huawei.com>,
+ linux-mtd@lists.infradead.org, Baoquan He <baoquan.he@linux.dev>, Pasha
+ Tatashin <pasha.tatashin@soleen.com>, Pratyush Yadav <pratyush@kernel.org>,
+ Jonathan Corbet <corbet@lwn.net>, Dave Young <ruirui.yang@linux.dev>, Shuah
+ Khan <skhan@linuxfoundation.org>, kexec@lists.infradead.org,
+ linux-doc@vger.kernel.org
+Subject: Re: [PATCH v4 00/16] Remove PG_private by using page/folio->private
+ checks instead
+Message-Id: <20260913203959.6b46b0b5a052aec818a7f267@linux-foundation.org>
 In-Reply-To: <20260913-remove-pg_private-v4-0-848550f7574e@nvidia.com>
-To: David Hildenbrand <david@kernel.org>, 
- "Matthew Wilcox (Oracle)" <willy@infradead.org>, 
- Andrew Morton <akpm@linux-foundation.org>, 
- Muchun Song <muchun.song@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>, 
- "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
- Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
- Michal Hocko <mhocko@suse.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
- Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>, 
- Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, 
- Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>, 
- Gregory Price <gourry@gourry.net>, 
- Ying Huang <ying.huang@linux.alibaba.com>, 
- Alistair Popple <apopple@nvidia.com>, Johannes Weiner <hannes@cmpxchg.org>, 
- Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
- Kairui Song <kasong@tencent.com>
-Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
- Zi Yan <ziy@nvidia.com>, Juergen Gross <jgross@suse.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
- xen-devel@lists.xenproject.org
-X-Mailer: b4 0.16.0
-X-ClientProxiedBy: MN0PR03CA0020.namprd03.prod.outlook.com
- (2603:10b6:208:52f::27) To IA0PR12MB8374.namprd12.prod.outlook.com
- (2603:10b6:208:40e::7)
-MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA0PR12MB8374:EE_|DS0PR12MB6486:EE_
-X-MS-Office365-Filtering-Correlation-Id: 982e5414-cdc7-43f1-3bd0-08df12074690
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|7416014|366016|376014|1800799024|22082099003|18002099003|921020|10067099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info:
-	z/p1/yzLc53JZYZ53rmd6dC7B8L8w49/gMQIhGR5QrVHUh2j7O2ONa48qlZznHbJHHion+Ak5rQoMEcxqjOhfla0nLfQWree90L1bause5fzWfCVNwirnthORJ/vBOEdWOo/WN0TvQ28YG7CsUhHx3biEDWDj/LZvwryd8xnuJS7ils5oqyvcwMcg2G8ICND4SdpKu1YVKrgJOeOioarOycaux98PW1Q0BJheuya+ZsQ1mjgx1xgoIOxqChcGDYp+Txu5XZiGLY8rPLk83FChwpnRooWCdqHKN7XAzLsM4b4ZFhJx/H6iYIQDqpxo0lcYijMmvsmuu6LlVFe8nTS5YoJQBlBT3B0Zy9xoBfqDzWTzPrq45OxQz/7Ni+ec0Tr2matRDgbNGlwXnaoXREkaICDQpmzBrMBp4fdtLBWw9ALUbLeOTwxrovQdO1P+ruGEnbuUtFF+kv3jcyklVGeIxpcivXGGuRamiLh9EFo3fhAvQIt9RU4+3VFWJyMKFgJ15BTNiVw6cYbIQ3U4pmb5krdyStnzoiVVxo0MmJqKkZ3bS6q0Zv53zw1EvqdXQ8AhvzUhbMEq/Hav4OeRn6ODjh+00SWRsjdsOZj6/3PbNYdsw2lv03YYQ9IBWKYLY6htsIyyCu67XGkVVFqJdacMGqIGIz9obMZadbHmiBqPcI1VqKXA5qIfBWvUUfSIHrqPg0beVreRPsMdUy3scJ3zQ==
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR12MB8374.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(7416014)(366016)(376014)(1800799024)(22082099003)(18002099003)(921020)(10067099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?d0dPWnF2NWlvUmZxaW5RcnRkWDRxUU1jOTA3Z2l5eVF6cDBHalkzaDQ5cXlP?=
- =?utf-8?B?a2JBUUlRTUtJM3F3R01BWHdBZkRNa0paMFN2b1BQckJjNGxaUmJnb053YVJG?=
- =?utf-8?B?bU5IbWxJb1M4N1RnaWlndmIrdVVyMWhLS1hNbEk4ZGh4TGN0N3M5bk1uSjNP?=
- =?utf-8?B?V01XWVNxSkh2bFVOZm5pWGtIVUttQ1d5a0hMQy95dGt5QWZGVUNzOGplTWhF?=
- =?utf-8?B?U2NabUxSdE9GemxsdlMzdjNVMFZqS2ZiN2d2ZUljekQ4NUZXTmRpSzZqZmMz?=
- =?utf-8?B?Um1GM013YmhINUd0Q0d1aHl3ZVFBWnFOVnpJSGJIUEZrWkVWTzFhdnJZZVNs?=
- =?utf-8?B?UGlrdmRncEFDOW13Y25LOXZQRmlwaTdFbHhqTGY4MTRrT1BLSnNLams5SEdU?=
- =?utf-8?B?a1VlTlduLy8vZmRkeXNpTm5VTDU5MFRmS2JPUkZ0YzJ6bGNJNnBiVmtkMjJY?=
- =?utf-8?B?RjcxdGphRjZ2M0lSTFY3UVN4cTA2SVhRUG5QWDdmaTk4cTlnRVMwUGtTamlr?=
- =?utf-8?B?TUFETjY2UVllTVFTRFlCQUlGTG9KdHpzdUdVeGhPRjNwMFl2RzB0Mkk3UVg0?=
- =?utf-8?B?bHlNT1hVMGRhZEtwVTRub1A3VjZkMjBhc0VmdG94L2xseW8wZFN4bnZtd1Qr?=
- =?utf-8?B?MGIxS2JJZXROSHFvNElvYjZMVVJFeTlPWWNVUndjRnB1UGZxMXNXb20wNVFw?=
- =?utf-8?B?V3laUnZBQk03ZzQxRGUxODRDSXFLTnErcEZEcFZBUHZZbVlwMnk5UWRVZXRk?=
- =?utf-8?B?b2F2L055K00wYVB3VHhvTy9JaUhOME8xWFlIVDZBZTRidUsvNm9iak8rYy93?=
- =?utf-8?B?NUdCTDhEUzVVQzZCUnpCMzJzN1phaWxtai94dkYxZS9BTENTbUM2ZElVMkpY?=
- =?utf-8?B?NlFTQm1CQ0w3SjdVcWYwVFcrL3ZXdmJvZy81YnpMZEpFRFc5Rm5ZU0FUcC8w?=
- =?utf-8?B?Qk8rQmRYc0tiaVdVUmFleXFjZytPMUlGRGZpbGlMdHR1dElVU2VXTEtQcE1Q?=
- =?utf-8?B?dDFxa1ZiNEVhN0pVcUxodnY0QXFOZFFmQ1cySEtnWlVSb25ieGsxUWhxUWtE?=
- =?utf-8?B?anNQdEdQRHk5Ymt2aWl3K0Vkb1ROVnJMOVdxVFhwZG9uTmVqUTE5eVRZbkNv?=
- =?utf-8?B?bGliQ3VpVDZlTnl2NDZXTFE5RTRqRHMyQnBjUVgwZnpwdUFCNWg2WEMxazAx?=
- =?utf-8?B?U2I3V0tEajNHNS9jVDZxVTA2UlZPM0VCWWhlaDNkanBQc1JDaWhHWktaellz?=
- =?utf-8?B?eE5JMEVVYSt5eGxGL0JUMnNOQnBJRXJ0NU13SWpYaGN0Tml0WU14YWh2dGU2?=
- =?utf-8?B?d2tSU1RmS1VDS2VTREJRSkJGSWt6TXl0V3BBd054d0VaQVlySVVKcHoxNFBi?=
- =?utf-8?B?VlAxSWE4NklwYllYV051SC9xQXJGZ3MzMi9OOG1rVlpBK2YwOUJFSHh0RURX?=
- =?utf-8?B?bUx4Z1RLd1p3dnhBUDRUZFV3bGNodFJjZWNOSW0zM21aMENldlZGYUNUNHhW?=
- =?utf-8?B?cmtkRHdKZTcyMHFkeEdpVWJiQlpWaHRLUjJja0sxYmNudFB0WU1ZS0VNKzdN?=
- =?utf-8?B?U2h3ZjV5VW0xQVVBRmlmaEtnRk1IRW1teGE3ODF4b1ZPRWh1TXVGUnFyTndv?=
- =?utf-8?B?cE9CYWhxU2lWOTJTb1ZzTjE0M3J5NW16ZGJlK050Rzd5blQ2ZGhvTDJObTd6?=
- =?utf-8?B?blJlNm5naGpmdnpOZHM3NzdsQkVPZTZCa1RwSjYzVnNCODRtSGpOMHJFVmZ2?=
- =?utf-8?B?cWpRUEozcGR1RkJ0Rm5ERzNINHJZVFZqd2N2VzFLbzY3V0p3R0ttNDIrSzlt?=
- =?utf-8?B?OTNWVFNOKzFXNzZjMlhuWGZrejBZd1ROQ0Q0RnFyak96TGtuZ1RFdmdUdVNr?=
- =?utf-8?B?RWc0d09vZ1VjNGQ1UFJQb3l2VlV2RVJoR1lnUmswUjFYZURUUVhXVmE1QU1O?=
- =?utf-8?B?QU50V1F2NG5oS3NpQ0xkek40RkFnQVV6cVBKdFJSV3Fod2hwQkNIKzVWQzBR?=
- =?utf-8?B?QStNTDJSZ00velBQKzNMVXQvYlpRYUY1ZWtVQTJCVjBQK3ZvLytMRVNhRkt0?=
- =?utf-8?B?QzBiaDJZZHhGNWtreFZyemw0UkZGS1htRjZXZzRZaEk4Rys3bUlObWZGWjVX?=
- =?utf-8?B?eEttRGVDYkUyRFgwREJrZVpTTWhoK2RYWlhVQ2xlZlVEdlYzNlFGSldhWG5w?=
- =?utf-8?B?M0dMbFR5dWVZZGZIeWt5aWFqeVNheXczM2k0dUdFQ2VrMkU4VzBWSU02dU04?=
- =?utf-8?B?Tit5QU9UeWx1VGptSHFMd2EzcElRaHEwVUpJbS8xNXV0TllYMGhNMGxUOXpn?=
- =?utf-8?Q?ja6n8QxfWm22fveCv8?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 982e5414-cdc7-43f1-3bd0-08df12074690
-X-MS-Exchange-CrossTenant-AuthSource: IA0PR12MB8374.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Sep 2026 02:24:16.8986
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: To3O9zZcW/LMdCtzpMacLnBBGk++x3Djb34juhRZC6KxlJaWhOUdimgBAOw6n/v2
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6486
-X-purgate-ID: tlsNG-d62444/1789352664-1FE68757-B19921BA/0/0
+References: <20260913-remove-pg_private-v4-0-848550f7574e@nvidia.com>
+X-Mailer: Sylpheed 3.8.0beta1 (GTK+ 2.24.33; x86_64-pc-linux-gnu)
+Mime-Version: 1.0
+Content-Type: text/plain; charset=US-ASCII
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1789357206-CF75B87B-29B29271/0/0
 X-purgate-type: clean
-X-purgate-size: 2028
+X-purgate-size: 1221
 
-gnttab_alloc_pages() stores xen_page_foreign in page->private. On 32-bit, a
-pointer to an allocated xen_page_foreign is stored; on 64-bit,
-xen_page_foreign is stored inline. Checking page->private != NULL is enough
-to tell whether a xen_page_foreign needs to be freed on 32-bit and
-page->private is zeroed unconditionally on 64-bit.
+On Sun, 13 Sep 2026 22:23:58 -0400 Zi Yan <ziy@nvidia.com> wrote:
 
-It prepares for a future commit that remove PG_private.
+> This patchset removes PG_private to make space for upcoming PG_folio for
+> identifying pages from a folio (more details in Note below). Instead of
+> checking PG_private, all code is changed to check page/folio->private !=
+> NULL instead.
+> 
+> MM people are cc'd on all patches and subsystem people are cc'd on the
+> cover letter and corresponding patches.
+> 
+> Patch 6 is picked up separately in f2fs tree, but since mm-new does not
+> have it yet, it is sent for MM testing.
 
-No functional change intended.
+AI review claims to have found a pre-existing critical level deadlock
+in f2fs:
 
-Assisted-by: LLM
-Signed-off-by: Zi Yan <ziy@nvidia.com>
-To: Juergen Gross <jgross@suse.com>
-To: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: xen-devel@lists.xenproject.org
-Cc: linux-kernel@vger.kernel.org
----
- drivers/xen/grant-table.c | 11 +++++------
- 1 file changed, 5 insertions(+), 6 deletions(-)
+	https://sashiko.dev/#/patchset/20260913-remove-pg_private-v4-0-848550f7574e@nvidia.com
 
-diff --git a/drivers/xen/grant-table.c b/drivers/xen/grant-table.c
-index 69922be28b54c..993f89f048e21 100644
---- a/drivers/xen/grant-table.c
-+++ b/drivers/xen/grant-table.c
-@@ -863,10 +863,10 @@ EXPORT_SYMBOL_GPL(gnttab_free_auto_xlat_frames);
- 
- int gnttab_pages_set_private(int nr_pages, struct page **pages)
- {
-+#if BITS_PER_LONG < 64
- 	int i;
- 
- 	for (i = 0; i < nr_pages; i++) {
--#if BITS_PER_LONG < 64
- 		struct xen_page_foreign *foreign;
- 
- 		foreign = kzalloc_obj(*foreign);
-@@ -874,9 +874,9 @@ int gnttab_pages_set_private(int nr_pages, struct page **pages)
- 			return -ENOMEM;
- 
- 		set_page_private(pages[i], (unsigned long)foreign);
--#endif
--		SetPagePrivate(pages[i]);
- 	}
-+#endif
-+	/* Data is stored in page->private on 64-bit */
- 
- 	return 0;
- }
-@@ -1031,12 +1031,11 @@ void gnttab_pages_clear_private(int nr_pages, struct page **pages)
- 	int i;
- 
- 	for (i = 0; i < nr_pages; i++) {
--		if (PagePrivate(pages[i])) {
- #if BITS_PER_LONG < 64
-+		if (page_private(pages[i]))
- 			kfree((void *)page_private(pages[i]));
- #endif
--			ClearPagePrivate(pages[i]);
--		}
-+		set_page_private(pages[i], 0);
- 	}
- }
- EXPORT_SYMBOL_GPL(gnttab_pages_clear_private);
+it also had a few things to say about this patchset and, as always,
+hugetlb.c.
 
--- 
-2.53.0
+
+Thanks, The MM bits appear adequately reviewed and review of the non-MM
+bits are, as usual:
+
+  Great to have but I won't permit lack of other-than-MM review to
+  block MM improvements.
+
+So I'll queue it all up and shall push it into -next after a few days.
+
+Acks from non-MM maintainers are appreciated.
+
+If a non-MM patch appears in linux-next I'll autodrop the mm.git copy
+of that patch.
 
 
