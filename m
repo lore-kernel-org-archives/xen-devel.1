@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CDB4DC88E64
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 11:48:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420840.1647057 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1D9D8C88E50
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 12:02:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420853.1647065 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x65At-0002Eb-3B; Mon, 14 Sep 2026 11:48:39 +0000
+	id 1x65No-0005nJ-64; Mon, 14 Sep 2026 12:02:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420840.1647057; Mon, 14 Sep 2026 11:48:39 +0000
+Received: by outflank-mailman (output) from mailman id 1420853.1647065; Mon, 14 Sep 2026 12:02:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x65At-0002EU-0L; Mon, 14 Sep 2026 11:48:39 +0000
-Received: by outflank-mailman (input) for mailman id 1420840;
- Mon, 14 Sep 2026 11:48:38 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x65No-0005nC-3U; Mon, 14 Sep 2026 12:02:00 +0000
+Received: by outflank-mailman (input) for mailman id 1420853;
+ Mon, 14 Sep 2026 12:01:59 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x65As-0002EO-EI
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 11:48:38 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x65Nn-0005n6-5B
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 12:01:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x65Ar-0017U7-Cm
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 13:48:37 +0200
+ id 1x65Nm-00DDDc-3i
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 14:01:58 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa7df0d-bab6-0a2a0a5309dd-0a2a450599f8-22
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 13:48:37 +0200
-Received: from [74.125.228.140] (helo=mail-ej2-f12.google.com)
+ id 6aa7e22c-e002-0a2a0a5209dd-0a2a4505cfb6-10
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 14:01:54 +0200
+Received: from [74.125.228.76] (helo=mail-ed2-f12.google.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa7df15-4cb1-0a2a45050019-4a7de48cddef-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 13:48:37 +0200
-Received: by mail-ej2-f12.google.com with SMTP id
- a640c23a62f3a-c254fa4c24cso262570666b.2
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 04:48:37 -0700 (PDT)
+ id 6aa7e231-4cb1-0a2a45050019-4a7de44c982a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 14:01:53 +0200
+Received: by mail-ed2-f12.google.com with SMTP id
+ 4fb4d7f45d1cf-6a67fa7a64eso3480497a12.1
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 05:01:53 -0700 (PDT)
 Received: from [172.18.123.208] ([185.104.138.131])
  by smtp.gmail.com with ESMTPSA id
- a640c23a62f3a-c29660219ecsm413939866b.16.2026.09.14.04.48.35
+ 4fb4d7f45d1cf-6a9b592470asm4090703a12.17.2026.09.14.05.01.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Sep 2026 04:48:36 -0700 (PDT)
+ Mon, 14 Sep 2026 05:01:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,48 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789386517; x=1789991317; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1789387313; x=1789992113; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=6xL0QViIq8WveYbpgruXyAkwKN3bOGAOjj8sghQlhHo=;
-        b=ejeq5xC7KrYyjj0Vk23l1hhAnLtHtfK0uLiX3F9zJWjNGOtXJb5rVKAJgHezm1PiM4
-         X8w/90LzRTF3KmoH7JHgKTGvNEwuDqE4V+vnx8SUKfJti3fUvOSu2e3y7UTofzvD0/5l
-         j73n5T0haePBNCIr2z0+D5MprhblAHdC3RPZqVVDpIiLP4P7fM9NZwFbFtBRn37hkJ9D
-         +aY4AJwSxE9MBNDDC4lyW/PSlF9lhTnmFfwLRQZB2Q3ylTb9l28kLF8h/bihf+2R7f5A
-         vvAGHLO4Mw51WS39mV6G3ELLhygc4cLIH8E8npjaYhMjRkqDwfMsr/NqGIWf55R4wqhc
-         UViQ==
+        bh=cN8ZWLGPIppK8G01ukyR0GIEK59bBmRpRoiq2Sd2cTU=;
+        b=JeyZXgSBKjvsuMmyPCyydbOqjMyyOkuOAQO4Be1Vu7m4g1AxGgCmz+wZ0PSJrbt1do
+         P0z95jQpPmrQRKiDJjSto+w6ELzPqSi6wz8IWfKjBYLjSupMiY8zPkWOQTnp7WMaQmHH
+         16KJvcRZqjMLzn1Z1AMolSL+niK0BJsZ3W3YA1Dy7G9w1/r/4DTEc1g44mkD9Hz6+3Fg
+         rKimVzvbM+K6VB8jZOAoQXRmSwtWyQ/YZt681QSel3lw/ed+AUpPjfPih/hYQwRJyUz4
+         1hvcRSGQ2Vx/q91Xpl3cooLWXBCv8KmmfExh3fZgJAYRDXHOf2n9bpwN1K8nVvkgkCWC
+         GwpA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789386517; x=1789991317;
+        d=1e100.net; s=20251104; t=1789387313; x=1789992113;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=6xL0QViIq8WveYbpgruXyAkwKN3bOGAOjj8sghQlhHo=;
-        b=LtgyDlnMsbZ6z8doyyomZrXnS0YV9IyKk53Xk72QSlMB/5zV9UE+/LzzhrKMq6O1T1
-         LzSCovFx2BBHM1+kAMODpY0Jj9YPGxevxAVx1W+2qUAFkxMu8ep2DDPHlyY/8XqWSO7L
-         jDSd+wqYnpAEDW9UqEpyvD22QF37pti+iPtLkq92LXycf+KsUV2xj2bsHuvRBdG3bIRt
-         QaFMoqGDZ6WVIignghkGmJ6ZTzFYExr84FJHZ0EYOZ6tV/mU0r2a0KDGJwikqC3Us+bH
-         1NJH4zB8SRPBzqHZjChNMYn/2EfOUFqnalJ2sK30jdtFwkcZEw0bo6/oGRRsTyQ4Js9/
-         NbsA==
-X-Forwarded-Encrypted: i=1; AKwUvByoBovO2T2fIWcMtP4aqm+qmS8vgVv1w1ZujPtNwcYUwoVpGlwGU8iLl5wd+C6MuD1jHnsB3uk7gTM=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lrfR/T+9Ii8m677dGS47hHTWe01C1K5HcxFpr1P8zW6NbItYPU
-	tN3h4j79ipXeiYP77riX732U0FX5lMn0dI+ILWefS9LE+nmAkwOjpcHk+AUZF6hPOA==
-X-Gm-Gg: AYBFou3EbdzL70W8HL7eZmrQVD43Fm850ODMkVex/QloAm2OTlND3FKPTG21uLEn0lQ
-	dnlCtRZFvMoyJaCFCslUPyjE6a+ZAQ1jRtDL6Af9+8+t6whivPf+Jsq3mBB3OvEN1xDnfRmoUF2
-	VeXEy0dc1ra5G2QGsRKXA62K+WWBMTcOQAdcZpzcFFVNoAF8hP0phEm4QVD4L70IqH0sXe5/GB6
-	GgNrJaO0Su6qR/7I1JgS3iRL1US1nVvcYuGIqd/ZI+1ONrbbHyWwldtiRmQU4XeGoNN5pcMsiPV
-	QmKjcqv40v+t1QVjFB5EpA0IEM2kpyJue1JpIrauNioNe8eZfDyPlWTR7ylLMJl57ZQB+wZkF6c
-	LzSLeC64A/KnUPsRQr719FAtP+Cm0TTLgntDVMhFDZA/mhzBFxb8CCx8fRQHMB5Wds9vkaDopsO
-	F0Q1WUuSn/srkl4JdYDoqKYq4x/5RdtstvV821cMm3YC2fDwzVQ8Hh5ikKzKCCO6Vxm2Dq/ePK7
-	hNtVnHkeGrxhYqefpWQ2fc=
-X-Received: by 2002:a17:907:9806:b0:c29:4503:35a9 with SMTP id a640c23a62f3a-c29b874b239mr138933466b.44.1789386516719;
-        Mon, 14 Sep 2026 04:48:36 -0700 (PDT)
-Message-ID: <ec4da2d4-d1d4-40f9-a008-be6ac4d2f05f@suse.com>
-Date: Mon, 14 Sep 2026 13:48:30 +0200
+        bh=cN8ZWLGPIppK8G01ukyR0GIEK59bBmRpRoiq2Sd2cTU=;
+        b=k6a2LkYkJFrNdjn4Yh7kKe96L51L0Mxv0iYPW/8lzaotqU9dr73ysG3xNfXyzpNUtO
+         vH7TFbqCtGPSN6L5uZsedTyngOoWb4TPqK8WJCGjYFPDLNOaHwwZ+jgmjLTBNVqJHDKG
+         HbmlAkz50nvPSnjM0gFQSn4NZjDudHCQR74qrn86D+K5V8XOP7GX3vdXVsSKRHLW76w5
+         Fj9ErmzwNV1LSE3+3DQ6S/Y9iO/jC3X5Aptnuu1aQQL56yNc6CcBZL5eWgbZ0XpIz+Lv
+         NVrtqSj9kBWkx3PBvscLstU/sGS/6rM9evIQauZLJiFfzDU/pR1aZvOW45t+gV5LXHKM
+         6Udg==
+X-Forwarded-Encrypted: i=1; AKwUvBz+7wqOm1Jr6qAafN8zM8tdFag9tNjjbYGU6rmzPdkvpmOMiC5eM60iWdUORq5G0bj3qSzFm9ChlqM=@lists.xenproject.org
+X-Gm-Message-State: AFuF++l+I1UoGAcHolyK4/lpD685Wo66AmxvtA+psJ8IPYbfC9kJUs+g
+	CO4be0jtvsrSd2moGvcQ/F6xhNrr8t1P03SB1vH+I5BvcEy2eNuOReYs1anNuxGeQw==
+X-Gm-Gg: AYBFou02l8Xn02R3BwxxckzxDLD3YlQQJRBgoqzqU6m3rdJduixrrwYhbgeRCJxUkDf
+	GQTuuHBAAOsHAVB9fg5EenxR+VOOdyeDjnyqlmiWOzMB4VxguAXnnYLm7REE5tjSe+/YAiNnw/G
+	OATjkZKyp0xoGaHSBOD3u05waV2/icME+CCRh78SGPPe20FOnEM/kfAyMwMdX1mm58RwZ7uSYhA
+	ynSNkhISZ/pt8AdPF3IIMn9dectsmwQ9oME1TFtjFmO3d1bEI7BWUL1EBv1fcChO9lNd2BuK7oT
+	tq/g3JlA2b7TySXAo8m016BI6/e5ldscVS/5bGQK7uVF4IktMhYo6FX9sPFFBBjlQsAGRqq8WP5
+	fX6HUusWVYfl8w3P7P8CtDJC5NN1o2awidmBnwA+5z4UfsRnKR29IOaiqFx9tOdOb4iRhsVgotW
+	2bk80oFCknBV/uDEu0Xke/G1LPo37uX7tSXMz13ynuT3/cq1BaDxR1puu7/aU1L00aDRzJpQ==
+X-Received: by 2002:a05:6402:46cc:b0:6a9:b3b0:6cf3 with SMTP id 4fb4d7f45d1cf-6a9f63dfcffmr1233556a12.34.1789387313182;
+        Mon, 14 Sep 2026 05:01:53 -0700 (PDT)
+Message-ID: <9d4600c6-258e-4990-b1f1-3c86037227b3@suse.com>
+Date: Mon, 14 Sep 2026 14:01:45 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 25/39] xen/riscv: add guest load emulation for trapped
+Subject: Re: [PATCH v2 26/39] xen/riscv: add guest store emulation for trapped
  MMIO accesses
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -111,62 +110,46 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <7cf3203f8f826eefa1b24bb2dedbd76c0b611dc1.1787838835.git.oleksii.kurochko@gmail.com>
+ <230c35550edff0b2b8480b6728614305951fe5cd.1787838835.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <7cf3203f8f826eefa1b24bb2dedbd76c0b611dc1.1787838835.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <230c35550edff0b2b8480b6728614305951fe5cd.1787838835.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1789386517-71CA82A1-DB2C0647/0/0
+X-purgate-ID: tlsNG-c201ff/1789387314-734BC2A1-7512F94A/0/0
 X-purgate-type: clean
-X-purgate-size: 1707
+X-purgate-size: 1110
 
 On 27.08.2026 17:21, Oleksii Kurochko wrote:
-> @@ -419,7 +416,41 @@ static __maybe_unused bool decode_ldst_insn(struct decoded_insn *di,
+> --- a/xen/arch/riscv/emulate.c
+> +++ b/xen/arch/riscv/emulate.c
+> @@ -453,9 +453,28 @@ static int emulate_load(const struct guest_fault *gf)
+>      return 0;
+>  }
 >  
->  static int emulate_load(const struct guest_fault *gf)
+> -static int emulate_store(struct guest_fault *gf)
+> +static int emulate_store(const struct guest_fault *gf)
 >  {
 > -    return -EOPNOTSUPP;
 > +    struct cpu_user_regs *regs = gf->regs;
-> +    mmio_info_t info = { .is_write = false };
+> +    mmio_info_t info = { .is_write = true };
 > +    struct decoded_insn di;
-> +    unsigned int shift = 0;
 > +    int rc;
 > +
-> +    /* A fault taken re-reading the instruction is redirected to the guest. */
 > +    if ( insn_fetch_faulted(gf, &di) )
 > +        return 0;
 > +
-> +    if ( !decode_ldst_insn(&di, guest_xlen(regs)) || di.is_write )
+> +    if ( !decode_ldst_insn(&di, guest_xlen(regs)) || !di.is_write )
 > +        return -EOPNOTSUPP;
 > +
-> +    if ( !di.is_unsigned )
-> +        shift = BITS_PER_BYTE * (sizeof(unsigned long) - di.len);
+> +    info.data = *guest_gpr(regs, di.reg);
 
-This is one of the cases where sizeof(<type>) is not only unclear to
-read, but actively risky: Which variable(s) of that type does this
-refer to? What if those variable(s)' type(s) change? Aha, ...
-
-> +#ifdef EMULATE_LOAD_DEBUG
-> +    gdprintk(XENLOG_DEBUG, "pc=%#lx, addr=%#"PRIpaddr", len=%u, shift=%u\n",
-> +             regs->sepc, gf->gpa, di.len, shift);
-> +#endif
-> +
-> +    rc = do_mmio(&info, gf->gpa, di.len);
-> +    if ( rc )
-> +        return rc;
-> +
-> +    /*
-> +     * A load into x0 discards its result: writing regs->zero would break the
-> +     * invariant that it reads as zero when x0 is a source operand elsewhere.
-> +     */
-> +    if ( di.reg )
-> +        *guest_gpr(regs, di.reg) = (long)(info.data << shift) >> shift;
-
-... you apparently mean sizeof(info.data) there.
-
-The comment is (nit) also too long for my taste. Everything from the
-colon onwards is imo redundant.
+This came to mind only here, but applies to the earlier patch as well:
+There's no checking of di.len, not even by an assertion. The above is
+fragile as to extensions like Zilsd. Zilsd itself may still be okay as
+the overrun of the register field will hit the correct one, but the
+general concern remains (plus of course that moving across fields is
+UB).
 
 Jan
 
