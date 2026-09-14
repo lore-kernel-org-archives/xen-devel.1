@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4921FC88E72
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 15:02:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421063.1647202 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 01E6FC88E75
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 15:15:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421083.1647212 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x68CY-0007mR-CX; Mon, 14 Sep 2026 15:02:34 +0000
+	id 1x68P0-0001SA-E4; Mon, 14 Sep 2026 15:15:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421063.1647202; Mon, 14 Sep 2026 15:02:34 +0000
+Received: by outflank-mailman (output) from mailman id 1421083.1647212; Mon, 14 Sep 2026 15:15:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x68CY-0007mK-9X; Mon, 14 Sep 2026 15:02:34 +0000
-Received: by outflank-mailman (input) for mailman id 1421063;
- Mon, 14 Sep 2026 15:02:33 +0000
+	id 1x68P0-0001S3-B1; Mon, 14 Sep 2026 15:15:26 +0000
+Received: by outflank-mailman (input) for mailman id 1421083;
+ Mon, 14 Sep 2026 15:15:25 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x68CX-0007mE-JS
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 15:02:33 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x68Oz-0001Rx-5x
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 15:15:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x68CW-00HCzN-JA
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 17:02:32 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x68Oy-00HFR2-1S
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 17:15:24 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa80c83-e002-0a2a0a5209dd-0a2a450bcdbc-22
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:02:32 +0200
+ id 6aa80f7c-e002-0a2a0a5209dd-0a2a4508e680-26
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:15:23 +0200
 Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa80c87-b7e8-0a2a450b0019-4a7de14ce8e8-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:02:32 +0200
+ id 6aa80f8b-f659-0a2a45080019-4a7de14cb474-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 17:15:23 +0200
 Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-4834977ae75so1180753f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:02:31 -0700 (PDT)
+ ffacd0b85a97d-485984ebf5cso1731564f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 08:15:23 -0700 (PDT)
 Received: from [172.18.123.208] ([185.104.138.149])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-486eb2ecf2esm27574599f8f.2.2026.09.14.08.02.28
+ ffacd0b85a97d-486eb32e8d1sm28048390f8f.11.2026.09.14.08.15.20
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Sep 2026 08:02:29 -0700 (PDT)
+ Mon, 14 Sep 2026 08:15:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789398151; x=1790002951; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1789398923; x=1790003723; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=SiHZaQhv67cyk4hXA/7ZoxNWw/khsJFenYx83nLehNk=;
-        b=DK/8zIHDjPP1PGPU2k3KFJUY/v+MNKEuvw7/KI/ZnyEwBDkP1hwLa4s67ggExSWTPK
-         7l0p+wdS8GmziAwz6QrDRu76YA1up8zUCIk7l2+Xy7cUBpZ10d+YgL5OnW580NG5FiVi
-         UUQH9NALHJWXwZ1L9zTb1hO7X2m74lVkIprdMIG6v2VoO2Sj/iWkMaEqnNDRpncYIrP3
-         IJLF1NDjHmW2wfbgNahkP8c+qCQb2RbhL8iMtIYzgu9gDckG+o4X+2jXKJjOdcD7O/Kb
-         ALt+30cJdWdNy2CuANixFEynhyf3jg2hEAc/fYCytxd0yt0vGcXVlMyJohal+86EgJ3h
-         edcQ==
+        bh=NuF/cpRbw+GzcHinI5yNpRgxXswL5i7y2FE8bwjfAKY=;
+        b=c/T8N/ezeRO+0sn3gec80chBKgNkMY9Ezi2Cg82DB7ASWv97jhTAHuTGdUUaIYVMF1
+         xJZjq0cZFujjpd8h8T+xtijnFvXj35X4YE717RGzE00b79voyCvZSEhlIZgTVHNAGrvq
+         pqPdpYxqlP88H/W+MmNfR54zrG0wWaCzNa904StXQ0fdeFevvUFJJmQanjFKmOIs+UcB
+         3TKCvdg+Sm4fxmx1u2tEvH13du+/TQ2wlSfq/BbQhvVbKqnAwSS480FgTuoBBQfQNxHU
+         vYEJCaN3dayDLfgjhnY9p0o3p/pegthx+ZkqNE3w7whrjkDR3UxuW1T8/CkO9TOEGVqS
+         C9gA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789398151; x=1790002951;
+        d=1e100.net; s=20251104; t=1789398923; x=1790003723;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=SiHZaQhv67cyk4hXA/7ZoxNWw/khsJFenYx83nLehNk=;
-        b=mN9rG5jos8GGs76h+K4ktYbcM62mISL8mk3ndVp1AQOPxWvV86w0KOqTJth4/sQMXG
-         6ICKv9/AYsF2UWEZ22S+kjSVJpfSvM51vQpawSqQ9w2IiLdwxz/6Ja+L0NQziBluVg8N
-         gkGukzfLkJ888b9PzROzC9ZMauwG38L/XGsrzfZt43M6V1sAqD+OMhQhaDInxzIBtUeb
-         SO9UBg+4i2RkRnYL63aJf/AfRyKl3/Ju9qFiM9xLlTO2Aj/3qwoLkNfpEDS4PBT9n+Fw
-         w7QjUlYbN1ftw4JTUbWOGAXK7uZNXCtNUGykAP4Q+fnKrNEFTDX7WJyin0dqZSa0QKJG
-         T8/A==
-X-Forwarded-Encrypted: i=1; AKwUvBzZ5613IErjwy40y6gbDW6LHidoKxY5Nxb3ikpVynUs0EovamNuNgCWEZDkwmkBeat/QiPdLK4Gcdo=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lBT5UfN0ZDP70f5tRO5UOoKsTfnU/ZuLaK0RdpnYfNsjIeggEc
-	Z+Lmvss1x93gETm8O3P3gCWYPlmsOx57i2bNVR66MHf3g7YqV/XJ9mgIvwN+z35yhg==
-X-Gm-Gg: AYBFou2sfmtkArCTgbF70QBnSLYiH6JfNoBE/DJNR9Geq+cQcbEsxuMoxwPqA9g47sT
-	6GhwACmBEao0GqG2DXB52BKebbgeq54xvOiVouIru1tDXWS98va9NU3Clzsfa0ypjphLATKmafn
-	1on/eE8LCgbGrkkYB2gsn7RP7+Y+LINJZXCpLkgoBeTk03TNON42nN5Cxx1gXxDN2F4vWpRIDH0
-	15/Ifu2I8+liq/Iiug6FMJuM9ZePjdIzzaeURL/dJRxr7lZyfusLH2+k9xbZcUKZ9mn3laJNmXH
-	Z6rjx33Ij6vVAWacOQiVtnt1odX9Lmayqz3vH+CjSp48w02AjPgBIvaXh+KRvrFt8l+nIfww8Gc
-	6T3UeFav8vGChRzHkzyxrBhQVAAE/IfiwvcuPf2E33ltMdxckgzNdxGJAGGOTGFHinJtgoXCZ25
-	x0SuYkT63Gz9ae5Wn0gH0tuan/5YQp8FgxdXeMq2NJAztzW9qKN0tek8P4KoZGS4mi6/oXaa4Nh
-	HiPyYd3Lr1j
-X-Received: by 2002:a05:6000:4b05:b0:485:acdd:1524 with SMTP id ffacd0b85a97d-48702afdde6mr3943134f8f.11.1789398151205;
-        Mon, 14 Sep 2026 08:02:31 -0700 (PDT)
-Message-ID: <2394a616-16be-4657-be17-0a2dafebaeee@suse.com>
-Date: Mon, 14 Sep 2026 17:02:22 +0200
+        bh=NuF/cpRbw+GzcHinI5yNpRgxXswL5i7y2FE8bwjfAKY=;
+        b=p/+chJAmoHnAj51IdJGB9SljmYIR8197McIpNqjSSvTdU3HXxrLdz62YetpMRjQwRO
+         hrnVXiXlNTJPzQykiB02sJiDz6F1RUFXFQ0rt+7e/CQoROnDLj4Yu0mIPq9g032grHsC
+         7gylDDdu27R2M1oP0ZhPTJzyCOtKXTOF8BY5dnu23Qv7nDEd67M16t9rlwfcN06yqhDd
+         eE8ztMG52rUJj46NmOwR9BBDPkxnmYUboc+joGGSnxaFob6j+GksCIMIUbASh/8PLLzL
+         kkeUchNdtMfm09V2m5/G0iZeGf/YUoGnuMS53m0KRlLdp98YSPEIFhsDs6Dtt2Ele8+x
+         QddA==
+X-Forwarded-Encrypted: i=1; AKwUvBxw1VrjcFnLaLxX+UZvD4nMNX0zyZcDXvvsL+yG+/x/ZRa15+COVMSdqmZ1OEiGTlAEaAE2pHaBAbQ=@lists.xenproject.org
+X-Gm-Message-State: AFuF++n3RC1UbjzydDU0L/4wrYHXoGj1/YjgJLCVxRGGc7w4jH5XwJBC
+	WYfJHI2u4J2CbaSo4ApW1MB9l/yVNajhoPkJSXSDWy8hNQqt/ylQ2z9jFpe68IkYJQ==
+X-Gm-Gg: AYBFou23JTksErlh61izXNdTAsS9kXgrWSKvgQzy75wbCU6Omy7bmBUfZsuG1yh4Tqe
+	pHMJHGO39QkSqFBJe65rp74qJbL68YCxK0tS/L8t1nRvmVkbnJ6d5uVFmlS14KpTf+9h0MQaPs8
+	Y2bStucgBrx+kXQ/Pu/YmamTsxzHJU0bkHn/LNfPcnpr9E2W/f8Mp4wQB1gWFA3N53iA9GEfXFE
+	URZomd4Bvf43RzESGkJoooxf7Qew5ssdvExOmnuFE+UVAlOKccJZk2Hpkum6Z8qHeMWMjhl+GmM
+	tOUQu/t/MEC89UWISokwjsbZfSZ3zWwcmhdPmpA87xxVLn0UO0+uTw6jmIBgc9aMGcDL1dTnmwJ
+	p5EkRAa7grtgKPbfJB//xrWp7CILVaPCneQFHy2A8zHpNZoftZd362RpMPhOjBZEl+WjjpYNebt
+	GPvxyZ1ZZqixHk6Iq4SAbojo4qGniK3Vew7tHLszlCMCRhTFpVKnNPt3ajfLch+BahngdgU9ZGM
+	HM6hhFl45Et
+X-Received: by 2002:a05:6000:1861:b0:485:9b35:a20e with SMTP id ffacd0b85a97d-48702b30773mr3580941f8f.56.1789398923193;
+        Mon, 14 Sep 2026 08:15:23 -0700 (PDT)
+Message-ID: <f8a2c7b7-7872-424c-89e0-5d81a29b77f4@suse.com>
+Date: Mon, 14 Sep 2026 17:15:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 32/39] xen/riscv: remap interrupts to new IMSIC VS-file
+Subject: Re: [PATCH v2 33/39] xen/riscv: dump old interrupt file to memory
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
@@ -110,123 +110,103 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <948e94b6610586b84626c98da033d301335dc7b0.1787838835.git.oleksii.kurochko@gmail.com>
+ <efecffa9cd7c4bb6e9ed51b7fd084328fcd4611e.1787838835.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <948e94b6610586b84626c98da033d301335dc7b0.1787838835.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <efecffa9cd7c4bb6e9ed51b7fd084328fcd4611e.1787838835.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1789398152-1A4DB9EA-6D178448/0/0
+X-purgate-ID: tlsNG-c1860d/1789398923-D694287B-276EDC7B/0/0
 X-purgate-type: clean
-X-purgate-size: 4044
+X-purgate-size: 3213
 
 On 27.08.2026 17:21, Oleksii Kurochko wrote:
-> @@ -60,6 +61,12 @@ static unsigned int __ro_after_init guest_num_msis;
->  #define IMSIC_DISABLE_EITHRESHOLD   1
->  #define IMSIC_ENABLE_EITHRESHOLD    0
->  
-> +#define imsic_csr_read(c)           \
-> +({                                  \
-> +    csr_write(CSR_SISELECT, (c));   \
+> At the old interrupt file, dump to memory all the eip and eie arrays).
+> After this step is done, the old interrupt file is no longer in use so
+> old intrrupt file VGEIN could be released.
+> 
+> Restoring of old interrupt file state will be done in follow-up
+> patch.
+> 
+> There are cases where it is needed to specify on which cpu it is
+> necessary to VGEIN should be released so update vgein_release() to
+> deal with that.
 
-Nit: Excess parentheses again.
+Beside this being difficult to parse, it looks like it is inapplicable? As
+said ...
 
-> @@ -242,6 +254,15 @@ void imsic_irq_disable(unsigned int irq)
->      spin_unlock(&imsic_cfg.lock);
->  }
->  
-> +static bool imsic_local_is_pending(unsigned int id)
-> +{
-> +    unsigned long isel =
-> +        (id / BITS_PER_LONG) * (BITS_PER_LONG / IMSIC_EIPx_BITS) + IMSIC_EIP0;
-> +    unsigned long bit = BIT(id % BITS_PER_LONG, UL);
+> Keep BUG_ON("unimplemented") placeholder in imsic_migrate_vcpu() to guard
+> against silent incorrect behaviour or unexpected panics in guest VMs until
+> the function is fully implemented.
+> 
+> vgein_release() is stub for now and will be introduced later.
 
-Both can be unsigned int, can't they?
+... also here?
 
-> +    return !!(imsic_csr_read(isel) & bit);
-> +}
-
-No need for !! here.
-
-What about endianness, btw? Does the IMSIC always match the CPU (and
-its setting)?
-
-Overall, what does "local" in the function name signify? (For a static
-function, the "imsic" prefix may also be unnecessary.)
-
-> @@ -497,6 +523,27 @@ static void imsic_call_on_cpu(unsigned int cpu, void (*func)(void *),
->          on_selected_cpus(cpumask_of(cpu), func, data, 1);
->  }
+> --- a/xen/arch/riscv/imsic.c
+> +++ b/xen/arch/riscv/imsic.c
+> @@ -56,6 +56,24 @@ static unsigned int __ro_after_init guest_num_msis;
+>   */
+>  #define GUEST_IMSIC_MAX_MSIS 255U
 >  
 > +/*
-> + * Ensure that all the MSIs the APLIC has already generated for the hart this
-> + * runs on have really reached the hart's IMSIC.
-> + *
-> + * The barrier is the one described by the AIA specification in
-> + * "Synchronizing interactions between a hart and the APLIC": ask the APLIC to
-> + * send an MSI to the hart itself and wait until it shows up as pending in the
-> + * hart's own interrupt file. As it says nothing about MSIs on their way to
-> + * any other hart, it has to be executed by the pCPU owning the interrupt file
-> + * the MSIs were being sent to.
+> + * The interrupt identities an IMSIC interrupt file provides are 0 (which is
+> + * never valid, but still occupies a bit) up to IMSIC_MAX_ID inclusive, so
+> + * IMSIC_MAX_ID + 1 bits have to be covered.
 > + */
-> +static void cf_check imsic_aplic_sync(void *data)
+> +#define IMSIC_MAX_EIX DIV_ROUND_UP(IMSIC_MAX_ID + 1, BITS_PER_TYPE(uint64_t))
 
-If the parameter isn't used, maybe best to name it "unused"?
+As before - plain 64 please, or it needs to become clear where the uint64_t
+is actually coming from.
 
-> @@ -848,8 +899,22 @@ void imsic_migrate_vcpu(struct vcpu *v)
->      if ( v->arch.last_cpu == NR_CPUS )
->          return;
+> +struct imsic_mrif_eix {
+> +    unsigned long eip[BITS_PER_TYPE(uint64_t) / BITS_PER_LONG];
+> +    unsigned long eie[BITS_PER_TYPE(uint64_t) / BITS_PER_LONG];
+
+Same here. Yet better may be to use DECLARE_BITMAP()?
+
+> @@ -85,6 +103,15 @@ do {                            \
+>      csr_clear(CSR_SIREG, v);    \
+>  } while (0)
 >  
-> +    read_lock_irqsave(&imsic_state->vsfile_lock, flags);
-> +    old_vsfile_id = imsic_state->guest_file_id;
-> +    old_vsfile_cpu = imsic_state->vsfile_cpu;
-> +    read_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
-> +
-> +    /*
-> +     * We don't support SW interrupt files at the moment. Bail out before
-> +     * anything is touched, as the old file has no owning pCPU in that case
-> +     * and there is nothing to retarget the producers away from.
-> +     */
-> +    if ( old_vsfile_cpu == NR_CPUS )
-> +        panic("IMSIC SW-file isn't supported\n");
-> +
->      /*
->       * At this point, all interrupt producers are still using the old IMSIC
-> +     * VS-file so we first move all interrupt producers to the new IMSIC
->       * VS-file.
->       */
+> +#define imsic_vs_csr_swap(c, v)     \
+> +({                                  \
+> +    unsigned long r_;               \
+> +                                    \
+> +    csr_write(CSR_VSISELECT, (c));  \
+> +    r_ = csr_swap(CSR_VSIREG, (v)); \
+> +    r_;                             \
+> +})
 
-Isn't the new part of the comment premature? Moving doesn't start until ...
+Excess parentheses again. Plus - what use is r_ here?
 
-> @@ -870,5 +935,43 @@ void imsic_migrate_vcpu(struct vcpu *v)
->      /* Zero-out new IMSIC VS-file */
->      imsic_call_on_cpu(new_vsfile_cpu, imsic_vsfile_local_clear, &vsfile_data);
+> @@ -130,6 +157,21 @@ do {                                \
+>      imsic_switchcase_32(F, ireg + 0, ##__VA_ARGS__) \
+>      imsic_switchcase_32(F, ireg + 32, ##__VA_ARGS__)
 >  
-> +    /* Update G-stage mapping for the new IMSIC VS-file */
-> +    if ( imsic_map_guest_file(v, new_vsfile_hgei) )
+> +static unsigned long imsic_eix_swap(unsigned int ireg, unsigned long val)
+> +{
+> +    switch ( ireg )
 > +    {
-> +        domain_crash(v->domain, "Migration to hw interrupt file failed\n");
-> +
-> +        return;
+> +    imsic_switchcase_64(imsic_switchcase_ret, IMSIC_EIP0,
+> +                        imsic_vs_csr_swap, val)
+> +    imsic_switchcase_64(imsic_switchcase_ret, IMSIC_EIE0,
+> +                        imsic_vs_csr_swap, val)
+> +    default:
+> +        ASSERT_UNREACHABLE();
 > +    }
-> +
-> +    imsic_update_state(v, new_vsfile_hgei);
-> +
-> +    /*
-> +     * TODO: Modify the relevant translation tables at all IOMMUs so that MSIs
-> +     *       for this virtual interrupt file are now sent to the new physical
-> +     *       interrupt file.
-> +     */
-> +    if ( iommu_enabled )
-> +        printk_once("IMSIC: IOMMU MSI retargeting is not implemented\n");
-> +
-> +    /*
-> +     * If any interrupts at an APLIC are forwarded by MSIs to the old interrupt
-> +     * file, reconfigure the APLIC to send them to the new interrupt file.
-> +     */
-> +    aplic_reconfigure_target(v, old_vsfile_id, old_vsfile_cpu);
 
-... here, as it looks.
+There still wants to "break" in the default case.
+
+> @@ -973,5 +1071,11 @@ void imsic_migrate_vcpu(struct vcpu *v)
+>       * to the new IMSIC VS-file.
+>       */
+>  
+> +    /* Read and clear register state from old IMSIC VS-file */
+> +    imsic_vsfile_read_clear(old_vsfile_id, old_vsfile_cpu, nr_hw_eix, &tmrif);
+
+Why is &tmrif being passed into the function, when it's not otherwise used
+here? The function could itself have a suitable local var.
 
 Jan
 
