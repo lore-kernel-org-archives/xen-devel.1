@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7FD3AC88E6A
-	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 09:14:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1420577.1646832 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 464BEC88E64
+	for <xen-devel@archiver.kernel.org>; Mon, 14 Sep 2026 09:22:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1420588.1646842 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x62lG-0001Xo-3y; Mon, 14 Sep 2026 09:14:02 +0000
+	id 1x62sk-0003IM-Qw; Mon, 14 Sep 2026 09:21:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1420577.1646832; Mon, 14 Sep 2026 09:14:02 +0000
+Received: by outflank-mailman (output) from mailman id 1420588.1646842; Mon, 14 Sep 2026 09:21:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x62lG-0001Xh-1J; Mon, 14 Sep 2026 09:14:02 +0000
-Received: by outflank-mailman (input) for mailman id 1420577;
- Mon, 14 Sep 2026 09:14:00 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x62sk-0003IF-O6; Mon, 14 Sep 2026 09:21:46 +0000
+Received: by outflank-mailman (input) for mailman id 1420588;
+ Mon, 14 Sep 2026 09:21:45 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x62lE-0001XZ-Li
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 09:14:00 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x62si-0003Ht-V9
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 09:21:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x62lD-009BaP-JK
- for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 11:13:59 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x62sh-0033K2-Uk
+ for xen-devel@lists.xenproject.org; Mon, 14 Sep 2026 11:21:43 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa7bad2-e002-0a2a0a5209dd-0a2a4501d2ca-28
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 11:13:59 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa7bca1-8faa-0a2a0a5109dd-0a2a450ad80e-20
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 11:21:43 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6aa7bad7-5984-0a2a45010019-d155802be4b9-3
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 11:13:59 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-49e717c9841so9810825e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 02:13:59 -0700 (PDT)
+ id 6aa7bca7-f2d2-0a2a450a0019-d155802fe8de-3
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 11:21:43 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-49d05d51553so25470155e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 14 Sep 2026 02:21:43 -0700 (PDT)
 Received: from [172.18.123.208] ([185.104.138.131])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49e60ad0614sm324326405e9.10.2026.09.14.02.13.54
+ 5b1f17b1804b1-49e60ac411asm289006315e9.8.2026.09.14.02.21.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 14 Sep 2026 02:13:58 -0700 (PDT)
+ Mon, 14 Sep 2026 02:21:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,149 +55,115 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789377239; x=1789982039; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1789377703; x=1789982503; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4pX6ehIPkirYx2cXTlEJLZmpcOcMBvg1KKWQ3Tskgno=;
-        b=BQcJSl35M47D7iZR4pVN4ImSV2Pt0JoMiFTgi9m2+7BWCvFy3Mt41uctrLV7PJ6uGQ
-         0zMT1bbUvlFZnkyYWoIdMOiYDDaVTL0lC1JxoFp+HfF6tjOEqir9BCWvqoxnEN8SN/EX
-         rLo6hWa1CdiSdiyvAjkRN20Fc7kQg/wOArKOsqn8ydUKlpJz1pIWb9m2/KkmDViVMqKM
-         CnCLo9ETYbZPMcEaFdMMP3m8Gw0JC/xFlR3jKmg3MxVss1g+7XbVa4n1HKNiHMtx8aAx
-         4voly+TvvdMm8MlEfWaQ6dpfMaho3RzuICX2QF+8QKPynhUScWRRFUtFSzUdczntwlxr
-         I1uw==
+        bh=zdN9NrxN8B2lkyt5tUSGZLrhPJA9n6yB+2SAPCu++cA=;
+        b=Efmh6lsNL7m/bUclu0WRYgryPOYLENfQ4jV6BqkGzzVuxyITvuqxOEVlzgL75si+np
+         7HeSd6+U/XZgSXRIKhTu/gDH9WO1QNhcmLw93XeJS/ymrqJE5wrPhCTbJbMAZKrWZumQ
+         NXvUROLOvDJHBVT1SvGEOF8re6HoykdZE5rCLL23fVkxrRDPWQstdjoVzhDMd9vfZkGu
+         UMkaWgKqr1rTs2WMpcgthOytcRQR+DRvXPJbAMAbyT45nclFyUOkyw4CLQnTxRuJeoTn
+         Jf3GJTBvBGcVmCEh1xm1pLMgInKSzXg4/Kbx1oMMbSWRVRqy5l9xubI2AcFXGqgSJFtM
+         3unw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20251104; t=1789377239; x=1789982039;
+        d=1e100.net; s=20251104; t=1789377703; x=1789982503;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4pX6ehIPkirYx2cXTlEJLZmpcOcMBvg1KKWQ3Tskgno=;
-        b=Wl01UIr4ed7lnixzaQsCeFUNmEYwoROvhOHLLUpB2RVDFzgpoBeRX+FY4pQFjuPXEi
-         X1HUICgZTSq+k5aOio3kduCZ99ieLA6VMR2Mouuk3+5XXAQJNpCPcgth7IWDTtyZlZEr
-         fA/8RxzgFRjY2NmfzJllpXXxlAT89reAABV31yiN9g1PdiZtz4rAX61DQRS/92gZ6mU7
-         +DQFvaGqXehUrjzML2dqs/Ra0UDXmgCxXYukt4nrrSLbJFX8JmuvxvmfSVPSdL48kBXg
-         q8pvTfl9W8R1VPTHgZOwTxUKbhXmI0R3dmZhEaPCoACbtfSjrCsjkf5u+a+boJ5+LSy6
-         h03A==
-X-Forwarded-Encrypted: i=1; AKwUvBxFN2ckSm0sXVIxirU2eXjemPOhFhZ3sdF/YUk2Jbz5My1/LbeC1BkT1ijR+NZQ9eB7nbDKVvzOqz0=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lFcgpRRKh9YEeki8cE4ibwnAEaLVLWDE/LDvwZHMS7CrQsbROl
-	n6+DN4dUSGDYuwUYOCNCpgyFUlH3LkSzdjn8IJ1VjZkaqHU64Iffe+xL3LRNyULgOw==
-X-Gm-Gg: AYBFou2Ngls99foak8bSV0BkG/ToFlSqqU6NAzN4rVOEzN0j8Pa24H1qreFC0D+ZXx1
-	JMpbdqZDQ5CWnIk3huwgKxm3gQaUlU8/iy7j+rpHtVKlxSrOD5RGpDnr4OEj4bWs6ouWP1eDLNi
-	DZa2DuLfnGw/98ZUxY/ZcOvIH5xUkxJAgTdg92T7gwucMx42TSK78K4YupIkAGbUrDhy1E1eXY+
-	EZNFuAaPool3psdGOrjgIUqiP7I2+H2Lkpb4okO8bjEfX+0EzZ8WMJg6A+BE5WrO7L3x10/wVqu
-	Xp0GSQG4pLDO3vF1klM+Od38tA5MNH1+34sCsztnGtLR/Itt4z8KtAPi5ERJtDib0D9nCDelzGU
-	Q/GvU8ltMGJctta8jz8AOfIkak1Fq/F97pN9DeStLJ4TFPA4AQiS9oazelmdRfA5du2Y6oRDJC4
-	Au3ou3uKocAqEGLxFAA4XGja8alMvF9jE4eJcXzILYPAWzQ1wCs4LZM0MaPHEU6KnPRYUSLoIZh
-	GsgKLRBsOW0
-X-Received: by 2002:a05:600c:190d:b0:49e:7a00:b9a5 with SMTP id 5b1f17b1804b1-49e7a63a894mr19963905e9.4.1789377238763;
-        Mon, 14 Sep 2026 02:13:58 -0700 (PDT)
-Message-ID: <325f2b44-ea61-45e8-a681-c0bb08d5766a@suse.com>
-Date: Mon, 14 Sep 2026 11:13:46 +0200
+        bh=zdN9NrxN8B2lkyt5tUSGZLrhPJA9n6yB+2SAPCu++cA=;
+        b=GsY5fZGT9x4Lzya7BjKx/MWjwIRs5TpPwlWt/MyO9fHVsH+CmBs7xkUt9daUQQgr+g
+         4WIazJ+IGhZ7Uv+TTPxFHRDifU3AV/rnCHb9NRCV7A/iG+3zXvKzHsACeUb8zrb5XPVf
+         evvS3xDngds0mxcgumI+LKfGkwQKsAtc7cK2HOFbGfaDERp3PdJJvD+ElSf0UAfQMoN8
+         aGgOqjWdIOBu5hm4jM5vWcYLEvYmhQF8OsoEo4+m2Heq4WQsfewi2Kp2guuQw5HOToRX
+         4pYNIkT0v5/NywGXlfXtZ2auLDJCmj+AGBz+EuXwWwdtA3ZNJu2XfY2rg+dSUabiF2lh
+         Ty/Q==
+X-Forwarded-Encrypted: i=1; AKwUvBwtofChboxr/aakdN+6S87GEiKdQrb+ujVlM/1ztMx2c66/9zMDjq0fI1N9cK+pdH5nsULrubzYe1Q=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mP6fkzLMWxyuimUmr1mUadgoaLAjKfaOifrlS5CivOEgZAa9/B
+	C89U2PXBVi4TM6KxljDE5LfaHAUKXlFtonNITE+setpYU8ooQFEThTiRmZTxXjWYZg==
+X-Gm-Gg: AYBFou3uMFJgad7toUuSHlZGI6BjadJq0dsqj4DIm0wFTmXxkyY0ltkG3vOp7g8Kq1X
+	8Nc6TEvamtVubEtQ31Gm7C4IrjYu9GvWMlQ3+DTvn/tqE/RYtOa6sBRZk4xInKAWRcmfF3PFCq0
+	U3Q16CaY58pUSje6xShHTD/cf07Y377iFINKbKcm5uj0ggYBzYDG9ecP0YSQaEK284w2dkf9LHm
+	Zym7edW18rG1+prqK8LbiTVQPNvL6OCDEQEvZudGQ4TR/p0HizEAYEv9Uyd5A/vTCh0I9TBvKUN
+	rgkA9oyqJUugijGGpYxIO/mIO2fWJiYElG+HIPhhQcDs4ZldqiO+s7yQpaq4d6w3srHlxZx06rJ
+	Mwt+2ElQRiAm16VOSNeQcXqb6wOtKXMrVLJ3btWtBWzAzpT1hx6+07+UKC4XFdtSqY/uQRgkxtZ
+	R8cKGZkGGcQ0A7H30wjG+scdkIcd2DR0wyGWaqdG3A2YdnmZtiXjZZb3o5fi1a6oeGEidGapmEP
+	TpATc8/qiaVYw==
+X-Received: by 2002:a05:600c:4746:b0:499:bf8c:cfd1 with SMTP id 5b1f17b1804b1-49e7a63a654mr18694485e9.2.1789377703290;
+        Mon, 14 Sep 2026 02:21:43 -0700 (PDT)
+Message-ID: <ee7a2c47-d9ce-41ee-87fa-b76d71a81292@suse.com>
+Date: Mon, 14 Sep 2026 11:21:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/5] xen/sched: rtds: add global-EDF utilization admission
- control
-To: Juergen Gross <jgross@suse.com>, Furkan Caliskan <frn1furkan10@gmail.com>
+Subject: Re: [PATCH 2/5] xen/sched: rtds: enforce admission control in xl
+ sched-rtds
+To: Furkan Caliskan <frn1furkan10@gmail.com>
 Cc: andrew.cooper3@citrix.com, roger@xenproject.org, dfaggioli@suse.com,
  anthony.perard@vates.tech, julien@xen.org, sstabellini@kernel.org,
  gwd@xenproject.org, enr0n@ubuntu.com, michal.orzel@amd.com,
- xen-devel@lists.xenproject.org
+ xen-devel@lists.xenproject.org, Juergen Gross <jgross@suse.com>
 References: <20260826045720.5779-1-frn1furkan10@gmail.com>
- <20260826045720.5779-2-frn1furkan10@gmail.com>
- <371537bb-7c12-4630-bb1f-57e301b1fbf2@suse.com>
+ <20260826045720.5779-3-frn1furkan10@gmail.com>
+ <e64415b8-f117-43d8-a977-8994650050c2@suse.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <371537bb-7c12-4630-bb1f-57e301b1fbf2@suse.com>
+In-Reply-To: <e64415b8-f117-43d8-a977-8994650050c2@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1789377239-C495A757-07026B2E/0/0
+X-purgate-ID: tlsNG-4011c0/1789377703-5A9D9CFC-FD7579D1/0/0
 X-purgate-type: clean
-X-purgate-size: 2935
+X-purgate-size: 1806
 
-On 14.09.2026 11:10, Juergen Gross wrote:
+On 14.09.2026 11:16, Juergen Gross wrote:
 > On 26.08.26 06:57, Furkan Caliskan wrote:
->> @@ -635,6 +656,54 @@ replq_reinsert(const struct scheduler *ops, struct rt_unit *svc)
->>           set_timer(&rt_priv(ops)->repl_timer, rearm_svc->cur_deadline);
->>   }
->>   
->> +/*
->> + * budget << RTDS_UTIL_SHIFT can't overflow: rt_validate_params()
->> + * caps budget at RTDS_MAX_BUDGET. period == 0 means "no
->> + * reservation" (a unit being removed), not an error.
->> + */
->> +static uint64_t
->> +rt_unit_utilization(s_time_t period, s_time_t budget)
->> +{
->> +    if ( period <= 0 )
->> +        return 0;
->> +
->> +    return ((uint64_t)budget << RTDS_UTIL_SHIFT) / (uint64_t)period;
->> +}
->> +
->> +/*
->> + * Utilization capacity of the cpupool domain d resides in.
->> + */
->> +static uint64_t
->> +rt_utilization_cap(const struct domain *d)
->> +{
->> +    unsigned int cpus = cpumask_weight(cpupool_domain_master_cpumask(d));
->> +
->> +    return (uint64_t)cpus * RTDS_UTIL_SCALE * RTDS_UTIL_CAP_PCT / 100;
->> +}
->> +
->> +/*
->> + * Replaces a unit's reservation and updates prv->utilization
->> + * to match. Growth that would push utilization over the
->> + * cpupool's cap is refused. Removing a unit or shrinking
->> + * a unit's reservation always succeed.
->> + */
->> +static int
->> +rt_admission_test(struct rt_private *prv, const struct domain *d,
->> +		   s_time_t old_period, s_time_t old_budget,
->> +		   s_time_t new_period, s_time_t new_budget)
-> 
-> I think the function name isn't appropriate. The function doesn't test only, it
-> is setting the utilization, too.
-> 
-> What about rt_try_set_utilization() instead? And make the return type bool
-> (true on success).
-> 
->> +{
->> +    uint64_t old_util = rt_unit_utilization(old_period, old_budget);
->> +    uint64_t new_util = rt_unit_utilization(new_period, new_budget);
->> +    uint64_t total    = prv->utilization - old_util + new_util;
->> +
->> +    if ( new_util > old_util && total > rt_utilization_cap(d) )
->> +        return -EINVAL;
->> +
->> +    prv->utilization = total;
->> +
->> +    return 0;
->> +}
->> +
->>   /*
->>    * Pick a valid resource for the unit vc
->>    * Valid resource of an unit is intesection of unit's affinity
->> @@ -892,8 +983,19 @@ rt_alloc_udata(const struct scheduler *ops, struct sched_unit *unit, void *dd)
->>   static void cf_check
->>   rt_free_udata(const struct scheduler *ops, void *priv)
->>   {
->> +    struct rt_private *prv = rt_priv(ops);
->>       struct rt_unit *svc = priv;
->>   
->> +    if ( svc && !is_idle_unit(svc->unit) )
+>> --- a/xen/common/sched/rt.c
+>> +++ b/xen/common/sched/rt.c
+>> @@ -1527,11 +1527,43 @@ rt_dom_cntl(
+>>           op->u.rtds.budget = RTDS_DEFAULT_BUDGET / MICROSECS(1);
+>>           break;
+>>       case XEN_DOMCTL_SCHEDOP_putinfo:
 >> +    {
->> +        unsigned long flags;
+>> +        uint64_t dom_old_util = 0, new_util, new_total;
+>> +        unsigned int nr_units = 0;
 >> +
->> +        spin_lock_irqsave(&prv->lock, flags);
->> +        rt_admission_test(prv, svc->unit->domain,
->> +                           svc->period, svc->budget, 0, 0);
+>>           rc = rt_validate_params(&op->u.rtds, &period, &budget);
+>>           if ( rc )
+>>               break;
+>>   
+>> +        new_util = rt_unit_utilization(period, budget);
+>> +
+>>           spin_lock_irqsave(&prv->lock, flags);
+>> +
+>> +        /*
+>> +         * Same (period, budget) for every unit of d: test and commit
+>> +         * the domain's whole utilization delta atomically, rather
+>> +         * than unit-by-unit, which could spuriously reject an
+>> +         * overall-acceptable change depending on iteration order.
+>> +         */
+>> +        for_each_sched_unit ( d, unit )
+>> +        {
+>> +            svc = rt_unit(unit);
+>> +            dom_old_util += rt_unit_utilization(svc->period, svc->budget);
+>> +            nr_units++;
+>> +        }
+>> +
+>> +        new_total = prv->utilization - dom_old_util +
+>> +                    (uint64_t)nr_units * new_util;
+>> +
+>> +        if ( new_total > prv->utilization && new_total > rt_utilization_cap(d) )
+>> +        {
+>> +            rc = -EINVAL;
 > 
-> This use case clearly shows you are not only testing. :-)
+> Is EINVAL a good choice here? I think a different error code might be wanted.
+> 
+>> +            spin_unlock_irqrestore(&prv->lock, flags);
+>> +            break;
+>> +        }
 
-Yet at the same time ignoring possible errors.
+Additionally please unlock first, then set rc. The compiler may do such a
+rearrangement, but it also may not.
 
 Jan
 
