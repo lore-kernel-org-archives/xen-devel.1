@@ -4,46 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7F156C88E53
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 09:39:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421566.1647347 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1A0C88E75
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 09:59:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421587.1647363 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6Pcc-0000zJ-P9; Tue, 15 Sep 2026 09:38:38 +0000
+	id 1x6PwQ-0003sX-CL; Tue, 15 Sep 2026 09:59:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421566.1647347; Tue, 15 Sep 2026 09:38:38 +0000
+Received: by outflank-mailman (output) from mailman id 1421587.1647363; Tue, 15 Sep 2026 09:59:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6Pcc-0000zC-Lr; Tue, 15 Sep 2026 09:38:38 +0000
-Received: by outflank-mailman (input) for mailman id 1421566;
- Tue, 15 Sep 2026 09:38:37 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x6PwQ-0003sQ-9R; Tue, 15 Sep 2026 09:59:06 +0000
+Received: by outflank-mailman (input) for mailman id 1421587;
+ Tue, 15 Sep 2026 09:59:05 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1x6Pcb-0000z6-G8
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 09:38:37 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1x6PwO-0003sD-Sg
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 09:59:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6Pca-001xBC-Cm
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 11:38:36 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1x6PwN-00GA70-9Q
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 11:59:03 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6aa9121b-2eae-0a2a0a5409dd-0a2a4503af86-4
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 11:38:36 +0200
-Received: from [40.93.195.13]
- (helo=SN4PR2101CU001.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6aa9121a-fae8-0a2a45030019-285dc30de614-3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 11:38:35 +0200
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by MN2PR03MB4989.namprd03.prod.outlook.com (2603:10b6:208:1a5::19)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6aa916e0-e002-0a2a0a5209dd-0a2a45089b1e-20
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 11:59:02 +0200
+Received: from [52.101.46.31]
+ (helo=CO1PR03CU002.outbound.protection.outlook.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6aa916e4-f659-0a2a45080019-34652e1f5631-3
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 11:59:02 +0200
+Received: from BN0PR02CA0046.namprd02.prod.outlook.com (2603:10b6:408:e5::21)
+ by MN0PR12MB6055.namprd12.prod.outlook.com (2603:10b6:208:3cd::20)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Tue, 15 Sep
- 2026 09:38:32 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0406.007; Tue, 15 Sep 2026
- 09:38:31 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.7; Tue, 15 Sep
+ 2026 09:58:57 +0000
+Received: from BN2PEPF0000A895.namprd04.prod.outlook.com
+ (2603:10b6:408:e5:cafe::88) by BN0PR02CA0046.outlook.office365.com
+ (2603:10b6:408:e5::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.9 via Frontend Transport; Tue, 15
+ Sep 2026 09:58:57 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN2PEPF0000A895.mail.protection.outlook.com (10.167.248.187) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.428.7 via Frontend Transport; Tue, 15 Sep 2026 09:58:57 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 15 Sep
+ 2026 04:58:56 -0500
+Received: from [10.59.21.158] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
+ Transport; Tue, 15 Sep 2026 04:58:55 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,171 +67,256 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cOGkhIeUGNt6T4TzMF3zosPT9Ss1LmMfK0+BuGoHSW8cKR0BTnkQyT2vcO1Zx6jiR4dLzz8GJkcHQk1nnkflFflIYB8lZCWzaLTeUM2x7Y0/4Abj7HY19J2gKZkZY9KM+lknVH1p7o+sZC3SkuCzn+SkfHhLUXLEJZ4x93wRNzW/kFDvsxzMakBTkpWSfyEFkFx10dzIHarTOvtfy4y1r2wShRVh/ZJNRvJA3GJmRcLnJ9rgQcXSfNkzpox6jvoVzreZl0gEIFafK6hVzPwAOzb9JnwBYDsdfAvhzkJTAAHRh3e7Iyp/ktJolHCxUVQATmxFewB3gGTB1RX6tvmlJA==
+ b=E8S5vOr8cHMiuAULtSVo0sFWZdMD/yKZcBtdrazuFptTpkPsaS1vyisi6Bjbz3ivxVAcjhavFyyAYpK5Cuyj2ojAzNizjHbOf44hdqEw2jAixPFMdH32kcQIzLAyxjnggOzUZY3N9BsOFCBQ+sTpHorNr6b7DXC+LPv06tzuZj9mzA9B6hpYxebDo3Y8oiLz1/aGeAxnT67RBB/zvjYxLCF6ofSENRlt6qV823SHBts7R2R3NKsp7xuL/ykbK6mJ2uTGc35qCTLzPMiEHPNubkUUqUEIOXGD7ltoHy8jw2pUgaGBibeaZ8ULrzr7GgZ4SSqrd0cYYiijIR9cuVeDug==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Oifu2j0T/ryYwRsVAwvUc9UCZV78mWd5/uiBJmInh1U=;
- b=AuL7XMZ6Pobw0LXOzujT1bikBulk0XtgNYMNGHERsI57oA7s30/vkAxYziYel+H9KKwRvRBqesyPsG9/1z8mJZ6ufGEVx2KoL4NXVUZY/5m3JRa3tJCQClWWqq0Xjpq2fYVPtsJzwStG/kh55FiII/6jIQ4VxwzzqGr7F6d7hxyLyzXc0iJXigOOJgwXv/ek+6AtBW4EpIelDwDv6gKR+C5tm/AGlf8w3lO65JyBekUVjYxNA6Ku1+zes9YN71Ru2s1gYVzPkM7L337t7UWTVrGF6raO1kfHq5+twEYc1Lg870K6I2Km4dJXxxBdS/VY9+mCKapRsWyQ8uh0ENgvsw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
+ bh=KywGxKMrh44b9K61tCSeBZhvRqdD6BlG94XY3KfEqaA=;
+ b=kzfo8Ki+AKbJbGqhkzDtQTzuNCueEQLcUd5TjuaXXR7KHIzcaqmnSj+Y3prE+RRi7LG3u/iY//DYVn2O7lFacwoIat110cOh/jzFsNpFEAw0RMK8qxGNC1f6l9RcCBhuuNIa4JSmn+bAp8lg1c5D2bELp5e+HCqRUmaYrOXhGKQIGfA6orea/bzKEu5UqoPo+3ocelkIH3DeaXBjZsxaH6SbezNK1CjihzT9dRh5aLXd9ES3JmflpzMjiPyxhrVpY9PfgTZKBCBGj4ry79Tw5i/aeLrQV2zi2Ddw//SSNDymT0+daHyBSMJnbjmKWNj39LCxVhBnmPylD49foFI4gQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=ti.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Oifu2j0T/ryYwRsVAwvUc9UCZV78mWd5/uiBJmInh1U=;
- b=q2FoBlG6ecrTTU4z48+66OU+rMH/adg5S3yEtdGFek4PBAmrjq9wGEfpBHluNNBJbQOd6TPi6WhESdm72QEQkROmAIT58Hra+mf29+P/T3Vsp3xG3UvL88VkXW6yeHGAQD8cx9LsrUfOmw55sxx1KLcI7sEW9V58Z8voeSlEa9g=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <ee58a22a-5509-479a-9379-543730dc0cb6@citrix.com>
-Date: Tue, 15 Sep 2026 11:38:26 +0200
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2] Add basic b4 config file
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- xen-devel@lists.xenproject.org
-References: <1789463207.8631fc262581453bbf619ec5b2062170.1a0a4519d3d000c4f3@vates.tech>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <1789463207.8631fc262581453bbf619ec5b2062170.1a0a4519d3d000c4f3@vates.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0036.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:c7::9) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+ bh=KywGxKMrh44b9K61tCSeBZhvRqdD6BlG94XY3KfEqaA=;
+ b=EOoURSt2FLbw1CHMKFmRHzEJLjYcKKmqAJvZmTf4oRbSiyWt0JHk5UeZNXe6NorYrH0zmkxO+Uf7XTL+H6O7oN0HazLlQaVXDc3dH36ATQEd8xxDNwrHyJv94xXHeB9c1Jf2KtugtOmHd2km+PAHDI2Ou9tER7bMS7HRKuwSyAw=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <cd1be7dd-5262-42d8-a935-a8461d18e18c@amd.com>
+Date: Tue, 15 Sep 2026 11:58:54 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] xen: Add support to passthrough reserved memory carveouts
+ to DomU
+To: Beleswar Padhi <b-padhi@ti.com>, <sstabellini@kernel.org>,
+	<julien@xen.org>, <bertrand.marquis@arm.com>
+CC: <u-kumar1@ti.com>, <detheridge@ti.com>, <jbergsagel@ti.com>,
+	<xen-devel@lists.xenproject.org>
+References: <20260915082824.2180692-1-b-padhi@ti.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <20260915082824.2180692-1-b-padhi@ti.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|MN2PR03MB4989:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8a1fb316-7d7d-4f83-5ee8-08df130d1ae6
+X-MS-TrafficTypeDiagnostic: BN2PEPF0000A895:EE_|MN0PR12MB6055:EE_
+X-MS-Office365-Filtering-Correlation-Id: 569f70ff-5e98-41ce-82f7-08df130ff559
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|23010399003|376014|366016|56012099006|5023799004|11063799006|22082099003|10067099003|18002099003;
+	BCL:0;ARA:13230040|36860700016|1800799024|376014|23010399003|82310400026|10067099003|22082099003|11063799006|56012099006|18002099003|6133799003|13003099007;
 X-Microsoft-Antispam-Message-Info:
-	nmD8aEyvHqI0um8nOUKTbPoxy1GK2CMeMsR9NErjlq9d32vID0SK1LlyHFAmdQ0TR1Jo2sK5ek3nti1Szqp5yvQyW2zzlReX5KOAiSzR455rWiaYDNSAyD26F+3J9nFbBsawHaJa/Suy55cMSmN1xwcUGPZY95X1On8u9p4QzM7aOvBrKtcdZu/2TVwHFWmjzGZzWTpG14w7aSbOXXda4yeMquviQeMBggevbHPdoX+FxPOVDma6mbhDkf39Sxsn0SLgY7q7LXt7rrRUzoMGhihGWyfML6ISm63qlGDHnQZ7eoRRgvCCrJ8RaRA3W4rKb8ismJ16YKM/Z0Krvln+yydwoQ5ELmlTIHF2jxdSN7EaGrXNulqP3Ru4hOtFH6xIV2rvg2r1ywIPKMQdnlg/1US11+FdsUNDZh68amZ7G9QNkT0NdXbRoQPdx+CCccYBTUNHjADwCKS7vii7uLuZewK/EWfVbbI0dg3si2yvTZKEOD2P3s5Iv4EN/5xpm5n10wPFdsXXyq99G2iIV/DQEcczMFhMkpPKegG0xGpDiHalpGSF0uTsNulRtZEX/ZTs1NF1Nxmf2r2OrLP0AZBNgl6Tl2Y6CFAYxgSI+aqIOJ8=
+	6yZKmSayIT6bLcor3Dhi6U6M0Ng3ocUT2QMasuS7JFrCESOeaykA17ETt+rOkvI5LCoUYcH8/oqXNHE/zkK/GAZNBR6Z1bQUjuE4ufcqSHDYZLPVxVWD0AqSBnIRSx9yqdzYY2xhcRGaSOiykqXQXHGWr4KVJ53U/wCFUd94S8sFBBW+xa7yJnT5LfT1QSeIvDMMKRJ3H2J9lDCFtOxiY5MxIxryul0TnMGJM9Hq6eElZUVz4NiWv2IvH6BxwnDgnQm5cVnVcPY1gYBgmB446zsbonGTZxOBQmVfL9OF/v8vTyc2ycEDEG9cOiRX21PMIAlh0JzFV27YhwCJ+nN7AjSdAWMifXqy04nCSA5QDjCdcrGLpPvEUWo5RCRtlVyMV8hwmspV4sPP3dnDMUIh/yZLTi5/v9Z5/BUAgf8+hixu/JL6M35wCvGXAeHOr2mHj5qq4wVWhT7PNmx5XukJnj1xkwga8BRcewMjO74VUpl2ANTlaTRz5LqVMkQTLZuHj26CwLJ99AieeJOtXuTzL3/YU64mxBNkncoeAVrt8L+jiLXLNaNI+xpmcCyb8vT+uxa8qla64fnOK5N9btDLvJQuqv93kb2Fg6rUNg5cYlgnOzs6q9U5gCth5JEvW3RMaQFzeEVMGtZ6L9cS+Nkozw5wFE2YQ/OIeIdOz9L62phmwEhG5WW0qnQom3yj4AjCCWN40T+3Wlq5FF3PfWPjrA==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(56012099006)(5023799004)(11063799006)(22082099003)(10067099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(376014)(23010399003)(82310400026)(10067099003)(22082099003)(11063799006)(56012099006)(18002099003)(6133799003)(13003099007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?QVZvMGxJNFNDbkdyaDRlQTBXLy9tS1hoMGIvS3VTWlNocjNlZ0pzWmpIT3J6?=
- =?utf-8?B?NzZpc0Nyc3dueE1ZSi9WWE5pTjFVRVVyN0dseWNhSEFzK0Q0SGg0RW0wTjFp?=
- =?utf-8?B?ODJORklLMXRDL052OUNnN05QTmRoM0ErMGdlZm0rMHZzL0JEbEJ2NVRndG4r?=
- =?utf-8?B?ald6Uk0zNEdtd0JFVEdMZzgzeXpvQmFlTERyNHd5ejh3aC9ENHFhUlRYYkp2?=
- =?utf-8?B?Y01NUUlPa1Nzc3JweGhMM0tDQS8wQjNITk4wUkVQOUJHR2VQM3BaeVhvV0do?=
- =?utf-8?B?cWRCaENORTBxNGJEUGRkOElqaW1UaGRidDRzY0ZVM2FaaEtDTFFLK1lFOUhH?=
- =?utf-8?B?dTZZMDZXVnpNY09YL1NpVUxzM2ZnRndGQzh3cWVldnRkVEpQU2JNY3UwZlJ6?=
- =?utf-8?B?ek4wV1Y1WHNnaWRyRDdoeENpUVJDdzMyQnZHRXJCZHJ5ZVg1NXhuejNxbGox?=
- =?utf-8?B?RmtBb2gwenJ4dkQ2UzJpaVhzUmVqS3RyRnVXUzA0OFUrZDdyb0RVaUF3RzVw?=
- =?utf-8?B?aThYSDJwY1hYYnBkazdLelB6dzdhNVRTeFllUlh3d3BrcDM5SVZIQ3d4R09h?=
- =?utf-8?B?VWl5MERKSE5HRzZLaWZ1RWYvdmQyc2xEM1lBOGh3a0U2NFM1QjZXbHU0QlRB?=
- =?utf-8?B?TVBiZktVaExibjM5TW9QT1JMMThmWWJQNkNaaHpwZU5ITzcwQ1RnQlVCMWQz?=
- =?utf-8?B?S21qQXllVjc5RkVidnE3elJ4OE9zb1hzUGIzUTgxVGRhbjBrbHRmdFhKUGR4?=
- =?utf-8?B?RW5vQmFUZkxud0ZhcnUwOHFBR3FuRmZSNXdzRmtjUllJTTFRVlRRTkhHVG8v?=
- =?utf-8?B?LzhmSmhuam5kTFV4bmE2Mnk0R2NZMXg1MVJFU2crSkRpNklrRElTSk02QUFy?=
- =?utf-8?B?blBkMDVYSWNiTVJuYzZaN1pKTmhyb0pqYWVuRmRYcUJpYmpBQ2lWbjdKM0JH?=
- =?utf-8?B?c01wblFwR0NXNXYyZVJjdzVHT2pYNlpCVzVhajIvTTg0eEc1d2hKZFM3WFRK?=
- =?utf-8?B?Zmo1TnVaVXhYMmVMZ25uVS9oVzFZbmFNeDZoM3VvZ1BlQ2lPblZzZi9IbTlw?=
- =?utf-8?B?cGQxV1VIRVFPYmZMTm9YZDNhQTVTdzRKRytxeEtoc3NhZnFJQ2ZmellzOERr?=
- =?utf-8?B?eGR6YkdQTHpvR0hBcVM4Z3hKRnJ2Qzdva0oxQ0Z3NTJDY3dPTHdiNHd1MUtJ?=
- =?utf-8?B?UHRTblJUUnYvTXRtdVZRcDdvaWdWN3BzNzMvR3J2Z3RheU5CQjZEOTRZQmJ4?=
- =?utf-8?B?cXVuZzh5dHhWQ3FTS1lUN0swVnRJdkkrbExPRHpoMWFnVGo4OGVhdk4wUE1n?=
- =?utf-8?B?TkxVV3h5NHZIV09sV3RtOEcxSVYvaTYrc1ZpajZ5UFA1WXlnSmc3MjVaWndm?=
- =?utf-8?B?b3d0U25mdFFpYkF6T1ZwRUJ3aW9UWVlxaG9tSCsxMVpFWmdHcDVJKzhRT0lh?=
- =?utf-8?B?eEZVUG9yeG04cEJlLzdZOVBTUUYwS3kwM3ZhMjNnYjYwRjlLODcxNHFUZ21m?=
- =?utf-8?B?L21aVnQzamRLQmFVanBTYzRORkdnSWJGVmVPU2crQTZsNUtmeDRyQjhzN2hk?=
- =?utf-8?B?S3FPRW93UHVEaGIyRzdFVmlBUFhBa0I4bG90dUVCRExoQUhTOVZNR1pvSmgv?=
- =?utf-8?B?SkpoR1RCaUxvK1BKRHByYlJKYVV6eHZGUnhHeFRYRGZTOS80Y0RKbUtDY25K?=
- =?utf-8?B?Rkpyc0NqK2FWZnlURTZFT2NDcFlGQ2pjNWZyRU42c1NEV0JpRmJLaDE0TUlX?=
- =?utf-8?B?VkNFTUdhRDF3YWhaTkUzVTY0T29ENnhnNlFxZkNic3VtS3NpRUxPQk0vYnhD?=
- =?utf-8?B?ZTlTc0JZUm51dWdvY2dOZm9mWVZ6bmVTV2FaU3ZKY3pDWWxvOUNUelR6N3Iw?=
- =?utf-8?B?cUhQMkE3N3JmcUl5UnFGN3BDLzl4azNHNytwMXVuMVZTbWN0MGZ6L1doSFU5?=
- =?utf-8?B?U1BWZGNqNUNjNmxPSUdhYnFyQzBnazh2N1BIOHBIaUpSbUNWVlh6d1F0Zy81?=
- =?utf-8?B?Y2FZc2xLQVZES3dTNW13STZkUTluSGcvT1dOaHRQYWFOdFd6UkZWbERNR3J0?=
- =?utf-8?B?dWFDamhaN3Jxc3JRUlQ4amlRZTBmYW50TzZXaTN4ditJVHhWMmFZRTlLakh6?=
- =?utf-8?B?RTVNVlpnVllad0VqRWhCbjZJZXAySHF2aDl2ZnY4QzVmMGU1Y21RQVBKSkVN?=
- =?utf-8?B?Y015UkgwSTUwVy82OG9MRUVrcDA4VmRYSDViUlNaWjZHUWtrbGhubEhhTGF0?=
- =?utf-8?B?VTFQNFgvSTV5aVA5UUpETXRDaU9RREc5R0xYQjhvM1Z2WHJyMEZtMVVKdndr?=
- =?utf-8?B?b3BlT1lobEYwNlJlRzUrYUw2dS9odExHSmFJNTdCMXdxT3FvVk8rdz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8a1fb316-7d7d-4f83-5ee8-08df130d1ae6
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 09:38:31.8410
+	Jv65bECHlpovCzGvZEXD2+0iYGsSfQZ4pOXp58dOE7MxdESB1zG28Ho4kcXyOJ58a8XRIZR6wpgFepKRCGXNzaDcpkDZP1TFp39lp+PM4b26vjKzFyPAmFSUhnt0LvYkd90QCVkQ1pWJ2fKvWAKRXVTSQmWK4qB/Bb79/gwtejsZFIHKpvW9UaHYxhBDxtlxih6E+1OkaGjaWZ5sA6yYDyHCxN1U/BqCj9kdJgR8pKWp89eeF5jR9ChaZcuVRO8QG/JAMKRRJxS1l7zuafl+UrAQKgAq0LZt7qbwn+Ai6WnOXhN6qv1tCdA/4vof+m+s4HDEJRC02rGn4UxwxJ32PmxjU6tZkBjZxOlY9HRO3GoApYxW//9ezXDIjmpaFAQpVpEMIwkHYAkaiBS3u5CE+wv15shA5g7xShe18H0HVX6polNfhpynTnnjSSo3eS2e
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 09:58:57.1199
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VLzzQ2Qsx8HxxwardX95HnHfWqVnl0HG/sihhjG5MVaH034jdwusPn6VeG9Fb2zkxhyrjy8DcytHJKs6IrNNYDka7S9NRjtIhGR5EbjgPAE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR03MB4989
-X-purgate-ID: tlsNG-33051d/1789465116-77AC44E9-F13AC87C/0/0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 569f70ff-5e98-41ce-82f7-08df130ff559
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN2PEPF0000A895.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6055
+X-purgate-ID: tlsNG-c1860d/1789466342-D554C87B-ECCCA531/0/0
 X-purgate-type: clean
-X-purgate-size: 790
+X-purgate-size: 7901
 
-On 15/09/2026 10:06 am, Baptiste Le Duc wrote:
-> b4[1] is a convenient tool for mail-based contribution. A config file[2]
-> tracked in the tree lets the project ship a few defaults that match the Xen
-> patch submission rules.
->
-> This aims to help new contributors who have never used a mailing list avoid
-> mistakes when sending their patch series.
->
-> The tree has no scripts/checkpatch.pl or equivalent, so there is nothing
-> for b4 to run per patch. Disable the needs-checking pre-flight check so a
-> series can be sent without first running b4 prep --check.
->
-> [1] https://pypi.org/project/b4/
-> [2] https://b4.docs.kernel.org/en/latest/config.html
->
-> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Hi,
 
-Acked-by: Andrew Cooper <andrew.cooper3@citrix.com>
+On 15-Sep-26 10:28, Beleswar Padhi wrote:
+> Currently Xen only looks for /passthrough and /aliases nodes. Add
+> support to parse the /reserved-memory node and pass it through as
+> requested to DomUs. This is useful to enable many usecases in DomUs
+> like Remoteproc firmware carveouts, CMA carveouts etc.
+> 
+> If Xen's static shared memory carveout is found, it is placed as child
+> nodes under the top level /reserved-memory node as also done in commit
+> 51a2b3f10918 ("xen/arm: fix duplicate /reserved-memory node in Dom0").
+> 
+> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
+I'm afraid adding support for passthroughing /reserved-memory nodes like this
+patch does is unfortunately not enough to help with the common use cases these
+days. /reserved-memory nodes got complex from Xen PoV mainly because of the
+"reusable" property that lets OS (say Linux) use such memory for whatever it
+wants until device asks for it. The common use case is "shared-dma-pool" and CMA
+buffers. They specify "reusable" (hence no "no-map"). This causes a few issues:
+1) Xen maps memory for passthroughed regions for domUs as device memory (keep in
+mind the rules from Arm ARM for joining stage 1 and stage 2 memory attributes -
+device type is the most stringent one and wins) but for shared memory it should
+be normal memory.
+
+2) Linux can use such reserved memory region as normal RAM and hence use it for
+Xen shared buffers (e.g. hypercall buffers, shared memory, etc.). As per
+arch-arm.h any memory shared between guest and Xen needs to be of normal type.
+
+3) Xen does not give reserved memory to the allocators and does not have backing
+page_info structs for such pages. If such memory ends up being used with Xen
+(e.g. to map foreign pages) such access will fail because Xen will not be able
+to get pages for such region.
+
+Problem 3) exists today also for hwdom. Problems 1) and 2) are gone because Xen
+maps memory of passthroughed nodes for hwdom in a more relaxed way so guest
+attributes win.
+
+This is high on my TODO list because there is a real need from customers to add
+a proper support but I don't have any bandwidth this year to do any work.
+
+I guess your solution would only work for the simplest use case which is for
+/reserved-memory nodes with only "no-map" property present. We could limit the
+support for only such nodes (check if it contains "reusable" property and if so,
+bail out) as a temporary solution if this helps.
+
+~Michal
+ > ---
+> Hello all,
+> 
+> Sending this patch as discussed in:
+> https://lore.kernel.org/all/0e556bb5-269d-47d7-9ae8-68f06eee9fc0@ti.com/
+> 
+> Test Configurations & Logs:
+> https://gist.github.com/3V3RYONE/bef3bb51459f8b823605261b35494a7e
+> 
+> Thanks,
+> Beleswar
+> 
+>  xen/common/device-tree/dom0less-build.c | 45 +++++++++++++++++++------
+>  1 file changed, 34 insertions(+), 11 deletions(-)
+> 
+> diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
+> index fcbeb8adbd..e9581327ee 100644
+> --- a/xen/common/device-tree/dom0less-build.c
+> +++ b/xen/common/device-tree/dom0less-build.c
+> @@ -334,7 +334,7 @@ static int __init handle_prop_pfdt(struct kernel_info *kinfo,
+>  static int __init scan_pfdt_node(struct kernel_info *kinfo, const void *pfdt,
+>                                   int nodeoff,
+>                                   uint32_t address_cells, uint32_t size_cells,
+> -                                 bool scan_passthrough_prop)
+> +                                 bool scan_passthrough_prop, bool resv_mem_node)
+>  {
+>      int rc = 0;
+>      void *fdt = kinfo->fdt;
+> @@ -358,13 +358,20 @@ static int __init scan_pfdt_node(struct kernel_info *kinfo, const void *pfdt,
+>      while ( node_next > 0 )
+>      {
+>          rc = scan_pfdt_node(kinfo, pfdt, node_next, address_cells, size_cells,
+> -                            scan_passthrough_prop);
+> +                            scan_passthrough_prop, false);
+>          if ( rc )
+>              return rc;
+>  
+>          node_next = fdt_next_subnode(pfdt, node_next);
+>      }
+>  
+> +    if ( resv_mem_node )
+> +    {
+> +        rc = make_shm_resv_memory_node(kinfo, address_cells, size_cells);
+> +        if ( rc )
+> +            return rc;
+> +    }
+> +
+>      return fdt_end_node(fdt);
+>  }
+>  
+> @@ -389,7 +396,8 @@ static int __init check_partial_fdt(void *pfdt, size_t size)
+>  }
+>  
+>  static int __init domain_handle_dtb_boot_module(struct domain *d,
+> -                                                struct kernel_info *kinfo)
+> +                                                struct kernel_info *kinfo,
+> +                                                bool *found_reserved_mem_node)
+>  {
+>      void *pfdt;
+>      int res, node_next;
+> @@ -430,8 +438,8 @@ static int __init domain_handle_dtb_boot_module(struct domain *d,
+>              continue;
+>  
+>          /*
+> -         * Only scan /$(interrupt_controller) /aliases /passthrough,
+> -         * ignore the rest.
+> +         * Only scan /$(interrupt_controller) /aliases /passthrough
+> +         * /reserved-memory, ignore the rest.
+>           * They don't have to be parsed in order.
+>           *
+>           * Take the interrupt controller phandle value from the special
+> @@ -445,7 +453,7 @@ static int __init domain_handle_dtb_boot_module(struct domain *d,
+>              res = scan_pfdt_node(kinfo, pfdt, node_next,
+>                                   DT_ROOT_NODE_ADDR_CELLS_DEFAULT,
+>                                   DT_ROOT_NODE_SIZE_CELLS_DEFAULT,
+> -                                 false);
+> +                                 false, false);
+>              if ( res )
+>                  goto out;
+>              continue;
+> @@ -455,11 +463,22 @@ static int __init domain_handle_dtb_boot_module(struct domain *d,
+>              res = scan_pfdt_node(kinfo, pfdt, node_next,
+>                                   DT_ROOT_NODE_ADDR_CELLS_DEFAULT,
+>                                   DT_ROOT_NODE_SIZE_CELLS_DEFAULT,
+> -                                 true);
+> +                                 true, false);
+>              if ( res )
+>                  goto out;
+>              continue;
+>          }
+> +        if ( dt_node_cmp(name, "reserved-memory") == 0 )
+> +        {
+> +            res = scan_pfdt_node(kinfo, pfdt, node_next,
+> +                                 DT_ROOT_NODE_ADDR_CELLS_DEFAULT,
+> +                                 DT_ROOT_NODE_SIZE_CELLS_DEFAULT,
+> +                                 false, true);
+> +            if ( res )
+> +                goto out;
+> +            *found_reserved_mem_node = true;
+> +            continue;
+> +        }
+>      }
+>  
+>   out:
+> @@ -486,6 +505,7 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
+>  {
+>      int addrcells, sizecells;
+>      int ret, fdt_size = DOMU_DTB_SIZE;
+> +    bool found_reserved_mem_node = false;
+>  
+>      BUILD_BUG_ON(DOMU_DTB_SIZE > SZ_2M);
+>  
+> @@ -538,7 +558,7 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
+>       */
+>      if ( kinfo->dtb )
+>      {
+> -        ret = domain_handle_dtb_boot_module(d, kinfo);
+> +        ret = domain_handle_dtb_boot_module(d, kinfo, &found_reserved_mem_node);
+>          if ( ret )
+>              goto err;
+>      }
+> @@ -556,9 +576,12 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
+>      if ( ret )
+>          goto err;
+>  
+> -    ret = make_resv_memory_node(kinfo, addrcells, sizecells);
+> -    if ( ret )
+> -        goto err;
+> +    if ( !found_reserved_mem_node )
+> +    {
+> +        ret = make_resv_memory_node(kinfo, addrcells, sizecells);
+> +        if ( ret )
+> +            goto err;
+> +    }
+>  
+>      ret = make_intc_domU_node(kinfo);
+>      if ( ret )
+
 
