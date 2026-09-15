@@ -4,44 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3DF8C88E75
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 13:18:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421727.1647504 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9546EC88E75
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 15:11:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421893.1647516 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6T3B-0007h1-4n; Tue, 15 Sep 2026 13:18:17 +0000
+	id 1x6UoN-0001Gu-HN; Tue, 15 Sep 2026 15:11:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421727.1647504; Tue, 15 Sep 2026 13:18:17 +0000
+Received: by outflank-mailman (output) from mailman id 1421893.1647516; Tue, 15 Sep 2026 15:11:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6T3A-0007fn-TT; Tue, 15 Sep 2026 13:18:16 +0000
-Received: by outflank-mailman (input) for mailman id 1421727;
- Tue, 15 Sep 2026 13:18:15 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x6UoN-0001Gn-Eh; Tue, 15 Sep 2026 15:11:07 +0000
+Received: by outflank-mailman (input) for mailman id 1421893;
+ Tue, 15 Sep 2026 15:11:05 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1x6T39-0007K3-8d
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 13:18:15 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1x6UoL-0001GO-7b
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 15:11:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6T38-00EGE6-Ku
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 15:18:14 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x6UoK-00HDv8-2Y
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 17:11:04 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6aa94592-8faa-0a2a0a5109dd-0a2a450ce112-12
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 15:18:14 +0200
-Received: from [74.125.230.140] (helo=mail-qv2-f12.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6aa94595-f479-0a2a450c0019-4a7de68ca73b-3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 15:18:14 +0200
-Received: by mail-qv2-f12.google.com with SMTP id
- 6a1803df08f44-910531ea7feso1933546d6.0
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 06:18:14 -0700 (PDT)
-Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
- [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-9120f45cb06sm120943296d6.11.2026.09.15.06.18.11
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Sep 2026 06:18:11 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6aa96004-bab6-0a2a0a5309dd-0a2a4507946e-10
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 17:11:03 +0200
+Received: from [40.93.194.38]
+ (helo=SN4PR0501CU005.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6aa96004-b4ea-0a2a45070019-285dc2262173-3
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 17:11:02 +0200
+Received: from SJ0P220CA0019.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:41b::35)
+ by IA1PR12MB6233.namprd12.prod.outlook.com (2603:10b6:208:3e7::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Tue, 15 Sep
+ 2026 15:10:55 +0000
+Received: from BY1PEPF00026966.namprd05.prod.outlook.com
+ (2603:10b6:a03:41b:cafe::98) by SJ0P220CA0019.outlook.office365.com
+ (2603:10b6:a03:41b::35) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.11 via Frontend Transport; Tue,
+ 15 Sep 2026 15:10:54 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BY1PEPF00026966.mail.protection.outlook.com (10.167.244.150) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.428.7 via Frontend Transport; Tue, 15 Sep 2026 15:10:54 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 15 Sep
+ 2026 10:10:53 -0500
+Received: from [10.59.21.158] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
+ Transport; Tue, 15 Sep 2026 10:10:50 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,231 +67,187 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1789478293; x=1790083093; darn=lists.xenproject.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=dyunHw12Wk9XaltfwN7bGL3PCRgKnyr3LfmugMg8Gj0=;
-        b=kVbYizVvr0XDYxRwAlznzX16CEGNCN3e0SM703D6FCbOn8fYG0Av0OzdwoCCP1+j/J
-         Nj4urZN8r1kEa2225NXa2HyIqnsh4vKC5qlxP7nTwmKJ/1a0PoSJl5zYSKm7+u62Bb/Y
-         8DpLL9kHOZYdk1PhBJvyiu/h4M0iroJRlJfj+OsPt1eT4Tb6ItC1ctPDeP1OqQA3cX0A
-         nDrPQ2eiI271dhOy39WokDfTsO3CPTKjmAuHRK6Wm8PSEhNljdbkwJE/5ZNUVL+dkoIh
-         JGTztFhWm+j6/phJ+WkEfcVOgktu9gcSuHnxeMiXsLerg+Uk7vUdoxQ3B5X2rcPxHY1R
-         ZjhA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789478293; x=1790083093;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=dyunHw12Wk9XaltfwN7bGL3PCRgKnyr3LfmugMg8Gj0=;
-        b=jKom8/oJe6fK2hVMuCTHhhLTmWyxThvGGDqwQHUYbu6A0YmxwwAv1PigScEJnvywO7
-         /nG5gCxx3EHwf9AsUiPAmM/eM6hrbPSm7YoXrejwNzkWTWkquBgkI3P2R4VSSA62CD9g
-         6/VnOzglMrcGad3ltm9D+nxI3CmBIR2T/Bm+iOLdKleEyrZyj2+M+smnS2X6NYnNGoSj
-         atSZX7ewMwiyNRig+porICRCkvqCssGvQBil/VtvelPXtSI5usAiVdAwLstYy4fV7Z0V
-         49U90HCm+mypkfJjHzgWzpMjQhlKjMrsmBDYq8KfzcfjGFZ2V6hLzQ/e1wK82+YlcECh
-         ubCw==
-X-Forwarded-Encrypted: i=1; AKwUvBz7NUpxt9ZhDbWyFmS/a1O+CMhHqGYFcr2wXSZseC+PBAEbzEhP/D2GJikSFkrTOxvLP7J6mcZML8w=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lpdYITDE3mXKMJrsizMM7cy5eFISlK5bSUsk9+4aTOfUE/o9jr
-	7REPbRFoX7ilsHQRFc9KwYRPORXFDD+UDCVZR1JI7R6plNemN5yZsxifBjCorZvud+w=
-X-Gm-Gg: AYBFou3arBiSY2czv/WL9oh5IY3mK9KIXu1SM9QKOalV4i/PYjLTQlDL83/v8uSwruQ
-	NcFB1bRn0Ev95sUTrReT7EamrqajR32/tS6ADXNvr0UOWkh3gmJE5zJJC4Mxowmx9UFZPG7Q7p5
-	Qc3PFAyW8Er3rsIbBfzOqW6AHoyHhlAmHALHdhgzq4HbH1zcLOGY0rleas4PWcu2ptpGXTaf0SS
-	0O0+xTJrVhOE8B8sdjh6Ki8IsMGXG09okE3vaXCY/HyhNiGyA6AxOY0rm8mHEWumexGnWuDM4Ie
-	sNmJ9/iSHa7iVEB8k2sVVmiLUY4Q8a70YIW6YezhaR/DIzduePiy6aCknDM7ls78ttZT7NkMmH/
-	nPf4qrIvMExYqwStddkSLUeRj3Qz5eANdeN3hlqO6iFyeLV+kGM5zqZIWnK7+TRqLB1xELWwG37
-	bqxem6Axva2VPTJvHg69lhJo2yvMmjUjGU+5xdX7QvvMpxOrMzDGGwxatN4jPgAuN3Exx1AlIUx
-	ycfWTtd0091SKn7TdSx14w7y77SCWbP/j1zz4Wi3UhLh0QI53hMqs22
-X-Received: by 2002:ad4:594b:0:b0:910:4c56:76d8 with SMTP id 6a1803df08f44-9123a42ec8fmr14508336d6.1.1789478292499;
-        Tue, 15 Sep 2026 06:18:12 -0700 (PDT)
-From: Josef Bacik <josef@toxicpanda.com>
-Date: Tue, 15 Sep 2026 13:17:40 +0000
-Subject: [PATCH RFC v3 13/13] x86, arm64: Build Tasks RCU on Tasks Trace
- readers in trampolines
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vWIHfdx2yvo2ifZSfC8Rt1yqiB83ZqBHUkaW2xM4PAqRKMHZW2DZb/4E82CRUKpqJC9Kym77OnGQWy89r18GcREPL9Itgh+eNr57NxdJAJlBJSSE1m+zU1YFScMkGzSIGw7nFbnkEGbzEEOhwDTt7OsHGqtHILogXFQuWJouORVCc5quQsyUYxV4A3SY6IPGE8DclbKw22hlWsFNgk8bNxX8Q++KnnoVWpZGAWJNY6TW03kbP4w9AuE0bLRIZYoTHKkYqtGz3dK3NAJ3SBFrdW5coaVSrgGpb/tVTqPaGO4jFgcaQr5PGCAQshrA0KsVGqivfz1fb+LUKk67AkcMAg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qlRb2gesJ/feywV2dEBLlDH3IlnkEBKEj38S1Cmyy1M=;
+ b=I6aqAXpP/SInA8w00WAZzSuOQaBr1k5UvQzrRC0DIRC1JnPb1/uF8DEv4RxABNLyf9RdiI49m3zvcH4ib1/mNqLkiZEZ+rZ4REE5vZSwd5pcs/EtLQqMkysfs7A9NwvxfogbB4ImMdPf34p10TXb+UPvx4qMbiyeuZq6FfNx0a9cUuXlb+HWrzi+LUVsq8R70R6Lx/JnFJB+gXyNU7igynufKcfZfAub4oiaONoLOorUQspZ6C3Ls4yYKMAjJMWPNsmrL8jSt8d1tH+UvRmbIpXU3lHfov8ghPIYvbfmGIgwh8l6sLwP6qlwZJA8r7je53ocSqbsvTLvMZgU9oDyCQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=vates.tech smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qlRb2gesJ/feywV2dEBLlDH3IlnkEBKEj38S1Cmyy1M=;
+ b=DURdfjvimofBwOm/N+DN3CkNzqFqPF5Ztl718ePkzrQyxblXb/IUr1an/gy7udchXW+lpKGE6mq62qXZFT6Jk7X3bvnm+pPWVNZXeeZKQe9c5Dc29oZg0Py1UhFxVnNBdlzKHgSJFT9p2uA1eHwCyfTvV+yDTtUIAI/DuVyfQcI=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <e090ed6c-c9aa-4b94-8652-3350cd9473c4@amd.com>
+Date: Tue, 15 Sep 2026 17:10:50 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 2/6] ARM/sysctl: Expose the supported guest GIC modes
+ in physinfo
+To: Julian Vetter <julian.vetter@vates.tech>, <xen-devel@lists.xenproject.org>
+CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>, Community Manager
+	<community.manager@xenproject.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, Jan
+ Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, Stefano Stabellini
+	<sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>, Andrii Sultanov
+	<andriy.sultanov@vates.tech>, Guillaume Thouvenin
+	<guillaume.thouvenin@vates.tech>, =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+	<marmarek@invisiblethingslab.com>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Oleksii Moisieiev <oleksii_moisieiev@epam.com>, Timothy Pearson
+	<tpearson@raptorengineering.com>, Alistair Francis
+	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, Teddy Astie
+	<teddy.astie@vates.tech>
+References: <1789130592.8631fc262581453bbf619ec5b2062170.1a0907e5286000c4f3@vates.tech>
+ <1789130862.8631fc262581453bbf619ec5b2062170.1a090827031000c4f3@vates.tech>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <1789130862.8631fc262581453bbf619ec5b2062170.1a090827031000c4f3@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260915-b4-rcu-tasks-preempt-qs-v3-13-0ad30c4c5ee7@toxicpanda.com>
-References: <20260915-b4-rcu-tasks-preempt-qs-v3-0-0ad30c4c5ee7@toxicpanda.com>
-In-Reply-To: <20260915-b4-rcu-tasks-preempt-qs-v3-0-0ad30c4c5ee7@toxicpanda.com>
-To: "Paul E. McKenney" <paulmck@kernel.org>, 
- Frederic Weisbecker <frederic@kernel.org>, 
- Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Boqun Feng <boqun@kernel.org>, 
- Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
- Steven Rostedt <rostedt@goodmis.org>, 
- Masami Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
- Jiri Olsa <jolsa@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
- Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, 
- x86@kernel.org, Catalin Marinas <catalin.marinas@arm.com>, 
- Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>, 
- Xu Kuohai <xukuohai@huaweicloud.com>, 
- "Paul E. McKenney" <paulmck@kernel.org>, 
- Frederic Weisbecker <frederic@kernel.org>, 
- Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Boqun Feng <boqun@kernel.org>, 
- Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
- Steven Rostedt <rostedt@goodmis.org>, 
- Masami Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
- Jiri Olsa <jolsa@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
- Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, 
- x86@kernel.org, Catalin Marinas <catalin.marinas@arm.com>, 
- Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>, 
- Xu Kuohai <xukuohai@huaweicloud.com>
-Cc: Andy Lutomirski <luto@kernel.org>, 
- Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, 
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
- Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, 
- Juergen Gross <jgross@suse.com>, Luis Chamberlain <mcgrof@kernel.org>, 
- Ihor Solodrai <ihor.solodrai@linux.dev>, linux-kernel@vger.kernel.org, 
- rcu@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
- bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- xen-devel@lists.xenproject.org, Andy Lutomirski <luto@kernel.org>, 
- Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, 
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
- Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, 
- Juergen Gross <jgross@suse.com>, Luis Chamberlain <mcgrof@kernel.org>, 
- Ihor Solodrai <ihor.solodrai@linux.dev>, linux-kernel@vger.kernel.org, 
- rcu@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
- bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1789478262; l=5993;
- i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=R9t47tbzDpBlKabnqSyLf9h+YtCy+mgQn2kYE1SNKlg=;
- b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
- JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QLrYYFTmT4yc2HnPNOm135tMG3u8qPYsi+9GRPNIPdwz0QfAjvOD+lsxTwptmj0sG65nDpJ4ULX
- TbSFHTaStyQI=
-X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
- fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-d25034/1789478294-00ACCA5B-2A63553D/0/0
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY1PEPF00026966:EE_|IA1PR12MB6233:EE_
+X-MS-Office365-Filtering-Correlation-Id: 676102be-cb34-4d21-e809-08df133b89be
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|7416014|376014|82310400026|36860700016|23010399003|1800799024|10067099003|56012099006|5023799004|11063799006|4143699003|6133799003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	BFJ2tLQhmsOZk81RbyCFsNaTXLRfkCmEY/XSfVGmndNHzc5Ty+ylpbmFrNLZjDxAwl66LoRzwhygxAo2KMzig/BLmlvhXthnrpi8vaZFgV7xvZw5puwTNi0wtNfBMNjABNKqlKcM8u3dQ66tluy2oImOf3AjRREWumxNBvUjcYPzaDkybut6+YsifrFLEGL+sziODsGtqbQ2YMgeEw1jPbl6uf7AXRG3zYg7MpLr/RDwnQ6W6uSwZqOINTWfID3mxYzxtZQsQBBsl6IRHFX+gkwYhZ/S18q/STD76YEZb77GN78D2UonjNIkZXMNmrei6CI//Q+hz00Ftby2lLzHH3WnIDAUxjvY1zuCq6nwGfEE5XPh3zBL34FzWgyHd8KDJAFjbPJBOfGMQweJXz3xds+Zv4C9rzxKSMMSeCTuprSwB9+oBYEFLXwFjA+pJ1DSKcQdQddV+juO/NpCX9SLjz1vffv/FuK6KxbPhRZfIs0xQjqN24EYIEOquzOrGt68Zqh+zwSCNV4KY8+OXexunqnGYV0E8u0AENu/pjgDGp+i0lK0JnfCZVEDZi063LLP+ZFIuIN8cs9WzFt9laSH35bUNQ3rMIqMZkqlG9/5lskzUo1QOOiVXnDXWVUE0RjuNJXEwmKbD/RReyzkNUiwmXj2pJ0KnJjfGaRAY+uGMwqTF+ItZw9I4hHR9Svq+y/QH4wdTyf03mj6NR9sp/fysA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(82310400026)(36860700016)(23010399003)(1800799024)(10067099003)(56012099006)(5023799004)(11063799006)(4143699003)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	C4a1r/HhWkqC2O1AwqFl0SODcCGw0vdgT+cbiDVsn/94aOQ0b+MTxxbMboq1V8OTMVFIW46gPwmA1y1b6K4V0aWoF4pqCbf8rBsFOo3EaQKqJEPxplFWRdyweFtjpvTAo1Rjm4wz23TGTnaUDQ/Iol5cn467oUicVXTvliHAij3aEvw8BcfhD6Ly8lcgCLyqWpz/s/eSoMtLlT6cMq6OweVZChUUgcbhX4o0Fwq7Y0uWOFZVBsKsPttUOHGDMV6pyO8hmIzcUhZehf1fFrmM3ekdThaOInruFs1BWMpN1A9WYuCIOwM+d0Qa0g5fBD5+CAacXhG/6559O3O4QPJi0x+ub9yHC0BYyzf3vUOUCz5sRm6XEJiboLuWRgXMhuxQJjrHKsJ1TeSzV1CjBLkY7o5K0xlAgWlwhFz5F43Ky/BpqIecDXo5U5tZ3hsuRX4e
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 15:10:54.3862
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 676102be-cb34-4d21-e809-08df133b89be
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BY1PEPF00026966.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6233
+X-purgate-ID: tlsNG-ef75cf/1789485063-A74D3AE4-CC83A485/0/0
 X-purgate-type: clean
-X-purgate-size: 5995
+X-purgate-size: 3725
 
-With the preceding patches every trampoline whose lifetime Tasks RCU
-guards on x86-64 and arm64 -- ftrace_caller and its copies, the optprobe
-template, BPF trampolines via their glue, and the sample direct-call
-trampolines -- is a Tasks Trace RCU reader around its call-out, and the
-text outside that reader is known to rcu_tasks_trampoline_text().
-Select HAVE_RCU_TRAMPOLINE_READERS on both (x86-64 with SMP for Tree
-SRCU and DYNAMIC_FTRACE, which is where its ftrace_caller changes and
-arch_rcu_tasks_trampoline_text() live; arm64 with
-DYNAMIC_FTRACE_WITH_ARGS likewise), which switches CONFIG_TASKS_RCU to the
-implementation added earlier in the series: a Tasks RCU grace period
-becomes a per-CPU pass over context switches and irq-exit reschedules
-outside trampoline text plus a Tasks Trace grace period, bounded by a
-few jiffies and preempt-off latency instead of by the longest stretch
-any task runs without sleeping.
 
-Other architectures keep the classic implementation.  Update
-Documentation/RCU and the FORCE_TASKS_RCU help text to describe the
-variant and the obligation it places on trampolines.
 
-Assisted-by: LLM
-Signed-off-by: Josef Bacik <josef@toxicpanda.com>
----
- .../RCU/Design/Requirements/Requirements.rst         | 20 ++++++++++++++++++++
- Documentation/RCU/checklist.rst                      |  7 ++++++-
- arch/arm64/Kconfig                                   |  1 +
- arch/x86/Kconfig                                     |  1 +
- kernel/rcu/Kconfig                                   |  6 ++++--
- 5 files changed, 32 insertions(+), 3 deletions(-)
+On 11-Sep-26 14:47, Julian Vetter wrote:
+> From: Andrew Cooper <andrew.cooper3@citrix.com>
+> 
+> In preparation to simplify the domain creation logic surrounding GIC
+> version.
+> 
+> On a GICv3 host, also report support for GICv2-compatible guests when
+> the hardware's vGICv2 compatibility mode is enabled, rather than just
+> the native GIC version.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+> ---
+> Changes in v5:
+> - Add vgic_v2_hw_enabled() to new vgic implementation.
+> ---
+>  xen/arch/arm/include/asm/vgic.h |  6 ++++++
+>  xen/arch/arm/sysctl.c           | 34 +++++++++++++++++++++++++++++++++
+>  xen/arch/arm/vgic-v2.c          |  5 +++++
+>  xen/arch/arm/vgic/vgic-v2.c     |  5 +++++
+>  xen/include/public/sysctl.h     |  2 ++
+>  5 files changed, 52 insertions(+)
+> 
+> diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/vgic.h
+> index 6f9ab1c98c..26c53aaf3c 100644
+> --- a/xen/arch/arm/include/asm/vgic.h
+> +++ b/xen/arch/arm/include/asm/vgic.h
+> @@ -433,6 +433,12 @@ unsigned int vgic_max_vcpus(unsigned int domctl_vgic_version);
+>  void vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
+>                        paddr_t vbase, uint32_t aliased_offset);
+>  
+> +#ifdef CONFIG_VGICV2
+> +bool vgic_v2_hw_enabled(void);
+> +#else
+> +static inline bool vgic_v2_hw_enabled(void) { return false; }
+> +#endif
+> +
+>  #ifdef CONFIG_GICV3
+>  struct rdist_region;
+>  void vgic_v3_setup_hw(paddr_t dbase,
+> diff --git a/xen/arch/arm/sysctl.c b/xen/arch/arm/sysctl.c
+> index 32cab4feff..8411deb7e2 100644
+> --- a/xen/arch/arm/sysctl.c
+> +++ b/xen/arch/arm/sysctl.c
+> @@ -12,7 +12,11 @@
+>  #include <xen/dt-overlay.h>
+>  #include <xen/errno.h>
+>  #include <xen/hypercall.h>
+> +
+>  #include <asm/arm64/sve.h>
+> +#include <asm/gic.h>
+> +#include <asm/vgic.h>
+> +
+>  #include <public/sysctl.h>
+>  
+>  void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
+> @@ -21,6 +25,36 @@ void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
+>  
+>      pi->arch_capabilities |= MASK_INSR(sve_encode_vl(get_sys_vl_len()),
+>                                         XEN_SYSCTL_PHYSCAP_ARM_SVE_MASK);
+> +
+> +    /*
+> +     * The GIC version(s) we're happy creating guests with. Right now for
+> +     * simplicity it is tied to the active hardware version, but this will
+> +     * cease to be the case if/when the compatibility modes are enabled.
+You carry on this comment but as we are now also informing about the legacy
+GICv2 mode (which was not there in v1) I no longer understand what it denotes
+and why we need it. I think we can drop this.
 
-diff --git a/Documentation/RCU/Design/Requirements/Requirements.rst b/Documentation/RCU/Design/Requirements/Requirements.rst
-index 8101fe6229d5..34b81512cc5f 100644
---- a/Documentation/RCU/Design/Requirements/Requirements.rst
-+++ b/Documentation/RCU/Design/Requirements/Requirements.rst
-@@ -2756,6 +2756,26 @@ synchronize_rcu(), and rcu_barrier(), respectively. In
- three APIs are therefore implemented by separate functions that check
- for voluntary context switches.
- 
-+Architectures that select ``CONFIG_HAVE_RCU_TRAMPOLINE_READERS`` keep the
-+same three APIs but implement the grace period differently
-+(``CONFIG_TASKS_RCU_TRAMPOLINE_READERS``).  There, every trampoline whose
-+lifetime Tasks RCU guards enters a Tasks Trace RCU read-side critical
-+section (rcu_read_lock_trace() or its assembly equivalent) before calling
-+out and leaves it before returning, so a task anywhere inside such a
-+call-out is an ordinary Tasks Trace reader whether or not it is
-+preempted.  The few trampoline instructions outside that reader can only
-+be occupied by a task that was interrupted there, so the grace period
-+additionally waits for each CPU to pass through a context switch, and the
-+irq-exit preemption path, the only switch that can catch a task inside
-+such text (rcu_tasks_trampoline_text()), briefly makes such a task a
-+holdout until it is next seen elsewhere.  On such kernels an involuntary
-+context switch outside trampoline text *is* a Tasks-RCU quiescent state,
-+a Tasks RCU grace period no longer depends on how long any task runs
-+without sleeping, cond_resched_tasks_rcu_qs() is unnecessary, and the
-+obligation moves to the trampolines: anything that relies on
-+synchronize_rcu_tasks() to protect code a task may be preempted in must
-+take the Tasks Trace reader (see register_ftrace_direct()).
-+
- Tasks Rude RCU
- ~~~~~~~~~~~~~~
- 
-diff --git a/Documentation/RCU/checklist.rst b/Documentation/RCU/checklist.rst
-index 4b30f701225f..7082686cbd66 100644
---- a/Documentation/RCU/checklist.rst
-+++ b/Documentation/RCU/checklist.rst
-@@ -252,7 +252,12 @@ over a rather long period of time, but improvements are always welcome!
- 	a.	If the updater uses synchronize_rcu_tasks() or
- 		call_rcu_tasks(), then the readers must refrain from
- 		executing voluntary context switches, that is, from
--		blocking.
-+		blocking.  On architectures that select
-+		CONFIG_HAVE_RCU_TRAMPOLINE_READERS a reader must in
-+		addition be a Tasks Trace RCU reader (that is what the
-+		trampolines there do around their call-outs); an
-+		arbitrary stretch of preemptible kernel code is not
-+		protected.
- 
- 	b.	If the updater uses call_rcu_tasks_trace()
- 		or synchronize_rcu_tasks_trace(), then the
-diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index b5a51b0ef944..bf0e56006863 100644
---- a/arch/arm64/Kconfig
-+++ b/arch/arm64/Kconfig
-@@ -218,6 +218,7 @@ config ARM64
- 	select HAVE_PERF_REGS
- 	select HAVE_PERF_USER_STACK_DUMP
- 	select HAVE_PREEMPT_DYNAMIC_KEY
-+	select HAVE_RCU_TRAMPOLINE_READERS if DYNAMIC_FTRACE_WITH_ARGS
- 	select HAVE_REGS_AND_STACK_ACCESS_API
- 	select HAVE_RELIABLE_STACKTRACE
- 	select HAVE_POSIX_CPU_TIMERS_TASK_WORK
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index 15fd9ec5ecac..64c3814eb745 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -288,6 +288,7 @@ config X86
- 	select MMU_GATHER_RCU_TABLE_FREE
- 	select MMU_GATHER_MERGE_VMAS
- 	select HAVE_POSIX_CPU_TIMERS_TASK_WORK
-+	select HAVE_RCU_TRAMPOLINE_READERS	if X86_64 && SMP && DYNAMIC_FTRACE
- 	select HAVE_REGS_AND_STACK_ACCESS_API
- 	select HAVE_RELIABLE_STACKTRACE		if UNWINDER_ORC || STACK_VALIDATION
- 	select HAVE_FUNCTION_ARG_ACCESS_API
-diff --git a/kernel/rcu/Kconfig b/kernel/rcu/Kconfig
-index bbab14bc14c3..341b68b972ef 100644
---- a/kernel/rcu/Kconfig
-+++ b/kernel/rcu/Kconfig
-@@ -95,8 +95,10 @@ config FORCE_TASKS_RCU
- 	help
- 	  This option force-enables a task-based RCU implementation
- 	  that uses only voluntary context switch (not preemption!),
--	  idle, and user-mode execution as quiescent states.  Not for
--	  manual selection in most cases.
-+	  idle, and user-mode execution as quiescent states, or, on
-+	  HAVE_RCU_TRAMPOLINE_READERS architectures, the variant built on
-+	  Tasks Trace RCU readers in trampolines.  Not for manual
-+	  selection in most cases.
- 
- config NEED_TASKS_RCU
- 	bool
+> +     */
+> +    switch ( gic_hw_version() )
+> +    {
+> +    case GIC_V2:
+> +        pi->arch_capabilities |= XEN_SYSCTL_PHYSCAP_ARM_GIC_V2;
+> +        break;
+> +
+> +    case GIC_V3:
+> +        pi->arch_capabilities |= XEN_SYSCTL_PHYSCAP_ARM_GIC_V3;
+> +
+> +        /* GICv3 may additionally support GICv2-compatible guests. */
+> +        if ( vgic_v2_hw_enabled() )
+> +            pi->arch_capabilities |= XEN_SYSCTL_PHYSCAP_ARM_GIC_V2;
+> +        break;
+> +
+> +    case GIC_INVALID:
+Change to default please to make MISRA C R16.4 happy.
 
--- 
-2.55.0
+> +        /*
+> +         * Running a control domain without having the GIC sorted yet?
+> +         * Something's broken, but there's nothing we can do about it here.
+> +         */
+> +        ASSERT_UNREACHABLE();
+> +        printk_once(XENLOG_ERR "Unrecognised GIC version %d\n",
+> +                    gic_hw_version());
+Please swap the printk with ASSERT.
+
+With these remarks addressed:
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+
+~Michal
 
 
