@@ -4,43 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5617EC982C3
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 11:54:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421684.1648126 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0045FC88E77
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 11:54:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421869.1648150 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6oDj-0003CQ-Fi; Wed, 16 Sep 2026 11:54:35 +0000
+	id 1x6oDk-0003YP-Ip; Wed, 16 Sep 2026 11:54:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421684.1648126; Wed, 16 Sep 2026 11:54:35 +0000
+Received: by outflank-mailman (output) from mailman id 1421869.1648150; Wed, 16 Sep 2026 11:54:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6oDj-0003CJ-CM; Wed, 16 Sep 2026 11:54:35 +0000
-Received: by outflank-mailman (input) for mailman id 1421684;
- Tue, 15 Sep 2026 12:56:12 +0000
+	id 1x6oDk-0003WC-Bk; Wed, 16 Sep 2026 11:54:36 +0000
+Received: by outflank-mailman (input) for mailman id 1421869;
+ Tue, 15 Sep 2026 14:18:00 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <rusya92266@gmail.com>) id 1x6Sho-0001GA-8e
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 12:56:12 +0000
+ (envelope-from <bot+bpf-ci@kernel.org>) id 1x6Tyy-0002b9-2v
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 14:18:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6Shn-001PeN-56
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 14:56:11 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1x6Tyx-007PNe-G3
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 16:17:59 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <rusya92266@gmail.com>)
- id 6aa9406a-8faa-0a2a0a5109dd-0a2a4507980e-6
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 14:56:11 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <rusya92266@gmail.com>)
- id 6aa9406a-b4ea-0a2a45070019-4a7de14cb65e-3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 14:56:11 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-4843f22dcb8so184994f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 05:56:11 -0700 (PDT)
-Received: from 830778650420 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 15 Sep 2026 05:56:09 -0700
-Received: from 830778650420 named unknown by gmailapi.google.com with
- HTTPREST; Tue, 15 Sep 2026 05:56:09 -0700
+ (envelope-from <bot+bpf-ci@kernel.org>)
+ id 6aa95393-bab6-0a2a0a5309dd-0a2a4509bb62-24
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 16:17:59 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <bot+bpf-ci@kernel.org>)
+ id 6aa95395-be1a-0a2a45090019-aceafc1fe91c-3
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 16:17:58 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 230DF41650;
+ Tue, 15 Sep 2026 14:17:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id D6F7A1F00893;
+ Tue, 15 Sep 2026 14:17:53 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,95 +50,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:MIME-Version:From"
-ARC-Seal: i=1; a=rsa-sha256; t=1789476970; cv=none;
-        d=google.com; s=arc-20260327;
-        b=eSowFjY+1fRoglpik6lKl2SJqkyhe+xKwQ4HVjiJnybF4CKuOmCu9JOtctBhr91wg8
-         R5YWk5EXpDQ84klSfGnGV5ct47nyb77MWI2JU+WAgZLDSn4iMJ01vovTv5ozWtKeoeWR
-         YxrTIcmATRKvBSv8Qlt7Ru6gYkv3YgjVg7vWzfotNA0T2ST0cQG5TC6aBOJSQvwFTljY
-         fJEY5AYCcpWmId5ZfgfQAWKjLZQonWMMprD03YStQvtub6aoxN+7M/MXyyaBBQYLFbRQ
-         bB0iYL7iv0u03yEEdQwQUGM6Clo2ZceUEyjBWYbq8nWv3pBFYMxgimYLKWsfk7DFUcOI
-         K8wQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:mime-version:from:dkim-signature;
-        bh=NYTm+ORiuCMyxJc9UywtnBxVs5qgekVj+icnB/ZVvik=;
-        fh=lPwC7CchF1+dXFOM/FzxI/B4aQd83dw89+WvzXVIKTI=;
-        b=n62laoELRqMZTOUpPwut8/LmaQiAOJwhGsP5M+eus7UNQ8Xspr64GIgohKvgZV0ub5
-         zF/6JCmgrxn3IktrGsGfS0MnV2l0hfq20UZWAEqTzspwKCUETej5zDFA1//wpJ90SJQI
-         oR64yE16OJ/I4RMPPdBdQT+9RxzaMJs2ZDzjiYd2XZjkY1wX5E5DbmMLB0ttYZcs5ZtQ
-         2+fF+Eq59LC72E/wv+SZfTfhMpCy3qZtQTPXAs7wInvzGwjA6IrcshvZQYcYTSHMVwVf
-         hUo9Upgfn/FspAdhd402At0eD0uA1F0Eu8qxtcmenscIHg5eNmwNK2IQzZhGEvuyFsAF
-         d6Mw==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789476970; x=1790081770; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:mime-version:from:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=NYTm+ORiuCMyxJc9UywtnBxVs5qgekVj+icnB/ZVvik=;
-        b=JrwXoviZSijFTSspWmmvJmxm7mgETCqCpXgI+jAT3HZMXumndU/Ayy3fI52HfhWp7R
-         oCN/BuIkk6kkM4CDummzP5Zv2il9oajzeVwCRziUnudoT8ruYfg0rhxAOWRgGf6eJ9Aw
-         iMXR/kau95yM804ot75KfQbIY3YyOWR/CaqDY249wlXakJwpWGs6Q1DXvt3EuIMRPGZW
-         ZE4cRZRhkbD+r192LeNmHaad7wChZ4L9dGNUpdrz3Qx4p7cBDiL6Twr+zCKp0M/nhw52
-         Zia9ugFP7YLp4kI9xRrYQzUrMEsolRDb7eWP7d+uRxgWDuwxP7DiBbqOgDpNiDf+1ud4
-         l63Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789476970; x=1790081770;
-        h=content-type:cc:to:subject:message-id:date:mime-version:from
-         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=NYTm+ORiuCMyxJc9UywtnBxVs5qgekVj+icnB/ZVvik=;
-        b=JKxBpDaY/b3VugrvcRymdMEGVrn6GL7vQoDmX1zIR0aBgi+UFYYPOmrfIni5DXguzn
-         ssreoq5w5+vvZNx/gSZhVlh5vfLTglI7aQ9K+q00Frd0hY4KGy0U/1gETsRr+gVZfNL/
-         OMZnrM9UIZyHPYYlXnIsJ1SWIXfTl9jqHw069EUI6LaPaJoGfdReCfZdg0+b/75/AE0X
-         DC1Q2Rb2EbO8ZuNmB9y8OLj9ZJnnQV4LyKauZWaEa1tx/jE69q+H7xWYURCfdH22rXUj
-         xaEtO44wW3kYcxPXWfeAWQrU6K/i8s1MoMJzARhls0F7tlQeBHXTnsHKxOxKUb1D450a
-         H0Mg==
-X-Gm-Message-State: AFuF++m5LUzDIcu6PVoH3qNVoYlDnmZZGm/e/ZjSxeSC89yk6Zdk2xix
-	Zt+2bB2C45Wm0RSFnmgBoZtNoGYzIT4OCSB3/biRYnyVtlyruB73mrwUP0//WFcwZ3nEYuJXPSr
-	ydPXq+QqnwHeoya4ME+3aPpThke6VFqnUz1vNG5bp47CE
-X-Gm-Gg: AYBFou0z+vQUQKyVSXrF4AlWFl2ea5eVvJor4LV9P26z737+UrtRgqHmLgVDTG/T87k
-	BKIDmuzX8YVLNcyXVMLevQvAZMm/89+0ZoSl/DvZnaBucARx3QICE06PYs6y4/ZaIHJTHx4piuj
-	W0sKfTRH5whmmVCUgPbDtz8mOmrN0ebaWOYDFWB3GFqK+XA7Uc0nFVRZaq6u6qsCUw1E4+6DqiH
-	PAp2vHxRjUxEN+P0D9QrYlDd1f43652T0Ec0I5J6zGCgxd0yEm6STMlhSNbatnJxU2yeVnVsJP0
-	Og+kNL6VuKvC13tSzvnMgKyaAbWtp2UKggQLozq252UWv2jWHR7zalBa1KdeYwRn
-X-Received: by 2002:adf:e18e:0:b0:487:aee:75cb with SMTP id
- ffacd0b85a97d-4870aee76aamr341482f8f.10.1789476970478; Tue, 15 Sep 2026
- 05:56:10 -0700 (PDT)
-From: Ruslan Vagner <rusya92266@gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="In-Reply-To:References:Subject:From:To:Cc:Date"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789481877;
+	bh=37WI6Bj/Ggz3/9zO2SR1BHA0D09BihoVO8j7O418CP4=;
+	h=In-Reply-To:References:Subject:From:To:Cc:Date;
+	b=L8QviNNrTmMpIqQxxWm+1VskqSUHJhnuf0/rYUwn4D42ISdoJmFjdazUlkGx8ggjD
+	 X9a5oqOjNa/CDI0U1C0R5QjHTXlgPr/67Rld+0Hyr0uJ/7kc3460S3rv7/jkol6ScQ
+	 +IDquEBZlfhgOQp6PB69iJ4aD7kdmPXVcZA+RIUuxHxgEsToRDVkNmvLsX0odMc+Rw
+	 nuEvkdqjxbWUYQZihz9u2BVhArW2qXa3JsNJNFwxqYCKBT6wR0d7kywT/XE6mpf1b3
+	 xzVVYFhiewYfFNfuT8Uq0rEA4UxyGjpPPEsrojRib0d1ehB27wSNo+4fQ7hHW5u7Gn
+	 OzxzjqzdwP2cg==
+Content-Type: multipart/mixed; boundary="===============0488351286812016447=="
 MIME-Version: 1.0
-Date: Tue, 15 Sep 2026 05:56:09 -0700
-X-Gm-Features: AcwNN1XleUuyvV52uIvINjYuMpQl23DTZbfH1-4Iiz2Z6kIPWcHwstIh4TDuGDA
-Message-ID: <CAF9RqJ439Cm0x9zzruXS5Dnz+5RgsAcJ0Q-gLQLpyTzWFF2ADw@mail.gmail.com>
-Subject: [PATCH] xen: fix comment typo in xen.h
-To: xen-devel@lists.xenproject.org
-Cc: jgross@suse.com, Ruslan Vagner <rusya92266@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-ef75cf/1789476971-A7CD7AE4-61FE23A5/0/0
+Message-Id: <99771250491ac7c5568e688eacca866676565a40f18f1189b8937472f4aba91e@mail.kernel.org>
+In-Reply-To: <20260915-b4-rcu-tasks-preempt-qs-v3-13-0ad30c4c5ee7@toxicpanda.com>
+References: <20260915-b4-rcu-tasks-preempt-qs-v3-13-0ad30c4c5ee7@toxicpanda.com>
+Subject: Re: [PATCH RFC v3 13/13] x86, arm64: Build Tasks RCU on Tasks Trace readers in trampolines
+From: bot+bpf-ci@kernel.org
+To: josef@toxicpanda.com,paulmck@kernel.org,frederic@kernel.org,neeraj.upadhyay@kernel.org,joelagnelf@nvidia.com,boqun@kernel.org,tglx@kernel.org,peterz@infradead.org,rostedt@goodmis.org,mhiramat@kernel.org,mark.rutland@arm.com,jolsa@kernel.org,ast@kernel.org,daniel@iogearbox.net,andrii@kernel.org,x86@kernel.org,catalin.marinas@arm.com,will@kernel.org,puranjay@kernel.org,xukuohai@huaweicloud.com,paulmck@kernel.org,frederic@kernel.org,neeraj.upadhyay@kernel.org,joelagnelf@nvidia.com,boqun@kernel.org,tglx@kernel.org,peterz@infradead.org,rostedt@goodmis.org,mhiramat@kernel.org,mark.rutland@arm.com,jolsa@kernel.org,ast@kernel.org,daniel@iogearbox.net,andrii@kernel.org,x86@kernel.org,catalin.marinas@arm.com,will@kernel.org,puranjay@kernel.org,xukuohai@huaweicloud.com
+Cc: luto@kernel.org,josh@joshtriplett.org,urezki@gmail.com,mathieu.desnoyers@efficios.com,jiangshanlai@gmail.com,qiang.zhang@linux.dev,jgross@suse.com,mcgrof@kernel.org,ihor.solodrai@linux.dev,linux-kernel@vger.kernel.org,rcu@vger.kernel.org,linux-trace-kernel@vger.kernel.org,bpf@vger.kernel.org,linux-arm-kernel@lists.infradead.org,xen-devel@lists.xenproject.org,luto@kernel.org,josh@joshtriplett.org,urezki@gmail.com,mathieu.desnoyers@efficios.com,jiangshanlai@gmail.com,qiang.zhang@linux.dev,jgross@suse.com,mcgrof@kernel.org,ihor.solodrai@linux.dev,linux-kernel@vger.kernel.org,rcu@vger.kernel.org,linux-trace-kernel@vger.kernel.org,bpf@vger.kernel.org,linux-arm-kernel@lists.infradead.org,xen-devel@lists.xenproject.org,josef@toxicpanda.com,ast@kernel.org,andrii@kernel.org,daniel@iogearbox.net,martin.lau@kernel.org,eddyz87@gmail.com,yonghong.song@linux.dev,mason@kernel.org,ihor.solodrai@linux.dev
+Date: Tue, 15 Sep 2026 14:17:53 +0000 (UTC)
+X-purgate-ID: tlsNG-bad1c0/1789481878-3AAD8034-D5CAAA14/0/0
 X-purgate-type: clean
-X-purgate-size: 1069
+X-purgate-size: 4585
 
-Fix the spelling in comments. No functional change.
+--===============0488351286812016447==
+Content-Type: text/plain; charset="us-ascii"
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
 
-Signed-off-by: Ruslan Vagner <rusya92266@gmail.com>
+> diff --git a/Documentation/RCU/Design/Requirements/Requirements.rst b/Documentation/RCU/Design/Requirements/Requirements.rst
+> index 8101fe6229d57..34b81512cc5f3 100644
+> --- a/Documentation/RCU/Design/Requirements/Requirements.rst
+> +++ b/Documentation/RCU/Design/Requirements/Requirements.rst
+> @@ -2756,6 +2756,26 @@ synchronize_rcu(), and rcu_barrier(), respectively. In
+>  three APIs are therefore implemented by separate functions that check
+>  for voluntary context switches.
+>
+> +Architectures that select ``CONFIG_HAVE_RCU_TRAMPOLINE_READERS`` keep the
+> +same three APIs but implement the grace period differently
+> +(``CONFIG_TASKS_RCU_TRAMPOLINE_READERS``).  There, every trampoline whose
+> +lifetime Tasks RCU guards enters a Tasks Trace RCU read-side critical
+> +section (rcu_read_lock_trace() or its assembly equivalent) before calling
+> +out and leaves it before returning, so a task anywhere inside such a
+> +call-out is an ordinary Tasks Trace reader whether or not it is
+> +preempted.  The few trampoline instructions outside that reader can only
+> +be occupied by a task that was interrupted there, so the grace period
+> +additionally waits for each CPU to pass through a context switch, and the
+> +irq-exit preemption path, the only switch that can catch a task inside
+> +such text (rcu_tasks_trampoline_text()), briefly makes such a task a
+> +holdout until it is next seen elsewhere.  On such kernels an involuntary
+> +context switch outside trampoline text *is* a Tasks-RCU quiescent state,
+> +a Tasks RCU grace period no longer depends on how long any task runs
+> +without sleeping, cond_resched_tasks_rcu_qs() is unnecessary, and the
+> +obligation moves to the trampolines: anything that relies on
+> +synchronize_rcu_tasks() to protect code a task may be preempted in must
+> +take the Tasks Trace reader (see register_ftrace_direct()).
+                                                               ^^^^^
+
+Does this paragraph describe the complete set of options? The series
+itself includes kernel/kprobes.c:kprobe_optimizer(), which relies on
+synchronize_rcu_tasks() to protect instructions a task may be preempted
+in, but instead of taking a Tasks Trace reader it registers an address
+predicate and calls rcu_tasks_wait_irq_preempted(kprobe_in_optimized_region)
+before synchronize_rcu_tasks().
+
+kernel/kprobes.c:526-539 documents that alternative: "kprobe_optimizer()
+relies on synchronize_rcu_tasks() to wait for tasks that ... the
+quiescent-state check asks this instead."
+
+Since this paragraph is the single place in Documentation/RCU that
+describes the new contract for HAVE_RCU_TRAMPOLINE_READERS architectures,
+a subsystem author reading it would conclude there is one way to comply
+and would get no pointer to rcu_tasks_wait_irq_preempted() or
+rcu_tasks_trampoline_text() for code that cannot take a reader.
+
+Could the paragraph mention the rcu_tasks_wait_irq_preempted() escape
+hatch, or soften to "must take the Tasks Trace reader or otherwise make
+its text known to the quiescent-state check"?
+
+> diff --git a/Documentation/RCU/checklist.rst b/Documentation/RCU/checklist.rst
+> index 4b30f701225fd..7082686cbd66d 100644
+> --- a/Documentation/RCU/checklist.rst
+> +++ b/Documentation/RCU/checklist.rst
+> @@ -252,7 +252,12 @@ over a rather long period of time, but improvements are always welcome!
+>  	a.	If the updater uses synchronize_rcu_tasks() or
+>  		call_rcu_tasks(), then the readers must refrain from
+>  		executing voluntary context switches, that is, from
+> -		blocking.
+> +		blocking.  On architectures that select
+> +		CONFIG_HAVE_RCU_TRAMPOLINE_READERS a reader must in
+> +		addition be a Tasks Trace RCU reader (that is what the
+> +		trampolines there do around their call-outs); an
+> +		arbitrary stretch of preemptible kernel code is not
+> +		protected.
+                        ^^^^^^^^^
+
+Same question here. This text also states the obligation in absolute
+terms ("a reader must in addition be a Tasks Trace RCU reader"), with
+no mention of the rcu_tasks_wait_irq_preempted() alternative that
+kprobe_optimizer() uses.
+
+[ ... ]
+
+
 ---
- include/xen/interface/xen.h | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+AI reviewed your patch. Please fix the bug or email reply why it's not a bug.
+See: https://github.com/kernel-patches/vmtest/blob/master/ci/claude/README.md
 
-diff --git a/include/xen/interface/xen.h b/include/xen/interface/xen.h
-index 40c9793e9880..f9acb21875cf 100644
---- a/include/xen/interface/xen.h
-+++ b/include/xen/interface/xen.h
-@@ -94,7 +94,7 @@
- #define VIRQ_XENOPROF   7  /* V. XenOprofile interrupt: new sample available */
- #define VIRQ_CON_RING   8  /* G. (DOM0) Bytes received on console            */
- #define VIRQ_PCPU_STATE 9  /* G. (DOM0) PCPU state changed                   */
--#define VIRQ_MEM_EVENT  10 /* G. (DOM0) A memory event has occured           */
-+#define VIRQ_MEM_EVENT  10 /* G. (DOM0) A memory event has occurred
-        */
- #define VIRQ_XC_RESERVED 11 /* G. Reserved for XenClient                     */
- #define VIRQ_ENOMEM     12 /* G. (DOM0) Low on heap memory       */
- #define VIRQ_XENPMU     13  /* PMC interrupt                                 */
--- 
-2.54.0.windows.1
+CI run summary: https://github.com/kernel-patches/bpf/actions/runs/34975311706
+--===============0488351286812016447==--
 
