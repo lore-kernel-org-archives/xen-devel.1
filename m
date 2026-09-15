@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CC57DC88E53
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 13:18:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421707.1647417 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C70DC88E7B
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 13:18:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421712.1647445 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6T2r-0004vD-25; Tue, 15 Sep 2026 13:17:57 +0000
+	id 1x6T2z-0005m3-79; Tue, 15 Sep 2026 13:18:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421707.1647417; Tue, 15 Sep 2026 13:17:57 +0000
+Received: by outflank-mailman (output) from mailman id 1421712.1647445; Tue, 15 Sep 2026 13:18:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6T2q-0004v6-Uz; Tue, 15 Sep 2026 13:17:56 +0000
-Received: by outflank-mailman (input) for mailman id 1421707;
- Tue, 15 Sep 2026 13:17:55 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x6T2z-0005lk-3M; Tue, 15 Sep 2026 13:18:05 +0000
+Received: by outflank-mailman (input) for mailman id 1421712;
+ Tue, 15 Sep 2026 13:18:03 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1x6T2p-0004sv-8m
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 13:17:55 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1x6T2x-0005hh-By
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 13:18:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6T2o-00DQNP-Lg
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 15:17:54 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x6T2w-00EGDb-On
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 15:18:02 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa94581-e002-0a2a0a5209dd-0a2a45099780-4
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 15:17:54 +0200
-Received: from [209.85.219.54] (helo=mail-qv1-f54.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa9458a-bab6-0a2a0a5309dd-0a2a450bc220-0
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 15:18:02 +0200
+Received: from [74.125.230.140] (helo=mail-qv2-f12.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa94580-be1a-0a2a45090019-d155db36a875-3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 15:17:53 +0200
-Received: by mail-qv1-f54.google.com with SMTP id
- 6a1803df08f44-90e9ad1a373so7400796d6.0
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 06:17:53 -0700 (PDT)
+ id 6aa94589-b7e8-0a2a450b0019-4a7de68cbe17-3
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 15:18:02 +0200
+Received: by mail-qv2-f12.google.com with SMTP id
+ 6a1803df08f44-90cdfc9b6eeso34080786d6.0
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 06:18:02 -0700 (PDT)
 Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
  [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-912321108a5sm31206596d6.46.2026.09.15.06.17.50
+ 6a1803df08f44-9120f47afc2sm120542886d6.20.2026.09.15.06.17.59
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Sep 2026 06:17:50 -0700 (PDT)
+ Tue, 15 Sep 2026 06:17:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,51 +55,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1789478272; x=1790083072; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1789478281; x=1790083081; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fYtErF6vBN+NnnD1JqJDCU7rpx142OZs1HR5OhHJnD0=;
-        b=Vjm83Eu+tPVcteSMCRWXtdBwGLzYwSaSEdhiG55n9GZVTzotJYAc1HLQ6y6KBSf1iz
-         GApzeln3B22k7qBhuAN8tqJazcFv5T8nZ0IWli+Pe5LDg7vI2nrQjPQowydDOjszlawi
-         edRGeYa8FaqM7bG7lqL5LHDN7Lcq8Hin+BbkaJNL+EXyIPM/sxRxQ818EP/OBR+6/avU
-         LZxigtEn1x/+bZxUjFdYL8/FBtNtUp8Q8N+CdDZ+XedhFmBvVZpegaF77D9YdOlLWVqg
-         cAW87553JEu2RymSq+l1OosIBEtBPNIf9R7WMP12HyRXVolHusZPYiDDzBo9J5dmktUe
-         U+BA==
+        bh=pPH1+eiN4EhHtK6rDK3I01/qZvQ6oNbinGntBhruq3Q=;
+        b=pdegXvcXrGOGWkHIqK5XopTSUhhctMzmxlyvokwlDr+7V/9rH3cWwRiT0YvCzX+OQD
+         qcVOgZXRFaNcM5cvxvIMB0SJUKpJ2ccZ/CVT9q3uFgU3ghpVz8VxMaTZy36HxERmVncK
+         01Ub9upahL+7BN2TpuMj8QwxtcCQWhGUIVXobhJhjP2WeywYzhES4KzwVT8+56Rmpcn/
+         ISjJ73Ivg6Cq+HOzitMKswnptvE2vLukFyTybUt85TQVDtB7f6OKlllbIOC2xompU4VP
+         diil+2SrocO2vSWOWXf/Kyyfg2Y+zAoDKILdSCRvLG0rY7RiT5c0YzgLyUdK3hwipIik
+         J4Vg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789478272; x=1790083072;
+        d=1e100.net; s=20260707; t=1789478281; x=1790083081;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=fYtErF6vBN+NnnD1JqJDCU7rpx142OZs1HR5OhHJnD0=;
-        b=qpE14rOYPRnDO+TWuLAzY+U/FXqY54C5s5UzwipCVSTQd/4LkW0bLXcmOBxIHnKClE
-         gSjwCBgWg/gwrEf4Eyr7um0jSccTAMMZF+gH2BmH/nUXaVVdsEy2qK52M492+16MRxa8
-         PyWxX/m+2vnclkf4y8Sq+deit3bS5nHODS1Gst/NtF6uShboQDHuqqHjQpsQLr6fo12k
-         1EzVpvQv74hrAAbQ4AQsx+7U2qF7JNX+ORKwx39Y63nx3yIWHnpll9tj0h7w6LZ7n2sD
-         O3f0fwLSIaqldAzdj5QrDtY0iAEzVe7McxJQ7pPRmQ+0BbfB0dc760FEvvpTflVzWa5g
-         Oe4g==
-X-Forwarded-Encrypted: i=1; AKwUvBwKx9NwO2Emgm0c6am6Gxt5dcR4Ryi31LEdjdZG4fxYp+7DJRX9+6TglFevgTqCxmgeKAfLAuqixug=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mS7e7fYRXlsQriPabgILhGRXHXvEk2fUZvDRntivjH7pimAx1K
-	zWf3NBTJ6QkRj2LVfjgDyvn3qBPruB32k/F9MN1FQ1+kMT3yzO/xTzBkTlamA0qkzRE=
-X-Gm-Gg: AYBFou0gj9oUfvtqwhuT0SPHTnKyTfK5Z60bhFx545PSstsM4cdJrEvCtYn9JJ8pYwJ
-	vAlhDfeQvdLmVvfq+LYB5zrCfX8ZDQQfl9drPIP0gdkyOvYqWdITQmDaUh6ejwZXizOe1KPaqad
-	cvClcvcucz5GEo9qYgjtPGKW45A3nERGF5ZMHL/FlTwuLzmRvQoMxG/yK+XM4Z6LB/MeYyH+V6p
-	k+3svzW2uAtparhlFRjxRkCCeTwSh4iELJHHUkB1Ejc0LkKeb04I9X9p4306lKXZMxb5hMZVZB9
-	LCDk3HC9zXWO0ovGaPQbEfC5CQttMUS77oRozM1LrHU0mwz6IwPEUbCjT0hC76l/A+EvQ0+Tc3U
-	sbBujT5c3MFHYfZAr20T7q68QmnjUCUJJXnlafVilrI5MFPy+/enmgPAxDtznFW43La7Nr1Bkjw
-	M6fWI8Z/KD3iYcm5omIJ4sVG3WFXJUuZwv9DENH/pR0AiwtMzX/E2KbJ/hVh6shA/s7rc8WdlLi
-	rAox+mutTAJd9Ry+ikTO/xozvE1ml4g+cSQOxOFdOa05Nz3dlN2Svgg
-X-Received: by 2002:ad4:5aa4:0:b0:911:2a7c:65b9 with SMTP id 6a1803df08f44-912344347ccmr49325266d6.30.1789478271691;
-        Tue, 15 Sep 2026 06:17:51 -0700 (PDT)
+        bh=pPH1+eiN4EhHtK6rDK3I01/qZvQ6oNbinGntBhruq3Q=;
+        b=hrffP7EnTbp4TMc6EBrOvskgssxmHqjjekIAmU2TuIEUu91u3maziXKUlAY1dCPsEd
+         7e5m8xTHxZjZwiMzLJUx+hK3G+Jzqp6es9s23yoNjU2aHItZzhQ59dlolJDAKqCvvmin
+         a6itqTKRFAwoSoWywYjrIYG6+a5+BekKhsZhIBjLCsUwZwTOkRJ1VTTFBPSAggi3CFEY
+         17zeNri7x4ldWtiHnaoaLJVlLFNfIw9gAqiT/QbUFaDtilHn6yIaIEave3hvMgR7gfQZ
+         320nhpGD+bdsydHLdu7lMo6Dm3qSmTsUHnJ31/lXwjHJkn9JU0iz4oaXwTC260w+ypyy
+         dIfQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxkICOM4kvJIyMYcmETzPYoTturNX6Nvi2t5m8UcnoD3pE3KfVoAMm3ZMl/mlmgsPnDV+3rnpYvR20=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lUSy0FVEP1MCXHFQWVlUn9rSRCUxkM6jYZA0DrTYFcvmtrdiKD
+	YSmbvoLLRqSqgWfOaoB7yNBlBi2empzZ9v29xLiKvi6G+zqUPQwTbin5DUk2k1GjfskW4elFSSo
+	vhgxeFk8PmA==
+X-Gm-Gg: AYBFou2eaHTTFmb7DbMAo09rh7DxT7GxXJNGkDM9MQfMQQ82suEtPna1xALFU3OxhAn
+	JIySjHR7zusd5zTXnTFQ6fpNNr8KWPCIMWV2t8HGeuMDXDze3rei1wFPcxyThk6AYjnEn6E0wij
+	ZtBkVoLNMUURkZtGaDzr3E8Lnt3rswh6MjK+04Oa9cYFP4kl5X9pvfkQbAMbiHwLz85IWU7k1PI
+	Wx9pxkxF9ezsyNfetZ1BWhMWyMlXrDfG5ZFKPWmWdujArJ/EiXBT/klA/dwf7t8++KhgF6zxBFA
+	XHH+Kqn/DWtGqBqIwfHcVdh2EVqJY0es6M1g+apDZFN8l3o+GNfJF3Us7aCbO5JVDk51wY97iih
+	ZSnoY+I6LXo+xPatU6RFRUsJO6bZMzaOOQoTyuXRRO9IXp1zv4N9nyaVdferAtZ3LmdR5ub1LoB
+	rTQOR+3aR4sQcM0KRPv0hfs4H0AtLcqhh8MoUNGurDscjRkhDkdp2FRzp5rjDjFjulG3nNR1Hhn
+	mmimyi1FsrKsnAtXVZlqnUsyqVqfCAptXClhtQ2j9zRyOXEYoIlyCVC
+X-Received: by 2002:a0c:f40b:0:b0:907:dd19:fcb3 with SMTP id 6a1803df08f44-9122e55d2e0mr126180476d6.24.1789478280887;
+        Tue, 15 Sep 2026 06:18:00 -0700 (PDT)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Tue, 15 Sep 2026 13:17:30 +0000
-Subject: [PATCH RFC v3 03/13] rcu-tasks: Add a Tasks RCU implementation for
- reader-marked trampolines
+Date: Tue, 15 Sep 2026 13:17:34 +0000
+Subject: [PATCH RFC v3 07/13] x86/ftrace: Take a Tasks Trace reader around
+ ftrace_caller's call-out
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260915-b4-rcu-tasks-preempt-qs-v3-3-0ad30c4c5ee7@toxicpanda.com>
+Message-Id: <20260915-b4-rcu-tasks-preempt-qs-v3-7-0ad30c4c5ee7@toxicpanda.com>
 References: <20260915-b4-rcu-tasks-preempt-qs-v3-0-0ad30c4c5ee7@toxicpanda.com>
 In-Reply-To: <20260915-b4-rcu-tasks-preempt-qs-v3-0-0ad30c4c5ee7@toxicpanda.com>
 To: "Paul E. McKenney" <paulmck@kernel.org>, 
@@ -144,811 +145,286 @@ Cc: Andy Lutomirski <luto@kernel.org>,
  bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1789478262; l=32683;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1789478262; l=9964;
  i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=wQeEStQPLpkB0ZukCY5vknBzMvvV//pSfULH7QtsQGc=;
+ bh=EBgIXBiL5Z/I6XbFK2Nq9sAUVoT2dZ9k9OxjIjZChGA=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
  JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QMM+dAGbEOlns74BRRoxfkCG0nJCZGoqB9FIgpGikpOfYMXm9qc7IWrJfu93xYxIrOxZ1yXrj33
- aa/TFXf8Q9wU=
+ QJJZPzWCoHiGtBk3LJYNRCR9qGstVoSpG9sCCUThRLJ2AVjOv69KNmqUSOUhIKjcnlXv6dm2yvx
+ k1FTR+gbuUgc=
 X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
  fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-bad1c0/1789478273-FD26A034-5D7126A2/0/0
+X-purgate-ID: tlsNG-42698a/1789478282-194C39EA-1A4B1781/0/0
 X-purgate-type: clean
-X-purgate-size: 32685
+X-purgate-size: 9966
 
-Tasks RCU waits for every task to pass through a voluntary context
-switch, usermode or idle, because a preempted task might be sitting in a
-trampoline that is about to be freed and nothing marks it as such.  With
-PREEMPT_LAZY that is a poor fit for servers: cond_resched() is a no-op,
-so a CPU-bound kthread only ever leaves the CPU by preemption, and one
-such kthread holds every synchronize_rcu_tasks() caller -- ftrace and
-BPF trampoline teardown under their mutexes, the kprobe jump optimizer
-under text_mutex and cpus_read_lock() -- hostage for as long as it runs.
+For HAVE_RCU_TRAMPOLINE_READERS the ftrace trampolines must be Tasks
+Trace RCU readers while they call out, since that -- and not the absence
+of a voluntary context switch -- is what synchronize_rcu_tasks() will
+wait for before ftrace_shutdown() frees a dynamic trampoline or its ops.
 
-Following the discussion on v2, take the other road: let the
-architecture make its trampolines Tasks Trace RCU readers.  When an
-architecture selects HAVE_RCU_TRAMPOLINE_READERS it promises that every
-trampoline whose lifetime Tasks RCU guards enters rcu_read_lock_trace()
-(or its assembly equivalent) before calling out and leaves it before
-returning, so a task anywhere inside such a call-out, preempted or not,
-is an ordinary Tasks Trace reader.
+Open-code rcu_read_lock_trace() and rcu_read_unlock_trace() in
+ftrace_caller and ftrace_regs_caller: bump current->trc_reader_nesting
+and, for the outermost reader, do the SRCU-fast per-CPU increment on
+rcu_tasks_trace_srcu_struct and stash the counter pointer in
+current->trc_reader_scp, exactly as the C inlines do (including the
+smp_mb() when CONFIG_TASKS_TRACE_RCU_NO_MB is not set).  The lock sits
+before the function_trace_op load, because between that load and the
+call the ops pointer is protected only by Tasks RCU, and the unlock
+after the call returns.  The sequences are inside the region that
+create_trampoline() copies for per-ops trampolines; their %rip-relative
+references are fixed up by text_poke_apply_relocation() like
+CALL_DEPTH_ACCOUNT's.  %rax and %rcx are dead at both points.
 
-That leaves the few instructions of trampoline text before the reader
-is entered and after it is left (plus, in a later patch, the bytes a
-kprobe jump optimization is about to overwrite).  A task can only linger
-there by being interrupted there, and such text never calls anything
-that schedules, so instead of tracking tasks we track CPUs: every pass
-through __schedule() is a per-CPU quiescent event, except that the one
-context switch that can catch a task at an arbitrary instruction -- a
-preemption from irq exit -- first records the interrupted IP in the task
-and parks it on a per-CPU list for the duration (reusing the fields and
-lists the classic flavor keeps for its exit-path bookkeeping), and, if
-the IP is inside such "unmarked" text, puts the task on a short holdout
-list; the task takes itself off at its next context switch outside such
-a preemption or irq-exit check that finds it elsewhere.  Usermode (the
-existing tick hook, or a nohz_full CPU in an RCU extended quiescent
-state) and idle count as well.  rcu_tasks_trampoline_text() does the
-classification: anything outside core and module text, a new
-.text..rcu_tramp section for C glue that trampolines call before it has
-entered the reader (__rcu_trampoline), and an arch hook for things like
-static ftrace stubs and return thunks.
+Two pieces of core text still run outside that reader while holding
+the address of a Tasks-RCU-protected trampoline they are about to
+enter: the static stubs themselves, whose direct-call tails keep a BPF
+trampoline address on the stack until the final RET, and, under
+CONFIG_MITIGATION_RETHUNK, the return thunk that RET expands to.  Add an
+ftrace_static_tramp_end marker after ftrace_stub_direct_tramp and linker
+symbols around .text..__x86.return_thunk and .text..__x86.rethunk_safe,
+and provide arch_rcu_tasks_trampoline_text() covering
+[ftrace_caller, ftrace_static_tramp_end) and both thunk ranges so the
+irq-exit check treats a task interrupted there as a holdout.
 
-The grace period, run by the existing rcu_tasks kthread so that
-call_rcu_tasks(), synchronize_rcu_tasks() and rcu_barrier_tasks() keep
-their names and callers, is: wait for every online non-idle CPU to
-context switch (nudging stragglers with resched_cpu() after a jiffy),
-drain the holdout list as it stood, synchronize_rcu_tasks_trace() for
-everything inside the readers, then one more CPU pass and drain for
-tasks that have since left the reader into the trailing instructions.
-That is bounded by a few jiffies, preempt-off latency and an SRCU grace
-period rather than by the longest stretch any task runs without
-sleeping, needs no per-task scan, and makes cond_resched_tasks_rcu_qs()
-unnecessary on such architectures.  As before, idle tasks are not
-waited for.  rcu_tasks_wait_irq_preempted() walks the parked lists for
-the one caller (the kprobe jump optimizer, later in the series) that
-makes ordinary text unsafe to be parked in and so has to wait out tasks
-that were preempted there before it said so.
+All of this is built only under CONFIG_TASKS_RCU_TRAMPOLINE_READERS,
+which x86 does not enable until a later patch.
 
-The classic implementation is untouched and remains the default; the
-new one is built only as CONFIG_TASKS_RCU_TRAMPOLINE_READERS when the
-architecture opts in and uses the generic irq entry code, whose
-reschedule check gains the rcu_tasks_irq_resched() call.  Nothing
-selects it yet.
-
-Suggested-by: Paul E. McKenney <paulmck@kernel.org>
-Suggested-by: Alexei Starovoitov <ast@kernel.org>
 Assisted-by: LLM
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- include/asm-generic/vmlinux.lds.h |  11 +
- include/linux/rcupdate.h          |  32 ++-
- include/linux/sched.h             |   1 +
- kernel/entry/common.c             |   8 +-
- kernel/fork.c                     |   1 +
- kernel/rcu/Kconfig                |  22 ++
- kernel/rcu/tasks.h                | 460 +++++++++++++++++++++++++++++++++++++-
- kernel/rcu/update.c               |   2 +
- 8 files changed, 528 insertions(+), 9 deletions(-)
+ arch/x86/kernel/asm-offsets.c |  8 +++++
+ arch/x86/kernel/ftrace.c      | 43 +++++++++++++++++++++++++++
+ arch/x86/kernel/ftrace_64.S   | 69 +++++++++++++++++++++++++++++++++++++++++++
+ arch/x86/kernel/vmlinux.lds.S |  4 +++
+ 4 files changed, 124 insertions(+)
 
-diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vmlinux.lds.h
-index b2988aa12f66..86e58c4fe370 100644
---- a/include/asm-generic/vmlinux.lds.h
-+++ b/include/asm-generic/vmlinux.lds.h
-@@ -571,6 +571,16 @@
- 		__cpuidle_text_end = .;					\
- 		__noinstr_text_end = .;
- 
-+/*
-+ * C glue called directly from Tasks-RCU-protected trampolines, bounded so
-+ * that rcu_tasks_trampoline_text() can recognise it; see __rcu_trampoline.
-+ */
-+#define RCU_TRAMP_TEXT							\
-+		ALIGN_FUNCTION();					\
-+		__rcu_tramp_text_start = .;				\
-+		*(.text..rcu_tramp)					\
-+		__rcu_tramp_text_end = .;
-+
- #define TEXT_SPLIT							\
- 		__split_text_start = .;					\
- 		*(.text.split .text.split.[0-9a-zA-Z_]*)		\
-@@ -607,6 +617,7 @@
- 		TEXT_HOT						\
- 		*(TEXT_MAIN .text.fixup)				\
- 		NOINSTR_TEXT						\
-+		RCU_TRAMP_TEXT						\
- 		*(.ref.text)
- 
- /* sched.text is aling to function alignment to secure we have same
-diff --git a/include/linux/rcupdate.h b/include/linux/rcupdate.h
-index 44c07a66edff..fb2a3889a696 100644
---- a/include/linux/rcupdate.h
-+++ b/include/linux/rcupdate.h
-@@ -50,6 +50,31 @@ token_context_lock_instance(RCU, RCU_BH);
- /* Exported common interfaces */
- void call_rcu(struct rcu_head *head, rcu_callback_t func);
- void rcu_barrier_tasks(void);
-+
-+/*
-+ * Trampoline-reader Tasks RCU (CONFIG_TASKS_RCU_TRAMPOLINE_READERS), see
-+ * kernel/rcu/tasks.h.  rcu_tasks_irq_resched_enter()/_exit() bracket the
-+ * irq-exit preemption; rcu_tasks_trampoline_text() and the arch_ override
-+ * classify an interrupted IP; rcu_tasks_wait_irq_preempted() lets a caller
-+ * wait out tasks already preempted somewhere it is about to make unsafe.
-+ * __rcu_trampoline places C code that such trampolines call directly, before
-+ * it has entered its Tasks Trace reader, where that classification can see it.
-+ */
-+void rcu_tasks_irq_resched_enter(unsigned long ip);
-+void rcu_tasks_irq_resched_exit(void);
-+bool rcu_tasks_trampoline_text(unsigned long ip);
-+bool arch_rcu_tasks_trampoline_text(unsigned long ip);
+diff --git a/arch/x86/kernel/asm-offsets.c b/arch/x86/kernel/asm-offsets.c
+index 081816888f7a..876c3986419a 100644
+--- a/arch/x86/kernel/asm-offsets.c
++++ b/arch/x86/kernel/asm-offsets.c
+@@ -9,6 +9,7 @@
+ #include <linux/crypto.h>
+ #include <crypto/aria.h>
+ #include <linux/sched.h>
++#include <linux/srcu.h>
+ #include <linux/stddef.h>
+ #include <linux/hardirq.h>
+ #include <linux/suspend.h>
+@@ -46,6 +47,13 @@ static void __used common(void)
+ #ifdef CONFIG_STACKPROTECTOR
+ 	OFFSET(TASK_stack_canary, task_struct, stack_canary);
+ #endif
 +#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
-+void rcu_tasks_wait_irq_preempted(bool (*inside)(unsigned long ip));
-+#else
-+static inline void rcu_tasks_wait_irq_preempted(bool (*inside)(unsigned long ip)) { }
++	OFFSET(TASK_trc_reader_nesting, task_struct, trc_reader_nesting);
++	OFFSET(TASK_trc_reader_scp, task_struct, trc_reader_scp);
++	OFFSET(SRCU_srcu_ctrp, srcu_struct, srcu_ctrp);
++	OFFSET(SRCU_CTR_srcu_locks, srcu_ctr, srcu_locks);
++	OFFSET(SRCU_CTR_srcu_unlocks, srcu_ctr, srcu_unlocks);
 +#endif
+ 
+ 	BLANK();
+ 	OFFSET(pbe_address, pbe, address);
+diff --git a/arch/x86/kernel/ftrace.c b/arch/x86/kernel/ftrace.c
+index 17d6edfcb7e0..9babaed483eb 100644
+--- a/arch/x86/kernel/ftrace.c
++++ b/arch/x86/kernel/ftrace.c
+@@ -275,6 +275,49 @@ static inline void tramp_free(void *tramp)
+ 	execmem_free(tramp);
+ }
+ 
 +#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
-+/* Also keeps instrumentation calls out of the prologue, ahead of the reader. */
-+#define __rcu_trampoline	__noinstr_section(".text..rcu_tramp")
-+#else
-+#define __rcu_trampoline
-+#endif
- void synchronize_rcu(void);
- 
- /*
-@@ -180,11 +205,16 @@ static inline void rcu_nocb_flush_deferred_wakeup(void) { }
- #ifdef CONFIG_TASKS_RCU_GENERIC
- 
- # ifdef CONFIG_TASKS_RCU
--# define rcu_tasks_classic_qs(t, preempt)				\
-+#  ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
-+void rcu_tasks_note_qs(struct task_struct *t, bool preempt);
-+#  define rcu_tasks_classic_qs(t, preempt) rcu_tasks_note_qs((t), (preempt))
-+#  else
-+#  define rcu_tasks_classic_qs(t, preempt)				\
- 	do {								\
- 		if (!(preempt) && READ_ONCE((t)->rcu_tasks_holdout))	\
- 			WRITE_ONCE((t)->rcu_tasks_holdout, false);	\
- 	} while (0)
-+#  endif
- void call_rcu_tasks(struct rcu_head *head, rcu_callback_t func);
- void synchronize_rcu_tasks(void);
- void rcu_tasks_torture_stats_print(char *tt, char *tf);
-diff --git a/include/linux/sched.h b/include/linux/sched.h
-index 8b3d47a325cc..15beb44caa2c 100644
---- a/include/linux/sched.h
-+++ b/include/linux/sched.h
-@@ -957,6 +957,7 @@ struct task_struct {
- 	u8				rcu_tasks_holdout;
- 	u8				rcu_tasks_idx;
- 	int				rcu_tasks_idle_cpu;
-+	unsigned long			rcu_tasks_irq_ip;
- 	struct list_head		rcu_tasks_holdout_list;
- 	int				rcu_tasks_exit_cpu;
- 	struct list_head		rcu_tasks_exit_list;
-diff --git a/kernel/entry/common.c b/kernel/entry/common.c
-index e4acd50bd81a..94318519998c 100644
---- a/kernel/entry/common.c
-+++ b/kernel/entry/common.c
-@@ -6,6 +6,7 @@
- #include <linux/jump_label.h>
- #include <linux/kmsan.h>
- #include <linux/livepatch.h>
-+#include <linux/rcupdate.h>
- #include <linux/resume_user_mode.h>
- #include <linux/tick.h>
- 
-@@ -141,8 +142,13 @@ void raw_irqentry_exit_cond_resched(struct pt_regs *regs)
- 		rcu_irq_exit_check_preempt();
- 		if (IS_ENABLED(CONFIG_DEBUG_ENTRY))
- 			WARN_ON_ONCE(!on_thread_stack());
--		if (need_resched() && arch_irqentry_exit_need_resched())
-+		if (need_resched() && arch_irqentry_exit_need_resched()) {
-+			if (IS_ENABLED(CONFIG_TASKS_RCU_TRAMPOLINE_READERS))
-+				rcu_tasks_irq_resched_enter(instruction_pointer(regs));
- 			preempt_schedule_irq();
-+			if (IS_ENABLED(CONFIG_TASKS_RCU_TRAMPOLINE_READERS))
-+				rcu_tasks_irq_resched_exit();
-+		}
- 	}
- }
- #ifdef CONFIG_PREEMPT_DYNAMIC
-diff --git a/kernel/fork.c b/kernel/fork.c
-index 416758c8a3d4..8077336bb136 100644
---- a/kernel/fork.c
-+++ b/kernel/fork.c
-@@ -1871,6 +1871,7 @@ static inline void rcu_copy_process(struct task_struct *p)
- 	p->rcu_tasks_holdout = false;
- 	INIT_LIST_HEAD(&p->rcu_tasks_holdout_list);
- 	p->rcu_tasks_idle_cpu = -1;
-+	p->rcu_tasks_irq_ip = 0;
- 	INIT_LIST_HEAD(&p->rcu_tasks_exit_list);
- #endif /* #ifdef CONFIG_TASKS_RCU */
- #ifdef CONFIG_TASKS_TRACE_RCU
-diff --git a/kernel/rcu/Kconfig b/kernel/rcu/Kconfig
-index 332df7a7a634..bbab14bc14c3 100644
---- a/kernel/rcu/Kconfig
-+++ b/kernel/rcu/Kconfig
-@@ -107,6 +107,28 @@ config TASKS_RCU
- 	default NEED_TASKS_RCU && PREEMPTION
- 	select IRQ_WORK
- 
-+config HAVE_RCU_TRAMPOLINE_READERS
-+	bool
-+	help
-+	  Select this if the architecture uses the generic irq entry code and
-+	  every trampoline whose lifetime Tasks RCU guards on it (ftrace
-+	  trampolines, kprobe out-of-line and optimized-probe slots, BPF
-+	  trampolines, out-of-line ftrace direct-call trampolines) enters a
-+	  Tasks Trace RCU read-side critical section before calling out of
-+	  the trampoline and leaves it before returning, and any core text
-+	  that runs on behalf of such a trampoline outside that reader is
-+	  reported by arch_rcu_tasks_trampoline_text().  The assembly readers
-+	  use the this_cpu_inc() form of SRCU-fast, hence !NEED_SRCU_NMI_SAFE.
-+
-+config TASKS_RCU_TRAMPOLINE_READERS
-+	def_bool TASKS_RCU && HAVE_RCU_TRAMPOLINE_READERS && GENERIC_IRQ_ENTRY && !NEED_SRCU_NMI_SAFE
-+	select TASKS_TRACE_RCU
-+	help
-+	  Implement the Tasks RCU grace period as a per-CPU pass over
-+	  context switches and irq-exit reschedules outside trampoline text
-+	  plus a Tasks Trace RCU grace period, instead of waiting for every
-+	  task to voluntarily context switch.  See kernel/rcu/tasks.h.
-+
- config FORCE_TASKS_RUDE_RCU
- 	bool "Force selection of Tasks Rude RCU"
- 	depends on RCU_EXPERT
-diff --git a/kernel/rcu/tasks.h b/kernel/rcu/tasks.h
-index 627295396cd9..3a7c092361a6 100644
---- a/kernel/rcu/tasks.h
-+++ b/kernel/rcu/tasks.h
-@@ -152,7 +152,7 @@ static struct rcu_tasks rt_name =							\
- 	.kname = #rt_name,								\
- }
- 
--#ifdef CONFIG_TASKS_RCU
-+#if defined(CONFIG_TASKS_RCU) && !defined(CONFIG_TASKS_RCU_TRAMPOLINE_READERS)
- 
- /* Report delay of scan exiting tasklist in rcu_tasks_postscan(). */
- static void tasks_rcu_exit_stall(struct timer_list *unused);
-@@ -802,7 +802,7 @@ static void rcu_tasks_torture_stats_print_generic(struct rcu_tasks *rtp, char *t
- 
- #endif // #ifndef CONFIG_TINY_RCU
- 
--#if defined(CONFIG_TASKS_RCU)
-+#if defined(CONFIG_TASKS_RCU) && !defined(CONFIG_TASKS_RCU_TRAMPOLINE_READERS)
- 
- ////////////////////////////////////////////////////////////////////////
- //
-@@ -897,10 +897,445 @@ static void rcu_tasks_wait_gp(struct rcu_tasks *rtp)
- 	rtp->postgp_func(rtp);
- }
- 
--#endif /* #if defined(CONFIG_TASKS_RCU) */
-+#endif /* #if defined(CONFIG_TASKS_RCU) && !defined(CONFIG_TASKS_RCU_TRAMPOLINE_READERS) */
- 
- #ifdef CONFIG_TASKS_RCU
- 
-+static int rcu_tasks_lazy_ms = -1;
-+module_param(rcu_tasks_lazy_ms, int, 0444);
-+
-+#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
-+
-+////////////////////////////////////////////////////////////////////////
-+//
-+// Tasks RCU for architectures whose trampolines are Tasks Trace RCU
-+// readers (CONFIG_HAVE_RCU_TRAMPOLINE_READERS).
-+//
-+// On these architectures every piece of text whose lifetime Tasks RCU
-+// guards -- ftrace trampolines, kprobe optinsn slots, BPF trampoline
-+// images, out-of-line ftrace direct-call trampolines -- enters a Tasks
-+// Trace RCU read-side critical section before calling out of itself and
-+// leaves it before returning, so a task anywhere inside such a call-out,
-+// preempted or not, is an ordinary rcu_read_lock_trace() reader and
-+// synchronize_rcu_tasks_trace() waits for it.
-+//
-+// What that cannot cover is the handful of instructions in the trampoline
-+// before the reader is entered and after it is left, and the one user that
-+// has no trampoline at all: the bytes after a kprobe that the jump
-+// optimizer is about to overwrite.  A task can only linger in such
-+// "unmarked" text by being interrupted there; unmarked text never calls
-+// anything that could schedule.  So a context switch on a CPU tells us that
-+// whatever that CPU was running is out of unmarked text, with one
-+// exception: a preemption from the irq-exit path, which can happen at any
-+// instruction boundary.  That path has the interrupted pt_regs in hand, so
-+// just before it preempts it records the IP in the task and checks it
-+// (rcu_tasks_trampoline_text()); if it is inside unmarked text the task
-+// goes on a short holdout list first, and takes itself off again at its
-+// next context switch outside such a preemption or its next irq-exit
-+// check that finds it elsewhere.  With that, every pass through
-+// __schedule() is a per-CPU quiescent event, as are usermode and idle.
-+//
-+// A grace period is then:
-+//
-+//  1. Wait for every online, non-idle CPU to context switch, nudging
-+//     stragglers with resched_cpu().  Afterwards no task is in the leading
-+//     unmarked instructions of a dying trampoline unless it is on the
-+//     holdout list.
-+//  2. Wait for the holdout list (as it stood) to drain.
-+//  3. synchronize_rcu_tasks_trace(), for everything inside the readers.
-+//  4. Repeat 1 and 2 for tasks that have since left the reader and are in
-+//     the trailing unmarked instructions.
-+//
-+// which is bounded by a few jiffies plus preempt-off latency plus an SRCU
-+// grace period, independent of how long any task runs without sleeping.
-+// As with the classic implementation, the idle tasks are not waited for.
-+
-+static void rcu_tasks_tramp_wait_gp(struct rcu_tasks *rtp);
-+void call_rcu_tasks(struct rcu_head *rhp, rcu_callback_t func);
-+DEFINE_RCU_TASKS(rcu_tasks, rcu_tasks_tramp_wait_gp, call_rcu_tasks, "RCU Tasks");
-+
-+/* Per-CPU count of Tasks RCU quiescent events, and the GP kthread's snapshot. */
-+static DEFINE_PER_CPU(unsigned long, rcu_tasks_qs_seq);
-+static DEFINE_PER_CPU(unsigned long, rcu_tasks_qs_snap);
++extern void ftrace_static_tramp_end(void);
++extern char __return_thunk_start[], __return_thunk_end[];
++extern char __rethunk_safe_start[], __rethunk_safe_end[];
 +
 +/*
-+ * Tasks currently switched out by an irq-exit preemption are kept, with the
-+ * interrupted IP, on the per-CPU rtp_exit_list of the CPU that preempted them
-+ * (reusing the list, lock and task_struct fields the classic flavor uses for
-+ * its exit-path bookkeeping, which this flavor does not need), so that
-+ * rcu_tasks_wait_irq_preempted() can find them without a tasklist scan and
-+ * regardless of where they are in exit.
++ * The SRCU-fast increments in TRACE_RCU_READ_LOCK/UNLOCK (ftrace_64.S) are the
++ * this_cpu_inc() form.
 + */
++static_assert(!IS_ENABLED(CONFIG_NEED_SRCU_NMI_SAFE));
 +
-+/* Tasks last seen preempted inside unmarked trampoline text. */
-+static LIST_HEAD(rcu_tasks_tramp_holdouts);
-+static DEFINE_RAW_SPINLOCK(rcu_tasks_tramp_lock);
-+
-+/* CPUs / holdouts the current grace period is still waiting for. */
-+static struct cpumask rcu_tasks_pending_cpus;
-+static LIST_HEAD(rcu_tasks_gp_holdouts);
-+
-+extern char __rcu_tramp_text_start[], __rcu_tramp_text_end[];
-+
-+/**
-+ * arch_rcu_tasks_trampoline_text - Does the architecture treat @ip as unmarked trampoline text?
-+ * @ip: kernel text address inside core kernel text
++/*
++ * See rcu_tasks_trampoline_text().  Some core kernel text behaves like a
++ * trampoline for Tasks RCU purposes because a task executing there outside
++ * any Tasks Trace reader may still be about to enter a Tasks-RCU-protected
++ * trampoline whose address it already holds:
 + *
-+ * See rcu_tasks_trampoline_text().  Architectures override this to flag
-+ * core text that runs on behalf of a trampoline outside its Tasks Trace
-+ * reader, e.g. static ftrace entry stubs or return thunks that hold a
-+ * trampoline address they are about to jump to.
++ *  - the static ftrace_caller / ftrace_regs_caller / ftrace_stub_direct_tramp
++ *    stubs, which carry a direct-call target on the stack until their final
++ *    RET, and
++ *  - the return thunks that RET expands to under CONFIG_MITIGATION_RETHUNK,
++ *    which run after leaving the stubs above and before landing in that
++ *    target.
 + */
-+bool __weak arch_rcu_tasks_trampoline_text(unsigned long ip)
++bool arch_rcu_tasks_trampoline_text(unsigned long ip)
 +{
++	if (ip >= (unsigned long)ftrace_caller &&
++	    ip <  (unsigned long)ftrace_static_tramp_end)
++		return true;
++#ifdef CONFIG_MITIGATION_RETPOLINE
++	if (ip >= (unsigned long)__return_thunk_start &&
++	    ip <  (unsigned long)__return_thunk_end)
++		return true;
++#endif
++#ifdef CONFIG_MITIGATION_SRSO
++	if (ip >= (unsigned long)__rethunk_safe_start &&
++	    ip <  (unsigned long)__rethunk_safe_end)
++		return true;
++#endif
 +	return false;
 +}
++#endif /* CONFIG_TASKS_RCU_TRAMPOLINE_READERS */
 +
-+/**
-+ * rcu_tasks_trampoline_text - Is @ip in text Tasks RCU protects but no reader marks?
-+ * @ip: an interrupted instruction pointer
-+ *
-+ * True when a task interrupted at @ip may be executing, or about to enter
-+ * or return into, text whose lifetime depends on synchronize_rcu_tasks()
-+ * without being inside the Tasks Trace reader that text takes around its
-+ * call-outs:
-+ *
-+ *  - anything outside core kernel and module text (ftrace and BPF
-+ *    trampolines, kprobe slots and other dynamically allocated text; this
-+ *    deliberately does not ask is_ftrace_trampoline() and friends, since
-+ *    text being torn down may already be unregistered there);
-+ *  - the .text..rcu_tramp section, C glue called directly from such
-+ *    trampolines before it has entered the reader;
-+ *  - whatever the architecture adds via arch_rcu_tasks_trampoline_text().
-+ *
-+ * A false positive only makes the task a holdout until its next quiescent
-+ * event.  Called with interrupts disabled from the irq-exit path.
-+ */
-+bool rcu_tasks_trampoline_text(unsigned long ip)
-+{
-+	if (core_kernel_text(ip)) {
-+		if (ip >= (unsigned long)__rcu_tramp_text_start &&
-+		    ip <  (unsigned long)__rcu_tramp_text_end)
-+			return true;
-+		return arch_rcu_tasks_trampoline_text(ip);
-+	}
-+	return !is_module_text_address(ip);
-+}
-+NOKPROBE_SYMBOL(rcu_tasks_trampoline_text);
-+
-+/* Note a Tasks RCU quiescent event on this CPU. */
-+static void rcu_tasks_qs_event(void)
-+{
-+	unsigned long *seq;
-+
-+	guard(preempt_notrace)();
-+	seq = this_cpu_ptr(&rcu_tasks_qs_seq);
-+	/* Order a preceding rcu_tasks_tramp_hold() before the count. */
-+	smp_store_release(seq, *seq + 1);
-+}
-+
-+static void rcu_tasks_tramp_hold(struct task_struct *t)
-+{
-+	unsigned long flags;
-+
-+	if (t->rcu_tasks_holdout)
-+		return;
-+	raw_spin_lock_irqsave(&rcu_tasks_tramp_lock, flags);
-+	list_add_tail(&t->rcu_tasks_holdout_list, &rcu_tasks_tramp_holdouts);
-+	WRITE_ONCE(t->rcu_tasks_holdout, true);
-+	raw_spin_unlock_irqrestore(&rcu_tasks_tramp_lock, flags);
-+}
-+
-+static void rcu_tasks_tramp_release(struct task_struct *t)
-+{
-+	unsigned long flags;
-+
-+	if (likely(!t->rcu_tasks_holdout))
-+		return;
-+	raw_spin_lock_irqsave(&rcu_tasks_tramp_lock, flags);
-+	list_del_init(&t->rcu_tasks_holdout_list);
-+	WRITE_ONCE(t->rcu_tasks_holdout, false);
-+	raw_spin_unlock_irqrestore(&rcu_tasks_tramp_lock, flags);
-+}
-+
-+/**
-+ * rcu_tasks_irq_resched_enter - Tasks RCU hook for the irq-exit reschedule check
-+ * @ip: instruction pointer of the interrupted (task-level) context
-+ *
-+ * Called with interrupts disabled when an interrupt returning to kernel
-+ * mode is about to preempt_schedule_irq(), the one context switch that can
-+ * catch a task inside unmarked trampoline text.  Record where the task is
-+ * parked for as long as it is (rcu_tasks_wait_irq_preempted() looks at
-+ * that), and if it is inside such text make it a holdout before
-+ * __schedule() reports the quiescent event; if it is not, this is as good
-+ * as a voluntary switch for ending an earlier hold.
-+ */
-+void rcu_tasks_irq_resched_enter(unsigned long ip)
-+{
-+	struct task_struct *t = current;
-+	struct rcu_tasks_percpu *rtpcp = this_cpu_ptr(rcu_tasks.rtpcpu);
-+
-+	lockdep_assert_irqs_disabled();
-+	WRITE_ONCE(t->rcu_tasks_irq_ip, ip);
-+	t->rcu_tasks_exit_cpu = smp_processor_id();
-+	raw_spin_lock_rcu_node(rtpcp);
-+	list_add(&t->rcu_tasks_exit_list, &rtpcp->rtp_exit_list);
-+	raw_spin_unlock_rcu_node(rtpcp);
-+
-+	if (unlikely(rcu_tasks_trampoline_text(ip)))
-+		rcu_tasks_tramp_hold(t);
-+	else
-+		rcu_tasks_tramp_release(t);
-+}
-+NOKPROBE_SYMBOL(rcu_tasks_irq_resched_enter);
-+
-+/**
-+ * rcu_tasks_irq_resched_exit - preempt_schedule_irq() has returned
-+ *
-+ * The task is running again (possibly elsewhere) and about to return to the
-+ * interrupted context; it is no longer parked anywhere.
-+ */
-+void rcu_tasks_irq_resched_exit(void)
-+{
-+	struct task_struct *t = current;
-+	struct rcu_tasks_percpu *rtpcp = per_cpu_ptr(rcu_tasks.rtpcpu, t->rcu_tasks_exit_cpu);
-+
-+	lockdep_assert_irqs_disabled();
-+	raw_spin_lock_rcu_node(rtpcp);
-+	list_del_init(&t->rcu_tasks_exit_list);
-+	raw_spin_unlock_rcu_node(rtpcp);
-+	WRITE_ONCE(t->rcu_tasks_irq_ip, 0);
-+}
-+NOKPROBE_SYMBOL(rcu_tasks_irq_resched_exit);
-+
-+/**
-+ * rcu_tasks_note_qs - Tasks RCU hook for a context switch or explicit QS
-+ * @t: current
-+ * @preempt: this is a preemption rather than a voluntary switch
-+ *
-+ * Every pass through __schedule() (and cond_resched_tasks_rcu_qs(), and a
-+ * tick from userspace or idle) is a quiescent event for this CPU: unmarked
-+ * trampoline text never calls anything that schedules, and the irq-exit
-+ * path has already made @t a holdout if it is preempting inside such text.
-+ * Any of these outside an irq-exit preemption also shows @t itself to be
-+ * outside, ending an earlier hold -- including cond_resched() under
-+ * PREEMPT_DYNAMIC's none/voluntary modes, where the irq-exit path is off.
-+ */
-+void rcu_tasks_note_qs(struct task_struct *t, bool preempt)
-+{
-+	WARN_ON_ONCE(t != current);
-+	if (!READ_ONCE(t->rcu_tasks_irq_ip))
-+		rcu_tasks_tramp_release(t);
-+	rcu_tasks_qs_event();
-+}
-+EXPORT_SYMBOL_GPL(rcu_tasks_note_qs);	/* cond_resched_tasks_rcu_qs() */
-+
-+/**
-+ * rcu_tasks_wait_irq_preempted - wait for tasks irq-preempted inside @inside
-+ * @inside: predicate on a task's recorded irq-exit preemption IP
-+ *
-+ * For a caller about to make some ordinary text unsafe to be parked in
-+ * (the kprobe jump optimizer): once the caller has arranged for
-+ * rcu_tasks_trampoline_text() to cover that text, new irq-exit preemptions
-+ * there become holdouts, but a task preempted there earlier is invisible
-+ * to the grace period.  Wait until no parked task's recorded preemption IP
-+ * is inside; a following synchronize_rcu_tasks() then covers the rest.
-+ * The leading synchronize_rcu() orders the caller's arrangement against
-+ * preemptions in flight, which run with interrupts disabled.
-+ */
-+void rcu_tasks_wait_irq_preempted(bool (*inside)(unsigned long ip))
-+{
-+	struct task_struct *t;
-+	unsigned long flags;
-+	int cpu, kick;
-+	bool found;
-+
-+	synchronize_rcu();
-+	for (;;) {
-+		found = false;
-+		for_each_possible_cpu(cpu) {
-+			struct rcu_tasks_percpu *rtpcp = per_cpu_ptr(rcu_tasks.rtpcpu, cpu);
-+
-+			kick = -1;
-+			raw_spin_lock_irqsave_rcu_node(rtpcp, flags);
-+			list_for_each_entry(t, &rtpcp->rtp_exit_list, rcu_tasks_exit_list) {
-+				if (inside(READ_ONCE(t->rcu_tasks_irq_ip))) {
-+					found = true;
-+					if (task_curr(t))
-+						kick = task_cpu(t);
-+				}
-+			}
-+			raw_spin_unlock_irqrestore_rcu_node(rtpcp, flags);
-+			if (kick >= 0)
-+				resched_cpu(kick);
-+		}
-+		if (!found)
-+			return;
-+		schedule_timeout_uninterruptible(1);
-+	}
-+}
-+
-+/* Has @cpu passed a quiescent event since the snapshot, or need it not? */
-+static bool rcu_tasks_cpu_quiescent(int cpu)
-+{
-+	if (!cpu_online(cpu))
-+		return true;
-+	/* Pairs with the release in rcu_tasks_qs_event(). */
-+	if (smp_load_acquire(per_cpu_ptr(&rcu_tasks_qs_seq, cpu)) !=
-+	    per_cpu(rcu_tasks_qs_snap, cpu))
-+		return true;
-+	/*
-+	 * Idle or nohz_full userspace (an RCU extended quiescent state): no
-+	 * task-level kernel frames there, and whatever ran before has switched
-+	 * out.  As with the classic flavor, the idle task itself is not waited
-+	 * for.
-+	 */
-+	if (!(ct_rcu_watching_cpu(cpu) & CT_RCU_WATCHING))
-+		return true;
-+	return idle_cpu(cpu);
-+}
-+
-+/* Rate-limited stall report; returns true if the caller should add detail. */
-+static bool rcu_tasks_tramp_stall(struct rcu_tasks *rtp, unsigned long *lastreport,
-+				  const char *what)
-+{
-+	int rtst = READ_ONCE(rcu_task_stall_timeout);
-+
-+	if (rtst <= 0 || !time_after(jiffies, *lastreport + rtst))
-+		return false;
-+	*lastreport = jiffies;
-+	pr_err("INFO: %s: %s, grace period %lu is %lu jiffies old\n", rtp->kname,
-+	       what, rcu_seq_current(&rtp->tasks_gp_seq), jiffies - rtp->gp_start);
-+	return true;
-+}
-+
+ /* Defined as markers to the end of the ftrace default trampolines */
+ extern void ftrace_regs_caller_end(void);
+ extern void ftrace_caller_end(void);
+diff --git a/arch/x86/kernel/ftrace_64.S b/arch/x86/kernel/ftrace_64.S
+index 62c1c93aa1c6..5d8cb3861978 100644
+--- a/arch/x86/kernel/ftrace_64.S
++++ b/arch/x86/kernel/ftrace_64.S
+@@ -7,6 +7,7 @@
+ #include <linux/cfi_types.h>
+ #include <linux/linkage.h>
+ #include <asm/asm-offsets.h>
++#include <asm/percpu.h>
+ #include <asm/ptrace.h>
+ #include <asm/ftrace.h>
+ #include <asm/nospec-branch.h>
+@@ -145,6 +146,53 @@ SYM_FUNC_END(ftrace_stub_graph)
+ 
+ #ifdef CONFIG_DYNAMIC_FTRACE
+ 
 +/*
-+ * Steps 1/4: wait until every online non-idle CPU has context switched.  A
-+ * CPU that has not after a jiffy is asked to with resched_cpu(), which takes
-+ * it through rcu_tasks_irq_resched_enter() and __schedule() (or, from
-+ * userspace or a guest, straight to __schedule()).
++ * Open-coded rcu_read_lock_trace() / rcu_read_unlock_trace(), see
++ * include/linux/rcupdate_trace.h and CONFIG_HAVE_RCU_TRAMPOLINE_READERS: the
++ * trampoline and the ftrace_ops it is about to load are kept alive by Tasks
++ * RCU only while we are inside this reader, so the lock must precede the
++ * function_trace_op load and the unlock must follow the call.  These live
++ * inside the region copied into dynamic trampolines; the %rip-relative
++ * references are fixed up by text_poke_apply_relocation() in
++ * create_trampoline().  Clobbers %rax, %rcx and flags.
 + */
-+static void rcu_tasks_tramp_wait_cpus(struct rcu_tasks *rtp, unsigned long *lastreport)
-+{
-+	struct cpumask *pending = &rcu_tasks_pending_cpus;
-+	unsigned long start;
-+	int cpu;
++.macro TRACE_RCU_READ_LOCK
++#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
++	movq	PER_CPU_VAR(current_task), %rcx
++	movl	TASK_trc_reader_nesting(%rcx), %eax
++	incl	TASK_trc_reader_nesting(%rcx)
++	testl	%eax, %eax
++	jnz	.Ltrl_nested_\@
++	movq	rcu_tasks_trace_srcu_struct+SRCU_srcu_ctrp(%rip), %rax
++	incq	%gs:SRCU_CTR_srcu_locks(%rax)
++	movq	%rax, TASK_trc_reader_scp(%rcx)
++#ifndef CONFIG_TASKS_TRACE_RCU_NO_MB
++	lock addl $0, -4(%rsp)		/* smp_mb() */
++#endif
++.Ltrl_nested_\@:
++#endif
++.endm
 +
-+	/*
-+	 * The quiescent events run with preemption (in practice interrupts)
-+	 * disabled, so after this any event we go on to count began after the
-+	 * caller's updates -- the unpublished trampoline, and whatever
-+	 * rcu_tasks_trampoline_text() consults -- were visible to it.
-+	 */
-+	synchronize_rcu();
++.macro TRACE_RCU_READ_UNLOCK
++#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
++	movq	PER_CPU_VAR(current_task), %rcx
++	movl	TASK_trc_reader_nesting(%rcx), %eax
++	subl	$1, %eax
++	jnz	.Ltru_nested_\@
++	/* Outermost: pick up scp before an interrupt can see nesting == 0. */
++	movq	TASK_trc_reader_scp(%rcx), %rax
++	movl	$0, TASK_trc_reader_nesting(%rcx)
++#ifndef CONFIG_TASKS_TRACE_RCU_NO_MB
++	lock addl $0, -4(%rsp)		/* smp_mb() */
++#endif
++	incq	%gs:SRCU_CTR_srcu_unlocks(%rax)
++	jmp	.Ltru_done_\@
++.Ltru_nested_\@:
++	movl	%eax, TASK_trc_reader_nesting(%rcx)
++.Ltru_done_\@:
++#endif
++.endm
 +
-+	start = jiffies;
-+	for_each_online_cpu(cpu) {
-+		per_cpu(rcu_tasks_qs_snap, cpu) = READ_ONCE(per_cpu(rcu_tasks_qs_seq, cpu));
-+		__cpumask_set_cpu(cpu, pending);
-+	}
-+	/* Snapshots before the checks below; pairs with rcu_tasks_qs_event(). */
-+	smp_mb();
+ SYM_FUNC_START(__fentry__)
+ 	ANNOTATE_NOENDBR
+ 	CALL_DEPTH_ACCOUNT
+@@ -163,6 +211,8 @@ SYM_FUNC_START(ftrace_caller)
+ 	leaq MCOUNT_REG_SIZE+8(%rsp), %rcx
+ 	movq %rcx, RSP(%rsp)
+ 
++	TRACE_RCU_READ_LOCK
 +
-+	for (;;) {
-+		for_each_cpu(cpu, pending)
-+			if (rcu_tasks_cpu_quiescent(cpu))
-+				__cpumask_clear_cpu(cpu, pending);
-+		if (cpumask_empty(pending))
-+			break;
-+		if (time_after(jiffies, start)) {
-+			for_each_cpu(cpu, pending)
-+				resched_cpu(cpu);
-+			rtp->n_ipis += cpumask_weight(pending);
-+		}
-+		schedule_timeout_idle(1);
-+		if (rcu_tasks_tramp_stall(rtp, lastreport, "CPUs without a quiescent event"))
-+			pr_err("\tCPUs: %*pbl\n", cpumask_pr_args(pending));
-+	}
-+}
+ SYM_INNER_LABEL(ftrace_caller_op_ptr, SYM_L_GLOBAL)
+ 	ANNOTATE_NOENDBR
+ 	/* Load the ftrace_ops into the 3rd parameter */
+@@ -181,6 +231,8 @@ SYM_INNER_LABEL(ftrace_call, SYM_L_GLOBAL)
+ 	ANNOTATE_NOENDBR
+ 	call ftrace_stub
+ 
++	TRACE_RCU_READ_UNLOCK
 +
+ 	/* Handlers can change the RIP */
+ 	movq RIP(%rsp), %rax
+ 	movq %rax, MCOUNT_REG_SIZE(%rsp)
+@@ -209,6 +261,8 @@ SYM_FUNC_START(ftrace_regs_caller)
+ 
+ 	CALL_DEPTH_ACCOUNT
+ 
++	TRACE_RCU_READ_LOCK
++
+ SYM_INNER_LABEL(ftrace_regs_caller_op_ptr, SYM_L_GLOBAL)
+ 	ANNOTATE_NOENDBR
+ 	/* Load the ftrace_ops into the 3rd parameter */
+@@ -246,6 +300,8 @@ SYM_INNER_LABEL(ftrace_regs_call, SYM_L_GLOBAL)
+ 	ANNOTATE_NOENDBR
+ 	call ftrace_stub
+ 
++	TRACE_RCU_READ_UNLOCK
++
+ 	/* Copy flags back to SS, to restore them */
+ 	movq EFLAGS(%rsp), %rax
+ 	movq %rax, MCOUNT_REG_SIZE(%rsp)
+@@ -328,6 +384,19 @@ SYM_FUNC_START(ftrace_stub_direct_tramp)
+ 	RET
+ SYM_FUNC_END(ftrace_stub_direct_tramp)
+ 
 +/*
-+ * Steps 2/4: wait for the tasks that were holdouts when we looked to stop
-+ * being holdouts.  They are moved to a private list so that tasks becoming
-+ * holdouts later (in live trampolines) cannot keep us here; each removes
-+ * itself via rcu_tasks_tramp_release() wherever it is queued.
++ * [ftrace_caller, ftrace_static_tramp_end) is treated as trampoline text by
++ * rcu_tasks_trampoline_text(): outside TRACE_RCU_READ_LOCK/UNLOCK the stubs
++ * may still hold a direct-call trampoline address (ORIG_RAX / the return
++ * address they RET to) that only Tasks RCU keeps alive.  With return thunks
++ * the RET itself runs elsewhere; arch_rcu_tasks_trampoline_text() covers
++ * those too.
 + */
-+static void rcu_tasks_tramp_wait_holdouts(struct rcu_tasks *rtp, unsigned long *lastreport)
-+{
-+	struct task_struct *t;
-+	unsigned long flags;
-+	int cpu;
++SYM_CODE_START_NOALIGN(ftrace_static_tramp_end)
++	UNWIND_HINT_UNDEFINED
++	ANNOTATE_NOENDBR
++SYM_CODE_END(ftrace_static_tramp_end)
 +
-+	raw_spin_lock_irqsave(&rcu_tasks_tramp_lock, flags);
-+	list_splice_tail_init(&rcu_tasks_tramp_holdouts, &rcu_tasks_gp_holdouts);
-+	raw_spin_unlock_irqrestore(&rcu_tasks_tramp_lock, flags);
-+
-+	for (;;) {
-+		struct cpumask *kick = &rcu_tasks_pending_cpus;
-+		struct task_struct *show[8];
-+		int nshow = 0, i;
-+		bool empty, report;
-+
-+		report = rcu_tasks_tramp_stall(rtp, lastreport,
-+					       "tasks preempted in trampoline text");
-+		cpumask_clear(kick);
-+		raw_spin_lock_irqsave(&rcu_tasks_tramp_lock, flags);
-+		empty = list_empty(&rcu_tasks_gp_holdouts);
-+		list_for_each_entry(t, &rcu_tasks_gp_holdouts, rcu_tasks_holdout_list) {
-+			if (task_curr(t))
-+				__cpumask_set_cpu(task_cpu(t), kick);
-+			if (report && nshow < ARRAY_SIZE(show))
-+				show[nshow++] = get_task_struct(t);
-+		}
-+		raw_spin_unlock_irqrestore(&rcu_tasks_tramp_lock, flags);
-+		/* Never printk under the lock the irq-exit path takes. */
-+		for (i = 0; i < nshow; i++) {
-+			sched_show_task(show[i]);
-+			put_task_struct(show[i]);
-+		}
-+		if (empty)
-+			break;
-+		for_each_cpu(cpu, kick)
-+			resched_cpu(cpu);
-+		rtp->n_ipis += cpumask_weight(kick);
-+		schedule_timeout_idle(1);
-+	}
-+}
-+
-+/* Wait for one trampoline-reader Tasks RCU grace period. */
-+static void rcu_tasks_tramp_wait_gp(struct rcu_tasks *rtp)
-+{
-+	unsigned long lastreport = jiffies;
-+
-+	set_tasks_gp_state(rtp, RTGS_WAIT_SCAN_HOLDOUTS);
-+	rcu_tasks_tramp_wait_cpus(rtp, &lastreport);
-+	rcu_tasks_tramp_wait_holdouts(rtp, &lastreport);
-+
-+	set_tasks_gp_state(rtp, RTGS_WAIT_READERS);
-+	synchronize_rcu_tasks_trace();
-+
-+	set_tasks_gp_state(rtp, RTGS_SCAN_HOLDOUTS);
-+	rcu_tasks_tramp_wait_cpus(rtp, &lastreport);
-+	rcu_tasks_tramp_wait_holdouts(rtp, &lastreport);
-+
-+	set_tasks_gp_state(rtp, RTGS_POST_GP);
-+}
-+
-+static int __init rcu_spawn_tasks_kthread(void)
-+{
-+	rcu_tasks.gp_sleep = HZ / 10;
-+	if (rcu_tasks_lazy_ms >= 0)
-+		rcu_tasks.lazy_jiffies = msecs_to_jiffies(rcu_tasks_lazy_ms);
-+	rcu_tasks.wait_state = TASK_IDLE;
-+	rcu_spawn_tasks_kthread_generic(&rcu_tasks);
-+	return 0;
-+}
-+
-+void exit_tasks_rcu_start(void) { }
-+void exit_tasks_rcu_finish(void) { }
-+
-+#else /* #ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS */
-+
- ////////////////////////////////////////////////////////////////////////
- //
- // Simple variant of RCU whose quiescent states are voluntary context
-@@ -1173,6 +1608,8 @@ static void tasks_rcu_exit_stall(struct timer_list *unused)
- #endif // #ifndef CONFIG_TINY_RCU
- }
+ #else /* ! CONFIG_DYNAMIC_FTRACE */
  
-+#endif /* #else #ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS */
-+
- /**
-  * call_rcu_tasks() - Queue an RCU for invocation task-based grace period
-  * @rhp: structure to be used for queueing the RCU updates.
-@@ -1187,6 +1624,12 @@ static void tasks_rcu_exit_stall(struct timer_list *unused)
-  * primitives analogous to rcu_read_lock() and rcu_read_unlock() because
-  * this primitive is intended to determine that all tasks have passed
-  * through a safe state, not so much for data-structure synchronization.
-+ * On CONFIG_TASKS_RCU_TRAMPOLINE_READERS kernels a preemption outside
-+ * trampoline text also ends one, and a reader whose protected window
-+ * spans preemptible code must additionally be a Tasks Trace RCU reader
-+ * (rcu_read_lock_trace(), as the trampolines there take around their
-+ * call-outs); an arbitrary stretch of preemptible kernel code is not
-+ * protected.
-  *
-  * See the description of call_rcu() for more detailed information on
-  * memory ordering guarantees.
-@@ -1205,7 +1648,9 @@ EXPORT_SYMBOL_GPL(call_rcu_tasks);
-  * executing rcu-tasks read-side critical sections have elapsed.  These
-  * read-side critical sections are delimited by calls to schedule(),
-  * cond_resched_tasks_rcu_qs(), idle execution, userspace execution, calls
-- * to synchronize_rcu_tasks(), and (in theory, anyway) cond_resched().
-+ * to synchronize_rcu_tasks(), and (in theory, anyway) cond_resched();
-+ * on CONFIG_TASKS_RCU_TRAMPOLINE_READERS kernels also by preemption
-+ * outside trampoline text, see call_rcu_tasks().
-  *
-  * This is a very specialized primitive, intended only for a few uses in
-  * tracing and other situations requiring manipulation of function
-@@ -1233,9 +1678,7 @@ void rcu_barrier_tasks(void)
- }
- EXPORT_SYMBOL_GPL(rcu_barrier_tasks);
+ SYM_FUNC_START(__fentry__)
+diff --git a/arch/x86/kernel/vmlinux.lds.S b/arch/x86/kernel/vmlinux.lds.S
+index 2438b89a4620..e546283dc267 100644
+--- a/arch/x86/kernel/vmlinux.lds.S
++++ b/arch/x86/kernel/vmlinux.lds.S
+@@ -151,7 +151,9 @@ SECTIONS
+ 		 * definition.
+ 		 */
+ 		. = srso_alias_untrain_ret | (1 << 2) | (1 << 8) | (1 << 14) | (1 << 20);
++		__rethunk_safe_start = .;
+ 		*(.text..__x86.rethunk_safe)
++		__rethunk_safe_end = .;
+ #endif
+ 		ALIGN_ENTRY_TEXT_END
  
--static int rcu_tasks_lazy_ms = -1;
--module_param(rcu_tasks_lazy_ms, int, 0444);
--
-+#ifndef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
- static int __init rcu_spawn_tasks_kthread(void)
- {
- 	rcu_tasks.gp_sleep = HZ / 10;
-@@ -1251,6 +1694,7 @@ static int __init rcu_spawn_tasks_kthread(void)
- 	rcu_spawn_tasks_kthread_generic(&rcu_tasks);
- 	return 0;
- }
-+#endif /* #ifndef CONFIG_TASKS_RCU_TRAMPOLINE_READERS */
- 
- #if !defined(CONFIG_TINY_RCU)
- void show_rcu_tasks_classic_gp_kthread(void)
-@@ -1279,6 +1723,7 @@ void rcu_tasks_get_gp_data(int *flags, unsigned long *gp_seq)
- }
- EXPORT_SYMBOL_GPL(rcu_tasks_get_gp_data);
- 
-+#ifndef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
- /*
-  * Protect against tasklist scan blind spot while the task is exiting and
-  * may be removed from the tasklist.  Do this by adding the task to yet
-@@ -1322,6 +1767,7 @@ void exit_tasks_rcu_finish(void)
- 	list_del_init(&t->rcu_tasks_exit_list);
- 	raw_spin_unlock_irqrestore_rcu_node(rtpcp, flags);
- }
-+#endif /* #ifndef CONFIG_TASKS_RCU_TRAMPOLINE_READERS */
- 
- #else /* #ifdef CONFIG_TASKS_RCU */
- void exit_tasks_rcu_start(void) { }
-diff --git a/kernel/rcu/update.c b/kernel/rcu/update.c
-index b62735a67884..a122b8d1effb 100644
---- a/kernel/rcu/update.c
-+++ b/kernel/rcu/update.c
-@@ -40,7 +40,9 @@
- #include <linux/tick.h>
- #include <linux/rcupdate_wait.h>
- #include <linux/sched/isolation.h>
-+#include <linux/context_tracking_state.h>
- #include <linux/kprobes.h>
-+#include <linux/module.h>
- #include <linux/slab.h>
- #include <linux/irq_work.h>
- #include <linux/rcupdate_trace.h>
+@@ -162,7 +164,9 @@ SECTIONS
+ 		SOFTIRQENTRY_TEXT
+ #ifdef CONFIG_MITIGATION_RETPOLINE
+ 		*(.text..__x86.indirect_thunk)
++		__return_thunk_start = .;
+ 		*(.text..__x86.return_thunk)
++		__return_thunk_end = .;
+ #endif
+ 		STATIC_CALL_TEXT
+ 		*(.gnu.warning)
 
 -- 
 2.55.0
