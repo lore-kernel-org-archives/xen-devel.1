@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08339C88E77
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 17:17:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421982.1647593 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFAF5C88E7D
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 17:41:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421995.1647601 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6Wlx-0001eL-0z; Tue, 15 Sep 2026 17:16:45 +0000
+	id 1x6X9J-0005Xl-VL; Tue, 15 Sep 2026 17:40:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421982.1647593; Tue, 15 Sep 2026 17:16:44 +0000
+Received: by outflank-mailman (output) from mailman id 1421995.1647601; Tue, 15 Sep 2026 17:40:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6Wlw-0001eE-UI; Tue, 15 Sep 2026 17:16:44 +0000
-Received: by outflank-mailman (input) for mailman id 1421982;
- Tue, 15 Sep 2026 17:16:43 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x6X9J-0005Xe-Se; Tue, 15 Sep 2026 17:40:53 +0000
+Received: by outflank-mailman (input) for mailman id 1421995;
+ Tue, 15 Sep 2026 17:40:52 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ziy@nvidia.com>) id 1x6Wlv-0001e8-AS
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 17:16:43 +0000
+ (envelope-from <kevin.lampis@citrix.com>) id 1x6X9I-0005XY-Fb
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 17:40:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6Wlu-00Eq6K-1B
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 19:16:42 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x6X9H-00HXrj-Sr
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 19:40:51 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ziy@nvidia.com>)
- id 6aa97d60-8faa-0a2a0a5109dd-0a2a4504c094-42
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 19:16:41 +0200
-Received: from [40.107.200.30]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ziy@nvidia.com>)
- id 6aa97d77-b57f-0a2a45040019-286bc81ec48d-3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 19:16:41 +0200
-Received: from DS7PR12MB8371.namprd12.prod.outlook.com (2603:10b6:8:e9::18) by
- PH7PR12MB9102.namprd12.prod.outlook.com (2603:10b6:510:2f8::14) with
+ (envelope-from <kevin.lampis@citrix.com>)
+ id 6aa982eb-2eae-0a2a0a5409dd-0a2a4501a2ce-32
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 19:40:51 +0200
+Received: from [40.107.201.19]
+ (helo=CH4PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <kevin.lampis@citrix.com>)
+ id 6aa98322-5984-0a2a45010019-286bc91304a0-3
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 19:40:51 +0200
+Received: from BY1PR03MB7996.namprd03.prod.outlook.com (2603:10b6:a03:5b2::8)
+ by DS2PR03MB8418.namprd03.prod.outlook.com (2603:10b6:8:32c::19) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Tue, 15 Sep
- 2026 17:16:14 +0000
-Received: from DS7PR12MB8371.namprd12.prod.outlook.com
- ([fe80::23d7:9e07:1de8:d80a]) by DS7PR12MB8371.namprd12.prod.outlook.com
- ([fe80::23d7:9e07:1de8:d80a%3]) with mapi id 15.21.0406.007; Tue, 15 Sep 2026
- 17:16:14 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Tue, 15 Sep
+ 2026 17:40:48 +0000
+Received: from BY1PR03MB7996.namprd03.prod.outlook.com
+ ([fe80::5068:e1b5:b478:8d07]) by BY1PR03MB7996.namprd03.prod.outlook.com
+ ([fe80::5068:e1b5:b478:8d07%3]) with mapi id 15.21.0406.007; Tue, 15 Sep 2026
+ 17:40:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,209 +55,119 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=selector2 header.d=Nvidia.com header.i="@Nvidia.com"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iwwFsvFOloHx4altECsYutAjbApJwPPXiD6QFXUizuENJtzyIE8exaKrZDcNq5I7j1CLZzN3u3ISD6WbMfmpsUQmCJN4RckcRofY0QshFZrbmhoHbkvQRop+h5YKS4kEBvdfiak61L/wb9hjmyJeZtvcGY5jTfRGI+aULIZfGXZZgbhOIgFJ3Jo0saNgmRlfEd7RZFz3v9ZPsHti4brKICSnAb8UPjO1ocO8ZFz49Dd2j8K+ZJviXuuGfO78cqEl0vyoC0pMRQ0iUke1SRVEdlfpkGjgpoL5TUmVYOmDQUI/Rod8n93gL5h8XE6gRHEW1s66fNlcnu8KTVQAGxqagQ==
+ b=Gqsr7afEe8MXHi4A9Nh+Zmjw+Tg8+nrqfbB41Mg6zzGVPejOnH9MUvQS6PHQWgw5Ir12xnRt6jNxL6HSOUGt/iWHvKYA5sPoQSH/+ssq+m1LzWNR1/BCaPr+XG04lRkoEyqT9YhR1aeUPXGUZVW3iwqM/RN4mosgJFL31DNedrlOUkx5NamAUAtmxqjmRV7dlmCi7NJyUpZsSN+oK7U+9TMaKQxd2qDEg8HP1Wqcxbj7PlRrCnizGh0PdLuBk28u81TeAA+BPEMg4t1cUtTgW8+NtRmWhYQU86D+D3z6p34FTG5FjBt2c05wdvjqKfmR1/a1msWCuoGjYDhLxbHi7A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=gm4A0dC/cSIZYi95VVuBQCnE1WnlU3ZJPlPGzxqmmdc=;
- b=izs3jKvQd2SPtIHCbqSzFGoF/iXmI728U1Xlv4NuvE2aWCWp99y+/8UF7Z4R9btCS7XEV6S7MzB5QgrnbKYyDjDw4I22mF0e9yYLUWo6LsxQeAotR+60Ij38OCq8+Xxs9bPppAHUMkXoVgQtJLufv3wqxE/Q1NhsjkzA/WYubFdA+bGMA3TPA64vVgRIvjsPkXsQ4+qsoih20yCJz5VqC5FsmYVrVMuzBh42bO6fXBfbrwwwx5Vbn9AOUQ8vukhRFj86KXZuvZ5X3d85hIbyOAHQVN14MjH1edvzJfPG0QWrkK4uKQP3TT+UFB9yeLBGWXmT7WGnN2xRkrx9vaAV5w==
+ bh=vUrYNOI9r0C0mwIIGWx2ncqfPsgZgCcsFQo4810CMeA=;
+ b=lDMacFVP/DK6JDL9irPgdP5mAuy4tLSLbLFH9QBewVd8CXIToOBLr0eICPTrjJdrWcg/Alsn3dim3dj2f42HrsvtM2V4aM0/0qZ1tO3zSKjsSXJcx/3KIu3yc5lYBt+K/b/diymSrvxWVm+VeOMtNyL0ZFZNu66/rNNv2fqbvyKfgY4BKm9OtORtCRcCB3ZQrMeqwq69mxR636VElUMQQd/PPV1YtRQ+5RZH43zK0VG7/JbnY8mpXBjnjcmnHN6CTol9eCFFVLOoU+M95yF/x7QFTQgjZlPgpLq79wmgIAcU/0qaw6rxxNTbyKElpLQqFIFaKIWgRPKyCYJtJku3Qw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=gm4A0dC/cSIZYi95VVuBQCnE1WnlU3ZJPlPGzxqmmdc=;
- b=qdjnEuZm+PoCkspfNOFNWfGpWz5qPUaQuoTEkOpTbi+fqdQpJTQt+C4lxiilcFDnbfSiq+FGTV+fRSmCE/TCUpCLM6y/p2UBuSMu0zsZ3TVemN8SDX3CAV2s4+WZnt7LA6f2dTjX2Cyu/P/qopUr95wEH9C9IV+34J9UMfEdRrJ6BVu2Nuxo524O9pQxU/y5dJDMca7N0gyUn0b+XTcLZfM0vuag7Io98Q0jH5Ll6bqWVefpOdaDuKZvyIJkomyuTSTVq/N2StADM738facGw9b6wKIZeOjGvklwX1BS5eUtzGbKAADcRCCRvX30ruvmlVg4sgMNeiqiuzwDIZ++Lg==
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-From: Zi Yan <ziy@nvidia.com>
-To: Andrew Morton <akpm@linux-foundation.org>
-Cc: David Hildenbrand <david@kernel.org>,
- "Matthew Wilcox (Oracle)" <willy@infradead.org>,
- Muchun Song <muchun.song@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>,
- "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
- Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Michal Hocko <mhocko@suse.com>, Baolin Wang <baolin.wang@linux.alibaba.com>,
- Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>,
- Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>,
- Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>,
- Gregory Price <gourry@gourry.net>, Ying Huang <ying.huang@linux.alibaba.com>,
- Alistair Popple <apopple@nvidia.com>, Johannes Weiner <hannes@cmpxchg.org>,
- Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>,
- Kairui Song <kasong@tencent.com>, linux-mm@kvack.org,
- linux-kernel@vger.kernel.org, Minchan Kim <minchan@kernel.org>,
- Sergey Senozhatsky <senozhatsky@chromium.org>,
- Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>,
- Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- x86@kernel.org, Mark Rutland <mark.rutland@arm.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
- Adrian Hunter <adrian.hunter@intel.com>,
- James Clark <james.clark@linaro.org>, "H. Peter Anvin" <hpa@zytor.com>,
- linux-perf-users@vger.kernel.org, Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- xen-devel@lists.xenproject.org, Eric Biggers <ebiggers@kernel.org>,
- "Theodore Y. Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>,
- linux-fscrypt@vger.kernel.org, Oscar Salvador <osalvador@suse.de>,
- Chao Yu <chao@kernel.org>, linux-f2fs-devel@lists.sourceforge.net,
- Tal Zussman <tz2294@columbia.edu>, Gao Xiang <xiang@kernel.org>,
- Jan Kara <jack@suse.cz>, Yue Hu <zbestahu@gmail.com>,
- Jeffle Xu <jefflexu@linux.alibaba.com>, Sandeep Dhavale <dhavale@google.com>,
- Hongbo Li <hongbohbli@tencent.com>, Chunhai Guo <guochunhai@vivo.com>,
- linux-erofs@lists.ozlabs.org, linux-fsdevel@vger.kernel.org,
- Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Matthew Brost <matthew.brost@intel.com>,
- Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
- Byungchul Park <byungchul@sk.com>, Axel Rasmussen <axelrasmussen@google.com>,
- Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>,
- linux-trace-kernel@vger.kernel.org, Trond Myklebust <trondmy@kernel.org>,
- Anna Schumaker <anna@kernel.org>, linux-nfs@vger.kernel.org,
- Ilya Dryomov <idryomov@gmail.com>, Alex Markuze <amarkuze@redhat.com>,
- Viacheslav Dubeyko <slava@dubeyko.com>, ceph-devel@vger.kernel.org,
- Song Liu <song@kernel.org>, Yu Kuai <yukuai@fygo.io>,
- Li Nan <magiclinan@didiglobal.com>, Xiao Ni <xiao@kernel.org>,
- linux-raid@vger.kernel.org, Richard Weinberger <richard@nod.at>,
- Zhihao Cheng <chengzhihao1@huawei.com>, linux-mtd@lists.infradead.org,
- Baoquan He <baoquan.he@linux.dev>,
- Pasha Tatashin <pasha.tatashin@soleen.com>,
- Pratyush Yadav <pratyush@kernel.org>, Jonathan Corbet <corbet@lwn.net>,
- Dave Young <ruirui.yang@linux.dev>, Shuah Khan <skhan@linuxfoundation.org>,
- kexec@lists.infradead.org, linux-doc@vger.kernel.org
-Subject: Re: [PATCH v4 00/16] Remove PG_private by using page/folio->private
- checks instead
-Date: Tue, 15 Sep 2026 13:16:07 -0400
-X-Mailer: MailMate (3.0r7032)
-Message-ID: <C87F746D-D3CD-4FB9-A50F-A2835DB750DF@nvidia.com>
-In-Reply-To: <20260913203959.6b46b0b5a052aec818a7f267@linux-foundation.org>
-References: <20260913-remove-pg_private-v4-0-848550f7574e@nvidia.com>
- <20260913203959.6b46b0b5a052aec818a7f267@linux-foundation.org>
-Content-Type: text/plain; charset="UTF-8"
+ bh=vUrYNOI9r0C0mwIIGWx2ncqfPsgZgCcsFQo4810CMeA=;
+ b=HOnDeN1/65PKazYUxejH5HN43hB/rGaLEy4WkBusinNtPu83ajK7wUyvgeLklwIEzheXo5WLsvUixBbKGy2W1Ca2gdJlqW/crJ2LV4hirDFU+9fpjy2G6fFveboc7mvy1zeP/EnS8nIw41YtuB1H4vcz6FzUrIP/yeV3LTkJJ4U=
+From: Kevin Lampis <kevin.lampis@citrix.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: "jbeulich@suse.com" <jbeulich@suse.com>, "teddy.astie@vates.tech"
+	<teddy.astie@vates.tech>
+Subject: Re: [PATCH v2 3/7] x86: extend update_intpte() to support atomic
+ get-and-update
+Thread-Topic: [PATCH v2 3/7] x86: extend update_intpte() to support atomic
+ get-and-update
+Thread-Index: AQHdQWMYYuOEW7sUTEmdu2MmKUu4LbbJV30AgAaXyo0=
+Date: Tue, 15 Sep 2026 17:40:48 +0000
+Message-ID:
+ <BY1PR03MB79960A870CEBD61B286E339BF3BA2@BY1PR03MB7996.namprd03.prod.outlook.com>
+References: <20260910203113.462943-1-kevin.lampis@citrix.com>
+ <20260910203113.462943-4-kevin.lampis@citrix.com>
+ <0aedfbad-29ae-4083-89b4-5c662398553d@citrix.com>
+In-Reply-To: <0aedfbad-29ae-4083-89b4-5c662398553d@citrix.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BY1PR03MB7996:EE_|DS2PR03MB8418:EE_
+x-ms-office365-filtering-correlation-id: b028f62b-9aa0-444d-abdc-08df13507a78
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|376014|1800799024|366016|23010399003|18002099003|22082099003|38070700021|4143699003|10067099003|11063799006|56012099006;
+x-microsoft-antispam-message-info:
+ k+TIVgZcXnk4MtYWpB5tXyhiFnmp8Gd3rD+MwgjJg5H8o7rEfLzZppklT8hEvcXDEm8I0JHBC0vGvs0IfaRSNVjaQ1wY3V7pdx7NIFJKM0vbrHPd/Z1VswvrALMZiePWxcQOotV6TINbj5nHONWARNp7VccEVtLzfQV21mpz6EdQx3enr5P4hlv3zxTpocDIZIEV97OLCB7KDkJvHJQNf8CHm1MuY3v/onzIoIRpH/yciDO/aL5f7uTVvp5mHf3//mQeJUFPayxzEoXeEBWs95teXA8rQp2j4a0g/tRuPKb+yoXLImZlojaX9nKLEQk4NTE9wnj9HJneG77LOl6ZfbTFmUXgAJRq3DqqULNBwr35lhEcQEtNg2EQFZBFlJOBqxzEdHYk4cAOaZAmX7xUERd3A7/MUjgcjBkR6KmJD82Pq1Fnmr0SMDXeiGjBf6VHKcnM48uZGQ4HwgR886zn2mQpswLNViRqih+7ItioNKvVRRxqXsrCl7mZzoT7z2bSpoHkrCH7NsFWCARRiUwgjo1y9d9DvX+s8LbR5i96EJmPaxnvRzuzgZBH0r7GjdtKan52NMty3Hi8YcftX8x6WcrjZ+kjJZ+7S0tHDuvAxWWeMz9OczqDRA3Xm5UeccssPEr2CoDUCr/mdJiqUlIiEIzHzSH3WOc6iFlkk4Fj0YEmftWeP9T9H4uL5HNaL9/0/lTWq/9hNUy16wChBQi4Rq8IlmzPsDRxYvM8kZDdFbs=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY1PR03MB7996.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(23010399003)(18002099003)(22082099003)(38070700021)(4143699003)(10067099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?3N8opkPzxWymciWYmRuw26PIv3m4Nwp6/RriaDHTn9vZDw0AM8J+AvvCxJ?=
+ =?iso-8859-1?Q?l5n2ef/+l0tcMbRXMbOQEJITAhkSqHroV3xCXKwpY6Dw96CXqJR0SvMFM1?=
+ =?iso-8859-1?Q?BhM4eLhkY7ZJIheE7q4fPceXeNEMJiXYMea5PzEb9O/8ch907uPPCv+ajq?=
+ =?iso-8859-1?Q?eNFu70+GWmOUBfZFc15zHLmhlwQ0aSZ18yHonIkAop3OqOgSag8+IkZZuP?=
+ =?iso-8859-1?Q?oXHTLMc40DpYUp299f2y1RTUZM1e+UhwvjbBt7hI/lZSXyS8+ZDRi+plVQ?=
+ =?iso-8859-1?Q?N6adqayItoxMXIB5hTcEg48N+hUy08LgfP8xgKAcq/BDdKTnFZAzDem8F3?=
+ =?iso-8859-1?Q?aM0HEPiuGnbejbSor0KvqTmnT0tnnqWesVIGpstHIUDSVCCoP/eLm56iBC?=
+ =?iso-8859-1?Q?HjJC8+jZcKpGI2Mz2I8uvgyUjUA9zAHS7XCXEzYnbs5YVsqowKgL95DIuI?=
+ =?iso-8859-1?Q?686GNcS7KtKDL6IMBJWw4B5thpKKL6oxIrJxLBeuRZ4n0x5ZjNrCuP6TOV?=
+ =?iso-8859-1?Q?pXlPUpUAkherZCS+ZAAVrSOzSoWlieajLlQECgVXFXPRO539OiMjJ8ySz5?=
+ =?iso-8859-1?Q?8GCbsVN5eLi/N+QwDl3CVdqpn8xeB50+j1OLevdAZBGHhtkw0Rtl8vtAgF?=
+ =?iso-8859-1?Q?8CmH3TbN6UZuT8KHCE0SA+Dc/Yy+6ywuSfrmKMudMGDFW13f6OhMau8cRd?=
+ =?iso-8859-1?Q?PGu4xp5Ajrbc3HSaxSWPqg8j2k5kFuHfE1XeiDc85l+GAQvNaVjcOvt7QN?=
+ =?iso-8859-1?Q?efKsmRlWSRBxvjhJwpUP4A1+RugBmAUaPMzOlUkk4T1lwmQa6ZB2cOfqIA?=
+ =?iso-8859-1?Q?oXG7cA/D2sS9ZdFnOJBEOZAJ9HzjlszXKKlA+CU0qBr02i7oioPwK+a7CC?=
+ =?iso-8859-1?Q?acbtK7MeYpc0GmT9Y8YuFGESz5KFxU+hjWuAhg02TzLdUHvaiYWrXT3K7+?=
+ =?iso-8859-1?Q?+b6zX3pHoch3nt7YvEuRJskTCn3jHvsRwL6+fsLvFim/y/MdVVPQwnot/F?=
+ =?iso-8859-1?Q?kjhLcXMb6JICLiKHNZ4/CObyd8WT2n8nUXRMtv4vui7tTZwH8kaUjHM1zk?=
+ =?iso-8859-1?Q?VA+DZYIK0f3oewtBSKV1C00KGr6ocrHK7EDwnzl+Lu+eO+KgGDes5/rsvz?=
+ =?iso-8859-1?Q?Aad+S3zo4Q7yyYdT5b0x/ptXTGwkqhNQ0gKW83JovFwskfhY3jbBHt2beS?=
+ =?iso-8859-1?Q?VGoisb3Q1HJEyvRj4N+MN3VdVF3PK7wxIFlOlQaRdihPP2OVS7xvNfO4Nb?=
+ =?iso-8859-1?Q?ZXbwbHidBKxfooQPr8yo34BR+zImzbTYPL1Pkv6Sr/uB2HlRu6fqr1tDUx?=
+ =?iso-8859-1?Q?BenpXZkQTglYE1rzw12/+42tu63VNX86N9AULNBnTIrhsr1i8oQX/EaOdb?=
+ =?iso-8859-1?Q?CpUfq2Sob11Z6QOSVFfZ1+F48Q4Z4v95h6X4eIK+qthnPRfSskE77mJm9/?=
+ =?iso-8859-1?Q?wJiM+GZPMXVz8eCN/0g4/vj3NtezLMPVhd9rdhPREj6vFafNvG9GFfGB4w?=
+ =?iso-8859-1?Q?2SlESy/B9REQ6tBpXDrqBLPtrzgGQNC+vbrGkQPg1oRj2XM4C/vMNwoUJT?=
+ =?iso-8859-1?Q?4aOZOUHfaYFy5arlS97U95LVC3x6LpLgKw+Y0eaGObxcNihviPvJK1wugY?=
+ =?iso-8859-1?Q?EomGgjtnfNFlobhpY8q4mNdDz8YV1UR/F/blZr4ecStD/Yw6tlExR5nAGn?=
+ =?iso-8859-1?Q?cDN27IxOM5wh5KSevFfVuh4H55MEaBWgwEYAJi0NRpYQ9ge979tuwHHwF+?=
+ =?iso-8859-1?Q?w08MaIoinbxVeoUWPqSX0a4rxFDWFWU5LUpUg+wUH1HuQW?=
+Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
-X-MS-Reactions: disallow
-X-ClientProxiedBy: BN9P220CA0024.NAMP220.PROD.OUTLOOK.COM
- (2603:10b6:408:13e::29) To DS7PR12MB8371.namprd12.prod.outlook.com
- (2603:10b6:8:e9::18)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS7PR12MB8371:EE_|PH7PR12MB9102:EE_
-X-MS-Office365-Filtering-Correlation-Id: 040b751e-5a2a-4578-d517-08df134d0be6
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|7416014|10067099003|4143699003|22082099003|18002099003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	EdmOT4SZggvXel11Uhh1H9mF8pJyToiZ4vo+EaL4dQpqpSiRPlv1r32Dgz69iVxRKeRQA2Ast0fMgp+dtSul+ssZ/kJs2D95hmspE8OQmcfALuUDnDqNeKbNVO83v2iXLX1TgKyRNG512daoHu/3lsvC7YFuT9syyAMKYcc8Cj7sRTVCwf7hiclEtUz9K+WYpQE60SsB9HMKu1aGNd+rOH4FuYpR0yN0pEZ9QMKTScul+Ork7mxnVj5Reie3mU3RZve/Igx+fzCyG74c/PU8IYeO3UC6228cv7SfuZEYjtTK3KsezbygJexMLYcjShKX3igAX2GXZzGSorl7Mi9BPwIm77+Sj1aax9f/Sy8vPMzVa8cLugoy5vYsGLC2OtrPq6Qpg8JuCZ2tbHicv6TteAmWCBgMe4ITXR/1Q2OTVdMrlua3hQfyZvShF0+Lt/pkcoExAwGghOwaNgsKpt68C3YDegf81smiqhANEWkXKOR/pLOE7NVTzz6IGCHYv0NPj0srvj9cGTgi+w88gmqAg0OWELisn+6fTDEmj3nFvk2ZKGneX4EdIAGOAHWtDBQTiEdFxiiQtE+G0uXNbgHPDiyTqEXJ97gGwJGOZSqGQ3tTkLHMw6dlf647AS9ptFS1i40d0Stx1d8ifCCWC48sIvnPF7yU5MgpaGtihLIlJP8=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS7PR12MB8371.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(7416014)(10067099003)(4143699003)(22082099003)(18002099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?V3VZVW84WlRLMThCTE10TGpMWXpHUEFQclpFRGgwYjJRQ1luV1BrS0dOcFRZ?=
- =?utf-8?B?a3ZtdnQ1YUNNdXJPSFZyOHY4UHhpRktvOUpXZEVqVVN6c1BoOU95RElsY1Iw?=
- =?utf-8?B?RGpRQXVCZy9Pd01tWDIrdXZnMlB2WEFYRDYvb01QRnViQW9nTmRtYUYvbDM2?=
- =?utf-8?B?dm11N2tIeGVTaFRpMk4xdzlnMFJpUjdoc2lCRlBVK29zdHBFbVNmekhXWHg2?=
- =?utf-8?B?cXRDbi9odVA4cTFWdjFHSURLWDhsamU3NWxtVmNFeUFvc3dNUGsrNHpVWjgy?=
- =?utf-8?B?bVRkWHFQTWdWVGQ4VTRTQTY5MG9reUpLU1RndEg1b0wyNW5aM1NnNVhicmJu?=
- =?utf-8?B?RWVQTytCNmZYSlYzVXkwcm85UDFMSnZrdmRMS2k2QWxIc1dkN2ovd2swNG5E?=
- =?utf-8?B?c01GRVRUcmdCWFhXRHo3UjlyN2Q1K0xLdTdkOFRocUpmMWRFdE5tcU5Tczho?=
- =?utf-8?B?QlNmYXVJd3NFeHliRjlZS3dQUDJYeGpEbk4xUmc5ZTZyb0tRWkVJNElJbHNa?=
- =?utf-8?B?UTZoa1YxWitOOS9lMFZoM0ErZS9ZQ0RjdU9tRHdadVZ6a2h2WVBqNVZudFhX?=
- =?utf-8?B?WEFiZkRsdVpuTStVT0J3bVZRcmt2OVdZa0JMQTY5cm5Yam9ObnVIVG14Tm5m?=
- =?utf-8?B?T05uLzBrQitWWElDdFViR0NiZkhUTExhZzBuV1R0MUVIdEVIY3dKclR0WmpU?=
- =?utf-8?B?SUlYUG1ZNnpMejRZUlVvQTZ2V2tqK0hxSTZFT25kdE5FaFdNZDNsS0dQZXlB?=
- =?utf-8?B?Z0hZeldiNzZDdDhoeWg2OXVUMHI2UWh3dmpmZC81c2hJcmdybHFTbk1PaFh6?=
- =?utf-8?B?elBuMm5LK2Zka0RoUnQraGdMb0hVN0JGUkRsU1RxdVJpWG1OU2VQemU0eTFC?=
- =?utf-8?B?V2pBYWJnSjQ3WlVMMnphQVN1ekQ2RmtuY3NZUWVpcytGSUMwUm5NeFAra2tC?=
- =?utf-8?B?eTcrZG9qVmlLbFM0SnVUdjc1WGIrMGZKVUlhNmg5U0N6ZkZuVzJpbktjSitk?=
- =?utf-8?B?ZWlXU1BKNE1OcDVySWFzcTRmY0pZak1JTWVMak13dzBCRjBuSGMzM3U1WDNM?=
- =?utf-8?B?ZENLQnlPVno1ZUpEMFRmRnh5a1YvMGFQc1E1Q1dTTEZ1QlUxSzI5d2dKM0Np?=
- =?utf-8?B?S3JrcnRpRTVKeDllbVhEK3h2U0Q0OGN1ZUQxOHZGWlcyZ2NFMHA4N0xJM0pm?=
- =?utf-8?B?empNendDUkI3d3J0TXQ2WnJBQm40dEw4dmFpMWNYd09RUXJ6MU9iZjBOOS9S?=
- =?utf-8?B?VHpCQXFVUE9iWXRnVW9ibDdRdDNBTGRncExmNjFBdkdrT3NOdGtDMUs5dzc1?=
- =?utf-8?B?SktIN0dhWXl3cGt3ejl6S2lST1I5KzVpNHlvSFZLaDlQa1NyWHhvS2NoQ1k1?=
- =?utf-8?B?ajVVUzNpcUpPZ0FGdlNSTXk1Y20rNmU5QjNFN1pzT1FuSzBycnhreGJpbmdJ?=
- =?utf-8?B?QVMzbnZ3anExa3J5aVJLK2RGYVFwUEZEUHE0aFJlQlpDYlZ6aWxCd2IreWYz?=
- =?utf-8?B?MnJxOTJsc21naEJjaG8wcWR1U2NJdUg3UERBZEpZbmlTS25TWlhaeExwTU5J?=
- =?utf-8?B?Ti94c2ZEa2VIWTNQS3dpck1zeGhRajlKQnNCSnhRS2Y1Vmo4SmVnd3FUNmcz?=
- =?utf-8?B?d3VZR3VtbFFRbU5JdTkycCtrMTc3SkEyc2tzSWhuYjh3ei9FWllkRUtKcUZj?=
- =?utf-8?B?VkVHRnBpZkprbTB6Q0Y5OWJsUThJcUg4b3hmejhoWkN2ZWFXK1FkM3V2djN4?=
- =?utf-8?B?SDN0bUdvd2h1NWVHZFgraU5leFVVMXR6UGxPVjA1ZzdjRGxycXNqTDQ3MlB6?=
- =?utf-8?B?MVBMWGxyTFF6RTk3SDBySmdvZ2dHRDBKK2lROWF0cGJYZnlteFpwOWIxVEtG?=
- =?utf-8?B?MWEydVdIc2hOLzlxaWQzTzhjck5zajVaSVhpcVU4QmtzV1VZb081Q0lUK2ht?=
- =?utf-8?B?Y0ozMnAzTDFMeWJzWDhwK2QwL1JjNkZONExrY2RFM3VpQkwzRzlYTG94amx4?=
- =?utf-8?B?RXhGZ3R3SzBFeGs1Z2F4dE5FZlh5WXIwQzJYNEw1L2JXU3FCYUQ2MkV4ODNl?=
- =?utf-8?B?cGkyWmxnbHh6R1B3K0krbzgvVHVWbHVwbXZDQzNWKy9TWjVacERyZjRxc0J0?=
- =?utf-8?B?VHBFUW9kNVFhUVZOTWVldlFkVjRQZjNVUjZBam9YM3dBKzViSGFmVEFkOTFs?=
- =?utf-8?B?QmlIZHVFdXcreUdIeWwrT0hma0oxOE1VNjVHeXFMMTJRYXlQUWJ1UStNOFdD?=
- =?utf-8?B?ek1Rd1YzbGxvM1lneHJWaC9UOEcxV0xjS1l5TUJ4V1hmTHM2d0lEUWNWMlMx?=
- =?utf-8?Q?1XlVQwkgpA6kYbW734?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 040b751e-5a2a-4578-d517-08df134d0be6
-X-MS-Exchange-CrossTenant-AuthSource: DS7PR12MB8371.namprd12.prod.outlook.com
+X-OriginatorOrg: citrix.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 17:16:14.4277
+X-MS-Exchange-CrossTenant-AuthSource: BY1PR03MB7996.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: b028f62b-9aa0-444d-abdc-08df13507a78
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Sep 2026 17:40:48.2868
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: yP9mlXsqTt1fzeF09feTD+wBnvQ4TzeslAIXm2l/hTA0PyUaCtr/LSo5CBpsWAAX
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH7PR12MB9102
-X-purgate-ID: tlsNG-ebf023/1789492601-C0AD8B50-599EA6B4/0/0
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: M5ybPd6r8I1gvswsGtdKTX0Q//g78XbdcC2w/Fd3/hU3tIUtUUDyUa0jHAc6NuTFw43zeIx3tMZgtO6k8IDtcw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR03MB8418
+X-purgate-ID: tlsNG-d62444/1789494051-1D87F757-E3B7FE8C/0/0
 X-purgate-type: clean
-X-purgate-size: 1518
+X-purgate-size: 616
 
-On 13 Sep 2026, at 23:39, Andrew Morton wrote:
-
-> On Sun, 13 Sep 2026 22:23:58 -0400 Zi Yan <ziy@nvidia.com> wrote:
->
->> This patchset removes PG_private to make space for upcoming PG_folio for
->> identifying pages from a folio (more details in Note below). Instead of
->> checking PG_private, all code is changed to check page/folio->private !=
-=3D
->> NULL instead.
->>
->> MM people are cc'd on all patches and subsystem people are cc'd on the
->> cover letter and corresponding patches.
->>
->> Patch 6 is picked up separately in f2fs tree, but since mm-new does not
->> have it yet, it is sent for MM testing.
->
-> AI review claims to have found a pre-existing critical level deadlock
-> in f2fs:
->
-> 	https://sashiko.dev/#/patchset/20260913-remove-pg_private-v4-0-848550f75=
-74e@nvidia.com
->
-> it also had a few things to say about this patchset and, as always,
-> hugetlb.c.
-
-It seems that Sashiko overwrote my patch reviews with the reviews to
-Matthew=E2=80=99s md patches. :/ I wonder if there is a way of recovering t=
-hem.
-
->
->
-> Thanks, The MM bits appear adequately reviewed and review of the non-MM
-> bits are, as usual:
->
->   Great to have but I won't permit lack of other-than-MM review to
->   block MM improvements.
->
-> So I'll queue it all up and shall push it into -next after a few days.
->
-> Acks from non-MM maintainers are appreciated.
->
-> If a non-MM patch appears in linux-next I'll autodrop the mm.git copy
-> of that patch.
-
-Thanks.
-
-Best Regards,
-Yan, Zi
+>         you want to wrap the expression in _t ## e_from_intpte(...) to=0A=
+>hand back the type safe version.=A0 In turn, this lets you remove the=0A=
+>'.l1' part of the assignments in the following patch.=0A=
+=0A=
+That would be much nicer but it trips over `-Werror=3Dunused-value`.=0A=
+=0A=
+I don't know a way to solve this without adding `(void)UPDATE_ENTRY(...)` t=
+o=0A=
+every call site or doing=0A=
+    #pragma GCC diagnostic push=0A=
+    #pragma GCC diagnostic ignored "-Wunused-value"=0A=
+    #define UPDATE_ENTRY(...)=0A=
+    #pragma GCC diagnostic pop=0A=
+neither of which seems very good.=
 
