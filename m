@@ -4,58 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A1A0C88E75
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 09:59:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421587.1647363 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBDC2C88E53
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 10:05:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421601.1647372 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6PwQ-0003sX-CL; Tue, 15 Sep 2026 09:59:06 +0000
+	id 1x6Q2h-0005nG-4r; Tue, 15 Sep 2026 10:05:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421587.1647363; Tue, 15 Sep 2026 09:59:06 +0000
+Received: by outflank-mailman (output) from mailman id 1421601.1647372; Tue, 15 Sep 2026 10:05:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6PwQ-0003sQ-9R; Tue, 15 Sep 2026 09:59:06 +0000
-Received: by outflank-mailman (input) for mailman id 1421587;
- Tue, 15 Sep 2026 09:59:05 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x6Q2h-0005n9-2J; Tue, 15 Sep 2026 10:05:35 +0000
+Received: by outflank-mailman (input) for mailman id 1421601;
+ Tue, 15 Sep 2026 10:05:33 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1x6PwO-0003sD-Sg
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 09:59:05 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1x6Q2f-0005n1-Bt
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 10:05:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6PwN-00GA70-9Q
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 11:59:03 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x6Q2e-00BhJM-Oj
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 12:05:32 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Michal.Orzel@amd.com>)
- id 6aa916e0-e002-0a2a0a5209dd-0a2a45089b1e-20
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 11:59:02 +0200
-Received: from [52.101.46.31]
+ id 6aa9186a-e002-0a2a0a5209dd-0a2a450cc8ce-12
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 12:05:32 +0200
+Received: from [52.101.46.71]
  (helo=CO1PR03CU002.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Michal.Orzel@amd.com>)
- id 6aa916e4-f659-0a2a45080019-34652e1f5631-3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 11:59:02 +0200
-Received: from BN0PR02CA0046.namprd02.prod.outlook.com (2603:10b6:408:e5::21)
- by MN0PR12MB6055.namprd12.prod.outlook.com (2603:10b6:208:3cd::20)
+ id 6aa91868-f479-0a2a450c0019-34652e47ed59-4
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 12:05:30 +0200
+Received: from BN0PR04CA0209.namprd04.prod.outlook.com (2603:10b6:408:e9::34)
+ by SJ1PR12MB6364.namprd12.prod.outlook.com (2603:10b6:a03:452::6)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.7; Tue, 15 Sep
- 2026 09:58:57 +0000
-Received: from BN2PEPF0000A895.namprd04.prod.outlook.com
- (2603:10b6:408:e5:cafe::88) by BN0PR02CA0046.outlook.office365.com
- (2603:10b6:408:e5::21) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.9 via Frontend Transport; Tue, 15
- Sep 2026 09:58:57 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Tue, 15 Sep
+ 2026 10:05:25 +0000
+Received: from LV8PEPF00000066.namprd03.prod.outlook.com
+ (2603:10b6:408:e9:cafe::57) by BN0PR04CA0209.outlook.office365.com
+ (2603:10b6:408:e9::34) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.12 via Frontend Transport; Tue,
+ 15 Sep 2026 10:05:23 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- BN2PEPF0000A895.mail.protection.outlook.com (10.167.248.187) with Microsoft
+ LV8PEPF00000066.mail.protection.outlook.com (10.167.248.38) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.428.7 via Frontend Transport; Tue, 15 Sep 2026 09:58:57 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ 15.21.428.7 via Frontend Transport; Tue, 15 Sep 2026 10:05:23 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 15 Sep
- 2026 04:58:56 -0500
-Received: from [10.59.21.158] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Tue, 15 Sep 2026 04:58:55 -0500
+ 2026 05:05:23 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 15 Sep
+ 2026 05:05:23 -0500
+Received: from [10.59.21.158] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
+ Transport; Tue, 15 Sep 2026 05:05:21 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -69,254 +73,98 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=E8S5vOr8cHMiuAULtSVo0sFWZdMD/yKZcBtdrazuFptTpkPsaS1vyisi6Bjbz3ivxVAcjhavFyyAYpK5Cuyj2ojAzNizjHbOf44hdqEw2jAixPFMdH32kcQIzLAyxjnggOzUZY3N9BsOFCBQ+sTpHorNr6b7DXC+LPv06tzuZj9mzA9B6hpYxebDo3Y8oiLz1/aGeAxnT67RBB/zvjYxLCF6ofSENRlt6qV823SHBts7R2R3NKsp7xuL/ykbK6mJ2uTGc35qCTLzPMiEHPNubkUUqUEIOXGD7ltoHy8jw2pUgaGBibeaZ8ULrzr7GgZ4SSqrd0cYYiijIR9cuVeDug==
+ b=DnRt4yTDNKzemUtdIFmlFjFGommpMs7KyLPRcWLiQR8fT9cXW3dxgr/9kGJd+zNmJSZ6u4z0n/KsiW2YrjMdCW+oMLQ+LeAh7uOWtdOBGEgxjaveoWcx8oB98yi2KRlgLqKMEMZUOTwNsfjawwUUhs9uH5leMWeycQOyLj51QhmVCCMnKd3+RrDl1U9phW1vm+TUUfYgl2rsQnGlF1ofGKB4JgNWvWl/YWgUhG2bH+VSSERu1JrjKEcBmb/fl6mejNTp3Al6rhAJV9bepIIM9eAexWijYkcEwRTNP7u2u1HeQM4MZfVZ0KcIbzmJScA3mAaOOdabvvQxsimm7Natjg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KywGxKMrh44b9K61tCSeBZhvRqdD6BlG94XY3KfEqaA=;
- b=kzfo8Ki+AKbJbGqhkzDtQTzuNCueEQLcUd5TjuaXXR7KHIzcaqmnSj+Y3prE+RRi7LG3u/iY//DYVn2O7lFacwoIat110cOh/jzFsNpFEAw0RMK8qxGNC1f6l9RcCBhuuNIa4JSmn+bAp8lg1c5D2bELp5e+HCqRUmaYrOXhGKQIGfA6orea/bzKEu5UqoPo+3ocelkIH3DeaXBjZsxaH6SbezNK1CjihzT9dRh5aLXd9ES3JmflpzMjiPyxhrVpY9PfgTZKBCBGj4ry79Tw5i/aeLrQV2zi2Ddw//SSNDymT0+daHyBSMJnbjmKWNj39LCxVhBnmPylD49foFI4gQ==
+ bh=j006rmxLo+ApI4QfmDcFsOzeYmInP1NFjds5PKVI7+U=;
+ b=VM++YpADTiu6HwmSnYGMftVcc5cKUp/e+/Lhx78FzzCY1QwsltHyG78MlSJ6C2HF4wigLxbDLcfvWqo55Q5KlXQWInYwH56XoI3YwFpCJ6wQeTvcIWR+YyBu/wdBVOxsXcNmLavoECRzBm2Pj+N3KAb+f13n65he/JW1GQ/FrojJnfr5lAchdPJSgKYdfwUo7QeNYI50OmflcCq8AuJtxWKKbIDkHyTWGprzJIpwP9cncyRYzGpR2dDHhUbX9wd7VnLMi/KCOidpvLkE2ZwlHba6HIyDDe+1U5UJMxXOLhZlYLiDOUEzDQ62K2pzgcjflV6KJEUdBIrBkTSm3UZ36Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=ti.com smtp.mailfrom=amd.com; dmarc=pass
+ 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KywGxKMrh44b9K61tCSeBZhvRqdD6BlG94XY3KfEqaA=;
- b=EOoURSt2FLbw1CHMKFmRHzEJLjYcKKmqAJvZmTf4oRbSiyWt0JHk5UeZNXe6NorYrH0zmkxO+Uf7XTL+H6O7oN0HazLlQaVXDc3dH36ATQEd8xxDNwrHyJv94xXHeB9c1Jf2KtugtOmHd2km+PAHDI2Ou9tER7bMS7HRKuwSyAw=
+ bh=j006rmxLo+ApI4QfmDcFsOzeYmInP1NFjds5PKVI7+U=;
+ b=ANd4+iYEz2qV3yvy0fjmba8sXBibPQxHfdEaPsh34JqYbr5soTGkAeBrgTDTTPVfEJqahKDUIEjicMAVmUlE9YKJACoepfcbb37fynDHVV3x3b5lNLbvR1s7b9+HHmM1lGQOubRk1sdlvQG0bIgxWXjjsd0pNP2OKJ4JD3wFL0A=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
 Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
  165.204.84.17 as permitted sender) receiver=protection.outlook.com;
  client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <cd1be7dd-5262-42d8-a935-a8461d18e18c@amd.com>
-Date: Tue, 15 Sep 2026 11:58:54 +0200
+Message-ID: <cdd5445d-93b0-4362-b7bf-8c2d8fa3f933@amd.com>
+Date: Tue, 15 Sep 2026 12:05:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen: Add support to passthrough reserved memory carveouts
- to DomU
-To: Beleswar Padhi <b-padhi@ti.com>, <sstabellini@kernel.org>,
-	<julien@xen.org>, <bertrand.marquis@arm.com>
-CC: <u-kumar1@ti.com>, <detheridge@ti.com>, <jbergsagel@ti.com>,
-	<xen-devel@lists.xenproject.org>
-References: <20260915082824.2180692-1-b-padhi@ti.com>
+Subject: Re: [PATCH v3 4/4] xen/arm: handle irq_set_type() failures
+To: Mykola Kvach <mykola_kvach@epam.com>, <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
+ Beulich" <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger@xenproject.org>, Jens Wiklander <jenswi@kernel.org>
+References: <cover.1787050437.git.mykola_kvach@epam.com>
+ <a960bc4917d4673cd1920cada2cfdb7eb7475f23.1787050437.git.mykola_kvach@epam.com>
 From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-In-Reply-To: <20260915082824.2180692-1-b-padhi@ti.com>
+In-Reply-To: <a960bc4917d4673cd1920cada2cfdb7eb7475f23.1787050437.git.mykola_kvach@epam.com>
 Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF0000A895:EE_|MN0PR12MB6055:EE_
-X-MS-Office365-Filtering-Correlation-Id: 569f70ff-5e98-41ce-82f7-08df130ff559
+X-MS-TrafficTypeDiagnostic: LV8PEPF00000066:EE_|SJ1PR12MB6364:EE_
+X-MS-Office365-Filtering-Correlation-Id: cfc22f37-7d63-47b6-4c11-08df1310dbd7
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|1800799024|376014|23010399003|82310400026|10067099003|22082099003|11063799006|56012099006|18002099003|6133799003|13003099007;
+	BCL:0;ARA:13230040|36860700016|82310400026|7416014|1800799024|376014|23010399003|6133799003|18002099003|22082099003|10067099003|11063799006|56012099006|4143699003;
 X-Microsoft-Antispam-Message-Info:
-	6yZKmSayIT6bLcor3Dhi6U6M0Ng3ocUT2QMasuS7JFrCESOeaykA17ETt+rOkvI5LCoUYcH8/oqXNHE/zkK/GAZNBR6Z1bQUjuE4ufcqSHDYZLPVxVWD0AqSBnIRSx9yqdzYY2xhcRGaSOiykqXQXHGWr4KVJ53U/wCFUd94S8sFBBW+xa7yJnT5LfT1QSeIvDMMKRJ3H2J9lDCFtOxiY5MxIxryul0TnMGJM9Hq6eElZUVz4NiWv2IvH6BxwnDgnQm5cVnVcPY1gYBgmB446zsbonGTZxOBQmVfL9OF/v8vTyc2ycEDEG9cOiRX21PMIAlh0JzFV27YhwCJ+nN7AjSdAWMifXqy04nCSA5QDjCdcrGLpPvEUWo5RCRtlVyMV8hwmspV4sPP3dnDMUIh/yZLTi5/v9Z5/BUAgf8+hixu/JL6M35wCvGXAeHOr2mHj5qq4wVWhT7PNmx5XukJnj1xkwga8BRcewMjO74VUpl2ANTlaTRz5LqVMkQTLZuHj26CwLJ99AieeJOtXuTzL3/YU64mxBNkncoeAVrt8L+jiLXLNaNI+xpmcCyb8vT+uxa8qla64fnOK5N9btDLvJQuqv93kb2Fg6rUNg5cYlgnOzs6q9U5gCth5JEvW3RMaQFzeEVMGtZ6L9cS+Nkozw5wFE2YQ/OIeIdOz9L62phmwEhG5WW0qnQom3yj4AjCCWN40T+3Wlq5FF3PfWPjrA==
+	fIB/3NiCgOMFLYQZbq1PbWdO5q3jOnB+i2IuULF+lwTs0tKIh/5XNBo7WoH3uoOFAWuG1FW52ocyuHWGbqvwFoE2ObroRK9wGRSZQIImyaUZfagtGGV04qyqP5XZfV0zGvYPMAezW798T9MNJpT1cOtnfBHzP8W8u5j9ojHrYJzuAi48Q6idyFu5RT/B70aIPeDSilqybAhB8Ik1KdAyBI6R8PNA8DVizqIZkicZf5GXQh0vMvoa7hOcZXfnlJBOq8988/5K4yZes+X1MM9U06GWF4t3fhy1WhNln5OuoH+PCbwFLv0ZJVJS5s6NUsaeuLdqhCgAdSuAEN6hrl9zhVn4fUCL3u36zD09SVd65EdDsGz4zdrw8SmGCtdW+eVmwkI9fuHYaMZ34W6reLdgvooVQhC8ZWAJIkzQtdNHO46JhsDekMW2qgdXZ0/CWqf52tla3tgqWQu35HWfFIfusBvflrdMHDKLQXLg/4bR/LV3m8AHjJ5FZ0EUntJGO0qsv4QHrS/8Vc2IFMrNr688Xxk6whUOYiehPUv2JBCKKiPEoVCzImFwH4r79as230x4BIfEpj0cVUdHXcTwnE7XJ9v68VWWcVRQTdsxMoc4IAHi28oz4MXIYxbDaUR7d9C6+sgOD0cmWwEdHSB6dJlBjnBjyB1G/j+igKTFUSz+rq6o+Tb/HWRF9dnupZNVRyz/5C2iQ0wrHWc8LzK/ZxQu4g==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(376014)(23010399003)(82310400026)(10067099003)(22082099003)(11063799006)(56012099006)(18002099003)(6133799003)(13003099007);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(82310400026)(7416014)(1800799024)(376014)(23010399003)(6133799003)(18002099003)(22082099003)(10067099003)(11063799006)(56012099006)(4143699003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	Jv65bECHlpovCzGvZEXD2+0iYGsSfQZ4pOXp58dOE7MxdESB1zG28Ho4kcXyOJ58a8XRIZR6wpgFepKRCGXNzaDcpkDZP1TFp39lp+PM4b26vjKzFyPAmFSUhnt0LvYkd90QCVkQ1pWJ2fKvWAKRXVTSQmWK4qB/Bb79/gwtejsZFIHKpvW9UaHYxhBDxtlxih6E+1OkaGjaWZ5sA6yYDyHCxN1U/BqCj9kdJgR8pKWp89eeF5jR9ChaZcuVRO8QG/JAMKRRJxS1l7zuafl+UrAQKgAq0LZt7qbwn+Ai6WnOXhN6qv1tCdA/4vof+m+s4HDEJRC02rGn4UxwxJ32PmxjU6tZkBjZxOlY9HRO3GoApYxW//9ezXDIjmpaFAQpVpEMIwkHYAkaiBS3u5CE+wv15shA5g7xShe18H0HVX6polNfhpynTnnjSSo3eS2e
+	a1aqWonAu11FVvFrmVWRP5APWFdB+txzAcD5+9Z7M5bjbMWO9MeyGdP99dMktQJYsZ8bCXtZ39Mqz6Eh611SrHZILmLuxJtKF3acVMpGqodYcSivLmfbe//gqB9Nh96Ot0jV2kjWPbguFlzirSfvEk/fR3VecDSQFbbJSyabl1nJcvOlR9YFmw2nEyLShIZPs1wHOs2bMZIo7iJWEWfa5jbyX6lD4XMV1gMAhf9TZgPhH7lj9owVaYUFTL8AOmFeNx+NaAQlQPLbPTzJB1iKtx0LjRvp4bl1aWZuz7svaXGB8yK+RlRcRjOTbeO87DfqVPgpYoKHlTnqGXUoYO1CN8NMTc65AqIcA7nWav0uvfyFiBrOkOxpMayEHLMIRZdeAmdFEATcRszSNu/mPv21lAcCPBi1AZ4KjFfsBquV3dtwRNqgCoYMCvNVkQvRfY49
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 09:58:57.1199
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 10:05:23.8238
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 569f70ff-5e98-41ce-82f7-08df130ff559
+X-MS-Exchange-CrossTenant-Network-Message-Id: cfc22f37-7d63-47b6-4c11-08df1310dbd7
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF0000A895.namprd04.prod.outlook.com
+	LV8PEPF00000066.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6055
-X-purgate-ID: tlsNG-c1860d/1789466342-D554C87B-ECCCA531/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ1PR12MB6364
+X-purgate-ID: tlsNG-d25034/1789466730-5290EA5B-AE2C3C15/0/0
 X-purgate-type: clean
-X-purgate-size: 7901
+X-purgate-size: 1016
 
-Hi,
 
-On 15-Sep-26 10:28, Beleswar Padhi wrote:
-> Currently Xen only looks for /passthrough and /aliases nodes. Add
-> support to parse the /reserved-memory node and pass it through as
-> requested to DomUs. This is useful to enable many usecases in DomUs
-> like Remoteproc firmware carveouts, CMA carveouts etc.
+
+On 18-Aug-26 13:33, Mykola Kvach wrote:
+> Several Arm firmware initialization paths discard irq_set_type()'s return
+> value, violating MISRA C Rule 17.7. If trigger configuration fails,
+> initialization continues with an IRQ that was not configured as requested.
 > 
-> If Xen's static shared memory carveout is found, it is placed as child
-> nodes under the top level /reserved-memory node as also done in commit
-> 51a2b3f10918 ("xen/arm: fix duplicate /reserved-memory node in Dom0").
+> GTDT and MADT retain rejected timer and maintenance INTIDs.
+> check_timer_irq_cfg() and release_irq() later perform unconditional
+> descriptor lookups on those values. Xen has no backing descriptors for
+> INTIDs 1024 through 4095, so retaining one can cause an out-of-bounds
+> access.
 > 
-> Signed-off-by: Beleswar Padhi <b-padhi@ti.com>
-I'm afraid adding support for passthroughing /reserved-memory nodes like this
-patch does is unfortunately not enough to help with the common use cases these
-days. /reserved-memory nodes got complex from Xen PoV mainly because of the
-"reusable" property that lets OS (say Linux) use such memory for whatever it
-wants until device asks for it. The common use case is "shared-dma-pool" and CMA
-buffers. They specify "reusable" (hence no "no-map"). This causes a few issues:
-1) Xen maps memory for passthroughed regions for domUs as device memory (keep in
-mind the rules from Arm ARM for joining stage 1 and stage 2 memory attributes -
-device type is the most stringent one and wins) but for shared memory it should
-be normal memory.
+> Check the return value in the GTDT, MADT, SPCR, and FF-A paths. Store timer
+> INTIDs only after successful trigger configuration, make GTDT parsing
+> failure fatal, and stop UART or notification setup when trigger
+> configuration fails.
+> 
+> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+This should be the first patch in a series that can be committed right away.
 
-2) Linux can use such reserved memory region as normal RAM and hence use it for
-Xen shared buffers (e.g. hypercall buffers, shared memory, etc.). As per
-arch-arm.h any memory shared between guest and Xen needs to be of normal type.
-
-3) Xen does not give reserved memory to the allocators and does not have backing
-page_info structs for such pages. If such memory ends up being used with Xen
-(e.g. to map foreign pages) such access will fail because Xen will not be able
-to get pages for such region.
-
-Problem 3) exists today also for hwdom. Problems 1) and 2) are gone because Xen
-maps memory of passthroughed nodes for hwdom in a more relaxed way so guest
-attributes win.
-
-This is high on my TODO list because there is a real need from customers to add
-a proper support but I don't have any bandwidth this year to do any work.
-
-I guess your solution would only work for the simplest use case which is for
-/reserved-memory nodes with only "no-map" property present. We could limit the
-support for only such nodes (check if it contains "reusable" property and if so,
-bail out) as a temporary solution if this helps.
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
 ~Michal
- > ---
-> Hello all,
-> 
-> Sending this patch as discussed in:
-> https://lore.kernel.org/all/0e556bb5-269d-47d7-9ae8-68f06eee9fc0@ti.com/
-> 
-> Test Configurations & Logs:
-> https://gist.github.com/3V3RYONE/bef3bb51459f8b823605261b35494a7e
-> 
-> Thanks,
-> Beleswar
-> 
->  xen/common/device-tree/dom0less-build.c | 45 +++++++++++++++++++------
->  1 file changed, 34 insertions(+), 11 deletions(-)
-> 
-> diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
-> index fcbeb8adbd..e9581327ee 100644
-> --- a/xen/common/device-tree/dom0less-build.c
-> +++ b/xen/common/device-tree/dom0less-build.c
-> @@ -334,7 +334,7 @@ static int __init handle_prop_pfdt(struct kernel_info *kinfo,
->  static int __init scan_pfdt_node(struct kernel_info *kinfo, const void *pfdt,
->                                   int nodeoff,
->                                   uint32_t address_cells, uint32_t size_cells,
-> -                                 bool scan_passthrough_prop)
-> +                                 bool scan_passthrough_prop, bool resv_mem_node)
->  {
->      int rc = 0;
->      void *fdt = kinfo->fdt;
-> @@ -358,13 +358,20 @@ static int __init scan_pfdt_node(struct kernel_info *kinfo, const void *pfdt,
->      while ( node_next > 0 )
->      {
->          rc = scan_pfdt_node(kinfo, pfdt, node_next, address_cells, size_cells,
-> -                            scan_passthrough_prop);
-> +                            scan_passthrough_prop, false);
->          if ( rc )
->              return rc;
->  
->          node_next = fdt_next_subnode(pfdt, node_next);
->      }
->  
-> +    if ( resv_mem_node )
-> +    {
-> +        rc = make_shm_resv_memory_node(kinfo, address_cells, size_cells);
-> +        if ( rc )
-> +            return rc;
-> +    }
-> +
->      return fdt_end_node(fdt);
->  }
->  
-> @@ -389,7 +396,8 @@ static int __init check_partial_fdt(void *pfdt, size_t size)
->  }
->  
->  static int __init domain_handle_dtb_boot_module(struct domain *d,
-> -                                                struct kernel_info *kinfo)
-> +                                                struct kernel_info *kinfo,
-> +                                                bool *found_reserved_mem_node)
->  {
->      void *pfdt;
->      int res, node_next;
-> @@ -430,8 +438,8 @@ static int __init domain_handle_dtb_boot_module(struct domain *d,
->              continue;
->  
->          /*
-> -         * Only scan /$(interrupt_controller) /aliases /passthrough,
-> -         * ignore the rest.
-> +         * Only scan /$(interrupt_controller) /aliases /passthrough
-> +         * /reserved-memory, ignore the rest.
->           * They don't have to be parsed in order.
->           *
->           * Take the interrupt controller phandle value from the special
-> @@ -445,7 +453,7 @@ static int __init domain_handle_dtb_boot_module(struct domain *d,
->              res = scan_pfdt_node(kinfo, pfdt, node_next,
->                                   DT_ROOT_NODE_ADDR_CELLS_DEFAULT,
->                                   DT_ROOT_NODE_SIZE_CELLS_DEFAULT,
-> -                                 false);
-> +                                 false, false);
->              if ( res )
->                  goto out;
->              continue;
-> @@ -455,11 +463,22 @@ static int __init domain_handle_dtb_boot_module(struct domain *d,
->              res = scan_pfdt_node(kinfo, pfdt, node_next,
->                                   DT_ROOT_NODE_ADDR_CELLS_DEFAULT,
->                                   DT_ROOT_NODE_SIZE_CELLS_DEFAULT,
-> -                                 true);
-> +                                 true, false);
->              if ( res )
->                  goto out;
->              continue;
->          }
-> +        if ( dt_node_cmp(name, "reserved-memory") == 0 )
-> +        {
-> +            res = scan_pfdt_node(kinfo, pfdt, node_next,
-> +                                 DT_ROOT_NODE_ADDR_CELLS_DEFAULT,
-> +                                 DT_ROOT_NODE_SIZE_CELLS_DEFAULT,
-> +                                 false, true);
-> +            if ( res )
-> +                goto out;
-> +            *found_reserved_mem_node = true;
-> +            continue;
-> +        }
->      }
->  
->   out:
-> @@ -486,6 +505,7 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
->  {
->      int addrcells, sizecells;
->      int ret, fdt_size = DOMU_DTB_SIZE;
-> +    bool found_reserved_mem_node = false;
->  
->      BUILD_BUG_ON(DOMU_DTB_SIZE > SZ_2M);
->  
-> @@ -538,7 +558,7 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
->       */
->      if ( kinfo->dtb )
->      {
-> -        ret = domain_handle_dtb_boot_module(d, kinfo);
-> +        ret = domain_handle_dtb_boot_module(d, kinfo, &found_reserved_mem_node);
->          if ( ret )
->              goto err;
->      }
-> @@ -556,9 +576,12 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
->      if ( ret )
->          goto err;
->  
-> -    ret = make_resv_memory_node(kinfo, addrcells, sizecells);
-> -    if ( ret )
-> -        goto err;
-> +    if ( !found_reserved_mem_node )
-> +    {
-> +        ret = make_resv_memory_node(kinfo, addrcells, sizecells);
-> +        if ( ret )
-> +            goto err;
-> +    }
->  
->      ret = make_intc_domU_node(kinfo);
->      if ( ret )
 
 
