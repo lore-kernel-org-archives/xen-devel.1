@@ -4,41 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA83C88E7F
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 15:14:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421901.1647525 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFC81C88E7F
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 15:46:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421923.1647551 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6UrU-0001nS-Ua; Tue, 15 Sep 2026 15:14:20 +0000
+	id 1x6VLj-0006Fq-DB; Tue, 15 Sep 2026 15:45:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421901.1647525; Tue, 15 Sep 2026 15:14:20 +0000
+Received: by outflank-mailman (output) from mailman id 1421923.1647551; Tue, 15 Sep 2026 15:45:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6UrU-0001nL-Rg; Tue, 15 Sep 2026 15:14:20 +0000
-Received: by outflank-mailman (input) for mailman id 1421901;
- Tue, 15 Sep 2026 15:14:18 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x6VLj-0006Fj-A2; Tue, 15 Sep 2026 15:45:35 +0000
+Received: by outflank-mailman (input) for mailman id 1421923;
+ Tue, 15 Sep 2026 15:45:34 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <frederic@kernel.org>) id 1x6UrS-0001nF-JX
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 15:14:18 +0000
+ (envelope-from <Oleksii_Moisieiev@epam.com>) id 1x6VLi-0006Fd-09
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 15:45:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6UrR-007SaN-Sq
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 17:14:17 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1x6VLh-007cxE-8e
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 17:45:33 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <frederic@kernel.org>)
- id 6aa960be-8faa-0a2a0a5109dd-0a2a4507846c-32
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 17:14:17 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <frederic@kernel.org>)
- id 6aa960c8-b4ea-0a2a45070019-aceafc1fb58a-3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 17:14:17 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 5E6BF438B0;
- Tue, 15 Sep 2026 15:14:15 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C0DE1F000FF;
- Tue, 15 Sep 2026 15:14:14 +0000 (UTC)
+ (envelope-from <Oleksii_Moisieiev@epam.com>)
+ id 6aa9680b-e002-0a2a0a5209dd-0a2a450cbe34-16
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 17:45:33 +0200
+Received: from [52.101.65.88]
+ (helo=DU2PR03CU002.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Oleksii_Moisieiev@epam.com>)
+ id 6aa9681c-f479-0a2a450c0019-346541582ec8-3
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 17:45:33 +0200
+Received: from VI0PR03MB11419.eurprd03.prod.outlook.com
+ (2603:10a6:800:33d::10) by GV1PR03MB10315.eurprd03.prod.outlook.com
+ (2603:10a6:150:165::12) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.13; Tue, 15 Sep
+ 2026 15:45:28 +0000
+Received: from VI0PR03MB11419.eurprd03.prod.outlook.com
+ ([fe80::6717:e4b8:c376:4a04]) by VI0PR03MB11419.eurprd03.prod.outlook.com
+ ([fe80::6717:e4b8:c376:4a04%3]) with mapi id 15.21.0428.008; Tue, 15 Sep 2026
+ 15:45:28 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,390 +55,265 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789485255;
-	bh=X3+2zYRSpciM7uYDkfrVnfpdjazC9P6LhL6MmIorApI=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=SGhRs7CyUcB+xKNzzgWZcvokGEOOVMOQJ3OETwnVY4jRSuKplqoTwyAHVl1KH+8b0
-	 VNFp7fTkeI9e0+ZC+dM3TCI/46xIVfnf6Hk9+kbi2++thNjHW5PBB5/REKjWuWnhOX
-	 NsSD7M8d1YeI07hn49Tk4V15z8kJeBIKxKfhHx/GhLBjJYbwN3chruH08krEcNHwOL
-	 tIzZTpw/abh24Oe+viSlZfRNOaS6B5P91oMAkTKw/YqLk36i3YOHepcXc0roWktlD6
-	 DjzlWtA6jsr6cBjFcAyGQ1ancIHd7wSK3XNR1o86hlnCFoVmiGndLQ4Fj8yQl/Cg9F
-	 e28SqUFMkedvA==
-Date: Tue, 15 Sep 2026 17:14:12 +0200
-From: Frederic Weisbecker <frederic@kernel.org>
-To: Josef Bacik <josef@toxicpanda.com>
-Cc: "Paul E. McKenney" <paulmck@kernel.org>,
-	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
-	Joel Fernandes <joelagnelf@nvidia.com>,
-	Boqun Feng <boqun@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>, Jiri Olsa <jolsa@kernel.org>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	Andrii Nakryiko <andrii@kernel.org>, x86@kernel.org,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>,
-	Xu Kuohai <xukuohai@huaweicloud.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Josh Triplett <josh@joshtriplett.org>,
-	Uladzislau Rezki <urezki@gmail.com>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Lai Jiangshan <jiangshanlai@gmail.com>,
-	Zqiang <qiang.zhang@linux.dev>, Juergen Gross <jgross@suse.com>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Ihor Solodrai <ihor.solodrai@linux.dev>,
-	linux-kernel@vger.kernel.org, rcu@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH RFC v3 03/13] rcu-tasks: Add a Tasks RCU implementation
- for reader-marked trampolines
-Message-ID: <aqlgxKGk_AEKls_1@localhost.localdomain>
-References: <20260915-b4-rcu-tasks-preempt-qs-v3-0-0ad30c4c5ee7@toxicpanda.com>
- <20260915-b4-rcu-tasks-preempt-qs-v3-3-0ad30c4c5ee7@toxicpanda.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=iD7iRFaj9c1PV86ofe/ABzG9apnzRrIWOV7hT8XYHw90F206Sm1aX4JmXmgNgsEOuecAM5JyssbLqysC4hUuqHEnS4QkWvFR00Br4ysPYQNg/YfA5TDA5tL/QwZ3DbpcY4GqAUxWKmSPPV6+5wk3cJCjv6xnRA1Y6V+aMQ+igItS1ZFmTxYyJg3z6dzzbxqvVTblaA1OELQIJLtCNtM1X+VM8HwjYGvqsTBvqre6yO931EECUDyz2YMkVZpRfaHo2DIlK4c0lQhR5Fclars9YmkDFXw2FeJngRIMk2FThWCg3gD1F4bAxBGcgO9JUOhKep6pPk3Y0aVxBTB1KaTIdQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=HUdUZUlb93Zh7vFpmIMPuV2SWdtdN03aswJIXG1nxzU=;
+ b=cc9d/QX/oCT+nqrjwaAilz/XvQtW0mINk9IsIM6EZlskHOIho4WzUvwcsszapZCQTP9FLtSCz1QzlE/bPn8wQO48Uc8KTb1wRDE+OY+1vqyySb+Q6kTYDnmaS1AbVatL/WWMZMEOROXQjDo27uTeC2lTYyLCkIPuGDzYse/c079t1QmpptsYiYJQbZEaiNXKQ6wyZGGnkA6Ir18Beh/PyB07KUUg41zKLBgyCx/wSefBiDics5F7C3uuWHZdb7O4hPZN+p5moNeNoMNp+nEUNRxa4QF3NekzRa7m1ta1VHENzYFCOMzlj3hfp24w3BIAqEQbW7OutQ6rjMp/EuNlPw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=HUdUZUlb93Zh7vFpmIMPuV2SWdtdN03aswJIXG1nxzU=;
+ b=XxOwvWMRFPs+YTNhHMUK8SejfMFww5JhuKUbcFivqOUsn4KmPpPv9PXbYvyx0gKtMJ+m0SyfgxW6PttpwJ76ia7Rd+v0cblyl9Jpg2a63sEYDHNPpTkVvirsdcRNMT7u1RYPqJMm/NlyxCYjpAYuVbxYsitUYEXbb8MDVfpig8Kv1yWWTCWjrK+wKs7wc+2ZeTT/eRUMVkB9goU/+8bGR6dN7xaMrtIWIV+oZ0E0K9NsK3dS+Clb7ywN12OpjEqmIk+LLJ+Lor2kMm9bP731EGKVnkpmCEvewKp5tUnqS/2yogEeV3nhzthkAPq5XMft+8Ju4ukBf1aCF1rrv+DhJg==
+From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Bertrand Marquis <bertrand.marquis@arm.com>,
+	Juergen Gross <jgross@suse.com>, Julien Grall <julien@xen.org>, Michal Orzel
+	<michal.orzel@amd.com>, =?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?=
+	<roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Grygorii Strashko
+	<grygorii_strashko@epam.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v12 3/6] lib/arm: Add I/O memory copy helpers
+Thread-Topic: [PATCH v12 3/6] lib/arm: Add I/O memory copy helpers
+Thread-Index: AQHdQb7XwQvbnxLqDEGK19PLXXgae7bJAQCAgABYGQCABnW1gA==
+Date: Tue, 15 Sep 2026 15:45:28 +0000
+Message-ID: <a7ba1f23-668d-4697-8de6-9890c64835fe@epam.com>
+References: <cover.1789055542.git.oleksii_moisieiev@epam.com>
+ <6bf8f9dd61da4d0fbea096b863f51db08df46c56.1789055542.git.oleksii_moisieiev@epam.com>
+ <1d8be2c2-a56d-4b81-8e36-c4f97099c879@suse.com>
+ <c9b06223-07b9-4c00-949e-874a6167e2d4@epam.com>
+In-Reply-To: <c9b06223-07b9-4c00-949e-874a6167e2d4@epam.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: VI0PR03MB11419:EE_|GV1PR03MB10315:EE_
+x-ms-office365-filtering-correlation-id: 298dd45a-4e98-41ea-c047-08df13405db6
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|7416014|376014|366016|1800799024|23010399003|11063799006|5023799004|56012099006|3023799007|4143699003|10067099003|6133799003|18002099003|22082099003|38070700021;
+x-microsoft-antispam-message-info:
+ BqX43QXjosfR2cVgOB441ZZVMusO0Qn6bhk/70fltPaQu3YwyIpfDrNBTv16ppu9MC+SJkkIq1cjaADQv8A/0SyPCifW/yF59tbHxVobZEkR+U2tErKmg4D/wYyKnn5U2in6a0Tp0i5xlndpAsvvUfhVW6qGaKbzf+P4s/PhSvJWXElaLm6MOJE0HcNtaj1iIwBXRRk8R84k049j2ykNmdaOKynUYxhEdlowFVneNvZlrL1Qg+TfbYIjDW7BhqUCaHJdBtwp4QjtBSo9lLUhm0nvUX1HwXjo+eWN2aVbYy5TjzgZ8ybs4h/Bc9+xr2/GeD3xEoZyGKc7MPTxXfudWATjYuS9HNfYWTIFKDS5Lcs8ztdEoLJnnCHHbWIjjwqML/Q6cMlZ+wrwA4ySm13lkoBsihLtXQzAwRyumtRqY8BRbYDEG1M7w0JrEPEAaH1FIub5lyWAKVu4/mGNyYWSN3T0nE1nnTZw8h1+ZeYiYSDFNQRcrpjm7FtEW9IUS50i1WK3hMRiF31w2rkyboVKd8CaQ4I1802wR6CWfuByZJOJ8PB+q1cG5aCBINRx3GacjEOu7yyeayZOdh1fa2q5SC1gEhVeX1TqF0Nu6JK2/4PLFZd3tAPLetS61CFtyG0Lo/zaXyzsJpJEXNhEbjpOflwG5ANgXFr0c4CXBwMBlIxRtVicHrkfbYBH+3aeMuNg
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VI0PR03MB11419.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(366016)(1800799024)(23010399003)(11063799006)(5023799004)(56012099006)(3023799007)(4143699003)(10067099003)(6133799003)(18002099003)(22082099003)(38070700021);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?VHY4WTJNTTBSaEJqak5nQktKZXpFZC9RY1NSLzlmdy96Rm5lMVlDNEs1ZFNK?=
+ =?utf-8?B?SDBUVmJUZzdZN1pWUXpGcWd4ZkQ1VCtqMDZoblFFcnBHN1FpRDMvb3JYcUJO?=
+ =?utf-8?B?Z1VmeFJBNzZvdzJhaTB3U2lmZkhZdlV4UTIxQVdPSVRsY2s3QmFBKytUNWNs?=
+ =?utf-8?B?clZJcG5sRU55Vzl4RjRPbjltcXpDZ0hxZE53dXlTbnlMSjcrWGlCWmdIaXBp?=
+ =?utf-8?B?dGQwS2hGcE9lQ295OS83Wkw0VUQ1TGpCR0lkejRIUGJ6b0Q1R1JrVVFhbmdQ?=
+ =?utf-8?B?WXM2ZkwrRkc3MWNtMHdNcTNyUGo5aGl2cDVJeXNBb241L2s0Ni9QaEl3bjl5?=
+ =?utf-8?B?QytOMVh3bCtQUnhIMXRwdFJCR1FGUE5kMkExU092RmpTL0c3Q09RbGVsbUxC?=
+ =?utf-8?B?MDBOZi9vSDRvRHoxc1h2V3N2dTlEZUhBWE0xd0ZBalNuMjlTVG5ReU4ySTZq?=
+ =?utf-8?B?eGN1VVhCU3pHOTZmQjkyRG5XenBkMWNJVWN3SlMzOUtRb2lRQlovbGxBenlR?=
+ =?utf-8?B?Y2JhODQ3cStBMElsTUNVdGVIaTI2ampHcTI3ZkRlSTFGaEs1TTZoVjI5UVJ6?=
+ =?utf-8?B?cnZwMTFGbVNVaE9NV2lrME05NXJGRm5LRzIrdzFwdGdlTEVCcTFjbVAweUdq?=
+ =?utf-8?B?SXFOSmloTUk3VGFlUmU3Zk1KekVRRWd5djhMRm9RNlpIeHk0NG05bGx5Rmdy?=
+ =?utf-8?B?WExiV2grbVNwcUFlZG96YjZ6UFlWYnJmaXNJcGhKTCtoNEtUK0RwSTdicWR0?=
+ =?utf-8?B?YkZVMHdaTlpGckF0TXVTWlJ4WnpCcGxIZlpqNXlFTkRHOCtWL054QVZ1QnhW?=
+ =?utf-8?B?d0lEaXIweitSNm1Wa0kvNTlPZ08vNlVQTWZhS09jOVp2RnBMT2FMc3hteHlq?=
+ =?utf-8?B?S2ZlK1hTKzVseS94em85T1FDSXBPQ21NSTdMLzZ0WnUvZXU0Wm0rSEZJbjNK?=
+ =?utf-8?B?Y3BzOXd3b0hDdTdjNUlnVW40M3FlbzBtdFRzUFJHcWtzdWJQWWxITFl2RHNo?=
+ =?utf-8?B?TnJkTFFBaldpVjBIay8yNWhuVCtZZ2pqUE1TbFhndDhOQWxyWDJtN0I5Snl6?=
+ =?utf-8?B?aXptOFJ3UHdlZHlpRmlJcGdvVjgzQW9uZTAreERsVDhFWG1pSW4ydmJ6bFV2?=
+ =?utf-8?B?NjR5TTBtTXhXcUdESVhVK0NGbmVWaXh2ZzVXMm5KTkRWZXhSSm0waUVHRUdu?=
+ =?utf-8?B?UERxZ1ZTUUxSQ2Q4a3hRazJqYnZzd0had2lwaTdyV3lVVjRvOFJGeTc3SWpF?=
+ =?utf-8?B?TXV3MzZLTERCK3NrV0ZUcHlLVnJWdWhQdnlUSEU1YTFPWXZEbGZsWUZzNU1X?=
+ =?utf-8?B?MnBXQUJoaVNWU0M0Y1l4VmJPZzZ0UXpVUys2d0xDdVBHU09QR01qcU9IbjRj?=
+ =?utf-8?B?dFIxdy91eTVseklYYTZSSXhCaTQ1WW95eitadGxoSFoveDF2ZHpHM2FnVUFG?=
+ =?utf-8?B?OUZ6Z0xvTzVjYmNpVkhUTmNBbGcyVVBkQndkd2xTS3Z6b0V3djZQZ3dRVkV1?=
+ =?utf-8?B?M3NXa3RIVzRkL2hDaG9VZHMvZ3U5bVUrQ05XTTJsOFkwZUtMMUtPQmg3dy9T?=
+ =?utf-8?B?NVpvNy9SN0JjSlV2ODl1M0xLR012SFV4NlYzc2dKNktkbURIbUJvYjhrTk1R?=
+ =?utf-8?B?VkFURU9OTXp3QkxaalFvaGpYOU9NMVRWRmcwd0FaWk8ydk85NE1CdWVWUTFZ?=
+ =?utf-8?B?R2hCVzNXYjlzbEJKZE83TnFZblM5M0hYbHhEdlpReWJ5cFIveXA3clJZcDBn?=
+ =?utf-8?B?WmJiSTQ1anlIcHF3Z0FHekxyQmVKUFNLRElPcy85YUY3bExYamZjd3ZEQUFw?=
+ =?utf-8?B?ZkhuNkJybmhNRjdNaFJJZ2djcmV4Tnh0WE4vV0ZLS2VQamovN0F0cSs2NUFo?=
+ =?utf-8?B?VXhrZ092NEhNeUU4Nys5cEhwbnJXT0xZQXZzR3pTWm92S3ErZ21YUHNDMHd2?=
+ =?utf-8?B?NlNoZzBQbHltQWMwcEdkU2ZGMGl0UFhVa2twY3FxWkxFbXVHNURBaTAxQ0tD?=
+ =?utf-8?B?Ym5ZME1YU2VDTjNNTWVTR2t6OVRRbVplMTBuVTZKZldHdlNVUHV2UFlnZCtL?=
+ =?utf-8?B?STFpZTYrajFRVEhlWVVURXpNTDZJdEE4TzBtZUFqK3BleEZDNENmU2Z3cUMz?=
+ =?utf-8?B?d3JXL2hJd0RKRGNCbVpDdTErZTdwaTRuQitkOU1PNENpTDhxRmdmckM2ci90?=
+ =?utf-8?B?SjdzOWRWZzhncjNSQmVHWWVOZHd3WTJuWFNIeCtpR1NlcEhkb0c3UHBjZGxO?=
+ =?utf-8?B?VGNLWlVkNGErQU5pSnFmSjZRUld6N2VrbzB4M2xtWVBmc0t4ZncxcTdEUG9M?=
+ =?utf-8?B?U3J0cCtKYnV0cWdncTg1eE95aEtKMElBQzh1RllFRjRKSW9VcXlIMzJ5dEZ1?=
+ =?utf-8?Q?jJONOvtaXvBPLPUc=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <8F525F57D6D718468677AAD72927B534@eurprd03.prod.outlook.com>
+Content-Transfer-Encoding: base64
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20260915-b4-rcu-tasks-preempt-qs-v3-3-0ad30c4c5ee7@toxicpanda.com>
-X-purgate-ID: tlsNG-ef75cf/1789485257-A62C4AE4-B676FA74/0/0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: VI0PR03MB11419.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 298dd45a-4e98-41ea-c047-08df13405db6
+X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Sep 2026 15:45:28.0907
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: rs/ALyK+c6fvKQ5EZo4isfd0ZVCFbjvyh2I9Qbg/Imto3f2J2kNUrMgnC/pbZHDdT6mhcYfX1SLRvaKAKd4WqpqW34lgIEjZhDyg66fneNU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR03MB10315
+X-purgate-ID: tlsNG-d25034/1789487133-020C1A5B-5B0FEFC7/0/0
 X-purgate-type: clean
-X-purgate-size: 15862
+X-purgate-size: 11496
 
-Le Tue, Sep 15, 2026 at 01:17:30PM +0000, Josef Bacik a écrit :
-> Tasks RCU waits for every task to pass through a voluntary context
-> switch, usermode or idle, because a preempted task might be sitting in a
-> trampoline that is about to be freed and nothing marks it as such.  With
-> PREEMPT_LAZY that is a poor fit for servers: cond_resched() is a no-op,
-> so a CPU-bound kthread only ever leaves the CPU by preemption, and one
-> such kthread holds every synchronize_rcu_tasks() caller -- ftrace and
-> BPF trampoline teardown under their mutexes, the kprobe jump optimizer
-> under text_mutex and cpus_read_lock() -- hostage for as long as it runs.
-> 
-> Following the discussion on v2, take the other road: let the
-> architecture make its trampolines Tasks Trace RCU readers.  When an
-> architecture selects HAVE_RCU_TRAMPOLINE_READERS it promises that every
-> trampoline whose lifetime Tasks RCU guards enters rcu_read_lock_trace()
-> (or its assembly equivalent) before calling out and leaves it before
-> returning, so a task anywhere inside such a call-out, preempted or not,
-> is an ordinary Tasks Trace reader.
-> 
-> That leaves the few instructions of trampoline text before the reader
-> is entered and after it is left (plus, in a later patch, the bytes a
-> kprobe jump optimization is about to overwrite).  A task can only linger
-> there by being interrupted there, and such text never calls anything
-> that schedules, so instead of tracking tasks we track CPUs: every pass
-> through __schedule() is a per-CPU quiescent event, except that the one
-> context switch that can catch a task at an arbitrary instruction -- a
-> preemption from irq exit -- first records the interrupted IP in the task
-> and parks it on a per-CPU list for the duration (reusing the fields and
-> lists the classic flavor keeps for its exit-path bookkeeping), and, if
-> the IP is inside such "unmarked" text, puts the task on a short holdout
-> list; the task takes itself off at its next context switch outside such
-> a preemption or irq-exit check that finds it elsewhere.  Usermode (the
-> existing tick hook, or a nohz_full CPU in an RCU extended quiescent
-> state) and idle count as well.  rcu_tasks_trampoline_text() does the
-> classification: anything outside core and module text, a new
-> .text..rcu_tramp section for C glue that trampolines call before it has
-> entered the reader (__rcu_trampoline), and an arch hook for things like
-> static ftrace stubs and return thunks.
-> 
-> The grace period, run by the existing rcu_tasks kthread so that
-> call_rcu_tasks(), synchronize_rcu_tasks() and rcu_barrier_tasks() keep
-> their names and callers, is: wait for every online non-idle CPU to
-> context switch (nudging stragglers with resched_cpu() after a jiffy),
-> drain the holdout list as it stood, synchronize_rcu_tasks_trace() for
-> everything inside the readers, then one more CPU pass and drain for
-> tasks that have since left the reader into the trailing instructions.
-> That is bounded by a few jiffies, preempt-off latency and an SRCU grace
-> period rather than by the longest stretch any task runs without
-> sleeping, needs no per-task scan, and makes cond_resched_tasks_rcu_qs()
-> unnecessary on such architectures.  As before, idle tasks are not
-> waited for.  rcu_tasks_wait_irq_preempted() walks the parked lists for
-> the one caller (the kprobe jump optimizer, later in the series) that
-> makes ordinary text unsafe to be parked in and so has to wait out tasks
-> that were preempted there before it said so.
-> 
-> The classic implementation is untouched and remains the default; the
-> new one is built only as CONFIG_TASKS_RCU_TRAMPOLINE_READERS when the
-> architecture opts in and uses the generic irq entry code, whose
-> reschedule check gains the rcu_tasks_irq_resched() call.  Nothing
-> selects it yet.
-> 
-> Suggested-by: Paul E. McKenney <paulmck@kernel.org>
-> Suggested-by: Alexei Starovoitov <ast@kernel.org>
-> Assisted-by: LLM
-> Signed-off-by: Josef Bacik <josef@toxicpanda.com>
-> ---
->  include/asm-generic/vmlinux.lds.h |  11 +
->  include/linux/rcupdate.h          |  32 ++-
->  include/linux/sched.h             |   1 +
->  kernel/entry/common.c             |   8 +-
->  kernel/fork.c                     |   1 +
->  kernel/rcu/Kconfig                |  22 ++
->  kernel/rcu/tasks.h                | 460 +++++++++++++++++++++++++++++++++++++-
->  kernel/rcu/update.c               |   2 +
->  8 files changed, 528 insertions(+), 9 deletions(-)
-> 
-> diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vmlinux.lds.h
-> index b2988aa12f66..86e58c4fe370 100644
-> --- a/include/asm-generic/vmlinux.lds.h
-> +++ b/include/asm-generic/vmlinux.lds.h
-> @@ -571,6 +571,16 @@
->  		__cpuidle_text_end = .;					\
->  		__noinstr_text_end = .;
->  
-> +/*
-> + * C glue called directly from Tasks-RCU-protected trampolines, bounded so
-> + * that rcu_tasks_trampoline_text() can recognise it; see __rcu_trampoline.
-> + */
-> +#define RCU_TRAMP_TEXT							\
-> +		ALIGN_FUNCTION();					\
-> +		__rcu_tramp_text_start = .;				\
-> +		*(.text..rcu_tramp)					\
-> +		__rcu_tramp_text_end = .;
-> +
->  #define TEXT_SPLIT							\
->  		__split_text_start = .;					\
->  		*(.text.split .text.split.[0-9a-zA-Z_]*)		\
-> @@ -607,6 +617,7 @@
->  		TEXT_HOT						\
->  		*(TEXT_MAIN .text.fixup)				\
->  		NOINSTR_TEXT						\
-> +		RCU_TRAMP_TEXT						\
->  		*(.ref.text)
->  
->  /* sched.text is aling to function alignment to secure we have same
-> diff --git a/include/linux/rcupdate.h b/include/linux/rcupdate.h
-> index 44c07a66edff..fb2a3889a696 100644
-> --- a/include/linux/rcupdate.h
-> +++ b/include/linux/rcupdate.h
-> @@ -50,6 +50,31 @@ token_context_lock_instance(RCU, RCU_BH);
->  /* Exported common interfaces */
->  void call_rcu(struct rcu_head *head, rcu_callback_t func);
->  void rcu_barrier_tasks(void);
-> +
-> +/*
-> + * Trampoline-reader Tasks RCU (CONFIG_TASKS_RCU_TRAMPOLINE_READERS), see
-> + * kernel/rcu/tasks.h.  rcu_tasks_irq_resched_enter()/_exit() bracket the
-> + * irq-exit preemption; rcu_tasks_trampoline_text() and the arch_ override
-> + * classify an interrupted IP; rcu_tasks_wait_irq_preempted() lets a caller
-> + * wait out tasks already preempted somewhere it is about to make unsafe.
-> + * __rcu_trampoline places C code that such trampolines call directly, before
-> + * it has entered its Tasks Trace reader, where that classification can see it.
-> + */
-> +void rcu_tasks_irq_resched_enter(unsigned long ip);
-> +void rcu_tasks_irq_resched_exit(void);
-> +bool rcu_tasks_trampoline_text(unsigned long ip);
-> +bool arch_rcu_tasks_trampoline_text(unsigned long ip);
-> +#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
-> +void rcu_tasks_wait_irq_preempted(bool (*inside)(unsigned long ip));
-> +#else
-> +static inline void rcu_tasks_wait_irq_preempted(bool (*inside)(unsigned long ip)) { }
-> +#endif
-> +#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
-> +/* Also keeps instrumentation calls out of the prologue, ahead of the reader. */
-> +#define __rcu_trampoline	__noinstr_section(".text..rcu_tramp")
-> +#else
-> +#define __rcu_trampoline
-> +#endif
->  void synchronize_rcu(void);
->  
->  /*
-> @@ -180,11 +205,16 @@ static inline void rcu_nocb_flush_deferred_wakeup(void) { }
->  #ifdef CONFIG_TASKS_RCU_GENERIC
->  
->  # ifdef CONFIG_TASKS_RCU
-> -# define rcu_tasks_classic_qs(t, preempt)				\
-> +#  ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
-> +void rcu_tasks_note_qs(struct task_struct *t, bool preempt);
-> +#  define rcu_tasks_classic_qs(t, preempt) rcu_tasks_note_qs((t), (preempt))
-> +#  else
-> +#  define rcu_tasks_classic_qs(t, preempt)				\
->  	do {								\
->  		if (!(preempt) && READ_ONCE((t)->rcu_tasks_holdout))	\
->  			WRITE_ONCE((t)->rcu_tasks_holdout, false);	\
->  	} while (0)
-> +#  endif
->  void call_rcu_tasks(struct rcu_head *head, rcu_callback_t func);
->  void synchronize_rcu_tasks(void);
->  void rcu_tasks_torture_stats_print(char *tt, char *tf);
-> diff --git a/include/linux/sched.h b/include/linux/sched.h
-> index 8b3d47a325cc..15beb44caa2c 100644
-> --- a/include/linux/sched.h
-> +++ b/include/linux/sched.h
-> @@ -957,6 +957,7 @@ struct task_struct {
->  	u8				rcu_tasks_holdout;
->  	u8				rcu_tasks_idx;
->  	int				rcu_tasks_idle_cpu;
-> +	unsigned long			rcu_tasks_irq_ip;
->  	struct list_head		rcu_tasks_holdout_list;
->  	int				rcu_tasks_exit_cpu;
->  	struct list_head		rcu_tasks_exit_list;
-> diff --git a/kernel/entry/common.c b/kernel/entry/common.c
-> index e4acd50bd81a..94318519998c 100644
-> --- a/kernel/entry/common.c
-> +++ b/kernel/entry/common.c
-> @@ -6,6 +6,7 @@
->  #include <linux/jump_label.h>
->  #include <linux/kmsan.h>
->  #include <linux/livepatch.h>
-> +#include <linux/rcupdate.h>
->  #include <linux/resume_user_mode.h>
->  #include <linux/tick.h>
->  
-> @@ -141,8 +142,13 @@ void raw_irqentry_exit_cond_resched(struct pt_regs *regs)
->  		rcu_irq_exit_check_preempt();
->  		if (IS_ENABLED(CONFIG_DEBUG_ENTRY))
->  			WARN_ON_ONCE(!on_thread_stack());
-> -		if (need_resched() && arch_irqentry_exit_need_resched())
-> +		if (need_resched() && arch_irqentry_exit_need_resched()) {
-> +			if (IS_ENABLED(CONFIG_TASKS_RCU_TRAMPOLINE_READERS))
-> +				rcu_tasks_irq_resched_enter(instruction_pointer(regs));
->  			preempt_schedule_irq();
-> +			if (IS_ENABLED(CONFIG_TASKS_RCU_TRAMPOLINE_READERS))
-> +				rcu_tasks_irq_resched_exit();
-> +		}
->  	}
->  }
->  #ifdef CONFIG_PREEMPT_DYNAMIC
-> diff --git a/kernel/fork.c b/kernel/fork.c
-> index 416758c8a3d4..8077336bb136 100644
-> --- a/kernel/fork.c
-> +++ b/kernel/fork.c
-> @@ -1871,6 +1871,7 @@ static inline void rcu_copy_process(struct task_struct *p)
->  	p->rcu_tasks_holdout = false;
->  	INIT_LIST_HEAD(&p->rcu_tasks_holdout_list);
->  	p->rcu_tasks_idle_cpu = -1;
-> +	p->rcu_tasks_irq_ip = 0;
->  	INIT_LIST_HEAD(&p->rcu_tasks_exit_list);
->  #endif /* #ifdef CONFIG_TASKS_RCU */
->  #ifdef CONFIG_TASKS_TRACE_RCU
-> diff --git a/kernel/rcu/Kconfig b/kernel/rcu/Kconfig
-> index 332df7a7a634..bbab14bc14c3 100644
-> --- a/kernel/rcu/Kconfig
-> +++ b/kernel/rcu/Kconfig
-> @@ -107,6 +107,28 @@ config TASKS_RCU
->  	default NEED_TASKS_RCU && PREEMPTION
->  	select IRQ_WORK
->  
-> +config HAVE_RCU_TRAMPOLINE_READERS
-> +	bool
-> +	help
-> +	  Select this if the architecture uses the generic irq entry code and
-> +	  every trampoline whose lifetime Tasks RCU guards on it (ftrace
-> +	  trampolines, kprobe out-of-line and optimized-probe slots, BPF
-> +	  trampolines, out-of-line ftrace direct-call trampolines) enters a
-> +	  Tasks Trace RCU read-side critical section before calling out of
-> +	  the trampoline and leaves it before returning, and any core text
-> +	  that runs on behalf of such a trampoline outside that reader is
-> +	  reported by arch_rcu_tasks_trampoline_text().  The assembly readers
-> +	  use the this_cpu_inc() form of SRCU-fast, hence !NEED_SRCU_NMI_SAFE.
-> +
-> +config TASKS_RCU_TRAMPOLINE_READERS
-> +	def_bool TASKS_RCU && HAVE_RCU_TRAMPOLINE_READERS && GENERIC_IRQ_ENTRY && !NEED_SRCU_NMI_SAFE
-> +	select TASKS_TRACE_RCU
-> +	help
-> +	  Implement the Tasks RCU grace period as a per-CPU pass over
-> +	  context switches and irq-exit reschedules outside trampoline text
-> +	  plus a Tasks Trace RCU grace period, instead of waiting for every
-> +	  task to voluntarily context switch.  See kernel/rcu/tasks.h.
-> +
->  config FORCE_TASKS_RUDE_RCU
->  	bool "Force selection of Tasks Rude RCU"
->  	depends on RCU_EXPERT
-> diff --git a/kernel/rcu/tasks.h b/kernel/rcu/tasks.h
-> index 627295396cd9..3a7c092361a6 100644
-> --- a/kernel/rcu/tasks.h
-> +++ b/kernel/rcu/tasks.h
-> @@ -152,7 +152,7 @@ static struct rcu_tasks rt_name =							\
->  	.kname = #rt_name,								\
->  }
->  
-> -#ifdef CONFIG_TASKS_RCU
-> +#if defined(CONFIG_TASKS_RCU) && !defined(CONFIG_TASKS_RCU_TRAMPOLINE_READERS)
->  
->  /* Report delay of scan exiting tasklist in rcu_tasks_postscan(). */
->  static void tasks_rcu_exit_stall(struct timer_list *unused);
-> @@ -802,7 +802,7 @@ static void rcu_tasks_torture_stats_print_generic(struct rcu_tasks *rtp, char *t
->  
->  #endif // #ifndef CONFIG_TINY_RCU
->  
-> -#if defined(CONFIG_TASKS_RCU)
-> +#if defined(CONFIG_TASKS_RCU) && !defined(CONFIG_TASKS_RCU_TRAMPOLINE_READERS)
->  
->  ////////////////////////////////////////////////////////////////////////
->  //
-> @@ -897,10 +897,445 @@ static void rcu_tasks_wait_gp(struct rcu_tasks *rtp)
->  	rtp->postgp_func(rtp);
->  }
->  
-> -#endif /* #if defined(CONFIG_TASKS_RCU) */
-> +#endif /* #if defined(CONFIG_TASKS_RCU) && !defined(CONFIG_TASKS_RCU_TRAMPOLINE_READERS) */
->  
->  #ifdef CONFIG_TASKS_RCU
->  
-> +static int rcu_tasks_lazy_ms = -1;
-> +module_param(rcu_tasks_lazy_ms, int, 0444);
-> +
-> +#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
-> +
-> +////////////////////////////////////////////////////////////////////////
-> +//
-> +// Tasks RCU for architectures whose trampolines are Tasks Trace RCU
-> +// readers (CONFIG_HAVE_RCU_TRAMPOLINE_READERS).
-> +//
-> +// On these architectures every piece of text whose lifetime Tasks RCU
-> +// guards -- ftrace trampolines, kprobe optinsn slots, BPF trampoline
-> +// images, out-of-line ftrace direct-call trampolines -- enters a Tasks
-> +// Trace RCU read-side critical section before calling out of itself and
-> +// leaves it before returning, so a task anywhere inside such a call-out,
-> +// preempted or not, is an ordinary rcu_read_lock_trace() reader and
-> +// synchronize_rcu_tasks_trace() waits for it.
-> +//
-> +// What that cannot cover is the handful of instructions in the trampoline
-> +// before the reader is entered and after it is left, and the one user that
-> +// has no trampoline at all: the bytes after a kprobe that the jump
-> +// optimizer is about to overwrite.  A task can only linger in such
-> +// "unmarked" text by being interrupted there; unmarked text never calls
-> +// anything that could schedule.  So a context switch on a CPU tells us that
-> +// whatever that CPU was running is out of unmarked text, with one
-> +// exception: a preemption from the irq-exit path, which can happen at any
-> +// instruction boundary.  That path has the interrupted pt_regs in hand, so
-> +// just before it preempts it records the IP in the task and checks it
-> +// (rcu_tasks_trampoline_text()); if it is inside unmarked text the task
-> +// goes on a short holdout list first, and takes itself off again at its
-> +// next context switch outside such a preemption or its next irq-exit
-> +// check that finds it elsewhere.  With that, every pass through
-> +// __schedule() is a per-CPU quiescent event, as are usermode and idle.
-> +//
-> +// A grace period is then:
-> +//
-> +//  1. Wait for every online, non-idle CPU to context switch, nudging
-> +//     stragglers with resched_cpu().  Afterwards no task is in the leading
-> +//     unmarked instructions of a dying trampoline unless it is on the
-> +//     holdout list.
-> +//  2. Wait for the holdout list (as it stood) to drain.
-> +//  3. synchronize_rcu_tasks_trace(), for everything inside the readers.
-> +//  4. Repeat 1 and 2 for tasks that have since left the reader and are in
-> +//     the trailing unmarked instructions.
-
-Alternatively the approach could be generalized to vanilla RCU, it could be
-possible to define a .text.rcu_no_qs section within which code running is
-considered as an RCU reader (with a pause while on the explicit RCU tasks
-section). It would be forbidden to voluntary sleep inside
-and to put explicit preemption points (CONFIG_PROVE_RCU could report misuses).
-
-Based on IP, RCU could consider those interrupted section as readers. This would
-require PREEMPT_RCU though.
-
-And then synchronize_rcu() would do the 1, 2, 4 jobs.
-
--- 
-Frederic Weisbecker
-SUSE Labs
+SGkgSmFuLA0KDQpBIHNob3J0IGZvbGxvdy11cCB0byBteSBwcmV2aW91cyByZXBseSwgdG8gbWFr
+ZSB0aGUgcHJvcG9zYWwgY29uY3JldGUNCg0KT24gMTEvMDkvMjAyNiAxNjowNiwgT2xla3NpaSBN
+b2lzaWVpZXYgd3JvdGU6DQo+IEhpIEphbiwNCj4NCj4gVGhhbmsgeW91IGZvciBxdWljayByZXNw
+b25zZS4gcGxlYXNlIHNlZSBiZWxvdy4NCj4NCj4gT24gMTEvMDkvMjAyNiAxMDo1MCwgSmFuIEJl
+dWxpY2ggd3JvdGU6DQo+PiBPbiAxMS4wOS4yMDI2IDA5OjI2LCBPbGVrc2lpIE1vaXNpZWlldiB3
+cm90ZToNCj4+PiBJbnRyb2R1Y2UgbWVtY3B5X2Zyb21pbygpIGFuZCBtZW1jcHlfdG9pbygpIGhl
+bHBlcnMgdG8gY29weSBiZXR3ZWVuDQo+Pj4gcmVndWxhciBtZW1vcnkgYW5kIE1NSU8gc3BhY2Ug
+b24gQXJtLiBUaGUgZ2VuZXJpYyBwcm90b3R5cGVzIGxpdmUgaW4NCj4+PiBpby5oIHNvIG90aGVy
+IGFyY2hpdGVjdHVyZXMgY2FuIHByb3ZpZGUgdGhlaXIgb3duIGltcGxlbWVudGF0aW9ucy4NCj4+
+Pg0KPj4+IFRoZXNlIGhlbHBlcnMgaGFuZGxlIGFsaWdubWVudCBzYWZlbHkgYnkgdXNpbmcgb3Jk
+ZXJlZCBieXRlIGFjY2Vzc2VzIA0KPj4+IGZvcg0KPj4+IGFueSBsZWFkaW5nL3RyYWlsaW5nIHVu
+YWxpZ25lZCBieXRlcyBhbmQgb3JkZXJlZCAzMi1iaXQgYWNjZXNzZXMgZm9yIA0KPj4+IHRoZQ0K
+Pj4+IGFsaWduZWQgYnVsayB0cmFuc2Zlci4NCj4+IFRoYXQncyBvdmVyLXNpbXBsaWZ5aW5nIHRo
+aW5ncyAoanVzdCBsaWtlIGNvZGUgY29tbWVudHMgZG8pLiBJZiBzb3VyY2UNCj4+IGFuZCBkZXN0
+aW5hdGlvbiBhcmUgZXF1YWxseSBtaXNhbGlnbmVkIG1vZHVsbyA0LCB3aGF0IGlzIHNhaWQgaXMg
+DQo+PiB0cnVlLiBJZg0KPj4gdGhleSBhcmUgZGlmZmVyZW50bHkgbWlzYWxpZ25lZCwgdGhlIGVu
+dGlyZSBjb3B5IHdpbGwgYmUgZG9uZSBieXRlLXdpc2UuDQo+PiBXaGljaCBjYW4gZWFzaWx5IGJl
+IGEgcHJvYmxlbSB3aGVuIDQtYnl0ZSBhY2Nlc3NlcyBhcmUgcmVxdWlyZWQgZm9yDQo+PiBwYXJ0
+aWN1bGFyIE1NSU8gbG9jYXRpb25zICh3aGljaCBtYXkgZS5nLiBhY3R1YWxseSByZXByZXNlbnQg
+ZGV2aWNlDQo+PiByZWdpc3RlcnMpLg0KPj4NCj4+IEFzIHNhaWQgb24gZWFybGllciB2ZXJzaW9u
+czogSSB0aGluayB5b3UgZWl0aGVyIHdhbnQgdG8gZ2V0IG1pc2FsaWdubWVudA0KPj4gaGFuZGxp
+bmcgcmlnaHQgZm9yIGFsbCBwb3NzaWJsZSBjYXNlcywgb3IgeW91IHdhbnQgdG8gZGVtYW5kIGFs
+aWduZWQNCj4+IGluY29taW5nIHBvaW50ZXJzLg0KPj4NCj4+IChGdGFvZCwgdXNpbmcgYnl0ZSBh
+Y2Nlc3NlcyBmb3IgdHdvIG9yIHRocmVlIGxlYWRpbmcgLyB0cmFpbGluZyANCj4+IG1pc2FsaWdu
+ZWQNCj4+IGJ5dGVzIGNhbiBiZSBlcXVhbGx5IHdyb25nLCB3aGVuIHRoZSBNTUlPIGxvY2F0aW9u
+IGFjY2Vzc2VkIHdhbnRzIHRvIGJlDQo+PiBhY2Nlc3NlZCB3aXRoIGEgMTYtYml0IGxvYWQvc3Rv
+cmUsIGZvciBiZWluZyBlLmcuIGEgMTYtYml0IGRldmljZSANCj4+IHJlZ2lzdGVyLg0KPj4gU2lt
+aWxhcmx5IHVzaW5nIDMyLWJpdCBsb2Fkcy9zdG9yZXMgY2FuIGJlIHdyb25nIGluIHRoZSBnZW5l
+cmFsIGNhc2UuIA0KPj4gSU9XDQo+PiB3aGlsZSBzb21lIG9mIHRoYXQgaXMgc2FpZCB0byBhIGNl
+cnRhaW4gZGVncmVlLCBJIHRoaW5rIHRoZXJlIGFyZQ0KPj4gdW5tZW50aW9uZWQgZnVydGhlciBj
+b25zdHJhaW50cyBvbiB3aGVuIHRoZXNlIGZ1bmN0aW9ucyBtYXkgc2FmZWx5IGJlDQo+PiB1c2Vk
+LiBGb3IgZXhhbXBsZSAiZGV2aWNlcyB0aGF0IHRvbGVyYXRlIDgtYml0IGFuZCAzMi1iaXQgYWNj
+ZXNzZXMiIGlzDQo+PiBzdGlsbCBhbWJpZ3VvdXMgYXMgdG8gd2hhdCBleGFjdGx5IGl0IG1lYW5z
+LiBOb3QgdGhlIGxlYXN0IGJlY2F1c2UNCj4+ICJ0b2xlcmF0ZSIgZG9lc24ndCBtZWFuICJ3b3Jr
+IGNvcnJlY3RseSB3aXRoIi4pDQo+Pg0KPj4+IFVzaW5nIHRoZSBvcmRlcmVkIGByZWFkYi9yZWFk
+bGAgYW5kDQo+Pj4gYHdyaXRlYi93cml0ZWxgIGFjY2Vzc29ycyBhdm9pZHMgdW5pbnRlbmRlZCBl
+bmRpYW5uZXNzIGNvbnZlcnNpb24gd2hpbGUNCj4+PiByZXNwZWN0aW5nIGRldmljZSBvcmRlcmlu
+ZyByZXF1aXJlbWVudHMgb24gQVJNMzIvQVJNNjQgaGFyZHdhcmUgdGhhdCANCj4+PiBtYXkNCj4+
+PiBub3Qgc3VwcG9ydCA2NC1iaXQgTU1JTyBhdG9taWNhbGx5Lg0KPj4gSSdtIGhhdmluZyB0cm91
+YmxlIG1ha2luZyBzZW5zZSBvZiB0aGlzIHBhcnQuIFdoeSdzIGVuZGlhbm5lc3Mgb2YgDQo+PiBj
+b25jZXJuDQo+PiBoZXJlPyBUaGUgYWNjZXNzb3JzIHVzZWQgZG9uJ3QgY2FyZSBhYm91dCBlbmRp
+YW5uZXNzIGF0IGFsbCwgYW5kIHdoYXQgDQo+PiBtYXkNCj4+IGhhdmUgKHdyb25nbHkpIGJlZW4g
+dXNlZCBpbiBlYXJsaWVyIHZlcnNpb25zIHNob3VsZG4ndCBtYXR0ZXIgaGVyZSANCj4+IChvciBp
+dA0KPj4gd291bGQgbmVlZCBjYWxsaW5nIG91dCB3aGljaCBvdGhlciBhY2Nlc3NvcnMgd291bGQg
+YmUgd3JvbmcgdG8gdXNlKS4NCj4gVGhpcyBpcyB0aGUgbGVmdG92ZXIgZnJvbSB2NyB3aGVyZSBf
+X3Jhd193cml0ZS9fX3Jhd19yZWFkIHdlcmUgdXNlZC4gDQo+IHJlYWRsKCkvd3JpdGVsKCkgaW5j
+bHVkZSBsaXR0bGUgZW5kaWFuIGNvbnZlcnNpb24gdGhyb3VnaCB0aGVpciANCj4gcmVsYXhlZCB2
+YXJpYW50cy4NCj4gaHR0cHM6Ly9wYXRjaGV3Lm9yZy9YZW4vY292ZXIuMTc2ODQxNTIwMC5naXQu
+b2xla3NpaS5fNUZtb2lzaWVpZXZAZXBhbS5jb20vZDE2NjM0ODUzMGI5MjI5NjczZTFhNmUzYjI5
+ZmY0ZWU5MTIzYWIyZi4xNzY4NDE1MjAwLmdpdC5vbGVrc2lpLl81Rm1vaXNpZWlldkBlcGFtLmNv
+bS8gDQo+DQo+DQo+IEkgd2lsbCByZW1vdmUgdGhlIGNsYWltIHRoYXQgb3JkZXJlZCBhY2Nlc3Nv
+cnMgYXZvaWQgZW5kaWFubmVzcyANCj4gY29udmVyc2lvbi4NCj4NCj4+PiAtLS0gYS94ZW4vaW5j
+bHVkZS94ZW4vaW8uaA0KPj4+ICsrKyBiL3hlbi9pbmNsdWRlL3hlbi9pby5oDQo+Pj4gQEAgLTY3
+LDQgKzY3LDE0IEBAIHN0YXRpYyBpbmxpbmUgYm9vbCB3cml0ZV9tbWlvKHZvbGF0aWxlIHZvaWQg
+DQo+Pj4gX19pb21lbSAqbWVtLCB1bnNpZ25lZCBsb25nIGRhdGEsDQo+Pj4gwqDCoMKgwqDCoCBy
+ZXR1cm4gdHJ1ZTsNCj4+PiDCoCB9DQo+Pj4gwqAgKy8qDQo+Pj4gKyAqIENvcHkgYmV0d2VlbiBy
+ZWd1bGFyIG1lbW9yeSBhbmQgTU1JTyBzcGFjZS4gSW1wbGVtZW50YXRpb25zIGFyZQ0KPj4+ICsg
+KiBhcmNoaXRlY3R1cmUtc3BlY2lmaWMgYW5kIG11c3QgdXNlIGFwcHJvcHJpYXRlIE1NSU8gYWNj
+ZXNzb3JzIGZvcg0KPj4+ICsgKiB0aGVpciBtZW1vcnkgYW5kIEkvTyBtb2RlbHMuDQo+Pj4gKyAq
+Lw0KPj4+ICt2b2lkIG1lbWNweV9mcm9taW8odm9pZCAqdG8sIGNvbnN0IHZvbGF0aWxlIHZvaWQg
+X19pb21lbSAqZnJvbSwNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+IHNpemVfdCBjb3VudCk7DQo+Pj4gK3ZvaWQgbWVtY3B5X3RvaW8odm9sYXRpbGUgdm9pZCBfX2lv
+bWVtICp0bywgY29uc3Qgdm9pZCAqZnJvbSwNCj4+PiArwqDCoMKgwqDCoMKgwqDCoMKgwqDCoMKg
+wqDCoMKgwqAgc2l6ZV90IGNvdW50KTsNCj4+IEZvciBzb21lYm9keSB3YW50aW5nIHRvIHVzZSB0
+aGVzZSBmdW5jdGlvbnMgYW5kIG1lcmVseSBsb29raW5nIGhlcmUsIGhvdw0KPj4gd291bGQgdGhl
+eSBrbm93IG9mIGFsbCB0aGUgY29uc3RyYWludHM/IFRoYXQgaXMgaW1wbGVtZW50YXRpb25zIGFy
+ZSBub3QNCj4+IG1lcmVseSBhcmNoLXNwZWNpZmljLCB0aGV5IG1heSBhbHNvIGltcG9zZSBhcmNo
+LXNwZWNpZmljIGNvbnN0cmFpbnRzLg0KPj4NCj4+IEphbg0KPiBZb3UgYXJlIHJpZ2h0IGFib3V0
+IHRoZSBhbGlnbm1lbnQgaGFuZGxpbmcuIEFkdmFuY2luZyBib3RoIHBvaW50ZXJzIGJ5DQo+IHRo
+ZSBzYW1lIGFtb3VudCBwcmVzZXJ2ZXMgdGhlaXIgcmVsYXRpdmUgYWxpZ25tZW50LCBzbyB0aGV5
+IG5ldmVyIGJlY29tZQ0KPiBhbGlnbmVkIHRvZ2V0aGVyIGlmIHRoZWlyIG9mZnNldHMgbW9kdWxv
+IGZvdXIgZGlmZmVyLiBJbiB0aGF0IGNhc2UgdGhlDQo+IGN1cnJlbnQgaW1wbGVtZW50YXRpb24g
+Y29waWVzIHRoZSB3aG9sZSByYW5nZSB1c2luZyBieXRlIGFjY2Vzc2VzLg0KPg0KPiBJIHByb3Bv
+c2UgdG8gaGFuZGxlIGFyYml0cmFyeSBSQU0gYWxpZ25tZW50IGJ5IGFsaWduaW5nIG9ubHkgdGhl
+IEkvTw0KPiBwb2ludGVyLCB0aGVuIHVzaW5nIHB1dF91bmFsaWduZWRfbGUzMigpL2dldF91bmFs
+aWduZWRfbGUzMigpIG9uIHRoZQ0KPiBOb3JtYWwtbWVtb3J5IHNpZGUgb2YgdGhlIHdvcmQgdHJh
+bnNmZXJzLiBBbGwgSS9PIGFjY2Vzc2VzIHdvdWxkIHN0aWxsDQo+IHVzZSByZWFkYi9yZWFkbCBv
+ciB3cml0ZWIvd3JpdGVsLiBUaGlzIHdvdWxkIG1ha2UgdGhlIEkvTyBhY2Nlc3Mgd2lkdGhzDQo+
+IGluZGVwZW5kZW50IG9mIHRoZSBSQU0gcG9pbnRlcidzIGFsaWdubWVudC4gSW4gcGFydGljdWxh
+ciwgYW4gYWxpZ25lZA0KPiBJL08gYWRkcmVzcyBhbmQgYSBsZW5ndGggZGl2aXNpYmxlIGJ5IGZv
+dXIgd291bGQgcHJvZHVjZSBvbmx5IDMyLWJpdA0KPiBJL08gYWNjZXNzZXMsIGV2ZW4gd2l0aCBh
+biB1bmFsaWduZWQgUkFNIGJ1ZmZlci4NCj4NCj4gU28gdGhlIGNoYW5nZXMgZm9yIG1lbWNweV90
+b2lvIHdpbGwgbG9vayBsaWtlOg0KPg0KPiB2b2lkIG1lbWNweV90b2lvKHZvbGF0aWxlIHZvaWQg
+X19pb21lbSAqdG8sIGNvbnN0IHZvaWQgKmZyb20sDQo+IMKgIMKgIMKgIMKgIMKgIMKgIMKgIMKg
+IMKgc2l6ZV90IGNvdW50KQ0KPiDCoHsNCj4gLcKgIMKgIHdoaWxlICggY291bnQgJiYgKCFJU19B
+TElHTkVEKCh1bnNpZ25lZCBsb25nKXRvLCA0KSB8fA0KPiAtwqAgwqAgwqAgwqAgwqAgwqAgwqAg
+wqAgwqAgwqAgwqAgIUlTX0FMSUdORUQoKHVuc2lnbmVkIGxvbmcpZnJvbSwgNCkpICkNCj4gK8Kg
+IMKgIHdoaWxlICggY291bnQgJiYgIUlTX0FMSUdORUQoKHVuc2lnbmVkIGxvbmcpdG8sIDQpICkN
+Cj4gwqAgwqAgwqB7DQo+IMKgIMKgIMKgIMKgIMKgd3JpdGViKCooY29uc3QgdWludDhfdCAqKWZy
+b20sIHRvKTsNCj4gwqAgwqAgwqAgwqAgwqBmcm9tKys7DQo+IEBAIC0yOSw3ICsyMiw3IEBADQo+
+DQo+IMKgIMKgIMKgd2hpbGUgKCBjb3VudCA+PSA0ICkNCj4gwqAgwqAgwqB7DQo+IC3CoCDCoCDC
+oCDCoCB3cml0ZWwoKihjb25zdCB1aW50MzJfdCAqKWZyb20sIHRvKTsNCj4gK8KgIMKgIMKgIMKg
+IHdyaXRlbChnZXRfdW5hbGlnbmVkX2xlMzIoZnJvbSksIHRvKTsNCj4gwqAgwqAgwqAgwqAgwqBm
+cm9tICs9IDQ7DQo+IMKgIMKgIMKgIMKgIMKgdG8gKz0gNDsNCj4gwqAgwqAgwqAgwqAgwqBjb3Vu
+dCAtPSA0Ow0KPg0KPiBUaGlzIGRvZXMgbm90IG1ha2UgdGhlIGhlbHBlcnMgc3VpdGFibGUgZm9y
+IGFyYml0cmFyeSBkZXZpY2UgcmVnaXN0ZXJzLg0KPiBJIHdpbGwgZGVzY3JpYmUgdGhlbSBhcyBj
+b3B5aW5nIGEgYnl0ZSBzZXF1ZW5jZSB0by9mcm9tIGEgbWVtb3J5LWxpa2UNCj4gSS9PIHJlZ2lv
+bi4gVGhlIHJlZ2lvbiBtdXN0IHN1cHBvcnQgYnl0ZSBhY2Nlc3NlcyBhdCBldmVyeSBieXRlIGFk
+ZHJlc3MNCj4gYW5kIGFsaWduZWQgMzItYml0IGFjY2Vzc2VzIHdpdGggZXF1aXZhbGVudCBieXRl
+LXN0b3JhZ2Ugc2VtYW50aWNzLg0KPiBUaGUgaW1wbGVtZW50YXRpb24gdXNlcyBieXRlIGFjY2Vz
+c2VzIHRvIGFsaWduIHRoZSBJL08gcG9pbnRlci4NCj4NCj4gQW5kIGFsc28gSSB3aWxsIGRvY3Vt
+ZW50IHRoZSBBcm0gcmVxdWlyZW1lbnRzIG5leHQgdG8gdGhlIGRlY2xhcmF0aW9ucw0KPiBpbiB4
+ZW4vaW8uaCBhcyB5b3Ugc3VnZ2VzdGVkLg0KPg0KPg0KPiBXaGF0IGRvIHlvdSB0aGluayBhYm91
+dCB0aGlzIGFwcHJvYWNoPw0KPg0KPiBPbGVrc2lpLg0KDQoNCg0KLSBQb3RlbnRpYWwgdXNhZ2UN
+Cg0KVGhlIG9ubHkgdXNlciBpbiB0aGlzIHNlcmllcyBpcyB0aGUgU0NNSSBzaGFyZWQtbWVtb3J5
+IHRyYW5zcG9ydA0KKHBhdGNoIDQpLiBUaGVyZSB0aGUgIkkvTyIgc2lkZSBpcyB0aGUgU0NNSSBz
+aG1lbSBhcmVhOiBTUkFNIG9yIG5vcm1hbA0KUkFNIG1hcHBlZCBieSBYZW4gd2l0aCBEZXZpY2Ug
+YXR0cmlidXRlcywgaS5lLiBwbGFpbiBieXRlLWFkZHJlc3NhYmxlDQpzdG9yYWdlIHdpdGhvdXQg
+YW55IHJlZ2lzdGVyIHNlbWFudGljcy4gQm90aCBjYWxsZXJzIHBhc3MgYSAzMi1iaXQNCmFsaWdu
+ZWQgSS9PIHBvaW50ZXIgKG1zZ19wYXlsb2FkIHNpdHMgYXQgb2Zmc2V0IDI4IG9mIHRoZSBwYWdl
+LWFsaWduZWQNCnNobWVtLCBwbHVzIGEgNC1ieXRlIHN0YXR1cyB3b3JkIGZvciB0aGUgcmVzcG9u
+c2UgcGF0aCksIHdoaWxlIHRoZSBSQU0NCnNpZGUgaXMgYSBjYWxsZXItcHJvdmlkZWQgc3RydWN0
+IG9mIGFyYml0cmFyeSBzaXplLCBzbyBjb3VudCBpcyBub3QNCm5lY2Vzc2FyaWx5IGEgbXVsdGlw
+bGUgb2YgNC4NCg0KLSBpby5oDQoNCkknZCByZXBsYWNlIHRoZSBjdXJyZW50IGNvbW1lbnQgd2l0
+aCBzb21ldGhpbmcgYWxvbmcgdGhlc2UgbGluZXMgKGtlcHQNCmFyY2gtbmV1dHJhbCwgc28gb3Ro
+ZXIgaW1wbGVtZW50YXRpb25zIHJlbWFpbiBwb3NzaWJsZSk6DQoNCi8qDQogwqAqIENvcHkgYSBz
+ZXF1ZW5jZSBvZiBieXRlcyBiZXR3ZWVuIHJlZ3VsYXIgbWVtb3J5IGFuZCBhIG1lbW9yeS1saWtl
+DQogwqAqIEkvTyByZWdpb24sIGUuZy4gc2hhcmVkIG1lbW9yeSBwbGFjZWQgaW4gUkFNIG9yIFNS
+QU0gbWFwcGVkIHdpdGgNCiDCoCogZGV2aWNlIGF0dHJpYnV0ZXMuDQogwqAqIFRoZSBJL08gcmVn
+aW9uIG11c3QgYmVoYXZlIGxpa2UgYnl0ZS1hZGRyZXNzYWJsZSBzdG9yYWdlOiBpdCBtdXN0DQog
+wqAqIGFjY2VwdCA4LWJpdCBhY2Nlc3NlcyBhdCBhbnkgYnl0ZSBhZGRyZXNzIGFuZCBuYXR1cmFs
+bHkgYWxpZ25lZA0KIMKgKiAzMi1iaXQgYWNjZXNzZXMsIHdpdGggcGxhaW4gYnl0ZS1zdG9yYWdl
+IHNlbWFudGljcyBpbiBib3RoIGNhc2VzDQogwqAqIChubyBzaWRlIGVmZmVjdHMsIG5vIGRlcGVu
+ZGVuY3kgb24gdGhlIGFjY2VzcyB3aWR0aCkuIEFuDQogwqAqIGltcGxlbWVudGF0aW9uIG1heSB1
+c2UgYW55IG9mIHRoZXNlIHdpZHRocywgYnV0IG5ldmVyIHdpZGVyIG9uZXMuDQogwqAqIFRoZSBo
+ZWxwZXJzIGFyZSBub3Qgc3VpdGFibGUgZm9yIGRldmljZSByZWdpc3RlcnMgd2l0aCBhY2Nlc3Mt
+d2lkdGgNCiDCoCogcmVxdWlyZW1lbnRzLg0KIMKgKg0KIMKgKiBOZWl0aGVyIHBvaW50ZXIgbmVl
+ZHMgdG8gYmUgYWxpZ25lZC4gVGhlIGFjY2VzcyB3aWR0aHMgaXNzdWVkIG9uIHRoZQ0KIMKgKiBJ
+L08gc2lkZSBkZXBlbmQgb25seSBvbiB0aGUgYWxpZ25tZW50IG9mIHRoZSBJL08gcG9pbnRlciBh
+bmQgb24NCiDCoCogY291bnQsIG5ldmVyIG9uIHRoZSBhbGlnbm1lbnQgb2YgdGhlIHJlZ3VsYXIg
+bWVtb3J5IHBvaW50ZXIuDQogwqAqDQogwqAqIEltcGxlbWVudGF0aW9ucyBhcmUgYXJjaGl0ZWN0
+dXJlLXNwZWNpZmljOyBzZWUgdGhlIHJlc3BlY3RpdmUNCiDCoCogYXJjaC8qL2xpYi9tZW1jcHkt
+e2Zyb20sdG99aW8uYyBmb3IgdGhlIGV4YWN0IGFjY2VzcyBwYXR0ZXJuLg0KIMKgKi8NCg0KVGhl
+IEFybS1zcGVjaWZpYyBub3RlIGluIG1lbWNweS17ZnJvbSx0b31pby5jIHdvdWxkIHRoZW4gc3Rh
+dGUgdGhlDQpjb25jcmV0ZSBwYXR0ZXJuOiA4LWJpdCBhY2Nlc3NlcyB1bnRpbCB0aGUgSS9PIHBv
+aW50ZXIgaXMgMzItYml0DQphbGlnbmVkIGFuZCBmb3IgdGhlIHRyYWlsaW5nIGNvdW50ICUgNCBi
+eXRlcywgMzItYml0IGFjY2Vzc2VzIGZvciB0aGUNCmFsaWduZWQgYnVsay4gSSdkIGFsc28gZHJv
+cCB0aGUgInRvbGVyYXRlIiB3b3JkaW5nIGluIGZhdm91ciBvZiB0aGUNCmFib3ZlLg0KDQotIGlt
+cGxlbWVudGF0aW9uDQoNCkFzIHByb3Bvc2VkOiBvbmx5IHRoZSBJL08gcG9pbnRlciBpcyBhbGln
+bmVkIHVwOyB0aGUgUkFNIHNpZGUgdXNlcw0KZ2V0X3VuYWxpZ25lZF9sZTMyKCkvcHV0X3VuYWxp
+Z25lZF9sZTMyKCkgZm9yIHRoZSAzMi1iaXQgcGFydC4gVGhlDQpfbGUzMiB2YXJpYW50cyBhcmUg
+dXNlZCBkZWxpYmVyYXRlbHk6IHBhaXJlZCB3aXRoIHJlYWRsKCkvd3JpdGVsKCksDQp3aGljaCBh
+cmUgZGVmaW5lZCBhcyBsaXR0bGUtZW5kaWFuIGFjY2Vzc29ycywgdGhpcyBwcmVzZXJ2ZXMgdGhl
+IGJ5dGUNCnNlcXVlbmNlIHJlZ2FyZGxlc3Mgb2YgQ1BVIGVuZGlhbm5lc3MuIFRoYXQgaXMgdGhl
+IG9ubHkgZW5kaWFubmVzcw0KYXNwZWN0IHdvcnRoIGEgbWVudGlvbiwgYW5kIEknbGwgcmV3cml0
+ZSB0aGUgY29tbWl0IG1lc3NhZ2UNCmFjY29yZGluZ2x5IChkcm9wcGluZyB0aGUgc2VudGVuY2Ug
+eW91IHBvaW50ZWQgb3V0KS4NCg0KV291bGQgdGhhdCBhZGRyZXNzIHlvdXIgY29uY2VybnM/DQoN
+Cg0KVGhhbmtzLA0KT2xla3NpaQ0K
 
