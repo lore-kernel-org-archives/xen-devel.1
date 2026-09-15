@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0518DC88E53
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 897FEC88E7B
 	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 13:18:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421720.1647472 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1421716.1647455 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6T36-0006fq-97; Tue, 15 Sep 2026 13:18:12 +0000
+	id 1x6T31-00063Y-Ff; Tue, 15 Sep 2026 13:18:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421720.1647472; Tue, 15 Sep 2026 13:18:12 +0000
+Received: by outflank-mailman (output) from mailman id 1421716.1647455; Tue, 15 Sep 2026 13:18:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6T36-0006fc-4x; Tue, 15 Sep 2026 13:18:12 +0000
-Received: by outflank-mailman (input) for mailman id 1421720;
- Tue, 15 Sep 2026 13:18:10 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x6T31-00063N-Ax; Tue, 15 Sep 2026 13:18:07 +0000
+Received: by outflank-mailman (input) for mailman id 1421716;
+ Tue, 15 Sep 2026 13:18:05 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1x6T34-0006aV-NC
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 13:18:10 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1x6T2z-0005lx-AI
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 13:18:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6T34-00EGI1-3v
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 15:18:10 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x6T2y-00DQRf-ND
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 15:18:04 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa9458a-bab6-0a2a0a5309dd-0a2a450bc220-40
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 15:18:10 +0200
-Received: from [74.125.230.205] (helo=mail-qk2-f13.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aa94586-e002-0a2a0a5209dd-0a2a4502d90c-8
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 15:18:04 +0200
+Received: from [74.125.230.204] (helo=mail-qk2-f12.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aa94590-b7e8-0a2a450b0019-4a7de6cdea8e-3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 15:18:09 +0200
-Received: by mail-qk2-f13.google.com with SMTP id
- af79cd13be357-93910ca5aa7so364803685a.1
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 06:18:09 -0700 (PDT)
+ id 6aa9458b-6ca4-0a2a45020019-4a7de6cccb07-3
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 15:18:04 +0200
+Received: by mail-qk2-f12.google.com with SMTP id
+ d75a77b69052e-52fb7692a57so36023731cf.1
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 06:18:04 -0700 (PDT)
 Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
  [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
- af79cd13be357-93a26921baesm489982785a.24.2026.09.15.06.18.07
+ d75a77b69052e-530ca4899dasm125209321cf.12.2026.09.15.06.18.01
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 15 Sep 2026 06:18:07 -0700 (PDT)
+ Tue, 15 Sep 2026 06:18:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,52 +55,51 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1789478288; x=1790083088; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1789478283; x=1790083083; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MkP56mJgKixcgLXoBxrfzz0NyJo14L+hjKFrNfKE/2k=;
-        b=KsRnxpdM0ubtvKqOAXQ7edwqj91lFxrXbW5a+peC4GCrrs1OGpZmAT02aHMhQwpj2A
-         OUl1liAYrNpjr2svthAGkLJJ0v4Or2xTtkrHntMp71Tf/y7HJM8b2wbDhKNyXVMBpsQ7
-         /2h2UilfXT5C8Q/RDcBlXCbSYkpwe8OQZ/N5zSIj4a0sgNEIICuSpb1tgCgqnI0l0fAY
-         GG0RqzhSQrFprEnrTO3bKy/oAWkZ1TxIOSQ9Q3a+YteTsLxKjeXvseQ1/sYbC6m8TviJ
-         spsRj0n/72HuRd/t4lCikc1Ih4D3efe8RCDelK6RxIeM/Jofq6uGkq1AKpoiGS+4Me4R
-         8DYg==
+        bh=9lDajmUPmaz8BTxhPEk6XaACKGtk0v9RwI05AN+Obys=;
+        b=HS3o7GwDZfuWn761isCadth/I8EGnjkKsjcmVm/g+TKD0AKN39MXDUiVedZ9j/pNgu
+         JskMwQavgNjV2RO6WM2YdUlLcWNf0KoCQ87cJRaZJ+/lycQXU+xZ5J/QxCJV8aBQSqHo
+         nlVqXREOrVdPqc8QC/9I8tMUdua1O6sxNMKkRNlxx2hzl9h2K/fcipAeuPllkLDxJOx7
+         0pv6wcqPillhRf+LR7juPlPYX4ROoA4G4F2BFOGvWPeJrA4DzetXmiZ3Wdy0XuzVMJc6
+         AlREzMNNfhHUJwt0rRZmAHUhsYtFGdAtG6IGKkLbPZjCqpntOPuOvzjTmdhWvug1lJzc
+         29eQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789478288; x=1790083088;
+        d=1e100.net; s=20260707; t=1789478283; x=1790083083;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=MkP56mJgKixcgLXoBxrfzz0NyJo14L+hjKFrNfKE/2k=;
-        b=2xJMNB9VjNxWAxn+hHVVxprkSTSIerT9e5UFG4wZbTXLBpW8Vvwba/nL1sdW8LEpAk
-         XskRfS8SM21VSR1zBfDidHCSGmvR1Y83RZRv7qySpsfVdXvl6MtEOeFUO/JTqnoxIbst
-         /beNLw8ivkXUTPbE7l4B6Dhp/LLDxkWJpV+e1/a+eaEdHhYXCTG/5gWBc/+57x8DRlYm
-         +kmM3FfHtZoIIqrayAnXTVBkOXiS7ZBCoBOs8EVKX6xh+WHrPsYAv8++qNi4eSRu1CNX
-         C1iUVY+//+lQ720S1TzFxo12I/lwy4FrfrYEfa12J6KauINvPCMJDr3uXgSh8NuMqDkh
-         Bl2w==
-X-Forwarded-Encrypted: i=1; AKwUvBz4pR3Eh2yU6DzL7W0xlkk9JouzidaNRBiVMB0ZJpMSGVw86bY9OK0mFfK1Ebwgcyu1X3Cg6tGnreo=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mKQ28ibEteFqq9bBG8TCCRNqDDWViO+JiT8zQNQuWJbhZuIQ5Q
-	QbMyKUoWGcy6qkCNp7rTRjGL7BaPeisaZbALNnNfVtKi66c2zDNLNbGtW7RX/FdF4vG93Vcdx7V
-	Dj6ZJj7yZMw==
-X-Gm-Gg: AYBFou2+vmOm3SFLh1kzwU5QoyX6TWL+KBVxUWhG4avFwGvqrmjWbMfIzmXMN9dvMVj
-	HWGD0QMUwOelwbKBwsjb9FadJoiOgGO2n7kBuDkzHuGf657p6ri3hDyYwF3jFE4hSMGKgcmKcLQ
-	fWx4+XuDrEq8ldsOwqeUMQ0DZ7sOKIOR+eHqQz6yev37k33DS/KUZJ8MOXpVjlnEwsgXBu0t/Dw
-	3hsJx/e14zFy+C6wXW2C+P+b1eUM9vl0ejr2z0nIW81S0+nny/fVerHCfCnYhcqPC7dGU4nDQOT
-	6NnXnr26NPxmhBl+bcPZFNDowmlmoD7lIfmNs8O+sRtDSQA5HDDoEdAJAaQmGBqEMLunUWggyBC
-	GJH4p9SKJmlTEVQ7byt9fR7ExsZ1SE3BBmh1PgHkTDcSjDwS9a3YkB1JCncLl/uZ3ocJb21wwxv
-	NCyNJ3qNlEjyZ0BNSL2V42RF9GZL5tcyrlc1dr5xN87IddamR13Fm68LFp68uEYPEgaqysz50nh
-	cTVJ1rhsVlUAAxMv2h+3LIg6ZlP/mPPId5LjR80a8AD4yuJBac8rKV0
-X-Received: by 2002:a05:620a:1b87:b0:92e:76a1:96cd with SMTP id af79cd13be357-93a297e8f8cmr1159268485a.13.1789478288213;
-        Tue, 15 Sep 2026 06:18:08 -0700 (PDT)
+        bh=9lDajmUPmaz8BTxhPEk6XaACKGtk0v9RwI05AN+Obys=;
+        b=QphUjjOPK5E4VAqiQh+AfvQIPf0/opsdNa7/IbXQTGRM67w+BOuBjff1Se4u1JYgQx
+         +IAdsww2DFuNJB5GhDvEDNdAH3eXeCNijP3wPfHJElEO1s0NR2plduIZAVX3ERu0atRq
+         5i7aSK/1/zadqyNNtEIG0/woxZgmm09QCycq7N4pgyPCtg8/V0srDI/mD657yqG2ZRBg
+         oQtjnO7PA0lsEPuC8ogdivHlVDdcg48KoAngHJTtvZPFykg2oGGP5mj+urgy9ZxE8Z8X
+         gUcHQLcQ8ETGV5+V84szB4W9uLAvSBIlx20L1ohAPvP7wGSx1rvDZBDcJAjwmhISSxwb
+         9lNw==
+X-Forwarded-Encrypted: i=1; AKwUvBzkxz2VkaPdZB2PRJA8eDzKownQiMi4+EXeYaE/rtgY5TF12tFzPIdLlubupSaF6F3FN7ePNSruXb8=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lEgN6sGMzRlx/jGNfp+XjkKJq8TNA9hY38q2LQqDkwXF2PribM
+	VhHseJQUu/vwlpM6MQFWihFBqJsAYQGHC/paFtTm2yJYbUrzAsnZsDN69TbF+tgeqK0=
+X-Gm-Gg: AYBFou3Anq/cIpaJZya7VfsSyGWeIU37KzI0ATgp+jkEHWBULjPOPFBremuIuwvvUOz
+	AuB3nMRMgospJJVhs0FwBabwQUubF9CXdWTSl1rKVWCUad1TyAvD+Y64h3ZRqVIJds3EgbsU4MD
+	8MdVXWwVqpanhUxqTIhW06chRZPBWcL3O4v9nRJfsw9GIexFZygSlYFpRlPEAyA0OlHKVf+uePI
+	LCiRObP1PO+gUSoG2vC+PEhr9cGwrsWcaEhY3tgI0kFyCLm0kiafKyrmsLOnpqqbuEdMomn8dHb
+	D/lJzbewE52qZ4GNTxWPRrcASe8wl82cPbpbOBkA3L1yARFYlyj2p64vCddEgZmsso6ksbJDRNF
+	g9w3ygnUueWIi1s/yozoOqpt5NYESOVcYH1CyNLUR5e4oD7OCwk5G0BEoruiDXMs6wELmEgLXAS
+	66uGxvFleufIvL82iKx20VolKzUN1JAEThQ/NT40OZ6okL+XGPCxGONb9PmwYGyNkl57YhALEQ7
+	PZXSqvm427JFkyeXQ3a9va7x6f6aU2ydA7zVuAx9nR+FMCqbWQK73mt
+X-Received: by 2002:ac8:5882:0:b0:531:4d7:bbe1 with SMTP id d75a77b69052e-5310d0620aamr106343871cf.50.1789478282597;
+        Tue, 15 Sep 2026 06:18:02 -0700 (PDT)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Tue, 15 Sep 2026 13:17:38 +0000
-Subject: [PATCH RFC v3 11/13] rcutorture: Make Tasks RCU readers Tasks
- Trace readers where required
+Date: Tue, 15 Sep 2026 13:17:35 +0000
+Subject: [PATCH RFC v3 08/13] x86/kprobes: Take a Tasks Trace reader in the
+ optprobe template
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260915-b4-rcu-tasks-preempt-qs-v3-11-0ad30c4c5ee7@toxicpanda.com>
+Message-Id: <20260915-b4-rcu-tasks-preempt-qs-v3-8-0ad30c4c5ee7@toxicpanda.com>
 References: <20260915-b4-rcu-tasks-preempt-qs-v3-0-0ad30c4c5ee7@toxicpanda.com>
 In-Reply-To: <20260915-b4-rcu-tasks-preempt-qs-v3-0-0ad30c4c5ee7@toxicpanda.com>
 To: "Paul E. McKenney" <paulmck@kernel.org>, 
@@ -145,62 +144,117 @@ Cc: Andy Lutomirski <luto@kernel.org>,
  bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1789478262; l=1716;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1789478262; l=3977;
  i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=O8YdW4YSHUYyF3GwEQN16WzJM7UkZZFfh8RzVwv7xJM=;
+ bh=cyOEpv7E+99KbsYBQF12i4qmiz/SB2W5CJ1v6BiG3CI=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
  JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QIccOQgqxisnPo/25JJmyx4Bx5hp1tfVVTZrdfU6SlgArQbvK/ARnj8AAoaQqqIY//mIhN1g1fK
- eVSGZVlcF5wA=
+ QPs7HUne0IzQlm9wRQkt109QqoRgFF/pfpz8lJ+9BcfBer6XnRW2+MjSGUTLZ6JFUaWA9Uyg01K
+ Y4lSDYJOfogI=
 X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
  fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-42698a/1789478290-1A8D99EA-A78D3724/0/0
+X-purgate-ID: tlsNG-720697/1789478284-F12A12AC-CECFB057/0/0
 X-purgate-type: clean
-X-purgate-size: 1718
+X-purgate-size: 3979
 
-rcutorture's "tasks" flavor has empty readlock/readunlock hooks because
-a classic Tasks RCU reader is simply code that does not block.  Under
-CONFIG_TASKS_RCU_TRAMPOLINE_READERS a preemption outside trampoline text
-is also a quiescent state, and the thing real readers (trampolines) do
-to stay protected across their call-outs is take rcu_read_lock_trace(),
-so have the torture readers do the same there.  Otherwise a preempted
-torture reader would rightly be treated as quiescent and the test would
-report false-positive too-short grace periods.
+The jump-optimized kprobe template calls optimized_callback() from a
+dynamically allocated slot with preemption enabled, and only Tasks RCU
+keeps that slot alive under a task preempted in the callback.  For
+HAVE_RCU_TRAMPOLINE_READERS that means the template must be a Tasks
+Trace reader across the call, so open-code rcu_read_lock_trace() and
+rcu_read_unlock_trace() around it as ftrace_64.S does.  The template
+lives in .rodata and is memcpy()d into each slot without relocation
+processing, so the references to current_task and
+rcu_tasks_trace_srcu_struct are absolute (R_X86_64_32S, relocated for
+KASLR like any other) rather than %rip-relative.  %rax and %rcx have
+already been saved by SAVE_REGS_STRING and are dead after the call.
+
+The slot itself is dynamically allocated text, so the instructions
+before the lock and after the unlock are covered by the irq-exit check.
+64-bit only; 32-bit x86 does not take part.
 
 Assisted-by: LLM
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- kernel/rcu/rcutorture.c | 10 ++++++++++
- 1 file changed, 10 insertions(+)
+ arch/x86/kernel/kprobes/opt.c | 44 +++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 44 insertions(+)
 
-diff --git a/kernel/rcu/rcutorture.c b/kernel/rcu/rcutorture.c
-index 794937e13e7c..ab870ef09af0 100644
---- a/kernel/rcu/rcutorture.c
-+++ b/kernel/rcu/rcutorture.c
-@@ -1142,13 +1142,23 @@ static struct rcu_torture_ops trivial_preempt_ops = {
-  * Definitions for RCU-tasks torture testing.
-  */
+diff --git a/arch/x86/kernel/kprobes/opt.c b/arch/x86/kernel/kprobes/opt.c
+index 3f8fea52619f..68a5de6cdabe 100644
+--- a/arch/x86/kernel/kprobes/opt.c
++++ b/arch/x86/kernel/kprobes/opt.c
+@@ -31,6 +31,7 @@
+ #include <asm/set_memory.h>
+ #include <asm/sections.h>
+ #include <asm/nospec-branch.h>
++#include <asm/asm-offsets.h>
+ 
+ #include "common.h"
+ 
+@@ -101,6 +102,47 @@ static void synthesize_set_arg1(kprobe_opcode_t *addr, unsigned long val)
+ 	*(unsigned long *)addr = val;
+ }
  
 +/*
-+ * A classic Tasks RCU reader is any stretch of kernel code that does not
-+ * voluntarily block.  With CONFIG_TASKS_RCU_TRAMPOLINE_READERS a preemption
-+ * outside trampoline text also ends it, and what a trampoline does to stay
-+ * protected across its call-out is take a Tasks Trace reader, so model that.
++ * Open-coded rcu_read_lock_trace() / rcu_read_unlock_trace() around the call
++ * to optimized_callback(), see CONFIG_HAVE_RCU_TRAMPOLINE_READERS and the
++ * equivalent macros in ftrace_64.S.  The template is memcpy()d into the slot
++ * without relocation processing, so memory references must be absolute
++ * rather than %rip-relative.  %rax and %rcx are free at both points.
 + */
- static int tasks_torture_read_lock(void)
- {
-+	if (IS_ENABLED(CONFIG_TASKS_RCU_TRAMPOLINE_READERS))
-+		rcu_read_lock_trace();
- 	return 0;
- }
- 
- static void tasks_torture_read_unlock(int idx)
- {
-+	if (IS_ENABLED(CONFIG_TASKS_RCU_TRAMPOLINE_READERS))
-+		rcu_read_unlock_trace();
- }
- 
- static void rcu_tasks_torture_deferred_free(struct rcu_torture *p)
++#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
++#ifndef CONFIG_TASKS_TRACE_RCU_NO_MB
++#define OPTPROBE_TRACE_RCU_MB	"	lock addl $0, -4(%rsp)\n"
++#else
++#define OPTPROBE_TRACE_RCU_MB
++#endif
++#define OPTPROBE_TRACE_RCU_READ_LOCK						\
++		"	movq %gs:current_task, %rcx\n"				\
++		"	movl " __stringify(TASK_trc_reader_nesting) "(%rcx), %eax\n"	\
++		"	incl " __stringify(TASK_trc_reader_nesting) "(%rcx)\n"	\
++		"	testl %eax, %eax\n"						\
++		"	jnz 1f\n"							\
++		"	movq rcu_tasks_trace_srcu_struct+" __stringify(SRCU_srcu_ctrp) ", %rax\n" \
++		"	incq %gs:" __stringify(SRCU_CTR_srcu_locks) "(%rax)\n"		\
++		"	movq %rax, " __stringify(TASK_trc_reader_scp) "(%rcx)\n"	\
++		OPTPROBE_TRACE_RCU_MB						\
++		"1:\n"
++#define OPTPROBE_TRACE_RCU_READ_UNLOCK						\
++		"	movq %gs:current_task, %rcx\n"				\
++		"	movl " __stringify(TASK_trc_reader_nesting) "(%rcx), %eax\n"	\
++		"	subl $1, %eax\n"						\
++		"	jnz 2f\n"							\
++		"	movq " __stringify(TASK_trc_reader_scp) "(%rcx), %rax\n"	\
++		"	movl $0, " __stringify(TASK_trc_reader_nesting) "(%rcx)\n"	\
++		OPTPROBE_TRACE_RCU_MB						\
++		"	incq %gs:" __stringify(SRCU_CTR_srcu_unlocks) "(%rax)\n"	\
++		"	jmp 3f\n"							\
++		"2:	movl %eax, " __stringify(TASK_trc_reader_nesting) "(%rcx)\n"	\
++		"3:\n"
++#else
++#define OPTPROBE_TRACE_RCU_READ_LOCK
++#define OPTPROBE_TRACE_RCU_READ_UNLOCK
++#endif
++
+ asm (
+ 			".pushsection .rodata\n"
+ 			".global optprobe_template_entry\n"
+@@ -114,6 +156,7 @@ asm (
+ 			"optprobe_template_clac:\n"
+ 			ASM_NOP3
+ 			SAVE_REGS_STRING
++			OPTPROBE_TRACE_RCU_READ_LOCK
+ 			"	movq %rsp, %rsi\n"
+ 			".global optprobe_template_val\n"
+ 			"optprobe_template_val:\n"
+@@ -122,6 +165,7 @@ asm (
+ 			".global optprobe_template_call\n"
+ 			"optprobe_template_call:\n"
+ 			ASM_NOP5
++			OPTPROBE_TRACE_RCU_READ_UNLOCK
+ 			/* Copy 'regs->flags' into 'regs->ss'. */
+ 			"	movq 18*8(%rsp), %rdx\n"
+ 			"	movq %rdx, 20*8(%rsp)\n"
 
 -- 
 2.55.0
