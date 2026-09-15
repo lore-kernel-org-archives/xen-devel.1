@@ -4,58 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9546EC88E75
-	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 15:11:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421893.1647516 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBA83C88E7F
+	for <xen-devel@archiver.kernel.org>; Tue, 15 Sep 2026 15:14:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1421901.1647525 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6UoN-0001Gu-HN; Tue, 15 Sep 2026 15:11:07 +0000
+	id 1x6UrU-0001nS-Ua; Tue, 15 Sep 2026 15:14:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421893.1647516; Tue, 15 Sep 2026 15:11:07 +0000
+Received: by outflank-mailman (output) from mailman id 1421901.1647525; Tue, 15 Sep 2026 15:14:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6UoN-0001Gn-Eh; Tue, 15 Sep 2026 15:11:07 +0000
-Received: by outflank-mailman (input) for mailman id 1421893;
- Tue, 15 Sep 2026 15:11:05 +0000
+	id 1x6UrU-0001nL-Rg; Tue, 15 Sep 2026 15:14:20 +0000
+Received: by outflank-mailman (input) for mailman id 1421901;
+ Tue, 15 Sep 2026 15:14:18 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1x6UoL-0001GO-7b
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 15:11:05 +0000
+ (envelope-from <frederic@kernel.org>) id 1x6UrS-0001nF-JX
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 15:14:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6UoK-00HDv8-2Y
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 17:11:04 +0200
+ id 1x6UrR-007SaN-Sq
+ for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 17:14:17 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6aa96004-bab6-0a2a0a5309dd-0a2a4507946e-10
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 17:11:03 +0200
-Received: from [40.93.194.38]
- (helo=SN4PR0501CU005.outbound.protection.outlook.com)
+ (envelope-from <frederic@kernel.org>)
+ id 6aa960be-8faa-0a2a0a5109dd-0a2a4507846c-32
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 17:14:17 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6aa96004-b4ea-0a2a45070019-285dc2262173-3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 17:11:02 +0200
-Received: from SJ0P220CA0019.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:41b::35)
- by IA1PR12MB6233.namprd12.prod.outlook.com (2603:10b6:208:3e7::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Tue, 15 Sep
- 2026 15:10:55 +0000
-Received: from BY1PEPF00026966.namprd05.prod.outlook.com
- (2603:10b6:a03:41b:cafe::98) by SJ0P220CA0019.outlook.office365.com
- (2603:10b6:a03:41b::35) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.11 via Frontend Transport; Tue,
- 15 Sep 2026 15:10:54 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BY1PEPF00026966.mail.protection.outlook.com (10.167.244.150) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.428.7 via Frontend Transport; Tue, 15 Sep 2026 15:10:54 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 15 Sep
- 2026 10:10:53 -0500
-Received: from [10.59.21.158] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Tue, 15 Sep 2026 10:10:50 -0500
+ (envelope-from <frederic@kernel.org>)
+ id 6aa960c8-b4ea-0a2a45070019-aceafc1fb58a-3
+ for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 17:14:17 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 5E6BF438B0;
+ Tue, 15 Sep 2026 15:14:15 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9C0DE1F000FF;
+ Tue, 15 Sep 2026 15:14:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,187 +50,390 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=vWIHfdx2yvo2ifZSfC8Rt1yqiB83ZqBHUkaW2xM4PAqRKMHZW2DZb/4E82CRUKpqJC9Kym77OnGQWy89r18GcREPL9Itgh+eNr57NxdJAJlBJSSE1m+zU1YFScMkGzSIGw7nFbnkEGbzEEOhwDTt7OsHGqtHILogXFQuWJouORVCc5quQsyUYxV4A3SY6IPGE8DclbKw22hlWsFNgk8bNxX8Q++KnnoVWpZGAWJNY6TW03kbP4w9AuE0bLRIZYoTHKkYqtGz3dK3NAJ3SBFrdW5coaVSrgGpb/tVTqPaGO4jFgcaQr5PGCAQshrA0KsVGqivfz1fb+LUKk67AkcMAg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qlRb2gesJ/feywV2dEBLlDH3IlnkEBKEj38S1Cmyy1M=;
- b=I6aqAXpP/SInA8w00WAZzSuOQaBr1k5UvQzrRC0DIRC1JnPb1/uF8DEv4RxABNLyf9RdiI49m3zvcH4ib1/mNqLkiZEZ+rZ4REE5vZSwd5pcs/EtLQqMkysfs7A9NwvxfogbB4ImMdPf34p10TXb+UPvx4qMbiyeuZq6FfNx0a9cUuXlb+HWrzi+LUVsq8R70R6Lx/JnFJB+gXyNU7igynufKcfZfAub4oiaONoLOorUQspZ6C3Ls4yYKMAjJMWPNsmrL8jSt8d1tH+UvRmbIpXU3lHfov8ghPIYvbfmGIgwh8l6sLwP6qlwZJA8r7je53ocSqbsvTLvMZgU9oDyCQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=vates.tech smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qlRb2gesJ/feywV2dEBLlDH3IlnkEBKEj38S1Cmyy1M=;
- b=DURdfjvimofBwOm/N+DN3CkNzqFqPF5Ztl718ePkzrQyxblXb/IUr1an/gy7udchXW+lpKGE6mq62qXZFT6Jk7X3bvnm+pPWVNZXeeZKQe9c5Dc29oZg0Py1UhFxVnNBdlzKHgSJFT9p2uA1eHwCyfTvV+yDTtUIAI/DuVyfQcI=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <e090ed6c-c9aa-4b94-8652-3350cd9473c4@amd.com>
-Date: Tue, 15 Sep 2026 17:10:50 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789485255;
+	bh=X3+2zYRSpciM7uYDkfrVnfpdjazC9P6LhL6MmIorApI=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=SGhRs7CyUcB+xKNzzgWZcvokGEOOVMOQJ3OETwnVY4jRSuKplqoTwyAHVl1KH+8b0
+	 VNFp7fTkeI9e0+ZC+dM3TCI/46xIVfnf6Hk9+kbi2++thNjHW5PBB5/REKjWuWnhOX
+	 NsSD7M8d1YeI07hn49Tk4V15z8kJeBIKxKfhHx/GhLBjJYbwN3chruH08krEcNHwOL
+	 tIzZTpw/abh24Oe+viSlZfRNOaS6B5P91oMAkTKw/YqLk36i3YOHepcXc0roWktlD6
+	 DjzlWtA6jsr6cBjFcAyGQ1ancIHd7wSK3XNR1o86hlnCFoVmiGndLQ4Fj8yQl/Cg9F
+	 e28SqUFMkedvA==
+Date: Tue, 15 Sep 2026 17:14:12 +0200
+From: Frederic Weisbecker <frederic@kernel.org>
+To: Josef Bacik <josef@toxicpanda.com>
+Cc: "Paul E. McKenney" <paulmck@kernel.org>,
+	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
+	Joel Fernandes <joelagnelf@nvidia.com>,
+	Boqun Feng <boqun@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>, Jiri Olsa <jolsa@kernel.org>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Andrii Nakryiko <andrii@kernel.org>, x86@kernel.org,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>,
+	Xu Kuohai <xukuohai@huaweicloud.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Josh Triplett <josh@joshtriplett.org>,
+	Uladzislau Rezki <urezki@gmail.com>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Lai Jiangshan <jiangshanlai@gmail.com>,
+	Zqiang <qiang.zhang@linux.dev>, Juergen Gross <jgross@suse.com>,
+	Luis Chamberlain <mcgrof@kernel.org>,
+	Ihor Solodrai <ihor.solodrai@linux.dev>,
+	linux-kernel@vger.kernel.org, rcu@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH RFC v3 03/13] rcu-tasks: Add a Tasks RCU implementation
+ for reader-marked trampolines
+Message-ID: <aqlgxKGk_AEKls_1@localhost.localdomain>
+References: <20260915-b4-rcu-tasks-preempt-qs-v3-0-0ad30c4c5ee7@toxicpanda.com>
+ <20260915-b4-rcu-tasks-preempt-qs-v3-3-0ad30c4c5ee7@toxicpanda.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 2/6] ARM/sysctl: Expose the supported guest GIC modes
- in physinfo
-To: Julian Vetter <julian.vetter@vates.tech>, <xen-devel@lists.xenproject.org>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>, Community Manager
-	<community.manager@xenproject.org>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, Jan
- Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>, Andrii Sultanov
-	<andriy.sultanov@vates.tech>, Guillaume Thouvenin
-	<guillaume.thouvenin@vates.tech>, =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
-	<marmarek@invisiblethingslab.com>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksii Moisieiev <oleksii_moisieiev@epam.com>, Timothy Pearson
-	<tpearson@raptorengineering.com>, Alistair Francis
-	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, Teddy Astie
-	<teddy.astie@vates.tech>
-References: <1789130592.8631fc262581453bbf619ec5b2062170.1a0907e5286000c4f3@vates.tech>
- <1789130862.8631fc262581453bbf619ec5b2062170.1a090827031000c4f3@vates.tech>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <1789130862.8631fc262581453bbf619ec5b2062170.1a090827031000c4f3@vates.tech>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY1PEPF00026966:EE_|IA1PR12MB6233:EE_
-X-MS-Office365-Filtering-Correlation-Id: 676102be-cb34-4d21-e809-08df133b89be
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|376014|82310400026|36860700016|23010399003|1800799024|10067099003|56012099006|5023799004|11063799006|4143699003|6133799003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	BFJ2tLQhmsOZk81RbyCFsNaTXLRfkCmEY/XSfVGmndNHzc5Ty+ylpbmFrNLZjDxAwl66LoRzwhygxAo2KMzig/BLmlvhXthnrpi8vaZFgV7xvZw5puwTNi0wtNfBMNjABNKqlKcM8u3dQ66tluy2oImOf3AjRREWumxNBvUjcYPzaDkybut6+YsifrFLEGL+sziODsGtqbQ2YMgeEw1jPbl6uf7AXRG3zYg7MpLr/RDwnQ6W6uSwZqOINTWfID3mxYzxtZQsQBBsl6IRHFX+gkwYhZ/S18q/STD76YEZb77GN78D2UonjNIkZXMNmrei6CI//Q+hz00Ftby2lLzHH3WnIDAUxjvY1zuCq6nwGfEE5XPh3zBL34FzWgyHd8KDJAFjbPJBOfGMQweJXz3xds+Zv4C9rzxKSMMSeCTuprSwB9+oBYEFLXwFjA+pJ1DSKcQdQddV+juO/NpCX9SLjz1vffv/FuK6KxbPhRZfIs0xQjqN24EYIEOquzOrGt68Zqh+zwSCNV4KY8+OXexunqnGYV0E8u0AENu/pjgDGp+i0lK0JnfCZVEDZi063LLP+ZFIuIN8cs9WzFt9laSH35bUNQ3rMIqMZkqlG9/5lskzUo1QOOiVXnDXWVUE0RjuNJXEwmKbD/RReyzkNUiwmXj2pJ0KnJjfGaRAY+uGMwqTF+ItZw9I4hHR9Svq+y/QH4wdTyf03mj6NR9sp/fysA==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(82310400026)(36860700016)(23010399003)(1800799024)(10067099003)(56012099006)(5023799004)(11063799006)(4143699003)(6133799003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	C4a1r/HhWkqC2O1AwqFl0SODcCGw0vdgT+cbiDVsn/94aOQ0b+MTxxbMboq1V8OTMVFIW46gPwmA1y1b6K4V0aWoF4pqCbf8rBsFOo3EaQKqJEPxplFWRdyweFtjpvTAo1Rjm4wz23TGTnaUDQ/Iol5cn467oUicVXTvliHAij3aEvw8BcfhD6Ly8lcgCLyqWpz/s/eSoMtLlT6cMq6OweVZChUUgcbhX4o0Fwq7Y0uWOFZVBsKsPttUOHGDMV6pyO8hmIzcUhZehf1fFrmM3ekdThaOInruFs1BWMpN1A9WYuCIOwM+d0Qa0g5fBD5+CAacXhG/6559O3O4QPJi0x+ub9yHC0BYyzf3vUOUCz5sRm6XEJiboLuWRgXMhuxQJjrHKsJ1TeSzV1CjBLkY7o5K0xlAgWlwhFz5F43Ky/BpqIecDXo5U5tZ3hsuRX4e
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 15:10:54.3862
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 676102be-cb34-4d21-e809-08df133b89be
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BY1PEPF00026966.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6233
-X-purgate-ID: tlsNG-ef75cf/1789485063-A74D3AE4-CC83A485/0/0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <20260915-b4-rcu-tasks-preempt-qs-v3-3-0ad30c4c5ee7@toxicpanda.com>
+X-purgate-ID: tlsNG-ef75cf/1789485257-A62C4AE4-B676FA74/0/0
 X-purgate-type: clean
-X-purgate-size: 3725
+X-purgate-size: 15862
 
-
-
-On 11-Sep-26 14:47, Julian Vetter wrote:
-> From: Andrew Cooper <andrew.cooper3@citrix.com>
+Le Tue, Sep 15, 2026 at 01:17:30PM +0000, Josef Bacik a écrit :
+> Tasks RCU waits for every task to pass through a voluntary context
+> switch, usermode or idle, because a preempted task might be sitting in a
+> trampoline that is about to be freed and nothing marks it as such.  With
+> PREEMPT_LAZY that is a poor fit for servers: cond_resched() is a no-op,
+> so a CPU-bound kthread only ever leaves the CPU by preemption, and one
+> such kthread holds every synchronize_rcu_tasks() caller -- ftrace and
+> BPF trampoline teardown under their mutexes, the kprobe jump optimizer
+> under text_mutex and cpus_read_lock() -- hostage for as long as it runs.
 > 
-> In preparation to simplify the domain creation logic surrounding GIC
-> version.
+> Following the discussion on v2, take the other road: let the
+> architecture make its trampolines Tasks Trace RCU readers.  When an
+> architecture selects HAVE_RCU_TRAMPOLINE_READERS it promises that every
+> trampoline whose lifetime Tasks RCU guards enters rcu_read_lock_trace()
+> (or its assembly equivalent) before calling out and leaves it before
+> returning, so a task anywhere inside such a call-out, preempted or not,
+> is an ordinary Tasks Trace reader.
 > 
-> On a GICv3 host, also report support for GICv2-compatible guests when
-> the hardware's vGICv2 compatibility mode is enabled, rather than just
-> the native GIC version.
+> That leaves the few instructions of trampoline text before the reader
+> is entered and after it is left (plus, in a later patch, the bytes a
+> kprobe jump optimization is about to overwrite).  A task can only linger
+> there by being interrupted there, and such text never calls anything
+> that schedules, so instead of tracking tasks we track CPUs: every pass
+> through __schedule() is a per-CPU quiescent event, except that the one
+> context switch that can catch a task at an arbitrary instruction -- a
+> preemption from irq exit -- first records the interrupted IP in the task
+> and parks it on a per-CPU list for the duration (reusing the fields and
+> lists the classic flavor keeps for its exit-path bookkeeping), and, if
+> the IP is inside such "unmarked" text, puts the task on a short holdout
+> list; the task takes itself off at its next context switch outside such
+> a preemption or irq-exit check that finds it elsewhere.  Usermode (the
+> existing tick hook, or a nohz_full CPU in an RCU extended quiescent
+> state) and idle count as well.  rcu_tasks_trampoline_text() does the
+> classification: anything outside core and module text, a new
+> .text..rcu_tramp section for C glue that trampolines call before it has
+> entered the reader (__rcu_trampoline), and an arch hook for things like
+> static ftrace stubs and return thunks.
 > 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+> The grace period, run by the existing rcu_tasks kthread so that
+> call_rcu_tasks(), synchronize_rcu_tasks() and rcu_barrier_tasks() keep
+> their names and callers, is: wait for every online non-idle CPU to
+> context switch (nudging stragglers with resched_cpu() after a jiffy),
+> drain the holdout list as it stood, synchronize_rcu_tasks_trace() for
+> everything inside the readers, then one more CPU pass and drain for
+> tasks that have since left the reader into the trailing instructions.
+> That is bounded by a few jiffies, preempt-off latency and an SRCU grace
+> period rather than by the longest stretch any task runs without
+> sleeping, needs no per-task scan, and makes cond_resched_tasks_rcu_qs()
+> unnecessary on such architectures.  As before, idle tasks are not
+> waited for.  rcu_tasks_wait_irq_preempted() walks the parked lists for
+> the one caller (the kprobe jump optimizer, later in the series) that
+> makes ordinary text unsafe to be parked in and so has to wait out tasks
+> that were preempted there before it said so.
+> 
+> The classic implementation is untouched and remains the default; the
+> new one is built only as CONFIG_TASKS_RCU_TRAMPOLINE_READERS when the
+> architecture opts in and uses the generic irq entry code, whose
+> reschedule check gains the rcu_tasks_irq_resched() call.  Nothing
+> selects it yet.
+> 
+> Suggested-by: Paul E. McKenney <paulmck@kernel.org>
+> Suggested-by: Alexei Starovoitov <ast@kernel.org>
+> Assisted-by: LLM
+> Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 > ---
-> Changes in v5:
-> - Add vgic_v2_hw_enabled() to new vgic implementation.
-> ---
->  xen/arch/arm/include/asm/vgic.h |  6 ++++++
->  xen/arch/arm/sysctl.c           | 34 +++++++++++++++++++++++++++++++++
->  xen/arch/arm/vgic-v2.c          |  5 +++++
->  xen/arch/arm/vgic/vgic-v2.c     |  5 +++++
->  xen/include/public/sysctl.h     |  2 ++
->  5 files changed, 52 insertions(+)
+>  include/asm-generic/vmlinux.lds.h |  11 +
+>  include/linux/rcupdate.h          |  32 ++-
+>  include/linux/sched.h             |   1 +
+>  kernel/entry/common.c             |   8 +-
+>  kernel/fork.c                     |   1 +
+>  kernel/rcu/Kconfig                |  22 ++
+>  kernel/rcu/tasks.h                | 460 +++++++++++++++++++++++++++++++++++++-
+>  kernel/rcu/update.c               |   2 +
+>  8 files changed, 528 insertions(+), 9 deletions(-)
 > 
-> diff --git a/xen/arch/arm/include/asm/vgic.h b/xen/arch/arm/include/asm/vgic.h
-> index 6f9ab1c98c..26c53aaf3c 100644
-> --- a/xen/arch/arm/include/asm/vgic.h
-> +++ b/xen/arch/arm/include/asm/vgic.h
-> @@ -433,6 +433,12 @@ unsigned int vgic_max_vcpus(unsigned int domctl_vgic_version);
->  void vgic_v2_setup_hw(paddr_t dbase, paddr_t cbase, paddr_t csize,
->                        paddr_t vbase, uint32_t aliased_offset);
+> diff --git a/include/asm-generic/vmlinux.lds.h b/include/asm-generic/vmlinux.lds.h
+> index b2988aa12f66..86e58c4fe370 100644
+> --- a/include/asm-generic/vmlinux.lds.h
+> +++ b/include/asm-generic/vmlinux.lds.h
+> @@ -571,6 +571,16 @@
+>  		__cpuidle_text_end = .;					\
+>  		__noinstr_text_end = .;
 >  
-> +#ifdef CONFIG_VGICV2
-> +bool vgic_v2_hw_enabled(void);
+> +/*
+> + * C glue called directly from Tasks-RCU-protected trampolines, bounded so
+> + * that rcu_tasks_trampoline_text() can recognise it; see __rcu_trampoline.
+> + */
+> +#define RCU_TRAMP_TEXT							\
+> +		ALIGN_FUNCTION();					\
+> +		__rcu_tramp_text_start = .;				\
+> +		*(.text..rcu_tramp)					\
+> +		__rcu_tramp_text_end = .;
+> +
+>  #define TEXT_SPLIT							\
+>  		__split_text_start = .;					\
+>  		*(.text.split .text.split.[0-9a-zA-Z_]*)		\
+> @@ -607,6 +617,7 @@
+>  		TEXT_HOT						\
+>  		*(TEXT_MAIN .text.fixup)				\
+>  		NOINSTR_TEXT						\
+> +		RCU_TRAMP_TEXT						\
+>  		*(.ref.text)
+>  
+>  /* sched.text is aling to function alignment to secure we have same
+> diff --git a/include/linux/rcupdate.h b/include/linux/rcupdate.h
+> index 44c07a66edff..fb2a3889a696 100644
+> --- a/include/linux/rcupdate.h
+> +++ b/include/linux/rcupdate.h
+> @@ -50,6 +50,31 @@ token_context_lock_instance(RCU, RCU_BH);
+>  /* Exported common interfaces */
+>  void call_rcu(struct rcu_head *head, rcu_callback_t func);
+>  void rcu_barrier_tasks(void);
+> +
+> +/*
+> + * Trampoline-reader Tasks RCU (CONFIG_TASKS_RCU_TRAMPOLINE_READERS), see
+> + * kernel/rcu/tasks.h.  rcu_tasks_irq_resched_enter()/_exit() bracket the
+> + * irq-exit preemption; rcu_tasks_trampoline_text() and the arch_ override
+> + * classify an interrupted IP; rcu_tasks_wait_irq_preempted() lets a caller
+> + * wait out tasks already preempted somewhere it is about to make unsafe.
+> + * __rcu_trampoline places C code that such trampolines call directly, before
+> + * it has entered its Tasks Trace reader, where that classification can see it.
+> + */
+> +void rcu_tasks_irq_resched_enter(unsigned long ip);
+> +void rcu_tasks_irq_resched_exit(void);
+> +bool rcu_tasks_trampoline_text(unsigned long ip);
+> +bool arch_rcu_tasks_trampoline_text(unsigned long ip);
+> +#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
+> +void rcu_tasks_wait_irq_preempted(bool (*inside)(unsigned long ip));
 > +#else
-> +static inline bool vgic_v2_hw_enabled(void) { return false; }
+> +static inline void rcu_tasks_wait_irq_preempted(bool (*inside)(unsigned long ip)) { }
 > +#endif
-> +
->  #ifdef CONFIG_GICV3
->  struct rdist_region;
->  void vgic_v3_setup_hw(paddr_t dbase,
-> diff --git a/xen/arch/arm/sysctl.c b/xen/arch/arm/sysctl.c
-> index 32cab4feff..8411deb7e2 100644
-> --- a/xen/arch/arm/sysctl.c
-> +++ b/xen/arch/arm/sysctl.c
-> @@ -12,7 +12,11 @@
->  #include <xen/dt-overlay.h>
->  #include <xen/errno.h>
->  #include <xen/hypercall.h>
-> +
->  #include <asm/arm64/sve.h>
-> +#include <asm/gic.h>
-> +#include <asm/vgic.h>
-> +
->  #include <public/sysctl.h>
+> +#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
+> +/* Also keeps instrumentation calls out of the prologue, ahead of the reader. */
+> +#define __rcu_trampoline	__noinstr_section(".text..rcu_tramp")
+> +#else
+> +#define __rcu_trampoline
+> +#endif
+>  void synchronize_rcu(void);
 >  
->  void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
-> @@ -21,6 +25,36 @@ void arch_do_physinfo(struct xen_sysctl_physinfo *pi)
+>  /*
+> @@ -180,11 +205,16 @@ static inline void rcu_nocb_flush_deferred_wakeup(void) { }
+>  #ifdef CONFIG_TASKS_RCU_GENERIC
 >  
->      pi->arch_capabilities |= MASK_INSR(sve_encode_vl(get_sys_vl_len()),
->                                         XEN_SYSCTL_PHYSCAP_ARM_SVE_MASK);
+>  # ifdef CONFIG_TASKS_RCU
+> -# define rcu_tasks_classic_qs(t, preempt)				\
+> +#  ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
+> +void rcu_tasks_note_qs(struct task_struct *t, bool preempt);
+> +#  define rcu_tasks_classic_qs(t, preempt) rcu_tasks_note_qs((t), (preempt))
+> +#  else
+> +#  define rcu_tasks_classic_qs(t, preempt)				\
+>  	do {								\
+>  		if (!(preempt) && READ_ONCE((t)->rcu_tasks_holdout))	\
+>  			WRITE_ONCE((t)->rcu_tasks_holdout, false);	\
+>  	} while (0)
+> +#  endif
+>  void call_rcu_tasks(struct rcu_head *head, rcu_callback_t func);
+>  void synchronize_rcu_tasks(void);
+>  void rcu_tasks_torture_stats_print(char *tt, char *tf);
+> diff --git a/include/linux/sched.h b/include/linux/sched.h
+> index 8b3d47a325cc..15beb44caa2c 100644
+> --- a/include/linux/sched.h
+> +++ b/include/linux/sched.h
+> @@ -957,6 +957,7 @@ struct task_struct {
+>  	u8				rcu_tasks_holdout;
+>  	u8				rcu_tasks_idx;
+>  	int				rcu_tasks_idle_cpu;
+> +	unsigned long			rcu_tasks_irq_ip;
+>  	struct list_head		rcu_tasks_holdout_list;
+>  	int				rcu_tasks_exit_cpu;
+>  	struct list_head		rcu_tasks_exit_list;
+> diff --git a/kernel/entry/common.c b/kernel/entry/common.c
+> index e4acd50bd81a..94318519998c 100644
+> --- a/kernel/entry/common.c
+> +++ b/kernel/entry/common.c
+> @@ -6,6 +6,7 @@
+>  #include <linux/jump_label.h>
+>  #include <linux/kmsan.h>
+>  #include <linux/livepatch.h>
+> +#include <linux/rcupdate.h>
+>  #include <linux/resume_user_mode.h>
+>  #include <linux/tick.h>
+>  
+> @@ -141,8 +142,13 @@ void raw_irqentry_exit_cond_resched(struct pt_regs *regs)
+>  		rcu_irq_exit_check_preempt();
+>  		if (IS_ENABLED(CONFIG_DEBUG_ENTRY))
+>  			WARN_ON_ONCE(!on_thread_stack());
+> -		if (need_resched() && arch_irqentry_exit_need_resched())
+> +		if (need_resched() && arch_irqentry_exit_need_resched()) {
+> +			if (IS_ENABLED(CONFIG_TASKS_RCU_TRAMPOLINE_READERS))
+> +				rcu_tasks_irq_resched_enter(instruction_pointer(regs));
+>  			preempt_schedule_irq();
+> +			if (IS_ENABLED(CONFIG_TASKS_RCU_TRAMPOLINE_READERS))
+> +				rcu_tasks_irq_resched_exit();
+> +		}
+>  	}
+>  }
+>  #ifdef CONFIG_PREEMPT_DYNAMIC
+> diff --git a/kernel/fork.c b/kernel/fork.c
+> index 416758c8a3d4..8077336bb136 100644
+> --- a/kernel/fork.c
+> +++ b/kernel/fork.c
+> @@ -1871,6 +1871,7 @@ static inline void rcu_copy_process(struct task_struct *p)
+>  	p->rcu_tasks_holdout = false;
+>  	INIT_LIST_HEAD(&p->rcu_tasks_holdout_list);
+>  	p->rcu_tasks_idle_cpu = -1;
+> +	p->rcu_tasks_irq_ip = 0;
+>  	INIT_LIST_HEAD(&p->rcu_tasks_exit_list);
+>  #endif /* #ifdef CONFIG_TASKS_RCU */
+>  #ifdef CONFIG_TASKS_TRACE_RCU
+> diff --git a/kernel/rcu/Kconfig b/kernel/rcu/Kconfig
+> index 332df7a7a634..bbab14bc14c3 100644
+> --- a/kernel/rcu/Kconfig
+> +++ b/kernel/rcu/Kconfig
+> @@ -107,6 +107,28 @@ config TASKS_RCU
+>  	default NEED_TASKS_RCU && PREEMPTION
+>  	select IRQ_WORK
+>  
+> +config HAVE_RCU_TRAMPOLINE_READERS
+> +	bool
+> +	help
+> +	  Select this if the architecture uses the generic irq entry code and
+> +	  every trampoline whose lifetime Tasks RCU guards on it (ftrace
+> +	  trampolines, kprobe out-of-line and optimized-probe slots, BPF
+> +	  trampolines, out-of-line ftrace direct-call trampolines) enters a
+> +	  Tasks Trace RCU read-side critical section before calling out of
+> +	  the trampoline and leaves it before returning, and any core text
+> +	  that runs on behalf of such a trampoline outside that reader is
+> +	  reported by arch_rcu_tasks_trampoline_text().  The assembly readers
+> +	  use the this_cpu_inc() form of SRCU-fast, hence !NEED_SRCU_NMI_SAFE.
 > +
-> +    /*
-> +     * The GIC version(s) we're happy creating guests with. Right now for
-> +     * simplicity it is tied to the active hardware version, but this will
-> +     * cease to be the case if/when the compatibility modes are enabled.
-You carry on this comment but as we are now also informing about the legacy
-GICv2 mode (which was not there in v1) I no longer understand what it denotes
-and why we need it. I think we can drop this.
-
-> +     */
-> +    switch ( gic_hw_version() )
-> +    {
-> +    case GIC_V2:
-> +        pi->arch_capabilities |= XEN_SYSCTL_PHYSCAP_ARM_GIC_V2;
-> +        break;
+> +config TASKS_RCU_TRAMPOLINE_READERS
+> +	def_bool TASKS_RCU && HAVE_RCU_TRAMPOLINE_READERS && GENERIC_IRQ_ENTRY && !NEED_SRCU_NMI_SAFE
+> +	select TASKS_TRACE_RCU
+> +	help
+> +	  Implement the Tasks RCU grace period as a per-CPU pass over
+> +	  context switches and irq-exit reschedules outside trampoline text
+> +	  plus a Tasks Trace RCU grace period, instead of waiting for every
+> +	  task to voluntarily context switch.  See kernel/rcu/tasks.h.
 > +
-> +    case GIC_V3:
-> +        pi->arch_capabilities |= XEN_SYSCTL_PHYSCAP_ARM_GIC_V3;
+>  config FORCE_TASKS_RUDE_RCU
+>  	bool "Force selection of Tasks Rude RCU"
+>  	depends on RCU_EXPERT
+> diff --git a/kernel/rcu/tasks.h b/kernel/rcu/tasks.h
+> index 627295396cd9..3a7c092361a6 100644
+> --- a/kernel/rcu/tasks.h
+> +++ b/kernel/rcu/tasks.h
+> @@ -152,7 +152,7 @@ static struct rcu_tasks rt_name =							\
+>  	.kname = #rt_name,								\
+>  }
+>  
+> -#ifdef CONFIG_TASKS_RCU
+> +#if defined(CONFIG_TASKS_RCU) && !defined(CONFIG_TASKS_RCU_TRAMPOLINE_READERS)
+>  
+>  /* Report delay of scan exiting tasklist in rcu_tasks_postscan(). */
+>  static void tasks_rcu_exit_stall(struct timer_list *unused);
+> @@ -802,7 +802,7 @@ static void rcu_tasks_torture_stats_print_generic(struct rcu_tasks *rtp, char *t
+>  
+>  #endif // #ifndef CONFIG_TINY_RCU
+>  
+> -#if defined(CONFIG_TASKS_RCU)
+> +#if defined(CONFIG_TASKS_RCU) && !defined(CONFIG_TASKS_RCU_TRAMPOLINE_READERS)
+>  
+>  ////////////////////////////////////////////////////////////////////////
+>  //
+> @@ -897,10 +897,445 @@ static void rcu_tasks_wait_gp(struct rcu_tasks *rtp)
+>  	rtp->postgp_func(rtp);
+>  }
+>  
+> -#endif /* #if defined(CONFIG_TASKS_RCU) */
+> +#endif /* #if defined(CONFIG_TASKS_RCU) && !defined(CONFIG_TASKS_RCU_TRAMPOLINE_READERS) */
+>  
+>  #ifdef CONFIG_TASKS_RCU
+>  
+> +static int rcu_tasks_lazy_ms = -1;
+> +module_param(rcu_tasks_lazy_ms, int, 0444);
 > +
-> +        /* GICv3 may additionally support GICv2-compatible guests. */
-> +        if ( vgic_v2_hw_enabled() )
-> +            pi->arch_capabilities |= XEN_SYSCTL_PHYSCAP_ARM_GIC_V2;
-> +        break;
+> +#ifdef CONFIG_TASKS_RCU_TRAMPOLINE_READERS
 > +
-> +    case GIC_INVALID:
-Change to default please to make MISRA C R16.4 happy.
+> +////////////////////////////////////////////////////////////////////////
+> +//
+> +// Tasks RCU for architectures whose trampolines are Tasks Trace RCU
+> +// readers (CONFIG_HAVE_RCU_TRAMPOLINE_READERS).
+> +//
+> +// On these architectures every piece of text whose lifetime Tasks RCU
+> +// guards -- ftrace trampolines, kprobe optinsn slots, BPF trampoline
+> +// images, out-of-line ftrace direct-call trampolines -- enters a Tasks
+> +// Trace RCU read-side critical section before calling out of itself and
+> +// leaves it before returning, so a task anywhere inside such a call-out,
+> +// preempted or not, is an ordinary rcu_read_lock_trace() reader and
+> +// synchronize_rcu_tasks_trace() waits for it.
+> +//
+> +// What that cannot cover is the handful of instructions in the trampoline
+> +// before the reader is entered and after it is left, and the one user that
+> +// has no trampoline at all: the bytes after a kprobe that the jump
+> +// optimizer is about to overwrite.  A task can only linger in such
+> +// "unmarked" text by being interrupted there; unmarked text never calls
+> +// anything that could schedule.  So a context switch on a CPU tells us that
+> +// whatever that CPU was running is out of unmarked text, with one
+> +// exception: a preemption from the irq-exit path, which can happen at any
+> +// instruction boundary.  That path has the interrupted pt_regs in hand, so
+> +// just before it preempts it records the IP in the task and checks it
+> +// (rcu_tasks_trampoline_text()); if it is inside unmarked text the task
+> +// goes on a short holdout list first, and takes itself off again at its
+> +// next context switch outside such a preemption or its next irq-exit
+> +// check that finds it elsewhere.  With that, every pass through
+> +// __schedule() is a per-CPU quiescent event, as are usermode and idle.
+> +//
+> +// A grace period is then:
+> +//
+> +//  1. Wait for every online, non-idle CPU to context switch, nudging
+> +//     stragglers with resched_cpu().  Afterwards no task is in the leading
+> +//     unmarked instructions of a dying trampoline unless it is on the
+> +//     holdout list.
+> +//  2. Wait for the holdout list (as it stood) to drain.
+> +//  3. synchronize_rcu_tasks_trace(), for everything inside the readers.
+> +//  4. Repeat 1 and 2 for tasks that have since left the reader and are in
+> +//     the trailing unmarked instructions.
 
-> +        /*
-> +         * Running a control domain without having the GIC sorted yet?
-> +         * Something's broken, but there's nothing we can do about it here.
-> +         */
-> +        ASSERT_UNREACHABLE();
-> +        printk_once(XENLOG_ERR "Unrecognised GIC version %d\n",
-> +                    gic_hw_version());
-Please swap the printk with ASSERT.
+Alternatively the approach could be generalized to vanilla RCU, it could be
+possible to define a .text.rcu_no_qs section within which code running is
+considered as an RCU reader (with a pause while on the explicit RCU tasks
+section). It would be forbidden to voluntary sleep inside
+and to put explicit preemption points (CONFIG_PROVE_RCU could report misuses).
 
-With these remarks addressed:
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+Based on IP, RCU could consider those interrupted section as readers. This would
+require PREEMPT_RCU though.
 
-~Michal
+And then synchronize_rcu() would do the 1, 2, 4 jobs.
 
+-- 
+Frederic Weisbecker
+SUSE Labs
 
