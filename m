@@ -4,43 +4,48 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F21F0C88E7F
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 17:31:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1423414.1648549 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12876C982C9
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 17:51:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1423430.1648556 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6tTQ-0001ML-0O; Wed, 16 Sep 2026 17:31:08 +0000
+	id 1x6tms-0004Fz-Dk; Wed, 16 Sep 2026 17:51:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1423414.1648549; Wed, 16 Sep 2026 17:31:07 +0000
+Received: by outflank-mailman (output) from mailman id 1423430.1648556; Wed, 16 Sep 2026 17:51:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6tTP-0001ME-Sf; Wed, 16 Sep 2026 17:31:07 +0000
-Received: by outflank-mailman (input) for mailman id 1423414;
- Wed, 16 Sep 2026 17:31:06 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x6tms-0004Fs-BD; Wed, 16 Sep 2026 17:51:14 +0000
+Received: by outflank-mailman (input) for mailman id 1423430;
+ Wed, 16 Sep 2026 17:51:12 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <accek@invisiblethingslab.com>) id 1x6tTO-0001M8-C5
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 17:31:06 +0000
+ (envelope-from <bp@alien8.de>) id 1x6tmp-0004Fm-Sp
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 17:51:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6tTM-005Y5P-0t
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 19:31:04 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x6tmo-008mBh-Qd
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 19:51:10 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <accek@invisiblethingslab.com>)
- id 6aaad257-bab6-0a2a0a5309dd-0a2a450488aa-2
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:31:03 +0200
-Received: from [103.168.172.154] (helo=fhigh-a3-smtp.messagingengine.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <accek@invisiblethingslab.com>)
- id 6aaad241-b57f-0a2a45040019-67a8ac9ad147-3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:30:42 +0200
-Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
- by mailfhigh.phl.internal (Postfix) with ESMTP id 2ADD614000F4;
- Wed, 16 Sep 2026 13:30:41 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-06.internal (MEProxy); Wed, 16 Sep 2026 13:30:41 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
- 16 Sep 2026 13:30:37 -0400 (EDT)
+ (envelope-from <bp@alien8.de>)
+ id 6aaad70e-8faa-0a2a0a5109dd-0a2a4507a180-0
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:51:10 +0200
+Received: from [65.109.113.108] (helo=mail.alien8.de)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <bp@alien8.de>)
+ id 6aaad70e-b4ea-0a2a45070019-416d716cc8a8-3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:51:10 +0200
+Received: from localhost (localhost.localdomain [127.0.0.1])
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTP id 99E4540E00E8; 
+ Wed, 16 Sep 2026 17:51:09 +0000 (UTC)
+Received: from mail.alien8.de ([127.0.0.1])
+ by localhost (mail.alien8.de [127.0.0.1]) (amavisd-new, port 10026)
+ with ESMTP id 9zV9muLWubjt; Wed, 16 Sep 2026 17:51:04 +0000 (UTC)
+Received: from stx.tnic (unknown [IPv6:2600:1700:38ca:c00::a])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature ECDSA (P-256) server-digest
+ SHA256) (No client certificate requested)
+ by mail.alien8.de (SuperMail on ZX Spectrum 128k) with ESMTPSA id 6DA8240E00B9;
+ Wed, 16 Sep 2026 17:49:32 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,138 +57,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:Message-ID:MIME-Version:Subject:To"; dkim=pass header.s=fm1 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:Message-ID:MIME-Version:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm1;
-	 t=1789579841; x=1789666241; bh=sEzC4k5CJmAV6EJO1XhWjipY2iPMC41J
-	5KqRauPMcFs=; b=W8z3cBvmX93Pzsm5bNCRiY139GXpeJe1v3Xkn22MstaPsHgy
-	qP3GyTYl3P4a67pLjO1PGEb1dFV1DfPLDykR4z/854lyE6SMAtsArI+Gg3QGFr1n
-	22KxTFVF9xgnaXFSKcdskfp+stDb1Pu+bcwUl6yYWwE7HdqikOZmXN7S2PksSAiz
-	sgsf43bs4CbOHMqYYAtbePUcusunHBJd3lidU1ECQdq27jC6XHpJWeRCKR2HI0SI
-	54cDKJ3qD8gY/Pp6ysmC2UYSxTKrj+SIgbfvcG/60mX9CYFf9Ad0K/j/m2WjSNhF
-	kvv8ksUz7PGSeUJLLSMNF+khLrS/fwOUBVeUOA==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
-	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm1; t=1789579841; x=1789666241; bh=sEzC4k5CJmAV6EJO1XhWjipY2iPM
-	C41J5KqRauPMcFs=; b=TFZUoj1sd5wzq6V92J/uxsf3SSM2ifhX4DsjAgUNlWhU
-	6eAsn61pwSeiVLgGV7jvmCKRWbXQ6CLYgzqEyQyv759H6AiJGx9yCW0EZQGvSqZA
-	tdLRY4dnewtM5NFNa99MZxpUr+OwHRfifJ+FXNEbp/VePCF8odEsQ7SJjMpAePN6
-	yl8MXZQOR9wortnzRLC5Cv8WCPbUmDe+qwK+357xalVj0aNXRwvbTbZPLtQprqPe
-	8fnjP8Nhh2NWHHZ+WzFzG5iiuhGyDesYUDsQAReRN+nca32x16AxG+UqKvyJLZwb
-	e07DMW/szM+5nAcoTmduXKQo+NQgCo0s6D5w4prHYA==
-X-ME-Sender: <xms:QNKqar4EE9LI-Ci45nMVNqyof-kwidRJpl306loLxgGmy3IwfVmqSA>
-    <xme:QNKqatkELrkNM8W2gVc3-2rio61NawOH3E1ezo3jDG4WzJ49qn8VIWzz2PCaNrSer
-    cPQwbP557BE_fZbGQ3OAJ3MR-A2hCQ4qFF21tn4dWpHAU8Cgt0>
-X-ME-Received: <xmr:QNKqamXp7FAlrkBIVB8SzSqRW9nEiS28hNCrLWexN4SBh6xYgoJGqbppGv9TzE1xFJc0rmwbSvQi>
-X-ME-Proxy-Cause: dmFkZTFRR2SdzYysCnDldAnwcUjqwv+J1OcwrzewRKc+tpczioQYwLmLsiqEXhmQdC2nje
-    56bGrrx9GV0swaDUdEK3vzaaVqY+M/XwqVdnxH+XYP25yLI5dgcMCMyHp1UAKHpzlMM6Pa
-    NfKIQqGtUlBxkueH0hJjWk2FklFgBKXLz2xRvyNL8MinjeW04yJe6UQoDcfj7Fm7GkQqjv
-    hWMDmiLq+BTLEM4gbkW/awJ3xlxmRvUzWx2Z1pfR7j7X/jzaQ8xRnBoS7gvzb3G9bG0ct3
-    i24Lbjgm0XtyjqxFcsT4bz5ya9cZ4U8Y9gRKqIKKaOSFKm85ALGxH1ylfLgRm2aN/+3adN
-    cUBVfKKQWHA2itOHpXXPGf2EhOirzoD+YJUN8W2J8btmtWKsDaOFNp10yxo1cjCNfqFLCA
-    eetNRPqBIDmnhflwbewQqA80/IE9YIqIzcnlCVJFyqgi/DPFkMyhrMlFDOWWfHiQjIeh9G
-    89n9QqLFXfGqXXqk99gbjnMCdgUUBVwfGw6Qv0Oj/Sv5b8KJP0y9gIov6j06UeHeBXiu58
-    ngIpfuaFxt/OlglSkpwlIdfm8koIBhdly2sJuzoiRSESBrEf2tn7hwG3rFYegHCYuFa04F
-    L7fp6z+VojadVcqdg1VI+iW4SHrDfKfNnDMGMAOf0fHuPfqzSNP33fuzmKRg
-X-ME-Proxy: <xmx:QNKqamQRcqvlLVMy3OsQDxJ-Pj62_oGYUfuHRu2Y5BOtNr-7ukxvxg>
-    <xmx:QNKqajCN2AJCPPGKq58J4g9L4vvSXTYb25eOUnyQ7d--iuJtUJD3Mg>
-    <xmx:QNKqauuEzb0d10ZGzyknk3K36HIWDjgTpWiMYIC8Ck0U3NuKpU4EOw>
-    <xmx:QNKqah9C--fGdirKD9LXW3LiBUUq7NtHJYplpvh9CAou0G6ozyA7Qw>
-    <xmx:QdKqaoNidy3xp9Bfq4NoR1cy-a8FbyWcN-DtMO5vSOMoLGcheiud6Y02>
-Feedback-ID: i792e4853:Fastmail
-From: =?UTF-8?q?Szymon=20Aceda=C5=84ski?= <accek@invisiblethingslab.com>
-To: intel-xe@lists.freedesktop.org
-Cc: thomas.hellstrom@linux.intel.com,
-	matthew.brost@intel.com,
-	rodrigo.vivi@intel.com,
-	maarten.lankhorst@linux.intel.com,
-	hch@lst.de,
-	bob.beckett@collabora.com,
-	dri-devel@lists.freedesktop.org,
-	marmarek@invisiblethingslab.com,
-	xen-devel@lists.xenproject.org,
-	=?UTF-8?q?Szymon=20Aceda=C5=84ski?= <accek@invisiblethingslab.com>,
-	stable@vger.kernel.org
-Subject: [PATCH v2] drm/xe: Limit sg segment size to PAGE_SIZE on Xen PV
-Date: Wed, 16 Sep 2026 19:30:30 +0200
-Message-ID: <20260916173030.3223833-1-accek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.53.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=alien8 header.d=alien8.de header.i="@alien8.de" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
+X-Virus-Scanned: Debian amavisd-new at mail.alien8.de
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=alien8.de; s=alien8;
+	t=1789581064; bh=or2++1LeeipZYCb3G9WRgyA4slOHEhMs91sMxm37PrE=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=E7FjhsZ1898C+iRkHA2e9itQoyiqH/Ch3CRAiwQscnU0CXAU1B3A58i/8qF7CWRQh
+	 G9fmEyLGGIFdYQql64Uc91Gneuv+SDG6aDTZnURc3lGHscWFc5r5ZPh1vPnn+mqjo9
+	 KFHhO1O53B1kflUQZ5pwBl1X+TZ/YeOf6S4ukWau6F9Oy2bvc2AkWVFtpJFZA/d20Q
+	 giWI8kOs24tcni/YN9qyJ2ifRbE9E3/xTzGmQUWsiuXTEhyoEZljOUczoL/sJ+VORm
+	 Jkvi5hPfZD2JyHdgx2JTUeJM+9EfC5lNAKlo3wpXrtxjuZdy0HbqzBa/nrDlGGXUEB
+	 T6ChTVHnrHjzueQm9iG6UjvNvWs1Ci2nBGXVxdIW5G0N5g5YvMPiyWBQmN/KIt+8BJ
+	 4nMWbx4zbda4r5Pe4F71yKd9gdBn5WVrThXpykty5Y9ZS6rxK/Zy/4imk+qiuwIQBK
+	 +J/Y7B2Xd/vbfAw0NWAJZRMYwlCrFpuzM/A8ynROZCZpyn7YbI8CMVxBS6k2Zrpwya
+	 T6Y4mlUo4kZxEKXRc1Vy6jsORFjfP4A+DtCjZKq1wSzIccfVVxpJX103Kp6LkYYPGE
+	 WV11UFcMReR+2ndH81MYlmJrtQ8QF3VCSlMJid4YqIKWMK9eHGy2UwsKc4B1bjlrvo
+	 ZcjWPKxqQS0jjFQdEECxxF+M=
+Date: Wed, 16 Sep 2026 10:49:29 -0700
+From: Borislav Petkov <bp@alien8.de>
+To: Alexey Kardashevskiy <aik@amd.com>
+Cc: x86@kernel.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
+	linux-crypto@vger.kernel.org, linux-pci@vger.kernel.org,
+	Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Ashish Kalra <ashish.kalra@amd.com>,
+	Tom Lendacky <thomas.lendacky@amd.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>,
+	"David S. Miller" <davem@davemloft.net>,
+	Bjorn Helgaas <bhelgaas@google.com>,
+	Juergen Gross <jgross@suse.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+	Marek Szyprowski <m.szyprowski@samsung.com>,
+	Robin Murphy <robin.murphy@arm.com>,
+	Andrew Morton <akpm@linux-foundation.org>,
+	David Hildenbrand <david@kernel.org>,
+	Lorenzo Stoakes <ljs@kernel.org>,
+	"Liam R. Howlett" <liam@infradead.org>,
+	Vlastimil Babka <vbabka@kernel.org>,
+	Mike Rapoport <rppt@kernel.org>,
+	Suren Baghdasaryan <surenb@google.com>,
+	Michal Hocko <mhocko@suse.com>,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Jini Susan George <jinisusan.george@amd.com>,
+	Kees Cook <kees@kernel.org>, Michael Ellerman <mpe@ellerman.id.au>,
+	Nikunj A Dadhania <nikunj@amd.com>,
+	Ard Biesheuvel <ardb@kernel.org>,
+	Eric Biggers <ebiggers@kernel.org>,
+	Kim Phillips <kim.phillips@amd.com>, Joerg Roedel <jroedel@suse.de>,
+	Ethan Nelson-Moore <enelsonmoore@gmail.com>,
+	"Tycho Andersen (AMD)" <tycho@kernel.org>,
+	Liam Merwick <liam.merwick@oracle.com>,
+	Michael Kerrisk <mtk.manpages@gmail.com>,
+	Suresh Siddha <suresh.b.siddha@intel.com>,
+	Xiaotian Feng <dfeng@redhat.com>,
+	Venkatesh Pallipadi <venkatesh.pallipadi@intel.com>,
+	Andi Kleen <ak@linux.intel.com>, Kiryl Shutsemau <kas@kernel.org>,
+	Tony Luck <tony.luck@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>,
+	Lu Baolu <baolu.lu@linux.intel.com>,
+	Xu Yilun <yilun.xu@linux.intel.com>,
+	Carlos =?utf-8?B?TMOzcGV6?= <clopez@suse.de>,
+	Jonathan Cameron <jic23@kernel.org>,
+	Jori Koolstra <jkoolstra@xs4all.nl>,
+	Thomas =?utf-8?Q?Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+	"Aneesh Kumar K.V (Arm)" <aneesh.kumar@kernel.org>,
+	Ian Campbell <ian.campbell@citrix.com>,
+	Jeremy Fitzhardinge <jeremy.fitzhardinge@citrix.com>,
+	Petr Tesarik <ptesarik@suse.com>,
+	David Howells <dhowells@redhat.com>,
+	Haavard Skinnemoen <hskinnemoen@atmel.com>,
+	Kenji Kaneshige <kaneshige.kenji@jp.fujitsu.com>,
+	Ilpo =?utf-8?B?SsOkcnZpbmVu?= <ilpo.jarvinen@linux.intel.com>,
+	Christian Marangi <ansuelsmth@gmail.com>,
+	Dave Jiang <dave.jiang@intel.com>,
+	Michael Kelley <mhklinux@outlook.com>,
+	Ilias Stamatis <ilstam@amazon.com>,
+	Sumanth Korikkar <sumanthk@linux.ibm.com>,
+	Simona Vetter <simona.vetter@ffwll.ch>,
+	Toshi Kani <toshi.kani@hp.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+	Vinod Koul <vkoul@kernel.org>,
+	Jiang Liu <jiang.liu@linux.intel.com>,
+	Arnd Bergmann <arnd@arndb.de>,
+	Anshuman Khandual <anshuman.khandual@arm.com>,
+	Kefeng Wang <wangkefeng.wang@huawei.com>,
+	Palmer Dabbelt <palmerdabbelt@google.com>,
+	linux-coco@lists.linux.dev, xen-devel@lists.xenproject.org,
+	iommu@lists.linux.dev, linux-mm@kvack.org, aik@ozlabs.ru,
+	Santosh Shukla <santosh.shukla@amd.com>,
+	"Pratik R . Sampat" <prsampat@amd.com>,
+	Scott Soule Cheloha <scott.cheloha@amd.com>,
+	Ackerley Tng <ackerleytng@google.com>,
+	Fuad Tabba <tabba@google.com>
+Subject: Re: [RFC PATCH kernel 01/17] pci/dma/tsm: Call disable DMA bus hook
+ on cleanup
+Message-ID: <20260916174929.GCaqrWqZ1fIhi4Rgbn@fat_crate.local>
+References: <20260916115159.1938195-1-aik@amd.com>
+ <20260916115159.1938195-2-aik@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1789579842-C0CDFB50-61F3B139/0/0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20260916115159.1938195-2-aik@amd.com>
+X-purgate-ID: tlsNG-ef75cf/1789581070-A5AC0AE4-D8657EAE/0/0
 X-purgate-type: clean
-X-purgate-size: 2577
+X-purgate-size: 434
 
-Fix display corruption on Xen PV dom0, where DMA buffers are not
-guaranteed machine-contiguous, in which case bounce buffering kicks
-in, breaking xe's memory coherency assumptions.
+On Wed, Sep 16, 2026 at 09:51:41PM +1000, Alexey Kardashevskiy wrote:
+> +	if (device_tcb_trusted(dev))
 
-Apply the same workaround i915 carries in i915_sg_segment_size() since
-commit 78a07fe777c4 ("drm/i915: stop abusing swiotlb_max_segment").
+Where is that function and the rest of the gunk needed for me to apply before
+I review those?
 
-Fixes: dd08ebf6c352 ("drm/xe: Introduce a new DRM driver for Intel GPUs")
-Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
-Closes: https://gitlab.freedesktop.org/drm/xe/kernel/-/work_items/8382
-Link: https://lore.kernel.org/xen-devel/aYtznP_tT6xNPwf-@mail-itl/
-Link: https://lore.kernel.org/all/20221020110308.1582518-1-hch@lst.de/ # i915 counterpart
-Cc: Christoph Hellwig <hch@lst.de>
-Cc: Robert Beckett <bob.beckett@collabora.com>
-Cc: stable@vger.kernel.org # v6.8+
-Signed-off-by: Szymon Acedański <accek@invisiblethingslab.com>
----
-v2:
- - Imperative language in the commit message (Thomas Hellström)
- - CC the authors of the original i915 workaround (Thomas Hellström)
+The patches on that branch:
 
- drivers/gpu/drm/xe/xe_bo.h | 19 +++++++++++++++++++
- 1 file changed, 19 insertions(+)
+https://github.com/AMDESE/linux-kvm/commits/tsm-next
 
-diff --git a/drivers/gpu/drm/xe/xe_bo.h b/drivers/gpu/drm/xe/xe_bo.h
-index 290ca62..341fa93 100644
---- a/drivers/gpu/drm/xe/xe_bo.h
-+++ b/drivers/gpu/drm/xe/xe_bo.h
-@@ -9,6 +9,8 @@
- #include <drm/drm_prime.h>
- #include <drm/ttm/ttm_tt.h>
- 
-+#include <xen/xen.h>
-+
- #include "xe_bo_types.h"
- #include "xe_ggtt.h"
- #include "xe_macros.h"
-@@ -574,6 +576,23 @@ static inline unsigned int xe_sg_segment_size(struct device *dev)
- 	struct scatterlist __maybe_unused sg;
- 	size_t max = BIT_ULL(sizeof(sg.length) * 8) - 1;
- 
-+	/*
-+	 * For Xen PV guests pages aren't contiguous in DMA (machine) address
-+	 * space.  The DMA API takes care of that both in dma_alloc_* (by
-+	 * calling into the hypervisor to make the pages contiguous) and in
-+	 * dma_map_* (by bounce buffering).  But xe (like i915, see commit
-+	 * 78a07fe777c4) ignores the coherency aspects of the DMA API and thus
-+	 * can't cope with bounce buffering actually happening, so add a hack
-+	 * here to force small allocations and mappings when running in PV
-+	 * mode on Xen.
-+	 *
-+	 * Note this will still break if bounce buffering is required for other
-+	 * reasons, like confidential computing hypervisors or PCIe root ports
-+	 * with addressing limitations.
-+	 */
-+	if (xen_pv_domain())
-+		return PAGE_SIZE;
-+
- 	max = min_t(size_t, max, dma_max_mapping_size(dev));
- 
- 	/*
+which come before those here are enough?
 
-base-commit: baafc300cd079a5210c1e70e5ea3d93518e40b38
+Thx.
+
 -- 
-2.53.0
+Regards/Gruss,
+    Boris.
 
+https://people.kernel.org/tglx/notes-about-netiquette
 
