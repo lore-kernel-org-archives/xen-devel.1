@@ -4,41 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 29275C88E5C
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 11:54:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1421863.1648132 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9596AC88E77
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 11:54:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1422837.1648200 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6oDj-0003Ey-NT; Wed, 16 Sep 2026 11:54:35 +0000
+	id 1x6oDp-00050e-Dy; Wed, 16 Sep 2026 11:54:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1421863.1648132; Wed, 16 Sep 2026 11:54:35 +0000
+Received: by outflank-mailman (output) from mailman id 1422837.1648200; Wed, 16 Sep 2026 11:54:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6oDj-0003Ep-Js; Wed, 16 Sep 2026 11:54:35 +0000
-Received: by outflank-mailman (input) for mailman id 1421863;
- Tue, 15 Sep 2026 14:17:47 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x6oDp-0004zq-8A; Wed, 16 Sep 2026 11:54:41 +0000
+Received: by outflank-mailman (input) for mailman id 1422837;
+ Wed, 16 Sep 2026 11:54:39 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bot+bpf-ci@kernel.org>) id 1x6Tyk-0002X0-Uk
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 14:17:46 +0000
+ (envelope-from <Alexey.Kardashevskiy@amd.com>) id 1x6oDn-0004h9-H9
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 11:54:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6Tyj-007PK2-Sw
- for xen-devel@lists.xenproject.org; Tue, 15 Sep 2026 16:17:45 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x6oDm-00HBSF-U7
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 13:54:38 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <bot+bpf-ci@kernel.org>)
- id 6aa9537a-bab6-0a2a0a5309dd-0a2a4501ce8a-30
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 16:17:45 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <bot+bpf-ci@kernel.org>)
- id 6aa95388-5984-0a2a45010019-ac6904fea58c-3
- for <xen-devel@lists.xenproject.org>; Tue, 15 Sep 2026 16:17:45 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id BDC386022A;
- Tue, 15 Sep 2026 14:17:43 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 692041F000FF;
- Tue, 15 Sep 2026 14:17:40 +0000 (UTC)
+ (envelope-from <Alexey.Kardashevskiy@amd.com>)
+ id 6aaa836c-e002-0a2a0a5209dd-0a2a4503b7a8-44
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:54:38 +0200
+Received: from [40.107.200.51]
+ (helo=CH5PR02CU005.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Alexey.Kardashevskiy@amd.com>)
+ id 6aaa837d-fae8-0a2a45030019-286bc833cfd4-3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:54:38 +0200
+Received: from BN9PR03CA0556.namprd03.prod.outlook.com (2603:10b6:408:138::21)
+ by CH3PR12MB9124.namprd12.prod.outlook.com (2603:10b6:610:1a7::6)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Wed, 16 Sep
+ 2026 11:54:31 +0000
+Received: from BN1PEPF0001854C.namprd05.prod.outlook.com
+ (2603:10b6:408:138:cafe::7b) by BN9PR03CA0556.outlook.office365.com
+ (2603:10b6:408:138::21) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.9 via Frontend Transport; Wed, 16
+ Sep 2026 11:54:31 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN1PEPF0001854C.mail.protection.outlook.com (10.167.248.11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.428.7 via Frontend Transport; Wed, 16 Sep 2026 11:54:31 +0000
+Received: from aiemdee.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Wed, 16 Sep
+ 2026 06:54:07 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,112 +64,174 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="In-Reply-To:References:Subject:From:To:Cc:Date"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789481863;
-	bh=OkMqESzdj+3RbY/kyt0I+HkaA6aNmsfECfxsjJo32bA=;
-	h=In-Reply-To:References:Subject:From:To:Cc:Date;
-	b=Vgvg6Vf6N5nvwhVZWf8fGzDXd9ZlEfXfBBG/w2riqNn/dcr/s/Bb1Kjn5xCt4rLZO
-	 /FNDQs2/ZLouDowbLTAoG+bOsccbO7s5T82+OyYwfcX6um3B/KUl0YlT8/pOC1v+5f
-	 qfcdM1Uto9fEVYDQOYHZKjjKOlmt0lChn43XPsBWCwsrLtJFm1HSPrz2wnmJCfJh1M
-	 iDY+pqsv0fXbc6ZC9p6/TRWvhMishNU4m7IfF0kyo4cmqOO3eYQhyXTS5cVMxD4cbH
-	 zUx/KbsD7HuIXt8sdbPnV1BFxKYfT7hprxoA82Tbi0rgBmyLGJtCk7rqFPY/rZT2dM
-	 tUhop+sx6hp9A==
-Content-Type: multipart/mixed; boundary="===============5486250446856456697=="
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Urn84h68Kv1NiW1kUjFhGSLpejB7pKDouEqo54M/qmMxqqUURd6ehj7mM9xpJoyNrMOyUCwditYWutF0X2+l0E9N6rbyp7n7T93fYm75aTFSiMm3PWzBQ+EzDba/ohbFoxZMLDEtYQ1KMmI8f5qJucPcqUgzNSHQSRCwKOJghCsJdwF34jAnX0AJGV7mjpTDuVJ835sAoA+8mt2dLoBHWmWxVbsPI9P5Pn6LMSuK6og9lrcTYvcgozQynqSEb07n+m9GO1XMQ/tOeOWdpd9q73+IScNGeTdee02ynit+Phwjbohxr+Vsj9onyxl/yw6v5FMtv8Fn2PQ7QgGYuWBOaA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=OKUdPqVU6vcP8IIVfw9k2l6nR9BJplx9o3NZa4hjOck=;
+ b=EDrGQU+zjyMIoBNBObg/r6jTe0H5NY8XWxArKdQBcDcekZYrh0UbRIh0tmCOcCfHp+dP6Wztd+oV40oofWIb4PFbFrxaTyiu/fxvMKTsdJyfUDuQBzh63awmNCIlzw2kxvb5izGceKhpYEkaujCzyL/utidKOJh+2vZjiyRqmTUXA9/cQePrUksl8uf6C0grj3ZJTzNp5u8EZzpUEviQPAjjmdTPZeGYvt8v8f/WO3Xzv8VITj5VSvEuFuOEads2rBd6M5Dm/XYx0+tsXPMX9v/5O/KZVSEJUGfxZpb+NPctjB7Uw3AuYXTo9rForv4T9S6RWtJhg4NX8Ej5WJRPrQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=OKUdPqVU6vcP8IIVfw9k2l6nR9BJplx9o3NZa4hjOck=;
+ b=H4qYp44qyY8gpvkWf1Ci8lBKgSKe4gGnaL0LZRKfWPHAKK1lwWWi+ubOgacGhxO5O1FzaozHGsrB/86eOm8Ue4BleHqQnDCWrO2eOb1cPtrNH5hsFjJTDNBzzppowIKl9d0/tzYyGSbtYSUiVlSk/3S/fYLmtLs6HF6Luzu27Rw=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Alexey Kardashevskiy <aik@amd.com>
+To: <x86@kernel.org>
+CC: <linux-kernel@vger.kernel.org>, <kvm@vger.kernel.org>,
+	<linux-crypto@vger.kernel.org>, <linux-pci@vger.kernel.org>, Thomas Gleixner
+	<tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Borislav Petkov
+	<bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin"
+	<hpa@zytor.com>, Sean Christopherson <seanjc@google.com>, Paolo Bonzini
+	<pbonzini@redhat.com>, Andy Lutomirski <luto@kernel.org>, Peter Zijlstra
+	<peterz@infradead.org>, Ashish Kalra <ashish.kalra@amd.com>, Tom Lendacky
+	<thomas.lendacky@amd.com>, Herbert Xu <herbert@gondor.apana.org.au>, "David
+ S. Miller" <davem@davemloft.net>, Bjorn Helgaas <bhelgaas@google.com>,
+	Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Marek Szyprowski
+	<m.szyprowski@samsung.com>, Robin Murphy <robin.murphy@arm.com>, "Andrew
+ Morton" <akpm@linux-foundation.org>, David Hildenbrand <david@kernel.org>,
+	Lorenzo Stoakes <ljs@kernel.org>, "Liam R. Howlett" <liam@infradead.org>,
+	Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>, "Suren
+ Baghdasaryan" <surenb@google.com>, Michal Hocko <mhocko@suse.com>, "Catalin
+ Marinas" <catalin.marinas@arm.com>, Jini Susan George
+	<jinisusan.george@amd.com>, Kees Cook <kees@kernel.org>, Michael Ellerman
+	<mpe@ellerman.id.au>, Nikunj A Dadhania <nikunj@amd.com>, Ard Biesheuvel
+	<ardb@kernel.org>, Eric Biggers <ebiggers@kernel.org>, Kim Phillips
+	<kim.phillips@amd.com>, Joerg Roedel <jroedel@suse.de>, Ethan Nelson-Moore
+	<enelsonmoore@gmail.com>, "Tycho Andersen (AMD)" <tycho@kernel.org>, "Liam
+ Merwick" <liam.merwick@oracle.com>, Michael Kerrisk <mtk.manpages@gmail.com>,
+	Suresh Siddha <suresh.b.siddha@intel.com>, Xiaotian Feng <dfeng@redhat.com>,
+	Venkatesh Pallipadi <venkatesh.pallipadi@intel.com>, Andi Kleen
+	<ak@linux.intel.com>, Kiryl Shutsemau <kas@kernel.org>, Tony Luck
+	<tony.luck@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>, Lu Baolu
+	<baolu.lu@linux.intel.com>, Xu Yilun <yilun.xu@linux.intel.com>,
+	=?UTF-8?q?Carlos=20L=C3=B3pez?= <clopez@suse.de>, Jonathan Cameron
+	<jic23@kernel.org>, Jori Koolstra <jkoolstra@xs4all.nl>,
+	=?UTF-8?q?Thomas=20Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
+	"Aneesh Kumar K.V (Arm)" <aneesh.kumar@kernel.org>, Ian Campbell
+	<ian.campbell@citrix.com>, Jeremy Fitzhardinge
+	<jeremy.fitzhardinge@citrix.com>, Petr Tesarik <ptesarik@suse.com>, "David
+ Howells" <dhowells@redhat.com>, Haavard Skinnemoen <hskinnemoen@atmel.com>,
+	Kenji Kaneshige <kaneshige.kenji@jp.fujitsu.com>,
+	=?UTF-8?q?Ilpo=20J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, "Christian
+ Marangi" <ansuelsmth@gmail.com>, Dave Jiang <dave.jiang@intel.com>, "Michael
+ Kelley" <mhklinux@outlook.com>, Ilias Stamatis <ilstam@amazon.com>, "Sumanth
+ Korikkar" <sumanthk@linux.ibm.com>, Simona Vetter <simona.vetter@ffwll.ch>,
+	Toshi Kani <toshi.kani@hp.com>, Greg Kroah-Hartman
+	<gregkh@linuxfoundation.org>, Vinod Koul <vkoul@kernel.org>, Jiang Liu
+	<jiang.liu@linux.intel.com>, Arnd Bergmann <arnd@arndb.de>, Anshuman Khandual
+	<anshuman.khandual@arm.com>, Kefeng Wang <wangkefeng.wang@huawei.com>,
+	"Palmer Dabbelt" <palmerdabbelt@google.com>, <linux-coco@lists.linux.dev>,
+	<xen-devel@lists.xenproject.org>, <iommu@lists.linux.dev>,
+	<linux-mm@kvack.org>, Alexey Kardashevskiy <aik@amd.com>, <aik@ozlabs.ru>,
+	Santosh Shukla <santosh.shukla@amd.com>, "Pratik R . Sampat"
+	<prsampat@amd.com>, Scott Soule Cheloha <scott.cheloha@amd.com>, Ackerley Tng
+	<ackerleytng@google.com>, Fuad Tabba <tabba@google.com>
+Subject: [RFC PATCH kernel 03/17] tsm/core: Store range_id in pci_tsm_mmio_entry
+Date: Wed, 16 Sep 2026 21:51:43 +1000
+Message-ID: <20260916115159.1938195-4-aik@amd.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260916115159.1938195-1-aik@amd.com>
+References: <20260916115159.1938195-1-aik@amd.com>
 MIME-Version: 1.0
-Message-Id: <2bb91d9868e07bedd1bc7a167a661b1f41e691d975184209c7e617adf551651e@mail.kernel.org>
-In-Reply-To: <20260915-b4-rcu-tasks-preempt-qs-v3-2-0ad30c4c5ee7@toxicpanda.com>
-References: <20260915-b4-rcu-tasks-preempt-qs-v3-2-0ad30c4c5ee7@toxicpanda.com>
-Subject: Re: [PATCH RFC v3 02/13] rcu-tasks-trace: Inline rcu_read_lock_trace() and annotate inside the reader
-From: bot+bpf-ci@kernel.org
-To: josef@toxicpanda.com,paulmck@kernel.org,frederic@kernel.org,neeraj.upadhyay@kernel.org,joelagnelf@nvidia.com,boqun@kernel.org,tglx@kernel.org,peterz@infradead.org,rostedt@goodmis.org,mhiramat@kernel.org,mark.rutland@arm.com,jolsa@kernel.org,ast@kernel.org,daniel@iogearbox.net,andrii@kernel.org,x86@kernel.org,catalin.marinas@arm.com,will@kernel.org,puranjay@kernel.org,xukuohai@huaweicloud.com,paulmck@kernel.org,frederic@kernel.org,neeraj.upadhyay@kernel.org,joelagnelf@nvidia.com,boqun@kernel.org,tglx@kernel.org,peterz@infradead.org,rostedt@goodmis.org,mhiramat@kernel.org,mark.rutland@arm.com,jolsa@kernel.org,ast@kernel.org,daniel@iogearbox.net,andrii@kernel.org,x86@kernel.org,catalin.marinas@arm.com,will@kernel.org,puranjay@kernel.org,xukuohai@huaweicloud.com
-Cc: luto@kernel.org,josh@joshtriplett.org,urezki@gmail.com,mathieu.desnoyers@efficios.com,jiangshanlai@gmail.com,qiang.zhang@linux.dev,jgross@suse.com,mcgrof@kernel.org,ihor.solodrai@linux.dev,linux-kernel@vger.kernel.org,rcu@vger.kernel.org,linux-trace-kernel@vger.kernel.org,bpf@vger.kernel.org,linux-arm-kernel@lists.infradead.org,xen-devel@lists.xenproject.org,luto@kernel.org,josh@joshtriplett.org,urezki@gmail.com,mathieu.desnoyers@efficios.com,jiangshanlai@gmail.com,qiang.zhang@linux.dev,jgross@suse.com,mcgrof@kernel.org,ihor.solodrai@linux.dev,linux-kernel@vger.kernel.org,rcu@vger.kernel.org,linux-trace-kernel@vger.kernel.org,bpf@vger.kernel.org,linux-arm-kernel@lists.infradead.org,xen-devel@lists.xenproject.org,josef@toxicpanda.com,ast@kernel.org,andrii@kernel.org,daniel@iogearbox.net,martin.lau@kernel.org,eddyz87@gmail.com,yonghong.song@linux.dev,mason@kernel.org,ihor.solodrai@linux.dev
-Date: Tue, 15 Sep 2026 14:17:40 +0000 (UTC)
-X-purgate-ID: tlsNG-d62444/1789481865-1FA6E757-4D996BDA/0/0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN1PEPF0001854C:EE_|CH3PR12MB9124:EE_
+X-MS-Office365-Filtering-Correlation-Id: d59d45d3-0f08-439b-d6d0-08df13e944b8
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|23010399003|32650700020|7416014|376014|1800799024|82310400026|56012099006|10067099003|11063799006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	rI3FUyxtUsFrikLPRCWOe3jkIJpu8Ayez//FbHvA7EZPaqMJ28NzEM4VhJ4uFsUfHOrPAJb/7UHnkmYOiZsZByETBO7LqwDolMkGk+NuIkrgD4qgEv4RzEDqahiEUr6RmoqLOB4/nnuarOms1DULPJLjrKyDmeOUAEEoyYHWB5A273Gc3ieXPZf/pG8FYsRMtuGwuUM0kd2jypZAIucOFIPlseEW6Tidon+1+G+qvbnitCdEbepShhBJZCMdJvcbi2vS4qERdzgmPEUsJ3ylIy1Ob5JKPPqLHOQxCE0Qe2/CCLBuIYsjqzVwfGEXXNSuZ2BN207i2oGm20r9eqcOgEt3kaOz34+dHkchUmel6U3bjs2AQ+EvxIjcvZ+I/wsFwRJXZHaO71FmXafnt71PBAcdJEK6qVYfgqy2v5S3Uj+vyR+1IKmg6Rfr4z3YMDSg+ptuH+K9bmzONBteIzA0bli1GHUAA4BrfnH2iDkYHuBxYRfVK9Xxfa3cxTwYqdojQDJQ4wX9c/N0NYNBfz8h9ph3umCHa0RhWXWwSESKEBn+FZY+jNWIHHce+uQnoGNf7r5KtJkpLdjT8wtA4XS8UGoRQZRBGqToFDemJKAzlXlGC45dacLPHVyAKBXcIcQK1KSkr1cjUWaUbUoGTGzCb1wvFKZUGANi+ZFG81a1RXGumrPU+cxRi4EFst/iIx9UAMPQNzjE4joretksZWLINw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(23010399003)(32650700020)(7416014)(376014)(1800799024)(82310400026)(56012099006)(10067099003)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	3PXzb1uIYISSNMY+R0m2gI1Golc9yZxyHNjo9mqcVW1iX+W8QOAgaw0Jx0+Ta1VKAjQN4QvuQJSWrTEiqdmnJWGdsiX9SXLTV7KsO1jkKL+RbUtl3rM6lse+vVwlHmd+IzaKPKUqMnAJwfSIsMv+aCwgqXOJHqF/H7s5tLLKw2PLKZUtD1ZyNYccxLICbLJnupx7vGu1T6MszIipxPfFngv9Ym+30x0Q2ajKbHjL0uPDpj7E5wgANp2xo3ZVGlO1/icucw65fAYiw3XHyAOEuraigI/3+qS1j8myjEMuJ4CLxEAyULrUad8gSQ6vE9GGBcTDKo8iENf0+SwfAW4PoJeJq0iP70PPpGHtspLqITaJWMzTVVn3E+S6NBglTQqsv+5r2fAzrn5fFPMMl+5p05yA4VJJHiI+sj+qmhIWaBwI9YGSh9HQT9Re3VgfsDTs
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 11:54:31.0614
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d59d45d3-0f08-439b-d6d0-08df13e944b8
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN1PEPF0001854C.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR12MB9124
+X-purgate-ID: tlsNG-33051d/1789559678-77AC44E9-46B275BD/0/0
 X-purgate-type: clean
-X-purgate-size: 3513
+X-purgate-size: 1753
 
---===============5486250446856456697==
-Content-Type: text/plain; charset="us-ascii"
-MIME-Version: 1.0
-Content-Transfer-Encoding: 7bit
+The pci_tsm_mmio struct represent a parsed TDI report which platform
+TSM driver will apply at the TDI accept step.
 
-> diff --git a/include/linux/rcupdate_trace.h b/include/linux/rcupdate_trace.h
-> index 273c59a032512..4035054309d7c 100644
-> --- a/include/linux/rcupdate_trace.h
-> +++ b/include/linux/rcupdate_trace.h
-> @@ -93,22 +93,20 @@ static inline void rcu_read_unlock_tasks_trace(struct srcu_ctr __percpu *scp)
->   *
->   * For more details, please see the documentation for rcu_read_lock().
->   */
-> -static inline void rcu_read_lock_trace(void)
-> +static __always_inline void rcu_read_lock_trace(void)
->  {
->  	int n;
->  	struct task_struct *t = current;
->
-> -	rcu_try_lock_acquire(&rcu_tasks_trace_srcu_struct.dep_map);
->  	n = READ_ONCE(t->trc_reader_nesting);
->  	WRITE_ONCE(t->trc_reader_nesting, n + 1);
-> -	if (n) {
-> -		// In case we interrupted a Tasks Trace RCU reader.
-> -		return;
-> -	}
-> -	barrier();  // nesting before scp to protect against interrupt handler.
-> -	t->trc_reader_scp = __srcu_read_lock_fast(&rcu_tasks_trace_srcu_struct);
-> -	if (!IS_ENABLED(CONFIG_TASKS_TRACE_RCU_NO_MB))
-> -		smp_mb(); // Placeholder for more selective ordering
-> +	if (!n) {
-> +		barrier();  // nesting before scp to protect against interrupt handler.
-> +		t->trc_reader_scp = __srcu_read_lock_fast(&rcu_tasks_trace_srcu_struct);
-> +		if (!IS_ENABLED(CONFIG_TASKS_TRACE_RCU_NO_MB))
-> +			smp_mb(); // Placeholder for more selective ordering
-> +	} // Else we interrupted a Tasks Trace RCU reader.
-> +	rcu_try_lock_acquire(&rcu_tasks_trace_srcu_struct.dep_map);
->  }
->
->  /**
-> @@ -120,12 +118,13 @@ static inline void rcu_read_lock_trace(void)
->   *
->   * For more details, please see the documentation for rcu_read_unlock().
->   */
-> -static inline void rcu_read_unlock_trace(void)
-> +static __always_inline void rcu_read_unlock_trace(void)
->  {
->  	int n;
->  	struct srcu_ctr __percpu *scp;
->  	struct task_struct *t = current;
->
-> +	srcu_lock_release(&rcu_tasks_trace_srcu_struct.dep_map);
->  	n = READ_ONCE(t->trc_reader_nesting) - 1;
->  	if (n) {
->  		WRITE_ONCE(t->trc_reader_nesting, n);
-> @@ -137,7 +136,6 @@ static inline void rcu_read_unlock_trace(void)
->  			smp_mb(); // Placeholder for more selective ordering
->  		__srcu_read_unlock_fast(&rcu_tasks_trace_srcu_struct, scp);
->  	}
-> -	srcu_lock_release(&rcu_tasks_trace_srcu_struct.dep_map);
->  }
+On top of what the existing structure stores already, the AMD TSM driver
+is going to need a range ID for the PSP communication.
 
-This isn't a bug, but the changelog notes that rcu_read_lock_tasks_trace()
-already annotates inside the reader "on the lock side" and then says "Make
-the trace variants match."
+Instead of calculating it in the platform TSM driver, just pass it along.
 
-rcu_read_unlock_tasks_trace(), four functions above the changed code in the
-same header, still calls srcu_lock_release() after __srcu_read_unlock_fast(),
-i.e. the exact ordering being corrected in rcu_read_unlock_trace().
+While at this, set the flag as resource_contains() checks for the type
+when pci_tsm_mmio_setup() inserts the range.
 
-After this patch the two unlock helpers in the file disagree. This has no
-functional effect (srcu_lock_release() is a lockdep annotation and compiles
-away without CONFIG_DEBUG_LOCK_ALLOC), but would it be worth either flipping
-rcu_read_unlock_tasks_trace() the same way, or saying in the changelog why
-only the rcu_read_{,un}lock_trace() pair is being changed?
-
-
+Signed-off-by: Alexey Kardashevskiy <aik@amd.com>
 ---
-AI reviewed your patch. Please fix the bug or email reply why it's not a bug.
-See: https://github.com/kernel-patches/vmtest/blob/master/ci/claude/README.md
 
-CI run summary: https://github.com/kernel-patches/bpf/actions/runs/34975311706
---===============5486250446856456697==--
+Not quite sure if IORESOURCE_MEM deserves a separate fix;
+also if it is just me who hit this.
+---
+ include/linux/pci-tsm.h | 2 ++
+ drivers/pci/tsm/core.c  | 2 ++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/include/linux/pci-tsm.h b/include/linux/pci-tsm.h
+index 6d5fadd79360..9b34304d9a1f 100644
+--- a/include/linux/pci-tsm.h
++++ b/include/linux/pci-tsm.h
+@@ -161,10 +161,12 @@ struct pci_tsm_pf0 {
+  * @res: MMIO address range (typically Guest Physical Address, GPA)
+  * @tsm_offset: Host Physical Address, HPA obfuscation offset added by the TSM.
+  *		Translates report addresses to GPA.
++ * @range_id: PCI BAR index for this range
+  */
+ struct pci_tsm_mmio_entry {
+ 	struct resource res;
+ 	u64 tsm_offset;
++	unsigned char range_id;
+ };
+ 
+ struct pci_tsm_mmio {
+diff --git a/drivers/pci/tsm/core.c b/drivers/pci/tsm/core.c
+index 2a18be5be56e..a197d56edbfb 100644
+--- a/drivers/pci/tsm/core.c
++++ b/drivers/pci/tsm/core.c
+@@ -746,6 +746,8 @@ struct pci_tsm_mmio *pci_tsm_mmio_alloc(struct pci_dev *pdev)
+ 
+ 		entry->res.start = range.start;
+ 		entry->res.end = range.end;
++		entry->res.flags = IORESOURCE_MEM;
++		entry->range_id = bar;
+ 		entry->tsm_offset = tsm_offset;
+ 		mmio->nr++;
+ 	}
+-- 
+2.55.0
+
 
