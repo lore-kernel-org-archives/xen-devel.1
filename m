@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ED854C88E5C
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 11:54:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1422830.1648157 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6067DC88E77
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 11:55:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1422880.1648208 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6oDk-0003f7-TG; Wed, 16 Sep 2026 11:54:36 +0000
+	id 1x6oEd-0007Sm-L2; Wed, 16 Sep 2026 11:55:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1422830.1648157; Wed, 16 Sep 2026 11:54:36 +0000
+Received: by outflank-mailman (output) from mailman id 1422880.1648208; Wed, 16 Sep 2026 11:55:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6oDk-0003e3-LY; Wed, 16 Sep 2026 11:54:36 +0000
-Received: by outflank-mailman (input) for mailman id 1422830;
- Wed, 16 Sep 2026 11:52:49 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x6oEd-0007SC-Ht; Wed, 16 Sep 2026 11:55:31 +0000
+Received: by outflank-mailman (input) for mailman id 1422880;
+ Wed, 16 Sep 2026 11:55:30 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Alexey.Kardashevskiy@amd.com>) id 1x6oC0-0002xC-Ro
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 11:52:49 +0000
+ (envelope-from <Alexey.Kardashevskiy@amd.com>) id 1x6oEc-0007RU-IE
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 11:55:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6oBz-00HAq8-Nm
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 13:52:47 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x6oEb-002Sxm-Ut
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 13:55:29 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Alexey.Kardashevskiy@amd.com>)
- id 6aaa8301-2eae-0a2a0a5409dd-0a2a450bad6c-22
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:52:47 +0200
-Received: from [40.93.196.64]
- (helo=SA9PR02CU001.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aaa83aa-8faa-0a2a0a5109dd-0a2a45078760-42
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:55:29 +0200
+Received: from [40.107.209.43]
+ (helo=PH8PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Alexey.Kardashevskiy@amd.com>)
- id 6aaa830b-b7e8-0a2a450b0019-285dc4402850-3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:52:47 +0200
-Received: from CH2PR17CA0024.namprd17.prod.outlook.com (2603:10b6:610:53::34)
- by LV3PR12MB9119.namprd12.prod.outlook.com (2603:10b6:408:1a2::9)
+ id 6aaa83af-b4ea-0a2a45070019-286bd12bd262-3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:55:29 +0200
+Received: from BN0PR04CA0192.namprd04.prod.outlook.com (2603:10b6:408:e9::17)
+ by CY8PR12MB7267.namprd12.prod.outlook.com (2603:10b6:930:55::17)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Wed, 16 Sep
- 2026 11:52:37 +0000
-Received: from CH2PEPF00000141.namprd02.prod.outlook.com
- (2603:10b6:610:53:cafe::4e) by CH2PR17CA0024.outlook.office365.com
- (2603:10b6:610:53::34) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.9 via Frontend Transport; Wed, 16
- Sep 2026 11:52:36 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Wed, 16 Sep
+ 2026 11:55:12 +0000
+Received: from BN1PEPF00018545.namprd05.prod.outlook.com
+ (2603:10b6:408:e9:cafe::a) by BN0PR04CA0192.outlook.office365.com
+ (2603:10b6:408:e9::17) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.11 via Frontend Transport; Wed,
+ 16 Sep 2026 11:55:12 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- CH2PEPF00000141.mail.protection.outlook.com (10.167.244.74) with Microsoft
+ BN1PEPF00018545.mail.protection.outlook.com (10.167.248.4) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.428.7 via Frontend Transport; Wed, 16 Sep 2026 11:52:36 +0000
+ 15.21.428.7 via Frontend Transport; Wed, 16 Sep 2026 11:55:12 +0000
 Received: from aiemdee.amd.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Wed, 16 Sep
- 2026 06:52:13 -0500
+ 2026 06:54:44 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,20 +66,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=aG0oKHb8KcEdre+rK3In8EAAqhdVUmF9VvRw6NPuPrlGrqPlvJPLzycguBO2noWHblZKBztH6x0PTeRAIrNfo/FpZQhkGtE6TprWRpR+ankhY0Sb5NVTSp8OB0TsfwRe1wR34gNExtL8rMQVZtY0WVlYqAev9TLoyn8+fjF+tErqAlqXMQ6QaChgVBOe+FHNUOdFQtBVCZnDV7xdAVyT5RA8NUbNzytuhsjQ2QVS4uT/x4y0xn/YQEwASNyZ3/qCOIOJoXazBFPW4b9h4kcue6fkaKWdAiUhfg0gCYUPi89mn6ssnZCOXYzl2h2M3N6O6c0ARXSiUxHJeyn6Ynu7BQ==
+ b=TZy2ZJrkMF7OCH9yN7sKyjTdWF7pgDVN6EGs0NLiBABwnnfINtahWOBYqwOz/NWr6N0AN5xk3KZ9gnYsR5DRJMFpXYxh6z5BOA4SqDov1+Py1rv1VdX8JfLWi2Iu9VC//4ZTsve+l1KibkrziEneP494mzlK+fKQ8Y6ZYsA72HeYMG2Hr2hrH/eH1tEk+QrUFUMbjHI1RdRPodHPy4kbR8OzqIx9MnVk7cuU+a0TdPj82AuZaqRcYaxYTHwARqMM06dsFTyWbujX389/moTRtNEA9l6ZTCBwS/3FOhSuXIjxLzfOGe+Ae7jc9Z5xx92b3zLyVpM45P9ZGWWrKZixBA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=mZx62VDeT0ufB+RoQyhNsYub6vn+IMt5N7ocikkQ9sU=;
- b=FUyNkmAgjoL3/Qs+3F8bOdJWZRxxAQSwJW4szhpjx76WlA2EdbNX7jtMV4pbjd6iC91k08D4iBb9j8AgeMohTuau1FzNyZt2pgMNrR3k7wEhCceWhRur0It9nkugCoDQfECZ/QHNEXl5jVGK9zQfspiclLtQPItvb1RkcyDOMSOeazpPRKoZiKffRGMnXBwgNMPwDdqq7GrZVoEa2hiF6nXWgC58+c0tDXJtUVpRjwHqUBSf7xfoY9HeBUajjbck/1j+ocf+2OW94VtyszgXGAhvPMbR2a17/AFehv7xqsqmqP2D78ATc4RhwLcSfrFMBON46FvV0aHG6+MLdveVFg==
+ bh=1fOSelVshB8tt+z9i3a63f+uWxxjJMxzG7NNd33A9O0=;
+ b=jvahsYYrSSADIREzYZklS3cfIwMu0Zmjl3U5BvdwOD0bHjS79vNZLV1090cMPL6Uddm1Hw+ha8DsRIl6P3D7x0Ofg7n5e0eXwx40OjAREYnsDswkBOv39tT7q/bKNNpUmqXWpuNLksT0urT9O7eswM+0t9pB45isrHcK6lFqM8UdcQiBDw4Vb33gF6dsB3eyhqYeP32eJFGEnfmG5DILEG7wekx+bPb9r8qXvsuX1N7LC/toA2ovW1QUEOVq6z514RTOhjhfZBxnBBRn+Dlr186XJ+X6ysknfcEZXH08zx1mABhTDn64ZziAWAzDtRO8T9+PFyMF6nB9sRZuzltbiQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=mZx62VDeT0ufB+RoQyhNsYub6vn+IMt5N7ocikkQ9sU=;
- b=TYb0b5xWa3CwbsbXaROqwWacW3UnsWZAsLXCBsuO2VZj3iXs8h7XkGDWJzHS+Rr4NOgL3HVseZVrYfoYjT+MEH/NbZvmfhn1kvBEhxyM6OmIB0EJdTl5EhLqRsxHyVePmgg7X/cEjYvCt0uElsJXsLaUetdh0Zp7OnwDJk7C+7o=
+ bh=1fOSelVshB8tt+z9i3a63f+uWxxjJMxzG7NNd33A9O0=;
+ b=hJHVgTgw40xSH04nc9KEY2kTfcBikFvdZzQOK6y8fFdlPWQ206tziMwKbuHLq2YsQdsWnXpxBJBN+nC+uIlM7TQItN4B4LBXEVkNpnzIbo0qAVLlJlMgBl/jaNSuWF8TLglwQGLQXYoBSkSvj44AiMmqUoZVh4d3hV9YFqdWZsw=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -138,10 +138,12 @@ CC: <linux-kernel@vger.kernel.org>, <kvm@vger.kernel.org>,
 	Santosh Shukla <santosh.shukla@amd.com>, "Pratik R . Sampat"
 	<prsampat@amd.com>, Scott Soule Cheloha <scott.cheloha@amd.com>, Ackerley Tng
 	<ackerleytng@google.com>, Fuad Tabba <tabba@google.com>
-Subject: [RFC PATCH kernel 00/17] PCI/TSM: coco/sev-guest: Implement SEV-TIO PCIe TDISP (phase2)
-Date: Wed, 16 Sep 2026 21:51:40 +1000
-Message-ID: <20260916115159.1938195-1-aik@amd.com>
+Subject: [RFC PATCH kernel 04/17] crypto/ccp/tsm: Use TSM API for DOE
+Date: Wed, 16 Sep 2026 21:51:44 +1000
+Message-ID: <20260916115159.1938195-5-aik@amd.com>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260916115159.1938195-1-aik@amd.com>
+References: <20260916115159.1938195-1-aik@amd.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
@@ -150,157 +152,59 @@ X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH2PEPF00000141:EE_|LV3PR12MB9119:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7391569d-ac2a-4616-69f3-08df13e9008e
+X-MS-TrafficTypeDiagnostic: BN1PEPF00018545:EE_|CY8PR12MB7267:EE_
+X-MS-Office365-Filtering-Correlation-Id: 95b0368a-0e2f-42c3-de47-08df13e95d65
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|376014|7416014|23010399003|36860700016|32650700020|18002099003|13003099007|3023799007|5023799004|10067099003|11063799006|56012099006;
+	BCL:0;ARA:13230040|82310400026|36860700016|32650700020|1800799024|23010399003|7416014|376014|22082099003|18002099003|56012099006|11063799006|10067099003;
 X-Microsoft-Antispam-Message-Info:
-	T/gKaq7XFEnBi/yuOuXBHIHCD7TNUzO6/LsGHGpb0VdFnhOacL7FQW1YWREUJE4JArQUEVm1ccK17oYVI1nlQOwVcl/+SkFGawQkgJDJaZ4qH1D/uIlFGDhiW1/d74DByXinxZnIkDQYj9FGXk4OOKJ+kYv/d+CAgG/PTWX0UzZ/Lp0jxAQbHs0Dyh/2BKLQqGx6/d87Tw12FdpCH48IcuKsPZwqk5G9T+klwO3fX8+XnXeVDGfJzW1m5NX1LnPISZhnXsO1uvc3KjxwqC2Ws3B92AV1byfml134mscouKf/eQr8L/BZGaOFkoksnlwWnjD9lH0mPC+uYD4fmIH/V9QWuw+a9tH/N1wA7D6WVBzjww7atU8VJyL+8XzaMFb2qtdJHbhuqCMaB+z8zwC49JfgoEPtAu0mlkYGGFxSu1TzrPnUKfMf62FtDWqwnsNj+u/4ijrmb4SDCnyuz/6Z5BsgMBwCnB0FOHo2HxPuIIO/mnWIVAz+NpBP5CW+k+EC5+76SALy+Sdr9vQ3wwwT8Jfd5sNrI69QlA0aSM0wKMl/u8/LnCLD16kj9JQrN6WPJvPTYouVAb0XPd8oICcFGbiT83qjuJrhursHTFxWhZkq9RUKjqw8PtitrmDBrh8LUAuK8iS9K561fV/OmR7VSuUhBxxDeAcJFprd3/YTi2LlHtvo9PNlxcIYxGV3Ppv25ZrBkRpchcUBXVADUWXLhA==
+	78xBYQC3+wj95ztS+jhBh7cicxBkBZUOOlFcfH+bxAVFisXGI8GTXus06sBoYkM4BHUkb5zK5O7yhQwpaF6Ip7ekJl/G+pCPCtnHlkIbjjDv8+KUNHhK+PJ5RhP6SlzTgoe81C/Eh+DyMDQXye78SzFJwQW40rgBDQmTb9VchioXMTf4z/5CzwrtVTOPqbyMg+Y8jjHpiDtfFf8zitapJgCESsXZOSM9HNHyJ0Um1NQ7D9s0uHUfcT/dzxDylcymM2S+Ld5yStPeE7mCxLl6qhrLFr3BSHwHwIQKghVjXLTcDnqt3GYaRiw1yz3V3OyeUjtuGPCVf3AbPcfXsEjBmGX3h2tdEuTQRVG2yu5p2hVO7DHZiUoLYTEA8rUsbspBT4rewvZj80kJwOFeoOC9mrD53/WOfp4jUrKfPm1SisbB+kyVpNsgZZv5etsg5Ftvdv2z1q+jSldsTRs0LfdHF3TNYwTFEs1O7ZDtHQkyvUMGi8Wd0Q4cAhiexEAvh9HeKXdpy7ly9noT4dc7jyjth76Lc412wIb3GxzcBx4uGvx9TbHy30dbUYFWfGVgiRyJ4kKr6lWWtTrwgeUS8GP8q2WbaMspMBnT3PljHdlQYUHCU206jA3P1Ax0KDSFRZmCQHobtyHO4o9tJVYCppnHdmpteVaf6qX9JvzuwR/35nR2qu87SdsvzIJ/RRzcLYid
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(376014)(7416014)(23010399003)(36860700016)(32650700020)(18002099003)(13003099007)(3023799007)(5023799004)(10067099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(36860700016)(32650700020)(1800799024)(23010399003)(7416014)(376014)(22082099003)(18002099003)(56012099006)(11063799006)(10067099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	+PlvSj+WWJdnQa9fqspJ0fGqU+h8yDsfBtjgrmCFlifW3rsbziq4yuNPQQyR/FXWEZSSp00sFYlutVZKzH62lMegd/JbzlYn/hpN78cr2SasoVm5fd/J4xz3ACrrUADNDus1kHqqqKweQl1XkKAuyyjZFggKvacCQoEX2+evG1kj/d82Fq/frgLm/kuBcCvch7vryn1qSGP2AV5fgGB6MD44u054gmUCHYZ5J56mDlJHDsaimg0mgKICWykgf5Qrzl+6gXxuOP4oouH0O8q6rxFwhevrd3K2x79h5jdXml1nC+XkfEUmXRGj3ewK399oB19ERF3hI9KhQsBGCljTGcXTZww+3pXfxyI/qyphgkPNRR1m+v+1Meh6DZkmrq0nPl4K1ltrTht/7eWVnESEApX3Cd54btZQ1VkXv4eebynsR510gjyu4rP54UQmEU7W
+	2+d9WKfuRzwiWgMdluOVo4qJNhnH2FvmuZhqqjP8Ga5RudmSdxm4o30kD3JGM+JEJhea7Mw6INW7XT3nm6ypzdPviJMk9OK4Pvzn2FWUxcA7Vdl/e56ub2ci729tDDVfvh9CVw61K6ffH4bM+JOXA9hNl5odzX2HLX/1echQ9gdSp7MdJwUJI64mKFNnvbf9aUbAqNw4+4SJCg+XD9XffbZf6fjl0LBtuDu0HjfarKrIabaGlv54VhQ3oyYEtE9psLNTPckbXz1N2avdxAcXqsvWJ2kLmfkkwZ5KVqB55EFLafOAfCbw5IMEhQaZWZfVjmI54+4RWFQcol/rYF1TFVzsYPTn+eBGFcEeCuS6BT7+MsDtPowlpnYvJ/R4X0x3YM5wuUYpDWv4dKXLhb6UuiqPb5UM6Mz5WR/m9mvvSwqSgI6A6Nq+5hSnCXyY+hAU
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 11:52:36.6991
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 11:55:12.4634
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7391569d-ac2a-4616-69f3-08df13e9008e
+X-MS-Exchange-CrossTenant-Network-Message-Id: 95b0368a-0e2f-42c3-de47-08df13e95d65
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	CH2PEPF00000141.namprd02.prod.outlook.com
+	BN1PEPF00018545.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR12MB9119
-X-purgate-ID: tlsNG-42698a/1789559567-186CA9EA-03BB215C/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7267
+X-purgate-ID: tlsNG-ef75cf/1789559729-A70DDAE4-994594FC/0/0
 X-purgate-type: clean
-X-purgate-size: 5607
+X-purgate-size: 994
 
+Compared to the currently used pci_doe(), the pci_tsm_doe_transfer() helper
+performs a few more sanity checks, use that helper now.
 
-Here are some patches to continue enabling SEV-TIO on AMD.
+Signed-off-by: Alexey Kardashevskiy <aik@amd.com>
+---
+ drivers/crypto/ccp/sev-dev-tsm.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-SEV-TIO allows guests to establish trust in a device that supports TEE
-Device Interface Security Protocol (TDISP, defined in PCIe r6.0+) and
-then interact with the device via private memory.
-
-In order to streamline upstreaming process, a common TSM infrastructure
-is being developed in collaboration with Intel+ARM+RiscV. There is
-Documentation/driver-api/pci/tsm.rst with proposed phases:
-1. IDE: encrypt PCI, host only
-2. TDISP in guest: lock + accept flow, interface report <= WE ARE HERE
-3. Enable on host: secure MMIO + DMA, KVM changes
-4. Device attestation: certificates, measurements
-
-
-Acronyms:
-TEE - Trusted Execution Environments, a concept of managing trust between the host and devices
-TSM - TEE Security Manager (TSM), an entity which ensures security on the host
-PSP - AMD platform secure processor (also "ASP", "AMD-SP"), acts as TSM on AMD.
-SEV TIO - the TIO protocol implemented by the PSP and used by the host, extension to SEV-SNP
-GHCB - guest/host communication block - a protocol for guest-to-host communication via a shared page
-TDISP - TEE Device Interface Security Protocol (PCIe).
-
-
-
-Flow:
-- Boot guest OS, load sev-guest.ko which registers itself as a TSM
-- PCI TSM creates sysfs nodes under "tsm" subdirectory in for all
-  TDISP-capable devices
-- lock the device via:
-	echo tsm0 > "/sys/bus/pci/devices/0000:01:00.0/tsm/lock"
-- accept the device via:
-	echo 1 > "/sys/bus/pci/devices/0000:01:00.0/tsm/accept"
-- load the device driver:
-	- DMA to encrypted memory should work right away
-	- Reported TEE MMIO regions will be mapped as encrypted
-
-
-Patches 01/17..05/17 are fixes and can go in sooner.
-Patches 06/17..17/17 are the minimum required by the VM to get encrypted MMIO and DMA.
-
-Doing "io_tlb_default_mem.for_alloc = true" in swiotlb_init_remap() enabled T=1 DMA
-to shared guest memory.
-
-
-The previous conversation is here:
-https://lore.kernel.org/r/20260225053806.3311234-1-aik@amd.com
-
-This is based on the last Dan's patch series rebased on top of
-v7.3-rc2 with the DMA SWIOTLB fixes from Aneesh.
-
-The whole tree is here: https://github.com/AMDESE/linux-kvm/commits/tsm-next/
-The host support is here: https://github.com/AMDESE/linux-kvm/commits/tsm
-Some raw QEMU sketch is here: https://github.com/AMDESE/qemu/commits/tsm-next
-
-Please comment. Thanks.
-
-
-The SEV TIO spec:
-https://www.amd.com/content/dam/amd/en/documents/epyc-technical-docs/specifications/58271.pdf
-
-
-
-Alexey Kardashevskiy (16):
-  pci/dma/tsm: Call disable DMA bus hook on cleanup
-  pci/tsm: Fix stale comment about TDI report range start
-  tsm/core: Store range_id in pci_tsm_mmio_entry
-  crypto/ccp/tsm: Use TSM API for DOE
-  tsm-core: Register nevertheless
-  x86/io/tsm: Allow mixed ioremap for shared+private BARs
-  x86/dma: Revert "x86: Remove unnecessary architecture-specific
-    <asm/device.h>"
-  x86/dma: Add ARCH_HAS_PHYS_TO_DMA
-  dma/swiotlb: Force shared DMA for allocatios from SWIOTLB
-  tsm/core: Add TDI status
-  coco/sev-guest: Allow multiple source files in the driver
-  x86/sev: Pass HV features to sev-guest device via platform data
-  x86/sev: Add GHCB calls for SEV-TIO
-  x86/sev: Implement guest TSM driver for SEV-TIO (phase2, DMA)
-  x86/sev: Enable secure MMIO (phase2)
-  x86/sev: Flush IOMMU TLB for trusted devices
-
-Dan Williams (1):
-  x86, dma: Allow accepted devices to map private memory
-
- arch/x86/Kconfig                                    |   1 +
- drivers/virt/coco/sev-guest/Kconfig                 |   1 +
- drivers/virt/coco/sev-guest/Makefile                |   5 +-
- arch/x86/include/asm/device.h                       |  13 +
- arch/x86/include/asm/dma-direct.h                   |  77 +++
- arch/x86/include/asm/sev-common.h                   |   3 +
- arch/x86/include/asm/sev.h                          |  13 +
- arch/x86/include/uapi/asm/svm.h                     |  43 ++
- drivers/virt/coco/sev-guest/sev-guest.h             |  20 +
- include/linux/dma-direct.h                          |   2 +-
- include/linux/io.h                                  |   8 +
- include/linux/ioport.h                              |   3 +
- include/linux/pci-tsm.h                             |  71 ++
- include/uapi/linux/sev-guest.h                      |  12 +
- arch/x86/coco/sev/core.c                            | 148 +++-
- arch/x86/mm/ioremap.c                               |   2 +-
- arch/x86/mm/mem_encrypt.c                           |   5 +-
- drivers/crypto/ccp/sev-dev-tsm.c                    |   5 +-
- drivers/pci/pci-driver.c                            |   3 +
- drivers/pci/tsm/core.c                              |   3 +-
- drivers/virt/coco/sev-guest/{sev-guest.c => core.c} |  25 +-
- drivers/virt/coco/sev-guest/tio.c                   | 725 ++++++++++++++++++++
- drivers/virt/coco/tsm-core.c                        |  16 +-
- drivers/xen/swiotlb-xen.c                           |   2 +-
- kernel/dma/direct.c                                 |   3 +-
- kernel/dma/swiotlb.c                                |   2 +-
- kernel/resource.c                                   |  63 ++
- mm/ioremap.c                                        |   2 +-
- 28 files changed, 1249 insertions(+), 27 deletions(-)
- create mode 100644 arch/x86/include/asm/device.h
- create mode 100644 arch/x86/include/asm/dma-direct.h
- create mode 100644 drivers/virt/coco/sev-guest/sev-guest.h
- rename drivers/virt/coco/sev-guest/{sev-guest.c => core.c} (97%)
- create mode 100644 drivers/virt/coco/sev-guest/tio.c
-
+diff --git a/drivers/crypto/ccp/sev-dev-tsm.c b/drivers/crypto/ccp/sev-dev-tsm.c
+index 46f2539d2d5a..6e704ad239af 100644
+--- a/drivers/crypto/ccp/sev-dev-tsm.c
++++ b/drivers/crypto/ccp/sev-dev-tsm.c
+@@ -40,8 +40,9 @@ static int sev_tio_spdm_cmd(struct tio_dsm *dsm, int ret)
+ 
+ 	/* ret > 0 means "SPDM requested" */
+ 	while (ret == PCI_DOE_FEATURE_CMA || ret == PCI_DOE_FEATURE_SSESSION) {
+-		ret = pci_doe(dsm->tsm.doe_mb, PCI_VENDOR_ID_PCI_SIG, ret,
+-			      spdm->req, spdm->req_len, spdm->rsp, spdm->rsp_len);
++		ret = pci_tsm_doe_transfer(dsm->tsm.base_tsm.pdev, ret,
++					   spdm->req, spdm->req_len,
++					   spdm->rsp, spdm->rsp_len);
+ 		if (ret < 0)
+ 			break;
+ 
 -- 
 2.55.0
-
 
 
