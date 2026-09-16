@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3FF0C88E77
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 11:59:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1422959.1648272 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90555C88E77
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 12:00:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1422969.1648281 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6oIZ-00043m-Ms; Wed, 16 Sep 2026 11:59:35 +0000
+	id 1x6oJN-0005ia-3d; Wed, 16 Sep 2026 12:00:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1422959.1648272; Wed, 16 Sep 2026 11:59:35 +0000
+Received: by outflank-mailman (output) from mailman id 1422969.1648281; Wed, 16 Sep 2026 12:00:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6oIZ-00043f-JO; Wed, 16 Sep 2026 11:59:35 +0000
-Received: by outflank-mailman (input) for mailman id 1422959;
- Wed, 16 Sep 2026 11:59:34 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x6oJN-0005iT-06; Wed, 16 Sep 2026 12:00:25 +0000
+Received: by outflank-mailman (input) for mailman id 1422969;
+ Wed, 16 Sep 2026 12:00:23 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Alexey.Kardashevskiy@amd.com>) id 1x6oIX-00043M-RB
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 11:59:33 +0000
+ (envelope-from <Alexey.Kardashevskiy@amd.com>) id 1x6oJK-0005iB-T4
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 12:00:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6oIX-00FRjE-83
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 13:59:33 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x6oJK-007oXG-9g
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 14:00:22 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Alexey.Kardashevskiy@amd.com>)
- id 6aaa84a4-8faa-0a2a0a5109dd-0a2a4505b236-4
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:59:32 +0200
-Received: from [40.107.209.70]
- (helo=PH8PR06CU001.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aaa84c6-8faa-0a2a0a5109dd-0a2a4502c49a-42
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 14:00:21 +0200
+Received: from [52.101.43.20]
+ (helo=SJ2PR03CU001.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Alexey.Kardashevskiy@amd.com>)
- id 6aaa84a2-4cb1-0a2a45050019-286bd146568b-3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:59:32 +0200
-Received: from SJ2P220CA0004.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:5da::11)
- by SJ0PR12MB6832.namprd12.prod.outlook.com (2603:10b6:a03:47e::12)
+ id 6aaa84d2-6ca4-0a2a45020019-34652b14f21e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 14:00:21 +0200
+Received: from BY1P220CA0011.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:59d::11)
+ by MW6PR12MB8663.namprd12.prod.outlook.com (2603:10b6:303:240::9)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.11; Wed, 16 Sep
- 2026 11:59:24 +0000
-Received: from SJ5PEPF00000208.namprd05.prod.outlook.com
- (2603:10b6:a03:5da:cafe::ab) by SJ2P220CA0004.outlook.office365.com
- (2603:10b6:a03:5da::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Wed, 16 Sep
+ 2026 12:00:06 +0000
+Received: from SJ5PEPF00000207.namprd05.prod.outlook.com
+ (2603:10b6:a03:59d:cafe::d) by BY1P220CA0011.outlook.office365.com
+ (2603:10b6:a03:59d::11) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.11 via Frontend Transport; Wed,
- 16 Sep 2026 11:59:24 +0000
+ 16 Sep 2026 12:00:04 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ5PEPF00000208.mail.protection.outlook.com (10.167.244.41) with Microsoft
+ SJ5PEPF00000207.mail.protection.outlook.com (10.167.244.40) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.428.7 via Frontend Transport; Wed, 16 Sep 2026 11:59:23 +0000
+ 15.21.428.7 via Frontend Transport; Wed, 16 Sep 2026 12:00:04 +0000
 Received: from aiemdee.amd.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Wed, 16 Sep
- 2026 06:58:59 -0500
+ 2026 06:59:40 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,20 +66,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ofOgEZt5/WvZL398DiMP4cnJu+bAOQ7ChdryDjdv6oc3B+1IqZ5xoCor8N7Ik69lXihL8DalFNN9z171VyKvjWP7qM0DDXR3yLwNOmXuBqCv86Gbl8ba8tHqsafdCNrPxltMrbLTHvsJAE5IbcIcl+RldZJlImHm7npnTIGIzJJ1QMcy8I+eqcBMS9ZZqprVDYX2C05fuBYoOpwyswLPdGLbxffVcsQm3S+lV4Mtf7YbMTeFB9fehnnY8S4cHnUSdXF5aINmNiKz7F17iSKPebMKZAIN0MpN0ypjqkW2E4BYk1eFRto289kn9r4R9JwcoGJZ4lcE9S2+Jgiy17XQSQ==
+ b=QOT7sVRXy9De2202CBbsIjMNa3wpE64zrj65FxGGKS7PGb1MplltqpoLeCUpGx7ERZpY3Wx3NAV/QLDD5ajZ8TWBhHAmA7svGZ0jRP+vm0EfeMRqzOra+gqEXc3wU2EUl3w5PL74Psv9aAjdKrMNFUdLmRVJkQK2/JK/tDQMJIp5RWvNbrsOmDMxwqf1AYrbxWIFO9Q6nLPhIlAHBFeZiskQzoJuvogtBFK//uDXAZC/DiazhNPFh9XmflxC3nO/YGV/6XeV9IWs6D0zAN0r07oXvJZZwudZ9ulmklLYQEAsk+qdJ/Qo0ulexhdhaCd/lK0XwXDFaXjI9mK24RPtWQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qTsg1utTkplWuARlA0qswoeLICanNrYPE/18/PBEUNY=;
- b=rmoiGjoh+6GgaL646m2gMAgAeOVhpofkBX3f/ONIo6agDbJ3NudbMju58xl+C1BXMLqHJHo/SJLgCu6OfZ6ClRdQOK+hdd+xThXKfg0ZOf8ObPpFogMdFYwFsuEVQyDlOqpg6yNgukAg4WRCIldL4HVzAGdtQX2nPGDjHKo/+CXnz1CXQERwq5BbbujDJTMzsYKKk4HZj6Q0ZmvdBb7+OwZZswtvWAkI3jaCClT3FPSNqo8ZTMgGcp9Xw0Zxm0nnnymV0tycimCtTkLIwfYtp4uFWIZo/SDWyrbE3/S4DfvtntmL3XIUE/P/cTKwfr6stSp1zjl52cvPMVYQHPKRMw==
+ bh=jaFnTLlUeuS15Vco6JUFNTtjEg2/GLK2yLIZqCLTaAk=;
+ b=Q5qrJsNAJXmzz0ze4iE6i1fEBUGJQFh0UxYftcksk8ufaz1yIDLcrj4GXAK8nACOLg6tFJdf36XWt0fiuVrvSDAcZVafTi+ehnmYjj/Bcc6GqwKJB0oncFHWsDbq+FKYYIVLek3mX2tJJhtqKAUChv3FCxISUBsAUFX4KWQw4+O+YaaDU2dxRiPqDCEHgUKL89cqNcuwbWD3oLQ5qPOjVAlgf7lgsqbw52wuZeaNyOWuVLUV5BeUYZvtR4ZH06sTqUsJchF4+DCIuIq/zDzCxVKC2Py6c7IvuS6xtZM5PncphGiKcCkKflcuw2KKxDCCQZ/KrxVKCadiD8iTS2wqng==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qTsg1utTkplWuARlA0qswoeLICanNrYPE/18/PBEUNY=;
- b=wzwC6nfwNmFtjgfk9sDcnKOMQ04jGfMzMCsC94PMwXHTyprnLafBJ/OMhSdIIZT7e1gKWt5OaYurLNADb4gi+KaWK8d7Qz3Dv4f9nx3JwyUsO5xKzntXU9YygO+pNZBzDvE9YfRcVfyBpz6mQnPpD2GxVC7juJ3ZzS7smUM8JKs=
+ bh=jaFnTLlUeuS15Vco6JUFNTtjEg2/GLK2yLIZqCLTaAk=;
+ b=gl3xaf2YW+xaUIdq/Ze4Vsnj1kQ2CrbCHsosjClYBGfqZKutdv3pYi+i/jzEWmd68FNLaEXIyXR//z2vbzRuO6R+38BRzH0IfFjoSr/u2P6BUTDTi5bwX8GkZ01py42Csy+noYDtShAmBDoL57gbb5TnjyLoMF0lpOHKJkgiW4U=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -138,148 +138,120 @@ CC: <linux-kernel@vger.kernel.org>, <kvm@vger.kernel.org>,
 	Santosh Shukla <santosh.shukla@amd.com>, "Pratik R . Sampat"
 	<prsampat@amd.com>, Scott Soule Cheloha <scott.cheloha@amd.com>, Ackerley Tng
 	<ackerleytng@google.com>, Fuad Tabba <tabba@google.com>
-Subject: [RFC PATCH kernel 11/17] tsm/core: Add TDI status
-Date: Wed, 16 Sep 2026 21:51:51 +1000
-Message-ID: <20260916115159.1938195-12-aik@amd.com>
+Subject: [RFC PATCH kernel 12/17] coco/sev-guest: Allow multiple source files in the driver
+Date: Wed, 16 Sep 2026 21:51:52 +1000
+Message-ID: <20260916115159.1938195-13-aik@amd.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260916115159.1938195-1-aik@amd.com>
 References: <20260916115159.1938195-1-aik@amd.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
 X-Originating-IP: [10.180.168.240]
 X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF00000208:EE_|SJ0PR12MB6832:EE_
-X-MS-Office365-Filtering-Correlation-Id: d8ed4718-0d0d-4492-fba9-08df13e9f352
+X-MS-TrafficTypeDiagnostic: SJ5PEPF00000207:EE_|MW6PR12MB8663:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2b51706f-555c-417b-6072-08df13ea0b92
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|82310400026|7416014|32650700020|376014|23010399003|36860700016|18002099003|22082099003|10067099003|56012099006|11063799006;
+	BCL:0;ARA:13230040|32650700020|82310400026|376014|1800799024|7416014|36860700016|23010399003|18002099003|22082099003|10067099003|56012099006|11063799006;
 X-Microsoft-Antispam-Message-Info:
-	1gjrxiOzZs++uLN/08CsbVuU5pzivX1w5sGfokhVo62HhTqsZAyt2altg4jQKy61YsFa5Q4JpAePEy56dZ2EtjTCeKjExL81JRYHJiYMY2uEiMnekm+X4HfnK61KTogTrUDOSWqYPac0RXsqXDF4wcWCECweQL2O+qrasaKF9Ob2twna6aAPVekdisRqgLeJlZeWB+Pyy3Bj167PJL09ZDmneWPqJ/nWbZ0cNzIZ9Uqu+TxE79xdf2uWrFfFyctA02oysbQLQg7NUfSUI+121Lh84kpVXJKbsCp4RX8FM8vKws3J3lHABQArpnrkiLAf2KQseddH0TJq+Gv/qJeo3ppTVrTxG+l8MATdtE6Ao3U3P+6gT3P9M6R6/DAw+GSzx5a/5muRGjOlLBCzMMiMgoy/exC0T3bXU9lf4eS/7wyQMhaEBz721jzLwZwa2Dv1PivZYIiWNzz8ZjfwLrQbmMk5/p8DJ5F9/KW0TMkedGokdgxIMOBxpzKrj0WOPNZTSFL2PdgqRRvebRWS/tn5JkJTmIfnpT4wVrU/EEANzAHAwcREbazlGn77NGogt+eYeQ5dt8vAtItGg7Je1OTdf7apf9IzPoCJmzfouuIh9OdDINS2GF86XJJkhSUJfr/0LPVLQjFXnrujzmzz+zKMX+LG2m67WgXyvo8/Y0n5DPWZ4ATFg4mJDgroef2p5B6hrmxaAbtQhopAI4TWgp6URw==
+	c1h/v5dfyxtiJ0WMVLNUDUgDxQatd0LMYdCKEY7e04HynA36o8DyKva5ruSvgqLaYCZoACqFUTHJK34ToQWM2MCCBg8Kk7vj/2plyvqelPReb5cAchDM+rTgWz3R7+Bnn8ph2gDyR2gM1wOZ3eh96GmQgRBj+zLT5cv5IdSYd3m2550ol3Ju1H9Km4MeCRVLxS3P5tQG7Q6T60yUsavCTOXu+/lSdcNSXfH4XlPCpgcpdFxRyqXRxBfbCDZiWLw0jYPQBg+gnHcm43Ypv3xHiGWQZTrQCmEP5i4jtweCR3YCmnazEVmPJCF5QstAYvxEeM743M1roHVrc9DqPuzMr8zHM0+lYfjxrS1wZoed/qJt1s5IE2AwGFgZuW7dDZtT6kWHu/51GndcomO9IWD/jwWkOFsL7bzdnTa7mI57odOgfeKiGNW5KML1b9MMJHQlon4dZskVmWAL8Sz4TeZsfI2snrZQqZHw1VeqP6cNOd1+SAikuN0yICPz2mmXFbsY9kDso0V8ykYrmJaFLk+T0sI6wo9CqW8wOzY2zQE86bI3j0nzMoUhX/M92d3xvTibl5Q8beTHkpAFkouRueVl86YNLgpODk3wkrrQXf65BdnneQuNWY7Gj2PWopz3bSypTYcLY/pRErszp3XubjRa2THlRPuWrl2ob/Hd5ZjCxnrdU7d5A7UKCUOQWy0Tr3m4DZo2fK5268pMv5G9i3j5zA==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(82310400026)(7416014)(32650700020)(376014)(23010399003)(36860700016)(18002099003)(22082099003)(10067099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(32650700020)(82310400026)(376014)(1800799024)(7416014)(36860700016)(23010399003)(18002099003)(22082099003)(10067099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	Fw53La2fWg2oO27psEqX3jIivEE3n3gbx3/xjn+KQHm1lz4FNVBajz48hTuLTPBt6uG2tVEbRRVvKQr7qSZv/THDK5/fsPRLILmlZp0+sWXWEMlp25tRTvdUlkvhgDpQhBBk7Xpw2/WNTNcciwCV4ENZvJuvlLVUt1sTm2llbK9DDNN55pWfltlQswjlh2XFTQbM3dBdqqt+eTE/9bviiGOC+WUEncGgm0s5E9hPqxwtrOEHu++p+E6DTbn76h4jtwoev54pqgHFtv9qpZ3UnUOsoBgI/lRE0iX1qfId86tWTOyfo3im62f04xW5+LNlhm5i3d1Ohcu/n4ZPM6reeV5E+Yufduo2+SyugUAxp87dhY4NTuBXalrrqjLQ46tVhj9YCY3Hk8coI/nSAbVxEzdI6mbCYS8c/Eerz4Y0bR2xhA+W8KI8DfNb2knsosaa
+	mS/imRrmbpxps67qGJxsphoc6eABPi9uEQAis97tyVjMcE7n1lUTb6+nlr386lpHVT/77AfVBAUGjtAsAI5U9VXIwQoNQqyOCrtenVvuZ6eZw8IQ01EvVcJIJZKPAyUI4IO5d87YjfhcEbh3mwPSHX0ytq1np4FzH1zAlBJzgfTo8p0WT7ftEYpWH/8xtuWrky0lg7Vb96bVRK0Oeh6Z/Bqtz30YVY0Ax3IUkvh2HhjL40wS9DrhCJBLx7/jYYe/jKEXsV+a4EnUeg6An48phGGuN8HGBTtQ3lpe6CODT1Jd3R3JIsEO3VlQNWWwvtg/FD5FsLXAXzDKQGVzf+GeBuklrtxXE/UOq8e27ANdgmihgrEF0Zlccza6kUJgBTwzV1Cp83zG4TJU548hlWxppR2g/9S2jzp+mAiL2crSmfzp8SlYOzleDPsozfr+5czZ
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 11:59:23.9209
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 12:00:04.6040
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: d8ed4718-0d0d-4492-fba9-08df13e9f352
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2b51706f-555c-417b-6072-08df13ea0b92
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF00000208.namprd05.prod.outlook.com
+	SJ5PEPF00000207.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6832
-X-purgate-ID: tlsNG-c201ff/1789559972-F56AD2A1-539BF0DB/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW6PR12MB8663
+X-purgate-ID: tlsNG-720697/1789560021-F16AF2AC-FEBAE27B/0/0
 X-purgate-type: clean
-X-purgate-size: 2853
+X-purgate-size: 2248
 
-Define a structure with all info about a TDI such as TDISP status,
-bind state, used START_INTERFACE options and the report digest.
+Prepare for SEV-TIO support as it is going to equal or bigger
+than the existing sev_guest.c which is already 700 lines and
+keeps growing.
+
+No behavioural change expected.
 
 Signed-off-by: Alexey Kardashevskiy <aik@amd.com>
 ---
- include/linux/pci-tsm.h | 69 ++++++++++++++++++++
- 1 file changed, 69 insertions(+)
+ drivers/virt/coco/sev-guest/Makefile                |  2 +-
+ drivers/virt/coco/sev-guest/sev-guest.h             | 16 ++++++++++++++++
+ drivers/virt/coco/sev-guest/{sev-guest.c => core.c} | 10 ++--------
+ 3 files changed, 19 insertions(+), 9 deletions(-)
 
-diff --git a/include/linux/pci-tsm.h b/include/linux/pci-tsm.h
-index 9b34304d9a1f..2ca577e2a37e 100644
---- a/include/linux/pci-tsm.h
-+++ b/include/linux/pci-tsm.h
-@@ -11,6 +11,7 @@
- struct pci_tsm;
- struct tsm_dev;
- struct kvm;
-+struct tsm_tdi_status;
- enum pci_tsm_req_scope;
+diff --git a/drivers/virt/coco/sev-guest/Makefile b/drivers/virt/coco/sev-guest/Makefile
+index 63d67c27723a..a8eb28b6736e 100644
+--- a/drivers/virt/coco/sev-guest/Makefile
++++ b/drivers/virt/coco/sev-guest/Makefile
+@@ -1,2 +1,2 @@
+ # SPDX-License-Identifier: GPL-2.0-only
+-obj-$(CONFIG_SEV_GUEST) += sev-guest.o
++obj-$(CONFIG_SEV_GUEST) += core.o
+diff --git a/drivers/virt/coco/sev-guest/sev-guest.h b/drivers/virt/coco/sev-guest/sev-guest.h
+new file mode 100644
+index 000000000000..b2a97778e635
+--- /dev/null
++++ b/drivers/virt/coco/sev-guest/sev-guest.h
+@@ -0,0 +1,16 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#ifndef __SEV_GUEST_H__
++#define __SEV_GUEST_H__
++
++#include <linux/miscdevice.h>
++#include <asm/sev.h>
++
++struct snp_guest_dev {
++	struct device *dev;
++	struct miscdevice misc;
++
++	struct snp_msg_desc *msg_desc;
++};
++
++#endif /* __SEV_GUEST_H__ */
+diff --git a/drivers/virt/coco/sev-guest/sev-guest.c b/drivers/virt/coco/sev-guest/core.c
+similarity index 99%
+rename from drivers/virt/coco/sev-guest/sev-guest.c
+rename to drivers/virt/coco/sev-guest/core.c
+index 935537a41469..98f698809720 100644
+--- a/drivers/virt/coco/sev-guest/sev-guest.c
++++ b/drivers/virt/coco/sev-guest/core.c
+@@ -27,19 +27,13 @@
+ #include <uapi/linux/psp-sev.h>
  
+ #include <asm/svm.h>
+-#include <asm/sev.h>
++
++#include "sev-guest.h"
+ 
+ #define DEVICE_NAME	"sev-guest"
+ 
+ #define SVSM_MAX_RETRIES		3
+ 
+-struct snp_guest_dev {
+-	struct device *dev;
+-	struct miscdevice misc;
+-
+-	struct snp_msg_desc *msg_desc;
+-};
+-
  /*
-@@ -88,6 +89,7 @@ struct pci_tsm_ops {
- 
- 	int (*refresh_evidence)(struct pci_tsm *tsm, const void *nonce,
- 				size_t nonce_len);
-+	int (*tdi_status)(struct pci_dev *pdev, struct tsm_tdi_status *ts);
- };
- 
- /**
-@@ -331,4 +333,71 @@ static inline ssize_t pci_tsm_guest_req(struct pci_dev *pdev,
- 	return -ENXIO;
- }
- #endif
-+
-+/* private: */
-+
-+enum tsm_tdisp_state {
-+	TDISP_STATE_CONFIG_UNLOCKED = 0,
-+	TDISP_STATE_CONFIG_LOCKED = 1,
-+	TDISP_STATE_RUN = 2,
-+	TDISP_STATE_ERROR = 3,
-+};
-+
-+enum tsm_tdisp_status {
-+	TDISP_STATE_BOUND = 0,
-+	TDISP_STATE_INVALID = 1,
-+	TDISP_STATE_UNBOUND = 2,
-+};
-+
-+/*
-+ * struct tdisp_interface_id - TDISP INTERFACE_ID Definition
-+ *
-+ * @function_id: Identifies the function of the device hosting the TDI
-+ *   15:0: @rid: Requester ID
-+ *   23:16: @rseg: Requester Segment (Reserved if Requester Segment Valid is Clear)
-+ *   24: @rseg_valid: Requester Segment Valid
-+ *   31:25 – Reserved
-+ * 8B - Reserved
-+ */
-+#define TSM_TDISP_IID_REQUESTER_ID      GENMASK(15, 0)
-+#define TSM_TDISP_IID_RSEG              GENMASK(23, 16)
-+#define TSM_TDISP_IID_RSEG_VALID        BIT(24)
-+
-+struct tdisp_interface_id {
-+	__u32 function_id; /* TSM_TDISP_IID_xxxx */
-+	__u8 reserved[8];
-+} __packed;
-+
-+struct tsm_tdi_status {
-+	__u8 status; /* enum tsm_tdisp_status */
-+	__u8 state; /* enum tsm_tdisp_state */
-+	__u8 meas_digest_fresh;
-+	__u8 meas_digest_valid;
-+	__u8 all_request_redirect;
-+	__u8 bind_p2p;
-+	__u8 lock_msix;
-+	__u8 no_fw_update;
-+	__u16 cache_line_size;
-+	__u64 spdm_algos; /* Bitmask of TSM_SPDM_ALGOS */
-+	__u8 certs_digest[48];
-+	__u8 meas_digest[48];
-+	__u8 interface_report_digest[48];
-+	__u64 intf_report_counter;
-+	struct tdisp_interface_id id;
-+	__u64 tdi_id;
-+} __packed;
-+
-+enum tsm_spdm_algos {
-+	TSM_SPDM_ALGOS_DHE_SECP256R1,
-+	TSM_SPDM_ALGOS_DHE_SECP384R1,
-+	TSM_SPDM_ALGOS_AEAD_AES_128_GCM,
-+	TSM_SPDM_ALGOS_AEAD_AES_256_GCM,
-+	TSM_SPDM_ALGOS_ASYM_TPM_ALG_RSASSA_3072,
-+	TSM_SPDM_ALGOS_ASYM_TPM_ALG_ECDSA_ECC_NIST_P256,
-+	TSM_SPDM_ALGOS_ASYM_TPM_ALG_ECDSA_ECC_NIST_P384,
-+	TSM_SPDM_ALGOS_HASH_TPM_ALG_SHA_256,
-+	TSM_SPDM_ALGOS_HASH_TPM_ALG_SHA_384,
-+	TSM_SPDM_ALGOS_KEY_SCHED_SPDM_KEY_SCHEDULE,
-+};
-+
- #endif /*__PCI_TSM_H */
+  * The VMPCK ID represents the key used by the SNP guest to communicate with the
+  * SEV firmware in the AMD Secure Processor (ASP, aka PSP). By default, the key
 -- 
 2.55.0
 
