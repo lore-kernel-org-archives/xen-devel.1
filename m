@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 48D62C88E77
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 09:29:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1422515.1647884 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 87CFFC88E5C
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 09:34:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1422523.1647892 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6lxM-0008OL-Vy; Wed, 16 Sep 2026 09:29:32 +0000
+	id 1x6m1j-0001T5-FD; Wed, 16 Sep 2026 09:34:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1422515.1647884; Wed, 16 Sep 2026 09:29:32 +0000
+Received: by outflank-mailman (output) from mailman id 1422523.1647892; Wed, 16 Sep 2026 09:34:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6lxM-0008OE-TE; Wed, 16 Sep 2026 09:29:32 +0000
-Received: by outflank-mailman (input) for mailman id 1422515;
- Wed, 16 Sep 2026 09:29:32 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x6m1j-0001Sy-Cd; Wed, 16 Sep 2026 09:34:03 +0000
+Received: by outflank-mailman (input) for mailman id 1422523;
+ Wed, 16 Sep 2026 09:34:02 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mark.syms@citrix.com>) id 1x6lxL-0008O8-RT
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 09:29:32 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1x6m1h-0001Ss-V5
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 09:34:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6lxL-009fZT-89
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 11:29:31 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x6m1h-00EySy-BW
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 11:34:01 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mark.syms@citrix.com>)
- id 6aaa6178-2eae-0a2a0a5409dd-0a2a4504d424-14
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 11:29:31 +0200
-Received: from [52.101.57.61]
- (helo=BN8PR05CU002.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <mark.syms@citrix.com>)
- id 6aaa6179-b57f-0a2a45040019-3465393d8b80-3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 11:29:30 +0200
-Received: from DS0PR03MB7557.namprd03.prod.outlook.com (2603:10b6:8:1fc::8) by
- DS0PR03MB7582.namprd03.prod.outlook.com (2603:10b6:8:1f5::5) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.428.9; Wed, 16 Sep 2026 09:29:21 +0000
-Received: from DS0PR03MB7557.namprd03.prod.outlook.com
- ([fe80::6884:8bd5:3e4d:fde7]) by DS0PR03MB7557.namprd03.prod.outlook.com
- ([fe80::6884:8bd5:3e4d:fde7%5]) with mapi id 15.21.0428.008; Wed, 16 Sep 2026
- 09:29:21 +0000
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6aaa6285-8faa-0a2a0a5109dd-0a2a450892e8-28
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 11:34:01 +0200
+Received: from [103.168.172.155] (helo=fhigh-a4-smtp.messagingengine.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6aaa6287-f659-0a2a45080019-67a8ac9bdc77-3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 11:34:00 +0200
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id AF8E514001FD;
+ Wed, 16 Sep 2026 05:33:59 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-06.internal (MEProxy); Wed, 16 Sep 2026 05:33:59 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 16 Sep 2026 05:33:58 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,261 +52,366 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=AVKZySrl2wXQU16m79sBlNxVb3a0Yq436qWDY4cIq+RclPmxMOZvTWAPNkC83OGyIdi/dL3eBbBKyngqq66IZ1LHUW9y+CwVmH8xRE870DI6cOEfcG+RCvmwKzhBnPbTY2TIHfxYdkMh8Zk3auKdSo3jTcN48CkWBWous1OLGlKyQKR6Xsp+hcNipuOmbhqF6k3mJBwEEjejfspA2sxyKW9VxWf8tu0+zwML1KwC7Ho6CXDVXQcM85sxjXVePPtF745UOK7g8ZzAlqeTC/XK6zNWkX4Eh/JBVVoaMVs4KB0puMqYc3CT7asK1hqfrXheyQj5jtLheWQDdMaSUaxPFQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=B+bVW6awHFUI9dFXxsOrceZQwHB+1lgluMYbgslDmYs=;
- b=kyMwodk6uIJI0chjcM0MDVJyR3a8GFwTbnbgPrAzD87fjB3QkpJJaguabv4BhFRPkMkRVseha/1Nzjh3PQ8TOG+1lUih7VwsHxniFPFLVXwJxGDRM4hiU9acurCVw5YV6Fb3P+9EpPhlFc0GB3hYdiJAXIExKGMyxvfr7gevkhEgbz0s8WrGQNLYgG5UsSO3It+W330dVtCSQxLlrnKDJ71QQ/8oVeLcsvb6pYtdZWjjy8f8+D6UfqU5lyghLh/sU8jHzX6jm7ANZf0JapwCgVK019s4w2VwGV+bfHRYBEBuvWn/aPh03WQFJgYtM5LjhLWHs459zHP51fVCpe84QA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=B+bVW6awHFUI9dFXxsOrceZQwHB+1lgluMYbgslDmYs=;
- b=NZ/nq9SMHOPsL8qTgZxSiTlI4isnsw8hSsd8ZjgMU1jKUAmbugR6gfaRKX5hdbpmM/o+RBdYtCzoWWgIRlbxEagxE6yM5Ki5ZYG3xkzrZhhl8SwAsGrboHfTMgoSxRCgzypfPpyUxG6/LvLua7ut0gPkk/vymiNsV5/HQGNMWzs=
-From: Mark Syms <mark.syms@citrix.com>
-To: Stefano Stabellini <sstabellini@kernel.org>, Anthony PERARD
-	<anthony@xenproject.org>, Paul Durrant <paul@xen.org>
-CC: "qemu-devel@nongnu.org" <qemu-devel@nongnu.org>, "Edgar E. Iglesias"
-	<edgar.iglesias@gmail.com>, Kevin Wolf <kwolf@redhat.com>, Hanna Reitz
-	<hreitz@redhat.com>, Stefan Hajnoczi <stefanha@redhat.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	"qemu-block@nongnu.org" <qemu-block@nongnu.org>
-Subject: Xen/QEMU PV Storage backend performance issues
-Thread-Topic: Xen/QEMU PV Storage backend performance issues
-Thread-Index: AQHdRby6p8WbXIfQiUq6fN2CsBlKNQ==
-Date: Wed, 16 Sep 2026 09:29:21 +0000
-Message-ID:
- <DS0PR03MB7557CCE44CDE2BCDB033C7A787B92@DS0PR03MB7557.namprd03.prod.outlook.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-GB
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-msip_labels:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DS0PR03MB7557:EE_|DS0PR03MB7582:EE_
-x-ms-office365-filtering-correlation-id: cee1a447-a47c-4c9e-c99a-08df13d4fd6b
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|376014|7416014|1800799024|366016|23010399003|38070700021|3023799007|10067099003|56012099006|11063799006|18002099003;
-x-microsoft-antispam-message-info:
- PHnMssEOMcXePAOP+Qw+jbbtMFEDprWcnYOfM7DERqbGfWmLaltgD3Ma0IG7wWnwi2gAWdms1jfyV43ebRhw1VjmcAbQRDCNo/n2n1FY2U2DZtwoHAQK1B9PUE3ca8y088AMB+MeqTP90XkJcgt52Q9FCeVDdS1EQnpKTMIm+lZ3Fh1qSEfehy9zCkbMpwHIvrZXvhli42kK38NzeH9EAXC63w/wAKBcgOzaj4ScMzFxFEiqh2mopUJFARNmdzKDa3a4bfrC3I0QhI0DGKZwavl3XRU/LLxaDSjO2M04yJ0WBpuXWlOOqWHqAFPwLtJ8L4yqCrBugv7IZdDT/6DDXeFjUT/CTfVUvgKMkZyBRSu3OSjZd7Clh5o2f0ngVkgba//dAPvQpzaCjO4uE8UJrAwI/N0zejov3j0w5tCiQg05MO5koMjdfSOWNlJK89KNKA6rkvw8exdf5mlGNZwfEPtoE1iQD6Ja2Quevpw9M+c1/N5onwneDusQ0maodnfz45u+jna3OxFUFrIHrgS+0PDsN6wD8XzZo8gWAm9Da/auiz6JAMVtKmJb+tcdnbyFSmVLeCVLrHtAa3n8QT85DgImr6yJHBbVeXKI585KU0hxvbg4wFhngavcK6UAdGuexz7XtZbLh3i137Is+VyUQu0NVuQ1OJEZvrgZuRsuOCqIeZJ9b8dtixjkaDJr3MdfQArtYLpmQ5cZjHYG8xOobo1ReS+VY1XWxgxraSTxPT8=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DS0PR03MB7557.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(366016)(23010399003)(38070700021)(3023799007)(10067099003)(56012099006)(11063799006)(18002099003);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?CFYT4X69YayEA+Q6AVdVO6KhOLYJbyuzQBmyfd+CSPqAvhHLpx7bPmLbGL?=
- =?iso-8859-1?Q?YzRbbPdRbNd3Z3TYovQzggB0MV2KDugxz4RhxKAL8MQaucU7+1waHnQLBG?=
- =?iso-8859-1?Q?FO0whe9tbsK+gfIWiufGUC3G8A1vFTGPsR8JKqGwvdp/ebE2vNT+nl5laY?=
- =?iso-8859-1?Q?tN0WpZZBx5e1jPc4eqZUg5eb7qhR9bXlX2ZGmIjUISEPgxYqnI7QwbviWF?=
- =?iso-8859-1?Q?s6fdY+goSKCmwXUtFHMfBi5mty2wnOTZ1D3Gct6XORn+NGzM/W/WY3LbcU?=
- =?iso-8859-1?Q?61u9ZFP1yFJGzbcO/oeLzo31M5B0AKsHLTMEAa789lWIM53wwyBYtutgnA?=
- =?iso-8859-1?Q?sCjMYq5SkyUALRSQtznbQsgFaDjHuKWTkDBXjB2SfCYWJ7yByeSyBvL7YT?=
- =?iso-8859-1?Q?btEK7H1hB1xgpxhQQXFjPyCxOdWEGc113OiOQDeAwh5m9PzHAuYtT+IBb3?=
- =?iso-8859-1?Q?zB0cNOdgL+TMtnwz8aBITq0dylR3rAZ0pusQAbcEU9jcVOIri+qaAbfYOg?=
- =?iso-8859-1?Q?0JgLuavhBPvAr1a525z89HNR7bfkilyBKP3UmNUNvK6Htd3njlMLr07dBF?=
- =?iso-8859-1?Q?uJYM8xd/38xmaXn7N9jUPLOuowrgsvpZb0hwvnQGO7oqciPCGCeJzYYGr/?=
- =?iso-8859-1?Q?5qxucsIuSNqVH1sxXh/PTG5Tb4b9HfCMHqTQkvIkrtwCPTipG11j3EXhz7?=
- =?iso-8859-1?Q?6TgvVq3N8jiWBpI/ddTyFZdAfnlzpHtRxTWqsK67m3kBZHXGtlyicFqrK9?=
- =?iso-8859-1?Q?BEONeyneqkVbyo+gMXe0xqRDtwMdS3gfpBfP2FI7fpYkl9eqOGkogOVDg+?=
- =?iso-8859-1?Q?CLcCq/QNnWM4r7NNmy+q6vAi1Ys3b7+T/0xCS5ak13J5+gELkaH/hOKPYg?=
- =?iso-8859-1?Q?98XaeiZa20vnj1sJeCNk7zquoWg40Gw2kVCyiJjJAY2Wfxa6ofO//QqVBC?=
- =?iso-8859-1?Q?DmySHCG2SH2j3nH/aXZJLZ2vgYRfDg+aOQNIT112cRQX9qXNXqNwphxpdM?=
- =?iso-8859-1?Q?IRCnZ6tENDR3/Drc8tQjA/SlmiOV1Kw4Pp40yh/hdAepS2ME9zS+m9YeA8?=
- =?iso-8859-1?Q?LD+W18D5e+83XlyzkJQrFaNCl5i24yCqGT7v4qWAIwtlLDy/iJwvsQ/m6C?=
- =?iso-8859-1?Q?idVirCTWGhDorbIRWH7mjBeeKDaH7NNczsLIXJlWZViQ3TTVi0MXnLwCvr?=
- =?iso-8859-1?Q?fHiRMWjbkD5vp/OKj7jRxzKHg9GsHDh3fr/1nHW0Q1nMNJdlh+cQKCgAZO?=
- =?iso-8859-1?Q?tGCVaLppr/3R0eTf5twUwLUrwbUnAbGvxSQorztOXpkaqBu6jWMdn7/LKd?=
- =?iso-8859-1?Q?f6w8FfbiawpbMa/xVJnLekQY3R2n8O9vyyuZw5i/Cfk6Erc+QqEQQlKDjL?=
- =?iso-8859-1?Q?7XtpU/DB4i1u2+hBkCdbi0Z9+LkjcB1XN/9R3cQVqN0/qbXBbVOT1QrwL7?=
- =?iso-8859-1?Q?tJFaj8qU55Aj/H/6prLwFhfxomNdCpbu72Em2QwZVk8iTQBpcEtL5kkuZD?=
- =?iso-8859-1?Q?uquMEbTYLbxQ0zYnvrsJvqgyzdBJUoQp+5T3f44F9HEuRV0Yh+gMczh14c?=
- =?iso-8859-1?Q?u5rX5f6buXb+npphxM21ztG62Kq+lypfi3IE1Hkni0K2ttM80DFzZgwqQ1?=
- =?iso-8859-1?Q?deGu2nhVlS8p0NQHs585xPGyO/gwQVQPV+BOgiMnXaeMFpG/CbHu/8L/JC?=
- =?iso-8859-1?Q?NCxuxMHprLpxe5ROh5EDS28IY2lsi+Ov46Ou48+0E8qhrZPKtVkfIwLDs7?=
- =?iso-8859-1?Q?5JaFl2S6JePY3JGyyM/DosA36ro2rYmfonzCfKB1BydBvl?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:Message-ID:MIME-Version:Subject:To"; dkim=pass header.s=fm1 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:Message-ID:MIME-Version:Subject:To:X-ME-Proxy:X-ME-Sender"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:message-id:mime-version:reply-to
+	:subject:subject:to:to; s=fm1; t=1789551239; x=1789637639; bh=LW
+	pTYQZgKfMCkuYeRduPa053Fwih7qDBbKTFi2jaGEY=; b=ZNi06WFEQai14WQwOY
+	r3i0BkR+NllOXiPj9a36D0lscVvBVRH5alYJ+up8AfVSpLbRU6aCmb511pN/PTHn
+	h7kDGwd7cjevfQK5E1dlTFt1qA4nq0m5qIcKgFXZwntx23F9jwtWn+OM1MtGiOhC
+	/Ve1i48d38yHiKmYRtxJG0uXQYylyWT3vevwJOP6L9/j5C1jIvURu81p0SrE6Hin
+	Ub1Izp+xdly3QukFfBqjwul2Ze3Tuo1I3SSgioepzWOXzxNMiHs8zlynCE6OCcZy
+	A7y8QgCh2akGaVrlUbJQnhKQA2W8pDV0VtvwwLmLoVdAKhw1nk0XtwwTMHM/ypwe
+	xm+A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:message-id
+	:mime-version:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1789551239; x=
+	1789637639; bh=LWpTYQZgKfMCkuYeRduPa053Fwih7qDBbKTFi2jaGEY=; b=S
+	v+oQx6ZXkLQCSm7xMf2OKjeIhGywPNagEdvTmR4bZsCl1PLha3sj5Cj2m73ne89b
+	unYgeUH/FV/7o6QHagFqMigzj2N98I4bZoUK49AexvZAD7P+WL4TZF7LfaCW3VM6
+	uYcbJx6f4BvQwezOddgwEaZMg6gbWM5PXfePcN0PPKesKRwehBmewxfGogkraIu6
+	ZATZ02ENlL9LzoWXrS8fKBjZyq9MGiYy+BMWcDAg9CDCltvlKVYF2vR86lDdpZSn
+	PJVN8skKnbpqxIMPm8hUR6u1lVk/Vp2V0k2lh2Zl7AN/onyUd5Aj/gEm2OFmZudA
+	fF0b8qWqxV6Whg6H/3tHg==
+X-ME-Sender: <xms:h2KqatThPi9yPx9bd71b1H6_k89hD_08uDVsvxqFdrzZIDA55SGGQw>
+    <xme:h2Kqasw-rnxwpCU81Jup0IRnJjz3K1sgLZDvtBTcCj1VCkldKVtbCQ0L60mJAbWPF
+    mYGZqvBKN-z3RniULwjTq89TDJtz_suOu3FTuT1SaI6Bv_ljmI>
+X-ME-Received: <xmr:h2Kqagf79KLf3NZPDbb8wSu-JVYaeskKcxqqma9L1NV3VM88RrHaQr8iVBdY>
+X-ME-Proxy-Cause: dmFkZTEc+7cC+aORsuuJJRdg6p2lxD1IHfyjNi4R3dq07RP4R5Y+HVBi7D9bzsE/UDdLBC
+    7CD7vDZe6ClS2P/K1nCP9tvAF/sAgAzBxyBVTwQvJ0DM38x2bf0aIINwTz7EtXTq6/2ZJp
+    5otaxbs57LvjtbdYd2KBFMHFNMNXDjESkTeNF6d0Hywg9HzIaRJUZXh+rXSuowX2RiMkCg
+    riy76luua9iPrUfwt8eshCOguIh/Ga1RdiuPpzRSbaZAtdG0V6I7ufJNowAsctniyWZdqy
+    5q75xZWUoSjb1yASeKFS02hUcshGnw6TmlZ1tG5+JQ2Dip80u5EgI3kbC+Ut7vf6S0+jBk
+    UhEk0L9qB6XyO4KPXjG5H1F9+shtorkRkkt6o5SlM8sL/5H4rMDS9VZW7aAL2vdr2JSrQu
+    pGCD/rf8hHLynQUxcYT4DRSH/heFA23DxYcZb7eyBN2nVxDzsmGjZ3iHp5EzKFDO7zgVWZ
+    KrQqFew2WmFf/M+YYjmjyACorkv1e/T78ovPVAg7Wrr/C9whDbzxxxnpkMSljr0CrFiAuZ
+    6B/uX0IBZ9Q3tMIDyM60+BX+7GDNxgszk51jqggkuorqduvu7J/lmAgXCPBoO3t9GdYYgd
+    09VJyPZg/5QroMzMqJjcwJExxEne+hUP9iftqnrVTOjSBsl6I3+QcpA0Sryg
+X-ME-Proxy: <xmx:h2KqagJ1JSDZUAtxd7d7puhEvk0JFqMyeu1R2ciJv93mptmd56B52g>
+    <xmx:h2KqapEbsdqqJTwDNlZDsaV0nD7lzAO5lC614M9RXrK64ZCW0rqTXA>
+    <xmx:h2KqairucAEUqTfc1H8028P7XcwWvFvWJ0T-mDqeo4_vIz-koFtgWQ>
+    <xmx:h2KqaqTWW-maUbJTI5lhxukHBWF057BYmgtk1RbkUQTjXBAUim8QMQ>
+    <xmx:h2KqaqVcOfJ3PPBXo5-YYllX6yGxVEwCgC9JydbKeXqU-svYRcbGx7gP>
+Feedback-ID: i1568416f:Fastmail
+Date: Wed, 16 Sep 2026 11:33:57 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Teddy Astie <teddy.astie@vates.tech>
+Subject: Test report: IGD (RPL) SR-IOV on Xen - Linux 7.2.5, xe
+Message-ID: <aqpihasUJ4lTZcnU@mail-itl>
 MIME-Version: 1.0
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DS0PR03MB7557.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: cee1a447-a47c-4c9e-c99a-08df13d4fd6b
-X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Sep 2026 09:29:21.5167
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: OsOjePThIar9NRrPnoith6NwKDmggnjcxgH1AcpgKQiSKhESJmG/m5U+wg/hjoP02pEtqEnxBB8dWa/MHGF5jg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR03MB7582
-X-purgate-ID: tlsNG-ebf023/1789550971-504DBB50-A651B5C4/0/0
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="NmWEiZWwkdeD2rFi"
+Content-Disposition: inline
+X-purgate-ID: tlsNG-c1860d/1789551241-D594A87B-29B048F9/0/0
 X-purgate-type: clean
-X-purgate-size: 8340
+X-purgate-size: 16345
 
-Stefano, Anthony, Paul,=0A=
-=0A=
-Hi guys, hope this finds you all well. We, in XenServer, have been=0A=
-doing some back to back Xen VM PV storage backend performance=0A=
-comparisons between tapdisk + VHD and QEMU + QCOW2. The image=0A=
-storage format appears to be largely irrelevant to the rest of this=0A=
-conversation. In doing so we have found a few significant issues in=0A=
-QEMU, mainly around the xen-block dataplane and adjacent code.=0A=
-=0A=
-## Testing Environment=0A=
-=0A=
-Debian 12 VM, 8 vCPUS, 4G Ram on XenServer 9. Three virtual block=0A=
-devices, one for the OS on host local storage and two, unformatted,=0A=
-20G test devices, one backed by tapdisk and one backed by QEMU. These=0A=
-disks themselves are then backed by a BRD based target hosted on a=0A=
-native installed Rocky 9.8 host. The two hosts are connected over a=0A=
-25G, 9000 MTU, switched storage network whose switch is rated to run=0A=
-all ports at wire speed without contention. In the guest=0A=
-`xen_blkfront` is configured with `max_ring_page_order=3D3`, which is=0A=
-honoured by both tapdisk and QEMU. QEMU supports 4 but tapdisk caps at=0A=
-3 so for consistency 3 was used. Performance data was collected by=0A=
-`fio` v3.33 from the default Debian 12 repo.=0A=
-=0A=
-Note: we did find during this that QEMU has a separate problem with=0A=
-feature publication when hot plugging a device -=0A=
-=0A=
-https://lists.gnu.org/archive/html/qemu-devel/2026-09/msg03492.html=0A=
-=0A=
-This was worked around by always cold booting the VM which then=0A=
-negotiates correctly.=0A=
-=0A=
-## Results=0A=
-=0A=
-The following table is the full grid from the testing=0A=
-performed. Points are expressed as ratios of QEMU/tapdisk so any=0A=
-points < 1.0 show QEMU having a performance deficit. Each figure is=0A=
-the median of the per-repeat ratio over 12 repeats, the first discarded=0A=
-as unstable on a newly booted VM. The tapdisk arm is measured=0A=
-seconds away from the QEMU arm in every repeat, so that drift in the=0A=
-rig cancels rather than being attributed to either datapath.=0A=
-=0A=
-| block size | queue depth | read | write |=0A=
-|:-----------|------------:|-----:|------:|=0A=
-| 4k         |           1 | 0.73 |  0.73 |=0A=
-| 64k        |           1 | 0.81 |  0.83 |=0A=
-| 256k       |           1 | 0.67 |  0.92 |=0A=
-| 1m         |           1 | 0.67 |  0.76 |=0A=
-| 4m         |           1 | 0.81 |  1.01 |=0A=
-| 4k         |          32 | 1.90 |  1.32 |=0A=
-| 64k        |          32 | 0.99 |  1.00 |=0A=
-| 256k       |          32 | 1.14 |  0.84 |=0A=
-| 1m         |          32 | 0.86 |  0.88 |=0A=
-| 4m         |          32 | 0.87 |  0.86 |=0A=
-=0A=
-Median across the 20 cells is 0.86, with 5 of 20 at or above parity.=0A=
-=0A=
-The deficit is concentrated at queue depth 1, which is what pointed at=0A=
-per-request latency rather than throughput. Note that 1m QD1 read is the=0A=
-noisiest cell in the grid at 24% coefficient of variation across=0A=
-repeats, so treat 0.67 as "much worse" rather than as a precise figure;=0A=
-the 4k and 64k QD1 cells sit at 3-4% and are solid. 1m QD1 is noisy on=0A=
-both backends and is probably an artifact of the environment.=0A=
-=0A=
-## Issues found=0A=
-=0A=
-1. **Large (4m) blocksize read**. Analysis determined that this was=0A=
-   impacted by QEMU being overly keen in notifying the frontend of=0A=
-   completion responses being placed into the ring. In turn this=0A=
-   results in a Dom0 to DomU context switch and all the associated=0A=
-   hypervisor flushes and mitigations. This can also be observed in=0A=
-   the `ctx` count tracker in `fio` itself. Tapdisk mitigates this by=0A=
-   only sending the notification on the `final` completion, managed by=0A=
-   a `bool` flag. For QEMU we can use built in primitives such as=0A=
-   `qemu_bh_schedule` so that the notify is sent at the tail of=0A=
-   processing the `iothread` events.=0A=
-=0A=
-2. **Small (4k) Queue Depth 1 read/writes**. Analysis pointed at=0A=
-   dataplane wakeup latency of ~57us being the culprit. Tapdisk=0A=
-   mitigates this by implementing polling, for a defined time period,=0A=
-   after receiving a request from the ring. QEMU contains built in=0A=
-   support for equivalent polling which can be set a property on the=0A=
-   `iothread`. However there is no plumbing for this in=0A=
-   `xen_device_set_event_channel_context` as `io_poll_ready` is passed=0A=
-   as NULL to `aio_set_fd_handler` so no polling occurs regardless of=0A=
-   the value set for `poll-max-ns`. Adding an implementation for this=0A=
-   goes most of the way to addressing this issue. Matching tapdisk we=0A=
-   used 8,000,000, i.e. 8ms. This ensures that the poll window exceeds=0A=
-   the backend service time. There should be no `evtchn` unmask in the=0A=
-   `io_poll_end` as this will introduce a CPU spin in the poller.=0A=
-=0A=
-3. **Overall performance deficit**. After addressing the above two=0A=
-   issues, overall comparative performance was still found to be=0A=
-   deficient relative to tapdisk. Analysis found that QEMU was making=0A=
-   many more, much smaller, I/O requests to the block layer than=0A=
-   tapdisk was for equivalent guest I/O patterns. This I/O pattern=0A=
-   difference was traced to tapdisk performing merges of adjacent,=0A=
-   same operation, I/O requests at the blkif level before submitting=0A=
-   to the lower level format drivers. Equivalent behaviour can be=0A=
-   achieved in QEMU using the `qemu_iovec` function family and issuing=0A=
-   `blk_aio_pwritev`/`blk_aio_preadv` as necessary. Suitable=0A=
-   completion fan-out is then needed to respond appropriately to the=0A=
-   associated request IDs.=0A=
-=0A=
-## Outcomes=0A=
-=0A=
-After addressing the above items the resulting comparison table is as=0A=
-follows, measured the same way on the same rig as the table above,=0A=
-again 12 repeats, first discarded.=0A=
-=0A=
-| block size | queue depth | read | write |=0A=
-|:-----------|------------:|-----:|------:|=0A=
-| 4k         |           1 | 1.07 |  1.07 |=0A=
-| 64k        |           1 | 1.02 |  1.03 |=0A=
-| 256k       |           1 | 0.93 |  1.04 |=0A=
-| 1m         |           1 | 0.80 |  1.00 |=0A=
-| 4m         |           1 | 1.03 |  1.01 |=0A=
-| 4k         |          32 | 2.24 |  1.50 |=0A=
-| 64k        |          32 | 1.05 |  1.00 |=0A=
-| 256k       |          32 | 1.32 |  0.99 |=0A=
-| 1m         |          32 | 1.17 |  0.99 |=0A=
-| 4m         |          32 | 1.06 |  0.98 |=0A=
-=0A=
-Median across the 20 cells moves from 0.86 to 1.03, and the number of=0A=
-cells at or above parity from 5 of 20 to 13 of 20. The cells still=0A=
-well below parity are 1m QD1 read at 0.80, 256k QD1 read at 0.93, the=0A=
-other deficient cells are 1-2% down.=0A=
-=0A=
-4k QD1 operations benefited most from the fixes for issue 2, voluntary=0A=
-context switches per I/O went from 1.94 to 0.00, corresponding CPU=0A=
-usage went from 26.5% to 96.7% which is a significant increase but it=0A=
-was mostly doing useful work.=0A=
-=0A=
-We believe that the final 3 rows of QD32 operations are probably I/O=0A=
-bound on the iSCSI transport.=0A=
-=0A=
-One cell deserves comment so it is not mistaken for one of our fixes.=0A=
-4k QD32 sits well above parity at 2.24 read and 1.50 write, but it was=0A=
-already at 1.90 and 1.32 before any of these changes; whatever causes=0A=
-it is pre-existing and we have not investigated it.=0A=
-=0A=
-XenServer has fixes for all of the above issues which are undergoing=0A=
-further testing before release to customers. We can't send these to=0A=
-qemu-devel as we have made extensive use of Claude Opus 5 in all=0A=
-aspects of this work from defining the test environment, the test=0A=
-strategy and automation to implement it, post-run analysis and gap=0A=
-detection, and finally implementation of the solution fixes. All text=0A=
-in this message is mine with the exception of the data tables.=0A=
-=0A=
-We did feel though that it was only right that we made you aware of=0A=
-the issues we have found so that you can make your own decisions about=0A=
-them and whether to address them.=0A=
-=0A=
-I'm happy to have any further conversation on this as you deem=0A=
-necessary.=0A=
-=0A=
-Regards,=0A=
-=0A=
-Mark=0A=
-XenServer Storage Engineering.=0A=
+--NmWEiZWwkdeD2rFi
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Wed, 16 Sep 2026 11:33:57 +0200
+From: Marek =?utf-8?B?PT91dGYtOD9RP01hcmN6eWtvd3NraS1HPUMzPUIzcmVja2k/PQ==?= <marmarek@invisiblethingslab.com>
+To: xen-devel <xen-devel@lists.xenproject.org>
+Cc: Teddy Astie <teddy.astie@vates.tech>
+Subject: Test report: IGD (RPL) SR-IOV on Xen - Linux 7.2.5, xe
+
+Hi,
+
+I was talking with Teddy about SR-IOV of Intel GPU and decided to repeat
+the test.
+
+My setup is:
+Hardware:
+Intel Raptor Lake system with:
+00:02.0 Display controller [0380]: Intel Corporation Raptor Lake-S GT1 [UHD=
+ Graphics 770] [8086:a780] (rev 04)
+
+Software:
+Qubes 4.3 with Xen 4.19.5
+(PV) Dom0 Linux 6.18.51, with "xe.force_probe=3Da780 i915.force_probe=3D!a7=
+80" on
+cmdline
+DomU Linux 7.2.5, also with "xe.force_probe=3Da780 i915.force_probe=3D!a780"
+on cmdline
+
+Hardware-wise, this platform should support SR-IOV:
+https://www.intel.com/content/www/us/en/support/articles/000093216/graphics=
+/processor-graphics.html
+
+But software-wise, the "xe" driver doesn't officially support this
+platform - this one is officially still on i915 - which in upstream
+version doesn't support SR-IOV at all. There is a i915 branch from
+Intel with SR-IOV support added, but it isn't maintained anymore, and I
+had worse results with it (although some people report it worked for
+them).
+
+I tried also LNL, but the one I have does not advertise SR-IOV at all
+(not sure if hardware lacking, or disabled at firmware level).
+I have also PTL that should theoretically be better, but userspace side
+on the current Qubes OS version is too old for that, so it's more
+complicated for me to test.
+
+Anyway, back to RPL:
+
+Dom0 steps:
+echo 7 > /sys/bus/pci/devices/0000:00:02.0/sriov_numvfs
+
+This makes the VFs to appear, now they can be assigned to a domU (I used
+00:02.1).
+
+Dom0 messages on boot:
+[    6.063363] xe 0000:00:02.0: [drm] Running in SR-IOV PF mode
+[    6.063373] xe 0000:00:02.0: [drm] Found alderlake_s/raptorlake_s (devic=
+e ID a780) integrated display version 12.00 stepping D0
+[    6.119874] xe 0000:00:02.0: [drm] Finished loading DMC firmware i915/ad=
+ls_dmc_ver2_01.bin (v2.1)
+[    6.129583] xe 0000:00:02.0: [drm] Tile0: GT0: Using GuC firmware from i=
+915/tgl_guc_70.bin version 70.49.4
+[    6.134506] xe 0000:00:02.0: [drm] Tile0: GT0: Using HuC firmware from i=
+915/tgl_huc.bin version 7.9.3
+[    6.224163] xe 0000:00:02.0: [drm] Tile0: GT0: vcs1 fused off
+[    6.224237] xe 0000:00:02.0: [drm] Tile0: GT0: vcs3 fused off
+[    6.224240] xe 0000:00:02.0: [drm] Tile0: GT0: vcs4 fused off
+[    6.224244] xe 0000:00:02.0: [drm] Tile0: GT0: vcs5 fused off
+[    6.224248] xe 0000:00:02.0: [drm] Tile0: GT0: vcs6 fused off
+[    6.224251] xe 0000:00:02.0: [drm] Tile0: GT0: vcs7 fused off
+[    6.224255] xe 0000:00:02.0: [drm] Tile0: GT0: vecs1 fused off
+[    6.224259] xe 0000:00:02.0: [drm] Tile0: GT0: vecs2 fused off
+[    6.224262] xe 0000:00:02.0: [drm] Tile0: GT0: vecs3 fused off
+[    6.242973] xe 0000:00:02.0: [drm] Registered 4 planes with drm panic
+[    6.242979] [drm] Initialized xe 1.1.0 for 0000:00:02.0 on minor 0
+[    6.323673] xe 0000:00:02.0: [drm] Allocated fbdev into stolen failed: -=
+12
+[    6.326272] Console: switching to colour frame buffer device 128x48
+[    6.343560] xe 0000:00:02.0: [drm] fb1: xedrmfb frame buffer device
+
+And then on adding VFs:
+[  274.829735] xe 0000:00:02.0: [drm] Tile0: GT0: PF: VF1..VF7 provisioned =
+with 598138880 (570 MiB) GGTT
+[  274.830257] xe 0000:00:02.0: [drm] Tile0: GT0: PF: VF1..VF7 provisioned =
+with 9324 GuC context IDs
+[  274.831069] xe 0000:00:02.0: [drm] Tile0: GT0: PF: VF1..VF7 provisioned =
+with 36 GuC doorbell IDs
+[  274.935797] pci 0000:00:02.1: [8086:a780] type 00 class 0x038000 PCIe Ro=
+ot Complex Integrated Endpoint
+[  274.935947] pci 0000:00:02.1: DMAR: Skip IOMMU disabling for graphics
+[  274.936569] i915 0000:00:02.1: I915 probe blocked for Device ID a780.
+[  274.936607] xe 0000:00:02.1: enabling device (0000 -> 0002)
+[  274.940247] xe 0000:00:02.1: [drm] Running in SR-IOV VF mode
+[  274.940272] xe 0000:00:02.1: [drm] VF: migration disabled: experimental =
+feature not available on production builds
+[  274.958658] xe 0000:00:02.1: [drm] Tile0: GT0: vcs1 fused off
+[  274.958664] xe 0000:00:02.1: [drm] Tile0: GT0: vcs3 fused off
+[  274.958668] xe 0000:00:02.1: [drm] Tile0: GT0: vcs4 fused off
+[  274.958671] xe 0000:00:02.1: [drm] Tile0: GT0: vcs5 fused off
+[  274.958674] xe 0000:00:02.1: [drm] Tile0: GT0: vcs6 fused off
+[  274.958677] xe 0000:00:02.1: [drm] Tile0: GT0: vcs7 fused off
+[  274.958680] xe 0000:00:02.1: [drm] Tile0: GT0: vecs1 fused off
+[  274.958683] xe 0000:00:02.1: [drm] Tile0: GT0: vecs2 fused off
+[  274.958686] xe 0000:00:02.1: [drm] Tile0: GT0: vecs3 fused off
+[  274.964105] [drm] Initialized xe 1.1.0 for 0000:00:02.1 on minor 1
+[  274.964276] pci 0000:00:02.2: [8086:a780] type 00 class 0x038000 PCIe Ro=
+ot Complex Integrated Endpoint
+[  274.964297] pci 0000:00:02.2: DMAR: Skip IOMMU disabling for graphics
+[  274.964426] i915 0000:00:02.2: I915 probe blocked for Device ID a780.
+[  274.964440] xe 0000:00:02.2: enabling device (0000 -> 0002)
+[  274.965163] xe 0000:00:02.2: [drm] Running in SR-IOV VF mode
+[  274.965167] xe 0000:00:02.2: [drm] VF: migration disabled: experimental =
+feature not available on production builds
+[  274.981117] xe 0000:00:02.2: [drm] Tile0: GT0: vcs1 fused off
+[  274.981124] xe 0000:00:02.2: [drm] Tile0: GT0: vcs3 fused off
+[  274.981127] xe 0000:00:02.2: [drm] Tile0: GT0: vcs4 fused off
+[  274.981130] xe 0000:00:02.2: [drm] Tile0: GT0: vcs5 fused off
+[  274.981134] xe 0000:00:02.2: [drm] Tile0: GT0: vcs6 fused off
+[  274.981137] xe 0000:00:02.2: [drm] Tile0: GT0: vcs7 fused off
+[  274.981140] xe 0000:00:02.2: [drm] Tile0: GT0: vecs1 fused off
+[  274.981143] xe 0000:00:02.2: [drm] Tile0: GT0: vecs2 fused off
+[  274.981146] xe 0000:00:02.2: [drm] Tile0: GT0: vecs3 fused off
+[  274.986586] [drm] Initialized xe 1.1.0 for 0000:00:02.2 on minor 2
+[  274.986666] pci 0000:00:02.3: [8086:a780] type 00 class 0x038000 PCIe Ro=
+ot Complex Integrated Endpoint
+[  274.986690] pci 0000:00:02.3: DMAR: Skip IOMMU disabling for graphics
+[  274.986873] i915 0000:00:02.3: I915 probe blocked for Device ID a780.
+[  274.986886] xe 0000:00:02.3: enabling device (0000 -> 0002)
+[  274.987857] xe 0000:00:02.3: [drm] Running in SR-IOV VF mode
+[  274.987949] xe 0000:00:02.3: [drm] VF: migration disabled: experimental =
+feature not available on production builds
+[  275.000724] xe 0000:00:02.3: [drm] Tile0: GT0: vcs1 fused off
+[  275.000730] xe 0000:00:02.3: [drm] Tile0: GT0: vcs3 fused off
+[  275.000733] xe 0000:00:02.3: [drm] Tile0: GT0: vcs4 fused off
+[  275.000736] xe 0000:00:02.3: [drm] Tile0: GT0: vcs5 fused off
+[  275.000739] xe 0000:00:02.3: [drm] Tile0: GT0: vcs6 fused off
+[  275.000742] xe 0000:00:02.3: [drm] Tile0: GT0: vcs7 fused off
+[  275.000745] xe 0000:00:02.3: [drm] Tile0: GT0: vecs1 fused off
+[  275.000748] xe 0000:00:02.3: [drm] Tile0: GT0: vecs2 fused off
+[  275.000751] xe 0000:00:02.3: [drm] Tile0: GT0: vecs3 fused off
+[  275.005750] [drm] Initialized xe 1.1.0 for 0000:00:02.3 on minor 3
+[  275.005819] pci 0000:00:02.4: [8086:a780] type 00 class 0x038000 PCIe Ro=
+ot Complex Integrated Endpoint
+[  275.005844] pci 0000:00:02.4: DMAR: Skip IOMMU disabling for graphics
+[  275.006222] i915 0000:00:02.4: I915 probe blocked for Device ID a780.
+[  275.006236] xe 0000:00:02.4: enabling device (0000 -> 0002)
+[  275.007191] xe 0000:00:02.4: [drm] Running in SR-IOV VF mode
+[  275.007197] xe 0000:00:02.4: [drm] VF: migration disabled: experimental =
+feature not available on production builds
+[  275.023297] xe 0000:00:02.4: [drm] Tile0: GT0: vcs1 fused off
+[  275.023303] xe 0000:00:02.4: [drm] Tile0: GT0: vcs3 fused off
+[  275.023306] xe 0000:00:02.4: [drm] Tile0: GT0: vcs4 fused off
+[  275.023309] xe 0000:00:02.4: [drm] Tile0: GT0: vcs5 fused off
+[  275.023312] xe 0000:00:02.4: [drm] Tile0: GT0: vcs6 fused off
+[  275.023315] xe 0000:00:02.4: [drm] Tile0: GT0: vcs7 fused off
+[  275.023318] xe 0000:00:02.4: [drm] Tile0: GT0: vecs1 fused off
+[  275.023321] xe 0000:00:02.4: [drm] Tile0: GT0: vecs2 fused off
+[  275.023324] xe 0000:00:02.4: [drm] Tile0: GT0: vecs3 fused off
+[  275.028862] [drm] Initialized xe 1.1.0 for 0000:00:02.4 on minor 4
+[  275.028936] pci 0000:00:02.5: [8086:a780] type 00 class 0x038000 PCIe Ro=
+ot Complex Integrated Endpoint
+[  275.028958] pci 0000:00:02.5: DMAR: Skip IOMMU disabling for graphics
+[  275.029139] i915 0000:00:02.5: I915 probe blocked for Device ID a780.
+[  275.029151] xe 0000:00:02.5: enabling device (0000 -> 0002)
+[  275.030260] xe 0000:00:02.5: [drm] Running in SR-IOV VF mode
+[  275.030266] xe 0000:00:02.5: [drm] VF: migration disabled: experimental =
+feature not available on production builds
+[  275.042968] xe 0000:00:02.5: [drm] Tile0: GT0: vcs1 fused off
+[  275.042974] xe 0000:00:02.5: [drm] Tile0: GT0: vcs3 fused off
+[  275.042977] xe 0000:00:02.5: [drm] Tile0: GT0: vcs4 fused off
+[  275.042980] xe 0000:00:02.5: [drm] Tile0: GT0: vcs5 fused off
+[  275.042983] xe 0000:00:02.5: [drm] Tile0: GT0: vcs6 fused off
+[  275.042986] xe 0000:00:02.5: [drm] Tile0: GT0: vcs7 fused off
+[  275.042989] xe 0000:00:02.5: [drm] Tile0: GT0: vecs1 fused off
+[  275.042992] xe 0000:00:02.5: [drm] Tile0: GT0: vecs2 fused off
+[  275.042995] xe 0000:00:02.5: [drm] Tile0: GT0: vecs3 fused off
+[  275.047932] [drm] Initialized xe 1.1.0 for 0000:00:02.5 on minor 5
+[  275.048093] pci 0000:00:02.6: [8086:a780] type 00 class 0x038000 PCIe Ro=
+ot Complex Integrated Endpoint
+[  275.048125] pci 0000:00:02.6: DMAR: Skip IOMMU disabling for graphics
+[  275.048443] i915 0000:00:02.6: I915 probe blocked for Device ID a780.
+[  275.048456] xe 0000:00:02.6: enabling device (0000 -> 0002)
+[  275.049613] xe 0000:00:02.6: [drm] Running in SR-IOV VF mode
+[  275.049622] xe 0000:00:02.6: [drm] VF: migration disabled: experimental =
+feature not available on production builds
+[  275.068094] xe 0000:00:02.6: [drm] Tile0: GT0: vcs1 fused off
+[  275.068100] xe 0000:00:02.6: [drm] Tile0: GT0: vcs3 fused off
+[  275.068103] xe 0000:00:02.6: [drm] Tile0: GT0: vcs4 fused off
+[  275.068107] xe 0000:00:02.6: [drm] Tile0: GT0: vcs5 fused off
+[  275.068110] xe 0000:00:02.6: [drm] Tile0: GT0: vcs6 fused off
+[  275.068113] xe 0000:00:02.6: [drm] Tile0: GT0: vcs7 fused off
+[  275.068116] xe 0000:00:02.6: [drm] Tile0: GT0: vecs1 fused off
+[  275.068119] xe 0000:00:02.6: [drm] Tile0: GT0: vecs2 fused off
+[  275.068122] xe 0000:00:02.6: [drm] Tile0: GT0: vecs3 fused off
+[  275.073227] [drm] Initialized xe 1.1.0 for 0000:00:02.6 on minor 6
+[  275.073299] pci 0000:00:02.7: [8086:a780] type 00 class 0x038000 PCIe Ro=
+ot Complex Integrated Endpoint
+[  275.073323] pci 0000:00:02.7: DMAR: Skip IOMMU disabling for graphics
+[  275.073512] i915 0000:00:02.7: I915 probe blocked for Device ID a780.
+[  275.073525] xe 0000:00:02.7: enabling device (0000 -> 0002)
+[  275.074485] xe 0000:00:02.7: [drm] Running in SR-IOV VF mode
+[  275.074581] xe 0000:00:02.7: [drm] VF: migration disabled: experimental =
+feature not available on production builds
+[  275.088133] xe 0000:00:02.7: [drm] Tile0: GT0: vcs1 fused off
+[  275.088139] xe 0000:00:02.7: [drm] Tile0: GT0: vcs3 fused off
+[  275.088142] xe 0000:00:02.7: [drm] Tile0: GT0: vcs4 fused off
+[  275.088146] xe 0000:00:02.7: [drm] Tile0: GT0: vcs5 fused off
+[  275.088149] xe 0000:00:02.7: [drm] Tile0: GT0: vcs6 fused off
+[  275.088152] xe 0000:00:02.7: [drm] Tile0: GT0: vcs7 fused off
+[  275.088155] xe 0000:00:02.7: [drm] Tile0: GT0: vecs1 fused off
+[  275.088159] xe 0000:00:02.7: [drm] Tile0: GT0: vecs2 fused off
+[  275.088162] xe 0000:00:02.7: [drm] Tile0: GT0: vecs3 fused off
+[  275.093163] [drm] Initialized xe 1.1.0 for 0000:00:02.7 on minor 7
+[  275.093338] xe 0000:00:02.0: [drm] PF: Enabled 7 of 7 VFs
+
+
+And then domU kernel messages:
+[  101.601460] xe 0000:00:07.0: [drm] Running in SR-IOV VF mode
+[  101.601479] xe 0000:00:07.0: [drm] VF: migration disabled: experimental =
+feature not available on production builds
+[  101.616800] xe 0000:00:07.0: [drm] Tile0: GT0: vcs1 fused off
+[  101.616818] xe 0000:00:07.0: [drm] Tile0: GT0: vcs3 fused off
+[  101.616831] xe 0000:00:07.0: [drm] Tile0: GT0: vcs4 fused off
+[  101.616844] xe 0000:00:07.0: [drm] Tile0: GT0: vcs5 fused off
+[  101.616856] xe 0000:00:07.0: [drm] Tile0: GT0: vcs6 fused off
+[  101.616872] xe 0000:00:07.0: [drm] Tile0: GT0: vcs7 fused off
+[  101.616885] xe 0000:00:07.0: [drm] Tile0: GT0: vecs1 fused off
+[  101.616899] xe 0000:00:07.0: [drm] Tile0: GT0: vecs2 fused off
+[  101.616912] xe 0000:00:07.0: [drm] Tile0: GT0: vecs3 fused off
+[  101.623546] [drm] Initialized xe 1.1.0 for 0000:00:07.0 on minor 0
+
+but when actually trying to use the device, it fails:
+[  177.031375] xe 0000:00:07.0: [drm] Tile0: GT0: Schedule disable failed t=
+o respond, guc_id=3D2
+[  177.031520] xe 0000:00:07.0: [drm] Xe device coredump has been created
+[  177.031558] xe 0000:00:07.0: [drm] Check your /sys/class/drm/card0/devic=
+e/devcoredump/data
+[  177.031598] xe 0000:00:07.0: [drm] Tile0: GT0: trying reset from guc_exe=
+c_queue_timedout_job [xe]
+[  177.031934] xe 0000:00:07.0: [drm] Tile0: GT0: reset queued
+[  177.031985] xe 0000:00:07.0: [drm] Tile0: GT0: reset started
+[  177.092882] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: GuC mmio request =
+0x5507: no reply 0xffff
+[  177.143396] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: GuC mmio request =
+0x5507: no reply 0x5507
+[  177.211682] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: GuC mmio request =
+0x5507: no reply 0x5507
+[  177.270458] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: GuC mmio request =
+0x5507: no reply 0x5507
+[  177.333223] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: GuC mmio request =
+0x5507: no reply 0x5507
+[  177.392473] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: GuC mmio request =
+0x5507: no reply 0x5507
+[  177.447398] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: GuC mmio request =
+0x5507: no reply 0x5507
+[  177.515673] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: GuC mmio request =
+0x5507: no reply 0x5507
+[  177.574551] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: GuC mmio request =
+0x5507: no reply 0x5507
+[  177.637391] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: GuC mmio request =
+0x5507: no reply 0x5507
+[  177.637455] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: VF: Failed to res=
+et GuC state (-ETIMEDOUT)
+[  177.637537] xe 0000:00:07.0: [drm] *ERROR* Tile0: GT0: reset failed (-ET=
+IMEDOUT)
+[  177.637610] xe 0000:00:07.0: [drm] *ERROR* CRITICAL: Xe has declared dev=
+ice 0000:00:07.0 as wedged.
+[  177.637610] IOCTLs and executions are blocked. Only a rebind may clear t=
+he failure
+[  177.637610] Please file a _new_ bug report at https://gitlab.freedesktop=
+=2Eorg/drm/xe/kernel/issues/new
+[  177.637744] xe 0000:00:07.0: [drm] device wedged, needs recovery
+[  177.637842] xe 0000:00:07.0: [drm] Tile0: GT0: Timedout job: seqno=3D429=
+4967175, lrc_seqno=3D4294967175, guc_id=3D2, flags=3D0x0 in Xorg [1388]
+
+Full logs, note multiple files there (unfortunately start of Xen log is cut=
+):
+https://gist.github.com/marmarek/fe5cdd3a82efc75a02f5b3050e6b5c89
+
+I kinda suspect getting similar result on PTL, but I'll hold off with
+the proper bug report until I can actually confirm it.
+I'll repeat the test on Xen 4.22 later.
+
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
+
+--NmWEiZWwkdeD2rFi
+Content-Type: application/pgp-signature; name=signature.asc
+
+-----BEGIN PGP SIGNATURE-----
+
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmqqYoUACgkQ24/THMrX
+1yznMgf9FGkgF3LjGrMzbMYdVZJLexSo/N5oqdFOTNduAirhZt8wkZLW4TmRQIx+
+/6tsxRlZsbNfE9Hc27fKgFjU+Ry5toMJH4Q1WvAXjkzjHRREvUf/jQTX+OyCs/8C
+wf6sdprXKUxKIT2AIcYFOoBNUUAT77Bp4AJaZTkwmFesAbW4JUqHezPomK1cFdbR
+85YfTJtboX5JzGrR8W5AQPuZ4vnlTTcgRTcHK6nhn7VpM42rQsrteE2SM5HJmxmd
+1t+E9uwzYr/t26zMNAR9c+6SrAL84/7R4m3NPDYydJOFAsYbCFNyTpOD77CQ7srM
+hFBHQQohr1fpVbCGw0+hECdAWEsJ7w==
+=yRu6
+-----END PGP SIGNATURE-----
+
+--NmWEiZWwkdeD2rFi--
 
