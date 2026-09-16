@@ -4,52 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6F48C88E77
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 07:51:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1422435.1647848 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 066F4C88E77
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 08:23:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1422455.1647857 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6kQR-0003Br-4t; Wed, 16 Sep 2026 07:51:27 +0000
+	id 1x6kvL-000813-V6; Wed, 16 Sep 2026 08:23:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1422435.1647848; Wed, 16 Sep 2026 07:51:27 +0000
+Received: by outflank-mailman (output) from mailman id 1422455.1647857; Wed, 16 Sep 2026 08:23:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6kQR-0003Bk-1r; Wed, 16 Sep 2026 07:51:27 +0000
-Received: by outflank-mailman (input) for mailman id 1422435;
- Wed, 16 Sep 2026 07:51:26 +0000
+	id 1x6kvL-00080w-SI; Wed, 16 Sep 2026 08:23:23 +0000
+Received: by outflank-mailman (input) for mailman id 1422455;
+ Wed, 16 Sep 2026 08:23:22 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <tzimmermann@suse.de>) id 1x6kQP-0003Be-Py
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 07:51:26 +0000
+ (envelope-from <kevin.lampis@citrix.com>) id 1x6kvJ-00080q-Pn
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 08:23:22 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6kQP-001bxM-3B
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 09:51:25 +0200
+ id 1x6kvF-001jlh-JM
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 10:23:17 +0200
 Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <tzimmermann@suse.de>)
- id 6aaa4a75-8faa-0a2a0a5109dd-0a2a4506b270-22
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 09:51:25 +0200
-Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
+ (envelope-from <kevin.lampis@citrix.com>)
+ id 6aaa51ea-e002-0a2a0a5209dd-0a2a4506d892-48
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 10:23:17 +0200
+Received: from [52.101.53.23]
+ (helo=BL0PR03CU003.outbound.protection.outlook.com)
  by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <tzimmermann@suse.de>)
- id 6aaa4a7c-195a-0a2a45060019-c387df83b132-3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 09:51:24 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 404C41FD86;
- Wed, 16 Sep 2026 07:51:16 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 51DDA136A5;
- Wed, 16 Sep 2026 07:51:15 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id Kr1lAXNKqmpDJwAAD6G6ig
- (envelope-from <tzimmermann@suse.de>); Wed, 16 Sep 2026 07:51:15 +0000
+ (envelope-from <kevin.lampis@citrix.com>)
+ id 6aaa51f4-195a-0a2a45060019-34653517907f-3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 10:23:17 +0200
+Received: from BY1PR03MB7996.namprd03.prod.outlook.com (2603:10b6:a03:5b2::8)
+ by SA1PR03MB7147.namprd03.prod.outlook.com (2603:10b6:806:336::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Wed, 16 Sep
+ 2026 08:23:14 +0000
+Received: from BY1PR03MB7996.namprd03.prod.outlook.com
+ ([fe80::5068:e1b5:b478:8d07]) by BY1PR03MB7996.namprd03.prod.outlook.com
+ ([fe80::5068:e1b5:b478:8d07%3]) with mapi id 15.21.0406.007; Wed, 16 Sep 2026
+ 08:23:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,166 +55,269 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Autocrypt"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1789545080; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=XBhtVBTat+R1KWkqHRDVuXf9g4iyat+P91M6XkPAv2w=;
-	b=BxQzUfzoqAIHFY0Ykr5vgXzbVKLviRIY7hccIBoiF0VOwuulTxGuADWpvUhUQGE+dtvh6x
-	3vN3THPQlyMTgaSmtlFC8E/xSCtAvNR4pl0Y78zwc64vtFl+S/JL6W18IKobHCawM233/6
-	sqXYRyZdz9GCSXrRWvGRYHQ1PVG3uV8=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1789545080;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=XBhtVBTat+R1KWkqHRDVuXf9g4iyat+P91M6XkPAv2w=;
-	b=lCBuT9OuoBHAwbbbQn7B51DQOeRuFn6J7gbvd5edmEp/evS0eeAuQT8S9jVqh8UkB94o8U
-	qjgOLhXNZcO2jyAQ==
-Authentication-Results: smtp-out2.suse.de;
-	dkim=pass header.d=suse.de header.s=susede2_rsa header.b="II3l/jzB";
-	dkim=pass header.d=suse.de header.s=susede2_ed25519 header.b=ucPKXdWy
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1789545076; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=XBhtVBTat+R1KWkqHRDVuXf9g4iyat+P91M6XkPAv2w=;
-	b=II3l/jzBRy236VBKXLz7gLYqUZsYcddfazBTpq8CVwqWHn3k4en4Tv5GHhIazbrHUJIGwK
-	vm8f28e1ZkgsVFsf4uANGqPfeKkzJpof49bKphUnOo3yLSjwWLCS30PmEyIeuJehsiTG8+
-	CnPVBO8r96Y8mAYMuU0iAqn7oPc5BaA=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1789545076;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=XBhtVBTat+R1KWkqHRDVuXf9g4iyat+P91M6XkPAv2w=;
-	b=ucPKXdWyMHsByG8+jpc4ABTYOK6OpiDIOhFzz69x9AXbFTAGbG/3PxJQtkShM3fc5d7X5h
-	7Z4Ia2cIthQ1fwAA==
-Message-ID: <9a248432-31df-484d-abc3-3fc73b42a43c@suse.de>
-Date: Wed, 16 Sep 2026 09:51:14 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CNvIdsGjYpropUhIAlAb3AboTwf+JVFbuAO2C2I9MMdxRri/OPFIoKyOoYyncMQsnlquA+hS5ErUSD+3PfXiXXMX0qM3SvHHecIq7XMSGQWpRYQ8xnOeW9BxfCtWvKLn0IE5ZXe+HVED/r+qEnF/ApAMQUKrOXMhqvCM/tN+DlVZiKRNuVQbVuojQdzu8fMSX9lICbJtAKvJ0qsTBvbWLNM+pgZs9yLOtYa/u3yGz+dlkC6KW/4DiQIsutuPDVKofxyjLcN4nw4W+W1COTn2VwtarSMKyD7TJUsu7pSTbdrN+DeF89vzLtKXUgCxsR6dxkz4E7bMWlcG5SXZErrowg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7B3fv3RhboLg99eykgwSnE5v+dtq2chUexLkyAwo+8c=;
+ b=PTfklA+y55uUHRsS5Xpr6jJWPc9ToDiyOWlC3rHSbbuTOcj0BANqVs1hbTFLbN4JKfSpMTA7TJ7AbHZCp2iY0oV5dtAQtRpL1KnDdRwKvIytkS1Ir/HwQ4b9kZTae+GY9k7tZO/a+RdZSp+XJn4CyBEul0G0zZNw6MAdpyc03MnCzrJaaBtCG4bNgqUstNbC6L1ufveE050lXMFKnYH+u22fGdjfXL5Qcr9vmfQc0uzfQG25vRRUiHNAuXyeaG4+TpAEjD75n3vHWibaUg9WGALPtV2TxcsD1q7NBBoeiO8Q+2fumd24eaStl4Np2We+E73u44dzh+W5Ff8fxJGJUw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7B3fv3RhboLg99eykgwSnE5v+dtq2chUexLkyAwo+8c=;
+ b=xxrX3ZZh7bGf8LEdrBuzsiXYfT/JHmNgA2nCW2beu0Hq0Sidf6Ij3zLjKW7V+wfznDdohJf0QR1nRQldnE4Q6KFUB5uYehtVC81Q08GoZsvvhIVZDt4lUbN0JKeUo8C/ccuP1KLyOBKQ3O6VwyMoPgv+L4GcrmHSRTdxAyNlkvM=
+From: Kevin Lampis <kevin.lampis@citrix.com>
+To: Jan Beulich <jbeulich@suse.com>
+CC: "teddy.astie@vates.tech" <teddy.astie@vates.tech>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Andrew
+ Cooper <andrew.cooper3@citrix.com>
+Subject: Re: [PATCH v2 3/7] x86: extend update_intpte() to support atomic
+ get-and-update
+Thread-Topic: [PATCH v2 3/7] x86: extend update_intpte() to support atomic
+ get-and-update
+Thread-Index: AQHdQWMYYuOEW7sUTEmdu2MmKUu4LbbJV30AgAaz+PaAAK8QAIAAK46o
+Date: Wed, 16 Sep 2026 08:23:14 +0000
+Message-ID:
+ <BY1PR03MB7996E6B84145F4A368D611B2F3B92@BY1PR03MB7996.namprd03.prod.outlook.com>
+References: <20260910203113.462943-1-kevin.lampis@citrix.com>
+ <20260910203113.462943-4-kevin.lampis@citrix.com>
+ <0aedfbad-29ae-4083-89b4-5c662398553d@citrix.com>
+ <BY1PR03MB79965A43641C02BC2267E5A8F3BA2@BY1PR03MB7996.namprd03.prod.outlook.com>
+ <2516df18-b239-4bf8-9f89-f1811515e5d8@suse.com>
+In-Reply-To: <2516df18-b239-4bf8-9f89-f1811515e5d8@suse.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: BY1PR03MB7996:EE_|SA1PR03MB7147:EE_
+x-ms-office365-filtering-correlation-id: 11c0e00a-dc2e-44d2-e124-08df13cbc0b9
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|1800799024|376014|23010399003|366016|18002099003|22082099003|10067099003|6133799003|4143699003|8096899003|56012099006|11063799006|38070700021;
+x-microsoft-antispam-message-info:
+ 5MpPTaGnc3en+YoCWuEkB5W/TGuw7ZDzyNKnv3+P/D0WWvvYIjoqBg18psMEWAMmzIT1FBoUm362P8Cvi348VQksoNRJwCmZgQa/MHW0Vx0h0UfaFMxs0XmnuYhxhorajGr9PoQRrVtmV1TBdbMWOQlWbCYKunptw4BGjcArgM7I2rYam2PJ2oQvSoqE7XL4uEM4jYDo2vud8aT2l3xFvEzagHFKcCAeH7tE7jwaw8DSME+7+I4B9jhuLahKIC+tLdyttLTkgh05L+YIopvBtad6i1qG4XF6r8qHkyf2PuVAktv5TwwjzPjhx7aw69nCbED3Clqj7/dHndbux3hHoq1X79j5TUBBTQun5Wv/uv3Feh/m0sKFTxZKartm1F0MnaQSkvPEklQQ9FoUHUwl9q6e4es1ZDUglBeq3qVZxOM8VsBNnyjcYQJHFPMYzwx1LKfLAmzbtN5kV6wX61mdrXuxvjnxb5sKWi+4+5ZJPzfxtzgf+416I7Mrf8oBC0WNAd1wMfjx1UD0LR9+SpumPj/5utS/wP7ClTyusWWIqJQbLV2usnIbnPqmhGQcHR9n8GRgz15CL2svrinWy0+MyJz2QneB33i2kMYlgeOsraSHU9t3iik5RVfX/EELHh+5j4vrKz+wuKHSTZt2wT4d4fo2PD1oMxVoxVX5dZyBnTFYP+964eJ/WEVmie6j83i2Kym0kAQnYwyXLTM+e0m0+xp8pw7WxseQIolrlOeYKNI=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY1PR03MB7996.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(23010399003)(366016)(18002099003)(22082099003)(10067099003)(6133799003)(4143699003)(8096899003)(56012099006)(11063799006)(38070700021);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?2sGWyM5RvFEtu5qvZaHaPP/Y+otOEPVBVvPhJGh1+zsUtdB3azy7EnOS3k?=
+ =?iso-8859-1?Q?BWfG6SOBTR2pzt6I9vfSXCOAenx2ze/b5OnakxpMl9aQbJbw1JWDwnseiH?=
+ =?iso-8859-1?Q?h9UG6a0bccRDg3C25BUIsAd6/mXT5MU0uZcS+8upEWfS2tCzb9wG2X6qgi?=
+ =?iso-8859-1?Q?no3DEDq96JBdOBtPQMhI9YxIoizNWUZeAz+rbtkbszibr8eYm50bliojZI?=
+ =?iso-8859-1?Q?U6LYu8mKUSFn3WosbJcpP7mU85BVINqnQSsBceAXufVZ6l5YAtGIwscVeS?=
+ =?iso-8859-1?Q?qKO1Tf93UEbs+NyAV1BD1M5Xb2XqRaqKEN/MFjYze2pG2loIcvDmQsoBtt?=
+ =?iso-8859-1?Q?b7Q6JfyThvaTZBlhT1CpwIMFycaxqufkiUkeeO7uCXM6qh002561rh+e9x?=
+ =?iso-8859-1?Q?ukqmSugDWELGiRX1ERRORScujxeojvf0rAaO+mYs1uLB7yXUXOm1ne1XQV?=
+ =?iso-8859-1?Q?8bxsT2p4gxtM2UiAy06BjiNLdH2YFyfeQSFR1qyp/7eET5afh7IMtIMDb1?=
+ =?iso-8859-1?Q?X0h5sYe9K2Wr+ARwz+DzepSI9COwdxBV5sksSCi/YgvWgLsOQLVohK1WYR?=
+ =?iso-8859-1?Q?nkeg/r9RmxuTGI0V4msPWTW6/0v30dsazEbHvmN8IULQJ5A/xbEeJ3+XU8?=
+ =?iso-8859-1?Q?w8wP049T9gTToJbSK7I1p8f3/DJepZFUxrCQPJWInyZ22/7R8fl5HA+K9a?=
+ =?iso-8859-1?Q?FZ0FkEgEJCrPK5ETSogIUDwNNPer29ReW9jXfhxSdeLvnAYp57iEwZ+TOS?=
+ =?iso-8859-1?Q?2ZaIRQ7cyh0CDQv/OoLKckx4naYFY6Bh7+DUb/cDsZPRDMg9th6fmE+YpU?=
+ =?iso-8859-1?Q?RTalexUFWs+LuuyTRHjVPvTTc7JytnXxuKfiC0jb1o8BwJVFF7cepnr/zR?=
+ =?iso-8859-1?Q?BV7RG7neYCujwtDVwlp2ue+mwmpptPqqKC7GTdUwDtoX7xZ/7df715bJcT?=
+ =?iso-8859-1?Q?iUDCa70tJ1MEw4/AyBjVaAvfvrU01GPOyR7zQ1Eo2cARNi2DIRY+33Scoo?=
+ =?iso-8859-1?Q?vyoeFBuHtK3xzYhD0VKv+vyl81OAUJpTT9xLLTlbsIDBWCC/WSG0REv1Ci?=
+ =?iso-8859-1?Q?4lAm886bHUSueQCkgCTFCmOjtnPoZnq4tgeR2V0k2F/9sUBIlmrNEpldag?=
+ =?iso-8859-1?Q?SG6FbMM5cg82tl4H35O/ALPmgzssAEBZY2QM8NUP1cpfize4Ke33guuj6+?=
+ =?iso-8859-1?Q?aAm+6ag6obVOWjjwJMGUjsKkB2mG7OOrOMVHvR7YHwFrBwlTYyyrKMtQMb?=
+ =?iso-8859-1?Q?9uncrlsZOZ0EPFBJEIksLSiFsmBCvgGDOxTCQudI8/ID+IoJAKuWW8W0uy?=
+ =?iso-8859-1?Q?Fp4oBCOUfbTAPSZDA+eKYrV6jl0h15zmpc+o4y2KVmkZYKOpOmbU+kjZVm?=
+ =?iso-8859-1?Q?z7/rXplj3Ij0E/B6TORiT5oJqq9VWHIl/Sfocygl+PQB0+GHR83gOeGUVr?=
+ =?iso-8859-1?Q?ZvtYPpoS6dFOiprIhRuMmoc+UJCHiI+EJ8fy9H2srwCblqxW1uw+6plU/C?=
+ =?iso-8859-1?Q?+v6vNO0MBgHm7pCMYh5HV/A9fWnKEa8ws2EEyni+UgF7AaLLDyZSPaL+Er?=
+ =?iso-8859-1?Q?W6mKGTi5IN5GeJqvAQQET8Zi1IFU9FASDBduHItk8CrXc7p4idZROXhS7A?=
+ =?iso-8859-1?Q?oxlgHxcPbR5cXIPDB+HibRqaXMxFft4Q4k7RV9wZpgJlDD2cXTzxHAURQM?=
+ =?iso-8859-1?Q?oBJZBH6+Ar2l6BKaV+KiW/q0sh33WFL1AKBwt4H51Z9wOvs+g1Sqhu2vMu?=
+ =?iso-8859-1?Q?WzGvuT2hYjohguSRn1X/Puj27uou3JPaweV0IzK4vykcRs?=
+Content-Type: multipart/alternative;
+	boundary="_000_BY1PR03MB7996E6B84145F4A368D611B2F3B92BY1PR03MB7996namp_"
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] drm/imx: replace struct drm_simple_display_pipe
- with regular atomic helpers
-To: Maxime Ripard <mripard@kernel.org>
-Cc: Ze Huang <ze.huang@oss.qualcomm.com>,
- Alexey Brodkin <abrodkin@synopsys.com>,
- Maarten Lankhorst <maarten.lankhorst@linux.intel.com>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Joel Stanley <joel@jms.id.au>, Andrew Jeffery <andrew@codeconstruct.com.au>,
- Frank Li <Frank.Li@nxp.com>, Sascha Hauer <s.hauer@pengutronix.de>,
- Pengutronix Kernel Team <kernel@pengutronix.de>,
- Fabio Estevam <festevam@gmail.com>, Linus Walleij <linusw@kernel.org>,
- Hans de Goede <hansg@kernel.org>, Alex Lanzano <lanzano.alex@gmail.com>,
- Oleksandr Andrushchenko <oleksandr_andrushchenko@epam.com>,
- Philipp Zabel <p.zabel@pengutronix.de>,
- =?UTF-8?Q?Uwe_Kleine-K=C3=B6nig?= <u.kleine-koenig@pengutronix.de>,
- Marian Cichy <m.cichy@pengutronix.de>, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, linux-aspeed@lists.ozlabs.org,
- linux-arm-kernel@lists.infradead.org, imx@lists.linux.dev,
- xen-devel@lists.xenproject.org
-References: <20260727-drm-simple-kms-removal-v3-0-de36e534f7a1@oss.qualcomm.com>
- <20260727-drm-simple-kms-removal-v3-2-de36e534f7a1@oss.qualcomm.com>
- <8e4c84be-5c89-4d84-adda-aad4c7de0c8a@suse.de> <aqpJKSSKunElnQ3o@houat>
-Content-Language: en-US
-From: Thomas Zimmermann <tzimmermann@suse.de>
-Autocrypt: addr=tzimmermann@suse.de; keydata=
- xsBNBFs50uABCADEHPidWt974CaxBVbrIBwqcq/WURinJ3+2WlIrKWspiP83vfZKaXhFYsdg
- XH47fDVbPPj+d6tQrw5lPQCyqjwrCPYnq3WlIBnGPJ4/jreTL6V+qfKRDlGLWFjZcsrPJGE0
- BeB5BbqP5erN1qylK9i3gPoQjXGhpBpQYwRrEyQyjuvk+Ev0K1Jc5tVDeJAuau3TGNgah4Yc
- hdHm3bkPjz9EErV85RwvImQ1dptvx6s7xzwXTgGAsaYZsL8WCwDaTuqFa1d1jjlaxg6+tZsB
- 9GluwvIhSezPgnEmimZDkGnZRRSFiGP8yjqTjjWuf0bSj5rUnTGiyLyRZRNGcXmu6hjlABEB
- AAHNJ1Rob21hcyBaaW1tZXJtYW5uIDx0emltbWVybWFubkBzdXNlLmRlPsLAjgQTAQgAOAIb
- AwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftODH
- AAoJEGgNwR1TC3ojx1wH/0hKGWugiqDgLNXLRD/4TfHBEKmxIrmfu9Z5t7vwUKfwhFL6hqvo
- lXPJJKQpQ2z8+X2vZm/slsLn7J1yjrOsoJhKABDi+3QWWSGkaGwRJAdPVVyJMfJRNNNIKwVb
- U6B1BkX2XDKDGffF4TxlOpSQzdtNI/9gleOoUA8+jy8knnDYzjBNOZqLG2FuTdicBXblz0Mf
- vg41gd9kCwYXDnD91rJU8tzylXv03E75NCaTxTM+FBXPmsAVYQ4GYhhgFt8S2UWMoaaABLDe
- 7l5FdnLdDEcbmd8uLU2CaG4W2cLrUaI4jz2XbkcPQkqTQ3EB67hYkjiEE6Zy3ggOitiQGcqp
- j//OwE0EWznS4AEIAMYmP4M/V+T5RY5at/g7rUdNsLhWv1APYrh9RQefODYHrNRHUE9eosYb
- T6XMryR9hT8XlGOYRwKWwiQBoWSDiTMo/Xi29jUnn4BXfI2px2DTXwc22LKtLAgTRjP+qbU6
- 3Y0xnQN29UGDbYgyyK51DW3H0If2a3JNsheAAK+Xc9baj0LGIc8T9uiEWHBnCH+RdhgATnWW
- GKdDegUR5BkDfDg5O/FISymJBHx2Dyoklv5g4BzkgqTqwmaYzsl8UxZKvbaxq0zbehDda8lv
- hFXodNFMAgTLJlLuDYOGLK2AwbrS3Sp0AEbkpdJBb44qVlGm5bApZouHeJ/+n+7r12+lqdsA
- EQEAAcLAdgQYAQgAIAIbDBYhBHIX+6yM6c9jRKFo5WgNwR1TC3ojBQJftOH6AAoJEGgNwR1T
- C3ojVSkIALpAPkIJPQoURPb1VWjh34l0HlglmYHvZszJWTXYwavHR8+k6Baa6H7ufXNQtThR
- yIxJrQLW6rV5lm7TjhffEhxVCn37+cg0zZ3j7zIsSS0rx/aMwi6VhFJA5hfn3T0TtrijKP4A
- SAQO9xD1Zk9/61JWk8OysuIh7MXkl0fxbRKWE93XeQBhIJHQfnc+YBLprdnxR446Sh8Wn/2D
- Ya8cavuWf2zrB6cZurs048xe0UbSW5AOSo4V9M0jzYI4nZqTmPxYyXbm30Kvmz0rYVRaitYJ
- 4kyYYMhuULvrJDMjZRvaNe52tkKAvMevcGdt38H4KSVXAylqyQOW5zvPc4/sq9c=
-In-Reply-To: <aqpJKSSKunElnQ3o@houat>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: 404C41FD86
-X-Spamd-Result: default: False [-3.01 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	MX_GOOD(-0.01)[];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RCPT_COUNT_TWELVE(0.00)[25];
-	MIME_TRACE(0.00)[0:+];
-	FREEMAIL_CC(0.00)[oss.qualcomm.com,synopsys.com,linux.intel.com,gmail.com,ffwll.ch,jms.id.au,codeconstruct.com.au,nxp.com,pengutronix.de,kernel.org,epam.com,lists.freedesktop.org,vger.kernel.org,lists.ozlabs.org,lists.infradead.org,lists.linux.dev,lists.xenproject.org];
-	RCVD_TLS_ALL(0.00)[];
-	DKIM_TRACE(0.00)[suse.de:+];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	TO_DN_SOME(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:url,suse.de:dkim,suse.de:mid]
-X-purgate-ID: tlsNG-16d1c6/1789545085-1F8CB77B-36E6F3DC/0/0
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: BY1PR03MB7996.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 11c0e00a-dc2e-44d2-e124-08df13cbc0b9
+X-MS-Exchange-CrossTenant-originalarrivaltime: 16 Sep 2026 08:23:14.2412
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: 4nZu7E9aeGtxbk0jfmi4tXQRNoSJqeKJ/7avmYG7vrTQF4kZ1pJXhE5c7fzZK6ClDNA9wIoPUhvMy3W785HuqQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR03MB7147
+X-purgate-ID: tlsNG-16d1c6/1789546997-1F4C977B-2740B61D/0/0
 X-purgate-type: clean
-X-purgate-size: 929
+X-purgate-size: 7226
 
-Hi
+--_000_BY1PR03MB7996E6B84145F4A368D611B2F3B92BY1PR03MB7996namp_
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 
-Am 16.09.26 um 09:46 schrieb Maxime Ripard:
-> On Wed, Sep 16, 2026 at 08:50:21AM +0200, Thomas Zimmermann wrote:
->>> +static const struct drm_plane_funcs imx_lcdc_plane_funcs = {
->>> +	.update_plane		= drm_atomic_helper_update_plane,
->>> +	.disable_plane		= drm_atomic_helper_disable_plane,
->>> +	.destroy		= drm_plane_cleanup,
->>> +	.reset			= drm_atomic_helper_plane_reset,
-> Also, this needs to be drm_atomic_helper_plane_create_state
->
->>> +static const struct drm_crtc_funcs imx_lcdc_crtc_funcs = {
->>> +	.reset			= drm_atomic_helper_crtc_reset,
->   and drm_atomic_helper_crtc_create_state
+>The "flag set, pointer non-NULL" case wouldn't hit the "return 0" path
 
-Right. I forgot that create_state is available already.
+Correct.
 
-Best regards
-Thomas
+But what about the "flag not set" case. When PTE_UPDATE_SWAP is not set the=
+n
+UPDATE_ENTRY may return 0.
 
->
-> Maxime
+If UPDATE_ENTRY() returns 0 then mod_l1_entry() will give
+the wrong ol1e value to put_page_from_l1e().
 
--- 
---
-Thomas Zimmermann
-Graphics Driver Developer
-SUSE Software Solutions Germany GmbH
-Frankenstr. 146, 90461 Nürnberg, Germany, www.suse.com
-GF: Jochen Jaser, Andrew McDonald, (HRB 36809, AG Nürnberg)
+    static int mod_l1_entry( ... )
+    {
+        ...
+        ol1e =3D UPDATE_ENTRY(l1, pl1e, ol1e, ...);
+        ...
+        put_page_from_l1e(ol1e, pt_dom);
+        ...
+    }
 
+I think mod_l1_entry may need to store a copy of ol1e incase UPDATE_ENTRY()
+returns 0. Or add some extra if/else around every call to UPDATE_ENTRY() to
+only assign ol1e if we know we're on the new PTE_UPDATE_SWAP path.
 
+And the mod_l{2,3,4}_entry() functions will probably have to do the same th=
+ing
+too so I just wanted to get some input first.
+
+--_000_BY1PR03MB7996E6B84145F4A368D611B2F3B92BY1PR03MB7996namp_
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html>
+<head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Diso-8859-=
+1">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&gt;The &quot;flag set, pointer non-NULL&quot; case wouldn't hit the &quot;=
+return 0&quot; path</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+<br>
+</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+Correct.</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+<br>
+</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+But what about the &quot;flag not set&quot; case. When PTE_UPDATE_SWAP is n=
+ot set then</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+UPDATE_ENTRY may return 0.</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+<br>
+</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+If UPDATE_ENTRY() returns 0 then mod_l1_entry() will give</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+the wrong ol1e value to put_page_from_l1e().</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+<br>
+</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&nbsp; &nbsp; static int mod_l1_entry( ... )</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&nbsp; &nbsp; {</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&nbsp; &nbsp; &nbsp; &nbsp; ...</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&nbsp; &nbsp; &nbsp; &nbsp; ol1e =3D UPDATE_ENTRY(l1, pl1e, ol1e, ...);</di=
+v>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&nbsp; &nbsp; &nbsp; &nbsp; ...</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&nbsp; &nbsp; &nbsp; &nbsp; put_page_from_l1e(ol1e, pt_dom);</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&nbsp; &nbsp; &nbsp; &nbsp; ...</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+&nbsp; &nbsp; }</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+<br>
+</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+I think mod_l1_entry may need to store a copy of ol1e incase UPDATE_ENTRY()=
+</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+returns 0. Or add some extra if/else around every call to UPDATE_ENTRY() to=
+</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+only assign ol1e if we know we're on the new PTE_UPDATE_SWAP path.</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+<br>
+</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+And the mod_l{2,3,4}_entry() functions will probably have to do the same th=
+ing</div>
+<div class=3D"elementToProof" style=3D"font-family: Aptos, Aptos_EmbeddedFo=
+nt, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-size: 12pt; c=
+olor: rgb(0, 0, 0);">
+too so I just wanted to get some input first.</div>
+<div id=3D"appendonsend"></div>
+<div id=3D"divRplyFwdMsg"></div>
+</body>
+</html>
+
+--_000_BY1PR03MB7996E6B84145F4A368D611B2F3B92BY1PR03MB7996namp_--
 
