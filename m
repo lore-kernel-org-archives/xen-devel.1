@@ -4,39 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A73BCC982C1
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 17:12:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1423397.1648540 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F21F0C88E7F
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 17:31:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1423414.1648549 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6tBE-0006wY-Dm; Wed, 16 Sep 2026 17:12:20 +0000
+	id 1x6tTQ-0001ML-0O; Wed, 16 Sep 2026 17:31:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1423397.1648540; Wed, 16 Sep 2026 17:12:20 +0000
+Received: by outflank-mailman (output) from mailman id 1423414.1648549; Wed, 16 Sep 2026 17:31:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6tBE-0006wR-AT; Wed, 16 Sep 2026 17:12:20 +0000
-Received: by outflank-mailman (input) for mailman id 1423397;
- Wed, 16 Sep 2026 17:12:18 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x6tTP-0001ME-Sf; Wed, 16 Sep 2026 17:31:07 +0000
+Received: by outflank-mailman (input) for mailman id 1423414;
+ Wed, 16 Sep 2026 17:31:06 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vulab@iscas.ac.cn>) id 1x6tBC-0006wJ-RZ
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 17:12:18 +0000
+ (envelope-from <accek@invisiblethingslab.com>) id 1x6tTO-0001M8-C5
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 17:31:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6tBC-00GGGJ-8b
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 19:12:18 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x6tTM-005Y5P-0t
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 19:31:04 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <vulab@iscas.ac.cn>)
- id 6aaacdde-bab6-0a2a0a5309dd-0a2a4509af94-22
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:12:16 +0200
-Received: from [159.226.251.25] (helo=cstnet.cn)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <vulab@iscas.ac.cn>)
- id 6aaacded-be1a-0a2a45090019-9fe2fb1981ba-3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:12:15 +0200
-Received: from dfae2b116770.home.arpa (unknown [36.110.52.2])
- by APP-05 (Coremail) with SMTP id zQCowAA3oDrpzapqV1xuCA--.22441S2;
- Thu, 17 Sep 2026 01:12:09 +0800 (CST)
+ (envelope-from <accek@invisiblethingslab.com>)
+ id 6aaad257-bab6-0a2a0a5309dd-0a2a450488aa-2
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:31:03 +0200
+Received: from [103.168.172.154] (helo=fhigh-a3-smtp.messagingengine.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <accek@invisiblethingslab.com>)
+ id 6aaad241-b57f-0a2a45040019-67a8ac9ad147-3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:30:42 +0200
+Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 2ADD614000F4;
+ Wed, 16 Sep 2026 13:30:41 -0400 (EDT)
+Received: from phl-frontend-04 ([10.202.2.163])
+ by phl-compute-06.internal (MEProxy); Wed, 16 Sep 2026 13:30:41 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Wed,
+ 16 Sep 2026 13:30:37 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,85 +52,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Wentao Liang <vulab@iscas.ac.cn>
-To: Jiqian.Chen@amd.com
-Cc: jgross@suse.com,
-	linux-kernel@vger.kernel.org,
-	oleksandr_tyshchenko@epam.com,
-	ray.huang@amd.com,
-	sstabellini@kernel.org,
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:Message-ID:MIME-Version:Subject:To"; dkim=pass header.s=fm1 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:Message-ID:MIME-Version:Subject:To:X-ME-Proxy:X-ME-Sender"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:from:from:in-reply-to
+	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm1;
+	 t=1789579841; x=1789666241; bh=sEzC4k5CJmAV6EJO1XhWjipY2iPMC41J
+	5KqRauPMcFs=; b=W8z3cBvmX93Pzsm5bNCRiY139GXpeJe1v3Xkn22MstaPsHgy
+	qP3GyTYl3P4a67pLjO1PGEb1dFV1DfPLDykR4z/854lyE6SMAtsArI+Gg3QGFr1n
+	22KxTFVF9xgnaXFSKcdskfp+stDb1Pu+bcwUl6yYWwE7HdqikOZmXN7S2PksSAiz
+	sgsf43bs4CbOHMqYYAtbePUcusunHBJd3lidU1ECQdq27jC6XHpJWeRCKR2HI0SI
+	54cDKJ3qD8gY/Pp6ysmC2UYSxTKrj+SIgbfvcG/60mX9CYFf9Ad0K/j/m2WjSNhF
+	kvv8ksUz7PGSeUJLLSMNF+khLrS/fwOUBVeUOA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-transfer-encoding
+	:content-type:content-type:date:date:feedback-id:feedback-id
+	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
+	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
+	fm1; t=1789579841; x=1789666241; bh=sEzC4k5CJmAV6EJO1XhWjipY2iPM
+	C41J5KqRauPMcFs=; b=TFZUoj1sd5wzq6V92J/uxsf3SSM2ifhX4DsjAgUNlWhU
+	6eAsn61pwSeiVLgGV7jvmCKRWbXQ6CLYgzqEyQyv759H6AiJGx9yCW0EZQGvSqZA
+	tdLRY4dnewtM5NFNa99MZxpUr+OwHRfifJ+FXNEbp/VePCF8odEsQ7SJjMpAePN6
+	yl8MXZQOR9wortnzRLC5Cv8WCPbUmDe+qwK+357xalVj0aNXRwvbTbZPLtQprqPe
+	8fnjP8Nhh2NWHHZ+WzFzG5iiuhGyDesYUDsQAReRN+nca32x16AxG+UqKvyJLZwb
+	e07DMW/szM+5nAcoTmduXKQo+NQgCo0s6D5w4prHYA==
+X-ME-Sender: <xms:QNKqar4EE9LI-Ci45nMVNqyof-kwidRJpl306loLxgGmy3IwfVmqSA>
+    <xme:QNKqatkELrkNM8W2gVc3-2rio61NawOH3E1ezo3jDG4WzJ49qn8VIWzz2PCaNrSer
+    cPQwbP557BE_fZbGQ3OAJ3MR-A2hCQ4qFF21tn4dWpHAU8Cgt0>
+X-ME-Received: <xmr:QNKqamXp7FAlrkBIVB8SzSqRW9nEiS28hNCrLWexN4SBh6xYgoJGqbppGv9TzE1xFJc0rmwbSvQi>
+X-ME-Proxy-Cause: dmFkZTFRR2SdzYysCnDldAnwcUjqwv+J1OcwrzewRKc+tpczioQYwLmLsiqEXhmQdC2nje
+    56bGrrx9GV0swaDUdEK3vzaaVqY+M/XwqVdnxH+XYP25yLI5dgcMCMyHp1UAKHpzlMM6Pa
+    NfKIQqGtUlBxkueH0hJjWk2FklFgBKXLz2xRvyNL8MinjeW04yJe6UQoDcfj7Fm7GkQqjv
+    hWMDmiLq+BTLEM4gbkW/awJ3xlxmRvUzWx2Z1pfR7j7X/jzaQ8xRnBoS7gvzb3G9bG0ct3
+    i24Lbjgm0XtyjqxFcsT4bz5ya9cZ4U8Y9gRKqIKKaOSFKm85ALGxH1ylfLgRm2aN/+3adN
+    cUBVfKKQWHA2itOHpXXPGf2EhOirzoD+YJUN8W2J8btmtWKsDaOFNp10yxo1cjCNfqFLCA
+    eetNRPqBIDmnhflwbewQqA80/IE9YIqIzcnlCVJFyqgi/DPFkMyhrMlFDOWWfHiQjIeh9G
+    89n9QqLFXfGqXXqk99gbjnMCdgUUBVwfGw6Qv0Oj/Sv5b8KJP0y9gIov6j06UeHeBXiu58
+    ngIpfuaFxt/OlglSkpwlIdfm8koIBhdly2sJuzoiRSESBrEf2tn7hwG3rFYegHCYuFa04F
+    L7fp6z+VojadVcqdg1VI+iW4SHrDfKfNnDMGMAOf0fHuPfqzSNP33fuzmKRg
+X-ME-Proxy: <xmx:QNKqamQRcqvlLVMy3OsQDxJ-Pj62_oGYUfuHRu2Y5BOtNr-7ukxvxg>
+    <xmx:QNKqajCN2AJCPPGKq58J4g9L4vvSXTYb25eOUnyQ7d--iuJtUJD3Mg>
+    <xmx:QNKqauuEzb0d10ZGzyknk3K36HIWDjgTpWiMYIC8Ck0U3NuKpU4EOw>
+    <xmx:QNKqah9C--fGdirKD9LXW3LiBUUq7NtHJYplpvh9CAou0G6ozyA7Qw>
+    <xmx:QdKqaoNidy3xp9Bfq4NoR1cy-a8FbyWcN-DtMO5vSOMoLGcheiud6Y02>
+Feedback-ID: i792e4853:Fastmail
+From: =?UTF-8?q?Szymon=20Aceda=C5=84ski?= <accek@invisiblethingslab.com>
+To: intel-xe@lists.freedesktop.org
+Cc: thomas.hellstrom@linux.intel.com,
+	matthew.brost@intel.com,
+	rodrigo.vivi@intel.com,
+	maarten.lankhorst@linux.intel.com,
+	hch@lst.de,
+	bob.beckett@collabora.com,
+	dri-devel@lists.freedesktop.org,
+	marmarek@invisiblethingslab.com,
 	xen-devel@lists.xenproject.org,
-	Wentao Liang <vulab@iscas.ac.cn>,
+	=?UTF-8?q?Szymon=20Aceda=C5=84ski?= <accek@invisiblethingslab.com>,
 	stable@vger.kernel.org
-Subject: [PATCH] xen-pciback: Fix pcistub_device ref leak in pcistub_get_gsi_from_sbdf()
-Date: Wed, 16 Sep 2026 17:11:41 +0000
-Message-Id: <20260916171141.2086627-1-vulab@iscas.ac.cn>
-X-Mailer: git-send-email 2.34.1
+Subject: [PATCH v2] drm/xe: Limit sg segment size to PAGE_SIZE on Xen PV
+Date: Wed, 16 Sep 2026 19:30:30 +0200
+Message-ID: <20260916173030.3223833-1-accek@invisiblethingslab.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:zQCowAA3oDrpzapqV1xuCA--.22441S2
-X-Coremail-Antispam: 1UD129KBjvdXoWrKrW8WFWUuF17JF1xKrW7Jwb_yoWkKwcEgr
-	WIvr97urs8tFWxtrW7uwn0vrZav3Z0q395XF1xta4rGw4j9r4UXr1rXF98Wr4Igr45JF13
-	Xr1DCr93Kr4I9jkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
-	9fnUUIcSsGvfJTRUUUbxkFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
-	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
-	A2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_
-	Gr1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
-	1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
-	7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r
-	1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY1x0262kKe7AK
-	xVWUtVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
-	0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFyl
-	IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxV
-	AFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8
-	JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7VUb
-	o5l5UUUUU==
-X-Originating-IP: [36.110.52.2]
-X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiBgEMA2qqok9l6QAAsp
-X-purgate-ID: tlsNG-bad1c0/1789578736-39AC0034-4730C548/0/0
+X-purgate-ID: tlsNG-ebf023/1789579842-C0CDFB50-61F3B139/0/0
 X-purgate-type: clean
-X-purgate-size: 1205
+X-purgate-size: 2577
 
-pcistub_get_gsi_from_sbdf() obtains the stub device with
-pcistub_device_find(), which returns it with its kref incremented, and
-returns psdev->gsi without dropping that reference again.  The caller
-cannot release it either, so every lookup leaks one reference to the
-stub device.
+Fix display corruption on Xen PV dom0, where DMA buffers are not
+guaranteed machine-contiguous, in which case bounce buffering kicks
+in, breaking xe's memory coherency assumptions.
 
-Release the reference after reading gsi.
+Apply the same workaround i915 carries in i915_sg_segment_size() since
+commit 78a07fe777c4 ("drm/i915: stop abusing swiotlb_max_segment").
 
-Fixes: 2fae6bb7be32 ("xen/privcmd: Add new syscall to get gsi from dev")
-Cc: stable@vger.kernel.org
-Signed-off-by: Wentao Liang <vulab@iscas.ac.cn>
+Fixes: dd08ebf6c352 ("drm/xe: Introduce a new DRM driver for Intel GPUs")
+Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+Closes: https://gitlab.freedesktop.org/drm/xe/kernel/-/work_items/8382
+Link: https://lore.kernel.org/xen-devel/aYtznP_tT6xNPwf-@mail-itl/
+Link: https://lore.kernel.org/all/20221020110308.1582518-1-hch@lst.de/ # i915 counterpart
+Cc: Christoph Hellwig <hch@lst.de>
+Cc: Robert Beckett <bob.beckett@collabora.com>
+Cc: stable@vger.kernel.org # v6.8+
+Signed-off-by: Szymon Acedański <accek@invisiblethingslab.com>
 ---
- drivers/xen/xen-pciback/pci_stub.c | 7 +++++--
- 1 file changed, 5 insertions(+), 2 deletions(-)
+v2:
+ - Imperative language in the commit message (Thomas Hellström)
+ - CC the authors of the original i915 workaround (Thomas Hellström)
 
-diff --git a/drivers/xen/xen-pciback/pci_stub.c b/drivers/xen/xen-pciback/pci_stub.c
-index 79a2b5dfd694..d1a335233aab 100644
---- a/drivers/xen/xen-pciback/pci_stub.c
-+++ b/drivers/xen/xen-pciback/pci_stub.c
-@@ -234,13 +234,16 @@ static int pcistub_get_gsi_from_sbdf(unsigned int sbdf)
- 	int bus = PCI_BUS_NUM(sbdf);
- 	int slot = PCI_SLOT(sbdf);
- 	int func = PCI_FUNC(sbdf);
-+	int gsi;
+ drivers/gpu/drm/xe/xe_bo.h | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+
+diff --git a/drivers/gpu/drm/xe/xe_bo.h b/drivers/gpu/drm/xe/xe_bo.h
+index 290ca62..341fa93 100644
+--- a/drivers/gpu/drm/xe/xe_bo.h
++++ b/drivers/gpu/drm/xe/xe_bo.h
+@@ -9,6 +9,8 @@
+ #include <drm/drm_prime.h>
+ #include <drm/ttm/ttm_tt.h>
  
- 	psdev = pcistub_device_find(domain, bus, slot, func);
--
- 	if (!psdev)
- 		return -ENODEV;
- 
--	return psdev->gsi;
-+	gsi = psdev->gsi;
-+	pcistub_device_put(psdev);
++#include <xen/xen.h>
 +
-+	return gsi;
- }
- #endif
+ #include "xe_bo_types.h"
+ #include "xe_ggtt.h"
+ #include "xe_macros.h"
+@@ -574,6 +576,23 @@ static inline unsigned int xe_sg_segment_size(struct device *dev)
+ 	struct scatterlist __maybe_unused sg;
+ 	size_t max = BIT_ULL(sizeof(sg.length) * 8) - 1;
  
++	/*
++	 * For Xen PV guests pages aren't contiguous in DMA (machine) address
++	 * space.  The DMA API takes care of that both in dma_alloc_* (by
++	 * calling into the hypervisor to make the pages contiguous) and in
++	 * dma_map_* (by bounce buffering).  But xe (like i915, see commit
++	 * 78a07fe777c4) ignores the coherency aspects of the DMA API and thus
++	 * can't cope with bounce buffering actually happening, so add a hack
++	 * here to force small allocations and mappings when running in PV
++	 * mode on Xen.
++	 *
++	 * Note this will still break if bounce buffering is required for other
++	 * reasons, like confidential computing hypervisors or PCIe root ports
++	 * with addressing limitations.
++	 */
++	if (xen_pv_domain())
++		return PAGE_SIZE;
++
+ 	max = min_t(size_t, max, dma_max_mapping_size(dev));
+ 
+ 	/*
+
+base-commit: baafc300cd079a5210c1e70e5ea3d93518e40b38
 -- 
-2.34.1
+2.53.0
 
 
