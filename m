@@ -4,45 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B5F6CC982C9
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 15:42:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1423332.1648521 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E9CC982C1
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 17:11:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1423390.1648530 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6rlV-0001gS-4Y; Wed, 16 Sep 2026 15:41:41 +0000
+	id 1x6t9U-0006SI-2O; Wed, 16 Sep 2026 17:10:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1423332.1648521; Wed, 16 Sep 2026 15:41:41 +0000
+Received: by outflank-mailman (output) from mailman id 1423390.1648530; Wed, 16 Sep 2026 17:10:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6rlV-0001gL-1l; Wed, 16 Sep 2026 15:41:41 +0000
-Received: by outflank-mailman (input) for mailman id 1423332;
- Wed, 16 Sep 2026 15:41:40 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3xxm=HI=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
- id 1x6rlU-0001gF-7E
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 15:41:40 +0000
+	id 1x6t9T-0006SB-W9; Wed, 16 Sep 2026 17:10:31 +0000
+Received: by outflank-mailman (input) for mailman id 1423390;
+ Wed, 16 Sep 2026 17:10:31 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <vulab@iscas.ac.cn>) id 1x6t9T-0006S5-22
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 17:10:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6rlT-008Vku-KP
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 17:41:39 +0200
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <SRS0=3xxm=HI=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
- id 6aaab8b3-e002-0a2a0a5209dd-0a2a45048198-0
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 17:41:39 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <SRS0=3xxm=HI=paulmck-ThinkPad-P17-Gen-1.home=paulmck@kernel.org>)
- id 6aaab8b2-b57f-0a2a45040019-ac6904fe9e6c-3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 17:41:39 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 601636020C;
- Wed, 16 Sep 2026 15:41:37 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0560E1F00898;
- Wed, 16 Sep 2026 15:41:37 +0000 (UTC)
-Received: by paulmck-ThinkPad-P17-Gen-1.home (Postfix, from userid 1000)
- id 89BBFCE04DE; Wed, 16 Sep 2026 08:41:36 -0700 (PDT)
+ id 1x6t9S-000Qwm-FG
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 19:10:30 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <vulab@iscas.ac.cn>)
+ id 6aaacd6d-8faa-0a2a0a5109dd-0a2a4501b3ee-20
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:10:28 +0200
+Received: from [159.226.251.25] (helo=cstnet.cn)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <vulab@iscas.ac.cn>)
+ id 6aaacd81-5984-0a2a45010019-9fe2fb19bbb4-3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:10:27 +0200
+Received: from dfae2b116770.home.arpa (unknown [36.110.52.2])
+ by APP-05 (Coremail) with SMTP id zQCowABHsTuAzapqVVJuCA--.22263S2;
+ Thu, 17 Sep 2026 01:10:24 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,187 +48,81 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1789573297;
-	bh=sGvzKbFPjf+oPN6Vq1aebGYY5v8J+QGBuqhmyn8aUVA=;
-	h=Date:From:To:Cc:Subject:Reply-To:References:In-Reply-To;
-	b=KIYUEz2FGcRHG+Ssklm2bHmtEXBGohs83s4Od39AMcZubOJsE9RcpEkF2MgFpaJyw
-	 cRxlDEaoPOVjTBiub0GC4lMMtcPW5Ai2f1xdjaWDEWMvi39Rl+gSqxtwEHJWheUE9m
-	 h8vHINDZAmYdg6E6FA6HEIujkaLUYdjPBXyiGd3emqo+GbGuJoiOmurbsPEcPhZ39A
-	 HzIPstpdtUBGHOY7LAsWpCzyaUAh+S2igBzAKhzvbQRIoKHL6/ON5LVD5FfW5y58Al
-	 UD8E7AGKumNniUj/FyucyAAXgQ+SyVefcwHGcFDMHxy4FOBWJ/JdVyW3WqSbC4G+Bq
-	 /anXSiz9gu+gQ==
-Date: Wed, 16 Sep 2026 08:41:36 -0700
-From: "Paul E. McKenney" <paulmck@kernel.org>
-To: Frederic Weisbecker <frederic@kernel.org>
-Cc: Josef Bacik <josef@toxicpanda.com>,
-	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
-	Joel Fernandes <joelagnelf@nvidia.com>,
-	Boqun Feng <boqun@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Steven Rostedt <rostedt@goodmis.org>,
-	Masami Hiramatsu <mhiramat@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>, Jiri Olsa <jolsa@kernel.org>,
-	Alexei Starovoitov <ast@kernel.org>,
-	Daniel Borkmann <daniel@iogearbox.net>,
-	Andrii Nakryiko <andrii@kernel.org>, x86@kernel.org,
-	Catalin Marinas <catalin.marinas@arm.com>,
-	Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>,
-	Xu Kuohai <xukuohai@huaweicloud.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Josh Triplett <josh@joshtriplett.org>,
-	Uladzislau Rezki <urezki@gmail.com>,
-	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
-	Lai Jiangshan <jiangshanlai@gmail.com>,
-	Zqiang <qiang.zhang@linux.dev>, Juergen Gross <jgross@suse.com>,
-	Luis Chamberlain <mcgrof@kernel.org>,
-	Ihor Solodrai <ihor.solodrai@linux.dev>,
-	linux-kernel@vger.kernel.org, rcu@vger.kernel.org,
-	linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
-	linux-arm-kernel@lists.infradead.org,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH RFC v3 03/13] rcu-tasks: Add a Tasks RCU implementation
- for reader-marked trampolines
-Message-ID: <8b73e1b3-0580-4ba9-b2e0-6363e429808d@paulmck-laptop>
-Reply-To: paulmck@kernel.org
-References: <20260915-b4-rcu-tasks-preempt-qs-v3-0-0ad30c4c5ee7@toxicpanda.com>
- <20260915-b4-rcu-tasks-preempt-qs-v3-3-0ad30c4c5ee7@toxicpanda.com>
- <aqlgxKGk_AEKls_1@localhost.localdomain>
- <edc7cca2-a5c5-455c-8969-ea05dbdb08f7@paulmck-laptop>
- <aqqONH8flTIpOUqT@localhost.localdomain>
- <91687748-0781-4133-baed-43cf82f35ff5@paulmck-laptop>
- <aqqpRoTfywUuTgoC@localhost.localdomain>
- <aqqsAUVV8a1yrQzX@localhost.localdomain>
- <6afb0afe-e7b8-46b4-9fea-2c7cf4791044@paulmck-laptop>
- <aqq0cwvRDsorGwgc@localhost.localdomain>
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: Wentao Liang <vulab@iscas.ac.cn>
+To: boris.ostrovsky@oracle.com
+Cc: jgross@suse.com,
+	linux-kernel@vger.kernel.org,
+	oleksandr_andrushchenko@epam.com,
+	oleksandr_tyshchenko@epam.com,
+	sstabellini@kernel.org,
+	xen-devel@lists.xenproject.org,
+	Wentao Liang <vulab@iscas.ac.cn>,
+	stable@vger.kernel.org
+Subject: [PATCH] xen/gntdev: Fix gntdev_dmabuf ref leak in dmabuf_exp_wait_released()
+Date: Wed, 16 Sep 2026 17:09:56 +0000
+Message-Id: <20260916170956.2086505-1-vulab@iscas.ac.cn>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <aqq0cwvRDsorGwgc@localhost.localdomain>
-X-purgate-ID: tlsNG-ebf023/1789573299-516D2B50-6DA1D1A6/0/0
+X-CM-TRANSID:zQCowABHsTuAzapqVVJuCA--.22263S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7tw4kAFyfCrWxJw4rtFW5ZFb_yoW8GF1xpr
+	sIqFy8AFZ3t347ta1DJ34Y9ryYyayDtrySkrW5Aws8Zry5Xw1xXF1fJr18XFyqkws3ua4f
+	Aa40yFy3Xr45AFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvY14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
+	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
+	1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
+	6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
+	4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
+	Yx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbV
+	WUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7CjxVAaw2AF
+	wI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
+	xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43
+	MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I
+	0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_
+	Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0J
+	UgXocUUUUU=
+X-Originating-IP: [36.110.52.2]
+X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiCRIMA2qqozVjiwAAsq
+X-purgate-ID: tlsNG-d62444/1789578628-1DC79757-B63200B5/0/0
 X-purgate-type: clean
-X-purgate-size: 6533
+X-purgate-size: 1349
 
-On Wed, Sep 16, 2026 at 05:23:31PM +0200, Frederic Weisbecker wrote:
-> Le Wed, Sep 16, 2026 at 07:55:02AM -0700, Paul E. McKenney a écrit :
-> > On Wed, Sep 16, 2026 at 04:47:29PM +0200, Frederic Weisbecker wrote:
-> > > Le Wed, Sep 16, 2026 at 04:35:50PM +0200, Frederic Weisbecker a écrit :
-> > > > Le Wed, Sep 16, 2026 at 07:26:35AM -0700, Paul E. McKenney a écrit :
-> > > > > On Wed, Sep 16, 2026 at 02:40:20PM +0200, Frederic Weisbecker wrote:
-> > > > > > Le Tue, Sep 15, 2026 at 04:56:41PM -0700, Paul E. McKenney a écrit :
-> > > > > > > > Alternatively the approach could be generalized to vanilla RCU, it could be
-> > > > > > > > possible to define a .text.rcu_no_qs section within which code running is
-> > > > > > > > considered as an RCU reader (with a pause while on the explicit RCU tasks
-> > > > > > > > section). It would be forbidden to voluntary sleep inside
-> > > > > > > > and to put explicit preemption points (CONFIG_PROVE_RCU could report misuses).
-> > > > > > > > 
-> > > > > > > > Based on IP, RCU could consider those interrupted section as readers. This would
-> > > > > > > > require PREEMPT_RCU though.
-> > > > > > > > 
-> > > > > > > > And then synchronize_rcu() would do the 1, 2, 4 jobs.
-> > > > > > > 
-> > > > > > > If I am following correctly (ha!), sleepable BPF programs rule out use
-> > > > > > > of RCU in this manner.
-> > > > > > > 
-> > > > > > > But your point is nevertheless valid, in that SRCU could be used.
-> > > > > > > And because rcu_read_lock_trace() is a thin wrapper around SRCU-fast, we
-> > > > > > > *might* be able to instead use rcu_read_lock_tasks_trace(), which would
-> > > > > > > skip the task-struct increment and decrement, saving a few instructions.
-> > > > > > > Then, instead of waiting for each task's counter to go to zero, instead
-> > > > > > > just invoke synchronize_rcu_tasks_trace().
-> > > > > > > 
-> > > > > > > Which is pretty close to what Josef is proposing, just with the new RCU
-> > > > > > > Tasks Trace read-side primitives.  I think.  ;-)
-> > > > > > > 
-> > > > > > > This assumes that we do not need to flatten partially overlapping RCU
-> > > > > > > Tasks Trace readers into one big reader.
-> > > > > > > 
-> > > > > > > Or am I missing something here?
-> > > > > > 
-> > > > > > Yes I think that's what Josef does in this patchset. The problem is about
-> > > > > > handling the few instructions:
-> > > > > > 
-> > > > > > 1) between the begining of the trampoline and the call to rcu_read_lock_trace()
-> > > > > > 
-> > > > > > 2) between the call to rcu_read_unlock_trace() and the end of the trampoline
-> > > > > > 
-> > > > > > So what I'm proposing is to make those two parts implicit RCU read lock sections.
-> > > > > > 
-> > > > > > So the whole trampoline would be .text.rcu_no_qs:
-> > > > > > 
-> > > > > > .text.rcu_no_qs trampoline:
-> > > > > >   __________________________________________________________________________________________
-> > > > > >  |Few instructions 1 | rcu_read_lock_trace() .... rcu_read_unlock_trace | Few instructions 2|
-> > > > > >  ___________________________________________________________________________________________
-> > > > > > 
-> > > > > > Then when a tick fires, rcu_flavor_sched_clock_irq() discards the interrupted
-> > > > > > code as QS if the IP was within .text.rcu_no_qs _unless_ it is in the
-> > > > > > rcu_read_lock_trace. Both are easy and quick to verify.
-> > > > > > 
-> > > > > > Also preempt_schedule_irq() would make sure to verify the same condition and
-> > > > > > enqueue the task as a GP blocker if preempting inside "Few instructions 1"
-> > > > > > or "Few instructions 2".
-> > > > > 
-> > > > > Ah, OK, I might be following now.  ;-)
-> > > > > 
-> > > > > We also need both versions of rcu_exp_handler() to check the IP as well,
-> > > > > given that sooner or later someone is going to want trampoline removal
-> > > > > to go faster.  Or am I still missing a turn in here somewhere?
-> > 
-> > I should add that the thing that I really like about Frederic's approach
-> > is that avoids the task-list scan.  Or at least has the potential to
-> > do so.  Such scans have proven problematic in the past.
-> > 
-> > > > Yes indeed, missed the exp part!
-> > > 
-> > > What remains to handle also is non-preemptible RCU because if the task is
-> > > preempted by an IRQ while in the .text.rcu_no_qs, we may still need to keep
-> > > track of that somewhere.
-> > 
-> > Perhaps in rcu_core() in kernels booted with use_softirq?  I am thinking
-> > specifically of the checks for deferred quiescent states.  I don't (yet)
-> > see a need to modify rcu_check_quiescent_state().
-> > 
-> > Maybe other places as well.  ;-)
-> 
-> Hmm this tracking would have to happen on preempt_schedule() just like we
-> do for PREEMPT_RCU. Or am I missing something? And then we would need a
-> list scan of those tasks.
+dmabuf_exp_wait_released() takes a reference on the exported
+gntdev_dmabuf with dmabuf_exp_wait_obj_get_dmabuf() and passes it to
+dmabuf_exp_wait_obj_new(), which drops that reference after adding the
+wait object to the wait list.  When the wait object allocation fails,
+dmabuf_exp_wait_obj_new() returns ERR_PTR(-ENOMEM) early and the
+reference is never dropped, leaking a reference to the exported
+gntdev_dmabuf.
 
-I am thinking of the case where a trampoline is interrupted before entering
-(or after leaving) its RCU Tasks Trace read-side critical section.  Then
-there is a softirq handler on the back of that interrupt handler, and
-RCU_SOFTIRQ is invoked, calling rcu_core().  Specifically:
+Drop the reference on the allocation failure path so the reference is
+consumed whether the wait object is created or not.
 
-	/* Report any deferred quiescent states if preemption enabled. */
-	if (IS_ENABLED(CONFIG_PREEMPT_COUNT) && (!(preempt_count() & PREEMPT_MASK))) {
-		rcu_preempt_deferred_qs(current);
-	} else if (rcu_preempt_need_deferred_qs(current)) {
-		guard(irqsave)();
-		set_need_resched_current();
-	}
+Fixes: 932d6562179e ("xen/gntdev: Add initial support for dma-buf UAPI")
+Cc: stable@vger.kernel.org
+Signed-off-by: Wentao Liang <vulab@iscas.ac.cn>
+---
+ drivers/xen/gntdev-dmabuf.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-Preemption is enabled, but we should not report a quiescent state because
-we have interrupted a trampoline.  Correct?
+diff --git a/drivers/xen/gntdev-dmabuf.c b/drivers/xen/gntdev-dmabuf.c
+index 83b0df460894..df1883aca850 100644
+--- a/drivers/xen/gntdev-dmabuf.c
++++ b/drivers/xen/gntdev-dmabuf.c
+@@ -96,8 +96,10 @@ dmabuf_exp_wait_obj_new(struct gntdev_dmabuf_priv *priv,
+ 	struct gntdev_dmabuf_wait_obj *obj;
+ 
+ 	obj = kzalloc_obj(*obj);
+-	if (!obj)
++	if (!obj) {
++		kref_put(&gntdev_dmabuf->u.exp.refcount, dmabuf_exp_release);
+ 		return ERR_PTR(-ENOMEM);
++	}
+ 
+ 	init_completion(&obj->completion);
+ 	obj->gntdev_dmabuf = gntdev_dmabuf;
+-- 
+2.34.1
 
-> Or we can build the blocked task list handling, that we already have for PREEMPT_RCU,
-> when CONFIG_RCU_TASKS && !CONFIG_PREEMPT_RCU. We would just only add tasks when
-> preempted in .text.rcu_no_qs since rcu_read_lock() would still disable
-> preemption on normal explicit readers. So I wouldn't expect more overhead due to
-> that blocked list tracking built since it would rarely track tasks.
-
-Yes, we could avoid the list of tasks by treating the preemption within
-the trampoline the same as preemption within an RCU read-side critical
-section, but there might not be an rcu_read_unlock() to clean up.
-Which could be a problem.
-
-Trampolines that transfer control to tracing code could supply the needed
-cleanup call.  But last I checked, there were trampolines that transferred
-directly back to the original code, with no opportunity for cleaning up.
-
-Or am I still missing a trick here?
-
-							Thanx, Paul
 
