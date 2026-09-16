@@ -4,54 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EA7C6C88E5C
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 10:46:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1422671.1648100 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AB21C88E5C
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 11:36:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1422815.1648119 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6n9M-0001rn-K9; Wed, 16 Sep 2026 10:46:00 +0000
+	id 1x6nvN-0004dO-Os; Wed, 16 Sep 2026 11:35:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1422671.1648100; Wed, 16 Sep 2026 10:46:00 +0000
+Received: by outflank-mailman (output) from mailman id 1422815.1648119; Wed, 16 Sep 2026 11:35:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6n9M-0001rU-EL; Wed, 16 Sep 2026 10:46:00 +0000
-Received: by outflank-mailman (input) for mailman id 1422671;
- Wed, 16 Sep 2026 10:45:59 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x6nvN-0004dD-JS; Wed, 16 Sep 2026 11:35:37 +0000
+Received: by outflank-mailman (input) for mailman id 1422815;
+ Wed, 16 Sep 2026 11:35:36 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mark.caveayland@nutanix.com>) id 1x6n9L-0001iE-BJ
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 10:45:59 +0000
+ (envelope-from <ayan.kumar.halder@amd.com>) id 1x6nvM-0004bw-0q
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 11:35:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6n9K-00A1UL-OA
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 12:45:58 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x6nvK-007kMV-Fd
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 13:35:34 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mark.caveayland@nutanix.com>)
- id 6aaa735b-bab6-0a2a0a5309dd-0a2a4502b0ca-38
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 12:45:58 +0200
-Received: from [148.163.155.12] (helo=mx0b-002c1b01.pphosted.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <mark.caveayland@nutanix.com>)
- id 6aaa7365-6ca4-0a2a45020019-94a39b0ce988-3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 12:45:58 +0200
-Received: from pps.filterd (m0127841.ppops.net [127.0.0.1])
- by mx0b-002c1b01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68G8IwgB639332; Wed, 16 Sep 2026 03:45:54 -0700
-Received: from ch4pr04cu002.outbound.protection.outlook.com
- (mail-northcentralusazon11023142.outbound.protection.outlook.com
- [40.107.201.142])
- by mx0b-002c1b01.pphosted.com (PPS) with ESMTPS id 4gqbx0sysq-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 16 Sep 2026 03:45:53 -0700 (PDT)
-Received: from PH0PR02MB7159.namprd02.prod.outlook.com (2603:10b6:510:16::8)
- by PHXPR02MB11343.namprd02.prod.outlook.com (2603:10b6:510:3cc::16) with
+ (envelope-from <ayan.kumar.halder@amd.com>)
+ id 6aaa7f03-bab6-0a2a0a5309dd-0a2a450ce87e-20
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:35:33 +0200
+Received: from [52.101.57.31]
+ (helo=BN8PR05CU002.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ayan.kumar.halder@amd.com>)
+ id 6aaa7f04-f479-0a2a450c0019-3465391f34fc-4
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:35:33 +0200
+Received: from BN9PR03CA0254.namprd03.prod.outlook.com (2603:10b6:408:ff::19)
+ by DS7PR12MB5718.namprd12.prod.outlook.com (2603:10b6:8:71::10) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Wed, 16 Sep
- 2026 10:45:52 +0000
-Received: from PH0PR02MB7159.namprd02.prod.outlook.com
- ([fe80::8e97:bc32:822c:b250]) by PH0PR02MB7159.namprd02.prod.outlook.com
- ([fe80::8e97:bc32:822c:b250%3]) with mapi id 15.21.0406.007; Wed, 16 Sep 2026
- 10:45:52 +0000
+ 2026 11:35:26 +0000
+Received: from BN2PEPF000044A8.namprd04.prod.outlook.com
+ (2603:10b6:408:ff:cafe::82) by BN9PR03CA0254.outlook.office365.com
+ (2603:10b6:408:ff::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.11 via Frontend Transport; Wed,
+ 16 Sep 2026 11:35:24 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN2PEPF000044A8.mail.protection.outlook.com (10.167.243.102) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.428.7 via Frontend Transport; Wed, 16 Sep 2026 11:35:24 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Wed, 16 Sep
+ 2026 06:35:24 -0500
+Received: from xcbayankuma40.xilinx.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via
+ Frontend Transport; Wed, 16 Sep 2026 06:35:23 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,358 +67,564 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=proofpoint20171006 header.d=nutanix.com header.i="@nutanix.com" header.h="Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector1 header.d=nutanix.com header.i="@nutanix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=
-	content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	proofpoint20171006; bh=pkJiFODl6b5vPY8FgP6Q0oGKEYfQCpQNYQchDr5v9
-	co=; b=e9049sm0PfHTdb/e3IZbpZjrt9trDXuLq7dPoe3fpbjxj/anCFZWZKGC/
-	IxNYIHK57znEpgLL2gvBlq9LpSsdOwZYHbCRveetBHJrQPo6HiQBgDiL5uE/rIOt
-	3dJw0cwNUQvM360SVben66CvGNt1iPiBhn/666+DdCERXqEgBqw6WyTTmcQBQOKD
-	gkiiAIGd2KE73d9rx3GIWNHXszCOZiuHxX5g9PnpI37yPOFnAv3EWAtfcmEnFq+B
-	zlV48ktvvViYjA0tmIG4hyE3Ub8XrdlFBIQQPjW4QaPnC7I3xwbNejjRaEGD+NKl
-	YRsyO/6dr+mT4zWkId2DbxtxLc7Kw==
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rY/IzxnfvawlFNkBlpQ8EedVOLOYiA6TurSUrH28gOvHV9G7qPBuNwfbtciQpp6GmJDJfcec5r1A2Uwk5de0t3NNxpQucCyGfwI85VbLk9nwmrPnfz9BvHBlRXjoIiUIulJaS8+HmiOGUQXzHG6zn+9u/14RMNA274qW9J2d9dz1PCvYgjOp/K7DkdqXe1IaK3hy1ZEYirwqfsf6XDGFXH77CFYaT8A7mYmOQ/OZrNYAvFW1L39JJ5OcsogvHbnCNEg1GffhFxDTFdJ017acAzBaplORhRODxHy9a3wmIT02ooNmeCl1CDxRX7N2flOyv5qjHNXzv6eWuuZiVM3jcQ==
+ b=UijxvMgJUc1Cdm1VX5c/02X+1e0tUKjKB/XAVLdlcCHQ+TCQRwjOZd5Civ3QsluqEoBUdljs1veTvAIrMVV+j1Hyq9SJ4cF8ejWmmhS6QhS8EJZRKKo2Lh/R25jHik3uerpqH7tuGoGFqWUQoOpBpx8U6sFDplV7xzPIAuGLStDDVW1o2W3Ld7VBWWwfqvYzxZpFFibqp5Kh+9kEjKlaJwrpyh/vy0WcuzqLhmNRhUzntmE5rR4JaBDUW9T1iVC/OGwa8c//M0Cbby/Lv8xzJ/an6ANHi/ScQ7ksshhKtB+d5q1Pm+Ezg/sbtbdKL9YFPwEHql2nyDLWIw1NLSwJRw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=pkJiFODl6b5vPY8FgP6Q0oGKEYfQCpQNYQchDr5v9co=;
- b=lwjvvX1cUnsEg99Jr9blNxLy1sXjPD1OzxfdIzUTIP6F177GA/PbedVXIghBelEBIptzu6DXj/HGPU2bWl2pJA+V6EcNUd+S9WuKXOexXl6zzzCtoSAZYHgYfpbHCpaJ8lv/HSs0/YVsxwTxyNAzmXM1HiPx7B0eD87W4pR5A4vWCP6Eeh8GLltmlnmkqm+erSbJfwztis0OpZZU/m5VVNi1zzZOvzkwzTVJ1dn8c/6BxKeHD+05qWPbiHVIDHCOnj/XNKxCpa8f6D4szZiAsHEY5GbmF1LFvtS5vDYQ3urvBEatzM8aabRhrV1GaR/Gx2zC0QxkyTGQrDX8g6nZbw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
- dkim=pass header.d=nutanix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
- s=selector1;
+ bh=xrc0yfbW430zJrQysRPIrSUuJKNogQEEXYt7wQuJzTk=;
+ b=iAQlXARduT4k6FAWlzOWYAgRihEHESmtn5JgBh7dYYlwOVVfQNbOD7CUqVk5P8hiDCoxc9W5KRZLjXw1C4aZVZR+dmh9603gQtoxeUJKHwa9HUmU0CX4vl8wgaR/i1VJpYDah0KFLrJ1xp2sCSU4sYAIoWvWY7GQLqlesYXBtREmNfI/An5pnN9qNyZMQ/JC/gK94dxPVdKj5tGjO1kYqgpZld9u5sdsTze7tiTl8AwMs3R/sCD1bdND4NmF6F5ssLK16wWg4o0P5euVKDcPBMqIwg4/XuwXzSYjRNqvwaKzFH2Q0CVcOOKsG2AvSRLHecz9fB1fyUn6KeEWfYXOaw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=pkJiFODl6b5vPY8FgP6Q0oGKEYfQCpQNYQchDr5v9co=;
- b=YPmBrh44ongr2RCK67ATKBA2lSR2kdRpNWV3ZxNXmE8EV2s0orr61mrgzV3ndC6BDvz7m3B5ur65g1A7tbMejiclyg1Ef+Tz35+h4lACqrjJATvFOEqtXzV+hO8uguKod6/MdHbKe6/UvhUdO0iKFO6O50XbY7MfNfmbw2otoKVwmqxSdQgLshPEDu6qWFKGQ4k9w0WnIQmyXbRF8QnC3QJUtp5spF8Xe8dlTGydV0yOt02utmgsQ5aWzsghueC1JVMahGH8g60uWEThwUvLasHHHwwRvKLICX69CXhsP61ed4loy/dg13+sTtiMq+rYkvJt4+FXSBOg290d7xzCug==
-From: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-To: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com,
-        sstabellini@kernel.org, anthony@xenproject.org,
-        edgar.iglesias@gmail.com, qemu-devel@nongnu.org,
-        xen-devel@lists.xenproject.org
-Subject: [PATCH 21/22] i8259_common.c: remove static irq_count and irq_level variables
-Date: Wed, 16 Sep 2026 11:43:49 +0100
-Message-ID: <20260916104435.600211-22-mark.caveayland@nutanix.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20260916104435.600211-1-mark.caveayland@nutanix.com>
-References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
+ bh=xrc0yfbW430zJrQysRPIrSUuJKNogQEEXYt7wQuJzTk=;
+ b=SFobVkwRy1qKmtXgFCEbSeRkrKpHXfl443wq+ZdLXzDebP8YI4iUKM1hWyGa2GroeAnaZGd/+lPx6e+KPOkxbsAsYGrx80YdRHVfeD4s1FzIf0Y0o+t+X3Xum3zFimdcBCZqzOrLbRZGn7SiAvT7HnWU3XpTje9wtj1rfjvk0zc=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+From: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel
+	<michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>, Roger Pau Monne
+	<roger@xenproject.org>, Doug Goldstein <cardoe@cardoe.com>
+Subject: [PATCH v4 for 4.23] Add GIC SGI boot/self tests in Xen
+Date: Wed, 16 Sep 2026 12:35:20 +0100
+Message-ID: <20260916113520.3870182-1-ayan.kumar.halder@amd.com>
+X-Mailer: git-send-email 2.25.1
+MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR05CA0077.namprd05.prod.outlook.com
- (2603:10b6:a03:332::22) To PH0PR02MB7159.namprd02.prod.outlook.com
- (2603:10b6:510:16::8)
-MIME-Version: 1.0
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH0PR02MB7159:EE_|PHXPR02MB11343:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7324f8ee-bb0c-4930-96d2-08df13dfadbc
-x-proofpoint-crosstenant: true
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A8:EE_|DS7PR12MB5718:EE_
+X-MS-Office365-Filtering-Correlation-Id: b078d290-02fe-4873-2f1e-08df13e6996b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|376014|1800799024|23010399003|18002099003|6133799003|3023799007|10067099003|56012099006|22082099003;
+	BCL:0;ARA:13230040|23010399003|36860700016|7416014|82310400026|376014|1800799024|11063799006|56012099006|10067099003|18002099003|6133799003|3023799007|13003099007;
 X-Microsoft-Antispam-Message-Info:
-	mny/sBr/FrGXACmPXrz0nt/UdwC9w+7/2ZbBP5GQtLMbTWA0ov4gxTRt9Kpyf6NRnwYxQ5/Ik/aXEdu/Uj9UQWGAZePcYSWfhTxY4WbpGpzbrXucFJmrt3TrOX+cnKMl1r9f5FCj8dv59rFISyeKlPe1tjQtpBcA5fffGpbIht8YuKWE7iMe+qbrLL/D8IEUH+0tZ7NONrSESBbmZRSnGfl8lyZmMuNMjgAnce9wJuZ8mXtc2LUlK5WORvQT0Na1UNjsa6pVcTk3r3o6U17pMR/fezto2RsvfNVVdxUT+O2du8AQ7fln5V7v0G01Xd+87C0TbivwRASZoQx9GlT8ZeUuI/UcWysfnMvE8Qop0tRMLS+YTglw4ydnGcQmnPjr43K+R23fexkruAud6Wt+E17OJxtPB4gOG/P6hJm0cyGdbF3xMdGUXlwED2I19PXeg5h9kV5PcMx6b/bnxb/MFYhMTLE/fdrGlpYrt3Q/7DMqUpF0JhR/Me0G5D9+gb5lDs4vil8QMSNjIYBsCQ5YFbgthZwPPvBQ5fhYjmzA+qrQ7YpFC0/QlLUVa2QAUisbcUhACOjc9RAil/pDFkkkuH0M6T7u8Z8o5p8SlfsSnqG/N1AILi+ytcNcFBjfVcr5+ZmM4WaWuKV3Fhq3E9rsIeNeiRTb02rVKesHH2T1n8k=
+	/NsNvaSuCNqTkGlCegv4dF29jzmiaA8Ha0I8c1+N5pRgzqR8Xs4zBpX/pOICk1X10kLI622jWz+QBYpcVfkZpHDASxSqD11Htq03vJ56fFdzA5xneXg9Q8Ynw+ARy9G3h09ZElvBWGcyI78nNpLbbs3q1NxSZjmx2ZXIuDUufbD/OXbNdEZjxMKK3HnyzISGCy63fDsLh7oeRtgoMpGUP6U5EuUsi9WogSQUG+rNguzxCEOIcNoowJOuDCPrfpsuB7OcmpdI+3NOZRtEYrD7gRgy4A/cyfzzWGNpa4Cr/8elu5h/B9bQXZr/qKYqdRUTWvkhBhyizmWn3wfzV1MxVd/Oid/SBjlWTKh/518jjAgzssnSayW1Pl/Dbd+nKeRw1/8/j3J/1hc5pS/lIgNPA89RCI3K7jqeZeqe2YuX6ZKyX1HbwArBlYJm2Roca/GEOdsBnfxB4yq+vlZboEBZYeeGXjnFtUZL4V0aPJhQJ9sAe7PYmu2dtg5cpOq+190PSYF53x7E+hrwwjfixyRqoZkpdD6JO6OKsoHOySiFuugFYfON4Ce/0NMEcjxsxG7R+nIdiveB6tXCgelTw+Tkr1nbLPGN7SXDuXqO/Hb2Q1hpk2yKZZLQUVGsucI9Ls7ka1Fz0bPzKiXG6BTkxGppkw==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR02MB7159.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(18002099003)(6133799003)(3023799007)(10067099003)(56012099006)(22082099003);DIR:OUT;SFP:1102;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(36860700016)(7416014)(82310400026)(376014)(1800799024)(11063799006)(56012099006)(10067099003)(18002099003)(6133799003)(3023799007)(13003099007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?2X9TcRXiJULb99j7T6SQRPC2gtmRqJkHeZXbC9UfcqnS8sx+Ypwcyp8FZXYS?=
- =?us-ascii?Q?ABMuuwk37B1/8gkBe0LGkZySJ89JvUhsLjaXJ/1mcG+7myZVlFL2/jT108jU?=
- =?us-ascii?Q?OKjtK6GRxQ2dsVSy6Scx7Cm4a34b3rnscBKXAstHzEpFJmvfplyJbbZCl8Gv?=
- =?us-ascii?Q?ZVrUMfzF+oUggugqTSw72zW6dGtba5a1DOKczwyP5kp59ORZ/wHlyIPdYOYm?=
- =?us-ascii?Q?5CyEspxIzjcwSKYbv+ir30oSKdYG3R8i8rzrfDPLGiM2IcqQKAwc6DURIFXb?=
- =?us-ascii?Q?nU+HX4rRkUrEmCfCvHPDfUxOFyckb3rriznHoxSaZdOgzhqfD0wT8Sz2pvDO?=
- =?us-ascii?Q?4ylbOMj2nzGyDcHqUR5t3L50YUGvCTbVIyJmRSI/C81lavu+h8fmzVgn1IFM?=
- =?us-ascii?Q?zL1TVEgtj6mub/nmLZ/KJDvX3+/Trnecb7rQ2Jg5sIyNn38dBjahB30WvPiL?=
- =?us-ascii?Q?LUMQ9FuUve12fWArvWzvds6+UJL2cOE0enla68Q1Nu4mzNqXpGFTttXcYl6c?=
- =?us-ascii?Q?z0bYry+poVCpobr/YoNeM1sXUlXjOxJOzhhcHtTFyFoFGcLcF6lMUuIY/48b?=
- =?us-ascii?Q?spVZBmqN8q0DB5CasgpUJ73Rxec4Xhpv4xVFPIWZ8yq1s33XqddZ7WqxtFwJ?=
- =?us-ascii?Q?hojQ4m2IYuE1L0owiTR009Eh5P7fiKJiMhZ3s50TUzRB4ZZm5F7ISASWBUq6?=
- =?us-ascii?Q?Xx0bymFj7erCJrZgUXQ5B/DSwbeXjYRLk9tLKZRyYpr0ZtJi3iX/JBYq2b8K?=
- =?us-ascii?Q?inSl2YdzbAczMNNEgV1cNMcW6IYaCKIBGShZzMLdTunE+xN4EoqTaDy+W0HJ?=
- =?us-ascii?Q?XWVe7X20KOVEHzEIS8jdxL7aIwf3wDABFaium71xWZfCq/VNr9ep7DJf7xF7?=
- =?us-ascii?Q?mSvaxXkfZAsNEvJIh/Jypulqbj/KQKTY0+Qvf9d6eYIVmcA1H8Qbuurf+iwG?=
- =?us-ascii?Q?9NoIULh3pbX/8zkJh4mvzmSvouKdQMlbIFXHTyXoB8U1SrPBXjt5Mc10LSNG?=
- =?us-ascii?Q?FnlKEBBcMkV7xGf2zGlPZWPfG+q5CGZScjlD5jdeFSKuT3jUpF2JByZzu4Nx?=
- =?us-ascii?Q?EwEAENvn28NRJkagv6YILcRlbuwh9Ydu9cCt0id2mwTem19CeNaYEVXLDJDx?=
- =?us-ascii?Q?eJVRx5eHoYaJF+o5Iw6FuRorE2oQ1kWQe/3FS2yK5C3QLj0EgXKmMG2NQ0q4?=
- =?us-ascii?Q?wtutMBFgOB4n8aaAM8mr9fer8hx+zoePI3TaXePZYSB2Vli7wwJVAE7/W5Lv?=
- =?us-ascii?Q?CIeyU6xB6Ba7hv+rVuT5NsSUdPlFCg34UY8qXgjVrut+LP+zPRsX2Cng1Pwb?=
- =?us-ascii?Q?w+QPuGPjAzIZWeNFMcWpWDZHyubJiepvRAXxPe3g8w2w2jAhLmevZvGyJM6v?=
- =?us-ascii?Q?ySpTGeS7zTdLal8SbOqz+TYjBEr27iH6srNkee28MQ1hB2Fe9BCKjWinRQ+T?=
- =?us-ascii?Q?KYWjNOo7Asi0uG6JxSRC/odDcN4M85I5UfFrvyDaVBsboSeZPFazSKsCnQ7G?=
- =?us-ascii?Q?Te/1/IG+UYK09TgXjLbAzzczdrJHD5rr9XcQ1YURk6tm3NcGbrzEeLRGTLHe?=
- =?us-ascii?Q?y59HugkI0+2QlbHN6kBmiKaozmHFL5uM2YPFJO4VVn/W64cc1gqLTrOhoNGJ?=
- =?us-ascii?Q?bV2BXDhABNUyT7b279eC6iKRCk2iQhtexoMBq/Vc8sEYlUVWUAKefyx1T7+R?=
- =?us-ascii?Q?vxBcpU84mX3P73xIhv8+ZC3mT+j3MFnvtkeo+ZQ+P4R/+JUJ/WuYzfD6VMPx?=
- =?us-ascii?Q?tCAuwfbQtOWLyom57THudj48mrXNjaE=3D?=
-X-Exchange-RoutingPolicyChecked:
-	KTivrjYdFvR7SJHrTTBQzO5zaHde9OiVioRlXndUZzYsc9CQ4KNRDFEIoMJPBBdGQbvA/c9RKoVHge2XcgtSW3LxOE864nnbWD4Nhf6ZeEc77PoKt5nTtvRgp9n9sPoX6MoewabeRsALjCdpN2YB3H5PxAAUPlPUK99j8SCJrWh9yAFQG2lL+HzBATwFpIy09ADfz4fpvhaOnfmSBGFf/SpNaCeyqETrzoilx4UFtwHHZ7ANjdNtnVWIT/j6q6tDIBbH1fCeAL7c1ONutkOyZDEQYzshOwaz0V+MpU86h4byZI2BxCEeUzmInw1kgTNk+eGgv5EKp5Gdu1tM9nDGgw==
-X-OriginatorOrg: nutanix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7324f8ee-bb0c-4930-96d2-08df13dfadbc
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR02MB7159.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 10:45:52.6825
+	FRG4pgQuR+NHZVva3sqosX/VGPIyOZXl40agbowTCXKXP24DOY/AU3HlpFttDEqTMF8u37lT5z6tc6gJDtaA8sv2o/tvqfqo2KCBIMSmwyVaASVOGjg61Z5G86jlIieEBWt1hnoeT/RC9zUSCzDAMHhYJKXNG9cgzWAjERdCeRE4j0Z45lKvUqRWfjXwvLIs9P2HIJkYq+3MpG/5L9BakaZibQSurLCXab6O7YzbGhNuKVvsL9fqG5xMmwkAQiErnomga3TxOFOUhgyDfZlwfsedQ7U4RHUtTR9HS0PrxnFsu5ofuWxJtbhp80hIrClD96ctFNsFK9BwFhAM8c7D1n9se9+nTMv/KTKOJiMK5Mrm/0GcaG70VzowI6aYiSx+E6Tjfthb4dg73A6arYR3A0KM6cCAivwngzxgmzIJ6kl5S2Ok8W7UPWlPFe/vMJ7r
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 11:35:24.6840
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: bb047546-786f-4de1-bd75-24e5b6f79043
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: fSxUaaZf+rCVhXhIsmBB4cJg6SsDwqqWoeVwkOEUYYlsbMyXk9WXDqm5UIDfJcadDc76n9ijQFtb8p4GMg/bHZfOTEe2M4wUycvJUBlcADY=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PHXPR02MB11343
-X-Authority-Analysis: v=2.4 cv=Xq5vqlF9 c=1 sm=1 tr=0 ts=6aaa7362 cx=c_pps
- a=nzP3m+/CqRdBhj8fzGTHBQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=VdqzKS8jKosA:10 a=0kUYKlekyDsA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=VofLwUrZ8Iiv6rRUPXIb:22 a=jxMXjlTPpCISP5mWtjnE:22
- a=64Cc0HZtAAAA:8 a=KJqig-R1GVLqmjI8InkA:9
-X-Proofpoint-ORIG-GUID: WfxuQKVPr1TjN3bNhFd63-_04f_peMQh
-X-Proofpoint-GUID: WfxuQKVPr1TjN3bNhFd63-_04f_peMQh
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDE0MSBTYWx0ZWRfX5UNtd2mNsJum
- XxPo9EBN659z2gNVDxbcWR9b4FW+aTQPHhrSycdSTvKg/6vxyMmYwJSObgfzewZJP9PiidJ89S6
- 692RIxLRpfIq9loS0TtKWqkiv+hevcU=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDE0MSBTYWx0ZWRfX7MOwfRkdisx0
- bjEnOu6jpiYP887LHQj9oYMyv5JwN3ofpx0aVnzUy7X2m4khh+fwq0etKCMQ8SNQbcC7unWMOVJ
- mMgTyDI+PMJLuCHbdcFo95VRILXapfrEAUiYYyi1mnsUKH8OHYDwTNPuCofBJmq+jjSeqMxw3i5
- fQd1x5raPK/EatgA2L0jTc9JpYaeU9D1a2l9/8WyIX83+spH1L1szQApbg4uC9PrNRGOvyXOS1Y
- PbfYRwHULsUcc36bZUeFxME25LSOjAL7G4y4tjHfeEFr4jqiMx5RdD6P/Hz5MXqeb1Olw1Ob/IS
- UIHhgmbf6tX8WnMz2vbSsafH/A3UdocCmmIw4LiibB/lReUzQMR5mQaXyFVTi2yDePbF+jcPTVi
- hYc5mCeDGpVigdlfD3Ue/FMGQlEfmgEG9y6ydcU5IdV0sA0bsLZBIQ6RvfhFS802t4PxTLlxpUU
- yeGZ2YvKI1Sb8FdrI6Q==
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
-X-Proofpoint-Spam-Reason: safe
-X-purgate-ID: tlsNG-720697/1789555558-F0AA52AC-A8EA178E/0/0
+X-MS-Exchange-CrossTenant-Network-Message-Id: b078d290-02fe-4873-2f1e-08df13e6996b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN2PEPF000044A8.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB5718
+X-purgate-ID: tlsNG-d25034/1789558533-024DFA5B-31BE9BA7/0/0
 X-purgate-type: clean
-X-purgate-size: 7331
+X-purgate-size: 16383
 
-Adjust the parameters to i8259_stat_update_irq() to allow passing in pointers
-to the irq_count and irq_level arrays, and then move the arrays into the
-corresponding i8259 PIC and KVM PIC devices.
+Boot self-tests (also referred to as boot-time tests or power-on
+self-tests) are intended to check that Xen has configured the hardware
+correctly before bringing up any domains.
 
-Doing this allows the statistics capture logic in i8259_set_irq() that handles
-incoming cascading interrupts to be removed.
+Introduce tests to confirm that, using a dedicated SGI (GIC_SGI_TEST):
+1. A cpu can send the SGI to itself
+2. A cpu can send the SGI to another specific CPU (CPU0)
+3. A cpu can send the SGI to all the other CPUs
 
-Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Each CPU counts the test SGIs it takes. A sender samples those counters
+before sending and then waits for the count of every CPU it targeted to
+change, which is how it tells that the SGI was really delivered. The
+counters are never reset, so comparing against a sample rather than an
+absolute value keeps concurrent senders from disturbing each other.
+
+A test reports a failure by panic(), so Xen never continues on a
+platform where SGI delivery is broken. When the tests pass, Xen carries
+on booting normally.
+
+Also introduce a config CONFIG_BOOT_SELFTEST which enables these
+tests. It depends on DEBUG and is off unless explicitly enabled.
+
+Also introduce a boolean command line parameter "gic-test", so that a
+build with CONFIG_BOOT_SELFTEST enabled can be shipped but the tests
+selected at boot. It is documented in
+docs/misc/xen-command-line.pandoc.
+
+In order to keep all the boot self-tests together in the binary, a
+separate section "initcallboottest" is introduced. Tests are registered
+using __initcallboottest() and run once on every CPU by
+do_init_boottests(), bracketed by begin/end messages. They run before
+any domain is created on the primary core, and before the idle loop is
+entered on a secondary core.
+
+Signed-off-by: Ayan Kumar Halder <ayan.kumar.halder@amd.com>
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
 ---
- include/hw/intc/i8259.h         |  3 ---
- include/hw/isa/i8259_internal.h |  3 ++-
- hw/i386/kvm/i8259.c             | 20 +++++++++++++++--
- hw/intc/i8259.c                 | 40 ++++++++++++++++++++++-----------
- hw/intc/i8259_common.c          | 21 +++++------------
- 5 files changed, 52 insertions(+), 35 deletions(-)
+Link to v3:
+https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg215355.html
 
-diff --git a/include/hw/intc/i8259.h b/include/hw/intc/i8259.h
-index 72be7c3de2..2efdaaca2b 100644
---- a/include/hw/intc/i8259.h
-+++ b/include/hw/intc/i8259.h
-@@ -21,9 +21,6 @@ qemu_irq *i8259_init(ISABus *bus, qemu_irq parent_irq_in);
- qemu_irq *kvm_i8259_init(ISABus *bus);
- int pic_get_output(I8259PICState *s);
- int pic_read_irq(I8259PICState *s);
--bool i8259_pic_get_statistics(InterruptStatsProvider *obj,
--                              uint64_t **irq_counts,
--                              unsigned int *nb_irqs);
- void i8259_pic_print_info(InterruptStatsProvider *obj, GString *buf);
+Upstream CI run:
+https://gitlab.com/xen-project/people/ayankuma/xen/-/pipelines/2853709475
+
+Changes in v4:
+ - gic-test.c is SPDX GPL-2.0-only; COPYING states v2-only is the only
+   valid version. v3 had changed this to GPL-2.0-or-later to match the
+   neighbouring GIC files, which was wrong (Julien).
+ - The SGI handler uses ACCESS_ONCE() for the increment as well as the
+   read, since the counter is published to another CPU. Not an atomic:
+   only the receiving CPU writes its own counter (Julien).
+ - Dropped the file name from the gic_sgi_test_interrupt() comment in
+   asm/gic.h (Julien).
+ - asm/setup.h is included after asm/tee/tee.h in smpboot.c (Julien).
+ - Sent as a new thread rather than in-reply-to v3 (Julien).
+ - Rebased onto current staging (adbbbd47a1); applied unchanged.
+
+ automation/gitlab-ci/build.yaml               |   8 ++
+ automation/gitlab-ci/test.yaml                |   8 ++
+ .../scripts/qemu-boot-selftest-arm64.sh       |  72 +++++++++++++
+ docs/misc/xen-command-line.pandoc             |  10 ++
+ xen/arch/arm/Kconfig                          |  13 +++
+ xen/arch/arm/Makefile                         |   1 +
+ xen/arch/arm/gic-test.c                       | 102 ++++++++++++++++++
+ xen/arch/arm/gic.c                            |   5 +
+ xen/arch/arm/include/asm/gic.h                |   8 ++
+ xen/arch/arm/include/asm/setup.h              |   9 ++
+ xen/arch/arm/setup.c                          |  20 ++++
+ xen/arch/arm/smpboot.c                        |   3 +
+ xen/arch/arm/xen.lds.S                        |   4 +
+ 13 files changed, 263 insertions(+)
+ create mode 100755 automation/scripts/qemu-boot-selftest-arm64.sh
+ create mode 100644 xen/arch/arm/gic-test.c
+
+diff --git a/automation/gitlab-ci/build.yaml b/automation/gitlab-ci/build.yaml
+index 27eefec5f9..3d37e0b572 100644
+--- a/automation/gitlab-ci/build.yaml
++++ b/automation/gitlab-ci/build.yaml
+@@ -420,6 +420,14 @@ alpine-3.24-arm64-gcc-debug:
+       CONFIG_UBSAN=y
+       CONFIG_UBSAN_FATAL=y
  
- #endif
-diff --git a/include/hw/isa/i8259_internal.h b/include/hw/isa/i8259_internal.h
-index 53751b045b..53d8e087eb 100644
---- a/include/hw/isa/i8259_internal.h
-+++ b/include/hw/isa/i8259_internal.h
-@@ -72,6 +72,7 @@ struct I8259CommonState {
- };
- 
- void i8259_common_reset(I8259CommonState *s);
--void i8259_stat_update_irq(int irq, int level);
-+void i8259_stat_update_irq(uint64_t *irq_levels, int *irq_counts,
-+                           int irq, int level);
- 
- #endif /* QEMU_I8259_INTERNAL_H */
-diff --git a/hw/i386/kvm/i8259.c b/hw/i386/kvm/i8259.c
-index 421c9279cd..ca661afc02 100644
---- a/hw/i386/kvm/i8259.c
-+++ b/hw/i386/kvm/i8259.c
-@@ -30,6 +30,9 @@ struct KVMI8259PICState {
- 
-     ISABus *isabus;
-     I8259CommonState i8259[2];
++alpine-3.24-arm64-gcc-debug-boot-selftest:
++  extends: .gcc-arm64-build-debug
++  <<: *build-test
++  variables:
++    CONTAINER: alpine:3.24-arm64v8
++    EXTRA_XEN_CONFIG: |
++      CONFIG_BOOT_SELFTEST=y
 +
-+    int irq_level[ISA_NUM_IRQS];
-+    uint64_t irq_count[ISA_NUM_IRQS];
- };
+ alpine-3.24-arm64-gcc-randconfig:
+   extends: .gcc-arm64-build
+   variables:
+diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.yaml
+index 61adc1baff..96127995d7 100644
+--- a/automation/gitlab-ci/test.yaml
++++ b/automation/gitlab-ci/test.yaml
+@@ -605,6 +605,14 @@ qemu-smoke-dom0less-arm64-gcc-debug-gicv3:
+     - *arm64-test-needs
+     - alpine-3.24-arm64-gcc-debug
  
- OBJECT_DECLARE_SIMPLE_TYPE(KVMI8259PICState, KVM_I8259_PIC)
-@@ -102,6 +105,18 @@ static void kvm_i8259_put(I8259CommonState *s)
-     }
- }
- 
-+static bool kvm_i8259_pic_get_statistics(InterruptStatsProvider *obj,
-+                                         uint64_t **irq_counts,
-+                                         unsigned int *nb_irqs)
-+{
-+    KVMI8259PICState *s = KVM_I8259_PIC(obj);
++qemu-smoke-boot-selftest-arm64-gcc-debug:
++  extends: .qemu-arm64
++  script:
++    - ./automation/scripts/qemu-boot-selftest-arm64.sh 2>&1 | tee ${LOGFILE}
++  needs:
++    - *arm64-test-needs
++    - alpine-3.24-arm64-gcc-debug-boot-selftest
 +
-+    *irq_counts = s->irq_count;
-+    *nb_irqs = ARRAY_SIZE(s->irq_count);
+ qemu-smoke-dom0less-arm64-gcc-debug-staticmem:
+   extends: .qemu-arm64
+   script:
+diff --git a/automation/scripts/qemu-boot-selftest-arm64.sh b/automation/scripts/qemu-boot-selftest-arm64.sh
+new file mode 100755
+index 0000000000..e36bd8d94a
+--- /dev/null
++++ b/automation/scripts/qemu-boot-selftest-arm64.sh
+@@ -0,0 +1,72 @@
++#!/bin/bash
 +
-+    return true;
++set -ex -o pipefail
++
++# Boot Xen under QEMU with gic-test in xen,xen-bootargs and check that every
++# self-test reported OK and that Xen carried on booting.
++
++XEN=binaries/xen
++# qemu-system-aarch64 comes from the debian:13-arm64v8 test container, the
++# same way the other qemu-smoke-*-arm64 scripts get it.
++QEMU=qemu-system-aarch64
++DTB_RAW=binaries/virt.dtb
++DTB=binaries/virt-bootselftest.dtb
++LOG=smoke.serial
++
++NR_CPUS=4
++
++test -f ${XEN}
++
++${QEMU} \
++    -machine virt,virtualization=true,gic-version=3,dumpdtb=${DTB_RAW} \
++    -cpu cortex-a57 -m 1024 -smp ${NR_CPUS} -display none -net none
++
++cp ${DTB_RAW} ${DTB}
++fdtput -t s ${DTB} /chosen xen,xen-bootargs \
++    "gic-test console=dtuart sync_console"
++
++rm -f ${LOG}
++timeout 60 ${QEMU} \
++    -machine virt,virtualization=true,gic-version=3 \
++    -cpu cortex-a57 -m 1024 -smp ${NR_CPUS} \
++    -serial file:${LOG} \
++    -monitor none -display none -no-reboot -net none \
++    -dtb ${DTB} \
++    -kernel ${XEN} || true
++
++fail=0
++
++check() {
++    local what=$1
++    local expected=$2
++    local got
++
++    got=$(grep -c -- "${what}" ${LOG} || true)
++    if [ "${got}" -ne "${expected}" ]; then
++        echo "FAIL: '${what}': expected ${expected}, got ${got}"
++        fail=1
++        return
++    fi
++
++    echo "OK: '${what}' x${expected}"
 +}
 +
- static void kvm_i8259_reset(DeviceState *dev)
- {
-     I8259CommonState *s = I8259_COMMON(dev);
-@@ -114,9 +129,10 @@ static void kvm_i8259_reset(DeviceState *dev)
- 
- static void kvm_pic_set_irq(void *opaque, int irq, int level)
- {
-+    KVMI8259PICState *s = opaque;
-     int delivered;
- 
--    i8259_stat_update_irq(irq, level);
-+    i8259_stat_update_irq(s->irq_count, s->irq_level, irq, level);
-     delivered = kvm_set_irq(kvm_state, irq, level);
-     kvm_report_irq_delivered(delivered);
- }
-@@ -210,7 +226,7 @@ static void kvm_i8259_pic_class_init(ObjectClass *klass, const void *data)
- 
-     dc->realize = kvm_i8259_pic_realize;
-     device_class_set_props(dc, kvm_i8259_pic_properties);
--    ic->get_statistics = i8259_pic_get_statistics;
-+    ic->get_statistics = kvm_i8259_pic_get_statistics;
-     ic->print_info = i8259_pic_print_info;
-     /*
-      * Reason: must be wired to the ISA bus via the "bus" property
-diff --git a/hw/intc/i8259.c b/hw/intc/i8259.c
-index 3f10777036..ac43995ce4 100644
---- a/hw/intc/i8259.c
-+++ b/hw/intc/i8259.c
-@@ -49,14 +49,16 @@ struct I8259PICState {
-     ISABus *isabus;
-     IRQState i8259_primary_out_irq;
-     I8259CommonState i8259[2];
++# Every CPU sends an SGI to itself...
++check "GIC selftest: CPU[0-9]*: SGI to self: OK" ${NR_CPUS}
++# ...every secondary CPU sends one to CPU0...
++check "GIC selftest: CPU[0-9]*: SGI to CPU0: OK" $((NR_CPUS - 1))
++# ...and whichever CPU runs last sends one to all the others.
++check "GIC selftest: CPU[0-9]*: SGI to all but self: OK" 1
 +
-+    int irq_level[ISA_NUM_IRQS];
-+    uint64_t irq_count[ISA_NUM_IRQS];
-+#ifdef DEBUG_IRQ_LATENCY
-+    int64_t irq_time[ISA_NUM_IRQS];
-+#endif
- };
++check "boot self-tests done" ${NR_CPUS}
++check "GIC selftest: .*did not receive" 0
++
++# A passing self-test must leave Xen booting normally.
++check "LOADING DOMAIN 0\|Xen dom0less mode detected" 1
++
++if [ ${fail} -ne 0 ]; then
++    echo "FAILED"
++    exit 1
++fi
++
++echo "PASSED"
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index b2c94ae56d..ea0e3368b1 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -1282,6 +1282,16 @@ available on Intel Panther Lake and Diamond Rapids CPUs, and AMD Zen6 CPUs.
+ FRED is fully supported on AMD hardware.  On Intel hardware it is still tech
+ preview, and in particular not security supported.
  
- OBJECT_DECLARE_SIMPLE_TYPE(I8259PICState, I8259_PIC)
++### gic-test (arm)
++> `= <boolean>`
++
++> Default: `false`
++
++Only available when `CONFIG_BOOT_SELFTEST` is enabled.
++
++Run the GIC SGI boot self-tests while each CPU is brought up.  Xen panics if
++an SGI is not delivered; otherwise it carries on booting normally.
++
+ ### gnttab
+ > `= List of [ max-ver:<integer>, transitive=<bool>, transfer=<bool> ]`
  
--
--#ifdef DEBUG_IRQ_LATENCY
--static int64_t irq_time[16];
--#endif
- I8259PICState *isa_pic;
+diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+index 843a43897e..92a1788854 100644
+--- a/xen/arch/arm/Kconfig
++++ b/xen/arch/arm/Kconfig
+@@ -498,6 +498,19 @@ config ARM64_HARDEN_BRANCH_PREDICTOR
+ config ARM32_HARDEN_BRANCH_PREDICTOR
+     def_bool y if ARM_32 && HARDEN_BRANCH_PREDICTOR
  
- /* return the highest priority found in mask (highest = smallest
-@@ -123,16 +125,8 @@ static void i8259_set_irq(void *opaque, int irq, int level)
- {
-     I8259CommonState *s = opaque;
-     int mask = 1 << irq;
--    int irq_index = s->master ? irq : irq + 8;
++config BOOT_SELFTEST
++	bool "Enable boot self-tests"
++	depends on DEBUG
++	help
++	  This option enables boot self-tests. They are intended to check that
++	  Xen has configured the hardware correctly before bringing up any
++	  domains. A failure is reported by panic(); when the tests pass, Xen
++	  boots normally.
++
++	  Selected at boot with the "gic-test" command line option.
++
++	  If unsure, say N.
++
+ source "arch/arm/platforms/Kconfig"
  
-     trace_pic_set_irq(s->master, irq, level);
--    i8259_stat_update_irq(irq_index, level);
--
--#ifdef DEBUG_IRQ_LATENCY
--    if (level) {
--        irq_time[irq_index] = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
--    }
--#endif
- 
-     if (s->ltim || (s->elcr & mask)) {
-         /* level triggered */
-@@ -209,7 +203,7 @@ int pic_read_irq(I8259PICState *s)
-     printf("IRQ%d latency=%0.3fus\n",
-            irq,
-            (double)(qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL) -
--                    irq_time[irq]) * 1000000.0 / NANOSECONDS_PER_SECOND);
-+                    s->irq_time[irq]) * 1000000.0 / NANOSECONDS_PER_SECOND);
- #endif
- 
-     trace_pic_interrupt(irq, intno);
-@@ -439,10 +433,30 @@ static void i8259_class_init(ObjectClass *klass, const void *data)
- }
- 
- 
-+static bool i8259_pic_get_statistics(InterruptStatsProvider *obj,
-+                                     uint64_t **irq_counts,
-+                                     unsigned int *nb_irqs)
+ source "common/Kconfig"
+diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
+index b7afd3e58c..71f177824b 100644
+--- a/xen/arch/arm/Makefile
++++ b/xen/arch/arm/Makefile
+@@ -24,6 +24,7 @@ obj-y += domctl.o
+ obj-$(CONFIG_EARLY_PRINTK) += early_printk.o
+ obj-y += efi/
+ obj-y += gic.o
++obj-$(CONFIG_BOOT_SELFTEST) += gic-test.o
+ obj-$(CONFIG_GICV2) += gic-v2.o
+ obj-$(CONFIG_GICV3) += gic-v3.o
+ obj-$(CONFIG_HAS_ITS) += gic-v3-its.o
+diff --git a/xen/arch/arm/gic-test.c b/xen/arch/arm/gic-test.c
+new file mode 100644
+index 0000000000..c2ffe2e9b9
+--- /dev/null
++++ b/xen/arch/arm/gic-test.c
+@@ -0,0 +1,102 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++
++#include <xen/atomic.h>
++#include <xen/cpumask.h>
++#include <xen/init.h>
++#include <xen/lib.h>
++#include <xen/param.h>
++#include <xen/percpu.h>
++#include <xen/smp.h>
++#include <xen/time.h>
++#include <asm/gic.h>
++#include <asm/processor.h>
++#include <asm/setup.h>
++
++static bool __initdata opt_gic_test;
++boolean_param("gic-test", opt_gic_test);
++
++static DEFINE_PER_CPU(unsigned int, sgi_test_count);
++
++void gic_sgi_test_interrupt(void)
 +{
-+    I8259PICState *s = I8259_PIC(obj);
-+
-+    *irq_counts = s->irq_count;
-+    *nb_irqs = ARRAY_SIZE(s->irq_count);
-+
-+    return true;
++    ACCESS_ONCE(this_cpu(sgi_test_count))++;
 +}
 +
- static void i8259_pic_set_irq(void *opaque, int n, int level)
- {
-     I8259PICState *s = opaque;
- 
-+    i8259_stat_update_irq(s->irq_count, s->irq_level, n, level);
++static unsigned int __init sgi_count(unsigned int cpu)
++{
++    return ACCESS_ONCE(per_cpu(sgi_test_count, cpu));
++}
 +
-+#ifdef DEBUG_IRQ_LATENCY
-+    if (level) {
-+        s->irq_time[n] = qemu_clock_get_ns(QEMU_CLOCK_VIRTUAL);
++static void __init snapshot_sgi(unsigned int *before)
++{
++    unsigned int cpu;
++
++    for_each_online_cpu ( cpu )
++        before[cpu] = sgi_count(cpu);
++}
++
++/*
++ * Wait for every CPU in @mask to take one more GIC_SGI_TEST than the count
++ * recorded in @before.
++ */
++static void __init expect_sgi(const cpumask_t *mask,
++                              const unsigned int *before, const char *what)
++{
++    s_time_t deadline = NOW() + MILLISECS(100);
++    unsigned int cpu;
++
++    for_each_cpu ( cpu, mask )
++    {
++        while ( sgi_count(cpu) == before[cpu] )
++        {
++            if ( NOW() > deadline )
++                panic("GIC selftest: %s: CPU%u did not receive GIC_SGI_TEST\n",
++                      what, cpu);
++            cpu_relax();
++        }
 +    }
++
++    printk("GIC selftest: CPU%u: %s: OK\n", smp_processor_id(), what);
++}
++
++/*
++ * "All but self" is only meaningful once every CPU can take an SGI, so it is
++ * run by whichever CPU observes that it is the last one to get here.
++ */
++static int __init gic_sgi_selftest(void)
++{
++    static atomic_t __initdata seen = ATOMIC_INIT(0);
++    unsigned int before[NR_CPUS] = { };
++    unsigned int cpu = smp_processor_id();
++
++    if ( !opt_gic_test )
++        return 0;
++
++    snapshot_sgi(before);
++    send_SGI_self(GIC_SGI_TEST);
++    expect_sgi(cpumask_of(cpu), before, "SGI to self");
++
++    if ( cpu != 0 )
++    {
++        snapshot_sgi(before);
++        send_SGI_one(0, GIC_SGI_TEST);
++        expect_sgi(cpumask_of(0), before, "SGI to CPU0");
++    }
++
++    if ( atomic_add_return(1, &seen) == num_online_cpus() )
++    {
++        cpumask_t target;
++
++        cpumask_andnot(&target, &cpu_online_map, cpumask_of(cpu));
++
++        if ( !cpumask_empty(&target) )
++        {
++            snapshot_sgi(before);
++            send_SGI_allbutself(GIC_SGI_TEST);
++            expect_sgi(&target, before, "SGI to all but self");
++        }
++    }
++
++    return 0;
++}
++__initcallboottest(gic_sgi_selftest);
+diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
+index 078049e741..6a132c64e1 100644
+--- a/xen/arch/arm/gic.c
++++ b/xen/arch/arm/gic.c
+@@ -330,6 +330,11 @@ static void do_static_sgi(struct cpu_user_regs *regs, enum gic_sgi sgi)
+     case GIC_SGI_CALL_FUNCTION:
+         smp_call_function_interrupt();
+         break;
++#ifdef CONFIG_BOOT_SELFTEST
++    case GIC_SGI_TEST:
++        gic_sgi_test_interrupt();
++        break;
++#endif
+     default:
+         panic("Unhandled SGI %d on CPU%d\n", sgi, smp_processor_id());
+         break;
+diff --git a/xen/arch/arm/include/asm/gic.h b/xen/arch/arm/include/asm/gic.h
+index ee2c26adb4..33dca9dcc6 100644
+--- a/xen/arch/arm/include/asm/gic.h
++++ b/xen/arch/arm/include/asm/gic.h
+@@ -306,6 +306,9 @@ enum gic_sgi {
+     GIC_SGI_EVENT_CHECK,
+     GIC_SGI_DUMP_STATE,
+     GIC_SGI_CALL_FUNCTION,
++#ifdef CONFIG_BOOT_SELFTEST
++    GIC_SGI_TEST,
++#endif
+     GIC_SGI_STATIC_MAX,
+ };
+ 
+@@ -321,6 +324,11 @@ extern void send_SGI_one(unsigned int cpu, enum gic_sgi sgi);
+ extern void send_SGI_self(enum gic_sgi sgi);
+ extern void send_SGI_allbutself(enum gic_sgi sgi);
+ 
++#ifdef CONFIG_BOOT_SELFTEST
++/* Record a GIC_SGI_TEST delivered to this CPU. */
++void gic_sgi_test_interrupt(void);
 +#endif
 +
-     qemu_set_irq(s->pass_irqs[n], level);
+ /* print useful debug info */
+ extern void gic_dump_info(struct vcpu *v);
+ extern void gic_dump_vgic_info(struct vcpu *v);
+diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+index 2af7805125..c491c56729 100644
+--- a/xen/arch/arm/include/asm/setup.h
++++ b/xen/arch/arm/include/asm/setup.h
+@@ -48,6 +48,15 @@ void setup_mm(void);
+ extern uint32_t hyp_traps_vector[];
+ void init_traps(void);
+ 
++#ifdef CONFIG_BOOT_SELFTEST
++#define __initcallboottest(fn) \
++    static const initcall_t __initcall_##fn __init_call("boottest") = (fn)
++
++void do_init_boottests(void);
++#else
++static inline void do_init_boottests(void) {}
++#endif
++
+ int handle_device(struct domain *d, struct dt_device_node *dev, p2m_type_t p2mt,
+                   struct rangeset *iomem_ranges, struct rangeset *irq_ranges);
+ 
+diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+index 79bbf24305..16f899dff5 100644
+--- a/xen/arch/arm/setup.c
++++ b/xen/arch/arm/setup.c
+@@ -81,6 +81,24 @@ static void __init init_idle_domain(void)
+     /* TODO: setup_idle_pagetable(); */
  }
  
-diff --git a/hw/intc/i8259_common.c b/hw/intc/i8259_common.c
-index 7980f86f1f..3511303c21 100644
---- a/hw/intc/i8259_common.c
-+++ b/hw/intc/i8259_common.c
-@@ -30,8 +30,6 @@
- #include "migration/vmstate.h"
- #include "qapi/error.h"
++#ifdef CONFIG_BOOT_SELFTEST
++extern const initcall_t __initcall_boot_test_start[],
++    __initcall_boot_test_end[];
++
++void do_init_boottests(void)
++{
++    const initcall_t *call;
++
++    printk("CPU%u: boot self-tests start\n", smp_processor_id());
++
++    for ( call = __initcall_boot_test_start; call < __initcall_boot_test_end;
++          call++ )
++        (*call)();
++
++    printk("CPU%u: boot self-tests done\n", smp_processor_id());
++}
++#endif /* CONFIG_BOOT_SELFTEST */
++
+ static const char * __initdata processor_implementers[] = {
+     ['A'] = "ARM Limited",
+     ['B'] = "Broadcom Corporation",
+@@ -471,6 +489,8 @@ void asmlinkage __init noreturn start_xen(unsigned long fdt_paddr)
+     enable_errata_workarounds();
+     enable_cpu_features();
  
--static int irq_level[16];
--static uint64_t irq_count[16];
++    do_init_boottests();
++
+     /* Create initial domain 0. */
+     if ( !is_dom0less_mode() )
+         create_dom0();
+diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+index 1806c47a08..8c9072f3c1 100644
+--- a/xen/arch/arm/smpboot.c
++++ b/xen/arch/arm/smpboot.c
+@@ -30,6 +30,7 @@
+ #include <asm/psci.h>
+ #include <asm/acpi.h>
+ #include <asm/tee/tee.h>
++#include <asm/setup.h>
  
- void i8259_common_reset(I8259CommonState *s)
- {
-@@ -89,26 +87,17 @@ static void i8259_common_realize(DeviceState *dev, Error **errp)
-     qdev_set_legacy_instance_id(dev, s->iobase, 1);
+ /* Override macros from asm/page.h to make them work with mfn_t */
+ #undef virt_to_mfn
+@@ -413,6 +414,8 @@ void asmlinkage noreturn start_secondary(void)
+ 
+     printk(XENLOG_DEBUG "CPU %u booted.\n", smp_processor_id());
+ 
++    do_init_boottests();
++
+     startup_cpu_idle_loop();
  }
  
--void i8259_stat_update_irq(int irq, int level)
-+void i8259_stat_update_irq(uint64_t *irq_counts, int *irq_levels,
-+                           int irq, int level)
- {
--    if (level != irq_level[irq]) {
--        irq_level[irq] = level;
-+    if (level != irq_levels[irq]) {
-+        irq_levels[irq] = level;
-         if (level == 1) {
--            irq_count[irq]++;
-+            irq_counts[irq]++;
-         }
-     }
- }
+diff --git a/xen/arch/arm/xen.lds.S b/xen/arch/arm/xen.lds.S
+index d4d9594033..7399ef4804 100644
+--- a/xen/arch/arm/xen.lds.S
++++ b/xen/arch/arm/xen.lds.S
+@@ -146,6 +146,10 @@ SECTIONS
+        *(.initcall1.init)
+        __initcall_end = .;
  
--bool i8259_pic_get_statistics(InterruptStatsProvider *obj,
--                              uint64_t **irq_counts,
--                              unsigned int *nb_irqs)
--{
--    *irq_counts = irq_count;
--    *nb_irqs = ARRAY_SIZE(irq_count);
--
--    return true;
--}
--
- void i8259_pic_print_info(InterruptStatsProvider *obj, GString *buf)
- {
-     /* No information for i8259-based PICs */
++       __initcall_boot_test_start = .;
++       *(.initcallboottest.init)
++       __initcall_boot_test_end = .;
++
+        . = ALIGN(4);
+        __alt_instructions = .;
+        *(.altinstructions)
 -- 
-2.43.0
+2.25.1
 
 
