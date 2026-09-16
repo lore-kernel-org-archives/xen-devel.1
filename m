@@ -4,55 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE78CC88E77
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 11:58:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1422938.1648254 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 599C2C88E77
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 11:59:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1422947.1648262 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6oHL-0002Qp-9G; Wed, 16 Sep 2026 11:58:19 +0000
+	id 1x6oHv-0003MT-Eh; Wed, 16 Sep 2026 11:58:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1422938.1648254; Wed, 16 Sep 2026 11:58:19 +0000
+Received: by outflank-mailman (output) from mailman id 1422947.1648262; Wed, 16 Sep 2026 11:58:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6oHL-0002Qi-3s; Wed, 16 Sep 2026 11:58:19 +0000
-Received: by outflank-mailman (input) for mailman id 1422938;
- Wed, 16 Sep 2026 11:58:18 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x6oHv-0003MM-Bp; Wed, 16 Sep 2026 11:58:55 +0000
+Received: by outflank-mailman (input) for mailman id 1422947;
+ Wed, 16 Sep 2026 11:58:54 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Alexey.Kardashevskiy@amd.com>) id 1x6oHK-0002QY-C6
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 11:58:18 +0000
+ (envelope-from <Alexey.Kardashevskiy@amd.com>) id 1x6oHu-0003Ku-Ii
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 11:58:54 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6oHJ-00HC5l-OR
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 13:58:17 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x6oHt-00Gak7-Vh
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 13:58:53 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Alexey.Kardashevskiy@amd.com>)
- id 6aaa8455-bab6-0a2a0a5309dd-0a2a4505ddc8-12
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:58:17 +0200
-Received: from [52.101.201.63]
+ id 6aaa846d-2eae-0a2a0a5409dd-0a2a4503bbbc-36
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:58:53 +0200
+Received: from [52.101.201.61]
  (helo=PH7PR06CU001.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Alexey.Kardashevskiy@amd.com>)
- id 6aaa8457-4cb1-0a2a45050019-3465c93f6165-3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:58:17 +0200
-Received: from DS7PR07CA0016.namprd07.prod.outlook.com (2603:10b6:5:3af::18)
- by IA0PPF6E99B1BC1.namprd12.prod.outlook.com (2603:10b6:20f:fc04::bd1) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Wed, 16 Sep
- 2026 11:58:11 +0000
-Received: from BN1PEPF00018548.namprd05.prod.outlook.com
- (2603:10b6:5:3af:cafe::24) by DS7PR07CA0016.outlook.office365.com
- (2603:10b6:5:3af::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.9 via Frontend Transport; Wed, 16
- Sep 2026 11:58:10 +0000
+ id 6aaa847c-fae8-0a2a45030019-3465c93d9270-3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 13:58:53 +0200
+Received: from BN9PR03CA0782.namprd03.prod.outlook.com (2603:10b6:408:13f::7)
+ by SJ2PR12MB8111.namprd12.prod.outlook.com (2603:10b6:a03:4fe::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.11; Wed, 16 Sep
+ 2026 11:58:47 +0000
+Received: from BN1PEPF0001854A.namprd05.prod.outlook.com
+ (2603:10b6:408:13f:cafe::37) by BN9PR03CA0782.outlook.office365.com
+ (2603:10b6:408:13f::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.11 via Frontend Transport; Wed,
+ 16 Sep 2026 11:58:46 +0000
 Received: from satlexmb07.amd.com (165.204.84.17) by
- BN1PEPF00018548.mail.protection.outlook.com (10.167.248.7) with Microsoft
+ BN1PEPF0001854A.mail.protection.outlook.com (10.167.248.9) with Microsoft
  SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.428.7 via Frontend Transport; Wed, 16 Sep 2026 11:58:10 +0000
+ 15.21.428.7 via Frontend Transport; Wed, 16 Sep 2026 11:58:46 +0000
 Received: from aiemdee.amd.com (10.180.168.240) by satlexmb07.amd.com
  (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Wed, 16 Sep
- 2026 06:57:46 -0500
+ 2026 06:58:23 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,20 +66,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=NV6s6jceu/ZS4M3BPMMEluiazfdQPZuri/VXYG8FSfB8pF5RfGvI8kksyzvJh1cHeYt/hP8szR5ie159qViXlrh1SY9lGvhbu5dmTufyXT3sseJQWm7Pdf9lFLEPolNneGtHOSsAPz4dOhG6k/04XMJPxpRhi9RsKQf3/j3tDAfdc19utjvRzEEeURrMmYgdZniUX5L0/5du+sMEWpdDNq6CLuMA59yRjSJj0pM+vNWjCwJbkNMtb1QXcm20uIZu1+OR/cVOiIBt8lHb4RHA0/BWbFA+9vC5le/fcjxzpBZVjIBGuncX6s9Q7e+GYDbnsSjglIrstaxnFVONN1UZ0Q==
+ b=seol/ZRYlk9PRV/AE/0igGP4M475B8bTrWiYjR7Z5NVQdKgQ8Snt2Iybu43auxQTLklLTDj+/czXGPucm0VRfzcuHZnrtWsnzt9fa564LGCuzyXYB2wboIBU0JiXD2tXbkUw4vznR7ZJdYwkqjhER+nCBLKlLXXLD77GbCUVxF55cBM98geU4KyUAbObpDwGwPlX7OUjvnyQ/ErVPhnYwe35LYF2lgl5JKmTc092duqdYS/xqXIz44O5hNx1ujjZtaQrsdxqobZsO6EZPAGhyMogjMHX3oHd0JDOqY35plSg988uH9TBWL1tdirm3lgBThESwB5WN07dH7u6fQsegQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=UGeG5UViy26eddcMIwAbSGGeZIQdkW5rZ6uT6XlTNXE=;
- b=HgyaDOT99pzp46n9b4AsZkH2yBSKUG7QnzEUnYQY0d3JALrsGd4BQ175ZVfWaB/fAeQ3azTOA777KO3QyiJ5nGvIBZRctI3Hp01RwZB9MNObD9LC7jJVcXxkY6lelR683vnAao7EKvyM0D4ReLoDRIbMe3Ekd0Nkg4RWOIsH1FY7yC4XxFFuVD2NKkwwudPbVFDQEqFTF/Bc/jUMIl9FO0CF5+3XIGlczkJQlvL5frQ5W3h4UJvtcjvEG8TGICB7pcmiH/yVrQx9dlHzfO0x8Iz5iNKpRFxp1+uDRBVqWag6GTNRJ6yGjoPbFC5SZuiYOZXU4birCAg/yPJNAnXP0Q==
+ bh=uN3TtTwM+bwTehqyvzEhtWdo/9tbU5sGc+GO4ttJXns=;
+ b=XlTCsuXfh6cbbhbZNEiVEITWSHaHxkZnjq0bBeBSI5S9g72kOw6XGGLeK+K4EWewm32H7VlSEd4nr9nUOHdWNETpfESYKdGCr2rAYiTPH207To88lFcUGwNjCbRT5kfB/PfJJXyvT9Em+8pJ3/kxdg7x61bbkpD3JT9YQtyIVXR5ilk5oujw/aNZ0uubZrZfPpO/N0oLeVTV7PmLE9i4C+BeEl2/6Slm/wxe2mDrFRJf9rojTe83MvrKt2jeWQn8nrZyd2tWkH35wRnCkyEjLproJIrPBR1lP5u2c2UEo9YQu/qPilPg/lGoa9Pjy7GmzZv5ehcBcrlNaEp9KYwiZA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  165.204.84.17) smtp.rcpttodomain=kernel.org smtp.mailfrom=amd.com; dmarc=pass
  (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
  dkim=none (message not signed); arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=UGeG5UViy26eddcMIwAbSGGeZIQdkW5rZ6uT6XlTNXE=;
- b=aotvzm2txPYMiNm37GYVZcv7nTGw4HjZldkCMfRHaQJlMMOX8qvwe9G9Rz8pgbK8ERMmHtcJhBs2ICDnRYXhQVvOv4OufpOw4mDEkaGW7vo6JlWmN2HF9VO8f/8dOBcSdgi3YXa9aQOmeqMyLY0xEDySEcjlpqVkM671GOxBUhY=
+ bh=uN3TtTwM+bwTehqyvzEhtWdo/9tbU5sGc+GO4ttJXns=;
+ b=KNHRx1/uIQrLP/p1OqbUtpLgVwCk7UVtvYLpPsa2/jtKdsR4Vjqm3gQm0t1vp4EhK906ZcAgkkSaNp5GN9OT1xi2nBN7sRrVepy7neCrEzBcLk6mtscazitXsKE123nz5ng2gI1C17BYkbYjzOdNlcc5U03fFb1OlKx8D9A4k+g=
 X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
  smtp.mailfrom=amd.com; dkim=none (message not signed)
  header.d=none;dmarc=pass action=none header.from=amd.com;
@@ -137,10 +137,11 @@ CC: <linux-kernel@vger.kernel.org>, <kvm@vger.kernel.org>,
 	<linux-mm@kvack.org>, Alexey Kardashevskiy <aik@amd.com>, <aik@ozlabs.ru>,
 	Santosh Shukla <santosh.shukla@amd.com>, "Pratik R . Sampat"
 	<prsampat@amd.com>, Scott Soule Cheloha <scott.cheloha@amd.com>, Ackerley Tng
-	<ackerleytng@google.com>, Fuad Tabba <tabba@google.com>
-Subject: [RFC PATCH kernel 09/17] dma/swiotlb: Force shared DMA for allocatios from SWIOTLB
-Date: Wed, 16 Sep 2026 21:51:49 +1000
-Message-ID: <20260916115159.1938195-10-aik@amd.com>
+	<ackerleytng@google.com>, Fuad Tabba <tabba@google.com>, Dan Williams
+	<dan.j.williams@intel.com>
+Subject: [RFC PATCH kernel 10/17] x86, dma: Allow accepted devices to map private memory
+Date: Wed, 16 Sep 2026 21:51:50 +1000
+Message-ID: <20260916115159.1938195-11-aik@amd.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20260916115159.1938195-1-aik@amd.com>
 References: <20260916115159.1938195-1-aik@amd.com>
@@ -152,68 +153,73 @@ X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
  (10.181.42.216)
 X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN1PEPF00018548:EE_|IA0PPF6E99B1BC1:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0c3e0d42-9d65-43b7-68d7-08df13e9c79b
+X-MS-TrafficTypeDiagnostic: BN1PEPF0001854A:EE_|SJ2PR12MB8111:EE_
+X-MS-Office365-Filtering-Correlation-Id: c49f70c9-81ce-478f-dac0-08df13e9dd27
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|82310400026|7416014|32650700020|23010399003|36860700016|18002099003|22082099003|10067099003|56012099006|11063799006;
+	BCL:0;ARA:13230040|23010399003|1800799024|376014|36860700016|7416014|82310400026|32650700020|11063799006|10067099003|56012099006|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	+GpeRrECie8z1D9ALNbaVkKslqe0K7+pREljkkHFWG+hTQaCiH4sIZT/MbiDR9MWL2T4L5pH8K9j6eQ0rPFIDktbKEJDVnSuavSQT1pE2jVKFVNcZeVDNx1QdN1qe+tQrVTtPfXe1thRZYFJl66uOmMmrKN4p4eZq3FxsS3dfsvFDmVKMuVncBGmBZ94WsHCgoFBLUSKVBOURsbaEoFJmN8osu4Q5Jdzr1Mlybij83EhAXICHeMQfZj3qDJW7raZ3TZvvNacja2NlGXKd/3Udyegr4sgtV/CWHzM+NlBC01JII9KMW+8CgIE6ADRG+b2l/ytc5sLzQGRZiHwgwS3WhB1kBADN6PSYOGmLGrvc03O66rDzvj9zt5ccDEaVWWDp4xN0o1v19z9238kLIaG3TFeJLDYOimtILWx9CEXluW4aDKRpNacF2iPneJboZ4b3NI7C885/y8n7nl/rlX3G8joXfFxsNYKvidXEIee3uDf67C9SEXZObD9PDP4YcmLGAJHNTwGORAMq61qBVd5+9on8qBAR2rWkQICNPkOEJKhdBxGAn3NLNCfoOJBbFOzvOWrGMQafUoTEqoIND74/TgH5zaPBLDC8XM1WgWm13XRATv7g8ynhEC9qN6OZMH1vv2U9Kf6jd3kloorCsRTL9A6DGb7AAJXpHbFlYdR7xiwANKrXsl/T/0jj9plvAsnMc4wMsrTs6HOkDX2GX7gVQ==
+	1bJ49a9trfumDwoyn9MewgHhdhH/vcO7H1vXItEBAR2GcC7Oz87Mn2l/avJzWfkRSChnShOjFI7hXwvbMP4FfIal/XfkCyAQO06jw07jp3OKH8Fv14GY6YOHfTvUSlnHRxfsxtpJfmrCwkr9GnKg5GXYolHH8kdXZuVQtH+PnHROr5jB+rRKZUZkw+jMKi6EB5sMFZve0dHPB2LyTXPZfcqQSwRzRnMa9JPAmrYk6BmjpPlY/zGIZMRL4ogIwgoaoBWgr2X3fJECn8xofhkS/dPlWE1gm4LGMM32AysHf5mzmXFzDVjFx/CzkJpupwN0nH8TVL9pWKTlpIbIQXDjaLx+FkjqAMfx3fzEL7R4946H7Hyse1Woyyf1+rbrQX6IFOCMqIQA75eNFofO3sWviWdOBrpPfr3KmGpt74PsgqnSShJAKfS1rBPn1YyDMZkLp8IRElEVCiFMgecxLvI7J7mj2+8+4z5F1jrSmVH0Pm+vouATGQfb5p4qKwJd5g31NtCxqwjL3sFapbwogiTa2xbrqJegMhJ+hMbhT1MYg0hV+Xn4w7KKLhnAON+dlxkAOXrgjAYJhDrg6VqYsK3x1ZmsmutuwzCbubbgs27aDBSaTnor7fzVXyE4z3gIdRZrtCPFmFIGs1Lxt9GqNBFoPs+7N5a4otqlL9gf7mHsWsJ4fS9vrcN8OM8srKTIfIU3IRe3qhs521WNeSWpaqmQQg==
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(82310400026)(7416014)(32650700020)(23010399003)(36860700016)(18002099003)(22082099003)(10067099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(36860700016)(7416014)(82310400026)(32650700020)(11063799006)(10067099003)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	N+QQCCWsHa7bqeHcyE9nTBdDa+bifDbun1axL/Jp+ouegH1jwRNDqGgZk9TnDMM0NkTrcFPDnH+mykQQ0BMSQxgY6hyIlPAIwKpGIAO+SlfWu1uY4kl2tIJYheErrmKT6AiYJLReu57IKXwx/n1iCmnQ/1sNR6Qx9rksJF+r7pSItlxQmXGUdxLCcqTz478u3FI20fTD5nJ7nyf37O4NpIHYbh3xpHya/3WGmaKBccRqqiF3pB0m10k//KIaBQcKbtyc1vuVtbYs5hu5q1T8AzJnqKlTvvdi8qtlFANfaGhlnhwnJA1w32iuN27yG1NExvnhRTcGPXtxAlggmbrjRRMf0VoeT0wKRj6X5ZhXvBNi9Egyrep6YAHcKOkokxnLq1riiT/QoWOY9upXNI8KANCUiE8B4qkM6/pLLtlzFqVPEro4k8b8NJ5zTk6WRHf0
+	qK/f3bcE1ASam6x2JuApZeSzxgwli4lwEhb+EPtO5GlbcvqWi2n0k+nCmOHidWa9c57wxnSKyVw6rpTH9uNaDmg3oJNXlIBXvGR1R/KFN/gP+3nnPsanWwrd57y/UdARYtTQx0oclZLQ0BGPI91gFjNkAlX5ujD1fxxig+qClAg8/i1f9m8YX9y28sjNZGmBEwP33TPzxrpHnN+hFi9AJNhz+zn1fgjuz4xCrtBlZIiJKBNAa55ix5MqPrc/Hp0hNMUb1/YlmECGfzThwtN1CwLiUVLLQlBKO1fcb1JIi5Qgv+5uPUz+SYTP5gl8NeH5pRlAUwiBM8wDq7PFX6NC37IA+rMpo1xfWlWcVjunL8MiE56oFApW110XZtgRGjDSOijBETZIzUKDFueWDJ8SMcnlpUO0wFZzFrYSoIR3W1JjxXGiUODmzMgF+4duPdAm
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 11:58:10.6516
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 11:58:46.8022
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0c3e0d42-9d65-43b7-68d7-08df13e9c79b
+X-MS-Exchange-CrossTenant-Network-Message-Id: c49f70c9-81ce-478f-dac0-08df13e9dd27
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	BN1PEPF00018548.namprd05.prod.outlook.com
+	BN1PEPF0001854A.namprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PPF6E99B1BC1
-X-purgate-ID: tlsNG-c201ff/1789559897-730B22A1-DB02D9F0/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB8111
+X-purgate-ID: tlsNG-33051d/1789559933-6D8D54E9-B0A20225/0/0
 X-purgate-type: clean
-X-purgate-size: 1147
+X-purgate-size: 1464
 
-SWIOTLB allocations are always decrypted but the DMA layer is unaware
-of those and will miss to adjust the DMA handle.
+From: Dan Williams <dan.j.williams@intel.com>
 
-Force __DMA_ATTR_ALLOC_CC_SHARED if SWIOTLB is used for memory allocations.
+With the arrival of "accepted" devices, devices that have been enabled to
+DMA to private encrypted memory, coherent DMA allocation no longer requires
+page conversion. Update force_dma_unencrypted() to skip accepted devices.
 
-This will be exploited by AMD SEV guest vTOM feature where DMA handles
-of shared memory have some high bit set (not to be confused with the
-Cbit).
-
+Cc: Dave Hansen <dave.hansen@linux.intel.com>
+Cc: Andy Lutomirski <luto@kernel.org>
+Cc: Peter Zijlstra <peterz@infradead.org>
+Cc: Thomas Gleixner <tglx@kernel.org>
+Cc: Ingo Molnar <mingo@redhat.com>
+Cc: Borislav Petkov <bp@alien8.de>
+Cc: x86@kernel.org
+Cc: "H. Peter Anvin" <hpa@zytor.com>
+Signed-off-by: Dan Williams <dan.j.williams@intel.com>
+[aik: re-added device_cc_accepted()]
 Signed-off-by: Alexey Kardashevskiy <aik@amd.com>
 ---
- kernel/dma/direct.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
+ arch/x86/mm/mem_encrypt.c | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
 
-diff --git a/kernel/dma/direct.c b/kernel/dma/direct.c
-index da665ca22d5c..dacf513d45fd 100644
---- a/kernel/dma/direct.c
-+++ b/kernel/dma/direct.c
-@@ -273,13 +273,14 @@ void *dma_direct_alloc(struct device *dev, size_t size,
- 	}
+diff --git a/arch/x86/mm/mem_encrypt.c b/arch/x86/mm/mem_encrypt.c
+index 95bae74fdab2..805800ddbd79 100644
+--- a/arch/x86/mm/mem_encrypt.c
++++ b/arch/x86/mm/mem_encrypt.c
+@@ -20,10 +20,11 @@
+ bool force_dma_unencrypted(struct device *dev)
+ {
+ 	/*
+-	 * For SEV, all DMA must be to unencrypted addresses.
++	 * Require unencrypted DMA unless the device has been "accepted",
++	 * enabled by a TSM driver to DMA to private encrypted memory.
+ 	 */
+ 	if (cc_platform_has(CC_ATTR_GUEST_MEM_ENCRYPT))
+-		return true;
++		return !__device_cc_accepted(dev);
  
- 	if (is_swiotlb_for_alloc(dev)) {
--		page = dma_direct_alloc_swiotlb(dev, size, attrs);
-+		page = dma_direct_alloc_swiotlb(dev, size, attrs | __DMA_ATTR_ALLOC_CC_SHARED);
- 		if (page) {
- 			/*
- 			 * swiotlb allocations comes from pool already marked
- 			 * decrypted
- 			 */
- 			mark_mem_decrypt = false;
-+			attrs |= __DMA_ATTR_ALLOC_CC_SHARED;
- 			goto setup_page;
- 		}
- 		return NULL;
+ 	/*
+ 	 * For SME, all DMA must be to unencrypted addresses if the
 -- 
 2.55.0
 
