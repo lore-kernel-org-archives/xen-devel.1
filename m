@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28E9CC982C1
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 17:11:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1423390.1648530 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A73BCC982C1
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 17:12:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1423397.1648540 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6t9U-0006SI-2O; Wed, 16 Sep 2026 17:10:32 +0000
+	id 1x6tBE-0006wY-Dm; Wed, 16 Sep 2026 17:12:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1423390.1648530; Wed, 16 Sep 2026 17:10:32 +0000
+Received: by outflank-mailman (output) from mailman id 1423397.1648540; Wed, 16 Sep 2026 17:12:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6t9T-0006SB-W9; Wed, 16 Sep 2026 17:10:31 +0000
-Received: by outflank-mailman (input) for mailman id 1423390;
- Wed, 16 Sep 2026 17:10:31 +0000
+	id 1x6tBE-0006wR-AT; Wed, 16 Sep 2026 17:12:20 +0000
+Received: by outflank-mailman (input) for mailman id 1423397;
+ Wed, 16 Sep 2026 17:12:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <vulab@iscas.ac.cn>) id 1x6t9T-0006S5-22
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 17:10:31 +0000
+ (envelope-from <vulab@iscas.ac.cn>) id 1x6tBC-0006wJ-RZ
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 17:12:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6t9S-000Qwm-FG
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 19:10:30 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x6tBC-00GGGJ-8b
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 19:12:18 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <vulab@iscas.ac.cn>)
- id 6aaacd6d-8faa-0a2a0a5109dd-0a2a4501b3ee-20
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:10:28 +0200
+ id 6aaacdde-bab6-0a2a0a5309dd-0a2a4509af94-22
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:12:16 +0200
 Received: from [159.226.251.25] (helo=cstnet.cn)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <vulab@iscas.ac.cn>)
- id 6aaacd81-5984-0a2a45010019-9fe2fb19bbb4-3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:10:27 +0200
+ id 6aaacded-be1a-0a2a45090019-9fe2fb1981ba-3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 19:12:15 +0200
 Received: from dfae2b116770.home.arpa (unknown [36.110.52.2])
- by APP-05 (Coremail) with SMTP id zQCowABHsTuAzapqVVJuCA--.22263S2;
- Thu, 17 Sep 2026 01:10:24 +0800 (CST)
+ by APP-05 (Coremail) with SMTP id zQCowAA3oDrpzapqV1xuCA--.22441S2;
+ Thu, 17 Sep 2026 01:12:09 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,78 +50,82 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
 From: Wentao Liang <vulab@iscas.ac.cn>
-To: boris.ostrovsky@oracle.com
+To: Jiqian.Chen@amd.com
 Cc: jgross@suse.com,
 	linux-kernel@vger.kernel.org,
-	oleksandr_andrushchenko@epam.com,
 	oleksandr_tyshchenko@epam.com,
+	ray.huang@amd.com,
 	sstabellini@kernel.org,
 	xen-devel@lists.xenproject.org,
 	Wentao Liang <vulab@iscas.ac.cn>,
 	stable@vger.kernel.org
-Subject: [PATCH] xen/gntdev: Fix gntdev_dmabuf ref leak in dmabuf_exp_wait_released()
-Date: Wed, 16 Sep 2026 17:09:56 +0000
-Message-Id: <20260916170956.2086505-1-vulab@iscas.ac.cn>
+Subject: [PATCH] xen-pciback: Fix pcistub_device ref leak in pcistub_get_gsi_from_sbdf()
+Date: Wed, 16 Sep 2026 17:11:41 +0000
+Message-Id: <20260916171141.2086627-1-vulab@iscas.ac.cn>
 X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:zQCowABHsTuAzapqVVJuCA--.22263S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7tw4kAFyfCrWxJw4rtFW5ZFb_yoW8GF1xpr
-	sIqFy8AFZ3t347ta1DJ34Y9ryYyayDtrySkrW5Aws8Zry5Xw1xXF1fJr18XFyqkws3ua4f
-	Aa40yFy3Xr45AFJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvY14x267AKxVW8JVW5JwAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK02
-	1l84ACjcxK6xIIjxv20xvE14v26r4j6ryUM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j
-	6r4UJwA2z4x0Y4vEx4A2jsIE14v26r4UJVWxJr1l84ACjcxK6I8E87Iv6xkF7I0E14v26r
-	4UJVWxJr1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2Wl
-	Yx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbV
-	WUJVW8JwACjcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lc7CjxVAaw2AF
-	wI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4
-	xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43
-	MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_JFI_Gr1lIxAIcVC0I7IYx2IY6xkF7I
-	0E14v26F4j6r4UJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_
-	Gr0_Cr1lIxAIcVC2z280aVCY1x0267AKxVW8Jr0_Cr1UYxBIdaVFxhVjvjDU0xZFpf9x0J
-	UgXocUUUUU=
+X-CM-TRANSID:zQCowAA3oDrpzapqV1xuCA--.22441S2
+X-Coremail-Antispam: 1UD129KBjvdXoWrKrW8WFWUuF17JF1xKrW7Jwb_yoWkKwcEgr
+	WIvr97urs8tFWxtrW7uwn0vrZav3Z0q395XF1xta4rGw4j9r4UXr1rXF98Wr4Igr45JF13
+	Xr1DCr93Kr4I9jkaLaAFLSUrUUUUjb8apTn2vfkv8UJUUUU8Yxn0WfASr-VFAUDa7-sFnT
+	9fnUUIcSsGvfJTRUUUbxkFF20E14v26r4j6ryUM7CY07I20VC2zVCF04k26cxKx2IYs7xG
+	6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8w
+	A2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_
+	Gr1UM28EF7xvwVC2z280aVAFwI0_Gr1j6F4UJwA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_Gr
+	1j6F4UJwAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv
+	7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Gr0_Cr1lOx8S6xCaFVCjc4AY6r
+	1j6r4UM4x0Y48IcxkI7VAKI48JM4x0x7Aq67IIx4CEVc8vx2IErcIFxwCY1x0262kKe7AK
+	xVWUtVW8ZwCF04k20xvY0x0EwIxGrwCFx2IqxVCFs4IE7xkEbVWUJVW8JwC20s026c02F4
+	0E14v26r1j6r18MI8I3I0E7480Y4vE14v26r106r1rMI8E67AF67kF1VAFwI0_Jw0_GFyl
+	IxkGc2Ij64vIr41lIxAIcVC0I7IYx2IY67AKxVWUCVW8JwCI42IY6xIIjxv20xvEc7CjxV
+	AFwI0_Cr0_Gr1UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8
+	JVWxJwCI42IY6I8E87Iv6xkF7I0E14v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7VUb
+	o5l5UUUUU==
 X-Originating-IP: [36.110.52.2]
-X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiCRIMA2qqozVjiwAAsq
-X-purgate-ID: tlsNG-d62444/1789578628-1DC79757-B63200B5/0/0
+X-CM-SenderInfo: pyxotu46lvutnvoduhdfq/1tbiBgEMA2qqok9l6QAAsp
+X-purgate-ID: tlsNG-bad1c0/1789578736-39AC0034-4730C548/0/0
 X-purgate-type: clean
-X-purgate-size: 1349
+X-purgate-size: 1205
 
-dmabuf_exp_wait_released() takes a reference on the exported
-gntdev_dmabuf with dmabuf_exp_wait_obj_get_dmabuf() and passes it to
-dmabuf_exp_wait_obj_new(), which drops that reference after adding the
-wait object to the wait list.  When the wait object allocation fails,
-dmabuf_exp_wait_obj_new() returns ERR_PTR(-ENOMEM) early and the
-reference is never dropped, leaking a reference to the exported
-gntdev_dmabuf.
+pcistub_get_gsi_from_sbdf() obtains the stub device with
+pcistub_device_find(), which returns it with its kref incremented, and
+returns psdev->gsi without dropping that reference again.  The caller
+cannot release it either, so every lookup leaks one reference to the
+stub device.
 
-Drop the reference on the allocation failure path so the reference is
-consumed whether the wait object is created or not.
+Release the reference after reading gsi.
 
-Fixes: 932d6562179e ("xen/gntdev: Add initial support for dma-buf UAPI")
+Fixes: 2fae6bb7be32 ("xen/privcmd: Add new syscall to get gsi from dev")
 Cc: stable@vger.kernel.org
 Signed-off-by: Wentao Liang <vulab@iscas.ac.cn>
 ---
- drivers/xen/gntdev-dmabuf.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ drivers/xen/xen-pciback/pci_stub.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/drivers/xen/gntdev-dmabuf.c b/drivers/xen/gntdev-dmabuf.c
-index 83b0df460894..df1883aca850 100644
---- a/drivers/xen/gntdev-dmabuf.c
-+++ b/drivers/xen/gntdev-dmabuf.c
-@@ -96,8 +96,10 @@ dmabuf_exp_wait_obj_new(struct gntdev_dmabuf_priv *priv,
- 	struct gntdev_dmabuf_wait_obj *obj;
+diff --git a/drivers/xen/xen-pciback/pci_stub.c b/drivers/xen/xen-pciback/pci_stub.c
+index 79a2b5dfd694..d1a335233aab 100644
+--- a/drivers/xen/xen-pciback/pci_stub.c
++++ b/drivers/xen/xen-pciback/pci_stub.c
+@@ -234,13 +234,16 @@ static int pcistub_get_gsi_from_sbdf(unsigned int sbdf)
+ 	int bus = PCI_BUS_NUM(sbdf);
+ 	int slot = PCI_SLOT(sbdf);
+ 	int func = PCI_FUNC(sbdf);
++	int gsi;
  
- 	obj = kzalloc_obj(*obj);
--	if (!obj)
-+	if (!obj) {
-+		kref_put(&gntdev_dmabuf->u.exp.refcount, dmabuf_exp_release);
- 		return ERR_PTR(-ENOMEM);
-+	}
+ 	psdev = pcistub_device_find(domain, bus, slot, func);
+-
+ 	if (!psdev)
+ 		return -ENODEV;
  
- 	init_completion(&obj->completion);
- 	obj->gntdev_dmabuf = gntdev_dmabuf;
+-	return psdev->gsi;
++	gsi = psdev->gsi;
++	pcistub_device_put(psdev);
++
++	return gsi;
+ }
+ #endif
+ 
 -- 
 2.34.1
 
