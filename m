@@ -4,53 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5CB6C982C4
-	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 10:45:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1422577.1647919 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3F2F8C88E5C
+	for <xen-devel@archiver.kernel.org>; Wed, 16 Sep 2026 10:45:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1422580.1647944 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6n8L-0002Ta-Q9; Wed, 16 Sep 2026 10:44:57 +0000
+	id 1x6n8Q-0002yo-QY; Wed, 16 Sep 2026 10:45:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1422577.1647919; Wed, 16 Sep 2026 10:44:57 +0000
+Received: by outflank-mailman (output) from mailman id 1422580.1647944; Wed, 16 Sep 2026 10:45:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x6n8L-0002TT-ND; Wed, 16 Sep 2026 10:44:57 +0000
-Received: by outflank-mailman (input) for mailman id 1422577;
- Wed, 16 Sep 2026 10:44:56 +0000
+	id 1x6n8Q-0002yR-IP; Wed, 16 Sep 2026 10:45:02 +0000
+Received: by outflank-mailman (input) for mailman id 1422580;
+ Wed, 16 Sep 2026 10:45:01 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mark.caveayland@nutanix.com>) id 1x6n8K-0002TN-8s
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 10:44:56 +0000
+ (envelope-from <mark.caveayland@nutanix.com>) id 1x6n8O-0002p8-T9
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 10:45:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x6n8J-002G1v-H8
- for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 12:44:55 +0200
+ id 1x6n8O-002G4Y-A4
+ for xen-devel@lists.xenproject.org; Wed, 16 Sep 2026 12:45:00 +0200
 Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <mark.caveayland@nutanix.com>)
- id 6aaa7321-e002-0a2a0a5209dd-0a2a45018ec4-24
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 12:44:55 +0200
+ id 6aaa7321-e002-0a2a0a5209dd-0a2a45018ec4-42
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 12:45:00 +0200
 Received: from [148.163.151.68] (helo=mx0a-002c1b01.pphosted.com)
  by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <mark.caveayland@nutanix.com>)
- id 6aaa7325-5984-0a2a45010019-94a39744a086-3
- for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 12:44:55 +0200
+ id 6aaa732a-5984-0a2a45010019-94a39744bf5c-3
+ for <xen-devel@lists.xenproject.org>; Wed, 16 Sep 2026 12:44:59 +0200
 Received: from pps.filterd (m0127839.ppops.net [127.0.0.1])
  by mx0a-002c1b01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68G8NpPu539450; Wed, 16 Sep 2026 03:44:44 -0700
-Received: from co1pr03cu002.outbound.protection.outlook.com
- (mail-westus2azon11020142.outbound.protection.outlook.com [52.101.46.142])
- by mx0a-002c1b01.pphosted.com (PPS) with ESMTPS id 4gqa0pt9xh-1
+ 68G8q4Ub541814; Wed, 16 Sep 2026 03:44:54 -0700
+Received: from bn1pr04cu002.outbound.protection.outlook.com
+ (mail-eastus2azon11020103.outbound.protection.outlook.com [52.101.56.103])
+ by mx0a-002c1b01.pphosted.com (PPS) with ESMTPS id 4gqa0pt9xw-1
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 16 Sep 2026 03:44:44 -0700 (PDT)
+ Wed, 16 Sep 2026 03:44:54 -0700 (PDT)
 Received: from PH0PR02MB7159.namprd02.prod.outlook.com (2603:10b6:510:16::8)
  by MW4PR02MB7380.namprd02.prod.outlook.com (2603:10b6:303:74::24) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Wed, 16 Sep
- 2026 10:44:41 +0000
+ 2026 10:44:48 +0000
 Received: from PH0PR02MB7159.namprd02.prod.outlook.com
  ([fe80::8e97:bc32:822c:b250]) by PH0PR02MB7159.namprd02.prod.outlook.com
  ([fe80::8e97:bc32:822c:b250%3]) with mapi id 15.21.0406.007; Wed, 16 Sep 2026
- 10:44:41 +0000
+ 10:44:48 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,165 +66,226 @@ Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=proofpoint20
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=
 	content-transfer-encoding:content-type:date:from:in-reply-to
 	:message-id:mime-version:references:subject:to; s=
-	proofpoint20171006; bh=prUedyp4AYuc7mLB5VI6y/YZt603NMIJq8WEZ9TCJ
-	CA=; b=FIBYkMQKRY8M7UhxUNQSJvQ4jvq22gaAwa7lYbJLyKlXEdCRcZthh6oSx
-	PA7ZtsmyiktmbYj8FIBvGWROVhwqYwRDC1scewmC0y/CrT1+wy5Q/MreJgkdMDnF
-	jXyPdTAAkVvJDmkY8/qD+WoqCUmH5RkY0Pr01HVrkN85Ot8GBqoCSA583PVrVcFo
-	s4ZMkosZ/hU8yLZM2HZ3LpSncEu/EfAQj0DpRmFjkUaZTJaOR1Qfn5ooHJrE/RaY
-	H/GzClR1ii35zJl17RNkbeFrssSakKSQtgXX9nWVQ04ftv4wXgkK2ToCT45Kso5M
-	O8L2nW3YtblrFc+G0h8ucSKTdqxow==
+	proofpoint20171006; bh=oCxDLQQ0JtOJx+l00uKoBh/UgomiZOIYm3LR6JQrD
+	XA=; b=zHHVnhS6ojghbU7jIp7YfnsSZ+e6aA3ok8ZgOJCPNrylUk5KqJ94VlSqg
+	5b3DSQ3sY9KWKUrioIMa3dr57cOih+jJ4GcXRnHGjL1Qo5rHnRwDYwJ98LpsOwyg
+	Mbkc6CIMe/wLnOEQHNOkhc85ivF5yEYsYi9rmYFnzVzzaJQbe2/iDzlO7L2ghj9N
+	zjp6UwdYa4HNO2Uq60uGcILT3gekkRnf8Q+V3BWOTM+S1yrpbvJp9a/seHcCtskS
+	sa2ieIYqn2qeybL77cb+kFuKtcg5UedwNIU5WeMJy6dK/i15IhuuYE5u3qZAxHWM
+	D1qOULVZ+1Ab9mKdr6/R9ui7FsqOw==
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=flhFFEppQEBRdsHvOmRubo5NntVuDipcwFr6iadkFrI41ndIBqwa2gILt/QNrRCgMMuWJFMvzS1Kh4hzHEaIso/g/7MAtHyGAyuKgcPMm8/dJ3S/OcM23xbVUl3KnNTA6LYQrhRZfw0tmgrZKTWYRDCpz43D3PR2wWKfJ0BJ66XEgre4fgMZyzXv1VUFWPnV0tP+/N7MqJLH5YYWtpo6tbvvLbYAl3a9+wBgLSwSbBXXKKblS0utOdybx25ismav1iDJoc5gsySLfDVJwRTvae3BS4o3APpf8r6M7wGNRN15bMqsbwCwDjWGH51ZBHGZQDBwMT+KMhfNft38EfCl2A==
+ b=J4Ytt+ZAMJcNRjOYNEiYnROly+7klnM2ruopQOO8rs1MNNKFNzyjNNwbRaSEExOYCFX4aiqGdZ8wOtArYcJM1A1w884qMB4iQmWijN9qK3PSm56Ao+T1b6Gnvq0lbaA1ztC//9N4kt1dVYCojCb2Mr0uJ3mw61P7hh8DivtNB/8h2KY8jIHrNTufGszDwQ1cOkQpuvRfPp68eLAbaf37KqSwx1bUec1PV0095JLS0wFwjiCGxSBWLiDQbLqXqOPYnuJKE4g3eF/Dj4/cTMlTO5vFc28pkleY13ghanhp8zs4DsauTvon4qB6tFewXt1swOVVgjmAEdFXSn18Dj9few==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=prUedyp4AYuc7mLB5VI6y/YZt603NMIJq8WEZ9TCJCA=;
- b=Ib3WNAbScNxPoRiv9cjY774vkDzGAeltmam54wTaJBvQ1QYCYbES51CKHWc/4HU93u+cZiy55yR8UwhSE0NylBJmtTCYN3h8cV+CVzxmbIqCFd6A3hYlG3RflBHEj9G17JWYXY5x7pqke8PxxgGVncBPUiqKghceeYg/Lx/bBmOiWoqF6iep3leWJjumPk2NznL0ZZ3DVYk3gM7APxp5UzvGzgneUXP4erutTTNQmR6ZaVQdjz7C/qSebDM359gubHNHYWqyBvE7uB5iK9yVGkMKZasXVPUHe5w1aXA7pfVFnl6fyWPzuYMYjY06pTV3eNJ9r1tVX8LgON5IEVvfPw==
+ bh=oCxDLQQ0JtOJx+l00uKoBh/UgomiZOIYm3LR6JQrDXA=;
+ b=e9bt/ipdC/4WmHDbuq2MYD4CcMRGRbcAKM0sCeHJ0sP79abTyyN8J7BtKDtphnz8BgrN7IO6OGtS+rZtjeYNsfFuw+ucli3GRFvuAPyo698qc4e01KGVMfvM6JBwnGcudN6imAu+hRKPiIubXoY/iZQyw74OXmw8V9CrR5LblkTPtQ7cyexS36NbHwUJYsPmoF4OvXcALSUMeKL0zuVFKbhiLkCuFT6b9VH59+4k6oAym6UEk0GJNQpBXo0pXyEuAtnolwoRfsqUxK4M+t+5+6aivJ+n0hXM2sa2rqtC+DeDALSKYnc/uRAKqnzGrR9ZMbiLB0xowxKfqwutPE4vvg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
  dkim=pass header.d=nutanix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=prUedyp4AYuc7mLB5VI6y/YZt603NMIJq8WEZ9TCJCA=;
- b=Xfvxz5kMUI7cPZkRE5O/VeNgwqUKCgSW1AM8pfAfMFvjeL2TjgKzYxdBtqkX/hrypzJP1pGrjnL2xf0OjE4liIqxMlJQ6vXGYZXShYuUAAsMkozPIkOtWFkE1NzbSPeo8tLIucOKp+cOusy9xvfeHYG6rItAtI1F1k67SIiHxtwevoArEvPZqgV3HAUOHdP1QzVp3kw5kZT2faFYR7pdVk8DWUb5tbvpQNJ3OwjzIpratTgj0lKkjn8oB9cnCR1gEbpfWRpCBAnwfAU7nSComssNUZHO+bE7x4EmdTxN/7v1tL1QIGfCHx5MJTC8/DFCsi9yWj7oS4ZJGtBs0/jceg==
+ bh=oCxDLQQ0JtOJx+l00uKoBh/UgomiZOIYm3LR6JQrDXA=;
+ b=VAagvSOdYPhz7ilzs5Q/RrPHgqJ+0Ki1trQuX52D+fQ7pZBp0dGATP8yocyJUIiF0WYlvCtJZu9yI4ivhskoej0AK9QFBNj4GZDLjCePSnbv2apyM0w8EI7Im/MACfSaSkrfjDwMA9rkbCKVvidZT50GthLukwDkhOzi8dba3v4IZwHh5Qifp9HJFxAOfrvKlgwclOwK3/lHvTiH52vXjFZgiMX1KzumZWRmVr6Fni05WM5DpZkE9c4TjFmh0hskigzlz5KmVtRJQE6RKjnQfquOsAJqgjujmIA9X1fWo/Shi4O7kgt/FYkne8o5EgtHOCc1fS8c3aT0f2ZDkuXUCw==
 From: Mark Cave-Ayland <mark.caveayland@nutanix.com>
 To: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com,
         sstabellini@kernel.org, anthony@xenproject.org,
         edgar.iglesias@gmail.com, qemu-devel@nongnu.org,
         xen-devel@lists.xenproject.org
-Subject: [PATCH 01/22] i8259_internal.h: rename PIC_COMMON to I8259_COMMON
-Date: Wed, 16 Sep 2026 11:43:29 +0100
-Message-ID: <20260916104435.600211-2-mark.caveayland@nutanix.com>
+Subject: [PATCH 03/22] i8259_internal.h: rename PICCommonState to I8259CommonState
+Date: Wed, 16 Sep 2026 11:43:31 +0100
+Message-ID: <20260916104435.600211-4-mark.caveayland@nutanix.com>
 X-Mailer: git-send-email 2.43.0
 In-Reply-To: <20260916104435.600211-1-mark.caveayland@nutanix.com>
 References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: SJ0PR03CA0277.namprd03.prod.outlook.com
- (2603:10b6:a03:39e::12) To PH0PR02MB7159.namprd02.prod.outlook.com
+X-ClientProxiedBy: SJ0PR03CA0056.namprd03.prod.outlook.com
+ (2603:10b6:a03:33e::31) To PH0PR02MB7159.namprd02.prod.outlook.com
  (2603:10b6:510:16::8)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: PH0PR02MB7159:EE_|MW4PR02MB7380:EE_
-X-MS-Office365-Filtering-Correlation-Id: b928cdc9-c82a-4b3b-cb26-08df13df837f
+X-MS-Office365-Filtering-Correlation-Id: f52442b9-c85d-4c94-e8a9-08df13df87b5
 x-proofpoint-crosstenant: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|22082099003|10067099003|56012099006|18002099003;
+	BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|22082099003|10067099003|3023799007|56012099006|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	78SkZK4UYr7breG+pCgv55dS6aPSQVRgF0mjs1+rCRh7cigI75iKm1oRfZW5NsAl9pwbAPDEFK463uUdh+4rxAh7qO2rZ2R3/WOeXLkSrBh1waGcHiokxogWH8pD24R16YzkyGKqJxur28+nriKF/vVP1wRzFt2jmgKyjkPiBIpPkrPuSaiz5rdH7hFx/kcx3KdGl2jF4OkNYd6zQIhF4r2eBUErog+P3O9qstKlaSBcfjjU/KaSoOkWLTWCSmKce8SvoRyReldBIrkC9BWDItakSU+qpU4yGSI5ZX4tjJcD1nhTBSaLyYQxvEq6L0FXA8ufQ/Sh/2FM0GWMU7QP7+I9BWZTg2DLoi5HEhqhPwHEYzyOg5E3rhIAQ60Vl9oYiOm2pA0C+Tz4gmnTlbA08mlpJv0or04kDLtwE+vS+PVjf12K8gEMOHFRp3wmxhqVX/dZywIFjfRzioUMBHPXJR/9Ukd7WmFIL+5GW1yrsSRnmCpz0aDNiZm9sJcwZoqwScpFkC4JEIwKC2BHg8hJMifFLSSIXvvbT5IelOQkDGo/Nh0l3gAlbdVxGOimsVzkeLX5TuPTs8w0cY+H3VibTNdw2DEo/dsMASulNNbGAmyN5fHw5VaFsPwBuzpn1T0RZP2o5mOiafimOx+MVJXgQPWpFAbJlI5e+nVC3AQdLnA=
+	pzBTX3ZpHkQEMssxpYlRUxBmCcytQ06n+Cyzla4PFCi55Nv1Ztc4BJ508xXZk530NJ7LuhG6310lDTbI4dir6VMnLevE0/Klg1V1N4f2QGzFjLRu1cc1Nn/ZPT6oUl7wdrDwmf0aM50X/fac2qH2PK5ZjjPmqnQqGbQCblwpGckyypuKqSDgrA4fqe7wPwitWOh+OZuplVbUdFWWwWj3/uRKsm7Ng84jhTioAsRoiAkHl1yiAwQnBlQqHiR+3jeY6W5p81iiH6+WaPQkQAavdwu35GRbXIz/yhHaump40KKL37nhYGolscwy1nS2WUr0YfgyqtuFjxESKbAScgDMKqm9CSwJD1z1EJ0NccPzrOSo6hj+MhGAsRm6eqXXMf+g+vczvfPgyiT2UJ8TfBBfT6S+RaLe1Byz0wc9jHdXUmlQkR5Uw0H6M+qYNquz8LxTR2iyAs4fJtoUQWM9vR4MCpMWn/JlYpoXuhZBq3rw2AVPG0kaQPNvC/2INXPRsS8XBUXNB0Kwb4VY5wf2POwfJdDju+Chm8IISFStIbuqtXdo4WON0qyoxZwnjfddjSfiRYwPXOJYZ0UvCUS27H/zN+bMdoahU6l1omiGvKxSr5HQJ6L4iZWXemLkBlB8OG3C49+RTBK+NRGhb6gFGZbvOKFg+binYLVQanLO4XEP1ZE=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR02MB7159.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(22082099003)(10067099003)(56012099006)(18002099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR02MB7159.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(22082099003)(10067099003)(3023799007)(56012099006)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?RH+VyBB8HlGNe00NDjHfYo8XhmlIniyU6P6S9VYvU9U3PmlVC6/6jZ6k/fkS?=
- =?us-ascii?Q?WZv0/M9hC6EoxCajWQnud7cV574I/KId+B5eDa5Jq0q5c2qDQBwAB6Sznx8O?=
- =?us-ascii?Q?BOuq0Q1EubOsTgLsnGzyP/T0f/SR5eerX3obqQJMlynIj6fMPFn4S7DUU3q6?=
- =?us-ascii?Q?V5OQaNxy4sizA6Qi50TK4YDeguV6eEMrrPBe2xmOL5rOWqobMGIjGXXyY8sP?=
- =?us-ascii?Q?EDfC9A6EnSOhgCPPKcOWdbpy/de29HTTS70IvpVdmtsaUzeu0em+tPwqzOyE?=
- =?us-ascii?Q?OB/A12vLKB2/lmYuW7kLoUFgxQwH+uPOuDtamQtbnOWbmjq9FbDfgP3toPAe?=
- =?us-ascii?Q?1E0TeHFpq4DnH5neOlPPJmvDoRQwLMHkc3ukaxTQpLCt7Z+AbUloT+MRuQU0?=
- =?us-ascii?Q?BS6vP1G9BkKKpjkecBcjO7Z4RLiA6/1K62puqf6K2w4h0yMWE6RbzQe/Cypz?=
- =?us-ascii?Q?Iau6ztZFdFpNrywO1uzFVf8vOx2dHVmaQPGseQHlx9W1QnzDB/kOdDUX3xEe?=
- =?us-ascii?Q?RZU2RmmU+RppWtr0pd2n+ibK0yaLSii8h9iA8If2EUStvPVf1XvOXp42Ffof?=
- =?us-ascii?Q?x+6NG+Xqr46d3uiZZkePBwuPlpnmsD3g+1X3ywsHVPKvzytXJ4hVyc2q1UDr?=
- =?us-ascii?Q?wcBocxHSpV8BSSMdn7T9yRZm5x3f39p7FlqCNVuPEQmS7lukRYmeeYv0XFnZ?=
- =?us-ascii?Q?kAXVXA3/tytaO4bA3F03u2YhwEdJyIkiAr5cnfX+wHRoT/otJKnW0+lDIPGh?=
- =?us-ascii?Q?wcdCUbKUy6Gb2swtKlw1Vc31YublLys5NgTAi5VXHBCKr/VPuC2QyfqPc3tf?=
- =?us-ascii?Q?rsbu3RnwKj1yHTBXn4sj5SgBz78AwkcLpvue+Hu7Ku9CZTLtqAEsraByKJsS?=
- =?us-ascii?Q?hkUlMOP67ElisIYZq1nfLk5fHH3GbPDs/Phnljcj1gBL79MFW6oPOX0JgCbJ?=
- =?us-ascii?Q?6FgUZF1BSohvdXFJyKVG73r8qBneQipgeDXC6htz7PDrOAUhnH05SSGY+5E1?=
- =?us-ascii?Q?ZPtVPPRs5wH/YDhIgt7HJj3rVauNld6LQRC+iJ99Dar9FxSm1FAa84eG/YZv?=
- =?us-ascii?Q?Q/HF4uDQ1E6u414Z0Vj9qE5XP3qG//Ib9oQBgxl1RxMw+8jLExahuSKaMlI5?=
- =?us-ascii?Q?eELIIsnYeg+ngalyfFRkS3UwghKdJvfVbfjQY3BtLVP4mXHCA14AlEEl/ELA?=
- =?us-ascii?Q?UX4Pjl5teXFIiRKfUzvJp7yP8MgpVhH1VfdwqY6aaGV9Ky7iWSAlrXPLSC//?=
- =?us-ascii?Q?aMiQBrpWedMTLjw1Uf+QFdmCXRGOf8MAuc0OiWMRFwyag4wuqm5O5p57tkSV?=
- =?us-ascii?Q?gA6zrO4EhdUOyeDH+/KhD7f/uAFm+cw5qtYG38J54P6ufQ70EUlWS9y/ogcr?=
- =?us-ascii?Q?lE2lP7+YraXNkGCf7rsvhhZdfYl34dzQzrSbvfQVeXXNQ4gikWRlUhRYIicO?=
- =?us-ascii?Q?L6Lx+7eE3iPJBefXJ9g6XNuxCZscD/wne1/TzHFJDeP4EUP6gZzBCNV9ms5m?=
- =?us-ascii?Q?XHapHj7hkZ0xKsruQRywFzmXs1Q4j2zmNKvyJb36RLIeMqW8/JQPilvTf1Tu?=
- =?us-ascii?Q?ie+FFplp2k0vvRug8ZuqokstwhiUQASAVjYQuSWE8MrYLRvzE+bRKhV1e+lK?=
- =?us-ascii?Q?tFOvevm0M59z4Z41SHJgi8aoPZojR0FAghIFx6oZgvUtdPSERVj0pXPv5RGh?=
- =?us-ascii?Q?WItkY0LOUT48qbwQHzeY6Psdg+LVpuFpUdMeCxWzuatHsc60pgJPocfuVryv?=
- =?us-ascii?Q?Oavh5/25Lru2pKC8dumP4necU6OUH9E=3D?=
+	=?us-ascii?Q?DGx0rcPHr9WquJH6dWY5Ml7TrVKKK8i2Vo2EBBfa3amL9XVhgpjdo+xEiMUN?=
+ =?us-ascii?Q?QEttGsBgL9GGbnqshQzavuVj24yGkR2Go+6DW2JWIQYuDFKPNHqky/3ySkvE?=
+ =?us-ascii?Q?PCBEkZ6xwXVCL5xhkbAY5wz3eGageuAY1CbR39nfZBD8GcXQaQ0zK5v/4JSu?=
+ =?us-ascii?Q?2+vQmt4TFtz4lhrzi9Msepyyy83CHwuTpFgybzAFZPESP0MdW4tcVt3oQLQx?=
+ =?us-ascii?Q?Nd0eLboFCtACojz4zUU+iWAKgk3obs+sbQlK7nSbgZwLs+tSNfQaMbYbr8hT?=
+ =?us-ascii?Q?+IzfX79EcUm6Gv3njDQRSBt4CaFjxNHBcZJWyZuGxRHIgJ+QXVdi07/rMEPM?=
+ =?us-ascii?Q?lDlCDRKB6tMFAZuh0IdtErsLw1mM2HQTZudB6gtdCxs5XtQkeAASBAqFgAxV?=
+ =?us-ascii?Q?J/hQ/kkTcFYIJBhhHLOp1eoVdyHHDwtZjBiWnU4Cyp3ndPOiJti+fNe5wjH9?=
+ =?us-ascii?Q?egwZOkxncgldAspLHQN4D0ZvKdOo6q3mOFALew1qC2wmKEamyW+yo1OneMc3?=
+ =?us-ascii?Q?qx0uXZ+ekNMvGBPBjt6r1FV8cn9K/IIjY5f0/mgmNlCW/6uLzeYIKREz01Xs?=
+ =?us-ascii?Q?FkyATZ4ftOgyIcu5uOzUp6u8eHAwUloi/giXFJttE4o2n7DxMcdJpY0YsGeo?=
+ =?us-ascii?Q?qJHfZyMjNDQAqxKRjU2fgO/v4ZYPsRXto5iyO1M5IVF1W+ru/kiJB040TjF0?=
+ =?us-ascii?Q?PJ8RHedcELkQuNkYOvQcoQmPLTEkBcWIXivinBNQ86ZsrNl3iLwy4kaGaDdz?=
+ =?us-ascii?Q?6C5T8fJFo9RSH00TCtZMdslI1nupKcabR37tvnOJa53bEHvmZktaORMY3UQp?=
+ =?us-ascii?Q?qvtkn5fBqE87bkFrJWx8SkPv7UUpDHLGbMWClBgMo/dGuerJNvYSRDUWqRHa?=
+ =?us-ascii?Q?sNB7QmziKinzouEkojlWVpPDLtTB7yPhzOZ6xM9V6g5eLtGsZKZAUsj27TtH?=
+ =?us-ascii?Q?uUaENN3aHBM06JWrq+HPO1YVhbSMJwjar4wSkyY17Txf7r/0ordHkS9+LuO/?=
+ =?us-ascii?Q?kIiEvuZTezb01QTpyUJeSUfKd+kDMqlT6S0BR7fbzz22Dz5urnl+647wE0F5?=
+ =?us-ascii?Q?ckPJCDKZN8C09OJ8o6CPYwXGB6CqzR5g4SdYbAPpoSBzm9qxumYcni85gAYZ?=
+ =?us-ascii?Q?WXi+bWjAHfWo4F4zXtw2mJKfRFi9/cMrymbPbpL9hRg6aVSgyEXcUrP2fEFR?=
+ =?us-ascii?Q?+82+zsQI5SYbXPGoRyt01X0JZt6u+P3wtVTj5cEZqSMlw74zjDiqkuhHAY1l?=
+ =?us-ascii?Q?8YGmaFcCddl2lw0fc1vQhKlwQZszZuKWZbE7wU/07ziGDV9dqI0xITs854V+?=
+ =?us-ascii?Q?6iKlOPH2XrUijQmJINIsb8T++4fDZWZvn/BeK6/kW1ZZ0iNrQ+I/Hi/1K2sd?=
+ =?us-ascii?Q?F/9l1LlP6vJwkMU93PLOmbQek7eOv4ob0I2LsHCeKabahQPjg3/5+g/g1fIN?=
+ =?us-ascii?Q?P+AYIPvjEDd4xcryGvhdTb9qRcObtRLpLVg/9skthzhsW6vLF6px2btHQt+E?=
+ =?us-ascii?Q?H0kdO5MU3p//i/1njokyfZOliVzgI5zYJWXNUhtfNgJmv1K3GHUSxQUe19/1?=
+ =?us-ascii?Q?jq2yRIdKgdtqhkz6pyFPzetIS2X6UPspxzaitkpDMhgsu4PuLXf5Ll0Azh6d?=
+ =?us-ascii?Q?MdMITmEoprfZcsZIhvZHj86zU9PcL0rBagQP4cFVIojcha3WcTEjYuqJqQnm?=
+ =?us-ascii?Q?JQJype+4bwD5FeEDHsBu7uBOkZIrOlbnNOzxMWGoE2QZ1/slSRy9xpVnGlqj?=
+ =?us-ascii?Q?eOHqcRz7j8fVaTvw+H6dHAIY5LF2/oY=3D?=
 X-Exchange-RoutingPolicyChecked:
-	tLU+vcdoC2UwaurktwJti4xWLmJqH+1lYmZ20NF8d13hWD64gtR0+JTcY/4GQoBVbrwA5nhMvSNqfAfzxL67Dg4Sp4mIr3dgvYHVvWeY4SzfbFiCBsbL3aMDaKMfbxPIp5y1AG0+M/SofbI19wIAKfHSDhDfLN0YFSx1RqULFmaCdU4pQkmWVDkoIRASXGxolOa8aVEGD7t91YyzZE+axjesPSA/QRrWsUSuJ7Y57uGVIMecojT+4yASGSGjmv6FDesuZAizFDG8DhofCq3NDB9tBZtCbNIGeLr659i3b4SMFXcOCdgt+DnUWiN3S+lstOmYUKKVVAuowQ+QXzM6gw==
+	fiXGG/uq0ni/TD5YsQf+7XB/3OIi5Zv1pXl7JC7vQza+86dveJaPmGWeJpTDFwXpBOGykzZ2JS08XJTGDFIv/Ik+VfJjJFuazbH+XFfIYrbysGAzu0u+ihlnKT+hA04meHLgU1GsAnD7nSMDX6NjdjRz5C3n44kR2Wm6LNFgUK2kzlYUMDWDDuhwexHwYLapaTVkkhws6hWenQ/gf+qJ3qOGWfOkgfszF5vEHcwCQSs2f4dpk/zy7S9o21/huJFX6vW9kkbuPXFX9q8WvwIqOEhYOXotfk5bjTagB4l8cRmYlQ9nKzuV7XmMD1CLwgwZgiCkxjwL5ROJc/mvWrccJQ==
 X-OriginatorOrg: nutanix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b928cdc9-c82a-4b3b-cb26-08df13df837f
+X-MS-Exchange-CrossTenant-Network-Message-Id: f52442b9-c85d-4c94-e8a9-08df13df87b5
 X-MS-Exchange-CrossTenant-AuthSource: PH0PR02MB7159.namprd02.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 10:44:41.7065
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Sep 2026 10:44:48.7674
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: bb047546-786f-4de1-bd75-24e5b6f79043
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: tZI/IjMG42zOcz+IcxJU8s/D5Qkfx9ZQutCyLilBvdMm7of6moT5t/xxVz/KnhjKdWbR+vJ2k0Cu6w+QL4SxKKkRguyLp+ljRjUn/weieRE=
+X-MS-Exchange-CrossTenant-UserPrincipalName: joFT/uxeyLQxacYAsLt5so5Cj94sXdpPTkuk9Z7ONz+biwg88xqWimaFgb7+QbpAsF3KOW+Z7d6WDqEK31J58PjW0mCBiNMjVGTGSnh497Y=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW4PR02MB7380
-X-Proofpoint-GUID: u7lcTM77ncOdzjWAb2vWC9dhAk_goSs6
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDE0MSBTYWx0ZWRfXy0BXZ3ibuEtP
- Ai0e2uYsGgUOy3BZHRotvBrYPXqUUtrE27e3Q55/2kT7RHX5Sj6zY/vp33xiKikGCL1yJgT7C04
- /oHC4joucQhgpyBvRjPTYWR202ynoME=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDE0MSBTYWx0ZWRfXw5C/Lkpm3pHb
- 8Xrk419VfF/FFnYM03Ha4Zee0RLoLdk3BxURbQ/lCo/du0Ig0aLVGj0NPk3qW3+X4ATC4wEvnSs
- Oa9n+lS1FxSsKb7SpfYpEb//gHnAivt7aSUwa5rh0DWN+dmaibKH4v/r3xjPa5+Z9nvP+Ar/k1z
- TUji7GdYKjpSuN5GrEm/YRomDwzPSS8ZfYUQMGORfFVTkgqkGXSoP1dSWGR100nBVWLJyqroo+a
- HUdftljsy6t4Lo/EyMtmdDa9cqkc2Kyj6aa8TqzdLMAVYDwhCQ/cxxdXmHr97TLq9TOH8SbXqIW
- KKKKcFMx8/TbCPsrmCsdRCDL4Ez6776oi7eXetX+Wj5chaohDrcDHOPAFhgbP5nyukflNr0S3nb
- G8CgzTHOZhtP0aiFdfdA28EgaDz4iPvoWrdEBuZTvAUzfph+ovKydiqjd0LAAH6UomMibmwH/Cv
- CSANQ5cdqOVid9Vf4pA==
-X-Proofpoint-ORIG-GUID: u7lcTM77ncOdzjWAb2vWC9dhAk_goSs6
-X-Authority-Analysis: v=2.4 cv=Ps4G/AM3 c=1 sm=1 tr=0 ts=6aaa731c cx=c_pps
- a=iw/g3Nm1s12GBgadF/0+Gw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+X-Proofpoint-GUID: rnFeN0odM08iXz9gj7odNRaiY4vShV-e
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE2MDE0MSBTYWx0ZWRfX7zmgByKtVDO/
+ sMMsDsb/pm66Tyhbiqn9Pzo2XDLbPuo8OseAdQRmsa+uh/c5a0XYpI5/4cFzd0y7PPWtHL7EZvC
+ kytv7cVuk9sdK8xzAzm2OvuwozUwhfg=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE2MDE0MSBTYWx0ZWRfX6FAZ131tOhRZ
+ gXuOMU/atiFn4btLM+IMqIqxsBgPcRi+gH917zBDxuaNT5crThTk2RNlaYIPy0VGOJ/8Z43K+yL
+ PccjQNWTKYE4JI/YXcEUYCSLnkBLDkAs0kNl3j5XRLVcptaO6x1D5s+4NUAbe8uOvQA3+yBnssM
+ TDzomF7y/jtqzkfx6kF5Ex04w7vWZbEZTUOjEbwGCJ6T1RxAb36QEu1fPcAWrr3EVt+9q82bjTD
+ NidRibG9wJqHh53ku9Nre6MIWO+7wh0gKGY01dR2f+fmoOIMM+Giz/f1cGzprwDFgjzE8For/7s
+ DwJnuhzTLBI1yljFZxnBlanPFKLv14TCid3GsRtLbIO/YvkU8V32sqfepGKH9f7zV44sAD6BawA
+ 5x70Shc/eT3NaLAU15Ik+2X+T/ZY54nkip1Et992tBNOX1AM/Ikwh5hSPVN7saFkrw9jzy6iBER
+ BIgMD3fVHR67hpWBfDw==
+X-Proofpoint-ORIG-GUID: rnFeN0odM08iXz9gj7odNRaiY4vShV-e
+X-Authority-Analysis: v=2.4 cv=Ps4G/AM3 c=1 sm=1 tr=0 ts=6aaa7326 cx=c_pps
+ a=WPXs+xwE9Zb4LCNJX07eKw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
  a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
  a=xqWC_Br6kY4A:10 a=VdqzKS8jKosA:10 a=0kUYKlekyDsA:10
  a=VkNPw1HP01LnGYTKEx00:22 a=VofLwUrZ8Iiv6rRUPXIb:22 a=y4UcunY2MAxhM4LwGdWI:22
- a=64Cc0HZtAAAA:8 a=XF9Y1ugsmyLceZbb4BIA:9
+ a=64Cc0HZtAAAA:8 a=01ND9n3NiX1-kDoXiQMA:9
 X-Proofpoint-Virus-Version: vendor=baseguard
  engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
  definitions=2026-09-15_05,2026-09-15_02,2025-10-01_01
 X-Proofpoint-Spam-Reason: safe
-X-purgate-ID: tlsNG-d62444/1789555495-1FE68757-AAEBCA89/0/0
+X-purgate-ID: tlsNG-d62444/1789555500-1E27A757-83CDB1E9/0/0
 X-purgate-type: clean
-X-purgate-size: 6588
-
-This is to emphasise that child types of PIC_COMMON are all instances of an
-an 8259 PIC.
+X-purgate-size: 14343
 
 Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
 ---
- include/hw/isa/i8259_internal.h |  4 ++--
- hw/i386/kvm/i8259.c             |  8 ++++----
- hw/intc/i8259.c                 | 10 +++++-----
- hw/intc/i8259_common.c          | 14 +++++++-------
- 4 files changed, 18 insertions(+), 18 deletions(-)
+ include/hw/intc/i8259.h         |  8 ++---
+ include/hw/isa/i8259_internal.h | 10 +++---
+ hw/i386/kvm/i8259.c             | 10 +++---
+ hw/intc/i8259.c                 | 34 +++++++++----------
+ hw/intc/i8259_common.c          | 58 ++++++++++++++++-----------------
+ 5 files changed, 60 insertions(+), 60 deletions(-)
 
+diff --git a/include/hw/intc/i8259.h b/include/hw/intc/i8259.h
+index 1f2420231f..1921a30371 100644
+--- a/include/hw/intc/i8259.h
++++ b/include/hw/intc/i8259.h
+@@ -3,9 +3,9 @@
+ 
+ /* i8259.c */
+ 
+-typedef struct PICCommonState PICCommonState;
++typedef struct I8259CommonState I8259CommonState;
+ 
+-extern PICCommonState *isa_pic;
++extern I8259CommonState *isa_pic;
+ 
+ /*
+  * i8259_init()
+@@ -16,7 +16,7 @@ extern PICCommonState *isa_pic;
+  */
+ qemu_irq *i8259_init(ISABus *bus, qemu_irq parent_irq_in);
+ qemu_irq *kvm_i8259_init(ISABus *bus);
+-int pic_get_output(PICCommonState *s);
+-int pic_read_irq(PICCommonState *s);
++int pic_get_output(I8259CommonState *s);
++int pic_read_irq(I8259CommonState *s);
+ 
+ #endif
 diff --git a/include/hw/isa/i8259_internal.h b/include/hw/isa/i8259_internal.h
-index f9dcc4163e..54dc9036cf 100644
+index 289d08b7d7..7a2f9addaf 100644
 --- a/include/hw/isa/i8259_internal.h
 +++ b/include/hw/isa/i8259_internal.h
-@@ -31,8 +31,8 @@
- #include "qom/object.h"
+@@ -32,16 +32,16 @@
  
  
--#define TYPE_PIC_COMMON "pic-common"
--OBJECT_DECLARE_TYPE(PICCommonState, PICCommonClass, PIC_COMMON)
-+#define TYPE_I8259_COMMON "pic-common"
-+OBJECT_DECLARE_TYPE(PICCommonState, PICCommonClass, I8259_COMMON)
+ #define TYPE_I8259_COMMON "i8259-common"
+-OBJECT_DECLARE_TYPE(PICCommonState, PICCommonClass, I8259_COMMON)
++OBJECT_DECLARE_TYPE(I8259CommonState, PICCommonClass, I8259_COMMON)
  
  struct PICCommonClass {
      DeviceClass parent_class;
+ 
+-    void (*pre_save)(PICCommonState *s);
+-    void (*post_load)(PICCommonState *s);
++    void (*pre_save)(I8259CommonState *s);
++    void (*post_load)(I8259CommonState *s);
+ };
+ 
+-struct PICCommonState {
++struct I8259CommonState {
+     ISADevice parent_obj;
+ 
+     uint8_t last_irr; /* edge detection */
+@@ -70,7 +70,7 @@ struct PICCommonState {
+     MemoryRegion elcr_io;
+ };
+ 
+-void pic_reset_common(PICCommonState *s);
++void pic_reset_common(I8259CommonState *s);
+ ISADevice *i8259_init_chip(const char *name, ISABus *bus, bool master);
+ void pic_stat_update_irq(int irq, int level);
+ 
 diff --git a/hw/i386/kvm/i8259.c b/hw/i386/kvm/i8259.c
-index 66f37e1303..14029783e5 100644
+index 14029783e5..f10643a120 100644
 --- a/hw/i386/kvm/i8259.c
 +++ b/hw/i386/kvm/i8259.c
+@@ -34,7 +34,7 @@ struct KVMPICClass {
+     DeviceRealize parent_realize;
+ };
+ 
+-static void kvm_pic_get(PICCommonState *s)
++static void kvm_pic_get(I8259CommonState *s)
+ {
+     struct kvm_irqchip chip;
+     struct kvm_pic_state *kpic;
+@@ -67,7 +67,7 @@ static void kvm_pic_get(PICCommonState *s)
+     s->elcr_mask = kpic->elcr_mask;
+ }
+ 
+-static void kvm_pic_put(PICCommonState *s)
++static void kvm_pic_put(I8259CommonState *s)
+ {
+     struct kvm_irqchip chip;
+     struct kvm_pic_state *kpic;
 @@ -103,7 +103,7 @@ static void kvm_pic_put(PICCommonState *s)
  
  static void kvm_pic_reset(DeviceState *dev)
  {
--    PICCommonState *s = PIC_COMMON(dev);
-+    PICCommonState *s = I8259_COMMON(dev);
+-    PICCommonState *s = I8259_COMMON(dev);
++    I8259CommonState *s = I8259_COMMON(dev);
  
      s->elcr = 0;
      pic_reset_common(s);
@@ -232,106 +293,202 @@ index 66f37e1303..14029783e5 100644
  
  static void kvm_pic_realize(DeviceState *dev, Error **errp)
  {
--    PICCommonState *s = PIC_COMMON(dev);
-+    PICCommonState *s = I8259_COMMON(dev);
+-    PICCommonState *s = I8259_COMMON(dev);
++    I8259CommonState *s = I8259_COMMON(dev);
      KVMPICClass *kpc = KVM_PIC_GET_CLASS(dev);
  
      memory_region_init_io(&s->base_io, OBJECT(dev), NULL, NULL, "kvm-pic", 2);
-@@ -142,7 +142,7 @@ qemu_irq *kvm_i8259_init(ISABus *bus)
- static void kvm_i8259_class_init(ObjectClass *klass, const void *data)
- {
-     KVMPICClass *kpc = KVM_PIC_CLASS(klass);
--    PICCommonClass *k = PIC_COMMON_CLASS(klass);
-+    PICCommonClass *k = I8259_COMMON_CLASS(klass);
-     DeviceClass *dc = DEVICE_CLASS(klass);
- 
-     device_class_set_legacy_reset(dc, kvm_pic_reset);
-@@ -153,7 +153,7 @@ static void kvm_i8259_class_init(ObjectClass *klass, const void *data)
- 
+@@ -154,7 +154,7 @@ static void kvm_i8259_class_init(ObjectClass *klass, const void *data)
  static const TypeInfo kvm_i8259_info = {
      .name = TYPE_KVM_I8259,
--    .parent = TYPE_PIC_COMMON,
-+    .parent = TYPE_I8259_COMMON,
-     .instance_size = sizeof(PICCommonState),
+     .parent = TYPE_I8259_COMMON,
+-    .instance_size = sizeof(PICCommonState),
++    .instance_size = sizeof(I8259CommonState),
      .class_init = kvm_i8259_class_init,
      .class_size = sizeof(KVMPICClass),
+ };
 diff --git a/hw/intc/i8259.c b/hw/intc/i8259.c
-index 8f2aa1f0fb..52e24d333e 100644
+index 52e24d333e..45db87a2ad 100644
 --- a/hw/intc/i8259.c
 +++ b/hw/intc/i8259.c
+@@ -52,12 +52,12 @@ struct PICClass {
+ #ifdef DEBUG_IRQ_LATENCY
+ static int64_t irq_time[16];
+ #endif
+-PICCommonState *isa_pic;
+-static PICCommonState *slave_pic;
++I8259CommonState *isa_pic;
++static I8259CommonState *slave_pic;
+ 
+ /* return the highest priority found in mask (highest = smallest
+    number). Return 8 if no irq */
+-static int get_priority(PICCommonState *s, int mask)
++static int get_priority(I8259CommonState *s, int mask)
+ {
+     int priority;
+ 
+@@ -72,7 +72,7 @@ static int get_priority(PICCommonState *s, int mask)
+ }
+ 
+ /* return the pic wanted interrupt. return -1 if none */
+-static int pic_get_irq(PICCommonState *s)
++static int pic_get_irq(I8259CommonState *s)
+ {
+     int mask, cur_priority, priority;
+ 
+@@ -101,7 +101,7 @@ static int pic_get_irq(PICCommonState *s)
+ }
+ 
+ /* Update INT output. Must be called every time the output may have changed. */
+-static void pic_update_irq(PICCommonState *s)
++static void pic_update_irq(I8259CommonState *s)
+ {
+     int irq;
+ 
+@@ -117,7 +117,7 @@ static void pic_update_irq(PICCommonState *s)
+ /* set irq level. If an edge is detected, then the IRR is set to 1 */
+ static void pic_set_irq(void *opaque, int irq, int level)
+ {
+-    PICCommonState *s = opaque;
++    I8259CommonState *s = opaque;
+     int mask = 1 << irq;
+     int irq_index = s->master ? irq : irq + 8;
+ 
+@@ -154,7 +154,7 @@ static void pic_set_irq(void *opaque, int irq, int level)
+ }
+ 
+ /* acknowledge interrupt 'irq' */
+-static void pic_intack(PICCommonState *s, int irq)
++static void pic_intack(I8259CommonState *s, int irq)
+ {
+     if (s->auto_eoi) {
+         if (s->rotate_on_auto_eoi) {
+@@ -170,7 +170,7 @@ static void pic_intack(PICCommonState *s, int irq)
+     pic_update_irq(s);
+ }
+ 
+-int pic_read_irq(PICCommonState *s)
++int pic_read_irq(I8259CommonState *s)
+ {
+     int irq, intno;
+ 
+@@ -210,7 +210,7 @@ int pic_read_irq(PICCommonState *s)
+     return intno;
+ }
+ 
+-static void pic_init_reset(PICCommonState *s)
++static void pic_init_reset(I8259CommonState *s)
+ {
+     pic_reset_common(s);
+     pic_update_irq(s);
 @@ -218,7 +218,7 @@ static void pic_init_reset(PICCommonState *s)
  
  static void pic_reset(DeviceState *dev)
  {
--    PICCommonState *s = PIC_COMMON(dev);
-+    PICCommonState *s = I8259_COMMON(dev);
+-    PICCommonState *s = I8259_COMMON(dev);
++    I8259CommonState *s = I8259_COMMON(dev);
  
      s->elcr = 0;
      s->ltim = 0;
+@@ -228,7 +228,7 @@ static void pic_reset(DeviceState *dev)
+ static void pic_ioport_write(void *opaque, hwaddr addr64,
+                              uint64_t val64, unsigned size)
+ {
+-    PICCommonState *s = opaque;
++    I8259CommonState *s = opaque;
+     uint32_t addr = addr64;
+     uint32_t val = val64;
+     int priority, cmd, irq;
+@@ -321,7 +321,7 @@ static void pic_ioport_write(void *opaque, hwaddr addr64,
+ static uint64_t pic_ioport_read(void *opaque, hwaddr addr,
+                                 unsigned size)
+ {
+-    PICCommonState *s = opaque;
++    I8259CommonState *s = opaque;
+     int ret;
+ 
+     if (s->poll) {
+@@ -348,7 +348,7 @@ static uint64_t pic_ioport_read(void *opaque, hwaddr addr,
+     return ret;
+ }
+ 
+-int pic_get_output(PICCommonState *s)
++int pic_get_output(I8259CommonState *s)
+ {
+     return (pic_get_irq(s) >= 0);
+ }
+@@ -356,14 +356,14 @@ int pic_get_output(PICCommonState *s)
+ static void elcr_ioport_write(void *opaque, hwaddr addr,
+                               uint64_t val, unsigned size)
+ {
+-    PICCommonState *s = opaque;
++    I8259CommonState *s = opaque;
+     s->elcr = val & s->elcr_mask;
+ }
+ 
+ static uint64_t elcr_ioport_read(void *opaque, hwaddr addr,
+                                  unsigned size)
+ {
+-    PICCommonState *s = opaque;
++    I8259CommonState *s = opaque;
+     return s->elcr;
+ }
+ 
 @@ -387,7 +387,7 @@ static const MemoryRegionOps pic_elcr_ioport_ops = {
  
  static void pic_realize(DeviceState *dev, Error **errp)
  {
--    PICCommonState *s = PIC_COMMON(dev);
-+    PICCommonState *s = I8259_COMMON(dev);
+-    PICCommonState *s = I8259_COMMON(dev);
++    I8259CommonState *s = I8259_COMMON(dev);
      PICClass *pc = PIC_GET_CLASS(dev);
  
      memory_region_init_io(&s->base_io, OBJECT(s), &pic_base_ioport_ops, s,
-@@ -418,7 +418,7 @@ qemu_irq *i8259_init(ISABus *bus, qemu_irq parent_irq_in)
-         irq_set[i] = qdev_get_gpio_in(dev, i);
-     }
+@@ -444,7 +444,7 @@ static void i8259_class_init(ObjectClass *klass, const void *data)
  
--    isa_pic = PIC_COMMON(dev);
-+    isa_pic = I8259_COMMON(dev);
- 
-     isadev = i8259_init_chip(TYPE_I8259, bus, false);
-     dev = DEVICE(isadev);
-@@ -428,7 +428,7 @@ qemu_irq *i8259_init(ISABus *bus, qemu_irq parent_irq_in)
-         irq_set[i + 8] = qdev_get_gpio_in(dev, i);
-     }
- 
--    slave_pic = PIC_COMMON(dev);
-+    slave_pic = I8259_COMMON(dev);
- 
-     return irq_set;
- }
-@@ -445,7 +445,7 @@ static void i8259_class_init(ObjectClass *klass, const void *data)
  static const TypeInfo i8259_info = {
      .name       = TYPE_I8259,
-     .instance_size = sizeof(PICCommonState),
--    .parent     = TYPE_PIC_COMMON,
-+    .parent     = TYPE_I8259_COMMON,
+-    .instance_size = sizeof(PICCommonState),
++    .instance_size = sizeof(I8259CommonState),
+     .parent     = TYPE_I8259_COMMON,
      .class_init = i8259_class_init,
      .class_size = sizeof(PICClass),
- };
 diff --git a/hw/intc/i8259_common.c b/hw/intc/i8259_common.c
-index 8ceb5841b9..e2f997e161 100644
+index e2f997e161..17040bdb1e 100644
 --- a/hw/intc/i8259_common.c
 +++ b/hw/intc/i8259_common.c
-@@ -56,7 +56,7 @@ void pic_reset_common(PICCommonState *s)
+@@ -33,7 +33,7 @@
+ static int irq_level[16];
+ static uint64_t irq_count[16];
+ 
+-void pic_reset_common(PICCommonState *s)
++void pic_reset_common(I8259CommonState *s)
+ {
+     s->last_irr = 0;
+     s->irr &= s->elcr;
+@@ -55,7 +55,7 @@ void pic_reset_common(PICCommonState *s)
+ 
  static int pic_dispatch_pre_save(void *opaque)
  {
-     PICCommonState *s = opaque;
--    PICCommonClass *info = PIC_COMMON_GET_CLASS(s);
-+    PICCommonClass *info = I8259_COMMON_GET_CLASS(s);
+-    PICCommonState *s = opaque;
++    I8259CommonState *s = opaque;
+     PICCommonClass *info = I8259_COMMON_GET_CLASS(s);
  
      if (info->pre_save) {
-         info->pre_save(s);
-@@ -68,7 +68,7 @@ static int pic_dispatch_pre_save(void *opaque)
+@@ -67,7 +67,7 @@ static int pic_dispatch_pre_save(void *opaque)
+ 
  static int pic_dispatch_post_load(void *opaque, int version_id)
  {
-     PICCommonState *s = opaque;
--    PICCommonClass *info = PIC_COMMON_GET_CLASS(s);
-+    PICCommonClass *info = I8259_COMMON_GET_CLASS(s);
+-    PICCommonState *s = opaque;
++    I8259CommonState *s = opaque;
+     PICCommonClass *info = I8259_COMMON_GET_CLASS(s);
  
      if (info->post_load) {
-         info->post_load(s);
 @@ -78,7 +78,7 @@ static int pic_dispatch_post_load(void *opaque, int version_id)
  
  static void pic_common_realize(DeviceState *dev, Error **errp)
  {
--    PICCommonState *s = PIC_COMMON(dev);
-+    PICCommonState *s = I8259_COMMON(dev);
+-    PICCommonState *s = I8259_COMMON(dev);
++    I8259CommonState *s = I8259_COMMON(dev);
      ISADevice *isa = ISA_DEVICE(dev);
  
      isa_register_ioport(isa, &s->base_io, s->iobase);
@@ -339,8 +496,8 @@ index 8ceb5841b9..e2f997e161 100644
  static bool pic_get_statistics(InterruptStatsProvider *obj,
                                 uint64_t **irq_counts, unsigned int *nb_irqs)
  {
--    PICCommonState *s = PIC_COMMON(obj);
-+    PICCommonState *s = I8259_COMMON(obj);
+-    PICCommonState *s = I8259_COMMON(obj);
++    I8259CommonState *s = I8259_COMMON(obj);
  
      if (s->master) {
          *irq_counts = irq_count;
@@ -348,8 +505,8 @@ index 8ceb5841b9..e2f997e161 100644
  
  static void pic_print_info(InterruptStatsProvider *obj, GString *buf)
  {
--    PICCommonState *s = PIC_COMMON(obj);
-+    PICCommonState *s = I8259_COMMON(obj);
+-    PICCommonState *s = I8259_COMMON(obj);
++    I8259CommonState *s = I8259_COMMON(obj);
  
      pic_dispatch_pre_save(s);
      g_string_append_printf(buf, "pic%d: irr=%02x imr=%02x isr=%02x hprio=%d "
@@ -357,20 +514,83 @@ index 8ceb5841b9..e2f997e161 100644
  
  static bool ltim_state_needed(void *opaque)
  {
--    PICCommonState *s = PIC_COMMON(opaque);
-+    PICCommonState *s = I8259_COMMON(opaque);
+-    PICCommonState *s = I8259_COMMON(opaque);
++    I8259CommonState *s = I8259_COMMON(opaque);
  
      return !!s->ltim;
  }
-@@ -220,7 +220,7 @@ static void pic_common_class_init(ObjectClass *klass, const void *data)
- }
+@@ -157,7 +157,7 @@ static const VMStateDescription vmstate_pic_ltim = {
+     .minimum_version_id = 1,
+     .needed = ltim_state_needed,
+     .fields = (const VMStateField[]) {
+-        VMSTATE_UINT8(ltim, PICCommonState),
++        VMSTATE_UINT8(ltim, I8259CommonState),
+         VMSTATE_END_OF_LIST()
+     }
+ };
+@@ -169,22 +169,22 @@ static const VMStateDescription vmstate_pic_common = {
+     .pre_save = pic_dispatch_pre_save,
+     .post_load = pic_dispatch_post_load,
+     .fields = (const VMStateField[]) {
+-        VMSTATE_UINT8(last_irr, PICCommonState),
+-        VMSTATE_UINT8(irr, PICCommonState),
+-        VMSTATE_UINT8(imr, PICCommonState),
+-        VMSTATE_UINT8(isr, PICCommonState),
+-        VMSTATE_UINT8(priority_add, PICCommonState),
+-        VMSTATE_UINT8(irq_base, PICCommonState),
+-        VMSTATE_UINT8(read_reg_select, PICCommonState),
+-        VMSTATE_UINT8(poll, PICCommonState),
+-        VMSTATE_UINT8(special_mask, PICCommonState),
+-        VMSTATE_UINT8(init_state, PICCommonState),
+-        VMSTATE_UINT8(auto_eoi, PICCommonState),
+-        VMSTATE_UINT8(rotate_on_auto_eoi, PICCommonState),
+-        VMSTATE_UINT8(special_fully_nested_mode, PICCommonState),
+-        VMSTATE_UINT8(init4, PICCommonState),
+-        VMSTATE_UINT8(single_mode, PICCommonState),
+-        VMSTATE_UINT8(elcr, PICCommonState),
++        VMSTATE_UINT8(last_irr, I8259CommonState),
++        VMSTATE_UINT8(irr, I8259CommonState),
++        VMSTATE_UINT8(imr, I8259CommonState),
++        VMSTATE_UINT8(isr, I8259CommonState),
++        VMSTATE_UINT8(priority_add, I8259CommonState),
++        VMSTATE_UINT8(irq_base, I8259CommonState),
++        VMSTATE_UINT8(read_reg_select, I8259CommonState),
++        VMSTATE_UINT8(poll, I8259CommonState),
++        VMSTATE_UINT8(special_mask, I8259CommonState),
++        VMSTATE_UINT8(init_state, I8259CommonState),
++        VMSTATE_UINT8(auto_eoi, I8259CommonState),
++        VMSTATE_UINT8(rotate_on_auto_eoi, I8259CommonState),
++        VMSTATE_UINT8(special_fully_nested_mode, I8259CommonState),
++        VMSTATE_UINT8(init4, I8259CommonState),
++        VMSTATE_UINT8(single_mode, I8259CommonState),
++        VMSTATE_UINT8(elcr, I8259CommonState),
+         VMSTATE_END_OF_LIST()
+     },
+     .subsections = (const VMStateDescription * const []) {
+@@ -194,10 +194,10 @@ static const VMStateDescription vmstate_pic_common = {
+ };
  
+ static const Property pic_properties_common[] = {
+-    DEFINE_PROP_UINT32("iobase", PICCommonState, iobase,  -1),
+-    DEFINE_PROP_UINT32("elcr_addr", PICCommonState, elcr_addr,  -1),
+-    DEFINE_PROP_UINT8("elcr_mask", PICCommonState, elcr_mask,  -1),
+-    DEFINE_PROP_BIT("master", PICCommonState, master,  0, false),
++    DEFINE_PROP_UINT32("iobase", I8259CommonState, iobase,  -1),
++    DEFINE_PROP_UINT32("elcr_addr", I8259CommonState, elcr_addr,  -1),
++    DEFINE_PROP_UINT8("elcr_mask", I8259CommonState, elcr_mask,  -1),
++    DEFINE_PROP_BIT("master", I8259CommonState, master,  0, false),
+ };
+ 
+ static void pic_common_class_init(ObjectClass *klass, const void *data)
+@@ -222,7 +222,7 @@ static void pic_common_class_init(ObjectClass *klass, const void *data)
  static const TypeInfo pic_common_type = {
--    .name = TYPE_PIC_COMMON,
-+    .name = TYPE_I8259_COMMON,
+     .name = TYPE_I8259_COMMON,
      .parent = TYPE_ISA_DEVICE,
-     .instance_size = sizeof(PICCommonState),
+-    .instance_size = sizeof(PICCommonState),
++    .instance_size = sizeof(I8259CommonState),
      .class_size = sizeof(PICCommonClass),
+     .class_init = pic_common_class_init,
+     .abstract = true,
 -- 
 2.43.0
 
