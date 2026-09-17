@@ -4,58 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A00BC88E72
-	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2026 12:14:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1423977.1648773 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D61C5C88E72
+	for <xen-devel@archiver.kernel.org>; Thu, 17 Sep 2026 12:15:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1423983.1648782 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7B0G-0005DJ-4Z; Thu, 17 Sep 2026 12:14:12 +0000
+	id 1x7B18-0005dZ-Dj; Thu, 17 Sep 2026 12:15:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1423977.1648773; Thu, 17 Sep 2026 12:14:12 +0000
+Received: by outflank-mailman (output) from mailman id 1423983.1648782; Thu, 17 Sep 2026 12:15:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7B0G-0005DC-1p; Thu, 17 Sep 2026 12:14:12 +0000
-Received: by outflank-mailman (input) for mailman id 1423977;
- Thu, 17 Sep 2026 12:14:10 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x7B18-0005dR-A9; Thu, 17 Sep 2026 12:15:06 +0000
+Received: by outflank-mailman (input) for mailman id 1423983;
+ Thu, 17 Sep 2026 12:15:04 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ayan.kumar.halder@amd.com>) id 1x7B0E-0005D6-B7
- for xen-devel@lists.xenproject.org; Thu, 17 Sep 2026 12:14:10 +0000
+ (envelope-from <frederic@kernel.org>) id 1x7B16-0005dH-M9
+ for xen-devel@lists.xenproject.org; Thu, 17 Sep 2026 12:15:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7B0D-00BAe3-OF
- for xen-devel@lists.xenproject.org; Thu, 17 Sep 2026 14:14:09 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x7B15-0081hy-Je
+ for xen-devel@lists.xenproject.org; Thu, 17 Sep 2026 14:15:03 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ayan.kumar.halder@amd.com>)
- id 6aabd98e-e002-0a2a0a5209dd-0a2a4505e26a-12
- for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2026 14:14:09 +0200
-Received: from [52.101.85.69]
- (helo=BYAPR05CU005.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ayan.kumar.halder@amd.com>)
- id 6aabd98f-4cb1-0a2a45050019-346555452cbb-3
- for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2026 14:14:09 +0200
-Received: from MW4P222CA0012.NAMP222.PROD.OUTLOOK.COM (2603:10b6:303:114::17)
- by BL1PR12MB5731.namprd12.prod.outlook.com (2603:10b6:208:386::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Thu, 17 Sep
- 2026 12:14:01 +0000
-Received: from SJ1PEPF000037A1.namprd04.prod.outlook.com
- (2603:10b6:303:114:cafe::9a) by MW4P222CA0012.outlook.office365.com
- (2603:10b6:303:114::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.11 via Frontend Transport; Thu,
- 17 Sep 2026 12:13:59 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ1PEPF000037A1.mail.protection.outlook.com (10.167.244.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.451.8 via Frontend Transport; Thu, 17 Sep 2026 12:13:58 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Thu, 17 Sep
- 2026 07:13:57 -0500
-Received: from [172.31.52.207] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Thu, 17 Sep 2026 07:13:55 -0500
+ (envelope-from <frederic@kernel.org>)
+ id 6aabd9c7-bab6-0a2a0a5309dd-0a2a450aad26-4
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2026 14:15:03 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <frederic@kernel.org>)
+ id 6aabd9c6-f2d2-0a2a450a0019-ac6904fe91b6-3
+ for <xen-devel@lists.xenproject.org>; Thu, 17 Sep 2026 14:15:03 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by tor.source.kernel.org (Postfix) with ESMTP id 70873602CA;
+ Thu, 17 Sep 2026 12:15:01 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 894761F00893;
+ Thu, 17 Sep 2026 12:15:00 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,138 +50,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SKBmbSLzRAt1lq/B6y9mAbm6WYOumh/YSFOk+ks8yEgg8y5BygBPcgGW+mzmVwfGH0L8zl7RJJil4VjH6idr7Dnpy7Q3Xz4OYB5dqx/GPT3/oTAG9/jiA8DKWDM/STL4VztmrGfvrLctk01+QgiAkTFbVqUWxfepEy1DluccLBwUTheVlBdwKZ61ce5bAn2O9ySiW9MPmTBUPv+kseFTFX2dFMWZF9tT+LQtm3uTTd7Ectz9BeEFLAVl24j+1HNQpZc+tNkxdbfa3IC7/ln1AUib0ayJZQeS4+hIiYk3NQBwhIwvJRmZ8DkQAFO+WhTArW64kUjb3GDq4n6hGa9nYA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ykwnd8AuGRDEEAns2qhqEaiPT3affmZmerE5r61BzM8=;
- b=r35rXy6/I4ceUOHZs7mH+f0Or3ZkiACfCe/YTpj6d0Kw9alMApzK7eGYoxKjfu6TlY2XdlGetMORPn63l2zSeCSjLi77p4DppNYaAfY2R3Rka+9Wct385f6P4sNU6Z5IBpqMWL4luEy+C8eHh8jOCRxnN9b0jX6RoicWxiw1MQ9pz5bpOrH3nHWHHMCXrQCKz318EOgdMbhfjf1zQv80bGeC6GdZEUnkrRr7h86CNE92OGR5qtQ7zE7XG9i5Bis+8qm7fX/hIFdrpYuxYDa5OvW+Lm8eV4FAtg8fWYbdaNAlDuGbm/KTrZsfZ99t6q1eLxdiNCMc8oUhIT4HpLB4yw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=xen.org smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ykwnd8AuGRDEEAns2qhqEaiPT3affmZmerE5r61BzM8=;
- b=AHtlSYB9/Uh0ZhwgSCoJztKI+YekS8I4hx2dSRYQnkuXKwfsRlduQytJ2fIZxkmLReE6gdOrbjYI5Tt8wnm/UR67xb4/rlLVV5XKmU74vWroATlWyVxeGcnv/2MdXLYVKY1DvA5eIDfQAkBzQZ63f3chnvnlwHVxAoZcR8JwQ9E=
-X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
- smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <e311cb4d-beba-4850-ba0d-13f9a2e92608@amd.com>
-Date: Thu, 17 Sep 2026 13:13:50 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1789647301;
+	bh=gkbPrcWx7naDFzx6es9+fglMGRB1RD3y/GInwlzOxG0=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To;
+	b=l9x6i3WuvpeAcNcSCVNaCtMy5SaRo1F+MZuI+PgVBSML9X+5R+oQzomOBe+PerxoF
+	 MGnUJJPBiBDo05wMQ6X2KJcxdTZENp23PzB7WcnSwSqj62YzmxsyGgJ7HZBIPXjfEF
+	 E8dIJpEOvURwajkhYJ8tZHYQ6DR7NoU4HbmBYBXiWsOXfSshDWbFnC/MWHjo/l6SjU
+	 kyARmxn8MXXrjxfSzwNY5oyHwnrB7W7LX+V0sI6oGEFdrpZUh+ZlK2RgUPaDlHkss4
+	 ui9Wsp50EnRuS0GxbBmgweTiv/MsHviRvjcYoGFHOH38WcDLv/iZ2YR+oN+hK1zE4l
+	 XEyjqlwBekiag==
+Date: Thu, 17 Sep 2026 14:14:57 +0200
+From: Frederic Weisbecker <frederic@kernel.org>
+To: "Paul E. McKenney" <paulmck@kernel.org>
+Cc: Josef Bacik <josef@toxicpanda.com>,
+	Neeraj Upadhyay <neeraj.upadhyay@kernel.org>,
+	Joel Fernandes <joelagnelf@nvidia.com>,
+	Boqun Feng <boqun@kernel.org>, Thomas Gleixner <tglx@kernel.org>,
+	Peter Zijlstra <peterz@infradead.org>,
+	Steven Rostedt <rostedt@goodmis.org>,
+	Masami Hiramatsu <mhiramat@kernel.org>,
+	Mark Rutland <mark.rutland@arm.com>, Jiri Olsa <jolsa@kernel.org>,
+	Alexei Starovoitov <ast@kernel.org>,
+	Daniel Borkmann <daniel@iogearbox.net>,
+	Andrii Nakryiko <andrii@kernel.org>, x86@kernel.org,
+	Catalin Marinas <catalin.marinas@arm.com>,
+	Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>,
+	Xu Kuohai <xukuohai@huaweicloud.com>,
+	Andy Lutomirski <luto@kernel.org>,
+	Josh Triplett <josh@joshtriplett.org>,
+	Uladzislau Rezki <urezki@gmail.com>,
+	Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+	Lai Jiangshan <jiangshanlai@gmail.com>,
+	Zqiang <qiang.zhang@linux.dev>, Juergen Gross <jgross@suse.com>,
+	Luis Chamberlain <mcgrof@kernel.org>,
+	Ihor Solodrai <ihor.solodrai@linux.dev>,
+	linux-kernel@vger.kernel.org, rcu@vger.kernel.org,
+	linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+	linux-arm-kernel@lists.infradead.org,
+	xen-devel@lists.xenproject.org
+Subject: Re: [PATCH RFC v3 03/13] rcu-tasks: Add a Tasks RCU implementation
+ for reader-marked trampolines
+Message-ID: <aqvZwfUVsiEI7q7y@localhost.localdomain>
+References: <20260915-b4-rcu-tasks-preempt-qs-v3-3-0ad30c4c5ee7@toxicpanda.com>
+ <aqlgxKGk_AEKls_1@localhost.localdomain>
+ <edc7cca2-a5c5-455c-8969-ea05dbdb08f7@paulmck-laptop>
+ <aqqONH8flTIpOUqT@localhost.localdomain>
+ <91687748-0781-4133-baed-43cf82f35ff5@paulmck-laptop>
+ <aqqpRoTfywUuTgoC@localhost.localdomain>
+ <aqqsAUVV8a1yrQzX@localhost.localdomain>
+ <6afb0afe-e7b8-46b4-9fea-2c7cf4791044@paulmck-laptop>
+ <aqq0cwvRDsorGwgc@localhost.localdomain>
+ <8b73e1b3-0580-4ba9-b2e0-6363e429808d@paulmck-laptop>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 for 4.23] Add GIC SGI boot/self tests in Xen
-To: "Grall, Julien" <julien@xen.org>, Ayan Kumar Halder
-	<ayan.kumar.halder@amd.com>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
- Beulich" <jbeulich@suse.com>, Roger Pau Monne <roger@xenproject.org>, "Doug
- Goldstein" <cardoe@cardoe.com>
-References: <20260916113520.3870182-1-ayan.kumar.halder@amd.com>
- <7b6d9027-9848-4909-a5a3-16ddf56dde72@xen.org>
-Content-Language: en-US
-From: "Halder, Ayan Kumar" <ayankuma@amd.com>
-In-Reply-To: <7b6d9027-9848-4909-a5a3-16ddf56dde72@xen.org>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000037A1:EE_|BL1PR12MB5731:EE_
-X-MS-Office365-Filtering-Correlation-Id: dc8f70a3-282f-47dd-2f45-08df14b52705
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|376014|7416014|1800799024|82310400026|36860700016|22082099003|18002099003|4143699003|10067099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info:
-	hBApP9LFR+p/1xjjmnBwsUrcLxraBZlgZaHQ40VdC2G6t+eu3azn8T0zfWB1Cqf1W0KyUYnlTXRBYhZaDpkXjlIOHARpjJw8xtWbIF3wLd0nWVgtK/HrK6483mFk+qf61587Gk9o93kEX/sfeZkPkzjcOD3k6CztQCQU45kWWPhh8echu3Vz4JQcy5hiRNJqmAg7eX2AJWpg763jML12hQc/8BYC1rL5Qyo8pxKAyGxiHeLds9agmEovglq7yvkIQ2SS4uN95gquAeoxW2YcOC1P3EcX7ZxIWZM8V8GjMj5D6nVImtySkE9XvNHE5ml0PsQaq/qcjMSJ5eAt45KqSUJLVsSZWkCSioLHK08OMnZaYQ00+kAhvHoZQM8OtOI48BgFVdd0vxIzGyNxKJIQB6q3GystbzdyChAkcoPtvL8SdCg/b9c9SxwZY+IjN7XHrjNzMOdar1Q3rDq9GIqUciYO7OKlaXcxQtwDbNF3CeGTH16kEmWKVtsH7jZVU67nV2nNq1u7ltH90J6NsbyifOy1c6NhAa7Hkg+KbAbykWqO4p8az8iNDdEv9TNrdDwd1NnNNIsOapybDn7Z6Roryv0DOFWe+8fmRtd9Yki23ybxzQx9A7RkBAILrsx95XRG1dhBqidWgoEU/CTU0qSTUafWwoZ8uWHj6T5Is9V2N3smZCVcPvdRMEIQKpHsHKCXbs1uec2fCQg4Xc5k8+nLUQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(376014)(7416014)(1800799024)(82310400026)(36860700016)(22082099003)(18002099003)(4143699003)(10067099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	WCedLCB81mfPnUqFWfPfnkxM7sZ2g2MBcxr7P6jOGXZZEb+rGSJzVJocZSdQvg+tqACZWJDGEAX/rghR5sftBXQAlmFJ9WLkj96DUeyBRKlpS457CWUK2YAyhRcHoi/MY7w2sw6OySr+8H7h74wE/VlfFJDYomiXoHkM/1A8QgPTBs68DedHs2FsHi9nO2IF9JF35aqYk4hoxXPIceo3XIYfWhv/Pp91+G1kF/EZDx+zyf4N+fDoBI/KCIwj9EaMRCURadTbaxUZ5/ArOu0XE6e2NIP+zK1v9LMmAtZYshCxVdVRIxEuxCwXEUgg7LwgjQlla76u/ast4xGV4uTsScv8OVzlhqOmS3s8mnPeSf81lEdji5qZ1SD6OvGmPFkMwdUDxcoZaSxH1502s/ETgkenxm2KFxK2csA/OR4DSWXv6oP8n4OehvIX/SDPIss0
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 17 Sep 2026 12:13:58.4927
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dc8f70a3-282f-47dd-2f45-08df14b52705
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF000037A1.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5731
-X-purgate-ID: tlsNG-c201ff/1789647249-72AB72A1-42C6D0CD/0/0
+In-Reply-To: <8b73e1b3-0580-4ba9-b2e0-6363e429808d@paulmck-laptop>
+X-purgate-ID: tlsNG-4011c0/1789647303-50ACCCFC-D73F6C38/0/0
 X-purgate-type: clean
-X-purgate-size: 1793
+X-purgate-size: 2514
 
+Le Wed, Sep 16, 2026 at 08:41:36AM -0700, Paul E. McKenney a �crit :
+> On Wed, Sep 16, 2026 at 05:23:31PM +0200, Frederic Weisbecker wrote:
+> > Le Wed, Sep 16, 2026 at 07:55:02AM -0700, Paul E. McKenney a �crit :
+> > > Perhaps in rcu_core() in kernels booted with use_softirq?  I am thinking
+> > > specifically of the checks for deferred quiescent states.  I don't (yet)
+> > > see a need to modify rcu_check_quiescent_state().
+> > > 
+> > > Maybe other places as well.  ;-)
+> > 
+> > Hmm this tracking would have to happen on preempt_schedule() just like we
+> > do for PREEMPT_RCU. Or am I missing something? And then we would need a
+> > list scan of those tasks.
+> 
+> I am thinking of the case where a trampoline is interrupted before entering
+> (or after leaving) its RCU Tasks Trace read-side critical section.  Then
+> there is a softirq handler on the back of that interrupt handler, and
+> RCU_SOFTIRQ is invoked, calling rcu_core().  Specifically:
+> 
+> 	/* Report any deferred quiescent states if preemption enabled. */
+> 	if (IS_ENABLED(CONFIG_PREEMPT_COUNT) && (!(preempt_count() & PREEMPT_MASK))) {
+> 		rcu_preempt_deferred_qs(current);
+> 	} else if (rcu_preempt_need_deferred_qs(current)) {
+> 		guard(irqsave)();
+> 		set_need_resched_current();
+> 	}
+> 
+> Preemption is enabled, but we should not report a quiescent state because
+> we have interrupted a trampoline.  Correct?
 
-On 17/09/2026 08:57, Grall, Julien wrote:
-> Hi Ayan,
-Hi Julien,
->
-> On 16/09/2026 12:35, Ayan Kumar Halder wrote:
->> +static void __init expect_sgi(const cpumask_t *mask,
->> +                              const unsigned int *before, const char 
->> *what)
->> +{
->> +    s_time_t deadline = NOW() + MILLISECS(100);
->> +    unsigned int cpu;
->> +
->> +    for_each_cpu ( cpu, mask )
->> +    {
->> +        while ( sgi_count(cpu) == before[cpu] )
->> +        {
->> +            if ( NOW() > deadline )
->> +                panic("GIC selftest: %s: CPU%u did not receive 
->> GIC_SGI_TEST\n",
->> +                      what, cpu);
->> +            cpu_relax();
->> +        }
->> +    }
->> +
->> +    printk("GIC selftest: CPU%u: %s: OK\n", smp_processor_id(), what);
->> +}
->> +
->> +/*
->> + * "All but self" is only meaningful once every CPU can take an SGI, 
->> so it is
->> + * run by whichever CPU observes that it is the last one to get here.
->> + */
->> +static int __init gic_sgi_selftest(void)
->> +{
->> +    static atomic_t __initdata seen = ATOMIC_INIT(0);
->> +    unsigned int before[NR_CPUS] = { };
->
-> Sorry I didn't spot this earlier. NR_CPUS can be quite large (up to 
-> 16K). So this will blow up the stack.
+Right!
+ 
+> > Or we can build the blocked task list handling, that we already have for PREEMPT_RCU,
+> > when CONFIG_RCU_TASKS && !CONFIG_PREEMPT_RCU. We would just only add tasks when
+> > preempted in .text.rcu_no_qs since rcu_read_lock() would still disable
+> > preemption on normal explicit readers. So I wouldn't expect more overhead due to
+> > that blocked list tracking built since it would rarely track tasks.
+> 
+> Yes, we could avoid the list of tasks by treating the preemption within
+> the trampoline the same as preemption within an RCU read-side critical
+> section, but there might not be an rcu_read_unlock() to clean up.
+> Which could be a problem.
 
-As this is a test, we have hardcoded NR_CPUS = 4 in 
-automation/scripts/qemu-boot-selftest-arm64.sh.
+Ah yes, good point.
 
-If there are 16K CPUs, our test only checks for 4 cpus only.
+> 
+> Trampolines that transfer control to tracing code could supply the needed
+> cleanup call.  But last I checked, there were trampolines that transferred
+> directly back to the original code, with no opportunity for cleaning up.
+> 
+> Or am I still missing a trick here?
 
-However if there is still a concern ....
+You're right. So we'll indeed need to reuse the deferred qs points here.
 
->
-> There are two options:
->   1) Use static
->   2) Temporarily allocate "before"
->
-> I don't have a strong opinion on which way to go with.
+Thanks.
 
-I can use static.
-
-- Ayan
-
->
-> Cheers,
->
+-- 
+Frederic Weisbecker
+SUSE Labs
 
