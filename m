@@ -4,39 +4,70 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F6C1C982D7
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 20:12:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1425856.1649563 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6739CC982D7
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 20:29:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1425869.1649573 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7evg-0004r3-42; Fri, 18 Sep 2026 20:11:28 +0000
+	id 1x7fDB-0006me-I2; Fri, 18 Sep 2026 20:29:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1425856.1649563; Fri, 18 Sep 2026 20:11:28 +0000
+Received: by outflank-mailman (output) from mailman id 1425869.1649573; Fri, 18 Sep 2026 20:29:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7evg-0004qu-1H; Fri, 18 Sep 2026 20:11:28 +0000
-Received: by outflank-mailman (input) for mailman id 1425856;
- Fri, 18 Sep 2026 20:11:26 +0000
+	id 1x7fDB-0006mX-Ex; Fri, 18 Sep 2026 20:29:33 +0000
+Received: by outflank-mailman (input) for mailman id 1425869;
+ Fri, 18 Sep 2026 20:29:32 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1x7eve-0004qo-Pf
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 20:11:26 +0000
+ (envelope-from <dmukhin@ford.com>) id 1x7fD9-0006mR-Mh
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 20:29:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7eve-000F4A-6g
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 22:11:26 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x7fD8-00AMvM-Mp
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 22:29:30 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6aad9ad6-e002-0a2a0a5209dd-0a2a450c8966-20
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 22:11:26 +0200
-Received: from [209.85.208.181] (helo=mail-lj1-f181.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6aad9aed-f479-0a2a450c0019-d155d0b5a819-3
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 22:11:26 +0200
-Received: by mail-lj1-f181.google.com with SMTP id
- 38308e7fff4ca-3a49a40209dso13095811fa.0
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 13:11:26 -0700 (PDT)
+ (envelope-from <dmukhin@ford.com>)
+ id 6aad9ef7-8faa-0a2a0a5109dd-0a2a4508c7aa-18
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 22:29:30 +0200
+Received: from [148.163.143.241] (helo=mx0b-00498f03.pphosted.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dmukhin@ford.com>)
+ id 6aad9f29-f659-0a2a45080019-94a38ff11326-3
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 22:29:30 +0200
+Received: from pps.filterd (m0367128.ppops.net [127.0.0.1])
+ by mx0b-00498f03.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68IKF3Fj2733445
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 20:29:29 GMT
+Received: from co1pr03cu002.outbound.protection.outlook.com
+ (mail-westus2azon11010037.outbound.protection.outlook.com [52.101.46.37])
+ by mx0b-00498f03.pphosted.com (PPS) with ESMTPS id 4gsbr9rbgj-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 20:29:28 +0000 (GMT)
+Received: from BN1PR14CA0026.namprd14.prod.outlook.com (2603:10b6:408:e3::31)
+ by CH9PR16MB390768.namprd16.prod.outlook.com (2603:10b6:610:33a::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.13; Fri, 18 Sep
+ 2026 20:29:26 +0000
+Received: from BN5PEPF00046989.namprd02.prod.outlook.com
+ (2603:10b6:408:e3:cafe::8d) by BN1PR14CA0026.outlook.office365.com
+ (2603:10b6:408:e3::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.12 via Frontend Transport; Fri,
+ 18 Sep 2026 20:29:25 +0000
+Received: from mx0b-00498f04.pphosted.com (148.163.138.245) by
+ BN5PEPF00046989.mail.protection.outlook.com (10.167.245.38) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.8
+ via Frontend Transport; Fri, 18 Sep 2026 20:29:25 +0000
+Received: from pps.filterd (m0373461.ppops.net [127.0.0.1])
+ by mx0b-00498f04.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68IKCJcP566546
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 16:29:25 -0400
+Received: from smtp-us.ser.proofpoint.com (pmta-usw.ser.proofpoint.com
+ [34.209.42.160])
+ by mx0b-00498f04.pphosted.com (PPS) with ESMTPS id 4gnnc7ym46-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 16:29:24 -0400 (EDT)
+Received: from localhost ([19.12.76.222]) by cmsmtp with ESMTPSA
+ id 7fD0xDPVVDCvh7fD1xIEOs; Fri, 18 Sep 2026 20:29:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,338 +79,185 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1789762285; cv=none;
-        d=google.com; s=arc-20260327;
-        b=UlTreZ9Rz2TZlelQx3rlI3wBpj/j0XvQQKxZRc7yUP1ACyvhmBVdN/K6gcjD8+5KKp
-         w+bA5R7lGG+Fs+AtlUiXRR73I5f5DSNxuea4BmNNS+QNMxLcVLp6+xS4/ZjNr2YsoUx/
-         gMpVoe8JDldUDTJLIOTbJaBjzOI10NSFEaR2wc/ubTw+jZRC4D/1FTjQPvnK+HZ2oWvb
-         Y1aYLhN4nj4BH2GAKML23EYwHiIrKbN/Zk3SrCFy1+Z20orqFfOpxFHJGJH/kGl2FxIq
-         L/yBkKMVIs7pA5sOPlY9QtHQ2CTjmWFFqv2w04Z7eOJqVaRyXPr730RWdcnmxcCiuc6P
-         wn1A==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=RjXqA35r57hnuOa5Guy5jxZ/xx19lYaIb7I9ZDD1OL4=;
-        fh=8qrorWp5mU6HGMgfX45u2S7N0Hai0jOoVMQ5u+MxS64=;
-        b=iQGxcw3cjg1wKK8Bv2BlEO+GtzT18g3KGI9qRI+fPsndcb/PJTbiiDa+GVBg4C0hJI
-         IOeIxBMABRA/hEsxwLP+LYx2jBsiO8qQn3LoM0CKeH1B6AxNzO7BhkQTcrcYuHkGBa8f
-         9LTUYUL8DC9Unt1WOerqeV0opqPVt3KF2k+Mj3b92pLZgCY9ref/9gZzVNKO2C8A7p+X
-         +TVvGAUe0MFIY6EV/No2qVZW5nCc1iqervvSEZDkFMzfs8+z8p0etFo26ciy3rB2pUIa
-         tNSLh0IWGjmovWmIi2EOTRQG2d4Ipw0ZNefaWNpfcRnMh1Fm3u90GiGLc4YQT9Grl9cv
-         3q5g==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ppford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=fail header.s=selector2-azureford-onmicrosoft-com header.d=azureford.onmicrosoft.com header.i="@azureford.onmicrosoft.com"; dkim=pass header.s=ppserprodsaar header.d=saarlouis.ford.com header.i="@saarlouis.ford.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=ppfserpocford header.d=ford.com header.i="@ford.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=ppford; bh=ImK
+	ihgVYYeqtDgPRyVBS/ngR6EsgHV2ulJgp21CGLIs=; b=is/JIvjsyyPDLKUWLC3
+	okadhYt1LFUh4EQFI3UbfVnxtvf7SKj3I9Pnqa88eT5y2ne6vufvxPmaRMOBgQ0z
+	uUC2Tag6qAq2zHX7Z13J4cpXuRm6zcLNN4UuokS0pAebG+cbM1tlSQOCegjdn4vs
+	hi3vRe3a3+BLGofjRlSMXzRsnG4SKQhEno05v+q8NqxFGj65UxnsmSkDZMOVW9Ot
+	+gKiEh5lSa7WndfdKXc6Aborpv0ZSd8Oaie+ujY0aybf+VK1ly40xlgU42gz2ggT
+	Ul/dbTlWHd+Es0ZMXRsV5Bw74RtcHTAfWEoG6SMUruycyyd1u8EDvgKyRU0LabWE
+	LHQ==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KxSB42msDky1hLm4dFIZgWzzpP9TAFQoNaEz58XnWIRWy0eOFN1ka+BL9Ctg/oSu9p2SMu+Qk28u51y15mw0NRkoHl69wfyDACUQlZgqGO6yX/ItJ88ZBtBh7Oi3L4ng3rk4Xx8F2lnzXCOGpO2fbsUs7Y7Q4dWRLmmi1LH2JQ/6q44fUxFFjUt+6juYclRjR3ONhNZjgnv2F4PXhDPf8oKm/bGC+iNIkhxJ0zwLqW9OCS/YJxDaGOoSxHMQ4ErE0GC1MuBGtNU7eKfFawbx5dNmiNAJlamUfjG4h0BpHXEf3HqPkxvKHOs3R7nkyx1SylBcPS4FNdMrzZ0hhtmx5A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Bv7kxj4BdMlu+VZ2+qb8knG7rLAwHsxaH+hgEYah3dc=;
+ b=AOET3tnp2ZOPGtdT/+FisPsy88F8gcqEUPtN7YpQgc7G/Ft08Y5r7/7EGoSgd8AqwrN7TrjWl7L+C9W/jDjPMU5zHz60gy20YdLtG5B7GhXRGLXZ8uJJXQH1+w46HLhgZr2VI+hYbMvEwwvQjYu7f9t5wTd6evA6ex0BDnZCf+LM9aK4p9A5h92jZr8MG550RL0Xax49TdlaGwewxqg4PyA9EFOQ9zcYAbTTn+u7CmejawIrY1GpuNePS/sP7QS8ACnFemXYBpwHRR+9C9UYien8AD5RK85n3RNiehGPR59y/vBBKRFjtALdJOVhV/k+H8QkKo3JRSxtUArXjzw4yw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 148.163.138.245) smtp.rcpttodomain=lists.xenproject.org
+ smtp.mailfrom=ford.com; dmarc=pass (p=reject sp=reject pct=100) action=none
+ header.from=ford.com; dkim=pass (signature was verified)
+ header.d=saarlouis.ford.com; dkim=pass (signature was verified)
+ header.d=ford.com; arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789762285; x=1790367085; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=RjXqA35r57hnuOa5Guy5jxZ/xx19lYaIb7I9ZDD1OL4=;
-        b=TnFHH8iTEYNBa+vb179BavuFFsG2UxxXO9VLu8ofzkqyQIycWDv+fg5hrxZIaNScnF
-         T1+o/dLYDr4Ps0a8PtrIJ5tuyCCXq9NLuM8maIOnOTq8fZ/sx2cIlEjYISd1BOCGy5hE
-         fcLk16C4/+9o2RwFUROmcre7bCtDkHWSeQY9+hyeov/y+EULNmjgVPsgZmOIIX1c1b07
-         15qWtFo0NT8dL34iEQ2WIRR2A187l/RP8aAnl4X3L//Qm7jlMNK9chmUkiCFPDVgUe95
-         mFxO3J07NIFNRulE9wdj7k1rVTn9kuzO62627c4dtMj20FYpDY8gwO5lXciQ0G0rK7lj
-         cZFQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789762285; x=1790367085;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=RjXqA35r57hnuOa5Guy5jxZ/xx19lYaIb7I9ZDD1OL4=;
-        b=ZEvMVhv6g4uE8LIRwmys+47p5BAlb62BhWnje8gIiV/WnxfpqZHRBE31+OQdV+sK4F
-         UrjAw+THff0CrgEVLllZpAkwKijPUzj75ba8sBqukahFB7daDyWY/aasNKq/5jQbcJhA
-         UgsDwqyyyGumxr7xvYrNCSvty5z7F4d+spHtWa3vZRHknIt4FjL+SuYlwK8WwDXeC6SP
-         saQ9PFday1Y/tHxlBXpiKktdgSMcinqfFUagAVPyvd2pk8u12eO3CQmZDvixOAK/w520
-         k95vEBc15+f1SYyNzQP34dswm0dyVMpEfH8hxS6r+D3U2K//YrFIWIYfjTOxxYRMGEgj
-         yDGw==
-X-Forwarded-Encrypted: i=1; AKwUvBwSYlAGfEmOiUPlZDf2Bj/LRAx9TWxgftpNZJ4+NuVcbM3MHSonqcJiSHL3qLbLZZL5ypNGU1OBDzQ=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mMWrqxhyTD93AeojwfcpHO8nu9B7xiV6Udp0sHnbJB4fhAFtCY
-	WrqHUw5c5GkT59xzkKCZDIp2pCeU4EJ3LUZi/9NsBQXiOIFG3NqgeFPOlVtWmH5+J9YURAAI7m7
-	O6KuwvDuTX7Vmp71i894sV0NE2vz5ia0=
-X-Gm-Gg: AYBFou3+gPGbgignZJIPFnzZLrDPyX+xp+rSYuD4wnWxsr2AgwKTH1/ybJtcxGtruBA
-	KNz3lKJq7ihpC//tWuFkuAhM/LAq/9trT7GiHlmosWawPkDjIkJqqsZb8KwiCMeaGTW9U2LMnW+
-	Pg2uRhGRn/Xi+3czRB9nYVjtwcEO4KLhDUEKYNTSq1RB0+iYEE8HBEcivgMmd4c464qGQ+TU6Bs
-	K8jWaSvzYdoOSoT4A2SPKU2I7hFQZqGx59IVsPWltm4dJvGoDESiWAQGTd5OFh9CPT94Qt2ywUF
-	Ge4zI2bnTIv2F8Lq53SIWc1L3oFcvWirpmESRdaecWBq1hUDOr/EYZEM
-X-Received: by 2002:a05:651c:a332:b0:3a4:8e54:562 with SMTP id
- 38308e7fff4ca-3a5e72887c0mr23728131fa.7.1789762285055; Fri, 18 Sep 2026
- 13:11:25 -0700 (PDT)
+ d=azureford.onmicrosoft.com; s=selector2-azureford-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Bv7kxj4BdMlu+VZ2+qb8knG7rLAwHsxaH+hgEYah3dc=;
+ b=I5kh59X5Vjxu84+kd0PhRanXcNoT5Fg8wlCvDGHpeg69DqYYKMa4OJAQFhttFGSPSNXi/Ox3PAKLsFpdyJdxAECGOAzUZ8PJM6OshMgl8TrGVXd8KwPPaVzwZDD7Tsr6mWkV6jdr6vMxYsgCgwKDjvjyj0E1+dqF8PoZEn0O7bk=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 148.163.138.245)
+ smtp.mailfrom=ford.com; dkim=pass (signature was verified)
+ header.d=saarlouis.ford.com;dkim=pass (signature was verified)
+ header.d=ford.com;dmarc=pass action=none header.from=ford.com;
+Received-SPF: Pass (protection.outlook.com: domain of ford.com designates
+ 148.163.138.245 as permitted sender) receiver=protection.outlook.com;
+ client-ip=148.163.138.245; helo=mx0b-00498f04.pphosted.com; pr=C
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	saarlouis.ford.com; h=cc:content-transfer-encoding:content-type
+	:date:from:in-reply-to:message-id:mime-version:references
+	:subject:to; s=ppserprodsaar; bh=ImKihgVYYeqtDgPRyVBS/ngR6EsgHV2
+	ulJgp21CGLIs=; b=hfdZ/06Uxg+X1sZkUFXru9OBYNh3h1B8bPEVsQFJrdu2JG+
+	vc1ICdfk/p0L67gW9/uNdo3lfmAZPSlfY/gZXnEG/vvWk/atU0todUwXkVrRfYjh
+	SedIBH/u/YwSujaWPOLM2LDdrGjffk8AxXg+DsqZRZXny6QmoF4b+kSfiYXTE7DD
+	VIHXL9t8M1O+t5NuRUMwaKNDUh3ZyASghtJ3MWfDwoKRZ6Li3DDwd+l3pzgvqSYh
+	pUKI+9HsyHNHH3YHD+YwUBp3TdFMqfw5fadBL3/WfeGMRxLUECo+KjCozU0ekSJw
+	HTbmW3d0SPPsgf3lBliDjjklF1bsUobVGqZgNxg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ford.com; h=cc
+	:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=ppfserpocford;
+	 bh=ImKihgVYYeqtDgPRyVBS/ngR6EsgHV2ulJgp21CGLIs=; b=S9SePF5mu2/9
+	WZ14rPKO6rGW+VT14OFrDuuMIsm/7noA6m+XZHmKMMjLDroQmG0gjH6sa9/98onT
+	m6DXILgAlv9MS59is0d7cVzkqTQrbNCuancTy+8fHRLhPBy3dsNEVJftktxAktUa
+	373K9yXZACw+W/Jl3Dj1bFFAU5e7PMSQY49bTX4N5novXEcq/+e2OCgUh3vynLSC
+	BlIpLsg8g4zvasXH4UEgQ+EY/eHteIIA9/iNL46xBEfb59a0QiurKyOp19r0WFxN
+	D2KNUvqMYDtkrNTVRsHIkJYc+Ce9roJY+wyE2R/r0m26AUp9pi4YSyGpGs1+GZuA
+	31gKzs7UmQ==
+X-Mailer: SER-76bead168636dc6ed1c9e51ce4dea80dbdd4163750742b614a4d871e565792b7
+X-Cloudmark-MID: 7fD0xDPVVDCvh7fD1xIEOs
+X-Proofpoint-CID: eb09f7eb-2dc2-34ab-a188-7b293c1db1fe
+From: dmukhin@ford.com
+Date: Fri, 18 Sep 2026 13:29:22 -0700
+To: Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>
+Cc: Denis Mukhin <dmukhin@xen.org>, xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: Zen5 runner access
+Message-ID: <aq2fIjkLvcDq0i9m@kraken>
+References: <aq0nXDnJ5PX5uiW2@mail-itl>
 MIME-Version: 1.0
-References: <cover.1770046465.git.mykyta_poturai@epam.com> <AC263D87-9EE3-4F32-BC5D-1A290781C48B@arm.com>
- <CAGeoDV_a-tUGrQai8+VzQwwGHSGwbJ04Y6uWg-pr5mVi52dsaw@mail.gmail.com>
-In-Reply-To: <CAGeoDV_a-tUGrQai8+VzQwwGHSGwbJ04Y6uWg-pr5mVi52dsaw@mail.gmail.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Fri, 18 Sep 2026 23:11:14 +0300
-X-Gm-Features: AcwNN1V_KbA5WvJDMDtxQRX4T9C_CIgIZ4qrzFv_OucX5rM4pnYoOhtBfvIduYM
-Message-ID: <CAGeoDV_CFMC1w2o+5BdDW7u7f2iCP0S4s-7EMokgLf6r_7zKjQ@mail.gmail.com>
-Subject: Re: [RFC PATCH 00/19] GICv4 Support for Xen
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-Cc: Mykyta Poturai <Mykyta_Poturai@epam.com>, 
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, 
-	Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-d25034/1789762286-00ECAA5B-12A38958/0/0
+Content-Type: text/plain; charset=iso-8859-1
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <aq0nXDnJ5PX5uiW2@mail-itl>
+PSER-M365-App: SER-APP
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-18_06,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 bulkscore=0
+ phishscore=0 adultscore=0 spamscore=0 malwarescore=0 suspectscore=0
+ lowpriorityscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609180294
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN5PEPF00046989:EE_|CH9PR16MB390768:EE_
+X-MS-Office365-Filtering-Correlation-Id: b417992f-3c80-4fcc-34e8-08df15c38827
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|82310400026|1800799024|23010399003|36860700016|56012099006|11063799006|10067099003|18002099003|22082099003|13003099007;
+X-Microsoft-Antispam-Message-Info:
+	ROgu/QCGJYGwAo0FAwSyhqVq+R/Keum0eTI1iEkRQSshzW2sP6W2f/TTf0MyP9fTbJtmehpE6zfF+jGnh5QtDICFqlap+/GQPOutAfUj81nzkCDfB+BxHTYbtmjhY6cqBRnJLYAEaPHjKEWnhxqQaSbBM+xcAwPCJZBdOTXSz9KlWs0K1V0pacxPMDOywak19A7Dd183g3sgH28khj8gAtjokGFcPNoljm2rfPBmgqTEUs5QC8pNtcBQjfzXKI1jN/yQVDlNZeVlJo5ryS7O8xQDLBs1MwXgFipy+64b4IbXNetsmUsCPEItNQ3Lr8+FrGBjN5pugD2Hw/ztgwo/66tO2sb7YHkRvUjv8lUbIc+9ocevhUjd/tB3U0exkvXkBfxdlsRPy5wU0JLVUvLwE3CrUGuzf5pWc5SUFfkbBRU73CDL2bdpw/ATnMaEvIY9yOuuLMSB9HKapHRycus2S0IHB3Om2YHg97BtKeNYIfBvtijZTv3yWoVhUYczuQ9M3eU17caiKoXyaomQd2FJD/oZ+6rBiWxXNDPlQN+fU3KMmLP1mG4hywj+c+Q29ryrG08yjIF+myhoyUBDH5E5WloLwIiaKermzBETnQ7xe81NatWSJSMFpDMG15edFNNdjDv/BhD8kuS5aZLDDirNyoNIPHRO3PnsyCHeYo2xzKtqopxzqGjGSLMlHdoAxkxlx01CV/LWzY590zDpEJHpvw==
+X-Forefront-Antispam-Report:
+	CIP:148.163.138.245;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mx0b-00498f04.pphosted.com;PTR:mx0b-00498f04.pphosted.com;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(23010399003)(36860700016)(56012099006)(11063799006)(10067099003)(18002099003)(22082099003)(13003099007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	kcfkMpk9Vzcy9Uh/MO0laODw/iIP9r9IApYz7QAHoXjDDE5knnxuPCcdbdEqSD+P38VgMA6J6JVBoZFrqu2Omgygi/Svy5NxqLHXSn0wZ5h/xKSuWQtAbmQKtYup5qChCLDGrXXSqr7NJN/+j8gIinbhIH2mY0P+MjOztNtopqCZ/L9PD0zSMk3JxdT5V+M6/66RWMLu83VF4kJ13NkM/p2UFIpM5xRcZ4/e/7zBiTR9CNH0C7TyGHRYBNYkNOv0XKNNyzJG4Vo1TL0Bwxurz5/7qAjeLG6Pa6O9UzLu8Z5fB6Xw5f87Ph82nIKT9dVS6ogv01tdgTYkaisqeOQCToChxS4vBbJqY67HZ6Hcw42Jicapo6o6mHaFvS06ee9EUqvV88LIbu3HJnNorDrZuFiMqJG77aAxuf8a0x2f2rRTJkLPXgh6KArIdR1XTLfH
+X-Exchange-RoutingPolicyChecked:
+	iy7+Gb1TpEEzLL5fox0C4BSV/aTApMp2pR7/0/hX6XX+4PWguXhPJ7hh7FMdvgZypbtsCdUx1m1ufsxBJil77Cz3e2Vx8vxFVv9gb1LmxOBVT1i50CYQWVPC3axcKyXVF7PK+1kOgWjsMKuvB1OVTu1YrWY5+sOZxlLFIxB2X8SpVbffXV/bW7QcU0F/fWe+2j9IVu3k6BAvbN6MgcgB1vQEP/buQ7NCtYwg4WQ29u91uZ/KLxD4I8q/G5ANbXJIsBNDO6jUiBEygTafVKBSGOyvsZRddtE6bxEZN00MrlmrrDRyYv2ANx3L9yDDbu2rErNl9WNW/gPKNkuFAapMIA==
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-ExternalHop-MessageData-0:
+	L6+Ninu/VHD73gu8MUOrMsxv9PMyyb8AHxw+AZD39RSLnXxLCFRdAYgalvdNIpO3rqReri7OHUJ+8SevnnN5kMtDNSvrvozn3tIGNA4W+wepEg0GUSD1Wic/9i3HSj4HORFL4tlEddEboCdsxJeuV9NKkx2n6CyUWnN5ta9SP6juVU53+xo3raMyn6xDTjFTA99Vv3CQIniCTDxCHMN+aKZ6fPsiSQkWNXqye4wcMDjRfzNk0I5L34faprRyOQNaZkC41kt3WucVPEQDGegXzGf7I1O9baCCpKszGal4xY3LlgPTBzqjxhiURZTa/YR0L115k9GWDGR5lLFF580pvh/Ltjam8Rw5bfl+9Uf2JEpvlYwm5RJqhAEGpZ42ALLNewKXbRks0xv+RSAR455ZqNzDdJmmiVl+wRnbbWkqeaGl9Mz7cI3rehp+ZVRv/8t+U3jPQN5Wk+SxPYQA6ziylYgFA6wjUWlr5il99nh/wswCEUWJl2QkAcUQ9l2b7kt2j6m/UF3A+M6NM4C2DDGuykMfQq138PgkxyMhy7bNrpq6G+YO2UAao8UJDEcE8HSukdMPMu2i0lLRJdvQrhVIPJtbAn+8hgU23aLb3BTcnxQQqkgX8/p8aVKWKBHgRxwzqsZXlBnFTluAXd13oI3l/Q==
+X-OriginatorOrg: ford.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Sep 2026 20:29:25.6104
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: b417992f-3c80-4fcc-34e8-08df15c38827
+X-MS-Exchange-CrossTenant-Id: c990bb7a-51f4-439b-bd36-9c07fb1041c0
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=c990bb7a-51f4-439b-bd36-9c07fb1041c0;Ip=[148.163.138.245];Helo=[mx0b-00498f04.pphosted.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN5PEPF00046989.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH9PR16MB390768
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDI5NCBTYWx0ZWRfXz+zwOSfKMFXm
+ Ni5Rc7bjv3KEJQAnJz46D562vmVEb++Fh6h+ika1/UrEUhuGi/Oz89FVnsIguTIa1AUROR4tLwD
+ meAUcqMaSD6Gli4BtybHohDgzQnHySZ4QZODvrtgW+SMG03Ofhfi
+X-Proofpoint-GUID: uTDC2Wavo4i7LUIpyQfpMQFoZ9lodQYA
+X-Authority-Analysis: v=2.4 cv=E5dYNqdl c=1 sm=1 tr=0 ts=6aad9f28 cx=c_pps
+ a=gjcLB77VbSPYcqvaeYBpgA==:117 a=b7IhknPlfT0FN1EembXvig==:17
+ a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19 a=8nJEP1OIZ-IA:10 a=VdqzKS8jKosA:10
+ a=3PXLN80vpJUA:10 a=6NUGLSImWEsA:10 a=w9pew1qAHqMA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=P_n1zlmtWsCQbjROFjcg:22 a=WER9OelvoqQQjwJToBYG:22
+ a=p0WdMEafAAAA:8 a=NSgd35z21Kgu57nUP4gA:9 a=3ZKOabzyN94A:10 a=wPNLvfGTeEIA:10
+ a=P0bj-C3X3jJDpopQwM1U:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDI5NCBTYWx0ZWRfX9DAqyHCwzO2R
+ ljB/VC3ArVcj75ypZSLnCGcidxRhQ+cXI3xIkXifmsknQEqeiU3FlWy8uWWkgWBSowPMJ0HWX48
+ Ghg8DFeC3CGp+WBYe3MrkTBQUcR8yWLw+QI46DDH1BQixv40+MhTqx0Go3pQcEdn4hI91LuBTYF
+ M1RG0IM++amHwB6daUVBGsT1oPvY7s/zcrCegec8FL6I2iP9qjMTzKB/KQYPGVhINcq5eAsUs7M
+ V7Gi/civHFirrvcxviXHmQ9X/TWATUOBvexEODROW0OAtTj1wmgzYMtS6uWGeg+F8+EJ7wirqe5
+ LQR+1/fjBABkYzd+T1z1V2lbJYgP676rlGGPg1F4G4Gr09xKglscoVj0MSvuxLpDmmo0s255cER
+ ipJ/xfa/o444sUgkEIQK20bW8+jlc6kBNvBJyRSi9b8gaopFu1FxJMORdBr65CFphAsA9oH1Tr7
+ dvGVn5K99HA95tGsuAQ==
+X-Proofpoint-ORIG-GUID: uTDC2Wavo4i7LUIpyQfpMQFoZ9lodQYA
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-18_06,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=notspam policy=default score=0 clxscore=1015
+ impostorscore=0 adultscore=0 phishscore=0 bulkscore=0 suspectscore=0
+ lowpriorityscore=0 priorityscore=1501 malwarescore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180294
+X-purgate-ID: tlsNG-c1860d/1789763370-CCB7187B-0F5DA67F/0/0
 X-purgate-type: clean
-X-purgate-size: 9942
+X-purgate-size: 1222
 
-Hi,
+Hi Marek!
 
-Following up with another round of tests for this RFC. The posted
-series covers GICv4.0; I tested an expanded version with additional
-patches for GICv4.1 on AWS c7g.metal.
+Thanks for help!
 
-The extra patches add GICv4.1 ITS commands, vPE table and residency
-handling, default doorbells and direct vSGI delivery, plus
-interrupt-state fixes. The results below apply to this extended
-series, not to the posted RFC alone.
+On Fri, Sep 18, 2026 at 01:58:20PM +0200, Marek Marczykowski-Górecki wrote:
+> Hi,
+> 
+> After some debugging, the AMD Zen5 gitlab runner seems to be working
+> now. You can add it to your repo by going to
+> https://gitlab.com/xen-project/people/dmukhin/xen/-/settings/ci_cd
+> Runners -> Other available project runners and add hal9021 to your repo.
+> This relies on temporary access I granted you, so you need to click it
+> in the next two weeks.
 
-Source branches:
-  Network OFF/ON: [1]
-  Network BASE:   [2]
-  NVMe OFF/ON:    [3]
+I have added the runner to the project, it shows up in
 
-Additional patches after the rebased GICv4.0 part: [4]
+  Runners -> Available project runners
 
-Workloads run in Dom0 with Credit2 and iommu=3Dno. Within each test
-series, OFF and ON use the same Xen binary with direct mode disabled
-or enabled. Network tests also include a matched BASE build without
-the series. All network builds have CONFIG_DEBUG disabled. The
-network sender is c8gn.4xlarge.
+> 
+> Then grab top commit from
+> https://gitlab.com/xen-project/people/marmarek/xen/-/commits/automation-hw21
+> that actually defines some jobs on it - edit it to your liking to run
+> tests you want there.
+> 
+> And then, you can also select which jobs to run while pushing stuff to
+> gitlab, for example like this:
+> 
+> git push gitlab -o ci.variable=SELECTED_JOBS_ONLY="/zen5-.*|alpine-3.24-x86_64-gcc-debug/"
 
-ON versus OFF:
+I picked up new zen5 jobs, but looks like I need some other permissions
+as I cannot schedule on any hardware runner.
 
-- NVMe: peak IOPS are unchanged. Scheduled Dom0 time per I/O falls by
-  4.2-6.1%; handled Xen IPIs fall by 98.2-99.7% at total QD64.
-- UDP4: received PPS is almost unchanged; scheduled Dom0 time/GiB
-  falls by 7.6-10.0%.
-- UDP8: received PPS rises by 1.7-12.9% at the same offered rates;
-  scheduled Dom0 time/GiB falls by 16.8-24.0%. The PPS gain is
-  subject to the CPU0 interrupt-routing limitation described below.
+All jobs are deployed on qemu runners only for my gitlab account.
 
-The UDP tests use 64-byte payloads at total offered rates of 800,
-896 and 1000 Mbit/s. The PPS differences describe packet delivery
-at these rates, not a measured increase in maximum sustainable PPS.
+Thanks,
+Denis
 
-The UDP8 PPS gain needs a qualification. In BASE/OFF, all recorded
-physical LPI-handler entries occur on pCPU0, even though guest IRQ
-handling is spread across vCPUs. At a total input of 800 Mbit/s,
-vCPU0 accumulates about 30 scheduled seconds in a 30-second trial,
-and its flow receives only about 8.7 Mbit/s in OFF out of the
-requested 100 Mbit/s. ON receives almost the full rate on that flow.
 
-This is consistent with a CPU0 bottleneck in BASE/OFF. The PPS gain
-may therefore reflect relief of that bottleneck, rather than only
-a lower cost of injecting each vLPI. =D0=A8 have not tested OFF with
-physical LPIs distributed across CPUs, so we cannot separate these
-effects. The result applies to the tested configurations; it is
-not an isolated measurement of the direct-vLPI speedup.
-
-There are also limits and worse results:
-
-- TCP throughput is almost unchanged. Actual generator TX queues
-  differ from the requested placement in 15 of 18 trials, which
-  limits CPU-cost comparisons. TCP1 ON has more IPIs.
-- Storage tail latency changes in both directions. Some normal ON
-  trials have more long completions. The four-volume sweep has a
-  maximum completion time of 26.8 ms OFF versus 62.5 ms ON. A separate
-  ON contention trial has a 1.050-second outlier. Their causes are
-  not established.
-- The shared-CPU contention test stays near 100 IOPS in both modes,
-  with about 100 ON worker doorbells/s. Separate GICv3 FVP tests
-  using virtio storage show sensitivity to CPU/IRQ placement. They
-  are supporting controls, not a direct comparison with AWS.
-
-The report covers 96 NVMe, 72 Xen network and 18 native UDP trials.
-The network tests and each NVMe queue-depth sweep have one boot
-per mode; the initial NVMe pairs also differ in CPU placement.
-Repeated trials within a boot do not measure boot-to-boot variation.
-
-The CPU figures measure scheduled Dom0 time, not total host CPU
-use. NVMe CPU ratios cover the full sweep and include completed
-I/Os from both measured trials and warmups. IPI counters measure
-handled events, not the time spent handling them.
-
-These results provide performance evidence in favour of the
-extended series, mainly lower scheduled Dom0 time and fewer IPIs
-in the NVMe and UDP tests. They do not show gains in every workload
-or replace correctness and maintainability review.
-
-The report [5] includes the detailed results and limitations.
-The same repository contains raw logs, statistics and test scripts.
-
-Best regards,
-Mykola
-
-[1] https://github.com/xakep-amatop/xen/tree/gicv4-bench-v3
-[2] https://github.com/xakep-amatop/xen/tree/gicv4-bench-v3-base
-[3] https://github.com/xakep-amatop/xen/tree/gicv4-bench-v3-nvme
-[4] https://github.com/xakep-amatop/xen/compare/c368b2ece40787d3fa333b1b824=
-e0dc89dd585c9...2b54d02e5bb6c038396c8aae5bd9dad00cc3697e
-[5] https://github.com/xakep-amatop/giv4-benchmark/blob/v3-benchmarks/repor=
-t.pdf
-
-On Tue, Mar 17, 2026 at 11:11=E2=80=AFAM Mykola Kvach <xakep.amatop@gmail.c=
-om> wrote:
->
-> Hi Bertrand,
->
-> On Tue, Feb 3, 2026 at 12:02=E2=80=AFPM Bertrand Marquis
-> <Bertrand.Marquis@arm.com> wrote:
-> >
-> > Hi Mykyta,
-> >
-> > We have a number of series from you which have not been merged yet and
-> > reviewing them all in parallel might be challenging.
-> >
-> > Would you mind giving us a status and maybe priorities on them.
-> >
-> > I could list the following series:
-> > - GICv4
-> > - CPU Hotplug on arm
-> > - PCI enumeration on arm
-> > - IPMMU for pci on arm
-> > - dom0less for pci passthrough on arm
-> > - SR-IOV for pvh
-> > - SMMU for pci on arm
-> > - MSI injection on arm
-> > - suspend to ram on arm
-> >
-> > There might be others feel free to complete the list.
-> >
-> > On GICv4...
-> >
-> > > On 2 Feb 2026, at 17:14, Mykyta Poturai <Mykyta_Poturai@epam.com> wro=
-te:
-> > >
-> > > This series introduces GICv4 direct LPI injection for Xen.
-> > >
-> > > Direct LPI injection relies on the GIC tracking the mapping between p=
-hysical and
-> > > virtual CPUs. Each VCPU requires a VPE that is created and registered=
- with the
-> > > GIC via the `VMAPP` ITS command. The GIC is then informed of the curr=
-ent
-> > > VPE-to-PCPU placement by programming `VPENDBASER` and `VPROPBASER` in=
- the
-> > > appropriate redistributor. LPIs are associated with VPEs through the =
-`VMAPTI`
-> > > ITS command, after which the GIC handles delivery without trapping in=
-to the
-> > > hypervisor for each interrupt.
-> > >
-> > > When a VPE is not scheduled but has pending interrupts, the GIC raise=
-s a per-VPE
-> > > doorbell LPI. Doorbells are owned by the hypervisor and prompt resche=
-duling so
-> > > the VPE can drain its pending LPIs.
-> > >
-> > > Because GICv4 lacks a native doorbell invalidation mechanism, this se=
-ries
-> > > includes a helper that invalidates doorbell LPIs via synthetic =E2=80=
-=9Cproxy=E2=80=9D devices,
-> > > following the approach used until GICv4.1.
-> > >
-> > > All of this work is mostly based on the work of Penny Zheng
-> > > <penny.zheng@arm.com> and Luca Fancellu <luca.fancellu@arm.com>. And =
-also from
-> > > Linux patches by Mark Zyngier.
-> > >
-> > > Some patches are still a little rough and need some styling fixes and=
- more
-> > > testing, as all of them needed to be carved line by line from a giant=
- ~4000 line
-> > > patch. This RFC is directed mostly to get a general idea if the propo=
-sed
-> > > approach is suitable and OK with everyone. And there is still an open=
- question
-> > > of how to handle Signed-off-by lines for Penny and Luca, since they h=
-ave not
-> > > indicated their preference yet.
-> >
-> > I would like to ask how much performance benefits you could
-> > have with this.
-> > Adding GICv4 support is adding a lot of code which will have to be main=
-tained
-> > and tested and there should be a good improvement to justify this.
-> >
-> > Did you do some benchmarks ? what are the results ?
-> >
-> > At the time where we started to work on that at Arm, we ended up in the=
- conclusion
-> > that the complexity in Xen compared to the benefit was not justifying i=
-t hence why
-> > this work was stopped in favor of other features that we thought would =
-be more
-> > beneficial to Xen (like PCI passthrough or SMMUv3).
->
-> I have been asked to run benchmarks for this series, so here is a short
-> update from my side.
->
-> Test setup:
->
-> - AWS c7g bare metal
-> - Linux bare-metal reference and Xen dom0 runs
-> - fio random-read workloads on an NVMe-backed EBS volume (gp3, 160G, 80k =
-iops)
-> - Main workloads:
->
-> - 4k, iodepth=3D1
-> - 16k, iodepth=3D1
-> - 4k, iodepth=3D4
-> - 4k, iodepth=3D1, numjobs=3D4
-> - 5 repetitions per configuration, looking mainly at median values
-> - Main Xen comparison was done with the default scheduler (credit2),
-> direct LPIs OFF vs ON
->
-> Summary:
->
-> - With credit2, enabling direct LPIs gave a small but repeatable IOPS
-> improvement across all tested workloads, roughly in the 0.8-1.1% range.
-> - Mean completion latency also improved consistently.
-> - The clearest gain was in tail latency. In the 4k randread,
-> iodepth=3D1, numjobs=3D4 case, p99.9 improved by about 41% and p99.99 by
-> about 34% with direct LPIs enabled.
-> - In this setup, switching from credit2 to null did not materially change
-> median throughput, so the observed improvement appears to come primarily
-> from the interrupt delivery path rather than from the scheduler choice.
->
-> A few caveats:
->
-> - This was a low-contention setup with only dom0 using 8 CPUs, so it did =
-not
-> exercise heavy VCPU migration or scheduler pressure.
-> - I also tried an artificially constrained NVMe host queue depth
-> configuration, but I am treating that only as a stress/control case and
-> not as the main result.
->
-> A full benchmark report is available here:
-> https://github.com/xakep-amatop/giv4-benchmark/blob/main/report.pdf
->
-> The same repository also contains the raw benchmark result archives used =
-for
-> the analysis.
->
-> So, based on these measurements, there does appear to be a measurable
-> benefit from direct LPI injection, with the strongest effect showing up i=
-n
-> tail latency rather than in median throughput.
->
-> If you need any additional benchmark results or specific test cases, plea=
-se
-> let me know.
->
-> Best regards,
-> Mykola
->
-> >
-> > Cheers
-> > Bertrand
-> >
 
