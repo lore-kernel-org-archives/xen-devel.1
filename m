@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 45831C982DF
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 14:50:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1425514.1649500 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A4F4C982DA
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 14:50:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1425520.1649510 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7Zum-00089q-KA; Fri, 18 Sep 2026 14:50:12 +0000
+	id 1x7Zup-0000Fu-TQ; Fri, 18 Sep 2026 14:50:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1425514.1649500; Fri, 18 Sep 2026 14:50:12 +0000
+Received: by outflank-mailman (output) from mailman id 1425520.1649510; Fri, 18 Sep 2026 14:50:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7Zum-00089d-E4; Fri, 18 Sep 2026 14:50:12 +0000
-Received: by outflank-mailman (input) for mailman id 1425514;
- Fri, 18 Sep 2026 14:50:11 +0000
+	id 1x7Zup-0000FE-Ol; Fri, 18 Sep 2026 14:50:15 +0000
+Received: by outflank-mailman (input) for mailman id 1425520;
+ Fri, 18 Sep 2026 14:50:14 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1x7Zul-0007jO-12
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 14:50:11 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1x7Zuo-0008PH-2F
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 14:50:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7Zuk-00H86X-Dy
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 16:50:10 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x7Zun-00H86X-Ev
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 16:50:13 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aad4f95-bab6-0a2a0a5309dd-0a2a450c97a2-30
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 16:50:10 +0200
-Received: from [74.125.230.140] (helo=mail-qv2-f12.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aad4f8a-bab6-0a2a0a5309dd-0a2a4504a334-32
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 16:50:13 +0200
+Received: from [74.125.230.204] (helo=mail-qk2-f12.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6aad4fa1-f479-0a2a450c0019-4a7de68c96db-3
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 16:50:10 +0200
-Received: by mail-qv2-f12.google.com with SMTP id
- 6a1803df08f44-910704e63a9so3889226d6.0
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 07:50:10 -0700 (PDT)
+ id 6aad4fa3-b57f-0a2a45040019-4a7de6ccf00b-3
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 16:50:12 +0200
+Received: by mail-qk2-f12.google.com with SMTP id
+ d75a77b69052e-52fb76ef19aso7956491cf.2
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 07:50:12 -0700 (PDT)
 Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
  [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-9125802d79bsm13900886d6.24.2026.09.18.07.50.06
+ d75a77b69052e-532aac41311sm5612191cf.10.2026.09.18.07.50.09
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Sep 2026 07:50:06 -0700 (PDT)
+ Fri, 18 Sep 2026 07:50:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,51 +55,51 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1789743009; x=1790347809; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1789743011; x=1790347811; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=z+PbvTl7j6crAVqwwSi1N6wOs6bBuNm88XPaAXlYwG4=;
-        b=sXcL3pFGVgeuE0lXG7/9XBlY3HQ6gJKvg/8Cc9C2cksY/3BQejrWKQVq71UmsJcDu4
-         CP0Pdmso4SjOcKtX3/gJYP2BN3uRYxe9+0Hw6MtTA1bKV9hjeQJ30vmGcAEmpWhYDNyl
-         U+fN0GnGjLw0XH/x6L3oKEpkAlVI2nv8Oz3LIi1CeuaE4e9Ie1AZ7Hy8s5e2tW1t8lnS
-         kG7i0kNUuW8nNvUVvYlgdsxw9NtKVhLZiZWIbDry8yTXfz18FcNnZOEixj2UqysuaU5w
-         9J5ffXJWSFKjE7cyqhmaCQ8ZLkscQ97E72/7DPxA1m4rSNQYtIkrY9Tdt6bWjuBF4wFL
-         0BIQ==
+        bh=A8c5rUXaTXu9B0UqDL2lNbjmJqabE8+fQOLsAHyr+Co=;
+        b=RrtbBLuO81ggjT/jg5rcGpFCBb1wap4lt4eXzYssx9gOx7qVYHx84f8IvvVH1C2n3v
+         0J1H4hsfijtC7dNtXattJ5A6krhl8fKegVIFA23L+QL5B8Hfj62ICcKGUgWgLFARS06d
+         C7HqyvzRottBa7PMJew8i6x2j9ihU43a4Py1ku8p9X3+4U3HNyGtpQZ9VC91ACBIYRCR
+         oRbSVXFJk0dLNXKVuqsYDwsQBJrUQ+X7o93FL554ayaoQsjZg1Tw6AYnIvs4AjmhPOYJ
+         fQGySwmYTXTcfW/h485ZLE8ehGAG25PCpzQX79lDWKeBoA+VJ3tpKUre/YUSV0udvfGd
+         06nA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789743009; x=1790347809;
+        d=1e100.net; s=20260707; t=1789743011; x=1790347811;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=z+PbvTl7j6crAVqwwSi1N6wOs6bBuNm88XPaAXlYwG4=;
-        b=yElr8aszEA56Prl1trERMJauTUY04i3pDQnZNbOdaXcYYxTX+FVpt+6k2NfwxQxQyF
-         X8nEXcZMpKks/+OM0Y0mhLBE5joIXfU3j5LXTJ/HG2nxtzUZDoC9qP5nJxNUhb+Gs3Vo
-         lIdGIaOZdmF8Az3OVtcnGIEItLqZM+lcTaxad7rmDYuuZm6ce0sem43feMGR+sZijHnh
-         9Wn/L5JTFxP8skwGHM0C5u6kK36rmj/5Wcou/BUoaC48LTlXsX8nBxopKFVFXih5zW8k
-         87JDPvF70ElJfffMlNHbiDKV5sqwqXV+fdyoGukIfPXOpJZCU0Izo+Q4zcCGMfFIgQxJ
-         dC5A==
-X-Forwarded-Encrypted: i=1; AKwUvBwiZtVVEZkU6vRCIkQlehdbJEiC9owMB/5VXZ4okBKze6BONqVeixNBZDuYYrTI2r7oQDgN2PDKoag=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kJFpR6BmRhYwRKuHe7bS5Xzuo1JSkFLjA+9dGJOXTRMp4s/bSx
-	NnWHo65jSMqqSSDQAXqadHAYwcp3o2h2XfUhXdfqHS4DUC/P/8XqSNtEbE5KLAfANtY=
-X-Gm-Gg: AYBFou2yN94QrQph2i8CxR89mH7czovlVxrdHQITrsrQ0Pml2zpnpNOP6gQfzq2Cwi9
-	ud5ATIYO7DASxMJ/hUZT/gDRnEWk/FXdUCJTYa+LtCYcmjJBdo3WGZi92oLFiZAoAhKmHq42Lvh
-	Ea93pkbG7WrMLBk7dupZqlBsveK5m/PiB122K8SMKmzZDUPfJ+m8gZrouFiiXLNVVll77ISAXXH
-	2aD/55rh+T/L8CP2lJgyGKrcGjX7HvL+AVcisA27IXElOykfhJYxXcbyitrjIzH4NXRl6D2JAGi
-	xW/XnBbtg8xhyluoN+spT9Dam0hXggZIEfpuQ2Ri1IAyiWSeuRkKruFmZh/IdVoRIlfKMP/y9Uh
-	zoAVvqpiQsy8BNPSoPFU8uOVeyfJRt1cuCDJw9Wm+MjY8s64PDUqgN+T5CjXOPvTZs+Hqatjsfx
-	qV0r9lcJSMUBAUp3ftVIbo82QWY9Nfj95Mg/J1wZkj6MsIaIgaHz+jUnA+ac9l0j8ncIlSvOn49
-	yEfhD2gUSUR93hbjiS1ajQT7YjmKyTCodIz+ekGxCZY3N222ucaXh7hfA==
-X-Received: by 2002:a05:6214:ca6:b0:912:3d05:eb11 with SMTP id 6a1803df08f44-91254e4feadmr40041586d6.5.1789743008667;
-        Fri, 18 Sep 2026 07:50:08 -0700 (PDT)
+        bh=A8c5rUXaTXu9B0UqDL2lNbjmJqabE8+fQOLsAHyr+Co=;
+        b=nhMGYRJyGWTGsimErcPGAK1ElO2mPEv2z58HBGb7Bar8rNpoVK1ug8+NV1wf/idwAi
+         5vUEe7f91oACy82rigJL4MopcTuaOZaLDX2LyApa05i9mgUqopbcV115/rnmRP1wd27c
+         iT4yYSYa06k1wvSW2i9BoPKQbi5AIYq9RIRDKjwzCO7zfy3+J477Mazcg/rMw3dDe4HS
+         kU8oA7Fx9ULoJQvaC25e5PlMW/St4SBFaX/0PhOQdIMQKpah0rBuELNK9nspFnMzZM/G
+         k5NFxFyc9W8weylywa8mGJBxkoBqCUJwl7TOec/eA4jSPNj6x+wFP9sJjk9QKOtenooY
+         gd/Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzLJ0ClcwmEhbaH/EEGEulrLJynphdvS59tKbVavZj0Dyo/v+VjAw9rWiKxgYGUG6IEvzrfWejp1SE=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nh32iyUUkfy2T0EcZzb1/plmokomv3Llw7w0ALPeYt8zpGmx7u
+	jRmm2ImG/K+hkkYbfpAj5HPDY6eooB++cQX3RTTDxPOSnS9IUbugDFpntlxmpVYtUg0=
+X-Gm-Gg: AYBFou3opspiqGHuinxLW9/VWtOwi6iQEiJx9RleWrXhQKilwFDTOzcZznzEVneTckt
+	hBHQ5XoceIjp3r4wOi2InsORlVI+zSpb27iwSgeT5f5xZRU0PD57QDj3K2ssD07AwK6d3obIRcZ
+	CGBRoe0YLb8DkbY2BD3ze/RsGO+fELyi9I5pYl9z/BRW/bq0/E+fqdR8dLF9bt7EV8OfhhEiGGL
+	VELt8KKGbJnoB6Bzo3LcmpincNICe/SMnADhOrHj/WaY/1YPHnG0NYCWlwc3NKAXjRO4BpkV9nX
+	l7U/4odmM2/v0ixAlGjkdFwvA8/s2ZhNQZt2OeKJyhCox2H3PbrCw3Moew2P3QQwN+pEnP8KJ2a
+	24LdsAwVTG/wCl/+DDyG3X06uFqyFAZavQUFIinW4/T+mqTy5pADH/dq7oY5Ns0VFeZ35/Kti2T
+	/FHbYk68TMBT7MAf/IhBGSIgFAwx6mw0rn9XRRJQqJgUZcZ0EWEa1dP6A0EcoU421+WznYCx1KK
+	X3jFKV8zieDgd9jXi2mK/PcS1nX8CovegCmPFUVCnuMvpGr/w5CabcM
+X-Received: by 2002:a05:622a:2606:b0:532:9add:50bb with SMTP id d75a77b69052e-5329e402a69mr42121701cf.75.1789743010763;
+        Fri, 18 Sep 2026 07:50:10 -0700 (PDT)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Fri, 18 Sep 2026 14:49:31 +0000
-Subject: [PATCH RFC v4 12/13] rcu-tasks-trace: Assert no reader is held on
- return to userspace
+Date: Fri, 18 Sep 2026 14:49:32 +0000
+Subject: [PATCH RFC v4 13/13] x86, arm64: Build Tasks RCU on Tasks Trace
+ readers in trampolines
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260918-b4-rcu-tasks-preempt-qs-v4-12-63f0e9d69661@toxicpanda.com>
+Message-Id: <20260918-b4-rcu-tasks-preempt-qs-v4-13-63f0e9d69661@toxicpanda.com>
 References: <20260918-b4-rcu-tasks-preempt-qs-v4-0-63f0e9d69661@toxicpanda.com>
 In-Reply-To: <20260918-b4-rcu-tasks-preempt-qs-v4-0-63f0e9d69661@toxicpanda.com>
 To: "Paul E. McKenney" <paulmck@kernel.org>, 
@@ -144,79 +144,142 @@ Cc: Andy Lutomirski <luto@kernel.org>,
  bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1789742980; l=2581;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1789742980; l=6284;
  i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=FRa7j81kn+FZifN+tU/RXt2NlHMQaOXWqjJvWoyULIE=;
+ bh=VsJyzZYJ6ksShlnC7Yiz29R4LafGY+0/mhkU2yBL4O8=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
  JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QAsi6H715Q7GMOS9YXNtKesBwx2lesjeCIIWVvPLg8W7bMTSPfSKqF2zG8KnHJqpv18BR10X5Rc
- 7g2eq40cmPAk=
+ QEwAhBVideBDLteTwvOfpHAYkoAWUm3JvOEwqQNA35GYhU6H/frrHaAxlVzl5POPAnXUpm7Q7V1
+ WCFlv6PR8OAI=
 X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
  fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-d25034/1789743010-00ECAA5B-BB1B51ED/0/0
+X-purgate-ID: tlsNG-ebf023/1789743012-502E4B50-B2ABC6E4/0/0
 X-purgate-type: clean
-X-purgate-size: 2583
+X-purgate-size: 6286
 
-With trampolines now taking rcu_read_lock_trace() open-coded from
-assembly and JIT-emitted code, an unbalanced reader would silently
-turn every later Tasks Trace grace period on that task into a stall.
-No task can legitimately reach userspace with current->trc_reader_nesting
-non-zero, so under CONFIG_PROVE_RCU check it in the generic entry
-code's return-to-user validation, next to the existing kmap and lockdep
-assertions.  Compiles away otherwise.
+With the preceding patches every trampoline whose lifetime Tasks RCU
+guards on x86-64 and arm64 -- ftrace_caller and its copies, the optprobe
+template, BPF trampolines, and the sample direct-call
+trampolines -- is a Tasks Trace RCU reader around its call-out, and the
+text outside that reader is known to rcu_tasks_trampoline_text().
+Select HAVE_RCU_TRAMPOLINE_READERS on both (x86-64 with SMP for Tree
+SRCU and DYNAMIC_FTRACE, which is where its ftrace_caller changes and
+arch_rcu_tasks_trampoline_text() live; arm64 with
+DYNAMIC_FTRACE_WITH_ARGS likewise), which switches CONFIG_TASKS_RCU to the
+implementation added earlier in the series: a Tasks RCU grace period
+becomes a per-CPU pass over context switches and irq-exit reschedules
+outside trampoline text plus a Tasks Trace grace period, bounded by a
+few jiffies and preempt-off latency instead of by the longest stretch
+any task runs without sleeping.
+
+Other architectures keep the classic implementation.  Update
+Documentation/RCU and the FORCE_TASKS_RCU help text to describe the
+variant and the obligation it places on trampolines.
 
 Assisted-by: LLM
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- include/linux/irq-entry-common.h | 2 ++
- include/linux/rcupdate_trace.h   | 7 +++++++
- 2 files changed, 9 insertions(+)
+ .../RCU/Design/Requirements/Requirements.rst       | 24 ++++++++++++++++++++++
+ Documentation/RCU/checklist.rst                    |  7 ++++++-
+ arch/arm64/Kconfig                                 |  1 +
+ arch/x86/Kconfig                                   |  1 +
+ kernel/rcu/Kconfig                                 |  6 ++++--
+ 5 files changed, 36 insertions(+), 3 deletions(-)
 
-diff --git a/include/linux/irq-entry-common.h b/include/linux/irq-entry-common.h
-index e19b41ee6b18..d42568a488a7 100644
---- a/include/linux/irq-entry-common.h
-+++ b/include/linux/irq-entry-common.h
-@@ -5,6 +5,7 @@
- #include <linux/context_tracking.h>
- #include <linux/hrtimer_rearm.h>
- #include <linux/kmsan.h>
-+#include <linux/rcupdate_trace.h>
- #include <linux/rseq_entry.h>
- #include <linux/static_call_types.h>
- #include <linux/syscalls.h>
-@@ -214,6 +215,7 @@ static __always_inline void __exit_to_user_mode_validate(void)
- {
- 	/* Ensure that kernel state is sane for a return to userspace */
- 	kmap_assert_nomap();
-+	rcu_tasks_trace_assert_idle();
- 	lockdep_assert_irqs_disabled();
- 	lockdep_sys_exit();
- }
-diff --git a/include/linux/rcupdate_trace.h b/include/linux/rcupdate_trace.h
-index 273c59a03251..6034c6b19479 100644
---- a/include/linux/rcupdate_trace.h
-+++ b/include/linux/rcupdate_trace.h
-@@ -211,6 +211,12 @@ unsigned long rcu_tasks_trace_batches_completed(void);
- // Placeholders to enable stepwise transition.
- void __init rcu_tasks_trace_suppress_unused(void);
+diff --git a/Documentation/RCU/Design/Requirements/Requirements.rst b/Documentation/RCU/Design/Requirements/Requirements.rst
+index 8101fe6229d5..c059c463e083 100644
+--- a/Documentation/RCU/Design/Requirements/Requirements.rst
++++ b/Documentation/RCU/Design/Requirements/Requirements.rst
+@@ -2756,6 +2756,30 @@ synchronize_rcu(), and rcu_barrier(), respectively. In
+ three APIs are therefore implemented by separate functions that check
+ for voluntary context switches.
  
-+/* A task must never reach userspace inside an rcu_read_lock_trace() reader. */
-+static inline void rcu_tasks_trace_assert_idle(void)
-+{
-+	WARN_ON_ONCE(IS_ENABLED(CONFIG_PROVE_RCU) && READ_ONCE(current->trc_reader_nesting));
-+}
++Architectures that select ``CONFIG_HAVE_RCU_TRAMPOLINE_READERS`` keep the
++same three APIs but implement the grace period differently
++(``CONFIG_TASKS_RCU_TRAMPOLINE_READERS``).  There, every trampoline whose
++lifetime Tasks RCU guards enters a Tasks Trace RCU read-side critical
++section (rcu_read_lock_trace() or its assembly equivalent) before calling
++out and leaves it before returning, so a task anywhere inside such a
++call-out is an ordinary Tasks Trace reader whether or not it is
++preempted.  The few trampoline instructions outside that reader can only
++be occupied by a task that was interrupted there, so the grace period
++additionally waits for each CPU to pass through a context switch, and the
++irq-exit preemption path, the only switch that can catch a task inside
++such text (rcu_tasks_trampoline_text()), briefly makes such a task a
++holdout until it is next seen elsewhere.  On such kernels an involuntary
++context switch outside trampoline text *is* a Tasks-RCU quiescent state,
++a Tasks RCU grace period no longer depends on how long any task runs
++without sleeping, cond_resched_tasks_rcu_qs() is unnecessary, and the
++obligation moves to the trampolines: anything that relies on
++synchronize_rcu_tasks() to protect code a task may be preempted in must
++take the Tasks Trace reader (see register_ftrace_direct()), or, where
++that is impossible because the code is ordinary text with no trampoline
++of its own, make it known to rcu_tasks_trampoline_text() and wait out
++tasks already parked there with rcu_tasks_wait_irq_preempted(), as the
++kprobe jump optimizer does.
 +
- #else
- static inline unsigned long rcu_tasks_trace_batches_completed(void) { return 0; }
- /*
-@@ -220,6 +226,7 @@ static inline unsigned long rcu_tasks_trace_batches_completed(void) { return 0;
- static inline void call_rcu_tasks_trace(struct rcu_head *rhp, rcu_callback_t func) { BUG(); }
- static inline void rcu_read_lock_trace(void) { BUG(); }
- static inline void rcu_read_unlock_trace(void) { BUG(); }
-+static inline void rcu_tasks_trace_assert_idle(void) { }
- #endif /* #ifdef CONFIG_TASKS_TRACE_RCU */
+ Tasks Rude RCU
+ ~~~~~~~~~~~~~~
  
- DEFINE_LOCK_GUARD_0(rcu_tasks_trace,
+diff --git a/Documentation/RCU/checklist.rst b/Documentation/RCU/checklist.rst
+index 4b30f701225f..87dd506bffef 100644
+--- a/Documentation/RCU/checklist.rst
++++ b/Documentation/RCU/checklist.rst
+@@ -252,7 +252,12 @@ over a rather long period of time, but improvements are always welcome!
+ 	a.	If the updater uses synchronize_rcu_tasks() or
+ 		call_rcu_tasks(), then the readers must refrain from
+ 		executing voluntary context switches, that is, from
+-		blocking.
++		blocking.  On architectures that select
++		CONFIG_HAVE_RCU_TRAMPOLINE_READERS a reader must in
++		addition be a Tasks Trace RCU reader (that is what the
++		trampolines there do around their call-outs) or be text
++		that rcu_tasks_trampoline_text() recognises; an arbitrary
++		stretch of preemptible kernel code is not protected.
+ 
+ 	b.	If the updater uses call_rcu_tasks_trace()
+ 		or synchronize_rcu_tasks_trace(), then the
+diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
+index b5a51b0ef944..bf0e56006863 100644
+--- a/arch/arm64/Kconfig
++++ b/arch/arm64/Kconfig
+@@ -218,6 +218,7 @@ config ARM64
+ 	select HAVE_PERF_REGS
+ 	select HAVE_PERF_USER_STACK_DUMP
+ 	select HAVE_PREEMPT_DYNAMIC_KEY
++	select HAVE_RCU_TRAMPOLINE_READERS if DYNAMIC_FTRACE_WITH_ARGS
+ 	select HAVE_REGS_AND_STACK_ACCESS_API
+ 	select HAVE_RELIABLE_STACKTRACE
+ 	select HAVE_POSIX_CPU_TIMERS_TASK_WORK
+diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
+index 15fd9ec5ecac..64c3814eb745 100644
+--- a/arch/x86/Kconfig
++++ b/arch/x86/Kconfig
+@@ -288,6 +288,7 @@ config X86
+ 	select MMU_GATHER_RCU_TABLE_FREE
+ 	select MMU_GATHER_MERGE_VMAS
+ 	select HAVE_POSIX_CPU_TIMERS_TASK_WORK
++	select HAVE_RCU_TRAMPOLINE_READERS	if X86_64 && SMP && DYNAMIC_FTRACE
+ 	select HAVE_REGS_AND_STACK_ACCESS_API
+ 	select HAVE_RELIABLE_STACKTRACE		if UNWINDER_ORC || STACK_VALIDATION
+ 	select HAVE_FUNCTION_ARG_ACCESS_API
+diff --git a/kernel/rcu/Kconfig b/kernel/rcu/Kconfig
+index bbab14bc14c3..341b68b972ef 100644
+--- a/kernel/rcu/Kconfig
++++ b/kernel/rcu/Kconfig
+@@ -95,8 +95,10 @@ config FORCE_TASKS_RCU
+ 	help
+ 	  This option force-enables a task-based RCU implementation
+ 	  that uses only voluntary context switch (not preemption!),
+-	  idle, and user-mode execution as quiescent states.  Not for
+-	  manual selection in most cases.
++	  idle, and user-mode execution as quiescent states, or, on
++	  HAVE_RCU_TRAMPOLINE_READERS architectures, the variant built on
++	  Tasks Trace RCU readers in trampolines.  Not for manual
++	  selection in most cases.
+ 
+ config NEED_TASKS_RCU
+ 	bool
 
 -- 
 2.55.0
