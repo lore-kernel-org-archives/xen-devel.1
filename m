@@ -4,67 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A49C982D8
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 12:58:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1425295.1649342 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EF77EC982DA
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 13:15:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1425319.1649349 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7YAJ-0003xO-DY; Fri, 18 Sep 2026 12:58:07 +0000
+	id 1x7YQO-0006z0-Q4; Fri, 18 Sep 2026 13:14:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1425295.1649342; Fri, 18 Sep 2026 12:58:07 +0000
+Received: by outflank-mailman (output) from mailman id 1425319.1649349; Fri, 18 Sep 2026 13:14:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7YAJ-0003xH-9z; Fri, 18 Sep 2026 12:58:07 +0000
-Received: by outflank-mailman (input) for mailman id 1425295;
- Fri, 18 Sep 2026 12:58:05 +0000
+	id 1x7YQO-0006yt-NV; Fri, 18 Sep 2026 13:14:44 +0000
+Received: by outflank-mailman (input) for mailman id 1425319;
+ Fri, 18 Sep 2026 13:14:43 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <agordeev@linux.ibm.com>) id 1x7YAH-0003xB-C6
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 12:58:05 +0000
+ (envelope-from <ross.lagerwall@citrix.com>) id 1x7YQN-0006yn-IU
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 13:14:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7YAG-006At9-Kp
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 14:58:04 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x7YQL-00CRVo-8w
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 15:14:41 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <agordeev@linux.ibm.com>)
- id 6aad3547-bab6-0a2a0a5309dd-0a2a4508dffc-46
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 14:58:04 +0200
-Received: from [148.163.158.5] (helo=mx0b-001b2d01.pphosted.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <agordeev@linux.ibm.com>)
- id 6aad355b-f659-0a2a45080019-94a39e05e4cc-3
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 14:58:04 +0200
-Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68IA2ka3990915; Fri, 18 Sep 2026 12:57:18 GMT
-Received: from ppma13.dal12v.mail.ibm.com
- (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4gmxcvfgrx-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Fri, 18 Sep 2026 12:57:17 +0000 (GMT)
-Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
- by ppma13.dal12v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68I9oGpj507832; Fri, 18 Sep 2026 12:57:16 GMT
-Received: from smtprelay05.fra02v.mail.ibm.com ([9.218.2.225])
- by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 4gra3yxedq-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Fri, 18 Sep 2026 12:57:16 +0000 (GMT)
-Received: from smtpav07.fra02v.mail.ibm.com (smtpav07.fra02v.mail.ibm.com
- [10.20.54.106])
- by smtprelay05.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 68ICvEb851904874
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Fri, 18 Sep 2026 12:57:14 GMT
-Received: from smtpav07.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 9D53820043;
- Fri, 18 Sep 2026 12:57:14 +0000 (GMT)
-Received: from smtpav07.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id EB2DB20040;
- Fri, 18 Sep 2026 12:57:13 +0000 (GMT)
-Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown
- [9.224.92.206])
- by smtpav07.fra02v.mail.ibm.com (Postfix) with ESMTPS;
- Fri, 18 Sep 2026 12:57:13 +0000 (GMT)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6aad3939-2eae-0a2a0a5409dd-0a2a4501c9b4-14
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 15:14:41 +0200
+Received: from [52.101.62.13]
+ (helo=DM5PR21CU001.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6aad393f-5984-0a2a45010019-34653e0d704e-3
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 15:14:40 +0200
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
+ by CH4PR03MB7724.namprd03.prod.outlook.com (2603:10b6:610:244::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.12; Fri, 18 Sep
+ 2026 13:14:31 +0000
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0428.011; Fri, 18 Sep 2026
+ 13:14:31 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -76,125 +55,164 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=pp1; bh=vvXTEBXtIpBfma8CBebbY+SSqqX1Qu
-	WR6+4vIHcllvk=; b=byvnC9DgZuLKYo4mY9QFMiFQ6Zc5eAvVokdOQ/jMnu/ROL
-	Ihy697HfGNSs027KQksAAkjwX7YaRrLsOO1g/6wd0s+CHm/STBQ5bGQE02PrUNuG
-	/jNGEuQyMJ0GgJpPIZLUjqfcXRUhYNBUGxSiAGrMMe/ZN3ie+9Negm0sXqB2qPGg
-	G78+ulSPRFoKyeDh2Y4ugEz6Mth2PVTjmT/mNSj1OZo6IEDn3Mmfrt4AuGBiF3It
-	82M05ljqdaF9c5/06LrZaWpRH1x7tFsqkPtu0asE5M/h1WbsI4/lZhbLwmk3A6qp
-	RqNdQRRqouleichhat5Xw20CbOufAHP17/U7CBSg==
-Date: Fri, 18 Sep 2026 14:57:12 +0200
-From: Alexander Gordeev <agordeev@linux.ibm.com>
-To: "David Hildenbrand (Arm)" <david@kernel.org>
-Cc: Muhammad Usama Anjum <usama.anjum@arm.com>,
-        Jani Nikula <jani.nikula@linux.intel.com>,
-        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
-        Rodrigo Vivi <rodrigo.vivi@intel.com>,
-        Tvrtko Ursulin <tursulin@ursulin.net>,
-        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
-        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
-        Arnd Bergmann <arnd@arndb.de>,
-        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
-        Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Muchun Song <muchun.song@linux.dev>,
-        Oscar Salvador <osalvador@suse.de>,
-        Andrew Morton <akpm@linux-foundation.org>,
-        "Liam R. Howlett" <liam@infradead.org>,
-        Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>,
-        "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
-        Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
-        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
-        Pasha Tatashin <pasha.tatashin@soleen.com>,
-        Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
-        Uladzislau Rezki <urezki@gmail.com>,
-        Steven Rostedt <rostedt@goodmis.org>,
-        Masami Hiramatsu <mhiramat@kernel.org>,
-        Alexei Starovoitov <ast@kernel.org>,
-        Daniel Borkmann <daniel@iogearbox.net>,
-        Andrii Nakryiko <andrii@kernel.org>,
-        Eduard Zingerman <eddyz87@gmail.com>,
-        Kumar Kartikeya Dwivedi <memxor@gmail.com>,
-        Ingo Molnar <mingo@redhat.com>,
-        Arnaldo Carvalho de Melo <acme@kernel.org>,
-        Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
-        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
-        Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>,
-        Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
-        Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
-        Christoph Lameter <cl@gentwo.org>, Mike Rapoport <rppt@kernel.org>,
-        Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, pfalcato@suse.de,
-        ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
-        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-        linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
-        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
-        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
-        linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
-        linux-perf-users@vger.kernel.org, damon@lists.linux.dev
-Subject: Re: [PATCH v2 0/8] mm: distinguish PTE table storage from PTE values
-Message-ID: <d4080bad-1546-4a9a-9325-7ab91161a9b9-agordeev@linux.ibm.com>
-References: <20260903103002.1091859-1-usama.anjum@arm.com>
- <dd6ecac2-9bd2-4184-a034-9e13afa614bb@kernel.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=d849NjUXKlFA1XwqhQJo0e4lgI1pF4j7iUBSVjIMiOSFwCa6+yAlpizJoDVs3jfaJ1f3X1pVNDi5Gy4WWaajVLjVv4EGcpm3CTTY3jK7Y/J84hV4/eErIpy49OE7xeTKwVWOA/Xspq/lTFo06uxDAd0V6HIzpM1SHGC+tE9FX6EMlBtxMDLBpYsVpdLHfl3F8Lk7vqaNnbSvHtvrTPPyM7G2KTOPWSQh25BvPbwQHcYiDO8o3tnVTELKQd2MibIwL8RcnHV7CY2ky23EV9hnZSb93FZtcXfqJJPvEyTC1zp3lJRCY+KuXpadJ9mD2/TI/nUUGARyX/sCiNTQ5h++Fw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=S4ifpLomry5gMeyeT/ahOwYrLfz80Zmfr7qTuPsi0dw=;
+ b=ELBlQOlb4nn3Z4YoS9jpHVgceKSD99SIwEBZ4sxIOxVhYPQcZLWtPtzVM+aZoubxcyUkToLMtZabuAgkxbtmN81VZ+gbPvw3uybf5TcmfsR6+kt4U0MyZaCnAmSxzuOWfUpR6KZpl5R6eV0NMtY6JgqVLnHMcaADjXgrdlH8RZCuuGBho1aDyoXF37hdJW4mws9EK4Xe8tf7Frm/uGtWb5abWw25wvn/uiPPKIJLH3RO+cHqGTolm6ws2zmijc5Ipq/8U055ZJ+ZTgWvLsn1+A5dmRTcmdseCFR2veIwHoG99xotsD6TQo3cmRmTBs3kNmy/uz+GWqq5lfkuPEoDnA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=S4ifpLomry5gMeyeT/ahOwYrLfz80Zmfr7qTuPsi0dw=;
+ b=RQOdB5t0X0BUU1BqQKEpybuu2zilzFIrFW7Qen5u0/ZqbKmjgFrbLsb6ejI9+5COzQao9/A37S45ZsRf/sYtXUDARkIlFbrlNIeW7IJFJVSuRcXgHpC4AUwy4+Fc93p0K+FfwelRjd7zhIgwfrWSd1knR7/oaLFg/SOatV7nNYk=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <0bf76f4f-8762-4e28-9964-479400e8ec76@citrix.com>
+Date: Fri, 18 Sep 2026 14:14:26 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PULL 04/11] xen-mapcache: Remove 32bit support
+To: Peter Xu <peterx@redhat.com>, qemu-devel@nongnu.org
+Cc: Paolo Bonzini <pbonzini@redhat.com>,
+ Richard Henderson <richard.henderson@linaro.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony@xenproject.org>,
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+ xen-devel@lists.xenproject.org
+References: <20260918113926.831204-1-peterx@redhat.com>
+ <20260918113926.831204-5-peterx@redhat.com>
+Content-Language: en-US
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+In-Reply-To: <20260918113926.831204-5-peterx@redhat.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO2P265CA0511.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:13b::18) To CH8PR03MB8274.namprd03.prod.outlook.com
+ (2603:10b6:610:2ba::5)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <dd6ecac2-9bd2-4184-a034-9e13afa614bb@kernel.org>
-X-TM-AS-GCONF: 00
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDE3NyBTYWx0ZWRfX0a+YmMinfqLY
- thIpqQ3k+YsaEL1Nu5Xtb4MVEpoHSHo6PXFxsq+F/Wx3xKw0f3hhtQwBUt801YS/UAG/0atek9m
- HF3E84n9wG4sj7upDsGZ+DoHJXM8gUk=
-X-Proofpoint-ORIG-GUID: m4DES1QILxZeg9-Jkqr1aSPqQzDTxZM1
-X-Proofpoint-GUID: m4DES1QILxZeg9-Jkqr1aSPqQzDTxZM1
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDE3NyBTYWx0ZWRfX/T2l95nFB1Uq
- xYhD9MK3T3CmjxCnR5kdtXxgndhWw6MxRYXoXqGlboj2UoA37O8EdLIe4YiWjjUCSxbCjYPDLdb
- zLflGPxTioAC9+xJzOGZkBco09vb3ShkcVMCROX8/GZfFwvrgzmx7n0qXL0rX5zPKB/njtDxwgb
- gMHToemhE70TFtiB9Pj1PeVjgH1oGQscKJTsEGRxHL5kVet2L1efcSErMDeLFJpVDhkGjX606/4
- v67gUAI8g2+alWIwtI8/jPJ+6ph22PnYWj6b88V7/Iglrvc/jT0GvjzhQ6L6hTrFOvO8q+nsLfd
- IM1uuwdfshQ6+5Im7f+26qdGKHnOEavHW8zEdphBYVrG/drJ0FH1jWiiDkeaELYlUGloVtsBlh+
- 7nM/BRgAPEjc6uhD2wSkdjVssp3wph+7cmdpYUKnvEQX/Ft2fdQFowSRajI1e1u1DVerG791p4M
- bjrU9H6l+Tvys0K+DAw==
-X-Authority-Analysis: v=2.4 cv=F+7C5ahN c=1 sm=1 tr=0 ts=6aad352d cx=c_pps
- a=AfN7/Ok6k8XGzOShvHwTGQ==:117 a=AfN7/Ok6k8XGzOShvHwTGQ==:17
- a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=RzCfie-kr_QcCd8fBx8p:22 a=36OLCuKFP8Pi5wnj2vYA:9
- a=CjuIK1q_8ugA:10
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-18_03,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 phishscore=0 clxscore=1011 malwarescore=0
- lowpriorityscore=0 bulkscore=0 spamscore=0 impostorscore=0 adultscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180177
-X-purgate-ID: tlsNG-c1860d/1789736284-CC77387B-635A3935/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|CH4PR03MB7724:EE_
+X-MS-Office365-Filtering-Correlation-Id: 29166d1c-218f-433b-2fb5-08df1586c673
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|22082099003|18002099003|56012099006|10067099003|4143699003|11063799006;
+X-Microsoft-Antispam-Message-Info:
+	bd16kEWStNhP7tjXnPvxBAexvu4kTw/qVsLqc+7gGEcwn0511TC9YmclncCouC8boYJe946eRIU/vjGcMxA2bXtf1vJQrZnsxMkg4oQb2zOorpjnTvh58idT7zHVt4fTYt6biDtf65JBZiZI24ULcgRJnhOYn6l1yC3qFbfpwm3jjTaDMElZPCwqcbNHf8+MjPGw+C+4QNbnTp3z2q3hTWTkANHKADIzHOAuf+ajY3HS7rz4QbwjpfJzSFz7WiJ/mkeexICwYkSg/XNu9eHvjRnFlCTjv8WCZWh9iavB4QSLM2p18jcvZxx05VlTYZ79Oj61MMSjyVz2bBp+jtypVJT4c7VaCjKxvx/buUqajp82ZcZdwdCTfqMAVVu+nilutVBMV1vKDtjPSX6R6GRJQuxlfiz1Dg70sY3MV+DViSbeRIHshFTgBjaFYuiJrjS6ixNNQG+CpymgsYZzfqvbZT1BY6zZGhponuS+kTKy8CqxRIwFOwT9qo7poLp5I7HnQM4LjBVpL8n70sDzOzT6Y9YuTL1JDzCNKGh4YRUqYCsGOeQvZyxO9ULYHIyxXf8JP0MJ4n6KrBk0KZ+w9alh4ZvJ8ayoo4izCyC+UFDkZtWWPDiL2Sl1thIaXJe5euqFvHbsHmsmtUljBOuxvuFlrd9nUyOqZ6kA9Sn2zZqgQIA=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(22082099003)(18002099003)(56012099006)(10067099003)(4143699003)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?QlVibkhpQ2grTjV0akhRZWhrRnBoSnh1SHplSVhZS0FrNWU5NVgrWG14UW9T?=
+ =?utf-8?B?RUt5MERDOCthZENsai94Z0pvVnM3UU1la0UxMUhxeVloWmdVOFRvUzlKS0JJ?=
+ =?utf-8?B?S1BCQ0JZejB0dHVGcXZacTZ3azZqZDZ6MkdpOEtpdGJMWGlGZ0d4MWJkbjhX?=
+ =?utf-8?B?N3RMRWpUVGxaNjRUVWppZ1l5eVkzUUxtRGJHa0llVkhoUDBTdG81T29SN3N2?=
+ =?utf-8?B?eHovYjBYQmJrcEw2bFRzbHRMeWJQeHFFWitBOE9NeTZUakprK1k1MzhTS0VQ?=
+ =?utf-8?B?aStJOUo0cVhhNEtTenBiZXlka09yWStiTUV5OHVrN0piV0tHL2JYUHl0Y3dm?=
+ =?utf-8?B?dDNuZEpPR1dMTk5tZGpNYTQrWGdBMFlCbnVWblVMTzRwQ2tGVmcyV2loT1lp?=
+ =?utf-8?B?QmdSa0FTaGZTTmQ3ciswdHZqc2NVeVVxYXR0VU1DZndSajg1WXNWTlFmNHBE?=
+ =?utf-8?B?dk05VEp1eWVEeFNJbVBQQ0taU2hnUk5temQ3dDh1VGhvSEF5RjJQYTk5dDFy?=
+ =?utf-8?B?NmZkRlRFUVI1K0IzM1ozbzNsZmtHajZDQUszS2I1a01MRE9sZDVIQzZudVho?=
+ =?utf-8?B?cUxXZ1NxMFVmb29lMVp3ZUcwSUZncS9OUnZ4VStyZEpqMTBnK2l3cjd5TVY0?=
+ =?utf-8?B?SE1jZUtJSENPM3ZWSTRuVytMbUZRNzE1bWJoeE42azhtcGkwNXQ1Z3FwdGZk?=
+ =?utf-8?B?Zm9ZUDdrRDRrd3V1N1RuUkhJdDQ1ZTlzSkhTWlRVN3o2c3g0S2xLZnhmVHdq?=
+ =?utf-8?B?RjMySWo0bTUvTXZRY1dra2pvMEhHOExMMG9HaUd4ZWlnd3VVWkxhRmlrQmpu?=
+ =?utf-8?B?cWNQaTd1U2tWUld3NDliZGVuR1A5cWFXVGd6bjRYTjFMTFYzV1ZReVp3Y2o4?=
+ =?utf-8?B?bXFtaEx0OUdNS3A4UlFsS0ZFL2lTemplRVIybkUvd1ZCSVhXNWIwMG4zRWFI?=
+ =?utf-8?B?SW8wMTZvYk5BemhtQ0txRUNuQjlmS2R2ZUJDNDBDQ2VOMVQrcDZSRC9mcGhU?=
+ =?utf-8?B?aDZiVU8yVTJsaE9Fb3ZKckhwQkRzM0xxVER1Rm5TeHVhdTNVWFErWmp3bFBx?=
+ =?utf-8?B?cGp1elluZjlQRXlRZmJSWHMvT3N5ZTZuQlZ4ZmNvMkZ6VVFraGtRYUgraFVH?=
+ =?utf-8?B?ZkFFQ3FDRE41dnJvUXJ0Y21JWWhPeXdjRTZmRGtEenhJT28ya0NHL2JGMHM2?=
+ =?utf-8?B?NHdqQnRGSjNWbGg2MGx1M0sxSEJ2aEh4dXMxWjllVktneFN6UHdva2F5Vk9a?=
+ =?utf-8?B?ZmdGSFVRZUJPTVlOQ1R4SmltTzRuNms5M09DVitTZ2tDdGZETWJ2akRYNXRV?=
+ =?utf-8?B?UTZBdjUydVJFK2NMRmlLTllvUFUzcUp2aGNScEUwUVh4SU1Na28xdWVIY01v?=
+ =?utf-8?B?Tk5HYk4zU2hrQWRBSTBQN21kWVpRSTRnYUZKNEZ0MndhbFBZdjA0KzVWK2Qv?=
+ =?utf-8?B?eDZmRk8xYUExUVNzeFhmdStQRzFBa2VucGU5SzIwRGtOSDFQaFhhUnA3eFJY?=
+ =?utf-8?B?dHpQY3krd3M4ZDdEMEFrS0xnanY3WHhTUkkxRWg4UGswOTNINVZVTFlVeGRC?=
+ =?utf-8?B?L20rNE9vcVhFckVlQ25UU3N1SGhBQlU4MFNUZE41dXNtSm1nR2lORXp0ZDIz?=
+ =?utf-8?B?VjRQdWpTdHZ5cWNJYVFoNEVkTVpPLzBiWkxuSHRvcnR4WWJBSzJQcGlLano0?=
+ =?utf-8?B?bHY0eGxWb0tmZERvOHhueU02Vkg3UW9uOU5Od0s1d242eUFIcmdCTmhBUWkw?=
+ =?utf-8?B?bjF4TE5zOG9GbWdDaFRwRWdiZTNXTHhqU25mc0IwYVc5dWQ0Vyt3RERvRWdI?=
+ =?utf-8?B?c1RiS0llYVc4dzBoOXZGT2xRbnVZNFhmWkkzMkU4OStBTmNjak1qNWE4aHMy?=
+ =?utf-8?B?d3Y4UTY4c0xhNVFnSVFIUnhGRWJLdzJSRUFTcFY3MVlmYUtiV3d2QUdZVHBO?=
+ =?utf-8?B?Mzd6ZXRlS1M3NVR6Y3pVSCt3YldMN3hRNDlnMnp3STFWOTI5bUxweEkyUTVE?=
+ =?utf-8?B?NHViN1c2Qm83QmR0b0dQTUZqS0NFSDYxMS8xUUtWa29MSE8xckNrWFFBaVRq?=
+ =?utf-8?B?RUlXUGNscTIrV1I3ODNydENldzhLRXdKZkJmcStrL1lUMm5pcWRkbzBoZDNs?=
+ =?utf-8?B?UlpWdUxpYkpxV1dJVHlaUnczeGF2LzZmN2lraE5SWThLSWxkdStjWGlFS3hQ?=
+ =?utf-8?B?ckEvWVRoUzUwRVFhMGhmU1FyZVpsK3hwbk1mTTc4enZreVJudXROTzU0eE5x?=
+ =?utf-8?B?L1hVTVMxYjZxc1lGNElPVGZqZVdzUWIrakRvNFc3RllPajg3TW1yQkRGdklz?=
+ =?utf-8?B?R21ML0plN1gySHB4TUtucjRWMG5uRU51OGYyUjhwdHBvVEtjazlWMk9UblpH?=
+ =?utf-8?Q?VX1JCpNY0eO3A+ks=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 29166d1c-218f-433b-2fb5-08df1586c673
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Sep 2026 13:14:31.0591
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: tW6vK0g1vQsAcvSTVZpPioCjRl/taSdWqB57snQdVUJJVQzuBJWd2QRIgKvCy750KVjU6Tm4cpbJnB38KQQTND1yG9l2862clC2BqW/qEy4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH4PR03MB7724
+X-purgate-ID: tlsNG-d62444/1789737281-1D47D757-95DCDC44/0/0
 X-purgate-type: clean
-X-purgate-size: 604
+X-purgate-size: 1938
 
-On Fri, Sep 11, 2026 at 06:55:18PM +0200, David Hildenbrand (Arm) wrote:
-
-Hi David, Muhammad,
-
-Sorry for the long delay.
-
-> Unless there is more feedback on the overall approach, the next step for this is
-> to have at least one architecture support posted.
+On 9/18/26 12:39 PM, Peter Xu wrote:
+> QEMU has switched to 64bit-only hosts for all system emulations.
 > 
-> We should only merge this if at least one architecture (better two? :) arm64 and
-> s390x? ) would merge the architecture bits.
-
-I am going to give it a try, hopefully next week.
-
-> That is, we should get an ACK from the arch maintainer son the common code bits
-> and the arch bits.
+> Reviewed-by: Richard Henderson <richard.henderson@linaro.org>
+> Link: https://lore.kernel.org/r/20260818172012.3052821-5-peterx@redhat.com
+> Cc: Stefano Stabellini <sstabellini@kernel.org>
+> Cc: Anthony PERARD <anthony@xenproject.org>
+> Cc: "Edgar E. Iglesias" <edgar.iglesias@gmail.com>
+> Cc: xen-devel@lists.xenproject.org
+> Signed-off-by: Peter Xu <peterx@redhat.com>
+> ---
+>   hw/xen/xen-mapcache.c | 12 ++----------
+>   1 file changed, 2 insertions(+), 10 deletions(-)
 > 
-> -- 
-> Cheers,
+> diff --git a/hw/xen/xen-mapcache.c b/hw/xen/xen-mapcache.c
+> index 85cf0cf359..e30c07c2ee 100644
+> --- a/hw/xen/xen-mapcache.c
+> +++ b/hw/xen/xen-mapcache.c
+> @@ -26,11 +26,7 @@
+>   #include <xenevtchn.h>
+>   #include <xengnttab.h>
+>   
+> -#if HOST_LONG_BITS == 32
+> -#  define MCACHE_MAX_SIZE     (1UL<<31) /* 2GB Cap */
+> -#else
+> -#  define MCACHE_MAX_SIZE     (1UL<<35) /* 32GB Cap */
+> -#endif
+> +#define MCACHE_MAX_SIZE     (1UL << 35) /* 32GB Cap */
+>   
+>   /* This is the size of the virtual address space reserve to QEMU that will not
+>    * be use by MapCache.
+> @@ -151,11 +147,7 @@ void xen_map_cache_init(phys_offset_to_gaddr_t f, void *opaque)
+>           exit(EXIT_FAILURE);
+>       }
+>   
+> -    if (HOST_LONG_BITS == 32) {
+> -        bucket_shift = 16;
+> -    } else {
+> -        bucket_shift = 20;
+> -    }
+> +    bucket_shift = 20;
+>   
+>       if (geteuid() == 0) {
+>           rlimit_as.rlim_cur = RLIM_INFINITY;
 
-Thanks!
+Using a local variable here to store a constant is a bit weird and its only use
+is to be stored as MapCache.bucket_shift and MapCache.bucket_size which are
+effectively constant. Not sure why this isn't just a couple of #defines at the
+top and used everywhere bucket_shift and bucket_size is needed. Perhaps that is
+further cleanup to be done separately...
 
-> David
+Ross
 
