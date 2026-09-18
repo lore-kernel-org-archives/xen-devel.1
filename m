@@ -4,44 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 790B9C982D8
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 12:53:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1425283.1649331 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47A49C982D8
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 12:58:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1425295.1649342 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7Y5S-0003EA-Rp; Fri, 18 Sep 2026 12:53:06 +0000
+	id 1x7YAJ-0003xO-DY; Fri, 18 Sep 2026 12:58:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1425283.1649331; Fri, 18 Sep 2026 12:53:06 +0000
+Received: by outflank-mailman (output) from mailman id 1425295.1649342; Fri, 18 Sep 2026 12:58:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7Y5S-0003E1-PB; Fri, 18 Sep 2026 12:53:06 +0000
-Received: by outflank-mailman (input) for mailman id 1425283;
- Fri, 18 Sep 2026 12:53:05 +0000
+	id 1x7YAJ-0003xH-9z; Fri, 18 Sep 2026 12:58:07 +0000
+Received: by outflank-mailman (input) for mailman id 1425295;
+ Fri, 18 Sep 2026 12:58:05 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x7Y5R-0003Dt-A5
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 12:53:05 +0000
+ (envelope-from <agordeev@linux.ibm.com>) id 1x7YAH-0003xB-C6
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 12:58:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7Y5Q-004l4O-Mk
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 14:53:04 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x7YAG-006At9-Kp
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 14:58:04 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aad341e-8faa-0a2a0a5109dd-0a2a450ab8d2-18
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 14:52:59 +0200
-Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aad342b-f2d2-0a2a450a0019-4a7de18dd2db-3
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 14:52:59 +0200
-Received: by mail-wm2-f13.google.com with SMTP id
- 5b1f17b1804b1-49cd5462b69so4066565e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 05:52:59 -0700 (PDT)
-Received: from [172.18.138.134] ([185.104.138.149])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4871ff3ae1fsm3689424f8f.8.2026.09.18.05.52.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Sep 2026 05:52:58 -0700 (PDT)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6aad3547-bab6-0a2a0a5309dd-0a2a4508dffc-46
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 14:58:04 +0200
+Received: from [148.163.158.5] (helo=mx0b-001b2d01.pphosted.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6aad355b-f659-0a2a45080019-94a39e05e4cc-3
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 14:58:04 +0200
+Received: from pps.filterd (m0360072.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68IA2ka3990915; Fri, 18 Sep 2026 12:57:18 GMT
+Received: from ppma13.dal12v.mail.ibm.com
+ (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4gmxcvfgrx-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Fri, 18 Sep 2026 12:57:17 +0000 (GMT)
+Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma13.dal12v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68I9oGpj507832; Fri, 18 Sep 2026 12:57:16 GMT
+Received: from smtprelay05.fra02v.mail.ibm.com ([9.218.2.225])
+ by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 4gra3yxedq-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Fri, 18 Sep 2026 12:57:16 +0000 (GMT)
+Received: from smtpav07.fra02v.mail.ibm.com (smtpav07.fra02v.mail.ibm.com
+ [10.20.54.106])
+ by smtprelay05.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 68ICvEb851904874
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Fri, 18 Sep 2026 12:57:14 GMT
+Received: from smtpav07.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 9D53820043;
+ Fri, 18 Sep 2026 12:57:14 +0000 (GMT)
+Received: from smtpav07.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id EB2DB20040;
+ Fri, 18 Sep 2026 12:57:13 +0000 (GMT)
+Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown
+ [9.224.92.206])
+ by smtpav07.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+ Fri, 18 Sep 2026 12:57:13 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,200 +76,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1789735979; x=1790340779; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rLfgc6+yuqe7f6diCPn3aKlcAw9KvU3+mrO5QDX8jZM=;
-        b=IYgc1/AjFjstvP16V3OArTW8LMmZHwIENVujGsH8N7HWuSnhAqEDmf5/3bdUYZlbSY
-         E4Ot07pXE4J18iXoBXGQxIj0mwIkUIMwN92uwTJOXStMJbL1cIqc+HuOFa/kuN3zfLiJ
-         73mkuitRfyu+33Nk4ZnkUo4PFaWdofxiXIBB1I7TTFqDDUnrV4sRZ2bdBi05pOdF7y2P
-         42ATGt3bIGsXSA3JYwzbWhT9JNZUykbuRaZ7ZgX0+kaJwtYZhe9hKkTgtT/+aJyvPlFM
-         537ukNf8aOqi2lsLncZBFc1Jz7qx9djJR7hZEo2fufatgkYAK4WTGrrx47uYdfv7mGJG
-         quHA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789735979; x=1790340779;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=rLfgc6+yuqe7f6diCPn3aKlcAw9KvU3+mrO5QDX8jZM=;
-        b=QpOXPDDjn86jrjqQiibKYz0ZOap64Dac2QtmzkWui75k26GnAf0i7aKf2921GRXn8H
-         lR9FELxYte1qfY6sc5tnDpXwdhJduaB400i1kfOpDUQ+svVw9EBY9KRvDv61dJ3flgAI
-         PRO34+Cn2aeAk4PKLgGRIm9b4tEyhBWD1Ni9UnpjrPig3XMkOO87Tskxkm8vbn6IZmtE
-         P4b1ryRr0Ne7FNKzLjfTcqPLfSoLu/zHmlqbuRkil/qvziLDFi3gYLg3gJSdNV+PrNLE
-         vaJFzq57DOiztIlVawNvcvq3ZpPfiznxxCQyDpIDaVB5N7H+AQbh6PCLhviXYw+FSXZm
-         WeRQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxAyq6jfbmmpT9maV7oHd/YMPasdzM39QP5QBeq49Bo/0Xmb/mpRJ4teOW8+VpU0TpYIUc4e/4wwQc=@lists.xenproject.org
-X-Gm-Message-State: AFuF++l/XHy84tBQBXhLeP44Qav0Tn0WIxI1pHTrqcqmiJ0r6uuM0q12
-	+l0uxPEZr5+i+47vbQqZURn43oU6LU19u+YMx84Hi+HLh25jal9blX+dDJ5wO0zfpw==
-X-Gm-Gg: AYBFou3mgbAW/I6qNbVDRcYe1TIDNnrxs/nwD9evOeiyGaU4Cu7h0aqS1UtKyF137AM
-	zrM6LIHKGMFZhp6z5WqeaiglITUs9t3qfgvQC1N+7oY06OIq0nhvynNDJtjhtmt4GIVUVIWk1j+
-	Cj95akgZVb/yvb1cq4URqZVD4EAeogrcWSsfH2lwlWqOkJiws4lf57o3OU2VsUisqE/Zt1mp8r3
-	oD+1Y6nizXouFzoVz+w3ikT8YtK1OgNgjUr/skYWwLFsMTHDALr66YqZ45Q/+LzPt1XOIPogNMy
-	/DSMkd2j2Qa4B038MApYskxFSby8mUMoL4XNvfsKdrvAftmugn6kCzjUsbkqJoaqC2jvvinn1sf
-	GpeKvAEniLUECxV0cYcNA7N8sZVlK2AQh5W2tepEWYUVd146LXiY4o0ksRXgML2CSLhC4xCxy/x
-	93FXj3224ES2/ojkYVjukYKabtB9diQQwMYN9Ixi3d+ZzBsnXHtmyJBXCi1e1+DioPYDcVViivO
-	WNpQim5FlQ=
-X-Received: by 2002:a05:600c:1f95:b0:49f:bcb7:8e9 with SMTP id 5b1f17b1804b1-49fc5726c1fmr60163275e9.9.1789735979021;
-        Fri, 18 Sep 2026 05:52:59 -0700 (PDT)
-Message-ID: <9260a8cb-66f0-4eba-b630-666039bf2e72@suse.com>
-Date: Fri, 18 Sep 2026 14:52:53 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pp1; bh=vvXTEBXtIpBfma8CBebbY+SSqqX1Qu
+	WR6+4vIHcllvk=; b=byvnC9DgZuLKYo4mY9QFMiFQ6Zc5eAvVokdOQ/jMnu/ROL
+	Ihy697HfGNSs027KQksAAkjwX7YaRrLsOO1g/6wd0s+CHm/STBQ5bGQE02PrUNuG
+	/jNGEuQyMJ0GgJpPIZLUjqfcXRUhYNBUGxSiAGrMMe/ZN3ie+9Negm0sXqB2qPGg
+	G78+ulSPRFoKyeDh2Y4ugEz6Mth2PVTjmT/mNSj1OZo6IEDn3Mmfrt4AuGBiF3It
+	82M05ljqdaF9c5/06LrZaWpRH1x7tFsqkPtu0asE5M/h1WbsI4/lZhbLwmk3A6qp
+	RqNdQRRqouleichhat5Xw20CbOufAHP17/U7CBSg==
+Date: Fri, 18 Sep 2026 14:57:12 +0200
+From: Alexander Gordeev <agordeev@linux.ibm.com>
+To: "David Hildenbrand (Arm)" <david@kernel.org>
+Cc: Muhammad Usama Anjum <usama.anjum@arm.com>,
+        Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Tvrtko Ursulin <tursulin@ursulin.net>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+        Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Muchun Song <muchun.song@linux.dev>,
+        Oscar Salvador <osalvador@suse.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        "Liam R. Howlett" <liam@infradead.org>,
+        Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>,
+        "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+        Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+        Pasha Tatashin <pasha.tatashin@soleen.com>,
+        Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
+        Uladzislau Rezki <urezki@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Eduard Zingerman <eddyz87@gmail.com>,
+        Kumar Kartikeya Dwivedi <memxor@gmail.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>,
+        Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
+        Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
+        Christoph Lameter <cl@gentwo.org>, Mike Rapoport <rppt@kernel.org>,
+        Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, pfalcato@suse.de,
+        ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
+        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
+        linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+        linux-perf-users@vger.kernel.org, damon@lists.linux.dev
+Subject: Re: [PATCH v2 0/8] mm: distinguish PTE table storage from PTE values
+Message-ID: <d4080bad-1546-4a9a-9325-7ab91161a9b9-agordeev@linux.ibm.com>
+References: <20260903103002.1091859-1-usama.anjum@arm.com>
+ <dd6ecac2-9bd2-4184-a034-9e13afa614bb@kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 36/39] xen/riscv: wake up a descheduled vCPU on a guest
- external interrupt
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <ed5a8b4d8137d9ce2f291956d19fbeaf61cce7a9.1787838835.git.oleksii.kurochko@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-In-Reply-To: <ed5a8b4d8137d9ce2f291956d19fbeaf61cce7a9.1787838835.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1789735979-58BC8CFC-44CBF150/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <dd6ecac2-9bd2-4184-a034-9e13afa614bb@kernel.org>
+X-TM-AS-GCONF: 00
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDE3NyBTYWx0ZWRfX0a+YmMinfqLY
+ thIpqQ3k+YsaEL1Nu5Xtb4MVEpoHSHo6PXFxsq+F/Wx3xKw0f3hhtQwBUt801YS/UAG/0atek9m
+ HF3E84n9wG4sj7upDsGZ+DoHJXM8gUk=
+X-Proofpoint-ORIG-GUID: m4DES1QILxZeg9-Jkqr1aSPqQzDTxZM1
+X-Proofpoint-GUID: m4DES1QILxZeg9-Jkqr1aSPqQzDTxZM1
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDE3NyBTYWx0ZWRfX/T2l95nFB1Uq
+ xYhD9MK3T3CmjxCnR5kdtXxgndhWw6MxRYXoXqGlboj2UoA37O8EdLIe4YiWjjUCSxbCjYPDLdb
+ zLflGPxTioAC9+xJzOGZkBco09vb3ShkcVMCROX8/GZfFwvrgzmx7n0qXL0rX5zPKB/njtDxwgb
+ gMHToemhE70TFtiB9Pj1PeVjgH1oGQscKJTsEGRxHL5kVet2L1efcSErMDeLFJpVDhkGjX606/4
+ v67gUAI8g2+alWIwtI8/jPJ+6ph22PnYWj6b88V7/Iglrvc/jT0GvjzhQ6L6hTrFOvO8q+nsLfd
+ IM1uuwdfshQ6+5Im7f+26qdGKHnOEavHW8zEdphBYVrG/drJ0FH1jWiiDkeaELYlUGloVtsBlh+
+ 7nM/BRgAPEjc6uhD2wSkdjVssp3wph+7cmdpYUKnvEQX/Ft2fdQFowSRajI1e1u1DVerG791p4M
+ bjrU9H6l+Tvys0K+DAw==
+X-Authority-Analysis: v=2.4 cv=F+7C5ahN c=1 sm=1 tr=0 ts=6aad352d cx=c_pps
+ a=AfN7/Ok6k8XGzOShvHwTGQ==:117 a=AfN7/Ok6k8XGzOShvHwTGQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=RzCfie-kr_QcCd8fBx8p:22 a=36OLCuKFP8Pi5wnj2vYA:9
+ a=CjuIK1q_8ugA:10
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-18_03,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 suspectscore=0 phishscore=0 clxscore=1011 malwarescore=0
+ lowpriorityscore=0 bulkscore=0 spamscore=0 impostorscore=0 adultscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180177
+X-purgate-ID: tlsNG-c1860d/1789736284-CC77387B-635A3935/0/0
 X-purgate-type: clean
-X-purgate-size: 4385
+X-purgate-size: 604
 
-On 27.08.2026 17:21, Oleksii Kurochko wrote:
-> @@ -62,23 +69,25 @@ static int cf_check cpu_callback(struct notifier_block *nfb,
->                                   unsigned long action, void *hcpu)
->  {
->      unsigned int cpu = (unsigned long)hcpu;
-> -    int rc = 0;
->  
->      switch ( action )
->      {
->      case CPU_STARTING:
-> -        rc = vgein_init();
-> +    {
-> +        int rc = vgein_init();
-> +
->          if ( rc )
->              printk(XENLOG_ERR "AIA: failed to init vgein for CPU%u: %d\n",
->                     cpu, rc);
->          break;
-> +    }
->  
->      case CPU_DYING:
->          vgein_deinit();
->          break;
->      }
->  
-> -    return notifier_from_errno(rc);
-> +    return NOTIFY_DONE;
->  }
+On Fri, Sep 11, 2026 at 06:55:18PM +0200, David Hildenbrand (Arm) wrote:
 
-What is this hunk doing in this patch? Was this meant to be merged into the
-prior one? But then - why?
+Hi David, Muhammad,
 
-> @@ -168,3 +181,36 @@ void vgein_release(struct vcpu *v, unsigned int vgein_id, unsigned int cpu)
->              __func__, v, vgein_id, cpu, vgein->bmp);
->  #endif
->  }
-> +
-> +void hgei_interrupt(void)
-> +{
-> +    unsigned long hgei_mask, flags;
-> +    struct vgein_ctrl *vgein = &this_cpu(vgein);
-> +
-> +    hgei_mask = csr_read(CSR_HGEIP) & csr_read(CSR_HGEIE);
+Sorry for the long delay.
 
-Misra, aiui, isn't going to like this. You may want to split it up.
+> Unless there is more feedback on the overall approach, the next step for this is
+> to have at least one architecture support posted.
+> 
+> We should only merge this if at least one architecture (better two? :) arm64 and
+> s390x? ) would merge the architecture bits.
 
-> +    csr_clear(CSR_HGEIE, hgei_mask);
-> +
-> +    spin_lock_irqsave(&vgein->lock, flags);
-> +
-> +    for_each_set_bit ( guest_file_id, hgei_mask )
-> +    {
-> +        /*
-> +         * guest_file_id shouldn't be zero, as it will indicate that no
-> +         * guest external interrupt source is selected for VS-level external
-> +         * interrupts.
-> +         */
-> +        ASSERT(guest_file_id);
+I am going to give it a try, hopefully next week.
 
-While it only affects debug builds, this check still needlessly is
-done on every loop iteration, when doing it once ahead of the loop
-would suffice.
+> That is, we should get an ACK from the arch maintainer son the common code bits
+> and the arch bits.
+> 
+> -- 
+> Cheers,
 
-> +        if ( vgein->owners[guest_file_id] )
-> +        {
-> +#ifdef VGEIN_DEBUG
-> +            gprintk(XENLOG_DEBUG, "%s: kick ->%pv, hgei_mask(%#lx)\n",
-> +                    __func__, vgein->owners[guest_file_id], hgei_mask);
-> +#endif
+Thanks!
 
-This can ocur very frequently (when VGEIN_DEBUG is defined). A
-trace record may be a better alternative.
-
-> --- a/xen/arch/riscv/domain.c
-> +++ b/xen/arch/riscv/domain.c
-> @@ -136,6 +136,8 @@ static void vcpu_csr_init(struct vcpu *v)
->          v->arch.hstateen0 = (hstateen0 & csr_masks.hstateen0) |
->                              csr_masks.ro_one.hstateen0;
->      }
-> +
-> +    v->arch.hie = MIP_SGEIP;
-
-Neither part of the rhs identifier has anything to do with the CSR
-having its default value set here. That's perhaps again a piece of
-RISC-V I'm missing, but I can't make sense of this.
-
-> --- a/xen/arch/riscv/imsic.c
-> +++ b/xen/arch/riscv/imsic.c
-> @@ -510,12 +510,31 @@ void cf_check imsic_ctxt_switch_from(struct vcpu *v)
->  
->      write_lock_irqsave(&imsic_state->vsfile_lock, flags);
->      imsic_state->vsfile_cpu = v->processor;
-> +    /*
-> +     * Start to observe the VS-file from HS-mode: while the vCPU isn't
-> +     * running an interrupt pending in its VS-file is reported through HGEIP
-> +     * instead of being delivered to VS-mode, which lets Xen wake the vCPU up.
-> +     */
-> +    csr_set(CSR_HGEIE, BIT(imsic_state->guest_file_id, UL));
->      write_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
->  }
-
-It is suspicious for the HGEIE write to be the last step. How's this free
-of a window where an interrupt is lost. (Sorry, likely another blind spot
-of mine wrt RISC-V.)
-
->  void cf_check imsic_ctxt_switch_to(struct vcpu *v)
->  {
-> -    /* Nothing to do */
-> +    struct vimsic_state *imsic_state = v->arch.vimsic_state;
-> +    unsigned long flags;
-> +
-> +    /* A s/w VS-file is never observed through HGEIP. */
-> +    if ( !vcpu_guest_file_id(v) )
-> +        return;
-> +
-> +    /*
-> +     * The vCPU is about to run, so hstatus.VGEIN delivers the VS-file's
-> +     * interrupts to it directly and there is nothing left for Xen to observe.
-> +     */
-> +    read_lock_irqsave(&imsic_state->vsfile_lock, flags);
-> +    csr_clear(CSR_HGEIE, BIT(imsic_state->guest_file_id, UL));
-> +    read_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
->  }
-
-How can this be a read-lock when you write a CSR? Or else - why is locking
-here necessary in the firt place?
-
-Jan
+> David
 
