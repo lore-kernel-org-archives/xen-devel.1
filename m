@@ -4,43 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94944C982D7
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 08:10:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1424867.1649115 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DF51C982D2
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 08:45:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1424960.1649139 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7Tfg-0003ry-FJ; Fri, 18 Sep 2026 08:10:12 +0000
+	id 1x7UDT-0002Od-5o; Fri, 18 Sep 2026 08:45:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1424867.1649115; Fri, 18 Sep 2026 08:10:12 +0000
+Received: by outflank-mailman (output) from mailman id 1424960.1649139; Fri, 18 Sep 2026 08:45:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7Tfg-0003rl-Ar; Fri, 18 Sep 2026 08:10:12 +0000
-Received: by outflank-mailman (input) for mailman id 1424867;
- Fri, 18 Sep 2026 08:10:11 +0000
+	id 1x7UDT-0002OW-2x; Fri, 18 Sep 2026 08:45:07 +0000
+Received: by outflank-mailman (input) for mailman id 1424960;
+ Fri, 18 Sep 2026 08:45:05 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <frn1furkan10@gmail.com>) id 1x7Tff-0003pZ-Ia
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 08:10:11 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0b3b0c18000072c4@swg.vates.tech>)
+ id 1x7UDQ-0002OQ-Pq
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 08:45:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7Tfe-00G512-VD
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 10:10:10 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6aacf1e2-bab6-0a2a0a5309dd-0a2a450ae726-4
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 10:10:10 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6aacf1e2-f2d2-0a2a450a0019-4a7de14cf5ae-3
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 10:10:10 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-4843cedd129so242736f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 01:10:10 -0700 (PDT)
-Received: from notebook.. ([88.230.43.170]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48720083c19sm2174133f8f.31.2026.09.18.01.10.07
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Sep 2026 01:10:09 -0700 (PDT)
+ id 1x7UDP-00GBNl-Ub
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 10:45:03 +0200
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0b3b0c18000072c4@swg.vates.tech>)
+ id 6aacf9fc-8faa-0a2a0a5109dd-0a2a4506cdca-46
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 10:45:03 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0b3b0c18000072c4@swg.vates.tech>)
+ id 6aacfa0e-195a-0a2a45060019-b9ff1c22b4d3-3
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 10:45:02 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a0b3b0c18000072c4.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Fri, 18 Sep 2026 08:45:00 +0000
+Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id E4D56820E1;
+ Fri, 18 Sep 2026 10:44:59 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,519 +58,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789719010; x=1790323810; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=FHRsXuEnf7BCXLP3eamT1pJU7X7xpT0JlychFCHzOuM=;
-        b=kH8A1dMV3DSmYf7vMFMIhA9Xc+cjJk0NOJvpiZdk03aMOfZuyjK1NDIy9nY/2GDLWT
-         j1vY5CFDiKMKSc02beHBlT1h7pwsl5m7ZRdWaPKLF6wISGTe9o8SbT9PENHoB6BjemGV
-         E/nM9Vl+Q8EkGytUQFNFE68q6RkEq0UQD2UnUXVWDFNP49evvvbqND4v80wFXeDGzCUO
-         znD4sp00M0x8S0f0G9YvOg0dlCOW4mfIfIxJO7pesnCFBY6IlPmYc8DoHBsbxPpGAI10
-         75XUb/PV7qsqw7N//p33ZlFL1RNGRcKIy3fRIykyn21o7uXkmhpePDlYk0712h9hCHoM
-         wasA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789719010; x=1790323810;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=FHRsXuEnf7BCXLP3eamT1pJU7X7xpT0JlychFCHzOuM=;
-        b=Uc4gRZwidlbwASscGGVLPF0q5QY+k7tWkOe28/n70MkQgJ4Wzf/WCjmjUI9PiQ1G5H
-         il4iuZM7hPscm902TiiiLDQBM7KQuWcVe49mOy1Dv1T89/rMoNG5YYIGfSufM7C1cP5s
-         +Ybj2raMde2gUQi2IQk/LFuzSjoParsbgOwYH39hIqizEpWH6pb2lFLPEFbYkGGJvt2S
-         8F5TKSkHe2CBGNQSBnhbxlmMsGzpfl0LJ9YaEZwKYEpSZz5rKzAG9xITWeQaM4WN70SM
-         GqCAVo3xfVyTKTlFOgvjCwmoxoJax+MsyB0fwtcPQvjbTXxn8ZM1VmkWI9boX6y3+XaF
-         X+dQ==
-X-Gm-Message-State: AFuF++kKdgq+8M5beczm8q2v5KhRJkaF2FDnQ+BWwJt5QifbnFalLsYg
-	2xpuMwDGVRs0BBNiNG/Bk4HhgCPdrpv63MKEb+uq+NhDye336ms9k9foBebTLw==
-X-Gm-Gg: AYBFou3lCB18iNspFq0f4xwd88YL2QWcRRuALogpXKs5fsYm7hXnq4ZnMZ3Zt5plQvf
-	9dIZEhsoDSQcecU61/r39H/Pw8LS40lLVA2j5DrAxWHddsv6RL3N/qfhrPiQRPnKAykIoCVG3RR
-	OSU2Xzv8PBNmKPpZXqXf++e7gCrH2a89cbx0D1RYrHXLwIdHf2mtZtvzW0RSOe2Ss1y7LWVMCnu
-	Y97orzXVbc9vF+V9B7vegFKTkrzeqNEJNcapqdNORabLL2KhVBspLtdtNbIeJAIj+FR4pC+WJUr
-	8OOGfr52ziQdPPBDkPUtwTpl9iADXwgkKfFEz8Vru8N4mhqE+QezSICaqythqIdjeT40LIrFo1P
-	11no8K9iAZHi96PaBUjCJlF6M6XL7r0axjVm8kanmTO4WdPc6QdFFXEZww0EkGABDAG533DwS0X
-	6aK2Ihmatl/x+RRImMGWw7AhBkoFgLKgS0hGeN2k375nP3NqlcvgZoDlAuDNUVVpx53kfWZpM=
-X-Received: by 2002:a05:6000:4b06:b0:487:931:946c with SMTP id ffacd0b85a97d-4871e20cef1mr4744995f8f.1.1789719010064;
-        Fri, 18 Sep 2026 01:10:10 -0700 (PDT)
-From: Furkan Caliskan <frn1furkan10@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: jgross@suse.com,
-	jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger@xenproject.org,
-	dfaggioli@suse.com,
-	anthony.perard@vates.tech,
-	julien@xen.org,
-	Furkan Caliskan <frn1furkan10@gmail.com>
-Subject: [PATCH v2 5/5] tools: expose admission control toggle via xl sched-rtds
-Date: Fri, 18 Sep 2026 11:09:35 +0300
-Message-Id: <20260918080935.35498-6-frn1furkan10@gmail.com>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20260918080935.35498-1-frn1furkan10@gmail.com>
-References: <20260918080935.35498-1-frn1furkan10@gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=7jy0xTNRqgNKUDYhh+aSRoS48Toxky/Fb6QdDUlvdnQ=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=SLMgt/voJQ0o0PtRorkn+Y+vVA1ooN02MX8vbllvUJBGuakdKWuV+Y266TwwTjcl80xjgEoss
+ A51F1WGbdD1hhcFoYEJ9XOu/KJ8mKE93vRtRp6T5qn9/rrRyJwXiPIBGLhr23/1oGgzUA00V2qj
+ VHOnhl+8EtsYHf37FqbP8JhmfGXMXS+yE3DgcVLJM0WPgQwWFCeA2X3jBMdEw0UiBPW1ggKnhe/
+ wHB56EmEwKE+gnqvaofYiSeDomdZ1wO0Cz2cuLYZO/rgpkTAKLtYBcs9X9vx4l9tLriSQqTqJe8
+ D+6vjgOsWxKdL489cHF5Sw9VhCr3ZZVqQhhoxjHE63vA==
+X-Zone-Loop: 633e9b565c2e6551920da11f2a04d160ec16b36d772f
+x-campaign-type: default
+x-transaction-id: 726e4d17-f28c-41b8-b75d-51213537b2bb
+x-swg-uid: 01-af0af1b7-0fb3-4353-b42d-336e642ea682
+X-Mailer: Sweego
+Message-ID:
+ <1789721100.8631fc262581453bbf619ec5b2062170.1a0b3b0c18000072c4@vates.tech>
+x-swg-bid: 1789721100.8631fc262581453bbf619ec5b2062170.1a0b3b0c18000072c4
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1789719010-52ADCCFC-781E7EAD/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v2 23/39] xen/riscv: look up the exception table for
+ any trap taken in Xen context
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org, 
+ Romain Caritey <Romain.Caritey@microchip.com>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+ Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <c8c767e5932057e1fe3ca7756246ded691adad4f.1787838835.git.oleksii.kurochko@gmail.com>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <c8c767e5932057e1fe3ca7756246ded691adad4f.1787838835.git.oleksii.kurochko@gmail.com>
+Date: Fri, 18 Sep 2026 10:44:52 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1789721094; l=1765;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=RmMnfB4XxmKrTffUuXoweGsD8YT7e++sjPW9+OJLNZs=;
+ b=B73cUk7TwHYnJasxV3VuafpIFlFdakB1rJFrJawelQKHF79FYtISqq5u202sDBbKwYm4QT9UM
+ OKcrRYeHMUeDFV6U8RHt1H/cJR7Sp3fENZlj2V2oDsEJn9JyfV5ABIn
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1789721100156
+X-purgate-ID: tlsNG-16d1c6/1789721103-F7ACA77B-0BBC81A5/0/0
 X-purgate-type: clean
-X-purgate-size: 16058
+X-purgate-size: 1765
 
-Wire the per-cpupool admission-control switch through libxl
-to xl sched-rtds, and document it.
+> do_trap() consulted the exception table only for CAUSE_ILLEGAL_INSTRUCTION,
+> which covers csr_read_safe() but not the hlv/hlvx sequences reading guest
+> memory: those fault with load/store (guest) page fault causes and would
+> reach do_unexpected_trap() instead of their fixup.
+> 
+> Move the lookup ahead of the cause switch, and gate it on the trap having
+> been taken in Xen context and not being an interrupt:
+> 
+> - sepc of a trap taken from the guest is a guest VA/PA, which the
+>   guest can point at an address listed in the exception table; Xen would
+>   then act on that entry and, for EX_TYPE_TRAP_INFO, write through a
+>   pointer fully under guest control. Entries are matched by exact address,
+>   so this needs no more than a numerical collision.
+> 
+> - an interrupt taken at an address listed in the table would otherwise be
+>   "fixed up" as if the access itself had faulted, silently skipping it and
+>   handing the caller the interrupt's scause as a fault cause.
+> 
+> Returning early skips check_for_pcpu_work(), which is correct: that only
+> runs for traps taken from the guest.
+> 
+> With that in place a G-stage fault reaching the switch can no longer have
+> been caused by an hlv/hlvx covered by an entry, so anything left must have
+> come from the guest; assert as much.
+What means `assert as much` here? As you referencing any assert in the code,
+because in this patch, I couldn't find any.
+> 
+> Cache the "trap came from the guest" test in a local, it is now used four
+> times.
+Nit: By reading this sentence, I would expect to have the introduction
+of `from_guest` local here instead of in patch cc2d3b97e8
+xen/riscv: add guest page fault handling stub
 
-Add -s/--schedparam to list or set pool-wide RTDS scheduler
-parameters, and -a/--admission to enable or disable admission
-control for a cpupool ("-c pool -s -a 0/1").
-
-Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
----
- docs/man/xl.1.pod.in                 |  20 ++++++
- tools/golang/xenlight/helpers.gen.go |  23 ++++++
- tools/golang/xenlight/types.gen.go   |   4 ++
- tools/include/libxl.h                |   4 ++
- tools/include/xenctrl.h              |   6 ++
- tools/libs/ctrl/xc_rt.c              |  40 +++++++++++
- tools/libs/light/libxl_sched.c       |  46 ++++++++++++
- tools/libs/light/libxl_types.idl     |   5 ++
- tools/xl/xl_cmdtable.c               |   8 ++-
- tools/xl/xl_sched.c                  | 103 +++++++++++++++++++++++++--
- 10 files changed, 254 insertions(+), 5 deletions(-)
-
-diff --git a/docs/man/xl.1.pod.in b/docs/man/xl.1.pod.in
-index 88ccf7ad82..51405f4e33 100644
---- a/docs/man/xl.1.pod.in
-+++ b/docs/man/xl.1.pod.in
-@@ -1230,6 +1230,16 @@ the unreserved system resource.
- 
- Restrict output to domains in the specified cpupool.
- 
-+=item B<-s>, B<--schedparam>
-+
-+Specify to list or set pool-wide scheduler parameters.
-+
-+=item B<-a ADMISSION_CONTROL>, B<--admission=ADMISSION_CONTROL>
-+
-+Binary flag to enable or disable admission control for the cpupool.
-+When enabled (the default), a reservation is rejected if admitting
-+it would exceed the cpupool's utilization capacity.
-+
- =back
- 
- B<EXAMPLE>
-@@ -1293,6 +1303,16 @@ e.g., "xl sched-rtds -d vm1 -v 0 -p 100 -b 50 -e 1 -v 3 -p 300 -b 150 -e 0".
- To change the parameters of all the VCPUs of a domain, use B<-v all>,
- e.g., "xl sched-rtds -d vm1 -v all -p 500 -b 250 -e 1".
- 
-+4) Use B<-c CPUPOOL -s> to see whether admission control is enabled
-+for a cpupool, and B<-c CPUPOOL -s -a> to change it:
-+
-+    xl sched-rtds -c pool-rt -s
-+    Cpupool pool-rt: sched=RTDS admission-control=enabled
-+
-+    xl sched-rtds -c pool-rt -s -a 0
-+    xl sched-rtds -c pool-rt -s
-+    Cpupool pool-rt: sched=RTDS admission-control=disabled
-+
- =back
- 
- =back
-diff --git a/tools/golang/xenlight/helpers.gen.go b/tools/golang/xenlight/helpers.gen.go
-index b0c09da910..18ab0731ef 100644
---- a/tools/golang/xenlight/helpers.gen.go
-+++ b/tools/golang/xenlight/helpers.gen.go
-@@ -4192,6 +4192,29 @@ func (x *SchedCredit2Params) toC(xc *C.libxl_sched_credit2_params) (err error){x
-  return nil
-  }
- 
-+// NewSchedRtdsParams returns an instance of SchedRtdsParams initialized with defaults.
-+func NewSchedRtdsParams() (*SchedRtdsParams, error) {
-+var (
-+x SchedRtdsParams
-+xc C.libxl_sched_rtds_params)
-+
-+C.libxl_sched_rtds_params_init(&xc)
-+
-+if err := x.fromC(&xc); err != nil {
-+return nil, err }
-+
-+return &x, nil}
-+
-+func (x *SchedRtdsParams) fromC(xc *C.libxl_sched_rtds_params) error {
-+ x.AdmissionControlEnabled = bool(xc.admission_control_enabled)
-+
-+ return nil}
-+
-+func (x *SchedRtdsParams) toC(xc *C.libxl_sched_rtds_params) (err error){xc.admission_control_enabled = C.bool(x.AdmissionControlEnabled)
-+
-+ return nil
-+ }
-+
- // NewDomainRemusInfo returns an instance of DomainRemusInfo initialized with defaults.
- func NewDomainRemusInfo() (*DomainRemusInfo, error) {
- var (
-diff --git a/tools/golang/xenlight/types.gen.go b/tools/golang/xenlight/types.gen.go
-index e0fd78ec03..897100d9b6 100644
---- a/tools/golang/xenlight/types.gen.go
-+++ b/tools/golang/xenlight/types.gen.go
-@@ -1231,6 +1231,10 @@ type SchedCredit2Params struct {
- RatelimitUs int
- }
- 
-+type SchedRtdsParams struct {
-+AdmissionControlEnabled bool
-+}
-+
- type DomainRemusInfo struct {
- Interval int
- AllowUnsafe Defbool
-diff --git a/tools/include/libxl.h b/tools/include/libxl.h
-index 7c098edab6..ff993c38b7 100644
---- a/tools/include/libxl.h
-+++ b/tools/include/libxl.h
-@@ -2797,6 +2797,10 @@ int libxl_sched_credit2_params_get(libxl_ctx *ctx, uint32_t poolid,
-                                    libxl_sched_credit2_params *scinfo);
- int libxl_sched_credit2_params_set(libxl_ctx *ctx, uint32_t poolid,
-                                    libxl_sched_credit2_params *scinfo);
-+int libxl_sched_rtds_params_get(libxl_ctx *ctx, uint32_t poolid,
-+                                libxl_sched_rtds_params *scinfo);
-+int libxl_sched_rtds_params_set(libxl_ctx *ctx, uint32_t poolid,
-+                                libxl_sched_rtds_params *scinfo);
- 
- /* Scheduler Per-domain parameters */
- 
-diff --git a/tools/include/xenctrl.h b/tools/include/xenctrl.h
-index 9f00d4a19d..6f4ea7ca62 100644
---- a/tools/include/xenctrl.h
-+++ b/tools/include/xenctrl.h
-@@ -897,6 +897,12 @@ int xc_sched_rtds_vcpu_get(xc_interface *xch,
-                            uint32_t domid,
-                            struct xen_domctl_schedparam_vcpu *vcpus,
-                            uint32_t num_vcpus);
-+int xc_sched_rtds_params_set(xc_interface *xch,
-+                             uint32_t cpupool_id,
-+                             struct xen_sysctl_rtds_schedule *schedule);
-+int xc_sched_rtds_params_get(xc_interface *xch,
-+                             uint32_t cpupool_id,
-+                             struct xen_sysctl_rtds_schedule *schedule);
- 
- int
- xc_sched_arinc653_schedule_set(
-diff --git a/tools/libs/ctrl/xc_rt.c b/tools/libs/ctrl/xc_rt.c
-index 3cb3fbb923..fb3f567d4f 100644
---- a/tools/libs/ctrl/xc_rt.c
-+++ b/tools/libs/ctrl/xc_rt.c
-@@ -130,3 +130,43 @@ int xc_sched_rtds_vcpu_get(xc_interface *xch,
- 
-     return rc;
- }
-+
-+int xc_sched_rtds_params_set(xc_interface *xch,
-+                             uint32_t cpupool_id,
-+                             struct xen_sysctl_rtds_schedule *schedule)
-+{
-+    struct xen_sysctl sysctl = {};
-+
-+    sysctl.cmd = XEN_SYSCTL_scheduler_op;
-+    sysctl.u.scheduler_op.cpupool_id = cpupool_id;
-+    sysctl.u.scheduler_op.sched_id = XEN_SCHEDULER_RTDS;
-+    sysctl.u.scheduler_op.cmd = XEN_SYSCTL_SCHEDOP_putinfo;
-+
-+    sysctl.u.scheduler_op.u.sched_rtds = *schedule;
-+
-+    if ( do_sysctl(xch, &sysctl) )
-+        return -1;
-+
-+    *schedule = sysctl.u.scheduler_op.u.sched_rtds;
-+
-+    return 0;
-+}
-+
-+int xc_sched_rtds_params_get(xc_interface *xch,
-+                             uint32_t cpupool_id,
-+                             struct xen_sysctl_rtds_schedule *schedule)
-+{
-+    struct xen_sysctl sysctl = {};
-+
-+    sysctl.cmd = XEN_SYSCTL_scheduler_op;
-+    sysctl.u.scheduler_op.cpupool_id = cpupool_id;
-+    sysctl.u.scheduler_op.sched_id = XEN_SCHEDULER_RTDS;
-+    sysctl.u.scheduler_op.cmd = XEN_SYSCTL_SCHEDOP_getinfo;
-+
-+    if ( do_sysctl(xch, &sysctl) )
-+        return -1;
-+
-+    *schedule = sysctl.u.scheduler_op.u.sched_rtds;
-+
-+    return 0;
-+}
-diff --git a/tools/libs/light/libxl_sched.c b/tools/libs/light/libxl_sched.c
-index 2d6635dae7..ae4379cf09 100644
---- a/tools/libs/light/libxl_sched.c
-+++ b/tools/libs/light/libxl_sched.c
-@@ -397,6 +397,52 @@ int libxl_sched_credit2_params_set(libxl_ctx *ctx, uint32_t poolid,
-     return rc;
- }
- 
-+int libxl_sched_rtds_params_get(libxl_ctx *ctx, uint32_t poolid,
-+                                libxl_sched_rtds_params *scinfo)
-+{
-+    struct xen_sysctl_rtds_schedule sparam;
-+    int r, rc;
-+    GC_INIT(ctx);
-+
-+    r = xc_sched_rtds_params_get(ctx->xch, poolid, &sparam);
-+    if (r < 0) {
-+        LOGE(ERROR, "getting RTDS scheduler parameters");
-+        rc = ERROR_FAIL;
-+        goto out;
-+    }
-+
-+    scinfo->admission_control_enabled = sparam.admission_control_enabled;
-+
-+    rc = 0;
-+out:
-+    GC_FREE;
-+    return rc;
-+}
-+
-+int libxl_sched_rtds_params_set(libxl_ctx *ctx, uint32_t poolid,
-+                                libxl_sched_rtds_params *scinfo)
-+{
-+    struct xen_sysctl_rtds_schedule sparam;
-+    int r, rc;
-+    GC_INIT(ctx);
-+
-+    sparam.admission_control_enabled = scinfo->admission_control_enabled;
-+
-+    r = xc_sched_rtds_params_set(ctx->xch, poolid, &sparam);
-+    if (r < 0) {
-+        LOGE(ERROR, "Setting RTDS scheduler parameters");
-+        rc = ERROR_FAIL;
-+        goto out;
-+    }
-+
-+    scinfo->admission_control_enabled = sparam.admission_control_enabled;
-+
-+    rc = 0;
-+out:
-+    GC_FREE;
-+    return rc;
-+}
-+
- static int sched_credit2_domain_get(libxl__gc *gc, uint32_t domid,
-                                     libxl_domain_sched_params *scinfo)
- {
-diff --git a/tools/libs/light/libxl_types.idl b/tools/libs/light/libxl_types.idl
-index a7893460f0..d3121ea277 100644
---- a/tools/libs/light/libxl_types.idl
-+++ b/tools/libs/light/libxl_types.idl
-@@ -1286,6 +1286,11 @@ libxl_sched_credit2_params = Struct("sched_credit2_params", [
-     ("ratelimit_us", integer),
-     ], dispose_fn=None)
- 
-+libxl_sched_rtds_params = Struct("sched_rtds_params", [
-+    ("admission_control_enabled", bool),
-+    ], dispose_fn=None)
-+
-+
- libxl_domain_remus_info = Struct("domain_remus_info",[
-     ("interval",             integer),
-     ("allow_unsafe",         libxl_defbool),
-diff --git a/tools/xl/xl_cmdtable.c b/tools/xl/xl_cmdtable.c
-index 502244f683..e48d5c5edc 100644
---- a/tools/xl/xl_cmdtable.c
-+++ b/tools/xl/xl_cmdtable.c
-@@ -295,13 +295,19 @@ const struct cmd_spec cmd_table[] = {
-     { "sched-rtds",
-       &main_sched_rtds, 0, 1,
-       "Get/set rtds scheduler parameters",
--      "[-d <Domain> [-v[=VCPUID/all]] [-p[=PERIOD]] [-b[=BUDGET]] [-e[=Extratime]]]",
-+      "[-d <Domain> [-v[=VCPUID/all]] [-p[=PERIOD]] [-b[=BUDGET]] [-e[=Extratime]]]\n"
-+      "                [-c <Cpupool> -s [-a[=ADMISSION_CONTROL]]]",
-       "-d DOMAIN, --domain=DOMAIN     Domain to modify\n"
-       "-v VCPUID/all, --vcpuid=VCPUID/all    VCPU to modify or output;\n"
-       "               Using '-v all' to modify/output all vcpus\n"
-       "-p PERIOD, --period=PERIOD     Period (us)\n"
-       "-b BUDGET, --budget=BUDGET     Budget (us)\n"
-       "-e Extratime, --extratime=Extratime Extratime (1=yes, 0=no)\n"
-+      "-c CPUPOOL, --cpupool=CPUPOOL  Restrict output to domains in CPUPOOL\n"
-+      "-s, --schedparam               List or set pool-wide scheduler parameters\n"
-+      "-a ADMISSION_CONTROL, --admission=ADMISSION_CONTROL\n"
-+      "               Enable or disable admission control for the cpupool\n"
-+      "               (1=enabled, 0=disabled); requires -s\n"
-     },
-     { "domid",
-       &main_domid, 0, 0,
-diff --git a/tools/xl/xl_sched.c b/tools/xl/xl_sched.c
-index 73cd7040cd..7257d1854b 100644
---- a/tools/xl/xl_sched.c
-+++ b/tools/xl/xl_sched.c
-@@ -246,6 +246,28 @@ static int sched_credit2_pool_output(uint32_t poolid)
-     return 0;
- }
- 
-+static int sched_rtds_params_set(int poolid,
-+                                 libxl_sched_rtds_params *scinfo)
-+{
-+    if (libxl_sched_rtds_params_set(ctx, poolid, scinfo)) {
-+        fprintf(stderr, "libxl_sched_rtds_params_set failed.\n");
-+        return 1;
-+    }
-+
-+    return 0;
-+}
-+
-+static int sched_rtds_params_get(int poolid,
-+                                 libxl_sched_rtds_params *scinfo)
-+{
-+    if (libxl_sched_rtds_params_get(ctx, poolid, scinfo)) {
-+        fprintf(stderr, "libxl_sched_rtds_params_get failed.\n");
-+        return 1;
-+    }
-+
-+    return 0;
-+}
-+
- static int sched_rtds_domain_output(
-     int domid)
- {
-@@ -339,10 +361,15 @@ static int sched_rtds_vcpu_output_all(int domid,
- 
- static int sched_rtds_pool_output(uint32_t poolid)
- {
--    char *poolname;
-+    libxl_sched_rtds_params scparam;
-+    char *poolname = libxl_cpupoolid_to_name(ctx, poolid);
- 
--    poolname = libxl_cpupoolid_to_name(ctx, poolid);
--    printf("Cpupool %s: sched=RTDS\n", poolname);
-+    if (sched_rtds_params_get(poolid, &scparam))
-+        printf("Cpupool %s: [sched params unavailable]\n", poolname);
-+    else
-+        printf("Cpupool %s: sched=RTDS admission-control=%s\n",
-+                poolname,
-+                scparam.admission_control_enabled ? "enabled" : "disabled");
- 
-     free(poolname);
-     return 0;
-@@ -715,6 +742,8 @@ int main_sched_credit2(int argc, char **argv)
-  * -d [domid] -v [vcpuid 1] [params] -v [vcpuid 2] [params] ...  :
-  * Set per-VCPU params for domain
-  * -d [domid] -v all [params]  : Set all per-VCPU params for domain
-+ * -c [cpupool] -s  : List pool-wide scheduling parameters for cpupool
-+ * -c [cpupool] -s -a [0|1]  : Set admission control for cpupool
-  */
- int main_sched_rtds(int argc, char **argv)
- {
-@@ -736,7 +765,10 @@ int main_sched_rtds(int argc, char **argv)
-     bool opt_b = false;
-     bool opt_e = false;
-     bool opt_v = false;
-+    bool opt_s = false;
-+    bool opt_a = false;
-     bool opt_all = false; /* output per-dom parameters */
-+    bool admission_control = false;
-     int opt, i, rc, r;
-     static struct option opts[] = {
-         {"domain", 1, 0, 'd'},
-@@ -745,10 +777,12 @@ int main_sched_rtds(int argc, char **argv)
-         {"extratime", 1, 0, 'e'},
-         {"vcpuid",1, 0, 'v'},
-         {"cpupool", 1, 0, 'c'},
-+        {"schedparam", 0, 0, 's'},
-+        {"admission", 1, 0, 'a'},
-         COMMON_LONG_OPTS
-     };
- 
--    SWITCH_FOREACH_OPT(opt, "d:p:b:e:v:c", opts, "sched-rtds", 0) {
-+    SWITCH_FOREACH_OPT(opt, "d:p:b:e:v:c:a:s", opts, "sched-rtds", 0) {
-     case 'd':
-         dom = optarg;
-         break;
-@@ -801,6 +835,19 @@ int main_sched_rtds(int argc, char **argv)
-     case 'c':
-         cpupool = optarg;
-         break;
-+    case 's':
-+        opt_s = true;
-+        break;
-+    case 'a':
-+        if (strcmp(optarg, "0") && strcmp(optarg, "1"))
-+        {
-+            fprintf(stderr, "Invalid admission_control value.\n");
-+            r = EXIT_FAILURE;
-+            goto out;
-+        }
-+        admission_control = strtol(optarg, NULL, 10);
-+        opt_a = true;
-+        break;
-     }
- 
-     if (cpupool && (dom || opt_p || opt_b || opt_e || opt_v || opt_all)) {
-@@ -809,6 +856,11 @@ int main_sched_rtds(int argc, char **argv)
-         r = EXIT_FAILURE;
-         goto out;
-     }
-+    if (opt_s && (dom || opt_p || opt_b || opt_e || opt_v || opt_all)) {
-+        fprintf(stderr, "-s cannot be combined with domain/VCPU options.\n");
-+        r = EXIT_FAILURE;
-+        goto out;
-+    }
-     if (!dom && (opt_p || opt_b || opt_e || opt_v)) {
-         fprintf(stderr, "Missing parameters.\n");
-         r = EXIT_FAILURE;
-@@ -831,6 +883,49 @@ int main_sched_rtds(int argc, char **argv)
-         r = EXIT_FAILURE;
-         goto out;
-     }
-+    if (opt_a && !opt_s) {
-+        fprintf(stderr, "-a/--admission requires -s/--schedparam.\n");
-+        r = EXIT_FAILURE;
-+        goto out;
-+    }
-+
-+    if (opt_s)
-+    {
-+        libxl_sched_rtds_params scparam;
-+        uint32_t poolid = 0;
-+
-+        if (cpupool) {
-+            if (libxl_cpupool_qualifier_to_cpupoolid(ctx, cpupool,
-+                                                      &poolid, NULL) ||
-+                !libxl_cpupoolid_is_valid(ctx, poolid)) {
-+                fprintf(stderr, "Unknown cpupool \'%s\'\n", cpupool);
-+                r = EXIT_FAILURE;
-+                goto out;
-+            }
-+        }
-+
-+        if (!opt_a) { /* output pool-wide scheduling parameters */
-+            if (sched_rtds_pool_output(poolid)) {
-+                r = EXIT_FAILURE;
-+                goto out;
-+            }
-+        } else { /* set pool-wide scheduling parameters */
-+            if (sched_rtds_params_get(poolid, &scparam)) {
-+                r = EXIT_FAILURE;
-+                goto out;
-+            }
-+
-+            scparam.admission_control_enabled = admission_control;
-+
-+            if (sched_rtds_params_set(poolid, &scparam)) {
-+                r = EXIT_FAILURE;
-+                goto out;
-+            }
-+        }
-+
-+        r = EXIT_SUCCESS;
-+        goto out;
-+    }
- 
-     if ((!dom) && opt_all) {
-         /* get all domain's per-vcpu rtds scheduler parameters */
 -- 
-2.34.1
-
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
