@@ -4,44 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5A4F4C982DA
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 14:50:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1425520.1649510 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1BEDC982DA
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 15:15:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1425627.1649520 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7Zup-0000Fu-TQ; Fri, 18 Sep 2026 14:50:15 +0000
+	id 1x7aIu-0006yG-2L; Fri, 18 Sep 2026 15:15:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1425520.1649510; Fri, 18 Sep 2026 14:50:15 +0000
+Received: by outflank-mailman (output) from mailman id 1425627.1649520; Fri, 18 Sep 2026 15:15:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7Zup-0000FE-Ol; Fri, 18 Sep 2026 14:50:15 +0000
-Received: by outflank-mailman (input) for mailman id 1425520;
- Fri, 18 Sep 2026 14:50:14 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x7aIt-0006y8-Ue; Fri, 18 Sep 2026 15:15:07 +0000
+Received: by outflank-mailman (input) for mailman id 1425627;
+ Fri, 18 Sep 2026 15:15:06 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1x7Zuo-0008PH-2F
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 14:50:14 +0000
+ (envelope-from <ze.huang@oss.qualcomm.com>) id 1x7aIs-0006xt-HE
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 15:15:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7Zun-00H86X-Ev
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 16:50:13 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x7aIr-006X1o-QT
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 17:15:05 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6aad4f8a-bab6-0a2a0a5309dd-0a2a4504a334-32
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 16:50:13 +0200
-Received: from [74.125.230.204] (helo=mail-qk2-f12.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6aad4fa3-b57f-0a2a45040019-4a7de6ccf00b-3
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 16:50:12 +0200
-Received: by mail-qk2-f12.google.com with SMTP id
- d75a77b69052e-52fb76ef19aso7956491cf.2
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 07:50:12 -0700 (PDT)
-Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
- [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-532aac41311sm5612191cf.10.2026.09.18.07.50.09
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Fri, 18 Sep 2026 07:50:09 -0700 (PDT)
+ (envelope-from <ze.huang@oss.qualcomm.com>)
+ id 6aad556c-8faa-0a2a0a5109dd-0a2a4503aefe-36
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 17:15:05 +0200
+Received: from [205.220.180.131] (helo=mx0b-0031df01.pphosted.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ze.huang@oss.qualcomm.com>)
+ id 6aad5577-fae8-0a2a45030019-cddcb4839146-3
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 17:15:05 +0200
+Received: from pps.filterd (m0279870.ppops.net [127.0.0.1])
+ by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68IF0X5u1234167
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 15:15:03 GMT
+Received: from mail-pl1-f198.google.com (mail-pl1-f198.google.com
+ [209.85.214.198])
+ by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gs7jk81ua-1
+ (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 15:15:02 +0000 (GMT)
+Received: by mail-pl1-f198.google.com with SMTP id
+ d9443c01a7336-2d6f80c76e6so17559445ad.3
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 08:15:02 -0700 (PDT)
+Received: from localhost ([143.246.51.243]) by smtp.gmail.com with ESMTPSA id
+ d9443c01a7336-2ddb73db302sm10267015ad.2.2026.09.18.08.14.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 18 Sep 2026 08:15:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,235 +61,183 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 header.d=qualcomm.com header.i="@qualcomm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-Id:Mime-Version:References:Subject:To"; dkim=pass header.s=google header.d=oss.qualcomm.com header.i="@oss.qualcomm.com" header.h="In-Reply-To:References:To:From:Subject:Cc:Message-Id:Date:Content-Type:Content-Transfer-Encoding:Mime-Version"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
+	klACuV7fdAYuSy7gHXP/AwNMnEDjRFePgshatLjHrOQ=; b=DTqEyIFwhXRJLNu9
+	IeYZsHOrKbXijwmdqq+ZxiPvyfet/fCUB0waQ1XFZArweh0RjYYUmoxq7nl/JEN1
+	Uy5NmhOd1qusEnfpTpqRg8agzbrAvS7pZSvHR/ylobOfF2XYjSV1/YXA1xxh8us/
+	0WSRuT7kO6kdLHoxx0I2EyTlfaVrjEBLOT5OPcRGUnOIkfZCR1Q/Gs7QFtUyIHF/
+	pYQtElGkrqyBwxzixxweaHTo1wj2rjXG06RAMMI+IEvfVga5JiRCPKr59GAZzH1x
+	JMF+HWQl287jMZVbazg42u8QTxVQ95BPg7psGMdFhgyAH+3PsFf8v+fRdN7V6mJV
+	VeUpRg==
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1789743011; x=1790347811; darn=lists.xenproject.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=A8c5rUXaTXu9B0UqDL2lNbjmJqabE8+fQOLsAHyr+Co=;
-        b=RrtbBLuO81ggjT/jg5rcGpFCBb1wap4lt4eXzYssx9gOx7qVYHx84f8IvvVH1C2n3v
-         0J1H4hsfijtC7dNtXattJ5A6krhl8fKegVIFA23L+QL5B8Hfj62ICcKGUgWgLFARS06d
-         C7HqyvzRottBa7PMJew8i6x2j9ihU43a4Py1ku8p9X3+4U3HNyGtpQZ9VC91ACBIYRCR
-         oRbSVXFJk0dLNXKVuqsYDwsQBJrUQ+X7o93FL554ayaoQsjZg1Tw6AYnIvs4AjmhPOYJ
-         fQGySwmYTXTcfW/h485ZLE8ehGAG25PCpzQX79lDWKeBoA+VJ3tpKUre/YUSV0udvfGd
-         06nA==
+        d=oss.qualcomm.com; s=google; t=1789744502; x=1790349302; darn=lists.xenproject.org;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-type:content-transfer-encoding:mime-version:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=klACuV7fdAYuSy7gHXP/AwNMnEDjRFePgshatLjHrOQ=;
+        b=C8ZOREXWTdqaM32xy1hknWSzg/v9reA94UVS5j5jZcqUXY3kz00zGlvCSLmcJwD0xb
+         u+WQRRYBOyyGwcUfUenuteqIfePxzJjyHjL10hoWQsZ+MIcmuUEazbkbNhXmMuTcS0iw
+         7A3pcuOJ3O1Xlp3B1YqyZkeEYp0o8eA6vNayoXEdOAyCJ6QEZmrxyebCP/zpIvLlQozc
+         9AyxYwoup7xMSPwGtzoDj0Kzp41zsOHmx7g1Xbxv+aUS4S0w679X5Nu8Ey1STsDfZP2n
+         Mt4CaWrpi9LLRdHqBV0hs/HhG3YP2ZBGpYPoQxJqZUzAfh7UmSwx+Y4AZxErvpushHqT
+         1A2A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789743011; x=1790347811;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
+        d=1e100.net; s=20260707; t=1789744502; x=1790349302;
+        h=in-reply-to:references:to:from:subject:cc:message-id:date
+         :content-type:content-transfer-encoding:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=A8c5rUXaTXu9B0UqDL2lNbjmJqabE8+fQOLsAHyr+Co=;
-        b=nhMGYRJyGWTGsimErcPGAK1ElO2mPEv2z58HBGb7Bar8rNpoVK1ug8+NV1wf/idwAi
-         5vUEe7f91oACy82rigJL4MopcTuaOZaLDX2LyApa05i9mgUqopbcV115/rnmRP1wd27c
-         iT4yYSYa06k1wvSW2i9BoPKQbi5AIYq9RIRDKjwzCO7zfy3+J477Mazcg/rMw3dDe4HS
-         kU8oA7Fx9ULoJQvaC25e5PlMW/St4SBFaX/0PhOQdIMQKpah0rBuELNK9nspFnMzZM/G
-         k5NFxFyc9W8weylywa8mGJBxkoBqCUJwl7TOec/eA4jSPNj6x+wFP9sJjk9QKOtenooY
-         gd/Q==
-X-Forwarded-Encrypted: i=1; AKwUvBzLJ0ClcwmEhbaH/EEGEulrLJynphdvS59tKbVavZj0Dyo/v+VjAw9rWiKxgYGUG6IEvzrfWejp1SE=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nh32iyUUkfy2T0EcZzb1/plmokomv3Llw7w0ALPeYt8zpGmx7u
-	jRmm2ImG/K+hkkYbfpAj5HPDY6eooB++cQX3RTTDxPOSnS9IUbugDFpntlxmpVYtUg0=
-X-Gm-Gg: AYBFou3opspiqGHuinxLW9/VWtOwi6iQEiJx9RleWrXhQKilwFDTOzcZznzEVneTckt
-	hBHQ5XoceIjp3r4wOi2InsORlVI+zSpb27iwSgeT5f5xZRU0PD57QDj3K2ssD07AwK6d3obIRcZ
-	CGBRoe0YLb8DkbY2BD3ze/RsGO+fELyi9I5pYl9z/BRW/bq0/E+fqdR8dLF9bt7EV8OfhhEiGGL
-	VELt8KKGbJnoB6Bzo3LcmpincNICe/SMnADhOrHj/WaY/1YPHnG0NYCWlwc3NKAXjRO4BpkV9nX
-	l7U/4odmM2/v0ixAlGjkdFwvA8/s2ZhNQZt2OeKJyhCox2H3PbrCw3Moew2P3QQwN+pEnP8KJ2a
-	24LdsAwVTG/wCl/+DDyG3X06uFqyFAZavQUFIinW4/T+mqTy5pADH/dq7oY5Ns0VFeZ35/Kti2T
-	/FHbYk68TMBT7MAf/IhBGSIgFAwx6mw0rn9XRRJQqJgUZcZ0EWEa1dP6A0EcoU421+WznYCx1KK
-	X3jFKV8zieDgd9jXi2mK/PcS1nX8CovegCmPFUVCnuMvpGr/w5CabcM
-X-Received: by 2002:a05:622a:2606:b0:532:9add:50bb with SMTP id d75a77b69052e-5329e402a69mr42121701cf.75.1789743010763;
-        Fri, 18 Sep 2026 07:50:10 -0700 (PDT)
-From: Josef Bacik <josef@toxicpanda.com>
-Date: Fri, 18 Sep 2026 14:49:32 +0000
-Subject: [PATCH RFC v4 13/13] x86, arm64: Build Tasks RCU on Tasks Trace
- readers in trampolines
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Message-Id: <20260918-b4-rcu-tasks-preempt-qs-v4-13-63f0e9d69661@toxicpanda.com>
-References: <20260918-b4-rcu-tasks-preempt-qs-v4-0-63f0e9d69661@toxicpanda.com>
-In-Reply-To: <20260918-b4-rcu-tasks-preempt-qs-v4-0-63f0e9d69661@toxicpanda.com>
-To: "Paul E. McKenney" <paulmck@kernel.org>, 
- Frederic Weisbecker <frederic@kernel.org>, 
- Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Boqun Feng <boqun@kernel.org>, 
- Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
- Steven Rostedt <rostedt@goodmis.org>, 
- Masami Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
- Jiri Olsa <jolsa@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
- Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, 
- x86@kernel.org, Catalin Marinas <catalin.marinas@arm.com>, 
- Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>, 
- Xu Kuohai <xukuohai@huaweicloud.com>, 
- "Paul E. McKenney" <paulmck@kernel.org>, 
- Frederic Weisbecker <frederic@kernel.org>, 
- Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, 
- Joel Fernandes <joelagnelf@nvidia.com>, Boqun Feng <boqun@kernel.org>, 
- Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
- Steven Rostedt <rostedt@goodmis.org>, 
- Masami Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
- Jiri Olsa <jolsa@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
- Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, 
- x86@kernel.org, Catalin Marinas <catalin.marinas@arm.com>, 
- Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>, 
- Xu Kuohai <xukuohai@huaweicloud.com>
-Cc: Andy Lutomirski <luto@kernel.org>, 
- Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, 
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
- Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, 
- Juergen Gross <jgross@suse.com>, Luis Chamberlain <mcgrof@kernel.org>, 
- Ihor Solodrai <ihor.solodrai@linux.dev>, linux-kernel@vger.kernel.org, 
- rcu@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
- bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- xen-devel@lists.xenproject.org, Andy Lutomirski <luto@kernel.org>, 
- Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, 
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
- Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, 
- Juergen Gross <jgross@suse.com>, Luis Chamberlain <mcgrof@kernel.org>, 
- Ihor Solodrai <ihor.solodrai@linux.dev>, linux-kernel@vger.kernel.org, 
- rcu@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
- bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
- xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1789742980; l=6284;
- i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=VsJyzZYJ6ksShlnC7Yiz29R4LafGY+0/mhkU2yBL4O8=;
- b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
- JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QEwAhBVideBDLteTwvOfpHAYkoAWUm3JvOEwqQNA35GYhU6H/frrHaAxlVzl5POPAnXUpm7Q7V1
- WCFlv6PR8OAI=
-X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
- fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-ebf023/1789743012-502E4B50-B2ABC6E4/0/0
+        bh=klACuV7fdAYuSy7gHXP/AwNMnEDjRFePgshatLjHrOQ=;
+        b=dcATbVbkgunAM44znTV8E22GiIazj3n/D5syqyOvfQ9O0uOBoLfTRssLhf4TUVzg8Y
+         S4F0LRVCba//ed9UPZ/UIT1FouMoVbmvmfz3ayMv3EzmRgjzDOOvql823c4zJ8d5irbd
+         5GmQ9jIKyqbg+5J/tHUCnhWqDrcctRHIgp2GBcxXIfBB81CFq8bG7AZlFtoc4Ife54qq
+         IkeUgr5B3o6xHO2hrQHT+OLW/8kt77Zeoc9jjbJP8h73u3/YVRQNYhbUdpVycopTfW4y
+         2HFaw9oyREcj8ICnh+5oA/y7hLb1E0VqLKstZzvdL0/L9iOkDqUQc+G95YdRyPv2Ppcp
+         BmcA==
+X-Forwarded-Encrypted: i=1; AKwUvBzq5JOlxrnf8CUMkkopJdNAZi+QAm4AuUtdd8+IBfd3XSkl3Nmodkx99TCG9KbJAaMWJr0THlxlji4=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mo9CmEtQcO+aZj2CPVFj9mdzlhNzoMpNQwzl4G1MMBqCkg/Ksy
+	FVeKe19OzQKa6haBntRijvW2yFMSDgM30bEpX/Ts7Z/PTYl/6lwg4Fs257Q15RZpfnEpFSkGJk8
+	lHkx4AF4FrYDU9qfoQAejysKqf+07VTNSJdzUPcXheaOdZBz8hdtE/tD79NFY+66tK3pvZw==
+X-Gm-Gg: AYBFou0uwMYi78V0jfW5g0DwAqsCvVBgUe9PbErncAiPeXWUXF7ec1bWNKTqQhi6yIh
+	dJQFv299sU4fl0QvKd2eB1nu1xYY71huvfcdqxdXjGpTetCCvwviiR4p3ZvgwpMzKR7LfcchfVq
+	jjeZ+VUb707ffYh/ETum03ixyCsXoo87v0Ot/ej1omQV/id3YLXCNcxWOkguvwz6EAHN/1aq8tW
+	zsl2BLF/duGgt1nCeBG+UW4hSHZY7XszaS2GIvxb+02JXM9Pim9dcBstf+S630z+TijLJXwmk/t
+	yczxDLQGk3aa4C9ljmOWO63n1pNGn1o6SrMaQUzsZdI8OHbTK/BakN1PtVdtai5uvirq6cXScqs
+	kO+b1cg==
+X-Received: by 2002:a17:903:906:b0:2dd:c053:e669 with SMTP id d9443c01a7336-2ddc053e6a2mr4635015ad.47.1789744501633;
+        Fri, 18 Sep 2026 08:15:01 -0700 (PDT)
+X-Received: by 2002:a17:903:906:b0:2dd:c053:e669 with SMTP id d9443c01a7336-2ddc053e6a2mr4634335ad.47.1789744501092;
+        Fri, 18 Sep 2026 08:15:01 -0700 (PDT)
+Mime-Version: 1.0
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Fri, 18 Sep 2026 23:14:35 +0800
+Message-Id: <DLIJGTK5M3G0.2PNROS5SMQWNF@oss.qualcomm.com>
+Cc: <dri-devel@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>,
+        <linux-aspeed@lists.ozlabs.org>,
+        <linux-arm-kernel@lists.infradead.org>, <imx@lists.linux.dev>,
+        <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v3 2/2] drm/imx: replace struct drm_simple_display_pipe
+ with regular atomic helpers
+From: "Ze Huang" <ze.huang@oss.qualcomm.com>
+To: "Thomas Zimmermann" <tzimmermann@suse.de>,
+        "Ze Huang"
+ <ze.huang@oss.qualcomm.com>,
+        "Alexey Brodkin" <abrodkin@synopsys.com>,
+        "Maarten Lankhorst" <maarten.lankhorst@linux.intel.com>,
+        "Maxime Ripard"
+ <mripard@kernel.org>,
+        "David Airlie" <airlied@gmail.com>, "Simona Vetter"
+ <simona@ffwll.ch>,
+        "Joel Stanley" <joel@jms.id.au>,
+        "Andrew Jeffery"
+ <andrew@codeconstruct.com.au>,
+        "Frank Li" <Frank.Li@nxp.com>,
+        "Sascha
+ Hauer" <s.hauer@pengutronix.de>,
+        "Pengutronix Kernel Team"
+ <kernel@pengutronix.de>,
+        "Fabio Estevam" <festevam@gmail.com>,
+        "Linus
+ Walleij" <linusw@kernel.org>,
+        "Hans de Goede" <hansg@kernel.org>,
+        "Alex
+ Lanzano" <lanzano.alex@gmail.com>,
+        "Oleksandr Andrushchenko"
+ <oleksandr_andrushchenko@epam.com>,
+        "Philipp Zabel"
+ <p.zabel@pengutronix.de>,
+        =?utf-8?q?Uwe_Kleine-K=C3=B6nig?=
+ <u.kleine-koenig@pengutronix.de>,
+        "Marian Cichy" <m.cichy@pengutronix.de>
+X-Mailer: aerc 0.22.0.r10.g73f20125
+References: <20260727-drm-simple-kms-removal-v3-0-de36e534f7a1@oss.qualcomm.com> <20260727-drm-simple-kms-removal-v3-2-de36e534f7a1@oss.qualcomm.com> <8e4c84be-5c89-4d84-adda-aad4c7de0c8a@suse.de>
+In-Reply-To: <8e4c84be-5c89-4d84-adda-aad4c7de0c8a@suse.de>
+X-Proofpoint-ORIG-GUID: MLiBPxhPjqk70rc0NIv2TKBkaJ0hli2i
+X-Proofpoint-GUID: MLiBPxhPjqk70rc0NIv2TKBkaJ0hli2i
+X-Authority-Analysis: v=2.4 cv=FeSiV5+6 c=1 sm=1 tr=0 ts=6aad5576 cx=c_pps
+ a=MTSHoo12Qbhz2p7MsH1ifg==:117 a=LNnhWNgewsfctp/cwirQdA==:17
+ a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=gowsoOTTUOVcmtlkKump:22
+ a=P-IC7800AAAA:8 a=EUspDBNiAAAA:8 a=nI5uWgR6GCbiVoZM8DwA:9 a=QEXdDO2ut3YA:10
+ a=GvdueXVYPmCkWapjIL-Q:22 a=d3PnA9EDa4IxuAV0gXij:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDIxNyBTYWx0ZWRfX9GkqI9kUxNdH
+ xaJowi0Bfn5ZoxL6BBdj96wirRi1/XCkMnxIBzKji0T0axJhprJyqeBmYuE4uL1xi/7xrIz5EzT
+ JyJGH0rVQmGeF55c3M0EXNM8vimI/RVCGMasWcCBVlbKeV/JGNcITRAijjaSy7CpSmBr+D9IFxS
+ waqdEFvsUFfRLoFqxzBzVx+7CiqNDQCiwl1BkxiMmktsKBY+GZj1rk2tGiu56ctcDgts/pysEfk
+ zNq22JZ1MMQ6EiZvz/Pdi53wrG++Ye+V7MeScJq1l8OSkQhHGcHPIMv+VvunlVg4+JDKxp/ewZ3
+ nQpw751461wPQ3niEDWh3WiA963ahVKSj/4yRqdZ6D9jdoQ5tBeFDpJUr95qydBBtlc23S21HVi
+ 7ehDuHleJK+yGH1CWosj9DPdGuJmC9OpNb7DRdxKDrvc4ETkllGmoqjv69aoE6cKNHA1aUYUVCb
+ sKrke2p7YwCqQcL96Uw==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDIxNyBTYWx0ZWRfX6WfenxViJ08H
+ Z4E4KMnqr4xWRG4clvJMFxCxkElNE8bx1p+3xTwj6p7NF7vGZyXRsZigG7IDsMVkXfn8wLTNyba
+ 3lgZRn9RR4QUJRIAnQNpiXp6etVujx4=
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-18_04,2026-09-16_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 lowpriorityscore=0 bulkscore=0 impostorscore=0
+ suspectscore=0 clxscore=1015 spamscore=0 malwarescore=0 adultscore=0
+ phishscore=0 classifier=typeunknown authscore=0 authtc= authcc=
+ route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2609040000
+ definitions=main-2609180217
+X-purgate-ID: tlsNG-33051d/1789744505-772F54E9-0DECE7E2/0/0
 X-purgate-type: clean
-X-purgate-size: 6286
+X-purgate-size: 1526
 
-With the preceding patches every trampoline whose lifetime Tasks RCU
-guards on x86-64 and arm64 -- ftrace_caller and its copies, the optprobe
-template, BPF trampolines, and the sample direct-call
-trampolines -- is a Tasks Trace RCU reader around its call-out, and the
-text outside that reader is known to rcu_tasks_trampoline_text().
-Select HAVE_RCU_TRAMPOLINE_READERS on both (x86-64 with SMP for Tree
-SRCU and DYNAMIC_FTRACE, which is where its ftrace_caller changes and
-arch_rcu_tasks_trampoline_text() live; arm64 with
-DYNAMIC_FTRACE_WITH_ARGS likewise), which switches CONFIG_TASKS_RCU to the
-implementation added earlier in the series: a Tasks RCU grace period
-becomes a per-CPU pass over context switches and irq-exit reschedules
-outside trampoline text plus a Tasks Trace grace period, bounded by a
-few jiffies and preempt-off latency instead of by the longest stretch
-any task runs without sleeping.
+On Wed Sep 16, 2026 at 2:50 PM CST, Thomas Zimmermann wrote:
+> Hi
+>
+> Am 26.07.26 um 21:42 schrieb Ze Huang:
+>> Convert i.MX LCDC to explicit primary plane, CRTC and encoder objects.
+>> Keep no-scaling plane check and GEM framebuffer prepare callback from
+>> simple-KMS path.
+>>
+>> Wire the vblank lifecycle explicitly with CRTC vblank callbacks and
+>> drm_crtc_vblank_on()/drm_crtc_vblank_off(). Use the old CRTC state in th=
+e
+>> disable path for clock unwinding so the clock reference count remains
+>> paired with the previous active state.
+>>
+>> Signed-off-by: Ze Huang <ze.huang@oss.qualcomm.com>
+>> ---
+>> +
 
-Other architectures keep the classic implementation.  Update
-Documentation/RCU and the FORCE_TASKS_RCU help text to describe the
-variant and the obligation it places on trampolines.
+[ ... ]
 
-Assisted-by: LLM
-Signed-off-by: Josef Bacik <josef@toxicpanda.com>
----
- .../RCU/Design/Requirements/Requirements.rst       | 24 ++++++++++++++++++++++
- Documentation/RCU/checklist.rst                    |  7 ++++++-
- arch/arm64/Kconfig                                 |  1 +
- arch/x86/Kconfig                                   |  1 +
- kernel/rcu/Kconfig                                 |  6 ++++--
- 5 files changed, 36 insertions(+), 3 deletions(-)
+>> +static void imx_lcdc_crtc_helper_atomic_flush(struct drm_crtc *crtc,
+>> +					      struct drm_atomic_commit *commit)
+>> +{
+>> +	struct drm_crtc_state *new_crtc_state =3D drm_atomic_get_new_crtc_stat=
+e(commit, crtc);
+>> +	struct drm_pending_vblank_event *event =3D new_crtc_state->event;
+>> +
+>> +	if (!event)
+>> +		return;
+>> +
+>> +	new_crtc_state->event =3D NULL;
+>> +
+>> +	spin_lock_irq(&crtc->dev->event_lock);
+>> +	if (new_crtc_state->active && drm_crtc_vblank_get(crtc) =3D=3D 0)
+>> +		drm_crtc_arm_vblank_event(crtc, event);
+>> +	else
+>> +		drm_crtc_send_vblank_event(crtc, event);
+>> +	spin_unlock_irq(&crtc->dev->event_lock);
+>>   }
+>
+> Please use drm_crtc_vblank_atomic_flush(). [1]
+>
+> [1]=20
+> https://elixir.bootlin.com/linux/v7.2.5/source/drivers/gpu/drm/drm_vblank=
+_helper.c#L51
 
-diff --git a/Documentation/RCU/Design/Requirements/Requirements.rst b/Documentation/RCU/Design/Requirements/Requirements.rst
-index 8101fe6229d5..c059c463e083 100644
---- a/Documentation/RCU/Design/Requirements/Requirements.rst
-+++ b/Documentation/RCU/Design/Requirements/Requirements.rst
-@@ -2756,6 +2756,30 @@ synchronize_rcu(), and rcu_barrier(), respectively. In
- three APIs are therefore implemented by separate functions that check
- for voluntary context switches.
- 
-+Architectures that select ``CONFIG_HAVE_RCU_TRAMPOLINE_READERS`` keep the
-+same three APIs but implement the grace period differently
-+(``CONFIG_TASKS_RCU_TRAMPOLINE_READERS``).  There, every trampoline whose
-+lifetime Tasks RCU guards enters a Tasks Trace RCU read-side critical
-+section (rcu_read_lock_trace() or its assembly equivalent) before calling
-+out and leaves it before returning, so a task anywhere inside such a
-+call-out is an ordinary Tasks Trace reader whether or not it is
-+preempted.  The few trampoline instructions outside that reader can only
-+be occupied by a task that was interrupted there, so the grace period
-+additionally waits for each CPU to pass through a context switch, and the
-+irq-exit preemption path, the only switch that can catch a task inside
-+such text (rcu_tasks_trampoline_text()), briefly makes such a task a
-+holdout until it is next seen elsewhere.  On such kernels an involuntary
-+context switch outside trampoline text *is* a Tasks-RCU quiescent state,
-+a Tasks RCU grace period no longer depends on how long any task runs
-+without sleeping, cond_resched_tasks_rcu_qs() is unnecessary, and the
-+obligation moves to the trampolines: anything that relies on
-+synchronize_rcu_tasks() to protect code a task may be preempted in must
-+take the Tasks Trace reader (see register_ftrace_direct()), or, where
-+that is impossible because the code is ordinary text with no trampoline
-+of its own, make it known to rcu_tasks_trampoline_text() and wait out
-+tasks already parked there with rcu_tasks_wait_irq_preempted(), as the
-+kprobe jump optimizer does.
-+
- Tasks Rude RCU
- ~~~~~~~~~~~~~~
- 
-diff --git a/Documentation/RCU/checklist.rst b/Documentation/RCU/checklist.rst
-index 4b30f701225f..87dd506bffef 100644
---- a/Documentation/RCU/checklist.rst
-+++ b/Documentation/RCU/checklist.rst
-@@ -252,7 +252,12 @@ over a rather long period of time, but improvements are always welcome!
- 	a.	If the updater uses synchronize_rcu_tasks() or
- 		call_rcu_tasks(), then the readers must refrain from
- 		executing voluntary context switches, that is, from
--		blocking.
-+		blocking.  On architectures that select
-+		CONFIG_HAVE_RCU_TRAMPOLINE_READERS a reader must in
-+		addition be a Tasks Trace RCU reader (that is what the
-+		trampolines there do around their call-outs) or be text
-+		that rcu_tasks_trampoline_text() recognises; an arbitrary
-+		stretch of preemptible kernel code is not protected.
- 
- 	b.	If the updater uses call_rcu_tasks_trace()
- 		or synchronize_rcu_tasks_trace(), then the
-diff --git a/arch/arm64/Kconfig b/arch/arm64/Kconfig
-index b5a51b0ef944..bf0e56006863 100644
---- a/arch/arm64/Kconfig
-+++ b/arch/arm64/Kconfig
-@@ -218,6 +218,7 @@ config ARM64
- 	select HAVE_PERF_REGS
- 	select HAVE_PERF_USER_STACK_DUMP
- 	select HAVE_PREEMPT_DYNAMIC_KEY
-+	select HAVE_RCU_TRAMPOLINE_READERS if DYNAMIC_FTRACE_WITH_ARGS
- 	select HAVE_REGS_AND_STACK_ACCESS_API
- 	select HAVE_RELIABLE_STACKTRACE
- 	select HAVE_POSIX_CPU_TIMERS_TASK_WORK
-diff --git a/arch/x86/Kconfig b/arch/x86/Kconfig
-index 15fd9ec5ecac..64c3814eb745 100644
---- a/arch/x86/Kconfig
-+++ b/arch/x86/Kconfig
-@@ -288,6 +288,7 @@ config X86
- 	select MMU_GATHER_RCU_TABLE_FREE
- 	select MMU_GATHER_MERGE_VMAS
- 	select HAVE_POSIX_CPU_TIMERS_TASK_WORK
-+	select HAVE_RCU_TRAMPOLINE_READERS	if X86_64 && SMP && DYNAMIC_FTRACE
- 	select HAVE_REGS_AND_STACK_ACCESS_API
- 	select HAVE_RELIABLE_STACKTRACE		if UNWINDER_ORC || STACK_VALIDATION
- 	select HAVE_FUNCTION_ARG_ACCESS_API
-diff --git a/kernel/rcu/Kconfig b/kernel/rcu/Kconfig
-index bbab14bc14c3..341b68b972ef 100644
---- a/kernel/rcu/Kconfig
-+++ b/kernel/rcu/Kconfig
-@@ -95,8 +95,10 @@ config FORCE_TASKS_RCU
- 	help
- 	  This option force-enables a task-based RCU implementation
- 	  that uses only voluntary context switch (not preemption!),
--	  idle, and user-mode execution as quiescent states.  Not for
--	  manual selection in most cases.
-+	  idle, and user-mode execution as quiescent states, or, on
-+	  HAVE_RCU_TRAMPOLINE_READERS architectures, the variant built on
-+	  Tasks Trace RCU readers in trampolines.  Not for manual
-+	  selection in most cases.
- 
- config NEED_TASKS_RCU
- 	bool
+Thanks! will follow
 
--- 
-2.55.0
-
+>
+> Best regards
+> Thomas
+>
 
