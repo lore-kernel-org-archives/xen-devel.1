@@ -4,52 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C656C982D7
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 17:05:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1425729.1649556 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1F6C1C982D7
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 20:12:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1425856.1649563 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7c1v-0006bZ-TS; Fri, 18 Sep 2026 17:05:43 +0000
+	id 1x7evg-0004r3-42; Fri, 18 Sep 2026 20:11:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1425729.1649556; Fri, 18 Sep 2026 17:05:43 +0000
+Received: by outflank-mailman (output) from mailman id 1425856.1649563; Fri, 18 Sep 2026 20:11:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7c1v-0006bS-PY; Fri, 18 Sep 2026 17:05:43 +0000
-Received: by outflank-mailman (input) for mailman id 1425729;
- Fri, 18 Sep 2026 17:05:43 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x7evg-0004qu-1H; Fri, 18 Sep 2026 20:11:28 +0000
+Received: by outflank-mailman (input) for mailman id 1425856;
+ Fri, 18 Sep 2026 20:11:26 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ze.huang@oss.qualcomm.com>) id 1x7c1v-0006bK-9Q
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 17:05:43 +0000
+ (envelope-from <xakep.amatop@gmail.com>) id 1x7eve-0004qo-Pf
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 20:11:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7c1t-006mVJ-T5
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 19:05:41 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x7eve-000F4A-6g
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 22:11:26 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ze.huang@oss.qualcomm.com>)
- id 6aad6f54-e002-0a2a0a5209dd-0a2a450b858c-26
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 19:05:41 +0200
-Received: from [205.220.180.131] (helo=mx0b-0031df01.pphosted.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ze.huang@oss.qualcomm.com>)
- id 6aad6f64-b7e8-0a2a450b0019-cddcb483e4a6-3
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 19:05:41 +0200
-Received: from pps.filterd (m0279873.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 68IGoPFV1211846
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 17:05:39 GMT
-Received: from mail-pl1-f200.google.com (mail-pl1-f200.google.com
- [209.85.214.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4gs23922r6-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 17:05:39 +0000 (GMT)
-Received: by mail-pl1-f200.google.com with SMTP id
- d9443c01a7336-2dc7337e2a7so12882595ad.0
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 10:05:39 -0700 (PDT)
-Received: from localhost ([143.246.51.243]) by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2ddb75ae73csm11519845ad.57.2026.09.18.10.05.32
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Sep 2026 10:05:37 -0700 (PDT)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6aad9ad6-e002-0a2a0a5209dd-0a2a450c8966-20
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 22:11:26 +0200
+Received: from [209.85.208.181] (helo=mail-lj1-f181.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6aad9aed-f479-0a2a450c0019-d155d0b5a819-3
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 22:11:26 +0200
+Received: by mail-lj1-f181.google.com with SMTP id
+ 38308e7fff4ca-3a49a40209dso13095811fa.0
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 13:11:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,147 +48,338 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 header.d=qualcomm.com header.i="@qualcomm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-Id:Mime-Version:References:Subject:To"; dkim=pass header.s=google header.d=oss.qualcomm.com header.i="@oss.qualcomm.com" header.h="In-Reply-To:References:To:From:Subject:Cc:Message-Id:Date:Content-Type:Content-Transfer-Encoding:Mime-Version"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	QMjXKTddFP/KRl7r6fg9f8x2YOcB9udmZHxfTy35BWA=; b=WMMuEWXHWJBv/taD
-	f9QZUlE46GdUzuTjYYf/C3doWA0kR+Y5MgruXgzoDKrnaUUWblDlcnoq62X0pGZb
-	/qbl9/Nh08g2JIywKdvQgqoIFODG95dmBYMwKhKE8pfH/9GV1s9uiIZ/ny0o1Ct9
-	AxCx/8lN1sOSKnfJuvaS1JUg9GiNW/atd+A2FpRM9LBALe3ZTIKYfBJ7XUzkVsAm
-	/0Sfv53h7nA91Txh3LNTG0XJ02vyxwLdjN4jnrj+2hSOYEPJdtabTGR3PdaWxCxi
-	qwYwhp2WIMT4a5wkgjtCyWIgf1y9m/+GKe3lh+g7l4PT8AQ6cRmW8HyvIVAcaiX9
-	oOwVlA==
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1789762285; cv=none;
+        d=google.com; s=arc-20260327;
+        b=UlTreZ9Rz2TZlelQx3rlI3wBpj/j0XvQQKxZRc7yUP1ACyvhmBVdN/K6gcjD8+5KKp
+         w+bA5R7lGG+Fs+AtlUiXRR73I5f5DSNxuea4BmNNS+QNMxLcVLp6+xS4/ZjNr2YsoUx/
+         gMpVoe8JDldUDTJLIOTbJaBjzOI10NSFEaR2wc/ubTw+jZRC4D/1FTjQPvnK+HZ2oWvb
+         Y1aYLhN4nj4BH2GAKML23EYwHiIrKbN/Zk3SrCFy1+Z20orqFfOpxFHJGJH/kGl2FxIq
+         L/yBkKMVIs7pA5sOPlY9QtHQ2CTjmWFFqv2w04Z7eOJqVaRyXPr730RWdcnmxcCiuc6P
+         wn1A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=RjXqA35r57hnuOa5Guy5jxZ/xx19lYaIb7I9ZDD1OL4=;
+        fh=8qrorWp5mU6HGMgfX45u2S7N0Hai0jOoVMQ5u+MxS64=;
+        b=iQGxcw3cjg1wKK8Bv2BlEO+GtzT18g3KGI9qRI+fPsndcb/PJTbiiDa+GVBg4C0hJI
+         IOeIxBMABRA/hEsxwLP+LYx2jBsiO8qQn3LoM0CKeH1B6AxNzO7BhkQTcrcYuHkGBa8f
+         9LTUYUL8DC9Unt1WOerqeV0opqPVt3KF2k+Mj3b92pLZgCY9ref/9gZzVNKO2C8A7p+X
+         +TVvGAUe0MFIY6EV/No2qVZW5nCc1iqervvSEZDkFMzfs8+z8p0etFo26ciy3rB2pUIa
+         tNSLh0IWGjmovWmIi2EOTRQG2d4Ipw0ZNefaWNpfcRnMh1Fm3u90GiGLc4YQT9Grl9cv
+         3q5g==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1789751139; x=1790355939; darn=lists.xenproject.org;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=QMjXKTddFP/KRl7r6fg9f8x2YOcB9udmZHxfTy35BWA=;
-        b=Ji0Cq8X43PZ/3yRrGbdtrbHFI3r86UiL3YIFbijELY74R76aWW98PHB4UOHEINxyTf
-         LYYjdgH9dsmc8daZ5BvBOh5Mi0iziJJFBw8UUuWCLR4T2KEfe8QNZ87CPypCBWnXyh3x
-         KcVXfa5LwXfMfJ7nhA/1Mld/DjfrrmLkY1Frj7wbu+yWva0qwg0oCFWHo0fPcx1/ifwe
-         8OrYVFaszWUx9oK96z2l0zDO0g3gRGgdHRRurlo3bp/KmdYJhak9ZH1i/rs+BZsh41ca
-         W1G9vlaL0L8ifctTlvv6vCLiSrqFcalkV1Lip4koK36WJ9iFS5511T7uVUBi/+0+uE35
-         OQjA==
+        d=gmail.com; s=20251104; t=1789762285; x=1790367085; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=RjXqA35r57hnuOa5Guy5jxZ/xx19lYaIb7I9ZDD1OL4=;
+        b=TnFHH8iTEYNBa+vb179BavuFFsG2UxxXO9VLu8ofzkqyQIycWDv+fg5hrxZIaNScnF
+         T1+o/dLYDr4Ps0a8PtrIJ5tuyCCXq9NLuM8maIOnOTq8fZ/sx2cIlEjYISd1BOCGy5hE
+         fcLk16C4/+9o2RwFUROmcre7bCtDkHWSeQY9+hyeov/y+EULNmjgVPsgZmOIIX1c1b07
+         15qWtFo0NT8dL34iEQ2WIRR2A187l/RP8aAnl4X3L//Qm7jlMNK9chmUkiCFPDVgUe95
+         mFxO3J07NIFNRulE9wdj7k1rVTn9kuzO62627c4dtMj20FYpDY8gwO5lXciQ0G0rK7lj
+         cZFQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789751139; x=1790355939;
-        h=in-reply-to:references:to:from:subject:cc:message-id:date
-         :content-type:content-transfer-encoding:mime-version:x-gm-gg
+        d=1e100.net; s=20260707; t=1789762285; x=1790367085;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=QMjXKTddFP/KRl7r6fg9f8x2YOcB9udmZHxfTy35BWA=;
-        b=K/NqFZeuhRj0EJV2AUAM+WhHHUlWtRtjBGzcBe6923lXOYbH1w5918LgBDL8Pzeoug
-         xflggiz0oObidY4luuRfzsY2srhdelXrFX3GrJ6czm18+uOkPIKMPFrZkwk0x8fjB3YQ
-         95qcOfW98STBlSsHnExt7+aIwmgcmOuxwKDDHh1+wFuiVjY1I9OpHwWwPDt45MMkf8/h
-         fmgocK3VWpGb8IwJD9XM943vIRn9z0MvW9UCtj5QezedQzbSzERXQS8/LmRL4GbgNvce
-         ITru7qY/ybpwuPtvOrb/jG/qrZC+gCpKfm4XpUksF3Lf5aiI9fS+aX+QhtSrCtdsQ/M/
-         ifJA==
-X-Forwarded-Encrypted: i=1; AKwUvBxjnJV8fIGuwR268d5zlDjjbxO61aLL/gFTjCDJeJUycXDSG1saUggmRMg3yuwQD3wvvL/JpC5+diY=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nN4kQsCVT6aa9QOHv9xdRIX4v+R4E0qnleN5NeND+jbirimZGG
-	wVqB7TtcCKExhr6z+bJ4++7rF4/+1tFmB3uSeUQU7YbEfTBObzmQ8sqLPct7bFwBvDV4mWVTX7y
-	aOMLmyHx+fM2H0BxxV1UO0LuGRz3sgodUVne3oDbCkjx3hix6ryLigZcsqvtKYGWLGchW7w==
-X-Gm-Gg: AYBFou3eroPvzJ6PUHeU1vSOzR/FhexQCZOKnvRW2m5zxvLV8EycTvdslb2q4vlNOjP
-	joXwOzc7BMTlIW/JyUHxyXfUZRgue++0RNwD0WU4B+RD31pfzUGlKMqjWFghCVCwuN5YNmTzqua
-	BDl7hxwFd2bhZ0g5SFDTh+nGLiPDyDi615iYDRxj60ytpr/gXgGclvzmCNR5JyMVbYAP5NZ6+Cw
-	Bz3fVwU2+jZvI6kA6usQtMblMt+1BbijcaIep2eY/eKNrV32kabx3Msj+x7y5K7JRpnX8usf8Nr
-	3RO+E38gM4ifx6d5VhWUr9aHxxBgtRvR0ijwQ8CtIYW5rCfCwMt8yzSM31Fe1Lbvn40cjilPM+W
-	1F5/7DQ==
-X-Received: by 2002:a17:902:fc50:b0:2dd:c053:e0f6 with SMTP id d9443c01a7336-2ddc053e13emr7876625ad.37.1789751138499;
-        Fri, 18 Sep 2026 10:05:38 -0700 (PDT)
-X-Received: by 2002:a17:902:fc50:b0:2dd:c053:e0f6 with SMTP id d9443c01a7336-2ddc053e13emr7876085ad.37.1789751137947;
-        Fri, 18 Sep 2026 10:05:37 -0700 (PDT)
-Mime-Version: 1.0
+        bh=RjXqA35r57hnuOa5Guy5jxZ/xx19lYaIb7I9ZDD1OL4=;
+        b=ZEvMVhv6g4uE8LIRwmys+47p5BAlb62BhWnje8gIiV/WnxfpqZHRBE31+OQdV+sK4F
+         UrjAw+THff0CrgEVLllZpAkwKijPUzj75ba8sBqukahFB7daDyWY/aasNKq/5jQbcJhA
+         UgsDwqyyyGumxr7xvYrNCSvty5z7F4d+spHtWa3vZRHknIt4FjL+SuYlwK8WwDXeC6SP
+         saQ9PFday1Y/tHxlBXpiKktdgSMcinqfFUagAVPyvd2pk8u12eO3CQmZDvixOAK/w520
+         k95vEBc15+f1SYyNzQP34dswm0dyVMpEfH8hxS6r+D3U2K//YrFIWIYfjTOxxYRMGEgj
+         yDGw==
+X-Forwarded-Encrypted: i=1; AKwUvBwSYlAGfEmOiUPlZDf2Bj/LRAx9TWxgftpNZJ4+NuVcbM3MHSonqcJiSHL3qLbLZZL5ypNGU1OBDzQ=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mMWrqxhyTD93AeojwfcpHO8nu9B7xiV6Udp0sHnbJB4fhAFtCY
+	WrqHUw5c5GkT59xzkKCZDIp2pCeU4EJ3LUZi/9NsBQXiOIFG3NqgeFPOlVtWmH5+J9YURAAI7m7
+	O6KuwvDuTX7Vmp71i894sV0NE2vz5ia0=
+X-Gm-Gg: AYBFou3+gPGbgignZJIPFnzZLrDPyX+xp+rSYuD4wnWxsr2AgwKTH1/ybJtcxGtruBA
+	KNz3lKJq7ihpC//tWuFkuAhM/LAq/9trT7GiHlmosWawPkDjIkJqqsZb8KwiCMeaGTW9U2LMnW+
+	Pg2uRhGRn/Xi+3czRB9nYVjtwcEO4KLhDUEKYNTSq1RB0+iYEE8HBEcivgMmd4c464qGQ+TU6Bs
+	K8jWaSvzYdoOSoT4A2SPKU2I7hFQZqGx59IVsPWltm4dJvGoDESiWAQGTd5OFh9CPT94Qt2ywUF
+	Ge4zI2bnTIv2F8Lq53SIWc1L3oFcvWirpmESRdaecWBq1hUDOr/EYZEM
+X-Received: by 2002:a05:651c:a332:b0:3a4:8e54:562 with SMTP id
+ 38308e7fff4ca-3a5e72887c0mr23728131fa.7.1789762285055; Fri, 18 Sep 2026
+ 13:11:25 -0700 (PDT)
+MIME-Version: 1.0
+References: <cover.1770046465.git.mykyta_poturai@epam.com> <AC263D87-9EE3-4F32-BC5D-1A290781C48B@arm.com>
+ <CAGeoDV_a-tUGrQai8+VzQwwGHSGwbJ04Y6uWg-pr5mVi52dsaw@mail.gmail.com>
+In-Reply-To: <CAGeoDV_a-tUGrQai8+VzQwwGHSGwbJ04Y6uWg-pr5mVi52dsaw@mail.gmail.com>
+From: Mykola Kvach <xakep.amatop@gmail.com>
+Date: Fri, 18 Sep 2026 23:11:14 +0300
+X-Gm-Features: AcwNN1V_KbA5WvJDMDtxQRX4T9C_CIgIZ4qrzFv_OucX5rM4pnYoOhtBfvIduYM
+Message-ID: <CAGeoDV_CFMC1w2o+5BdDW7u7f2iCP0S4s-7EMokgLf6r_7zKjQ@mail.gmail.com>
+Subject: Re: [RFC PATCH 00/19] GICv4 Support for Xen
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+Cc: Mykyta Poturai <Mykyta_Poturai@epam.com>, 
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, 
+	Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Sat, 19 Sep 2026 01:05:13 +0800
-Message-Id: <DLILTJ12IX36.15ABZZEUMTL59@oss.qualcomm.com>
-Cc: "Ze Huang" <ze.huang@oss.qualcomm.com>,
-        "Alexey Brodkin"
- <abrodkin@synopsys.com>,
-        "Maarten Lankhorst"
- <maarten.lankhorst@linux.intel.com>,
-        "David Airlie" <airlied@gmail.com>, "Simona Vetter" <simona@ffwll.ch>,
-        "Joel Stanley" <joel@jms.id.au>,
-        "Andrew
- Jeffery" <andrew@codeconstruct.com.au>,
-        "Frank Li" <Frank.Li@nxp.com>, "Sascha Hauer" <s.hauer@pengutronix.de>,
-        "Pengutronix Kernel Team"
- <kernel@pengutronix.de>,
-        "Fabio Estevam" <festevam@gmail.com>,
-        "Linus
- Walleij" <linusw@kernel.org>,
-        "Hans de Goede" <hansg@kernel.org>,
-        "Alex
- Lanzano" <lanzano.alex@gmail.com>,
-        "Oleksandr Andrushchenko"
- <oleksandr_andrushchenko@epam.com>,
-        "Philipp Zabel"
- <p.zabel@pengutronix.de>,
-        =?utf-8?q?Uwe_Kleine-K=C3=B6nig?=
- <u.kleine-koenig@pengutronix.de>,
-        "Marian Cichy" <m.cichy@pengutronix.de>,
-        <dri-devel@lists.freedesktop.org>, <linux-kernel@vger.kernel.org>,
-        <linux-aspeed@lists.ozlabs.org>,
-        <linux-arm-kernel@lists.infradead.org>, <imx@lists.linux.dev>,
-        <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH v3 2/2] drm/imx: replace struct drm_simple_display_pipe
- with regular atomic helpers
-From: "Ze Huang" <ze.huang@oss.qualcomm.com>
-To: "Maxime Ripard" <mripard@kernel.org>,
-        "Thomas Zimmermann"
- <tzimmermann@suse.de>
-X-Mailer: aerc 0.22.0.r10.g73f20125
-References: <20260727-drm-simple-kms-removal-v3-0-de36e534f7a1@oss.qualcomm.com> <20260727-drm-simple-kms-removal-v3-2-de36e534f7a1@oss.qualcomm.com> <8e4c84be-5c89-4d84-adda-aad4c7de0c8a@suse.de> <aqpJKSSKunElnQ3o@houat>
-In-Reply-To: <aqpJKSSKunElnQ3o@houat>
-X-Proofpoint-Spam-Info: AW1haW4tMjYwOTE4MDI0NSBTYWx0ZWRfXz9lnGZRlra3V
- w0w99TSEKX/5CQgtJyckvjLQnx3/1HX8ueBQ5cW8Cy2bGMe6D/KBukHwiKoXLV1KuJXyevmpluN
- JmoxOGsraYuOgmgY9nSW8Zv1fFzfK68=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTE4MDI0NSBTYWx0ZWRfX3Vm8f3f+XIak
- /Aq1RrGImoDR/CDaSN3V27L5sPSrBhOsJNE0FnGDIWwMp3qTkhzFFoDw27VhzRVMKCAj+luDQFw
- P7ka4wu235mRT1sU7/sycC2gJ2wxpsGXdhRpAY/oJP4iYvsGnChpBhgx1fyh1ZXUChJM7LpJEOH
- GvUeTw4vWB5sZbvKjCdw9jmd80HUHloFIxhYpByG0wYRIhBbzKdnJy5684Y1FDHSOZ0DMQ2+KI6
- c2m0v1lK33sP1wkqtD9zUM4Z3Fvmjjnyctq14dwHn4YPBj8sKUZ4rk1edY1C/+Eo8xo3fmy9Q6G
- QOvDcEl8wBFOAHr3B07YCzJLFLmEYIwkyE6P4BYxH/c3krA0VTl+ZAHVuvb6NWbK+tMSMlTsZ7v
- 5FyQz68LUVGtRS+htSSxVaJKBK3rumzxD3PH2+pyd1Riyjz0Ny1V+Xpx2f+hCtgp0b9MnGYEEFy
- O564Iyz+86isDd+mPRA==
-X-Proofpoint-ORIG-GUID: 7H4dEN8HV7w13PDUh-9Jw7JTAefMxiJO
-X-Authority-Analysis: v=2.4 cv=I7zw19gg c=1 sm=1 tr=0 ts=6aad6f63 cx=c_pps
- a=IZJwPbhc+fLeJZngyXXI0A==:117 a=LNnhWNgewsfctp/cwirQdA==:17
- a=IkcTkHD0fZMA:10 a=VdqzKS8jKosA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=rJkE3RaqiGZ5pbrm-msn:22
- a=IqZAcGRvIuv5jEvzszIA:9 a=QEXdDO2ut3YA:10 a=uG9DUKGECoFWVXl0Dc02:22
-X-Proofpoint-GUID: 7H4dEN8HV7w13PDUh-9Jw7JTAefMxiJO
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-09-18_05,2026-09-16_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- lowpriorityscore=0 suspectscore=0 bulkscore=0 clxscore=1015 impostorscore=0
- priorityscore=1501 adultscore=0 phishscore=0 malwarescore=0 spamscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609180245
-X-purgate-ID: tlsNG-42698a/1789751141-A8CCF9EA-D6827E69/0/0
+X-purgate-ID: tlsNG-d25034/1789762286-00ECAA5B-12A38958/0/0
 X-purgate-type: clean
-X-purgate-size: 702
+X-purgate-size: 9942
 
-On Wed Sep 16, 2026 at 3:46 PM CST, Maxime Ripard wrote:
-> On Wed, Sep 16, 2026 at 08:50:21AM +0200, Thomas Zimmermann wrote:
->> > +static const struct drm_plane_funcs imx_lcdc_plane_funcs =3D {
->> > +	.update_plane		=3D drm_atomic_helper_update_plane,
->> > +	.disable_plane		=3D drm_atomic_helper_disable_plane,
->> > +	.destroy		=3D drm_plane_cleanup,
->> > +	.reset			=3D drm_atomic_helper_plane_reset,
->
-> Also, this needs to be drm_atomic_helper_plane_create_state
->
->> > +static const struct drm_crtc_funcs imx_lcdc_crtc_funcs =3D {
->> > +	.reset			=3D drm_atomic_helper_crtc_reset,
->
->  and drm_atomic_helper_crtc_create_state
->
-> Maxime
+Hi,
 
-Thanks for the reminder. Will do.
+Following up with another round of tests for this RFC. The posted
+series covers GICv4.0; I tested an expanded version with additional
+patches for GICv4.1 on AWS c7g.metal.
 
-Ze
+The extra patches add GICv4.1 ITS commands, vPE table and residency
+handling, default doorbells and direct vSGI delivery, plus
+interrupt-state fixes. The results below apply to this extended
+series, not to the posted RFC alone.
+
+Source branches:
+  Network OFF/ON: [1]
+  Network BASE:   [2]
+  NVMe OFF/ON:    [3]
+
+Additional patches after the rebased GICv4.0 part: [4]
+
+Workloads run in Dom0 with Credit2 and iommu=3Dno. Within each test
+series, OFF and ON use the same Xen binary with direct mode disabled
+or enabled. Network tests also include a matched BASE build without
+the series. All network builds have CONFIG_DEBUG disabled. The
+network sender is c8gn.4xlarge.
+
+ON versus OFF:
+
+- NVMe: peak IOPS are unchanged. Scheduled Dom0 time per I/O falls by
+  4.2-6.1%; handled Xen IPIs fall by 98.2-99.7% at total QD64.
+- UDP4: received PPS is almost unchanged; scheduled Dom0 time/GiB
+  falls by 7.6-10.0%.
+- UDP8: received PPS rises by 1.7-12.9% at the same offered rates;
+  scheduled Dom0 time/GiB falls by 16.8-24.0%. The PPS gain is
+  subject to the CPU0 interrupt-routing limitation described below.
+
+The UDP tests use 64-byte payloads at total offered rates of 800,
+896 and 1000 Mbit/s. The PPS differences describe packet delivery
+at these rates, not a measured increase in maximum sustainable PPS.
+
+The UDP8 PPS gain needs a qualification. In BASE/OFF, all recorded
+physical LPI-handler entries occur on pCPU0, even though guest IRQ
+handling is spread across vCPUs. At a total input of 800 Mbit/s,
+vCPU0 accumulates about 30 scheduled seconds in a 30-second trial,
+and its flow receives only about 8.7 Mbit/s in OFF out of the
+requested 100 Mbit/s. ON receives almost the full rate on that flow.
+
+This is consistent with a CPU0 bottleneck in BASE/OFF. The PPS gain
+may therefore reflect relief of that bottleneck, rather than only
+a lower cost of injecting each vLPI. =D0=A8 have not tested OFF with
+physical LPIs distributed across CPUs, so we cannot separate these
+effects. The result applies to the tested configurations; it is
+not an isolated measurement of the direct-vLPI speedup.
+
+There are also limits and worse results:
+
+- TCP throughput is almost unchanged. Actual generator TX queues
+  differ from the requested placement in 15 of 18 trials, which
+  limits CPU-cost comparisons. TCP1 ON has more IPIs.
+- Storage tail latency changes in both directions. Some normal ON
+  trials have more long completions. The four-volume sweep has a
+  maximum completion time of 26.8 ms OFF versus 62.5 ms ON. A separate
+  ON contention trial has a 1.050-second outlier. Their causes are
+  not established.
+- The shared-CPU contention test stays near 100 IOPS in both modes,
+  with about 100 ON worker doorbells/s. Separate GICv3 FVP tests
+  using virtio storage show sensitivity to CPU/IRQ placement. They
+  are supporting controls, not a direct comparison with AWS.
+
+The report covers 96 NVMe, 72 Xen network and 18 native UDP trials.
+The network tests and each NVMe queue-depth sweep have one boot
+per mode; the initial NVMe pairs also differ in CPU placement.
+Repeated trials within a boot do not measure boot-to-boot variation.
+
+The CPU figures measure scheduled Dom0 time, not total host CPU
+use. NVMe CPU ratios cover the full sweep and include completed
+I/Os from both measured trials and warmups. IPI counters measure
+handled events, not the time spent handling them.
+
+These results provide performance evidence in favour of the
+extended series, mainly lower scheduled Dom0 time and fewer IPIs
+in the NVMe and UDP tests. They do not show gains in every workload
+or replace correctness and maintainability review.
+
+The report [5] includes the detailed results and limitations.
+The same repository contains raw logs, statistics and test scripts.
+
+Best regards,
+Mykola
+
+[1] https://github.com/xakep-amatop/xen/tree/gicv4-bench-v3
+[2] https://github.com/xakep-amatop/xen/tree/gicv4-bench-v3-base
+[3] https://github.com/xakep-amatop/xen/tree/gicv4-bench-v3-nvme
+[4] https://github.com/xakep-amatop/xen/compare/c368b2ece40787d3fa333b1b824=
+e0dc89dd585c9...2b54d02e5bb6c038396c8aae5bd9dad00cc3697e
+[5] https://github.com/xakep-amatop/giv4-benchmark/blob/v3-benchmarks/repor=
+t.pdf
+
+On Tue, Mar 17, 2026 at 11:11=E2=80=AFAM Mykola Kvach <xakep.amatop@gmail.c=
+om> wrote:
+>
+> Hi Bertrand,
+>
+> On Tue, Feb 3, 2026 at 12:02=E2=80=AFPM Bertrand Marquis
+> <Bertrand.Marquis@arm.com> wrote:
+> >
+> > Hi Mykyta,
+> >
+> > We have a number of series from you which have not been merged yet and
+> > reviewing them all in parallel might be challenging.
+> >
+> > Would you mind giving us a status and maybe priorities on them.
+> >
+> > I could list the following series:
+> > - GICv4
+> > - CPU Hotplug on arm
+> > - PCI enumeration on arm
+> > - IPMMU for pci on arm
+> > - dom0less for pci passthrough on arm
+> > - SR-IOV for pvh
+> > - SMMU for pci on arm
+> > - MSI injection on arm
+> > - suspend to ram on arm
+> >
+> > There might be others feel free to complete the list.
+> >
+> > On GICv4...
+> >
+> > > On 2 Feb 2026, at 17:14, Mykyta Poturai <Mykyta_Poturai@epam.com> wro=
+te:
+> > >
+> > > This series introduces GICv4 direct LPI injection for Xen.
+> > >
+> > > Direct LPI injection relies on the GIC tracking the mapping between p=
+hysical and
+> > > virtual CPUs. Each VCPU requires a VPE that is created and registered=
+ with the
+> > > GIC via the `VMAPP` ITS command. The GIC is then informed of the curr=
+ent
+> > > VPE-to-PCPU placement by programming `VPENDBASER` and `VPROPBASER` in=
+ the
+> > > appropriate redistributor. LPIs are associated with VPEs through the =
+`VMAPTI`
+> > > ITS command, after which the GIC handles delivery without trapping in=
+to the
+> > > hypervisor for each interrupt.
+> > >
+> > > When a VPE is not scheduled but has pending interrupts, the GIC raise=
+s a per-VPE
+> > > doorbell LPI. Doorbells are owned by the hypervisor and prompt resche=
+duling so
+> > > the VPE can drain its pending LPIs.
+> > >
+> > > Because GICv4 lacks a native doorbell invalidation mechanism, this se=
+ries
+> > > includes a helper that invalidates doorbell LPIs via synthetic =E2=80=
+=9Cproxy=E2=80=9D devices,
+> > > following the approach used until GICv4.1.
+> > >
+> > > All of this work is mostly based on the work of Penny Zheng
+> > > <penny.zheng@arm.com> and Luca Fancellu <luca.fancellu@arm.com>. And =
+also from
+> > > Linux patches by Mark Zyngier.
+> > >
+> > > Some patches are still a little rough and need some styling fixes and=
+ more
+> > > testing, as all of them needed to be carved line by line from a giant=
+ ~4000 line
+> > > patch. This RFC is directed mostly to get a general idea if the propo=
+sed
+> > > approach is suitable and OK with everyone. And there is still an open=
+ question
+> > > of how to handle Signed-off-by lines for Penny and Luca, since they h=
+ave not
+> > > indicated their preference yet.
+> >
+> > I would like to ask how much performance benefits you could
+> > have with this.
+> > Adding GICv4 support is adding a lot of code which will have to be main=
+tained
+> > and tested and there should be a good improvement to justify this.
+> >
+> > Did you do some benchmarks ? what are the results ?
+> >
+> > At the time where we started to work on that at Arm, we ended up in the=
+ conclusion
+> > that the complexity in Xen compared to the benefit was not justifying i=
+t hence why
+> > this work was stopped in favor of other features that we thought would =
+be more
+> > beneficial to Xen (like PCI passthrough or SMMUv3).
+>
+> I have been asked to run benchmarks for this series, so here is a short
+> update from my side.
+>
+> Test setup:
+>
+> - AWS c7g bare metal
+> - Linux bare-metal reference and Xen dom0 runs
+> - fio random-read workloads on an NVMe-backed EBS volume (gp3, 160G, 80k =
+iops)
+> - Main workloads:
+>
+> - 4k, iodepth=3D1
+> - 16k, iodepth=3D1
+> - 4k, iodepth=3D4
+> - 4k, iodepth=3D1, numjobs=3D4
+> - 5 repetitions per configuration, looking mainly at median values
+> - Main Xen comparison was done with the default scheduler (credit2),
+> direct LPIs OFF vs ON
+>
+> Summary:
+>
+> - With credit2, enabling direct LPIs gave a small but repeatable IOPS
+> improvement across all tested workloads, roughly in the 0.8-1.1% range.
+> - Mean completion latency also improved consistently.
+> - The clearest gain was in tail latency. In the 4k randread,
+> iodepth=3D1, numjobs=3D4 case, p99.9 improved by about 41% and p99.99 by
+> about 34% with direct LPIs enabled.
+> - In this setup, switching from credit2 to null did not materially change
+> median throughput, so the observed improvement appears to come primarily
+> from the interrupt delivery path rather than from the scheduler choice.
+>
+> A few caveats:
+>
+> - This was a low-contention setup with only dom0 using 8 CPUs, so it did =
+not
+> exercise heavy VCPU migration or scheduler pressure.
+> - I also tried an artificially constrained NVMe host queue depth
+> configuration, but I am treating that only as a stress/control case and
+> not as the main result.
+>
+> A full benchmark report is available here:
+> https://github.com/xakep-amatop/giv4-benchmark/blob/main/report.pdf
+>
+> The same repository also contains the raw benchmark result archives used =
+for
+> the analysis.
+>
+> So, based on these measurements, there does appear to be a measurable
+> benefit from direct LPI injection, with the strongest effect showing up i=
+n
+> tail latency rather than in median throughput.
+>
+> If you need any additional benchmark results or specific test cases, plea=
+se
+> let me know.
+>
+> Best regards,
+> Mykola
+>
+> >
+> > Cheers
+> > Bertrand
+> >
 
