@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06282C982DA
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 13:49:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1425438.1649384 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C587BC982D8
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 14:50:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1425493.1649403 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7YxM-0004n1-Pw; Fri, 18 Sep 2026 13:48:48 +0000
+	id 1x7ZuQ-0004Gn-ES; Fri, 18 Sep 2026 14:49:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1425438.1649384; Fri, 18 Sep 2026 13:48:48 +0000
+Received: by outflank-mailman (output) from mailman id 1425493.1649403; Fri, 18 Sep 2026 14:49:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7YxM-0004mu-NL; Fri, 18 Sep 2026 13:48:48 +0000
-Received: by outflank-mailman (input) for mailman id 1425438;
- Fri, 18 Sep 2026 13:48:46 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x7ZuQ-0004Gg-AV; Fri, 18 Sep 2026 14:49:50 +0000
+Received: by outflank-mailman (input) for mailman id 1425493;
+ Fri, 18 Sep 2026 14:49:48 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1x7YxK-0004mo-Hj
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 13:48:46 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1x7ZuO-00044D-LS
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 14:49:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7YxJ-00EgV6-4q
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 15:48:45 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x7ZuN-009hUR-Ce
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 16:49:47 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6aad4134-8faa-0a2a0a5109dd-0a2a4508e680-8
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 15:48:45 +0200
-Received: from [40.107.201.46]
- (helo=CH4PR04CU002.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6aad413b-f659-0a2a45080019-286bc92e158b-3
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 15:48:44 +0200
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
- by PH0PR03MB989304.namprd03.prod.outlook.com (2603:10b6:510:3c0::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.13; Fri, 18 Sep
- 2026 13:48:41 +0000
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0428.011; Fri, 18 Sep 2026
- 13:48:41 +0000
+ (envelope-from <josef@toxicpanda.com>)
+ id 6aad4f6d-e002-0a2a0a5209dd-0a2a450b91f8-48
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 16:49:47 +0200
+Received: from [74.125.230.204] (helo=mail-qk2-f12.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <josef@toxicpanda.com>)
+ id 6aad4f8a-b7e8-0a2a450b0019-4a7de6ccecb9-3
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 16:49:47 +0200
+Received: by mail-qk2-f12.google.com with SMTP id
+ d75a77b69052e-52fb76bcb1fso8330261cf.0
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 07:49:46 -0700 (PDT)
+Received: from toxicpanda.com (ec2-34-228-114-98.compute-1.amazonaws.com.
+ [34.228.114.98]) by smtp.gmail.com with ESMTPSA id
+ d75a77b69052e-532abe9a4f4sm3338251cf.0.2026.09.18.07.49.44
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 18 Sep 2026 07:49:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,168 +53,214 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fYi63ZaEttOFVb2RmS1acD1WLf9u2N2dGQ5EWgQJzHdgXSAzRPq8Owpm3YTSbLXKfkbhioap5D11FyjX+B93EI3EzmJMIjj1PzTLo+a3xaXWbOYEKYgEU/ZLxn0Axr9POM6OtLweq9yAHcy71euQ4ENVqRMejwbyHyUyXBvypDKeGQKWAnNAVRr5djqr6AAdPA9sAzPu9LbTQSLq0hfl293cfjmysSZD9PXHKPiyp3tzyOf8CJPa8LuRF1+4MSOikKvntV06k9AXdBsKSqIJiR7rjsUii1XIXIWNAln31KzKpCFf+FgjbSxSNWhZsCzaEvzTM/1wiJx2vqRWT4POGQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iSvoD2QhDS7LRDfKxNZb6FGqDEVd/0RqYV2zQj9z1YU=;
- b=l3DKRq2D34QFWU5SzXTzr18IrCHUZbW3/dfGn8AcRfFMREjUYxI7Ca/M3fcDNoL2SPQpU/jv1ddgIeBoJagfteL3TfwnbBFASmcjxrgJITmcQYxLt/i1R2dXdpKaiHpnRxEStGmqi16+eJzXeWFoJACLfAz7giywR9IObGBiP0KUk29yjGkNYSIib0GbvWNArmxwVjZG3DzdpogkcJmOX2kxFnYZdCx8gSK59d2q5ZOtoBWXw7MjdXMM+8Hyn8WERYdaYVZuWUbr3OFKeBMaWBIUmxAE+v2Vd7mXgi69dXy6uU+NdJ3fu6reOOGh1m2SzZ/Ztot3VQB/xoWEv5+T3A==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iSvoD2QhDS7LRDfKxNZb6FGqDEVd/0RqYV2zQj9z1YU=;
- b=0J8ZXumleJzWpJJ93ohnBSIuS/FhkX5bY/k8hQL75dytUWNvsmSG53TA7iSGOvhbtYMl29mhswPdvjqUWocEEGE3X1R0kjw8leINiQAbT/9LC6y7bIdtEeBIVtP6PxsiM4uAmoiHKPNCXaWpEwYTqVq7N5qKsSg25EoW93SI/8w=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <aacfb18a-d445-4623-938f-09bdbea83219@citrix.com>
-Date: Fri, 18 Sep 2026 14:48:35 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2 3/5] x86: Track vcpu context switches and introduce
- needs_tlb_flush field
-To: Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-References: <1785509179.8631fc262581453bbf619ec5b2062170.19fb8a3efe8000e099@vates.tech>
- <1785509308.8631fc262581453bbf619ec5b2062170.19fb8a5e798000e099@vates.tech>
-Content-Language: en-US
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-In-Reply-To: <1785509308.8631fc262581453bbf619ec5b2062170.19fb8a5e798000e099@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P123CA0373.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:18e::18) To CH8PR03MB8274.namprd03.prod.outlook.com
- (2603:10b6:610:2ba::5)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=toxicpanda.com; s=google; t=1789742986; x=1790347786; darn=lists.xenproject.org;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=fr6kFLYx3hqPZHfOilkUN+oxGtJHBsVQ4xuLKdXd4To=;
+        b=JhaSd2xNUVF5PguyAOIqoKUcaNDq3UxXn5XklTEgGJoEsAs+AKpmlYiO0SIKJhxGEu
+         2OjMQ1y0tEfJuM1n0E983oHuH4eIk9+EDdMfJ4S9gjizwRqCNPx0EWsEaF0leGINc4vk
+         WIs+6PEyKnA2FqgyBD6BZib08I0dsHFG+7m46PqCnBtW4PXki7rFzht17Ydmaswt53Os
+         bKufQUafKX4Sy/Q4s9rjvJkf9LfHGps3sclazSPQIzMWicrvvUI7cARBtWVIEo5R3sxH
+         T1/MMK3x3cBKjPzN/bqfQM2Wskk4Aqk3yvS8+G3kAcN04eFcZOOuSUxxS5NbuuXaoEfA
+         9cbQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789742986; x=1790347786;
+        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
+         :content-type:mime-version:subject:date:from:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=fr6kFLYx3hqPZHfOilkUN+oxGtJHBsVQ4xuLKdXd4To=;
+        b=XiHlSRtnxE4xpGCamaIxzUV0E5uFsDsEuXYG+5HnQWXa26iNOtqiy/NwmKFEI5W99+
+         O3UYHLfzS9IqBiFRv4oG/pSkRewY52Wi3xFMbHhPGH65zo0oGOWhK8nobVE6xtT8kClG
+         uwM3A9tIz91pV3Lf/LgkY23kmCYHz75dvPdSmGWKRUVYzw+XXXJtjebWBjS/5m4+JM8n
+         TQxGY0VZOh2oVSZTYg8jARu9qd+YwP1Q6xn+rfrr+I5Oir8GES+ashhE8hxFd9gWZ3Xt
+         TwDu+y8sQ3IU918nXnS2aU2+k+lALkQXIO9aIejLRFGwv5umTpuw2QqBwH0xy9GInaEG
+         qomQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwvPNDrftaBQ8xMGAXdMdZ4JilynE9q9v53vJ3embnHajMk94j6hnXkTcFbSh0/JKof3hUdB10zbaY=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nGfieXMVm3W7IFsPLoDIEyxg5gKtLF8heQDKtpfZ2zm1ncfcts
+	mQlOmDCbvjI1xXFDz2ISVe9WFYG8PzEJFoJcHKmLNQfHieocJ206WuK9tNJa/CT89lE=
+X-Gm-Gg: AYBFou3c5npRsPd75fULZ80tON6hVMs5fhCCwnr32opQE3Kvo8uXwwNL0Fzvbd4e2EY
+	N3HETnh+r4YTqWsUs18sPnYEd5gtl2XZJVVaaIjJC+coAdx4LNk/8lWzOMIlysDZmZ1Ypxodl7l
+	kQXcfJehjCuOymLpTSaI5yqzwP1rEQMVkZKWVWhninhYiiw7Y+nj2gnjQlOWZ/Ik5ciRdMxjhze
+	raV9rIGYmJJqKmBR8jpoT6g+u7TQ6rnMtyuEUIFI8GMne3slfT97waBZgsjbQpqaNNRAENviRVZ
+	kS3QBnFZ4G93ltD17Pdk2kfr8XfzzfTYiZ9ovdyD7verJWjCU0zLsGNzOH36GZ8Z2SHwtlvCfS/
+	GwmBsWqesOu8ntYMfrAxT5f7JSvXkBGdgGHVjx8RFq31965AbBRHUUrK5KM/THDaHlX+QVAZkFl
+	8eKMy1IZXU8LHMW551khMO/3U8Nrz/20cjofnqshjwlJTh2ml5qIvslJ78TZjfxoeDl5Cdl+2hg
+	fyFKtTdL9FbJ0uaqIf69+NyCy4pJDgNbzplZ2pSDdkrQ8jzqcwxOefeEVyunnv6RdE=
+X-Received: by 2002:a05:622a:652:b0:530:efbc:9a8e with SMTP id d75a77b69052e-5329e3767camr46085191cf.5.1789742985599;
+        Fri, 18 Sep 2026 07:49:45 -0700 (PDT)
+From: Josef Bacik <josef@toxicpanda.com>
+Date: Fri, 18 Sep 2026 14:49:20 +0000
+Subject: [PATCH RFC v4 01/13] entry: Pass pt_regs to
+ irqentry_exit_cond_resched()
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|PH0PR03MB989304:EE_
-X-MS-Office365-Filtering-Correlation-Id: 161f2922-103d-4618-be69-08df158b8c90
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|376014|1800799024|23010399003|56012099006|11063799006|4143699003|22082099003|18002099003|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	fILLBlzrG/7Pma2jRIrh195S7wpWksHaKqSiTiGknAWQdC2YnoFUHuAmwlvNPCWWngeGoDN3DarpbcLhM4qRg6/OqG323CBCsvsP4E3/lR97KR6o1PSGgyhB1nl83Bteh6dssYVgXNOv4ShGgqMUg7XnDZZIL24PEAurecO3JFiOVKbk43tkh9jPt2ZqeHTsvff/heeRWgM1RojT4d16QA9CUQE7UqMFBXvSf8+j3slkG9zmjU64W6Ym+DhJj5qY6Ack4vHJHrujhCWcpEWOR5n6wp6iRpSEpT8RCHq3S0s5X+801/tDaJiC7DpV1KZVVZ8PK8dY5LYmpY8bvBFtYTNa9AlhpZoLTWBFmdyL4DZ8tNLgMYtQB1R4X9NxBNAUUMd70uqd1hOu8oT6mQmjjOyrnp0JERFoLMZVRpUHtdilxE6Yek0kfkNEbXMgtUXlWYmIdmCunQsWViCa8BIf1UzdgAlTpM/3N6GEGZ0dXu5rS2jt07z2BP0l+1m/r0hMrgjW+YRDbaGk46aS2FYNFJFtWj8CwEOCv3e68BeSLhZoETT9VVlmsCOYyQbGorLMnUgWatgv91Q2W4K0JlbRfQRDviAQU4kQNq5t/QNQK+7xa4ouQ5sUoLZdE9cq4mIe+UUDUcdVh9sogpGTxCmjWg1GPwAFCDddj24JQz3J66w=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(56012099006)(11063799006)(4143699003)(22082099003)(18002099003)(10067099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?eU1lMlFNaGVFRjI1STFnTW4zR01kcVRNK1RReEE2QzIrZVlJckI3WExqN01G?=
- =?utf-8?B?V2VweDZxTkdjenBoc2gyTmFlRzhJQUI0R2U3ckRaQm1jR09DQmc1a0hySHJ2?=
- =?utf-8?B?VzQrRXp2VTE1cWlPVTNEWVNVUU9uMlR3dlpHZTZZQm52NlFSbEYzejVOZmFz?=
- =?utf-8?B?cm9pd0I1ejJuMXpuR244NVlhdmFlZndLeFFFemNxR1RWRWJEZTdoTHE0SlVu?=
- =?utf-8?B?M0xLOHorUGJhTUdKdlU0NjFDays4d2JISXJaeFU1SWZBSVZRZXM4ejNmRXo4?=
- =?utf-8?B?OHZ6a1ZBdWNhbGU4TURxM2pENmc3ZStkSTYrZGMxT0hKTks5TEtnRkhzU3hW?=
- =?utf-8?B?K3JybCtZR01mQ2ZTMkk5OUJIYU5DSUZ2UmtOVVlqeGNOZFM0eVFEWk9aU2I2?=
- =?utf-8?B?Z2tBaXpESnpMVytHY3d3MUpXeXVTamFSRmFOSG5xbVRuNGFmN1BwS216Sk1R?=
- =?utf-8?B?bGdEUWhVMCs0MHJqcXAyVE1QMzYxZzR6LzBNNlRmSEhGVzYvL3BJOHpjUEdZ?=
- =?utf-8?B?YmFsbWNrb3dkOElud3Z6bGU0TGxBUUFUNzNqUHJqaFA1azBmRHJNRFBJWFMy?=
- =?utf-8?B?ZzRlOVFtaExNNktJK0laUlpsUGQ4UkVUY3VUZjJ6QnFKNmw5WURQSEJXb3Yv?=
- =?utf-8?B?Z1V1SGgwdks4UWlpUmRQVy85Rnd2Mk9iS1lvaTZSeUg4Rk9BT09FeXM1N2p5?=
- =?utf-8?B?aEgwUVFyWEx1YVR4VCtOVlBaU0ZnQlRQV25tOS90REVydk9TcE9QVnpsZ0sv?=
- =?utf-8?B?Z1JGdTEvcndMeUplQ2hDN2FHZnYvckR2UEcrcjBCRXdyY09uSXRCTU5JK1B3?=
- =?utf-8?B?RzdJTDlxdkhXK1U3T1BlUEYyOStDQWJUT1hRaXBlTDNnYndlWklwd0pkRjhF?=
- =?utf-8?B?bnVPTXhacm80MmZZbXB2NStLcE5STjhpdzYvcUU4UTlVR3N1bWtEM083QWRa?=
- =?utf-8?B?ZEVRSlc0WkVJTFBwcUxlT01SZFlZRDdQb3pLNU54N3QyUlY0ekhXakpxR1Vw?=
- =?utf-8?B?MlN0TG1JQ011UXVCSVJVSVk0Z2Q2SFRZOUNrQlk4YXpJdGxJeU1UdVREcEZR?=
- =?utf-8?B?dCtIbmJCc2cwZ2xjZi9VN1M3NXYrcDk1aTJSU043NFVtUFRleWxHK3N0Z1JT?=
- =?utf-8?B?Q3JZNmhmSmJ0N3dEdmlLRXdRekdLdGRWczVGSnRqNVcxRWF5ai9pcTZsUDlJ?=
- =?utf-8?B?SFFtNTBlT21ha3dVa1ZmVkNJUUFFYjVSS3prVUl2TFNzMzFiS2NZVmVXZ1k3?=
- =?utf-8?B?UHhqRnhSWloyYmZidGw2RDFNNS84aXloSEh2djVpYlRLRjlmc1VzdVVENkRa?=
- =?utf-8?B?NkVmZjhoS3piM000NkhPenBkcXRWb1R1eGpjaFFHVWNzWVNYMWE0S2ZsT0wy?=
- =?utf-8?B?QkdZUHRnaUJmR3dBWllIK05RdEhIdE5rN2JMSlhmTzZvNjNOV2FqR0dMMlVm?=
- =?utf-8?B?Smg5T2hsdWNBQkU1S2ZTSFVuUEkyM04zY3BGS2VkM0lycDFrQmdHNGwxQW9l?=
- =?utf-8?B?U2VGT20wVGhWbFgrSkxmV2s4VEplZGJRNEJpeVR3UUVYNXNyN1RJZkhhUnhw?=
- =?utf-8?B?S1FBdmZjSUJDV1FkY2Q5RElOS0ZNREU3bVJYSTEwQzJ2T1ZGb0l2aUtGUG83?=
- =?utf-8?B?NmdMcEJWcHFkbk5BbVJjenpWWHg4eU56dTBtc3RJZ25MdGt2Q0dCUmdYdWpK?=
- =?utf-8?B?bENtT09Qc21WTXd5cEFiQjJBSC8xbDVVSWdZVTR0Y0cyNkxMdk05QlhxaEtq?=
- =?utf-8?B?dHQwdm1VekJlSnZ1aXJzcm9EWjQwWkx5enpzRHorR05mSW81TFFFWjdsanpk?=
- =?utf-8?B?VDJ6MytFTHJEOUNKYzVGRktVS3dZa3pFbFpJYUhWUnlDOS9md0tabnR0ODFs?=
- =?utf-8?B?OU1EY0cxbm1YVDVuU0I0STYrRUd1NkI1UTZNdlBrNDA3Rk1HdDVMRnB4UVc1?=
- =?utf-8?B?REFITENyVm5vWXBrTnlsQWIrUzZCTXg1N0JFREJkVVNVWlc5dnBoTm1lOU12?=
- =?utf-8?B?SnN4aHZYWW4rVG5CMW1pWnAzMzA4SmpCTytNVDlXRG4rRFR6TUNvdlNvRXFt?=
- =?utf-8?B?N3lDVnhac0JQaW5nR3puOXBYMC8zVCs2dXdtQ1hXNSs4b0twV0ZqTGRPTmhJ?=
- =?utf-8?B?NDNRWFJ3L0VYdWxtK3NYQ3c4VWp3UDl3RUo1Y1pLcjNmL2dydHdhOG8yMitz?=
- =?utf-8?B?bG80aTAyeEEyMlplblBaeUwvTm1vMXk1VUFDMUthMTJ4LzBPU01uMUNIYmxi?=
- =?utf-8?B?ODRzQVg3djNjTUdxOWdha1dlRTQveWc5RG9pRXlIanMvVVZJZEF0SG95WHBY?=
- =?utf-8?B?QXgyTmtXeHRLSFZxZ1FjUCtVUnJuMjAvTXFSYU9hNUp2WnpHb21VdnNsNG9T?=
- =?utf-8?Q?bME6bR2NRG4b6mlc=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 161f2922-103d-4618-be69-08df158b8c90
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Sep 2026 13:48:41.5097
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: xTtLgh5IyyXGglv8L++adRCeOshStmcBPd+HOlOZmCWUl46iRFc6p9LPnqbVoDOtujOFYi2+ilcwVWqHNZCDGjbcZEMxuIA8Ds7rYVaqnjM=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB989304
-X-purgate-ID: tlsNG-c1860d/1789739325-D755C87B-A84A6015/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Message-Id: <20260918-b4-rcu-tasks-preempt-qs-v4-1-63f0e9d69661@toxicpanda.com>
+References: <20260918-b4-rcu-tasks-preempt-qs-v4-0-63f0e9d69661@toxicpanda.com>
+In-Reply-To: <20260918-b4-rcu-tasks-preempt-qs-v4-0-63f0e9d69661@toxicpanda.com>
+To: "Paul E. McKenney" <paulmck@kernel.org>, 
+ Frederic Weisbecker <frederic@kernel.org>, 
+ Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, 
+ Joel Fernandes <joelagnelf@nvidia.com>, Boqun Feng <boqun@kernel.org>, 
+ Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+ Steven Rostedt <rostedt@goodmis.org>, 
+ Masami Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
+ Jiri Olsa <jolsa@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
+ Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, 
+ x86@kernel.org, Catalin Marinas <catalin.marinas@arm.com>, 
+ Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>, 
+ Xu Kuohai <xukuohai@huaweicloud.com>, 
+ "Paul E. McKenney" <paulmck@kernel.org>, 
+ Frederic Weisbecker <frederic@kernel.org>, 
+ Neeraj Upadhyay <neeraj.upadhyay@kernel.org>, 
+ Joel Fernandes <joelagnelf@nvidia.com>, Boqun Feng <boqun@kernel.org>, 
+ Thomas Gleixner <tglx@kernel.org>, Peter Zijlstra <peterz@infradead.org>, 
+ Steven Rostedt <rostedt@goodmis.org>, 
+ Masami Hiramatsu <mhiramat@kernel.org>, Mark Rutland <mark.rutland@arm.com>, 
+ Jiri Olsa <jolsa@kernel.org>, Alexei Starovoitov <ast@kernel.org>, 
+ Daniel Borkmann <daniel@iogearbox.net>, Andrii Nakryiko <andrii@kernel.org>, 
+ x86@kernel.org, Catalin Marinas <catalin.marinas@arm.com>, 
+ Will Deacon <will@kernel.org>, Puranjay Mohan <puranjay@kernel.org>, 
+ Xu Kuohai <xukuohai@huaweicloud.com>
+Cc: Andy Lutomirski <luto@kernel.org>, 
+ Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, 
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+ Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, 
+ Juergen Gross <jgross@suse.com>, Luis Chamberlain <mcgrof@kernel.org>, 
+ Ihor Solodrai <ihor.solodrai@linux.dev>, linux-kernel@vger.kernel.org, 
+ rcu@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
+ bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ xen-devel@lists.xenproject.org, Andy Lutomirski <luto@kernel.org>, 
+ Josh Triplett <josh@joshtriplett.org>, Uladzislau Rezki <urezki@gmail.com>, 
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+ Lai Jiangshan <jiangshanlai@gmail.com>, Zqiang <qiang.zhang@linux.dev>, 
+ Juergen Gross <jgross@suse.com>, Luis Chamberlain <mcgrof@kernel.org>, 
+ Ihor Solodrai <ihor.solodrai@linux.dev>, linux-kernel@vger.kernel.org, 
+ rcu@vger.kernel.org, linux-trace-kernel@vger.kernel.org, 
+ bpf@vger.kernel.org, linux-arm-kernel@lists.infradead.org, 
+ xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
+X-Mailer: b4 0.15.2
+X-Developer-Signature: v=1; a=openssh-sha256; t=1789742979; l=4297;
+ i=josef@toxicpanda.com; h=from:subject:message-id;
+ bh=vAWpKfoMcBcYFQiIgPpQZt2gAuw45VdrXu4vr32WnR0=;
+ b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
+ JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
+ QLUE3k3CkS2ybrdoKxDg2rM2yr7vcCp6RSWtB3hgoOxoISfCxswmRrxWH4MEQd0eZavwNPRgmIn
+ mcD0WDNOMyg4=
+X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
+ fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
+X-purgate-ID: tlsNG-42698a/1789742987-AA4DB9EA-73F16DD6/0/0
 X-purgate-type: clean
-X-purgate-size: 2179
+X-purgate-size: 4299
 
-On 7/31/26 3:46 PM, Teddy Astie wrote:
-> Introduce needs_tlb_flush that indicate that the vCPU related TLB
-> needs to be flushed before entering this domain. This is intended
-> to be used later for using the same ASID for all vCPU of a domain.
-> 
-> Also track vCPU context switch to determine :
->   - per vcpu "latest_cpu" that tracks which pCPU last ran this vCPU,
->     this is used to know whether our current TLB (of our pCPU) state
->     is stale.
->     Schedule a TLB flush if the vCPU ran on another pCPU previously.
->   - per pCPU "latest_vcpu" (per domain) that tracks which vCPU the
->     TLB+ASID/VPID is holding onto.
->     Schedule a TLB flush if this pCPU hasn't ran this vCPU previously
->     (which can happen if we context-switch multiples vCPUs of a same
->     domain on a same pCPU).
-> 
-> If ASID use is disabled, unconditionnaly perform a TLB flush.
-> 
-> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
-> ---
-> v2: Merge several patches into one, move logic to context_switch(),
->      move fields to arch_vcpu/arch_domain, consider !asid_enabled case.
-> ---
->   xen/arch/x86/domain.c             | 26 ++++++++++++++++++++++++++
->   xen/arch/x86/include/asm/domain.h |  6 ++++++
->   2 files changed, 32 insertions(+)
-> 
-> diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-> index 996b50af7a..27155546ca 100644
-> --- a/xen/arch/x86/domain.c
-> +++ b/xen/arch/x86/domain.c
-> @@ -38,6 +38,7 @@
->   #include <xen/smp.h>
->   #include <xen/softirq.h>
->   #include <xen/wait.h>
-> +#include <xen/xvmalloc.h>
->   
->   #include <asm/amd.h>
->   #include <asm/cpu-policy.h>
-> @@ -874,6 +875,13 @@ int arch_domain_create(struct domain *d,
->   
->       spec_ctrl_init_domain(d);
->   
-> +    rc = -ENOMEM;
-> +    d->arch.latest_vcpu = xvmalloc_array(int, nr_cpu_ids);
+The irq-exit preemption path is about to need the interrupted context's
+registers to decide whether the preemption may be reported to Tasks RCU
+as a quiescent state.  irqentry_exit_to_kernel_mode_preempt() already
+has them; hand them down through irqentry_exit_cond_resched(), its
+PREEMPT_DYNAMIC static-call and static-key variants, and
+raw_irqentry_exit_cond_resched().  The only caller outside the generic
+entry code is Xen PV's upcall handler, which has regs as well.
 
-Does this work with pCPU hotplug or do you need to use NR_CPUS?
+No functional change.
 
-> +    if ( !d->arch.latest_vcpu )
-> +        goto fail;
-> +    for (unsigned int i = 0; i < nr_cpu_ids; i++)
-> +        d->arch.latest_vcpu[i] = -1;
-> +
+Assisted-by: LLM
+Signed-off-by: Josef Bacik <josef@toxicpanda.com>
+---
+ arch/x86/xen/enlighten_pv.c      |  2 +-
+ include/linux/irq-entry-common.h | 13 +++++++------
+ kernel/entry/common.c            |  6 +++---
+ 3 files changed, 11 insertions(+), 10 deletions(-)
 
-The other arches define INVALID_VCPU_ID to be MAX_VIRT_CPUS. Not sure if it is
-worth doing the same for x86?
+diff --git a/arch/x86/xen/enlighten_pv.c b/arch/x86/xen/enlighten_pv.c
+index 2c64b388f616..3d85035f5624 100644
+--- a/arch/x86/xen/enlighten_pv.c
++++ b/arch/x86/xen/enlighten_pv.c
+@@ -739,7 +739,7 @@ __visible noinstr void xen_pv_evtchn_do_upcall(struct pt_regs *regs)
+ 
+ 	inhcall = get_and_clear_inhcall();
+ 	if (inhcall && !WARN_ON_ONCE(state.exit_rcu)) {
+-		irqentry_exit_cond_resched();
++		irqentry_exit_cond_resched(regs);
+ 		instrumentation_end();
+ 		restore_inhcall(inhcall);
+ 	} else {
+diff --git a/include/linux/irq-entry-common.h b/include/linux/irq-entry-common.h
+index 0bb6c03481fa..e19b41ee6b18 100644
+--- a/include/linux/irq-entry-common.h
++++ b/include/linux/irq-entry-common.h
+@@ -343,24 +343,25 @@ typedef struct irqentry_state {
+ 
+ /**
+  * irqentry_exit_cond_resched - Conditionally reschedule on return from interrupt
++ * @regs:	Pointer to pt_regs of interrupted context
+  *
+  * Conditional reschedule with additional sanity checks.
+  */
+-void raw_irqentry_exit_cond_resched(void);
++void raw_irqentry_exit_cond_resched(struct pt_regs *regs);
+ 
+ #ifdef CONFIG_PREEMPT_DYNAMIC
+ #if defined(CONFIG_HAVE_PREEMPT_DYNAMIC_CALL)
+ #define irqentry_exit_cond_resched_dynamic_enabled	raw_irqentry_exit_cond_resched
+ #define irqentry_exit_cond_resched_dynamic_disabled	NULL
+ DECLARE_STATIC_CALL(irqentry_exit_cond_resched, raw_irqentry_exit_cond_resched);
+-#define irqentry_exit_cond_resched()	static_call(irqentry_exit_cond_resched)()
++#define irqentry_exit_cond_resched(regs)	static_call(irqentry_exit_cond_resched)(regs)
+ #elif defined(CONFIG_HAVE_PREEMPT_DYNAMIC_KEY)
+ DECLARE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
+-void dynamic_irqentry_exit_cond_resched(void);
+-#define irqentry_exit_cond_resched()	dynamic_irqentry_exit_cond_resched()
++void dynamic_irqentry_exit_cond_resched(struct pt_regs *regs);
++#define irqentry_exit_cond_resched(regs)	dynamic_irqentry_exit_cond_resched(regs)
+ #endif
+ #else /* CONFIG_PREEMPT_DYNAMIC */
+-#define irqentry_exit_cond_resched()	raw_irqentry_exit_cond_resched()
++#define irqentry_exit_cond_resched(regs)	raw_irqentry_exit_cond_resched(regs)
+ #endif /* CONFIG_PREEMPT_DYNAMIC */
+ 
+ /**
+@@ -465,7 +466,7 @@ static inline void irqentry_exit_to_kernel_mode_preempt(struct pt_regs *regs,
+ 		return;
+ 
+ 	if (IS_ENABLED(CONFIG_PREEMPTION))
+-		irqentry_exit_cond_resched();
++		irqentry_exit_cond_resched(regs);
+ }
+ 
+ /**
+diff --git a/kernel/entry/common.c b/kernel/entry/common.c
+index e3d381fd3d25..e4acd50bd81a 100644
+--- a/kernel/entry/common.c
++++ b/kernel/entry/common.c
+@@ -134,7 +134,7 @@ static inline bool arch_irqentry_exit_need_resched(void);
+ static inline bool arch_irqentry_exit_need_resched(void) { return true; }
+ #endif
+ 
+-void raw_irqentry_exit_cond_resched(void)
++void raw_irqentry_exit_cond_resched(struct pt_regs *regs)
+ {
+ 	if (!preempt_count()) {
+ 		/* Sanity check RCU and thread stack */
+@@ -150,11 +150,11 @@ void raw_irqentry_exit_cond_resched(void)
+ DEFINE_STATIC_CALL(irqentry_exit_cond_resched, raw_irqentry_exit_cond_resched);
+ #elif defined(CONFIG_HAVE_PREEMPT_DYNAMIC_KEY)
+ DEFINE_STATIC_KEY_TRUE(sk_dynamic_irqentry_exit_cond_resched);
+-void dynamic_irqentry_exit_cond_resched(void)
++void dynamic_irqentry_exit_cond_resched(struct pt_regs *regs)
+ {
+ 	if (!static_branch_unlikely(&sk_dynamic_irqentry_exit_cond_resched))
+ 		return;
+-	raw_irqentry_exit_cond_resched();
++	raw_irqentry_exit_cond_resched(regs);
+ }
+ #endif
+ #endif
 
-Ross
+-- 
+2.55.0
+
 
