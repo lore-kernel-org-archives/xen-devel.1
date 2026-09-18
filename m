@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A9F12C982DC
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 11:53:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1425198.1649292 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E56EC982DA
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 11:58:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1425210.1649304 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7X9Y-00020s-Tf; Fri, 18 Sep 2026 11:53:16 +0000
+	id 1x7XEY-0002gJ-F9; Fri, 18 Sep 2026 11:58:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1425198.1649292; Fri, 18 Sep 2026 11:53:16 +0000
+Received: by outflank-mailman (output) from mailman id 1425210.1649304; Fri, 18 Sep 2026 11:58:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7X9Y-00020l-Pt; Fri, 18 Sep 2026 11:53:16 +0000
-Received: by outflank-mailman (input) for mailman id 1425198;
- Fri, 18 Sep 2026 11:53:15 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x7X9X-00020f-7t
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 11:53:15 +0000
+	id 1x7XEY-0002gC-CV; Fri, 18 Sep 2026 11:58:26 +0000
+Received: by outflank-mailman (input) for mailman id 1425210;
+ Fri, 18 Sep 2026 11:58:25 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <marmarek@invisiblethingslab.com>) id 1x7XEX-0002g6-K4
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 11:58:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7X9W-004asM-K8
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 13:53:14 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x7XEW-00BBGi-WF
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 13:58:25 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aad2623-e002-0a2a0a5209dd-0a2a450ad36a-18
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 13:53:14 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6aad262a-f2d2-0a2a450a0019-d155dd33a80a-3
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 13:53:14 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-48431648f33so712284f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 04:53:14 -0700 (PDT)
-Received: from ?IPV6:2a02:778:142:8f01:2700:bad4:284c:5aa5?
- ([2a02:778:142:8f01:2700:bad4:284c:5aa5])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4872008fe3csm3571728f8f.37.2026.09.18.04.53.12
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 18 Sep 2026 04:53:13 -0700 (PDT)
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6aad275f-8faa-0a2a0a5109dd-0a2a4503dc2c-10
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 13:58:24 +0200
+Received: from [103.168.172.153] (helo=fhigh-a2-smtp.messagingengine.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marmarek@invisiblethingslab.com>)
+ id 6aad275f-fae8-0a2a45030019-67a8ac99832f-3
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 13:58:24 +0200
+Received: from phl-compute-03.internal (phl-compute-03.internal [10.202.2.43])
+ by mailfhigh.phl.internal (Postfix) with ESMTP id 6D5F8140009A;
+ Fri, 18 Sep 2026 07:58:23 -0400 (EDT)
+Received: from phl-frontend-03 ([10.202.2.162])
+ by phl-compute-03.internal (MEProxy); Fri, 18 Sep 2026 07:58:23 -0400
+Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
+ 18 Sep 2026 07:58:22 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,151 +52,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789732394; x=1790337194; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=y0tWxbj9cGkYXEJPFzDR5FglFp8Hk9hDzsHv6lnfQ2E=;
-        b=HI6wW3E+PXI6M3bDZslyjnv4oXdgfhGq6H2XZlnBkch/7uN27MUth+bHDi1ZerWp2R
-         DmOx4y+5M1aHHNpCcrzR7vk/UJtOQh+v31M3TKn+0lC8pbPqDnOaEbyq7YAw6aao9MXG
-         KjuqtbDFUFS+52vDbBFwsYZJttnnglrawk1p/AMi0h14sYenSeejSRngm4C132Fh3RJa
-         gZp2ckVEVjrLFOXeNdgCpz4ttQO8LkvpVwPRafRzHECby3/7cYRqU1zQseV4rJkj6SqA
-         GjA1bcxTZ+QAbriH0YCPlVyvefFQhxVy3AypZXBaYHIqALWGq8l24Xfo9mLZEDQE8QNy
-         /YZA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789732394; x=1790337194;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=y0tWxbj9cGkYXEJPFzDR5FglFp8Hk9hDzsHv6lnfQ2E=;
-        b=iSk0Qfpvdu9XgQZ89SMOSXPLW3vwJDuZZ25Q1QbVzkJ58DERB/z84yPu0w1XkTFWrj
-         k1vdxxVhTJHGcmxn4OFGKZijRh4YlBbqb7I3jEfITQ2RcKbrqsE1W8KVUHWr0rmF/jcq
-         X5chBkY/7eqYgEzk/0bArIkH93QY9edr7ehr+0YlNUUmfAWNwjsEtskPnbcCdi0MyBVA
-         a2Nj1g2k/nArP3XtK/tR+/k8uU67sD9mswHWpIxRCS6/Cl5Bgn1OoEL3X+3Urqpg5Gru
-         d5Bb+5cEPyvR76z1U5HvYCC/1AOVxKiK7M7KffGZFlqp8x8AWcw4DMpMebRlFlIcSbba
-         eW4A==
-X-Forwarded-Encrypted: i=1; AKwUvBx2jb+a6FwX70Dvhg4b/4A40lXx/BAaXl04lUdob0KEnhQbesOgROuiXntaVd57j/uZ3VuiUBWsprM=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lRiGKY/oPrAdluxxS78qk1Xp4xsh9iW9emkOqLbE8wnh9XpmV1
-	/nJV4ybysga7j2lBXSMsZuETmYa69rEYvaM2MJRw57p64y3exi8S2Dyu
-X-Gm-Gg: AYBFou2IUtzL1RT+JR5x0BjVhK4O9oXh9JGLixZMeDdM/ThNbtCeljBsILjU93+D4bt
-	ZJtJ2KTpxLiA6vgLED8KjvzW/IQpYmaOEE0QWpndch46Hl91IoT0flYj2IhveozKKtH28CtdSQm
-	fbZtuN6N1eneB4C+acTsf+O0iBEBFJlpBqdnqCKyp+JgAZ8w5jwXIGCOiogaSc5qYLL478pM+nP
-	/0X9DhGZPwoV6/UDwSRK91RIEg5CeVMHl3ji55e65S7o8u5E9v1JWaYAxmjw/41kpeJSwgzxyxL
-	hSiEcUFXyS1TljyWE99r3VU2aBuYVmrdPH5hMIw15llePzWi0wdtUjG+Smbt6MJ/Uh8XaTZSdjY
-	cnCBNpHIg4opPHVdPSM7lVI0dQcEqT6KiFtvuJiXB45jQIseLj6zjf+3CVRUdsjKl1zOhStFn8p
-	hguHbL+Fckw6qnuyGQnGMz3LGGGGb7msKi3yxcrCbvGhSUEls3CDwmwrfiFNpTCMVP8mASdlE1J
-	aSIJi9AwE+suaY6y2n/wOEqzv+xYf4YMdJTGrec4oVziaGR1SeRtQ==
-X-Received: by 2002:a05:6000:468c:b0:487:152:e57c with SMTP id ffacd0b85a97d-48713aff8dbmr7318615f8f.1.1789732393638;
-        Fri, 18 Sep 2026 04:53:13 -0700 (PDT)
-Message-ID: <2e07e5e8-bd6c-4ec9-b656-6fa8c61bb456@gmail.com>
-Date: Fri, 18 Sep 2026 13:53:12 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:Message-ID:MIME-Version:Subject:To"; dkim=pass header.s=fm1 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:Message-ID:MIME-Version:Subject:To:X-ME-Proxy:X-ME-Sender"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
+	:date:from:from:in-reply-to:message-id:mime-version:reply-to
+	:subject:subject:to:to; s=fm1; t=1789732703; x=1789819103; bh=O3
+	uG9dqlPfb/Zs/qiRaK9/x7Wn0S0Gv8fLS9Aik8M68=; b=u0KMFC5C64CX7QoFd9
+	aZna7k3j5Agxnaq3je1WW4Z9l8eQVFRTJufxU4M2Hog2kwNxyQsTH1YD3k9s5Jbk
+	3d9r3jM8ztK+MaGJm2RFhxh0dTMeXjnJGGOrvtzGxn4HMQBzw1GGwNpxjaXNHevb
+	gBibsBADL9yKq8c0x8apSENBE7yuE9MZ8jqRuxMJN2alj1UkBl//W7c4+vLO8FGi
+	dngMT48hTGAPbIpJ8y5ZSzcHeDqPCzcnfvBIKZ3YYnbW4CB+6iVTJyK++ILsBuZV
+	Bq2bUPcr84jD82LghkOI6dKX1NmEGyFBTc4l9KbSzqnBRKb8J/W5Ue5HqJWelw+U
+	LP/A==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
+	messagingengine.com; h=cc:cc:content-type:content-type:date:date
+	:feedback-id:feedback-id:from:from:in-reply-to:message-id
+	:mime-version:reply-to:subject:subject:to:to:x-me-proxy
+	:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=1789732703; x=
+	1789819103; bh=O3uG9dqlPfb/Zs/qiRaK9/x7Wn0S0Gv8fLS9Aik8M68=; b=m
+	J6RypAQodPKuLqC3/EtPJMNDRwF4/fV4LdGT7cJtt2V7BvRMmwSPxFxavVFzqrHz
+	Ierh+BIAcAmdWoWeYu+PoqGvnC8Dm7JboWR9LK+xZeT2QkS2JVfJ1ltyTGeLAHnw
+	Az6qXut88n3bnjcfdWZa2iw8Ijve6FStBEEWFyf49iDkXsszljzKJd3JgWP6/OZ+
+	stX+HQr/CIX25Q9ewHuaz7rHFzD191vr9upr4skoH1svbV8KZCXRn8TfmYwRGJRI
+	4E8CxQcmq4nrRUBbLCpaxbYjlh+/B7zWf02nr7zSBWOZYcmYLWgxOMoiN/wWKy3e
+	8jSnQLqLErBrjCI9RI6iA==
+X-ME-Sender: <xms:XyetauQtBgLFlXPYPql8aN0QyXJP-FVX0Ka4hXQTP34V4C1gDOFEMw>
+    <xme:XyetapwBoEgLPQ2drV4IuUpujjsVbJ2teGraHWT3qcv0DD0HvOzt-HEn6Tuwttj_v
+    zQcmgLriTKMWtD0LqCEITZeEScD7VOVH8tm-UzAGQE5fPYIkls>
+X-ME-Received: <xmr:XyetapfNq6XKT0GVNmdfEE8MWw8dUCephuSVu9OfvHBvsUe9tdOyhMhQR_PsOyyqYHDCDDsy9gVYz8nXzGNg8mZLzVfQPNiEOSp-mhDVjK0>
+X-ME-Proxy-Cause: dmFkZTE/2Gn5ijyLCaoq8oPOQ4LbUZIcnZMUOtxDnZTdxIuzLNE/cOOhMZe6fx+T8iiIAX
+    IgmmoGimADrV5G1RRbZsjkfi67c3P7VVPoaGS9LR8JQr9fDW5DVpkcA+jIhc0WPeg3AAJo
+    aLNLNzLVkJ98LAejSQ+yinThiyREwGNv18pb/gBu4CSkAbi75sbh9pqTZXlpbgGJDj95L6
+    n6Ca6Bdt5cjNB7AFMJSmpFsrJr4pcF9rEjFSI37yw4golBrVkt4vN/0HXG9JSu/NlEaqn+
+    tyMXKc4SvP7JzYozfie9ehzqDoJX7h9xnG6PQesyDLSjMmTu6DpAL0W23pblgHKQ0jb0AM
+    iqgWEf4E1dv406yaVnNkpJVcnbk/HpPwR+RJFu0GVnKcVJoSx9Ai4vc1qI+plSahr8d7hG
+    ZWJDO6Kr6eRCz/p7s8MAMhlLBQAXPVpdNBYfIV1dV7tvc4gFKL5MIed+Fas8NRMaMH/CwH
+    a8DOsf17t/WxKYe38NQ/IkGi57ueC6nzY6RsLOyd1AYx3xd6y9szv+eU2tCfnlZ2NO6Ap7
+    qUY8ZZPcoRBe/iInPFVRRlCs8Wqr47p2y5keudK+OSTPO2EgtkKKtku43yLoYqagWX63Zw
+    a/6V8H9ZRmAoayZQYCfleAOo2pge1IB3bheo3vZRCsN4OigRpUpnmStt9q+A
+X-ME-Proxy: <xmx:XyetalJ86oWzzPs_0YbxTul9BYrO9xmh-sx5yjLIob02ZpKJ-x4SYQ>
+    <xmx:XyetaqEY51FZ2UM23CuvwX53kQaInW0YMvKer4C1iWRj-FfL_cn61g>
+    <xmx:XyetavoNim_6TCfo2y-a0zz103apM4x2QI1gGWgR5Z2oqNYE6KU-Ag>
+    <xmx:XyetajRCYxB8NIP3CNuKy0FhZRgndiNWd4pRPA2fcjtizJQ49pVA-A>
+    <xmx:XyetajUue8L3W4jJTkpymHFGulcVey5jzcPBDdPppc_GRiuCnLI3IQ3n>
+Feedback-ID: i1568416f:Fastmail
+Date: Fri, 18 Sep 2026 13:58:20 +0200
+From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
+To: Denis Mukhin <dmkhn@proton.me>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
+Subject: Zen5 runner access
+Message-ID: <aq0nXDnJ5PX5uiW2@mail-itl>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 31/39] xen/riscv: implement APLIC-hart sync barrier for
- vCPU migration
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <3d953b6e7f221f4cf4143454076466fab38b6236.1787838835.git.oleksii.kurochko@gmail.com>
- <45f6e417-ea0e-470c-bfae-e163a65b48d0@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <45f6e417-ea0e-470c-bfae-e163a65b48d0@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1789732394-59DDFCFC-9B653AE7/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 3088
+Content-Type: multipart/signed; micalg=pgp-sha256;
+	protocol="application/pgp-signature"; boundary="dMebaTGnIpaxfV48"
+Content-Disposition: inline
+X-purgate-ID: tlsNG-33051d/1789732704-77AF14E9-9F12E21C/0/0
+X-purgate-type: clean
+X-purgate-size: 1879
 
+--dMebaTGnIpaxfV48
+Content-Type: text/plain; protected-headers=v1; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Date: Fri, 18 Sep 2026 13:58:20 +0200
+From: Marek =?utf-8?B?PT91dGYtOD9RP01hcmN6eWtvd3NraS1HPUMzPUIzcmVja2k/PQ==?= <marmarek@invisiblethingslab.com>
+To: Denis Mukhin <dmkhn@proton.me>
+Cc: xen-devel <xen-devel@lists.xenproject.org>
+Subject: Zen5 runner access
 
+Hi,
 
-On 9/14/26 3:27 PM, Jan Beulich wrote:
-> On 27.08.2026 17:21, Oleksii Kurochko wrote:
->> During migration of a virtual hart to a different guest interrupt file,
->> straggler MSIs from the APLIC could arrive at the old interrupt file
->> after the switch.
->>
->> genmsi is used despite not supporting guest interrupt files because the
->> AIA spec guarantees that all MSIs previously sent from the APLIC to the
->> same hart are visible at the hart's IMSIC before the extempore MSI from
->> genmsi becomes visible.
-> 
-> Hmm. As indicated, I'm learning RISC-V as I'm reviewing patches. This
-> paragraph, if left as is, would make sure I simply can't ack the patch.
-> I just don't understand what is being talked about. I can guess parts,
-> but for example I don't know what "genmsi" is.
+After some debugging, the AMD Zen5 gitlab runner seems to be working
+now. You can add it to your repo by going to
+https://gitlab.com/xen-project/people/dmukhin/xen/-/settings/ci_cd
+Runners -> Other available project runners and add hal9021 to your repo.
+This relies on temporary access I granted you, so you need to click it
+in the next two weeks.
 
-I will reword then commit message in the following way:
+Then grab top commit from
+https://gitlab.com/xen-project/people/marmarek/xen/-/commits/automation-hw21
+that actually defines some jobs on it - edit it to your liking to run
+tests you want there.
 
-```
-When a vCPU is moved to a different guest interrupt file, MSIs that the
-APLIC has already sent towards the old file may still be in flight. They
-must land before the old file's state is saved and the switch is done,
-otherwise they would be lost.
+And then, you can also select which jobs to run while pushing stuff to
+gitlab, for example like this:
 
-To wait for them, use the APLIC's genmsi register. Writing it makes the
-APLIC itself send an MSI (an "extempore" MSI) with a given interrupt
-identity to a given hart. genmsi can only target the hart's supervisor-
-level interrupt file, not a guest one, but the AIA spec guarantees that
-all MSIs previously sent by the same APLIC to the same hart become
-visible at the hart's IMSIC before the extempore MSI does. So once the
-extempore MSI has been delivered, no older MSI from this APLIC to the
-hart can still be in flight, whichever interrupt file it targets.
+git push gitlab -o ci.variable=3DSELECTED_JOBS_ONLY=3D"/zen5-.*|alpine-3.24=
+-x86_64-gcc-debug/"
 
-The last interrupt identity (nr_ids) is reserved for this purpose.
-```
+--=20
+Best Regards,
+Marek Marczykowski-G=C3=B3recki
+Invisible Things Lab
 
-> 
->> @@ -205,6 +207,30 @@ void aplic_hw_write_reg(unsigned int offset, uint32_t value)
->>       spin_unlock_irqrestore(&aplic.lock, flags);
->>   }
->>   
->> +/*
->> + * As needed, synchronize with all IOMMUs and APLICs to ensure that no
->> + * straggler MSIs will arrive at the old interrupt file after this step.
->> + */
->> +void aplic_genmsi_barrier(void)
->> +{
->> +    const struct imsic_config *imsic = imsic_get_config();
->> +    unsigned int cpu = smp_processor_id();
->> +    unsigned long flags;
->> +    uint32_t val;
->> +
->> +    val = MASK_INSR(aplic_hart_field(cpu), APLIC_TARGET_HART_IDX) |
->> +          (imsic->sync_id & APLIC_TARGET_EIID);
-> 
-> Along the lines of a question on an earlier patch: What if this ANDing
-> actually chops off bits?
+--dMebaTGnIpaxfV48
+Content-Type: application/pgp-signature; name=signature.asc
 
-I will do then the same as I did in aplic_set_irq_affinity() (i 
-mentioned that in the one of the replies connected to this function in 
-this patch series):
+-----BEGIN PGP SIGNATURE-----
 
-     /*
-      * sync_id is nr_ids, which imsic_parse_node() limits to IMSIC_MAX_ID,
-      * so it always fits into the EIID field.
-      */
-     BUILD_BUG_ON(IMSIC_MAX_ID > MASK_EXTR(~0U, APLIC_TARGET_EIID));
-     ASSERT(imsic->sync_id <= IMSIC_MAX_ID);
+iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmqtJ1wACgkQ24/THMrX
+1yxHZgf+I+CoXmc1svMVnblyDYhgx5HHCdWSUTM0vijrQIUFRarYidlyft5TBGBw
+DYA07Tfxi29j8LjsRkAmzm/8BHuH+MM4YCUzGOg9ar2z8lk44QBdWz62CMzsvzqH
+KueZYVDn1HmnKpuEKNnVYBWy0s0MOh66VphOLM1ailuuPJTO123sShOSGcznQB2j
+X9msvdLLRjs7AbtzeG6fOCeFsGX79ljT5l4/mDD65rM+MIxM9yel9LRNGRLbuhFS
+0dTItQPp3i1oHD41oLNsfUxnr0/05hIu5mA7YFnL8eAkWDVBJrlqtUJnY+zVrSmV
+EAzlzWuhHvZ5a+nBhqVZDE4EFTywyw==
+=/1bt
+-----END PGP SIGNATURE-----
 
-     val = MASK_INSR(aplic_hart_index(cpu), APLIC_TARGET_HART_IDX) |
-           imsic->sync_id;
-
-Thanks.
-
-~ Oleksii
-
+--dMebaTGnIpaxfV48--
 
