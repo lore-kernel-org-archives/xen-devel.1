@@ -4,47 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99158C982D7
-	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 08:45:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1424961.1649147 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D1C1C982D9
+	for <xen-devel@archiver.kernel.org>; Fri, 18 Sep 2026 09:07:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1424986.1649158 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7UDY-0002bW-CU; Fri, 18 Sep 2026 08:45:12 +0000
+	id 1x7UYm-0006EI-72; Fri, 18 Sep 2026 09:07:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1424961.1649147; Fri, 18 Sep 2026 08:45:12 +0000
+Received: by outflank-mailman (output) from mailman id 1424986.1649158; Fri, 18 Sep 2026 09:07:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7UDY-0002bP-9r; Fri, 18 Sep 2026 08:45:12 +0000
-Received: by outflank-mailman (input) for mailman id 1424961;
- Fri, 18 Sep 2026 08:45:11 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x7UDW-0002b8-Ps
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 08:45:11 +0000
+	id 1x7UYm-0006E7-2a; Fri, 18 Sep 2026 09:07:08 +0000
+Received: by outflank-mailman (input) for mailman id 1424986;
+ Fri, 18 Sep 2026 09:07:06 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jgross@suse.com>) id 1x7UYk-0006E1-5j
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 09:07:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7UDW-005NnV-6c
- for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 10:45:10 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0b3b0c3ad00072c4@swg.vates.tech>)
- id 6aacfa10-e002-0a2a0a5209dd-0a2a4506a144-10
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 10:45:09 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0b3b0c3ad00072c4@swg.vates.tech>)
- id 6aacfa14-195a-0a2a45060019-b9ff1c23a1e5-3
- for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 10:45:08 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0b3b0c3ad00072c4.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 18 Sep 2026 08:45:01 +0000
-Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 5B8ED821ED;
- Fri, 18 Sep 2026 10:45:00 +0200 (CEST)
+ id 1x7UYi-00GDL7-2S
+ for xen-devel@lists.xenproject.org; Fri, 18 Sep 2026 11:07:04 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jgross@suse.com>)
+ id 6aacff2b-8faa-0a2a0a5109dd-0a2a4501bd44-16
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 11:07:03 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6aacff37-5984-0a2a45010019-4a7de18dce96-3
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 11:07:03 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49e7d2bb404so1495525e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 18 Sep 2026 02:07:03 -0700 (PDT)
+Received: from [172.18.88.57] (195-200-20-130.mclarenap.oninferno.net.
+ [195.200.20.130]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49fbd204d89sm164994375e9.3.2026.09.18.02.07.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 18 Sep 2026 02:07:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,535 +53,368 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=cB51r+lZrmiPfz+T3Gfa8J2oPhSh0gpzC4SIRfovPlc=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=jrsK/EGBrHucTrIs+1eUtIGQ0pnwzrosVJ/4br/33JYMpwE8bQtNkFqsBzuSc3RLtTtfEIx34
- zEz8g8Pr2Hqk7RxDkBvSxJFALZqyaiE86atlHYT2PCfBdmpidnOgdLyqJWQo/8Nq7A7U/kQOOty
- YI/QFFan5fOXv72UwkkqmPjbGtbOy3Qy9/gM0waL7M4OO7W2oYaTSHC3iVFhR1Wjmsjg3Mrkeg2
- XD9K+tLTerfAuiNSK2eiOuYsoXugcPFUgWpsnIxBgvecA7oMrl/sNCnQDH6mtl1vaaOWR1KHNUR
- VJMRrugok8ruje0eQMZG1JIDDAk6VOr/efWcQbbhQkoA==
-X-Zone-Loop: 838f895215de527d5e6bda2e77c1bee5b38a7077956e
-x-campaign-type: default
-x-transaction-id: dadd2cb1-cf33-4e9b-b298-007b18a64040
-x-swg-uid: 01-9023a72b-dff1-4074-954f-772a454d07cb
-X-Mailer: Sweego
-Message-ID:
- <1789721101.8631fc262581453bbf619ec5b2062170.1a0b3b0c3ad00072c4@vates.tech>
-x-swg-bid: 1789721101.8631fc262581453bbf619ec5b2062170.1a0b3b0c3ad00072c4
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1789722423; x=1790327223; darn=lists.xenproject.org;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=ouDNE0rDoiixgMyNSmCiJpla05ZJvb0lVlXPtaxqtkI=;
+        b=dlB0hGmnQyOMzYTKUoR74MWi1VwYUs7bqr+sTiXmNZryXrX5YP96ptyBuAEhqUbOKj
+         KUBFQTztjPuZ9lyOE2Z1fkKUmNRMANsGUrIiNl0phclW/FI93JLBtyxsupk/YJiX32kf
+         QDunCF+9eDAJ/oU+lNOpxUMC4spxieD541MZlOsrAXta3O3PGtTvVbcyIwqYASMl8Bxg
+         KTZGU74ggFbnHoZ0MAGT56oaFNPMjNesqQDH0QAK7BrvbYQFfIoRgSNuFQIoLg8j1NCK
+         iGT3wl5Ba2k+zVI6co3zvK6mIQ2Byh/Tp3WnddU1fuIP+BGegdVAxHNutDzpOtlxcyMh
+         6TNg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789722423; x=1790327223;
+        h=content-type:in-reply-to:autocrypt:from:content-language:references
+         :cc:to:subject:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ouDNE0rDoiixgMyNSmCiJpla05ZJvb0lVlXPtaxqtkI=;
+        b=1zM1cE0IlQCsWfLIh4zu17lIoXqHsn85OYOmPqodVcZhVSDl9LV/X/OHOjEGkVSHLR
+         yyS12m2QGCkJ1milQK6Pd34SdzlCGJY/0G5sREfNywO/A7B32tBAUB42m3L0f0OAHpq+
+         yR+E3esQAus+e3uoI4sNyRefZufT8GlBFb6LP1pep8wonr7J9pbgp7WrfEQPzV2b5Q7D
+         JSLiIhhW1voQ1IaoAfjtx58aXy+VbPtXbDTGj42immqEh6ildPknH6YjwWT/E6SQ9aO1
+         dIIPz7sVSl0H0vX0ZeP3d+j9GRceIBFDJnkOPgXV0QyHnLoPFQ1zzff3Yo9dbc9Jvb7x
+         zFLA==
+X-Forwarded-Encrypted: i=1; AKwUvBzfoQDh6TOJCddTDk1FA+vn8mR90OrPVYIKt/jxF10zN/wRy8usUGI+xa4Khtx6AFtvWZvxzRKtBTk=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mPjdh+Bg3O1PMMn1BK3QhEfBeeqwyboa471ofZ2cw+wwbEkCcn
+	EqGsWdIZmd3BubtDil3qiDKK8HjVp5YeoGjLeUDQlS9qZuX3z0jIEh/PVJYsvWapRr8=
+X-Gm-Gg: AYBFou0yxWbzKbUkzLeu1adlx+fhUo8L+ZHQUyGFrGJxKBC1cmpOrjli14jAntsq1aU
+	5uyMraNK1146KKHO19P4GG2vCzm6gbX9tbdhjG1Xp56TDGB7Xd5JV6RdXBAEOQHfpEeVmcTaLHL
+	zI+P6CUjkYVFH9TY0SKLvXQNs19Z8Kihm+77CWbmF7DjASkteaW8VbuwNj07zi7tLj/6QuXiLJK
+	qtLwfMU/huJ3fTKjwiyenEliYk7kkw5EugxlrrXik8lEgOCH0eagapTiD5ClunNNm1j9FIgGNuT
+	js0bd4TnmcD8pZn+nd9SnTZSK8ihVgaWuw7vjoLS8VK7HnX3pBwADhlFv1lSws2c6xjeKCHy5R3
+	EcRwLMD+Yly+SPC0lShmAqGLzFVVDvJkfiZ0NpW5WyJk6FA/AbUZscHpEit1Xs+Zg2Fys2csUgS
+	uTbPBf+glKjv1C96Du/8C5M6zCKBiEaaZlITapXPQ/R9Y4Agg38Ao9KGd1Mo50OLBasnjMd0Trb
+	8WQtI/MjNMpTeTemVGQQhbjUHUgKc8RJyMT5kA=
+X-Received: by 2002:a05:600c:83c9:b0:49c:f13e:e4d with SMTP id 5b1f17b1804b1-49fc4ff402cmr24978935e9.10.1789722423006;
+        Fri, 18 Sep 2026 02:07:03 -0700 (PDT)
+Message-ID: <3fe03cde-a614-48e2-920a-3116661e886b@suse.com>
+Date: Fri, 18 Sep 2026 11:06:17 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2 24/39] xen/riscv: add helpers for decoding a trapped
- load or store
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, 
- Romain Caritey <Romain.Caritey@microchip.com>, 
- Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- Zheng Zhang <zhangzheng@iscas.ac.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <4c5361bda56e97f5338f4bc561498e018adbf618.1787838835.git.oleksii.kurochko@gmail.com>
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <4c5361bda56e97f5338f4bc561498e018adbf618.1787838835.git.oleksii.kurochko@gmail.com>
-Date: Fri, 18 Sep 2026 10:44:52 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1789721094; l=16982;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=Dg2QiUp8Y1lpu0ImOFAoAE+mxFvJ5sseFP0IZrp5/SM=;
- b=Y1HmtScKXHDumUg3arsjOASHXNwGhqRhx73/mkyBWQDcJ4P6lEE/wCuQQAYGCy/+0Tdiu8kUb
- Bw5DhnAvt5XD3PsMb2xMn0lJWRN/dEGlsOMStQADiPX/rEs/lYZlFdI
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1789721100586
-X-purgate-ID: tlsNG-16d1c6/1789721108-F4C0777B-722D6683/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 16982
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/5] xen/sched: rtds: add global-EDF utilization
+ admission control
+To: Furkan Caliskan <frn1furkan10@gmail.com>, xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, roger@xenproject.org,
+ dfaggioli@suse.com, anthony.perard@vates.tech, julien@xen.org
+References: <20260918080935.35498-1-frn1furkan10@gmail.com>
+ <20260918080935.35498-2-frn1furkan10@gmail.com>
+Content-Language: en-US
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <20260918080935.35498-2-frn1furkan10@gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------cGS3MeBSQi3ObU09OPpPdfhb"
+X-purgate-ID: tlsNG-d62444/1789722423-BCF47757-97E33486/35/110847
+X-purgate-type: clean
+X-purgate-size: 18566
 
-> emulate_load() and emulate_store() will both need to obtain the
-> instruction which caused a guest MMIO trap, decode it, and locate the
-> register operand it names. Add what the two share, ahead of either of
-> them being implemented: struct decoded_insn, insn_fetch_faulted(),
-> decode_ldst_insn(), guest_xlen(), guest_gpr() and advance_pc().
-> 
-> The mask/match chain is adapted from Linux's KVM RISC-V implementation.
-Nit: maybe you could add the Origin: trailer as mentioned in the
-sending-patches.adoc.
-> 
-> Nothing calls any of this yet, so tag the functions __maybe_unused to
-> keep the build going; the tags go away once emulate_load() and
-> emulate_store() gain their bodies later.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------cGS3MeBSQi3ObU09OPpPdfhb
+Content-Type: multipart/mixed; boundary="------------nXGT6hNqYecyPk5f5l73YXw0";
+ protected-headers="v1"
+From: =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
+To: Furkan Caliskan <frn1furkan10@gmail.com>, xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, roger@xenproject.org,
+ dfaggioli@suse.com, anthony.perard@vates.tech, julien@xen.org
+Message-ID: <3fe03cde-a614-48e2-920a-3116661e886b@suse.com>
+Subject: Re: [PATCH v2 1/5] xen/sched: rtds: add global-EDF utilization
+ admission control
+References: <20260918080935.35498-1-frn1furkan10@gmail.com>
+ <20260918080935.35498-2-frn1furkan10@gmail.com>
+In-Reply-To: <20260918080935.35498-2-frn1furkan10@gmail.com>
+Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
+ ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
+ Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
+ pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
+ tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
+ OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
+ v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
+ 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
+ jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
+ DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
+ Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
+ dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
+ AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
 
+--------------nXGT6hNqYecyPk5f5l73YXw0
+Content-Type: multipart/mixed; boundary="------------nl82mkcGPkkA8mDEZQKYRBzm"
 
-> 
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->
-> diff --git a/xen/arch/riscv/emulate.c b/xen/arch/riscv/emulate.c
-> index ff530ef2df..81a50643a5 100644
-> --- a/xen/arch/riscv/emulate.c
-> +++ b/xen/arch/riscv/emulate.c
-> @@ -5,6 +5,7 @@
->   */
->  
->  #include <xen/bug.h>
-> +#include <xen/compiler.h>
->  #include <xen/errno.h>
->  #include <xen/sched.h>
->  #include <xen/types.h>
-> @@ -13,9 +14,29 @@
->  #include <asm/csr.h>
->  #include <asm/current.h>
->  #include <asm/emulate.h>
-> +#include <asm/guest_access.h>
-> +#include <asm/processor.h>
->  #include <asm/riscv_encoding.h>
->  #include <asm/traps.h>
->  
-> +/*
-> + * Determine the trapped load or store instruction which caused a guest MMIO
-> + * trap.
-> + */
-> +struct decoded_insn {
-> +    /* The instruction itself, and its length in bytes. */
-> +    unsigned long insn;
-> +    unsigned int insn_len;
-> +    /* Width of the memory access, in bytes. */
-> +    unsigned int len;
-> +    /* Number of the register operand: rd for a load, rs2 for a store. */
-> +    unsigned int reg;
-> +    /* The access is a store rather than a load. */
-> +    bool is_write;
-> +    /* The load zero-extends its result rather than sign-extending it. */
-> +    bool is_unsigned;
-> +};
+--------------nl82mkcGPkkA8mDEZQKYRBzm
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
+T24gMTguMDkuMjYgMTA6MDksIEZ1cmthbiBDYWxpc2thbiB3cm90ZToNCj4gUlREUyBoYXMg
+bm8gYWRtaXNzaW9uIGNvbnRyb2w6IG5vdGhpbmcgc3RvcHMgdGhlIHN1bSBvZiBhbGwgYWRt
+aXR0ZWQNCj4gdW5pdHMnIChidWRnZXQvcGVyaW9kKSByZXNlcnZhdGlvbnMgaW4gYSBjcHVw
+b29sIGZyb20gZXhjZWVkaW5nDQo+IHdoYXQgaXRzIHBDUFVzIGNhbiBhY3R1YWxseSBwcm92
+aWRlLiBPbmNlIHRoYXQgaGFwcGVucywgbm9uZSBvZiB0aGUNCj4gRURGIGRlYWRsaW5lIGd1
+YXJhbnRlZXMgdGhpcyBzY2hlZHVsZXIgaXMgYnVpbHQgYXJvdW5kIHN0aWxsIGhvbGQNCj4g
+Zm9yIHRoZSB1bml0cyBzaGFyaW5nIHRoYXQgcG9vbC4NCj4gDQo+IEludHJvZHVjZSBhZG1p
+c3Npb24gY29udHJvbCB0byBwcmV2ZW50IHRoaXM6IHJlamVjdCBhIHJlc2VydmF0aW9uDQo+
+IHdoZW5ldmVyIGFkbWl0dGluZyBpdCB3b3VsZCBwdXNoIGEgY3B1cG9vbCdzIHVuaXRzIG92
+ZXIgaXRzIGNhcGFjaXR5Lg0KPiBUcmFjayBhIHJ1bm5pbmcgdXRpbGl6YXRpb24gdG90YWwg
+cGVyIGNwdXBvb2wsIGFuZCBlbmZvcmNlIGl0IGluDQo+IHJ0X2FsbG9jX3VkYXRhKCkvcnRf
+ZnJlZV91ZGF0YSgpLCB0aGUgcGFpcmVkIGxpZmVjeWNsZSBob29rcyBmb3IgYQ0KPiB1bml0
+J3MgY3JlYXRpb24gYW5kIGRlc3RydWN0aW9uLiBUaGlzIGNhdGNoZXMgdGhlIGRlZmF1bHQN
+Cj4gcGVyaW9kL2J1ZGdldCBldmVyeSBuZXcgdW5pdCBnZXRzLg0KPiANCj4gVXRpbGl6YXRp
+b24gaXMgcmVwcmVzZW50ZWQgYXMgYSBmaXhlZC1wb2ludCB2YWx1ZTogYnVkZ2V0IGlzDQo+
+IGxlZnQgc2hpZnRlZCBieSBSVERTX1VUSUxfU0hJRlQgKDIwIGJpdHMpIGFuZCBkaXZpZGVk
+IGJ5IHBlcmlvZC4NCj4gQSBwbGFpbiAiKGJ1ZGdldCA8PCBSVERTX1VUSUxfU0hJRlQpIC8g
+cGVyaW9kIiByaXNrcyBvdmVyZmxvd2luZw0KPiB0aGUgbXVsdGlwbHkgZm9yIGxhcmdlIGVu
+b3VnaCBidWRnZXRzLiBSYXRoZXIgdGhhbiB3aWRlbiB0aGUNCj4gYXJpdGhtZXRpYyB0byB0
+b2xlcmF0ZSBhbnkgaW5wdXQsIHRoZSBpbnB1dCBpdHNlbGYgaXMgYm91bmRlZDoNCj4gcnRf
+dmFsaWRhdGVfcGFyYW1zKCkgcmVqZWN0cyBhbnkgYnVkZ2V0IGFib3ZlIFJURFNfTUFYX0JV
+REdFVCwNCj4gY2hvc2VuIGFzIHRoZSBsYXJnZXN0IHZhbHVlIHRoYXQgY2FuIGJlIGxlZnQt
+c2hpZnRlZCBieQ0KPiBSVERTX1VUSUxfU0hJRlQgd2l0aG91dCBvdmVyZmxvd2luZyA2NCBi
+aXRzLCBzbyB0aGUgc2hpZnQgaW4NCj4gcnRfdW5pdF91dGlsaXphdGlvbigpIGNhbiBuZXZl
+ciBvdmVyZmxvdy4NCj4gDQo+IEEgY3B1cG9vbCdzIGNhcGFjaXR5IHJ0X3V0aWxpemF0aW9u
+X2NhcCgpIHNjYWxlcyB3aXRoIHRoZSBudW1iZXIgb2YNCj4gc2NoZWR1bGluZyByZXNvdXJj
+ZXMgaW4gaXQuIEl0IGlzIGNhbGN1bGF0ZWQgYXM6DQo+IChudW1iZXIgb2Ygc2NoZWRfcmVz
+b3VyY2VzICogUlREU19VVElMX1NDQUxFICogUlREU19VVElMX0NBUF9QQ1QgLyAxMDApLA0K
+PiB3aGVyZSBSVERTX1VUSUxfQ0FQX1BDVCBjb250cm9scyBob3cgbXVjaCBvZiB0aGF0IGNh
+cGFjaXR5IGNhbg0KPiBhY3R1YWxseSBiZSByZXNlcnZlZDsgYXQgMTAwJSAoaXRzIGN1cnJl
+bnQgdmFsdWUpLCBhbGwgb2YgaXQgY2FuIGJlLg0KPiANCj4gU2lnbmVkLW9mZi1ieTogRnVy
+a2FuIENhbGlza2FuIDxmcm4xZnVya2FuMTBAZ21haWwuY29tPg0KPiAtLS0NCj4gdjI6DQo+
+ICAgLSBSZW5hbWVkIHJ0X2FkbWlzc2lvbl90ZXN0KCkgdG8gcnRfdHJ5X3NldF91dGlsaXph
+dGlvbigpIGFuZCBjaGFuZ2VkDQo+ICAgICBpdHMgcmV0dXJuIHR5cGUgZnJvbSBpbnQgdG8g
+Ym9vbCwgc2luY2UgaXQgZG9lc24ndCBqdXN0IHRlc3QgYnV0DQo+ICAgICBhbHNvIGNvbW1p
+dHMgdGhlIG5ldyB1dGlsaXphdGlvbiBvbiBzdWNjZXNzLg0KPiAtLS0NCj4gICB4ZW4vY29t
+bW9uL3NjaGVkL3J0LmMgfCAxMDUgKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysr
+KysrKysrKystDQo+ICAgMSBmaWxlIGNoYW5nZWQsIDEwNCBpbnNlcnRpb25zKCspLCAxIGRl
+bGV0aW9uKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEveGVuL2NvbW1vbi9zY2hlZC9ydC5jIGIv
+eGVuL2NvbW1vbi9zY2hlZC9ydC5jDQo+IGluZGV4IDBlOWYwNGVhNzIuLmFjZWJiYmU1N2Ug
+MTAwNjQ0DQo+IC0tLSBhL3hlbi9jb21tb24vc2NoZWQvcnQuYw0KPiArKysgYi94ZW4vY29t
+bW9uL3NjaGVkL3J0LmMNCj4gQEAgLTExNCw2ICsxMTQsMjQgQEANCj4gICAgKi8NCj4gICAj
+ZGVmaW5lIFJURFNfTUFYX1BSSU9SSVRZX0xFVkVMICh+MFUpDQo+ICAgDQo+ICsvKg0KPiAr
+ICogRml4ZWQtcG9pbnQgc2NhbGUgZm9yIHV0aWxpemF0aW9uIChidWRnZXQvcGVyaW9kKQ0K
+PiArICovDQo+ICsjZGVmaW5lIFJURFNfVVRJTF9TSElGVCAgICAgMjANCj4gKyNkZWZpbmUg
+UlREU19VVElMX1NDQUxFICAgICAoMVVMTCA8PCBSVERTX1VUSUxfU0hJRlQpDQo+ICsNCj4g
+Ky8qDQo+ICsgKiBMYXJnZXN0IGJ1ZGdldCBzYWZlIHRvIGxlZnQtc2hpZnQgYnkgUlREU19V
+VElMX1NISUZUIHdpdGhvdXQNCj4gKyAqIG92ZXJmbG93aW5nIDY0IGJpdHMuIEVuZm9yY2Vk
+IGluIHJ0X3ZhbGlkYXRlX3BhcmFtcygpLg0KPiArICovDQo+ICsjZGVmaW5lIFJURFNfTUFY
+X0JVREdFVF9CSVRTICAoNjQgLSBSVERTX1VUSUxfU0hJRlQpDQo+ICsjZGVmaW5lIFJURFNf
+TUFYX0JVREdFVCAgICAgICAoKDFVTEwgPDwgUlREU19NQVhfQlVER0VUX0JJVFMpIC0gMSkN
+Cj4gKw0KPiArLyoNCj4gKyAqICUgb2YgYSBjcHVwb29sJ3Mgc2NoZWRfcmVzb3VyY2UgY2Fw
+YWNpdHkgYWRtaXR0ZWQgdW5pdHMgbWF5IHN1bSB1cCB0by4NCj4gKyAqLw0KPiArI2RlZmlu
+ZSBSVERTX1VUSUxfQ0FQX1BDVCAgIDEwMA0KPiArDQo+ICAgLyoNCj4gICAgKiBVUERBVEVf
+TElNSVRfU0hJRlQ6IGEgY29uc3RhbnQgdXNlZCBpbiBydF91cGRhdGVfZGVhZGxpbmUoKS4g
+V2hlbiBmaW5kaW5nDQo+ICAgICogdGhlIG5leHQgZGVhZGxpbmUsIHBlcmZvcm1pbmcgYWRk
+aXRpb24gY291bGQgYmUgZmFzdGVyIGlmIHRoZSBkaWZmZXJlbmNlDQo+IEBAIC0xOTUsNiAr
+MjEzLDkgQEAgc3RydWN0IHJ0X3ByaXZhdGUgew0KPiAgICAgICBzdHJ1Y3QgbGlzdF9oZWFk
+IHJlcGxxOyAgICAgLyogb3JkZXJlZCBsaXN0IG9mIHVuaXRzIHRoYXQgbmVlZCByZXBsZW5p
+c2htZW50ICovDQo+ICAgDQo+ICAgICAgIGNwdW1hc2tfdCB0aWNrbGVkOyAgICAgICAgICAv
+KiBjcHVzIGJlZW4gdGlja2xlZCAqLw0KPiArDQo+ICsgICAgLyogU3VtIG9mIGFkbWl0dGVk
+IHVuaXRzJyAoYnVkZ2V0L3BlcmlvZCksIHNjYWxlZCBieSBSVERTX1VUSUxfU0NBTEUgKi8N
+Cj4gKyAgICB1aW50NjRfdCB1dGlsaXphdGlvbjsNCj4gICB9Ow0KPiAgIA0KPiAgIC8qDQo+
+IEBAIC02MzUsNiArNjU2LDU0IEBAIHJlcGxxX3JlaW5zZXJ0KGNvbnN0IHN0cnVjdCBzY2hl
+ZHVsZXIgKm9wcywgc3RydWN0IHJ0X3VuaXQgKnN2YykNCj4gICAgICAgICAgIHNldF90aW1l
+cigmcnRfcHJpdihvcHMpLT5yZXBsX3RpbWVyLCByZWFybV9zdmMtPmN1cl9kZWFkbGluZSk7
+DQo+ICAgfQ0KPiAgIA0KPiArLyoNCj4gKyAqIGJ1ZGdldCA8PCBSVERTX1VUSUxfU0hJRlQg
+Y2FuJ3Qgb3ZlcmZsb3c6IHJ0X3ZhbGlkYXRlX3BhcmFtcygpDQo+ICsgKiBjYXBzIGJ1ZGdl
+dCBhdCBSVERTX01BWF9CVURHRVQuIHBlcmlvZCA9PSAwIG1lYW5zICJubw0KPiArICogcmVz
+ZXJ2YXRpb24iIChhIHVuaXQgYmVpbmcgcmVtb3ZlZCksIG5vdCBhbiBlcnJvci4NCj4gKyAq
+Lw0KPiArc3RhdGljIHVpbnQ2NF90DQo+ICtydF91bml0X3V0aWxpemF0aW9uKHNfdGltZV90
+IHBlcmlvZCwgc190aW1lX3QgYnVkZ2V0KQ0KPiArew0KPiArICAgIGlmICggcGVyaW9kIDw9
+IDAgKQ0KPiArICAgICAgICByZXR1cm4gMDsNCj4gKw0KPiArICAgIHJldHVybiAoKHVpbnQ2
+NF90KWJ1ZGdldCA8PCBSVERTX1VUSUxfU0hJRlQpIC8gKHVpbnQ2NF90KXBlcmlvZDsNCj4g
+K30NCj4gKw0KPiArLyoNCj4gKyAqIFV0aWxpemF0aW9uIGNhcGFjaXR5IG9mIHRoZSBjcHVw
+b29sIGRvbWFpbiBkIHJlc2lkZXMgaW4uDQo+ICsgKi8NCj4gK3N0YXRpYyB1aW50NjRfdA0K
+PiArcnRfdXRpbGl6YXRpb25fY2FwKGNvbnN0IHN0cnVjdCBkb21haW4gKmQpDQo+ICt7DQo+
+ICsgICAgdW5zaWduZWQgaW50IGNwdXMgPSBjcHVtYXNrX3dlaWdodChjcHVwb29sX2RvbWFp
+bl9tYXN0ZXJfY3B1bWFzayhkKSk7DQo+ICsNCj4gKyAgICByZXR1cm4gKHVpbnQ2NF90KWNw
+dXMgKiBSVERTX1VUSUxfU0NBTEUgKiBSVERTX1VUSUxfQ0FQX1BDVCAvIDEwMDsNCj4gK30N
+Cj4gKw0KPiArLyoNCj4gKyAqIFJlcGxhY2VzIGEgdW5pdCdzIHJlc2VydmF0aW9uIGFuZCB1
+cGRhdGVzIHBydi0+dXRpbGl6YXRpb24NCj4gKyAqIHRvIG1hdGNoLiBHcm93dGggdGhhdCB3
+b3VsZCBwdXNoIHV0aWxpemF0aW9uIG92ZXIgdGhlDQo+ICsgKiBjcHVwb29sJ3MgY2FwIGlz
+IHJlZnVzZWQuIFJlbW92aW5nIGEgdW5pdCBvciBzaHJpbmtpbmcNCj4gKyAqIGEgdW5pdCdz
+IHJlc2VydmF0aW9uIGFsd2F5cyBzdWNjZWVkLg0KPiArICovDQo+ICtzdGF0aWMgYm9vbA0K
+PiArcnRfdHJ5X3NldF91dGlsaXphdGlvbihzdHJ1Y3QgcnRfcHJpdmF0ZSAqcHJ2LCBjb25z
+dCBzdHJ1Y3QgZG9tYWluICpkLA0KPiArICAgICAgICAgICAgICAgICAgICAgICBzX3RpbWVf
+dCBvbGRfcGVyaW9kLCBzX3RpbWVfdCBvbGRfYnVkZ2V0LA0KPiArICAgICAgICAgICAgICAg
+ICAgICAgICBzX3RpbWVfdCBuZXdfcGVyaW9kLCBzX3RpbWVfdCBuZXdfYnVkZ2V0KQ0KPiAr
+ew0KPiArICAgIHVpbnQ2NF90IG9sZF91dGlsID0gcnRfdW5pdF91dGlsaXphdGlvbihvbGRf
+cGVyaW9kLCBvbGRfYnVkZ2V0KTsNCj4gKyAgICB1aW50NjRfdCBuZXdfdXRpbCA9IHJ0X3Vu
+aXRfdXRpbGl6YXRpb24obmV3X3BlcmlvZCwgbmV3X2J1ZGdldCk7DQo+ICsgICAgdWludDY0
+X3QgdG90YWwgICAgPSBwcnYtPnV0aWxpemF0aW9uIC0gb2xkX3V0aWwgKyBuZXdfdXRpbDsN
+Cj4gKw0KPiArICAgIGlmICggbmV3X3V0aWwgPiBvbGRfdXRpbCAmJiB0b3RhbCA+IHJ0X3V0
+aWxpemF0aW9uX2NhcChkKSApDQo+ICsgICAgICAgIHJldHVybiBmYWxzZTsNCj4gKw0KPiAr
+ICAgIHBydi0+dXRpbGl6YXRpb24gPSB0b3RhbDsNCj4gKw0KPiArICAgIHJldHVybiB0cnVl
+Ow0KPiArfQ0KPiArDQo+ICAgLyoNCj4gICAgKiBQaWNrIGEgdmFsaWQgcmVzb3VyY2UgZm9y
+IHRoZSB1bml0IHZjDQo+ICAgICogVmFsaWQgcmVzb3VyY2Ugb2YgYW4gdW5pdCBpcyBpbnRl
+c2VjdGlvbiBvZiB1bml0J3MgYWZmaW5pdHkNCj4gQEAgLTg2NCw2ICs5MzMsNyBAQCBydF9m
+cmVlX2RvbWRhdGEoY29uc3Qgc3RydWN0IHNjaGVkdWxlciAqb3BzLCB2b2lkICpkYXRhKQ0K
+PiAgIHN0YXRpYyB2b2lkICogY2ZfY2hlY2sNCj4gICBydF9hbGxvY191ZGF0YShjb25zdCBz
+dHJ1Y3Qgc2NoZWR1bGVyICpvcHMsIHN0cnVjdCBzY2hlZF91bml0ICp1bml0LCB2b2lkICpk
+ZCkNCj4gICB7DQo+ICsgICAgc3RydWN0IHJ0X3ByaXZhdGUgKnBydiA9IHJ0X3ByaXYob3Bz
+KTsNCj4gICAgICAgc3RydWN0IHJ0X3VuaXQgKnN2YzsNCj4gICANCj4gICAgICAgLyogQWxs
+b2NhdGUgcGVyLVVOSVQgaW5mbyAqLw0KPiBAQCAtODgxLDkgKzk1MSwzMCBAQCBydF9hbGxv
+Y191ZGF0YShjb25zdCBzdHJ1Y3Qgc2NoZWR1bGVyICpvcHMsIHN0cnVjdCBzY2hlZF91bml0
+ICp1bml0LCB2b2lkICpkZCkNCj4gICAgICAgX19zZXRfYml0KF9fUlREU19leHRyYXRpbWUs
+ICZzdmMtPmZsYWdzKTsNCj4gICAgICAgc3ZjLT5wcmlvcml0eV9sZXZlbCA9IDA7DQo+ICAg
+ICAgIHN2Yy0+cGVyaW9kID0gUlREU19ERUZBVUxUX1BFUklPRDsNCj4gKw0KPiAgICAgICBp
+ZiAoICFpc19pZGxlX3VuaXQodW5pdCkgKQ0KPiArICAgIHsNCj4gKyAgICAgICAgdW5zaWdu
+ZWQgbG9uZyBmbGFnczsNCj4gKyAgICAgICAgYm9vbCBhZG1pdHRlZDsNCj4gKw0KPiAgICAg
+ICAgICAgc3ZjLT5idWRnZXQgPSBSVERTX0RFRkFVTFRfQlVER0VUOw0KPiAgIA0KPiArICAg
+ICAgICBzcGluX2xvY2tfaXJxc2F2ZSgmcHJ2LT5sb2NrLCBmbGFncyk7DQo+ICsgICAgICAg
+IGFkbWl0dGVkID0gcnRfdHJ5X3NldF91dGlsaXphdGlvbihwcnYsIHVuaXQtPmRvbWFpbiwg
+MCwgMCwNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBz
+dmMtPnBlcmlvZCwgc3ZjLT5idWRnZXQpOw0KDQpOaXQ6IHRoaXMgbGluZSBzZWVtcyB0byBi
+ZSBpbmRlbnRlZCBvbmUgc3BhY2UgdG9vIG11Y2guIFNhbWUgLi4uDQoNCj4gKyAgICAgICAg
+c3Bpbl91bmxvY2tfaXJxcmVzdG9yZSgmcHJ2LT5sb2NrLCBmbGFncyk7DQo+ICsNCj4gKyAg
+ICAgICAgaWYgKCAhYWRtaXR0ZWQgKQ0KPiArICAgICAgICB7DQo+ICsgICAgICAgICAgICBw
+cmludGsoWEVOTE9HX1dBUk5JTkcNCj4gKyAgICAgICAgICAgICAgICAgICAiUlREUzogQURN
+SVNTSU9OIENPTlRST0w6IHJlZnVzaW5nIHVuaXQgJXUgb2YgZCVkLCINCj4gKyAgICAgICAg
+ICAgICAgICAgICAiIHdvdWxkIGV4Y2VlZCB1dGlsaXphdGlvbiBjYXBhY2l0eSBvZiB0aGUg
+Y3B1cG9vbFxuIiwNCj4gKyAgICAgICAgICAgICAgICAgICB1bml0LT51bml0X2lkLCB1bml0
+LT5kb21haW4tPmRvbWFpbl9pZCk7DQo+ICsgICAgICAgICAgICB4ZnJlZShzdmMpOw0KPiAr
+ICAgICAgICAgICAgcmV0dXJuIE5VTEw7DQo+ICsgICAgICAgIH0NCj4gKyAgICB9DQo+ICsN
+Cj4gICAgICAgU0NIRURfU1RBVF9DUkFOSyh1bml0X2FsbG9jKTsNCj4gICANCj4gICAgICAg
+cmV0dXJuIHN2YzsNCj4gQEAgLTg5Miw4ICs5ODMsMTkgQEAgcnRfYWxsb2NfdWRhdGEoY29u
+c3Qgc3RydWN0IHNjaGVkdWxlciAqb3BzLCBzdHJ1Y3Qgc2NoZWRfdW5pdCAqdW5pdCwgdm9p
+ZCAqZGQpDQo+ICAgc3RhdGljIHZvaWQgY2ZfY2hlY2sNCj4gICBydF9mcmVlX3VkYXRhKGNv
+bnN0IHN0cnVjdCBzY2hlZHVsZXIgKm9wcywgdm9pZCAqcHJpdikNCj4gICB7DQo+ICsgICAg
+c3RydWN0IHJ0X3ByaXZhdGUgKnBydiA9IHJ0X3ByaXYob3BzKTsNCj4gICAgICAgc3RydWN0
+IHJ0X3VuaXQgKnN2YyA9IHByaXY7DQo+ICAgDQo+ICsgICAgaWYgKCBzdmMgJiYgIWlzX2lk
+bGVfdW5pdChzdmMtPnVuaXQpICkNCj4gKyAgICB7DQo+ICsgICAgICAgIHVuc2lnbmVkIGxv
+bmcgZmxhZ3M7DQo+ICsNCj4gKyAgICAgICAgc3Bpbl9sb2NrX2lycXNhdmUoJnBydi0+bG9j
+aywgZmxhZ3MpOw0KPiArICAgICAgICBydF90cnlfc2V0X3V0aWxpemF0aW9uKHBydiwgc3Zj
+LT51bml0LT5kb21haW4sDQo+ICsgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN2
+Yy0+cGVyaW9kLCBzdmMtPmJ1ZGdldCwgMCwgMCk7DQoNCi4uLiBoZXJlLg0KDQo+ICsgICAg
+ICAgIHNwaW5fdW5sb2NrX2lycXJlc3RvcmUoJnBydi0+bG9jaywgZmxhZ3MpOw0KPiArICAg
+IH0NCj4gKw0KPiAgICAgICB4ZnJlZShzdmMpOw0KPiAgIH0NCj4gICANCj4gQEAgLTEzODks
+NyArMTQ5MSw4IEBAIHJ0X3ZhbGlkYXRlX3BhcmFtcyhjb25zdCBzdHJ1Y3QgeGVuX2RvbWN0
+bF9zY2hlZF9ydGRzICpydGRzLA0KPiAgICAgICBzX3RpbWVfdCBiID0gTUlDUk9TRUNTKHJ0
+ZHMtPmJ1ZGdldCk7DQo+ICAgDQo+ICAgICAgIGlmICggcCA8IFJURFNfTUlOX1BFUklPRCB8
+fCBwID4gUlREU19NQVhfUEVSSU9EIHx8DQo+IC0gICAgICAgICBiIDwgUlREU19NSU5fQlVE
+R0VUIHx8IGIgPiBwICkNCj4gKyAgICAgICAgIGIgPCBSVERTX01JTl9CVURHRVQgfHwgYiA+
+IHAgfHwNCj4gKyAgICAgICAgIGIgPiAoc190aW1lX3QpUlREU19NQVhfQlVER0VUICkNCj4g
+ICAgICAgICAgIHJldHVybiAtRUlOVkFMOw0KPiAgIA0KPiAgICAgICAqcGVyaW9kID0gcDsN
+Cg0KV2l0aCBhYm92ZSBmaXhlZDoNCg0KUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpn
+cm9zc0BzdXNlLmNvbT4NCg0KDQpKdWVyZ2VuDQo=
+--------------nl82mkcGPkkA8mDEZQKYRBzm
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-> +
->  /*
->   * The hardware-reported details of a guest page fault, gathered once by
->   * handle_guest_page_fault() and passed down to the emulation of the faulted
-> @@ -39,6 +60,71 @@ struct guest_fault {
->      paddr_t gpa;
->  };
->  
-> +static bool is_load_guest_page_fault(unsigned long scause)
-> +{
-> +    return scause == CAUSE_LOAD_GUEST_PAGE_FAULT;
-> +}
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
 
-> +
-> +static __maybe_unused void advance_pc(struct cpu_user_regs *regs,
-> +                                      unsigned int step)
-> +{
-> +    regs->sepc += step;
-> +}
-> +
-> +/*
-> + * The effective XLEN of the guest at the point of the trap: hstatus.VSXL for a
-> + * trap taken from VS-mode, vsstatus.UXL for one taken from VU-mode.
-> + *
-> + * VSXL is consulted whichever mode the trap came from, as it also gives the
-> + * width of vsstatus itself: where VSXL says 32, that register has no UXL field
-> + * to consult and VU-mode is 32-bit as well, there being nothing to configure.
-> + *
-> + * It is needed to decode a trapped instruction: the encodings which exist only
-> + * for XLEN=64 must not be recognized for a 32-bit guest. Besides those simply
-> + * being reserved there, the compressed ones are ambiguous: C.LD and C.FLW
-> + * share the encoding 0x6000 (mask 0xe003), and likewise C.SD/C.FSW,
-> + * C.LDSP/C.FLWSP and C.SDSP/C.FSWSP.
-> + *
-> + * IS_ENABLED() can't be used here as HSTATUS_VSXL is defined for
-> + * __riscv_xlen == 64 only, the field not existing on RV32 in the first place.
-> + */
-> +static __maybe_unused unsigned int guest_xlen(const struct cpu_user_regs *regs)
-> +{
-> +#ifdef CONFIG_RISCV_32
-> +    return 32;
-> +#else
-> +    unsigned long xl = MASK_EXTR(regs->hstatus, HSTATUS_VSXL);
-> +
-> +    if ( (xl == XLEN_FIELD_64) && !(regs->sstatus & SSTATUS_SPP) )
+--------------nl82mkcGPkkA8mDEZQKYRBzm--
 
+--------------nXGT6hNqYecyPk5f5l73YXw0--
 
-> +        xl = MASK_EXTR(csr_read(CSR_VSSTATUS), SSTATUS64_UXL);
-> +
-> +    switch ( xl )
-> +    {
-> +    case XLEN_FIELD_32:
-> +        return 32;
-> +
-> +    case XLEN_FIELD_64:
-> +        return 64;
-> +
-> +    default:
-> +        /*
-> +         * The field holds nothing else in practice: XLEN_FIELD_128 would mean
-> +         * RV128, which no implementation provides, and the only value left is
-> +         * reserved. ASSERT_UNREACHABLE() being debug-only, a width still has
-> +         * to be answered in release builds.
-> +         *
-> +         * Answer 32, that being the safe way to be wrong: the decoder then
-> +         * fails to recognize the RV64-only encodings and emulation gives up.
-> +         * Answering 64 for what may well be a 32-bit guest would instead have
-> +         * it take C.FLW for C.LD and C.FSW for C.SD (see above), i.e. quietly
-> +         * emulate an access of the wrong width against the wrong register.
-> +         */
-> +        ASSERT_UNREACHABLE();
-> +        return 32;
-> +    }
-> +#endif
-> +}
-> +
->  /*
->   * Is @htinst one of the pseudoinstructions reported for a guest page fault
->   * taken on an implicit memory access done for VS-stage address translation?
-> @@ -87,6 +173,250 @@ static void resolve_faulting_gpa(struct guest_fault *gf)
->                (htinst_is_pseudo(gf->htinst) ? 0 : (gf->stval & 3));
->  }
->  
-> +/*
-> + * Where the value of a decoded instruction's register operand is held.
-> + *
-> + * Relies on x0..x31 being laid out at the start of struct cpu_user_regs in
-> + * architectural register-number order; see the comment there.
-> + */
-> +static __maybe_unused unsigned long *guest_gpr(struct cpu_user_regs *regs,
-> +                                               unsigned int reg)
-> +{
-> +    ASSERT(reg < 32);
-> +
-> +    return REG_PTR(reg, 0, regs);
-> +}
+--------------cGS3MeBSQi3ObU09OPpPdfhb
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
+-----BEGIN PGP SIGNATURE-----
 
-> +
-> +/*
-> + * Obtain the instruction which caused a guest MMIO trap, filling in
-> + * @di->insn and @di->insn_len. It either comes transformed in htinst, or has
-> + * to be fetched from guest memory.
-> + *
-> + * Returns true if the fetch faulted in turn; the resulting trap has then
-> + * already been redirected to the guest and there is nothing further for the
-> + * caller to do. Where it returns false, @di has been filled in and emulation
-> + * is to continue.
-> + */
-> +static bool __maybe_unused insn_fetch_faulted(const struct guest_fault *gf,
-> +                                              struct decoded_insn *di)
-> +{
-> +    unsigned long htinst = gf->htinst;
-> +
-> +    /*
-> +     * A pseudoinstruction says nothing about the instruction the guest was
-> +     * executing, and comes with a guest physical address which isn't the one
-> +     * that instruction accessed. handle_guest_page_fault() deals with such a
-> +     * fault on its own, so no emulation can ever start for one.
-> +     */
-> +    ASSERT(!htinst_is_pseudo(htinst));
-> +
-> +    if ( htinst & BIT(0, UL) )
-> +    {
-> +        /*
-> +         * Bit[0] == 1 implies trapped instruction value is
-> +         * transformed instruction or custom instruction.
-> +         *
-> +         * The transformation always yields the 32-bit format, with bits[1:0]
-> +         * holding a marker instead of the original opcode bits: bit[0] set to
-> +         * flag the transformation, bit[1] clear if the trapped instruction
-> +         * was a compressed one. Restoring the opcode bits makes the value the
-> +         * valid 32-bit encoding decode_ldst_insn() matches against. Its
-> +         * INSN_MASK_C_* cases exist for the branch below, where a compressed
-> +         * instruction is read from guest memory as is: a trapped one arrives
-> +         * here already expanded to its 32-bit equivalent, and the opcode bits
-> +         * just restored keep it from matching those cases anyway.
-> +         *
-> +         * The length then cannot come from the value anymore, only from
-> +         * bit[1]. And only a 16- or a 32-bit instruction is ever reported
-> +         * this way: the standard load and store instructions the hardware
-> +         * transforms are all of one of these two lengths, anything else comes
-> +         * as the zero special value handled below.
-> +         */
-> +        di->insn = htinst | INSN_16BIT_MASK;
-> +        di->insn_len = (htinst & BIT(1, UL)) ? 4 : 2;
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmqs/wkFAwAAAAAACgkQsN6d1ii/Ey9+
+Uwf/dQQRdOEjral9P6cztakPfEMLH+S5CqkXtHfxwvz22zEXcx+zeYE7kpnOjOhOOOXHm7vl7qqI
+JZausgUxTznBlQzKH151HtzimlOFBB4Gic6O+wC3u+Ox2dj84m8mZlhurGL+owBnFYz51RKIePk1
+5CsI3ewmQdTIPU3mc0pNuHjvyKl/oUig/ch3yR0n4N8e0WKLG2FM7iUuDE/X3nO1PslRvhCuU0zx
+JWpRApsVgHZmj91jTGMLQhZDyqnPeKjqzN0R794fQoMwD7JcP5z9tS5y2nGIWeDTH8ZxQvsauhxp
+cWDrWNom+z/7Kgse/rQzz6VCzDPq/JJ5JKksQndpIQ==
+=W0TV
+-----END PGP SIGNATURE-----
 
-
-> +    }
-> +    else
-> +    {
-> +        const struct cpu_user_regs *regs = gf->regs;
-> +        struct trap_info utrap = {};
-> +
-> +        /*
-> +         * Bit[0] == 0 implies trapped instruction value is
-> +         * zero or special value. With the pseudoinstructions ruled out
-> +         * above, only zero is left: the instruction has to be read from
-> +         * guest memory.
-> +         */
-> +
-> +        di->insn = riscv_read_guest(regs->sepc, true, &utrap);
-> +        if ( utrap.scause )
-> +        {
-> +            /*
-> +             * If during getting of trapped instruction a fault happen in
-> +             * G-stage translation then CAUSE_LOAD_GUEST_PAGE_FAULT is
-> +             * generated. Such faults during this operation is considered as
-> +             * bus error.
-> +             */
-> +            if ( is_load_guest_page_fault(utrap.scause) )
-> +                utrap.scause = CAUSE_FETCH_ACCESS;
-> +
-> +            utrap.sepc = regs->sepc;
-
-
-> +
-> +            trap_redirect(&utrap);
-> +
-> +            return true;
-> +        }
-> +
-> +        /*
-> +         * riscv_read_guest() fetches at most two halfwords, so a wider
-> +         * encoding has been read in part only and cannot be decoded here.
-> +         *
-> +         * Report an illegal instruction, which is what the guest would have
-> +         * got for such an encoding anyway: the ISA defines no instruction
-> +         * wider than 32 bits.
-> +         */
-
-
-> +        if ( !INSN_IS_16BIT(di->insn) && !INSN_IS_32BIT(di->insn) )
-> +        {
-> +            utrap.sepc = regs->sepc;
-
-
-> +            utrap.scause = CAUSE_ILLEGAL_INSTRUCTION;
-> +            /*
-> +             * stval is left zero: the spec allows that for an illegal
-> +             * instruction, and only part of the instruction is in hand.
-> +             */
-
-
-> +
-> +            trap_redirect(&utrap);
-> +
-> +            return true;
-> +        }
-> +
-> +        di->insn_len = INSN_LEN(di->insn);
-
-
-> +    }
-> +
-> +    return false;
-> +}
-> +
-> +/*
-> + * Decode the load or store instruction fetched into @di, filling in the
-> + * remaining fields of it (@di->insn and @di->insn_len are filled by
-> + * insn_fetch_faulted()).
-> + *
-> + * @xlen is the effective XLEN of the guest, needed as
-> + * the encodings which exist for XLEN=64 only must not be recognized for a
-> + * 32-bit guest.
-> + *
-> + * Returns false if the instruction is not a load or store which can be
-> + * emulated here.
-> + */
-> +static __maybe_unused bool decode_ldst_insn(struct decoded_insn *di,
-> +                                            unsigned int xlen)
-> +{
-> +    unsigned long insn = di->insn;
-> +    /* Register fields of the uncompressed forms ... */
-> +    unsigned int rd = RV_RD(insn);
-> +    unsigned int rs2 = RV_RS2(insn);
-> +    /*
-> +     * ... and of the compressed ones, where the 3-bit field selects one of
-> +     * x8..x15, while the stack-pointer-relative forms have a full-width one.
-> +     */
-> +    unsigned int rs2s = RVC_RS2S(insn);
-> +    unsigned int rs2c = RVC_RS2(insn);
-> +
-This naming are confusing because above you described di->reg to be rd
-for load and rs2 for store but here ...
-> +    di->is_write = false;
-> +    di->is_unsigned = false;
-
-
-> +    di->reg = rd;
-> +
-> +    if ( (insn & INSN_MASK_LB) == INSN_MATCH_LB )
-> +        di->len = 1;
-> +    else if ( (insn & INSN_MASK_LBU) == INSN_MATCH_LBU )
-> +    {
-> +        di->len = 1;
-> +        di->is_unsigned = true;
-> +    }
-> +    else if ( (insn & INSN_MASK_LH) == INSN_MATCH_LH )
-> +        di->len = 2;
-> +    else if ( (insn & INSN_MASK_LHU) == INSN_MATCH_LHU )
-> +    {
-> +        di->len = 2;
-> +        di->is_unsigned = true;
-> +    }
-> +    else if ( (insn & INSN_MASK_LW) == INSN_MATCH_LW )
-> +        di->len = 4;
-> +    else if ( xlen == 64 && (insn & INSN_MASK_LWU) == INSN_MATCH_LWU )
-> +    {
-> +        di->len = 4;
-> +        di->is_unsigned = true;
-> +    }
-
-
-> +    else if ( (insn & INSN_MASK_C_LW) == INSN_MATCH_C_LW )
-> +    {
-> +        di->len = 4;
-
-
-> +        di->reg = rs2s;
-... you assigned rs2s for a load. According to the spec, it should be rd'.
-
-I would suggest something generic to load and store. Maybe rxs with a comment to explain it concerns rs2' for store and rd' for load.
-
-    /*
-     * ... and of the compressed ones, where the 3-bit field selects one of
-     * x8..x15, while the stack-pointer-relative forms have a full-width one.
-     * rxs is named after that field's spec mnemonic, rd'/rs2': rd' for
-     * compressed loads, rs2' for compressed stores.
-     */
-    unsigned int rxs = RVC_RS2S(insn);
-
-> +    }
-> +    /* c.lwsp and c.ldsp are reserved with rd being x0. */
-> +    else if ( (insn & INSN_MASK_C_LWSP) == INSN_MATCH_C_LWSP && rd )
-> +        di->len = 4;
-> +    else if ( xlen == 64 && (insn & INSN_MASK_LD) == INSN_MATCH_LD )
-> +        di->len = 8;
-> +    else if ( xlen == 64 && (insn & INSN_MASK_C_LD) == INSN_MATCH_C_LD )
-> +    {
-> +        di->len = 8;
-> +        di->reg = rs2s;
-> +    }
-> +    else if ( xlen == 64 && (insn & INSN_MASK_C_LDSP) == INSN_MATCH_C_LDSP &&
-> +              rd )
-> +        di->len = 8;
-> +    else if ( (insn & INSN_MASK_SB) == INSN_MATCH_SB )
-> +    {
-> +        di->len = 1;
-> +        di->is_write = true;
-> +        di->reg = rs2;
-> +    }
-> +    else if ( (insn & INSN_MASK_SH) == INSN_MATCH_SH )
-> +    {
-> +        di->len = 2;
-> +        di->is_write = true;
-> +        di->reg = rs2;
-> +    }
-> +    else if ( (insn & INSN_MASK_SW) == INSN_MATCH_SW )
-> +    {
-> +        di->len = 4;
-> +        di->is_write = true;
-> +        di->reg = rs2;
-> +    }
-> +    else if ( (insn & INSN_MASK_C_SW) == INSN_MATCH_C_SW )
-> +    {
-> +        di->len = 4;
-> +        di->is_write = true;
-> +        di->reg = rs2s;
-> +    }
-> +    else if ( (insn & INSN_MASK_C_SWSP) == INSN_MATCH_C_SWSP )
-> +    {
-> +        di->len = 4;
-> +        di->is_write = true;
-> +        di->reg = rs2c;
-> +    }
-> +    else if ( xlen == 64 && (insn & INSN_MASK_SD) == INSN_MATCH_SD )
-> +    {
-> +        di->len = 8;
-> +        di->is_write = true;
-> +        di->reg = rs2;
-> +    }
-> +    else if ( xlen == 64 && (insn & INSN_MASK_C_SD) == INSN_MATCH_C_SD )
-> +    {
-> +        di->len = 8;
-> +        di->is_write = true;
-> +        di->reg = rs2s;
-> +    }
-> +    else if ( xlen == 64 && (insn & INSN_MASK_C_SDSP) == INSN_MATCH_C_SDSP )
-> +    {
-> +        di->len = 8;
-> +        di->is_write = true;
-> +        di->reg = rs2c;
-> +    }
-> +    else
-> +        return false;
-> +
-> +    return true;
-> +}
-> +
->  static int emulate_load(const struct guest_fault *gf)
->  {
->      return -EOPNOTSUPP;
-> diff --git a/xen/arch/riscv/include/asm/guest_access.h b/xen/arch/riscv/include/asm/guest_access.h
-> index 8d679319de..39c28dd2ec 100644
-> --- a/xen/arch/riscv/include/asm/guest_access.h
-> +++ b/xen/arch/riscv/include/asm/guest_access.h
-> @@ -5,6 +5,7 @@
->  #include <xen/types.h>
->  
->  struct domain;
-> +struct trap_info;
->  
->  unsigned long raw_copy_to_guest(void *to, const void *from, unsigned len);
->  unsigned long raw_copy_from_guest(void *to, const void *from, unsigned len);
-> @@ -25,6 +26,9 @@ unsigned long raw_clear_guest(void *to, unsigned int len);
->  unsigned long copy_to_guest_phys(struct domain *d, paddr_t gpa, void *buf,
->                                   unsigned long len);
->  
-> +unsigned long riscv_read_guest(unsigned long guest_addr, bool read_insn,
-> +                               struct trap_info *trap);
-> +
->  #endif /* ASM__RISCV__GUEST_ACCESS_H */
->  /*
->   * Local variables:
-> diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
-> index b2071f4758..656a5fcccb 100644
-> --- a/xen/arch/riscv/include/asm/riscv_encoding.h
-> +++ b/xen/arch/riscv/include/asm/riscv_encoding.h
-> @@ -65,6 +65,14 @@
->  #define SSTATUS64_UXL			MSTATUS_UXL
->  #define SSTATUS64_SD			MSTATUS64_SD
->  
-> +/*
-> + * Width encoded by the MXL, SXL, UXL and VSXL fields, all of which share one
-> + * encoding. 0 is reserved.
-> + */
-> +#define XLEN_FIELD_32			_UL(1)
-> +#define XLEN_FIELD_64			_UL(2)
-> +#define XLEN_FIELD_128			_UL(3)
-> +
->  #if __riscv_xlen == 64
->  #define HSTATUS_VSXL			_UL(0x300000000)
->  #define HSTATUS_VSXL_SHIFT		32
-> @@ -896,6 +904,8 @@
->  					 (RV_X(x, 7, 2) << 6))
->  #define RVC_SDSP_IMM(x)			((RV_X(x, 10, 3) << 3) | \
->  					 (RV_X(x, 7, 3) << 6))
-> +#define RV_RD(insn)			RV_X(insn, SH_RD, 5)
-> +#define RV_RS2(insn)			RV_X(insn, SH_RS2, 5)
-Nit: format
-
--- 
-Baptiste Le Duc <baptiste.le-duc@vates.tech>
+--------------cGS3MeBSQi3ObU09OPpPdfhb--
 
