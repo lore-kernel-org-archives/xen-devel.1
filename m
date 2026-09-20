@@ -4,53 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E5B0C982D8
-	for <xen-devel@archiver.kernel.org>; Sat, 19 Sep 2026 16:58:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1426456.1649636 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 26A46C982CC
+	for <xen-devel@archiver.kernel.org>; Sun, 20 Sep 2026 03:33:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1426641.1649645 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7yNq-0005Tg-04; Sat, 19 Sep 2026 16:57:50 +0000
+	id 1x88Ii-0005Vn-EE; Sun, 20 Sep 2026 03:33:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1426456.1649636; Sat, 19 Sep 2026 16:57:49 +0000
+Received: by outflank-mailman (output) from mailman id 1426641.1649645; Sun, 20 Sep 2026 03:33:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x7yNp-0005TY-Rt; Sat, 19 Sep 2026 16:57:49 +0000
-Received: by outflank-mailman (input) for mailman id 1426456;
- Sat, 19 Sep 2026 16:57:48 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <SRS0=3tMR=HL=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
- id 1x7yNn-0005TP-UD
- for xen-devel@lists.xenproject.org; Sat, 19 Sep 2026 16:57:48 +0000
+	id 1x88Ii-0005Vf-9P; Sun, 20 Sep 2026 03:33:12 +0000
+Received: by outflank-mailman (input) for mailman id 1426641;
+ Sun, 20 Sep 2026 03:33:11 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <lin.liu01@citrix.com>) id 1x88Ih-0005VZ-03
+ for xen-devel@lists.xenproject.org; Sun, 20 Sep 2026 03:33:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x7yNn-00FAjM-B9
- for xen-devel@lists.xenproject.org; Sat, 19 Sep 2026 18:57:47 +0200
-Received: from [10.42.69.5] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <SRS0=3tMR=HL=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
- id 6aaebee6-2eae-0a2a0a5409dd-0a2a4505ecbc-18
- for <xen-devel@lists.xenproject.org>; Sat, 19 Sep 2026 18:57:47 +0200
-Received: from [140.77.166.138] (helo=sonata.ens-lyon.org)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <SRS0=3tMR=HL=ens-lyon.org=samuel.thibault@bounce.ens-lyon.org>)
- id 6aaebf0a-4cb1-0a2a45050019-8c4da68ad02c-3
- for <xen-devel@lists.xenproject.org>; Sat, 19 Sep 2026 18:57:47 +0200
-Received: from localhost (localhost [127.0.0.1])
- by sonata.ens-lyon.org (Postfix) with ESMTP id A7E4EA02EB;
- Sat, 19 Sep 2026 18:57:46 +0200 (CEST)
-Received: from sonata.ens-lyon.org ([127.0.0.1])
- by localhost (sonata.ens-lyon.org [127.0.0.1]) (amavisd-new, port 10024)
- with ESMTP id X0dv8dflxbNV; Sat, 19 Sep 2026 18:57:46 +0200 (CEST)
-Received: from end (lfbn-bor-1-980-210.w90-120.abo.wanadoo.fr [90.120.173.210])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange ECDHE (P-256) server-signature RSA-PSS (4096 bits) server-digest
- SHA256) (No client certificate requested)
- by sonata.ens-lyon.org (Postfix) with ESMTPSA id 470ECA01F4;
- Sat, 19 Sep 2026 18:57:46 +0200 (CEST)
-Received: from samy by end with local (Exim 4.100)
- (envelope-from <samuel.thibault@ens-lyon.org>)
- id 1x7yNl-0000000Bk3N-2kMG; Sat, 19 Sep 2026 18:57:45 +0200
+ id 1x88Ig-00F0tH-DK
+ for xen-devel@lists.xenproject.org; Sun, 20 Sep 2026 05:33:10 +0200
+Received: from [10.42.69.12] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <lin.liu01@citrix.com>)
+ id 6aaf53d7-bab6-0a2a0a5309dd-0a2a450caee4-16
+ for <xen-devel@lists.xenproject.org>; Sun, 20 Sep 2026 05:33:10 +0200
+Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <lin.liu01@citrix.com>)
+ id 6aaf53f5-f479-0a2a450c0019-a0658309e718-3
+ for <xen-devel@lists.xenproject.org>; Sun, 20 Sep 2026 05:33:10 +0200
+Received: from xenrt10716048 (unknown [10.113.40.46])
+ by na1pdmzitismtp02.tibco.com (Postfix) with ESMTP id 8188383DA34E;
+ Sat, 19 Sep 2026 23:30:57 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,84 +48,54 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=dkim header.d=ens-lyon.org header.i="@ens-lyon.org" header.h="Date:From:To:Cc:Subject:In-Reply-To"; dkim=pass header.s=dkim header.d=ens-lyon.org header.i="@ens-lyon.org" header.h="Date:From:To:Cc:Subject:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ens-lyon.org; s=dkim;
-	t=1789837066; bh=x2rPBn3+93eD4n3f0kucW1BWRjSamWxCzqKS1cFOmIs=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:From;
-	b=Ue5rZiCS0jwWtbgzmQhoeFXknojdSPopoVEZqHY2Q8/N1OFXR/Sb1FcIART8Bgqwo
-	 XKgPMQXfGZ4hCBfjL1CbQrdacljJTbXsmRJwxVvPv2dSnOXSHYDqPDlUaDUn7ODMqP
-	 vNo4jCoXsAVRGBLZPe7AgdPEb0zyghhqjd63+rKY+Yv6juKbpFW7FEnHL4DK6TDVXX
-	 E7LRRCegmh1NmH7Mr0ifCLj+bSfI2TA0TWiZWy+o55qcyLG+2zKkDxMiHaIPENcUUZ
-	 tFU7g7AMAtA30uKIXWbDxh+I61LkiEf7Zz3YDiAs+Ai9IfUEAkibeOGEgEQipH0daR
-	 yMoxSfz1Tx3Dg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=ens-lyon.org; s=dkim;
-	t=1789837066; bh=x2rPBn3+93eD4n3f0kucW1BWRjSamWxCzqKS1cFOmIs=;
-	h=Date:From:To:Cc:Subject:In-Reply-To:From;
-	b=Ue5rZiCS0jwWtbgzmQhoeFXknojdSPopoVEZqHY2Q8/N1OFXR/Sb1FcIART8Bgqwo
-	 XKgPMQXfGZ4hCBfjL1CbQrdacljJTbXsmRJwxVvPv2dSnOXSHYDqPDlUaDUn7ODMqP
-	 vNo4jCoXsAVRGBLZPe7AgdPEb0zyghhqjd63+rKY+Yv6juKbpFW7FEnHL4DK6TDVXX
-	 E7LRRCegmh1NmH7Mr0ifCLj+bSfI2TA0TWiZWy+o55qcyLG+2zKkDxMiHaIPENcUUZ
-	 tFU7g7AMAtA30uKIXWbDxh+I61LkiEf7Zz3YDiAs+Ai9IfUEAkibeOGEgEQipH0daR
-	 yMoxSfz1Tx3Dg==
-Date: Sat, 19 Sep 2026 18:57:45 +0200
-From: Samuel Thibault <samuel.thibault@ens-lyon.org>
-To: Jan Beulich <jbeulich@suse.com>,
-	=?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>
-Cc: xen-devel@lists.xenproject.org,
-	Anthony PERARD <anthony.perard@vates.tech>
-Subject: Re: [PATCH 2/4] stubdom: remove pciutils
-Message-ID: <aq6_Cebyee8IHN8p@end>
-Mail-Followup-To: Samuel Thibault <samuel.thibault@ens-lyon.org>,
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: Lin Liu <lin.liu01@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: Lin Liu <lin.liu01@citrix.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	=?utf-8?B?SsO8cmdlbiBHcm/Dnw==?= <jgross@suse.com>,
-	xen-devel@lists.xenproject.org,
-	Anthony PERARD <anthony.perard@vates.tech>
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Jason Andryuk <jason.andryuk@amd.com>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH] x86/nSVM: Don't clear TLB_CONTROL on #VMEXIT
+Date: Sun, 20 Sep 2026 03:33:06 +0000
+Message-ID: <cf664749ee96e217cfb9a15e4e99ee1b8add3745.1789875186.git.lin.liu01@citrix.com>
+X-Mailer: git-send-email 2.52.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <ab78351b-6b03-407c-9bcd-74b1566fd853@suse.com>
- <dbe4d409-37b9-45b9-ae5e-5bedb5df0bb4@suse.com>
-Organization: I am not organized
-X-purgate-ID: tlsNG-c201ff/1789837067-F5EA92A1-A8B26DCB/0/0
+X-purgate-ID: tlsNG-d25034/1789875190-77AD4A5B-42AF16B1/0/0
 X-purgate-type: clean
-X-purgate-size: 1442
+X-purgate-size: 1119
 
-Hello,
+nsvm_vmcb_prepare4vmexit() zeroes TLB_CONTROL in the L1-provided VMCB.
+That VMCB is mapped writable, so the store lands in L1's memory and L1
+sees a field it wrote come back as 0.
 
-I have submitted the pciutils MiniOS port to upstream (which I should
-probably have done 18 years ago :)
+APM vol 2 rev 3.45 15.16.1 (p.550): "The VMRUN instruction reads, but
+does not change, the value of the TLB_CONTROL field."
 
-https://github.com/pciutils/pciutils/pull/235
-https://github.com/pciutils/pciutils/pull/236
+Fixes: 9a779e4fc161 ("Implement SVM specific part for Nested Virtualization")
+Assisted-by: Claude:claude-opus-5
+Signed-off-by: Lin Liu <lin.liu01@citrix.com>
+---
+ xen/arch/x86/hvm/svm/nestedsvm.c | 3 ---
+ 1 file changed, 3 deletions(-)
 
-Jan Beulich, le mer. 19 août 2026 08:40:37 +0200, a ecrit:
-> On 18.08.2026 23:42, Samuel Thibault wrote:
-> > Jürgen Groß, le mar. 18 août 2026 07:43:34 +0200, a ecrit:
-> >> On 17.08.26 18:37, Samuel Thibault wrote:
-> >>> Juergen Gross, le lun. 17 août 2026 10:24:02 +0200, a ecrit:
-> >> What about adding a comment to the stubdom Makefile in a separate patch, like:
-> >>
-> >> # pciutils support has been removed with commit <commit-id>, revert that patch
-> >> # in case it is needed again.
-> >>
-> >> I think this would be preferable over unused and probably bit-rotten code in
-> >> the repository.
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index a8b15d6eae..1ac2e57b3b 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+@@ -991,9 +991,6 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
+     /* ASID */
+     /* vmcb_set_asid(ns_vmcb, vmcb_get_asid(n2vmcb)); */
+ 
+-    /* TLB control */
+-    ns_vmcb->tlb_control = 0;
+-
+     /* Virtual Interrupts */
+     ns_vmcb->_vintr = n2vmcb->_vintr;
+     if ( !svm->ns_hostflags.fields.vintrmask )
+-- 
+2.52.0
 
-We can point people to pciutils through such a comment.
-
-Jürgen Groß, le mer. 19 août 2026 09:12:00 +0200, a ecrit:
-> On 18.08.26 23:42, Samuel Thibault wrote:
-> > I don't see why it would be bit-rotten, since the pciutils version in
-> > used is fixed, it's a library that has a quite stable API, and the pci
-> > xen interface is supposed to keep backward compatibility.
-> 
-> Then I'd rather add it to Mini-OS (probably behind another CONFIG option) than
-> having it in the Xen tree.
-
-Mmm, but how? We don't really want to pull the whole pciutils build into
-mini-os :)
-
-With regards,
-Samuel
 
