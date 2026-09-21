@@ -4,43 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EA19C982E6
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 14:35:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1427617.1650416 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ECDCC982E6
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 14:37:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1427623.1650425 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8f77-0000uM-0e; Mon, 21 Sep 2026 14:35:25 +0000
+	id 1x8f9H-0001R6-CW; Mon, 21 Sep 2026 14:37:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1427617.1650416; Mon, 21 Sep 2026 14:35:24 +0000
+Received: by outflank-mailman (output) from mailman id 1427623.1650425; Mon, 21 Sep 2026 14:37:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8f76-0000uF-U8; Mon, 21 Sep 2026 14:35:24 +0000
-Received: by outflank-mailman (input) for mailman id 1427617;
- Mon, 21 Sep 2026 14:35:23 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x8f75-0000u9-2C
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 14:35:23 +0000
+	id 1x8f9H-0001Qz-9j; Mon, 21 Sep 2026 14:37:39 +0000
+Received: by outflank-mailman (input) for mailman id 1427623;
+ Mon, 21 Sep 2026 14:37:37 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>) id 1x8f9F-0001PY-NM
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 14:37:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8f72-001Wx0-FB
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 16:35:20 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x8f9F-004rkC-3z
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 16:37:37 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab1409c-2eae-0a2a0a5409dd-0a2a450cc2ea-26
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 16:35:20 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab140a7-f479-0a2a450c0019-4a7de14cad5b-3
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 16:35:19 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-485ac898fa4so2683903f8f.0
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 07:35:19 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48724589c02sm22699876f8f.24.2026.09.21.07.35.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Sep 2026 07:35:18 -0700 (PDT)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6ab1412c-8faa-0a2a0a5109dd-0a2a450887d4-10
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 16:37:36 +0200
+Received: from [52.101.201.10]
+ (helo=PH7PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6ab1412e-f659-0a2a45080019-3465c90a5e1b-3
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 16:37:36 +0200
+Received: from BY5PR12MB4999.namprd12.prod.outlook.com (2603:10b6:a03:1da::13)
+ by PH8PR12MB6843.namprd12.prod.outlook.com (2603:10b6:510:1ca::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.16; Mon, 21 Sep
+ 2026 14:37:30 +0000
+Received: from BY5PR12MB4999.namprd12.prod.outlook.com
+ ([fe80::a890:d230:e0a8:6740]) by BY5PR12MB4999.namprd12.prod.outlook.com
+ ([fe80::a890:d230:e0a8:6740%3]) with mapi id 15.21.0428.015; Mon, 21 Sep 2026
+ 14:37:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,157 +55,249 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790001319; x=1790606119; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=zKWmacSRjEOWwCwtTdSF25dMhGAD5KW/oGGRtVIBG5I=;
-        b=OXKLfgMSEvaRGdH6J46tlV0kJTNe2lc1FN++h9jQWIDqQEvk4gjPnIo6n78OAXIUWT
-         jVfddJtZhkzAd+Q9Ka/Td81LCCqxb+I+b0t6zFbnmQ1IUPF/vs5cZB+NisrGbmkNbSUG
-         YzHiW6SDP4PS+4ynKsiL2UWAF7poNVGodZVLeTFXGF7zmXcnD/JysbF6T3LQPSTjpbfF
-         xOSVvYB3Q4Ojq/JFWCru/NgtMkVc1+RWT5gC0pbh5+Fg1sZMKIVGfo/6uDwRGGnp95a7
-         a44y/hd81eMWh/f9VfCqX76bXzxE8wsjq4jwvVJ4k08P1/7IDyFJdgXo2Ej+5cn3vPtO
-         PeEQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790001319; x=1790606119;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=zKWmacSRjEOWwCwtTdSF25dMhGAD5KW/oGGRtVIBG5I=;
-        b=a/kI67TLFgCl36pve/Fb5u/k0O+fz2ejAIIr/qjG1VnxdDuSqzocbCvbUmsm8Xkywy
-         KqrVzHrWmdcQ5xDH3QapkIoPfy72eHYpwh84ZhnPtV8HOMNq0RzRDNFPQQI892oglaw7
-         zejfcP/WpkxXvtk78rDPS4f5GtFsolC2F2LuifGHZit8uBM0eAU4bRsSyta/xOvHlEnU
-         3mAuxH5Yqu3JVQ1teutZAiye6EfqdgEjnVedv2ZyvEDbjptjb84hVAsjldH6gKeiQScM
-         RDA6Q/ILRRdb+F8PSepmJaW6olcmcdp3GegBPdEFC2AmwfnaTSHSEHyW9Uu3u6jVF1LU
-         pEPA==
-X-Forwarded-Encrypted: i=1; AKwUvByFRgeiJl3Fk1qyE/fQNv2bdHTsTKCTgWifdhZIpLKhaA9+r5eGHz9geLzXi4hfs2yLDKG/+W54Z0I=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mYqi3ECN84mvyW8F748EMv+lkf/xai4oJTazvXei5Q2ztyrNpu
-	WCif/l3AAeb5ba1TNBiVngA2itI0llmLb1RKcrwhwwRmD9ERp4fPLlW5
-X-Gm-Gg: AYBFou2J0eegqGA0ILi4IF3gvHJNq4ET6URuDOsGTGUQ4vfyLCL1FbDoBeWtsDK6IDb
-	kFEjqzOkPVTG7AH1DWGeQwNjUCPi/pRKR8/ZvKd/yFvSp7xvsd0+9QOKtcNg/QYFuOZz2S+9Wq3
-	H+VFsMtGwxTqYRuDMguwM4o0kWPlTA36IIKsct5T+9Ar+PkCnGHDtAGwGKIIiDOFwDohcSag2P0
-	FBAAM2VlmrCIxStX6lpINEaXGeLq7udLzrEASBATyRvntpA+ibG35FbT1GAyHRW5H1lZwSKQt4R
-	r9SFdG3HLI2it7Vui+nAT64KS9UOYkcmPTkcJ4tWdjWB3FIltaPprj2rM8H+Q53N1TkUtP34WPU
-	P8XTAtiXjXXKPYwPpThLYyWA9HzsaSk+0Uj2f35O8JbTupMI/dLi/kiyeFIQHqm4d5bWafEovve
-	3Ka4++JeLJ9/GMfd/r63pxzj3NrEiQ7BgaEynQu5dtq/VmKQMXg192hnHKBFujUARFNQnsIw7Al
-	htsc8TJ8+sxhheyj1+O5YOuamt9xVDgUiZUwSlew6qK3ZJ9GQ==
-X-Received: by 2002:a05:6000:220e:b0:487:9a8:9f31 with SMTP id ffacd0b85a97d-4871e368258mr16602561f8f.41.1790001319199;
-        Mon, 21 Sep 2026 07:35:19 -0700 (PDT)
-Message-ID: <4c3a1826-fb74-4907-add5-4e06d6094995@gmail.com>
-Date: Mon, 21 Sep 2026 16:35:17 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mU7hCQUFQHGI9+Hznpo8mcP0qeOouANLFT2YBxTaz/+5ex0txAjm7ipqv/D55r6jq8WsjkjI2A0OX1adk4yVegi8/1tcYPaJttItMJgTHdIymcgxpiTV94Srj8eqYW+eOFK3U5WUIm7jlXevL2CQzdmhRbEv1w2nkvwwuitigoKyXgK9gq0xP2wbWMNrdzQejj9xhHeNPZHD2qqpizfjQlfUKYGPOlY1F5wfJiSAPhQ9UKadcEcjwoePyAQjZ2OqbIiF4iW3uRA2m/gGTCU+u6+3k9XGZi4WrdxwOUlIPsnugu/Yuj6ECa6T+g2uej6lcPyMLw1sp6vMGWBM+L2/Ug==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=2NcxDG8WB5e1spVO79Dkhf7xcitYgWM44esyJgxgGC0=;
+ b=HOzCK+fBJR5Ocu+NTpJXIIaIarkBsAguMATFZkmxVQupf4iccdHikgo7Em6d7Bp7XD6Mwsjjnt6VVTGARjfLv8hYYDxYB+b1A+dtht0dyYjlVAVdhBPB7qDyOHzd28NWVGnqCNjMC7v14EyVCKPB/AYrM4iTTYfLH4kR6zioN/C33Y3fMkoiZTSl7qbo4fcrmTMznH58RrObZKTdJSlCz9M0vzH18FrO42nd7kDmJFShAKNy9+Cw5TJrv5lB2DcHKKrZQrGFoLU7UjtGobP6+/JhOI4KUTWhJD19vycavkZ3+5WW4jUvKkzuM8dlPBBrbQ3r2hv1gq60ZPmsWH/RyA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=2NcxDG8WB5e1spVO79Dkhf7xcitYgWM44esyJgxgGC0=;
+ b=W96XRGlJhVUxhb/XN6fyhTVmA49Gq4v984iiMbDdG5vk3lx1dLadeyvru31oL/SgDNnhALrQtgCrEdcek5J2W68LLG0QjnwRuNiQL6pzEpJnCLnC2/QjSN+8dc6/sx9xQNqzYignrCU8rht/AGCjMCrN+i4lGgTf8u0BqfobnUc=
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Mon, 21 Sep 2026 16:37:26 +0200
+Message-Id: <DLL2K0JJWNCB.17LYI7INCLTHX@amd.com>
+From: "Alejandro Vallejo" <alejandro.garciavallejo@amd.com>
+To: "Baptiste Le Duc" <baptiste.le-duc@vates.tech>,
+ <xen-devel@lists.xenproject.org>
+Cc: "Doug Goldstein" <cardoe@cardoe.com>, "Stefano Stabellini"
+ <sstabellini@kernel.org>
+Subject: Re: [PATCH v2 6/6] CI: run the riscv64 smoke test via QTB framework
+ console-test
+X-Mailer: aerc 0.17.0
+References: <1787823334.8631fc262581453bbf619ec5b2062170.1a04293255c000c4f3@vates.tech> <1787823789.8631fc262581453bbf619ec5b2062170.1a0429a155d000c4f3@vates.tech>
+In-Reply-To: <1787823789.8631fc262581453bbf619ec5b2062170.1a0429a155d000c4f3@vates.tech>
+X-ClientProxiedBy: MA3P292CA0073.ESPP292.PROD.OUTLOOK.COM
+ (2603:10a6:250:49::13) To BY5PR12MB4999.namprd12.prod.outlook.com
+ (2603:10b6:a03:1da::13)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 37/39] xen/riscv: map IMSIC interrupt file for vCPUs
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <ae5965ba43eb691b078f4a6bcf8a87a1f7a5aac5.1787838835.git.oleksii.kurochko@gmail.com>
- <b0421306-a1a9-4155-9dfc-4b8147db0d9b@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <b0421306-a1a9-4155-9dfc-4b8147db0d9b@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1790001319-034D7A5B-BAF1555C/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 3850
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY5PR12MB4999:EE_|PH8PR12MB6843:EE_
+X-MS-Office365-Filtering-Correlation-Id: 092276e9-cb9f-4e0c-67af-08df17edddcc
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|376014|23010399003|11063799006|56012099006|4143699003|10067099003|3023799007|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	N1NeMrH6kF+FqB5sW5NcvMZQeGDosa1GGpNNSLzbYL8Unq8xiYi315/aE3YrZgBi+P0Czck7g62m1qFxW6U8IePqjUjOhWuM0hmCvdJeRY3oj02p0aF15XbvGxcupR81KVNLB1QUfKWau+WsHzkxTkyX2/MEDQ0xj4RCt4uAksHxqlCK8CSzdod0WkOH26Yoewv8qA58nApErAAvWyGNt1Wr7nx+fTCVis2FyQqUiFu8PggnQ5gflGYQJFzykwV04VnZYD/vV6JpoyB5hpbPs88C2z0ITEpbyFhkxpSdCgcojhqsQr4NiZ6CYuXPgEzkk1TbXQWxMXNiF3LT92IQoegYDERExypEyuI5smA0p0rqKwl1BwWXKNymUX/lqxWIDts4WVlpd5GV9f/CB0TpGrubkiWQln4bWc2gNXY8gZY9uLDbTrka3k3U6j9siGKMfH2hsyqF3YUe6dpTOAzzxgwo8AyHeYOUkOT43fc6XdzidDOfiR38Atkw+1gnEM/IOl3YFZ8wEDhDVXmZLyHANR7PTY2UL3MBRThLPXQyv/29g+t7FUXpLotYrDfbvvevI5ZK8d5KXVxhcyDClzyWE26dFC/yT7hqiU+BiINFkeE8/vSu759IxHJOSsbMYidi
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR12MB4999.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(11063799006)(56012099006)(4143699003)(10067099003)(3023799007)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?WXJWeTR6WkVpY1cxSDY3SVAxdVJHbnVaRW9jOVZmQnVIZUFtYXI2dDlnTEQy?=
+ =?utf-8?B?Y1BnaTdxc2xIRWRUS0srdDRQS3lLZ1dVcmxrYkhiSjNiNEJucTEvQkN0OXB0?=
+ =?utf-8?B?c2NsajhPNGUyUk5uaVZ0T1poOUJHRWc1aGRpaWN0MFVWU2Z0TzczRXdydkky?=
+ =?utf-8?B?UVBIcDJnb3dCdXVQOFBYOWw5cXJlbVJyZllOcjMyY2tPWHBORzlsSUdiVnJ3?=
+ =?utf-8?B?SlNxQVdIUUxlcHYvUlhxVURlaGlWTTZZR0JXTVlXbmRIYVMyQzRvSUtWaUxo?=
+ =?utf-8?B?dmRQc29RYzRnUGJvNjdzakYwRS91RG4vaTJZeWVJeVorclFnVXF6alI0Vzho?=
+ =?utf-8?B?Mk9IdTlvSXlpejZjc0ZhK01MVnpoaUR4MDRjQkg1WElqQ3l1OCtPdDRCRms5?=
+ =?utf-8?B?WG9PSVJLUFNic3VBLzlmbCsyalpXdHByc2o3RTVNSHlmYW8zclVQdG8yVXBs?=
+ =?utf-8?B?WXFRd1RqWGZjSjdIUWZpRk1hSVRsSlVFeWtrYkR3ZGUwQWZ6ZG5tU0xXSGtK?=
+ =?utf-8?B?Q09CMHNmdTFYUHhTenJrZkxJY3N3anJ1dnNvb205eE9QSk1uUVJMQWNLa1px?=
+ =?utf-8?B?N1U5emdXczNMNDhkM2pvVS83L0FQYnVCczV6VzU0NUhtNTdZMGxXcy8yT1ZR?=
+ =?utf-8?B?WHVGZWUySzRjS0FtSHJRZG1GYnVaYWFlMTUwU2FKU216RzY5ZU5ZbExDU1B3?=
+ =?utf-8?B?bnUvU0cwVGNFSWhWWGdoU0pRSE1ia0xBNTVOcVZtcXYvMStnZjdEYm5SeThV?=
+ =?utf-8?B?ZWkycUJUM2UwdUFCaFJPSEUxU1R4OGV2Nk81ZEdxU051UHlmcFlUYzUxTUlL?=
+ =?utf-8?B?Z0RNWWpBejJadWk5b1BxMHovK24zbGRvMjVrZk5jVzIvUmxiOEMzMVpWcTVs?=
+ =?utf-8?B?blBDMTZWa0g4WlFqdGVCL1lyT2F6QXJjb2d0aTBvK05kRmxnMlBLaUNlQlJW?=
+ =?utf-8?B?dzV5UW5MS3RaZGs2VGRNTHJNN1VxK2pXNnZYbzJGcUNqa1ZwaGpBQmRIR20w?=
+ =?utf-8?B?TkZhclRMZ2N3V1lIYWE1M2VXdkFFaDg5SkZsNlJNaTBtMEU4U1orWEZ3MHFV?=
+ =?utf-8?B?SWdPczlma1FnT2F5M2EwUEZOUmN3RUpXL0VUMy9ZckVEdlU3VWpOYWJKRk5w?=
+ =?utf-8?B?SjVLbzFlQkcyeXFuQ2UvczQ3UFVRZUV5Q0RjNVZoWTR6Y3JyaWJmWldKMm84?=
+ =?utf-8?B?b0FXeCtzeFJRcmxlTEI5MGdFWHRPdFRTc0VLUG5TZVkxQ0gxaWlHMkhBUG9t?=
+ =?utf-8?B?blErditJTjNtMFQxNzNNNkpJT3RBbEZpYTJMQVBCVVFnbHMvRktVdkZPS0lQ?=
+ =?utf-8?B?SUVNSWVNK0xwcmZmNDBTc3hMUHdJamhQenk5RThGWGFNdHdKMHZsMWZsN2FN?=
+ =?utf-8?B?bTZJb3NCUy9aSG8vZmJuc1RPTGJYN3RQMjIxOFQ3RFJmQjhHT2hnUE1jMjFR?=
+ =?utf-8?B?eEJpbVZnc25FWmJMWDhPZEJkVEtrYU1DS3JZY215SG1VTUlUZUlOTk05dDRl?=
+ =?utf-8?B?aHM2UTlaRjRyUHJYdEhoWnRoWTkyZWdvTjFzVlBRWmFudXN4NHBreXU5eUxM?=
+ =?utf-8?B?M1UrNWFjdVBuamlCdUJiV3kwZHhndW94ZzZ6NzZuQUhRZnBFS1J5N0ZMcVVE?=
+ =?utf-8?B?dXNCMzdnODNQRlR0VVFjWHYzMGxyaDNWYzVaWG5PRnJ1cEtzdXNWbktEQjkz?=
+ =?utf-8?B?U1Vkb2xCSWdQMWtHc0xsbWdHQzhsWnhHOUZ2a3poRFhRek15UDRPNFFpS24z?=
+ =?utf-8?B?d1lqUHVMelo0VXowZlM5OEtEN0RDTFowWitqbW1HMXlWSUJabnF4bTVnZW9x?=
+ =?utf-8?B?MytTWWlLSVg4d3QzQ1B4TjZLNGU3VnE5L1ZGZnZHUis0VjJpb2tScmgxNGx4?=
+ =?utf-8?B?ZXZHelNvYXRlZEIwSXA2R2lUYW9mL1I1dWhxQ01kcDRTaWIzRzVKY05NUE5V?=
+ =?utf-8?B?R1hmbFpaelZnUzBSV20xMjNyUEloNnlPWThSdkd5b0YvOEZVREdKWHh4a0p2?=
+ =?utf-8?B?QkVMcGRWeURvVmVPSkExM1Y5TlJCY3FwSXl2dWFSRnI3NHVRN3JONjRqVXBo?=
+ =?utf-8?B?N1U0WU0vSDhhMG5mWnUzMUlKZUIwM284WmpmZGtzVVFTQTJGMHNPL0FHbUtp?=
+ =?utf-8?B?TFE3Yms2S2cvZ0s2YzNZZG83bUVjZ2hXdk1yRzQybUora1FuSXpUdnR0azlt?=
+ =?utf-8?B?dllpM2dmTmlxZjBBOTFMK05RaW1FQlBzUzFESURhV3QrcUgyTFdpVy8vblBj?=
+ =?utf-8?B?NXR6bmhYWkgvYjFZTjBIcmpNRVdXelNiOWJvbWdpMGk5L2ZUVVZ0aFRud3F0?=
+ =?utf-8?Q?GqdBqwfnNm1CvDVQ7i?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 092276e9-cb9f-4e0c-67af-08df17edddcc
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR12MB4999.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2026 14:37:30.6472
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: ZdVDumclfXJ1WH17SQuP8S3mrxvCrMq1Zp8MgA2BD+qMXAllj8ahzDuAxxdFTYYPeTEQJY0CTt0kud+3uSSzLA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6843
+X-purgate-ID: tlsNG-c1860d/1790001456-D574B87B-E0C64BC2/0/0
+X-purgate-type: clean
+X-purgate-size: 5089
 
+On Thu Aug 27, 2026 at 11:42 AM CEST, Baptiste Le Duc wrote:
+> qemu-smoke-riscv64-gcc drove QEMU through
+> automation/scripts/qemu-smoke-riscv64.sh, an expect wrapper whose machine
+> description (cpus, memory, device tree, console wiring) lived in the scri=
+pt
+> itself. The QTB framework now owns all of that: machines come from the
+> shared catalog, expectations from the test type's own YAML.
+>
+> Turn .qemu-riscv64 into a template running qemu_smoke_riscv64.py <type> r=
+un
+> <test> in the qtb-riscv64 container, machine and test picked per job
+> through QTB_TEST_TYPE/QTB_TEST. The container comes from the test-artifac=
+ts
+> registry, hence the new ARTIFACTS_REGISTRY next to the existing
+> ARTIFACTS_REPO/ARTIFACTS_BRANCH. QTB_BINARIES_DIR points at the artifacts
+> of the job (Xen only currently, but aims to have initrd and linux images
+> when dom0less will be supported). QTB_LOG_DIR collects the per-console
+> logs, kept on failure and on success.
+>
+> Point qemu-smoke-riscv64-gcc at that template, running the console-test
+> type on dom0less-1smp-0domu-1vcpu-aplic-imsic-null: a Xen-only machine, s=
+o
+> the smoke check is Xen's own "All set up" on console 0, the same string t=
+he
+> expect script waited for.
+>
+> Drop automation/scripts/qemu-smoke-riscv64.sh as it has no caller left in
+> the CI after this patch and drop smoke.serial from the .qemu-riscv64
+> artifacts since no riscv64 job uses it anymore, the logs are now kept und=
+er
+> QTB_LOG_DIR.
+>
+> Assisted-by: Claude:claude-opus-5
+> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
+This is all quite large and monolithic to review quickly, but I can
+already tell you that replacing a <50LoC test with such a massive
+infra bench is probably not quite what you want at this point in time.
 
-On 9/21/26 1:36 PM, Jan Beulich wrote:
-> On 27.08.2026 17:21, Oleksii Kurochko wrote:
->> A guest running in VS-mode expects its own IMSIC S-file at offset 0 of its
->> guest-physical IMSIC block. Physically, the guest-file (G-file) assigned to
->> this vCPU lives at a hart-relative offset given by guest_file_id (assigned
->> via the vGEIN allocator). Therefore, imsic_map_guest_file() uses stage-2
->> translation to redirect the guest's fixed per-vCPU GPA page (offset 0) to
->> the specific physical guest-file page.
->>
->> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> 
-> Acked-by: Jan Beulich <jbeulich@suse.com>
+IMO, you ought to keep the existing test in place and perhaps integrate
+the new infra with new tests that would be complicated without it.
+Things like injecting bizarre interrupts (NMI?) and capture expected
+behaviour.
 
-Thanks.
+Or even duplicating the existing test would be fine. Build confidence in
+it and only after you really trust it do remove your previous smoke.
 
-> perhaps with ...
-> 
->> @@ -537,9 +538,72 @@ void cf_check imsic_ctxt_switch_to(struct vcpu *v)
->>       read_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
->>   }
->>   
->> +/*
->> + * Map the physical IMSIC guest interrupt file (G-file) assigned to vCPU
->> + * into the domain's stage-2 guest-physical address space.
->> + *
->> + * In the machine's physical address space (SPA), each hart's IMSIC
->> + * supervisor-level file (S-file) is located at offset 0 of its address block,
->> + * followed contiguously by GEILEN guest files at offsets of 1, 2, ..., N pages.
->> + *
->> + * Because a guest OS running in VS-mode expects its own supervisor-level
->> + * interrupt file to be at offset 0 of its guest-physical IMSIC block, the
->> + * hypervisor must use stage-2 address translation to map the vCPU's
->> + * guest-physical "supervisor" page (GPA offset 0) to the specific
->> + * physical guest file page (SPA offset guest_file_id) on the physical hart.
->> + *
->> + * A vCPU runs on the pCPU the scheduler picked for it (v->processor), and
->> + * the guest file it is given (guest_file_id, from the vGEIN allocator)
->> + * belongs to that very pCPU's IMSIC. A guest_file_id of 0 indicates that no
->> + * hardware guest file is selected (matching the architectural behavior where
->> + * vGEIN = 0 in the hstatus CSR selects no guest external interrupt source),
->> + * requiring the VS-file to be emulated in software.
->> + *
->> + * Consequently the mapping installed here is only valid as long as the vCPU
->> + * stays on that pCPU. When it migrates, a VS-file is acquired on the new
->> + * pCPU and mapped at the very same GFN, so the stale mapping needs no
->> + * explicit tear-down: it is simply replaced.
->> + *
->> + * The base guest-physical address advertised to the guest in the device
->> + * tree matches offset 0 of the vCPU's virtual IMSIC block. Stage-2
->> + * translation ensures that guest supervisor accesses to this page are
->> + * transparently routed to the real hardware VS-file granted to it on
->> + * the pCPU it currently runs on.
->> + */
->>   int imsic_map_guest_file(struct vcpu *v, unsigned int vsfile_id)
->>   {
->> -    return -EOPNOTSUPP;
->> +    struct domain *d = v->domain;
->> +    unsigned int cpu = v->processor;
->> +    paddr_t gaddr = GUEST_IMSIC_S_BASE + (IMSIC_MMIO_PAGE_SZ * v->vcpu_id);
->> +    paddr_t paddr, guest_offset;
->> +    int res;
->> +
->> +    /* Nothing to map in the case of sw interrupt file. */
->> +    if ( !vsfile_id )
->> +        return 0;
->> +
->> +    guest_offset = vsfile_id * IMSIC_MMIO_PAGE_SZ;
->> +
->> +    paddr = imsic_cfg.msi[cpu].base_addr + imsic_cfg.msi[cpu].offset +
->> +            guest_offset;
->> +
->> +#ifdef IMSIC_DEBUG
->> +    printk(XENLOG_DEBUG
->> +           "%s: %pv: ga(%#"PRIpaddr") -> pa(%#"PRIpaddr"), cpu(%u), "
->> +           "guest_file_id(%u) base_addr(%#"PRIpaddr") offset(%#lx)\n",
->> +           __func__, v, gaddr, paddr, cpu, vsfile_id,
->> +           imsic_cfg.msi[cpu].base_addr, imsic_cfg.msi[cpu].offset);
-> 
-> ... this also converted to dprintk(), or at least using XENLOG_G_DEBUG.
+My .05 cents at least.
 
-I will convert to dprintk().
+Cheers,
+Alejandro
 
-~ Oleksii
+> ---
+>  .gitlab-ci.yml                           |  3 +++
+>  automation/gitlab-ci/test.yaml           | 20 ++++++++++++++------
+>  automation/scripts/qemu-smoke-riscv64.sh | 19 -------------------
+>  3 files changed, 17 insertions(+), 25 deletions(-)
+>  delete mode 100755 automation/scripts/qemu-smoke-riscv64.sh
+>
+> diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+> index f42a9abeaa..15f93b8634 100644
+> --- a/.gitlab-ci.yml
+> +++ b/.gitlab-ci.yml
+> @@ -11,6 +11,9 @@ variables:
+>    ARTIFACTS_BRANCH:
+>      description: "Branch in test-artifacts to use"
+>      value: master
+> +  ARTIFACTS_REGISTRY:
+> +    description: "Registry holding the test-artifacts containers"
+> +    value: registry.gitlab.com/xen-project/hardware/test-artifacts
+>    LINUX_JOB_X86_64:
+>      description: "Job name in test-artifacts to use for Linux x86_64"
+>      value: linux-6.6.56-x86_64
+> diff --git a/automation/gitlab-ci/test.yaml b/automation/gitlab-ci/test.y=
+aml
+> index 61adc1baff..e9dd147380 100644
+> --- a/automation/gitlab-ci/test.yaml
+> +++ b/automation/gitlab-ci/test.yaml
+> @@ -72,14 +72,21 @@
+>      TEST_TIMEOUT_OVERRIDE: 120
+> =20
+>  .qemu-riscv64:
+> +  image: ${ARTIFACTS_REGISTRY}/${CONTAINER}
+>    extends: .test-jobs-common
+>    variables:
+> -    CONTAINER: debian:13-riscv64
+> -    LOGFILE: qemu-smoke-riscv64.log
+> +    CONTAINER: debian:13-qtb-riscv64
+> +    QTB_LOG_DIR: qtb-logs
+> +    QTB_BINARIES_DIR: ${CI_PROJECT_DIR}/binaries
+> +  script:
+> +    - ./automation/scripts/qemu_smoke_riscv64.py
+> +      ${QTB_TEST_TYPE}
+> +      run
+> +      ${QTB_TEST}
+> +      --log-dir ${QTB_LOG_DIR}
+>    artifacts:
+>      paths:
+> -      - smoke.serial
+> -      - '*.log'
+> +      - ${QTB_LOG_DIR}
+>      when: always
+>    tags:
+>      - x86_64
+> @@ -779,8 +786,9 @@ qemu-xtf-argo-x86_64-gcc-debug:
+> =20
+>  qemu-smoke-riscv64-gcc:
+>    extends: .qemu-riscv64
+> -  script:
+> -    - ./automation/scripts/qemu-smoke-riscv64.sh 2>&1 | tee ${LOGFILE}
+> +  variables:
+> +    QTB_TEST_TYPE: console-test
+> +    QTB_TEST: dom0less-1smp-0domu-1vcpu-aplic-imsic-null
+>    needs:
+>      - debian-13-riscv64-gcc-debug
+> =20
+> diff --git a/automation/scripts/qemu-smoke-riscv64.sh b/automation/script=
+s/qemu-smoke-riscv64.sh
+> deleted file mode 100755
+> index c0b1082a08..0000000000
+> --- a/automation/scripts/qemu-smoke-riscv64.sh
+> +++ /dev/null
+> @@ -1,19 +0,0 @@
+> -#!/bin/bash
+> -
+> -set -ex -o pipefail
+> -
+> -# Run the test
+> -rm -f smoke.serial
+> -
+> -export TEST_CMD=3D"qemu-system-riscv64 \
+> -    -M virt,aia=3Daplic-imsic \
+> -    -cpu rv64,svpbmt=3Don \
+> -    -smp 1 \
+> -    -nographic \
+> -    -m 2g \
+> -    -kernel binaries/xen"
+> -
+> -export TEST_LOG=3D"smoke.serial"
+> -export PASSED=3D"All set up"
+> -
+> -./automation/scripts/console.exp |& sed 's/\r\+$//'
+
 
