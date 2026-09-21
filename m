@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25D6AC982E1
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 08:12:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1427139.1649762 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E3840C982DE
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 08:28:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1427149.1649772 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8Z7t-00046o-FS; Mon, 21 Sep 2026 08:11:49 +0000
+	id 1x8ZOC-00060O-Pv; Mon, 21 Sep 2026 08:28:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1427139.1649762; Mon, 21 Sep 2026 08:11:49 +0000
+Received: by outflank-mailman (output) from mailman id 1427149.1649772; Mon, 21 Sep 2026 08:28:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8Z7t-00046h-CP; Mon, 21 Sep 2026 08:11:49 +0000
-Received: by outflank-mailman (input) for mailman id 1427139;
- Mon, 21 Sep 2026 08:11:47 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x8ZOC-00060H-Lt; Mon, 21 Sep 2026 08:28:40 +0000
+Received: by outflank-mailman (input) for mailman id 1427149;
+ Mon, 21 Sep 2026 08:28:39 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1x8Z7r-00046b-9y
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 08:11:47 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x8ZOA-00060A-Sy
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 08:28:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8Z7q-000Jz5-If
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 10:11:46 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x8ZOA-00GI9r-5z
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 10:28:38 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6ab0e6b4-e002-0a2a0a5209dd-0a2a450bdefa-34
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 10:11:46 +0200
-Received: from [40.107.208.61]
- (helo=PH0PR06CU001.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6ab0e6c0-b7e8-0a2a450b0019-286bd03d48bd-3
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 10:11:46 +0200
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
- by PH0PR03MB989332.namprd03.prod.outlook.com (2603:10b6:510:120::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.13; Mon, 21 Sep
- 2026 08:09:48 +0000
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0428.015; Mon, 21 Sep 2026
- 08:09:48 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab0eab0-8faa-0a2a0a5109dd-0a2a4502ddae-26
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 10:28:38 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab0eab0-6ca4-0a2a45020019-4a7de18ce1b4-3
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 10:28:33 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49e69b9e16aso27716865e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 01:28:32 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49fcd0eabfcsm219672175e9.3.2026.09.21.01.28.31
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Sep 2026 01:28:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,180 +53,212 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Tvs2/sdIvNt0bb9Wi1LkBdNcwqCteg9DHmbvTyg5TSZVhPt3FZ4zUXIU2Ug5cMacC3V1gboiRzytxFOm3L2ZwSBu7c5igz/kS9o3NJM4WiD2tPm+n6mZxeG+aE+4QJR4dH74SENB19MoiKqCwoRZNKU1el8mbfqlNJXljdA1sXVnkm8mco46FoR6c1iddT44onOi/WmuO42/M5i8HOlROoUPi4+1j2Scalr+RsMXLLJLwgxe2gtcn6shxpjKuWUyU8fPbAHxxU2pka4i94X8/ltYt4s1kaAqBETk/7ZURNpCA/pYmqdofguFHuJHm+x3CxqdXV1xmP30TCZx9RXnZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=SU30me+7oUzPyjyBP7bGt/BtRwrgcEiRGeIVhWCmOoc=;
- b=Il6fYLt/3++NIUR3KVZ2BEwXpq51j2woLG2zYnQjKJCUewKNUabgGiPelLBwQ2FsxxKUUW+/Wj9umaP/bYDdGea6pFjBlMvZO7VJGZqCgUPsVedGBQlPF5qVFu72MQIDvK5BgiLMCmvZ1WBY+faUMOsvXS9gOn66qb3jg2LzYFYKfBCG19rgKdI0HdYRLcpwX1Ff1DWXw3Y5ZP5ZajQ7m8D2SDpmFxdJ8EfIdKZJx+Q6AX4f8mZb99ZgWpUc6jzt7ey2kgV1E2upRXZo7DQpkVBruz0SKIM18Pq/R0jyMEaxRVoTEs2gKbpv1mJ+KMhZDflRaJAytFTok93qpnYOeg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=SU30me+7oUzPyjyBP7bGt/BtRwrgcEiRGeIVhWCmOoc=;
- b=vq+jaTfpzhQ2zpzWSYlChW0DAankvMlS4cpjA6+oTUpHmWYyq1EgmR1sl23/C6qEpWFyKaQO5F+RZuEW2bvrs4KR9wyUBL+ZSCkz6X1MAmfj6T3sMYYwiUz4F/dbWof16XLUx5YFgC2P2hvubNBa74GKmyfe1FatFu+qEpsTgAg=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <3283039d-e0cf-4d84-9fe9-ccef041fddfb@citrix.com>
-Date: Mon, 21 Sep 2026 09:09:43 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] nestedsvm: Don't set VMCB(1-2)'s NP_ENABLE and N_CR3
- during VMEXIT to L1
-To: Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Jason Andryuk <jason.andryuk@amd.com>
-References: <20260918125205.374168-1-ross.lagerwall@citrix.com>
- <1789931442.8631fc262581453bbf619ec5b2062170.1a0c03a526800072c4@vates.tech>
-Content-Language: en-US
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-In-Reply-To: <1789931442.8631fc262581453bbf619ec5b2062170.1a0c03a526800072c4@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO2P265CA0511.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:13b::18) To CH8PR03MB8274.namprd03.prod.outlook.com
- (2603:10b6:610:2ba::5)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1789979312; x=1790584112; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0+e5laBwizznHgMWVoPgYtecdciPAQTbOYaLJI6fY4Y=;
+        b=IAIPzWtAW9RNSYuuDb9lqaSvnRchlEWta305KWfjf1OFQAD5zbDZVz4fy+zaOLR0RQ
+         1UQmOcbvmFE8l+hry/wWKVHd8XUQossf5HqWYu5uZ2ZfXYjTiHU6wTh3ptBmJlodeNbB
+         h3xuGTx57pLRSG1MGKJD/A9/x8aN9U+tlSRa+XDUWs3cj1xvHqtwxaMiMiBLyrSw4AwW
+         tWRXqvmsKrU+7bnHhhEv8nY067kd/LYCmA7QT7le/LbfSRdHdazx/UtOY08OvBigARtq
+         /anFQ5HEpLnTqFy66J9VWdepidxA5upB7KIBoF2y7girf98TB7FO0kzHmGCkmSKhf/Lu
+         bpdg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1789979312; x=1790584112;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=0+e5laBwizznHgMWVoPgYtecdciPAQTbOYaLJI6fY4Y=;
+        b=jaLRVtu3qexiLNSVj5Y05dJouM2HD5JbUL3LgoRnynBYLqgJda/N6HLS2nK/LFu3q3
+         W3Nk+zOlA3suSHl/fCQbMCPNhDqWjFM+bzSznwuOZFbc3MF0J1f4EHMmHi1ozabPz18P
+         37H/Lp4wP70/xljf7Ik0jVDSbpxDMzifM8vkndn3krTDoT1YtHIVNPvoDPHpu5mk9w3n
+         mGNS/4sk/Jr6CvxqyC3oKnbO6r3qIrFngQkvTSh3sIOHJ2pnzI0ZCMz0HUeqIYoBD4WQ
+         2Rh365taRYhzYzCecms7HzEQgsNT8geAJpJMbug0dktBlFVenPDFLaPtbyReH8bX04df
+         lhvg==
+X-Forwarded-Encrypted: i=1; AKwUvBwjzId65FGtPbhpX9ONd/vm5Hq5IX6G0iMoW3ZS6TJQodtYEjm/eJ8S6+oX88+sAKc4X7wRlDkGiaY=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lSfQFL4FCaBgt27u1lzC35AkQ0icyotAFDEY1C00lW+tqkZXkR
+	6URBoGuLaYCVvxkKjCCeOl5KyBauu8ayrKQN2RfHeRGZ6CKGquiqGOnCXTxPtsQOWQ==
+X-Gm-Gg: AYBFou3e8blxc5690FKK8XA0VGKN/Z91ryXwnGBmg5yNyF9kd/u3q9ag2jPZ2yZaxCs
+	NluM+M53d4+8cahBv+5zn+WjE6zpi6WsHFvnKsjZcUp9AH3kzIGhrwOX7CycREiC5cuYqFsS2CI
+	XcFpFMiEDl1MEJAUJxydC4PeWH3HcngFMZSPxhkoocZdiWL/OFCG/8WGI96UOVO71GAYZtAnYas
+	S37TIJvI2SayliRAYpbZTF4kWm2EZfffb0fhTPTOlCG7/d+GvAtwcqgRXm68fIMGeDqYIJYvJfF
+	WefHt2lcVo76qP7Dxbuk0egOaO+FkxP049EP4TL9c/rZAahudBYm6pyiW91D362mMbM/J0NPDHn
+	dDl4gV5kAoQj4YAai2Y9wQlqPlOFF7WMTgR6CuN7We4cgmSsFPqUi8ztYa42Q8NSvN8ZJ0Etqhf
+	Pq5uPkCI0fJ1P0bhht1F+7H4H0DnVTG3gT250uBhWlEHqBv3JbpY7RTVRC8PewU6O8yyfHJXW1A
+	GaqWHJOO5I9Nv3/92PlKYB+D8xcnH5OCB+f8K6gJD0OhcV2c6zo9X3mzhQIKQ==
+X-Received: by 2002:a05:600c:a403:b0:49f:d377:ac24 with SMTP id 5b1f17b1804b1-49fd377ac55mr29928225e9.3.1789979312537;
+        Mon, 21 Sep 2026 01:28:32 -0700 (PDT)
+Message-ID: <815bf929-57be-4b31-b3a9-a3720f5cd88e@suse.com>
+Date: Mon, 21 Sep 2026 10:28:38 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|PH0PR03MB989332:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8676fcd6-cb68-453b-d594-08df17b7b46b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|23010399003|1800799024|376014|11063799006|56012099006|4143699003|10067099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	ZEYOZ7rXi9rLlnEQNk4dOv8gA4bjlNwDXpq4oPpykv9G4O2vDv7rqX02RYR88ib5q3b3zrj4+HrQyjAL9k0wn0l++gR4Q3UIaqgqOi9fKvT/nmcJqhmLwh0cucEwYc+y6bBmB8RMctyECss2b4LCIaf3su/3THwO2V3rIoyOQiDTSrjv0EDPnrMA/fFTmwo0PRe4Rn3AYJ2/zpPIxgzJ1CeRf3xuQRvOeLiWr80j2veYQXdBzTbXVPGMNZG/o7bTuvwVm0/HV6YP0HjvckKi24oi7gS6oD5L2VyyWk55JKimlRGe/BWeD7Fgermkb96HiO/pF6cEY4kHZOvmLCECtPUTrKD3Gk4IT4HhVmKpWMVqvuXSxNxOwY5vW/XNLM7jciIvYBl/txlrbm/P3KghiFQfALo4KNhi0RN3UikZ9noAjtJ/HzNl0VX+wwSrkyROlKKBfZWXE4/yeL/0Hf8c6Fhou7diSHfxlOreVPTnwyaiDGOKn4f9i8NGCLtyQ+MMwpi4L4GpkIRihF4UJ8TxeGR1C3GV7WsFthDKSooZS9KuwB6V4UCsumUdAzMNYbz6zzaNh0PNtT4T+I4Sf8bAjxFUL/Y6XOGjFPzzcwxZR78s3OJiTCa/kvfi8X/4TJz4IdxJE3sJOPvyLtRbcDOjHIaVvQIWfYTq9G2TjdBKm5o=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(11063799006)(56012099006)(4143699003)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?VzFyL3o1ditvTTNWODlZOVNLYmFsQjJRajFoWFlRTU1yVkE4UUd4a3FIOFF2?=
- =?utf-8?B?clBYeVFac2VOcTVSaGhQMXpOVHFaOW1QMVhmVTNBU002NktBS2FxamhKcC9l?=
- =?utf-8?B?dUxRVFNMYXJXbEVoQk0wNHNHbTZKVDBLaVkydGdNNW5pU1hnL2thTWZuUm5G?=
- =?utf-8?B?aEJPeG5tS1Y1dTU4SjlSVFp1ZmxkTHhCL1dOWGRpejY1RGtZNEFHeS9tZElC?=
- =?utf-8?B?c3hrQmVyZW51UGhWd2ZQaVBJa0FQNDQ3UlBLQUsyVU16VGd2TGx1bEtQZ2ZM?=
- =?utf-8?B?OWl6dkpIUXhaT1JIWVhUTnYwUzNzZmdIdUp4ejFkckhOU2VnZi9xdGxvK0FL?=
- =?utf-8?B?SExTNVYrS2ozMktTN1FJZ3pLQWU2ellkSUZNcmhKcWYrT3EvNHg0NCt5bUpZ?=
- =?utf-8?B?QnJaOXY3cWJkcHR5SkttWWtvaGVBbklJWjZyU3dIblRtRHkrZTd3ZWlSSTl3?=
- =?utf-8?B?WTcwWHpNVnIydmZub2pXNXZlcVI4aFlVWlZ6UGJEYllhNDhoNlZHVEVCUmto?=
- =?utf-8?B?eitPdTNaeG00UHpiSnEyelhFeXFZeVNLS2RIZGlhaWNWSHk4akZ2RDcyeUJw?=
- =?utf-8?B?N2J0Z1lxY3EyK2RIdm04TkczTTgrSys3UTlyZTYyTGVrWGd3a3dmaUE1Vm1L?=
- =?utf-8?B?TEc3NGhqNS9lYXNLeWdtTEI1cHF2NncwTTZKdXlzaFFkTVdEUXBHMlhjdGlJ?=
- =?utf-8?B?d3FQOGRLR3NpS2xVOHdYdWM2Z0xQcnhiaW1lQmpxd0tqRkdmeTNJalBkSWZR?=
- =?utf-8?B?SnRUVWwzZ2xtZnhlVXkxdFNaVHNJTHowM25ETDVQOWlnSTZhRStXNlIzRGRC?=
- =?utf-8?B?WktEVHhkOWlpUklLeDJoMDVxU3M5WEZiSzNtTXJLQjJMYmxWeTBTcVd1WjBv?=
- =?utf-8?B?WXlxb2lUeXBMMnNMQWhMcUt2UnJqSXNveTdWYmYvZjlwbG9Cb29FalI4Rk9R?=
- =?utf-8?B?NEIrSk5Md0c3NHNiZUdiTFB6eThGUVpQNUo5ZFpHQ2dFbTRmaVcxUDUzMlp0?=
- =?utf-8?B?RHA3UkV5dWR1dzhTRUJ2OUFxVGJBbXdpUzMrcDI4eFVSQi8yWHBrMGhMbVBH?=
- =?utf-8?B?VTlqazdnLzhXQnBDQndueUZQcDVRcndNVXhyQkNVQy9TOTlSa0UxM1Y2QUg5?=
- =?utf-8?B?UXZlaWwrc25tNm83V2Q5UjhnMEpQejVSQWszbnNBZngyL2pvM21CYmErK1lH?=
- =?utf-8?B?MGxnaE80K2c2Q0x0VjNBMkZhek40V2ZYYmxpZG01bldWRFNjMG9QQ000Z0Fk?=
- =?utf-8?B?MVMvdFpIdVc2blZseGtWQkZWWXczdDlTelpQb2ZlbGlaMXRvakRSWmE2UWg1?=
- =?utf-8?B?K1lWMDQreGJBZE1JOGZIY1NId3Z5SHJWcHJHRTJmS0wrQnBYNUduWUVpQkRa?=
- =?utf-8?B?bFlsM0hlc1pXVm9HdjQ0UGJ6bW13NGVJWWpVWDA3RlZpaXhZNGN1UnhlbFBp?=
- =?utf-8?B?WkhFT1NnY1ZEeVkzSHVFbjJCbS90aDJvOWV2ZEtaZEVha2xUR1VBNmh2ZXVE?=
- =?utf-8?B?bDltNkllc2Z4QVR5SnJoN2dpaW1oMFRDZGlkQU1DaER2Z2hyU0lrY1JQc3I3?=
- =?utf-8?B?WCtyVkNPTTl3aHhGeWJWaGRzbVZCdEcxeUpFRW5pd1ptSzFOUm5hRFhGekk2?=
- =?utf-8?B?Snh5K2lhVDMyNVVTQ1N2Ui9LdUQvNDV3NU9JWlZ0a0NsS01BYS9VcFVJQUFB?=
- =?utf-8?B?Z3VKL0Jxc29NcFVTUzNqWThjZmFrN29nUkF1cm11QXhXVkxEcy9VeTF1RVk2?=
- =?utf-8?B?d2RCejVDMG5pTHptWnNvUEVxTUlRT3RVR2ZDZzlDNjhjQXgzUFJGbmpjdGsw?=
- =?utf-8?B?WGhRT1J6TlY0QXJ1YU5QNDFKTkU5K2FmeHFncXZ0MlJDY01DU1UvcUE0bnlP?=
- =?utf-8?B?ZWZwYWlLaUxvczNsTnRldGovRThHeFNFYTlGV3hDNVIycTdFYVVPa3AwbEZF?=
- =?utf-8?B?a1paVkMrd3l6WU9OdVYvTG9mbTZBaExYSkZjYi9vOFN5K0ZUVTVMMmt2a1RM?=
- =?utf-8?B?NzI2UmZlLzFWc3hTdDI3VXRTdXNhZnlXWnVWcEhyaUhSNEdCU3MxUXQ3UnEw?=
- =?utf-8?B?OExLUGN4R1NXZVJEdGV6am56Tk14OGREVnRVSWRZOG0vMSszSDFyRUJ3OS9F?=
- =?utf-8?B?T1U0bjB0UXBTdEw3ODkrNVFnZUo1ZjB1WUZpb2g4bGJzL2s4UEpBQnFOYW1D?=
- =?utf-8?B?ODdnOThwRTd0UExmU3IrV2hrUmN5OVRocUEvNkQvOTZWNEdPeWF5eU5QQUFI?=
- =?utf-8?B?bjlIeUt5V0RwbTlLNDhVTzVqZm0vMDlPRkQxczRnb3d3cEVqcmNCV0hickpI?=
- =?utf-8?B?QnhXL3lia2xIeXVUcFBYMDlQU0tMY3I1bHlkRDFNcmVweVVYVnBtLzFpV2J3?=
- =?utf-8?Q?Jg+FpsHjTMgNs0Y0=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8676fcd6-cb68-453b-d594-08df17b7b46b
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2026 08:09:48.4963
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: dbEskV57CFlAyeQcJoBSyvZXIM9X97VtvKoGk1aS+OLnqxHgKJyWnQ5uLwDysUqrGOjhNwdL98du7bupg6qgXWZFxDuM1Ack0R7D8rLuZOQ=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB989332
-X-purgate-ID: tlsNG-42698a/1789978306-1AEDE9EA-831DEDDB/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 32/39] xen/riscv: remap interrupts to new IMSIC VS-file
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <948e94b6610586b84626c98da033d301335dc7b0.1787838835.git.oleksii.kurochko@gmail.com>
+ <2394a616-16be-4657-be17-0a2dafebaeee@suse.com>
+ <9929eb6a-d7b8-4a39-b726-82290983e9f3@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <9929eb6a-d7b8-4a39-b726-82290983e9f3@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1789979318-666B72AC-C6E18C37/0/0
 X-purgate-type: clean
-X-purgate-size: 3071
+X-purgate-size: 4294
 
-On 9/20/26 8:10 PM, Teddy Astie wrote:
-> Le 18/09/2026 à 14:54, Ross Lagerwall a écrit :
->> As per the VMRUN pseudocode in APM Vol 3 3.38, the VMCB's NP_ENABLE and
->> N_CR3 fields are not set during a VMEXIT so don't do this when updating
->> VMCB(1-2). At the same time, cleanup the somewhat bogus and irrelevant
->> comments. Not clearing N_CR3 does not introduce a security hole as
->> stated since L1 can set it regardless and it is never used directly when
->> running L2.
+On 21.09.2026 10:03, Oleksii Kurochko wrote:
+> On 9/14/26 5:02 PM, Jan Beulich wrote:
+>> On 27.08.2026 17:21, Oleksii Kurochko wrote:
+>>> @@ -242,6 +254,15 @@ void imsic_irq_disable(unsigned int irq)
+>>>       spin_unlock(&imsic_cfg.lock);
+>>>   }
+>>>   
+>>> +static bool imsic_local_is_pending(unsigned int id)
+>>> +{
+>>> +    unsigned long isel =
+>>> +        (id / BITS_PER_LONG) * (BITS_PER_LONG / IMSIC_EIPx_BITS) + IMSIC_EIP0;
+>>> +    unsigned long bit = BIT(id % BITS_PER_LONG, UL);
 >>
->> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
->> ---
->>   xen/arch/x86/hvm/svm/nestedsvm.c | 32 +-------------------------------
->>   1 file changed, 1 insertion(+), 31 deletions(-)
+>> Both can be unsigned int, can't they?
+> 
+> Yes, agreed. Both isel and bit fit within unsigned int. I will update 
+> them in the next version.
+> 
 >>
->> diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
->> index a8b15d6eae05..c62fca571d75 100644
->> --- a/xen/arch/x86/hvm/svm/nestedsvm.c
->> +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
->> @@ -1023,37 +1023,6 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
->>       ns_vmcb->event_inj.raw = 0;
->> -    /* Nested paging mode */
->> -    if ( nestedhvm_paging_mode_hap(v) )
->> -    {
->> -        /* host nested paging + guest nested paging. */
->> -        vmcb_set_np(ns_vmcb, vmcb_get_np(n2vmcb));
->> -        ns_vmcb->_cr3 = n2vmcb->_cr3;
->> -        /* The vmcb->h_cr3 is the shadowed h_cr3. The original
->> -         * unshadowed guest h_cr3 is kept in ns_vmcb->h_cr3,
->> -         * hence we keep the ns_vmcb->h_cr3 value. */
->> -    }
->> -    else if ( paging_mode_hap(v->domain) )
->> -    {
->> -        /* host nested paging + guest shadow paging. */
->> -        vmcb_set_np(ns_vmcb, false);
->> -        /* Throw h_cr3 away. Guest is not allowed to set it or
->> -         * it can break out, otherwise (security hole!) */
->> -        ns_vmcb->_h_cr3 = 0x0;
->> -        /* Stop intercepting #PF (already done above
->> -         * by restoring cached intercepts). */
->> -        ns_vmcb->_cr3 = n2vmcb->_cr3;
->> -    }
->> -    else
->> -    {
->> -        /* host shadow paging + guest shadow paging. */
->> -        vmcb_set_np(ns_vmcb, false);
->> -        ns_vmcb->_h_cr3 = 0x0;
->> -        /* The vmcb->_cr3 is the shadowed cr3. The original
->> -         * unshadowed guest cr3 is kept in ns_vmcb->_cr3,
->> -         * hence we keep the ns_vmcb->_cr3 value. */
->> -    }
->> ->       /* LBR virtualization - keep lbr control as is */
->>       /* NextRIP */
->> @@ -1083,6 +1052,7 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
->>       /* CRn */
->>       ns_vmcb->_cr4 = n2vmcb->_cr4;
->> +    ns_vmcb->_cr3 = n2vmcb->_cr3;
->>       ns_vmcb->_cr0 = n2vmcb->_cr0;
+>>> +    return !!(imsic_csr_read(isel) & bit);
+>>> +}
+>>
+>> No need for !! here.
+>>
+>> What about endianness, btw? Does the IMSIC always match the CPU (and
+>> its setting)?
 > 
-> I would suggest to group all the CRn (the CR2 part is currently separated). That can be done separately.
+> No, the IMSIC does not dynamically adapt its register interfaces based 
+> on the CPU's runtime endianness configuration (e.g. mstatus.SBE/MBE):
 > 
+> - CSR Accesses (imsic_csr_read): Indirect CSR accesses (siselect/sireg 
+> or miselect/mireg) operate using standard RISC-V CSR instructions at 
+> current XLEN width. Values are read and written directly into 
+> architectural GPRs without byte-swapping.
 
-Indeed. The APM says...
+I.e. you need you add endianness conversion.
 
-"Upon #VMEXIT, the processor performs the following actions in order to return
-to the host execution context:"
+>> Overall, what does "local" in the function name signify? (For a static
+>> function, the "imsic" prefix may also be unnecessary.)
+> 
+> It signifies that local (on which code is executed now) hart's IMSIC 
+> CSRs (isel and ireg in the case of imsic_csr_read()) are touched.
 
-... so ideally we would rearrange this function to match the order specified
-(though it shouldn't make a functional difference).
+That's the expected thing for CSR access, though.
 
-Ross
+>>> @@ -848,8 +899,22 @@ void imsic_migrate_vcpu(struct vcpu *v)
+>>>       if ( v->arch.last_cpu == NR_CPUS )
+>>>           return;
+>>>   
+>>> +    read_lock_irqsave(&imsic_state->vsfile_lock, flags);
+>>> +    old_vsfile_id = imsic_state->guest_file_id;
+>>> +    old_vsfile_cpu = imsic_state->vsfile_cpu;
+>>> +    read_unlock_irqrestore(&imsic_state->vsfile_lock, flags);
+>>> +
+>>> +    /*
+>>> +     * We don't support SW interrupt files at the moment. Bail out before
+>>> +     * anything is touched, as the old file has no owning pCPU in that case
+>>> +     * and there is nothing to retarget the producers away from.
+>>> +     */
+>>> +    if ( old_vsfile_cpu == NR_CPUS )
+>>> +        panic("IMSIC SW-file isn't supported\n");
+>>> +
+>>>       /*
+>>>        * At this point, all interrupt producers are still using the old IMSIC
+>>> +     * VS-file so we first move all interrupt producers to the new IMSIC
+>>>        * VS-file.
+>>>        */
+>>
+>> Isn't the new part of the comment premature? Moving doesn't start until ...
+>>
+>>> @@ -870,5 +935,43 @@ void imsic_migrate_vcpu(struct vcpu *v)
+>>>       /* Zero-out new IMSIC VS-file */
+>>>       imsic_call_on_cpu(new_vsfile_cpu, imsic_vsfile_local_clear, &vsfile_data);
+>>>   
+>>> +    /* Update G-stage mapping for the new IMSIC VS-file */
+>>> +    if ( imsic_map_guest_file(v, new_vsfile_hgei) )
+>>> +    {
+>>> +        domain_crash(v->domain, "Migration to hw interrupt file failed\n");
+>>> +
+>>> +        return;
+>>> +    }
+>>> +
+>>> +    imsic_update_state(v, new_vsfile_hgei);
+>>> +
+>>> +    /*
+>>> +     * TODO: Modify the relevant translation tables at all IOMMUs so that MSIs
+>>> +     *       for this virtual interrupt file are now sent to the new physical
+>>> +     *       interrupt file.
+>>> +     */
+>>> +    if ( iommu_enabled )
+>>> +        printk_once("IMSIC: IOMMU MSI retargeting is not implemented\n");
+>>> +
+>>> +    /*
+>>> +     * If any interrupts at an APLIC are forwarded by MSIs to the old interrupt
+>>> +     * file, reconfigure the APLIC to send them to the new interrupt file.
+>>> +     */
+>>> +    aplic_reconfigure_target(v, old_vsfile_id, old_vsfile_cpu);
+>>
+>> ... here, as it looks.
+> 
+> At some point I agree but the steps before are preparation of moving and 
+> is a part of moving process.
+> 
+> Then probably it make sense to reword the comment to:
+> 
+>     /*
+>       * At this point, all interrupt producers are still using the old IMSIC
+>       * VS-file.  Allocate and clear the new one before redirecting anything
+>       * to it.
+>       */
+> 
+> Would it be better?
+
+Imo yes.
+
+Jan
 
