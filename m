@@ -4,50 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15D52C982E6
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 17:47:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1427828.1650581 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 050DBC982ED
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 17:54:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1427764.1650591 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8i6H-00013k-5j; Mon, 21 Sep 2026 17:46:45 +0000
+	id 1x8iDw-0002l7-Tp; Mon, 21 Sep 2026 17:54:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1427828.1650581; Mon, 21 Sep 2026 17:46:45 +0000
+Received: by outflank-mailman (output) from mailman id 1427764.1650591; Mon, 21 Sep 2026 17:54:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8i6H-00013d-3C; Mon, 21 Sep 2026 17:46:45 +0000
-Received: by outflank-mailman (input) for mailman id 1427828;
- Mon, 21 Sep 2026 17:46:44 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x8iDw-0002l0-Qv; Mon, 21 Sep 2026 17:54:40 +0000
+Received: by outflank-mailman (input) for mailman id 1427764;
+ Mon, 21 Sep 2026 16:28:48 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <support@trinity-net.com>) id 1x8i6F-00013X-6B
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 17:46:44 +0000
+ (envelope-from <csh0052@gmail.com>) id 1x8gsq-0005zp-Bp
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 16:28:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8i6D-00DGdE-V8
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 19:46:41 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x8gsp-0059C1-Gf
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 18:28:47 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <support@trinity-net.com>)
- id 6ab16d78-2eae-0a2a0a5409dd-0a2a4504e454-14
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 19:46:41 +0200
-Received: from [178.33.249.249] (helo=5.mo565.mail-out.ovh.net)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <support@trinity-net.com>)
- id 6ab16d81-b57f-0a2a45040019-b221f9f9ca31-3
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 19:46:41 +0200
-Received: from director4.derp.mail-out.ovh.net
- (director4.derp.mail-out.ovh.net [79.137.60.37])
- by mo565.mail-out.ovh.net (Postfix) with ESMTPS id 4hpVz44v6yz63W1;
- Mon, 21 Sep 2026 17:46:40 +0000 (UTC)
-Received: from director4.derp.mail-out.ovh.net
- (director4.derp.mail-out.ovh.net. [127.0.0.1])
- by director4.derp.mail-out.ovh.net (inspect_sender_mail_agent) with SMTP
- for <lihuisong@huawei.com>; Mon, 21 Sep 2026 17:46:40 +0000 (UTC)
-Received: from mta6.priv.ovhmail-u1.ea.mail.ovh.net (unknown [10.110.188.54])
- by director4.derp.mail-out.ovh.net (Postfix) with ESMTPS id
- 4hpVz43BNwz1xvB; Mon, 21 Sep 2026 17:46:40 +0000 (UTC)
-Received: from mailstore7.priv.ovhmail-u1.ea.mail.ovh.net (unknown [10.1.8.7])
- by mta6.priv.ovhmail-u1.ea.mail.ovh.net (Postfix) with ESMTP id
- 4D00F8E1BC7; Mon, 21 Sep 2026 17:46:39 +0000 (UTC)
+ (envelope-from <csh0052@gmail.com>)
+ id 6ab15b2f-e002-0a2a0a5209dd-0a2a450a9c90-8
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 18:28:47 +0200
+Received: from [74.125.228.12] (helo=mail-pz2-f12.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <csh0052@gmail.com>)
+ id 6ab15b3d-f2d2-0a2a450a0019-4a7de40cb546-3
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 18:28:47 +0200
+Received: by mail-pz2-f12.google.com with SMTP id
+ d2e1a72fcca58-8631d0023daso2349552b3a.2
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 09:28:46 -0700 (PDT)
+Received: from SANGHOON. ([1.220.132.212]) by smtp.gmail.com with ESMTPSA id
+ 41be03b00d2f7-cc72aee0fbasm3746033a12.25.2026.09.21.09.28.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 21 Sep 2026 09:28:44 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -59,227 +52,115 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=ovhmo-selector-1 header.d=trinity-net.com header.i="@trinity-net.com" header.h=From
-Date: Mon, 21 Sep 2026 17:46:39 +0000 (UTC)
-From: Support TRINITY <support@trinity-net.com>
-To: 
-	Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-Cc: "Rafael J. Wysocki (Intel)" <rafael@kernel.org>, 
-	regressions <regressions@lists.linux.dev>, 
-	linux-acpi <linux-acpi@vger.kernel.org>, 
-	linux-pm <linux-pm@vger.kernel.org>, 
-	xen-devel <xen-devel@lists.xenproject.org>, 
-	linux-kernel <linux-kernel@vger.kernel.org>, 
-	Huisong Li <lihuisong@huawei.com>
-Message-ID: <750088883.289173062.1790012799166.JavaMail.zimbra@trinity-net.com>
-In-Reply-To: <arFe7-xa3HtCUOHs@mail-itl>
-References: <905771062.272724286.1789919301858.JavaMail.zimbra@trinity-net.com> <CAJZ5v0gg7kBtEhagR9SYKaPNstPC6aSyP7W4xBjP1r-kzbcH1A@mail.gmail.com> <arFe7-xa3HtCUOHs@mail-itl>
-Subject: Re: [REGRESSION] ACPI processor/cpuidle change in 6.18.52 breaks
- bare-metal Xen dom0 boot
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790008125; x=1790612925; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ySNS+GwrhibfzjzLbLOnb295wmy2g2Ft16DvkrgaNXI=;
+        b=GBGAgbM4cXGR1NqBuBKqr+HlU/ZQh54f5yER2/9ZUCTjBEgIljRpx0BROTfUmrxwQI
+         eL7dkk9mM4k31JbRrEHybJvEoOb2PNjzkgb4zYa4YcA0PyuW4E/qjsYAQw6Vf2cpVj+Q
+         3bMv0d/cLZI+wMU/dR+rBlMcMhr/JiL7hecwmNYKgn+vlfvcmOOqTQFxbQefyr5L+6wh
+         nEVLTSGNTqW3aqLLicSzwI6YtiA5RIuV872gaF9geKKRqhn5wVQIlWNHym3X+MIzyxfZ
+         sE9B/6ux4QK2oH5459AcCO7BC1A94nj+JNg9pvBdDFw3Gu5E8Ld5MC5WNZHtwzQYUNur
+         HUxg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790008125; x=1790612925;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=ySNS+GwrhibfzjzLbLOnb295wmy2g2Ft16DvkrgaNXI=;
+        b=l1jXrNulWf0pPyTKcnCLPbQ3y45EVGv2UA5zJNliNh+WVRGebLnX0ng4oioAXKIoH5
+         fORSxwS8XqU5NXS9aZ2KFt3jCr7QBNXjyU7Sx4d2KHxLvyfbBgUXErPaYo2KevoGNuwa
+         ebpl4IYimTYqp7A77E0iP5wUJ9/8yQB7kr5VAZps5+HSZ9ylMRA4oK4RIQQp6/4094ja
+         aWatfYTq97W3l0rAKF1MewkKivIz8YafZGZkbyM8LhQW041QnGZbaaXEV0WOzRZSGaZK
+         M3f83TJTwJICVwGBThiw6CfuFxsFRtbEqoq1pQt4AC1mFQnXHSgkaLxdsmsnr/FpNcLV
+         TUOQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwfhWiva0meoCZR+nla3utjvi8K3+tgj0JcSjN1DTfSlRoH426gCur861MPyMMlfBNcR9aMU2lA3fk=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mYiKmmQzYFlBKZzHRvtjEmX2uYThEpf6Z2z/duIpLkfaESgdS7
+	tVygoVBREEZH7pnLjk92BCOcrijJ+B6N/M1mFYi6OSbBwNQJxvlSdXp2GSnKAtar
+X-Gm-Gg: AYBFou1mw/moaFR7RXgPxKA0ScpFnnexIHur0yOx8exbpt12Vd0j/P9SdNbzIXYQ3xs
+	NBexo9p2iITevHwRuM/ZJNGEbBVh8+iz7TGdFemZINzLyiZWY5G84mkx4EdHybi7JMdzQN7YFL0
+	ldjDHsxDZnxqEdVGsEV/Y9JFit+FRImq6DEMxlabljV17zULt5rVGVBFLu0PG638ttWeQNynVyn
+	nwu9stXIP0ypMQUajU1JS75/QtXQbGTL+PaDpsSQ4QIv3H+632pJno4a1Cubbb7U2pCE1EBMN7s
+	NMf7O9a2lgKgtI6c7a+zB1RLtn0i4Yh8+ImDkNg1waJDTcWxZlVm4mVtSOspItkwxXcS6mPNtEO
+	wRGq0P1lSKqn4e+5DaUn1oLv9wawVHMGXC1ANfmg7yr3MKcgwEZyV7h0zB1PU/OndGLyUi5BClJ
+	UHw0wLfgDwu72RlK8ckIomxoyRhM0rrTwKgcmE/E8aIZt72y3WB+fQBImJ6XKTDRKOY9evxtEpW
+	2NiN3kIX9v2wDfil0Vb0+k6
+X-Received: by 2002:a05:6a20:c90e:b0:3dd:a195:dd5f with SMTP id adf61e73a8af0-3dda195e43fmr11708071637.65.1790008125115;
+        Mon, 21 Sep 2026 09:28:45 -0700 (PDT)
+From: Sang-Hoon Choi <csh0052@gmail.com>
+To: Juergen Gross <jgross@suse.com>,
+    Stefano Stabellini <sstabellini@kernel.org>
+Cc: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+    xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org,
+    Changyul Lee <lcy8047@gmail.com>
+Subject: [RFC] xen/pvcalls: possible bind/disconnect mapping lifetime race
+Date: Tue, 22 Sep 2026 01:28:34 +0900
+Message-ID: <179000811428.1227592.17782105050930623388.idr-bug-82@gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-Originating-IP: [213.169.178.160]
-X-Authenticated-User: support@trinity-net.com
-Thread-Topic: ACPI processor/cpuidle change in 6.18.52 breaks bare-metal Xen dom0 boot
-Thread-Index: JJ5MX6sCvA3YfJ8XBKw+R8eVLKlrew==
-x-ovh-tracer-id: 7890306548001371756
-X-VR-SPAMSTATE: OK
-X-VR-SPAMSCORE: -100
-X-VR-SPAMCAUSE: dmFkZTGzUGnqSG7fSU4vc1J/EOhw0keWUraYqIl+GujdRSX+o6s5CmvuG878t9CnLVy/dOzT9c5Wno/vmvzTE/kpj9cKFal6oOeRUTJpeBxtdOzcq9ArTwZAOopcvTsus+hI48lwvR3/EDxL6AeT8kaXBVqATYCWxGtk2M4D939oYnPD0pN5JlAtuqbP42lvWE7s6c/6uagGp5/KZRwC3MdpS+FYNYare6+Y+GgWSCsajU2GnorlsO9l4ZWxu2YnIl90kkMpGO3Op8wnuKxiUxFHjVrX5JpUJ7/JwTFTmlf2t0B0mPW0wl6h4V5KlF4kBWDyp1l6z7z7n9Yq7FHAzmhgxPtdooQgzZwd95jedm/YQsNjk8+dbr6uUBQVomff0zO1BOc0MEz8gOTVxkZ+odwEPj0YilwjJvhGJnDR/ElIfHhNho44wLpbNjVnQptFUBgp7spYHcFNV9CAiIMrXSLLbUf+njlMYFfUBwFnBTg/n5rDYat1rGgqDwJcy3qi4zqIOQ8VJc6toExjaHjhRHuXb52y4Yry5V5rPcm4GF6V7vH+hNwymq2qkAUdnUEoFTOTnw8Tw79SBOxgBQNHbZj+AIfqsYIj6YbkWYCFSUzOSyPX5T8ZszCFXBv1gEzOeTYJ1G5eMjdkHPdEE0n+W8KzkUqsh8xM3C840MQJE1V9Ci5GdA
-DKIM-Signature: a=rsa-sha256; bh=eEs26H6jLMUFSrdB4SPeZDbYEEF2DnyaqQKffkYXWGQ=;
- c=relaxed/relaxed; d=trinity-net.com; h=From; s=ovhmo-selector-1;
- t=1790012801; v=1;
- b=C0F6xWsZon2nfRwJgLBZ3xh/yqLzy9xne1B/f+hbh7D2sH3MowiOWITJOdecH/SZZtQm5gMX
- jjZ6CvKtOpUNsHzkrapCHgSwX4TxIi0erF16qw+yOcHFuebM3VVKN+snKyqRw/AzZy06CqiFaNh
- jBYYryK2zor8ATmCl6ANR4JRbrRXrxSie/hNA9X5eFObEKFYgMFQwD53cmQeyPmNHtposqhwW3k
- lnlAlcVU3l8FcXoyDI0E0mYCX2nt3Ero4ut1xHvqkJ3/jM8iOd835+eJ75Vsu5lf/0tVjGrcxnp
- rmPHi95aXuUVYv9a6WIQuBYoABsYnhs5IesMFLuNbWKfQ==
-X-purgate-ID: tlsNG-ebf023/1790012801-C24CBB50-04A53CAB/0/0
+Content-Type: text/plain; charset="us-ascii"
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-4011c0/1790008127-599C1CFC-F483B92E/0/0
 X-purgate-type: clean
-X-purgate-size: 7817
+X-purgate-size: 2363
 
-Hello,
+Hi,
 
-Thank you, this matches what I see on the affected Alpine Xen dom0
-systems.
+I would like to report a possible race between pvcalls_back_bind() and
+backend_disconnect(), found during source review.
 
-I also tested Linux 6.18.52 with processor=3Dnocst on the Linux kernel
+The source reviewed is mainline commit
+5dd1818b15d98d4a20806cd00b1b40320b06004f.
 
-Result: it still fails with the same black screen before dom0 userspace
-and networking come up.
+pvcalls_back_bind() inserts a new sockpass_mapping into
+socketpass_mappings under socket_lock, then drops that lock before
+installing the socket callbacks:
 
-Marek's trace looks consistent with the failure mode I isolated: the
-crash happens from acpi_processor_power_init() while registering the
-cpuidle device.
+    radix_tree_insert(..., map);
+    up(&fedata->socket_lock);
+    write_lock_bh(&map->sock->sk->sk_callback_lock);
+    map->saved_data_ready = map->sock->sk->sk_data_ready;
+    map->sock->sk->sk_user_data = map;
+    map->sock->sk->sk_data_ready = pvcalls_pass_sk_data_ready;
 
-The working patch I tested is not a plain full revert of 6.18.52 ACPI
-processor changes. It restores only the previous ACPI idle driver
-registration lifecycle, where the ACPI idle driver is registered from
-acpi_processor_power_init() before the first per-CPU cpuidle device is
-registered, and unregistered from acpi_processor_power_exit() after the
-last one is removed.
+backend_disconnect() takes socket_lock, removes passive mappings, and
+calls pvcalls_back_release_passive(). That function restores the socket
+callback, releases the socket, destroys the workqueue, and frees the
+mapping. The request IRQ is unbound only after this cleanup.
 
-Compared with my first ACPI-only test revert, the refined patch keeps the
-unrelated 6.18.52 safety/error-handling changes, including the _LPI
-bounds checks and the cpufreq notifier cleanup on
-acpi_processor_driver_init() failure.
+If disconnect overlaps the threaded request handler, this appears to
+allow the mapping to be freed between insertion and callback setup:
 
-So yes, it is very close to a targeted revert of commit 13ebeef6a1b9
-("ACPI: processor: idle: Optimize ACPI idle driver registration"), but it
-is intentionally narrowed to the idle registration lifecycle instead of
-reverting all surrounding ACPI processor changes.
+    bind handler                    disconnect
+    ------------                    ----------
+    insert map
+    drop socket_lock
+                                    take socket_lock
+                                    remove and release map
+    access map->sock
 
-I agree that this points to a missing ordering/lifetime check rather than
-a storage, Xenbus, IOMMU, APIC, networking, or initramfs issue.
+A draft change holds socket_lock through callback setup. This preserves
+the socket_lock -> sk_callback_lock order used during disconnect and
+addresses the interval above. It is not a complete teardown fix: an
+in-flight handler could still insert a mapping after disconnect has
+finished walking the tree. Quiescing the request IRQ before freeing
+mappings may be the better approach, but needs a separate teardown and
+deadlock review.
 
-I have not tested Linux 6.18.53 yet. Based on the 6.18.53 changelog, I
-did not see any ACPI processor/cpuidle change that appears to address
-this regression.
+The narrow draft was compile-checked as pvcalls-back.o with W=1 in an
+x86 allmodconfig build at the commit above and passed checkpatch. It has
+not been tested in a Xen frontend/backend setup. There is no runtime
+reproducer or sanitizer trace, and no security impact has been established.
+XEN_PVCALLS_BACKEND is marked experimental in Kconfig.
 
-Given Marek's additional data point that Linux 7.3-rc3 works fine, this
-looks more likely to be a stable/backport regression in 6.18.52 than a
-current mainline regression.
+Is there synchronization outside these functions that prevents the
+request handler from overlapping backend_disconnect()?
 
-I had already started a 7.3-rc4 build locally before seeing Marek's
-reply, so I can still report that result if useful, but it may be less
-important now than identifying the missing dependency or ordering check
-around commit 13ebeef6a1b9 in the 6.18 stable backport.
+Reported-by: Changyul Lee <lcy8047@gmail.com>
+Assisted-by: LLM
 
-Regards,
-Tony
-
-
------Message original-----
-De: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblethingslab.com>
-=C3=A0: Rafael J. Wysocki (Intel) <rafael@kernel.org>
-Cc: Support TRINITY <support@trinity-net.com>; regressions <regressions@lis=
-ts.linux.dev>; linux-acpi <linux-acpi@vger.kernel.org>; linux-pm <linux-pm@=
-vger.kernel.org>; xen-devel <xen-devel@lists.xenproject.org>; linux-kernel =
-<linux-kernel@vger.kernel.org>; Huisong Li <lihuisong@huawei.com>
-Envoy=C3=A9: lundi 21 septembre 2026 18:44 CEST
-Sujet : Re: [REGRESSION] ACPI processor/cpuidle change in 6.18.52 breaks ba=
-re-metal Xen dom0 boot
-
-
-On Mon, Sep 21, 2026 at 05:26:55PM +0200, Rafael J. Wysocki (Intel) wrote:
-> On Sun, Sep 20, 2026 at 5:48=E2=80=AFPM Support TRINITY <support@trinity-=
-net.com> wrote:
-> >
-> > Hello,
-> >
-> > I am reporting a bare-metal Xen dom0 boot regression seen with Linux 6.=
-18.52.
-> >
-> > On affected systems, Linux 6.18.51 boots successfully as Xen dom0 on ba=
-re metal, while Linux 6.18.52 consistently black-screens before dom0 usersp=
-ace/networking comes up.
-> >
-> > #regzbot introduced: v6.18.51..v6.18.52
-> > #regzbot title: ACPI processor/cpuidle lifecycle change breaks bare-met=
-al Xen dom0 boot
-> > #regzbot link: https://gitlab.alpinelinux.org/alpine/aports/-/work_item=
-s/18447
-> >
-> > Tested results:
-> >
-> > Linux 6.18.51-r0, Xen dom0, bare metal: boots
-> > Linux 6.18.52-r0, Xen dom0, bare metal: black screen before userspace/n=
-etwork
->=20
-> I'm wondering what's special about Xen dom0 bare metal.
->=20
-> Does adding processor=3Dnocst to the kernel command line help, by any cha=
-nce?
-
-It does not.
-
-> The patch is essentially a revert of commit 13ebeef6a1b9 ("ACPI:
-> processor: idle: Optimize ACPI idle driver registration") which I'd
-> rather not do without knowing what exactly is going on.
->=20
-> At this point it looks like a missing check somewhere or similar, so
-> it would be good to find out where exactly it crashes.
-
-I can reproduce the crash, I get this:
-
-[    3.525669] BUG: kernel NULL pointer dereference, address: 0000000000000=
-008
-[    3.525677] #PF: supervisor read access in kernel mode
-[    3.525681] #PF: error_code(0x0000) - not-present page
-[    3.525685] PGD 0 P4D 0=20
-[    3.525688] Oops: Oops: 0000 [#1] SMP NOPTI
-[    3.525693] CPU: 0 UID: 0 PID: 21 Comm: cpuhp/0 Not tainted 6.18.52-1.qu=
-bes.23.fc41.x86_64 #1 PREEMPT(full)=20
-[    3.525700] Hardware name: Micro-Star International Co., Ltd. MS-7E06/PR=
-O Z790-P WIFI (MS-7E06), BIOS Dasharo (coreboot+UEFI) v0.9.1 01/17/2024
-[    3.525706] RIP: e030:cpuidle_register_device+0xd2/0x350
-[    3.525714] Code: 00 00 8b 55 04 49 89 c5 49 89 d4 81 fa ff 1f 00 00 0f =
-87 68 02 00 00 48 8b 04 d5 c0 a0 19 82 48 83 3c 18 00 0f 85 ad 48 12 ff <49=
-> 8b 7d 08 48 89 14 24 e8 31 73 30 ff 84 c0 0f 84 72 01 00 00 41
-[    3.525723] RSP: e02b:ffffc90040133db8 EFLAGS: 00010246
-[    3.525727] RAX: ffff888235f5c000 RBX: ffffffff834d4d40 RCX: 00000000000=
-00000
-[    3.525732] RDX: 0000000000000000 RSI: 0000000000000007 RDI: ffff888101c=
-39c00
-[    3.525736] RBP: ffff888101c39c00 R08: 4ec4ec4ec4ec4ec5 R09: ffff888101c=
-39c00
-[    3.525740] R10: ffffc90040133df8 R11: 0000000000000000 R12: 00000000000=
-00000
-[    3.525744] R13: 0000000000000000 R14: 0000000000000000 R15: ffffffff834=
-d4d40
-[    3.525752] FS:  0000000000000000(0000) GS:ffff888235f5c000(0000) knlGS:=
-0000000000000000
-[    3.525757] CS:  e030 DS: 0000 ES: 0000 CR0: 0000000080050033
-[    3.525761] CR2: 0000000000000008 CR3: 000000000242c000 CR4: 00000000000=
-50660
-[    3.525768] Call Trace:
-[    3.525771]  <TASK>
-[    3.525775]  acpi_processor_power_init+0xde/0x150
-[    3.525782]  ? __pfx_acpi_soft_cpu_online+0x10/0x10
-[    3.525787]  acpi_soft_cpu_online+0x123/0x170
-[    3.525792]  cpuhp_invoke_callback+0x134/0x470
-[    3.525797]  ? __pfx_smpboot_thread_fn+0x10/0x10
-[    3.525802]  cpuhp_thread_fun+0xa2/0x170
-[    3.525806]  smpboot_thread_fn+0xf3/0x220
-[    3.525810]  kthread+0xfc/0x240
-[    3.525814]  ? __pfx_kthread+0x10/0x10
-[    3.525818]  ? __pfx_kthread+0x10/0x10
-[    3.525822]  ret_from_fork+0x158/0x170
-[    3.525827]  ? __pfx_kthread+0x10/0x10
-[    3.525830]  ret_from_fork_asm+0x1a/0x30
-[    3.525835]  </TASK>
-[    3.525837] Modules linked in:
-[    3.525842] CR2: 0000000000000008
-[    3.525845] ---[ end trace 0000000000000000 ]---
-[    3.525849] RIP: e030:cpuidle_register_device+0xd2/0x350
-[    3.525854] Code: 00 00 8b 55 04 49 89 c5 49 89 d4 81 fa ff 1f 00 00 0f =
-87 68 02 00 00 48 8b 04 d5 c0 a0 19 82 48 83 3c 18 00 0f 85 ad 48 12 ff <49=
-> 8b 7d 08 48 89 14 24 e8 31 73 30 ff 84 c0 0f 84 72 01 00 00 41
-[    3.525862] RSP: e02b:ffffc90040133db8 EFLAGS: 00010246
-[    3.525866] RAX: ffff888235f5c000 RBX: ffffffff834d4d40 RCX: 00000000000=
-00000
-[    3.525870] RDX: 0000000000000000 RSI: 0000000000000007 RDI: ffff888101c=
-39c00
-[    3.525874] RBP: ffff888101c39c00 R08: 4ec4ec4ec4ec4ec5 R09: ffff888101c=
-39c00
-[    3.525878] R10: ffffc90040133df8 R11: 0000000000000000 R12: 00000000000=
-00000
-[    3.525882] R13: 0000000000000000 R14: 0000000000000000 R15: ffffffff834=
-d4d40
-[    3.525889] FS:  0000000000000000(0000) GS:ffff888235f5c000(0000) knlGS:=
-0000000000000000
-[    3.525894] CS:  e030 DS: 0000 ES: 0000 CR0: 0000000080050033
-[    3.525898] CR2: 0000000000000008 CR3: 000000000242c000 CR4: 00000000000=
-50660
-[    3.525904] Kernel panic - not syncing: Fatal exception
-[    3.525931] Kernel Offset: disabled
-
-And I have also another data point: Linux 7.2.6 is _not_ affected. And
-similarly, Linux 7.3-rc3 works fine (haven't tried -rc4 yet).
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
+Thanks,
+Sang-Hoon Choi
 
