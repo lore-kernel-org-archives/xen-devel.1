@@ -4,43 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E8789C982ED
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 16:45:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1427771.1650546 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 466F3C982E6
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 17:04:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1427781.1650555 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8h8C-0008EL-1a; Mon, 21 Sep 2026 16:44:40 +0000
+	id 1x8hQm-0002oD-Lk; Mon, 21 Sep 2026 17:03:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1427771.1650546; Mon, 21 Sep 2026 16:44:40 +0000
+Received: by outflank-mailman (output) from mailman id 1427781.1650555; Mon, 21 Sep 2026 17:03:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8h8B-0008EE-Ui; Mon, 21 Sep 2026 16:44:39 +0000
-Received: by outflank-mailman (input) for mailman id 1427771;
- Mon, 21 Sep 2026 16:44:38 +0000
+	id 1x8hQm-0002o6-Ih; Mon, 21 Sep 2026 17:03:52 +0000
+Received: by outflank-mailman (input) for mailman id 1427781;
+ Mon, 21 Sep 2026 17:03:51 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1x8h8A-0008E8-2G
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 16:44:38 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c4ec74f000072c4@swg.vates.tech>)
+ id 1x8hQl-0002o0-Aj
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 17:03:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8h89-00D9Kf-FM
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 18:44:37 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6ab15ec5-bab6-0a2a0a5309dd-0a2a45029d2c-42
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 18:44:37 +0200
-Received: from [103.168.172.153] (helo=fhigh-a2-smtp.messagingengine.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6ab15ef4-6ca4-0a2a45020019-67a8ac998841-3
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 18:44:36 +0200
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfhigh.phl.internal (Postfix) with ESMTP id C92B914000BD;
- Mon, 21 Sep 2026 12:44:35 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-05.internal (MEProxy); Mon, 21 Sep 2026 12:44:35 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Mon,
- 21 Sep 2026 12:44:33 -0400 (EDT)
+ id 1x8hQj-00DBYV-92
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 19:03:49 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c4ec74f000072c4@swg.vates.tech>)
+ id 6ab16370-bab6-0a2a0a5309dd-0a2a450b984e-6
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 19:03:49 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c4ec74f000072c4@swg.vates.tech>)
+ id 6ab16374-b7e8-0a2a450b0019-b9ff1c12a72d-3
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 19:03:48 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a0c4ec74f000072c4.006 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 21 Sep 2026 17:03:45 +0000
+Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 1AD698115F;
+ Mon, 21 Sep 2026 19:03:45 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,226 +58,315 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm1 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm1; t=1790009075;
-	 x=1790095475; bh=zjivBsa9hsRYHRNcFKFS9TSN3LLieSyZGZ06Ds3oU04=; b=
-	ETOnTJrWCFgnFf/C6RW39dzZVGm9alXCueR8hrIYvyhVK8RxNGOJ3OBhs38QifwK
-	Gd/b0d8HjsrrNbRIEKPqx/2AZwA8lrpMeqkU9fgFMkFLA1an3zIpHfKWcYIsn0CI
-	aKtNx2/7C4QYRxoPxjGafhTx+EInGybRln/BP8LTVlQevCgBsVu5GpS6RIvARYlD
-	dFRTcZvm06/nhqQ3uj6a1EBIltNrr7VfTvD1ct1HsppWzC9XyaD3jh2/85aWS5vC
-	txPKZ3eIWTWEIne68UlhLAOTEkaXyBUCKK211Mpdcr/Z85aKHUv1AdkFpifKBbjH
-	jNIULI84Px6RykN2jLUoHQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1790009075; x=1790095475; bh=zjivBsa9hsRYHRNcFKFS9TSN3LLieSyZGZ0
-	6Ds3oU04=; b=VKcMeiVtck82x1r/UyvCXPeKBPcVIOpbiLym7cqzPvPhJLsdZp1
-	9s+QNXETbUNvzxGoGahycJ7vl1NOZ045Vvl+lF58R7PcoLvhGtv9g9lQFTKe0xka
-	IL9yBbYA3v8iaW8ZB9xuc9hIc1+XR1N8qYSrCLIhKrNUyrhWPu9X+KyFBMuP0uCm
-	9RsBxp6aM4gF/lPyXboPKE8bnOsMI3s7kcF5HKhdkLD2WVzir4SuEXpzeRHjYyy/
-	uceQqwtXZWhQKJ2mvaDFAJMtcgStz9u6RGqkfikyY7n/LxaTpDGgIVEPkzI+ES1z
-	QU45+tsWIgJiLG6lggy9LF9WgS/CAl/ZStw==
-X-ME-Sender: <xms:816xahJ1LXzvp-yUi51Wp_yPlvOBzkMZQGoT40iBcnuMYf6HQYFQgQ>
-    <xme:816xaiG6rUwTFXAUUl5CCiPAfcinsSTWArg-r2yZw1WuyNyZl776JOkszTL823t0t
-    rDFSHFIzASozQwuI9FCltLtOOCBcmhU4a2QkETLoedAXjomRw>
-X-ME-Received: <xmr:816xat8VHnFPJuKWO2gnQin-jdnfpxHhIl7PMeLxLfgGEC8fi8DQMYL5aszSmTrLY5txy0FdhpUAxvEzasxUsAkVtPuTCSQkQXvJ7klAPGo>
-X-ME-Proxy-Cause: dmFkZTEeJuUSXcXeoFym2RhUCdnjC1hVcyJNbiXzRJfWYXLtKAJXYGAPCakl5qcp6/SKXs
-    MGNNYK1DQXRQ2t//wFMwqiisHDJwLqn7jO49xQPd0WPBSlYe9lDssGROHDQsS8Bk7FlTe6
-    0EvM8fIU92OKf3+3Gigm9Qce8DcAbAIPunT5xFIRRF3Ty8X1bTicArUlkdPTZol/UiwrKd
-    Hobiz/pIFccJHnBJIevVebKUXyOh1TNjvla/N5w0hybdKG7+G/uRJtzwe5hkpZvwhe8zUR
-    2+UHThMzf4dYYKG+me1Y9hzKWbr+1QfhRSj7X745j7VRthIymvfnGMWTNMvihukkwdkZl+
-    qHJZYmWrhaTHFuidDeOXKl58oQjIrx8ft2kjCTJdv/Q4FvyJ4tprsGwOBViHTQREvOU+Xe
-    a16oR2BSKbPhYqK61AcYux0Y71upCmsQiYMaql4UhguxQE1QfvDkh+iz9MIpgmPqWSiaqn
-    bwMcE4vt5kvoLHIkEVw8zx2GdJ3213MnEjFRH4vW4CjcZ6+uSS4YGiDlAlmCsMXxvguEDv
-    18N/psr8ZwybdP1rujQDtYLnfDep6bjEx8oioZ/A6UfJ8+mw5/yQpC30VzG4PhYCYqkbk9
-    FRaVrq5qGyQEBQTDZpgAPeYS6mPpd6ZgO0JPOPln4Vv9dzAyne0/GJjgpNTg
-X-ME-Proxy: <xmx:816xaiJgq853xS5tN-BLCraQiqOkZKbLFnWVYo3D-1TMXudqaXoXpg>
-    <xmx:816xart2tdtEtBCWdWYvKd3bB2StsRBrJzqdjkusdlX1AoKswkRamA>
-    <xmx:816xapB2H6u-tVayBeTar35szQVWML6bFau1oEinGM6HrePo5mZgNw>
-    <xmx:816xajMUUcH--87Ycu2a5W1iaMiwwU_5sxvdhziSshYNCq5DHrJjwg>
-    <xmx:816xagAoWBUPSw0s7yC1piPv0zpMXd7gPP4Srdym09Jee9u61TWOtbr9>
-Feedback-ID: i1568416f:Fastmail
-Date: Mon, 21 Sep 2026 18:44:31 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: "Rafael J. Wysocki (Intel)" <rafael@kernel.org>
-Cc: Support TRINITY <support@trinity-net.com>,
-	regressions <regressions@lists.linux.dev>,
-	linux-acpi <linux-acpi@vger.kernel.org>,
-	linux-pm <linux-pm@vger.kernel.org>,
-	xen-devel <xen-devel@lists.xenproject.org>,
-	linux-kernel <linux-kernel@vger.kernel.org>,
-	Huisong Li <lihuisong@huawei.com>
-Subject: Re: [REGRESSION] ACPI processor/cpuidle change in 6.18.52 breaks
- bare-metal Xen dom0 boot
-Message-ID: <arFe7-xa3HtCUOHs@mail-itl>
-References: <905771062.272724286.1789919301858.JavaMail.zimbra@trinity-net.com>
- <CAJZ5v0gg7kBtEhagR9SYKaPNstPC6aSyP7W4xBjP1r-kzbcH1A@mail.gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=nFN7+0Yt3+MnStuj92rJ7nzyMbzgriCI4a7p5fqJd3g=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=YxwCr3ol7fTxAJnM+GrTXXDGGKfIxM24CuMCK7LdS2JUefhEA2rLNwD5AFrYlryAxQUB09pIo
+ 1ajVsV9Si7mCjDCUYB6YdJ7Vu0HFmbexh7zmUp21cfyfMLQy14ibDs9C2OICu1hFl8Z4/TTVIlH
+ IMP0hoyPcHN2k68BlHvmbSx1UikX72PxLVWf0oRV3GtItfOz4jAIlWjiXcu5LWcWnSi6utGke+S
+ ndMW+GVPFA5KU8/3sNbUeYAhiwK+FYvqOK2boxcmNxSlthA6Ruhnq17xbyFvM+WHsH4+FBNaPF1
+ zohjcbx9wu8LEkVrbTVsZ/QShkW1X6ermyo6rGlsK/Nw==
+X-Zone-Loop: 1d52740d9342a53dd63c30c3576c447c708fb3e5ba3a
+x-campaign-type: default
+x-transaction-id: ea8baf98-ea3f-4d79-ad40-0fc26f7ebde9
+x-swg-uid: 01-1ab7c777-214b-4db6-8eb7-d3bd7c7e8d62
+X-Mailer: Sweego
+Message-ID:
+ <1790010225.8631fc262581453bbf619ec5b2062170.1a0c4ec74f000072c4@vates.tech>
+x-swg-bid: 1790010225.8631fc262581453bbf619ec5b2062170.1a0c4ec74f000072c4
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="Lth3KI9EydCmQGrl"
-Content-Disposition: inline
-In-Reply-To: <CAJZ5v0gg7kBtEhagR9SYKaPNstPC6aSyP7W4xBjP1r-kzbcH1A@mail.gmail.com>
-X-purgate-ID: tlsNG-720697/1790009077-670B02AC-B1CC4B66/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+Subject: Re: [PATCH v2 1/6] xen/riscv: fix Svade/Svadu A/D bit handling
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ xen-devel@lists.xenproject.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <450d0c5e-2101-4b1c-98fd-2f438bd0ccf3@suse.com>
+References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
+ <1789032897.8631fc262581453bbf619ec5b2062170.1a08aab9d76000c4f3@vates.tech>
+ <450d0c5e-2101-4b1c-98fd-2f438bd0ccf3@suse.com>
+Date: Mon, 21 Sep 2026 19:03:39 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790010219; l=12521;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=ZrRyxxlRPHz5I5lHZ2pJSefPtiVW4YoKEOxkzdtW4hE=;
+ b=XHZ16m5qViLmyfz9Edg+6l/zcIS3nsA9f/OrLTN/eXFYH13C71VFuSpTBhjgO/Ep4GJYdmjVb
+ 3kOtdYWKqQ4AjUfFZXvjyF6LhgWjnvCyPJkE6FsQ15yN1z/FtVs8K6B
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1790010225291
+X-purgate-ID: tlsNG-42698a/1790010229-182F49EA-9D536384/0/0
 X-purgate-type: clean
-X-purgate-size: 6501
+X-purgate-size: 12525
 
---Lth3KI9EydCmQGrl
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Mon, 21 Sep 2026 18:44:31 +0200
-From: Marek =?utf-8?B?PT91dGYtOD9RP01hcmN6eWtvd3NraS1HPUMzPUIzcmVja2k/PQ==?= <marmarek@invisiblethingslab.com>
-To: "Rafael J. Wysocki (Intel)" <rafael@kernel.org>
-Cc: Support TRINITY <support@trinity-net.com>,
-	regressions <regressions@lists.linux.dev>,
-	linux-acpi <linux-acpi@vger.kernel.org>,
-	linux-pm <linux-pm@vger.kernel.org>,
-	xen-devel <xen-devel@lists.xenproject.org>,
-	linux-kernel <linux-kernel@vger.kernel.org>,
-	Huisong Li <lihuisong@huawei.com>
-Subject: Re: [REGRESSION] ACPI processor/cpuidle change in 6.18.52 breaks
- bare-metal Xen dom0 boot
+On 2026-09-21 17:26:47+02:00, Jan Beulich wrote:
+> On 10.09.2026 11:34, Baptiste Le Duc wrote:
+> 
+> > p2m_set_permission() only presets the PTE A/D bits when the Svade extension
+> > is present in the device tree. This causes an unhandled page fault when
+> > neither Svade nor Svadu is present (the platform's actual behaviour is then
+> > unknown), and when both are present in the device tree.
+> > 
+> > Move the Svade/Svadu resolution out of p2m_set_permission() and into a new
+> > riscv_resolve_ad_scheme(), called once from riscv_fill_hwcap(). For each of
+> > the four possible Svade/Svadu combinations (inspired by [1]), it decides
+> > whether software has to preset the A/D bits and, if so, sets
+> > RISCV_ISA_EXT_svade to record that decision:
+> > - neither present: assume Svade, since assuming Svade is harmless on real
+> >   Svadu hardware, while assuming Svadu on real Svade hardware risks an
+> >   unhandled page fault
+> > - only Svade present: assume Svade
+> > - only Svadu present: leave A/D management to hardware
+> > - both present: Svade wins until Xen supports the SBI FWFT call needed to
+> >   enable hardware updating of A/D bits, so assume Svade and warn that
+> >   dropping 'svade' from the DT is the only way to get Svadu.
+> > 
+> > [1] https://lwn.net/Articles/980016/
+> > 
+> > Fixes: ff14053983b0 ("xen/riscv: Implement p2m_pte_from_mfn() and support PBMT configuration")
+> > Assisted-by: Claude:claude-opus-5
+> > Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> > ---
+> > Changes since v1:
+> > - change commit title
+> > - expose RISCV_ISA_EXT_svadu so the two extensions can be told apart.
+> > - move the Svade/Svadu resolution to a new riscv_resolve_ad_scheme(),
+> >   called once from riscv_fill_hwcap().
+> > - expose sbi_probe_extension() (was static) to probe for SBI FWFT.
+> > - stop presetting A/D bits unconditionally in p2m_set_permission(), do it
+> >   only when Svade is present.
+> > ---
+> >  xen/arch/riscv/cpufeature.c             | 59 +++++++++++++++++++++++++++++++++
+> >  xen/arch/riscv/include/asm/cpufeature.h |  1 +
+> >  xen/arch/riscv/include/asm/sbi.h        |  8 +++++
+> >  xen/arch/riscv/p2m.c                    | 47 ++++++++++----------------
+> >  4 files changed, 86 insertions(+), 29 deletions(-)
+> > 
+> > diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
+> > index 92235fdfd5..19454544a7 100644
+> > --- a/xen/arch/riscv/cpufeature.c
+> > +++ b/xen/arch/riscv/cpufeature.c
+> > @@ -18,6 +18,7 @@
+> >  
+> >  #include <asm/cpufeature.h>
+> >  #include <asm/csr.h>
+> > +#include <asm/sbi.h>
+> >  
+> >  #ifdef CONFIG_ACPI
+> >  # error "cpufeature.c functions should be updated to support ACPI"
+> > @@ -468,6 +469,62 @@ static bool __init has_isa_extensions_property(void)
+> >      return false;
+> >  }
+> >  
+> > +/*
+> > + * Svade and Svadu extensions represent two schemes for managing the PTE A/D
+> > + * bits. When the PTE A/D bits need to be set, the Svade extension indicates
+> > + * that a page fault will be raised. In contrast, the Svadu extension supports
+> > + * hardware updating of the PTE A/D bits.
+> > + *
+> > + * There are 4 possible combinations of these extensions in the device tree.
+> > + * The default hardware behavior for each is:
+> > + *
+> > + * 1) Neither Svade nor Svadu present in DT => It is technically unknown
+> > + *    whether the platform uses Svade or Svadu. Xen should be prepared to
+> > + *    handle either hardware updating of the PTE A/D bits or page faults when
+> > + *    they need updating. In that case, Xen assumes Svade because it's
+> > + *    harmless if the platform is actually Svadu, while assuming Svadu on real
+> > + *    Svade hardware risks an unhandled page fault.
+> > + *
+> > + * 2) Only Svade present in DT => Xen must assume Svade to be always enabled.
+> > + *
+> > + * 3) Only Svadu present in DT => Xen must assume Svadu to be always enabled.
+> > + *
+> > + * 4) Both Svade and Svadu present in DT => Xen must assume Svadu is turned off
+> > + *    at boot time by setting A/D bits. To use Svadu, the supervisor must
+> > + *    explicitly enable it using the SBI FWFT extension.
+> > + *
+> > + * The Svade extension is mandatory and the Svadu extension is optional in the
+> > + * RVA23 profile. Platforms wanting to take advantage of Svadu can choose
+> > + * option 3. Platforms aware of the profile can choose option 4, and Xen won't
+> > + * get the benefit of Svadu until the SBI FWFT extension is available.
+> > + *
+> > + * In other words, hardware manages the A/D bits on its own only in case 3, in
+> > + * all the other cases software has to preset them. Instead of open coding this
+> > + * in every A/D bits user, RISCV_ISA_EXT_svade is used to mean "software is
+> > + * responsible for the A/D bits" and is set here for the cases 1, 2 and 4.
+> > + */
+> > +static void __init riscv_resolve_ad_scheme(void)
+> > +{
+> > +    bool svade = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade);
+> > +    bool svadu = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu);
+> > +
+> > +    /* Case 3: leave the A/D bits management to hardware. */
+> > +    if ( svadu && !svade )
+> > +        return;
+> > +
+> > +    /* Case 4 */
+> > +    if ( svadu && svade ){
+> > +        if ( !sbi_probe_extension(SBI_EXT_FWFT) ){
+> 
+> Nit (style): Brace placement.
+Sorry for that. I will fix that in v3.
+> Furthermore this is written in a way which Misra would call "dead code". I'd
+> like to suggest (leaving out comments):
+> 
+>     if ( svadu )
+>     {
+>         if ( !svade )
+>             return;
+> 
+>         if ( !sbi_probe_extension(SBI_EXT_FWFT) )
+>             printk(...);
+>     }
+I assume you are referring to Misra C:2012 Rule 13.5 "The right operand
+of a logical && or || operand shall not contain persistent side effect"
 
-On Mon, Sep 21, 2026 at 05:26:55PM +0200, Rafael J. Wysocki (Intel) wrote:
-> On Sun, Sep 20, 2026 at 5:48=E2=80=AFPM Support TRINITY <support@trinity-=
-net.com> wrote:
-> >
-> > Hello,
-> >
-> > I am reporting a bare-metal Xen dom0 boot regression seen with Linux 6.=
-18.52.
-> >
-> > On affected systems, Linux 6.18.51 boots successfully as Xen dom0 on ba=
-re metal, while Linux 6.18.52 consistently black-screens before dom0 usersp=
-ace/networking comes up.
-> >
-> > #regzbot introduced: v6.18.51..v6.18.52
-> > #regzbot title: ACPI processor/cpuidle lifecycle change breaks bare-met=
-al Xen dom0 boot
-> > #regzbot link: https://gitlab.alpinelinux.org/alpine/aports/-/work_item=
-s/18447
-> >
-> > Tested results:
-> >
-> > Linux 6.18.51-r0, Xen dom0, bare metal: boots
-> > Linux 6.18.52-r0, Xen dom0, bare metal: black screen before userspace/n=
-etwork
->=20
-> I'm wondering what's special about Xen dom0 bare metal.
->=20
-> Does adding processor=3Dnocst to the kernel command line help, by any cha=
-nce?
+If yes, IMO, I think it doesn't apply here as `svade` is evaluated
+before the `if` so there is no side effect that wouldn't have been
+executed in case of svadu=false.
 
-It does not.
+> 
+> > +          printk(XENLOG_WARNING "RISC-V: Both Svade and Svadu detected, but SBI FWFT is missing.\n"
+> > +                  "RISC-V: Defaulting to software A/D updates (Svade).\n"
+> > +                  "RISC-V: To force hardware A/D updates (Svadu), remove 'svade' from DT.\n");
+> 
+> Nit (style): Indentation (in multiple ways). Furthermore XENLOG_* needs
+> repeating after every newline.
+> 
+> > +        }
+> > +    }
+> > +
+> > +    /* Cases 1, 2: Xen assume Svade to be enabled */
+> > +    __set_bit(RISCV_ISA_EXT_svade, riscv_isa);
+> 
+> Isn't this a lie (to ourselves) then?
+If you are talking about case 1:
+    [1] Yes, it's technically a lie for boards shipped before
+    the svade/svadu extension was ratified (e.g., HiFive Premier P550).
+    These extensions merely formalized a mechanism that already existed in
+    hardware.
 
-> The patch is essentially a revert of commit 13ebeef6a1b9 ("ACPI:
-> processor: idle: Optimize ACPI idle driver registration") which I'd
-> rather not do without knowing what exactly is going on.
->=20
-> At this point it looks like a missing check somewhere or similar, so
-> it would be good to find out where exactly it crashes.
+    [2] For boards that do support svade, we could enforce DT
+    declaration by adding it to `required_extension` as they are
+    explicitly supporting it. However, doing so would cause boards
+    without svade/svadu support (as described above) to hit a panic
+    during boot.
 
-I can reproduce the crash, I get this:
+    So in both case ([1], [2]), the svade extension exist either implicitely or
+    explicitly. Therefore, force it doesn't compromize anything.
 
-[    3.525669] BUG: kernel NULL pointer dereference, address: 0000000000000=
-008
-[    3.525677] #PF: supervisor read access in kernel mode
-[    3.525681] #PF: error_code(0x0000) - not-present page
-[    3.525685] PGD 0 P4D 0=20
-[    3.525688] Oops: Oops: 0000 [#1] SMP NOPTI
-[    3.525693] CPU: 0 UID: 0 PID: 21 Comm: cpuhp/0 Not tainted 6.18.52-1.qu=
-bes.23.fc41.x86_64 #1 PREEMPT(full)=20
-[    3.525700] Hardware name: Micro-Star International Co., Ltd. MS-7E06/PR=
-O Z790-P WIFI (MS-7E06), BIOS Dasharo (coreboot+UEFI) v0.9.1 01/17/2024
-[    3.525706] RIP: e030:cpuidle_register_device+0xd2/0x350
-[    3.525714] Code: 00 00 8b 55 04 49 89 c5 49 89 d4 81 fa ff 1f 00 00 0f =
-87 68 02 00 00 48 8b 04 d5 c0 a0 19 82 48 83 3c 18 00 0f 85 ad 48 12 ff <49=
-> 8b 7d 08 48 89 14 24 e8 31 73 30 ff 84 c0 0f 84 72 01 00 00 41
-[    3.525723] RSP: e02b:ffffc90040133db8 EFLAGS: 00010246
-[    3.525727] RAX: ffff888235f5c000 RBX: ffffffff834d4d40 RCX: 00000000000=
-00000
-[    3.525732] RDX: 0000000000000000 RSI: 0000000000000007 RDI: ffff888101c=
-39c00
-[    3.525736] RBP: ffff888101c39c00 R08: 4ec4ec4ec4ec4ec5 R09: ffff888101c=
-39c00
-[    3.525740] R10: ffffc90040133df8 R11: 0000000000000000 R12: 00000000000=
-00000
-[    3.525744] R13: 0000000000000000 R14: 0000000000000000 R15: ffffffff834=
-d4d40
-[    3.525752] FS:  0000000000000000(0000) GS:ffff888235f5c000(0000) knlGS:=
-0000000000000000
-[    3.525757] CS:  e030 DS: 0000 ES: 0000 CR0: 0000000080050033
-[    3.525761] CR2: 0000000000000008 CR3: 000000000242c000 CR4: 00000000000=
-50660
-[    3.525768] Call Trace:
-[    3.525771]  <TASK>
-[    3.525775]  acpi_processor_power_init+0xde/0x150
-[    3.525782]  ? __pfx_acpi_soft_cpu_online+0x10/0x10
-[    3.525787]  acpi_soft_cpu_online+0x123/0x170
-[    3.525792]  cpuhp_invoke_callback+0x134/0x470
-[    3.525797]  ? __pfx_smpboot_thread_fn+0x10/0x10
-[    3.525802]  cpuhp_thread_fun+0xa2/0x170
-[    3.525806]  smpboot_thread_fn+0xf3/0x220
-[    3.525810]  kthread+0xfc/0x240
-[    3.525814]  ? __pfx_kthread+0x10/0x10
-[    3.525818]  ? __pfx_kthread+0x10/0x10
-[    3.525822]  ret_from_fork+0x158/0x170
-[    3.525827]  ? __pfx_kthread+0x10/0x10
-[    3.525830]  ret_from_fork_asm+0x1a/0x30
-[    3.525835]  </TASK>
-[    3.525837] Modules linked in:
-[    3.525842] CR2: 0000000000000008
-[    3.525845] ---[ end trace 0000000000000000 ]---
-[    3.525849] RIP: e030:cpuidle_register_device+0xd2/0x350
-[    3.525854] Code: 00 00 8b 55 04 49 89 c5 49 89 d4 81 fa ff 1f 00 00 0f =
-87 68 02 00 00 48 8b 04 d5 c0 a0 19 82 48 83 3c 18 00 0f 85 ad 48 12 ff <49=
-> 8b 7d 08 48 89 14 24 e8 31 73 30 ff 84 c0 0f 84 72 01 00 00 41
-[    3.525862] RSP: e02b:ffffc90040133db8 EFLAGS: 00010246
-[    3.525866] RAX: ffff888235f5c000 RBX: ffffffff834d4d40 RCX: 00000000000=
-00000
-[    3.525870] RDX: 0000000000000000 RSI: 0000000000000007 RDI: ffff888101c=
-39c00
-[    3.525874] RBP: ffff888101c39c00 R08: 4ec4ec4ec4ec4ec5 R09: ffff888101c=
-39c00
-[    3.525878] R10: ffffc90040133df8 R11: 0000000000000000 R12: 00000000000=
-00000
-[    3.525882] R13: 0000000000000000 R14: 0000000000000000 R15: ffffffff834=
-d4d40
-[    3.525889] FS:  0000000000000000(0000) GS:ffff888235f5c000(0000) knlGS:=
-0000000000000000
-[    3.525894] CS:  e030 DS: 0000 ES: 0000 CR0: 0000000080050033
-[    3.525898] CR2: 0000000000000008 CR3: 000000000242c000 CR4: 00000000000=
-50660
-[    3.525904] Kernel panic - not syncing: Fatal exception
-[    3.525931] Kernel Offset: disabled
+> 
+> > --- a/xen/arch/riscv/include/asm/sbi.h
+> > +++ b/xen/arch/riscv/include/asm/sbi.h
+> > @@ -30,6 +30,7 @@
+> >  #define SBI_EXT_BASE                    0x10
+> >  #define SBI_EXT_RFENCE                  0x52464E43
+> >  #define SBI_EXT_TIME                    0x54494D45
+> > +#define SBI_EXT_FWFT                    0x46574654
+> >  
+> >  /* SBI function IDs for BASE extension */
+> >  #define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
+> > @@ -138,6 +139,13 @@ int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
+> >  int sbi_remote_hfence_gvma_vmid(const cpumask_t *cpu_mask, vaddr_t start,
+> >                                  size_t size, unsigned long vmid);
+> >  
+> > +/**
+> > + * Check if an SBI extension ID is supported or not.
+> > + * @extid: The extension ID to be probed.
+> > + *
+> > + * @return: 1 or an extension specific nonzero value if yes, 0 otherwise.
+> > + */
+> > +int sbi_probe_extension(long extid);
+> >  /*
+> 
+> Nit (style): Also add a blank line.
+> 
+> > --- a/xen/arch/riscv/p2m.c
+> > +++ b/xen/arch/riscv/p2m.c
+> > @@ -586,42 +586,31 @@ static inline void p2m_clean_pte(pte_t *p, bool clean_cache)
+> >  
+> >  static void p2m_set_permission(pte_t *e, p2m_type_t t)
+> >  {
+> > +    bool svade = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade);
+> > +    bool svadu = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu);
+> > +
+> >      e->pte &= ~PTE_ACCESS_MASK;
+> >  
+> >      e->pte |= PTE_USER;
+> >  
+> >      /*
+> > -     * Two schemes to manage the A and D bits are defined:
+> > -     *   • The Svade extension: when a virtual page is accessed and the A bit
+> > -     *     is clear, or is written and the D bit is clear, a page-fault
+> > -     *     exception is raised.
+> > -     *   • When the Svade extension is not implemented, the following scheme
+> > -     *     applies.
+> > -     *     When a virtual page is accessed and the A bit is clear, the PTE is
+> > -     *     updated to set the A bit. When the virtual page is written and the
+> > -     *     D bit is clear, the PTE is updated to set the D bit. When G-stage
+> > -     *     address translation is in use and is not Bare, the G-stage virtual
+> > -     *     pages may be accessed or written by implicit accesses to VS-level
+> > -     *     memory management data structures, such as page tables.
+> > -     * Thereby to avoid a page-fault in case of Svade is available, it is
+> > -     * necessary to set A and D bits.
+> > -     *
+> > -     * TODO: For now, it’s fine to simply set the A/D bits, since OpenSBI
+> > -     *       delegates page faults to a lower privilege mode and so OpenSBI
+> > -     *       isn't expect to handle page-faults occured in lower modes.
+> > -     *       By setting the A/D bits here, page faults that would otherwise
+> > -     *       be generated due to unset A/D bits will not occur in Xen.
+> > -     *
+> > -     *       Currently, Xen on RISC-V does not make use of the information
+> > -     *       that could be obtained from handling such page faults, which
+> > -     *       could otherwise be useful for several use cases such as demand
+> > -     *       paging, cache-flushing optimizations, memory access tracking,etc.
+> > +     * riscv_fill_hwcap() sets either RISCV_ISA_EXT_svade or
+> > +     * RISCV_ISA_EXT_svadu (mutually exclusive) depending on the Svade/Svadu
+> > +     * device tree combination (see riscv_resolve_ad_scheme()):
+> > +     * - RISCV_ISA_EXT_svade means that software is responsible for the A/D
+> > +     *   bits.
+> > +     * - RISCV_ISA_EXT_svadu means the hardware is responsible for the A/D
+> > +     *   bits.
+> >       *
+> > -     *       To support the more general case and the optimizations mentioned
+> > -     *       above, it would be better to stop setting the A/D bits here and
+> > -     *       instead handle page faults that occur due to unset A/D bits.
+> > +     * Currently, when RISCV_ISA_EXT_svade is set, Xen doesn't track A/D
+> > +     * bits, so it does not make use of the information that could be
+> > +     * obtained from handling the resulting page faults, which could
+> > +     * otherwise be useful for several use cases such as demand paging,
+> > +     * cache-flushing optimizations, memory access tracking, etc. To avoid
+> > +     * such a page fault, Xen presets the A and D bits instead.
+> >       */
+> > -    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
+> > +    ASSERT(svade != svadu); /* exactly one of svade/svadu must be set by riscv_fill_hwcap() */
+> 
+> Here I'm lost: riscv_resolve_ad_scheme() specifically handles the "both set"
+> case. How can you then assert that exactly one of them is set?
+Because in the future, with SBI FWFT support, both extensions could be
+supported by the hardware and listed in the DT. Xen could still assume
+that only Svadu is turned-off at boot time but then, to use Svadu, it
+should explicitly enable it by using SBI FWFT extension.
 
-And I have also another data point: Linux 7.2.6 is _not_ affected. And
-similarly, Linux 7.3-rc3 works fine (haven't tried -rc4 yet).
+I agree it's not needed right now. I'll drop it until then.
+> 
+> Apart from this the line is also too long and the comment doesn't match our
+> style.
+> 
+> Jan
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
 
---Lth3KI9EydCmQGrl
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmqxXu8ACgkQ24/THMrX
-1yxeNAf8CqjSP8UmFu0EwOUBtvbUXkkKyQgSNjKPFIYIh4LYPPhWtXqrWzp3GKn4
-1QbwQSmgEPWpJjLi5/zkNGpJ75gPkJbzDCcD82D39fYjcncHWfD2LCh7LHHOM94J
-1z+dqF6L6llqEgeKxcFNDX8eWopBznsp5XNv0wVtYAlt9Qdl89FGYg5qsFecbwno
-aDEuUVfT46CQ6+6+eY/mNyifgQcNlFnmShIOR0OXjKghsOzNwU+Geyin3/Kylh/g
-9adNQ+eNkUod/gidhUZxUS0O2Q3ZDlM2CHnkItGEWj3vu8OTsvUZrBcussfKnPHD
-60t/CiN4kdY1vKqB0SqRGgKmVy4d9w==
-=n6Pq
------END PGP SIGNATURE-----
-
---Lth3KI9EydCmQGrl--
 
