@@ -4,52 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95DD3C982ED
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 15:24:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1427658.1650460 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 479C7C982E6
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 15:26:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1427665.1650469 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8fs4-0001k5-Di; Mon, 21 Sep 2026 15:23:56 +0000
+	id 1x8ful-0002Lk-UY; Mon, 21 Sep 2026 15:26:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1427658.1650460; Mon, 21 Sep 2026 15:23:56 +0000
+Received: by outflank-mailman (output) from mailman id 1427665.1650469; Mon, 21 Sep 2026 15:26:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8fs4-0001jy-As; Mon, 21 Sep 2026 15:23:56 +0000
-Received: by outflank-mailman (input) for mailman id 1427658;
- Mon, 21 Sep 2026 15:23:55 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x8ful-0002Ld-RV; Mon, 21 Sep 2026 15:26:43 +0000
+Received: by outflank-mailman (input) for mailman id 1427665;
+ Mon, 21 Sep 2026 15:26:43 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1x8fs2-0001jr-QY
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 15:23:55 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x8ful-0002LX-8h
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 15:26:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8fs1-00DcgC-8R
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 17:23:53 +0200
+ id 1x8fuk-002qWR-Lu
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 17:26:42 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jgross@suse.com>)
- id 6ab14c08-e002-0a2a0a5209dd-0a2a4507c91a-6
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 17:23:53 +0200
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab14ca3-bab6-0a2a0a5309dd-0a2a45078188-18
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 17:26:42 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jgross@suse.com>)
- id 6ab14c08-b4ea-0a2a45070019-c387df82e38e-3
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 17:23:53 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 89916219B3;
- Mon, 21 Sep 2026 15:23:44 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 33B9E13793;
- Mon, 21 Sep 2026 15:23:42 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id UKI5A/5LsWrMfAAAD6G6ig
- (envelope-from <jgross@suse.com>); Mon, 21 Sep 2026 15:23:42 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab14cb2-b4ea-0a2a45070019-d155dd2ea446-3
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 17:26:42 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-48586861639so4460f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 08:26:42 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-487244608a3sm22580081f8f.8.2026.09.21.08.26.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Sep 2026 08:26:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,522 +53,318 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1790004228; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=/VkC67msFQZzDCHeLIME8y32FTfMzKWh+3d2Bu15lIs=;
-	b=eGWxoMWWjb3KQyPwLxRQ56DQpkuu47zbkNyrbyWWCoS86qr+Oo5WwgNwIoR0fSB2C5Id4S
-	Rwc7fbuSbUSuE0sy2ZvFIkDOceABsXXvFuIGhXCczV73CZDRRcwQcWDgbhGir3pWjGnFjO
-	Mp3WgCJJlNn7gTxAM0lkAwsHcuGvqdk=
-Authentication-Results: smtp-out1.suse.de;
-	dkim=pass header.d=suse.com header.s=susede1 header.b=MG0RJ5NW
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1790004224; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=/VkC67msFQZzDCHeLIME8y32FTfMzKWh+3d2Bu15lIs=;
-	b=MG0RJ5NWcjT0bvQlmoPyqzoMfwSY52OvREe84/xPqggmc9Jh3O2yB0v8OIg0cMAMHs7eJ7
-	S9R9zcd/RpnTqTQgUSOAEWXIk56GZ40SwbQQWFMzQesRCvvJyzU/8CcCF4qABST5JrxOGQ
-	cqwdlWChCyZ+ZgdWGE0m3wWY9ArV0WQ=
-Message-ID: <6df2617a-5bee-4bac-822d-a4ca09c47e76@suse.com>
-Date: Mon, 21 Sep 2026 17:23:41 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1790004402; x=1790609202; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=DdX4buUzE3yjIfRsl+nmkTj/01kjnaaILXJBm0HCW1E=;
+        b=beMWcwYO5I/DfFnlfsSk1j7uzhYIepA6hUYZR7AsM7CV/SdTXf9+VOFyP5pEs+kqVv
+         cNfWjLMUj0r21OUBeBUJy6WK3qWB1qE6jWuDYB0z59FL5GVZXbwhJxs8sAyWDqVa7e3M
+         gYNDZzxOZrAn8Bep5uX7msqqcXll07U12GRMk6jP51MxR8gaQtDYJX9v98hnYv+A3R1v
+         oljIaZEtik84UMQVtBFBXa+MCCBJ1Q65v2m5zUR9VR785Mv1hOig2vWADmvp0ijmUYAZ
+         +GGNUPy9RNSBglieXLWyhQtccXFXsqlwiAKcss1PaDfIUzhbCHcioHHyhp/k1wOvd1Xq
+         YguA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790004402; x=1790609202;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=DdX4buUzE3yjIfRsl+nmkTj/01kjnaaILXJBm0HCW1E=;
+        b=vXZ2XqmUcQ2IwOJ38wdm3DZLWcTEVXsJB0pGXL6qE7hZ+uA++nfKswd1TZfWKKPAwg
+         a996ccqXttQCfPx6G8XiyQ79JgZ5ggi3I3RK4J46LCQseWrXJGpDcg9Ek+p2Ym29DkCU
+         Aqg30TP2A/m9V7UnpHBMDeLqtwTfSoY/bWc+7ckELwUWEozUDWpdj3sjJj6P0JDPO4CL
+         eRDf0Cc8URv3nZZtZYQbtn6vjhcTXLN+8Yx/1eoeFQKKDzSsBuNvyJ1oKh5g11BFO0Hx
+         uJZsac+zY0oypF+qcsiJxJT4VCbdrNC2vXMT6D3WdQLfnJc9WXZfoGSCOL/58WqjyTi2
+         h+ug==
+X-Gm-Message-State: AFuF++k6has4capiCvwHKl4ryE6TBObPtEHeTGR8SHLxbJhlkLScngdv
+	lWnvdmGqzTf6miEZ4HnYVX6ZXckffhZhn2kR1RMlliArUjpk8rTqrjco7tWfjzkR2w==
+X-Gm-Gg: AYBFou3KcckqqCzuqL1bZs1ttJAhuOuYWKhAFcFTI91OuY82JcVuIzC73ppPyJ08u2C
+	TzjUrSrcdcqq7k4tN4bv/IpOxrBzdyO6cA2nOvckb3y0wGQekw9IVVvisRoTcJnFR/3budAViyp
+	wr24ld6zrCuArSS+ob7BbfEk9J9IyyI8Z3VgOJguFnb+pgrTTA8ZTFGvisMSZuh9uM15bRkHhW+
+	EZXYH+Rj75RTvf1hHDYFKS/6i0KhAAaTIcy9kvCdq/M8XXXg400qMNrrhHJZMJcruC1PCLpXLyp
+	blzvDiAExbGJjUhB5d7jMD/I5HDhMFW4nKarTL9C2j/XxeKUOKGmUKK/kY+FwZCTDGIJjAiL0UX
+	hls4bMp9szHS2nPks71NHaKyuExfFoSJhZyz8Yuf1VozmKx4G9z8mEyNCvi+tJh2EXHUY+aUeL2
+	OLzI8TSGmjS753couUlr2h+KUhhSaqNMzrZW7VAJ9qtM8QUQli6nK6pqxSHbp8agVJTwoVR+PMf
+	k823uyL2Vp0okb7WKvES8e4NMOYva37w8YerEaNn2IG5XiKLGNM9anPDAHO1A==
+X-Received: by 2002:a05:6000:41ce:b0:487:462:d85d with SMTP id ffacd0b85a97d-48713c47239mr22961648f8f.18.1790004401859;
+        Mon, 21 Sep 2026 08:26:41 -0700 (PDT)
+Message-ID: <450d0c5e-2101-4b1c-98fd-2f438bd0ccf3@suse.com>
+Date: Mon, 21 Sep 2026 17:26:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 00/13] x86/msr: Drop 32-bit MSR interfaces
-To: linux-kernel@vger.kernel.org, x86@kernel.org,
- virtualization@lists.linux.dev, linux-ide@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
- linux-crypto@vger.kernel.org, linux-gpio@vger.kernel.org,
- linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
- kvm@vger.kernel.org, linux-edac@vger.kernel.org, linux-pci@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-coco@lists.linux.dev,
- linux-acpi@vger.kernel.org, linux-hwmon@vger.kernel.org,
- linux-mtd@lists.infradead.org, platform-driver-x86@vger.kernel.org,
- Ingo Molnar <mingo@redhat.com>
-Cc: Thomas Gleixner <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>,
- Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>,
- Ajay Kaher <ajay.kaher@broadcom.com>,
- Alexey Makhalov <alexey.makhalov@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Damien Le Moal
- <dlemoal@kernel.org>, Niklas Cassel <cassel@kernel.org>,
- David Airlie <airlied@redhat.com>, Helge Deller <deller@gmx.de>,
- linux-geode@lists.infradead.org, Olivia Mackall <olivia@selenic.com>,
- Herbert Xu <herbert@gondor.apana.org.au>, Linus Walleij <linusw@kernel.org>,
- Bartosz Golaszewski <brgl@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Peter Zijlstra <peterz@infradead.org>,
- Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
- Adrian Hunter <adrian.hunter@intel.com>, James Clark
- <james.clark@linaro.org>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
- Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>,
- Sean Christopherson <seanjc@google.com>, Paolo Bonzini
- <pbonzini@redhat.com>, Josh Poimboeuf <jpoimboe@kernel.org>,
- Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, Pu Wen <puwen@hygon.cn>,
- Tony Luck <tony.luck@intel.com>, Reinette Chatre
- <reinette.chatre@intel.com>, Dave Martin <Dave.Martin@arm.com>,
- James Morse <james.morse@arm.com>, Babu Moger <babu.moger@amd.com>,
- Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>,
- Vitaly Kuznetsov <vkuznets@redhat.com>, Andy Lutomirski <luto@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>, "Rafael J. Wysocki"
- <rafael@kernel.org>, Pavel Machek <pavel@kernel.org>,
- Kiryl Shutsemau <kas@kernel.org>, Rick Edgecombe
- <rick.p.edgecombe@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Len Brown <lenb@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>,
- Huang Rui <ray.huang@amd.com>, Mario Limonciello
- <mario.limonciello@amd.com>, Perry Yuan <perry.yuan@amd.com>,
- K Prateek Nayak <kprateek.nayak@amd.com>,
- Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
- Yazen Ghannam <yazen.ghannam@amd.com>, Guenter Roeck <linux@roeck-us.net>,
- Artem Bityutskiy <artem.bityutskiy@linux.intel.com>,
- Artem Bityutskiy <dedekind1@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- Ashok Raj <ashok.raj.linux@gmail.com>, Hans de Goede <hansg@kernel.org>,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- Rajneesh Bhardwaj <irenic.rajneesh@gmail.com>,
- Xi Pardee <xi.pardee@linux.intel.com>,
- Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
- Lukasz Luba <lukasz.luba@arm.com>, xen-devel@lists.xenproject.org
-References: <20260911074530.3140830-1-jgross@suse.com>
+Subject: Re: [PATCH v2 1/6] xen/riscv: fix Svade/Svadu A/D bit handling
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
+ <1789032897.8631fc262581453bbf619ec5b2062170.1a08aab9d76000c4f3@vates.tech>
 Content-Language: en-US
-From: Juergen Gross <jgross@suse.com>
-Autocrypt: addr=jgross@suse.com; keydata=
- xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
- ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
- dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
- NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
- XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
- AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
- CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
- mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
- G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
- kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
- Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
- RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
- vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
- sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
- aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
- w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
- auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
- 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
- fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
- HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
- QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
- ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <20260911074530.3140830-1-jgross@suse.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------axxK79NgUHTDoQRwnbgWpSYy"
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Rspamd-Queue-Id: 89916219B3
-X-Spamd-Result: default: False [-3.91 / 50.00];
-	BAYES_HAM(-3.00)[100.00%];
-	SIGNED_PGP(-2.00)[];
-	SUSPICIOUS_RECIPS(1.50)[];
-	MIME_BASE64_TEXT_BOGUS(1.00)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
-	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_BASE64_TEXT(0.10)[];
-	MIME_UNKNOWN(0.10)[application/pgp-keys];
-	MX_GOOD(-0.01)[];
-	FROM_HAS_DN(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:+,4:~,5:~];
-	RCVD_TLS_ALL(0.00)[];
-	ARC_NA(0.00)[];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FREEMAIL_CC(0.00)[kernel.org,alien8.de,linux.intel.com,zytor.com,broadcom.com,redhat.com,gmx.de,lists.infradead.org,selenic.com,gondor.apana.org.au,arndb.de,linuxfoundation.org,infradead.org,arm.com,google.com,intel.com,linaro.org,microsoft.com,hygon.cn,amd.com,zhaoxin.com,oracle.com,roeck-us.net,gmail.com,bootlin.com,nod.at,ti.com,lists.xenproject.org];
-	R_RATELIMIT(0.00)[to_ip_from(RLd6eq7w9gpcedu6aekum1umqh)];
-	DKIM_TRACE(0.00)[suse.com:+];
-	TO_MATCH_ENVRCPT_SOME(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from,2a07:de40:b281:106:10:150:64:167:received];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	HAS_ATTACHMENT(0.00)[];
-	RCPT_COUNT_GT_50(0.00)[94];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	TO_DN_SOME(0.00)[];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	TAGGED_RCPT(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:rdns,imap1.dmz-prg2.suse.org:helo,suse.com:dkim,suse.com:mid]
-X-purgate-ID: tlsNG-ef75cf/1790004233-A56C2AE4-3072145C/35/110847
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <1789032897.8631fc262581453bbf619ec5b2062170.1a08aab9d76000c4f3@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1790004402-368D9AE4-6A015826/0/0
 X-purgate-type: clean
-X-purgate-size: 24058
+X-purgate-size: 10629
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------axxK79NgUHTDoQRwnbgWpSYy
-Content-Type: multipart/mixed; boundary="------------T4ZJp6Lhzy2IBIrjLpBsTTw0";
- protected-headers="v1"
-From: Juergen Gross <jgross@suse.com>
-To: linux-kernel@vger.kernel.org, x86@kernel.org,
- virtualization@lists.linux.dev, linux-ide@vger.kernel.org,
- dri-devel@lists.freedesktop.org, linux-fbdev@vger.kernel.org,
- linux-crypto@vger.kernel.org, linux-gpio@vger.kernel.org,
- linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
- kvm@vger.kernel.org, linux-edac@vger.kernel.org, linux-pci@vger.kernel.org,
- linux-pm@vger.kernel.org, linux-coco@lists.linux.dev,
- linux-acpi@vger.kernel.org, linux-hwmon@vger.kernel.org,
- linux-mtd@lists.infradead.org, platform-driver-x86@vger.kernel.org,
- Ingo Molnar <mingo@redhat.com>
-Cc: Thomas Gleixner <tglx@kernel.org>, Borislav Petkov <bp@alien8.de>,
- Dave Hansen <dave.hansen@linux.intel.com>, "H. Peter Anvin" <hpa@zytor.com>,
- Ajay Kaher <ajay.kaher@broadcom.com>,
- Alexey Makhalov <alexey.makhalov@broadcom.com>,
- Broadcom internal kernel review list
- <bcm-kernel-feedback-list@broadcom.com>, Damien Le Moal
- <dlemoal@kernel.org>, Niklas Cassel <cassel@kernel.org>,
- David Airlie <airlied@redhat.com>, Helge Deller <deller@gmx.de>,
- linux-geode@lists.infradead.org, Olivia Mackall <olivia@selenic.com>,
- Herbert Xu <herbert@gondor.apana.org.au>, Linus Walleij <linusw@kernel.org>,
- Bartosz Golaszewski <brgl@kernel.org>, Arnd Bergmann <arnd@arndb.de>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Peter Zijlstra <peterz@infradead.org>,
- Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
- Adrian Hunter <adrian.hunter@intel.com>, James Clark
- <james.clark@linaro.org>, "K. Y. Srinivasan" <kys@microsoft.com>,
- Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>,
- Dexuan Cui <decui@microsoft.com>, Long Li <longli@microsoft.com>,
- Sean Christopherson <seanjc@google.com>, Paolo Bonzini
- <pbonzini@redhat.com>, Josh Poimboeuf <jpoimboe@kernel.org>,
- Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, Pu Wen <puwen@hygon.cn>,
- Tony Luck <tony.luck@intel.com>, Reinette Chatre
- <reinette.chatre@intel.com>, Dave Martin <Dave.Martin@arm.com>,
- James Morse <james.morse@arm.com>, Babu Moger <babu.moger@amd.com>,
- Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>,
- Vitaly Kuznetsov <vkuznets@redhat.com>, Andy Lutomirski <luto@kernel.org>,
- Bjorn Helgaas <bhelgaas@google.com>, "Rafael J. Wysocki"
- <rafael@kernel.org>, Pavel Machek <pavel@kernel.org>,
- Kiryl Shutsemau <kas@kernel.org>, Rick Edgecombe
- <rick.p.edgecombe@intel.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
- Len Brown <lenb@kernel.org>, Viresh Kumar <viresh.kumar@linaro.org>,
- Huang Rui <ray.huang@amd.com>, Mario Limonciello
- <mario.limonciello@amd.com>, Perry Yuan <perry.yuan@amd.com>,
- K Prateek Nayak <kprateek.nayak@amd.com>,
- Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
- Yazen Ghannam <yazen.ghannam@amd.com>, Guenter Roeck <linux@roeck-us.net>,
- Artem Bityutskiy <artem.bityutskiy@linux.intel.com>,
- Artem Bityutskiy <dedekind1@gmail.com>,
- Miquel Raynal <miquel.raynal@bootlin.com>,
- Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
- Ashok Raj <ashok.raj.linux@gmail.com>, Hans de Goede <hansg@kernel.org>,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- Rajneesh Bhardwaj <irenic.rajneesh@gmail.com>,
- Xi Pardee <xi.pardee@linux.intel.com>,
- Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
- Lukasz Luba <lukasz.luba@arm.com>, xen-devel@lists.xenproject.org
-Message-ID: <6df2617a-5bee-4bac-822d-a4ca09c47e76@suse.com>
-Subject: Re: [PATCH v3 00/13] x86/msr: Drop 32-bit MSR interfaces
-References: <20260911074530.3140830-1-jgross@suse.com>
-In-Reply-To: <20260911074530.3140830-1-jgross@suse.com>
+On 10.09.2026 11:34, Baptiste Le Duc wrote:
+> p2m_set_permission() only presets the PTE A/D bits when the Svade extension
+> is present in the device tree. This causes an unhandled page fault when
+> neither Svade nor Svadu is present (the platform's actual behaviour is then
+> unknown), and when both are present in the device tree.
+> 
+> Move the Svade/Svadu resolution out of p2m_set_permission() and into a new
+> riscv_resolve_ad_scheme(), called once from riscv_fill_hwcap(). For each of
+> the four possible Svade/Svadu combinations (inspired by [1]), it decides
+> whether software has to preset the A/D bits and, if so, sets
+> RISCV_ISA_EXT_svade to record that decision:
+> - neither present: assume Svade, since assuming Svade is harmless on real
+>   Svadu hardware, while assuming Svadu on real Svade hardware risks an
+>   unhandled page fault
+> - only Svade present: assume Svade
+> - only Svadu present: leave A/D management to hardware
+> - both present: Svade wins until Xen supports the SBI FWFT call needed to
+>   enable hardware updating of A/D bits, so assume Svade and warn that
+>   dropping 'svade' from the DT is the only way to get Svadu.
+> 
+> [1] https://lwn.net/Articles/980016/
+> 
+> Fixes: ff14053983b0 ("xen/riscv: Implement p2m_pte_from_mfn() and support PBMT configuration")
+> Assisted-by: Claude:claude-opus-5
+> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> ---
+> Changes since v1:
+> - change commit title
+> - expose RISCV_ISA_EXT_svadu so the two extensions can be told apart.
+> - move the Svade/Svadu resolution to a new riscv_resolve_ad_scheme(),
+>   called once from riscv_fill_hwcap().
+> - expose sbi_probe_extension() (was static) to probe for SBI FWFT.
+> - stop presetting A/D bits unconditionally in p2m_set_permission(), do it
+>   only when Svade is present.
+> ---
+>  xen/arch/riscv/cpufeature.c             | 59 +++++++++++++++++++++++++++++++++
+>  xen/arch/riscv/include/asm/cpufeature.h |  1 +
+>  xen/arch/riscv/include/asm/sbi.h        |  8 +++++
+>  xen/arch/riscv/p2m.c                    | 47 ++++++++++----------------
+>  4 files changed, 86 insertions(+), 29 deletions(-)
+> 
+> diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
+> index 92235fdfd5..19454544a7 100644
+> --- a/xen/arch/riscv/cpufeature.c
+> +++ b/xen/arch/riscv/cpufeature.c
+> @@ -18,6 +18,7 @@
+>  
+>  #include <asm/cpufeature.h>
+>  #include <asm/csr.h>
+> +#include <asm/sbi.h>
+>  
+>  #ifdef CONFIG_ACPI
+>  # error "cpufeature.c functions should be updated to support ACPI"
+> @@ -468,6 +469,62 @@ static bool __init has_isa_extensions_property(void)
+>      return false;
+>  }
+>  
+> +/*
+> + * Svade and Svadu extensions represent two schemes for managing the PTE A/D
+> + * bits. When the PTE A/D bits need to be set, the Svade extension indicates
+> + * that a page fault will be raised. In contrast, the Svadu extension supports
+> + * hardware updating of the PTE A/D bits.
+> + *
+> + * There are 4 possible combinations of these extensions in the device tree.
+> + * The default hardware behavior for each is:
+> + *
+> + * 1) Neither Svade nor Svadu present in DT => It is technically unknown
+> + *    whether the platform uses Svade or Svadu. Xen should be prepared to
+> + *    handle either hardware updating of the PTE A/D bits or page faults when
+> + *    they need updating. In that case, Xen assumes Svade because it's
+> + *    harmless if the platform is actually Svadu, while assuming Svadu on real
+> + *    Svade hardware risks an unhandled page fault.
+> + *
+> + * 2) Only Svade present in DT => Xen must assume Svade to be always enabled.
+> + *
+> + * 3) Only Svadu present in DT => Xen must assume Svadu to be always enabled.
+> + *
+> + * 4) Both Svade and Svadu present in DT => Xen must assume Svadu is turned off
+> + *    at boot time by setting A/D bits. To use Svadu, the supervisor must
+> + *    explicitly enable it using the SBI FWFT extension.
+> + *
+> + * The Svade extension is mandatory and the Svadu extension is optional in the
+> + * RVA23 profile. Platforms wanting to take advantage of Svadu can choose
+> + * option 3. Platforms aware of the profile can choose option 4, and Xen won't
+> + * get the benefit of Svadu until the SBI FWFT extension is available.
+> + *
+> + * In other words, hardware manages the A/D bits on its own only in case 3, in
+> + * all the other cases software has to preset them. Instead of open coding this
+> + * in every A/D bits user, RISCV_ISA_EXT_svade is used to mean "software is
+> + * responsible for the A/D bits" and is set here for the cases 1, 2 and 4.
+> + */
+> +static void __init riscv_resolve_ad_scheme(void)
+> +{
+> +    bool svade = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade);
+> +    bool svadu = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu);
+> +
+> +    /* Case 3: leave the A/D bits management to hardware. */
+> +    if ( svadu && !svade )
+> +        return;
+> +
+> +    /* Case 4 */
+> +    if ( svadu && svade ){
+> +        if ( !sbi_probe_extension(SBI_EXT_FWFT) ){
 
---------------T4ZJp6Lhzy2IBIrjLpBsTTw0
-Content-Type: multipart/mixed; boundary="------------dtnWD0jmGt0coRzSWi6oU7rk"
+Nit (style): Brace placement.
 
---------------dtnWD0jmGt0coRzSWi6oU7rk
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Furthermore this is written in a way which Misra would call "dead code". I'd
+like to suggest (leaving out comments):
 
-SW5nbywNCg0KT24gMTEuMDkuMjYgMDk6NDUsIEp1ZXJnZW4gR3Jvc3Mgd3JvdGU6DQo+IEZv
-ciBhY2Nlc3NpbmcgdGhlIE1TUiByZWdpc3RlcnMgb24gdGhlIGxvY2FsIENQVSwgdGhlcmUg
-YXJlIDIgdHlwZXMgb2YNCj4gaW50ZXJmYWNlczogdGhlICJtb2Rlcm4iIDY0LWJpdCBvbmVz
-IChyZG1zcnEoKSBldGMuKSBhbmQgdGhlIDMyLWJpdA0KPiBvbmVzIChyZG1zcigpIGV0Yy4p
-IHdoaWNoIGFyZSB1c2luZyB0aGUgdXBwZXIgYW5kIGxvd2VyIDMyLWJpdCBoYWx2ZXMNCj4g
-b2YgdGhlIDY0LWJpdCB3aWRlIE1TUiByZWdpc3RlciB2YWx1ZXMuDQo+IA0KPiBUaGUgMzIt
-Yml0IGludGVyZmFjZXMgYXJlIG5vdCBvcHRpbWFsIGZvciAzIHJlYXNvbnM6DQo+IA0KPiAt
-IFRoZXkgYXJlIGJhc2VkIG9uIHByaW1pdGl2ZXMgdXNpbmcgNjQtYml0IHNpemVkIHZhbHVl
-cyBhbnl3YXkuDQo+IA0KPiAtIE1vZGVybiB4ODYgQ1BVcyBoYXZlIGFkZGVkIHN1cHBvcnQg
-Zm9yIE1TUiBhY2Nlc3MgaW5zdHJ1Y3Rpb25zIHVzaW5nDQo+ICAgIGFuIGltbWVkaWF0ZSB2
-YWx1ZSBpbnN0ZWFkIG9mIGEgcmVnaXN0ZXIgZm9yIGFkZHJlc3NpbmcgdGhlIE1TUiwNCj4g
-ICAgd2hpbGUgdGhlIHZhbHVlIGlzIGluIGEgNjQtYml0IHJlZ2lzdGVyLg0KPiANCj4gLSBy
-ZG1zcigpIGlzIGEgbWFjcm8gc3RvcmluZyB0aGUgdXBwZXIgYW5kIGxvd2VyIDMyLWJpdCBo
-YWx2ZXMgaW4NCj4gICAgdmFyaWFibGVzIHNwZWNpZmllZCBhcyBtYWNybyBwYXJhbWV0ZXJz
-LiBUaGlzIGlzIG9ic2N1cmluZyB2YXJpYWJsZQ0KPiAgICBhc3NpZ25tZW50IHRocm91Z2gg
-YSBtYWNyby4gQWRkaXRpb25hbGx5IHJkbXNycSgpIGlzIG1pbWlja2luZyB0aGlzDQo+ICAg
-IHBhdHRlcm4gYnkgYmVpbmcgYSBtYWNybywgdG9vLCB3aXRoIHRoZSB0YXJnZXQgdmFyaWFi
-bGUgc3BlY2lmaWVkIGFzDQo+ICAgIGEgcGFyYW1ldGVyIGFzIHdlbGwuDQo+IA0KPiBGb3Ig
-dGhvc2UgcmVhc29ucyBkcm9wIHRoZSAzMi1iaXQgaW50ZXJmYWNlcyBmb3IgYWNjZXNzaW5n
-IHRoZSB4ODYgTVNSDQo+IHJlZ2lzdGVycyBjb21wbGV0ZWx5IGFuZCBvbmx5IHVzZSB0aGUg
-NjQtYml0IHZhcmlhbnRzLg0KPiANCj4gVGhpcyBhbGxvd3MgdG8gc3dpdGNoIGFsbCAiaGln
-aC1sZXZlbCIgTVNSIGFjY2VzcyBtYWNyb3MgdG8gaW5saW5lDQo+IGZ1bmN0aW9ucyBpbiB0
-aGUgZW5kLg0KPiANCj4gVGhpcyBzZXJpZXMgd2lsbCBiZSB1c2VkIGFzIHRoZSBiYXNlIGZv
-ciBmdXJ0aGVyIHJlb3JnYW5pc2F0aW9uIG9mIHRoZQ0KPiBNU1IgYWNjZXNzIGZ1bmN0aW9u
-cywgZXNwZWNpYWxseSBmb3IgY29tcGxldGVseSBpbmxpbmluZyB0aGUgTVNSDQo+IGFjY2Vz
-cyBpbnN0cnVjdGlvbnMgZXZlbiB3aXRoIHBhcmF2aXJ0dWFsaXphdGlvbiBiZWluZyBhY3Rp
-dmUuDQo+IA0KPiBCYXNlZCBvbiBrZXJuZWwgNy4zIGFzIG9mIDIwMjYtMDktMTEuDQo+IA0K
-PiBDaGFuZ2VzIGluIFYyOg0KPiAtIGRyb3BwZWQgYWxyZWFkeSBhcHBsaWVkIHBhdGNoZXMN
-Cj4gLSBhZGRlZCBwYXRjaCAxDQo+IC0gcmViYXNlZA0KPiANCj4gQ2hhbmdlcyBpbiBWMzoN
-Cj4gLSBzbWFsbCBmaXhlcyBpbiBwYXRjaGVzIDQgYW5kIDEzDQo+IC0gcmViYXNlZA0KPiAN
-Cj4gSnVlcmdlbiBHcm9zcyAoMTMpOg0KPiAgICB4ODYvY3B1OiBGaXggY29kaW5nIHN0eWxl
-IHZpb2xhdGlvbg0KPiAgICB4ODYvbXNyOiBSZW1vdmUgd3Jtc3Jfc2FmZSgpDQo+ICAgIHg4
-Ni9tc3I6IFJlbW92ZSByZG1zcl9zYWZlKCkNCj4gICAgZHJpdmVycy9hdGE6IFN0b3AgdXNp
-bmcgMzItYml0IE1TUiBpbnRlcmZhY2VzDQo+ICAgIGFncC9udmlkaWE6IFN0b3AgdXNpbmcg
-MzItYml0IE1TUiBpbnRlcmZhY2VzDQo+ICAgIGZiZGV2L2dlb2RlOiBTdG9wIHVzaW5nIDMy
-LWJpdCBNU1IgaW50ZXJmYWNlcw0KPiAgICBod19yYW5kb20vdmlhLXJuZzogU3RvcCB1c2lu
-ZyAzMi1iaXQgTVNSIGludGVyZmFjZXMNCj4gICAgZHJpdmVycy9ncGlvOiBTdG9wIHVzaW5n
-IDMyLWJpdCBNU1IgaW50ZXJmYWNlcw0KPiAgICBkcml2ZXJzL21pc2M6IFN0b3AgdXNpbmcg
-MzItYml0IE1TUiBpbnRlcmZhY2VzDQo+ICAgIHg4Ni9tc3I6IFJlbW92ZSB3cm1zcigpDQo+
-ICAgIHg4Ni9tc3I6IFJlbW92ZSByZG1zcigpDQo+ICAgIHRyZWV3aWRlOiBjb252ZXJ0IHJk
-bXNycSgpIGZyb20gYSBtYWNybyB0byBhbiBpbmxpbmUgZnVuY3Rpb24NCj4gICAgeDg2L21z
-cjogU2ltcGxpZnkgc29tZSByZG1zcnEoKSB1c2UgY2FzZXMNCj4gDQo+ICAgYXJjaC94ODYv
-Y29jby9zZXYvY29yZS5jICAgICAgICAgICAgICAgICAgICAgIHwgIDIgKy0NCj4gICBhcmNo
-L3g4Ni9ldmVudHMvYW1kL2Jycy5jICAgICAgICAgICAgICAgICAgICAgfCAgNCArLQ0KPiAg
-IGFyY2gveDg2L2V2ZW50cy9hbWQvY29yZS5jICAgICAgICAgICAgICAgICAgICB8ICA4ICst
-LQ0KPiAgIGFyY2gveDg2L2V2ZW50cy9hbWQvaWJzLmMgICAgICAgICAgICAgICAgICAgICB8
-IDE4ICsrKy0tLS0NCj4gICBhcmNoL3g4Ni9ldmVudHMvYW1kL2xici5jICAgICAgICAgICAg
-ICAgICAgICAgfCAxNiArKy0tLS0NCj4gICBhcmNoL3g4Ni9ldmVudHMvYW1kL3Bvd2VyLmMg
-ICAgICAgICAgICAgICAgICAgfCAgOCArLS0NCj4gICBhcmNoL3g4Ni9ldmVudHMvYW1kL3Vu
-Y29yZS5jICAgICAgICAgICAgICAgICAgfCAgNCArLQ0KPiAgIGFyY2gveDg2L2V2ZW50cy9j
-b3JlLmMgICAgICAgICAgICAgICAgICAgICAgICB8IDIwICsrKystLS0tDQo+ICAgYXJjaC94
-ODYvZXZlbnRzL2ludGVsL2NvcmUuYyAgICAgICAgICAgICAgICAgIHwgMTUgKystLS0tDQo+
-ICAgYXJjaC94ODYvZXZlbnRzL2ludGVsL2NzdGF0ZS5jICAgICAgICAgICAgICAgIHwgIDUg
-Ky0NCj4gICBhcmNoL3g4Ni9ldmVudHMvaW50ZWwvZHMuYyAgICAgICAgICAgICAgICAgICAg
-fCAgMiArLQ0KPiAgIGFyY2gveDg2L2V2ZW50cy9pbnRlbC9rbmMuYyAgICAgICAgICAgICAg
-ICAgICB8IDEwICsrLS0NCj4gICBhcmNoL3g4Ni9ldmVudHMvaW50ZWwvbGJyLmMgICAgICAg
-ICAgICAgICAgICAgfCAyNSArKystLS0tLS0tDQo+ICAgYXJjaC94ODYvZXZlbnRzL2ludGVs
-L3A0LmMgICAgICAgICAgICAgICAgICAgIHwgIDYgKy0tDQo+ICAgYXJjaC94ODYvZXZlbnRz
-L2ludGVsL3A2LmMgICAgICAgICAgICAgICAgICAgIHwgIDQgKy0NCj4gICBhcmNoL3g4Ni9l
-dmVudHMvaW50ZWwvcHQuYyAgICAgICAgICAgICAgICAgICAgfCAxMiArKy0tLQ0KPiAgIGFy
-Y2gveDg2L2V2ZW50cy9pbnRlbC91bmNvcmUuYyAgICAgICAgICAgICAgICB8ICA2ICstLQ0K
-PiAgIGFyY2gveDg2L2V2ZW50cy9pbnRlbC91bmNvcmVfbmhtZXguYyAgICAgICAgICB8ICA0
-ICstDQo+ICAgYXJjaC94ODYvZXZlbnRzL2ludGVsL3VuY29yZV9zbmIuYyAgICAgICAgICAg
-IHwgIDIgKy0NCj4gICBhcmNoL3g4Ni9ldmVudHMvaW50ZWwvdW5jb3JlX3NuYmVwLmMgICAg
-ICAgICAgfCAgNiArLS0NCj4gICBhcmNoL3g4Ni9ldmVudHMvbXNyLmMgICAgICAgICAgICAg
-ICAgICAgICAgICAgfCAgMiArLQ0KPiAgIGFyY2gveDg2L2V2ZW50cy9wZXJmX2V2ZW50Lmgg
-ICAgICAgICAgICAgICAgICB8ICA2ICstLQ0KPiAgIGFyY2gveDg2L2V2ZW50cy9yYXBsLmMg
-ICAgICAgICAgICAgICAgICAgICAgICB8ICA2ICstLQ0KPiAgIGFyY2gveDg2L2V2ZW50cy96
-aGFveGluL2NvcmUuYyAgICAgICAgICAgICAgICB8IDEwICsrLS0NCj4gICBhcmNoL3g4Ni9o
-eXBlcnYvaHZfYXBpYy5jICAgICAgICAgICAgICAgICAgICAgfCAgOSArKy0tDQo+ICAgYXJj
-aC94ODYvaHlwZXJ2L2h2X2luaXQuYyAgICAgICAgICAgICAgICAgICAgIHwgMjYgKysrKyst
-LS0tLQ0KPiAgIGFyY2gveDg2L2h5cGVydi9odl9zcGlubG9jay5jICAgICAgICAgICAgICAg
-ICB8ICAyICstDQo+ICAgYXJjaC94ODYvaW5jbHVkZS9hc20vYXBpYy5oICAgICAgICAgICAg
-ICAgICAgIHwgIDcgKy0tDQo+ICAgYXJjaC94ODYvaW5jbHVkZS9hc20vZGVidWdyZWcuaCAg
-ICAgICAgICAgICAgIHwgIDYgKy0tDQo+ICAgYXJjaC94ODYvaW5jbHVkZS9hc20vZnNnc2Jh
-c2UuaCAgICAgICAgICAgICAgIHwgIDIgKy0NCj4gICBhcmNoL3g4Ni9pbmNsdWRlL2FzbS9r
-dm1faG9zdC5oICAgICAgICAgICAgICAgfCAxMCAtLS0tDQo+ICAgYXJjaC94ODYvaW5jbHVk
-ZS9hc20vbXNyLmggICAgICAgICAgICAgICAgICAgIHwgMzkgKystLS0tLS0tLS0tLS0tDQo+
-ICAgYXJjaC94ODYvaW5jbHVkZS9hc20vcGFyYXZpcnQuaCAgICAgICAgICAgICAgIHwgMjYg
-Ky0tLS0tLS0tLQ0KPiAgIGFyY2gveDg2L2tlcm5lbC9hcGljL2FwaWMuYyAgICAgICAgICAg
-ICAgICAgICB8IDE0ICsrKy0tLQ0KPiAgIGFyY2gveDg2L2tlcm5lbC9hcGljL2FwaWNfbnVt
-YWNoaXAuYyAgICAgICAgICB8ICA2ICstLQ0KPiAgIGFyY2gveDg2L2tlcm5lbC9jZXQuYyAg
-ICAgICAgICAgICAgICAgICAgICAgICB8ICAyICstDQo+ICAgYXJjaC94ODYva2VybmVsL2Nw
-dS9hbWQuYyAgICAgICAgICAgICAgICAgICAgIHwgMTQgKysrLS0tDQo+ICAgYXJjaC94ODYv
-a2VybmVsL2NwdS9hcGVyZm1wZXJmLmMgICAgICAgICAgICAgIHwgIDggKy0tDQo+ICAgYXJj
-aC94ODYva2VybmVsL2NwdS9idWdzLmMgICAgICAgICAgICAgICAgICAgIHwgMTIgKystLS0N
-Cj4gICBhcmNoL3g4Ni9rZXJuZWwvY3B1L2J1c19sb2NrLmMgICAgICAgICAgICAgICAgfCAg
-OCArLS0NCj4gICBhcmNoL3g4Ni9rZXJuZWwvY3B1L2NlbnRhdXIuYyAgICAgICAgICAgICAg
-ICAgfCAgOCArLS0NCj4gICBhcmNoL3g4Ni9rZXJuZWwvY3B1L2NvbW1vbi5jICAgICAgICAg
-ICAgICAgICAgfCAxMiArKy0tLQ0KPiAgIGFyY2gveDg2L2tlcm5lbC9jcHUvZmVhdF9jdGwu
-YyAgICAgICAgICAgICAgICB8ICA0ICstDQo+ICAgYXJjaC94ODYva2VybmVsL2NwdS9oeWdv
-bi5jICAgICAgICAgICAgICAgICAgIHwgIDQgKy0NCj4gICBhcmNoL3g4Ni9rZXJuZWwvY3B1
-L2ludGVsLmMgICAgICAgICAgICAgICAgICAgfCAgNiArLS0NCj4gICBhcmNoL3g4Ni9rZXJu
-ZWwvY3B1L2ludGVsX2VwYi5jICAgICAgICAgICAgICAgfCAgNCArLQ0KPiAgIGFyY2gveDg2
-L2tlcm5lbC9jcHUvbWNlL2FtZC5jICAgICAgICAgICAgICAgICB8ICA0ICstDQo+ICAgYXJj
-aC94ODYva2VybmVsL2NwdS9tY2UvY29yZS5jICAgICAgICAgICAgICAgIHwgIDggKy0tDQo+
-ICAgYXJjaC94ODYva2VybmVsL2NwdS9tY2UvaW5qZWN0LmMgICAgICAgICAgICAgIHwgIDIg
-Ky0NCj4gICBhcmNoL3g4Ni9rZXJuZWwvY3B1L21jZS9pbnRlbC5jICAgICAgICAgICAgICAg
-fCAxOCArKystLS0tDQo+ICAgYXJjaC94ODYva2VybmVsL2NwdS9tY2UvcDUuYyAgICAgICAg
-ICAgICAgICAgIHwgIDggKy0tDQo+ICAgYXJjaC94ODYva2VybmVsL2NwdS9tY2Uvd2luY2hp
-cC5jICAgICAgICAgICAgIHwgIDIgKy0NCj4gICBhcmNoL3g4Ni9rZXJuZWwvY3B1L21pY3Jv
-Y29kZS9pbnRlbC5jICAgICAgICAgfCAgMiArLQ0KPiAgIGFyY2gveDg2L2tlcm5lbC9jcHUv
-bXNoeXBlcnYuYyAgICAgICAgICAgICAgICB8ICA2ICstLQ0KPiAgIGFyY2gveDg2L2tlcm5l
-bC9jcHUvbXRyci9hbWQuYyAgICAgICAgICAgICAgICB8ICA0ICstDQo+ICAgYXJjaC94ODYv
-a2VybmVsL2NwdS9tdHJyL2NsZWFudXAuYyAgICAgICAgICAgIHwgIDQgKy0NCj4gICBhcmNo
-L3g4Ni9rZXJuZWwvY3B1L210cnIvZ2VuZXJpYy5jICAgICAgICAgICAgfCAzMiArKysrKyst
-LS0tLS0NCj4gICBhcmNoL3g4Ni9rZXJuZWwvY3B1L210cnIvbXRyci5jICAgICAgICAgICAg
-ICAgfCAgMiArLQ0KPiAgIGFyY2gveDg2L2tlcm5lbC9jcHUvcmVzY3RybC9jb3JlLmMgICAg
-ICAgICAgICB8ICAyICstDQo+ICAgYXJjaC94ODYva2VybmVsL2NwdS9yZXNjdHJsL21vbml0
-b3IuYyAgICAgICAgIHwgIDQgKy0NCj4gICBhcmNoL3g4Ni9rZXJuZWwvY3B1L3Jlc2N0cmwv
-cHNldWRvX2xvY2suYyAgICAgfCAgNCArLQ0KPiAgIGFyY2gveDg2L2tlcm5lbC9jcHUvcmVz
-Y3RybC9yZHRncm91cC5jICAgICAgICB8ICAyICstDQo+ICAgYXJjaC94ODYva2VybmVsL2Nw
-dS90b3BvbG9neS5jICAgICAgICAgICAgICAgIHwgIDIgKy0NCj4gICBhcmNoL3g4Ni9rZXJu
-ZWwvY3B1L3RvcG9sb2d5X2FtZC5jICAgICAgICAgICAgfCAgNCArLQ0KPiAgIGFyY2gveDg2
-L2tlcm5lbC9jcHUvdHJhbnNtZXRhLmMgICAgICAgICAgICAgICB8ICA4ICstLQ0KPiAgIGFy
-Y2gveDg2L2tlcm5lbC9jcHUvdHN4LmMgICAgICAgICAgICAgICAgICAgICB8IDEwICsrLS0N
-Cj4gICBhcmNoL3g4Ni9rZXJuZWwvY3B1L3Vtd2FpdC5jICAgICAgICAgICAgICAgICAgfCAg
-MiArLQ0KPiAgIGFyY2gveDg2L2tlcm5lbC9jcHUvemhhb3hpbi5jICAgICAgICAgICAgICAg
-ICB8ICA0ICstDQo+ICAgYXJjaC94ODYva2VybmVsL2ZwdS9jb3JlLmMgICAgICAgICAgICAg
-ICAgICAgIHwgIDIgKy0NCj4gICBhcmNoL3g4Ni9rZXJuZWwvaHBldC5jICAgICAgICAgICAg
-ICAgICAgICAgICAgfCAgMiArLQ0KPiAgIGFyY2gveDg2L2tlcm5lbC9rdm0uYyAgICAgICAg
-ICAgICAgICAgICAgICAgICB8ICAyICstDQo+ICAgYXJjaC94ODYva2VybmVsL21tY29uZi1m
-YW0xMGhfNjQuYyAgICAgICAgICAgIHwgIDYgKy0tDQo+ICAgYXJjaC94ODYva2VybmVsL3By
-b2Nlc3MuYyAgICAgICAgICAgICAgICAgICAgIHwgIDQgKy0NCj4gICBhcmNoL3g4Ni9rZXJu
-ZWwvcHJvY2Vzc182NC5jICAgICAgICAgICAgICAgICAgfCAxNCArKystLS0NCj4gICBhcmNo
-L3g4Ni9rZXJuZWwvc2hzdGsuYyAgICAgICAgICAgICAgICAgICAgICAgfCAgOCArLS0NCj4g
-ICBhcmNoL3g4Ni9rZXJuZWwvdHJhcHMuYyAgICAgICAgICAgICAgICAgICAgICAgfCAgNCAr
-LQ0KPiAgIGFyY2gveDg2L2tlcm5lbC90c2MuYyAgICAgICAgICAgICAgICAgICAgICAgICB8
-ICAyICstDQo+ICAgYXJjaC94ODYva2VybmVsL3RzY19tc3IuYyAgICAgICAgICAgICAgICAg
-ICAgIHwgIDYgKy0tDQo+ICAgYXJjaC94ODYva2VybmVsL3RzY19zeW5jLmMgICAgICAgICAg
-ICAgICAgICAgIHwgIDYgKy0tDQo+ICAgYXJjaC94ODYva3ZtL21zcnMuYyAgICAgICAgICAg
-ICAgICAgICAgICAgICAgIHwgIDIgKy0NCj4gICBhcmNoL3g4Ni9rdm0vc3ZtL3BtdS5jICAg
-ICAgICAgICAgICAgICAgICAgICAgfCAgNCArLQ0KPiAgIGFyY2gveDg2L2t2bS9zdm0vc3Zt
-LmMgICAgICAgICAgICAgICAgICAgICAgICB8ICA0ICstDQo+ICAgYXJjaC94ODYva3ZtL3Zt
-eC9uZXN0ZWQuYyAgICAgICAgICAgICAgICAgICAgIHwgIDQgKy0NCj4gICBhcmNoL3g4Ni9r
-dm0vdm14L3BtdV9pbnRlbC5jICAgICAgICAgICAgICAgICAgfCAgOCArLS0NCj4gICBhcmNo
-L3g4Ni9rdm0vdm14L3NneC5jICAgICAgICAgICAgICAgICAgICAgICAgfCAgNiArLS0NCj4g
-ICBhcmNoL3g4Ni9rdm0vdm14L3RkeC5jICAgICAgICAgICAgICAgICAgICAgICAgfCAgMiAr
-LQ0KPiAgIGFyY2gveDg2L2t2bS92bXgvdm14LmMgICAgICAgICAgICAgICAgICAgICAgICB8
-IDQyICsrKysrKysrLS0tLS0tLS0NCj4gICBhcmNoL3g4Ni9rdm0veDg2LmMgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgfCAgNiArLS0NCj4gICBhcmNoL3g4Ni9saWIvaW5zbi1ldmFs
-LmMgICAgICAgICAgICAgICAgICAgICAgfCAgNiArLS0NCj4gICBhcmNoL3g4Ni9saWIvbXNy
-LXNtcC5jICAgICAgICAgICAgICAgICAgICAgICAgfCAgMiArLQ0KPiAgIGFyY2gveDg2L21t
-L3BhdC9tZW10eXBlLmMgICAgICAgICAgICAgICAgICAgICB8ICAyICstDQo+ICAgYXJjaC94
-ODYvcGNpL2FtZF9idXMuYyAgICAgICAgICAgICAgICAgICAgICAgIHwgIDggKy0tDQo+ICAg
-YXJjaC94ODYvcGxhdGZvcm0vb2xwYy9vbHBjLXhvMS1ydGMuYyAgICAgICAgIHwgIDYgKy0t
-DQo+ICAgYXJjaC94ODYvcGxhdGZvcm0vb2xwYy9vbHBjLXhvMS1zY2kuYyAgICAgICAgIHwg
-IDIgKy0NCj4gICBhcmNoL3g4Ni9wb3dlci9jcHUuYyAgICAgICAgICAgICAgICAgICAgICAg
-ICAgfCAxMCArKy0tDQo+ICAgYXJjaC94ODYvcmVhbG1vZGUvaW5pdC5jICAgICAgICAgICAg
-ICAgICAgICAgIHwgIDIgKy0NCj4gICBhcmNoL3g4Ni92aXJ0L2h3LmMgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgfCAgOCArLS0NCj4gICBhcmNoL3g4Ni92aXJ0L3N2bS9zZXYuYyAg
-ICAgICAgICAgICAgICAgICAgICAgfCAxOCArKystLS0tDQo+ICAgYXJjaC94ODYvdmlydC92
-bXgvdGR4L3RkeC5jICAgICAgICAgICAgICAgICAgIHwgIDIgKy0NCj4gICBhcmNoL3g4Ni94
-ZW4vc3VzcGVuZC5jICAgICAgICAgICAgICAgICAgICAgICAgfCAgMiArLQ0KPiAgIGRyaXZl
-cnMvYWNwaS9wcm9jZXNzb3JfcGVyZmxpYi5jICAgICAgICAgICAgICB8ICAyICstDQo+ICAg
-ZHJpdmVycy9hdGEvcGF0YV9jczU1MzUuYyAgICAgICAgICAgICAgICAgICAgIHwgMjQgKysr
-Ky0tLS0tDQo+ICAgZHJpdmVycy9hdGEvcGF0YV9jczU1MzYuYyAgICAgICAgICAgICAgICAg
-ICAgIHwgMTcgKysrLS0tLQ0KPiAgIGRyaXZlcnMvY2hhci9hZ3AvbnZpZGlhLWFncC5jICAg
-ICAgICAgICAgICAgICB8IDMyICsrKysrKy0tLS0tLQ0KPiAgIGRyaXZlcnMvY2hhci9od19y
-YW5kb20vdmlhLXJuZy5jICAgICAgICAgICAgICB8IDI5ICsrKysrLS0tLS0tDQo+ICAgZHJp
-dmVycy9jcHVmcmVxL2FjcGktY3B1ZnJlcS5jICAgICAgICAgICAgICAgIHwgIDggKy0tDQo+
-ICAgZHJpdmVycy9jcHVmcmVxL2FtZC1wc3RhdGUuYyAgICAgICAgICAgICAgICAgIHwgIDQg
-Ky0NCj4gICBkcml2ZXJzL2NwdWZyZXEvZV9wb3dlcnNhdmVyLmMgICAgICAgICAgICAgICAg
-fCAyMCArKysrLS0tLQ0KPiAgIGRyaXZlcnMvY3B1ZnJlcS9pbnRlbF9wc3RhdGUuYyAgICAg
-ICAgICAgICAgICB8IDI4ICsrKysrLS0tLS0tDQo+ICAgZHJpdmVycy9jcHVmcmVxL2xvbmdo
-YXVsLmMgICAgICAgICAgICAgICAgICAgIHwgMTIgKystLS0NCj4gICBkcml2ZXJzL2NwdWZy
-ZXEvbG9uZ3J1bi5jICAgICAgICAgICAgICAgICAgICAgfCAxNiArKystLS0NCj4gICBkcml2
-ZXJzL2NwdWZyZXEvcG93ZXJub3ctazcuYyAgICAgICAgICAgICAgICAgfCAxMCArKy0tDQo+
-ICAgZHJpdmVycy9jcHVmcmVxL3Bvd2Vybm93LWs4LmMgICAgICAgICAgICAgICAgIHwgIDgg
-Ky0tDQo+ICAgZHJpdmVycy9jcHVmcmVxL3NwZWVkc3RlcC1jZW50cmluby5jICAgICAgICAg
-IHwgIDQgKy0NCj4gICBkcml2ZXJzL2NwdWZyZXEvc3BlZWRzdGVwLWxpYi5jICAgICAgICAg
-ICAgICAgfCAxNCArKystLS0NCj4gICBkcml2ZXJzL2VkYWMvYW1kNjRfZWRhYy5jICAgICAg
-ICAgICAgICAgICAgICAgfCAgNiArLS0NCj4gICBkcml2ZXJzL2dwaW8vZ3Bpby1jczU1MzUu
-YyAgICAgICAgICAgICAgICAgICAgfCAxMCArKy0tDQo+ICAgZHJpdmVycy9odi9tc2h2X3Z0
-bF9tYWluLmMgICAgICAgICAgICAgICAgICAgIHwgIDIgKy0NCj4gICBkcml2ZXJzL2h3bW9u
-L2h3bW9uLXZpZC5jICAgICAgICAgICAgICAgICAgICAgfCAgNCArLQ0KPiAgIGRyaXZlcnMv
-aWRsZS9pbnRlbF9pZGxlLmMgICAgICAgICAgICAgICAgICAgICB8IDI2ICsrKysrLS0tLS0N
-Cj4gICBkcml2ZXJzL21pc2MvY3M1NTM1LW1mZ3B0LmMgICAgICAgICAgICAgICAgICAgfCAz
-MyArKysrKystLS0tLS0NCj4gICBkcml2ZXJzL210ZC9uYW5kL3Jhdy9jczU1M3hfbmFuZC5j
-ICAgICAgICAgICAgfCAgNiArLS0NCj4gICBkcml2ZXJzL3BsYXRmb3JtL3g4Ni9pbnRlbC9p
-ZnMvbG9hZC5jICAgICAgICAgfCAxMCArKy0tDQo+ICAgZHJpdmVycy9wbGF0Zm9ybS94ODYv
-aW50ZWwvaWZzL3J1bnRlc3QuYyAgICAgIHwgIDggKy0tDQo+ICAgZHJpdmVycy9wbGF0Zm9y
-bS94ODYvaW50ZWwvcG1jL2NucC5jICAgICAgICAgIHwgIDIgKy0NCj4gICAuLi4vaW50ZWwv
-c3BlZWRfc2VsZWN0X2lmL2lzc3RfaWZfbWJveF9tc3IuYyAgfCAgNiArLS0NCj4gICAuLi4v
-aW50ZWwvc3BlZWRfc2VsZWN0X2lmL2lzc3RfdHBtaV9jb3JlLmMgICAgfCAgMiArLQ0KPiAg
-IGRyaXZlcnMvcGxhdGZvcm0veDg2L2ludGVsX2lwcy5jICAgICAgICAgICAgICB8IDIwICsr
-KystLS0tDQo+ICAgZHJpdmVycy9wb3dlcmNhcC9pbnRlbF9yYXBsX21zci5jICAgICAgICAg
-ICAgIHwgIDIgKy0NCj4gICBkcml2ZXJzL3RoZXJtYWwvaW50ZWwvaW50ZWxfaGZpLmMgICAg
-ICAgICAgICAgfCAgOCArLS0NCj4gICBkcml2ZXJzL3RoZXJtYWwvaW50ZWwvdGhlcm1fdGhy
-b3QuYyAgICAgICAgICAgfCAyMiArKysrLS0tLQ0KPiAgIGRyaXZlcnMvdGhlcm1hbC9pbnRl
-bC94ODZfcGtnX3RlbXBfdGhlcm1hbC5jICB8ICA2ICstLQ0KPiAgIGRyaXZlcnMvdmlkZW8v
-ZmJkZXYvZ2VvZGUvZGlzcGxheV9neC5jICAgICAgICB8ICA4ICstLQ0KPiAgIGRyaXZlcnMv
-dmlkZW8vZmJkZXYvZ2VvZGUvZ3hmYl9jb3JlLmMgICAgICAgICB8ICAyICstDQo+ICAgZHJp
-dmVycy92aWRlby9mYmRldi9nZW9kZS9seGZiX29wcy5jICAgICAgICAgIHwgNTAgKysrKysr
-KysrLS0tLS0tLS0tLQ0KPiAgIGRyaXZlcnMvdmlkZW8vZmJkZXYvZ2VvZGUvc3VzcGVuZF9n
-eC5jICAgICAgICB8IDI0ICsrKysrLS0tLQ0KPiAgIGRyaXZlcnMvdmlkZW8vZmJkZXYvZ2Vv
-ZGUvdmlkZW9fZ3guYyAgICAgICAgICB8ICA4ICstLQ0KPiAgIGluY2x1ZGUvbGludXgvY3M1
-NTM1LmggICAgICAgICAgICAgICAgICAgICAgICB8IDEwICsrLS0NCj4gICAxMzggZmlsZXMg
-Y2hhbmdlZCwgNTc1IGluc2VydGlvbnMoKyksIDY5NCBkZWxldGlvbnMoLSkNCj4gDQoNCmFu
-eXRoaW5nIHlvdSBuZWVkIGZyb20gbWUgdG8gZ2V0IHRoaXMgc2VyaWVzIGludG8gNy40Pw0K
-DQoNCkp1ZXJnZW4NCg==
---------------dtnWD0jmGt0coRzSWi6oU7rk
-Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
-Content-Description: OpenPGP public key
-Content-Transfer-Encoding: quoted-printable
+    if ( svadu )
+    {
+        if ( !svade )
+            return;
 
------BEGIN PGP PUBLIC KEY BLOCK-----
+        if ( !sbi_probe_extension(SBI_EXT_FWFT) )
+            printk(...);
+    }
 
-xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjri
-oyspZKOBycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2
-kaV2KL9650I1SJvedYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i
-1TXkH09XSSI8mEQ/ouNcMvIJNwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/B
-BLUVbDa4+gmzDC9ezlZkTZG2t14zWPvxXP3FAp2pkW0xqG7/377qptDmrk42GlSK
-N4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEBAAHNHEp1ZXJnZW4gR3Jvc3Mg
-PGpnQHBmdXBmLm5ldD7CwHkEEwECACMFAlOMcBYCGwMHCwkIBwMCAQYVCAIJCgsE
-FgIDAQIeAQIXgAAKCRCw3p3WKL8TL0KdB/93FcIZ3GCNwFU0u3EjNbNjmXBKDY4F
-UGNQH2lvWAUy+dnyThpwdtF/jQ6j9RwE8VP0+NXcYpGJDWlNb9/JmYqLiX2Q3Tye
-vpB0CA3dbBQp0OW0fgCetToGIQrg0MbD1C/sEOv8Mr4NAfbauXjZlvTj30H2jO0u
-+6WGM6nHwbh2l5O8ZiHkH32iaSTfN7Eu5RnNVUJbvoPHZ8SlM4KWm8rG+lIkGurq
-qu5gu8q8ZMKdsdGC4bBxdQKDKHEFExLJK/nRPFmAuGlId1E3fe10v5QL+qHI3EIP
-tyfE7i9Hz6rVwi7lWKgh7pe0ZvatAudZ+JNIlBKptb64FaiIOAWDCx1SzR9KdWVy
-Z2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+wsB5BBMBAgAjBQJTjHCvAhsDBwsJ
-CAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/Ey/HmQf/RtI7kv5A2PS4
-RF7HoZhPVPogNVbC4YA6lW7DrWf0teC0RR3MzXfy6pJ+7KLgkqMlrAbN/8Dvjoz7
-8X+5vhH/rDLa9BuZQlhFmvcGtCF8eR0T1v0nC/nuAFVGy+67q2DH8As3KPu0344T
-BDpAvr2uYM4tSqxK4DURx5INz4ZZ0WNFHcqsfvlGJALDeE0LhITTd9jLzdDad1pQ
-SToCnLl6SBJZjDOX9QQcyUigZFtCXFst4dlsvddrxyqT1f17+2cFSdu7+ynLmXBK
-7abQ3rwJY8SbRO2iRulogc5vr/RLMMlscDAiDkaFQWLoqHHOdfO9rURssHNN8WkM
-nQfvUewRz80hSnVlcmdlbiBHcm9zcyA8amdyb3NzQG5vdmVsbC5jb20+wsB5BBMB
-AgAjBQJTjHDXAhsDBwsJCAcDAgEGFQgCCQoLBBYCAwECHgECF4AACgkQsN6d1ii/
-Ey8PUQf/ehmgCI9jB9hlgexLvgOtf7PJnFOXgMLdBQgBlVPO3/D9R8LtF9DBAFPN
-hlrsfIG/SqICoRCqUcJ96Pn3P7UUinFG/I0ECGF4EvTE1jnDkfJZr6jrbjgyoZHi
-w/4BNwSTL9rWASyLgqlA8u1mf+c2yUwcGhgkRAd1gOwungxcwzwqgljf0N51N5Jf
-VRHRtyfwq/ge+YEkDGcTU6Y0sPOuj4Dyfm8fJzdfHNQsWq3PnczLVELStJNdapwP
-OoE+lotufe3AM2vAEYJ9rTz3Cki4JFUsgLkHFqGZarrPGi1eyQcXeluldO3m91NK
-/1xMI3/+8jbO0tsn1tqSEUGIJi7ox80eSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1
-c2UuZGU+wsB5BBMBAgAjBQJTjHDrAhsDBwsJCAcDAgEGFQgCCQoLBBYCAwECHgEC
-F4AACgkQsN6d1ii/Ey+LhQf9GL45eU5vOowA2u5N3g3OZUEBmDHVVbqMtzwlmNC4
-k9Kx39r5s2vcFl4tXqW7g9/ViXYuiDXb0RfUpZiIUW89siKrkzmQ5dM7wRqzgJpJ
-wK8Bn2MIxAKArekWpiCKvBOB/Cc+3EXE78XdlxLyOi/NrmSGRIov0karw2RzMNOu
-5D+jLRZQd1Sv27AR+IP3I8U4aqnhLpwhK7MEy9oCILlgZ1QZe49kpcumcZKORmzB
-TNh30FVKK1EvmV2xAKDoaEOgQB4iFQLhJCdP1I5aSgM5IVFdn7v5YgEYuJYx37Io
-N1EblHI//x/e2AaIHpzK5h88NEawQsaNRpNSrcfbFmAg987ATQRTjHAWAQgAyzH6
-AOODMBjgfWE9VeCgsrwH3exNAU32gLq2xvjpWnHIs98ndPUDpnoxWQugJ6MpMncr
-0xSwFmHEgnSEjK/PAjppgmyc57BwKII3sV4on+gDVFJR6Y8ZRwgnBC5mVM6JjQ5x
-Dk8WRXljExRfUX9pNhdE5eBOZJrDRoLUmmjDtKzWaDhIg/+1Hzz93X4fCQkNVbVF
-LELU9bMaLPBG/x5q4iYZ2k2ex6d47YE1ZFdMm6YBYMOljGkZKwYde5ldM9mo45mm
-we0icXKLkpEdIXKTZeKDO+Hdv1aqFuAcccTg9RXDQjmwhC3yEmrmcfl0+rPghO0I
-v3OOImwTEe4co3c1mwARAQABwsBfBBgBAgAJBQJTjHAWAhsMAAoJELDendYovxMv
-Q/gH/1ha96vm4P/L+bQpJwrZ/dneZcmEwTbe8YFsw2V/Buv6Z4Mysln3nQK5ZadD
-534CF7TDVft7fC4tU4PONxF5D+/tvgkPfDAfF77zy2AH1vJzQ1fOU8lYFpZXTXIH
-b+559UqvIB8AdgR3SAJGHHt4RKA0F7f5ipYBBrC6cyXJyyoprT10EMvU8VGiwXvT
-yJz3fjoYsdFzpWPlJEBRMedCot60g5dmbdrZ5DWClAr0yau47zpWj3enf1tLWaqc
-suylWsviuGjKGw7KHQd3bxALOknAp4dN3QwBYCKuZ7AddY9yjynVaD5X7nF9nO5B
-jR/i1DG86lem3iBDXzXsZDn8R3/CwO0EGAEIACAWIQSFEmdy6PYElKXQl/ew3p3W
-KL8TLwUCWt3w0AIbAgCBCRCw3p3WKL8TL3YgBBkWCAAdFiEEUy2wekH2OPMeOLge
-gFxhu0/YY74FAlrd8NAACgkQgFxhu0/YY75NiwD/fQf/RXpyv9ZX4n8UJrKDq422
-bcwkujisT6jix2mOOwYBAKiip9+mAD6W5NPXdhk1XraECcIspcf2ff5kCAlG0DIN
-aTUH/RIwNWzXDG58yQoLdD/UPcFgi8GWtNUp0Fhc/GeBxGipXYnvuWxwS+Qs1Qay
-7/Nbal/v4/eZZaWs8wl2VtrHTS96/IF6q2o0qMey0dq2AxnZbQIULiEndgR625EF
-RFg+IbO4ldSkB3trsF2ypYLij4ZObm2casLIP7iB8NKmQ5PndL8Y07TtiQ+Sb/wn
-g4GgV+BJoKdDWLPCAlCMilwbZ88Ijb+HF/aipc9hsqvW/hnXC2GajJSAY3Qs9Mib
-4Hm91jzbAjmp7243pQ4bJMfYHemFFBRaoLC7ayqQjcsttN2ufINlqLFPZPR/i3IX
-kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
-=3DeeAB
------END PGP PUBLIC KEY BLOCK-----
 
---------------dtnWD0jmGt0coRzSWi6oU7rk--
+> +          printk(XENLOG_WARNING "RISC-V: Both Svade and Svadu detected, but SBI FWFT is missing.\n"
+> +                  "RISC-V: Defaulting to software A/D updates (Svade).\n"
+> +                  "RISC-V: To force hardware A/D updates (Svadu), remove 'svade' from DT.\n");
 
---------------T4ZJp6Lhzy2IBIrjLpBsTTw0--
+Nit (style): Indentation (in multiple ways). Furthermore XENLOG_* needs
+repeating after every newline.
 
---------------axxK79NgUHTDoQRwnbgWpSYy
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+> +        }
+> +    }
+> +
+> +    /* Cases 1, 2: Xen assume Svade to be enabled */
+> +    __set_bit(RISCV_ISA_EXT_svade, riscv_isa);
 
------BEGIN PGP SIGNATURE-----
+Isn't this a lie (to ourselves) then?
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmqxS/0FAwAAAAAACgkQsN6d1ii/Ey96
-wwf/dV+nbtFwBzRTdTv3Vx2lVN89DL6TR+euiSyGZLTqPjp0pW5wAtoIwgj4xQNNKLWJK+HdGnQA
-uIpKCGhzndQjA5/bYZLYAk0U5OVc1x2RrasQn0vel7msJTFqjW6fl3XNodJ40rFbpqoOYqFxBOIq
-H0xe0vqCJ1u8yj9FZ5+NUOXlGprAqEgyUOFGWWrT237ejyqgKVVw6QS2d/7sDvXFyLeRkG6f/wfH
-eiUguWe063lhXObtP1J1YAkzAMJBkTuG39L6Tde54kqVIQyIbk9voL4wDHeNYvIpyd2Mk2GSZ+ha
-kni709pSh+qTNFkR5kCpypyUAeSKftAkqDpPz3fe1A==
-=q3Lv
------END PGP SIGNATURE-----
+> --- a/xen/arch/riscv/include/asm/sbi.h
+> +++ b/xen/arch/riscv/include/asm/sbi.h
+> @@ -30,6 +30,7 @@
+>  #define SBI_EXT_BASE                    0x10
+>  #define SBI_EXT_RFENCE                  0x52464E43
+>  #define SBI_EXT_TIME                    0x54494D45
+> +#define SBI_EXT_FWFT                    0x46574654
+>  
+>  /* SBI function IDs for BASE extension */
+>  #define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
+> @@ -138,6 +139,13 @@ int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
+>  int sbi_remote_hfence_gvma_vmid(const cpumask_t *cpu_mask, vaddr_t start,
+>                                  size_t size, unsigned long vmid);
+>  
+> +/**
+> + * Check if an SBI extension ID is supported or not.
+> + * @extid: The extension ID to be probed.
+> + *
+> + * @return: 1 or an extension specific nonzero value if yes, 0 otherwise.
+> + */
+> +int sbi_probe_extension(long extid);
+>  /*
 
---------------axxK79NgUHTDoQRwnbgWpSYy--
+Nit (style): Also add a blank line.
+
+> --- a/xen/arch/riscv/p2m.c
+> +++ b/xen/arch/riscv/p2m.c
+> @@ -586,42 +586,31 @@ static inline void p2m_clean_pte(pte_t *p, bool clean_cache)
+>  
+>  static void p2m_set_permission(pte_t *e, p2m_type_t t)
+>  {
+> +    bool svade = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade);
+> +    bool svadu = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu);
+> +
+>      e->pte &= ~PTE_ACCESS_MASK;
+>  
+>      e->pte |= PTE_USER;
+>  
+>      /*
+> -     * Two schemes to manage the A and D bits are defined:
+> -     *   • The Svade extension: when a virtual page is accessed and the A bit
+> -     *     is clear, or is written and the D bit is clear, a page-fault
+> -     *     exception is raised.
+> -     *   • When the Svade extension is not implemented, the following scheme
+> -     *     applies.
+> -     *     When a virtual page is accessed and the A bit is clear, the PTE is
+> -     *     updated to set the A bit. When the virtual page is written and the
+> -     *     D bit is clear, the PTE is updated to set the D bit. When G-stage
+> -     *     address translation is in use and is not Bare, the G-stage virtual
+> -     *     pages may be accessed or written by implicit accesses to VS-level
+> -     *     memory management data structures, such as page tables.
+> -     * Thereby to avoid a page-fault in case of Svade is available, it is
+> -     * necessary to set A and D bits.
+> -     *
+> -     * TODO: For now, it’s fine to simply set the A/D bits, since OpenSBI
+> -     *       delegates page faults to a lower privilege mode and so OpenSBI
+> -     *       isn't expect to handle page-faults occured in lower modes.
+> -     *       By setting the A/D bits here, page faults that would otherwise
+> -     *       be generated due to unset A/D bits will not occur in Xen.
+> -     *
+> -     *       Currently, Xen on RISC-V does not make use of the information
+> -     *       that could be obtained from handling such page faults, which
+> -     *       could otherwise be useful for several use cases such as demand
+> -     *       paging, cache-flushing optimizations, memory access tracking,etc.
+> +     * riscv_fill_hwcap() sets either RISCV_ISA_EXT_svade or
+> +     * RISCV_ISA_EXT_svadu (mutually exclusive) depending on the Svade/Svadu
+> +     * device tree combination (see riscv_resolve_ad_scheme()):
+> +     * - RISCV_ISA_EXT_svade means that software is responsible for the A/D
+> +     *   bits.
+> +     * - RISCV_ISA_EXT_svadu means the hardware is responsible for the A/D
+> +     *   bits.
+>       *
+> -     *       To support the more general case and the optimizations mentioned
+> -     *       above, it would be better to stop setting the A/D bits here and
+> -     *       instead handle page faults that occur due to unset A/D bits.
+> +     * Currently, when RISCV_ISA_EXT_svade is set, Xen doesn't track A/D
+> +     * bits, so it does not make use of the information that could be
+> +     * obtained from handling the resulting page faults, which could
+> +     * otherwise be useful for several use cases such as demand paging,
+> +     * cache-flushing optimizations, memory access tracking, etc. To avoid
+> +     * such a page fault, Xen presets the A and D bits instead.
+>       */
+> -    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
+> +    ASSERT(svade != svadu); /* exactly one of svade/svadu must be set by riscv_fill_hwcap() */
+
+Here I'm lost: riscv_resolve_ad_scheme() specifically handles the "both set"
+case. How can you then assert that exactly one of them is set?
+
+Apart from this the line is also too long and the comment doesn't match our
+style.
+
+Jan
 
