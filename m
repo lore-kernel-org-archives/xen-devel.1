@@ -4,40 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E35C982E6
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 15:57:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1427694.1650496 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 21B7CC982ED
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 15:57:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1427698.1650506 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8gNo-0007aN-K6; Mon, 21 Sep 2026 15:56:44 +0000
+	id 1x8gO6-0007rz-QR; Mon, 21 Sep 2026 15:57:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1427694.1650496; Mon, 21 Sep 2026 15:56:44 +0000
+Received: by outflank-mailman (output) from mailman id 1427698.1650506; Mon, 21 Sep 2026 15:57:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8gNo-0007aG-HW; Mon, 21 Sep 2026 15:56:44 +0000
-Received: by outflank-mailman (input) for mailman id 1427694;
- Mon, 21 Sep 2026 15:56:43 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x8gO6-0007rs-NY; Mon, 21 Sep 2026 15:57:02 +0000
+Received: by outflank-mailman (input) for mailman id 1427698;
+ Mon, 21 Sep 2026 15:57:01 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 1x8gNm-0007aA-TG
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 15:56:42 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x8gO5-0007r5-B1
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 15:57:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8gNm-00546Y-72
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 17:56:42 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x8gO4-0078y9-1g
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 17:57:00 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6ab153a8-bab6-0a2a0a5309dd-0a2a4501cada-24
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 17:56:42 +0200
-Received: from [160.101.131.8] (helo=na1pdmzitismtp01.tibco.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
- id 6ab153b9-5984-0a2a45010019-a06583089440-3
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 17:56:42 +0200
-Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp01.tibco.com (Postfix) with ESMTP id 170CC44B8956;
- Mon, 21 Sep 2026 11:54:39 -0400 (EDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab153c0-8faa-0a2a0a5109dd-0a2a4508a5ba-12
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 17:56:59 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab153cb-f659-0a2a45080019-4a7de18cdc63-3
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 17:56:59 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49ce364488dso8635595e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 08:56:59 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49fcd07cca6sm236288425e9.11.2026.09.21.08.56.58
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 21 Sep 2026 08:56:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,151 +53,212 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-To: xen-devel@lists.xenproject.org,
-	jbeulich@suse.com
-Cc: andrew.cooper3@citrix.com,
-	roger@xenproject.org,
-	jason.andryuk@amd.com,
-	teddy.astie@vates.tech
-Subject: Re: Re: [PATCH v4] x86/nSVM: Check injected event consistency
-Date: Mon, 21 Sep 2026 16:50:56 +0100
-Message-ID: <20260921155103.3243475-1-abdelkareem.abdelsaamad@citrix.com>
-X-Mailer: git-send-email 2.53.0
-In-Reply-To: <v4-586da975-bd71-4305-a17e-cd5ba35995a4@suse.com>
-References: <v4-586da975-bd71-4305-a17e-cd5ba35995a4@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1790006219; x=1790611019; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=jUtow8Uf9yxDMJ8PoFWIAMmTgPt2YQ5jPZTRbsIUPBo=;
+        b=IdXcf2dw6n9Uj/n8STn0D5SnpoFHYXxWSliNJHVyO8w6rseLHBzwBIMuh5DBZ9ahd3
+         AS5DsCJk+YMw0VQ4fMcq/9/F6V0hUaZ9rEBzWDcKFusn+v+ryVu5cS2/bpAis80in4JF
+         +0OcugkUXSdw8qs3VD/GBXm99tLGaMB7sypMqc1/xvhyU/VCfB47womVhJL4CMOJbUjf
+         Ea3WRCaHlJmMPD9mtK99wV8Nh/VJepvZPrwmF0IW1to8oCeCyKEmjAN8tJciuQzLEBR3
+         nIKwZsOroDpH0mn4bOLsxlyMILQn024GKLA9fUAD2VWn7LlWVfVduBUmh/41XMotcPQ3
+         E04A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790006219; x=1790611019;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jUtow8Uf9yxDMJ8PoFWIAMmTgPt2YQ5jPZTRbsIUPBo=;
+        b=VkIc5RZJVdxe0HwggqqYZKfhnTpkhP3FmKzZDV7p5RSSn4SQPxy+nMQOdNy4lGLi+f
+         Tp8W9Au57/tOHrdF18E6tvPN3kX3gBTKFHGphNDfLVfD9YI2ORRvja9yLuREFo8PfzOT
+         ZYiMpVj/Z6ZgmVY3Jd/OtJ1X+ZXivnOp56Ex+dUnHsv11tuwHsUIQRezu84XwNbdHLo9
+         4gf1LqPLv/XLwaur+eVoysLQwgcyp8tW7hsUqM5h/nxT0PRj8Uvuz+P7Ntk/puo/D0hY
+         P2BC8OhDoKVIC5bPMj6mZStXy7ZOLpB/nYgWHxKg9byZiWNTbIvPruWIuynAazAMmz0T
+         yumQ==
+X-Gm-Message-State: AFuF++koOsUhKfD+YdwMZyx1eZpbNIuR22MAda3CnEU3ETH4hzx08/l5
+	N/9o8e4mQZQrpIFRtddciKsgY/5ATHdjdFoaHm2HCP40DTalKWMGLkjQpWFsMLhF/A==
+X-Gm-Gg: AYBFou3o2ZnstTrWtGPNHHZcgv1axYpz86kPkqJkccQ1sQ49/A5+CxBE5k/v/DvHbaC
+	tG5OVr1W+i7EcR8Y2Vcs07WYYZIRh/cnhaZ5c1ksiJ2vakGuHRcDjFiS15yrq+d65VrVVvV03Zl
+	Mj/j/xp8m79pF0jjQ3b7ieA35LfC8VFi+rszHTw1POxnllz4al/KWy9VvF03B9CHjPMKfSmdlTu
+	344pA2aO/Hr0zGkTcrs8MbLdKmGLg1edaTyMX4bu6cH6udaCGj9cHv/PoMlgDRs7JE2WGRP1C3y
+	+2cXb4NcK4cLkEtBQg+5bpyG7jsAy2trSN6xU/7IG/p8um+cdUCtg8sFF6nriF4QxXmNOHGbE6P
+	Uctps2RM9T+0ko18/eGp1Ssng0kDlOP7I/M9NMQHP7+xkUhVJ4QakSYJiXo4QpDTtkMCmeRda33
+	TxZGBmxB6tiBNMrC5xMt2qggiyr5UfZw1beoH9MRkAFzCTKvGjgQAimJmCjwPALUnPZfZUQ5gqp
+	RL0+heSIxpAXT2wvxaHghIgZ0SsN5YysPHcLZ05jOvWXFXzkb9G0NIIyiC2aw==
+X-Received: by 2002:a05:600c:3e16:b0:49e:715d:95ca with SMTP id 5b1f17b1804b1-49fd8a69266mr755935e9.13.1790006219373;
+        Mon, 21 Sep 2026 08:56:59 -0700 (PDT)
+Message-ID: <9ea9edfc-be76-4507-8b71-a483daa9e7d5@suse.com>
+Date: Mon, 21 Sep 2026 17:57:05 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 3/6] xen/riscv: make Svpbmt no longer a required
+ extension
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
+ <1789032898.8631fc262581453bbf619ec5b2062170.1a08aab9fe1000c4f3@vates.tech>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <1789032898.8631fc262581453bbf619ec5b2062170.1a08aab9fe1000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1790006202-1E867757-AD78F3BA/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1790006219-CF95A87B-E12904DB/0/0
 X-purgate-type: clean
-X-purgate-size: 5890
+X-purgate-size: 4312
 
-On 07.09.2026 08:50, Jan Beulich wrote:
->On 06.09.2026 15:11, Abdelkareem Abdelsaamad wrote:
->> On 26.08.2026 15:33, Jan Beulich wrote:
->>> On 23.08.2026 18:11, Abdelkareem Abdelsaamad wrote:
->>>> --- a/xen/arch/x86/hvm/svm/vmcb.c
->>>> +++ b/xen/arch/x86/hvm/svm/vmcb.c
->>>> @@ -320,6 +320,44 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
->>>>      svm_dump_sel("  TR", &vmcb->tr);
->>>>  }
->>>>  
->>>> +static bool is_valid_injected_exception_vector(const struct vmcb_struct *vmcb,
->>>> +    uint8_t vmcb_injected_vector)
->>>> +{
->>>> +    switch ( vmcb_injected_vector )
->>>> +    {
->>>> +    case X86_EXC_DE:
->>>> +    case X86_EXC_DB:
->>>> +    case X86_EXC_BP:
->>>> +    case X86_EXC_UD:
->>>> +    case X86_EXC_NM:
->>>> +    case X86_EXC_DF:
->>>> +    case X86_EXC_TS:
->>>> +    case X86_EXC_NP:
->>>> +    case X86_EXC_SS:
->>>> +    case X86_EXC_GP:
->>>> +    case X86_EXC_PF:
->>>> +    case X86_EXC_MF:
->>>> +    case X86_EXC_AC:
->>>> +    case X86_EXC_MC:
->>>
->>> Is #MC valid to inject without CR4.MCE set?
->> The testing I performed (see previous comment) does not show that set CR4.MCE
->> is required for the valid injection.
->
->I find this worrying. Roger, any chance you could try to find out whether
->that's perhaps more an erratum than intended behavior?
->
-I believe X86_EXC_MC was introduced long before AMD CPUs with SVM. Therefore,
-on all the SVM-capable CPUs I am targeting, it is valid to trigger this
-exception vector regardless of whether the guest has explicitly opted in for
-the capability.
-That said, if Roger can double-check and confirm this behavior, it would be
-highly appreciated.
+On 10.09.2026 11:34, Baptiste Le Duc wrote:
+> Without the Svpbmt extension, memory attributes (such as cacheability and
+> ordering) are strictly tied to physical address ranges and enforced by the
+> hardware's Physical Memory Attributes (PMA) checker.
+> 
+> In this configuration, supervisor software relies on the platform's memory
+> map:
+>     - peripheral device registers (MMIO) are physically mapped into
+>       hardware-defined I/O regions (which are implicitly non-cacheable and
+>       strongly-ordered)
+>     - regular RAM is mapped as cacheable main memory.
+> 
+> S-mode paging can safely map these physical ranges without specifying
+> page-based memory types in the PTEs, as the hardware MMU and PMA pipeline
+> will correctly bypass caches for MMIO accesses and use caches for RAM
+> accesses, based on the target physical address.
 
->>>> +        return true;
->>>> +
->>>> +    case X86_EXC_OF:
->>>> +    case X86_EXC_BR:
->>>> +        return !(vmcb_get_efer(vmcb) & EFER_LMA) || !vmcb->cs.l;
->>>> +
->>>> +    case X86_EXC_VC:
->>>> +        return vmcb_get_sev_es(vmcb);
->>>> +
->>>> +    case X86_EXC_CP:
->>>> +        return vmcb_get_cr4(vmcb) & X86_CR4_CET;
->>>
->>> ... e.g. here. That is, if a CR4 (or other) check is needed here, but not
->>> for #XM (or #SX), that's surely worth (briefly) commenting upon. The more
->>> that, afaics, none of this is spelled out in the PM.
->> In my testing, the hardware behavior differs across the generations support for
->> the Control-flow Enforcement Technology (CET):
->>  - Naples (No hardware support): Injecting the event when the feature is
->>    completely unsupported by the CPU results in VMEXIT_INVALID. The VMCB's CR4
->>    bit is not set as it is expected.
->>  - Genoa (Hardware support exists): If the CPU supports the feature but the
->>    guest has not enabled it in CR4 (not opted-in), injecting the event
->>    results in a triple fault. I am accordingly checking for the CPU feature and
->>    report it as invalid.
->
->A guest triple fault, I assume?
-Yes, that is correct. I meant a guest triple fault.
-> I'm not entirely convinced this is a sufficient
->indication of injection being permitted, even though I agree it very much looks
->so. Then again, like above, I'm also unconvinced this is actually intended
->behavior. Guests unaware of a feature (and hence not enabling it) should never
->observe exceptions related to only that feature.
-The testing, I performed shows the following behavior across the CPU
-generations:
- - On CPUU generations that support the feature (e.g., Genoa supporting 
-   Control-flow Enforcement Technology / CET), the injection results in
-   a guest triple fault. If the the guest did not opt-in for the CET feature.
-   No VMEXIT_INVALID results by the injection.
- - On older hardware generations that completely lack the feature (e.g., Naples), 
-   the injection immediately results in a VMEXIT_INVALID.
+Provided firmware got absolutely everything right.
 
-The current hardware behavior seems to depend on whether the underlying
-physical CPU understands the feature, rather than whether the guest has opted
-into it via CR4. The patch expands this to consider the injection will result
-in VMEXIT_INVALID if the guest did not opt into the feature.
+> Furthermore, on platforms that either feature fully hardware-coherent DMA
+> or don't expose non-coherent DMA agents to the OS, page-level programmatic
+> cache control via Svpbmt is not required, making it safe to boot and run
+> when Svpbmt is absent.
 
-Are you suggesting to reather explicitly check the CPU model/generation instead
-of checking X86_CR4_CET? For example, allowing the injection on Genoa platforms
-regardless of whether the guest has enabled the CET capability? I am concerned 
-that handling this via CPU model checks might introduce architectural edge
-cases and/or add maintenance complication—what are your thoughts on that
-approach?
+Yet a fully coherent platform should also be possible to somehow identify?
 
->>>> @@ -392,6 +436,20 @@ bool svm_vmcb_isvalid(
->>>>          PRINTF("eventinj: MBZ bits are set (%#"PRIx64")\n",
->>>>                 vmcb->event_inj.raw);
->>>>  
->>>> +    if ( !vmcb->event_inj.v )
->>>> +        PRINTF("eventinj: valid bit is not set (%#"PRIx64")\n",
->>>> +               vmcb->event_inj.raw);
->>>
->>> I understand the parentheses in the log message here. Yet ...
->>>
->>>> +    if ( !((1 << vmcb_injected_type) & vmcb_valid_event_inj_types_mask) )
->>>
->>> If vmcb_injected_type really could take all possible uint8_t values (see
->>> below), this shift would be at risk of becoming UB. And uint8_t is a
->>> stronger hint that all possible values may appear than unsigned int is.
->> I am OK to change to unsigned int for safety with future possible extensions.
->>>
->>>> +        PRINTF("eventinj: Invalid Injected Event Type: (%#"PRIx8")\n",
->>>> +               vmcb_injected_type);
->>>
->>> ... what purpose do they serve here (and below)?
->> I did it just to go with the previous format but I am OK to drop in v5.
->
->You did notice the difference in message type, though? Where parentheses
->are used in existing messages, the values put there serve as auxiliary
->information to the wording used. Whereas here you plainly dump a value,
->without saying what exactly is wrong (that's actually said by the value
->dumped).
-Got it. I will drop the parentheses in v5.
+> Drop Svpbmt from required_extensions. Introduce svpbmt_enabled, a
+> __ro_after_init flag computed once in init_csr_masks() from ISA
+> availability and the henvcfg.PBMTE bit. Xen cannot read menvcfg.PBMTE
+> directly, since menvcfg is M-mode-only and unreadable from HS-mode, but the
+> spec guarantees henvcfg.PBMTE reads as zero whenever menvcfg.PBMTE is zero,
+> so checking henvcfg.PBMTE alone is sufficient.
+
+I don't understand this logic. If menvcfg.PBMTE is non-zero, we know
+nothing about (or from) henvcfg.PBMTE's setting.
+
+> --- a/xen/arch/riscv/domain.c
+> +++ b/xen/arch/riscv/domain.c
+> @@ -47,6 +47,8 @@ static struct csr_masks __ro_after_init csr_masks;
+>  #define HENVCFG_VALID_MASK 0xe0000003000000ffUL
+>  #define HSTATEEN0_VALID_MASK 0xde00000000000007UL
+>  
+> +bool __ro_after_init svpbmt_enabled;
+> +
+>  void __init init_csr_masks(void)
+>  {
+>      /*
+> @@ -79,6 +81,10 @@ void __init init_csr_masks(void)
+>          INIT_RO_ONE_MASK(HSTATEEN0, hstateen0);
+>      }
+>  
+> +    svpbmt_enabled = (riscv_isa_extension_available(NULL,
+> +                RISCV_ISA_EXT_svpbmt)) && (ENVCFG_PBMTE &
+> +                csr_masks.henvcfg);
+
+Line wrapping wants doing entirely differently here. One of the style-
+conforming options is
+
+    svpbmt_enabled =
+        riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svpbmt) &&
+        (csr_masks.henvcfg & ENVCFG_PBMTE);
+
+> --- a/xen/arch/riscv/include/asm/page.h
+> +++ b/xen/arch/riscv/include/asm/page.h
+> @@ -11,6 +11,7 @@
+>  #include <xen/types.h>
+>  
+>  #include <asm/atomic.h>
+> +#include <asm/cpufeature.h>
+>  #include <asm/page-bits.h>
+>  
+>  #define VPN_MASK                    (PAGETABLE_ENTRIES - 1UL)
+> @@ -42,7 +43,21 @@
+>   *  01 - NC     Non-cacheable, idempotent, weakly-ordered Main Memory
+>   *  10 - IO     Non-cacheable, non-idempotent, strongly-ordered I/O memory
+>   *  11 - Rsvd   Reserved for future standard use
+> + *
+> + * These bits are only meaningful when Svpbmt is enabled. Otherwise they must
+> + * stay 0 (PMA).
+>   */
+> +extern bool svpbmt_enabled;
+> +static inline unsigned long pte_pbmt_nocache(void)
+> +{
+> +    return svpbmt_enabled ? BIT(61, UL) : 0;
+> +}
+> +
+> +static inline unsigned long pte_pbmt_io(void)
+> +{
+> +    return svpbmt_enabled ? BIT(62, UL) : 0;
+> +}
+
+Why open-code ...
+
+>  #define PTE_PBMT_NOCACHE            BIT(61, UL)
+>  #define PTE_PBMT_IO                 BIT(62, UL)
+
+... what is still available here?
+
+> @@ -53,6 +68,7 @@
+>  #define PAGE_HYPERVISOR_RX          (PTE_VALID | PTE_READABLE | PTE_EXECUTABLE | PTE_ACCESSED)
+>  
+>  #define PAGE_HYPERVISOR             PAGE_HYPERVISOR_RW
+> +
+>  /*
+>   * PAGE_HYPERVISOR_NOCACHE is used for ioremap().
+>   *
+
+Stray change?
+
+> @@ -82,7 +98,7 @@ enum pbmt_type {
+>  
+>  #define PTE_ACCESS_MASK (PTE_READABLE | PTE_WRITABLE | PTE_EXECUTABLE)
+>  
+> -#define PTE_PBMT_MASK   (PTE_PBMT_NOCACHE | PTE_PBMT_IO)
+> +#define PTE_PBMT_MASK   (BIT(61, UL) | BIT(62, UL))
+
+I don't understand the need for this change.
+
+Jan
 
