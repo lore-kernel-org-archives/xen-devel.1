@@ -4,44 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2890FC982ED
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 16:01:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1427724.1650524 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39294C982ED
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 16:15:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1427752.1650537 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8gSA-0002ES-Jf; Mon, 21 Sep 2026 16:01:14 +0000
+	id 1x8gfj-00049h-R3; Mon, 21 Sep 2026 16:15:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1427724.1650524; Mon, 21 Sep 2026 16:01:14 +0000
+Received: by outflank-mailman (output) from mailman id 1427752.1650537; Mon, 21 Sep 2026 16:15:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8gSA-0002EL-Gc; Mon, 21 Sep 2026 16:01:14 +0000
-Received: by outflank-mailman (input) for mailman id 1427724;
- Mon, 21 Sep 2026 16:01:13 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x8gS9-0002EF-Jh
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 16:01:13 +0000
+	id 1x8gfj-00049a-OU; Mon, 21 Sep 2026 16:15:15 +0000
+Received: by outflank-mailman (input) for mailman id 1427752;
+ Mon, 21 Sep 2026 16:15:15 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x8gfi-00049T-Ij
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 16:15:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8gS9-0079oW-0V
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 18:01:13 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ab154c8-bab6-0a2a0a5309dd-0a2a450a9bd4-4
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 18:01:12 +0200
-Received: from [74.125.225.103] (helo=mail-wr2-f39.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ab154c8-f2d2-0a2a450a0019-4a7de1678076-3
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 18:01:12 +0200
-Received: by mail-wr2-f39.google.com with SMTP id
- ffacd0b85a97d-482f633ece3so2452228f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 09:01:12 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48724460898sm22720256f8f.9.2026.09.21.09.01.10
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Sep 2026 09:01:10 -0700 (PDT)
+ id 1x8gfh-00Dj9s-FU
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 18:15:13 +0200
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c4bff57900072c4@swg.vates.tech>)
+ id 6ab15809-8faa-0a2a0a5109dd-0a2a4506dcbc-34
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 18:15:13 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c4bff57900072c4@swg.vates.tech>)
+ id 6ab15811-195a-0a2a45060019-b9ff1c228781-3
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 18:15:13 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a0c4bff57900072c4.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 21 Sep 2026 16:15:09 +0000
+Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id CD00580B5E;
+ Mon, 21 Sep 2026 18:15:08 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,146 +56,366 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790006472; x=1790611272; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=qgQz7Jfd9wETL2veMKW7K1+Bq6adGZsDysw0mhmkPAU=;
-        b=SU2ebhivthaKqb0jPiVEeOU5tpMJEgMdI7A+VrUJe18dAJQLBzZhqpQNq1P3reSqYP
-         bYq+CEqfHH0LiA2NlaUvHS6sfsTRNnJuQPwNIoM0CiX0c+ctZoC1kOqsC5hXt1RwgfJa
-         HL3bEZ3ydhneXNivGGkcPufdvpi28iLyuJxlZi1TY20TOjmtyw6imx7SCsOkRrbShwUa
-         H4MHMwQ12/4LdqVnDdDqjWXyQIMAe7r6Pn2SvxUjDLZOBX9y4D8VVoQHFd3mlSN1csuC
-         g43y/h/0bqn//riau0KFNVCj1puVXF5B7aCJ080CJMDFmddd8153R6sxYXFDlUpHqdkq
-         IoBg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790006472; x=1790611272;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=qgQz7Jfd9wETL2veMKW7K1+Bq6adGZsDysw0mhmkPAU=;
-        b=dBA9v1etEPuIF8222i1+yV7osbG/qUZ32p6NzLWQWb5JoaAIHasv4b83sX5mPPKMsP
-         OkS5F1hqYzf+Ku9qDvIjFW79bXY2iQiiad8pC1qQlaVRCGsaJnNdoNo6OvDy7EcN7IH3
-         4mV8HU9cnQeQwyP/1Eu4SNXb0bcXdHjEqh6L33oKSP5Lma2JmfmOHdcDrta6VGqDb0Y3
-         YGshZx9+YXAnfJUJItvUMFtNV1W0AUZfLLCqBWpvHOhWhGmvLThK9VYXxEQ4J0OTsdD5
-         diD5OXG05jCniZNEcP32rtBUxEfYXtqX0OxKLMHq/p2/1g+fyBQHMP0r/ub1TaEymELM
-         ahZQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzOVnJmWiZSAhCvH1LhCf1RSxnEiyBV0BkheACrl6HjiK7U3/xSsDAUtBibMvZqw/xpHLRsOmftbkQ=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nKo3YoC8VhKH5Iw13FIv9Oev74RHnXfytiyWFdnBqk4hkMR3tw
-	u4Tnm1HtS5KDlHruSc8gxtKGo3CuTGaVkJcV80DIBtpQDs5gwAY+FU0c9im8uyW1Cw==
-X-Gm-Gg: AYBFou357O42unVCJCAlw8TJbp8W/UoUXP0/HpeOvZo8OiASZNG+RGAbmzLr74wJDqV
-	OgEO/9RALZnRdZXJJ51fLcgUgvfVOLB6i/OL8ND1CB81NPOEJC6QhRXU0OiWjs3WDj1/tJPs9lT
-	tlPwpY5SuZfHnSY4fbizPu3CZhEhx4KrVJ2ZxReHENZLM3qKRZweWnU+TK/OS1jQzvd0ZUWEJSh
-	CA2qzNs4f31WWuK39qAaa2yUorQ7Smnan51LarXkdWzsBIQRd7JOKNdZUhTp2U8mKsyMia+zZf9
-	cqQ6S2pmbWkqXLqiHns6kVLGzXQ8uG7QxFYVXQx740qFsOgnYqLYy8L4UGtgjhVK4lDA6K3gRiK
-	GsPkUL+neKrncJvyGFdZYDfMD7rDXv1qbcM86E1GwbpT/YQ/EOsEY4XMAx/7/C6NYMZAbNAwGIK
-	F6wNtxy+UWQ3s5ZYn7l5jNOrM9QSm/WsuZjurh9yBSbC4zR7IRZdE+Wz/4EDuOs+slzhO6oe9HQ
-	JkP2fv49IWqfoCIslr3Ps6wHn0fqUMPsgkc4kjBEGkkWoRrGMSt8kKjGRJgUw==
-X-Received: by 2002:a05:600c:3e06:b0:49e:8238:6feb with SMTP id 5b1f17b1804b1-49fc56daf07mr169600375e9.14.1790006472378;
-        Mon, 21 Sep 2026 09:01:12 -0700 (PDT)
-Message-ID: <f81efd12-4eab-4147-9e83-8d082a8ce163@suse.com>
-Date: Mon, 21 Sep 2026 18:01:17 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=2c6HMFbObZqp9M8tEUOgquC1OeMDygg1yWrZjcnVNus=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=FCx593TiAl23R5zH7Da28DNdMcGTPL+o3FOWDIszz9yxJYLvBrG+sDQZfaitJv2O7kcdEKHA6
+ 0G5k1fwLHXJlLPQ7Cv+s63uFkWmfAjqt16rQqtXxa6/dhuO9q+WHp2X33071HSuWacJvyGRnu1R
+ P2cFKpe1Oyg15SBeMmpSnKhpsUzR1zlMduLcsPvG2x11jvV+YMLTUybvhhHL0O6kZwMu6tuPr99
+ jmEUWWYPLcP1I4tNwjCDFWyA3rUjA15suwNffqBp15fD0PF8b/7MjsXHJBsa0VqmyMHypKkJXok
+ OLn/wQnDVPGUxF2HiLpAiuZLtL+Y4UIU8he+VKjK1Dng==
+X-Zone-Loop: 66803f35ba05bc9aa7abaa99e81e6389fe02bc6e9d1a
+x-campaign-type: default
+x-transaction-id: b1189af5-d8ef-4555-805c-a72dee02ca9f
+x-swg-uid: 01-e94081c9-8dc9-4f77-876b-67bdf94f80e9
+X-Mailer: Sweego
+Message-ID:
+ <1790007309.8631fc262581453bbf619ec5b2062170.1a0c4bff57900072c4@vates.tech>
+x-swg-bid: 1790007309.8631fc262581453bbf619ec5b2062170.1a0c4bff57900072c4
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Mon, 21 Sep 2026 18:15:08 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4] x86/nSVM: Check injected event consistency
-To: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-Cc: andrew.cooper3@citrix.com, roger@xenproject.org, jason.andryuk@amd.com,
- teddy.astie@vates.tech, xen-devel@lists.xenproject.org
-References: <v4-586da975-bd71-4305-a17e-cd5ba35995a4@suse.com>
- <20260921155103.3243475-1-abdelkareem.abdelsaamad@citrix.com>
+Subject: Re: [PATCH v2 30/39] xen/riscv: prepare new IMSIC VS-file
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ xen-devel@lists.xenproject.org
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <440bc07dfb72d09da72b49ded6f78dc1f54a3ad5.1787838835.git.oleksii.kurochko@gmail.com>
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260921155103.3243475-1-abdelkareem.abdelsaamad@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1790006472-53ED2CFC-0F5833FC/0/0
-X-purgate-type: clean
-X-purgate-size: 3207
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+Autocrypt: addr=baptiste.le-duc@vates.tech; keydata=
+ xsBNBGoPSX8BCADSuTikqW3FD4mscQugY1thRaKlIhcJ2G9YCWYXAlp+xosvTlzfIftOZZim
+ 750MLvyKtLPkQzB6TZtFZBiexSraaF/MdDKRTT5DcVa3r7ZnHgqMclWlPa4ioysS4yFcJanL
+ cyNOT7HUFvIdirMMqiViedfYtS0GORPBBPVISD6ClMz3ecHIxqllfq9CHYQn4amKEfHmh6tm
+ Rufo4Gjl6x8cUFZZlRQf+aCmUzdSPA0P5u3sueYH1uEz4w/jbD53MlKqzCvxUeOsfS2swTQA
+ 6mS9jIgOjNadpUTOzKfDHMgFirtG+HFpm45Nwp6KQizxgDVOfTnOfVHm5Gwqm3ETl9y5ABEB
+ AAHNPEJhcHRpc3RlIExlIER1YyAoVmF0ZXMgWXViaWtleSkgPGJhcHRpc3RlLmxlLWR1Y0B2
+ YXRlcy50ZWNoPsLAjgQTAQoAOBYhBGiSJ6HgW88MgT/gfu2Cu2XL9M6QBQJqD0l/AhsDBQsJ
+ CAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEO2Cu2XL9M6QuMcH/ihiy/Nrxp919AmY0ENnc0NK
+ r/2LDvW/hrX4FfbpxAmrGmQ7MU1aQTk0JDbfcsG8OYH6wO5sqnXb1gz50YrEdpfVSbHz5YTZ
+ EhDIxE4g7NrvJZh3Qc0m0CAyjYTNHen7J6olVaCMjrOH7uRHUYZ7Pl3am9mZosfLmez/aWJO
+ a6ihQxBXHI75brlk1teIURkep2kP7P0Flmfl4cA//saREoTF7GXCtjOSQk/xg8PP0Sswqp5G
+ TdJptn3FQn6lAzfz0eFSYqkaoX2c2k1MDa7o+UX9cfGPL8ybMKnYkasLxck6eOWGJWf+YTrm
+ ga/r0kBaftmqNDgt5nI2jNTDwZcT9g3OwE0Eag9JfwEIAM6IWbuBSvz+erv27oGDDpo8M6Fp
+ dGUvft7v+WceHUfxiXpYFx9qgIU6XGy6y+3lJMAvNcltS8DuhioqMlfKRSYGKZlpliY65dNP
+ 557IuM4ctVJ+I9CVclvv9eahARQKgF5auLJAAlvGSmU+ufNvlwTUmLIRcrPviTmB6X5jJYc+
+ fiNeyI0HcsgcN21C0r62tUCypuZ+vgEJXw2bx1V8mVGZKxdGJPh58QF6kRK+xmd4kEComLGV
+ BeM6BcVOtEjDcGNC0tLhXb0p9g1Ys55iA8sd6s4WacyolW2J6rwmcOkjiWexWw1caYgIWAV1
+ 004M3gwUaOz0dGq2i7HQ0AiVfVkAEQEAAcLAdgQYAQoAIBYhBGiSJ6HgW88MgT/gfu2Cu2XL
+ 9M6QBQJqD0l/AhsMAAoJEO2Cu2XL9M6QovYH/RjstyL5o/V5K74ylBtz0j5t3pLX5JKbwApi
+ 656rGgDdqElImyvvZppNMl/mgHNzvxmfFAhJXnSX9f1fqVEQKOGEhLUastnl/ssBiE5x7btM
+ V0GAffxXbXJZbVv4b/DI+gVrOPc2YXlVwruapvTZNtD3hqPrkjrmq5WTtGR2loIVSe62hmh0
+ BGD2Fy79b/hYWyBqhayPBEjwGW75u4/yn+Yqy1PgG3hIcvg7GSuT3akhHZSB2Mbguzcoyf9Q
+ DJl6t33JxPRkkNrEdkPPmRlQCTSiUkVjKqMDF3jlINWsJ5t4jKFsNF91ksdw7aQgiX+tQIpE
+ ugMC1NuNi5dDGip66bw=
+In-Reply-To: <440bc07dfb72d09da72b49ded6f78dc1f54a3ad5.1787838835.git.oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1790007309060
+X-purgate-ID: tlsNG-16d1c6/1790007313-FE67277B-BE7FC686/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 10263
 
-On 21.09.2026 17:50, Abdelkareem Abdelsaamad wrote:
-> On 07.09.2026 08:50, Jan Beulich wrote:
->> On 06.09.2026 15:11, Abdelkareem Abdelsaamad wrote:
->>> On 26.08.2026 15:33, Jan Beulich wrote:
->>>> On 23.08.2026 18:11, Abdelkareem Abdelsaamad wrote:
->>>>> +    case X86_EXC_OF:
->>>>> +    case X86_EXC_BR:
->>>>> +        return !(vmcb_get_efer(vmcb) & EFER_LMA) || !vmcb->cs.l;
->>>>> +
->>>>> +    case X86_EXC_VC:
->>>>> +        return vmcb_get_sev_es(vmcb);
->>>>> +
->>>>> +    case X86_EXC_CP:
->>>>> +        return vmcb_get_cr4(vmcb) & X86_CR4_CET;
->>>>
->>>> ... e.g. here. That is, if a CR4 (or other) check is needed here, but not
->>>> for #XM (or #SX), that's surely worth (briefly) commenting upon. The more
->>>> that, afaics, none of this is spelled out in the PM.
->>> In my testing, the hardware behavior differs across the generations support for
->>> the Control-flow Enforcement Technology (CET):
->>>  - Naples (No hardware support): Injecting the event when the feature is
->>>    completely unsupported by the CPU results in VMEXIT_INVALID. The VMCB's CR4
->>>    bit is not set as it is expected.
->>>  - Genoa (Hardware support exists): If the CPU supports the feature but the
->>>    guest has not enabled it in CR4 (not opted-in), injecting the event
->>>    results in a triple fault. I am accordingly checking for the CPU feature and
->>>    report it as invalid.
->>
->> A guest triple fault, I assume?
-> Yes, that is correct. I meant a guest triple fault.
->> I'm not entirely convinced this is a sufficient
->> indication of injection being permitted, even though I agree it very much looks
->> so. Then again, like above, I'm also unconvinced this is actually intended
->> behavior. Guests unaware of a feature (and hence not enabling it) should never
->> observe exceptions related to only that feature.
-> The testing, I performed shows the following behavior across the CPU
-> generations:
->  - On CPUU generations that support the feature (e.g., Genoa supporting 
->    Control-flow Enforcement Technology / CET), the injection results in
->    a guest triple fault. If the the guest did not opt-in for the CET feature.
->    No VMEXIT_INVALID results by the injection.
->  - On older hardware generations that completely lack the feature (e.g., Naples), 
->    the injection immediately results in a VMEXIT_INVALID.
+
+
+On 8/27/26 5:24 PM, Oleksii Kurochko wrote:
+> Implement first steps of migration a vCPU to a different guest interrupt file
+> procedure:
+> - At the old interrupt file, save to memory the values of registers
+>    eidelivery and eithreshold, and set eidelivery = 0.
+> - At the new interrupt file, set eidelivery = 0, and zero all
+>    implemented interrupt-pending bits (the eip array).
 > 
-> The current hardware behavior seems to depend on whether the underlying
-> physical CPU understands the feature, rather than whether the guest has opted
-> into it via CR4. The patch expands this to consider the injection will result
-> in VMEXIT_INVALID if the guest did not opt into the feature.
+> The following steps will be introduced in follow-up patches.
 > 
-> Are you suggesting to reather explicitly check the CPU model/generation instead
-> of checking X86_CR4_CET? For example, allowing the injection on Genoa platforms
-> regardless of whether the guest has enabled the CET capability? I am concerned 
-> that handling this via CPU model checks might introduce architectural edge
-> cases and/or add maintenance complication—what are your thoughts on that
-> approach?
-
-No, I'm not suggesting to go by CPU model. That would be wrong in certain
-migration scenarios, afaict.
-
-Jan
+> Add a BUG_ON("unimplemented") placeholder in imsic_migrate_vcpu() to guard
+> against silent incorrect behaviour or unexpected panics in guest VMs until
+> the function is fully implemented.
+> 
+> vgein_assign() will be introduced later in a separate patch, for not it is
+> only stub.
+> 
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> ---
+> Changes in v2:
+>   - New patch.
+> ---
+> ---
+>   xen/arch/riscv/aia.c             |   9 ++
+>   xen/arch/riscv/imsic.c           | 159 +++++++++++++++++++++++++++++++
+>   xen/arch/riscv/include/asm/aia.h |   4 +
+>   xen/include/xen/config.h         |   1 +
+>   4 files changed, 173 insertions(+)
+> 
+> diff --git a/xen/arch/riscv/aia.c b/xen/arch/riscv/aia.c
+> index e31c9c2d24b6..75c82bcfa1b3 100644
+> --- a/xen/arch/riscv/aia.c
+> +++ b/xen/arch/riscv/aia.c
+> @@ -1,8 +1,10 @@
+>   /* SPDX-License-Identifier: GPL-2.0-only */
+>   
+> +#include <xen/bug.h>
+>   #include <xen/errno.h>
+>   #include <xen/init.h>
+>   #include <xen/sections.h>
+> +#include <xen/sched.h>
+>   #include <xen/types.h>
+>   
+>   #include <asm/cpufeature.h>
+> @@ -21,3 +23,10 @@ void __init aia_init(void)
+>   
+>       _aia_usable = true;
+>   }
+> +
+> +unsigned int vgein_assign(struct vcpu *v)
+> +{
+> +    BUG_ON("unimplemented\n");
+> +
+> +    return 0;
+> +}
+> diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
+> index ad7fbe708bfd..516f0105352a 100644
+> --- a/xen/arch/riscv/imsic.c
+> +++ b/xen/arch/riscv/imsic.c
+> @@ -26,6 +26,7 @@
+>   #include <xen/spinlock.h>
+>   #include <xen/xvmalloc.h>
+>   
+> +#include <asm/aia.h>
+>   #include <asm/imsic.h>
+>   
+>   #define IMSIC_HART_SIZE(guest_bits) (BIT(guest_bits, U) * IMSIC_MMIO_PAGE_SZ)
+> @@ -77,6 +78,64 @@ do {                            \
+>       csr_clear(CSR_SIREG, v);    \
+>   } while (0)
+>   
+> +#define imsic_vs_csr_write(c, v)    \
+> +do {                                \
+> +    csr_write(CSR_VSISELECT, (c));  \
+> +    csr_write(CSR_VSIREG, (v));     \
+> +} while ( 0 )
+> +
+> +/*
+> + * Generic switchcase expansion pyramid.
+> + * F is the per-operation leaf macro, ireg is the base register index.
+> + * Optional extra args (e.g. an operation and/or a value) are forwarded to F
+> + * via __VA_ARGS__.
+> + *
+> + * imsic_switchcase_break(ireg, op, v) - emit "case ireg: op(ireg,v); break;"
+> + * imsic_switchcase_ret(ireg, op, ...) - emit "case ireg: return op(ireg[,v]);"
+> + *   The variadic tail is optional so the same leaf works for both read (no v)
+> + *   and swap (with v).
+> + */
+> +#define imsic_switchcase_break(ireg, op, v) \
+> +    case ireg:                              \
+> +        op(ireg, v);                        \
+> +        break;
+> +
+> +#define imsic_switchcase_ret(ireg, op, ...) \
+> +    case ireg:                              \
+> +        return op(ireg, ##__VA_ARGS__);
+> +
+> +#define imsic_switchcase_2(F, ireg, ...)    \
+> +    F(ireg + 0, ##__VA_ARGS__)              \
+> +    F(ireg + 1, ##__VA_ARGS__)
+> +#define imsic_switchcase_4(F, ireg, ...)    \
+> +    imsic_switchcase_2(F, ireg + 0, ##__VA_ARGS__)  \
+> +    imsic_switchcase_2(F, ireg + 2, ##__VA_ARGS__)
+> +#define imsic_switchcase_8(F, ireg, ...)    \
+> +    imsic_switchcase_4(F, ireg + 0, ##__VA_ARGS__)  \
+> +    imsic_switchcase_4(F, ireg + 4, ##__VA_ARGS__)
+> +#define imsic_switchcase_16(F, ireg, ...)   \
+> +    imsic_switchcase_8(F, ireg + 0, ##__VA_ARGS__)  \
+> +    imsic_switchcase_8(F, ireg + 8, ##__VA_ARGS__)
+> +#define imsic_switchcase_32(F, ireg, ...)   \
+> +    imsic_switchcase_16(F, ireg + 0, ##__VA_ARGS__) \
+> +    imsic_switchcase_16(F, ireg + 16, ##__VA_ARGS__)
+> +#define imsic_switchcase_64(F, ireg, ...)   \
+> +    imsic_switchcase_32(F, ireg + 0, ##__VA_ARGS__) \
+> +    imsic_switchcase_32(F, ireg + 32, ##__VA_ARGS__)
+> +
+> +static void imsic_eix_write(unsigned int ireg, unsigned long val)
+> +{
+> +    switch ( ireg )
+> +    {
+> +    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIP0,
+> +                        imsic_vs_csr_write, val)
+> +    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIE0,
+> +                        imsic_vs_csr_write, val)
+> +    default:
+> +        ASSERT_UNREACHABLE();
+> +    }
+> +}
+> +
+>   unsigned int vcpu_guest_file_id(const struct vcpu *v)
+>   {
+>       return ACCESS_ONCE(v->arch.vimsic_state->guest_file_id);
+> @@ -389,6 +448,76 @@ int cf_check vcpu_imsic_init(struct vcpu *v)
+>       return 0;
+>   }
+>   
+> +/*
+> + * Arguments of the imsic_vsfile_local_*() helpers, which are executed by the
+> + * pCPU owning the interrupt file, thereby through imsic_call_on_cpu().
+> + */
+> +struct imsic_vsfile_data {
+> +    unsigned int hgei;
+> +    unsigned int nr_eix;
+> +    struct imsic_mrif *mrif;
+> +};
+> +
+> +/*
+> + * Execute func() on the pCPU which owns the IMSIC interrupt file func() is
+> + * going to work with.
+> + *
+> + * An IMSIC VS-file is reachable only through hstatus.VGEIN of the hart the
+> + * file belongs to, and a guest interrupt file index is meaningless on any
+> + * other hart, so such work always has to be done by that very hart.
+> + *
+> + * The local case runs with IRQs disabled to provide func() with the same
+> + * environment it is given when it is called from the function call IPI
+> + * handler.
+> + */
+> +static void imsic_call_on_cpu(unsigned int cpu, void (*func)(void *),
+> +                              void *data)
+> +{
+> +    if ( cpu == smp_processor_id() )
+> +    {
+> +        unsigned long flags;
+> +
+> +        local_irq_save(flags);
+> +        func(data);
+> +        local_irq_restore(flags);
+> +    }
+> +    else
+> +        on_selected_cpus(cpumask_of(cpu), func, data, 1);
+> +}
+> +
+> +static void cf_check imsic_vsfile_local_clear(void *data)
+I think the remark from Jan to direclty pass the type instead of void
+could be applied here.
+> +{
+> +    unsigned int i;
+> +    const struct imsic_vsfile_data *idata = data;
+> +    unsigned long new_hstatus, old_hstatus, old_vsiselect;
+> +
+> +    /* We can only zero-out if we have a IMSIC VS-file */
+> +    if ( !idata->hgei )
+> +        return;
+> +
+> +    old_vsiselect = csr_read(CSR_VSISELECT);
+> +    old_hstatus = csr_read(CSR_HSTATUS);
+> +    new_hstatus = old_hstatus & ~HSTATUS_VGEIN;
+> +    new_hstatus |= MASK_INSR(idata->hgei, HSTATUS_VGEIN);
+> +    csr_write(CSR_HSTATUS, new_hstatus);
+> +
+> +    imsic_vs_csr_write(IMSIC_EIDELIVERY, 0);
+> +    imsic_vs_csr_write(IMSIC_EITHRESHOLD, 0);
+> +
+> +    for ( i = 0; i < idata->nr_eix; i++ )
+> +    {
+> +        imsic_eix_write(IMSIC_EIP0 + i * 2, 0);
+> +        imsic_eix_write(IMSIC_EIE0 + i * 2, 0);
+> +#ifdef CONFIG_RISCV_32
+> +        imsic_eix_write(IMSIC_EIP0 + i * 2 + 1, 0);
+> +        imsic_eix_write(IMSIC_EIE0 + i * 2 + 1, 0);
+> +#endif
+> +    }
+> +
+> +    csr_write(CSR_HSTATUS, old_hstatus);
+> +    csr_write(CSR_VSISELECT, old_vsiselect);
+> +}
+> +
+>   void cf_check vcpu_imsic_deinit(struct vcpu *v)
+>   {
+>       XVFREE(v->arch.vimsic_state);
+> @@ -689,6 +818,14 @@ int __init vimsic_make_domu_dt_node(struct kernel_info *kinfo,
+>   
+>   void imsic_migrate_vcpu(struct vcpu *v)
+>   {
+> +    unsigned int new_vsfile_hgei;
+> +    unsigned int new_vsfile_cpu;
+> +    unsigned int nr_hw_eix = DIV_ROUND_UP(imsic_cfg.nr_ids + 1,
+> +                                          BITS_PER_TYPE(uint64_t));
+This value appears to remain constant after initialization, since it 
+depends directly on the hw,
+so it is not necessary to calculate it each time.
+> +    struct imsic_vsfile_data vsfile_data = {
+> +        .nr_eix = nr_hw_eix,
+> +    };
+> +
+>       /*
+>        * The scheduler can mark a freshly created vCPU's unit as migrated and
+>        * invoke this before the vCPU has ever run (see the migrated branch in
+> @@ -699,5 +836,27 @@ void imsic_migrate_vcpu(struct vcpu *v)
+>       if ( v->arch.last_cpu == NR_CPUS )
+>           return;
+>   
+> +    /*
+> +     * At this point, all interrupt producers are still using the old IMSIC
+> +     * VS-file.
+> +     */
+> +
+> +    /*
+> +     * Latch the pCPU the new interrupt file is taken from: vgein_assign()
+> +     * allocates it from v->processor's pool of guest interrupt files, and
+> +     * only that hart can access the file afterwards.
+> +     */
+> +    new_vsfile_cpu = v->processor;
+> +
+> +    new_vsfile_hgei = vgein_assign(v);
+> +
+> +    /* We don't support SW interrupt files at the moment. */
+> +    BUG_ON(!new_vsfile_hgei);
+> +
+> +    vsfile_data.hgei = new_vsfile_hgei;
+> +
+> +    /* Zero-out new IMSIC VS-file */
+> +    imsic_call_on_cpu(new_vsfile_cpu, imsic_vsfile_local_clear, &vsfile_data);
+> +
+>       BUG_ON("unimplemented");
+>   }
+> diff --git a/xen/arch/riscv/include/asm/aia.h b/xen/arch/riscv/include/asm/aia.h
+> index aaa4bf91fc75..53a1efb042f8 100644
+> --- a/xen/arch/riscv/include/asm/aia.h
+> +++ b/xen/arch/riscv/include/asm/aia.h
+> @@ -3,8 +3,12 @@
+>   #ifndef RISCV_AIA_H
+>   #define RISCV_AIA_H
+>   
+> +struct vcpu;
+> +
+>   bool aia_usable(void);
+>   
+>   void aia_init(void);
+>   
+> +unsigned int vgein_assign(struct vcpu *v);
+> +
+>   #endif /* RISCV_AIA_H */
+> diff --git a/xen/include/xen/config.h b/xen/include/xen/config.h
+> index dddc8e1920fe..0e29976e8203 100644
+> --- a/xen/include/xen/config.h
+> +++ b/xen/include/xen/config.h
+> @@ -100,6 +100,7 @@
+>   #define BITS_PER_INT    (BITS_PER_BYTE * __SIZEOF_INT__)
+>   #define BITS_PER_LONG   (BITS_PER_BYTE * BYTES_PER_LONG)
+>   #define BITS_PER_LLONG  (BITS_PER_BYTE * __SIZEOF_LONG_LONG__)
+> +#define BITS_PER_TYPE(type) (sizeof(type) * BITS_PER_BYTE)
+>   
+>   /* It is assumed that sizeof(void *) == __alignof(void *) */
+>   #define POINTER_ALIGN   __SIZEOF_POINTER__
 
