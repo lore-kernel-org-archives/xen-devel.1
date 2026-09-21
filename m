@@ -4,49 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE49C982DA
-	for <xen-devel@archiver.kernel.org>; Sun, 20 Sep 2026 19:11:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1426955.1649663 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E673C982EF
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 02:29:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1427029.1649680 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8Mw4-0000cu-7v; Sun, 20 Sep 2026 19:10:48 +0000
+	id 1x8Tlm-000892-LG; Mon, 21 Sep 2026 02:28:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1426955.1649663; Sun, 20 Sep 2026 19:10:48 +0000
+Received: by outflank-mailman (output) from mailman id 1427029.1649680; Mon, 21 Sep 2026 02:28:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8Mw4-0000cn-4d; Sun, 20 Sep 2026 19:10:48 +0000
-Received: by outflank-mailman (input) for mailman id 1426955;
- Sun, 20 Sep 2026 19:10:47 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c03a526800072c4@swg.vates.tech>)
- id 1x8Mw3-0000cf-2Y
- for xen-devel@lists.xenproject.org; Sun, 20 Sep 2026 19:10:47 +0000
+	id 1x8Tlm-00088v-IT; Mon, 21 Sep 2026 02:28:38 +0000
+Received: by outflank-mailman (input) for mailman id 1427029;
+ Mon, 21 Sep 2026 02:28:37 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <ziy@nvidia.com>) id 1x8Tlk-00088f-TF
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 02:28:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8Mw1-0023cb-Hp
- for xen-devel@lists.xenproject.org; Sun, 20 Sep 2026 21:10:45 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c03a526800072c4@swg.vates.tech>)
- id 6ab02f74-e002-0a2a0a5209dd-0a2a4507842e-30
- for <xen-devel@lists.xenproject.org>; Sun, 20 Sep 2026 21:10:45 +0200
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c03a526800072c4@swg.vates.tech>)
- id 6ab02fb4-b4ea-0a2a45070019-b9ff1c12988d-3
- for <xen-devel@lists.xenproject.org>; Sun, 20 Sep 2026 21:10:45 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0c03a526800072c4.004 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Sun, 20 Sep 2026 19:10:42 +0000
-Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id CE9BB82323;
- Sun, 20 Sep 2026 21:10:41 +0200 (CEST)
+ id 1x8Tlk-00H6CK-AN
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 04:28:36 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <ziy@nvidia.com>)
+ id 6ab095e9-2eae-0a2a0a5409dd-0a2a4509e752-34
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 04:28:35 +0200
+Received: from [52.101.201.36]
+ (helo=PH7PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ziy@nvidia.com>)
+ id 6ab09652-be1a-0a2a45090019-3465c924c330-3
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 04:28:35 +0200
+Received: from IA0PR12MB8374.namprd12.prod.outlook.com (2603:10b6:208:40e::7)
+ by DM4PR12MB7719.namprd12.prod.outlook.com (2603:10b6:8:101::13) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.16; Mon, 21 Sep
+ 2026 02:28:20 +0000
+Received: from IA0PR12MB8374.namprd12.prod.outlook.com
+ ([fe80::d85f:4c87:ae84:3f16]) by IA0PR12MB8374.namprd12.prod.outlook.com
+ ([fe80::d85f:4c87:ae84:3f16%6]) with mapi id 15.21.0428.014; Mon, 21 Sep 2026
+ 02:28:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,212 +55,433 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=vd2emGBAA1YVEyr1TJTV6aQL+nPL02cQ9qt2KbopMns=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=CZNyWUaEUnckdkJSeGG2voVE4Ys3h0jc26HNm34kczDanc+d9maSyTDnSOr1ZqSUKKt8Nkh1W
- nMRY3IwBoQiAJMGR3+sgOW5+rPq1O2VazwnkLCTwZV50DcIwIMok+W9XvNNHrnIRNtfQ70rcbKA
- Bc5JWv5EYkg++4Qdra/aWSssmt87vTRPIYeMziCtglsaADJmHKUSyzUogsPAX8xCJioqGFhdH2o
- TcEIZ9GiP0sF1+8b/A+4rhfAcoUjkb9R0pGcJs57kUpGAykHRQW9R56jRv8zcX/nGYdHQ7ApIqV
- KC/cgsi1hvXTeJ/1nksrC3SxhrLbWhGo1Rjg7cpyx/vQ==
-X-Zone-Loop: 97ba5823c31eff2700d8d9b5587dffc20b84a634f22a
-x-campaign-type: default
-x-transaction-id: 2c22e0c4-f3f7-49c3-b313-7e95d2e3b159
-x-swg-uid: 01-08a99b0c-a3ae-46c8-9379-c82e421f6bc8
-X-Mailer: Sweego
-Message-ID:
- <1789931442.8631fc262581453bbf619ec5b2062170.1a0c03a526800072c4@vates.tech>
-x-swg-bid: 1789931442.8631fc262581453bbf619ec5b2062170.1a0c03a526800072c4
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Sun, 20 Sep 2026 21:10:41 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=selector2 header.d=Nvidia.com header.i="@Nvidia.com"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RRFY7uye0kx9GQjjkISBpRHpDPL29B8yQ8lXNXezss2d2gGhkyEutGGa453W1maOcE5lOC0c87pJYQSpAovCTeVp79gCbcGzIb1UsGjMcEkg6D7MwCpdDlVlVV64xw/2hfSWrKZ+SSEKkb92rUy2RuT1uPDh0D26tF1YqL0Ii6SAoNeZbcf6UGGOB8Cjxc7LkJ46mn16Qo2DbtAaHvqdi200cHvnlPNSPKi1AQ9JNz/U9PCYDi6j9gB2V2wfxR78nSAq7MrEsu7e20E+bbhKT0llTFJRt22gtee/mIbq4YYaUQwPmTQjBgkQQZBvXGPy8J/wMOTso6+IukkamcdsZw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=CTl7/MYdyvkpIqnqDSwOLFKKPNvDoeCHW7e7oy+63k0=;
+ b=C4tE/dxsYHZQAyzC2DHfdVYqYy6Byc+yhITkYPh+yeVAmZJldjQuSs1hcIMiS9tHypL7L7UsSL5kASM8SXhAAa6ZXtRXCRE6wssr8zCstro7lTgF+RYkma/KGDucTovMozlA1dD3O/L7ZTqandjqyjNP/AWQbqxiEDj6Havc3M7kDYSNdgLyW0Bp7UA+UbK7zLx7xNqT+CNh4IgyQx4jUCdUTRp/MneciXqrB7gt9ucSbri5bbULTtdf2w1tV9i2dHX5+zqsasXbq9olvlUVQBDSogo4z+v2r8TR8Zmk024RYV0RjwxIotJoU1ipBUV4/1wPuYECVSZkDv4hmEIfBQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
+ dkim=pass header.d=nvidia.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
+ s=selector2;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=CTl7/MYdyvkpIqnqDSwOLFKKPNvDoeCHW7e7oy+63k0=;
+ b=fEXTqQxIw31L8b/z2am/tbWCoSGLWor9huaABv/x7xO/ux5Vo7KYzrKY0kLSbPSsVlIWvou7Cidj/Ich23k2IsLy0eViq/qPUwVYgWStZgMSFCf5K2OeSVfKb/zUn1YeuUql3/xMHIwHA+2U4sUTKe43+NwjTxEfNPKqY1TxKW4++6qxXGCXv2ORuACN4FESbTm7chTOCAB1KQTHvtIyYdapyNsELsFXg3k6KBHYTJ6misbEwJSVUf0IfSbN1YgJAIXjww+rlfKmtfdqE7nqZHyBhhEua/pP4J85O6YSeSRsIRKSXo+2XC0Hg7/qsOXLAtaDI/t4eXjNVE9C0LJoCA==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nvidia.com;
+From: Zi Yan <ziy@nvidia.com>
+Subject: [PATCH v5 00/17] Remove PG_private by using page/folio->private
+ checks instead
+Date: Sun, 20 Sep 2026 22:27:56 -0400
+Message-Id: <20260920-remove-pg_private-v5-0-bb68b6a21869@nvidia.com>
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/23OzWrDMAzA8VcpPs/Dlr932nuUUjxHbnVoEpxiW
+ krevU4YdKM5/gX6SQ82YSGc2NfuwQpWmmjoW5iPHUvn2J+QU9eagQArHHhe8DJU5OPpOBaq8Yo
+ 8ZQxgk8teJdb2xoKZbqu5P7Q+03Qdyn09UeUy/dWU3NCq5IJLDSm4n6iMhe++UkfxMw0XtnAVX
+ oTfJqARylovTUhdQP9GqBcRhNsiVCNsRIAcugDu/Qv9h5Bqi9CN8NobI7IzTuM/Yp7nJ2Wbryl
+ 8AQAA
+X-Change-ID: 20260728-remove-pg_private-cfe926c7f83c
+To: David Hildenbrand <david@kernel.org>, 
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>, 
+ Andrew Morton <akpm@linux-foundation.org>, 
+ Muchun Song <muchun.song@linux.dev>, Lorenzo Stoakes <ljs@kernel.org>, 
+ "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
+ Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+ Michal Hocko <mhocko@suse.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+ Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>, 
+ Dev Jain <dev.jain@arm.com>, Barry Song <baohua@kernel.org>, 
+ Lance Yang <lance.yang@linux.dev>, Usama Arif <usama.arif@linux.dev>, 
+ Gregory Price <gourry@gourry.net>, 
+ Ying Huang <ying.huang@linux.alibaba.com>, 
+ Alistair Popple <apopple@nvidia.com>, Johannes Weiner <hannes@cmpxchg.org>, 
+ Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+ Kairui Song <kasong@tencent.com>
+Cc: linux-mm@kvack.org, linux-kernel@vger.kernel.org, 
+ Zi Yan <ziy@nvidia.com>, Minchan Kim <minchan@kernel.org>, 
+ Sergey Senozhatsky <senozhatsky@chromium.org>, 
+ Peter Zijlstra <peterz@infradead.org>, Ingo Molnar <mingo@redhat.com>, 
+ Arnaldo Carvalho de Melo <acme@kernel.org>, 
+ Namhyung Kim <namhyung@kernel.org>, Thomas Gleixner <tglx@kernel.org>, 
+ Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>, 
+ x86@kernel.org, Mark Rutland <mark.rutland@arm.com>, 
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>, 
+ Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>, 
+ Adrian Hunter <adrian.hunter@intel.com>, 
+ James Clark <james.clark@linaro.org>, "H. Peter Anvin" <hpa@zytor.com>, 
+ linux-perf-users@vger.kernel.org, Juergen Gross <jgross@suse.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
+ xen-devel@lists.xenproject.org, Eric Biggers <ebiggers@kernel.org>, 
+ "Theodore Y. Ts'o" <tytso@mit.edu>, Jaegeuk Kim <jaegeuk@kernel.org>, 
+ linux-fscrypt@vger.kernel.org, Oscar Salvador <osalvador@suse.de>, 
+ Chao Yu <chao@kernel.org>, linux-f2fs-devel@lists.sourceforge.net, 
+ Tal Zussman <tz2294@columbia.edu>, Gao Xiang <xiang@kernel.org>, 
+ Jan Kara <jack@suse.cz>, Yue Hu <zbestahu@gmail.com>, 
+ Jeffle Xu <jefflexu@linux.alibaba.com>, 
+ Sandeep Dhavale <dhavale@google.com>, Hongbo Li <hongbohbli@tencent.com>, 
+ Chunhai Guo <guochunhai@vivo.com>, linux-erofs@lists.ozlabs.org, 
+ linux-fsdevel@vger.kernel.org, Steven Rostedt <rostedt@goodmis.org>, 
+ Masami Hiramatsu <mhiramat@kernel.org>, 
+ Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+ Matthew Brost <matthew.brost@intel.com>, 
+ Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>, 
+ Byungchul Park <byungchul@sk.com>, 
+ Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, 
+ Wei Xu <weixugc@google.com>, linux-trace-kernel@vger.kernel.org, 
+ Trond Myklebust <trondmy@kernel.org>, Anna Schumaker <anna@kernel.org>, 
+ linux-nfs@vger.kernel.org, Ilya Dryomov <idryomov@gmail.com>, 
+ Alex Markuze <amarkuze@redhat.com>, Viacheslav Dubeyko <slava@dubeyko.com>, 
+ ceph-devel@vger.kernel.org, Richard Weinberger <richard@nod.at>, 
+ Zhihao Cheng <chengzhihao1@huawei.com>, linux-mtd@lists.infradead.org, 
+ Baoquan He <baoquan.he@linux.dev>, 
+ Pasha Tatashin <pasha.tatashin@soleen.com>, 
+ Pratyush Yadav <pratyush@kernel.org>, Jonathan Corbet <corbet@lwn.net>, 
+ Dave Young <ruirui.yang@linux.dev>, Shuah Khan <skhan@linuxfoundation.org>, 
+ kexec@lists.infradead.org, linux-doc@vger.kernel.org
+X-Mailer: b4 0.16.0
+X-ClientProxiedBy: YQZPR01CA0096.CANPRD01.PROD.OUTLOOK.COM
+ (2603:10b6:c01:84::29) To IA0PR12MB8374.namprd12.prod.outlook.com
+ (2603:10b6:208:40e::7)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] nestedsvm: Don't set VMCB(1-2)'s NP_ENABLE and N_CR3
- during VMEXIT to L1
-To: Ross Lagerwall <ross.lagerwall@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Jason Andryuk <jason.andryuk@amd.com>
-References: <20260918125205.374168-1-ross.lagerwall@citrix.com>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20260918125205.374168-1-ross.lagerwall@citrix.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------800bwqfyCx0oDVZhxFjVwudK"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1789931441989
-X-purgate-ID: tlsNG-ef75cf/1789931445-A5EC6AE4-A8E2573B/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA0PR12MB8374:EE_|DM4PR12MB7719:EE_
+X-MS-Office365-Filtering-Correlation-Id: cd7bc866-ada1-4775-a366-08df1788007e
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|7416014|23010399003|366016|921020|3023799007|6133799003|10067099003|56012099006|5023799004|11063799006|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	jVeqbV/tHFeiMu+SHY69AVMUwlHgvJsFntwh78c0mOcyBYkE8gAjYMbep7rFh8vHMGgr8l7yUZE0wDAJUPHvuknsIrb4O+8a8CBU5khXkWuMT+npJhPIuSRVZKqAXkS6AUfSBuwwxl7f3QNiNU+g4Qk/Qz5PmSRNx55YKYEiDYSb55PzugiK3ZDls1OYDO3v7MpXnErGtt8oYnSGtUru5y3fimvQH+lf0rZLZm2+oXMLQNsu83LlHdG99VtP6Njhe6MJbXuqX8q5F1rD/jCXNX2wYn8PLKDDdgZykqjyL1BvD6H14oNNo+G/QudzvRY77JbHnOJfhGWnIp1dSLfxa+OjBX1b80BYxzKQd0bAchUIwnQFMIHAezbWzJ08R1jRMcq/11N0FReMEhWF1GPfKuMEh04duME2n6TloQln/Qc99yjLw0DDTr0X5vL3NJ+tlN/aSUtrzclqW5fsIDUHFOW6X4ryYk8GRDzm3ohrdzu2gWRCEg90EEJqKp6rzqFAuUndZvP/69JkVVw0lhJSQaPElhG/kpxVTut8iWtLi3QBhQpc2G+2oWMnQmTrxW20F4aQlX5gRFsRrHp4w+zciUct2j0VVdvsbZ8trJDLj+mGNgdE1I25ddAnyDjmbr8eeckeeGIqtfjL1uI3WeoeM99Xa9VuytHz5wAtj5HVOXJq3cDZ4gqbt9qr5aDkOV+74+B9ckF4Zxx/OgvbcR51ZA==
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR12MB8374.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(23010399003)(366016)(921020)(3023799007)(6133799003)(10067099003)(56012099006)(5023799004)(11063799006)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?eWpRa1g4TTBZTnQ2bnRZS3h1WFA4c1gzWm4xSFB3Z3JNZFZJcGk1cm5aVGF0?=
+ =?utf-8?B?dnhIY3hJdDBSaWxZTnVHR3BrTGRGUGZScHI3MVFrbTcxbEJ6d3dBN3NRcy9T?=
+ =?utf-8?B?RlZ6STN1Yi9VMnlOSTJodjA3M0dqK0Z3TG5KNnI0M2VNUGh4NVU1SFk3Vmk5?=
+ =?utf-8?B?ekZmTXpEUnZveFdHdFpMMkRmdjBtT3JNV2l6L29NUmdYZjFHZWpSMVE0V2ln?=
+ =?utf-8?B?bDNWZktoRjZEbGRtUHBxSmp3OGdZc2hBeFVvUyt6ajVQMkE2OXNqbHFJS2Vu?=
+ =?utf-8?B?ekduYlJVZkI0ek44NXdvMW5KUW55aXdRR0JPd3lPeE53Y0ZuZjJOb2VkMTYx?=
+ =?utf-8?B?c1cvSHh0S3RCNWxQT3J5cTJBazg2WVc3dUdXeUxkQ0FnMHZhM3ppdWY5TFhl?=
+ =?utf-8?B?djhIcHdTNlFtZEswcHZCUkZyKzlwMVRjS1VkejhESlZFa1U0d1hmVXFzcDZw?=
+ =?utf-8?B?V0VUcktpRmNCZTNWaXNuR0dQVTNueThqQzFidFJxOTA2YU5hOTdoYmZGNllx?=
+ =?utf-8?B?eUl0K1RLU2V2QmZzWnErVk8vSmhOYkVFQk9YRFdwdXJ1WWNxQk9vc3NWTE9B?=
+ =?utf-8?B?TEdYdUNQUHRUS1crNjA0T2hJUUtySSsya3czK2dDbUJGMTNPbDJyWEVYNk5q?=
+ =?utf-8?B?K3Azc2hTWUNKdnNIalZiMjdhVzJ0OThLWkg4ckU2ZkRnTzFzUjdKRGZSRXpr?=
+ =?utf-8?B?cGl1dGo0bTRqRzdQSldDQWM0bnpXdWxqNG9rdDh2TklqR0VaelNVYkVPTkVB?=
+ =?utf-8?B?YzhBN3ljUFkzeUxvOUloZndyNjY5Z3FSL0FDeHIreXBsZWplL1I5TmhQREw5?=
+ =?utf-8?B?dm1TTm9wdldrc1ZIK2RUWHJVZnEvbjlPMTVKSGhoSXdLc0tPK0pjSnJmWHY1?=
+ =?utf-8?B?NStheFlWUExNS3RLLzAvYmhSVmk2S3V0bS94Q2ZySlJtYUYxQlkrZkRhU0Zh?=
+ =?utf-8?B?YjdnQkZua05CS29Ua2pxUWUzNjRuRHltQnhRWVIxVFBQN0pDSWhSOWZuNDhE?=
+ =?utf-8?B?M21oR0ZLL2ZSaUdnWThwb3NtQmtrZmc1dkpSMmxPMU05VWppWlJYVFZUVHlz?=
+ =?utf-8?B?MW50Qm5TVE1zbElPMWVURFhNdG5VbjVzdnNvZW1wTE85Sm4raEh6ZW4rVFBC?=
+ =?utf-8?B?RExVc0s0M2R3QkNMK2J0Z2RxM1NVMW5OU05XS3h1M09YQlZWMTNqMFZTVXM4?=
+ =?utf-8?B?dVJjdUdvR1Ird3lBekVGd1ZWVndnWEFNbTU3ME50dzh0L0l4WUhDb2tVcmUx?=
+ =?utf-8?B?aTJiNG9pS3NhN0xJU2hxMU1xSEFYNDA0UVpCSy9nSFhuV3RaZkxpcmdFZ2x0?=
+ =?utf-8?B?Z205cTB0WG5USUdJeGJHOEF0R3hJay9aZUVnVUhCc1JudVFGL0g1alFyeG9C?=
+ =?utf-8?B?UHUybldqS3BvRGx6MDc0bnpwS1VOYkNmRnVEdE1qQ2l0Mm9NODBqdVV1UEtZ?=
+ =?utf-8?B?Zm9pZWF6K2hSVFg3M0l4K3FDNko3Sy9vQ3UwdWNad3ZyQ1FOeHpGNlc5aytt?=
+ =?utf-8?B?cXZRQUl2T0xUTkRoWno1TFZZV3NDMXZEWk9uNk1Nc1VYM2VBNEprVVd3cTkz?=
+ =?utf-8?B?S3lrTkZLRjJDNWpqdWtENkcrN3pMbjV0RUt5UlVodzRFZGtRWkhTdndBMncx?=
+ =?utf-8?B?Zk5Wd2d4NTdTb3BNaDNlSndvV1RaUXM1QXB4SGNVKzlWRVBEYlRaRk5idmRr?=
+ =?utf-8?B?UTM3cDJsQlMxczBjaW90R29ickJTME02UXRDME0yM0NBMGV0cVB2c3BHVEVQ?=
+ =?utf-8?B?RktwK1MyT3kzMXlzbStCazF5YTJCMitHbWRra2ErWXRXYmE3aGU3bFRGSnZW?=
+ =?utf-8?B?VkhqUXhjZ0NaQU0zUjFJNHBiTWMxUUR1cmxBN1BwZFp4RGNYRlFpTjJSTlZn?=
+ =?utf-8?B?dGRDdGR3OHpiem1nbGl6cHdlWWtGdlZ2Vnp3aG04bUJBNFd3c2l1Rlh5MG54?=
+ =?utf-8?B?dGM0NW9MbFhucmFOMG1FSmVxQXh2MG5SM0xQNnc0MklWMFgzQ1V2NTF2a3h1?=
+ =?utf-8?B?OGRvcCtxcWRVcTdwMVlzWW94aGhsd0dMVFZZaWhQejRjeGdMZ1hyOG5wTGJ4?=
+ =?utf-8?B?cFRlQm9UTlp1ZU44MW9kVWNoSnh0TlpsZ2gwaWNFRG5DMG9xMVVOTWtuOUZv?=
+ =?utf-8?B?RDZVSHZaaWtaZmpNTzI3Z0h4OWlGd3o4YmxmRFhlT0U2YmRxaEVEaGNZWU1u?=
+ =?utf-8?B?UUdoUWw3dUg3TVZLS3p2VTZmUEZZTU5JZnRPWXR5VW5QMzkwKzZlRUFUVU0y?=
+ =?utf-8?B?TE9xTFllTWRMTjFwRWxKd2tmU1hUaXlRSHJTbjRuOGdSclhTa284U28vQ1FT?=
+ =?utf-8?Q?F1TFjtIkGgWhFLH9mx?=
+X-OriginatorOrg: Nvidia.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: cd7bc866-ada1-4775-a366-08df1788007e
+X-MS-Exchange-CrossTenant-AuthSource: IA0PR12MB8374.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Sep 2026 02:28:20.2879
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vyBX7Kyzqii8eJcu8TMIvK1/ygKw2l6cNqXR5BHUUQfr5ne4lK/kybDBlk0qcMdP
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB7719
+X-purgate-ID: tlsNG-bad1c0/1789957715-BE4DB034-6FCEA7CB/0/0
 X-purgate-type: clean
-X-purgate-size: 8380
+X-purgate-size: 12707
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------800bwqfyCx0oDVZhxFjVwudK
-Content-Type: multipart/mixed; boundary="------------fzkdCnuWyFaSh1PIQ2B2crs4";
- protected-headers="v1"; hp="clear"
-Message-ID: <957665ac-02f3-4c03-aa15-86cdadc498b8@vates.tech>
-Date: Sun, 20 Sep 2026 21:10:41 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] nestedsvm: Don't set VMCB(1-2)'s NP_ENABLE and N_CR3
- during VMEXIT to L1
-To: Ross Lagerwall <ross.lagerwall@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Jason Andryuk <jason.andryuk@amd.com>
-References: <20260918125205.374168-1-ross.lagerwall@citrix.com>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20260918125205.374168-1-ross.lagerwall@citrix.com>
+Hi all,
 
---------------fzkdCnuWyFaSh1PIQ2B2crs4
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+This patchset removes PG_private to make space for upcoming PG_folio for
+identifying pages from a folio (more details in Note below). Instead of
+checking PG_private, all code is changed to check page/folio->private !=
+NULL instead.
 
-TGUgMTgvMDkvMjAyNiDDoCAxNDo1NCwgUm9zcyBMYWdlcndhbGwgYSDDqWNyaXTCoDoNCj4g
-QXMgcGVyIHRoZSBWTVJVTiBwc2V1ZG9jb2RlIGluIEFQTSBWb2wgMyAzLjM4LCB0aGUgVk1D
-QidzIE5QX0VOQUJMRSBhbmQNCj4gTl9DUjMgZmllbGRzIGFyZSBub3Qgc2V0IGR1cmluZyBh
-IFZNRVhJVCBzbyBkb24ndCBkbyB0aGlzIHdoZW4gdXBkYXRpbmcNCj4gVk1DQigxLTIpLiBB
-dCB0aGUgc2FtZSB0aW1lLCBjbGVhbnVwIHRoZSBzb21ld2hhdCBib2d1cyBhbmQgaXJyZWxl
-dmFudA0KPiBjb21tZW50cy4gTm90IGNsZWFyaW5nIE5fQ1IzIGRvZXMgbm90IGludHJvZHVj
-ZSBhIHNlY3VyaXR5IGhvbGUgYXMNCj4gc3RhdGVkIHNpbmNlIEwxIGNhbiBzZXQgaXQgcmVn
-YXJkbGVzcyBhbmQgaXQgaXMgbmV2ZXIgdXNlZCBkaXJlY3RseSB3aGVuDQo+IHJ1bm5pbmcg
-TDIuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBSb3NzIExhZ2Vyd2FsbCA8cm9zcy5sYWdlcndh
-bGxAY2l0cml4LmNvbT4NCj4gLS0tDQo+ICAgeGVuL2FyY2gveDg2L2h2bS9zdm0vbmVzdGVk
-c3ZtLmMgfCAzMiArLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLQ0KPiAgIDEgZmls
-ZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMzEgZGVsZXRpb25zKC0pDQo+IA0KPiBkaWZm
-IC0tZ2l0IGEveGVuL2FyY2gveDg2L2h2bS9zdm0vbmVzdGVkc3ZtLmMgYi94ZW4vYXJjaC94
-ODYvaHZtL3N2bS9uZXN0ZWRzdm0uYw0KPiBpbmRleCBhOGIxNWQ2ZWFlMDUuLmM2MmZjYTU3
-MWQ3NSAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gveDg2L2h2bS9zdm0vbmVzdGVkc3ZtLmMN
-Cj4gKysrIGIveGVuL2FyY2gveDg2L2h2bS9zdm0vbmVzdGVkc3ZtLmMNCj4gQEAgLTEwMjMs
-MzcgKzEwMjMsNiBAQCBuc3ZtX3ZtY2JfcHJlcGFyZTR2bWV4aXQoc3RydWN0IHZjcHUgKnYs
-IHN0cnVjdCBjcHVfdXNlcl9yZWdzICpyZWdzKQ0KPiAgIA0KPiAgICAgICBuc192bWNiLT5l
-dmVudF9pbmoucmF3ID0gMDsNCj4gICANCj4gLSAgICAvKiBOZXN0ZWQgcGFnaW5nIG1vZGUg
-Ki8NCj4gLSAgICBpZiAoIG5lc3RlZGh2bV9wYWdpbmdfbW9kZV9oYXAodikgKQ0KPiAtICAg
-IHsNCj4gLSAgICAgICAgLyogaG9zdCBuZXN0ZWQgcGFnaW5nICsgZ3Vlc3QgbmVzdGVkIHBh
-Z2luZy4gKi8NCj4gLSAgICAgICAgdm1jYl9zZXRfbnAobnNfdm1jYiwgdm1jYl9nZXRfbnAo
-bjJ2bWNiKSk7DQo+IC0gICAgICAgIG5zX3ZtY2ItPl9jcjMgPSBuMnZtY2ItPl9jcjM7DQo+
-IC0gICAgICAgIC8qIFRoZSB2bWNiLT5oX2NyMyBpcyB0aGUgc2hhZG93ZWQgaF9jcjMuIFRo
-ZSBvcmlnaW5hbA0KPiAtICAgICAgICAgKiB1bnNoYWRvd2VkIGd1ZXN0IGhfY3IzIGlzIGtl
-cHQgaW4gbnNfdm1jYi0+aF9jcjMsDQo+IC0gICAgICAgICAqIGhlbmNlIHdlIGtlZXAgdGhl
-IG5zX3ZtY2ItPmhfY3IzIHZhbHVlLiAqLw0KPiAtICAgIH0NCj4gLSAgICBlbHNlIGlmICgg
-cGFnaW5nX21vZGVfaGFwKHYtPmRvbWFpbikgKQ0KPiAtICAgIHsNCj4gLSAgICAgICAgLyog
-aG9zdCBuZXN0ZWQgcGFnaW5nICsgZ3Vlc3Qgc2hhZG93IHBhZ2luZy4gKi8NCj4gLSAgICAg
-ICAgdm1jYl9zZXRfbnAobnNfdm1jYiwgZmFsc2UpOw0KPiAtICAgICAgICAvKiBUaHJvdyBo
-X2NyMyBhd2F5LiBHdWVzdCBpcyBub3QgYWxsb3dlZCB0byBzZXQgaXQgb3INCj4gLSAgICAg
-ICAgICogaXQgY2FuIGJyZWFrIG91dCwgb3RoZXJ3aXNlIChzZWN1cml0eSBob2xlISkgKi8N
-Cj4gLSAgICAgICAgbnNfdm1jYi0+X2hfY3IzID0gMHgwOw0KPiAtICAgICAgICAvKiBTdG9w
-IGludGVyY2VwdGluZyAjUEYgKGFscmVhZHkgZG9uZSBhYm92ZQ0KPiAtICAgICAgICAgKiBi
-eSByZXN0b3JpbmcgY2FjaGVkIGludGVyY2VwdHMpLiAqLw0KPiAtICAgICAgICBuc192bWNi
-LT5fY3IzID0gbjJ2bWNiLT5fY3IzOw0KPiAtICAgIH0NCj4gLSAgICBlbHNlDQo+IC0gICAg
-ew0KPiAtICAgICAgICAvKiBob3N0IHNoYWRvdyBwYWdpbmcgKyBndWVzdCBzaGFkb3cgcGFn
-aW5nLiAqLw0KPiAtICAgICAgICB2bWNiX3NldF9ucChuc192bWNiLCBmYWxzZSk7DQo+IC0g
-ICAgICAgIG5zX3ZtY2ItPl9oX2NyMyA9IDB4MDsNCj4gLSAgICAgICAgLyogVGhlIHZtY2It
-Pl9jcjMgaXMgdGhlIHNoYWRvd2VkIGNyMy4gVGhlIG9yaWdpbmFsDQo+IC0gICAgICAgICAq
-IHVuc2hhZG93ZWQgZ3Vlc3QgY3IzIGlzIGtlcHQgaW4gbnNfdm1jYi0+X2NyMywNCj4gLSAg
-ICAgICAgICogaGVuY2Ugd2Uga2VlcCB0aGUgbnNfdm1jYi0+X2NyMyB2YWx1ZS4gKi8NCj4g
-LSAgICB9DQo+IC0+ICAgICAgIC8qIExCUiB2aXJ0dWFsaXphdGlvbiAtIGtlZXAgbGJyIGNv
-bnRyb2wgYXMgaXMgKi8NCj4gICANCj4gICAgICAgLyogTmV4dFJJUCAqLw0KPiBAQCAtMTA4
-Myw2ICsxMDUyLDcgQEAgbnN2bV92bWNiX3ByZXBhcmU0dm1leGl0KHN0cnVjdCB2Y3B1ICp2
-LCBzdHJ1Y3QgY3B1X3VzZXJfcmVncyAqcmVncykNCj4gICANCj4gICAgICAgLyogQ1JuICov
-DQo+ICAgICAgIG5zX3ZtY2ItPl9jcjQgPSBuMnZtY2ItPl9jcjQ7DQo+ICsgICAgbnNfdm1j
-Yi0+X2NyMyA9IG4ydm1jYi0+X2NyMzsNCj4gICAgICAgbnNfdm1jYi0+X2NyMCA9IG4ydm1j
-Yi0+X2NyMDsNCj4gICANCg0KSSB3b3VsZCBzdWdnZXN0IHRvIGdyb3VwIGFsbCB0aGUgQ1Ju
-ICh0aGUgQ1IyIHBhcnQgaXMgY3VycmVudGx5IA0Kc2VwYXJhdGVkKS4gVGhhdCBjYW4gYmUg
-ZG9uZSBzZXBhcmF0ZWx5Lg0KDQo+ICAgICAgIC8qIERSbiAqLw0KDQpSZXZpZXdlZC1ieTog
-VGVkZHkgQXN0aWUgPHRlZGR5LmFzdGllQHZhdGVzLnRlY2g+DQoNClRlZGR5DQo=
+MM people are cc'd on all patches and subsystem people are cc'd on the
+cover letter and corresponding patches.
 
---------------fzkdCnuWyFaSh1PIQ2B2crs4--
+This patchset is on top of commit ef0ea92854987 ("mm: zswap: return -ENOENT
+when the swap device is gone") from mm-new, which is the same base as V4 of
+this patchset and no conflict is found during the rebase. I also tried to
+cherry pick the remaining patches from mm-everything on top of this
+patchset and find no conflict.
 
---------------800bwqfyCx0oDVZhxFjVwudK
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+Patch 10 and Patch 13 are the only two patches without any Ack or Rb tag.
 
------BEGIN PGP SIGNATURE-----
+Overview
+===
+Most code uses folio_attach/detach/change_private() functions, so folio
+refcount is increased and decreased when folio->private is set and reset,
+respectively. There is no need to change them.
 
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmqwL7EFAwAAAAAACgkQZg+p0QLLz9Bj
-mAv/eoG2vrcIjYpbJKOWKa40Lb8Ziu59BK/kHYuZ3UxjwyE6JnZO4Hc+lF1gr5aQxjHuSP97OWfr
-3Tsz5vDW7DgJbo41sdr1sXirRwn8HNBe246ppXM2YFnRueLHae8JeY2opBFK5bHY4j6gMA9bOHK6
-fq8mDWxfohoEvuKpDl5CdVeXUHlHY9tylx9pTu+kpwX3rdxtaRh+akh9Dq91fvNFYl7DxEBi39U1
-yIgoxI+YQlS2MsXZb/DHhhvm3DgbiC49poVgjFPRZgbEHR3eS6pITLT5VKR0yBfh2D8XDpUBCRBr
-W81kOK+KsAWuf3zbPy3AGBaptEodA7XJuDpeh5HKYImuZgy14V1bg+dKyKbi3VpkrsDJoDRafGQH
-H92HtasmEew8hLedfnajd0JvrFy7IfqxsWDkKAik8u3XbYT6NQRepvJdW+aEdyt4cHbjKkH5cLHi
-hertE6UoZvCES2Xqzi849dVYBUvQBaA8gdJMYVn/ALVSMJpxzzw6Z7PHCLtU
-=cdgH
------END PGP SIGNATURE-----
+Changes are needed for exceptional users:
+1. zsmalloc uses PG_private to indicate first component zpdesc page and
+   page->private is used to store zspage in zpdesc. To remove PG_private,
+   is_first_zpdesc() is replaced by pointer comparison.
 
---------------800bwqfyCx0oDVZhxFjVwudK--
+2. kernel/events/ring_buffer.c stores page order in page->private.
+   Replacing PG_private with page->private != NULL works.
+
+3. drivers/xen/grant-table.c stores xen_page_foreign in page->private,
+   where on 32-bit, a pointer to xen_page_foreign is stored; on 64-bit,
+   page->private is used as xen_page_foreign. PG_private check is replaced
+   by page->private != NULL on 32-bit for xen_page_foreign deallocation.
+   On 64-bit, page->private is cleared unconditionally since {domid=0,
+   gref=0} (xen_page_foreign can be 0) is valid.
+
+4. fs/crypto/crypto.c stores a folio pointer in page->private, PG_private
+   checks are replaced by page->private != NULL.
+
+5. fs/erofs has two different uses:
+
+    5a. folio->private is used to form a reversed list of
+    the outputs of readahead_folio(). readahead_folio_last() is added to
+    output folios in reversed order, so that ->private is no longer needed.
+
+    5b. folio->private is used as an in-flight I/O counter. Convert the
+    code to use folio_attach/detach/get_private() and add bias==1 to the
+    counter to avoid folio->private being zero.
+
+6. fs/nfs/write.c: folio refcount maintenance is in a bigger scope than
+   folio->private. So folio_attach/detach/get_private() is not used.
+   Nothing to change.
+
+7. fs/f2fs uses attach_page_private() to first reset folio->private then
+   immediately sets PAGE_PRIVATE_NOT_POINTER bit on it. Change it to use
+   attach_page_private() to set PAGE_PRIVATE_NOT_POINTER bit directly to
+   avoid folio->private == NULL gap inside set_page_private_##name().
+
+8. hugetlb uses folio_change_private(folio, NULL) without folio refcount
+   maintenance. Change it to folio->private = NULL.
+
+After the above changes, PG_private ops are converted to
+page/folio->private ops.
+
+folio_has_attached_private() is added to check filesystem-only private data
+by excluding swapcache and hugetlb folios, because swapcache folios overlap
+swp_entry_t swap with ->private and hugetlb sets its own flags in
+->private.
+
+Note
+===
+1. KPF_PRIVATE is removed after PG_private is removed.
+
+2. Documentation/mm/hugetlbfs_reserv.rst is outdated, so I did not remove
+   PG_private related text. It should be rewritten.
+
+3. PG_folio is planned to be set on every page from a folio in
+   page_rmappable_folio(), so folios with any order (currently
+   PG_large_rmappable is used to identify >0 order folios, but not order-0
+   folios) can be identified. Then vm_insert_*() can correctly reject all
+   folios and rmap code will only see folios. Eventually, page_folio()
+   will return NULL for non-folio pages by checking PG_folio, but before
+   that all existing users that treat compound pages as folios will need
+   to be converted.
+
+Tests
+===
+1. allmodconfig build passed.
+
+2. zsmalloc is tested using ext4 on a 1GB lz4 zram:
+    2a. zram load + zsmalloc compaction;
+    2b. concurrent zspage migration via memory compaction;
+    2c. confirmed that multi-page zspages actually formed.
+
+    Details: https://github.com/x-y-z/linux-dev/blob/b4/remove-pg_private/test_zsmalloc.md
+
+3. erofs is tested on images created with -C4096 and lz4hc, lzma,
+   deflate, and zstd algorithms:
+   3a. cold read of all files, verify checksums match source;
+   3b. readahead + reclaim/migration race.
+
+   Details: https://github.com/x-y-z/linux-dev/blob/b4/remove-pg_private/test_erofs.md
+
+4. fscrypt is tested on software-encrypted ext4 with writes to exercise
+   bounce pages.
+
+   Details: https://github.com/x-y-z/linux-dev/blob/b4/remove-pg_private/test_fscrypt.md
+
+5. f2fs is tested on an image with inline_data,compress_algorithm=lz4:
+    5a. INLINE_INODE — lots of tiny files;
+    5b. REF_RESOURCE + general writeback — buffered write churn with fsync;
+    5c. ONGOING_MIGRATION — force GC / page migration;
+    5d. ATOMIC_WRITE — atomic-write ioctl path.
+
+    Details: https://github.com/x-y-z/linux-dev/blob/b4/remove-pg_private/test_f2fs.md
+    (I did not run xfstests)
+
+6. MM selftests passed.
+
+LLM use
+===
+Claude was used to form a concrete plan on what code needs to be changed
+and how to change them. The plan was reviewed by Codex until no issue was
+spotted.
+
+Plan is at: https://github.com/x-y-z/linux-dev/blob/b4/remove-pg_private/plan.md
+
+I then followed the plan to make code changes. I did bounce ideas with
+Claude how to change fs/erofs, since I did not like the original idea.
+After each change, I asked Claude to review my code and git commit message.
+I also asked Claude to give me test plans (see above).
+
+At last, Codex was used to review all patches.
+
+Comments and suggestions are welcome. Thanks.
+
+Assisted-by: LLM
+Signed-off-by: Zi Yan <ziy@nvidia.com>
+---
+Changes in v5:
+1. replaced md patches (patch 13 and 14 in v4) with Matthew Wilcox's
+   version (see Matthew's replies to v4).
+2. used data_race() inside folio_test_private() and PagePrivate(), so that
+   the new versions can be used without KCSAN warnings while not holding
+   folio lock like before.
+3. moved folio_has_attached_private() implementation detail comment next to
+   the code.
+- Link to v4: https://patch.msgid.link/20260913-remove-pg_private-v4-0-848550f7574e@nvidia.com
+
+Changes in v4:
+1. dropped set_page_private(0) in balloon_retrieve(), since page->private
+   is cleared at that point.
+2. simplified the comment in add_hugetlb_folio().
+3. additional cleanup for f2fs to remove fio->page uses and convert
+   PAGE_PRIVATE_* flags and helper to folio-only.
+4. added a comment for __readahead_advance().
+5. added core-mm split/migration interaction information on newly added
+   folio_attach/detach_private() for erofs.
+6. renamed folio_test_fs_private() to folio_has_attached_private() and
+   merged the commit introducing folio_test_fs_private() into its prior
+   commit.
+7. adjusted the patch subject: "treewide: remove folio_set/clear_private()
+   *usage*"
+8. split "treewide: replace PagePrivate() with page_private()" into three.
+9. moved some comments in "treewide: remove PagePrivate() and PG_private
+   from comments and docs" to prior patches along with code changes.
+10. used PG_folio instead of __PG_folio to avoid additional
+    code change in __def_pageflag_names().
+- Link to v3: https://patch.msgid.link/20260907-remove-pg_private-v3-0-6ae22f9d9272@nvidia.com
+
+Changes in v3:
+1. changed folio_test_fs_private() to check PG_swapbacked instead of
+   PG_swapcache for excluding swapcache folios. Because folio->private and
+   PG_swapcache are not set as a whole, making folio_test_fs_private() give
+   false positive, whereas PG_swapbacked is always set for swapcache
+   folios.
+2. added __DEF_PAGEFLAG_NAME() to show __PG_folio instead of open code.
+3. f2fs change is picked up at
+   https://git.kernel.org/jaegeuk/f2fs/c/5ad9409a9533, mm-new currently
+   does not have it, so the patch is sent for MM testing purpose.
+- Link to v2: https://patch.msgid.link/20260831-remove-pg_private-v2-0-3668159cd9e8@nvidia.com
+
+Changes in v2:
+1. removed is_first_zpdesc() in patch 1 and open coded the checks.
+2. fixed wording in patch 2's commit message and clarified page_private()
+   also works when ring buffer's AUX page order is 0.
+3. removed the empty loop in 64-bit gnttab_pages_set_private().
+4. clarified folio->private will be reset to NULL by
+   fscrypt_free_bounce_page() in the commit message.
+5. clarified why hugetlb needs to restore hugetlb_vmemmap_optimized.
+6. renamed readahead_folio_reverse() readahead_folio_last() and
+   reimplemented readahead_folio_last() by adding a new readahead_control
+   private member, _forward, and a new helper __readahead_advance().
+7. added a bias, 1, to erofs I/O counter, so that folio->private stays non
+   NULL between folio_attach_private() and folio_detach_private().
+8. converted more call sites to use folio_test_fs_private().
+- Link to v1: https://lore.kernel.org/r/20260731-remove-pg_private-v1-0-142c97ba3562@nvidia.com
+
+---
+Matthew Wilcox (Oracle) (3):
+      md: Use folio_alloc_buffers()
+      md: Use folio APIs in free_page()
+      md: Remove the last use of page_buffers()
+
+Zi Yan (14):
+      mm/zsmalloc: replace PG_private with pointer comparison
+      perf/ring_buffer: stop using PG_private as AUX page high-order marker
+      xen/grant-table: stop setting PG_private on pages for grant mapping
+      fscrypt: stop setting PG_private on bounce page
+      mm/hugetlb: use direct assignment instead of folio_change_private()
+      f2fs: stop using PG_private
+      f2fs: convert the ->private flag helpers to folio-only
+      erofs: mm/pagemap: add readahead_folio_last() to avoid folio->private
+      erofs: use folio_attach/detach_private() instead of direct assignment
+      mm/page-flags: check page/folio->private instead of PG_private
+      treewide: remove folio_set/clear_private() usage
+      ceph: replace PagePrivate() with page_private()
+      treewide: remove PagePrivate() and PG_private from comments and docs
+      mm/page-flags: remove PG_private
+
+ Documentation/admin-guide/kdump/vmcoreinfo.rst |  2 +-
+ Documentation/filesystems/vfs.rst              |  6 +-
+ arch/x86/events/intel/bts.c                    |  3 -
+ arch/x86/events/intel/pt.c                     |  6 +-
+ drivers/md/md-bitmap.c                         | 18 +++--
+ drivers/xen/grant-table.c                      | 11 ++-
+ fs/buffer.c                                    |  8 ---
+ fs/ceph/addr.c                                 |  8 +--
+ fs/crypto/crypto.c                             |  2 -
+ fs/erofs/data.c                                | 16 +++--
+ fs/erofs/zdata.c                               | 13 +---
+ fs/f2fs/compress.c                             | 35 +++++----
+ fs/f2fs/data.c                                 |  2 +-
+ fs/f2fs/f2fs.h                                 | 99 ++++++++++----------------
+ fs/f2fs/segment.c                              |  2 +-
+ fs/nfs/file.c                                  |  4 +-
+ fs/nfs/write.c                                 |  2 -
+ fs/proc/page.c                                 |  1 -
+ fs/ubifs/file.c                                |  8 +--
+ include/linux/buffer_head.h                    |  8 +--
+ include/linux/kernel-page-flags.h              |  1 -
+ include/linux/mm.h                             | 34 +++++----
+ include/linux/mm_types.h                       |  4 +-
+ include/linux/page-flags.h                     | 51 ++++++++++---
+ include/linux/pagemap.h                        | 64 ++++++++++++++---
+ include/trace/events/mmflags.h                 |  2 +-
+ include/trace/events/pagemap.h                 |  2 +-
+ kernel/events/ring_buffer.c                    |  7 +-
+ kernel/vmcore_info.c                           |  1 -
+ mm/huge_memory.c                               |  2 +-
+ mm/hugetlb.c                                   |  7 +-
+ mm/migrate.c                                   |  3 +-
+ mm/page-writeback.c                            |  2 +-
+ mm/vmscan.c                                    |  2 +-
+ mm/zpdesc.h                                    |  2 +-
+ mm/zsmalloc.c                                  | 24 ++-----
+ tools/mm/page-types.c                          |  2 -
+ 37 files changed, 238 insertions(+), 226 deletions(-)
+---
+base-commit: ef0ea92854987c1e61cd72e100c8b61b485955d8
+change-id: 20260728-remove-pg_private-cfe926c7f83c
+
+Best regards,
+--  
+Yan, Zi
+
 
