@@ -4,43 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1847FC982E1
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 09:52:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1427248.1649879 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92004C982DE
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 10:01:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1427289.1650000 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8agW-0005kN-0l; Mon, 21 Sep 2026 09:51:40 +0000
+	id 1x8apx-00007e-2t; Mon, 21 Sep 2026 10:01:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1427248.1649879; Mon, 21 Sep 2026 09:51:39 +0000
+Received: by outflank-mailman (output) from mailman id 1427289.1650000; Mon, 21 Sep 2026 10:01:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8agV-0005kG-Tq; Mon, 21 Sep 2026 09:51:39 +0000
-Received: by outflank-mailman (input) for mailman id 1427248;
- Mon, 21 Sep 2026 09:51:39 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x8agV-0005kA-77
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 09:51:39 +0000
+	id 1x8apw-00007X-Vo; Mon, 21 Sep 2026 10:01:24 +0000
+Received: by outflank-mailman (input) for mailman id 1427289;
+ Mon, 21 Sep 2026 10:01:24 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <regressions@leemhuis.info>) id 1x8apv-00007R-6B
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 10:01:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8agU-00Gbt7-6U
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 11:51:38 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x8apu-00Cfdc-HX
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 12:01:22 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab0fe29-8faa-0a2a0a5109dd-0a2a45019048-6
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 11:51:38 +0200
-Received: from [74.125.228.76] (helo=mail-ed2-f12.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab0fe2a-5984-0a2a45010019-4a7de44ce8ca-3
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 11:51:38 +0200
-Received: by mail-ed2-f12.google.com with SMTP id
- 4fb4d7f45d1cf-6a98505364aso4548661a12.3
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 02:51:38 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6aa67e1a45esm3966885a12.25.2026.09.21.02.51.36
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Sep 2026 02:51:37 -0700 (PDT)
+ (envelope-from <regressions@leemhuis.info>)
+ id 6ab1006b-e002-0a2a0a5209dd-0a2a4506a45e-30
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 12:01:22 +0200
+Received: from [188.68.63.162] (helo=relay.yourmailgateway.de)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <regressions@leemhuis.info>)
+ id 6ab10071-195a-0a2a45060019-bc443fa2baf9-3
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 12:01:22 +0200
+Received: from mors-relay-8201.netcup.net (localhost [127.0.0.1])
+ by mors-relay-8201.netcup.net (Postfix) with ESMTPS id 4hpJdV2sb7z4NRn;
+ Mon, 21 Sep 2026 12:00:46 +0200 (CEST)
+Received: from policy01-mors.netcup.net (unknown [46.38.225.35])
+ by mors-relay-8201.netcup.net (Postfix) with ESMTPS id 4hpJdV27C2z4NRh;
+ Mon, 21 Sep 2026 12:00:46 +0200 (CEST)
+Received: from mxe9fb.netcup.net (unknown [10.243.12.53])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange ECDHE (P-256) server-signature RSA-PSS (2048 bits) server-digest
+ SHA256) (No client certificate requested)
+ by policy01-mors.netcup.net (Postfix) with ESMTPS id 4hpJdS65cXz8td8;
+ Mon, 21 Sep 2026 12:00:44 +0200 (CEST)
+Received: from [IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f] (unknown
+ [IPv6:2a02:8108:8984:1d00:a0cf:1912:4be:477f])
+ by mxe9fb.netcup.net (Postfix) with ESMTPSA id 5AA1A5FA21;
+ Mon, 21 Sep 2026 12:00:39 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,214 +61,157 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1789984298; x=1790589098; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=/IxU85Q5+hlg74zBf1mzGGMbph3ImCEiXQwned8esM8=;
-        b=SHv3e7O4zCtels+lm1HpGPB/LbZJuBz5NppcONb+MndBZJxMMxnG2BuJhDyBXknlZ9
-         379aamO41YUvtFT72/ieAzKED9Hqb7URLPptu1F3irv7tr2E/HFSIKogr+cIzqWKng8R
-         8U1dKLK3rYHYDu6E70C53892P6ErHDDyzyWvZP/+aTp2myZ6N8M6l+ypeDjYaMlNl5tq
-         VjH3XPi+ALeq9EpIj5WNFt6cgQ7grRLDRvz0VTBKUZjmD4h0ncRuVsQtRCFbTnkEh4UJ
-         F4WnsbBNBLUwKeBoNmAlds6S4q6U0muvErx39ZgQokWeDk6orU47Em74TOswUkuYvOXl
-         pplA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1789984298; x=1790589098;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=/IxU85Q5+hlg74zBf1mzGGMbph3ImCEiXQwned8esM8=;
-        b=mMgOuLotWl0EbEwGmVS9Qz0j97hgCO0lGjebZHm1vtUBE+qyMYUqZR0HW4Kz4cUnsF
-         OroIgN1r2QI3kRTqtUvwEKKtA5BorHL4fdX6ObbinJv7nGwnBWmF62WB/BlkFNiIMjkb
-         +EfhUER+4S3QKw0Iz1n4zdGaWTMvKAt7lZ3O9Cl56lquvOW/SQlTdEJY7WM4veQV8tMj
-         JtWWbUASx7XmeGj29qlZ0zlsoKBld1PVzh24K6MyQ1H89BHTSkbb+nN+c89qu7Mx8Euw
-         /P9vF8YYFh+Sj3vsqUW86Hx3udNPCxxFrp04U4V+tVDHO42ZLhmdPv4EW/b2850wjzxt
-         NsgQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwBylV6pHgSYdpnCtoTBZXXIgPAeA/UcYx8hEMIA78b0BiOfkAMIBOG7FkpXuBfxpNzq51agA16fPA=@lists.xenproject.org
-X-Gm-Message-State: AFuF++k9C2/LaEfPuG559WTkg8nPu4anwbpqwbJy39oIJ5fU6v5M+UoO
-	nTJLIBNRAIpHobpJQYrGoi26MBZTeqmi2MOUhNiYL1OVc1jtLXUYEG0g
-X-Gm-Gg: AYBFou0VvJRjoK8fPGGkp/I4s6Qe+ohmArLHf0osVm0LdnsnrqCpyE9a7bWE9AZl2fs
-	BdsWl6/xMk1qp48B52ChROK4SM3UNiZuo9aiLtNIOvPbwKme08gjMjlSoYwQkCwxQL4x9rz4Ouc
-	dAOjAgMvy/uJ1hcyVOROdfJOhHev+lpTqLIwmRuTfB3M3X2G63sySJ/h9Xt0T73mnqyAMWQHTsq
-	+IeWY8oKwkz6qkbksyFr6t3Uoa0IPs41jlETgOJW6m6tPCSfiqeEf8isDLVdfvwtfwMp6Vy5DH6
-	uf/oHtulQLdyxKKKMKce+A00OtdeT0O8FQe8yjB2S9shG+RnoLPFGaaLI3dYrVcAzlYFxwLbuGE
-	jzQdoFPDVoTX4I+cEBAyfslhphrhAoULPyrhIoIvkFUf66YElOUcUiB5XtJoUAu5jU3VIzif2g+
-	4iqIl2KmfnIqd61FFUZMEDtTr/w4LE8AX0jdTPHhuwjIMxtBAveGTxysuLGb8+6gUikjpHd7WlW
-	Dm/WRpo21rEdc+ozLmRAbnTzpHQChcKjzabd/K7qU13p/5jhw==
-X-Received: by 2002:a05:6402:510d:b0:6a9:b519:eb3f with SMTP id 4fb4d7f45d1cf-6aa53cb3d0bmr7327483a12.29.1789984297540;
-        Mon, 21 Sep 2026 02:51:37 -0700 (PDT)
-Message-ID: <323b4219-113e-4592-88a9-d16b92ca12d4@gmail.com>
-Date: Mon, 21 Sep 2026 11:51:35 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=key2 header.d=leemhuis.info header.i="@leemhuis.info" header.h="Date:Subject:To:References:From:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=leemhuis.info;
+	s=key2; t=1789984846;
+	bh=8EDrVz3B5Ui9t+59/tsVLp1aP1KLxbEoqN01RrOD6w8=;
+	h=Date:Subject:To:References:From:In-Reply-To:From;
+	b=N+muyZXc8ymigm1X4WJYdQfg2FAM32UXD62GkYAoXAwUrk7y9wSeo8wrc/kijMJRV
+	 y5tWKY3o2n02jG8BFKiSIVU0+QItf44A8F/uAvgSzG094QdLpHkIhB2vYGkX46B20i
+	 VN8otbW9QVGTprs7yAikun99LjJZdMuY8JvNPtYmNbSMCRCvzKBQOTZyd8gdjxZZ5l
+	 DyvixvqPU0uzZ2XY48NNI84277giq0riOIyvt5KdUAjXgXxXqYHUF2UnaCKvpjyJhB
+	 wokbeEO1V5wZCwoLz8JbmY9fO/UzY31upQSqXV2mNt9yhCmfs119MpbQUfndGp34Ma
+	 0jJsS2X3dDAMA==
+X-Virus-Scanned: Debian amavisd-new at policy01-mors.netcup.net
+Authentication-Results: mxe9fb;
+        spf=pass (sender IP is 2a02:8108:8984:1d00:a0cf:1912:4be:477f) smtp.mailfrom=regressions@leemhuis.info smtp.helo=[IPV6:2a02:8108:8984:1d00:a0cf:1912:4be:477f]
+Received-SPF: pass (mxe9fb: connection is authenticated)
+Message-ID: <8aaad113-1952-4655-978d-0cdd8b048064@leemhuis.info>
+Date: Mon, 21 Sep 2026 12:00:37 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 33/39] xen/riscv: dump old interrupt file to memory
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <efecffa9cd7c4bb6e9ed51b7fd084328fcd4611e.1787838835.git.oleksii.kurochko@gmail.com>
- <f8a2c7b7-7872-424c-89e0-5d81a29b77f4@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <f8a2c7b7-7872-424c-89e0-5d81a29b77f4@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Subject: Re: [REGRESSION] ACPI processor/cpuidle change in 6.18.52 breaks
+ bare-metal Xen dom0 boot
+To: Support TRINITY <support@trinity-net.com>,
+ regressions <regressions@lists.linux.dev>,
+ linux-acpi <linux-acpi@vger.kernel.org>, linux-pm
+ <linux-pm@vger.kernel.org>, stable <stable@vger.kernel.org>,
+ xen-devel <xen-devel@lists.xenproject.org>,
+ linux-kernel <linux-kernel@vger.kernel.org>
+References: 
+ <905771062.272724286.1789919301858.JavaMail.zimbra@trinity-net.com>
+From: Thorsten Leemhuis <regressions@leemhuis.info>
+Content-Language: de-DE, en-US
+In-Reply-To: 
+ <905771062.272724286.1789919301858.JavaMail.zimbra@trinity-net.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1789984298-BC95A757-82F58171/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4901
+X-PPP-Message-ID: <178998483973.134331.13310613659725459518@mxe9fb.netcup.net>
+X-Rspamd-Server: rspamd-worker-8404
+X-Rspamd-Queue-Id: 5AA1A5FA21
+X-NC-CID: jHAYD1xjKcSrG8HKUMDccnDoibkQCgWtGfye6GROeeyolTZ1i1c=
+X-purgate-ID: tlsNG-16d1c6/1789984882-FEC7777B-42F7454D/0/0
+X-purgate-type: clean
+X-purgate-size: 3947
 
+On 9/20/26 17:48, Support TRINITY wrote:
+>
+> I am reporting a bare-metal *Xen* dom0 boot regression seen with *Linux
+> 6.18.52.*
 
+Thx for the report. There is one somewhat important detail that was
+missing (hope I didn't miss it):
 
-On 9/14/26 5:15 PM, Jan Beulich wrote:
-> On 27.08.2026 17:21, Oleksii Kurochko wrote:
->> At the old interrupt file, dump to memory all the eip and eie arrays).
->> After this step is done, the old interrupt file is no longer in use so
->> old intrrupt file VGEIN could be released.
->>
->> Restoring of old interrupt file state will be done in follow-up
->> patch.
->>
->> There are cases where it is needed to specify on which cpu it is
->> necessary to VGEIN should be released so update vgein_release() to
->> deal with that.
+Is latest 7.3-rc also affected? And if it is: does that partial revert
+help there, too?
+
+Ciao, Thorsten
+> On affected systems, Linux 6.18.51 boots successfully as Xen dom0 on
+> bare metal, while Linux 6.18.52 *consistently black-screens before dom0
+> userspace/networking comes up.*
 > 
-> Beside this being difficult to parse, it looks like it is inapplicable? As
-> said ...
+> #regzbot introduced: v6.18.51..v6.18.52
+> #regzbot title: ACPI processor/cpuidle lifecycle change breaks bare-
+> metal Xen dom0 boot
+> #regzbot link: https://gitlab.alpinelinux.org/alpine/aports/-/
+> work_items/18447 <https://gitlab.alpinelinux.org/alpine/aports/-/
+> work_items/18447>
 > 
->> Keep BUG_ON("unimplemented") placeholder in imsic_migrate_vcpu() to guard
->> against silent incorrect behaviour or unexpected panics in guest VMs until
->> the function is fully implemented.
->>
->> vgein_release() is stub for now and will be introduced later.
+> Tested results:
 > 
-> ... also here?
-
-Agree that paragraph should be dropped, it ins't applicable anymore.
-
+>   * Linux 6.18.51-r0, Xen dom0, bare metal: boots
+>   * Linux 6.18.52-r0, Xen dom0, bare metal: black screen before
+>     userspace/network
+>   * Linux 6.18.52-r0, Xen domU: boots
+>   * Linux 6.18.52-r0 with Xenbus notifier change reverted: still fails
+>   * Linux 6.18.52-r0 with only ACPI processor/cpuidle changes reverted:
+>     boots
+>   * Linux 6.18.52-r0 with refined ACPI idle lifecycle patch: boots
 > 
->> --- a/xen/arch/riscv/imsic.c
->> +++ b/xen/arch/riscv/imsic.c
->> @@ -56,6 +56,24 @@ static unsigned int __ro_after_init guest_num_msis;
->>    */
->>   #define GUEST_IMSIC_MAX_MSIS 255U
->>   
->> +/*
->> + * The interrupt identities an IMSIC interrupt file provides are 0 (which is
->> + * never valid, but still occupies a bit) up to IMSIC_MAX_ID inclusive, so
->> + * IMSIC_MAX_ID + 1 bits have to be covered.
->> + */
->> +#define IMSIC_MAX_EIX DIV_ROUND_UP(IMSIC_MAX_ID + 1, BITS_PER_TYPE(uint64_t))
+> Affected hardware tested:
 > 
-> As before - plain 64 please, or it needs to become clear where the uint64_t
-> is actually coming from.
-
-I will use plain 64.
-
+>   * Intel Core i7-4785T thin mini-ITX, 16 GB DDR3
+>   * Intel N305 thin mini-ITX, 16 GB DDR5
+>   * Supermicro / Intel Xeon E5-1650, 32 GB DDR3
 > 
->> +struct imsic_mrif_eix {
->> +    unsigned long eip[BITS_PER_TYPE(uint64_t) / BITS_PER_LONG];
->> +    unsigned long eie[BITS_PER_TYPE(uint64_t) / BITS_PER_LONG];
+> The successful boot used the regular Xen command line:
 > 
-> Same here. Yet better may be to use DECLARE_BITMAP()?
-
-It will be better. I'll use:
-
-     DECLARE_BITMAP(eip, 64);
-     DECLARE_BITMAP(eie, 64);
-
+> multiboot2 /boot/xen.gz cpufreq=xen:performance
+> module2 /boot/vmlinuz-lts modules=loop,squashfs,sd-mod,usb-storage,xfs quiet
+> module2 /boot/initramfs-lts
 > 
->> @@ -85,6 +103,15 @@ do {                            \
->>       csr_clear(CSR_SIREG, v);    \
->>   } while (0)
->>   
->> +#define imsic_vs_csr_swap(c, v)     \
->> +({                                  \
->> +    unsigned long r_;               \
->> +                                    \
->> +    csr_write(CSR_VSISELECT, (c));  \
->> +    r_ = csr_swap(CSR_VSIREG, (v)); \
->> +    r_;                             \
->> +})
+> No IOMMU workaround, serial console parameter, debug parameter, storage
+> workaround, or Xen command-line change was required.
 > 
-> Excess parentheses again. Plus - what use is r_ here?
-
-r_ stands for `return value` but it should be dropped as it could be 
-done so imsic_vs_csr_swap() just returns a value directly:
-
-#define imsic_vs_csr_swap(c, v)     \
-({                                  \
-     csr_write(CSR_VSISELECT, c);    \
-     csr_swap(CSR_VSIREG, v);        \
-})
-
-
+> The regression was narrowed to *ACPI processor/cpuidle* changes between
+> 6.18.51 and 6.18.52, specifically the idle-driver registration lifecycle.
 > 
->> @@ -130,6 +157,21 @@ do {                                \
->>       imsic_switchcase_32(F, ireg + 0, ##__VA_ARGS__) \
->>       imsic_switchcase_32(F, ireg + 32, ##__VA_ARGS__)
->>   
->> +static unsigned long imsic_eix_swap(unsigned int ireg, unsigned long val)
->> +{
->> +    switch ( ireg )
->> +    {
->> +    imsic_switchcase_64(imsic_switchcase_ret, IMSIC_EIP0,
->> +                        imsic_vs_csr_swap, val)
->> +    imsic_switchcase_64(imsic_switchcase_ret, IMSIC_EIE0,
->> +                        imsic_vs_csr_swap, val)
->> +    default:
->> +        ASSERT_UNREACHABLE();
->> +    }
+> The working 6.18.51-style behavior registers the ACPI idle driver from
+> *acpi_processor_power_init()* and unregisters it from
+> *acpi_processor_power_exit().*
 > 
-> There still wants to "break" in the default case.
+> The failing 6.18.52 behavior registers the ACPI idle driver globally
+> from *acpi_processor_driver_init()* before *driver_register().*
+> 
+> A first ACPI-only revert confirmed the regression source. A refined
+> candidate patch was then prepared to preserve the working ACPI idle
+> lifecycle while keeping unrelated 6.18.52 safety fixes, including:
+> 
+>   * _LPI bounds checks
+>   * cpufreq notifier cleanup on *acpi_processor_driver_init()* failure
+> 
+> The refined candidate patch modifies only:
+> 
+>   * *drivers/acpi/processor_driver.c*
+>   * *drivers/acpi/processor_idle.c*
+>   * *include/acpi/processor.h*
+> 
+> It does not modify Xen, Xenbus, IOMMU, APIC, PCI/ASPM, intel_idle,
+> syscore, USB, storage, XFS, networking, printk, or the cpuidle core API.
+> 
+> The earlier cpuidle_disabled() workaround is not included.
+> 
+> The refined patch has been rebuilt and boot-tested successfully as Xen
+> dom0 on bare metal on TRINITY-EDGE.
+> 
+> This issue is currently visible to *Alpine* users because the *Alpine
+> v3.24 *stable repository contains:
+> 
+> alpine-release 3.24.2-r0
+> *linux-lts 6.18.52-r0*
+> 
+> Systems tracking Alpine 3.24 stable / latest-stable may therefore
+> receive Linux 6.18.52 as the default LTS kernel.
+> 
+> Attachments:
+> 
+>   * revert-acpi-idle-registration-lifecycle.patch
+>   * APKBUILD
+> 
+> The original Alpine report is here:
+> 
+> https://gitlab.alpinelinux.org/alpine/aports/-/work_items/18447
+> <https://gitlab.alpinelinux.org/alpine/aports/-/work_items/18447>
+> 
+> Please let me know if this should be submitted as a formal patch with
+> Signed-off-by, or if there is a better upstream fix/dependency that
+> should be backported instead.
+> 
+> Regards,
+> 
+> *Tony BONNIN*
 > 
 
-I'll add.
 
->> @@ -973,5 +1071,11 @@ void imsic_migrate_vcpu(struct vcpu *v)
->>        * to the new IMSIC VS-file.
->>        */
->>   
->> +    /* Read and clear register state from old IMSIC VS-file */
->> +    imsic_vsfile_read_clear(old_vsfile_id, old_vsfile_cpu, nr_hw_eix, &tmrif);
-> 
-> Why is &tmrif being passed into the function, when it's not otherwise used
-> here? The function could itself have a suitable local var.
-> 
-tmrif isn't a scratch buffer local to the read: it carries the register 
-state of the old interrupt file over to the new one. In this patch it's 
-only filled in, but the next patch ("restore register state in the new 
-IMSIC VS-file") passes the same buffer, via vsfile_data.mrif, to 
-imsic_vsfile_local_update() on the new pCPU. By then the old file has 
-been cleared and released, so the state has to live in the caller. I'll 
-add a sentence to this patch's description saying the dumped state is 
-consumed by the following patch:
-
-The state is dumped into a buffer provided by the caller rather than one
-local to imsic_vsfile_read_clear(), as it has to outlive the old 
-interrupt file: once that file is released, the state is still needed to 
-be restored into the new interrupt file.
-
-Just to emphasize that in code I will use vsfile_data.mrif instead of 
-&tmrif:
-
-   imsic_vsfile_read_clear(old_vsfile_id, old_vsfile_cpu, 
-vsfile_data.nr_eix, vsfile_data.mrif);
-
-Thanks.
-
-~ Oleksii
-
-
+#regzbot introduced: 6cffb59ee50ea4
 
