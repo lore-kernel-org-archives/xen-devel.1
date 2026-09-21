@@ -4,49 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B465C982E6
-	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 14:16:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1427598.1650398 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A12FDC982E1
+	for <xen-devel@archiver.kernel.org>; Mon, 21 Sep 2026 14:30:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1427611.1650406 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8eow-0005kf-AA; Mon, 21 Sep 2026 14:16:38 +0000
+	id 1x8f25-0000Ly-EJ; Mon, 21 Sep 2026 14:30:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1427598.1650398; Mon, 21 Sep 2026 14:16:38 +0000
+Received: by outflank-mailman (output) from mailman id 1427611.1650406; Mon, 21 Sep 2026 14:30:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8eow-0005kY-63; Mon, 21 Sep 2026 14:16:38 +0000
-Received: by outflank-mailman (input) for mailman id 1427598;
- Mon, 21 Sep 2026 14:16:36 +0000
+	id 1x8f25-0000Lr-BP; Mon, 21 Sep 2026 14:30:13 +0000
+Received: by outflank-mailman (input) for mailman id 1427611;
+ Mon, 21 Sep 2026 14:30:11 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c4534c3a00072c4@swg.vates.tech>)
- id 1x8eou-0005kQ-Q3
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 14:16:36 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <thomas.hellstrom@linux.intel.com>)
+ id 1x8f23-0000Ll-Dc
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 14:30:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8eou-00E8iT-2f
- for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 16:16:36 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c4534c3a00072c4@swg.vates.tech>)
- id 6ab13c2c-e002-0a2a0a5209dd-0a2a4502e4f0-40
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 16:16:35 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c4534c3a00072c4@swg.vates.tech>)
- id 6ab13c43-6ca4-0a2a45020019-b9ff1c23989d-3
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 16:16:35 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0c4534c3a00072c4.00a for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 21 Sep 2026 14:16:28 +0000
-Received: from l14 (areims-651-1-80-194.w90-18.abo.wanadoo.fr [90.18.187.194])
- (Authenticated sender: anthony.perard)
- by mail2.vates.fr (Postfix) with ESMTPSA id 0388481CD9;
- Mon, 21 Sep 2026 16:16:27 +0200 (CEST)
+ id 1x8f22-002hdr-HW
+ for xen-devel@lists.xenproject.org; Mon, 21 Sep 2026 16:30:10 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <thomas.hellstrom@linux.intel.com>)
+ id 6ab13f6e-8faa-0a2a0a5109dd-0a2a4509de40-10
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 16:30:09 +0200
+Received: from [192.198.163.7] (helo=mgamail.intel.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <thomas.hellstrom@linux.intel.com>)
+ id 6ab13f6e-be1a-0a2a45090019-c0c6a307741d-3
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 16:30:08 +0200
+Received: from fmviesa002.fm.intel.com ([10.60.135.142])
+ by fmvoesa101.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 Sep 2026 07:30:06 -0700
+Received: from ettammin-mobl3.ger.corp.intel.com (HELO [10.245.244.155])
+ ([10.245.244.155])
+ by fmviesa002-auth.fm.intel.com with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384;
+ 21 Sep 2026 07:30:03 -0700
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,188 +53,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=pOGCXt6vkCQlwrtS3DnhULGdJQA42r2yTBWcqvBKXss=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=l3USAwaXsfEkrTMnZDawZpzX4yBTAEtUQdvpUboSqUepF1WOsK3AX3dDyI6sTzWNa4kZua8Ub
- RpIKBj8063B6t/RDV6wR52weSgnMnUyWk1coH/rheg0vsNE86fofZ4V/IbeSw1ef67KFjJcDDUw
- RbpJVpjHc6ko39G9enfpRFIk2BNCEjau7J8D1ieHxH3z5rJ5payeYsvnoF/fotmwv/H+EPm556R
- OBKQDxdK8Jpltk6OSUcg8gWHNgMJuWFV7feDvs8pGdahQYScwvTxOikHXrf63RVHvXS1POlvrXT
- /oibblNsXT3xbcmILldsJ3hIjBFcxDHKEgqeNuXJ0IXQ==
-X-Zone-Loop: 3a9441f31822fecd954392836c5ef1b4d450c1300250
-x-campaign-type: default
-x-transaction-id: 06c5598e-38eb-4d58-8439-75c73379deef
-x-swg-uid: 01-6f3484ae-ac9e-4747-bacf-3fbe651426a1
-X-Mailer: Sweego
-Message-ID:
- <1790000188.8631fc262581453bbf619ec5b2062170.1a0c4534c3a00072c4@vates.tech>
-x-swg-bid: 1790000188.8631fc262581453bbf619ec5b2062170.1a0c4534c3a00072c4
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Mon, 21 Sep 2026 16:16:26 +0200
-From: Anthony PERARD <anthony.perard@vates.tech>
-To: Julian Vetter <julian.vetter@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Community Manager <community.manager@xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	Roger Pau =?iso-8859-1?Q?Monn=E9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Andrii Sultanov <andriy.sultanov@vates.tech>,
-	Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
-	Marek =?iso-8859-1?Q?Marczykowski-G=F3recki?= <marmarek@invisiblethingslab.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
-	Timothy Pearson <tpearson@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH v5 5/6] xen/arm: report clock_frequency via sysctl
- physinfo, not createdomain
-References: <1789130592.8631fc262581453bbf619ec5b2062170.1a0907e5286000c4f3@vates.tech>
- <1789130864.8631fc262581453bbf619ec5b2062170.1a0908275e9000c4f3@vates.tech>
-MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1789130864.8631fc262581453bbf619ec5b2062170.1a0908275e9000c4f3@vates.tech>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.2b3.72d97aefce43d207.1a0c4534933.334128e23dbc3fbb=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1790000187699
-X-purgate-ID: tlsNG-720697/1790000195-F2AB52AC-8920BDEE/0/0
-X-purgate-type: clean
-X-purgate-size: 4214
-
----=Part.2b3.72d97aefce43d207.1a0c4534933.334128e23dbc3fbb=-
-Content-Type: text/plain; charset=utf-8
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=Intel header.d=intel.com header.i="@intel.com" header.h="Message-ID:Subject:From:To:Cc:Date:In-Reply-To:References:Content-Transfer-Encoding:MIME-Version"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple;
+  d=intel.com; i=@intel.com; q=dns/txt; s=Intel;
+  t=1790001008; x=1821537008;
+  h=message-id:subject:from:to:cc:date:in-reply-to:
+   references:content-transfer-encoding:mime-version;
+  bh=KEIz1oZeYNGf2W1PHV/FBKWoGPCq3tTSHeCdI8YHNSU=;
+  b=HJ4yMHewQXjuw680xaWwAsA24xsPxXxeOZ8wmkWJVoJXdQ4eEHXci6ai
+   ZjAhw6j2OIkQxthSe5PPRvNNmAltd2KO7aCoa3GyhQtLUWCps/LszcL3t
+   +EgViCxfDiWAk0pRW8pvlyTyqSTlVUZaa31bG35TbN6gjoT8sd/ewtJ2L
+   D/ZhjqniAUhvTgYLQVnu62m7slJXuLLd/GuvtnBbZchgTLttUv39mNHVb
+   gtKFcdRUhJRuQ+P8DOZTzf/UfV5nooAxMw69F+ji1dpI6DU4m4IbVk9BE
+   yU04TjsCs12hubdZLhXZ5KoZipGpeQx8bailT8siOvtAxRNzHWpgi0mCy
+   Q==;
+X-CSE-ConnectionGUID: ATmBgQN4Q7i0WDqMIDQTbg==
+X-CSE-MsgGUID: 9XtS2wy6SVGwLCj9QXG2Dg==
+X-IronPort-AV: E=McAfee;i="6800,10657,11912"; a="116042568"
+X-IronPort-AV: E=Sophos;i="6.27,114,1787036400"; 
+   d="scan'208";a="116042568"
+X-CSE-ConnectionGUID: kjkLvVcGQfSuVkimgMKulQ==
+X-CSE-MsgGUID: q9iUGYRaTnOT4JEfU+z5Iw==
+X-ExtLoop1: 1
+X-IronPort-AV: E=Sophos;i="6.27,114,1787036400"; 
+   d="scan'208";a="298923086"
+Message-ID: <466d03e5725bdda886a53b395e102c121e110c1d.camel@linux.intel.com>
+Subject: Re: [PATCH v2] drm/xe: Limit sg segment size to PAGE_SIZE on Xen PV
+From: Thomas =?ISO-8859-1?Q?Hellstr=F6m?= <thomas.hellstrom@linux.intel.com>
+To: Szymon =?UTF-8?Q?Aceda=C5=84ski?= <accek@invisiblethingslab.com>, 
+	intel-xe@lists.freedesktop.org
+Cc: matthew.brost@intel.com, rodrigo.vivi@intel.com, 
+	maarten.lankhorst@linux.intel.com, hch@lst.de, bob.beckett@collabora.com, 
+	dri-devel@lists.freedesktop.org, marmarek@invisiblethingslab.com, 
+	xen-devel@lists.xenproject.org, stable@vger.kernel.org
+Date: Mon, 21 Sep 2026 16:30:01 +0200
+In-Reply-To: <49da6f28a4ba582d32ac6cdccd6dea65d75eefbf.camel@linux.intel.com>
+References: <20260916173030.3223833-1-accek@invisiblethingslab.com>
+	 <49da6f28a4ba582d32ac6cdccd6dea65d75eefbf.camel@linux.intel.com>
+Organization: Intel Sweden AB, Registration Number: 556189-6027
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
+User-Agent: Evolution 3.58.3 (3.58.3-1.fc43) 
+MIME-Version: 1.0
+X-purgate-ID: tlsNG-bad1c0/1790001009-BF2DC034-6AA6D7C7/0/0
+X-purgate-type: clean
+X-purgate-size: 3329
 
-On Fri, Sep 11, 2026 at 02:47:35PM +0200, Julian Vetter wrote:
-> diff --git a/tools/libs/light/libxl=2Ec b/tools/libs/light/libxl=2Ec
-> index a1fe16274d=2E=2Eec7e6d3f65 100644
-> --- a/tools/libs/light/libxl=2Ec
-> +++ b/tools/libs/light/libxl=2Ec
-> @@ -410,6 +410,7 @@ int libxl_get_physinfo(libxl_ctx *ctx, libxl_physinf=
-o *physinfo)
->      physinfo->cap_gnttab_v2 =3D
->          !!(xcphysinfo=2Ecapabilities & XEN_SYSCTL_PHYSCAP_gnttab_v2);
->      physinfo->arch_capabilities =3D xcphysinfo=2Earch_capabilities;
-> +    physinfo->arch_clock_frequency_hz =3D xcphysinfo=2Earch_clock_frequ=
-ency_hz;
+On Mon, 2026-09-21 at 15:57 +0200, Thomas Hellstr=C3=B6m wrote:
+> On Wed, 2026-09-16 at 19:30 +0200, Szymon Aceda=C5=84ski wrote:
+> > Fix display corruption on Xen PV dom0, where DMA buffers are not
+> > guaranteed machine-contiguous, in which case bounce buffering kicks
+> > in, breaking xe's memory coherency assumptions.
+> >=20
+> > Apply the same workaround i915 carries in i915_sg_segment_size()
+> > since
+> > commit 78a07fe777c4 ("drm/i915: stop abusing swiotlb_max_segment").
+> >=20
+> > Fixes: dd08ebf6c352 ("drm/xe: Introduce a new DRM driver for Intel
+> > GPUs")
+> > Reported-by: Marek Marczykowski-G=C3=B3recki
+> > <marmarek@invisiblethingslab.com>
+> > Closes:
+> > https://gitlab.freedesktop.org/drm/xe/kernel/-/work_items/8382
+> > Link: https://lore.kernel.org/xen-devel/aYtznP_tT6xNPwf-@mail-itl/
+> > Link:
+> > https://lore.kernel.org/all/20221020110308.1582518-1-hch@lst.de/=C2=A0#
+> > i915 counterpart
+> > Cc: Christoph Hellwig <hch@lst.de>
+> > Cc: Robert Beckett <bob.beckett@collabora.com>
+> > Cc: stable@vger.kernel.org=C2=A0# v6.8+
+> > Signed-off-by: Szymon Aceda=C5=84ski <accek@invisiblethingslab.com>
+> > ---
+> > v2:
+> > =C2=A0- Imperative language in the commit message (Thomas Hellstr=C3=B6=
+m)
+> > =C2=A0- CC the authors of the original i915 workaround (Thomas
+> > Hellstr=C3=B6m)
+>=20
+> Reviewed-by: Thomas Hellstr=C3=B6m <thomas.hellstrom@linux.intel.com>
 
-That new field name doesn't really make sense=2E How a clock can be arch
-specific? Which clock, I'm sure they can be many?
-(also a comment about that new field in `libxl_physinfo` which is said
-to be ARM only, which doesn't make sense because every CPU architectures
-needs a clock, or many)=2E
+Pushed to drm-xe-next. Thanks.
 
-Anyway, if the name is acceptable in the hypervisor public interfaces,
-so be it=2E
-
-> diff --git a/tools/libs/light/libxl_arm=2Ec b/tools/libs/light/libxl_arm=
-=2Ec
-> index 283cfb749b=2E=2E3d232040c9 100644
-> --- a/tools/libs/light/libxl_arm=2Ec
-> +++ b/tools/libs/light/libxl_arm=2Ec
-> @@ -252,6 +252,9 @@ int libxl__arch_domain_save_config(libxl__gc *gc,
->                                     libxl__domain_build_state *state,
->                                     const struct xen_domctl_createdomain=
- *config)
->  {
-> +    libxl_physinfo info;
-> +    int rc;
-> +
->      switch (config->arch=2Egic_version) {
->      case XEN_DOMCTL_CONFIG_GIC_V2:
->          d_config->b_info=2Earch_arm=2Egic_version =3D LIBXL_GIC_VERSION=
-_V2;
-> @@ -264,7 +267,23 @@ int libxl__arch_domain_save_config(libxl__gc *gc,
->          return ERROR_FAIL;
->      }
-> =20
-> -    state->clock_frequency =3D config->arch=2Eclock_frequency;
-> +    libxl_physinfo_init(&info);
-> +    rc =3D libxl_get_physinfo(CTX, &info);
-
-Could you move both call to the beginning of the function? It might be
-useful to more than just the new code=2E
-
-> +    if (rc) {
-> +        LOG(ERROR, "failed to get physinfo");
-> +        libxl_physinfo_dispose(&info);
-
-It would be better if there's only a single call of this function
-throughout the function, and so only a single error path=2E
-
-Could you an "out" label at the end a of function, and =2E=2E
-
-> +        return ERROR_FAIL;
-
-=2E=2E this and the `_dispose()` call can be replace by `goto out`;
-
-No need to change the value of `rc`, it's already set by a libxl
-function so it can be returned=2E
-
-> +    }
-> +    /*
-> +     * Pass the timer frequency on to the guest DT only when Xen took i=
-t from
-> +     * the host DT (XEN_SYSCTL_PHYSCAP_ARM_TIMER_DT_FREQ)=2E Otherwise =
-the guest
-> +     * gets the right value from CNTFRQ_EL0=2E
-> +     */
-> +    if (arch_capabilities_arm_timer_dt_freq(info=2Earch_capabilities))
-> +        state->clock_frequency =3D info=2Earch_clock_frequency_hz;
-> +    else
-> +        state->clock_frequency =3D 0;
-
-Add here:
-
-    rc =3D 0;
-out:
-
-> +    libxl_physinfo_dispose(&info);
-> =20
->      return 0;
-
-Then replace the return by `return rc`;
-
-Then, replace every `return X` in the function by
-    rc =3D X;
-    goto out;
-
-That error handling style is used in many places in libxl=2E
-
->  }
-> diff --git a/tools/libs/light/libxl_types=2Eidl b/tools/libs/light/libxl=
-_types=2Eidl
-> index 8699ab3013=2E=2Ee2e4be7323 100644
-> --- a/tools/libs/light/libxl_types=2Eidl
-> +++ b/tools/libs/light/libxl_types=2Eidl
-> @@ -1201,6 +1201,7 @@ libxl_physinfo =3D Struct("physinfo", [
->      ("cap_gnttab_v1", bool),
->      ("cap_gnttab_v2", bool),
->      ("arch_capabilities", uint32),
-> +    ("arch_clock_frequency_hz", uint32), # ARM only
->      ], dir=3DDIR_OUT)
-> =20
->  libxl_connectorinfo =3D Struct("connectorinfo", [
-
-Thanks,
+/Thomas
 
 
--- 
-Anthony Perard | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vate=
-s solutions
-
-web: https://vates=2Etech
----=Part.2b3.72d97aefce43d207.1a0c4534933.334128e23dbc3fbb=---
+>=20
+>=20
+> >=20
+> > =C2=A0drivers/gpu/drm/xe/xe_bo.h | 19 +++++++++++++++++++
+> > =C2=A01 file changed, 19 insertions(+)
+> >=20
+> > diff --git a/drivers/gpu/drm/xe/xe_bo.h
+> > b/drivers/gpu/drm/xe/xe_bo.h
+> > index 290ca62..341fa93 100644
+> > --- a/drivers/gpu/drm/xe/xe_bo.h
+> > +++ b/drivers/gpu/drm/xe/xe_bo.h
+> > @@ -9,6 +9,8 @@
+> > =C2=A0#include <drm/drm_prime.h>
+> > =C2=A0#include <drm/ttm/ttm_tt.h>
+> > =C2=A0
+> > +#include <xen/xen.h>
+> > +
+> > =C2=A0#include "xe_bo_types.h"
+> > =C2=A0#include "xe_ggtt.h"
+> > =C2=A0#include "xe_macros.h"
+> > @@ -574,6 +576,23 @@ static inline unsigned int
+> > xe_sg_segment_size(struct device *dev)
+> > =C2=A0	struct scatterlist __maybe_unused sg;
+> > =C2=A0	size_t max =3D BIT_ULL(sizeof(sg.length) * 8) - 1;
+> > =C2=A0
+> > +	/*
+> > +	 * For Xen PV guests pages aren't contiguous in DMA
+> > (machine) address
+> > +	 * space.=C2=A0 The DMA API takes care of that both in
+> > dma_alloc_* (by
+> > +	 * calling into the hypervisor to make the pages
+> > contiguous)
+> > and in
+> > +	 * dma_map_* (by bounce buffering).=C2=A0 But xe (like i915,
+> > see
+> > commit
+> > +	 * 78a07fe777c4) ignores the coherency aspects of the DMA
+> > API and thus
+> > +	 * can't cope with bounce buffering actually happening, so
+> > add a hack
+> > +	 * here to force small allocations and mappings when
+> > running
+> > in PV
+> > +	 * mode on Xen.
+> > +	 *
+> > +	 * Note this will still break if bounce buffering is
+> > required for other
+> > +	 * reasons, like confidential computing hypervisors or
+> > PCIe
+> > root ports
+> > +	 * with addressing limitations.
+> > +	 */
+> > +	if (xen_pv_domain())
+> > +		return PAGE_SIZE;
+> > +
+> > =C2=A0	max =3D min_t(size_t, max, dma_max_mapping_size(dev));
+> > =C2=A0
+> > =C2=A0	/*
+> >=20
+> > base-commit: baafc300cd079a5210c1e70e5ea3d93518e40b38
 
