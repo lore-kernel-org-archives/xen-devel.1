@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFD8BC982F1
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 11:01:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428639.1651529 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95D73C982F1
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 11:03:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428651.1651547 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8yFa-0000Ff-Cu; Tue, 22 Sep 2026 11:01:26 +0000
+	id 1x8yHH-0001GD-UM; Tue, 22 Sep 2026 11:03:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428639.1651529; Tue, 22 Sep 2026 11:01:26 +0000
+Received: by outflank-mailman (output) from mailman id 1428651.1651547; Tue, 22 Sep 2026 11:03:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8yFa-0000FY-A0; Tue, 22 Sep 2026 11:01:26 +0000
-Received: by outflank-mailman (input) for mailman id 1428639;
- Tue, 22 Sep 2026 11:01:25 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Volodymyr_Babchuk@epam.com>) id 1x8yFY-0000FD-RT
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 11:01:24 +0000
+	id 1x8yHH-0001G6-RK; Tue, 22 Sep 2026 11:03:11 +0000
+Received: by outflank-mailman (input) for mailman id 1428651;
+ Tue, 22 Sep 2026 11:03:09 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x8yHF-0001Fu-Ho
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 11:03:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8yFY-00GAup-8B
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 13:01:24 +0200
+ id 1x8yHE-005R2g-R4
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 13:03:08 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6ab25ffd-2eae-0a2a0a5409dd-0a2a4508b902-48
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 13:01:24 +0200
-Received: from [52.101.83.122]
- (helo=GVXPR05CU001.outbound.protection.outlook.com)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ab26069-e002-0a2a0a5209dd-0a2a4508a5cc-6
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 13:03:08 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6ab26003-f659-0a2a45080019-3465537a834e-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 13:01:24 +0200
-Received: from VE1PR03MB6078.eurprd03.prod.outlook.com (2603:10a6:803:113::29)
- by AM7PR03MB6264.eurprd03.prod.outlook.com (2603:10a6:20b:13d::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.14; Tue, 22 Sep
- 2026 11:01:21 +0000
-Received: from VE1PR03MB6078.eurprd03.prod.outlook.com
- ([fe80::4722:b91:9b24:ee48]) by VE1PR03MB6078.eurprd03.prod.outlook.com
- ([fe80::4722:b91:9b24:ee48%3]) with mapi id 15.21.0428.015; Tue, 22 Sep 2026
- 11:01:21 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ab2606a-f659-0a2a45080019-4a7de18cbf37-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 13:03:06 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49cd38e0f79so22436045e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 04:03:06 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
+ [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49fdab8ae6dsm92707795e9.0.2026.09.22.04.03.05
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Sep 2026 04:03:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,163 +52,364 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=b3tpahzainPqapkGEh7njg4BaCpLABpZpT7tH4S3NgEWao/c7JbIVVvhnomRCIezWoEb6PjuDmrwwx5zmq+nUSFAPT4NMe0PhNkEhCOj5m+YYX12pDi7DolpL/Sa+Z8tCQnoz0LrVjXOo4KDexcb0IQaGQWImgsfsnaXlE65CP++U812tpVCd7y6UF+uOjeCcp8vK8PEwxVRmHylaUBCP5/BAtFQxt+kIY2pN9hAvxdn5oxnzfHkdQtJM8VWR+KYYat/DARDLgTGRg0+8cxYQtVowGXDdON/mVfrPm72K0AWRWwF2sOLd60Osos9F6gRLh81DzpPKwoOXu1aMa1S3g==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=V3W5tUjS+MCwugElpeUBsmEcQeNOhcCMCJZ7r4GSvwY=;
- b=fN+q7pf8XcB0VQLosIdXzXmCt0RfYSyksXcCsNtjr5uGoOUXDpP3UiH31/k3DwEfkrfv8rpWZS0BIVMxsf9WJdHRoaxzSlEFbVxrtEIxbFGE1LynV52dFeAS4j8rqctjcWHn8oyoRLJHwBC5gv4W8K5ztAM7scG7MToGg9afq8mYnWVxphw4B82++WhbnY2KKkOzBxzwwUHIaYHTbrOA8PXsGwI93CrEpfPjYLiSlHPwM8sbttKzvyTFOTNRv8Gge2op0JsKlEI/t1mpoAvZK2bsCgwjXixAerNoZIGc2sIMduJRsevU2GWex7e5Q46jOP7N6x174emChb1tNZeSPw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=V3W5tUjS+MCwugElpeUBsmEcQeNOhcCMCJZ7r4GSvwY=;
- b=Ay9sssYUrTGbzahlMTK9wK1Z7PXVYwh8jKt2iGRRrgAqBtLNgMLOG2jDqqjZoxWWR6mnqnbX8Z5KDtR73fXj1SM2eu/isJZO3fH7wauhqatARwOwM0c37LLfUq7G5g85Oljfo4FwzDNE8AwHSJg3JtYX8bs36qjR+9Nvwy4QtRrQeCvugnYjq0sY8Y6oLdsrtc6hvaa/zqmUUIHr9p1Y/S2IyfiqTnzvFcuHTs1cqAjr4YC3cv7r/sQeknIgt80Vhdrbp+8RlaBzaGkP26dRWKjr2heQdKsIOmMGaPiRe3JYWLL3MpSK/1YKnnhwMBkeC6eoBlnmZSPtlt3NTZZ0TQ==
-From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-To: Jan Beulich <jbeulich@suse.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Nicola
- Vetrini <nicola.vetrini@bugseng.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Anthony PERARD
-	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
-	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger@xenproject.org>
-Subject: Re: [PATCH 10/14] ELF/notes: use pointer-to-const by default in
- ELFNOTE_...()
-Thread-Topic: [PATCH 10/14] ELF/notes: use pointer-to-const by default in
- ELFNOTE_...()
-Thread-Index: AQHdOqU2Vkz5DOI+4USs/ahFyLHJfA==
-Date: Tue, 22 Sep 2026 11:01:21 +0000
-Message-ID: <87pky55z3z.fsf@epam.com>
-References: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
-	<8fe86787-7590-44f1-be4f-461b61d7669b@suse.com>	<87fqz26otq.fsf@epam.com>
-	<162997df-6c5f-4f1c-b01f-16f6c2e4e0c6@suse.com>
-In-Reply-To: <162997df-6c5f-4f1c-b01f-16f6c2e4e0c6@suse.com> (Jan Beulich's
-	message of "Tue, 22 Sep 2026 08:36:23 +0200")
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-user-agent: mu4e 1.14.3; emacs 30.2
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: VE1PR03MB6078:EE_|AM7PR03MB6264:EE_
-x-ms-office365-filtering-correlation-id: 644e0546-61d5-42f9-4c52-08df1898d5f8
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|376014|1800799024|23010399003|42112799006|38070700021|3023799007|10067099003|56012099006|4143699003|11063799006|22082099003|18002099003;
-x-microsoft-antispam-message-info:
- E/7fZkwLIFS8RF5v6qMyDsrbsZqghdoTjb37ySqqh0zi1uSskloHDkRtOZjAxanqY79n5c7IeDlSyIK5oF96NniW0GtIz1L5BPEv+Zcqc0xGZ+1jpOTzyH9WXUKNwatpJmFBZHrHcHS2XcIu6YAs2wg1YgY7Tk+tmVezalCxsHkTXvm5xkarCrlRObB3ZnXE0SwjSd3LeOHTlbIruD2qMGMSOmIN2APiH2tnnt5YDbjuNos4wt7fkLfBWBxc8FrQz3+6J46MF+veI2tLBRGLqQHrIusg7xv6MmUKunkFP6UOL+xKQVfXLqyU7+RCCY8xkr044hvUX6WykoPgIYV1+P2Qoa6DK5aIYN4l/SA92S/NgWPhd4Go+n6l/ZmVtQQj2SB52dFGpYaEcWsPnmDYyHivF0AEs9HNJxaxL2dWMfsmQTlmpRATOvO8iXVPtric5NlMcvChc804uT74V261viqkpoxBZ/LqZnOitg8evvyziFnQjiOwRZfeSWdDqIFmFKiv9RVbLdhCZRV4nCNVB81l/0yuPrhtqfgon1ac2j2YO0MoCyaVQO9vxW+OV4BCvn6Ca+X4LoGM/rJkL49D1XzBk0oZNc4X8ztjN17Q7+J0pfmZ7pgg6TadQ34mAEQtJ9LoW8SU6HOC4ex2fG4pwBr7XA+r2VyORKYxX8uP8M6rXX+uR+/ceSBaZ6vftb3QuAWZNuJV1wwXX8oR7CwlBt4kfikewHtRRWBKw8G8Wpg=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR03MB6078.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(42112799006)(38070700021)(3023799007)(10067099003)(56012099006)(4143699003)(11063799006)(22082099003)(18002099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?fy1yw15Eh+f+hHE4O61nYQiy++uq/0m2JpWAfuEXsVsRKr15+mHTSYHp1s?=
- =?iso-8859-1?Q?G/RlwY6wQu1xCeZ3V9jbvG9Od3925kGOuGarUHayKnbbM+CGrt3D+4R8ly?=
- =?iso-8859-1?Q?79BupW9lBjaJ1+UHMSiEINZZ21HxG/sII8JSE28xTKLwBGF6kNbRxpvPiZ?=
- =?iso-8859-1?Q?nFB8fwno4c4GYmzUe3zkyg5b02CRsttMf/31+MyCwVmph/S58k1mGNF0ph?=
- =?iso-8859-1?Q?SaS1/bqS9CE+nYeZvbBD8YHq9BwJ83AM41HLXtYaPMssKztObI2cWKsLTq?=
- =?iso-8859-1?Q?VmWWOnpgKZzX4xMJk7qKRQv809f7q/560SLRf47xyscTgEMwMEZiy8HgL8?=
- =?iso-8859-1?Q?1WOWQIWi7mpFHYn9Y+lyImTgKmR/BXnMXtilIxWRcPLzMzx3rfX4r6jKOa?=
- =?iso-8859-1?Q?c2CjpDoJzp5gzUCuizpAa3jstH5PYUatU2jjJiyVWMM0Y8CW43Hkz6guvy?=
- =?iso-8859-1?Q?yAUNfn5Dv7p9do/4Akauf4O4j88j8nCEZ2qDm3kVlIWvBLovkHPVdrKofB?=
- =?iso-8859-1?Q?gHD1xkfoRnUiVkzrAZeIi/SVOVUxipkQFUgXjAqPmW4XPY+foqUnIiHmxb?=
- =?iso-8859-1?Q?f4sa+jEba2pGmJyJPV1bvq6/u9aCQlAydlKiBwkkm71pJa+8vGfUMYVlgr?=
- =?iso-8859-1?Q?GnyFHNjoGVHUd2sUS3X6bKD81+caa7OP98Q/+GcNIHgO+y05R2837fPzir?=
- =?iso-8859-1?Q?lNhdl/V22R41qqdRSNk9aks8FdJGlYCBOzufOsKzOyStgFHUTOi1AbBd8q?=
- =?iso-8859-1?Q?HShMi3j8NijP6flItWN/YIxb7kwzCcPm4/4kcgTT7pbUJCDXTIeW1Sb+HC?=
- =?iso-8859-1?Q?ZGtpHj/Ak1sm+c6/uG+eL3JHpih19aR9RzrQeJ6eLTvKurTU1WKXQqLKRZ?=
- =?iso-8859-1?Q?43cWfrjkWIQq6WozRqFRjuNIjyR9d/a11zoaC7O4hFAqWwQ+016jL4Vlvt?=
- =?iso-8859-1?Q?ovYNmSrhB33UaKngstCLZgpxhJ1vR8EPdaRk5kAfFF6AA7EPJG1iOmV/vV?=
- =?iso-8859-1?Q?C+HQ3nZNUQEYxgpqt+61cdgVJvZoak9aj+Y/dg30KWu3r8EpSm/9y3XA86?=
- =?iso-8859-1?Q?cL5I0vosH3ddfo3N54Vg2gLrMqTB+peUNm3f+DFFY3LDFKp76QlZsFTnWS?=
- =?iso-8859-1?Q?48QPtB9UAiMS+QygBky/xXf3Iz1jvhIF5qvyhKIe19USd2DzZ2cE/8UIhl?=
- =?iso-8859-1?Q?ELJn7Y0EIDLIBNQYM4BPxQwhHAXLlW6Zu8eFlAySK08YSnsNUNk4hO0Gno?=
- =?iso-8859-1?Q?i7fdydawiTlhOZ5TSAe2gjqa/w47vKOYTNBg0WHPvysSHDq+xDimipl3m8?=
- =?iso-8859-1?Q?ZrmdiOKETY6+kBeIyOzSA/L+ViXh9UG3D1AUSMTBM1pMmtUy3qhn1A/fEN?=
- =?iso-8859-1?Q?huc3zX8v0UD8+cg/g06I6YshGzhseK8W6gTNbejAEHAy6lOTYWijCzO5rm?=
- =?iso-8859-1?Q?JSdlAFRVwep5n0h4mRHb/vQ5gGDxZaL2NjrT+5GLxflP3cArGp/+sx7cMq?=
- =?iso-8859-1?Q?0iPPkYJ16szSk2+AO7RZkq0qzZFsvFWRvhnGhjx595j1JP8dIYsE4F7LJo?=
- =?iso-8859-1?Q?4z2cv9YWg1HNofbGCEICA/Expg8zUGCTjuZkYdh9KImQgIJEStT8lRYROY?=
- =?iso-8859-1?Q?RdYHYz6mWzjnHkRIXJ3/sBPNEqkBkWGoh9Bu2ykOIYcl2i0xctCTQb0T3K?=
- =?iso-8859-1?Q?ZF6S2uw8iq8gqtIuiBfR+1j7VSrTyI0hmIwxDDZMTOD/QWW1Z7GStLRh0p?=
- =?iso-8859-1?Q?xERzij74x9XN6XV5l1snuPfHmtfTrcYuSK/on3Ua7BhbIKD88pq1jSWUnw?=
- =?iso-8859-1?Q?ktIc9kfWKyL31FUurQyvfNfxeXKZKWc=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790074986; x=1790679786; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=rWVdaKk7lkBV1zyykoxHG3CrUBeKB9NFkyrtNEOtJgs=;
+        b=gq831bf4pL4e4cz0i+hQfSscCB10ibvogK+6eBu791/YiiPx28cxZ3EEG/Pj1XRAnq
+         jstkee4Cd8RAvG/2RNOR7ALcHOcWrzrG1b65y6OhzgmemhLZlh+isDjd4ih8OekNE+w9
+         44jHiydoduAewe9z6USv8qfT4/rgUyNSsZmxHxSahvB7n7OGhx4f/e1MTXxmsAJpI4K3
+         KAOqJhYgMgvuobUmee2vTMy17cTYPnXQHK08KDIZGmIORa9ejCiTzzzfhETBKMS0/VQC
+         C47ZKBbmPRp2uSaN6PSke3pEiETJIelTFCTXoOy6yZ8AHSg8bp/Za5WV5T5rqHtSSd12
+         6rCQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790074986; x=1790679786;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=rWVdaKk7lkBV1zyykoxHG3CrUBeKB9NFkyrtNEOtJgs=;
+        b=0SsqkDdBMhiOsWG9r7vTkD6YEartRi/dYmUZkd7RNx3UmJUa5yehmhry540uBY48TH
+         5fiqaZBgvvqho+oG9NtZ8U5D9JK9bDWw9O80WPosnPcP8D9grXqxfz7NydBRh/iqVqT3
+         8KguDqc0/nzF9q6ddBSee1Aa5QntAVMC3fNd6YC2czl9KP3viVMJzxLZ+EyCwXFnQXx/
+         Dl88OxeWLI6mJ3xVqavlcD1Qgvix8derr+4vhCXvZTJpcT7EpsSwWg+/ECq4lYX2Thkg
+         G55EbQt+NSHSJ/eq3+UO4EGHkl6tNHk8ndRhYQOcyskqcGotwXmuOJ/cePq85bN9/qTy
+         gilw==
+X-Gm-Message-State: AFuF++khIEJdk2f7Gpp5fwKSRwvakzvbFe+hEhO2r9t0CiPh6xzWw3lc
+	olame5iO4MOKv+oN309d1HE8Ekb0fWIk/vwrSvgQlWsNeddkDTL9XLdH
+X-Gm-Gg: AYBFou0C1rCbiJ3GRCV/bAS1EDs+pBok16oAB57W5mgTkpODYnYvydTjp9vu0qqgAs3
+	hqpq8ZlCBZFenfOxgI6auztgthvoRDqjD+YQJe/5/v9VQ2O4shgF5JNALvr9yjPCKUsXn6A4CCF
+	OCpwemYYVDQbs5ycBtOCjR9LWoxTbMcLN4QATUof0QYoL5azm7dTvwZNJUKk/V9ci4WD8fXb3a3
+	DyXa+UxJPMcFAEDJGIzoc2BcMfmuMhYim2QQmcclZT1ETPviVKT3FkmmVDK2Kx0x8j+vF/dS2IP
+	YEDlyFVgoWZlGsvsfI/lKZCR1Xnj2E3pOT72X+fBO+juXMMDYT339iYutqJ5UvdxFQFsZCwXR4R
+	P0e1kHjhXtrB1AKx8Iq5vCvOmUP5BCsuL0CeS6XHUVC8I2o7zywk/LQPwtIgJMl6QCwyG5S76ux
+	h5jCPqRuAdsMsCkMK+88A2JcQubNbwaJQRlIEdhr3ESljfMKB2XEtb6laI4P9/3WRYBM1E5LM2e
+	lL/3Jg1MtP4eLKHKzIfzVa7sLPA8ZvLSDmOB1a4lswAuNZ/rA==
+X-Received: by 2002:a05:600c:c16a:b0:49f:ce78:356e with SMTP id 5b1f17b1804b1-49fce7836b0mr139595575e9.31.1790074986223;
+        Tue, 22 Sep 2026 04:03:06 -0700 (PDT)
+Message-ID: <028383a7-e806-4219-990b-c982b580edd5@gmail.com>
+Date: Tue, 22 Sep 2026 13:03:04 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR03MB6078.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 644e0546-61d5-42f9-4c52-08df1898d5f8
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Sep 2026 11:01:21.3386
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: QowOWXJip5k5jGfKSValRSm0fh38HsOCxLqustWeAZl6BbocqfbYw1IADDNab58ylMr1VoOFACr5xPhcvbmiazLrKII8+YUD6ISEeBp6Tww=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR03MB6264
-X-purgate-ID: tlsNG-c1860d/1790074884-D4B7187B-3B676E4D/0/0
-X-purgate-type: clean
-X-purgate-size: 1672
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 24/39] xen/riscv: add helpers for decoding a trapped
+ load or store
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <4c5361bda56e97f5338f4bc561498e018adbf618.1787838835.git.oleksii.kurochko@gmail.com>
+ <1789721101.8631fc262581453bbf619ec5b2062170.1a0b3b0c3ad00072c4@vates.tech>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1789721101.8631fc262581453bbf619ec5b2062170.1a0b3b0c3ad00072c4@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1790074986-CE94287B-223EC513/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 9524
 
-Hi Jan,
 
-Jan Beulich <jbeulich@suse.com> writes:
 
-> On 22.09.2026 03:45, Volodymyr Babchuk wrote:
->> Jan Beulich <jbeulich@suse.com> writes:
->>> Not doing so results in a number of Misra rule 11.8 (casting away of
->>> const-ness) violations. We need to allow kexec to use pointer to non-
->>> const though, so provide a means to override the default.
->>>
->>> For ELFNOTE_NEXT() we can do better and simply re-apply the type of the
->>> incoming pointer.
->>>
->>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>>
->>> --- a/xen/common/kexec.c
->>> +++ b/xen/common/kexec.c
->>> @@ -6,6 +6,9 @@
->>>   * - Magnus Damm <magnus@valinux.co.jp>
->>>   */
->>> =20
->>> +/* We're producing ELF notes here. */
->>> +#define ELFNOTE_CONST
->>=20
->> Frankly, it feels backwards. When reading this line of code I am
->> assuming that you are adding constness to ELF notes because you are
->> defining ELFNOTE_CONST. And I had to check the elf.h to understand that
->> you are doing exactly opposite. I am pretty sure that other people will
->> confused by this as well.
->
-> Well, that's certainly possible. Yet then you or them are asked to make
-> an alternative suggestion. An option I could think of would be to merely
-> rename what is ELFNOTE_CONST right now, to no longer have the word
-> "CONST" in it. ELFNOTE_MODIFIER maybe, albeit that reads a little clumsy
-> to me.
+On 9/18/26 10:44 AM, Baptiste Le Duc wrote:
+>> emulate_load() and emulate_store() will both need to obtain the
+>> instruction which caused a guest MMIO trap, decode it, and locate the
+>> register operand it names. Add what the two share, ahead of either of
+>> them being implemented: struct decoded_insn, insn_fetch_faulted(),
+>> decode_ldst_insn(), guest_xlen(), guest_gpr() and advance_pc().
+>>
+>> The mask/match chain is adapted from Linux's KVM RISC-V implementation.
+> Nit: maybe you could add the Origin: trailer as mentioned in the
+> sending-patches.adoc.
 
-Taking into account that we need 'const' to be enabled by default, maybe
-something like that?
+I think that I will drop that sentense as the code in v3 is changed 
+pretty significantly so it doesn't too much sense to mention that it was 
+derived from Linux's KVM RISC-V.
 
-#ifndef ELFNOTE_NO_CONST
-#define __ELFNOTE_CONST const
-#else
-#define __ELFNOTE_CONST
-#endif
+Basically even if I will put Origin: now here then it will be still 
+pretty hard to undestand what was used or not as I mentioned above there 
+are a lot of changes done in comparison with original.
 
-?
+I will take it in mind for my future patches.
 
-And then use
+[...]
+>> +
+>> +/*
+>> + * Decode the load or store instruction fetched into @di, filling in the
+>> + * remaining fields of it (@di->insn and @di->insn_len are filled by
+>> + * insn_fetch_faulted()).
+>> + *
+>> + * @xlen is the effective XLEN of the guest, needed as
+>> + * the encodings which exist for XLEN=64 only must not be recognized for a
+>> + * 32-bit guest.
+>> + *
+>> + * Returns false if the instruction is not a load or store which can be
+>> + * emulated here.
+>> + */
+>> +static __maybe_unused bool decode_ldst_insn(struct decoded_insn *di,
+>> +                                            unsigned int xlen)
+>> +{
+>> +    unsigned long insn = di->insn;
+>> +    /* Register fields of the uncompressed forms ... */
+>> +    unsigned int rd = RV_RD(insn);
+>> +    unsigned int rs2 = RV_RS2(insn);
+>> +    /*
+>> +     * ... and of the compressed ones, where the 3-bit field selects one of
+>> +     * x8..x15, while the stack-pointer-relative forms have a full-width one.
+>> +     */
+>> +    unsigned int rs2s = RVC_RS2S(insn);
+>> +    unsigned int rs2c = RVC_RS2(insn);
+>> +
+> This naming are confusing because above you described di->reg to be rd
+> for load and rs2 for store but here ...
+>> +    di->is_write = false;
+>> +    di->is_unsigned = false;
+> 
+> 
+>> +    di->reg = rd;
+>> +
+>> +    if ( (insn & INSN_MASK_LB) == INSN_MATCH_LB )
+>> +        di->len = 1;
+>> +    else if ( (insn & INSN_MASK_LBU) == INSN_MATCH_LBU )
+>> +    {
+>> +        di->len = 1;
+>> +        di->is_unsigned = true;
+>> +    }
+>> +    else if ( (insn & INSN_MASK_LH) == INSN_MATCH_LH )
+>> +        di->len = 2;
+>> +    else if ( (insn & INSN_MASK_LHU) == INSN_MATCH_LHU )
+>> +    {
+>> +        di->len = 2;
+>> +        di->is_unsigned = true;
+>> +    }
+>> +    else if ( (insn & INSN_MASK_LW) == INSN_MATCH_LW )
+>> +        di->len = 4;
+>> +    else if ( xlen == 64 && (insn & INSN_MASK_LWU) == INSN_MATCH_LWU )
+>> +    {
+>> +        di->len = 4;
+>> +        di->is_unsigned = true;
+>> +    }
+> 
+> 
+>> +    else if ( (insn & INSN_MASK_C_LW) == INSN_MATCH_C_LW )
+>> +    {
+>> +        di->len = 4;
+> 
+> 
+>> +        di->reg = rs2s;
+> ... you assigned rs2s for a load. According to the spec, it should be rd'.
+> 
+> I would suggest something generic to load and store. Maybe rxs with a comment to explain it concerns rs2' for store and rd' for load.
+> 
+>      /*
+>       * ... and of the compressed ones, where the 3-bit field selects one of
+>       * x8..x15, while the stack-pointer-relative forms have a full-width one.
+>       * rxs is named after that field's spec mnemonic, rd'/rs2': rd' for
+>       * compressed loads, rs2' for compressed stores.
+>       */
+>      unsigned int rxs = RVC_RS2S(insn);
 
-#define ELFNOTE_NO_CONST
+Good point. It isn't partly applied to what I suggested in one of the 
+reply to Jan B. but I will try to re-use part of your suggestion there.
 
-in this hunk
+It will look like:
 
---=20
-WBR, Volodymyr=
+static bool decode_ldst_insn(struct decoded_insn *di, unsigned int xlen)
+{
+     uint32_t insn = di->insn;
+     unsigned int funct3, width_log2;
+
+     if ( INSN_IS_16BIT(insn) )
+     {
+         /*
+          * C.LW, C.LD, C.SW and C.SD (bits[1:0] == 00), and their 
+sp-relative
+          * C.*SP forms (bits[1:0] == 10), have bits[15:13] of the form x1y:
+          * x is set for a store, and y selects a width of 4 or 8 bytes.
+          */
+         funct3 = RV_X(insn, 13, 3);
+
+         if ( (insn & 1) || !(funct3 & 2) )
+             return false;
+
+         di->is_write = funct3 & 4;
+         width_log2 = 2 + (funct3 & 1);
+
+         /*
+          * The register operand is rd' of a load or rs2' of a store for the
+          * register-relative forms, both being bits[4:2], and rs2 of a 
+store
+          * or rd of a load for the sp-relative ones.
+          */
+         if ( !(insn & 2) )
+             /* Quadrant 0: bits[4:2] encode rd' (load) or rs2' (store) */
+             di->reg = RVC_RS2S(insn);
+         else if ( di->is_write )
+             /* Quadrant 2 (CSS): bits[6:2] encode rs2 for C.SWSP / 
+C.SDSP */
+             di->reg = RVC_RS2(insn);
+         else
+         {
+             /* Quadrant 2 (CI): bits[11:7] encode rd for C.LWSP / C.LDSP */
+             di->reg = RV_RD(insn);
+
+             /* C.LWSP and C.LDSP are reserved with rd being x0. */
+             if ( !di->reg )
+                 return false;
+         }
+     }
+     else
+     {
+         /*
+          * funct3[1:0] is log2 of the width in bytes, and funct3[2] selects
+          * zero-extension for a load, while being reserved for a store.
+          */
+         funct3 = RV_X(insn, 12, 3);
+         width_log2 = funct3 & 3;
+
+         switch ( insn & INSN_OPCODE_MASK )
+         {
+         case INSN_OPCODE_LOAD:
+             di->is_unsigned = funct3 & 4;
+             di->reg = RV_RD(insn);
+             break;
+
+         case INSN_OPCODE_STORE:
+             if ( funct3 & 4 )
+                 return false;
+             di->is_write = true;
+             di->reg = RV_RS2(insn);
+             break;
+
+         default:
+             return false;
+         }
+     }
+
+     di->len = 1U << width_log2;
+
+     /*
+      * No access is wider than XLEN, and one as wide as XLEN exists only in
+      * its sign-extending form: this rules out the encodings which 
+exist for
+      * XLEN=64 only on a 32-bit guest, including C.FLW for C.LD (and 
+alike).
+      */
+     if ( (di->len * BITS_PER_BYTE > xlen) ||
+          (di->is_unsigned && di->len * BITS_PER_BYTE == xlen) )
+         return false;
+
+     return true;
+}
+
+> 
+>> +    }
+>> +    /* c.lwsp and c.ldsp are reserved with rd being x0. */
+>> +    else if ( (insn & INSN_MASK_C_LWSP) == INSN_MATCH_C_LWSP && rd )
+>> +        di->len = 4;
+>> +    else if ( xlen == 64 && (insn & INSN_MASK_LD) == INSN_MATCH_LD )
+>> +        di->len = 8;
+>> +    else if ( xlen == 64 && (insn & INSN_MASK_C_LD) == INSN_MATCH_C_LD )
+>> +    {
+>> +        di->len = 8;
+>> +        di->reg = rs2s;
+>> +    }
+>> +    else if ( xlen == 64 && (insn & INSN_MASK_C_LDSP) == INSN_MATCH_C_LDSP &&
+>> +              rd )
+>> +        di->len = 8;
+>> +    else if ( (insn & INSN_MASK_SB) == INSN_MATCH_SB )
+>> +    {
+>> +        di->len = 1;
+>> +        di->is_write = true;
+>> +        di->reg = rs2;
+>> +    }
+>> +    else if ( (insn & INSN_MASK_SH) == INSN_MATCH_SH )
+>> +    {
+>> +        di->len = 2;
+>> +        di->is_write = true;
+>> +        di->reg = rs2;
+>> +    }
+>> +    else if ( (insn & INSN_MASK_SW) == INSN_MATCH_SW )
+>> +    {
+>> +        di->len = 4;
+>> +        di->is_write = true;
+>> +        di->reg = rs2;
+>> +    }
+>> +    else if ( (insn & INSN_MASK_C_SW) == INSN_MATCH_C_SW )
+>> +    {
+>> +        di->len = 4;
+>> +        di->is_write = true;
+>> +        di->reg = rs2s;
+>> +    }
+>> +    else if ( (insn & INSN_MASK_C_SWSP) == INSN_MATCH_C_SWSP )
+>> +    {
+>> +        di->len = 4;
+>> +        di->is_write = true;
+>> +        di->reg = rs2c;
+>> +    }
+>> +    else if ( xlen == 64 && (insn & INSN_MASK_SD) == INSN_MATCH_SD )
+>> +    {
+>> +        di->len = 8;
+>> +        di->is_write = true;
+>> +        di->reg = rs2;
+>> +    }
+>> +    else if ( xlen == 64 && (insn & INSN_MASK_C_SD) == INSN_MATCH_C_SD )
+>> +    {
+>> +        di->len = 8;
+>> +        di->is_write = true;
+>> +        di->reg = rs2s;
+>> +    }
+>> +    else if ( xlen == 64 && (insn & INSN_MASK_C_SDSP) == INSN_MATCH_C_SDSP )
+>> +    {
+>> +        di->len = 8;
+>> +        di->is_write = true;
+>> +        di->reg = rs2c;
+>> +    }
+>> +    else
+>> +        return false;
+>> +
+>> +    return true;
+>> +}
+>> +
+
+[...]
+
+>> +/*
+>> + * Width encoded by the MXL, SXL, UXL and VSXL fields, all of which share one
+>> + * encoding. 0 is reserved.
+>> + */
+>> +#define XLEN_FIELD_32			_UL(1)
+>> +#define XLEN_FIELD_64			_UL(2)
+>> +#define XLEN_FIELD_128			_UL(3)
+>> +
+>>   #if __riscv_xlen == 64
+>>   #define HSTATUS_VSXL			_UL(0x300000000)
+>>   #define HSTATUS_VSXL_SHIFT		32
+>> @@ -896,6 +904,8 @@
+>>   					 (RV_X(x, 7, 2) << 6))
+>>   #define RVC_SDSP_IMM(x)			((RV_X(x, 10, 3) << 3) | \
+>>   					 (RV_X(x, 7, 3) << 6))
+>> +#define RV_RD(insn)			RV_X(insn, SH_RD, 5)
+>> +#define RV_RS2(insn)			RV_X(insn, SH_RS2, 5)
+> Nit: format
+> 
+
+I think it looks like that because tabs are used there instead of spaces 
+and tabs are there because it was orignally taken from the project which 
+uses tabs.
+
+Thanks!
+
+~ Oleksii
 
