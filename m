@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55FC2C9830B
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:00:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1429296.1652212 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1A9BC98308
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:00:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1429308.1652255 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x94ml-0004iT-IX; Tue, 22 Sep 2026 18:00:07 +0000
+	id 1x94mo-0005Yu-0V; Tue, 22 Sep 2026 18:00:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1429296.1652212; Tue, 22 Sep 2026 18:00:07 +0000
+Received: by outflank-mailman (output) from mailman id 1429308.1652255; Tue, 22 Sep 2026 18:00:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x94ml-0004g2-BT; Tue, 22 Sep 2026 18:00:07 +0000
-Received: by outflank-mailman (input) for mailman id 1429296;
- Tue, 22 Sep 2026 17:13:56 +0000
+	id 1x94mn-0005WF-Md; Tue, 22 Sep 2026 18:00:09 +0000
+Received: by outflank-mailman (input) for mailman id 1429308;
+ Tue, 22 Sep 2026 17:15:04 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <usama.anjum@arm.com>) id 1x9444-0005Ir-BS
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:13:56 +0000
+ (envelope-from <usama.anjum@arm.com>) id 1x945A-0005Qz-IB
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:15:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9443-005CIV-OU
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 19:13:55 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1x9459-00AeFB-VE
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 19:15:03 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6ab2b741-2eae-0a2a0a5409dd-0a2a45039aa4-34
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:13:55 +0200
+ id 6ab2b77c-8faa-0a2a0a5109dd-0a2a4502cc04-42
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:15:03 +0200
 Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6ab2b752-fae8-0a2a45030019-d98c6eacc21c-1
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:13:55 +0200
+ id 6ab2b796-6ca4-0a2a45020019-d98c6eac8cc4-1
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:15:03 +0200
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 094B31595;
- Tue, 22 Sep 2026 10:13:51 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id C71EE1595;
+ Tue, 22 Sep 2026 10:14:58 -0700 (PDT)
 Received: from [127.0.1.1] (e142334-100.cambridge.arm.com [10.2.198.93])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C46153F86C;
- Tue, 22 Sep 2026 10:13:41 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 056A83F86C;
+ Tue, 22 Sep 2026 10:14:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,18 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1790097234; bh=VSAJHWUAe7NS76HVRAMjNd0GQzrtewrgnfoeWDUMlnY=;
+	t=1790097302; bh=S1+moWK8WUqQqBwq12CGGS95zxJn4CEiSQR2ZbgzAjA=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=FVt56hjuBPaMyg/BnFKqE4fzU1cEu6NBRc7MPH68RUYG/CCz6y6YC9RG6hPWhN96x
-	 x9hwL9qrWyGY3gHSBta6j4l7PueQkx2vM6HZNIWXJTPqHrodyx2R2jU4yzc9rQNtJ/
-	 1suYvsUR4FuoJM/twYHmYXuJo99AkA0nApGsDh9M=
+	b=I3OhF8wvoUdplYbIAxprYhaliSqNizYMQQKPtaoeJ91myAacTy8wDEGp9P9Hk+JYc
+	 Cxti/txw6TGw66MJUNH7dnKqLXhJcsVRV8TfIQ9DU6Lzstr1QT53ZIGBG3xPD9QBrO
+	 98HXGpHEpdXb5XLelYBAp6ylu9J64MVVJelAF18I=
 From: Muhammad Usama Anjum <usama.anjum@arm.com>
-Date: Tue, 22 Sep 2026 18:12:32 +0100
-Subject: [PATCH v3 4/9] mm: convert PTE table entries in ptep_get()
+Date: Tue, 22 Sep 2026 18:12:37 +0100
+Subject: [PATCH v3 9/9] xen: use hw_pte_t for PTE range callbacks
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260922-pte0-v3-4-5670b8cb9059@arm.com>
+Message-Id: <20260922-pte0-v3-9-5670b8cb9059@arm.com>
 References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
 In-Reply-To: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
 To: Andrew Morton <akpm@linux-foundation.org>, 
@@ -134,56 +134,94 @@ Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
  Muhammad Usama Anjum <usama.anjum@arm.com>
 X-Mailer: b4 0.16.0
-X-purgate-ID: tlsNG-33051d/1790097235-6D8D54E9-34DFBB81/0/0
+X-purgate-ID: tlsNG-720697/1790097303-668B42AC-7CBD72FD/0/0
 X-purgate-type: clean
-X-purgate-size: 1531
+X-purgate-size: 3396
 
-ptep_get() now accepts a pointer to hw_pte_t storage but must continue to
-return a software PTE value. Add __pte_from_hw for both generic hw_pte_t
-definitions. Read the hw_pte_t table element atomically before converting
-it to pte_t.
+Generic PTE range and remapping helpers now pass pointers to PTE table
+storage as hw_pte_t *. Update the Xen callbacks to match those interfaces.
 
+Keep software PTE values as pte_t and continue to access them through the
+existing PTE helpers. This is required when Xen is built for an
+architecture that selects the distinct hw_pte_t wrapper.
+
+Reviewed-by: Juergen Gross <jgross@suse.com>
 Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
 ---
 Changes since v1:
 - Use software PTE value terminology.
 
 Changes since RFC v1:
-- Define __pte_from_hw for the opted-in generic wrapper.
-- Apply READ_ONCE() to hw_pte_t before converting it to pte_t.
+- Clarify why the callback conversion is required after architecture
+  opt-in.
 ---
- include/linux/pgtable.h       | 2 +-
- include/linux/pgtable_types.h | 2 ++
- 2 files changed, 3 insertions(+), 1 deletion(-)
+ drivers/xen/gntdev.c               | 2 +-
+ drivers/xen/privcmd.c              | 2 +-
+ drivers/xen/xenbus/xenbus_client.c | 2 +-
+ drivers/xen/xlate_mmu.c            | 4 ++--
+ 4 files changed, 5 insertions(+), 5 deletions(-)
 
-diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
-index 19098e302b75a..41337da0d65aa 100644
---- a/include/linux/pgtable.h
-+++ b/include/linux/pgtable.h
-@@ -493,7 +493,7 @@ static inline int pudp_set_access_flags(struct vm_area_struct *vma,
- #ifndef ptep_get
- static inline pte_t ptep_get(hw_pte_t *ptep)
+diff --git a/drivers/xen/gntdev.c b/drivers/xen/gntdev.c
+index 1dcc4675580ed..b013bcad99b5b 100644
+--- a/drivers/xen/gntdev.c
++++ b/drivers/xen/gntdev.c
+@@ -301,7 +301,7 @@ void gntdev_put_map(struct gntdev_priv *priv, struct gntdev_grant_map *map)
+ 
+ /* ------------------------------------------------------------------ */
+ 
+-static int find_grant_ptes(pte_t *pte, unsigned long addr, void *data)
++static int find_grant_ptes(hw_pte_t *pte, unsigned long addr, void *data)
  {
--	return READ_ONCE(*ptep);
-+	return __pte_from_hw(READ_ONCE(*ptep));
+ 	struct gntdev_grant_map *map = data;
+ 	unsigned int pgnr = (addr - map->pages_vm_start) >> PAGE_SHIFT;
+diff --git a/drivers/xen/privcmd.c b/drivers/xen/privcmd.c
+index 7cfc28f1bb86f..e724cc053e264 100644
+--- a/drivers/xen/privcmd.c
++++ b/drivers/xen/privcmd.c
+@@ -1658,7 +1658,7 @@ static int privcmd_mmap(struct file *file, struct vm_area_struct *vma)
+  * on a per pfn/pte basis. Mapping calls that fail with ENOENT
+  * can be then retried until success.
+  */
+-static int is_mapped_fn(pte_t *pte, unsigned long addr, void *data)
++static int is_mapped_fn(hw_pte_t *pte, unsigned long addr, void *data)
+ {
+ 	return pte_none(ptep_get(pte)) ? 0 : -EBUSY;
  }
- #endif
+diff --git a/drivers/xen/xenbus/xenbus_client.c b/drivers/xen/xenbus/xenbus_client.c
+index 27682cb5e58ab..387f97a555594 100644
+--- a/drivers/xen/xenbus/xenbus_client.c
++++ b/drivers/xen/xenbus/xenbus_client.c
+@@ -749,7 +749,7 @@ int xenbus_unmap_ring_vfree(struct xenbus_device *dev, void *vaddr)
+ EXPORT_SYMBOL_GPL(xenbus_unmap_ring_vfree);
  
-diff --git a/include/linux/pgtable_types.h b/include/linux/pgtable_types.h
-index 07da05d375c2c..d6c5a7548550b 100644
---- a/include/linux/pgtable_types.h
-+++ b/include/linux/pgtable_types.h
-@@ -8,8 +8,10 @@
+ #ifdef CONFIG_XEN_PV
+-static int map_ring_apply(pte_t *pte, unsigned long addr, void *data)
++static int map_ring_apply(hw_pte_t *pte, unsigned long addr, void *data)
+ {
+ 	struct map_ring_valloc *info = data;
  
- #ifdef CONFIG_ARCH_HAS_HW_PTE_T
- typedef struct __hw_pte_t { pte_t __pte; } hw_pte_t;
-+#define __pte_from_hw(pte)	((pte).__pte)
- #else
- #define hw_pte_t pte_t
-+#define __pte_from_hw(pte)	(pte)
- #endif
+diff --git a/drivers/xen/xlate_mmu.c b/drivers/xen/xlate_mmu.c
+index 8efd7b55223fb..d7244f9f9a545 100644
+--- a/drivers/xen/xlate_mmu.c
++++ b/drivers/xen/xlate_mmu.c
+@@ -93,7 +93,7 @@ static void setup_hparams(unsigned long gfn, void *data)
+ 	info->fgfn++;
+ }
  
- #endif /* !__ASSEMBLY__ */
+-static int remap_pte_fn(pte_t *ptep, unsigned long addr, void *data)
++static int remap_pte_fn(hw_pte_t *ptep, unsigned long addr, void *data)
+ {
+ 	struct remap_data *info = data;
+ 	struct page *page = info->pages[info->index++];
+@@ -269,7 +269,7 @@ struct remap_pfn {
+ 	unsigned long i;
+ };
+ 
+-static int remap_pfn_fn(pte_t *ptep, unsigned long addr, void *data)
++static int remap_pfn_fn(hw_pte_t *ptep, unsigned long addr, void *data)
+ {
+ 	struct remap_pfn *r = data;
+ 	struct page *page = r->pages[r->i];
 
 -- 
 2.47.3
