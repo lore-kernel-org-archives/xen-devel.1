@@ -4,61 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D4C89C982FA
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 11:20:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428689.1651583 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3EF21C982FF
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 11:22:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428697.1651592 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8yXg-0006a7-28; Tue, 22 Sep 2026 11:20:08 +0000
+	id 1x8ya5-0007Am-E4; Tue, 22 Sep 2026 11:22:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428689.1651583; Tue, 22 Sep 2026 11:20:08 +0000
+Received: by outflank-mailman (output) from mailman id 1428697.1651592; Tue, 22 Sep 2026 11:22:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8yXf-0006a0-VZ; Tue, 22 Sep 2026 11:20:07 +0000
-Received: by outflank-mailman (input) for mailman id 1428689;
- Tue, 22 Sep 2026 11:20:06 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1x8yXe-0006Tn-AL
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 11:20:06 +0000
+	id 1x8ya5-0007Ad-B5; Tue, 22 Sep 2026 11:22:37 +0000
+Received: by outflank-mailman (input) for mailman id 1428697;
+ Tue, 22 Sep 2026 11:22:35 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x8ya3-0007AQ-Br
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 11:22:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8yXd-007cZi-NP
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 13:20:05 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x8ya2-002glK-Ov
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 13:22:34 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ab26460-bab6-0a2a0a5309dd-0a2a450ccd5c-8
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 13:20:05 +0200
-Received: from [40.107.200.25]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ab26464-f479-0a2a450c0019-286bc81968a4-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 13:20:05 +0200
-Received: from IA4P220CA0005.NAMP220.PROD.OUTLOOK.COM (2603:10b6:208:558::9)
- by DM4PR12MB5745.namprd12.prod.outlook.com (2603:10b6:8:5c::7) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.428.13; Tue, 22 Sep 2026 11:20:00 +0000
-Received: from BN3PEPF0000B06C.namprd21.prod.outlook.com
- (2603:10b6:208:558:cafe::6e) by IA4P220CA0005.outlook.office365.com
- (2603:10b6:208:558::9) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.14 via Frontend Transport; Tue,
- 22 Sep 2026 11:20:00 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BN3PEPF0000B06C.mail.protection.outlook.com (10.167.243.71) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.451.0 via Frontend Transport; Tue, 22 Sep 2026 11:19:59 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 22 Sep
- 2026 06:19:59 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 22 Sep
- 2026 06:19:59 -0500
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Tue, 22 Sep 2026 06:19:58 -0500
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ab264fa-8faa-0a2a0a5109dd-0a2a4509a09c-0
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 13:22:34 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ab264fa-be1a-0a2a45090019-4a7de18cacce-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 13:22:34 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49b912df756so27768855e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 04:22:34 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
+ [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49fdace76e8sm58810405e9.1.2026.09.22.04.22.33
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Sep 2026 04:22:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -70,196 +52,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ydP17yeqhob6vACnQpPrDMAYuXl4mTD/sjzbT9RIGvOjsNzTeWjiZIPj5pF9a4l67AVoOz4NmTwYKojJfBbIzahqOVWIFarhPMfNCG+udjQdFCyEG9IHyyeHZEhwwpRHCM8FtkccIc7R6k7WcK9SRtiOPPjomrc+1MfW8G4kpg6tPcCpeIE4NpeHvhc//BWA5QoLMRuIEaCRxUSPACMWRmOtnWaUo8/HBoD4x/CK+B5x9aB0REckBgHYIkN6E7cPo9XgBc4yZj9VYoE/0VwTYJ47KAKOM+yjqZIl/RDgEWAiavpusFj6x+lFTt0PrEii407KEkUMlC0/fzSBxySBag==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uQxk49AgEydZFEzS/37FzXkLZAyO0irbvK0oJ835BtQ=;
- b=Mm+XoZZqlGqHLlhHcVyBJq0IvxSjeUNoc7VkCcEiKLeW2mxYsqDpCsaxB6yh66Te0B48xgzUcJh/uU5ECMPLlEpjWVNGx3f4/HFAwdSzaF27FqogfK7EBgD+pXifrCTsDA0/hJwsSrl1UBz4jcZw5/rodAgq9/R8ROmNmLU5ssD8aRGYF17yut+QIXx4GxKCQf1SdvBESbAfQgDmz/kb3fixOVgSZjuo9BOvVens7mGQ0obXIdc34CF01r2YTjIK2PpE05Bu4+ufDo1/Hvpwt/w++ueePAEEzO3yqcNyZL3wSszC7mdUYi/UOygqJdaVpHRwQ/JKaM2F+FPzgnqDWQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uQxk49AgEydZFEzS/37FzXkLZAyO0irbvK0oJ835BtQ=;
- b=GXMXdPHO4IvVDeb6Zbu6w2LzfJyBumqDTcjp584NC/1sPVvaM3dWQAKjNNJTDG3mVm2EO6sr6O/hRYQDd716DjBXG3h6vIuxv2RftMo1T+1rJ79oIuu54GanuUn06NsyNFKiumMHgFpkicFiz5WpJYcFF0ZbEztTZN1S2IdisgA=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <52255065-80db-4dae-8406-b1f75614ef9a@amd.com>
-Date: Tue, 22 Sep 2026 13:19:57 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790076154; x=1790680954; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=FuQGbY5+Oh09G0KsH/4qhh0PfmkZHq19MkHek5qZnME=;
+        b=ouggmz/9C5vaTG6MzwDd/nd096+ju1vioAJeOyalrz62Epw1w3Tavlkgk624il9DCg
+         VclHa5+sBjZ/0kz+y87dkT+UiiE/Ia7FjN5Vpsr0t329meICtcipwartAvHpi8H0ZMqa
+         IeIioLTYr3rMRmDakmqvhV7glbJF+rlYOByjMAdzk4bYwPIdhpGqq2vRTuv/aK7St3el
+         8QqPNtYzWs7uCmj+hTYzxYo1LI3zWBNyFCkET3ar3rEFioSortSkPkMQlbolWfPqWWk3
+         +sfjDfu7ea/o6SiPaN8pJvPZeag54b4MjKF0ic3pV+fLqgi/zqU/rW84UMV7F18Fxsi7
+         YDeQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790076154; x=1790680954;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=FuQGbY5+Oh09G0KsH/4qhh0PfmkZHq19MkHek5qZnME=;
+        b=0UxXyBveKMImutpSrWlaST08Yw7o61wn9Ra0eqD2OUrhxAcPOwDNAvDaIXNCH3GMS0
+         SNf2sa2S09+ylTmlfamDfOCEdbbvnol1NYrtCRhLojn6R+5UDXKOZp6nRj8oSqUDuGxk
+         Nxukn76hsDmBuC8c8Vo1f5bjMMHMALGPIdt/I04snxyVljuQSJ0eF0Z5hXxGkTNbiXvE
+         Vq7Kb5BXm4DdyK7EfJ3dnTOnUDlOGHueE1vzDfZPmynhk2mEtcFJR0WAtKAEgsdfnzvc
+         rnZeUZ+LRl/A9EOw+u9py10sj/gGsclrrQ/0oTnqVkQvVBYwpfHlh/8ouzamqAMCKOL1
+         Z7iQ==
+X-Gm-Message-State: AFuF++le33ri04fBLkqONKNMkhSiqXSRDrcR0v83ezUHeMDv6oHB89LN
+	F1BVVqXggGMGyRSbDuY6EGLhaEVaIrW6ogZlHtSvGgeBfyxEfdM8KnR7
+X-Gm-Gg: AYBFou0/IbzmfAfW0yQHPuiVY5ZGxcpLTzCBr06NengECdeDyGzJBGpwjVdOVWcbkiO
+	GZekKLoFuEyjuzgul09zqJG7UPpmL80ATuQ8B2TRAkG8P1M9sFxJgwST4lvCh0+oRzIow1hOsNl
+	1SmpfKk37Rov/CALaiiek2vj1dCqEp4bzjVqrs0qWTUPWSEQmyrGyVvzETVN6nhkIlN/iKs+j2e
+	PMYjwn8bpISNOMGnSa+ApCXjt7llwBYpLYNwiU8aPJiFOnpDBD/WeHafyOG9Tl96v19tQm4/KHT
+	MvLmcP+WUsGHQdIJIDBagXciKNzcrA7fF9qFOBrLUcB7TWDpKDd5cBYTGLxuGWGz6q1SC8aF8ZG
+	NwMVo0XbWVj80Qqqr0AqK8TaJT9Lm2UmYAOmN6yc4uctlhNb63QRQhjlN6xCi4HNkMV4Sl3VfrZ
+	51dZMjP+Ycr8umvJxeM9Wh+ORSEvIiCnKdUYvWhg9p+yVEi6EA4kJ6jwVWm+dWeB0ymji66oooQ
+	oML/ZaPwKRAuCj2U1DmAC7fzkDUYgA7nW55w3TKf+DE89SXaw==
+X-Received: by 2002:a05:600c:474e:b0:49e:7cff:f8ca with SMTP id 5b1f17b1804b1-49fc5743c69mr183916215e9.29.1790076154219;
+        Tue, 22 Sep 2026 04:22:34 -0700 (PDT)
+Message-ID: <f4cf7ca5-f4ac-413e-9c06-7e9fe97aa158@gmail.com>
+Date: Tue, 22 Sep 2026 13:22:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 1/4] xen/arm: make is_espi() a pure range predicate
-To: Mykola Kvach <mykola_kvach@epam.com>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>
-References: <cover.1790056623.git.mykola_kvach@epam.com>
- <802ae2dd44556a292d98f1d52d3c88ce4fa5034b.1790056623.git.mykola_kvach@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH v2 25/39] xen/riscv: add guest load emulation for trapped
+ MMIO accesses
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <7cf3203f8f826eefa1b24bb2dedbd76c0b611dc1.1787838835.git.oleksii.kurochko@gmail.com>
+ <1789723009.8631fc262581453bbf619ec5b2062170.1a0b3cde12700072c4@vates.tech>
 Content-Language: en-US
-In-Reply-To: <802ae2dd44556a292d98f1d52d3c88ce4fa5034b.1790056623.git.mykola_kvach@epam.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1789723009.8631fc262581453bbf619ec5b2062170.1a0b3cde12700072c4@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN3PEPF0000B06C:EE_|DM4PR12MB5745:EE_
-X-MS-Office365-Filtering-Correlation-Id: a411d755-478a-41a7-d34d-08df189b70ba
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|23010399003|376014|36860700016|82310400026|11063799006|10067099003|4143699003|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	URgQ9SIIX+R4jdCxYmvRf/5iqxGEI9gKCMUpcyznXvERe6jjhLSeq5qJFGfr1moKD5qd+yiaO0bs43gGOOBzmfpQb7Wew7fWwKNLGIXcqiLNCRrXzT6Ur71GqxzAS4uhna/02xOLqufelQPDaP5jC8Z1sQU97/4h86/ZP9Wc7m/NBYhO18/O2uzY5XkJFfaPvvbTEjJkcv9d3veHP5c/HnTgkx5s4zWoY2UBJp9fkbntVVqfCriRxaAaB8nLQj1NRwvj54+++uWbxocdGooJrzQtOszqvLifNxdi8UraqPNYB3LJS1KIQ0PxxN5jeHhvDI4qCkpQumZ5VpgPz4W4KIVGNjEZDg6/7rV4RPUOdDYRqT8m/gpwYgQBJ3Fn+Bbdk3ok8UrNF+C+nr+eblwbt/R084cTppWQDXKHM0vuLyv+6HGc1hX9TgH1P0H0bpUS0QosrEm0SaLP/hkmJ7eTLKu+uWfolGfuR8kjaGiztnrl8rq1PN/M0nOpET3Qp/k0VUq6IB4Lcq5qT+KcMzF8MEfxYdXa2OweVkqo6Xng45A8Xu99+UIvpLFqDgLVlc5foRwkaneIW/iYA2hMLm87EEh4uobx9/rWDr0xlaCULLrrAkmCtNHris3xxNs1IrwNn36XqXZq9ki3gvNsMI0BvluXQc54o+O8zaVbO9lK9qj6aGRO8aIamzFESEem2kgerHgIwcriJzDpbVtTjj4BJA==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(36860700016)(82310400026)(11063799006)(10067099003)(4143699003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	ML4dYkPBH5uvU/NtvIAtZSHlLH3pP3hTpizbNrcfjEjiAnbHfsprPBEvfPHHSW+kTqa/M5eN1lfiXD0M2n8zeIGm/10GiKrLx+ljnSZWdDA5EcheU5d3oeN2bf5uIyfMQfyutXc5UzgW9nriDXsj+LKNCLzWqo6tEvSZsr47V0ZNmK7ngCqywxODKNng0WR+fAJypCA2wgRKoAsf2gpM0DTvomG25rF6hFUPjsJ5e4xCeBY12MQ5HG7dxZjbHxDQZCJQKErkNuyuqA9AiPOyVzg2fhTiARv9Ht1yNLzFPxp0OtItGPNkztUbbh0tPerutUod4DjFHMFuJlSRu/OLM0pnaFTptmE5l2Ms3/XsUYTHO9tFC4mlssQoDDMgeaZaxVQDqFWjZUYDxdCNE6638yDHNeK3s/i0S3UVHNXYeoGHG/eMLBikeVMRmG5av0/z
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2026 11:19:59.9731
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: a411d755-478a-41a7-d34d-08df189b70ba
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN3PEPF0000B06C.namprd21.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5745
-X-purgate-ID: tlsNG-d25034/1790076005-50F3BA5B-8C30C127/0/0
-X-purgate-type: clean
-X-purgate-size: 4849
+X-purgate-ID: tlsNG-bad1c0/1790076154-3A2C4034-A6A77DFC/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 533
 
-
-
-On 22-Sep-26 08:39, Mykola Kvach wrote:
-> is_espi() currently changes its result according to CONFIG_GICV3_ESPI.
-> Without eSPI support, it returns false, and its assertion fails if
-> an eSPI INTID is passed. Callers therefore use it both to identify
-> eSPIs and to exclude eSPI handling when support is disabled.
+>> @@ -179,8 +178,7 @@ static void resolve_faulting_gpa(struct guest_fault *gf)
+>>    * Relies on x0..x31 being laid out at the start of struct cpu_user_regs in
+>>    * architectural register-number order; see the comment there.
+>>    */
+>> -static __maybe_unused unsigned long *guest_gpr(struct cpu_user_regs *regs,
+>> -                                               unsigned int reg)
+> Could we unified this function with regs_get_gpr()?
 > 
-> Make is_espi() report only whether an INTID is in the architectural
-> eSPI range. Check for eSPI support at the call sites.
-> 
-> Use BUG_ON() if the GIC reports an eSPI without compiled-in support,
-> matching the handling of unsupported LPIs. Return NULL from
-> spi_to_pending() for an eSPI when support is disabled, using an
-> espi_to_pending() stub.
-> 
-> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> ---
-> Changes in v4:
-> - Clarify the existing is_espi() behavior in the commit message.
-> - Drop the unrelated blank-line removal in vgic.c.
-> - Use BUG_ON() if the GIC reports an eSPI without eSPI support.
-> - Drop the redundant CONFIG_GICV3_ESPI check in IRQ dispatch.
-> - Return NULL for virtual eSPI lookup when eSPI support is disabled.
-> 
-> Changes in v3:
-> - New preparatory cleanup requested during review.
-> ---
->  xen/arch/arm/gic.c             |  2 ++
->  xen/arch/arm/include/asm/irq.h | 11 -----------
->  xen/arch/arm/vgic.c            | 30 ++++++++++++++++--------------
->  3 files changed, 18 insertions(+), 25 deletions(-)
-> 
-> diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
-> index 078049e741..3a7f972826 100644
-> --- a/xen/arch/arm/gic.c
-> +++ b/xen/arch/arm/gic.c
-> @@ -348,6 +348,8 @@ void gic_interrupt(struct cpu_user_regs *regs, int is_fiq)
->          /* Reading IRQ will ACK it */
->          irq = gic_hw_ops->read_irq();
->  
-> +        BUG_ON(!IS_ENABLED(CONFIG_GICV3_ESPI) && is_espi(irq));
-Usually BUG() should come with a comment explaining why we cannot continue. Here
-it's that without config enabled, there's no descriptor and no pending_irq
-storage for it. Please add a comment.
 
-> +
->          if ( likely(irq >= GIC_SGI_STATIC_MAX && irq < 1020) || is_espi(irq) )
->          {
->              isb();
-> diff --git a/xen/arch/arm/include/asm/irq.h b/xen/arch/arm/include/asm/irq.h
-> index 09788dbfeb..c29f3d04a3 100644
-> --- a/xen/arch/arm/include/asm/irq.h
-> +++ b/xen/arch/arm/include/asm/irq.h
-> @@ -66,18 +66,7 @@ static inline bool is_lpi(unsigned int irq)
->  
->  static inline bool is_espi(unsigned int irq)
->  {
-> -#ifdef CONFIG_GICV3_ESPI
->      return irq >= ESPI_BASE_INTID && irq <= ESPI_MAX_INTID;
-> -#else
-> -    /*
-> -     * The function should not be called for eSPIs when CONFIG_GICV3_ESPI is
-> -     * disabled. Returning false allows the compiler to optimize the code
-> -     * when the config is disabled, while the assert ensures that out-of-range
-> -     * array resources are not accessed.
-> -     */
-> -    ASSERT(!(irq >= ESPI_BASE_INTID && irq <= ESPI_MAX_INTID));
-> -    return false;
-> -#endif
->  }
->  
->  static inline unsigned int espi_intid_to_idx(unsigned int intid)
-> diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
-> index e5aca17dcb..e04678f134 100644
-> --- a/xen/arch/arm/vgic.c
-> +++ b/xen/arch/arm/vgic.c
-> @@ -62,6 +62,13 @@ static inline struct vgic_irq_rank *vgic_get_espi_rank(struct vcpu *v,
->      return &v->domain->arch.vgic.ext_shared_irqs[EXT_RANK_NUM2IDX(rank)];
->  }
->  
-> +static struct pending_irq *espi_to_pending(struct domain *d, unsigned int irq)
-Constify d, please.
-Also, use static inline like the surrounding helpers.
+I think it could. I will try to do in the unified way.
 
-> +{
-> +    unsigned int idx = espi_intid_to_idx(irq) + d->arch.vgic.nr_spis;
-> +
-> +    return &d->arch.vgic.pending_irqs[idx];
-> +}
-> +
->  #else
->  static inline bool is_valid_espi_rank(struct domain *d, unsigned int rank)
->  {
-> @@ -78,6 +85,11 @@ static inline struct vgic_irq_rank *vgic_get_espi_rank(struct vcpu *v,
->      ASSERT_UNREACHABLE();
->      return NULL;
->  }
-> +
-> +static struct pending_irq *espi_to_pending(struct domain *d, unsigned int irq)
-> +{
-Add ASSERT_UNREACHABLE() here like for vgic_get_espi_rank().
+Thanks!
 
-> +    return NULL;
-> +}
->  #endif
->  
->  static inline struct vgic_irq_rank *vgic_get_rank(struct vcpu *v,
-> @@ -696,8 +708,8 @@ bool vgic_to_sgi(struct vcpu *v, register_t sgir, enum gic_sgi_mode irqmode,
->  /*
->   * Returns the pointer to the struct pending_irq belonging to the given
->   * interrupt.
-> - * This can return NULL if called for an LPI which has been unmapped
-> - * meanwhile.
-> + * This can return NULL for an eSPI when support is disabled, or for an
-> + * LPI which has been unmapped meanwhile.
-This puts LPI and eSPIs on exactly the same level which is not correct. While
-unmapped LPI can happen, eSPI with support disabled must not. Leave the LPI
-comment as is and clarify eSPI in one sentence.
-
-Otherwsie, LGTM.
-
-~Michal
-
+~ Oleksii
 
