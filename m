@@ -4,43 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BA87DC982FF
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 13:23:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428835.1651756 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3ED55C982FF
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 13:34:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428851.1651764 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x90Sg-0006Wr-9g; Tue, 22 Sep 2026 13:23:06 +0000
+	id 1x90dZ-0001fd-9e; Tue, 22 Sep 2026 13:34:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428835.1651756; Tue, 22 Sep 2026 13:23:06 +0000
+Received: by outflank-mailman (output) from mailman id 1428851.1651764; Tue, 22 Sep 2026 13:34:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x90Sg-0006Wk-6o; Tue, 22 Sep 2026 13:23:06 +0000
-Received: by outflank-mailman (input) for mailman id 1428835;
- Tue, 22 Sep 2026 13:23:05 +0000
+	id 1x90dZ-0001fW-6o; Tue, 22 Sep 2026 13:34:21 +0000
+Received: by outflank-mailman (input) for mailman id 1428851;
+ Tue, 22 Sep 2026 13:34:19 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1x90Se-0006WX-M7
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 13:23:04 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x90dX-0001fI-P0
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 13:34:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x90Sd-00G3uD-HR
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 15:23:03 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x90dW-00G6SM-EI
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 15:34:18 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6ab2812c-2eae-0a2a0a5409dd-0a2a4502c746-12
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 15:23:03 +0200
-Received: from [202.12.124.144] (helo=fout-b1-smtp.messagingengine.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6ab28131-6ca4-0a2a45020019-ca0c7c90eb61-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 15:22:57 +0200
-Received: from phl-compute-06.internal (phl-compute-06.internal [10.202.2.46])
- by mailfout.stl.internal (Postfix) with ESMTP id 6DF961D0009D;
- Tue, 22 Sep 2026 09:22:56 -0400 (EDT)
-Received: from phl-frontend-04 ([10.202.2.163])
- by phl-compute-06.internal (MEProxy); Tue, 22 Sep 2026 09:22:56 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Tue,
- 22 Sep 2026 09:22:54 -0400 (EDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab283d1-8faa-0a2a0a5109dd-0a2a450a86e4-24
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 15:34:17 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab283d9-f2d2-0a2a450a0019-4a7de18dbe2d-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 15:34:17 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49ccf3ca626so21686895e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 06:34:17 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4886277e84dsm5608092f8f.20.2026.09.22.06.34.16
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Sep 2026 06:34:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,162 +53,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm1 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm1; t=1790083376;
-	 x=1790169776; bh=8yLYVHJ6jNzwsHMgG8xS1Ovb4UA04vsZw/QYJZxSTJI=; b=
-	X2ypO5wa3iO9/WOfyPan5UDJcstQ/iIZO8ZhmMI7WI/ShG5xQwz2lBfxZm4CQHfM
-	S+kF8r7kJNl188Vlhw6T0Ej8ocpDirFuhCQAbwIfMziP+YVjAJq/x7LFmearYekN
-	5AMtSzTmFWobxTnA2Fa6Fw7MvPGG3uvrZYOikSajG6rhYqwizFwsIQ29BJGWGTko
-	RuU4Ye8h0bBgrLWQi+s5CccTRCcgR6noEYDJTAeyJllFlVk3Mbzx+ZxwdcTBnXss
-	9FHo0AJm9YjpVYqtnO15OcWdMu18PEOsNv7TMwYGj6KmwmwyAKFOlvjBPKtEfpPt
-	TEMQWs6Ql4cyHTzlXUwzJQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm1; t=
-	1790083376; x=1790169776; bh=8yLYVHJ6jNzwsHMgG8xS1Ovb4UA04vsZw/Q
-	YJZxSTJI=; b=i0nALIbfl7oxb6z9DtuhZVBboe4ijUGOMuZeJpZPLr1bbTqXzka
-	aEC6GsFZmPeG1bVv61bPK0G+QBcsiwHtmdBa3/sg589hXpRF41SL+gF0O1We5oWl
-	Usimv9UfK5nAFHjZdJPCglGfJds/Lld4b3bZkQSB9HcNAPDisxQ+OJaOz3ouPkiB
-	A6nW4W78kF9ZMUZSonHnpZQZl1e3W7gyHx0pg605P85aZpMBhl+1wLWbhGL5FEUG
-	vvZxyHt12m2OeYp/+VnPWGZrIoxxnCNIg4hB3APAqGpTLsyIK7ZLxwhx+Ih3XeG9
-	/xFtvWs5tIdhjeydkPVZhsd9at+ZUKGhZng==
-X-ME-Sender: <xms:L4GyaroC6iAkdzgKH85wUd6E-K1mWyvhst3pFB26jxlaayOtGJChLg>
-    <xme:L4GyaktA959mramabtMWhnj-eErCVIkse_XdFhmYhovuQqULBluOBIirqRu4oMdGH
-    AaL0A-qdRj6ny2cDa2v7_0sVNnI_pL9U2hU3a1UUZXaJGZE7g>
-X-ME-Received: <xmr:L4GyauZ_uiJDllLhjGfIyTy381dUyswtYLUyz5TBLIW7pXlp3BqR9ZDvIu6BSgh5CpoxyxPR-YLBU_9WETH_Xb69nTYnR6GnV-_b3VwKXTA>
-X-ME-Proxy-Cause: dmFkZTGfELLFfugd19QwWNMUx/tN0RfiMI7ehPd4jmxTb0QXU0+VfZjqDjZOAKNphemAil
-    rmqN74zJleUWWCqI8Trx5U9i1ROrF++RFTlMWaBw7cUhxMLH9xkcZj3HgwVZa3CJl4oqZ9
-    lN0pxKfKfXSt+WJIZt8blUxdlCJ1cfqZQXCyrtfOFP7+e7Rut5ssK16fr6BMz9Qla3SAlC
-    NgL5Ul00WvBCgLWKloTgd40nKH3+iS5SuD9/2cJ2baFinZ+aa+USU3OH8TvjYOnGec3g/1
-    BUdDuHPQH8IY3TqIdqNpy0OMvH3c8Xt0QEiim/6SMx4Fae3jEKCXbFjFJHhQrIUV/1Xwjv
-    vnk05nWlshLTR7N9Nxw8qqE0VH+UGV7CJsuJfwhxx9IOzEyIbcmK4eNuqNBvkUba6PupyQ
-    nINvJLCGKguSugVtLxwRbYGP7EYoVReXPPmuetCsziet0J4JmJVViQbrDBcVNYz6ZLcWrU
-    5R+B15C4ABX3rmQeoIHfeL6IZpNG8j13N0J2/wHkIdumiexEL6AxHNXMb5hQlx3JbPg+ml
-    vy8CjjoRoBhMSq2OwIqBhhsf/lnozxl6rnDu8+hzOV/0qu8yRit7lAZ6aMAOdm8r8ZmZpF
-    pdzto7JsTUryzvI1RZhMqj7Sinf2szIfmWgPCWJrrNjuPoQk1WToOPXz4vmQ
-X-ME-Proxy: <xmx:L4GyarY2QikXBD62j0m-CSoBLgtgR6usAmVwfRIzK_mZk8BaFgOMNg>
-    <xmx:L4GyavldX3oeRDWYZhTTeOkR59NQoXyfm1NLK3A9xzNkBhl6-L6PYw>
-    <xmx:L4Gyau22TDkwbo-lGc_dLggF371aUcfNb9f93pgb2JcrF6te9NQZKw>
-    <xmx:L4Gyan0hQv1BfeT8TAEXXx7fudtagz9na9JpdeqTH1pbErH5X19siw>
-    <xmx:MIGyaqJOAfOuPRQ6GFopusVv2oWaVg7D9BnrQdkpvAvnIlMYTpofrIHy>
-Feedback-ID: i1568416f:Fastmail
-Date: Tue, 22 Sep 2026 15:22:52 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v2] Strip build path directories in tools and hypervisor
-Message-ID: <arKBLCOvv8SIii9z@mail-itl>
-References: <20250904114202.2722478-1-marmarek@invisiblethingslab.com>
- <acdf64df-240a-4186-bf92-ccaf1f83dc60@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1790084057; x=1790688857; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=e4Ryrx73BEQdCje8/y/wl1Qw7FCFzVnkirAvpC6A43E=;
+        b=CoHYzCvRPYVBfrzzcH/nnl6vN7VpWymYIkAjiQvMvIAI0azqrJsqsc2I+gIfF88p2s
+         CH3Lbfay5c7XBOYxOGJ0PZOTM8JD81gO3m+moR2ziWutxLxelSgNnDOaFJgup0ukrOZ3
+         kcDBa5e1Et5reNGYpCrLrtfgGchWLi079YmQqlw4IUJGx1pHI/nBjKvVzQ4gU0hTigML
+         Ua/mfbXhNVCe8A7B532Utqm+HC0GyBsZaCil35HUbVBHndQ4OKkod+o/7nrc37JTE2F6
+         fKrjLeH2Yn+njMITRKX8UqGLmTS7Rraje+t/It4BIPybWqWv7Oed0aFMSQcFxEy9oPpL
+         q3BQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790084057; x=1790688857;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=e4Ryrx73BEQdCje8/y/wl1Qw7FCFzVnkirAvpC6A43E=;
+        b=zbXpO7oBUP7N7+fj31nT7JdNqSPFK8aYsT1Vnden8Iw6O9bvYfdYTeTahIyMmD467O
+         ElYsJ8wxjjrLbBN4sZqYfOxns4rcOtlcBUqXso+MlVfOloQDq6UBWBzd9uFRzGqFzkd3
+         HpEWRSLXRgyKWOjk6FdIEppOrRzUleMCOcVIYkKTYDwUKC2t7DWoxsBTjNP7HuECrO1k
+         ukTP1fqz9vphezivFTgBPc8lkDaw/d1IzdlSCDHOtj6ZuIjiu1f5OKi26hyAEgR5Bef1
+         xQrhYHZKfot3701ZiF2exunzesPcH7WGzXdDc7+Io2fmgTJ2eLP1Bp+sHa2AUMs3Gbdt
+         4k2Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzcmdSTQjYRhkqH7frrbe+Xs35L3NFcX4K3LmZ29/M5UYVMCHavTEVcmKgKRrrLShCwxfvs2Z+mioE=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mryqem4ErMcAthrfsbZorgLd+aB5y7ab4mF1vF0BtS5zofkUln
+	DpN3Ht1ZZP1r5FmyLHP444T4TlEZOvHTsHMLYhNRBGS5S71RCAzHNVT1vN00T2OnTA==
+X-Gm-Gg: AYBFou0UL/6JMukYtd97izAtTSslOjEqNaRWE2tbvWDD9ZsgOAW6TKiXko7GiMl66/z
+	rIs+nZFEScvaVcnjwmiC4pOpXeVudW0s12YjByoO09at7PbmjwqxtixA8+TDB6kLaoOf5k8itZo
+	zEQTghKpNL6ZmgJz3Ykqxxqylk2L3sfErFWB3cmTov2xxs6vqQ0Cv2j9FZ4V0nA7sfLE7Y60Fb2
+	eaeV88tpuGYV5fxm/B+8vk0qUXqV6vakOw1x1c9H+g6jy34tQOXIHmuynQWmuwzipgorYNIrW/5
+	qAKJgK3yPNQ0xox686kC7J8iZDP3NrRCv0uRiYnu2TwxIwQTt0evGlPM5JIZJruxIn+kaBC0hIc
+	1HyhaYL2Gp3f84HfMEm6nmIAQ0FvrtTTBezjn95xXqnyi4uyCRKkC9bvE61mYhx0/E21WZ0rtlr
+	VrpglBxvYKCn6ymuCPIyFyr7/SklS4dWYmABY2N3opGOqeVAdB0PcVY/vfOitGlfrwIFYcuFk8w
+	wyg7f8H09cFE7Z6s67dfASBc60r0b/BDM28xaGNt+PNFRayNg7sRxjt9Pkheg==
+X-Received: by 2002:a05:600c:6308:b0:49c:fa20:cbfd with SMTP id 5b1f17b1804b1-49fc5728e35mr190371955e9.20.1790084057070;
+        Tue, 22 Sep 2026 06:34:17 -0700 (PDT)
+Message-ID: <baabb75a-dc95-4fad-a682-e4eb40071a73@suse.com>
+Date: Tue, 22 Sep 2026 15:34:15 +0200
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="kSAC0yivbSsstiZu"
-Content-Disposition: inline
-In-Reply-To: <acdf64df-240a-4186-bf92-ccaf1f83dc60@suse.com>
-X-purgate-ID: tlsNG-720697/1790083383-315CD2AC-62A64731/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86emul: Cache the amd_like() output on x86_emulate()
+ entry
+To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20260921092545.37148-1-alejandro.garciavallejo@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260921092545.37148-1-alejandro.garciavallejo@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-4011c0/1790084057-508CDCFC-8D6F4817/0/0
 X-purgate-type: clean
-X-purgate-size: 3768
+X-purgate-size: 1950
 
---kSAC0yivbSsstiZu
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Tue, 22 Sep 2026 15:22:52 +0200
-From: Marek =?utf-8?B?PT91dGYtOD9RP01hcmN6eWtvd3NraS1HPUMzPUIzcmVja2k/PQ==?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
-	Roger Pau =?utf-8?B?PT91dGYtOD9CP1RXOXVic09wPz0=?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v2] Strip build path directories in tools and hypervisor
+On 21.09.2026 11:25, Alejandro Vallejo wrote:
+> The current code instantiates amd_like() way too many times, leading to
+> codegen explosion. Unconditionally call it early on, and use that
+> variable everywhere. This shrinks the emulator by ~3KiB.
+> 
+> No a functional change.
+> 
+> Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+> ---
+> pipeline: https://gitlab.com/xen-project/people/agvallejo/xen/-/pipelines/2860748404
+>           (it's red because of an caching issue and personal branch name
+>            conventions it's just arm. x86 passes in full)
+> 
+> bloat-o-meter before-after patch.
+> 
+> add/remove: 0/0 grow/shrink: 0/1 up/down: 0/-3366 (-3366)
+> Function                                     old     new   delta
+> x86_emulate                               209351  205985   -3366
+> Total: Before=3617694, After=3614328, chg -0.09%
 
-On Tue, Sep 22, 2026 at 03:06:35PM +0200, Jan Beulich wrote:
-> On 04.09.2025 13:41, Marek Marczykowski-G=C3=B3recki wrote:
-> > Use -fdebug-prefix-map in preference to -ffile-prefix-map, as it's
-> > available in earlier toolchain versions. But use it together with
-> > -fmacro-prefix-map (if available) for hypervisor build, otherwise it
-> > still contains some paths in out-of-tree builds.
-> >=20
-> > The out of tree build requires -fdebug-prefix-map mapping for both sour=
-ce
-> > dir and object dir - otherwise the latter is included (2 occurrences) in
-> > xen-syms. Note the ./xen path for out of tree builds may not be strictly
-> > correct choice, but it's consistent across the tree, and just require
-> > starting debugger from the source, not object, directory.
-> >=20
-> > Ensure to have a realpath for XEN_ROOT else it fails to substitute
-> > properly paths in strings sections.
-> >=20
-> > Signed-off-by: Marek Marczykowski-G=C3=B3recki <marmarek@invisiblething=
-slab.com>
->=20
-> Coming back to this, as it was also mentioned at the summit.
->=20
-> > --- a/tools/Makefile
-> > +++ b/tools/Makefile
-> > @@ -1,4 +1,4 @@
-> > -XEN_ROOT =3D $(CURDIR)/..
-> > +XEN_ROOT =3D $(realpath $(CURDIR)/..)
->=20
-> $(realpath ...) may not be available (with older make), it wants to be
-> $(call realpath, ...), allowing use of the fallback in ./Config.mk.
->=20
-> I'm further not really sure if $(realpath ...) is actually meant here;
-> to me $(abspath ...) would seem more logical (as we don't want to
-> resolve symlinks in the path, but rather keep it as specified / seen).
+That's surprisingly big a difference, considering how simple amd_like() is.
+I'm counting 24 instances, so the savings would be well over 100 bytes per
+instance.
 
-Honestly, I don't remember all the details a year later... But I think,
-based on the commit message, there was some case where XEN_ROOT needed
-to textually match the actual directory, possibly when some other
-part of the build system embedded a resolved path to the binary anyway.
+That said - there are more uses, and I wonder why you ...
 
-> And finally - isn't the above rendering redundant ...
->=20
-> > --- a/tools/Rules.mk
-> > +++ b/tools/Rules.mk
-> > @@ -166,6 +166,8 @@ endif
-> >  CFLAGS-$(CONFIG_X86_32) +=3D $(call cc-option,$(CC),-mno-tls-direct-se=
-g-refs)
-> >  CFLAGS +=3D $(CFLAGS-y)
-> > =20
-> > +$(call cc-option-add,CFLAGS,CC,-fdebug-prefix-map=3D$(realpath $(XEN_R=
-OOT))=3D.)
->=20
-> ... the use of $(realpath ...) here?
+> @@ -1310,6 +1310,7 @@ x86_emulate(
+>      /* Shadow copy of register state. Committed on successful emulation. */
+>      struct cpu_user_regs _regs = *ctxt->regs;
+>      const struct cpu_policy *__maybe_unused cp = ctxt->cpu_policy;
+> +    bool is_amd_like = amd_like(ctxt);
+>      struct x86_emulate_state state;
 
-This seems to be correct observation.
+... make a standalone local variable here when you could introduce a new
+field in struct x86_emulate_state, which would then filled early in
+x86emul_decode(), and which could then be used elsewhere as well. With
+that amd_like() could then likely also move from private.h to decode.c;
+better yet - perhaps the function then wouldn't be needed at all anymore.
 
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
+Another way to reduce the overhead at least some would be to make more use
+of _amd_like(), now that x86_emulate() has a "cp" local variable.
 
---kSAC0yivbSsstiZu
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmqygSwACgkQ24/THMrX
-1yx4jwf/RGmjRI1+CvVrXCsM219ug75nn/KNfZ/hfgZxSSCwc+/guiTyj0DYeBTy
-6Y3/9+yMbUk/whSO/JGN7u6TCRasbuhozet3JuE6OO7VOij6zoqFFYDYfJuy/Xmo
-sN5gEtFZNoYgqfv7m/JR63wC6dCkT4aFAhkA+eaH3LQtleVInrAYu9zBn396ervu
-Qz/rY9e8jS8uiklBJVzt3gehf0bL9+pIPlRvHSpgvm1UccICyaq1So+suVRvZeWE
-FeZHYPWqdFOEtuOT5gvvZu8OmMMV3NlUT+PaaILsE01Dhof2P1wLc5UVFfyzieKF
-EiD26Fduz/YW2SWImIHCqiIl/GqTMQ==
-=9tOx
------END PGP SIGNATURE-----
-
---kSAC0yivbSsstiZu--
+Jan
 
