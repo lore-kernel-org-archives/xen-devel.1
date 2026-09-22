@@ -4,43 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7A9D5C982F1
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 08:50:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428363.1651094 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE5FC982FA
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 09:18:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428381.1651103 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8wCU-0008UW-8c; Tue, 22 Sep 2026 08:50:06 +0000
+	id 1x8wdX-0003Yk-Ea; Tue, 22 Sep 2026 09:18:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428363.1651094; Tue, 22 Sep 2026 08:50:06 +0000
+Received: by outflank-mailman (output) from mailman id 1428381.1651103; Tue, 22 Sep 2026 09:18:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8wCU-0008UN-5N; Tue, 22 Sep 2026 08:50:06 +0000
-Received: by outflank-mailman (input) for mailman id 1428363;
- Tue, 22 Sep 2026 08:50:05 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x8wCS-0008Dp-Sb
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 08:50:04 +0000
+	id 1x8wdX-0003Yd-Bt; Tue, 22 Sep 2026 09:18:03 +0000
+Received: by outflank-mailman (input) for mailman id 1428381;
+ Tue, 22 Sep 2026 09:18:02 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c868594900072c4@swg.vates.tech>)
+ id 1x8wdV-0003YX-LV
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 09:18:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8wCR-00Fi8m-Ts
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 10:50:03 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab24132-bab6-0a2a0a5309dd-0a2a4507b85a-46
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 10:50:03 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab2413b-b4ea-0a2a45070019-4a7de18cb208-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 10:50:03 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49e620fa473so23332985e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 01:50:03 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4886277e611sm3494914f8f.18.2026.09.22.01.50.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Sep 2026 01:50:02 -0700 (PDT)
+ id 1x8wdU-003s7Y-Nb
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 11:18:00 +0200
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c868594900072c4@swg.vates.tech>)
+ id 6ab247bc-bab6-0a2a0a5309dd-0a2a450283c6-38
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 11:18:00 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c868594900072c4@swg.vates.tech>)
+ id 6ab247c6-6ca4-0a2a45020019-b9ff1c128df9-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 11:17:58 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a0c868594900072c4.006 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Tue, 22 Sep 2026 09:17:56 +0000
+Received: from [192.168.1.37] (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
+ [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 0DF5581B88;
+ Tue, 22 Sep 2026 11:17:56 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,143 +58,211 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790067003; x=1790671803; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ugtLLQkFC9t7ZU6phzkW64agO8NV8EwcdJmof6b8lXs=;
-        b=e4hj2SAZd3LedsZX1pMUvOo2/jszo/h5fOrtPp8CZ/6XuPiJ7Q+Ycd+hZ2TqL3pL0V
-         4cMizM5JtCO/O9TLbfM94rUN9+5zGeHxShCZp1Dw4dTdsnWka+9iiendFF4Dt3zcY5bT
-         HzitLUSIQ9wWKJfc/zWDOu16vP9XcsMDWD7lvRz7U1tWI2gkT25MRxq55jhNrBY2wesL
-         0qH7VUBMv0cIUIlZY4NddlFhYSqKHM/DSsSMNaGkQO4gRX1bbHLVjy0uqwTw+5TBkNo3
-         scwUoiNTmkOxAxu/MZEyL9c9viPXS5K9ggcRIkFi40QLot1MniE6B8KSmFEUPbI5LoOm
-         VWZg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790067003; x=1790671803;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ugtLLQkFC9t7ZU6phzkW64agO8NV8EwcdJmof6b8lXs=;
-        b=eKCywP2vlrg6YpkVTnFYqc7Xo3Kho3qMwMld8+u2ra3a8eL/PTmHTgQMty2hHpMH5e
-         oX74Z7uooqUoh343c/RKQ44rgr5TYmbtTRO68nGzx67tTHDgaDjNDfdRmZM8jV77jmUe
-         UBlm7cq7Wwu2cfy5zU3sWU5mB9i8PODXoZfJbUyrqtVDXa4U6UiiZpa0S+JH8OpZ3PS9
-         9Oio0mM9QEGuqZrb4GTMAj348CUeLXKhCxjVy6SqnlfPJOJPRg94uEddlmah6gKaQAXg
-         XLQds7TiWSL0kXOPhheZJch9hFUOs+pGanjcS+HJhJ1kheVFf9zfOZIWzqT8/ELi4u2I
-         t14g==
-X-Forwarded-Encrypted: i=1; AKwUvBw0nMxjmEIv5x+9segVCNA6KgXFFkV3jOYK4CU3e8kGnvvmrRQfra5Ds1HguUWQKfqMwIKLCY5drQM=@lists.xenproject.org
-X-Gm-Message-State: AFuF++n8Cw0BhmPbTFEzw4jgLEsRTb8nc90GAL5Nwdd4nZEpMkxAhrqY
-	7v1kyZOhpw400kjNnBDEBP954Jbd61iqIItyHZDedTPbIIitL1epr6K4
-X-Gm-Gg: AYBFou2xY2+yEZBHoGKPHJk0Ip5XuehOLQL9sS4YNZkvO6HFb4IsKNuX7eqWduCKg3s
-	DOLwcjTmvRgvqfDw4pmHWfT54N+ExcaXmFQ/kIvqp5//6zAQHPED4sjrfs7f5CZTaWOFdXymti6
-	Hk0/PqwlikfzG64KMRRN4/3txt7rFJXFDmkPg4EY4cQz+B0IjJxMrqsdz2167DnRx/YLeLNPH2M
-	c5cpduwYOvdg3KwvC/cxXZnVxFD4nJ6BOZ5nYrRtdxeYl5U7Nxob8eDlO57QZNUArwLrnlZSozo
-	f4fqRp2uA/3sgCqxAzEotDa+NRXeeRCMTrSV95G7nzdjXqXvS/vRglyF3vBhqMjcgBu84VREsLL
-	+nsvLT9X+q310atbaunQ255kGNOpJMsAkWFHHvJUb5JwiEweZc0NOzh8FmKmozGWJu40gWvvVVf
-	g6Z4LWhQhx/q+4j4Y+gF28Hj6+l+Sefukfa/NDomOge2JOK289f2jAbIGoUj5Nle6ZNlwIc3G6V
-	tS1b/9PBSf7y0A7mYlmSzy1Hwy93/rUiCVCrRXLytIqw7oVow==
-X-Received: by 2002:a05:600c:46c7:b0:49d:7fc:5dc5 with SMTP id 5b1f17b1804b1-49fc56dba6emr176849145e9.1.1790067003172;
-        Tue, 22 Sep 2026 01:50:03 -0700 (PDT)
-Message-ID: <d9567670-a381-44fd-b130-45a1e2d638c4@gmail.com>
-Date: Tue, 22 Sep 2026 10:50:01 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=Ey+VyVbFYdwB/cAkjwXzT2mnm7rY6FcAP6/4dCNmN4s=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=M4IS4VFm4+hfM1D69LgCYwCNcSXDIrsrz39AGf1vU3oY0ADUtg0zwrY5YBKNyrnjy1sjIU2Xz
+ Q9WTHBk9Gmlv1WdLaQ3GfilJxlcKi+Xd19soRHSZ9du8wOvmvMI24TWaKzxRPx6lrWbApvkiyDa
+ pN1CY2uZnOnXZHAQUAhnlyfV0ExmJtgm61lDjPZv/sgpStf1qNqzMSlEPj49K5gNuskP5g5sawS
+ sQSTg6eV0bWEBnJKOfRk5F0X7AEwZ/Pyvfd5FlbtKDvyli1fqUweglEK8nXaKBSIxOqb0ScS8LU
+ s/DcpY3YBWVkTxp9d4V09DCFuGXKzY9e179Gaes0Ia+g==
+X-Zone-Loop: de9b7c4808def73ec177634e76e66c17e1798e92caea
+x-campaign-type: default
+x-transaction-id: e26c2122-091e-4562-8b0c-55dd9452c0e1
+x-swg-uid: 01-8aeca70a-1403-475f-b1b4-8ca2649d775d
+X-Mailer: Sweego
+Message-ID:
+ <1790068677.8631fc262581453bbf619ec5b2062170.1a0c868594900072c4@vates.tech>
+x-swg-bid: 1790068677.8631fc262581453bbf619ec5b2062170.1a0c868594900072c4
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 09/39] xen/riscv: implement virtual APLIC MMIO
- emulation
-To: SeungJu Cheon <suunj1331@gmail.com>
-Cc: Jan Beulich <jbeulich@suse.com>,
- Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <4413e157dfe67167f651df1ea92ab61ca4182723.1787838835.git.oleksii.kurochko@gmail.com>
- <68ab5241-7301-4988-9420-bcccc4b16e3d@suse.com>
- <071ed630-4c72-4df1-b15e-3037e3f076ba@gmail.com>
- <48857983-ac79-44a0-8a11-93f62ac3d0c4@suse.com>
- <efd67e96-e24f-4bfb-b484-51514c5fc18b@gmail.com> <aqUO_u-Spcmjcy8P@fedora>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <aqUO_u-Spcmjcy8P@fedora>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1790067003-A56C2AE4-80A11160/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2887
+Subject: Re: [PATCH v2 1/6] xen/riscv: fix Svade/Svadu A/D bit handling
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ xen-devel@lists.xenproject.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <e8b1257b-3b28-43d3-b692-5e79f5cae68a@suse.com>
+References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
+ <1789032897.8631fc262581453bbf619ec5b2062170.1a08aab9d76000c4f3@vates.tech>
+ <450d0c5e-2101-4b1c-98fd-2f438bd0ccf3@suse.com>
+ <1790010225.8631fc262581453bbf619ec5b2062170.1a0c4ec74f000072c4@vates.tech>
+ <e8b1257b-3b28-43d3-b692-5e79f5cae68a@suse.com>
+Date: Tue, 22 Sep 2026 11:17:50 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790068670; l=6981;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=UYVrUyLKG+qpxD4aojxjl9DRgwJXPjGMib3r+pnhyQg=;
+ b=tpCE5owuukW7NPO9561rhcr7WHjPSTkeY/VDUSIBiuyIdppllr0kRsk3KyWerA5NbFhsP1nCG
+ 5uo5YcgoJbeBU7idwVcbnvRtuQhk/RNssbqDTqLUQclTQpcO2I8Wfv4
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1790068676250
+X-purgate-ID: tlsNG-720697/1790068678-676BF2AC-FC5D502B/0/0
+X-purgate-type: clean
+X-purgate-size: 6985
 
-
-
-On 9/12/26 10:50 AM, SeungJu Cheon wrote:
-> On Thu, Sep 10, 2026 at 04:24:06PM +0200, Oleksii Kurochko wrote:
-> [...]
->> In v3 I'll (a) stop using ->processor and take the (guest_file_id,
->> vsfile_cpu) pair, which imsic_update_state() updates atomically under
->> vsfile_lock, and (b) do the snapshot plus the h/w TARGET write under
->> aplic.lock, which aplic_reconfigure_target() also holds. As
->> imsic_update_state() completes before aplic_reconfigure_target() (also that
->> could be checked in this patch series and is introduced a little bit later.
->> Probably I have to re-order some patches again) takes the lock, the emulated
->> write either happens before the scan (and gets fixed up, or skipped as
->> already correct) or after it (and sees the new location).
->>
->> Any better option I have now?
+On 2026-09-22 08:24 +0200, Jan Beulich wrote:
+> On 21.09.2026 19:03, Baptiste Le Duc wrote:
+> > On 2026-09-21 17:26:47+02:00, Jan Beulich wrote:
+> >> On 10.09.2026 11:34, Baptiste Le Duc wrote:
+> >>> @@ -468,6 +469,62 @@ static bool __init has_isa_extensions_property(void)
+> >>>      return false;
+> >>>  }
+> >>>  
+> >>> +/*
+> >>> + * Svade and Svadu extensions represent two schemes for managing the PTE A/D
+> >>> + * bits. When the PTE A/D bits need to be set, the Svade extension indicates
+> >>> + * that a page fault will be raised. In contrast, the Svadu extension supports
+> >>> + * hardware updating of the PTE A/D bits.
+> >>> + *
+> >>> + * There are 4 possible combinations of these extensions in the device tree.
+> >>> + * The default hardware behavior for each is:
+> >>> + *
+> >>> + * 1) Neither Svade nor Svadu present in DT => It is technically unknown
+> >>> + *    whether the platform uses Svade or Svadu. Xen should be prepared to
+> >>> + *    handle either hardware updating of the PTE A/D bits or page faults when
+> >>> + *    they need updating. In that case, Xen assumes Svade because it's
+> >>> + *    harmless if the platform is actually Svadu, while assuming Svadu on real
+> >>> + *    Svade hardware risks an unhandled page fault.
+> >>> + *
+> >>> + * 2) Only Svade present in DT => Xen must assume Svade to be always enabled.
+> >>> + *
+> >>> + * 3) Only Svadu present in DT => Xen must assume Svadu to be always enabled.
+> >>> + *
+> >>> + * 4) Both Svade and Svadu present in DT => Xen must assume Svadu is turned off
+> >>> + *    at boot time by setting A/D bits. To use Svadu, the supervisor must
+> >>> + *    explicitly enable it using the SBI FWFT extension.
+> >>> + *
+> >>> + * The Svade extension is mandatory and the Svadu extension is optional in the
+> >>> + * RVA23 profile. Platforms wanting to take advantage of Svadu can choose
+> >>> + * option 3. Platforms aware of the profile can choose option 4, and Xen won't
+> >>> + * get the benefit of Svadu until the SBI FWFT extension is available.
+> >>> + *
+> >>> + * In other words, hardware manages the A/D bits on its own only in case 3, in
+> >>> + * all the other cases software has to preset them. Instead of open coding this
+> >>> + * in every A/D bits user, RISCV_ISA_EXT_svade is used to mean "software is
+> >>> + * responsible for the A/D bits" and is set here for the cases 1, 2 and 4.
+> >>> + */
+> >>> +static void __init riscv_resolve_ad_scheme(void)
+> >>> +{
+> >>> +    bool svade = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade);
+> >>> +    bool svadu = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu);
+> >>> +
+> >>> +    /* Case 3: leave the A/D bits management to hardware. */
+> >>> +    if ( svadu && !svade )
+> >>> +        return;
+> >>> +
+> >>> +    /* Case 4 */
+> >>> +    if ( svadu && svade ){
+> >>> +        if ( !sbi_probe_extension(SBI_EXT_FWFT) ){
+> >>
+> >> Nit (style): Brace placement.
+> > Sorry for that. I will fix that in v3.
+> >> Furthermore this is written in a way which Misra would call "dead code". I'd
+> >> like to suggest (leaving out comments):
+> >>
+> >>     if ( svadu )
+> >>     {
+> >>         if ( !svade )
+> >>             return;
+> >>
+> >>         if ( !sbi_probe_extension(SBI_EXT_FWFT) )
+> >>             printk(...);
+> >>     }
+> > I assume you are referring to Misra C:2012 Rule 13.5 "The right operand
+> > of a logical && or || operand shall not contain persistent side effect"
+> > 
+> > If yes, IMO, I think it doesn't apply here as `svade` is evaluated
+> > before the `if` so there is no side effect that wouldn't have been
+> > executed in case of svadu=false.
 > 
-> Unless I am missing something, the snapshot also needs to handle the
-> case where the target vCPU has not been attached yet:
-> vcpu_guest_file_id() returns zero until the vCPU has gone through
-> imsic_vsfile_attach(), i.e. until it is scheduled for the first time,
-> and vsfile_cpu is NR_CPUS until then.
+> No, there's nothing side-effect-ish here. With "svadu && !svade" in the
+> first if(), the rhs of "svadu && svade" in the second one is dead code:
+> Things would function the same with it dropped.
+Ok, now I understand, thanks. I'll fix it in next round.
 > 
-> With the current code, a write targeting such a vCPU makes
-> aplic_msi_target_gen() program Guest Index 0 into the physical APLIC
-> target register. According to AIA section 4.5.16, Guest Index 0 selects
-> the hart's supervisor-level interrupt file rather than a VS-level guest
-> interrupt file. Could this cause the MSI to be delivered to Xen's own
-> interrupt file with the EIID supplied by the guest?
+> >>> +          printk(XENLOG_WARNING "RISC-V: Both Svade and Svadu detected, but SBI FWFT is missing.\n"
+> >>> +                  "RISC-V: Defaulting to software A/D updates (Svade).\n"
+> >>> +                  "RISC-V: To force hardware A/D updates (Svadu), remove 'svade' from DT.\n");
+> >>
+> >> Nit (style): Indentation (in multiple ways). Furthermore XENLOG_* needs
+> >> repeating after every newline.
+> >>
+> >>> +        }
+> >>> +    }
+> >>> +
+> >>> +    /* Cases 1, 2: Xen assume Svade to be enabled */
+> >>> +    __set_bit(RISCV_ISA_EXT_svade, riscv_isa);
+> >>
+> >> Isn't this a lie (to ourselves) then?
+> > If you are talking about case 1:
+> >     [1] Yes, it's technically a lie for boards shipped before
+> >     the svade/svadu extension was ratified (e.g., HiFive Premier P550).
+> >     These extensions merely formalized a mechanism that already existed in
+> >     hardware.
 > 
-> I also could not find where such a target would be updated once the
-> VS-file is attached. imsic_migrate_vcpu() reprograms the relevant
-> targets during migration, but the initial imsic_vsfile_attach() path
-> does not appear to replay targets which were written before the
-> attachment.
+> Wait, how do you know this for _all_ boards anyone may ever have made?
+We don't know but based on [1] and my commit message, if neither
+Svade nor Svadu are present in DT then it is technically unknown whether
+the platform uses Svade or Svade. Hypervisor may then assume Svade to be
+present and enabled or it can discover based on mvendorid, marchid, and
+mimpid. For this patch, I choose to have the Hypervisor assumed Svade.
+
+Saying that, I agree that it doesn't make sense to manually have set
+Svade extension in the isa bitfield as we could just preset A/D bits
+regardless of Svade/Svadu during the p2m_set_permission(). It's what
+kvm explains in kvm_riscv_gstage_map_page():
+
+  /*
+   * A RISC-V implementation can choose to either:
+   * 1) Update 'A' and 'D' PTE bits in hardware
+   * 2) Generate page fault when 'A' and/or 'D' bits are not set
+   *    PTE so that software can update these bits.
+   *
+   * We support both options mentioned above. To achieve this, we
+   * always set 'A' and 'D' PTE bits at time of creating G-stage
+   * mapping. To support KVM dirty page logging with both options
+   * mentioned above, we will write-protect G-stage PTEs to track
+   * dirty pages.
+   */
+
+
+[1] https://lore.kernel.org/lkml/20240628093711.11716-1-yongxuan.wang@sifive.com/#t
+> And for all qemu (and alike) versions which supported RISC-V?
+
+Concerning qemu, you're right, in case when (!svade && !svadu) they use
+by default Svadu (hw updating) for backward compatibility.
+
 > 
-> Whether a write targeting an unattached vCPU should be supported seems
-> like a separate question. Independently of that choice, would it make
-> sense to avoid programming the physical TARGET register while
-> guest_file_id is zero? The virtual target could either be rejected, or
-> retained in the shadow target[] and programmed once the VS-file is
-> attached.
-If the target vCPU hasn't attached yet it means that 
-continue_to_new_vcpu() for it wasn't called so it will be rejected by 
-target register emulated code:
+> >     [2] For boards that do support svade, we could enforce DT
+> >     declaration by adding it to `required_extension` as they are
+> >     explicitly supporting it. However, doing so would cause boards
+> >     without svade/svadu support (as described above) to hit a panic
+> >     during boot.
+> > 
+> >     So in both case ([1], [2]), the svade extension exist either implicitely or
+> >     explicitly. Therefore, force it doesn't compromize anything.
+> 
+> If, despite my comment above, this is indeed what is wanted, I think it
+> requires a little more commentary.
+> 
+> Jan
+> 
+> 
+> 
 
-...
-             target_vcpu = domain_vcpu(currd, guest_hart_idx);
 
-             if ( !target_vcpu )
-             {
-                 gdprintk(XENLOG_ERR, "Invalid vCPU id in target 
-register\n");
-
-                 /* Ignore such writings */
-                 return true;
-             }
-...
-
-(probably we should back to this question in v3 of this patch as several 
-things were updated and some of your concerns mentioned here looks to me 
-not really possible)
-
-Thanks.
-
-~ Oleksii
 
