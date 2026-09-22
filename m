@@ -4,44 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0B500C982FA
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:43:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1429417.1652297 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8224C982FA
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:48:57 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1429432.1652304 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x95Sq-0007yh-KG; Tue, 22 Sep 2026 18:43:36 +0000
+	id 1x95Xo-0000Oa-8Y; Tue, 22 Sep 2026 18:48:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1429417.1652297; Tue, 22 Sep 2026 18:43:36 +0000
+Received: by outflank-mailman (output) from mailman id 1429432.1652304; Tue, 22 Sep 2026 18:48:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x95Sq-0007ya-Gd; Tue, 22 Sep 2026 18:43:36 +0000
-Received: by outflank-mailman (input) for mailman id 1429417;
- Tue, 22 Sep 2026 18:43:35 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <benjamin@edera.dev>) id 1x95Sp-0007yP-GO
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 18:43:35 +0000
+	id 1x95Xo-0000OT-60; Tue, 22 Sep 2026 18:48:44 +0000
+Received: by outflank-mailman (input) for mailman id 1429432;
+ Tue, 22 Sep 2026 18:48:42 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x95Xm-0000ON-Lb
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 18:48:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x95So-006dB4-Be
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 20:43:34 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x95Xl-005MWG-VA
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 20:48:41 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <benjamin@edera.dev>)
- id 6ab2cc47-e002-0a2a0a5209dd-0a2a4505c714-30
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 20:43:34 +0200
-Received: from [74.125.224.170] (helo=mail-yx2-f42.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <benjamin@edera.dev>)
- id 6ab2cc55-4cb1-0a2a45050019-4a7de0aa8d9b-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 20:43:34 +0200
-Received: by mail-yx2-f42.google.com with SMTP id
- 00721157ae682-89666ee9b3bso3799877b3.0
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 11:43:33 -0700 (PDT)
-Received: from StolidWingnut.axolotl-tone.ts.net ([174.80.170.224])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8a4658c723asm1141807b3.15.2026.09.22.11.43.31
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 22 Sep 2026 11:43:32 -0700 (PDT)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ab2cd65-8faa-0a2a0a5109dd-0a2a4503e044-48
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 20:48:41 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ab2cd89-fae8-0a2a45030019-4a7de18ce22f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 20:48:41 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49cd4ba9f68so1247425e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 11:48:41 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
+ [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49fde1acb91sm10872635e9.15.2026.09.22.11.48.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Sep 2026 11:48:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,218 +52,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=edera.io header.i="@edera.io" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=edera.io; s=google; t=1790102613; x=1790707413; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=29xwDDSi2fCcXa+moxCVRPRT7c5WgBkgjLtY01+nTtM=;
-        b=ffMv+K3EM6mv7X/lWUCvFSLXwKioRoyz2RDtQER0vz4LSDbJwpQV6/BhFQIFOqWwYG
-         UIMYJVKihtk5JXljBQdHjRJlY3PCZvOV/rYZy0Lk2u7LcS5+Ou1QVQGx5HcMq5wyLrD2
-         mQeZ6iYRvhVVGI9Gtk4PgjovYB91afCT1X+BF0owL2udSjcKjxCXHS7GPrP3gsBifUHk
-         wsc6H2Gy38iE7HTg9RFbHt7ohZsJ19vUe5IjG9zipMKhm67aL130aGHQPhXhkwSVgi76
-         Ir1lEtJ9Aeiq5+DHXtjhFB+hgeQ0/Y76pt9kt5SwWYPWvmt0JLVNyQMaowLWBQGDrFKy
-         agGw==
+        d=gmail.com; s=20251104; t=1790102921; x=1790707721; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=lIPMuq7W1Pa4X4TXu8rbTxYicHKqL6hnBXo/9p1I/dM=;
+        b=dwx/kwnxIvR0NpYpc9ByzbERa7DGlJJFiIILWZpREbmoheZeQEcgknIXGWMF7peDP0
+         Ak2g3YFoarVrYm9rxCNuVsqYyAyaW4r6A7VzZdEQuofvGOZ48MzJuW8AStY6gl121DPa
+         /z4ZZxRqUPP0LfBTj0NiSjXLwXZZnpdQszJ4ifkchuuCK5GkfnNeK1pJcGhI0xgC2GEV
+         RIqWF5427Tp0aiNIi4GW9umSgReAdP0ipKEzpcOm54XdgXspctqDr8jaJGHRkaMSU8uU
+         QNvXv6R4w2a57A5/UbgtdkgVYTMJYPQ3yZbSlSaVmrxD+zfkTZK8QpVUjE/j2qLM4Q4t
+         5kBQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790102613; x=1790707413;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=1e100.net; s=20260707; t=1790102921; x=1790707721;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=29xwDDSi2fCcXa+moxCVRPRT7c5WgBkgjLtY01+nTtM=;
-        b=GOqMgzH/owIJArtofb/9xZA4vHsuj0OKUsFGrNBgiKMlnEjyHiyuaKfCDc8bwzC1jS
-         YSm32P7QIyI1NVGF7qTk+8NBXES7xrgQO49gE+tlCbSF2p2fAleUeLmD6dOZZWHE3+8E
-         0UtMDTM1SBzJ0503MaRyxP0s47zlKpMfVzSNFQCEcf0l/j22wbx2KvHE9YnepgWCsKEl
-         aedYN9JBlaiHC+Scmrr3fSNPc106illC4x+B4CDDNe9nyXrg9p/9T3Tjxy3RNub4+wCj
-         gx4zpJXrvwp3RoL/JRhawj0ULgBWcZsnf0Khul1zx6+7D+FCsIuKJNPaNXqagQtL06ZE
-         Tggw==
-X-Gm-Message-State: AFuF++m717//7kMEA+cvE6jeqTETBeFkY2lQVaDOJ1KpdIqyIbp7vDUt
-	6KTyHh7B5nWhQJaD66N87tBtOxZT/wNFbuLNf7aTrwDoS9OZ4DA3YfOBBs0WGSZDIsjx2fFRXTW
-	aCpsqBpk=
-X-Gm-Gg: AYBFou12H++Z8UEC3Zz8WbFUrwMtL3cNY2jmzM6g0mQyEtfClmtxZfzPmzEm6ipXcsw
-	Kzq+Midu83epN1qQ3zfVKzoJgflMsrrcR2wTcaU+lJW1Gg27P4VnEXel7muLwC4McjDoLq4eVLZ
-	+NM3rBFp6hNOMv6WNe5banUrjfavKh5bz3M3CSfR88/lgIfRzKYBEytv/IJaBuihNeXmjIoihoy
-	3Jo40bvg/BDD7mzYmdv3NsgBHzAB3Y5S+K76IW1+0E7c560+DUJeFOUuqDOOiaVS1Dw5HLUbAsf
-	Racxj7CtT+aHHx7vq4iyiRkIvKqygePTwh310AGIUIbMlP+yOdIvg7gVXHYJL494G0MJJB8Dx4v
-	OsecD+WiuNziqVP64Arv+Q0n3HAQn48RCIbn4PC4tQ3YLj6pyzVozTbzm2MAssZNcbjijRR9pk0
-	5zdwT72v74IxsOs4ooq+PmG2jMep3+Q4cMglmuVH7sgwKIqKTZ6J6oj+TEk+kZd3WJZIST7iYqi
-	Uv9D8c7ynzWso468DASySomMeHMOfVlhYrPIgjBqMhKE0BGzvSIbvEoQYZZkMyGHqTynFiejwwu
-	Sq0TiQ==
-X-Received: by 2002:a05:690c:a6d4:b0:888:7a02:280d with SMTP id 00721157ae682-8a45afa799emr2654537b3.30.1790102612569;
-        Tue, 22 Sep 2026 11:43:32 -0700 (PDT)
-From: Benjamin Leggett <benjamin@edera.io>
-To: xen-devel@lists.xenproject.org
-Cc: Benjamin Leggett <benjamin@edera.io>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] ns16550: find the console UART on PCI when there is no legacy one
-Date: Tue, 22 Sep 2026 14:43:16 -0400
-Message-ID: <20260922184316.324817-1-benjamin@edera.io>
-X-Mailer: git-send-email 2.55.0
+        bh=lIPMuq7W1Pa4X4TXu8rbTxYicHKqL6hnBXo/9p1I/dM=;
+        b=Lt+n+wmePOyloj9/Dpv1UICFLxsKThvO7vNLf0WaELOs5GTdltcf2HUR4rRurtiDQa
+         EJwOWNsPPLbPkDatfqHWdWy1XuFtawnIlKCKQEPaFOEOwTDI6O+FSSUY1LVOFxw23BGZ
+         1oX9ZKaRquGENxJMQxQ+zXoB4/o+PgQgl/BrTg/bvXNNIXxY0c3Z3WRw/1BO0RtQW1EP
+         B7lzSYy51QIIrC5UbOGZ4mOr2fcMAcPFJSS9GBPxKVMKdJ+cksn0D896jkehNQQbqmNK
+         2WUH7vNfpvZZrYv8zAz9HCWuIhrEfGgu7OVL2fo/LiQzmEYyZT+aav8wC9n8nZIvhjpx
+         BJng==
+X-Gm-Message-State: AFuF++kVc15CIXULS5eWKLmRWyuqxzbmfwE+n48XE/XsT40rUXqIj7qP
+	4OU4qAyLX0k6njODvbwGdEyDUBXwYKlCzJLYui9DLMpXoDGi30DmvqHP
+X-Gm-Gg: AYBFou0vBm7TKbynaBYhUUFicQzq/I/zRs0tPbCkcl9izFQTIfnUoV7JYVccv02Pj6O
+	1TJZs2l/2UNIGol45L+EYTQjikIP7CCLc4D5IHgThakn5hbnogtjgA4Q49AWSwkqDAMZJTb8aX9
+	WecKwxd+ZhoIQTy1pY1lQs68iWpk84PqamusQXH2xNurcBFy6lE17CPAtO6mMGdrjbvu4hpQSKf
+	J4a9JDVh7V9Nt1OtM5qp83Ry0kVsV7nx/HC0H1uYtS1LEurSFjmKWMYo3H6BjYizfn/n5uLE5Sj
+	86zTnuzjAEa7CMe9cHTFdTw8TXOm9YoMRqCRO6rE0gN/oJBfTheUktEudMxMBOMqSgiuAuqJKWK
+	PY/5cZOhxbl6Bf/5kVPM8JXrYCldWZonV+sbca5Fz5SRryIkyZ4xVw9ItLEjFCxmosYy/Ec6dzN
+	aTjFMNtAHEnezuLzifAxfocYXagKpzWH8E+KXLRIEKQCC/nK6U5A8ufwpX6sGFlGBPA/PLUN5Wn
+	1Zg35lUKTttOxaVV8+QgP0sCcasG+L+YDgfe8+MAe0MmPueWQk=
+X-Received: by 2002:a05:600c:138d:b0:49e:73d3:78ab with SMTP id 5b1f17b1804b1-49fdec980c6mr2165765e9.0.1790102921255;
+        Tue, 22 Sep 2026 11:48:41 -0700 (PDT)
+Message-ID: <6da5569d-8ae8-4388-a407-00b5d2a4bc27@gmail.com>
+Date: Tue, 22 Sep 2026 20:48:39 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 31/39] xen/riscv: implement APLIC-hart sync barrier for
+ vCPU migration
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <3d953b6e7f221f4cf4143454076466fab38b6236.1787838835.git.oleksii.kurochko@gmail.com>
+ <1790096435.8631fc262581453bbf619ec5b2062170.1a0ca0fea6500072c4@vates.tech>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1790096435.8631fc262581453bbf619ec5b2062170.1a0ca0fea6500072c4@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1790102614-6BEB92A1-8F0D6B88/0/0
-X-purgate-type: clean
-X-purgate-size: 5800
+X-purgate-ID: tlsNG-33051d/1790102921-6DCD34E9-452875B4/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 2917
 
-Amazon EC2 bare metal instances have no UART at the legacy I/O port
-0x3f8. Their only serial port is a 16550-compatible PCI device (vendor
-0x1d0f, device 0x8250) with its registers in the MMIO space of BAR 0.
-Today Xen has no console on these systems unless the command line
-names that device, and "com1=...,pci" cannot find it, because
-uart_config[] doesn't have it.
 
-Add the device to uart_config[].
 
-Additionally, when the port that com1 describes is not present, scan PCI
-for a known UART before giving up. This way the same command line works on
-systems with and without a legacy UART, and a machine-specific "pci"
-option is not needed. The fallback does not run when the command line
-gave an I/O base, or when it already asked for a scan with "pci" or
-"amt", so explicit config keeps its current meaning. It is
-for com1 only: for com2, pci_uart_config() skips the first port it
-finds, so it can never match a single-port device.
+On 9/22/26 7:00 PM, Baptiste Le Duc wrote:
+>> During migration of a virtual hart to a different guest interrupt file,
+>> straggler MSIs from the APLIC could arrive at the old interrupt file
+>> after the switch.
+>>
+>> genmsi is used despite not supporting guest interrupt files because the
+>> AIA spec guarantees that all MSIs previously sent from the APLIC to the
+>> same hart are visible at the hart's IMSIC before the extempore MSI from
+>> genmsi becomes visible.
+> 
+> 
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>>
+>> diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
+>> index 0af13f28e4..cb11d6aeaa 100644
+>> --- a/xen/arch/riscv/aplic.c
+>> +++ b/xen/arch/riscv/aplic.c
+>> @@ -27,7 +27,9 @@
+>>   #include <asm/imsic.h>
+>>   #include <asm/intc.h>
+>>   #include <asm/io.h>
+>> +#include <asm/processor.h>
+>>   #include <asm/riscv_encoding.h>
+>> +#include <asm/smp.h>
+>>   
+>>   static struct aplic_priv aplic = {
+>>       .lock = SPIN_LOCK_UNLOCKED,
+>> @@ -205,6 +207,30 @@ void aplic_hw_write_reg(unsigned int offset, uint32_t value)
+>>       spin_unlock_irqrestore(&aplic.lock, flags);
+>>   }
+>>   
+>> +/*
+>> + * As needed, synchronize with all IOMMUs and APLICs to ensure that no
+>> + * straggler MSIs will arrive at the old interrupt file after this step.
+>> + */
+>> +void aplic_genmsi_barrier(void)
+>> +{
+>> +    const struct imsic_config *imsic = imsic_get_config();
+>> +    unsigned int cpu = smp_processor_id();
+>> +    unsigned long flags;
+>> +    uint32_t val;
+>> +
+>> +    val = MASK_INSR(aplic_hart_field(cpu), APLIC_TARGET_HART_IDX) |
+>> +          (imsic->sync_id & APLIC_TARGET_EIID);
+> 
+> 
+>> +
+>> +    spin_lock_irqsave(&aplic.lock, flags);
+>> +
+>> +    writel(val, &aplic.regs->genmsi);
+>> +
+>> +    while ( readl(&aplic.regs->genmsi) & APLIC_GENMSI_BUSY )
+>> +        cpu_relax();
+>> +
+>> +    spin_unlock_irqrestore(&aplic.lock, flags);
+>> +}
+>> +
+> According to AIA spec §4.9.3 (Synchronizing interactions between a hart and the APLIC), the sequence needs 6 steps; this implements only steps 2-5:
+> 
+> - Step 1: clear the pending bit for sync_id at the hart's IMSIC before writing genmsi.
+> - Step 6: after releasing the lock, poll the pending bit for sync_id at the hart's IMSIC until it's set.
+> 
+> Step 4 (Busy clear) only means the APLIC has accepted/sent the MSI, not that it has arrived at the hart (the spec notes an unspecified travel delay).
+> Without step 6, aplic_genmsi_barrier() returns before the MSI (and thus prior MSIs) actually reach the hart, so it doesn't achieve the barrier it's meant to
+> provide.
+> 
 
-When the scan finds nothing, pci_uart_config() puts back the original
-base, and check_existence() does not test MMIO addresses.
+It is really missed but it exists in riscv-next-upstream branch 
+(https://gitlab.com/xen-project/people/olkur/xen/-/blob/riscv-next-upstreaming/xen/arch/riscv/imsic.c#L723).
 
-On a system with a legacy UART, check_existence() passes and nothing
-changes.
+I will re-check why it is missed here.
 
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Benjamin Leggett <benjamin@edera.io>
----
- xen/drivers/char/ns16550.c | 47 +++++++++++++++++++++++++++++++++++++-
- xen/include/xen/pci_ids.h  |  2 ++
- 2 files changed, 48 insertions(+), 1 deletion(-)
+Thanks for noticing that.
 
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index 120ac09d23..d5403598d2 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -64,8 +64,10 @@ static struct ns16550 {
-     bool intr_works;
-     bool force_polling;
-     bool dw_usr_bsy;
-+    bool io_base_set;       /* if =1, io_base came from the command line */
- #ifdef NS16550_PCI
-     /* PCI card parameters. */
-+    bool pci_scanned;       /* if =1, pci_uart_config() already ran */
-     bool pb_bdf_enable;     /* if =1, pb-bdf effective, port behind bridge */
-     bool ps_bdf_enable;     /* if =1, ps_bdf effective, port on pci card */
-     pci_sbdf_t pci_bridge;
-@@ -98,6 +100,7 @@ struct ns16550_config {
-         param_intel_lpss,
-         param_wch_ch382,
-         param_asix,
-+        param_amazon,
-     } param;
- };
- 
-@@ -909,6 +912,13 @@ static const struct ns16550_config_param __initconst uart_param[] = {
-         .bar0 = true,
-         .max_ports = 1,
-     },
-+    [param_amazon] = {
-+        .reg_width = 1,
-+        .lsr_mask = UART_LSR_THRE,
-+        .bar0 = true,
-+        .mmio = true,
-+        .max_ports = 1,
-+    },
- };
- 
- static const struct ns16550_config __initconst uart_config[] =
-@@ -1255,6 +1265,12 @@ static const struct ns16550_config __initconst uart_config[] =
-         .dev_id = 0x9910,
-         .param = param_asix
-     },
-+    /* Amazon EC2 bare metal UART, the only serial port on those systems */
-+    {
-+        .vendor_id = PCI_VENDOR_ID_AMAZON,
-+        .dev_id = 0x8250,
-+        .param = param_amazon
-+    },
- };
- 
- static int __init
-@@ -1263,6 +1279,8 @@ pci_uart_config(struct ns16550 *uart, bool skip_amt, unsigned int idx)
-     u64 orig_base = uart->io_base;
-     unsigned int b, d, f, nextf, i;
- 
-+    uart->pci_scanned = true;
-+
-     /* NB. Start at bus 1 to avoid AMT: a plug-in card cannot be on bus 0. */
-     for ( b = skip_amt ? 1 : 0; b < 0x100; b++ )
-     {
-@@ -1618,6 +1636,7 @@ static bool __init parse_positional(struct ns16550 *uart, char **str)
- #endif
-         {
-             uart->io_base = simple_strtoull(conf, &conf, 0);
-+            uart->io_base_set = true;
-         }
-     }
- 
-@@ -1693,6 +1712,7 @@ static bool __init parse_namevalue_pairs(char *str, struct ns16550 *uart)
-                 break;
-             }
-             uart->io_base = simple_strtoull(param_value, NULL, 0);
-+            uart->io_base_set = true;
-             break;
- 
-         case irq:
-@@ -1805,7 +1825,32 @@ static void __init ns16550_parse_port_config(
-     if ( uart->io_base == 0 )
-         PARSE_ERR("I/O base address must be specified.");
-     if ( !check_existence(uart) )
--        PARSE_ERR("16550-compatible serial UART not present");
-+    {
-+        bool present = false;
-+
-+#ifdef NS16550_PCI
-+        /*
-+         * Some systems, EC2 bare metal among them, have no legacy UART and
-+         * carry their only serial port on PCI. Look for one before giving up,
-+         * unless the command line named a base or already asked for a scan.
-+         * com1 only: for com2 the scan skips the first port it finds, so it
-+         * can never match a single-port device.
-+         */
-+        if ( uart == ns16550_com && !uart->io_base_set && !uart->pci_scanned )
-+        {
-+            pci_uart_config(uart, 1 /* skip AMT */, uart - ns16550_com);
-+            /*
-+             * A scan that matched nothing puts back the base we just rejected,
-+             * and check_existence() passes MMIO addresses through untested, so
-+             * ps_bdf_enable is what says a device was found.
-+             */
-+            present = uart->ps_bdf_enable && check_existence(uart);
-+        }
-+#endif
-+
-+        if ( !present )
-+            PARSE_ERR("16550-compatible serial UART not present");
-+    }
- 
-     /* Register with generic serial driver. */
-     serial_register_uart(uart - ns16550_com, &ns16550_driver, uart);
-diff --git a/xen/include/xen/pci_ids.h b/xen/include/xen/pci_ids.h
-index fd424ef55d..a17c88dcf7 100644
---- a/xen/include/xen/pci_ids.h
-+++ b/xen/include/xen/pci_ids.h
-@@ -17,6 +17,8 @@
- 
- #define PCI_VENDOR_ID_WCHIC              0x1c00
- 
-+#define PCI_VENDOR_ID_AMAZON             0x1d0f
-+
- #define PCI_VENDOR_ID_INTEL              0x8086
- 
- #endif /* XEN_PCI_IDS_H */
--- 
-2.55.0
+~ Oleksii
 
 
