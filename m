@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D066AC98309
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 943BFC98308
 	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:00:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1429302.1652234 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1429289.1652198 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x94mm-00057P-N5; Tue, 22 Sep 2026 18:00:08 +0000
+	id 1x94mk-0004RH-KP; Tue, 22 Sep 2026 18:00:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1429302.1652234; Tue, 22 Sep 2026 18:00:08 +0000
+Received: by outflank-mailman (output) from mailman id 1429289.1652198; Tue, 22 Sep 2026 18:00:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x94mm-00055G-Cx; Tue, 22 Sep 2026 18:00:08 +0000
-Received: by outflank-mailman (input) for mailman id 1429302;
- Tue, 22 Sep 2026 17:14:23 +0000
+	id 1x94mk-0004R6-Fa; Tue, 22 Sep 2026 18:00:06 +0000
+Received: by outflank-mailman (input) for mailman id 1429289;
+ Tue, 22 Sep 2026 17:13:19 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <usama.anjum@arm.com>) id 1x944V-0005Ln-2W
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:14:23 +0000
+ (envelope-from <usama.anjum@arm.com>) id 1x943T-0005FS-CO
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:13:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x944U-00Gilg-Fl
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 19:14:22 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x943R-006TAE-7q
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 19:13:17 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6ab2b767-bab6-0a2a0a5309dd-0a2a450c81d2-26
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:14:22 +0200
+ id 6ab2b72c-8faa-0a2a0a5109dd-0a2a4502c1b2-0
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:13:16 +0200
 Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6ab2b76d-f479-0a2a450c0019-d98c6eacee0a-1
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:14:21 +0200
+ id 6ab2b72b-6ca4-0a2a45020019-d98c6eace9ce-1
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:13:16 +0200
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 7B61A1576;
- Tue, 22 Sep 2026 10:14:17 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 9E8A51595;
+ Tue, 22 Sep 2026 10:13:11 -0700 (PDT)
 Received: from [127.0.1.1] (e142334-100.cambridge.arm.com [10.2.198.93])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id D30003F86C;
- Tue, 22 Sep 2026 10:14:07 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 479AD3F86C;
+ Tue, 22 Sep 2026 10:13:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,18 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1790097261; bh=m1/Zj1kl1r4NT70p2V5vARYiyafZNwoUEY016kfXI6M=;
+	t=1790097195; bh=6PW1tkj08QGo8QdckrPX0ODHoxUb6pqu2veO+kTTZ/k=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=uyMUOZj6R5njDUnUE0WViDRG203+0ImQf8L3e4R3tvNeiQX8hthSWT3MmAozquZCC
-	 MtaevHRyysWE/QOR2DnQlqNWb2SZ0tKdXvT/wq71vEr+9CY6J3c/VDmp9lE+PtmgLq
-	 I6LApZTWohZd2n0AKddZqBwhz/kVnU82kKMdtcjU=
+	b=pCTPM03mJphkPxfc35zeUUsQF8Wf+c8WL4VK71wDLX28hB9HGW7S8BbVsmZ2JQk5T
+	 Yo0zY8RCJu6/8P4pPe9u2C/m6SJk9j0y0fparJfvZTMlzq4fTIbQBDrgjycGf2yHZq
+	 HemyfHlHgY+jLXxIgf46qiftTUNRZqsbU5Uy10Sg=
 From: Muhammad Usama Anjum <usama.anjum@arm.com>
-Date: Tue, 22 Sep 2026 18:12:34 +0100
-Subject: [PATCH v3 6/9] mm: add hw_pte_val for HW PTE storage
+Date: Tue, 22 Sep 2026 18:12:29 +0100
+Subject: [PATCH v3 1/9] mm: introduce hw_pte_t for PTE table storage
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260922-pte0-v3-6-5670b8cb9059@arm.com>
+Message-Id: <20260922-pte0-v3-1-5670b8cb9059@arm.com>
 References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
 In-Reply-To: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
 To: Andrew Morton <akpm@linux-foundation.org>, 
@@ -134,47 +134,96 @@ Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
  Muhammad Usama Anjum <usama.anjum@arm.com>
 X-Mailer: b4 0.16.0
-X-purgate-ID: tlsNG-d25034/1790097262-51737A5B-2E5D5452/0/0
+X-purgate-ID: tlsNG-720697/1790097196-F22A92AC-391C8119/0/0
 X-purgate-type: clean
-X-purgate-size: 1321
+X-purgate-size: 3029
 
-Atomic PTE updates need an lvalue for the bits stored in an HW PTE.
-pte_val() only accepts a SW PTE value, so it cannot operate directly on
-a distinct hw_pte_t.
+pte_t is used both for software PTE values and for entries stored in a PTE
+table, so pte_t * does not distinguish a pointer to a software PTE
+value from a pointer to table storage.
 
-Add hw_pte_val() to expose the underlying pte_val() lvalue. Access the
-wrapper's __pte member when hw_pte_t is distinct, and use pte_val()
-directly when it remains an alias of pte_t.
+Introduce hw_pte_t as the generic name for a PTE table element. Define it
+as a macro alias of pte_t by default. When an architecture selects
+ARCH_HAS_HW_PTE_T, define it as a structure containing a pte_t instead.
+This preserves the representation while allowing converted architectures
+to enforce the distinction at compile time.
 
+Name the generic wrapper structure __hw_pte_t so architectures can
+forward-declare it when pgtable_t must be defined before the generic
+hw_pte_t typedef is visible. This avoids header-order dependencies.
+
+Keep the C type definitions behind an __ASSEMBLY__ check because
+architecture assembly sources can include this header indirectly. Include
+asm/page.h so consumers such as linux/vmalloc.h retain the page definitions
+they previously obtained from that header.
+
+Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
 ---
-Changes in v3:
-- Moved from the arm64 series to generic series as it makes more sense
-  to add this in generic with all other changes. Usually we only add
-  code where its get used. But this whole series wouldn't get used
-  until an arch started using HW PTEs.
----
- include/linux/pgtable_types.h | 4 ++++
- 1 file changed, 4 insertions(+)
+Changes since v1:
+- Name the generic wrapper structure __hw_pte_t so architectures can
+  forward-declare it, and explain why this is required.
+- Use software PTE value terminology.
 
+Changes since RFC v1:
+- Add the ARCH_HAS_HW_PTE_T opt-in and generic wrapper definition.
+- Exclude the C type definitions from assembly sources.
+- Update the description for the new opt-in model.
+---
+ MAINTAINERS                   |  1 +
+ include/linux/pgtable_types.h | 17 +++++++++++++++++
+ mm/Kconfig                    |  3 +++
+ 3 files changed, 21 insertions(+)
+
+diff --git a/MAINTAINERS b/MAINTAINERS
+index 2133aec4a2004..da60a8bdcddb5 100644
+--- a/MAINTAINERS
++++ b/MAINTAINERS
+@@ -17140,6 +17140,7 @@ F:	include/linux/mmu_notifier.h
+ F:	include/linux/pagewalk.h
+ F:	include/linux/pgalloc.h
+ F:	include/linux/pgtable.h
++F:	include/linux/pgtable_types.h
+ F:	include/linux/ptdump.h
+ F:	include/linux/vmpressure.h
+ F:	include/linux/vmstat.h
 diff --git a/include/linux/pgtable_types.h b/include/linux/pgtable_types.h
-index d6c5a7548550b..ee4eace5c3e1c 100644
---- a/include/linux/pgtable_types.h
+new file mode 100644
+index 0000000000000..07da05d375c2c
+--- /dev/null
 +++ b/include/linux/pgtable_types.h
-@@ -9,9 +9,13 @@
- #ifdef CONFIG_ARCH_HAS_HW_PTE_T
- typedef struct __hw_pte_t { pte_t __pte; } hw_pte_t;
- #define __pte_from_hw(pte)	((pte).__pte)
+@@ -0,0 +1,17 @@
++/* SPDX-License-Identifier: GPL-2.0 */
++#ifndef _LINUX_PGTABLE_TYPES_H
++#define _LINUX_PGTABLE_TYPES_H
 +
-+#define hw_pte_val(x)  pte_val((x).__pte)
- #else
- #define hw_pte_t pte_t
- #define __pte_from_hw(pte)	(pte)
++#include <asm/page.h>
 +
-+#define hw_pte_val(x)  pte_val(x)
- #endif
++#ifndef __ASSEMBLY__
++
++#ifdef CONFIG_ARCH_HAS_HW_PTE_T
++typedef struct __hw_pte_t { pte_t __pte; } hw_pte_t;
++#else
++#define hw_pte_t pte_t
++#endif
++
++#endif /* !__ASSEMBLY__ */
++
++#endif /* _LINUX_PGTABLE_TYPES_H */
+diff --git a/mm/Kconfig b/mm/Kconfig
+index c1ddf59c0d71a..5f462ec6fa5e5 100644
+--- a/mm/Kconfig
++++ b/mm/Kconfig
+@@ -1312,6 +1312,9 @@ comment "GUP_TEST needs to have DEBUG_FS enabled"
+ config GUP_GET_PXX_LOW_HIGH
+ 	bool
  
- #endif /* !__ASSEMBLY__ */
++config ARCH_HAS_HW_PTE_T
++	bool
++
+ config DMAPOOL_TEST
+ 	tristate "Enable a module to run time tests on dma_pool"
+ 	depends on HAS_DMA
 
 -- 
 2.47.3
