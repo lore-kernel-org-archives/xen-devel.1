@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1219CC98307
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:00:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1429291.1652203 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55FC2C9830B
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:00:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1429296.1652212 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x94mk-0004Tn-Sl; Tue, 22 Sep 2026 18:00:06 +0000
+	id 1x94ml-0004iT-IX; Tue, 22 Sep 2026 18:00:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1429291.1652203; Tue, 22 Sep 2026 18:00:06 +0000
+Received: by outflank-mailman (output) from mailman id 1429296.1652212; Tue, 22 Sep 2026 18:00:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x94mk-0004TS-Nv; Tue, 22 Sep 2026 18:00:06 +0000
-Received: by outflank-mailman (input) for mailman id 1429291;
- Tue, 22 Sep 2026 17:13:30 +0000
+	id 1x94ml-0004g2-BT; Tue, 22 Sep 2026 18:00:07 +0000
+Received: by outflank-mailman (input) for mailman id 1429296;
+ Tue, 22 Sep 2026 17:13:56 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <usama.anjum@arm.com>) id 1x943e-0005GY-Nw
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:13:30 +0000
+ (envelope-from <usama.anjum@arm.com>) id 1x9444-0005Ir-BS
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:13:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x943e-005CEz-4h
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 19:13:30 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x9443-005CIV-OU
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 19:13:55 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6ab2b70d-2eae-0a2a0a5409dd-0a2a450aec74-48
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:13:29 +0200
+ id 6ab2b741-2eae-0a2a0a5409dd-0a2a45039aa4-34
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:13:55 +0200
 Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6ab2b738-f2d2-0a2a450a0019-d98c6eacc160-1
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:13:29 +0200
+ id 6ab2b752-fae8-0a2a45030019-d98c6eacc21c-1
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:13:55 +0200
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id B1CBF1595;
- Tue, 22 Sep 2026 10:13:24 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 094B31595;
+ Tue, 22 Sep 2026 10:13:51 -0700 (PDT)
 Received: from [127.0.1.1] (e142334-100.cambridge.arm.com [10.2.198.93])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 742013F86C;
- Tue, 22 Sep 2026 10:13:15 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id C46153F86C;
+ Tue, 22 Sep 2026 10:13:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,19 +53,18 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1790097208; bh=A5NzDbD1noDwzYUVi8ldHdR4UZ15jpqj+KvUR0EDrHw=;
+	t=1790097234; bh=VSAJHWUAe7NS76HVRAMjNd0GQzrtewrgnfoeWDUMlnY=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=igT401m5Ukd+3+6wB+UgkDK63LspXcTemyvQIbaw1+BgwuYsVHrX2DMhqhgHk3LXY
-	 kHy/IQiBkermaVeOcybtnCdoQu7KcLnO6cNeXQ+B00DQhjxLMdA8FG5xp3QHrnYKlq
-	 HpbAzdd9QkzACrgJ3YINIW0HcgeXtIyLmi4yHh8c=
+	b=FVt56hjuBPaMyg/BnFKqE4fzU1cEu6NBRc7MPH68RUYG/CCz6y6YC9RG6hPWhN96x
+	 x9hwL9qrWyGY3gHSBta6j4l7PueQkx2vM6HZNIWXJTPqHrodyx2R2jU4yzc9rQNtJ/
+	 1suYvsUR4FuoJM/twYHmYXuJo99AkA0nApGsDh9M=
 From: Muhammad Usama Anjum <usama.anjum@arm.com>
-Date: Tue, 22 Sep 2026 18:12:30 +0100
-Subject: [PATCH v3 2/9] mm: rename pointers to software PTE values as
- ptentp
+Date: Tue, 22 Sep 2026 18:12:32 +0100
+Subject: [PATCH v3 4/9] mm: convert PTE table entries in ptep_get()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260922-pte0-v3-2-5670b8cb9059@arm.com>
+Message-Id: <20260922-pte0-v3-4-5670b8cb9059@arm.com>
 References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
 In-Reply-To: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
 To: Andrew Morton <akpm@linux-foundation.org>, 
@@ -135,95 +134,56 @@ Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
  Muhammad Usama Anjum <usama.anjum@arm.com>
 X-Mailer: b4 0.16.0
-X-purgate-ID: tlsNG-4011c0/1790097209-4ABD8CFC-A8EEAF4C/0/0
+X-purgate-ID: tlsNG-33051d/1790097235-6D8D54E9-34DFBB81/0/0
 X-purgate-type: clean
-X-purgate-size: 2982
+X-purgate-size: 1531
 
-Some interfaces use pte_t * for a software PTE value rather than for an
-entry stored in a PTE table. These pointers must remain pte_t * when
-pointers to PTE table storage are converted to hw_pte_t *.
+ptep_get() now accepts a pointer to hw_pte_t storage but must continue to
+return a software PTE value. Add __pte_from_hw for both generic hw_pte_t
+definitions. Read the hw_pte_t table element atomically before converting
+it to pte_t.
 
-Rename these parameters in the install_pte callback,
-write_protect_page(), and guard_install_set_pte() to ptentp. The later
-Coccinelle conversion skips pointers named ptentp, allowing it to convert
-the remaining PTE table pointers without changing these interfaces.
-
-Some functions already use ptentp for such pointers, including:
-- madvise_folio_pte_batch()
-- folio_pte_batch_flags()
-No need to rename them.
-
-This patch only renames parameters and makes no functional change.
-
-Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
 ---
 Changes since v1:
-- Rewrite the subject and description to distinguish software PTE
-  values from PTE table storage.
+- Use software PTE value terminology.
 
 Changes since RFC v1:
-- Update the description for the architecture opt-in conversion.
+- Define __pte_from_hw for the opted-in generic wrapper.
+- Apply READ_ONCE() to hw_pte_t before converting it to pte_t.
 ---
- include/linux/pagewalk.h | 2 +-
- mm/ksm.c                 | 4 ++--
- mm/madvise.c             | 4 ++--
- 3 files changed, 5 insertions(+), 5 deletions(-)
+ include/linux/pgtable.h       | 2 +-
+ include/linux/pgtable_types.h | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/include/linux/pagewalk.h b/include/linux/pagewalk.h
-index b41d7265c01bc..c34d826c5e4a2 100644
---- a/include/linux/pagewalk.h
-+++ b/include/linux/pagewalk.h
-@@ -89,7 +89,7 @@ struct mm_walk_ops {
- 		       struct mm_walk *walk);
- 	void (*post_vma)(struct mm_walk *walk);
- 	int (*install_pte)(unsigned long addr, unsigned long next,
--			   pte_t *ptep, struct mm_walk *walk);
-+			   pte_t *ptentp, struct mm_walk *walk);
- 	enum page_walk_lock walk_lock;
- };
- 
-diff --git a/mm/ksm.c b/mm/ksm.c
-index 624f37975e129..2a4f19fe0f696 100644
---- a/mm/ksm.c
-+++ b/mm/ksm.c
-@@ -1292,7 +1292,7 @@ static u32 calc_checksum(struct page *page)
- }
- 
- static int write_protect_page(struct vm_area_struct *vma, struct folio *folio,
--			      pte_t *orig_pte)
-+			      pte_t *ptentp)
+diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
+index 19098e302b75a..41337da0d65aa 100644
+--- a/include/linux/pgtable.h
++++ b/include/linux/pgtable.h
+@@ -493,7 +493,7 @@ static inline int pudp_set_access_flags(struct vm_area_struct *vma,
+ #ifndef ptep_get
+ static inline pte_t ptep_get(hw_pte_t *ptep)
  {
- 	struct mm_struct *mm = vma->vm_mm;
- 	DEFINE_FOLIO_VMA_WALK(pvmw, folio, vma, 0, 0);
-@@ -1371,7 +1371,7 @@ static int write_protect_page(struct vm_area_struct *vma, struct folio *folio,
- 
- 		set_pte_at(mm, pvmw.address, pvmw.pte, entry);
- 	}
--	*orig_pte = entry;
-+	*ptentp = entry;
- 	err = 0;
- 
- out_unlock:
-diff --git a/mm/madvise.c b/mm/madvise.c
-index 73c2901b9adbf..dd75a673e108f 100644
---- a/mm/madvise.c
-+++ b/mm/madvise.c
-@@ -1113,12 +1113,12 @@ static int guard_install_pte_entry(pte_t *pte, unsigned long addr,
+-	return READ_ONCE(*ptep);
++	return __pte_from_hw(READ_ONCE(*ptep));
  }
+ #endif
  
- static int guard_install_set_pte(unsigned long addr, unsigned long next,
--				 pte_t *ptep, struct mm_walk *walk)
-+				 pte_t *ptentp, struct mm_walk *walk)
- {
- 	unsigned long *nr_pages = (unsigned long *)walk->private;
+diff --git a/include/linux/pgtable_types.h b/include/linux/pgtable_types.h
+index 07da05d375c2c..d6c5a7548550b 100644
+--- a/include/linux/pgtable_types.h
++++ b/include/linux/pgtable_types.h
+@@ -8,8 +8,10 @@
  
- 	/* Simply install a PTE marker, this causes segfault on access. */
--	*ptep = make_pte_marker(PTE_MARKER_GUARD);
-+	*ptentp = make_pte_marker(PTE_MARKER_GUARD);
- 	(*nr_pages)++;
+ #ifdef CONFIG_ARCH_HAS_HW_PTE_T
+ typedef struct __hw_pte_t { pte_t __pte; } hw_pte_t;
++#define __pte_from_hw(pte)	((pte).__pte)
+ #else
+ #define hw_pte_t pte_t
++#define __pte_from_hw(pte)	(pte)
+ #endif
  
- 	return 0;
+ #endif /* !__ASSEMBLY__ */
 
 -- 
 2.47.3
