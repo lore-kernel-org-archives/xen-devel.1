@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08AE3C98302
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:00:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1429306.1652250 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBAF8C982FA
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:00:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1429304.1652241 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x94mn-0005P0-Me; Tue, 22 Sep 2026 18:00:09 +0000
+	id 1x94mn-0005IS-3g; Tue, 22 Sep 2026 18:00:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1429306.1652250; Tue, 22 Sep 2026 18:00:09 +0000
+Received: by outflank-mailman (output) from mailman id 1429304.1652241; Tue, 22 Sep 2026 18:00:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x94mn-0005KU-5n; Tue, 22 Sep 2026 18:00:09 +0000
-Received: by outflank-mailman (input) for mailman id 1429306;
- Tue, 22 Sep 2026 17:14:51 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x94mm-0005Gt-Ph; Tue, 22 Sep 2026 18:00:08 +0000
+Received: by outflank-mailman (input) for mailman id 1429304;
+ Tue, 22 Sep 2026 17:14:37 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <usama.anjum@arm.com>) id 1x944x-0005O3-G5
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:14:51 +0000
+ (envelope-from <usama.anjum@arm.com>) id 1x944i-0005Mv-UF
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:14:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x944w-003clj-T5
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 19:14:50 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x944i-00Ae9t-B5
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 19:14:36 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6ab2b788-bab6-0a2a0a5309dd-0a2a4508d152-4
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:14:50 +0200
+ id 6ab2b748-8faa-0a2a0a5109dd-0a2a4504e582-18
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:14:36 +0200
 Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6ab2b789-f659-0a2a45080019-d98c6eac9526-1
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:14:50 +0200
+ id 6ab2b77b-b57f-0a2a45040019-d98c6eac94f8-1
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:14:36 +0200
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 33B321576;
- Tue, 22 Sep 2026 10:14:45 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 78D071595;
+ Tue, 22 Sep 2026 10:14:31 -0700 (PDT)
 Received: from [127.0.1.1] (e142334-100.cambridge.arm.com [10.2.198.93])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 4E50C3F86C;
- Tue, 22 Sep 2026 10:14:35 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 50FAF3FA32;
+ Tue, 22 Sep 2026 10:14:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,18 +53,19 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1790097288; bh=FzOwmvXA/ZsaFfwRIrSgTUueXbfZi9w1ND4q544oILg=;
+	t=1790097275; bh=SNK4rrwFvjnxcdknL2hsc20bUzMvwr6CIipWYMszSzs=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=Q1VpCxluEzmguxI26Ee7wNqjVLyFcXsyK9/dTWuDEaV5LI432tzfpNULGi1fic9rT
-	 Bmjsh3ZnFfh+9S7gpmlxZgPGzuuQpx+nqgYUgF5ZWR3Ua8oDKnB0+1kZHIWXY9gb9N
-	 2rdmHfnaacSFRGJxxoea+piZgL6JIpAkwsMHQgwc=
+	b=iARAx8Qyk1413VBr4PC7dGwIhlrToaTnagZ6dPlvezmqEddDjaVkHLgBTgS5wWhxt
+	 NG3MjS+xmLq1vZyn83oVsYzSt8u9iMTTXB3k+0eeRFDj4F3gou8popZy7lpyXeDKr4
+	 SHUdvtaZmDDnMdNPXUZnhs8extIVv21cyFM4/8oM=
 From: Muhammad Usama Anjum <usama.anjum@arm.com>
-Date: Tue, 22 Sep 2026 18:12:36 +0100
-Subject: [PATCH v3 8/9] drm/i915: use hw_pte_t for PTE range callbacks
+Date: Tue, 22 Sep 2026 18:12:35 +0100
+Subject: [PATCH v3 7/9] mm/kasan: use hw_pte_t for the early shadow PTE
+ table
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260922-pte0-v3-8-5670b8cb9059@arm.com>
+Message-Id: <20260922-pte0-v3-7-5670b8cb9059@arm.com>
 References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
 In-Reply-To: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
 To: Andrew Morton <akpm@linux-foundation.org>, 
@@ -134,17 +135,20 @@ Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
  Muhammad Usama Anjum <usama.anjum@arm.com>
 X-Mailer: b4 0.16.0
-X-purgate-ID: tlsNG-c1860d/1790097290-D6F5F87B-B16FE897/0/0
+X-purgate-ID: tlsNG-ebf023/1790097276-528C9B50-8DA07A91/0/0
 X-purgate-type: clean
-X-purgate-size: 2447
+X-purgate-size: 2371
 
-apply_to_page_range() now passes PTE table storage to its callback as
-hw_pte_t *. Update the i915 remap and selftest callbacks to match the new
-type.
+kasan_early_shadow_pte is a complete PTE table rather than a software
+PTE value. Declare and define its elements as hw_pte_t so the object uses
+the PTE table storage type.
 
-Continue to use ptep_get() for software PTE values and set_pte_at() for
-updates.
-The type remains an alias of pte_t on x86 until that architecture opts in.
+Read the first element through ptep_get(), which returns the software PTE
+value expected by note_page_pte(), instead of accessing hw_pte_t storage
+directly. This also uses the accessor selected by the architecture.
+
+No architecture selects ARCH_HAS_HW_PTE_T at this point, so the storage
+representation remains unchanged.
 
 Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
 ---
@@ -152,55 +156,51 @@ Changes since v1:
 - Use software PTE value terminology.
 
 Changes since RFC v1:
-- Clarify the effect on architectures that have not opted in.
+- Update the description for the architecture opt-in model.
 ---
- drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c | 4 ++--
- drivers/gpu/drm/i915/i915_mm.c                     | 4 ++--
- 2 files changed, 4 insertions(+), 4 deletions(-)
+ include/linux/kasan.h | 2 +-
+ mm/kasan/init.c       | 2 +-
+ mm/ptdump.c           | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c b/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
-index d01acfb7d93d0..056faf4a3618b 100644
---- a/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
-+++ b/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
-@@ -1690,7 +1690,7 @@ static int igt_mmap_gpu(void *arg)
- 	return 0;
+diff --git a/include/linux/kasan.h b/include/linux/kasan.h
+index bf233bde68c7e..ff41949c0ac08 100644
+--- a/include/linux/kasan.h
++++ b/include/linux/kasan.h
+@@ -51,7 +51,7 @@ typedef unsigned int __bitwise kasan_vmalloc_flags_t;
+ #endif
+ 
+ extern unsigned char kasan_early_shadow_page[PAGE_SIZE];
+-extern pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS];
++extern hw_pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS];
+ extern pmd_t kasan_early_shadow_pmd[MAX_PTRS_PER_PMD];
+ extern pud_t kasan_early_shadow_pud[MAX_PTRS_PER_PUD];
+ extern p4d_t kasan_early_shadow_p4d[MAX_PTRS_PER_P4D];
+diff --git a/mm/kasan/init.c b/mm/kasan/init.c
+index 30c5266eaf37e..9bbc2a41d23f0 100644
+--- a/mm/kasan/init.c
++++ b/mm/kasan/init.c
+@@ -64,7 +64,7 @@ static inline bool kasan_pmd_table(pud_t pud)
+ 	return false;
  }
+ #endif
+-pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS]
++hw_pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS]
+ 	__bss_pgtbl;
  
--static int check_present_pte(pte_t *pte, unsigned long addr, void *data)
-+static int check_present_pte(hw_pte_t *pte, unsigned long addr, void *data)
+ static inline bool kasan_pte_table(pmd_t pmd)
+diff --git a/mm/ptdump.c b/mm/ptdump.c
+index 376880071ca2a..8f19f20be3c44 100644
+--- a/mm/ptdump.c
++++ b/mm/ptdump.c
+@@ -19,7 +19,7 @@ static inline int note_kasan_page_table(struct mm_walk *walk,
  {
- 	pte_t ptent = ptep_get(pte);
+ 	struct ptdump_state *st = walk->private;
  
-@@ -1703,7 +1703,7 @@ static int check_present_pte(pte_t *pte, unsigned long addr, void *data)
- 	return 0;
- }
+-	st->note_page_pte(st, addr, kasan_early_shadow_pte[0]);
++	st->note_page_pte(st, addr, ptep_get(kasan_early_shadow_pte));
  
--static int check_absent_pte(pte_t *pte, unsigned long addr, void *data)
-+static int check_absent_pte(hw_pte_t *pte, unsigned long addr, void *data)
- {
- 	pte_t ptent = ptep_get(pte);
- 
-diff --git a/drivers/gpu/drm/i915/i915_mm.c b/drivers/gpu/drm/i915/i915_mm.c
-index fd89e7c7d8d6f..aab88e8edf946 100644
---- a/drivers/gpu/drm/i915/i915_mm.c
-+++ b/drivers/gpu/drm/i915/i915_mm.c
-@@ -48,7 +48,7 @@ static inline unsigned long sgt_pfn(const struct remap_pfn *r)
- 		return r->sgt.pfn + (r->sgt.curr >> PAGE_SHIFT);
- }
- 
--static int remap_sg(pte_t *pte, unsigned long addr, void *data)
-+static int remap_sg(hw_pte_t *pte, unsigned long addr, void *data)
- {
- 	struct remap_pfn *r = data;
- 
-@@ -70,7 +70,7 @@ static int remap_sg(pte_t *pte, unsigned long addr, void *data)
- #define EXPECTED_FLAGS (VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP)
- 
- #if IS_ENABLED(CONFIG_X86)
--static int remap_pfn(pte_t *pte, unsigned long addr, void *data)
-+static int remap_pfn(hw_pte_t *pte, unsigned long addr, void *data)
- {
- 	struct remap_pfn *r = data;
+ 	walk->action = ACTION_CONTINUE;
  
 
 -- 
