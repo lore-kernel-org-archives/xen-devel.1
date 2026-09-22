@@ -4,43 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2983C982FE
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 14:22:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428962.1651882 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CBB96C982FA
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 14:24:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428972.1651890 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x91Ne-0004bq-MG; Tue, 22 Sep 2026 14:21:58 +0000
+	id 1x91QG-0005WB-1k; Tue, 22 Sep 2026 14:24:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428962.1651882; Tue, 22 Sep 2026 14:21:58 +0000
+Received: by outflank-mailman (output) from mailman id 1428972.1651890; Tue, 22 Sep 2026 14:24:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x91Ne-0004bj-JO; Tue, 22 Sep 2026 14:21:58 +0000
-Received: by outflank-mailman (input) for mailman id 1428962;
- Tue, 22 Sep 2026 14:21:57 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x91Nd-0004bX-Td
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 14:21:57 +0000
+	id 1x91QF-0005W4-VH; Tue, 22 Sep 2026 14:24:39 +0000
+Received: by outflank-mailman (input) for mailman id 1428972;
+ Tue, 22 Sep 2026 14:24:38 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Michal.Orzel@amd.com>) id 1x91QE-0005Vt-Db
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 14:24:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x91Nd-0001Cp-Ae
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 16:21:57 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x91QD-004mzz-Qd
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 16:24:37 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab28ef7-8faa-0a2a0a5109dd-0a2a4502b32a-26
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 16:21:57 +0200
-Received: from [74.125.230.99] (helo=mail-lr2-f35.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab28f05-6ca4-0a2a45020019-4a7de66381f6-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 16:21:57 +0200
-Received: by mail-lr2-f35.google.com with SMTP id
- 38308e7fff4ca-3a47f740839so35120691fa.2
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 07:21:57 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- 38308e7fff4ca-3a627d67d9asm6260641fa.23.2026.09.22.07.21.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Sep 2026 07:21:56 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ab28fa4-2eae-0a2a0a5409dd-0a2a4507b324-8
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 16:24:37 +0200
+Received: from [40.107.209.53]
+ (helo=PH8PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ab28fa4-b4ea-0a2a45070019-286bd135b5b7-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 16:24:37 +0200
+Received: from BY5PR04CA0029.namprd04.prod.outlook.com (2603:10b6:a03:1d0::39)
+ by BY5PR12MB4241.namprd12.prod.outlook.com (2603:10b6:a03:20c::9)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.13; Tue, 22 Sep
+ 2026 14:21:16 +0000
+Received: from SJ1PEPF000023CB.namprd02.prod.outlook.com
+ (2603:10b6:a03:1d0:cafe::af) by BY5PR04CA0029.outlook.office365.com
+ (2603:10b6:a03:1d0::39) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.13 via Frontend Transport; Tue,
+ 22 Sep 2026 14:21:16 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SJ1PEPF000023CB.mail.protection.outlook.com (10.167.244.5) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.451.8 via Frontend Transport; Tue, 22 Sep 2026 14:21:16 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 22 Sep
+ 2026 09:21:15 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 22 Sep
+ 2026 09:21:14 -0500
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
+ Transport; Tue, 22 Sep 2026 09:21:13 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,120 +71,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790086916; x=1790691716; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=6xiUNAhZbzRQt8xbOCQm25lVj86yCf+Eb13dZvBRGfM=;
-        b=h62CQ7xHZgloTuPgkRHLZ4RjMhFY4IjLzLCYCSAo7/v58XF1byF7QdAnvf4Sv1Orfu
-         /O1KYBwdSlLncnw5GKjiMkJNP7TYsNLor8mERlDwzhrU+nI358oBqJepYEMidOVmJtfA
-         wToH9CHTQg0W1oEYYJzBBUPDsvOAUX0oVpX9xrX3mPOlrRM0CerdRWJ16calMaLnxbL2
-         I0RCwiSql8vEcap2qlfpgvcJ33h2wBNEyVhA/0EST9o1frSDAexgOnW1qHXni6Y5sUtS
-         DvxT+C/nj/y12zUcucWSoeb/c1/6nyVQ3u/dhMkuafJSYAw6IHl19wMZwW4b0XohmD3c
-         g/cw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790086916; x=1790691716;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=6xiUNAhZbzRQt8xbOCQm25lVj86yCf+Eb13dZvBRGfM=;
-        b=VW3PamDraBhMz2zrvOEUEmDkocSZQMTQxazpYr4KITbzdAlpZlEzsR8lQT3SgyXBj2
-         azWmY5XKPz88mq1/b91dOWQpkCdkgp+jbzfWdhA/vCQQLHJl4klZH+PuUlacz6evxqck
-         rg7K64kD3F7n73PnYKKnGTNyVjzq4BeywWWRO7zIhDj+9HqW4iTxjWo4j33ludb/WvUJ
-         2N2XnHpSyJNUfHkmLog5xvWoB08Ati/+rDf+K0IeUDoRqv6vTsFGcKBt783qrvpK//Jj
-         MuMLTgZvNdeKEkPmHImJY6mR+YjA3UOVG7pYvseluxpmOIOFQhSqtVF8RfFCpek4FIeQ
-         8mVw==
-X-Gm-Message-State: AFuF++ke4O30aeqU+uy+fzkcY5RHNQG9Xu3JxzsAu1coSKALJhymWudw
-	rMUzekGO3xfpdV+ddZw0YmAk+uFOCa1PWIjOSoTxpMoZ9uMgnAheE6wK
-X-Gm-Gg: AYBFou0jJa1T2wAaaY1J9NgJ5ba8L220V3h1wzn040DaSy45/Gb3BGVWaiZWOls4TKi
-	gLVR8y8wPss4ZhmepteSjTUPHAzCOt5/jO4FOzygRltqUj2seiiZ472UvX40xFgoOMwFRUNBNPc
-	hoLD60JDM1bOUMx2r/GARafS2Zn0K+Kxaa4OoLjUN0CLfPavPeoGMMXz3hw4LOwvKjwyLHkarud
-	yBEzCaZ1nu8Afjcr/xSbaTuroCQ7gkFohns+GGJTcLmsLG2QIAYrkqrjUjGaJHRk1MB4UMd6MQM
-	czXrhVOGBDDeJAYczUpqpM4L3koH7ZAD0f8csuVzdcZv8DKdcbEec4Ye9CEwRbYEQKGBiYhhcK0
-	eqY5xnh5/3jGMa24kl/k0uehhNw+1VHoZi6+bwAvrrFzFJmrdApeM5TrOdNaVlDwPw9RxySOnFr
-	Ulo4/44JXNkFNMoE1taFcnPLiaq8HgwwVzhRNiNTyX1aLhD/pHeARlrGrH54KPGjUlg0eqcUbTC
-	DNP4D1h3ypoDRgZ2EFlc/I7oBJL3tvcPf4U8j8B72cVYDxfmC9mG5ATNTkP
-X-Received: by 2002:a2e:bc04:0:b0:3a6:95a:52a6 with SMTP id 38308e7fff4ca-3a6095a5397mr24620721fa.20.1790086916308;
-        Tue, 22 Sep 2026 07:21:56 -0700 (PDT)
-Message-ID: <1a1d21cb-20c5-4b11-af1e-995d31fd2995@gmail.com>
-Date: Tue, 22 Sep 2026 16:21:54 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=QM7IjKYQmg36TzDvXvKkLC45Y9vky9ixpDSotiVQRHrthWcWhfqu8Owk80Nni7198fWbfotkkF5mGW4GseWNnZDhoTyvHcAwCJO3dW7xsI2K99PqriZpZ4Vro2t4iuHj1w6lafbBFRlWSSti6BqIyLf62lk1B8GeZ7CmS4z2sgedbqxZgam8LIvtjSbwbdr5FVMamxobBsowd4I2D/fZEEVe22vgfpwNcIBiZzzpVihg9htAhWxJ8UtB07ouFAFF0qX89lwsBMkMLIRXqEwDUmY5EeoHnFVFisyuC7UtGOZyk5M3EDBrlHzpP79dsYQRGWT5LKTU0shKr1wryG0ViA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=UOcZmDEQVFh+hFHW/y8ILASHFQwfF/paE8y4vWUmMtM=;
+ b=Mt0bVn8Gq8AonSFpOrEFJGxvq5zm21i/Yv7HTdKGa0hn8rYctMfjiPv2bS66QaAhV3n5K74Ag59YcMRLV5caEePZ/FIErrdO3b/iDHZHcwNE5DjUAREFZVfRIu4kDUZM7ZiYd7qWjzhU+xuzCekhTMrTo5RA3HXyvOaOlo3B+XkQrevYT7exMh2uTMh4sDdWxNLEhYm7ZuR2B0S4m/v+Wlyl4UfYkb0bMyo1AbN4udjw3lrjc8rYrvVkPNEECttT+ZEHso0ND7MhsZD5X8jsUIIQnKrh4A9RUIDFc6tekKBPZ6+UolZaF9E70rAx+UK1CYOVP4DYvu+jZSaG+3jVCQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=UOcZmDEQVFh+hFHW/y8ILASHFQwfF/paE8y4vWUmMtM=;
+ b=NApspWGFcVugzmVdINiEnGV+ZnoPF6rhpH5AUsSXOMgrmXZ+Jhhpr9IaNOdQxFXCjrEB+7l9QEDV3fod1l3LIQJ9QgaZ0Sib8JbWBQSzzS+Jgi0SZ1+3SK0ClzB1dgWkuIi9Y+9fU2JGUEO7FgxIizAV3kVFk8PzRkRMGnUqenI=
+X-MS-Exchange-Authentication-Results: spf=pass (sender IP is 165.204.84.17)
+ smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <bf6c4358-32c0-4f9e-8122-8e2c298a6377@amd.com>
+Date: Tue, 22 Sep 2026 16:21:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/6] xen/riscv: flush speculatively cached Bare-mode
- TLB entries in turn_on_mmu()
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org, Julien Grall <julien@xen.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Connor Davis <connojdavis@gmail.com>
-References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
- <1789032899.8631fc262581453bbf619ec5b2062170.1a08aaba238000c4f3@vates.tech>
+Subject: Re: [PATCH v4 3/4] xen/arm: vgic: free eSPIs using the bitmap index
+To: Mykola Kvach <mykola_kvach@epam.com>, <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>
+References: <cover.1790056623.git.mykola_kvach@epam.com>
+ <eb8e52ee6c227f0fd7d059d1ddfd0de6eec45fe4.1790056623.git.mykola_kvach@epam.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1789032899.8631fc262581453bbf619ec5b2062170.1a08aaba238000c4f3@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+In-Reply-To: <eb8e52ee6c227f0fd7d059d1ddfd0de6eec45fe4.1790056623.git.mykola_kvach@epam.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1790086917-315CD2AC-31E02189/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 1923
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000023CB:EE_|BY5PR12MB4241:EE_
+X-MS-Office365-Filtering-Correlation-Id: 068f67e8-5f4c-4f7c-f67f-08df18b4c3b6
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|376014|82310400026|36860700016|1800799024|10067099003|11063799006|4143699003|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	otcUTWCkJczJGzMyAc1K+5olLoUXhcKjfG6+Grn6LaILynUhZHwf47niGoIIUWRcejDPTaaIcPiLqLTJ/WP7j88q5+2eY/2ds07FTRa0sQMbbS6462tvt8tokFgh/a7jBZI2fWthr8SHl/GPSh6Qg2BGYtTgBroS2VeklVxhdVKVpUrbk3Q0XbfjJJUUxbOpXMjiltZzcMYtl84jRrXq/+biqHza29/q1pxWel20AxFScJ9d8Sx0aF80OpZEPhpTXFXoL7iP2yAaypW/kd9kPMiU/HLK6ISb00RIO6cwjNM5KYFaQ/9H4WFNTCzvbUfcz/tWY/Cpq7HAPvx7PkuCx9I4J6BJgTb5MO9wVM/maP/oC8YITyXYn1AvqOIlWdjm3m+ZwqNVps7AnmDjz6n/i90T4SNNHbLbXwoSMgbk4z3nOUnhfdPU+jl1NwnubRWG2UcLKn8ryHnGlwoc4fq322LDWmq3EKy61K2yt9lk9wXzC6ul3rQCPr2sy+IdZOcsPbjT/sxfzSfNKTmGo+A1/ACy/0RSExht3iyC3zJU7N8xnf8BK2C9mV4B1oKBYaWWOz1fQFfDkfFVNjOxLUK7ZqPFdDGCBk4wS9pvoXyNk/etKPBBYXrU5INIKkmoBpOX6indV84BfijPG7oVI4lyr+OSQ40A49P41TK1XcvBprh3hu4qQ/3trU3N4YFp+3TIecdGSJGBg3zmFPvr8jPlQQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(376014)(82310400026)(36860700016)(1800799024)(10067099003)(11063799006)(4143699003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	915P4r3qnPyh8r8Q3/c21yEu3kUYKF6d+CKa5naiRM2IDILqJkqKEj587dBEK8jNOJXCPGl2ZyPY9pyhmG//1FtRK9+vo6PB4yeb4izhoYdg2RHKcA9eIaO9s3tp3fkb06Pho57PbqM0t2DUVj72clLuzuj09wRZHiOEiZadyXniDLP02YZPwHJvjabNooL7O0tPtoFWVT0LKoqgnCq5qnFZ14K8a05BXYVvVl/AlsR0YGlPplv6xFOeP5ZcId9Gjt3e4laoYnOUn5mD5YtWk3CjCn9AEmNl5Xa33tGHARoVwOc42jUg07tB4WfLpg3G/mFKBHN2iYj+4d7l1nPe0b1Tv5D/NxO5aiOOoUvg1ElCJRRdl3IDxNwJgOMh5lIhWwy2s2gAJbN0vT4h97vWeMAX4L8FjYOgvWTG50VI5Nt21THG+F3jyJjta4qFQ+dH
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2026 14:21:16.5342
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 068f67e8-5f4c-4f7c-f67f-08df18b4c3b6
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ1PEPF000023CB.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4241
+X-purgate-ID: tlsNG-ef75cf/1790087077-350CDAE4-2C924FA1/0/0
+X-purgate-type: clean
+X-purgate-size: 895
 
 
 
-On 9/10/26 11:34 AM, Baptiste Le Duc wrote:
-> The existing SFENCE.VMA before the satp write only orders the page table
-> stores from setup_initial_pagetables() against subsequent implicit reads.
-> It does not prevent the CPU from speculatively caching translations after
-> the fence retires.
+On 22-Sep-26 08:39, Mykola Kvach wrote:
+> The allocated_irqs bitmap in the existing vGIC implementation stores eSPI
+> allocation bits immediately after the regular vIRQ bits.
+> vgic_reserve_virq() converts an eSPI INTID to this compressed bitmap index,
+> but vgic_free_virq() used the raw INTID.
 > 
-> According to the RISC-V Privileged specification, implementations are
-> permitted to speculatively cache Bare-mode identity mappings. Furthermore,
-> selecting MODE=Bare (which happens during check_pgtbl_mode_support())
-> requires zeroing the remaining fields of satp, causing ASID=0 to be
-> actively used in Bare mode. Consequently, the TLB can be polluted with Bare
-> identity mappings tagged with ASID=0.
+> Freeing INTID 4096 therefore clears bit 4096 instead of the first eSPI bit.
+> This writes beyond allocated_irqs and leaves the intended eSPI bit set.
+> Valid eSPIs reach this path during DOMCTL bind failure cleanup and unbind,
+> and during vPL011 teardown.
 > 
-> Once satp is written to enable Sv39 translation, these cached identity
-> mappings (tagged with ASID=0) can shadow the true Sv39 translations. This
-> would lead to translation failures since turn_on_mmu() jumps to a
-> non-identity-mapped linker address.
-> 
-> Fix this by adding a post-satp-write SFENCE.VMA to invalidate any stale
-> translations (including Bare-mode identity mappings under ASID=0) before
-> jumping to the virtual address space.
-> 
-> Assisted-by: Claude:claude-opus-5
-> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-> ---
-> Changes since v1:
-> - rewrite commit message
-> ---
->   xen/arch/riscv/riscv64/head.S | 1 +
->   1 file changed, 1 insertion(+)
-> 
-> diff --git a/xen/arch/riscv/riscv64/head.S b/xen/arch/riscv/riscv64/head.S
-> index 9c40512e61..7f6edc972f 100644
-> --- a/xen/arch/riscv/riscv64/head.S
-> +++ b/xen/arch/riscv/riscv64/head.S
-> @@ -98,6 +98,7 @@ FUNC(turn_on_mmu)
->           srli    t1, t1, PAGE_SHIFT
->           or      t1, t1, t0
->           csrw    CSR_SATP, t1
-> +        sfence.vma
->   
->           jr      a0
->   END(turn_on_mmu)
-> 
+> Add virq_to_idx(), the inverse of idx_to_virq(), and use it when reserving
+> and freeing vIRQs. Validate a vIRQ before clearing its allocation bit.
+Please also add this validation (just vgic_is_valid_line() guard) to a new VGIC
+vgic.c. It's eSPI agnostic and we should keep them in sync if possible.
 
-Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-
-~ Oleksii
+~Michal
 
 
