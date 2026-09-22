@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9BAA5C98302
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 13:58:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428890.1651801 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DA37BC98302
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 13:59:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428895.1651810 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x910y-0000vz-Qp; Tue, 22 Sep 2026 13:58:32 +0000
+	id 1x9127-0001Z3-3K; Tue, 22 Sep 2026 13:59:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428890.1651801; Tue, 22 Sep 2026 13:58:32 +0000
+Received: by outflank-mailman (output) from mailman id 1428895.1651810; Tue, 22 Sep 2026 13:59:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x910y-0000vs-Ny; Tue, 22 Sep 2026 13:58:32 +0000
-Received: by outflank-mailman (input) for mailman id 1428890;
- Tue, 22 Sep 2026 13:58:32 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x910x-0000vi-Vr
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 13:58:32 +0000
+	id 1x9127-0001Yw-0d; Tue, 22 Sep 2026 13:59:43 +0000
+Received: by outflank-mailman (input) for mailman id 1428895;
+ Tue, 22 Sep 2026 13:59:42 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x9125-0001Yk-V9
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 13:59:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x910w-00AZCX-WE
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 15:58:31 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x9125-00HYlr-80
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 15:59:41 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab28979-bab6-0a2a0a5309dd-0a2a4508af1c-28
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 15:58:30 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ab289ca-bab6-0a2a0a5309dd-0a2a450b8fe6-22
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 15:59:41 +0200
+Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab28986-f659-0a2a45080019-4a7de18cf71d-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 15:58:30 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49b912df756so29140045e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 06:58:30 -0700 (PDT)
+ id 6ab289cd-b7e8-0a2a450b0019-4a7de14ce2ae-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 15:59:41 +0200
+Received: by mail-wr2-f12.google.com with SMTP id
+ ffacd0b85a97d-482f6350f89so2507993f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 06:59:41 -0700 (PDT)
 Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
  [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49fd8b97385sm84318545e9.2.2026.09.22.06.58.29
+ ffacd0b85a97d-48862774882sm5506267f8f.13.2026.09.22.06.59.40
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Sep 2026 06:58:29 -0700 (PDT)
+ Tue, 22 Sep 2026 06:59:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,169 +54,87 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790085510; x=1790690310; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790085581; x=1790690381; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=PR9XOsE+XnvE6AH4I0DYy0W5jkKN9kElBVLGNxt+jAg=;
-        b=O3FjBWR/poNNOoczkreQmfbqgqPVCVizqoY7mZb7Stg3J7p2J5Yd5KWuQuBH+D+kMs
-         3B+z24ZLPhjQeIsH2MSyKqAdxFrgXCeGtDb01pKpV6ANwBKlyHU2/JVIFoe8I+yvtEPA
-         b509cAiICRU+L0MSxTouaasWp1polXz1M+I6ypgVsWyWVcoLU8yFymzcVSMpJtpIEm8H
-         wDOddKFzHjouyYtqMU1bFaeyOY5ZQu5p5fyUqtxg3AQFWBEN9SXlHYcBZPCpxsAp7EsK
-         iVHdoR1C3MhKCXxui+yqk3h7F7Anoz1wa2YozJNFDJ5bG3FZL9QN5JHlDujgxpvoBgwo
-         KbiA==
+        bh=CaOfa4yq+8f+PXaRAVsgS+seiDe9BQ6P4dSHmnDrlbQ=;
+        b=lp9YUGuj6OGE4wZXnk1VwE+i1clhqkgd8LPjN5swSwNnStfIp/2Aaz2jENTAcIoOIz
+         YdxnFKdoYeU1wvWmNq5QwJE5Xs7QOuzLpJ7tGiN6UGB2ZpE7uRLV1kv18U9U4mLsIZE5
+         6S5BGxZdYC1/giDAzNhSWTe0UnQbc8k1mhTschDndJMFIOJJ4cGY8mye08/DfHjEqKpk
+         miDXnI34F+SEjleFEYjvtof9UTHxWX8PyKrh94kLefxhe/KQk9M58Hukysmwfa5yASkq
+         Zz9r+tgS21L3o5QD5gZkKqokft5wwy+4XX0zN+gNwZBOoqg3of2R8yda1dWFTWeU2t0P
+         76JQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790085510; x=1790690310;
+        d=1e100.net; s=20260707; t=1790085581; x=1790690381;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PR9XOsE+XnvE6AH4I0DYy0W5jkKN9kElBVLGNxt+jAg=;
-        b=fBFXzAidDbJeg7EFtWfqGeirKEIJgcUZQLoTkmMPfexX1wOgnX2nSO5RpBsn/9w/5E
-         w76sYwK1DcprQxEFmuH/DYMqriZ3MX7JZRz+7zDyusE1JldMbIf2LqQsCGkA/VKpO95Y
-         Fm3GCzQczhQhN0kQBUNNlccvWLUKLiYBbx90X4nJthRmf/YjE9o+ryVcjnNjH5lrSOVS
-         GBp3xafoR8AL1rK5uz278bsR/GT/wPdlhu7DAOLOY8fzeNFDsL62Tigmhu4W7Evut2kN
-         aPVyZo40XJJJtbg2VElVF/LxdBPIAZjQaqSH4647Z/1IOnTT7SZ7neVlp7vXFSiwuuaN
-         5IsQ==
-X-Forwarded-Encrypted: i=1; AKwUvBylJysLO2d68ALgjGJV3D/r2Bup6/tnDqqiipSj3eD2UcvBrFecLP5L2VmpCk5XqWSt1oLVCMKrkpE=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mmu5dWxN6YtU6aC1NeBAPhHX7LLJr/A2qkzmnEz8HSDnK69jhZ
-	3Kysi54K4UQco5J21KK4pEH+GqD7GOt+tKOlhfo2fJGUh6x2xKZvucRk
-X-Gm-Gg: AYBFou036iz4jrkofNaUQx9AzWDoSOt+iOcm7zOtNYxB2aM6OAKI2Lq/Mc+zuImnpJQ
-	TPkoF9ninvaUsE5NwxvEaqdN7RA3Q4k8J5aeL9gLRqdQUyKY7+LO2dM1eOarOQmIg7mGVDU0YwX
-	nVVvsoS9RFMPciei2J8WSByJ+pfb/CYwQyep0Ww39uoeysjgHeLADRmHT4/w84LUV1hwECvB95x
-	bnNjkJRZsIupG88GtzSOUQqrhIC7r3ZOpGD60ELHXoRVeVTk0oF2A8JEPzXHpB+FfqyoVWzjXO/
-	b46BZPrhihc2tmY7fr+LlycXlgo+55sIcy0OHUcE/l1+c3wLgaaixyw4/sq4KsVCovwcibTgohz
-	5taVW1fyYJA97RA9OsMk2EE/dwWmqOF57pKu83MuSdvCFJYffCdaAzNZw7xmmkWC6g9+t4h0c0h
-	DceiBOueTjvSwFojLinY2tjJqRze6bWz1xzBVVzrLM0EmM6RVaqkir3M/b3/swNsiLa+8Qkg0fV
-	MNeugB7NNVO+GJRKsdg+cVTYVcloclRI7hdiDGdWpyJkt7S3g==
-X-Received: by 2002:a05:600c:1c1a:b0:49d:1de5:ce0a with SMTP id 5b1f17b1804b1-49fc56d4238mr246209275e9.13.1790085510219;
-        Tue, 22 Sep 2026 06:58:30 -0700 (PDT)
-Message-ID: <f0cd866e-de50-48d8-bb81-a1fc116658d3@gmail.com>
-Date: Tue, 22 Sep 2026 15:58:28 +0200
+        bh=CaOfa4yq+8f+PXaRAVsgS+seiDe9BQ6P4dSHmnDrlbQ=;
+        b=uOL/XAcWOMJKt+zZY9h4N4elu77QM3UfrkQNWmxof8bD11hFxguR2oOPd3Szt9VnTe
+         68Gp7wb97e5/KvO5wlmzhN9d173oybsnHT8ySRIvFPLmdInD0AJnKjsSyV37jp8D0y2H
+         +9LVjYE/ByTkFdkL2Hd+F7aqBkJNiMGKl536ox0yPmDeOokQxkMgfTV8QPAleehpPUvq
+         5juOOZ+xKl+cY7NfXgufGTHoCpBKDuc4U1dMx3KDJ7FW2kATKEO/qrZf0eZ+7qsUliUX
+         QLgFYP4K/DTqOmicc3G3yfw8a+topWlvyW3+DG2HSLGuDI1JRuKV6HTRaocXiRtC6Ybq
+         m2lA==
+X-Forwarded-Encrypted: i=1; AKwUvBxx95rLgyciUqw+co60g4AxyFfEtM5+b9OWunBNAIFqN+Hiv2MVPfe0ssX0uB86GtiIr0Eg9CEX7Uc=@lists.xenproject.org
+X-Gm-Message-State: AFuF++msmfTj8qqVhQPiLg1NTTRbcAIultBJTtC48ZW2CpS7Fe3QpTqT
+	4wbO/jRguCjCDtRtMBGn1B7qFGrpxSsfgioD48bIPEWMlxLoY8zCgNnW
+X-Gm-Gg: AYBFou1Vq57OxNrVqIcxAUTOzmJOI19mFT6u22SfxkpWMc1qO4kBDP+SeNU9yJRtSWm
+	djS1atB7bHtbQIX0s0cvnkD7ST6c/QvxJv8SUhQtm8qij8oD/H0LpLAvYtoCT+RBZiDVUm26H6x
+	es9kFagn53vxuctppkUwuiWKtPkklbPcbPygbaWCq/c6ReKIK+mEjvKBhjnrHs9/4cM26i8wBZe
+	KhSMeFddrx1/Moji2I3dbZylEOsgwht8dflXxe92shTtsXulll1+DpvhRrDh1O9E5GiqstTe93t
+	H3yE6CIWsLTtz+QWtPky/mB0knaHQyZtMpAkvV65T7GITW1I7WdmxmJLmjMSi5Sd6oorpXEdnPp
+	ZtN21xVpDT8wu9Y2VqonvmR7gmUslrZhHG7QEn7ATDA/zgWUg3uH6RIxk9Uu3rOTp0cP7GPSLmC
+	fLAElPdru96JEVYfXRbTybDrABLxR1A/SUGNmFYnyWquNxLgRkZs8zhJ1bV5SV9xgbL91/Lbq4j
+	/7W/23cvHLUqgBV7JKZhk5iPLJATZr1KDXY8W6IpTQeQVPcMJwor2t3gEbv
+X-Received: by 2002:a05:6000:2608:b0:487:91e:d8ed with SMTP id ffacd0b85a97d-4871e20b210mr20498734f8f.2.1790085580550;
+        Tue, 22 Sep 2026 06:59:40 -0700 (PDT)
+Message-ID: <038aa8c1-915d-488e-89ac-004b1b8bec70@gmail.com>
+Date: Tue, 22 Sep 2026 15:59:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 38/39] xen/riscv: implement continue_new_vcpu()
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <a282887cc08cd9b05f59d46cab9377915e83c61d.1787838835.git.oleksii.kurochko@gmail.com>
- <8dbc4ba6-bf92-4e9f-b4b6-7286d5a96443@suse.com>
- <96f66feb-8889-4475-b39f-ed52b1f58a68@gmail.com>
- <a88e1326-14da-4613-9d01-2e374b574467@suse.com>
+Subject: Re: [PATCH v3 4/4] CHANGELOG: add removal of grub-pv
+To: Juergen Gross <jgross@suse.com>, xen-devel@lists.xenproject.org
+Cc: Community Manager <community.manager@xenproject.org>
+References: <20260922072711.385956-1-jgross@suse.com>
+ <20260922072711.385956-5-jgross@suse.com>
 Content-Language: en-US
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <a88e1326-14da-4613-9d01-2e374b574467@suse.com>
+In-Reply-To: <20260922072711.385956-5-jgross@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1790085510-D5F4787B-C2AB749A/10/73395122804
+X-purgate-ID: tlsNG-42698a/1790085581-AAAD89EA-B9621E1B/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3934
+X-purgate-size: 940
 
 
 
-On 9/22/26 12:20 PM, Jan Beulich wrote:
-> On 22.09.2026 10:23, Oleksii Kurochko wrote:
->> On 9/21/26 2:12 PM, Jan Beulich wrote:
->>> On 27.08.2026 17:21, Oleksii Kurochko wrote:
->>>> continue_new_vcpu() is the arch hook invoked the first time a freshly
->>>> created vCPU is scheduled. Implement both cases it has to cover:
->>>>    - for the idle vCPU, switch to its own stack and jump to idle_loop();
->>>>    - for a guest vCPU, restore hstatus and enter the guest through the new
->>>>      return_to_new_vcpu() path in entry.S, which loads sepc, passes the
->>>>      hart id in a0 and the DTB address in a1 as expected by the RISC-V
->>>>      boot protocol, sets sstatus.SPP and executes sret.
->>>
->>> Is this a requirement for all CPUs, or just for the boot one? (I can't
->>> quite see why secondary processors would need passing a DTB address.)
->>
->> It is requirement for boot one. For secondary processors it is HSM boot
->> data which is passed to sbi_hsm_hart_start() and then intercpeted by Xen.
->>
->> At the moment of writing of this commit message we have only boot CPU
->> and so only DTB could be passed.
+On 9/22/26 9:27 AM, Juergen Gross wrote:
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> ---
+>   CHANGELOG.md | 2 ++
+>   1 file changed, 2 insertions(+)
 > 
-> That you're talking about Xen. Despite Xen being UP only right now, guests
-> still can have more than one vCPU, can't they?
+> diff --git a/CHANGELOG.md b/CHANGELOG.md
+> index aa1a777dd4..a2dd01037b 100644
+> --- a/CHANGELOG.md
+> +++ b/CHANGELOG.md
+> @@ -23,6 +23,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
+>        The only known user was the classic-xen fork of Linux.  This does not
+>        affect Xen kexec support in the kexec-tools package.
+>      - The example stubdom "c-stubdom" has been removed.
+> +   - The grub-pv stubdom has been removed.  A grub-pv stubdom from an older
+> +     Xen version (e.g. 4.22) will still work with Xen 4.23.
+>   
+>   ## [4.22.0](https://xenbits.xenproject.org/gitweb/?p=xen.git;a=shortlog;h=staging) - 2026-07-30
+>   
 
-They can.
+Acked-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
-> 
->> I can update the commit message and the comment in return_to_new_vcpu()
->> to tell that it could be DTB address for boot cpu and/or for secondary
->> CPUs HSM boot data or it will be better to add info about HSM boot data
->> during and an introduction of secondary CPUs support?
-> 
-> As per above you want to deal with multi-vCPU guests right now.
-
-Then I will update the commit message and the comment in 
-return_to_new_vcpu() to say that a1 holds the DTB address for the boot 
-vCPU, and for secondary vCPUs the opaque value the guest passed to SBI 
-HSM hart_start().
-
-For commit message:
-
-  - for a guest vCPU, restore hstatus and enter the guest through the new
-     return_to_new_vcpu() path in entry.S, which loads sepc, passes the
-     hart id in a0 and, in a1, either the DTB address (boot vCPU) or the
-     opaque argument of SBI HSM hart_start() (secondary vCPUs), as 
-required by the RISC-V boot protocol and the SBI specification, sets 
-sstatus.SPP and executes sret.
-
-In the code:
-
-         /*
-          * .a1 holds the DTB address for the boot vCPU, or the opaque value
-          * passed to SBI HSM hart_start() for secondary vCPUs
-          */
-
->>>> +        /* Set guest mode to supervisor */
->>>> +        li      t0, SSTATUS_SPP
->>>> +        csrs    CSR_SSTATUS, t0
->>>> +
->>>> +        /* Enter guest */
->>>> +        sret
->>>> +END(return_to_new_vcpu)
->>>
->>> Aiui SRET does not switch stacks. Shouldn't you therefore clear sp here?
->>> And perhaps also other GPRs, not the least ra? Exposing hypervisor
->>> register values to guests is, well, a bit of a problem.
->>
->> Good point, sret leaves all GPRs as they are, so the guest would indeed
->> see Xen's sp, ra and friends. Only a0 and a1 are architecturally
->> meaningful for a booting hart, so I'll clear every other GPR right
->> before sret.
->>
->> I will add the following before sret:
->>
->>           /*
->>            * sret doesn't switch stacks and leaves the GPRs alone, so every
->>            * register which isn't meaningful to the vCPU being started
->> has to be
->>            * cleared here: otherwise the guest would see Xen's values, sp
->> (this
->>            * vCPU's Xen stack) and ra among them.
->>            */
->>           .irp reg, ra, sp, gp, tp, t0, t1, t2, s0, s1, a2, a3, a4, a5,
->> a6, a7, \
->>                     s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, t3, t4, t5, t6
->>           mv      \reg, zero
->>           .endr
-> 
-> At which point discussing the clobbering of t0 in the comment ahead of
-> the function also isn't needed anymore.
-
-Indeed, I'll drop it.
+Thanks.
 
 ~ Oleksii
-
 
