@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1AFEC982FA
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 15:21:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1429148.1652080 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37A4DC982FA
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 15:29:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1429158.1652089 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x92JM-0000sY-0n; Tue, 22 Sep 2026 15:21:36 +0000
+	id 1x92R2-000327-PH; Tue, 22 Sep 2026 15:29:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1429148.1652080; Tue, 22 Sep 2026 15:21:35 +0000
+Received: by outflank-mailman (output) from mailman id 1429158.1652089; Tue, 22 Sep 2026 15:29:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x92JL-0000sR-U4; Tue, 22 Sep 2026 15:21:35 +0000
-Received: by outflank-mailman (input) for mailman id 1429148;
- Tue, 22 Sep 2026 15:21:35 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1x92JK-0000sH-Rd
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 15:21:34 +0000
+	id 1x92R2-000320-MV; Tue, 22 Sep 2026 15:29:32 +0000
+Received: by outflank-mailman (input) for mailman id 1429158;
+ Tue, 22 Sep 2026 15:29:31 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x92R0-00031n-SJ
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 15:29:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x92JJ-00GyPL-SC
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:21:33 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x92Qz-00Aotb-KT
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:29:29 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6ab29ced-e002-0a2a0a5209dd-0a2a450ce03e-34
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 17:21:33 +0200
-Received: from [40.107.209.18]
- (helo=PH8PR06CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6ab29cfb-f479-0a2a450c0019-286bd112b9ef-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 17:21:33 +0200
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by BL1PR03MB5992.namprd03.prod.outlook.com (2603:10b6:208:30a::20)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.14; Tue, 22 Sep
- 2026 15:21:30 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0428.015; Tue, 22 Sep 2026
- 15:21:30 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ab29ecf-8faa-0a2a0a5109dd-0a2a4501e7c2-36
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 17:29:29 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ab29ed9-5984-0a2a45010019-4a7de18ced81-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 17:29:29 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49b912e4ad9so25497845e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 08:29:29 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
+ [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49fddfd158bsm2148465e9.6.2026.09.22.08.29.27
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Sep 2026 08:29:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,167 +52,365 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=iD+eqMeUeRMYVXOqvGEcrD9UimyvpCQ39HB17t72w0LUxy3j1uuiI72DD76v1DKYRe5zGInyROwQpHvViROUMFml8P7TKV36utmgf1QcAQQKKrEdtDIqsqqMbzYNq5N++jGhWbb+Wn3hp341sxY8+GI3OYASLNSs+HHzMe9ypWgzf21sf+P87KTYoWjAd3LjmsDtX33QffR6q0Pwtqgm4ChDyk0k7zWFVKoXwigPNFzQda1llstXJ0pHSM+vaj3K3lUWwYpjmDN/VU3wDxZRSOO47I/XHuEXaizJ4VCILNonyW1AC2/SBd0QiPjU/6HVCks5NKXuDLUdlE7eSCMOLg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=kEI/kIIOd6UTcjRAbecf/3Wfz1WNDPukW79dqipR1yQ=;
- b=zEl9RhiSh8B6jJU65h4/2f8Ot7SEGSbH/o0k7fhBGWacSPU+BA7H2cp/oZpnsJsvJK+QehoyXtlacDAAitEdjiTV7DdW5eHpHT1OGkhGMmt1/IGhtFJTO3oT81q+2DEbKpcLw8BoAmMMteYWrh7I89jhJsDkI3K+FYuQnjAtnB/fwkLqo0LBQED/mQkjfbC5WUV18DtGTZVF6S997t80Oo/J4Nq8wY7J0vAS/dZUkVJBLO9M5KXivAfOddRPiPguJigklTaEivcAPmsIeOdToKoNsfBB+j/ILUcCqJqvKy09fOsXbvLvgtONScCWLPlPASzs4gzvG0eAQFr1PPGEiQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=kEI/kIIOd6UTcjRAbecf/3Wfz1WNDPukW79dqipR1yQ=;
- b=Gx7ADZ3DJXZR6gAWNPkoDubm9ZbpiltYQ0Gqmikmdbwp3XYNJrhhcFRXwfYQ47RprCBObPgPzTrUkAqLkZg3NanGK2Swr81/0wxhMAr+jyMDJSKZxiFu4f1d6+8Qri6VNzrnv/LTHM5uiJaM2NQCArUoGP/cErH02QlpkunmVlU=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <290d1ac5-a9b8-4576-9e9e-2b44d377a76a@citrix.com>
-Date: Tue, 22 Sep 2026 16:21:25 +0100
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Daniel Smith <dpsmith@apertussolutions.com>
-Subject: Re: [PATCH v2 04/14] x86: restrict PHYSDEVOP_* when PV=n
-To: Jan Beulich <jbeulich@suse.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <ef09b072-c935-459e-bf8b-81c96ff9cc46@suse.com>
- <664d2a63-2745-4c33-9748-283aefce2433@suse.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- xsFNBFLhNn8BEADVhE+Hb8i0GV6mihnnr/uiQQdPF8kUoFzCOPXkf7jQ5sLYeJa0cQi6Penp
- VtiFYznTairnVsN5J+ujSTIb+OlMSJUWV4opS7WVNnxHbFTPYZVQ3erv7NKc2iVizCRZ2Kxn
- srM1oPXWRic8BIAdYOKOloF2300SL/bIpeD+x7h3w9B/qez7nOin5NzkxgFoaUeIal12pXSR
- Q354FKFoy6Vh96gc4VRqte3jw8mPuJQpfws+Pb+swvSf/i1q1+1I4jsRQQh2m6OTADHIqg2E
- ofTYAEh7R5HfPx0EXoEDMdRjOeKn8+vvkAwhviWXTHlG3R1QkbE5M/oywnZ83udJmi+lxjJ5
- YhQ5IzomvJ16H0Bq+TLyVLO/VRksp1VR9HxCzItLNCS8PdpYYz5TC204ViycobYU65WMpzWe
- LFAGn8jSS25XIpqv0Y9k87dLbctKKA14Ifw2kq5OIVu2FuX+3i446JOa2vpCI9GcjCzi3oHV
- e00bzYiHMIl0FICrNJU0Kjho8pdo0m2uxkn6SYEpogAy9pnatUlO+erL4LqFUO7GXSdBRbw5
- gNt25XTLdSFuZtMxkY3tq8MFss5QnjhehCVPEpE6y9ZjI4XB8ad1G4oBHVGK5LMsvg22PfMJ
- ISWFSHoF/B5+lHkCKWkFxZ0gZn33ju5n6/FOdEx4B8cMJt+cWwARAQABzSlBbmRyZXcgQ29v
- cGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPsLBegQTAQgAJAIbAwULCQgHAwUVCgkI
- CwUWAgMBAAIeAQIXgAUCWKD95wIZAQAKCRBlw/kGpdefoHbdD/9AIoR3k6fKl+RFiFpyAhvO
- 59ttDFI7nIAnlYngev2XUR3acFElJATHSDO0ju+hqWqAb8kVijXLops0gOfqt3VPZq9cuHlh
- IMDquatGLzAadfFx2eQYIYT+FYuMoPZy/aTUazmJIDVxP7L383grjIkn+7tAv+qeDfE+txL4
- SAm1UHNvmdfgL2/lcmL3xRh7sub3nJilM93RWX1Pe5LBSDXO45uzCGEdst6uSlzYR/MEr+5Z
- JQQ32JV64zwvf/aKaagSQSQMYNX9JFgfZ3TKWC1KJQbX5ssoX/5hNLqxMcZV3TN7kU8I3kjK
- mPec9+1nECOjjJSO/h4P0sBZyIUGfguwzhEeGf4sMCuSEM4xjCnwiBwftR17sr0spYcOpqET
- ZGcAmyYcNjy6CYadNCnfR40vhhWuCfNCBzWnUW0lFoo12wb0YnzoOLjvfD6OL3JjIUJNOmJy
- RCsJ5IA/Iz33RhSVRmROu+TztwuThClw63g7+hoyewv7BemKyuU6FTVhjjW+XUWmS/FzknSi
- dAG+insr0746cTPpSkGl3KAXeWDGJzve7/SBBfyznWCMGaf8E2P1oOdIZRxHgWj0zNr1+ooF
- /PzgLPiCI4OMUttTlEKChgbUTQ+5o0P080JojqfXwbPAyumbaYcQNiH1/xYbJdOFSiBv9rpt
- TQTBLzDKXok86M7BTQRS4TZ/ARAAkgqudHsp+hd82UVkvgnlqZjzz2vyrYfz7bkPtXaGb9H4
- Rfo7mQsEQavEBdWWjbga6eMnDqtu+FC+qeTGYebToxEyp2lKDSoAsvt8w82tIlP/EbmRbDVn
- 7bhjBlfRcFjVYw8uVDPptT0TV47vpoCVkTwcyb6OltJrvg/QzV9f07DJswuda1JH3/qvYu0p
- vjPnYvCq4NsqY2XSdAJ02HrdYPFtNyPEntu1n1KK+gJrstjtw7KsZ4ygXYrsm/oCBiVW/OgU
- g/XIlGErkrxe4vQvJyVwg6YH653YTX5hLLUEL1NS4TCo47RP+wi6y+TnuAL36UtK/uFyEuPy
- wwrDVcC4cIFhYSfsO0BumEI65yu7a8aHbGfq2lW251UcoU48Z27ZUUZd2Dr6O/n8poQHbaTd
- 6bJJSjzGGHZVbRP9UQ3lkmkmc0+XCHmj5WhwNNYjgbbmML7y0fsJT5RgvefAIFfHBg7fTY/i
- kBEimoUsTEQz+N4hbKwo1hULfVxDJStE4sbPhjbsPCrlXf6W9CxSyQ0qmZ2bXsLQYRj2xqd1
- bpA+1o1j2N4/au1R/uSiUFjewJdT/LX1EklKDcQwpk06Af/N7VZtSfEJeRV04unbsKVXWZAk
- uAJyDDKN99ziC0Wz5kcPyVD1HNf8bgaqGDzrv3TfYjwqayRFcMf7xJaL9xXedMcAEQEAAcLB
- XwQYAQgACQUCUuE2fwIbDAAKCRBlw/kGpdefoG4XEACD1Qf/er8EA7g23HMxYWd3FXHThrVQ
- HgiGdk5Yh632vjOm9L4sd/GCEACVQKjsu98e8o3ysitFlznEns5EAAXEbITrgKWXDDUWGYxd
- pnjj2u+GkVdsOAGk0kxczX6s+VRBhpbBI2PWnOsRJgU2n10PZ3mZD4Xu9kU2IXYmuW+e5KCA
- vTArRUdCrAtIa1k01sPipPPw6dfxx2e5asy21YOytzxuWFfJTGnVxZZSCyLUO83sh6OZhJkk
- b9rxL9wPmpN/t2IPaEKoAc0FTQZS36wAMOXkBh24PQ9gaLJvfPKpNzGD8XWR5HHF0NLIJhgg
- 4ZlEXQ2fVp3XrtocHqhu4UZR4koCijgB8sB7Tb0GCpwK+C4UePdFLfhKyRdSXuvY3AHJd4CP
- 4JzW0Bzq/WXY3XMOzUTYApGQpnUpdOmuQSfpV9MQO+/jo7r6yPbxT7CwRS5dcQPzUiuHLK9i
- nvjREdh84qycnx0/6dDroYhp0DFv4udxuAvt1h4wGwTPRQZerSm4xaYegEFusyhbZrI0U9tJ
- B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
- d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
- 6+ahAA==
-In-Reply-To: <664d2a63-2745-4c33-9748-283aefce2433@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: VI1P189CA0032.EURP189.PROD.OUTLOOK.COM
- (2603:10a6:802:2a::45) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790090969; x=1790695769; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=8PGtmnDxBnGxAZeoBuBu672Y7HTrakHFY0FKpHr3+Vc=;
+        b=gv4RdlwFnxdqM9Zd5iM6XmWS8aKHl7xGNmCDaWGfYXrbY1pKva+uuLZy3mhJi+X1y7
+         NdnvvTlDD1q4zb8xIfkBbIYhLgSAhoySYxsSwgghJyp6h5zzTxrqRgheA7exJJooP+aa
+         lXO/FvHb563JCOPjCZ80+QnAo/fkmqa02KzhC6eNF6V2Mb1Y5+WJKCW9mMh+tARLOmFE
+         iJUxh5MtFE8FTJw4Gr0QDuk7MKQvkmXbKd9ndTDbodtMAZFKjH79+IpHHCfWakAJ4EOV
+         rbk7Wv9JlsRffAtoiHou1q7YfEPZBg+ghcxZhykRkZ2t3EFxHmcAqrlh1q7H62ua+uDX
+         W/NA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790090969; x=1790695769;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=8PGtmnDxBnGxAZeoBuBu672Y7HTrakHFY0FKpHr3+Vc=;
+        b=JxDQR8ZkU3kpaFCnIb8cTFdPdkUZsLyOmD5Z0x1/TSRssnm6XhISMUHN+Hr1T+mZrU
+         Fv1gQvhjY65a5qrTY8iEUfoiMFLkZvYWQE1wKnpXjQle+JDDUHhK2gupLD9H0NM6taRj
+         F77gJxy/SU2lTA9OfTm+rmcRFWo65fItZdrPMs3MlNS83581ISqp8/DtzZ0nbeCARcES
+         oIVohWpyNflDKMMWoLmd4N4ibwoMFTzxwl0SaS6yE2HqD1EG43oNYHJf9ow+BFqCfuv2
+         TfW7DAoijOno3v0c2BPw5D6xk73CU5xjgy5DnxQi3Gyo0ChP2JaDRN96WCo2a2bV0x3X
+         qa4Q==
+X-Gm-Message-State: AFuF++nYoIA32dYDkKBV2I9RY3ErR21qd7MMqcG0PCDwxpffIAASHYiX
+	AC8YaPsLtebVDHHhkfvfo0eDLDFoR4s5Hf6CH1+ny+Wsd6QN4/7d3CPP
+X-Gm-Gg: AYBFou0FSvrB54F0UDh0gZ2vdim5hj5ZCTeQom0mhDMW+Aydp7uYXek9pn6AWFNc6q+
+	yUeCendZC1BI8KtuYJ94d8ZxgB5VdhH2XRNY2VGccPeH5V1B1rlrmGvrEch+MdLVDSRbcHlhCSK
+	GvlRu/v/mU//eos/203UbeJ2oLfChfum9JMq3F/VtMVCq4Ede8mlOj/HK+CgJBpOdv+SYq4d1ju
+	p5rDjCHvlB91YlpN6AXwTv5nh+iE3Cx8BL8UD0/O5N2FslO3ZNLulZOGEzv7RBs6FRnVo6agVyn
+	/yvBfr0yhVMxAwmYh527hRSPLrIhsJJL0D8jqvI7H+sDG2U99y7wvmjNeFeixIWaICaTl2MFLAD
+	NxpKm5LKacqaU0Lmo3oVsuqecr/2KcjsnqR7lVA4jw2jGR8TBmyfbl/E6Onp1/fUW01/ueVA3LX
+	lStET9b8UZiRmuJSFYie2KwAhNV5KKo3H0YKILkWEg1MlNdsibQIzdemuCabUtEU9RPLGZdHM/H
+	BYxsYZlz3BTe597tpr/bjlde+/Pjsh0C1o=
+X-Received: by 2002:a05:600d:6409:20b0:49f:cbad:eef7 with SMTP id 5b1f17b1804b1-49fcbadef22mr123063165e9.33.1790090967939;
+        Tue, 22 Sep 2026 08:29:27 -0700 (PDT)
+Message-ID: <ab528209-4a06-4f30-8cd7-af54c7c33e4c@gmail.com>
+Date: Tue, 22 Sep 2026 17:29:26 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|BL1PR03MB5992:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3b6a05a6-fd86-4164-f559-08df18bd2d60
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|4143699003|6133799003|10067099003|11063799006|56012099006|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	gmx9byPQOysiQJWUO5wVZm3kLvgP/kfuw8UMBXRBoOulp+TTu/ulUQV670JNzgpM4T+j5eviJJkAZQhCMA5R6/hdCIhix5bzOp8PYHTTKtVcXGXxwrUARDkFQDVpenftEulxQZ8qRW5GCXga2yMVdGQSZoAbtU05WPu7xlDpVABv/9GDFzPxFcZXoOUJL/K2MYl7j2D1I2zckq/bLkJe2bryNxSdDafvB30aCo21YcQVqBQxY/8KoFJFYf+eNmIPnejZ9EJiIloGiaBamJthxe7LyBfA9IOedNdUk1OSkSOiZXeHKulkwnKQJT6weivB357y9zzbQpUDy9I2UH8wGy8ToPkJ2UJy/sDhwhks9DZD0q/YBs0+EuQAeHBIMERbn+HfRtZmRV3JVvpPe/5+Ny5mPMgLXL//9mrDcVNvk1JyHwEqVX4FDGGYyEpGts/4zFqbfiRU3XMe1nriSQVnaaOelGYnMbk7MffcWkpnbpz3yakzIYT1SQvqbl8rder+MNaGCXiYh541BQRT6sw72KEUjoCwA+DhC1dGyvz69YNkGjU/EAFy0UahFH3YfbXJwlpJazQRH8mfwta7iMIdR5fWTBPQcZUpU1eyRf6DYHRIzld1cvYVbiEERejbOE85WLTgMAiYHtnowLgSu79nyB1B6NUbwY/OClt1wrT4lJ8=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(4143699003)(6133799003)(10067099003)(11063799006)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?TUNrS0RGQkxFZVJyTjBEemViZ01KVFRpbC93YzdaRUVZa3EvNjM5cFBDcVJj?=
- =?utf-8?B?bktSMkFOU1lCdnZmZ3A2R2VILzlTc2pqSVdMdTdDRzZVekFjOVpEcFZoYTlS?=
- =?utf-8?B?M1Z5UzNRd0VIa1V6MG14WlluYlJGNWhUVW9aNERVWFk3cHJBeUhCUnpSYTZk?=
- =?utf-8?B?UlAzUUZFYjBYcCtHaGh6dGYwYnUxYTd5UTdlL1cyRTNCSHhQaEpvR3paSDZ4?=
- =?utf-8?B?bEFzRzIwV05iWFkzVU9IMTFqb2Flc2FlMUlSR2JWYnlZWlpVbU1BMEhFSnZs?=
- =?utf-8?B?N0x1L1FMbW9TTFZlSSt1QmtQb3lhdlVGZUVHRmJna0MwK0xjM2J4R0czZWtT?=
- =?utf-8?B?QUNWQlltSVg5ZFlVZFY1N3dZR1RLOXd3UXoxWmhPS0kyUXZpTUhRMVMwNHhM?=
- =?utf-8?B?ZFpSa1YzbUhwcGlJS3dDKytkN0hzdmZJSzkwNld5aFQrNXVXUktzc3I3NThn?=
- =?utf-8?B?aGpIM1YycWRDR2NKb3lpTnB3UTFidFJVVk15czRhUVNVM3NxZ3JaQ1NUUXRL?=
- =?utf-8?B?SnBLZ2tWTkFYS1BoaWdoQkZLZWhaekpVWjFFakNlRDdEN291Q3lqTWhzenpo?=
- =?utf-8?B?TEpKSEd3SGxZRzQrMmYyQzFvOWVhWXdIZFdNam8zT1RPY21UWEFQMTlURkdu?=
- =?utf-8?B?NUlBR29vU3dLTDdjaFJJY2ZhNnZ1WlRUdE5Xd0dOelNoSnVtckozY3BnamUx?=
- =?utf-8?B?UUkyWmU2RDlzTkZ1OVYvRFpFb0VIeC92Z00rdi9MR1JsUjdtdUQ0dUdjdEhm?=
- =?utf-8?B?Zkl5RG5JeDFZdlNKdHFnUU1xY0FQNjVPNDF4bUVPY3VkRkpTY2FxenhoblVu?=
- =?utf-8?B?TlRBcDJFa1lkMGFvUHdJWEFsNlM4TnN6V0Q0T2MwdVFtcXZiSm91eG8rSk14?=
- =?utf-8?B?VUtoaGVDcy9ZWmxadW9Pa0w3VG9POHIvWjN6cFBONHNVWGxTdTQ2ZzRBNlBE?=
- =?utf-8?B?ZXdtYmp3QmxqOWVRRDdNNGthZ0dma0JYSU12WUY5U1VERWdka3hOaFdTZGda?=
- =?utf-8?B?WlRtVlcrNGdnYXZwbDllMngxdG94em83dmtlQXM2OENJZG5yU3p3WDEvUjNP?=
- =?utf-8?B?VDl0S2poYThKQkwwNWlaUFBzOFAwQ2hGWVU5bzFSTStlK0Q0NTFCeVFmV1JE?=
- =?utf-8?B?N01wNElRQkgwOWQ1RHdLNGdBbjBiU2VTZVBiMjNHM3V0dHdCZ1NSbnZHWWc2?=
- =?utf-8?B?QSszMVVBdFhDQmZLOUNSem5malVZRVpmSVNBcC9QOVh1TVgvU2JKT3VkRnVr?=
- =?utf-8?B?elRKUU1kckVuRlRvMGs5dCtINVpVVXA5NjF3RHJZbnNKMFVBaWorcXIxelVP?=
- =?utf-8?B?STA5NEF0ejNlZ3J5UE5jekN1R0dQZ2ovTDZjVS9iMHQ4Nk14d0RBMWM1M0p5?=
- =?utf-8?B?MzlUWkVicUpiNzJwRUt2R3B1VW1GQTBpN2dRSU9vdFBYL1Fjc3ZIMW85T1k5?=
- =?utf-8?B?ZFNvU0hzRDBhR2R4R2h6NktCajVWZStWR20xWDJHa2JXS2Jac2VtR0NjcVpP?=
- =?utf-8?B?RDExL1JlL0plcW1jSzBTbkZIVDhONnZ3Q3JEM0YrZXp6RXpudHFGTmI2Ty94?=
- =?utf-8?B?VGxOcUY3dVJYS2h5N3lsaThJUkRFZ25pUEVIaHdLcTRpTklrNkovRld6cFFk?=
- =?utf-8?B?T0FwQXo5ZnBRejNiUzdxM01CV2tyMWY2ZHR5KzJjR1VWeW5ad3JMUXVibXBC?=
- =?utf-8?B?NUdnY0F2RlhyZVhtNHYvWnNES1dXM3NPSHBCOHRyejJvL3dlcmZNckNIUktw?=
- =?utf-8?B?cFpSRXhBSjNjR24zVEJ6cFJXOFZaTlZORW5wdFRyYUdhZFZpRElnUElYVHBN?=
- =?utf-8?B?NFByWjZmMG15SnVua1VQeGRlQ1NpcldxSFpoTEhsZzFsQklLcDd0Mk1Fc1Fu?=
- =?utf-8?B?M1VDN1RKTGE2OG1hTnNrakJZKzM0YXBtYkJkOUdXYzBlRUN0VHRxNU45Z1F2?=
- =?utf-8?B?SHBNMFEyc0dCUzVpL0RWWGIzZ3BmZmt2aUI4VnZZRk43TkpTcHRja1I1blhK?=
- =?utf-8?B?UHlzK2wxQkN5YXk0TEgvT1FTRFpYbWN4anBLbWpYMS9YcUtFM1ZsbE9wak5t?=
- =?utf-8?B?RTVQZ2lnVnNGOHU3cDJ0TnNOV2pYMkppSmdWbUw3enpSaHRwRmdGUDM2MGsx?=
- =?utf-8?B?WTRYTzZxdXFmdTZXZ0RZQWl2U3JHSkFOV1dwei9BSEYrcW84Zm5qQUhsYzJT?=
- =?utf-8?B?TFlaSG92cGxVSmdIL0c5VzRQekRGNjlMZXYrU1lLVTBNTHYrZjRWVFFnc2Yr?=
- =?utf-8?B?YUpnMWRjM2p1QnZNelNsaE9JYkQvTjh4cHZuZjMxQWwycVNSWFJEZ0xqc3J4?=
- =?utf-8?B?aVBoWGJSU1dzRnAwVkYzM0Q3QnFhcXV1NGpndXJrTSt4ZjNBQUR3dz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3b6a05a6-fd86-4164-f559-08df18bd2d60
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2026 15:21:30.0090
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: pQMB5musMl+7XyW738dHryLfyJQ8UijEbMTjMzXKuIl5CLy3Lte1IUgMMmUHhuvGVz2DAM2Jbxuk9dvE4KdhwZ2Ra+qLB846pLcGqf9yrSI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR03MB5992
-X-purgate-ID: tlsNG-d25034/1790090493-51B35A5B-4E28AF6B/0/0
-X-purgate-type: clean
-X-purgate-size: 484
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/6] xen/riscv: fix Svade/Svadu A/D bit handling
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+Cc: xen-devel@lists.xenproject.org
+References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
+ <1789032897.8631fc262581453bbf619ec5b2062170.1a08aab9d76000c4f3@vates.tech>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1789032897.8631fc262581453bbf619ec5b2062170.1a08aab9d76000c4f3@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1790090969-1FE68757-A0BBB646/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 13512
 
-On 17/08/2026 9:52 am, Jan Beulich wrote:
-> --- a/xen/arch/x86/physdev.c
-> +++ b/xen/arch/x86/physdev.c
-> @@ -233,6 +233,8 @@ ret_t do_physdev_op(int cmd, XEN_GUEST_H
->          break;
->      }
->  
-> +#ifdef CONFIG_PV
 
-I think this needs to have /* See hvm_physdev_op(). */
 
-Most of these ops are not inherently PV; they're only PV because we've
-not cared to expose them to HVM guests, and that's a different meaning
-to what CONFIG_PV normally means in code.
+On 9/10/26 11:34 AM, Baptiste Le Duc wrote:
+> p2m_set_permission() only presets the PTE A/D bits when the Svade extension
+> is present in the device tree. This causes an unhandled page fault when
+> neither Svade nor Svadu is present (the platform's actual behaviour is then
+> unknown), and when both are present in the device tree.
 
-~Andrew
+When both are present, RISCV_ISA_EXT_svade is set, so the current code 
+does preset the A/D bits and no fault happens. The only broken case is 
+when neither extension is present, so shouldn't "both present" be dropped?
+
+> 
+> Move the Svade/Svadu resolution out of p2m_set_permission() and into a new
+> riscv_resolve_ad_scheme(), called once from riscv_fill_hwcap(). For each of
+> the four possible Svade/Svadu combinations (inspired by [1]), it decides
+> whether software has to preset the A/D bits and, if so, sets
+> RISCV_ISA_EXT_svade to record that decision:
+> - neither present: assume Svade, since assuming Svade is harmless on real
+>    Svadu hardware, while assuming Svadu on real Svade hardware risks an
+>    unhandled page fault
+> - only Svade present: assume Svade
+> - only Svadu present: leave A/D management to hardware
+> - both present: Svade wins until Xen supports the SBI FWFT call needed to
+>    enable hardware updating of A/D bits, so assume Svade and warn that
+>    dropping 'svade' from the DT is the only way to get Svadu.
+> 
+> [1] https://lwn.net/Articles/980016/
+> 
+> Fixes: ff14053983b0 ("xen/riscv: Implement p2m_pte_from_mfn() and support PBMT configuration")
+> Assisted-by: Claude:claude-opus-5
+> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> ---
+> Changes since v1:
+> - change commit title
+> - expose RISCV_ISA_EXT_svadu so the two extensions can be told apart.
+> - move the Svade/Svadu resolution to a new riscv_resolve_ad_scheme(),
+>    called once from riscv_fill_hwcap().
+> - expose sbi_probe_extension() (was static) to probe for SBI FWFT.
+
+sbi_probe_extension() is already non-static in staging, only the prototype
+is missing. What base is this patch against?
+
+> - stop presetting A/D bits unconditionally in p2m_set_permission(), do it
+>    only when Svade is present.
+
+What is the gain from not presetting them? Presetting A/D is correct 
+with both Svade and Svadu: with Svadu it just saves the hardware an 
+atomic PTE update on first access. Xen doesn't consume G-stage A/D bits 
+(no dirty tracking, no demand paging), and pt.c already presets A/D 
+unconditionally for Xen's own mappings. Always setting PTE_ACCESSED | 
+PTE_DIRTY in p2m_set_permission() fixes the bug in one line, with no 
+need for the resolver, the new ISA bit, FWFT probing or the ASSERT. 
+Handling A/D differently only makes sense once Xen actually wants that 
+information, and at that point FWFT support and a fault handler are 
+needed anyway.
+
+> ---
+>   xen/arch/riscv/cpufeature.c             | 59 +++++++++++++++++++++++++++++++++
+>   xen/arch/riscv/include/asm/cpufeature.h |  1 +
+>   xen/arch/riscv/include/asm/sbi.h        |  8 +++++
+>   xen/arch/riscv/p2m.c                    | 47 ++++++++++----------------
+>   4 files changed, 86 insertions(+), 29 deletions(-)
+> 
+> diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
+> index 92235fdfd5..19454544a7 100644
+> --- a/xen/arch/riscv/cpufeature.c
+> +++ b/xen/arch/riscv/cpufeature.c
+> @@ -18,6 +18,7 @@
+>   
+>   #include <asm/cpufeature.h>
+>   #include <asm/csr.h>
+> +#include <asm/sbi.h>
+>   
+>   #ifdef CONFIG_ACPI
+>   # error "cpufeature.c functions should be updated to support ACPI"
+> @@ -468,6 +469,62 @@ static bool __init has_isa_extensions_property(void)
+>       return false;
+>   }
+>   
+> +/*
+> + * Svade and Svadu extensions represent two schemes for managing the PTE A/D
+> + * bits. When the PTE A/D bits need to be set, the Svade extension indicates
+> + * that a page fault will be raised. In contrast, the Svadu extension supports
+> + * hardware updating of the PTE A/D bits.
+> + *
+> + * There are 4 possible combinations of these extensions in the device tree.
+> + * The default hardware behavior for each is:
+> + *
+> + * 1) Neither Svade nor Svadu present in DT => It is technically unknown
+> + *    whether the platform uses Svade or Svadu. Xen should be prepared to
+> + *    handle either hardware updating of the PTE A/D bits or page faults when
+> + *    they need updating. In that case, Xen assumes Svade because it's
+> + *    harmless if the platform is actually Svadu, while assuming Svadu on real
+> + *    Svade hardware risks an unhandled page fault.
+> + *
+> + * 2) Only Svade present in DT => Xen must assume Svade to be always enabled.
+> + *
+> + * 3) Only Svadu present in DT => Xen must assume Svadu to be always enabled.
+> + *
+> + * 4) Both Svade and Svadu present in DT => Xen must assume Svadu is turned off
+> + *    at boot time by setting A/D bits. To use Svadu, the supervisor must
+> + *    explicitly enable it using the SBI FWFT extension.
+> + *
+> + * The Svade extension is mandatory and the Svadu extension is optional in the
+> + * RVA23 profile. Platforms wanting to take advantage of Svadu can choose
+> + * option 3. Platforms aware of the profile can choose option 4, and Xen won't
+> + * get the benefit of Svadu until the SBI FWFT extension is available.
+> + *
+> + * In other words, hardware manages the A/D bits on its own only in case 3, in
+> + * all the other cases software has to preset them. Instead of open coding this
+> + * in every A/D bits user, RISCV_ISA_EXT_svade is used to mean "software is
+> + * responsible for the A/D bits" and is set here for the cases 1, 2 and 4.
+> + */
+> +static void __init riscv_resolve_ad_scheme(void)
+> +{
+> +    bool svade = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade);
+> +    bool svadu = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu);
+
+svadu is always false here: the patch doesn't add 
+RISCV_ISA_EXT_ENTRY(svadu, NONE) to riscv_isa_ext[], so match_isa_ext()
+never sets this bit. Cases 3 and 4 are dead code. Am I missing something?
+
+> +
+> +    /* Case 3: leave the A/D bits management to hardware. */
+> +    if ( svadu && !svade )
+> +        return;
+> +
+> +    /* Case 4 */
+> +    if ( svadu && svade ){
+> +        if ( !sbi_probe_extension(SBI_EXT_FWFT) ){
+> +          printk(XENLOG_WARNING "RISC-V: Both Svade and Svadu detected, but SBI FWFT is missing.\n"
+> +                  "RISC-V: Defaulting to software A/D updates (Svade).\n"
+> +                  "RISC-V: To force hardware A/D updates (Svadu), remove 'svade' from DT.\n");
+> +        }
+> +    }
+
+sbi_probe_extension() returns a negative errno on SBI failure, so
+!sbi_probe_extension() is false in that case and an error is treated as
+"FWFT present". The existing callers check "> 0", so this should be
+"<= 0".
+
+> +
+> +    /* Cases 1, 2: Xen assume Svade to be enabled */
+
+s/assume/assumes.
+
+> +    __set_bit(RISCV_ISA_EXT_svade, riscv_isa);
+
+In case 4 RISCV_ISA_EXT_svadu stays set, so both bits are set and the
+ASSERT() in p2m_set_permission() fires (once svadu is actually parsed).
+This contradicts the "mutually exclusive" statement there.
+
+> +}
+> +
+>   bool riscv_isa_extension_available(const unsigned long *isa_bitmap,
+>                                      enum riscv_isa_ext_id id)
+>   {
+> @@ -513,6 +570,8 @@ void __init riscv_fill_hwcap(void)
+>           __set_bit(RISCV_ISA_EXT_sstc, riscv_isa);
+>       }
+>   
+> +    riscv_resolve_ad_scheme();
+> +
+>       for ( i = 0; i < req_extns_amount; i++ )
+>       {
+>           const struct riscv_isa_ext_data ext = required_extensions[i];
+> diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
+> index 0c48d57a03..74200ce7c9 100644
+> --- a/xen/arch/riscv/include/asm/cpufeature.h
+> +++ b/xen/arch/riscv/include/asm/cpufeature.h
+> @@ -41,6 +41,7 @@ enum riscv_isa_ext_id {
+>       RISCV_ISA_EXT_sstc,
+>       RISCV_ISA_EXT_svade,
+>       RISCV_ISA_EXT_svpbmt,
+> +    RISCV_ISA_EXT_svadu,
+
+Please keep the same order as riscv_isa_ext[], i.e. between svade and
+svpbmt, and add the matching riscv_isa_ext[] entry there as well.
+
+>       RISCV_ISA_EXT_MAX
+>   };
+>   
+> diff --git a/xen/arch/riscv/include/asm/sbi.h b/xen/arch/riscv/include/asm/sbi.h
+> index 1952868e96..4f13e8c7a0 100644
+> --- a/xen/arch/riscv/include/asm/sbi.h
+> +++ b/xen/arch/riscv/include/asm/sbi.h
+> @@ -30,6 +30,7 @@
+>   #define SBI_EXT_BASE                    0x10
+>   #define SBI_EXT_RFENCE                  0x52464E43
+>   #define SBI_EXT_TIME                    0x54494D45
+> +#define SBI_EXT_FWFT                    0x46574654
+>   
+>   /* SBI function IDs for BASE extension */
+>   #define SBI_EXT_BASE_GET_SPEC_VERSION   0x0
+> @@ -138,6 +139,13 @@ int sbi_remote_hfence_gvma(const cpumask_t *cpu_mask, vaddr_t start,
+>   int sbi_remote_hfence_gvma_vmid(const cpumask_t *cpu_mask, vaddr_t start,
+>                                   size_t size, unsigned long vmid);
+>   
+> +/**
+> + * Check if an SBI extension ID is supported or not.
+> + * @extid: The extension ID to be probed.
+> + *
+> + * @return: 1 or an extension specific nonzero value if yes, 0 otherwise.
+> + */
+
+This is incorrect: on failure the function returns a negative errno, not
+0. Also, the rest of the file uses /* */ and not kernel-doc /**.
+
+> +int sbi_probe_extension(long extid);
+
+A blank line is missing before the next comment block.
+
+>   /*
+>    * Initialize SBI library
+>    *
+> diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+> index 1cea86512c..22ad4a2aee 100644
+> --- a/xen/arch/riscv/p2m.c
+> +++ b/xen/arch/riscv/p2m.c
+> @@ -586,42 +586,31 @@ static inline void p2m_clean_pte(pte_t *p, bool clean_cache)
+>   
+>   static void p2m_set_permission(pte_t *e, p2m_type_t t)
+>   {
+> +    bool svade = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade);
+> +    bool svadu = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu);
+
+This runs for every p2m PTE. The second test_bit() exists only for the
+ASSERT().
+
+> +
+>       e->pte &= ~PTE_ACCESS_MASK;
+>   
+>       e->pte |= PTE_USER;
+>   
+>       /*
+> -     * Two schemes to manage the A and D bits are defined:
+> -     *   • The Svade extension: when a virtual page is accessed and the A bit
+> -     *     is clear, or is written and the D bit is clear, a page-fault
+> -     *     exception is raised.
+> -     *   • When the Svade extension is not implemented, the following scheme
+> -     *     applies.
+> -     *     When a virtual page is accessed and the A bit is clear, the PTE is
+> -     *     updated to set the A bit. When the virtual page is written and the
+> -     *     D bit is clear, the PTE is updated to set the D bit. When G-stage
+> -     *     address translation is in use and is not Bare, the G-stage virtual
+> -     *     pages may be accessed or written by implicit accesses to VS-level
+> -     *     memory management data structures, such as page tables.
+> -     * Thereby to avoid a page-fault in case of Svade is available, it is
+> -     * necessary to set A and D bits.
+> -     *
+> -     * TODO: For now, it’s fine to simply set the A/D bits, since OpenSBI
+> -     *       delegates page faults to a lower privilege mode and so OpenSBI
+> -     *       isn't expect to handle page-faults occured in lower modes.
+> -     *       By setting the A/D bits here, page faults that would otherwise
+> -     *       be generated due to unset A/D bits will not occur in Xen.
+> -     *
+> -     *       Currently, Xen on RISC-V does not make use of the information
+> -     *       that could be obtained from handling such page faults, which
+> -     *       could otherwise be useful for several use cases such as demand
+> -     *       paging, cache-flushing optimizations, memory access tracking,etc.
+> +     * riscv_fill_hwcap() sets either RISCV_ISA_EXT_svade or
+> +     * RISCV_ISA_EXT_svadu (mutually exclusive) depending on the Svade/Svadu
+> +     * device tree combination (see riscv_resolve_ad_scheme()):
+
+This isn't true, see the comment on riscv_resolve_ad_scheme(): in case 4 
+both bits end up set.
+
+> +     * - RISCV_ISA_EXT_svade means that software is responsible for the A/D
+> +     *   bits.
+> +     * - RISCV_ISA_EXT_svadu means the hardware is responsible for the A/D
+> +     *   bits.
+>        *
+> -     *       To support the more general case and the optimizations mentioned
+> -     *       above, it would be better to stop setting the A/D bits here and
+> -     *       instead handle page faults that occur due to unset A/D bits.
+> +     * Currently, when RISCV_ISA_EXT_svade is set, Xen doesn't track A/D
+> +     * bits, so it does not make use of the information that could be
+> +     * obtained from handling the resulting page faults, which could
+> +     * otherwise be useful for several use cases such as demand paging,
+> +     * cache-flushing optimizations, memory access tracking, etc. To avoid
+> +     * such a page fault, Xen presets the A and D bits instead.
+>        */
+> -    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
+> +    ASSERT(svade != svadu); /* exactly one of svade/svadu must be set by riscv_fill_hwcap() */
+
+The line is over 80 columns, and the trailing comment just repeats the 
+block comment above.
+
+> +    if ( svade )
+>           e->pte |= PTE_ACCESSED | PTE_DIRTY;
+>   
+>       switch ( t )
+> 
+
+~ Oleksii
+
 
