@@ -4,44 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3DF4C982F1
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 10:23:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428546.1651392 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9CF85C982FA
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 10:29:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428556.1651407 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8xf5-0005pT-1N; Tue, 22 Sep 2026 10:23:43 +0000
+	id 1x8xkP-0006q2-WC; Tue, 22 Sep 2026 10:29:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428546.1651392; Tue, 22 Sep 2026 10:23:43 +0000
+Received: by outflank-mailman (output) from mailman id 1428556.1651407; Tue, 22 Sep 2026 10:29:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8xf4-0005pM-Ug; Tue, 22 Sep 2026 10:23:42 +0000
-Received: by outflank-mailman (input) for mailman id 1428546;
- Tue, 22 Sep 2026 10:23:41 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x8xkP-0006ps-Pb; Tue, 22 Sep 2026 10:29:13 +0000
+Received: by outflank-mailman (input) for mailman id 1428556;
+ Tue, 22 Sep 2026 10:29:12 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x8xf3-0005pC-B5
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 10:23:41 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8xf2-002UxR-OA
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 12:23:40 +0200
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ab25707-8faa-0a2a0a5109dd-0a2a4504d678-44
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 12:23:40 +0200
-Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ab2572c-b57f-0a2a45040019-4a7de18db5d8-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 12:23:40 +0200
-Received: by mail-wm2-f13.google.com with SMTP id
- 5b1f17b1804b1-49b91369d18so29647325e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 03:23:40 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49fdab0c240sm28222615e9.4.2026.09.22.03.23.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Sep 2026 03:23:39 -0700 (PDT)
+ (envelope-from <anthony@xenproject.org>) id 1x8xkO-0006mx-8k
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 10:29:12 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <anthony@xenproject.org>) id 1x8xkN-00ApBn-1O;
+ Tue, 22 Sep 2026 10:29:11 +0000
+Received: from [2a01:cb15:80c6:e800:b9e9:dfdc:4751:7ecb] (helo=l14.home)
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <anthony@xenproject.org>) id 1x8xR4-00DE8C-1z;
+ Tue, 22 Sep 2026 10:09:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,126 +41,165 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790072620; x=1790677420; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=t0xXwVHC5NMTpwFI6XhDRiCyEmcfc9jvURgZBwlMrag=;
-        b=VSTfAXB2vwZzdS22Bw9IikIF2+IM2uYRDLXpgz1JWa8CHrOKSbIQvPmElpgfRJQulT
-         iVqtvHpbHarLVjRI4djDp9MCN4TYNMgyXZJpG/x/9SspRNWPxxmRdcHg07qilVOe9SxC
-         D0KSkOUxMmWnjjGVW5/RNLioBqW7Wb20erj5NA8uSixJW3+ZE6Qs69mZ5fhFA7XnacqE
-         bmBmJPlPCoQcrXWqhoKECKTfk0v2hu6oa/WmkN/iXcBwPnqtSZZf/hhgj7TT7jaDgrTk
-         b8St0PYIj9osisiAkPFcPX33g07G2hHtORTKxSg1p3d/Vcxm6WiuPoJhC9UkpKbDF1Of
-         9bjA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790072620; x=1790677420;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=t0xXwVHC5NMTpwFI6XhDRiCyEmcfc9jvURgZBwlMrag=;
-        b=1qv2IIm6R8kP5IZ8s9G1h3HsOcLQ0XzbJjhYmMqpGHaprR4kFu37hgJcovVzqmgKrF
-         5eMIzdrbi0lF9DTyji0NwGfpdNpgyOYp+So2xNmS3tAvA/9WxPbYXe7znBKzbY70naF+
-         6km05b+tUEHf98b4WQ2VpxQLoXcZ0aBjmvWhBhuWGwS4gn9O1MNdJgTTOuIQRbnpjPZ5
-         d//HbVxJkeExfp9kJBbx/QHCT90Q43IHEsEpXe2GYh9wU4je2wb694Sn/OI48v+xqeRm
-         ClqaUOXnc5JisgtA4gQPFq0ot0a9VspLMblQRdLYmYGBLey8aq4fx7TGlmEqg+zieQoX
-         c/Ew==
-X-Forwarded-Encrypted: i=1; AKwUvBz/1UPqrMhCgqkoOCkIJGEnImgr6NmhzQfAhwVLXo8JdGhQk9oGn/sBlcPTWweE849DIIdO6tkRdGE=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lbQe5p6AwpjcZRbDUlE4RJF2T+rV1F3AHyV+1R7v9B3moQRpnT
-	KBrjNDVlqPZ8gPgO6D3eEHXyQahtYytwdxvggeqxpzxMgKHYTz8OskphG8vWh3m8bw==
-X-Gm-Gg: AYBFou0OIKRqS4o9rBfHRTt5SGyAS4hK6iacuRR+BUrdflFCKc/RrAw8SXelLDp7Ac9
-	8PTE1R/5mCkvl/lnK8csIqAAI4kHnU+o3L5RMdtYQ9OvC0Ek4kjsCh4q5eHoU5AbnKxjzQn22Zh
-	yGf+gzJFRVnS2tuU1dMLLh7mOVdaUqWLotZWq5LrwhHpov77z4k4+KFwl+Nt59fFrZXJ2ToTixe
-	n1GTE2OXDVRg4kbAWgsOJxmjcfRPmZD6Pxn4yXVOyb9zZdg+NQZULMMyZREgPAVI0YexoJ/EExq
-	5PvTZIW8Q6WNgSJKZgRxj/iQeGdFfOTq+mcTqPkQnebt8AOREkVui2AV+nNlbGYx55HCWWwxR2k
-	NKQ0Vy/Hd7OFM9EVFEr/VLeJhL02EnEvERWGijUBQtDgFj46zxv0Magh2HimqvmXMScBFAM48wN
-	y3FPxPSPSAemZk04WA9luX1zf94+ylOsSsis/Au7zJ5yovSGr5Rbq7fxqp6AfKpN8biFXi9Gsx7
-	myovjq80taM8Vb/PeehIzvY+F6vzxD2GR6UBpX0DUDE0PU7QsWM4yIaCQh1lVA=
-X-Received: by 2002:a05:600c:310d:b0:49d:15b9:2a2a with SMTP id 5b1f17b1804b1-49fc5721b9dmr203393485e9.10.1790072620072;
-        Tue, 22 Sep 2026 03:23:40 -0700 (PDT)
-Message-ID: <8a809ae3-4e30-4287-b43f-cdc3a6f434d4@suse.com>
-Date: Tue, 22 Sep 2026 12:23:38 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=0EYmk0NJ/kvSiclNpr9gVl0wT7a9lZ6KKLAdNMnZn+8=; b=0g8vDDC72M9fifW5/z5jWwZDDe
+	n7hUPd2gGJRzFSwarkZyHVAjqpw/lGDU4inJjDrKWlEuGraLJsx2x6d8a077cvulNZaZr7ch29yjc
+	twCdNBUMctcABymJi4huRQ8kK3urMKHgpHa+3CLoEg8ojQ146KhHUegJ/1sXNuXdT5z4=;
+From: Anthony PERARD <anthony@xenproject.org>
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Doug Goldstein <cardoe@cardoe.com>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [RFC XEN PATCH 10/13] pytest: Add guest test
+Date: Tue, 22 Sep 2026 12:08:57 +0200
+Message-ID: <20260922100900.29129-11-anthony@xenproject.org>
+X-Mailer: git-send-email 2.47.3
+In-Reply-To: <20260922100900.29129-1-anthony@xenproject.org>
+References: <20260922100900.29129-1-anthony@xenproject.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 39/39] xen/riscv: introduce IMSIC h/w interrupt file
- attaching to vcpu
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <4df9cf63943d0f371c8a25c6c9e84adbd3083a61.1787838835.git.oleksii.kurochko@gmail.com>
- <bbaaa4f9-a1c4-4ad0-9fae-7fecf1568086@suse.com>
- <1b7b29da-bc22-4fff-8e1a-92cedcd0cf22@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1b7b29da-bc22-4fff-8e1a-92cedcd0cf22@gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1790072620-C38C1B50-76ECEB2C/0/0
-X-purgate-type: clean
-X-purgate-size: 1536
+Content-Transfer-Encoding: 8bit
 
-On 22.09.2026 10:31, Oleksii Kurochko wrote:
-> On 9/21/26 2:32 PM, Jan Beulich wrote:
->> On 27.08.2026 17:21, Oleksii Kurochko wrote:
->>> Introduce imsic_vsfile_attach() to initialize the AIA-related state needed
->>> for a vCPU to have a working guest interrupt file.
->>>
->>> A guest (VS) interrupt file must be mapped to one of a pCPU's
->>> hardware interrupt files (if they exist), so the pCPU a vCPU will actually
->>> run on needs to be known first. arch_vcpu_create() is therefore not a
->>> suitable place to call vcpu_aia_init(), since the pCPU assigned to a
->>> vCPU can still change before it is first scheduled. To avoid
->>> reassigning the VS interrupt file id and remapping it to a different
->>> pCPU's hardware interrupt file, imsic_vsfile_attach() is called from a
->>> later point in the scheduling path (e.g. continue_new_vcpu()).
->>
->> Hmm, why does first-time handling need to be this different from the
->> handling of a vCPU moving across pCPU-s? The sole difference should be
->> "no state to load" vs "load state that was saved on the old pCPU".
-> 
-> Generally I think it could be the same but not all the steps done in 
-> migration functions aren't needed for new vCPU (despite of the fact they 
-> aren't harmful). For new vCPU it seems to me it is enough only to attach 
-> h/w interrupt file to vCPU.
+From: Anthony PERARD <anthony.perard@vates.tech>
 
-Sure, yet still imo you want to aim at re-using as much code as possible,
-especially when otherwise you introduce multiple very similar but not
-exactly identical variants of logic.
+Adding a second test, to help show how to improve the fixtures, and
+needed code in libraries
 
-Jan
+That test copies part of the run tools-test tests, but we could shared
+that better.
+
+Then, we ssh to the host, to both follow the guest log files and to
+prepare and start the guest, over several SSH channel.
+
+tail_log() could go into a lib.
+And I don't know yet what to do with the collected threads object.
+
+I also want to get rid of the guest_boot_script marker, and ssh to the
+guest instead.
+
+Signed-off-by: Anthony PERARD <anthony.perard@vates.tech>
+---
+ automation/pytest/test_boot.py | 97 ++++++++++++++++++++++++++++++++++
+ 1 file changed, 97 insertions(+)
+
+diff --git a/automation/pytest/test_boot.py b/automation/pytest/test_boot.py
+index 5a7ec43fa52b..089aa1e6c063 100644
+--- a/automation/pytest/test_boot.py
++++ b/automation/pytest/test_boot.py
+@@ -3,8 +3,11 @@ import os
+ import paramiko
+ from pathlib import Path
+ import pytest
++from queue import Queue
+ import random
+ import string
++from textwrap import dedent
++from threading import Thread
+ from typing import Generator
+ 
+ from lib.boot_binary import BootBinary
+@@ -138,3 +141,97 @@ def test_xen_tools_tests(machine_on_ipmi: IPMI,
+     errormsg = stderr.read()
+     if errormsg:
+         logging.info(f"cmd errro: {errormsg!r}")
++
++
++@pytest.mark.timeout(600)
++@pytest.mark.guest_boot_script(dedent(f"""
++    ifconfig eth0 10.1.105.101
++    until ping -c 10 {os.environ["HOST_IP4"].partition('/')[0]}; do
++        sleep 1
++    done
++    echo \"guest ping test passed\"
++    """))
++def test_guest(
++        machine_on_ipmi: IPMI,
++        sshkey_for_test: paramiko.pkey.PKey,
++        boot_string: str,
++        ) -> None:
++    expect_string = boot_string
++    for line in machine_on_ipmi.console_output_generator():
++        #
++        # Wait for `expect_string` for the test to succeed
++        #
++        if expect_string in line:
++            logging.info(f"got expect_string '{line}'.")
++            break
++        #
++        # Some common expected or not console outputs.
++        #
++        if "Latest ChangeSet:" in line:
++            logging.info(f"Test xen build from '{line}'.")
++        if "Manual reset required ('noreboot' specified)" in line:
++            # Test failed, could wait a bit before failing the test.
++            logging.error("Xen panic")
++
++    with paramiko.client.SSHClient() as ssh:
++        threads = []
++        ssh_logs: Queue[str] = Queue()
++        ssh.set_missing_host_key_policy(paramiko.client.WarningPolicy)
++        logging.debug(f"connecting to {os.environ['HOST_IP4'].split('/')[0]}")
++        ssh.connect(os.environ['HOST_IP4'].split('/')[0],
++                    username='root',
++                    pkey=sshkey_for_test,
++                    timeout=10,
++                    )
++
++        def ssh_channel_read(stdout, prefix):
++            for output in stdout:
++                ssh_logs.put(f"{prefix}{output.strip()}")
++
++        def tail_log(file: Path, prefix: str):
++            stdin, stdout, stderr = ssh.exec_command(f"tail -n0 -F {file}")
++            stdin.close()
++            # Dirty, should keep `stderr` to clean it up
++            t = Thread(target=ssh_channel_read, args=(stdout, prefix))
++            t.start()
++            return t
++
++        threads += [
++            tail_log(Path("/var/log/xen/console/guest-domU.log"), "(domU) "),
++            tail_log(Path("/var/log/xen/qemu-dm-domU.log"), "(qemu-dm) "),
++         ]
++
++        cmd = dedent(f"""
++            set -x
++            pxe_host="{os.environ["PXE_HOST"]}"
++            http_pxe_path="{os.environ["PXE_HTTP_PATH"]}"
++            wget http://${{pxe_host}}/${{http_pxe_path}}/bzImage -O /boot/vmlinuz-domU
++            wget http://${{pxe_host}}/${{http_pxe_path}}/guest-rootfs.cpio.gz -O /boot/initrd-domU
++            xl -Tvvv create /etc/xen/domU.cfg 2>&1
++            """)
++        logging.info(f"Exec command: {cmd}")
++        stdin, stdout, stderr = ssh.exec_command(cmd)
++
++        # everything is on stderr, both wget and xl output
++        t = Thread(target=ssh_channel_read, args=(stderr, ""))
++        t.start()
++        threads.append(t)
++        t = Thread(target=ssh_channel_read, args=(stdout, ""))
++        t.start()
++        threads.append(t)
++
++        # Log while `xl` is preparing the guest to start
++        while t.is_alive():
++            line = ssh_logs.get()
++            logging.debug(line)
++
++        xl_exit_status = stderr.channel.recv_exit_status()
++        assert xl_exit_status == 0
++
++        # `xl` have exited, continue logging the guest output
++        while True:
++            line = ssh_logs.get()
++            logging.debug(line)
++            if "guest ping test passed" in line:
++                logging.info("found expected guest line in logs")
++                break
+-- 
+Anthony PERARD
+
 
