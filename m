@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DBAF8C982FA
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:00:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1429304.1652241 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89BBDC98309
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:00:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1429300.1652228 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x94mn-0005IS-3g; Tue, 22 Sep 2026 18:00:09 +0000
+	id 1x94mm-0004yp-AB; Tue, 22 Sep 2026 18:00:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1429304.1652241; Tue, 22 Sep 2026 18:00:09 +0000
+Received: by outflank-mailman (output) from mailman id 1429300.1652228; Tue, 22 Sep 2026 18:00:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x94mm-0005Gt-Ph; Tue, 22 Sep 2026 18:00:08 +0000
-Received: by outflank-mailman (input) for mailman id 1429304;
- Tue, 22 Sep 2026 17:14:37 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x94mm-0004xC-28; Tue, 22 Sep 2026 18:00:08 +0000
+Received: by outflank-mailman (input) for mailman id 1429300;
+ Tue, 22 Sep 2026 17:14:09 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <usama.anjum@arm.com>) id 1x944i-0005Mv-UF
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:14:37 +0000
+ (envelope-from <usama.anjum@arm.com>) id 1x944H-0005Kg-LN
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:14:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x944i-00Ae9t-B5
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 19:14:36 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x944H-00Gih6-1x
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 19:14:09 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6ab2b748-8faa-0a2a0a5109dd-0a2a4504e582-18
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:14:36 +0200
+ id 6ab2b747-bab6-0a2a0a5309dd-0a2a4506eaf6-10
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:14:09 +0200
 Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
  (envelope-from <usama.anjum@arm.com>)
- id 6ab2b77b-b57f-0a2a45040019-d98c6eac94f8-1
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:14:36 +0200
+ id 6ab2b760-195a-0a2a45060019-d98c6eac9766-1
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 19:14:08 +0200
 Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 78D071595;
- Tue, 22 Sep 2026 10:14:31 -0700 (PDT)
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 0E2F91576;
+ Tue, 22 Sep 2026 10:14:04 -0700 (PDT)
 Received: from [127.0.1.1] (e142334-100.cambridge.arm.com [10.2.198.93])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 50FAF3FA32;
- Tue, 22 Sep 2026 10:14:21 -0700 (PDT)
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CF53A3FA32;
+ Tue, 22 Sep 2026 10:13:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,19 +53,18 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:References:In-Reply-To:To:Cc"
 DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1790097275; bh=SNK4rrwFvjnxcdknL2hsc20bUzMvwr6CIipWYMszSzs=;
+	t=1790097247; bh=ycUddICsfxEifMnQljPG5LJ+QAfshpGj42pAhJYJWAs=;
 	h=From:Date:Subject:References:In-Reply-To:To:Cc:From;
-	b=iARAx8Qyk1413VBr4PC7dGwIhlrToaTnagZ6dPlvezmqEddDjaVkHLgBTgS5wWhxt
-	 NG3MjS+xmLq1vZyn83oVsYzSt8u9iMTTXB3k+0eeRFDj4F3gou8popZy7lpyXeDKr4
-	 SHUdvtaZmDDnMdNPXUZnhs8extIVv21cyFM4/8oM=
+	b=SBP5DIfa3nHM7wg1pyznXr/QOoBKyjohtWTUL8njVjJ2HZJ7Dx+/2lyN5lNkmMRzt
+	 MkKJj6bY+fLt8c5gDKfHKPh91F5Et1R0ROJrwOWzqHfSea49QFldK5bBAeUeM9p2Ca
+	 sZJWLtBML/JGGl2eO59i8Nq/hvCyVDsIRYBYPmlc=
 From: Muhammad Usama Anjum <usama.anjum@arm.com>
-Date: Tue, 22 Sep 2026 18:12:35 +0100
-Subject: [PATCH v3 7/9] mm/kasan: use hw_pte_t for the early shadow PTE
- table
+Date: Tue, 22 Sep 2026 18:12:33 +0100
+Subject: [PATCH v3 5/9] mm: convert PTE table entry to pte
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20260922-pte0-v3-7-5670b8cb9059@arm.com>
+Message-Id: <20260922-pte0-v3-5-5670b8cb9059@arm.com>
 References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
 In-Reply-To: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
 To: Andrew Morton <akpm@linux-foundation.org>, 
@@ -135,72 +134,36 @@ Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org, 
  Muhammad Usama Anjum <usama.anjum@arm.com>
 X-Mailer: b4 0.16.0
-X-purgate-ID: tlsNG-ebf023/1790097276-528C9B50-8DA07A91/0/0
+X-purgate-ID: tlsNG-16d1c6/1790097249-F480577B-478CDECB/0/0
 X-purgate-type: clean
-X-purgate-size: 2371
+X-purgate-size: 897
 
-kasan_early_shadow_pte is a complete PTE table rather than a software
-PTE value. Declare and define its elements as hw_pte_t so the object uses
-the PTE table storage type.
-
-Read the first element through ptep_get(), which returns the software PTE
-value expected by note_page_pte(), instead of accessing hw_pte_t storage
-directly. This also uses the accessor selected by the architecture.
-
-No architecture selects ARCH_HAS_HW_PTE_T at this point, so the storage
-representation remains unchanged.
+The non-MMU stub receives hw_pte_t but returns a software PTE value. It
+has no attached PTE that requires ptep_get(), so convert only the stored
+entry through __pte_from_hw().
 
 Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
 ---
 Changes since v1:
+- Explain why the NOMMU stub does not use ptep_get().
 - Use software PTE value terminology.
-
-Changes since RFC v1:
-- Update the description for the architecture opt-in model.
 ---
- include/linux/kasan.h | 2 +-
- mm/kasan/init.c       | 2 +-
- mm/ptdump.c           | 2 +-
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ include/linux/hugetlb.h | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/include/linux/kasan.h b/include/linux/kasan.h
-index bf233bde68c7e..ff41949c0ac08 100644
---- a/include/linux/kasan.h
-+++ b/include/linux/kasan.h
-@@ -51,7 +51,7 @@ typedef unsigned int __bitwise kasan_vmalloc_flags_t;
+diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
+index 0d2101facaa50..637fc863d3687 100644
+--- a/include/linux/hugetlb.h
++++ b/include/linux/hugetlb.h
+@@ -1278,7 +1278,8 @@ static inline pte_t huge_ptep_clear_flush(struct vm_area_struct *vma,
+ #ifdef CONFIG_MMU
+ 	return ptep_get(ptep);
+ #else
+-	return *ptep;
++	/* No attached PTE that requires ptep_get(). */
++	return __pte_from_hw(*ptep);
  #endif
- 
- extern unsigned char kasan_early_shadow_page[PAGE_SIZE];
--extern pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS];
-+extern hw_pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS];
- extern pmd_t kasan_early_shadow_pmd[MAX_PTRS_PER_PMD];
- extern pud_t kasan_early_shadow_pud[MAX_PTRS_PER_PUD];
- extern p4d_t kasan_early_shadow_p4d[MAX_PTRS_PER_P4D];
-diff --git a/mm/kasan/init.c b/mm/kasan/init.c
-index 30c5266eaf37e..9bbc2a41d23f0 100644
---- a/mm/kasan/init.c
-+++ b/mm/kasan/init.c
-@@ -64,7 +64,7 @@ static inline bool kasan_pmd_table(pud_t pud)
- 	return false;
  }
- #endif
--pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS]
-+hw_pte_t kasan_early_shadow_pte[MAX_PTRS_PER_PTE + PTE_HWTABLE_PTRS]
- 	__bss_pgtbl;
- 
- static inline bool kasan_pte_table(pmd_t pmd)
-diff --git a/mm/ptdump.c b/mm/ptdump.c
-index 376880071ca2a..8f19f20be3c44 100644
---- a/mm/ptdump.c
-+++ b/mm/ptdump.c
-@@ -19,7 +19,7 @@ static inline int note_kasan_page_table(struct mm_walk *walk,
- {
- 	struct ptdump_state *st = walk->private;
- 
--	st->note_page_pte(st, addr, kasan_early_shadow_pte[0]);
-+	st->note_page_pte(st, addr, ptep_get(kasan_early_shadow_pte));
- 
- 	walk->action = ACTION_CONTINUE;
  
 
 -- 
