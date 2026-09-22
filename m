@@ -4,46 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C2C2BC98302
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 18:59:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1429439.1652314 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2429CC98302
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 20:25:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1429471.1652323 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x95hd-0002o5-4G; Tue, 22 Sep 2026 18:58:53 +0000
+	id 1x972V-0003sI-26; Tue, 22 Sep 2026 20:24:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1429439.1652314; Tue, 22 Sep 2026 18:58:53 +0000
+Received: by outflank-mailman (output) from mailman id 1429471.1652323; Tue, 22 Sep 2026 20:24:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x95hd-0002ny-1e; Tue, 22 Sep 2026 18:58:53 +0000
-Received: by outflank-mailman (input) for mailman id 1429439;
- Tue, 22 Sep 2026 18:58:52 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x972U-0003sB-VR; Tue, 22 Sep 2026 20:24:30 +0000
+Received: by outflank-mailman (input) for mailman id 1429471;
+ Tue, 22 Sep 2026 20:24:29 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Leonid_Komarianskyi@epam.com>) id 1x95hb-0002ns-Ry
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 18:58:52 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1x972S-0003s5-W1
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 20:24:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x95ha-000dk7-H4
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 20:58:50 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x972R-00BPgi-Mt
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 22:24:27 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Leonid_Komarianskyi@epam.com>)
- id 6ab2cfd1-8faa-0a2a0a5109dd-0a2a450bc242-38
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 20:58:50 +0200
-Received: from [52.101.72.121]
- (helo=AM0PR02CU008.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Leonid_Komarianskyi@epam.com>)
- id 6ab2cfea-b7e8-0a2a450b0019-3465487985b3-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 20:58:50 +0200
-Received: from DB5PR03MB10049.eurprd03.prod.outlook.com (2603:10a6:10:4a0::9)
- by VI0PR03MB10733.eurprd03.prod.outlook.com (2603:10a6:800:264::19)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.16; Tue, 22 Sep
- 2026 18:58:45 +0000
-Received: from DB5PR03MB10049.eurprd03.prod.outlook.com
- ([fe80::9240:92cd:d9da:bf9e]) by DB5PR03MB10049.eurprd03.prod.outlook.com
- ([fe80::9240:92cd:d9da:bf9e%5]) with mapi id 15.21.0428.015; Tue, 22 Sep 2026
- 18:58:45 +0000
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6ab2e3fb-2eae-0a2a0a5409dd-0a2a4508b96e-0
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 22:24:27 +0200
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6ab2e3f5-f659-0a2a45080019-aa0a857cda23-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 22:24:22 +0200
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-684-Ljz03s7FNHWwafDBITVPiw-1; Tue,
+ 22 Sep 2026 16:24:17 -0400
+Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 28C9C19772E4; Tue, 22 Sep 2026 20:24:16 +0000 (UTC)
+Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.114])
+ by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 5100141D; Tue, 22 Sep 2026 20:24:13 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,183 +61,678 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=oc+ruYOKUoKN7DOXKoh5fm8A+TEg96+hqDUQqPI/7JGcngQ7cHrFCi9UyiK+uanY0OalWKNp60+4M3CjDYF9q4bje7qqHKsuVcVN9PKxGPI2/cr1I7zvcJ3pqzkC7fHHGViBdG1uITJbuhWK4zvytGYeJgOBCX8Fel4953HHB19F0V2nTvytW5BixXNd0KdpayAmDYoaRTO0GLQN4pxeURldvx3CxvfH5wFY/2LM590CeGI/KiL5v6JGA2sQVhbHQHlJiWy5Inw41u1Ca8aVlk3OCApVcOUxK1fditEk4Ro0vLqJgr9ohgwQ/Z5QSI5qRW/PTGTMvZy7iMhQsb9zeQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=EdID0DFE4HAU7xd8Jz5U0z8FNuSv078dhHif4ac5eZs=;
- b=xKjLhtMBgc1kiNMX6ZQoblWf8QIuCOmOurhZ2tzYkguYcSZAYhHm9pwMKn2hbdh7Uwmaz/L0rq/gVpF8d9INYIfzSPSpNtzZK3ypw6gttIznaMJuq90mPVTNAJBlj1S2h5nckAV0W88V/ElhEvnWogIf1XffxrXZdM5RyZ6iFXtBxIAzqWTeWd84pXKl3yUAq/q3zYrYPHgyKpA3Sx92HFcrmsSXceUICyDm3m9ElNiPaNwP2PpEk5RP/TxYhZPPpjM95EHwHdQIScvcgFg4K5yLpWW+ERI7zohyoTsTAJXX85sa92QoEOShuCK12hLOAPZIk3qDhQOIFeAsDLUW8g==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=EdID0DFE4HAU7xd8Jz5U0z8FNuSv078dhHif4ac5eZs=;
- b=gXourLZoYtwzEcC2fsfdrh6Y22nyRxwR7H/Cva0KBKubIOyHdZLTUu+kroWfeAb26KtRrI07FUS+P2uwgGwaHS+pXR7o0wbYaeAgQwa/nEYHvF97892QmB0PSlf7+CN4lWssQBNXo5ERlE+UT7ftr+9UToFx+8xPYQyHg2WBATGMOfHR2V6npd/RnskP6fK1lGQ58N2rcYMfsTP+cAmtFciAs8U1fuqs6dRHnk+Z99ylXdy2OpDYnkqiymUznv9t5+5v3OmB90LREa9Kz0C1QELUflnhkuvvmSpKYoi2jnIod+3O9wBxTq9rfKE6EUK63pbdKZsehRxZh23A9/cprw==
-From: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Julien Grall <jgrall@amazon.com>
-Subject: [PATCH v2] xen/arm: gicv3: initialize eSPI unconditionally
-Thread-Topic: [PATCH v2] xen/arm: gicv3: initialize eSPI unconditionally
-Thread-Index: AQHdSsRkuuRG4YXur0mlXN3LfWLvYg==
-Date: Tue, 22 Sep 2026 18:58:45 +0000
-Message-ID:
- <13181424f9be3f5e31977fbd505209cd0508571b.1790102501.git.leonid_komarianskyi@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: DB5PR03MB10049:EE_|VI0PR03MB10733:EE_
-x-ms-office365-filtering-correlation-id: 69e3f00e-ecf5-4ff9-509a-08df18db874e
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|376014|366016|23010399003|38070700021|5023799004|11063799006|6133799003|10067099003|56012099006|18002099003;
-x-microsoft-antispam-message-info:
- 9+w/QoSgF3KxjRt0YIgp/Ypdiyg62HN/ebrMvU1vNMlabMVbESzyOkIRrBvDiWUMj7HeNK3L99Q50lrNDrlXZWFH9HTl/H2HhF5BbRpHixoQsxDRSDk5ez0E/0cb5YyoPHS9okMdM9wcntQp8DbICOhngglqwp2aoUaGLag6Y/WbjWUf405j9Grk68Cm3Zbeha1hfsLzSrUakHxH7JMwnSIDDL4SMf729obpfHVCRNbumn2iYn78TDB5Usm13HyPq84xu7eVLm498IR2vYljv5mPoKVc2tFD308bz3mvhHqQa294brnKg4bwkaiTsAkwMNbqQe878iSAEUY/sNL3kqxPYUANSbF4Ou7f8OB3lxEcBzxkAGsHP68rorHo8/9isojNivmuv6xanJcdy5+AVokOxMUMwxZncyjLSDbcX6H1xpsV8isgV26IarEahZVufJ0GwLsHuk0Tyx9DL8mFc0XCbCp+Aiv6VBpy1uYtn/LoKnBNFMlTZh4NhweiULZSTarChuL3z1mYtmTxmvRgo61lguwP0orWbc+cOmeeTvHRbORhwUcOFEUMyl83Wy6/2/GomazO19B4gswjOK1AFTL+G2u0ELpiXGsIek06R6dr8wtuYG6LPxtp8+Yo0Xfk3MggoGReHT2ILzGqYppunL8Krm5KChOxhb7kYo1jMkKGCt/Zqf7PXLvnxx7Ss6C75G0jCRXjKwp7QTIKgy6nlGEPbhSZQIigbi5xTy/DYek=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB5PR03MB10049.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(38070700021)(5023799004)(11063799006)(6133799003)(10067099003)(56012099006)(18002099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?Q1c1SXJEVFJBU2h2YmUzak5GR2JwT0hwNllhSmdHVmlZaGJPL0RxdjVBaDEx?=
- =?utf-8?B?YTJYc243RElEQlpMc2pYY2YrTzJ6Yks2ZkdOT2UvNTErd084akF5YlVPSERm?=
- =?utf-8?B?bE82THFwdTVUdHJJVmo0ZDRkQ05hS0lnMVlIRDhuV0hhZFRmNmZ5dmpweUtT?=
- =?utf-8?B?U05helJyQ3Npc3htNnh4c2p0Rit4NFkzVmVad3Q4OEVRUDNueDV0MmpjdjFu?=
- =?utf-8?B?WnBESUFPZ0VrQ3NKVElsQzQ2cVQ0M1NXSk14SkkrMzBWV3ovL1IyMTdHVTFo?=
- =?utf-8?B?Nkt5aUxvSVQ1dkNJYzV1NG1oZ0MxTFIxclR0ekFtMmtLMWo2R3JiWHFaNGxD?=
- =?utf-8?B?WWtzMUlwdFVQUUZYRDZEMUo4dDRWTHFPbGlkTjJvVWlOMm43ampDYkhzOU1K?=
- =?utf-8?B?dXdxRWJ1ZkhSUUt6TVdFaXVBREQvemtpY0k4MkNzMWFoaVJ4N1YyOUFDZW9a?=
- =?utf-8?B?U0UycDh4a3l4UUFFcUZiS2xMbTJCQzlDbnV6UEI3Vzh5MTE0ZVhBcXhoSGFr?=
- =?utf-8?B?TXRnL0JYVGVTODZQK0NtUjZNb284aUVtWXZrU0dVVGpFQTJvZDJydktMRHRm?=
- =?utf-8?B?ajJnZFJ4ZTFVaGFOeFJCcnlEaGgzdjFvUGgwWDN2dkpNdkwxa3lVaHd2K0x1?=
- =?utf-8?B?TUl6WmJvcnNhMnROdzEyZTI0ZElRcTl0d3VZVW5PR3didzdTbWFOWWYwQ3Vw?=
- =?utf-8?B?M016V0FEQXZEQWR3S2pmdzk4ZGN2dUZXWTMxWUVaNys2TkF2ZDZLYXJSOGFX?=
- =?utf-8?B?WWJTYVBHYkptSjBDVzMrSENCTmdCZEtHaUQycWFFU3JPdXcveDFEcVJLZmox?=
- =?utf-8?B?ZTFmLzJUWGcrcWorZUhpUG83VDRkUnNwaXNCV2JUMy9UV2kvVGtXWDVwWXQ5?=
- =?utf-8?B?SGU1UHdaWlkwM2kzVTRRbTF4NXVOZnliQ3d6STh0bkoxZ1lTc1ZZTUNWajA1?=
- =?utf-8?B?cVpKc0JIcmZDM09qU05FU2ttWU5nZy9BS2h5cGcxZ1lsQWdXdElUbVIxUXdG?=
- =?utf-8?B?ZWJIcmVja0FZOVJmMGhsaUpxekNtWnEyUzZyWFFGSit0cWxzcnV2WjlWMmR2?=
- =?utf-8?B?MU5QUFJyWjYyNG0xQkM5SUVkWCtrQ0V0VkdrM054aG56Z2ZnVE9VUjIvSS9Z?=
- =?utf-8?B?b3BPQmxYclNpVzZveWJ0Rmhwajl2amkrbGhGU3FPRmJDZk5HS1gvYTNVQnVK?=
- =?utf-8?B?NFJyaXQ2Tk5jVnhKQ09KOFVXZE9sQ29nTDVrbCtHaE05cGF5NmNKcU5sb2Zq?=
- =?utf-8?B?em1ESVNBVnFNZ2N1TDJXZzlXck9ySS9BZlQvd3VISzNpVExISFp4ejNFTGd6?=
- =?utf-8?B?bU15QXJEUms3SjliUERSWnVMTVgvVDVGa0JGTUpKQmJ2OFJZZXpieWg5TWhB?=
- =?utf-8?B?T3lQQ0pPZklnWEtLbG5QTGZvYUFnOTIzOEtFdHpodXFZRUtPcjdKVy9lK1Jn?=
- =?utf-8?B?eWFPclRlSlhDOUl0N3QxMVhoQkVDSnhRcnNvSmlEWTZUaVVIN0llamtlN1dw?=
- =?utf-8?B?dTRuTW1USE11dEtVRDhiakVZaEU5VVJSamFkOEtKY055dXg3cko2TG13TFNX?=
- =?utf-8?B?Z3cwUnlGRUdZT0Vwa2Vra3M3NkQ0bEdaRkZwQTE0QlRxM0VBbUJCc25EUkc5?=
- =?utf-8?B?UDllSDhvZHQxaGxETVFBTFhxRUtKN2RYMDYxU21SQjJvZ042SDcxbkN3Rk41?=
- =?utf-8?B?VjBWWFpMRjFwVzlCa1BON1BOTEZVZXF5OEtvNUhUcDN6UnpUVTh6eFNHZFN3?=
- =?utf-8?B?MmxDQnN4TnVIRERWQUtQVlRKYXlpYVYyVHQ4ejZvcURkVmpVS2pOSGpGOXFB?=
- =?utf-8?B?UUI5Y2ZBUzVZUmdIYVNLNWtIZXRpWEpOQXZEM3NSM3lIcnFDeFIvMldZekE5?=
- =?utf-8?B?U2ZQZyt0Vng4YUV1cUM5STRwcnB4dzNuaDhiZEwrb0d2OU5RTnhiQ3lTOXNV?=
- =?utf-8?B?Rm9WMjdveFFrdXpwNFR3NCtlZWlvQm1YOVBkQ0EzK01Sc2ZQekZIK0JNVjFo?=
- =?utf-8?B?L09jcS9xa0VwaFF6WUY3V2ZFdzU1V2Y5cVFnSHRvYzJTcmc4SUFMV1N2VHg4?=
- =?utf-8?B?M1pDbEhQUWtTSGZkc3B4clZhSjBISzBRTmN3WDNyTkxTcmJDb29JTjRRTkkw?=
- =?utf-8?B?anYvYmtYcHFYV0x5ZVhjclBWMVVkS3hVbmZoWTlGbzNIUWlIOW55Rnk1N1lU?=
- =?utf-8?B?YTd1dk8rZlEwV2s2SDRhQ09Tc05NeTdrSjRGZXh5Y3pDUVE1alRNY1VYbUxG?=
- =?utf-8?B?b3NNK2Z4VXlTNFIzZ0hINDI4c2NqYmF1dHhZRWo2ZnEzZ0NWUU1TQUNSc3h5?=
- =?utf-8?B?WWNsdzcxZ0M3Q1M1aWRLVWQ5MGw2cmZoTGpLQis0cHJCK2R6NElHQTN2R2xa?=
- =?utf-8?Q?xx56xycrgfwhCGd4=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1790108661;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=ArBsudPGq56rGaGjJckWrplo0/hGiKQk5vOivYLgX9k=;
+	b=QIsZgVeuuzl2ZhjQwuC/Ev2xRT58M/N7eE3GyQ2PPEj97XWOBxLhTCzf5CsY9pKGxyykX4
+	z6FWOxTu+0pX+b/4zC8XGk+KDtJrgYL02t9+2A3kHbNlntRyT/WL+QNPBwAQ5YbkBSK5EM
+	4F2WcO4yumsE7YO4QyZ8GK1uAgTE4/4=
+X-MC-Unique: Ljz03s7FNHWwafDBITVPiw-1
+X-Mimecast-MFC-AGG-ID: Ljz03s7FNHWwafDBITVPiw_1790108656
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Wed, 23 Sep 2026 00:18:32 +0400
+Subject: [PATCH 85/88] qdev: add x-query-qtree QMP command
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: DB5PR03MB10049.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 69e3f00e-ecf5-4ff9-509a-08df18db874e
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Sep 2026 18:58:45.6296
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: WHeOxv4HEkWsIkbx/Dtm+Xg/NU3cmg4otoN2uHha6oGzMpXJRXY5Z6V6V5Z7xAtCc4mWqfc1Sj0zlfwpd6WzMzXy7auXtLVOGu7oyUmkkDc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI0PR03MB10733
-X-purgate-ID: tlsNG-42698a/1790103530-AA0C59EA-3A0C6932/0/0
+Message-Id: <20260923-nohmp-v1-85-ebc029d4bd80@redhat.com>
+References: <20260923-nohmp-v1-0-ebc029d4bd80@redhat.com>
+In-Reply-To: <20260923-nohmp-v1-0-ebc029d4bd80@redhat.com>
+To: qemu-devel@nongnu.org
+Cc: Kevin Wolf <kwolf@redhat.com>, 
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
+ Amit Shah <amit@kernel.org>, Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Anthony PERARD <anthony@xenproject.org>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ Eric Blake <eblake@redhat.com>, Markus Armbruster <armbru@redhat.com>, 
+ xen-devel@lists.xenproject.org, qemu-rust@nongnu.org
+X-Developer-Signature: v=1; a=openpgp-sha256; l=22716;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=kgwmlhrAVDXi4XANRljYDT/ER4YlpkwkFlzObaLlJCI=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqsuK0thVU45gjDBEnQecKc50CZGgIu1NnS+HpQ
+ rZ5RvqAZ+eJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCarLitAAKCRDa6OEJdZac
+ 5b9tD/4kNJbyz4x+KPGlvhyk8IVrVHJKZHe5UYHPfmbGRKG3E/CkRpYoSW1VZREd5AXbD30foTk
+ uH2iuDdZSIVyKgvaXZ7nI5VUgdRygOG4goAHwzLFHxxhq3Vclj4UBupzOvP0tPftLwnrGsOF4+p
+ TYYtzzoFntv8G+lZZandIG3ufOMhbd+YxevKBYq3enEueT7AqZQZZ1ASg38GYKqxTaqtcj3gQ/p
+ 13tMoUCCnxkpLfRr9R3+4ZYMWXoaE9ORpoiK8yxM22Esgy4mTBrQxYpib+lhhY4TtgsuBa0YIqV
+ soeVaFz8aT2ePEv3xAjpVz6sIj6WqNFoQF2DN/9t7Z0AtT3InmQKtWd3YgA9zKYYwRcJYyR6x3m
+ 8Fk/M4VVDAweUT4vsJc1/PgrRp+Ll66Rhe/Xc2Vcmi0sy8Fu5zhpXlE2gid+F5Cxo8sn5E1Sz9D
+ 8XSclNJ44UE1JsizmaE27ACxJM73V4DHmoQap/RElPzw3KQ/HzT2/UShIHIUqzEwTWCaBgoNn7r
+ hQbqa9uiSvX4TpmFSQ3JFg9RaqcKlNJaZKIi7sjB042G13pfc52ZVxT2zvSzculhKrJxk5Wza5U
+ hnukq7c231Kr1MQI6F87bTKMT7GXKQrxiJah4/1xyrbK9ZfTjfo+yDV7uv0DZpTujvcd7Ht/igg
+ DtXX3YvV6KvoVZg==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+X-Mimecast-MFC-PROC-ID: rwj2S0dtMkQfFOHf-l19XsiugOfoLzfkG1or5F3ApqI_1790108656
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1790108667-D457487B-72E35ECC/0/0
 X-purgate-type: clean
-X-purgate-size: 5842
+X-purgate-size: 22718
 
-U2luY2UgdGhlIGZpcm13YXJlIG1heSBpbml0aWFsaXplIGVTUElzIGJlZm9yZSBYZW4sIGFuZCB3
-aXRob3V0DQpDT05GSUdfR0lDVjNfRVNQSSBlbmFibGVkLCBYZW4gd291bGQgbm90IHJlaW5pdGlh
-bGl6ZSB0aGVtIHByb3Blcmx5DQpkdXJpbmcgYm9vdC4gSW4gc3VjaCBjYXNlcywgb25jZSB0aGUg
-R0lDIGlzIHJlLWVuYWJsZWQgaW4gWGVuLA0KaW50ZXJydXB0cyBtYXkgYmUgcmVjZWl2ZWQgdGhh
-dCBjYW5ub3QgYmUgaGFuZGxlZC4NCg0KVG8gZW5zdXJlIHByb3BlciBvcGVyYXRpb24gb24gaGFy
-ZHdhcmUgd2l0aCBlU1BJIGZlYXR1cmUsIGV2ZW4gd2hlbiB0aGUgZVNQSQ0KY29uZmlnIGlzIGRp
-c2FibGVkLCBnaWN2M19kaXN0X2VzcGlfY29tbW9uX2luaXQoKSBzaG91bGQgYmUgaW52b2tlZA0K
-cmVnYXJkbGVzcyBvZiB3aGV0aGVyIENPTkZJR19HSUNWM19FU1BJIGlzIGVuYWJsZWQgb3Igbm90
-LiBUaGlzIHdpbGwgbm90DQphZmZlY3QgaGFyZHdhcmUgd2l0aG91dCBlU1BJIHN1cHBvcnQsIGFz
-IHRoZSBmdW5jdGlvbiBjaGVja3MgaWYgdGhlDQpoYXJkd2FyZSBzdXBwb3J0cyBlU1BJcyBieSBy
-ZWFkaW5nIHRoZSBHSUNEX1RZUEVSLkVTUEkgZmllbGQgKHVzaW5nDQpHSUNEX1RZUEVSX0VTUElT
-X05VTSBtYWNybyksIHdoaWNoIGluZGljYXRlcyB3aGV0aGVyIHRoZSBleHRlbmRlZCBTUEkNCnJh
-bmdlIGlzIHN1cHBvcnRlZC4gSWYgdGhlIGhhcmR3YXJlIGRvZXMgbm90IHN1cHBvcnQgZVNQSSwg
-dGhlIGZ1bmN0aW9uDQp3aWxsIG5vdCBwZXJmb3JtIGFueSBhY3Rpb25zLg0KDQpUaGVyZSBhcmUg
-bm8gZnVuY3Rpb25hbCBjaGFuZ2VzIGZvciBzZXR1cHMgd2hlcmUgQ09ORklHX0dJQ1YzX0VTUEk9
-eS4NCg0KU3VnZ2VzdGVkLWJ5OiBKdWxpZW4gR3JhbGwgPGpncmFsbEBhbWF6b24uY29tPg0KU2ln
-bmVkLW9mZi1ieTogTGVvbmlkIEtvbWFyaWFuc2t5aSA8bGVvbmlkX2tvbWFyaWFuc2t5aUBlcGFt
-LmNvbT4NCkFja2VkLWJ5OiBKdWxpZW4gR3JhbGwgPGpncmFsbEBhbWF6b24uY29tPg0KLS0tDQpD
-aGFuZ2VzIGluIHYyOg0KLSByZWJhc2VkIG9uIHRoZSBjdXJyZW50IHN0YWdpbmcNCi0gcGxhY2Vk
-IFN1Z2dlc3RlZC1ieSB0YWcgZmlyc3QgdG8ga2VlcCB0YWdzIGluIGNocm9ub2xvZ2ljYWwgb3Jk
-ZXINCi0gYWRkZWQgQWNrZWQtYnkgZnJvbSBKdWxpZW4gR3JhbGwNCg0KVGhpcyBpcyBhIGZvbGxv
-dy11cCBwYXRjaCByZWxhdGVkIHRvIHRoZSBkaXNjdXNzaW9uOg0KaHR0cHM6Ly9sb3JlLmtlcm5l
-bC5vcmcveGVuLWRldmVsLzgyMDcwNGQwLTQwNDctNGYwMi1hMDU4LTAxZGFiYTI3NjVmMUB4ZW4u
-b3JnLw0KDQpTZW5kaW5nIHYyIHdpdGggdGhlIHJlcXVlc3RlZCBjaGFuZ2VzLCBhcyBJIG9ubHkg
-bm93IG5vdGljZWQNCnRoYXQgdGhpcyBwYXRjaCBoYXMgbm90IGJlZW4gbWVyZ2VkIHlldC4NCi0t
-LQ0KIHhlbi9hcmNoL2FybS9naWMtdjMuYyAgICAgICAgICAgICAgICAgIHwgMzIgKysrKysrKysr
-KysrKystLS0tLS0tLS0tLS0NCiB4ZW4vYXJjaC9hcm0vaW5jbHVkZS9hc20vZ2ljX3YzX2RlZnMu
-aCB8ICAyIC0tDQogMiBmaWxlcyBjaGFuZ2VkLCAxNyBpbnNlcnRpb25zKCspLCAxNyBkZWxldGlv
-bnMoLSkNCg0KZGlmZiAtLWdpdCBhL3hlbi9hcmNoL2FybS9naWMtdjMuYyBiL3hlbi9hcmNoL2Fy
-bS9naWMtdjMuYw0KaW5kZXggYWNkYWMyMjk1My4uNDYzNzY5ZDc3YiAxMDA2NDQNCi0tLSBhL3hl
-bi9hcmNoL2FybS9naWMtdjMuYw0KKysrIGIveGVuL2FyY2gvYXJtL2dpYy12My5jDQpAQCAtNzAz
-LDE3ICs3MDMsMzIgQEAgdW5zaWduZWQgaW50IGdpY19udW1iZXJfZXNwaXModm9pZCkNCiAgICAg
-cmV0dXJuIGdpY19od19vcHMtPmluZm8tPm5yX2VzcGk7DQogfQ0KIA0KK3N0YXRpYyB2b2lkIF9f
-aW5pdCBnaWN2M19kaXN0X2VzcGlfaW5pdF9hZmYodWludDY0X3QgYWZmaW5pdHkpDQorew0KKyAg
-ICB1bnNpZ25lZCBpbnQgaTsNCisNCisgICAgZm9yICggaSA9IDA7IGkgPCBnaWN2M19pbmZvLm5y
-X2VzcGk7IGkrKyApDQorICAgICAgICB3cml0ZXFfcmVsYXhlZF9ub25fYXRvbWljKGFmZmluaXR5
-LCBHSUNEICsgR0lDRF9JUk9VVEVSbkUgKyBpICogOCk7DQorfQ0KKyNlbHNlDQorDQorc3RhdGlj
-IHZvaWQgX19pbml0IGdpY3YzX2Rpc3RfZXNwaV9pbml0X2FmZih1aW50NjRfdCBhZmZpbml0eSkg
-eyB9DQorI2VuZGlmDQorDQogc3RhdGljIHZvaWQgX19pbml0IGdpY3YzX2Rpc3RfZXNwaV9jb21t
-b25faW5pdCh1aW50MzJfdCB0eXBlKQ0KIHsNCiAgICAgdW5zaWduZWQgaW50IGVzcGlfbnIsIGk7
-DQogDQogICAgIGVzcGlfbnIgPSBtaW4oMTAyNFUsIEdJQ0RfVFlQRVJfRVNQSVNfTlVNKHR5cGUp
-KTsNCisjaWZkZWYgQ09ORklHX0dJQ1YzX0VTUEkNCiAgICAgZ2ljdjNfaW5mby5ucl9lc3BpID0g
-ZXNwaV9ucjsNCisjZW5kaWYNCiAgICAgLyogVGhlIEdJQyBIVyBkb2Vzbid0IHN1cHBvcnQgZVNQ
-SSwgc28gd2UgY2FuIGxlYXZlIGZyb20gaGVyZSAqLw0KLSAgICBpZiAoIGdpY3YzX2luZm8ubnJf
-ZXNwaSA9PSAwICkNCisgICAgaWYgKCBlc3BpX25yID09IDAgKQ0KICAgICAgICAgcmV0dXJuOw0K
-IA0KLSAgICBwcmludGsoIkdJQ3YzOiAldSBlU1BJIGxpbmVzXG4iLCBnaWN2M19pbmZvLm5yX2Vz
-cGkpOw0KKyAgICBpZiAoIElTX0VOQUJMRUQoQ09ORklHX0dJQ1YzX0VTUEkpICkNCisgICAgICAg
-IHByaW50aygiR0lDdjM6ICV1IGVTUEkgbGluZXNcbiIsIGVzcGlfbnIpOw0KIA0KICAgICAvKiBU
-aGUgY29uZmlndXJhdGlvbiBmb3IgZVNQSXMgaXMgc2ltaWxhciB0byB0aGF0IGZvciByZWd1bGFy
-IFNQSXMgKi8NCiAgICAgZm9yICggaSA9IDA7IGkgPCBlc3BpX25yOyBpICs9IDE2ICkNCkBAIC03
-MzMsMTkgKzc0OCw2IEBAIHN0YXRpYyB2b2lkIF9faW5pdCBnaWN2M19kaXN0X2VzcGlfY29tbW9u
-X2luaXQodWludDMyX3QgdHlwZSkNCiAgICAgICAgIHdyaXRlbF9yZWxheGVkKEdFTk1BU0soMzEs
-IDApLCBHSUNEICsgR0lDRF9JR1JPVVBSbkUgKyAoaSAvIDMyKSAqIDQpOw0KIH0NCiANCi1zdGF0
-aWMgdm9pZCBfX2luaXQgZ2ljdjNfZGlzdF9lc3BpX2luaXRfYWZmKHVpbnQ2NF90IGFmZmluaXR5
-KQ0KLXsNCi0gICAgdW5zaWduZWQgaW50IGk7DQotDQotICAgIGZvciAoIGkgPSAwOyBpIDwgZ2lj
-djNfaW5mby5ucl9lc3BpOyBpKysgKQ0KLSAgICAgICAgd3JpdGVxX3JlbGF4ZWRfbm9uX2F0b21p
-YyhhZmZpbml0eSwgR0lDRCArIEdJQ0RfSVJPVVRFUm5FICsgaSAqIDgpOw0KLX0NCi0jZWxzZQ0K
-LXN0YXRpYyB2b2lkIF9faW5pdCBnaWN2M19kaXN0X2VzcGlfY29tbW9uX2luaXQodWludDMyX3Qg
-dHlwZSkgeyB9DQotDQotc3RhdGljIHZvaWQgX19pbml0IGdpY3YzX2Rpc3RfZXNwaV9pbml0X2Fm
-Zih1aW50NjRfdCBhZmZpbml0eSkgeyB9DQotI2VuZGlmDQotDQogc3RhdGljIHZvaWQgX19pbml0
-IGdpY3YzX2Rpc3RfaW5pdCh2b2lkKQ0KIHsNCiAgICAgdWludDMyX3QgdHlwZTsNCmRpZmYgLS1n
-aXQgYS94ZW4vYXJjaC9hcm0vaW5jbHVkZS9hc20vZ2ljX3YzX2RlZnMuaCBiL3hlbi9hcmNoL2Fy
-bS9pbmNsdWRlL2FzbS9naWNfdjNfZGVmcy5oDQppbmRleCAzNzE0Y2ZlYjdkLi4yMDgxYjJmZThm
-IDEwMDY0NA0KLS0tIGEveGVuL2FyY2gvYXJtL2luY2x1ZGUvYXNtL2dpY192M19kZWZzLmgNCisr
-KyBiL3hlbi9hcmNoL2FybS9pbmNsdWRlL2FzbS9naWNfdjNfZGVmcy5oDQpAQCAtNjMsNyArNjMs
-NiBAQA0KICNkZWZpbmUgR0lDRF9JUk9VVEVSbkUgICAgICAgICAgICAgICAoMHg4MDAwKQ0KICNk
-ZWZpbmUgR0lDRF9JUk9VVEVSbkVOICAgICAgICAgICAgICAoMHg5RkZDKQ0KIA0KLSNpZmRlZiBD
-T05GSUdfR0lDVjNfRVNQSQ0KICNkZWZpbmUgR0lDRF9UWVBFUl9FU1BJX1NISUZUICAgICAgICA4
-DQogI2RlZmluZSBHSUNEX1RZUEVSX0VTUElfUkFOR0VfU0hJRlQgIDI3DQogI2RlZmluZSBHSUNE
-X1RZUEVSX0VTUElfUkFOR0VfTUFTSyAgICgweDFGKQ0KQEAgLTczLDcgKzcyLDYgQEANCiAjZGVm
-aW5lIEdJQ0RfVFlQRVJfRVNQSVNfTlVNKHR5cGVyKSAgICBcDQogICAgICAgICAoKCh0eXBlcikg
-JiBHSUNEX1RZUEVSX0VTUEkpID8gXA0KICAgICAgICAgR0lDRF9UWVBFUl9FU1BJX1JBTkdFKCh0
-eXBlcikgPj4gR0lDRF9UWVBFUl9FU1BJX1JBTkdFX1NISUZUKSA6IDApDQotI2VuZGlmDQogDQog
-LyogQ29tbW9uIGJldHdlZW4gR0lDRF9QSURSMiBhbmQgR0lDUl9QSURSMiAqLw0KICNkZWZpbmUg
-R0lDX1BJRFIyX0FSQ0hfTUFTSyAgICAgICAgICgweGYwKQ0KLS0gDQoyLjM0LjENCg==
+Add x-query-qtree QMP command returning HumanReadableText with the
+device tree. Supports an optional "brief" parameter to omit device
+properties, matching the -b flag of "info qtree".
+
+Refactor the BusClass print_dev callback and qbus_print/qdev_print
+functions to write to a GString buffer instead of requiring a Monitor,
+so the QMP command can collect the output directly without needing
+monitor internals.
+
+Rewire hmp_info_qtree to use the new QMP command.
+
+Eventually, qom-list and properties retrieval should be enhanced to
+do tree traversal and make this pretty-printing method obsolete and
+return structured data instead.
+
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+---
+ hw/char/virtio-serial-bus.c     | 23 ++++++++--------------
+ hw/core/sysbus.c                | 17 +++++------------
+ hw/misc/auxbus.c                | 22 ++++++++-------------
+ hw/pci/pci-hmp-cmds.c           | 38 -------------------------------------
+ hw/pci/pci-internal.h           |  2 +-
+ hw/pci/pci.c                    | 40 +++++++++++++++++++++++++++++++++++++--
+ hw/usb/bus.c                    | 23 ++++++++--------------
+ hw/xen/xen-bus.c                | 12 +++---------
+ include/hw/core/qdev.h          |  4 +---
+ qapi/qdev.json                  | 31 ++++++++++++++++++++++++++++++
+ rust/bindings/hwcore-sys/lib.rs |  2 +-
+ system/qdev-monitor.c           | 42 +++++++++++++++++++++++++++--------------
+ 12 files changed, 132 insertions(+), 124 deletions(-)
+
+diff --git a/hw/char/virtio-serial-bus.c b/hw/char/virtio-serial-bus.c
+index c36e18a4cfb5..af438316f1a4 100644
+--- a/hw/char/virtio-serial-bus.c
++++ b/hw/char/virtio-serial-bus.c
+@@ -24,8 +24,6 @@
+ #include "qemu/main-loop.h"
+ #include "qemu/module.h"
+ #include "migration/qemu-file-types.h"
+-#include "monitor/monitor.h"
+-#include "monitor/hmp.h"
+ #include "qemu/error-report.h"
+ #include "qemu/queue.h"
+ #include "hw/core/qdev-properties.h"
+@@ -818,9 +816,7 @@ static int virtio_serial_load_device(VirtIODevice *vdev, QEMUFile *f,
+     return 0;
+ }
+ 
+-#ifdef CONFIG_HMP
+-static void virtser_bus_dev_print(MonitorHMP *hmp, DeviceState *qdev, int indent);
+-#endif
++static void virtser_bus_dev_print(GString *buf, DeviceState *qdev, int indent);
+ 
+ static const Property virtser_props[] = {
+     DEFINE_PROP_UINT32("nr", VirtIOSerialPort, id, VIRTIO_CONSOLE_BAD_ID),
+@@ -829,10 +825,8 @@ static const Property virtser_props[] = {
+ 
+ static void virtser_bus_class_init(ObjectClass *klass, const void *data)
+ {
+-#ifdef CONFIG_HMP
+     BusClass *k = BUS_CLASS(klass);
+     k->print_dev = virtser_bus_dev_print;
+-#endif
+ }
+ 
+ static const TypeInfo virtser_bus_info = {
+@@ -842,18 +836,17 @@ static const TypeInfo virtser_bus_info = {
+     .class_init = virtser_bus_class_init,
+ };
+ 
+-#ifdef CONFIG_HMP
+-static void virtser_bus_dev_print(MonitorHMP *hmp, DeviceState *qdev, int indent)
++static void virtser_bus_dev_print(GString *buf, DeviceState *qdev, int indent)
+ {
+     VirtIOSerialPort *port = VIRTIO_SERIAL_PORT(qdev);
+ 
+-    monitor_hmp_printf(hmp, "%*sport %d, guest %s, host %s, throttle %s\n",
+-                       indent, "", port->id,
+-                       port->guest_connected ? "on" : "off",
+-                       port->host_connected ? "on" : "off",
+-                       port->throttled ? "on" : "off");
++    g_string_append_printf(buf,
++                           "%*sport %d, guest %s, host %s, throttle %s\n",
++                           indent, "", port->id,
++                           port->guest_connected ? "on" : "off",
++                           port->host_connected ? "on" : "off",
++                           port->throttled ? "on" : "off");
+ }
+-#endif
+ 
+ /* This function is only used if a port id is not provided by the user */
+ static uint32_t find_free_port_id(VirtIOSerial *vser)
+diff --git a/hw/core/sysbus.c b/hw/core/sysbus.c
+index fe8f867a8d9c..3a5fd52192d8 100644
+--- a/hw/core/sysbus.c
++++ b/hw/core/sysbus.c
+@@ -20,13 +20,9 @@
+ #include "qemu/osdep.h"
+ #include "qapi/error.h"
+ #include "hw/core/sysbus.h"
+-#include "monitor/monitor.h"
+-#include "monitor/hmp.h"
+ #include "system/address-spaces.h"
+ 
+-#ifdef CONFIG_HMP
+-static void sysbus_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent);
+-#endif
++static void sysbus_dev_print(GString *buf, DeviceState *dev, int indent);
+ static char *sysbus_get_fw_dev_path(DeviceState *dev);
+ 
+ typedef struct SysBusFind {
+@@ -78,9 +74,7 @@ static void system_bus_class_init(ObjectClass *klass, const void *data)
+ {
+     BusClass *k = BUS_CLASS(klass);
+ 
+-#ifdef CONFIG_HMP
+     k->print_dev = sysbus_dev_print;
+-#endif
+     k->get_fw_dev_path = sysbus_get_fw_dev_path;
+ }
+ 
+@@ -253,8 +247,7 @@ bool sysbus_realize_and_unref(SysBusDevice *dev, Error **errp)
+     return qdev_realize_and_unref(DEVICE(dev), sysbus_get_default(), errp);
+ }
+ 
+-#ifdef CONFIG_HMP
+-static void sysbus_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
++static void sysbus_dev_print(GString *buf, DeviceState *dev, int indent)
+ {
+     SysBusDevice *s = SYS_BUS_DEVICE(dev);
+     hwaddr size;
+@@ -262,11 +255,11 @@ static void sysbus_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
+ 
+     for (i = 0; i < s->num_mmio; i++) {
+         size = memory_region_size(s->mmio[i].memory);
+-        monitor_hmp_printf(hmp, "%*smmio " HWADDR_FMT_plx "/" HWADDR_FMT_plx "\n",
+-                           indent, "", s->mmio[i].addr, size);
++        g_string_append_printf(buf, "%*smmio "
++                               HWADDR_FMT_plx "/" HWADDR_FMT_plx "\n",
++                               indent, "", s->mmio[i].addr, size);
+     }
+ }
+-#endif
+ 
+ static char *sysbus_get_fw_dev_path(DeviceState *dev)
+ {
+diff --git a/hw/misc/auxbus.c b/hw/misc/auxbus.c
+index 3f17784d9b8a..17033433147a 100644
+--- a/hw/misc/auxbus.c
++++ b/hw/misc/auxbus.c
+@@ -32,8 +32,6 @@
+ #include "qemu/module.h"
+ #include "hw/misc/auxbus.h"
+ #include "hw/i2c/i2c.h"
+-#include "monitor/monitor.h"
+-#include "monitor/hmp.h"
+ #include "qapi/error.h"
+ 
+ #ifndef DEBUG_AUX
+@@ -47,22 +45,18 @@
+ } while (0)
+ 
+ 
+-#ifdef CONFIG_HMP
+-static void aux_slave_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent);
+-#endif
++static void aux_slave_dev_print(GString *buf, DeviceState *dev, int indent);
+ static inline I2CBus *aux_bridge_get_i2c_bus(AUXTOI2CState *bridge);
+ 
+ /* aux-bus implementation (internal not public) */
+ static void aux_bus_class_init(ObjectClass *klass, const void *data)
+ {
+-#ifdef CONFIG_HMP
+     BusClass *k = BUS_CLASS(klass);
+ 
+     /* AUXSlave has an MMIO so we need to change the way we print information
+      * in monitor.
+      */
+     k->print_dev = aux_slave_dev_print;
+-#endif
+ }
+ 
+ AUXBus *aux_bus_init(DeviceState *parent, const char *name)
+@@ -287,13 +281,12 @@ static const TypeInfo aux_to_i2c_type_info = {
+ };
+ 
+ /* aux-slave implementation */
+-#ifdef CONFIG_HMP
+ static bool aux_bus_is_bridge(AUXBus *bus, DeviceState *dev)
+ {
+     return (dev == DEVICE(bus->bridge));
+ }
+ 
+-static void aux_slave_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
++static void aux_slave_dev_print(GString *buf, DeviceState *dev, int indent)
+ {
+     AUXBus *bus = AUX_BUS(qdev_get_parent_bus(dev));
+     AUXSlave *s;
+@@ -305,12 +298,13 @@ static void aux_slave_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
+ 
+     s = AUX_SLAVE(dev);
+ 
+-    monitor_hmp_printf(hmp, "%*smemory " HWADDR_FMT_plx "/" HWADDR_FMT_plx "\n",
+-                       indent, "",
+-                       object_property_get_uint(OBJECT(s->mmio), "addr", NULL),
+-                       memory_region_size(s->mmio));
++    g_string_append_printf(buf,
++                           "%*smemory " HWADDR_FMT_plx "/" HWADDR_FMT_plx "\n",
++                           indent, "",
++                           object_property_get_uint(OBJECT(s->mmio),
++                                                    "addr", NULL),
++                           memory_region_size(s->mmio));
+ }
+-#endif
+ 
+ void aux_init_mmio(AUXSlave *aux_slave, MemoryRegion *mmio)
+ {
+diff --git a/hw/pci/pci-hmp-cmds.c b/hw/pci/pci-hmp-cmds.c
+index 879011da1384..776762f18fa5 100644
+--- a/hw/pci/pci-hmp-cmds.c
++++ b/hw/pci/pci-hmp-cmds.c
+@@ -135,44 +135,6 @@ void hmp_info_pci(MonitorHMP *hmp, const QDict *qdict)
+     qapi_free_PciInfoList(info_list);
+ }
+ 
+-#ifdef CONFIG_HMP
+-void pcibus_dev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
+-{
+-    PCIDevice *d = (PCIDevice *)dev;
+-    int class = pci_get_word(d->config + PCI_CLASS_DEVICE);
+-    const pci_class_desc *desc = get_class_desc(class);
+-    char ctxt[64];
+-    PCIIORegion *r;
+-    int i;
+-
+-    if (desc->desc) {
+-        snprintf(ctxt, sizeof(ctxt), "%s", desc->desc);
+-    } else {
+-        snprintf(ctxt, sizeof(ctxt), "Class %04x", class);
+-    }
+-
+-    monitor_hmp_printf(hmp, "%*sclass %s, addr %02x:%02x.%x, "
+-                       "pci id %04x:%04x (sub %04x:%04x)\n",
+-                       indent, "", ctxt, pci_dev_bus_num(d),
+-                       PCI_SLOT(d->devfn), PCI_FUNC(d->devfn),
+-                       pci_get_word(d->config + PCI_VENDOR_ID),
+-                       pci_get_word(d->config + PCI_DEVICE_ID),
+-                       pci_get_word(d->config + PCI_SUBSYSTEM_VENDOR_ID),
+-                       pci_get_word(d->config + PCI_SUBSYSTEM_ID));
+-    for (i = 0; i < PCI_NUM_REGIONS; i++) {
+-        r = &d->io_regions[i];
+-        if (!r->size) {
+-            continue;
+-        }
+-        monitor_hmp_printf(hmp, "%*sbar %d: %s at 0x%"FMT_PCIBUS
+-                           " [0x%"FMT_PCIBUS"]\n",
+-                           indent, "",
+-                           i, r->type & PCI_BASE_ADDRESS_SPACE_IO ? "i/o" : "mem",
+-                           r->addr, r->addr + r->size - 1);
+-    }
+-}
+-#endif
+-
+ void hmp_pcie_aer_inject_error(MonitorHMP *hmp, const QDict *qdict)
+ {
+     Error *err = NULL;
+diff --git a/hw/pci/pci-internal.h b/hw/pci/pci-internal.h
+index b7231fab5dc9..68a169488d09 100644
+--- a/hw/pci/pci-internal.h
++++ b/hw/pci/pci-internal.h
+@@ -16,7 +16,7 @@ extern PCIHostStateList pci_host_bridges;
+ 
+ const pci_class_desc *get_class_desc(int class);
+ PCIBus *pci_find_bus_nr(PCIBus *bus, int bus_num);
+-void pcibus_dev_print(MonitorHMP *mon, DeviceState *dev, int indent);
++void pcibus_dev_print(GString *buf, DeviceState *dev, int indent);
+ 
+ int pcie_aer_parse_error_string(const char *error_name,
+                                 uint32_t *status, bool *correctable);
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index 0efb4eb4bb03..433568440853 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -293,9 +293,7 @@ static void pci_bus_class_init(ObjectClass *klass, const void *data)
+     ResettableClass *rc = RESETTABLE_CLASS(klass);
+     FWCfgDataGeneratorClass *fwgc = FW_CFG_DATA_GENERATOR_CLASS(klass);
+ 
+-#ifdef CONFIG_HMP
+     k->print_dev = pcibus_dev_print;
+-#endif
+     k->get_dev_path = pcibus_get_dev_path;
+     k->get_fw_dev_path = pcibus_get_fw_dev_path;
+     k->realize = pci_bus_realize;
+@@ -2094,6 +2092,44 @@ const pci_class_desc *get_class_desc(int class)
+     return desc;
+ }
+ 
++void pcibus_dev_print(GString *buf, DeviceState *dev, int indent)
++{
++    PCIDevice *d = (PCIDevice *)dev;
++    int class = pci_get_word(d->config + PCI_CLASS_DEVICE);
++    const pci_class_desc *desc = get_class_desc(class);
++    char ctxt[64];
++    PCIIORegion *r;
++    int i;
++
++    if (desc->desc) {
++        snprintf(ctxt, sizeof(ctxt), "%s", desc->desc);
++    } else {
++        snprintf(ctxt, sizeof(ctxt), "Class %04x", class);
++    }
++
++    g_string_append_printf(buf, "%*sclass %s, addr %02x:%02x.%x, "
++                           "pci id %04x:%04x (sub %04x:%04x)\n",
++                           indent, "", ctxt, pci_dev_bus_num(d),
++                           PCI_SLOT(d->devfn), PCI_FUNC(d->devfn),
++                           pci_get_word(d->config + PCI_VENDOR_ID),
++                           pci_get_word(d->config + PCI_DEVICE_ID),
++                           pci_get_word(d->config + PCI_SUBSYSTEM_VENDOR_ID),
++                           pci_get_word(d->config + PCI_SUBSYSTEM_ID));
++    for (i = 0; i < PCI_NUM_REGIONS; i++) {
++        r = &d->io_regions[i];
++        if (!r->size) {
++            continue;
++        }
++        g_string_append_printf(buf, "%*sbar %d: %s at 0x%"FMT_PCIBUS
++                               " [0x%"FMT_PCIBUS"]\n",
++                               indent, "",
++                               i,
++                               r->type & PCI_BASE_ADDRESS_SPACE_IO
++                                   ? "i/o" : "mem",
++                               r->addr, r->addr + r->size - 1);
++    }
++}
++
+ void pci_init_nic_devices(PCIBus *bus, const char *default_model)
+ {
+     qemu_create_nic_bus_devices(&bus->qbus, TYPE_PCI_DEVICE, default_model,
+diff --git a/hw/usb/bus.c b/hw/usb/bus.c
+index 5cc5ffec33a1..c6d65274771f 100644
+--- a/hw/usb/bus.c
++++ b/hw/usb/bus.c
+@@ -8,14 +8,10 @@
+ #include "qemu/module.h"
+ #include "system/system.h"
+ #include "migration/vmstate.h"
+-#include "monitor/monitor.h"
+-#include "monitor/hmp.h"
+ #include "trace.h"
+ #include "qemu/cutils.h"
+ 
+-#ifdef CONFIG_HMP
+-static void usb_bus_dev_print(MonitorHMP *hmp, DeviceState *qdev, int indent);
+-#endif
++static void usb_bus_dev_print(GString *buf, DeviceState *qdev, int indent);
+ 
+ static char *usb_get_dev_path(DeviceState *dev);
+ static char *usb_get_fw_dev_path(DeviceState *qdev);
+@@ -34,9 +30,7 @@ static void usb_bus_class_init(ObjectClass *klass, const void *data)
+     BusClass *k = BUS_CLASS(klass);
+     HotplugHandlerClass *hc = HOTPLUG_HANDLER_CLASS(klass);
+ 
+-#ifdef CONFIG_HMP
+     k->print_dev = usb_bus_dev_print;
+-#endif
+     k->get_dev_path = usb_get_dev_path;
+     k->get_fw_dev_path = usb_get_fw_dev_path;
+     hc->unplug = qdev_simple_device_unplug_cb;
+@@ -548,19 +542,18 @@ static const char *usb_speed(unsigned int speed)
+     return txt[speed];
+ }
+ 
+-#ifdef CONFIG_HMP
+-static void usb_bus_dev_print(MonitorHMP *hmp, DeviceState *qdev, int indent)
++static void usb_bus_dev_print(GString *buf, DeviceState *qdev, int indent)
+ {
+     USBDevice *dev = USB_DEVICE(qdev);
+     USBBus *bus = usb_bus_from_device(dev);
+ 
+-    monitor_hmp_printf(hmp, "%*saddr %d.%d, port %s, speed %s, name %s%s\n",
+-                       indent, "", bus->busnr, dev->addr,
+-                       dev->port ? dev->port->path : "-",
+-                       usb_speed(dev->speed), dev->product_desc,
+-                       dev->attached ? ", attached" : "");
++    g_string_append_printf(buf,
++                           "%*saddr %d.%d, port %s, speed %s, name %s%s\n",
++                           indent, "", bus->busnr, dev->addr,
++                           dev->port ? dev->port->path : "-",
++                           usb_speed(dev->speed), dev->product_desc,
++                           dev->attached ? ", attached" : "");
+ }
+-#endif
+ 
+ static char *usb_get_dev_path(DeviceState *qdev)
+ {
+diff --git a/hw/xen/xen-bus.c b/hw/xen/xen-bus.c
+index 8def3bb68bc6..cc98034230e8 100644
+--- a/hw/xen/xen-bus.c
++++ b/hw/xen/xen-bus.c
+@@ -16,8 +16,6 @@
+ #include "hw/xen/xen-legacy-backend.h" /* xen_be_init() */
+ #include "hw/xen/xen-bus.h"
+ #include "hw/xen/xen-bus-helper.h"
+-#include "monitor/monitor.h"
+-#include "monitor/hmp.h"
+ #include "qapi/error.h"
+ #include "qobject/qdict.h"
+ #include "system/system.h"
+@@ -101,15 +99,13 @@ abort:
+     qemu_xen_xs_transaction_end(xenbus->xsh, tid, true);
+ }
+ 
+-#ifdef CONFIG_HMP
+-static void xen_bus_print_dev(MonitorHMP *hmp, DeviceState *dev, int indent)
++static void xen_bus_print_dev(GString *buf, DeviceState *dev, int indent)
+ {
+     XenDevice *xendev = XEN_DEVICE(dev);
+ 
+-    monitor_hmp_printf(hmp, "%*sname = '%s' frontend_id = %u\n",
+-                       indent, "", xendev->name, xendev->frontend_id);
++    g_string_append_printf(buf, "%*sname = '%s' frontend_id = %u\n",
++                           indent, "", xendev->name, xendev->frontend_id);
+ }
+-#endif
+ 
+ static char *xen_bus_get_dev_path(DeviceState *dev)
+ {
+@@ -388,9 +384,7 @@ static void xen_bus_class_init(ObjectClass *class, const void *data)
+     BusClass *bus_class = BUS_CLASS(class);
+     HotplugHandlerClass *hotplug_class = HOTPLUG_HANDLER_CLASS(class);
+ 
+-#ifdef CONFIG_HMP
+     bus_class->print_dev = xen_bus_print_dev;
+-#endif
+     bus_class->get_dev_path = xen_bus_get_dev_path;
+     bus_class->realize = xen_bus_realize;
+     bus_class->unrealize = xen_bus_unrealize;
+diff --git a/include/hw/core/qdev.h b/include/hw/core/qdev.h
+index 1f6bf3fc1abf..e8399d8541fb 100644
+--- a/include/hw/core/qdev.h
++++ b/include/hw/core/qdev.h
+@@ -323,10 +323,8 @@ DECLARE_OBJ_CHECKERS(BusState, BusClass,
+ struct BusClass {
+     ObjectClass parent_class;
+ 
+-#ifdef CONFIG_HMP
+     /* FIXME first arg should be BusState */
+-    void (*print_dev)(MonitorHMP *mon, DeviceState *dev, int indent);
+-#endif
++    void (*print_dev)(GString *buf, DeviceState *dev, int indent);
+     /*
+      * Return a newly allocated string containing the path of the
+      * device on this bus.
+diff --git a/qapi/qdev.json b/qapi/qdev.json
+index 974cf9c5830e..4b5ccfb37687 100644
+--- a/qapi/qdev.json
++++ b/qapi/qdev.json
+@@ -165,6 +165,37 @@
+ { 'event': 'DEVICE_UNPLUG_GUEST_ERROR',
+   'data': { '*device': 'str', 'path': 'str' } }
+ 
++##
++# @x-query-qtree:
++#
++# Query device tree
++#
++# @brief: if true, omit device properties.  (default: false)
++#
++# Features:
++#
++# @unstable: This command is meant for debugging.
++#
++# Returns: device tree
++#
++# Since: 11.2
++#
++# .. qmp-example::
++#
++#     -> { "execute": "x-query-qtree" }
++#     <- { "return": { "human-readable-text": "..." } }
++#
++# .. qmp-example::
++#
++#     -> { "execute": "x-query-qtree",
++#          "arguments": { "brief": true } }
++#     <- { "return": { "human-readable-text": "..." } }
++##
++{ 'command': 'x-query-qtree',
++  'data': { '*brief': 'bool' },
++  'returns': 'HumanReadableText',
++  'features': [ 'unstable' ] }
++
+ ##
+ # @device-sync-config:
+ #
+diff --git a/rust/bindings/hwcore-sys/lib.rs b/rust/bindings/hwcore-sys/lib.rs
+index cecbf808dd09..a28f5ab90f69 100644
+--- a/rust/bindings/hwcore-sys/lib.rs
++++ b/rust/bindings/hwcore-sys/lib.rs
+@@ -21,7 +21,7 @@
+ 
+ use chardev_sys::Chardev;
+ use common::Zeroable;
+-use glib_sys::GSList;
++use glib_sys::{GSList, GString};
+ use migration_sys::VMStateDescription;
+ use qom_sys::{
+     InterfaceClass, Object, ObjectClass, ObjectProperty, ObjectPropertyAccessor,
+diff --git a/system/qdev-monitor.c b/system/qdev-monitor.c
+index 8185822daa71..1a4af35f9db1 100644
+--- a/system/qdev-monitor.c
++++ b/system/qdev-monitor.c
+@@ -27,6 +27,7 @@
+ #include "system/runstate.h"
+ #include "qapi/error.h"
+ #include "qapi/qapi-commands-qdev.h"
++#include "qapi/type-helpers.h"
+ #include "qapi/qmp-registry.h"
+ #include "qobject/qdict.h"
+ #include "qapi/qmp/qerror.h"
+@@ -770,11 +771,10 @@ DeviceState *qdev_device_add(QemuOpts *opts, Error **errp)
+     return ret;
+ }
+ 
+-#ifdef CONFIG_HMP
+ #define qdev_printf(fmt, ...) \
+-    monitor_hmp_printf(hmp, "%*s" fmt, indent, "", ## __VA_ARGS__)
++    g_string_append_printf(buf, "%*s" fmt, indent, "", ## __VA_ARGS__)
+ 
+-static void qdev_print_props(MonitorHMP *hmp, DeviceState *dev, DeviceClass *dc,
++static void qdev_print_props(GString *buf, DeviceState *dev, DeviceClass *dc,
+                              int indent)
+ {
+     for (int i = 0, n = dc->props_count_; i < n; ++i) {
+@@ -798,16 +798,17 @@ static void qdev_print_props(MonitorHMP *hmp, DeviceState *dev, DeviceClass *dc,
+     }
+ }
+ 
+-static void bus_print_dev(BusState *bus, MonitorHMP *hmp, DeviceState *dev, int indent)
++static void bus_print_dev(BusState *bus, GString *buf, DeviceState *dev,
++                          int indent)
+ {
+     BusClass *bc = BUS_GET_CLASS(bus);
+ 
+     if (bc->print_dev) {
+-        bc->print_dev(hmp, dev, indent);
++        bc->print_dev(buf, dev, indent);
+     }
+ }
+ 
+-static void qdev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
++static void qdev_print(GString *buf, DeviceState *dev, int indent)
+ {
+     ObjectClass *class;
+     NamedGPIOList *ngl;
+@@ -832,13 +833,13 @@ static void qdev_print(MonitorHMP *hmp, DeviceState *dev, int indent)
+     }
+     class = object_get_class(OBJECT(dev));
+     do {
+-        qdev_print_props(hmp, dev, DEVICE_CLASS(class), indent);
++        qdev_print_props(buf, dev, DEVICE_CLASS(class), indent);
+         class = object_class_get_parent(class);
+     } while (class != object_class_by_name(TYPE_DEVICE));
+-    bus_print_dev(dev->parent_bus, hmp, dev, indent);
++    bus_print_dev(dev->parent_bus, buf, dev, indent);
+ }
+ 
+-static void qbus_print(MonitorHMP *hmp, BusState *bus, int indent, bool details)
++static void qbus_print(GString *buf, BusState *bus, int indent, bool details)
+ {
+     BusChild *kid;
+ 
+@@ -851,22 +852,35 @@ static void qbus_print(MonitorHMP *hmp, BusState *bus, int indent, bool details)
+         qdev_printf("dev: %s, id \"%s\"\n", object_get_typename(OBJECT(dev)),
+                     dev->id ? dev->id : "");
+         if (details) {
+-            qdev_print(hmp, dev, indent + 2);
++            qdev_print(buf, dev, indent + 2);
+         }
+         QLIST_FOREACH(child_bus, &dev->child_bus, sibling) {
+-            qbus_print(hmp, child_bus, indent + 2, details);
++            qbus_print(buf, child_bus, indent + 2, details);
+         }
+     }
+ }
+ #undef qdev_printf
+ 
+-void hmp_info_qtree(MonitorHMP *hmp, const QDict *qdict)
++HumanReadableText *qmp_x_query_qtree(bool has_brief, bool brief, Error **errp)
+ {
+-    bool details = !qdict_get_try_bool(qdict, "brief", false);
++    g_autoptr(GString) buf = g_string_new("");
++    bool details = !(has_brief && brief);
+ 
+     if (sysbus_get_default()) {
+-        qbus_print(hmp, sysbus_get_default(), 0, details);
++        qbus_print(buf, sysbus_get_default(), 0, details);
+     }
++
++    return human_readable_text_from_str(buf);
++}
++
++#ifdef CONFIG_HMP
++void hmp_info_qtree(MonitorHMP *hmp, const QDict *qdict)
++{
++    bool brief = qdict_get_try_bool(qdict, "brief", false);
++    g_autoptr(HumanReadableText) info =
++        qmp_x_query_qtree(true, brief, &error_abort);
++
++    monitor_hmp_printf(hmp, "%s", info->human_readable_text);
+ }
+ 
+ void hmp_info_qdm(MonitorHMP *hmp, const QDict *qdict)
+
+-- 
+2.56.0.rc0.29.g47ce80527c56
+
 
