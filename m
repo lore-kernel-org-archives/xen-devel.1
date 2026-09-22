@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFC74C982FF
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 12:43:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428777.1651715 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E534EC982FF
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 12:55:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428790.1651730 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8zpx-0006Gr-KN; Tue, 22 Sep 2026 12:43:05 +0000
+	id 1x901g-0008SC-OD; Tue, 22 Sep 2026 12:55:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428777.1651715; Tue, 22 Sep 2026 12:43:05 +0000
+Received: by outflank-mailman (output) from mailman id 1428790.1651730; Tue, 22 Sep 2026 12:55:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8zpx-0006Gk-HX; Tue, 22 Sep 2026 12:43:05 +0000
-Received: by outflank-mailman (input) for mailman id 1428777;
- Tue, 22 Sep 2026 12:43:04 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x901g-0008S5-Ke; Tue, 22 Sep 2026 12:55:12 +0000
+Received: by outflank-mailman (input) for mailman id 1428790;
+ Tue, 22 Sep 2026 12:55:11 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x8zpw-0006GZ-J9
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 12:43:04 +0000
+ (envelope-from <alex.brett@citrix.com>) id 1x901f-0008Rs-Cr
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 12:55:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8zpv-00AK7E-Ch
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 14:43:03 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1x901e-00HLst-PP
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 14:55:10 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ab277cd-e002-0a2a0a5209dd-0a2a4503a432-48
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 14:43:03 +0200
-Received: from [74.125.225.103] (helo=mail-wr2-f39.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ab277d7-fae8-0a2a45030019-4a7de167800b-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 14:43:03 +0200
-Received: by mail-wr2-f39.google.com with SMTP id
- ffacd0b85a97d-482f633ece3so3138701f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 05:43:03 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-488626d29dasm5250064f8f.0.2026.09.22.05.43.01
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Sep 2026 05:43:02 -0700 (PDT)
+ (envelope-from <alex.brett@citrix.com>)
+ id 6ab27aa2-bab6-0a2a0a5309dd-0a2a450ca090-20
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 14:55:10 +0200
+Received: from [52.101.43.59]
+ (helo=SJ2PR03CU001.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <alex.brett@citrix.com>)
+ id 6ab27aac-f479-0a2a450c0019-34652b3bf27d-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 14:55:10 +0200
+Received: from CH7PR03MB7859.namprd03.prod.outlook.com (2603:10b6:610:24f::20)
+ by SJ0PR03MB5421.namprd03.prod.outlook.com (2603:10b6:a03:289::7)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.14; Tue, 22 Sep
+ 2026 12:55:06 +0000
+Received: from CH7PR03MB7859.namprd03.prod.outlook.com
+ ([fe80::967:59c2:d16:1fcf]) by CH7PR03MB7859.namprd03.prod.outlook.com
+ ([fe80::967:59c2:d16:1fcf%6]) with mapi id 15.21.0451.014; Tue, 22 Sep 2026
+ 12:55:06 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,156 +55,169 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790080983; x=1790685783; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=snXXMJlrgbggXfT1mZvFwn5OPCOQTYOMT8eZohQBErw=;
-        b=PWsbYdITMhGN6dH0+YZnf/L7i5esLZ3RLSLRuHwkvHyS9rCQgxaI9oHWHBwEZE3eDH
-         YBBoyQSQx2qQ25AlTZcHM3bL97aeEqE2/Zb5OmKWv68JDWUtxL6u+XV9W+fYavw+NeZC
-         F5aEV/Fwzpn0ZH/nYETXzfpG9zgmdZX/wzUu82gVv9ILd6g0Am5/ON7lv0w5A/uciZDw
-         L8UZZkYGb2UCU0IzSaLJNreFPr6QA2LqBrCoAttRULQNJ/RIsIEbLouFGHuvwCnv0xy7
-         4jSFuxcD9sNmFWrhLYcfIf8+WnN46W1wAx0YryHw1prh7pPVXT8YW1ss1wM9us4KyHMx
-         7iNA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790080983; x=1790685783;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=snXXMJlrgbggXfT1mZvFwn5OPCOQTYOMT8eZohQBErw=;
-        b=DMM9QOJFUS+cOqf4oi6ckYTD9EDuOnk2xPw8qMpjJymwt5aMhhrCkNrlohaPPJWyu/
-         7uSau1S0ahBD1rbMkpzJWE4H1hQAHcMn8RgI2g1W64bf+Wn0VvFZuAt5e+c/IYMu5PKP
-         tHlkID12qrzQOSLLX6v4ylDP4QsGYyDG0vYxVmAVHkVxMk84vl4ePZ3il6ArYl35/3WA
-         EFFYTd4GIauWjpluCC/V5zCrEFA02V9zR919JBbXsRUyUNd42SEKbmu+UgQbxxq141CU
-         jUAbOhIdCDqdp4CKki3rQR4Ufr+MddRMJWj+DYTYL/zjpAZtoF2jG6dFFk5EW5xeOi6d
-         UGMA==
-X-Gm-Message-State: AFuF++lPg+uIe2ydhanLIU7sbHa/VOwrAqDHj0G14eJFt1xnlRnHjijW
-	6QNTe5f2NCFfW9l4DPsCqO++NxtCsd+fyA7czK4WyqX0DHlQ60VyekY7EY2KGZB9xA==
-X-Gm-Gg: AYBFou0R4xBGkOR+mk3fdIWmSIDADB5jJ9t66oDe1JiPSEIKizpVXkalrdW6RF3jXU6
-	QO2f+nBRYFZ1r0R3fSDM81twxs2Pr3KDvY2raiAbMH+rlOBxaPiXJGRBnMw82imp7ceaPe3e/Kn
-	VPz3D7M3tPJSmkzHHqj+aS1OtMsWJyQ9T6H0WLE2yOC39UJ9LYIkR0bhlPJr6BfPWaDCQCUMWQ5
-	9/SAtS89/vlhzYHErzedmNqGYTMptQddyJnR7Pq+oTDQGVrZkPGelEElxQXX0E/6hMrxox33Jji
-	Rqb/oNyL9+62W+g6UNQOrbHvWzt4uPsW7h7pXmxkLjlSYa7fbLeBTEifJQPvmVqdqG9p4/lZSMf
-	b0dEQrK3pItlbVUvJbF/S1fDomHW1JVaq03Jmh25sb+YII6n8YC8N5hKbOOu3YySziN4/m+VbzM
-	WJXZl7BmnabtCmy32eR26sJhDvr/xe05v9nqctEA9Jw3yGOVb6cYm9/AX85AKimjCUG06Wzl/XU
-	+ZZh2wZCyuO94TzL3dUsKgb4/+eoB+XK1HNtsR25QmZuPVyU+1lB6IpMhPgFlM=
-X-Received: by 2002:a05:6000:4685:b0:487:2385:e19c with SMTP id ffacd0b85a97d-4872385f827mr11459240f8f.0.1790080982623;
-        Tue, 22 Sep 2026 05:43:02 -0700 (PDT)
-Message-ID: <0ebba54b-142b-4040-b4a8-938518e7672b@suse.com>
-Date: Tue, 22 Sep 2026 14:43:01 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=h+i2fPDUH683qhhcD7+UCmcWM+V2OUm+v9Pgae0lbL67d+OFuUkZFm5f46rbU6p91nmz7aASC2to2zMHvqr1BDnKPeL1Qo6R1SX25xaiODFN9DylVFdNR6AYmtvtJiiGLSd2n6w9pCZEVa7yQHftRr1/aMkdS4tyjZHLq4FrlvDIJcuMOvOlsJYD0watBd1uJ0qAPjd1AXNXQrCMV+bWjJrsLeAyWqoNQP7rxy0sn7IGpVy1wS3AjZY9Htl6RF3dBeKnhp3uUfRrekQNBLnsG2n1cwIbIum2iSRCO8mdEA+YBMdIGpG9Bfd79b/ML/e/NTNEvSnpWOto2umORTmZZg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=PMvDmdURcCKCX8S8qDj2J5NhrZcfw0jh8u43/yP7kPE=;
+ b=GdTebdoaRwl3p/ZhHMVKCr71swKtxljW22YNPmkNlXsdER6mftd5Hu/99XRApE6a/BVDjMsMGfCGGvvhoV7HUdXIiA63Q8mGKm+skjyUQdlbUuO2r8BCorNjBISyPzeDPHor/LaQ+Plj/fC/gOEo+pusgN2ZEpQ0ZVBNrPDOPBSHyLql6wmeSWoNm3iYaUaogflqhtJM2+ay1CLU6y3eK14CT8T5gGm6A6abyo47P81VSqefzqWaP/FYQrXzpAenqz6dN7jHLhI1WpgQCTBDJHQbAFZzoK2MfXmJ2yh2WGhXFuNYZht58zxR1Of+iy4x9ZgMv31jLvGIVSu6xaf8Iw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=PMvDmdURcCKCX8S8qDj2J5NhrZcfw0jh8u43/yP7kPE=;
+ b=V61M0xOjiX/wJCGcntXCZ/ApOnt7/Yaj5b9yKD1y231aQCSWTqVoeRZIqxXEqnvZ+3OVTLtFCr8x6UK8r0L1Chy2krjiUcRJud/6JNIRZH3VdizgVRlUw1Uu1PkXD9Puz55n9cA/ZZm0gQFGm7/3CXnLRKT/50YcQntd1b+eEDQ=
+From: Alex Brett <alex.brett@citrix.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Xen Summit 2026 - "Nested Virt <-> WinPV drivers" design session
+ notes
+Thread-Topic: Xen Summit 2026 - "Nested Virt <-> WinPV drivers" design session
+ notes
+Thread-Index: AQHdSo9DZLcioeW9H02VyiyxNJb//w==
+Date: Tue, 22 Sep 2026 12:55:06 +0000
+Message-ID:
+ <CH7PR03MB7859CFEDBB674323A1872211E3832@CH7PR03MB7859.namprd03.prod.outlook.com>
+Accept-Language: en-GB, en-US
+Content-Language: en-GB
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+authentication-results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: CH7PR03MB7859:EE_|SJ0PR03MB5421:EE_
+x-ms-office365-filtering-correlation-id: 44e796d7-24c3-4456-cd54-08df18a8ba23
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|38070700021|3023799007|10067099003|56012099006|5023799004|11063799006|18002099003;
+x-microsoft-antispam-message-info:
+ ml0Lj9Z3C57jteK2i+ID4Jhserpe0kJtXe53wLjPnS2H0L37uzJFKfMVmI6SQr7ccG363+ASAUx5I0dP454Y/+jKkfP1VuavR7CEGNSxKAKukvfTaN1WqTVJwNtnG7XvYGGhhAjRZ6Fjj0sYmGCNHSSrNE9hiYOCShlGVbfhb1aCWLt8forIs1Yn6S3UXrCEfCRGOYtZYjH1Gh7oZX8hP2YNdZRCMm8dVPc16mvqV3s+fY1wWWX7haIPTXWTQ4PsFeg0N4nlXA+WsT4ARaPwbcIbRB2BQzr6GuD8ru44JjICl42+e7IvA+IYKwTZg8jn4v57Gkk3c+1WptfNWMUPEt7U5sJB3HX3DM2g6pxTUEOyl3FI3YrsjAuGHm3C8PXnvm5JO+Un7PPftatpS9MF714vcBjcvrDNd7D/nDQLsctHMlo1W0zbciF3roGgT2EDGk8R8kB7XAsy7syJ/CXzbmYJhGkLJ+UN5B/tHlGwxWddL8fFPXVj/Cp1NxB6Q86F+8hxVLqUhJGGyBMuA6WPKUo1nKLdo3EEKN6xg4pJbbdlwTgpS3ugyiV9H7wPl0gSC8hSe0Ap0JfSDcNBMfKo4bSQbH/gVnBeqO4hq9nc7l4Fe65nnlCSddd9P7oVR6fiDXLl4G/E6QYzSWvozfkbxb7QLgfmDKLtVSBUdI4+jzo=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7859.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(38070700021)(3023799007)(10067099003)(56012099006)(5023799004)(11063799006)(18002099003);DIR:OUT;SFP:1101;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?OxN7WKVMQGi8+0zjq7zpLXFtWbaey58otWKDGVDpLLzKyqdbL0uVK0gNjx?=
+ =?iso-8859-1?Q?n+HvGcl/8YET3Lvyhz6aGqivFmhrlEnN+81soeKRxYTjPmpz2IyWlXoRHH?=
+ =?iso-8859-1?Q?YAeGyzjJEhcQkG0GOYX4DvXXdIpPdewJ0MBe/6JlFQU3ywgZH6wccRw/Gi?=
+ =?iso-8859-1?Q?7870OcrTj+IIgHjKQjFU2RkJ3Gh5N3Ny1luiCKcQc54Ms472FTEDykBfoW?=
+ =?iso-8859-1?Q?SQNmZbS+5ecA7LAxBL+66xndr02SBMZ6i7LMfFhBbZ2Klyj58Iak19zMk1?=
+ =?iso-8859-1?Q?3ffphbSQiTdLUbk+GD2VCdHzfKB2FFcnAGW+/65RLD16me8JxD/MQDkG22?=
+ =?iso-8859-1?Q?teB5axyJfE2dvyWB8ZxI/oVhUw1fxjPwtUW+U5UUctp6V9dfcxMXUoUVEq?=
+ =?iso-8859-1?Q?WZHCpt2TEP1ZZiYhgtAJvvzkWasCG9YzkVCmf7corVH4qzcZ6XqV2DSKRd?=
+ =?iso-8859-1?Q?+xsWzdAhbUuihq0w4P8SXlKMoR/3dMNQFdhMRz9OtDRp6V/zK70wpMUXSS?=
+ =?iso-8859-1?Q?Ix4RsiEfGtjKTE08zZvnLg5Wxs2YfBJka3bCquuQlhihiMCF1a/+lgcIqs?=
+ =?iso-8859-1?Q?dxNpXxePQnzHMZMO0Mt1/VqLcIrbRvmgmgqgkQ3ugsb8Scg+Zno1WEYRq/?=
+ =?iso-8859-1?Q?WieA4StFQpEEVoCmpbvwivRoZWiS/sz7B6Odv+Mjj3Ot78hcuq9+mTwsIP?=
+ =?iso-8859-1?Q?uJ+UuwT9BZndxkY++FYedRyIyxbPDoRFmvJUJecgulFpCxj2X5gCKa+KbH?=
+ =?iso-8859-1?Q?xKDlnMs/I7E1coSs9Ys/RHDg/TP8oZ0SfXNRk6r5gZOF0lwgfXHGNxrvTz?=
+ =?iso-8859-1?Q?5ZlhnvN8XDRMMt7icGLPqgUsMTZjdjNa49SEapuTPuE2UUu+DIx4mX7EMj?=
+ =?iso-8859-1?Q?ft+lqZmp8CG4nEKbgbm++eOOZcGS3ntYEVvrPhB3LY4H7kNl3mFQR3GHlW?=
+ =?iso-8859-1?Q?D8IN3RzlsmUMvKg0zfpw1X6JxuSDjcE24/ZGEhLLGcgX+5cKdOL3gLyHzQ?=
+ =?iso-8859-1?Q?3jqTI4nPZTvnThRb8JlSb0g7Qi4ssLIzDqLTYeFeL7GWGz1SMfEgo2zlaC?=
+ =?iso-8859-1?Q?upWuQ0RgKvoVac9KvBpT89jLyjT2ya5zSD+1GyKvxYtPKhrGMskS6QQAbh?=
+ =?iso-8859-1?Q?aJueAjkx91FFGUDAjCB/QT70DdEundmgoIEBeD/o1U/De2bgfWXY2X4zYI?=
+ =?iso-8859-1?Q?WBkPplll/BzssCr1rtjm2DBloI2OwPWUAfx20RPG+a64Bbcmk3bYgT4IJQ?=
+ =?iso-8859-1?Q?PsLTl3KmKo9NaSArViPlGcg/j5blrWlMUskYLKT+TmCMoJDJmrsSG0U4+N?=
+ =?iso-8859-1?Q?EcDvwlW5Suk719DvTBMcMyBEkZ3AGQu+lTEm9uI2Oif0Q40N5kpA3FFxJk?=
+ =?iso-8859-1?Q?xyIguUfafhHIQRPXrQAe1ZU9wX9v69wt7d049/yZii4KX++v11c2d9HeRg?=
+ =?iso-8859-1?Q?0FKP4EHUYew9/7RUbRm40UOyKxgFQq3lb4ErjrVh97shCPojM1lVirGjTC?=
+ =?iso-8859-1?Q?6M7oZeXZ1soMOWf2mnOU5TJTLmRH4kXY5K0stVCZs0PJY3evJBpr/btIkZ?=
+ =?iso-8859-1?Q?bYvT2rnJnhOnQzwLJ7wIMeYSbmsT78wFdxxhdF4xsUhyEdXgg+LHpCeU00?=
+ =?iso-8859-1?Q?BQb7uaXriIsri4JCbHIxuOmDzLYhdb1sCHIUYEOw/Ziv3G4aTUGMREViJd?=
+ =?iso-8859-1?Q?gi8Afc3BKNi2LWEa7fuNM2fHfVOZcHx/ZUQSFZ/3CWA32gru285vD4LqVF?=
+ =?iso-8859-1?Q?l/3OT4s0ELpxY7mibtd2s+oVr//YOk9CAE0+5Bxp2PI0vu?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 6/6] xen/riscv: fix level_map_mask truncation on
- load_start
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org, Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
- <1789032899.8631fc262581453bbf619ec5b2062170.1a08aaba3b8000c4f3@vates.tech>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1789032899.8631fc262581453bbf619ec5b2062170.1a08aaba3b8000c4f3@vates.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1790080983-6F8C54E9-EE386F89/0/0
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7859.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 44e796d7-24c3-4456-cd54-08df18a8ba23
+X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Sep 2026 12:55:06.5802
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: CAkwflQfo/FlVJig2xaVDn+9TBGnhJGrWJFASyqPKLPadIB58fU3JwmaBxdyiLQghVQZUSgjwyn8L9PGuhFVjw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5421
+X-purgate-ID: tlsNG-d25034/1790081710-51538A5B-90F97B5E/0/0
 X-purgate-type: clean
-X-purgate-size: 2588
+X-purgate-size: 3980
 
-On 10.09.2026 11:34, Baptiste Le Duc wrote:
-> check_pgtbl_mode_support() declares level_map_mask as bare `unsigned`, i.e.
-> a 32-bit type while it derives from a paddr_t which is in both RV32/RV64 a
-> 64-bit type. Storing that value into a 32-bit local silently drops any set
-> bits above bit 31.
-> 
-> The mask is then used as:
-> 
->     aligned_load_start = load_start & level_map_mask;
-> 
-> load_start is `unsigned long` (64-bit on riscv64) and if it requires more
-> than 32 bits to represent, because load_start zero-extend to 64 bits, we
-> would drop some load_start's bits during the AND.
-> 
-> Widen level_map_mask to `unsigned long`, matching the width of the physical
-> address.
-> 
-> Fixes: e66003e7be19 ("xen/riscv: introduce setup_initial_pages")
-> Reported-by: Zheng Zhang <zhangzheng@iscas.ac.cn>
-> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-
-The change is okay as is, so
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-But see below.
-
-> ---
-> Question:
-> I would think replacing unsigned long by paddr_t would be better in this
-> case but for consistency with other variables in the function I just kept
-> unsigned long.
-> 
-> However, there are many variables in mm.c which are unsigned long while
-> they are, in reality, physical addresses and could technically be paddr_t.
-> Using paddr_t would also let us bypass the compiler's decision on what
-> unsigned long extends to (u32 or u64, depending on the target), and
-> therefore be more generic. I've seen similar code in Arm using this
-> convention, and found nothing on the mailing list explaining the original
-> choice of unsigned long over paddr_t.
-
-The mask here is applied to an incoming linear address, so imo unsigned
-long is the correct type.
-
-> --- a/xen/arch/riscv/mm.c
-> +++ b/xen/arch/riscv/mm.c
-> @@ -180,7 +180,7 @@ static bool __init check_pgtbl_mode_support(struct mmu_desc *mmu_desc,
->      bool is_mode_supported = false;
->      unsigned int index;
->      unsigned int page_table_level = (mmu_desc->num_levels - 1);
-> -    unsigned level_map_mask = XEN_PT_LEVEL_MAP_MASK(page_table_level);
-> +    unsigned long level_map_mask = XEN_PT_LEVEL_MAP_MASK(page_table_level);
->  
->      unsigned long aligned_load_start = load_start & level_map_mask;
-
-level_map_mask is used exclusively here. Without that intermediate variable
-no problem would have existed in the first place. Hence perhaps worth
-considering
-
-    unsigned long aligned_load_start =
-        load_start & XEN_PT_LEVEL_MAP_MASK(page_table_level);
-
-as an alternative?
-
-Jan
+The following notes were taken during the design session on Thursday 17th=
+=A0September (https://design-sessions.xenproject.org/uid/discussion/disc_bp=
+kf1nkpeOyiAehjw4xN/view) titled "Nested Virt <-> WinPV drivers":=0A=
+=0A=
+This is an issue identified during XenServer's nested virt development.=0A=
+With HyperV, your nominal Windows machine becomes an L2 guest as the root p=
+artition under HyperV (~equivalent to Xen dom0). HyperV at L1 handles thing=
+s from the L2 (flowing via Xen at L0).=0A=
+Specifically this affects CPUID and VM(M)CALL operations - L1 handles these=
+ and doesn't give the Xen parts that the PV drivers expect - consequence is=
+ PV drivers are unable to communicate with Xen. 'Feature' of the design of =
+nesting.=0A=
+=0A=
+A Viridian enlightenment allows L1 to provide information to L0 as to which=
+ L2 is the root partition. A workaround was implemented using this where Xe=
+n can modify the responses so the L2 still 'sees' Xen and can enable the dr=
+ivers. This relies on a _currently_ invalid input to HyperV, but this may f=
+ail in future so not a safe solution and not shippable.=0A=
+=0A=
+Tangent: Bromium. Different way of solving this problem, did all hypercalls=
+ using the CPUID instruction (Intel doesn't permit you not to have an exit =
+on CPUID, AMD permits you not to intercept but everyone does). ABI for CPUI=
+D says nothing about high halves of the registers, so Bromium puts a magic =
+constant in high half that L0 can recognise, or if not present the nominal =
+L1 would still answer the normal CPUID.=0A=
+=0A=
+What are people's thoughts on such an approach?=0A=
+=A0 Would it be restricted to root partition? Yes.=0A=
+=A0=A0=0A=
+HyperV doesn't seem to have good provision for nested virt on hypervisors t=
+hat are not MS. Can we stick to just Viridian enlightenments in the nested =
+case and avoid the problem?=0A=
+=A0 Ideal world we'd do a full VMBus implementation and abandon the PV driv=
+ers but we can't (potential legal issues with doing so. Might change if MS =
+do an implementation in Linux which is rumoured, but no sign of this as thi=
+ngs stand - would be complete replacement of I/O model and not practical in=
+ the timeframe of the nested virt project). Could be looked into in future,=
+ but not a short term solution.=0A=
+=A0 HyperV knows about PCI and enables this for the root partition, but our=
+ PV model uses hypercalls.=0A=
+=0A=
+Some questions to put to MS=0A=
+=A0 Never found a situation where the root partition doesn't have an identi=
+ty map=0A=
+=0A=
+Ballooning will break everything?=0A=
+=A0 Apparently MS has an API to add/remove memory that may be a solution he=
+re.=0A=
+=A0 Ballooning implementation in PV drivers uses API.=0A=
+=A0 Concern as to whether this API is designed for HyperV and not a nested =
+case like this?=0A=
+=A0 Tu would like to retain ballooning in the drivers. Andrew wants to make=
+ it an admin choice (whereas currently it must be available even in dangero=
+us cases). Interaction with ABI enumeration questions...=0A=
+=0A=
+We have the Xen PCI platform device in HVM domains.=0A=
+=A0 Root partition will see this device, could we send hypercalls to it? In=
+ principal maybe. Specific BAR for hypercalls where qemu tells the hypervis=
+or a specific range? Would mean every hypercall goes into x86 emulate! Mayb=
+e could have some sort of special flag?=0A=
+=A0 What would benefit be over CPUID mechanism? Don't need to check it's th=
+e root partition, can just do it by access to PCI device.=0A=
+=A0 Wouldn't work for PVH.=0A=
+=0A=
+Could we do something with an MMIO range? Can't have a Xen specific driver =
+use this as HyperV comes up before Xen drivers. Could declare in ACPI and t=
+hen Windows knows a driver can bind to it?=0A=
+=0A=
+We only want the root partition to be doing PV I/O to L0, not any L2 guest.=
+ In a virtio model it'd be down to HyperV/root partition which guest it pas=
+ses the PCI device to.=0A=
 
