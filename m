@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E534EC982FF
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 12:55:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428790.1651730 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 47DC3C98302
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 13:01:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428803.1651737 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x901g-0008SC-OD; Tue, 22 Sep 2026 12:55:12 +0000
+	id 1x907Q-0001zq-FB; Tue, 22 Sep 2026 13:01:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428790.1651730; Tue, 22 Sep 2026 12:55:12 +0000
+Received: by outflank-mailman (output) from mailman id 1428803.1651737; Tue, 22 Sep 2026 13:01:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x901g-0008S5-Ke; Tue, 22 Sep 2026 12:55:12 +0000
-Received: by outflank-mailman (input) for mailman id 1428790;
- Tue, 22 Sep 2026 12:55:11 +0000
+	id 1x907Q-0001zj-CQ; Tue, 22 Sep 2026 13:01:08 +0000
+Received: by outflank-mailman (input) for mailman id 1428803;
+ Tue, 22 Sep 2026 13:01:07 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <alex.brett@citrix.com>) id 1x901f-0008Rs-Cr
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 12:55:11 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x907P-0001zZ-H2
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 13:01:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x901e-00HLst-PP
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 14:55:10 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1x907O-005niM-Cq
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 15:01:06 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <alex.brett@citrix.com>)
- id 6ab27aa2-bab6-0a2a0a5309dd-0a2a450ca090-20
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 14:55:10 +0200
-Received: from [52.101.43.59]
- (helo=SJ2PR03CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <alex.brett@citrix.com>)
- id 6ab27aac-f479-0a2a450c0019-34652b3bf27d-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 14:55:10 +0200
-Received: from CH7PR03MB7859.namprd03.prod.outlook.com (2603:10b6:610:24f::20)
- by SJ0PR03MB5421.namprd03.prod.outlook.com (2603:10b6:a03:289::7)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.14; Tue, 22 Sep
- 2026 12:55:06 +0000
-Received: from CH7PR03MB7859.namprd03.prod.outlook.com
- ([fe80::967:59c2:d16:1fcf]) by CH7PR03MB7859.namprd03.prod.outlook.com
- ([fe80::967:59c2:d16:1fcf%6]) with mapi id 15.21.0451.014; Tue, 22 Sep 2026
- 12:55:06 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ab27c12-8faa-0a2a0a5109dd-0a2a4508e44c-0
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 15:01:06 +0200
+Received: from [74.125.229.205] (helo=mail-lf2-f13.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ab27c12-f659-0a2a45080019-4a7de5cdebb3-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 15:01:06 +0200
+Received: by mail-lf2-f13.google.com with SMTP id
+ 2adb3069b0e04-5b8c9954ccbso2450394e87.1
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 06:01:06 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
+ [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
+ 2adb3069b0e04-5b8d46ad0b5sm487273e87.5.2026.09.22.06.01.03
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Sep 2026 06:01:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,169 +52,333 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=h+i2fPDUH683qhhcD7+UCmcWM+V2OUm+v9Pgae0lbL67d+OFuUkZFm5f46rbU6p91nmz7aASC2to2zMHvqr1BDnKPeL1Qo6R1SX25xaiODFN9DylVFdNR6AYmtvtJiiGLSd2n6w9pCZEVa7yQHftRr1/aMkdS4tyjZHLq4FrlvDIJcuMOvOlsJYD0watBd1uJ0qAPjd1AXNXQrCMV+bWjJrsLeAyWqoNQP7rxy0sn7IGpVy1wS3AjZY9Htl6RF3dBeKnhp3uUfRrekQNBLnsG2n1cwIbIum2iSRCO8mdEA+YBMdIGpG9Bfd79b/ML/e/NTNEvSnpWOto2umORTmZZg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PMvDmdURcCKCX8S8qDj2J5NhrZcfw0jh8u43/yP7kPE=;
- b=GdTebdoaRwl3p/ZhHMVKCr71swKtxljW22YNPmkNlXsdER6mftd5Hu/99XRApE6a/BVDjMsMGfCGGvvhoV7HUdXIiA63Q8mGKm+skjyUQdlbUuO2r8BCorNjBISyPzeDPHor/LaQ+Plj/fC/gOEo+pusgN2ZEpQ0ZVBNrPDOPBSHyLql6wmeSWoNm3iYaUaogflqhtJM2+ay1CLU6y3eK14CT8T5gGm6A6abyo47P81VSqefzqWaP/FYQrXzpAenqz6dN7jHLhI1WpgQCTBDJHQbAFZzoK2MfXmJ2yh2WGhXFuNYZht58zxR1Of+iy4x9ZgMv31jLvGIVSu6xaf8Iw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PMvDmdURcCKCX8S8qDj2J5NhrZcfw0jh8u43/yP7kPE=;
- b=V61M0xOjiX/wJCGcntXCZ/ApOnt7/Yaj5b9yKD1y231aQCSWTqVoeRZIqxXEqnvZ+3OVTLtFCr8x6UK8r0L1Chy2krjiUcRJud/6JNIRZH3VdizgVRlUw1Uu1PkXD9Puz55n9cA/ZZm0gQFGm7/3CXnLRKT/50YcQntd1b+eEDQ=
-From: Alex Brett <alex.brett@citrix.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Xen Summit 2026 - "Nested Virt <-> WinPV drivers" design session
- notes
-Thread-Topic: Xen Summit 2026 - "Nested Virt <-> WinPV drivers" design session
- notes
-Thread-Index: AQHdSo9DZLcioeW9H02VyiyxNJb//w==
-Date: Tue, 22 Sep 2026 12:55:06 +0000
-Message-ID:
- <CH7PR03MB7859CFEDBB674323A1872211E3832@CH7PR03MB7859.namprd03.prod.outlook.com>
-Accept-Language: en-GB, en-US
-Content-Language: en-GB
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-msip_labels:
-authentication-results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: CH7PR03MB7859:EE_|SJ0PR03MB5421:EE_
-x-ms-office365-filtering-correlation-id: 44e796d7-24c3-4456-cd54-08df18a8ba23
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|38070700021|3023799007|10067099003|56012099006|5023799004|11063799006|18002099003;
-x-microsoft-antispam-message-info:
- ml0Lj9Z3C57jteK2i+ID4Jhserpe0kJtXe53wLjPnS2H0L37uzJFKfMVmI6SQr7ccG363+ASAUx5I0dP454Y/+jKkfP1VuavR7CEGNSxKAKukvfTaN1WqTVJwNtnG7XvYGGhhAjRZ6Fjj0sYmGCNHSSrNE9hiYOCShlGVbfhb1aCWLt8forIs1Yn6S3UXrCEfCRGOYtZYjH1Gh7oZX8hP2YNdZRCMm8dVPc16mvqV3s+fY1wWWX7haIPTXWTQ4PsFeg0N4nlXA+WsT4ARaPwbcIbRB2BQzr6GuD8ru44JjICl42+e7IvA+IYKwTZg8jn4v57Gkk3c+1WptfNWMUPEt7U5sJB3HX3DM2g6pxTUEOyl3FI3YrsjAuGHm3C8PXnvm5JO+Un7PPftatpS9MF714vcBjcvrDNd7D/nDQLsctHMlo1W0zbciF3roGgT2EDGk8R8kB7XAsy7syJ/CXzbmYJhGkLJ+UN5B/tHlGwxWddL8fFPXVj/Cp1NxB6Q86F+8hxVLqUhJGGyBMuA6WPKUo1nKLdo3EEKN6xg4pJbbdlwTgpS3ugyiV9H7wPl0gSC8hSe0Ap0JfSDcNBMfKo4bSQbH/gVnBeqO4hq9nc7l4Fe65nnlCSddd9P7oVR6fiDXLl4G/E6QYzSWvozfkbxb7QLgfmDKLtVSBUdI4+jzo=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH7PR03MB7859.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(38070700021)(3023799007)(10067099003)(56012099006)(5023799004)(11063799006)(18002099003);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?OxN7WKVMQGi8+0zjq7zpLXFtWbaey58otWKDGVDpLLzKyqdbL0uVK0gNjx?=
- =?iso-8859-1?Q?n+HvGcl/8YET3Lvyhz6aGqivFmhrlEnN+81soeKRxYTjPmpz2IyWlXoRHH?=
- =?iso-8859-1?Q?YAeGyzjJEhcQkG0GOYX4DvXXdIpPdewJ0MBe/6JlFQU3ywgZH6wccRw/Gi?=
- =?iso-8859-1?Q?7870OcrTj+IIgHjKQjFU2RkJ3Gh5N3Ny1luiCKcQc54Ms472FTEDykBfoW?=
- =?iso-8859-1?Q?SQNmZbS+5ecA7LAxBL+66xndr02SBMZ6i7LMfFhBbZ2Klyj58Iak19zMk1?=
- =?iso-8859-1?Q?3ffphbSQiTdLUbk+GD2VCdHzfKB2FFcnAGW+/65RLD16me8JxD/MQDkG22?=
- =?iso-8859-1?Q?teB5axyJfE2dvyWB8ZxI/oVhUw1fxjPwtUW+U5UUctp6V9dfcxMXUoUVEq?=
- =?iso-8859-1?Q?WZHCpt2TEP1ZZiYhgtAJvvzkWasCG9YzkVCmf7corVH4qzcZ6XqV2DSKRd?=
- =?iso-8859-1?Q?+xsWzdAhbUuihq0w4P8SXlKMoR/3dMNQFdhMRz9OtDRp6V/zK70wpMUXSS?=
- =?iso-8859-1?Q?Ix4RsiEfGtjKTE08zZvnLg5Wxs2YfBJka3bCquuQlhihiMCF1a/+lgcIqs?=
- =?iso-8859-1?Q?dxNpXxePQnzHMZMO0Mt1/VqLcIrbRvmgmgqgkQ3ugsb8Scg+Zno1WEYRq/?=
- =?iso-8859-1?Q?WieA4StFQpEEVoCmpbvwivRoZWiS/sz7B6Odv+Mjj3Ot78hcuq9+mTwsIP?=
- =?iso-8859-1?Q?uJ+UuwT9BZndxkY++FYedRyIyxbPDoRFmvJUJecgulFpCxj2X5gCKa+KbH?=
- =?iso-8859-1?Q?xKDlnMs/I7E1coSs9Ys/RHDg/TP8oZ0SfXNRk6r5gZOF0lwgfXHGNxrvTz?=
- =?iso-8859-1?Q?5ZlhnvN8XDRMMt7icGLPqgUsMTZjdjNa49SEapuTPuE2UUu+DIx4mX7EMj?=
- =?iso-8859-1?Q?ft+lqZmp8CG4nEKbgbm++eOOZcGS3ntYEVvrPhB3LY4H7kNl3mFQR3GHlW?=
- =?iso-8859-1?Q?D8IN3RzlsmUMvKg0zfpw1X6JxuSDjcE24/ZGEhLLGcgX+5cKdOL3gLyHzQ?=
- =?iso-8859-1?Q?3jqTI4nPZTvnThRb8JlSb0g7Qi4ssLIzDqLTYeFeL7GWGz1SMfEgo2zlaC?=
- =?iso-8859-1?Q?upWuQ0RgKvoVac9KvBpT89jLyjT2ya5zSD+1GyKvxYtPKhrGMskS6QQAbh?=
- =?iso-8859-1?Q?aJueAjkx91FFGUDAjCB/QT70DdEundmgoIEBeD/o1U/De2bgfWXY2X4zYI?=
- =?iso-8859-1?Q?WBkPplll/BzssCr1rtjm2DBloI2OwPWUAfx20RPG+a64Bbcmk3bYgT4IJQ?=
- =?iso-8859-1?Q?PsLTl3KmKo9NaSArViPlGcg/j5blrWlMUskYLKT+TmCMoJDJmrsSG0U4+N?=
- =?iso-8859-1?Q?EcDvwlW5Suk719DvTBMcMyBEkZ3AGQu+lTEm9uI2Oif0Q40N5kpA3FFxJk?=
- =?iso-8859-1?Q?xyIguUfafhHIQRPXrQAe1ZU9wX9v69wt7d049/yZii4KX++v11c2d9HeRg?=
- =?iso-8859-1?Q?0FKP4EHUYew9/7RUbRm40UOyKxgFQq3lb4ErjrVh97shCPojM1lVirGjTC?=
- =?iso-8859-1?Q?6M7oZeXZ1soMOWf2mnOU5TJTLmRH4kXY5K0stVCZs0PJY3evJBpr/btIkZ?=
- =?iso-8859-1?Q?bYvT2rnJnhOnQzwLJ7wIMeYSbmsT78wFdxxhdF4xsUhyEdXgg+LHpCeU00?=
- =?iso-8859-1?Q?BQb7uaXriIsri4JCbHIxuOmDzLYhdb1sCHIUYEOw/Ziv3G4aTUGMREViJd?=
- =?iso-8859-1?Q?gi8Afc3BKNi2LWEa7fuNM2fHfVOZcHx/ZUQSFZ/3CWA32gru285vD4LqVF?=
- =?iso-8859-1?Q?l/3OT4s0ELpxY7mibtd2s+oVr//YOk9CAE0+5Bxp2PI0vu?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790082066; x=1790686866; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=tnQ0ideIs48MmX8Q0RhKG0Die5lKQw6VCxIcqz/H+aY=;
+        b=DI5O1TphM6UaU9FsS5vtqW7pWvHqpgtByw4HqIWUI5H0te6xNGO6l6G+q9gmA3gG6m
+         qTeqNETMZC7I3mWjC2+ascux1hvWRZw2Q0TQMmyZ1zAuiLNzcQk/1UFsrB5TQwuI3Wgo
+         wb67Ssy8WvdgmkNc11wsESo/f2k76debHnxnG3LadLcLuzGct0lh565sBZpxEkBP3WJ/
+         oMATJEKZ37AUH9/QaXWaJMCdAncHNF34qlDsQQnwRkaDuQuzoXzw4DCyEu7lBfFpAwtp
+         k/mCQYNUWF0OoMm15KL5pOMvxOEOatxs1Wqms+7dbhxrOLhET+qMuyhohwAy84TYmaq7
+         F7tA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790082066; x=1790686866;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=tnQ0ideIs48MmX8Q0RhKG0Die5lKQw6VCxIcqz/H+aY=;
+        b=p5KppfoSsYENHH3RI87kIeG88ud+UyX55g6qPhj07cSgqo9EKHliyZ7LRUEEiJpuKJ
+         WElwxjYi95fsTH1Jafn3jS31klUwbL1XCUtRwdid5XQdOZhoX/jOktrDYMC0VapES2V6
+         OAw8ZIUrh91ZT+jRNMJ92AWyfm7Ca9m5Jn0NoC+KhzyDy2YGnLBFcmi9GaMa3hL3kpXT
+         Ml//RKUESW0uZtHjGY08A3o+zWbQieBi2cMRhRx6ybv5NfnIs+H65ldXx1VxFhQUzL4e
+         ry4EyRzooS4cyjmM/Uuxpq35COv0uI5ZJ2DmM28+EI7z7MHS67EQhuwYRBahN5J4vs/A
+         9sGw==
+X-Forwarded-Encrypted: i=1; AKwUvBwsSVjuqWVh5kuJkORSglEUqueK8+O+chniEI9kccs+IZLk/M8hLbEwG6O2JkZZ35CRCVPPPDH2t6c=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mX2S54a3rku1FM+z1a3BXGbGME/U657Y+zWIyHKbFY7igqjnaR
+	k5SICkjhVdTpU5Nts8qVZoDu81TaeRPb08kzss+KcdM0linuV3LVEAFy
+X-Gm-Gg: AYBFou1aKuRCOXvCRPjGruk/Y4lo7X7p52fcL9SAMozkz+fbEIqHQ2cBEjT+RULT+e8
+	ZCjr6BUr/PMdmTBPlN0NxSPnlKdvIQRSPOKgDXrbpxI+T3KoPz7mjXtpXjuozZBtZDrFNRqGIFp
+	kzATU/3z83WQGuKyqOIpjfzBRTVM90Wic5n1wi7h6cRmjOYiMkkNvGhivaMxV5UipsiT1HoMMNC
+	ICsik5gZPNn/z9hAkSA7AYaw6TQEZX0O7xW8AEfT124z1ig6UOx3zIpSAtkIUvKVA9EPYPdp0Su
+	OKgqFAiCWnbKydQXfvUvWBwlZATOp6A2SIrrzqBIgilEzIMqMr76Q2s/JDfs8V1M1Qk99FbqwT7
+	VmBdLBripyn7Xpraj9H771Mx9DFnc8enxT4jHYmBV2LujAYjHCJD6NJffZhrESikEKFrllOA/Lm
+	S4sglcHTFBwVUnYx4ONnGaZh+OjUCce6pf9U/mkb0DNiIn/yjHbUiqrXdHLG4ThMZKzA/s2xn1T
+	c9+cNiWhffxtdcD76LhLeilgEP4AJMtUaUyNj+Vq6f5XiOG4w==
+X-Received: by 2002:a05:6512:3ca5:b0:5b7:674f:cab8 with SMTP id 2adb3069b0e04-5b8c1821977mr4869113e87.15.1790082065147;
+        Tue, 22 Sep 2026 06:01:05 -0700 (PDT)
+Message-ID: <5b70c0d6-12ec-429c-be9c-a96d78d48e68@gmail.com>
+Date: Tue, 22 Sep 2026 15:01:02 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: CH7PR03MB7859.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 44e796d7-24c3-4456-cd54-08df18a8ba23
-X-MS-Exchange-CrossTenant-originalarrivaltime: 22 Sep 2026 12:55:06.5802
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: CAkwflQfo/FlVJig2xaVDn+9TBGnhJGrWJFASyqPKLPadIB58fU3JwmaBxdyiLQghVQZUSgjwyn8L9PGuhFVjw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5421
-X-purgate-ID: tlsNG-d25034/1790081710-51538A5B-90F97B5E/0/0
-X-purgate-type: clean
-X-purgate-size: 3980
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 30/39] xen/riscv: prepare new IMSIC VS-file
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ xen-devel@lists.xenproject.org
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <440bc07dfb72d09da72b49ded6f78dc1f54a3ad5.1787838835.git.oleksii.kurochko@gmail.com>
+ <1790007309.8631fc262581453bbf619ec5b2062170.1a0c4bff57900072c4@vates.tech>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1790007309.8631fc262581453bbf619ec5b2062170.1a0c4bff57900072c4@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1790082066-CDB4987B-8BABB209/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 9602
 
-The following notes were taken during the design session on Thursday 17th=
-=A0September (https://design-sessions.xenproject.org/uid/discussion/disc_bp=
-kf1nkpeOyiAehjw4xN/view) titled "Nested Virt <-> WinPV drivers":=0A=
-=0A=
-This is an issue identified during XenServer's nested virt development.=0A=
-With HyperV, your nominal Windows machine becomes an L2 guest as the root p=
-artition under HyperV (~equivalent to Xen dom0). HyperV at L1 handles thing=
-s from the L2 (flowing via Xen at L0).=0A=
-Specifically this affects CPUID and VM(M)CALL operations - L1 handles these=
- and doesn't give the Xen parts that the PV drivers expect - consequence is=
- PV drivers are unable to communicate with Xen. 'Feature' of the design of =
-nesting.=0A=
-=0A=
-A Viridian enlightenment allows L1 to provide information to L0 as to which=
- L2 is the root partition. A workaround was implemented using this where Xe=
-n can modify the responses so the L2 still 'sees' Xen and can enable the dr=
-ivers. This relies on a _currently_ invalid input to HyperV, but this may f=
-ail in future so not a safe solution and not shippable.=0A=
-=0A=
-Tangent: Bromium. Different way of solving this problem, did all hypercalls=
- using the CPUID instruction (Intel doesn't permit you not to have an exit =
-on CPUID, AMD permits you not to intercept but everyone does). ABI for CPUI=
-D says nothing about high halves of the registers, so Bromium puts a magic =
-constant in high half that L0 can recognise, or if not present the nominal =
-L1 would still answer the normal CPUID.=0A=
-=0A=
-What are people's thoughts on such an approach?=0A=
-=A0 Would it be restricted to root partition? Yes.=0A=
-=A0=A0=0A=
-HyperV doesn't seem to have good provision for nested virt on hypervisors t=
-hat are not MS. Can we stick to just Viridian enlightenments in the nested =
-case and avoid the problem?=0A=
-=A0 Ideal world we'd do a full VMBus implementation and abandon the PV driv=
-ers but we can't (potential legal issues with doing so. Might change if MS =
-do an implementation in Linux which is rumoured, but no sign of this as thi=
-ngs stand - would be complete replacement of I/O model and not practical in=
- the timeframe of the nested virt project). Could be looked into in future,=
- but not a short term solution.=0A=
-=A0 HyperV knows about PCI and enables this for the root partition, but our=
- PV model uses hypercalls.=0A=
-=0A=
-Some questions to put to MS=0A=
-=A0 Never found a situation where the root partition doesn't have an identi=
-ty map=0A=
-=0A=
-Ballooning will break everything?=0A=
-=A0 Apparently MS has an API to add/remove memory that may be a solution he=
-re.=0A=
-=A0 Ballooning implementation in PV drivers uses API.=0A=
-=A0 Concern as to whether this API is designed for HyperV and not a nested =
-case like this?=0A=
-=A0 Tu would like to retain ballooning in the drivers. Andrew wants to make=
- it an admin choice (whereas currently it must be available even in dangero=
-us cases). Interaction with ABI enumeration questions...=0A=
-=0A=
-We have the Xen PCI platform device in HVM domains.=0A=
-=A0 Root partition will see this device, could we send hypercalls to it? In=
- principal maybe. Specific BAR for hypercalls where qemu tells the hypervis=
-or a specific range? Would mean every hypercall goes into x86 emulate! Mayb=
-e could have some sort of special flag?=0A=
-=A0 What would benefit be over CPUID mechanism? Don't need to check it's th=
-e root partition, can just do it by access to PCI device.=0A=
-=A0 Wouldn't work for PVH.=0A=
-=0A=
-Could we do something with an MMIO range? Can't have a Xen specific driver =
-use this as HyperV comes up before Xen drivers. Could declare in ACPI and t=
-hen Windows knows a driver can bind to it?=0A=
-=0A=
-We only want the root partition to be doing PV I/O to L0, not any L2 guest.=
- In a virtio model it'd be down to HyperV/root partition which guest it pas=
-ses the PCI device to.=0A=
+
+
+On 9/21/26 6:15 PM, Baptiste Le Duc wrote:
+> 
+> 
+> On 8/27/26 5:24 PM, Oleksii Kurochko wrote:
+>> Implement first steps of migration a vCPU to a different guest 
+>> interrupt file
+>> procedure:
+>> - At the old interrupt file, save to memory the values of registers
+>>    eidelivery and eithreshold, and set eidelivery = 0.
+>> - At the new interrupt file, set eidelivery = 0, and zero all
+>>    implemented interrupt-pending bits (the eip array).
+>>
+>> The following steps will be introduced in follow-up patches.
+>>
+>> Add a BUG_ON("unimplemented") placeholder in imsic_migrate_vcpu() to 
+>> guard
+>> against silent incorrect behaviour or unexpected panics in guest VMs 
+>> until
+>> the function is fully implemented.
+>>
+>> vgein_assign() will be introduced later in a separate patch, for not 
+>> it is
+>> only stub.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> ---
+>> Changes in v2:
+>>   - New patch.
+>> ---
+>> ---
+>>   xen/arch/riscv/aia.c             |   9 ++
+>>   xen/arch/riscv/imsic.c           | 159 +++++++++++++++++++++++++++++++
+>>   xen/arch/riscv/include/asm/aia.h |   4 +
+>>   xen/include/xen/config.h         |   1 +
+>>   4 files changed, 173 insertions(+)
+>>
+>> diff --git a/xen/arch/riscv/aia.c b/xen/arch/riscv/aia.c
+>> index e31c9c2d24b6..75c82bcfa1b3 100644
+>> --- a/xen/arch/riscv/aia.c
+>> +++ b/xen/arch/riscv/aia.c
+>> @@ -1,8 +1,10 @@
+>>   /* SPDX-License-Identifier: GPL-2.0-only */
+>> +#include <xen/bug.h>
+>>   #include <xen/errno.h>
+>>   #include <xen/init.h>
+>>   #include <xen/sections.h>
+>> +#include <xen/sched.h>
+>>   #include <xen/types.h>
+>>   #include <asm/cpufeature.h>
+>> @@ -21,3 +23,10 @@ void __init aia_init(void)
+>>       _aia_usable = true;
+>>   }
+>> +
+>> +unsigned int vgein_assign(struct vcpu *v)
+>> +{
+>> +    BUG_ON("unimplemented\n");
+>> +
+>> +    return 0;
+>> +}
+>> diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
+>> index ad7fbe708bfd..516f0105352a 100644
+>> --- a/xen/arch/riscv/imsic.c
+>> +++ b/xen/arch/riscv/imsic.c
+>> @@ -26,6 +26,7 @@
+>>   #include <xen/spinlock.h>
+>>   #include <xen/xvmalloc.h>
+>> +#include <asm/aia.h>
+>>   #include <asm/imsic.h>
+>>   #define IMSIC_HART_SIZE(guest_bits) (BIT(guest_bits, U) * 
+>> IMSIC_MMIO_PAGE_SZ)
+>> @@ -77,6 +78,64 @@ do {                            \
+>>       csr_clear(CSR_SIREG, v);    \
+>>   } while (0)
+>> +#define imsic_vs_csr_write(c, v)    \
+>> +do {                                \
+>> +    csr_write(CSR_VSISELECT, (c));  \
+>> +    csr_write(CSR_VSIREG, (v));     \
+>> +} while ( 0 )
+>> +
+>> +/*
+>> + * Generic switchcase expansion pyramid.
+>> + * F is the per-operation leaf macro, ireg is the base register index.
+>> + * Optional extra args (e.g. an operation and/or a value) are 
+>> forwarded to F
+>> + * via __VA_ARGS__.
+>> + *
+>> + * imsic_switchcase_break(ireg, op, v) - emit "case ireg: op(ireg,v); 
+>> break;"
+>> + * imsic_switchcase_ret(ireg, op, ...) - emit "case ireg: return 
+>> op(ireg[,v]);"
+>> + *   The variadic tail is optional so the same leaf works for both 
+>> read (no v)
+>> + *   and swap (with v).
+>> + */
+>> +#define imsic_switchcase_break(ireg, op, v) \
+>> +    case ireg:                              \
+>> +        op(ireg, v);                        \
+>> +        break;
+>> +
+>> +#define imsic_switchcase_ret(ireg, op, ...) \
+>> +    case ireg:                              \
+>> +        return op(ireg, ##__VA_ARGS__);
+>> +
+>> +#define imsic_switchcase_2(F, ireg, ...)    \
+>> +    F(ireg + 0, ##__VA_ARGS__)              \
+>> +    F(ireg + 1, ##__VA_ARGS__)
+>> +#define imsic_switchcase_4(F, ireg, ...)    \
+>> +    imsic_switchcase_2(F, ireg + 0, ##__VA_ARGS__)  \
+>> +    imsic_switchcase_2(F, ireg + 2, ##__VA_ARGS__)
+>> +#define imsic_switchcase_8(F, ireg, ...)    \
+>> +    imsic_switchcase_4(F, ireg + 0, ##__VA_ARGS__)  \
+>> +    imsic_switchcase_4(F, ireg + 4, ##__VA_ARGS__)
+>> +#define imsic_switchcase_16(F, ireg, ...)   \
+>> +    imsic_switchcase_8(F, ireg + 0, ##__VA_ARGS__)  \
+>> +    imsic_switchcase_8(F, ireg + 8, ##__VA_ARGS__)
+>> +#define imsic_switchcase_32(F, ireg, ...)   \
+>> +    imsic_switchcase_16(F, ireg + 0, ##__VA_ARGS__) \
+>> +    imsic_switchcase_16(F, ireg + 16, ##__VA_ARGS__)
+>> +#define imsic_switchcase_64(F, ireg, ...)   \
+>> +    imsic_switchcase_32(F, ireg + 0, ##__VA_ARGS__) \
+>> +    imsic_switchcase_32(F, ireg + 32, ##__VA_ARGS__)
+>> +
+>> +static void imsic_eix_write(unsigned int ireg, unsigned long val)
+>> +{
+>> +    switch ( ireg )
+>> +    {
+>> +    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIP0,
+>> +                        imsic_vs_csr_write, val)
+>> +    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIE0,
+>> +                        imsic_vs_csr_write, val)
+>> +    default:
+>> +        ASSERT_UNREACHABLE();
+>> +    }
+>> +}
+>> +
+>>   unsigned int vcpu_guest_file_id(const struct vcpu *v)
+>>   {
+>>       return ACCESS_ONCE(v->arch.vimsic_state->guest_file_id);
+>> @@ -389,6 +448,76 @@ int cf_check vcpu_imsic_init(struct vcpu *v)
+>>       return 0;
+>>   }
+>> +/*
+>> + * Arguments of the imsic_vsfile_local_*() helpers, which are 
+>> executed by the
+>> + * pCPU owning the interrupt file, thereby through imsic_call_on_cpu().
+>> + */
+>> +struct imsic_vsfile_data {
+>> +    unsigned int hgei;
+>> +    unsigned int nr_eix;
+>> +    struct imsic_mrif *mrif;
+>> +};
+>> +
+>> +/*
+>> + * Execute func() on the pCPU which owns the IMSIC interrupt file 
+>> func() is
+>> + * going to work with.
+>> + *
+>> + * An IMSIC VS-file is reachable only through hstatus.VGEIN of the 
+>> hart the
+>> + * file belongs to, and a guest interrupt file index is meaningless 
+>> on any
+>> + * other hart, so such work always has to be done by that very hart.
+>> + *
+>> + * The local case runs with IRQs disabled to provide func() with the 
+>> same
+>> + * environment it is given when it is called from the function call IPI
+>> + * handler.
+>> + */
+>> +static void imsic_call_on_cpu(unsigned int cpu, void (*func)(void *),
+>> +                              void *data)
+>> +{
+>> +    if ( cpu == smp_processor_id() )
+>> +    {
+>> +        unsigned long flags;
+>> +
+>> +        local_irq_save(flags);
+>> +        func(data);
+>> +        local_irq_restore(flags);
+>> +    }
+>> +    else
+>> +        on_selected_cpus(cpumask_of(cpu), func, data, 1);
+>> +}
+>> +
+>> +static void cf_check imsic_vsfile_local_clear(void *data)
+> I think the remark from Jan to direclty pass the type instead of void
+> could be applied here.
+
+I think it can't because of how function pointer is passed to 
+on_selected_cpus() through imsic_call_on_cpu().
+
+>> +{
+>> +    unsigned int i;
+>> +    const struct imsic_vsfile_data *idata = data;
+>> +    unsigned long new_hstatus, old_hstatus, old_vsiselect;
+>> +
+>> +    /* We can only zero-out if we have a IMSIC VS-file */
+>> +    if ( !idata->hgei )
+>> +        return;
+>> +
+>> +    old_vsiselect = csr_read(CSR_VSISELECT);
+>> +    old_hstatus = csr_read(CSR_HSTATUS);
+>> +    new_hstatus = old_hstatus & ~HSTATUS_VGEIN;
+>> +    new_hstatus |= MASK_INSR(idata->hgei, HSTATUS_VGEIN);
+>> +    csr_write(CSR_HSTATUS, new_hstatus);
+>> +
+>> +    imsic_vs_csr_write(IMSIC_EIDELIVERY, 0);
+>> +    imsic_vs_csr_write(IMSIC_EITHRESHOLD, 0);
+>> +
+>> +    for ( i = 0; i < idata->nr_eix; i++ )
+>> +    {
+>> +        imsic_eix_write(IMSIC_EIP0 + i * 2, 0);
+>> +        imsic_eix_write(IMSIC_EIE0 + i * 2, 0);
+>> +#ifdef CONFIG_RISCV_32
+>> +        imsic_eix_write(IMSIC_EIP0 + i * 2 + 1, 0);
+>> +        imsic_eix_write(IMSIC_EIE0 + i * 2 + 1, 0);
+>> +#endif
+>> +    }
+>> +
+>> +    csr_write(CSR_HSTATUS, old_hstatus);
+>> +    csr_write(CSR_VSISELECT, old_vsiselect);
+>> +}
+>> +
+>>   void cf_check vcpu_imsic_deinit(struct vcpu *v)
+>>   {
+>>       XVFREE(v->arch.vimsic_state);
+>> @@ -689,6 +818,14 @@ int __init vimsic_make_domu_dt_node(struct 
+>> kernel_info *kinfo,
+>>   void imsic_migrate_vcpu(struct vcpu *v)
+>>   {
+>> +    unsigned int new_vsfile_hgei;
+>> +    unsigned int new_vsfile_cpu;
+>> +    unsigned int nr_hw_eix = DIV_ROUND_UP(imsic_cfg.nr_ids + 1,
+>> +                                          BITS_PER_TYPE(uint64_t));
+> This value appears to remain constant after initialization, since it 
+> depends directly on the hw,
+> so it is not necessary to calculate it each time.
+
+I will add then:
+
+--- a/xen/arch/riscv/include/asm/imsic.h
++++ b/xen/arch/riscv/include/asm/imsic.h
+@@ struct imsic_config {
+      /* Number off interrupt identities */
+      unsigned int nr_ids;
+
++    /*
++     * Number of 64-bit EIx groups needed to cover all the interrupt
++     * identities, which are 0 (never valid, but it still occupies a 
+bit) up
++     * to and including nr_ids.
++     */
++    unsigned int nr_eix;
++
+
+and init it once in imsic_parse_node().
+
+Thanks.
+
+~ Oleksii
 
