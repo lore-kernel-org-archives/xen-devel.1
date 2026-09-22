@@ -4,47 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDF6FC982FE
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 15:37:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1429176.1652107 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E40C982FA
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 15:59:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1429192.1652144 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x92YA-0006Qc-Q5; Tue, 22 Sep 2026 15:36:54 +0000
+	id 1x92ti-0005kD-KS; Tue, 22 Sep 2026 15:59:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1429176.1652107; Tue, 22 Sep 2026 15:36:54 +0000
+Received: by outflank-mailman (output) from mailman id 1429192.1652144; Tue, 22 Sep 2026 15:59:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x92YA-0006QV-Mk; Tue, 22 Sep 2026 15:36:54 +0000
-Received: by outflank-mailman (input) for mailman id 1429176;
- Tue, 22 Sep 2026 15:36:53 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x92Y9-0006QM-LR
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 15:36:53 +0000
+	id 1x92ti-0005k1-Dy; Tue, 22 Sep 2026 15:59:10 +0000
+Received: by outflank-mailman (input) for mailman id 1429192;
+ Tue, 22 Sep 2026 15:59:09 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Mykola_Kvach@epam.com>) id 1x92th-0005d7-QX
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 15:59:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x92Y8-00Aqez-TL
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:36:52 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c9c32ad300072c4@swg.vates.tech>)
- id 6ab2a07b-8faa-0a2a0a5109dd-0a2a4507c23e-48
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 17:36:52 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0c9c32ad300072c4@swg.vates.tech>)
- id 6ab2a093-b4ea-0a2a45070019-b9ff1c2387af-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 17:36:52 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0c9c32ad300072c4.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Tue, 22 Sep 2026 15:36:46 +0000
-Received: from [192.168.1.37] (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
- [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 3E73282362;
- Tue, 22 Sep 2026 17:36:45 +0200 (CEST)
+ id 1x92th-00ATp7-7M
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 17:59:09 +0200
+Received: from [10.42.69.5] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6ab2a5ca-2eae-0a2a0a5409dd-0a2a4505d854-4
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 17:59:09 +0200
+Received: from [52.101.66.99]
+ (helo=DUZPR83CU001.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6ab2a5cc-4cb1-0a2a45050019-3465426338ac-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 17:59:09 +0200
+Received: from AS8PR03MB9746.eurprd03.prod.outlook.com (2603:10a6:20b:61d::18)
+ by AMBPR03MB11360.eurprd03.prod.outlook.com (2603:10a6:20b:767::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.16; Tue, 22 Sep
+ 2026 15:59:05 +0000
+Received: from AS8PR03MB9746.eurprd03.prod.outlook.com
+ ([fe80::cf11:309:1384:58f7]) by AS8PR03MB9746.eurprd03.prod.outlook.com
+ ([fe80::cf11:309:1384:58f7%6]) with mapi id 15.21.0428.015; Tue, 22 Sep 2026
+ 15:59:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,324 +55,256 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=8Ey3zrjI8D0i6oxEP4lWwENQRpC1B+d6F7u4VPCDVbY=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=tQqDmq19nwHSxG4uKJYcONpEpqJvjbbhmT/1Nt94mVo7mmZH+EONo8aI99J6k7GflULDZsw2R
- Qy6P3NfMjLy1ZWv30yfLO/PKqIXlIy8ITFnc0d6AhXkGKFVO21pNLiD0okaFK+U+GwAFOJ9IQn1
- n7CeNTvjhFYduMMvONC9Ug2saUxR0w7ljtz6JTqFEO6Zp2YX4TZcr7/g+817083y3XKqetPKQGI
- bB/oNHBNbVn8O0SjQrrBdofV1DkIwZSfYu+w4bTJbacCOt6VGPP3fsN/SS0dZTs4JRvz64vr2JN
- LX1P/zWSZST4qirXdh7mC2703Wko4+C4E6Kz9xUR66rA==
-X-Zone-Loop: 7417802adc134c79dc3dc9abfa987440dc040b2f0ddd
-x-campaign-type: default
-x-transaction-id: 3297e265-725e-44f0-85ef-f576fc4e46ea
-x-swg-uid: 01-e66d5b4d-f032-49fd-a992-c3aadaa0c401
-X-Mailer: Sweego
-Message-ID:
- <1790091406.8631fc262581453bbf619ec5b2062170.1a0c9c32ad300072c4@vates.tech>
-x-swg-bid: 1790091406.8631fc262581453bbf619ec5b2062170.1a0c9c32ad300072c4
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=oLgtyVh4ZP5JqViUaVZV3+F7q04fMyUlbh3lMICdp3WpBeDjWsuXCUvW+mDtme4orTB2PKMg20Db82MX4GW8PrkSbvlrBqviRDIsVeGl5NzoZgX44mb3UK4TwTCpyW2i5Ibo/Wt0m++6/0vF3XzwxBYoyRA0Mzi/BOULjXXUBYA6++MHCaYs5MEBNLc1eV+/n1PUcYHiRaAMesNEdeTAkMzaANvoLY8cHJJ+X2FQ/NaL5p/ot98CiMk5qDEGMQazeGXSQI+xzMx3eUs99pf6yBFE/WS3LRlqGMgreCabQoM1d+/xAR3DJ2rLr9GgbsCOtkgVrrALm0VdJbg/uVW+Sw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=y0CNFQ6w0OoFMTVo9GGVwFDr1Sg2IGBlLPPygPrJC/Y=;
+ b=uG1/Gi81Z5n0fRfO65ju8ZQlAaCsNm3rkzStvRIfFBYM28L1+wkuV636ZEJV8zKZ+Be4K2zzWUBg+RchRTCAJetzGQUbxDUYZXso66YK6sQhVbB58bQAGeO02ogOhqFgxHf1AT/dRgZobPZE5r/2T0e/NPh4SV15Qkaef7ziU9mC7xAj9gokmjl13tF0zKk2bFIw2UamRFFB5LEJ4X1HK1Auzo7j2lhdzQitjKe87mi88OuehZfGXK/kdw30BAVUMVEYxos51Tj/k2Qxb0Bfb2NgQmJHcGxX502l6vVL67P4q7jX5dvmeSn4ulQhq+1W7LJKSFiD0mY64REgRbvqzQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=y0CNFQ6w0OoFMTVo9GGVwFDr1Sg2IGBlLPPygPrJC/Y=;
+ b=FvN2XmUJnqotIpgygOTFZEznxNrVky/ohLoZ4I9V03vDmmp+ghht0JWtRT4TcKSAm4Fdg8j4NuPpMq0R43AKZBIjo6usuGq2RHewG4SG+Eg5BQ5Oj9nKttHFuToji4cPTFg31JAbFW2RHdyKcrUac1DRFCpeNMCWgI/TuSb/olnwpQuaanf25Gq6oDdhyM28aSAgUO/E8YgZ0lJCRyT1ftPJa3lV4RkAIe+cSAnixM2BZhuGQqvn7NfglUgC32BknAJTck8Xlp2LuuoozZttTu6t7rZ4e/hXIiLRJWAzt9Nqort7MOEsOzjWm393pImeW4nw0CS2w0tmysESDpxObg==
+Authentication-Results: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+From: Mykola Kvach <mykola_kvach@epam.com>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v3 3/4] xen/arm: its: refactor ITS quirk matching
+Date: Tue, 22 Sep 2026 18:58:41 +0300
+Message-ID: <a9bccc7d8054244cdbe754fd16b8d2faba01af3f.1790089161.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1790089161.git.mykola_kvach@epam.com>
+References: <cover.1790089161.git.mykola_kvach@epam.com>
 Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v2 30/39] xen/riscv: prepare new IMSIC VS-file
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- xen-devel@lists.xenproject.org, 
- Romain Caritey <Romain.Caritey@microchip.com>, 
- Zheng Zhang <zhangzheng@iscas.ac.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <5b70c0d6-12ec-429c-be9c-a96d78d48e68@gmail.com>
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <440bc07dfb72d09da72b49ded6f78dc1f54a3ad5.1787838835.git.oleksii.kurochko@gmail.com>
- <1790007309.8631fc262581453bbf619ec5b2062170.1a0c4bff57900072c4@vates.tech>
- <5b70c0d6-12ec-429c-be9c-a96d78d48e68@gmail.com>
-Date: Tue, 22 Sep 2026 17:36:39 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790091399; l=10227;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=7eaUhQ0DVeRCoRnrDKsWiD50xCkTNrckjLHxLGNTNrs=;
- b=ZVhBnkmD3CK4Szwe1moI9uQcChVNn/R+z5Pehi4UBAzSoDsPYZboMHkomBLTMKqaMa7zC9ylb
- pgVYDl9c1AvDAR3eW9BxuOwMHxopq9jLRYEC4a6kuGjd+v1A6UTbRfF
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1790091405462
-X-purgate-ID: tlsNG-ef75cf/1790091412-A70DDAE4-E3D577A9/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 10231
+Content-Type: text/plain
+X-ClientProxiedBy: WA0P291CA0020.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1::17) To AS8PR03MB9746.eurprd03.prod.outlook.com
+ (2603:10a6:20b:61d::18)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AS8PR03MB9746:EE_|AMBPR03MB11360:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2b5a5be9-f1eb-4778-2666-08df18c26dfd
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|376014|366016|1800799024|18002099003|22082099003|11063799006|56012099006|10067099003;
+X-Microsoft-Antispam-Message-Info:
+	nxKuU2JMZMreulMbq0ktOE2Z8ESLmB51S+vcv9n7FoXveEakbNFK76ZT42XZU2gbvcOezfwPHm2njKS6eUMohm0XKLgEKlBVyUCUztqDWYkk7U4+D26nKSES97RrRvklSdMhcvbTLopcGMmpUBb9bA6OechwZkQ4B1tOQ7KRFiLQU8qO0F32qU0vcy5OCNv6+JU7T/Iv4u96gL06bJCRD4pWmegU7gTQ4xMlasQmFhW64KCaio0LV7ZHPtq6V5UJswYsfazdSyIQh0kNc6MEf8LYyePCSH0UhxkXHmd3p3PbQtvBEp8BZri6IOX51jWLpNNp2EbHZ6tMtfZFAEIPaWwDkKAEcimRet21I1CyzZsUdDS+7OoWAa13mCUd3+PDR2QWE6PCSOUCyMAELGnau/LAb8PkuA1DpZulSpMDfOIEUtqVd++wvGHj3g9OepYDt7zuzDA5Z19HF/ao7gNm9gN7hkdfzCpSC1uWHVq36RjDJK+qBLMCrXJ78Ezz022/gj1jK3Zs49B9E46H6I8OC3KhqyI6p1kiGvnWMQnNeeFO45CNIBoBnStct5InyzQPn7qf9I4IzqE2vCOcgSND5vNNpTxyDPPlsIgB9HWuiB5yX4K0IDj+/urE61admJiCH9kIauwq+IUE2paLxlCP/ymbL/ks6uCtsdLuMW2lDGU=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9746.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(18002099003)(22082099003)(11063799006)(56012099006)(10067099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?On5pEzodTOQ9XD+mLSqc2VUuHTqi3njuR60lNFRPha8Gnd8nA73Diz3MMehO?=
+ =?us-ascii?Q?O6dYVIHHCwhOMl1ufwgM/IrGuG4LNJoda+cA//6mir2WKsiglPWITkP1ZP4N?=
+ =?us-ascii?Q?uRFNcxqkjRnDOiBaXwD9loDHggT74DX0ZiNrrUorPxW66SlOeUXqIcCwtzjO?=
+ =?us-ascii?Q?FeYqxhW/sIw42SZP6LRyFWr17wtoy3pb94n7ApXxgjK3gD5m+gxUpv+HqLLL?=
+ =?us-ascii?Q?OgrAQXFJ8NiFmT27fXKbDVwkuh2ExWBk168xEsuA9BbuKOC0LS6ZYGj26uqQ?=
+ =?us-ascii?Q?6Gwb3erQmlbAHBZubTQL2UFVkwz6MTTssssi5o34fG4V27z98kz5MYMx45mH?=
+ =?us-ascii?Q?8eTzSmQsUZmDOXPk6IM8H4tesg09MWWoZCTaRlN5Iu73xX65E5aUf6r33k6P?=
+ =?us-ascii?Q?2oifM4fY3VHwaOD6Al74uFWwcKwet2VbKbn3c2ApkiG1IEX71OkcTAappWbe?=
+ =?us-ascii?Q?Tmdoof8AjECEnSNUyMbnrhyWVhvjkm+lHpiPTv3061ObnO+zfAXV+RJ4Dl28?=
+ =?us-ascii?Q?wgqsfyt6CYW6uT7GyoL/gx7geZ7mcPyGFcduFZIWC9BhZC3v2at6ozjGES4K?=
+ =?us-ascii?Q?3UKfGcgYdJpZ9qKhZLAScudiIrG+f9lIK0fmAsqvqtgTBZu6Ef0EcHCJvC8H?=
+ =?us-ascii?Q?3lurrtISKZrRFd3zE2hJU7ImF/398FWnPb3ZnLt35I0ay+9g00j/vj1h47tI?=
+ =?us-ascii?Q?BMyeH6QTy6npVzkT+kFwCBwF+7b6mtUWhLGeDGsKfbm9Wugpqsd8C2KiZNPJ?=
+ =?us-ascii?Q?91wWUegT7IuvqtbwKwvpfxWV3ioL0JTkqWsPwWqa+eDYlHbZLPzx631ACjZ7?=
+ =?us-ascii?Q?S5sGVvTE2ew7cHPQ/MzgYK/HuN+y83q6saLPwpDYsxdNuGFIfjZKmtAa7Fda?=
+ =?us-ascii?Q?mUeGdbvZ2svhVg55Gn6x2Hbd1wTYBbc0Xm4JQqcX1+GrO5J8+QzIUoP5QCUp?=
+ =?us-ascii?Q?16PbR+EHQjUiGcEXHBdAOwygX5Nefssi/Jj2j/FSeuOdpQ3gQXDBGMSU/DR7?=
+ =?us-ascii?Q?E93dqHXpW4IJPri611LlypuEYKCGHLB2pcceuIaBp0W0PdHBHy+WVtlnnZm/?=
+ =?us-ascii?Q?eM1gINw1D/lDoQ80bVvUEtb2w9pvBWXWT6M2TPFWYnRQ+KqNUKUD9qUo1Fhu?=
+ =?us-ascii?Q?q4e8j6XvaZmXZUMvBOvYOYE6ga1FAN57UvInbcMhSuftWqAAXMATechZU1AI?=
+ =?us-ascii?Q?SyQK+y36/eRJiC89eJ8sP8z5Hy7iwNTg+KP3FAyv7bTsvILHTS+JjXVhMJ4N?=
+ =?us-ascii?Q?js5XTgXt3PsoFtWtWpiRvVVh84aUPTwvQxzEAieX20KjxZdu9LlhE7efpxJI?=
+ =?us-ascii?Q?0Lsxs+CfWKs8Q6kwU6ZjQ9stvZacGwpCwEcZD7LOpvSGWbd3fAVgjLmdgM1x?=
+ =?us-ascii?Q?86wjnOP2Lj2aPBx9iInGdNIndzXHtfjeNtRSlYbVees5P0U0KCBtjMktF2ka?=
+ =?us-ascii?Q?b7F4J9NTeaRQzqw4wStzab+wo+dfeKnUjNCorqbj38ln/AsBZ/GuK/hZjDBJ?=
+ =?us-ascii?Q?E78gEF9YibcKkkr9lRjslL6o1IDA9wA3QUx+Twu7fo1jB6xEF8IecmLX3PF0?=
+ =?us-ascii?Q?VdaYbnByeN39ZjqRAJz3/NMfCN3WV4UG6PZ3JyryjLGKIAr37qD77U+wO+0Q?=
+ =?us-ascii?Q?+rf7cfM2JOiRwv0jbUh2p8M0pzE06BqBNl3Coa8+jf3nyZP4xhfGlCL9QmkA?=
+ =?us-ascii?Q?iaWrGmPnFbhkdGNfkzMAjOpeRGABVNFcvyqYNMzpw2kXjgtPSaDdfAFb90j+?=
+ =?us-ascii?Q?73TgE4QKrQ=3D=3D?=
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2b5a5be9-f1eb-4778-2666-08df18c26dfd
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9746.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Sep 2026 15:59:05.9198
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: lH56Dn9s0pvSSlqXVk0WZ6bPEfWWMCdBeB+IgSsGO6dCreF4zFLrSxHlp1qcKYXT9etvOLw9wdTLlV1AV1/4qQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AMBPR03MB11360
+X-purgate-ID: tlsNG-c201ff/1790092749-F7CB82A1-959C4A81/0/0
+X-purgate-type: clean
+X-purgate-size: 5575
 
-On 2026-09-22 15:01:02+02:00, Oleksii Kurochko wrote:
-> On 9/21/26 6:15 PM, Baptiste Le Duc wrote:
-> > 
-> > 
-> > On 8/27/26 5:24 PM, Oleksii Kurochko wrote:
-> >> Implement first steps of migration a vCPU to a different guest 
-> >> interrupt file
-> >> procedure:
-> >> - At the old interrupt file, save to memory the values of registers
-> >>    eidelivery and eithreshold, and set eidelivery = 0.
-> >> - At the new interrupt file, set eidelivery = 0, and zero all
-> >>    implemented interrupt-pending bits (the eip array).
-> >>
-> >> The following steps will be introduced in follow-up patches.
-> >>
-> >> Add a BUG_ON("unimplemented") placeholder in imsic_migrate_vcpu() to 
-> >> guard
-> >> against silent incorrect behaviour or unexpected panics in guest VMs 
-> >> until
-> >> the function is fully implemented.
-> >>
-> >> vgein_assign() will be introduced later in a separate patch, for not 
-> >> it is
-> >> only stub.
-> >>
-> >> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> >> ---
-> >> Changes in v2:
-> >>   - New patch.
-> >> ---
-> >> ---
-> >>   xen/arch/riscv/aia.c             |   9 ++
-> >>   xen/arch/riscv/imsic.c           | 159 +++++++++++++++++++++++++++++++
-> >>   xen/arch/riscv/include/asm/aia.h |   4 +
-> >>   xen/include/xen/config.h         |   1 +
-> >>   4 files changed, 173 insertions(+)
-> >>
-> >> diff --git a/xen/arch/riscv/aia.c b/xen/arch/riscv/aia.c
-> >> index e31c9c2d24b6..75c82bcfa1b3 100644
-> >> --- a/xen/arch/riscv/aia.c
-> >> +++ b/xen/arch/riscv/aia.c
-> >> @@ -1,8 +1,10 @@
-> >>   /* SPDX-License-Identifier: GPL-2.0-only */
-> >> +#include <xen/bug.h>
-> >>   #include <xen/errno.h>
-> >>   #include <xen/init.h>
-> >>   #include <xen/sections.h>
-> >> +#include <xen/sched.h>
-> >>   #include <xen/types.h>
-> >>   #include <asm/cpufeature.h>
-> >> @@ -21,3 +23,10 @@ void __init aia_init(void)
-> >>       _aia_usable = true;
-> >>   }
-> >> +
-> >> +unsigned int vgein_assign(struct vcpu *v)
-> >> +{
-> >> +    BUG_ON("unimplemented\n");
-> >> +
-> >> +    return 0;
-> >> +}
-> >> diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-> >> index ad7fbe708bfd..516f0105352a 100644
-> >> --- a/xen/arch/riscv/imsic.c
-> >> +++ b/xen/arch/riscv/imsic.c
-> >> @@ -26,6 +26,7 @@
-> >>   #include <xen/spinlock.h>
-> >>   #include <xen/xvmalloc.h>
-> >> +#include <asm/aia.h>
-> >>   #include <asm/imsic.h>
-> >>   #define IMSIC_HART_SIZE(guest_bits) (BIT(guest_bits, U) * 
-> >> IMSIC_MMIO_PAGE_SZ)
-> >> @@ -77,6 +78,64 @@ do {                            \
-> >>       csr_clear(CSR_SIREG, v);    \
-> >>   } while (0)
-> >> +#define imsic_vs_csr_write(c, v)    \
-> >> +do {                                \
-> >> +    csr_write(CSR_VSISELECT, (c));  \
-> >> +    csr_write(CSR_VSIREG, (v));     \
-> >> +} while ( 0 )
-> >> +
-> >> +/*
-> >> + * Generic switchcase expansion pyramid.
-> >> + * F is the per-operation leaf macro, ireg is the base register index.
-> >> + * Optional extra args (e.g. an operation and/or a value) are 
-> >> forwarded to F
-> >> + * via __VA_ARGS__.
-> >> + *
-> >> + * imsic_switchcase_break(ireg, op, v) - emit "case ireg: op(ireg,v); 
-> >> break;"
-> >> + * imsic_switchcase_ret(ireg, op, ...) - emit "case ireg: return 
-> >> op(ireg[,v]);"
-> >> + *   The variadic tail is optional so the same leaf works for both 
-> >> read (no v)
-> >> + *   and swap (with v).
-> >> + */
-> >> +#define imsic_switchcase_break(ireg, op, v) \
-> >> +    case ireg:                              \
-> >> +        op(ireg, v);                        \
-> >> +        break;
-> >> +
-> >> +#define imsic_switchcase_ret(ireg, op, ...) \
-> >> +    case ireg:                              \
-> >> +        return op(ireg, ##__VA_ARGS__);
-> >> +
-> >> +#define imsic_switchcase_2(F, ireg, ...)    \
-> >> +    F(ireg + 0, ##__VA_ARGS__)              \
-> >> +    F(ireg + 1, ##__VA_ARGS__)
-> >> +#define imsic_switchcase_4(F, ireg, ...)    \
-> >> +    imsic_switchcase_2(F, ireg + 0, ##__VA_ARGS__)  \
-> >> +    imsic_switchcase_2(F, ireg + 2, ##__VA_ARGS__)
-> >> +#define imsic_switchcase_8(F, ireg, ...)    \
-> >> +    imsic_switchcase_4(F, ireg + 0, ##__VA_ARGS__)  \
-> >> +    imsic_switchcase_4(F, ireg + 4, ##__VA_ARGS__)
-> >> +#define imsic_switchcase_16(F, ireg, ...)   \
-> >> +    imsic_switchcase_8(F, ireg + 0, ##__VA_ARGS__)  \
-> >> +    imsic_switchcase_8(F, ireg + 8, ##__VA_ARGS__)
-> >> +#define imsic_switchcase_32(F, ireg, ...)   \
-> >> +    imsic_switchcase_16(F, ireg + 0, ##__VA_ARGS__) \
-> >> +    imsic_switchcase_16(F, ireg + 16, ##__VA_ARGS__)
-> >> +#define imsic_switchcase_64(F, ireg, ...)   \
-> >> +    imsic_switchcase_32(F, ireg + 0, ##__VA_ARGS__) \
-> >> +    imsic_switchcase_32(F, ireg + 32, ##__VA_ARGS__)
-> >> +
-> >> +static void imsic_eix_write(unsigned int ireg, unsigned long val)
-> >> +{
-> >> +    switch ( ireg )
-> >> +    {
-> >> +    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIP0,
-> >> +                        imsic_vs_csr_write, val)
-> >> +    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIE0,
-> >> +                        imsic_vs_csr_write, val)
-> >> +    default:
-> >> +        ASSERT_UNREACHABLE();
-> >> +    }
-> >> +}
-> >> +
-> >>   unsigned int vcpu_guest_file_id(const struct vcpu *v)
-> >>   {
-> >>       return ACCESS_ONCE(v->arch.vimsic_state->guest_file_id);
-> >> @@ -389,6 +448,76 @@ int cf_check vcpu_imsic_init(struct vcpu *v)
-> >>       return 0;
-> >>   }
-> >> +/*
-> >> + * Arguments of the imsic_vsfile_local_*() helpers, which are 
-> >> executed by the
-> >> + * pCPU owning the interrupt file, thereby through imsic_call_on_cpu().
-> >> + */
-> >> +struct imsic_vsfile_data {
-> >> +    unsigned int hgei;
-> >> +    unsigned int nr_eix;
-> >> +    struct imsic_mrif *mrif;
-> >> +};
-> >> +
-> >> +/*
-> >> + * Execute func() on the pCPU which owns the IMSIC interrupt file 
-> >> func() is
-> >> + * going to work with.
-> >> + *
-> >> + * An IMSIC VS-file is reachable only through hstatus.VGEIN of the 
-> >> hart the
-> >> + * file belongs to, and a guest interrupt file index is meaningless 
-> >> on any
-> >> + * other hart, so such work always has to be done by that very hart.
-> >> + *
-> >> + * The local case runs with IRQs disabled to provide func() with the 
-> >> same
-> >> + * environment it is given when it is called from the function call IPI
-> >> + * handler.
-> >> + */
-> >> +static void imsic_call_on_cpu(unsigned int cpu, void (*func)(void *),
-> >> +                              void *data)
-> >> +{
-> >> +    if ( cpu == smp_processor_id() )
-> >> +    {
-> >> +        unsigned long flags;
-> >> +
-> >> +        local_irq_save(flags);
-> >> +        func(data);
-> >> +        local_irq_restore(flags);
-> >> +    }
-> >> +    else
-> >> +        on_selected_cpus(cpumask_of(cpu), func, data, 1);
-> >> +}
-> >> +
-> >> +static void cf_check imsic_vsfile_local_clear(void *data)
-> > I think the remark from Jan to direclty pass the type instead of void
-> > could be applied here.
-> 
-> I think it can't because of how function pointer is passed to 
-> on_selected_cpus() through imsic_call_on_cpu().
-> 
-> >> +{
-> >> +    unsigned int i;
-> >> +    const struct imsic_vsfile_data *idata = data;
-> >> +    unsigned long new_hstatus, old_hstatus, old_vsiselect;
-> >> +
-> >> +    /* We can only zero-out if we have a IMSIC VS-file */
-> >> +    if ( !idata->hgei )
-> >> +        return;
-> >> +
-> >> +    old_vsiselect = csr_read(CSR_VSISELECT);
-> >> +    old_hstatus = csr_read(CSR_HSTATUS);
-> >> +    new_hstatus = old_hstatus & ~HSTATUS_VGEIN;
-> >> +    new_hstatus |= MASK_INSR(idata->hgei, HSTATUS_VGEIN);
-> >> +    csr_write(CSR_HSTATUS, new_hstatus);
-> >> +
-> >> +    imsic_vs_csr_write(IMSIC_EIDELIVERY, 0);
-> >> +    imsic_vs_csr_write(IMSIC_EITHRESHOLD, 0);
-> >> +
-> >> +    for ( i = 0; i < idata->nr_eix; i++ )
-> >> +    {
-> >> +        imsic_eix_write(IMSIC_EIP0 + i * 2, 0);
-> >> +        imsic_eix_write(IMSIC_EIE0 + i * 2, 0);
-> >> +#ifdef CONFIG_RISCV_32
-> >> +        imsic_eix_write(IMSIC_EIP0 + i * 2 + 1, 0);
-> >> +        imsic_eix_write(IMSIC_EIE0 + i * 2 + 1, 0);
-> >> +#endif
-> >> +    }
-> >> +
-> >> +    csr_write(CSR_HSTATUS, old_hstatus);
-> >> +    csr_write(CSR_VSISELECT, old_vsiselect);
-> >> +}
-> >> +
-> >>   void cf_check vcpu_imsic_deinit(struct vcpu *v)
-> >>   {
-> >>       XVFREE(v->arch.vimsic_state);
-> >> @@ -689,6 +818,14 @@ int __init vimsic_make_domu_dt_node(struct 
-> >> kernel_info *kinfo,
-> >>   void imsic_migrate_vcpu(struct vcpu *v)
-> >>   {
-> >> +    unsigned int new_vsfile_hgei;
-> >> +    unsigned int new_vsfile_cpu;
-> >> +    unsigned int nr_hw_eix = DIV_ROUND_UP(imsic_cfg.nr_ids + 1,
-> >> +                                          BITS_PER_TYPE(uint64_t));
-> > This value appears to remain constant after initialization, since it 
-> > depends directly on the hw,
-> > so it is not necessary to calculate it each time.
-> 
-> I will add then:
-> 
-> --- a/xen/arch/riscv/include/asm/imsic.h
-> +++ b/xen/arch/riscv/include/asm/imsic.h
-> @@ struct imsic_config {
->       /* Number off interrupt identities */
->       unsigned int nr_ids;
-> 
-> +    /*
-> +     * Number of 64-bit EIx groups needed to cover all the interrupt
-> +     * identities, which are 0 (never valid, but it still occupies a 
-> bit) up
-> +     * to and including nr_ids.
-> +     */
-> +    unsigned int nr_eix;
-> +
-Thanks! Maybe use `registers` instead of `groups` wording.
-> and init it once in imsic_parse_node().
-> 
-> Thanks.
-> 
-> ~ Oleksii
+ITS quirks are matched only by IIDR and mask fields stored in each table
+entry. That is too coarse when the same GIC IP block appears on several
+platforms but a workaround is valid only for some of them.
 
+Replace the fixed IIDR fields with a generic match(hw_its, data)
+callback and an opaque data pointer. Add an IIDR matcher as a reusable
+building block and use it from the R-Car Gen4 matcher after checking the
+Renesas machine compatibles.
+
+This intentionally narrows the R-Car Gen4 quirk. Previously every ITS
+with IIDR 0x0201743b matched. Now it matches only a DT-discovered ITS on
+an r8a779f0 or r8a779g0 machine. ACPI-discovered ITSes and the same IIDR
+on other platforms no longer match.
+
+Keep first-match semantics explicit. Assert that non-sentinel entries
+provide a matcher and that IIDR matching receives match data. Retain
+runtime guards so malformed entries cannot cause a NULL function call
+or data dereference in non-debug builds. Place the matcher data and
+table in init-only read-only sections.
+
+The matched entry still supplies separate ITS and LPI flags; this patch
+only changes how the entry is selected.
+
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+Changes in v3:
+- Document the intentional narrowing of the R-Car Gen4 match.
+- Add the non-debug NULL-data guard.
+- Put the matcher data and table in init-only read-only sections.
+
+Changes in v2:
+- Replace v1's optional platform callback plus fixed IIDR/mask fields
+  with a single generic match(hw_its, data) selector.
+- Add a reusable IIDR matcher and use it after the R-Car Gen4
+  machine-compatible checks.
+- Document that the R-Car Gen4 quirk remains DT-only.
+- Keep the split ITS and host LPI quirk scopes when applying the matched
+  entry.
+- Document first-match ordering in the lookup path and guard against
+  entries without a match callback or IIDR match data.
+---
+ xen/arch/arm/gic-v3-its.c | 73 +++++++++++++++++++++++++++++++--------
+ 1 file changed, 58 insertions(+), 15 deletions(-)
+
+diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
+index 454fd0e0ef..f52232ca40 100644
+--- a/xen/arch/arm/gic-v3-its.c
++++ b/xen/arch/arm/gic-v3-its.c
+@@ -54,8 +54,8 @@ struct its_device {
+ 
+ struct its_quirk {
+     const char *desc;
+-    uint32_t iidr;
+-    uint32_t mask;
++    bool (*match)(const struct host_its *hw_its, const void *data);
++    const void *data;
+     uint32_t its_flags;
+     /*
+      * lpi_flags are ORed into the global host LPI policy and must only
+@@ -65,11 +65,52 @@ struct its_quirk {
+     uint32_t lpi_flags;
+ };
+ 
+-static const struct its_quirk its_quirks[] = {
++struct its_quirk_match_iidr {
++    uint32_t iidr;
++    uint32_t mask;
++};
++
++static bool __init gicv3_its_match_iidr(const struct host_its *hw_its,
++                                        const void *data)
++{
++    const struct its_quirk_match_iidr *match;
++    uint32_t iidr;
++
++    ASSERT(data);
++
++    if ( !data )
++        return false;
++
++    match = data;
++    iidr = readl_relaxed(hw_its->its_base + GITS_IIDR);
++
++    return (iidr & match->mask) == match->iidr;
++}
++
++static bool __init gicv3_its_match_quirk_gen4(const struct host_its *hw_its,
++                                              const void *data)
++{
++    if ( !hw_its->dt_node )
++        return false;
++
++    if ( !dt_machine_is_compatible("renesas,r8a779f0") &&
++         !dt_machine_is_compatible("renesas,r8a779g0") )
++        return false;
++
++    return gicv3_its_match_iidr(hw_its, data);
++}
++
++static const struct its_quirk_match_iidr rcar_gen4_iidr __initconst = {
++    /* Implementer 0x43b identifies Arm Ltd. */
++    .iidr = 0x0201743b,
++    .mask = 0xffffffffU,
++};
++
++static const struct its_quirk its_quirks[] __initconstrel = {
+     {
+-        .desc	= "R-Car Gen4",
+-        .iidr	= 0x0201743b,
+-        .mask	= 0xffffffffU,
++        .desc = "R-Car Gen4",
++        .match = gicv3_its_match_quirk_gen4,
++        .data = &rcar_gen4_iidr,
+         .its_flags = GICV3_QUIRK_MEM_NC_NS | GICV3_QUIRK_MEM_32BIT_ADDR,
+         .lpi_flags = GICV3_QUIRK_MEM_NC_NS | GICV3_QUIRK_MEM_32BIT_ADDR,
+     },
+@@ -78,18 +119,21 @@ static const struct its_quirk its_quirks[] = {
+     }
+ };
+ 
+-static const struct its_quirk *__init gicv3_its_find_quirk(uint32_t iidr)
++static const struct its_quirk *__init gicv3_its_find_quirk(
++    const struct host_its *hw_its)
+ {
+-    const struct its_quirk *quirks = its_quirks;
++    const struct its_quirk *quirk;
+ 
+     /*
+-     * The first matching quirk wins. More specific quirks must be listed
+-     * before broader IIDR-only entries.
++     * The first matching quirk wins. Entries that match a specific platform
++     * must be listed before broader IIDR-only entries.
+      */
+-    for ( ; quirks->desc; quirks++ )
++    for ( quirk = its_quirks; quirk->desc; quirk++ )
+     {
+-        if ( quirks->iidr == (quirks->mask & iidr) )
+-            return quirks;
++        ASSERT(quirk->match);
++
++        if ( quirk->match && quirk->match(hw_its, quirk->data) )
++            return quirk;
+     }
+ 
+     return NULL;
+@@ -97,8 +141,7 @@ static const struct its_quirk *__init gicv3_its_find_quirk(uint32_t iidr)
+ 
+ static void __init gicv3_its_collect_quirks(struct host_its *hw_its)
+ {
+-    uint32_t iidr = readl_relaxed(hw_its->its_base + GITS_IIDR);
+-    const struct its_quirk *quirk = gicv3_its_find_quirk(iidr);
++    const struct its_quirk *quirk = gicv3_its_find_quirk(hw_its);
+ 
+     if ( quirk )
+     {
+-- 
+2.53.0
 
 
