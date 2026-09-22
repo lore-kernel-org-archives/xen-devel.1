@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 43315C982FA
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 10:20:51 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428539.1651382 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B3DF4C982F1
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 10:23:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428546.1651392 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8xc4-0005DV-JV; Tue, 22 Sep 2026 10:20:36 +0000
+	id 1x8xf5-0005pT-1N; Tue, 22 Sep 2026 10:23:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428539.1651382; Tue, 22 Sep 2026 10:20:36 +0000
+Received: by outflank-mailman (output) from mailman id 1428546.1651392; Tue, 22 Sep 2026 10:23:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8xc4-0005DO-Gs; Tue, 22 Sep 2026 10:20:36 +0000
-Received: by outflank-mailman (input) for mailman id 1428539;
- Tue, 22 Sep 2026 10:20:36 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x8xf4-0005pM-Ug; Tue, 22 Sep 2026 10:23:42 +0000
+Received: by outflank-mailman (input) for mailman id 1428546;
+ Tue, 22 Sep 2026 10:23:41 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x8xc3-0005DC-SF
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 10:20:35 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x8xf3-0005pC-B5
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 10:23:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8xc3-005Iqa-0v
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 12:20:35 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x8xf2-002UxR-OA
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 12:23:40 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ab25663-bab6-0a2a0a5309dd-0a2a45058ee6-36
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 12:20:34 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ab25707-8faa-0a2a0a5109dd-0a2a4504d678-44
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 12:23:40 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ab25672-4cb1-0a2a45050019-4a7de14ce11a-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 12:20:34 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-482f62ccdb1so1366285f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 03:20:34 -0700 (PDT)
+ id 6ab2572c-b57f-0a2a45040019-4a7de18db5d8-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 12:23:40 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49b91369d18so29647325e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 03:23:40 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4886277e84dsm4193133f8f.20.2026.09.22.03.20.33
+ 5b1f17b1804b1-49fdab0c240sm28222615e9.4.2026.09.22.03.23.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Sep 2026 03:20:33 -0700 (PDT)
+ Tue, 22 Sep 2026 03:23:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,49 +55,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790072434; x=1790677234; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790072620; x=1790677420; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=NUy6/cLFyqdO0dmZ/aIVtzBYW0tV/zVebq7X+jymWdA=;
-        b=ZzLSNKu1nVuEpyVx3j+ueEEET3KOvmN/ZS0dgwlxFudCppiiHZJpNZaNb3gtseM40O
-         9C6qAJYUdY9AkbCVm6s1cyHXg0G8stCE9aa0vL89iIusVms5cYcZdpARPwH0wa6X+Wf0
-         eZj65wAwvhR/8tlvOJuPuLzOTCSj48RUj7EBKtum47ktFnWFk0Un12JIoJApQbDxcRE0
-         U8jUCpPqjOJP/Cv7aKqMDMGvO7ogTzg5nZhIFgM+aWGW++tzPy1weWoj1cGEsMObdg93
-         /mGobx1PaDOF/PxilYVpwQleuEwIElbAtEin3s/0p7QtD90bjmsra3fQGqmyZyyhYId9
-         Qqow==
+        bh=t0xXwVHC5NMTpwFI6XhDRiCyEmcfc9jvURgZBwlMrag=;
+        b=VSTfAXB2vwZzdS22Bw9IikIF2+IM2uYRDLXpgz1JWa8CHrOKSbIQvPmElpgfRJQulT
+         iVqtvHpbHarLVjRI4djDp9MCN4TYNMgyXZJpG/x/9SspRNWPxxmRdcHg07qilVOe9SxC
+         D0KSkOUxMmWnjjGVW5/RNLioBqW7Wb20erj5NA8uSixJW3+ZE6Qs69mZ5fhFA7XnacqE
+         bmBmJPlPCoQcrXWqhoKECKTfk0v2hu6oa/WmkN/iXcBwPnqtSZZf/hhgj7TT7jaDgrTk
+         b8St0PYIj9osisiAkPFcPX33g07G2hHtORTKxSg1p3d/Vcxm6WiuPoJhC9UkpKbDF1Of
+         9bjA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790072434; x=1790677234;
+        d=1e100.net; s=20260707; t=1790072620; x=1790677420;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=NUy6/cLFyqdO0dmZ/aIVtzBYW0tV/zVebq7X+jymWdA=;
-        b=xP5PaUE3+Ta23HMwJGamm98zi2UgTxCT0m8x9IlYARkWkKDCQlFRF7IZHHvJbtkebN
-         nN88U06fyB+XH59GimZ1/Fdxpc2iW5/O0e8ZNdecaquprGVHEsMv3/dtqIbOAJRsNcsU
-         jiICpW48iOWJi5V6YKZntsXg6b1nH265xOflkLhb5DJ8hFJc8iQjxyrn0ySFsNLITeA3
-         dKAa15phGAoLL7J1WjjDPa2i+Rk77vRsvp9uXhv1u5vEIFGcNiWwpt9Yd1WuAssXZMRQ
-         AQdiyDJiZAAwkcon6Wx7Yv8/Hc17RzpO0khJ8ci3rrSgydf/DGkoWeWH/lQU/6syF03t
-         w9EQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwwyBb9GtUvbReSx1KiNkP+OqnU8FJvSnjcV+/DXyknRvXdNfl/7AhpK6lP+N7wiS7zVYcpTlL7mx8=@lists.xenproject.org
-X-Gm-Message-State: AFuF++k4LC8yDGjzBJn/uH5U+NxwBnfpSBSCITvioNHXNFPZq5mFweRk
-	FuZevvRuJXNQS15HyBgxsHoCEX29SnSeuC++aiuq8eTuCpFnuDN/dS3EcUuF+g96sA==
-X-Gm-Gg: AYBFou0F3VOObBW8H9RqmVle8HzpsZm7UaiXVdtIn2hyoLOg/iOOknAT4NZ7qDbvEPG
-	wyMbozlXUYPT7cjTL/oLVM3fAQOusNJjUCn85D6yTom35RDJ77NqBBqO2KH3LeDgVjtczjHhDCL
-	MziQhZOLaOx6tfCcuztUvMTqEElwuMo4o0gb0EkSkcpmxJBTUWwEc3Hj5oKDrQdgsATcnaSFWt/
-	rkuepK5sdAkTeFz2u6tsiYBT4hAdCi9KQ75D+buaL0EUKcXC7gqHwp2dMDqQ43Ttlp0b5/MIxby
-	5MFtA7qZG6wbEF5OV+TqGuWcQBrtipcmXw807U9JZsZIAV3cDNaLIW3Lm9nVZDlp5PNbDMRZM8r
-	+OeTZgtmk0fd3praf/jlhBfQopdmMKoUjx379YmBfzjfr3C4mkXCxUmJxOFxshjUE7TByCyl3kI
-	s16E8RIRQO/HVdBs3zG2cDqhlFie2N8a6zOl5PC8+Sd1LMaGF9QxUEojOWdg/iV8aV29aAqJj1T
-	rsE+/gBIpG9Qep8re1KOMDkM8pCSdoVBO+opPqu/3FLRnk/nE0uP9xgjWHNyg==
-X-Received: by 2002:a05:6000:4b1b:b0:487:13a9:80d with SMTP id ffacd0b85a97d-48860ff7d35mr3914753f8f.10.1790072434238;
-        Tue, 22 Sep 2026 03:20:34 -0700 (PDT)
-Message-ID: <a88e1326-14da-4613-9d01-2e374b574467@suse.com>
-Date: Tue, 22 Sep 2026 12:20:32 +0200
+        bh=t0xXwVHC5NMTpwFI6XhDRiCyEmcfc9jvURgZBwlMrag=;
+        b=1qv2IIm6R8kP5IZ8s9G1h3HsOcLQ0XzbJjhYmMqpGHaprR4kFu37hgJcovVzqmgKrF
+         5eMIzdrbi0lF9DTyji0NwGfpdNpgyOYp+So2xNmS3tAvA/9WxPbYXe7znBKzbY70naF+
+         6km05b+tUEHf98b4WQ2VpxQLoXcZ0aBjmvWhBhuWGwS4gn9O1MNdJgTTOuIQRbnpjPZ5
+         d//HbVxJkeExfp9kJBbx/QHCT90Q43IHEsEpXe2GYh9wU4je2wb694Sn/OI48v+xqeRm
+         ClqaUOXnc5JisgtA4gQPFq0ot0a9VspLMblQRdLYmYGBLey8aq4fx7TGlmEqg+zieQoX
+         c/Ew==
+X-Forwarded-Encrypted: i=1; AKwUvBz/1UPqrMhCgqkoOCkIJGEnImgr6NmhzQfAhwVLXo8JdGhQk9oGn/sBlcPTWweE849DIIdO6tkRdGE=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lbQe5p6AwpjcZRbDUlE4RJF2T+rV1F3AHyV+1R7v9B3moQRpnT
+	KBrjNDVlqPZ8gPgO6D3eEHXyQahtYytwdxvggeqxpzxMgKHYTz8OskphG8vWh3m8bw==
+X-Gm-Gg: AYBFou0OIKRqS4o9rBfHRTt5SGyAS4hK6iacuRR+BUrdflFCKc/RrAw8SXelLDp7Ac9
+	8PTE1R/5mCkvl/lnK8csIqAAI4kHnU+o3L5RMdtYQ9OvC0Ek4kjsCh4q5eHoU5AbnKxjzQn22Zh
+	yGf+gzJFRVnS2tuU1dMLLh7mOVdaUqWLotZWq5LrwhHpov77z4k4+KFwl+Nt59fFrZXJ2ToTixe
+	n1GTE2OXDVRg4kbAWgsOJxmjcfRPmZD6Pxn4yXVOyb9zZdg+NQZULMMyZREgPAVI0YexoJ/EExq
+	5PvTZIW8Q6WNgSJKZgRxj/iQeGdFfOTq+mcTqPkQnebt8AOREkVui2AV+nNlbGYx55HCWWwxR2k
+	NKQ0Vy/Hd7OFM9EVFEr/VLeJhL02EnEvERWGijUBQtDgFj46zxv0Magh2HimqvmXMScBFAM48wN
+	y3FPxPSPSAemZk04WA9luX1zf94+ylOsSsis/Au7zJ5yovSGr5Rbq7fxqp6AfKpN8biFXi9Gsx7
+	myovjq80taM8Vb/PeehIzvY+F6vzxD2GR6UBpX0DUDE0PU7QsWM4yIaCQh1lVA=
+X-Received: by 2002:a05:600c:310d:b0:49d:15b9:2a2a with SMTP id 5b1f17b1804b1-49fc5721b9dmr203393485e9.10.1790072620072;
+        Tue, 22 Sep 2026 03:23:40 -0700 (PDT)
+Message-ID: <8a809ae3-4e30-4287-b43f-cdc3a6f434d4@suse.com>
+Date: Tue, 22 Sep 2026 12:23:38 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 38/39] xen/riscv: implement continue_new_vcpu()
+Subject: Re: [PATCH v2 39/39] xen/riscv: introduce IMSIC h/w interrupt file
+ attaching to vcpu
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
@@ -110,9 +111,9 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <a282887cc08cd9b05f59d46cab9377915e83c61d.1787838835.git.oleksii.kurochko@gmail.com>
- <8dbc4ba6-bf92-4e9f-b4b6-7286d5a96443@suse.com>
- <96f66feb-8889-4475-b39f-ed52b1f58a68@gmail.com>
+ <4df9cf63943d0f371c8a25c6c9e84adbd3083a61.1787838835.git.oleksii.kurochko@gmail.com>
+ <bbaaa4f9-a1c4-4ad0-9fae-7fecf1568086@suse.com>
+ <1b7b29da-bc22-4fff-8e1a-92cedcd0cf22@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -138,162 +139,40 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <96f66feb-8889-4475-b39f-ed52b1f58a68@gmail.com>
+In-Reply-To: <1b7b29da-bc22-4fff-8e1a-92cedcd0cf22@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1790072434-F7CB82A1-C6CCF03B/0/0
+X-purgate-ID: tlsNG-ebf023/1790072620-C38C1B50-76ECEB2C/0/0
 X-purgate-type: clean
-X-purgate-size: 6538
+X-purgate-size: 1536
 
-On 22.09.2026 10:23, Oleksii Kurochko wrote:
-> On 9/21/26 2:12 PM, Jan Beulich wrote:
+On 22.09.2026 10:31, Oleksii Kurochko wrote:
+> On 9/21/26 2:32 PM, Jan Beulich wrote:
 >> On 27.08.2026 17:21, Oleksii Kurochko wrote:
->>> continue_new_vcpu() is the arch hook invoked the first time a freshly
->>> created vCPU is scheduled. Implement both cases it has to cover:
->>>   - for the idle vCPU, switch to its own stack and jump to idle_loop();
->>>   - for a guest vCPU, restore hstatus and enter the guest through the new
->>>     return_to_new_vcpu() path in entry.S, which loads sepc, passes the
->>>     hart id in a0 and the DTB address in a1 as expected by the RISC-V
->>>     boot protocol, sets sstatus.SPP and executes sret.
+>>> Introduce imsic_vsfile_attach() to initialize the AIA-related state needed
+>>> for a vCPU to have a working guest interrupt file.
+>>>
+>>> A guest (VS) interrupt file must be mapped to one of a pCPU's
+>>> hardware interrupt files (if they exist), so the pCPU a vCPU will actually
+>>> run on needs to be known first. arch_vcpu_create() is therefore not a
+>>> suitable place to call vcpu_aia_init(), since the pCPU assigned to a
+>>> vCPU can still change before it is first scheduled. To avoid
+>>> reassigning the VS interrupt file id and remapping it to a different
+>>> pCPU's hardware interrupt file, imsic_vsfile_attach() is called from a
+>>> later point in the scheduling path (e.g. continue_new_vcpu()).
 >>
->> Is this a requirement for all CPUs, or just for the boot one? (I can't
->> quite see why secondary processors would need passing a DTB address.)
+>> Hmm, why does first-time handling need to be this different from the
+>> handling of a vCPU moving across pCPU-s? The sole difference should be
+>> "no state to load" vs "load state that was saved on the old pCPU".
 > 
-> It is requirement for boot one. For secondary processors it is HSM boot 
-> data which is passed to sbi_hsm_hart_start() and then intercpeted by Xen.
-> 
-> At the moment of writing of this commit message we have only boot CPU 
-> and so only DTB could be passed.
+> Generally I think it could be the same but not all the steps done in 
+> migration functions aren't needed for new vCPU (despite of the fact they 
+> aren't harmful). For new vCPU it seems to me it is enough only to attach 
+> h/w interrupt file to vCPU.
 
-That you're talking about Xen. Despite Xen being UP only right now, guests
-still can have more than one vCPU, can't they?
-
-> I can update the commit message and the comment in return_to_new_vcpu() 
-> to tell that it could be DTB address for boot cpu and/or for secondary 
-> CPUs HSM boot data or it will be better to add info about HSM boot data 
-> during and an introduction of secondary CPUs support?
-
-As per above you want to deal with multi-vCPU guests right now.
-
->>> Interrupts have to stay disabled across the restore. The trap entry
->>> logic implicitly clears hstatus.SPV, so an interrupt taken between the
->>> write of hstatus and sret would make sret return to HS-mode instead of
->>> VS-mode, and restoring SPV afterwards is non-trivial. Instead interrupts
->>> are simply kept off and sstatus.SPIE is set, so that SIE is restored from
->>> SPIE once sret has been executed.
->>
->> As written this reads as if the guest would be responsible for doing this.
->> Isn't it rather SRET itself which does this?
-> 
-> IIUC to which part you refer then yes, it is SRET itself which does 
-> this. So some re-wording should be done ...
-> 
->>
->>> Also, it follows what hardware will do
->>> with real CPU which is also started with interrupts disabled.
->>
->> Further up, aiui, you talk about the host's interrupt state. How vCPU-s
->> are started, however, is virtual interrupt state. Mixing both isn't
->> very helpful.
-> 
-> ...:
-> 
-> Interrupts have to stay disabled across the restore. The trap entry
-> logic implicitly clears hstatus.SPV, so an interrupt taken between the
-> write of hstatus and sret would make sret return to HS-mode instead of
-> VS-mode, and restoring SPV afterwards is non-trivial. Hence interrupts
-> are kept disabled, and sstatus.SPIE is set so that sret itself 
-> re-enables them (SIE := SPIE) as part of entering the guest.
-> 
-> Then it will be also need to update the comment inside 
-> continue_new_vcpu() to:
-> 
-> -         * To avoid this, interrupts are kept disabled during the restore.
-> -         * Additionally, setting sstatus.SPIE=1 ensures that after sret is
-> -         * executed (as sstatus.SIE will be loaded from SPIE), HS-mode will
-> -         * continue to receive interrupts normally.
-> +         * To avoid this, interrupts are kept disabled during the restore,
-> +         * and sstatus.SPIE is set so that sret itself re-enables them
-> +         * (SIE := SPIE) as part of entering the guest.
->            */
-> 
-> Would it be the wording okay for you now?
-
-I think so, yes.
-
->>> --- a/xen/arch/riscv/entry.S
->>> +++ b/xen/arch/riscv/entry.S
->>> @@ -143,3 +143,26 @@ FUNC(__context_switch)
->>>   
->>>           ret
->>>   END(__context_switch)
->>> +
->>> +/* t0 is used as a temporary reg and is clobbered to oblivion */
->>> +FUNC(return_to_new_vcpu)
->>> +        /* Swap tp with sscratch */
->>> +        csrrw   tp, CSR_SSCRATCH, tp
->>
->> What is this about? I'm not aware of any counterpart code, yet all on its
->> own this I can't see it being overly useful.
-> 
-> It will be needed later when a guest will be able to launch to 
-> distinguish in handle_trap() [1] if a trap is from guest or not. I can 
-> drop it for now and re-introduce it with the code of handle_trap() or as 
-> an option I could update the comment above to:
-> 
->          /*
->           * SSCRATCH holds this hart's struct pcpu_info while a guest 
-> runs and
->           * is zero while Xen runs, so that a trap handler can tell the two
->           * apart: tp is Xen's pointer to pcpu_info in Xen context, but 
-> belongs
->           * to the guest once sret has been executed. Establish that by 
-> swapping
->           * the two here; the trap path swaps them back.
->           */
->          csrrw   tp, CSR_SSCRATCH, tp
-> 
-> (but then the last part will point to the part which isn't yet 
-> introduced so probably it will be better to drop this line for now)
-
-Yes, introducing it together with the other related pieces is going to be
-more consistent and easier to follow.
-
->>> +        /* Set guest mode to supervisor */
->>> +        li      t0, SSTATUS_SPP
->>> +        csrs    CSR_SSTATUS, t0
->>> +
->>> +        /* Enter guest */
->>> +        sret
->>> +END(return_to_new_vcpu)
->>
->> Aiui SRET does not switch stacks. Shouldn't you therefore clear sp here?
->> And perhaps also other GPRs, not the least ra? Exposing hypervisor
->> register values to guests is, well, a bit of a problem.
-> 
-> Good point, sret leaves all GPRs as they are, so the guest would indeed 
-> see Xen's sp, ra and friends. Only a0 and a1 are architecturally 
-> meaningful for a booting hart, so I'll clear every other GPR right 
-> before sret.
-> 
-> I will add the following before sret:
-> 
->          /*
->           * sret doesn't switch stacks and leaves the GPRs alone, so every
->           * register which isn't meaningful to the vCPU being started 
-> has to be
->           * cleared here: otherwise the guest would see Xen's values, sp 
-> (this
->           * vCPU's Xen stack) and ra among them.
->           */
->          .irp reg, ra, sp, gp, tp, t0, t1, t2, s0, s1, a2, a3, a4, a5, 
-> a6, a7, \
->                    s2, s3, s4, s5, s6, s7, s8, s9, s10, s11, t3, t4, t5, t6
->          mv      \reg, zero
->          .endr
-
-At which point discussing the clobbering of t0 in the comment ahead of
-the function also isn't needed anymore.
+Sure, yet still imo you want to aim at re-using as much code as possible,
+especially when otherwise you introduce multiple very similar but not
+exactly identical variants of logic.
 
 Jan
 
