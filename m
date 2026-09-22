@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4291BC982FF
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 12:31:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428766.1651707 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EFC74C982FF
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 12:43:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428777.1651715 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8zec-00046X-KM; Tue, 22 Sep 2026 12:31:22 +0000
+	id 1x8zpx-0006Gr-KN; Tue, 22 Sep 2026 12:43:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428766.1651707; Tue, 22 Sep 2026 12:31:22 +0000
+Received: by outflank-mailman (output) from mailman id 1428777.1651715; Tue, 22 Sep 2026 12:43:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8zec-00046Q-H9; Tue, 22 Sep 2026 12:31:22 +0000
-Received: by outflank-mailman (input) for mailman id 1428766;
- Tue, 22 Sep 2026 12:31:22 +0000
+	id 1x8zpx-0006Gk-HX; Tue, 22 Sep 2026 12:43:05 +0000
+Received: by outflank-mailman (input) for mailman id 1428777;
+ Tue, 22 Sep 2026 12:43:04 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x8zeb-00046H-Rx
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 12:31:21 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x8zpw-0006GZ-J9
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 12:43:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8zeb-002t10-5P
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 14:31:21 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1x8zpv-00AK7E-Ch
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 14:43:03 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ab27518-8faa-0a2a0a5109dd-0a2a4507cfac-2
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 14:31:21 +0200
-Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ab277cd-e002-0a2a0a5209dd-0a2a4503a432-48
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 14:43:03 +0200
+Received: from [74.125.225.103] (helo=mail-wr2-f39.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ab27518-b4ea-0a2a45070019-4a7de18da0bf-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 14:31:20 +0200
-Received: by mail-wm2-f13.google.com with SMTP id
- 5b1f17b1804b1-49e8185e037so23575255e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 05:31:20 -0700 (PDT)
+ id 6ab277d7-fae8-0a2a45030019-4a7de167800b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 14:43:03 +0200
+Received: by mail-wr2-f39.google.com with SMTP id
+ ffacd0b85a97d-482f633ece3so3138701f8f.3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 05:43:03 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-49fdad53c7dsm44649225e9.12.2026.09.22.05.31.18
+ ffacd0b85a97d-488626d29dasm5250064f8f.0.2026.09.22.05.43.01
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 22 Sep 2026 05:31:19 -0700 (PDT)
+ Tue, 22 Sep 2026 05:43:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,51 +55,51 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790080280; x=1790685080; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790080983; x=1790685783; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=+92Dl39HqApT06XXPezMG+SG8nsAQtZw+yIjN81Wtug=;
-        b=b5rEgd3HRXJXl8W976uw2Lx2N2hiYyLlZ9ryFpO5CZ27UKf+HdjOAdR2Hii1xvM4pD
-         qQ+RfkZ+CcehLeKePc9Y2gCO0m41fzUcrzskY03JRWG1cyGSUz+gHZY4J1UtJoQGfiQB
-         0lm0hORVqDrWkzR6h0w23PgwWUnOFlJrCzRDBvN0mjTTFziuMdtEWHZdhbILpkQKLqkW
-         hBAmaNuU4du0TCX46Xo6uO3zp5SFfUCCbh6eaxColxBCIH6WIZUg3FAY30upBKPvqAql
-         eh9zkkgwgzMbZTRH+VXJMFKn7oLyrokgfre/0yjBiiGECVapxTn4MptemvwYBeMMQZLq
-         VkTQ==
+        bh=snXXMJlrgbggXfT1mZvFwn5OPCOQTYOMT8eZohQBErw=;
+        b=PWsbYdITMhGN6dH0+YZnf/L7i5esLZ3RLSLRuHwkvHyS9rCQgxaI9oHWHBwEZE3eDH
+         YBBoyQSQx2qQ25AlTZcHM3bL97aeEqE2/Zb5OmKWv68JDWUtxL6u+XV9W+fYavw+NeZC
+         F5aEV/Fwzpn0ZH/nYETXzfpG9zgmdZX/wzUu82gVv9ILd6g0Am5/ON7lv0w5A/uciZDw
+         L8UZZkYGb2UCU0IzSaLJNreFPr6QA2LqBrCoAttRULQNJ/RIsIEbLouFGHuvwCnv0xy7
+         4jSFuxcD9sNmFWrhLYcfIf8+WnN46W1wAx0YryHw1prh7pPVXT8YW1ss1wM9us4KyHMx
+         7iNA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790080280; x=1790685080;
+        d=1e100.net; s=20260707; t=1790080983; x=1790685783;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=+92Dl39HqApT06XXPezMG+SG8nsAQtZw+yIjN81Wtug=;
-        b=tda9Ud9hQs17jxKpDyR7OahH8pul3bNEVj/VLOvA+qw2cabAVk9pCIGh45U8XCDdfa
-         I7534LdENmtfjELDT77MA4SnxNbjv7wDsENNIiVf9Tko3U07bxeduaUHmbLBe86PXqjW
-         yAHpXXPmUJy3kwPoS5upJafgN2D32/zOal6gXoeQ9VkfpDSVOwKctCfAkQ3U5WgV5osH
-         +c/jJ6vG2PN6vzBkufgMvNEULuHEKu+tui3V+kse/0CR989LdPYkoLLDNL/DwYVmweHT
-         FRYxlHaH6hAszB5gKH8v5+6Xa/uuPINrN6mcKeVxZCFxUWamhbe0c22Mkd6zD5KvOYGz
-         Pqkw==
-X-Gm-Message-State: AFuF++kESR5JxjwHd53Vk8pZCB4CVr1xrX2uZ4kffJ0X/WzxLUMwzXB9
-	byuNV7PswZokbxM9iODQmi5z6zNJdCZyJjgBvOjAmfnkfan76/RxIjETI9bwPu89hw==
-X-Gm-Gg: AYBFou1iymHRnuCmm8yULAurGFN3urH4H1Tx+BccPnR9Er0PqBtDP/zQ+6XnKFxkDeq
-	cpgTQhGlvRozdrmHIk3ZMJaB4oM1aljiDdkZS8+TexxiLqXhkxSOM0ZaULImCwcUYu45ks9Tza5
-	J6qti07bM45JRrRwl7Xc2UskaYPyRB+swD8mDNmzJKUSCpUIv3s1nyk02Npu6NWc8s4mzFjvHPX
-	IaeFVW81HD9/85doWskY+pSvCs8fPKIq6zRne+PAbLum9r25mkv9h6wHwmGGPIySFeDrdSU2twp
-	dQ2Z141ZSX/50pw020oHKI7y7Pgl1TbHilaE6eWg9XEveq49gq55VXJmU7sXnSnzxPBSevU/Jcw
-	fwxAeLUWTVykowxmlEXoxKf45G7PKL6yrVOn3dKTGaUvX0ux28J8+CjlF3EAailSzUVvEHgRwiY
-	aHdEMMdTTlkeRpkayynoryUYfclROvZvMNfQn7Hb6FqBkUT6fxNrBYVWtEKnUUkqJhNldwvmKl6
-	ye8WJ6O/89ryLXlyCTQkcDb4XJdr1Gzp6Jp8bQ9n0zG2sU=
-X-Received: by 2002:a05:600c:4505:b0:49a:a101:4157 with SMTP id 5b1f17b1804b1-49fc56db92fmr199087405e9.7.1790080279539;
-        Tue, 22 Sep 2026 05:31:19 -0700 (PDT)
-Message-ID: <89defb83-6e1d-4961-b5f8-a425f093a25c@suse.com>
-Date: Tue, 22 Sep 2026 14:31:17 +0200
+        bh=snXXMJlrgbggXfT1mZvFwn5OPCOQTYOMT8eZohQBErw=;
+        b=DMM9QOJFUS+cOqf4oi6ckYTD9EDuOnk2xPw8qMpjJymwt5aMhhrCkNrlohaPPJWyu/
+         7uSau1S0ahBD1rbMkpzJWE4H1hQAHcMn8RgI2g1W64bf+Wn0VvFZuAt5e+c/IYMu5PKP
+         tHlkID12qrzQOSLLX6v4ylDP4QsGYyDG0vYxVmAVHkVxMk84vl4ePZ3il6ArYl35/3WA
+         EFFYTd4GIauWjpluCC/V5zCrEFA02V9zR919JBbXsRUyUNd42SEKbmu+UgQbxxq141CU
+         jUAbOhIdCDqdp4CKki3rQR4Ufr+MddRMJWj+DYTYL/zjpAZtoF2jG6dFFk5EW5xeOi6d
+         UGMA==
+X-Gm-Message-State: AFuF++lPg+uIe2ydhanLIU7sbHa/VOwrAqDHj0G14eJFt1xnlRnHjijW
+	6QNTe5f2NCFfW9l4DPsCqO++NxtCsd+fyA7czK4WyqX0DHlQ60VyekY7EY2KGZB9xA==
+X-Gm-Gg: AYBFou0R4xBGkOR+mk3fdIWmSIDADB5jJ9t66oDe1JiPSEIKizpVXkalrdW6RF3jXU6
+	QO2f+nBRYFZ1r0R3fSDM81twxs2Pr3KDvY2raiAbMH+rlOBxaPiXJGRBnMw82imp7ceaPe3e/Kn
+	VPz3D7M3tPJSmkzHHqj+aS1OtMsWJyQ9T6H0WLE2yOC39UJ9LYIkR0bhlPJr6BfPWaDCQCUMWQ5
+	9/SAtS89/vlhzYHErzedmNqGYTMptQddyJnR7Pq+oTDQGVrZkPGelEElxQXX0E/6hMrxox33Jji
+	Rqb/oNyL9+62W+g6UNQOrbHvWzt4uPsW7h7pXmxkLjlSYa7fbLeBTEifJQPvmVqdqG9p4/lZSMf
+	b0dEQrK3pItlbVUvJbF/S1fDomHW1JVaq03Jmh25sb+YII6n8YC8N5hKbOOu3YySziN4/m+VbzM
+	WJXZl7BmnabtCmy32eR26sJhDvr/xe05v9nqctEA9Jw3yGOVb6cYm9/AX85AKimjCUG06Wzl/XU
+	+ZZh2wZCyuO94TzL3dUsKgb4/+eoB+XK1HNtsR25QmZuPVyU+1lB6IpMhPgFlM=
+X-Received: by 2002:a05:6000:4685:b0:487:2385:e19c with SMTP id ffacd0b85a97d-4872385f827mr11459240f8f.0.1790080982623;
+        Tue, 22 Sep 2026 05:43:02 -0700 (PDT)
+Message-ID: <0ebba54b-142b-4040-b4a8-938518e7672b@suse.com>
+Date: Tue, 22 Sep 2026 14:43:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 5/6] xen/riscv: flush speculatively cached Bare-mode
- TLB entries in turn_on_mmu()
+Subject: Re: [PATCH v2 6/6] xen/riscv: fix level_map_mask truncation on
+ load_start
 To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
+Cc: xen-devel@lists.xenproject.org, Zheng Zhang <zhangzheng@iscas.ac.cn>,
  Alistair Francis <alistair.francis@wdc.com>,
  Connor Davis <connojdavis@gmail.com>,
  Oleksii Kurochko <oleksii.kurochko@gmail.com>,
@@ -109,7 +109,7 @@ Cc: xen-devel@lists.xenproject.org,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>
 References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
- <1789032899.8631fc262581453bbf619ec5b2062170.1a08aaba238000c4f3@vates.tech>
+ <1789032899.8631fc262581453bbf619ec5b2062170.1a08aaba3b8000c4f3@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -135,38 +135,74 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1789032899.8631fc262581453bbf619ec5b2062170.1a08aaba238000c4f3@vates.tech>
+In-Reply-To: <1789032899.8631fc262581453bbf619ec5b2062170.1a08aaba3b8000c4f3@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1790080280-366DAAE4-E32E8335/0/0
+X-purgate-ID: tlsNG-33051d/1790080983-6F8C54E9-EE386F89/0/0
 X-purgate-type: clean
-X-purgate-size: 1329
+X-purgate-size: 2588
 
 On 10.09.2026 11:34, Baptiste Le Duc wrote:
-> The existing SFENCE.VMA before the satp write only orders the page table
-> stores from setup_initial_pagetables() against subsequent implicit reads.
-> It does not prevent the CPU from speculatively caching translations after
-> the fence retires.
+> check_pgtbl_mode_support() declares level_map_mask as bare `unsigned`, i.e.
+> a 32-bit type while it derives from a paddr_t which is in both RV32/RV64 a
+> 64-bit type. Storing that value into a 32-bit local silently drops any set
+> bits above bit 31.
 > 
-> According to the RISC-V Privileged specification, implementations are
-> permitted to speculatively cache Bare-mode identity mappings. Furthermore,
-> selecting MODE=Bare (which happens during check_pgtbl_mode_support())
-> requires zeroing the remaining fields of satp, causing ASID=0 to be
-> actively used in Bare mode. Consequently, the TLB can be polluted with Bare
-> identity mappings tagged with ASID=0.
+> The mask is then used as:
 > 
-> Once satp is written to enable Sv39 translation, these cached identity
-> mappings (tagged with ASID=0) can shadow the true Sv39 translations. This
-> would lead to translation failures since turn_on_mmu() jumps to a
-> non-identity-mapped linker address.
+>     aligned_load_start = load_start & level_map_mask;
 > 
-> Fix this by adding a post-satp-write SFENCE.VMA to invalidate any stale
-> translations (including Bare-mode identity mappings under ASID=0) before
-> jumping to the virtual address space.
+> load_start is `unsigned long` (64-bit on riscv64) and if it requires more
+> than 32 bits to represent, because load_start zero-extend to 64 bits, we
+> would drop some load_start's bits during the AND.
 > 
-> Assisted-by: Claude:claude-opus-5
+> Widen level_map_mask to `unsigned long`, matching the width of the physical
+> address.
+> 
+> Fixes: e66003e7be19 ("xen/riscv: introduce setup_initial_pages")
+> Reported-by: Zheng Zhang <zhangzheng@iscas.ac.cn>
 > Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
+The change is okay as is, so
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
+But see below.
 
+> ---
+> Question:
+> I would think replacing unsigned long by paddr_t would be better in this
+> case but for consistency with other variables in the function I just kept
+> unsigned long.
+> 
+> However, there are many variables in mm.c which are unsigned long while
+> they are, in reality, physical addresses and could technically be paddr_t.
+> Using paddr_t would also let us bypass the compiler's decision on what
+> unsigned long extends to (u32 or u64, depending on the target), and
+> therefore be more generic. I've seen similar code in Arm using this
+> convention, and found nothing on the mailing list explaining the original
+> choice of unsigned long over paddr_t.
+
+The mask here is applied to an incoming linear address, so imo unsigned
+long is the correct type.
+
+> --- a/xen/arch/riscv/mm.c
+> +++ b/xen/arch/riscv/mm.c
+> @@ -180,7 +180,7 @@ static bool __init check_pgtbl_mode_support(struct mmu_desc *mmu_desc,
+>      bool is_mode_supported = false;
+>      unsigned int index;
+>      unsigned int page_table_level = (mmu_desc->num_levels - 1);
+> -    unsigned level_map_mask = XEN_PT_LEVEL_MAP_MASK(page_table_level);
+> +    unsigned long level_map_mask = XEN_PT_LEVEL_MAP_MASK(page_table_level);
+>  
+>      unsigned long aligned_load_start = load_start & level_map_mask;
+
+level_map_mask is used exclusively here. Without that intermediate variable
+no problem would have existed in the first place. Hence perhaps worth
+considering
+
+    unsigned long aligned_load_start =
+        load_start & XEN_PT_LEVEL_MAP_MASK(page_table_level);
+
+as an alternative?
+
+Jan
 
