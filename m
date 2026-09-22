@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9393BC982F1
-	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 06:33:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1428157.1650862 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6674CC982F1
+	for <xen-devel@archiver.kernel.org>; Tue, 22 Sep 2026 06:36:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1428164.1650869 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8u3h-0002K9-97; Tue, 22 Sep 2026 06:32:53 +0000
+	id 1x8u79-0002pq-M0; Tue, 22 Sep 2026 06:36:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1428157.1650862; Tue, 22 Sep 2026 06:32:53 +0000
+Received: by outflank-mailman (output) from mailman id 1428164.1650869; Tue, 22 Sep 2026 06:36:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x8u3h-0002K1-52; Tue, 22 Sep 2026 06:32:53 +0000
-Received: by outflank-mailman (input) for mailman id 1428157;
- Tue, 22 Sep 2026 06:32:51 +0000
+	id 1x8u79-0002pj-JC; Tue, 22 Sep 2026 06:36:27 +0000
+Received: by outflank-mailman (input) for mailman id 1428164;
+ Tue, 22 Sep 2026 06:36:25 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1x8u3f-0002Jv-GI
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 06:32:51 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x8u77-0002pd-Ir
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 06:36:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x8u3e-003Fsu-Ds
- for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 08:32:50 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1x8u76-008hhd-Vv
+ for xen-devel@lists.xenproject.org; Tue, 22 Sep 2026 08:36:25 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ab22112-2eae-0a2a0a5409dd-0a2a4509a1a6-0
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 08:32:50 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ab221e0-e002-0a2a0a5209dd-0a2a4505eb56-28
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 08:36:24 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ab22112-be1a-0a2a45090019-4a7de14c985e-3
- for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 08:32:50 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-482f633cd80so1756274f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 23:32:50 -0700 (PDT)
+ id 6ab221e8-4cb1-0a2a45050019-4a7de18caa3b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 08:36:24 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49cd5462b69so19934965e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 21 Sep 2026 23:36:24 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48862774543sm2789232f8f.11.2026.09.21.23.32.48
+ 5b1f17b1804b1-49fdaa4e47csm55392655e9.1.2026.09.21.23.36.23
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 21 Sep 2026 23:32:49 -0700 (PDT)
+ Mon, 21 Sep 2026 23:36:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,63 +55,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790058770; x=1790663570; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790058984; x=1790663784; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=2TO59/nBjTVigmtq+fqciQQ+MZL7u5Nzo1s2mKXfA8Q=;
-        b=fV4cq2ARzFDyWS4Fv3YmWcxyFr/sLUIqRU2cjvZNiQb9DygXVb31qZg9g3KA3aO0PA
-         L2MZ0L3dTvuqqxHA/xE2U/e5kKR7A9IpZCYCjzztBjCjP2JHT9912uMMCs0LqPfHfBo2
-         swAOLBPhgttHTCoPh3uofXKbztOvLsTNWyARH7ZCDonAshjvxtvXKHI2o3lhpSn22n1c
-         lc3mMCxCShGAkiy/AWK9cLwxm1pe2v7uTtPOB0ioflZZl4cCuCwXdGU2qKQt13sEjp5M
-         U3wf0/9OvrCLLISG35U6bUQNJusOY8EN5/qYh/IEvshKx34gw8xTBXdif+eSutiT+cj3
-         mSlQ==
+        bh=ySpO8zLkhZzTz7pj7WmyA9l3Ff2FfjURPFQzBaa68ek=;
+        b=GdunEhu1vU3n75UwkIGmuD8vcmKK4ls+zJN8GC2q/ToJE8DdMWhTKZ69Spt9NyDrxW
+         8ACNbSaB2CgCmCdt2s84y8a4XZRVh176a6+OSmUHlBXir+xK+V7r9WI9tdxaomih7eAe
+         k9WmMADpgoSKk0KVLq0k4j2f9I1vcjkOo4AurG+KOgltj0+JJcBwWg4oeWIVaLD/5eJY
+         bN5yMmvKmEk0rYzAF/SWOft2NP1zuNElAosworX8i01j5xCdINW93rgXvxWmI2WnnO4R
+         yZPkYq3Mg6xpiWyw8WAHpIKIdWdJiaXc3OErqz6VLcL6unGsJ4ptNJskMgea5QKEcpW0
+         niHw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790058770; x=1790663570;
+        d=1e100.net; s=20260707; t=1790058984; x=1790663784;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2TO59/nBjTVigmtq+fqciQQ+MZL7u5Nzo1s2mKXfA8Q=;
-        b=tlR+hOWrQaFm+bT0pRh4G9CKRQb19dPhK7VfF7dMXkCDlCQXzkCJPG4nTVRXr28tdo
-         XONyBsbuB4pYvienU0gmvNe1V/VAoViQtKrLYnIQqCkhYhmGVQRdH0K5FT/PEDgXCIwJ
-         kU+sgYmZmWyIdhGdVQHXeAUytNwh7uUhjt35s8G6nxF94SKBWR8Mxg++E0hvFbd0P0dv
-         ESPp+XzJPIs0834RL85xBB2fZV8WMaBBjjCEywBpC2ZxHOG4p0GjdLIltm1Zd3lYyehk
-         ra+6jEvKvfo85vOcIeM0XMJJR5AGQWQQHzUumldQBKWX+00VOmB0Oys8kBbyEJpv7csy
-         clvA==
-X-Forwarded-Encrypted: i=1; AKwUvBwlC7U3zrYsfX3HKD441hQMthx+Qt/mNkmJQq5vYjbbxvXMne12q+7g/JmhwPDCt8DMBAMJZWZCfE8=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kjOwx84r77cxfYsp+qOZwPyeVUooXA+dLVIRWh4I4uhMSeBDzs
-	36nA/BoGquyQrgKk2xrdWGZLlcHQSxe8p46SgwhS9JReCA4XfcgCrlRIt6iVFfGOFg==
-X-Gm-Gg: AYBFou3zvno+oPieQ3t6el8IYqVQDVWRDuUHg5LhvmQTEyayEFhdePuvO5pezM3+N2q
-	hc2h0ZycMQ1EVJdhMzIRvd9INXBr0AQk3/r1AqO30hbUNPC2q4ubUoSaHlLyIqWFfWmbjp/BtIh
-	QVajFIXNtIRw1NBP5Wy8pTc/IUyw3AoYnHgsz/2nv7Qi5dcYtmuEcJaEU2WQKQqEblnO0/LlpeP
-	3Ok2VeXzjg3/Q2h4+L4uB/ECTWjwEie6vfwdllcujKxZ9XKIdzdXX2MSAuTNnph0n19ntTN22AH
-	bsCZowfe3bSFN3B7wUv7I55siSs08V9v0hFmRXNEX0TIIimKCpaHoKIwFJnoXJNbHQmk4ntkojA
-	YlwF9BhKMbUS3/XxgOVtEmHw6bjcA6AWsKXXDq9E/TUWm6CpnUqrgYUSFJ7QuQEYweptYQzxy0I
-	uMJmDRI1/qF+VPJo7kQSlVkjwK0vS315it5WpZECSXGbehctJUxUoI+5dzyU+U859MVzsl+iHWg
-	SKX6iqctiBHUcDaqGgT6kiLANhwi1KR+PhiM0/r5PJhjmhr459hoJC+zT0aXw==
-X-Received: by 2002:a5d:5d84:0:b0:485:ac0e:6fb2 with SMTP id ffacd0b85a97d-4871e2279f7mr20035744f8f.18.1790058769709;
-        Mon, 21 Sep 2026 23:32:49 -0700 (PDT)
-Message-ID: <8419536a-5e73-4718-a700-6bce5b8c71f8@suse.com>
-Date: Tue, 22 Sep 2026 08:32:48 +0200
+        bh=ySpO8zLkhZzTz7pj7WmyA9l3Ff2FfjURPFQzBaa68ek=;
+        b=TerB9tzxDEr9Zm/NcVX9MIyNPwwCNHc7DwrLywfjSsnCcIn66wioocEKsx7UxBDatQ
+         z6pzxBg5cp0rUL7AFLsuQN2lc3Vrw3cKYcaQ0QM8aveZVNfCOF43Uy8ekunNxLj0sZLT
+         aNhnG+EGzTkRoZZswPKYM8DEOGYN0lLztR2DkFsHJaa19XVnsdflFqUjBFVJamMX28PQ
+         99CInQRBfkqyYwwinYyNGg46RC2IoUNZy4LyDSoUPobS5nsJRvf9w8HgrCz3WRU4zpcb
+         jjokmbtEXaMuShvaJewac2brE15mzQ5iiEy+5lsaWcHEIGNZf9/Kb2yDTdXXoyQrBtfH
+         eAkQ==
+X-Gm-Message-State: AFuF++mDOq/dwYk7wdzN8jdyS6/P5mZN1++nSpjVtvlUsuB7TqCpinTf
+	XRNdJ3ex78qmnUgwU4THNZSvIyekGsa5x0fcfoyAjFx3CUcQ/tILTsU+HhKzVd3Yuw==
+X-Gm-Gg: AYBFou1HpIFPPB3LBeG3GIWmV4lu+1+cXpUEC4QZMsLUDRqMxFNw/TyGm+ccYWfGRPt
+	3rnhQxEOsjABsKu6WgbydsqcKYXsdP4ZNEIrVLoUTQhbxKOdczjy//nIahGLimEaZufzhIJUt8I
+	yUjnF4NwLdRau8yCbelOWPiYFhODp6HLORAb5Cp/5QVadn9JzISPz72k9m3MPyDpakznmOuJpMk
+	WY/lYdseGeyFoS96urqJj/4jFJq3pd6nyXvo1AN7qvoZ43bG4NxqBR5FZfBVC5Phe6NyYrDp/hX
+	fNcY5q77Beklv1cR/20ZUERS1PbpCqZ8ESu+NUQIonr3K1I8EGYz42vnRXDL2UuvPjQqRxGY77W
+	i7xNQ4jsBn33LVjelDqZAnLIVJMBQEBUZ0PYYn/KvnnCTogto2eUqcVF8O5zk2lMASx2JNINJAj
+	F0mv/105BSlsVN5hJHccEYTdT2iTXD1rqzgwfmfCctx8XpnpiMdHPH/0Hi3PQSDqoVKUXGaBmkm
+	WKeyDO+qeV6E4qHM2JxQziw3oMChpLt/O7WNCrhL6a3RStSGPdoS/J85DMxLU2aF7rolUKngw==
+X-Received: by 2002:a05:600c:5489:b0:49c:dca4:94c with SMTP id 5b1f17b1804b1-49fc573579amr236387705e9.13.1790058984379;
+        Mon, 21 Sep 2026 23:36:24 -0700 (PDT)
+Message-ID: <162997df-6c5f-4f1c-b01f-16f6c2e4e0c6@suse.com>
+Date: Tue, 22 Sep 2026 08:36:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 30/39] xen/riscv: prepare new IMSIC VS-file
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+Subject: Re: [PATCH 10/14] ELF/notes: use pointer-to-const by default in
+ ELFNOTE_...()
+To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>, xen-devel@lists.xenproject.org
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <440bc07dfb72d09da72b49ded6f78dc1f54a3ad5.1787838835.git.oleksii.kurochko@gmail.com>
- <1790007309.8631fc262581453bbf619ec5b2062170.1a0c4bff57900072c4@vates.tech>
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+References: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
+ <8fe86787-7590-44f1-be4f-461b61d7669b@suse.com> <87fqz26otq.fsf@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -137,89 +133,44 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1790007309.8631fc262581453bbf619ec5b2062170.1a0c4bff57900072c4@vates.tech>
+In-Reply-To: <87fqz26otq.fsf@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1790058770-FD06B034-2E59D5B0/0/0
+X-purgate-ID: tlsNG-c201ff/1790058984-F5EA92A1-BEB482D9/0/0
 X-purgate-type: clean
-X-purgate-size: 2677
+X-purgate-size: 1296
 
-On 21.09.2026 18:15, Baptiste Le Duc wrote:
-> On 8/27/26 5:24 PM, Oleksii Kurochko wrote:
->> @@ -389,6 +448,76 @@ int cf_check vcpu_imsic_init(struct vcpu *v)
->>       return 0;
->>   }
->>   
->> +/*
->> + * Arguments of the imsic_vsfile_local_*() helpers, which are executed by the
->> + * pCPU owning the interrupt file, thereby through imsic_call_on_cpu().
->> + */
->> +struct imsic_vsfile_data {
->> +    unsigned int hgei;
->> +    unsigned int nr_eix;
->> +    struct imsic_mrif *mrif;
->> +};
->> +
->> +/*
->> + * Execute func() on the pCPU which owns the IMSIC interrupt file func() is
->> + * going to work with.
->> + *
->> + * An IMSIC VS-file is reachable only through hstatus.VGEIN of the hart the
->> + * file belongs to, and a guest interrupt file index is meaningless on any
->> + * other hart, so such work always has to be done by that very hart.
->> + *
->> + * The local case runs with IRQs disabled to provide func() with the same
->> + * environment it is given when it is called from the function call IPI
->> + * handler.
->> + */
->> +static void imsic_call_on_cpu(unsigned int cpu, void (*func)(void *),
->> +                              void *data)
->> +{
->> +    if ( cpu == smp_processor_id() )
->> +    {
->> +        unsigned long flags;
->> +
->> +        local_irq_save(flags);
->> +        func(data);
->> +        local_irq_restore(flags);
->> +    }
->> +    else
->> +        on_selected_cpus(cpumask_of(cpu), func, data, 1);
->> +}
->> +
->> +static void cf_check imsic_vsfile_local_clear(void *data)
-> I think the remark from Jan to direclty pass the type instead of void
-> could be applied here.
+On 22.09.2026 03:45, Volodymyr Babchuk wrote:
+> Jan Beulich <jbeulich@suse.com> writes:
+>> Not doing so results in a number of Misra rule 11.8 (casting away of
+>> const-ness) violations. We need to allow kexec to use pointer to non-
+>> const though, so provide a means to override the default.
+>>
+>> For ELFNOTE_NEXT() we can do better and simply re-apply the type of the
+>> incoming pointer.
+>>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>
+>> --- a/xen/common/kexec.c
+>> +++ b/xen/common/kexec.c
+>> @@ -6,6 +6,9 @@
+>>   * - Magnus Damm <magnus@valinux.co.jp>
+>>   */
+>>  
+>> +/* We're producing ELF notes here. */
+>> +#define ELFNOTE_CONST
+> 
+> Frankly, it feels backwards. When reading this line of code I am
+> assuming that you are adding constness to ELF notes because you are
+> defining ELFNOTE_CONST. And I had to check the elf.h to understand that
+> you are doing exactly opposite. I am pretty sure that other people will
+> confused by this as well.
 
-No, the function pointer is passed to ...
-
->> @@ -699,5 +836,27 @@ void imsic_migrate_vcpu(struct vcpu *v)
->>       if ( v->arch.last_cpu == NR_CPUS )
->>           return;
->>   
->> +    /*
->> +     * At this point, all interrupt producers are still using the old IMSIC
->> +     * VS-file.
->> +     */
->> +
->> +    /*
->> +     * Latch the pCPU the new interrupt file is taken from: vgein_assign()
->> +     * allocates it from v->processor's pool of guest interrupt files, and
->> +     * only that hart can access the file afterwards.
->> +     */
->> +    new_vsfile_cpu = v->processor;
->> +
->> +    new_vsfile_hgei = vgein_assign(v);
->> +
->> +    /* We don't support SW interrupt files at the moment. */
->> +    BUG_ON(!new_vsfile_hgei);
->> +
->> +    vsfile_data.hgei = new_vsfile_hgei;
->> +
->> +    /* Zero-out new IMSIC VS-file */
->> +    imsic_call_on_cpu(new_vsfile_cpu, imsic_vsfile_local_clear, &vsfile_data);
-
-... imsic_call_on_cpu() here, which in turn passes it to on_selected_cpus().
+Well, that's certainly possible. Yet then you or them are asked to make
+an alternative suggestion. An option I could think of would be to merely
+rename what is ELFNOTE_CONST right now, to no longer have the word
+"CONST" in it. ELFNOTE_MODIFIER maybe, albeit that reads a little clumsy
+to me.
 
 Jan
 
