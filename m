@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F467C9830B
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:19:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430460.1652963 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5D1C2C9830C
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:19:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430464.1652973 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9Msc-0003w8-15; Wed, 23 Sep 2026 13:19:22 +0000
+	id 1x9Msk-0004LM-Bf; Wed, 23 Sep 2026 13:19:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430460.1652963; Wed, 23 Sep 2026 13:19:22 +0000
+Received: by outflank-mailman (output) from mailman id 1430464.1652973; Wed, 23 Sep 2026 13:19:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9Msb-0003vx-U2; Wed, 23 Sep 2026 13:19:21 +0000
-Received: by outflank-mailman (input) for mailman id 1430460;
- Wed, 23 Sep 2026 13:19:20 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1x9Msk-0004LE-6b; Wed, 23 Sep 2026 13:19:30 +0000
+Received: by outflank-mailman (input) for mailman id 1430464;
+ Wed, 23 Sep 2026 13:19:28 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1x9Msa-0003qZ-4E
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:19:20 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1x9Msi-0004Jd-Pf
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:19:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9MsZ-001trX-HC
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:19:19 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1x9Msi-00Dqip-61
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:19:28 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d1d2-e002-0a2a0a5209dd-0a2a45088f0e-20
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:19:19 +0200
+ id 6ab3d1d6-bab6-0a2a0a5309dd-0a2a4505bf10-12
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:19:28 +0200
 Received: from [74.125.229.12] (helo=mail-dy2-f12.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d1d5-f659-0a2a45080019-4a7de50cb91f-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:19:19 +0200
+ id 6ab3d1de-4cb1-0a2a45050019-4a7de50cd27f-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:19:27 +0200
 Received: by mail-dy2-f12.google.com with SMTP id
- 5a478bee46e88-328664ef783so542420eec.0
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:19:18 -0700 (PDT)
+ 5a478bee46e88-328664c2da6so544677eec.1
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:19:27 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.19.00
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.19.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:19:07 -0700 (PDT)
+ Wed, 23 Sep 2026 06:19:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +55,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790169557; x=1790774357; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790169566; x=1790774366; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ZoknbnXiPKVvZXfcQ8PLlr7Gz40KHcVsCzqNeg5MeQU=;
-        b=Pmlgkad40Nj6bAPahIrsidj6q9oS1RfMbbtINWjj3+hY5XI7iY/f+OjwPJlGJa6QOQ
-         mGWq/OhQBB96I62sjSz+6AqCe8NKa79nLzxPQsdpo2IXk3O4ycntzR7KE0zy2NmGkX8a
-         /wtq4oKunwoPzB/5uoQddaeQy1+SYZM3OYcmJIl0Lu88fvqvnbCzeEi/WjXtHDZ1MvAL
-         KZhJ0G/FAP5/op+RCebeFoYnEBTQVaLZRFgtksbhHKaEAS6GbjKCNV0kyJJpYUo/r+6I
-         QIS7bmrOC3LwN2DnhtQloRq/aSYgc/T2cMRa7Lt/MYxBel5dzecquK0U51qRO2vlChcJ
-         sQzA==
+        bh=wwD9DuwZG4f9q5/deLy+Fa9fAvUmV5QMi6qQxOTBcxg=;
+        b=mGNSdVNjy4qSMPtWxo/di0gCMLmK+6vc2Ux+Rdy+e/3PTaUcdvH5CxeN8VjprwhYSv
+         aySMVCdoQsdbSuiO5dt+IfHVo1wSpQr8/sXRjGViIIq7y7VYl3CbwNz2TFxCwLnd0TLa
+         GeBJaWcmEnmePKM2TuiGyu4T1i6sfrJK6ZzMaxqvsuQ+5Fhz0gH0FGPhOKcUYzyM7fXx
+         MRyfKgFADxdRZve5XHiqYd8QQxjZyrFBNzcf8JQD3pqGPibatUXS6wrJ6B9dA6em7ybG
+         0gTiHHE4ObOdEQ+CfT04e7RrmJMO+g2nn2nTjCqBRp+cr8NufJJyVd47EY2oro20uCG9
+         eH3g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790169557; x=1790774357;
+        d=1e100.net; s=20260707; t=1790169566; x=1790774366;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ZoknbnXiPKVvZXfcQ8PLlr7Gz40KHcVsCzqNeg5MeQU=;
-        b=bSt+Vi65MeX6DFI2rUaPHXuA4oT220Zg+PKdOMwPAF6jD/zn0XDebzdOEjB93Jcm2L
-         wsjS4CPnrVpCM5D8NfbbAaL4JNvtY82vXKzazmYly62LHw2aj3QVIwwHypKdcT23Q0Gx
-         ajRLkh+LuAGbE0rbuUO0BR4A5RFh7961hWxl4gvisqTHe545Q0ShpVXdNrapU7Tm1wb0
-         y9VMbg4hioWYkMO0+x7bYxbK0gLVmEbD6CKuw0463Kf0/R5qr4wnSGxgVJD8sBXZHuoa
-         7DMoC0KdN7FZfiDkKk4IcKYO8MBH0oPveEbyQSIZTHnFWtWVW10GBbIvLNbgAP1kW5E6
-         U14g==
-X-Forwarded-Encrypted: i=1; AKwUvBw0IJE1piMIDn7mC6cEykr7hIMgi5op21DZr+eyp3XSKb0hvNdZlHv5QFI6jE5AzP6uPB2/2tyQJfo=@lists.xenproject.org
-X-Gm-Message-State: AFuF++m7DAy4rpdr9+kGt65fs27ZzCGax/QpXcLMF2nXeezBSxUnstBR
-	YAt17NMP86pI4UWV0USs6K1qipuVdI6EFL6okBp30H5quegvmR+IUx73
-X-Gm-Gg: AYBFou3NVTuaYRFdE6APzDLrsvoS9e9RcQzhCRltVeyo+zvShvFLgEkSlb2Nmn2MuML
-	2xktF7e0aFYTRMS057FhhU32cW1B17BkqdH/1xMbAihK/irYzUqwZPOG0lmnhe3kABC+hQGlbMk
-	4G1ksB43oT+9lgdl/WsN84ZYnN3S1lKOR9ATQB0RdTQdPqkO+xyGE2krc/vzvQgJC6t5SMRtVJr
-	V4OsN0VaDM495m1RYEovRmAc+z6ZP9E15LidfbVr8JQIBaCWIlHLIzIYpGsQAtMDvpInnGcsbrc
-	50BF6DRyz3Q92jF1tE6FHAcbXG+8ssYnhvAKU3Jm/v4FqYKVIqSGc3fvyxK95C7sf39TQs2rbLg
-	PULRdaZYKiZs9YgSHfQ5S/toUvldM+YHAiGpVpCvec1F8F5vTAKxaNeI+ey+MBNYDlV8F82L8Th
-	bREDIfHM57o9xdKEbDKS5EcRnVTwretrnyoWhdkRw7WyqAxrUcc5vTyI5jRvksJDTcH8Qxj5RxT
-	aFyT/k33B86ZcPZqe0fnZqMG6d6QHVX4JZ9oeERBg==
-X-Received: by 2002:a05:7300:dd05:b0:33b:eea2:cbfe with SMTP id 5a478bee46e88-33e8dec5b02mr2370454eec.32.1790169556543;
-        Wed, 23 Sep 2026 06:19:16 -0700 (PDT)
+        bh=wwD9DuwZG4f9q5/deLy+Fa9fAvUmV5QMi6qQxOTBcxg=;
+        b=Jg3mSB0y57J+Pq5RwTqv4SxeFSYTHnU+LZ8oloIQ/fRuLPQbJJYoJ8HMKJZ79UZSEO
+         jvSRqcFP2fLpvdfeDeuT++Td4Ew0kk/Vu/xTDe2SWEDp+xJ0hNK/5/bvXsMG83R+0KR6
+         ZgArP/LdyDwQig+8xKrYlQWusz9pLfTsrxNmwqR/Byroehn0Gp2PcitOPDwpaAayYzXk
+         1VGaOthMrwSMvD6dQNXMwqQl9I0XIu38oSd7kmAr3O2e8Vs0opDFxser4Rw27ot2OKbz
+         yEeFffwZwNcgnN+uX2/IMdn3P7mSPTfXPnj77HEOayuyXJbl/Eg1FIqCF0aMyOKlYVos
+         3j7Q==
+X-Forwarded-Encrypted: i=1; AKwUvBxUO/8BlomB4p+Fs2ZUKJV+f7D8UflQN8FZ7tn9qGZjvHkdSzWQssipTcJhOtlaSZoVIBSJoaA+4v8=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kOTC4DaSyMQ1M9o7xwZiDwCBsb4lZNxaUpb5Pik+IEk9Yoa75A
+	xFuQKzGiJaDB9ftfHw7GAhyXoDQ7lO0kNxXQwyw+4pRsV8fs4V1luXZj
+X-Gm-Gg: AYBFou3/k255MiI3snzD+bk5/+djqR6TdiW60h9j4xcIlHVGJJuDnxuKsG10A0il6xa
+	pKpkBN7ipEBKgw4JUZ1z1l7IPThFKl39yDzjxPtanI8i3Z3yqHbcFx/7d8C2vImri+0vhdE9YlG
+	D+TPtul+8Z/GAIcLAfT6W6iZO3mLgvZ5qNcKUSljcPveCSz3JoSO2kxZ0JbAPKoS8QC0mDgp5vK
+	GQ97eJdKI9iOg2jrdPXDLwYoOUM9sXwzdLfH5IRG2jS2m3lafjc0SCs4Z32Ugy8iv3FH1gbFjNM
+	A7dv3v/xzzipNIxsqG4j0eYOXCdI0icRgODioYI03UQiphHxarOi6hh61j8a2hm5od0/fxwJorq
+	AYqhwGFrpQ5e2gjFjWiIHyjpkvpk/xak2cx+kt5o1j/OfcF+D1eOZhNy2iyx9kURHJ2fBuzJ27P
+	e53t3jeurXl7nIfYrQ2oE2e7mocHNhICITcsJ3BJ9wXU1WHv4U96Wi8qMa4mrIVp/CPWrFXG50c
+	MR0M35EcZM93gfda3YzZpZiFSybjco=
+X-Received: by 2002:a05:693c:638c:10b0:33e:6a54:b3ef with SMTP id 5a478bee46e88-33e8c05f69amr2514746eec.18.1790169565697;
+        Wed, 23 Sep 2026 06:19:25 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>,
@@ -134,129 +134,371 @@ Cc: Cornelia Huck <cohuck@redhat.com>,
 	qemu-arm@nongnu.org,
 	qemu-s390x@nongnu.org,
 	Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 014/114] target-info: add i386 and x86_64 helpers
-Date: Wed, 23 Sep 2026 21:14:48 +0800
-Message-ID: <20260923131635.1894-15-luoyonggang@gmail.com>
+Subject: [PATCH v3 015/114] qom: pass TargetInfo to is_available
+Date: Wed, 23 Sep 2026 21:14:49 +0800
+Message-ID: <20260923131635.1894-16-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1790169559-D497287B-E0D0FD19/0/0
+X-purgate-ID: tlsNG-c201ff/1790169568-F44A42A1-D7525A03/0/0
 X-purgate-type: clean
-X-purgate-size: 2573
+X-purgate-size: 13264
 
-This is added for latter use with is_available.
+Change TypeInfo.is_available to TypeIsAvailable taking const
+TargetInfo *. Store the callback on TypeImpl and add
+object_class_get_is_available. ARM and RISC-V machines use
+target_is_aarch64(), target_is_riscv32(), and target_is_riscv64().
+object.h includes target-info.h.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- include/qemu/target-info.h | 45 ++++++++++++++++++++++++++++++++++++++
- target-info.c              | 36 ++++++++++++++++++++++++++++++
- 2 files changed, 81 insertions(+)
+ hw/arm/aspeed_ast27x0-fc.c  |  2 +-
+ hw/arm/aspeed_ast27x0_evb.c |  4 ++--
+ hw/arm/raspi.c              |  4 ++--
+ hw/arm/raspi4b.c            |  2 +-
+ hw/riscv/boston-aia.c       |  4 ++--
+ hw/riscv/k230.c             |  4 ++--
+ hw/riscv/microchip_pfsoc.c  |  4 ++--
+ hw/riscv/opentitan.c        |  4 ++--
+ hw/riscv/shakti_c.c         |  4 ++--
+ hw/riscv/tt_atlantis.c      |  4 ++--
+ hw/riscv/xiangshan_kmh.c    |  4 ++--
+ include/qom/object.h        | 27 ++++++++++++++++++++++++---
+ qom/object.c                | 11 ++++++++++-
+ 13 files changed, 54 insertions(+), 24 deletions(-)
 
-diff --git a/include/qemu/target-info.h b/include/qemu/target-info.h
-index 89656da1ca4..440da63e6cf 100644
---- a/include/qemu/target-info.h
-+++ b/include/qemu/target-info.h
-@@ -98,6 +98,51 @@ bool target_is_aarch64(const TargetInfo *ti);
+diff --git a/hw/arm/aspeed_ast27x0-fc.c b/hw/arm/aspeed_ast27x0-fc.c
+index 73362b60d2a..8a7c6a116ac 100644
+--- a/hw/arm/aspeed_ast27x0-fc.c
++++ b/hw/arm/aspeed_ast27x0-fc.c
+@@ -234,7 +234,7 @@ static const TypeInfo ast2700fc_types[] = {
+         .parent         = TYPE_MACHINE,
+         .class_init     = ast2700fc_class_init,
+         .instance_size  = sizeof(Ast2700FCState),
+-        .is_available   = target_aarch64,
++        .is_available   = target_is_aarch64,
+     },
+ };
+ 
+diff --git a/hw/arm/aspeed_ast27x0_evb.c b/hw/arm/aspeed_ast27x0_evb.c
+index 460c9ff0d2e..02a8cff1d9d 100644
+--- a/hw/arm/aspeed_ast27x0_evb.c
++++ b/hw/arm/aspeed_ast27x0_evb.c
+@@ -75,13 +75,13 @@ static const TypeInfo aspeed_ast27x0_evb_types[] = {
+         .name          = MACHINE_TYPE_NAME("ast2700a1-evb"),
+         .parent        = TYPE_ASPEED_MACHINE,
+         .class_init    = aspeed_machine_ast2700a1_evb_class_init,
+-        .is_available  = target_aarch64,
++        .is_available  = target_is_aarch64,
+     },
+     {
+         .name          = MACHINE_TYPE_NAME("ast2700a2-evb"),
+         .parent        = TYPE_ASPEED_MACHINE,
+         .class_init    = aspeed_machine_ast2700a2_evb_class_init,
+-        .is_available  = target_aarch64,
++        .is_available  = target_is_aarch64,
+     }
+ };
+ 
+diff --git a/hw/arm/raspi.c b/hw/arm/raspi.c
+index fadbacb2534..22b06c6ca22 100644
+--- a/hw/arm/raspi.c
++++ b/hw/arm/raspi.c
+@@ -403,12 +403,12 @@ static const TypeInfo raspi_machine_types[] = {
+         .name           = MACHINE_TYPE_NAME("raspi3ap"),
+         .parent         = TYPE_RASPI_MACHINE,
+         .class_init     = raspi3ap_machine_class_init,
+-        .is_available   = target_aarch64,
++        .is_available   = target_is_aarch64,
+     }, {
+         .name           = MACHINE_TYPE_NAME("raspi3b"),
+         .parent         = TYPE_RASPI_MACHINE,
+         .class_init     = raspi3b_machine_class_init,
+-        .is_available   = target_aarch64,
++        .is_available   = target_is_aarch64,
+     }, {
+         .name           = TYPE_RASPI_MACHINE,
+         .parent         = TYPE_RASPI_BASE_MACHINE,
+diff --git a/hw/arm/raspi4b.c b/hw/arm/raspi4b.c
+index 566d64572db..a1dc477f25e 100644
+--- a/hw/arm/raspi4b.c
++++ b/hw/arm/raspi4b.c
+@@ -121,7 +121,7 @@ static const TypeInfo raspi4b_machine_type = {
+     .parent         = TYPE_RASPI_BASE_MACHINE,
+     .instance_size  = sizeof(Raspi4bMachineState),
+     .class_init     = raspi4b_machine_class_init,
+-    .is_available   = target_aarch64,
++    .is_available   = target_is_aarch64,
+ };
+ 
+ static void raspi4b_machine_register_type(void)
+diff --git a/hw/riscv/boston-aia.c b/hw/riscv/boston-aia.c
+index ba16b7dbc69..2618b424efe 100644
+--- a/hw/riscv/boston-aia.c
++++ b/hw/riscv/boston-aia.c
+@@ -468,14 +468,14 @@ static const TypeInfo boston_types[] = {
+         .name          = TYPE_MIPS_BOSTON_AIA,
+         .parent        = TYPE_SYS_BUS_DEVICE,
+         .instance_size = sizeof(BostonState),
+-        .is_available  = target_riscv64,
++        .is_available  = target_is_riscv64,
+     },
+     {
+         .name          = MACHINE_TYPE_NAME("boston-aia"),
+         .parent        = TYPE_MACHINE,
+         .class_init    = boston_mach_class_init,
+         .instance_size = sizeof(MachineState),
+-        .is_available  = target_riscv64,
++        .is_available  = target_is_riscv64,
+     },
+ };
+ 
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 43b6ae6d2f2..79715265da6 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -421,7 +421,7 @@ static const TypeInfo k230_soc_type_info = {
+     .instance_size = sizeof(K230SoCState),
+     .instance_init = k230_soc_init,
+     .class_init = k230_soc_class_init,
+-    .is_available = target_riscv64,
++    .is_available = target_is_riscv64,
+ };
+ 
+ static void k230_soc_register_types(void)
+@@ -560,7 +560,7 @@ static const TypeInfo k230_machine_typeinfo = {
+     .class_init = k230_machine_class_init,
+     .instance_init = k230_machine_instance_init,
+     .instance_size = sizeof(K230MachineState),
+-    .is_available = target_riscv64,
++    .is_available = target_is_riscv64,
+ };
+ 
+ static void k230_machine_init_register_types(void)
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index b2991e5a710..cc4b6bc3529 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -505,7 +505,7 @@ static const TypeInfo microchip_pfsoc_soc_type_info = {
+     .instance_size = sizeof(MicrochipPFSoCState),
+     .instance_init = microchip_pfsoc_soc_instance_init,
+     .class_init = microchip_pfsoc_soc_class_init,
+-    .is_available = target_riscv64,
++    .is_available = target_is_riscv64,
+ };
+ 
+ static void microchip_pfsoc_soc_register_types(void)
+@@ -759,7 +759,7 @@ static const TypeInfo microchip_icicle_kit_machine_typeinfo = {
+     .class_init = microchip_icicle_kit_machine_class_init,
+     .instance_init = microchip_icicle_kit_machine_instance_init,
+     .instance_size = sizeof(MicrochipIcicleKitState),
+-    .is_available = target_riscv64,
++    .is_available = target_is_riscv64,
+ };
+ 
+ static void microchip_icicle_kit_machine_init_register_types(void)
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index c3a563db926..9e3db34eed9 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -333,13 +333,13 @@ static const TypeInfo open_titan_types[] = {
+         .instance_size  = sizeof(LowRISCIbexSoCState),
+         .instance_init  = lowrisc_ibex_soc_init,
+         .class_init     = lowrisc_ibex_soc_class_init,
+-        .is_available   = target_riscv32,
++        .is_available   = target_is_riscv32,
+     }, {
+         .name           = TYPE_OPENTITAN_MACHINE,
+         .parent         = TYPE_MACHINE,
+         .instance_size  = sizeof(OpenTitanState),
+         .class_init     = opentitan_machine_class_init,
+-        .is_available   = target_riscv32,
++        .is_available   = target_is_riscv32,
+     }
+ };
+ 
+diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+index 76cfe30918a..0f96258b764 100644
+--- a/hw/riscv/shakti_c.c
++++ b/hw/riscv/shakti_c.c
+@@ -98,7 +98,7 @@ static const TypeInfo shakti_c_machine_type_info = {
+     .class_init = shakti_c_machine_class_init,
+     .instance_init = shakti_c_machine_instance_init,
+     .instance_size = sizeof(ShaktiCMachineState),
+-    .is_available = target_riscv64,
++    .is_available = target_is_riscv64,
+ };
+ 
+ static void shakti_c_machine_type_info_register(void)
+@@ -188,7 +188,7 @@ static const TypeInfo shakti_c_type_info = {
+     .class_init = shakti_c_soc_class_init,
+     .instance_init = shakti_c_soc_instance_init,
+     .instance_size = sizeof(ShaktiCSoCState),
+-    .is_available = target_riscv64,
++    .is_available = target_is_riscv64,
+ };
+ 
+ static void shakti_c_type_info_register(void)
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index f54eb942f37..086e95bd2d1 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -695,13 +695,13 @@ static const TypeInfo tt_atlantis_types[] = {
+         .instance_size = sizeof(TTAtlantisSoCState),
+         .instance_init = tt_atlantis_soc_init,
+         .class_init = tt_atlantis_soc_class_init,
+-        .is_available = target_riscv64,
++        .is_available = target_is_riscv64,
+     }, {
+         .name       = MACHINE_TYPE_NAME("tt-atlantis"),
+         .parent     = TYPE_MACHINE,
+         .class_init = tt_atlantis_machine_class_init,
+         .instance_size = sizeof(TTAtlantisState),
+-        .is_available = target_riscv64,
++        .is_available = target_is_riscv64,
+     },
+ };
+ 
+diff --git a/hw/riscv/xiangshan_kmh.c b/hw/riscv/xiangshan_kmh.c
+index f2383c53993..6bc669421fe 100644
+--- a/hw/riscv/xiangshan_kmh.c
++++ b/hw/riscv/xiangshan_kmh.c
+@@ -158,7 +158,7 @@ static const TypeInfo xiangshan_kmh_soc_info = {
+     .instance_size = sizeof(XiangshanKmhSoCState),
+     .instance_init = xiangshan_kmh_soc_instance_init,
+     .class_init = xiangshan_kmh_soc_class_init,
+-    .is_available = target_riscv64,
++    .is_available = target_is_riscv64,
+ };
+ 
+ static void xiangshan_kmh_soc_register_types(void)
+@@ -222,7 +222,7 @@ static const TypeInfo xiangshan_kmh_machine_info = {
+     .parent = TYPE_MACHINE,
+     .instance_size = sizeof(XiangshanKmhState),
+     .class_init = xiangshan_kmh_machine_class_init,
+-    .is_available = target_riscv64,
++    .is_available = target_is_riscv64,
+ };
+ 
+ static void xiangshan_kmh_machine_register_types(void)
+diff --git a/include/qom/object.h b/include/qom/object.h
+index 4c0645817a5..f2dc22f0eb0 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -16,6 +16,7 @@
+ 
+ #include "qapi/qapi-builtin-types.h"
+ #include "qemu/module.h"
++#include "qemu/target-info.h"
+ 
+ struct TypeImpl;
+ typedef struct TypeImpl *Type;
+@@ -117,6 +118,15 @@ typedef void (ObjectUnparent)(Object *obj);
   */
- bool target_aarch64(void);
+ typedef void (ObjectFree)(void *obj);
  
 +/**
-+ * target_is_base_i386:
-+ * @ti: TargetInfo to inspect
++ * typedef TypeIsAvailable:
++ * @ti: TargetInfo to test.
 + *
-+ * Returns whether @ti is i386 or x86_64.
++ * Returns whether a type is available for @ti. Typical implementations
++ * are target_is_*().
 + */
-+bool target_is_base_i386(const TargetInfo *ti);
++typedef bool (TypeIsAvailable)(const TargetInfo *ti);
 +
+ #define OBJECT_CLASS_CAST_CACHE 4
+ 
+ /**
+@@ -473,8 +483,10 @@ struct Object
+  * @class_data: Data to pass to the @class_init,
+  *   @class_base_init. This can be useful when building dynamic
+  *   classes.
+- * @is_available: callback invoked at registration time, to dynamically check if
+- *   this type should be available or not.
++ * @is_available: Optional callback. Unset inherits the parent type's
++ *   callback in the MODULE_INIT_QOM after pass (parents are not all
++ *   registered at type_register time). After inherit the callback is
++ *   never NULL. Callers may also invoke it with a chosen TargetInfo.
+  * @interfaces: The list of interfaces associated with this type.  This
+  *   should point to a static array that's terminated with a zero filled
+  *   element.
+@@ -498,7 +510,7 @@ struct TypeInfo
+     void (*class_base_init)(ObjectClass *klass, const void *data);
+     const void *class_data;
+ 
+-    bool (*is_available)(void);
++    TypeIsAvailable *is_available;
+     const InterfaceInfo *interfaces;
+ };
+ 
+@@ -1087,6 +1099,15 @@ bool object_class_is_abstract(ObjectClass *klass);
+  */
+ bool object_class_is_secure(ObjectClass *klass);
+ 
 +/**
-+ * target_base_i386:
++ * object_class_get_is_available:
++ * @klass: The class to obtain TypeInfo.is_available for.
 + *
-+ * Returns whether the target architecture is i386 or x86_64.
++ * Returns: The availability callback (own or inherited from a parent).
++ * Never %NULL after MODULE_INIT_QOM inherit.
 + */
-+bool target_base_i386(void);
-+
-+/**
-+ * target_is_i386:
-+ * @ti: TargetInfo to inspect
-+ *
-+ * Returns whether @ti is i386 (32-bit, not x86_64).
-+ */
-+bool target_is_i386(const TargetInfo *ti);
-+
-+/**
-+ * target_i386:
-+ *
-+ * Returns whether the target architecture is i386 (32-bit, not x86_64).
-+ */
-+bool target_i386(void);
-+
-+/**
-+ * target_is_x86_64:
-+ * @ti: TargetInfo to inspect
-+ *
-+ * Returns whether @ti is x86_64.
-+ */
-+bool target_is_x86_64(const TargetInfo *ti);
-+
-+/**
-+ * target_x86_64:
-+ *
-+ * Returns whether the target architecture is x86_64.
-+ */
-+bool target_x86_64(void);
++TypeIsAvailable *object_class_get_is_available(ObjectClass *klass);
 +
  /**
-  * target_is_base_ppc:
-  * @ti: TargetInfo to inspect
-diff --git a/target-info.c b/target-info.c
-index 6d57cad5d33..36f75ece36f 100644
---- a/target-info.c
-+++ b/target-info.c
-@@ -132,6 +132,42 @@ bool target_aarch64(void)
-     return target_is_aarch64(target_info());
+  * object_class_by_name:
+  * @typename: The QOM typename to obtain the class for.
+diff --git a/qom/object.c b/qom/object.c
+index 96498f3d001..a3e75927e82 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -15,6 +15,7 @@
+ #include "qom/compat-properties.h"
+ #include "qom/object.h"
+ #include "qom/object_interfaces.h"
++#include "qemu/target-info-qapi.h"
+ #include "qemu/cutils.h"
+ #include "qemu/memalign.h"
+ #include "qapi/visitor.h"
+@@ -71,6 +72,8 @@ struct TypeImpl
+     bool abstract;
+     bool secure;
+ 
++    TypeIsAvailable *is_available;
++
+     const char *parent;
+     TypeImpl *parent_type;
+ 
+@@ -126,6 +129,7 @@ static TypeImpl *type_new(const TypeInfo *info)
+ 
+     ti->abstract = info->abstract;
+     ti->secure = info->secure;
++    ti->is_available = info->is_available;
+ 
+     for (i = 0; info->interfaces && info->interfaces[i].type; i++) {
+         ti->interfaces[i].typename = g_strdup(info->interfaces[i].type);
+@@ -167,7 +171,7 @@ static TypeImpl *type_register_internal(const TypeInfo *info)
+         abort();
+     }
+ 
+-    if (info->is_available && !info->is_available()) {
++    if (info->is_available && !info->is_available(target_info())) {
+         return NULL;
+     }
+ 
+@@ -1153,6 +1157,11 @@ bool object_class_is_secure(ObjectClass *klass)
+     return klass->type->secure;
  }
  
-+bool target_is_base_i386(const TargetInfo *ti)
++TypeIsAvailable *object_class_get_is_available(ObjectClass *klass)
 +{
-+    switch (ti->target_arch) {
-+    case SYS_EMU_TARGET_I386:
-+    case SYS_EMU_TARGET_X86_64:
-+        return true;
-+    default:
-+        return false;
-+    }
++    return klass->type->is_available;
 +}
 +
-+bool target_base_i386(void)
-+{
-+    return target_is_base_i386(target_info());
-+}
-+
-+bool target_is_i386(const TargetInfo *ti)
-+{
-+    return ti->target_arch == SYS_EMU_TARGET_I386;
-+}
-+
-+bool target_i386(void)
-+{
-+    return target_is_i386(target_info());
-+}
-+
-+bool target_is_x86_64(const TargetInfo *ti)
-+{
-+    return ti->target_arch == SYS_EMU_TARGET_X86_64;
-+}
-+
-+bool target_x86_64(void)
-+{
-+    return target_is_x86_64(target_info());
-+}
-+
- bool target_is_base_ppc(const TargetInfo *ti)
+ const char *object_class_get_name(ObjectClass *klass)
  {
-     switch (ti->target_arch) {
+     return klass->type->name;
 -- 
 2.52.0.windows.1
 
