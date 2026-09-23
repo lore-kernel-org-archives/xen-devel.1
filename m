@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8204C9830B
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:21:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430544.1653071 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 480D9C9830B
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:21:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430554.1653081 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9Mub-0002X7-HC; Wed, 23 Sep 2026 13:21:25 +0000
+	id 1x9Mum-00033T-Vw; Wed, 23 Sep 2026 13:21:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430544.1653071; Wed, 23 Sep 2026 13:21:25 +0000
+Received: by outflank-mailman (output) from mailman id 1430554.1653081; Wed, 23 Sep 2026 13:21:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9Mub-0002Wz-E3; Wed, 23 Sep 2026 13:21:25 +0000
-Received: by outflank-mailman (input) for mailman id 1430544;
- Wed, 23 Sep 2026 13:21:24 +0000
+	id 1x9Mum-00033H-Qs; Wed, 23 Sep 2026 13:21:36 +0000
+Received: by outflank-mailman (input) for mailman id 1430554;
+ Wed, 23 Sep 2026 13:21:35 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1x9Mua-0002V1-KZ
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:21:24 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1x9Mul-00031h-0h
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:21:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9Mua-007x0m-1S
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:21:24 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x9Muk-007x4B-Du
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:21:34 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d248-2eae-0a2a0a5409dd-0a2a45019c7c-20
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:24 +0200
-Received: from [74.125.229.22] (helo=mail-dy2-f22.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ab3d25e-2eae-0a2a0a5409dd-0a2a4504abd2-2
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:34 +0200
+Received: from [74.125.229.43] (helo=mail-dy2-f43.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d252-5984-0a2a45010019-4a7de516806c-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:23 +0200
-Received: by mail-dy2-f22.google.com with SMTP id
- 5a478bee46e88-33bf5a1c4d9so901848eec.3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:21:23 -0700 (PDT)
+ id 6ab3d25c-b57f-0a2a45040019-4a7de52b930e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:34 +0200
+Received: by mail-dy2-f43.google.com with SMTP id
+ 5a478bee46e88-33c3735125bso410509eec.3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:21:33 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.21.13
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.21.22
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:21:19 -0700 (PDT)
+ Wed, 23 Sep 2026 06:21:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +55,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790169682; x=1790774482; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790169692; x=1790774492; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Xe2eD+AiZP/2qt9dfiB6B/fVlOtPvZaEy5H5CusisPI=;
-        b=JngE89EcHuzonfcInxuRbWhL35cJiiz/3a27eYOepiozbOGtfrZ1ydEYqeLAJJ/EsB
-         2SrLWanBG8Xm8lnyqc+aUvaTImWATPLGb+UoItNNe0slvSDjR+hPOQjq36jhjRhqAb63
-         hqMg4bMp7/IYCKNNNXxo6cLEuGOFWUrc0qimnv49sJ0HTXQfQDo4NU9mV3LnoqCbrYb1
-         eVveMiDgvA//gr7rCq7CaCsjXcJrcMeTw260YRsJVythQRlCT3VCezpKqTdGtPpIqSfU
-         9qrMPpU7IODfY3FmxIN7DKhRes/r2GWd44yGjQK4RyGUIYiFHhzU2uitZPlhJz8epbI9
-         x6OA==
+        bh=huS4A6FsKFDWrrXfwa21/vS+oZaWC4wTWSJg3SCD6Do=;
+        b=UOcW8haf4Xc6fjHt9QaOV5SDqcL4KM3mMxx8d9jU6s1gh/RlYhUxVmbKS6ESuSekW/
+         cYRY08d1gLdDpEkCZZmJCYpbwVPTVbz9YIwlIm8InxSbzBehIr1TrwE0cCrOl2lrV4Za
+         GzAQU7G6PbEelN6whRs8jAs1WQg1dEAjQSHNuZNrcj7QRddzK481K2cdRldhaxIzqNz2
+         LROtoV1ZgOkPZF65KwgrAzwRRfYwyH8m4Spo1dlgd12TIKVd7Mv4l0GqN1KUZyVIeOuW
+         bM73aBrF+SK1lTXeolhlicvs3OmBUzgLWcH2/SHaSErnl1nt9mvU88BYn249RlqW1dID
+         Zong==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790169682; x=1790774482;
+        d=1e100.net; s=20260707; t=1790169692; x=1790774492;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=Xe2eD+AiZP/2qt9dfiB6B/fVlOtPvZaEy5H5CusisPI=;
-        b=086TGH+pwtGuVvaa9WQUL+hzBt7Uut6fLambEZbaKDz4dCdLB9RGjbKqEpSN873bm0
-         G/tTBdwhQi1dffhZcKG3SUB26SO6j6IVDx2aOyKLSQerh888nnBwIm5Vt1vCVa3eTf4X
-         yXWkKcRvxD9kvIJWr0KsZNm3jwhomjNr7oQDIyYB9BOyEppQnIdGwZU3Y6wH8h64F/g9
-         xoB3BLkXp2piJAKNYiE7vbkYwDe/dpiFp/U0UKSpb/ZV+fE0Lx0hNozEpo1s5PgVSqF4
-         Lvfe+8rS/pFXRjOXWKIo80O2cFLCWEtilWEKlziJbWGQGsWecJoZVHig1G7ksJznff7R
-         ho9w==
-X-Forwarded-Encrypted: i=1; AKwUvBzsJbqi8YqVAdlsmukOiJ72KxwL8C0AyDTGOSXro8si33BzMwwcIstu9GdZJVvPZTcRe0oYwGhxG1U=@lists.xenproject.org
-X-Gm-Message-State: AFuF++m82K6KYz6PZpbnZhsNPWH733VyUjAi5a+pWV6kx4uf/F2w3VkY
-	LMq52kGNgUYoPSqtQqAqBKzZETwRBzxmYs/1W+koq6/kvmHGpt3enJBD
-X-Gm-Gg: AYBFou1rKPgcaLWiGP+CrHA+GBE3u7q+iZuble5HjIl0ACZldmlyXn3v+v5xF0unwAF
-	jcC4Q3mE9H5gDLiSH1yAsWpZXdMIxoMLLU2jhn6J1jqXbw3s31iL9q68OzOrXhbvnyi/O1v9/Gz
-	wMzW655ERn403XUgJO0jt5xe/WJDs/GQz2gu7XS38fXbrneKfLmAae57ZBg898fQ/rM1LoQu+uW
-	472gsQc526Bl4/AMhedo0PexUu7ZkozG1mid1NxMCYAEywhbdh/7YQoEuxMmRT6y7dJ2SCQIEmv
-	wObKUssNlMuBt9GUDD9nvDdH3uzGn4Hr0jkG2bfIxNw1dqL4TtWXnRaxCKuxjLqiT5yS5gzpbvQ
-	x1ostjml5FdaubwApqjwLDc7ETMmXNO6lQ0H7BwrAgzJP8PMyt8FZ2TqauVoDn8CtLnjPY9Hbuu
-	WjiIK8c4xTexLSUa6/fZdfvkWDHTaQntNo/Y5ihTzwh2cjBfHcnnoMkLddLNIKTZmPFDy9JFfdg
-	6D2QY0oZvozmtls5WzRGPQaDv80r7ECLxAk6yLDgg==
-X-Received: by 2002:a05:7300:8242:b0:339:7909:9782 with SMTP id 5a478bee46e88-33e8d9ce7f9mr2561360eec.21.1790169681656;
-        Wed, 23 Sep 2026 06:21:21 -0700 (PDT)
+        bh=huS4A6FsKFDWrrXfwa21/vS+oZaWC4wTWSJg3SCD6Do=;
+        b=n9NROeuIf8Nc+GB4mZrkSnW1hS3GRC8OpU9dcwE2JUSdLfRaytwLI9FhQ0HJMI9lc9
+         hUzNVVZwPBpfGgmpIAQYh97SwQZv/U5EDpKaEQnFEfLd3V9RP692j3Z+MZ6G1QQnz1Cx
+         3bdG3TWERu4a9B7vBUP5Ane8OHCJjv1h3umfk4rmVHwsAMl+tIdm4gVUj3CmC4d9/u1C
+         Eb+iuHLC2OfCp6ok8gxH9VRqr6YVoa9tpDPH9Xb3RoGf3PehPAol5RjFjRtBA4US8PAu
+         xXElK2VdfAFyUHH20Bx5CLOqj1ZjTlSmzh6sSf4T1P4E6cWYt6s3b5jBu+AikyM6AP0h
+         q0+A==
+X-Forwarded-Encrypted: i=1; AKwUvBz232/HUUkwNEFGtCgnnxVeMp8E2Sdj7LW38w/05s0h1xZy3jjI+U72PiFUa6S+PaKmF3F/ypyetXA=@lists.xenproject.org
+X-Gm-Message-State: AFuF++ldifEdoJiTX6N1I4x4YYwXXlRVX3KEU+Gi70H1CBGC1SxEGego
+	Xvb5xneGzXFNu3kCW0VBtTMkixdrQysxsSY1cuKt3qNQXHW6j0Lb5HfP
+X-Gm-Gg: AYBFou0fjUS01L8t9lGaMMVAgmo67xgm9nE0ajWRqAmKJa0qKMqEHyuBVhhAugq+i9k
+	vKPQoWf3V7N8gGGh3tR/wD+brvvT29Meowl9Gdyho3jur9oLKdWKQClMDYI9g8tT7tGUnHu/aRY
+	XxIXQAqu3oOk0aPtNy3bMvviUfMYExjsdJHaOmqUac1Z1LGr7wD82iVoJdSv/FprCVzDjivqfBH
+	9UB5yV/7dnnfPdUCdRctunfJU3lrmo5WsCjToXkpNElA5gIYy95jRdEcTcnXCBlu6rhh3PBdDNr
+	V2VcUNJpZegWrZ1dee2NiZDKyLExnXsqFMio8eodTGut0cm27IGlzCmdXciuOFS1XuQ1wxUukkS
+	/xo7GscNLMKHaADixVglC9rRjc42Wx/iSh7Q7kRgB+Z0TmHsS7ECPKiOc+0ZtqHmrAb3KPyCosq
+	LA76847oAF2/hSCAFy0VJhIzsU1x+U8yLHFvirPfbwZJD06OYcu7cLjG5vHjp0Ua4VXUCEN+XCb
+	o33s6gmTbAl59fzchyJnUmt3KWYuzaltptlJz2uAw==
+X-Received: by 2002:a05:693c:42d9:b0:33b:e75b:cc42 with SMTP id 5a478bee46e88-33e8d7d8b7bmr2063395eec.19.1790169691801;
+        Wed, 23 Sep 2026 06:21:31 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>,
@@ -134,37 +134,39 @@ Cc: Cornelia Huck <cohuck@redhat.com>,
 	qemu-arm@nongnu.org,
 	qemu-s390x@nongnu.org,
 	Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 026/114] hw/intc: use target_long_bits in IMSIC geilen
-Date: Wed, 23 Sep 2026 21:15:00 +0800
-Message-ID: <20260923131635.1894-27-luoyonggang@gmail.com>
+Subject: [PATCH v3 027/114] hw/misc/riscv_cmgcr: replace target_ulong with uint64_t
+Date: Wed, 23 Sep 2026 21:15:01 +0800
+Message-ID: <20260923131635.1894-28-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1790169684-BD341757-46695DE3/0/0
+X-purgate-ID: tlsNG-ebf023/1790169694-53AC0B50-120FC315/0/0
 X-purgate-type: clean
-X-purgate-size: 623
+X-purgate-size: 785
 
-- Compare geilen to target_long_bits() instead of TARGET_LONG_BITS so
-  the check works when TARGET_* is poisoned.
+- Change get_exception_base() to return uint64_t so the GCR model
+  compiles in libsystem_riscv with -DCPU_DEFS_H.
+- Match reset_base and cpu_set_exception_base(), which already use
+  uint64_t.
 ---
- hw/intc/riscv_imsic.c | 2 +-
+ hw/misc/riscv_cmgcr.c | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
-index bf0434e96fd..30fb60cc312 100644
---- a/hw/intc/riscv_imsic.c
-+++ b/hw/intc/riscv_imsic.c
-@@ -52,7 +52,7 @@ static void riscv_cpu_set_geilen(CPURISCVState *env, uint8_t geilen)
-         return;
-     }
+diff --git a/hw/misc/riscv_cmgcr.c b/hw/misc/riscv_cmgcr.c
+index 0390996f78b..2086a33f08e 100644
+--- a/hw/misc/riscv_cmgcr.c
++++ b/hw/misc/riscv_cmgcr.c
+@@ -110,7 +110,7 @@ static uint64_t gcr_read(void *opaque, hwaddr addr, unsigned size)
+     return 0;
+ }
  
--    if (geilen > (TARGET_LONG_BITS - 1)) {
-+    if (geilen > (target_long_bits() - 1)) {
-         return;
-     }
- 
+-static inline target_ulong get_exception_base(RISCVGCRVPState *vps)
++static inline uint64_t get_exception_base(RISCVGCRVPState *vps)
+ {
+     return vps->reset_base & GCR_CL_RESET_BASE_RESETBASE_MSK;
+ }
 -- 
 2.52.0.windows.1
 
