@@ -4,47 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD1BBC982FA
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 12:42:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430330.1652819 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C809EC9830B
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:18:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430377.1652840 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MIw-00013Z-IL; Wed, 23 Sep 2026 12:42:30 +0000
+	id 1x9MrG-0005rl-60; Wed, 23 Sep 2026 13:17:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430330.1652819; Wed, 23 Sep 2026 12:42:30 +0000
+Received: by outflank-mailman (output) from mailman id 1430377.1652840; Wed, 23 Sep 2026 13:17:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MIw-00013Q-FK; Wed, 23 Sep 2026 12:42:30 +0000
-Received: by outflank-mailman (input) for mailman id 1430330;
- Wed, 23 Sep 2026 12:42:28 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x9MrF-0005qo-Ve; Wed, 23 Sep 2026 13:17:57 +0000
+Received: by outflank-mailman (input) for mailman id 1430377;
+ Wed, 23 Sep 2026 13:17:01 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mfo@igalia.com>) id 1x9MIt-00013K-5u
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 12:42:28 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1x9MqL-0005fG-Dz
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:17:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9MIr-007njs-6I
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 14:42:25 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x9MqK-006Omx-Bl
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:17:00 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mfo@igalia.com>)
- id 6ab3c91e-e002-0a2a0a5209dd-0a2a4501b06a-46
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 14:42:24 +0200
-Received: from [213.97.179.56] (helo=fanzine2.igalia.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <mfo@igalia.com>)
- id 6ab3c92e-5984-0a2a45010019-d561b3388ce2-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 14:42:23 +0200
-Received: from maestria.local.igalia.com ([192.168.10.14] helo=mail.igalia.com)
- by fanzine2.igalia.com with esmtps 
- (Cipher TLS1.3:ECDHE_SECP256R1__RSA_PSS_RSAE_SHA256__AES_256_GCM:256) (Exim)
- id 1x9MIN-0068Yz-Pt; Wed, 23 Sep 2026 14:41:55 +0200
-Received: from webmail.service.igalia.com ([192.168.21.45])
- by mail.igalia.com with esmtp (Exim)
- id 1x9MIL-008BYe-T3; Wed, 23 Sep 2026 14:41:55 +0200
-Received: from localhost ([127.0.0.1] helo=webmail.igalia.com)
- by webmail.service.igalia.com with esmtp (Exim 4.98.2)
- (envelope-from <mfo@igalia.com>) id 1x9MIL-00000003yOG-3zlc;
- Wed, 23 Sep 2026 14:41:53 +0200
+ (envelope-from <luoyonggang@gmail.com>)
+ id 6ab3d149-2eae-0a2a0a5409dd-0a2a45029f8c-10
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:17:00 +0200
+Received: from [74.125.229.19] (helo=mail-dy2-f19.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <luoyonggang@gmail.com>)
+ id 6ab3d14a-6ca4-0a2a45020019-4a7de51380cc-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:17:00 +0200
+Received: by mail-dy2-f19.google.com with SMTP id
+ 5a478bee46e88-3286624d194so642813eec.3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:16:59 -0700 (PDT)
+Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
+ by smtp.googlemail.com with ESMTPSA id
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.16.49
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 23 Sep 2026 06:16:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,73 +53,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20170329 header.d=igalia.com header.i="@igalia.com" header.h="Content-Transfer-Encoding:Content-Type:Message-ID:Subject:Cc:To:From:Date:MIME-Version"
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=igalia.com;
-	s=20170329; h=Content-Transfer-Encoding:Content-Type:Message-ID:Subject:Cc:To
-	:From:Date:MIME-Version:From:Reply-To;
-	bh=g9B2VaeeRiExoRvqu5OhmbVwC5+5bS3UNUKe+fIyEUo=; b=I1KHWuoqWH71gb7QuhhwJvbB7B
-	stuwG2ZQ1gEXCknmr0LlbVOX2Sn92AHnY67LFjl4iy/+q/PAoC4XAOiuqCyiOhZFAVdqyi2xSjR3D
-	CBVRECGZeJ/n6E0w4Uh9sUOTOLGqqr/3Ez5aJx0+1hhC2zl5EuhLOGqz/VM/4WrY83oubYIcfT/RP
-	JkNVY53mWlRS1267DJd7Ii5wQAe32cwT1PxBairv9PkIl7HulU9j/PPaYBlCl2s8DKcxJntNvps04
-	hSZ3sky0F5+s2o1bX+CsF6E8ovGUdjIcnIWhNL4zm7eD+DZFOObgFdPZpq6dj/Kma7QAR4xks9QHc
-	cDSvavpg==;
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790169418; x=1790774218; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=2gngFNJ3Klpuiy2qgGGYHVsKQcajQAru1FZZV3MRnyY=;
+        b=L2T1KumsISHbPxz6NPCdQ9wxshXO15Va2/fLFq4HAqOPxgHk000l4fHFyqjsPsbR8O
+         1Cjz1wYlVZ2fLsO6RRbws0/nhCGjjvXbDluRVAiA2VPkpT8J+1OwjGnQrH5gezGSd0uW
+         0mlpdnct5McvdUglofasmBhx2IJPnBs0kcwCqe5H5E9mPZMz+CETut8vX0rhXGNimbds
+         R+DQgAJmSIT8UU504A98woT2zX6i8kXAqo3ZE6p9Dkpq9hmedKJS0/MbMRNI5Ijr8VE1
+         yXP5LpOQW+CULlzWBvCcbtd0br+JtS4xx3nl7epoQJBVdeiyBlkzLpie0pV/VMhICgsZ
+         bjhA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790169418; x=1790774218;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=2gngFNJ3Klpuiy2qgGGYHVsKQcajQAru1FZZV3MRnyY=;
+        b=D452zPH+khNa/3ZJoTfrI1cv5972f887XM4F1feGM/afa1yY8erR8wrSYIyKCl0mAl
+         /C6CLHR3pCMFeyS1J8kuH4Yc+XPkJeWHi5ncjaC9QFnpeCMx2pe1A9eEVucqgA9yVngc
+         4llNTOQKupOtqen6dIBtOZDnD03as0LX841L9S22q1aCKiKLL+PX0aeL6yKAdoDxDmcH
+         J1gS3JxnXmv0tPbwwgeskp59uG9l6V1ZdrEUSOwxjADkFsWamsejze/w4OBwfeSarwY/
+         uVQYXL4VILKeD2ER9LOPAWiyrAnSbKLam0KZdQPSdHNeGxgbM70Ej2gxRcdyJXNxCFOD
+         D67A==
+X-Forwarded-Encrypted: i=1; AKwUvBwT5lyVNtf5yyMbTlxCYI6N3GJSOwWLtMzuX5mVxR5zuR24HfkD1eVRs3pPnsF0nzjNfhYtu3OMrk4=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lRJdT5xhYWY3Omd4q/UvONddwJ8hP71CJzY2r2Qj3jfDT/jTKi
+	TIktG8Wpwi4pYwbc6cl2Ie0nQjwS/tryq1RfsuDGG3Ay1fkvCZ2s8gEb
+X-Gm-Gg: AYBFou1WFwiGaq0iYK3jZ+1X0aZCfYg0E6oc6xdtIC5MjBQAJ+d2aRyemFYdKpJ4DSe
+	GhPRVlj9Q96CNdKd5frls9kjb2GYTAqkqnC0Mf9GJkAgf0BR+1lA4CW4SXchhkiEDmwu8N48j0r
+	CwUHpKk78QBGa47YypvOgV6v1GIFgEsSNN6+bZDMDnxRcS6+Pxq9uN/ygEDHjvlsR/um8hklcUH
+	Z5/qL12mx0e/wgMGMK9qJhqHFHKpohJiw4Lrv3myOs4NnPywqpMvfSdLga8rZtxqPO8kFniiQaO
+	3DtccN+rHkhs4uHyrsHfjVjgsqZZdnlFiLHYtP3+cMEvx/GWMsuD1ck4dkcFV9nok5J/qzd9Y71
+	xbg428BJ/NtxU/DTkFu1+oIe/6eOlVi/mdBTOMQ5FLKSzPgG6otfwm68EkOliWwc7hx6/ZaYvAo
+	IW8nSMJg+KhY/cSzpjxPUxcTZ4GtgxGUEMWgyrD8BNgFfYWkQ1sTF+SHBBrDOhmi7Tf6Y8REeAv
+	pNWZ1dRAy43IxDeQv+X4jHpJUE9qdMtwNSnnEsH/A==
+X-Received: by 2002:a05:693c:8808:10b0:33e:6b65:5eab with SMTP id 5a478bee46e88-33e8ddbef60mr2484078eec.26.1790169417968;
+        Wed, 23 Sep 2026 06:16:57 -0700 (PDT)
+From: Yonggang Luo <luoyonggang@gmail.com>
+To: qemu-devel@nongnu.org
+Cc: Cornelia Huck <cohuck@redhat.com>,
+	xen-devel@lists.xenproject.org,
+	Chao Liu <chao.liu@processmission.com>,
+	Igor Mammedov <imammedo@redhat.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+	Peter Xu <peterx@redhat.com>,
+	Eric Blake <eblake@redhat.com>,
+	=?UTF-8?q?Philippe=20Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
+	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+	Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+	Peter Maydell <peter.maydell@linaro.org>,
+	Sunil V L <sunilvl@ventanamicro.com>,
+	Stefan Hajnoczi <stefanha@redhat.com>,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Fabiano Rosas <farosas@suse.de>,
+	Xianglai Li <lixianglai@loongson.cn>,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>,
+	Max Filippov <jcmvbkbc@gmail.com>,
+	qemu-ppc@nongnu.org,
+	Zhao Liu <zhao1.liu@intel.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Bibo Mao <maobibo@loongson.cn>,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Laurent Vivier <laurent@vivier.eu>,
+	David Hildenbrand <david@kernel.org>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	=?UTF-8?q?Daniel=20P=2E=20Berrang=C3=A9?= <berrange@redhat.com>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	qemu-riscv@nongnu.org,
+	kvm@vger.kernel.org,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	=?UTF-8?q?Alex=20Benn=C3=A9e?= <alex.bennee@linaro.org>,
+	Stafford Horne <shorne@gmail.com>,
+	=?UTF-8?q?Marc-Andr=C3=A9=20Lureau?= <marcandre.lureau@redhat.com>,
+	Markus Armbruster <armbru@redhat.com>,
+	Weiwei Li <liwei1518@gmail.com>,
+	Song Gao <17746591750@163.com>,
+	qemu-arm@nongnu.org,
+	qemu-s390x@nongnu.org,
+	Brian Cain <brian.cain@oss.qualcomm.com>
+Subject: [PATCH v3 001/114] meson: stale qemu-version.h only when .git exists
+Date: Wed, 23 Sep 2026 21:14:35 +0800
+Message-ID: <20260923131635.1894-2-luoyonggang@gmail.com>
+X-Mailer: git-send-email 2.52.0.windows.1
+In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
+References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
-Date: Wed, 23 Sep 2026 09:41:53 -0300
-From: Mauricio Faria de Oliveira <mfo@igalia.com>
-To: Borislav Petkov <bp@alien8.de>
-Cc: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>, Dave
- Hansen <dave.hansen@linux.intel.com>, x86@kernel.org, "H. Peter Anvin"
- <hpa@zytor.com>, Juergen Gross <jgross@suse.com>, Alexey Dobriyan
- <adobriyan@gmail.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>, Jan
- Beulich <jbeulich@suse.com>, Brian Gerst <brgerst@gmail.com>,
- kernel-dev@igalia.com, linux-kernel@vger.kernel.org,
- xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v10 0/4] x86/pvh: fix unbootable VMs again (PVH + KASAN)
-In-Reply-To: <20260923011232.GBarMngDiylzal41XI@fat_crate.local>
-References: <20260921-pvh-kasan-inline-v10-0-08da47943d8e@igalia.com>
- <20260922035815.GFarH819yHRX8WWnG9@fat_crate.local>
- <3ed7ea3908233ef72660ddfa1f92e914@igalia.com>
- <20260923011232.GBarMngDiylzal41XI@fat_crate.local>
-Message-ID: <4d7b03a55ea3d8633828229d3c3c988e@igalia.com>
-X-Sender: mfo@igalia.com
-Content-Type: text/plain; charset=US-ASCII
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1790167344-1E07B757-858DF159/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1790169420-F22A92AC-CEE58226/0/0
 X-purgate-type: clean
-X-purgate-size: 1322
+X-purgate-size: 865
 
-On 2026-09-22 22:12, Borislav Petkov wrote:
-> On Tue, Sep 22, 2026 at 07:13:35PM -0300, Mauricio Faria de Oliveira wrote:
->> I think that is fine, yes. Even though it's a boot failure, actually
->> hitting it depends on all of: CONFIG_KASAN, CONFIG_PVH, booting from the
->> PVH entry point, _plus_ a compiler version that triggers it.
->> 
->> Nonetheless, this may be picked up for stable due to the Fixes: tags,
->> but I can provide backports as needed.
-> 
-> Right, just consider all the bandwidth of the folks involved downstream:
-> stable team and all distros backporting stuff every day. This sounds like an
-> exotic thing so let's be conservative here pls.
+build_always_stale for qemu-version.h is fs.exists on the source
+.git. Matches qemu-version.sh, so a tree without git does not
+regenerate the header on every ninja.
 
-Absolutely. I worked for a long time with distro kernels and
-backporting. I just mentioned that it is possible for this to be picked
-up, and that if it is, then I can help with it if needed; not pushing.
-:)
+Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
->> BTW, I just realized that the title of patch 4/4 is missing memset().
->> Would you mind adding it, please? Or I can send v11.
->> -x86/cpuid: fix unbootable VMs by really inlining memcmp() in
->> cpuid_base_hypervisor() and xen_prepare_pvh()
->> +x86/cpuid: fix unbootable VMs by really inlining memcmp() and memset()
->> in cpuid_base_hypervisor() and xen_prepare_pvh()
-> 
-> Sure, np.
-
-Thanks!
-
-> 
-> Thx.
-
+diff --git a/meson.build b/meson.build
+index cfac634cf13..f17665c667d 100644
+--- a/meson.build
++++ b/meson.build
+@@ -3546,7 +3546,7 @@ qemu_version = custom_target('qemu-version.h',
+                              command: qemu_version_cmd,
+                              capture: true,
+                              build_by_default: true,
+-                             build_always_stale: true)
++                             build_always_stale: fs.exists(meson.current_source_dir() / '.git'))
+ genh += qemu_version
+ 
+ hxdep = []
 -- 
-Mauricio
+2.52.0.windows.1
+
 
