@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5BFEDC9830B
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:21:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430562.1653089 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 06474C982FA
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:22:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430569.1653098 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9Muy-0003Yd-4R; Wed, 23 Sep 2026 13:21:48 +0000
+	id 1x9Mv8-00040q-Dp; Wed, 23 Sep 2026 13:21:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430562.1653089; Wed, 23 Sep 2026 13:21:48 +0000
+Received: by outflank-mailman (output) from mailman id 1430569.1653098; Wed, 23 Sep 2026 13:21:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9Muy-0003YV-1L; Wed, 23 Sep 2026 13:21:48 +0000
-Received: by outflank-mailman (input) for mailman id 1430562;
- Wed, 23 Sep 2026 13:21:46 +0000
+	id 1x9Mv8-00040h-AT; Wed, 23 Sep 2026 13:21:58 +0000
+Received: by outflank-mailman (input) for mailman id 1430569;
+ Wed, 23 Sep 2026 13:21:56 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1x9Muw-0003Vh-1W
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:21:46 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1x9Mv6-0003wa-GA
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:21:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9Muv-006Pa4-EL
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:21:45 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x9Mv5-006Pd0-T8
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:21:55 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d262-bab6-0a2a0a5309dd-0a2a450b9ba0-20
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:45 +0200
-Received: from [74.125.229.140] (helo=mail-dl2-f12.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ab3d26e-bab6-0a2a0a5309dd-0a2a4501e51a-10
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:51 +0200
+Received: from [74.125.229.12] (helo=mail-dy2-f12.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d267-b7e8-0a2a450b0019-4a7de58c9069-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:45 +0200
-Received: by mail-dl2-f12.google.com with SMTP id
- a92af1059eb24-142dd04edb4so764526c88.0
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:21:44 -0700 (PDT)
+ id 6ab3d26e-5984-0a2a45010019-4a7de50cc127-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:51 +0200
+Received: by mail-dy2-f12.google.com with SMTP id
+ 5a478bee46e88-328664d340aso547201eec.0
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:21:51 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.21.32
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.21.41
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:21:39 -0700 (PDT)
+ Wed, 23 Sep 2026 06:21:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +55,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790169703; x=1790774503; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790169710; x=1790774510; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=BQcT2TCunpJ4XJOGDsLRORw+wafc2yMdlkK9/vuTXoQ=;
-        b=DtntKWzu3Sqd+TbjcsxRCSsda6fmFmUA14btT+RvQZaUWUSkoUYCyFq7jEXFHQrnwt
-         H8GLtrRZTy5+F7YkTSPzePE2z4T9QfKF2nRbvPfOsasesfyerjcqvx6msaD/jxRzHI40
-         CpqyTz/f8bOl3Wv8v/t2c3IORiRTzIMTOXRyFH0MmpQvoQxH1k/wwpKnvRDchCmlpIX8
-         MLj2L+DbtMoEliZlIL9Wdh02nPwl6A8ZI9fBcMdErz7cpR/LuB0SdEF4J7FcYiK+CFet
-         prAy5r1Cx4fXbUa7APP4748n79c6EeMn4r4CiDGhUBxYPhCmv528Ha5TxGXeLEBsN/Le
-         MXWA==
+        bh=RGdh00utr6Q+OpO6+8fa0s0hS8SKHylDK/Tx/Y6cmu0=;
+        b=Rdd9FaFGcQNRMMJuwVGacozwC7wKe2KNfY0+UGqfGrRsqUNNFDRbp86U8V0URvZp/E
+         WEmkNl6GfkeLJxtEK/enRc3sxxLYfNJh6BZGLobAA2xz5B2KyopNu2l+NlBXEwdeTOYI
+         DogcXHIV4n8hSau1wiStnob+oS/baz4K1TBVAPAftsOxrNk4+kufS0TxuWd1Z5WOcQrD
+         2gaDI3RApZ7ISH0JRPinVp1rfTRw0QiXJdTbAfJbeHmLKzi2N0VNWCwWCZZ8xBoK22Ll
+         JPbbzcvPosMf4qZvW1qX6i39sRtAlsx6hA6766OcTKxfNQ1hzCkjK/Iv9QqKIiPZKQj2
+         z39g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790169703; x=1790774503;
+        d=1e100.net; s=20260707; t=1790169710; x=1790774510;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=BQcT2TCunpJ4XJOGDsLRORw+wafc2yMdlkK9/vuTXoQ=;
-        b=qWZn6Xcxdddot2tC0EZvSiw0MK0Rss2lFY4dwn5b6Qtb3B3UnsiJaWb2MC9M8GjyQv
-         cqbjS8pzs2l6rpC1Tyd8AKuB+Hwdnkj1JV9C7zvJR4Qo4GfT2T2ErogNL2/WOFhNth4Q
-         IrA+L7OxOaMQ2NlF0k07tl355Up4wPWgoEwKj+hJEew5U6KzSNP5POM0f8eJXDbgwikO
-         fWrB37x294Y4ZdQ6zgPONZgWwpCIg12sObJip1prBcILwnSaAoJjX7ipg2LbVm0Yuao7
-         HpduLgNI1awE7yrQw7p91yfPEKUp3ppvNd/wkF0qC761wAWR2+cpGHYqhmbreSY0FG+r
-         sTgw==
-X-Forwarded-Encrypted: i=1; AKwUvBxOwxZflLCBxB23wVyrKGePkOar3JZdjXzcrhLrAopnJDd3pUj7tZQjC08fCIWAdGzD1g9oDJ3NFfE=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lLJKtGHHMY0sJls4k3fKUhqh8JsLOYGEsF5idv5wILiDMB/IWu
-	DShHFa5otLktJmeGU+oBugUcH/4VtJl1t9tolcAJMRnBaW5szi3ujcj+
-X-Gm-Gg: AYBFou3VG8bteLUsiGbJovzDN9roiPp9qDfymvMmpwPm58ZmdARR+Ye0A/M/JEvv+kr
-	q9AkbpJxr4RpWwHC9DccJEJa12ICZ/Br+rfduTHXi/OKxqBClB0aomjVCE/Fnsyidm8NXy5aUg6
-	gNKyUeJ6zlzLx64tE2Yyd3oVLKV5m2kUvraf3ligc1MBUuaeguu79nait+ulPnjqpojnF7SjEgc
-	AzRJ/gVeKH1KHJM7cidagEfYDYrigzWboaN0KNeLyCrHI1yPG/d6hB5n61iG5yEDNu1jYO8hvBd
-	YqhTDD62yB+aHkgzKb1y5b63iqu83Ou+wdcUuf1NFxF9ZsfZBZpGiLwp75BS1nqLl7FPjqRkCvL
-	sZSAE+FV7FKx4YIWn8CFHpaxOF6sHcFXKAoDytr0bWx2B+QJfUmIqNpPaHY+1KnbnkiCw5BXtei
-	WGvwcD9E7ttJm45/lo46954Nmp1uOqCWIufeNbg0t++ymgUNVdylDQFkNFzkhfWoTcnu+t3Nh9j
-	+JCV8FoWuaEHxXKoeJwlkGBSuIQmhuR82ZlcRKvnGI=
-X-Received: by 2002:a05:701b:4551:10b0:144:fd7c:84f4 with SMTP id a92af1059eb24-144fd7c8641mr1564469c88.5.1790169700288;
-        Wed, 23 Sep 2026 06:21:40 -0700 (PDT)
+        bh=RGdh00utr6Q+OpO6+8fa0s0hS8SKHylDK/Tx/Y6cmu0=;
+        b=FxKcYzJZc00bVZfA8QklX5aYKWRJVT7ItcuQg3huFqr/iyh1iSdxVtI7jHsRoGpVeA
+         7Ng9mdxBkX9t/Eskv6pS2XHfLmTu/htmlQFgldozq8dLHG8SDfvd5tNW54jy2h0+d06K
+         SYNzDp/OpA8kNNsLAyUyWmrsaQAJshfGT0QhmL8ueoET1j95zFwtkFIPR+y044oAUeJ0
+         Pu0mVf+dKUAe4deNzi7eMH9+GPb1SiMYt1RcLUV7zXpVDv9b/4w2rfa2SAhNGx7IgvLQ
+         5DumkQdkOTH8EW1HdNiaQPgl4lqd3le3uqesKeYn+fh1thHz3gcyIXgUwdN6wePe/AE/
+         qEow==
+X-Forwarded-Encrypted: i=1; AKwUvBwG0uOX2LCltDORU+keMbRTzfvODtRGxnQ86GhF/RE04SN31HyH9Wxw9zRzRNiflLP6DqqAWjSbFZs=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kwjddPKJBh3RJfDlM+8sRQfuiNYIktBJoP9HGk9vsefbP7quzP
+	Eur8zbKLt7v9jUjTu8bpP9NJc126ZKWOcT77Wqcr4N0jGFGPudZw820T
+X-Gm-Gg: AYBFou2U9nDbmwfUgb3IG5wpdh2VVZJX0a8r+99VFelKAQDmqGdGtPPyhzmJXcFRyAL
+	zYmMGnyeHPz9FPGfdPQdGWlZI2e1kg0vKAlIbHcI+WVkDaq4w1c9rNp2LHMp9e7aI3S5Bye4Ka8
+	0N3NfRbkX8LxbF7BLyjxZsrzUnqAcrKRkTbIYiYaSg44fx5Deyu92Vcl41DZyb6E9DKeGgpXn+N
+	pFx2mYLdOJgsYaEhlwSmF1TOi6j+U/O+HtOtFpLDqThrDg2N3Fr0ApsitjALqAZJU2mRmZbTCtC
+	WiQpM4kvzGxPl95J6c+CHMhlqyIYgVTF86B62e4sFhZo8FEOp2KDjIZBoKzeoqU6vUNK9n9S8Fz
+	4El+63IdYE50qAw0k6Aqzs7B2zafV9vDqNUQU6kHZgklMWwu37X65I1E24Cw/ZJ7wUMxEEjRY3s
+	ULtsaIAnq/GnUi9+KAEXOztF5S6lGKqVaaV2KQWIxZ0fW6reDBtXY3+1jdv96kmDYxt/GKr4wU3
+	b/dKNvf5HZWqiHc0e4FAUQurYDtKxY=
+X-Received: by 2002:a05:693c:88d4:10b0:33b:dcbc:6046 with SMTP id 5a478bee46e88-33e8bc70ee6mr2596067eec.7.1790169709341;
+        Wed, 23 Sep 2026 06:21:49 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>,
@@ -134,66 +134,54 @@ Cc: Cornelia Huck <cohuck@redhat.com>,
 	qemu-arm@nongnu.org,
 	qemu-s390x@nongnu.org,
 	Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 028/114] hw/intc: use kvm_enabled() in APLIC AIA helpers
-Date: Wed, 23 Sep 2026 21:15:02 +0800
-Message-ID: <20260923131635.1894-29-luoyonggang@gmail.com>
+Subject: [PATCH v3 029/114] hw/intc: send IMSIC MSI via kvm_irqchip_send_msi()
+Date: Wed, 23 Sep 2026 21:15:03 +0800
+Message-ID: <20260923131635.1894-30-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1790169705-1A2C49EA-A12480D9/0/0
+X-purgate-ID: tlsNG-d62444/1790169711-BD67C757-64952C21/0/0
 X-purgate-type: clean
-X-purgate-size: 1295
+X-purgate-size: 1251
 
-- Replace CONFIG_KVM ifdefs in riscv_use_emulated_aplic and
-  riscv_aplic_set_kvm_msicfgaddr with kvm_enabled().
+- Drop the CONFIG_KVM ioctl path and call kvm_irqchip_send_msi() when
+  KVM and an in-kernel irqchip are enabled.
 ---
- hw/intc/riscv_aplic.c | 14 ++++++++------
- 1 file changed, 8 insertions(+), 6 deletions(-)
+ hw/intc/riscv_imsic.c | 16 ++++++----------
+ 1 file changed, 6 insertions(+), 10 deletions(-)
 
-diff --git a/hw/intc/riscv_aplic.c b/hw/intc/riscv_aplic.c
-index d8e25bfda14..03a0852b8b8 100644
---- a/hw/intc/riscv_aplic.c
-+++ b/hw/intc/riscv_aplic.c
-@@ -167,7 +167,10 @@ bool riscv_is_kvm_aia_aplic_imsic(bool msimode)
- 
- bool riscv_use_emulated_aplic(bool msimode)
- {
--#ifdef CONFIG_KVM
-+    if (!kvm_enabled()) {
-+        return true;
-+    }
-+
-     if (tcg_enabled()) {
-         return true;
-     }
-@@ -177,21 +180,20 @@ bool riscv_use_emulated_aplic(bool msimode)
+diff --git a/hw/intc/riscv_imsic.c b/hw/intc/riscv_imsic.c
+index 30fb60cc312..033b7813060 100644
+--- a/hw/intc/riscv_imsic.c
++++ b/hw/intc/riscv_imsic.c
+@@ -311,19 +311,15 @@ static void riscv_imsic_write(void *opaque, hwaddr addr, uint64_t value,
+         goto err;
      }
  
-     return kvm_kernel_irqchip_split();
--#else
--    return true;
--#endif
- }
+-#if defined(CONFIG_KVM)
+-    if (kvm_irqchip_in_kernel()) {
+-        struct kvm_msi msi;
+-
+-        msi.address_lo = extract64(imsic->mmio.addr + addr, 0, 32);
+-        msi.address_hi = extract64(imsic->mmio.addr + addr, 32, 32);
+-        msi.data = le32_to_cpu(value);
+-
+-        kvm_vm_ioctl(kvm_state, KVM_SIGNAL_MSI, &msi);
++    if (kvm_enabled() && kvm_irqchip_in_kernel()) {
++        MSIMessage msg = {
++            .address = imsic->mmio.addr + addr,
++            .data = (uint32_t)value,
++        };
  
- void riscv_aplic_set_kvm_msicfgaddr(RISCVAPLICState *aplic, hwaddr addr)
- {
--#ifdef CONFIG_KVM
-+    if (!kvm_enabled()) {
-+        return;
-+    }
-+
-     if (riscv_use_emulated_aplic(aplic->msimode)) {
-         addr >>= APLIC_xMSICFGADDR_PPN_SHIFT;
-         aplic->kvm_msicfgaddr = extract64(addr, 0, 32);
-         aplic->kvm_msicfgaddrH = extract64(addr, 32, 32) &
-                                  APLIC_MMSICFGADDRH_VALID_MASK;
++        kvm_irqchip_send_msi(kvm_state, msg);
+         return;
      }
 -#endif
- }
  
- /*
+     /* Writes only supported for MSI little-endian registers */
+     page = addr >> IMSIC_MMIO_PAGE_SHIFT;
 -- 
 2.52.0.windows.1
 
