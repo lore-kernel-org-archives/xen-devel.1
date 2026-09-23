@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 243CCC98302
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 04:35:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1429683.1652412 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C830AC98302
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 06:12:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1429720.1652421 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9EhX-0001V1-FF; Wed, 23 Sep 2026 04:35:23 +0000
+	id 1x9GCU-0008CN-Ul; Wed, 23 Sep 2026 06:11:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1429683.1652412; Wed, 23 Sep 2026 04:35:23 +0000
+Received: by outflank-mailman (output) from mailman id 1429720.1652421; Wed, 23 Sep 2026 06:11:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9EhX-0001Uu-Ca; Wed, 23 Sep 2026 04:35:23 +0000
-Received: by outflank-mailman (input) for mailman id 1429683;
- Wed, 23 Sep 2026 04:35:22 +0000
+	id 1x9GCU-0008CG-S4; Wed, 23 Sep 2026 06:11:26 +0000
+Received: by outflank-mailman (input) for mailman id 1429720;
+ Wed, 23 Sep 2026 06:11:25 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Alexey.Kardashevskiy@amd.com>) id 1x9EhV-0001Un-MW
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 04:35:22 +0000
+ (envelope-from <jbeulich@suse.com>) id 1x9GCS-0008CA-TV
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 06:11:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9EhU-00Blm0-1T
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 06:35:20 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1x9GCS-006WHq-AP
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 08:11:24 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Alexey.Kardashevskiy@amd.com>)
- id 6ab356f4-e002-0a2a0a5209dd-0a2a4506ab54-22
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:35:19 +0200
-Received: from [52.101.201.13]
- (helo=PH7PR06CU001.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Alexey.Kardashevskiy@amd.com>)
- id 6ab35705-195a-0a2a45060019-3465c90d470b-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:35:19 +0200
-Received: from SA1PR12MB999228.namprd12.prod.outlook.com
- (2603:10b6:806:4db::10) by IA1PR12MB6650.namprd12.prod.outlook.com
- (2603:10b6:208:3a1::18) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.16; Wed, 23 Sep
- 2026 04:35:12 +0000
-Received: from SA1PR12MB999228.namprd12.prod.outlook.com
- ([fe80::4dba:119e:8e7c:37b3]) by SA1PR12MB999228.namprd12.prod.outlook.com
- ([fe80::4dba:119e:8e7c:37b3%6]) with mapi id 15.21.0451.014; Wed, 23 Sep 2026
- 04:35:12 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab36d8b-8faa-0a2a0a5109dd-0a2a4507ce62-8
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 08:11:24 +0200
+Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab36d8b-b4ea-0a2a45070019-4a7de14cf657-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 08:11:24 +0200
+Received: by mail-wr2-f12.google.com with SMTP id
+ ffacd0b85a97d-485b1d2874fso228735f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 22 Sep 2026 23:11:24 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-49fe0c77b8csm23049545e9.3.2026.09.22.23.11.22
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 22 Sep 2026 23:11:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,497 +53,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=p6L730XBTm6fBb+8RyilodyYPqmdNmUUqWZ25+2FvG4VzBKWh6y0c0OIszK/mFNJYP8gWpnt4Ix/WXTzIwvGmAZfSzHYxbqv4H+EEn8fpHuVoM2VQrKIHRoN933T5gUgsW6lcVyiY9VTA6YTIT+M1akhzQK1eaODHY1hWrw0WneeqO4/XVkmwBI0k0e7OsRRDsMqcq4mqUOsjBDZ7czDoJIBZF6ST52g/PdEY3NcqlEWxqI8PwkSy5rAlSD5vgSDSMlhpkSD1ZzwyxS6nd9xffkiyqktdLZZtdiRzJ33X2PdtalTtYqEVaC/HRg6fpFk8NWHKh8rXmevh5mdc6wwZA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=x2d3KccSK+qwgXdBkoUCmUtGaaT6R2qysxXQ1M1RQEg=;
- b=b37Xj3IBtQbLMw2hqRviggBRCePqg+DOqmn5yilJMyuz+/bq2F9gJdFZZsxGf8WeA4211TBJAQGXpfWXbEJXUatRv3Ll36PNwMf2oLTX1ZDehmYHxyubsajfhNWcu7LZO4bMOzpEQtphW009DEqVgB7+rdSbEhQtStU/vibpjt1+rR+ZraoVdLTvmylXPeX0xIZb+cqJB/qiY/s+qZJaCvSyoFawZtbPApR+8YeDQEs2+M5AyOBGhYuN/ZR5mk59vYQ8C/+IfyQ+kfMp2EnmqfqEWMg6/cPs8hlbjTP89uoQD15CeY7ebvCupr7vjaTkaao77URew/luTNTtG+p6tQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=x2d3KccSK+qwgXdBkoUCmUtGaaT6R2qysxXQ1M1RQEg=;
- b=4BqnvGAMXrhcsSSujKtI25AOlwa7oPoLWhi+SQZ0KHUME9N6oV/I9gTGkoE1RzoO4LS2jQtGlRuRf4VfU/11luXYJYbhisHtOgXklFiDNdWk7CDSmBlwvN2zfCAUiExI1gEXV0NmghdcBZ2JF69TUghb6nGnIrqX56yKL2j7EuE=
-Authentication-Results: dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Message-ID: <8ff51404-d752-499c-af65-cd25e0731a2e@amd.com>
-Date: Wed, 23 Sep 2026 14:34:49 +1000
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH kernel 17/17] x86/sev: Flush IOMMU TLB for trusted
- devices
-To: Jianxiong Gao <jxgao@google.com>
-Cc: x86@kernel.org, linux-kernel@vger.kernel.org, kvm@vger.kernel.org,
- linux-crypto@vger.kernel.org, linux-pci@vger.kernel.org,
- Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
- Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
- "H. Peter Anvin" <hpa@zytor.com>, Sean Christopherson <seanjc@google.com>,
- Paolo Bonzini <pbonzini@redhat.com>, Andy Lutomirski <luto@kernel.org>,
- Peter Zijlstra <peterz@infradead.org>, Ashish Kalra <ashish.kalra@amd.com>,
- Tom Lendacky <thomas.lendacky@amd.com>,
- Herbert Xu <herbert@gondor.apana.org.au>,
- "David S. Miller" <davem@davemloft.net>, Bjorn Helgaas
- <bhelgaas@google.com>, Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Marek Szyprowski <m.szyprowski@samsung.com>,
- Robin Murphy <robin.murphy@arm.com>,
- Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
- "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
- Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Michal Hocko <mhocko@suse.com>, Catalin Marinas <catalin.marinas@arm.com>,
- Jini Susan George <jinisusan.george@amd.com>, Kees Cook <kees@kernel.org>,
- Michael Ellerman <mpe@ellerman.id.au>, Nikunj A Dadhania <nikunj@amd.com>,
- Ard Biesheuvel <ardb@kernel.org>, Eric Biggers <ebiggers@kernel.org>,
- Kim Phillips <kim.phillips@amd.com>, Joerg Roedel <jroedel@suse.de>,
- Ethan Nelson-Moore <enelsonmoore@gmail.com>,
- "Tycho Andersen (AMD)" <tycho@kernel.org>,
- Liam Merwick <liam.merwick@oracle.com>,
- Michael Kerrisk <mtk.manpages@gmail.com>,
- Suresh Siddha <suresh.b.siddha@intel.com>, Xiaotian Feng <dfeng@redhat.com>,
- Venkatesh Pallipadi <venkatesh.pallipadi@intel.com>,
- Andi Kleen <ak@linux.intel.com>, Kiryl Shutsemau <kas@kernel.org>,
- Tony Luck <tony.luck@intel.com>, Jason Gunthorpe <jgg@ziepe.ca>,
- Lu Baolu <baolu.lu@linux.intel.com>, Xu Yilun <yilun.xu@linux.intel.com>,
- =?UTF-8?Q?Carlos_L=C3=B3pez?= <clopez@suse.de>,
- Jonathan Cameron <jic23@kernel.org>, Jori Koolstra <jkoolstra@xs4all.nl>,
- =?UTF-8?Q?Thomas_Wei=C3=9Fschuh?= <thomas.weissschuh@linutronix.de>,
- "Aneesh Kumar K.V (Arm)" <aneesh.kumar@kernel.org>,
- Ian Campbell <ian.campbell@citrix.com>,
- Jeremy Fitzhardinge <jeremy.fitzhardinge@citrix.com>,
- Petr Tesarik <ptesarik@suse.com>, David Howells <dhowells@redhat.com>,
- Haavard Skinnemoen <hskinnemoen@atmel.com>,
- Kenji Kaneshige <kaneshige.kenji@jp.fujitsu.com>,
- =?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>,
- Christian Marangi <ansuelsmth@gmail.com>, Dave Jiang <dave.jiang@intel.com>,
- Michael Kelley <mhklinux@outlook.com>, Ilias Stamatis <ilstam@amazon.com>,
- Sumanth Korikkar <sumanthk@linux.ibm.com>,
- Simona Vetter <simona.vetter@ffwll.ch>, Toshi Kani <toshi.kani@hp.com>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Vinod Koul <vkoul@kernel.org>, Jiang Liu <jiang.liu@linux.intel.com>,
- Arnd Bergmann <arnd@arndb.de>, Anshuman Khandual
- <anshuman.khandual@arm.com>, Kefeng Wang <wangkefeng.wang@huawei.com>,
- Palmer Dabbelt <palmerdabbelt@google.com>, linux-coco@lists.linux.dev,
- xen-devel@lists.xenproject.org, iommu@lists.linux.dev, linux-mm@kvack.org,
- aik@ozlabs.ru, Santosh Shukla <santosh.shukla@amd.com>,
- "Pratik R . Sampat" <prsampat@amd.com>,
- Scott Soule Cheloha <scott.cheloha@amd.com>,
- Ackerley Tng <ackerleytng@google.com>, Fuad Tabba <tabba@google.com>,
- Darwin Guo <darwinguo@google.com>, Shruti <shrutiss@google.com>,
- Saurabh Singh <saurabhsinghs@google.com>
-References: <20260916115159.1938195-1-aik@amd.com>
- <20260916115159.1938195-18-aik@amd.com>
- <CAMGD6P38zYT8FzkFHoaKNEL0tVErK7G+ZLPMzgazAmVoMcD=yQ@mail.gmail.com>
-From: Alexey Kardashevskiy <aik@amd.com>
-Content-Language: en-US
-In-Reply-To: <CAMGD6P38zYT8FzkFHoaKNEL0tVErK7G+ZLPMzgazAmVoMcD=yQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: SY6PR01CA0107.ausprd01.prod.outlook.com
- (2603:10c6:10:111::22) To SA1PR12MB999228.namprd12.prod.outlook.com
- (2603:10b6:806:4db::10)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1790143883; x=1790748683; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=oeRo1lrFVOAUXTlKOftlBsJcAgKh5BvSU2w80XPL1RM=;
+        b=LALRGMLy1R/zVlLPOrE8uSPrED5GdyCfXpWFm2CfzpywLzcdaJjh1LvCu9837T66Ei
+         qQRpT65yUbCyxGLpT2VhHKoWVamkSXtyqgGRQtHvejyo0A/fYCY9wweY44RkJP45AQv7
+         SVvEFREeh9rUAY7iLDkSGZtrS7mRjZ73B9kKYR8DoDF2SyzUCeX7wfHoL1/G1M7H6iIk
+         UHzwzivPuoqYZBdW5/fNKcpIZs7uMn7XMZhOvgDVUbPL3Y3PjACY1l677/U2T6TqQYIR
+         hOdz63ItZNcJfXi7CJB0f2W2PdjKFgLjxHZSwekm/Vh9++zbpxpSv5wm3/hk12LGXE3T
+         BjrA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790143883; x=1790748683;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=oeRo1lrFVOAUXTlKOftlBsJcAgKh5BvSU2w80XPL1RM=;
+        b=m1ZaklLurlVNWUTuZrnoXhKQZyTPVaw9InfE4rBmgjpE0hoN+l9SjMu6YFg/m34w4x
+         edzTOMKrwCPOLRcaEmHRN9PJCuJSNrhbrCI6iC3rfoEGH5IAb5+mTh9+lBaWJoI+F4S6
+         Fb2YEvJaJzBMK8P9W8KaLVgQ4l6ySGtqQnqchGEyjGqGI9Ac1mazhr4J486GOddPFl+J
+         f0k4MEtQdsgP7j1N1LOglSVLrBTevjuVRCT7vDJGG/ZBfwSp86pdwojXf8FG4O5xxg0Y
+         Z/5gT4H3McWPXM0xDF7cfRTJvKfaLa2tSscDvVGTFHr+SjNVw5BhmpRTx+EtNIN8m2cg
+         n7cQ==
+X-Forwarded-Encrypted: i=1; AKwUvByZeGLFl805xQ2S9gh0dy3TwbaoR9al5F6mqYqrSOsOo1e2+00YPAlq/rUEx7HzAFRcfFIXZ9C35Vg=@lists.xenproject.org
+X-Gm-Message-State: AFuF++lA5TNGeZ/gr3jtoPQh/+RDtUZROIM6G2/G2d8Uleanw59plKw5
+	K6GPnU75z/VAgBVXDNep8Ilb0l2hp5ptnUHof4ueB/y8SAiFA8yuLUtruHhTCVE1tQ==
+X-Gm-Gg: AYBFou1gEr/Cte+OW+pBhOOQJGhJ3dEvuso0DCLesssEKr7N6Og+PUzfFolrgix0Gyh
+	N8sPXnniEfvOAYqzpsbDezgDLPrsI8duUHej7XEmln0TXToouynz8obQYLzQeHCzueD7wCEzHKX
+	M9Gox6gJeSLZBtVo+izbiAwJ1pZp6d5//zeYuuP/MYm8VRtDeIeavR3mIeeM8N/SpT8s7f7aSpe
+	000yhEncTlRwmS+XWV2NJ3Fp6Hie7p0f8x6OM33oJgEkTeP0u1BwaiLpTlvsdGGXO/LzrxBVThk
+	40YZH6eXVEbieqGhEYM1mB1TqfE0FRtrUnyUu6K0vzAjP6t3EsOqSWRDgjcXJw57bTKCKOYwO+4
+	eZsgsDSHnhaFjkI3vwiUoe/tYOmEjQbZ7vN0YIN/JQWYHgqH14oXhXSJZwYVO3Zgb/E6Ptefre5
+	x0A0z5TKUBnKoOyjKFfgLZKOpnxcR+CSK8smtL23Ypw5hA3W8uuSAZ6UwNXgD1dMdpxj6cvs2zh
+	tdUxlcQLBOTtLKQzMPFE2mtxF4cadG8W/wQDjwh3c1SoqAlIEwCWFy8lBf1LvU=
+X-Received: by 2002:a05:600c:c491:b0:49c:f13e:e4d with SMTP id 5b1f17b1804b1-49fde4972e0mr18342185e9.10.1790143883433;
+        Tue, 22 Sep 2026 23:11:23 -0700 (PDT)
+Message-ID: <1f2eb0d2-5208-40e4-bcd1-55df6ebfc2e3@suse.com>
+Date: Wed, 23 Sep 2026 08:11:22 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA1PR12MB999228:EE_|IA1PR12MB6650:EE_
-X-MS-Office365-Filtering-Correlation-Id: 8981c364-a945-4747-3f40-08df192c0e65
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|7416014|366016|376014|11063799006|56012099006|3023799007|4143699003|10067099003|22082099003|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	ZaDuQetgahZL0POAHplLHKM987LEJ/IKYS6CK/okFsjPboBL5sRvVMf8LQaMVfpusvykSSJRhs2QkXWUaubCCqxVe1yn/v9AUeYZhMT6fKcT2gaHASLNsmqHLUcxfUHz3nONwDrGrTbOLy/nWbN+t7T0NyjxR8sfdFx5dDAMeyHJrVSfNekpqqGlpi8L9nfCkrGdigRnUhnCkSnYIdBeHRDMSt7NC9/Jvwa/zr4l+Gz+bPOpqG1zd5oxynPg7qLs88uhjnMUiRuDl5If779W/jx+SDEVc++ZUOl+3aM2+/e+LvbV9t/OI2D0P3aS05ALNVG0nNIWiw8X+jOm60j7KO3wEbo29z3C85X7Hx1wt8KoKe1Ybxckjec3duxdjktfy1DGMDFJe0CaNQZHIVboaZN/6bxERmKKU7FSO9NVjcbZ9Y87wW8da7q6kuZmf5pdjnLT06CjSilPTz7NDZtU9Q7Rseh7hRvLN7Xix1lK8m+x59QyEnMFay8x5W3dSPtd5h3o+P0HahtYIhmCIjHhyBeSYYBaki9PyCYMYpyWYTFDNFvmzY9LVG/UgcwJr2DydhS4vqzExQe/Io1YkUN0EYLafefs3wFS0q+e1mAqYnLgumtOY9fzJnIAwALAZB0nZCgzrhV/Gzd+CWZj/WvLcyO4dkCKwpsCQu9ij+8Oka4=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA1PR12MB999228.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(7416014)(366016)(376014)(11063799006)(56012099006)(3023799007)(4143699003)(10067099003)(22082099003)(18002099003)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?c2dvSUtpRE8rSkNnc3h5d0gyK04vRC9QMmVSVWE4U3I2VCtrbVlwTEFjRlNn?=
- =?utf-8?B?NnZ1U2V4eUNPdGQ5eDFuMUJNNDZ2R09KMkN4ZzF5bTREdUoxTVAvT29nRTJQ?=
- =?utf-8?B?R0J3cEsxVVJDM3k0M1hRMUhLejBmR3hrRkg3a01FUjdkK0djY3UvdFM5NFFE?=
- =?utf-8?B?b3FoUmFCUklHSTJWM3pNODA1WFVGVnNaU2NjV0MzRU9FMlM5Nlp0SllOTmpo?=
- =?utf-8?B?R0JRRGJlL0xWbG5PT3V6bk0xWjQ0Z01hVWIxa3oxcFJvU0RvYlF3cjhteXBn?=
- =?utf-8?B?UXRtU25DSjdjRlRQWXVMcFRRK1RmZ2lmaUgrWmdQV2hJR1pLL2QxL1BmelMx?=
- =?utf-8?B?VXlVekpVWWJkbEVsQnFydm9PZmZEczJIVDRTMCtBV1BDMXlZcmlkbkx2R3hW?=
- =?utf-8?B?M2xoQ0hQNWlmUm5DTG01RTc3VFhIeEVXSVFXNjIxcThpeVF6VG5oZUNwdUs0?=
- =?utf-8?B?RTJkY3lOK1FyTnMzenJOT3dudUhqV25aK3RPWjlYdmtLcVZaWGJpcW9HMkE0?=
- =?utf-8?B?SDVLRWJMSTVFVXBWZXllNWtsL3hia25DNU5vVEUyMXF0Z2NuaG41Um8xYmRU?=
- =?utf-8?B?QmxsVjNRQXl1bERvaTJQQ3Fpd2RHejV0bVNxbU5XZ3dDR1BCSUMzS3o3R2Rm?=
- =?utf-8?B?M2hDUDdKcEhkaVg2d2Zya0I4VDVwOUY5R2E5YlZYRGFyNjgzd2lTYzJmRlhD?=
- =?utf-8?B?dFNsRkt0Y1dybExWT2pvZ3N0WGcyNnkwZngyVXRkMlFOSzlaU2tLb0JON3pT?=
- =?utf-8?B?UEtJdTc2elRjNGM3NFp5SHpvWmZERWUrS3puYmtOQkM2MFVsdmd1ZFpUWkJz?=
- =?utf-8?B?aHhDaHBWcmREZE1nb1BOMFhWM3ZCSlBaMGI4bWVzQ3RzUU95RHJKK2ZIcjd5?=
- =?utf-8?B?K2ZobjlKenE3K1lJb0F2RW9CMVBZZ1lOTzNIRUU0a0toQlRSY2RrSEZaa2J2?=
- =?utf-8?B?VFZrKzN0VTlraDZpcVNYYmhKVGsweUpBZVorWDJCbnU0Tkk2M2FtdTFaanA0?=
- =?utf-8?B?ZUx5bXVibWxNOFhmRnVCMHRrYWhJWnZxUyt5OGNRalFhdUZjcGYxZmwyRDl0?=
- =?utf-8?B?VWtEY2ZmbmFVWHYrVDJaQ0h0b3lHbmNzNHR3bEV5aUVEK0htZ1RQY0VzT0NV?=
- =?utf-8?B?dzFIa1BSQVdKSmZkaXJMMUhCZWhDNjVpRlZES0NmQ2ZOM2MyM2NCUGtTdUF1?=
- =?utf-8?B?V3RWT2FiV0NvRTVWUnhmYlJQcjRGT0dhS1lvL1V0S3VxTlBYMXZkNStIWlVl?=
- =?utf-8?B?ak1laVcyUUhrSnp1MmpIekFRYjRUcXdDcjRHa2ZWVFhGMlhteURpOVBJZmY2?=
- =?utf-8?B?ckErSXNvYWJMb1N1aXIzZ0w2QUw3bUo1N3hJN3dRVklsdnBxZU4yQ3JJdlhr?=
- =?utf-8?B?elMwWmxDUVdqNzhqVWdGbDluOW15L2UwM2VkVUp6YTBFOEUzalpVNitONy9B?=
- =?utf-8?B?NHRmMEsvcHRyZjVMaEtQRk5qWnFZWHNGYnlrTHVBVHJmUmZuTHRvTlhhYlJJ?=
- =?utf-8?B?RmpnUm84SkJjTlZ3VHpjZDJjcytmTmNGOFNDeGpxdCtKMzlFTkdsdFI2Y3dj?=
- =?utf-8?B?VWg4RWJXbW5qQzdiY1ZLZmZ4ZUdIWGR0cXE0SFdpWDVrbEFpaHc1RGh6OEJW?=
- =?utf-8?B?UnN4ZFlVVk8vVHBTb2tpbUFRdWE0c1djZHhjeDRkSTZ4Rjl0OXpsQmMvblhl?=
- =?utf-8?B?M0p0TjNiOXFpWDlobnFQMTZwdytNZitySUhXcitUMW9PSVNWMWVucXlrN21Z?=
- =?utf-8?B?a2dJZ0JiRmwwR0k3eUt5SGRiWkZVU2dBOThJTzExWWlkMC9lREZrcnRabnNV?=
- =?utf-8?B?M3dhZjZPdzczNlZ5ZExNQWVUbGMvN0huM3pITFczNHZTNTQ5T2RjOUxHclV5?=
- =?utf-8?B?TDM3OXBjSk5xQTVWVHFIYVptRW9RdTN0RzBQdjZvb3dXcGR3MFRoZGlkRjUy?=
- =?utf-8?B?bkxOVkpiVW11NEVWNk0xQ0JpSUdZQ0F5bW9xb2FpeFlYOVA3ZHFHSy9VK2lH?=
- =?utf-8?B?UFBOQ2EwTDFqT0NPaW8xZE5OQUt5ZDJJaCtpa1N3RitVRS9rU2JLRHQ1Ui8r?=
- =?utf-8?B?U2FPMXJxVXU5QUh5QWUxL0tRdGdVaEhwc1h6M3AzUFVIRmVuR2wyRitJRjg1?=
- =?utf-8?B?aHZudEFXU1U3bDBlUERPZjBLVUZhWFhBaWRrRVA3QmV6Y0RQMDVxRE03Mi9Z?=
- =?utf-8?B?L1M5WWtYdnlTK1dqdUsreWRwRzRtWXpNaHF4cTBNMlpSYWVIOHRHdS90Und3?=
- =?utf-8?B?alo5ZzU2LzZpQS9KREtseER2dXFZcnpDZDJlYk5GMFR3NWUwbVVFZHJqK3FK?=
- =?utf-8?B?L3pIWk83dEFsdC9wTEtEcVBmcS9lM0pRbXpKdHk5bG9OOW5OY3VtQT09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8981c364-a945-4747-3f40-08df192c0e65
-X-MS-Exchange-CrossTenant-AuthSource: SA1PR12MB999228.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2026 04:35:12.1580
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: zZs7rr9HjiBZLbw/+tgcevxZC4wiBrtIsCkocA1rCwwo3zMPw8jTnfk0grI5DrECh7sD98PZlZVY1ra8DYA4bA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB6650
-X-purgate-ID: tlsNG-16d1c6/1790138119-FE67277B-D54425E5/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] ns16550: find the console UART on PCI when there is no
+ legacy one
+To: Benjamin Leggett <benjamin@edera.io>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260922184316.324817-1-benjamin@edera.io>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20260922184316.324817-1-benjamin@edera.io>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1790143884-3C817AE4-E076B8FF/0/0
 X-purgate-type: clean
-X-purgate-size: 13959
+X-purgate-size: 3220
 
+On 22.09.2026 20:43, Benjamin Leggett wrote:
+> Amazon EC2 bare metal instances have no UART at the legacy I/O port
+> 0x3f8. Their only serial port is a 16550-compatible PCI device (vendor
+> 0x1d0f, device 0x8250) with its registers in the MMIO space of BAR 0.
+> Today Xen has no console on these systems unless the command line
+> names that device, and "com1=...,pci" cannot find it, because
+> uart_config[] doesn't have it.
+> 
+> Add the device to uart_config[].
 
+Is there a spec that you could point to here?
 
-On 23/9/26 05:22, Jianxiong Gao wrote:
-> On Wed, Sep 16, 2026 at 5:07 AM Alexey Kardashevskiy <aik@amd.com> wrote:
->> +static int alloc_iommu_tlb_flush_ghcb_pages(void)
->> +{
->> +       unsigned int cpu;
->> +       struct page *pg;
->> +       void *p;
->> +
->> +       /*
->> +        * Allocate per CPU pages while encrypted DMA is not happening yet
->> +        * and smashing is cheap.
->> +        */
->> +       for_each_possible_cpu(cpu) {
->> +               if (per_cpu(iommu_tlb_flush_ghcb_page, cpu))
->> +                       continue;
->> +
->> +               pg = alloc_pages_node(cpu_to_node(cpu), GFP_KERNEL, 0);
->> +               if (!pg)
->> +                       return -ENOMEM;
->> +
->> +               p = page_to_virt(pg);
->> +               /* Trigger psmash in the host os now to avoid psmash race later */
->> +               snp_set_memory_shared((unsigned long)p, 1);
->> +               snp_set_memory_private((unsigned long)p, 1);
->> +               per_cpu(iommu_tlb_flush_ghcb_page, cpu) = p;
->> +       }
->> +
->> +       return 0;
->> +}
->>
->>   int sev_tio_op(u32 guest_rid, unsigned int op, u64 *fw_err, u64 *tdi_id)
->>   {
->> @@ -111,6 +142,24 @@ int sev_tio_op(u32 guest_rid, unsigned int op, u64 *fw_err, u64 *tdi_id)
->>          struct ghcb *ghcb;
->>          int ret;
->>
->> +       if (!(sev_hv_features & GHCB_HV_FT_SNP_SEV_TIO))
->> +               return -EPERM;
->> +
->> +       if (op == SVM_VMGEXIT_SEV_TIO_OP_RUN || op == SVM_VMGEXIT_SEV_TIO_OP_STOP) {
->> +               if (!(sev_hv_features & GHCB_HV_FT_SNP_IOMMU_TLB_FLUSH))
->> +                       return -EPERM;
->> +
->> +               if (op == SVM_VMGEXIT_SEV_TIO_OP_RUN) {
->> +                       if (atomic_inc_return(&sev_tio_devices_num) == 1) {
->> +                               ret = alloc_iommu_tlb_flush_ghcb_pages();
->> +                               if (ret)
->> +                                       return ret;
->> +                       }
->> +               } else if (atomic_dec_return(&sev_tio_devices_num) == 0) {
->> +                       /* Do cleanup or leave it like this? */
->> +               }
->> +       }
-> 
-> Hi Alexey,
-> 
-> When testing this series and accepting a locked TDI in the guest
-> (echo 1 > /sys/bus/pci/devices/.../tsm/accept), the guest immediately
-> terminates with 0x1:0xd (SEV_TERM_SET_LINUX, GHCB_TERM_IOMMUTLB_FLUSH).
+> Additionally, when the port that com1 describes is not present, scan PCI
+> for a known UART before giving up. This way the same command line works on
+> systems with and without a legacy UART, and a machine-specific "pci"
+> option is not needed. The fallback does not run when the command line
+> gave an I/O base, or when it already asked for a scan with "pci" or
+> "amt", so explicit config keeps its current meaning. It is
+> for com1 only: for com2, pci_uart_config() skips the first port it
+> finds, so it can never match a single-port device.
 
-Yup, you are right, I do have it fixed exactly like this in my current working tree, just screwed up my rebase (as a newer CPU will do this invalidate differently) and posted a broken version :-/ Sorry about that. Thanks,
+This needs to be split to a separate patch, and not only because right
+now you're doing two entirely unrelated things in a single change. The
+addition of the Amazon device is likely uncontroversial, so presumably
+can go in quickly. Doing a scan when none was asked for, otoh, is
+potentially problematic: What if there's an issue during scanning? With
+not having any output set up yet, we couldn't even indicate the problem,
+and a possible crash would also go entirely silently.
 
+> When the scan finds nothing, pci_uart_config() puts back the original
+> base, and check_existence() does not test MMIO addresses.
+> 
+> On a system with a legacy UART, check_existence() passes and nothing
+> changes.
 
-> 
-> In sev_tio_op(), sev_tio_devices_num is incremented from 0 to 1 before
-> alloc_iommu_tlb_flush_ghcb_pages() allocates and initializes the per-CPU
-> iommu_tlb_flush_ghcb_page buffers:
-> 
-> 1. atomic_inc_return(&sev_tio_devices_num) sets sev_tio_devices_num = 1
->     while iommu_tlb_flush_ghcb_page is still NULL on all CPUs.
-> 2. alloc_iommu_tlb_flush_ghcb_pages() allocates p for cpu = 0 and calls
->     snp_set_memory_shared((unsigned long)p, 1) to pre-smash the 2M page
->     before per_cpu(iommu_tlb_flush_ghcb_page, cpu) is assigned (and before
->     other CPUs' pages are allocated, in case this task is running on cpu > 0).
-> 3. snp_set_memory_shared() -> __set_pages_state() sees
->     atomic_read(&sev_tio_devices_num) != 0 and calls ghcb_flush_iommu_tlb().
-> 4. ghcb_flush_iommu_tlb() reads this_cpu_read(iommu_tlb_flush_ghcb_page),
->     gets NULL, and returns -ENOMEM.
-> 5. __set_pages_state() treats the non-zero return as fatal and calls
->     sev_es_terminate(SEV_TERM_SET_LINUX, GHCB_TERM_IOMMUTLB_FLUSH).
-> 
-> Calling alloc_iommu_tlb_flush_ghcb_pages() before incrementing
-> sev_tio_devices_num avoids triggering ghcb_flush_iommu_tlb() while the
-> per-CPU pages are still being pre-smashed and initialized:
-> 
-> --- a/arch/x86/coco/sev/core.c
-> +++ b/arch/x86/coco/sev/core.c
-> @@ -150,13 +150,12 @@ int sev_tio_op(...)
->               return -EPERM;
-> 
->           if (op == SVM_VMGEXIT_SEV_TIO_OP_RUN) {
-> -            if (atomic_inc_return(&sev_tio_devices_num) == 1) {
-> -                ret = alloc_iommu_tlb_flush_ghcb_pages();
-> -                if (ret)
-> -                    return ret;
-> -            }
-> -        } else if (atomic_dec_return(&sev_tio_devices_num) == 0) {
-> -            /* Do cleanup or leave it like this? */
-> +            ret = alloc_iommu_tlb_flush_ghcb_pages();
-> +            if (ret)
-> +                return ret;
-> +            atomic_inc(&sev_tio_devices_num);
-> +        } else {
-> +            atomic_dec_if_positive(&sev_tio_devices_num);
->           }
->       }
-> 
-> On Wed, Sep 16, 2026 at 5:07 AM Alexey Kardashevskiy <aik@amd.com> wrote:
->>
->> IOMMU performs RMP checks when SNP is enabled, the results are
->> cached along with the IOMMU translations. When a VM lowers permission
->> of a mapped page (moves to a lower VMPL level or from read+write to
->> read-only or private to shared), the cached RMP check results require
->> invalidation.
->>
->> At the moment the only way to invalidate IOMMU cache is the RMPUPDATE
->> instruction which flushes all IOMMU TLBs. It is a host privileged
->> instruction so a VM needs a way to ensure the host has done it.
->> Note that the guest's RMPADJUST/PVALIDATE do not flush IOMMU TLBs.
->>
->> The host implements a new "IOMMU TLB Flush" VMGEXIT code which is
->> advertised via bit#11 in the GHCB Hypervisor capabilities.
->>
->> Use RMPUPDATE in the following way:
->> - allocate a page per VCPU (to allow lockless flushing);
->> - When invalidation is needed, copy two patterns (A and B) to the page;
->> - invalidate the page so the host can make it shared;
->> - use new GHCB call to request RMPUPDATE on the host;
->> - the host makes the page shared;
->> - the host clears pattern A;
->> - the host makes the page private again;
->> - the host returns to the guest;
->> - check if pattern A has changed and pattern B has not;
->> - if the above failed, panic().
->>
->> The patterns are located far enough to not hit the same cache line to
->> work with the cipher text hiding feature.
->>
->> The host can choose to not execute the request, WARN_ON if this
->> is the case. Further patches will attempt to handle this in other way.
->>
->> Signed-off-by: Alexey Kardashevskiy <aik@amd.com>
->> ---
->>   arch/x86/include/asm/sev-common.h |  2 +
->>   arch/x86/include/uapi/asm/svm.h   |  3 +
->>   arch/x86/coco/sev/core.c          | 92 ++++++++++++++++++++
->>   3 files changed, 97 insertions(+)
->>
->> diff --git a/arch/x86/include/asm/sev-common.h b/arch/x86/include/asm/sev-common.h
->> index ff763c3c5d63..51abf8d061fa 100644
->> --- a/arch/x86/include/asm/sev-common.h
->> +++ b/arch/x86/include/asm/sev-common.h
->> @@ -138,6 +138,7 @@ enum psc_op {
->>   #define GHCB_HV_FT_SNP_AP_CREATION     BIT_ULL(1)
->>   #define GHCB_HV_FT_SNP_MULTI_VMPL      BIT_ULL(5)
->>   #define GHCB_HV_FT_SNP_SEV_TIO         BIT_ULL(7)
->> +#define GHCB_HV_FT_SNP_IOMMU_TLB_FLUSH BIT_ULL(11)
->>
->>   /*
->>    * SNP Page State Change NAE event
->> @@ -210,6 +211,7 @@ struct snp_psc_desc {
->>   #define GHCB_TERM_SECURE_TSC           10      /* Secure TSC initialization failed */
->>   #define GHCB_TERM_SVSM_CA_REMAP_FAIL   11      /* SVSM is present but CA could not be remapped */
->>   #define GHCB_TERM_SAVIC_FAIL           12      /* Secure AVIC-specific failure */
->> +#define GHCB_TERM_IOMMUTLB_FLUSH       13      /* IOMMUTLB flush failed for SEV-TIO device */
->>
->>   #define GHCB_RESP_CODE(v)              ((v) & GHCB_MSR_INFO_MASK)
->>
->> diff --git a/arch/x86/include/uapi/asm/svm.h b/arch/x86/include/uapi/asm/svm.h
->> index 93597ad492bf..269050942c8e 100644
->> --- a/arch/x86/include/uapi/asm/svm.h
->> +++ b/arch/x86/include/uapi/asm/svm.h
->> @@ -160,6 +160,8 @@
->>   #define SVM_VMGEXIT_SEV_TIO_OP_UNBIND  1
->>   #define SVM_VMGEXIT_SEV_TIO_OP_RUN     2
->>   #define SVM_VMGEXIT_SEV_TIO_OP_STOP    3
->> +#define SVM_VMGEXIT_IOMMU_TLB_FLUSH            0x80000022ull
->> +#define SVM_VMGEXIT_IOMMU_TLB_FLUSH_NO_ACTION  1
->>   #define SVM_VMGEXIT_HV_FEATURES                        0x8000fffdull
->>   #define SVM_VMGEXIT_TERM_REQUEST               0x8000fffeull
->>   #define SVM_VMGEXIT_TERM_REASON(reason_set, reason_code)       \
->> @@ -285,6 +287,7 @@
->>          { SVM_VMGEXIT_AP_CREATION,      "vmgexit_ap_creation" }, \
->>          { SVM_VMGEXIT_SEV_TIO_GR,       "vmgexit_sev_tio_guest_request" }, \
->>          { SVM_VMGEXIT_SEV_TIO_OP,       "vmgexit_sev_tio_op" }, \
->> +       { SVM_VMGEXIT_IOMMU_TLB_FLUSH, "vmgexit_sev_tio_iommu_tlb_flush" }, \
->>          { SVM_VMGEXIT_HV_FEATURES,      "vmgexit_hypervisor_feature" }, \
->>          { SVM_EXIT_ERR,         "invalid_guest_state" }
->>
->> diff --git a/arch/x86/coco/sev/core.c b/arch/x86/coco/sev/core.c
->> index ed0e4546d5e5..aa5a3abb4796 100644
->> --- a/arch/x86/coco/sev/core.c
->> +++ b/arch/x86/coco/sev/core.c
->> @@ -44,6 +44,7 @@
->>   #include <asm/cpuid/api.h>
->>   #include <asm/cmdline.h>
->>   #include <asm/msr.h>
->> +#include <asm/archrandom.h>
->>
->>   #include "internal.h"
->>
->> @@ -103,6 +104,36 @@ static unsigned long snp_tsc_freq_khz __ro_after_init;
->>
->>   DEFINE_PER_CPU(struct sev_es_runtime_data*, runtime_data);
->>   DEFINE_PER_CPU(struct sev_es_save_area *, sev_vmsa);
->> +DEFINE_PER_CPU(u8 *, iommu_tlb_flush_ghcb_page);
->> +static atomic_t sev_tio_devices_num;
->> +
->> +static int alloc_iommu_tlb_flush_ghcb_pages(void)
->> +{
->> +       unsigned int cpu;
->> +       struct page *pg;
->> +       void *p;
->> +
->> +       /*
->> +        * Allocate per CPU pages while encrypted DMA is not happening yet
->> +        * and smashing is cheap.
->> +        */
->> +       for_each_possible_cpu(cpu) {
->> +               if (per_cpu(iommu_tlb_flush_ghcb_page, cpu))
->> +                       continue;
->> +
->> +               pg = alloc_pages_node(cpu_to_node(cpu), GFP_KERNEL, 0);
->> +               if (!pg)
->> +                       return -ENOMEM;
->> +
->> +               p = page_to_virt(pg);
->> +               /* Trigger psmash in the host os now to avoid psmash race later */
->> +               snp_set_memory_shared((unsigned long)p, 1);
->> +               snp_set_memory_private((unsigned long)p, 1);
->> +               per_cpu(iommu_tlb_flush_ghcb_page, cpu) = p;
->> +       }
->> +
->> +       return 0;
->> +}
->>
->>   int sev_tio_op(u32 guest_rid, unsigned int op, u64 *fw_err, u64 *tdi_id)
->>   {
->> @@ -111,6 +142,24 @@ int sev_tio_op(u32 guest_rid, unsigned int op, u64 *fw_err, u64 *tdi_id)
->>          struct ghcb *ghcb;
->>          int ret;
->>
->> +       if (!(sev_hv_features & GHCB_HV_FT_SNP_SEV_TIO))
->> +               return -EPERM;
->> +
->> +       if (op == SVM_VMGEXIT_SEV_TIO_OP_RUN || op == SVM_VMGEXIT_SEV_TIO_OP_STOP) {
->> +               if (!(sev_hv_features & GHCB_HV_FT_SNP_IOMMU_TLB_FLUSH))
->> +                       return -EPERM;
->> +
->> +               if (op == SVM_VMGEXIT_SEV_TIO_OP_RUN) {
->> +                       if (atomic_inc_return(&sev_tio_devices_num) == 1) {
->> +                               ret = alloc_iommu_tlb_flush_ghcb_pages();
->> +                               if (ret)
->> +                                       return ret;
->> +                       }
->> +               } else if (atomic_dec_return(&sev_tio_devices_num) == 0) {
->> +                       /* Do cleanup or leave it like this? */
->> +               }
->> +       }
->> +
->>          /* __sev_get_ghcb() needs IRQs disabled because it uses per-CPU GHCB. */
->>          guard(irqsave)();
->>
->> @@ -347,6 +396,42 @@ static int vmgexit_psc(struct ghcb *ghcb, struct snp_psc_desc *desc)
->>          return ret;
->>   }
->>
->> +static int ghcb_flush_iommu_tlb(struct ghcb *ghcb)
->> +{
->> +       /* AES encrypts with 16 byte blocks */
->> +       unsigned long s1[BITS_TO_LONGS(128)], s2[BITS_TO_LONGS(128)];
->> +       void *p = this_cpu_read(iommu_tlb_flush_ghcb_page), *p2;
->> +       struct es_em_ctxt ctxt;
->> +       int ret;
->> +
->> +       if (!p)
->> +               return -ENOMEM;
->> +
->> +       /* Keep patterns apart far enough to not share the same cache line */
->> +       p2 = (u8 *) p + 2048;
->> +
->> +       vc_ghcb_invalidate(ghcb);
->> +
->> +       BUILD_BUG_ON(ARRAY_SIZE(s1) != 2);
->> +       if (!rdrand_long(s1) || !rdrand_long(s1 + 1) ||
->> +           !rdrand_long(s2) || !rdrand_long(s2 + 1))
->> +               return -EFAULT;
->> +
->> +       memcpy(p, s1, sizeof(s1));
->> +       memcpy(p2, s2, sizeof(s2));
->> +
->> +       pvalidate((unsigned long) p, RMP_PG_SIZE_4K, false);
->> +       ret = sev_es_ghcb_hv_call(ghcb, &ctxt, SVM_VMGEXIT_IOMMU_TLB_FLUSH, __pa(p), 0);
->> +       pvalidate((unsigned long) p, RMP_PG_SIZE_4K, true);
->> +
->> +       /* Ensure that the host change is visible */
->> +       smp_mb();
->> +
->> +       if (!memcmp(p, s1, sizeof(s1)) || memcmp(p2, s2, sizeof(s2)))
->> +               return -EFAULT;
->> +
->> +       return 0;
->> +}
->>   static unsigned long __set_pages_state(struct snp_psc_desc *data, unsigned long vaddr,
->>                                         unsigned long vaddr_end, int op)
->>   {
->> @@ -404,6 +489,13 @@ static unsigned long __set_pages_state(struct snp_psc_desc *data, unsigned long
->>          if (!ghcb || vmgexit_psc(ghcb, data))
->>                  sev_es_terminate(SEV_TERM_SET_LINUX, GHCB_TERM_PSC);
->>
->> +       if (atomic_read(&sev_tio_devices_num)) {
->> +               int ret = ghcb_flush_iommu_tlb(ghcb);
->> +
->> +               if (ret)
->> +                       sev_es_terminate(SEV_TERM_SET_LINUX, GHCB_TERM_IOMMUTLB_FLUSH);
->> +       }
->> +
->>          __sev_put_ghcb(&state);
->>
->>          local_irq_restore(flags);
->> --
->> 2.55.0
->>
->>
-> 
-> 
+This isn't really true, is it? You check ...
 
--- 
-Alexey
+> @@ -1805,7 +1825,32 @@ static void __init ns16550_parse_port_config(
+>      if ( uart->io_base == 0 )
+>          PARSE_ERR("I/O base address must be specified.");
+>      if ( !check_existence(uart) )
+> -        PARSE_ERR("16550-compatible serial UART not present");
+> +    {
+> +        bool present = false;
+> +
+> +#ifdef NS16550_PCI
+> +        /*
+> +         * Some systems, EC2 bare metal among them, have no legacy UART and
+> +         * carry their only serial port on PCI. Look for one before giving up,
+> +         * unless the command line named a base or already asked for a scan.
+> +         * com1 only: for com2 the scan skips the first port it finds, so it
+> +         * can never match a single-port device.
+> +         */
+> +        if ( uart == ns16550_com && !uart->io_base_set && !uart->pci_scanned )
 
+... ->io_base_set here, which can only be true when a command line option
+provided the base address. A cmdline option like "com1=115200" doesn't,
+and instead the value set by (on x86) __start_xen() is used. If that isn't
+the correct address to use, check_existence() is (hopefully) going to fail.
+(For example, I have a system where firmware mixes up COM1 and COM2
+settings, which you may only notice after having played with things for a
+while. In such a case it doesn't help if unexpected PCI bus scanning gets
+in the way.)
+
+Jan
 
