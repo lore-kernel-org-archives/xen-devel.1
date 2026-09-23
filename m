@@ -4,44 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 04AD9C9830B
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 15:40:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430938.1653349 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A239EC9830B
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 15:43:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430947.1653360 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9P57-0004tI-2d; Wed, 23 Sep 2026 15:40:25 +0000
+	id 1x9P7n-0005PZ-Gk; Wed, 23 Sep 2026 15:43:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430938.1653349; Wed, 23 Sep 2026 15:40:25 +0000
+Received: by outflank-mailman (output) from mailman id 1430947.1653360; Wed, 23 Sep 2026 15:43:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9P56-0004tB-Vr; Wed, 23 Sep 2026 15:40:24 +0000
-Received: by outflank-mailman (input) for mailman id 1430938;
- Wed, 23 Sep 2026 15:40:23 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <benjamin@edera.dev>) id 1x9P55-0004t1-Qp
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:40:23 +0000
+	id 1x9P7n-0005PS-D3; Wed, 23 Sep 2026 15:43:11 +0000
+Received: by outflank-mailman (input) for mailman id 1430947;
+ Wed, 23 Sep 2026 15:43:10 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1x9P7m-0005PM-Cs
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:43:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9P55-006pms-4I
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 17:40:23 +0200
-Received: from [10.42.69.12] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <benjamin@edera.dev>)
- id 6ab3f2e2-8faa-0a2a0a5109dd-0a2a450ced3e-14
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 17:40:23 +0200
-Received: from [74.125.224.140] (helo=mail-yx2-f12.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <benjamin@edera.dev>)
- id 6ab3f2e5-f479-0a2a450c0019-4a7de08ccb6f-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 17:40:22 +0200
-Received: by mail-yx2-f12.google.com with SMTP id
- 00721157ae682-85d440939f0so12350497b3.2
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 08:40:22 -0700 (PDT)
-Received: from StolidWingnut.axolotl-tone.ts.net ([174.80.170.224])
- by smtp.gmail.com with ESMTPSA id
- 00721157ae682-8a465ec41acsm11211697b3.26.2026.09.23.08.40.19
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 08:40:20 -0700 (PDT)
+ id 1x9P7l-002KbI-Px
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 17:43:09 +0200
+Received: from [10.42.69.3] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0ceef50f800072c4@swg.vates.tech>)
+ id 6ab3f38a-bab6-0a2a0a5309dd-0a2a4503ac02-16
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 17:43:09 +0200
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0ceef50f800072c4@swg.vates.tech>)
+ id 6ab3f38d-fae8-0a2a45030019-b9ff1c23b3c3-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 17:43:09 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a0ceef50f800072c4.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Wed, 23 Sep 2026 15:43:05 +0000
+Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 96D3F80B5E;
+ Wed, 23 Sep 2026 17:43:04 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,138 +56,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=edera.io header.i="@edera.io" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=edera.io; s=google; t=1790178021; x=1790782821; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=zRSBigR+fNtVFjx5bu3waR1j8HxydhkAAJV7I+0HM74=;
-        b=ryozL9GSP7GQnj9DSEnHbw5lP8HgUd3bayjhyrtRp1VTvREKe4Q/ko/i0QkcU7jYkb
-         31pJ7eSFNCMrEuEqqqDr3CdhHsIFO6o0bLIgvW2C7fWhnBk6LVtvCEzMtQUF71vEI81l
-         CajmXv+WdeC6JmCAIhb5N3M7Hu6yoJiNdqF26coeVR86+VMXK3EsnlNnmABxc1/JkpAh
-         a13ye66ckGi4tBjdMekQ2jMiQ+rMm4FKBCbxALMi+/8nDDG7inL+Ueo0ubEpuftnuLth
-         9ecdtxx/54lcv96uR6PzPlsNWFyKtQGlH6TAxrm3LILuwWRGE3BTphbNHFttXOsgcQQr
-         Jx9g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790178021; x=1790782821;
-        h=content-transfer-encoding:mime-version:references:in-reply-to
-         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=zRSBigR+fNtVFjx5bu3waR1j8HxydhkAAJV7I+0HM74=;
-        b=iT5EejCvIGF0TT3keMnV3eqRtY0UVUoux8/4V8glQrgHZVN9xo782oeDUdJgWJXrsR
-         WPkVIMMC+l3ieLnXl4Xi0bQ8AckLbQxnZmjYta6wP7G6Vv5nmupJCJdfEfx+103+qZJC
-         Vvr/ya6aX+aZ3tUNT4c91M0DvVwlfsOmznv0zijg981/Ta/nfsdYSdId0fMFwURzWnMn
-         NxavEqV44ELEbE/owbxrNM8zS/uuGb4Qi3VIX45Xg5cBY4tbflp5APXwHoLcOI63jMYM
-         CDIgxLPsgkYtSDttsJbXv0iuqT9g6zkrdZKVPsayHNaeW3q68XE34hk3Hj5S/zCSYNGf
-         Ys0w==
-X-Gm-Message-State: AFuF++mrEVzE5ZczdRSsz5Ggt/zxyhNU48kvCHS3BQOtCTUGDLBtcV+t
-	CpWMUoVc5pCexDJkeSQnEvy7SI36paSoncmRu/W88/LGGq/34XvX/rJqqTscr7HLpQ8tYI2YBF6
-	Po9uFDzg=
-X-Gm-Gg: AYBFou0NsJo8qPFSVoIY1F0d5PhlsSHYr0J0jjSIPKhWpo/bt6phkWOADxggTzctWnl
-	uyQ05Lg/aL28IXqYI7JSzrE8RdwG57U2PAXvBl3otVJNWBwWD9CsaPizHNI2Yr/fQgqRxkLBtkO
-	72yG3Kxzy7R87ZFJd+o91SZdCnxBrJbVs7PpEieyAQAuUFf2QmbA+CulzHjTKbFn5FS4vttIQrS
-	JR1hyZqr6+BVza8lGj+R7hY6ffMmtxhQdsOk7iYkVBAoiAbeR+kFsaxBsp6FDjBVEtpGIdv7zdf
-	qGChtgO0DXYUoe65fZ0Sql9iaWXbthO1WkMDmQXmchmJ7HqBdscmgCN9UXWvIHFB8wziubP6k6b
-	yweiNHNj8jMbvRDhG7GRX0glKeQgg+r6dbH2WYdu3YuGU1lsx0RvY6JhS1DjjBUE84A46NBwck9
-	cUagoW/7zy6/7A01q4yAn06YKZafk5XjfhyE9Xb7ry4fY597itYSH0KT4cyYHga8/9C1/ftM875
-	Dq9fHFJl86PdFnReQm44NpLhiGFZuFZGiYuh++DGdlR/xqu6FXqTWMwom1vzEV8IdGvKll0z963
-	Ve479WemF4RCvcrXKg==
-X-Received: by 2002:a05:690c:c59c:b0:873:5bb2:6bff with SMTP id 00721157ae682-8a45b09e620mr17371697b3.41.1790178021171;
-        Wed, 23 Sep 2026 08:40:21 -0700 (PDT)
-From: Benjamin Leggett <benjamin@edera.io>
-To: xen-devel@lists.xenproject.org
-Cc: Benjamin Leggett <benjamin@edera.io>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] ns16550: add the Amazon EC2 PCI serial device
-Date: Wed, 23 Sep 2026 11:39:33 -0400
-Message-ID: <20260923153933.2024896-1-benjamin@edera.io>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20260922184316.324817-1-benjamin@edera.io>
-References: <20260922184316.324817-1-benjamin@edera.io>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=NJ1Ayj43GSeaYDEZryv5OI9GcmzJI4BFh1MJ+3u6/tI=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=nkvXLNnQ9JhKQYNKecS48hb/Y7egWLGE1l8rgEU7NsS+AUBDKcICIx0u3yxYP2+5/bTAkpVIw
+ 1HvTV2H3pld5A+hFIXJo46FJctlWIHKnrQMOYe72pz/QnLDkbxiG/hZvINYB2h+6GkgaO7pBsFq
+ AzgFTYuRmuM/FLenZWVG6/fz/36vYSxd/3FQk11VPimapY+BLltHXqMBiMpor9ScKWrUEzhAF22
+ CwK2+FxGpOF3959g00gara5XZFs7srmblD5Ycbb5Gm4NcIp1m969gceuSuRfI7W/WFXnQ+8syXt
+ 11Nxgd7/aI8dxKL/oSqR2OJ0PN3FUZD8JyCyhcENAv9Q==
+X-Zone-Loop: 778e586d7f063c241a30b0af42b1bd94fe2ea116dee4
+x-campaign-type: default
+x-transaction-id: b02bd0b7-68a8-47da-ad3c-759b09dfb7fc
+x-swg-uid: 01-71e76db3-6b38-42c9-9fe7-72d52ba7331a
+X-Mailer: Sweego
+Message-ID:
+ <1790178185.8631fc262581453bbf619ec5b2062170.1a0ceef50f800072c4@vates.tech>
+x-swg-bid: 1790178185.8631fc262581453bbf619ec5b2062170.1a0ceef50f800072c4
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1790178023-022C0A5B-E2C9AA9A/0/0
-X-purgate-type: clean
-X-purgate-size: 2288
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v2 34/39] xen/riscv: restore register state in the new
+ IMSIC VS-file
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org, 
+ Romain Caritey <Romain.Caritey@microchip.com>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+ Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <c7000473af04e618a340270398fb85fffb46ca05.1787838835.git.oleksii.kurochko@gmail.com>
+References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
+ <c7000473af04e618a340270398fb85fffb46ca05.1787838835.git.oleksii.kurochko@gmail.com>
+Date: Wed, 23 Sep 2026 17:42:57 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790178179; l=3736;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=BzEfIFlrYQztHMGGHfEsDcs/jwvhxnFVfJJ5vToB52o=;
+ b=m8+Mb1EfT83cdswF9PF2zoCMAGLeo+La8Nz9dDNRv9xu5eI7dabgWLBHLgPHMvr4+P0jCNzoF
+ MaMvQ7F1RexAPthK4mM4mh7cWa++oZXZFNGQ2AnKU8rtfk/tq12s5ZS
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1790178184823
+X-purgate-ID: tlsNG-33051d/1790178189-74A894E9-24E0A020/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 3736
 
-Amazon EC2 bare metal instances have no UART at the legacy I/O port
-0x3f8. Their only serial port is a 16550-compatible PCI device (vendor
-0x1d0f, device 0x8250) with its registers in the MMIO space of BAR 0.
+> At this point, all interrupt producers have been moved to the new
+> IMSIC VS-file so we move register state from the old IMSIC VS/SW-file
+> to the new IMSIC VS-file.
+> 
+> As new IMSIC VS-file is ready to be used update vCPU's hstatus with
+> new VGEIN.
+> 
+> As the whole migration procedure is finished add some extra explanatory
+> comments.
+> 
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>
+> diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
+> index 3cba58e0c1..d7b137a1f5 100644
+> --- a/xen/arch/riscv/imsic.c
+> +++ b/xen/arch/riscv/imsic.c
+> @@ -112,6 +112,12 @@ do {                            \
+>      r_;                             \
+>  })
+>  
+> +#define imsic_vs_csr_set(c, v)      \
+> +do {                                \
+> +    csr_write(CSR_VSISELECT, (c));  \
+> +    csr_set(CSR_VSIREG, (v));       \
+> +} while ( 0 )
+> +
+>  #define imsic_vs_csr_write(c, v)    \
+>  do {                                \
+>      csr_write(CSR_VSISELECT, (c));  \
+> @@ -185,6 +191,19 @@ static void imsic_eix_write(unsigned int ireg, unsigned long val)
+>      }
+>  }
+>  
+> +static void imsic_eix_set(unsigned int ireg, unsigned long val)
+> +{
+> +    switch ( ireg )
+> +    {
+> +    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIP0,
+> +                        imsic_vs_csr_set, val)
+> +    imsic_switchcase_64(imsic_switchcase_break, IMSIC_EIE0,
+> +                        imsic_vs_csr_set, val)
+> +    default:
+> +        ASSERT_UNREACHABLE();
+> +    }
+> +}
+> +
+>  unsigned int vcpu_guest_file_id(const struct vcpu *v)
+>  {
+>      return ACCESS_ONCE(v->arch.vimsic_state->guest_file_id);
+> @@ -630,13 +649,13 @@ static void cf_check imsic_vsfile_local_read_clear(void *data)
+>      old_vsiselect = csr_read(CSR_VSISELECT);
+>      old_hstatus = csr_read(CSR_HSTATUS);
+>      new_hstatus = old_hstatus & ~HSTATUS_VGEIN;
+> -    new_hstatus |= ((unsigned long)idata->hgei) << HSTATUS_VGEIN_SHIFT;
+> +    new_hstatus |= MASK_INSR(idata->hgei, HSTATUS_VGEIN);
 
-pci_uart_config() uses the default parameters for a device that is not
-in uart_config[], and those only accept an I/O BAR, so "com1=...,pci"
-cannot find this device. Add it, with the same layout that Linux uses
-(commit 3bfd1300abfe ("serial: 8250_pci: Add Amazon PCI serial device
-ID")): one port at the start of BAR 0, 1-byte registers, and the
-default 1.8432MHz clock.
 
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Benjamin Leggett <benjamin@edera.io>
----
- xen/drivers/char/ns16550.c | 14 ++++++++++++++
- xen/include/xen/pci_ids.h  |  2 ++
- 2 files changed, 16 insertions(+)
+>      csr_write(CSR_HSTATUS, new_hstatus);
+>  
+>      /*
+> -     * There is no need to use atomic functions version to store
+> -     * values in MRIF because imsic_vsfile_read_clear() is always called
+> -     * with pointer to temporary MRIF on stack.
+> +     * No atomic accessors are needed to store the values into the MRIF here,
+> +     * as imsic_vsfile_read_clear() is always called with a pointer to a
+> +     * temporary MRIF on the stack.
+>       */
 
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index 120ac09d23..593d208483 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -98,6 +98,7 @@ struct ns16550_config {
-         param_intel_lpss,
-         param_wch_ch382,
-         param_asix,
-+        param_amazon,
-     } param;
- };
- 
-@@ -909,6 +910,13 @@ static const struct ns16550_config_param __initconst uart_param[] = {
-         .bar0 = true,
-         .max_ports = 1,
-     },
-+    [param_amazon] = {
-+        .reg_width = 1,
-+        .lsr_mask = UART_LSR_THRE,
-+        .bar0 = true,
-+        .mmio = true,
-+        .max_ports = 1,
-+    },
- };
- 
- static const struct ns16550_config __initconst uart_config[] =
-@@ -1255,6 +1263,12 @@ static const struct ns16550_config __initconst uart_config[] =
-         .dev_id = 0x9910,
-         .param = param_asix
-     },
-+    /* Amazon EC2 bare metal UART */
-+    {
-+        .vendor_id = PCI_VENDOR_ID_AMAZON,
-+        .dev_id = 0x8250,
-+        .param = param_amazon
-+    },
- };
- 
- static int __init
-diff --git a/xen/include/xen/pci_ids.h b/xen/include/xen/pci_ids.h
-index fd424ef55d..a17c88dcf7 100644
---- a/xen/include/xen/pci_ids.h
-+++ b/xen/include/xen/pci_ids.h
-@@ -17,6 +17,8 @@
- 
- #define PCI_VENDOR_ID_WCHIC              0x1c00
- 
-+#define PCI_VENDOR_ID_AMAZON             0x1d0f
-+
- #define PCI_VENDOR_ID_INTEL              0x8086
- 
- #endif /* XEN_PCI_IDS_H */
+
+>  
+>      mrif->eidelivery = imsic_vs_csr_swap(IMSIC_EIDELIVERY, 0);
+> @@ -972,6 +991,49 @@ int __init vimsic_make_domu_dt_node(struct kernel_info *kinfo,
+>      return fdt_end_node(fdt);
+>  }
+>  
+> +static void cf_check imsic_vsfile_local_update(void *data)
+> +{
+> +    unsigned int i;
+> +    struct imsic_mrif_eix *eix;
+> +    const struct imsic_vsfile_data *idata = data;
+> +    struct imsic_mrif *mrif = idata->mrif;
+> +    unsigned long new_hstatus, old_hstatus, old_vsiselect;
+> +
+> +    /* We can only update if we have a HW IMSIC context */
+> +    if ( !idata->hgei )
+> +        return;
+> +
+> +    /*
+> +     * No atomic accessors are needed to read the values out of the MRIF here,
+> +     * as this is always called with a pointer to a temporary MRIF on the
+> +     * stack.
+> +     */
+idata->mrif may point anywhere, so what the comment really states is a
+requirement on callers. It also only makes full sense next to KVM, where
+a shared SW-file MRIF is accessed atomically; Xen has neither of those
+(yet). Either explicitely explain that callers must declare mrif on
+their stack or move the comment directly in call sites.
+
 -- 
-2.55.0
-
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
