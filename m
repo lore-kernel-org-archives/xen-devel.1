@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CB757C9830B
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:21:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430527.1653053 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C1BFC9830B
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:21:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430541.1653061 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MuJ-0001bG-20; Wed, 23 Sep 2026 13:21:07 +0000
+	id 1x9MuS-00028d-90; Wed, 23 Sep 2026 13:21:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430527.1653053; Wed, 23 Sep 2026 13:21:07 +0000
+Received: by outflank-mailman (output) from mailman id 1430541.1653061; Wed, 23 Sep 2026 13:21:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MuI-0001b4-UQ; Wed, 23 Sep 2026 13:21:06 +0000
-Received: by outflank-mailman (input) for mailman id 1430527;
- Wed, 23 Sep 2026 13:21:05 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x9MuS-00028U-5k; Wed, 23 Sep 2026 13:21:16 +0000
+Received: by outflank-mailman (input) for mailman id 1430541;
+ Wed, 23 Sep 2026 13:21:15 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1x9MuH-0001UR-Bu
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:21:05 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1x9MuR-00026E-IH
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:21:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9MuG-007wu5-Os
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:21:04 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1x9MuQ-006PU6-VW
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:21:14 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d234-2eae-0a2a0a5409dd-0a2a4505b64c-30
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:04 +0200
+ id 6ab3d241-bab6-0a2a0a5309dd-0a2a4506e044-44
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:14 +0200
 Received: from [74.125.229.12] (helo=mail-dy2-f12.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d23f-4cb1-0a2a45050019-4a7de50ca0b7-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:04 +0200
+ id 6ab3d249-195a-0a2a45060019-4a7de50cd6a8-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:21:14 +0200
 Received: by mail-dy2-f12.google.com with SMTP id
- 5a478bee46e88-33bb1a50f6fso374830eec.2
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:21:04 -0700 (PDT)
+ 5a478bee46e88-32dbbe82e13so794109eec.0
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:21:14 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.20.53
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.21.03
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:20:59 -0700 (PDT)
+ Wed, 23 Sep 2026 06:21:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +55,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790169662; x=1790774462; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790169673; x=1790774473; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=qin3vLUrrbcXuVdau3Ouu4JIt8wWynB3TLlDqfsVk5s=;
-        b=ULn8iY4QT/hiFBbaAUdsAjADi5QXDDYONdteKlAqfgscOaTFQGCk4Wd64heJ+k1GEJ
-         91uYRIHGKJVqJs+QNrMJm+KMhynYB+7Bxi/HoNJsfcq0scWTv5x6E6FIukRMgHmqQ5fp
-         DTyVgyYyXxmtz3YPSp8oi5uvvCXYNLLLTBp/rGe+cbRnPIr/gvmB8RSZ573dUSkjWgvh
-         8rrtf0VxGmlZANGGxBaS5g4R0dc4JtC5HR+7axfLcMsjL+nV6oFJ1TZyNOBhgcLFDfR4
-         2TlKmzu9de0Ev+dWjuVRIF1PvhqpzIIqucF0+4OErtYOmn3dLEyB5DnETZxZYz9Mvac3
-         L4fA==
+        bh=aW7Q/4+ozQSDE0PZQ7E9tHZoVUU6eb45JG6HfJcLS94=;
+        b=XQ5zYR1YF4Mch1mAi3R+9eR4DVKvZs9BsBo3ic79SdjEUi15Zb9pxtffber1XrPIyo
+         xfJtY9DowFJYrh/hagxcOwdnLYIOdwvq7YL4/PTrfuQFd2I1xnw/G8GwDM5B+H4yFBMh
+         QuZFq5GoAHf2Ic6/fqrW2BeKvOjrM5Yor4L6lIfRr5l5UQOZC2EWLqu8sDkw8rMv67zJ
+         cRtilbTs0MEks5LruC1pruDzgyVoXkIKRyRhhr60cyD4KNA9g4COtcKUx6ExA18EFKUg
+         oHPIiWNMa7zqjDgfOE7Wt5diovM0pUFe33B6U7fbzuBII85SV68jOi9ruNqcyLKdMD9P
+         J4CA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790169662; x=1790774462;
+        d=1e100.net; s=20260707; t=1790169673; x=1790774473;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=qin3vLUrrbcXuVdau3Ouu4JIt8wWynB3TLlDqfsVk5s=;
-        b=Qkh74r8FIWTK2lej4RIwZbKi6bLgjJYxxsv1qjRys+T+/6pwmSJRbc628SXrxFukAy
-         jQl99/8HmJufsb8xfgdIwRdJWohXfyvk5qsODOE1rw5egpFxqKvWCXHQbBmByX33aq1Y
-         z9QVznabTacA9xD+pIMKrPxnfMBgAkd254LjKuAIEcUzVOiSdxFIMfT1tLspNm+KLj28
-         hvosvAdB+5siE+S+qwq41oZmzBMVZfLrKuHUXkrJFGQ/cj0m8F3zF//vQNu9Jg+HOefE
-         n+snEUNyOBlZsxvVdRVQHxIXa0GXvHqYGBQZcsn2astaE3J8h53HFmDxfnTyHEUN+Bhh
-         bzVA==
-X-Forwarded-Encrypted: i=1; AKwUvBzd0Oj4K9R9xH6K4T7RDFRK0LQh52iImJCI6YM+EO8PD8FvAdq9N2sRKecY34R5IgD90gKWO9rxsac=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kRDMlJwCoaV/qJk1k3RX5ezl7dNGdFNJOpEcn+Gnx9ubJIpkPk
-	Z8YKaB8Tm9Yy9R+fhYZ6rNfQfe0HFNtRrckicgU8yN/nHXFgCbl2ZTUD
-X-Gm-Gg: AYBFou0Pgqhxlm5Md4PxONzYRf/djdf+ODF93U9EVjCIzrgDsqkZ6DXCRLIsQKZMjL3
-	QkdrSY1QWnWp/lQY7hYEdbkJYoaYY+MHu7zxFlPtQ/29heyBDwNaaWTO4ruBj6COUoFLxoH8tlW
-	52RhzWp2qDxfl/eYRnQI+POpxtwSFGAqIF7/SDNkImBf4et1MNt7LkOzMSfqqtQnbLYyiVRud4U
-	GfRlMlZGZJZ0IoeeeG/pxTqnxCbZS4JEBB9vFzvPG5Cf0T4vDiDC6n61zzTUE8atZop7+7SfkdK
-	tvGjIaAb3qrNX6RoAA/fl59v5MHX2poFA6khlHuSSIUokEAUE9QfAxYuweUVT3Cf4W9IWjDMJSZ
-	UmIFGS3+POQPeOsxfsSVdKOQh0FdwKIa2IsxrlfJPmZD43ErW1HrjaYorHhwHqofzo9keHA9dm2
-	bLgfGteoUgHTK1NctTbAylK2tvmpPpZGqEhUle3K20/d47clji1ocs+j6EN4nFWOB9MO9/C7ko4
-	CUN9S8g/KHY06ZOKj2ouycVGkcQuvh8eT34fxXEpw==
-X-Received: by 2002:a05:7300:a224:b0:33c:141b:73a5 with SMTP id 5a478bee46e88-33e8e1afe12mr2620027eec.41.1790169661766;
-        Wed, 23 Sep 2026 06:21:01 -0700 (PDT)
+        bh=aW7Q/4+ozQSDE0PZQ7E9tHZoVUU6eb45JG6HfJcLS94=;
+        b=aVkPdUN2DNlO7uhHT5vA38k/Ls7Cp/Ga01dchXCddgtX5FWJyJSatJvoolTO5qtPl4
+         FvK0vHM59k27vhfXy+TmkEnKKo5tXXIy9WtOM3AKw/DyMGm+W5mk6u7sD8oT866bixOu
+         8xTlHT6ghusKB5nTCbc17aJ84E2ny2iWJecdzGk5c9yLmTXcHmAcRbqDRVldqI9iGxqH
+         ErgD/Phl93sIHD2cJKSIs9kmUJIlWjvAoKS5MHlyr/7X1ZselXOy/kJeYxqNMw2nMHp5
+         9qfq1u1eaNDZGtGyp8tMLCo+IiFn++YQduJRTYalBcug/LGqogr/gR89FKEj9qbiA1Hr
+         flPA==
+X-Forwarded-Encrypted: i=1; AKwUvBxmRP/SNvWn/aLboIXyQ0C3Blb5LMpBg3c8M4vuUYCGtcYhDw2RMxR7CjK9CwyYR42JgGHCejNCwCk=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kbDGgJXlW1xjDD9IjulTBONutAk3XSOVrfemKmyDsRh1J+hoJo
+	B2gTPhlIjKFAanWGrRg8eHh9tcTjxlSNN1iZmH0L/CRm1z1A9A6EmqyQ
+X-Gm-Gg: AYBFou3bCCOGJaNDbtu5QjrSE3+TFZtiHa9QlktARLCSSR/P4EOu/mvhzaOcqdvRol9
+	GFG/5ClxSjJuZqqSKhIpxC+0vYqS61HyPdMDKey+C6MeyPOlv2K50LFQHXMOy3J2XQOKy1V7JLp
+	bS824m5SwzF0jPEOKKFzfkj92MSnc16YeqaYhOaZQY3qqyJBQAlxNiwis16GrQZT3kWHavrThYv
+	1JzbosUhUwpWp9VhkZGnUneNppbhDuLe0BDVaQKX7f8HZyJrNCOgpbwI3DiS872eVycZ+JHYA+p
+	b+uSLEOeLLogvjhZm0MgxDhgIiQviNvXeLopgC8/AFY3tZxib9pwC5mRFsPM6+V0jy9CyIFxMVg
+	qIYBxV78jDkEDPABjDyJAbchzzazaYX+NoemKAawHvEdG6VDo95z20XBnUeJFMwOL9NKUr2sfEH
+	pczqMZnORRr6i6UmBNSbkxIJWomZgo1sJ/tqm83S5+YC6yt74PLfD6Btk4+8Ladv1D7Uffxx01K
+	6kxa2cAm8eraYklolue9oloKHMYDwEwD2f9EWFcUJAKIRFDKFZJJA==
+X-Received: by 2002:a05:7300:cca4:b0:33b:fc68:9790 with SMTP id 5a478bee46e88-33e8d2ebd99mr2512374eec.21.1790169672443;
+        Wed, 23 Sep 2026 06:21:12 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>,
@@ -134,123 +134,153 @@ Cc: Cornelia Huck <cohuck@redhat.com>,
 	qemu-arm@nongnu.org,
 	qemu-s390x@nongnu.org,
 	Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 024/114] target/riscv: uniquify TCG crc32, crc32c, and wfi helper names
-Date: Wed, 23 Sep 2026 21:14:58 +0800
-Message-ID: <20260923131635.1894-25-luoyonggang@gmail.com>
+Subject: [PATCH v3 025/114] hw/riscv: gate boards with target_is_base_riscv
+Date: Wed, 23 Sep 2026 21:14:59 +0800
+Message-ID: <20260923131635.1894-26-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1790169664-716AD2A1-0CE5E16F/0/0
+X-purgate-ID: tlsNG-16d1c6/1790169674-F7ECC77B-C89AFAC8/0/0
 X-purgate-type: clean
-X-purgate-size: 4810
+X-purgate-size: 6241
 
-- ARM already exports helper_crc32, helper_crc32c, helper_wfi, and the
-  matching helper_info_* objects. RISC-V used the same DEF_HELPER names,
-  which collide in a combined qemu-system link.
-- Rename the RISC-V helpers to riscv_crc32, riscv_crc32c, and riscv_wfi
-  so the generated C symbols are unique without meson -D prefixes.
-
-Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+- Set TypeInfo.is_available to target_is_base_riscv on RISC-V machines
+  so a combined qemu-system lists them only for riscv32/riscv64.
 ---
- target/riscv/helper.h                              | 6 +++---
- target/riscv/tcg/bitmanip_helper.c                 | 4 ++--
- target/riscv/tcg/insn_trans/trans_privileged.c.inc | 2 +-
- target/riscv/tcg/insn_trans/trans_xlrbr.c.inc      | 4 ++--
- target/riscv/tcg/op_helper.c                       | 2 +-
- 5 files changed, 9 insertions(+), 9 deletions(-)
+ hw/riscv/k230.c            | 1 +
+ hw/riscv/microchip_pfsoc.c | 1 +
+ hw/riscv/opentitan.c       | 1 +
+ hw/riscv/shakti_c.c        | 1 +
+ hw/riscv/sifive_e.c        | 1 +
+ hw/riscv/sifive_u.c        | 1 +
+ hw/riscv/spike.c           | 1 +
+ hw/riscv/tt_atlantis.c     | 1 +
+ hw/riscv/virt.c            | 1 +
+ hw/riscv/xiangshan_kmh.c   | 1 +
+ 10 files changed, 10 insertions(+)
 
-diff --git a/target/riscv/helper.h b/target/riscv/helper.h
-index 9458a5152be..ef629b3c650 100644
---- a/target/riscv/helper.h
-+++ b/target/riscv/helper.h
-@@ -83,8 +83,8 @@ DEF_HELPER_FLAGS_1(unzip, TCG_CALL_NO_RWG_SE, tl, tl)
- DEF_HELPER_FLAGS_1(zip, TCG_CALL_NO_RWG_SE, tl, tl)
- DEF_HELPER_FLAGS_2(xperm4, TCG_CALL_NO_RWG_SE, tl, tl, tl)
- DEF_HELPER_FLAGS_2(xperm8, TCG_CALL_NO_RWG_SE, tl, tl, tl)
--DEF_HELPER_FLAGS_2(crc32, TCG_CALL_NO_RWG_SE, tl, tl, tl)
--DEF_HELPER_FLAGS_2(crc32c, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-+DEF_HELPER_FLAGS_2(riscv_crc32, TCG_CALL_NO_RWG_SE, tl, tl, tl)
-+DEF_HELPER_FLAGS_2(riscv_crc32c, TCG_CALL_NO_RWG_SE, tl, tl, tl)
- 
- /* Floating Point - Half Precision */
- DEF_HELPER_FLAGS_3(fadd_h, TCG_CALL_NO_RWG, i64, env, i64, i64)
-@@ -134,7 +134,7 @@ DEF_HELPER_1(sret, tl, env)
- DEF_HELPER_1(mret, tl, env)
- DEF_HELPER_1(mnret, tl, env)
- DEF_HELPER_1(ctr_clear, void, env)
--DEF_HELPER_1(wfi, void, env)
-+DEF_HELPER_1(riscv_wfi, void, env)
- DEF_HELPER_1(wrs_nto, void, env)
- DEF_HELPER_1(tlb_flush, void, env)
- DEF_HELPER_1(tlb_flush_all, void, env)
-diff --git a/target/riscv/tcg/bitmanip_helper.c b/target/riscv/tcg/bitmanip_helper.c
-index d8d94bca7ba..5af3efe194d 100644
---- a/target/riscv/tcg/bitmanip_helper.c
-+++ b/target/riscv/tcg/bitmanip_helper.c
-@@ -117,7 +117,7 @@ target_ulong HELPER(xperm8)(target_ulong rs1, target_ulong rs2)
-     return do_xperm(rs1, rs2, 3);
- }
- 
--target_ulong HELPER(crc32)(target_ulong rs1, target_ulong sz)
-+target_ulong HELPER(riscv_crc32)(target_ulong rs1, target_ulong sz)
- {
-     for (target_ulong i = 0; i < sz; i++) {
-         rs1 = crc32_table[rs1 & 0xFF] ^ (rs1 >> 8);
-@@ -126,7 +126,7 @@ target_ulong HELPER(crc32)(target_ulong rs1, target_ulong sz)
-     return rs1;
- }
- 
--target_ulong HELPER(crc32c)(target_ulong rs1, target_ulong sz)
-+target_ulong HELPER(riscv_crc32c)(target_ulong rs1, target_ulong sz)
- {
-     for (target_ulong i = 0; i < sz; i++) {
-         rs1 = crc32c_table[rs1 & 0xFF] ^ (rs1 >> 8);
-diff --git a/target/riscv/tcg/insn_trans/trans_privileged.c.inc b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-index a8eaccef67e..0df78e89745 100644
---- a/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_privileged.c.inc
-@@ -144,7 +144,7 @@ static bool trans_wfi(DisasContext *ctx, arg_wfi *a)
- #ifndef CONFIG_USER_ONLY
-     decode_save_opc(ctx, 0);
-     gen_update_pc(ctx, ctx->cur_insn_len);
--    gen_helper_wfi(tcg_env);
-+    gen_helper_riscv_wfi(tcg_env);
-     return true;
- #else
-     return false;
-diff --git a/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc b/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc
-index 01da2b6ce1d..795231f0839 100644
---- a/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc
-+++ b/target/riscv/tcg/insn_trans/trans_xlrbr.c.inc
-@@ -29,11 +29,11 @@ static bool gen_crc(DisasContext *ctx, arg_r2 *a,
- #define TRANS_CRC32(NAME, SIZE) \
-     static bool trans_crc32_##NAME(DisasContext *ctx, arg_r2 *a) \
-     { if (SIZE == 8) { REQUIRE_64BIT(ctx); }; \
--      return gen_crc(ctx, a, gen_helper_crc32, tcg_constant_tl(SIZE)); }
-+      return gen_crc(ctx, a, gen_helper_riscv_crc32, tcg_constant_tl(SIZE)); }
- #define TRANS_CRC32C(NAME, SIZE) \
-     static bool trans_crc32c_##NAME(DisasContext *ctx, arg_r2 *a) \
-     { if (SIZE == 8) { REQUIRE_64BIT(ctx); }; \
--      return gen_crc(ctx, a, gen_helper_crc32c, tcg_constant_tl(SIZE)); }
-+      return gen_crc(ctx, a, gen_helper_riscv_crc32c, tcg_constant_tl(SIZE)); }
- 
- TRANS_CRC32(b, 1);
- TRANS_CRC32(h, 2);
-diff --git a/target/riscv/tcg/op_helper.c b/target/riscv/tcg/op_helper.c
-index a00370a7973..4f4932614f1 100644
---- a/target/riscv/tcg/op_helper.c
-+++ b/target/riscv/tcg/op_helper.c
-@@ -591,7 +591,7 @@ void helper_ctr_clear(CPURISCVState *env)
-     riscv_ctr_clear(env);
- }
- 
--void helper_wfi(CPURISCVState *env)
-+void HELPER(riscv_wfi)(CPURISCVState *env)
- {
-     CPUState *cs = env_cpu(env);
-     bool rvs = riscv_has_ext(env, RVS);
+diff --git a/hw/riscv/k230.c b/hw/riscv/k230.c
+index 79715265da6..3890cb6357d 100644
+--- a/hw/riscv/k230.c
++++ b/hw/riscv/k230.c
+@@ -557,6 +557,7 @@ static void k230_machine_class_init(ObjectClass *oc, const void *data)
+ static const TypeInfo k230_machine_typeinfo = {
+     .name       = TYPE_RISCV_K230_MACHINE,
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = k230_machine_class_init,
+     .instance_init = k230_machine_instance_init,
+     .instance_size = sizeof(K230MachineState),
+diff --git a/hw/riscv/microchip_pfsoc.c b/hw/riscv/microchip_pfsoc.c
+index cc4b6bc3529..103c0d7f7ca 100644
+--- a/hw/riscv/microchip_pfsoc.c
++++ b/hw/riscv/microchip_pfsoc.c
+@@ -756,6 +756,7 @@ static void microchip_icicle_kit_machine_class_init(ObjectClass *oc,
+ static const TypeInfo microchip_icicle_kit_machine_typeinfo = {
+     .name       = MACHINE_TYPE_NAME("microchip-icicle-kit"),
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = microchip_icicle_kit_machine_class_init,
+     .instance_init = microchip_icicle_kit_machine_instance_init,
+     .instance_size = sizeof(MicrochipIcicleKitState),
+diff --git a/hw/riscv/opentitan.c b/hw/riscv/opentitan.c
+index 9e3db34eed9..db1fb3e3347 100644
+--- a/hw/riscv/opentitan.c
++++ b/hw/riscv/opentitan.c
+@@ -337,6 +337,7 @@ static const TypeInfo open_titan_types[] = {
+     }, {
+         .name           = TYPE_OPENTITAN_MACHINE,
+         .parent         = TYPE_MACHINE,
++        .is_available   = target_is_base_riscv,
+         .instance_size  = sizeof(OpenTitanState),
+         .class_init     = opentitan_machine_class_init,
+         .is_available   = target_is_riscv32,
+diff --git a/hw/riscv/shakti_c.c b/hw/riscv/shakti_c.c
+index 0f96258b764..e8ae770f7ca 100644
+--- a/hw/riscv/shakti_c.c
++++ b/hw/riscv/shakti_c.c
+@@ -95,6 +95,7 @@ static void shakti_c_machine_class_init(ObjectClass *klass, const void *data)
+ static const TypeInfo shakti_c_machine_type_info = {
+     .name = TYPE_RISCV_SHAKTI_MACHINE,
+     .parent = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = shakti_c_machine_class_init,
+     .instance_init = shakti_c_machine_instance_init,
+     .instance_size = sizeof(ShaktiCMachineState),
+diff --git a/hw/riscv/sifive_e.c b/hw/riscv/sifive_e.c
+index 1b6f9ab4fee..087d0c48e1e 100644
+--- a/hw/riscv/sifive_e.c
++++ b/hw/riscv/sifive_e.c
+@@ -165,6 +165,7 @@ static void sifive_e_machine_class_init(ObjectClass *oc, const void *data)
+ static const TypeInfo sifive_e_machine_typeinfo = {
+     .name       = MACHINE_TYPE_NAME("sifive_e"),
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = sifive_e_machine_class_init,
+     .instance_init = sifive_e_machine_instance_init,
+     .instance_size = sizeof(SiFiveEState),
+diff --git a/hw/riscv/sifive_u.c b/hw/riscv/sifive_u.c
+index 344f3d915d7..d5cc9255da6 100644
+--- a/hw/riscv/sifive_u.c
++++ b/hw/riscv/sifive_u.c
+@@ -679,6 +679,7 @@ static void sifive_u_machine_class_init(ObjectClass *oc, const void *data)
+ static const TypeInfo sifive_u_machine_typeinfo = {
+     .name       = MACHINE_TYPE_NAME("sifive_u"),
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = sifive_u_machine_class_init,
+     .instance_init = sifive_u_machine_instance_init,
+     .instance_size = sizeof(SiFiveUState),
+diff --git a/hw/riscv/spike.c b/hw/riscv/spike.c
+index 63cf77e1de3..4bb58ec6203 100644
+--- a/hw/riscv/spike.c
++++ b/hw/riscv/spike.c
+@@ -292,6 +292,7 @@ static void spike_machine_class_init(ObjectClass *oc, const void *data)
+ static const TypeInfo spike_machine_typeinfo = {
+     .name       = MACHINE_TYPE_NAME("spike"),
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = spike_machine_class_init,
+     .instance_init = spike_machine_instance_init,
+     .instance_size = sizeof(SpikeState),
+diff --git a/hw/riscv/tt_atlantis.c b/hw/riscv/tt_atlantis.c
+index 086e95bd2d1..6e7272d705c 100644
+--- a/hw/riscv/tt_atlantis.c
++++ b/hw/riscv/tt_atlantis.c
+@@ -699,6 +699,7 @@ static const TypeInfo tt_atlantis_types[] = {
+     }, {
+         .name       = MACHINE_TYPE_NAME("tt-atlantis"),
+         .parent     = TYPE_MACHINE,
++        .is_available = target_is_base_riscv,
+         .class_init = tt_atlantis_machine_class_init,
+         .instance_size = sizeof(TTAtlantisState),
+         .is_available = target_is_riscv64,
+diff --git a/hw/riscv/virt.c b/hw/riscv/virt.c
+index 0edf75fefc3..2240a516d85 100644
+--- a/hw/riscv/virt.c
++++ b/hw/riscv/virt.c
+@@ -1202,6 +1202,7 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+ static const TypeInfo virt_machine_typeinfo = {
+     .name       = TYPE_RISCV_VIRT_MACHINE,
+     .parent     = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .class_init = virt_machine_class_init,
+     .instance_init = virt_machine_instance_init,
+     .instance_finalize = virt_machine_instance_finalize,
+diff --git a/hw/riscv/xiangshan_kmh.c b/hw/riscv/xiangshan_kmh.c
+index 6bc669421fe..9578a11aee6 100644
+--- a/hw/riscv/xiangshan_kmh.c
++++ b/hw/riscv/xiangshan_kmh.c
+@@ -220,6 +220,7 @@ static void xiangshan_kmh_machine_class_init(ObjectClass *klass, const void *dat
+ static const TypeInfo xiangshan_kmh_machine_info = {
+     .name = TYPE_XIANGSHAN_KMH_MACHINE,
+     .parent = TYPE_MACHINE,
++    .is_available = target_is_base_riscv,
+     .instance_size = sizeof(XiangshanKmhState),
+     .class_init = xiangshan_kmh_machine_class_init,
+     .is_available = target_is_riscv64,
 -- 
 2.52.0.windows.1
 
