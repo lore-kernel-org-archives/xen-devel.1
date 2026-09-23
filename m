@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 978FDC98310
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:22:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430588.1653126 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE9B1C982FA
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:22:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430593.1653133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MvT-0005Jy-CZ; Wed, 23 Sep 2026 13:22:19 +0000
+	id 1x9Mvc-0005nM-HV; Wed, 23 Sep 2026 13:22:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430588.1653126; Wed, 23 Sep 2026 13:22:19 +0000
+Received: by outflank-mailman (output) from mailman id 1430593.1653133; Wed, 23 Sep 2026 13:22:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MvT-0005Jr-7H; Wed, 23 Sep 2026 13:22:19 +0000
-Received: by outflank-mailman (input) for mailman id 1430588;
- Wed, 23 Sep 2026 13:22:17 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1x9Mvc-0005n8-Ea; Wed, 23 Sep 2026 13:22:28 +0000
+Received: by outflank-mailman (input) for mailman id 1430593;
+ Wed, 23 Sep 2026 13:22:26 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1x9MvR-0005IZ-Lu
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:22:17 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1x9Mva-0005iw-9S
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:22:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9MvR-00BQAt-2k
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:22:17 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x9MvZ-007xGa-MP
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:22:25 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d27c-8faa-0a2a0a5109dd-0a2a450bb9a2-28
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:22:16 +0200
-Received: from [74.125.229.170] (helo=mail-dl2-f42.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ab3d281-2eae-0a2a0a5409dd-0a2a450785e4-34
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:22:25 +0200
+Received: from [74.125.229.12] (helo=mail-dy2-f12.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d287-b7e8-0a2a450b0019-4a7de5aac134-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:22:16 +0200
-Received: by mail-dl2-f42.google.com with SMTP id
- a92af1059eb24-144f47a9b57so964243c88.2
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:22:16 -0700 (PDT)
+ id 6ab3d290-b4ea-0a2a45070019-4a7de50cb5d6-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:22:25 +0200
+Received: by mail-dy2-f12.google.com with SMTP id
+ 5a478bee46e88-328664b7582so520147eec.3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:22:25 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.22.07
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.22.15
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:22:13 -0700 (PDT)
+ Wed, 23 Sep 2026 06:22:21 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +55,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790169735; x=1790774535; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790169743; x=1790774543; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=dE9e1D/hNDaJ+34nzjVxm6PaKrug7kV63zAG9/GlOBQ=;
-        b=U5Ab4cFRUnNhOcO1reKr8zZjobJoNBqEjSaQS84glgOJq/3izbZYN8jybIQpqT7AIX
-         cLPuU/o26UdAc+ZVCAeZnE8yQqHzem2WP2HFV94bZOwc90txY+hJ47q/iUmMR9BVSybu
-         M46W3LZQjFrCHWDN78rFyuW+gWXVFsNc5BS+uBrSa1lhHFfXgNaS4iJpx8U/A6v+Dct2
-         GXGd/+hA8K5ICshpcFMwU/EY63gfSBZIY6ZC7BFFzdKixFLJpFoVxRdz/wjWzCuU2AnI
-         2BH9KYoAgvUOh2hV0WRC/T3BnHoW9D0pvyGPMB2UUjNi2IGG7/qvY7LeVf2B/Ukpn6Fw
-         jhqw==
+        bh=gZLlHjgFKGd97ZAl0jDOPJ4J/L8M7/uJxBZfNAi1MwY=;
+        b=UiUFYu47rAMR77AAN/2reISqmaCnNrAV0ysTYQsQMyvxcL+RwwHpI3tYEYrO6aKMQq
+         7e6pJMpxdUWqeegRkbakRubPFypi+iWRnQG7WvNUy3+N5nx4qpwpcGiM6SkE0698YsGY
+         EEOB7CZs3IXEuYX5C75z3XIZ9xzjc3vE9v5dcB+AdNMDxVhTSurFjyQtRrpeYXtA4E3d
+         X4WuGFH5zij5hTfhrgLCecvkUBoAcT217q+wgUwPSy6ia5XrrItOckGGWzoVq1qVXokC
+         CB49un/oDr/9WNzmi4i0s3iDg+d64j08cZGuiHAfdaLuhMHIuoaEwiJakvT2Wymv3n6v
+         z1wg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790169735; x=1790774535;
+        d=1e100.net; s=20260707; t=1790169743; x=1790774543;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=dE9e1D/hNDaJ+34nzjVxm6PaKrug7kV63zAG9/GlOBQ=;
-        b=ulWZp69V3nyPZpvYseHmKw/eRagrg9mBw6XD4MVnY1HV7ScYPWIK85XHoWzV/Fhtsr
-         HzL2qC4e8ajgXB0RLOzUdU/WA5ay6nvvjpF5fjEVPI1DqicXrC7JNd/Ndd7Q/iizUTu4
-         uC9h1eWFH8FivyaeutllSV7Ot+wBvBLBb2oOIAMAolrk81N9W2yp0SoVBLQyBOfNgSnL
-         /uOZioVz8v+f/MLvMGAJ1mMnDR4yZ7SDoAG6KVAjMIv2MkjKnhgJBehC784HIa7FfFZa
-         stI0Wlzklrf5RCu/3RCMVmJIPw/srhh8W/MeRniOrj6w3WiBwOZVoFOL0McAr738M36f
-         ogQw==
-X-Forwarded-Encrypted: i=1; AKwUvByNCUtFUGDMGoh6MZgEGxsIjGhV8Mf1PrLBjR4Gn8XJ7J6eS6uvjB72yZ67BQKwAD7dYJA9BUTDocw=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lxC93F3NOrKipYQtg3zZiXAKWUCE5Aac5E4MO7eGN9eF5uQWvF
-	iD1Jo9gNH5c7L+0U6CYclV5Kq8VSlD4Qo7/nLJqgUL5dMm+QI0/TPVbk
-X-Gm-Gg: AYBFou3HFpkJaznXOwKMVjoSUU87to1dslEwlFg5ABRLAnAVj8PKEeDsKtTOxwZeKbh
-	Nni+edcCp7tswIoFhJoOk7rsVvDDvnujBX5/s6F7rTR7czBC+pJUPX0bVSyF7m3EFr7E4K1f+PV
-	CHPNrM91zyNAQZshQ+435K5HfprRPIKltkxSMs0+mrgcoGk6P4RaPqh5OvFr0+aPONbWdO3DoZK
-	UsKi6QhzU+m7/tSf6pUvCqQ4kErlBjyw8ZaCP02DZNrcth74AbR362T0W3xzbQ4TJg8Xn3VFBrk
-	nh0JHOXNTsc/yB5AcYDbdl88iRs5mkweY0hZdIdCi2TO7dizewNJBsQL/iIuwSX7SPRk6sZ2JlY
-	JHaPHDObm6SfuPjSZSnm63jnRjidEUjtzGg1VmPWgb0g3gfl264ncyskHnMLP9D2pPvFr6N/G77
-	8zs94jYv1YLCK0LmErAZOQcgAVSj/P6kOd4v4xW78xhGw2QiQiZWhikdWwP/AAkFV94vvP92H+x
-	0hY3PETnWK+B2AwXkNYiPO8FxmYORI=
-X-Received: by 2002:a05:7022:6b87:b0:143:57c1:6242 with SMTP id a92af1059eb24-144f917e7a9mr3802797c88.26.1790169734421;
-        Wed, 23 Sep 2026 06:22:14 -0700 (PDT)
+        bh=gZLlHjgFKGd97ZAl0jDOPJ4J/L8M7/uJxBZfNAi1MwY=;
+        b=jr0YvlsFiySjnUHWyCwBqGRXaPkqRQoTFK0oJSONMybHT303p06y1AGv7cUoQYvBjo
+         wXmRXgZBNI0TRadRpuhRX94/4iu4MVU1yXDwaQ2WtFc6gPH5Ye2Fykhoup+rJ+Avzab+
+         qUNZ6BlhH+emjjKBjZbx3iB08BysRxtFXvI0PlH8ua93uSAWt28sW8cU7Efl76oYQ/dY
+         sZ0tOLJ1JUeSesiWxy3JMBvXElbNRjd5rFJoOT+I/o5k2RmWNbKsCo+yMTAGqB1iEEvN
+         y68JVL7PrrUE32TYGe8vpUfoKRYXMRujKG8JjABSYLIjCppzTet1tTaSrL30qRtvBOfl
+         BWPQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxcIwE1TmYUftWzJsZUj7TPDxzOIQ6eVjVtEBqzHeWOjlhWDhigYX0tJrya/FBJpWUdR3/AfH5gvNU=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mNBiLj8HzTuaxpCuZMHvgPvzBXLyzFd4OzD56izbzykaxvA2mI
+	8Xbz6pUtm4nuJJoUZmJDPafxFWuyTgXc1feQ5h8sZwuA69ldPjJeJ3n3
+X-Gm-Gg: AYBFou1rmWLbNaAxSw2CKOh4exO5syf/yPab8tj1cH+Ve6WS/eA6upE1uMUm19cJC2P
+	ggwR8fyNnUh1eFidYfcjFGOFkgVumWllBjl4OHn40FlQ/a7A0b2ZxQXKcvYwtgpeazOfjLobAG9
+	VLazudjjphKtoGFc0fFtVYNVy+9cB4btGVLUr2eqQK6YYpVAoqWpqpudgeaigQ0Fs4EF8bXB4la
+	7MGx9BuynXiYtKPlKsW0A+iajGpn8lietzqL8apzZgWHKdP9f4+uxaXGLyNz2pdIbYCj56tVbmU
+	hxyt4AWDOgkIdvqFZeXlmwO1lgUZpPxDHSYer5a4YzHETasUjw/XIFNejkIq/b2OQ6C/k3sRZpu
+	pRY3XsqFBuFkVNZFE/enb21mSoyyz2dDaoCxHXZtBqlgYePXTuapS4bvMaOuvYx/3jdQYPGDB8u
+	vaRVjktlzANSc/C11qjZueV/lPR/EOP5GmtBczWxMpG4HYfl2C6YTPWMKPNGLUghsJmOg2qYFKs
+	+xES4YIW4PSZbp2XE8GqLPGSDzi//LrU5lNoKg22g==
+X-Received: by 2002:a05:7301:c016:b0:33b:d4c9:561f with SMTP id 5a478bee46e88-33e8bb7c1ffmr2536095eec.5.1790169742689;
+        Wed, 23 Sep 2026 06:22:22 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>,
@@ -134,40 +134,68 @@ Cc: Cornelia Huck <cohuck@redhat.com>,
 	qemu-arm@nongnu.org,
 	qemu-s390x@nongnu.org,
 	Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 032/114] gdbstub: drop per-target cpu-param.h from helpers.h
-Date: Wed, 23 Sep 2026 21:15:06 +0800
-Message-ID: <20260923131635.1894-33-luoyonggang@gmail.com>
+Subject: [PATCH v3 033/114] hw/riscv: expand boston-aia and microblaze-v-generic to TypeInfo
+Date: Wed, 23 Sep 2026 21:15:07 +0800
+Message-ID: <20260923131635.1894-34-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1790169736-19AC09EA-0F5152AA/0/0
+X-purgate-ID: tlsNG-ef75cf/1790169745-A74D3AE4-2B8872A1/0/0
 X-purgate-type: clean
-X-purgate-size: 678
+X-purgate-size: 1801
 
-- Stop including cpu-param.h from gdbstub/helpers.h so once-compiled
-  gdbstub can use the helpers without TARGET_* macros.
+Replace DEFINE_MACHINE with TypeInfo on boston-aia and
+amd-microblaze-v-generic. Set is_available to target_is_base_riscv.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- include/gdbstub/helpers.h | 3 ---
- 1 file changed, 3 deletions(-)
+ hw/riscv/microblaze-v-generic.c | 19 +++++++++++++++++--
+ 1 file changed, 17 insertions(+), 2 deletions(-)
 
-diff --git a/include/gdbstub/helpers.h b/include/gdbstub/helpers.h
-index b2f41d6d280..7250e457c2c 100644
---- a/include/gdbstub/helpers.h
-+++ b/include/gdbstub/helpers.h
-@@ -15,9 +15,6 @@
- #include "qemu/bswap.h"
+diff --git a/hw/riscv/microblaze-v-generic.c b/hw/riscv/microblaze-v-generic.c
+index 3f07ab21328..9b60a955152 100644
+--- a/hw/riscv/microblaze-v-generic.c
++++ b/hw/riscv/microblaze-v-generic.c
+@@ -14,6 +14,7 @@
+  */
+ 
+ #include "qemu/osdep.h"
++#include "qemu/target-info.h"
+ #include "qemu/units.h"
  #include "qemu/target-info.h"
+ #include "qapi/error.h"
+@@ -177,8 +178,10 @@ static void mb_v_generic_init(MachineState *machine)
+     create_unimplemented_device("qspi", QSPI_BASEADDR, 0x10000);
+ }
  
--#ifdef COMPILING_PER_TARGET
--#include "cpu-param.h"
--#endif
+-static void mb_v_generic_machine_init(MachineClass *mc)
++static void mb_v_generic_machine_class_init(ObjectClass *oc, const void *data)
+ {
++    MachineClass *mc = MACHINE_CLASS(oc);
++
+     mc->desc = "AMD Microblaze-V generic platform";
+     mc->init = mb_v_generic_init;
+     mc->min_cpus = 1;
+@@ -188,4 +191,16 @@ static void mb_v_generic_machine_init(MachineClass *mc)
+     mc->default_cpus = 1;
+ }
  
- /*
-  * The GDB remote protocol transfers values in target byte order. As
+-DEFINE_MACHINE("amd-microblaze-v-generic", mb_v_generic_machine_init)
++static const TypeInfo mb_v_generic_machine_class_init_typeinfo = {
++    .name = MACHINE_TYPE_NAME("amd-microblaze-v-generic"),
++    .parent = TYPE_MACHINE,
++    .class_init = mb_v_generic_machine_class_init,
++    .is_available = target_is_base_riscv,
++};
++
++static void mb_v_generic_machine_class_init_register_types(void)
++{
++    type_register_static(&mb_v_generic_machine_class_init_typeinfo);
++}
++
++type_init(mb_v_generic_machine_class_init_register_types)
 -- 
 2.52.0.windows.1
 
