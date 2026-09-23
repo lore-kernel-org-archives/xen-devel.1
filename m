@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 90419C982EA
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 09:21:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1429930.1652576 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E1027C982FA
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 09:21:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1429936.1652586 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9JAT-0004wN-91; Wed, 23 Sep 2026 09:21:33 +0000
+	id 1x9JAZ-0005NW-Ma; Wed, 23 Sep 2026 09:21:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1429930.1652576; Wed, 23 Sep 2026 09:21:33 +0000
+Received: by outflank-mailman (output) from mailman id 1429936.1652586; Wed, 23 Sep 2026 09:21:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9JAT-0004wF-66; Wed, 23 Sep 2026 09:21:33 +0000
-Received: by outflank-mailman (input) for mailman id 1429930;
- Wed, 23 Sep 2026 09:21:31 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1x9JAZ-0005NA-Is; Wed, 23 Sep 2026 09:21:39 +0000
+Received: by outflank-mailman (input) for mailman id 1429936;
+ Wed, 23 Sep 2026 09:21:38 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <chunjie.zhu@citrix.com>) id 1x9JAR-0004sq-MG
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 09:21:31 +0000
+ (envelope-from <chunjie.zhu@citrix.com>) id 1x9JAY-0005IS-Fr
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 09:21:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9JAR-0079J3-36
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 11:21:31 +0200
+ id 1x9JAX-0017u4-SU
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 11:21:37 +0200
 Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <chunjie.zhu@citrix.com>)
- id 6ab39a15-2eae-0a2a0a5409dd-0a2a450c828e-32
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 11:21:31 +0200
-Received: from [40.93.195.57]
- (helo=SN4PR2101CU001.outbound.protection.outlook.com)
+ id 6ab39a1d-bab6-0a2a0a5309dd-0a2a450c829e-12
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 11:21:37 +0200
+Received: from [52.101.57.2]
+ (helo=BN8PR05CU002.outbound.protection.outlook.com)
  by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <chunjie.zhu@citrix.com>)
- id 6ab39a19-f479-0a2a450c0019-285dc3399e16-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 11:21:30 +0200
+ id 6ab39a20-f479-0a2a450c0019-346539026ed6-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 11:21:37 +0200
 Received: from LV3PR03MB7609.namprd03.prod.outlook.com (2603:10b6:408:283::12)
  by BL4PR03MB8106.namprd03.prod.outlook.com (2603:10b6:208:591::7)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.16; Wed, 23 Sep
- 2026 09:21:28 +0000
+ 2026 09:21:35 +0000
 Received: from LV3PR03MB7609.namprd03.prod.outlook.com
  ([fe80::146d:1d33:b619:386c]) by LV3PR03MB7609.namprd03.prod.outlook.com
  ([fe80::146d:1d33:b619:386c%5]) with mapi id 15.21.0451.014; Wed, 23 Sep 2026
- 09:21:28 +0000
+ 09:21:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Uv/kP8+5dKvRiUe0mtYsU6E5nv3BHkRBS14/SEmSl+O4KN9aR9oJg4moTlDa8SMUSUbTRLsH55u8mHm6gznYnXUhF5+A2+wZLKegFzH2/1BTvr5RQ8pVFERd+3lLV06HltrLBVQVPoSRSL6qndVlQ5ADCSuVXy/X+1zB57L1TDXNqmhjCfSDTiWvMpu53/KPFk1nTXORtFC1L8SeRCwq9So0ISDXMOPhntA95QcIanYWlEugWhIe9NBhaSH1cF3ojswq1Ab4+/9VkBdOsIgRaiUiCqdMZj9kzJQOQhNBeCJA5POfBhKrwScZXZRPMepoTWUNCp42ZXw5l/PeBprpsQ==
+ b=oB8xzTn5m48EtYiUi9N+tYqbbTv8e7uzFakRrSIWtmiLG/K6IoDp7Z31zCGYdYSPN7rnWY7TWSdl1pjngaHyyzuGzvedVa3mgOrjZaDDCgIdnqCNL/iyRbaSh8gNlNZ0e66SRH2gxJyxUuQBLbwqeWcMLncMQsBdZlCr8Czns/FAHhfQpUbxf6H5CreY18aYw9/2rUVoQfUASUkDFuZyjCf7TFnMLCARnYWn3Y27dHy8ZSrXY5IFj2EWQzbKMI9j38bR2wItElJSqjG4tF81NWK9gOYeFL+MPa3Gc5k+49CI/C4P6xEwB7P7boagiPQg3LFLckMCcjOaGmjnVnDh6w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8IU4BHlwvEUQATEKce1EuKskCgG/uibOwmDxKxzfdCE=;
- b=c1VydIVejzKK4rMGX9qxg0YJ5goLqJs5hZwDXwJn6Oo2O/NaOclQDsnSCJdnkeDXvd+2iFsO9zCPmNicLHJblUT0mCs1Z3WjATsskYCgVVXor/+Dnqlou5COJTEMLRMc9VjtTWmpVgJhsFSd03ESP55Ec72wkD7pPGMYT6DNoaAMU8j3bXpJOh7M+Jb3Q4yac2Eq7bMURHxr6LT1meiJhaoL3FUUo+3VqByBeKxwRiC+Y/0sh97uicTs3ClZJh5fPHops8xLvFaKvCnIFGUZO8W1EYPShJ+l+SltcHtVA0qO7zjmewAfg3B7wz1V4TBQht1JHjFlwLCH5Jc29pSndg==
+ bh=c0G5DFHvfT3OxxH3EakjBBKP8uv26iIDoAqt94XNIBo=;
+ b=roy0obYufjH+LX15/CI78RIdU4iOriNQmSe8Cf/lPDUoQO7rXgOizUFojNi1qJunxfuqfTz7VCeuVyuwW3iYVykGNghJAJazXH/X6VklwF7fO3E2wWoPgrCtTAta1eOe7Khqwry0ADvccBXMuxS3Mk6p1yJcQKNOs8lWVIT9E0YrnwzOzWoyayZXYGtohdxR3TCuEEN/X7md+LVQSoX09f2hAjjpBN33ZXRw1hme4mgSoWQV7Pk4953Wpcv6QivzjogufiG003e+CBn7TeXVEWm9l2PEnNFLMfZ5WaBA+am8VLLdi2LF1cAGgWyaPGfyxoNF7MhI5D73+rndmyURmg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8IU4BHlwvEUQATEKce1EuKskCgG/uibOwmDxKxzfdCE=;
- b=xRsUJZHawXpRYw62TPZWHniM4nf5IVhoR4VU2ZjVHStXSJ6okWUL817mi4miyv3Oz7myQG52w/7oJu/+jXX4ThXFZCAn3XnemB7FCRPQGOcgY48ByPIjyPiV0Nwgwh6x4PaA3pWHidpkv912X9aej3jvkyiw53qTjdNm2WRGzYA=
+ bh=c0G5DFHvfT3OxxH3EakjBBKP8uv26iIDoAqt94XNIBo=;
+ b=kA79D9UYM8qw+QE55lT6QwT9bRuap7ih9YM7H6nTwxUQo1eFrNJ3ajngMksWgIO4QjQJzx7lv9BMqMfOJnKFI7JFuYb35b+MeyhCAa0WvCtQ6JtPFOZr+VoYJoH/G4Q4k3dgVXe2jKYfVAk5/eeselutcpT1eDqc2dXfpqjmHnM=
 Authentication-Results: dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 From: chunjie.zhu@citrix.com
@@ -81,482 +81,440 @@ Cc: jbeulich@suse.com,
 	jason.andryuk@amd.com,
 	teddy.astie@vates.tech,
 	Chunjie Zhu <chunjie.zhu@citrix.com>
-Subject: =?UTF-8?q?=5BPATCH=C2=A0v1=203/5=5D=20x86/nestedsvm=3A=20update=20vmexit=20without=20pending=20or=20deferred=20flag?=
-Date: Wed, 23 Sep 2026 17:20:43 +0800
-Message-Id: <3fd01cae3399dd425731c0c2f62b5fdb68071e36.1790146987.git.chunjie.zhu@citrix.com>
+Subject: =?UTF-8?q?=5BPATCH=C2=A0v1=204/5=5D=20x86/nestedsvm=3A=20update=20vmcb=20correctly?=
+Date: Wed, 23 Sep 2026 17:20:44 +0800
+Message-Id: <293d4fce5adc8b4a7f8e9e2700ecaee988ac803c.1790146987.git.chunjie.zhu@citrix.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1790146987.git.chunjie.zhu@citrix.com>
 References: <cover.1790146987.git.chunjie.zhu@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: KU0P306CA0027.MYSP306.PROD.OUTLOOK.COM
- (2603:1096:d10:16::7) To LV3PR03MB7609.namprd03.prod.outlook.com
+X-ClientProxiedBy: KL1PR0401CA0034.apcprd04.prod.outlook.com
+ (2603:1096:820:e::21) To LV3PR03MB7609.namprd03.prod.outlook.com
  (2603:10b6:408:283::12)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: LV3PR03MB7609:EE_|BL4PR03MB8106:EE_
-X-MS-Office365-Filtering-Correlation-Id: 29dd6e7d-73b1-49e4-2ad0-08df19540bfe
+X-MS-Office365-Filtering-Correlation-Id: 9be20fbe-389d-40f2-f23f-08df19541065
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|18002099003|22082099003|56012099006|11063799006|10067099003;
+	BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|18002099003|22082099003|56012099006|11063799006|5023799004|10067099003;
 X-Microsoft-Antispam-Message-Info:
-	GHkDco+qx9cw4b5kl+ueiE/BgAoDI3RfvCkVyrQOmBO4dK9cQ6ASgKZNSdCH6UxN5Ah24z+voBlTprprpu+5riQ8Y9TFsYQBfB+BVAvfXQo5wfIPYAUb2Ly0ZBNWGyVuHsfbeNJ3oYhRVJhqhZ8eGuJQrs+ylJr+bdXeJLsi2GYCF0kQYLtxBQ8Y4nuwo/7M4fPBpRtHCimnohAlTOsNatYlxrZazihC9G338e86OrDKxOSZK+pVXNYmq5obYp04b7Q5NyhERUsGDXSwQqLzNbmbRZS9qKWhhNRLSBHSXUAylYTIB7gEQXzij5BCIj4SnPxC7DmLLJpm0abrHqm9P2SJe8lr9DcBb0mC91/kmLQMAkmHeGwI669oLoSeKIfrWOxCuGF/QdWPLjW/fzwC2m78KlohvuiIds56IudoS9lbIeesGdA5bS6vOlPdwvCe5jo0t66fYmAWBCxowew5NLV7mS4lDnb4iKCwtaqLyqUoChxq8j8KGRcoGWwHrYKE/+qY46mbI4mT5wT0/PHebY/Hye2cjzIYP0palkHJbjpeT8R2q++mVBBnm+99RbnjVC1ZO1qpmaAUtItpx4U/QLr25yuUorUkGHl+2duRNMsYzursb35omr7UPj94SHm+rPNZFLO+Q8ht8kByy3URpps1gIgqMqFnxltrlw4p83s=
+	4lOAWRITY+UDSE69gr0ZFuK+spQTbEsoGnUanMt0Qb+qXG/NIFs3ftPr8CXEvKZVVro7notdN2wbQGwo+IR9MHkDkiY6sNRNUaytqMipDaP2dftEx9fDyEz5wylTKXFKRVQVrZwMbzE4NrhR0vGucaxIBRu9yHZGWxcaCTpeFg/fv1oijIu+VTah79BbGpVfaIrVijv86JrR1NV6kiViK9+GLl3ZNtN7ZVe5afIL/8yS6xKk68aqRoJMN3gvyPqRI2llGJiJ0L67Z20R+XsjbXFMDhgryiZUKH3TxKG9KA4zZqBCEWqtoJpisPh1Q8U9mLJam3gLQ2YtVWnc1TEN6faaZ12trJgW87xSvR0gLpLHTPrMGKl0k6MW4fxE7y3tXh8I/kqYYOHXzneTZ3IG8PEAcVBNTH1JJbX1zG1GL8daY60JMPa0jRYFXLtr/tR3ErknUyg/vFmMsL4tT2uRzEplD23Y1UIEy3tLocJeu24zvULv3TufwbUf+eFZGvxhvQFzfIe2pyykxdG7HGg8a8rW85tsNWYoqtwLbKNn++GjWX/40w0RZ8/bMCU3T9cAV8zydzHNcJfbu2jM2bVStSD2obi1kdEIlQr27OEmwpD7za09bxNFLm54EuPxd/8RFhMEw5EaXMBMEyQcuGyttMo32MHl6I7P1pS18JbuAtU=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR03MB7609.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(18002099003)(22082099003)(56012099006)(11063799006)(10067099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR03MB7609.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(18002099003)(22082099003)(56012099006)(11063799006)(5023799004)(10067099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?cldFUk0vQkEwYUdER0FsYlZSdHhvVE1JbXdScjkwUlQvWDliS0crVHlsVjlr?=
- =?utf-8?B?QldiT0VyRnQ0RHpkQUxGWW9oemswem9MT2xObGFRZUJsSEIzZzVERGQyZlli?=
- =?utf-8?B?NlZrYXV2QzVwV0RJQ3NUMWJnd1V0MW10K1NDMmg2SGh6QjFrQXdkSGpZTlNh?=
- =?utf-8?B?S2dYWi96ODZQTHdJWUJRSEE1YjdEdG9FWmx3emlOb0tjQmRYOHVNQitzc2ky?=
- =?utf-8?B?ZWpjM05zUDI4K0U1cHdUVHdHS3d4c2x4UVdTYXQvcVVBT05jWFAxdmtGUVNI?=
- =?utf-8?B?YzJrWDB4b203ZnFRNFdody8rTExONmNvL3MzNDRLaXpYclg5dFhtYzJpRC9H?=
- =?utf-8?B?WldDZ2hIQ3E3d3lhdFp1cW9SMkVnN1c5RUJIa1c1VktVbDE1QVhwSm8vQU9S?=
- =?utf-8?B?c1hvdzNucmtmYS82cWdlYTdOd2xNTGZIVmRDNHQ0MTBQYVUyK213SDVteGRZ?=
- =?utf-8?B?c3VEOTYxdVV1TnFnYk4rWXcvWjdLSzliVzcwZU1oUC82bExVVG03K1ZFNGhI?=
- =?utf-8?B?TzNvdDRtUldpNTBvS1N1VWZFMy92eHp1RDVFbXorMVgyUUNuK2YzWjZDdy9i?=
- =?utf-8?B?eWZyTDRWU3JVUldydENQWk1aTkJRVmYrdUNFVkd4Zm1SSHZVZzVPSktyWDJI?=
- =?utf-8?B?UkI3SFNhQ3duVG81WDhwSWlVUWdYaVpEZ0M4OEQ2eVczb2Vpd3lpMjRPZlNJ?=
- =?utf-8?B?TVFtUUtUdnlxNSt4cVc3NVBGNXAwd21mZXkrazVMQnVwbk5vSGhvZHZINnpK?=
- =?utf-8?B?eG1ZREFvVkR0aXN0VWtyc0pHUnJwSXhkSmhZRDBucHV4RmhHWnlKMVZFTk1J?=
- =?utf-8?B?TTdrazB6Lyt1VmlnMjAybzdPSkpaMnB5VTJzcDU4L095Z00zL3lKWExuNEsy?=
- =?utf-8?B?R0FENTlDOEhZei9hV2h1TVIxeEZFQTNJenFEZWw4ekUyUzlRSTBVK04zc2xV?=
- =?utf-8?B?M0NOblNPSmZWVFF0eUhCSG4rbC9CV2FPNDlWV1BPdUEyck9TdDZkUUtvRnJY?=
- =?utf-8?B?ZVpJYUVneHV3NEN2Z0J4alVYeVptc0NMM3doeHhGL2RkNEtMcGJJTHdZSTBy?=
- =?utf-8?B?cjFidTdFbjgvR3F5K0xETE1lTjRBSzlhVXdXYWd4VHBia3RKc3pBcVZoQU8w?=
- =?utf-8?B?ZFluSGM2UE9mVDNHaE5Va3VDSnd6VmRvTHdkY1dodXNpWE9jRDJ2ZjkvYjQr?=
- =?utf-8?B?M2RNdlJkR0VGLytyek8zVVpvUzRySTV3Qys2S1kvNEpHeGRoVXMyMEh3UTVQ?=
- =?utf-8?B?WC9mcC8zcy8wUW1Nbmt2NEo0ZWYrVDNPaDZNMy9DR1huSWxVVk95cEhMallt?=
- =?utf-8?B?UUFzUWFPdlBKK3lrVTZ3Q00rZlM4d1hvZG9NTW15dzhPdTRHRkF3Nk9VTUFz?=
- =?utf-8?B?TXFwaEIzVjd2N0gwd1cwb1NPNFowT3YzVGM1WkZaa1BDMDhzdkhoeThVTlNo?=
- =?utf-8?B?b2grQXovdi94NGV3NXRwcEU5NlpzZlVaaFRoU1oyZSsyWUp6bVc2R0dpZ0Vq?=
- =?utf-8?B?MjdnQ2gyVG1ETmFWKzFyYTlvQnI3V3JiUWQyTkUzcDBRd2VpUGNrUHdkeFRt?=
- =?utf-8?B?eWtJM1FLUHFUZmRtVmFsWVpXWXJPanR2NzRaTE9YVElLNGJnNlc2WlpIT0w5?=
- =?utf-8?B?eWsyTmNzWWxBT21SNGl4RjhYczdVZTY2Y0ducC9jOUk1R2lMdmd5T04yNzBH?=
- =?utf-8?B?TU9qVWUyaTF2MXlIMEZYQ2JQTXhFT3BFWkxnSU9SZXcrVGsvZzhFa3hQV1F1?=
- =?utf-8?B?N0tGS21IU3VWbVZTeFhjNGtpNjhlQWZSTC80M1djcHE0dVJ6NTl4a3NwZWN1?=
- =?utf-8?B?bjJYd2svRnIvOUZ2ekhCbitSMTIzRXp1RGQ3cmJ1RVZ1cG9ZeHB4bGRNNFZM?=
- =?utf-8?B?bjZFY3lLZGdXcGhZaU80ak1DK1FvVEZJWGZ0VFlyV1QyVTFEaFVaWm5QRzV1?=
- =?utf-8?B?dHVzcjViUTJDcXlpbUtTNzNVTmxVRXRoZ0FTU2tZWXRnQldIUkMzNUxLZDdU?=
- =?utf-8?B?aWdxMGtpTTFkejc1Si9IYzIrR3ZNdzk4NHNiMzB3a0hnS1hSY1BYQlE4Qi96?=
- =?utf-8?B?eGJLeWJ4RDB2MzhIVTdzNFhGNEZDZGxsWGpiKzhIb2hBSTRORUNxN1kxMVcw?=
- =?utf-8?B?eHRydG5memx6ZlhvdG1jUGtWdFoxOWRDSFd2TVcyY2prOVBYMmlXY0lORXhJ?=
- =?utf-8?B?U1IxLzNvVTRtZ1VKL0xONnJuaXF3VFE4TFQ1VXUxcDdkQVN5VWNZaWY5dGkv?=
- =?utf-8?B?YnliQS90VVlEcmhrdTRnNk8xSzNuSmNaSlpFT01PekxmRGxRekhtbFNEaFBE?=
- =?utf-8?B?a0Z5b2JScTIzRk9ueUtwRUh3cUJ2REJFZWdZUU5EYmhDbHNic2g2UT09?=
+	=?utf-8?B?aGhUTEFZZk11NVJuZWcyejMrdHQvWklHVXZaRmE4NjQza1BrSUxXaGVNdlVr?=
+ =?utf-8?B?NmRwZkxraFpaWk1JZ0NpclhlbEFjaFYyWnBLVmFTWGhjd2lJdUdJTVBPaDlh?=
+ =?utf-8?B?NlRLcWtrTCtPUkpUVkVhWnNnUjJvcHhWYVZvbkdmQkNodXBKVFdwcHh1azQ3?=
+ =?utf-8?B?djhrNjBnN1dBWHhodGNEdk11Nmowd2dkdnh0UWJQNFBLMkpmOXdydDBBUUJ2?=
+ =?utf-8?B?ZTVJVlVjVUgxOHB0M2h3UnNtVktpcEduNk1tOGNMNzc2TFFqbC9lMlVkQnR5?=
+ =?utf-8?B?NFlHeCtkL1h0VE1XQTd4azExK1l5dEprblg4cEprWGExTzV1Z1A1OTF1UlZ1?=
+ =?utf-8?B?V1JPWmpTczJTajZCQnREcWRKcXVNTlBaa3BYN2dta3UzeHZMQ1lvaWs2Z0ZF?=
+ =?utf-8?B?Nkpydlhla2Z2MkdZbzB2RjdUZWh1S2JFa0QyUC9kaVcySjRWYUxPM1g0VlZl?=
+ =?utf-8?B?VytoZG5pNW16Zm5EQW1kcndQVEU5US9pQkhGaWM0OGN2UHNNL1llMzNxYWZP?=
+ =?utf-8?B?RFpoOWNtSWNETDBXNlQ1Mk5EOGRNbmJHVWptbzAyczFLU2NZZnVRQXRyMnlv?=
+ =?utf-8?B?UVBQZWk0TDVuVHdONzV1V0JCWnc2SExieUQrSTRlTWlLM25iSmtPdDRpMkNH?=
+ =?utf-8?B?QlA5YXBLODhudEN0eHVDRm1yK3Y1a1AxMkFLMFVNVmFBUHJLWjVGSHJZRDQ2?=
+ =?utf-8?B?aUdqMTh3dHVwVlo3aG9ndkFYQmVSbFdwb2Yzbkt4N3VDeDZIUkpjQ2ZtRGJn?=
+ =?utf-8?B?cVpqRUtpVVd1eWwxWFI0dEoweklRTTlVZ3drU2tqTUJrSWFua09tU3NGejA3?=
+ =?utf-8?B?SWxWM0h4VDh6dlBMQlVqTlhNMGlNai9WSnpGWlluSWkwTFc2ZFV4azQ0bUp5?=
+ =?utf-8?B?TlNCWFZlWGVQTzVubVhnMUpkOVE4VXFiNXRrZUVJZi9wSTB5OGxpSXByamtC?=
+ =?utf-8?B?SHY0UFIyeWQxRzI0bERTK1dIaXlhREJSNHF0amlXdldhL2FSWkNxTjhkNFRj?=
+ =?utf-8?B?RTdjcUlleWdqZUhRSHVVVlE0STRiMjdISkFtL251T2k2ZjN0SEhBS3V6YXVr?=
+ =?utf-8?B?NWxFVjVKWU5aT3NCYVh6L1hpNG5STzArTWl1azVNRXZCV3Y5OERweTBjamdJ?=
+ =?utf-8?B?NzZkNUl4TXFKRGlnM2xsMVZtUHl6YkJ2bXJqSVVOU1JsN2cxaDVTUkRCc0ZH?=
+ =?utf-8?B?Ymg3b0tTNDRKdFRqREc3bTNsSjZGRzM5akEwZVF2ZndtT1BINW5mR1J6aFVW?=
+ =?utf-8?B?UGhralZiRGMweUUzS0U1QUl2c1g0blBaU2FIZmdVUEI1R1ZQRXNrR0hORUVm?=
+ =?utf-8?B?WFpUdzI4MWsvTUVQTk50czhpbjVMeFVoUG9ZSUxaSnp1QWVzR3Z3anQyK1V4?=
+ =?utf-8?B?WjRJQ2xIREJWTGVnQ3p2Tlhkb05WK00vUE5ydFFYd0ZsVnRWTGd2NHNvcURD?=
+ =?utf-8?B?aTFKSXJ2Zyt1Vi9QL1N1Y0FINENmQ0c0Y084VU9qRlVESjk5d3F4aDFYZ3E3?=
+ =?utf-8?B?UUxjNjd5OWg0K3hSNUVQUFFVRkw2ajZJSWxLbjN5ZUZGWGNUMUZWWlQxSGs1?=
+ =?utf-8?B?R2pzQ00yL1ZZa0ZSY0Fyd2Q1VldMZER1M1BKQ1VxKy83VUtLelh4YWEyNEpt?=
+ =?utf-8?B?OE5DekkyYnI2cVpQdnpoMmtkbS9YZUZtL2lRczBnYUhUSkpTeGVPQWNuYlZV?=
+ =?utf-8?B?eDZPNWp6ZlFZQm95L3lKcXVjZVhuWmppM053bkJZZkVwaFIwNSt0azgxV1lC?=
+ =?utf-8?B?STNid3liTHFvVXFIZjFBZjJoS3VjL0dPQ1N0QU5rNGEyRENaVUlTZnFDZXpp?=
+ =?utf-8?B?RVVpYmZzTkdvbkVQR2Jpb3NxL3ZPSlpnY25VUTJEMjJ5OEpKRkpVbmJCQTgw?=
+ =?utf-8?B?TDdzQ3JTUUNMRlY2dnhMdCtNYWloWHhJVUszNlF3L09jSFVlNWdiT1JtSEEr?=
+ =?utf-8?B?YWxwcjhNRWtyRWhNVmxEMHF3WS9YMGZNUEJlWk5HWjJxWXRReDMrTHYyN0RV?=
+ =?utf-8?B?cHpmV2c5cm4vVkN1UG9RQmwvZWx2QVdacEtIOEc4MnAySm9CQXBxcVFaRWNS?=
+ =?utf-8?B?WWloZHBEMElZZUtLM3h2TXplb1pUWFpmYXhvbXJqSWVOcG5EOHNuSWhvQkxk?=
+ =?utf-8?B?RjZlMWJncy96S01aZzF4SkY1K3JQc2tFcEZvWFJveDIzRkVBNzFGRFNsd09l?=
+ =?utf-8?B?YS83dHBBbTdKNVduZFZ1Z1dYdnZqTkppZUhlNzFETnhubmg4OWpNWDIvSHdn?=
+ =?utf-8?B?VThEcXByNXZUdjlCT0k0aXh0MXdVcVhPdVpJT2RLcnc5ZXYra3dxbkt1ckpt?=
+ =?utf-8?B?aitZZ1M5NVk5MjFuMUZyWG5GYWduWVZlSEtGcGZ3VmpxeEFZRVRMdz09?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 29dd6e7d-73b1-49e4-2ad0-08df19540bfe
+X-MS-Exchange-CrossTenant-Network-Message-Id: 9be20fbe-389d-40f2-f23f-08df19541065
 X-MS-Exchange-CrossTenant-AuthSource: LV3PR03MB7609.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2026 09:21:28.0660
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2026 09:21:35.4537
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: IuaFT9smi/msam5Eq3kj+bg540+XlIPPD1THl+sOkvnoFCjRPzEbKPALmUbPzDnxG+eqN0lveabevuBDxOMuBw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: v4r7GZj/MvflqtvuAfnDYplFsLbaXf6DjFZ1yNB0Z+qq1AsjFXKa+nPCUSc7igWfa5jnWbqAixqChq2VadhBKA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL4PR03MB8106
-X-purgate-ID: tlsNG-d25034/1790155291-50D3CA5B-FAA83AA1/0/0
+X-purgate-ID: tlsNG-d25034/1790155297-034D7A5B-861885D8/0/0
 X-purgate-type: clean
-X-purgate-size: 14296
+X-purgate-size: 13662
 
 From: Chunjie Zhu <chunjie.zhu@citrix.com>
 
 Signed-off-by: Chunjie Zhu <chunjie.zhu@citrix.com>
 ---
- xen/arch/x86/hvm/svm/intr.c              |   4 +-
- xen/arch/x86/hvm/svm/nestedhvm.h         |   5 +-
- xen/arch/x86/hvm/svm/nestedsvm.c         | 168 ++++++++---------------
- xen/arch/x86/hvm/svm/svm.c               |  10 +-
- xen/arch/x86/include/asm/hvm/svm-types.h |   7 -
- 5 files changed, 72 insertions(+), 122 deletions(-)
+ xen/arch/x86/hvm/svm/nestedsvm.c         | 100 ++++++++++++++++-------
+ xen/arch/x86/hvm/svm/svm.c               |   4 +
+ xen/arch/x86/hvm/svm/vmcb.c              |   3 +
+ xen/arch/x86/hvm/svm/vmcb.h              |   6 ++
+ xen/arch/x86/include/asm/hvm/svm-types.h |   2 +-
+ xen/arch/x86/include/asm/msr-index.h     |   1 +
+ 6 files changed, 87 insertions(+), 29 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
-index 7f6cafb6db78..f9b59a0d6a46 100644
---- a/xen/arch/x86/hvm/svm/intr.c
-+++ b/xen/arch/x86/hvm/svm/intr.c
-@@ -55,7 +55,7 @@ static void svm_inject_nmi(struct vcpu *v)
-         vmcb, general1_intercepts | GENERAL1_INTERCEPT_IRET);
- }
- 
--static void svm_inject_intr(struct vcpu *v, int vector)
-+void svm_inject_intr(struct vcpu *v, int vector)
- {
-     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-     intinfo_t event;
-@@ -69,7 +69,7 @@ static void svm_inject_intr(struct vcpu *v, int vector)
-     vmcb->event_inj = event;
- }
- 
--static void svm_enable_intr_window(struct vcpu *v, struct hvm_intack intack)
-+void svm_enable_intr_window(struct vcpu *v, struct hvm_intack intack)
- {
-     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-     uint32_t general1_intercepts = vmcb_get_general1_intercepts(vmcb);
-diff --git a/xen/arch/x86/hvm/svm/nestedhvm.h b/xen/arch/x86/hvm/svm/nestedhvm.h
-index e22ef259c171..5876a948f39a 100644
---- a/xen/arch/x86/hvm/svm/nestedhvm.h
-+++ b/xen/arch/x86/hvm/svm/nestedhvm.h
-@@ -27,7 +27,8 @@
-     (!!((v)->arch.hvm.guest_efer & EFER_SVME))
- 
- int nestedsvm_vmcb_map(struct vcpu *v, uint64_t vmcbaddr);
--void nestedsvm_vmexit_defer(struct vcpu *v,
-+enum nestedhvm_vmexits
-+nestedsvm_vcpu_vmexit(struct vcpu *v, struct cpu_user_regs *regs,
-     uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2);
- enum nestedhvm_vmexits
- nestedsvm_vmexit_n2n1(struct vcpu *v, struct cpu_user_regs *regs);
-@@ -65,6 +66,8 @@ int cf_check nsvm_hap_walk_L1_p2m(
- #define NSVM_INTR_MASKED         0
- 
- int nestedsvm_vcpu_interrupt(struct vcpu *v, const struct hvm_intack intack);
-+void svm_enable_intr_window(struct vcpu *v, struct hvm_intack intack);
-+void svm_inject_intr(struct vcpu *v, int vector);
- 
- #endif /* __X86_HVM_SVM_NESTEDHVM_PRIV_H__ */
- 
 diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index edb3f444756d..9e5e804a5b00 100644
+index 9e5e804a5b00..82e01e513e69 100644
 --- a/xen/arch/x86/hvm/svm/nestedsvm.c
 +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -152,8 +152,6 @@ int cf_check nsvm_vcpu_reset(struct vcpu *v)
+@@ -146,16 +146,15 @@ int cf_check nsvm_vcpu_reset(struct vcpu *v)
+     svm->ns_exception_intercepts = 0;
+     svm->ns_general1_intercepts = 0;
+     svm->ns_general2_intercepts = 0;
++    svm->ns_general3_intercepts = 0;
+ 
+     svm->ns_hap_enabled = 0;
+     svm->ns_vmcb_guestcr3 = 0;
      svm->ns_vmcb_hostcr3 = 0;
      svm->ns_asid = 0;
      svm->ns_hostflags.bytes = 0;
--    svm->ns_vmexit.exitinfo1 = 0;
--    svm->ns_vmexit.exitinfo2 = 0;
- 
+-
      svm->ns_iomap = NULL;
  
-@@ -712,14 +710,10 @@ nsvm_vcpu_vmrun(struct vcpu *v, struct cpu_user_regs *regs)
-     int ret;
-     unsigned int inst_len;
-     struct nestedvcpu *nv = &vcpu_nestedhvm(v);
--    struct nestedsvm *svm = &vcpu_nestedsvm(v);
+-    svm->ns_gif = 1;
+     return 0;
+ }
  
-     inst_len = svm_get_insn_len(v, INSTR_VMRUN);
-     if ( inst_len == 0 )
--    {
--        svm->ns_vmexit.exitcode = VMEXIT_SHUTDOWN;
-         return -1;
--    }
- 
-     nv->nv_vmswitch_in_progress = 1;
-     ASSERT(nv->nv_vvmcx != NULL);
-@@ -738,15 +732,10 @@ nsvm_vcpu_vmrun(struct vcpu *v, struct cpu_user_regs *regs)
-         break;
-     case NSVM_ERROR_VVMCB:
-         gdprintk(XENLOG_ERR, "inject VMEXIT(INVALID)\n");
--        svm->ns_vmexit.exitcode = VMEXIT_INVALID;
-         return -1;
-     case NSVM_ERROR_VMENTRY:
-     default:
--        gdprintk(XENLOG_ERR,
--            "nsvm_vcpu_vmentry failed, injecting #UD\n");
--        hvm_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
--        /* Must happen after hvm_inject_hw_exception or it doesn't work right. */
--        nv->nv_vmswitch_in_progress = 0;
-+        gdprintk(XENLOG_ERR, "nsvm_vcpu_vmentry failed\n");
-         return 1;
+@@ -416,6 +415,7 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+         svm->ns_exception_intercepts = ns_vmcb->_exception_intercepts;
+         svm->ns_general1_intercepts = ns_vmcb->_general1_intercepts;
+         svm->ns_general2_intercepts = ns_vmcb->_general2_intercepts;
++        svm->ns_general3_intercepts = ns_vmcb->_general3_intercepts;
      }
  
-@@ -760,47 +749,55 @@ nsvm_vcpu_vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+     /* We could track the cleanbits of the n1vmcb from
+@@ -444,6 +444,8 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+         n1vmcb->_general1_intercepts | ns_vmcb->_general1_intercepts;
+     n2vmcb->_general2_intercepts =
+         n1vmcb->_general2_intercepts | ns_vmcb->_general2_intercepts;
++    n2vmcb->_general3_intercepts =
++        n1vmcb->_general3_intercepts | ns_vmcb->_general3_intercepts;
  
- static int
- nsvm_vcpu_vmexit_inject(struct vcpu *v, struct cpu_user_regs *regs,
--    uint64_t exitcode)
-+    uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2)
- {
+     /* Nested Pause Filter */
+     if ( ns_vmcb->_general1_intercepts & GENERAL1_INTERCEPT_PAUSE )
+@@ -472,6 +474,17 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+         n2vmcb->_vintr.fields.intr_masking = 1;
+     }
+ 
++    /*
++     * If L1 granted its L2 vGIF, the copy above already carried the enable
++     * and the GIF through.  Otherwise seed it set, as a VMRUN of a guest
++     * without vGIF starts with GIF set (APM vol.2 15.5).
++     */
++    if ( !ns_vmcb->_vintr.fields.vgif_enable )
++    {
++        n2vmcb->_vintr.fields.vgif_enable = 1;
++        n2vmcb->_vintr.fields.vgif = 1;
++    }
++
+     /* Interrupt state */
+     n2vmcb->int_stat = ns_vmcb->int_stat;
+ 
+@@ -487,7 +500,8 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+     n2vmcb->virt_ext.bytes =
+         n1vmcb->virt_ext.bytes | ns_vmcb->virt_ext.bytes;
+ 
+-    /* NextRIP - only evaluated on #VMEXIT. */
++    /* NextRIP is consumed by VMRUN as the return address for injected soft events. */
++    n2vmcb->nextrip = ns_vmcb->nextrip;
+ 
+     /*
+      * VMCB Save State Area
+@@ -652,10 +666,12 @@ nsvm_vcpu_vmentry(struct vcpu *v, struct cpu_user_regs *regs,
+     int ret;
      struct nestedvcpu *nv = &vcpu_nestedhvm(v);
--    struct nestedsvm *svm = &vcpu_nestedsvm(v);
-     struct vmcb_struct *ns_vmcb;
+     struct nestedsvm *svm = &vcpu_nestedsvm(v);
+-    struct vmcb_struct *ns_vmcb;
++    struct vmcb_struct *ns_vmcb, *n1vmcb;
+ 
+     ns_vmcb = nv->nv_vvmcx;
++    n1vmcb = nv->nv_n1vmcx;
+     ASSERT(ns_vmcb != NULL);
++    ASSERT(n1vmcb != NULL);
+     ASSERT(nv->nv_n2vmcx != NULL);
+     ASSERT(nv->nv_n2vmcx_pa != INVALID_PADDR);
+ 
+@@ -700,7 +716,8 @@ nsvm_vcpu_vmentry(struct vcpu *v, struct cpu_user_regs *regs,
+         return ret;
+     }
+ 
+-    svm->ns_gif = 1;
++    ASSERT(n1vmcb->_vintr.fields.vgif_enable);
++    n1vmcb->_vintr.fields.vgif = 1;
+     return 0;
+ }
+ 
+@@ -756,7 +773,7 @@ nsvm_vcpu_vmexit_inject(struct vcpu *v, struct cpu_user_regs *regs,
      struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
  
--    if ( vmcb->_vintr.fields.vgif_enable )
-+    ASSERT(vmcb->_vintr.fields.vgif_enable);
-         vmcb->_vintr.fields.vgif = 0;
--    else
--        svm->ns_gif = 0;
+     ASSERT(vmcb->_vintr.fields.vgif_enable);
+-        vmcb->_vintr.fields.vgif = 0;
++    vmcb->_vintr.fields.vgif = 0;
  
      ns_vmcb = nv->nv_vvmcx;
  
--    if ( nv->nv_vmexit_pending )
-+    switch ( exitcode )
-+    {
-+    case VMEXIT_INTR:
-     {
--        switch ( exitcode )
-+        struct hvm_intack intack = {
-+            .source = exitinfo1,
-+            .vector = exitinfo2
-+        };
-+
-+        /* See the comment in svm_intr_assist() for why this is necessary */
-+        if ( unlikely(vmcb->event_inj.v) ||
-+             hvm_interrupt_blocked(v, intack) )
-         {
--        case VMEXIT_INTR:
--            if ( unlikely(ns_vmcb->event_inj.v) && nv->nv_vmentry_pending &&
--                 hvm_event_needs_reinjection(ns_vmcb->event_inj.type,
--                                             ns_vmcb->event_inj.vector) )
--                ns_vmcb->exit_int_info = ns_vmcb->event_inj;
--            break;
--        case VMEXIT_EXCEPTION_PF:
--            ns_vmcb->_cr2 = ns_vmcb->ei.exc.cr2;
--            fallthrough;
--        case VMEXIT_NPF:
--            ns_vmcb->exitinfo2 = svm->ns_vmexit.exitinfo2;
--            fallthrough;
--        case VMEXIT_EXCEPTION_NP:
--        case VMEXIT_EXCEPTION_SS:
--        case VMEXIT_EXCEPTION_GP:
--        case VMEXIT_EXCEPTION_15:
--        case VMEXIT_EXCEPTION_MF:
--        case VMEXIT_EXCEPTION_AC:
--            ns_vmcb->exitinfo1 = svm->ns_vmexit.exitinfo1;
--            break;
--        default:
-+            svm_enable_intr_window(v, intack);
+@@ -939,12 +956,18 @@ nsvm_vmcb_guest_intercepts_exitcode(struct vcpu *v,
              break;
-         }
-+
-+        svm_inject_intr(v, intack.vector);
-+        pt_intr_post(v, intack);
-+        break;
-+    }
-+
-+    case VMEXIT_EXCEPTION_PF:
-+        ns_vmcb->_cr2 = exitinfo2;
-+        fallthrough;
-+    case VMEXIT_NPF:
-+        ns_vmcb->exitinfo2 = exitinfo2;
-+        fallthrough;
-+    case VMEXIT_EXCEPTION_NP:
-+    case VMEXIT_EXCEPTION_SS:
-+    case VMEXIT_EXCEPTION_GP:
-+    case VMEXIT_EXCEPTION_15:
-+    case VMEXIT_EXCEPTION_MF:
-+    case VMEXIT_EXCEPTION_AC:
-+        ns_vmcb->exitinfo1 = exitinfo1;
-+        break;
-+    default:
-+        break;
-     }
+         return 0;
  
-     ns_vmcb->exitcode = exitcode;
-@@ -811,10 +808,16 @@ nsvm_vcpu_vmexit_inject(struct vcpu *v, struct cpu_user_regs *regs,
- int cf_check nsvm_vcpu_vmexit_event(
-     struct vcpu *v, const struct x86_event *event)
+-    case VMEXIT_VMRUN ... VMEXIT_XSETBV:
++    case VMEXIT_VMRUN ... VMEXIT_RDPRU:
+         exit_bits = 1ULL << (exitcode - VMEXIT_VMRUN);
+         if ( svm->ns_general2_intercepts & exit_bits )
+             break;
+         return 0;
+ 
++    case VMEXIT_INVLPGB ... VMEXIT_IDLE_HLT:
++        exit_bits = 1ULL << (exitcode - VMEXIT_INVLPGB);
++        if ( svm->ns_general3_intercepts & exit_bits )
++            break;
++        return 0;
++
+     case VMEXIT_NPF:
+         if ( nestedhvm_paging_mode_hap(v) )
+             break;
+@@ -1026,10 +1049,15 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
+     /* TLB control */
+     ns_vmcb->tlb_control = 0;
+ 
+-    /* Virtual Interrupts */
+-    ns_vmcb->_vintr = n2vmcb->_vintr;
+-    if ( !svm->ns_hostflags.fields.vintrmask )
+-        ns_vmcb->_vintr.fields.intr_masking = 0;
++    /*
++     * Virtual Interrupts.  #VMEXIT writes back V_TPR and V_IRQ (APM vol.2
++     * 15.6); the remaining fields do not change.  Copy vGIF back only if
++     * enabled in L1.
++     */
++    ns_vmcb->_vintr.fields.tpr = n2vmcb->_vintr.fields.tpr;
++    ns_vmcb->_vintr.fields.irq = n2vmcb->_vintr.fields.irq;
++    if ( ns_vmcb->_vintr.fields.vgif_enable )
++        ns_vmcb->_vintr.fields.vgif = n2vmcb->_vintr.fields.vgif;
+ 
+     /* Interrupt state */
+     ns_vmcb->int_stat = n2vmcb->int_stat;
+@@ -1437,19 +1465,30 @@ nestedsvm_vcpu_interrupt(struct vcpu *v, const struct hvm_intack intack)
+ bool
+ nestedsvm_gif_isset(struct vcpu *v)
  {
-+    enum nestedhvm_vmexits ret;
-+
-     ASSERT(vcpu_nestedhvm(v).nv_vvmcx != NULL);
- 
--    nestedsvm_vmexit_defer(v, VMEXIT_EXCEPTION_DE + event->vector,
--                           event->error_code, event->data);
-+    ret = nestedsvm_vcpu_vmexit(v, guest_cpu_user_regs(),
-+                                VMEXIT_EXCEPTION_DE + event->vector,
-+                                event->error_code, event->data);
-+    if ( ret == NESTEDHVM_VMEXIT_FATALERROR )
-+        domain_crash(v->domain);
-+
-     return NESTEDHVM_VMEXIT_DONE;
- }
- 
-@@ -1219,7 +1222,7 @@ enum hvm_intblk cf_check nsvm_intr_blocked(struct vcpu *v)
-         if ( v->io.req.state != STATE_IOREQ_NONE )
-             return hvm_intblk_shadow;
- 
--        if ( !nv->nv_vmexit_pending && n2vmcb->exit_int_info.v )
-+        if ( n2vmcb->exit_int_info.v )
-         {
-             /* Give the l2 guest a chance to finish the delivery of
-              * the last injected interrupt or exception before we
-@@ -1228,42 +1231,15 @@ enum hvm_intblk cf_check nsvm_intr_blocked(struct vcpu *v)
-             return hvm_intblk_shadow;
-         }
-     }
--
--    if ( nv->nv_vmexit_pending )
--        /* hvm_inject_hw_exception() must have run before.
--         * exceptions have higher priority than interrupts.
--         */
--        return hvm_intblk_rflags_ie;
--
-     return hvm_intblk_none;
- }
- 
--/* VMEXIT emulation */
--void
--nestedsvm_vmexit_defer(struct vcpu *v,
--    uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2)
--{
 -    struct nestedsvm *svm = &vcpu_nestedsvm(v);
 -    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
--
++    struct nestedvcpu *nv = &vcpu_nestedhvm(v);
++    struct vmcb_struct *n1vmcb = nv->nv_n1vmcx;
++    struct vmcb_struct *n2vmcb = nv->nv_n2vmcx;
++    struct vmcb_struct *ns_vmcb = nv->nv_vvmcx;
+ 
+-    /* get the vmcb gif value if using vgif */
 -    if ( vmcb->_vintr.fields.vgif_enable )
--        vmcb->_vintr.fields.vgif = 0;
+-        return vmcb->_vintr.fields.vgif;
 -    else
--        svm->ns_gif = 0;
--
--    svm->ns_vmexit.exitcode = exitcode;
--    svm->ns_vmexit.exitinfo1 = exitinfo1;
--    svm->ns_vmexit.exitinfo2 = exitinfo2;
--    vcpu_nestedhvm(v).nv_vmexit_pending = 1;
--}
--
- enum nestedhvm_vmexits
- nestedsvm_check_intercepts(struct vcpu *v, struct cpu_user_regs *regs,
-     uint64_t exitcode)
- {
-     bool is_intercepted;
- 
--    ASSERT(vcpu_nestedhvm(v).nv_vmexit_pending == 0);
-     is_intercepted = nsvm_vmcb_guest_intercepts_exitcode(v, regs, exitcode);
- 
-     /* 
-@@ -1352,11 +1328,12 @@ nestedsvm_vmexit_n2n1(struct vcpu *v, struct cpu_user_regs *regs)
- /* The exitcode is in native SVM/VMX format. The forced exitcode
-  * is in generic format.
-  */
--static enum nestedhvm_vmexits
-+enum nestedhvm_vmexits
- nestedsvm_vcpu_vmexit(struct vcpu *v, struct cpu_user_regs *regs,
--    uint64_t exitcode)
-+    uint64_t exitcode, uint64_t exitinfo1, uint64_t exitinfo2)
- {
-     int rc;
-+    enum nestedhvm_vmexits ret = NESTEDHVM_VMEXIT_DONE;
-     struct nestedvcpu *nv = &vcpu_nestedhvm(v);
- 
-     nv->nv_vmswitch_in_progress = 1;
-@@ -1368,14 +1345,12 @@ nestedsvm_vcpu_vmexit(struct vcpu *v, struct cpu_user_regs *regs,
-      */
-     if ( nestedhvm_vcpu_in_guestmode(v) )
-     {
--        enum nestedhvm_vmexits ret;
--
-         ret = nestedsvm_vmexit_n2n1(v, regs);
-         switch ( ret )
-         {
-         case NESTEDHVM_VMEXIT_FATALERROR:
-             gdprintk(XENLOG_ERR, "VMEXIT: fatal error\n");
--            return ret;
-+            goto out;
-         case NESTEDHVM_VMEXIT_HOST:
-             BUG();
- 
-@@ -1395,46 +1370,18 @@ nestedsvm_vcpu_vmexit(struct vcpu *v, struct cpu_user_regs *regs,
-     /* Prepare for running the l1 guest. Make the actual
-      * modifications to the virtual VMCB/VMCS.
-      */
--    rc = nsvm_vcpu_vmexit_inject(v, regs, exitcode);
-+    rc = nsvm_vcpu_vmexit_inject(v, regs, exitcode, exitinfo1, exitinfo2);
- 
-     /* If l1 guest uses shadow paging, update the paging mode. */
-     if ( !nestedhvm_paging_mode_hap(v) )
-         paging_update_paging_modes(v);
- 
--    nv->nv_vmswitch_in_progress = 0;
--
-     if ( rc )
--        return NESTEDHVM_VMEXIT_FATALERROR;
--
--    return NESTEDHVM_VMEXIT_DONE;
--}
--
--/* VCPU switch */
--void asmlinkage nsvm_vcpu_switch(void)
--{
--    struct cpu_user_regs *regs = guest_cpu_user_regs();
--    struct vcpu *v = current;
--    struct nestedvcpu *nv;
--    struct nestedsvm *svm;
--
--    if ( !nestedhvm_enabled(v->domain) )
--        return;
--
--    nv = &vcpu_nestedhvm(v);
--    svm = &vcpu_nestedsvm(v);
--    ASSERT(v->arch.hvm.svm.vmcb != NULL);
--    ASSERT(nv->nv_n1vmcx != NULL);
--    ASSERT(nv->nv_n2vmcx != NULL);
--    ASSERT(nv->nv_n1vmcx_pa != INVALID_PADDR);
--    ASSERT(nv->nv_n2vmcx_pa != INVALID_PADDR);
-+        ret = NESTEDHVM_VMEXIT_FATALERROR;
- 
--    if ( nv->nv_vmexit_pending )
--    {
--    vmexit:
--        nestedsvm_vcpu_vmexit(v, regs, svm->ns_vmexit.exitcode);
--        nv->nv_vmexit_pending = 0;
--        return;
--    }
-+out:
-+    nv->nv_vmswitch_in_progress = 0;
-+    return ret;
+-        return svm->ns_gif;
++    /*
++     * An L2 with no vGIF of its own shares L1's GIF.  L0 keeps that shared
++     * GIF in the L2 shadow, to keep an L2 CLGI off the host's.
++     */
++    if ( nestedhvm_vcpu_in_guestmode(v) &&
++         !ns_vmcb->_vintr.fields.vgif_enable )
++        return n2vmcb->_vintr.fields.vgif;
++
++    /*
++     * The VMCB virtual GIF is authoritative.
++     */
++    return n1vmcb->_vintr.fields.vgif;
  }
  
- /* Interrupts, Virtual GIF */
-@@ -1477,7 +1424,10 @@ nestedsvm_vcpu_interrupt(struct vcpu *v, const struct hvm_intack intack)
-                                      guest_cpu_user_regs(), exitcode);
-     if ( ret )
-     {
--        nestedsvm_vmexit_defer(v, exitcode, intack.source, exitinfo2);
-+        ret = nestedsvm_vcpu_vmexit(v, guest_cpu_user_regs(), exitcode,
-+                                    intack.source, exitinfo2);
-+        if ( ret == NESTEDHVM_VMEXIT_FATALERROR )
-+            domain_crash(v->domain);
-         return NSVM_INTR_FORCEVMEXIT;
-     }
+ void svm_vmexit_do_stgi(struct cpu_user_regs *regs, struct vcpu *v)
+ {
++    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+     unsigned int inst_len;
++    vintr_t intr;
  
+     /*
+      * STGI doesn't require SVME to be set to be used.  See AMD APM vol
+@@ -1464,7 +1503,9 @@ void svm_vmexit_do_stgi(struct cpu_user_regs *regs, struct vcpu *v)
+     if ( (inst_len = svm_get_insn_len(v, INSTR_STGI)) == 0 )
+         return;
+ 
+-    vcpu_nestedsvm(v).ns_gif = 1;
++    intr = vmcb_get_vintr(vmcb);
++    intr.fields.vgif = 1;
++    vmcb_set_vintr(vmcb, intr);
+ 
+     __update_guest_eip(regs, inst_len);
+ }
+@@ -1485,10 +1526,9 @@ void svm_vmexit_do_clgi(struct cpu_user_regs *regs, struct vcpu *v)
+     if ( (inst_len = svm_get_insn_len(v, INSTR_CLGI)) == 0 )
+         return;
+ 
+-    vcpu_nestedsvm(v).ns_gif = 0;
+-
+     /* After a CLGI no interrupts should come */
+     intr = vmcb_get_vintr(vmcb);
++    intr.fields.vgif = 0;
+     intr.fields.irq = 0;
+     general1_intercepts &= ~GENERAL1_INTERCEPT_VINTR;
+     vmcb_set_vintr(vmcb, intr);
+@@ -1504,10 +1544,17 @@ void svm_vmexit_do_clgi(struct cpu_user_regs *regs, struct vcpu *v)
+ void svm_nested_features_on_efer_update(struct vcpu *v)
+ {
+     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
+-    struct nestedsvm *svm = &vcpu_nestedsvm(v);
+     u32 general2_intercepts;
+     vintr_t vintr;
+ 
++    /*
++     * These accelerate the L1 VMCB.  A world switch loads an EFER rather
++     * than writing one, and an L2 EFER write says nothing about L1; the L2
++     * shadow is configured in nsvm_vmcb_prepare4vmrun().
++     */
++    if ( nestedhvm_vmswitch_in_progress(v) || nestedhvm_vcpu_in_guestmode(v) )
++        return;
++
+     /*
+      * Need state for transfering the nested gif status so only write on
+      * the hvm_vcpu EFER.SVME changing.
+@@ -1515,7 +1562,6 @@ void svm_nested_features_on_efer_update(struct vcpu *v)
+     if ( nsvm_efer_svm_enabled(v) )
+     {
+         if ( !vmcb->virt_ext.fields.vloadsave_enable &&
+-             paging_mode_hap(v->domain) &&
+              cpu_has_svm_vloadsave )
+         {
+             vmcb->virt_ext.fields.vloadsave_enable = 1;
+@@ -1525,11 +1571,9 @@ void svm_nested_features_on_efer_update(struct vcpu *v)
+             vmcb_set_general2_intercepts(vmcb, general2_intercepts);
+         }
+ 
+-        if ( !vmcb->_vintr.fields.vgif_enable &&
+-             cpu_has_svm_vgif )
++        if ( !vmcb->_vintr.fields.vgif_enable )
+         {
+             vintr = vmcb_get_vintr(vmcb);
+-            vintr.fields.vgif = svm->ns_gif;
+             vintr.fields.vgif_enable = 1;
+             vmcb_set_vintr(vmcb, vintr);
+             general2_intercepts  = vmcb_get_general2_intercepts(vmcb);
+@@ -1552,7 +1596,6 @@ void svm_nested_features_on_efer_update(struct vcpu *v)
+         if ( vmcb->_vintr.fields.vgif_enable )
+         {
+             vintr = vmcb_get_vintr(vmcb);
+-            svm->ns_gif = vintr.fields.vgif;
+             vintr.fields.vgif_enable = 0;
+             vmcb_set_vintr(vmcb, vintr);
+             general2_intercepts  = vmcb_get_general2_intercepts(vmcb);
+@@ -1574,5 +1617,6 @@ void __init start_nested_svm(struct hvm_function_table *hvm_function_table)
+         cpu_has_svm_lbrv &&
+         cpu_has_svm_nrips &&
+         cpu_has_svm_flushbyasid &&
+-        cpu_has_svm_decode;
++        cpu_has_svm_decode &&
++        cpu_has_svm_vgif;
+ }
 diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index fc447d24d67e..a8d258aa3980 100644
+index a8d258aa3980..074f09a0e0e9 100644
 --- a/xen/arch/x86/hvm/svm/svm.c
 +++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -1619,7 +1619,9 @@ static void svm_do_nested_pgfault(struct vcpu *v,
-     case -1:
-         ASSERT(nestedhvm_enabled(v->domain) && nestedhvm_vcpu_in_guestmode(v));
-         /* inject #VMEXIT(NPF) into guest. */
--        nestedsvm_vmexit_defer(v, VMEXIT_NPF, pfec, gpa);
-+        if ( nestedsvm_vcpu_vmexit(v, regs, VMEXIT_NPF, pfec, gpa) ==
-+             NESTEDHVM_VMEXIT_FATALERROR )
-+            domain_crash(v->domain);
-         return;
-     }
+@@ -1660,6 +1660,8 @@ static void svm_dr_access(struct vcpu *v, struct cpu_user_regs *regs)
  
-@@ -2595,8 +2597,10 @@ void asmlinkage svm_vmexit_handler(void)
-             switch ( nsret )
-             {
-             case NESTEDHVM_VMEXIT_DONE:
--                /* defer VMEXIT injection */
--                nestedsvm_vmexit_defer(v, exit_reason, exitinfo1, exitinfo2);
-+                nsret = nestedsvm_vcpu_vmexit(v, regs, exit_reason,
-+                                              exitinfo1, exitinfo2);
-+                if ( nsret == NESTEDHVM_VMEXIT_FATALERROR )
-+                    domain_crash(v->domain);
-                 goto out;
-             case NESTEDHVM_VMEXIT_FATALERROR:
-                 gdprintk(XENLOG_ERR, "unexpected nestedsvm_vmexit() error\n");
+     TRACE(TRC_HVM_DR_WRITE);
+     __restore_debug_registers(vmcb, v);
++    if ( nestedhvm_enabled(v->domain) && nestedhvm_vcpu_in_guestmode(v) )
++        vmcb_set_dr_intercepts(v->arch.hvm.svm.vmcb, 0);
+ }
+ 
+ static int cf_check svm_msr_read_intercept(
+@@ -1990,6 +1992,8 @@ static int cf_check svm_msr_write_intercept(
+     case MSR_K8_SYSCFG:
+     case MSR_K8_VM_CR:
+     case MSR_AMD64_EX_CFG:
++    case MSR_K8_HWCR:
++    case MSR_K8_VM_IGNNE:
+         /* ignore write. handle all bits as read-only. */
+         break;
+ 
+diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
+index d069280a4da8..5354c4f1b85f 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.c
++++ b/xen/arch/x86/hvm/svm/vmcb.c
+@@ -194,6 +194,9 @@ static int construct_vmcb(struct vcpu *v)
+ 
+     vmcb->_vintr.fields.vnmi_enable = cpu_has_svm_vnmi;
+ 
++    /* GIF is set out of reset; with vGIF its value lives in the VMCB. */
++    vmcb->_vintr.fields.vgif = 1;
++
+     return 0;
+ }
+ 
+diff --git a/xen/arch/x86/hvm/svm/vmcb.h b/xen/arch/x86/hvm/svm/vmcb.h
+index 3760f71a8625..d098bf1d1355 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.h
++++ b/xen/arch/x86/hvm/svm/vmcb.h
+@@ -288,7 +288,13 @@ enum VMEXIT_EXITCODE
+     VMEXIT_MWAIT_CONDITIONAL= 140, /* 0x8c */
+     VMEXIT_XSETBV           = 141, /* 0x8d */
+     VMEXIT_RDPRU            = 142, /* 0x8e */
++    VMEXIT_INVLPGB          = 160, /* 0xa0 */
++    VMEXIT_INVLPGB_ILLEGAL  = 161, /* 0xa1 */
++    VMEXIT_INVPCID          = 162, /* 0xa2 */
++    VMEXIT_MCOMMIT          = 163, /* 0xa3 */
++    VMEXIT_TLBSYNC          = 164, /* 0xa4 */
+     VMEXIT_BUS_LOCK         = 165, /* 0xa5 */
++    VMEXIT_IDLE_HLT         = 166, /* 0xa6 */
+     /* Remember to also update VMEXIT_NPF_PERFC! */
+     VMEXIT_NPF              = 1024, /* 0x400, nested paging fault */
+     /* Remember to also update SVM_PERF_EXIT_REASON_SIZE! */
 diff --git a/xen/arch/x86/include/asm/hvm/svm-types.h b/xen/arch/x86/include/asm/hvm/svm-types.h
-index beab9a3af203..256bf5b91402 100644
+index 256bf5b91402..24363a58ffcb 100644
 --- a/xen/arch/x86/include/asm/hvm/svm-types.h
 +++ b/xen/arch/x86/include/asm/hvm/svm-types.h
-@@ -69,13 +69,6 @@ struct nestedsvm {
-     bool ns_gif;
+@@ -44,6 +44,7 @@ struct nestedsvm {
+     uint32_t ns_exception_intercepts;
+     uint32_t ns_general1_intercepts;
+     uint32_t ns_general2_intercepts;
++    uint32_t ns_general3_intercepts;
+ 
+     /* Cached real MSR permission bitmaps of the l2 guest */
+     unsigned long *ns_cached_msrpm;
+@@ -66,7 +67,6 @@ struct nestedsvm {
+     uint64_t ns_vmcb_guestcr3, ns_vmcb_hostcr3;
+     uint32_t ns_asid;
+ 
+-    bool ns_gif;
      bool ns_hap_enabled;
  
--    /* Only meaningful when vmexit_pending flag is set */
--    struct {
--        uint64_t exitcode;  /* native exitcode to inject into l1 guest */
--        uint64_t exitinfo1; /* additional information to the exitcode */
--        uint64_t exitinfo2; /* additional information to the exitcode */
--    } ns_vmexit;
--
      union {
-         uint32_t bytes;
-         struct {
+diff --git a/xen/arch/x86/include/asm/msr-index.h b/xen/arch/x86/include/asm/msr-index.h
+index ad1c6c97f8f7..beb858bf99bb 100644
+--- a/xen/arch/x86/include/asm/msr-index.h
++++ b/xen/arch/x86/include/asm/msr-index.h
+@@ -250,6 +250,7 @@
+ #define MSR_K8_VM_CR                        _AC(0xc0010114, U)
+ #define  VM_CR_INIT_REDIRECTION             (_AC(1, ULL) <<  1)
+ #define  VM_CR_SVM_DISABLE                  (_AC(1, ULL) <<  4)
++#define MSR_K8_VM_IGNNE                     _AC(0xc0010115, U)
+ 
+ #define MSR_VIRT_SPEC_CTRL                  _AC(0xc001011f, U) /* Layout matches MSR_SPEC_CTRL */
+ 
 -- 
 2.34.1
 
