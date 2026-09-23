@@ -4,47 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D5B6FC982FA
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 12:16:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430278.1652802 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 114B4C9830B
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 12:26:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430307.1652810 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9Lsx-0004kr-EJ; Wed, 23 Sep 2026 12:15:39 +0000
+	id 1x9M3N-0006UG-9Z; Wed, 23 Sep 2026 12:26:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430278.1652802; Wed, 23 Sep 2026 12:15:39 +0000
+Received: by outflank-mailman (output) from mailman id 1430307.1652810; Wed, 23 Sep 2026 12:26:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9Lsx-0004kj-A9; Wed, 23 Sep 2026 12:15:39 +0000
-Received: by outflank-mailman (input) for mailman id 1430278;
- Wed, 23 Sep 2026 12:15:38 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x9Lsv-0004kb-JA
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 12:15:38 +0000
+	id 1x9M3N-0006U9-6V; Wed, 23 Sep 2026 12:26:25 +0000
+Received: by outflank-mailman (input) for mailman id 1430307;
+ Wed, 23 Sep 2026 12:26:23 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <agordeev@linux.ibm.com>) id 1x9M3L-0006U3-Cb
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 12:26:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9Lsu-007jMO-WA
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 14:15:37 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0ce31488500072c4@swg.vates.tech>)
- id 6ab3c2db-e002-0a2a0a5209dd-0a2a4502ab0e-44
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 14:15:36 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0ce31488500072c4@swg.vates.tech>)
- id 6ab3c2e8-6ca4-0a2a45020019-b9ff1c228bf7-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 14:15:36 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0ce31488500072c4.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 23 Sep 2026 12:15:31 +0000
-Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 88662821D0;
- Wed, 23 Sep 2026 14:15:30 +0200 (CEST)
+ id 1x9M3K-00DfsD-Lz
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 14:26:22 +0200
+Received: from [10.42.69.10] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6ab3c569-8faa-0a2a0a5109dd-0a2a450aa1c8-24
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 14:26:22 +0200
+Received: from [148.163.156.1] (helo=mx0a-001b2d01.pphosted.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6ab3c56c-f2d2-0a2a450a0019-94a39c01ef2c-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 14:26:22 +0200
+Received: from pps.filterd (m0356517.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68N8ZPkk2906895; Wed, 23 Sep 2026 12:25:42 GMT
+Received: from ppma22.wdc07v.mail.ibm.com
+ (5c.69.3da9.ip4.static.sl-reverse.com [169.61.105.92])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4gskgsb5ap-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Wed, 23 Sep 2026 12:25:42 +0000 (GMT)
+Received: from pps.filterd (ppma22.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma22.wdc07v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68N95f8S005144; Wed, 23 Sep 2026 12:25:41 GMT
+Received: from smtprelay05.fra02v.mail.ibm.com ([9.218.2.225])
+ by ppma22.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4gvbu8rrf7-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 23 Sep 2026 12:25:41 +0000 (GMT)
+Received: from smtpav01.fra02v.mail.ibm.com (smtpav01.fra02v.mail.ibm.com
+ [10.20.54.100])
+ by smtprelay05.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 68NCPd4t38732190
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 23 Sep 2026 12:25:39 GMT
+Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id EC5CD20065;
+ Wed, 23 Sep 2026 12:25:38 +0000 (GMT)
+Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 3B95620043;
+ Wed, 23 Sep 2026 12:25:38 +0000 (GMT)
+Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown
+ [9.224.92.206])
+ by smtpav01.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+ Wed, 23 Sep 2026 12:25:38 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,190 +76,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=BXA/xZrK7qbUzj5CdTkyj0eFU/ACd0spVO4w9gv8LDI=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=h6QTIxvdof37gUbwo8dn9ZeL5MEDHAE6DkG6dHHCRo4jOjtZ5/STYUOxyABBxJPMOCIPtzwQq
- SjL1T+mR1RjT14eyFM+/oifhqyI+vf5+Gg8xrtcEZbxj8rgjYkaEgM7WYCbsR5g0CYqX0A5Al5X
- Yru80pT1QSLdCO6vnjbLV37ZIrX8eIaDug8brh2/ZrCo6QMWAHzSCO+jqKAiIB0a0iIcxMaUh+/
- AZwxQhtb3EtPrLp4q1iE5GDFvzsSR6eFY9IOoVFzM80zdPDEvlHnJjoQUP21CjENNX1QXbvcATY
- dWHO8V1kQs+28WAE7jw1dDOgzl3ZRIJDcSN5p5wg2wsg==
-X-Zone-Loop: df19d74efeea9eaa38707cb655f52ab688699ea3d9d3
-x-campaign-type: default
-x-transaction-id: 69b697b0-4e47-4f90-ab55-8c08355dbc31
-x-swg-uid: 01-1661bd48-ee02-4300-a83e-67d03e7f4fc7
-X-Mailer: Sweego
-Message-ID:
- <1790165731.8631fc262581453bbf619ec5b2062170.1a0ce31488500072c4@vates.tech>
-x-swg-bid: 1790165731.8631fc262581453bbf619ec5b2062170.1a0ce31488500072c4
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pp1; bh=v0X+Rs8szhHkgnuPcIWhAyZce3EkTz
+	TtRBKQqHEj2SY=; b=DymJK7xH6KCGN1aWSDi8yE3JeZCCm0hQdInjvaYZRKitNb
+	sl2yDuJWYD4cPHPK0u4r0N9hStfA3omtniXxpaEHynRZ9NUZdggQ7y4v9nOzT7U9
+	XpO+PxL7oe/Fbh6/+YhooIKtXBG55sR4NiT2ToMHAWFRENr3oHFXFkwslZyhFWbI
+	1B334HuWzXx4hpfNYekKa9xlmXk6cYQIBC2BCsfeLJ0OBkoaCBbxWf7H/z4Lv2mB
+	P/Lqle8a9fS6YnXCc6Y1u7OGYFyusCvin01zNALgGbVb6TQ9tmxXkOZ3MjLGdEdC
+	M/ha62xE0Fq3/RrtNVNmohrqAIQ4+aJYTAup8uSA==
+Date: Wed, 23 Sep 2026 14:25:37 +0200
+From: Alexander Gordeev <agordeev@linux.ibm.com>
+To: Muhammad Usama Anjum <usama.anjum@arm.com>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Tvrtko Ursulin <tursulin@ursulin.net>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+        Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Muchun Song <muchun.song@linux.dev>,
+        Oscar Salvador <osalvador@suse.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        "Liam R. Howlett" <liam@infradead.org>,
+        Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>,
+        "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+        Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+        David Hildenbrand <david@kernel.org>,
+        Pasha Tatashin <pasha.tatashin@soleen.com>,
+        Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
+        Uladzislau Rezki <urezki@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Eduard Zingerman <eddyz87@gmail.com>,
+        Kumar Kartikeya Dwivedi <memxor@gmail.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>,
+        Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
+        Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
+        Christoph Lameter <cl@gentwo.org>, Mike Rapoport <rppt@kernel.org>,
+        Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, pfalcato@suse.de,
+        ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
+        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
+        linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+        linux-perf-users@vger.kernel.org, damon@lists.linux.dev
+Subject: Re: [PATCH v2 0/8] mm: distinguish PTE table storage from PTE values
+Message-ID: <1401e907-04ff-4ee5-ad03-00d88531a091-agordeev@linux.ibm.com>
+References: <20260903103002.1091859-1-usama.anjum@arm.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v2 31/39] xen/riscv: implement APLIC-hart sync barrier
- for vCPU migration
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- xen-devel@lists.xenproject.org, 
- Romain Caritey <Romain.Caritey@microchip.com>, 
- Zheng Zhang <zhangzheng@iscas.ac.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <1cf983c9-456b-4137-b302-e60a0f5ed057@gmail.com>
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <3d953b6e7f221f4cf4143454076466fab38b6236.1787838835.git.oleksii.kurochko@gmail.com>
- <1790096435.8631fc262581453bbf619ec5b2062170.1a0ca0fea6500072c4@vates.tech>
- <6da5569d-8ae8-4388-a407-00b5d2a4bc27@gmail.com>
- <1cf983c9-456b-4137-b302-e60a0f5ed057@gmail.com>
-Date: Wed, 23 Sep 2026 14:15:25 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790165725; l=4819;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=cR4lKVyGqbLaLxXYF/cwm1EWPPEICePCmiVQuJuVqRQ=;
- b=Q0FtZKLXNb4vPQjNyhGEMJ0LGbQQ5qgNAtVZS7iRFNlmapsf88IsaS65Frs9/Dwvd+OlYxD9O
- bGP/WVd7HbuBDF3/SqsApxAeFADrAgmWZ7h86HhANESAExu2nKegCpA
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1790165730760
-X-purgate-ID: tlsNG-720697/1790165736-F34BE2AC-C9FCD9B4/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4823
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260903103002.1091859-1-usama.anjum@arm.com>
+X-TM-AS-GCONF: 00
+X-Authority-Analysis: v=2.4 cv=V/XoQuni c=1 sm=1 tr=0 ts=6ab3c546 cx=c_pps
+ a=5BHTudwdYE3Te8bg5FgnPg==:117 a=5BHTudwdYE3Te8bg5FgnPg==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=U7nrCbtTmkRpXpFmAIza:22 a=VwQbUJbxAAAA:8
+ a=7CQSdrXTAAAA:8 a=vUGUDSKChvK0ha46Ui4A:9 a=CjuIK1q_8ugA:10
+ a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-ORIG-GUID: ev-_JLyQr-pwEqNhXTXIZA7T8jABJbLj
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA0OCBTYWx0ZWRfX3jBRFLFxLXRH
+ 41gkMIIRJm9VbqiK2YtOcXDOIZwYjrCdxtSZOW/HeORsfhOxpmJhhPEWSN2wE9YBL2VRhW6O7D2
+ Qr3To+xxPwlTw7GeQ2a8zIO36T51bHxKzdyp7yFXdKF3rEFGszcZBbYQEl+zv+QLSQa5BvzpNIK
+ C5R4wcWrvwWHRZRXWHAwBTIUpPG8PzVJkpsQifRmwR8LgilnDa74f2xP/hyPClmLnKPerI1e3/s
+ fJyE7zMlic6Rx/76z/RtAMNkCr6xtVVE5VeRNLbRnsmDb4KohBKbvJQ4ax0IiGSsSTYf9dF9DDW
+ Go51ekYyr1d3O9vLChpz5abCQojIKm+DNY8HzWZzpMyAQ8VmaL5ufL6oddQ5mv/Q189e6iBxqs6
+ q8d6mtePYNjZn9b5/f57l92H+6h3S1U9nREt1LclL5Eqc+yXvnOU5Bwtr8lGfdC+FyC20VRDqr5
+ yvBcPkksv7DCdMzUVog==
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA0OCBTYWx0ZWRfX46m1QpM8dmIH
+ lg16GCvD6ONwEeOosozSD2m/9N5Zt+i3zavCwk/jFQmzNEO3Hlv1PgshihWpld67QkuM0YD1grS
+ xDTdsyKVkLQulaYB1Dcv4/OHkUvJzFM=
+X-Proofpoint-GUID: ev-_JLyQr-pwEqNhXTXIZA7T8jABJbLj
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ priorityscore=1501 spamscore=0 malwarescore=0 clxscore=1015 phishscore=0
+ bulkscore=0 adultscore=0 lowpriorityscore=0 impostorscore=0 suspectscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230048
+X-purgate-ID: tlsNG-4011c0/1790166382-526DECFC-91688456/0/0
+X-purgate-type: clean
+X-purgate-size: 767
 
-On 2026-09-23 12:57 +0200, Oleksii Kurochko wrote:
-> 
-> 
-> On 9/22/26 8:48 PM, Oleksii Kurochko wrote:
-> > 
-> > 
-> > On 9/22/26 7:00 PM, Baptiste Le Duc wrote:
-> >>> During migration of a virtual hart to a different guest interrupt file,
-> >>> straggler MSIs from the APLIC could arrive at the old interrupt file
-> >>> after the switch.
-> >>>
-> >>> genmsi is used despite not supporting guest interrupt files because the
-> >>> AIA spec guarantees that all MSIs previously sent from the APLIC to the
-> >>> same hart are visible at the hart's IMSIC before the extempore MSI from
-> >>> genmsi becomes visible.
-> >>
-> >>
-> >>>
-> >>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> >>>
-> >>> diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
-> >>> index 0af13f28e4..cb11d6aeaa 100644
-> >>> --- a/xen/arch/riscv/aplic.c
-> >>> +++ b/xen/arch/riscv/aplic.c
-> >>> @@ -27,7 +27,9 @@
-> >>>   #include <asm/imsic.h>
-> >>>   #include <asm/intc.h>
-> >>>   #include <asm/io.h>
-> >>> +#include <asm/processor.h>
-> >>>   #include <asm/riscv_encoding.h>
-> >>> +#include <asm/smp.h>
-> >>>   static struct aplic_priv aplic = {
-> >>>       .lock = SPIN_LOCK_UNLOCKED,
-> >>> @@ -205,6 +207,30 @@ void aplic_hw_write_reg(unsigned int offset, 
-> >>> uint32_t value)
-> >>>       spin_unlock_irqrestore(&aplic.lock, flags);
-> >>>   }
-> >>> +/*
-> >>> + * As needed, synchronize with all IOMMUs and APLICs to ensure that no
-> >>> + * straggler MSIs will arrive at the old interrupt file after this 
-> >>> step.
-> >>> + */
-> >>> +void aplic_genmsi_barrier(void)
-> >>> +{
-> >>> +    const struct imsic_config *imsic = imsic_get_config();
-> >>> +    unsigned int cpu = smp_processor_id();
-> >>> +    unsigned long flags;
-> >>> +    uint32_t val;
-> >>> +
-> >>> +    val = MASK_INSR(aplic_hart_field(cpu), APLIC_TARGET_HART_IDX) |
-> >>> +          (imsic->sync_id & APLIC_TARGET_EIID);
-> >>
-> >>
-> >>> +
-> >>> +    spin_lock_irqsave(&aplic.lock, flags);
-> >>> +
-> >>> +    writel(val, &aplic.regs->genmsi);
-> >>> +
-> >>> +    while ( readl(&aplic.regs->genmsi) & APLIC_GENMSI_BUSY )
-> >>> +        cpu_relax();
-> >>> +
-> >>> +    spin_unlock_irqrestore(&aplic.lock, flags);
-> >>> +}
-> >>> +
-> >> According to AIA spec §4.9.3 (Synchronizing interactions between a 
-> >> hart and the APLIC), the sequence needs 6 steps; this implements only 
-> >> steps 2-5:
-> >>
-> >> - Step 1: clear the pending bit for sync_id at the hart's IMSIC before 
-> >> writing genmsi.
-> >> - Step 6: after releasing the lock, poll the pending bit for sync_id 
-> >> at the hart's IMSIC until it's set.
-> >>
-> >> Step 4 (Busy clear) only means the APLIC has accepted/sent the MSI, 
-> >> not that it has arrived at the hart (the spec notes an unspecified 
-> >> travel delay).
-> >> Without step 6, aplic_genmsi_barrier() returns before the MSI (and 
-> >> thus prior MSIs) actually reach the hart, so it doesn't achieve the 
-> >> barrier it's meant to
-> >> provide.
-> >>
-> > 
-> > It is really missed but it exists in riscv-next-upstream branch 
-> > (https://gitlab.com/xen-project/people/olkur/xen/-/blob/riscv-next- 
-> > upstreaming/xen/arch/riscv/imsic.c#L723).
-> > 
-> > I will re-check why it is missed here.
-> 
-> Step 1 and step 6 are not missing, they are just not part of
-> aplic_genmsi_barrier() itself. They are done by its caller, which is 
-> added in "xen/riscv: remap interrupts to new IMSIC VS-file":
-> 
->      static void cf_check imsic_aplic_sync(void *unused)
->      {
->          imsic_local_eix_update(imsic_cfg.sync_id, 1, true, false);
-> 
->          aplic_genmsi_barrier();
-> 
->          while ( !imsic_local_is_pending(imsic_cfg.sync_id) )
->              cpu_relax();
->      }
-> 
-> I did consider doing all six steps inside aplic_genmsi_barrier(), but 
-> that would make aplic.c reach into IMSIC internals (the local EIx CSR 
-> accessors, which are private to imsic.c), and I would rather not add 
-> that dependency. Keeping the APLIC half (write genmsi, wait for Busy to 
-> clear) in aplic.c and the IMSIC half (clear the pending bit of sync_id 
-> before, poll it until set afterwards) in imsic.c keeps the layering clean.
-> 
-> You are right, though, that nothing in this patch says so, and that the
-> helper on its own is not the full barrier its name suggests. I will 
-> spell the split out in the commit message and in the comment above the 
-> function.
-> 
-> Probably it will be better to introduce function imsic_aplic_sync() as a 
-> part of this patch.
-Yes it would make sense as function imsic_aplic_sync() is introduced in
-next patch so reviewer couldn't know the existence of it when reading
-this patch. Thanks for that!
-> 
-> ~ Oleksii
-> 
-> 
-> 
+On Thu, Sep 03, 2026 at 11:29:52AM +0100, Muhammad Usama Anjum wrote:
 
+Hi Muhammad,
 
+> I've the patches here [3] for arm64 conversion which I used to find
+> usages in generic code which I missed during development. These would be
+> sent separately.
+> 
+> [1] https://lore.kernel.org/all/6110202c-057b-4701-8c04-1a76ee7bb9ab@arm.com/
+> [2] https://lore.kernel.org/all/a063f6c5-2785-4a9f-8079-25edb3e54cef@arm.com
+> [3] https://gitlab.arm.com/linux-arm/linux-us/-/commits/pte0_arm
+
+I checked [3] with s390 and also against our lazy mmu implementation and it
+looks okay.
+
+However, is there a particular reason this series is against mm-new?
+Should it be against the master, it would be easier for me to try it in our CI.
+
+> Thanks,
+> Usama
+
+Thanks!
 
