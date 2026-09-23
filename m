@@ -4,46 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9CC5C982EA
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 11:17:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430213.1652783 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 89401C982FA
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 11:54:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430243.1652792 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9Ky3-0004eW-Uv; Wed, 23 Sep 2026 11:16:51 +0000
+	id 1x9LYH-0001h2-L4; Wed, 23 Sep 2026 11:54:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430213.1652783; Wed, 23 Sep 2026 11:16:51 +0000
+Received: by outflank-mailman (output) from mailman id 1430243.1652792; Wed, 23 Sep 2026 11:54:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9Ky3-0004eP-SI; Wed, 23 Sep 2026 11:16:51 +0000
-Received: by outflank-mailman (input) for mailman id 1430213;
- Wed, 23 Sep 2026 11:16:51 +0000
+	id 1x9LYH-0001gv-Hq; Wed, 23 Sep 2026 11:54:17 +0000
+Received: by outflank-mailman (input) for mailman id 1430243;
+ Wed, 23 Sep 2026 11:54:16 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1x9Ky3-0004eJ-6y
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 11:16:51 +0000
+ (envelope-from <agordeev@linux.ibm.com>) id 1x9LYG-0001gk-6A
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 11:54:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9Ky2-007XID-1t
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:16:50 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1x9LYF-007f0b-J9
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:54:15 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6ab3b51b-2eae-0a2a0a5409dd-0a2a450bae00-6
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 13:16:49 +0200
-Received: from [52.101.48.8]
- (helo=MW6PR02CU001.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6ab3b520-b7e8-0a2a450b0019-346530082af8-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 13:16:49 +0200
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
- by CY3PR03MB8152.namprd03.prod.outlook.com (2603:10b6:930:100::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.14; Wed, 23 Sep
- 2026 11:16:46 +0000
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0428.015; Wed, 23 Sep 2026
- 11:16:46 +0000
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6ab3bde3-bab6-0a2a0a5309dd-0a2a4507ab8c-28
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 13:54:15 +0200
+Received: from [148.163.158.5] (helo=mx0b-001b2d01.pphosted.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <agordeev@linux.ibm.com>)
+ id 6ab3bde5-b4ea-0a2a45070019-94a39e059ce6-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 13:54:14 +0200
+Received: from pps.filterd (m0356516.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68N8ZaCq2742039; Wed, 23 Sep 2026 11:52:49 GMT
+Received: from ppma13.dal12v.mail.ibm.com
+ (dd.9e.1632.ip4.static.sl-reverse.com [50.22.158.221])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4gske1jk3y-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Wed, 23 Sep 2026 11:52:49 +0000 (GMT)
+Received: from pps.filterd (ppma13.dal12v.mail.ibm.com [127.0.0.1])
+ by ppma13.dal12v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 68N8ILmd2892101; Wed, 23 Sep 2026 11:52:48 GMT
+Received: from smtprelay06.fra02v.mail.ibm.com ([9.218.2.230])
+ by ppma13.dal12v.mail.ibm.com (PPS) with ESMTPS id 4gu5bkgqma-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 23 Sep 2026 11:52:48 +0000 (GMT)
+Received: from smtpav05.fra02v.mail.ibm.com (smtpav05.fra02v.mail.ibm.com
+ [10.20.54.104])
+ by smtprelay06.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 68NBqkcL49086914
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 23 Sep 2026 11:52:46 GMT
+Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 4C3D920043;
+ Wed, 23 Sep 2026 11:52:46 +0000 (GMT)
+Received: from smtpav05.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 8F30620040;
+ Wed, 23 Sep 2026 11:52:45 +0000 (GMT)
+Received: from li-008a6a4c-3549-11b2-a85c-c5cc2836eea2.ibm.com (unknown
+ [9.224.92.206])
+ by smtpav05.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+ Wed, 23 Sep 2026 11:52:45 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,150 +76,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Ko156pzfNLv/coan9zKcYFk7a+dOlodbFjsWaFwDjIgBthz615Brrb8GqgJU07a25u67m3nToYFm8LAkALVcg4XIxwVjRPs1rJcnHShKDXtAMs2Efr7IDRmICHaQyH5F8LJBMNUvhVHOXMongqcKYLLp4nQlgDFWj8QbURsBG9vb/qZNaK5r4FeDNEXud1Xk1ORUb6QdvoOSdUjbhspaWWIlLiLkUmyhph9ykk6hvqBQLohN7hSHdBofGYBUNIUzUeQY5WW63OopBaqLwyVl/qvtbX1SwzqyyoxSnca9axi6c0XUoikOBxuuFOPWq0+kW5O8o7PuSkXy5hy9iDZlNQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=QxfeYVCK/ABHBpdU2TQPFB2PkdQGMgpkvrmStIswxk8=;
- b=Yf4VzTFJkxZWF8Zj2V3RlrARUJy51Xh3MjmYxc/ew7+Lr0CjynI9cvnUqeEpFFSpZzbBIAzE3HK/4ref9Csq6H93f5MsmZfaPsmHw799MU0mlq/djuJ1gzzJnJtgbwITDt+NN6J3dYLib4jgPXHrAix0Zs5JzIYswsEXkcc9Yf+5Qp0Bak3UJaELvFdBSWPmrKmTiVtj23R0HK55/TN+CJMTpfn5GN6MtFt53JnWFNfQweatq9PildM0FhEz5DAkQajrGh6LEJFtrM+bwPef4WGdSo35yvSv+vWKyAXV7mvkmLzyWJ8GIxsBxXj9+AsvtQdP1MOL6AK61QbbcpMDZw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=QxfeYVCK/ABHBpdU2TQPFB2PkdQGMgpkvrmStIswxk8=;
- b=TVyANupYmlotxXcwXgf37oUDOg0McuGrcmnQzSNnbAeNIwcyXVdlDtHC+5WuUBDA0TCqZzX5MXreG1v+v20GYRCfMm3HtM3AfMEmmlJdjj0HjOCgWirgj3IrRvtvDCiCZKF8xCquhuYnCS711B/aGiFW42zC3dTu7hVwpOS3kt4=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <38c41bfb-48c6-4408-8da1-2b7d730a6c9e@citrix.com>
-Date: Wed, 23 Sep 2026 12:16:41 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/nSVM: Save L2's CR4 on #VMEXIT, not Xen's
-To: Lin Liu <lin.liu01@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Jason Andryuk <jason.andryuk@amd.com>,
- Teddy Astie <teddy.astie@vates.tech>
-References: <a5702b9bc1d354dac5778deacbc397e76530408a.1790069475.git.lin.liu01@citrix.com>
-Content-Language: en-US
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-In-Reply-To: <a5702b9bc1d354dac5778deacbc397e76530408a.1790069475.git.lin.liu01@citrix.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO4P265CA0071.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:2af::13) To CH8PR03MB8274.namprd03.prod.outlook.com
- (2603:10b6:610:2ba::5)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pp1; bh=DZPR253R3+bl6LyBiXW5gQAtjY6DOY
+	80tr7PJYJoSn0=; b=Ip/9PsmLLpYTUEIiqqN7PEUCjt/tbos3gbllDcLV+dKinE
+	DxM4vzFM1FgDLuHauy7zkOFHkE+8QgTu4v3UOwe3wRUssGJANSTjHJOqGP138G+T
+	Nhqd4UMt93hU/7hAzMP4DnDStV7v3lAJgOZvyhZ0P+hcH1+UYg4pIU0KHQpm5t+5
+	XYQiGLs519bydF3F3Ly2mUsQkpmeIheUS2Amsu7SuvxdJgo6dsqyP4V/N6M8uPwo
+	Yuml8Vro5Oj2/R/nPk2G/xRZFMnqki/FTHYZUvTsblhV4A+Kj49Gi5gWyBTzSy/p
+	hvCA8ghvjVyo99no8eYyGLGNv+3L5xoksFaAmS9Q==
+Date: Wed, 23 Sep 2026 13:52:44 +0200
+From: Alexander Gordeev <agordeev@linux.ibm.com>
+To: Muhammad Usama Anjum <usama.anjum@arm.com>
+Cc: Jani Nikula <jani.nikula@linux.intel.com>,
+        Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+        Rodrigo Vivi <rodrigo.vivi@intel.com>,
+        Tvrtko Ursulin <tursulin@ursulin.net>,
+        David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
+        Dimitri Sivanich <dimitri.sivanich@hpe.com>,
+        Arnd Bergmann <arnd@arndb.de>,
+        Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "James E.J. Bottomley" <James.Bottomley@hansenpartnership.com>,
+        Helge Deller <deller@gmx.de>, Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Muchun Song <muchun.song@linux.dev>,
+        Oscar Salvador <osalvador@suse.de>,
+        Andrew Morton <akpm@linux-foundation.org>,
+        "Liam R. Howlett" <liam@infradead.org>,
+        Lorenzo Stoakes <ljs@kernel.org>, Will Deacon <will@kernel.org>,
+        "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+        Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+        Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+        David Hildenbrand <david@kernel.org>,
+        Pasha Tatashin <pasha.tatashin@soleen.com>,
+        Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
+        Uladzislau Rezki <urezki@gmail.com>,
+        Steven Rostedt <rostedt@goodmis.org>,
+        Masami Hiramatsu <mhiramat@kernel.org>,
+        Alexei Starovoitov <ast@kernel.org>,
+        Daniel Borkmann <daniel@iogearbox.net>,
+        Andrii Nakryiko <andrii@kernel.org>,
+        Eduard Zingerman <eddyz87@gmail.com>,
+        Kumar Kartikeya Dwivedi <memxor@gmail.com>,
+        Ingo Molnar <mingo@redhat.com>,
+        Arnaldo Carvalho de Melo <acme@kernel.org>,
+        Namhyung Kim <namhyung@kernel.org>, SJ Park <sj@kernel.org>,
+        "Matthew Wilcox (Oracle)" <willy@infradead.org>,
+        Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>,
+        Leon Romanovsky <leon@kernel.org>, Miaohe Lin <linmiaohe@huawei.com>,
+        Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>,
+        Christoph Lameter <cl@gentwo.org>, Mike Rapoport <rppt@kernel.org>,
+        Johannes Weiner <hannes@cmpxchg.org>, ziy@nvidia.com, pfalcato@suse.de,
+        ryan.roberts@arm.com, linux-kernel@vger.kernel.org,
+        intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        linux-parisc@vger.kernel.org, xen-devel@lists.xenproject.org,
+        linux-mm@kvack.org, linux-fsdevel@vger.kernel.org,
+        linux-arch@vger.kernel.org, kasan-dev@googlegroups.com,
+        linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+        linux-perf-users@vger.kernel.org, damon@lists.linux.dev
+Subject: Re: [PATCH v2 1/8] mm: introduce hw_pte_t for PTE table storage
+Message-ID: <4fb9f42e-73c3-46db-ac10-351a90901b7c-agordeev@linux.ibm.com>
+References: <20260903103002.1091859-1-usama.anjum@arm.com>
+ <20260903103002.1091859-2-usama.anjum@arm.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|CY3PR03MB8152:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2d7fca29-1c82-4df3-6a72-08df196427df
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|366016|376014|1800799024|56012099006|11063799006|10067099003|18002099003|22082099003;
-X-Microsoft-Antispam-Message-Info:
-	N4OMWksP/6Ngg54e6v18okY2MN1iPAHEFJ+mPsQB/ESdfBHlepqFTt7V27tMO+MKIxBM99peC7C5ERFyPJHeBom8Gs9Y1mUbxHBm80wLim/+KyUDJyGoLUZ4n004Ng1IuAf7vo1mg1O35Ww3yg/Ul5wsTK5ftmqAL7LorW5Zd2rf9DHU2aJFmu9NFHZGHCZQ8OarG/XYPHRYjmJpsmSh6OB0mf0AprYXbTsR8dEA9Ot6BsSq5jbmqlqpwLPHX9Ph2LEaMGkHkKvgNsKKbkaYlULOhaUIrGqusKMPTsRrxARWyRK4D9xUytaOEO0CoMJgWMYJnN8ma32EHtDA4EsWXwe+aeZAbE2NOq+Q/LsF/mxmyBi1cROjwqEbnsqRCYnuiROBp22KldFplX0E/IHWmbwcymEnbQnt7Hq+LBGM4aZYI88uNLBK4icN5cXps5QiaDRB01t14c6F3Tx5sEjWMSk4hUK1yJCcx1Mywpl1vEKb/K2dDcV+d/zfLvwLEBLxYgBPk1ubhAuXbkbet0giTNaK9ONXeatsu//d0gz9QfkbCJ4ty2sdn65zudaITur4qZNobMZFY4fQbL9vYJvI73WLxUWTb9x6OXdzvrCzDsGGA5k8926s9BR/LTFUAvYhOcg902vasLGSmsLEk8biF89BCMOTxMkmsrEBd8tJDIQ=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(376014)(1800799024)(56012099006)(11063799006)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?S0lyRVdSam85REFGaEJCaUJIWTJ1OUFWWW1sY2lLd3JlMGN0c1cyTUtnRTN0?=
- =?utf-8?B?QUdqZWZlakdDYnZBTWxSOWJTNTRGVVFUM2VvNUxUREVuVTZOa1ZGalNUdW9t?=
- =?utf-8?B?WGRsMDFmTEtLNFB5S2U2NXozM29UTkkrcW1Ham9nN0l0dTJhUHQzY05wQUNC?=
- =?utf-8?B?TUFpcE9XL2FNVkpzRVVLMlh4MnZ2ank5TUNRcWRHVXFJMHFvL0ROUXUrZjhG?=
- =?utf-8?B?UWRTa2hjR0psOGpZKzZSQmNId1V5RDd0SjZZc21mR1luSEJYZzVvWGpCd1Vt?=
- =?utf-8?B?Uzlsc2ZGZVJZcWRuT2F6cEhRYWdNTzE0MHdiaUkxYWVFd2owUllTYmtSRy9l?=
- =?utf-8?B?bXJHNU9oQlVuMHRhbUV4bTNKd3NhaWEzdEVjVFB3aWVXMmxONFl3YmVHYWY5?=
- =?utf-8?B?QkdOREVSeDVTMUlHQ0NVZy8yQTl0U01nYVA0NFpJdFdEZjYybGF2b05QK2Yz?=
- =?utf-8?B?dHVzZGd4RXArTTBaQ1JKeXdLTGtEN0gyV2E4UE1ZZmhlWVI4a2RldlZWYWsw?=
- =?utf-8?B?WTlUamJQQU1wbVRsT3U2eFV4MmVTQUZKYmJMS3BVLzkxMU5DT2pYQ2lIMGV5?=
- =?utf-8?B?bzdXYzR3Mi90ZnZFNjZvbHQ2VFIrOXZxNitsR0JOWEprbVZWY0hUUnFLZ0wr?=
- =?utf-8?B?c3FCY2pjbE42SnNOcHlNWWFPZE4xaHMrK1UyVkgzaUE3aElMeWIvUno3azlK?=
- =?utf-8?B?ZDlKSWdibjVrcFRrME8yMnJ1ejR3SDVvUms2ajlLdlM4bEhlMEZXMk5SUmls?=
- =?utf-8?B?NGx1L3c4UU45b1FzV0MwR2s0VkhJWWoyL2JRT2EwVHFXWUt4MkRYMjdreTVB?=
- =?utf-8?B?d05wcWZWdC9JNWpoM2kwdlRpeEZkbG5VVXdtWldkVGhKUHdvdUk1aHBBTER2?=
- =?utf-8?B?TDhVQ1VKQlVpRUJZN2FPckROSW9xbzgxdzlDL1ZrRDBqS0NiR01Zd1lnZ3NM?=
- =?utf-8?B?VE5WRkZxZS9vSXlsa3M2bEtWdDdIOEo0WkVMUWtjNTBxUG5YbTg1azlBdDJ2?=
- =?utf-8?B?SitVQ3cwdmxXSEpDZXRnV2owSmNrWkJUTG9mZFpYMTd2alJwV09GeTVHS3JX?=
- =?utf-8?B?OStlZzhWTis4aTJTVjJxWWlHazV3QlBRNkRKVmIwMnRxOXpnM1N5S2phbnlw?=
- =?utf-8?B?VGllYjlCRFI2anB1TWVPRnVsZyt5a3k5WkFIOVNiYkJrMFJNSlYvakh1UXF1?=
- =?utf-8?B?WUxabzdhcVVtWEpsYmE4QXVwdU1sSXN5bFViU0VrZkpuMGhNTncwaXA3MDNJ?=
- =?utf-8?B?QjAwRHpOT1VZQWljZHM1SzRxem5KWEoxNUdPRnNlWmNuQzhBa25sdHk0a0w0?=
- =?utf-8?B?UEdsODkxaDdwcTM0ZGQxZjl1cW1DWjNIK04zWnB1aWxTd1poZDBYeUJmeHNt?=
- =?utf-8?B?aVRCdUlpT2FWQlc4VzBuQmhCUmhpM1JpRG1SNHNyTnNtR2xwNmxwMFJEelpB?=
- =?utf-8?B?RGxwUDlUMEQ2OGh5ZXFLNWd5RUtVRzVMcDRUMXZZVkhKbThvNkQraVlUcjA1?=
- =?utf-8?B?dmhRSG93YkF1a3NPaW8zZjVyZlIxdlpUdTRKS2JVcEpxa1RYNXRvTFppd1lB?=
- =?utf-8?B?UEdub2dFcWFKVGhKS1N0Y2NaMW9kMlpTVWliczhERUp6TkcxRVhZSlBTbXBG?=
- =?utf-8?B?Y0ZJQVQ0TXZ4dUdvb3RlMHQ1QVFvQis3aVVnK2FpbGtnQ1RuRVVCQXd2eXlj?=
- =?utf-8?B?YWhDSlkzU3hxNWEyOUpDMW5Bd1RKbHNrMFA4S3BDNldGcXlhaGpMWnpqZFFC?=
- =?utf-8?B?VldTNmtWTWx1UllQT1hhUHh2WGZ0MmM5RzVWZ1pQdWhGVHJkNG12QU92bUc4?=
- =?utf-8?B?aktucGRhMk1EMFhka0ZLWjdLSTNKelg5dDh1TVRna1dNUzZIZUYyeFVFdWFF?=
- =?utf-8?B?VlFwOFRna0dFTXdoOG9pVHZ2VHRudGxhNmtwb243SVFIOEhEQ3RScVlVWHlH?=
- =?utf-8?B?U3ZxU0FkUHl6emhRWXBYSnBONkJ0bk85aFV5c2pJVkpoVDlDaU8rR0h5K0M5?=
- =?utf-8?B?ajBmUjJITyttbUZtcXFCRUd1ajJqZ0JramVYTVVZeVloejFvY2k0cmN3c2dq?=
- =?utf-8?B?Rmh5TmZQaDNPZ0VHdDRGTGRlSVFGQTNJUVdFTmVqNTJzSU1qZUhZbzM1aTVS?=
- =?utf-8?B?dVllV0hta3R2cjBtMTNvUnNvUHhaaEFxekl4dGM5emtMMkQ5V0xGNjJ3bU9l?=
- =?utf-8?B?S0cyRGkxL0NIUHo5UlBydzFXMHBxVURIeTlkRkNhRTNmU3hOQ3psRjExUDU5?=
- =?utf-8?B?Q3V5WFVhaXFnWDhyaWhNZE5FK3RZQmFRUTNQK2dlR0dOemRDeGlkcnBZSE40?=
- =?utf-8?B?akNrRGwwUXYvNWpoQkFKQ0t2dXBaUnQ2ZGtndU0yL003RW1NMERaMml3eXRM?=
- =?utf-8?Q?dA8kVG7cMo2lcR8o=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2d7fca29-1c82-4df3-6a72-08df196427df
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2026 11:16:46.8112
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: q2FSVhW96QwrXn2KvYKD32ug2BwkmbHEjnxFP6Wf+BCwtxBPh0Bq6A19Iy3OkZj4y2z4Lcz/hgBkpLkSaidwatjMUs59J8jwqiurgddHkxg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY3PR03MB8152
-X-purgate-ID: tlsNG-42698a/1790162209-1B4D39EA-A6FACC28/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260903103002.1091859-2-usama.anjum@arm.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-ORIG-GUID: zkg8Yjm8buhyt1eRNhnorvj4h8bfMg31
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYwOTIzMDA0NiBTYWx0ZWRfX6bMVOEi2qN4e
+ SEAEWElqPuFcMqb6XxMSAKgTBU7nj/dCzT7pboAwFXABTdsicPgdnhSpodFJ6O+u2hg509qHfDk
+ z9HbX8YO6UJxXAtAPBr1SXV/yRHUshBZqtP38jfDABopi2Q8TlICK2s09kBGBV4exDZexYbukEp
+ Oxg7zWWj4bwJEOGzokpvAGkgwx6mOV9Hci2samlSyJVgEXMEqtoph/gVCurHxiAAqf0TauaVInd
+ IvHSuwss6TAgfLNFvMkfvgEfm/lWIxq4QqGWZb1wZGJTR0i8Aqwb5xGBOLcMv/lOTIYdxzI8o3R
+ oPxWzTJkmoTyuCze3ranpvgoRtO0j9Fwo13juJtO4WWD8YTP1C0PjcAbhZUntKNvoYTNnIcU/mO
+ iX0G+Pezy0wbnkBvSeLA9ii/P51EkQzABCycAD2yGmiU5zm9dKM8qjIMLGZaPS8vA+24yUC1vPk
+ rGMSqvFG6FK+7tXalcw==
+X-Authority-Analysis: v=2.4 cv=O/KsLx9W c=1 sm=1 tr=0 ts=6ab3bd91 cx=c_pps
+ a=AfN7/Ok6k8XGzOShvHwTGQ==:117 a=AfN7/Ok6k8XGzOShvHwTGQ==:17
+ a=kj9zAlcOel0A:10 a=VdqzKS8jKosA:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=Y2IxJ9c9Rs8Kov3niI8_:22 a=7CQSdrXTAAAA:8
+ a=WBsaCDucxrlOMaPtzzAA:9 a=CjuIK1q_8ugA:10 a=a-qgeE7W1pNrGK8U0ZQC:22
+X-Proofpoint-Spam-Info: AW1haW4tMjYwOTIzMDA0NiBTYWx0ZWRfX/Y5nhDG4vyXY
+ k03GeTaIqKwMRq4AUpoHFMiSiGlDWAE+orQ24P6M5Bz7btA5rwd/KAwZVyCP0QeAkoFRkdQm8Rw
+ gOzyts+JEL8Z8Grz2VhIOfiIo2KdxD0=
+X-Proofpoint-GUID: zkg8Yjm8buhyt1eRNhnorvj4h8bfMg31
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-09-23_04,2026-09-21_02,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ clxscore=1015 malwarescore=0 phishscore=0 impostorscore=0 suspectscore=0
+ bulkscore=0 priorityscore=1501 lowpriorityscore=0 adultscore=0 spamscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2609040000 definitions=main-2609230046
+X-purgate-ID: tlsNG-ef75cf/1790164455-34AC8AE4-AF1E4327/0/0
 X-purgate-type: clean
-X-purgate-size: 1653
+X-purgate-size: 3435
 
-On 9/23/26 10:51 AM, Lin Liu wrote:
-> Xen leaks the host's CR4 bits to L1.
+On Thu, Sep 03, 2026 at 11:29:53AM +0100, Muhammad Usama Anjum wrote:
+> pte_t is used both for software PTE values and for entries stored in a PTE
+> table, so pte_t * does not distinguish a pointer to a software PTE
+> value from a pointer to table storage.
 > 
-> nsvm_vmcb_prepare4vmrun() constructs the shadow VMCB's CR4 via
-> hvm_set_cr4(), and svm_update_guest_cr() ORs in HVM_CR4_HOST_MASK.
-> nsvm_vmcb_prepare4vmexit() then copies CR4 back out of the shadow VMCB
-> instead of the value kept in v->arch.hvm.guest_cr[4], so L1 reads back
-> Xen's bits - under HAP, CR4.MCE.
+> Introduce hw_pte_t as the generic name for a PTE table element. Define it
+> as a macro alias of pte_t by default. When an architecture selects
+> ARCH_HAS_HW_PTE_T, define it as a structure containing a pte_t instead.
+> This preserves the representation while allowing converted architectures
+> to enforce the distinction at compile time.
 > 
-> Fixes: 9a779e4fc161 ("Implement SVM specific part for Nested Virtualization")
-> Assisted-by: Claude:claude-opus-5
-> Signed-off-by: Lin Liu <lin.liu01@citrix.com>
+> Name the generic wrapper structure __hw_pte_t so architectures can
+> forward-declare it when pgtable_t must be defined before the generic
+> hw_pte_t typedef is visible. This avoids header-order dependencies.
+> 
+> Keep the C type definitions behind an __ASSEMBLY__ check because
+> architecture assembly sources can include this header indirectly. Include
+> asm/page.h so consumers such as linux/vmalloc.h retain the page definitions
+> they previously obtained from that header.
+> 
+> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
 > ---
->   xen/arch/x86/hvm/svm/nestedsvm.c | 2 +-
->   1 file changed, 1 insertion(+), 1 deletion(-)
+> Changes since v1:
+> - Name the generic wrapper structure __hw_pte_t so architectures can
+>   forward-declare it, and explain why this is required.
+> - Use software PTE value terminology.
 > 
-> diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-> index a8b15d6eae..8d99b0affc 100644
-> --- a/xen/arch/x86/hvm/svm/nestedsvm.c
-> +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-> @@ -1082,7 +1082,7 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
->       ns_vmcb->_efer = n2vmcb->_efer;
->   
->       /* CRn */
-> -    ns_vmcb->_cr4 = n2vmcb->_cr4;
-> +    ns_vmcb->_cr4 = v->arch.hvm.guest_cr[4];
->       ns_vmcb->_cr0 = n2vmcb->_cr0;
->   
->       /* DRn */
+> Changes since RFC v1:
+> - Add the ARCH_HAS_HW_PTE_T opt-in and generic wrapper definition.
+> - Exclude the C type definitions from assembly sources.
+> - Update the description for the new opt-in model.
+> ---
+>  MAINTAINERS                   |  1 +
+>  include/linux/pgtable_types.h | 17 +++++++++++++++++
+>  mm/Kconfig                    |  3 +++
+>  3 files changed, 21 insertions(+)
+>  create mode 100644 include/linux/pgtable_types.h
+> 
+> diff --git a/MAINTAINERS b/MAINTAINERS
+> index 2133aec4a2004..da60a8bdcddb5 100644
+> --- a/MAINTAINERS
+> +++ b/MAINTAINERS
+> @@ -17140,6 +17140,7 @@ F:	include/linux/mmu_notifier.h
+>  F:	include/linux/pagewalk.h
+>  F:	include/linux/pgalloc.h
+>  F:	include/linux/pgtable.h
+> +F:	include/linux/pgtable_types.h
+>  F:	include/linux/ptdump.h
+>  F:	include/linux/vmpressure.h
+>  F:	include/linux/vmstat.h
+> diff --git a/include/linux/pgtable_types.h b/include/linux/pgtable_types.h
+> new file mode 100644
+> index 0000000000000..07da05d375c2c
+> --- /dev/null
+> +++ b/include/linux/pgtable_types.h
+> @@ -0,0 +1,17 @@
+> +/* SPDX-License-Identifier: GPL-2.0 */
+> +#ifndef _LINUX_PGTABLE_TYPES_H
+> +#define _LINUX_PGTABLE_TYPES_H
+> +
+> +#include <asm/page.h>
+> +
+> +#ifndef __ASSEMBLY__
+> +
+> +#ifdef CONFIG_ARCH_HAS_HW_PTE_T
+> +typedef struct __hw_pte_t { pte_t __pte; } hw_pte_t;
+> +#else
+> +#define hw_pte_t pte_t
+> +#endif
 
-Reviewed-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+I would suggest to provide __hw_pte() in this series - it is needed
+by architectures along with __pte_from_hw() right away (as opposed
+to when lands in arm64).
 
-Did you consider addressing similar issues with the other state copied from
-n2vmcb as well? i.e. I think something similar would apply to CR0, EFER, etc.
-
-As an aside, it is confusing that the same CR value also appears in
-v->arch.hvm.nvcpu.guest_cr[4]. The SVM code doesn't seem to use it and I
-haven't checked why the VMX code needs it. Perhaps something to clean up in
-future.
-
-Ross
+> +#endif /* !__ASSEMBLY__ */
+> +
+> +#endif /* _LINUX_PGTABLE_TYPES_H */
+> diff --git a/mm/Kconfig b/mm/Kconfig
+> index c1ddf59c0d71a..5f462ec6fa5e5 100644
+> --- a/mm/Kconfig
+> +++ b/mm/Kconfig
+> @@ -1312,6 +1312,9 @@ comment "GUP_TEST needs to have DEBUG_FS enabled"
+>  config GUP_GET_PXX_LOW_HIGH
+>  	bool
+>  
+> +config ARCH_HAS_HW_PTE_T
+> +	bool
+> +
+>  config DMAPOOL_TEST
+>  	tristate "Enable a module to run time tests on dma_pool"
+>  	depends on HAS_DMA
+> -- 
+> 2.47.3
+> 
 
