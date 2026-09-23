@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D40A8C98311
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:18:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430381.1652851 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08D70C9830B
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:18:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430385.1652865 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MrG-00062o-NP; Wed, 23 Sep 2026 13:17:58 +0000
+	id 1x9MrH-0006HJ-DF; Wed, 23 Sep 2026 13:17:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430381.1652851; Wed, 23 Sep 2026 13:17:58 +0000
+Received: by outflank-mailman (output) from mailman id 1430385.1652865; Wed, 23 Sep 2026 13:17:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MrG-00060x-Ev; Wed, 23 Sep 2026 13:17:58 +0000
-Received: by outflank-mailman (input) for mailman id 1430381;
- Wed, 23 Sep 2026 13:17:19 +0000
+	id 1x9MrH-0006EK-3v; Wed, 23 Sep 2026 13:17:59 +0000
+Received: by outflank-mailman (input) for mailman id 1430385;
+ Wed, 23 Sep 2026 13:17:38 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1x9Mqd-0005gL-Ua
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:17:19 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1x9Mqw-0005hx-Jy
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:17:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9Mqc-002EMY-Gf
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:17:18 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1x9Mqw-002EU2-0h
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:17:38 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d155-bab6-0a2a0a5309dd-0a2a450aa10e-22
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:17:18 +0200
-Received: from [74.125.229.170] (helo=mail-dl2-f42.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ab3d16a-8faa-0a2a0a5109dd-0a2a4503847a-16
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:17:37 +0200
+Received: from [74.125.229.12] (helo=mail-dy2-f12.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d15c-f2d2-0a2a450a0019-4a7de5aa985e-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:17:18 +0200
-Received: by mail-dl2-f42.google.com with SMTP id
- a92af1059eb24-144f089b1e3so805630c88.2
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:17:17 -0700 (PDT)
+ id 6ab3d170-fae8-0a2a45030019-4a7de50c81a9-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:17:37 +0200
+Received: by mail-dy2-f12.google.com with SMTP id
+ 5a478bee46e88-33b9e805130so667924eec.1
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:17:37 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.17.08
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.17.27
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:17:14 -0700 (PDT)
+ Wed, 23 Sep 2026 06:17:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +55,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790169436; x=1790774236; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790169456; x=1790774256; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=t43puSbRZc523NBj9nQXSYWDHrWaj0cvHGn4qE6n+xk=;
-        b=Jlmi46C+QX33iA7Q4P9o/yrrb4JJ2DxukUmCrRMj2zRJ45vsuSMrWiL3uaBOd+xpS9
-         PvJRE27tK3vzOs6IBkk3xpm5S/APSE4iGTkZ0HZ0CZpaDNU7DiF5Hl6/Gq0BjaS7cJf0
-         /U7WE/U7JDSD5NFv/bL3agfgz3DnX5iPTmblgTAiCoqwxUoXgMY7+QrDyuZOXruCeD2r
-         kBLysrBUf1y3WO3EsA2RMSTdqz2Vo/p5wnlnCPjs15/eN+LXw1+0HtB3fOpu4hl8oofj
-         uZdfSZ7MTBf/vozsAh3PoDkacfHGxlJ3yPpuq1jgtXkIxjfjYn4PxDDNVgBJe2lsvWcF
-         x0DQ==
+        bh=ElUpYvhknnIwSPfbcSK8wY490g/9t35RPhM2WyomKNg=;
+        b=scT/3AqeDmupbfNVZmMacnnAzsFwc48mA//AWCLiQVAZAO3fjzbqMp/PiKVKNETptS
+         z+KUaV3stKO4QfklcofmlbyRXTXsaux43/XNcIesXvlCPGHME1v2mShGUIaMC5C67cnx
+         5mXLZjdM8846GnXPFofDZ+cS8dm9DNWbejj5glanG713u4VIkaI78byl8uy5IG5jOjbV
+         VCOaWIPM0CfvqjiZWWLhBwpqERf0GlC0bjPtctCRcGch1FYvF3HX0Zk9yXrU2UcoYlaz
+         NFb0sJ+mDeiXx9jJ+dmKi5HpvS5/9Jf+TwtKhwqoYDYnoD93OKOX4GqVaH6RkObGCdbI
+         KK0g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790169436; x=1790774236;
+        d=1e100.net; s=20260707; t=1790169456; x=1790774256;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=t43puSbRZc523NBj9nQXSYWDHrWaj0cvHGn4qE6n+xk=;
-        b=S9KCguvTccCyd5/eDbpFKSXWmfz/jYOpjQsLYmNrnZyg58uc2Ozo8Gi3wXZsQCTEl1
-         Up1ULSiFt5BboTJyBWUtVgasjjbokFsu52KbjNVpNAS3x7bMJUxPnfegTKMMwdG3VDZ1
-         E+htPi98/00ITSYEJH9pksYJEJVtJahYDLJWqZ+wtgrH+q1Ogj6OXh9O5u+F8beUGmaq
-         oFcvPKlz+oCtSBHOLjsxXdaFhxei3td91XGlbv98Zz3SJY4+Vyy3U2m9PpFqJsAuZj3C
-         +Vbi2FN3lyf/fWqVVd6k+Djnbf7V+PZWWzfFlLRjXhUtzDMp6wnaUnn0N1Gpmj9OzyAs
-         nYIw==
-X-Forwarded-Encrypted: i=1; AKwUvBwIvQynt5ukeme1KcfcFDVAIGrvGCqpexxWALjyxkuNehrggHFeERZRPGMr8LoIFRj8WYtZ9WO/kbI=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lElIB3coWsOGop4mXR3OuFNfY1vRtTqHXjEjPAJ2HTG6p9Gpo6
-	IxVqa3td2Gc7fYqW/AD5C5Fo50V5BCFGptLViDDZzlrk/zvpDpcefFRh
-X-Gm-Gg: AYBFou2IESWlTlrSmyOR3NBreRA4TFun0jkQLu2gZjRdfCF9nrbzx7RdSeFo3eFd4if
-	yhNvHEJ7GnKCsPd5njafJz9wdUNrLoNYImj4VfRbmFy8eP8uiYqRp9VFglfVn1OqcX7qD3q2mcq
-	hR+B3wejRBgh6ICJ4h8KmIXtV97J4hdMBV7a0i3yESUeWmEEJygKcsiI4YE65CjW9WYsX3w2Da6
-	D2CipUfRkaJ/Jn/0r7GCjsgaCAasCL1xDrH9EzAb+1NqDjwHfihTz1OSid98MSiV1WmnYGHKf0g
-	FfwrnPFiIJzyjj5U+OqyP0r34gBngcRrh6emWIt3Ks3NGS5aFNkYTU2sU7UcaMrH4+N9Qe7L/Bf
-	LeEgJzjajisABQQqnddc87QyXjHubpkpjBMENHdlAEl/QfJ4GPLrvmBLJEAM4o/8IBNp2lnv5aQ
-	BJcCDr24Q7qqEBp1/A3LBRFtX/3xy/QdJC5/abqzl4xOFNFwzVibgLcLN6lHu0L7Esn12VKT3YD
-	27SVto7Z2phKnuJVyD5D8dwxifgK20=
-X-Received: by 2002:a05:7300:8818:b0:338:2485:ad03 with SMTP id 5a478bee46e88-33e8c53c0d4mr2821124eec.16.1790169436068;
-        Wed, 23 Sep 2026 06:17:16 -0700 (PDT)
+        bh=ElUpYvhknnIwSPfbcSK8wY490g/9t35RPhM2WyomKNg=;
+        b=tQ8TdMBrMTlPGGBMp67OnUIIkvljPe+YfF7Zmi0xBA1Imd3nDAX0t2H2mpNmMsWDJU
+         HrJkDvOeqFRlVoczMz3Y2S7Yp4mqXyms4gEbG/k+cOvf0QwXWiZpF2fiMgKn8aHxqFWO
+         Bi0fwyed/Ugjg40zL0FvLX6FjE17P0cRows/UoL7SzFQ95VVmiVwf2FkVeq9sxJqgU87
+         00W5UQvKfbQNXwH8kyYE7HI9i8CQMN5neIAScjH8N7NtFvTU+PrMYK00pewxPjn1B6+P
+         7NshGBJLON26ByL0Vwyd5caTs0NqoPNzMvPY1dj/7HRdc+FuLR9YcNJ2WdyHna42sNq5
+         GnHw==
+X-Forwarded-Encrypted: i=1; AKwUvBzKH43doDUIySwjUP0b3TkQ6Mm5BwLJh+juWyFGmfHmHMuIb+BpP3FpSfYIazPZZSAKuEAXV8YK0FI=@lists.xenproject.org
+X-Gm-Message-State: AFuF++n7F0+dEnoAuFjWMm/vZq0P0iFqAc2iGThN/Ts77WO/adAt88Pa
+	JaGv7o2urzvdcG/2XrwVdkCWZ+XgjVEAyjB68y/FmcK8RAev7I+OcqNu
+X-Gm-Gg: AYBFou30o957YrQJU+NhYhffG0IWCAj74xeOlD4kW5U+HSYxox4iMPENmf42aluvXc3
+	ROKVV3pbrceW8ozV9Ben5JUg7PdEAIQAwnlR38Xdxmv5ZKxmtsgOL9KTawUd27CEFrC3fAXAERO
+	/DWmrtVxp45Phs73sfkWDj5ylqnRHbLbLCsyhCbRGpk1ScRQsgEZfYvg2JNbTZHIlXfGtSuXfVF
+	siJkYVmWhhEv+pCQCErBSBliKmD7nutxTBQj39CrLZV6ajFqLfNcsD2uI9eWqcEoKmIJMfbNvKB
+	7vxSFSLkfxJO9GvurlLMtXyleeFQ9B3jeOD3tiE1QP/UB4bxeBca6H7xVCW8vlEMFhU0uMohkBp
+	oYapAtH/dmWYWQY+h+wf3umos/bv6wY0SS8p4LFJr1QIO8EfuxpOzC9LmbB6GdUzmMrkegP3KJJ
+	6lQpG3P5x7atqbYaXgKzPciiGHkAm9OawpYryNAnswEM2DlIEYiaAimTMdozQiFv17lddNExRDM
+	czAvQwxdfMBs1UmhH8/muLhKAy1UaiEKwVx7ldOEQ==
+X-Received: by 2002:a05:7300:b286:b0:30e:f0a5:8762 with SMTP id 5a478bee46e88-33e8d9ca3c8mr2607807eec.19.1790169455486;
+        Wed, 23 Sep 2026 06:17:35 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>,
@@ -134,48 +134,156 @@ Cc: Cornelia Huck <cohuck@redhat.com>,
 	qemu-arm@nongnu.org,
 	qemu-s390x@nongnu.org,
 	Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 003/114] target-info: rename target-info-stub.c in target-info-def.c
-Date: Wed, 23 Sep 2026 21:14:37 +0800
-Message-ID: <20260923131635.1894-4-luoyonggang@gmail.com>
+Subject: [PATCH v3 005/114] target-info: set cpu_type from TARGET_BASE_ARCH
+Date: Wed, 23 Sep 2026 21:14:39 +0800
+Message-ID: <20260923131635.1894-6-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1790169438-585CBCFC-A8BD492B/0/0
+X-purgate-ID: tlsNG-33051d/1790169457-6ECCB4E9-00AA5DB7/0/0
 X-purgate-type: clean
-X-purgate-size: 1055
+X-purgate-size: 5027
 
-From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+target-info-def.c no longer includes cpu.h, so CPU_RESOLVING_TYPE
+is unavailable. Emit TARGET_BASE_ARCH as an uppercase identifier in
+config-target.h and set cpu_type to TYPE_${TARGET_BASE_ARCH}_CPU.
 
-Now it's the only file left to define target info, we call it def to
-make the intent more clear.
+Alias the base-arch tokens whose QOM name differs: TYPE_I386_CPU,
+TYPE_OR1K_CPU, TYPE_PPC_CPU, TYPE_S390X_CPU, and TYPE_SH4_CPU.
 
-Signed-off-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
+Drop the ArchCPU parent_obj and env offsetof checks with the cpu.h
+include. Page-size checks stay, via cpu-param.h.
+
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- meson.build                             | 2 +-
- target-info-stub.c => target-info-def.c | 0
- 2 files changed, 1 insertion(+), 1 deletion(-)
- rename target-info-stub.c => target-info-def.c (100%)
+ include/qemu/target-info-def.h |  2 +-
+ meson.build                    |  1 +
+ target-info-def.c              | 11 +++--------
+ target/i386/cpu-qom.h          |  1 +
+ target/or1k/cpu-qom.h          |  1 +
+ target/ppc/cpu-qom.h           |  1 +
+ target/s390x/cpu-qom.h         |  1 +
+ target/sh4/cpu-qom.h           |  1 +
+ 8 files changed, 10 insertions(+), 9 deletions(-)
 
+diff --git a/include/qemu/target-info-def.h b/include/qemu/target-info-def.h
+index 8019d2c7196..ebd88463aea 100644
+--- a/include/qemu/target-info-def.h
++++ b/include/qemu/target-info-def.h
+@@ -19,7 +19,7 @@ typedef struct TargetInfo {
+     SysEmuTarget target_arch;
+     /* runtime equivalent of TARGET_LONG_BITS definition */
+     unsigned long_bits;
+-    /* runtime equivalent of CPU_RESOLVING_TYPE definition */
++    /* runtime equivalent of TYPE_${TARGET_BASE_ARCH}_CPU definition */
+     const char *cpu_type;
+     /* related to TARGET_BIG_ENDIAN definition */
+     EndianMode endianness;
 diff --git a/meson.build b/meson.build
-index f412d917d94..8bd2d725ca0 100644
+index 8bd2d725ca0..20345860c9f 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -4330,7 +4330,7 @@ foreach target : target_dirs
-     endif
-   endif
+@@ -3378,6 +3378,7 @@ foreach target : target_dirs
+       # Note that TARGET_BASE_ARCH ends up in config-target.h but it is
+       # not used to select files from sourcesets.
+       config_target_data.set('TARGET_' + v.to_upper(), 1)
++      config_target_data.set(k, v.to_upper())
+     elif k == 'TARGET_NAME' or k == 'CONFIG_QEMU_INTERP_PREFIX'
+       config_target_data.set_quoted(k, v)
+     elif v == 'y'
+diff --git a/target-info-def.c b/target-info-def.c
+index fa19cabc55f..f167f5f2ac1 100644
+--- a/target-info-def.c
++++ b/target-info-def.c
+@@ -10,15 +10,10 @@
+ #include "qemu/target-info.h"
+ #include "qemu/target-info-def.h"
+ #include "qemu/target-info-init.h"
+-#include "hw/core/boards.h"
+-#include "cpu.h"
+-#include "exec/cpu-defs.h"
++#include "cpu-qom.h"
++#include "cpu-param.h"
+ #include "exec/page-vary.h"
  
--  arch_srcs += files('target-info-stub.c')
-+  arch_srcs += files('target-info-def.c')
+-/* Validate correct placement of CPUArchState. */
+-QEMU_BUILD_BUG_ON(offsetof(ArchCPU, parent_obj) != 0);
+-QEMU_BUILD_BUG_ON(offsetof(ArchCPU, env) != sizeof(CPUState));
+-
+ /* Validate target page size, if invariant. */
+ #ifndef TARGET_PAGE_BITS_VARY
+ QEMU_BUILD_BUG_ON(TARGET_PAGE_BITS < TARGET_PAGE_BITS_MIN);
+@@ -28,7 +23,7 @@ static const TargetInfo target_info_stub = {
+     .target_name = TARGET_NAME,
+     .target_arch = glue(SYS_EMU_TARGET_, TARGET_ARCH),
+     .long_bits = TARGET_LONG_BITS,
+-    .cpu_type = CPU_RESOLVING_TYPE,
++    .cpu_type = glue(TYPE_, glue(TARGET_BASE_ARCH, _CPU)),
+     .endianness = TARGET_BIG_ENDIAN ? ENDIAN_MODE_BIG : ENDIAN_MODE_LITTLE,
+ #ifdef TARGET_PAGE_BITS_VARY
+     .page_bits_vary = true,
+diff --git a/target/i386/cpu-qom.h b/target/i386/cpu-qom.h
+index d4e216d000c..7619c4a4826 100644
+--- a/target/i386/cpu-qom.h
++++ b/target/i386/cpu-qom.h
+@@ -27,6 +27,7 @@
+ #else
+ #define TYPE_X86_CPU "i386-cpu"
+ #endif
++#define TYPE_I386_CPU TYPE_X86_CPU
  
-   if target_base_arch in target_arch
-     t = target_arch[target_base_arch].apply(config_target, strict: false)
-diff --git a/target-info-stub.c b/target-info-def.c
-similarity index 100%
-rename from target-info-stub.c
-rename to target-info-def.c
+ OBJECT_DECLARE_CPU_TYPE(X86CPU, X86CPUClass, X86_CPU)
+ 
+diff --git a/target/or1k/cpu-qom.h b/target/or1k/cpu-qom.h
+index 14bac33312e..c0d5e9e81ba 100644
+--- a/target/or1k/cpu-qom.h
++++ b/target/or1k/cpu-qom.h
+@@ -12,6 +12,7 @@
+ #include "hw/core/cpu.h"
+ 
+ #define TYPE_OPENRISC_CPU "or1k-cpu"
++#define TYPE_OR1K_CPU TYPE_OPENRISC_CPU
+ 
+ OBJECT_DECLARE_CPU_TYPE(OpenRISCCPU, OpenRISCCPUClass, OPENRISC_CPU)
+ 
+diff --git a/target/ppc/cpu-qom.h b/target/ppc/cpu-qom.h
+index 8247fa23367..428cdc85488 100644
+--- a/target/ppc/cpu-qom.h
++++ b/target/ppc/cpu-qom.h
+@@ -28,6 +28,7 @@
+ #else
+ #define TYPE_POWERPC_CPU "powerpc-cpu"
+ #endif
++#define TYPE_PPC_CPU TYPE_POWERPC_CPU
+ 
+ OBJECT_DECLARE_CPU_TYPE(PowerPCCPU, PowerPCCPUClass, POWERPC_CPU)
+ 
+diff --git a/target/s390x/cpu-qom.h b/target/s390x/cpu-qom.h
+index c59bb1eab15..07a8c881fe5 100644
+--- a/target/s390x/cpu-qom.h
++++ b/target/s390x/cpu-qom.h
+@@ -23,6 +23,7 @@
+ #include "hw/core/cpu.h"
+ 
+ #define TYPE_S390_CPU "s390x-cpu"
++#define TYPE_S390X_CPU TYPE_S390_CPU
+ 
+ OBJECT_DECLARE_CPU_TYPE(S390CPU, S390CPUClass, S390_CPU)
+ 
+diff --git a/target/sh4/cpu-qom.h b/target/sh4/cpu-qom.h
+index 6cf5fbb0745..08fa92106e9 100644
+--- a/target/sh4/cpu-qom.h
++++ b/target/sh4/cpu-qom.h
+@@ -23,6 +23,7 @@
+ #include "hw/core/cpu.h"
+ 
+ #define TYPE_SUPERH_CPU "superh-cpu"
++#define TYPE_SH4_CPU TYPE_SUPERH_CPU
+ 
+ #define TYPE_SH7750R_CPU SUPERH_CPU_TYPE_NAME("sh7750r")
+ #define TYPE_SH7751R_CPU SUPERH_CPU_TYPE_NAME("sh7751r")
 -- 
 2.52.0.windows.1
 
