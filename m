@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C809EC9830B
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:18:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430377.1652840 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E53D3C982FA
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:18:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430379.1652846 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MrG-0005rl-60; Wed, 23 Sep 2026 13:17:58 +0000
+	id 1x9MrG-0005xV-E5; Wed, 23 Sep 2026 13:17:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430377.1652840; Wed, 23 Sep 2026 13:17:58 +0000
+Received: by outflank-mailman (output) from mailman id 1430379.1652846; Wed, 23 Sep 2026 13:17:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MrF-0005qo-Ve; Wed, 23 Sep 2026 13:17:57 +0000
-Received: by outflank-mailman (input) for mailman id 1430377;
- Wed, 23 Sep 2026 13:17:01 +0000
+	id 1x9MrG-0005vI-6y; Wed, 23 Sep 2026 13:17:58 +0000
+Received: by outflank-mailman (input) for mailman id 1430379;
+ Wed, 23 Sep 2026 13:17:16 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1x9MqL-0005fG-Dz
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:17:01 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1x9Mqa-0005g9-Dm
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:17:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9MqK-006Omx-Bl
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:17:00 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x9MqZ-006Oq6-Qw
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:17:15 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d149-2eae-0a2a0a5409dd-0a2a45029f8c-10
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:17:00 +0200
-Received: from [74.125.229.19] (helo=mail-dy2-f19.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ab3d157-e002-0a2a0a5209dd-0a2a450ce800-6
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:17:15 +0200
+Received: from [74.125.229.143] (helo=mail-dl2-f15.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d14a-6ca4-0a2a45020019-4a7de51380cc-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:17:00 +0200
-Received: by mail-dy2-f19.google.com with SMTP id
- 5a478bee46e88-3286624d194so642813eec.3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:16:59 -0700 (PDT)
+ id 6ab3d158-f479-0a2a450c0019-4a7de58f8011-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:17:14 +0200
+Received: by mail-dl2-f15.google.com with SMTP id
+ a92af1059eb24-144f9160b81so326093c88.0
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:17:13 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.16.49
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.16.58
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:16:55 -0700 (PDT)
+ Wed, 23 Sep 2026 06:17:05 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +55,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790169418; x=1790774218; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790169432; x=1790774232; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2gngFNJ3Klpuiy2qgGGYHVsKQcajQAru1FZZV3MRnyY=;
-        b=L2T1KumsISHbPxz6NPCdQ9wxshXO15Va2/fLFq4HAqOPxgHk000l4fHFyqjsPsbR8O
-         1Cjz1wYlVZ2fLsO6RRbws0/nhCGjjvXbDluRVAiA2VPkpT8J+1OwjGnQrH5gezGSd0uW
-         0mlpdnct5McvdUglofasmBhx2IJPnBs0kcwCqe5H5E9mPZMz+CETut8vX0rhXGNimbds
-         R+DQgAJmSIT8UU504A98woT2zX6i8kXAqo3ZE6p9Dkpq9hmedKJS0/MbMRNI5Ijr8VE1
-         yXP5LpOQW+CULlzWBvCcbtd0br+JtS4xx3nl7epoQJBVdeiyBlkzLpie0pV/VMhICgsZ
-         bjhA==
+        bh=yna4uP+Wuvk4Vi5PLJAGcI6TOXtcsNj/VZXgauqzoKs=;
+        b=FmNJZ+Ajglj6XXmpkaqT1KrUL0qzde3LSgO033s5fTplKaxt5hFeNUlYJ59PU0bbFY
+         bZyITYlwlwi16TZvrFxUkAHWNYXKpdQTPRW/2elF6xHenilUlznel8i1ccZU3UqoAsBJ
+         O/XjMFLym7VTHrWdhkWRfA9nBEpLOR5dUDwh13giekCizc5NmQuTC8kbLp9Nw92rqYJN
+         ZstkazRTMIF/xjRWxGwLHEH7kdYSQKZ3U00JYpaga+Fo+jvTduhvCZeJtvaYiNCbiNeq
+         YT5Y3koNZzwlB1DxCdX0Cn6NqvQz93aimM8oe4Bswli3B+NpweSu2OBpV/CYHFebCZFY
+         8/cw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790169418; x=1790774218;
+        d=1e100.net; s=20260707; t=1790169432; x=1790774232;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=2gngFNJ3Klpuiy2qgGGYHVsKQcajQAru1FZZV3MRnyY=;
-        b=D452zPH+khNa/3ZJoTfrI1cv5972f887XM4F1feGM/afa1yY8erR8wrSYIyKCl0mAl
-         /C6CLHR3pCMFeyS1J8kuH4Yc+XPkJeWHi5ncjaC9QFnpeCMx2pe1A9eEVucqgA9yVngc
-         4llNTOQKupOtqen6dIBtOZDnD03as0LX841L9S22q1aCKiKLL+PX0aeL6yKAdoDxDmcH
-         J1gS3JxnXmv0tPbwwgeskp59uG9l6V1ZdrEUSOwxjADkFsWamsejze/w4OBwfeSarwY/
-         uVQYXL4VILKeD2ER9LOPAWiyrAnSbKLam0KZdQPSdHNeGxgbM70Ej2gxRcdyJXNxCFOD
-         D67A==
-X-Forwarded-Encrypted: i=1; AKwUvBwT5lyVNtf5yyMbTlxCYI6N3GJSOwWLtMzuX5mVxR5zuR24HfkD1eVRs3pPnsF0nzjNfhYtu3OMrk4=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lRJdT5xhYWY3Omd4q/UvONddwJ8hP71CJzY2r2Qj3jfDT/jTKi
-	TIktG8Wpwi4pYwbc6cl2Ie0nQjwS/tryq1RfsuDGG3Ay1fkvCZ2s8gEb
-X-Gm-Gg: AYBFou1WFwiGaq0iYK3jZ+1X0aZCfYg0E6oc6xdtIC5MjBQAJ+d2aRyemFYdKpJ4DSe
-	GhPRVlj9Q96CNdKd5frls9kjb2GYTAqkqnC0Mf9GJkAgf0BR+1lA4CW4SXchhkiEDmwu8N48j0r
-	CwUHpKk78QBGa47YypvOgV6v1GIFgEsSNN6+bZDMDnxRcS6+Pxq9uN/ygEDHjvlsR/um8hklcUH
-	Z5/qL12mx0e/wgMGMK9qJhqHFHKpohJiw4Lrv3myOs4NnPywqpMvfSdLga8rZtxqPO8kFniiQaO
-	3DtccN+rHkhs4uHyrsHfjVjgsqZZdnlFiLHYtP3+cMEvx/GWMsuD1ck4dkcFV9nok5J/qzd9Y71
-	xbg428BJ/NtxU/DTkFu1+oIe/6eOlVi/mdBTOMQ5FLKSzPgG6otfwm68EkOliWwc7hx6/ZaYvAo
-	IW8nSMJg+KhY/cSzpjxPUxcTZ4GtgxGUEMWgyrD8BNgFfYWkQ1sTF+SHBBrDOhmi7Tf6Y8REeAv
-	pNWZ1dRAy43IxDeQv+X4jHpJUE9qdMtwNSnnEsH/A==
-X-Received: by 2002:a05:693c:8808:10b0:33e:6b65:5eab with SMTP id 5a478bee46e88-33e8ddbef60mr2484078eec.26.1790169417968;
-        Wed, 23 Sep 2026 06:16:57 -0700 (PDT)
+        bh=yna4uP+Wuvk4Vi5PLJAGcI6TOXtcsNj/VZXgauqzoKs=;
+        b=vcNYDDvGuycao02jV9Im4X8uH1kKHcz9LZsYR6n3lhomZKrmNlCiDS3GJCARMRfWI8
+         SEIPP+lIwg5LBo0700YVmwS8gAwi9Un7rHhghw1ZG5r9oDqA2DBjSZRV/GrzVW8Osr0r
+         o+CaC2md7l0CqYp3ZMWyiQLWIAiA7c6N1gNmPmDxucH4QBEKUCoFXS8WyaXFqVECqhXX
+         808bvTmwe4mZT7aoOMoDAgaB1kiFph3/jQyw6b4fqOIIFJDVsiLoAjhsWsICtSQ8aCeV
+         82+8CmvRsHo53pO+9EYOmKWKq2U9EIfpQYXzustajud1ZklUrXRPMxZWmrIoGl4ctbjB
+         mTFA==
+X-Forwarded-Encrypted: i=1; AKwUvBzAztFZY1J521w7c8Un35tSrjXnP6YuLIzai1p3nqfed8OtgWjmf+gF1l0Z4spLF12YXg24xx9A4Ag=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nvZdkcnnVWkKIzxJJii5c6Nw4xxdtEgIV7JoT0DeVoDR2N0xhb
+	C8PNOXbw72aMNBL7GCW0rR76T19dS/T0SuBXDOxy9Wh+M3gP4pCt9I9+
+X-Gm-Gg: AYBFou2BpPYvpro3WGZOxzkqIiaHOLEl232nND8tOVOHA/3OMqDVdb5yAEZiMPrnzqp
+	7QRRHlK20efUKJlbmtkgU+dNPeqGXK1stK8iPSDJbHlo0ShDFx6pQIm6Mtku6c9QGf6ceQi7KAO
+	sdRq0mMrKwD+yV85JJDbpzte1b4UJ+w7bXpj6OqGSo8G3tLbGHOClPmZb0HiBQ7cDvWddKvUC0u
+	1YXjbDPHuMl4XYa5e9Z/VXvcVjFMhQwKaKjbLjp6gRMG8x26IWp/UtoPrj91fqIx8I1VKu2n3RW
+	Mzdau3AYD94kwv/AbqQayGlcS+6AV5onvP027PFldYCzkWrGRIHThLSJxSCPO8rAKpyjyvSge5t
+	GW+27JczBhNbZY1gvvVAETGI8qA24IvNpc4Wib38uWxipuvN5i8PGyngyhPBxfHGiTwQBfwqKc1
+	njIA+7iTWKrLAgq3ZLjqXytAdMmEhfSyIa1bYEtLA7igcDmkChG9rJIl+YT8DMGjJKYSTr111Kp
+	5zMdILi2hem9zHDxoqWS03ynJ6QDw4=
+X-Received: by 2002:a05:7022:fa9:b0:143:2973:3240 with SMTP id a92af1059eb24-144f91551e9mr4233625c88.29.1790169427298;
+        Wed, 23 Sep 2026 06:17:07 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>,
@@ -134,40 +134,198 @@ Cc: Cornelia Huck <cohuck@redhat.com>,
 	qemu-arm@nongnu.org,
 	qemu-s390x@nongnu.org,
 	Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 001/114] meson: stale qemu-version.h only when .git exists
-Date: Wed, 23 Sep 2026 21:14:35 +0800
-Message-ID: <20260923131635.1894-2-luoyonggang@gmail.com>
+Subject: [PATCH v3 002/114] configs/targets: remove target info definitions
+Date: Wed, 23 Sep 2026 21:14:36 +0800
+Message-ID: <20260923131635.1894-3-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1790169420-F22A92AC-CEE58226/0/0
+X-purgate-ID: tlsNG-d25034/1790169434-012C8A5B-28A12276/0/0
 X-purgate-type: clean
-X-purgate-size: 865
+X-purgate-size: 5620
 
-build_always_stale for qemu-version.h is fs.exists on the source
-.git. Matches qemu-version.sh, so a tree without git does not
-regenerate the header on every ninja.
+From: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 
+Now that we remove machine_typename, we don't need to keep duplicated
+file per target anymore. So we can just rely on target-info-stub.c.
+
+Signed-off-by: Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- meson.build | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ configs/targets/aarch64-softmmu.c | 25 -------------------------
+ configs/targets/arm-softmmu.c     | 25 -------------------------
+ configs/targets/meson.build       |  6 ------
+ configs/targets/riscv32-softmmu.c | 24 ------------------------
+ configs/targets/riscv64-softmmu.c | 24 ------------------------
+ meson.build                       |  7 +------
+ 6 files changed, 1 insertion(+), 110 deletions(-)
+ delete mode 100644 configs/targets/aarch64-softmmu.c
+ delete mode 100644 configs/targets/arm-softmmu.c
+ delete mode 100644 configs/targets/meson.build
+ delete mode 100644 configs/targets/riscv32-softmmu.c
+ delete mode 100644 configs/targets/riscv64-softmmu.c
 
+diff --git a/configs/targets/aarch64-softmmu.c b/configs/targets/aarch64-softmmu.c
+deleted file mode 100644
+index fdebdcc3582..00000000000
+--- a/configs/targets/aarch64-softmmu.c
++++ /dev/null
+@@ -1,25 +0,0 @@
+-/*
+- * QEMU binary/target API (qemu-system-aarch64)
+- *
+- *  Copyright (c) Linaro
+- *
+- * SPDX-License-Identifier: GPL-2.0-or-later
+- */
+-
+-#include "qemu/osdep.h"
+-#include "qemu/target-info-impl.h"
+-#include "qemu/target-info-init.h"
+-#include "target/arm/cpu-qom.h"
+-#include "target/arm/cpu-param.h"
+-
+-static const TargetInfo target_info_aarch64_system = {
+-    .target_name = "aarch64",
+-    .target_arch = SYS_EMU_TARGET_AARCH64,
+-    .long_bits = 64,
+-    .cpu_type = TYPE_ARM_CPU,
+-    .endianness = ENDIAN_MODE_LITTLE,
+-    .page_bits_vary = true,
+-    .page_bits_init = TARGET_PAGE_BITS_LEGACY,
+-};
+-
+-target_info_init(target_info_aarch64_system)
+diff --git a/configs/targets/arm-softmmu.c b/configs/targets/arm-softmmu.c
+deleted file mode 100644
+index 2b98f65a0f8..00000000000
+--- a/configs/targets/arm-softmmu.c
++++ /dev/null
+@@ -1,25 +0,0 @@
+-/*
+- * QEMU binary/target API (qemu-system-arm)
+- *
+- *  Copyright (c) Linaro
+- *
+- * SPDX-License-Identifier: GPL-2.0-or-later
+- */
+-
+-#include "qemu/osdep.h"
+-#include "qemu/target-info-impl.h"
+-#include "qemu/target-info-init.h"
+-#include "target/arm/cpu-qom.h"
+-#include "target/arm/cpu-param.h"
+-
+-static const TargetInfo target_info_arm_system = {
+-    .target_name = "arm",
+-    .target_arch = SYS_EMU_TARGET_ARM,
+-    .long_bits = 32,
+-    .cpu_type = TYPE_ARM_CPU,
+-    .endianness = ENDIAN_MODE_LITTLE,
+-    .page_bits_vary = true,
+-    .page_bits_init = TARGET_PAGE_BITS_LEGACY,
+-};
+-
+-target_info_init(target_info_arm_system)
+diff --git a/configs/targets/meson.build b/configs/targets/meson.build
+deleted file mode 100644
+index 2ab4d27eaf5..00000000000
+--- a/configs/targets/meson.build
++++ /dev/null
+@@ -1,6 +0,0 @@
+-foreach target : [
+-      'arm-softmmu', 'aarch64-softmmu',
+-      'riscv32-softmmu', 'riscv64-softmmu'
+-  ]
+-  config_target_info += {target : files(target + '.c')}
+-endforeach
+diff --git a/configs/targets/riscv32-softmmu.c b/configs/targets/riscv32-softmmu.c
+deleted file mode 100644
+index 0829ab84de5..00000000000
+--- a/configs/targets/riscv32-softmmu.c
++++ /dev/null
+@@ -1,24 +0,0 @@
+-/*
+- * QEMU binary/target API (qemu-system-riscv32)
+- *
+- *  Copyright (c) rev.ng Labs Srl.
+- *
+- * SPDX-License-Identifier: GPL-2.0-or-later
+- */
+-
+-#include "qemu/osdep.h"
+-#include "qemu/target-info-impl.h"
+-#include "qemu/target-info-init.h"
+-#include "target/riscv/cpu-qom.h"
+-#include "target/riscv/cpu-param.h"
+-
+-static const TargetInfo target_info_riscv32_system = {
+-    .target_name = "riscv32",
+-    .target_arch = SYS_EMU_TARGET_RISCV32,
+-    .long_bits = 32,
+-    .cpu_type = TYPE_RISCV_CPU,
+-    .endianness = ENDIAN_MODE_LITTLE,
+-    .page_bits_init = TARGET_PAGE_BITS,
+-};
+-
+-target_info_init(target_info_riscv32_system)
+diff --git a/configs/targets/riscv64-softmmu.c b/configs/targets/riscv64-softmmu.c
+deleted file mode 100644
+index 553bd1f75fe..00000000000
+--- a/configs/targets/riscv64-softmmu.c
++++ /dev/null
+@@ -1,24 +0,0 @@
+-/*
+- * QEMU binary/target API (qemu-system-riscv64)
+- *
+- *  Copyright (c) rev.ng Labs Srl.
+- *
+- * SPDX-License-Identifier: GPL-2.0-or-later
+- */
+-
+-#include "qemu/osdep.h"
+-#include "qemu/target-info-impl.h"
+-#include "qemu/target-info-init.h"
+-#include "target/riscv/cpu-qom.h"
+-#include "target/riscv/cpu-param.h"
+-
+-static const TargetInfo target_info_riscv64_system = {
+-    .target_name = "riscv64",
+-    .target_arch = SYS_EMU_TARGET_RISCV64,
+-    .long_bits = 64,
+-    .cpu_type = TYPE_RISCV_CPU,
+-    .endianness = ENDIAN_MODE_LITTLE,
+-    .page_bits_init = TARGET_PAGE_BITS,
+-};
+-
+-target_info_init(target_info_riscv64_system)
 diff --git a/meson.build b/meson.build
-index cfac634cf13..f17665c667d 100644
+index f17665c667d..f412d917d94 100644
 --- a/meson.build
 +++ b/meson.build
-@@ -3546,7 +3546,7 @@ qemu_version = custom_target('qemu-version.h',
-                              command: qemu_version_cmd,
-                              capture: true,
-                              build_by_default: true,
--                             build_always_stale: true)
-+                             build_always_stale: fs.exists(meson.current_source_dir() / '.git'))
- genh += qemu_version
+@@ -3754,7 +3754,6 @@ subdir('dump')
+ subdir('accel')
  
- hxdep = []
+ subdir('backends')
+-subdir('configs/targets')
+ subdir('disas')
+ subdir('migration')
+ subdir('monitor')
+@@ -4331,11 +4330,7 @@ foreach target : target_dirs
+     endif
+   endif
+ 
+-  if target in config_target_info
+-    arch_srcs += config_target_info[target]
+-  else
+-    arch_srcs += files('target-info-stub.c')
+-  endif
++  arch_srcs += files('target-info-stub.c')
+ 
+   if target_base_arch in target_arch
+     t = target_arch[target_base_arch].apply(config_target, strict: false)
 -- 
 2.52.0.windows.1
 
