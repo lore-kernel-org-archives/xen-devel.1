@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEF2FC982FA
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:19:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430446.1652945 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A173C9830B
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 13:19:13 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430452.1652954 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MsC-0002eh-Be; Wed, 23 Sep 2026 13:18:56 +0000
+	id 1x9MsK-00038p-Jk; Wed, 23 Sep 2026 13:19:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430446.1652945; Wed, 23 Sep 2026 13:18:56 +0000
+Received: by outflank-mailman (output) from mailman id 1430452.1652954; Wed, 23 Sep 2026 13:19:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9MsC-0002eY-89; Wed, 23 Sep 2026 13:18:56 +0000
-Received: by outflank-mailman (input) for mailman id 1430446;
- Wed, 23 Sep 2026 13:18:54 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1x9MsK-00038i-FN; Wed, 23 Sep 2026 13:19:04 +0000
+Received: by outflank-mailman (input) for mailman id 1430452;
+ Wed, 23 Sep 2026 13:19:03 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <luoyonggang@gmail.com>) id 1x9MsA-0002bc-Jl
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:18:54 +0000
+ (envelope-from <luoyonggang@gmail.com>) id 1x9MsJ-000358-20
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:19:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9MsA-00DqRR-0H
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:18:54 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1x9MsI-009Ch3-FD
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 15:19:02 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d1bc-e002-0a2a0a5209dd-0a2a4504b038-8
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:18:53 +0200
-Received: from [74.125.229.43] (helo=mail-dy2-f43.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ab3d1c3-8faa-0a2a0a5109dd-0a2a4508ada8-16
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:19:02 +0200
+Received: from [74.125.229.140] (helo=mail-dl2-f12.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <luoyonggang@gmail.com>)
- id 6ab3d1bc-b57f-0a2a45040019-4a7de52b846a-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:18:53 +0200
-Received: by mail-dy2-f43.google.com with SMTP id
- 5a478bee46e88-328664ef78fso553275eec.2
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:18:53 -0700 (PDT)
+ id 6ab3d1c4-f659-0a2a45080019-4a7de58cb4c1-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 15:19:02 +0200
+Received: by mail-dl2-f12.google.com with SMTP id
+ a92af1059eb24-142dd046b87so729350c88.2
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 06:19:01 -0700 (PDT)
 Received: from WIN-BH9M8FJACR9 ([103.94.185.75])
  by smtp.googlemail.com with ESMTPSA id
- 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.18.43
+ 5a478bee46e88-33e97236754sm5553695eec.29.2026.09.23.06.18.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 23 Sep 2026 06:18:49 -0700 (PDT)
+ Wed, 23 Sep 2026 06:18:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,42 +55,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790169531; x=1790774331; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790169540; x=1790774340; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LmGgEVLgs7KsvhNFrBIpJWDBtYOselCCUrcKIvn6Xxs=;
-        b=N5kD2MpFstjZQR5P4F/zhxpkQkoRPRsV9raByYIP9UTp0fpp159ddB7OUukZI1YzZp
-         Ua4Yzkp8x8aKIMGXD/04hRrh2cQnpjQX2y3hlNqKH3FPKHv4DtoWVIV8j9ztX7lGPAnV
-         YmnoOAMLKaeHLxDYQz41zk9NJnXwVIfv45j+bkghS33oXmBAolnbUIJPmAt38XQNzwYc
-         sSwBmg8lQHN3W4XohzYOcXnnweNBtOGi6u1A3rb+dz5fZAr82cP718SdbKL5tyx3ecxA
-         wpd4wqLM5FZNc3eo0xkuBH7Tkhqs2Dl2PwhZTWZMaLpjqSk9CP3P5E7Be/9VeN9h+6SE
-         tgeg==
+        bh=/Pnb4009fcr63720pQihUF6v8EokAjQS6rcfppqNlzc=;
+        b=qwIx68aboq2H5bHUdmGRIxAsE+CUG8BNHN9/7dCEuuFlNs1ZEdfVi5WsqZTeBMM5nl
+         4qYjpq4UWO9xn8M5/qiqQLRppb6Gb077DYfoZocW5jeA6Y2uVzAP3t9cfwmLLn9S485v
+         SY+KAfmw/Liw1s+CCyC6l9lyiEBqm0vhTcm3olPb6nWqhoviSvbKxzjTP0qNvuCd1LNZ
+         T8NgfPQTtsTrcrwAiNYoRi1pIjcl6KfnILSsFsZWNcTRsd5PVwNpSEhvsH9W0H6MIPfQ
+         lJfF4u1MOhec+PX8RGiPzpdcYGekpU/l+biqcDKs5764bRM++nbpIHMiBKDHLGC83CMG
+         vmuQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790169531; x=1790774331;
+        d=1e100.net; s=20260707; t=1790169540; x=1790774340;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=LmGgEVLgs7KsvhNFrBIpJWDBtYOselCCUrcKIvn6Xxs=;
-        b=ZiputBaWmE2yZ1hceLNRAktumKt05+6LmTYznjLdZXiRz91zhzSmILLJ35r/GRghuk
-         v96Qr6ydeU9a7RJ2Enq0wy2o8zh/yyz2yuc6rWJS65OotdzGra2P+ly+iLiAk1OYpLdD
-         9yGY16ze49sYYYPQomjfZFR/p5d2qgOdGWfT/AAx+u9HzHhXInXl5P+maZq3/yN/QyVp
-         gLW07rmLnWz8cqdDcYrLQIxuMQ9IATiA+y3KQXaTPh0aFLgq5rt5nZdlCsMBn+HhzhLg
-         afeSTU/vGE0p4Dy4+Z0mRu9i8Gfu6UZDZ2iOqB1DFHdOjI/tmZhRl/4sLK7UWwyzVM6i
-         4HSg==
-X-Forwarded-Encrypted: i=1; AKwUvBxVmWCDHCcE5yE796LwoHSpccptOaswenM8XS/zMgN2qAACau4jQIuZv0WjE+jP2ZdAn/zoTRAmzVk=@lists.xenproject.org
-X-Gm-Message-State: AFuF++l2STLRvzrMKDbOg/ru2hSbzvkr7VzectSLUgymZccozFmnFvsZ
-	tLpp/NpmknVRDuEP9yT99Gof8EnN/a1BiBnHkk/dpKvw8Ps9bNDwPQOX
-X-Gm-Gg: AYBFou3PKZKaJx0fZZ91xikyDO+JZ9GdXGgiUW0OnekWuTqqe5YfAUTnimEoHijShRK
-	BB0X+w8/iuR0TCNAWkeL5qu7MdPJtC7NcjwyfUY8cyVlvtpZyoHYrCiIudR2MOKAudSN8dNWKJL
-	G7KQJMc/R4PXF7pZQ0wv4XRjEAxGRaXDo6uBwwncdtwZVnosyZN5Gq8tC/w4Y02AiDVrjY6R9Ou
-	tLpKJNRS3VzOIf+U9bQlql69NV9gNTGGwujmPgZRwfSYasxYdZ0T7IoNNJJoo821LHLnH4nhh0a
-	gDURO++bzPIDLuDRN8eRNyn0ZkUva9hvzYoE100WZwzsAx9n2Ar/pFbwoVgj7bHJyBg5RHh32bL
-	6Axsm6CUy9xZ77hDbAT2A6QP/P+Y8e1ulcxxBTDESGFLIG8g2Z9VC2h8U+ZCYto5a5v6cRztSNz
-	JVUFybHXkOLRym7YnSY/JgjyLtxOBv4fPWILHVskJbWG6dyYqMQdnZchdZ9FQnyqRhmCvk71KRi
-	s/BjMqrXP0hCCsik4ZtUgC5EwKYV+w=
-X-Received: by 2002:a05:7300:dd05:b0:33b:eea2:cbfe with SMTP id 5a478bee46e88-33e8dec5b02mr2369589eec.32.1790169531303;
-        Wed, 23 Sep 2026 06:18:51 -0700 (PDT)
+        bh=/Pnb4009fcr63720pQihUF6v8EokAjQS6rcfppqNlzc=;
+        b=vYV1DUgeoxqmagCVguSeZl1HkfFWkZb2Sh5LKQUwYo+xBgi6DPRrdcyq53quCiWWzs
+         Liun6G3Hcs3QjSLvnd5h4S7Y1aTSL4heztxy7I47wnCDE5gcxKOqolaMb8+rJG8uuojH
+         pxZ1VnznlNFSWsH2tjbJPcYg579xVFz2Zqj+hBt76NFYcWhLkK1M83Rls6fQJw0259fc
+         VprAstmHBPkTALAzrrC/Tk/4+j70XKGLF1TB/Mtj9cyDc9A9a2d4zZsl9VYh0dLVJtbb
+         dJhZTlkygKqLEQS1cwrLmTgyys2Bd+pknvHx9b9tc8b2IBDYCJR26ALIP+wvdVfF5SLx
+         zdKw==
+X-Forwarded-Encrypted: i=1; AKwUvBzzvd8N+jpiRQ58Jq+P2jR/CMao2UreGeh8msTqVJSCmOPpHQFR3nWVxotlICRIaUITUd1pf7441VY=@lists.xenproject.org
+X-Gm-Message-State: AFuF++k/vJS6EOJuqF75JvH89RKStKrn+SGgTCuFExSc3+ROExqpM8wS
+	KpTqoqbsLC952gQD2YQs2B8PGzebEX+3mJLJOdq08xsNpyVoTzi8cFpE
+X-Gm-Gg: AYBFou2m8rOZJTe6nSYP6onhwjER9QlERTxHRSIbdmW4aHHxaCw31ktsaIUrigja0HH
+	5UuAlpSGe0TmGW401GAZuwNpIUMKEaOqbqH8+qu/HGT9McIF9r7ELRw/kXxI4uLi9pbnHSDwHrp
+	Jsqq6//tAriANFpwHV3R5AfTwtSN0o/OgF/3Zcron4fu7DygqgzIIo1LTIskp+m0BpJEQPuMMqA
+	21Tj6spxNR2j86I6TV9yHE8Xh6ooKxLD//d1q0gtYCxHyqZO7/jRFeLqGILxtMdYDYBctxUWjOh
+	hxu8csWGDnzMglUP7K0630r0NvF3PSd/LxfeNPnIZKBQ2wFCmSixyk1GjtiIwb5Z92ljMkSDFuw
+	Em5zuPcKzZIABvwI2S5qiQlXgP359EwQ4QH6n0eNoBulOasloViV13IIwd1uB3CD22e+hEci1tT
+	0MkA0Nj8JFbL8VJQJICEHV6t4xLkeETDu5rWAsBOBjKg3ZsGTgObPOWEmIGsH3+ah/vAWfNEpA2
+	XvKoZS7ZDoB+K9lM3xIn5bpMmZ2z/k=
+X-Received: by 2002:a05:7022:fa9:b0:143:2973:3240 with SMTP id a92af1059eb24-144f91551e9mr4241198c88.29.1790169539996;
+        Wed, 23 Sep 2026 06:18:59 -0700 (PDT)
 From: Yonggang Luo <luoyonggang@gmail.com>
 To: qemu-devel@nongnu.org
 Cc: Cornelia Huck <cohuck@redhat.com>,
@@ -134,405 +134,320 @@ Cc: Cornelia Huck <cohuck@redhat.com>,
 	qemu-arm@nongnu.org,
 	qemu-s390x@nongnu.org,
 	Brian Cain <brian.cain@oss.qualcomm.com>
-Subject: [PATCH v3 012/114] target-info: add TargetKconfig
-Date: Wed, 23 Sep 2026 21:14:46 +0800
-Message-ID: <20260923131635.1894-13-luoyonggang@gmail.com>
+Subject: [PATCH v3 013/114] target-info: add target_is_* helpers for each architecture
+Date: Wed, 23 Sep 2026 21:14:47 +0800
+Message-ID: <20260923131635.1894-14-luoyonggang@gmail.com>
 X-Mailer: git-send-email 2.52.0.windows.1
 In-Reply-To: <20260923131635.1894-1-luoyonggang@gmail.com>
 References: <20260923131635.1894-1-luoyonggang@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1790169533-504DBB50-98395C87/0/0
+X-purgate-ID: tlsNG-c1860d/1790169542-CF55C87B-C0E75CE1/0/0
 X-purgate-type: clean
-X-purgate-size: 12921
+X-purgate-size: 6657
 
-Add a packed TargetKconfig of device and accel CONFIG_* bits,
-generated from the Kconfig tree, and attach it to TargetInfo.
-target_kconfig() returns the current bits, and
-target_has_kconfig_<name>() tests them. Initialize
-target_info_stub.kconfig from CONFIG_DEVICES.
+This is added for latter use with is_available.
 
 Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
 ---
- include/qemu/target-info-def.h       |   2 +
- include/qemu/target-kconfig-has.h    |   7 ++
- include/qemu/target-kconfig.h        |  34 ++++++
- meson.build                          |  14 +++
- scripts/gen-target-kconfig.py        | 162 +++++++++++++++++++++++++++
- target-info-def.c                    |   6 +
- target-kconfig.c                     |  20 ++++
- tests/unit/meson.build               |   1 +
- tests/unit/test-target-kconfig-has.c |  22 ++++
- 9 files changed, 268 insertions(+)
- create mode 100644 include/qemu/target-kconfig-has.h
- create mode 100644 include/qemu/target-kconfig.h
- create mode 100644 scripts/gen-target-kconfig.py
- create mode 100644 target-kconfig.c
- create mode 100644 tests/unit/test-target-kconfig-has.c
+ include/qemu/target-info.h | 91 +++++++++++++++++++++++++++++++++++++-
+ target-info.c              | 83 +++++++++++++++++++++++++++++-----
+ 2 files changed, 161 insertions(+), 13 deletions(-)
 
-diff --git a/include/qemu/target-info-def.h b/include/qemu/target-info-def.h
-index 25dc7c508d3..615596ed468 100644
---- a/include/qemu/target-info-def.h
-+++ b/include/qemu/target-info-def.h
-@@ -13,6 +13,7 @@
- #include "qapi/qapi-types-machine.h"
- #include "qemu/queue.h"
- #include "qemu/target-info.h"
-+#include "qemu/target-kconfig.h"
- 
- struct TargetInfo {
-     /* runtime equivalent of TARGET_NAME definition */
-@@ -32,6 +33,7 @@ struct TargetInfo {
-     unsigned page_bits_init;
-     /* runtime equivalent of TARGET_PAGE_BITS_VARY definition */
-     bool page_bits_vary;
-+    TargetKconfig kconfig;
- };
- 
- typedef struct TargetInfoNode TargetInfoNode;
-diff --git a/include/qemu/target-kconfig-has.h b/include/qemu/target-kconfig-has.h
-new file mode 100644
-index 00000000000..6616f75845a
---- /dev/null
-+++ b/include/qemu/target-kconfig-has.h
-@@ -0,0 +1,7 @@
-+/*
-+ * QEMU target_has_kconfig_* helpers
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#include "target-kconfig-has-gen.h"
-diff --git a/include/qemu/target-kconfig.h b/include/qemu/target-kconfig.h
-new file mode 100644
-index 00000000000..21b2ba576ec
---- /dev/null
-+++ b/include/qemu/target-kconfig.h
-@@ -0,0 +1,34 @@
-+/*
-+ * QEMU target kconfig API
-+ *
-+ *  Copyright (c) Yonggang Luo
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
-+ */
-+
-+#ifndef QEMU_TARGET_KCONFIG_H
-+#define QEMU_TARGET_KCONFIG_H
-+
-+#include "qemu/compiler.h"
-+
-+/**
-+ * struct TargetKconfig:
-+ *
-+ * Compile-time device and accel CONFIG_* bits. Not Kconfig.host
-+ * or target/Kconfig. Target identity is TargetInfo, not these
-+ * bits. Not kvm_enabled() etc. Fields and
-+ * target_has_kconfig_<name>() are generated by
-+ * scripts/gen-target-kconfig.py.
-+ */
-+typedef struct TargetKconfig {
-+#include "target-kconfig-fields.h"
-+} QEMU_PACKED TargetKconfig;
-+
-+/**
-+ * target_kconfig:
-+ *
-+ * Returns: The current TargetKconfig (target_info()->kconfig).
-+ */
-+const TargetKconfig *target_kconfig(void);
-+
-+#endif
-diff --git a/meson.build b/meson.build
-index 776d38c5afd..8a017faaa74 100644
---- a/meson.build
-+++ b/meson.build
-@@ -3445,6 +3445,19 @@ genh += custom_target('config-poison.h',
-                       capture: true,
-                       command: [find_program('scripts/make-config-poison.sh'),
-                                 target_configs_h])
-+genh += custom_target('target-kconfig',
-+                      output: ['target-kconfig-fields.h',
-+                               'target-kconfig-init.h',
-+                               'target-kconfig-has-gen.h',
-+                               'target-kconfig-has.c.inc'],
-+                      depfile: 'target-kconfig.d',
-+                      command: [python, files('scripts/gen-target-kconfig.py'),
-+                                '--kconfig', meson.current_source_dir() / 'Kconfig',
-+                                '--depfile', '@DEPFILE@',
-+                                '--fields', '@OUTPUT0@',
-+                                '--init', '@OUTPUT1@',
-+                                '--has', '@OUTPUT2@',
-+                                '--has-c', '@OUTPUT3@'])
- 
- if fdt_required.length() > 0
-   error('fdt disabled but required by targets ' + ', '.join(fdt_required))
-@@ -3779,6 +3792,7 @@ endif
- 
- qom_ss.add(files(
-   'target-info.c',
-+  'target-kconfig.c',
- ))
- qom_ss = qom_ss.apply({})
- libqom = static_library('qom', qom_ss.sources() + genh,
-diff --git a/scripts/gen-target-kconfig.py b/scripts/gen-target-kconfig.py
-new file mode 100644
-index 00000000000..afeffc75ca0
---- /dev/null
-+++ b/scripts/gen-target-kconfig.py
-@@ -0,0 +1,162 @@
-+#!/usr/bin/env python3
-+# SPDX-License-Identifier: GPL-2.0-or-later
-+"""Generate TargetKconfig CONFIG_* field, initializer, and has headers.
-+
-+The field list is every `config FOO` from the QEMU Kconfig tree,
-+parsed with scripts/minikconf.py (including accel/Kconfig: KVM,
-+XEN, HVF, TCG, ...). Host proxies in Kconfig.host and the
-+target/Kconfig tree (arch tokens and TARGET_BIG_ENDIAN) are
-+omitted. Target identity is TargetInfo, not TargetKconfig.
-+
-+Each field also gets target_has_kconfig_<name>(const TargetInfo *).
-+"""
-+
-+import argparse
-+import os
-+import sys
-+
-+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-+from minikconf import KconfigData, KconfigParser
-+
-+
-+def field_name(config: str) -> str:
-+    return config[len("CONFIG_"):].lower()
-+
-+
-+def collect_from_kconfig(root: str) -> tuple[set[str], list[str]]:
-+    data = KconfigData()
-+    with open(root, "rt", encoding="utf-8") as fp:
-+        KconfigParser.parse(fp, data)
-+    names = {"CONFIG_" + name for name in data.defined_vars}
-+    return names, list(data.previously_included)
-+
-+
-+def collect_kconfig_names(path: str) -> set[str]:
-+    data = KconfigData()
-+    with open(path, "rt", encoding="utf-8") as fp:
-+        KconfigParser.parse(fp, data)
-+    return {"CONFIG_" + name for name in data.defined_vars}
-+
-+
-+def collect_host_kconfig_names(kconfig_root: str) -> set[str]:
-+    host = os.path.join(os.path.dirname(os.path.abspath(kconfig_root)),
-+                        "Kconfig.host")
-+    return collect_kconfig_names(host)
-+
-+
-+def collect_target_kconfig_names(kconfig_root: str) -> set[str]:
-+    target = os.path.join(os.path.dirname(os.path.abspath(kconfig_root)),
-+                          "target", "Kconfig")
-+    return collect_kconfig_names(target)
-+
-+
-+def write_fields(path: str, configs: list[str]) -> None:
-+    lines = [
-+        "/* Generated by scripts/gen-target-kconfig.py. Do not edit. */",
-+        "",
-+    ]
-+    for name in configs:
-+        lines.append(f"    uint32_t {field_name(name)} : 1;")
-+    lines.append("")
-+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
-+        fh.write("\n".join(lines))
-+
-+
-+def write_init(path: str, configs: list[str]) -> None:
-+    lines = [
-+        "/* Generated by scripts/gen-target-kconfig.py. Do not edit. */",
-+        "",
-+    ]
-+    for name in configs:
-+        field = field_name(name)
-+        lines.append(f"#if defined({name})")
-+        lines.append(f"    .{field} = true,")
-+        lines.append("#endif")
-+    lines.append("")
-+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
-+        fh.write("\n".join(lines))
-+
-+
-+def has_fn(config: str) -> str:
-+    return "target_has_kconfig_" + field_name(config)
-+
-+
-+def write_has_h(path: str, configs: list[str]) -> None:
-+    lines = [
-+        "/* Generated by scripts/gen-target-kconfig.py. Do not edit. */",
-+        "",
-+        "#ifndef TARGET_KCONFIG_HAS_GEN_H",
-+        "#define TARGET_KCONFIG_HAS_GEN_H",
-+        "",
-+        "#include <stdbool.h>",
-+        "",
-+        "typedef struct TargetInfo TargetInfo;",
-+        "",
-+    ]
-+    for name in configs:
-+        lines.append(f"bool {has_fn(name)}(const TargetInfo *ti);")
-+    lines.append("")
-+    lines.append("#endif")
-+    lines.append("")
-+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
-+        fh.write("\n".join(lines))
-+
-+
-+def write_has_c(path: str, configs: list[str]) -> None:
-+    lines = [
-+        "/* Generated by scripts/gen-target-kconfig.py. Do not edit. */",
-+        "",
-+    ]
-+    for name in configs:
-+        fn = has_fn(name)
-+        field = field_name(name)
-+        lines.append(f"bool {fn}(const TargetInfo *ti)")
-+        lines.append("{")
-+        lines.append(f"    return ti->kconfig.{field};")
-+        lines.append("}")
-+        lines.append("")
-+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
-+        fh.write("\n".join(lines))
-+
-+
-+def write_depfile(path: str, outputs: list[str], deps: list[str]) -> None:
-+    lines = [" ".join(outputs) + ":" ]
-+    for dep in deps:
-+        lines.append(f"  {dep} \\")
-+    if len(lines) > 1:
-+        lines[-1] = lines[-1][:-2]
-+    lines.append("")
-+    with open(path, "w", encoding="utf-8", newline="\n") as fh:
-+        fh.write("\n".join(lines))
-+
-+
-+def main(argv: list[str]) -> int:
-+    parser = argparse.ArgumentParser(
-+        description="Generate TargetKconfig CONFIG_* include headers"
-+    )
-+    parser.add_argument("--fields", required=True, help="output fields header")
-+    parser.add_argument("--init", required=True, help="output initializer header")
-+    parser.add_argument("--has", required=True, help="output has-function header")
-+    parser.add_argument("--has-c", required=True, help="output has-function bodies")
-+    parser.add_argument("--kconfig", required=True, help="root Kconfig")
-+    parser.add_argument("--depfile", help="ninja depfile of walked Kconfig files")
-+    args = parser.parse_args(argv)
-+
-+    names, kconfig_files = collect_from_kconfig(args.kconfig)
-+    names -= collect_host_kconfig_names(args.kconfig)
-+    names -= collect_target_kconfig_names(args.kconfig)
-+    configs = sorted(names)
-+
-+    write_fields(args.fields, configs)
-+    write_init(args.init, configs)
-+    write_has_h(args.has, configs)
-+    write_has_c(args.has_c, configs)
-+    if args.depfile:
-+        write_depfile(args.depfile,
-+                      [args.fields, args.init, args.has, args.has_c],
-+                      kconfig_files)
-+    return 0
-+
-+
-+if __name__ == "__main__":
-+    sys.exit(main(sys.argv[1:]))
-diff --git a/target-info-def.c b/target-info-def.c
-index 954298b56d0..44d153cefbc 100644
---- a/target-info-def.c
-+++ b/target-info-def.c
-@@ -7,6 +7,9 @@
+diff --git a/include/qemu/target-info.h b/include/qemu/target-info.h
+index c48973f20be..89656da1ca4 100644
+--- a/include/qemu/target-info.h
++++ b/include/qemu/target-info.h
+@@ -53,6 +53,14 @@ const char *target_cpu_type(void);
   */
+ bool target_big_endian(void);
  
- #include "qemu/osdep.h"
-+#ifdef CONFIG_DEVICES
-+#include CONFIG_DEVICES
-+#endif
- #include "qemu/target-info.h"
- #include "qemu/target-info-def.h"
- #include "cpu-qom.h"
-@@ -33,6 +36,9 @@ static const TargetInfo target_info_stub = {
-     .page_bits_vary = false,
-     .page_bits_init = TARGET_PAGE_BITS,
- #endif
-+    .kconfig = {
-+#include "target-kconfig-init.h"
-+    },
- };
++/**
++ * target_is_base_arm:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is ARM or Aarch64.
++ */
++bool target_is_base_arm(const TargetInfo *ti);
++
+ /**
+  * target_base_arm:
+  *
+@@ -60,6 +68,14 @@ bool target_big_endian(void);
+  */
+ bool target_base_arm(void);
  
- target_info_init(target_info_stub)
-diff --git a/target-kconfig.c b/target-kconfig.c
-new file mode 100644
-index 00000000000..078c0d8e7f3
---- /dev/null
-+++ b/target-kconfig.c
-@@ -0,0 +1,20 @@
-+/*
-+ * QEMU target kconfig helpers
++/**
++ * target_is_arm:
++ * @ti: TargetInfo to inspect
 + *
-+ *  Copyright (c) Yonggang Luo
-+ *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
++ * Returns whether @ti is ARM (32-bit, not Aarch64).
 + */
++bool target_is_arm(const TargetInfo *ti);
 +
-+#include "qemu/osdep.h"
-+#include "qemu/target-info.h"
-+#include "qemu/target-info-def.h"
-+#include "qemu/target-kconfig.h"
-+#include "qemu/target-kconfig-has.h"
-+
-+const TargetKconfig *target_kconfig(void)
-+{
-+    return &target_info()->kconfig;
-+}
-+
-+#include "target-kconfig-has.c.inc"
-diff --git a/tests/unit/meson.build b/tests/unit/meson.build
-index dc980a35955..c806dbc4ffa 100644
---- a/tests/unit/meson.build
-+++ b/tests/unit/meson.build
-@@ -47,6 +47,7 @@ tests = {
-     objects: target_info_def_objects.values(),
-     compile_args: ['-DTARGET_INFO_DEF_COUNT=@0@'.format(
-       target_info_def_objects.values().length())])],
-+  'test-target-kconfig-has': [qom],
-   'test-qemu-opts': [],
-   'test-keyval': [testqapi],
-   'test-logging': [],
-diff --git a/tests/unit/test-target-kconfig-has.c b/tests/unit/test-target-kconfig-has.c
-new file mode 100644
-index 00000000000..289ed89b854
---- /dev/null
-+++ b/tests/unit/test-target-kconfig-has.c
-@@ -0,0 +1,22 @@
-+/*
-+ * target-kconfig-has.h include path test
+ /**
+  * target_arm:
+  *
+@@ -67,6 +83,14 @@ bool target_base_arm(void);
+  */
+ bool target_arm(void);
+ 
++/**
++ * target_is_aarch64:
++ * @ti: TargetInfo to inspect
 + *
-+ * SPDX-License-Identifier: GPL-2.0-or-later
++ * Returns whether @ti is Aarch64.
 + */
++bool target_is_aarch64(const TargetInfo *ti);
 +
-+#include "qemu/osdep.h"
-+#include "qemu/target-kconfig-has.h"
+ /**
+  * target_aarch64:
+  *
+@@ -74,6 +98,14 @@ bool target_arm(void);
+  */
+ bool target_aarch64(void);
+ 
++/**
++ * target_is_base_ppc:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is PowerPC 32-bit or 64-bit.
++ */
++bool target_is_base_ppc(const TargetInfo *ti);
 +
-+static void test_include(void)
+ /**
+  * target_base_ppc:
+  *
+@@ -81,6 +113,14 @@ bool target_aarch64(void);
+  */
+ bool target_base_ppc(void);
+ 
++/**
++ * target_is_ppc:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is PowerPC 32-bit.
++ */
++bool target_is_ppc(const TargetInfo *ti);
++
+ /**
+  * target_ppc:
+  *
+@@ -88,6 +128,14 @@ bool target_base_ppc(void);
+  */
+ bool target_ppc(void);
+ 
++/**
++ * target_is_ppc64:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is PowerPC 64-bit.
++ */
++bool target_is_ppc64(const TargetInfo *ti);
++
+ /**
+  * target_ppc64:
+  *
+@@ -95,6 +143,14 @@ bool target_ppc(void);
+  */
+ bool target_ppc64(void);
+ 
++/**
++ * target_is_s390x:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is S390x.
++ */
++bool target_is_s390x(const TargetInfo *ti);
++
+ /**
+  * target_s390x:
+  *
+@@ -102,17 +158,48 @@ bool target_ppc64(void);
+  */
+ bool target_s390x(void);
+ 
++/**
++ * target_is_base_riscv:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is RISC-V 32-bit or 64-bit.
++ */
++bool target_is_base_riscv(const TargetInfo *ti);
++
++/**
++ * target_base_riscv:
++ *
++ * Returns whether the target architecture is RISC-V 32-bit or 64-bit.
++ */
++bool target_base_riscv(void);
++
++/**
++ * target_is_riscv32:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is RISC-V 32-bit.
++ */
++bool target_is_riscv32(const TargetInfo *ti);
++
+ /**
+  * target_riscv32:
+  *
+- * Returns whether the target architecture is riscv32
++ * Returns whether the target architecture is RISC-V 32-bit.
+  */
+ bool target_riscv32(void);
+ 
++/**
++ * target_is_riscv64:
++ * @ti: TargetInfo to inspect
++ *
++ * Returns whether @ti is RISC-V 64-bit.
++ */
++bool target_is_riscv64(const TargetInfo *ti);
++
+ /**
+  * target_riscv64:
+  *
+- * Returns whether the target architecture is riscv64
++ * Returns whether the target architecture is RISC-V 64-bit.
+  */
+ bool target_riscv64(void);
+ 
+diff --git a/target-info.c b/target-info.c
+index 6e66f48e1ff..6d57cad5d33 100644
+--- a/target-info.c
++++ b/target-info.c
+@@ -96,9 +96,9 @@ bool target_big_endian(void)
+     return target_endian_mode() == ENDIAN_MODE_BIG;
+ }
+ 
+-bool target_base_arm(void)
++bool target_is_base_arm(const TargetInfo *ti)
+ {
+-    switch (target_arch()) {
++    switch (ti->target_arch) {
+     case SYS_EMU_TARGET_ARM:
+     case SYS_EMU_TARGET_AARCH64:
+         return true;
+@@ -107,19 +107,34 @@ bool target_base_arm(void)
+     }
+ }
+ 
++bool target_base_arm(void)
 +{
-+    bool (*fn)(const TargetInfo *ti) = target_has_kconfig_tcg;
-+
-+    g_assert_nonnull(fn);
++    return target_is_base_arm(target_info());
 +}
 +
-+int main(int argc, char **argv)
++bool target_is_arm(const TargetInfo *ti)
 +{
-+    g_test_init(&argc, &argv, NULL);
-+    g_test_add_func("/target-kconfig-has/include", test_include);
-+    return g_test_run();
++    return ti->target_arch == SYS_EMU_TARGET_ARM;
 +}
++
+ bool target_arm(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_ARM;
++    return target_is_arm(target_info());
++}
++
++bool target_is_aarch64(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_AARCH64;
+ }
+ 
+ bool target_aarch64(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_AARCH64;
++    return target_is_aarch64(target_info());
+ }
+ 
+-bool target_base_ppc(void)
++bool target_is_base_ppc(const TargetInfo *ti)
+ {
+-    switch (target_arch()) {
++    switch (ti->target_arch) {
+     case SYS_EMU_TARGET_PPC:
+     case SYS_EMU_TARGET_PPC64:
+         return true;
+@@ -128,27 +143,73 @@ bool target_base_ppc(void)
+     }
+ }
+ 
++bool target_base_ppc(void)
++{
++    return target_is_base_ppc(target_info());
++}
++
++bool target_is_ppc(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_PPC;
++}
++
+ bool target_ppc(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_PPC;
++    return target_is_ppc(target_info());
++}
++
++bool target_is_ppc64(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_PPC64;
+ }
+ 
+ bool target_ppc64(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_PPC64;
++    return target_is_ppc64(target_info());
++}
++
++bool target_is_s390x(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_S390X;
+ }
+ 
+ bool target_s390x(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_S390X;
++    return target_is_s390x(target_info());
++}
++
++bool target_is_base_riscv(const TargetInfo *ti)
++{
++    switch (ti->target_arch) {
++    case SYS_EMU_TARGET_RISCV32:
++    case SYS_EMU_TARGET_RISCV64:
++        return true;
++    default:
++        return false;
++    }
++}
++
++bool target_base_riscv(void)
++{
++    return target_is_base_riscv(target_info());
++}
++
++bool target_is_riscv32(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_RISCV32;
+ }
+ 
+ bool target_riscv32(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_RISCV32;
++    return target_is_riscv32(target_info());
++}
++
++bool target_is_riscv64(const TargetInfo *ti)
++{
++    return ti->target_arch == SYS_EMU_TARGET_RISCV64;
+ }
+ 
+ bool target_riscv64(void)
+ {
+-    return target_arch() == SYS_EMU_TARGET_RISCV64;
++    return target_is_riscv64(target_info());
+ }
 -- 
 2.52.0.windows.1
 
