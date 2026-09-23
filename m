@@ -4,43 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACCD2C982FA
-	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 10:57:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1430180.1652773 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9CC5C982EA
+	for <xen-devel@archiver.kernel.org>; Wed, 23 Sep 2026 11:17:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1430213.1652783 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9KfD-0001VY-EL; Wed, 23 Sep 2026 10:57:23 +0000
+	id 1x9Ky3-0004eW-Uv; Wed, 23 Sep 2026 11:16:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1430180.1652773; Wed, 23 Sep 2026 10:57:23 +0000
+Received: by outflank-mailman (output) from mailman id 1430213.1652783; Wed, 23 Sep 2026 11:16:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9KfD-0001VR-BU; Wed, 23 Sep 2026 10:57:23 +0000
-Received: by outflank-mailman (input) for mailman id 1430180;
- Wed, 23 Sep 2026 10:57:21 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1x9KfB-0001VL-FP
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 10:57:21 +0000
+	id 1x9Ky3-0004eP-SI; Wed, 23 Sep 2026 11:16:51 +0000
+Received: by outflank-mailman (input) for mailman id 1430213;
+ Wed, 23 Sep 2026 11:16:51 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <ross.lagerwall@citrix.com>) id 1x9Ky3-0004eJ-6y
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 11:16:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9KfA-001omP-NK
- for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 12:57:20 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1x9Ky2-007XID-1t
+ for xen-devel@lists.xenproject.org; Wed, 23 Sep 2026 13:16:50 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab3b075-2eae-0a2a0a5409dd-0a2a4502d718-44
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 12:57:20 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab3b090-6ca4-0a2a45020019-4a7de14cc78a-3
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 12:57:20 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-485b1d2874aso655013f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 03:57:20 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-488682668e7sm7256281f8f.4.2026.09.23.03.57.19
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 23 Sep 2026 03:57:19 -0700 (PDT)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6ab3b51b-2eae-0a2a0a5409dd-0a2a450bae00-6
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 13:16:49 +0200
+Received: from [52.101.48.8]
+ (helo=MW6PR02CU001.outbound.protection.outlook.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6ab3b520-b7e8-0a2a450b0019-346530082af8-3
+ for <xen-devel@lists.xenproject.org>; Wed, 23 Sep 2026 13:16:49 +0200
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
+ by CY3PR03MB8152.namprd03.prod.outlook.com (2603:10b6:930:100::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.14; Wed, 23 Sep
+ 2026 11:16:46 +0000
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0428.015; Wed, 23 Sep 2026
+ 11:16:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,189 +55,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790161040; x=1790765840; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=8bx2uWKvoOnVG2P2VE9YzHLiiwahiHPtwCvtIv7FPns=;
-        b=dXxLNE7qrvTCR7RonGpl0N/Y84Gpi15nkSBElsEA7CSY92qw+eJRhnyFGdSKUTmIiz
-         3wFEqnIfu3HJB5/opXendnFfl6nFJyQHH2xZK/nkHZZL/mE4pY4iSeoEli00G7dQ9fx4
-         NvtmzcNMCi4BfQI7rSb16eD6YUHf21B8n4mhAXW0rNPSon4MDD47t/kNwNIH1KsYwDi+
-         WrZ7gkQnVUWiL6Ry43rk2uQC+/kpfDv2ntNaQYOST/pWCGHJxTNU6YtheJmfRIEU26eB
-         KsM/e9jx7DdIRxqBrAJ1uloZBGXkvdGvrT+LmWaEO73cgNwzSrfouQaJLNhF5Lo6Jz6e
-         6Fyg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790161040; x=1790765840;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=8bx2uWKvoOnVG2P2VE9YzHLiiwahiHPtwCvtIv7FPns=;
-        b=Z9rt8SJle59DAOE3NoWX1ZULXr/3kOsbIUkZBjqxj35yJW5US27lsSfKZj8c+YAtsI
-         XjnMWoxRdibMoIBYVHFV1rqVHDy9GXOdy39Ae8DQyw6L/7V5KxFuE3zyYRWi9GuUO6U3
-         JkmoJcXQsj91nRaKHaM/xP8uJOAXjALoYFUyIxrPigyAVA7WsjYDEEIMHOvTlLjy/vBh
-         58y4RqUJ2pK7B+EP7rQrJ0M1jWhs3pfrhejByzKm9PEpwh1IzYs8lF6eQbIvZJbhKv72
-         /ErtL+rWxMcb7cuLDwM8YwiDnxXqxGKxwbYtY1wVJHBpW8PkSOcxjBNl36dq47juUAu2
-         CDYA==
-X-Gm-Message-State: AFuF++lVwWA2IxuSEhRA2CsLagageiPWvLDXZ+6T6mKZDVbfGlU8P5Hh
-	1qfqZ4TyX7143wzR1GBl1tnQ2+2gcC9oGH2jJTli0Q2gKw89+hscBewD
-X-Gm-Gg: AYBFou1zi4cfd3sMsoadrpuEFwUMXd8LPUBnOW8rK0RV3JTGXq6/ict0vmk+PLLqRvb
-	Ce+dZsAYZiHLMEhyG0JIjuO8biZcdMqDno+gkG8ELsZ3BRR8+sIHJ/4NlsREIOhmaSBI+Ct1OFi
-	ldbq9MBqzhQ8pl6YhSMf8KRHijZ5gLJrlHJzF1W88lZBeucnDnUY2Hy/UK6+BmFp/Cq8xCH6cXi
-	9K9j975jQsJvQXG4GDPudOyA0l3nfkx+NVSRCKrJJ6vmttx+iDMoBY1DCVtk5QoYkV/Lad9geW+
-	gb+lf0FDSjkvh/m6gSsOD1Ss1AkynxBIX3A4h/JWhZJXmwBRI2GCowR+uhTSp+bsbQV7X8B0H0o
-	mL/amXjS8VR9paJDT0ZIXXNgG3r1Ra93UNBmlTtqPpoBm2bp6U2P83ayDb2sUcfGHnk+nYbWm9g
-	15ukwEIe/cjxmThpo/1LBB4ueyn0rAEmw//XbNU8EihL7eQ7Ag3c7SikOPFWPlSCXD28SCviHD7
-	cZBtufbm1D5DmGEqAd1zdKbgEPwcLQjeK/vW2ljQf/YElkg8nwsAEwJYIUG
-X-Received: by 2002:a05:6000:26c7:b0:484:3314:eff6 with SMTP id ffacd0b85a97d-488670906bcmr3492908f8f.28.1790161040079;
-        Wed, 23 Sep 2026 03:57:20 -0700 (PDT)
-Message-ID: <1cf983c9-456b-4137-b302-e60a0f5ed057@gmail.com>
-Date: Wed, 23 Sep 2026 12:57:18 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Ko156pzfNLv/coan9zKcYFk7a+dOlodbFjsWaFwDjIgBthz615Brrb8GqgJU07a25u67m3nToYFm8LAkALVcg4XIxwVjRPs1rJcnHShKDXtAMs2Efr7IDRmICHaQyH5F8LJBMNUvhVHOXMongqcKYLLp4nQlgDFWj8QbURsBG9vb/qZNaK5r4FeDNEXud1Xk1ORUb6QdvoOSdUjbhspaWWIlLiLkUmyhph9ykk6hvqBQLohN7hSHdBofGYBUNIUzUeQY5WW63OopBaqLwyVl/qvtbX1SwzqyyoxSnca9axi6c0XUoikOBxuuFOPWq0+kW5O8o7PuSkXy5hy9iDZlNQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=QxfeYVCK/ABHBpdU2TQPFB2PkdQGMgpkvrmStIswxk8=;
+ b=Yf4VzTFJkxZWF8Zj2V3RlrARUJy51Xh3MjmYxc/ew7+Lr0CjynI9cvnUqeEpFFSpZzbBIAzE3HK/4ref9Csq6H93f5MsmZfaPsmHw799MU0mlq/djuJ1gzzJnJtgbwITDt+NN6J3dYLib4jgPXHrAix0Zs5JzIYswsEXkcc9Yf+5Qp0Bak3UJaELvFdBSWPmrKmTiVtj23R0HK55/TN+CJMTpfn5GN6MtFt53JnWFNfQweatq9PildM0FhEz5DAkQajrGh6LEJFtrM+bwPef4WGdSo35yvSv+vWKyAXV7mvkmLzyWJ8GIxsBxXj9+AsvtQdP1MOL6AK61QbbcpMDZw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=QxfeYVCK/ABHBpdU2TQPFB2PkdQGMgpkvrmStIswxk8=;
+ b=TVyANupYmlotxXcwXgf37oUDOg0McuGrcmnQzSNnbAeNIwcyXVdlDtHC+5WuUBDA0TCqZzX5MXreG1v+v20GYRCfMm3HtM3AfMEmmlJdjj0HjOCgWirgj3IrRvtvDCiCZKF8xCquhuYnCS711B/aGiFW42zC3dTu7hVwpOS3kt4=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <38c41bfb-48c6-4408-8da1-2b7d730a6c9e@citrix.com>
+Date: Wed, 23 Sep 2026 12:16:41 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 31/39] xen/riscv: implement APLIC-hart sync barrier for
- vCPU migration
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
- Romain Caritey <Romain.Caritey@microchip.com>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <3d953b6e7f221f4cf4143454076466fab38b6236.1787838835.git.oleksii.kurochko@gmail.com>
- <1790096435.8631fc262581453bbf619ec5b2062170.1a0ca0fea6500072c4@vates.tech>
- <6da5569d-8ae8-4388-a407-00b5d2a4bc27@gmail.com>
+Subject: Re: [PATCH] x86/nSVM: Save L2's CR4 on #VMEXIT, not Xen's
+To: Lin Liu <lin.liu01@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Jason Andryuk <jason.andryuk@amd.com>,
+ Teddy Astie <teddy.astie@vates.tech>
+References: <a5702b9bc1d354dac5778deacbc397e76530408a.1790069475.git.lin.liu01@citrix.com>
 Content-Language: en-US
-In-Reply-To: <6da5569d-8ae8-4388-a407-00b5d2a4bc27@gmail.com>
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+In-Reply-To: <a5702b9bc1d354dac5778deacbc397e76530408a.1790069475.git.lin.liu01@citrix.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1790161040-307C22AC-A447E1E8/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4347
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: LO4P265CA0071.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2af::13) To CH8PR03MB8274.namprd03.prod.outlook.com
+ (2603:10b6:610:2ba::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|CY3PR03MB8152:EE_
+X-MS-Office365-Filtering-Correlation-Id: 2d7fca29-1c82-4df3-6a72-08df196427df
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|366016|376014|1800799024|56012099006|11063799006|10067099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	N4OMWksP/6Ngg54e6v18okY2MN1iPAHEFJ+mPsQB/ESdfBHlepqFTt7V27tMO+MKIxBM99peC7C5ERFyPJHeBom8Gs9Y1mUbxHBm80wLim/+KyUDJyGoLUZ4n004Ng1IuAf7vo1mg1O35Ww3yg/Ul5wsTK5ftmqAL7LorW5Zd2rf9DHU2aJFmu9NFHZGHCZQ8OarG/XYPHRYjmJpsmSh6OB0mf0AprYXbTsR8dEA9Ot6BsSq5jbmqlqpwLPHX9Ph2LEaMGkHkKvgNsKKbkaYlULOhaUIrGqusKMPTsRrxARWyRK4D9xUytaOEO0CoMJgWMYJnN8ma32EHtDA4EsWXwe+aeZAbE2NOq+Q/LsF/mxmyBi1cROjwqEbnsqRCYnuiROBp22KldFplX0E/IHWmbwcymEnbQnt7Hq+LBGM4aZYI88uNLBK4icN5cXps5QiaDRB01t14c6F3Tx5sEjWMSk4hUK1yJCcx1Mywpl1vEKb/K2dDcV+d/zfLvwLEBLxYgBPk1ubhAuXbkbet0giTNaK9ONXeatsu//d0gz9QfkbCJ4ty2sdn65zudaITur4qZNobMZFY4fQbL9vYJvI73WLxUWTb9x6OXdzvrCzDsGGA5k8926s9BR/LTFUAvYhOcg902vasLGSmsLEk8biF89BCMOTxMkmsrEBd8tJDIQ=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(376014)(1800799024)(56012099006)(11063799006)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?S0lyRVdSam85REFGaEJCaUJIWTJ1OUFWWW1sY2lLd3JlMGN0c1cyTUtnRTN0?=
+ =?utf-8?B?QUdqZWZlakdDYnZBTWxSOWJTNTRGVVFUM2VvNUxUREVuVTZOa1ZGalNUdW9t?=
+ =?utf-8?B?WGRsMDFmTEtLNFB5S2U2NXozM29UTkkrcW1Ham9nN0l0dTJhUHQzY05wQUNC?=
+ =?utf-8?B?TUFpcE9XL2FNVkpzRVVLMlh4MnZ2ank5TUNRcWRHVXFJMHFvL0ROUXUrZjhG?=
+ =?utf-8?B?UWRTa2hjR0psOGpZKzZSQmNId1V5RDd0SjZZc21mR1luSEJYZzVvWGpCd1Vt?=
+ =?utf-8?B?Uzlsc2ZGZVJZcWRuT2F6cEhRYWdNTzE0MHdiaUkxYWVFd2owUllTYmtSRy9l?=
+ =?utf-8?B?bXJHNU9oQlVuMHRhbUV4bTNKd3NhaWEzdEVjVFB3aWVXMmxONFl3YmVHYWY5?=
+ =?utf-8?B?QkdOREVSeDVTMUlHQ0NVZy8yQTl0U01nYVA0NFpJdFdEZjYybGF2b05QK2Yz?=
+ =?utf-8?B?dHVzZGd4RXArTTBaQ1JKeXdLTGtEN0gyV2E4UE1ZZmhlWVI4a2RldlZWYWsw?=
+ =?utf-8?B?WTlUamJQQU1wbVRsT3U2eFV4MmVTQUZKYmJMS3BVLzkxMU5DT2pYQ2lIMGV5?=
+ =?utf-8?B?bzdXYzR3Mi90ZnZFNjZvbHQ2VFIrOXZxNitsR0JOWEprbVZWY0hUUnFLZ0wr?=
+ =?utf-8?B?c3FCY2pjbE42SnNOcHlNWWFPZE4xaHMrK1UyVkgzaUE3aElMeWIvUno3azlK?=
+ =?utf-8?B?ZDlKSWdibjVrcFRrME8yMnJ1ejR3SDVvUms2ajlLdlM4bEhlMEZXMk5SUmls?=
+ =?utf-8?B?NGx1L3c4UU45b1FzV0MwR2s0VkhJWWoyL2JRT2EwVHFXWUt4MkRYMjdreTVB?=
+ =?utf-8?B?d05wcWZWdC9JNWpoM2kwdlRpeEZkbG5VVXdtWldkVGhKUHdvdUk1aHBBTER2?=
+ =?utf-8?B?TDhVQ1VKQlVpRUJZN2FPckROSW9xbzgxdzlDL1ZrRDBqS0NiR01Zd1lnZ3NM?=
+ =?utf-8?B?VE5WRkZxZS9vSXlsa3M2bEtWdDdIOEo0WkVMUWtjNTBxUG5YbTg1azlBdDJ2?=
+ =?utf-8?B?SitVQ3cwdmxXSEpDZXRnV2owSmNrWkJUTG9mZFpYMTd2alJwV09GeTVHS3JX?=
+ =?utf-8?B?OStlZzhWTis4aTJTVjJxWWlHazV3QlBRNkRKVmIwMnRxOXpnM1N5S2phbnlw?=
+ =?utf-8?B?VGllYjlCRFI2anB1TWVPRnVsZyt5a3k5WkFIOVNiYkJrMFJNSlYvakh1UXF1?=
+ =?utf-8?B?WUxabzdhcVVtWEpsYmE4QXVwdU1sSXN5bFViU0VrZkpuMGhNTncwaXA3MDNJ?=
+ =?utf-8?B?QjAwRHpOT1VZQWljZHM1SzRxem5KWEoxNUdPRnNlWmNuQzhBa25sdHk0a0w0?=
+ =?utf-8?B?UEdsODkxaDdwcTM0ZGQxZjl1cW1DWjNIK04zWnB1aWxTd1poZDBYeUJmeHNt?=
+ =?utf-8?B?aVRCdUlpT2FWQlc4VzBuQmhCUmhpM1JpRG1SNHNyTnNtR2xwNmxwMFJEelpB?=
+ =?utf-8?B?RGxwUDlUMEQ2OGh5ZXFLNWd5RUtVRzVMcDRUMXZZVkhKbThvNkQraVlUcjA1?=
+ =?utf-8?B?dmhRSG93YkF1a3NPaW8zZjVyZlIxdlpUdTRKS2JVcEpxa1RYNXRvTFppd1lB?=
+ =?utf-8?B?UEdub2dFcWFKVGhKS1N0Y2NaMW9kMlpTVWliczhERUp6TkcxRVhZSlBTbXBG?=
+ =?utf-8?B?Y0ZJQVQ0TXZ4dUdvb3RlMHQ1QVFvQis3aVVnK2FpbGtnQ1RuRVVCQXd2eXlj?=
+ =?utf-8?B?YWhDSlkzU3hxNWEyOUpDMW5Bd1RKbHNrMFA4S3BDNldGcXlhaGpMWnpqZFFC?=
+ =?utf-8?B?VldTNmtWTWx1UllQT1hhUHh2WGZ0MmM5RzVWZ1pQdWhGVHJkNG12QU92bUc4?=
+ =?utf-8?B?aktucGRhMk1EMFhka0ZLWjdLSTNKelg5dDh1TVRna1dNUzZIZUYyeFVFdWFF?=
+ =?utf-8?B?VlFwOFRna0dFTXdoOG9pVHZ2VHRudGxhNmtwb243SVFIOEhEQ3RScVlVWHlH?=
+ =?utf-8?B?U3ZxU0FkUHl6emhRWXBYSnBONkJ0bk85aFV5c2pJVkpoVDlDaU8rR0h5K0M5?=
+ =?utf-8?B?ajBmUjJITyttbUZtcXFCRUd1ajJqZ0JramVYTVVZeVloejFvY2k0cmN3c2dq?=
+ =?utf-8?B?Rmh5TmZQaDNPZ0VHdDRGTGRlSVFGQTNJUVdFTmVqNTJzSU1qZUhZbzM1aTVS?=
+ =?utf-8?B?dVllV0hta3R2cjBtMTNvUnNvUHhaaEFxekl4dGM5emtMMkQ5V0xGNjJ3bU9l?=
+ =?utf-8?B?S0cyRGkxL0NIUHo5UlBydzFXMHBxVURIeTlkRkNhRTNmU3hOQ3psRjExUDU5?=
+ =?utf-8?B?Q3V5WFVhaXFnWDhyaWhNZE5FK3RZQmFRUTNQK2dlR0dOemRDeGlkcnBZSE40?=
+ =?utf-8?B?akNrRGwwUXYvNWpoQkFKQ0t2dXBaUnQ2ZGtndU0yL003RW1NMERaMml3eXRM?=
+ =?utf-8?Q?dA8kVG7cMo2lcR8o=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 2d7fca29-1c82-4df3-6a72-08df196427df
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Sep 2026 11:16:46.8112
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: q2FSVhW96QwrXn2KvYKD32ug2BwkmbHEjnxFP6Wf+BCwtxBPh0Bq6A19Iy3OkZj4y2z4Lcz/hgBkpLkSaidwatjMUs59J8jwqiurgddHkxg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY3PR03MB8152
+X-purgate-ID: tlsNG-42698a/1790162209-1B4D39EA-A6FACC28/0/0
+X-purgate-type: clean
+X-purgate-size: 1653
 
-
-
-On 9/22/26 8:48 PM, Oleksii Kurochko wrote:
+On 9/23/26 10:51 AM, Lin Liu wrote:
+> Xen leaks the host's CR4 bits to L1.
 > 
+> nsvm_vmcb_prepare4vmrun() constructs the shadow VMCB's CR4 via
+> hvm_set_cr4(), and svm_update_guest_cr() ORs in HVM_CR4_HOST_MASK.
+> nsvm_vmcb_prepare4vmexit() then copies CR4 back out of the shadow VMCB
+> instead of the value kept in v->arch.hvm.guest_cr[4], so L1 reads back
+> Xen's bits - under HAP, CR4.MCE.
 > 
-> On 9/22/26 7:00 PM, Baptiste Le Duc wrote:
->>> During migration of a virtual hart to a different guest interrupt file,
->>> straggler MSIs from the APLIC could arrive at the old interrupt file
->>> after the switch.
->>>
->>> genmsi is used despite not supporting guest interrupt files because the
->>> AIA spec guarantees that all MSIs previously sent from the APLIC to the
->>> same hart are visible at the hart's IMSIC before the extempore MSI from
->>> genmsi becomes visible.
->>
->>
->>>
->>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->>>
->>> diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
->>> index 0af13f28e4..cb11d6aeaa 100644
->>> --- a/xen/arch/riscv/aplic.c
->>> +++ b/xen/arch/riscv/aplic.c
->>> @@ -27,7 +27,9 @@
->>>   #include <asm/imsic.h>
->>>   #include <asm/intc.h>
->>>   #include <asm/io.h>
->>> +#include <asm/processor.h>
->>>   #include <asm/riscv_encoding.h>
->>> +#include <asm/smp.h>
->>>   static struct aplic_priv aplic = {
->>>       .lock = SPIN_LOCK_UNLOCKED,
->>> @@ -205,6 +207,30 @@ void aplic_hw_write_reg(unsigned int offset, 
->>> uint32_t value)
->>>       spin_unlock_irqrestore(&aplic.lock, flags);
->>>   }
->>> +/*
->>> + * As needed, synchronize with all IOMMUs and APLICs to ensure that no
->>> + * straggler MSIs will arrive at the old interrupt file after this 
->>> step.
->>> + */
->>> +void aplic_genmsi_barrier(void)
->>> +{
->>> +    const struct imsic_config *imsic = imsic_get_config();
->>> +    unsigned int cpu = smp_processor_id();
->>> +    unsigned long flags;
->>> +    uint32_t val;
->>> +
->>> +    val = MASK_INSR(aplic_hart_field(cpu), APLIC_TARGET_HART_IDX) |
->>> +          (imsic->sync_id & APLIC_TARGET_EIID);
->>
->>
->>> +
->>> +    spin_lock_irqsave(&aplic.lock, flags);
->>> +
->>> +    writel(val, &aplic.regs->genmsi);
->>> +
->>> +    while ( readl(&aplic.regs->genmsi) & APLIC_GENMSI_BUSY )
->>> +        cpu_relax();
->>> +
->>> +    spin_unlock_irqrestore(&aplic.lock, flags);
->>> +}
->>> +
->> According to AIA spec §4.9.3 (Synchronizing interactions between a 
->> hart and the APLIC), the sequence needs 6 steps; this implements only 
->> steps 2-5:
->>
->> - Step 1: clear the pending bit for sync_id at the hart's IMSIC before 
->> writing genmsi.
->> - Step 6: after releasing the lock, poll the pending bit for sync_id 
->> at the hart's IMSIC until it's set.
->>
->> Step 4 (Busy clear) only means the APLIC has accepted/sent the MSI, 
->> not that it has arrived at the hart (the spec notes an unspecified 
->> travel delay).
->> Without step 6, aplic_genmsi_barrier() returns before the MSI (and 
->> thus prior MSIs) actually reach the hart, so it doesn't achieve the 
->> barrier it's meant to
->> provide.
->>
+> Fixes: 9a779e4fc161 ("Implement SVM specific part for Nested Virtualization")
+> Assisted-by: Claude:claude-opus-5
+> Signed-off-by: Lin Liu <lin.liu01@citrix.com>
+> ---
+>   xen/arch/x86/hvm/svm/nestedsvm.c | 2 +-
+>   1 file changed, 1 insertion(+), 1 deletion(-)
 > 
-> It is really missed but it exists in riscv-next-upstream branch 
-> (https://gitlab.com/xen-project/people/olkur/xen/-/blob/riscv-next- 
-> upstreaming/xen/arch/riscv/imsic.c#L723).
-> 
-> I will re-check why it is missed here.
+> diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+> index a8b15d6eae..8d99b0affc 100644
+> --- a/xen/arch/x86/hvm/svm/nestedsvm.c
+> +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+> @@ -1082,7 +1082,7 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
+>       ns_vmcb->_efer = n2vmcb->_efer;
+>   
+>       /* CRn */
+> -    ns_vmcb->_cr4 = n2vmcb->_cr4;
+> +    ns_vmcb->_cr4 = v->arch.hvm.guest_cr[4];
+>       ns_vmcb->_cr0 = n2vmcb->_cr0;
+>   
+>       /* DRn */
 
-Step 1 and step 6 are not missing, they are just not part of
-aplic_genmsi_barrier() itself. They are done by its caller, which is 
-added in "xen/riscv: remap interrupts to new IMSIC VS-file":
+Reviewed-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 
-     static void cf_check imsic_aplic_sync(void *unused)
-     {
-         imsic_local_eix_update(imsic_cfg.sync_id, 1, true, false);
+Did you consider addressing similar issues with the other state copied from
+n2vmcb as well? i.e. I think something similar would apply to CR0, EFER, etc.
 
-         aplic_genmsi_barrier();
+As an aside, it is confusing that the same CR value also appears in
+v->arch.hvm.nvcpu.guest_cr[4]. The SVM code doesn't seem to use it and I
+haven't checked why the VMX code needs it. Perhaps something to clean up in
+future.
 
-         while ( !imsic_local_is_pending(imsic_cfg.sync_id) )
-             cpu_relax();
-     }
-
-I did consider doing all six steps inside aplic_genmsi_barrier(), but 
-that would make aplic.c reach into IMSIC internals (the local EIx CSR 
-accessors, which are private to imsic.c), and I would rather not add 
-that dependency. Keeping the APLIC half (write genmsi, wait for Busy to 
-clear) in aplic.c and the IMSIC half (clear the pending bit of sync_id 
-before, poll it until set afterwards) in imsic.c keeps the layering clean.
-
-You are right, though, that nothing in this patch says so, and that the
-helper on its own is not the full barrier its name suggests. I will 
-spell the split out in the commit message and in the comment above the 
-function.
-
-Probably it will be better to introduce function imsic_aplic_sync() as a 
-part of this patch.
-
-~ Oleksii
+Ross
 
