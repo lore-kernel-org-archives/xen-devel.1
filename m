@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4AEEC9831E
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2026 22:45:40 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1433134.1653952 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 185B2C98318
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2026 22:49:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1433140.1653960 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9sBt-0007PD-LC; Thu, 24 Sep 2026 22:45:21 +0000
+	id 1x9sFE-00084X-3r; Thu, 24 Sep 2026 22:48:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1433134.1653952; Thu, 24 Sep 2026 22:45:21 +0000
+Received: by outflank-mailman (output) from mailman id 1433140.1653960; Thu, 24 Sep 2026 22:48:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9sBt-0007P6-Gp; Thu, 24 Sep 2026 22:45:21 +0000
-Received: by outflank-mailman (input) for mailman id 1433134;
- Thu, 24 Sep 2026 22:45:19 +0000
+	id 1x9sFE-00084Q-0A; Thu, 24 Sep 2026 22:48:48 +0000
+Received: by outflank-mailman (input) for mailman id 1433140;
+ Thu, 24 Sep 2026 22:48:46 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Volodymyr_Babchuk@epam.com>) id 1x9sBr-0007P0-LU
- for xen-devel@lists.xenproject.org; Thu, 24 Sep 2026 22:45:19 +0000
+ (envelope-from <Volodymyr_Babchuk@epam.com>) id 1x9sFC-00084K-LL
+ for xen-devel@lists.xenproject.org; Thu, 24 Sep 2026 22:48:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9sBl-00B1xH-VI
- for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 00:45:18 +0200
+ id 1x9sFB-00B2KS-Ut
+ for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 00:48:45 +0200
 Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6ab5a7c1-e002-0a2a0a5209dd-0a2a4509cd48-34
- for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 00:45:13 +0200
-Received: from [52.101.69.143]
- (helo=AM0PR83CU005.outbound.protection.outlook.com)
+ id 6ab5a80c-bab6-0a2a0a5309dd-0a2a4509b660-48
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 00:48:45 +0200
+Received: from [40.107.130.104]
+ (helo=MRWPR03CU001.outbound.protection.outlook.com)
  by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6ab5a7f9-be1a-0a2a45090019-3465458faff5-3
- for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 00:45:13 +0200
+ id 6ab5a8cd-be1a-0a2a45090019-286b8268754f-3
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 00:48:45 +0200
 Received: from VE1PR03MB6078.eurprd03.prod.outlook.com (2603:10a6:803:113::29)
  by AS8PR03MB7585.eurprd03.prod.outlook.com (2603:10a6:20b:34a::20)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Thu, 24 Sep
- 2026 22:45:12 +0000
+ 2026 22:48:41 +0000
 Received: from VE1PR03MB6078.eurprd03.prod.outlook.com
  ([fe80::4722:b91:9b24:ee48]) by VE1PR03MB6078.eurprd03.prod.outlook.com
  ([fe80::4722:b91:9b24:ee48%3]) with mapi id 15.21.0451.014; Thu, 24 Sep 2026
- 22:45:11 +0000
+ 22:48:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,36 +57,34 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=W1/ts9r+I1ihrBPr8mgW3lTAec6v9ovQTOjCHq7YtbdVVA73FHoobp+/Ol1Du7nyLJc+4anBkoDDeaiJpwNA40WGwsmDu7AOpHHfwhDBYxU2veLkOa6LboBLYbb+8bWKC7dd9KAcI8KCU1DOoyEDHNHRcteuC5kCGDt5J0TXcpfBhoMcch82O7mXkGvJD1De+oWxTvacttcbL91BAhmkgVN+dbe9IZEXxRWMoMGRt2vmc2GXuW1mLqLzGLShE1H1fYJeLZXDc7kwie1j8V548csn440yQZKdBdObAjhi7np8QlwyqSxa95g/Aj2u0mS4XrdoimuoBAeFfIO9cRC6sA==
+ b=P+M+Q3bQMKJpbPypgNg9FHuGkBt/rWxhhvVhecPYaOPAQyIKkIiw1Yb2DSOKYxYrvDHTxfWap6LNjUt1bSwJiMUGxou7tcOgQr0OaO1ftxgnDtMA7i0OsUrHp37FLK3pIAeualykt5mcTMuziBapmMmxxAP7G0zXpyZGke4o6LcKkjW2+Y2bmmNbMZ9u76tUgbkGa2XOk5qkFc1VddDYxliZa3tuqFyWimeOqirAjKUDIUsXJJW61pBwecvpfyjZaX7Xhc8cTTvlk3B8hUI/09UGVnCSLjNDVmOuVewcd+76G8JWD/cprOX5W/NGYfoN/F6HHQrvH2QfsHWC5oxS1w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=cxkIYplUMAx3k6PdnftzQLJ2p5om4DNTocWlyGYQx6E=;
- b=i02L5hWZ6EY6HgGEy8e2tZyKNMY/yJjdxJQt3jAxzBjT4CrWNDphfIkOZeLD3F51HBwLoByxBx7GihHs6AkiU0t0PiYi721CrOXM0h6xen6n53zNBebHtUn0m8Z3H7c9s2qoXmpaaW8zF4cuiSd/XOsywbhP9wEPmsBkP8YvJpbdoqqlZzvLkINM895HN4gusOUZJcAuitSZgjDiwZwfJx2mYkOYSoE1vl9UWKdVYNHjo2O5AOzkY4ffPI8M6BkqpRZCAC58ZHbBu/HOknKkvjWg3PXi1FTl+9CQl3nZKb88ZbA2vdBGLyxdjtbIeK/D6L6disEHs1xZ6QxFNaWXWA==
+ bh=VeUp7Wi6wcAtU37QGNRs8t5yutaUO6GvLIt5JZ7ErkE=;
+ b=RQIIuQjzwyoQsJB/Q3nEkPErOjNATkb23kAkSWtkUj/Bu65otm2o3I1TijqjEBGqR7afrcpMla0UrwsMJxkyDYW94okROVrl976I7GWIR9kKIfbnPgY6mjwCmw+//TknOjCLmyfmC4Hfi/ptVr03rywITHWfnKbg1BgegYXIkWzw30Zd0yztK77KXhtt7HL8Ytef5cWG5jdji31BsRxihppKa8+CDkshgGt60+kSy02IQEKZZujATkBzvQnlCVnGgjit/wFmkKI9KhTYcDs0+nTUN4KXrMKADJph6k+3BSJefjb/L3DnMu92qLFFAwbyJd8NULJkZHVMwOJuIt25nQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=cxkIYplUMAx3k6PdnftzQLJ2p5om4DNTocWlyGYQx6E=;
- b=mAXHf2t/7LqHmHsPwy/AMyjFKoU6pFFFSR5eBk8WR4UdUZcadhKuu5UnmC7mBxLToQAA6Mwj9eN/ru6+sLSt+nnPnL9WBPuPmLZeDFWFhXfteSpi1MrhVNFB3TPkpRUb1Mtj4cFRgEekXeAIz9B+beCt7RhJjosM3dDAEbVxEsaqASQwCAQqnaOk+3+7RooRX4IsReeauD15vJkVkFOktJkoa4Z9AvCUsHiIMkEfVtW+vI8j+ZXVkn+t41BvAzPKoeHiQ0CB3aCGcH7PpuOgB7BwKXgkGVuQ8KnY4h4ohkP1SZgkoTxLa2TwNJMYcQm8AbxGDHe9B0KmX0ZMPaKhMg==
+ bh=VeUp7Wi6wcAtU37QGNRs8t5yutaUO6GvLIt5JZ7ErkE=;
+ b=SRdWSKSG664xkPwkpUh9XCLgwgJrym6lNd38GIegjc5LJ4h/Oe/21fkbvgXoz+df9WXIDq3nnxusucz5VDMi3NfFB27mvbNyqqcHS2Ptc+tMgHCCUeUG9B1t6knNnFbg8e8elimF4JoSucygVSj+mFfdY+I7eVSU/CCDlrH0xdYNLZRBsSNdWM1CKL80jBMYAZy4sgf7hYMpLFwhGfFud9nCcwDeO+Xq7u2Sb/A98YOxIPIABSgsGKzU3+llHmJXrIRw5hFX228AZ2U35sS2ZfPtZ8Kk40LRr7Dt1JK+GWtusASOP3LHn+zZF297OrH1u5JG9Bs1jiz/v4gjYHRfVw==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: Mykola Kvach <Mykola_Kvach@epam.com>
 CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
  Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
  Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>
-Subject: Re: [PATCH v5] xen/arm: derive GIC CPU interface ID fields from the
- vGIC
-Thread-Topic: [PATCH v5] xen/arm: derive GIC CPU interface ID fields from the
- vGIC
-Thread-Index: AQHdTGflNHaw2bFG60qtE8E+9DIq7Q==
-Date: Thu, 24 Sep 2026 22:45:11 +0000
-Message-ID: <87o6dm1d6x.fsf@epam.com>
-References:
- <4f24dd8cd9fc76e8c3f93bca44bb58056cbcc51a.1790147101.git.mykola_kvach@epam.com>
+Subject: Re: [PATCH v5 2/4] xen/arm: make is_espi() a pure range predicate
+Thread-Topic: [PATCH v5 2/4] xen/arm: make is_espi() a pure range predicate
+Thread-Index: AQHdTGdtuoJ+YRti9EqfLG1rI3nQEw==
+Date: Thu, 24 Sep 2026 22:48:41 +0000
+Message-ID: <87fqyy1d13.fsf@epam.com>
+References: <cover.1790160605.git.mykola_kvach@epam.com>
+	<8aa55bb41ec944bd249a77959e7702e001a8329d.1790160605.git.mykola_kvach@epam.com>
 In-Reply-To:
- <4f24dd8cd9fc76e8c3f93bca44bb58056cbcc51a.1790147101.git.mykola_kvach@epam.com>
-	(Mykola Kvach's message of "Fri, 25 Sep 2026 00:01:29 +0300")
+ <8aa55bb41ec944bd249a77959e7702e001a8329d.1790160605.git.mykola_kvach@epam.com>
+	(Mykola Kvach's message of "Thu, 24 Sep 2026 23:57:54 +0300")
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -96,284 +94,231 @@ authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VE1PR03MB6078:EE_|AS8PR03MB7585:EE_
-x-ms-office365-filtering-correlation-id: d465b5ca-c8ca-44cc-efab-08df1a8d7e15
+x-ms-office365-filtering-correlation-id: 41ecfdf5-9e6f-4d53-6cb5-08df1a8dfadb
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|376014|23010399003|366016|1800799024|42112799006|10067099003|5023799004|56012099006|11063799006|6133799003|38070700021|18002099003|22082099003;
+ BCL:0;ARA:13230040|376014|23010399003|366016|1800799024|42112799006|10067099003|56012099006|11063799006|4143699003|38070700021|18002099003|22082099003;
 x-microsoft-antispam-message-info:
- ve6F7/jyRXzfaEmqoWm1rDTTk0wuXNr24JA4Wp7Q1jSBUEcWkAAWVNwP9NFA5986qZyOiAH6Vn5fzNPRBQ9WxhR+9mfTcjB/gv/D3IP+HB7VfKDwO3FUul7nmt0CalGt86LGMG1FzEr6aajL54lV8cIk9cO+o0UyjU/Qm+ygfchGf1wklbAli30gaODhnXyXGIeRqZK+xEnTOhoGOgSKJT606Av34jyqhsYs9oyv9gZCWGOGnwbHU+OPdYy4Xc+I1YHoAcRJWIecyK3KtRfFimAvAxXG004dE4+L5IVMk65yFogZuUAtplgXsQCC+Z2sC5fzcb0T+O1Oe7oW5T/X9GseDu5DMOn69kknskSlwpmfTsTnnYIxBYgvd/r7/6qIjfK8IOyfUzG2V5oMgtJsFhUoc1T/hw2krmU0ibkoPto52hGRrkpyIK8prtA60FY2VwyiwBgjL0sQ7mXstYkR8qfCFtPa4MFezF8A4Vg4v3xafN28wmr/ycoCTM2n5bAyn+H/mivSGIIVlG/HVT4yb8Bc/CnAONVjbIQnj6cKnzUqazuKWp94XObaHKo0EHDk+PxmwvL+D2sY9G3HkUbOvWf2j9X+BCj9fplDNfstPLxW0MMRisCFHYVrUFB6LoN9Aqdxz7c+hhmQigK+zilSeUBd3LXTiqCZg0EFppaQC3g=
+ TtDWeVyNal0NW1eWi/cc3adkye7fVAXqTrJ5vYrcxSKLz8qJWNfAVhEOb/GzvvLI24aFI3DcK0DaTkdbTn7XcfOQyVA6cB+UuZrKnGlbb82pFNbA++kkcrd4VQrJAW5ED0oIxRDlpHzeVs5ZmqEUG++A84oj6OsRisY431P97CdmFhJXI/iPl9pd0D9vFzRi5vGkOZywju/Jof2r5vxe68pTsU2WxegLoHyoOBkB8KUQt2MERuQfbt0DNoWfL7FxM5On3Q/ng/tfiyZ8cna415n+zo4feJmvGeqHMffO/kxv7Rfpns+Xgmr2QJOyIYWaHn/i+OYm/+ZB7KWFN6vCkJWsWksNAqQwVGET07A/Xw3dR4bvNlUWfU1mfveXQ4B1iQAnCYKyGxyp+MKgj4eA9qlsRvXX1f5B+G2jjwif68wINPWOC1abCIRI7o7adQ+U1WqyYUOog2Aqlu6wcOWRFcj0JtAAYJXKzYljSL3H5YvuIUlUqxdf5kEYnBX7q/a837c3hy/ZP5uohw3o9TKZz8jxbz8aDhRJhkkGrOIzEN1/folTmo0woWxyRK/DCPtTfL7ZASf8hnOQtgRNoQkAkuF5yivTb5qLhFbCIvacJvCKMwOWLEAF7eRAjCbJ1pyxsNwyn3MhR2nAHd9/Uph1JlF+KUowfPTUZgLduogsO5UujiS3iH74Q9rpnps0lSgjSE6uLCQRGcimiwyWEyP2Acb72h6kCNNohsglQpMyZRc=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR03MB6078.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(42112799006)(10067099003)(5023799004)(56012099006)(11063799006)(6133799003)(38070700021)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR03MB6078.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(366016)(1800799024)(42112799006)(10067099003)(56012099006)(11063799006)(4143699003)(38070700021)(18002099003)(22082099003);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?1an/1QaO8dMZE45xm3pKEU/RUmu7oF601MofDGZL+XhJnsaawYCAKsfAB7?=
- =?iso-8859-1?Q?uG/fWSazqDNBi5nFRaBRZgIVF3IgqQRiC5pwIklfPgxNIaeNmVDumU7C7g?=
- =?iso-8859-1?Q?73ye0vvDbaunMhc+15H9cq6aIjgaPmE2aGPxDQwcdIQf/PPBNCup5oUQ2A?=
- =?iso-8859-1?Q?UcfzfvOJM/ZFRxUS0K7BA2WTIi3ATLly6zHvbTbKWxOfgEboOjyMotFBv/?=
- =?iso-8859-1?Q?SSBIWns8iqPHxjKWyUWUuRivvKlVJuUf0WFJSs+R26C6/rqvWBkkepdkDt?=
- =?iso-8859-1?Q?IM9ixKv+kA2oyWMdsrjlgBVJQv7KbeXtr7o/9bJhIclljML6mvHifODTso?=
- =?iso-8859-1?Q?1OmgnEAAY3Woemo1O9wW1bQyCPJNUCoZp0BWnWQ7drPmLm7D9QlGBcmSRU?=
- =?iso-8859-1?Q?lx98CisNQOexCLs/tLdPDHw5VZYZvqBzUrCHjnHukDOGipE5f9iBU5eOqS?=
- =?iso-8859-1?Q?yJoBDdFEulxYhWOluXUKaZ+aI1d3B3NmXe8nk5sCpVbw9WOKovuNParwqj?=
- =?iso-8859-1?Q?4Ff+PV53uMUqysTItW3tnJghz/XuTnTpC/65igMmfgEH9ojV+6YllJ2hdA?=
- =?iso-8859-1?Q?HCjPDzsG49qCNN1MCmwUatGsQxBpAz9f7+4ZO+wz5r7RBCXkzUkZ74WE05?=
- =?iso-8859-1?Q?ZalgybkC4TbjpTZHxW5Siaul4/BXF9Y61ppUjEq6GlJI/cmifm+7/uiQgb?=
- =?iso-8859-1?Q?OQ1kecmGZMdOSge8RL8m/NO91bhVFRTKsKysA35u7x5/GcH6j5hX4Q/aHY?=
- =?iso-8859-1?Q?61diXGVpnX6xqMt2UaBczhJWSEdYpbgOvwqG2kLrASH1WSyRhP2eT7pXQ1?=
- =?iso-8859-1?Q?M5Ke1UqeVm+IqQ2id6PRaXkNhSDxYgwX/lCA2wq9wk6fgI89HhxTl4Xvl/?=
- =?iso-8859-1?Q?X2Y6psoqHJR7zFNjmHSSj8gf+8I9I4qURAOeqmfmuk6sCrthlD5jaatF4k?=
- =?iso-8859-1?Q?7m9oOwglNU0HC0cd3NfP5KMG8EBywoCgooEJaQRshKktG7ArCAigTClPo8?=
- =?iso-8859-1?Q?RQ1OCoR9nTzwcqdOH7z3v99wdQeoEybbso2rhU9gJd1h+eVRUy9zv6Cbyv?=
- =?iso-8859-1?Q?aSuaOhPPkWMidqH3fKKHU/SQiznnpTLJLJeOZ454o3a5+UiGRJPyXUED98?=
- =?iso-8859-1?Q?Odz1Jio+i7p/tOAnum4ugkUsiGhvqesLVAZCbT7nNpUDf0DE5wFkMb/uEP?=
- =?iso-8859-1?Q?Dwr3U8EFCrZopzwdKxCrZodcb1/bt9FfozlVbALe7NKAE8gGudcPtVV1nS?=
- =?iso-8859-1?Q?d31YbLwUP7ci+Mu3hislKRx4idM3yPvbdOpucLUovIcH1fNJntNRvfpPUr?=
- =?iso-8859-1?Q?zVXr/2bKjywDTKCLp4UeNBPIPhiLAxI5c7Ze8QK7ShOIgChhwn0zQlqjFH?=
- =?iso-8859-1?Q?pcxWLHW1X7pVCrwoIyNLXQe4//VSBbNfrBwTjRdPbShPMhgJgloUEOu/zX?=
- =?iso-8859-1?Q?JhJX9gluGnj0InGhcdrEvID5B4H9ualtF+YoDHylaM0rSMZq5gwVKnMi4b?=
- =?iso-8859-1?Q?mL5i+GEcrpa+px7T5tIuXPI0flxBcoy/TQOsCmAodJI16gXbLJC0MKiLzW?=
- =?iso-8859-1?Q?hVrRt98GGrusbsaQd4K3n2E9TfzoXv+ZAaf1SvpA0i50+3tUdeAxQvIBvz?=
- =?iso-8859-1?Q?1cfwG7CpZAHdZqXLwuoA4Gx5k4ZtouC0aN5GjhFfzTfocXzqb79KXS98N4?=
- =?iso-8859-1?Q?TGXuS3gQ7aIqfpL+65FO6f1G1ws7N2DzYlngQE5KchFeUFrQoxBvc/IKOH?=
- =?iso-8859-1?Q?UIpg0bm0i+d1F3uaaieUOTl9FgBdgOGa6vYYCT5HKNnBUkzkSbdjEKOfNb?=
- =?iso-8859-1?Q?cjilCwQdo9GYeSQBI5CjyVj7CUyX+H8=3D?=
+ =?iso-8859-1?Q?iTur7EmhhZY0qfwUGhj1/kwzBkTR9k1/QbwZXTNdWi/AA7fzu1JOgPH5O+?=
+ =?iso-8859-1?Q?Hc/dxISt4RsL46VcN9Ldhix9lFws99dWrVM9twH+DIg19cQfe7fJD0U7Dv?=
+ =?iso-8859-1?Q?MPqKY7qSLIb9oOh4zOiZ2ShB8hCE17xjD5yX8m0hvxELhHHMV/dgzwfK+R?=
+ =?iso-8859-1?Q?x0HXQlA8X6dJeBfHmDmWBXUb3YQr/Xh2neYS+4FGS52Qgnusr0bl/h3nEj?=
+ =?iso-8859-1?Q?l3XfgzDfFh2j8I7Ho4n4qZXjNSEGEFd/2SoTSOjuxglH8HsT+f2N/d1Irs?=
+ =?iso-8859-1?Q?dlatNodKhBskWSA3jLtzE3jmfm26tVjQExS83ik/5oH4phvfQyfyfI1aXY?=
+ =?iso-8859-1?Q?6NzRY1xHJ37of79tBC5wj5nX2xcZxnKzMYq9YNm5yp7zCdM0aDUCFMfWfj?=
+ =?iso-8859-1?Q?LuykEmNa2vYiUA1z3sIO+xxP7lR2KwIcSBGBpmxB0DMlvBTK5qFqN6Zrls?=
+ =?iso-8859-1?Q?ti7zLkDyA0KEYiOBMWB5ekBsd/fanf2cPPhfJGH44fwGV9TrToU/0AmELe?=
+ =?iso-8859-1?Q?OHMLkWpwlBv/LX6nt94tAG7GmOUzzpWzV56mwhRkIbxc6aADRjh7/W0qiZ?=
+ =?iso-8859-1?Q?oduAZAHo23GGejPO4BKwyCsVR12E/+hiUG0OcBkFfNnew9W0KkR+OIBSDC?=
+ =?iso-8859-1?Q?C+YmY3SbvUBDTvPyhRclAgbxQVPQE9forfk+rRXQu6jerW6YoBqz7dENr4?=
+ =?iso-8859-1?Q?ZW00Op7uTKEbNbjlNDNejtzOYRUSFayt9qbTc+GdvhWr0kGAouUhf/NydD?=
+ =?iso-8859-1?Q?3KS0V9/Dlp6J3IBy4eALOtlhH3FBZKVoxyz//ZS+TUZMBCDCbkr5crzOQ9?=
+ =?iso-8859-1?Q?Z+vbK2SXD2TLzXBNU+AfdJBkKK7vkwekXBHldXIFaELfVUgSkfWxp2MJCL?=
+ =?iso-8859-1?Q?FROTleZFesYxN7jZMRAkiBtScAizj8NjOzAiUzpe7bilnjrlgR1NVRu4l3?=
+ =?iso-8859-1?Q?UrRcjqeZ7aC3WXJYFQHSDG0iqGosD0uD8Wd7vm+r/Cr24rTWws4f6Xdw80?=
+ =?iso-8859-1?Q?WvFiAYIQ/TnkL7Kaj8gTGBZCbEEyJ8B5zJdSyS2xN84LE2m8+udgMnRIlX?=
+ =?iso-8859-1?Q?jthmswlqLFVjs/VDbPxd/O2vBq5jkpC/eB7ToAwfQXFl5pHFvoP9uLtL7x?=
+ =?iso-8859-1?Q?mZOdfgvPy3xVHRriMRYpzhR+gNDgPyvvVtfMWDoXyxOxmQrf0WvLbBIKHP?=
+ =?iso-8859-1?Q?WLltxdMQDkH2E0fpBJ04moy1E8xXIvBufCKWYfvoKAYx3YK/SSHRRurfBM?=
+ =?iso-8859-1?Q?CkXnF5hl35iwa1EGPgl7Iqm8uh8iqKJfr7AlvskMBN+LQxE3lO0o+NZD2d?=
+ =?iso-8859-1?Q?y923l0TVPerxl07FeFBNcAHHJ4ui4GyRtu4mnzfjO6TkJ4CdkMc4tuVnwk?=
+ =?iso-8859-1?Q?hshk/Y4EAdA0BZ3vKrA0Zyez2Pf7jkfYXW73eXZjQ7JSuYWEaCYpOIyfKo?=
+ =?iso-8859-1?Q?FI0kys+1wSZZspUtt2nWJ2T9l9VtNbprJWHQz0VmPTaCYfhRFQpq29+AVr?=
+ =?iso-8859-1?Q?4rI7R4jNCUhA093J8jaMptyZFR8qcJJyyAh114RjnnPjEQFDyv7n8pso1V?=
+ =?iso-8859-1?Q?UK6ZrTaUoIggJoAUe6hXOTxLUWVvo6c91WcOoA8mXc0DYx5Yd5joWPx0MU?=
+ =?iso-8859-1?Q?x/JQFHqEziiD3A8FUqh0MUCR7pm0d+UZjeK4Mzs4+PuIvUf4oSsFrgonmR?=
+ =?iso-8859-1?Q?EU+C36I8DAzfYoI40/fQmtDw/iMClSfRkct5A0cQkk9MNQDacA9FEEJUrw?=
+ =?iso-8859-1?Q?BzsuZRdCgROPTB6v4KX6PNnKrGBTt3uDTK6nw2NZ3ig5MGgTT3RzkDiD+C?=
+ =?iso-8859-1?Q?NJ19DqbZcrTk9eMjhBi17LD7WJJFETI=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR03MB6078.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d465b5ca-c8ca-44cc-efab-08df1a8d7e15
-X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2026 22:45:11.7504
+X-MS-Exchange-CrossTenant-Network-Message-Id: 41ecfdf5-9e6f-4d53-6cb5-08df1a8dfadb
+X-MS-Exchange-CrossTenant-originalarrivaltime: 24 Sep 2026 22:48:41.1188
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jG9Lql+fsiyOWE0ff/Jnhw4m7suFPOMSVw0QSRwClFz9Ns0VE1E3n/YguiXbizxjOEcB0ca5g6P5BDtCUw6tWdJCzj79zsjJCfJFKl7VDEc=
+X-MS-Exchange-CrossTenant-userprincipalname: U/9T+8jGOpITAsYtoQKKFnqw23Zg3tmWDixEz8aNj58uMyUQeUS2jiLiExAEzk9KlAl5Cz5gL5wjJ0USFLali/cOihgH7BzLrVIj0E31N0c=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS8PR03MB7585
-X-purgate-ID: tlsNG-bad1c0/1790289913-BFAD0034-761D6A59/0/0
+X-purgate-ID: tlsNG-bad1c0/1790290125-BF6D2034-F6AC4382/0/0
 X-purgate-type: clean
-X-purgate-size: 8588
+X-purgate-size: 5810
 
 Hi Mykola,
 
 Mykola Kvach <mykola_kvach@epam.com> writes:
 
-> Xen exposes ID_AA64PFR0_EL1.GIC and ID_PFR1.GIC from domain_cpuinfo,
-> which is initialized from the sanitized host CPU feature state. This
-> does not necessarily match the virtual interrupt controller configured
-> for a domain.
+> is_espi() currently changes its result according to CONFIG_GICV3_ESPI.
+> Without eSPI support, it returns false, and its assertion fails if
+> an eSPI INTID is passed. Callers therefore use it both to identify
+> eSPIs and to exclude eSPI handling when support is disabled.
 >
-> A vGICv2 domain can therefore observe a nonzero GIC field when the host
-> supports the GIC system register interface, even though Xen disables that
-> interface for the domain. On a GICv4.1-capable host, a vGICv3 domain can
-> observe encoding 0b0011, although Xen exposes only its vGICv3 model.
+> Make is_espi() report only whether an INTID is in the architectural
+> eSPI range. Check for eSPI support at the call sites.
 >
-> Derive the fields from the domain's vGIC version instead. Expose 0b0000
-> for vGICv2 and 0b0001 for vGICv3. This covers ID_AA64PFR0_EL1 and the
-> ID_PFR1_EL1 alias in AArch64 state, as well as ID_PFR1 accessed through
-> CP15 in AArch32 state. Leave the alias unchanged when AArch32 is
-> unavailable.
+> Use BUG_ON() if the GIC reports an eSPI without compiled-in support,
+> matching the handling of unsupported LPIs. Treat virtual eSPI lookup
+> without support as unreachable, with a NULL return from the
+> espi_to_pending() stub.
 >
-> Fixes: 07b9acea116e ("xen/arm: Add handler for ID registers on arm64")
-> Fixes: 8f81064a07c6 ("xen/arm: Add handler for cp15 ID registers")
 > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+
+Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+
 > ---
 > Changes in v5:
-> - Fold the vGIC version mapping into the shared ID register helper.
-> - Use the vreg_ and VREG_ prefixes for the helper and field width.
-> - Cosmetic changes after review
+> - Explain why an eSPI cannot be handled without compiled-in support.
+> - Make both espi_to_pending() helpers static inline and constify d.
+> - Add ASSERT_UNREACHABLE() to the espi_to_pending() stub.
+> - Preserve the unmapped LPI comment and clarify that an eSPI lookup
+>   without support must not occur.
 >
 > Changes in v4:
-> - Explain why ID_PFR1_EL1 is left unchanged without AArch32 EL0 support.
-> - Move all ID_PFR1_*_SHIFT definitions to the common asm/sysregs.h and
->   remove the unused cpregs.h includes from the ARM64 files.
-> - Return explicit unsigned GIC field values to avoid MISRA C Rule 10.3.
+> - Clarify the existing is_espi() behavior in the commit message.
+> - Drop the unrelated blank-line removal in vgic.c.
+> - Use BUG_ON() if the GIC reports an eSPI without eSPI support.
+> - Drop the redundant CONFIG_GICV3_ESPI check in IRQ dispatch.
+> - Return NULL for virtual eSPI lookup when eSPI support is disabled.
 >
 > Changes in v3:
-> - Add direct dependencies for the shared ID register helpers.
-> - Move ID_PFR1_GIC_SHIFT to the common CP15 register header.
-> - Apply cosmetic fixes from review.
->
-> Changes in v2:
-> - Share the GIC ID field helpers between the AArch64 and AArch32 paths.
-> - Parenthesize the individual ASSERT conditions.
-> - Preserve ID_PFR1_EL1.GIC when AArch32 is unavailable.
-> - Target master instead of the 4.22 release.
->
-> v1: https://patchew.org/Xen/ba4f779d68c54efc80c4a566dca38ac2e6f9a073.1783=
-675708.git.mykola._5Fkvach@epam.com/
+> - New preparatory cleanup requested during review.
 > ---
->  xen/arch/arm/arm64/vsysreg.c             | 21 ++++++++++++++++++++-
->  xen/arch/arm/include/asm/arm64/sysregs.h |  9 ---------
->  xen/arch/arm/include/asm/sysregs.h       |  9 +++++++++
->  xen/arch/arm/include/asm/vreg.h          | 20 ++++++++++++++++++++
->  xen/arch/arm/vcpreg.c                    | 12 +++++++++++-
->  5 files changed, 60 insertions(+), 11 deletions(-)
+>  xen/arch/arm/gic.c             |  6 ++++++
+>  xen/arch/arm/include/asm/irq.h | 11 -----------
+>  xen/arch/arm/vgic.c            | 30 ++++++++++++++++++------------
+>  3 files changed, 24 insertions(+), 23 deletions(-)
 >
-> diff --git a/xen/arch/arm/arm64/vsysreg.c b/xen/arch/arm/arm64/vsysreg.c
-> index 66f4f23bb3..d8f380ccb7 100644
-> --- a/xen/arch/arm/arm64/vsysreg.c
-> +++ b/xen/arch/arm/arm64/vsysreg.c
-> @@ -299,7 +299,22 @@ void do_sysreg(struct cpu_user_regs *regs,
->       * to identify the processor features
->       */
->      GENERATE_TID3_INFO(ID_PFR0_EL1, pfr32, 0)
-> -    GENERATE_TID3_INFO(ID_PFR1_EL1, pfr32, 1)
-> +    case HSR_SYSREG_ID_PFR1_EL1:
-> +    {
-> +        register_t guest_reg_value =3D domain_cpuinfo.pfr32.bits[1];
-> +
+> diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
+> index 078049e741..cdae6afb07 100644
+> --- a/xen/arch/arm/gic.c
+> +++ b/xen/arch/arm/gic.c
+> @@ -348,6 +348,12 @@ void gic_interrupt(struct cpu_user_regs *regs, int i=
+s_fiq)
+>          /* Reading IRQ will ACK it */
+>          irq =3D gic_hw_ops->read_irq();
+> =20
 > +        /*
-> +         * Preserve the sanitized ID_PFR1_EL1 value when AArch32 EL0
-> +         * is not supported, as for the other AArch32 ID registers.
+> +         * Without CONFIG_GICV3_ESPI, there is no IRQ descriptor or
+> +         * pending_irq storage for eSPIs, so we cannot handle them.
 > +         */
-> +        if ( cpu_feature64_has_el0_32(&domain_cpuinfo) )
-> +            guest_reg_value =3D vreg_id_reg_set_gic_field(guest_reg_valu=
-e,
-> +                                                        ID_PFR1_GIC_SHIF=
-T,
-> +                                                        v->domain);
+> +        BUG_ON(!IS_ENABLED(CONFIG_GICV3_ESPI) && is_espi(irq));
 > +
-> +        return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
-> +                                  guest_reg_value);
-> +    }
->      GENERATE_TID3_INFO(ID_PFR2_EL1, pfr32, 2)
+>          if ( likely(irq >=3D GIC_SGI_STATIC_MAX && irq < 1020) || is_esp=
+i(irq) )
+>          {
+>              isb();
+> diff --git a/xen/arch/arm/include/asm/irq.h b/xen/arch/arm/include/asm/ir=
+q.h
+> index 09788dbfeb..c29f3d04a3 100644
+> --- a/xen/arch/arm/include/asm/irq.h
+> +++ b/xen/arch/arm/include/asm/irq.h
+> @@ -66,18 +66,7 @@ static inline bool is_lpi(unsigned int irq)
 > =20
->      case HSR_SYSREG_ID_DFR0_EL1:
-> @@ -362,6 +377,10 @@ void do_sysreg(struct cpu_user_regs *regs,
->              guest_reg_value |=3D (sysval << ID_AA64PFR0_SVE_SHIFT) & mas=
-k;
->          }
+>  static inline bool is_espi(unsigned int irq)
+>  {
+> -#ifdef CONFIG_GICV3_ESPI
+>      return irq >=3D ESPI_BASE_INTID && irq <=3D ESPI_MAX_INTID;
+> -#else
+> -    /*
+> -     * The function should not be called for eSPIs when CONFIG_GICV3_ESP=
+I is
+> -     * disabled. Returning false allows the compiler to optimize the cod=
+e
+> -     * when the config is disabled, while the assert ensures that out-of=
+-range
+> -     * array resources are not accessed.
+> -     */
+> -    ASSERT(!(irq >=3D ESPI_BASE_INTID && irq <=3D ESPI_MAX_INTID));
+> -    return false;
+> -#endif
+>  }
 > =20
-> +        guest_reg_value =3D vreg_id_reg_set_gic_field(guest_reg_value,
-> +                                                    ID_AA64PFR0_GIC_SHIF=
-T,
-> +                                                    v->domain);
-> +
->          return handle_ro_read_val(regs, regidx, hsr.sysreg.read, hsr, 1,
->                                    guest_reg_value);
->      }
-> diff --git a/xen/arch/arm/include/asm/arm64/sysregs.h b/xen/arch/arm/incl=
-ude/asm/arm64/sysregs.h
-> index f3c11d871e..f6ece8f972 100644
-> --- a/xen/arch/arm/include/asm/arm64/sysregs.h
-> +++ b/xen/arch/arm/include/asm/arm64/sysregs.h
-> @@ -438,15 +438,6 @@
->  #define MVFR1_FPDNAN_SHIFT           4
->  #define MVFR1_FPFTZ_SHIFT            0
-> =20
-> -#define ID_PFR1_GIC_SHIFT            28
-> -#define ID_PFR1_VIRT_FRAC_SHIFT      24
-> -#define ID_PFR1_SEC_FRAC_SHIFT       20
-> -#define ID_PFR1_GENTIMER_SHIFT       16
-> -#define ID_PFR1_VIRTUALIZATION_SHIFT 12
-> -#define ID_PFR1_MPROGMOD_SHIFT       8
-> -#define ID_PFR1_SECURITY_SHIFT       4
-> -#define ID_PFR1_PROGMOD_SHIFT        0
-> -
->  #define MVFR2_FPMISC_SHIFT           4
->  #define MVFR2_SIMDMISC_SHIFT         0
-> =20
-> diff --git a/xen/arch/arm/include/asm/sysregs.h b/xen/arch/arm/include/as=
-m/sysregs.h
-> index f6af987ef5..8dcf82a694 100644
-> --- a/xen/arch/arm/include/asm/sysregs.h
-> +++ b/xen/arch/arm/include/asm/sysregs.h
-> @@ -9,6 +9,15 @@
->  # error "unknown ARM variant"
->  #endif
-> =20
-> +#define ID_PFR1_GIC_SHIFT            28
-> +#define ID_PFR1_VIRT_FRAC_SHIFT      24
-> +#define ID_PFR1_SEC_FRAC_SHIFT       20
-> +#define ID_PFR1_GENTIMER_SHIFT       16
-> +#define ID_PFR1_VIRTUALIZATION_SHIFT 12
-> +#define ID_PFR1_MPROGMOD_SHIFT       8
-> +#define ID_PFR1_SECURITY_SHIFT       4
-> +#define ID_PFR1_PROGMOD_SHIFT        0
-> +
->  #ifndef __ASSEMBLER__
-> =20
->  #include <asm/alternative.h>
-> diff --git a/xen/arch/arm/include/asm/vreg.h b/xen/arch/arm/include/asm/v=
-reg.h
-> index 387ce76e7e..a85fefcc3e 100644
-> --- a/xen/arch/arm/include/asm/vreg.h
-> +++ b/xen/arch/arm/include/asm/vreg.h
-> @@ -4,11 +4,31 @@
->  #ifndef __ASM_ARM_VREG__
->  #define __ASM_ARM_VREG__
-> =20
-> +#include <xen/bitops.h>
-> +#include <xen/bug.h>
-> +#include <xen/sched.h>
-> +
-> +#include <asm/gic.h>
-> +
->  typedef bool (*vreg_reg64_fn_t)(struct cpu_user_regs *regs, uint64_t *r,
->                                     bool read);
->  typedef bool (*vreg_reg_fn_t)(struct cpu_user_regs *regs, register_t *r,
->                                     bool read);
-> =20
-> +#define VREG_ID_REG_GIC_WIDTH 4
-
-Should this go into sysregs.h?
-
-Something like ID_AArchx_PFR_GIC_SHIFT? I am open to alternatives in naming=
-.
-
-> +
-> +static inline register_t vreg_id_reg_set_gic_field(register_t val,
-> +                                                   unsigned int shift,
-> +                                                   const struct domain *=
-d)
-> +{
-> +    register_t mask =3D GENMASK(shift + VREG_ID_REG_GIC_WIDTH - 1, shift=
-);
-> +    enum gic_version vgic_ver =3D d->arch.vgic.version;
-> +
-> +    ASSERT((vgic_ver =3D=3D GIC_V2) || (vgic_ver =3D=3D GIC_V3));
-> +
-> +    return (val & ~mask) | ((vgic_ver =3D=3D GIC_V3 ? 1U : 0U) << shift)=
+>  static inline unsigned int espi_intid_to_idx(unsigned int intid)
+> diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
+> index e5aca17dcb..0ba13e18da 100644
+> --- a/xen/arch/arm/vgic.c
+> +++ b/xen/arch/arm/vgic.c
+> @@ -62,6 +62,14 @@ static inline struct vgic_irq_rank *vgic_get_espi_rank=
+(struct vcpu *v,
+>      return &v->domain->arch.vgic.ext_shared_irqs[EXT_RANK_NUM2IDX(rank)]=
 ;
-
-Probably better to use constants?
-
-Something like ID_AArchx_PFR_GIC_V3 and ID_AArchx_PFR_GIC_NO_CPU_INTF.
-
+>  }
+> =20
+> +static inline struct pending_irq *espi_to_pending(const struct domain *d=
+,
+> +                                                  unsigned int irq)
+> +{
+> +    unsigned int idx =3D espi_intid_to_idx(irq) + d->arch.vgic.nr_spis;
+> +
+> +    return &d->arch.vgic.pending_irqs[idx];
 > +}
 > +
->  static inline bool vreg_emulate_cp32(struct cpu_user_regs *regs, union h=
-sr hsr,
->                                       vreg_reg_fn_t fn)
+>  #else
+>  static inline bool is_valid_espi_rank(struct domain *d, unsigned int ran=
+k)
 >  {
-> diff --git a/xen/arch/arm/vcpreg.c b/xen/arch/arm/vcpreg.c
-> index 3c315be9fd..15ccde71da 100644
-> --- a/xen/arch/arm/vcpreg.c
-> +++ b/xen/arch/arm/vcpreg.c
-> @@ -316,7 +316,17 @@ void do_cp15_32(struct cpu_user_regs *regs, const un=
-ion hsr hsr)
->       * to identify the processor features
->       */
->      GENERATE_TID3_INFO(ID_PFR0, pfr32, 0)
-> -    GENERATE_TID3_INFO(ID_PFR1, pfr32, 1)
-> +    case HSR_CPREG32(ID_PFR1):
-> +    {
-> +        register_t guest_reg_value =3D domain_cpuinfo.pfr32.bits[1];
+> @@ -78,6 +86,13 @@ static inline struct vgic_irq_rank *vgic_get_espi_rank=
+(struct vcpu *v,
+>      ASSERT_UNREACHABLE();
+>      return NULL;
+>  }
 > +
-> +        guest_reg_value =3D vreg_id_reg_set_gic_field(guest_reg_value,
-> +                                                    ID_PFR1_GIC_SHIFT,
-> +                                                    v->domain);
-> +
-> +        return handle_ro_read_val(regs, regidx, cp32.read, hsr, 1,
-> +                                  guest_reg_value);
-> +    }
->      GENERATE_TID3_INFO(ID_PFR2, pfr32, 2)
+> +static inline struct pending_irq *espi_to_pending(const struct domain *d=
+,
+> +                                                  unsigned int irq)
+> +{
+> +    ASSERT_UNREACHABLE();
+> +    return NULL;
+> +}
+>  #endif
 > =20
->      case HSR_CPREG32(ID_DFR0):
+>  static inline struct vgic_irq_rank *vgic_get_rank(struct vcpu *v,
+> @@ -698,6 +713,7 @@ bool vgic_to_sgi(struct vcpu *v, register_t sgir, enu=
+m gic_sgi_mode irqmode,
+>   * interrupt.
+>   * This can return NULL if called for an LPI which has been unmapped
+>   * meanwhile.
+> + * This must not be called for an eSPI when CONFIG_GICV3_ESPI is disable=
+d.
+>   */
+>  struct pending_irq *irq_to_pending(struct vcpu *v, unsigned int irq)
+>  {
+> @@ -715,22 +731,12 @@ struct pending_irq *irq_to_pending(struct vcpu *v, =
+unsigned int irq)
+> =20
+>  struct pending_irq *spi_to_pending(struct domain *d, unsigned int irq)
+>  {
+> -    unsigned int idx;
+> -
+>      ASSERT(irq >=3D NR_LOCAL_IRQS);
+> =20
+>      if ( is_espi(irq) )
+> -    {
+> -        unsigned int nr_spis =3D d->arch.vgic.nr_spis;
+> +        return espi_to_pending(d, irq);
+> =20
+> -        idx =3D espi_intid_to_idx(irq) + nr_spis;
+> -    }
+> -    else
+> -    {
+> -        idx =3D irq - NR_LOCAL_IRQS;
+> -    }
+> -
+> -    return &d->arch.vgic.pending_irqs[idx];
+> +    return &d->arch.vgic.pending_irqs[irq - NR_LOCAL_IRQS];
+>  }
+> =20
+>  void vgic_clear_pending_irqs(struct vcpu *v)
 
 --=20
 WBR, Volodymyr=
