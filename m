@@ -4,62 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 95020C9831F
-	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2026 20:55:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1433029.1653865 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A988C98318
+	for <xen-devel@archiver.kernel.org>; Thu, 24 Sep 2026 20:58:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1433039.1653873 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9qTn-0004kE-S3; Thu, 24 Sep 2026 20:55:43 +0000
+	id 1x9qWI-0005S3-71; Thu, 24 Sep 2026 20:58:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1433029.1653865; Thu, 24 Sep 2026 20:55:43 +0000
+Received: by outflank-mailman (output) from mailman id 1433039.1653873; Thu, 24 Sep 2026 20:58:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1x9qTn-0004k6-O1; Thu, 24 Sep 2026 20:55:43 +0000
-Received: by outflank-mailman (input) for mailman id 1433029;
- Thu, 24 Sep 2026 20:55:42 +0000
+	id 1x9qWI-0005Rw-4E; Thu, 24 Sep 2026 20:58:18 +0000
+Received: by outflank-mailman (input) for mailman id 1433039;
+ Thu, 24 Sep 2026 20:58:16 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Jason.Andryuk@amd.com>) id 1x9qTm-0004k0-Kw
- for xen-devel@lists.xenproject.org; Thu, 24 Sep 2026 20:55:42 +0000
+ (envelope-from <Mykola_Kvach@epam.com>) id 1x9qWG-0005Rj-Ds
+ for xen-devel@lists.xenproject.org; Thu, 24 Sep 2026 20:58:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1x9qTl-00CMNj-UT
- for xen-devel@lists.xenproject.org; Thu, 24 Sep 2026 22:55:41 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1x9qWF-00CMcQ-Qu
+ for xen-devel@lists.xenproject.org; Thu, 24 Sep 2026 22:58:15 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6ab58e10-2eae-0a2a0a5409dd-0a2a4501ec40-44
- for <xen-devel@lists.xenproject.org>; Thu, 24 Sep 2026 22:55:41 +0200
-Received: from [40.107.200.11]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6ab58e4c-5984-0a2a45010019-286bc80bba38-3
- for <xen-devel@lists.xenproject.org>; Thu, 24 Sep 2026 22:55:41 +0200
-Received: from DS1PR05CA0002.namprd05.prod.outlook.com (2603:10b6:8:457::10)
- by CH2PR12MB4264.namprd12.prod.outlook.com (2603:10b6:610:a4::15) with
- Microsoft SMTP Server (version=TLS1_2,
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6ab58ebf-8faa-0a2a0a5109dd-0a2a4509c090-26
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Sep 2026 22:58:15 +0200
+Received: from [40.107.130.140]
+ (helo=MRWPR03CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6ab58ee7-be1a-0a2a45090019-286b828ce1c5-3
+ for <xen-devel@lists.xenproject.org>; Thu, 24 Sep 2026 22:58:15 +0200
+Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
+ (2603:10a6:10:430::13) by GV1PR03MB10503.eurprd03.prod.outlook.com
+ (2603:10a6:150:16f::20) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Thu, 24 Sep
- 2026 20:50:31 +0000
-Received: from DS3PEPF0000C381.namprd04.prod.outlook.com
- (2603:10b6:8:457:cafe::ad) by DS1PR05CA0002.outlook.office365.com
- (2603:10b6:8:457::10) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.13 via Frontend Transport; Thu,
- 24 Sep 2026 20:50:30 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- DS3PEPF0000C381.mail.protection.outlook.com (10.167.23.11) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.451.8 via Frontend Transport; Thu, 24 Sep 2026 20:50:29 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Thu, 24 Sep
- 2026 15:50:29 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Thu, 24 Sep
- 2026 15:50:28 -0500
-Received: from [192.168.19.2] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Thu, 24 Sep 2026 15:50:28 -0500
+ 2026 20:58:10 +0000
+Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
+ ([fe80::f257:38e:c0af:df28]) by DB3PR0302MB9208.eurprd03.prod.outlook.com
+ ([fe80::f257:38e:c0af:df28%5]) with mapi id 15.21.0451.014; Thu, 24 Sep 2026
+ 20:58:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,91 +55,214 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=g0TnSY8VneubHBgeyhD1m8uEhNIg8U5WXBnSBj7obBu3+LyFZ91YkcpGa+Ok5i84mYBB2LvTvnn91Qbob/MVtLBQQEFQcfN0k4oEUX0xGIZbhLmeFfj6EuCxLJ2CCllT9OCvCiF6oJDq+baKfIZbWgvxBenIC1Io5Iy6E7FDvI9c7D9p0OBRewuImeVBx5cd2vxFizGtDHlqZlFsbyTWCaL52YBOsnjnU8Hkw6KQWFCzwNy/4ia6jofKcxRPNQ6NJnLa2ZdbyTxrvpiYqBn8JDYpRQxCdq5jPAhpoDg8Ci3JX+/guGyg08PB0jWUD8EUH3C3cN865YySBEGnvNqNhg==
+ b=atvXbPtNEYEJ7yUjCeF4ae0byOyKys/Zf1iIjhnK81x0b6o5JZJ5M5Cdp9cwJOu/7JZCjLGMKRwl4UNfaNaFRVmdFPcHYUU6fk5x7J3zGuhrOSYGRVt8AuJrY75a3NXdHC1fyQdEaAAQwjIHDVRRMayvTDqyrxDXavJrm0rWGDEgpXEGMV4AmVQSMvouyVsTJLca/8VjkbFDMHaux/XjdXu2i6dAQ7oJZgosaPihy9oMe6VsDK39dQ3+mHejZIgQYxjvUj/OODeBshPsOdR7YMz2ubCnuU4b+JeqnkAqnvG2yzoLL4pVogWFcQlACTUv/g5J6sVqzuCiqByxxmXLCg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XrwXOGVPoCuvkbvKL3weAoNwHrYqs0UvPWiSsQhyNMA=;
- b=VvYuX1BmrRwNwHXwcBwKj9/s3boaaWy6W9RKP04oKGNUdlrIJJZ8xqjVzLX9Azk/6vWbC9Kwwt8yiQ9v9ATCJ4M395TOQvkPjotR+EbEzt1VXylULZV9KHUVINFG2OEpv6EJxcboo7U+2xIc27yTcypQCf1btgM6E6bnLDJX2yDrbsgiHAHAUzvjJXIKyXRE9a2CZaSYy9xAkyOMzWzrPbRJdYHFJL7CI2ApD+j+CB3lBCgQh7uUh21taBXeyQFM5ZYalpLiHLBprmJC3BW6oE7zRlg/4anr5sbrk4Q5SDiVHLrkUiF8FmLHIRrMv9pCTISGxadNZCsxkGrKlmqHSA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=vates.tech smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ bh=9FEWI+Mu3FCaR/ob7J4Ho5auTDYHoiCQQ5iGwusxYkY=;
+ b=AIIE7uvBQcXvNqia0QG/vtlp0gJTgGCmCDNpbHrjwn0oB7i9Xft2s7OYyTGRsrxQHz/91BgQZQPeMMtb5SNM0Nwm0mJzXhCGw5ouHtjb9VdetKpFtUQTTUgR4bxp8kj39WcpQAheC+12CQOjnifjYdzhFDZFhx9Y11l4Pv7v4QLYZ7hCOo0U0xV1RbxQkQtMlsy/Pd8iSyQPh+Tmv/MwZDtsvia7qaRKEijX8dV8f/r8nqhjKFSXEsv2oTxhAulXxcHaYDQrmSeLSkbBddZSKkRCD02ykfcpe0099KsVfJHN6LFdn5oJLv1pGVnJgsWXgrqcUJZB3pKGQXDCBeRehA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XrwXOGVPoCuvkbvKL3weAoNwHrYqs0UvPWiSsQhyNMA=;
- b=WXhW8v1CKNCX3u2brQrCemNfsog3kUl4Ssk/TaB7PTxvsJi8YyQcWo4+FULYvPhb3Pl9dDCT7v1qeT7m+QAVu8CvVfrWu2zzppgpGkcdMOEsJJoCcRIftj0TFjWgfVJkoCddv/tLN8BP4rVlni18YPsca/NvBE3Z0xZ1cbN8BcA=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <d52b2229-974e-4ec0-8d72-bea574d650fe@amd.com>
-Date: Thu, 24 Sep 2026 16:50:27 -0400
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 1/3] vm_event: svm: Don't BUG() when enabling intercept on
- hypervisor MSR
-To: Teddy Astie <teddy.astie@vates.tech>, <xen-devel@lists.xenproject.org>
-CC: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger@xenproject.org>
-References: <1790250881.8631fc262581453bbf619ec5b2062170.1a0d344933500072c4@vates.tech>
- <1790250991.8631fc262581453bbf619ec5b2062170.1a0d3463da200072c4@vates.tech>
-Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <1790250991.8631fc262581453bbf619ec5b2062170.1a0d3463da200072c4@vates.tech>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
+ bh=9FEWI+Mu3FCaR/ob7J4Ho5auTDYHoiCQQ5iGwusxYkY=;
+ b=kXnalXmN9eztwE5KlJap/Hc2gKhOWucGm4oDIoXTDJiBMAd00WBh080lU/ZCvf7qSra/nS56VGD8gQgF0IFtFbxGAfb5B8B2g9ffUc7DBbOPComNH4aCqUIT42J2npJ+nO0aOT281FxPQxF9KrdwXwgXjWdj8aKDmzzy0qz5JtG6T/7Kl5taC3zN2/aP4x1YgDEAA7VVDyKn7Au7uYABvx5NRIgKfZcoO1ckoAcCMnrQ+wirIiOS++Yj6FoJmwluKHCPOCLgKUWOjCUsXWoiK+RxCJhdqPwWj4FaMP0xgBCCduI68SS2z0+zV7Z5+PFGnZKaIx6BLEhPC1csemb1IA==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+From: Mykola Kvach <mykola_kvach@epam.com>
+To: xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Jens Wiklander <jenswi@kernel.org>
+Subject: [PATCH v5 0/4] xen/arm: Fix eSPI IRQ handling
+Date: Thu, 24 Sep 2026 23:57:52 +0300
+Message-ID: <cover.1790160605.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.53.0
 Content-Transfer-Encoding: 8bit
-X-EOPAttributedMessage: 0
+Content-Type: text/plain
+X-ClientProxiedBy: WA0P291CA0022.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d0:1::22) To DB3PR0302MB9208.eurprd03.prod.outlook.com
+ (2603:10a6:10:430::13)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DS3PEPF0000C381:EE_|CH2PR12MB4264:EE_
-X-MS-Office365-Filtering-Correlation-Id: 08af3900-ea8c-42d3-2e4d-08df1a7d77eb
+X-MS-TrafficTypeDiagnostic: DB3PR0302MB9208:EE_|GV1PR03MB10503:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3ce9cfcf-ff79-42ec-27a9-08df1a7e8a37
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
- BCL:0;ARA:13230040|376014|82310400026|1800799024|36860700016|23010399003|6133799003|11063799006|56012099006|18002099003|10067099003|4143699003|22082099003;
+	BCL:0;ARA:13230040|366016|23010399003|7416014|376014|1800799024|11063799006|56012099006|10067099003|18002099003|6133799003;
 X-Microsoft-Antispam-Message-Info:
- X2suyCMx/ZTjclQ82Y2KFcEBkyVmanpJFNAvRdICyBvdhe6HC1jZ9D3KXlodJwsQ3WWruzB/A7CmDDrs7dJ2h8OnIkMcORbI0hRxR/t6kpBl8NJ5IxwKjCj7Pj1xFA/WZ1ZeU0/YqnhANR/dvCu3fsQ/w3Hu5D7HhlZzBVoB42mYtm8Eu0PZwVd+VXY3d+uLfqPiH7hPQGo/thpRxhbJ1h45QxPsPMoJ8Ao1VfnqAib1RqYnVeKG60a6G5I7H1XhaX9/Lo6MMPSbZhxD2aRvUqCaRwr/jrBguMivfIXhPkLnofGmnjlUks+KzJcp20DmSCJ9HTwvYarE1/OimZc45MBuX5Ud2qX/WFso3wSJMm3MAxDYSuzxMe5F342DBM54iO6Sy4RHu2XKeGmslSL/DoXXCbxUunsqluJWoB8rXGCjagREDLu0bQ6EdFV57JQDXKSmSCFhsIzYZGgpkJpMUjOIVQHDDq9Ohay4LA0p9fqn1w2Uw4Mw7WzwISw2SUtrzut8VlhOSNEp0Kt04ohlv0D9hyOQi5cuRBst/6Se9PW5wu3uZBBCjExxXacvsyVugkSTTUHSmFVIueFPr/nomAeVk4nwBFyhakFKj4PLfuto0JXYfx810nwZMshma7J8fh2+YOxETCsaZ/qmBATAHScWfhlCFHVPzZTwV9Z6MveG2re4fGajVj5usbMrmqTp
+	yx6ZVKPKYcsT8wYFACGpqNzvb41uFqAeN8Irl6zQsT1inwLGukEAIXDOX5c4/jWei8TC5e0LpeVSQIf1eOIdqxcuDAx+7YEmKUezkYxxNQXWPbjglxWcqNMim1zuaW/5FTkwyAbDFoacsmMwP39xnrwKN9oU3ekAK7GMd4ROx5EXH2bY/kKAmw6TAOwsPfapXv11u5hF4IOfNYQBOxghY9ZAlJSF3ly92R7UBkmjH0Ui+mDoGbmefzH9/8BXlLMkisL9bzA9CDH5oHtddxIPm+xeyS5fReGX/hWx5AqyGXkeH0e6ULkKRr1wjKEaD+AadXDgvnl2wiBpDPCbM+Z+AR698aHCZr/R92bKlA4SRmNmo44e8kmliznnW4dOPqQlEvexx2fsyTzPR1smUjxaYPJ28UWdhjawtn1uQEkVXuWXOxuj43rMdz5ke7oGe/6upTRuMbqzCdqNYAs6Cadki5UcO2WWu9M3PmcAg2WXJnLUIuMqdc1z1wHkMUS2ZKcKE6Agmuj5Pdg68+MCL36pZt10eox0urFOGyGrVQU0MtDTVyFx/jngtv+todtHypdqGc/gFuhFeO8FlAkcUHR/Frk2Ck1gNK4991/u6a6Ln4Q1084btNauvA3RIW4hpA4/2eUFwpRLWNvLscCcIWTHPj/LYY8HpYh8bqMpECJYSCo=
 X-Forefront-Antispam-Report:
- CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(1800799024)(36860700016)(23010399003)(6133799003)(11063799006)(56012099006)(18002099003)(10067099003)(4143699003)(22082099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB3PR0302MB9208.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(7416014)(376014)(1800799024)(11063799006)(56012099006)(10067099003)(18002099003)(6133799003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
- tBONMGLDF9P5eTwqzLgp/rLtSk5XzzTUNrig8QNUMRiVGIfIE44WgVksF2xXit8b0Iai0LBR0PmNEVzQPWhosUbef8oVZZg3bmbwTOfP13zHWXqY3/w8yLGe+i7wo2IgyLOzP81G/IPYELAuAQcsMR/c8sgd9NKkzrYOfGTZGW/gel1lbARlV2XK708iNADw65y7moAyWxDVPbkN9eejOqHTbzBG6NIhKy2CLGh6wi6HuFQ3r+VzRiKuFHxmQQmrM+4J78K05n4/KR/+bRmwsJJnnR1utzpa/0ekjzwC713SiHFeJSf935vrzi3G8m8Z/8FlrKlh8nQhvdF6AU6FexSETKuCiaTQKtzSHOt0FN+jqd6tXN7vnn2XKZP04d1IPp4S1zYZ2ZGFNSWE+xA9IHyAUUeVsWG3qHagv1JigrK/R2K2UFBw8McJcNDJqLHM
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2026 20:50:29.4241
+	=?us-ascii?Q?pAHWxusjT+tKjiIt+0hMMVC2ztXEpOG4ByxVSVA4F6jgnbaNnD5N9TJ0xm5I?=
+ =?us-ascii?Q?GKiE0fZarQMyaoKHCbvOr7vIordpqhAtCLcE7b2au1k2yhJ8zH8n4MSdRraH?=
+ =?us-ascii?Q?Fqo3ZRIh0j2QoMYF6fUsoD6DnvztMKnKrMbJUeqftAvCqQNOMkAGkdkGhz4/?=
+ =?us-ascii?Q?frtpFyr0cYQWGmEuvw4E98Nh3i4G261pfcjybgq6CdpmPsrShXN02eveRMpM?=
+ =?us-ascii?Q?wQKYRmwQYwYsj6uKrde8tZGBQga4B/qvh9oNZtEz7dWib0BBGE9xM7ACMV1y?=
+ =?us-ascii?Q?SjCvWJmXOUxe6SXRPL0HkLlSuj0KEWEKjLYQFNZJsH3njbywEBBC9p/Kr2iS?=
+ =?us-ascii?Q?TY2b3VhcMFa2r0XDDwvYRoxmRIRe8kHW4cKX+viklkjUuJWlWkHP5eXMzlBE?=
+ =?us-ascii?Q?SjFJyinlnsH/F8d7U+zbHFd/g76h26exKEEPX9qr2YlNgD8gY4uo/DnTlNo3?=
+ =?us-ascii?Q?BeZaePyy6W1qbDrG8lMG/sfXNZQjW7Tg0Dp5WFwHtwe3Q94M4krWBgFgccAW?=
+ =?us-ascii?Q?lO9H+gB3jAY09xFpFttW6maSSaGqkPsR0H/iYdRc1WZRZOSGZOfqOZU4r1KU?=
+ =?us-ascii?Q?Nh2+eaah1IuvjfF010D/GLSdBrMx9zn/0nANgO6RoH28NmHrbvaASKVIB0jD?=
+ =?us-ascii?Q?jcwF3qCOO/ePWN4GQFd9gJVx4eGkALXlbOWnFeuhVojNjTGycDgZsfPayumE?=
+ =?us-ascii?Q?nfAQ47X2F/3v5nYKPilk4zbTU+5JTVFRFjipC25ZyBBBSWwhoNS0mWPJcKVG?=
+ =?us-ascii?Q?6pXFI3wY4o0K7B8mGfvpOMDqh6Tqtl+1vRfdNb1jB/Jp82aYNEDIW+1tZNVc?=
+ =?us-ascii?Q?AFFpI39+Cno+Pp5Sgwze4e5xdxgWh2R5TRP7d71ZGPbi9pDlsqDxG/uLT6ry?=
+ =?us-ascii?Q?mckB/DUn7XgmNq8ZIb/Fg134VvuRqnRQxNksXRUM82T2Mjgc1r3GX4UWYyLq?=
+ =?us-ascii?Q?RroNCtmprHiz5jKKeG+O3ZFehwwqcGqDh2iKgsaplKJRbfs+lEk1qc48ppuZ?=
+ =?us-ascii?Q?z77vAqZHwNYtEt/cmFulLrMEuN47YPRcCJX/9GOytisrL+fWkbMi6G4g6rOW?=
+ =?us-ascii?Q?DkmkrfdZQvnHcYAMEkNtJUQpWJLrtfUlzS02/uodjjEEuoN40Nm924l0l1L0?=
+ =?us-ascii?Q?wClehkX7c5KcNGugH1yKBW3hw2m8SYC9SDtUV3pD3LKNPvv9hNGztHTvY+xo?=
+ =?us-ascii?Q?uyLwHKmbowW4Lp07fajiITAjgQ3IPh5dfnCSfXQVX13znmCxzu3RJZ45KIsm?=
+ =?us-ascii?Q?UnX9sRlVAmhaqLbrAXeGn3J1zCfG4RQOvE6GsCsUtdXmjKf5wg7OAOcHMZ2E?=
+ =?us-ascii?Q?ToFFJUhwjgKt+0I3S47dNuS1u8o6oTpQgk3Q+lulCMyBEp8c7D8YTDnufTLE?=
+ =?us-ascii?Q?14u+d6HvUGIhDyA+l2BCVn4OqLedGV7MxWr2OvLbFQda0aeV4XZJ1MN6w/ms?=
+ =?us-ascii?Q?EBpvMaTq/On/NJtjZ8bpWxyjXN6V6HiV51ZNjISRyV+4ND9Bg2RqK9wwAxck?=
+ =?us-ascii?Q?kKhTZJVhj2YWmGw7Y2Wu+aar3tAoADwYiYpQ7wf6H8AWS6n6WC8rfgMWcLo0?=
+ =?us-ascii?Q?UbPyxBCG8M/SsS1LmbBh27jOpipNx9pYKJGlrEIv/fMceYrGm0hnOKwAiyV0?=
+ =?us-ascii?Q?lhsixivR2lA1PHVFab8IX4Up34vBc+pUNo056O0NNOOTSTVDlgJzMGGUK61r?=
+ =?us-ascii?Q?90Dh1/C9Vga1v0jVSV2AZPfI9JvWF9knfAPx7Tw/4OPTqtwANq6OvgOCMUlx?=
+ =?us-ascii?Q?6js9w6+HMw=3D=3D?=
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3ce9cfcf-ff79-42ec-27a9-08df1a7e8a37
+X-MS-Exchange-CrossTenant-AuthSource: DB3PR0302MB9208.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Sep 2026 20:58:09.8672
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 08af3900-ea8c-42d3-2e4d-08df1a7d77eb
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
- DS3PEPF0000C381.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR12MB4264
-X-purgate-ID: tlsNG-d62444/1790283341-BDE78757-7FF90730/0/0
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vC9H98kbc3bRk/kgDNnJhyDZoWd0uvd1C68vq/qyUcf5Zc0Hj9owXU3q62l08EoKGP7zsc/VpitcavzmO823Vw==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV1PR03MB10503
+X-purgate-ID: tlsNG-bad1c0/1790283495-BFCD7034-44A4E690/0/0
 X-purgate-type: clean
-X-purgate-size: 800
+X-purgate-size: 5223
 
-On 2026-09-24 07:56, Teddy Astie wrote:
-> svm_msrbits() only cover MSRs in the ranges specified in APM and returns
-> NULL for all the other ones (i.e hypervisor range), which triggers the
-> BUG_ON() that follows.
-> 
-> APM specifies that MSR outside the architectural and AMD specific ranges
-> are unconditionally intercepted, hence don't require any specific handling
-> by SVM logic, fix this by ignoring cases when msr_bit is NULL.
-> 
-> This is only reachable with CONFIG_VM_EVENT using XEN_DOMCTL_MONITOR_EVENT_MOV_TO_MSR
-> to configure a MSR intercept in the hypervisor range (0x40000000–0x40001fff).
-> 
-> Fixes: 6e9fc4d628b6 ("hvm/svm: Enable MSR events")
-> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
-Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+This series fixes sparse eSPI INTID handling and checks errors returned by
+irq_set_type().
 
-Thanks,
-Jason
+Patch 1 checks irq_set_type() failures in the GTDT, MADT, SPCR, and FF-A
+paths. GTDT and MADT could retain rejected timer or maintenance INTIDs
+and later use them in direct descriptor lookups. This patch also fixes
+MISRA C Rule 17.7 violations. It is now first in the series, as requested
+during review, so callers handle errors before stricter IRQ validation
+is introduced.
+
+Patch 2 makes is_espi() check the architectural INTID range regardless of
+CONFIG_GICV3_ESPI. If the GIC reports an eSPI without compiled-in support,
+Xen stops with BUG_ON(), as there is no descriptor or pending_irq storage
+for it. Virtual eSPI pending lookups without support are treated as
+unreachable: the stub asserts in debug builds and retains a NULL return.
+
+Xen has IRQ descriptors for INTIDs below NR_IRQS and, with eSPI support,
+for eSPIs starting at 4096. It has no descriptors for INTIDs 1024 through
+4095. Patch 3 checks INTIDs in setup_irq() and irq_set_spi_type() before
+descriptor lookup. irq_set_spi_type() checks descriptor-backed ranges
+because it can run before the GIC line counts are known. setup_irq()
+checks implemented lines using those counts.
+
+Patch 4 fixes the vGIC allocation bitmap. Reserving an eSPI used a compact
+bitmap index, but freeing it used the raw virtual INTID. This could write
+past the bitmap and leave the eSPI reserved. Both vGIC implementations now
+use vgic_is_valid_line() when reserving and freeing vIRQs.
+
+Testing of the v5 review changes, before the latest rebase and reordering:
+
+- Arm64 build with CONFIG_NEW_VGIC=y, CONFIG_GICV2=y, and CONFIG_DEBUG=y.
+- QEMU GICv2 guest tests: 10 checks passed, covering SPI delivery,
+  enable/disable behavior, affinity changes, SGIs, and the virtual timer.
+
+Testing from earlier revisions, before the final v5 edits:
+
+- QEMU and FVP tests with CONFIG_GICV3_ESPI, CONFIG_HAS_ITS, and
+  CONFIG_DEBUG enabled and disabled.
+- Physical and virtual eSPI delivery on FVP, including delivery to both
+  vCPUs and retriggering an active eSPI.
+- Injected an unsupported physical eSPI and confirmed BUG_ON() in both
+  debug and release builds.
+- Arm64 builds with CONFIG_GICV3_ESPI and CONFIG_DEBUG enabled and disabled.
+- Arm64 debug builds with CONFIG_ACPI=y and CONFIG_FFA=y, both with and
+  without CONFIG_GICV3_ESPI.
+- FVP Device Tree boot with 64 eSPIs; Linux dom0 started.
+- QEMU virt UEFI/ACPI boot to a dom0 initramfs shell, covering the GTDT,
+  GICv3 MADT, and PL011 SPCR paths.
+
+Changes in v5:
+
+- Move the irq_set_type() error-handling patch to the beginning.
+- Explain why an eSPI cannot be handled without compiled-in support.
+- Make both espi_to_pending() helpers static inline and constify d.
+- Add ASSERT_UNREACHABLE() to the disabled-eSPI stub.
+- Preserve the unmapped LPI comment and clarify that eSPI lookup without
+  support must not occur.
+- Add the vgic_is_valid_line() guard to vgic_free_virq() in the new vGIC
+  implementation and use the same helper in vgic_reserve_virq().
+
+Changes in v4:
+
+- Use BUG_ON() when the GIC reports an eSPI without compiled-in support.
+- Return NULL for virtual eSPI pending lookups when support is disabled.
+- Remove the redundant CONFIG_GICV3_ESPI check in IRQ dispatch.
+- Share irq_has_desc() with the assertion in __irq_to_desc().
+- Log invalid IRQs rejected by setup_irq().
+- Document the compressed vIRQ allocation bitmap above the conversion
+  helpers, with an ASCII diagram and a reference to struct vgic_dist.
+- Clarify the is_espi() commit message and drop unrelated blank-line
+  removals.
+- Add Reviewed-by tags.
+
+Changes in v3:
+
+- Add a preparatory patch making is_espi() a pure range predicate and move
+  configuration policy and debug checks to callers.
+- Add the requested assertion before regular descriptor lookup.
+- Avoid partial MADT and UART state updates after irq_set_type() failures.
+- Apply cosmetic cleanups from review.
+
+Changes in v2:
+
+- Check descriptor ranges in irq_set_spi_type() and implemented GIC lines
+  in setup_irq().
+- Keep the is_espi() debug check when CONFIG_GICV3_ESPI is disabled.
+- Remove a redundant CONFIG_GICV3_ESPI guard from the vGIC code.
+- Add a patch checking irq_set_type() errors in the GTDT, MADT, SPCR, and
+  FF-A paths.
+- Target master instead of the 4.22 release.
+
+Mykola Kvach (4):
+  xen/arm: handle irq_set_type() failures
+  xen/arm: make is_espi() a pure range predicate
+  xen/arm: validate IRQs before descriptor lookup
+  xen/arm: vgic: free eSPIs using the bitmap index
+
+ xen/arch/arm/gic-v2.c          | 15 ++++---
+ xen/arch/arm/gic-v3.c          | 15 ++++---
+ xen/arch/arm/gic.c             |  6 +++
+ xen/arch/arm/include/asm/irq.h | 11 ------
+ xen/arch/arm/irq.c             | 28 +++++++++++--
+ xen/arch/arm/tee/ffa_notif.c   | 11 +++++-
+ xen/arch/arm/time.c            | 18 +++++++--
+ xen/arch/arm/vgic.c            | 72 +++++++++++++++++++++++-----------
+ xen/arch/arm/vgic/vgic.c       |  5 ++-
+ xen/drivers/char/ns16550.c     |  8 +++-
+ xen/drivers/char/pl011.c       |  4 +-
+ 11 files changed, 135 insertions(+), 58 deletions(-)
+
+-- 
+2.53.0
+
 
