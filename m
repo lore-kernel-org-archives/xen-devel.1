@@ -4,62 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38C94C9830D
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2026 09:45:20 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1433603.1654077 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C90DC9830E
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2026 09:51:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1433612.1654088 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xA2UA-000563-8u; Fri, 25 Sep 2026 09:44:54 +0000
+	id 1xA2aE-0006qn-UE; Fri, 25 Sep 2026 09:51:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1433603.1654077; Fri, 25 Sep 2026 09:44:54 +0000
+Received: by outflank-mailman (output) from mailman id 1433612.1654088; Fri, 25 Sep 2026 09:51:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xA2UA-00055w-69; Fri, 25 Sep 2026 09:44:54 +0000
-Received: by outflank-mailman (input) for mailman id 1433603;
- Fri, 25 Sep 2026 09:44:53 +0000
+	id 1xA2aE-0006qg-QO; Fri, 25 Sep 2026 09:51:10 +0000
+Received: by outflank-mailman (input) for mailman id 1433612;
+ Fri, 25 Sep 2026 09:51:09 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xA2U9-00055n-3X
- for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 09:44:53 +0000
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 1xA2aD-0006qZ-Ag
+ for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 09:51:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xA2U7-00HJzP-TX
- for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 11:44:51 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xA2aC-008ImR-KD
+ for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 11:51:08 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ab64289-e002-0a2a0a5209dd-0a2a450a912c-22
- for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 11:44:51 +0200
-Received: from [40.93.196.18]
- (helo=SA9PR02CU001.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ab64291-f2d2-0a2a450a0019-285dc412ca39-3
- for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 11:44:50 +0200
-Received: from SJ0PR13CA0037.namprd13.prod.outlook.com (2603:10b6:a03:2c2::12)
- by BY5PR12MB4131.namprd12.prod.outlook.com (2603:10b6:a03:212::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Fri, 25 Sep
- 2026 09:44:44 +0000
-Received: from SJ5PEPF000001C8.namprd05.prod.outlook.com
- (2603:10b6:a03:2c2:cafe::32) by SJ0PR13CA0037.outlook.office365.com
- (2603:10b6:a03:2c2::12) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.14 via Frontend Transport; Fri,
- 25 Sep 2026 09:44:44 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ5PEPF000001C8.mail.protection.outlook.com (10.167.242.36) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.451.8 via Frontend Transport; Fri, 25 Sep 2026 09:44:44 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Fri, 25 Sep
- 2026 04:44:43 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Fri, 25 Sep
- 2026 04:44:43 -0500
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Fri, 25 Sep 2026 04:44:40 -0500
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 6ab64409-e002-0a2a0a5209dd-0a2a450cd4f8-10
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 11:51:08 +0200
+Received: from [160.101.131.8] (helo=na1pdmzitismtp01.tibco.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <abdelkareem.abdelsaamad@citrix.com>)
+ id 6ab64267-f479-0a2a450c0019-a06583089148-3
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 11:44:07 +0200
+Received: from fedora.eng.citrite.net (unknown [10.113.40.46])
+ by na1pdmzitismtp01.tibco.com (Postfix) with ESMTP id C0B344718AAB;
+ Fri, 25 Sep 2026 05:42:02 -0400 (EDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,95 +49,342 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rEV3O3Z4zG3BnNnTK0KXmXjXb5n0vATjQrb20lrNPycXnGnAg1hdl7N9RTl+eJg3k1jTYVoPVM4qZZGoF8POlko2nkchz1htjkEhZYT1zpiIfgxoBxiEjWEUaIjygaRgGSgpwyWkb/zndAqbyiHKJrqw/utu86B2RpwQHlhpDBq5ghM82oPk1B2Jj1SyfnvE6EUHMMP+8iJyHHuK1NXiJtC7RBS2U0gocyMw3mg4/JCaPZCd0UHCjzHBp+YoM8kFmrj5RysZnTy88xkWyOHygGNxucbjm1jynb0euo0mbbGW1gloAqBl63GlW4RhETUNJQgMjdMyxn3bTkA/3URypA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=i28OjEiM8mx+Q9SHXTUbKcboZg2drHrP221eBpOLvuo=;
- b=hdKmVdiP4nHPlFRObL6xG9Xbip8xvD51zgIIjiy6GttYMwEJu4p9TarY3gWPwyd7la2Po7wUBMp1ZPwg/MLoXqcxjvpeOFt5bA6MXdenjH2dwl3AqkLz6wtzqzUIbY/GwijjAUOAnQch1nKtdKVyRY8uuncHKSN/iy41bDJWJ5TNlw8wY/fNmM6qJjtuIcILDpHjK1IuaVjhsidr4A0yoqxUjCNJCrnX6oI9+ngydbAvcOKa/SlTiJOcveOJyikLhCWsGquZSIzZ6aBeVcHWzv6O44pjCLVDrbsoIa+0sfOch1PsStMHPIL4vmNEn8yGu+5iyZ53Su78dtkOKbMeIg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=i28OjEiM8mx+Q9SHXTUbKcboZg2drHrP221eBpOLvuo=;
- b=JPYDd5MqtXoce1Vi2lZ2ZOY38Fj7URL+J0Z+TJNGG0b1FAOLYEHSVE6Z+ssP5Om5jQ6reqq/33fWp8MSkmeO17mVxFnhRg1hzuQFWUYKiP2oKnr+Lvi/W5or5CcdvwdOCPPshqlnrY/2BfpDrtX1nYqS5sfr93BhR8ISJDRLnRU=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <1421f319-8e95-431f-9527-d492f8397cc2@amd.com>
-Date: Fri, 25 Sep 2026 11:44:40 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; none
+From: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+To: xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com,
+	andrew.cooper3@citrix.com,
+	roger@xenproject.org,
+	jason.andryuk@amd.com,
+	teddy.astie@vates.tech,
+	Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+Subject: [PATCH v5] x86/nSVM: Check injected event consistency
+Date: Fri, 25 Sep 2026 10:38:17 +0100
+Message-ID: <216f0de990dd180c8336837e86bf5860e37b9c50.1790326132.git.abdelkareem.abdelsaamad@citrix.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen: Consolidate linker script setup data
-To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jason Andryuk
-	<jason.andryuk@amd.com>, <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
- Beulich" <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger@xenproject.org>, Timothy Pearson <tpearson@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>, Connor Davis
-	<connojdavis@gmail.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>, Teddy
- Astie <teddy.astie@vates.tech>, Grygorii Strashko
-	<grygorii_strashko@epam.com>
-References: <20260923161935.24429-1-jason.andryuk@amd.com>
- <DLNO61C820D2.2TSH4227QA8DB@amd.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <DLNO61C820D2.2TSH4227QA8DB@amd.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ5PEPF000001C8:EE_|BY5PR12MB4131:EE_
-X-MS-Office365-Filtering-Correlation-Id: 787c5000-64ff-4429-197b-08df1ae9a11d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|1800799024|376014|7416014|36860700016|23010399003|22082099003|10067099003|56012099006|11063799006|18002099003|4143699003;
-X-Microsoft-Antispam-Message-Info:
-	wfpUhWBNB6PG4Ac6WwOMwzKxP/c13Ys7I+KV1QkOQd/6gH9C62HSeWkm5E3ajTLUR4rXl/JaPm0tf7dO/oY5INHRt6ecInwJ+FHEuHTsA1GQjgcnX1HWdMHEI6oowLew9na9RTNQy85HZcrso0g8QCmWWsSEmVnr0Ipo/lENkWmRhz0u9uTXIE4C6GR87gJzXdeIyS9Myl2SCIQ/Ayz/xSF9JsRwSCArzcq6ygES29pFgpeqnvwj8LkSTLDm/y5+3MYIMjwrWcOc+5l22KKwp81Q2IS1Xdq2dHX046DDhZxhojrlmBk4c4ppooBAq6lGFg7462yItJp7n4jVfMjyNfqMGXYOlRGiyvNGiimzm77VgNgRcF8JOmJtko/jbNU3am7cfHGGlkSGkeqz1f9roSj2R5vzHeRBPuk6wWFzYAAsp+FnK7ojJRMAD2i241l90dNpRdjREDeDyU6S7g1yres2tnSYK4JeBmcdwvLNcJji3T7s/IL18yVgwTxS4a5MDHLKrk4uhoM/HANFxmBt//hxOThMqGCIhDqCu6Kz/bBsrGVvSRHO8F21Isz2ZFl2HN7vTO0QcLhHqw11uxAj3tvcqyelbV2X6V5Ehj7AnHEi42arAB+BCOO0tjDVG84BqjgdKUa3ImcyTXNdkRbuEKUtFTV8Y5GzgKpLYyjhYWlvYsBuclW/zn3rUvOsANPFuEyeSnj05wkNvgw3ucRxtg==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(1800799024)(376014)(7416014)(36860700016)(23010399003)(22082099003)(10067099003)(56012099006)(11063799006)(18002099003)(4143699003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	9NLNSlE3mGukb8nbsD6DekHydkF6eGSUazkuGibvvEGp5cuW4LaMu0TeuWW3LIUHVHIWq0nV/wOZ0E1O9g6g4j1042mie6FmvmvxqTrXpjdBZKyGAu+e5CuGS+vbXEq64XFf9qHeUxCuDPA/EL5y3+BakOaGKsLU8qrk/pCpw/1fKqxwB5bnBCm48KRT3XRfgwu4xbzQpL5WZYXabHUEnhxczJXMIThSb+QpYi3KnOvzE9fUcySx4OHScY6vGtVdqiSrkQMgF/6hw8txsehrIIXQGYDJrSwja5P15brI+qKMuuqd3QbFFm7khUNR4L5A8Xojrp4ztvJusRQCk3iRsPVstjVbH0oSP1xlqGbZbrr6Z+86PWnRhjb0YVEM8D9IrPyN+NHfps9RaFOAy/gAuaoqWe9z4D8QTka56msM7e/HF78C+lpHbeppNEaHXjoO
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Sep 2026 09:44:44.1349
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 787c5000-64ff-4429-197b-08df1ae9a11d
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ5PEPF000001C8.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BY5PR12MB4131
-X-purgate-ID: tlsNG-4011c0/1790329491-4B0D9CFC-352B4011/0/0
-X-purgate-type: clean
-X-purgate-size: 566
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1790329448-51936A5B-B1C49FD7/13/0
+X-purgate-type: bulk
+X-purgate-size: 15017
+Message-ID: <20260925093817.qjD7ADK2hy6ILEcW8_7aDt7mZHnuXNx8jJkWlWEXi14@z>
 
+On the AMD platforms, allowing a VMRUN instruction with a malformed VMCB has
+debugging complications, security and performance implications. The APM
+volume #2 15.20 (40332—Rev. 4.10—July 2026) states the two possibilities that
+VMRUN will immediately exit with VMEXIT_INVALID due to the injected event.
+These are
+• Reserved values of TYPE have been specified.
+• TYPE = 3 (exception) has been specified with a vector that does not
+  correspond to an exception (this includes vector 2, which is an NMI, not
+  an exception).
 
+Furthermore, reading through the APM shows that the exception vector validity
+can also depend on the guest mode, the CPU generation and the
+microarchitectural constraints. Some vectors are only valid starting with the
+specific CPU generation that introduced the corresponding feature, the guest
+mode or whether the guest opted-in for specific CPU capability. The Upstream
+KVM introduced a similar consistency check that reflects on this dependency
+with the commit
+7e79f71bca5c ("KVM: nSVM: Add missing consistency check for EVENTINJ").
+However, the KVM implementation did allow the Overflow (X86_EXC_OF) and the
+BOUND Range (X86_EXC_BR) vectors injection in 64-bit mode. According to the APM
+Volume #2 and Volume #3 (40332—Rev. 4.10—July 2026), injecting these exceptions
+while the guest is in 64-bit mode is invalid and triggers an immediate
+VMEXIT_INVALID. This architectural mismatch in the KVM implementation was
+reported here:
+https://lore.kernel.org/all/20260803225402.2324595-1-abdelkareem.abdelsaamad@citrix.com/
 
-On 24-Sep-26 17:58, Alejandro Vallejo wrote:
-> On Wed Sep 23, 2026 at 6:19 PM CEST, Jason Andryuk wrote:
->> .init.setup, .initcallpresmp.init, and .initcall1.init are duplicated
->> across architectures.  Replace them with a common define, SETUP_DATA.
->>
->> Suggested-by: Grygorii Strashko <grygorii_strashko@epam.com>
->> Signed-off-by: Jason Andryuk <jason.andryuk@amd.com>
->> Reviewed-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
->> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+To verify the hardware behaviour with the various vectors, A case-by-case
+testing on 64-bit mode Windows guest is performed. The hardware exception event
+is manually injected at the end of svm_vmexit_handler and the consequence
+is observed:
+ - If VMEXIT_INVALID is triggered, the injection is invalid.
+ - If a guest triple fault is triggered, the event passed the hardware checks
+   and completed the event delivery. It is valid.
 
-~Michal
+Extend the VMCB validation to check for the VMCB event injection inconsistency.
+
+While at it, extend the svm_vmcb_isvalid usage to the non-nested VMEXIT_INVALID
+debugging. Clean up svm_vmcb_isvalid by dropping the unused `verbose` parameter
+and by correcting the misleading boolean return value to properly reflect the
+validation status.
+
+Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
+---
+Changes in v5:
+- Drop the rejection of injected events when the VALID bit is not set. The
+  testing confirms no VMEXIT_INVALID is triggired in such case.
+- Reject the X86_EXC_BP (#BP) and the X86_EXC_OF (#OF) exception vectors when
+  injected into SEV-ES guests to respect architectural constraints.
+- Reject X86_EXC_VC (#VC) event injection entirely, as testing confirms manual
+  injection of the VMM Communication exception unconditionally triggers
+  a VMEXIT_INVALID.
+- Separate X86_EXC_HV (#HV) into its own explicit case block with a dedicated
+  architectural comment.
+- Extend the use of svm_vmcb_isvalid() to non-nested VMEXIT_INVALID debugging
+  to improve error diagnostics, and clean up the internal logic of the
+  function.
+- Promote the vmcb_injected_type and the vmcb_injected_vector to unsigned int
+  type.
+- Add an inline comment explaining the purpose and architectural backing of the
+  new vmcb_valid_event_inj_types_mask.
+
+Changes in v4:
+- Reject the injected events with the valid bit not set.
+- Fix the APM revision details.
+- Rename the is_valid_svm_vmcb_injected_exception_vector to the shorter
+  is_valid_injected_exception_vector.
+- Address coding style comments regarding !! operator usage for boolean
+  returns, concise debug messaging for reserved vectors, and blank lines
+  between non-fall-through case blocks.
+- Drop the X86_EXC_HV from the permitted vectors.
+
+Changes in v3:
+- Restricted X86_EXC_OF (4) and X86_EXC_BR (5) vector injections to
+  non-64-bit guests to prevent impossible guest-mode state injections
+  per AMD APM Volumes 2 & 3.
+- Refactored exception vector validation from if-conditions to a switch
+  statement to improve readability and extensibility.
+- Restricted X86_EXC_CP (21) vector injection to guests with enabled CET
+  to prevent VMRUN failures on hardware without CET support.
+
+Changes in v2:
+- Remove the redundant SVM_EVENT_INJ_TYPE_MASK and SVM_EVENT_INJ_VEC_MASK
+  constants.
+- Correct the Injected Event Type consistency check to disallow the injection
+  of reserved type 1 events.
+---
+Testing:
+ - Using a locally developed XTF nested virt setup, I manually tested VMRUN
+   instruction handling with a malformed VMCB:
+   1) Inject event with the type (7).
+      The hypervisor logs show the message
+      (XEN) [  645.155609] d2v0[nsvm_vmcb_prepare4vmrun]: eventinj: Invalid
+            Injected Event Type: 0x7.
+   2) Inject event with the exception value (3) and the vector value (2) for
+      NMI. The hypervisor logs show the message
+      (XEN) [  645.157277] d2v0[nsvm_vmcb_prepare4vmrun]: eventinj: Invalid
+            exception type: 0x3 vector: 0x2.
+   3) Inject event with the exception value (3) and the vector value (21) for
+      the X86_EXC_CP (Control-Flow Protection).
+      Without the changes included:
+          On the Naples host, where the vector was not yet known to the
+          hardware. VMRUN immediately triggers VMEXIT_INVALID.
+   4) To perform more detailed bare-metal testing, I set up a testing matrix
+      using a XenServer Windows 10 64-bit VM and manually injected the
+      various events according to the testing matrix below:
+-----------------------------------------------------------------------------------
+|Exception Vector|     AMD Naples    |     AMD Genoa    |    Testing Conditions    |
+|----------------|-------------------|------------------|--------------------------|
+|  - X86_EXC_OF  |  VMEXIT_INVALID   |  VMEXIT_INVALID  | - Verified that 64bit    |
+|  - X86_EXC_BR  |                   |                  | mode is active before    |
+|                |                   |                  | injecting the event.     |
+|----------------|-------------------|------------------|--------------------------|
+|                |                   |                  | - Verified that the      |
+|                |                   |                  | Genoa host does not have |
+|  - X86_EXC_CP  | Guest Triple fault|  VMEXIT_INVALID  | guest_cr[4] X86_CR4_CET  |
+|                |                   |                  | set and the VMCB does not|
+|                |                   |                  | have CR4 X86_CR4_CET set |
+|----------------|-------------------|------------------|--------------------------|
+|                |                   |                  | - APM states only valid  |
+| - X86_EXC_HV   |  VMEXIT_INVALID   |  VMEXIT_INVALID  | to inject into VMSAs that|
+|                |                   |                  | execute with Restricted  |
+|                |                   |                  | Injection.               |
+|----------------|-------------------|------------------|--------------------------|
+| - X86_EXC_DE   |                   |                  | - Verified that hosts    |
+| - X86_EXC_DB   |                   |                  | do not have guest_cr[4]  |
+| - X86_EXC_UD   |                   |                  | X86_CR4_OSXMMEXCPT set   |
+| - X86_EXC_BP   |                   |                  | and the VMCB does not    |
+| - X86_EXC_NM   |                   |                  | have CR4                 |
+| - X86_EXC_DF   |                   |                  | X86_CR4_OSXMMEXCPT set   |
+| - X86_EXC_TS   | Guest Triple fault|Guest Triple fault| with the vector          |
+| - X86_EXC_NP   |                   |                  | X86_EXC_XM.              |
+| - X86_EXC_SX   |                   |                  | with the vector          |
+|                |                   |                  | X86_EXC_MC.              |
+|----------------|-------------------|------------------|--------------------------|
+| - X86_EXC_CSO  |                   |                  |                          |
+| - X86_EXC_SPV  |                   |                  |                          |
+| - X86_EXC_VE   |  VMEXIT_INVALID   |  VMEXIT_INVALID  |                          |
+| - X86_EXC_VC   |                   |                  |                          |
+ ----------------------------------------------------------------------------------
+ - CI tests:
+https://gitlab.com/xen-project/people/aabdelsa/xen/-/pipelines/2881691847
+---
+ xen/arch/x86/hvm/svm/nestedsvm.c |  8 +--
+ xen/arch/x86/hvm/svm/svm.c       |  1 +
+ xen/arch/x86/hvm/svm/vmcb.c      | 90 ++++++++++++++++++++++++++++++--
+ xen/arch/x86/hvm/svm/vmcb.h      |  2 +-
+ 4 files changed, 91 insertions(+), 10 deletions(-)
+
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index 81579370b8..bb3511622d 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+@@ -595,15 +595,15 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+     /* Cleanbits */
+     n2vmcb->cleanbits.raw = 0;
+ 
+-    rc = svm_vmcb_isvalid(__func__, ns_vmcb, v, true);
+-    if ( rc )
++    rc = svm_vmcb_isvalid(__func__, ns_vmcb, v);
++    if ( !rc )
+     {
+         gdprintk(XENLOG_ERR, "virtual vmcb invalid\n");
+         return NSVM_ERROR_VVMCB;
+     }
+ 
+-    rc = svm_vmcb_isvalid(__func__, n2vmcb, v, true);
+-    if ( rc )
++    rc = svm_vmcb_isvalid(__func__, n2vmcb, v);
++    if ( !rc )
+     {
+         gdprintk(XENLOG_ERR, "n2vmcb invalid\n");
+         return NSVM_ERROR_VMENTRY;
+diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+index 71e48351f2..ebdeb95dbf 100644
+--- a/xen/arch/x86/hvm/svm/svm.c
++++ b/xen/arch/x86/hvm/svm/svm.c
+@@ -2619,6 +2619,7 @@ void asmlinkage svm_vmexit_handler(void)
+ 
+     if ( unlikely(exit_reason == VMEXIT_INVALID) )
+     {
++        svm_vmcb_isvalid(__func__, vmcb, v);
+         gdprintk(XENLOG_ERR, "invalid VMCB state:\n");
+         svm_vmcb_dump(__func__, vmcb);
+         domain_crash(v->domain);
+diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
+index a6f09672a7..50bec50fc5 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.c
++++ b/xen/arch/x86/hvm/svm/vmcb.c
+@@ -327,20 +327,91 @@ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb)
+     svm_dump_sel("  TR", &vmcb->tr);
+ }
+ 
++static bool is_valid_injected_exception_vector(const struct vmcb_struct *vmcb,
++    uint8_t vmcb_injected_vector, const struct vcpu *v)
++{
++    switch ( vmcb_injected_vector )
++    {
++    case X86_EXC_DE:
++    case X86_EXC_DB:
++    case X86_EXC_UD:
++    case X86_EXC_NM:
++    case X86_EXC_DF:
++    case X86_EXC_TS:
++    case X86_EXC_NP:
++    case X86_EXC_SS:
++    case X86_EXC_GP:
++    case X86_EXC_PF:
++    case X86_EXC_MF:
++    case X86_EXC_AC:
++    case X86_EXC_MC:
++    case X86_EXC_XM:
++    case X86_EXC_SX:
++        return true;
++
++    /*
++     * Exception vectors 3 and 4 may not be injected into SEV-ES guests.
++     * If this is attempted, the VMRUN will fail with a VMEXIT_INVALID
++     * error code.
++     * See the APM Volume #2 15.35.8 (40332—Rev. 4.10—July 2026).
++     */
++    case X86_EXC_BP:
++        return !vmcb_get_sev_es(vmcb);
++
++    /*
++     * If the VMM attempts to inject an event that is impossible for the
++     * guest mode (e.g., a #BR exception when the guest is in 64-bit mode),
++     * the event injection will fail... VMRUN will immediately exit with
++     * VMEXIT_INVALID.
++     * See the APM Volume #2 15.20 (40332—Rev. 4.10—July 2026).
++     */
++    case X86_EXC_OF:
++        return ( (!(vmcb_get_efer(vmcb) & EFER_LMA) || !vmcb->cs.l) &&
++                 !vmcb_get_sev_es(vmcb) );
++
++    case X86_EXC_BR:
++        return !(vmcb_get_efer(vmcb) & EFER_LMA) || !vmcb->cs.l;
++
++    case X86_EXC_CP:
++    {
++        unsigned long guest_valid_cr4 = hvm_cr4_guest_valid_bits(v->domain);
++        return guest_valid_cr4 & X86_CR4_CET;
++    }
++
++    /*
++     * X86_EXC_HV vector is reserved for SNP guests use. Only allowed to be
++     * injected into VMSAs that execute with Restricted Injection.
++     * See the APM Volume #2 15.36 (40332—Rev. 4.10—July 2026).
++     */
++    case X86_EXC_HV:
++    default:
++        return false;
++    }
++}
++
+ bool svm_vmcb_isvalid(
+-    const char *from, const struct vmcb_struct *vmcb, const struct vcpu *v,
+-    bool verbose)
++    const char *from, const struct vmcb_struct *vmcb, const struct vcpu *v)
+ {
+-    bool ret = false; /* ok */
++    bool ret = true; /* ok */
+     unsigned long cr0 = vmcb_get_cr0(vmcb);
+     unsigned long cr3 = vmcb_get_cr3(vmcb);
+     unsigned long cr4 = vmcb_get_cr4(vmcb);
+     unsigned long valid;
+     uint64_t efer = vmcb_get_efer(vmcb);
++    unsigned int vmcb_injected_type = vmcb->event_inj.type;
++    unsigned int vmcb_injected_vector = vmcb->event_inj.vector;
++    /*
++     * Represent the nonreserved and accoridngly valid guest exception or
++     * interrupt type.
++     * See the APM Volume #2 15.20 (40332—Rev. 4.10—July 2026).
++     */
++    unsigned long vmcb_valid_event_inj_types_mask = (1 << X86_ET_INTR) |
++                                                    (1 << X86_ET_NMI) |
++                                                    (1 << X86_ET_HW_EXC) |
++                                                    (1 << X86_ET_SW_INT);
+ 
+ #define PRINTF(fmt, args...) do { \
+-    if ( !verbose ) return true; \
+-    ret = true; \
++    ret = false; \
+     printk(XENLOG_GUEST "%pv[%s]: " fmt, v, from, ## args); \
+ } while (0)
+ 
+@@ -399,6 +470,15 @@ bool svm_vmcb_isvalid(
+         PRINTF("eventinj: MBZ bits are set (%#"PRIx64")\n",
+                vmcb->event_inj.raw);
+ 
++    if ( !((1ul << vmcb_injected_type) & vmcb_valid_event_inj_types_mask) )
++        PRINTF("eventinj: Invalid Injected Event Type: %#x\n",
++               vmcb_injected_type);
++
++    if ( (vmcb_injected_type == X86_ET_HW_EXC) &&
++         !is_valid_injected_exception_vector(vmcb, vmcb_injected_vector, v) )
++        PRINTF("eventinj: Invalid exception type: %#x vector: %#x\n",
++               vmcb_injected_type, vmcb_injected_vector);
++
+ #undef PRINTF
+     return ret;
+ }
+diff --git a/xen/arch/x86/hvm/svm/vmcb.h b/xen/arch/x86/hvm/svm/vmcb.h
+index 3760f71a86..78ace19b27 100644
+--- a/xen/arch/x86/hvm/svm/vmcb.h
++++ b/xen/arch/x86/hvm/svm/vmcb.h
+@@ -565,7 +565,7 @@ void svm_destroy_vmcb(struct vcpu *v);
+ void setup_vmcb_dump(void);
+ void svm_vmcb_dump(const char *from, const struct vmcb_struct *vmcb);
+ bool svm_vmcb_isvalid(const char *from, const struct vmcb_struct *vmcb,
+-                      const struct vcpu *v, bool verbose);
++                      const struct vcpu *v);
+ 
+ /*
+  * VMCB accessor functions.
+-- 
+2.53.0
 
 
