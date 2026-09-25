@@ -4,43 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A6158C98325
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2026 15:34:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1434103.1654249 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7C34C98325
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2026 15:39:11 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1434116.1654258 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xA7w2-0006SR-9m; Fri, 25 Sep 2026 15:34:02 +0000
+	id 1xA80o-0007Cn-QM; Fri, 25 Sep 2026 15:38:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1434103.1654249; Fri, 25 Sep 2026 15:34:02 +0000
+Received: by outflank-mailman (output) from mailman id 1434116.1654258; Fri, 25 Sep 2026 15:38:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xA7w2-0006SK-76; Fri, 25 Sep 2026 15:34:02 +0000
-Received: by outflank-mailman (input) for mailman id 1434103;
- Fri, 25 Sep 2026 15:34:01 +0000
+	id 1xA80o-0007Cg-NV; Fri, 25 Sep 2026 15:38:58 +0000
+Received: by outflank-mailman (input) for mailman id 1434116;
+ Fri, 25 Sep 2026 15:38:57 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xA7w0-0006SE-RF
- for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 15:34:01 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jgross@suse.com>) id 1xA80m-0007Ca-RU
+ for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 15:38:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xA7vz-009I28-TG
- for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 17:33:59 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xA80m-000ccq-89
+ for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 17:38:56 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab6945f-2eae-0a2a0a5409dd-0a2a4506e79e-20
- for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 17:33:59 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ab69467-195a-0a2a45060019-4a7de14cd7ae-3
- for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 17:33:59 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-482f635552aso792727f8f.2
- for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 08:33:59 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-4887a30bcdbsm8084341f8f.2.2026.09.25.08.33.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 25 Sep 2026 08:33:58 -0700 (PDT)
+ (envelope-from <jgross@suse.com>)
+ id 6ab6958a-bab6-0a2a0a5309dd-0a2a450384f8-6
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 17:38:56 +0200
+Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6ab6958f-fae8-0a2a45030019-c387df83d256-3
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 17:38:55 +0200
+Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
+ [IPv6:2a07:de40:b281:104:10:150:64:97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 4CEB51F786;
+ Fri, 25 Sep 2026 15:38:47 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id DC0E113274;
+ Fri, 25 Sep 2026 15:38:46 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 5C4DK4aVtmoPOgAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 25 Sep 2026 15:38:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,157 +61,224 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790350439; x=1790955239; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=rC0/FChRcP6WDbGZE0Y4ocaflYft5ulQPnAvFiX7l2Q=;
-        b=n0yRXN0totprKiLdM0xhEoyqJqvDKThjQn4arlMymQOfaiXeBs17ilrbJ6/99ddZXT
-         BYjqvegLmykn08ZN95LLxSa/8tSJVTUbsfg0dk8SgGj3DKMbVLE4dBaDoH1ZdkkU3jKr
-         2DwK0mJvyUAwYW225TDPQ58+s2R7/SGa73DNHXFYtdy3qZR+KrR1/oNFqkFFVPnDaeM2
-         kvF8H/WNjGcBOdmNrlITpDWrCapyMWUU6c25QvuAd8lpsd41jNYw6moz3S6nNjWvGtpr
-         iy8y2uK9UvFyBYowGnUTaA6BBgOjdQxAAZbtY8an4HP28DZhcznutHA/k/sE1PT1yQDc
-         /iKw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790350439; x=1790955239;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=rC0/FChRcP6WDbGZE0Y4ocaflYft5ulQPnAvFiX7l2Q=;
-        b=YIAiSqSO+aZDANYmgFdWdRvbks9OiW2+qnG7qDqY291GCi1cg+pN4x9cCibDFK6GD8
-         90NtMvsJZbcjU8AQfoiXTYIY1Kbq5j9YRdOgfsM/HA4zf1PylB03j8tGhu9nbrku5hXk
-         PRqlvoNbSX9afgYBtmB31mRPB0IfChnE+gul8CUFa3+OkzWxjsy2AMVOvXokrdj7IDfW
-         iVJ8gGz045qgZk7D2RB3oo5UfngMNQG6gzJ/RbMQ+k7i5p2Qpv1DUngOQFmxnJjOXD0R
-         D/41gZs8pPpir0UsGFRQR3azl2zeDLLdMkDd/EgJdcUgASsPMh0oa0uzSkxdgeUAkGYO
-         kKrQ==
-X-Gm-Message-State: AFuF++kkGjjLY/gJS3tkBKnltB9UnrZacKwBazX0pYu/tH5SGOyvn6i1
-	izyvQm3qqQpEB0sp9ZhMG1amf3I0fkAr45d4T8oAjys2b/yQ9wvPNss4
-X-Gm-Gg: AYBFou09OTHecU2JfEmKaNLSaXuDDEYih3Keat0IxC76kLukmCL+ukPMCqqvwdOJCVW
-	2a0+T4VI96SU/QwbuCQwtPOReu/YEmgnJvjcU4IDt5Ph84/OXganFqIfTl/c91znXyamMhUAZGE
-	8jMlzy03PxGAqf1gmxg9EGoF239PPIL8HCohPbvkAsnPqV1qlju16o974rPAYJRsYneSnSSdsT6
-	pRZftagr7noK87lvDzeS5NNLJzid/qGl5LrTY/fFvmHXS9Dr5Ap1Uj97YcoNKAaOATLC3HAwFrL
-	DYkExxJ0AW1XDKwHj1Q5F3CBUL8Vu51wqN+HPLr5T5nbwX5LEeNl6DwK0U8Jkt2iJYJJ3F3XVgL
-	7RDOnjnZ92KzSNZLhNzjOYx/p1OjwRUs7HJAE1zf5xN1a+DvDVogEZTkvqHL1ibvCmE5ZRxhx0s
-	9+5FfyjYq8bFnqnTaxlrlofASbwV3AzqHxUAw3yTkNHYHJbFkNzN+Zj/xmtSsqJVv2ENfPsOJmX
-	vTCqAM0iqjWU+zt0lcouKHN1XZyORvRy5qIbRuZAZUwXW/ibw==
-X-Received: by 2002:a5d:5d08:0:b0:487:35c:6e6b with SMTP id ffacd0b85a97d-48872a5c2d7mr11484312f8f.12.1790350439174;
-        Fri, 25 Sep 2026 08:33:59 -0700 (PDT)
-Message-ID: <8ca6e469-862f-4373-8dc0-0d3b01f89c8a@gmail.com>
-Date: Fri, 25 Sep 2026 17:33:57 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1790350731; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=Q7E+UxpSbSVKgIapvkQ6Zr4zHvBWYuY5FDhOnkjFOJw=;
+	b=MkOKJdrYpbH20iat/Xwt07OOV6JJUWfoivW+A2sE9YajFmQBvCRt+KCwUloD8nLJnUXN+Y
+	bbWkr+9k9YeaEQhHVbilGKIHV3SeP7l6yYz9JYEUCYLebfRYoi5sxSPKwy0w3Qy7txzJd0
+	+iBwt+P52hbl1/SLq/7NbqK9GdtQznQ=
+Authentication-Results: smtp-out2.suse.de;
+	dkim=pass header.d=suse.com header.s=susede1 header.b=nBbbPTOb
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1790350727; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=Q7E+UxpSbSVKgIapvkQ6Zr4zHvBWYuY5FDhOnkjFOJw=;
+	b=nBbbPTObp3gDQllql9JNDucUxkPV0bICklGMESfcvIvwv11p30wy9q0CSIOZ0675fNUiIC
+	vt3vmxUHEtWKLNIAANblr/X0uDxHUaO6UjIaMTYlCcFv7VPLLTKawveb0N2L4WtD/gxSwl
+	hSKLEysG1diwQZKIXqPN+k08G8OFuDM=
+Message-ID: <3a2f0678-f81a-47cd-a47b-af9b439cedb3@suse.com>
+Date: Fri, 25 Sep 2026 17:38:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 36/39] xen/riscv: wake up a descheduled vCPU on a guest
- external interrupt
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
- Romain Caritey <Romain.Caritey@microchip.com>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <ed5a8b4d8137d9ce2f291956d19fbeaf61cce7a9.1787838835.git.oleksii.kurochko@gmail.com>
- <1790259947.8631fc262581453bbf619ec5b2062170.1a0d3cee79600072c4@vates.tech>
+Subject: Re: [PATCH] xen/gntdev: prevent private mappings from becoming
+ writable
+To: Abdifatah Suruur <suruurism@gmail.com>, xen-devel@lists.xenproject.org
+Cc: linux-kernel@vger.kernel.org
+References: <20260819084217.1577-1-suruurism@gmail.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1790259947.8631fc262581453bbf619ec5b2062170.1a0d3cee79600072c4@vates.tech>
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <20260819084217.1577-1-suruurism@gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------gD9bE6JzZy8Y0hi00bZF6K5L"
+X-Rspamd-Action: no action
+X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
+X-Rspamd-Queue-Id: 4CEB51F786
+X-Spamd-Result: default: False [-5.41 / 50.00];
+	BAYES_HAM(-3.00)[100.00%];
+	SIGNED_PGP(-2.00)[];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
+	R_DKIM_ALLOW(-0.20)[suse.com:s=susede1];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_BASE64_TEXT(0.10)[];
+	MIME_UNKNOWN(0.10)[application/pgp-keys];
+	MX_GOOD(-0.01)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	FREEMAIL_TO(0.00)[gmail.com,lists.xenproject.org];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:+,4:~,5:~];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	ARC_NA(0.00)[];
+	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	DKIM_TRACE(0.00)[suse.com:+];
+	HAS_ATTACHMENT(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	DNSWL_BLOCKED(0.00)[2a07:de40:b281:104:10:150:64:97:from,2a07:de40:b281:106:10:150:64:167:received];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	DWL_DNSWL_BLOCKED(0.00)[suse.com:dkim];
+	TO_DN_SOME(0.00)[];
+	RCPT_COUNT_THREE(0.00)[3];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:dkim,suse.com:email,suse.com:mid]
+X-purgate-ID: tlsNG-33051d/1790350736-758824E9-EB3DC459/35/110847
+X-purgate-type: clean
+X-purgate-size: 7015
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------gD9bE6JzZy8Y0hi00bZF6K5L
+Content-Type: multipart/mixed; boundary="------------gx0ezLrPrh60GfZgX60H2J7b";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Abdifatah Suruur <suruurism@gmail.com>, xen-devel@lists.xenproject.org
+Cc: linux-kernel@vger.kernel.org
+Message-ID: <3a2f0678-f81a-47cd-a47b-af9b439cedb3@suse.com>
+Subject: Re: [PATCH] xen/gntdev: prevent private mappings from becoming
+ writable
+References: <20260819084217.1577-1-suruurism@gmail.com>
+In-Reply-To: <20260819084217.1577-1-suruurism@gmail.com>
+
+--------------gx0ezLrPrh60GfZgX60H2J7b
+Content-Type: multipart/mixed; boundary="------------eA0awQggEX202hh8SIARYAow"
+
+--------------eA0awQggEX202hh8SIARYAow
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1790350439-1ECC577B-829624E6/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 3713
+Content-Transfer-Encoding: base64
 
+T24gMTkuMDguMjYgMTA6NDIsIEFiZGlmYXRhaCBTdXJ1dXIgd3JvdGU6DQo+IGdudGRldl9t
+bWFwKCkgcmVqZWN0cyB3cml0YWJsZSBwcml2YXRlIChub24tc2hhcmVkKSBtYXBwaW5ncyBv
+ZiBmb3JlaWduDQo+IGdyYW50IHBhZ2VzLCBiZWNhdXNlIGEgcHJpdmF0ZSB3cml0YWJsZSBt
+YXBwaW5nIHRha2VzIHRoZSBDT1cgcGF0aCBvbg0KPiBwYWdlcyB0aGF0IGhhdmUgbm8gcHJv
+cGVyIHN0cnVjdC1wYWdlIGJhY2tpbmcuICBIb3dldmVyLCBWTV9NQVlXUklURSBpcw0KPiBs
+ZWZ0IHNldCwgc28gdXNlcnNwYWNlIGNhbiBtYXAgdGhlIGdyYW50IHJlYWQtb25seSBhbmQg
+dGhlbiB1cGdyYWRlIHRoZQ0KPiBtYXBwaW5nIHRvIHdyaXRhYmxlIHdpdGggbXByb3RlY3Qo
+KSwgaGl0dGluZyB0aGUgc2FtZSBDT1cgcGF0aCB0aGUNCj4gY2hlY2sgd2FzIHdyaXR0ZW4g
+dG8gcHJldmVudC4NCj4gDQo+IENsZWFyIFZNX01BWVdSSVRFIGZvciBwcml2YXRlIG1hcHBp
+bmdzLCBhcyBpOTE1IGRvZXMgZm9yIGl0cyByZWFkLW9ubHkNCj4gb2JqZWN0cyBhbmQgYXMg
+Zml4ZWQgaW4gZHJtL3ZjNCAoQ1ZFLTIwMjYtNjg0NDUpIGFuZCBkcm0vcGFudGhvcg0KPiAo
+Q1ZFLTIwMjQtNTMwNzEpIGFuZCBwdHA6IHZtY2xvY2sgKGNvbW1pdA0KPiBhNWVkYWRiYWU1
+N2UyMjk4YTU2Y2Y3YTRlNzc0YTAyNzkwNWEzMzFmKS4NCj4gDQo+IEZpeGVzOiBhYjMxNTIz
+YzJmY2FjICgieGVuL2dudGRldjogYWxsb3cgdXNlcm1vZGUgdG8gbWFwIGdyYW50ZWQgcGFn
+ZXMiKQ0KPiBDYzogc3RhYmxlQHZnZXIua2VybmVsLm9yZw0KPiBTaWduZWQtb2ZmLWJ5OiBB
+YmRpZmF0YWggU3VydXVyIDxzdXJ1dXJpc21AZ21haWwuY29tPg0KDQpSZXZpZXdlZC1ieTog
+SnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPg0KDQoNCkp1ZXJnZW4NCg==
+--------------eA0awQggEX202hh8SIARYAow
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-On 9/24/26 4:25 PM, Baptiste Le Duc wrote:
->> While a vCPU is running, MSIs written to its h/w IMSIC guest interrupt
->> file are delivered straight to VS-mode. Once the vCPU is descheduled
->> nobody observes that file anymore, so a guest blocked on such an
->> interrupt would stay blocked until some unrelated event happens to
->> schedule it again.
->>
->> Let Xen observe the file in that window: on deschedule set the vCPU's
->> bit in HGEIE, which turns an interrupt pending in its VS-file into an
->> HS-level SGEI, and clear the bit again on schedule-in. HGEIP only
->> reports a file number, so to get from it back to a vCPU keep an
->> owners[] map per pCPU, filled by vgein_{assign,release} alongside the
->> VGEIN bitmap, and kick the vCPU it points at.
-> Nit: I would reword the last sentence to make it more clear:
-> 
->      HGEIP only reports an interrupt file number, so to find the vCPU to
->      kick, keep a per-pCPU owners[] array indexed by file number and
->      updated in vgein_assign()/vgein_release() together with the VGEIN
->      bitmap.
-> 
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
 
-LGTM: I will apply your suggestion.
+--------------eA0awQggEX202hh8SIARYAow--
 
->>   
->> +/*
->> + * Start to observe the interrupt file from HS-mode, the same way
->> + * imsic_ctxt_switch_from() does it for a vCPU which is switched out.
->> + *
->> + * The counterpart, clearing the bit of the interrupt file which is left
->> + * behind, is done by imsic_vsfile_local_read_clear(), which already runs on
->> + * the pCPU owning that file.
->> + */
->> +static void cf_check imsic_local_hgeie_set(void *data)
->> +{
->> +    const struct imsic_vsfile_data *idata = data;
->> +
->> +    csr_set(CSR_HGEIE, BIT(idata->hgei, UL));
->> +}
->> +
-> Sorry I'm a bit lost here, are you doing that for vCPUs migration?
-> Because in your commit message you only mentioned scheduled-out case
-> which needs to have Xen observing the descheduled vCPU to re-scheduled
-> it, but no other case that would need to have interrupt file observed is
-> explained
-> 
+--------------gx0ezLrPrh60GfZgX60H2J7b--
 
-Yes, this is for migration. A vCPU can be migrated while it isn't
-running: e.g. a blocked vCPU whose affinity is changed (it is moved by
-sched_unit_migrate_finish() and stays blocked on the new pCPU), or the
-vCPUs of a domain moved to another cpupool.
+--------------gD9bE6JzZy8Y0hi00bZF6K5L
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Before the migration, imsic_ctxt_switch_from() armed the HGEIE bit of
-the vCPU's interrupt file on the old pCPU. That file is released as part
-of the migration (and imsic_vsfile_local_read_clear() clears its HGEIE
-bit), so afterwards nothing observes the vCPU's interrupts anymore: the
-vCPU isn't switched in on the new pCPU, so imsic_ctxt_switch_from() 
-never arms HGEIE for the new file. A blocked vCPU waiting for an MSI 
-could then stay blocked until some unrelated event wakes it up, possibly 
-never.
+-----BEGIN PGP SIGNATURE-----
 
-Hence imsic_local_hgeie_set() arms HGEIE for the new interrupt file on
-the new pCPU. As HGEIP reflects the current state of the file, this also
-covers an interrupt which was already pending in the old file and got
-carried over: it raises an SGEI as soon as the bit is set.
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmq2lYYFAwAAAAAACgkQsN6d1ii/Ey/U
++wf+PIoLqIUl84NjR6o2F/4ariIjps5xrsLvpynPalwaaR6Yt5EiirO/m1+z41jI0E/BcDcmPSxS
+BQo91xWov9mB6HSk6XjEf1EyAIlBeLCp8EY7uGog+6cfuNUeYtbkQ4VRlKzi2jDxjEMhpXHbUiBJ
+GuTO6PRGIuLsHWjgENJNnSnwvFsYH8+SwVnxPmnrbo26ZjJ6l6EJnE57dNMxaTjZJuBnd9BRWcCn
+WdLQBZGCJtTTg+EMmsdK3fOom5iA2s2VBSJf1tlfeOShy0ZQKVgfWn5/QxmwtX0neyinXquqWBfB
+fZKS250tJNTQniIIdJdn9/Ui1SIcROS1aEUDIruUuA==
+=5oNC
+-----END PGP SIGNATURE-----
 
-For a vCPU which is about to run, this isn't needed, as 
-imsic_ctxt_switch_to() clears the bit anyway.
-
-I'll describe this case in the commit message:
-```
-The same applies to a vCPU which is migrated to another pCPU while it
-isn't running. Its old interrupt file is released during the migration,
-and the vCPU isn't switched in on the new pCPU until something wakes it
-up, so nothing would observe the new interrupt file. Hence arm HGEIE for
-the new interrupt file on the new pCPU in imsic_migrate_vcpu(), and
-clear the bit of the old one in imsic_vsfile_local_read_clear(), which
-already runs on the pCPU owning it.
-```
-
-Thanks!
-
-~ Oleksii
-
+--------------gD9bE6JzZy8Y0hi00bZF6K5L--
 
