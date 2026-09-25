@@ -4,47 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 62241C98324
-	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2026 09:22:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1433558.1654060 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 19F6EC9830D
+	for <xen-devel@archiver.kernel.org>; Fri, 25 Sep 2026 09:25:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1433586.1654068 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xA28V-0000pz-7y; Fri, 25 Sep 2026 09:22:31 +0000
+	id 1xA2Ax-0001gk-P2; Fri, 25 Sep 2026 09:25:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1433558.1654060; Fri, 25 Sep 2026 09:22:31 +0000
+Received: by outflank-mailman (output) from mailman id 1433586.1654068; Fri, 25 Sep 2026 09:25:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xA28V-0000ps-59; Fri, 25 Sep 2026 09:22:31 +0000
-Received: by outflank-mailman (input) for mailman id 1433558;
- Fri, 25 Sep 2026 09:22:30 +0000
+	id 1xA2Ax-0001gd-MM; Fri, 25 Sep 2026 09:25:03 +0000
+Received: by outflank-mailman (input) for mailman id 1433586;
+ Fri, 25 Sep 2026 09:25:02 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xA28T-0000p7-Uk
- for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 09:22:30 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1xA2Aw-0001gH-LN
+ for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 09:25:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xA28T-008DbT-BO
- for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 11:22:29 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0d7df725e00072c4@swg.vates.tech>)
- id 6ab63d55-bab6-0a2a0a5309dd-0a2a450ad48a-4
- for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 11:22:29 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0d7df725e00072c4@swg.vates.tech>)
- id 6ab63d55-f2d2-0a2a450a0019-b9ff1c23a845-3
- for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 11:22:29 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0d7df725e00072c4.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 25 Sep 2026 09:22:20 +0000
-Received: from [192.168.1.37] (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
- [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 9DD4881F57;
- Fri, 25 Sep 2026 11:22:19 +0200 (CEST)
+ id 1xA2Av-008EU5-EC
+ for xen-devel@lists.xenproject.org; Fri, 25 Sep 2026 11:25:01 +0200
+Received: from [10.42.69.3] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab63de1-bab6-0a2a0a5309dd-0a2a4503895a-30
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 11:25:01 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ab63dec-fae8-0a2a45030019-4a7de18dc2ba-3
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 11:25:00 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49b912e64ccso4430095e9.0
+ for <xen-devel@lists.xenproject.org>; Fri, 25 Sep 2026 02:25:00 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-4887a349fa1sm7895583f8f.8.2026.09.25.02.24.59
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 25 Sep 2026 02:25:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,192 +53,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=yMkgpgjoPO5Zwne+U57iuasthQXgXPsJZONhP6yrplI=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=J/Q0OyK0hm/EwCfqTOOS59m/o3A9NaMwsPxl3jv8j0j3Ba2MnQPqvSnOGxUGQd45jlSI6EfA4
- Jjtx4xZ/nirzWa3C3ZBmRuxhubIQfVzwNs/6f2j3CPuHTVYE1xADQJS64S4yu4ChtH6CXdMJKEA
- fgVHTnvpQcINawAaUwQAODTuQQ3DzEnS5uPhcizOhz+aHIGvo3zHl9iypo5ao4sRBtLX7sVe4PG
- vFBMwxktW0xYbg64FyLagZMKP1M5MCxqYn8Z15d4NdUeXAT2Rn/uUSqGWDGnlQpS62GIXnY8tH/
- u+SFwOqPt332wXuY3AWbv2vU427zQ3uZBoklo1v9DF1g==
-X-Zone-Loop: c956adb237c4396ec341af446ca9b513621539f8049b
-x-campaign-type: default
-x-transaction-id: c3b19550-973f-4d80-b0c6-5b32e5aa9db3
-x-swg-uid: 01-10f32111-2741-4796-aa4a-980fafcd225b
-X-Mailer: Sweego
-Message-ID:
- <1790328140.8631fc262581453bbf619ec5b2062170.1a0d7df725e00072c4@vates.tech>
-x-swg-bid: 1790328140.8631fc262581453bbf619ec5b2062170.1a0d7df725e00072c4
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1790328300; x=1790933100; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3z6ojXIO0zDL7LD8TnIZwg1SLz0VeRJlMP/I+aLZFxc=;
+        b=KkKo1GAgU9F3dx0opD/33l4FZHwAo1n9bQwde0CxmIIclkMfwugbEcqJKEwfvZSCxG
+         fkSfjPPAF06vomk/2mI4k99lWcVIk/fUhG8e1ds1w581LGHh14Xd/1gSUzrYDjJCnF+E
+         trOqSphFp5jVSljDjO+KQ/LZQ6kd4736ztbXoPmr+OCsnGuvx7wMEiTEke5ND5h2VTB8
+         mCKfGmizek5w1YKmwGKHq8DInTQZHXr950q+FCKz5DDo3lnena78BZZ9DS0190m4YQS2
+         evLXe1+dHPurs8f95NxI9P4hI9vQ7IQSnKtfL8+VEOrvGcvKYNzjFFwUOa2qj2GemYQj
+         w3EQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790328300; x=1790933100;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=3z6ojXIO0zDL7LD8TnIZwg1SLz0VeRJlMP/I+aLZFxc=;
+        b=ATLhDahya6O9SD93zH6Z3MLhLek39ETPGDWQD98bSo2/Jz4o35g8I7R7P0bZhWjuLQ
+         hn0BG5MILQIzSjVrDdal3xKrWDinsMjiK4u2hAoS1nOuptnzN19uoS4uIuT1rv16uzOC
+         gABMGQSlsm3XP6oOg651CQ+fCFUJqRzTm84bN/Qdu1EnacEMzjO+0ggD5Ib/sXrDez5/
+         L37AukKdlLzVuT2nSIfIJ01mnTcKkLApkcEwoNFwsWE8uL4d/PpkRP4uHkLSFJmStwFj
+         b2X8eEbGxMKLCY8X14Tq+ziS5VURjoAd8Tv4PxVWwCSx3IfEHbZrGPW2yMdTR+2GXkOg
+         GVPw==
+X-Forwarded-Encrypted: i=1; AKwUvBx3Yv2hBxfqkfyxb+fj97jX4pO//6fKZcul40r5tjh6rENagT8yxI5Op3pBQ2YxKN7kUQfwy8GhzsQ=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kbre1TrYHIKWGfSm4GvDviFPT3dOj8U3On2vJfUwC5JrQrpyQZ
+	y54Tj3DFcEIzrNKYy0Kp5ZvLP64psWAjR3jweP8fKmEjchY1RiH9VhkEHt0KRsrtqA==
+X-Gm-Gg: AYBFou3IryNjYt6QSE/ZqOgPNJ7pjcgDn8+FDtjr0qDKZziKSzbbG/TPpsO4PfHmUIQ
+	ywE6xTROkrcgW1NRFXYNUHd4R9jk2Wwg883lfelxAECZZdAgQo84m5Ck2nUy6yP/5UlpNcFmhAP
+	d3Dl4qC3grZJv6lSGWUDos/yySXXXa24lffS3WTMQxBFEnt46rG3TMi/PDy5y3INvtKT9CmWczQ
+	FX7N1drlRrsmKl9Hya9RvbyJI/Iv4L1zZtJ1bEamNuWiRUMajqkdo9jcaEkQlJodMCDh5HnBTOz
+	m4xEQiNMtzI2jr6kawExaEjLR5v8UKRTmXi6b91jez7LzechpMqS4an1O1MOc+mpEX2o+Wby8jC
+	IKeIvxvmug5wUqMAYW8l1i9VAGrlOyoLb7IY5l0tVPIH5PwC1boj+avAexdFUCGLLAJPn7BW585
+	5Yvio6TPCWvrE9YRc5u+GaK02MR5Fa26zec1qDjIe0CuiYweDp53xYxZ1iQ7Xtm/Ol8JYszf+HR
+	j5AW2wCboO5vR53AYGT/NFN6dWgtF4oDrGJr6wRmoaJc6mAARZXD8zwXkNYSA==
+X-Received: by 2002:a05:600c:4e93:b0:49c:f89b:f82 with SMTP id 5b1f17b1804b1-49fe66d2d2fmr95436075e9.12.1790328300374;
+        Fri, 25 Sep 2026 02:25:00 -0700 (PDT)
+Message-ID: <480139b0-faa4-4425-af4b-4d884b0d3112@suse.com>
+Date: Fri, 25 Sep 2026 11:24:59 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v2 38/39] xen/riscv: implement continue_new_vcpu()
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, 
- Romain Caritey <Romain.Caritey@microchip.com>, 
- Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- Zheng Zhang <zhangzheng@iscas.ac.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <a282887cc08cd9b05f59d46cab9377915e83c61d.1787838835.git.oleksii.kurochko@gmail.com>
-References: <cover.1787838835.git.oleksii.kurochko@gmail.com>
- <a282887cc08cd9b05f59d46cab9377915e83c61d.1787838835.git.oleksii.kurochko@gmail.com>
-Date: Fri, 25 Sep 2026 11:22:11 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790328132; l=4790;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=RgdpzRTfxh87IHWx3Zc6PKiXzVKdXezeQqS5BeLk8Gc=;
- b=SoSho3XMk1U+ppWucrSnCeuPSk2MRZg1FgiXnQtWx9oY+wKFfcW0q6IEDunREEfjGLWuNEVFf
- 6fhx94CJ4vQBw/KnBvn/Mze5+8UHhjTxYmiDnMvtWUafb88wzYtMvzI
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1790328139847
-X-purgate-ID: tlsNG-4011c0/1790328149-53CD3CFC-A299344D/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4790
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2.1 5/5] tools: expose admission control toggle via xl
+ sched-rtds
+To: =?UTF-8?B?RnVya2FuIMOHYWzEscWfa2Fu?= <frn1furkan10@gmail.com>
+Cc: andrew.cooper3@citrix.com, roger@xenproject.org,
+ anthony.perard@vates.tech, =?UTF-8?B?SsO8cmdlbiBHcm/Dnw==?=
+ <jgross@suse.com>, xen-devel@lists.xenproject.org
+References: <20260918080935.35498-6-frn1furkan10@gmail.com>
+ <20260918104106.53530-1-frn1furkan10@gmail.com>
+ <c959d6e8-3eba-46a8-a486-20a76f7438a7@suse.com>
+ <d5e3edc6-2bf8-4527-a341-0946d6292c93@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <d5e3edc6-2bf8-4527-a341-0946d6292c93@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1790328301-754844E9-A0139A7F/0/0
+X-purgate-type: clean
+X-purgate-size: 843
 
-> continue_new_vcpu() is the arch hook invoked the first time a freshly
-> created vCPU is scheduled. Implement both cases it has to cover:
->  - for the idle vCPU, switch to its own stack and jump to idle_loop();
->  - for a guest vCPU, restore hstatus and enter the guest through the new
->    return_to_new_vcpu() path in entry.S, which loads sepc, passes the
->    hart id in a0 and the DTB address in a1 as expected by the RISC-V
->    boot protocol, sets sstatus.SPP and executes sret.
-
-
+On 25.09.2026 11:13, Furkan Çalışkan wrote:
+> On 9/18/26 13:45, Jürgen Groß wrote:
+>> On 18.09.26 12:41, Furkan Caliskan wrote:
+>>> Wire the per-cpupool admission-control switch through libxl
+>>> to xl sched-rtds, and document it.
+>>>
+>>> Add -s/--schedparam to list or set pool-wide RTDS scheduler
+>>> parameters, and -a/--admission to enable or disable admission
+>>> control for a cpupool ("-c pool -s -a 0/1").
+>>>
+>>> Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
+>>
+>> Reviewed-by: Juergen Gross <jgross@suse.com>
 > 
-> Interrupts have to stay disabled across the restore. The trap entry
-> logic implicitly clears hstatus.SPV, so an interrupt taken between the
-> write of hstatus and sret would make sret return to HS-mode instead of
-> VS-mode, and restoring SPV afterwards is non-trivial. Instead interrupts
-> are simply kept off and sstatus.SPIE is set, so that SIE is restored from
+> Just noticed that patches 1-4 have been merged, but patch 5 
+> (which already has a Reviewed-by from Juergen) doesn't seem to have 
+> made it in. Could you let me know if it needs anything further, 
+> or if it just got missed?
 
+It's still waiting for a maintainer ack, afaict.
 
-> SPIE once sret has been executed. Also, it follows what hardware will do
-> with real CPU which is also started with interrupts disabled.
-
-
-> 
-> Introduce get_cpu_info() and reset_stack_and_jump() in asm/current.h,
-> needed by the above. get_cpu_info() is a macro rather than a static
-> inline because asm/current.h is pulled in by <xen/percpu.h> before
-
-
-> this_cpu() is defined and before <xen/sched.h> completes struct vcpu.
-> 
-> idle_loop() is added as a stub on purpose; its real implementation will
-> come separately later.
-> 
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->
-> diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-> index 2918196822..0782148b72 100644
-> --- a/xen/arch/riscv/domain.c
-> +++ b/xen/arch/riscv/domain.c
-> @@ -8,10 +8,13 @@
->  #include <xen/smp.h>
->  #include <xen/vmap.h>
->  
-> +#include <asm/aia.h>
-> +#include <asm/aplic.h>
->  #include <asm/bitops.h>
->  #include <asm/cpufeature.h>
->  #include <asm/csr.h>
->  #include <asm/current.h>
-> +#include <asm/imsic.h>
->  #include <asm/intc.h>
->  #include <asm/mmio.h>
->  #include <asm/riscv_encoding.h>
-
-
-> @@ -140,9 +143,43 @@ static void vcpu_csr_init(struct vcpu *v)
->      v->arch.hie = MIP_SGEIP;
->  }
->  
-> +static void schedule_tail(struct vcpu *prev);
-> +static void noreturn idle_loop(void);
-> +void noreturn return_to_new_vcpu(void);
-
-
-> +
->  static void continue_new_vcpu(struct vcpu *prev)
->  {
-> -    BUG_ON("unimplemented\n");
-> +    schedule_tail(prev);
-> +
-> +    if ( is_idle_vcpu(current) )
-> +        reset_stack_and_jump(idle_loop);
-> +    else
-
-
-> +    {
-> +        /*
-> +         * During a context switch to a new vCPU, interrupts must be disabled
-> +         * to guarantee that the vCPU's CSR state can be safely restored into
-> +         * the hart without being clobbered by an interrupt trap.
-> +         *
-> +         * For example, when return_to_new_vcpu() finishes, it executes sret.
-> +         * At that point, the hart checks hstatus.SPV=1 and sstatus.SPP=1 in
-> +         * order to return from HS-mode into VS-mode. If an interrupt were to
-> +         * arrive before sret, the trap entry logic would implicitly clear
-> +         * hstatus.SPV to 0. Correctly restoring it afterwards is non-trivial,
-> +         * and if left as 0, sret would incorrectly return to HS-mode instead
-> +         * of VS-mode.
-> +         *
-> +         * To avoid this, interrupts are kept disabled during the restore.
-> +         * Additionally, setting sstatus.SPIE=1 ensures that after sret is
-> +         * executed (as sstatus.SIE will be loaded from SPIE), HS-mode will
-> +         * continue to receive interrupts normally.
-> +         */
-> +        local_irq_disable();
-> +        csr_set(CSR_SSTATUS, SSTATUS_SPIE);
-> +
-> +        csr_write(CSR_HSTATUS, vcpu_guest_cpu_user_regs(current)->hstatus);
-> +
-> +        reset_stack_and_jump(return_to_new_vcpu);
-
-
-> +    }
->  }
->  
->  int arch_vcpu_create(struct vcpu *v)
-> @@ -551,3 +588,8 @@ static void __init __maybe_unused build_assertions(void)
->       */
->      BUILD_BUG_ON(offsetof(struct cpu_info, guest_cpu_user_regs));
->  }
-> +
-> +static void noreturn idle_loop(void)
-> +{
-> +    BUG_ON("unimplemented");
-> +}
-> diff --git a/xen/arch/riscv/entry.S b/xen/arch/riscv/entry.S
-> index 331446a238..bf1843dcea 100644
-> --- a/xen/arch/riscv/entry.S
-> +++ b/xen/arch/riscv/entry.S
-> @@ -143,3 +143,26 @@ FUNC(__context_switch)
->  
->          ret
->  END(__context_switch)
-> +
-> +/* t0 is used as a temporary reg and is clobbered to oblivion */
-> +FUNC(return_to_new_vcpu)
-> +        /* Swap tp with sscratch */
-> +        csrrw   tp, CSR_SSCRATCH, tp
-Why do we need a swap? After it, tp will be equal to zero, but we won't
-use it. Couldn't we do a basic csrw instead?
-
--- 
-Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Jan
 
