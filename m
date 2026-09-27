@@ -4,39 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E6F1C9830E
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2026 02:39:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1435632.1654439 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8B1FEC98328
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2026 05:19:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1435413.1654454 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xB1GN-0001P6-33; Mon, 28 Sep 2026 02:38:43 +0000
+	id 1xB3lX-0007Id-04; Mon, 28 Sep 2026 05:19:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1435632.1654439; Mon, 28 Sep 2026 02:38:43 +0000
+Received: by outflank-mailman (output) from mailman id 1435413.1654454; Mon, 28 Sep 2026 05:19:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xB1GM-0001NJ-U4; Mon, 28 Sep 2026 02:38:42 +0000
-Received: by outflank-mailman (input) for mailman id 1435632;
- Mon, 28 Sep 2026 02:38:42 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xB3lW-0007IW-Sr; Mon, 28 Sep 2026 05:19:02 +0000
+Received: by outflank-mailman (input) for mailman id 1435413;
+ Sun, 27 Sep 2026 12:16:32 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <zhangzheng@iscas.ac.cn>) id 1xB1GM-0001Md-46
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 02:38:42 +0000
+ (envelope-from <chao.liu@processmission.com>) id 1xAno0-0004n4-EN
+ for xen-devel@lists.xenproject.org; Sun, 27 Sep 2026 12:16:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xB1GL-007jIb-8Y
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 04:38:41 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xAnnz-00DCOX-KY
+ for xen-devel@lists.xenproject.org; Sun, 27 Sep 2026 14:16:31 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6ab9d2f0-bab6-0a2a0a5309dd-0a2a450cd010-16
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 04:38:41 +0200
-Received: from [159.226.251.21] (helo=cstnet.cn)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6ab9d32e-f479-0a2a450c0019-9fe2fb15b492-3
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 04:38:40 +0200
-Received: from iscas-ws (unknown [36.110.52.2])
- by APP-01 (Coremail) with SMTP id qwCowAAH3fAl07lqgMQ+CQ--.323S3;
- Mon, 28 Sep 2026 10:38:31 +0800 (CST)
+ (envelope-from <chao.liu@processmission.com>)
+ id 6ab9087b-e002-0a2a0a5209dd-0a2a45099d00-30
+ for <xen-devel@lists.xenproject.org>; Sun, 27 Sep 2026 14:16:31 +0200
+Received: from [40.107.75.103]
+ (helo=OS8PR02CU002.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <chao.liu@processmission.com>)
+ id 6ab9091c-be1a-0a2a45090019-286b4b6759d2-3
+ for <xen-devel@lists.xenproject.org>; Sun, 27 Sep 2026 14:16:30 +0200
+Received: from KUXPR02MB9336.apcprd02.prod.outlook.com (2603:1096:d10:a3::10)
+ by TY0PR02MB5621.apcprd02.prod.outlook.com (2603:1096:400:1ba::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.23; Sun, 27 Sep
+ 2026 12:16:24 +0000
+Received: from KUXPR02MB9336.apcprd02.prod.outlook.com
+ ([fe80::1451:cb49:7950:b10d]) by KUXPR02MB9336.apcprd02.prod.outlook.com
+ ([fe80::1451:cb49:7950:b10d%5]) with mapi id 15.21.0451.022; Sun, 27 Sep 2026
+ 12:16:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,481 +55,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Zhang Zheng <zhangzheng@iscas.ac.cn>
-To: xen-devel@lists.xenproject.org
-Cc: Zhang Zheng <zhangzheng@iscas.ac.cn>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v1 1/1] xen/riscv: replace SBI early console with 8250 UART
-Date: Mon, 28 Sep 2026 10:38:53 +0800
-Message-ID: <20260928023857.1030884-2-zhangzheng@iscas.ac.cn>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20260928023857.1030884-1-zhangzheng@iscas.ac.cn>
-References: <20260928023857.1030884-1-zhangzheng@iscas.ac.cn>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=processmission.com header.i="@processmission.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ZlcbDLmt17PL1KHG1mLhtvJvDBgF8GuIRZw5s6AJbPpQ6rqBqmeQJ86OlvGF7LgcZk5MR7AkE3I6DwC17s2YUa/mynEqeLab7EcgLqo/qcgfKYxHaIgfRT8uEu6rbxMqgTX9YBMKt5P8N/6KNBnh08BhmL6z3Ka+aCDn9nvVny+J3hg5YoZUrQvCzoVJ71Y84bYNtVKycYFkBbQUt13BTpJcs66JMohjCZBgvBg/xVW5TS87zufXu6FyhloK93lwZ1J4ogC9uW+dDXAsq6ZnFZiy4keWwRkMtBay9u4BKD0rcQVsOA8ScHWPlHC5pYqzHpxZ1lGp8U/G9LiLopNi2Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lCV1RTrFz8GKOyerhNCUZ1uRjqnC+Qtf8kNFF4KLkM8=;
+ b=Yxi+K0OQgz21QeNXU5/uiEtVnOY3A99zplYHy2KREeERTYoR8BOmQDsbWqUiB4kTKJmysYV3RohIt5vgBAHcRUCsPWWuvpGhtPUDngxv995E8WP7pMFhSaG2bMdTkFzPYwPu58FB/J899hH/oP2878CL4zEkiKSiByGSa887i0mxgJZClPtZGA2HtRuyNWQBzHAZTZwo8pAj1KHjhPG37w9XTtbHd/pc9arGAnHDX339xKqne86EPMjTrLwJ2s/ukrteWkoKL7QDmsbOJDjueXYnLMJbU7I4BrJKLItHKjaB+ChTL43oni6CTdZeWqJbiaaeJDLTQ8mjfJJavJ77ww==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=processmission.com; dmarc=pass action=none
+ header.from=processmission.com; dkim=pass header.d=processmission.com;
+ arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=processmission.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lCV1RTrFz8GKOyerhNCUZ1uRjqnC+Qtf8kNFF4KLkM8=;
+ b=jsnTeSxOMHGNEnFZOsJset9CvkM0KKyP0hrfuEmSxmtpXwRH27QAKSLhE8ku2DA8hvzfRKF8yoFpwYefpCvekuuN+yyt8+B9yBD0WswOgg7AhwtxXhBmVHQBHVbM8vY/zEY9jzApQ9Ye/aRCZUd/XD6Bkt+xJkpRirlQi0BYEUsXXHw1muHB25PFTtdYxRNzSSga2VT274MOPeG7/v29yHuaxIsPegbzRt5F8QIBvNAbfhcV9H7fCfz0AZT8CBPJ8Us1yPzmI78Fk78XVRfg2aaB3NVPQx6QMByxJ2pBVOCknYsRYsQOfRs7/TD2yALMWKqku/hhfdVkfgsAXY3uWA==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=processmission.com;
+Date: Sun, 27 Sep 2026 20:16:15 +0800
+From: Chao Liu <chao.liu@processmission.com>
+To: Yonggang Luo <luoyonggang@gmail.com>
+Cc: qemu-devel@nongnu.org, Cornelia Huck <cohuck@redhat.com>, 
+	xen-devel@lists.xenproject.org, Igor Mammedov <imammedo@redhat.com>, 
+	Alistair Francis <alistair.francis@wdc.com>, Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+	Peter Xu <peterx@redhat.com>, Eric Blake <eblake@redhat.com>, 
+	Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+	Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, Peter Maydell <peter.maydell@linaro.org>, 
+	Sunil V L <sunilvl@ventanamicro.com>, Stefan Hajnoczi <stefanha@redhat.com>, 
+	Palmer Dabbelt <palmer@dabbelt.com>, Fabiano Rosas <farosas@suse.de>, 
+	Xianglai Li <lixianglai@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+	Max Filippov <jcmvbkbc@gmail.com>, qemu-ppc@nongnu.org, Zhao Liu <zhao1.liu@intel.com>, 
+	Paolo Bonzini <pbonzini@redhat.com>, Bibo Mao <maobibo@loongson.cn>, 
+	"Michael S. Tsirkin" <mst@redhat.com>, Laurent Vivier <laurent@vivier.eu>, 
+	David Hildenbrand <david@kernel.org>, Richard Henderson <richard.henderson@linaro.org>, 
+	Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>, Nicholas Piggin <npiggin@gmail.com>, qemu-riscv@nongnu.org, 
+	kvm@vger.kernel.org, "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+	Alex =?utf-8?Q?Benn=C3=A9e?= <alex.bennee@linaro.org>, Stafford Horne <shorne@gmail.com>, 
+	=?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>, Markus Armbruster <armbru@redhat.com>, 
+	Weiwei Li <liwei1518@gmail.com>, Song Gao <17746591750@163.com>, qemu-arm@nongnu.org, 
+	qemu-s390x@nongnu.org, Brian Cain <brian.cain@oss.qualcomm.com>
+Subject: Re: [PATCH v3 034/114] target/riscv: Include migration/vmstate.h
+ instead of migration/cpu.h in machine.c
+Message-ID: <arkILubl2mARqX39@MacBook-Pro-4.local>
+References: <20260923131635.1894-1-luoyonggang@gmail.com>
+ <20260923131635.1894-35-luoyonggang@gmail.com>
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260923131635.1894-35-luoyonggang@gmail.com>
+X-ClientProxiedBy: PH8PR02CA0037.namprd02.prod.outlook.com
+ (2603:10b6:510:2da::35) To TYNPR02MB9351.apcprd02.prod.outlook.com
+ (2603:1096:405:3d0::15)
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qwCowAAH3fAl07lqgMQ+CQ--.323S3
-X-Coremail-Antispam: 1UD129KBjvAXoW3uw1xWw4rWF15Zw1DXFWkJFb_yoW8JF43to
-	ZYvrs2qw1Sqr43ur4fuw13tay8XrsagrsrX342yF45ZFy8Jr1rJF1vgwn0v34jyF1xtryr
-	GFW7uanxZF4DXFn5n29KB7ZKAUJUUUU8529EdanIXcx71UUUUU7v73VFW2AGmfu7bjvjm3
-	AaLaJ3UjIYCTnIWjp_UUUO27AC8VAFwI0_Wr0E3s1l1xkIjI8I6I8E6xAIw20EY4v20xva
-	j40_Wr0E3s1l1IIY67AEw4v_Jr0_Jr4l82xGYIkIc2x26280x7IE14v26r18M28IrcIa0x
-	kI8VCY1x0267AKxVW8JVW5JwA2ocxC64kIII0Yj41l84x0c7CEw4AK67xGY2AK021l84AC
-	jcxK6xIIjxv20xvE14v26F1j6w1UM28EF7xvwVC0I7IYx2IY6xkF7I0E14v26F4j6r4UJw
-	A2z4x0Y4vEx4A2jsIE14v26F4UJVW0owA2z4x0Y4vEx4A2jsIEc7CjxVAFwI0_GcCE3s1l
-	e2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IEw4CE5I8CrVC2j2WlYx0E2Ix0cI
-	8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26r4j6F4UMcvjeVCFs4IE7xkEbVWUJVW8JwAC
-	jcxG0xvY0x0EwIxGrwACjI8F5VA0II8E6IAqYI8I648v4I1lFIxGxcIEc7CjxVA2Y2ka0x
-	kIwI1lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_
-	Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1V
-	AY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAI
-	cVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42
-	IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIev
-	Ja73UjIFyTuYvjfUb3ktUUUUU
-X-Originating-IP: [36.110.52.2]
-X-CM-SenderInfo: x2kd0wx2kh0w46lvutnvoduhdfq/
-X-purgate-ID: tlsNG-d25034/1790563121-032D8A5B-D724822E/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: KUXPR02MB9336:EE_|TY0PR02MB5621:EE_
+X-MS-Office365-Filtering-Correlation-Id: 6ef0dbda-0881-4109-31c1-08df1c9124da
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|7416014|376014|23010399003|56012099006|4143699003|10067099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	dCG4AKz2TSOTXpPh6fozxrva9ygcWuOKW/crKVHDWSwr39AP5566wSSN58bmSi15BkV5kV9BM9KfczKvHDFPtHyTtxdsBXaRZTPr93Bj6Gowt88bWszXbjGol1ZbdzbGebh8wccTKx9xN99yZs7pNw2/UnCiH4+uvKoGxDFyzmffpihn9QvmfOA/4m3F1JbV/kuARXbjsn6e88qKSwPlf/YGyqPUCLjMyawxGs87JdwNac6Ee9nhZhyOwyzbgSK0BGun3rtENQrB8k6SAw8EQdUtboXczwCNboyPfjD4XgJRfneEEDFPM1Cx9S32WmkeStwcuSvUdpDfxcyYlbqdVunwFOARnQKYG0/gLRwCYTJoRhIePB9xRGyR2h6BI2+0/KEVkVpak5cSYYMQ1xAL2ljkOpRRWYcwIUOz9M+bgqvcfxzRFlSRMmQJCddN1kyjIhV52x4ZA5PllfLxt+cmm/LKKHPUFaOaqqKX6dRoM2BoSIte3/9vyLJ+ZgABNjNHCaPpF6brZzojZayjnqSIirCTC7hDHKhl/ii9z3NeDa7KHP1RUnr0pIaT9UeppeiMOsftT7u4mWaQyx5vpLxC8u2pPPUWXqaTfCnkuhoTPvaMaxsYrgmTFEJfzNtk90THWzl5ulxc7U+og9TEXqlZn5dCq1Ojd1gl5Vysnj4M5Bw=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:KUXPR02MB9336.apcprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(7416014)(376014)(23010399003)(56012099006)(4143699003)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?qejOmHBXqVGkbPtY5Y1Romh1xWU9/TwSZESQ7imsqDLCW8JYZdYkSeVzOPQP?=
+ =?us-ascii?Q?X6GJ8fmMMIqNdwb9l4VcMMh7lW1u4JUW90T/j25ZpYUKWb+uUhhm1nS6DBaO?=
+ =?us-ascii?Q?NAyjlXmluSGekULt6kx9z0/jvPb6C65gBoewRUBfWfp3v+y9yqWzN/+xhe28?=
+ =?us-ascii?Q?9RkhokK664uu+VQo3iMIu1HOg0JXhFjpJLpWDQjc2cP1ySocH1cRPOW8/NPi?=
+ =?us-ascii?Q?Olk8evkjjJm2pB00770x94dVo1A1tB6AunUV4PFiaV1pEaOrnN4/b9l49N90?=
+ =?us-ascii?Q?gEhQO6zC1SY8lJImpbd6GISQ79FtdH/mLaGHcRo/4CxbnLtqpxNO+wR7F6eZ?=
+ =?us-ascii?Q?lLHAY5zJcQKo+PGAxMw10tuFJm35e7uOiRKHGlYcyfzxMx/bx+XtKNGUCeyu?=
+ =?us-ascii?Q?y+IZB3Bn6L9+BdueSYusqR/tE2YfqzL0DjpGd7H/pDakib4NFEucmL77esWF?=
+ =?us-ascii?Q?wGO9y34E0qhd48/U1M4HtlIc0v/nkebe4oI9xOuIn/BiLGTTJayBzTusEr3V?=
+ =?us-ascii?Q?U8pNTz0klqu6tX2xX+51MqGTbBRSdt87h87y+M676Bz3bR3JLbja5cnAC4Ve?=
+ =?us-ascii?Q?d7klEoZyRNSwUIjcVDQa4jXZ4w0Yd3ySkaA5K22iIW1ha6AIvdexmuM83DeY?=
+ =?us-ascii?Q?4QrIny48T28Wk2qHVkbSV7n8AP+wLSQ2kjLGNGl9eNj1wMBEaeZkRw87O/70?=
+ =?us-ascii?Q?TxBBUVE8DEGJhFE8CYqdoj8Tn/ZXWbrm3IsH+Fc6vbcv217nuj9aceeZsYMH?=
+ =?us-ascii?Q?xAsnVnCmbrA4PdQ1iQi9f0Cu9GTPV+M9XdBX8eBIuGWtv2mUJE2NK+nCdnnA?=
+ =?us-ascii?Q?acSHCSIcxtC8z9h0MWCLOsh7RWtlKV4gKT12ApMsyUflPXBL+W3sv4C6elLH?=
+ =?us-ascii?Q?ZwO8tXM/MXoyHGUHvQf70mG2x1ZjkL0LuzF6ep2u9GfiYBa8oaGMzaug/VKA?=
+ =?us-ascii?Q?ZLWbj+mIbqaOYlx5BhXhw9cQ8+N+0tv+nYPxKDTuXEFnsq2zBgAWvIuE0Ne9?=
+ =?us-ascii?Q?cx6j0XmU947y1e1B5CVgSwQZAY8x5wfODdnWjSLWH85QR3vfTilcMGc+nvSh?=
+ =?us-ascii?Q?p03hFqw8QWDHVlXQw9uSYgXxn4CDHCLgqL8sJOvujyLn10zynunHEKf/pKVD?=
+ =?us-ascii?Q?O2YLr8H8g5cxTuZElhFsUREeLqgR7SrZsalf+tN3py/TJpXImemdSjKsB9kA?=
+ =?us-ascii?Q?1Pc5I0GBfSFSjbitjR36KJ53a1QiM8a0hvYAqaMOK0LpdLDM2Q76TzVAN7dG?=
+ =?us-ascii?Q?IkFVCuWzF3G/+Gf415s4MW0SEQe9hEnn8PnLpShm7myk4Yz0ZeyXVZsLt3s5?=
+ =?us-ascii?Q?pz8bZq44zNKEOlw7Oa1SRBcAbqPo4FWGM9nS0EBNgbcR6rf2v/fh+o1RzYrE?=
+ =?us-ascii?Q?DpGkYHhNf5265uZcJH42V4fUrsmwTI4PMbot5Xkr4a6XENVq9bKZbIE3CWyj?=
+ =?us-ascii?Q?8TQN5tJ6k9ITm0QcvLP+pW41NMvNjf+jQpQ7AgogSgrGI5r75VDQKVzILKgd?=
+ =?us-ascii?Q?aNM6DqHUYxx88WGLSD6gNxrK5N1AYNhoWtQy/R+rKa9fiSK6oRiY8XVFfhIq?=
+ =?us-ascii?Q?bWBgXHg8TewIjkMoacLMD/Ol9Ifxw4Me/Jx0b01Az69qbAvPXYy7oVL4M34o?=
+ =?us-ascii?Q?ApxtG9K9QJDrHCEs+EuFvPFrvnPxse6S7zYRmZ7zkPrKw46SC1hz3L1c7mkD?=
+ =?us-ascii?Q?55+pEX9o3ZuKxALx2oip0rfDXH6VO8U7q7kMwG1HizlHIA5mnS2EAUcOAkWA?=
+ =?us-ascii?Q?wZx/myneZImYiLd7Wc4Eke5IXTI64Ok=3D?=
+X-OriginatorOrg: processmission.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6ef0dbda-0881-4109-31c1-08df1c9124da
+X-MS-Exchange-CrossTenant-AuthSource: TYNPR02MB9351.apcprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Sep 2026 12:16:24.7182
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: e0544bf7-9765-4630-ab69-0b266dc2169c
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: vtvF4kxj6VDk5sgTClhfm5d8ogz+XPtmmmEur/dKG7JmlAf421JNUAfqGtMvuna4CP9d2A3OB1uCLy1sLNrafpLOcAYuUieXpYRn87toEaw=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY0PR02MB5621
+X-purgate-ID: tlsNG-bad1c0/1790511391-3A8D9034-9105C33F/0/0
 X-purgate-type: clean
-X-purgate-size: 13612
+X-purgate-size: 831
 
-As noted by the TODO, the legacy SBI console extension is planned
-for deprecation. Replace it with direct access to UART MMIO.
+On Wed, Sep 23, 2026 at 09:15:08PM +0800, Yonggang Luo wrote:
+> already uses fixed-width VMSTATE_* macros and does not need TARGET_LONG_BITS UINTTL helpers.
+Please wrap the commit message at 76 columns.
 
-Signed-off-by: Zhang Zheng <zhangzheng@iscas.ac.cn>
----
- xen/arch/riscv/Kconfig.debug              | 53 ++++++++++++++++++++--
- xen/arch/riscv/configs/tiny64_defconfig   |  2 +
- xen/arch/riscv/early_printk.c             | 37 +++++++---------
- xen/arch/riscv/include/asm/early_printk.h | 12 +++++
- xen/arch/riscv/include/asm/fixmap.h       |  6 ++-
- xen/arch/riscv/include/asm/sbi.h          |  7 ---
- xen/arch/riscv/mm.c                       | 41 +++++++++++++----
- xen/arch/riscv/riscv64/Makefile           |  1 +
- xen/arch/riscv/riscv64/debug-8250.inc     | 51 +++++++++++++++++++++
- xen/arch/riscv/riscv64/debug.S            | 54 +++++++++++++++++++++++
- xen/arch/riscv/sbi.c                      |  5 ---
- 11 files changed, 223 insertions(+), 46 deletions(-)
- create mode 100644 xen/arch/riscv/riscv64/debug-8250.inc
- create mode 100644 xen/arch/riscv/riscv64/debug.S
-
-diff --git a/xen/arch/riscv/Kconfig.debug b/xen/arch/riscv/Kconfig.debug
-index 608c9ff832..51536e7151 100644
---- a/xen/arch/riscv/Kconfig.debug
-+++ b/xen/arch/riscv/Kconfig.debug
-@@ -1,5 +1,50 @@
-+choice
-+	bool "Early printk"
-+	optional
-+	help
-+	  You may want to enable early printk if you are debugging code
-+	  that executes before the console is initialized.
-+
-+	  Note that selecting this option will limit Xen to a single UART
-+	  definition. Attempting to boot the Xen image on a different
-+	  platform will not work, so this option should not be enabled
-+	  for Xen images that are intended to be portable.
-+
-+	  Choose one of the UART drivers for early printk, then specify
-+	  parameters such as the base address.
-+
-+	config EARLY_UART_CHOICE_8250
-+		select EARLY_UART_8250
-+		bool "Early printk via 8250 UART"
-+		help
-+		  Say Y here if you wish early printk to direct its output
-+		  to an already configured 8250-compatible UART.
-+
-+endchoice
-+
-+config EARLY_UART_8250
-+	select EARLY_PRINTK
-+	bool
-+
- config EARLY_PRINTK
--    bool "Enable early printk"
--    default DEBUG
--    help
--      Enables early printk debug messages
-+	bool
-+
-+config EARLY_UART_BASE_ADDRESS
-+	depends on EARLY_UART_8250
-+	hex "Early printk, physical base address of debug UART"
-+
-+config EARLY_UART_8250_REG_SHIFT
-+	depends on EARLY_UART_8250
-+	int "Early printk, left-shift to apply to the register offsets within the 8250 UART"
-+	default 0
-+	range 0 4
-+	help
-+	  EARLY_UART_8250_REG_SHIFT is, optionally, the left-shift to
-+	  apply to the register offsets within the UART with early
-+	  printk.
-+
-+	  Default to 0.
-+
-+config EARLY_PRINTK_INC
-+	string
-+	default "debug-8250.inc" if EARLY_UART_8250
-diff --git a/xen/arch/riscv/configs/tiny64_defconfig b/xen/arch/riscv/configs/tiny64_defconfig
-index 2399f7b918..438db66551 100644
---- a/xen/arch/riscv/configs/tiny64_defconfig
-+++ b/xen/arch/riscv/configs/tiny64_defconfig
-@@ -10,3 +10,5 @@ CONFIG_DEBUG=y
- CONFIG_DEBUG_INFO=y
- CONFIG_EXPERT=y
- CONFIG_QEMU_PLATFORM=y
-+CONFIG_EARLY_UART_CHOICE_8250=y
-+CONFIG_EARLY_UART_BASE_ADDRESS=0x10000000
-diff --git a/xen/arch/riscv/early_printk.c b/xen/arch/riscv/early_printk.c
-index 634141354c..bb2dc6c719 100644
---- a/xen/arch/riscv/early_printk.c
-+++ b/xen/arch/riscv/early_printk.c
-@@ -1,42 +1,37 @@
- /* SPDX-License-Identifier: GPL-2.0-only */
- /*
-- * RISC-V early printk using SBI
-+ * RISC-V early printk
-  *
-  * Copyright (C) 2021 Bobby Eshleman <bobbyeshleman@gmail.com>
-  */
--#include <asm/early_printk.h>
--#include <asm/sbi.h>
-+#include <xen/early_printk.h>
- 
--/*
-- * When the MMU is off during early boot, any C function called has to
-- * use PC-relative rather than absolute address because the physical address
-- * may not match the virtual address.
-- *
-- * To guarantee PC-relative address cmodel=medany should be used
-- */
- #ifndef __riscv_cmodel_medany
- #error "early_*() can be called from head.S with MMU-off"
- #endif
- 
--/*
-- * TODO:
-- *   sbi_console_putchar is already planned for deprecation
-- *   so it should be reworked to use UART directly.
--*/
-+void early_putch(char c);
-+void early_flush(void);
-+
- void early_puts(const char *s, size_t nr)
- {
-     while ( nr-- > 0 )
-     {
--        sbi_console_putchar(*s);
-+        if ( *s == '\n' )
-+            early_putch('\r');
-+        early_putch(*s);
-         s++;
-     }
-+
-+    early_flush();
- }
- 
- void early_printk(const char *str)
- {
--    while ( *str )
--    {
--        early_puts(str, 1);
--        str++;
--    }
-+    const char *end = str;
-+
-+    while ( *end )
-+        end++;
-+
-+    early_puts(str, end - str);
- }
-diff --git a/xen/arch/riscv/include/asm/early_printk.h b/xen/arch/riscv/include/asm/early_printk.h
-index 2750045bdd..e4c95ed7b4 100644
---- a/xen/arch/riscv/include/asm/early_printk.h
-+++ b/xen/arch/riscv/include/asm/early_printk.h
-@@ -3,6 +3,7 @@
- #ifndef ASM__RISCV__EARLY_PRINTK_H
- #define ASM__RISCV__EARLY_PRINTK_H
- 
-+#ifndef __ASSEMBLER__
- #include <xen/early_printk.h>
- 
- #ifdef CONFIG_EARLY_PRINTK
-@@ -10,5 +11,16 @@ void early_printk(const char *str);
- #else
- static inline void early_printk(const char *s) {};
- #endif
-+#endif
-+
-+#ifdef CONFIG_EARLY_PRINTK
-+
-+#include <xen/page-size.h>
-+#include <asm/fixmap.h>
-+
-+/* need to add the uart address offset in page to the fixmap address */
-+#define EARLY_UART_VIRTUAL_ADDRESS \
-+    (FIXMAP_ADDR(FIX_CONSOLE) + (CONFIG_EARLY_UART_BASE_ADDRESS & ~PAGE_MASK))
-+#endif
- 
- #endif /* ASM__RISCV__EARLY_PRINTK_H */
-diff --git a/xen/arch/riscv/include/asm/fixmap.h b/xen/arch/riscv/include/asm/fixmap.h
-index 085d135c15..66a78bb19d 100644
---- a/xen/arch/riscv/include/asm/fixmap.h
-+++ b/xen/arch/riscv/include/asm/fixmap.h
-@@ -17,8 +17,12 @@
- #define FIX_PMAP_BEGIN (0) /* Start of PMAP */
- #define FIX_PMAP_END (FIX_PMAP_BEGIN + NUM_FIX_PMAP - 1) /* End of PMAP */
- #define FIX_MISC (FIX_PMAP_END + 1)  /* Ephemeral mappings of hardware */
--
-+#ifdef CONFIG_EARLY_PRINTK
-+#define FIX_CONSOLE (FIX_MISC + 1) /* Early UART mapping */
-+#define FIX_LAST FIX_CONSOLE
-+#else
- #define FIX_LAST FIX_MISC
-+#endif
- 
- #define FIXADDR_START FIXMAP_ADDR(0)
- #define FIXADDR_TOP FIXMAP_ADDR(FIX_LAST + 1)
-diff --git a/xen/arch/riscv/include/asm/sbi.h b/xen/arch/riscv/include/asm/sbi.h
-index 1952868e96..d043fc7632 100644
---- a/xen/arch/riscv/include/asm/sbi.h
-+++ b/xen/arch/riscv/include/asm/sbi.h
-@@ -75,13 +75,6 @@ struct sbiret sbi_ecall(unsigned long ext, unsigned long fid,
-                         unsigned long arg2, unsigned long arg3,
-                         unsigned long arg4, unsigned long arg5);
- 
--/**
-- * Writes given character to the console device.
-- *
-- * @param ch The data to be written to the console.
-- */
--void sbi_console_putchar(int ch);
--
- void sbi_shutdown(void);
- 
- /*
-diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index 610d111945..8480e61de2 100644
---- a/xen/arch/riscv/mm.c
-+++ b/xen/arch/riscv/mm.c
-@@ -76,6 +76,27 @@ stage1_pgtbl_nonroot[PGTBL_INITIAL_COUNT * PAGETABLE_ENTRIES];
- pte_t __section(".bss.page_aligned") __aligned(PAGE_SIZE)
- xen_fixmap[PAGETABLE_ENTRIES];
- 
-+#ifdef CONFIG_EARLY_PRINTK
-+static void __init setup_early_uart_mapping(void)
-+{
-+    pte_t *pgtbl = stage1_pgtbl_root;
-+    unsigned int i;
-+
-+    /* Add UART to the fixmap table. */
-+    xen_fixmap[pt_index(0, EARLY_UART_VIRTUAL_ADDRESS)] =
-+        paddr_to_pte(CONFIG_EARLY_UART_BASE_ADDRESS & PAGE_MASK,
-+                     PAGE_HYPERVISOR_RW);
-+
-+    for ( i = HYP_PT_ROOT_LEVEL; i > 1; i-- )
-+        pgtbl = (pte_t *)pte_to_paddr(
-+            pgtbl[pt_index(i, FIXMAP_ADDR(0))]);
-+
-+    /* Map fixmap into the initial page tables. */
-+    pgtbl[pt_index(1, FIXMAP_ADDR(0))] =
-+        paddr_to_pte((paddr_t)xen_fixmap, PTE_TABLE);
-+}
-+#endif
-+
- #define HANDLE_PGTBL(curr_lvl_num)                                          \
-     index = pt_index(curr_lvl_num, page_addr);                              \
-     if ( pte_is_valid(pgtbl[index]) )                                       \
-@@ -243,18 +264,18 @@ void __init setup_fixmap_mappings(void)
-         pte = &pte[pt_index(i, FIXMAP_ADDR(0))];
-     }
- 
--    BUG_ON(pte_is_valid(*pte));
--
--    tmp = paddr_to_pte(virt_to_maddr(&xen_fixmap), PTE_TABLE);
--    write_pte(pte, tmp);
-+    if ( pte_is_valid(*pte) )
-+        BUG_ON(pte_to_paddr(*pte) != virt_to_maddr(xen_fixmap));
-+    else
-+    {
-+        tmp = paddr_to_pte(virt_to_maddr(xen_fixmap), PTE_TABLE);
-+        write_pte(pte, tmp);
-+    }
- 
-     RISCV_FENCE(rw, rw);
-     sfence_vma();
- 
--    /*
--     * We only need the zeroeth table allocated, but not the PTEs set, because
--     * set_fixmap() will set them on the fly.
--     */
-+    /* Remaining fixmap entries are populated on demand by set_fixmap(). */
- }
- 
- /*
-@@ -314,6 +335,10 @@ void __init setup_initial_pagetables(void)
-                           linker_end,
-                           load_start);
- 
-+#ifdef CONFIG_EARLY_PRINTK
-+    setup_early_uart_mapping();
-+#endif
-+
-     if ( linker_start == load_start )
-         return;
- 
-diff --git a/xen/arch/riscv/riscv64/Makefile b/xen/arch/riscv/riscv64/Makefile
-index 3340058c08..a35968ead7 100644
---- a/xen/arch/riscv/riscv64/Makefile
-+++ b/xen/arch/riscv/riscv64/Makefile
-@@ -1 +1,2 @@
-+obj-$(CONFIG_EARLY_PRINTK) += debug.o
- obj-y += head.o
-diff --git a/xen/arch/riscv/riscv64/debug-8250.inc b/xen/arch/riscv/riscv64/debug-8250.inc
-new file mode 100644
-index 0000000000..5918e74cbd
---- /dev/null
-+++ b/xen/arch/riscv/riscv64/debug-8250.inc
-@@ -0,0 +1,51 @@
-+/* SPDX-License-Identifier: GPL-2.0-only
-+ *
-+ * xen/arch/riscv/riscv64/debug-8250.inc
-+ *
-+ * 8250 specific debug code
-+ *
-+ * Copyright (c) 2013 Applied Micro.
-+ * Copyright (c) 2026 Zheng Zhang.
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License, or
-+ * (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ */
-+
-+#include <xen/8250-uart.h>
-+
-+/*
-+ * UART wait UART to be ready to transmit
-+ * xb: register which contains the UART base address
-+ * c: scratch register
-+ */
-+.macro early_uart_ready xb c
-+1:
-+        lbu     \c, (UART_LSR << CONFIG_EARLY_UART_8250_REG_SHIFT)(\xb)
-+        andi    \c, \c, UART_LSR_THRE
-+        xori    \c, \c, UART_LSR_THRE
-+        bnez    \c, 1b
-+.endm
-+
-+/*
-+ * UART transmit character
-+ * xb: register which contains the UART base address
-+ * wt: register which contains the character to transmit
-+ */
-+.macro early_uart_transmit xb wt
-+        /* UART_THR transmit holding */
-+        sb      \wt, (UART_THR << CONFIG_EARLY_UART_8250_REG_SHIFT)(\xb)
-+.endm
-+
-+/*
-+ * Local variables:
-+ * mode: ASM
-+ * indent-tabs-mode: nil
-+ * End:
-+ */
-diff --git a/xen/arch/riscv/riscv64/debug.S b/xen/arch/riscv/riscv64/debug.S
-new file mode 100644
-index 0000000000..4e7465e1d8
---- /dev/null
-+++ b/xen/arch/riscv/riscv64/debug.S
-@@ -0,0 +1,54 @@
-+/* SPDX-License-Identifier: GPL-2.0-only
-+ *
-+ * xen/arch/riscv/riscv64/debug.S
-+ *
-+ * Wrapper for early printk
-+ *
-+ * Julien Grall <julien.grall@linaro.org>
-+ * Copyright (c) 2013 Linaro Limited.
-+ * Copyright (c) 2026 Zheng Zhang.
-+ *
-+ * This program is free software; you can redistribute it and/or modify
-+ * it under the terms of the GNU General Public License as published by
-+ * the Free Software Foundation; either version 2 of the License, or
-+ * (at your option) any later version.
-+ *
-+ * This program is distributed in the hope that it will be useful,
-+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
-+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-+ * GNU General Public License for more details.
-+ */
-+
-+#include <asm/asm.h>
-+#include <asm/early_printk.h>
-+#include <asm/riscv_encoding.h>
-+
-+#include CONFIG_EARLY_PRINTK_INC
-+
-+.macro early_uart_base bs, c
-+        li      \bs, CONFIG_EARLY_UART_BASE_ADDRESS
-+        csrr    \c, CSR_SATP
-+        beqz    \c, 1f
-+        li      \bs, EARLY_UART_VIRTUAL_ADDRESS
-+1:
-+.endm
-+
-+/* Print the character in a0. */
-+FUNC(early_putch)
-+        early_uart_base t0, t1
-+        early_uart_ready t0, t1
-+        andi    a0, a0, 0xff
-+        early_uart_transmit t0, a0
-+        ret
-+END(early_putch)
-+
-+/* Wait until both the transmit FIFO and shift register are empty. */
-+FUNC(early_flush)
-+        early_uart_base t0, t1
-+1:
-+        lbu     t1, (UART_LSR << CONFIG_EARLY_UART_8250_REG_SHIFT)(t0)
-+        andi    t1, t1, (UART_LSR_THRE | UART_LSR_TEMT)
-+        xori    t1, t1, (UART_LSR_THRE | UART_LSR_TEMT)
-+        bnez    t1, 1b
-+        ret
-+END(early_flush)
-diff --git a/xen/arch/riscv/sbi.c b/xen/arch/riscv/sbi.c
-index 3576e26033..bca3ebdca5 100644
---- a/xen/arch/riscv/sbi.c
-+++ b/xen/arch/riscv/sbi.c
-@@ -72,11 +72,6 @@ static int sbi_err_map_xen_errno(int err)
-     };
- }
- 
--void sbi_console_putchar(int ch)
--{
--    sbi_ecall(SBI_EXT_0_1_CONSOLE_PUTCHAR, 0, ch, 0, 0, 0, 0, 0);
--}
--
- void sbi_shutdown(void)
- {
-     sbi_ecall(SBI_EXT_0_1_SHUTDOWN, 0, 0, 0, 0, 0, 0, 0);
--- 
-2.54.0
-
+> 
+> Signed-off-by: Yonggang Luo <luoyonggang@gmail.com>
+> ---
+>  target/riscv/machine.c | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
+> 
+> diff --git a/target/riscv/machine.c b/target/riscv/machine.c
+> index bf203bffcef..00805745fbf 100644
+> --- a/target/riscv/machine.c
+> +++ b/target/riscv/machine.c
+> @@ -21,7 +21,7 @@
+>  #include "qemu/error-report.h"
+>  #include "system/kvm.h"
+>  #include "system/tcg.h"
+> -#include "migration/cpu.h"
+> +#include "migration/vmstate.h"
+>  #include "exec/icount.h"
+>  #include "target/riscv/tcg/debug.h"
+>  #ifdef CONFIG_KVM
+> -- 
+> 2.52.0.windows.1
+> 
 
