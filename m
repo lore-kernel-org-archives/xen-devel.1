@@ -4,39 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30231C9833F
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2026 12:53:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436008.1654766 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D094FCA5FA2
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2026 13:21:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436024.1654774 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBAqj-0000zj-GD; Mon, 28 Sep 2026 12:52:53 +0000
+	id 1xBBIF-0005P6-LJ; Mon, 28 Sep 2026 13:21:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436008.1654766; Mon, 28 Sep 2026 12:52:53 +0000
+Received: by outflank-mailman (output) from mailman id 1436024.1654774; Mon, 28 Sep 2026 13:21:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBAqj-0000zc-Br; Mon, 28 Sep 2026 12:52:53 +0000
-Received: by outflank-mailman (input) for mailman id 1436008;
- Mon, 28 Sep 2026 12:52:52 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <zhangzheng@iscas.ac.cn>) id 1xBAqi-0000zU-IR
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 12:52:52 +0000
+	id 1xBBIF-0005Oz-IG; Mon, 28 Sep 2026 13:21:19 +0000
+Received: by outflank-mailman (input) for mailman id 1436024;
+ Mon, 28 Sep 2026 13:21:18 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0e82d3cf5000b504@swg.vates.tech>)
+ id 1xBBIE-0005Os-CR
+ for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 13:21:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBAqh-004QVP-Vb
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 14:52:51 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6aba6319-bab6-0a2a0a5309dd-0a2a45068454-16
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 14:52:50 +0200
-Received: from [159.226.251.25] (helo=cstnet.cn)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6aba631f-195a-0a2a45060019-9fe2fb19898c-3
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 14:52:49 +0200
-Received: from iscas-ws (unknown [36.110.52.2])
- by APP-05 (Coremail) with SMTP id zQCowAC36EIYY7pqBZ2UCQ--.12125S2;
- Mon, 28 Sep 2026 20:52:41 +0800 (CST)
+ id 1xBBID-00GLgA-8W
+ for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 15:21:17 +0200
+Received: from [10.42.69.5] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0e82d3cf5000b504@swg.vates.tech>)
+ id 6aba69cc-2eae-0a2a0a5409dd-0a2a4505c88a-8
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 15:21:17 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0e82d3cf5000b504@swg.vates.tech>)
+ id 6aba69cc-4cb1-0a2a45050019-b9ff1c2295f3-3
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 15:21:17 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a0e82d3cf5000b504.006 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 28 Sep 2026 13:21:13 +0000
+Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 1F59982838;
+ Mon, 28 Sep 2026 15:21:13 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,151 +58,220 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Date: Mon, 28 Sep 2026 20:53:13 +0800
-From: Zhang Zheng <zhangzheng@iscas.ac.cn>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, 
-	Alistair Francis <alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, 
-	Baptiste Le Duc <baptiste.le-duc@vates.tech>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v1 0/1] [RISC-V] replace SBI early console with 8250 UART
-Message-ID: <arpi6szfHazQg07N@iscas-ws>
-References: <20260928023857.1030884-1-zhangzheng@iscas.ac.cn>
- <5919f1f2-e24c-4b0e-a7dd-126ac6fbe38f@gmail.com>
- <aronfcYWtc1CHQgH@iscas-ws>
- <3152e70f-881f-4a58-9b2d-df661887dc80@gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=dhLRlieuAI+L0j4lzXyZc74iq21W1XyxqAGnlA8C30g=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=iByqBzwYNoZBYMXlwxCp/l1485j252imSOgNzgFzWL1YnbyKGvvgi9oeJox44NN4MtsCb97SK
+ 0XEFDeXhy2rayjfOAMbgAokhY4XS5X4mghk/DFeEdnCwZ2v0AsCwaxtUl8CoR/UwIypDqBjl0q0
+ 7OpJB11npKH9P/Gu8d5FHqDXHIrOGXyRNH/lHPYvrtmhNBHJWIYMm2zaOvGRbwXfETuJoLkJdvg
+ K7cBja1EiFHur3sw/cNki3yse70RYgTXrfeQeoMkuci22ol33aLfEMAqNpmTIPWiHQTGeE4wD+J
+ pYxxGkNBFkyruGWLGi1haEBA8H8qXgIfn3QrpaRohRog==
+X-Zone-Loop: ed8fdf3b49db407ddf138a3e0ae7e496d437d730ff0e
+x-campaign-type: default
+x-transaction-id: e2bcc86f-30a8-41bc-b4eb-46023a37d0d0
+x-swg-uid: 01-e8882fc0-9b24-45a9-9bb3-5b8132b8d017
+X-Mailer: Sweego
+Message-ID:
+ <1790601674.8631fc262581453bbf619ec5b2062170.1a0e82d3cf5000b504@vates.tech>
+x-swg-bid: 1790601674.8631fc262581453bbf619ec5b2062170.1a0e82d3cf5000b504
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <3152e70f-881f-4a58-9b2d-df661887dc80@gmail.com>
-X-CM-TRANSID:zQCowAC36EIYY7pqBZ2UCQ--.12125S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxGrWftr4xGryUJF17uF1rZwb_yoWrZryfpF
-	W8C3ZYkr45Jr1ak34Sg3WUurWak3ykGa4UXasxCrWYgrZ0vrWUAry3t34F9asrXF15Xry0
-	kF10gry3W3WUA37anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvvb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4
-	A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IE
-	w4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26F4j6r4UJw
-	Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l
-	c7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr
-	1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE
-	14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7
-	IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E
-	87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73Uj
-	IFyTuYvjxUqFdyDUUUU
-X-Originating-IP: [36.110.52.2]
-X-CM-SenderInfo: x2kd0wx2kh0w46lvutnvoduhdfq/
-X-purgate-ID: tlsNG-16d1c6/1790599970-F70C777B-54046F54/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v2 3/6] xen/riscv: make Svpbmt no longer a required
+ extension
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ xen-devel@lists.xenproject.org, Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <9ea9edfc-be76-4507-8b71-a483daa9e7d5@suse.com>
+References: <1789032657.8631fc262581453bbf619ec5b2062170.1a08aa7f23b000c4f3@vates.tech>
+ <1789032898.8631fc262581453bbf619ec5b2062170.1a08aab9fe1000c4f3@vates.tech>
+ <9ea9edfc-be76-4507-8b71-a483daa9e7d5@suse.com>
+Date: Mon, 28 Sep 2026 15:21:07 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790601667; l=6427;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=joA3DSXJl4XNFVm+42bhVLW8aPXgNJ4DOxK+o7LXT0o=;
+ b=PcHLGM5R21Gt19d32KUDzLMw2Cig8DyjT7A8ZrX1cJe4NtZGsv1Z7wJMkcS6W/uIVlsQ5Rf4n
+ 2oOQpO2mQ2hBDczAwO46rVWNT3K9p7Cz6uvwYRSkKfyLMN8sDGJRSyf
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1790601673311
+X-purgate-ID: tlsNG-c201ff/1790601677-24F1F2A1-9B730ECA/0/0
 X-purgate-type: clean
-X-purgate-size: 4937
+X-purgate-size: 6429
 
-On Mon, Sep 28, 2026 at 11:31:06AM +0200, Oleksii Kurochko wrote:
-> 
-> 
-> On 9/28/26 10:40 AM, Zhang Zheng wrote:
-> > On Mon, Sep 28, 2026 at 09:38:14AM +0200, Oleksii Kurochko wrote:
-> > > 
-> > > 
-> > > On 9/28/26 4:38 AM, Zhang Zheng wrote:
-> > > > The legacy SBI console extension is planned for deprecation. Replace the
-> > > > RISC-V early printk backend with direct access to 8250 UART MMIO.
-> > > 
-> > > Won't it better just to start to add support of newer SBI? It provides
-> > > pretty good support + faster as it supports passing of string instead of one
-> > > char.
-> > > 
-> > 
-> > Using the newer SBI DBCN extension would indeed result in a smaller change. At
-> > the time, I mainly followed the direction suggested by the TODO and referred
-> > directly to the arm64 implementation, from which most of the code was adapted.
-> 
-> I think TODO was written at that way because I missed DBCN (or it wasn't
-> ratified at that moment). Considering that it is ratified now ...
-> 
-> > 
-> > > Also, I think it will lead to lesser changes.
-> > > 
-> > 
-> > If falling back to SBI console putchar is acceptable, DBCN should work
-> > well here.
-> 
-> ... I prefer to use SBI functionality (in the current case DBCN) as maximum
-> as possible so if there is no any reason (and I don't see at the moment it)
-> which doesn't allow us to use DBCN here, I would prefer to use DBCN.
-> 
-
-Given that Xen on RISC-V is expected to target relatively recent RVA23 hardware,
-which should ship with a recent version of OpenSBI, I think you are right that
-there is no real need to provide a fallback here.
-
-> If you still want to in the way suggested by TODO then some parts which are
-> common between Arm and RISC-V should be moved to common instead of
-> introducing them in RISC-V specific folder.
+On 2026-09-21 17:57:05+02:00, Jan Beulich wrote:
+> On 10.09.2026 11:34, Baptiste Le Duc wrote:
 >
+> > Without the Svpbmt extension, memory attributes (such as cacheability and
+> > ordering) are strictly tied to physical address ranges and enforced by the
+> > hardware's Physical Memory Attributes (PMA) checker.
+> >
+> > In this configuration, supervisor software relies on the platform's memory
+> > map:
+> >     - peripheral device registers (MMIO) are physically mapped into
+> >       hardware-defined I/O regions (which are implicitly non-cacheable and
+> >       strongly-ordered)
+> >     - regular RAM is mapped as cacheable main memory.
+> >
+> > S-mode paging can safely map these physical ranges without specifying
+> > page-based memory types in the PTEs, as the hardware MMU and PMA pipeline
+> > will correctly bypass caches for MMIO accesses and use caches for RAM
+> > accesses, based on the target physical address.
+>
+> Provided firmware got absolutely everything right.
 
-I also tried to make the current patch as minimal as possible, but it would
-still end up touching quite a few places.
+Agreed, but that dependency isn't new. Even with Svpbmt, all RAM mappings
+(and most of Xen's own) use PBMT=PMA, so we already rely on the PMAs being
+correct there; Svpbmt only lets us override them for ioremap() and
+p2m_mmio_direct_io. I'll say this explicitly in v3 rather than claiming
+it's "safe" unconditionally.
 
-> Let me know which approach you are going to follow. If the current one you
-> already introduced then I will start to review it, if you will go SBI-way
-> then I prefer to wait for your v2.
-> 
-> ~ Oleksii
-> 
+> > Furthermore, on platforms that either feature fully hardware-coherent DMA
+> > or don't expose non-coherent DMA agents to the OS, page-level programmatic
+> > cache control via Svpbmt is not required, making it safe to boot and run
+> > when Svpbmt is absent.
+>
+> Yet a fully coherent platform should also be possible to somehow identify?
 
-I misunderstood the TODO comment, I thought that would be the preferred
-implementation. Therefore, I will switch to using DBCN and send a v2.
+Yes, through the device tree: a device (or one of its parents) can be
+marked "dma-noncoherent", with DMA being coherent by default, which is also
+how Linux handles it on RISC-V (ARCH_DMA_DEFAULT_COHERENT).
 
-Best regards,
+Xen itself doesn't drive any DMA-capable device on RISC-V at this point, so
+the only affected devices are those passed through to guests. In v3 I'm
+adding a check in arch_handle_passthrough_prop() which warns when a device
+marked "dma-noncoherent" is assigned while Svpbmt is unavailable. I went
+for a warning rather than a refusal, like Linux does (WARN_TAINT()) for a
+non-coherent device it has no means to handle.
 
-Zhang
+> > Drop Svpbmt from required_extensions. Introduce svpbmt_enabled, a
+> > __ro_after_init flag computed once in init_csr_masks() from ISA
+> > availability and the henvcfg.PBMTE bit. Xen cannot read menvcfg.PBMTE
+> > directly, since menvcfg is M-mode-only and unreadable from HS-mode, but the
+> > spec guarantees henvcfg.PBMTE reads as zero whenever menvcfg.PBMTE is zero,
+> > so checking henvcfg.PBMTE alone is sufficient.
+>
+> I don't understand this logic. If menvcfg.PBMTE is non-zero, we know
+> nothing about (or from) henvcfg.PBMTE's setting.
 
-> > > > 
-> > > > This also addresses truncated output observed on SpacemiT K3 when
-> > > > switching from early printk to dtuart. Direct UART access lets early
-> > > > printk flush the UART after each string before the dtuart driver takes
-> > > > over and clear it's FIFO, which cause the truncated uart output.>
-> > > > The truncated uart looks like:
-> > > > 
-> > > >     (XEN) Command line: dtuart=/soc/uart@d4017000:115200/921600 console=dtuart sync_console
-> > > >     (XEN) Domain heap initialised
-> > > >     (XEN) Booting using Device Tree
-> > > >     (XEN) /home/zz/dev/git/xen_stuff/xen/xen/arch/riscv/cpufeature.c:710: SSTC detected; supported for Xen use, but not for guests
-> > > >     (XEN) Looking for dtuart at "/soc/uart@d40 __  __            _  _    ____  _____                    _        _     _
-> > > >      \ \/ /___ _ __   | || |  |___ \|___ /    _   _ _ __  ___| |_ __ _| |__ | | ___
-> > > >       \  // _ \ '_ \  | || |_   __) | |_ \ __| | | | '_ \/ __| __/ _` | '_ \| |/ _ \
-> > > >       /  \  __/ | | | |__   _| / __/ ___) |__| |_| | | | \__ \ || (_| | |_) | |  __/
-> > > >      /_/\_\___|_| |_|    |_|(_)_____|____/    \__,_|_| |_|___/\__\__,_|_.__/|_|\___|
-> > > > 
-> > > >     (XEN) Xen version 4.23-unstable (zz@) (riscv64-linux-gnu-gcc (GCC) 15.1.0) debug=y ubsan=y Sat Sep 26 14:50:31 CST 2026
-> > > >     (XEN) Latest ChangeSet: Fri Sep 18 10:11:27 2026 +0800 git:77544a69ea
-> > > > 
-> > > > Zheng Zhang (1):
-> > > >     xen/riscv: replace SBI early console with 8250 UAR
-> > > > 
-> > > >    xen/arch/riscv/Kconfig.debug              | 53 ++++++++++++++++++++--
-> > > >    xen/arch/riscv/configs/tiny64_defconfig   |  2 +
-> > > >    xen/arch/riscv/early_printk.c             | 37 +++++++---------
-> > > >    xen/arch/riscv/include/asm/early_printk.h | 12 +++++
-> > > >    xen/arch/riscv/include/asm/fixmap.h       |  6 ++-
-> > > >    xen/arch/riscv/include/asm/sbi.h          |  7 ---
-> > > >    xen/arch/riscv/mm.c                       | 41 +++++++++++++----
-> > > >    xen/arch/riscv/riscv64/Makefile           |  1 +
-> > > >    xen/arch/riscv/riscv64/debug-8250.inc     | 51 +++++++++++++++++++++
-> > > >    xen/arch/riscv/riscv64/debug.S            | 54 +++++++++++++++++++++++
-> > > >    xen/arch/riscv/sbi.c                      |  5 ---
-> > > >    11 files changed, 223 insertions(+), 46 deletions(-)
-> > > >    create mode 100644 xen/arch/riscv/riscv64/debug-8250.inc
-> > > >    create mode 100644 xen/arch/riscv/riscv64/debug.S
-> > > > 
-> > > > base-commit: 4c1aba82cff95ab11f7fe4af8965a06703537288
-> > 
-> 
-> 
+I explained this badly. What's checked isn't the current value of
+henvcfg.PBMTE but whether the bit is writable: init_csr_masks() identifies
+which bits of henvcfg (and of other CSRs) are writable, by setting them,
+reading the register back into csr_masks and restoring the original value.
+
+As per the menvcfg description in the privileged spec ("for
+implementations with the hypervisor extension, henvcfg.PBMTE is
+read-only zero if menvcfg.PBMTE is zero"), the contrapositive is that
+if henvcfg.PBMTE is writable (ENVCFG_PBMTE being present in
+csr_masks.henvcfg), then menvcfg.PBMTE is set, i.e. firmware has enabled
+Svpbmt for S-mode and G-stage address translation. I'll reword the
+description accordingly.
+
+> > --- a/xen/arch/riscv/domain.c
+> > +++ b/xen/arch/riscv/domain.c
+> > @@ -47,6 +47,8 @@ static struct csr_masks __ro_after_init csr_masks;
+> >  #define HENVCFG_VALID_MASK 0xe0000003000000ffUL
+> >  #define HSTATEEN0_VALID_MASK 0xde00000000000007UL
+> >
+> > +bool __ro_after_init svpbmt_enabled;
+> > +
+> >  void __init init_csr_masks(void)
+> >  {
+> >      /*
+> > @@ -79,6 +81,10 @@ void __init init_csr_masks(void)
+> >          INIT_RO_ONE_MASK(HSTATEEN0, hstateen0);
+> >      }
+> >
+> > +    svpbmt_enabled = (riscv_isa_extension_available(NULL,
+> > +                RISCV_ISA_EXT_svpbmt)) && (ENVCFG_PBMTE &
+> > +                csr_masks.henvcfg);
+>
+> Line wrapping wants doing entirely differently here. One of the style-
+> conforming options is
+>
+>     svpbmt_enabled =
+>         riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svpbmt) &&
+>         (csr_masks.henvcfg & ENVCFG_PBMTE);
+
+Will do, thanks.
+
+> > --- a/xen/arch/riscv/include/asm/page.h
+> > +++ b/xen/arch/riscv/include/asm/page.h
+> > @@ -11,6 +11,7 @@
+> >  #include <xen/types.h>
+> >
+> >  #include <asm/atomic.h>
+> > +#include <asm/cpufeature.h>
+> >  #include <asm/page-bits.h>
+> >
+> >  #define VPN_MASK                    (PAGETABLE_ENTRIES - 1UL)
+> > @@ -42,7 +43,21 @@
+> >   *  01 - NC     Non-cacheable, idempotent, weakly-ordered Main Memory
+> >   *  10 - IO     Non-cacheable, non-idempotent, strongly-ordered I/O memory
+> >   *  11 - Rsvd   Reserved for future standard use
+> > + *
+> > + * These bits are only meaningful when Svpbmt is enabled. Otherwise they must
+> > + * stay 0 (PMA).
+> >   */
+> > +extern bool svpbmt_enabled;
+> > +static inline unsigned long pte_pbmt_nocache(void)
+> > +{
+> > +    return svpbmt_enabled ? BIT(61, UL) : 0;
+> > +}
+> > +
+> > +static inline unsigned long pte_pbmt_io(void)
+> > +{
+> > +    return svpbmt_enabled ? BIT(62, UL) : 0;
+> > +}
+>
+> Why open-code ...
+>
+> >  #define PTE_PBMT_NOCACHE            BIT(61, UL)
+> >  #define PTE_PBMT_IO                 BIT(62, UL)
+>
+> ... what is still available here?
+
+No good reason, v3 uses PTE_PBMT_NOCACHE / PTE_PBMT_IO.
+
+> > @@ -53,6 +68,7 @@
+> >  #define PAGE_HYPERVISOR_RX          (PTE_VALID | PTE_READABLE | PTE_EXECUTABLE | PTE_ACCESSED)
+> >
+> >  #define PAGE_HYPERVISOR             PAGE_HYPERVISOR_RW
+> > +
+> >  /*
+> >   * PAGE_HYPERVISOR_NOCACHE is used for ioremap().
+> >   *
+>
+> Stray change?
+
+Yes, will drop.
+
+> > @@ -82,7 +98,7 @@ enum pbmt_type {
+> >
+> >  #define PTE_ACCESS_MASK (PTE_READABLE | PTE_WRITABLE | PTE_EXECUTABLE)
+> >
+> > -#define PTE_PBMT_MASK   (PTE_PBMT_NOCACHE | PTE_PBMT_IO)
+> > +#define PTE_PBMT_MASK   (BIT(61, UL) | BIT(62, UL))
+>
+> I don't understand the need for this change.
+
+There's none, it's a leftover from an earlier iteration. Will drop.
+
+Thanks,
+Baptiste
 
 
