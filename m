@@ -4,49 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3DAACA5FA2
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2026 12:20:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1435964.1654748 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2EEAC9833F
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2026 12:51:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436002.1654756 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBALQ-0003Ko-Ru; Mon, 28 Sep 2026 12:20:32 +0000
+	id 1xBAog-0000TH-3m; Mon, 28 Sep 2026 12:50:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1435964.1654748; Mon, 28 Sep 2026 12:20:32 +0000
+Received: by outflank-mailman (output) from mailman id 1436002.1654756; Mon, 28 Sep 2026 12:50:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBALQ-0003Kf-Og; Mon, 28 Sep 2026 12:20:32 +0000
-Received: by outflank-mailman (input) for mailman id 1435964;
- Mon, 28 Sep 2026 12:20:30 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0e7f55a6e000b504@swg.vates.tech>)
- id 1xBALO-0003H0-NK
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 12:20:30 +0000
+	id 1xBAog-0000TA-1A; Mon, 28 Sep 2026 12:50:46 +0000
+Received: by outflank-mailman (input) for mailman id 1436002;
+ Mon, 28 Sep 2026 12:50:45 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <jbeulich@suse.com>) id 1xBAof-0000T4-Gz
+ for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 12:50:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBALO-009KbS-3y
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 14:20:30 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0e7f55a6e000b504@swg.vates.tech>)
- id 6aba5b87-8faa-0a2a0a5109dd-0a2a450ac6bc-38
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 14:20:30 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0e7f55a6e000b504@swg.vates.tech>)
- id 6aba5b8a-f2d2-0a2a450a0019-b9ff1c22aa6b-4
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 14:20:30 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0e7f55a6e000b504.00a for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 28 Sep 2026 12:20:11 +0000
-Received: from julian.home (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: julian.vetter@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id 9515782326;
- Mon, 28 Sep 2026 14:20:10 +0200 (CEST)
+ id 1xBAoe-005jfM-3d
+ for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 14:50:44 +0200
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6aba629f-2eae-0a2a0a5409dd-0a2a45078e9c-12
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 14:50:43 +0200
+Received: from [74.125.225.98] (helo=mail-wr2-f34.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6aba62a3-b4ea-0a2a45070019-4a7de162813a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 14:50:43 +0200
+Received: by mail-wr2-f34.google.com with SMTP id
+ ffacd0b85a97d-48884b021dbso1088046f8f.3
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 05:50:43 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a00179c729sm213660425e9.15.2026.09.28.05.50.42
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 28 Sep 2026 05:50:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,293 +53,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=1a+uPUAHcNZZmfky+bDS4ycNHBXD1SRW+s2bHfQv5wM=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=dKvP9ED5E1JrusY6rvkB03cWEK+ULtwg3qDJwmkH05ygPsu1+ABaOqnj/6hLkAkvLt4eOTWsg
- thvACWZyp+pi780D2XbzfbjdF4ypJ0grkkQsOEOUlbIv0Pojm0DkQJLaueZsaqVfZa6Y0IC3ZLv
- WZwAEnRJFqhw9CHBk7GmCRklN+VUeLrqvGddVfUT6BdmuxGs6PMHDZCzX0svBDjWzjYXBy2Uhx/
- tQJ+IegSYfgDHcoiszI06tDeUunBj4NV65/pU/CLEXq7huKPaiCvkSCgbyrU1tqDT7Bf4EtvkAi
- rKHvU0s0kmwVTHtvKNvzVTS7JNAJzco5/URA+LvCZFsQ==
-X-Zone-Loop: 30051cfd7c70b028c76330d70068bd57d3e1c1680279
-x-campaign-type: default
-x-transaction-id: 588a73cc-8273-427f-bb4b-4c3508fdabbb
-x-swg-uid: 01-362fd03c-1b37-41d3-b295-8200c0e582a7
-X-Mailer: Sweego
-Message-ID:
- <1790598011.8631fc262581453bbf619ec5b2062170.1a0e7f55a6e000b504@vates.tech>
-x-swg-bid: 1790598011.8631fc262581453bbf619ec5b2062170.1a0e7f55a6e000b504
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Julian Vetter <julian.vetter@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Community Manager <community.manager@xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Andrii Sultanov <andriy.sultanov@vates.tech>,
-	Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
-	Timothy Pearson <tpearson@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Julian Vetter <julian.vetter@vates.tech>
-Subject: [PATCH v6 5/5] xen: make config argument const
-Date: Mon, 28 Sep 2026 14:20:01 +0200
-In-Reply-To: <1790597845.8631fc262581453bbf619ec5b2062170.1a0e7f2cff3000b504@vates.tech>
-References: <1790597845.8631fc262581453bbf619ec5b2062170.1a0e7f2cff3000b504@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1790599843; x=1791204643; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=vddx+UEdCMI0yrHwvahcQoYIirGYaGRBDuo3v4mTh74=;
+        b=T1LAUqKXGdMIEgm2egzjrIlNdoyAW2F6MAg5NqGqfTrgsfoNRHB0nC9KutNrmoP5M/
+         pWXYiwkg59H5EdHtvDkPgHlHq32azSrGYQkrPM1thy7/ZAxmxo+tHoyK7n7VbgBQeuUZ
+         aPy2f3gO6cOYLcxV3u9ln5KIkTlcfSE8rs9GM8LlhXicn9mDmn09CRI4sunNetpzYwjS
+         Sw8OfQh8lxzA0wzSTCW2uhccVfgYYyaMej45EZK0/0GfRSbTgP+YHi1vhBeffU4We7fr
+         qEVbBu0y98amzcQMuuyyeZr98aiG09EQkn5r2Cmd79KT0xEox9pjZo+vi0X6X+UdB/+G
+         NI+g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790599843; x=1791204643;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=vddx+UEdCMI0yrHwvahcQoYIirGYaGRBDuo3v4mTh74=;
+        b=z0pkWIh5KOMqPqNg3FJGcA8P+Z1TJebNJlVz8SwQaHI3GEMDvJ60ZXjMkiIOLesHXH
+         RCBzti3h0iAF3Q+8ETQ4rRd/6IkCcDsxfLyA04V4GKpavUaJjtdVlJcBc7I1I5ZQSjiK
+         VuU0fBvX8O3DYAeO0aoc2lkm3ns/IZZSBCJlPnTV3yVGC77XhOoPOJ7NUIAgUygKDm30
+         dPwiuzp6DzxTNyyeEl9/N0EuMbPJrpAb+sqJQBA+uftuKOUdyc2KYip+lof8yYbvC8d4
+         bS3OHyVg7aA/lzUJaSUoMe3b9XAMmnw37OtmzyXhWx3BNZJRamWNON4X6ZO6NdfwMwkp
+         iLAA==
+X-Gm-Message-State: AFuF++nV4/t5PjyIRbR5Oa9Yqw9gMxzkquRNqL3IXkSQpECZuqXAKj4K
+	PlO0tnoIlW+KPg+jelbmZ8zwaCN1psC0Jk/jl46N5lR8MmXMz6ijnYwLa0m/YaMkcw==
+X-Gm-Gg: AYBFou2FB7IoMaPtsx3BOEBM2+fDTEJIogyAAhj36XylIWktOSjKHBhl9eRwoZB8uY+
+	lqvACf6EjijaCwZAFXcaF2bynxkpcCo6jCvw9MMxo3f5/7y8hc7OTYBrGstALD11ZQ3SiB/Itlu
+	MaLpIxTD6o0hB8zlyuIKaOlQVLw+Qaw9cKgez0FL7Bc9y0+H/69TwTvHFimvSgxDMsZHXeSDQQY
+	UiVhX5D2aJwkDwVLSBVruAV56qHH++T5IVbIQc45VWmPrZ0lmO2Vn+bCEMKW4z1bwGpBggzVYBe
+	ejLMrmeMAm6x9/AAHH52v/LZCSv3KFODfpXIalF9Pzmo63y5iyD9PUybAFbAzhzqDUVRr201trJ
+	D7NH/JVpGOS//WxtR5Kq9fdWsp0usXVnGwz6/Kc1Jg/B2hfqeS4laEtWZXePIFOMLck7eptX8sK
+	N0aNm9jSScG0k4B/qPAy06XcDg05J3yEwdUtx66cPpuxVA5YQ0WnE/Vla60Nn5HYCYF4uvshsIe
+	lU/w4JM8Au1Dx0YJEF46xO35GGO422/juCzK3snyMeoCxMCIzKI4fvjzhkU6sA=
+X-Received: by 2002:a05:600c:6986:b0:49c:fa21:e73c with SMTP id 5b1f17b1804b1-49fe66f147bmr218206695e9.18.1790599843137;
+        Mon, 28 Sep 2026 05:50:43 -0700 (PDT)
+Message-ID: <dfbafb99-58cd-4be0-aa77-942c6fc916fd@suse.com>
+Date: Mon, 28 Sep 2026 14:50:41 +0200
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.48b.9a1a93d8a6409988.1a0e7f5583b.b13d91549d459bad=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1790598010939
-X-purgate-ID: tlsNG-4011c0/1790598030-510C9CFC-980318A6/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/6] x86/pass-through: no locking around
+ pt_irq_{create,destroy}_bind()
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Julian Vetter <julian.vetter@vates.tech>
+References: <eb5925e4-2409-452c-8768-4ca6717eb156@suse.com>
+ <92b0a72a-44df-424f-acbe-58d7167f1c4d@suse.com>
+ <arOr69DIql2Mjnd7@macbook.local>
+ <cc7da531-958b-4b03-9c0e-514d77ebb366@suse.com>
+ <araKzmNyBCGWidBt@macbook.local>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <araKzmNyBCGWidBt@macbook.local>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ef75cf/1790599843-3C610AE4-E46CCDD8/0/0
 X-purgate-type: clean
-X-purgate-size: 8371
+X-purgate-size: 3069
 
----=Part.48b.9a1a93d8a6409988.1a0e7f5583b.b13d91549d459bad=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 25.09.2026 16:53, Roger Pau Monné wrote:
+> On Thu, Sep 24, 2026 at 11:57:19AM +0200, Jan Beulich wrote:
+>> On 23.09.2026 12:37, Roger Pau Monné wrote:
+>>> On Tue, Sep 08, 2026 at 03:01:51PM +0200, Jan Beulich wrote:
+>>>> The questionable use of pcidevs_lock() there was discussed more than once.
+>>>> It really is pointless: The functions synchronize primarily via the per-
+>>>> domain event lock. They also may already be called with the global PCI
+>>>> devices lock not held: See hvm/vmsi.c:vpci_msi_update(),
+>>>> hvm/vmsi.c:vpci_msi_arch_update(), and hvm/vmsi.c:vpci_msi_disable().
+>>>>
+>>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>>>
+>>>> --- a/xen/arch/x86/domctl.c
+>>>> +++ b/xen/arch/x86/domctl.c
+>>>> @@ -636,10 +636,7 @@ long arch_do_domctl(
+>>>>              ret = -EPERM;
+>>>>          else if ( is_iommu_enabled(d) )
+>>>>          {
+>>>> -            pcidevs_lock();
+>>>>              ret = pt_irq_create_bind(d, bind);
+>>>> -            pcidevs_unlock();
+>>>
+>>> pt_irq_create_bind() might call into msixtbl_pt_register() which
+>>> requires either the pcidevs_lock() or the per-domain d->pci_lock lock
+>>> to be taken, which I think is not the case in the context here?
+>>
+>> Hmm, indeed. Not having seen the assertion there trigger kind of worries
+>> me a little. Do you agree that the change to vioapic_hwdom_map_gsi() can,
+>> otoh, be left as is?
+> 
+> Hm, I'm borderline on that one - I can't find a path where d->pci_lock
+> will be needed for legacy PCI interrupt binding, yet at the same time
+> I feel it would be better if the locking context is uniform across
+> call sites.  I guess I'm fine with the asymmetric locking context if
+> that's your preference.  Maybe worth a mention in a comment somewhere.
 
-arch_sanitise_domain_config() validates the configuration requested by
-the toolstack, and should not fill anything in=2E The config struct passed
-to createdomain is supposed to be pure input=2E ARM used to abuse this
-(GIC_NATIVE resolution, now removed) to smuggle output back to the
-toolstack=2E Making the parameter const stops that type of abuse from
-happening on any architecture=2E
+Maybe it's best if I get v2 out before we settle on this. The need for a
+comment may, with how v2 is done, go away. E.g. the first of the hunks
+now is
 
-The x86 implementation turned out to have its own instance of the same
-issue=2E It set XEN_DOMCTL_CDF_oos_off into config->flags for non-HVM
-guests=2E Since The sanitisation runs before the function domain_create()
-copies config->flags into d->options, this relied on mutating the
-toolstack's config to take effect=2E Move the default onto d->options
-directly in arch_domain_create() (which runs after d->options is
-populated), where all the remaining domain options are resolved=2E This
-has the same effect and no mutation of the input config is required=2E
-
-ARM, PPC and RISC-V need no equivalent change, Their implementations
-were already read-only=2E
-
-Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
-Reviewed-by: Jan Beulich <jbeulich@suse=2Ecom> # x86
-Reviewed-by: Michal Orzel <michal=2Eorzel@amd=2Ecom>
----
-Changes in v6:
-- Added Reviewed-by
----
- xen/arch/arm/domain=2Ec                   |  2 +-
- xen/arch/arm/firmware/sci=2Ec             |  2 +-
- xen/arch/arm/firmware/scmi-smc=2Ec        |  2 +-
- xen/arch/arm/include/asm/firmware/sci=2Eh |  6 +++---
- xen/arch/ppc/stubs=2Ec                    |  2 +-
- xen/arch/riscv/domain=2Ec                 |  2 +-
- xen/arch/x86/domain=2Ec                   | 16 ++++++++--------
- xen/include/xen/sched=2Eh                 |  5 ++---
- 8 files changed, 18 insertions(+), 19 deletions(-)
-
-diff --git a/xen/arch/arm/domain=2Ec b/xen/arch/arm/domain=2Ec
-index 4ca3a3749f=2E=2E34b5a85f9f 100644
---- a/xen/arch/arm/domain=2Ec
-+++ b/xen/arch/arm/domain=2Ec
-@@ -557,7 +557,7 @@ static bool v8r_el1_msa_domain_sanitise_config(
-     }
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     unsigned int max_vcpus;
-     unsigned int flags_required =3D (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_=
-hap);
-diff --git a/xen/arch/arm/firmware/sci=2Ec b/xen/arch/arm/firmware/sci=2Ec
-index aa93cda7f0=2E=2Ef73ed06092 100644
---- a/xen/arch/arm/firmware/sci=2Ec
-+++ b/xen/arch/arm/firmware/sci=2Ec
-@@ -45,7 +45,7 @@ int sci_domain_init(struct domain *d, struct xen_domctl_=
-createdomain *config)
-     return cur_mediator->domain_init(d, config);
- }
-=20
--int sci_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+int sci_domain_sanitise_config(const struct xen_domctl_createdomain *conf=
-ig)
- {
-     if ( !cur_mediator )
-         return 0;
-diff --git a/xen/arch/arm/firmware/scmi-smc=2Ec b/xen/arch/arm/firmware/sc=
-mi-smc=2Ec
-index a0cc6c6192=2E=2E391df8b945 100644
---- a/xen/arch/arm/firmware/scmi-smc=2Ec
-+++ b/xen/arch/arm/firmware/scmi-smc=2Ec
-@@ -68,7 +68,7 @@ static bool scmi_handle_smc(struct cpu_user_regs *regs)
- }
-=20
- static int
--scmi_smc_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+scmi_smc_domain_sanitise_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     if ( config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_NONE =
-&&
-          config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_=
-SMC )
-diff --git a/xen/arch/arm/include/asm/firmware/sci=2Eh b/xen/arch/arm/incl=
-ude/asm/firmware/sci=2Eh
-index 485ce211c9=2E=2E1d566be8e2 100644
---- a/xen/arch/arm/include/asm/firmware/sci=2Eh
-+++ b/xen/arch/arm/include/asm/firmware/sci=2Eh
-@@ -32,7 +32,7 @@ struct sci_mediator_ops {
-      * it to sanitize domain SCI configuration parameters=2E
-      * Optional=2E
-      */
--    int (*domain_sanitise_config)(struct xen_domctl_createdomain *config)=
-;
-+    int (*domain_sanitise_config)(const struct xen_domctl_createdomain *c=
-onfig);
-=20
-     /*
-      * Called during domain destruction, releases all resources, that
-@@ -101,7 +101,7 @@ int sci_domain_init(struct domain *d, struct xen_domct=
-l_createdomain *config);
-  * Sanitise domain configuration parameters=2E
-  *
-  */
--int sci_domain_sanitise_config(struct xen_domctl_createdomain *config);
-+int sci_domain_sanitise_config(const struct xen_domctl_createdomain *conf=
-ig);
-=20
- /*
-  * Destroy SCI domain instance=2E
-@@ -162,7 +162,7 @@ static inline int sci_domain_init(struct domain *d,
- }
-=20
- static inline int
--sci_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+sci_domain_sanitise_config(const struct xen_domctl_createdomain *config)
- {
-     if ( config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_NONE =
-)
-         return -EINVAL;
-diff --git a/xen/arch/ppc/stubs=2Ec b/xen/arch/ppc/stubs=2Ec
-index a333f06119=2E=2E82a289af85 100644
---- a/xen/arch/ppc/stubs=2Ec
-+++ b/xen/arch/ppc/stubs=2Ec
-@@ -162,7 +162,7 @@ void arch_vcpu_destroy(struct vcpu *v)
-     BUG_ON("unimplemented");
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     BUG_ON("unimplemented");
- }
-diff --git a/xen/arch/riscv/domain=2Ec b/xen/arch/riscv/domain=2Ec
-index d94652809e=2E=2Ecfce8e91fa 100644
---- a/xen/arch/riscv/domain=2Ec
-+++ b/xen/arch/riscv/domain=2Ec
-@@ -284,7 +284,7 @@ void sync_vcpu_execstate(struct vcpu *v)
-     /* Nothing to do -- no lazy switching */
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     return 0;
- }
-diff --git a/xen/arch/x86/domain=2Ec b/xen/arch/x86/domain=2Ec
-index 996b50af7a=2E=2E0ddddb1024 100644
---- a/xen/arch/x86/domain=2Ec
-+++ b/xen/arch/x86/domain=2Ec
-@@ -590,7 +590,7 @@ void arch_vcpu_destroy(struct vcpu *v)
-         ASSERT_UNREACHABLE();
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     bool hvm =3D config->flags & XEN_DOMCTL_CDF_hvm;
-     bool hap =3D config->flags & XEN_DOMCTL_CDF_hap;
-@@ -633,13 +633,6 @@ int arch_sanitise_domain_config(struct xen_domctl_cre=
-atedomain *config)
-         return -EINVAL;
-     }
-=20
--    if ( !hvm )
--        /*
--         * It is only meaningful for XEN_DOMCTL_CDF_oos_off to be clear
--         * for HVM guests=2E
--         */
--        config->flags |=3D XEN_DOMCTL_CDF_oos_off;
--
-     if ( nested_virt && !hvm_nested_virt_supported() )
-     {
-         dprintk(XENLOG_INFO, "Nested virt requested but not available\n")=
-;
-@@ -833,6 +826,13 @@ int arch_domain_create(struct domain *d,
-=20
-     spin_lock_init(&d->arch=2Ee820_lock);
-=20
-+    /*
-+     * It is only meaningful for XEN_DOMCTL_CDF_oos_off to be clear for H=
-VM
-+     * guests=2E
-+     */
-+    if ( !is_hvm_domain(d) )
-+        d->options |=3D XEN_DOMCTL_CDF_oos_off;
+@@ -637,9 +637,13 @@ long arch_do_domctl(
+             ret = -EPERM;
+         else if ( is_iommu_enabled(d) )
+         {
+-            pcidevs_lock();
++            if ( bind->irq_type == PT_IRQ_TYPE_MSI )
++                read_lock(&d->pci_lock);
 +
-     if ( d->domain_id && cpu_has_amd_erratum(&boot_cpu_data, AMD_ERRATUM_=
-121) )
-     {
-         if ( !opt_allow_unsafe )
-diff --git a/xen/include/xen/sched=2Eh b/xen/include/xen/sched=2Eh
-index 73c54794ac=2E=2Ece1fa636db 100644
---- a/xen/include/xen/sched=2Eh
-+++ b/xen/include/xen/sched=2Eh
-@@ -772,10 +772,9 @@ static inline void domain_update_node_affinity(struct=
- domain *d)
- }
-=20
- /*
-- * To be implemented by each architecture, sanity checking the configurat=
-ion
-- * and filling in any appropriate defaults=2E
-+ * To be implemented by each architecture, sanity checking the configurat=
-ion=2E
-  */
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config);
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig);
-=20
- /*
-  * Create a domain: the configuration is only necessary for real domain
---=20
-2=2E53=2E0
+             ret = pt_irq_create_bind(d, bind);
+-            pcidevs_unlock();
++
++            if ( bind->irq_type == PT_IRQ_TYPE_MSI )
++                read_unlock(&d->pci_lock);
+ 
+             if ( ret < 0 )
+                 printk(XENLOG_G_ERR "pt_irq_create_bind failed (%ld) for %pd\n",
 
+While it's only a read-lock now, effects on parallelism aren't as bad
+anymore. Yet still I'm rather hesitant to acquire a lock when there's no
+need for doing so. In the case here we'd still impact any write-lock
+paths, i.e. first and foremost vpci_write().
 
+There's possibly another somewhat related issue: vpci_read() only uses
+read_lock(), yet reads can in principle have side effects. Are we (once
+again) building upon Dom0 knowing what it's doing, and this - like many
+other aspect - being in need of auditing before DomU supported can be
+declared complete?
 
--- 
-Julian Vetter | Vates Hypervisor & Kernel Developer
-
-XCP-ng & Xen Orch=
-estra - Vates solutions
-
-web: https://vates=2Etech
----=Part.48b.9a1a93d8a6409988.1a0e7f5583b.b13d91549d459bad=---
+Jan
 
