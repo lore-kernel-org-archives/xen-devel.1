@@ -4,60 +4,60 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1A143CA5FA2
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2026 16:18:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436135.1654906 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B8417CA5FA2
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2026 16:18:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436134.1654897 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBE3s-00016s-JU; Mon, 28 Sep 2026 16:18:40 +0000
+	id 1xBE3m-0000t2-8d; Mon, 28 Sep 2026 16:18:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436135.1654906; Mon, 28 Sep 2026 16:18:40 +0000
+Received: by outflank-mailman (output) from mailman id 1436134.1654897; Mon, 28 Sep 2026 16:18:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBE3s-00016e-Fb; Mon, 28 Sep 2026 16:18:40 +0000
-Received: by outflank-mailman (input) for mailman id 1436135;
- Mon, 28 Sep 2026 16:18:38 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xBE3m-0000sv-53; Mon, 28 Sep 2026 16:18:34 +0000
+Received: by outflank-mailman (input) for mailman id 1436134;
+ Mon, 28 Sep 2026 16:18:32 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Bertrand.Marquis@arm.com>) id 1xBE3q-00015f-J2
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 16:18:38 +0000
+ (envelope-from <Bertrand.Marquis@arm.com>) id 1xBE3k-0000sp-FM
+ for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 16:18:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBE3o-009zb7-Cl
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 18:18:36 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xBE3j-006HDi-BM
+ for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 18:18:31 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Bertrand.Marquis@arm.com>)
- id 6aba9331-8faa-0a2a0a5109dd-0a2a4508863a-34
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 18:18:36 +0200
-Received: from [40.107.130.39]
- (helo=MRWPR03CU001.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aba932d-2eae-0a2a0a5409dd-0a2a450a95d6-44
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 18:18:29 +0200
+Received: from [52.101.69.68]
+ (helo=AM0PR83CU005.outbound.protection.outlook.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Bertrand.Marquis@arm.com>)
- id 6aba935b-f659-0a2a45080019-286b82270d95-3
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 18:18:36 +0200
-Received: from PAZP264CA0195.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:237::23)
- by FRWPR08MB11679.eurprd08.prod.outlook.com (2603:10a6:d10:1b0::9)
+ id 6aba9355-f2d2-0a2a450a0019-34654544755f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 18:18:29 +0200
+Received: from PAYP264CA0025.FRAP264.PROD.OUTLOOK.COM (2603:10a6:102:11f::12)
+ by DB9PR08MB6521.eurprd08.prod.outlook.com (2603:10a6:10:254::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.7; Mon, 28 Sep
- 2026 16:18:32 +0000
-Received: from MI3PEPF00008552.eurprd05.prod.outlook.com
- (2603:10a6:102:237:cafe::99) by PAZP264CA0195.outlook.office365.com
- (2603:10a6:102:237::23) with Microsoft SMTP Server (version=TLS1_3,
+ 2026 16:18:23 +0000
+Received: from MI3PEPF00008557.eurprd05.prod.outlook.com
+ (2603:10a6:102:11f:cafe::4e) by PAYP264CA0025.outlook.office365.com
+ (2603:10a6:102:11f::12) with Microsoft SMTP Server (version=TLS1_3,
  cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.23 via Frontend Transport; Mon,
- 28 Sep 2026 16:18:32 +0000
+ 28 Sep 2026 16:18:23 +0000
 Received: from outbound-uk1.az.dlp.m.darktrace.com (4.158.2.129) by
- MI3PEPF00008552.mail.protection.outlook.com (10.167.240.6) with Microsoft
+ MI3PEPF00008557.mail.protection.outlook.com (10.167.240.11) with Microsoft
  SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.14
- via Frontend Transport; Mon, 28 Sep 2026 16:18:31 +0000
+ via Frontend Transport; Mon, 28 Sep 2026 16:18:22 +0000
 Received: from PR3PR08MB5593.eurprd08.prod.outlook.com (2603:10a6:102:84::13)
  by GV2PR08MB11820.eurprd08.prod.outlook.com (2603:10a6:150:303::9)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.406.4; Mon, 28 Sep
- 2026 16:17:59 +0000
+ 2026 16:17:46 +0000
 Received: from PR3PR08MB5593.eurprd08.prod.outlook.com
  ([fe80::aae1:6871:afc4:620e]) by PR3PR08MB5593.eurprd08.prod.outlook.com
  ([fe80::aae1:6871:afc4:620e%5]) with mapi id 15.21.0451.022; Mon, 28 Sep 2026
- 16:17:59 +0000
+ 16:17:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,20 +71,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"; dkim=pass header.s=selector1 header.d=arm.com header.i="@arm.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fv3pyUWxwm5sfNEGJ4cWT5uGTVC+WQp+AnyTpFS7okYnEqVccbRRP+K0kPmeKajldPQnDu91Akt8fymuVgobWnQTP3v6485x0ZwdlfbXJJOQV8ppOvVDgq+Bb+m4xoBs5+9QuCeh0R672iYubzXXiFcbIclJQfTC8kkqJ2KtwgoAtpLetJWiE+loj11tMKHaM32MBrWXvqWUGvwrTxJepEbOXEtMjYGUbnyRJfAXjLuGhLMyjYxJ8noxUDZITUliHXZP+TpwUulhG8FD1v3RwT9+N1m41XARI3u6xrP9i8XM20NlWCwbssnRWsXAaQzCWhSZvR6WpW+PEdw6Yb7PlQ==
+ b=GuAsHvFWTr49yh0KHSOU7nhzlczn03XsMIszoXXgxPaeeN9EOavX8zk5y3AGY4DF6WWdwZ4J7YUkb9z+/8f4yk3GwF1cXH2aSNKetje4a0zcUXIW8pUO8RvwxBx7zza/XWT9ldhk8ubFL/BOgz9xcce/Fvj2or+AfPs+Q7b6t0BOhV0d6ImNR1QEPz8HdDsp7MoHPzCMe9ZZYFIu/rNDv8HDgEKgxrYZ252ZUcWOgNtif0KGO5i+RTcU0OiBMO+bvxIpGPKVEXSTYGQrVFs703aaEk1LaE5JvRTGWyagBRFx938dI30kBWAbNk63F4Zx9nleLVY0neUW1hIeACwueA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FHfQ6x0TuWYN9jzUa+00XdYZIgWlMVC7rUAENlKK84w=;
- b=spE7BWz3zMTiz8X2YlL9aSFEN75vITiFCZBnZ0CgUgr+81PLI1p8EEd566b9yRNo0b3OR+EvG/7mUOhpubpjMq/EJZyBRREpk3pVojezYnTLnqYs9uzzA0s1FYo/US2nulLGJ7kcCkQed7vOBoqjoqqpfkQFanJLq522KBXqIyYyiaEyVYSJiO6jDaDHjLYVquNPqwKMYVh5quuvRmPZh2qXjq0qSowy+grIaGxrFg+Zd5dHHk454+5d7SDxlmLgWg0pQ387/ADrZZ/O43gyWUX5oXe/CR+M4eVTfELWge1Wok0+2CC2x+WZmzA8vQ9iSIWx/SXm6X8Kdjopa9ihgw==
+ bh=RLLq4R2qscP8fs8G6XvYb9sXiIne08kkFcsG9NunCxg=;
+ b=PldhnoIpa0nWThqpC99TRJ7HyQoMRsaurOXRxD7FXt9Dgk+o7iRecicPS5HcKNc8nahFGUIvH1efCQSvooHHQAoRhFrfUZFP6WC2i/u8T4xvHDssp8w9tBu8nfq75C8f5nydaMTb6M+Lm7CHJMFxMeqcny6tJO/5+yUih0YpiInK4x84LkBvZEdT+Ij/F5snUZFkjzx5pBtZvyIQdbWa0rKqc6HPxe0t7fswRltwveTF+oDa1VQ0rpW07qZH+0oxO3kbvyqLCeeqg/FSjeUnwsQSBEiaKWzgThTKdV/71nushXS4ZcIvAUe7lf+Nl+Tc2Rthkgny+5QhwQiYNFknIQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
  4.158.2.129) smtp.rcpttodomain=epam.com smtp.mailfrom=arm.com; dmarc=pass
  (p=none sp=none pct=100) action=none header.from=arm.com; dkim=pass
  (signature was verified) header.d=arm.com; arc=none (0)
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FHfQ6x0TuWYN9jzUa+00XdYZIgWlMVC7rUAENlKK84w=;
- b=nEaZNqS1BF/AWezKbH27ag4Ve4vuDTO4tVi8j4n2h8UaSQtkLSyXftBl70fbxAxAaL0wBDx0U6Zu93bk1P/+h5qsyHpmoLPFNN7/pKX46dD0wJxu9ifSL/wqO6Cn7kuUyj+ZmRd9JYRi4jYnIAYCPWz/wBbEdsh9iJwJLCAir3k=
+ bh=RLLq4R2qscP8fs8G6XvYb9sXiIne08kkFcsG9NunCxg=;
+ b=FMYBL29GNqikb7MRW6SJbVG/Xivn4d7sciu9pY8dZ3hlvic5zJAoGm98HQxAAdb0WJAlYZx8M1eKosTMlgNgrX/j784D9PAV8LSiHK3rl9SRB6ME8hBJnMTHrMGdgCtpBLyMhQCqNDVv4Mh+OZo/aUePIQ8lVeOwsqP+1b/ptIM=
 X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
  is 4.158.2.129) smtp.mailfrom=arm.com; dkim=pass (signature was verified)
  header.d=arm.com;dmarc=pass action=none header.from=arm.com;
@@ -93,26 +93,24 @@ Received-SPF: Pass (protection.outlook.com: domain of arm.com designates
  client-ip=4.158.2.129; helo=outbound-uk1.az.dlp.m.darktrace.com; pr=C
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=arm.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FHfQ6x0TuWYN9jzUa+00XdYZIgWlMVC7rUAENlKK84w=;
- b=nEaZNqS1BF/AWezKbH27ag4Ve4vuDTO4tVi8j4n2h8UaSQtkLSyXftBl70fbxAxAaL0wBDx0U6Zu93bk1P/+h5qsyHpmoLPFNN7/pKX46dD0wJxu9ifSL/wqO6Cn7kuUyj+ZmRd9JYRi4jYnIAYCPWz/wBbEdsh9iJwJLCAir3k=
+ bh=RLLq4R2qscP8fs8G6XvYb9sXiIne08kkFcsG9NunCxg=;
+ b=FMYBL29GNqikb7MRW6SJbVG/Xivn4d7sciu9pY8dZ3hlvic5zJAoGm98HQxAAdb0WJAlYZx8M1eKosTMlgNgrX/j784D9PAV8LSiHK3rl9SRB6ME8hBJnMTHrMGdgCtpBLyMhQCqNDVv4Mh+OZo/aUePIQ8lVeOwsqP+1b/ptIM=
 From: Bertrand Marquis <Bertrand.Marquis@arm.com>
 To: Mykola Kvach <mykola_kvach@epam.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Michal
- Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Luca Fancellu
-	<Luca.Fancellu@arm.com>
-Subject: Re: [PATCH v12 10/13] xen/arm64: Save/restore CPU context across
- SYSTEM_SUSPEND
-Thread-Topic: [PATCH v12 10/13] xen/arm64: Save/restore CPU context across
- SYSTEM_SUSPEND
-Thread-Index: AQHdNjDrck5tdQi+nEWf4DlkNNzg5rbkXWsA
-Date: Mon, 28 Sep 2026 16:17:59 +0000
-Message-ID: <08F80D50-EA31-49AB-B8C2-A38A01A8C2BD@arm.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Rahul
+ Singh <Rahul.Singh@arm.com>, Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Pranjal Shrivastava <praan@google.com>,
+	Luca Fancellu <Luca.Fancellu@arm.com>
+Subject: Re: [PATCH v12 09/13] xen/arm: smmu-v3: add suspend/resume handlers
+Thread-Topic: [PATCH v12 09/13] xen/arm: smmu-v3: add suspend/resume handlers
+Thread-Index: AQHdNjDrjFXCXeSMDUWyr9xW8wFZIbbkXVyA
+Date: Mon, 28 Sep 2026 16:17:45 +0000
+Message-ID: <0094745D-F00F-4376-9CD7-4EE07ACC6816@arm.com>
 References: <cover.1787838455.git.mykola_kvach@epam.com>
- <552b979775f1f67d49f7ac303c1a1d4feafe820a.1787838455.git.mykola_kvach@epam.com>
+ <388056532b9d11c1db1631c1b8385b317ec46e02.1787838455.git.mykola_kvach@epam.com>
 In-Reply-To:
- <552b979775f1f67d49f7ac303c1a1d4feafe820a.1787838455.git.mykola_kvach@epam.com>
+ <388056532b9d11c1db1631c1b8385b317ec46e02.1787838455.git.mykola_kvach@epam.com>
 Accept-Language: en-GB, en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -121,393 +119,446 @@ x-mailer: Apple Mail (2.3864.700.51.1.1)
 Authentication-Results-Original: mx.microsoft.com 1; dkim=none (message not
  signed) header.d=none;dmarc=none action=none header.from=arm.com;
 x-ms-traffictypediagnostic:
-	PR3PR08MB5593:EE_|GV2PR08MB11820:EE_|MI3PEPF00008552:EE_|FRWPR08MB11679:EE_
-X-MS-Office365-Filtering-Correlation-Id: 135f340a-e5a5-450a-f132-08df1d7c23a0
+	PR3PR08MB5593:EE_|GV2PR08MB11820:EE_|MI3PEPF00008557:EE_|DB9PR08MB6521:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5f54fc6e-42d7-4975-bfec-08df1d7c1e38
 x-checkrecipientrouted: true
 nodisclaimer: true
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam-Untrusted:
- BCL:0;ARA:13230040|23010399003|1800799024|366016|376014|4143699003|10067099003|260925021311599003|18002099003|6133799003|260925021911599003|56012099006|5023799004|11063799006|22082099003|38070700021|260925022911599003;
+ BCL:0;ARA:13230040|23010399003|1800799024|366016|376014|4143699003|10067099003|3023799007|18002099003|6133799003|56012099006|5023799004|11063799006|22082099003|38070700021;
 X-Microsoft-Antispam-Message-Info-Original:
- TPuQrbTy88PXDYNILSL6UoAwwcqOiATTTNlkZvO3jxbuZUz5bzwUs1/hpnLhihUWbHyTl8msHA5K93I2bFmqLRhHAYnT8GynySjYuREVdSAyPCSrLdXnGL535fh40FJjufdrTAA70DrQZ1oBzO6FPp6wMbaNEFd7erxJVvv9hlRkeUDjcsFAIQqtbaaZRPEl45SP0sjkFjTZnYXi60TX7zNWGkO4qDOLR2BxBcxowq4Be5Kpqg9R20R7g2Uj5MAajBxZp5s/Z+KOisxWA+fp38UwCLIiIp9071tad1y0t7hlFATOjY+V0W8CBRL8JBM1OhYbMnZFrbPdpHGClrSG/tcfw9GFpaArq79njgykCPoffjs9EhLw+3SeyxNv/uW6udEbTVUEjE7O/z8MAU4HlEmEo6ATmFGme6zVJ4dQUoDs6eSwe//rXLpzCpe2sWOxHT0puEumZGrBLCUWbovVNKKgV09m4UDLHnS1TRmOQBLdXCsDd37nAoSWW0DzvjMDehB2bVr58AioekAzrLqMwrNAEjK/cjrwHQ+VIkGVcArs3QBjTjlQgzFrykMNUr9fnexiYfT/xrFq1SdFCaS9Ytf6gqxvBTlw0ywNcG+YgTLvn539jpNxw8h9ueaSgNx2hpTM3kUJZ5XDNxm8fWUMuV26+/cXbwITylPfrWRRYI8RLNhhAbSduHECy/MwONazHWIXgyCqWsBYWAzyBFDlit6YUV8izcTIc0ruFnin2KQ=
+ +sT4gy8AK/Gm5n3IVf+55IRbaAIQk2deQxznZ/RhStw4BO5JUCM6UygVV+b6a0BSeRVK1CLhVOVk5KUpL6Ri8qKp29b94UmCV3zn8d3e4Fk9F3Zx7xBcGA7kfdYvJkYix1mtePHFqVwrpYrS4jB1/2uWs7VXJ5FZ8tT5W0W7iPOR8jUyK9ZHt93K4ia6i3C6U1RnWStToawpocehl7FFOYc1awQqPFjTijfrKU5X8sRf/UaooWfA+4IA3un2OeEHma3T3ENWLy/wJVksF/Amo7Lu7ty3VdcEx6NURHHFJvGQTx9NHqsisQcoBkdaknu8jKG2af/C1DK+EpthizaYWE29Tg6dyOOprrWS+rzQYVbRTLrY35+o3QCJsMd86GdsOkalwLMBnIV01VwWu6aJjBp4nUcovCpz93b2zpp6CV41wFIMYAFFoiMnCuZYkv/JD7QRyZNCiiiunVL2u9rgy34Erbbtakl80eRVm2SReokbtvoFa2itfCPb9aTCLi49H1Cth5n2KjAQlJYrnVytz46d3aBGWi6lvrZxFdl5xlQBCPhtBdfm5w6SQnDCY4jZFjW+4E3R9qetBqXVnqg8dBRIDrMDZmT4aIuiFP/jufOTc1wPS+Zjhq4mS1wvln/Mp7O7MKmU2cQGzGTejkKKcxZkwk2pqTmC6yNoBQxqIL4=
 X-Forefront-Antispam-Report-Untrusted:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PR3PR08MB5593.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(366016)(376014)(4143699003)(10067099003)(260925021311599003)(18002099003)(6133799003)(260925021911599003)(56012099006)(5023799004)(11063799006)(22082099003)(38070700021)(260925022911599003);DIR:OUT;SFP:1101;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PR3PR08MB5593.eurprd08.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(366016)(376014)(4143699003)(10067099003)(3023799007)(18002099003)(6133799003)(56012099006)(5023799004)(11063799006)(22082099003)(38070700021);DIR:OUT;SFP:1101;
 Content-Type: text/plain; charset="us-ascii"
-Content-ID: <DB33AC02F8B0D04DBD187133D4300FD8@eurprd08.prod.outlook.com>
+Content-ID: <03AD54081875744B8144DBD54BD4A67D@eurprd08.prod.outlook.com>
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-Exchange-RoutingPolicyChecked:
- blQ0ZjGiGtQNUiX4jSbouG69eWvm3Y9vbvSw7zxze1gHmiNVc2+VJQZJZ8Bu/dk/+OKd9AeTWvm6v5aKNUg8noOJcSC/M1TLtNwPFlwYmvk4u3EkqBg0W0GfZLXEjdQVtgsWZNRxTC/+uhvERYTo0mAst9Z1ko55DUieoGpgSm1me6xOI0yuT7lR+9E0CnlJE6br5KTMbA4DY7/CEFRwRFevZA2rApVFi4gz+TGJfMYieqedcI4pLsYxyhI6hVfHYUxvlvzAw5Oa9rpTr6+vMRVIGl9FYWNJwz35xXPqmpDY9Q7Ymh55CAi3vMPYhs9iYK2bHNXg6OShHavhFz4feA==
+ S3Ahawn3670wdSjNjnCSdLnhMGx809WxXyDx2pyGABCfRRfAhaTHlLzl2ejZVKEpmz4Sx0AOdS5CWM6XBLazhldNZR+hcBoSQvTL8EeApsSlQo6rnhJIhQUImz5KD+OPVJ1KN5wMAQP/MkdFTbX78kbc7lUUkPbXbxz0Qth1iEHWlh9IMowopiwPdsET9USkYWW32h1r5y/duG80hDb3FdpyaUDx3J+H91ttSh23hbzWhR07pquraEcfHk7KtfRwEe2WogN+5E1khYrO2JzQl/rs4dQ+tTzEeAk1Aamheb+659EjUrQ0Of6/OSp3qZ1nNjqQN1lrffGtXRqLHl1uMw==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: GV2PR08MB11820
 X-EOPAttributedMessage: 0
 X-MS-Exchange-Transport-CrossTenantHeadersStripped:
- MI3PEPF00008552.eurprd05.prod.outlook.com
+ MI3PEPF00008557.eurprd05.prod.outlook.com
 X-MS-PublicTrafficType: Email
 X-MS-Office365-Filtering-Correlation-Id-Prvs:
-	c3b19029-be5d-417b-fcdc-08df1d7c1002
+	9a690532-5bd3-4cab-50c4-08df1d7c0827
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|82310400026|35042699022|14060799003|376014|36860700016|10067099003|260925021311599003|11063799006|260925021911599003|5023799004|260925022911599003|6133799003|22082099003|18002099003|4143699003|56012099006;
+	BCL:0;ARA:13230040|14060799003|36860700016|23010399003|35042699022|1800799024|376014|82310400026|4143699003|56012099006|11063799006|10067099003|5023799004|18002099003|22082099003|6133799003|13003099007|3023799007;
 X-Microsoft-Antispam-Message-Info:
-	aJfWOFiiyJlzme98Bj3r5WH7zKTVNGo9g4LilCmt+K2oWUpQqOxj+kRxStNc/kpVQZrUsts+byUqxc2ZRWesBeD5WYbsIeYxGHbhkFvjcAO2Z2krvF0lxbRoabiHIXO8AfLBcI/2R3oQYxAAZTEDAMbO2mrIbWso22WYzU51IVKFQkY7CMiQhlz+acvPuuzlAyGe879h9ow9OmefzOWzmod2KAMQiRawNGQ6xQtIuE6mEInNRtE9JHaADyjc2YUHPdC+0YbIaUricNIVIgn4u+c13IQP2DbRoUlWKYPReKxyl63XggpQVHuzNA0JGUCvdgkhbi3kSBtS2gmW/27414sJkrdvTgF9CPx4+JsNOWDykPRkTPjSQG241KjTouvTy74xwdP8grwrYWoW7t4DME0aWfxVZjlQXEeJ7kRhEO1bHP6qFbbdrufudymO4y7kQBu14SrbeASzrCmH9njtYYL0iCgNv+KrwaGjR2daYvVTSPGS4RDuoMWtcZVCFFmPvUN6bmitdr+BNG/AfxziWXtKUju72c7ZB//tpnONR8LYW32ZJc63awYTnvHjO+U8MlPR47lW+IsxbN8Gc+0pbD/k0h4c7xUSUCHcnaNiLXIwXk/MecKBo8RXd/wg+L5XIZl90knmRDD+uxCWyxPyN7+c9wM9iMxysMLmpVp+h9SmEwG3VbZVGzQf+JPIF35D87ouJHi9ovU3tClVLQGHdQ==
+	8Ll4X4KbxkOr1EaC65LTOTU4ia9W720jXiouEDtC4MR8T9QK122FZ0PcGOXJGUGx48bcICnWpcXRpU80hKfZIrU3agxHLxAhVZR3VK0xfZDKPSItR/PEqIRzg0S8PJ5sLv59B+kObP3xigtcoipG8YulzbnM7g04vmuqHd3oGng6pmkFNC7VoPY2NGXpwAvo/jSGkyJyd4yMhvmmaBxh2ZIJPqyXPywnJMAm7NH95N4oEa0BB3/bMwSKS0BULouWb9x8uz64hdEPTvK+Xk+DTUskIMXwqOeUIyTk5iJn2f8wWJl+/jCGK/xtSzcS5KTc9+4pNJet/YH6N4SeLylu9RFNqhbJfKcGh+aR47Tch9GIRJzqnMuLiG1/A/8o+Dcyybxidadzdk0X59USWMbEbpBN9zGCB6FJTt4ZMW0iPOcI4XMaa7UBL6o59eRG3XOfxnEiVshS4Eim5fvS92Tc2RuUmfE/4YmkhGKyT5qEZK6EtAulwtq2X1d+5NOH/Ykrx4zztsl7qP1r3pacowCcCZpr+b65vYHJ/0/mrKkjF1CiDq48+BUwi1nun2jqiQm7xypvR3JqWogubq2/IOXyChl6JZ8NErCgHGqbcBU3vEkheEo9LtkJUu5X2BMlGd7s6gbFt2Pkyg1dij04sB2hyvhGD9zdPHwoSVRgcEZeXQc=
 X-Forefront-Antispam-Report:
-	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(82310400026)(35042699022)(14060799003)(376014)(36860700016)(10067099003)(260925021311599003)(11063799006)(260925021911599003)(5023799004)(260925022911599003)(6133799003)(22082099003)(18002099003)(4143699003)(56012099006);DIR:OUT;SFP:1101;
+	CIP:4.158.2.129;CTRY:GB;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:outbound-uk1.az.dlp.m.darktrace.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(14060799003)(36860700016)(23010399003)(35042699022)(1800799024)(376014)(82310400026)(4143699003)(56012099006)(11063799006)(10067099003)(5023799004)(18002099003)(22082099003)(6133799003)(13003099007)(3023799007);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	kkVn0ee3/u5kUrmF2bMQ4cKZfoJE57AvBNqaGLoT3ruXuByczRndVazeTBKnJc+m53KwvinVOfzKxwfo34a5BhFza5qr3B1CJ1hparqIrUnRRsdTrXIcQmp4ARbLqpMakUoGJKfMSIgjXDU8ETeb6kmk7ZDOXrh62qW/3O+3xXadeEQ8toguf3Z60Hifqhh3i5s+BxcXOFOEf1tf4ObArzR+w9+TBdOOaSJ5LM6fGWjQ1kyInTZy3lHva8VcDBm1kyIs6rBSwE4rVcYgvTAN7H9YbJsOvOG03JTNg0HmL9h2qpO+npTxoVlkQiALgu66Dg7mwPSyeRKSo4mz2FeKv/Hg/NNBEyYdplgGVBY6rs4jdRjQxHbLq7mJ5uKBhtTeys4uWWNVJGh9xRclMy8Qg/Lr841U73lp3gO991VsnLXmmsLRbZyWPsP/22NDuGi5
+	C2C03/8iEgU9idX9FzFAYjVKZ8QIAILTyX2YDU9T96z3pcd/LkfWSH44yDPz7gMbjkbetVoVWx9VUrOkcb92htsGwLfGeSueYtrtHORYDV3O0nurOC51T1ZyAk1iRgLLOiL0OtkKYS/vSMFEErf3agfDrYi2w/KRkzAxCY1IB7m3eyVmNmvrfi9limTH5vDJopnZ0VQP76r2yiJpno90m++vnpQm7q1hhxBcY53MyFuYQfibRgSqsOPaF1czz39zuS+ekH5zXUranUnB4GzJT92v9YJynjibywbrtgH8CunvOUmdFZANfzMDjjoO+XCQiQPgIKGt/FZwPW2s0HAW3Fz9zP/xOYTL8hGaVoY9SjeEwxLIEE/+k6IbRZT1x2DMnwi1FyC5mclaSmF9R/7jnfsYV1N+0EUMR29WzU672Q17FudN2HIw5lmQip7GLTEU
 X-OriginatorOrg: arm.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2026 16:18:31.8858
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Sep 2026 16:18:22.8083
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 135f340a-e5a5-450a-f132-08df1d7c23a0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5f54fc6e-42d7-4975-bfec-08df1d7c1e38
 X-MS-Exchange-CrossTenant-Id: f34e5979-57d9-4aaa-ad4d-b122a662184d
 X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=f34e5979-57d9-4aaa-ad4d-b122a662184d;Ip=[4.158.2.129];Helo=[outbound-uk1.az.dlp.m.darktrace.com]
 X-MS-Exchange-CrossTenant-AuthSource:
-	MI3PEPF00008552.eurprd05.prod.outlook.com
+	MI3PEPF00008557.eurprd05.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Anonymous
 X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: FRWPR08MB11679
-X-purgate-ID: tlsNG-c1860d/1790612316-D654487B-EFC20A49/0/0
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB9PR08MB6521
+X-purgate-ID: tlsNG-4011c0/1790612309-4ACDBCFC-DBEA040B/0/0
 X-purgate-type: clean
-X-purgate-size: 12373
+X-purgate-size: 12077
 
 Hi Mykola,
 
 > On 27 Aug 2026, at 16:31, Mykola Kvach <mykola_kvach@epam.com> wrote:
 >=20
-> From: Mirela Simonovic <mirela.simonovic@aggios.com>
+> Add system suspend/resume callbacks for the Arm SMMUv3 driver.
 >=20
-> On wakeup from PSCI SYSTEM_SUSPEND, Xen re-enters EL2 with the MMU and
-> data cache disabled. The resume path must first switch back to Xen's
-> runtime page tables before it can access the saved CPU context using
-> virtual addresses.
+> During suspend, configure GBPA to abort incoming transactions, disable th=
+e
+> translation interface while keeping CMDQ enabled, issue CMD_SYNC to ensur=
+e
+> all previously issued commands have completed, then disable the SMMU IRQs
+> and SMMU.
 >=20
-> Add an arm64 hyp_resume trampoline that reuses enable_secondary_cpu_mm()
-> to enable the data cache and MMU, switch to init_ttbr, and resume in the
-> runtime virtual mapping. The trampoline then restores the saved CPU
-> general-purpose and system-control register context.
+> Resume uses arm_smmu_device_reset() to reprogram the SMMU and re-enable
+> translation and interrupt generation.
 >=20
-> prepare_resume_ctx() must be invoked just before the PSCI system suspend
-> call is issued to the platform firmware. It saves the current CPU context
-> and returns a non-zero value so that the caller enters the physical
-> SYSTEM_SUSPEND call.
+> The IRQ setup split follows the approach from Pranjal Shrivastava's Linux
+> arm-smmu-v3 runtime/system sleep series: IRQ handlers are requested once
+> during probe, while reset/resume only restores SMMU hardware state and
+> re-enables IRQ_CTRL.
 >=20
-> On resume, hyp_resume restores the saved context, including the saved lin=
-k
-> register. Control therefore returns to the place where prepare_resume_ctx=
-()
-> was called. To avoid re-entering the suspend path, the restored path sees
-> prepare_resume_ctx() return zero.
+> Only the pieces relevant to Xen's currently supported SMMUv3 path are
+> ported here. Xen documents SMMUv3 MSI and PCI ATS as unsupported and not
+> compiled/tested, so this patch does not restore SMMU MSI IRQ_CFGn registe=
+rs
+> nor reinitialize ATS/PRI endpoints. If those paths become usable,
+> suspend/resume will need corresponding MSI restore and ATS/PRI
+> quiesce/reinit steps.
 >=20
-> The assembly save/restore code uses offsets generated by asm-offsets.c
-> from struct resume_cpu_context, keeping the assembly memory accesses in
-> sync with the C structure layout.
->=20
-> Support for ARM32 is not implemented. Instead, compilation fails with a
-> build-time error if suspend is enabled for ARM32.
->=20
-> Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-> Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
+> Link: https://lore.kernel.org/r/20260414194702.1229094-1-praan@google.com=
+/
+> Based-on-patch-by: Pranjal Shrivastava <praan@google.com>
 > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> Reviewed-by: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
 > Reviewed-by: Luca Fancellu <luca.fancellu@arm.com>
+> ---
+> Changes in V11:
+> - Keep arm_smmu_update_gbpa() and arm_smmu_device_reset() in init text wh=
+en
+>  CONFIG_SYSTEM_SUSPEND is disabled.
+>=20
+> Changes in V10:
+> - Disable SMMU interrupt generation during suspend before disabling the
+>  SMMU interface, matching the resume/reset path which re-enables IRQ_CTRL=
+.
+>=20
+> Changes in V9:
+> - Use CMD_SYNC in suspend instead of polling CMDQ_CONS, so the suspend
+>  path waits for command completion rather than only command consumption.
+> - Document that arm_smmu_setup_irqs() is probe-only and that future Xen
+>  SMMUv3 MSI support will need to restore SMMU IRQ_CFGn registers on
+>  resume.
+> - Restore the reference to Pranjal's Linux runtime/system sleep series an=
+d
+>  clarify that MSI/ATS/PRI resume handling is outside the supported Xen
+>  path.
+> - Prefix the subject with xen/arm for consistency with the rest of the
+>  Arm suspend/resume series.
+>=20
+> Changes in V8:
+> - Honor ARM_SMMU_FEAT_SEV when draining the CMDQ during suspend, matching
+>  the existing runtime CMD_SYNC path.
+> - Fold the suspend rollback reset path into a helper and rename the error
+>  reporting to describe suspend rollback rather than resume.
+> - Treat SMMU reset failure during resume as fatal instead of logging and
+>  continuing with a potentially unusable IOMMU.
+> - cosmetic changes
+> ---
+> xen/drivers/passthrough/arm/smmu-v3.c | 194 +++++++++++++++++++++-----
+> 1 file changed, 158 insertions(+), 36 deletions(-)
+>=20
+> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthro=
+ugh/arm/smmu-v3.c
+> index bf153227db..7f1d00fb81 100644
+> --- a/xen/drivers/passthrough/arm/smmu-v3.c
+> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
+> @@ -94,6 +94,12 @@
+>=20
+> #include "smmu-v3.h"
+>=20
+> +#ifdef CONFIG_SYSTEM_SUSPEND
+> +#define __init_or_smmu_suspend
+> +#else
+> +#define __init_or_smmu_suspend __init
+> +#endif
+> +
+> #define ARM_SMMU_VTCR_SH_IS 3
+> #define ARM_SMMU_VTCR_RGN_WBWA 1
+> #define ARM_SMMU_VTCR_TG0_4K 0
+> @@ -1814,8 +1820,8 @@ static int arm_smmu_write_reg_sync(struct arm_smmu_=
+device *smmu, u32 val,
+> }
+>=20
+> /* GBPA is "special" */
+> -static int __init arm_smmu_update_gbpa(struct arm_smmu_device *smmu,
+> -                                       u32 set, u32 clr)
+> +static int __init_or_smmu_suspend
+> +arm_smmu_update_gbpa(struct arm_smmu_device *smmu, u32 set, u32 clr)
+> {
+> int ret;
+> u32 reg, __iomem *gbpa =3D smmu->base + ARM_SMMU_GBPA;
+> @@ -1995,10 +2001,35 @@ err_free_evtq_irq:
+> return ret;
+> }
+>=20
+> +static int arm_smmu_enable_irqs(struct arm_smmu_device *smmu)
+> +{
+> + int ret;
+> + u32 irqen_flags =3D IRQ_CTRL_EVTQ_IRQEN | IRQ_CTRL_GERROR_IRQEN;
+> +
+> + if ( smmu->features & ARM_SMMU_FEAT_PRI )
+> + irqen_flags |=3D IRQ_CTRL_PRIQ_IRQEN;
+> +
+> + /* Enable interrupt generation on the SMMU */
+> + ret =3D arm_smmu_write_reg_sync(smmu, irqen_flags,
+> +      ARM_SMMU_IRQ_CTRL, ARM_SMMU_IRQ_CTRLACK);
+> + if ( ret )
+> + {
+> + dev_warn(smmu->dev, "failed to enable irqs\n");
+> + return ret;
+> + }
+> +
+> + return 0;
+> +}
+> +
+> +/*
+> + * Probe-time only: request host IRQs and, when available, program the S=
+MMU's
+> + * MSI doorbells. Resume does not restore the SMMU *_IRQ_CFGn MSI regist=
+ers,
+> + * so any host suspend support must treat the active MSI IRQ path as
+> + * unsupported until that restore path exists.
+> + */
+> static int __init arm_smmu_setup_irqs(struct arm_smmu_device *smmu)
+> {
+> int ret, irq;
+> - u32 irqen_flags =3D IRQ_CTRL_EVTQ_IRQEN | IRQ_CTRL_GERROR_IRQEN;
+>=20
+> /* Disable IRQs first */
+> ret =3D arm_smmu_write_reg_sync(smmu, 0, ARM_SMMU_IRQ_CTRL,
+> @@ -2028,22 +2059,7 @@ static int __init arm_smmu_setup_irqs(struct arm_s=
+mmu_device *smmu)
+> }
+> }
+>=20
+> - if (smmu->features & ARM_SMMU_FEAT_PRI)
+> - irqen_flags |=3D IRQ_CTRL_PRIQ_IRQEN;
+> -
+> - /* Enable interrupt generation on the SMMU */
+> - ret =3D arm_smmu_write_reg_sync(smmu, irqen_flags,
+> -      ARM_SMMU_IRQ_CTRL, ARM_SMMU_IRQ_CTRLACK);
+> - if (ret) {
+> - dev_warn(smmu->dev, "failed to enable irqs\n");
+> - goto err_free_irqs;
+> - }
+> -
+> return 0;
+> -
+> -err_free_irqs:
+> - arm_smmu_free_irqs(smmu);
+> - return ret;
+> }
+>=20
+> static int arm_smmu_device_disable(struct arm_smmu_device *smmu)
+> @@ -2057,7 +2073,8 @@ static int arm_smmu_device_disable(struct arm_smmu_=
+device *smmu)
+> return ret;
+> }
+>=20
+> -static int __init arm_smmu_device_reset(struct arm_smmu_device *smmu)
+> +static int __init_or_smmu_suspend
+> +arm_smmu_device_reset(struct arm_smmu_device *smmu)
+> {
+> int ret;
+> u32 reg, enables;
+> @@ -2163,17 +2180,9 @@ static int __init arm_smmu_device_reset(struct arm=
+_smmu_device *smmu)
+> }
+> }
+>=20
+> - ret =3D arm_smmu_setup_irqs(smmu);
+> - if (ret) {
+> - dev_err(smmu->dev, "failed to setup irqs\n");
+> + ret =3D arm_smmu_enable_irqs(smmu);
+> + if ( ret )
+> return ret;
+> - }
+> -
+> - /* Initialize tasklets for threaded IRQs*/
+> - tasklet_init(&smmu->evtq_irq_tasklet, arm_smmu_evtq_tasklet, smmu);
+> - tasklet_init(&smmu->priq_irq_tasklet, arm_smmu_priq_tasklet, smmu);
+> - tasklet_init(&smmu->combined_irq_tasklet, arm_smmu_combined_irq_tasklet=
+,
+> - smmu);
+>=20
+> /* Enable the SMMU interface, or ensure bypass */
+> if (disable_bypass) {
+> @@ -2181,20 +2190,16 @@ static int __init arm_smmu_device_reset(struct ar=
+m_smmu_device *smmu)
+> } else {
+> ret =3D arm_smmu_update_gbpa(smmu, 0, GBPA_ABORT);
+> if (ret)
+> - goto err_free_irqs;
+> + return ret;
+> }
+> ret =3D arm_smmu_write_reg_sync(smmu, enables, ARM_SMMU_CR0,
+>      ARM_SMMU_CR0ACK);
+> if (ret) {
+> dev_err(smmu->dev, "failed to enable SMMU interface\n");
+> - goto err_free_irqs;
+> + return ret;
+> }
+>=20
+> return 0;
+> -
+> -err_free_irqs:
+> - arm_smmu_free_irqs(smmu);
+> - return ret;
+> }
+>=20
+> static int arm_smmu_device_hw_probe(struct arm_smmu_device *smmu)
+> @@ -2558,10 +2563,23 @@ static int __init arm_smmu_device_probe(struct pl=
+atform_device *pdev)
+> if (ret)
+> goto out_free;
+>=20
+> + ret =3D arm_smmu_setup_irqs(smmu);
+> + if ( ret )
+> + {
+> + dev_err(smmu->dev, "failed to setup irqs\n");
+> + goto out_free;
+> + }
+> +
+> + /* Initialize tasklets for threaded IRQs*/
+> + tasklet_init(&smmu->evtq_irq_tasklet, arm_smmu_evtq_tasklet, smmu);
+> + tasklet_init(&smmu->priq_irq_tasklet, arm_smmu_priq_tasklet, smmu);
+> + tasklet_init(&smmu->combined_irq_tasklet, arm_smmu_combined_irq_tasklet=
+,
+> + smmu);
+> +
+> /* Reset the device */
+> ret =3D arm_smmu_device_reset(smmu);
+> if (ret)
+> - goto out_free;
+> + goto out_free_irqs;
+>=20
+> /*
+> * Keep a list of all probed devices. This will be used to query
+> @@ -2575,6 +2593,8 @@ static int __init arm_smmu_device_probe(struct plat=
+form_device *pdev)
+>=20
+> return 0;
+>=20
+> +out_free_irqs:
+> + arm_smmu_free_irqs(smmu);
+>=20
+> out_free:
+> arm_smmu_free_structures(smmu);
+> @@ -2855,6 +2875,104 @@ static void arm_smmu_iommu_xen_domain_teardown(st=
+ruct domain *d)
+> xfree(xen_domain);
+> }
+>=20
+> +#ifdef CONFIG_SYSTEM_SUSPEND
+> +
+> +static void arm_smmu_reset_for_suspend_rollback(struct arm_smmu_device *=
+smmu)
+> +{
+> + int ret =3D arm_smmu_device_reset(smmu);
+> +
+> + if ( ret )
+> + dev_err(smmu->dev, "Failed to reset during suspend rollback: %d\n",
+> + ret);
 
-Reviewed-by: Bertrand Marquis <bertrand.marquis@arm.com>
+If reset fails here, we only print an error.
+
+Could the SMMU be left disabled with GBPA.ABORT cleared, allowing guest
+DMA to bypass translation when the domains resume?
+
+
+> +}
+> +
+> +static int arm_smmu_suspend(void)
+> +{
+> + struct arm_smmu_device *smmu;
+> + int ret =3D 0;
+> +
+> + list_for_each_entry(smmu, &arm_smmu_devices, devices)
+> + {
+> + /* Abort all transactions before disable to avoid spurious bypass */
+> + ret =3D arm_smmu_update_gbpa(smmu, GBPA_ABORT, 0);
+> + if ( ret )
+> + goto fail;
+> +
+> + ret =3D arm_smmu_write_reg_sync(smmu, 0, ARM_SMMU_IRQ_CTRL,
+> + ARM_SMMU_IRQ_CTRLACK);
+> + if ( ret )
+> + {
+> + dev_err(smmu->dev, "Timed-out while disabling SMMU irqs\n");
+> + goto fail;
+> + }
+> +
+> + /* Disable the SMMU via CR0.EN and all queues except CMDQ */
+> + ret =3D arm_smmu_write_reg_sync(smmu, CR0_CMDQEN, ARM_SMMU_CR0,
+> + ARM_SMMU_CR0ACK);
+> + if ( ret )
+> + {
+> + dev_err(smmu->dev, "Timed-out while disabling smmu\n");
+> + goto fail;
+> + }
+> +
+> + /*
+> + * At this point the translation interface is disabled and the
+> + * SMMU won't access translation/config structures, even
+> + * speculatively, as per the IHI0070 spec (section 6.3.9.6).
+> + * CMDQ is still enabled so that a CMD_SYNC can complete any
+> + * previously issued commands.
+> + */
+> +
+> + /* Ensure all previously issued commands have completed. */
+> + ret =3D arm_smmu_cmdq_issue_sync(smmu);
+> + if ( ret )
+> + {
+> + dev_err(smmu->dev, "Timed-out waiting for pending commands\n");
+> + goto fail;
+> + }
+
+Could we lose EVTQ events here because we do not check the queue after
+stopping it?
 
 Cheers
 Bertrand
 
-> ---
-> Changes in v10:
-> - Save and restore CNTHCTL_EL2 across SYSTEM_SUSPEND
->=20
-> Changes in v9:
-> - Drop the misleading prepare_resume_ctx() pointer argument and make both
->  save/restore paths use the global resume_cpu_context.
-> - Squash the arm64 resume trampoline into the context save/restore patch.
-> - Document in code that hyp_resume relies on PSCI initial-state rules.
-> - Use generic platform firmware wording instead of ATF-specific wording.
-> - Rename the saved context type/storage to resume_cpu_context and rely on
->  implicit zero-initialization for the file-scope object.
-> - Use asm-offsets.c-generated RESUME_CTX_* offsets to keep the assembly
->  save/restore code in sync with struct resume_cpu_context.
->=20
-> Changes in v8:
-> - Fix alignments in code.
->=20
-> Changes in v7:
-> - No functional changes, just moved commit.
-> ---
-> xen/arch/arm/Makefile              |   1 +
-> xen/arch/arm/arm64/asm-offsets.c   |  21 +++++
-> xen/arch/arm/arm64/head.S          | 122 +++++++++++++++++++++++++++++
-> xen/arch/arm/include/asm/suspend.h |  27 +++++++
-> xen/arch/arm/suspend.c             |  14 ++++
-> 5 files changed, 185 insertions(+)
-> create mode 100644 xen/arch/arm/suspend.c
->=20
-> diff --git a/xen/arch/arm/Makefile b/xen/arch/arm/Makefile
-> index b7afd3e58c..788db83ba9 100644
-> --- a/xen/arch/arm/Makefile
-> +++ b/xen/arch/arm/Makefile
-> @@ -51,6 +51,7 @@ obj-y +=3D setup.o
-> obj-y +=3D shutdown.o
-> obj-y +=3D smp.o
-> obj-y +=3D smpboot.o
-> +obj-$(CONFIG_SYSTEM_SUSPEND) +=3D suspend.o
-> obj-$(CONFIG_SYSCTL) +=3D sysctl.o
-> obj-y +=3D time.o
-> obj-y +=3D traps.o
-> diff --git a/xen/arch/arm/arm64/asm-offsets.c b/xen/arch/arm/arm64/asm-of=
-fsets.c
-> index 38a3894a3b..5d60406e9c 100644
-> --- a/xen/arch/arm/arm64/asm-offsets.c
-> +++ b/xen/arch/arm/arm64/asm-offsets.c
-> @@ -13,6 +13,7 @@
-> #include <asm/mm.h>
-> #include <asm/setup.h>
-> #include <asm/smccc.h>
-> +#include <asm/suspend.h>
->=20
-> #define DEFINE(_sym, _val)                                               =
-  \
->     asm volatile ( "\n.ascii\"=3D=3D>#define " #_sym " %0 /* " #_val " */=
-<=3D=3D\""\
-> @@ -57,6 +58,26 @@ void __dummy__(void)
->    OFFSET(INITINFO_stack, struct init_info, stack);
->    BLANK();
->=20
-> +#ifdef CONFIG_SYSTEM_SUSPEND
-> +   OFFSET(RESUME_CTX_X19, struct resume_cpu_context, callee_regs[0]);
-> +   OFFSET(RESUME_CTX_X21, struct resume_cpu_context, callee_regs[2]);
-> +   OFFSET(RESUME_CTX_X23, struct resume_cpu_context, callee_regs[4]);
-> +   OFFSET(RESUME_CTX_X25, struct resume_cpu_context, callee_regs[6]);
-> +   OFFSET(RESUME_CTX_X27, struct resume_cpu_context, callee_regs[8]);
-> +   OFFSET(RESUME_CTX_X29, struct resume_cpu_context, callee_regs[10]);
-> +   OFFSET(RESUME_CTX_SP, struct resume_cpu_context, sp);
-> +   OFFSET(RESUME_CTX_VBAR_EL2, struct resume_cpu_context, vbar_el2);
-> +   OFFSET(RESUME_CTX_VTCR_EL2, struct resume_cpu_context, vtcr_el2);
-> +   OFFSET(RESUME_CTX_VTTBR_EL2, struct resume_cpu_context, vttbr_el2);
-> +   OFFSET(RESUME_CTX_TPIDR_EL2, struct resume_cpu_context, tpidr_el2);
-> +   OFFSET(RESUME_CTX_MDCR_EL2, struct resume_cpu_context, mdcr_el2);
-> +   OFFSET(RESUME_CTX_HSTR_EL2, struct resume_cpu_context, hstr_el2);
-> +   OFFSET(RESUME_CTX_CPTR_EL2, struct resume_cpu_context, cptr_el2);
-> +   OFFSET(RESUME_CTX_HCR_EL2, struct resume_cpu_context, hcr_el2);
-> +   OFFSET(RESUME_CTX_CNTHCTL_EL2, struct resume_cpu_context, cnthctl_el2=
-);
-> +   BLANK();
-> +#endif
 > +
->    OFFSET(SMCCC_RES_a0, struct arm_smccc_res, a0);
->    OFFSET(SMCCC_RES_a2, struct arm_smccc_res, a2);
->    OFFSET(ARM_SMCCC_1_2_REGS_X0_OFFS, struct arm_smccc_1_2_regs, a0);
-> diff --git a/xen/arch/arm/arm64/head.S b/xen/arch/arm/arm64/head.S
-> index 72c7b24498..962be716ae 100644
-> --- a/xen/arch/arm/arm64/head.S
-> +++ b/xen/arch/arm/arm64/head.S
-> @@ -561,6 +561,128 @@ END(efi_xen_start)
->=20
-> #endif /* CONFIG_ARM_EFI */
->=20
-> +#ifdef CONFIG_SYSTEM_SUSPEND
-> +/*
-> + * int prepare_resume_ctx(void)
-> + *
-> + * CPU context saved here will be restored on resume in hyp_resume funct=
-ion.
-> + * prepare_resume_ctx shall return a non-zero value. Upon restoring cont=
-ext
-> + * hyp_resume shall return value zero instead. From C code that invokes
-> + * prepare_resume_ctx, the return value is interpreted to determine whet=
-her
-> + * the context is saved (prepare_resume_ctx) or restored (hyp_resume).
+> + /* Disable everything */
+> + ret =3D arm_smmu_device_disable(smmu);
+> + if ( ret )
+> + goto fail;
+> +
+> + dev_dbg(smmu->dev, "Suspended smmu\n");
+> + }
+> +
+> + return 0;
+> +
+> + fail:
+> + /* Reset the device that failed as well as any already-suspended ones. =
+*/
+> + arm_smmu_reset_for_suspend_rollback(smmu);
+> +
+> + list_for_each_entry_continue_reverse(smmu, &arm_smmu_devices, devices)
+> + arm_smmu_reset_for_suspend_rollback(smmu);
+> +
+> + return ret;
+> +}
+> +
+> +static void arm_smmu_resume(void)
+> +{
+> + int ret;
+> + struct arm_smmu_device *smmu;
+> +
+> + list_for_each_entry(smmu, &arm_smmu_devices, devices)
+> + {
+> + dev_dbg(smmu->dev, "Resuming device\n");
+> +
+> + /*
+> + * The reset will re-initialize all the base addresses, queues,
+> + * prod and cons maintained within struct arm_smmu_device as well as
+> + * re-enable the interrupts.
 > + */
-> +FUNC(prepare_resume_ctx)
-> +        ldr   x0, =3Dresume_cpu_context
-> +
-> +        /* Store callee-saved registers */
-> +        stp   x19, x20, [x0, #RESUME_CTX_X19]
-> +        stp   x21, x22, [x0, #RESUME_CTX_X21]
-> +        stp   x23, x24, [x0, #RESUME_CTX_X23]
-> +        stp   x25, x26, [x0, #RESUME_CTX_X25]
-> +        stp   x27, x28, [x0, #RESUME_CTX_X27]
-> +        stp   x29, lr, [x0, #RESUME_CTX_X29]
-> +
-> +        /* Store stack-pointer */
-> +        mov   x2, sp
-> +        str   x2, [x0, #RESUME_CTX_SP]
-> +
-> +        /* Store system control registers */
-> +        mrs   x2, VBAR_EL2
-> +        str   x2, [x0, #RESUME_CTX_VBAR_EL2]
-> +        mrs   x2, VTCR_EL2
-> +        str   x2, [x0, #RESUME_CTX_VTCR_EL2]
-> +        mrs   x2, VTTBR_EL2
-> +        str   x2, [x0, #RESUME_CTX_VTTBR_EL2]
-> +        mrs   x2, TPIDR_EL2
-> +        str   x2, [x0, #RESUME_CTX_TPIDR_EL2]
-> +        mrs   x2, MDCR_EL2
-> +        str   x2, [x0, #RESUME_CTX_MDCR_EL2]
-> +        mrs   x2, HSTR_EL2
-> +        str   x2, [x0, #RESUME_CTX_HSTR_EL2]
-> +        mrs   x2, CPTR_EL2
-> +        str   x2, [x0, #RESUME_CTX_CPTR_EL2]
-> +        mrs   x2, HCR_EL2
-> +        str   x2, [x0, #RESUME_CTX_HCR_EL2]
-> +        mrs   x2, CNTHCTL_EL2
-> +        str   x2, [x0, #RESUME_CTX_CNTHCTL_EL2]
-> +
-> +        /* prepare_resume_ctx must return a non-zero value */
-> +        mov   x0, #1
-> +        ret
-> +END(prepare_resume_ctx)
-> +
-> +FUNC(hyp_resume)
-> +        /*
-> +         * PSCI states that SYSTEM_SUSPEND follows the CPU_SUSPEND initi=
-al
-> +         * state rules, so PSCI-compliant firmware must enter the return
-> +         * exception level with DAIF masked.
-> +         */
-> +
-> +        /* Initialize the UART if earlyprintk has been enabled. */
-> +#ifdef CONFIG_EARLY_PRINTK
-> +        bl    init_uart
+> + ret =3D arm_smmu_device_reset(smmu);
+> + if ( ret )
+> + panic("SMMUv3: %s: Failed to reset during resume: %d\n",
+> +      dev_name(smmu->dev), ret);
+> + }
+> +}
 > +#endif
-> +        PRINT_ID("- Xen resuming -\r\n")
 > +
-> +        bl    check_cpu_mode
-> +        bl    cpu_init
-> +
-> +        ldr   x0, =3Dstart
-> +        adr   x20, start             /* x20 :=3D paddr (start) */
-> +        sub   x20, x20, x0           /* x20 :=3D phys-offset */
-> +        ldr   lr, =3Dmmu_resumed
-> +        b     enable_secondary_cpu_mm
-> +
-> +mmu_resumed:
-> +        /* Now we can access the saved context, so restore it here. */
-> +        ldr   x0, =3Dresume_cpu_context
-> +
-> +        /* Restore callee-saved registers */
-> +        ldp   x19, x20, [x0, #RESUME_CTX_X19]
-> +        ldp   x21, x22, [x0, #RESUME_CTX_X21]
-> +        ldp   x23, x24, [x0, #RESUME_CTX_X23]
-> +        ldp   x25, x26, [x0, #RESUME_CTX_X25]
-> +        ldp   x27, x28, [x0, #RESUME_CTX_X27]
-> +        ldp   x29, lr, [x0, #RESUME_CTX_X29]
-> +
-> +        /* Restore stack pointer */
-> +        ldr   x2, [x0, #RESUME_CTX_SP]
-> +        mov   sp, x2
-> +
-> +        /* Restore system control registers */
-> +        ldr   x2, [x0, #RESUME_CTX_VBAR_EL2]
-> +        msr   VBAR_EL2, x2
-> +        ldr   x2, [x0, #RESUME_CTX_VTCR_EL2]
-> +        msr   VTCR_EL2, x2
-> +        ldr   x2, [x0, #RESUME_CTX_VTTBR_EL2]
-> +        msr   VTTBR_EL2, x2
-> +        ldr   x2, [x0, #RESUME_CTX_TPIDR_EL2]
-> +        msr   TPIDR_EL2, x2
-> +        ldr   x2, [x0, #RESUME_CTX_MDCR_EL2]
-> +        msr   MDCR_EL2, x2
-> +        ldr   x2, [x0, #RESUME_CTX_HSTR_EL2]
-> +        msr   HSTR_EL2, x2
-> +        ldr   x2, [x0, #RESUME_CTX_CPTR_EL2]
-> +        msr   CPTR_EL2, x2
-> +        ldr   x2, [x0, #RESUME_CTX_HCR_EL2]
-> +        msr   HCR_EL2, x2
-> +        ldr   x2, [x0, #RESUME_CTX_CNTHCTL_EL2]
-> +        msr   CNTHCTL_EL2, x2
-> +        isb
-> +
-> +        /*
-> +         * Since context is restored return from this function will appe=
-ar
-> +         * as return from prepare_resume_ctx. To distinguish a return fr=
-om
-> +         * prepare_resume_ctx which is called upon finalizing the suspen=
-d,
-> +         * as opposed to return from this function which executes on res=
-ume,
-> +         * we need to return zero value here.
-> +         */
-> +        mov   x0, #0
-> +        ret
-> +END(hyp_resume)
-> +
-> +#endif /* CONFIG_SYSTEM_SUSPEND */
-> +
-> /*
->  * Local variables:
->  * mode: ASM
-> diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/as=
-m/suspend.h
-> index 31a98a1f1b..c848fc6340 100644
-> --- a/xen/arch/arm/include/asm/suspend.h
-> +++ b/xen/arch/arm/include/asm/suspend.h
-> @@ -3,6 +3,8 @@
-> #ifndef ARM_SUSPEND_H
-> #define ARM_SUSPEND_H
->=20
-> +#include <xen/types.h>
-> +
-> struct domain;
-> struct vcpu;
-> struct vcpu_guest_context;
-> @@ -14,6 +16,31 @@ struct resume_info {
->=20
-> void arch_domain_resume(struct domain *d);
->=20
+> static const struct iommu_ops arm_smmu_iommu_ops =3D {
+> .page_sizes =3D PAGE_SIZE_4K,
+> .init =3D arm_smmu_iommu_xen_domain_init,
+> @@ -2867,6 +2985,10 @@ static const struct iommu_ops arm_smmu_iommu_ops =
+=3D {
+> .unmap_page =3D arm_iommu_unmap_page,
+> .dt_xlate =3D arm_smmu_dt_xlate,
+> .add_device =3D arm_smmu_add_device,
 > +#ifdef CONFIG_SYSTEM_SUSPEND
-> +#ifdef CONFIG_ARM_64
-> +struct resume_cpu_context {
-> +    register_t callee_regs[12];
-> +    register_t sp;
-> +    register_t vbar_el2;
-> +    register_t vtcr_el2;
-> +    register_t vttbr_el2;
-> +    register_t tpidr_el2;
-> +    register_t mdcr_el2;
-> +    register_t hstr_el2;
-> +    register_t cptr_el2;
-> +    register_t hcr_el2;
-> +    register_t cnthctl_el2;
-> +} __aligned(16);
-> +#else
-> +#error "Define resume_cpu_context structure for arm32"
+> + .suspend =3D arm_smmu_suspend,
+> + .resume =3D arm_smmu_resume,
 > +#endif
-> +
-> +extern struct resume_cpu_context resume_cpu_context;
-> +
-> +int prepare_resume_ctx(void);
-> +void hyp_resume(void);
-> +#endif /* CONFIG_SYSTEM_SUSPEND */
-> +
-> #endif /* ARM_SUSPEND_H */
+> };
 >=20
-> /*
-> diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
-> new file mode 100644
-> index 0000000000..6ea4a0f9cc
-> --- /dev/null
-> +++ b/xen/arch/arm/suspend.c
-> @@ -0,0 +1,14 @@
-> +/* SPDX-License-Identifier: GPL-2.0-only */
-> +
-> +#include <asm/suspend.h>
-> +
-> +struct resume_cpu_context resume_cpu_context;
-> +
-> +/*
-> + * Local variables:
-> + * mode: C
-> + * c-file-style: "BSD"
-> + * c-basic-offset: 4
-> + * indent-tabs-mode: nil
-> + * End:
-> + */
+> static __init int arm_smmu_dt_init(struct dt_device_node *dev,
 > --=20
 > 2.43.0
 >=20
