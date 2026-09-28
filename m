@@ -4,44 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2EEAC9833F
-	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2026 12:51:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436002.1654756 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30231C9833F
+	for <xen-devel@archiver.kernel.org>; Mon, 28 Sep 2026 12:53:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436008.1654766 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBAog-0000TH-3m; Mon, 28 Sep 2026 12:50:46 +0000
+	id 1xBAqj-0000zj-GD; Mon, 28 Sep 2026 12:52:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436002.1654756; Mon, 28 Sep 2026 12:50:46 +0000
+Received: by outflank-mailman (output) from mailman id 1436008.1654766; Mon, 28 Sep 2026 12:52:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBAog-0000TA-1A; Mon, 28 Sep 2026 12:50:46 +0000
-Received: by outflank-mailman (input) for mailman id 1436002;
- Mon, 28 Sep 2026 12:50:45 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xBAqj-0000zc-Br; Mon, 28 Sep 2026 12:52:53 +0000
+Received: by outflank-mailman (input) for mailman id 1436008;
+ Mon, 28 Sep 2026 12:52:52 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1xBAof-0000T4-Gz
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 12:50:45 +0000
+ (envelope-from <zhangzheng@iscas.ac.cn>) id 1xBAqi-0000zU-IR
+ for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 12:52:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBAoe-005jfM-3d
- for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 14:50:44 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xBAqh-004QVP-Vb
+ for xen-devel@lists.xenproject.org; Mon, 28 Sep 2026 14:52:51 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aba629f-2eae-0a2a0a5409dd-0a2a45078e9c-12
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 14:50:43 +0200
-Received: from [74.125.225.98] (helo=mail-wr2-f34.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6aba62a3-b4ea-0a2a45070019-4a7de162813a-3
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 14:50:43 +0200
-Received: by mail-wr2-f34.google.com with SMTP id
- ffacd0b85a97d-48884b021dbso1088046f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 05:50:43 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a00179c729sm213660425e9.15.2026.09.28.05.50.42
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Sep 2026 05:50:42 -0700 (PDT)
+ (envelope-from <zhangzheng@iscas.ac.cn>)
+ id 6aba6319-bab6-0a2a0a5309dd-0a2a45068454-16
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 14:52:50 +0200
+Received: from [159.226.251.25] (helo=cstnet.cn)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <zhangzheng@iscas.ac.cn>)
+ id 6aba631f-195a-0a2a45060019-9fe2fb19898c-3
+ for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 14:52:49 +0200
+Received: from iscas-ws (unknown [36.110.52.2])
+ by APP-05 (Coremail) with SMTP id zQCowAC36EIYY7pqBZ2UCQ--.12125S2;
+ Mon, 28 Sep 2026 20:52:41 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,160 +48,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790599843; x=1791204643; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=vddx+UEdCMI0yrHwvahcQoYIirGYaGRBDuo3v4mTh74=;
-        b=T1LAUqKXGdMIEgm2egzjrIlNdoyAW2F6MAg5NqGqfTrgsfoNRHB0nC9KutNrmoP5M/
-         pWXYiwkg59H5EdHtvDkPgHlHq32azSrGYQkrPM1thy7/ZAxmxo+tHoyK7n7VbgBQeuUZ
-         aPy2f3gO6cOYLcxV3u9ln5KIkTlcfSE8rs9GM8LlhXicn9mDmn09CRI4sunNetpzYwjS
-         Sw8OfQh8lxzA0wzSTCW2uhccVfgYYyaMej45EZK0/0GfRSbTgP+YHi1vhBeffU4We7fr
-         qEVbBu0y98amzcQMuuyyeZr98aiG09EQkn5r2Cmd79KT0xEox9pjZo+vi0X6X+UdB/+G
-         NI+g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790599843; x=1791204643;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=vddx+UEdCMI0yrHwvahcQoYIirGYaGRBDuo3v4mTh74=;
-        b=z0pkWIh5KOMqPqNg3FJGcA8P+Z1TJebNJlVz8SwQaHI3GEMDvJ60ZXjMkiIOLesHXH
-         RCBzti3h0iAF3Q+8ETQ4rRd/6IkCcDsxfLyA04V4GKpavUaJjtdVlJcBc7I1I5ZQSjiK
-         VuU0fBvX8O3DYAeO0aoc2lkm3ns/IZZSBCJlPnTV3yVGC77XhOoPOJ7NUIAgUygKDm30
-         dPwiuzp6DzxTNyyeEl9/N0EuMbPJrpAb+sqJQBA+uftuKOUdyc2KYip+lof8yYbvC8d4
-         bS3OHyVg7aA/lzUJaSUoMe3b9XAMmnw37OtmzyXhWx3BNZJRamWNON4X6ZO6NdfwMwkp
-         iLAA==
-X-Gm-Message-State: AFuF++nV4/t5PjyIRbR5Oa9Yqw9gMxzkquRNqL3IXkSQpECZuqXAKj4K
-	PlO0tnoIlW+KPg+jelbmZ8zwaCN1psC0Jk/jl46N5lR8MmXMz6ijnYwLa0m/YaMkcw==
-X-Gm-Gg: AYBFou2FB7IoMaPtsx3BOEBM2+fDTEJIogyAAhj36XylIWktOSjKHBhl9eRwoZB8uY+
-	lqvACf6EjijaCwZAFXcaF2bynxkpcCo6jCvw9MMxo3f5/7y8hc7OTYBrGstALD11ZQ3SiB/Itlu
-	MaLpIxTD6o0hB8zlyuIKaOlQVLw+Qaw9cKgez0FL7Bc9y0+H/69TwTvHFimvSgxDMsZHXeSDQQY
-	UiVhX5D2aJwkDwVLSBVruAV56qHH++T5IVbIQc45VWmPrZ0lmO2Vn+bCEMKW4z1bwGpBggzVYBe
-	ejLMrmeMAm6x9/AAHH52v/LZCSv3KFODfpXIalF9Pzmo63y5iyD9PUybAFbAzhzqDUVRr201trJ
-	D7NH/JVpGOS//WxtR5Kq9fdWsp0usXVnGwz6/Kc1Jg/B2hfqeS4laEtWZXePIFOMLck7eptX8sK
-	N0aNm9jSScG0k4B/qPAy06XcDg05J3yEwdUtx66cPpuxVA5YQ0WnE/Vla60Nn5HYCYF4uvshsIe
-	lU/w4JM8Au1Dx0YJEF46xO35GGO422/juCzK3snyMeoCxMCIzKI4fvjzhkU6sA=
-X-Received: by 2002:a05:600c:6986:b0:49c:fa21:e73c with SMTP id 5b1f17b1804b1-49fe66f147bmr218206695e9.18.1790599843137;
-        Mon, 28 Sep 2026 05:50:43 -0700 (PDT)
-Message-ID: <dfbafb99-58cd-4be0-aa77-942c6fc916fd@suse.com>
-Date: Mon, 28 Sep 2026 14:50:41 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Date: Mon, 28 Sep 2026 20:53:13 +0800
+From: Zhang Zheng <zhangzheng@iscas.ac.cn>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org, 
+	Alistair Francis <alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, 
+	Baptiste Le Duc <baptiste.le-duc@vates.tech>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
+	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v1 0/1] [RISC-V] replace SBI early console with 8250 UART
+Message-ID: <arpi6szfHazQg07N@iscas-ws>
+References: <20260928023857.1030884-1-zhangzheng@iscas.ac.cn>
+ <5919f1f2-e24c-4b0e-a7dd-126ac6fbe38f@gmail.com>
+ <aronfcYWtc1CHQgH@iscas-ws>
+ <3152e70f-881f-4a58-9b2d-df661887dc80@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/6] x86/pass-through: no locking around
- pt_irq_{create,destroy}_bind()
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>,
- Julian Vetter <julian.vetter@vates.tech>
-References: <eb5925e4-2409-452c-8768-4ca6717eb156@suse.com>
- <92b0a72a-44df-424f-acbe-58d7167f1c4d@suse.com>
- <arOr69DIql2Mjnd7@macbook.local>
- <cc7da531-958b-4b03-9c0e-514d77ebb366@suse.com>
- <araKzmNyBCGWidBt@macbook.local>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <araKzmNyBCGWidBt@macbook.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1790599843-3C610AE4-E46CCDD8/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <3152e70f-881f-4a58-9b2d-df661887dc80@gmail.com>
+X-CM-TRANSID:zQCowAC36EIYY7pqBZ2UCQ--.12125S2
+X-Coremail-Antispam: 1UD129KBjvJXoWxGrWftr4xGryUJF17uF1rZwb_yoWrZryfpF
+	W8C3ZYkr45Jr1ak34Sg3WUurWak3ykGa4UXasxCrWYgrZ0vrWUAry3t34F9asrXF15Xry0
+	kF10gry3W3WUA37anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvvb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVW0oVCq3wA2z4x0Y4vEx4
+	A2jsIEc7CjxVAFwI0_GcCE3s1le2I262IYc4CY6c8Ij28IcVAaY2xG8wAqx4xG64xvF2IE
+	w4CE5I8CrVC2j2WlYx0E2Ix0cI8IcVAFwI0_JF0_Jw1lYx0Ex4A2jsIE14v26F4j6r4UJw
+	Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l
+	c7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr
+	1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE
+	14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7
+	IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E
+	87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73Uj
+	IFyTuYvjxUqFdyDUUUU
+X-Originating-IP: [36.110.52.2]
+X-CM-SenderInfo: x2kd0wx2kh0w46lvutnvoduhdfq/
+X-purgate-ID: tlsNG-16d1c6/1790599970-F70C777B-54046F54/0/0
 X-purgate-type: clean
-X-purgate-size: 3069
+X-purgate-size: 4937
 
-On 25.09.2026 16:53, Roger Pau Monné wrote:
-> On Thu, Sep 24, 2026 at 11:57:19AM +0200, Jan Beulich wrote:
->> On 23.09.2026 12:37, Roger Pau Monné wrote:
->>> On Tue, Sep 08, 2026 at 03:01:51PM +0200, Jan Beulich wrote:
->>>> The questionable use of pcidevs_lock() there was discussed more than once.
->>>> It really is pointless: The functions synchronize primarily via the per-
->>>> domain event lock. They also may already be called with the global PCI
->>>> devices lock not held: See hvm/vmsi.c:vpci_msi_update(),
->>>> hvm/vmsi.c:vpci_msi_arch_update(), and hvm/vmsi.c:vpci_msi_disable().
->>>>
->>>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>>>
->>>> --- a/xen/arch/x86/domctl.c
->>>> +++ b/xen/arch/x86/domctl.c
->>>> @@ -636,10 +636,7 @@ long arch_do_domctl(
->>>>              ret = -EPERM;
->>>>          else if ( is_iommu_enabled(d) )
->>>>          {
->>>> -            pcidevs_lock();
->>>>              ret = pt_irq_create_bind(d, bind);
->>>> -            pcidevs_unlock();
->>>
->>> pt_irq_create_bind() might call into msixtbl_pt_register() which
->>> requires either the pcidevs_lock() or the per-domain d->pci_lock lock
->>> to be taken, which I think is not the case in the context here?
->>
->> Hmm, indeed. Not having seen the assertion there trigger kind of worries
->> me a little. Do you agree that the change to vioapic_hwdom_map_gsi() can,
->> otoh, be left as is?
+On Mon, Sep 28, 2026 at 11:31:06AM +0200, Oleksii Kurochko wrote:
 > 
-> Hm, I'm borderline on that one - I can't find a path where d->pci_lock
-> will be needed for legacy PCI interrupt binding, yet at the same time
-> I feel it would be better if the locking context is uniform across
-> call sites.  I guess I'm fine with the asymmetric locking context if
-> that's your preference.  Maybe worth a mention in a comment somewhere.
+> 
+> On 9/28/26 10:40 AM, Zhang Zheng wrote:
+> > On Mon, Sep 28, 2026 at 09:38:14AM +0200, Oleksii Kurochko wrote:
+> > > 
+> > > 
+> > > On 9/28/26 4:38 AM, Zhang Zheng wrote:
+> > > > The legacy SBI console extension is planned for deprecation. Replace the
+> > > > RISC-V early printk backend with direct access to 8250 UART MMIO.
+> > > 
+> > > Won't it better just to start to add support of newer SBI? It provides
+> > > pretty good support + faster as it supports passing of string instead of one
+> > > char.
+> > > 
+> > 
+> > Using the newer SBI DBCN extension would indeed result in a smaller change. At
+> > the time, I mainly followed the direction suggested by the TODO and referred
+> > directly to the arm64 implementation, from which most of the code was adapted.
+> 
+> I think TODO was written at that way because I missed DBCN (or it wasn't
+> ratified at that moment). Considering that it is ratified now ...
+> 
+> > 
+> > > Also, I think it will lead to lesser changes.
+> > > 
+> > 
+> > If falling back to SBI console putchar is acceptable, DBCN should work
+> > well here.
+> 
+> ... I prefer to use SBI functionality (in the current case DBCN) as maximum
+> as possible so if there is no any reason (and I don't see at the moment it)
+> which doesn't allow us to use DBCN here, I would prefer to use DBCN.
+> 
 
-Maybe it's best if I get v2 out before we settle on this. The need for a
-comment may, with how v2 is done, go away. E.g. the first of the hunks
-now is
+Given that Xen on RISC-V is expected to target relatively recent RVA23 hardware,
+which should ship with a recent version of OpenSBI, I think you are right that
+there is no real need to provide a fallback here.
 
-@@ -637,9 +637,13 @@ long arch_do_domctl(
-             ret = -EPERM;
-         else if ( is_iommu_enabled(d) )
-         {
--            pcidevs_lock();
-+            if ( bind->irq_type == PT_IRQ_TYPE_MSI )
-+                read_lock(&d->pci_lock);
-+
-             ret = pt_irq_create_bind(d, bind);
--            pcidevs_unlock();
-+
-+            if ( bind->irq_type == PT_IRQ_TYPE_MSI )
-+                read_unlock(&d->pci_lock);
- 
-             if ( ret < 0 )
-                 printk(XENLOG_G_ERR "pt_irq_create_bind failed (%ld) for %pd\n",
+> If you still want to in the way suggested by TODO then some parts which are
+> common between Arm and RISC-V should be moved to common instead of
+> introducing them in RISC-V specific folder.
+>
 
-While it's only a read-lock now, effects on parallelism aren't as bad
-anymore. Yet still I'm rather hesitant to acquire a lock when there's no
-need for doing so. In the case here we'd still impact any write-lock
-paths, i.e. first and foremost vpci_write().
+I also tried to make the current patch as minimal as possible, but it would
+still end up touching quite a few places.
 
-There's possibly another somewhat related issue: vpci_read() only uses
-read_lock(), yet reads can in principle have side effects. Are we (once
-again) building upon Dom0 knowing what it's doing, and this - like many
-other aspect - being in need of auditing before DomU supported can be
-declared complete?
+> Let me know which approach you are going to follow. If the current one you
+> already introduced then I will start to review it, if you will go SBI-way
+> then I prefer to wait for your v2.
+> 
+> ~ Oleksii
+> 
 
-Jan
+I misunderstood the TODO comment, I thought that would be the preferred
+implementation. Therefore, I will switch to using DBCN and send a v2.
+
+Best regards,
+
+Zhang
+
+> > > > 
+> > > > This also addresses truncated output observed on SpacemiT K3 when
+> > > > switching from early printk to dtuart. Direct UART access lets early
+> > > > printk flush the UART after each string before the dtuart driver takes
+> > > > over and clear it's FIFO, which cause the truncated uart output.>
+> > > > The truncated uart looks like:
+> > > > 
+> > > >     (XEN) Command line: dtuart=/soc/uart@d4017000:115200/921600 console=dtuart sync_console
+> > > >     (XEN) Domain heap initialised
+> > > >     (XEN) Booting using Device Tree
+> > > >     (XEN) /home/zz/dev/git/xen_stuff/xen/xen/arch/riscv/cpufeature.c:710: SSTC detected; supported for Xen use, but not for guests
+> > > >     (XEN) Looking for dtuart at "/soc/uart@d40 __  __            _  _    ____  _____                    _        _     _
+> > > >      \ \/ /___ _ __   | || |  |___ \|___ /    _   _ _ __  ___| |_ __ _| |__ | | ___
+> > > >       \  // _ \ '_ \  | || |_   __) | |_ \ __| | | | '_ \/ __| __/ _` | '_ \| |/ _ \
+> > > >       /  \  __/ | | | |__   _| / __/ ___) |__| |_| | | | \__ \ || (_| | |_) | |  __/
+> > > >      /_/\_\___|_| |_|    |_|(_)_____|____/    \__,_|_| |_|___/\__\__,_|_.__/|_|\___|
+> > > > 
+> > > >     (XEN) Xen version 4.23-unstable (zz@) (riscv64-linux-gnu-gcc (GCC) 15.1.0) debug=y ubsan=y Sat Sep 26 14:50:31 CST 2026
+> > > >     (XEN) Latest ChangeSet: Fri Sep 18 10:11:27 2026 +0800 git:77544a69ea
+> > > > 
+> > > > Zheng Zhang (1):
+> > > >     xen/riscv: replace SBI early console with 8250 UAR
+> > > > 
+> > > >    xen/arch/riscv/Kconfig.debug              | 53 ++++++++++++++++++++--
+> > > >    xen/arch/riscv/configs/tiny64_defconfig   |  2 +
+> > > >    xen/arch/riscv/early_printk.c             | 37 +++++++---------
+> > > >    xen/arch/riscv/include/asm/early_printk.h | 12 +++++
+> > > >    xen/arch/riscv/include/asm/fixmap.h       |  6 ++-
+> > > >    xen/arch/riscv/include/asm/sbi.h          |  7 ---
+> > > >    xen/arch/riscv/mm.c                       | 41 +++++++++++++----
+> > > >    xen/arch/riscv/riscv64/Makefile           |  1 +
+> > > >    xen/arch/riscv/riscv64/debug-8250.inc     | 51 +++++++++++++++++++++
+> > > >    xen/arch/riscv/riscv64/debug.S            | 54 +++++++++++++++++++++++
+> > > >    xen/arch/riscv/sbi.c                      |  5 ---
+> > > >    11 files changed, 223 insertions(+), 46 deletions(-)
+> > > >    create mode 100644 xen/arch/riscv/riscv64/debug-8250.inc
+> > > >    create mode 100644 xen/arch/riscv/riscv64/debug.S
+> > > > 
+> > > > base-commit: 4c1aba82cff95ab11f7fe4af8965a06703537288
+> > 
+> 
+> 
+
 
