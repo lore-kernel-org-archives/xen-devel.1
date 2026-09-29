@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B384CA5FA5
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 19:02:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436701.1655386 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BBAFDCA5FA7
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 19:02:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436704.1655415 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBd5z-0001T9-7f; Tue, 29 Sep 2026 19:02:31 +0000
+	id 1xBd66-00029N-9N; Tue, 29 Sep 2026 19:02:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436701.1655386; Tue, 29 Sep 2026 19:02:31 +0000
+Received: by outflank-mailman (output) from mailman id 1436704.1655415; Tue, 29 Sep 2026 19:02:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBd5z-0001Se-4I; Tue, 29 Sep 2026 19:02:31 +0000
-Received: by outflank-mailman (input) for mailman id 1436701;
- Tue, 29 Sep 2026 19:02:30 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xBd66-000296-2k; Tue, 29 Sep 2026 19:02:38 +0000
+Received: by outflank-mailman (input) for mailman id 1436704;
+ Tue, 29 Sep 2026 19:02:37 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykola_Kvach@epam.com>) id 1xBd5x-0001QS-Qr
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 19:02:29 +0000
+ (envelope-from <Mykola_Kvach@epam.com>) id 1xBd65-00020Z-DE
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 19:02:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBd5w-008g6y-TL
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 21:02:28 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xBd64-002hjN-QY
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 21:02:36 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6abc0b41-8faa-0a2a0a5109dd-0a2a450cc434-6
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 21:02:28 +0200
-Received: from [52.101.83.141]
- (helo=GVXPR05CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abc0b3e-e002-0a2a0a5209dd-0a2a45018dc2-46
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 21:02:36 +0200
+Received: from [40.107.159.78]
+ (helo=OSPPR02CU001.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Mykola_Kvach@epam.com>)
- id 6abc0b43-f479-0a2a450c0019-3465538da00d-4
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 21:02:28 +0200
+ id 6abc0b4c-5984-0a2a45010019-286b9f4eeb70-3
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 21:02:36 +0200
 Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
  (2603:10a6:10:430::13) by AM9PR03MB8053.eurprd03.prod.outlook.com
  (2603:10a6:20b:3df::18) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.24; Tue, 29 Sep
- 2026 19:02:26 +0000
+ 2026 19:02:34 +0000
 Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
  ([fe80::f257:38e:c0af:df28]) by DB3PR0302MB9208.eurprd03.prod.outlook.com
  ([fe80::f257:38e:c0af:df28%5]) with mapi id 15.21.0451.022; Tue, 29 Sep 2026
- 19:02:26 +0000
+ 19:02:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,19 +57,19 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FS7YrrTLMwtSI+WfeutaqM4zfJF5X76nX9LyGIbAXTK3DAHRXSkxKuAhbKCnFZXcxiNwM7raYUC9eZlL0B0FnuR6PwqKG2eWaVhSNPeLNvF9YV5Io9RpKIlvbUGkcqJCzJCPoftbbYgMAs64bnAcDd+7OO+HRGhJKSolDgmIN81dCXotVMqBkSDFgH06q/uSRIqg7RIot2EmXIod3ArUcYbu3B1N1j/Uowx+27ZdGUhbrYjticuFp83RJ3omYXUgsDWO5j17XYLfZTwO+54L8W6j5bhB9xFbzjYEvi1yEgbiljp9v6v2LIKoNkGL1vBAIxsTJBNzpnoEdBDT1mTkGg==
+ b=g/NPc51eRWaSb5qQXPNMRlQEDu7Lj+ue5Qe0hPjdvukAttViXtPVDXSdBmnycpOmNWYhBhVu7B0EBXJ9YenR9jmEVhjWlOZ37W1LAxq3Ld62FLdoaDCXIuPiG6nqbk0p2KzKiKdIWTn6JoGSmLIwWcEznzF8MjibZvny4q9SY2fzs6zDTiIMigYCqPJyBclZBCrKTV4Ut4vRIVPrigyI85sMSIGRYbboDrLgqMmpXTGHOlmcU9KQPh4cxGNrpCFn73QiCbJRgVIDoFmqXh/DxtP0l97QzrK+ty1wFdngFeakZB3vVUbOZsoRrNu7HpvX0KUMNWn1Me9HE+npdaCa0Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=t2HroqjEQXa8onlzti7/N45vTONp5vJUUwe52l1zMgU=;
- b=NybgxJGHowd5GGontu3178WvbrUcm++2lHxXWuPfrRRGuyWUSyH55ymRlwV6ZpxB7iQ9ez0Vw9qKqwrH1w6AExPFeJqz1DfUB7xqwoufGk3KXaDrYol3JA4WadTae/auPQJFd7Ql15RgzogFLZSBtRbSWwnYnOA9kdJfAqX3igzA2HPQxnMYTgsih+SMR3YtGeBguTZ5MMV2gX6yeFBnbjKfg6PDk292XNbUVsHtbYSN4wTMh9LvEok3yyQH2Q4MyD0rkIj2vnrO+4ae94cteoWzwxyfl+67DmPFNij1Rfw4J7Hw9Tfft7xDR6u1WJpNFl/8g9u0HOO5TvlKGBSWRg==
+ bh=IwvtV8OvyUyBXitibYL6YMGUohC/7mqNEc2oAD0Ppwc=;
+ b=v+uJg9gotWbbQ3lB2GIxucF9YZxsrepBBFYePxMX58a40Nhf2xOVQKtpDRBBspqWsyWgwoi3TDZ/Vvn1ERdChJXSJVvI98kTaf0TRbjpydPmRZpHiSIwYvWYk/07VDEpqB+cMTicY0TjtRnD/VQPKqTmuZu4cAdFFV0J0kZol/DQeGjQ/Og4+UyTq3L69RkGSOhzzhXaNSk4mbTZ5w9JGZKzDqF1ql67ulmjl69goO/q99/qHP8BtolVaHNq6XLzvfZKaCpkVm1LX9Om+RL420V27XSYqvzEU+VFE+APDHLmd3x2s78WG3+cIwsSamOhAhxVOEA4iTt2v5YUc2gBTw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=t2HroqjEQXa8onlzti7/N45vTONp5vJUUwe52l1zMgU=;
- b=hReVKIsH5cvXEqKYUmNDlAfz8cAf5yoErHGWtaUCbUTBLhbcEvyY+dpeC29GKw5+5Ngk+jsUXMP7iKlOYeXkIIq+G7aLYmj8iWMxZYHQXQii+T0Xe3BdzsPdF3RVZhREEGvFW7gXPeRHSLtt0uVY5fJu7CV0nZBa73wAtuS3aovY5CHPink2InyJH0pdikCkDXqRapcTqQNvkd1pYhQnj5I670AQ1qbDZVfmPSt6EBAvqv2EPBJmJ/BNycXpedsmW7JaqrL0fBrVlXUkilNRhKxm+tgik3rnRdzUMYr9B3tEDn5s2IB3CEoGXeFYkUos+g6FEB89USWLKSblJtbN9A==
+ bh=IwvtV8OvyUyBXitibYL6YMGUohC/7mqNEc2oAD0Ppwc=;
+ b=iL+2Bvv5nKSYXvUxUh/HETw6KpQj5j3OSoY/IyTAphJcShh7hzYMjGAaIIYeuBDQOTIdCEOU6+M1PmdDbGdi2QUV6lwN1cAPyTmgZB9ojs7ySRNZDe3yKEJj/OkskWqmR2Az7ivk+GGf7ihvijOETaZD+tpYuWBPFEh5oGuKkRYRqsf7+rZnfIHONTkEUhHOwcxJBAUCc0Y6j8/RLDw7YWpDkjAxsRoO8cwSi2Bq3D1TaPZMzgydIwBOmgZIrP/aIQmqWYH92N1rNADolGPPEcu0qOF5C8cWmMFXzHhxOPjlG326cL3xJxYCyWLEwkKyxXZS8eb9OM+pOLeW51LRjg==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 From: Mykola Kvach <mykola_kvach@epam.com>
@@ -79,9 +79,9 @@ Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Bertrand Marquis <bertrand.marquis@arm.com>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH v4 1/4] xen/arm: its: initialize host LPI state before activating ITSes
-Date: Tue, 29 Sep 2026 22:02:10 +0300
-Message-ID: <0afac276107d8b2a170489950d75e611c69a599b.1790707009.git.mykola_kvach@epam.com>
+Subject: [PATCH v4 4/4] xen/arm: its: handle dma-noncoherent on GIC and ITS nodes
+Date: Tue, 29 Sep 2026 22:02:13 +0300
+Message-ID: <fb0674bdf222312b6ed04f3b6ab1a0cf58f05718.1790707009.git.mykola_kvach@epam.com>
 X-Mailer: git-send-email 2.53.0
 In-Reply-To: <cover.1790707009.git.mykola_kvach@epam.com>
 References: <cover.1790707009.git.mykola_kvach@epam.com>
@@ -93,224 +93,188 @@ X-ClientProxiedBy: VIVP296CA0004.AUTP296.PROD.OUTLOOK.COM
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: DB3PR0302MB9208:EE_|AM9PR03MB8053:EE_
-X-MS-Office365-Filtering-Correlation-Id: d9fc56e7-b963-4398-1993-08df1e5c33a3
+X-MS-Office365-Filtering-Correlation-Id: 5e313d27-d8dd-4036-adc9-08df1e5c38c3
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|366016|23010399003|3023799007|260925021911599003|260925022911599003|56012099006|11063799006|10067099003|6133799003|260925021311599003|22082099003|18002099003;
+	BCL:0;ARA:13230040|376014|1800799024|366016|23010399003|56012099006|11063799006|10067099003|6133799003|22082099003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	wOF4XHuTWJT6uK6bXShqaf3EW5i8RtQF+A4ojMz2xESXkEyQgU3sgiJ2omrl/4M/sl885Lp8Vs+9GL66s3vOGkIREDq0cMfAKI6h59As9v/1QneCLUnieoBnnbmYYWONa4sGIVuMbgohuENYs4U0JYwshHZQmREkmNG6z3MeTTaL78aHNnhTwRz16+EW0XUP9yG3V1tKb/Tr9mvpfVyT3ZyxvCwXIUATQybv5Z78lw/B7XoGJnomzIHtSU9csnk5vsZ5tsVjP7I+kTsDOSIF1NpYUYuhiVurS6AaZadtwWl7wvF23Tl3sqHPq7cPZFu4opBuawGoUaKFuuR4wcBbwHIA7HPuN2gPnpA+Q5BlmvWMdWwv53riFytXIWwrdX0WiPb7flBdw9+Dyi189i/X4ih+dsZ9xDNB2b8OYrJIi5rI2Alb9iQRbRFbWzs8w4lZHcRPXeY+Gq9SP8pmHW23TwCd9TEyI/yZJqyOa+riXyOxSP+vwfqLQJ4rybEAR9bkMoTLvndLNN2ca4h4g6EQ8M5SZ0E/UWnnA4a78HzTeAgFqw9833zYe539kqyj3nhTp1p4DeBClcM1tdd2gHjty3dN9aRk+1IWKea0F2w/kxL/5jfww4T8T6zeeaAzudt/
+	18uZAeIuSFukLK2p5m1BFtRrgvi849tEFwfLcHDTlyOGGkIv3HxjsmOxbOdwdySAleddjp8PRhn6e+NyZQ7ENa5vXP1gjgCO/mVgypNv+GZSJnJ+QtyReYb3gf/qkTLCgkhatMh9DiaE/FJnP2UVHkqm1iD0o6KSvk4lrA/ABSibGurv7qYHujJx5sSwsM1zE0lHAPr/9hV7PaoW0cGQVNkTE6Uov+fGih7Ru7PPh6aramWJNbPlZRWj9oLw33Ddr0c718V3IZEA9s4cB78cGIWdWldQczfILk5xUgkTrxXNYPWj8iBKUzWgtvB2p3TplYa4dbpAGdIvpzF3sJzBrCWBlO+dbIE/gFObDHxbIGDuphfNjXjT0bS/Mglm9WRZXBoIU8/VVZaYUdPPh6VUNf9/A8eWS0BCaAXnU0ESngJPp0GFnl5QPpEZlRUrmc2hxeZb7QSEO5YsnaYizcZuLQVIeWUhGnOzH1lHa1kCpD9d9wgwKXaw1MopaekuE8lhLLdjGK15JTOv33Sc6RumHuFEPTmebOT1KnUKnNT43TK/gnQLcXlM66wsPAwkp21g9iPaCf4wKGykbEbkNxefPb3SwptrNTfMIuISuKUFo/sjeK4L7B+Ua5beXYwpWUM74VMSozhNz8DgmRZmA11KHjUP3xqdcag9C7zx7S+HhPM=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB3PR0302MB9208.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(23010399003)(3023799007)(260925021911599003)(260925022911599003)(56012099006)(11063799006)(10067099003)(6133799003)(260925021311599003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB3PR0302MB9208.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(23010399003)(56012099006)(11063799006)(10067099003)(6133799003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?kWnc96ohrCxVgep6g0lCNFS3bnEWbbCbt2wAGe5vDvqYwZfK87DOB3oZS09/?=
- =?us-ascii?Q?zL6ezaeaqGkvVUC+HYPyeF7QWgicdgGepkJ6eJ0AqKut4sV8iGsLsp+h+4YK?=
- =?us-ascii?Q?J5rhUN1K/Spng/Uo3rc86hgy7yNef7TwQzTO/08i7NeQsJHDeYgqdo6YJ8F6?=
- =?us-ascii?Q?wge+Jdn447mkOR1Xcw0AjwPyvQ4yWF0yrbWjxxUKdLElK0IxlLfjxUlqnSx2?=
- =?us-ascii?Q?kuuAmd6hFHyn58BmxGEJb1NBQviMZsVwwZOokXscX3/PIt/4OBq0JMugT7R3?=
- =?us-ascii?Q?5W9hdTO1EAsKgxI5Cz4EbGfmcx014GbiQIzhIDWfAoAE327/Px3+NffZNU49?=
- =?us-ascii?Q?DJG8g/6H/OsJkQI0NTti6ur01w90/TKc2p4Ix68yIoRUr8vVCOUixg5rKhOX?=
- =?us-ascii?Q?y9b7Z/KvfcbLRQeUV3DxQZjAmwcYFBB24vfAM82FY/5m5LZkUlaGUlYV6ggm?=
- =?us-ascii?Q?thrsIsdjhLotAgBh6A1Iey7vf0K68Dk0q0Pm78jY8sONO9DLTkXeQuBpjv82?=
- =?us-ascii?Q?vJOkWwzAM/lI8Ch4hcYELxXZvgSql2q8lyVyaReeKkTVW75UJ/kpL6AbjDMp?=
- =?us-ascii?Q?p+GdKUNiVRpz2MzU+whWceqW+DaiDSkS/ni25yM/SaCN9L9sPzoKqy4VS1+G?=
- =?us-ascii?Q?sjBzT+HPgumW6/WkMCYZ41EDq+nQh99qTNmd6xvt80U9I4RzjnTuS8XHQzUb?=
- =?us-ascii?Q?GYk1yIbV4Kcw3ESjFjXoB7KyTS3RvzAqSyUjj+2yIVVJg5evEILp+UG8yeK5?=
- =?us-ascii?Q?4+brROfh8Zjp4Q0COMTgoVSt8GitWa9cgfE4lOs+EaGPpKQ1CQ1j7vm+ruDY?=
- =?us-ascii?Q?DwZa4g93Xpk4pqr61cn5cSlb/cka2+8MH5Dvcm80s5m45CQd3mzskEcDPXgB?=
- =?us-ascii?Q?czo572YgDxFZ1B0/dZT3JPKtIBX90H5iUM1eaoIdLxxgoJt2cmkv4r7SkAkN?=
- =?us-ascii?Q?YSOgWNZjz5Ovvgf0O5Sr5Z5SYvDfXsKMgi0emnIW1Zwgz7cfzPT68j4+zoif?=
- =?us-ascii?Q?YoFZsHrII/vZZpW0wLXwKNgDcW9Dq6oERrprvcM261cv+aZAVus/Weku2Omi?=
- =?us-ascii?Q?AGXjTDXd2LINh/z8RhlALSjqVOsrWaAsiqNl+NUqbF79J78uyUQKjuZIBVRl?=
- =?us-ascii?Q?bJ8+i9Qz3tuaXaNCdzwTMFpXeJ6yFwykZ0kTnW5iBIjscuhLdLDhhOHrGK3x?=
- =?us-ascii?Q?PPKRl3iyYc+30Ekx0eVnYJAx7oW9fwpHNEUyF9Vulbsh6CLRImXtmBN8Kb9M?=
- =?us-ascii?Q?PQr6IABeEYJNAtGxJRLiXUoorNensDnKWMdW3d1GM19OVRdi5tRbI6ez/3Yw?=
- =?us-ascii?Q?h1XTYu9rxU+gfkvjCHf/ANNOBiOLNSG4m7UBOjQRhyWRzw4lB4woFLi+kMbZ?=
- =?us-ascii?Q?GwE0hw0+bMUXgLvBPeqJkda6xWak8JWK8U2pdWeWyGggjp0f0pFy2vM7KqU4?=
- =?us-ascii?Q?qYeZyaIyye1fepnOfg1t8UQLqc8ZlFADnPKbXhBPuyNQrAUmJOJfX8jzDrK1?=
- =?us-ascii?Q?zYwAEr/KxqMDf0pcppesIJjbLXfxemm2NmVfJGqlraSO6Gs4P5IiThycU6do?=
- =?us-ascii?Q?kuq5ub1F9vqGefQsBIk8Qk96VSwuj1oFQHxuMH6u1Vd/5ixUAxyzKoElN+ny?=
- =?us-ascii?Q?q8pKVvvrUaFf6BWAOUQRKCujyzq0fjtbag5i1bjU11Q84KmnrHpU1WL+nHWQ?=
- =?us-ascii?Q?ABGZ4DRdSgXfL9EmzXL2G6TqFFOLxpwfFop7NH8G7AIHSz/tQ4q53yYSqLSn?=
- =?us-ascii?Q?MReqQ9cb9A=3D=3D?=
+	=?us-ascii?Q?dwt1yWRlwWdVCdTLCUE4LcWQ+03kCZm6C1fVNhxsRZjWmB1/BOPonPz21d3Q?=
+ =?us-ascii?Q?jUpGTpw/aaQr4+stIECLrxFqYN1Sxl5bQjI38IRHddzCHdEapzArYs8XtZCX?=
+ =?us-ascii?Q?c0b4+MzTdynsvdRP67+rtJSOcZOccZ5EkJDueHN0jIEg5PyPDfkyUT+9a92u?=
+ =?us-ascii?Q?mfKi5xK7V8eG5d5iUXKZcV9nnl2NBcsKgq6cA7B0wWjjFNe/HMrt3UI1UNs8?=
+ =?us-ascii?Q?P7HKTWSsGe1Z8DO3kDP6TeAq8jq6BQy0ecxJ6L/SqZILZ6RSU6ooLOJgh8Uw?=
+ =?us-ascii?Q?U7lQb354/JqUjbXArhzYO39BoqwLUKFOe+pBLlCzxP5X0ZfRa0jmKOC6sVka?=
+ =?us-ascii?Q?dRebyykO92mRCef48Bs9nqIuo7jnMpWcEp8wEi/i8Lmk1g9TwguBAmD0nrzX?=
+ =?us-ascii?Q?UrKp/XkdkqTBYTmS/fZQvCsApha3hiM9hsAS8M1KLRMsr6UrMBdVxtw52AzC?=
+ =?us-ascii?Q?dSQRbcIouFC/J37pfI6IdAUnZjQ7v/nWQ3D9RKDKzoIEIEcrocWFtAoi/2rS?=
+ =?us-ascii?Q?wG6ssvykpXjuXJvmKVMQDS9vKVqxy91aw5OT3MEzSUv4EHhlWUGcVCjOuh2I?=
+ =?us-ascii?Q?wfYfMvZm7mevM+bBd8hTRylx+DlfOrdSuw9g5q97myMTgnQ7hkh5MG+ItNXU?=
+ =?us-ascii?Q?m+q9rPsGtbxcyAV3qAM5ez0kAUQm8YtFMDWNBOq1NBnQD93SPkq2616lL7YL?=
+ =?us-ascii?Q?1vghdq8qLskpTovv3Q32HV+EZyRUy/lww0Crr8jfu6OgXc+4EbwjU5aBXdaH?=
+ =?us-ascii?Q?HXXYUMUFDXvaPvdY9IYumVtXBJxlrDdNPYZjOKzpkunR9srlNUrs6kuvYB5U?=
+ =?us-ascii?Q?7Zkgt4Opq1xsQ2tO3LVQ9294IJ0Dj2etHVEqcIih1XzuT679FJ7cmptx8qpp?=
+ =?us-ascii?Q?FOu7n0NGhzhDdDMuzKJcF/gXQP/XkOY9d5uFZUbBbs2qwI+Q9LujU8on4+7j?=
+ =?us-ascii?Q?VJkEuBJGqCoOfwK0fFDthfqZVp2q37QviKxbcb7yrg69YzPOTO275T6lccem?=
+ =?us-ascii?Q?0PiPzRsQ/Im5C2lTfdmu6s5ufH1JPXTysT7SG9uYOqE0r6Gv1xxxpqYRRiXT?=
+ =?us-ascii?Q?OnHuPNcYY2qkfFQ0jh8Ksfko4QAM1X3nHXc7E6ubTmJ0Q9KzIknJTuXWbJEx?=
+ =?us-ascii?Q?uLVK4B55m7z3tlit8oic7NQM+C39ACVn7fOmPwfW3L5m8wtiNNy9BebDRZdi?=
+ =?us-ascii?Q?/4nOtDxYSHJcMv1wnd17JhbRXxxAbeSDDZyZ5iMGZmipA7t48j7y0lxWKLTt?=
+ =?us-ascii?Q?vRoddrEyL1Hz3zpwRwPvY13QaeDSI7657nYftBtLF9NGmT9iLNp1bw7/CKLZ?=
+ =?us-ascii?Q?3Xq1k+6IRgdUdIvDr4i5sT2lLdPIw8gVsyCRMJnZcvZplAZKwrvdyTT8ekn7?=
+ =?us-ascii?Q?yl9jGmwcaw2hBkYIDVi7BL3dXgAihSbC881lx2fy+qGmG4bz6mtLSmp1hw9i?=
+ =?us-ascii?Q?CdivdtPMRo15thsF7VdVmsxPqZzucUvaHqw0rpKTIg9q227bqLJhCC6578TK?=
+ =?us-ascii?Q?vAubACkSJ6LWhR94siVDPFnEhKFJe8DBI8f+zdn6p8gG29gfQ8T2V/zLXFtQ?=
+ =?us-ascii?Q?IAVNgzXXTFRX/7vvImj+UzhueuL7vhzmRnna2L8zI6cD3Cl8j0aEp60fUzBh?=
+ =?us-ascii?Q?djWjM1vF/pBwdnbqpnLs1XCoXrkAbEm++hMThxoRtlIEmAIa81dKi+vRYE8i?=
+ =?us-ascii?Q?nWVIE98HMTnc5R5TGnGeqWpwuXO1dSwZTP3U1q120CZdi5SESuUvIBvIRgYx?=
+ =?us-ascii?Q?j846PIW32Q=3D=3D?=
 X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d9fc56e7-b963-4398-1993-08df1e5c33a3
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5e313d27-d8dd-4036-adc9-08df1e5c38c3
 X-MS-Exchange-CrossTenant-AuthSource: DB3PR0302MB9208.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2026 19:02:26.3022
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2026 19:02:34.9014
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: G6m7sglqGyWOd3swDGSjGFYU8IoUf4gzA8rzoAGq7eAU7joSdFu0baAMcc+IrjCqhJFffCW2VNsokEd+FIaZNw==
+X-MS-Exchange-CrossTenant-UserPrincipalName: tg8/jASUJHLtPN42iv8xa9qWhXL+T6XqTSOBju7imO52xmUo/CTePXyNLpR1+Plb+6IT9Sjm9WG9Bfhu5daZCA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM9PR03MB8053
-X-purgate-ID: tlsNG-d25034/1790708548-02EDAA5B-D60FB9B4/0/0
+X-purgate-ID: tlsNG-d62444/1790708556-BC95A757-31760B48/0/0
 X-purgate-type: clean
-X-purgate-size: 5465
+X-purgate-size: 4775
 
-The boot CPU pending table must use the memory attributes selected by
-ITS quirks. gicv3_lpi_init_host_lpis() is therefore called after
-gicv3_its_init(). However, gicv3_its_init() also programs and enables
-each ITS before host LPI state is allocated. No ITS commands are
-submitted at that point, but this ordering relies on that implementation
-detail.
+The DT dma-noncoherent property describes the bus coherency of the
+device represented by the node. On an ITS subnode, that is memory
+accessed by that ITS. Add GICV3_QUIRK_MEM_NC_NS to the corresponding
+host_its and use it when programming GITS_CBASER and GITS_BASER<n>.
 
-Split per-ITS initialization into preparation and activation phases.
-First map and disable every ITS and collect its quirks. Then initialize
-host LPI state. Only after that, allocate and program the ITS tables and
-command queue, and enable each ITS.
+On the top-level GIC node, the property describes the Redistributor side
+of the LPI path. Collect it in gicv3_lpi_init_host_lpis() and apply it
+only to the host LPI policy used when allocating the property and
+pending tables and when programming GICR_PROPBASER and GICR_PENDBASER.
+Mark the function init-only because firmware attributes are collected
+only during boot.
 
-The subsequent gicv3_cpu_init() sequence remains unchanged: it programs
-the Redistributor LPI tables, enables LPIs, and then submits the first
-MAPC and SYNC commands.
+Do not inherit the property between parent and child nodes: ITS-node
+non-coherency does not change the global host LPI policy, and GIC-node
+non-coherency does not change per-ITS quirk_flags.
 
-Suggested-by: Julien Grall <julien@xen.org>
+ACPI is unchanged; this patch only consumes the DT dma-noncoherent
+property.
+
 Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com
 ---
-Changes in v4:
-- Move the empty ITS list check before the preparation loop.
-
 Changes in v3:
-- New patch implementing the post-4.22 initialization order discussed
-  during review of the ordering fix.
+- Keep the ITS init annotations with the earlier initialization patch.
+- Drop the redundant aggregate host-LPI-flags message.
 
-Link: https://patchew.org/Xen/341edd8de63dcd84ccc6e7b6c03e9e8fc7105184.1781847061.git.mykola._5Fkvach@epam.com/
+Changes in v2:
+- Split v1's dma-noncoherent handling into explicit ITS-node and GIC-node
+  scopes.
+- Apply an ITS subnode property only to the matching host_its
+  quirk_flags.
+- Collect the top-level GIC property from gic-v3-lpi.c before host LPI
+  allocations use host_lpi_flags.
 ---
- xen/arch/arm/gic-v3-its.c             | 32 ++++++++++++++++++++++-----
- xen/arch/arm/gic-v3.c                 | 15 ++-----------
- xen/arch/arm/include/asm/gic_v3_its.h |  4 ++--
- 3 files changed, 31 insertions(+), 20 deletions(-)
+ xen/arch/arm/gic-v3-its.c | 17 +++++++++++++++++
+ xen/arch/arm/gic-v3-lpi.c | 20 +++++++++++++++++++-
+ 2 files changed, 36 insertions(+), 1 deletion(-)
 
 diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
-index 325835b0ad..511e49a116 100644
+index 43804a6c7a..f44ee21293 100644
 --- a/xen/arch/arm/gic-v3-its.c
 +++ b/xen/arch/arm/gic-v3-its.c
-@@ -11,6 +11,7 @@
- #include <xen/lib.h>
- #include <xen/delay.h>
- #include <xen/iocap.h>
-+#include <xen/init.h>
- #include <xen/libfdt/libfdt.h>
- #include <xen/mm.h>
- #include <xen/rbtree.h>
-@@ -549,10 +550,9 @@ static int gicv3_disable_its(struct host_its *hw_its)
-     return -ETIMEDOUT;
+@@ -136,6 +136,21 @@ static const struct its_quirk *__init gicv3_its_find_quirk(
+     return NULL;
  }
  
--static int gicv3_its_init_single_its(struct host_its *hw_its)
-+static int __init gicv3_its_prepare_single_its(struct host_its *hw_its)
- {
--    uint64_t reg;
--    int i, ret;
-+    int ret;
- 
-     hw_its->its_base = ioremap_nocache(hw_its->addr, hw_its->size);
-     if ( !hw_its->its_base )
-@@ -564,6 +564,14 @@ static int gicv3_its_init_single_its(struct host_its *hw_its)
- 
-     gicv3_its_enable_quirks(hw_its);
- 
-+    return 0;
++static void __init gicv3_its_collect_fw_attrs(struct host_its *hw_its)
++{
++    /*
++     * An ITS subnode property describes memory transactions made by that ITS.
++     * Do not inherit it into the global host LPI/Redistributor policy.
++     */
++    if ( !hw_its->dt_node ||
++         !dt_property_read_bool(hw_its->dt_node, "dma-noncoherent") )
++        return;
++
++    hw_its->quirk_flags |= GICV3_QUIRK_MEM_NC_NS;
++    printk("GICv3: ITS @%#"PRIpaddr" marked dma-noncoherent\n",
++           hw_its->addr);
 +}
 +
-+static int __init gicv3_its_init_single_its(struct host_its *hw_its)
+ static void __init gicv3_its_collect_quirks(struct host_its *hw_its)
+ {
+     const struct its_quirk *quirk = gicv3_its_find_quirk(hw_its);
+@@ -146,6 +161,8 @@ static void __init gicv3_its_collect_quirks(struct host_its *hw_its)
+         gicv3_lpi_update_host_flags(quirk->lpi_flags);
+         printk("GICv3: enabling workaround for ITS: %s\n", quirk->desc);
+     }
++
++    gicv3_its_collect_fw_attrs(hw_its);
+ }
+ 
+ uint64_t gicv3_mem_get_cacheability(uint32_t flags)
+diff --git a/xen/arch/arm/gic-v3-lpi.c b/xen/arch/arm/gic-v3-lpi.c
+index accfd48a74..1cf49430ea 100644
+--- a/xen/arch/arm/gic-v3-lpi.c
++++ b/xen/arch/arm/gic-v3-lpi.c
+@@ -7,7 +7,9 @@
+  * Copyright (C) 2016,2017 - ARM Ltd
+  */
+ 
++#include <xen/acpi.h>
+ #include <xen/cpu.h>
++#include <xen/device_tree.h>
+ #include <xen/init.h>
+ #include <xen/lib.h>
+ #include <xen/mm.h>
+@@ -102,6 +104,20 @@ void __init gicv3_lpi_update_host_flags(uint32_t flags)
+     host_lpi_flags |= flags;
+ }
+ 
++static void __init gicv3_lpi_collect_fw_attrs(void)
 +{
-+    uint64_t reg;
-+    int i, ret;
++    /*
++     * A top-level GIC node property describes the Redistributor side of the
++     * LPI path. Do not inherit it into per-ITS policy.
++     */
++    if ( !acpi_disabled ||
++         !dt_property_read_bool(dt_interrupt_controller, "dma-noncoherent") )
++        return;
 +
-     reg = readq_relaxed(hw_its->its_base + GITS_TYPER);
-     hw_its->devid_bits = GITS_TYPER_DEVICE_ID_BITS(reg);
-     hw_its->evid_bits = GITS_TYPER_EVENT_ID_BITS(reg);
-@@ -1189,7 +1197,7 @@ static void gicv3_its_acpi_init(void)
- 
- #endif
- 
--int gicv3_its_init(void)
-+int __init gicv3_its_init(unsigned int host_lpi_bits)
++    gicv3_lpi_update_host_flags(GICV3_QUIRK_MEM_NC_NS);
++    printk("GICv3: Redistributors marked dma-noncoherent\n");
++}
++
+ static union host_lpi *gic_get_host_lpi(uint32_t plpi)
  {
-     struct host_its *hw_its;
-     int ret;
-@@ -1199,15 +1207,29 @@ int gicv3_its_init(void)
-     else
-         gicv3_its_acpi_init();
- 
-+    if ( list_empty(&host_its_list) )
-+        return 0;
-+
-     list_for_each_entry(hw_its, &host_its_list, entry)
-     {
--        ret = gicv3_its_init_single_its(hw_its);
-+        ret = gicv3_its_prepare_single_its(hw_its);
-         if ( ret )
-             return ret;
-     }
- 
-     gicv3_its_validate_quirks();
- 
-+    ret = gicv3_lpi_init_host_lpis(host_lpi_bits);
-+    if ( ret )
-+        return ret;
-+
-+    list_for_each_entry(hw_its, &host_its_list, entry)
-+    {
-+        ret = gicv3_its_init_single_its(hw_its);
-+        if ( ret )
-+            return ret;
-+    }
-+
-     return 0;
- }
- 
-diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
-index acdac22953..6bc3e313be 100644
---- a/xen/arch/arm/gic-v3.c
-+++ b/xen/arch/arm/gic-v3.c
-@@ -1984,20 +1984,9 @@ static int __init gicv3_init(void)
- 
-     if ( gic_dist_supports_lpis() )
-     {
--        res = gicv3_its_init();
-+        res = gicv3_its_init(intid_bits);
-         if ( res )
--            panic("GICv3: ITS: initialization failed: %d\n", res);
--
--        /*
--         * Host LPI allocation uses ITS-derived memory attributes, so defer it
--         * until after gicv3_its_init() has discovered ITS workarounds.
--         */
--        if ( gicv3_its_host_has_its() )
--        {
--            res = gicv3_lpi_init_host_lpis(intid_bits);
--            if ( res )
--                panic("GICv3: LPI initialization failed: %d\n", res);
--        }
-+            panic("GICv3: ITS/LPI initialization failed: %d\n", res);
-     }
- 
-     res = gicv3_cpu_init();
-diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include/asm/gic_v3_its.h
-index 02c083f210..e1322b94f8 100644
---- a/xen/arch/arm/include/asm/gic_v3_its.h
-+++ b/xen/arch/arm/include/asm/gic_v3_its.h
-@@ -156,7 +156,7 @@ int gicv3_lpi_init_rdist(void __iomem * rdist_base);
- 
- /* Initialize the host structures for LPIs and the host ITSes. */
- int gicv3_lpi_init_host_lpis(unsigned int host_lpi_bits);
--int gicv3_its_init(void);
-+int gicv3_its_init(unsigned int host_lpi_bits);
- 
- /* Store the physical address and ID for each redistributor as read from DT. */
- void gicv3_set_redist_address(paddr_t address, unsigned int redist_id);
-@@ -245,7 +245,7 @@ static inline int gicv3_lpi_init_host_lpis(unsigned int host_lpi_bits)
-     return 0;
- }
- 
--static inline int gicv3_its_init(void)
-+static inline int gicv3_its_init(unsigned int host_lpi_bits)
+     union host_lpi *block;
+@@ -443,7 +459,7 @@ integer_param("max_lpi_bits", max_lpi_bits);
+  * to the page with the actual "union host_lpi" entries. Our LPI limit
+  * avoids excessive memory usage.
+  */
+-int gicv3_lpi_init_host_lpis(unsigned int host_lpi_bits)
++int __init gicv3_lpi_init_host_lpis(unsigned int host_lpi_bits)
  {
-     return 0;
- }
+     unsigned int nr_lpi_ptrs;
+     int rc;
+@@ -451,6 +467,8 @@ int gicv3_lpi_init_host_lpis(unsigned int host_lpi_bits)
+     /* We rely on the data structure being atomically accessible. */
+     BUILD_BUG_ON(sizeof(union host_lpi) > sizeof(unsigned long));
+ 
++    gicv3_lpi_collect_fw_attrs();
++
+     /*
+      * An implementation needs to support at least 14 bits of LPI IDs.
+      * Tell the user about it, the actual number is reported below.
 -- 
 2.53.0
 
