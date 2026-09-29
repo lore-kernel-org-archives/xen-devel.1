@@ -4,55 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 63EA5CA5FA5
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 14:07:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436471.1655120 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5E37FCA5FAE
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 14:21:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436479.1655130 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBYUA-0007PN-Dg; Tue, 29 Sep 2026 14:07:10 +0000
+	id 1xBYhS-0001j4-JT; Tue, 29 Sep 2026 14:20:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436471.1655120; Tue, 29 Sep 2026 14:07:10 +0000
+Received: by outflank-mailman (output) from mailman id 1436479.1655130; Tue, 29 Sep 2026 14:20:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBYUA-0007PG-Ao; Tue, 29 Sep 2026 14:07:10 +0000
-Received: by outflank-mailman (input) for mailman id 1436471;
- Tue, 29 Sep 2026 14:07:09 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xBYhS-0001ix-GG; Tue, 29 Sep 2026 14:20:54 +0000
+Received: by outflank-mailman (input) for mailman id 1436479;
+ Tue, 29 Sep 2026 14:20:53 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Zhao.Jiaqing@amd.com>) id 1xBYU8-0007P1-Ux
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 14:07:09 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBYU4-003MN4-Bc
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 16:07:04 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Zhao.Jiaqing@amd.com>)
- id 6abbc5ea-bab6-0a2a0a5309dd-0a2a4506d18e-44
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 16:07:03 +0200
-Received: from [40.107.201.35]
- (helo=CH4PR04CU002.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Zhao.Jiaqing@amd.com>)
- id 6abbc606-195a-0a2a45060019-286bc923c72b-4
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 16:07:03 +0200
-Received: from PH0PR07CA0013.namprd07.prod.outlook.com (2603:10b6:510:5::18)
- by BL1PR12MB5780.namprd12.prod.outlook.com (2603:10b6:208:393::10) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Tue, 29 Sep
- 2026 14:06:57 +0000
-Received: from SN1PEPF00036F42.namprd05.prod.outlook.com
- (2603:10b6:510:5:cafe::64) by PH0PR07CA0013.outlook.office365.com
- (2603:10b6:510:5::18) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.24 via Frontend Transport; Tue,
- 29 Sep 2026 14:06:57 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SN1PEPF00036F42.mail.protection.outlook.com (10.167.248.26) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.472.14 via Frontend Transport; Tue, 29 Sep 2026 14:06:56 +0000
-Received: from zjiaqing-dev.amd.com (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 29 Sep
- 2026 09:06:54 -0500
+ (envelope-from <roger@xenproject.org>) id 1xBYhQ-0001ir-Vi
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 14:20:52 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <roger@xenproject.org>) id 1xBYhP-0054L2-2k;
+ Tue, 29 Sep 2026 14:20:52 +0000
+Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
+ helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <roger@xenproject.org>) id 1xBYhP-0059jX-2S;
+ Tue, 29 Sep 2026 14:20:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -64,106 +41,149 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=INI78uN6nOswo4GbUjzTcMjNXjmvhesrELA8Apdg5eUQH07GnduLou/Ceua1xLIB3d36Jr7QO5vjkytFHW9yvlmMVtAU8tzW4n/TqCUKefGgJD9gtZwpy8Xta8n5qWDew8hvkRfTIFNdFpwhNQnZCibf+3cVNaEMvfzhzrlwRrK536o8Hss+gKiBbdjYP06QBuu2GHG8XrqYkKLEyMNMzA7yAh6wxOs++V9aZJArxhjfz9R3M1qV7Pbl2DxLPfGAfwQcrLa/1xDJ/jZBQ/5QkydDHj2s5NcuGNeaSmeSUUd1SLK0qYcjlUAJbVViYkw7+LyKOJjgVoSpM3PlL/2veg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9bHk3rsSw1G5BQtibXtqslx1MAkGdUpX2+7hfOQ9N9A=;
- b=xciWMTucWbT1eiDYjWxOAJnsZTOTCRrJvvpJIQT4YzrnKaxVnygFaU46whrL7F3XAt3VXe3fkUAYBg36zZE6IbPpv9Pms1HgXE7ZyMIRMbKZtAMlWuohjCS45bcJA1Nk+Byqkj1k4MO/fbdupvZJsLAXrR3Bli4/z+WnO8HCEm3R1CESqeZ7Ck/av4mXoSMgfM0HJ28m5mckFislzqkq0udK8vk+3vBbFD34IPYHlwiI4ycfxtVG1R2UjMuGerZYFzAakGZhQeSDNv5qjWcRDoVr3KXJ52MKkMN/gThcphJavKHcn9+/Yq/4B0MMzXSc5/YStoJD/w5u1QGJiN9iYA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9bHk3rsSw1G5BQtibXtqslx1MAkGdUpX2+7hfOQ9N9A=;
- b=zrrdQxuv3hQQrYC9kZrNxSnp8TttgYGEH7CO2gvpSzaFInFvj6YezU+vuazWID43/bizv9B5qo0w5snwAU9cgpDcL4+nerCmdNJtjsACv04cfb7/wolT+brZWQO8cxMZsGmm6pPSHrWif8iY26QlbMNLKOThxinQJenZFaRXvAA=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Jiaqing Zhao <Zhao.Jiaqing@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Jiaqing Zhao <Zhao.Jiaqing@amd.com>, Dario Faggioli <dfaggioli@suse.com>,
-	Juergen Gross <jgross@suse.com>, George Dunlap <gwd@xenproject.org>, "Stefano
- Stabellini" <sstabellini@kernel.org>, =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?=
-	<roger@xenproject.org>
-Subject: [XEN PATCH] xen/credit2: let the tickled pCPU pick up the unit it was tickled for
-Date: Tue, 29 Sep 2026 22:05:42 +0800
-Message-ID: <20260929140542.249693-1-Zhao.Jiaqing@amd.com>
-X-Mailer: git-send-email 2.53.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
+	bh=bH1h+5bYP4T+5C2iVf+ODAs6ZHADV4fPmfF/s1z9aNI=; b=BJs4v1R5FNlDrrafHT+DMgQ0Ci
+	1uuJ5fFNCD3orQPlZH1zszov3NHFTMTjTffQu4nSLvithNNeecF7qttq8C23g8or06vy8utG+bueF
+	KJ6KdmoQj0YjBFC78T8XCUyCxGj2ePbPlRHH5ZDuqbS1VuK2dcvOqgQ0LlRRy5XaVjgI=;
+Date: Tue, 29 Sep 2026 16:20:49 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
+To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Cc: xen-devel@lists.xenproject.org,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2 1/3] xen/rcu: introduce the concept of RCU epoch
+Message-ID: <arvJQSDecSSAU1WC@macbook.local>
+References: <20260925163025.65217-1-roger@xenproject.org>
+ <20260925163025.65217-2-roger@xenproject.org>
+ <DLQSZY2KSYDH.1YSCWGQIQYP0H@amd.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-Originating-IP: [10.180.168.240]
-X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SN1PEPF00036F42:EE_|BL1PR12MB5780:EE_
-X-MS-Office365-Filtering-Correlation-Id: 00ef9c70-408f-483f-bd9e-08df1e32ec20
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|376014|82310400026|36860700016|1800799024|260925021311599003|260925021911599003|18002099003|10067099003|11063799006|56012099006|260925022911599003;
-X-Microsoft-Antispam-Message-Info:
-	GSHQRUw7UCapUX4lNelfAN26ByIjaZDB3KuUcjsuaitmJGUY/t2vj9s+r//oGw8nEPvk1a1NwXtGfsQDsStPXWWoWVO4vOwgu4hN4TU+N7D0/9iu0Fuo8dKBHIh17A+FKw3NGVIb75dAckOi7EucbAYV34wK2/+cMuyV7LOxnzyByfkfoeK9pWCq/WMiRoWWrhKuP1OqBCyGd+v2q8oisewfJCIkd9Eg7uC8f+MvZF2gNGfFUYNVY40uGn2/WnALYPeM1+aF52N2iDGFbJkSrBws6ylciz13Hxpt7cDKYlTtEdJ9DX4tmzHkhEBvOw/HnNASirkxsGOMMWnu/mKLwC7J4uAcNQoVnBl7D0JE0jE6Upye3hjJsXj7jfH/NsvUdt8vafdf8vecTABLRMG1Wwi6fEAqNjdLhJso2DV2+w6ytRjDGl33w0D4j0OSuCWh4cap9MehleVSOh1MVJNTNodFSq5u7wxSPPWFybfDM4ioUXVTW3zt8bMLyxOZJWwCOTShmBza8nO3uI79Yqb6KnPIvdMgqHfWSwkER6O0BnrecioyIV3JxscBpSqBasyCYNu2OuAm+8otF0J7WKuZ5S7lTemYhdbl+j4GrixIahKWK+W/jpPuoIi5S8TSfotKivXc3jhBOzM36YL/EL5q2McXdngIhLBbgzlavZEUoNtQZFC0y+CRgoXBI6fNBByHrBgI3EYMQhAvxmawOGVRUQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(376014)(82310400026)(36860700016)(1800799024)(260925021311599003)(260925021911599003)(18002099003)(10067099003)(11063799006)(56012099006)(260925022911599003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	UtNLHsdKlNrVIoXRd36kOD1ZQ/rdtkdZDyduDoaXfufZA1JFzzyFq/Crafoql22lrBtuM9LLonlrN7lh6XrATOTtTSU6XDOthm/wGcM3ag88iEdZzdOCwRj6kd1Sg8f79biH9SRW3JP+ALpShGybamRUp3wwP4bJ4zPwOGhLEkwp/3yeNcF8TJ3u3V/JuVxL0hyUF2/P3brW37mvzxAdRSu/bKiYhBPZNGZM4vTNQviLgstVwYamUaDeed0Im91BIFlgXyirAxbjQV0PPR+yogzTWRESqBQz4z1bUBlSSJvWtkY6IyjPh/RsDnJ5fo3+zGVYyKuJY94YX2hi4gFyNiyggJxSAvTkP5JmytNjQiUZ5irXmbPlv8dzrD/dLFz840VBdZuiWpjS5lDHTjVndcwmVY/qVPJJFfRxKtHlUhnFeOOJOXFpYgroY3XUzew/
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2026 14:06:56.7999
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 00ef9c70-408f-483f-bd9e-08df1e32ec20
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SN1PEPF00036F42.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR12MB5780
-X-purgate-ID: tlsNG-16d1c6/1790690823-FEE7677B-72FEC612/0/0
-X-purgate-type: clean
-X-purgate-size: 1426
+In-Reply-To: <DLQSZY2KSYDH.1YSCWGQIQYP0H@amd.com>
 
-runq_tickle() picks an idle pCPU without taking CSCHED2_MIGRATE_RESIST
-into account, but runq_candidate() on that pCPU still applies it. With
-the unit's credit within CSCHED2_MIGRATE_RESIST of CSCHED2_CREDIT_MIN,
-the tickled pCPU declines the unit because it is not its master, while
-the master has already skipped it as deferred to the tickled pCPU. Both
-go idle and the unit stays runnable on the runqueue with nobody to run
-it.
+On Mon, Sep 28, 2026 at 10:24:04AM +0200, Alejandro Vallejo wrote:
+> On Fri Sep 25, 2026 at 6:30 PM CEST, Roger Pau Monne wrote:
+> > An RCU epoch signals the lifetime of RCU references.  Each CPU records the
+> > epoch in force when it enters an RCU critical section.  When a callback is
+> > queued the current epoch is stored in the callback and the global epoch is
+> > then bumped, as a way to know when all CPUs have moved past a specific
+> > epoch.  At that point there can be no remaining references to objects
+> > fetched during the callback's epoch.
+> >
+> > The compiler barrier is switched to a full memory barrier, as future uses
+> > of rcu_lock_cnt must ensure the count is increased before taking a
+> > reference to any RCU protected object.
+> >
+> > Access rcu_lock_cnt, rcu_lock_epoch and rcu_epoch through ACCESS_ONCE()
+> > to stop the compiler shattering the loads and stores.  The reordering
+> > prevention aspect of ACCESS_ONCE() is not what we rely on here (the memory
+> > barriers cover that); what matters is that these variables now have remote
+> > consumers, so each access must be a single, non-torn memory operation.
+> >
+> > Signed-off-by: Roger Pau Monné <roger@xenproject.org>
+> > ---
+> > Can possibly be folded into the next patch, as it's lacking context on its
+> > own to understand the need to introduce the logic.
+> > ---
+> > Changes since v1:
+> >  - Do the setting of head->added in the interrupt disabled section.
+> >  - Unconditionally do a memory barrier when enter/exit RCU critical
+> >    regions.  Attempting to do selectively is too complex.
+> > ---
+> >  xen/common/rcupdate.c      |  6 ++++++
+> >  xen/include/xen/rcupdate.h | 17 +++++++++++++----
+> >  2 files changed, 19 insertions(+), 4 deletions(-)
+> >
+> > diff --git a/xen/common/rcupdate.c b/xen/common/rcupdate.c
+> > index c1b6b2ae768b..babaabbbeefe 100644
+> > --- a/xen/common/rcupdate.c
+> > +++ b/xen/common/rcupdate.c
+> > @@ -49,6 +49,11 @@
+> >  #include <asm/atomic.h>
+> >  
+> >  DEFINE_PER_CPU(unsigned int, rcu_lock_cnt);
+> > +/* Store epoch when CPU entered the RCU critical section. */
+> > +DEFINE_PER_CPU(unsigned int, rcu_lock_epoch);
+> > +
+> > +/* Current RCU epoch, bumped every time a new callback is queued. */
+> > +unsigned int rcu_epoch;
+> 
+> nit: I'd suggest calling this rcu_cur_epoch, and then renaming "added"
+> below to plain "epoch". "added" doesn't convey what the field is at all.
 
-Seen as a permanent PVH dom0 stall under nested virtualization, where
-dom0 overruns its slice far enough to be clamped at CSCHED2_CREDIT_MIN.
+added_epoch? (or epoch_added?)
 
-Don't resist migration to the pCPU that was tickled for the unit.
+I would be fine with epoch also.  I think it's obvious that the
+global variable holds the current epoch without it needing the "cur"
+addition.
 
-Fixes: 069cf39fb171 ("xen: credit2: make tickling more deterministic")
-Signed-off-by: Jiaqing Zhao <Zhao.Jiaqing@amd.com>
----
- xen/common/sched/credit2.c | 1 +
- 1 file changed, 1 insertion(+)
+> >  
+> >  /* Global control variables for rcupdate callback mechanism. */
+> >  static struct rcu_ctrlblk {
+> > @@ -283,6 +288,7 @@ void call_rcu(struct rcu_head *head,
+> >      head->func = func;
+> >      head->next = NULL;
+> >      local_irq_save(flags);
+> > +    head->added = arch_fetch_and_add(&rcu_epoch, 1);
+> >      rdp = &this_cpu(rcu_data);
+> >      *rdp->nxttail = head;
+> >      rdp->nxttail = &head->next;
+> > diff --git a/xen/include/xen/rcupdate.h b/xen/include/xen/rcupdate.h
+> > index c57f628107cf..5846e8c169d7 100644
+> > --- a/xen/include/xen/rcupdate.h
+> > +++ b/xen/include/xen/rcupdate.h
+> > @@ -34,24 +34,32 @@
+> >  #include <xen/compiler.h>
+> >  #include <xen/spinlock.h>
+> >  #include <xen/cpumask.h>
+> > +#include <xen/lib.h>
+> >  #include <xen/percpu.h>
+> >  #include <xen/preempt.h>
+> >  
+> >  #define __rcu
+> >  
+> >  DECLARE_PER_CPU(unsigned int, rcu_lock_cnt);
+> > +DECLARE_PER_CPU(unsigned int, rcu_lock_epoch);
+> > +
+> > +extern unsigned int rcu_epoch;
+> >  
+> >  static inline void rcu_quiesce_disable(void)
+> >  {
+> > +    unsigned int cpu = smp_processor_id();
+> > +
+> >      preempt_disable();
+> > -    this_cpu(rcu_lock_cnt)++;
+> > -    barrier();
+> > +    if ( !ACCESS_ONCE(per_cpu(rcu_lock_cnt, cpu))++ )
+> > +        ACCESS_ONCE(per_cpu(rcu_lock_epoch, cpu)) = ACCESS_ONCE(rcu_epoch);
+> 
+> I'm not terribly convinced about using ACCESS_ONCE() for atomic
+> accesses. In particular...
+> 
+> > +    smp_mb();
+> >  }
+> >  
+> >  static inline void rcu_quiesce_enable(void)
+> >  {
+> > -    barrier();
+> > -    this_cpu(rcu_lock_cnt)--;
+> > +
+> > +    smp_mb();
+> > +    ACCESS_ONCE(this_cpu(rcu_lock_cnt))--;
+> 
+> ... this variable is to be read by remote CPUs and autodecrement seems
+> like the wrong tool for an atomic decrement.
 
-diff --git a/xen/common/sched/credit2.c b/xen/common/sched/credit2.c
-index 4949606881..3791a8d4cd 100644
---- a/xen/common/sched/credit2.c
-+++ b/xen/common/sched/credit2.c
-@@ -3517,6 +3517,7 @@ runq_candidate(struct csched2_runqueue_data *rqd,
-          * its credit is at least CSCHED2_MIGRATE_RESIST higher.
-          */
-         if ( sched_unit_master(svc->unit) != cpu
-+             && svc->tickled_cpu != cpu
-              && snext->credit + CSCHED2_MIGRATE_RESIST > svc->credit )
-         {
-             SCHED_STAT_CRANK(migrate_resisted);
--- 
-2.53.0
+I can use {read,write}_atomic() instead, but there's been a tendency
+to phase out the usage of those functions.  On x86 this should be a
+plain `addl` or `subl` instruction (the non-locked version of
+atomic_{inc,dec}()).
 
+Thanks, Roger.
 
