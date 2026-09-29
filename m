@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D00ECCA5FA5
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 13:18:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436439.1655094 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4F06DC9832A
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 13:40:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436450.1655103 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBXiO-0007hh-Ct; Tue, 29 Sep 2026 13:17:48 +0000
+	id 1xBY4O-0003Nn-4r; Tue, 29 Sep 2026 13:40:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436439.1655094; Tue, 29 Sep 2026 13:17:48 +0000
+Received: by outflank-mailman (output) from mailman id 1436450.1655103; Tue, 29 Sep 2026 13:40:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBXiO-0007ha-9z; Tue, 29 Sep 2026 13:17:48 +0000
-Received: by outflank-mailman (input) for mailman id 1436439;
- Tue, 29 Sep 2026 13:17:47 +0000
+	id 1xBY4O-0003Ng-20; Tue, 29 Sep 2026 13:40:32 +0000
+Received: by outflank-mailman (input) for mailman id 1436450;
+ Tue, 29 Sep 2026 13:40:30 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBXiN-0007hU-7c
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 13:17:47 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBY4M-0003Na-BG
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 13:40:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBXiM-007qxe-3e
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 15:17:46 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xBY4L-007vf8-Kp
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 15:40:29 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abbba69-e002-0a2a0a5209dd-0a2a450be146-48
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 15:17:45 +0200
-Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abbbfc1-8faa-0a2a0a5109dd-0a2a4507aad4-38
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 15:40:29 +0200
+Received: from [74.125.225.99] (helo=mail-wr2-f35.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abbba79-b7e8-0a2a450b0019-4a7de18db6c9-3
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 15:17:45 +0200
-Received: by mail-wm2-f13.google.com with SMTP id
- 5b1f17b1804b1-49e83a388f8so31313515e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 06:17:45 -0700 (PDT)
+ id 6abbbfcd-b4ea-0a2a45070019-4a7de163b28b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 15:40:29 +0200
+Received: by mail-wr2-f35.google.com with SMTP id
+ ffacd0b85a97d-488811c9ebaso2040410f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 06:40:29 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a013d00570sm3395655e9.3.2026.09.29.06.17.44
+ ffacd0b85a97d-48af50abad2sm3742651f8f.37.2026.09.29.06.40.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Sep 2026 06:17:44 -0700 (PDT)
+ Tue, 29 Sep 2026 06:40:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,55 +54,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790687865; x=1791292665; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790689229; x=1791294029; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=/LM7C4/+JvDl5rkPIAi4fIZv0DzDx9izej0s7uDUyis=;
-        b=goLRu+USJJ0s/nkSxSrkZrWgWBpzFHKsSgpJabCAds1YR/+sAtudlGZZ6Qt9RLSU6S
-         CW7LEml0hVrl0qhQScP/VBxgsS9osFuWx+ClBcjyi1PhExQzqBTtVvLYQEedY+iXnRP8
-         CBQqi6HuAPTTn78Mgp7rHyuvfqrabsYusZTi7Ctd2DoTf02y8g2k+2BSfdfn0F6VC6Ud
-         DaXS/xS3LEkE8LCILDzvtIcP7LfMDVUdgVoPZ3xoWJDnBOnvVASgpuW1+9qp7wN6skJb
-         DNF0IhgJ7U2Ti8oyVQEVQ/7tRB7ihMCkwzKte7mYpH+0X9IgPMV0bI+v1g6qOtM0wSrr
-         W6+w==
+        bh=Mo9mO38/6w63fnixQTxbfmLojvcoH6b3uOhbEQOCkag=;
+        b=IPGy5H1Cm4fZYd/NYYgdE2j/wmIMqiuHbhxIb5Z8TX8UC8Jy/Zl5Zj9wmQvMVaeYCA
+         RYv/8xJCfrh2nKRa8bbtL2xWzZGPsmCevpWQHgZ66EDfvXBrZHXIMOrySdoNLWD6ET/T
+         UE69xXiA9KdUfJ8Ac3mFrbikKCTPOmO4JZFZly1fLNOLX3ovlqsQCSDZDtG7gMr0glr8
+         RAot72bxAuKaD6VffFTCaGcCYaK3FGG5d2fY9d9G3i9KEXfl5ecjGo4Ft+BsCeFxt/HG
+         DaYwlO6l0TWQpN9iWFPCBKeI9WAyJ+Fn3lVu4Dxm43At6MEoYgsdbufAb/U0OLe4ImBy
+         09Zw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790687865; x=1791292665;
+        d=1e100.net; s=20260707; t=1790689229; x=1791294029;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=/LM7C4/+JvDl5rkPIAi4fIZv0DzDx9izej0s7uDUyis=;
-        b=kBDdN1eJz3Gc6/7XDCC4uYciUwEr/vgr6rfqvV16b46Ctz9W+t1EOspfNUVlBf3WNo
-         j+3PoMR6JI/udNnu+L22ODHVuLFMkGN2L9ZyqNTroCsl7GiPuJ6aiD1nGDP/lBJn9p+l
-         Y71C0XTnCyBGH8HrEDkQbqiU93kd0Co4/UTwD2wLiFMEc1FIzKEVkgo2/5PJ3b6Dp7T9
-         KkYdNb8rxi2gShQEQzLJTlukbVbIDLh0xeV82G3YPFMl3BYogHH9aXjjBrOzaw+K76X7
-         gzKfZGvivSxV0NPEXY1Lu35jEn3U+WVZ+R9SczduWjsLRbeKMrlVrzD7HU4Q9HiM1m0b
-         ZE4Q==
-X-Forwarded-Encrypted: i=1; AKwUvBxdrkP4Zt4nselzK1FMkekvO+Jibgv/EQ53ac+o9DI705wIKOKQX+0fXC/Kxprt3dNdrJSmJ60exNY=@lists.xenproject.org
-X-Gm-Message-State: AFuF++m/zITq60P0LeRZcF11QNLvMnbaE0TkcZ/0GyWnVlW6Qk0LqHvC
-	LPHfwOXgh2Ecki0LXo3JNy3ZHJIpctveXopGQDcjfh6H/WeTjmxbZ2zWVyvHBFoGrg==
-X-Gm-Gg: AYBFou1cDn9hPnRhY9kJbBR/zV6pJqsO9VfwDU1bzm8TWC9F1sn+gKdCNsJjyU3OUdp
-	G+X40AVU4zVuzfvIRdKiVKsSXTgShAWYQCMjS63Y+5h8OdaEVERf+l/aFKUVkiz+L8Vnt+lxIsX
-	Fy1Xafu1NYAFFGr1g7MA8hdii/9i1YYKPzXq9WEMm5J/ttHg2mafe5NjdNPfYHpjiPPVe8UVF9Y
-	S0VsepZx+FVqYf12nw3+0Bi94y1rbCNOpZB7pk3rlHanXawQR2mDa260fgJpcn14fbACEyqGyEX
-	ILARkwxuklabigCm13dQpMSbWFHuIKu1fnpspdqX1Mhei2HrLHL3+VWO4IfSlqZSRvL0HmZNwzv
-	VAM1LyrmgG94K/zWdMELGt2GR909AxKMk6eqM/ffRjLx+uw9KUpGDBkkqlU9uLQgKT6g+TAavdz
-	/RkxSzQ1fMK1QzcsVnbWnl+OFcfWcjYm0tzIzTYgMOzJW90SXkRWPx9DzIJRT79g1RZhg9NFB8u
-	LvTNxE3QigKYe+IW65hTJDaiBz8kShbWLuaAerTaDG6TkaN3laxpDI0SW7vYdgbYzK5Ewa2
-X-Received: by 2002:a05:600c:198a:b0:499:b65e:49c9 with SMTP id 5b1f17b1804b1-49fe66d2d24mr291628195e9.10.1790687865452;
-        Tue, 29 Sep 2026 06:17:45 -0700 (PDT)
-Message-ID: <e82130fb-6a10-46e2-b07c-65334f30c30b@suse.com>
-Date: Tue, 29 Sep 2026 15:17:44 +0200
+        bh=Mo9mO38/6w63fnixQTxbfmLojvcoH6b3uOhbEQOCkag=;
+        b=YFYo/Za7vfViC4pSGK+7dFlbNEk5ttcKK9WeDH8wIK8PoHXnHQfN6ed8Vg9YLpPVO7
+         XOHQbN77gid0ed0JZRpGh3mK9kQrW4XyKpVy0urpIjZS/ixcKUTNY7DSSbPqDJPzDxa7
+         XxBTiLB8NSgaFutPF6t8t6Ofbb8tcTSlMnLHdFu7fiKobXfW9k2H55wjmqktC2QRPpW0
+         Gl64axR9ERiAkWn0KfZFDbLHJQfy5kUPQb9xph24ykAdABcJctBKWIerBZmvNPlnvwe5
+         XSD1emvM4qn7rxPVhWdJllJikp4kAPZII4DaK716kJfxZOYbNnFlCpmX5mMGp4yu/A4q
+         Bg4A==
+X-Forwarded-Encrypted: i=1; AKwUvByEUYIfffi8yhtJVsT/+iqMYzwAVRYCtUd77zgE0zLCRNogVnG4JZKOURiV+N/hkMnSrkjSjcP5WXM=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJ3tG5xsLbxDHySWEV0nE+lUjpmw97a1Vw8sugsD1KmUSPOpyP9
+	Oc/EQAnPNKILDqtB8aHnfU31+rHyrc4S4p42O1fr1NJYSrA+07n6blzOXSBoCDEM8Q==
+X-Gm-Gg: AYBFou3t+xgQx2+K/LppKdQSez1Hc19Jso2hrNx1B83UQ5nt4GuxxZyz5wdH7eInOly
+	bNNqUOPDLhzRwxoM7ayvCGT1CWcvzRx8oZoOsPR7FiAnKctbq7KINMWIo6R1BVaTx9YynIczens
+	hn8wda+Xllh/+Y37ls9RTfhdt4dkkOU6OPbSNSdH096+UrMPLcLwaeKXnoXopoyvBiOsHGlDs0U
+	FFVcAnb9nyd+BKWRwDEU10c6Vy/SUe9UNxI6fq+wLBhn+Fo3dRlPSCp1mA2CpvKtNU9yATpC4iR
+	8pUYlRGNlV/CitWCRcwpJRUsBZeMNFDvpE8As2Cblqn8dai92Z8TCgMlKDz79KTPvLc9GEHnFok
+	rd8ruh+6RS3KEp9SvOU8X1fjEO5nffVf2DMUMAGOtkVkDsfVssfKjPQsIUWDTr8rW95nKDzRqwz
+	7FHORiStvo+roJi8iDPEcocfyfrQlSUyq4cWMWUTl78W8jBNREws7RLv0OhRN8OPWOw6ON3+ExI
+	E+WVdcDfxjZjxF/FrWuyy1yZVjBjCxii6WV+XKz4WAZG2hT51EUKhIscnCUZA==
+X-Received: by 2002:a05:6000:1861:b0:488:7dc8:9a7f with SMTP id ffacd0b85a97d-4887dc89c2fmr26546667f8f.56.1790689228673;
+        Tue, 29 Sep 2026 06:40:28 -0700 (PDT)
+Message-ID: <0a286fe9-2133-4f28-8fab-59f4e51d1484@suse.com>
+Date: Tue, 29 Sep 2026 15:40:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] eclair: widen R11.1 noreturn cast deviation
-To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
-Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Doug Goldstein <cardoe@cardoe.com>,
+Subject: Re: [PATCH] misra: deviate C library-style functions from Misra
+ C:2012 rule 11.8
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>,
+ Nicola Vetrini <nicola.vetrini@bugseng.com>
+Cc: Doug Goldstein <cardoe@cardoe.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <c6632dd805a119aca54b9d1ae2eea68ef9c1334c.1790674358.git.dmytro_prokopchuk1@epam.com>
+References: <4abcb11ef287170ced74935cbee60c90058c1307.1790671787.git.dmytro_prokopchuk1@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,22 +133,41 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <c6632dd805a119aca54b9d1ae2eea68ef9c1334c.1790674358.git.dmytro_prokopchuk1@epam.com>
+In-Reply-To: <4abcb11ef287170ced74935cbee60c90058c1307.1790671787.git.dmytro_prokopchuk1@epam.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1790687865-190CD9EA-6D294920/10/78276251493
+X-purgate-ID: tlsNG-ef75cf/1790689229-A4AC8AE4-CE217DE1/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 422
+X-purgate-size: 1536
 
-On 29.09.2026 11:48, Dmytro Prokopchuk1 wrote:
-> The existing safe-cast rule for noreturn function pointers only
-> matched a void * parameter. Generalize it to also match unsigned int
-> and const struct cpu_user_regs *,
+On 29.09.2026 11:03, Dmytro Prokopchuk1 wrote:
+> bsearch(), memchr(), memchr_inv(), strchr(), strpbrk(), strrchr() and
+> strstr() all accept a const pointer/object but return a non-const pointer
+> to the matched element or byte, matching their standard C library
+> interfaces. The const qualifier is deliberately stripped so that callers
+> searching a non-const object get back a mutable pointer to it. Fixing
+> this would require changing the public API, so document these uses as
+> deviations instead.
+> 
+> Update docs/misra/rules.rst to note that this class of double-use
+> library functions is deviated on a per-function basis.
+> 
+> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
 
-No, this doesn't go far enough. See [1] for my proposal, which goes
-father and _still_ doesn't cover all cases.
+When I prepared my 11.8 series [1], I was wondering whether we need to go
+as far as deviating these. Since we now uniformly take gcc5 as minimum
+baseline, there is (at least in theory) the option of using _Generic to
+cover the dual-use. One question there is whether Eclair would recognize
+such - Nicola? After all, looking at e.g. glibc's implementation, the
+functions themselves remain "unsafe" there; it's a macro wrapping them
+which puts the lost qualifier back.
+
+Another question is about memchr_inv(): That's not a standard function,
+and hence it also doesn't need to strictly follow the pattern of those
+other functions. In no case should it, imo, be mixed with the standard
+functions without mentioning the difference.
 
 Jan
 
-[1] https://lists.xen.org/archives/html/xen-devel/2026-09/msg00189.html
+[1] https://lists.xen.org/archives/html/xen-devel/2026-09/msg00036.html
 
