@@ -4,39 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8679ECA5FAB
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 03:10:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436264.1654991 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8BCCDCA5FA1
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 06:22:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436277.1655009 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBOE0-0003YO-QM; Tue, 29 Sep 2026 03:09:48 +0000
+	id 1xBRE1-0002Zt-RR; Tue, 29 Sep 2026 06:22:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436264.1654991; Tue, 29 Sep 2026 03:09:48 +0000
+Received: by outflank-mailman (output) from mailman id 1436277.1655009; Tue, 29 Sep 2026 06:22:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBOE0-0003YD-Lc; Tue, 29 Sep 2026 03:09:48 +0000
-Received: by outflank-mailman (input) for mailman id 1436264;
- Tue, 29 Sep 2026 03:09:48 +0000
+	id 1xBRE1-0002Zm-Nx; Tue, 29 Sep 2026 06:22:01 +0000
+Received: by outflank-mailman (input) for mailman id 1436277;
+ Tue, 29 Sep 2026 06:22:00 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <zhangzheng@iscas.ac.cn>) id 1xBOE0-0003Y7-5K
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 03:09:48 +0000
+ (envelope-from <dmytro_prokopchuk1@epam.com>) id 1xBRE0-0002ZM-2L
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 06:22:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBODy-000XXb-T5
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 05:09:46 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xBRDz-000vp8-FC
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 08:21:59 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6abb2bcf-2eae-0a2a0a5409dd-0a2a450383a6-14
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 05:09:44 +0200
-Received: from [159.226.251.25] (helo=cstnet.cn)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6abb2bf6-fae8-0a2a45030019-9fe2fb19b02c-3
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 05:09:44 +0200
-Received: from iscas-ws (unknown [36.110.52.2])
- by APP-05 (Coremail) with SMTP id zQCowAAXSELvK7tqBySjCQ--.2628S2;
- Tue, 29 Sep 2026 11:09:36 +0800 (CST)
+ (envelope-from <dmytro_prokopchuk1@epam.com>)
+ id 6abb58f5-2eae-0a2a0a5409dd-0a2a450b9f52-42
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 08:21:59 +0200
+Received: from [52.101.66.125]
+ (helo=DUZPR83CU001.outbound.protection.outlook.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dmytro_prokopchuk1@epam.com>)
+ id 6abb5906-b7e8-0a2a450b0019-3465427dc72b-4
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 08:21:59 +0200
+Received: from AM9PR03MB7526.eurprd03.prod.outlook.com (2603:10a6:20b:3de::17)
+ by VI1PR03MB6253.eurprd03.prod.outlook.com (2603:10a6:800:138::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.428.9; Tue, 29 Sep
+ 2026 06:21:56 +0000
+Received: from AM9PR03MB7526.eurprd03.prod.outlook.com
+ ([fe80::904d:5820:80e1:41ba]) by AM9PR03MB7526.eurprd03.prod.outlook.com
+ ([fe80::904d:5820:80e1:41ba%5]) with mapi id 15.21.0451.022; Tue, 29 Sep 2026
+ 06:21:55 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,141 +55,193 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Date: Tue, 29 Sep 2026 11:10:09 +0800
-From: Zhang Zheng <zhangzheng@iscas.ac.cn>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, 
-	Alistair Francis <alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, 
-	Baptiste Le Duc <baptiste.le-duc@vates.tech>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v1 0/1] [RISC-V] replace SBI early console with 8250 UART
-Message-ID: <arsr7FV_KDQpyTcS@iscas-ws>
-References: <20260928023857.1030884-1-zhangzheng@iscas.ac.cn>
- <5919f1f2-e24c-4b0e-a7dd-126ac6fbe38f@gmail.com>
- <aronfcYWtc1CHQgH@iscas-ws>
- <3152e70f-881f-4a58-9b2d-df661887dc80@gmail.com>
- <arpi6szfHazQg07N@iscas-ws>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=vUX13hoopzTd4onzv+KNexUunsvBtNy9r+V2VD1dnKiiLxq4af20zivWEavTdAGiFzSBjJ430cZbrxE1woVlr7K44qHv+GfcSRrxW0yVWjTawWR8wPWtMNfedY6IRyE6qqo2VQNxMvDZNycsZnZDbyaFD3z4nPwGRWdLiCib68HHoQUrYpsLK9DuEGgBJRwM7739A2ycwfkc80AhylaEsLfnnuhlFGQ626G8my0F7mhh08vdz2Jz6tC1jPTJFtrdO2SaFQLBVNAcFgsQi6y00aJZe4gVALjoyQaQc3H5DVXrH790MQtIAc4L7+wm0qzdZC/A3ljouJkMF2Ie54kIBQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7EVP2BLAq1P0kBJcETbjis/DX6E2TDig0OTKrH6M1b0=;
+ b=G+xIojSC46I4IpBwx2StqyQrVtQIM+aJDpJn550YR4p0NoVEOnrlRQN77Cr3aDVKrn8uyzV01tmNmA3YX2A/sFPlo2rDo+qhJ8XXZkpwRpOtclu1F0fmSZC9fdfVVNiifF+AX0KrU8uFe64KHKRua0ltqnW7zbBqpms+J5w7L5Och5mO4DUOiIDsrh+6mEYvdp1Rr4T1DoELyzfmUSXnGBJ/RfkUxT6DF8HZo11Ty34IJXEgbbIyuUnvNn6hkROTcQV8O6nMCInasqA6XdZEM43TH8HuyGIVwtUaP6tJKZBJFx3WrDt/oghe6aj8P8WzLsnD4J+M7e/zCBxClFPfwg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7EVP2BLAq1P0kBJcETbjis/DX6E2TDig0OTKrH6M1b0=;
+ b=AfC5sEXqRMJ9BJ7Dw/qdf/upGYFU52PfgXXH6IKXk1IRsmq6tOT7GA4Z7ey9DKQY3GFLyUztA8eOixgBeiRTRwVoIAgeA422c3h4faGLNwFekTw9U27Emxj4OW+ifZo0sEsWb4UMPkGhpFPDjFBUKyKIp9oNFA17k2pip6eunzEc8Db1iv2LMef/umxEkAUKxfbrlYtuyW/36/GytKgKQM3aAY0yN0i2fCCZTXllVdCIx/5F67KgpekTcJsMudipuLHyl3eOf7ZMymB5zlI+mL7Ej/AbQo2QI68pExvV1Cpzaudp3U4UzAj7spwGMHSlMuPQuvf7Cl9dkm/gGONaBQ==
+From: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Nicola Vetrini
+	<nicola.vetrini@bugseng.com>, Doug Goldstein <cardoe@cardoe.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien
+ Grall <julien@xen.org>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
+	<roger@xenproject.org>
+Subject: [PATCH v3 1/3] misra: deviate MISRA C Rule 5.5 for
+ hypfs_alloc_dyndata()
+Thread-Topic: [PATCH v3 1/3] misra: deviate MISRA C Rule 5.5 for
+ hypfs_alloc_dyndata()
+Thread-Index: AQHdT9rTfImszTnnlUOCzNpmeO1RUQ==
+Date: Tue, 29 Sep 2026 06:21:55 +0000
+Message-ID:
+ <8867e4624ebd8c75afb93565782513c3b35baf1f.1790661461.git.dmytro_prokopchuk1@epam.com>
+References: <cover.1790661461.git.dmytro_prokopchuk1@epam.com>
+In-Reply-To: <cover.1790661461.git.dmytro_prokopchuk1@epam.com>
+Accept-Language: en-US, uk-UA, ru-RU
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AM9PR03MB7526:EE_|VI1PR03MB6253:EE_
+x-ms-office365-filtering-correlation-id: fad88242-feaa-405e-d1b2-08df1df1f5de
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|23010399003|366016|1800799024|42112799006|376014|7416014|38070700021|3023799007|6133799003|10067099003|56012099006|11063799006|18002099003|22082099003;
+x-microsoft-antispam-message-info:
+ gmHBOLefwQ0wY6v+35v1T5VPBIAsiIKf8cdnZyE2JHMjzypUnritJZ+nn4YWVB4fWnvMheedIRfBvZoWYjFS7IA7dkr4LSTLTQpAtSQEVlssx4VCNtSc7iLgC5ZtnDxz4ZNVpHePn/Uf154iIH3n8Sqtyw/ngCAmFNRP5L9o22AG6SfcrRoGG0OU4iaMtkDyC8VYa8GFX8Srs2eyYKTpis4bLBBcHln76xZ0DIVa0tz1MhRY15x5hGn4U1mpkSSyxDUiqFJjpOQwS0zuL/ARbDX9Gd1iwI/IXY+SatTj5jABoJdwoGzJ0PVZmvIvROUh+BEjTd6onrqrQe+kmb6QLJIgZ8X7qu9/HeVrstHNXgUdxaa9sQU5yb5I5PjdvX6ZsppdItfdWfnP8CiHi7PWRHqEaxrZo/eesrI1IsS98SQURwdSRde9XUUhpEQMTFZ43j9vuurI6pxxc/Ky+EUwso4gH5inhnzFIbmteJmDr/C1EvNhqx3gwO6riZH6cXm3RK8skh9UgiEtU0p5w9MvtsRzLBan6FBzGQQdMUR85bJXlAXF+Yx0WFqTztvbXijL3YZdY2+cDOWy0HdrZAZxmKIuLMaQYOxFXfn2Gm6fwXNZ0TPJ4s+8vtIA7r1EaKEBCOAD2+z8FvJ6PSnU/03/8lFenuaonBYWY0JfcRfg2HaS7X4EFDyeUuUwNWjzgc+dz560BWZgrQflsEHesS6pTZG47Pu7tg3JobPZi93m0FE=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR03MB7526.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(42112799006)(376014)(7416014)(38070700021)(3023799007)(6133799003)(10067099003)(56012099006)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?gYRDgaLHJtu3R53Ra8gnaSfAkBwunAnVZCApRO7tlSeUIplTDQLUs2AuB3?=
+ =?iso-8859-1?Q?TtQ0gt5do2ha77BlzEiqXDwztA9WIzi8udhxxI6NP9weOMreQ1q64HN3ai?=
+ =?iso-8859-1?Q?adS0MD8S4fGAdIIpdLwcfMY6c8WNgquyq4WAD8rUHc9DaBCaweSLhHZhyD?=
+ =?iso-8859-1?Q?PxKN6eJW/mNhtYo5jSvjALBa+W901/QCoyBTcd04EUe5H8FMdvQ5K1Eizp?=
+ =?iso-8859-1?Q?lN6KfU/wWPXge6p4eiONl6PQPdqjSeuA/l8FZTDAkKZFQxBcLcvuSWOOk9?=
+ =?iso-8859-1?Q?CCCrqtmYGB5cNqVW5zkUVUwhXbhggRb1odgSIjem7HQZ7G5xu3mr5pE0c3?=
+ =?iso-8859-1?Q?cz+7f52JDAp0hPeio53ARsfnd8OxAnJnHnzNg4YujSyzSp29qT/CZmW9RA?=
+ =?iso-8859-1?Q?7C+DZSabVtmgKuxiz7V69QW5+/NVZcy0kftcld/sal95tu0KN4UDWL6lMr?=
+ =?iso-8859-1?Q?tMWrLeaSFK9PN8hYC2LuSWuSVEay49uzIeOvPd0g/9G3VDyrmhbQ53M0pt?=
+ =?iso-8859-1?Q?OaxwhRt+7xPOEOSfDZ/aTBqypTviqvX6F+o3Va1e4cJ2QvgR3AbftyL1px?=
+ =?iso-8859-1?Q?xFX6ouV/TkdHNH/bArZ/AYNQFSf5sW0rpTDVQV+XUQ71+HGM6rfqaEwyuY?=
+ =?iso-8859-1?Q?Z1u6lNqEefDMR1AVKQ1W1SOHbwih0PwKhfRMtZtsIKFBa6JPlAOE/JZWSz?=
+ =?iso-8859-1?Q?63sfX/cqRmYnSovCubjId3ifBdrwkW0pnajMXawyy+Ep/Ncr+0w12L3X3k?=
+ =?iso-8859-1?Q?5pmGkThonJWnNWj355otbzd+BlRPBJMt0Ive2yNcDr+EqgabjOBwGQL5pB?=
+ =?iso-8859-1?Q?vLytwcO6XQNaKv+rotiq+El1emyYFCer2sEmDp8H1wzHjAE9FmGP16BqIz?=
+ =?iso-8859-1?Q?0qqYCo4ZQ2qWQOWlo25X04RS9q8buKFBC4mQDcyPIFJI70TctX25kMffD7?=
+ =?iso-8859-1?Q?tlnTd7CeqzAZkh1FVm2s530z/rgB2ybCvAW4TVKOGeeXx8+5UuSxESRU0g?=
+ =?iso-8859-1?Q?A3tFAgipoYJZaTuKsdSOPUfrsLcdFnkw129lqYBhq7aVAqXxSAUHpxBqZd?=
+ =?iso-8859-1?Q?VJPfZis+HiERxvaQ2Nhz5988spxJPjcRv1NDRACS6udaD4nmOB8Gs5bSGT?=
+ =?iso-8859-1?Q?GYZ5oyMA9pfj1JKRPYKaF7oYZC7flg+upCpaaNWCXt0aInzAOa6JJ7e8cu?=
+ =?iso-8859-1?Q?SWkxGmpkc6wV29kJC2eyuieNbww29vFFV9VQldNkymHarzU6k+B+rQHyfo?=
+ =?iso-8859-1?Q?kuJjdVkWA4ktsIRK3VHFMoOgSX9ekroX5Nt8weCoYPKu67OgFsYHj5i8W7?=
+ =?iso-8859-1?Q?BIp9LABSsfA3wFB/xJMzC1QCcdwse/t+DKmERJtm3wzNNsiL4Ghj2U2MlQ?=
+ =?iso-8859-1?Q?kAL8587jyt4chD7/lWqUfEGYlTNUJFpV/oOI0JBV1N/jYA1HNU6hoetkBu?=
+ =?iso-8859-1?Q?AH3X2fb9fR/fZzCO2C4vpA6OkeEGPNYrdpEbrpIbi8XPv8h3+0x+TNaI9+?=
+ =?iso-8859-1?Q?0vHFhMICh0IXy1tvhJMXcEJxsXamJC2/5jsSBLOiNf9rSZ6z6U2IIAe/Ez?=
+ =?iso-8859-1?Q?Cqh4VlbpUeusu4p3umltFWA9r6Q7N8ANJ74evxaVSLPZHDNhOQnp3SJQ7c?=
+ =?iso-8859-1?Q?ypt5IYFWDs8TcMhNGcMvO4+RmgyxO2zWXZigl5WBERjRDQAzoTYUsZjdEX?=
+ =?iso-8859-1?Q?F9gPrs4m2tkCDG6sZlcgLSP0iEk8GomXpLcHfAMeX7eS3RFMIeqCGMb9AE?=
+ =?iso-8859-1?Q?/ePuV7yqGwOXLeM7xTxkYctGzzusLeCQ49KlHTOSjsoSxyebhNUiUhkG2o?=
+ =?iso-8859-1?Q?dzjOox8i4FsYj2fl2tIxB+8wQ5cHvFU=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <arpi6szfHazQg07N@iscas-ws>
-X-CM-TRANSID:zQCowAAXSELvK7tqBySjCQ--.2628S2
-X-Coremail-Antispam: 1UD129KBjvJXoWxGrWftr4fAF4fZr1xAFyDGFg_yoW5KF43pF
-	W7Ka18tan5tFWa9wnFvw48ZFW8t3yrtw4UWr95J3yjgwnYyr1rJrW3tF4Y9a4DJr1kJr1j
-	va1Y9a43Wa4UZa7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvvb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I
-	8E87Iv6xkF7I0E14v26rxl6s0DM2AIxVAIcxkEcVAq07x20xvEncxIr21l5I8CrVACY4xI
-	64kE6c02F40Ex7xfMcIj6xIIjxv20xvE14v26r1Y6r17McIj6I8E87Iv67AKxVW8JVWxJw
-	Am72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1l
-	c7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr
-	1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY17CE
-	14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7
-	IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E
-	87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa73Uj
-	IFyTuYvjxUgD5rDUUUU
-X-Originating-IP: [36.110.52.2]
-X-CM-SenderInfo: x2kd0wx2kh0w46lvutnvoduhdfq/
-X-purgate-ID: tlsNG-33051d/1790651384-75EFF4E9-FD163318/0/0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR03MB7526.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: fad88242-feaa-405e-d1b2-08df1df1f5de
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Sep 2026 06:21:55.8890
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: rWOkd6MLkIlebwojqvkyc7SnkFnXn9mUXg5QjZcjFXKZr4ipAgsHDLow3voUfPuYiE862XnMvqP7AqSnUnpHik1uMqwkud81fvOGYnqwszE=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI1PR03MB6253
+X-purgate-ID: tlsNG-42698a/1790662919-1B8D19EA-C01A6A61/0/0
 X-purgate-type: clean
-X-purgate-size: 3825
+X-purgate-size: 3631
 
-On Mon, Sep 28, 2026 at 08:53:15PM +0800, Zhang Zheng wrote:
-> On Mon, Sep 28, 2026 at 11:31:06AM +0200, Oleksii Kurochko wrote:
-> > 
-> > 
-> > On 9/28/26 10:40 AM, Zhang Zheng wrote:
-> > > On Mon, Sep 28, 2026 at 09:38:14AM +0200, Oleksii Kurochko wrote:
-> > > > 
-> > > > 
-> > > > On 9/28/26 4:38 AM, Zhang Zheng wrote:
-> > > > > The legacy SBI console extension is planned for deprecation. Replace the
-> > > > > RISC-V early printk backend with direct access to 8250 UART MMIO.
-> > > > 
-> > > > Won't it better just to start to add support of newer SBI? It provides
-> > > > pretty good support + faster as it supports passing of string instead of one
-> > > > char.
-> > > > 
-> > > 
-> > > Using the newer SBI DBCN extension would indeed result in a smaller change. At
-> > > the time, I mainly followed the direction suggested by the TODO and referred
-> > > directly to the arm64 implementation, from which most of the code was adapted.
-> > 
-> > I think TODO was written at that way because I missed DBCN (or it wasn't
-> > ratified at that moment). Considering that it is ratified now ...
-> > 
-> > > 
-> > > > Also, I think it will lead to lesser changes.
-> > > > 
-> > > 
-> > > If falling back to SBI console putchar is acceptable, DBCN should work
-> > > well here.
-> > 
-> > ... I prefer to use SBI functionality (in the current case DBCN) as maximum
-> > as possible so if there is no any reason (and I don't see at the moment it)
-> > which doesn't allow us to use DBCN here, I would prefer to use DBCN.
-> > 
-> 
-> Given that Xen on RISC-V is expected to target relatively recent RVA23 hardware,
-> which should ship with a recent version of OpenSBI, I think you are right that
-> there is no real need to provide a fallback here.
-> 
-> > If you still want to in the way suggested by TODO then some parts which are
-> > common between Arm and RISC-V should be moved to common instead of
-> > introducing them in RISC-V specific folder.
-> >
-> 
-> I also tried to make the current patch as minimal as possible, but it would
-> still end up touching quite a few places.
-> 
-> > Let me know which approach you are going to follow. If the current one you
-> > already introduced then I will start to review it, if you will go SBI-way
-> > then I prefer to wait for your v2.
-> > 
-> > ~ Oleksii
-> > 
-> 
-> I misunderstood the TODO comment, I thought that would be the preferred
-> implementation. Therefore, I will switch to using DBCN and send a v2.
-> 
-> Best regards,
-> 
-> Zhang
-> 
+MISRA C Rule 5.5 states: "Identifiers shall be distinct from macro
+names".
 
-Hi Oleksii,
+Update ECLAIR configuration to deviate identifier and macro name
+clashes by specifying the macros that should be ignored.
+This includes hypfs_alloc_dyndata(), where the real function takes
+an allocation size and the same-named macro is a typed convenience
+wrapper that expands calls using sizeof(type).
 
-I initially assumed that the DBCN console-write call would wait until the
-whole string had been transmitted. After checking the SBI specification
-and the Linux implementation, I found that this is not the case.
+Update deviations.rst and rules.rst accordingly.
 
-The DBCN Console Write function is explicitly non-blocking. Linux uses DBCN
-through the HVC console driver, so the DBCN backend remains the owner of the
-console and the 8250 driver does not subsequently reinitialize the same UART
-or clear its FIFO.
+Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+---
+ automation/eclair_analysis/ECLAIR/deviations.ecl | 4 ++++
+ docs/misra/deviations.rst                        | 9 +++++++++
+ docs/misra/rules.rst                             | 4 ++++
+ 3 files changed, 17 insertions(+)
 
-On the other hand, when Linux uses an 8250 earlycon, it accesses the UART
-directly and waits for UART_LSR_TEMT before the regular 8250 driver takes
-over.
-
-The current Xen setup combines these two paths: early printk uses the SBI
-console, while the later 8250 driver initializes the same UART. During this
-handover, the 8250 driver clears the TX FIFO, which can discard characters
-that were accepted by SBI but have not yet been transmitted by the UART.
-
-Therefore, if Xen is going to use the 8250 driver after early printk, I
-think the early console should use the same 8250 MMIO path, as Linux does
-with 8250 earlycon. This keeps the early-console backend consistent with
-the driver that takes ownership of the UART and allows Xen to wait for
-UART_LSR_TEMT before reinitialization.
-
-BR
-
-Zhang
-
+diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/=
+eclair_analysis/ECLAIR/deviations.ecl
+index 33d508a2fb..400413f8f5 100644
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -133,6 +133,10 @@ These macros address differences in argument count dur=
+ing compile-time, effectiv
+ -config=3DMC3A2.R5.5,ignored_macros+=3D"name(update_gnttab_par||parse_gntt=
+ab_limit)&&loc(file(^xen/common/grant_table\\.c$))"
+ -doc_end
+=20
++-doc_begin=3D"Clash between hypfs_alloc_dyndata() function and macro name =
+in xen/include/xen/hypfs.h is deliberate."
++-config=3DMC3A2.R5.5,ignored_macros+=3D"name(hypfs_alloc_dyndata)&&loc(fil=
+e(^xen/include/xen/hypfs\\.h$))"
++-doc_end
++
+ -doc_begin=3D"The type \"ret_t\" is deliberately defined multiple times,
+ depending on the guest."
+ -config=3DMC3A2.R5.6,reports+=3D{deliberate,"any_area(any_loc(text(^.*ret_=
+t.*$)))"}
+diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
+index b048309596..6bcc2adf95 100644
+--- a/docs/misra/deviations.rst
++++ b/docs/misra/deviations.rst
+@@ -176,6 +176,15 @@ Deviations related to MISRA C:2012 Rules:
+        unused 2nd and 3rd parameters to avoid warnings or errors related t=
+o them.
+      - ECLAIR has been configured to ignore these macros.
+=20
++   * - R5.5
++     - Clash between the hypfs_alloc_dyndata() function and macro name in =
+the
++       file xen/include/xen/hypfs.h is deliberate. The function is the all=
+ocator
++       taking a size in bytes, while the macro is a typed convenience wrap=
+per used
++       by dynamic hypfs nodes to allocate per-request traversal data with =
+the
++       correct size and return type. The implementation explicitly undefin=
+es the
++       macro before defining the real function, so the name clash is contr=
+olled.
++     - ECLAIR has been configured to ignore this macro.
++
+    * - R5.6
+      - The type ret_t is deliberately defined multiple times depending on =
+the
+        type of guest to service.
+diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
+index c9bbab6c08..a59cf1782e 100644
+--- a/docs/misra/rules.rst
++++ b/docs/misra/rules.rst
+@@ -223,6 +223,10 @@ maintainers if you want to suggest a change.
+        Clashes between grant table functions and macro names are allowed
+        because they are used for discarding unused parameters.
+=20
++       Clash between hypfs_alloc_dyndata() function and macro name in the
++       file xen/include/xen/hypfs.h is allowed because the macro is a type=
+d
++       convenience wrapper around the size-based allocation function.
++
+    * - `Rule 5.6 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Su=
+ite/-/blob/master/R_05_06.c>`_
+      - Required
+      - A typedef name shall be a unique identifier
+--=20
+2.43.0
 
