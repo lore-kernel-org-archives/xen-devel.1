@@ -4,49 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD6E9CA5FB1
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 16:33:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436565.1655255 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0FA43CA5FA5
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 16:54:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436605.1655301 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBalk-00077s-OA; Tue, 29 Sep 2026 16:33:28 +0000
+	id 1xBb6M-0003zR-FM; Tue, 29 Sep 2026 16:54:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436565.1655255; Tue, 29 Sep 2026 16:33:28 +0000
+Received: by outflank-mailman (output) from mailman id 1436605.1655301; Tue, 29 Sep 2026 16:54:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBalk-00077j-Km; Tue, 29 Sep 2026 16:33:28 +0000
-Received: by outflank-mailman (input) for mailman id 1436565;
- Tue, 29 Sep 2026 16:33:27 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0ee034479000b504@swg.vates.tech>)
- id 1xBalj-00075F-4D
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 16:33:27 +0000
+	id 1xBb6M-0003zH-Ca; Tue, 29 Sep 2026 16:54:46 +0000
+Received: by outflank-mailman (input) for mailman id 1436605;
+ Tue, 29 Sep 2026 16:54:45 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Mykola_Kvach@epam.com>) id 1xBb6L-0003xb-9m
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 16:54:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBali-008OWV-HK
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 18:33:26 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0ee034479000b504@swg.vates.tech>)
- id 6abbe852-8faa-0a2a0a5109dd-0a2a450a8762-26
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 18:33:26 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0ee034479000b504@swg.vates.tech>)
- id 6abbe856-f2d2-0a2a450a0019-b9ff1c2291e3-3
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 18:33:26 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0ee034479000b504.006 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Tue, 29 Sep 2026 16:33:06 +0000
-Received: from leducb.home (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 1567E823AA;
- Tue, 29 Sep 2026 18:33:06 +0200 (CEST)
+ id 1xBb6K-003jmP-Mk
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 18:54:44 +0200
+Received: from [10.42.69.1] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6abbed18-e002-0a2a0a5209dd-0a2a4501d150-28
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 18:54:44 +0200
+Received: from [52.101.72.111]
+ (helo=AM0PR02CU008.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6abbed54-5984-0a2a45010019-3465486fe7db-3
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 18:54:44 +0200
+Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
+ (2603:10a6:10:430::13) by DB4PR03MB8683.eurprd03.prod.outlook.com
+ (2603:10a6:10:383::13) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.24; Tue, 29 Sep
+ 2026 16:54:42 +0000
+Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
+ ([fe80::f257:38e:c0af:df28]) by DB3PR0302MB9208.eurprd03.prod.outlook.com
+ ([fe80::f257:38e:c0af:df28%5]) with mapi id 15.21.0451.022; Tue, 29 Sep 2026
+ 16:54:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,130 +55,237 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=QtEeReohDrT56joXV07q7UEDqQN6ir05HjrVldJ7zVk=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=poah5Y0Xno7GuD+mJJ+E+QzlObBDT09QMM+d9hN3aFSfI73O+Ez6nYnlJPX/Z45KNHciL4Dj7
- mXTGkGD4R81uMVtlaUnRz15N7EOiCTdO4k3DEG+tJud3Ydct0bU0CmKJHtI2Ilm79AAoYGMLFCi
- Ez+EnVbXvrwO1Gou1wXklK+u3owa6NHi5o8g5k4E0NUlN0xkF6nM4Ctzmp+m+xdXaNew5YwfHEO
- pk7HPtgu1jw68GCE1xf8fE7vsyc7rKYbs086Dr37UuRVQe5sG5RSTBZGZqJRHo5UXAVLsYi/Rc1
- rH+Q1HT3uX0IrohVFSgkJxzBxh/d189oXLyT7HhvhBlw==
-X-Zone-Loop: dbb0accd60713173dad082eecde8a8de48da9f86b2e2
-x-campaign-type: default
-x-transaction-id: f90d3643-613b-45d2-9e15-a710a23097bd
-x-swg-uid: 01-b8e0be9a-a0c5-4018-a55e-6fc64cddd403
-X-Mailer: Sweego
-Message-ID:
- <1790699586.8631fc262581453bbf619ec5b2062170.1a0ee034479000b504@vates.tech>
-x-swg-bid: 1790699586.8631fc262581453bbf619ec5b2062170.1a0ee034479000b504
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tryXRdEm0UdESh6+ZBW9xKT8Dr1aI66XbcNl3HpIFEtJj2Yl6sBcxy1M4O/0v188ufOxGij9HQ8lmyV6IGuAx0YvKAw1vEC5Eqg9pUzAgZQh805SHDOVPu6QkNmrFKowKnuzoxnsoBdBojpDkIXN6+n6ya23z7je2yIjZDFzbUGxE0aU1tNlRZXLA2eVx/j7uVb4p4H8XDMWVouLJg/5OtP6OyBqceDqAXwvr9KkOI2zRaddg3Bybx1Hu1JrYpxJtDmGLAJuHcQW2EdYNqF6PPxOVIhkf0yUPl0UO7Bwxd2IShs3AlyLH+6oMW3eEDf4GCFUea6z2O3XB8aricf/BA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=S2lkmYG7n/ygHugPAF7XixSg3rxPx+xoxz3SzwwUq4A=;
+ b=bwDQGAEWRzYTE3XjxMAfqxoOXl0f5qxTr1DGssY1+8D9SRQUjHeLGBLnUxA4UQJeLYnRHyWgNR+1evqPf6ThjDsDYAwi5AwEFzM6n2QhkVUfRpda3LJmv2xmDljfdDEW+FFFCdWpEgnkN6uO+t9t/omdOvn9txW6HJ+EZnrEpkeN7F9PA52n3RFRgQcZKHpvPwLYVUExvmmJKV3WaYcRrel1FiKElGcD/BUszPG+Z3vy2jTBQCBKXPSvGiJ+vEYUcfGJ5nzI8iiVIYp7ahGL4rJfgzB5hh6c7KxXB/ojUJft/oPIg3uWAzmO2oo+/5D/BC3khSrB6q+O9RWdSEkfww==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=S2lkmYG7n/ygHugPAF7XixSg3rxPx+xoxz3SzwwUq4A=;
+ b=gycPNJML4WEAnsBrTWtCHEHkRQPovrWzUzjWbcgrfIKkBpWTH7m+hD7b+e/HlZnZYmitR9FDrfkCyPeb1scdjKQD5/yibVWuUStWmWE5/b/rNblfkRnXxC1EfsXU5GD8qrb3aelk97Uy+ojDAheEqNE+oFGVdA5uU4Nc/zINvypR6BIg1lCTYr+RU+2tigjmnYXssbArwSt/bdytwjQFQrqtC4S8Il9743Bma6FE3Uv+Hj1S/Z1tE7Z7xqw8OMRdnGVjWNBHcP7XmHKS/QB9sftH8msl7I9r7fANa/Tqninu05IHLvy/ZDKmff2mMzqE+J/jxMwW4Wb/aPSWKLq5vg==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+From: Mykola Kvach <mykola_kvach@epam.com>
 To: xen-devel@lists.xenproject.org
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Stefano Stabellini <sstabellini@kernel.org>,
 	Julien Grall <julien@xen.org>,
-	=?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Subject: [PATCH v3 6/6] xen/riscv: make Zihintpause no longer a required extension
-Date: Tue, 29 Sep 2026 18:32:47 +0200
-In-Reply-To: <1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech>
-References: <1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech>
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790699289; l=3161; i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id; bh=WoMBT9/xwT97Z2UudFU580yGvNMK25r/GunTeSHKnhw=; b=0VXexm4THU1RwGaj+gq/JIo/fhZilR1o5Lq0S4ESKSmCc+QuQoBj1MHsTDkpJxOM+KsGDceJw afSjJ8SHgB7ABvL9mYQiSzlP/AgEis7YfpHKyO2HoSBJIwwTT2TdVop
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519; pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+	Bertrand Marquis <bertrand.marquis@arm.com>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH v6 4/4] xen/arm: vgic: free eSPIs using the bitmap index
+Date: Tue, 29 Sep 2026 19:54:12 +0300
+Message-ID: <a6263578fae9c9691322561e2fcf8df97af519a2.1790699282.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1790699282.git.mykola_kvach@epam.com>
+References: <cover.1790699282.git.mykola_kvach@epam.com>
 Content-Transfer-Encoding: 8bit
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1790699586266
-X-purgate-ID: tlsNG-4011c0/1790699606-4B4D7CFC-1D395FA0/0/0
+Content-Type: text/plain
+X-ClientProxiedBy: VIUP296CA0096.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:35c::10) To DB3PR0302MB9208.eurprd03.prod.outlook.com
+ (2603:10a6:10:430::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB3PR0302MB9208:EE_|DB4PR03MB8683:EE_
+X-MS-Office365-Filtering-Correlation-Id: c9b0c589-1059-43a0-b00b-08df1e4a5b9a
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|366016|23010399003|1800799024|10067099003|56012099006|11063799006|6133799003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	BLAnRPwSZj3eR1qxSD+aZdJF+vbn0KUeVf789GyFKTGnZCe4zRvcWv7nKpeV7Xu8BGH7iAKGcn59I3oEmMfAZ14Klf8mGSNxgJMC4f4R0EhcL1dEZ3YUoD3o4F2nja2dhJv8KMExkusjB+GTPRGLHFyWOGEsU2bctxGj5vyXIc9zCy681th4ZwSbB5Jtv49tPLF4YQc+LgjdQegQAhQzf48J2BGRixaWxiAIST2Di/uPlESJwCjt+HmUO7DJbc8Wps6qb/xdDmnYYRMru4krViHAh5/xEINdQf/PpSGSQBwvyR/xJPzv9ct/LvRpXDQ733OUDeC8I8/KC04tVlV8OI00svU1fxtlf8fZPboI+LUzHF4cLdRhBgEdHu/zTeuE1KuMJyL3owJQepZNEG1z9BIDktjiDv//QJi6k4nvpHJww1nLBxhcEZWWg1lQf7IMWOTUnCHJNMAtf8vxMFWFgYNbXdK8vvlNa7o2njnwN2zEjOHQyVAr+ChQQfIeUnzUCSwWLvhTUhVHoq5iS5/5RSC2WUP+c4rmQ34AJJPh8GPjdprvhK7JrCFTQR+0tOZOh7uFW3jiA0NPZOSW5lNJOVlZGm1aCCcQfq4QD15e3WBEhnqWqPXRQEHIFzSVhmrHJOGzI9beJAWGk7XpyWlSqcJWLvvsWpjqwj0UINqe1Tg=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB3PR0302MB9208.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(23010399003)(1800799024)(10067099003)(56012099006)(11063799006)(6133799003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?Io6YVHqi/WUR6kKHU3fpFaF1RicA3Q6cAEdUq5S82nV4rSd1JInp2hbmNZs1?=
+ =?us-ascii?Q?4QGUvgZc2FuPHIQea0cM2xs/Yl2fecQAgpLNaqs3QxISXUT8H7Nh8I3kXnK9?=
+ =?us-ascii?Q?M4La1VQkE8siCMuELw03cATAxLo6n7hR2hTgslk3VVYY1XY7UD4VdTM3UlvQ?=
+ =?us-ascii?Q?zwHdLBrr1qjdEJxPOfrICw341X1K2yuzmE0boAl7UJVbCv3Qiwz+spHnLKxo?=
+ =?us-ascii?Q?86EW6u3euoWWS8K6GM8HRh1S6L571Ht0cau7QCsCwuRHSL313OovRmrgG593?=
+ =?us-ascii?Q?ERI4aUjRfcJVPP2jge0BigxaCULDFKYoC50HgLmm3ZGCRYAkjKRecoBR4K41?=
+ =?us-ascii?Q?LQ+Aqc9wvKvIm3X30xCBKdeXE++sZTiUOzxUza9Y9cchoGCsyG0LNxLlQL04?=
+ =?us-ascii?Q?devecTViSSCE06kXDZtGEQlUyb8Y+60uz7wTCFDCN5iGH804nAXCvM2WR67T?=
+ =?us-ascii?Q?+vhdvViEk6MyBt1dtHIYywhWtkjDfplaqWhL6ElkcQ3rPxFR8DtcNb8yvJQ0?=
+ =?us-ascii?Q?639cKKx1nkHk8mx3cAt4+8Z1i0g0y0O3jxz/NHpc7hASoTa92XSr1WNGsmpg?=
+ =?us-ascii?Q?Fe47OsLjGI2ZxbZNUvQtumt2y+Dlv5kWcStMb30AHfQ4QwOF5S45jtfsJika?=
+ =?us-ascii?Q?xwxyoLy4wxFtmO62mFDwDCKZflRIHVmyT4MBwv/yymioUX5j5fT2KeqT9lvk?=
+ =?us-ascii?Q?DUeYEOBn5/Ge14CaHh3k9w5AZ05SxrcRgIq8KAf27RLxpTnUWj0bBrR/4k/M?=
+ =?us-ascii?Q?9CHOCHMQg0Npx8SlnEq5rhdnyKF5q92ATYs7rVCzSIIbLxwIK3QuHtzw3Tmi?=
+ =?us-ascii?Q?hbqIC+aL8l6BtVSke/VPO+FwSfiiNpbKB3Nk4GZk/D78lI1PZIeEYlzBpml9?=
+ =?us-ascii?Q?Hy9mK89v0hmK3lYNRjLksxPdXWDRlJMcQMevzZLQc7z2sU/Lk2HqS/AlyJqk?=
+ =?us-ascii?Q?lqJsPNOm/eolPAzbzkQDBUOhGWG6KRSten/d+TiGJIb29Lpt2YbQEXu8gPKq?=
+ =?us-ascii?Q?OkjU/sq1J3ZaYn/y/Px4GJm0Aoyx9NbavtrfwJFIpAbLGnh9B/k5VDHbif4g?=
+ =?us-ascii?Q?tsO6b8i6/1RYzW60jzC9PZ+kPxzJQj6IJkR6FzFBKtWsSUmDwztl8EmgN1vz?=
+ =?us-ascii?Q?mgR1+i6GwAgS0x+CZED2raNLc2Xilq1nOq80pxSiJ41dM1TuJlkEL1okC1WX?=
+ =?us-ascii?Q?8eCWtwENa14UCkOq9DlyleUduWzmuK85c1Cz+VkQB1CFSZvSZ0zv8QOj6y75?=
+ =?us-ascii?Q?3amm2J3oXiTlntAOdhoMG5TG1HqUVuICeT8xe5HWZygaTDL723sJt03y9+fA?=
+ =?us-ascii?Q?11/aX/COnX9lnjlHUdnAs3TGk0/zqj1YKV/P0PKA137d2wihkX7IYUPzzcmN?=
+ =?us-ascii?Q?vtWjBZuZ5Zw+1KIxVX1kAi6RAJsjACDsfaUQcH1HrsWveyor86DmrXw62cni?=
+ =?us-ascii?Q?xUcBu06kZywKcY9i+Qbn9Dx4dg7kiWgHCFfLzMoFPKrFykcUysel8v340DBt?=
+ =?us-ascii?Q?9+TlzJt9eNf118TuwKkq1mjPSv5fvouRrz67zumIJsTlUzFhxMuYNel09YWi?=
+ =?us-ascii?Q?msqm/HV3KfwPMl4MENP/GGatK+nUwNGFpjNm1tAzWIm/JBv+Ou6C9U80X4d2?=
+ =?us-ascii?Q?Hldh9ABINIRwMweTvnAqP/HlrjG9E+/Z0z5il7p1TqAh35ZhN3Gx5bluAhX6?=
+ =?us-ascii?Q?cGN1HXDqQQgjjJ+ellVf1nMiiIHXsiptG0PNMLBTtZKh+J8zqu4BMaYDpQPl?=
+ =?us-ascii?Q?txACqo1rxQ=3D=3D?=
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c9b0c589-1059-43a0-b00b-08df1e4a5b9a
+X-MS-Exchange-CrossTenant-AuthSource: DB3PR0302MB9208.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 29 Sep 2026 16:54:42.4204
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: FjKe1Y+eO9FYP6ID8CV8clTE7VWfz060d4+GMvQxYNlTvRSZdsGcSI77yfREoIESrHZC8DfOYPewsBPVo0Zx3g==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DB4PR03MB8683
+X-purgate-ID: tlsNG-d62444/1790700884-C4B45757-A57D6769/0/0
 X-purgate-type: clean
-X-purgate-size: 3163
+X-purgate-size: 4869
 
-Zihintpause is in required_extensions[] so Xen panics when it is missing,
-while it does not strictly require hardware support for it.
+The allocated_irqs bitmap in the existing vGIC implementation stores eSPI
+allocation bits immediately after the regular vIRQ bits.
+vgic_reserve_virq() converts an eSPI INTID to this compressed bitmap index,
+but vgic_free_virq() used the raw INTID.
 
-The PAUSE hint (Zihintpause extension) is encoded as FENCE W, 0
-(0x0100000F). In accordance with the RISC-V Unprivileged ISA, HINTs are
-encoded in the space of valid standard instructions. On platforms without
-Zihintpause support, executing 0x0100000F is treated as a standard FENCE
-with an empty successor set, which acts as a NOP and never generates an
-illegal instruction trap.
+Freeing INTID 4096 therefore clears bit 4096 instead of the first eSPI bit.
+This writes beyond allocated_irqs and leaves the intended eSPI bit set.
+Valid eSPIs reach this path during DOMCTL bind failure cleanup and unbind,
+and during vPL011 teardown.
 
-Zihintpause is therefore purely an optimization hint. Drop it from
-required_extensions[] so Xen can still boot on systems that don't advertise
-it, and print a warning in that case.
+Add virq_to_idx(), the inverse of idx_to_virq(), and use it when reserving
+and freeing vIRQs. Use vgic_is_valid_line() for the validity checks when
+reserving and freeing vIRQs in both vGIC implementations.
 
-Assisted-by: Claude:claude-opus-5
-Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Fixes: bdde400c6e1b ("xen/arm: vgic: add resource management for extended SPIs")
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 ---
-Changes since v2:
-- rewrite commit message
-- print a warning at boot when Zihintpause is unavailable
-- drop Zihintpause requirement from booting.txt
----
-Changes since v1:
-- rewrite commit message.
----
- docs/misc/riscv/booting.txt |  3 ---
- xen/arch/riscv/cpufeature.c | 12 +++++++++++-
- 2 files changed, 11 insertions(+), 4 deletions(-)
+Changes in v5:
+- Add the vgic_is_valid_line() guard to vgic_free_virq() in the new
+  vGIC implementation and use the same helper in vgic_reserve_virq().
 
-diff --git a/docs/misc/riscv/booting.txt b/docs/misc/riscv/booting.txt
-index c99ccafa74..14212ed62f 100644
---- a/docs/misc/riscv/booting.txt
-+++ b/docs/misc/riscv/booting.txt
-@@ -19,9 +19,6 @@ them is missing from the riscv,isa property of the CPU nodes:
-   a very simple sequence.
-   The similar issue occurs with other __builtin_<bitop>, so it is needed to
-   provide a generic version of bitops in RISC-V bitops.h
--- Zihintpause:
--  On a system that doesn't have this extension, cpu_relax() should be
--  implemented properly.
- - Svpbmt:
-   Mandatory to enable changing the memory attributes of a page.
-   For platforms that do not support Svpbmt, it is necessary to introduce a
-diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
-index ee35c7a17c..91404daac5 100644
---- a/xen/arch/riscv/cpufeature.c
-+++ b/xen/arch/riscv/cpufeature.c
-@@ -216,7 +216,6 @@ static const struct riscv_isa_ext_data __initconst required_extensions[] = {
-     RISCV_ISA_EXT_DATA(h),
-     RISCV_ISA_EXT_DATA(zicsr),
-     RISCV_ISA_EXT_DATA(zifencei),
--    RISCV_ISA_EXT_DATA(zihintpause),
-     RISCV_ISA_EXT_DATA(zbb),
-     RISCV_ISA_EXT_DATA(svpbmt),
- };
-@@ -707,6 +706,17 @@ void __init riscv_fill_hwcap(void)
+Changes in v4:
+- Document the compressed bitmap layout with an ASCII diagram above the
+  conversion helpers and refer to struct vgic_dist for the full layout.
+
+Changes in v3:
+- Adapt virq_to_idx() to the configuration-neutral is_espi() helper.
+
+Changes in v2:
+- Call is_espi() without a configuration guard.
+---
+ xen/arch/arm/vgic.c      | 42 +++++++++++++++++++++++++++++-----------
+ xen/arch/arm/vgic/vgic.c |  5 ++++-
+ 2 files changed, 35 insertions(+), 12 deletions(-)
+
+diff --git a/xen/arch/arm/vgic.c b/xen/arch/arm/vgic.c
+index 0ba13e18da..acded6a40f 100644
+--- a/xen/arch/arm/vgic.c
++++ b/xen/arch/arm/vgic.c
+@@ -25,6 +25,21 @@
+ #include <asm/vgic.h>
  
-     riscv_resolve_ad_scheme();
  
-+    /*
-+     * Zihintpause isn't mandatory: the encoding used by cpu_relax() is a
-+     * HINT which executes as a no-op on hardware without the extension.
-+     * Report it, as a platform may provide its own way to hint a spin-wait
-+     * loop, which then has to be wired up in cpu_relax().
-+     */
-+    if ( !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_zihintpause) )
-+        printk(XENLOG_WARNING
-+               "Zihintpause unavailable: cpu_relax() gives the CPU no hint; "
-+               "wire up this platform's pause equivalent in cpu_relax()\n");
++/*
++ * The allocated_irqs bitmap is compressed: eSPI bits immediately follow
++ * regular IRQ bits, skipping the gap in the INTID space.
++ *
++ *   +-----------+-----------+-------------------+-------------------+
++ *   |   SGIs    |   PPIs    |       SPIs        |       eSPIs       |
++ *   +-----------+-----------+-------------------+-------------------+
++ *   0           16          32                  vgic_num_irqs(d)
++ *
++ * INTID ESPI_BASE_INTID maps to bitmap index vgic_num_irqs(d).
++ * The following idx_to_virq() and virq_to_idx() convert between INTIDs
++ * and bitmap indexes.
++ *
++ * See also the allocated_irqs comment in struct vgic_dist.
++ */
+ static inline unsigned int idx_to_virq(struct domain *d, unsigned int idx)
+ {
+     if ( idx >= vgic_num_irqs(d) )
+@@ -33,6 +48,16 @@ static inline unsigned int idx_to_virq(struct domain *d, unsigned int idx)
+     return idx;
+ }
+ 
++static inline unsigned int virq_to_idx(struct domain *d, unsigned int virq)
++{
++    ASSERT(IS_ENABLED(CONFIG_GICV3_ESPI) || !is_espi(virq));
 +
-     for ( i = 0; i < req_extns_amount; i++ )
-     {
-         const struct riscv_isa_ext_data ext = required_extensions[i];
-
++    if ( IS_ENABLED(CONFIG_GICV3_ESPI) && is_espi(virq) )
++        return espi_intid_to_idx(virq) + vgic_num_irqs(d);
++
++    return virq;
++}
++
+ bool vgic_is_valid_line(struct domain *d, unsigned int virq)
+ {
+ #ifdef CONFIG_GICV3_ESPI
+@@ -854,19 +879,11 @@ bool vgic_emulate(struct cpu_user_regs *regs, union hsr hsr)
+ 
+ bool vgic_reserve_virq(struct domain *d, unsigned int virq)
+ {
+-    unsigned int idx = virq;
+-
+     if ( !vgic_is_valid_line(d, virq) )
+         return false;
+ 
+-    if ( is_espi(virq) )
+-    {
+-        unsigned int num_regular_irqs = vgic_num_irqs(d);
+-
+-        idx = espi_intid_to_idx(virq) + num_regular_irqs;
+-    }
+-
+-    return !test_and_set_bit(idx, d->arch.vgic.allocated_irqs);
++    return !test_and_set_bit(virq_to_idx(d, virq),
++                             d->arch.vgic.allocated_irqs);
+ }
+ 
+ int vgic_allocate_virq(struct domain *d, bool spi)
+@@ -903,7 +920,10 @@ int vgic_allocate_virq(struct domain *d, bool spi)
+ 
+ void vgic_free_virq(struct domain *d, unsigned int virq)
+ {
+-    clear_bit(virq, d->arch.vgic.allocated_irqs);
++    if ( !vgic_is_valid_line(d, virq) )
++        return;
++
++    clear_bit(virq_to_idx(d, virq), d->arch.vgic.allocated_irqs);
+ }
+ 
+ unsigned int vgic_max_vcpus(unsigned int domctl_vgic_version)
+diff --git a/xen/arch/arm/vgic/vgic.c b/xen/arch/arm/vgic/vgic.c
+index ba029b8a3b..84212bbefe 100644
+--- a/xen/arch/arm/vgic/vgic.c
++++ b/xen/arch/arm/vgic/vgic.c
+@@ -712,7 +712,7 @@ bool vgic_evtchn_irq_pending(struct vcpu *v)
+ 
+ bool vgic_reserve_virq(struct domain *d, unsigned int virq)
+ {
+-    if ( virq >= vgic_num_irqs(d) )
++    if ( !vgic_is_valid_line(d, virq) )
+         return false;
+ 
+     return !test_and_set_bit(virq, d->arch.vgic.allocated_irqs);
+@@ -756,6 +756,9 @@ int vgic_allocate_virq(struct domain *d, bool spi)
+ 
+ void vgic_free_virq(struct domain *d, unsigned int virq)
+ {
++    if ( !vgic_is_valid_line(d, virq) )
++        return;
++
+     clear_bit(virq, d->arch.vgic.allocated_irqs);
+ }
+ 
 -- 
-2.55.0
+2.53.0
 
 
