@@ -4,43 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 71FA8CA5FA5
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 15:11:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436508.1655156 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9F683C9832A
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 15:15:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436515.1655166 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBZUg-0000pO-L0; Tue, 29 Sep 2026 15:11:46 +0000
+	id 1xBZXt-0001Ky-2G; Tue, 29 Sep 2026 15:15:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436508.1655156; Tue, 29 Sep 2026 15:11:46 +0000
+Received: by outflank-mailman (output) from mailman id 1436515.1655166; Tue, 29 Sep 2026 15:15:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBZUg-0000pH-IO; Tue, 29 Sep 2026 15:11:46 +0000
-Received: by outflank-mailman (input) for mailman id 1436508;
- Tue, 29 Sep 2026 15:11:45 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBZUf-0000ov-Gz
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 15:11:45 +0000
+	id 1xBZXs-0001Kr-Vh; Tue, 29 Sep 2026 15:15:04 +0000
+Received: by outflank-mailman (input) for mailman id 1436515;
+ Tue, 29 Sep 2026 15:15:04 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <xakep.amatop@gmail.com>) id 1xBZXs-0001Kl-3C
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 15:15:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBZUd-002Frk-4t
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 17:11:43 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xBZXr-002kpQ-FY
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 17:15:03 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abbd528-e002-0a2a0a5209dd-0a2a4509ce58-6
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 17:11:42 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abbd52c-be1a-0a2a45090019-4a7de18ca8ef-3
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 17:11:40 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49b912d8239so35125425e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 08:11:40 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a00cfec703sm79119385e9.6.2026.09.29.08.11.38
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Sep 2026 08:11:38 -0700 (PDT)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6abbd5d8-2eae-0a2a0a5409dd-0a2a450598f8-36
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 17:15:03 +0200
+Received: from [74.125.229.204] (helo=mail-lf2-f12.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6abbd5f7-4cb1-0a2a45050019-4a7de5cccd33-3
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 17:15:03 +0200
+Received: by mail-lf2-f12.google.com with SMTP id
+ 2adb3069b0e04-5ba31af822cso883143e87.1
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 08:15:03 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,148 +48,248 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1790694903; cv=none;
+        d=google.com; s=arc-20260327;
+        b=eMS+cLlvWplw6vT/ieOM5xqMwFC1LEX1WeX7VAaXPyG4zi/5YKZInmoHo91JVaMzsL
+         J/GtVaz5whem1Am6sk/M2yem0f+s+MN5W/i20XiXkxsVnrSQGTE2NMPqVQexQXuhyzhp
+         VqR+fZY3wQZTxNpIfjul9bPdZkxlfZv5aRx5aNg+P6O9jM5TzmsJoKRWUKUTuGWvOrtd
+         SqQJ+lpcjUomk9AXLxMo7CQVYWYAbMMIuccKhwRmTtwGt3Rz/ouOXXllvsyFyMkJiI45
+         Mwy9yq7jGPA47QavlQQ6dOWYBIVH3bff/iBlgAf2zFHaW5K1nlpDSmhfHBkrgkQ12QvK
+         mU3w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=oI51A4n41bP5Q2icrJYl3VQqc1gPXhJxzBkDYd01Pu8=;
+        fh=WIBsbU94tzJ4cDiE2U1nGSEGZUKQH+ugjEkhmxI8Bgo=;
+        b=IU8kEz8pR24xujO5+K0LULKLAVzSnVPBToET71IbHHV5n6PzTId3oUtv9jpYmqc9lv
+         6UxFGZ1KawBTp+Csj+u1QHAmnECNhR0eckvNuzfDpXXuvC6MG+iDKkfDkNLAZVkQ4CQm
+         MDDw/0vJ44KaFa3dgG6rsHw+EuZYvS+Y/dO3TlOSm+c6Ymz7fTKNnedHzi7R7wN6wABQ
+         VC3kRIYrMg4RWqzBYrde7lL9iO9Bz0Y1TJ4faEMOWqh3xMDb3ZOYkw6CrpT8dnT4NGMA
+         SoWGTG9GxsKyOMItGjwzAWzFrA3/zrxc6e3HOLVp0L4tRxw1e2PfladNkviRf/JisB6K
+         RGcA==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790694700; x=1791299500; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=lwA2KSZjyy5hsKkVHj5gA5xx08XT3DepPe2WuODi2nQ=;
-        b=Mbqv8LTN85NT4d3dqj5gPGCwW7L/9LHdElCu1YaxkMv9CTLfVDOc64NC8+OU/NSGJo
-         GClhNsst837h9Y8Zyr9g6nFeD1obOdl67E0yzPfHKqWJiI465erBNYDEEkQn48hAxLfr
-         PNM7zKkWHtGh7tON7YQmFNx+PIoRQEZF+5lRmcQSOaToEFnvOocA2CMCKQaR1lRe8+rz
-         48dBlPO8BFT/dPczxBB/LghxJviWlKr1XiYsqbpppxBf+qTRUB0UDdZveUgSBVTldZtg
-         bURPWrfTi03p73l00CMLHLFagOdbbCbTTJBIeOxKdni67l7/lsjByJLh3msHH5V7J8CU
-         5x5g==
+        d=gmail.com; s=20251104; t=1790694903; x=1791299703; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=oI51A4n41bP5Q2icrJYl3VQqc1gPXhJxzBkDYd01Pu8=;
+        b=Rm/Ei5UAf3s0+cYd/50DCqMnSZMtWfDM3m1fuw4NYMQ30BVZzKebdPGRd789vb8HeO
+         sLWLLx35YK3LCnmxGRg7aNgHHE2jvkdD9AEdE7b40m05FDmaPpHS2M9VLJho4Ie8lurQ
+         yqtBp5Q6XuLEjdwCCWZ/7WuH3RcQ+KPkVDw2Ioq4gbA/z7pmu7xuGy2X9rX1ajRVwOeD
+         8JktXgwLEZsIaTfD+293HnatxSJYq1dzv4NmYNDyW1aR4D1arvRdPABc4D/2hVapdLXq
+         4vrr8aLrX5E2oZPzd0beZqw5YKlBFp/zc/laK0S+0GO+cpSczzS/Vkim2E5UDfvNjjAJ
+         QAtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790694700; x=1791299500;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=lwA2KSZjyy5hsKkVHj5gA5xx08XT3DepPe2WuODi2nQ=;
-        b=P8LlVz9LFvG5zSrcwJ6Wom75rBuKOez84hTGBmZgTSwPieno3n1/dk/srxRyIhwX5+
-         E3hrOXTV9tRpRJq0jxGE65mppzyos/MLrfT1f8V3Sf6V5Y7xfubxbi6olA4mXoBBF3nB
-         NIHFzwBCXEmG/w+SEmljTTh81kP0nF2QBcb3hcWMuy6YWKumBZnuwNQwhTqaVRpRwNYg
-         lWJRFRwX32lVuCJwu3zTfzhzgtzL8XyswUV85ToMgMEdsnrfUYobYSN7Hxldoc6x2VMK
-         mkYU2Pmp8uiWGkKM9ORnA/vasCNaFSqkTHwTBd0ImXdtdh3uQvK0xsniDO0+Yj+guwgW
-         As0w==
-X-Forwarded-Encrypted: i=1; AKwUvBxx/4py8iSoBvG/bdb/3zCYSAVQwdtbKKevMsekwats2pOEdSNovjKWGfZ/w5/tHkM15PyCyaKMpwA=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nE9zxltH0H4gwty91n1gx06qfZZsLDvQNFDe32+ruCCT6S+M3X
-	5aLvN+5H/OQ1DJaB7zW4bF+69g8BjqgaIh+D/xgjDP6LFDh7fgJaXZUqf+Hk6grvgg==
-X-Gm-Gg: AYBFou3nBPO/zCK3anf+v/WTZZWIeX5gZn5A0FVaR5KnPio8L9TfHy4PLT82zIb/saE
-	OMPhl3ruEl+czLWz2pAlE2AOJSAkqQ3xlHAv9KyH5NN6UyhKj5QmzLeZb1EsWNnlHZrBk3CTgOS
-	stSnDNdmLsJaNJ1HVijDV0CfXbASpt7rRccLynDANNK3bahJyEz1u9NPJARfLzD7tnvhb+7V12v
-	Mp6cr15CbnX79UDqapI+fgVat8FOqtgoGOIkBkd048NxWTuAXa1empjUeTlcf9RaNOyKTZwPfzb
-	lebZxTf0edT/XCX3dXPb2QWsnJLlNWFvvaCMM1HHn181EttcraJzxXrJelNS6r5Fs3iTxUemhVm
-	CwtTYBVT9zny0z2kpXdwjYj3dsbfJxpcEg3EwOCwB2r9iXxOCvOLfkvDeupSMsekHEoTFkxtPEj
-	hbEBcECpwf8fgU3PsDoBAIF+0ZBIQxXx3tnfEQNJNv194AXDakVB/HaQxFtTWzgfeUiCwFJ3YlR
-	8MbdJdBnlGeAYt5uNbhp9WRb9hNtYqgIi3RGkN4wn6npVzUSW0dFa66lfVbdns=
-X-Received: by 2002:a05:600c:c494:b0:49c:fa21:1c81 with SMTP id 5b1f17b1804b1-49fe7bab979mr280903045e9.22.1790694699987;
-        Tue, 29 Sep 2026 08:11:39 -0700 (PDT)
-Message-ID: <0373fcc0-5bc9-4140-a2c9-52a31c7e42b5@suse.com>
-Date: Tue, 29 Sep 2026 17:11:37 +0200
+        d=1e100.net; s=20260707; t=1790694903; x=1791299703;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=oI51A4n41bP5Q2icrJYl3VQqc1gPXhJxzBkDYd01Pu8=;
+        b=W+b9EBsNc4a/9BrwGHD0jayWpC+IvpgdjYyacIIc4t0gX3KRoH1zPglTWiiFfdFIjs
+         B2TVxmvOdDaiBRyZf1pHo9Rz0mVYDZ9VXDprr24g9GJhxVU9XvLBCU2jxuPmt6snhZqd
+         9P4CaCi/4ecnn5Zmn5CDNyZDLi19zPU/9kLIm3EIlGDNDqnbiNpxLAVB/CFHpTjQz1rS
+         W/yTOB7TEU3+kZjMr2baLFimMAceX+jZ6TuVVdv5KxAjkkP8c1k6B9oNT37QBeo64Zal
+         Uv44dNeO12gTaGtfl206ZOfv/S0aUXFj37bDdVMkBc2dyP5SM247fE5i67MbX0httSC5
+         dv8g==
+X-Gm-Message-State: AFq9FYKkiYrGc2idHDVdUO3OMYPGMP+QXLlgIJ2OltHxQAuO9ArY39+S
+	h+grCWrRzJ6Oz8gOE6ZXyTwXJkHxOmOpw4QIbrtboCGYkzKPtPpywH2+4CLDw/5BmzGlTDJPYCh
+	U7flWFIITkRlhgmTnmjPQu0ho6KnUJFo=
+X-Gm-Gg: AYBFou1IHAHUhfZyXlfwC2pMbUVqrXfDCD66QojdI3uGg+ZvMV1Qp+O/sG7bqXI65NK
+	v2hiKAQiruRKf1e39nPfbHp5sYYfiI87tA00oZv2Pbtqr9GvmqG11Io6YEd3qtDRIRgP4k7cLiF
+	TSBeyhtoLrqux5f2mNfLjBinQCPPjDKVuDyW1FjER813v+lHJqd4dj47p+2h3nZ4T5OhE+W/Qco
+	4fwqP2fMyc2TOQdpgI5jBp8YmDCeYS1Wl4GxAxjMWjjB4S5h6BUeeWXr5DUs988kZ0oHEKvUbGv
+	/DQJ5N661aIochlEm9aT9bELHNzqfDhk12UdilvHoo32wSbnDPrEJw==
+X-Received: by 2002:a05:6512:6c2:b0:5b8:c6be:7d58 with SMTP id
+ 2adb3069b0e04-5b8e6dd0c15mr4034882e87.44.1790694902303; Tue, 29 Sep 2026
+ 08:15:02 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] misra: deviate C library-style functions from Misra
- C:2012 rule 11.8
-To: Nicola Vetrini <nicola.vetrini@bugseng.com>
-Cc: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>,
- Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- xen-devel@lists.xenproject.org
-References: <4abcb11ef287170ced74935cbee60c90058c1307.1790671787.git.dmytro_prokopchuk1@epam.com>
- <0a286fe9-2133-4f28-8fab-59f4e51d1484@suse.com>
- <446354d93ae04a07b86d7293705d7e46@bugseng.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <446354d93ae04a07b86d7293705d7e46@bugseng.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1790694700-BE0C5034-B4C62623/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 2177
+References: <13181424f9be3f5e31977fbd505209cd0508571b.1790102501.git.leonid_komarianskyi@epam.com>
+ <CAGeoDV8sN2P9nqHwxcYz72u+L-DEQDbOcHENvX=jpzJ2=Z-gNQ@mail.gmail.com> <d7f902ed-af19-4d06-8bea-b73b4b385533@epam.com>
+In-Reply-To: <d7f902ed-af19-4d06-8bea-b73b4b385533@epam.com>
+From: Mykola Kvach <xakep.amatop@gmail.com>
+Date: Tue, 29 Sep 2026 18:14:50 +0300
+X-Gm-Features: AclHuK-TVITRrHVCiuyqgizPpVqzBz02_9dE7lruHfpKi3UcMk-SWzaJ8H5kQ_Y
+Message-ID: <CAGeoDV_v3DxCNvPQvOs9YQLBg0cgxZsjH8rHyVPCEmYws8nEpA@mail.gmail.com>
+Subject: Re: [PATCH v2] xen/arm: gicv3: initialize eSPI unconditionally
+To: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Bertrand Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, 
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, Julien Grall <jgrall@amazon.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-c201ff/1790694903-726B52A1-F9F26586/0/0
+X-purgate-type: clean
+X-purgate-size: 6567
 
-On 29.09.2026 16:56, Nicola Vetrini wrote:
-> On 2026-09-29 15:40, Jan Beulich wrote:
->> On 29.09.2026 11:03, Dmytro Prokopchuk1 wrote:
->>> bsearch(), memchr(), memchr_inv(), strchr(), strpbrk(), strrchr() and
->>> strstr() all accept a const pointer/object but return a non-const 
->>> pointer
->>> to the matched element or byte, matching their standard C library
->>> interfaces. The const qualifier is deliberately stripped so that 
->>> callers
->>> searching a non-const object get back a mutable pointer to it. Fixing
->>> this would require changing the public API, so document these uses as
->>> deviations instead.
->>>
->>> Update docs/misra/rules.rst to note that this class of double-use
->>> library functions is deviated on a per-function basis.
->>>
->>> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
->>
->> When I prepared my 11.8 series [1], I was wondering whether we need to 
->> go
->> as far as deviating these. Since we now uniformly take gcc5 as minimum
->> baseline, there is (at least in theory) the option of using _Generic to
->> cover the dual-use. One question there is whether Eclair would 
->> recognize
->> such - Nicola? After all, looking at e.g. glibc's implementation, the
->> functions themselves remain "unsafe" there; it's a macro wrapping them
->> which puts the lost qualifier back.
-> 
-> Could you provide a concrete example?
+Hi Leonid,
 
-From glibc 2.43:
+On Wed, Sep 23, 2026 at 8:55=E2=80=AFPM Leonid Komarianskyi
+<Leonid_Komarianskyi@epam.com> wrote:
+>
+> Hello Mykola,
+>
+> Thank you for your review.
+>
+> On 9/23/26 11:04, Mykola Kvach wrote:
+> > Hi Leonid,
+> >
+> > Thank you for the patch.
+> >
+> > On Tue, Sep 22, 2026 at 9:59=E2=80=AFPM Leonid Komarianskyi
+> > <Leonid_Komarianskyi@epam.com> wrote:
+> >>
+> >> Since the firmware may initialize eSPIs before Xen, and without
+> >> CONFIG_GICV3_ESPI enabled, Xen would not reinitialize them properly
+> >> during boot. In such cases, once the GIC is re-enabled in Xen,
+> >> interrupts may be received that cannot be handled.
+> >>
+> >> To ensure proper operation on hardware with eSPI feature, even when th=
+e eSPI
+> >> config is disabled, gicv3_dist_espi_common_init() should be invoked
+> >> regardless of whether CONFIG_GICV3_ESPI is enabled or not. This will n=
+ot
+> >> affect hardware without eSPI support, as the function checks if the
+> >> hardware supports eSPIs by reading the GICD_TYPER.ESPI field (using
+> >> GICD_TYPER_ESPIS_NUM macro), which indicates whether the extended SPI
+> >> range is supported. If the hardware does not support eSPI, the functio=
+n
+> >> will not perform any actions.
+> >>
+> >> There are no functional changes for setups where CONFIG_GICV3_ESPI=3Dy=
+.
+> >>
+> >> Suggested-by: Julien Grall <jgrall@amazon.com>
+> >> Signed-off-by: Leonid Komarianskyi <leonid_komarianskyi@epam.com>
+> >> Acked-by: Julien Grall <jgrall@amazon.com>
+> >> ---
+> >> Changes in v2:
+> >> - rebased on the current staging
+> >> - placed Suggested-by tag first to keep tags in chronological order
+> >> - added Acked-by from Julien Grall
+> >>
+> >> This is a follow-up patch related to the discussion:
+> >> https://lore.kernel.org/xen-devel/820704d0-4047-4f02-a058-01daba2765f1=
+@xen.org/
+> >>
+> >> Sending v2 with the requested changes, as I only now noticed
+> >> that this patch has not been merged yet.
+> >> ---
+> >>   xen/arch/arm/gic-v3.c                  | 32 ++++++++++++++----------=
+--
+> >>   xen/arch/arm/include/asm/gic_v3_defs.h |  2 --
+> >>   2 files changed, 17 insertions(+), 17 deletions(-)
+> >>
+> >> diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+> >> index acdac22953..463769d77b 100644
+> >> --- a/xen/arch/arm/gic-v3.c
+> >> +++ b/xen/arch/arm/gic-v3.c
+> >> @@ -703,17 +703,32 @@ unsigned int gic_number_espis(void)
+> >>       return gic_hw_ops->info->nr_espi;
+> >>   }
+> >>
+> >> +static void __init gicv3_dist_espi_init_aff(uint64_t affinity)
+> >> +{
+> >> +    unsigned int i;
+> >> +
+> >> +    for ( i =3D 0; i < gicv3_info.nr_espi; i++ )
+> >> +        writeq_relaxed_non_atomic(affinity, GICD + GICD_IROUTERnE + i=
+ * 8);
+> >> +}
+> >> +#else
+> >> +
+> >> +static void __init gicv3_dist_espi_init_aff(uint64_t affinity) { }
+> >> +#endif
+> >> +
+> >>   static void __init gicv3_dist_espi_common_init(uint32_t type)
+> >
+> > I think the ordering in gicv3_dist_espi_common_init() needs to be
+> > revisited now that this function is also called with
+> > CONFIG_GICV3_ESPI=3Dn.
+> >
+> > The motivation for this patch is that firmware may have left an eSPI
+> > enabled. However, we currently program GICD_ICFGRnE before clearing
+> > the corresponding enable bit in GICD_ICENABLERnE.
+> >
+> > The GIC architecture requires an interrupt to be individually disabled
+> > before changing Int_config; otherwise the behavior is UNPREDICTABLE.
+> > See Arm IHI 0069H.b, section 12.9.9 (GICD_ICFGR<n>).
+> >
+>
+> Section 12.9.9 describes GICD_ICFGR<n>, i.e. the regular SPI range, and
+> it indeed contains this requirement. However, the code in
+> gicv3_dist_espi_common_init() programs GICD_ICFGR<n>E, which is
+> described in 12.9.10, and I could not find an equivalent requirement ther=
+e.
 
-# define __glibc_const_generic(PTR, CTYPE, CALL)	\
-  _Generic (0 ? (PTR) : (void *) 1,			\
-	    const void *: (CTYPE) (CALL),		\
-	    default: CALL)
+Thanks for checking. You're right, the eSPI section does not state
+the same requirement. Sorry for the confusion.
 
-while the declarations still are e.g.
+>
+> The only related rule I found that also covers the extended SPI range is
+> in Arm IHI 0069H.b section 4.5:
+>
+> "Changing the configuration of an interrupt from level-sensitive to
+> edge-triggered, or from edge-triggered to level-sensitive, when there is
+> a pending interrupt, leaves the interrupt in an UNKNOWN state."
+>
+> That rule is about the pending state rather than the enable state, though=
+.
+>
+> Also, the current eSPI initialization sequence mirrors the one used for
+> regular SPIs in gicv3_dist_init(), where the requirement from 12.9.9
+> does apply. So if we decide to reorder the initialization, I think it
+> should be done for regular SPIs as well, ideally in a separate
+> preparatory patch.
 
-extern void *memchr (const void *__s, int __c, size_t __n)
-      __THROW __attribute_pure__ __nonnull ((1));
+For regular SPIs, let's wait for the maintainers' feedback. I think
+any fix there should be a separate patch and should not block this
+one.
 
-(and hence the implementation still - necessarily - casts away
-const-ness).
+>
+> > We also rely on the same requirement in gic_set_irq_type().
+> >
+> > So shouldn't we disable/deactivate all eSPIs before programming
+> > GICD_ICFGRnE? Linux also initializes the extended SPI range in this
+> > order: ICENABLERnE/ICACTIVERnE first, followed by IGROUPRnE,
+> > ICFGRnE and IPRIORITYRnE.
+> >
+> > This issue already seems to exist for the CONFIG_GICV3_ESPI=3Dy path,
+> > but this patch makes it relevant to the newly added CONFIG=3Dn path,
+> > where an eSPI left enabled by firmware is precisely the case we are
+> > trying to handle.
+> >
+> > Also, we could disable/deactivate eSPIs for all builds, while keeping
+> > the rest of the eSPI configuration under CONFIG_GICV3_ESPI. This would
+> > avoid accessing the other eSPI registers in builds without eSPI
+> > support, unless there is a particular reason to initialize them there.
+> >
+>
+> This is a fair point, but I think it is better to clarify with the Arm
+> maintainers first whether the SPI/eSPI initialization order should be
+> changed in a separate preparatory patch, as the code for this patch
+> depends on the answer. As mentioned above, I could not find such a
 
-> In passing, for stronger 
-> guarantees w.r.t. _Generic it would be better to switch to MISRA C:2012 
-> Amendment 3, which has specific support for that feature. Keeping AMD2 
-> and using _Generic weakens a bit the safety argument (though one can do 
-> an analysis himself, of course).
+My suggestion to skip the extra eSPI configuration when
+CONFIG_GICV3_ESPI=3Dn was just a minor cleanup suggestion. Those writes
+look unnecessary, but I don't see any harm in keeping them. There is
+no need to change this in the current patch. It can be left as is or
+cleaned up later.
 
-As this keeps coming up, we surely want to discuss / progress this move.
+Reviewed-by: Mykola Kvach <mykola_kvach@epam.com>
 
-Jan
+> restriction for eSPIs; it applies only to regular SPIs. If the
+> maintainers agree to change the sequence for both SPIs and eSPIs, I can
+> prepare a separate patch and update this patch accordingly.
+>
+>
+> Best regards,
+> Leonid.
+
+Best regards,
+Mykola
 
