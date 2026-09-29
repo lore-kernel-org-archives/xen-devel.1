@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8FC9CA5FA5
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 15:35:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436524.1655175 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77BAECA5FAC
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 15:53:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436534.1655185 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBZra-0004Lm-MF; Tue, 29 Sep 2026 15:35:26 +0000
+	id 1xBa92-0007Ak-61; Tue, 29 Sep 2026 15:53:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436524.1655175; Tue, 29 Sep 2026 15:35:26 +0000
+Received: by outflank-mailman (output) from mailman id 1436534.1655185; Tue, 29 Sep 2026 15:53:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBZra-0004Lf-IF; Tue, 29 Sep 2026 15:35:26 +0000
-Received: by outflank-mailman (input) for mailman id 1436524;
- Tue, 29 Sep 2026 15:35:25 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBZrZ-0004LZ-8e
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 15:35:25 +0000
+	id 1xBa92-0007Ad-1f; Tue, 29 Sep 2026 15:53:28 +0000
+Received: by outflank-mailman (input) for mailman id 1436534;
+ Tue, 29 Sep 2026 15:53:27 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBa90-0007AX-UT
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 15:53:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBZrY-002njy-3s
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 17:35:24 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xBa8z-006poc-Nn
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 17:53:25 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abbdab7-e002-0a2a0a5209dd-0a2a4509cae4-2
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 17:35:24 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abbdedd-bab6-0a2a0a5309dd-0a2a4503b096-46
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 17:53:25 +0200
+Received: from [74.125.225.98] (helo=mail-wr2-f34.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abbdab9-be1a-0a2a45090019-4a7de18c8c5e-3
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 17:35:21 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-4a006bb267eso11909695e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 08:35:21 -0700 (PDT)
+ id 6abbdef5-fae8-0a2a45030019-4a7de1628001-3
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 17:53:25 +0200
+Received: by mail-wr2-f34.google.com with SMTP id
+ ffacd0b85a97d-48881a62e09so2672207f8f.2
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 08:53:25 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a00cf4598esm93469635e9.0.2026.09.29.08.35.19
+ ffacd0b85a97d-48af508bb41sm5022429f8f.28.2026.09.29.08.53.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Sep 2026 08:35:20 -0700 (PDT)
+ Tue, 29 Sep 2026 08:53:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,54 +54,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790696121; x=1791300921; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790697205; x=1791302005; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=pZyO70NfDiF6JXCDY9tMHtHB5fcbO61/4cbXYv8ya30=;
-        b=SLYVHtkCNZ14fQaVsoHDOsdNuBQBLDlo4Btwl1NHFrzvI1nB1Ka89iVlHo1OWsbbyK
-         bscNBfIVH5P3PgXc/FvBOgoEYZkFoUwGdVE9pjHv5F6lzAFofIPjNi9tIHNPrOepoXwR
-         dxeWb1p395kSQDhrseQdTlBQV9CsnXvvoNInWkJ2R1nx1Fh8hJvbnb8DAPi4DU+ALROU
-         Lsiaqx+5uLLdDjSdhF8ppYfTBBvJsKHPXbvtK5Pm7+OMWvf0d45WTuEr+OL8U4Xe4KCv
-         o7EpNe7AtOSAAhLaEsPLr3O2WKZ43IPdu7nrlxULXmrxtSfjATpsvuwCdSsXn6rdJ+WG
-         GjNA==
+        bh=uNCU1+SLYxjwe7JYcba24LoLUluyuPQFyKJ38Du5U5Q=;
+        b=LRaz6USMQFGvK6d69KByhvDbTW/C6bjeZizpOb4rGBstuCNlnjs1dTdRwLQegAArEM
+         pjG5gQE03TvsfM2rF+eDqIGIang2b/268FjzunMqpgDT2QFGurMCFodRWsuLUUX/KFwo
+         2+QOWGoqqmdCoq3SSjL8lHjs2EMBoZi0ecgOCwFCf6QD/C0NpcIY9inzEjulp3YGN/zd
+         i4FSwMFrQCuL2Kk4yU72THCUcNxxA6D8MfVqDHS88sU95sc3bXXC5fy78ukzj6VF2+vv
+         qwvS8aWaFURoBBZPb5Q2ewbvWZ+LehAHmuco643DxagR1AUuhriIw1OdYMiHM/ViaBqx
+         Wviw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790696121; x=1791300921;
+        d=1e100.net; s=20260707; t=1790697205; x=1791302005;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=pZyO70NfDiF6JXCDY9tMHtHB5fcbO61/4cbXYv8ya30=;
-        b=Bi83SoPb3+7sq25Hl3/F/dHCLLDYEb1qkpWgHOtO4VqjkofHiHgJLZSBoBGACC7u6j
-         DG2CsxQgxfTgBfBLgQwnYyh7zGeyW6qJM4cfVsX5IC2EhFoyIT1WXAcQ5y30W+BgVHXP
-         JBB/oGudB07s92t7GkMuyIb1b2HkMAV0W+fv9lVyQzYog5XnPE7z8ab90x6h4ykSqSjV
-         27DIgD9M7GLHberU4H9OTJb7F0DxnSw3wTKMZpTJxyKe80zxdIx+RaMssdm/aWUKx14o
-         2OHjM/SabP3ohdBhyMaCEMY0JUdII3ccVLgu/S64+1k/d7WbJoEuL+mM+ZZUsILvos1o
-         pUFw==
-X-Forwarded-Encrypted: i=1; AKwUvBz3QiGOSADSUPU1IsMhuAf4qQo5Qg02E0zwge9sMcFUvs8pj6e3JWUE13gVStemn5XS70jBn0RWtmw=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nJRWz1GPNII5JUD1Ujr1rHNxkBmAIb2c7KZt8jMTe3Jvr7klbN
-	5RSC3VKI00uc5rs+wN5htB8bAeJgIkCD28uFbTWLt0s6ZpIiHUcXPUoBHTGi5M76Nw==
-X-Gm-Gg: AYBFou3/K5bpCXFwHRKCbHinrxajjN4qSzHZsaXJ+hixgYCkIpu2WoKGSUq8JeUJmTj
-	K58eoqz8n1uEPyD/DluGO4qBcRKnoCsjNws4qnedcH6HYT/pP36v0AwUz6/qZ2NTbRcMT48MbDu
-	m085M9lpIai5bPUq3UZk8ncN6H51fSoSXSOGjA/XgijOe2FA6rEG5SPiNQB+/Ma7da4r1TjVauF
-	uaWrs6yaVOTv5pyHzurGZixM2Ey+liPOQSeePjt3nwLOdlm4Af/9f+VY1pJMZgm+oyJv1jTDwpB
-	tPC+3mBmAaV/SlbTS33UANOSIkqXiizunt9YjMiAVJFFOKJrXIySxfk5aZsOdGTiiHtNkxVef3L
-	93o5U2UjYKg3qdyiMqWeCjzczAnWda7m6vvYpSjMiBTPvR2VHrEaT9l8iQkFTuHc3erwrqo2dX/
-	kyMvLa+UM/DudQSm3zjy71gJasGa8BMRyfGwSH0vDaA32MayPd0nyOwKK78737QX51t969DQozy
-	nyhLjJzb4fTeJNr6kOBoanGxeCxxpDVgL5UQcsGrngFkbR0riydg9SP9k1IJUTSPSQIXmZvuKk=
-X-Received: by 2002:a05:600c:8b86:b0:49f:ce73:7a9 with SMTP id 5b1f17b1804b1-49fe6701ed1mr288631865e9.34.1790696120708;
-        Tue, 29 Sep 2026 08:35:20 -0700 (PDT)
-Message-ID: <1753bd8f-effd-40c4-a3b0-1e61ec8f7474@suse.com>
-Date: Tue, 29 Sep 2026 17:35:19 +0200
+        bh=uNCU1+SLYxjwe7JYcba24LoLUluyuPQFyKJ38Du5U5Q=;
+        b=FQfX/PbPxQpK+E0Dw8WethnpjLIQAnPGiDSJeTAPqhzEDJZVdqA1kbUTsocFduTNn3
+         NgcQS/wW48sJE3qSipB7b8L2LhV0pO3QFNpVhflRR0mRjwoATVo85Z4zZyentEzhYpfT
+         dEPZsDxNzxCdNyW5tESdc0I0vR7pDHgLU/Bfiq+Fmu3Zu7UJBwWW9wcJCLJPgTOGH5NE
+         5u8QHpb5N0jACS9EdJCw1gu0c6+7WU/Yv9yKltJQNudVN3WVupcP8Otvxgdc3uLOA4kO
+         3FX7VH8waNkOBUuY39Dh96nRn0tM+0/dSuP5BHacqc8Z6oBBXyDeJm7b654V8oNFh3RR
+         1IiQ==
+X-Forwarded-Encrypted: i=1; AKwUvBy8YkrioE0kP+7AVfwnQX3Me2m6x6tSz2mkTrq5a+dXTkMiUPDixBeipEtPGNFpfKI1jcMbC77I2ts=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJ2HbBbBtez9UsijeCzEJsSlOCyNakpI49rpWevXRhu21dW2Tx/
+	xRSHO1qF4gEz4iIJAvaxrak5v5IIGV2fa6Vyqr3eGKQFZoFj+H4GuzlkbKA0jcaxrw==
+X-Gm-Gg: AYBFou34VhRCXpimsA6eDOfcXnb+tjNftrtK4yyVtRDDpZtyNt8TbC/goBBTvNK6uiy
+	3LN7hfSLWYHBc0Il6Bdi6FQcMDPE2CELDlS7y4cfrH8GNcZcCLB5zu+lEStvJiWp00fkDGZoCx7
+	8RJoDdhkgtCSboaeOLcLX3gg8bWkOh8g11NxhKhC2xpGH+L17Yivc2xqf1orU0363sf7xQkAEdY
+	ilpMSYE5M78N+R8oKD1+Bj8E7LBG4gQWbsJcI9HrtHuDGtxx7xyME5FrdwKTQPbAUwBBnCZEOC0
+	ukIHG6uZz0fQ+jzCJwjM2V0uMa136GlWuFtsCQ6zjNIDNsBw4sOneI5sL7neOjh1GUsQpzJFftf
+	plx5JHGqE3AiVaqxj7HqxsHCi5ABxszx3uy5nKwPNwAMQIJa46fDyxenH8T8OBHkjoB0b+KLJuY
+	0S8NNV+otrC/qc8rmIFz/SLy3adt6uD/O/txbI/+qWD5JRY5q700eYlaeuaCR9Y1SxFpUyJkIlO
+	zGrcN4kXnjYL3z30raXdm/53wV0hLxopSJISJ6P6KUvMHWifB7mg+lP4Si0oHo=
+X-Received: by 2002:a05:6000:4108:b0:488:7787:469d with SMTP id ffacd0b85a97d-4887787490dmr22638675f8f.25.1790697204847;
+        Tue, 29 Sep 2026 08:53:24 -0700 (PDT)
+Message-ID: <252b42e8-d710-46f6-b837-21a9e6198d46@suse.com>
+Date: Tue, 29 Sep 2026 17:53:23 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/sched: refactor urgent count update
-To: Ruslan Ruslichenko <ruslichenko.r@gmail.com>
-Cc: dfaggioli@suse.com, jgross@suse.com, gwd@xenproject.org,
- artem_mygaiev@epam.com, Ruslan_Ruslichenko@epam.com,
+Subject: Re: [PATCH v2] x86/nSVM: Save L2's CR0, CR4 and EFER on #VMEXIT, not
+ Xen's
+To: Lin Liu <lin.liu01@citrix.com>
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Jason Andryuk <jason.andryuk@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
  xen-devel@lists.xenproject.org
-References: <20260925212803.799550-1-ruslichenko.r@gmail.com>
+References: <33c6c6e2838745be1de15874856812bb68e671cc.1790587806.git.lin.liu01@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -127,85 +130,61 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260925212803.799550-1-ruslichenko.r@gmail.com>
+In-Reply-To: <33c6c6e2838745be1de15874856812bb68e671cc.1790587806.git.lin.liu01@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1790696121-FD26A034-ACB601FA/10/78276251493
+X-purgate-ID: tlsNG-33051d/1790697205-760FE4E9-B4EB5009/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2635
+X-purgate-size: 2026
 
-On 25.09.2026 23:28, Ruslan Ruslichenko wrote:
-> From: Ruslan Ruslichenko <Ruslan_Ruslichenko@epam.com>
+On 28.09.2026 12:23, Lin Liu wrote:
+> nsvm_vmcb_prepare4vmexit() copies CR0, CR4 and EFER out of the shadow
+> VMCB, but Xen does not run L2 with L2's own values: svm_update_guest_cr()
+> ORs in HVM_CR4_HOST_MASK and, under shadow paging, CR0.PG|WP, and
+> svm_update_guest_efer() forces EFER.SVME.  Hardware writes back what L2
+> ran with, so L1 reads Xen's bits back as L2's.  Save the shadowed values
+> instead.
 > 
-> With current implementation whenever vCPU blocks on
-> waiting for event channel via SCHEDOP_poll hypercall,
-> scheduler sets 'is_urgent' flag. The flag is cleared
-> on vCPU runstate change, if it is no longer in
-> 'VPF_blocked' state or its vcpu_id is not in poll_mask.
+> CR4 leaks CR4.MCE under HAP.  EFER is observable on a VMRUN rejected for
+> SVME=0: L1 gets back a VMCB with the bit it deliberately cleared.  CR0 is
+> a no-op today, since nested virt requires HAP, and is changed for
+> consistency.
 > 
-> However, the only way for vCPU runstate to change in
-> polled state is when it's going to wakeup.
-> 
-> Thus when 'is_urgent' is set, inner condition will always be:
-> 
-> if ( unlikely(v->is_urgent) )
-> {
->     if ( !(v->pause_flags & VPF_blocked) ||            // Always True
->          !test_bit(v->vcpu_id, v->domain->poll_mask) ) // Never evaluated
+> Fixes: 9a779e4fc161 ("Implement SVM specific part for Nested Virtualization")
+> Assisted-by: Claude:claude-opus-5
+> Signed-off-by: Lin Liu <lin.liu01@citrix.com>
 
-Maybe this invariant indeed applies, but then there must be more to it.
-Simply from taking the "else" branch here
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-        if ( unlikely(v->pause_flags & VPF_blocked) &&
-             unlikely(test_bit(v->vcpu_id, v->domain->poll_mask)) )
-        {
-            v->is_urgent = 1;
-            atomic_inc(&per_cpu(sched_urgent_count, v->processor));
-        }
+However, ...
 
-clearly immediately afterwards the invariant you name does not hold.
-
-> --- a/xen/common/sched/core.c
-> +++ b/xen/common/sched/core.c
-> @@ -241,26 +241,22 @@ static inline void trace_continue_running(const struct vcpu *v)
+> --- a/xen/arch/x86/hvm/svm/nestedsvm.c
+> +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+> @@ -1079,11 +1079,11 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
+>      ns_vmcb->_cpl = n2vmcb->_cpl;
 >  
->  static inline void vcpu_urgent_count_update(struct vcpu *v)
->  {
-> +    bool cur_urgent;
-> +
->      if ( is_idle_vcpu(v) )
->          return;
+>      /* EFER */
+> -    ns_vmcb->_efer = n2vmcb->_efer;
+> +    ns_vmcb->_efer = v->arch.hvm.guest_efer;
 >  
-> -    if ( unlikely(v->is_urgent) )
-> -    {
-> -        if ( !(v->pause_flags & VPF_blocked) ||
-> -             !test_bit(v->vcpu_id, v->domain->poll_mask) )
-> -        {
-> -            v->is_urgent = 0;
-> -            atomic_dec(&per_cpu(sched_urgent_count, v->processor));
-> -        }
-> -    }
-> -    else
-> +    cur_urgent = (v->pause_flags & VPF_blocked) &&
-> +                 test_bit(v->vcpu_id, v->domain->poll_mask);
-> +
-> +    if ( unlikely(v->is_urgent != cur_urgent) )
->      {
-> -        if ( unlikely(v->pause_flags & VPF_blocked) &&
-> -             unlikely(test_bit(v->vcpu_id, v->domain->poll_mask)) )
-> -        {
-> -            v->is_urgent = 1;
-> +        v->is_urgent = cur_urgent;
-> +
-> +        if ( cur_urgent )
->              atomic_inc(&per_cpu(sched_urgent_count, v->processor));
-> -        }
-> +        else
-> +            atomic_dec(&per_cpu(sched_urgent_count, v->processor));
+>      /* CRn */
+> -    ns_vmcb->_cr4 = n2vmcb->_cr4;
+> -    ns_vmcb->_cr0 = n2vmcb->_cr0;
+> +    ns_vmcb->_cr4 = v->arch.hvm.guest_cr[4];
+> +    ns_vmcb->_cr0 = v->arch.hvm.guest_cr[0];
+>  
+>      /* DRn */
+>      ns_vmcb->_dr7 = n2vmcb->_dr7;
 
-Assuming the transformation is valid to make (scheduler maintainers will
-need to judge), may I suggest to fold these two into a single atomic_add(),
-passing in either +1 or -1?
+... I still think it is a mistake to leave alone the similar CR2 handling
+code further down in the function. Yes, #PF handling in
+nsvm_vcpu_vmexit_inject() updates the value, but as indicated before that
+(aiui) still leaves (at least) the case where L2 writes CR2 explicitly.
+
+nestedsvm_vmexit_n2n1() -> nsvm_vmcb_prepare4vmexit() runs ahead of
+nsvm_vcpu_vmexit_inject(), i.e. whatever nsvm_vmcb_prepare4vmexit() would
+store would still be properly updated by nsvm_vcpu_vmexit_inject() (yet,
+as said, only in the #PF case).
 
 Jan
 
