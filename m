@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 36C12C9832A
-	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 06:52:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436301.1655036 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0A454CA5FA1
+	for <xen-devel@archiver.kernel.org>; Tue, 29 Sep 2026 09:03:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436338.1655045 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBRhS-0007l7-Jc; Tue, 29 Sep 2026 06:52:26 +0000
+	id 1xBTjw-0007Ec-47; Tue, 29 Sep 2026 09:03:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436301.1655036; Tue, 29 Sep 2026 06:52:26 +0000
+Received: by outflank-mailman (output) from mailman id 1436338.1655045; Tue, 29 Sep 2026 09:03:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBRhS-0007l0-Gl; Tue, 29 Sep 2026 06:52:26 +0000
-Received: by outflank-mailman (input) for mailman id 1436301;
- Tue, 29 Sep 2026 06:52:25 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xBTjv-0007EU-Vk; Tue, 29 Sep 2026 09:03:07 +0000
+Received: by outflank-mailman (input) for mailman id 1436338;
+ Tue, 29 Sep 2026 09:03:07 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jbeulich@suse.com>) id 1xBRhR-0007ku-If
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 06:52:25 +0000
+ (envelope-from <dmytro_prokopchuk1@epam.com>) id 1xBTju-0007EO-Qq
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 09:03:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBRhQ-001xfg-3H
- for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 08:52:24 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xBTjt-00D7oy-HP
+ for xen-devel@lists.xenproject.org; Tue, 29 Sep 2026 11:03:05 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abb601d-bab6-0a2a0a5309dd-0a2a4501cd54-38
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 08:52:23 +0200
-Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abb6027-5984-0a2a45010019-4a7de18d98f4-3
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 08:52:23 +0200
-Received: by mail-wm2-f13.google.com with SMTP id
- 5b1f17b1804b1-49e721b5503so36090825e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 28 Sep 2026 23:52:23 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a00d10cb7dsm22667695e9.0.2026.09.28.23.52.22
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 28 Sep 2026 23:52:22 -0700 (PDT)
+ (envelope-from <dmytro_prokopchuk1@epam.com>)
+ id 6abb7ec2-e002-0a2a0a5209dd-0a2a4507bee4-18
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 11:03:05 +0200
+Received: from [52.101.65.101]
+ (helo=DU2PR03CU002.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dmytro_prokopchuk1@epam.com>)
+ id 6abb7ec8-b4ea-0a2a45070019-346541658a7e-4
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 11:03:05 +0200
+Received: from AM9PR03MB7526.eurprd03.prod.outlook.com (2603:10a6:20b:3de::17)
+ by BESPR03MB911500.eurprd03.prod.outlook.com (2603:10a6:b10:10e::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.24; Tue, 29 Sep
+ 2026 09:03:01 +0000
+Received: from AM9PR03MB7526.eurprd03.prod.outlook.com
+ ([fe80::904d:5820:80e1:41ba]) by AM9PR03MB7526.eurprd03.prod.outlook.com
+ ([fe80::904d:5820:80e1:41ba%5]) with mapi id 15.21.0451.022; Tue, 29 Sep 2026
+ 09:03:01 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,105 +55,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790664743; x=1791269543; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=HmI1Zh6FMfvKYDLJnlPfHK7JTmlcfSeOLA4xkGboDbk=;
-        b=O+JSCQIVfaDE9ilkR/w+kUNtfuki0CqJKEln/sMS99EicG2GQXu3aY1gzKeWjxQsHc
-         KPB4zJXXU4DhGl+CSpWFzs5aKGTcrDQt/uK0h+RUu89ao9g4g8JqhgjU9ul0UBhysOCg
-         xFiuQG3S7TC6bP47W6roHq2zutpHUEFk4vBOWpnux5cWX7ntFkYjGrtAF14+ePm4S+7b
-         vUL6wSXk2OWcUmMDrLJjpcpdTOGNH55Sd09K5O/a+IyYs9WVakodLEamJa6mAp7ELR/S
-         HX6FA+iqRCzZjfvYoN60gvIEFPfOtYhEvbSItzyY/1s82v/ef1f89vE4JOZrg4myUIpG
-         uxow==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790664743; x=1791269543;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=HmI1Zh6FMfvKYDLJnlPfHK7JTmlcfSeOLA4xkGboDbk=;
-        b=Egvm5aRQixnYGek6e3w7iGsvwk2o0mV46VvjgCWLbGXSMXhotR6KEAM/Up95UKvEKf
-         4Kqek6z61GfSUR+/ye7BOASFPkl08VX9TjXFhpB+ycLpYlRfFfunBwNwvv3f5PfjN93D
-         wCp/PTJOjwXKF01mbLL6es7j1R+H1Af8wVYFeFpl8ekBHgs/Qyfi2X2YiHdZ/bfP0Xgk
-         1yuKvCE2XPej+BsBoRWuPeP5y3+HY11solJWFrA9E03vUB2vBck7XxgVmv015QnUHTtG
-         7nBShuWrGviL19lW7SYZ0krhgbB/60f8Ij5mzGwU3sGAijt8ThQZyX9M4AjHzUc55Z3C
-         P/Mg==
-X-Forwarded-Encrypted: i=1; AKwUvBwwExCmgS9DNTJdh/eeu0shjlfgObAVB8ubpR/b5wq7h0ZqAGA1/7e7DtNMgBK6BF85+qTLOdUYAjI=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kqQsCvsucOrATLJsdAq8s4jlTFx8brW9oRjg1sCGcdNx3MdbJ8
-	23I1wGkKKTw+68ArowBxj/F9q9qCft6YcAIlIV7eeYSBlm9aC3607r7bU+zkVMgAAw==
-X-Gm-Gg: AYBFou1t7Ab7wvfhx6f8GIFK4fm5PWa6f/LlrMCgFUY71fAYj4wFL75l2VK80aUlyxL
-	XgeQ84xmATFt+4Ug8Hiy4cc8NXZQ66IXZqOi9txr+mLnSGWvml/PXFZmNwEk28aNmbeUVPTSkWY
-	edVc1Sa/YF4kPQutjGz9f0KkJQ4bDDIhdpo/Rynn/WgtNkj6cyUkuPa2bQQQCmCIHx0KMxHb+oi
-	6DxQkGfrncV5QvzN1DOmlrmCOUiGdU5yihFG0Mr7oxiDVbeGoD8IosijP3D4HmrOXSWKduTW1Zm
-	2o/0O30cf+V9ObgwdHtwtazREF4UqwsLGAwgCB80sgFfWVPT91RRKLF9ku+nBlogzhEoxcxp3fU
-	ywV9SIQJ0rZZ5z8Y/yYYy64FcixvBaIvMojDhAtGNMlgQJJYcpcqDiCdiMtYUOGRte5QduNHtlF
-	LrF8JJLu9tBZJzyb9DD4zfH1wIjQUnfigJCbF+cGpSgMDa1moOgEzHhJpoQV3VYlOWT89eJdaDp
-	5kbb587tXekhKSNcMEDJZ5/wZ5LIfM6bDLE015Kx/iAL4c5+O+anoPNihuaJyE=
-X-Received: by 2002:a05:600c:c177:b0:49c:fc6c:be19 with SMTP id 5b1f17b1804b1-49fe67080b1mr277977555e9.31.1790664743329;
-        Mon, 28 Sep 2026 23:52:23 -0700 (PDT)
-Message-ID: <79de1bea-7e1a-4d15-b7d2-8390ab5bdef2@suse.com>
-Date: Tue, 29 Sep 2026 08:52:21 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 0/3] misra: add Rule 5.5 deviations for macro clashes
-To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
-Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <cover.1790661461.git.dmytro_prokopchuk1@epam.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EvUkijEd+kAejbJXyTTLglW15fuOCveEXRSK/JMtgHmuQITRBvQ9pa6YhSnmWDAEfhtLA2NIDAI+6eYhdu5CUsxfd/FaKlz2ZRTzgKcn9TiYZf5L7uzlOyPPfOwkHMip0LPcCsipYdRAxrWnJgWIJRZozU7xIDVE3PGyGX03EI0SE097/7U8ESoRtFkia617zPLlgDMw/3YzX+e6ky6bELoWBAP1G6OdHmbyKNNW6EeFPegJIBy8DUauF1Whq88MH6ILVUFHmFNvnc59fkHxeO8sEAE4JjMfS4W+MXpUgyGIsb/IUiSie3SWOFOffYKsiies91ghDHIr3ykH2d2M2A==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fafAK153eg918SSKENcO+oeH2Sl9Ie+i4cRFh2vgOvE=;
+ b=ob2b87mRaUBokdTEMJju4vOea3TbFAbiYlLZl5uLrPWXd+P1mBJQ1cWmF99rSKqQ1CF4zmfz5+P6J9yCNwVe+hC4DsxvJVTSIKBOSfSjfHaO73DsHtrkVJY7L5R6Y2E2UucNG8J/OhWHowVGsuWhYu+nBIHYHFuRG+mp0L1o3MxGt5KmOORolbzGY3E+W4zswcpbNmD0sDay/MIeK8x2o/W1nILPjgkrMM53EUPyfDQJiorhnCClzrW+8KWUIh+pObOXHZq8r6BLQI1tqbp7AQ8B5B4fZOqpDFz3LuCkiAaZaQGSlkvB9zoVcQXCyp9PODjV40b5M3s8PkSAz5zyag==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fafAK153eg918SSKENcO+oeH2Sl9Ie+i4cRFh2vgOvE=;
+ b=nH3AS5PCK8znLHXoQTLC2QkNdiknb+pr1G/lPTxZVE649tJIf81skG6PNWL77J2IGPobMipGGOMJRR8ouA2BjFU7HHsBRC+vxnl6gASlAK2cdAza03hH1lfWkHDLI4jGuDgtkECaDNy4g7rE481nNm0B/X5LcXYbnxqpybC8Qsau6Zg93lluWdHBpiEMfZmT6Iw7ATxe1CKEbsE2gE93imnVLggUjN//dUfSps5NWo5LcSTCZcIZvBHy7582UTzxgeIwhwdNBN52+jOEb16B5N43QxK8z7xgHg4t/WUHfdX9j6iy0ueSLAtVMPlOKPQuWVM+/23ZcCMvq15JX7YUDQ==
+From: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Nicola Vetrini
+	<nicola.vetrini@bugseng.com>, Doug Goldstein <cardoe@cardoe.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien
+ Grall <julien@xen.org>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
+	<roger@xenproject.org>
+Subject: [PATCH] misra: deviate C library-style functions from Misra C:2012
+ rule 11.8
+Thread-Topic: [PATCH] misra: deviate C library-style functions from Misra
+ C:2012 rule 11.8
+Thread-Index: AQHdT/FUuEZ9j2ZjeEWRZmF5vcrM7g==
+Date: Tue, 29 Sep 2026 09:03:01 +0000
+Message-ID:
+ <4abcb11ef287170ced74935cbee60c90058c1307.1790671787.git.dmytro_prokopchuk1@epam.com>
+Accept-Language: en-US, uk-UA, ru-RU
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <cover.1790661461.git.dmytro_prokopchuk1@epam.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1790664743-BF46D757-A844DFE8/0/0
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AM9PR03MB7526:EE_|BESPR03MB911500:EE_
+x-ms-office365-filtering-correlation-id: 68b633e8-c311-483e-4f19-08df1e08772b
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|1800799024|376014|7416014|366016|23010399003|42112799006|38070700021|56012099006|11063799006|260925021311599003|260925021911599003|260925022911599003|10067099003|18002099003|6133799003|3023799007;
+x-microsoft-antispam-message-info:
+ 5JRoIF+YyTyWT86LJjyQ4uzwTMcLHn5EEtP6C+KTUUVIUt8CugzlqrrvNh5A0RO40531DKmiPPn6Yof2QjztZ3h1etexbF0b4Qb4N3121SEPC9czC5lX3kspaz14ffBTKehh0xDzpCLbzjXs91ASYZNTtYNxLFRft78SoAZWK5P5dvCCJrt1l3UvG4Z3mcue8+escWHFBXs9YSeZG8/Ebh2SOpz85HgwGpjqqUioRLhjR7JQZFfpOGgam2pgd6GWEt8TxOotWQelWvPeozkzMj/LnJ5UdPjJxZevGFMXLTpzen87/bssPq6pHxGrIWrhIuZT+b352htxv5VLPtB8uqtx8rKcXh9xuRp2S+utsdF8pkEbUvH6GgXElYfYExWD6qt6knW1z3oBkbwQactJAgBql7vk2ZP3BaDY/CcOBKk4C2vI8xGWjnbBU2FZPuEwT+4ejQV0sOyMbjU9sUSF3KkZWIU80Uh7xxiIZ+eeYPpYWDBVISlqIiWpx4cBkzugUHneL1JXwicy8Za+jCl6rHWxmsZByF6GHZ4FCifnpLOa+exV2Eum1NXAm/ODr95k0XMM7l9x7UmbKq1ckK/Eh9UTL7dMPvYA2QcIXjthuqfKXedUrA5pUhU6nS/dlanP4lHvCx8jhiZPvBS50P/NFocNflDReVgpcYg2WQco5DHV99AAVNWg2dmCPsdyy0xkSney7bChUtdIj7nLp6/kocNZYQFlucfZlTReLQQzoAM=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9PR03MB7526.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(366016)(23010399003)(42112799006)(38070700021)(56012099006)(11063799006)(260925021311599003)(260925021911599003)(260925022911599003)(10067099003)(18002099003)(6133799003)(3023799007);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?Nx6rZ/yOvRTAjlmmQzUULc0RpB+7gYvLTaM3uhxlvQ+hIPr8d7uie0TF4C?=
+ =?iso-8859-1?Q?Boz1ZWVs89VUL8IdR3Lk89+BvRo8lKs9SkCSzbmkLuWPs3xGWgVXbkGXh7?=
+ =?iso-8859-1?Q?7NE61+aHNtFrzwK2Vj75xFtQ4jWAA6SbOYJzh4ABCK7KsYL2HH4bCYuRoW?=
+ =?iso-8859-1?Q?iZPg+715vG8kX1cgYDVq7JZ9s7Wu7gS9BCITdQ387qDnJ+s/pO1tXct55F?=
+ =?iso-8859-1?Q?+jx31dJfj0pOy4QRIVKutf7bh5ny8hsxVkIj67TF8Vrz9/44x7IsAt25S6?=
+ =?iso-8859-1?Q?HGpkqR09kTHsojJMknOZ008o8n6oAYetleWOar04Mj/PIMq+RZA2tNmsCd?=
+ =?iso-8859-1?Q?Z9rpZv9dBdM08j9aH7y4pGWA7E22jfT+BqgzY+ICE1HcK3hBHMvg3dJYhh?=
+ =?iso-8859-1?Q?bxEdyQsujFo25ZbAUPv0wA+1GzrtQAfhnglu1NfPjU8Ej5XiNvr1sblspa?=
+ =?iso-8859-1?Q?fjpHJuF5nmmx6vEgdiu4c9YfcMi12pgFUhlKuO3I85I5YFeOSahhbGWYmi?=
+ =?iso-8859-1?Q?5o3tyhL92glx7dfOdM8kyJvr/ZgKySvMLZf5kG5S7dJY+sJTyWt/JidUXx?=
+ =?iso-8859-1?Q?i6yL3Kqe2lbuP585uvuQSAcHa0iYgu/ZiKNny4Nsid56rqglbVrdogRCug?=
+ =?iso-8859-1?Q?X/VIr+5AK5BvSIQvbp/9twgx7AvFj/NWRLhmpc6JtpqEojKS8ht762cP0P?=
+ =?iso-8859-1?Q?fAJo8cwiHfdIZuv7sAPNJYduLMQmWPYto7YeEb61qm3d5pxJNNuCOkt10g?=
+ =?iso-8859-1?Q?CARRtz+R9tKoStOxCmBmBzNkv/4vV0AM972VnlhX5dUy6iN+pmdXxsayyp?=
+ =?iso-8859-1?Q?/qMpvudmp0E4KzSg72bteIbbPy1AyzIMdp9wUtnTANrWzd3tjTwnV8Qn0L?=
+ =?iso-8859-1?Q?kaOxYBjsOL9nBPQyM2GdsH2o4jRiyR228BCfYthWWIouCRxehDbWOGXdjs?=
+ =?iso-8859-1?Q?8i5Hrg2FATDuWkw0KWNwBDDLMmw+XsegXO98UTbp0vzegkC0K3K3REap6O?=
+ =?iso-8859-1?Q?eGSGMLHvKdbbKy1hVjVVKnlRhi6GiNA2PMJeC7IDwEU9ysOpzl9sYwiHVi?=
+ =?iso-8859-1?Q?tv4/BoS/DZ8XthyIvKXRwbjq5SsKec6nYKr3bAnRLNZSCJ9phVhXv5chw6?=
+ =?iso-8859-1?Q?jUF5A8R6/MPeCH9YHrfNnvWbBigkuUBha81qZCsYNBtfFa26x2tVrAkOig?=
+ =?iso-8859-1?Q?HePrPzYwcyE0pUV5TZ7O9zdS4aBq/xkuxNjpyMCxVvTiHynnDjeU0mBBYm?=
+ =?iso-8859-1?Q?BoAcaTrATbKnceQYi2Rj3N3Cjnf86QhCTqFPrmLHVPg72VU4AP+VqjXuop?=
+ =?iso-8859-1?Q?PP0iL0R2fkNr7QWgjiDMmfvVCQpfJUHO++cyHFafnRAW6luvTuWDudhFxX?=
+ =?iso-8859-1?Q?4flYAvxTy+tH29HL/bIgdvnqqYxesQ9a4k0cuWxbISGyLQ0J9XkvAhx7R+?=
+ =?iso-8859-1?Q?HCn4m34zmuwi+mBGOY+ggaSBn6A0R/o4LudXTpOzphfsSXUz8HbySTDRev?=
+ =?iso-8859-1?Q?lX6Jt301C4AcrgrTo/TC70ERYnpnVATVfIfWT4kNC2Xm69B+mD3Fdubdb9?=
+ =?iso-8859-1?Q?p6aVVyMXnwqlFhbAcmxy8pWwpo594KANDVCGul23rXhqo+/NSDNjjzOE3Z?=
+ =?iso-8859-1?Q?Ihr7xvCBG9TnUqVu9fkv3QgabiGxfxMho4LoECy5uu1+AZ8ZSqvIkOMsI4?=
+ =?iso-8859-1?Q?41LpbsYfJAl70nHWZZZ3dN6Fn2xvdu0oZWGwycQTF506+yBTBAFi2i2jFu?=
+ =?iso-8859-1?Q?IB2HGBt1RR4ZLQ/kGtd4R+448ZjIaYHM+SfOe/bMnH7wvnrvrXQkdlzyze?=
+ =?iso-8859-1?Q?o10vchLycEBuKNUqaojwxFOMrRsNHug=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AM9PR03MB7526.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68b633e8-c311-483e-4f19-08df1e08772b
+X-MS-Exchange-CrossTenant-originalarrivaltime: 29 Sep 2026 09:03:01.7329
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: VVq1TyGEnuMTZavQd0MnjiLCRufRfBi9Rp8ViHHjy4LI0JFRUmvUy6WP0sJyQcfsxvtCwdlslTvtY6rvcqHDgJErtn4HkD5t+pDlxi7LPJY=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BESPR03MB911500
+X-purgate-ID: tlsNG-ef75cf/1790672585-A54C3AE4-9D0A76B1/0/0
 X-purgate-type: clean
-X-purgate-size: 469
+X-purgate-size: 4199
 
-On 29.09.2026 08:21, Dmytro Prokopchuk1 wrote:
-> This series adds deviations for function/macro name clashes where
-> the macro is used as a wrapper around an existing function name.
-> 
-> With these three patches all ARM Rules 5.5 became clean.
-> 
-> Changes in v3:
-> - update wording with specifying file (constrains)
-> - add Jan's ack for the first patch in the list
+bsearch(), memchr(), memchr_inv(), strchr(), strpbrk(), strrchr() and
+strstr() all accept a const pointer/object but return a non-const pointer
+to the matched element or byte, matching their standard C library
+interfaces. The const qualifier is deliberately stripped so that callers
+searching a non-const object get back a mutable pointer to it. Fixing
+this would require changing the public API, so document these uses as
+deviations instead.
 
-I.e. you took my reply to Bastian's comment as sufficient to address his
-concern?
+Update docs/misra/rules.rst to note that this class of double-use
+library functions is deviated on a per-function basis.
 
-Jan
+Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+---
+Test CI pipeline: https://gitlab.com/xen-project/people/dimaprkp4k/xen/-/pi=
+pelines/2892411430
+---
+ automation/eclair_analysis/ECLAIR/deviations.ecl | 9 +++++++++
+ docs/misra/deviations.rst                        | 9 +++++++++
+ docs/misra/rules.rst                             | 5 ++++-
+ 3 files changed, 22 insertions(+), 1 deletion(-)
+
+diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/=
+eclair_analysis/ECLAIR/deviations.ecl
+index 33d508a2fb..0b87bd1d6f 100644
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -445,6 +445,15 @@ write or not"
+ -config=3DMC3A2.R11.8,reports+=3D{safe,"any_area(any_loc(text(^.*__hvm_cop=
+y.*HVMCOPY_to_guest doesn't modify.*$)))"}
+ -doc_end
+=20
++-doc_begin=3D"Functions bsearch(), memchr(), memchr_inv(), strchr(), strpb=
+rk(),
++strrchr() and strstr() accept a const pointer/object and return a non-cons=
+t
++pointer to the matched element or byte, matching their standard C library
++interfaces. The const qualifier is deliberately stripped so that callers
++searching a non-const object get back a mutable pointer. This use is deeme=
+d
++safe."
++-config=3DMC3A2.R11.8,reports+=3D{safe,"any_area(any_loc(file(^xen/include=
+/xen/bsearch\\.h|xen/lib/memchr\\.c|xen/lib/memchr_inv\\.c|xen/lib/strchr\\=
+.c|xen/lib/strpbrk\\.c|xen/lib/strrchr\\.c|xen/lib/strstr\\.c$)))"}
++-doc_end
++
+ -doc_begin=3D"This construct is used to check if the type is scalar, and f=
+or this purpose the use of 0 as a null pointer constant is deliberate."
+ -config=3DMC3A2.R11.9,reports+=3D{deliberate, "any_area(any_loc(any_exp(ma=
+cro(^__ACCESS_ONCE$))))"
+ }
+diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
+index b048309596..e3ad3545bc 100644
+--- a/docs/misra/deviations.rst
++++ b/docs/misra/deviations.rst
+@@ -427,6 +427,15 @@ Deviations related to MISRA C:2012 Rules:
+        readability.
+      - Tagged as `safe` for ECLAIR.
+=20
++   * - R11.8
++     - Functions bsearch(), memchr(), memchr_inv(), strchr(), strpbrk(),
++       strrchr() and strstr() accept a const pointer/object and return a
++       non-const pointer to the matched element or byte, matching their
++       standard C library interfaces. The const qualifier is deliberately
++       stripped so that callers searching a non-const object get back a
++       mutable pointer. This use is deemed safe.
++     - Tagged as `safe` for ECLAIR.
++
+    * - R11.9
+      - __ACCESS_ONCE uses an integer, which happens to be zero, as a
+        compile time check. The typecheck uses a cast. The usage of zero or=
+ other
+diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
+index c9bbab6c08..644e897558 100644
+--- a/docs/misra/rules.rst
++++ b/docs/misra/rules.rst
+@@ -469,7 +469,10 @@ maintainers if you want to suggest a change.
+    * - `Rule 11.8 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-S=
+uite/-/blob/master/R_11_08.c>`_
+      - Required
+      - A cast shall not remove any const or volatile qualification from th=
+e type pointed to by a pointer
+-     -
++     - Some standard C library-style functions are inherently double-use,
++       accepting a const argument and returning a non-const pointer into
++       it so that callers searching a non-const object get back a
++       mutable pointer. Such uses are deviated on a per-function basis.
+=20
+    * - `Rule 11.9 <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-S=
+uite/-/blob/master/R_11_09.c>`_
+      - Required
+--=20
+2.43.0
 
