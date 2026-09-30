@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6911CA5FC5
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 16:03:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437434.1656333 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 066F4CA5FC4
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 16:19:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437471.1656351 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBwli-0003K1-4O; Wed, 30 Sep 2026 16:02:54 +0000
+	id 1xBx1v-0005T8-Pg; Wed, 30 Sep 2026 16:19:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437434.1656333; Wed, 30 Sep 2026 16:02:54 +0000
+Received: by outflank-mailman (output) from mailman id 1437471.1656351; Wed, 30 Sep 2026 16:19:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBwli-0003Ju-1o; Wed, 30 Sep 2026 16:02:54 +0000
-Received: by outflank-mailman (input) for mailman id 1437434;
- Wed, 30 Sep 2026 15:28:27 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ziy@nvidia.com>) id 1xBwEN-0005Mt-IW
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 15:28:27 +0000
+	id 1xBx1v-0005T1-Mq; Wed, 30 Sep 2026 16:19:39 +0000
+Received: by outflank-mailman (input) for mailman id 1437471;
+ Wed, 30 Sep 2026 16:19:38 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBx1u-0005Sd-Jc
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:19:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBwEM-00BYe7-QL
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 17:28:26 +0200
+ id 1xBx1u-00Ezzr-0T
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 18:19:38 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ziy@nvidia.com>)
- id 6abd2a95-e002-0a2a0a5209dd-0a2a4505dec4-4
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 17:28:26 +0200
-Received: from [40.107.201.53]
- (helo=CH4PR04CU002.outbound.protection.outlook.com)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6abd368a-bab6-0a2a0a5309dd-0a2a4505e51a-14
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:19:37 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ziy@nvidia.com>)
- id 6abd2a96-4cb1-0a2a45050019-286bc935c03c-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 17:28:23 +0200
-Received: from IA0PR12MB8374.namprd12.prod.outlook.com (2603:10b6:208:40e::7)
- by DM4PR12MB5724.namprd12.prod.outlook.com (2603:10b6:8:5f::9) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.451.26; Wed, 30 Sep 2026 15:27:57 +0000
-Received: from IA0PR12MB8374.namprd12.prod.outlook.com
- ([fe80::d85f:4c87:ae84:3f16]) by IA0PR12MB8374.namprd12.prod.outlook.com
- ([fe80::d85f:4c87:ae84:3f16%6]) with mapi id 15.21.0472.015; Wed, 30 Sep 2026
- 15:27:57 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6abd3699-4cb1-0a2a45050019-4a7de18cc1a9-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:19:37 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49ffde3cec6so24418535e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 09:19:37 -0700 (PDT)
+Received: from fedora (user-109-243-71-234.play-internet.pl. [109.243.71.234])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a01eb60804sm2807245e9.1.2026.09.30.09.19.30
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 30 Sep 2026 09:19:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,202 +52,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=selector2 header.d=Nvidia.com header.i="@Nvidia.com"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s8uTyHY6ca0S0gFpYdWeYhmt2qrfVim81f/ez5gEyTG7rnWCcA8/efKeY19pYTwnxwABRHXRKolDwQi2UhO6Qz7e2tw2LtkJhsBVye4eWtkujwDZZ27NbV2cskWBD4nzj1Dd3LmiOn4W3u3obhqoFQUlgEbfAT/rGvrdzux+FUcMcTWhIntHiV95U798sZ0k9HBVZ5bIWiu68czDL62rHBAnmeLn4IK07kBZs/ig5ErqAxPLXbvEKipxMPC6OIyzO6xtuBjjFcSmzsvMHjYPfjA5yanrW4EaKx+lblQaKX1kfhoTPznH15l3TzT35GNhWLmss4FkNHGG6SvIvUG8mQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=j8w1jBnA80+jx0tcZGoqUFaJ5onaLQirx/OFTHfw1Is=;
- b=JtWj3321OWFasox9ZMgOhmSAZPBdcjqPps/So50HJ7tSj2RIaFzWfVwmg056K6Itl7SlkJcHCMMvQbbJTMO79OGYAlUlJuGtRtdVkL6sMFAexi7rnPCZHLYdW5ylCqSCWp9Tbtmwyu09O7a/B+uMNCtRv6iEaMwjKiTLORhoRLOqV/0Taa1tt9sChnpupDPn3t2atSyDikEKWBFyLPz6ExmCk3P8/RraolNwzkaYCWDAWdQNlhDsDztRxk7p+U8gIFWQke2ge3GUrf5TMVmjVdk8i+weC5bxjqn4edtnPcOmAcvjaRYdEw7K/USJ6WkTMuC5RDb/DfHvcDWyW50Ymw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=j8w1jBnA80+jx0tcZGoqUFaJ5onaLQirx/OFTHfw1Is=;
- b=D1N0qPH6GDpjju4aIZpuxd1dhaa2+ullhx2NmCdQEzl3PVKYtQiHUacX80CpSDdjg0S1R5ugLiFraR2ypmUMTxGd3LzzhmR/rTewwQlyA92Mi3NJk3EQlxFcyrFGanZDy1OGzsQAUD7urm32U1uSNCKFWM7dEF8VvyJRYcckG81trDtDoXM+IP/gyS2UIZcfmNG4Lwk6NQHtbSLnUzilm8CMps9VuTI1+77XdaqWXsdqZUz2hwiQ3NL+9v2iT0+9kWqOl5A7DD0o3HbuAv6X5Y5zR2uE1C2tjPAIc1EOJrtUqptRVP22RCCLNS8C4ohXmhwm7eqoEgGQhlD+OCe9zQ==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-From: Zi Yan <ziy@nvidia.com>
-To: Muhammad Usama Anjum <usama.anjum@arm.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>,
- "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
- Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Michal Hocko <mhocko@suse.com>, Xu Xin <xu.xin16@zte.com.cn>,
- Chengming Zhou <chengming.zhou@linux.dev>, Jann Horn <jannh@google.com>,
- Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
- Pedro Falcato <pfalcato@suse.de>, Arnd Bergmann <arnd@arndb.de>,
- Will Deacon <will@kernel.org>, "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
- Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
- Pasha Tatashin <pasha.tatashin@soleen.com>, Rik van Riel <riel@surriel.com>,
- Harry Yoo <harry@kernel.org>, Lance Yang <lance.yang@linux.dev>,
- Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
- Kemeng Shi <shikemeng@huaweicloud.com>, Nhat Pham <nphamcs@gmail.com>,
- Baoquan He <baoquan.he@linux.dev>, Barry Song <baohua@kernel.org>,
- Youngjun Park <youngjun.park@lge.com>, Uladzislau Rezki <urezki@gmail.com>,
- Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu <mhiramat@kernel.org>,
- Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>,
- Andrii Nakryiko <andrii@kernel.org>, Eduard Zingerman <eddyz87@gmail.com>,
- Kumar Kartikeya Dwivedi <memxor@gmail.com>,
- Martin KaFai Lau <martin.lau@linux.dev>, Song Liu <song@kernel.org>,
- Yonghong Song <yonghong.song@linux.dev>, Jiri Olsa <jolsa@kernel.org>,
- Emil Tsalapatis <emil@etsalapatis.com>,
- Ihor Solodrai <ihor.solodrai@linux.dev>, Ingo Molnar <mingo@redhat.com>,
- Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>,
- James Clark <james.clark@linaro.org>, SJ Park <sj@kernel.org>,
- "Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>,
- Jason Gunthorpe <jgg@ziepe.ca>, John Hubbard <jhubbard@nvidia.com>,
- Peter Xu <peterx@redhat.com>, Leon Romanovsky <leon@kernel.org>,
- Baolin Wang <baolin.wang@linux.alibaba.com>,
- Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>,
- Dev Jain <dev.jain@arm.com>, Usama Arif <usama.arif@linux.dev>,
- Kiryl Shutsemau <kas@kernel.org>, Andrey Ryabinin <ryabinin.a.a@gmail.com>,
- Alexander Potapenko <glider@google.com>,
- Andrey Konovalov <andreyknvl@gmail.com>, Dmitry Vyukov <dvyukov@google.com>,
- Vincenzo Frascino <vincenzo.frascino@arm.com>,
- Miaohe Lin <linmiaohe@huawei.com>, Naoya Horiguchi <nao.horiguchi@gmail.com>,
- Matthew Brost <matthew.brost@intel.com>,
- Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
- Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>,
- Ying Huang <ying.huang@linux.alibaba.com>,
- Alistair Popple <apopple@nvidia.com>, Dennis Zhou <dennis@kernel.org>,
- Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@gentwo.org>,
- Johannes Weiner <hannes@cmpxchg.org>, Qi Zheng <qi.zheng@linux.dev>,
- Shakeel Butt <shakeel.butt@linux.dev>,
- Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
- Wei Xu <weixugc@google.com>, Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- linux-fsdevel@vger.kernel.org, linux-arch@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
- linux-perf-users@vger.kernel.org, damon@lists.linux.dev,
- kasan-dev@googlegroups.com, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v3 1/9] mm: introduce hw_pte_t for PTE table storage
-Date: Wed, 30 Sep 2026 11:27:53 -0400
-X-Mailer: MailMate (3.0r7032)
-Message-ID: <51D02557-E9CC-4806-917E-279C6E66AF1A@nvidia.com>
-In-Reply-To: <20260922-pte0-v3-1-5670b8cb9059@arm.com>
-References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
- <20260922-pte0-v3-1-5670b8cb9059@arm.com>
-Content-Type: text/plain
-X-MS-Reactions: disallow
-X-ClientProxiedBy: BL1PR13CA0112.namprd13.prod.outlook.com
- (2603:10b6:208:2b9::27) To IA0PR12MB8374.namprd12.prod.outlook.com
- (2603:10b6:208:40e::7)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790785177; x=1791389977; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=LrKFeRIoL8z7uYGXx6LOdIuYW20jZhQAIuucTzUA5hQ=;
+        b=I67PpGE7RFLJXcRdAQFp+HlfFoJ4gMx6gdAWgUu3FsAPMUFTxYnMDTqM2NpRcvRNOh
+         ZzoTjpcqexAE09BBKhBKG71TY4Cv4znvsRE9BLwg5bHJYBpuqLLe7laoKoK+gHuIemgD
+         jBiprl7p32Ayf7fHwaLomLRCrQTPQhsyYA+yfG9EpGRh5ArvI8YfSUPWVeGznyC4QUWQ
+         WLyCEpQoquF45EU/skecEhU8TTlG8WPvmru9uHUlb9jhetNAtVaRgote2KC1klr8h+tX
+         4KmpucXiPtMy3JOZHmg4nCy/nQeCCiTrI5H/RQVSTYJWBTl+2jRMVP/OMNXxIHQvTF6i
+         Y2Iw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790785177; x=1791389977;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=LrKFeRIoL8z7uYGXx6LOdIuYW20jZhQAIuucTzUA5hQ=;
+        b=dff98/fCq75SoC6ECf+nxoRqWgHhkHauzFRCYqtnRYcfHpJJMnsg/odl3U8xfHDBhG
+         qVM1CexGIjZKOp7HoGvogWQu89WkxOz+d/c0uh+eWdMeGLHRUDxgaFJyXqQ7ZNEhZbwx
+         /Ofmh29yeOLP7QkSNLP3UNxJ/zIkt7JIVnzuJ+zjor8hGdJaBmcMUzeJ5K4umFJV653m
+         zz6nE0ONpekf1tVOhmZ+WWSN/fY+khQoFp3lkHRBAx6HIfUw874TvEj7ZYLFS8weU0iV
+         LWYEMp5KleVWxGrXvGtztMpYMLg+5O62VZDUD6WZCsitnRLqRzniT/CGmByqKt9uwWAE
+         2jNg==
+X-Gm-Message-State: AFuF++kHo4cTmEgYa7cmWRAonD2GzSmldo49B2Lq5Vl2/NpsPFh+QL3a
+	6aQobL1Es/7A4P2Q4xoPRcmwlTvr79Bf4/pGEPkx5/VUJw3GBYsoHWkGkanIYg==
+X-Gm-Gg: AYBFou398n2o/+lG+YeYLOCbaOFdVYCa7pULQNCG7k6x8DRbqwrjbvDlmxaCivh3ynO
+	u/rswCmgCxe/gPkNOKM896GapT6rwJvhC7qjDTagRHSoQcnBw+mbPORb4gWkSUTYk0lVffFlKYw
+	TZUpkNmzN2bLFLqTmXNC/MBtjWWGJCDPvaRifUylLhPWqrazGJQGAaBDKn8cUvKVHbM1CyUrpFy
+	rcahH00Yhhcnn51VvtYWhC6dAlYjMFwA7uOyr+QDfYEc+34CvnA+PzwsgBHgt2FRY7KnvLFx31c
+	Y61IWH6gVlW2rp4IntoUj/hFSG1IJ4wh3/alKjkhAHhqAjWB7+e8rcchT1+fYpgAtlTPYQVv8Ys
+	04uKAzjNGpLGlpI0dLBJffOkNTlP+TQK2N9N/eXa4gc8pvnyqajuquIiO5UHLYyr3UjKe4VlklF
+	sZRaUftn4s8xh9vPyqyUmrC508v2PA8jRJde1aLR/otAWEdckqiFfyMopc3z8d5dDg/5RogLGjC
+	5T+ROKSHSLdj0QX53fg033ETJ0lZRlOL7ccpybXkKaULv4WONo=
+X-Received: by 2002:a05:600c:354e:b0:4a0:1eb1:133b with SMTP id 5b1f17b1804b1-4a01eb113acmr2588115e9.12.1790785177281;
+        Wed, 30 Sep 2026 09:19:37 -0700 (PDT)
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+	Zheng Zhang <zhangzheng@iscas.ac.cn>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 01/39] xen/riscv: drop INSN_{16,32}BIT_MASK and report unknown instruction lengths
+Date: Wed, 30 Sep 2026 18:18:43 +0200
+Message-ID: <f3c8b78cd0bbbebf51892c56967a12cb8ea6c226.1790779209.git.oleksii.kurochko@gmail.com>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA0PR12MB8374:EE_|DM4PR12MB5724:EE_
-X-MS-Office365-Filtering-Correlation-Id: d214dff4-b381-4957-d09d-08df1f07674d
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|7416014|376014|1800799024|23010399003|366016|10067099003|4143699003|11063799006|56012099006|10063799003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	NTMS7w3pkwbdyX8kXLQQPd6bmp7vgxhsw8wWUgoxv0BrTrWoioXQwXj9y2sXwxqK/qp94qzNdh/w34dJBNSvbrkk9mQbv2eUPT1dCR5tZ1ctxQM8bgU8kBHD7llfqbs2uDuPa0FCmoZMt4aJnvieWCKHKxci7qcqJAuMjkWfrFU8R5RZ0Pp+gWd6vaVst+KGOu7iQzlS6ZiiLCyEHCFhE5UTWJFFq6SPOOfeik7Z0B1OXZ2zH9V2SuK02wJNgjSYLbszkIqi50F10i5CEUJ3ZGuCkyo3DM/MwDsQAmHM8Bp6vKunIh4HqtMQOnv7zekcp+FzN5RAzsi0FWBm5ZLmamnACbJ3ID8Uhc2HbeBvXNONVsFjYpykdaOuaDLwRN1/WB3MpYmtTWpOhyqq8LIb7VFs6nvId/Ccql4GAZZPIAqWvI0kj6zudAav0tOCf5ocPxPGvqv0srNHGzljQMohQkc5knSeLiz0T7I3twibdB+LZUKnkqS4g6gZxOLx8jHHOrM7CcIMBFvSVOy124A+psloR+Sir++O4fteJpkRLIH2eo2XV3ANbGLdqlMLl7bvZevXSVQuXGwtEFUG0PQnGs49YCqwB44rR9hCbCcjSPAnPCpAXVR+pJ987rdeYw2WIN+jnl6TeeNBBReTpntyPBD6DV97FUla1GcpMqCM9h8=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:IA0PR12MB8374.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(23010399003)(366016)(10067099003)(4143699003)(11063799006)(56012099006)(10063799003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?MXu4eQniVxMuLf/9bfDbC7QY5S/GZmk+BEhdZPsCpb2Fwvz+snepEPRv42qo?=
- =?us-ascii?Q?J+fGc6zIpN2r69MH3j1NbAw+66SPKNJSbZWhUSOYSaWDRf4WysG/w2mdz+cN?=
- =?us-ascii?Q?vp3KKbYKM8MhsCZWkFB42OashkTTgzj6OZ6vq7YylqGondij1VlWCYNmcP8S?=
- =?us-ascii?Q?6CXUVF1CZY8gLz31yQcOyjXSX5r+5W5adH8GV43S5daPLgy1FP1pch3Vqrlf?=
- =?us-ascii?Q?LydlKNFlFcd6CQvLAmRZRg5f+x5EGG7YhPBj+3BMbN4LI/lNWXYIpqiHqL7j?=
- =?us-ascii?Q?oXhMMivi1j3CAIyHtKjnBqsGsncsD9Df+DEDyitdDfZE5i1G5UrNPgcatcz/?=
- =?us-ascii?Q?mOfTjD8IZ8ZR2rMuwlWGM7cKyWdpZ5SlTiRxY5CJuWwlCSWlWhK7Mn9edgn9?=
- =?us-ascii?Q?Abtswnt7rCImfHaCNvjLM8bxzr2VL0lWfaOQoi0ZkND6Uxjx80xWYDeDdcLy?=
- =?us-ascii?Q?E2M4AQSakyvohHmvNmzUGfYvmOf5UofkU4avmkfn0FAKO3HBNZ84eu6/qB0/?=
- =?us-ascii?Q?BZkh42wfg4Tpp5AzexqE0YlzTTYdsEhTlxyMDpY0dY/493VkD3G3VmmenLvc?=
- =?us-ascii?Q?rOsNrznL3Ai/WSC9dPAJ2ZVp4YFIfEewJtaYthUYeM1mHNwkHM57C3jhqJZE?=
- =?us-ascii?Q?oE/mixWkz2wHs5AScj9awqrTKdoG+D2+UP55curGBCATRmTl/m7GNbhLI8DD?=
- =?us-ascii?Q?/LpUx+iBAnEP2/sP4eK6DpVctibX9lPiiKkUQDwfqPwHb4HWHRBFrm7hyvbb?=
- =?us-ascii?Q?1q0FRxmMe40oskj/VcMiMnLOYQolAHPLNrau928odO+HIqfP4yZRqOG4dD0h?=
- =?us-ascii?Q?PwtkEzoBxPv+ezIzGXMVj6vnzZHj9k+INQcrtqClIA1ORalRBd8jzvtlji5b?=
- =?us-ascii?Q?/2qlXjfsInReKmjefmVeIOG1K/qzZ5l/6e/Lwvopa6VTFuL+SrhYv9N/Yoc5?=
- =?us-ascii?Q?j8+pg/TPURR8FqRiO5nzmXCWudtk9pQowrK1N1/noRFW++Oxh5J6KEGxWoBg?=
- =?us-ascii?Q?bPvscNfCLhlUpVRhJ/HlU6qHXIHRVZT2ops9BEj/kj5gQGfI4gKjYUo8q2wm?=
- =?us-ascii?Q?EnQA7IeJ2rTYpUTpOztbqVoqKIAugvcp5LpMgIaQJgYyR90PdeQk8rB206pU?=
- =?us-ascii?Q?OEevidn/mt07l+4qXT8oBb9a22pTAX5Oz0iY9j1ManvQYZpzc2pC2r3XI/7w?=
- =?us-ascii?Q?yFS4ZzYI7p519xaiDGAOAL210+5azfqWPKAg6FPBqpqqUj4RH+MzvfU0VjFl?=
- =?us-ascii?Q?OmpY5RRcLDE94Cy1REYNVkR0ntXfbZovloDW2XYuRh1PRBAplbFbVz1CF6j5?=
- =?us-ascii?Q?HNbo0gHXo8t5IB4239rfrJjNIMAv2hWLBuATBn9RDSclotP3/WVbOlTrrAcA?=
- =?us-ascii?Q?alpY8++184I9GbRwPtp9oFf7AqX1so53T0aej11fWXSkDCa1pQAAGqrwk30V?=
- =?us-ascii?Q?IMeN5jH8ijdgbAThHaaerWzyh9CUxr0uM5fjHYLb6lohDLNnl+7gCzQlXXVU?=
- =?us-ascii?Q?kknZDCREfrCBcTH4jTRN6YVj+UUrdNs44QUakpZEqj9lZJvG3tCBCjQ5tiLa?=
- =?us-ascii?Q?YWv8bBtBYiNnp4zT2e28zycu04Xl/sgRPaac3E0Vo5JfjdtnbDUBYehX0WWg?=
- =?us-ascii?Q?lEcYH+QxwZlpE3cj0tzisjeSTXu2N+jw3p9Iel/2Fl9/zZx2i9uYQxMkEDjn?=
- =?us-ascii?Q?GS3vsX2AB2EzWefPjnuPPbP5XqaqtZOHwLXLZGiQl5NHkVEOqH+nMbTsJp/E?=
- =?us-ascii?Q?7DP2WO6Skg=3D=3D?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d214dff4-b381-4957-d09d-08df1f07674d
-X-MS-Exchange-CrossTenant-AuthSource: IA0PR12MB8374.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2026 15:27:56.9730
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: YLttr6nZbAZEgLwiA1BQTWtmyJC4gk3s+HBEIV2F7pIcz4C++d3nVT6aZtPTmkRN
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5724
-X-purgate-ID: tlsNG-c201ff/1790782106-F60AA2A1-E8FE49A5/0/0
-X-purgate-type: clean
-X-purgate-size: 1874
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1790785177-73ABF2A1-8A07D0AD/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2717
 
-On 22 Sep 2026, at 13:12, Muhammad Usama Anjum wrote:
+Both constants were inherited from OpenSBI and their names are misleading.
+The length of an instruction is encoded in its low bits: bits[1:0] != 11
+means 16 bits, otherwise bits[4:2] != 111 means 32 bits, and anything else
+is 48 bits or wider. 0x3 and 0x1c are the patterns compared against in
+these two tests, not masks selecting a 16-bit or a 32-bit instruction. As
+each constant is needed in one place only, once INSN_IS_16BIT() and
+INSN_IS_32BIT() encapsulate the tests, drop them and spell the values out
+in those two macros instead.
 
-> pte_t is used both for software PTE values and for entries stored in a PTE
-> table, so pte_t * does not distinguish a pointer to a software PTE
-> value from a pointer to table storage.
->
-> Introduce hw_pte_t as the generic name for a PTE table element. Define it
-> as a macro alias of pte_t by default. When an architecture selects
-> ARCH_HAS_HW_PTE_T, define it as a structure containing a pte_t instead.
-> This preserves the representation while allowing converted architectures
-> to enforce the distinction at compile time.
->
-> Name the generic wrapper structure __hw_pte_t so architectures can
-> forward-declare it when pgtable_t must be defined before the generic
-> hw_pte_t typedef is visible. This avoids header-order dependencies.
->
-> Keep the C type definitions behind an __ASSEMBLY__ check because
-> architecture assembly sources can include this header indirectly. Include
-> asm/page.h so consumers such as linux/vmalloc.h retain the page definitions
-> they previously obtained from that header.
->
-> Acked-by: David Hildenbrand (Arm) <david@kernel.org>
-> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
-> ---
-> Changes since v1:
-> - Name the generic wrapper structure __hw_pte_t so architectures can
->   forward-declare it, and explain why this is required.
-> - Use software PTE value terminology.
->
-> Changes since RFC v1:
-> - Add the ARCH_HAS_HW_PTE_T opt-in and generic wrapper definition.
-> - Exclude the C type definitions from assembly sources.
-> - Update the description for the new opt-in model.
-> ---
->  MAINTAINERS                   |  1 +
->  include/linux/pgtable_types.h | 17 +++++++++++++++++
->  mm/Kconfig                    |  3 +++
->  3 files changed, 21 insertions(+)
->
-LGTM.
+While at it, make INSN_LEN() cover the case both macros already knew about:
+an encoding of 48 bits or wider now yields 0 rather than being silently
+taken for a 32-bit instruction. No ratified extension defines an instruction
+of such a length, so rather than open-coding a decoder for encodings which
+cannot legitimately occur, leave it to the caller to treat the 0 as an
+illegal instruction.
 
-Acked-by: Zi Yan <ziy@nvidia.com>
+No functional change: the only present caller applies INSN_LEN() to a bug
+frame, i.e. to an instruction emitted by Xen itself, which is either 16 or
+32 bits wide.
 
-Best Regards,
-Yan, Zi
+Suggested-by: Jan Beulich <jbeulich@suse.com>
+Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+---
+Changes in v3:
+ - New patch.
+---
+---
+ xen/arch/riscv/include/asm/riscv_encoding.h | 20 +++++++++++---------
+ 1 file changed, 11 insertions(+), 9 deletions(-)
+
+diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
+index 03e186bcdb8c..647268e6d0d4 100644
+--- a/xen/arch/riscv/include/asm/riscv_encoding.h
++++ b/xen/arch/riscv/include/asm/riscv_encoding.h
+@@ -857,16 +857,18 @@
+ #error "Unexpected __riscv_xlen"
+ #endif
+ 
+-#define INSN_16BIT_MASK			0x3
+-#define INSN_32BIT_MASK			0x1c
++#define INSN_IS_16BIT(insn)	(((insn) & 3) != 3)
++#define INSN_IS_32BIT(insn)	(!INSN_IS_16BIT(insn) && ((insn) & 0x1c) != 0x1c)
+ 
+-#define INSN_IS_16BIT(insn)		\
+-	(((insn) & INSN_16BIT_MASK) != INSN_16BIT_MASK)
+-#define INSN_IS_32BIT(insn)		\
+-	(((insn) & INSN_16BIT_MASK) == INSN_16BIT_MASK && \
+-	 ((insn) & INSN_32BIT_MASK) != INSN_32BIT_MASK)
+-
+-#define INSN_LEN(insn)			(INSN_IS_16BIT(insn) ? 2 : 4)
++/*
++ * Length in bytes of the instruction whose first parcel is @insn: 2 or 4, or
++ * 0 when the encoding is 48 bits or wider. No ratified extension defines an
++ * instruction of such a length, so rather than open-coding a decoder for
++ * encodings which cannot legitimately occur, leave it to the caller to treat
++ * the 0 as an illegal instruction.
++ */
++#define INSN_LEN(insn) \
++	(INSN_IS_16BIT(insn) ? 2 : (INSN_IS_32BIT(insn) ? 4 : 0))
+ 
+ #if __riscv_xlen == 64
+ #define LOG_REGBYTES			3
+-- 
+2.55.0
+
 
