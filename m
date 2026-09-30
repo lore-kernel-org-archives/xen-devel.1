@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C32F7CA5FB1
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 11:43:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437094.1655867 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 55988CA5FB1
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 11:43:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437100.1655875 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBsiS-00041m-Dg; Wed, 30 Sep 2026 11:43:16 +0000
+	id 1xBsin-0004UJ-P4; Wed, 30 Sep 2026 11:43:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437094.1655867; Wed, 30 Sep 2026 11:43:16 +0000
+Received: by outflank-mailman (output) from mailman id 1437100.1655875; Wed, 30 Sep 2026 11:43:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBsiS-00041f-Ax; Wed, 30 Sep 2026 11:43:16 +0000
-Received: by outflank-mailman (input) for mailman id 1437094;
- Wed, 30 Sep 2026 11:43:14 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBsiQ-00040A-On
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 11:43:14 +0000
+	id 1xBsin-0004UC-MM; Wed, 30 Sep 2026 11:43:37 +0000
+Received: by outflank-mailman (input) for mailman id 1437100;
+ Wed, 30 Sep 2026 11:43:36 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBsim-0004Sm-Hn
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 11:43:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBsiQ-00E9Fr-5X
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 13:43:14 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xBsil-00C9D3-Ue
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 13:43:35 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abcf5c9-2eae-0a2a0a5409dd-0a2a4509ebe6-14
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 13:43:14 +0200
+ id 6abcf5d8-bab6-0a2a0a5309dd-0a2a4503d83c-44
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 13:43:35 +0200
 Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abcf5d1-be1a-0a2a45090019-4a7de18c8bce-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 13:43:14 +0200
+ id 6abcf5e7-fae8-0a2a45030019-4a7de18cecb7-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 13:43:35 +0200
 Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49ffe281cb1so26269275e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 04:43:14 -0700 (PDT)
+ 5b1f17b1804b1-49b912d3931so39712315e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 04:43:35 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01751613dsm47209935e9.3.2026.09.30.04.43.12
+ 5b1f17b1804b1-4a01cd2114esm2701305e9.4.2026.09.30.04.43.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Sep 2026 04:43:13 -0700 (PDT)
+ Wed, 30 Sep 2026 04:43:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,50 +54,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790768593; x=1791373393; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790768615; x=1791373415; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=7UlEPoDDJhLeviLZJAxh1QAj5n/whaugPJ987VD1ywg=;
-        b=DWw1R7LNLVG10TzIfTgJBIh6FHea0SA/YfQkTis5CAOIbcU15w3GeDo0w0wbxS0KQk
-         ya3clCQn0e4lOVPcqCRDvbEFEYmN7DIJ3jCx07BE9ClGwMrgV4sYBWG35UY4nM0RJXbQ
-         Say2yp7qHQXQC1Bdof4Joz2Gmkr1n29Ha+s0MrhDB/nqv9ZThwKCVnG2+6WnWTQfFWqd
-         LSQX1TTkfZq5SGJNuc5Jeihrzll9V6c2XEAyGvfSVTzg8lolTM6X8mR71Q0fg//ZRplC
-         QftO4/XWP4fWeSqikRD46vAModeT201Q6xh+61bZH8F601d89YqZcdMncIVebURd4dYK
-         Xs8Q==
+        bh=fMP+aMbGTq/QNVUvBxjH4sITe7aOmudxNWIlirIxtN0=;
+        b=Ls/3u0mPvHOxLGwbLloqNtKONR/KZQetO1A7zb1ydc56wtqzCun2UJs4GJ/wbulelm
+         sVcZoZcyVdl75+pM5x919ZPjXM1IkJWkPtJme/cXWbnXwtCyRNyMbq+TxljA81AgPrDL
+         86J+0kyLTVZk6TmfTfX7kmeIExkWXWkWYmeJ3rIb11yISaBuLh/0o0NUzibIwO8HQpmh
+         Onauc5HnjiqPjB5EXj/TfjhTwhSpHGHfqzaPR9tiI4i8hR9LT6wEJXyPR6esZfTMA+9K
+         W9w+qY1raeXbRtk5doDQOV2DtiznxSPVWjCIbx/aRw8YPkARvIa/NXZQvQk3zNww2dIw
+         Xjdw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790768593; x=1791373393;
+        d=1e100.net; s=20260707; t=1790768615; x=1791373415;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=7UlEPoDDJhLeviLZJAxh1QAj5n/whaugPJ987VD1ywg=;
-        b=eZ0YH6RM1Oc6mOPYZkPQ//wINEJgL4ifwsdSep24c7FQNGXgu+E2NyNt6oYoebeK14
-         OQVYThSQBLVM1W6P1zVOVK1P5BLHtEB2VSQNAPcWFPkI7/vtHdhnWI2UqWH3ydgc+nbA
-         cukDEJbXzxmNbR6nPYCews41Sv7IMFbl4hk6X4TW9R3aOUYL8KYh3vr+2doyga12LdJT
-         h0cqYsqTr3LuwHFXoADu+hGuvNUwrZv7ExAAq7m0WHqDzS7icNIcEaiiY8AeoWVDfvNo
-         9sP719JaAj6Zk15nYeHMshR7c5TiqoQ6oMJ7lf8bjEqkjG2jjM7Z0gItBkb5fR0mkoX/
-         0y3Q==
-X-Gm-Message-State: AFuF++l31Q0bjN8vPxehwliX9lZQhRST5RkVhcEftkSRvtoDU2o4x6O6
-	CqpUO1VqvKTlqhr/jKPNzcAZwnNeq4RTmEEIR+MmyAuQNec3qRCq5GU2XiZY82d1VlJ4Xe6x5xj
-	VSqDS4g==
-X-Gm-Gg: AYBFou2RPynz0QkUCP9cRHw5YTTEWFmEELd6WYz5+oQxdY2lV1WMeOy5aHyvmO6Td6w
-	5REeyeEuJspj7HR5zeRJEyUQ2kqioY78HXTy40wZfFN56DKJQ/FudJfMv4XY3p+vZQ7nSrWAcQA
-	91NnPgFtdtIFZKC/+62w6ApAO7v8EM1rUS166+mmqiF1yk0IhPe4h3EvU9snlmv7HFw7qejZYJi
-	/ygmI5q26kaUoULc3HczL8D4ASDYum/7LSno4je45p/GGTVvZKZaRhfh9s3g+XneJTyANMVG16U
-	82tT67Zzraayu1EEftaA/nkU/riW55O/4DN7+BzGxeaTNLXPLvPdABaKFNjxkgJhCjQVlVw7Mra
-	6Vcv9gKr+Lid2YtcY55G9Oe+Nwg6SU8yrE0xMxWUZWnpmDxV6FpoRE5JpdhkfOKPQygBqV/jMLB
-	t2imCQJj6cNgaAe+cRgzWSLHGxzyfP1n5Ovvjq678EyTkdZSsaaBsweXh/65eNc3Rb2xW+Pg+bL
-	91YC+k0/Ex/x6/I9aWjsNe/nSx0HkByMroSH+4drOJPsQK6n5YIvNlVjbdBog==
-X-Received: by 2002:a05:600c:4fcb:b0:4a0:3b9:f16b with SMTP id 5b1f17b1804b1-4a01ab4f2d9mr22071065e9.0.1790768593473;
-        Wed, 30 Sep 2026 04:43:13 -0700 (PDT)
-Message-ID: <bb14302d-d366-4841-a639-3af02d755cff@suse.com>
-Date: Wed, 30 Sep 2026 13:43:12 +0200
+        bh=fMP+aMbGTq/QNVUvBxjH4sITe7aOmudxNWIlirIxtN0=;
+        b=FftcWVjH1s8oP44m8J+qnW3mnF0eCxKUyitGV74Vv6fW/BCyD0NxFHumdFKFNuKKI/
+         6c5Mj/BTqOZ34ZcstY0xKVF74SG/EPVZFYQdK28ZvRbBECk0qGh14X8mKmD3Tz6FFwXb
+         mlqVC3xo5nelT+mo448AVfs9SmdmYPyPae3NdBgj/rvQw/r8Tkq231yalZgr7ZexHIde
+         YMDaLwaDMCfayzLCIPtEjnxPlJz+nMMr2QyEqtRpVT9+DsMH51MsliOpEY4LrWjjcR4w
+         y6WNBYbcxXvtqnZJ/VUn5psBq0PPJT+rmxjLxYJMzBwtPf5167QbzKyjLXjBX3OFKGDR
+         CSPA==
+X-Gm-Message-State: AFuF++kk1JSkxYBVY5eEu+yEi4Tppb3kvjcHBqutZu9FS11Z0zyD5dAJ
+	EQ/A+sBrs2v1oZ69AsthM56cuWIb1NVWyotCiXN5N0yLap/28Ds57vLHFv/nKgSoK8q9VYr7/qm
+	wABNdFw==
+X-Gm-Gg: AYBFou1ER9Q80ylQvTs4xcgMMdJgrr35mwnrYYMsAj56GeQSjRIjgfcX7uDQETxiGdA
+	IVO2CzDz6JYkxElHFwHkmoMfbOe+syMgxc8nvgcKfODWHVXm0YeP5WXqIalpD0LxDovVcTOGlWS
+	Rdog3NAS2ONIWuP81fqvf2vGA58wWb6tDjCLpgp04VGSZocXJ//K5JiH1DvogYgMtGqov6AW+Gj
+	UwYRY/5YrEPbB5IhaSon5ee3+EihrVrAXVyI9iK4QkTAm96nMW+1zLMO0qzu/+PrHTGQ+oIatm0
+	EDFQrYKvurUhOkTFgKVdTYbnRIhKm81tB8xC+QOPgICXPtrY/LruRaLmwPfQxVShAij1OCSDR51
+	k961vYhe9TR3Cjpw6lmXHzfy9fhuxEg+3MsM5DeuLY8cVdJuiH9lHc05Feohio/hXg+lc69Kja2
+	AF7eID1VetCIj29j6sodBocXQ6AJSS+pI8tIZWV6GYXWy3N1LZuh+4f8WPIf+Zprg5CKiGaVjJU
+	YMEwYm56fCY7seHClSvubB9hxSUZd2qoGZ8u9xhOAEQTyhRKBa3IXUU1I2jtg==
+X-Received: by 2002:a05:600c:1c02:b0:4a0:1a18:b748 with SMTP id 5b1f17b1804b1-4a01ad8f197mr19090465e9.4.1790768615216;
+        Wed, 30 Sep 2026 04:43:35 -0700 (PDT)
+Message-ID: <b21db453-c2ad-4321-8f8f-76d801dfe998@suse.com>
+Date: Wed, 30 Sep 2026 13:43:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v2 3/5] x86/pass-through: use simpler locking primitives in
- pt_irq_{create,destroy}_bind()
+Subject: [PATCH v2 4/5] x86/vPCI: make better use of "pdev" in
+ vpci_msix_arch_print()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,80 +130,46 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
 In-Reply-To: <e34484a9-03f8-40f7-8627-7d5e668dbd63@suse.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1790768594-3B8D1034-6E5A065A/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-33051d/1790768615-6F2C84E9-4E7CA957/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2309
+X-purgate-size: 1250
 
-Both functions already assume IRQs to be enabled upon entry, by e.g. their
-acquiring of the domain's event channel lock. Hence like e.g.
-hvm_migrate_pirq() (also called from here) does, saving/restoring of
-EFLAGS.IF isn't necessary (because of the functions called, we can't
-really avoid the saving there).
+Move the declaration to function scope, so that not only the (so far)
+immediately following spin_unlock() can make use of it, but also the
+assertions at the top. Also add const, as the pdev itself isn't supposed
+to be altered here.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Acked-by: Roger Pau Monné <roger@xenproject.org>
 ---
-v2: Add IRQ-s-enabled assertions.
+v2: New.
 
---- a/xen/drivers/passthrough/x86/hvm.c
-+++ b/xen/drivers/passthrough/x86/hvm.c
-@@ -228,6 +228,8 @@ int pt_irq_create_bind(
-     if ( pirq < 0 || pirq >= d->nr_pirqs )
-         return -EINVAL;
+--- a/xen/arch/x86/hvm/vmsi.c
++++ b/xen/arch/x86/hvm/vmsi.c
+@@ -1044,10 +1044,11 @@ void vpci_msix_arch_init_entry(struct vp
  
-+    ASSERT(local_irq_is_enabled());
-+
-  restart:
-     write_lock(&d->event_lock);
+ int vpci_msix_arch_print(const struct vpci_msix *msix)
+ {
++    const struct pci_dev *pdev = msix->pdev;
+     unsigned int i;
  
-@@ -400,8 +402,7 @@ int pt_irq_create_bind(
+-    ASSERT(rw_is_locked(&msix->pdev->domain->pci_lock));
+-    ASSERT(spin_is_locked(&msix->pdev->vpci->lock));
++    ASSERT(rw_is_locked(&pdev->domain->pci_lock));
++    ASSERT(spin_is_locked(&pdev->vpci->lock));
  
-         if ( pt_irq_bind->u.msi.gflags & XEN_DOMCTL_VMSI_X86_UNMASKED )
+     for ( i = 0; i < msix->max_entries; i++ )
+     {
+@@ -1064,9 +1065,7 @@ int vpci_msix_arch_print(const struct vp
+                entry->masked, entry->arch.pirq);
+         if ( i && !(i % 64) )
          {
--            unsigned long flags;
--            struct irq_desc *desc = pirq_spin_lock_irq_desc(info, &flags);
-+            struct irq_desc *desc = pirq_spin_lock_irq_desc(info, NULL);
- 
-             if ( !desc )
-             {
-@@ -411,7 +412,7 @@ int pt_irq_create_bind(
-             }
- 
-             guest_mask_msi_irq(desc, false);
--            spin_unlock_irqrestore(&desc->lock, flags);
-+            spin_unlock_irq(&desc->lock);
-         }
- 
-         write_unlock(&d->event_lock);
-@@ -588,6 +589,8 @@ int pt_irq_destroy_bind(
-     struct pirq *pirq;
-     const char *what = NULL;
- 
-+    ASSERT(local_irq_is_enabled());
-+
-     switch ( pt_irq_bind->irq_type )
-     {
-     case PT_IRQ_TYPE_PCI:
-@@ -606,9 +609,7 @@ int pt_irq_destroy_bind(
-         break;
-     case PT_IRQ_TYPE_MSI:
-     {
--        unsigned long flags;
--        struct irq_desc *desc = domain_spin_lock_irq_desc(d, machine_gsi,
--                                                          &flags);
-+        struct irq_desc *desc = domain_spin_lock_irq_desc(d, machine_gsi, NULL);
- 
-         if ( !desc )
-             return -EINVAL;
-@@ -617,7 +618,7 @@ int pt_irq_destroy_bind(
-          * pt_irq_create_bind is consistent across bind/unbinds.
-          */
-         guest_mask_msi_irq(desc, true);
--        spin_unlock_irqrestore(&desc->lock, flags);
-+        spin_unlock_irq(&desc->lock);
-         break;
-     }
+-            struct pci_dev *pdev = msix->pdev;
+-
+-            spin_unlock(&msix->pdev->vpci->lock);
++            spin_unlock(&pdev->vpci->lock);
+             read_unlock(&pdev->domain->pci_lock);
+             process_pending_softirqs();
  
 
 
