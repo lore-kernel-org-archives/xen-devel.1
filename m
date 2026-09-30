@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 84FF0CA5FC7
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 14:51:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437410.1656306 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0435ACA5FC7
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 14:56:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437416.1656316 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBveU-0008CB-LL; Wed, 30 Sep 2026 14:51:22 +0000
+	id 1xBvjB-0000MW-6g; Wed, 30 Sep 2026 14:56:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437410.1656306; Wed, 30 Sep 2026 14:51:22 +0000
+Received: by outflank-mailman (output) from mailman id 1437416.1656316; Wed, 30 Sep 2026 14:56:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBveU-0008C4-I0; Wed, 30 Sep 2026 14:51:22 +0000
-Received: by outflank-mailman (input) for mailman id 1437410;
- Wed, 30 Sep 2026 14:51:21 +0000
+	id 1xBvjB-0000MP-2g; Wed, 30 Sep 2026 14:56:13 +0000
+Received: by outflank-mailman (input) for mailman id 1437416;
+ Wed, 30 Sep 2026 14:56:11 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBveT-0008By-Gl
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 14:51:21 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBvj9-0000MJ-Gs
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 14:56:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBveS-00HXD7-QL
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:51:20 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xBvj8-00A6NP-Ql
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:56:10 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abd21d6-e002-0a2a0a5209dd-0a2a4507b374-28
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 16:51:20 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abd22fc-e002-0a2a0a5209dd-0a2a450c9bde-36
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 16:56:10 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abd21e8-b4ea-0a2a45070019-4a7de14ca600-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 16:51:20 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-482f63546c3so4280109f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 07:51:20 -0700 (PDT)
+ id 6abd230a-f479-0a2a450c0019-4a7de18d9d58-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 16:56:10 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49e7d2bb404so8788125e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 07:56:10 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48b029f3b1fsm3726358f8f.26.2026.09.30.07.51.18
+ 5b1f17b1804b1-4a01e42ad94sm5803225e9.1.2026.09.30.07.56.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Sep 2026 07:51:19 -0700 (PDT)
+ Wed, 30 Sep 2026 07:56:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,63 +54,63 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790779880; x=1791384680; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790780170; x=1791384970; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=G+3zvmkMCZKNyD04eOrufTq9qcC+82Dl28gqa4+duUk=;
-        b=EbBJqf6biuayPXEgT262WEI28vqikuXq2gEXVGVdWT0UoekzpW9J8utAg/IeT1oHh1
-         JthHfvKCjzvC7WTnhCvGd+uuf7XHkCjzcesTiwNFaIAMlw1R6oijCyaKmZ2Ko3Me0w31
-         Kvdtj/Chu36bvH+P+KGE9EX/2poCKkrbR73WmWZbw5n58J0p4MLEJMlEtY3Wgh/n1Sm2
-         vXBt8otNx1EvPkShpOVZ3uAMySDXQyV7liLSRjArSWP0CncFkKe4ILpdkDUZtjnUMfjy
-         oc8Zc4AT8ZtQgMNaDUBrVwrnmkJaTWHsrkxhb0ct1BaQ8Ev0GjH9Au+B8IrUpcJlwkaz
-         Oe/A==
+        bh=VBZOym+Gxz9yKCpSM26V+js9UUOdf2hbNTH5ftF6Jiw=;
+        b=A2QipdND0MbIJyxPZjUWHNaS0mp47vbSkEXbhEP82Z/5HzrD/9B+GDmD6lUWgcz+p5
+         3vGjAk93j7x/1Y/+/WVTFkm4F/0KzYFG80OE7Ftn30l3o4y5i64gmBMgwQNXdErHX8lH
+         L2LKqrC+j+n/BWIIoaUDeS5im+7UDG9y3WpFSSnRhNW6xSJiCBZuW6OekwxLvUNI5+/G
+         a0rcqAI6PDVV/o7N6tcWITCLVPkrXRiCBdeGkxiAmT7ktc39V4fR2IpRlhNsMlms/rse
+         UJtXSNO3yBVKXkhBA7n9ERtLupad/PUpFtPC+ScEfxoD1ZhuCNlUIIrvwJNPCBpZ/YVQ
+         k+Gg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790779880; x=1791384680;
+        d=1e100.net; s=20260707; t=1790780170; x=1791384970;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=G+3zvmkMCZKNyD04eOrufTq9qcC+82Dl28gqa4+duUk=;
-        b=XRM3M/pFkz7SQVB4mu+WqaGpDwgGsm4XYZFlGFi7EV1KMP/VrKHaYEuw7p9+V0qzU7
-         HnfhTIcep5lIJFY/P4NoiRaX3d48XdvVv/E8SFOanaGDQjWPQvCzhxXj9/5iRIFnBKFC
-         q3iCPrez1AblC+A1VUhXZuWqetVj4UMDC3TUG5WZlWdDE0i5LxCqBfOTHL0GjEkvXBCr
-         pFl8XYau89/m7VlVkw+ypn3LMfC/OZyHY7Ru2QuLiJs1KweMD3FWJ5opkCkOcXt+GnZ/
-         bLcvSwLa+L96IjBIG6VHDVlJf4BPeTImZedS/RQsBk6xGTpmm2LW3eegxkvAhEHEFojv
-         /llA==
-X-Forwarded-Encrypted: i=1; AKwUvByoc/AtMOF6GXvFpzfkuJ8oPXHEL0L/WmBRxz4lybviSHLuVx6qnEeyQVFOb6FHimPY6rj+u4zLLnA=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIag4dcx0u6Ty9lkv7OvCZ+NdmRmjAdeIrYQ02fPCRj4X0Ya2hS
-	0OefJRPJAMBQKQLmq3RJuYoYJoQfJPwBOrv0TxNELZQPMCMSV3oSq3ljihA0rfQXPg==
-X-Gm-Gg: AYBFou1UfWW7Tqpm436jmAAX4jkEb8GxJ0zjggyrj1x2fnZcBFTOQ+eQ72RQ+dHgySf
-	WM0XynzpaTw7hoBGR0g3kr+eLm9vhT6fYMS90BK+VazW+gnkG1n43uTWgs/cRFyce7V1p8VnZko
-	vcEBBnzMHrDaVEZuYniPjmSWhWI87hE/myFmA0hJj6cW8EfifdJr9I+HzqJ+iF0A2/ILdJp8okG
-	bogl1hbBpdbF+FoykDCW9Nm+3MaoIdLfjA8blbnnqQJrFPNkZc332Dmm7x8fyvy3Q4gzETMDxRn
-	vFsDTyXAn1vzVwjzTRWGd3j5PgrdOiw44FONACW7d0W7djNsttWivN7cSKlIZ8ikn2DK/D3CQTQ
-	QR40uFBe40dGJe6oSzWb5VtSH1tT5VKFo0rfFG8yJ1s3U2tKbeqkzaQ1rW+8WL2pfS6GkZrQ3e4
-	qMtdkrSQpcS/qe7lWMY7oHVUBvyoSzLTGi3MBR8jFaPN1D5Vn4B1yuChL58KzOMvtzttdiRpcL5
-	CaULHQnkY6paPjMElOgbrwnKyUPJlkAoGLdLQa4RvafQ3clWyi9WlBAxESKzQ==
-X-Received: by 2002:a05:6000:4553:b0:487:73c:3f9 with SMTP id ffacd0b85a97d-48b02597fffmr2226994f8f.22.1790779879798;
-        Wed, 30 Sep 2026 07:51:19 -0700 (PDT)
-Message-ID: <08c87a8b-6b30-4ac4-a65c-57f3d96079f3@suse.com>
-Date: Wed, 30 Sep 2026 16:51:18 +0200
+        bh=VBZOym+Gxz9yKCpSM26V+js9UUOdf2hbNTH5ftF6Jiw=;
+        b=kovGWaaqEMUGyqCZj7owh9k/RxhiBZYrofSAY3riWnIMlo//B/Bn9327oC19yM4Kvt
+         HvkX2BT6P4ijTtpwg580bSgq4Jk189RfRuoYDNtHC5XhdVogbfSJrbmYEHV6jElkImO4
+         Zqp3aGR6Ff9xzdJ5ZlOWCjykagjQZqclw+lPnXxBBVYkMhUpAm2DtnU+agVYarQYr54Z
+         L0Muxa73DsvVTUDfJvl/5GufH/vL4BOywtlLrjLVoqd83LwVeu80dPrvZ3tB13ydas2s
+         h5QdyvFd+fW7P8AbG95BHdrv+h0ozeiVW7yCDSB+jOlTOqmNYaoGVTiSJph2c1lzg8dA
+         T7jQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwHcy2fQBb923GQgtU+kjbQWajBHGtBYqYRcLb7Uj/y1k24kFJPLW67veTYhT9q4lqoEINwtK5p3eI=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nVbLnIxPF4/VR+XBBZMu+4mxiC4D6Zi8Vq4w27tv8mOhjjTgeM
+	PCE/42EHqZLwoKpKpHEUZ92D9qDgZOL63eHSGF8lAHQiPCYGC1mQQlszvNH1uKPB5Q==
+X-Gm-Gg: AYBFou1wsdp+G3OJcBAqLyb0f6qkiRnXaxkki5lRdPZedeeRh6N9pDd05kgx49/W1iz
+	8d26HOuhdvL64VR0OExUj49m1KGiIO2dHKZip12C7y2gYhNvXYqE2iR26VpXq2ypQBPobqgv8/w
+	mvx2g4pkgZOCHdeTdg13xkCiYac8/Kk5I20whhcUbwNFaEY9XuMe+9ISHeXf9OZbj29n75StOYh
+	waT/hqHv/ynlPKl14hWyDFWBRvSH/XY71thmamduKiD2ewE1l6z7YXcZBZScZTazjAHS4aLew4O
+	4cXAMzIPBvwribLpjZgHjWeAFQYwkATtpQDAugEkGVAHEHlRO+YoDVrX4eIMzmr6AKrA8T4Pha7
+	k407Ym/+c8kIiXteyKuVS5RBQ0fNrQWGjvZC19FcYJoRT228ZQdr8ci5xZIk2wXjxTuQeatz/pB
+	jrUKi+V2TJLBQsBtD7Yj7LDIXFuesC9IiMBZio4EtTdI5I5K8fUv01BPON0x8noX3ekYHG6ZxGM
+	OZSeZQDNjDNxOyGC2D79Gcu2LLxLnqFZUB/cusxx/6aRfy4RcrsnQE5HRYaUAA=
+X-Received: by 2002:a05:600c:4f8e:b0:49e:63cc:6324 with SMTP id 5b1f17b1804b1-4a01b196740mr26816715e9.6.1790780169100;
+        Wed, 30 Sep 2026 07:56:09 -0700 (PDT)
+Message-ID: <fde528e4-a3d3-404e-8c4e-a05a3c998bd1@suse.com>
+Date: Wed, 30 Sep 2026 16:56:07 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 04/11] x86/passthrough: Extract pt_irq_dpci_setup()
- from pt_irq_create_bind()
-To: Julian Vetter <julian.vetter@vates.tech>
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Community Manager <community.manager@xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+Subject: Re: [PATCH 1/3] vm_event: svm: Don't BUG() when enabling intercept on
+ hypervisor MSR
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, Juergen Gross
- <jgross@suse.com>, Teddy Astie <teddy.astie@vates.tech>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
-References: <1788444605.8631fc262581453bbf619ec5b2062170.1a0679afc0d000c4f3@vates.tech>
- <1788444857.8631fc262581453bbf619ec5b2062170.1a0679ed4c6000c4f3@vates.tech>
+ Jason Andryuk <jason.andryuk@amd.com>, xen-devel@lists.xenproject.org,
+ Tamas K Lengyel <tamas@tklengyel.com>
+References: <1790250881.8631fc262581453bbf619ec5b2062170.1a0d344933500072c4@vates.tech>
+ <1790250991.8631fc262581453bbf619ec5b2062170.1a0d3463da200072c4@vates.tech>
+ <1abe6540-e92a-4d11-90e0-a3c13c9b0a97@suse.com>
+ <1790773030.8631fc262581453bbf619ec5b2062170.1a0f263ed240003f66@vates.tech>
+ <ee526731-509d-4802-8470-2dec9c5700b7@suse.com>
+ <1790775549.8631fc262581453bbf619ec5b2062170.1a0f28a5dec0003f66@vates.tech>
+ <232f5f5f-a87d-4407-8175-ed164c9e1a74@suse.com>
+ <1790778656.8631fc262581453bbf619ec5b2062170.1a0f2b9c8270003f66@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -136,34 +136,99 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1788444857.8631fc262581453bbf619ec5b2062170.1a0679ed4c6000c4f3@vates.tech>
+In-Reply-To: <1790778656.8631fc262581453bbf619ec5b2062170.1a0f2b9c8270003f66@vates.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1790779880-A58C1AE4-8FE5B80B/10/78276251493
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1790780170-76ADCA5B-FB969877/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 970
+X-purgate-size: 4044
 
-On 03.09.2026 16:14, Julian Vetter wrote:
-> --- a/xen/drivers/passthrough/x86/hvm.c
-> +++ b/xen/drivers/passthrough/x86/hvm.c
-> @@ -217,16 +217,14 @@ static struct vcpu *vector_hashing_dest(const struct domain *d,
->      return dest;
->  }
->  
-> -int pt_irq_create_bind(
-> -    struct domain *d, const struct xen_domctl_bind_pt_irq *pt_irq_bind)
-> +static int pt_irq_dpci_setup(struct domain *d, unsigned int pirq,
-> +                             struct hvm_irq_dpci **hvm_irq_dpci_out,
-> +                             struct hvm_pirq_dpci **pirq_dpci_out,
-> +                             struct pirq **info_out)
+On 30.09.2026 16:30, Teddy Astie wrote:
+> Le 30/09/2026 à 16:04, Jan Beulich a écrit :
+>> On 30.09.2026 15:39, Teddy Astie wrote:
+>>> Le 30/09/2026 à 15:08, Jan Beulich a écrit :
+>>>> On 30.09.2026 14:57, Teddy Astie wrote:
+>>>>> Le 30/09/2026 à 11:16, Jan Beulich a écrit :
+>>>>>> On 24.09.2026 13:56, Teddy Astie wrote:
+>>>>>>> svm_msrbits() only cover MSRs in the ranges specified in APM and returns
+>>>>>>> NULL for all the other ones (i.e hypervisor range), which triggers the
+>>>>>>> BUG_ON() that follows.
+>>>>>>>
+>>>>>>> APM specifies that MSR outside the architectural and AMD specific ranges
+>>>>>>> are unconditionally intercepted, hence don't require any specific handling
+>>>>>>> by SVM logic, fix this by ignoring cases when msr_bit is NULL.
+>>>>>>>
+>>>>>>> This is only reachable with CONFIG_VM_EVENT using XEN_DOMCTL_MONITOR_EVENT_MOV_TO_MSR
+>>>>>>> to configure a MSR intercept in the hypervisor range (0x40000000–0x40001fff).
+>>>>>>
+>>>>>> Hence imo it is wrong to drop the sanity check altogether. See below.
+>>>>>>
+>>>>>> Also, nit: Description lines want limiting to 75 chars.
+>>>>>>
+>>>>>>> --- a/xen/arch/x86/hvm/svm/svm.c
+>>>>>>> +++ b/xen/arch/x86/hvm/svm/svm.c
+>>>>>>> @@ -237,7 +237,9 @@ void svm_intercept_msr(struct vcpu *v, uint32_t msr, int flags)
+>>>>>>>         const struct domain *d = v->domain;
+>>>>>>>     
+>>>>>>>         msr_bit = svm_msrbit(v->arch.hvm.svm.msrpm, msr);
+>>>>>>> -    BUG_ON(msr_bit == NULL);
+>>>>>>> +    if ( msr_bit == NULL )
+>>>>>>> +        return;
+>>>>>>
+>>>>>> Imo the function wants to return an error here, which all callers
+>>>>>> except the one you mention check. I.e. the BUG_ON() would be moved
+>>>>>> out to most callers (alternatively the one caller could range-check
+>>>>>> the MSR itself). Right now for introspection intercepts can only be
+>>>>>> enabled, hence why for that use "all other MSRs are intercepted
+>>>>>> anyway" is fine. Suppose the inverse operation would be possible as
+>>>>>> well: Then indicating "success" back to the caller when accesses to
+>>>>>> the requested MSR are still intercepted would be wrong.
+>>>>>>
+>>>>>
+>>>>> IIUC, you're suggesting to report to the caller that the hardware
+>>>>> doesn't cover it, such as we can detect cases where we accidentally pass
+>>>>> a bogus MSR index that is outside of hardware ranges.
+>>>>>
+>>>>> In the VM introspection case, we could ignore it since we're only
+>>>>> interested on intercepts, where outside hardware ranges would always be
+>>>>> intercepted.
+>>>>>
+>>>>> Did I got the idea correctly ?
+>>>>
+>>>> Yes. Just that the more I think about it, the more I prefer the alternative
+>>>> that I also mentioned. Not the least because it's less churn.
+>>>>
+>>>
+>>> One of the idea would be to check monitored_msr() (somewhat like what
+>>> you proposed for VMX) so that the VM event case is covered, but we
+>>> ASSERT (or BUG_ON ?) in the other cases if we pass a unexpected MSR to
+>>> this function.
+>>>
+>>> diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+>>> index 71e48351f2..be866b9055 100644
+>>> --- a/xen/arch/x86/hvm/svm/svm.c
+>>> +++ b/xen/arch/x86/hvm/svm/svm.c
+>>> @@ -236,7 +236,12 @@ void svm_intercept_msr(struct vcpu *v, uint32_t
+>>> msr, int flags)
+>>>        const struct domain *d = v->domain;
+>>>
+>>>        msr_bit = svm_msrbit(v->arch.hvm.svm.msrpm, msr);
+>>> -    BUG_ON(msr_bit == NULL);
+>>> +    if ( !msr_bit )
+>>> +    {
+>>> +        ASSERT(monitored_msr(d, msr));
+>>> +        return;
+>>> +    }
+>>
+>> Just that ASSERT() only covers debug builds and BUG_ON() is too heavy on
+>> release ones: There's no reason to kill an entire host because of this.
+> 
+> So we should do WARN_ON() then ?
 
-This is a little ugly. Can we perhaps reduce ugliness by a third through
-omitting pirq_dpci_out here? The caller can trivially compute it from
-*info_out.
-
-An option to reduce ugliness by another third would be to have the
-function return e.g. struct hvm_irq_dpci *, encoding error indicators
-by the macros supplied by xen/err.h.
+Not sure, as would still hide an anomaly from the caller (which ultimately
+is responsible; the log entry is only indicating the problem to the admin,
+and only if they care to actually look). You didn't Cc Tamas on this
+series, yet his input would be valuable here.
 
 Jan
 
