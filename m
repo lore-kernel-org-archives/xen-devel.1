@@ -4,43 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 113DDCA5FB1
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 11:56:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437122.1655903 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28187CA5FAC
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 11:59:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437136.1655911 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBsvH-0007X0-E8; Wed, 30 Sep 2026 11:56:31 +0000
+	id 1xBsyB-0000AO-Q6; Wed, 30 Sep 2026 11:59:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437122.1655903; Wed, 30 Sep 2026 11:56:31 +0000
+Received: by outflank-mailman (output) from mailman id 1437136.1655911; Wed, 30 Sep 2026 11:59:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBsvH-0007Wt-9r; Wed, 30 Sep 2026 11:56:31 +0000
-Received: by outflank-mailman (input) for mailman id 1437122;
- Wed, 30 Sep 2026 11:56:29 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBsvF-0007W4-Ji
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 11:56:29 +0000
+	id 1xBsyB-0000AA-NU; Wed, 30 Sep 2026 11:59:31 +0000
+Received: by outflank-mailman (input) for mailman id 1437136;
+ Wed, 30 Sep 2026 11:59:30 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>) id 1xBsyA-0000A1-IH
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 11:59:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBsvE-005bBI-DK
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 13:56:28 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xBsy9-009YOf-VF
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 13:59:29 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abcf8eb-bab6-0a2a0a5309dd-0a2a450a8b1c-8
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 13:56:28 +0200
-Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abcf8ec-f2d2-0a2a450a0019-4a7de18d8b7c-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 13:56:28 +0200
-Received: by mail-wm2-f13.google.com with SMTP id
- 5b1f17b1804b1-49e6b885ef8so30826615e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 04:56:28 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01771beb7sm59841875e9.13.2026.09.30.04.56.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Sep 2026 04:56:26 -0700 (PDT)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6abcf99d-e002-0a2a0a5209dd-0a2a4501adde-10
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 13:59:29 +0200
+Received: from [52.101.193.54]
+ (helo=CH1PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6abcf99e-5984-0a2a45010019-3465c136a839-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 13:59:27 +0200
+Received: from BY5PR12MB4999.namprd12.prod.outlook.com (2603:10b6:a03:1da::13)
+ by SA1PR12MB6847.namprd12.prod.outlook.com (2603:10b6:806:25e::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.15; Wed, 30 Sep
+ 2026 11:59:23 +0000
+Received: from BY5PR12MB4999.namprd12.prod.outlook.com
+ ([fe80::a890:d230:e0a8:6740]) by BY5PR12MB4999.namprd12.prod.outlook.com
+ ([fe80::a890:d230:e0a8:6740%3]) with mapi id 15.21.0472.015; Wed, 30 Sep 2026
+ 11:59:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,223 +55,232 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790769387; x=1791374187; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=j3ovuUC5S1K92KFJvpEgCQf6KXhCQ+hHy5sdhv4T+5U=;
-        b=HXr3Vn77GuOOtlg5EU/LsAql7ORqqF17lSpQHe/Qqi18gspk87UTRxD+j4qnL+hsRq
-         VKvqZjvVEwFeSTBJhHaBn1W6We1XsBzegjmgZQ79PVvK7mn9eRFKWcE/S72dHdFZC4T+
-         83Crhy9M81YZDAul8bxVOl1UnL46VY93h+SspQ8GTAs28Z5ZpzdRjOcqexE29szc/sX5
-         koX87ln3PfAgwZ2P7zvDfMen4tC8YMUhHCsRweLmFy0+rOYpgk2+UTVxbP8CO4ZMkBP0
-         QwVICyXck73Aoa0Y/GJbQOGoKOP89xngDFhB7+F4Ex1CJ7QKAh1My+eBS2qv6ZX+AWLG
-         RDqw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790769387; x=1791374187;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=j3ovuUC5S1K92KFJvpEgCQf6KXhCQ+hHy5sdhv4T+5U=;
-        b=V20W6Rdk2EJ5yoAbCs2vkE8ipsgo9spZwc5Tog6GOsXxARrABxrrnrJ+8e9tnhTdX7
-         +FM+nh9YvxW52JuNqS/el6XlMAPfjZcbPKLRkJ4ZzcT3FUd/gTv427gy/+2uWI1aFYTE
-         L3m6t/Zdj1eGSpWGN/xVQlAb3gSuoFDp5Xbtgh2ImMQsQ6qeziEIkBybvA4swgQS97rS
-         4HUQsWiAg4i+VfNWfEtHSVS2h5ETd6hxw3Nyhskc00nD5IUTQ0aL549RNRh7g8gEYURk
-         gEqcfIVwRNMyXaTQtnIvRUuc9KM9ZKjl8lB7JJiRTXnyh6oIip8dAyQ9RCqxIS+9o42V
-         l64g==
-X-Forwarded-Encrypted: i=1; AKwUvBxVdx5KchsSYpCnpW4jMEq3NGkF2fSxcnzdVGRSrBSBOC/rh+GNtrKscdTLmSLXXunKsqkkyn2uCKA=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kvA7k+Stke0WzhgVi3dzJVFE1J4uGVb9KrmqIyVh7wmQ3UBp6+
-	MMdyf/galuT0rXptfJmDfkSI5RYWK9uEiGqUbDyejXdoqYHLtfR7VI1lno0p1/9k8A==
-X-Gm-Gg: AYBFou3D7KvRBTuHqv07zGpvxPvfgMfQ8KqyBRImCVuRhExWNktuufkABrzElVkFaH2
-	Huyv+AEre5esBhKbYIwpnqoOKSKM1P1g/E3tBttRLT5QhXNFzcsmUSWCzGh9OBx+1X7TlPtXM4Y
-	YpPuK7SDjtZ/Cm47yTm003+mKkGHQ7wRcrG6JnCWnFFBaQQkWVqL0+8tdU6/hdJ7Olzk7Q0QPMJ
-	jCbxF9cNkaBJDdlp6hALDWpMov0rwk0LrGtN21Vgn9yNEhFvxYTKFJ893zAyFgi+EPUVWOz3e19
-	WXnLiSM12FPpW9jUsLtBXRxfKamGsz3BIzxhAvWojFsZblkQlbSSrd54a9ay19rf8xivkVUVxO7
-	xkXW0/+i+tDTo9htvgu9J2yh3U2DwPRoBdT4757j25aFcD4qD/ZnNzOQDDwqYdpS9/HBazxAoTp
-	DDn31GTiYX+tP1L66OOlLDJN3tCkQntRralYKps1rVE0wpDZfn9+5on3Vxg+thFGNOt6hQzSe3T
-	MlUirF4GW6XUari4zBSRRh3W5PBi+e/fG9Y3IGezjdLc9HEVsaS4ACZDnGmIZU=
-X-Received: by 2002:a05:600c:8b5b:b0:4a0:159b:d283 with SMTP id 5b1f17b1804b1-4a01b120613mr20889635e9.30.1790769387582;
-        Wed, 30 Sep 2026 04:56:27 -0700 (PDT)
-Message-ID: <52703422-cc20-472d-96be-68d9a4f17fbc@suse.com>
-Date: Wed, 30 Sep 2026 13:56:25 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v10 1/5] xen/riscv: implement IRQ routing for device
- passthrough
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- xen-devel@lists.xenproject.org
-References: <cover.1790158750.git.oleksii.kurochko@gmail.com>
- <99d3f072b0c4b97e2ebac8b227bd57f90e780605.1790158750.git.oleksii.kurochko@gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <99d3f072b0c4b97e2ebac8b227bd57f90e780605.1790158750.git.oleksii.kurochko@gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Z/hpmqGH3CQ1LFPMbM1NgZvs1xvdFN2VtVgxh9ZVVm1kqyXA/RdWUDxUrWfm+CUNhqGmz1xwoe3nxDBYJkquNyNbaZJgkadEqFlFlwq2eGYn/K6GDNTIDkCdOcJ9ED73+aqUOhZkK3qOT5qJ5deIjxTPLTiTxcZmgHq/MjpsxKJ1AW/1IUta3+V5FuTx2gAnYZxWTdwms7a8b05yJPVEGgcEWaVOg4ujaHyCmBzjjnBoMPTeOueMulcwbREOHXt/fspFPEwOcad/jKz+Z755j4UCRzLBM5x1ofZjTkIa1mYYFW530tDMJAwqZ2h4ZNEAB1gDcF9tpZS3UA/wqoIZbg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=377X7wxcbb/IYu3/sELXexNlCs1RfTtLjf1eO/CNWb0=;
+ b=eXiCYwUIGvCDlvsPFVR4ZWRymiWQC+nZyImgW75mXdTjLbNdxsWCtYLCZPHfj41a9W2fB+/lcD6kkL6JPRYQxQnfGJDsiFI9o1Hl6I/n2d45O10ezNXDaKWO0n0BqvdBPy+ZsOyD/KyrxoJemWfxxcGkYNnsNvm9XyNwGqEl0nRVDCUjOTXImXLm6DVHd9mWmXLDvKnK3RkzGVsxmBPSWMgGseMZKMDpO10e1CmFZWOpRe4zLqLMVN3NcHsZYRrLno34ozDWaoMCjjvoN8P0w1xc+Wyrz8b5BBf5wpnro4RARTaRvhfKUG7bgiPEUTBlAYfu2e8/MLKB5nj2IaKhiQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=377X7wxcbb/IYu3/sELXexNlCs1RfTtLjf1eO/CNWb0=;
+ b=VILESe3pjCd7X1mc6FOsDCyLNg3tMW5af+tWd+wLHTJ0sxvDOVW2bPrKS+p1yqQOLJmD2jCngcE0K4L/Bqo4jhO8emEuWCJ8Xn38jhKdVYstqYf3sZkzJqoVx8zq1aSzjYZagTOpd7SKfK9RtpsROLrdCnjTV1AFTiUcm+HUz+w=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Content-Transfer-Encoding: quoted-printable
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1790769388-593C4CFC-A1A637B6/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 6189
+Date: Wed, 30 Sep 2026 13:59:19 +0200
+Message-Id: <DLSMTULZIC0J.37MJ4N5UJFOFF@amd.com>
+Cc: "Jan Beulich" <jbeulich@suse.com>, <xen-devel@lists.xenproject.org>,
+ "Andrew Cooper" <andrew.cooper3@citrix.com>, "Anthony PERARD"
+ <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien
+ Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>
+Subject: Re: [PATCH v2 1/3] xen/rcu: introduce the concept of RCU epoch
+From: "Alejandro Vallejo" <alejandro.garciavallejo@amd.com>
+To: =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+X-Mailer: aerc 0.17.0
+References: <20260925163025.65217-1-roger@xenproject.org>
+ <20260925163025.65217-2-roger@xenproject.org>
+ <DLQSZY2KSYDH.1YSCWGQIQYP0H@amd.com> <arvJQSDecSSAU1WC@macbook.local>
+ <50d1df6c-d969-470b-9b40-ca171c60618d@suse.com>
+ <DLS5A4YDJ8ET.28ZIPQ6QEN2K4@amd.com> <arzJCY1M6NcVInmn@macbook.local>
+In-Reply-To: <arzJCY1M6NcVInmn@macbook.local>
+X-ClientProxiedBy: MA2P292CA0014.ESPP292.PROD.OUTLOOK.COM
+ (2603:10a6:250:1::10) To BY5PR12MB4999.namprd12.prod.outlook.com
+ (2603:10b6:a03:1da::13)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY5PR12MB4999:EE_|SA1PR12MB6847:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0d24deac-9ed6-45d4-4c11-08df1eea4477
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|4143699003|56012099006|10067099003|11063799006|22082099003|18002099003|3023799007|6133799003;
+X-Microsoft-Antispam-Message-Info:
+	ORUo3bzbiSIMMqbtbEFC1vW9+nxBSuqCBG/zQRpFjzwrgsIvAb23jzMM9ROanHsngqIyPvYH/O0SshwigiEggE+LyFgX4fMapUv19tLYXcIvhsnbmT1CdbG0wn5tZ70/eT3gxKJx+gZwPUs63mTQY8tjs/bYrPapwv8DsxnC7F0CSl3omShyAK8t7aA7ToSXRXB1/qYs96iALYCSLBFalMZmaE17zAHR9KwjA1KPqddHwQfwHkNYGRO0M1QMP91pmWN84iWnkcRDP3NoUfGbvL6f4ThWzZa5vRUz/NErx8sYb1hwD/oKNuJIyRTT2CoXAmu8yTJadGUBGwcvgKJl8YOhHH4XqCviJT7uU/AxlrjtxknFl5UkTHTjSBgMOnU4BWrHsk5MrF/X/PNNu2QbXbhbIeVrTIlC+2nJgWeZoxht0axXQ1y7+38azR9yQf3/JSWZPpsc9wzsuhQo5n1i7Vmc0YxcgmJcSY3cXgyppubStbOhb/qNhJtOfLfGoxeVUKbDJ5SAEiXcxhLY0orega7SCHLlxmUclwljFOVqQHwHhyVPpGQU5+F1cuB/PEj9ZrCXfsOkj41/AOT36BXBqrFgfEFl1gnH4QaAGBIh28yemx9TugMMevLZJ+8W1ohp4liMjrhMPdWpYk8iv2NfyCEASG00te8z9K/182gu0mk=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR12MB4999.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(4143699003)(56012099006)(10067099003)(11063799006)(22082099003)(18002099003)(3023799007)(6133799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?NnZHTWlkb01jL2hRMi9HRTh0WndTeUFwZHdmNTBFRGN4WEluVkhWREgxZFRP?=
+ =?utf-8?B?L2RQR29LQlZ1a2pHMEUzMjNwMjVZNWVXY3lFUU0wUnUzV3I4ZTZCWXhOYVEy?=
+ =?utf-8?B?cXNDaTVEWlZHei9wbXo0RWpHTmUwYXAreDJJUmVPOVI5WEtYQ0lhZ3FYWkJt?=
+ =?utf-8?B?cXhHMExHNHJuMlhpQko0ck5EdzZHRXk5U0crL05UZkJYQ1Zpc0Q0WFdkVHNp?=
+ =?utf-8?B?Y3BKRHR0cWpXc1k1NlB2eVZITFl1MStPZUx2UVNucXdzQjJTVXc5TmpyWlF3?=
+ =?utf-8?B?cE1JWmw2dnB0bmhRcUtVcm5uTTJ5VUlmOFlLWUlIMHVZTnJRTUxSV21uTFcr?=
+ =?utf-8?B?RlNnUWVnWEd0US9rQzRLWWRPbXR5UXNxQnFVREZ4K3BXSmpYdEtHQkc5QVdM?=
+ =?utf-8?B?U1NJdFBpQlpPdTYvZFRMK0dmT0dYOFNkSUF0cGVNY0FMcTNWalVWUnZWV2pC?=
+ =?utf-8?B?VHpwdVRUOSt3MHlOeHpjRTJsV3UrNHNYMmhoR1NLaGVXNlFIdmhaSFljdUZu?=
+ =?utf-8?B?OU8rVUZNODBvTXd2UVBTSEhmcUJvYTkxaWlMY2ZGeVBkaUNVdzN3T2tOUXJl?=
+ =?utf-8?B?N3dENHA5NGRiaUl6WWxYWVFMeXhvWlFuN1l0VmRzRTlLMEtaOUxwbFNPZ1RB?=
+ =?utf-8?B?VHp3NWRPYnJKRzk5UWhFUmdFKzh0eEJ2VE9zUHZuVlJzZzIvSFpQR2c4TW5F?=
+ =?utf-8?B?eVlYQmFET01FVVgybXNOQ0lnd2FoNFM2c1RINEdnVHNQajh3YUlKcjdzR1RN?=
+ =?utf-8?B?bzEyMWV0S2o4M2VMWkVLTDlCdlJLTEhZL1BNcmZqbXV2bSt1TWNtd3B4V21i?=
+ =?utf-8?B?ZWRHbTZnV21ERXlPdmp5eGhGMFRucnFpbzc0T1NENHd2WEFaQjVIaGpNU0tJ?=
+ =?utf-8?B?blpaR2M0ejVJR1FkK1BmL2dzcHBMb3I1SmtVY01OeGFta3J0ZDdEQVY4dmZE?=
+ =?utf-8?B?dmsydWJlU05wRy8zdVJQSm13QWdnR0Y4cyt4bzQ2VUo0MW1iUXVnMDlzYmhu?=
+ =?utf-8?B?dGErMGFidlFIcGZPMUtOWXNaWjdLSUVLSWIyUlZxdGJBWDZXdXg1Um1UcXp6?=
+ =?utf-8?B?OWVGL1E5Rm5aaEJrYWhaR3dQR2t1S2RTN2loeVVEOXRGTHV2cGFtcVo5Y2pp?=
+ =?utf-8?B?VkY3VG16ejF1cEk5cEQwZmJTQno0NkhiZTZmaHdvYjBMSkxwVnJsb2ZDODFn?=
+ =?utf-8?B?SWxrS0dwak1JWFNoQ1Bad3ZyMTRvYUZRamFSc3RZdDVPNDdaYkt1S3pKVWtJ?=
+ =?utf-8?B?T1pDTTZSK2x4b3pTYlNmajRsUHBxeXQ0SFd1c2tCbnNvR0lOZzVhRFBzSmFF?=
+ =?utf-8?B?K0hDNHBValFRNTErSEtFSXIwcS94K0Z6L1pEM0Q3ZnBaSERvM0NwZ2tCVXk3?=
+ =?utf-8?B?R2hNZWFCSzdLcjNSaERDZkVnSEZkU1hMcWVjVXNJV3RYWGdqV0EyUjdDNlc2?=
+ =?utf-8?B?ZHBDTXVkUHlSajZHNWFoVTBscjdqNWxBcFpvaUU0cEd6a3BKL0hFWkY4RFhZ?=
+ =?utf-8?B?dWNkd1pIY0dETEZ5MU9QTVo0WVhCanBueDNvT0dnK2c0b2plQjZXeDNaSTJH?=
+ =?utf-8?B?eWoydFNNVi9ZTUdjN0J2MStEZVRUT2UvbUU0OTdYSmZVM2xZTDArR05FV00w?=
+ =?utf-8?B?ZGEyZGZwUWRUWDViVTA4QUlERjRhV3VJSzBiN2lnNDk2K2JBSkZsMzFkSGNS?=
+ =?utf-8?B?RjQ0TDAyV1hQb0dnTmg3WXJKWWNZcVpMcnhRQ3B1eGNqajR1OFU1N0JpNlFW?=
+ =?utf-8?B?WURmSHc2VE5wemg3U0pxOTR2bVBQSzU4cWJZMjhTRDlHMVlvU3praWZQS3BD?=
+ =?utf-8?B?L1R4TXB2M2t2dXdneFNyWExJRGdsUmo1MEY2djVBZHdzNCtudEJrSFdEaWlJ?=
+ =?utf-8?B?L2M4V0FuWXRNb3VrTEpwUjcwcVpYSTFVWU1PQVdZUWZHdmlFMG92R2FISlRF?=
+ =?utf-8?B?ZUpxUGV5ZWFhL2NrWE1TdFZ1OUFhYnJOQWdTOThwWHQrME9oeDM1RHEyUDNF?=
+ =?utf-8?B?NEJMYldlR3R2RFRXMW5xRURMZ2VYUGl5KzluOTdIUUJITHNtNHFZM2szYnVw?=
+ =?utf-8?B?YlRmUk5hSkVYb1JucVVEK29hQThuVnZLYktXdkFqWG0zU3E3TGwwNkpSY1hI?=
+ =?utf-8?B?cTh1RmtMeEJvWjRsODFmYy9UMGZLZHMvejQ1ZTRXWE5ES2NSbG1kczAyTDJj?=
+ =?utf-8?B?Ri9HQmVCQmFZdnVDSkRXMEs1VVBDTFBLWnc1V3dGUGswbmVJelNYSXNGUDZD?=
+ =?utf-8?B?YkdnWW9PZnRYWHgxOElVeDNsRk9TaTJaRXJTOXB6TEtTaDJGdUFhTEJHUWVn?=
+ =?utf-8?Q?F1FzFdWGSaw4Uf91Q4?=
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0d24deac-9ed6-45d4-4c11-08df1eea4477
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR12MB4999.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2026 11:59:23.1099
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: b/0PyL92iVQkbnQ+45rOiIJJC1pnp98OdgB7hDyDIGpNgkpH9qBKUa053auxl6QkqZ7jipGxJKnK17eNKONRCg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6847
+X-purgate-ID: tlsNG-d62444/1790769568-1FC69757-58DE4D5F/0/0
+X-purgate-type: clean
+X-purgate-size: 4735
 
-On 23.09.2026 12:26, Oleksii Kurochko wrote:
-> dom0less device passthrough requires granting guest domains access to
-> device interrupts.  Introduce map_device_irqs_to_domain() to enumerate
-> a DT node's interrupt properties, skipping those not owned by
-> the primary interrupt controller (as at the moment I haven't seen usages
-> of it), and map_irq_to_domain() to grant domain access and configure
-> Xen's interrupt descriptor accordingly. Sharing IRQ between domains is
-> rejected.
-> 
-> Both map_irq_to_domain() and map_device_irqs_to_domain() are marked
-> __overlay_init, mirroring Arm: without CONFIG_OVERLAY_DTB this expands to
-> __init, so the functions are init-only and need no XSM check; with
-> CONFIG_OVERLAY_DTB they become runtime-callable, but the only runtime
-> entry point is dt_overlay_domctl(), which performs the XSM checks at the
-> domctl layer.  RISC-V does not wire up DT overlay yet, so today these are
-> strictly __init; if/when overlay support is added, the domctl-level XSM
-> gating must be added together with it, as on Arm.
-> 
-> route_irq_to_guest() and release_guest_irq() manage irq_desc ownership
-> for guest-assigned interrupts.  Each assignment carries a small irq_guest
-> structure as irqaction::dev_id, recording the owning domain and virtual
-> IRQ number which is 1:1 mapped to physical IRQ number.  A per-domain
-> vIRQ allocation bitmap (used_irqs in struct vintc), managed by
-> vintc_reserve_virq(), prevents the same vIRQ being claimed twice.
-> 
-> Host and guest interrupts may differ in some operations, EOI timing in
-> particular: a host IRQ is completed once Xen's handler runs, whereas a
-> passthrough IRQ must defer the physical completion until the guest issues
-> its own EOI, otherwise a still-asserted level line would immediately
-> retrigger and storm.  Hence a separate guest hw_irq_controller instance,
-> aplic_guest_irq_type, rather than an alias of the host one.
-> 
-> Its callbacks are BUG_ON("unimplemented") for now.  The only interrupt
-> controller configuration supported so far is APLIC in MSI mode together
-> with IMSIC, where guest interrupts are delivered by hardware straight to
-> the guest's interrupt file, bypassing do_IRQ() and thereby Xen entirely.
-> The _IRQ_GUEST branch in do_IRQ() is left as BUG() for the same reason.
-> Real callbacks, .end() in particular, become necessary once a platform
-> without direct IMSIC delivery has to be supported, where Xen traps the
-> interrupt and injects it into the guest itself.
-> 
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+On Wed Sep 30, 2026 at 10:32 AM CEST, Roger Pau Monn=C3=A9 wrote:
+> On Wed, Sep 30, 2026 at 12:14:15AM +0200, Alejandro Vallejo wrote:
+> > On Tue Sep 29, 2026 at 4:52 PM CEST, Jan Beulich wrote:
+> > > On 29.09.2026 16:20, Roger Pau Monn=C3=A9 wrote:
+> > > > On Mon, Sep 28, 2026 at 10:24:04AM +0200, Alejandro Vallejo wrote:
+> > > >> On Fri Sep 25, 2026 at 6:30 PM CEST, Roger Pau Monne wrote:
+> > > >>>  static inline void rcu_quiesce_disable(void)
+> > > >>>  {
+> > > >>> +    unsigned int cpu =3D smp_processor_id();
+> > > >>> +
+> > > >>>      preempt_disable();
+> > > >>> -    this_cpu(rcu_lock_cnt)++;
+> > > >>> -    barrier();
+> > > >>> +    if ( !ACCESS_ONCE(per_cpu(rcu_lock_cnt, cpu))++ )
+> > > >>> +        ACCESS_ONCE(per_cpu(rcu_lock_epoch, cpu)) =3D ACCESS_ONC=
+E(rcu_epoch);
+> > > >>
+> > > >> I'm not terribly convinced about using ACCESS_ONCE() for atomic
+> > > >> accesses. In particular...
+> > > >>
+> > > >>> +    smp_mb();
+> > > >>>  }
+> > > >>> =20
+> > > >>>  static inline void rcu_quiesce_enable(void)
+> > > >>>  {
+> > > >>> -    barrier();
+> > > >>> -    this_cpu(rcu_lock_cnt)--;
+> > > >>> +
+> > > >>> +    smp_mb();
+> > > >>> +    ACCESS_ONCE(this_cpu(rcu_lock_cnt))--;
+> > > >>
+> > > >> ... this variable is to be read by remote CPUs and autodecrement s=
+eems
+> > > >> like the wrong tool for an atomic decrement.
+> > > >=20
+> > > > I can use {read,write}_atomic() instead, but there's been a tendenc=
+y
+> > > > to phase out the usage of those functions.  On x86 this should be a
+> > > > plain `addl` or `subl` instruction (the non-locked version of
+> > > > atomic_{inc,dec}()).
+> >=20
+> > I don't think the compiler can merge volatile reads and writes. It can
+> > shatter them (thus my fear), but they are meant to be distinct because
+> > each might have different side effects. Jan already mentioned this in
+> > other words.
+> >=20
+> > You don't need an atomic decrement though, just an atomic write. Note
+> > IRQs restore it on exit and other CPUs don't write to it.
+> >=20
+> >   unsigned int *lock_cnt =3D &this_cpu(rcu_lock_cnt);
+> >   write_atomic(lock_cnt, *lock_cnt - 1);
+> >=20
+> > and this yields a plain mov, through a static inline stub (plus the
+> > mov from the read access + dec)
+> >=20
+> > The problem with ACCESS_ONCE() is that the write isn't guaranteed to be
+> > atomic.
+>
+> It has always been blurry to me using ACCESS_ONCE() to signal
+> unshattered accesses, but we seem to rely on this property in other
+> places already (which doesn't mean is correct).  See
+> ffa_negotiate_version() for example.
+>
+> This is all kind of moot if we guarantee that all supported compilers
+> will never tear accesses up to machine word sizes.
+>
+> > >
+> > > If remote CPUs are to access the variable, is a non-locked access oka=
+y
+> > > in the first place?
+> >=20
+> > You use locked access when you need sequential consistency or an atomic
+> > RMW, and that's not it here. There's a single writer (currrent CPU) and
+> > IRQs don't play a part because the restore the previous value before
+> > returning. So it's race-free. All we need to ensure is that remote CPUs
+> > never see a partial write.
+> >=20
+> > Another take would be to subsume the prior smp_mb() into the decrement.
+> > Something like:
+> >=20
+> >   arch_fetch_add(&this_cpu(rcu_lock_cnt), RCU_LOCK_CNT_MAX);
+>
+> Kind of a nit (as I've already attempted this approach), but
+> arch_fetch_and_add() is not usable as-is here.  We we need to consume
+> the returned value, otherwise the compiler complains.
+>
+> ./arch/x86/include/asm/system.h:189:6: error: value computed is not used =
+[-Werror=3Dunused-value]
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+(void)arch_fetch_and_add() would shut up the warning, but...
 
-One nit:
+>
+> Could do:
+>
+> unsigned int prev =3D arch_fetch_and_add(&this_cpu(rcu_lock_cnt), -1);
+> ASSERT(prev > 0);
+>
+> > This would make the decrement itself atomic (through a locked insn), bu=
+t
+> > ensure sequential consistency as well, thus removing the need for the
+> > prior barrier. It's trickery through twos complement to behave like a u=
+nit
+> > decrement.
+> >=20
+> > My point isn't so much the "how" (should be obvious by now there's many
+> > ways), but to not use ACCESS_ONCE() where an atomic read or write was
+> > meant. Not necessarily a locked instruction. Just atomic.
+>
+> I don't have a strong opinion of using smp_mb() vs
+> arch_fetch_and_add().  I think smp_mb() expresses the intention
+> better, and avoids explicitly using a locked instruction, which is not
+> required here.
 
-> Changes in v8:
->  - vintc_reserve_virq(): return an error code instead of a bool: 0 on
->    success, -EEXIST when the vIRQ has already been reserved (which
->    legitimately happens for an IRQ shared between devices) and -ERANGE
->    when the vIRQ is outside the range the vINTC provides. Document the
->    function and its return values.
->  - vintc_reserve_virq(): mark it __overlay_init, as its only caller
->    map_irq_to_domain() is __overlay_init too. Add the <xen/dt-overlay.h>
->    and <xen/errno.h> includes this needs.
->  - map_irq_to_domain(): check the return value of vintc_reserve_virq()
->    and propagate anything but -EEXIST. Otherwise the IRQ would end up
->    routed to the domain without domain_vintc_deinit() ever releasing it
->    again. Update the stale comment accordingly.
->  - domain_vintc_deinit(): only walk used_irqs and free it if it has
->    actually been allocated. domain_vintc_init() can fail after the vINTC
->    itself has been allocated, leaving used_irqs NULL.
->  - irq.c: split the body of release_irq() into two helpers:
->    irq_detach_action(), which removes the action matching dev_id from
->    desc->action with desc->lock held, and irq_release_action(), which
->    waits for a handler still running on another CPU and frees the action
->    with desc->lock dropped. Both document the locking rules they rely on.
->    release_irq() is now just a wrapper around the two.
->  - release_guest_irq(): use irq_detach_action()/irq_release_action()
->    instead of open-coding __clear_bit(_IRQ_GUEST, ...) followed by
->    release_irq(), which looked the action up by dev_id a second time.
->  - release_guest_irq(): drop the -EBUSY restriction that only allowed
->    unrouting from a dying domain. Detaching the action under desc->lock
->    now closes the window this was working around.
->  - route_irq_to_guest(): on the intc_route_irq_to_guest() failure path,
->    detach the action while desc->lock is still held and only release it
->    after the lock has been dropped, instead of dropping the lock first
->    and calling release_irq().
->  - route_irq_to_guest(): initialise desc at its declaration.
->  - irq_get_guest_info(): use ASSERT(desc->action) instead of
->    ASSERT(desc->action != NULL).
+... I agree. My point was rather on ACCESS_ONCE() avoidance. Let that be
+for now, it's clearly meat for another barbequeue.
 
-Along the lines of this, and in line with ...
+Cheers,
+Alejandro
 
-> +/* Route an IRQ to a specific guest */
-> +int route_irq_to_guest(struct domain *d, unsigned int virq,
-> +                       unsigned int irq, const char *devname)
-> +{
-> +    struct irq_guest *info;
-> +    struct irq_desc *desc = irq_to_desc(irq);
-> +    unsigned long flags;
-> +    int retval = 0;
-> +
-> +    if ( d->is_dying )
-> +        return -EINVAL;
-> +
-> +    info = xvzalloc(struct irq_guest);
-> +    if ( !info )
+>
+> Thanks, Roger.
 
-... e.g. this, ...
-
-> +        return -ENOMEM;
-> +
-> +    info->d = d;
-> +    info->virq = virq;
-> +
-> +    info->action.dev_id = info;
-> +    info->action.name = devname;
-> +
-> +    spin_lock_irqsave(&desc->lock, flags);
-> +
-> +    /*
-> +     * If the IRQ is already used by someone
-> +     *  - If it's the same domain -> Xen doesn't need to update the IRQ desc.
-> +     *  For safety check if we are not trying to assign the IRQ to a
-> +     *  different vIRQ.
-> +     *  - Otherwise -> For now, don't allow the IRQ to be shared between
-> +     *  Xen and domains.
-> +     */
-> +    if ( desc->action != NULL )
-
-... this would more consistently be "if ( desc->action )". I think I'll take
-the liberty to adjust this while committing.
-
-Jan
 
