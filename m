@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB8CCA5FC5
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 13:59:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437321.1656177 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3529ACA5FC5
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 14:01:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437328.1656185 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBupr-0002Fw-87; Wed, 30 Sep 2026 13:59:03 +0000
+	id 1xBusM-0003pe-IW; Wed, 30 Sep 2026 14:01:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437321.1656177; Wed, 30 Sep 2026 13:59:03 +0000
+Received: by outflank-mailman (output) from mailman id 1437328.1656185; Wed, 30 Sep 2026 14:01:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBupr-0002Fp-34; Wed, 30 Sep 2026 13:59:03 +0000
-Received: by outflank-mailman (input) for mailman id 1437321;
- Wed, 30 Sep 2026 13:59:02 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBupq-0002Fj-EG
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 13:59:02 +0000
+	id 1xBusM-0003pX-FQ; Wed, 30 Sep 2026 14:01:38 +0000
+Received: by outflank-mailman (input) for mailman id 1437328;
+ Wed, 30 Sep 2026 14:01:37 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBusL-0003pR-0z
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 14:01:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBupp-006gEo-QU
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 15:59:01 +0200
+ id 1xBusK-00GJ8X-DM
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:01:36 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abd1590-2eae-0a2a0a5409dd-0a2a4504980a-42
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 15:59:01 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ id 6abd1634-bab6-0a2a0a5309dd-0a2a4504ada2-28
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 16:01:36 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abd15a5-b57f-0a2a45040019-4a7de18cde87-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 15:59:01 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49ff9621c5dso31320015e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 06:59:01 -0700 (PDT)
+ id 6abd1640-b57f-0a2a45040019-4a7de18da417-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 16:01:36 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49e7bcb94d3so40716435e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 07:01:36 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01e673d4asm1490755e9.11.2026.09.30.06.59.00
+ 5b1f17b1804b1-4a01e662378sm1438495e9.4.2026.09.30.07.01.34
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Sep 2026 06:59:00 -0700 (PDT)
+ Wed, 30 Sep 2026 07:01:34 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,63 +54,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790776741; x=1791381541; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790776895; x=1791381695; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4AVoby2Pk5ebO+BZZaGXziPTKUz6FI6vnFKWzX/1MG8=;
-        b=CBRMA3UUY+2x2VyrN5Hp8zu80eDA1gqyCpPjNdSjFVHrd9Soc+JD6ig2oImZfPCvfV
-         wMmt0j2CCEh+N1qXSLmtyw6IU2YI7MQf2bVgFfQ+g4JjSf9faCOmrhuxucj/nfeOcApO
-         s1d41OMS8y0Na0DA7py9IAHC3tQJLVZmorAHkSxFW9myKtNaeX5DwEV6ta1MLV4yaZgw
-         EaVi+7Qdjo1RTslf7hD3XgfecI6zkFX1yblRjkcs38hwz6K0mgTZ9sWm54QJwI6GOMcM
-         Cgba3GqRJmrx+ct4F95L6uS0M+KVZycyUweboC9MzWDVNkmlHwq/2nx2++l1IwxPAZIV
-         5YaA==
+        bh=GMz+0u6OX+qPEkulAbOvDLCVkVpYcFFNKq8zzaNaz9c=;
+        b=cJMQEVhyW/+u46Hr4wMVVwWjNxn3npY+hOCy2UT6aYUBjjreMVaDuIKRbCGAZMee8w
+         SkKqtoCuRnGeTKKTJ9hSjIWaQCHAVVDO+6AoT5xCw7FKuu4TgculkYGxmtsQy0Jrn7u+
+         7cz9dAjt1eQzMqcFISnMz3WDI8SZc12zm6CD5clCqJNdmzAZoOUWy9JOgattLuIhP0P7
+         OHihhkrbaKztkfcFlVqdaP4FdCl6NgJ8FB2cVsadgvnAdSjb7fqnQIG9vLGuh88ozDt+
+         +s+v6BEsjQl7l14zKiEZaqaA0+b1HhNIGv46CJWSIXG75ekYifEDOw+60PMqiVHUt4fx
+         1IKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790776741; x=1791381541;
+        d=1e100.net; s=20260707; t=1790776895; x=1791381695;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4AVoby2Pk5ebO+BZZaGXziPTKUz6FI6vnFKWzX/1MG8=;
-        b=jqqOqDOobDVmwBozyXMcZu/VfoqwgdYAyUYplLrjb++t0CoW3VEodl4N1xssDzqcTC
-         1RWXgCh5Cwgbx2Y8mGM56cXEyulXhndILEWa/wZV4q96z6qjrUYWBlFvM3eZFLYUaIK7
-         8ES0cbZ/wGVsQQKNPHCimB2WS2o+Ls3UHwDLjOfnxZ6kw+LUjrbu9MEITT3tbvzMp1Mq
-         OtNXmJkc5cp1vbDUc8aFE8PtZj9LFgczd2jBThABrZpVFy0bkaa67XGXVbaxVFiltT/K
-         knroBw1g7CyIrf9MgBAbFxriD/l3M3+T2+i9L5rrWme0v2Nb0YqL0VzHwAUIOLo+WNjN
-         kpXw==
-X-Forwarded-Encrypted: i=1; AKwUvBxXsIGYU4Fk0tqNT35epNi+tg72f3mOvguZFmI7fLdrBAPZbFgCVrqwlpT8h4uAOJjPXJiTLnI5pZs=@lists.xenproject.org
-X-Gm-Message-State: AFuF++n6YhFO31sEXtNhw7uWvV/Uil3YKS8Nvh4EfLdR3NpBHDDqE+kY
-	pbIrm6g9/s8ZYTxppsIS2CseBAmYWgKdUr30/4x2MHPzC+LqwbQux51BFPZC9AFVBg==
-X-Gm-Gg: AYBFou2E2kkF0/3c+HVQA4spzPGo+f3YMBK0GzNxPyKIW9ZY6o4T8OWeqhDnXnmYPgV
-	omT6pL2vS3hHHyM/MPT1N7m28k1lQiopCneOCHMgdK+S2IRktl4cMRF+geIh9vVwFE3Bc9dVkf/
-	8bLdcFa4tBfHLfgysffxIqGSpMYARlab0yPFnSj9540GHNYrCFSVJHK1fhKbm4HBmKdCwrDv2ii
-	lWP80m/7vAUG0Wzz2DbcIsb4cqAOnN8IJNzXVRfLqOrH0cZRu6OXOlN6BDkibKStys7//TdCX1j
-	WLC7iarChymRqCOwiKBk9JYxb4HkLDA/IGTPFTZXcxjPmmELmhlHLGVU/TQ2FUF7cyRi+m22E1c
-	5y2IMw/dVc5MG0lZNAHklObkGrRdMbGseZeEF4JgsHExWaSd/bNUBa14QMQ75/ldvCe10cxVhsP
-	I4v9CfaSOVZaYPcYSXow5PDmlXHc3JtDnSqxP4+YS5tlJtLNnKwpfdAi4kLJMfalQtD2l0vqNPM
-	d/dFkLcD6P+OpHBxhJwhE21lskOzzzAo5a6zHpY+TLpPBcVh33mrClPvhywOQ==
-X-Received: by 2002:a05:600c:348f:b0:49d:10d6:fd55 with SMTP id 5b1f17b1804b1-4a01adb2ae3mr28428165e9.1.1790776741148;
-        Wed, 30 Sep 2026 06:59:01 -0700 (PDT)
-Message-ID: <2e6f8a8e-7b02-41b4-812a-fa71c48ac48c@suse.com>
-Date: Wed, 30 Sep 2026 15:58:59 +0200
+        bh=GMz+0u6OX+qPEkulAbOvDLCVkVpYcFFNKq8zzaNaz9c=;
+        b=RPs7BCjhjuLB6ylyqCL9Y5PxrXaCGpepWS+xkVedCwkI+HAkoUA94t5ptcXaTmDDJy
+         FvPHWf/YB5RWE+jIUxX4IoMOsRGm4DMStZ9ie6+FVLkP9SNCgTL3NKpdNjHf15uR2Cym
+         VGklmzi/BBuG3NO8yUhaoUxPVgYBfSfnJOZZHmgE8Vua7PxXRoBVid7ey15sY2wXmGUc
+         bktkKYqpN9OfLH9FAD68Rn7QEJ0pFp/9Nfkia780xSHvGySX4WnYtRRxPU8BEgm1bXYd
+         RxiH/pgCcxWYMZulcti07AlWj2HzLhaNqrrvcZVrQdKSrI8vinS8aTVt2I9w/g6z70D8
+         KS9A==
+X-Forwarded-Encrypted: i=1; AKwUvBzhO13dIRoGkb5vPwyWAZsD92B0WKgDXhrftQ6WS1/RJ6g3AwiRA2JeYtQwJ4ZvRwQMWudpGjdrc7Q=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kmk84tfNS8JwUVjH32a1eJAMAC/jg1GTvgogl3XKruRt/oTEVK
+	xe4xf/6OcLzEr3BB/3twPjEOa2iLMTlzM6nJEVpzfEeMlq1g9zN84QUpffembLVl1g==
+X-Gm-Gg: AYBFou38nsqymiID0mWCwRkGdF/uzZFHcDCrj4YGgE5n9eckaFYTVH5B7Agtdqrs0pr
+	n9t3jnRXWgfliRJYVOxQDgjLzd47QTv4dJVpAmIGBFbpIUYqZGK7TUtAvxIw/TIUdgvx7u62V92
+	zfgFIFS55sMLhDdj/JDr6Sn4Dazs0HSPe5VmhG8C/uzGkKMLYhi+EUTXVZgWRupi2Tz5ZLXJCiR
+	83SE4CYpClS9gtklfr+3o8lnmxi407NmJ8+yPIv1S3FZus0SNVBEbSZMoq3S+uel3nYG5QQrrUA
+	s1Ump9SoyR16vXaQ0rAKM8yxpuhlCdDtKipcsvqWx/IllJiRqCg1dNw7IeUSgK7zCK9gn2ja8yu
+	fJ+qPJ9F2UNqHOfv4bT7XBucK24P6kA5Mbb4nSCpv7GgRSUQmPwXfUsXdm6wye6gLkbBsi2A5Qc
+	lxqt+/FQebF5lnRgcYOyzei7vj+1MEmCMWsRAEmdLKTgEDiUzcTa4k54RbzebQFP7bn1jD6zPmH
+	Hybh59veV8cJjLIVOYI+rJCV69Lk+4w3JMI8UatAYblhdP/uhk0LgvB0++cGA==
+X-Received: by 2002:a05:600c:1912:b0:4a0:1d24:dee3 with SMTP id 5b1f17b1804b1-4a01d24e165mr6789915e9.17.1790776894894;
+        Wed, 30 Sep 2026 07:01:34 -0700 (PDT)
+Message-ID: <232f5f5f-a87d-4407-8175-ed164c9e1a74@suse.com>
+Date: Wed, 30 Sep 2026 16:01:33 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/6] xen/riscv: fix A/D bit handling in G-stage
- mappings
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH 1/3] vm_event: svm: Don't BUG() when enabling intercept on
+ hypervisor MSR
+To: Teddy Astie <teddy.astie@vates.tech>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>, xen-devel@lists.xenproject.org,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>
-References: <1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech>
- <1790699585.8631fc262581453bbf619ec5b2062170.1a0ee0340f9000b504@vates.tech>
- <c2d30da2-6844-4df2-9029-238f5ce25838@suse.com>
- <3419a5a5-fcb9-4222-9045-1acdd9609021@gmail.com>
+ Jason Andryuk <jason.andryuk@amd.com>, xen-devel@lists.xenproject.org
+References: <1790250881.8631fc262581453bbf619ec5b2062170.1a0d344933500072c4@vates.tech>
+ <1790250991.8631fc262581453bbf619ec5b2062170.1a0d3463da200072c4@vates.tech>
+ <1abe6540-e92a-4d11-90e0-a3c13c9b0a97@suse.com>
+ <1790773030.8631fc262581453bbf619ec5b2062170.1a0f263ed240003f66@vates.tech>
+ <ee526731-509d-4802-8470-2dec9c5700b7@suse.com>
+ <1790775549.8631fc262581453bbf619ec5b2062170.1a0f28a5dec0003f66@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -136,92 +133,90 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <3419a5a5-fcb9-4222-9045-1acdd9609021@gmail.com>
+In-Reply-To: <1790775549.8631fc262581453bbf619ec5b2062170.1a0f28a5dec0003f66@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1790776741-C18D1B50-943A890F/10/78276251493
+X-purgate-ID: tlsNG-ebf023/1790776896-C32CCB50-E404079D/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 4416
+X-purgate-size: 3486
 
-On 30.09.2026 15:53, Oleksii Kurochko wrote:
-> On 9/30/26 2:20 PM, Jan Beulich wrote:
->> On 29.09.2026 18:32, Baptiste Le Duc wrote:
->>> --- a/xen/arch/riscv/p2m.c
->>> +++ b/xen/arch/riscv/p2m.c
->>> @@ -586,42 +586,24 @@ static inline void p2m_clean_pte(pte_t *p, bool clean_cache)
->>>   
->>>   static void p2m_set_pte_flags(pte_t *e, p2m_type_t t)
->>>   {
->>> +    bool svade = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade);
->>> +    bool svadu = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu);
->>> +
->>>       e->pte &= ~PTE_ACCESS_MASK;
->>>   
->>>       e->pte |= PTE_USER;
->>>   
->>>       /*
->>> -     * Two schemes to manage the A and D bits are defined:
->>> -     *   • The Svade extension: when a virtual page is accessed and the A bit
->>> -     *     is clear, or is written and the D bit is clear, a page-fault
->>> -     *     exception is raised.
->>> -     *   • When the Svade extension is not implemented, the following scheme
->>> -     *     applies.
->>> -     *     When a virtual page is accessed and the A bit is clear, the PTE is
->>> -     *     updated to set the A bit. When the virtual page is written and the
->>> -     *     D bit is clear, the PTE is updated to set the D bit. When G-stage
->>> -     *     address translation is in use and is not Bare, the G-stage virtual
->>> -     *     pages may be accessed or written by implicit accesses to VS-level
->>> -     *     memory management data structures, such as page tables.
->>> -     * Thereby to avoid a page-fault in case of Svade is available, it is
->>> -     * necessary to set A and D bits.
->>> -     *
->>> -     * TODO: For now, it’s fine to simply set the A/D bits, since OpenSBI
->>> -     *       delegates page faults to a lower privilege mode and so OpenSBI
->>> -     *       isn't expect to handle page-faults occured in lower modes.
->>> -     *       By setting the A/D bits here, page faults that would otherwise
->>> -     *       be generated due to unset A/D bits will not occur in Xen.
->>> -     *
->>> -     *       Currently, Xen on RISC-V does not make use of the information
->>> -     *       that could be obtained from handling such page faults, which
->>> -     *       could otherwise be useful for several use cases such as demand
->>> -     *       paging, cache-flushing optimizations, memory access tracking,etc.
->>> +     * A RISC-V implementation can choose to either:
->>> +     * 1) Update 'A' and 'D' PTE bits in hardware.
->>> +     * 2) Generate page fault when 'A' and/or 'D' PTE bits are not set so that
->>> +     *    software can update these bits.
->>>        *
->>> -     *       To support the more general case and the optimizations mentioned
->>> -     *       above, it would be better to stop setting the A/D bits here and
->>> -     *       instead handle page faults that occur due to unset A/D bits.
->>> +     * Xen supports both options mentioned above: unless the platform guarantees
->>> +     * (1), i.e. only Svadu is present, set 'A' and 'D' so that (2) never
->>> +     * faults.
->>>        */
->>> -    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
->>> +    if ( !svadu || svade )
->>>           e->pte |= PTE_ACCESSED | PTE_DIRTY;
+On 30.09.2026 15:39, Teddy Astie wrote:
+> Le 30/09/2026 à 15:08, Jan Beulich a écrit :
+>> On 30.09.2026 14:57, Teddy Astie wrote:
+>>> Le 30/09/2026 à 11:16, Jan Beulich a écrit :
+>>>> On 24.09.2026 13:56, Teddy Astie wrote:
+>>>>> svm_msrbits() only cover MSRs in the ranges specified in APM and returns
+>>>>> NULL for all the other ones (i.e hypervisor range), which triggers the
+>>>>> BUG_ON() that follows.
+>>>>>
+>>>>> APM specifies that MSR outside the architectural and AMD specific ranges
+>>>>> are unconditionally intercepted, hence don't require any specific handling
+>>>>> by SVM logic, fix this by ignoring cases when msr_bit is NULL.
+>>>>>
+>>>>> This is only reachable with CONFIG_VM_EVENT using XEN_DOMCTL_MONITOR_EVENT_MOV_TO_MSR
+>>>>> to configure a MSR intercept in the hypervisor range (0x40000000–0x40001fff).
+>>>>
+>>>> Hence imo it is wrong to drop the sanity check altogether. See below.
+>>>>
+>>>> Also, nit: Description lines want limiting to 75 chars.
+>>>>
+>>>>> --- a/xen/arch/x86/hvm/svm/svm.c
+>>>>> +++ b/xen/arch/x86/hvm/svm/svm.c
+>>>>> @@ -237,7 +237,9 @@ void svm_intercept_msr(struct vcpu *v, uint32_t msr, int flags)
+>>>>>        const struct domain *d = v->domain;
+>>>>>    
+>>>>>        msr_bit = svm_msrbit(v->arch.hvm.svm.msrpm, msr);
+>>>>> -    BUG_ON(msr_bit == NULL);
+>>>>> +    if ( msr_bit == NULL )
+>>>>> +        return;
+>>>>
+>>>> Imo the function wants to return an error here, which all callers
+>>>> except the one you mention check. I.e. the BUG_ON() would be moved
+>>>> out to most callers (alternatively the one caller could range-check
+>>>> the MSR itself). Right now for introspection intercepts can only be
+>>>> enabled, hence why for that use "all other MSRs are intercepted
+>>>> anyway" is fine. Suppose the inverse operation would be possible as
+>>>> well: Then indicating "success" back to the caller when accesses to
+>>>> the requested MSR are still intercepted would be wrong.
+>>>>
+>>>
+>>> IIUC, you're suggesting to report to the caller that the hardware
+>>> doesn't cover it, such as we can detect cases where we accidentally pass
+>>> a bogus MSR index that is outside of hardware ranges.
+>>>
+>>> In the VM introspection case, we could ignore it since we're only
+>>> interested on intercepts, where outside hardware ranges would always be
+>>> intercepted.
+>>>
+>>> Did I got the idea correctly ?
 >>
->> I may have asked this already when the original conditional was introduced:
->> What use is it to leave A and D clear, when we don't otherwise consume the
->> bits? This way hardware has to issue more (atomic) writes, i.e. performance
->> suffers for no gain.
+>> Yes. Just that the more I think about it, the more I prefer the alternative
+>> that I also mentioned. Not the least because it's less churn.
+>>
 > 
-> It will be done only once, won't it? After that, if the A/D bits aren't 
-> cleared, there shouldn't be any performance impact, so it will basically 
-> behave the same as setting the A/D bits in software.
+> One of the idea would be to check monitored_msr() (somewhat like what 
+> you proposed for VMX) so that the VM event case is covered, but we 
+> ASSERT (or BUG_ON ?) in the other cases if we pass a unexpected MSR to 
+> this function.
 > 
-> The idea was that, if Svadu is available, it should be the hardware's 
-> job to set the A/D bits. That way, when the A/D bits eventually start 
-> being used for some purpose in Xen, we won't miss an unconditional write 
-> of the A/D bits when Svadu is available.
+> diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+> index 71e48351f2..be866b9055 100644
+> --- a/xen/arch/x86/hvm/svm/svm.c
+> +++ b/xen/arch/x86/hvm/svm/svm.c
+> @@ -236,7 +236,12 @@ void svm_intercept_msr(struct vcpu *v, uint32_t 
+> msr, int flags)
+>       const struct domain *d = v->domain;
 > 
-> If you think it's enough to just have the A/D bits set unconditionally, 
-> I'm okay with that, and we can go that way.
+>       msr_bit = svm_msrbit(v->arch.hvm.svm.msrpm, msr);
+> -    BUG_ON(msr_bit == NULL);
+> +    if ( !msr_bit )
+> +    {
+> +        ASSERT(monitored_msr(d, msr));
+> +        return;
+> +    }
 
-I think starting simple (i.e. unconditional) here is the way to go. Making
-the setting of one or both flags conditional can be left to whenever that
-would become a necessity. Note that on x86 we haven't seen a need in all
-the time (for Xen's own page tables that is).
+Just that ASSERT() only covers debug builds and BUG_ON() is too heavy on
+release ones: There's no reason to kill an entire host because of this.
 
 Jan
 
