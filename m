@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B4E69CA5FC7
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 14:38:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437380.1656267 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A3BA0CA5FC5
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 14:38:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437384.1656275 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBvRQ-0003cQ-LE; Wed, 30 Sep 2026 14:37:52 +0000
+	id 1xBvSC-00048Q-Ss; Wed, 30 Sep 2026 14:38:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437380.1656267; Wed, 30 Sep 2026 14:37:52 +0000
+Received: by outflank-mailman (output) from mailman id 1437384.1656275; Wed, 30 Sep 2026 14:38:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBvRQ-0003cJ-I2; Wed, 30 Sep 2026 14:37:52 +0000
-Received: by outflank-mailman (input) for mailman id 1437380;
- Wed, 30 Sep 2026 14:37:50 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBvRO-0003bx-Hb
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 14:37:50 +0000
+	id 1xBvSC-00048J-Pl; Wed, 30 Sep 2026 14:38:40 +0000
+Received: by outflank-mailman (input) for mailman id 1437384;
+ Wed, 30 Sep 2026 14:38:39 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBvSB-000487-0e
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 14:38:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBvRN-00HUbi-R7
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:37:49 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xBvS9-00CiIA-V2
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:38:37 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abd1eb7-8faa-0a2a0a5109dd-0a2a4508ae9c-14
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 16:37:49 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abd1ee5-bab6-0a2a0a5309dd-0a2a4509de70-32
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 16:38:37 +0200
+Received: from [74.125.225.98] (helo=mail-wr2-f34.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abd1ebd-f659-0a2a45080019-4a7de18cb101-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 16:37:49 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49fff72474fso23706705e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 07:37:49 -0700 (PDT)
+ id 6abd1eed-be1a-0a2a45090019-4a7de162ac43-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 16:38:37 +0200
+Received: by mail-wr2-f34.google.com with SMTP id
+ ffacd0b85a97d-48affb828f1so880983f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 07:38:37 -0700 (PDT)
 Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
  [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01ca310dbsm11836705e9.0.2026.09.30.07.37.48
+ ffacd0b85a97d-48b029edea4sm4307062f8f.22.2026.09.30.07.38.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Sep 2026 07:37:48 -0700 (PDT)
+ Wed, 30 Sep 2026 07:38:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,238 +54,207 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790779069; x=1791383869; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790779117; x=1791383917; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=PEVXC6txBmRIpRNYGZRW3Vk8SYDMUdxPR8+kI5kPnOQ=;
-        b=PhWwv5Bx+kOenX4SVTp1NSvAz+AAaYlMBHOB3TUyGZ1WakNE89123Svv1kk1OL4dpe
-         SWs75Qia4iZj+BLv5kie91AUrPjUYkvN6Uw57iCbtG5bPbKoiTyOOaWhTF0MrExaTv5o
-         iy0zddyQHrvB1NimBofESYJl8yICQlxaYNH+AhVF1ZvF/UZgcf8inYZWIh9cBGH/HsvR
-         xm1cTav2/ZRPKEE1u4qJajUseQxVEAp87PdbNxLOFcT3H6YAvdPf2wLhXogHy3IcOBN6
-         Z/l2D/HLC9vBraAJXuJf8m1h8tC9GEmkPXqvrjYwNTkdoUFA7PQSoPJbpFbRxUvTEnnV
-         9N8A==
+        bh=iBf0sKBAYGIevVR2sKEuKTDrhc+45zCJhlPo48JzdmI=;
+        b=cD8U+sx4eIPft6J3fveYDYzoz9dj2XHz0W0CN/E5bYbj2/f8s8j11OBOJDNH5zQzut
+         LwW7LVDt6EELS3PeOode83gojQOi1LC4pmN++zk+xjI6VfZhNJMaXvX3Ir56oycIHw+A
+         D0Dg1cJYj2xPdNR6av/5Pb0kLxcjLMZ8Iv0cu6419rrGXpJs7ue1nrhB0aiPUqsHftJj
+         5p5CBXYZ25IIy+WRRKKgY3aN88/pvFeR71cOdYMN6Ll525g/zj9ReFYCPIsm0qviJnRx
+         2ybXXmahvERDauy7sB99pJJXHTrMs6xFPHOXy3EjbUyMkGItRuwi+9FoPwnuiTiEjG2r
+         L6aQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790779069; x=1791383869;
+        d=1e100.net; s=20260707; t=1790779117; x=1791383917;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=PEVXC6txBmRIpRNYGZRW3Vk8SYDMUdxPR8+kI5kPnOQ=;
-        b=DFMeduNEYW4j1YYN4h5eCqdLzmuRy/zKLc505f3BtG5YQj5ubiBHzhpJwV4Ebw27fT
-         nMRmiVJqj7k2tnifJ858fdTEJuSLBIQsUgozeKSCoCqG6zoYWNgyvo3Cveb+r6zMGGnt
-         GHP+y9Ipqfy+7Me2CaQ9mUrJUQVZoOfn1YJpTH/6uX4oK+YmMgSFsiwWLOwpsQPU3Vx8
-         3R76gljqGWjfbzfk3f+KWlARjUrnPvyHbNUZuP0S6WIPahUurk7LL2kiDkaWvjLJq0H0
-         7wuNNt3W5gIQ6lsDOX48k5sUEo+4avRWjcVDl+eJYOc4Gy1LjQ4hyrlG/NHNHpxCBoOv
-         Vgmw==
-X-Forwarded-Encrypted: i=1; AKwUvBxj8XAdPzKq1cFIklydwDfm9wghfgS2o6Z0Lteq9ymmvoqtQB3H+/aT8IX5qdUQlOCwa2qO08LK9SM=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mxAHZ0+29qWh5FfSxMj4brkdZ7LFKUsiULsdzz25k8o9qkJzUM
-	lCeLFZoUUF+fOHducaj34hTtl4Q+tGa6aaJ3Nkd1lOCH1JUuaW3K0K8b
-X-Gm-Gg: AYBFou0j+SmAGuo10WMGbhj/qYPdIt1A0jECWhiM6FtpAdQdLXL6qje6Vr0znx01WOJ
-	I5si2oyOIrfdg88iqGvjIHMqsTZkWx8u4BAEil+wzPLedQKvbfUTIKhIixJnna8X5cyzEg165hs
-	9wTpIZGW6bXjNBIeZFH2rPHA2FSZsl/pzdPI+SLzAgkUkUlP5XjCxvTghIjaZuHzpltQEFcfEmQ
-	R0GOGo5BAweSNcJVqiq+WiqQTrPUqZRFUldZ+2RYQ8BDu68eF6AmF4MJgNTpGiPA2/+B4b4NceD
-	rYWt3iOwQ70Lx1VjdTl/gQ1kn5v3gu8wAg2i/TIEl1X7HCqbLfaBMJ1iQsYfv2LK/ZePM9udm8e
-	Ed40253RnLLrlCmmLScomUpBBPpX4RpRbJb6kph4ikYOL7kXL3Gc1XjpOKmLHwiqlq4SMODwVkQ
-	9ZxhUCqgKPLB48T90pOf4IQW7ydm63D4+Lnx0fzpop42LhuJ9j5n+bH4pF53MgAeM7ptaM+8GXL
-	GCINKiA3GeAk4tDVUrghctCsDFsdwopRThjjJZclFQyiQsCdQ==
-X-Received: by 2002:a05:600c:5391:b0:4a0:1559:bafd with SMTP id 5b1f17b1804b1-4a01aff068emr25813525e9.8.1790779068978;
-        Wed, 30 Sep 2026 07:37:48 -0700 (PDT)
-Message-ID: <a69d8b8b-df60-40bb-b2cd-2c876a4b4829@gmail.com>
-Date: Wed, 30 Sep 2026 16:37:47 +0200
+        bh=iBf0sKBAYGIevVR2sKEuKTDrhc+45zCJhlPo48JzdmI=;
+        b=FqVsRLKjxs2gPVbNLlEvbr/RNBD3NL/LE02wFI0N1L8Ksx2RpCQ6cK1mUsDdyKXQqM
+         IS96oKesLne87cxP32MqwXdN/UJ9f/6D3FHGmvDcZb9/hoPhfrZ+WkC8eTfDPTDWiCGS
+         ZMTHItyTHo1Uvp8F0BULuwnFBhIX7yVS4TJBRi62Dr3eJ6cvSjaSyx92+EAAu6Aqawbo
+         Y0OOOGmOqFENhdw6V2FHPZ05eAaQrId5nbqknBgQ8t9AvhTrHFwqb54pc82dugoizIpf
+         sghY9bilbPVTsMqXmePXH6dl4sDooPXTAV9uJK90DlyF8DQ4vda/tc6lQfTBr/iv5xgD
+         +s+w==
+X-Forwarded-Encrypted: i=1; AKwUvBwE0Ld/FwTJE/K7dt7+8d7vHM1XBNjYCL5xEJRJIuCI2/RF1JzsYy6UzyStCi5rU1NV39OcwOeAPv0=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIpLJZdO63RCOXILpaRHtTYG7w6kZLVfIxJ+4axy4fKMQ9r4O3X
+	0RLfds0ktKVKHWFX2NyMOQeewHd0RdI32SROdHofEqoxbfrOLeCFWwjg
+X-Gm-Gg: AYBFou1D9AeJhQv4WRXwqwmmAK+Zc1FmDmzeEdgmYTP7OFPLQlkmTLbX2pTv8sVv33l
+	s8N9/hIHdQaWtlpveEfGjmhBOCTh7wz7uHrdBO+8kt2qfe24Rfdz4Jbiui0pxnEFt1lPpjdEEX/
+	JVfogP49SlhfbX5JoJQ2PDm12HqjOTdQZwrqBhzgJwqVrGVAmcBD5H8oHtWnx+IEjXROou3bAd8
+	CQVQTXahD5u8nwEEqJPbsENozJWdbLBUK8IvX+CDeByqcEPXkmVVgf0q5HPbrcaVHn3wvfmg/+M
+	peLefJn2XCzyee0Oh4BCkz/e0xQFLeDRuhCLq0VfZx7hPouebyj79KQXa1XMz8HApNtHj91T0ry
+	qBymSI4Uu2dP9w7iBKl2Wah0StFPG53VWIq56w+tdNiNSJvpag59TjCOuDJt3Xi4XPuJQg4cb1L
+	BPbt1/KOXJR8iR8OV2ubgEDGZ65h2jGMYb+e6zF+ml296QlvWV8u1UeUMhrZkL5eaYmK90qVmuV
+	1Ew+Kcx5Xl3wZdGBWPMtOjoxzPa8ZzqRMgeJnr2tcP/ghCuQg==
+X-Received: by 2002:a5d:5f87:0:b0:488:8a5d:ffc3 with SMTP id ffacd0b85a97d-48b024c57eamr3473142f8f.11.1790779116459;
+        Wed, 30 Sep 2026 07:38:36 -0700 (PDT)
+Message-ID: <9a3113c2-1c38-44d0-a41f-bc25de309b98@gmail.com>
+Date: Wed, 30 Sep 2026 16:38:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 4/6] xen/riscv: fix A/D bits in Xen's page-table
- mappings
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
+Subject: Re: [PATCH v10 1/5] xen/riscv: implement IRQ routing for device
+ passthrough
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
  Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>
-References: <1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech>
- <1790699586.8631fc262581453bbf619ec5b2062170.1a0ee034220000b504@vates.tech>
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ "Daniel P. Smith" <dpsmith@apertussolutions.com>,
+ xen-devel@lists.xenproject.org
+References: <cover.1790158750.git.oleksii.kurochko@gmail.com>
+ <99d3f072b0c4b97e2ebac8b227bd57f90e780605.1790158750.git.oleksii.kurochko@gmail.com>
+ <52703422-cc20-472d-96be-68d9a4f17fbc@suse.com>
 Content-Language: en-US
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1790699586.8631fc262581453bbf619ec5b2062170.1a0ee034220000b504@vates.tech>
+In-Reply-To: <52703422-cc20-472d-96be-68d9a4f17fbc@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1790779069-CCB7187B-480391EB/10/73395122804
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-bad1c0/1790779117-39CC7034-7D1A5367/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 7367
+X-purgate-size: 6461
 
 
 
-On 9/29/26 6:32 PM, Baptiste Le Duc wrote:
-> Xen does not handle page faults caused by clear A/D bits, so it presets
-> them when creating PTEs. pt_update_entry() does so, but
-> setup_initial_mapping() (the boot page tables) and arch_pmap_map() (the
-> fixmap) build leaf PTEs directly without going through it. 
+On 9/30/26 1:56 PM, Jan Beulich wrote:
+> On 23.09.2026 12:26, Oleksii Kurochko wrote:
+>> dom0less device passthrough requires granting guest domains access to
+>> device interrupts.  Introduce map_device_irqs_to_domain() to enumerate
+>> a DT node's interrupt properties, skipping those not owned by
+>> the primary interrupt controller (as at the moment I haven't seen usages
+>> of it), and map_irq_to_domain() to grant domain access and configure
+>> Xen's interrupt descriptor accordingly. Sharing IRQ between domains is
+>> rejected.
+>>
+>> Both map_irq_to_domain() and map_device_irqs_to_domain() are marked
+>> __overlay_init, mirroring Arm: without CONFIG_OVERLAY_DTB this expands to
+>> __init, so the functions are init-only and need no XSM check; with
+>> CONFIG_OVERLAY_DTB they become runtime-callable, but the only runtime
+>> entry point is dt_overlay_domctl(), which performs the XSM checks at the
+>> domctl layer.  RISC-V does not wire up DT overlay yet, so today these are
+>> strictly __init; if/when overlay support is added, the domctl-level XSM
+>> gating must be added together with it, as on Arm.
+>>
+>> route_irq_to_guest() and release_guest_irq() manage irq_desc ownership
+>> for guest-assigned interrupts.  Each assignment carries a small irq_guest
+>> structure as irqaction::dev_id, recording the owning domain and virtual
+>> IRQ number which is 1:1 mapped to physical IRQ number.  A per-domain
+>> vIRQ allocation bitmap (used_irqs in struct vintc), managed by
+>> vintc_reserve_virq(), prevents the same vIRQ being claimed twice.
+>>
+>> Host and guest interrupts may differ in some operations, EOI timing in
+>> particular: a host IRQ is completed once Xen's handler runs, whereas a
+>> passthrough IRQ must defer the physical completion until the guest issues
+>> its own EOI, otherwise a still-asserted level line would immediately
+>> retrigger and storm.  Hence a separate guest hw_irq_controller instance,
+>> aplic_guest_irq_type, rather than an alias of the host one.
+>>
+>> Its callbacks are BUG_ON("unimplemented") for now.  The only interrupt
+>> controller configuration supported so far is APLIC in MSI mode together
+>> with IMSIC, where guest interrupts are delivered by hardware straight to
+>> the guest's interrupt file, bypassing do_IRQ() and thereby Xen entirely.
+>> The _IRQ_GUEST branch in do_IRQ() is left as BUG() for the same reason.
+>> Real callbacks, .end() in particular, become necessary once a platform
+>> without direct IMSIC delivery has to be supported, where Xen traps the
+>> interrupt and injects it into the guest itself.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> 
+> Acked-by: Jan Beulich <jbeulich@suse.com>
 
-If I am not mistaken then not all places are mentioned here:
-
-... does so, but three places
-build leaf PTEs directly without going through it:
-setup_initial_mapping() (the boot page tables), check_pgtbl_mode_support()
-(the temporary root entry used to probe SATP mode support) and
-arch_pmap_map() (the fixmap).
-
-Without Svadu,
-> both would fault on first access.
-
-After this I think it makes sense to add also about 
-check_pgtbl_mode_support():
-
-For check_pgtbl_mode_support() the fault happens on the
-instruction fetch right after the CSR_SATP write, before any trap
-handler is set up.
+Thanks.
 
 > 
-> Add PTE_ACCESSED and PTE_DIRTY to PAGE_HYPERVISOR_RO, and build
-> PAGE_HYPERVISOR_RW and PAGE_HYPERVISOR_RX on top of it. PTE_DIRTY is set in
-> all cases for consistency with pt_update_entry() which sets it at runtime.
+> One nit:
 > 
-> This fixes arch_pmap_map() for free, since it already builds its PTE from
-> PAGE_HYPERVISOR_RW. Switch setup_initial_mapping() to use these macros for
-> its default, text and rodata permissions, and for the temporary root entry
-> built by check_pgtbl_mode_support(), instead of the equivalent raw bit
-> lists.
-
-... but you added PTE_ACCESSED | PTE_DIRTY to PAGE_HYPERVISOR_* so it 
-isn't really "equivalent raw bit lists".
-
-So it seems like this part should be dropped. My suggestion is ...
-
-
-  The latter drops PTE_WRITABLE, going from RWX to RX, but this is
-> harmless, as that entry only has to make the current instruction stream
-> fetchable between the two CSR_SATP writes used to probe SATP mode support,
-> and nothing writes through it.
-
-...
-
-This fixes arch_pmap_map() for free, since it already builds its PTE 
-from PAGE_HYPERVISOR_RW. Switch setup_initial_mapping() to use these 
-macros for its default, text and rodata permissions, and 
-check_pgtbl_mode_support() to use PAGE_HYPERVISOR_RX for its temporary 
-root entry. The latter drops PTE_WRITABLE, going from RWX to RX, but 
-this is harmless, as that entry only has to make the current instruction 
-stream fetchable between the two CSR_SATP writes, and nothing writes 
-through it.
-
+>> Changes in v8:
+>>   - vintc_reserve_virq(): return an error code instead of a bool: 0 on
+>>     success, -EEXIST when the vIRQ has already been reserved (which
+>>     legitimately happens for an IRQ shared between devices) and -ERANGE
+>>     when the vIRQ is outside the range the vINTC provides. Document the
+>>     function and its return values.
+>>   - vintc_reserve_virq(): mark it __overlay_init, as its only caller
+>>     map_irq_to_domain() is __overlay_init too. Add the <xen/dt-overlay.h>
+>>     and <xen/errno.h> includes this needs.
+>>   - map_irq_to_domain(): check the return value of vintc_reserve_virq()
+>>     and propagate anything but -EEXIST. Otherwise the IRQ would end up
+>>     routed to the domain without domain_vintc_deinit() ever releasing it
+>>     again. Update the stale comment accordingly.
+>>   - domain_vintc_deinit(): only walk used_irqs and free it if it has
+>>     actually been allocated. domain_vintc_init() can fail after the vINTC
+>>     itself has been allocated, leaving used_irqs NULL.
+>>   - irq.c: split the body of release_irq() into two helpers:
+>>     irq_detach_action(), which removes the action matching dev_id from
+>>     desc->action with desc->lock held, and irq_release_action(), which
+>>     waits for a handler still running on another CPU and frees the action
+>>     with desc->lock dropped. Both document the locking rules they rely on.
+>>     release_irq() is now just a wrapper around the two.
+>>   - release_guest_irq(): use irq_detach_action()/irq_release_action()
+>>     instead of open-coding __clear_bit(_IRQ_GUEST, ...) followed by
+>>     release_irq(), which looked the action up by dev_id a second time.
+>>   - release_guest_irq(): drop the -EBUSY restriction that only allowed
+>>     unrouting from a dying domain. Detaching the action under desc->lock
+>>     now closes the window this was working around.
+>>   - route_irq_to_guest(): on the intc_route_irq_to_guest() failure path,
+>>     detach the action while desc->lock is still held and only release it
+>>     after the lock has been dropped, instead of dropping the lock first
+>>     and calling release_irq().
+>>   - route_irq_to_guest(): initialise desc at its declaration.
+>>   - irq_get_guest_info(): use ASSERT(desc->action) instead of
+>>     ASSERT(desc->action != NULL).
 > 
-> Drop the now-redundant PTE_LEAF_DEFAULT, since converting the last
-> open-coded site above leaves it with no user outside page.h itself.
+> Along the lines of this, and in line with ...
 > 
-> pte_is_table() and pte_is_mapping() both assert that a PTE doesn't use one
-> of the two reserved encodings, (V=1, W=1, R=0) and (V=1, X=1, W=1, R=0), by
-> masking it with PAGE_HYPERVISOR_RW. Now that PAGE_HYPERVISOR_RW also
-> carries A and D, a reserved PTE with A or D set would no longer be caught.
-> Mask with the V, R and W bits explicitly instead, and factor the check out
-> into pte_is_reserved().
+>> +/* Route an IRQ to a specific guest */
+>> +int route_irq_to_guest(struct domain *d, unsigned int virq,
+>> +                       unsigned int irq, const char *devname)
+>> +{
+>> +    struct irq_guest *info;
+>> +    struct irq_desc *desc = irq_to_desc(irq);
+>> +    unsigned long flags;
+>> +    int retval = 0;
+>> +
+>> +    if ( d->is_dying )
+>> +        return -EINVAL;
+>> +
+>> +    info = xvzalloc(struct irq_guest);
+>> +    if ( !info )
 > 
-> Fixes: e66003e7be19 ("xen/riscv: introduce setup_initial_pages")
-> Assisted-by: Claude:claude-opus-5
-> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-> ---
-> Changes since v2:
-> - add fixes commit ref.
-> - add A/D bits to PAGE_HYPERVISOR_RO and derive PAGE_HYPERVISOR_RW/RX
->    from it for consistency with runtime.
-> - introduce pte_is_reserved() to factor out the reserved-encoding assert
->    shared by pte_is_table() and pte_is_mapping().
-> - reword commit title
-> ---
-> Changes since v1:
-> - change commit title
-> - mention in patch message that arch_pmap_map() is fixed too, via the
->    PAGE_HYPERVISOR_RW change, not just setup_initial_mapping().
-> - convert check_pgtbl_mode_support()'s temporary root entry to
->    PAGE_HYPERVISOR_RX, as it's harmless.
-> - drop PTE_LEAF_DEFAULT entirely instead of keeping it, now that no site
->    open-codes it anymore.
-> - drop the pte_is_table() comment line that referenced PAGE_HYPERVISOR_RW,
->    now stale.
-> ---
->   xen/arch/riscv/include/asm/page.h | 33 +++++++++++++++++----------------
->   xen/arch/riscv/mm.c               |  9 ++++-----
->   2 files changed, 21 insertions(+), 21 deletions(-)
+> ... e.g. this, ...
 > 
-> diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
-> index b465a90325..7772e2f572 100644
-> --- a/xen/arch/riscv/include/asm/page.h
-> +++ b/xen/arch/riscv/include/asm/page.h
-> @@ -46,12 +46,12 @@
->   #define PTE_PBMT_NOCACHE            BIT(61, UL)
->   #define PTE_PBMT_IO                 BIT(62, UL)
->   
-> -#define PTE_LEAF_DEFAULT            (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
->   #define PTE_TABLE                   (PTE_VALID)
->   
-> -#define PAGE_HYPERVISOR_RO          (PTE_VALID | PTE_READABLE)
-> -#define PAGE_HYPERVISOR_RW          (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
-> -#define PAGE_HYPERVISOR_RX          (PTE_VALID | PTE_READABLE | PTE_EXECUTABLE)
-> +#define PAGE_HYPERVISOR_RO          (PTE_VALID | PTE_READABLE | \
-> +                                     PTE_ACCESSED | PTE_DIRTY)
-> +#define PAGE_HYPERVISOR_RW          (PAGE_HYPERVISOR_RO | PTE_WRITABLE)
-> +#define PAGE_HYPERVISOR_RX          (PAGE_HYPERVISOR_RO | PTE_EXECUTABLE)
->   
->   #define PAGE_HYPERVISOR             PAGE_HYPERVISOR_RW
->   /*
-> @@ -161,31 +161,32 @@ static inline bool pte_is_valid(pte_t p)
->    *      X W R Meaning
->    *      0 0 0 Pointer to next level of page table.
->    *      0 0 1 Read-only page.
-> - *      0 1 0 Reserved for future use.
-> + *      0 1 0 Reserved for future use. [1]
->    *      0 1 1 Read-write page.
->    *      1 0 0 Execute-only page.
->    *      1 0 1 Read-execute page.
-> - *      1 1 0 Reserved for future use.
-> + *      1 1 0 Reserved for future use. [2]
->    *      1 1 1 Read-write-execute page.
-> + *
-> + *   So if V=1 and W=1 then R also needs to be 1 as R = 0 is reserved for
-> + *   future use ([1], [2]).
->    */
-> +static inline bool pte_is_reserved(pte_t p)
-> +{
-> +    return (p.pte & (PTE_VALID | PTE_READABLE | PTE_WRITABLE)) ==
-> +           (PTE_VALID | PTE_WRITABLE);
-> +}
-> +
-Nit:
+>> +        return -ENOMEM;
+>> +
+>> +    info->d = d;
+>> +    info->virq = virq;
+>> +
+>> +    info->action.dev_id = info;
+>> +    info->action.name = devname;
+>> +
+>> +    spin_lock_irqsave(&desc->lock, flags);
+>> +
+>> +    /*
+>> +     * If the IRQ is already used by someone
+>> +     *  - If it's the same domain -> Xen doesn't need to update the IRQ desc.
+>> +     *  For safety check if we are not trying to assign the IRQ to a
+>> +     *  different vIRQ.
+>> +     *  - Otherwise -> For now, don't allow the IRQ to be shared between
+>> +     *  Xen and domains.
+>> +     */
+>> +    if ( desc->action != NULL )
+> 
+> ... this would more consistently be "if ( desc->action )". I think I'll take
+> the liberty to adjust this while committing.
 
-The function checks specifically for reserved R/W/X permission bit 
-encodings where W=1 and R=0 (encodings 0b010 and 0b110 in Table 25 
-"Encoding of PTE R/W/X fields" of the RISC-V Privileged ISA 
-Specification). Per the specification, writable pages must also be 
-marked readable (W=1 requires R=1 for valid leaf PTEs).
-
-However, naming this function `pte_is_reserved()` can be ambiguous 
-because the RISC-V PTE format contains several other types of reserved 
-fields:
-1. Bits 54–60 (and bit 63 without Svnapot) are "Reserved for future 
-standard use".
-2. Bits 9:8 (RSW) are "Reserved for supervisor software" and ignored by 
-hardware.
-3. PBMT = 0b11 is "Reserved for future standard use" under the Svpbmt 
-extension.
-
-To avoid confusion between reserved R/W/X permission encodings and 
-reserved PTE bitfields/attributes, it would be much clearer to make the 
-function name explicitly reflect that it checks for reserved R/W/X 
-permission encodings.
-
-My suggestion will be pte_has_reserved_rwx() or pte_has_reserved_perms().
-
-I am not going to insist on the name change (but it would be nice to 
-have) so but with commit message updated:
-  Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+I will be happy with that.
 
 Thanks.
 
