@@ -4,49 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F089DCA5FC4
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 20:13:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437882.1656823 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9D11BCA5FC4
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 20:43:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437892.1656841 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xC0fw-0000qL-Gr; Wed, 30 Sep 2026 20:13:12 +0000
+	id 1xC18r-000557-TG; Wed, 30 Sep 2026 20:43:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437882.1656823; Wed, 30 Sep 2026 20:13:12 +0000
+Received: by outflank-mailman (output) from mailman id 1437892.1656841; Wed, 30 Sep 2026 20:43:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xC0fw-0000qE-Dr; Wed, 30 Sep 2026 20:13:12 +0000
-Received: by outflank-mailman (input) for mailman id 1437882;
- Wed, 30 Sep 2026 20:13:11 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f3f301220003f66@swg.vates.tech>)
- id 1xC0fv-0000q8-3H
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 20:13:11 +0000
+	id 1xC18r-00054u-QF; Wed, 30 Sep 2026 20:43:05 +0000
+Received: by outflank-mailman (input) for mailman id 1437892;
+ Wed, 30 Sep 2026 20:43:04 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <xakep.amatop@gmail.com>) id 1xC18q-00054D-12
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 20:43:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xC0ft-00DMeU-DA
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 22:13:09 +0200
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f3f301220003f66@swg.vates.tech>)
- id 6abd6d2c-e002-0a2a0a5209dd-0a2a4503a752-42
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 22:13:09 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f3f301220003f66@swg.vates.tech>)
- id 6abd6d55-fae8-0a2a45030019-b9ff1c22ab5f-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 22:13:09 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0f3f301220003f66.003 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 30 Sep 2026 20:13:04 +0000
-Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 4A69F81CBA;
- Wed, 30 Sep 2026 22:13:03 +0200 (CEST)
+ id 1xC18o-00FTH7-VF
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 22:43:02 +0200
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6abd7408-bab6-0a2a0a5309dd-0a2a45078dec-32
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 22:43:02 +0200
+Received: from [74.125.230.98] (helo=mail-lr2-f34.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <xakep.amatop@gmail.com>)
+ id 6abd7456-b4ea-0a2a45070019-4a7de662aa72-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 22:43:02 +0200
+Received: by mail-lr2-f34.google.com with SMTP id
+ 38308e7fff4ca-3a65fd1534aso34763321fa.0
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 13:43:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,231 +48,435 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=JgXpFqkqvqOWPtTZR70bJwroxkwDSwxy9xQtcotDg7I=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=bwc70Lch/zRuq7mKZ12CUu3bTAyc/kxWXep/gBUfoqAPTxDezoQeqmnXtS4pxbK/L8juiN55Q
- kWOlYflMy8OdX3uCXx/NUe9k1D1W8uLmF8r3afwjbeDpJESGnNU3Lhj9qWpvchpAU98Aq818FK0
- epLVIG4sYhXQQhTVRN0yVEeC2R+Q5eRR0MnJoUu6fI0xduLb1fhGScwNReAnE1UaIVG/hQiuuri
- UCT+xYNQun5iFBD65X4VtG6qXUpYoldV/tFplyi8rPAv6N+RYWv9H578hMgANLkWm+N/UJrFSHU
- DPtfGCZ1FwMw81AINi10SC46EqC0fpJgGkWpduirwwzg==
-X-Zone-Loop: fbb1364fd099f1654edf068f68972dbc73ce64a7f0de
-x-campaign-type: default
-x-transaction-id: 56df8976-a6d3-46fd-9632-fac5d695294e
-x-swg-uid: 01-899b0312-e2fc-4ac8-b958-1a515fd2bd24
-X-Mailer: Sweego
-Message-ID:
- <1790799184.8631fc262581453bbf619ec5b2062170.1a0f3f301220003f66@vates.tech>
-x-swg-bid: 1790799184.8631fc262581453bbf619ec5b2062170.1a0f3f301220003f66
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Wed, 30 Sep 2026 22:13:02 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1790800982; cv=none;
+        d=google.com; s=arc-20260327;
+        b=hudFJmx26CP5IPRxBYyS2fAagR7PlUzRuOm1YLCchpeJA6zt+N+V+FaPFEGWhT160n
+         oAq93L4yKn8jyZ0HxbhQx6ZIQNAqxVFJfe/Ki+vBJfk3SoqHosUC5uE/lcXiOhFN6+um
+         LEmjCnpN0mI3Vm2ISfRtGhuoSx2QCpqbNqMy+BOPu/wzIcsdAoVYiipq9crRzfAXtI+8
+         cmRpbDolfwCiOucNLk2LCEN6r6P++X5bVgtZfBtkgisydM8+BI1Fz40/X4O2o1rFd3mQ
+         HD8FhvdePOKemdnfjcEJIqgGi69CxxNjsNXFPSR6LigNb4iFSueEt7zXNf252a1U8WTy
+         aIIA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=0OaLs+Y0dfMT76BGHOjTgGloKCLLhaOlGqG7YViTpzo=;
+        fh=llRL5efFqnnHpFXFV9xRpBehi/y3E7RY4Hjj6ZsjGXM=;
+        b=B0oj+tTmdcMt2o7/OEF/IBse9iBsjVhdfm9uL0T49001ctmiqnP7OUEkvlubGQomAk
+         OnLKacveBQpzLceonLpdLUuc6F3/prWNo439amRCJHa/lQrVI82vxGBHWKAc9HehiwoP
+         lArpTc5yLOSNBX4nigkEIyjvqQrpqvIb3lPeD74exTMZn/kRn3tHuRkdR1uvV+24NW6u
+         6er42EYuh4UUcTCENZX12ABL/DeEmV6IgLhggz6tPWadrfM0aWWd67Tqdz1yIkQd2tr9
+         iFqLF4OkeyZfJTaS7IDP+A6mW7mnv1vBm0P2fsaJct135TmdWtjXNosXr24CAZ1hol09
+         yg/g==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790800982; x=1791405782; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=0OaLs+Y0dfMT76BGHOjTgGloKCLLhaOlGqG7YViTpzo=;
+        b=guC9Yh+zsi1S5//J4msFzTFBLQ81YzeGAlcnWreE2Vd1fA+2p+vK95v5/O+ooozAZl
+         2KjjoSigkDTHqvnHm3bHa/mtowFtQfSA8DMe5QNwj0qJFCjLw8M2Vaw3x7BMy/shaPSv
+         5gifPY+rSwN7hgEZ/jkm9mxVfafbE6ShHBOSdm96eWYSLrTVFNaa9wjTwWXD234/b+ih
+         zYOjOgD7tgMsF5m2xsB4QyFy9YVYLixrp9847tWnlxZiTuUvqt7UWPQ1gbKavCgO/+ff
+         MteUVsvPZTO1Eya7CAFLU/WnBpEke2HXbBkPm0zZrOXu2xnq2xaVDVkt3FslgMK6pENt
+         AuHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790800982; x=1791405782;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0OaLs+Y0dfMT76BGHOjTgGloKCLLhaOlGqG7YViTpzo=;
+        b=eR16z1es3KZNPAI7ZrOQ71etPxzK5avSl+Ua4WaO1ri02A59wWa41ZakhJIn6mFmwv
+         4l0IqhOngPYaS/Xep8DLGz7q0mVVaRtDsSzrhWj4pPB3PGOiqRwkSEiyzu2aEMgva6E4
+         HoYc/P/SQkYTjmRQk/0ig/oGcUrvdALcTSzjIt3ogxdPxO8ePQyPPmiergDehHAd3YgT
+         BiQu/oevvZlr1FvNd5uzwqgirclwbn2BIXnUFEesGZf1JkLW75s6lalojgePZL2R799d
+         +8Cjvr775mFhd9m1Y0mbQehN6CHAeOa4HnKQ4WD1atpCW23kMaWzgDEfdsG0X0pmiLHf
+         g2oA==
+X-Forwarded-Encrypted: i=1; AKwUvBxcQQTMvgDPBZLhgso1M6jQCdyNye+l3eAzFhJiSZCrk983aiQ1NomomxAzstC1YABXg/QQWRsPxOI=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJOwcsLnulNk4Tzlm2STqUfQLCXKbC0RMoKBGjR/zY/xeLwnxja
+	W0kUyuKXPl1OeFRv8IqJW2GOGE5tyv7zwaEMqvvU4z32m136bjMyp8xkzYAlvI5+4WpkPicfwPy
+	KTwhBQLDT1EUzELMF7vHIdAGbecauUYw=
+X-Gm-Gg: AYBFou0ak+chmYvQouLziEcBZmiKqc3qScAntOeOKo4bEc/evAKPm/VoaolqLmZK3Ae
+	G8mAnyJmcD+lTZ5RUeVOTffhqOy9BxwrR3RI0cXmgmq3m4TpoCKRR2K2NznIr8XPfJOSiL8yl6G
+	+pBt/ktQ1ZXF8cHXYhFq7M+AKXRlpPY6Dy+NdIxWxadNs6kA7jIUD41lK3kG5YsclTFnK3MFlfH
+	tPTpeygWamjUXMPjR2ff9S40RLvNNUpR8s+gROzwgpr3OVQgQ/J60dWvdYKgkgqu6zdcn2pdAxl
+	nbCM5mfPaJjM3wlvlRiu6cavDn3U2XHEmOTI2zvezhE4YMHlqZFrcXiTKtHDksV4
+X-Received: by 2002:a05:651c:50e:b0:3a7:81c4:1906 with SMTP id
+ 38308e7fff4ca-3a781c443f0mr3743291fa.8.1790800981869; Wed, 30 Sep 2026
+ 13:43:01 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2] x86/ACPI: optimise C3 entry on AMD CPUs
-To: Olivier Lambert <olivier.lambert@vates.tech>,
- xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Jason Andryuk <jason.andryuk@amd.com>
-References: <1790796643.8631fc262581453bbf619ec5b2062170.1a0f3cc3da00003f66@vates.tech>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <1790796643.8631fc262581453bbf619ec5b2062170.1a0f3cc3da00003f66@vates.tech>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------zg0xTqThLMTT05wGJ3Ydv80n"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1790799183450
-X-purgate-ID: tlsNG-33051d/1790799189-6F8C54E9-1193A3FC/0/0
+References: <cover.1787838455.git.mykola_kvach@epam.com> <1d4cee919353f883f6be9c9de4f317432d61206e.1787838455.git.mykola_kvach@epam.com>
+ <4FB9774A-1929-443D-ACA1-F1E1734021A1@arm.com>
+In-Reply-To: <4FB9774A-1929-443D-ACA1-F1E1734021A1@arm.com>
+From: Mykola Kvach <xakep.amatop@gmail.com>
+Date: Wed, 30 Sep 2026 23:42:50 +0300
+X-Gm-Features: AclHuK90Ua5oekEDPN7BuKq5nRtDd_bTbxR7yiJ1R0rGBM-k2WLbdLLe3uJtGW8
+Message-ID: <CAGeoDV9TOrkKfCHWNZC+EoVx77jdF4zb+p_mXNXTWJD3kZgRNw@mail.gmail.com>
+Subject: Re: [PATCH v12 12/13] xen/arm: Add vPSCI SYSTEM_SUSPEND policy
+To: Bertrand Marquis <Bertrand.Marquis@arm.com>
+Cc: Mykola Kvach <mykola_kvach@epam.com>, 
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
+	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, 
+	Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+	Rahul Singh <Rahul.Singh@arm.com>, Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-ef75cf/1790800982-A4ECEAE4-768B094B/0/0
 X-purgate-type: clean
-X-purgate-size: 9766
+X-purgate-size: 12843
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------zg0xTqThLMTT05wGJ3Ydv80n
-Content-Type: multipart/mixed; boundary="------------Som7zvJlsQqdVDayyX3i4n3b";
- protected-headers="v1"; hp="clear"
-Message-ID: <fa3cb326-8f9e-4ad7-b0bd-70d5e5c14d93@vates.tech>
-Date: Wed, 30 Sep 2026 22:13:02 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2] x86/ACPI: optimise C3 entry on AMD CPUs
-To: Olivier Lambert <olivier.lambert@vates.tech>,
- xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>, Andrew Cooper
- <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Jason Andryuk <jason.andryuk@amd.com>
-References: <1790796643.8631fc262581453bbf619ec5b2062170.1a0f3cc3da00003f66@vates.tech>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- xsDNBGn5sK8BDACuzSrrTjpVf4ay06OYB6yY0J1PqKffihoNMtrQRZjAHxoAPC7LTBVHV/XO
- Zw5HJc+9R71z1JV+iYg6z3jPziGKzX8Fj3ZXlzJPmpf1PuETH3KdbvtJT4ny+OGntnJntUoR
- KRPhTirr6yNeBk/637O3CQXjtqFUPZnko8OI/o1yawIBhJJAWicutjkkUgd28Bh6HV9EIumH
- tCBgn5/1A/fpm9624MMgYLsA8qjC4XsoovQvFCaO8HEhvfzrrTZHjn/nPeB9SigxIxXW8YaT
- VqMdqul07o72m3eA2mf+LMu9a04FX/d4wbxBLtELm+1jIrbtyaFZEMOLv/haSiS/Lj3btJH/
- EoucejoZ5SH49ksmVAmKOLktOaTQ8b2gEvP7iaKiIiszCCtOSRohr+2GvDsDeLvVZnlR3I+S
- PhHar7TPKjFz0G3DPNolyjXywNqOAMpomSPi8lSwjAFsxOtQbcck/qRGRSNk4DAmH70pA+89
- MXfQXZ3qt1Q01B1+sU0I8xsAEQEAAc0kVGVkZHkgQXN0aWUgPHRlZGR5LmFzdGllQHZhdGVz
- LnRlY2g+wsENBBMBCAA3FiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmn5sK8FCQWjmoACGwME
- CwkIBwUVCAkKCwUWAgMBAAAKCRBmD6nRAsvP0ID6DACGOktArFbLKHNzuyOVCskwfUZPla6Z
- pd3GZ8r61SrAKePIr2BnpgPkd0hV3bSRkRLIrgjzR2NRCzfp0x0HfuhcYfAYPR46XHTvjaJE
- v99sT/vGUG1BZguYDOScSEpgSNaNlYum3RKZbMuROxdK8G+YHccJY8PvWSq2K2yiae2KGiAv
- 1yjnZxug9/PtDfX8vQFUSg2w1ukRDf50wvDohN1zUQfFtofOP2xCRsDZiHAlQ0pF+aUjXQhP
- eP3IdpfWc8cyRLXF06Rk46YMYCytweGtGdHcqAfrVthl84129ZPN422k/voW0sm14gjYlGcT
- UwgnYlFRk2FLq0QeKEDcS0aj3o3EVAQCrayoGzi1pnlIKE3PRGUcUzjGVvzQ/po24gOjwba9
- Egr/Wmu3MQlx/7A8zT5QBzF/n+RYdLNQ0Eu6YnUwf0Z1uieqNaon+olyIRFiLb/hCZHO6ekN
- f5vrm2clHUbQAYaPQebknujoKBo6ZLHg0WM1gZS01Gz+aUpKsUfOwM0EafmwsAEMAKiQiZa3
- yQMmc/h3sDbfVHPSiBA4IMI/NAB7IotzPHq1GzCpsoVILAhF/INbWjxJ3DbVf+en3/FvdVZg
- 2S38xtnth0njNdlVKpyxm054phKjbdoFDwaknWolS4hrddTmetSG5/52AjtmPFtlXAk0NmLv
- fJnW3seXVQbgM7sW/MNXPP5UKDpkGnLhnvej+GU0s3109sJeXT5ImVdphFs9cvyZyBT9t1Pb
- Rowv58EgV0zE4hbAeVkULAbxFV5b/ExTjjGVHoX7CVhWxvCiTqCUoXZRkUE9C3FnkzEFRkKb
- Yu6NCfiHfEyB3Xyg9hfdrRgjMRq907zCof+nDtWxGz1MSEuvTj1g9GZ049Bennqzjc/Q+0ov
- XoK4jm+Py0FiUGUaA6yhexficjH+kCR/xDbVnWrMhSLB4AuTBT9HjfZI6gk3uYLhoT8Pig4/
- eVtR2Q1wZIJsFToR6ofGuyECwFcs+PUXN7fmGRSiPXgjAr/zIUBdW0VWCE3OGPNqtRk2E5s6
- IQARAQABwsD8BBgBCAAmFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmn5sLAFCQWjmoACGwwA
- CgkQZg+p0QLLz9DncQwAg76IehTemLIfrB8T9WIBZrI4kUV7G7a4rjiVoUiHYN5QwhnbZnsa
- JDlt+Ezoqy/510eo2bCSzvW5xXYPgyjcuOPwgQo1Qp764QxyX6rld2f2RcWkDuBHun55ZWXj
- by8o21ginPRwruBVYY5rVf3DV1iBu4NurUeHtyFk/dS0XTOQi2wVUb17sW/+ybCEokdVacZG
- zOqP/OmwHrF8ylXlXnhQq6e3r+J+T8fuoGJelm/CJiMwyP6cEWE8sxVqX/iqwjwUYkuOCpE+
- lOWSvdNHgoEkWR0RXBPQjnGmLKbfTl/QDXLk6NP2/r9uxm2HL6Ei3QJKSEdrp+XZaVnk/Off
- O485NOTKwGOxyWb006cTMh53xPkAJFQu4Tvdj+odsHz88jqw5wfPG0BYWx0I/FspYj7N9kZR
- 8ULR9nX0LvpzJ/kB4NgHIUt8YtIL6ZSfM2dbF7fKzvx1UqFfvozJZwFzfEieJLXa4nlGgR6D
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <1790796643.8631fc262581453bbf619ec5b2062170.1a0f3cc3da00003f66@vates.tech>
+Hi Bertrand,
 
---------------Som7zvJlsQqdVDayyX3i4n3b
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Thank you for the review.
 
-TGUgMzAvMDkvMjAyNiDDoCAyMTozMywgT2xpdmllciBMYW1iZXJ0IGEgw6ljcml0wqA6DQo+
-IEFsbCBaZW4gb3IgbmV3ZXIgQ1BVIHdoaWNoIHN1cHBvcnQgQzMgc2hhcmVzIGNhY2hlLiBJ
-dHMgbm90IG5lY2Vzc2FyeSB0bw0KPiBmbHVzaCB0aGUgY2FjaGVzIGluIHNvZnR3YXJlIGJl
-Zm9yZSBlbnRlcmluZyBDMy4gVGhpcyB3aWxsIGNhdXNlIGRyb3AgaW4NCj4gcGVyZm9ybWFu
-Y2UgZm9yIHRoZSBjb3JlcyB3aGljaCBzaGFyZSBzb21lIGNhY2hlcy4gQVJCX0RJUyBpcyBu
-b3QgdXNlZA0KPiB3aXRoIGN1cnJlbnQgQU1EIEMgc3RhdGUgaW1wbGVtZW50YXRpb24uIFNv
-IHNldCByZWxhdGVkIGZsYWdzIGNvcnJlY3RseS4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IERl
-ZXBhayBTaGFybWEgPGRlZXBhay5zaGFybWFAYW1kLmNvbT4NCj4gQWNrZWQtYnk6IFRob21h
-cyBHbGVpeG5lciA8dGdseEBsaW51dHJvbml4LmRlPg0KPiBTaWduZWQtb2ZmLWJ5OiBSYWZh
-ZWwgSi4gV3lzb2NraSA8cmFmYWVsLmoud3lzb2NraUBpbnRlbC5jb20+DQo+IE9yaWdpbjog
-aHR0cHM6Ly9naXQua2VybmVsLm9yZy90b3J2YWxkcy9wL2E4ZmI0MDk2NmYxOQ0KPiBbUG9y
-dCB0byBYZW4uICBJbmNsdWRlIEh5Z29uLl0NCj4gQXNzaXN0ZWQtYnk6IENsYXVkZS1Db2Rl
-OmNsYXVkZS1vcHVzLTUtNQ0KPiBTaWduZWQtb2ZmLWJ5OiBPbGl2aWVyIExhbWJlcnQgPG9s
-aXZpZXIubGFtYmVydEB2YXRlcy50ZWNoPg0KPiBSZXZpZXdlZC1ieTogSmFzb24gQW5kcnl1
-ayA8amFzb24uYW5kcnl1a0BhbWQuY29tPg0KPiAtLS0NCj4gDQo+IE5vdGVzOg0KPiAgICAg
-IENoYW5nZXMgaW4gdjI6DQo+ICAgICAgIC0gUmVzZW5kIHdpdGggZ2l0IHNlbmQtZW1haWw6
-IG15IG1haWwgY2xpZW50IHN0cmlwcGVkIHRoZSB3aGl0ZXNwYWNlIGZyb20NCj4gICAgICAg
-ICB2MSwgc28gaXRzIGRpZmYgY291bGQgbm90IGJlIGFwcGxpZWQuICBObyBjb2RlIGNoYW5n
-ZS4NCj4gICAgICAgLSBQaWNrZWQgdXAgSmFzb24ncyBSZXZpZXdlZC1ieS4NCj4gICAgICAN
-Cj4gICAgICBGb3VuZCBvbiBYQ1AtbmcgOC4zIChYZW4gNC4xNy42KSBvbiBhIFJ5emVuIDUg
-NzYwMCAoWmVuIDQsIGZhbWlseSAweDE5KQ0KPiAgICAgIHdob3NlIF9DU1QgbGlzdHMgQzEg
-KEhMVCkgcGx1cyBDMiBhbmQgQzMgYXMgU1lTSU8gc3RhdGVzIChDMyBleGl0DQo+ICAgICAg
-bGF0ZW5jeSAzNTB1cykuICBXaXRoIGJtX2NoZWNrID09IDAsIGV2ZXJ5IEMzIGVudHJ5IGV4
-ZWN1dGVzIFdCSU5WRC4NCj4gICAgICANCj4gICAgICBNZWFzdXJlZCB1bmRlciBhIFZNLXRv
-LVZNIG5ldHdvcmsgbG9hZCwgaW4gMjVzIHdpbmRvd3M6DQo+ICAgICAgIC0gfjE0MCBXQklO
-VkQvcywgNjUtNjl1cyBlYWNoIG9uIGF2ZXJhZ2UsIDMwMHVzIGF0IHdvcnN0Lg0KPiAgICAg
-ICAtIFNwaW5uaW5nIG9uIGVhY2ggQ1BVIGluIHR1cm4gd2l0aCBJUlFzIG9mZiBhbmQgcmVh
-ZGluZyB0aGUgVFNDIHNob3dzDQo+ICAgICAgICAgZ2FwcyBvZiB1cCB0byAyMjJ1czsgbm9u
-ZSB3aXRoIHRoaXMgY2hhbmdlLiAgVGhlIFNNSSBjb3VudCAoUE1DIGV2ZW50DQo+ICAgICAg
-ICAgMHgyYiwgdmFsaWRhdGVkIGJ5IGNvdW50aW5nIGN5Y2xlcyBvbiB0aGUgc2FtZSBjb3Vu
-dGVyKSBzdGF5ZWQgYXQgMCwNCj4gICAgICAgICBhbmQgTk1JcyBkaWRuJ3QgbGluZSB1cCB3
-aXRoIHRoZSBnYXBzLg0KPiAgICAgICAtIGNyZWRpdDEncyBkb19zY2hlZHVsZSgpIG9jY2Fz
-aW9uYWxseSB0b29rIHVwIHRvIDI2MnVzLCB3aXRoIElSUXMNCj4gICAgICAgICBvZmY7IGF0
-IG1vc3QgNC40dXMgd2l0aCB0aGlzIGNoYW5nZS4NCj4gICAgICAgLSB4ZW5wbSBzZXQtbWF4
-LWNzdGF0ZSAxIHJlbW92ZXMgdGhlIHN0YWxscyB0b28sIHdoaWNoIHBvaW50cyBhdCBDMw0K
-PiAgICAgICAgIGVudHJ5Lg0KPiAgICAgIA0KPiAgICAgIFRoaXMgY2hhbmdlIHdhcyBib290
-ZWQgYW5kIG1lYXN1cmVkIGFzIGEgYmFja3BvcnQgb24gNC4xNy42IG9ubHkuICBPbg0KPiAg
-ICAgIHN0YWdpbmcgaXQgaXMgYnVpbGQtdGVzdGVkLiAgSXQgYWxzbyBjb3ZlcnMgSHlnb24s
-IGFzIExpbnV4IGRvZXMgdG9kYXkNCj4gICAgICB0aHJvdWdoIFg4Nl9GRUFUVVJFX1pFTjsg
-dGhlIG9yaWdpbmFsIExpbnV4IGNvbW1pdCB3YXMgQU1ELW9ubHkuDQo+ICAgICAgDQo+ICAg
-ICAgVGhpcyB3aWxsIGNvbmZsaWN0IHRyaXZpYWxseSB3aXRoIEFsZWphbmRybydzIHBlbmRp
-bmcgIng4Ni9hY3BpOiBNaWdyYXRlDQo+ICAgICAgdmVuZG9yIGNoZWNrcyB0byBjcHVfdmVu
-ZG9yKCkiOyBoYXBweSB0byByZWJhc2Ugb24gdG9wIG9mIGl0Lg0KPiAgICAgIA0KPiAgICAg
-IFBvc3NpYmx5IGEgYmFja3BvcnQgY2FuZGlkYXRlLg0KPiANCj4gICB4ZW4vYXJjaC94ODYv
-YWNwaS9jcHVfaWRsZS5jIHwgMTggKysrKysrKysrKysrKysrKysrDQo+ICAgMSBmaWxlIGNo
-YW5nZWQsIDE4IGluc2VydGlvbnMoKykNCj4gDQo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC94
-ODYvYWNwaS9jcHVfaWRsZS5jIGIveGVuL2FyY2gveDg2L2FjcGkvY3B1X2lkbGUuYw0KPiBp
-bmRleCA1NmIyMmEyLi5iMmJjYTRkIDEwMDY0NA0KPiAtLS0gYS94ZW4vYXJjaC94ODYvYWNw
-aS9jcHVfaWRsZS5jDQo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9hY3BpL2NwdV9pZGxlLmMNCj4g
-QEAgLTEwNjUsNiArMTA2NSwyNCBAQCBzdGF0aWMgdm9pZCBhY3BpX3Byb2Nlc3Nvcl9wb3dl
-cl9pbml0X2JtX2NoZWNrKHN0cnVjdCBhY3BpX3Byb2Nlc3Nvcl9mbGFncyAqZmxhZw0KPiAg
-ICAgICAgKi8NCj4gICAgICAgaWYgKCBjLT52ZW5kb3IgPT0gWDg2X1ZFTkRPUl9JTlRFTCAp
-DQo+ICAgICAgICAgICBmbGFncy0+Ym1fY29udHJvbCA9IDA7DQo+ICsNCj4gKyAgICBpZiAo
-IChjLT52ZW5kb3IgJiAoWDg2X1ZFTkRPUl9BTUQgfCBYODZfVkVORE9SX0hZR09OKSkgJiYN
-Cj4gKyAgICAgICAgIGMtPmZhbWlseSA+PSAweDE3ICkNCg0KSSBndWVzcyB3ZSBjYW4gYXNz
-dW1lIHRoYXQgSHlnb24gQ1BVcyBzaGFyZSB0aGUgc2VtYW50aWNzIG9mIFplbiBDUFVzLCAN
-CmFzIHJlY2VudCBIeWdvbiBDUFVzIGFyZSB+WmVuIG9uZXMuDQoNCj4gKyAgICB7DQo+ICsg
-ICAgICAgIC8qDQo+ICsgICAgICAgICAqIEZvciBhbGwgQU1EIFplbiBvciBuZXdlciBDUFVz
-IHRoYXQgc3VwcG9ydCBDMywgY2FjaGVzDQo+ICsgICAgICAgICAqIHNob3VsZCBub3QgYmUg
-Zmx1c2hlZCBieSBzb2Z0d2FyZSB3aGlsZSBlbnRlcmluZyBDMw0KPiArICAgICAgICAgKiB0
-eXBlIHN0YXRlLiBTZXQgYm1fY2hlY2sgdG8gMSBzbyB0aGF0IFhlbiBkb2Vzbid0DQo+ICsg
-ICAgICAgICAqIG5lZWQgdG8gZXhlY3V0ZSBjYWNoZSBmbHVzaCBvcGVyYXRpb24uDQo+ICsg
-ICAgICAgICAqLw0KPiArICAgICAgICBmbGFncy0+Ym1fY2hlY2sgPSAxOw0KPiArICAgICAg
-ICAvKg0KPiArICAgICAgICAgKiBJbiBjdXJyZW50IEFNRCBDIHN0YXRlIGltcGxlbWVudGF0
-aW9uIEFSQl9ESVMgaXMgbm8gbG9uZ2VyDQo+ICsgICAgICAgICAqIHVzZWQuIFNvIHNldCBi
-bV9jb250cm9sIHRvIHplcm8gdG8gaW5kaWNhdGUgQVJCX0RJUyBpcyBub3QNCj4gKyAgICAg
-ICAgICogcmVxdWlyZWQgd2hpbGUgZW50ZXJpbmcgQzMgdHlwZSBzdGF0ZS4NCj4gKyAgICAg
-ICAgICovDQo+ICsgICAgICAgIGZsYWdzLT5ibV9jb250cm9sID0gMDsNCj4gKyAgICB9DQo+
-ICAgfQ0KPiAgIA0KPiAgICNkZWZpbmUgVkVORE9SX0lOVEVMICAgICAgICAgICAgICAgICAg
-ICgxKQ0KDQpSZXZpZXdlZC1ieTogVGVkZHkgQXN0aWUgPHRlZGR5LmFzdGllQHZhdGVzLnRl
-Y2g+DQoNClRlZGR5DQo=
+On Mon, Sep 28, 2026 at 7:20=E2=80=AFPM Bertrand Marquis
+<Bertrand.Marquis@arm.com> wrote:
+>
+> Hi Mykola,
+>
+> > On 27 Aug 2026, at 16:32, Mykola Kvach <mykola_kvach@epam.com> wrote:
+> >
+> > Introduce CONFIG_HAS_HWDOM_SYSTEM_SUSPEND as an architecture-selected
+> > capability for platforms where the hardware domain can be parked with
+> > SHUTDOWN_suspend without calling hwdom_shutdown().
+> >
+> > Expose PSCI SYSTEM_SUSPEND as a vPSCI operation for all domains. For
+> > non-control domains, including the hardware domain when it is not actin=
+g
+> > as a control domain, the call is handled as a guest/domain suspend requ=
+est
+> > and parks the domain in SHUTDOWN_suspend.
+> >
+> > Control domains need additional sequencing because their SYSTEM_SUSPEND
+> > request is used to coordinate host-wide suspend. A non-last awake contr=
+ol
+> > domain may be parked in SHUTDOWN_suspend without requiring the host
+> > suspend path to be available. The last awake control domain is treated =
+as
+> > the point where the request becomes a host-suspend request, and it may
+> > only proceed when all non-control domains are already in SHUTDOWN_suspe=
+nd
+> > and the host suspend path is available.
+> >
+> > Keep the control-domain sequencing and domain-readiness checks out of
+> > PSCI_FEATURES. They are per-attempt runtime conditions rather than stab=
+le
+> > PSCI function availability. Advertise SYSTEM_SUSPEND as implemented by
+> > vPSCI and report attempt-time policy failures as PSCI_DENIED.
+> >
+> > Select HAS_HWDOM_SYSTEM_SUSPEND independently from CONFIG_SYSTEM_SUSPEN=
+D
+> > so that SHUTDOWN_suspend from the hardware domain can be treated as a
+> > domain suspend state rather than as a hardware-domain initiated host
+> > shutdown. This does not by itself imply that host-wide suspend is
+> > available.
+> >
+> > Add host_system_suspend_allowed() to combine the host PSCI SYSTEM_SUSPE=
+ND
+> > capability with runtime blockers reported by Xen-owned subsystems. Add
+> > runtime blockers for registered serial, IOMMU, GIC and SMMUv3 MSI IRQ
+> > paths lacking suspend/resume support. These blockers are runtime based,
+> > so they only apply to drivers or paths that Xen actually uses on the
+> > platform. For SMMUv3, the blocker applies only when Xen actually uses t=
+he
+> > MSI IRQ path, since resume does not restore the SMMU *_IRQ_CFGn MSI
+> > registers yet.
+> >
+> > Add a struct domain forward declaration to xen/suspend.h so the generic
+> > header can expose arch_domain_resume() without requiring a full domain.=
+h
+> > include.
+> >
+> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> > Reviewed-by: Oleksandr Tyshchenko <Oleksandr_Tyshchenko@epam.com>
+> > ---
+> > Changes in V12:
+> > - handle missing is_shut_down, change checking to call of
+> >  domain_shutdown_completed
+> >
+> > Changes in V11:
+> > - Mark host_system_suspend_runtime_allowed as __ro_after_init.
+> > - Avoid printing the SMMUv3 MSI IRQ host suspend blocker more than once
+> >  when multiple SMMUv3 instances use MSIs.
+> > - Wrap the Arm IOMMU host suspend blocker in CONFIG_SYSTEM_SUSPEND to m=
+ake
+> >  its policy-only use explicit.
+> >
+> > Changes in V10:
+> > - Return PSCI_DENIED rather than PSCI_NOT_SUPPORTED when the last awake
+> >  control domain cannot proceed to host suspend, keeping PSCI_FEATURES
+> >  stable once SYSTEM_SUSPEND is advertised.
+> > - Shorten SYSTEM_SUSPEND blocker messages and use %pd when logging the
+> >  control domain.
+> > - Mark serial_suspend_available as __ro_after_init.
+> > - Mention the struct domain forward declaration added to xen/suspend.h.
+> >
+> > Changes in V9:
+> > - Select HAS_HWDOM_SYSTEM_SUSPEND independently from CONFIG_SYSTEM_SUSP=
+END
+> >  so that hardware-domain SHUTDOWN_suspend support is not tied to
+> >  host-wide system suspend availability.
+> > - Add runtime host suspend blockers for Xen-owned subsystems lacking
+> >  suspend/resume support.
+> > - Keep vPSCI SYSTEM_SUSPEND advertised through PSCI_FEATURES and enforc=
+e
+> >  control-domain sequencing in the call handler.
+> > ---
+> > xen/arch/arm/Kconfig                  |   1 +
+> > xen/arch/arm/gic.c                    |   6 ++
+> > xen/arch/arm/include/asm/psci.h       |   3 +
+> > xen/arch/arm/include/asm/suspend.h    |  10 ++-
+> > xen/arch/arm/psci.c                   |   7 ++
+> > xen/arch/arm/suspend.c                |  40 +++++++++
+> > xen/arch/arm/vpsci.c                  | 114 +++++++++++++++++++++++---
+> > xen/common/Kconfig                    |   3 +
+> > xen/common/domain.c                   |   7 +-
+> > xen/drivers/char/serial.c             |  12 +++
+> > xen/drivers/passthrough/arm/iommu.c   |   6 ++
+> > xen/drivers/passthrough/arm/smmu-v3.c |   9 ++
+> > xen/include/xen/serial.h              |   1 +
+> > xen/include/xen/suspend.h             |   2 +
+> > 14 files changed, 208 insertions(+), 13 deletions(-)
+> >
+> > diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+> > index 843a43897e..9027aa17eb 100644
+> > --- a/xen/arch/arm/Kconfig
+> > +++ b/xen/arch/arm/Kconfig
+> > @@ -19,6 +19,7 @@ config ARM
+> > select HAS_ALTERNATIVE if HAS_VMAP
+> > select HAS_DEVICE_TREE_DISCOVERY
+> > select HAS_DOM0LESS
+> > + select HAS_HWDOM_SYSTEM_SUSPEND if !MPU
+> > select HAS_GRANT_CACHE_FLUSH if GRANT_TABLE
+> > select HAS_STACK_PROTECTOR
+> > select HAS_STATIC_MEMORY
+> > diff --git a/xen/arch/arm/gic.c b/xen/arch/arm/gic.c
+> > index ffc11f36a1..0695474432 100644
+> > --- a/xen/arch/arm/gic.c
+> > +++ b/xen/arch/arm/gic.c
+> > @@ -26,6 +26,7 @@
+> > #include <asm/device.h>
+> > #include <asm/io.h>
+> > #include <asm/gic.h>
+> > +#include <asm/suspend.h>
+> > #include <asm/vgic.h>
+> > #include <asm/acpi.h>
+> >
+> > @@ -44,6 +45,11 @@ static void __init __maybe_unused build_assertions(v=
+oid)
+> > void register_gic_ops(const struct gic_hw_operations *ops)
+> > {
+> >     gic_hw_ops =3D ops;
+> > +
+> > +#ifdef CONFIG_SYSTEM_SUSPEND
+> > +    if ( !ops->suspend || !ops->resume )
+> > +        host_system_suspend_disable("GIC driver lacks suspend support"=
+);
+> > +#endif
+> > }
+> >
+> > static void clear_cpu_lr_mask(void)
+> > diff --git a/xen/arch/arm/include/asm/psci.h b/xen/arch/arm/include/asm=
+/psci.h
+> > index bb3c73496e..142fa1bfe5 100644
+> > --- a/xen/arch/arm/include/asm/psci.h
+> > +++ b/xen/arch/arm/include/asm/psci.h
+> > @@ -24,6 +24,9 @@ void call_psci_cpu_off(void);
+> > void call_psci_system_off(void);
+> > void call_psci_system_reset(void);
+> > int call_psci_system_suspend(void);
+> > +#ifdef CONFIG_SYSTEM_SUSPEND
+> > +bool psci_system_suspend_allowed(void);
+> > +#endif
+> >
+> > /* Range of allocated PSCI function numbers */
+> > #define PSCI_FNUM_MIN_VALUE                 _AC(0,U)
+> > diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/=
+asm/suspend.h
+> > index c848fc6340..50dc6e9fdf 100644
+> > --- a/xen/arch/arm/include/asm/suspend.h
+> > +++ b/xen/arch/arm/include/asm/suspend.h
+> > @@ -39,7 +39,15 @@ extern struct resume_cpu_context resume_cpu_context;
+> >
+> > int prepare_resume_ctx(void);
+> > void hyp_resume(void);
+> > -#endif /* CONFIG_SYSTEM_SUSPEND */
+> > +bool host_system_suspend_allowed(void);
+> > +void host_system_suspend_disable(const char *reason);
+> > +
+> > +#else /* !CONFIG_SYSTEM_SUSPEND */
+> > +
+> > +static inline bool host_system_suspend_allowed(void) { return false; }
+> > +static inline void host_system_suspend_disable(const char *reason) {}
+> > +
+> > +#endif
+> >
+> > #endif /* ARM_SUSPEND_H */
+> >
+> > diff --git a/xen/arch/arm/psci.c b/xen/arch/arm/psci.c
+> > index e05dae1133..e9d78668fd 100644
+> > --- a/xen/arch/arm/psci.c
+> > +++ b/xen/arch/arm/psci.c
+> > @@ -41,6 +41,13 @@ static bool __ro_after_init has_psci_system_suspend;
+> >
+> > #define PSCI_RET(res)   ((int32_t)(res).a0)
+> >
+> > +#ifdef CONFIG_SYSTEM_SUSPEND
+> > +bool psci_system_suspend_allowed(void)
+> > +{
+> > +    return has_psci_system_suspend;
+> > +}
+> > +#endif
+> > +
+> > int call_psci_cpu_on(int cpu)
+> > {
+> >     struct arm_smccc_res res;
+> > diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
+> > index 6ea4a0f9cc..c7c26bcf03 100644
+> > --- a/xen/arch/arm/suspend.c
+> > +++ b/xen/arch/arm/suspend.c
+> > @@ -1,9 +1,49 @@
+> > /* SPDX-License-Identifier: GPL-2.0-only */
+> >
+> > +#include <asm/psci.h>
+> > #include <asm/suspend.h>
+> >
+> > +#include <xen/lib.h>
+> > +#include <xen/serial.h>
+> > +
+> > struct resume_cpu_context resume_cpu_context;
+> >
+> > +/*
+> > + * Non-PSCI infrastructure can make host suspend impossible even when =
+the PSCI
+> > + * SYSTEM_SUSPEND conduit is present, e.g. when a Xen-owned driver has=
+ no valid
+> > + * suspend/resume path.
+> > + *
+> > + * This gate is checked only when the last awake control domain attemp=
+ts to
+> > + * turn a guest SYSTEM_SUSPEND request into a host-suspend request.
+> > + */
+> > +static bool __ro_after_init host_system_suspend_runtime_allowed =3D tr=
+ue;
+> > +
+> > +static bool host_serial_suspend_allowed(void)
+> > +{
+> > +    if ( serial_suspend_supported() )
+> > +        return true;
+> > +
+> > +    printk_once(XENLOG_INFO
+> > +                "Host SYSTEM_SUSPEND blocked: serial unsupported\n");
+> > +
+> > +    return false;
+> > +}
+> > +
+> > +bool host_system_suspend_allowed(void)
+> > +{
+> > +    return psci_system_suspend_allowed() &&
+> > +           host_serial_suspend_allowed() &&
+> > +           host_system_suspend_runtime_allowed;
+> > +}
+> > +
+> > +void host_system_suspend_disable(const char *reason)
+> > +{
+> > +    host_system_suspend_runtime_allowed =3D false;
+> > +
+> > +    printk(XENLOG_INFO "Host SYSTEM_SUSPEND blocked: %s\n",
+> > +           reason ? reason : "unsupported suspend/resume path");
+> > +}
+> > +
+> > /*
+> >  * Local variables:
+> >  * mode: C
+> > diff --git a/xen/arch/arm/vpsci.c b/xen/arch/arm/vpsci.c
+> > index ac6af6118f..a41355d75d 100644
+> > --- a/xen/arch/arm/vpsci.c
+> > +++ b/xen/arch/arm/vpsci.c
+> > @@ -5,6 +5,7 @@
+> >
+> > #include <asm/current.h>
+> > #include <asm/domain.h>
+> > +#include <asm/suspend.h>
+> > #include <asm/vgic.h>
+> > #include <asm/vpsci.h>
+> > #include <asm/event.h>
+> > @@ -219,6 +220,89 @@ static void do_psci_0_2_system_reset(void)
+> >     domain_shutdown(d,SHUTDOWN_reboot);
+> > }
+> >
+> > +/*
+> > + * Serialise SYSTEM_SUSPEND policy decisions with the domain suspend t=
+ransition,
+> > + * so multiple control domains cannot all observe each other as still =
+awake.
+> > + */
+> > +static DEFINE_SPINLOCK(vpsci_system_suspend_lock);
+> > +
+> > +static bool domain_in_suspend_state(struct domain *d)
+> > +{
+> > +    bool suspended;
+> > +
+> > +    spin_lock(&d->shutdown_lock);
+> > +    suspended =3D domain_shutdown_completed(d) && (d->shutdown_code =
+=3D=3D SHUTDOWN_suspend);
+>
+> This lines is over 80 chars and should be broken down.
 
---------------Som7zvJlsQqdVDayyX3i4n3b--
+Ack.
 
---------------zg0xTqThLMTT05wGJ3Ydv80n
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+>
+> > +    spin_unlock(&d->shutdown_lock);
+> > +
+> > +    return suspended;
+> > +}
+> > +
+> > +static int32_t domain_psci_system_suspend_policy(struct domain *d)
+> > +{
+> > +    struct domain *other;
+> > +    bool last_awake_control_domain =3D true;
+> > +    bool awake_non_control_domain =3D false;
+> > +
+> > +    /* Only control domains participate in sequencing policy. */
+> > +    if ( !is_control_domain(d) )
+> > +        return 0;
+>
+> I am wondering what would happen in a dom0less setup with no control
+> domain if the domains request SYSTEM_SUSPEND.
+>
+> Could you explain how they would be resumed?
+> Should we deny SYSTEM_SUSPEND requests in this case?
 
------BEGIN PGP SIGNATURE-----
+In the current implementation, a domain in SHUTDOWN_suspend needs
+an explicit XEN_DOMCTL_resumedomain request to resume, for example
+through "xl resume". A guest interrupt does not resume it.
 
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmq9bU4FAwAAAAAACgkQZg+p0QLLz9Bx
-DQwAk6oPAB+CDd6hlL8VA3S5gu6gQjWlpOrJ7+lP+RXKgO4L2NuRmw4X1ov/85DXCsWAtbJmfsXM
-dfoSXzAiLXUGKIYBmoR/TmnvLYGVtd4a1DKrjDbje9yyxTGrh80rZIfZkv/48j1oUgc0b2M/ThIh
-RnIRjWbvSMPHj3QzOQMAH7OsJUiBFRLVAQJ14zDuppa569QePBCICMC1lVj/Rkn25IrvocXiJLKv
-z1/iBCl6WxKg8PrKuAgVnarIK7FCsAcZ1Q8emIIoNKOI8ltJ8mxN+bVUoFhMycIcoctRwnkQlliN
-z+ZJ3RO+NNVd7pQhlLYzkckWKlH1Xs2WMMPhTloQ+9PhpWj2rWZ3U0z9aOTaIl7C/S9vhJyhTL5h
-lxckBwfC0gEW9zozo+GM0jveIJ1YQJGzdF/Gr7tAI0lueM2YouNLYRoV8/K5QcGMPMvD2qtyCCNu
-CBF5nn3VIH8NMSf6IpWin0fd+7T4FaT5Na30DVdJ++xs6pF/PUzvdvqfgEVq
-=7TJ4
------END PGP SIGNATURE-----
+This series relies on a control domain to coordinate resume,
+including the order of backend and frontend domains. It does not
+provide autonomous guest wakeup in a dom0less setup without a
+control domain.
 
---------------zg0xTqThLMTT05wGJ3Ydv80n--
+A separate policy could support dom0less systems with independent
+guests. Each guest could resume on its own wake interrupt. Xen
+could enter host suspend once all guests have completed suspend
+and the platform is ready, then resume on a platform-supported
+wake event. Such a mode could coexist with managed resume, but
+it is not implemented in this series.
+
+So yes, in v13 I will return PSCI_DENIED when a non-control domain
+requests SYSTEM_SUSPEND and no control domain exists.
+PSCI_FEATURES will remain unchanged.
+
+This only checks that a control domain exists. It does not check
+whether that domain has permission to resume this guest or will
+remain available (it may be crashed, dying, or suspended).
+The actual resumedomain request is still checked by XSM.
+
+Best regards,
+Mykola
 
