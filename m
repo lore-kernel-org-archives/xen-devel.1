@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 362C3CA5FC4
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 16:19:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437473.1656369 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DB0DCA5FCC
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 16:19:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437475.1656387 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBx20-0005wB-CK; Wed, 30 Sep 2026 16:19:44 +0000
+	id 1xBx22-0006PK-Sj; Wed, 30 Sep 2026 16:19:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437473.1656369; Wed, 30 Sep 2026 16:19:44 +0000
+Received: by outflank-mailman (output) from mailman id 1437475.1656387; Wed, 30 Sep 2026 16:19:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBx20-0005w1-7a; Wed, 30 Sep 2026 16:19:44 +0000
-Received: by outflank-mailman (input) for mailman id 1437473;
- Wed, 30 Sep 2026 16:19:43 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBx1y-0005se-Vd
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:19:43 +0000
+	id 1xBx22-0006P6-OC; Wed, 30 Sep 2026 16:19:46 +0000
+Received: by outflank-mailman (input) for mailman id 1437475;
+ Wed, 30 Sep 2026 16:19:45 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBx21-0006AA-Jc
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:19:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBx1y-00Ezzr-Ce
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 18:19:42 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xBx21-0008es-0a
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 18:19:45 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abd3695-bab6-0a2a0a5309dd-0a2a4504a40e-6
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:19:42 +0200
-Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abd3681-8faa-0a2a0a5109dd-0a2a4507d690-46
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:19:44 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abd369e-b57f-0a2a45040019-4a7de14ca077-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:19:42 +0200
-Received: by mail-wr2-f12.google.com with SMTP id
- ffacd0b85a97d-482f6350f91so3275942f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 09:19:42 -0700 (PDT)
+ id 6abd36a0-b4ea-0a2a45070019-4a7de18ddd8a-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:19:44 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49e71cdb22bso40973325e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 09:19:44 -0700 (PDT)
 Received: from fedora (user-109-243-71-234.play-internet.pl. [109.243.71.234])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01eb60804sm2807245e9.1.2026.09.30.09.19.39
+ 5b1f17b1804b1-4a01eb60804sm2807245e9.1.2026.09.30.09.19.42
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Sep 2026 09:19:40 -0700 (PDT)
+ Wed, 30 Sep 2026 09:19:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790785182; x=1791389982; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790785184; x=1791389984; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ndysInZFRd3KJAfO9tj2iTZ8cZtuOYLRyLiwdhRF1Ws=;
-        b=i0n2+LqB9ipLcUCuj9QvswiknGlgxvl2/eQhgWcFZ89ORbTbxW+QegYpEXvGeQTxmT
-         /THlwbHqXk2CjvteoEXMeTvlo6I3rAoNBwQYt+fQdFdOdqDa55JDDckwIgEBDAahnkJd
-         NawKBUth/SDy84mwblmwYgIXH3BdKFAFoHJqxjH1Xq2mzsRO8iRSZIAvZochKDB/2nUE
-         RXmWyZpAAYr/CtNPpqtnW8eQAomWN9nMA2CDnBaN2LVyLIYeeKGPoz5H6mrBpRLEYSVz
-         ODExDz5jOLoZnpuGTv2BwR/aVRslR2f0m9QOqu95qjSUc6vTpFDf2TNLJyP2oqT5tRiM
-         zxag==
+        bh=0jP5teAbj/qkytYZEEH2E3nqfgZ1G5e5RzALaSNKJXI=;
+        b=s9LXGZOTTmuaYu+K0r+8N2bnzpKvpytCfrMaunqjdBAKlymZ8AK3U7Dvp2NfWq05Lc
+         ybczYe1BsmpFlnRmyqIYAfk1jEwTYD+YRZ6C3lvUsK7TefmmsN25CPpDYXYYbiQk7nX+
+         X2tqKz8XLt+dYLVRE0kgfeU8VQBW1NCeDmDW95OwVfXY7xKcSreKOK340SnX3YQZ3vx9
+         RdOcj62g0pZmWgq2JLgaVaA93IPTIHXmCEUDEfeproIGQyyQ2pDotiJlJ5QF6W4sVOpC
+         NLhqD6wy5BMbI542LTkLhkNof2dYTDnQW5GfLqJQRJ8Vu6Mk4+U46J4wJ8nMBbcZwpOD
+         JwSg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790785182; x=1791389982;
+        d=1e100.net; s=20260707; t=1790785184; x=1791389984;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=ndysInZFRd3KJAfO9tj2iTZ8cZtuOYLRyLiwdhRF1Ws=;
-        b=0jlHR58QwxePkr1NNdUfCt8TjRZyZMKNrZLCRcwnqJQlJWTk2dHKFEEmP07Kb/t8Cf
-         +Gkeu5/iD57IGFUdad+4bcMTbrpSn3CKAGrhE21rJEgvI+FahzZ9GhXG9j1qRMFwr3T6
-         p/uo1cBTV+wciwZDLFKCnGFEvNYSaJaUwrqmlbZ9WqKTW/NWnsdkUmzqGr5S1XdJZ4sW
-         qwSa6/RcAP3fP6cFGmo93B72A02/8PUWWyQHTnzTedW5lvNjvsEFzQP06fsUN2+pmrA9
-         3z0rRGWyM8veomGLVN+rIrVLrGhK/12Fm/KlZc8XDliG2Zz/8VbfuhW3nfWF8DB3trx4
-         ekUw==
-X-Gm-Message-State: AFuF++koxhfvyP5d8hKo4nv8j8st1pTSwJS6nPpHa9T/JFPy+hlHMU98
-	FrTEJTjiNKTZh21Gg+HgUEg/sG7Od7+++zJwtQJGyCiq/WU2CTgpL/kep/ZZHg==
-X-Gm-Gg: AYBFou2Bstr1PntaMEo1cmrg9lBPOtjlu6OheZEoE3Vk9BiGOj1P2QMc9ysQHYTRSuz
-	nLEUvt77hxNFmuAXXxNpX2MbXA/j5ZSbclaLpbZrcNguEb1Ifd5R0HFgwcVEwQUml0OWLlPm0Vy
-	UanXE9jXBv1F0BLQj8Zx207uZXxJVfu8ZzaX5a2kMyh3ID2EAGc5V3ulKJD52TaV05NL2s/bkfH
-	dNOY6uSAyOKCwZ4AmsiXqySqNchQD9e7SrZssntszmkwWOt3ROK3UxYvwvwIgabsVSF1oEq7Non
-	/jMpnzX6lVSaWDMEW//Er6+XFT3IWp8jqyBFhJ0iex7NiyDnM0ySfF8oakQtshTQVyHCYi1yyu1
-	R+hwSXbRvSow2lgIrPSdNvdPZYLNVJeukV4tn+9ow4ZSzHTH3bxf4LZ3+pRl0qrUZpTY4PEy4VT
-	DbNcfsmTVo0kH5E3XPtkKHkInepnXqb+LLqeHPaZN8mkjQqvPaaOdvr1krr5cN7JfGRl4R699aR
-	e+bYSuVXlVBgwPamv47lzmx9HjsFlLqxRInrAb6
-X-Received: by 2002:a05:600c:a45:b0:49f:fd40:80fa with SMTP id 5b1f17b1804b1-4a01b11de2bmr30435415e9.34.1790785181650;
-        Wed, 30 Sep 2026 09:19:41 -0700 (PDT)
+        bh=0jP5teAbj/qkytYZEEH2E3nqfgZ1G5e5RzALaSNKJXI=;
+        b=jnaAg9yofUlH9QWU+ip8Yu/v5qgUfupiLVhQj0aoCthFGNPdApfaobNxsrfxUBCuHV
+         y8PfYp8b7x9rKISagklb89T5PVaFnGqpAu/KzoIX8KOJJMY/ahyzbdd/78NHxYFOWFRD
+         i0hC2Dt7rWES7jpIAdNTYWxcTrC3FTlSO3lSJ4jWZwfWzS1XXqGuGTUUSIDxd9bb+WFY
+         GgfzcSsE2L9pggtFzIVQYPhbhx5YSCA9TwlQvaZDGARuU0wZnuHO2hho2rDDy7/Q64Rz
+         hEyG3hjPGdSHYFtbRRDKGqR5rSeNHA8RBk3HrIBUFAWyiDNTssgWlJnYEYzNzzzmk1V3
+         mebw==
+X-Gm-Message-State: AFuF++mPsJ5hAv7dRwG9DUMyNj2QWQraT/A2q4cuSQSaaaFPpL4KNJ9B
+	7RrO4nCrUaQlHvw4qNzUTN9Ci5pIfZZLymUiYbKJUxrw5lCobjR9lNy8N4rHNA==
+X-Gm-Gg: AYBFou2xI/Lm5Z4Y3tjfBbgZnpXGnPL650QFWpEw01KxMkJPa1O5SQtx2anJiNMFZQQ
+	YxjebtVwuopEnmuL/stvXkzugsK3ZHtepeH6FxHpaHFJ85CVCFhYBTV9nKhsaDTCGqE2pqdgg8n
+	2EQRDoj8YYxav1cdsY9o24rjVRsfVFPYTqRd7RL4+LejAJH06ugM6bdM6et7w0JI5QFImpvA4Xx
+	abBGP8V56qM+1Ctzhk30q4OJNCV+hvpw9nt9IZgzEgnHtKw5TzPEPeE0ZS/LW59XTh+2tl/TIR/
+	RkERcUWC+bGKNGbYyvUT3XtSDTfICkkFva8nEI7AJCuzzWF17IQPP8nNlWysOmYviQ0VYSXzNfj
+	e6Q02lyZvMj/W/p4zapfLzf3TZBSkhh4GP7VWInjxjsZUyd7FC3PDXP6dqCmFp3Er9JQJ7VSdXn
+	knglSEbTsPW13rE11IbzWGkveaGCaaDQZSvfYt3bSgJvGomHV8jCC3iqaq4gk339cmrZDj++lHH
+	LBei7H6paUY50k6OJvAeRSUrJUfz9QacDkIP+El
+X-Received: by 2002:a05:600c:8a16:10b0:4a0:b9:21b5 with SMTP id 5b1f17b1804b1-4a01b12cbcemr27098005e9.30.1790785184065;
+        Wed, 30 Sep 2026 09:19:44 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -104,116 +104,62 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 03/39] xen/riscv: introduce csr_volatile_read64()
-Date: Wed, 30 Sep 2026 18:18:45 +0200
-Message-ID: <af8a07a676749b83cad27332e88bf433f98f22e1.1790779209.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 05/39] xen/riscv: use ~0 instead of ULONG_MAX to disable the VS-timer
+Date: Wed, 30 Sep 2026 18:18:47 +0200
+Message-ID: <96c87282b3c36e910f8d504a1c85e5802f75efad.1790779209.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1790779209.git.oleksii.kurochko@gmail.com>
 References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1790785182-50CDFB50-BA9D4029/10/73395122804
+X-purgate-ID: tlsNG-ef75cf/1790785184-A50CDAE4-8CA6CDC5/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3798
+X-purgate-size: 1845
 
-On RV32 a 64-bit CSR is accessed as two halves, <csr> and <csr>H. Reading
-the halves with two separate instructions isn't always safe: for a CSR
-which hardware increments, a carry from the low half into the high one can
-happen in between, so a plain pair of reads can produce a value the CSR
-never held. Therefore the high half is re-read and the sequence retried if
-it changed in the meantime.
+vstimecmp is a 64-bit CSR independently of XLEN, which is why it is
+written with csr_write64(). On RV32 that macro splits the value into
+the vstimecmp/vstimecmph pair, so passing ULONG_MAX (0xffffffff there)
+writes all ones to the low half and zero to the high half, leaving the
+CSR at 0x00000000ffffffff rather than at its maximum. A VS-timer irq
+would then become pending as soon as (time + htimedelta) reaches 2^32,
+which is exactly what the code is trying to avoid.
 
-Only CSRs which change under Xen's feet need that, hence the name. The
-majority can be read with a plain pair of csr_read()s, so no helper for
-those is introduced here as there would be no user for it.
+Use ~0 instead: csr_write64() converts its argument to uint64_t, and the
+conversion of the signed -1 sign-extends to all ones, so both halves get
+0xffffffff. On RV64 the result is equal to ULONG_MAX, so no functional
+change there.
 
-Use it for CSR_TIME, which is exactly such a counter, and widen cycles_t to
-uint64_t. Otherwise get_cycles() would still truncate the time counter to
-32 bits on RV32.
-
-No functional change on RV64.
-
-Fixes: a541ddadec0a ("xen/riscv: introduce time.h")
+Fixes: 25e032730690 ("xen/riscv: allow Xen to use SSTC while hiding it from guests")
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 ---
 Changes in v3:
- - Rename csr_read64() to csr_volatile_read64(): only CSRs which change
-   under Xen's feet need the retry, the majority can be read with a plain
-   split access, which isn't introduced here as it would have no user.
- - Carry the high half read at the end of an iteration over to the next
-   one, instead of reading it twice per retry.
- - Update the commit message.
+ - Add Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>.
+ - Use ~0 instead of UINT64_MAX.
+ - Update the subject and the commit message accordingly.
 ---
 Changes in v2:
  - New patch.
 ---
 ---
- xen/arch/riscv/include/asm/csr.h  | 27 +++++++++++++++++++++++++++
- xen/arch/riscv/include/asm/time.h |  4 ++--
- 2 files changed, 29 insertions(+), 2 deletions(-)
+ xen/arch/riscv/time.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/riscv/include/asm/csr.h b/xen/arch/riscv/include/asm/csr.h
-index 888d6a2a86d6..a5cb24c863dd 100644
---- a/xen/arch/riscv/include/asm/csr.h
-+++ b/xen/arch/riscv/include/asm/csr.h
-@@ -39,12 +39,39 @@
-     csr_write(csr, v_);             \
-     csr_write(csr ## H, v_ >> 32);  \
- })
-+
-+/*
-+ * The two halves are read by separate instructions, so a CSR which hardware
-+ * increments can carry from the low half into the high one in between,
-+ * yielding a value the CSR never held. Re-read the high half and retry the
-+ * sequence if it changed.
-+ *
-+ * Only needed for CSRs which change under Xen's feet.
-+ */
-+#define csr_volatile_read64(csr)                    \
-+({                                                  \
-+    uint32_t hi_, lo_, old_;                        \
-+                                                    \
-+    hi_ = csr_read(csr ## H);                       \
-+    do {                                            \
-+        old_ = hi_;                                 \
-+        lo_ = csr_read(csr);                        \
-+    } while ( (hi_ = csr_read(csr ## H)) != old_ ); \
-+                                                    \
-+    ((uint64_t)hi_ << 32) | lo_;                    \
-+})
- #else
- #define csr_write64(csr, val)       \
- ({                                  \
-     csr_write(csr, val);            \
-     (void)csr ## H;                 \
- })
-+
-+#define csr_volatile_read64(csr)    \
-+({                                  \
-+    (void)csr ## H;                 \
-+    csr_read(csr);                  \
-+})
- #endif
- 
- #define csr_swap(csr, val)                                      \
-diff --git a/xen/arch/riscv/include/asm/time.h b/xen/arch/riscv/include/asm/time.h
-index 4d68900151a7..a7c9736ae719 100644
---- a/xen/arch/riscv/include/asm/time.h
-+++ b/xen/arch/riscv/include/asm/time.h
-@@ -18,11 +18,11 @@ static inline void force_update_vcpu_system_time(struct vcpu *v)
-     BUG_ON("unimplemented");
+diff --git a/xen/arch/riscv/time.c b/xen/arch/riscv/time.c
+index 602c029641b8..782d9cd450f3 100644
+--- a/xen/arch/riscv/time.c
++++ b/xen/arch/riscv/time.c
+@@ -101,8 +101,8 @@ void __init preinit_xen_time(void)
+          * A VS-timer interrupt becomes pending whenever the value of
+          * (time + htimedelta) is greater than or equal to vstimecmp CSR.
+          * Thereby to avoid spurious VS-timer irqs set vstimecmp CSR to
+-         * ULONG_MAX.
++         * ~0.
+          */
+-        csr_write64(CSR_VSTIMECMP, ULONG_MAX);
++        csr_write64(CSR_VSTIMECMP, ~0);
+     }
  }
- 
--typedef unsigned long cycles_t;
-+typedef uint64_t cycles_t;
- 
- static inline cycles_t get_cycles(void)
- {
--    return csr_read(CSR_TIME);
-+    return csr_volatile_read64(CSR_TIME);
- }
- 
- void preinit_xen_time(void);
 -- 
 2.55.0
 
