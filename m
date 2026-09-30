@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 596E1CA5FCB
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 16:24:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437567.1656601 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6B010CA5FC7
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 16:24:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437571.1656615 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBx6f-0006qs-D2; Wed, 30 Sep 2026 16:24:33 +0000
+	id 1xBx6i-0007JE-1Q; Wed, 30 Sep 2026 16:24:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437567.1656601; Wed, 30 Sep 2026 16:24:33 +0000
+Received: by outflank-mailman (output) from mailman id 1437571.1656615; Wed, 30 Sep 2026 16:24:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBx6e-0006oS-MM; Wed, 30 Sep 2026 16:24:32 +0000
-Received: by outflank-mailman (input) for mailman id 1437567;
- Wed, 30 Sep 2026 16:24:30 +0000
+	id 1xBx6h-0007Hy-2z; Wed, 30 Sep 2026 16:24:35 +0000
+Received: by outflank-mailman (input) for mailman id 1437571;
+ Wed, 30 Sep 2026 16:24:32 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBx6c-0006PI-9D
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:24:30 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBx6e-0006l7-Fj
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:24:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBx6b-006Nvr-Lx
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 18:24:29 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xBx6d-006Nvr-Sk
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 18:24:31 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abd37b9-2eae-0a2a0a5409dd-0a2a4508b85c-6
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:24:29 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abd37a8-2eae-0a2a0a5409dd-0a2a4507c4d4-34
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:24:31 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abd37bd-f659-0a2a45080019-4a7de18c8a95-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:24:29 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49ffe281cb1so28578005e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 09:24:29 -0700 (PDT)
+ id 6abd37bf-b4ea-0a2a45070019-4a7de18dd99e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:24:31 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49b912d391aso42605905e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 09:24:31 -0700 (PDT)
 Received: from fedora (user-109-243-71-234.play-internet.pl. [109.243.71.234])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01cd43e66sm14620485e9.2.2026.09.30.09.24.27
+ 5b1f17b1804b1-4a01cd43e66sm14620485e9.2.2026.09.30.09.24.30
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Sep 2026 09:24:28 -0700 (PDT)
+ Wed, 30 Sep 2026 09:24:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,41 +54,41 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790785469; x=1791390269; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790785471; x=1791390271; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=WhdgV3QVxJUr3oQpuKpqS6JUk7msudbkVBTwJRK9mRA=;
-        b=hIc7y2fI0aLpMkRHIOyPbNY2PVRGoZs5HdlwX+83PT26KMNyTjKs+8LSkK5G35NJIV
-         YG23qWCEKAdxatG9DsLbyD3UM+3pRECzYRtXFPcuataU0CdQah47+gmaIAyC52T587Wb
-         s5+wbvO9TrmtAMwDOJLR5FWe0sQtrV3ZcoMV8+0Va/geu6NXson0SAaazfHuf5C3b525
-         9nP4CUd7kGKh8h+BB5wS2POZVH1SZ5PJv2pMPL8yzRr1SSnfC09Zz9ZoymlD8keTV3jw
-         5yJa2p/CAtxAe9IILGmsB1HXr/t1sSmGmRar8oH0aSR/UyEzaKztmdbvrKIM8NisTKzo
-         GV/A==
+        bh=d/jp8PMzGlGGiWG+GmHZRyZuEBmMNWGF6eFnVc/o6uo=;
+        b=TENrT3XYn7YGuR7i4dRvC2VhLVcPIxTFEGEVMOo9yWMCfTyPX4jGVWs+uImHxDhtoU
+         7nZ+yD2JKflzxDwH8k27GIC7kHZnmeQ1MdvHEx+1ZHbRoqdVM9g+4GM4qvIvVD8wAeBi
+         CciJdFwn6Zmu/p9g7yCpuiqw4xGbQYLbG+pVmPGgZoLXpYDjq5SjfpMLNznYQmxwMYuy
+         fDEwlh3t7ND6UyMTFmyMmwSIuWc9F5YQwMtHabJBBNmwz0KDBWDwffqkdLWn4y4Avo+k
+         0u5SWM1MZtW51AcAWaL52gxw82yxA9ttb9nbVoD+aJyjnY7rfyIKlYZjZx+1AwVWQLgx
+         vf4w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790785469; x=1791390269;
+        d=1e100.net; s=20260707; t=1790785471; x=1791390271;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=WhdgV3QVxJUr3oQpuKpqS6JUk7msudbkVBTwJRK9mRA=;
-        b=la9awBoYnKpWl7nNpp9O0KhRPG7Ed+QtScfaVXam7SRpZpaC/20soNzs6KLCK8ZuYi
-         NXqg9UuxfmkrGr7zYiNtGqeDOh3jNvXjCUPDEN8YrKYHskGaudTRrSAIpXjzHQ2FWV2X
-         5s1hsD8ZjZufUxEGN03NEhs+c68ScyI5iF0v4k5F8eIbAGb2NUAo18gkE6U3hrxqFgs2
-         FeESOIGP/ypqH/Y6mw6DERpiq+bXTPv+7ySzdXcRI48erb74aHAb4k6hWNV7DIuGg3i3
-         FnayyRMg/WLFDsQ+N7ZLW8SqcSfn8r6VP4eHvkzMqZB1Sp/lPw0b8B9wk9cf1ctri0JU
-         Bmuw==
-X-Gm-Message-State: AFuF++k9Kg34muPPjpN4XzR6AXd+OCmntp1yvFQ44AFuck5uilXEcI7d
-	WGjEqJkH4u8pzs/H27BnQyRSddBuPbZHOSb/xg9mSFg7sg4j4sxBsEqFAErayA==
-X-Gm-Gg: AYBFou2jw5cKrOqIjI4Qc722FDYHtopSTvD1EvzqBVgTGxQrfIhSOSOBiRu/avu41Rz
-	fkQ4S4Q0eL1XiMgw6A0VYyNTqTlUHVUJtjue7V97R/5FpjlRGI3DWvqt6G5mCis2nzMhxKpopKn
-	/i00kYcD6QkcpOcAPZYura4TGRrzF1Enyx6ODgrwPtu2EkZxc18YYqxngiKLYfgGTBfndDrs2g6
-	DCOfctNY9CDhCo2/EjE56jq84DdGM6NSu4Vgla22V/oytvy4O5MIhyUz4dACa6Tmf2hiaPpXzx4
-	AA4zB11LRKC0oLHii9x4Ow3lK2uFBpJkp//Iba8q1BV7xVgcuagWnjS+QLXP8LbqHYAF+/sEE36
-	Wjx6mWzwopD8SA8Wo4dO1Lyd4BFB1G7ojOiOlygD8VLXNFufmw2xt/Pb3D3KFLFuwr8XPueYPl6
-	g/Y1f5p8Hx4nTEuIy+teEI9gH9d3dXNhFh7M33RyNVQesjP3khecdATrRBziGf5QE9LYxOAFXyH
-	Kje20BIYCbYVCyCK+LiG6rWo/PtqxJRtJuqRk/7a9MTgdA8Bct9
-X-Received: by 2002:a05:600d:82e7:b0:49f:c199:e1e2 with SMTP id 5b1f17b1804b1-4a01b0190cemr37567345e9.28.1790785469012;
-        Wed, 30 Sep 2026 09:24:29 -0700 (PDT)
+        bh=d/jp8PMzGlGGiWG+GmHZRyZuEBmMNWGF6eFnVc/o6uo=;
+        b=ktNb5ieT65eUmsA9nh4Uadd6EP8BTPqOWvSGA4bIlxLprnzsm+BAVpDPb6PSO7jHGS
+         Tfi65Evk4Vwrhml2Ic7FJ0DH2hLl6OOkQSaRIPH5zLigee14io72Wf9a9JzCm2KIY2qo
+         QWrp/bEsXG1tZd2MQfpmzdBJsPVj/u0JSKR0yp3HpqIht4VWplW9bm/jR1I6cV5IHeQt
+         o0JnAkOOyA0S8PWU3q74HEARGA/G0H1qqoTbtrPtVLotRkuHO+wjyxcwQKXTNy16mQw0
+         ASivkNIo4vJHQQjWLogglGM3HqvRg4DIKe7ArLqLS7M74zgGt7DXCC9pA/5SxEsQ3yNz
+         Sh0g==
+X-Gm-Message-State: AFuF++kuNhY08glw3RCFZ0V6z3sxa7PeL+sVg9nfhzXzx2xWu+j+JzY0
+	hlxY9MKFrZCXypEGXzny3hrMY0oM1hZbWBGGnTihPFwEX+GaaamiYR43OS9orQ==
+X-Gm-Gg: AYBFou3OaELVrnj3FlF2bNwToq2vhzKkvAwlqlKU0S3pz3mzXLsF/7CgY/YEWLZPFcS
+	CPYNCGUJhBkAIsi7e7ulxam1vsD71ZDBWkznNRR7KRf8/of3XdoNj4rL4iCgE/2ci9YbuxOk0mt
+	O1wKWx4fYPjN0SRoCcNS/jte4P2LNw1m6LLHrSrWVL3eIV0RKXqukFf6k+oesM4kqN5Y6/F6eFV
+	dIokSLNDJ2ycO47cpjUlKMArLmJSXVcv4fQDTj19iAiV8gu+NxhK5hVkTETaU2LctZFh/vNGn8r
+	P3hJYjrqiuQCb8Ms3cDRKE9QbdXauZ6SmYNgySL5tb//ayoHzh9ycr+OXwGQoCo2OBbx5yytTTg
+	R0Cu1b+q4lH8/28vUK5NKu0usFgLJVoSGckqGWIF158cEUzfbhwvTMZ2LakSiY67w8BmiFZCedd
+	VQb1/CTVPeDWGkX2i0UXJ6zf+tBSZvC3575hTnBUO7p+Y+k8fLPJFuxm/kKHYAW0wf2S2S1Elz1
+	U7Uzg/kJ/oGF22AxHeXuy/n5HJFL+HTC/+vVI8KSkUo8U/LlTowKtunPufG4Q==
+X-Received: by 2002:a05:600c:46cf:b0:4a0:151e:f744 with SMTP id 5b1f17b1804b1-4a01b01bb16mr34637825e9.22.1790785471263;
+        Wed, 30 Sep 2026 09:24:31 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
@@ -104,104 +104,69 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 25/39] xen/riscv: add guest store emulation for trapped MMIO accesses
-Date: Wed, 30 Sep 2026 18:23:44 +0200
-Message-ID: <ee4611cd5d3388eda12c611eeebec6b354a49681.1790779209.git.oleksii.kurochko@gmail.com>
+Subject: [PATCH v3 27/39] xen/riscv: handle the case when no vCPU migration is needed
+Date: Wed, 30 Sep 2026 18:23:46 +0200
+Message-ID: <dddd74313e8b64b61c797fba663cba5e9322911e.1790779209.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1790779209.git.oleksii.kurochko@gmail.com>
 References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1790785469-CD54C87B-27B4087A/10/73395122804
+X-purgate-ID: tlsNG-ef75cf/1790785471-362C4AE4-C5B3E5B0/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 3696
+X-purgate-size: 2084
 
-Extend the guest page fault handler with store emulation to support MMIO
-write accesses.
+The scheduler moves a vCPU's interrupts (arch_move_irqs(), i.e.
+imsic_migrate_vcpu()) ahead of context_switch() whenever the unit is
+picked up by a pCPU other than the one it was assigned to, which can
+already happen for a freshly created vCPU on its very first run. No IMSIC
+h/w interrupt file has been mapped for such a vCPU yet, so there is
+nothing to migrate: return early while its last_cpu is still CPU_NONE,
+i.e. while it hasn't run.
 
-Like emulate_load(), emulate_store() obtains the trapped instruction with
-insn_fetch_faulted(), which also deals with a fault taken while re-reading
-it, and decodes it with decode_ldst_insn(). As with the load path, the
-access is completed synchronously through do_mmio().
-
-At the moment only virtual interrupt controller (vINTC) traps are expected
-to occur, since it is currently the only backend registered with the MMIO
-handler dispatch, so in practice the store is emulated via the vINTC
-backend.
-
-Together with load emulation, this completes the basic MMIO handling path
-needed for virtual interrupt controller support on RISC-V.
+Keep the BUG_ON() at the end of the function until imsic_migrate_vcpu() is
+fully implemented, to avoid ending up with a vCPU which isn't fully migrated
+to the new IMSIC interrupt file.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v3:
- - Update the commit message.
- - Zero-initialize di, as decode_ldst_insn() expects it to start out zeroed.
- - Adjust to guest_gpr() taking the decoded instruction rather than a bare
-   register number.
- - Don't change the prototype of emulate_store(): the stub takes a pointer
-   to const already.
+ - Reword the last paragraph of the commit message: the BUG_ON() is already
+   present in imsic_migrate_vcpu() before this patch, so it is kept rather
+   than added.
+ - Check last_cpu against CPU_NONE instead of NR_CPUS, as that is the
+   value a vCPU which never ran holds now.
+ - Describe in the commit message how imsic_migrate_vcpu() can be called
+   for a vCPU which never ran, rather than referring to where the IMSIC
+   interrupt file gets attached.
 ---
 Changes in v2:
- - Move the emulation code to the new arch/riscv/emulate.c, leaving traps.c
-   with trap dispatch only.
- - Split the patch up: the instruction fetch and the mask/match chain now
-   live in "xen/riscv: add helpers for decoding a trapped load or store"
-   (struct decoded_insn, insn_fetch_faulted(), decode_ldst_insn(),
-   guest_gpr(), advance_pc()), so only emulate_store() itself is left here.
- - Since the decoder is now shared with the load path, reject an encoding
-   which is not a store (!di.is_write) explicitly; in v2 the mask/match
-   chain was store-only and could not match a load.
- - Recognize the XLEN=64-only encodings by the guest's effective XLEN
-   (guest_xlen()) rather than by Xen's own (CONFIG_RISCV_32). Besides those
-   encodings simply being reserved on RV32, the compressed ones are ambiguous
-   there: C.SD and C.FSW share an encoding, and likewise C.SDSP and C.FSWSP.
- - Read the source register through guest_gpr() instead of the
-   GET_RS2()/GET_RS2S()/GET_RS2C() macros; which of the three register
-   fields an encoding names is now decided by decode_ldst_insn().
- - Take the faulting address from struct guest_fault, filled in by
-   resolve_faulting_gpa(), rather than from the fault_addr parameter.
- - Drop the description of a fault taken while re-reading the trapped
-   instruction: that code is now in the patch adding the decoding helpers,
-   where a G-stage fault is reported to the guest as CAUSE_FETCH_ACCESS.
- - Update the commit message accordingly.
+ - New patch.
 ---
 ---
- xen/arch/riscv/emulate.c | 21 ++++++++++++++++++++-
- 1 file changed, 20 insertions(+), 1 deletion(-)
+ xen/arch/riscv/imsic.c | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/xen/arch/riscv/emulate.c b/xen/arch/riscv/emulate.c
-index ff8cba7d5116..7ae3f438a726 100644
---- a/xen/arch/riscv/emulate.c
-+++ b/xen/arch/riscv/emulate.c
-@@ -454,7 +454,26 @@ static int emulate_load(const struct guest_fault *gf)
+diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
+index c5fcdcf13b00..2f0bb29ae639 100644
+--- a/xen/arch/riscv/imsic.c
++++ b/xen/arch/riscv/imsic.c
+@@ -693,5 +693,15 @@ int __init vimsic_make_domu_dt_node(struct kernel_info *kinfo,
  
- static int emulate_store(const struct guest_fault *gf)
+ void imsic_migrate_vcpu(struct vcpu *v)
  {
--    return -EOPNOTSUPP;
-+    struct cpu_user_regs *regs = gf->regs;
-+    mmio_info_t info = { .is_write = true };
-+    struct decoded_insn di = {};
-+    int rc;
++    /*
++     * The scheduler can mark a freshly created vCPU's unit as migrated and
++     * invoke this before the vCPU has ever run (see the migrated branch in
++     * schedule()). No need to do migration for such vCPUs as they aren't fully
++     * initialized (for example, context_switch() will be called after
++     * imsic_migrate_vcpu()).
++     */
++    if ( v->arch.last_cpu == CPU_NONE )
++        return;
 +
-+    if ( insn_fetch_faulted(gf, &di) )
-+        return 0;
-+
-+    if ( !decode_ldst_insn(&di, guest_xlen(regs)) || !di.is_write )
-+        return -EOPNOTSUPP;
-+
-+    info.data = *guest_gpr(regs, &di);
-+
-+    rc = do_mmio(&info, gf->gpa, di.len);
-+    if ( rc )
-+        return rc;
-+
-+    advance_pc(regs, di.insn_len);
-+
-+    return 0;
+     BUG_ON("unimplemented");
  }
- 
- static void inject_access_fault(const struct guest_fault *gf)
 -- 
 2.55.0
 
