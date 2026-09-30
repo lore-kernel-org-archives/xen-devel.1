@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C5BEEC9830E
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 05:01:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436813.1655470 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF11DCA5FAB
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 05:59:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436841.1655497 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBmRM-0003Iw-Gw; Wed, 30 Sep 2026 05:01:12 +0000
+	id 1xBnLJ-0002rz-8V; Wed, 30 Sep 2026 05:59:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436813.1655470; Wed, 30 Sep 2026 05:01:12 +0000
+Received: by outflank-mailman (output) from mailman id 1436841.1655497; Wed, 30 Sep 2026 05:59:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBmRM-0003If-C3; Wed, 30 Sep 2026 05:01:12 +0000
-Received: by outflank-mailman (input) for mailman id 1436813;
- Wed, 30 Sep 2026 04:13:46 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <anshuman.khandual@arm.com>) id 1xBlhR-0005Za-O9
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 04:13:46 +0000
+	id 1xBnLJ-0002rs-51; Wed, 30 Sep 2026 05:59:01 +0000
+Received: by outflank-mailman (input) for mailman id 1436841;
+ Wed, 30 Sep 2026 05:59:00 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBnLI-0002rm-3e
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 05:59:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBlhP-0047Re-Ac
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 06:13:43 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xBnLH-00Fp0i-1Q
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 07:58:59 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <anshuman.khandual@arm.com>)
- id 6abc8c62-2eae-0a2a0a5409dd-0a2a450b8ac2-30
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 06:13:42 +0200
-Received: from [217.140.110.172] (helo=foss.arm.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
- (envelope-from <anshuman.khandual@arm.com>)
- id 6abc8c76-b7e8-0a2a450b0019-d98c6eac84ca-1
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 06:13:42 +0200
-Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
- by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id 115331516;
- Tue, 29 Sep 2026 21:13:38 -0700 (PDT)
-Received: from localhost (a085714.arm.com [10.164.19.28])
- by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id 068A63F85F;
- Tue, 29 Sep 2026 21:13:40 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6abca520-bab6-0a2a0a5309dd-0a2a4506bac4-4
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 07:58:58 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6abca520-195a-0a2a45060019-4a7de18dce63-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 07:58:57 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49e7d2bb404so6249785e9.1
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 22:58:57 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a0174f055csm21659335e9.9.2026.09.29.22.58.55
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 29 Sep 2026 22:58:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,171 +52,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
-	t=1790741621; bh=Eo9CdH+0TtRSX/QNTJHDXco4iCbdFaKjgbzXmhi+d+w=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
-	b=uUMCfJkuCo0kl9BpIml6ya6QFhzuY6ScFyN2rrI9OZskXRGAAufEdzszI/qQTPqg9
-	 Iguh/DHAQ4gijcI8is1MZGmQg8kO5mj99Gmt6zNO4sTw9mweCAqyNbvOWOTaW5gjPd
-	 8DmLSRkJE2jM29CtfSFlUOWDSiSDxl4euASIJUXk=
-Date: Wed, 30 Sep 2026 09:43:37 +0530
-From: Anshuman Khandual <anshuman.khandual@arm.com>
-To: Muhammad Usama Anjum <usama.anjum@arm.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>, 
-	David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, 
-	"Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
-	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
-	Michal Hocko <mhocko@suse.com>, Xu Xin <xu.xin16@zte.com.cn>, 
-	Chengming Zhou <chengming.zhou@linux.dev>, Jann Horn <jannh@google.com>, 
-	Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
-	Pedro Falcato <pfalcato@suse.de>, Arnd Bergmann <arnd@arndb.de>, Will Deacon <will@kernel.org>, 
-	"Aneesh Kumar K.V" <aneesh.kumar@kernel.org>, Nick Piggin <npiggin@gmail.com>, 
-	Peter Zijlstra <peterz@infradead.org>, Pasha Tatashin <pasha.tatashin@soleen.com>, 
-	Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>, Lance Yang <lance.yang@linux.dev>, 
-	Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>, 
-	Kemeng Shi <shikemeng@huaweicloud.com>, Nhat Pham <nphamcs@gmail.com>, Baoquan He <baoquan.he@linux.dev>, 
-	Barry Song <baohua@kernel.org>, Youngjun Park <youngjun.park@lge.com>, 
-	Uladzislau Rezki <urezki@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, 
-	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
-	Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, 
-	Andrii Nakryiko <andrii@kernel.org>, Eduard Zingerman <eddyz87@gmail.com>, 
-	Kumar Kartikeya Dwivedi <memxor@gmail.com>, Martin KaFai Lau <martin.lau@linux.dev>, 
-	Song Liu <song@kernel.org>, Yonghong Song <yonghong.song@linux.dev>, 
-	Jiri Olsa <jolsa@kernel.org>, Emil Tsalapatis <emil@etsalapatis.com>, 
-	Ihor Solodrai <ihor.solodrai@linux.dev>, Ingo Molnar <mingo@redhat.com>, 
-	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
-	Mark Rutland <mark.rutland@arm.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>, 
-	Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>, 
-	James Clark <james.clark@linaro.org>, SJ Park <sj@kernel.org>, 
-	"Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>, 
-	John Hubbard <jhubbard@nvidia.com>, Peter Xu <peterx@redhat.com>, Leon Romanovsky <leon@kernel.org>, 
-	Zi Yan <ziy@nvidia.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
-	Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>, 
-	Usama Arif <usama.arif@linux.dev>, Kiryl Shutsemau <kas@kernel.org>, 
-	Andrey Ryabinin <ryabinin.a.a@gmail.com>, Alexander Potapenko <glider@google.com>, 
-	Andrey Konovalov <andreyknvl@gmail.com>, Dmitry Vyukov <dvyukov@google.com>, 
-	Vincenzo Frascino <vincenzo.frascino@arm.com>, Miaohe Lin <linmiaohe@huawei.com>, 
-	Naoya Horiguchi <nao.horiguchi@gmail.com>, Matthew Brost <matthew.brost@intel.com>, 
-	Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>, Byungchul Park <byungchul@sk.com>, 
-	Gregory Price <gourry@gourry.net>, Ying Huang <ying.huang@linux.alibaba.com>, 
-	Alistair Popple <apopple@nvidia.com>, Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>, 
-	Christoph Lameter <cl@gentwo.org>, Johannes Weiner <hannes@cmpxchg.org>, 
-	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
-	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>, 
-	Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
-	Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>, 
-	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Juergen Gross <jgross@suse.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
-	linux-kernel@vger.kernel.org, linux-mm@kvack.org, linux-fsdevel@vger.kernel.org, 
-	linux-arch@vger.kernel.org, linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org, 
-	linux-perf-users@vger.kernel.org, damon@lists.linux.dev, kasan-dev@googlegroups.com, 
-	intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v3 1/9] mm: introduce hw_pte_t for PTE table storage
-Message-ID: <snzkwnnubrx27tkroyql77iziuws3ku34dkclevfen5edef33b@wc3df3hbeuly>
-References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
- <20260922-pte0-v3-1-5670b8cb9059@arm.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1790747936; x=1791352736; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=P/1kr+oNfk9OMkGhSORIWxyYSxL+iPiey+wqxxzCezA=;
+        b=ftiPGJUL4Mxzka1WUDmvbATtwh4vOv8xxsTTDXaM0cEx31xG6LpeHrntkyH26AjbBR
+         SRe73KiTghVGiXzRlRw4jrvDpmzPMRfVWCCdygueuIl2/UEc7BEiGLC0tjtBOCbF4QWr
+         76/gviztJsDe98ZNNDX9yTQSfAiHVQEcCFFALZWVLHY3N2I9JpaPW1GNds7BoaT7CX5S
+         tDv0SZHuHpyViYeQJ89fRw3k/GZW1HQl3FG3hXu2loxYzbYL5qVp0LDKIzxhWbvZHmnQ
+         qA4L3RmQ67Cbm78KSKpjm8iEKPhc8W+McUbreRsliLSxQsbtz07TcKaVHLW/bGTwf1DH
+         T+OA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790747936; x=1791352736;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=P/1kr+oNfk9OMkGhSORIWxyYSxL+iPiey+wqxxzCezA=;
+        b=Zph9ShlOYMLDo+EwnMu+j6gCAssDsTDJTm5IsjvQm2tN3JxrUtFQFLAYdaJjQ7YX8Z
+         7H62/kZreQiwprJTiroB80mlXIxnXqZ2o6uEf7UBjLTcm5TH5DhkZ+FuMKYw2gkLnxNM
+         9hLDg8XJqMQv/teiGO0bM+tqOFKDkgcg/SMl5yHpfrkm/y6cSNOezFxfTVgoKx8EZ5Rz
+         O0eYg9oR/ew4cxeZ9Vv/ptDZ+kBfRst3DKOox2Z6X5M9SYAkBTAMof88mh5GAVqQ0LeA
+         ccWsMs1JY8UshzdE4Gojz0oVOqmnUGOcPBTAoQQPEEQ6k34cghN6KeqdDgSsyqUNi/bp
+         sslg==
+X-Gm-Message-State: AFuF++lCJLXC/fK9gdBFKVgIdcqNe24biGBT1WRIR5TwNgjXFC78piVq
+	8m6F/s26JZqu13X1Bkj2qYh0kRcbrlyUvrGs7PLvkpHqTsGlIsxWZC0eUEib52dyJA==
+X-Gm-Gg: AYBFou097HOvIwCwknlVVJBJmFdElBeHXmTDSTXBL6QozffgM9GD5350DP/PlMGhK+x
+	7qUPnwNvSoPcczp89SEh8NsKCI6eYucL+Q+adFZD5tuGpmSWXI38FIdIC8ALexdrYPC+FSYz5iF
+	sglnIR25EyYg/xbTlr0niHJr5GyVof4o3vIAIRVLqV/ahcqP+rW+/zkxYyE/dTHVJrvTK6bXusZ
+	gDSu0px2W3GsBxyQJmG/bUp1FQ9lABgYqHDqlbZ/qkAl98NVNNiInNuAbCdkwJbHpEMSTb7ns6b
+	iribHjR4yr8BZvy9IDj5dRKQKIJXB51soIyGd6UCaFBUqwvRDflS7qFYhaz+TMzRBH7H9ickpCl
+	hETraBc70G9V9Id5KPw8MjF2ngCt7ZUoc/BbfHXbEz8R2ENyti4Y+4VbOPKso8f7lzh39EC8TFA
+	sKl/2a1DetpaA3pDAi9t5Oq4xtBcTibggx1aPgr7sFlbDv7LxWN5mjKZqaaeOaz6LfAgG04xXb+
+	VfoaM/qTlaiQCzlIMV5ZarrZ2nDt5hmD0vZYh2IR/s0mIpMDl5+BSsSdvs86Q==
+X-Received: by 2002:a05:600c:1f95:b0:49f:c5aa:9ef4 with SMTP id 5b1f17b1804b1-4a01b1a1138mr2139515e9.8.1790747936603;
+        Tue, 29 Sep 2026 22:58:56 -0700 (PDT)
+Message-ID: <3e600ac0-3096-4cfb-967b-c6d87d8c04e6@suse.com>
+Date: Wed, 30 Sep 2026 07:58:55 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20260922-pte0-v3-1-5670b8cb9059@arm.com>
-X-purgate-ID: tlsNG-42698a/1790741622-AB4D39EA-281E47E7/0/0
-X-purgate-type: clean
-X-purgate-size: 3352
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/3] xen/rcu: introduce the concept of RCU epoch
+To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+References: <20260925163025.65217-1-roger@xenproject.org>
+ <20260925163025.65217-2-roger@xenproject.org>
+ <DLQSZY2KSYDH.1YSCWGQIQYP0H@amd.com> <arvJQSDecSSAU1WC@macbook.local>
+ <50d1df6c-d969-470b-9b40-ca171c60618d@suse.com>
+ <DLS5A4YDJ8ET.28ZIPQ6QEN2K4@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <DLS5A4YDJ8ET.28ZIPQ6QEN2K4@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1790747937-F7ACA77B-33E700F8/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2238
 
-On Tue, Sep 22, 2026 at 06:12:29PM +0100, Muhammad Usama Anjum wrote:
-> pte_t is used both for software PTE values and for entries stored in a PTE
-> table, so pte_t * does not distinguish a pointer to a software PTE
-> value from a pointer to table storage.
+On 30.09.2026 00:14, Alejandro Vallejo wrote:
+> On Tue Sep 29, 2026 at 4:52 PM CEST, Jan Beulich wrote:
+>> On 29.09.2026 16:20, Roger Pau Monné wrote:
+>>> On Mon, Sep 28, 2026 at 10:24:04AM +0200, Alejandro Vallejo wrote:
+>>>> On Fri Sep 25, 2026 at 6:30 PM CEST, Roger Pau Monne wrote:
+>>>>>  static inline void rcu_quiesce_disable(void)
+>>>>>  {
+>>>>> +    unsigned int cpu = smp_processor_id();
+>>>>> +
+>>>>>      preempt_disable();
+>>>>> -    this_cpu(rcu_lock_cnt)++;
+>>>>> -    barrier();
+>>>>> +    if ( !ACCESS_ONCE(per_cpu(rcu_lock_cnt, cpu))++ )
+>>>>> +        ACCESS_ONCE(per_cpu(rcu_lock_epoch, cpu)) = ACCESS_ONCE(rcu_epoch);
+>>>>
+>>>> I'm not terribly convinced about using ACCESS_ONCE() for atomic
+>>>> accesses. In particular...
+>>>>
+>>>>> +    smp_mb();
+>>>>>  }
+>>>>>  
+>>>>>  static inline void rcu_quiesce_enable(void)
+>>>>>  {
+>>>>> -    barrier();
+>>>>> -    this_cpu(rcu_lock_cnt)--;
+>>>>> +
+>>>>> +    smp_mb();
+>>>>> +    ACCESS_ONCE(this_cpu(rcu_lock_cnt))--;
+>>>>
+>>>> ... this variable is to be read by remote CPUs and autodecrement seems
+>>>> like the wrong tool for an atomic decrement.
+>>>
+>>> I can use {read,write}_atomic() instead, but there's been a tendency
+>>> to phase out the usage of those functions.  On x86 this should be a
+>>> plain `addl` or `subl` instruction (the non-locked version of
+>>> atomic_{inc,dec}()).
 > 
-> Introduce hw_pte_t as the generic name for a PTE table element. Define it
-> as a macro alias of pte_t by default. When an architecture selects
-> ARCH_HAS_HW_PTE_T, define it as a structure containing a pte_t instead.
-> This preserves the representation while allowing converted architectures
-> to enforce the distinction at compile time.
+> I don't think the compiler can merge volatile reads and writes. It can
+> shatter them (thus my fear), but they are meant to be distinct because
+> each might have different side effects. Jan already mentioned this in
+> other words.
 > 
-> Name the generic wrapper structure __hw_pte_t so architectures can
-> forward-declare it when pgtable_t must be defined before the generic
-> hw_pte_t typedef is visible. This avoids header-order dependencies.
+> You don't need an atomic decrement though, just an atomic write. Note
+> IRQs restore it on exit and other CPUs don't write to it.
 > 
-> Keep the C type definitions behind an __ASSEMBLY__ check because
-> architecture assembly sources can include this header indirectly. Include
-> asm/page.h so consumers such as linux/vmalloc.h retain the page definitions
-> they previously obtained from that header.
+>   unsigned int *lock_cnt = &this_cpu(rcu_lock_cnt);
+>   write_atomic(lock_cnt, *lock_cnt - 1);
 > 
-> Acked-by: David Hildenbrand (Arm) <david@kernel.org>
-> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+> and this yields a plain mov, through a static inline stub (plus the
+> mov from the read access + dec)
+> 
+> The problem with ACCESS_ONCE() is that the write isn't guaranteed to be
+> atomic.
 
-LGTM
+It may not be properly written down anywhere, but at least the compilers
+we use are known to not tear aligned accesses up to a machine word in
+width.
 
-Reviewed-by: Anshuman Khandual <anshuman.khandual@arm.com>
-
-> ---
-> Changes since v1:
-> - Name the generic wrapper structure __hw_pte_t so architectures can
->   forward-declare it, and explain why this is required.
-> - Use software PTE value terminology.
-> 
-> Changes since RFC v1:
-> - Add the ARCH_HAS_HW_PTE_T opt-in and generic wrapper definition.
-> - Exclude the C type definitions from assembly sources.
-> - Update the description for the new opt-in model.
-> ---
->  MAINTAINERS                   |  1 +
->  include/linux/pgtable_types.h | 17 +++++++++++++++++
->  mm/Kconfig                    |  3 +++
->  3 files changed, 21 insertions(+)
-> 
-> diff --git a/MAINTAINERS b/MAINTAINERS
-> index 2133aec4a2004..da60a8bdcddb5 100644
-> --- a/MAINTAINERS
-> +++ b/MAINTAINERS
-> @@ -17140,6 +17140,7 @@ F:	include/linux/mmu_notifier.h
->  F:	include/linux/pagewalk.h
->  F:	include/linux/pgalloc.h
->  F:	include/linux/pgtable.h
-> +F:	include/linux/pgtable_types.h
->  F:	include/linux/ptdump.h
->  F:	include/linux/vmpressure.h
->  F:	include/linux/vmstat.h
-> diff --git a/include/linux/pgtable_types.h b/include/linux/pgtable_types.h
-> new file mode 100644
-> index 0000000000000..07da05d375c2c
-> --- /dev/null
-> +++ b/include/linux/pgtable_types.h
-> @@ -0,0 +1,17 @@
-> +/* SPDX-License-Identifier: GPL-2.0 */
-> +#ifndef _LINUX_PGTABLE_TYPES_H
-> +#define _LINUX_PGTABLE_TYPES_H
-> +
-> +#include <asm/page.h>
-> +
-> +#ifndef __ASSEMBLY__
-> +
-> +#ifdef CONFIG_ARCH_HAS_HW_PTE_T
-> +typedef struct __hw_pte_t { pte_t __pte; } hw_pte_t;
-> +#else
-> +#define hw_pte_t pte_t
-> +#endif
-> +
-> +#endif /* !__ASSEMBLY__ */
-> +
-> +#endif /* _LINUX_PGTABLE_TYPES_H */
-> diff --git a/mm/Kconfig b/mm/Kconfig
-> index c1ddf59c0d71a..5f462ec6fa5e5 100644
-> --- a/mm/Kconfig
-> +++ b/mm/Kconfig
-> @@ -1312,6 +1312,9 @@ comment "GUP_TEST needs to have DEBUG_FS enabled"
->  config GUP_GET_PXX_LOW_HIGH
->  	bool
->  
-> +config ARCH_HAS_HW_PTE_T
-> +	bool
-> +
->  config DMAPOOL_TEST
->  	tristate "Enable a module to run time tests on dma_pool"
->  	depends on HAS_DMA
-> 
-> -- 
-> 2.47.3
-> 
+Jan
 
