@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 119DBCA5FC7
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0BADCA5FCC
 	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 16:24:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437553.1656542 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1437556.1656558 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBx6U-0004wb-Pw; Wed, 30 Sep 2026 16:24:22 +0000
+	id 1xBx6X-0005ON-5J; Wed, 30 Sep 2026 16:24:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437553.1656542; Wed, 30 Sep 2026 16:24:22 +0000
+Received: by outflank-mailman (output) from mailman id 1437556.1656558; Wed, 30 Sep 2026 16:24:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBx6U-0004ud-Ke; Wed, 30 Sep 2026 16:24:22 +0000
-Received: by outflank-mailman (input) for mailman id 1437553;
- Wed, 30 Sep 2026 16:24:21 +0000
+	id 1xBx6W-0005NQ-Rb; Wed, 30 Sep 2026 16:24:24 +0000
+Received: by outflank-mailman (input) for mailman id 1437556;
+ Wed, 30 Sep 2026 16:24:23 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBx6T-0004aW-Iu
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:24:21 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBx6V-00059i-KW
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 16:24:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBx6S-00GhYY-Vg
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 18:24:20 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xBx6V-00GhY9-1O
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 18:24:23 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abd37a9-bab6-0a2a0a5309dd-0a2a4509a632-12
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:24:20 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abd37b7-8faa-0a2a0a5109dd-0a2a4503edf2-0
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:24:23 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abd37b4-be1a-0a2a45090019-4a7de18cc578-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:24:20 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49ccf3ca626so34552515e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 09:24:20 -0700 (PDT)
+ id 6abd37b6-fae8-0a2a45030019-4a7de18dd322-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 18:24:22 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49b912e4b11so33222555e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 09:24:22 -0700 (PDT)
 Received: from fedora (user-109-243-71-234.play-internet.pl. [109.243.71.234])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01cd43e66sm14620485e9.2.2026.09.30.09.24.19
+ 5b1f17b1804b1-4a01cd43e66sm14620485e9.2.2026.09.30.09.24.21
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 30 Sep 2026 09:24:19 -0700 (PDT)
+ Wed, 30 Sep 2026 09:24:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,193 +54,181 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790785460; x=1791390260; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1790785462; x=1791390262; darn=lists.xenproject.org;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=OYQQ7ScvSr55sK1nXTa6WzNLNd6SqlC9eeJ4PcwjlZo=;
-        b=Uy0L+mEA4lfTMMG7o1T8t6XYnMYP9gCru5DNEDNpoy7v5cBow9UrTHVTZdW+ktITtV
-         bYubq2SMJKX8LXPR4k9My7qlZ+Wtb/AtyyF99jDwCpa4JJo8VzoV1i5A11NXiY10zgWd
-         Ml4QaQIERG1c6ehSSJkJHpSODXf1R4jeBRbbwaQuReCyWHBaUtiP8wsrTraDIrLhgKal
-         n1ZCGkKB0uk1BhpXhd8ak+rJh7o4mzIM1AIM1i7o8FPKRlWKuo+DYHvE/+xaMqpJlIv1
-         Xal2cxS+mD4JGv/8GRox/aW/LVz5mq1YyvhWuxDsM9CUVZ1N4jjmQp9fcf7QDw+0omeb
-         yyFw==
+        bh=Y85EkaaCMNDVlRXtbC0r51vx5KgR2UBicrOOiZxzrlI=;
+        b=P2pLWGne6JHCwixS8jw79U4sTzBnenkxZUwMLhl2xgEiwMeGTZQ99sKWYsVihBHgMt
+         trSlNyue5hpcqSvKr12AqiJeRFXkZuVYjr+9A91ttd+ZnMtAAShDq6wczyZ/Pc/ok2sx
+         N0CecZ53+7kmAKmffYFMNDWf/a6kywIw90TJETFsNIk043fFMqB5fSz+QCsJBX7wGgS5
+         l32aoM1NjtPvSy+8GvbJkTdJL0MZMXeH5YlWaUNgVOr/u36T3mllSa118Pmk7xlzTQ/w
+         ywwD1RRoTqFYfgWV3bOAb/623DTLkQrzbf4rk9sb1Sjn025e1ih3r0dKBNl8oeISgoPo
+         UoIQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790785460; x=1791390260;
+        d=1e100.net; s=20260707; t=1790785462; x=1791390262;
         h=content-transfer-encoding:mime-version:references:in-reply-to
          :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
          :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=OYQQ7ScvSr55sK1nXTa6WzNLNd6SqlC9eeJ4PcwjlZo=;
-        b=q3DLQ47c1FXx8vMofN45NWPdbX0xxE/G+33LqYu5V9MKxU8lFsoWU59RKAUg6G5sPp
-         0i1pUn51iLzW8QKWPLvW9bnFLqhB8fX/yFCSzHe1js0VgXHTKHwY6qmVlMCzvLumEvE8
-         o8VqBjN8p7b0tryDcCf9QOLtEpasG1afE1tSoEqhfTF+N+kycoOMwxBYCLu0VNwnvtB7
-         uYUah+4MfRztoaqg3PDe/LBzajC8d9QADW/yQQrIJc6ktsh3yGAISo6FqSFO8kZeSzFL
-         F4Ke/Uqij2Ufpgj7Myh5hqkwWgMRZUVZk1e/Use5Q0rms7U9A+Ck6cI0W4CgmeEVUVgq
-         Me9A==
-X-Gm-Message-State: AFuF++lHVbSWLtuvcKgHu9UQzUYR/BvT5nnCJx75uOsVD9/9b+lTQxhh
-	5LWcR/WeTcD0cd6jz4x+VrzDXsU7l/bgfwscX0thkh3NjKQfo4IV5tV9gFZ4AA==
-X-Gm-Gg: AYBFou25qv+uqX701I51VQsuJwkwJypCJSUk+HgNXr/1V40T5BoJY9Ty40hD1NMRgtB
-	aiYNiBKnZnMkKOc7QO7SRNd65ttS6jon/4GDbLDWCup4Jzwy5UbfVUNmuaeTPwSxz+icSOxDEZY
-	xK1m9y1PNa2Qd/QH95PK7yQ2Bm6RV6JSsjYUwWj7sFl1CeJU/8AePcRyZQKW9g56N+Jbrcs+dBU
-	+X6tPwzF4QG+T6DQnd6ehE3+CQ0qnQxPkYxDGtfa1xegvz0a7V/mInJf0lVWMr/UFLKunBYXYSl
-	ljvS3ScyZRrjz6hPb736ZzmGgCMpSQnLRrsszGFlz42X7vh3Av4Wc7SABxIBIzHKigw9sXpe39C
-	Tot8bWl8bRN+asIRZnZE36fUwBirPxg47dWXi+z8MNz9JikNkXUpydkdofrdaSfjB7aCuj5SYFA
-	g4y1v9jy9cfQZaEN6IfUspCMtsZuBju/PWAA+W0vvPBzwWwvSv6bbm1CxOntpHiIyhT2Q2bd1K+
-	Q3Q7dSr/stnAnHK+/UqP0Ia7YqBsN2+7YAuhxzAtQ==
-X-Received: by 2002:a05:600c:4514:b0:49f:ffed:2cb with SMTP id 5b1f17b1804b1-4a01aff3298mr35624915e9.6.1790785460170;
-        Wed, 30 Sep 2026 09:24:20 -0700 (PDT)
+        bh=Y85EkaaCMNDVlRXtbC0r51vx5KgR2UBicrOOiZxzrlI=;
+        b=RmUgjtYl8b7nkaFsCCRpPjPC8AAQhjxdajPPNhpv3BSiDRhxcSYNhCgtcQA2hOhTsr
+         nw/9UNtfxr6bM1kg2mlNMnpZPzcFG7dmUylzQo4hQBkwa2n61k+WlaFWJ5SkshRkjUCO
+         5HI8irs77w8D8sFZRasv+EwxRdCaI+PiQfETlSRyvR2zw4Vv1W5GYljnpSvQkJRf0kwu
+         ktT8BEWlvAhUENkA8MmxfaQxvjrG0BBqwShsrGXDEkCURLnyvKC0+5/fMxv+SgoZFGhJ
+         fLvs/zTPzvqEYxR+A4qfgXSHH4lqzwcuPfXt0Wf+rmYnWgyTN0ruC/C0XGtuj5ylAFuT
+         U/4g==
+X-Gm-Message-State: AFuF++lNr12pcrdzwGHhLwFoJ8oHgyZPD+1TWOuHMxdCf0FuTdrxJV9u
+	VVeEmJjDhExx7yAqjKvf0Ds0KNL1YVrHpR3QVtAGLQvAxPI0NMOv1Gk9SinDvg==
+X-Gm-Gg: AYBFou3bFfKgWMhn7IrAAfja/D6GawejLsPDngB3Jmy8iITtIke6TE4JV3aHDA+PQXK
+	YR43OVVRKVntYg4Ai3xmAvpqmX2RVZV1Fp8R0pRTvEM/gsIkRsiy284RUkCLjS7A5JfjoolL6Mh
+	P7OTEqdGk8t3El52hoBrO9c16ElfzK1Do+OGUq70+jMvnyAwt5eR6eu+lvnlf0oKx1UPL+p5X1N
+	fLhM8XzJ6x5iwAY348zHODmMexzRJ4A0QmIAwTXaIwLqkU102AmEKQvK3LcRXSRAGDKNZMqsz+I
+	D9vZ4se81YE1SjGD1xQ+HjPN6OJ97BK7YQLTkiLYUY+i5WFL8BjAqDpVL9/3BAzgugQGCmWVJAF
+	NBCNX8mIfkZZzfj57BsooUX1tm9Rd4g4XUcCJsjOrkhbGEZLuJybNpAhlj6yQlkzpYQKXFNSoAP
+	NcEysQDp6/fvb9fHA+GAHD9ANyVtmjn76aT2EWuztj3xlu4wE/9jFO1cyuHoV3CduyEIF8uxwtO
+	dhk/A+uVZsALoRh12JjbAue4iwu+ukwz/Hge20f
+X-Received: by 2002:a05:600c:6815:b0:49b:96a0:5c00 with SMTP id 5b1f17b1804b1-4a01ade9aa5mr36195235e9.13.1790785462292;
+        Wed, 30 Sep 2026 09:24:22 -0700 (PDT)
 From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 To: xen-devel@lists.xenproject.org
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
 	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
 	Zheng Zhang <zhangzheng@iscas.ac.cn>,
 	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v3 18/39] xen/riscv: implement trap redirection to a guest
-Date: Wed, 30 Sep 2026 18:23:37 +0200
-Message-ID: <109f3a920a2f5e58de5889ac2bcb834cc7ce967a.1790779209.git.oleksii.kurochko@gmail.com>
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>
+Subject: [PATCH v3 20/39] xen/riscv: resolve the faulting guest physical address
+Date: Wed, 30 Sep 2026 18:23:39 +0200
+Message-ID: <f828fe51cde79f10632094067c82a7fc6f05391f.1790779209.git.oleksii.kurochko@gmail.com>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <cover.1790779209.git.oleksii.kurochko@gmail.com>
 References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1790785460-BD0CD034-B656A627/10/73395122804
+X-purgate-ID: tlsNG-33051d/1790785463-754844E9-0E833DDF/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 5325
+X-purgate-size: 4973
 
-Two kinds of traps can't or shouldn't be handled by the hypervisor and
-have to be reflected to the guest's own S-mode trap handler instead:
-- Traps Xen takes on the guest's behalf, such as those taken by the
-  hlv/hlvx sequences Xen uses to access guest memory.
-- Access faults handle_guest_page_fault() injects for a guest-page
-  fault that can never become an emulated access.
+Recover the guest physical address from htval and stval. On a guest-page
+fault to hypervisor, htval holds the guest physical address shifted
+right by 2, so that an address wider than HSXLEN fits, and stval holds
+the faulting guest virtual address. The shift is done on paddr_t rather
+than on the raw register: a guest physical address is 34 bits wide on
+RV32 with Sv32x4, so shifting an XLEN-wide value would drop its top two
+bits.
 
-Implement trap_redirect(), until now a BUG_ON() placeholder, for that
-purpose. It makes the trap appear to the guest as if it had been taken
-directly in VS-mode: the trap information is transferred to the guest's
-virtual supervisor CSRs and the vCPU is resumed at its exception vector in
-supervisor mode, following the trap entry rules of the RISC-V privileged
-specification.
+However, there are two cases to distinguish when recovering the
+faulting GPA:
+- Explicit memory access: the two least significant bits of stval are
+  the same as those of the guest physical address.
+- Implicit memory access for VS-stage translation: the two least
+  significant bits of the guest physical address (GPA[1:0]) are zero.
+These two cases can be distinguished using the value provided in
+register htinst.
 
-The implementation is based on kvm_riscv_vcpu_trap_redirect() from Linux,
-with a few deviations:
- - The function reads and writes physical VS-mode CSRs, so it is only
-   meaningful for the currently running vCPU. Instead of taking a
-   struct vcpu argument, it always operates on current.
- - The MODE field of vstvec is masked off explicitly when computing the
-   exception target PC (exceptions always vector to BASE), rather than
-   relying on the hardwired zero bit of sepc to drop it on VM entry.
- - Assertions document the preconditions: the trap must have been taken
-   from virtualized mode (hstatus.SPV set), and only synchronous
-   exceptions may be redirected - interrupts must be injected via hvip
-   instead, so that the hardware performs VS-mode trap entry itself,
-   respecting vsstatus.SIE and vectored vstvec dispatch.
+stval needs no check against an ISA extension: a guest-page fault writes it
+with the faulting guest virtual address regardless. Sstvala would not be the
+right thing to test for either (it covers stval across every trap type
+which writes it, a wider guarantee than what is needed here).
 
-STVEC_MODE_DIRECT and STVEC_MODE_VECTORED are unused for now and are
-added only for completeness alongside STVEC_MODE_MASK.
+htval does need one. The H extension lets an implementation write it with
+either the faulting address or zero, so without Shtvala a zero htval cannot
+be told apart from a genuine fault on guest physical address 0-3, and the
+address has to be recovered by decoding the access and walking the VS-stage
+page tables in software instead. That is left as a TODO; until it is
+written, such a fault crashes the domain rather than acting on an address
+which may not be the one which faulted.
 
 Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes in v3:
  - Update the commit message.
- - Drop STVEC_BASE_MASK for now and use ~STVEC_MODE_MASK instead.
+ - Drop panic() inside resolve_faulting_gpa() and return -EOPNOTSUPP +
+   printk_once().
+ - Leave the comment above resolve_faulting_gpa() alone: it already says
+   what the function does since "xen/riscv: add guest page fault handling
+   stub".
+ - Document in docs/misc/riscv/booting.txt why Shtvala is recommended.
 ---
 Changes in v2:
- - Add new defines STVEC_*. The STVEC_MODE_DIRECT/_VECTORED values are
-   currently unused and were included because riscv encoding header is a
-   spec mirror full of unused encodings.
- - Use STVEC_BASE_MASK instead of open-coding it.
- - Rename riscv_vcpu_trap_redirect() to trap_redirect(): unlike its KVM
-   counterpart the function takes no vCPU argument, it implicitly operates
-   on current, so "vcpu" in the name describes nothing.
+ - New patch.
 ---
- xen/arch/riscv/include/asm/riscv_encoding.h |  5 +++
- xen/arch/riscv/traps.c                      | 50 ++++++++++++++++++++-
- 2 files changed, 54 insertions(+), 1 deletion(-)
+---
+ docs/misc/riscv/booting.txt | 11 +++++++++++
+ xen/arch/riscv/emulate.c    | 27 ++++++++++++++++++++++++++-
+ 2 files changed, 37 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/riscv/include/asm/riscv_encoding.h b/xen/arch/riscv/include/asm/riscv_encoding.h
-index 2dbfd4d16067..b01da95f7ece 100644
---- a/xen/arch/riscv/include/asm/riscv_encoding.h
-+++ b/xen/arch/riscv/include/asm/riscv_encoding.h
-@@ -107,6 +107,11 @@
- #define SIP_SSIP			MIP_SSIP
- #define SIP_STIP			MIP_STIP
+diff --git a/docs/misc/riscv/booting.txt b/docs/misc/riscv/booting.txt
+index c99ccafa7485..f90d8603ef57 100644
+--- a/docs/misc/riscv/booting.txt
++++ b/docs/misc/riscv/booting.txt
+@@ -38,3 +38,14 @@ Other extensions recognised by Xen are listed in riscv_isa_ext[] in
+ xen/arch/riscv/cpufeature.c. Xen uses them when present, but they are not
+ needed to boot. The second column of that table says whether the extension
+ is also exposed to guests.
++
++Some of them are nevertheless recommended, as functionality depends on them:
++- Shtvala:
++  Guarantees that htval is written with the faulting guest physical address
++  on a guest-page fault. Without it an implementation may write zero instead,
++  which can't be told apart from a genuine fault on guest physical addresses
++  0-3. Xen needs that address to emulate a guest's MMIO accesses; recovering
++  it in software (by walking the guest's VS-stage page tables) isn't
++  implemented, so on such hardware a guest-page fault reported with a zero
++  htval crashes the domain. See resolve_faulting_gpa() in
++  xen/arch/riscv/emulate.c.
+diff --git a/xen/arch/riscv/emulate.c b/xen/arch/riscv/emulate.c
+index cc4b1fc54054..a579bc4b8a15 100644
+--- a/xen/arch/riscv/emulate.c
++++ b/xen/arch/riscv/emulate.c
+@@ -9,6 +9,7 @@
+ #include <xen/sched.h>
+ #include <xen/types.h>
  
-+/* stvec/vstvec: MODE is bits [1:0], BASE is bits [XLEN-1:2] */
-+#define STVEC_MODE_MASK		_UL(0x3)
-+#define STVEC_MODE_DIRECT		_UL(0x0)
-+#define STVEC_MODE_VECTORED		_UL(0x1)
-+
- #define PRV_U				_UL(0)
- #define PRV_S				_UL(1)
- #define PRV_M				_UL(3)
-diff --git a/xen/arch/riscv/traps.c b/xen/arch/riscv/traps.c
-index 4b9ec246e4c9..08aae2e5280b 100644
---- a/xen/arch/riscv/traps.c
-+++ b/xen/arch/riscv/traps.c
-@@ -293,5 +293,53 @@ enum mc_disposition arch_do_multicall_call(struct mc_state *state)
- /* Redirect trap to Guest. */
- void trap_redirect(const struct trap_info *trap)
++#include <asm/cpufeature.h>
+ #include <asm/csr.h>
+ #include <asm/current.h>
+ #include <asm/emulate.h>
+@@ -58,7 +59,31 @@ static bool htinst_is_pseudo(unsigned long htinst)
+  */
+ static int resolve_faulting_gpa(struct guest_fault *gf)
  {
--    BUG_ON("unimplemented");
-+    struct cpu_user_regs *regs = vcpu_guest_cpu_user_regs(current);
-+    unsigned long vsstatus = csr_read(CSR_VSSTATUS);
-+
+-    return -EOPNOTSUPP;
 +    /*
-+     * Redirecting a trap makes sense only if the trap was taken from
-+     * virtualized mode, i.e. sret is going to return to VS-mode.
-+     */
-+    ASSERT(regs->hstatus & HSTATUS_SPV);
-+
-+    /*
-+     * Only synchronous exceptions can be redirected. Interrupts must be
-+     * injected via hvip instead, so that the hardware itself performs
-+     * VS-mode trap entry, respecting vsstatus.SIE and the vectored
-+     * dispatch (BASE + 4 * cause) if vstvec is configured so.
-+     */
-+    ASSERT(!(trap->scause & CAUSE_IRQ_FLAG));
-+
-+    /* Change Guest SSTATUS.SPP bit */
-+    vsstatus &= ~SSTATUS_SPP;
-+    if ( regs->sstatus & SSTATUS_SPP )
-+        vsstatus |= SSTATUS_SPP;
-+
-+    /* Change Guest SSTATUS.SPIE bit */
-+    vsstatus &= ~SSTATUS_SPIE;
-+    if ( vsstatus & SSTATUS_SIE )
-+        vsstatus |= SSTATUS_SPIE;
-+
-+    /* Clear Guest SSTATUS.SIE bit */
-+    vsstatus &= ~SSTATUS_SIE;
-+
-+    /* Update Guest SSTATUS */
-+    csr_write(CSR_VSSTATUS, vsstatus);
-+
-+    /* Update Guest SCAUSE, STVAL, and SEPC */
-+    csr_write(CSR_VSCAUSE, trap->scause);
-+    csr_write(CSR_VSTVAL, trap->stval);
-+    csr_write(CSR_VSEPC, trap->sepc);
-+
-+    /*
-+     * Set Guest PC to Guest exception vector.
++     * A zero htval is either a genuine fault on guest physical address 0-3, or
++     * an implementation which does not report the address at all; only Shtvala
++     * tells the two apart.
 +     *
-+     * vstvec's MODE field is not part of the address. Exceptions always
-+     * target BASE regardless of MODE, so mask it off explicitly instead of
-+     * relying on the hardwired zero bit of sepc to drop it.
++     * TODO: where it is absent, recover the address in software rather than
++     * giving up.
 +     */
-+    regs->sepc = csr_read(CSR_VSTVEC) & ~STVEC_MODE_MASK;
++    if ( !gf->htval &&
++         !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_shtvala) )
++    {
++        printk_once(XENLOG_WARNING
++                    "Shtvala isn't supported by h/w; s/w VS-stage walk required\n");
++        return -EOPNOTSUPP;
++    }
 +
-+    /* Set Guest privilege mode to supervisor */
-+    regs->sstatus |= SSTATUS_SPP;
++    /*
++     * htval does not carry the two low bits of the address: for an explicit
++     * access they are those of the faulting guest virtual address in stval,
++     * and for an implicit access made for VS-stage translation they are zero.
++     */
++    gf->gpa = ((paddr_t)gf->htval << 2) |
++              (htinst_is_pseudo(gf->htinst) ? 0 : (gf->stval & 3));
++
++    return 0;
  }
+ 
+ static int emulate_load(const struct guest_fault *gf)
 -- 
 2.55.0
 
