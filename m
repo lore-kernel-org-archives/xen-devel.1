@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3B37CA5FAB
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 06:19:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436847.1655506 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B953CA5FAB
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 06:28:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436853.1655515 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBneE-0005ty-Mw; Wed, 30 Sep 2026 06:18:34 +0000
+	id 1xBnnH-0007e5-Hw; Wed, 30 Sep 2026 06:27:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436847.1655506; Wed, 30 Sep 2026 06:18:34 +0000
+Received: by outflank-mailman (output) from mailman id 1436853.1655515; Wed, 30 Sep 2026 06:27:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBneE-0005tr-Jz; Wed, 30 Sep 2026 06:18:34 +0000
-Received: by outflank-mailman (input) for mailman id 1436847;
- Wed, 30 Sep 2026 06:18:33 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBneD-0005tl-Ks
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 06:18:33 +0000
+	id 1xBnnH-0007dy-EL; Wed, 30 Sep 2026 06:27:55 +0000
+Received: by outflank-mailman (input) for mailman id 1436853;
+ Wed, 30 Sep 2026 06:27:54 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBnnF-0007ds-Vw
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 06:27:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBneC-009non-1e
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 08:18:32 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xBnnF-0059xX-9b
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 08:27:53 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abca9a5-bab6-0a2a0a5309dd-0a2a4504cc60-42
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 08:18:31 +0200
-Received: from [74.125.225.98] (helo=mail-wr2-f34.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abcabd0-2eae-0a2a0a5409dd-0a2a45028cc8-36
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 08:27:53 +0200
+Received: from [74.125.225.76] (helo=mail-wr2-f12.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abca9b7-b57f-0a2a45040019-4a7de162ac14-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 08:18:31 +0200
-Received: by mail-wr2-f34.google.com with SMTP id
- ffacd0b85a97d-48affb828f1so372066f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 23:18:31 -0700 (PDT)
+ id 6abcabe9-6ca4-0a2a45020019-4a7de14cccec-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 08:27:53 +0200
+Received: by mail-wr2-f12.google.com with SMTP id
+ ffacd0b85a97d-482f6351831so2879413f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 23:27:53 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48b029df5dbsm879910f8f.18.2026.09.29.23.18.30
+ ffacd0b85a97d-48b029f2b0dsm863114f8f.25.2026.09.29.23.27.52
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Sep 2026 23:18:30 -0700 (PDT)
+ Tue, 29 Sep 2026 23:27:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,61 +54,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790749111; x=1791353911; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790749672; x=1791354472; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=uG+JrpaFX4UYhhRwGLyiIXUwl5R3ivY4q9peoW+JSTo=;
-        b=Vqwp8o/4+eGaYvTCFNAEZfgOppTqeVuA0++N4iXURaYYE7uHKGeQz7FSm9+s9Osar5
-         nl3mI3XxUjzuCXi2coR17RS79MqAfpo/YSvME3ARQaPqgcpxqF7EUynNjQ3LWSuaDiXc
-         p9xct59TvnXFIfEQkHdC/MuMufsL+eBsto483x6avhBFdY28V5GY7WOlMKefrS2d1xWU
-         /8th+xeoPtddlVNqLJ9oB6TcZ5YqnGzAGJG/owlvv+vLHyZ90RVs5F6NwiTJlYZzoAwk
-         fw0v5A16hDYM5JJeDtarn3/ROtvV8lKIsrbSx6GUpn5KhqfRPwky140sOOARqApQ5Wwy
-         Z06w==
+        bh=D6Nu3HL0OunCTSOQ/0sjGPRiO5Rv88/1NkyR9hgZ65s=;
+        b=Nh1/vXd08x3uQJrbhPjzCy9fyIDTQkYFmvPdSO4MBEciXATyXWaqHwhOYQKjvRP3C3
+         B+I1VfUNN5JetgWkAcQX6Jk4m0HkUJT7pp58bevSYu6/SpEd6U1ye9FU7WlBOn087oia
+         Z5NVx7QIbotoJnL0ku5+mPBNg/nbwEU7obK+XW4oBC4piVwExohFe8d4yLvsFAd1hK3+
+         ialTEwDUCUNjzCGrwHsttWQiyq/v5mjUMZHnxeGcVcw8FYkAT3MGIkjACb1fyQi+/Pyr
+         LmTDfKGrsTtM+bAOCmdrT2FS8SfRVHmbkbVO8PTk2x/cV38zjTc/IRBkvlx6WJQGA0Gh
+         kKqA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790749111; x=1791353911;
+        d=1e100.net; s=20260707; t=1790749672; x=1791354472;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=uG+JrpaFX4UYhhRwGLyiIXUwl5R3ivY4q9peoW+JSTo=;
-        b=IbYsdkSLW3kvYCaalygj5NtBMGO2eBO4v3Tbv/AZhfoYZcRlm/VVYwAtHWtGCfsbcE
-         Nv71gpl5ntWBANkWauRijmcipu3R1aGH7JMTDRKJJi2AyND0eEpXrYb2nEdmYACVMFEj
-         8ubny2J8/JAG1V4b3SyRGq8VKtjB7LgC0lZeu9TGfBFxpVrtrIAlmjExmr/5YiAU5BLX
-         gxyFKkwBalY5Bp7O7EBtDtP2UfOcvjwdVDxDWPgxlUY7lxz7HIiGW2WSLPWjkozHL+Qj
-         9gH2i8qXXV/+uzqlZ3CVrbJIOQbpsCkt2bE5PqUahBOIURWTTMss+cP18a80sbrstLKb
-         WUuw==
-X-Forwarded-Encrypted: i=1; AKwUvBxKVzrihGXlojB88nBkgHV0btFK4GIFw6kViZwVL+c8NzIVL9Lniqy5HGYbH3/M9LWiphFwNv8M/pQ=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYI8kfM2Z/ecuDbu8F8wkGOUFEmT4sqbwZAvD64XV5rh1tKmD0KW
-	taQOOlLTxmZ00iYkpd2b0s3KE1WbkwwqwnI0uhDLsyXIjux0WUYtUXsceebOI3DgdA==
-X-Gm-Gg: AYBFou177Cu9fmRyiqy0hBdLQ75mffBWfoMc83ROazLNnqrnjxFdWTxXnLgoyzPib97
-	qIOmQ9ztARRrC08ecT3eLN4csJwIu/N0SGZN/WQLtrEpwTRr80wRWVOOkyQJamp0Tn0jNLbYW+N
-	23/dsz33xnaPxaKUmOVRKDRmENEBzVa3bOliGr7rhi+1pFlov+UpIjrIwvOorPqvXRp+o+L7VNv
-	gXq+6gK8q/vnc05fYewNZlkCG5mvtvn+a6jLoS9PEaTn4ie6ffdA0ppBg0HiTwbaCUKm06IuFQH
-	ErU+vF+ZPO+E6v+5wfVTvGAXzbiZU22F3nWbTwfIZrb9O+pXD+/Zz6wQdDaJSbnPXCNIgkU3V6A
-	gGYgul8Ru6gxEHuk9rLcN7BUGSGq9ZXCbAReteDQiMHJgGr6K3LpNIL+NcCx6M2I+A9gIQV9rl1
-	mOyMfvHhqcE7OmbcYWnb4N+mXP8FGDOjXNbYDarfnVDMbGWpv7oFSyjm0zelDSFlbJ/ZMjLqtH6
-	rjWs67N+ZVtfU6+d8FJ6yrQhBOziW/nDCFvbg+o+JtbXuGiHqIx214o5cAGaFQ=
-X-Received: by 2002:a05:6000:1861:b0:48a:f11e:6d57 with SMTP id ffacd0b85a97d-48b024c5d52mr872975f8f.19.1790749111381;
-        Tue, 29 Sep 2026 23:18:31 -0700 (PDT)
-Message-ID: <9f74c9c1-72c0-4bad-8a64-8b694b9c4386@suse.com>
-Date: Wed, 30 Sep 2026 08:18:29 +0200
+        bh=D6Nu3HL0OunCTSOQ/0sjGPRiO5Rv88/1NkyR9hgZ65s=;
+        b=QVE1x6AM4geghQ5rWhdtSlNkvYTHdPqaIKxBQ+VtRXZKfK8fARrKXPZ9+KML2AGTtK
+         y/HHCUpJVbhWCBk4kwFL9KxzT5a47qf2rh9U24WRVNi23vdovgCGrGrOniJnLP9PP2tk
+         Pwoykz8jJj7tH2AI0LXJ7M/UoHh+p/tSMJwqSpOVPwoyLss/55ipNHq9q7apRw/P/+Yf
+         zLQkdM+4b8ZyeaeCGMkfDJZ+ui7RSrgShboOYepYPTkZA2kZGjBtbFTDtMNrpzclGROx
+         Bk34C6IeWD23eBBnLmcB1e5wWoTiy8+L9JP9/r4+u2f+C1+VCv64SzAky4Q6zF8+JtSZ
+         O9fA==
+X-Forwarded-Encrypted: i=1; AKwUvBxdy6ga6OpYgawxMKBi0CdUB7d+Ew+q17LXAK/jR7g6yp69dwHrqksDi/8M7qXM2l6jbFE0Q6Pbp6Y=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYK6l83u8zucSrUniD0tjmTWF20hyOsqUkL8bvgXz2izeqe2scAf
+	c0hndtoHxxMfDjvbdzXNuIsHrhJRora30DTqIdqinTomnmCzdlVFxMhONUH/9GcoWX2AGv3GHHG
+	weWK2ow==
+X-Gm-Gg: AYBFou28k3Efu6XF1WVW2GoUtlPm19dvFZmw1Wa0NFFNc96o4mK34+vZQC5QgAYWLyK
+	QAPH7YcfB4eY52fDlotHWDUIc6q1Y627kru3z/wVgAN1bJtCLASFydeJtEnBGRzuRdHGsrtmkuo
+	SS6Y8rpBV+qWNBi2rSjMtin2w+LOslPS7fmkex7Pg0oMjjos32i5ij/ewv55Lu3egn5aymksbVt
+	Q6ENJFbgXIKZckIQlNVyvDH2oge4EXASvotpS5A6nEQIwmBkzTGaLlsVnmoWBArqtP+L1xD6VMy
+	jhO/YlnSzTMDvkr9fxnHnECn5y9us0y5zLnpIb9gPP6GjytB0gwNHrLX1e59FbcOgOEZWrBN495
+	AuaJb4nq9oZc6ThnD3kL6EuZsQeIcM1YIXYRWW4lFtJdkc4ztlTErdiFPBJiDH8wjz+BM/q4VJA
+	XsAv5pBWqpjK+q7q8d2SokwmfxfsbSP1pV73hNGADd/BN7/t7dPgpTdUBENg2fNz7pDLz73WirB
+	cGG+7NUPfnp01u22dzphI39cjwbKLGXqLlzKdmq4FRmFKUotqMBnYv6eKl5Lb0yejGZBHi66w==
+X-Received: by 2002:a5d:59c2:0:b0:488:8a5d:ffcc with SMTP id ffacd0b85a97d-48b024bc9d5mr807657f8f.13.1790749672700;
+        Tue, 29 Sep 2026 23:27:52 -0700 (PDT)
+Message-ID: <b7b37df2-b282-46e6-a6f1-1076ea78d334@suse.com>
+Date: Wed, 30 Sep 2026 08:27:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 1/6] docs/riscv: sync required ISA extensions with
- required_extensions[]
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>, xen-devel@lists.xenproject.org
-References: <1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech>
- <1790699584.8631fc262581453bbf619ec5b2062170.1a0ee033d8d000b504@vates.tech>
+Subject: Re: [PATCH] eclair: restrict scoping of guest copy deviation MISRA C
+ Rule 11.8 violations
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Cc: Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <23fa33db36bde08b03b6be9913dc4a8e72206619.1790748103.git.nicola.vetrini@bugseng.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -134,30 +128,23 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1790699584.8631fc262581453bbf619ec5b2062170.1a0ee033d8d000b504@vates.tech>
+In-Reply-To: <23fa33db36bde08b03b6be9913dc4a8e72206619.1790748103.git.nicola.vetrini@bugseng.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1790749111-520D5B50-BA097A0F/10/78276251493
+X-purgate-ID: tlsNG-720697/1790749673-F3ABD2AC-3ED2025D/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 860
+X-purgate-size: 416
 
-On 29.09.2026 18:32, Baptiste Le Duc wrote:
-> From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+On 30.09.2026 08:22, Nicola Vetrini wrote:
+> The file scoping restrictions were spelled out in the documentation comment,
+> but not enforced by the configuration.
 > 
-> booting.txt listed only H, Zbb, Zihintpause and Svpbmt as required, while
-> required_extensions[] in cpufeature.c also checks for I, M, A, Zicsr,
-> Zifencei and, with CONFIG_RISCV_ISA_C=y, C. As the panic message printed
-> for a missing extension points to booting.txt, document the missing ones.
-> 
-> Also add a section pointing to riscv_isa_ext[] for the optional extensions
-> Xen recognises, and a comment above required_extensions[] to keep it in
-> sync with the document.
+> Remove duplicated file tag asm_offsets while at it.
 > 
 > No functional change.
 > 
-> Suggested-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> Suggested-by: Jan Beulich <jbeulich@suse.com>
+> Signed-off-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
 
 Acked-by: Jan Beulich <jbeulich@suse.com>
 
