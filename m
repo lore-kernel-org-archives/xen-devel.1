@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 97051CA5FC5
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 13:54:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437307.1656157 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E591ECA5FC5
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 13:56:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437312.1656168 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBulU-0000u1-Eq; Wed, 30 Sep 2026 13:54:32 +0000
+	id 1xBunY-0001St-QG; Wed, 30 Sep 2026 13:56:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437307.1656157; Wed, 30 Sep 2026 13:54:32 +0000
+Received: by outflank-mailman (output) from mailman id 1437312.1656168; Wed, 30 Sep 2026 13:56:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBulU-0000tu-C4; Wed, 30 Sep 2026 13:54:32 +0000
-Received: by outflank-mailman (input) for mailman id 1437307;
- Wed, 30 Sep 2026 13:54:31 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBulT-0000te-3m
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 13:54:31 +0000
+	id 1xBunY-0001Sm-MS; Wed, 30 Sep 2026 13:56:40 +0000
+Received: by outflank-mailman (input) for mailman id 1437312;
+ Wed, 30 Sep 2026 13:56:38 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBunW-0001Q1-KL
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 13:56:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBulS-00EakB-1j
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 15:54:30 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xBunV-00CbA4-IN
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 15:56:37 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abd148b-e002-0a2a0a5209dd-0a2a4508e398-20
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 15:54:29 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abd1495-f659-0a2a45080019-4a7de18caa49-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 15:54:29 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49cd5462b69so30447345e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 06:54:29 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01e63f574sm1128425e9.3.2026.09.30.06.54.28
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6abd1500-2eae-0a2a0a5409dd-0a2a4509c584-36
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 15:56:37 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6abd1515-be1a-0a2a45090019-d155802da528-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 15:56:37 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-4a01b560392so2309145e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 06:56:37 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
+ [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48b029be71csm4162887f8f.9.2026.09.30.06.56.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Sep 2026 06:54:28 -0700 (PDT)
+ Wed, 30 Sep 2026 06:56:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,52 +52,52 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790776469; x=1791381269; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=gmail.com; s=20251104; t=1790776597; x=1791381397; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Pjpga6JD0er0zGD16YUE65FL7GK+rVjJTaCSfBHwxUA=;
-        b=D7zDfqn3fpMMfDPoq4/1bUH7ZeCannJz4V8AyvsjA/f0uuA2v5muwKayApmTIBol57
-         JSSqAC5trQnW+Q8x3PkpZO4SyIvKGARDubauCIeqcWEsFty91EEE8rSzim4JD8kD0sDt
-         ZYyh6HR7xFA5W+ZKjGajp3pmPPfXoNaslSRjCHs1ylR/bP0FgZEF596nCBAvEqYYQ0pF
-         Vi4s5BL+BpOnGs3P1oaeME3jtz6dpkdq50eNPybzboKQpaoHtitopsp+J4pRgrdzjYtQ
-         guA29eTlQF7wm0YHa6qi1Wusp+eZI19+7Kss+1I/0EZGeLlFqtJWcFn6APHeLaxvYhjM
-         tOVQ==
+        bh=ffDnjrv5gtZeAI6GHrZp9yvaTY/ZRPVjxIMSX8/YOkI=;
+        b=NR/D02AOQM/FjdBmMCwjos9+yT1aTjHqwBNJWSGTZS93Kc0JURMoKDRCQtdx5wCfMr
+         gMbQ7WqbS3YmDcbzGQi0HJqwDlitW7mjUPaL723XvgYQ9Kb2lNW/i43xgx6iP1m91zkL
+         XWIERuAA9E4BqXQosTdq9Kdc5aEJcLMl0/fvi1vHKmX1jxzrLH8zlUefW21YuDIiG2qz
+         PzXWfOyQ2SrbpNc4JiNP7OVPyEVQyzthLxgcV9w2MDXNiwb9rK/9oHW9cytwNGdO/wzG
+         afdoumJksSWoJjn6RC6FqNHmFG5/K6gO7vscekJ+DQDYH3w7Kku0PgMI2/mrXgEzOCAJ
+         V5zg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790776469; x=1791381269;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=1e100.net; s=20260707; t=1790776597; x=1791381397;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Pjpga6JD0er0zGD16YUE65FL7GK+rVjJTaCSfBHwxUA=;
-        b=ZU3exZ+aWMApcapWSCYrtyIJ3+UBnURoAPZk0W/ZsPWJvRa7v4/7Gtkzs+3VZD7eZk
-         7leZh5uVOCkUlpgMEY6sWBG1N91ATRlT8Vx+EWhAQqVP7V7Lgvvv+HsJiXz3ptN3UUlG
-         f5NQSnk1L9iibf7waqQpnnBJd53zhbY/YW+mEd0WXZzA5KEIBKP3aUfqZ8w+yZVCVICz
-         zJzqWffIqmoh8RiBqHEiepOfVvGGTQRkMALzmVCGERY+5drS5xCYh0GUBL+ZkQeDJyFs
-         7k0UCHBMjA4xwl7fcTOP/epeo+3C/pWcHEKZ1/Uwwhubmb/IdNmpjdf/5mp7wCe5T2Hl
-         O7Uw==
-X-Forwarded-Encrypted: i=1; AKwUvBxxzDy+s1ZNRF3pXJk/zN7GrPDZzAYJq39y48n+ZQqcqRtPUzP9csnLh+5ZHZyD3ec+adZH7QZ5LtY=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kF8Y5yOnlY9WvDBroTGRBJPsL5+vqCwwQG5Dacs6w0KQMxpB/E
-	Y4AvC5C4ul1eJ6GeuKf8s9qpPESwxvZ2vP8rJCzhjIIzm9atS6KBlWnYMkBfj905tA==
-X-Gm-Gg: AYBFou2+i9Ge0WC5JRNe6joZmLZvwNwsBSJNWTbLBgDeqx0WqCrF73a0F4BSLk92Bik
-	f9NO2kAWp4NvGaujlNLQTW5a9w4FLeFElOurL39BRiGu1PxUGRLl964GVkYLhTFXae2/YSYwQ2d
-	ZPGslBTnHBHgrhf+4A4+kE+gjANiHwlBUFNcCqqb56pOEHhcbA8toKRDY2l1MJ5tCMGscWBzchE
-	pclHJ8K0LJlhQqgA+CTkkR+QccYB7dxbVi4hs7DHC63yMYmCRAfWJ/v0ah+vAzjBwPBq0BXYg5C
-	b8GtE2Av8PhQQ3kPlsxQQEG8yEta4gsmzV41Hnwg8mOAQqLqTNhki7xjgm1cIQ+19SGM2spp2Y8
-	kqjvv/PziEF3GDuTNF9Ncr1cmps4UFypjLPcnamFQucya3J1fNy/qzfqyt4CwxZRZfvUbFSg6qs
-	y0h99ZcQWlpVrknoUvjCYsSo1rezKTg7Ft6ESIG2fjHR0hx+iXTvf1N9KBXaV0gn40rXJI3kx4f
-	NAHzblaaatWg/6P/49GdCucEhsdp5ouO5UyEfPUZ6wDHx5pXhMzV62zoFh4iV0=
-X-Received: by 2002:a05:600d:4448:10b0:49f:ce78:3564 with SMTP id 5b1f17b1804b1-4a01b11bedcmr20405265e9.21.1790776469395;
-        Wed, 30 Sep 2026 06:54:29 -0700 (PDT)
-Message-ID: <f93e6f0d-0ceb-4db6-91f8-d571503ca58c@suse.com>
-Date: Wed, 30 Sep 2026 15:54:27 +0200
+        bh=ffDnjrv5gtZeAI6GHrZp9yvaTY/ZRPVjxIMSX8/YOkI=;
+        b=g7Z45JhIWOY+0p2FuaJ2O55zifpnC0VMl+U8Wvt/uDSp7nOJCW9BGvjUDMNFW2LWLF
+         97M4cRl9FVH4TMk/0E3Q/LzYu1j3/ks+z8JIjeDc2uAz8DbNiiJB4eEChoJ3Zcv4AiF9
+         8hJCZPZeRSqsLvFpnOEBuH5T6o1pAbPLEP4nt6n+u170zMKpxZufdsh+b1tgrzubB8gU
+         IN2ZHC7vFawZZCkorbNz7nyKJcvyBSATknbxB4c/RAw2f4DN/TFEm9EFUfbb02IBpk2e
+         3tCPW2cU8i/g9CLlTtJsb2AhNyhT9pShvpmhpDA22arWCylhQ2wyRJcBdYg2MqUlQcN4
+         iziw==
+X-Forwarded-Encrypted: i=1; AKwUvBwC3g//x5V1gmS3h+ZuBiFlcG9fbbKrUzVCirPtHUGVxkZxaW17IE6YCNSjZwz53y1EvEZmQHixZzU=@lists.xenproject.org
+X-Gm-Message-State: AFuF++mx/IXYsujYEuQ/Yp7cTNhLo1cZ0opABKgiUpoG5f0xx0OlZbKN
+	Uona8Jz0Y+8H7Dds6M+gIBD/zqAUaMGRZDdHqP0/0HKqk9SfOjNQ/FJ9
+X-Gm-Gg: AYBFou3zNjl6O/+i+v/qQhmGw+OMHN8b1+vM1sVijTuLWo1H/e0KsNSoT4gNsWS41CM
+	+ijPhEGVlH1Zh7rjfP24qGNjh4jq4c8s+X9kTu9XhdvwI7VsZwgf81z0HCU9f7PUUxw4ekvjr7U
+	ZCVYUmJNQ75c3Hq6ivg3XMPniw2f3gaJctV2AtIkQyATPF4gqZEscJ3A5tvGGBboIZeruFlGV3Q
+	0tC3OCLQGAx8Iys7vt+N3dvyGVLojAT2FMLvl9JMGg8wZ9f/aSKHpTlKY4GBuLXgi1XbiVjhtj2
+	YdHlRZqagAUS5mY2wD3S1v143g4nv7sKJI3pEI8jmUsnRHEfu7+mWc5ubX/oHTEs2fdvwY6PwfS
+	WOcQHdODhZWlg/IKOqOXUOX4oTDE92WDDx4Xt8EkVduyIDxKYC6LbpdU4Q+y28CLdQoQi//eSmB
+	oosS/pI6lWkQsIkJJ6yVhVwQ4j1+eV+UgCqM9YzjRDYeE9WdvKNJGEQharx9jKxt88JrpG5tRfQ
+	o5VJskvpGxNzfO98nafqKMh3+TK8DZcecbRTbJos3DM+TSVPw==
+X-Received: by 2002:a05:600c:47c9:b0:4a0:1c92:f989 with SMTP id 5b1f17b1804b1-4a01c92f9c2mr9406055e9.12.1790776596879;
+        Wed, 30 Sep 2026 06:56:36 -0700 (PDT)
+Message-ID: <aff1e60a-0420-4c44-8c65-b05f9e21a0b5@gmail.com>
+Date: Wed, 30 Sep 2026 15:56:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v3 2/6] xen/riscv: rename PTE "permissions" to "pte_flags"
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+To: Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
@@ -109,92 +109,79 @@ Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
 References: <1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech>
  <1790699585.8631fc262581453bbf619ec5b2062170.1a0ee033eb9000b504@vates.tech>
  <9f94af4b-f122-46e0-bbc4-7fecd51d4348@gmail.com>
+ <f93e6f0d-0ceb-4db6-91f8-d571503ca58c@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <9f94af4b-f122-46e0-bbc4-7fecd51d4348@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <f93e6f0d-0ceb-4db6-91f8-d571503ca58c@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1790776469-CE14687B-CDA90FD3/10/78276251493
+X-purgate-ID: tlsNG-bad1c0/1790776597-BFCD7034-45D54B9B/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2035
+X-purgate-size: 2362
 
-On 30.09.2026 15:42, Oleksii Kurochko wrote:
-> On 9/29/26 6:32 PM, Baptiste Le Duc wrote:
->> paddr_to_pte()'s "permissions" parameter, the matching local in
+
+
+On 9/30/26 3:54 PM, Jan Beulich wrote:
+> On 30.09.2026 15:42, Oleksii Kurochko wrote:
+>> On 9/29/26 6:32 PM, Baptiste Le Duc wrote:
+>>> paddr_to_pte()'s "permissions" parameter, the matching local in
+>>
+>> Nit: s/the matching local/the matching local variable?
 > 
-> Nit: s/the matching local/the matching local variable?
+> What else could "local" on its own mean here? I think it's common
+> shorthand for "local variable".
 
-What else could "local" on its own mean here? I think it's common
-shorthand for "local variable".
+I didn't think in that way. Now I agree that it is fine.
 
->> setup_initial_mapping() and p2m_set_permission() don't only deal with
->> permission bits: they also handle PTE_VALID, PTE_USER, PTE_ACCESSED and
->> PTE_DIRTY.
->>
->> Rename them to "pte_flags" and p2m_set_pte_flags() respectively.
->>
->> No functional change.
->>
->> Requested-by: Jan Beulich <jbeulich@suse.com>
->> Assisted-by: Claude:claude-opus-5
->> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
->> ---
->> Changes since v2:
->> - new patch
->> ---
->>   xen/arch/riscv/include/asm/mm.h | 5 +++--
->>   xen/arch/riscv/mm.c             | 8 ++++----
->>   xen/arch/riscv/p2m.c            | 4 ++--
->>   3 files changed, 9 insertions(+), 8 deletions(-)
->>
->> diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
->> index 9e28c24954..1ac66283ec 100644
->> --- a/xen/arch/riscv/include/asm/mm.h
->> +++ b/xen/arch/riscv/include/asm/mm.h
->> @@ -22,9 +22,10 @@ extern vaddr_t directmap_virt_start;
->>   #define paddr_to_pfn(pa)  ((unsigned long)((pa) >> PAGE_SHIFT))
->>   
->>   static inline pte_t paddr_to_pte(paddr_t paddr,
->> -                                 unsigned int permissions)
->> +                                 unsigned int pte_flags)
->>   {
->> -    return (pte_t) { .pte = (paddr_to_pfn(paddr) << PTE_PPN_SHIFT) | permissions };
->> +    return (pte_t) { .pte = (paddr_to_pfn(paddr) << PTE_PPN_SHIFT) |
->> +                            pte_flags };
 > 
-> Nit: it could be one line.
-
-Not if all the blanks are to be kept.
-
-> I am okay to go without last two Nit(s):
+>>> setup_initial_mapping() and p2m_set_permission() don't only deal with
+>>> permission bits: they also handle PTE_VALID, PTE_USER, PTE_ACCESSED and
+>>> PTE_DIRTY.
+>>>
+>>> Rename them to "pte_flags" and p2m_set_pte_flags() respectively.
+>>>
+>>> No functional change.
+>>>
+>>> Requested-by: Jan Beulich <jbeulich@suse.com>
+>>> Assisted-by: Claude:claude-opus-5
+>>> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+>>> ---
+>>> Changes since v2:
+>>> - new patch
+>>> ---
+>>>    xen/arch/riscv/include/asm/mm.h | 5 +++--
+>>>    xen/arch/riscv/mm.c             | 8 ++++----
+>>>    xen/arch/riscv/p2m.c            | 4 ++--
+>>>    3 files changed, 9 insertions(+), 8 deletions(-)
+>>>
+>>> diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+>>> index 9e28c24954..1ac66283ec 100644
+>>> --- a/xen/arch/riscv/include/asm/mm.h
+>>> +++ b/xen/arch/riscv/include/asm/mm.h
+>>> @@ -22,9 +22,10 @@ extern vaddr_t directmap_virt_start;
+>>>    #define paddr_to_pfn(pa)  ((unsigned long)((pa) >> PAGE_SHIFT))
+>>>    
+>>>    static inline pte_t paddr_to_pte(paddr_t paddr,
+>>> -                                 unsigned int permissions)
+>>> +                                 unsigned int pte_flags)
+>>>    {
+>>> -    return (pte_t) { .pte = (paddr_to_pfn(paddr) << PTE_PPN_SHIFT) | permissions };
+>>> +    return (pte_t) { .pte = (paddr_to_pfn(paddr) << PTE_PPN_SHIFT) |
+>>> +                            pte_flags };
+>>
+>> Nit: it could be one line.
 > 
-> Reveiwed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> Not if all the blanks are to be kept.
+> 
+>> I am okay to go without last two Nit(s):
+>>
+>> Reveiwed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> 
+> Please clarify whether you insist on the description change for the tag
+> to be applied.
+> 
+Considering the your comment above, I agree local is just shorthand for 
+'local variable' so I am not insisting on the description change.
 
-Please clarify whether you insist on the description change for the tag
-to be applied.
-
-Jan
+~ Oleksii
 
