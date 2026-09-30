@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 28187CA5FAC
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 11:59:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437136.1655911 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CE21CCA5FAC
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 12:07:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437144.1655920 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBsyB-0000AO-Q6; Wed, 30 Sep 2026 11:59:31 +0000
+	id 1xBt64-0001tG-L7; Wed, 30 Sep 2026 12:07:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437136.1655911; Wed, 30 Sep 2026 11:59:31 +0000
+Received: by outflank-mailman (output) from mailman id 1437144.1655920; Wed, 30 Sep 2026 12:07:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBsyB-0000AA-NU; Wed, 30 Sep 2026 11:59:31 +0000
-Received: by outflank-mailman (input) for mailman id 1437136;
- Wed, 30 Sep 2026 11:59:30 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Alejandro.GarciaVallejo@amd.com>) id 1xBsyA-0000A1-IH
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 11:59:30 +0000
+	id 1xBt64-0001t9-I2; Wed, 30 Sep 2026 12:07:40 +0000
+Received: by outflank-mailman (input) for mailman id 1437144;
+ Wed, 30 Sep 2026 12:07:38 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBt62-0001t3-Ll
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 12:07:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBsy9-009YOf-VF
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 13:59:29 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xBt61-00Fwsu-4D
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 14:07:37 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Alejandro.GarciaVallejo@amd.com>)
- id 6abcf99d-e002-0a2a0a5209dd-0a2a4501adde-10
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 13:59:29 +0200
-Received: from [52.101.193.54]
- (helo=CH1PR05CU001.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Alejandro.GarciaVallejo@amd.com>)
- id 6abcf99e-5984-0a2a45010019-3465c136a839-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 13:59:27 +0200
-Received: from BY5PR12MB4999.namprd12.prod.outlook.com (2603:10b6:a03:1da::13)
- by SA1PR12MB6847.namprd12.prod.outlook.com (2603:10b6:806:25e::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.15; Wed, 30 Sep
- 2026 11:59:23 +0000
-Received: from BY5PR12MB4999.namprd12.prod.outlook.com
- ([fe80::a890:d230:e0a8:6740]) by BY5PR12MB4999.namprd12.prod.outlook.com
- ([fe80::a890:d230:e0a8:6740%3]) with mapi id 15.21.0472.015; Wed, 30 Sep 2026
- 11:59:23 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6abcfb77-bab6-0a2a0a5309dd-0a2a4506c51e-36
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 14:07:36 +0200
+Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6abcfb88-195a-0a2a45060019-4a7de18dfaf0-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 14:07:36 +0200
+Received: by mail-wm2-f13.google.com with SMTP id
+ 5b1f17b1804b1-49fe8bf173aso27910795e9.3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 05:07:36 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a01cb8af89sm6897145e9.1.2026.09.30.05.07.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 30 Sep 2026 05:07:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,232 +52,287 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Z/hpmqGH3CQ1LFPMbM1NgZvs1xvdFN2VtVgxh9ZVVm1kqyXA/RdWUDxUrWfm+CUNhqGmz1xwoe3nxDBYJkquNyNbaZJgkadEqFlFlwq2eGYn/K6GDNTIDkCdOcJ9ED73+aqUOhZkK3qOT5qJ5deIjxTPLTiTxcZmgHq/MjpsxKJ1AW/1IUta3+V5FuTx2gAnYZxWTdwms7a8b05yJPVEGgcEWaVOg4ujaHyCmBzjjnBoMPTeOueMulcwbREOHXt/fspFPEwOcad/jKz+Z755j4UCRzLBM5x1ofZjTkIa1mYYFW530tDMJAwqZ2h4ZNEAB1gDcF9tpZS3UA/wqoIZbg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=377X7wxcbb/IYu3/sELXexNlCs1RfTtLjf1eO/CNWb0=;
- b=eXiCYwUIGvCDlvsPFVR4ZWRymiWQC+nZyImgW75mXdTjLbNdxsWCtYLCZPHfj41a9W2fB+/lcD6kkL6JPRYQxQnfGJDsiFI9o1Hl6I/n2d45O10ezNXDaKWO0n0BqvdBPy+ZsOyD/KyrxoJemWfxxcGkYNnsNvm9XyNwGqEl0nRVDCUjOTXImXLm6DVHd9mWmXLDvKnK3RkzGVsxmBPSWMgGseMZKMDpO10e1CmFZWOpRe4zLqLMVN3NcHsZYRrLno34ozDWaoMCjjvoN8P0w1xc+Wyrz8b5BBf5wpnro4RARTaRvhfKUG7bgiPEUTBlAYfu2e8/MLKB5nj2IaKhiQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=377X7wxcbb/IYu3/sELXexNlCs1RfTtLjf1eO/CNWb0=;
- b=VILESe3pjCd7X1mc6FOsDCyLNg3tMW5af+tWd+wLHTJ0sxvDOVW2bPrKS+p1yqQOLJmD2jCngcE0K4L/Bqo4jhO8emEuWCJ8Xn38jhKdVYstqYf3sZkzJqoVx8zq1aSzjYZagTOpd7SKfK9RtpsROLrdCnjTV1AFTiUcm+HUz+w=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Wed, 30 Sep 2026 13:59:19 +0200
-Message-Id: <DLSMTULZIC0J.37MJ4N5UJFOFF@amd.com>
-Cc: "Jan Beulich" <jbeulich@suse.com>, <xen-devel@lists.xenproject.org>,
- "Andrew Cooper" <andrew.cooper3@citrix.com>, "Anthony PERARD"
- <anthony.perard@vates.tech>, "Michal Orzel" <michal.orzel@amd.com>, "Julien
- Grall" <julien@xen.org>, "Stefano Stabellini" <sstabellini@kernel.org>
-Subject: Re: [PATCH v2 1/3] xen/rcu: introduce the concept of RCU epoch
-From: "Alejandro Vallejo" <alejandro.garciavallejo@amd.com>
-To: =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-X-Mailer: aerc 0.17.0
-References: <20260925163025.65217-1-roger@xenproject.org>
- <20260925163025.65217-2-roger@xenproject.org>
- <DLQSZY2KSYDH.1YSCWGQIQYP0H@amd.com> <arvJQSDecSSAU1WC@macbook.local>
- <50d1df6c-d969-470b-9b40-ca171c60618d@suse.com>
- <DLS5A4YDJ8ET.28ZIPQ6QEN2K4@amd.com> <arzJCY1M6NcVInmn@macbook.local>
-In-Reply-To: <arzJCY1M6NcVInmn@macbook.local>
-X-ClientProxiedBy: MA2P292CA0014.ESPP292.PROD.OUTLOOK.COM
- (2603:10a6:250:1::10) To BY5PR12MB4999.namprd12.prod.outlook.com
- (2603:10b6:a03:1da::13)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1790770056; x=1791374856; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=sLki2cInvLivE+QZ6SEnzvqp6w6cIkhwJmGOL+r46Q4=;
+        b=SoILOsOiVF+BmgMNE4jeduS9LwZzxZgXSdFa08mtQlzoQGxY+fqVm33GT2hH4N29LG
+         skP96eSW3jg4Tdw6TKSgQpZPZw+TPVn/mcXawJ4fW1LPFq8DLeXH5PRUtQeb6xJ5jiw8
+         IkRhecmMo/2gbt+aPRU0rrAheURAGEf/R6KUWPhaRFAkfXtvyQvl0Rt8rFQrwoy/eQIy
+         KgQDZl4EK0gWzxZRzBw0sc0pvOYIifQTj9Nttj66qdjloJX4I+45eNOHeazSei2veq4L
+         ZriNWXkZIOsddf3dsJS2bmaX0kcHR3scc72M9namjX74xRjG8FiKa1kpKMQCVfBLCgh0
+         JWOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790770056; x=1791374856;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=sLki2cInvLivE+QZ6SEnzvqp6w6cIkhwJmGOL+r46Q4=;
+        b=R9ERUxgiJinqN9nWfNHi1UGoGHNvmtfCsaZ235Mcjk2ml96siooycxlgXvqZwZ6+6G
+         KAV5gWPYqxHb/wYCpInOHRbQ9ng0VlJy6nQgs1/ftCOhO9MsgT7O8DcC7GTgWCC0bhAn
+         6XLo7XENj2FR4m/9Zri195Y9xJGdgXnfPOxa3DQY2yf+Os6KpC7SRJtx3ybTGGRYdX4S
+         QDVdj6eLPUtu92mCFKD5xS2ZhbiljCBW17naCVsuvkMMj/KUrEnpaaybfJ+QLc8HdnxU
+         q0Yh1QyUsXJ+RV/FmMVJreHkmFcjDiEyr5olmx7Sh35uA5ZNKsYbaQe8c9rrVJEvyNaD
+         h07Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzlVRaoD1jnP2XHLIhPAJlgGLoiK3nU4gH3rjhKjERjpY72ZMQ3fcX5wg6AiSM8uuzttBoQvug69UQ=@lists.xenproject.org
+X-Gm-Message-State: AFuF++nkoXGbybyUn6e8vvz5SS+1ihE0v6fYkzLXCgxr/y9FfJ28oaJv
+	O64LsyJhcwon/381qYotXjueivZmMnnPc2VgOiluQOHizaX6x1Ir5OtroQTvK5onYg==
+X-Gm-Gg: AYBFou3f+NqkCKyYID0Fv78OBlM6s0v+4JtYjzcNd65Uwj9HUEL/s/+hULkaErDYlFw
+	xCzwchvtg93kHc8pd3nCJ4Ea/a1kIZzyukXzOghVeW1wJWGYmoIOrSojs3T6w9SR7C0XSoFjtOx
+	CxJ7HHugM077R56GtzNbk4NaBMGb3GvajvZcg4OhM5hXTAuN0YsFbsAcZSq0uuURhIgf5CKR4OY
+	t7bHeW7nzDp/f4Y0vvZ/b+MbiMY3m4D8SwNxJmqrECkbTCB3ZsnR6imjMgGXgS3HQ4Cdrcl9IZ/
+	29KoCoRjN4IeZxC3PNVcJEc+jA675FPtOrlG9NXw6DDocDR3l3OcHT9r0AWx6jPdU7ImcVesZv/
+	fWMcQHJhX0F7Ez+lRLhN0KcBoCVF3IXtb1szRXQOun/YwTsqv/ipqOHZ5w33pREvalwaJtFCszv
+	XDDJ0OkY2r8wKEekDdMRHAFWxQvWPLqyog2QBSRwnd2SUk8lIQzIHHaVAnff4CHeRODAFlA8Vfo
+	znsCBizaGOHeNV9tyO5KQyrITUQCM7+ON6uZPnTL+nesQFEQ/zaLSIQwLAynFM=
+X-Received: by 2002:a05:600d:82ea:b0:4a0:4cd:7e1d with SMTP id 5b1f17b1804b1-4a01aff2404mr22893845e9.8.1790770056306;
+        Wed, 30 Sep 2026 05:07:36 -0700 (PDT)
+Message-ID: <20e04d15-8621-4680-a2dc-8e54ee88d050@suse.com>
+Date: Wed, 30 Sep 2026 14:07:34 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY5PR12MB4999:EE_|SA1PR12MB6847:EE_
-X-MS-Office365-Filtering-Correlation-Id: 0d24deac-9ed6-45d4-4c11-08df1eea4477
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|4143699003|56012099006|10067099003|11063799006|22082099003|18002099003|3023799007|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	ORUo3bzbiSIMMqbtbEFC1vW9+nxBSuqCBG/zQRpFjzwrgsIvAb23jzMM9ROanHsngqIyPvYH/O0SshwigiEggE+LyFgX4fMapUv19tLYXcIvhsnbmT1CdbG0wn5tZ70/eT3gxKJx+gZwPUs63mTQY8tjs/bYrPapwv8DsxnC7F0CSl3omShyAK8t7aA7ToSXRXB1/qYs96iALYCSLBFalMZmaE17zAHR9KwjA1KPqddHwQfwHkNYGRO0M1QMP91pmWN84iWnkcRDP3NoUfGbvL6f4ThWzZa5vRUz/NErx8sYb1hwD/oKNuJIyRTT2CoXAmu8yTJadGUBGwcvgKJl8YOhHH4XqCviJT7uU/AxlrjtxknFl5UkTHTjSBgMOnU4BWrHsk5MrF/X/PNNu2QbXbhbIeVrTIlC+2nJgWeZoxht0axXQ1y7+38azR9yQf3/JSWZPpsc9wzsuhQo5n1i7Vmc0YxcgmJcSY3cXgyppubStbOhb/qNhJtOfLfGoxeVUKbDJ5SAEiXcxhLY0orega7SCHLlxmUclwljFOVqQHwHhyVPpGQU5+F1cuB/PEj9ZrCXfsOkj41/AOT36BXBqrFgfEFl1gnH4QaAGBIh28yemx9TugMMevLZJ+8W1ohp4liMjrhMPdWpYk8iv2NfyCEASG00te8z9K/182gu0mk=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR12MB4999.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(4143699003)(56012099006)(10067099003)(11063799006)(22082099003)(18002099003)(3023799007)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?NnZHTWlkb01jL2hRMi9HRTh0WndTeUFwZHdmNTBFRGN4WEluVkhWREgxZFRP?=
- =?utf-8?B?L2RQR29LQlZ1a2pHMEUzMjNwMjVZNWVXY3lFUU0wUnUzV3I4ZTZCWXhOYVEy?=
- =?utf-8?B?cXNDaTVEWlZHei9wbXo0RWpHTmUwYXAreDJJUmVPOVI5WEtYQ0lhZ3FYWkJt?=
- =?utf-8?B?cXhHMExHNHJuMlhpQko0ck5EdzZHRXk5U0crL05UZkJYQ1Zpc0Q0WFdkVHNp?=
- =?utf-8?B?Y3BKRHR0cWpXc1k1NlB2eVZITFl1MStPZUx2UVNucXdzQjJTVXc5TmpyWlF3?=
- =?utf-8?B?cE1JWmw2dnB0bmhRcUtVcm5uTTJ5VUlmOFlLWUlIMHVZTnJRTUxSV21uTFcr?=
- =?utf-8?B?RlNnUWVnWEd0US9rQzRLWWRPbXR5UXNxQnFVREZ4K3BXSmpYdEtHQkc5QVdM?=
- =?utf-8?B?U1NJdFBpQlpPdTYvZFRMK0dmT0dYOFNkSUF0cGVNY0FMcTNWalVWUnZWV2pC?=
- =?utf-8?B?VHpwdVRUOSt3MHlOeHpjRTJsV3UrNHNYMmhoR1NLaGVXNlFIdmhaSFljdUZu?=
- =?utf-8?B?OU8rVUZNODBvTXd2UVBTSEhmcUJvYTkxaWlMY2ZGeVBkaUNVdzN3T2tOUXJl?=
- =?utf-8?B?N3dENHA5NGRiaUl6WWxYWVFMeXhvWlFuN1l0VmRzRTlLMEtaOUxwbFNPZ1RB?=
- =?utf-8?B?VHp3NWRPYnJKRzk5UWhFUmdFKzh0eEJ2VE9zUHZuVlJzZzIvSFpQR2c4TW5F?=
- =?utf-8?B?eVlYQmFET01FVVgybXNOQ0lnd2FoNFM2c1RINEdnVHNQajh3YUlKcjdzR1RN?=
- =?utf-8?B?bzEyMWV0S2o4M2VMWkVLTDlCdlJLTEhZL1BNcmZqbXV2bSt1TWNtd3B4V21i?=
- =?utf-8?B?ZWRHbTZnV21ERXlPdmp5eGhGMFRucnFpbzc0T1NENHd2WEFaQjVIaGpNU0tJ?=
- =?utf-8?B?blpaR2M0ejVJR1FkK1BmL2dzcHBMb3I1SmtVY01OeGFta3J0ZDdEQVY4dmZE?=
- =?utf-8?B?dmsydWJlU05wRy8zdVJQSm13QWdnR0Y4cyt4bzQ2VUo0MW1iUXVnMDlzYmhu?=
- =?utf-8?B?dGErMGFidlFIcGZPMUtOWXNaWjdLSUVLSWIyUlZxdGJBWDZXdXg1Um1UcXp6?=
- =?utf-8?B?OWVGL1E5Rm5aaEJrYWhaR3dQR2t1S2RTN2loeVVEOXRGTHV2cGFtcVo5Y2pp?=
- =?utf-8?B?VkY3VG16ejF1cEk5cEQwZmJTQno0NkhiZTZmaHdvYjBMSkxwVnJsb2ZDODFn?=
- =?utf-8?B?SWxrS0dwak1JWFNoQ1Bad3ZyMTRvYUZRamFSc3RZdDVPNDdaYkt1S3pKVWtJ?=
- =?utf-8?B?T1pDTTZSK2x4b3pTYlNmajRsUHBxeXQ0SFd1c2tCbnNvR0lOZzVhRFBzSmFF?=
- =?utf-8?B?K0hDNHBValFRNTErSEtFSXIwcS94K0Z6L1pEM0Q3ZnBaSERvM0NwZ2tCVXk3?=
- =?utf-8?B?R2hNZWFCSzdLcjNSaERDZkVnSEZkU1hMcWVjVXNJV3RYWGdqV0EyUjdDNlc2?=
- =?utf-8?B?ZHBDTXVkUHlSajZHNWFoVTBscjdqNWxBcFpvaUU0cEd6a3BKL0hFWkY4RFhZ?=
- =?utf-8?B?dWNkd1pIY0dETEZ5MU9QTVo0WVhCanBueDNvT0dnK2c0b2plQjZXeDNaSTJH?=
- =?utf-8?B?eWoydFNNVi9ZTUdjN0J2MStEZVRUT2UvbUU0OTdYSmZVM2xZTDArR05FV00w?=
- =?utf-8?B?ZGEyZGZwUWRUWDViVTA4QUlERjRhV3VJSzBiN2lnNDk2K2JBSkZsMzFkSGNS?=
- =?utf-8?B?RjQ0TDAyV1hQb0dnTmg3WXJKWWNZcVpMcnhRQ3B1eGNqajR1OFU1N0JpNlFW?=
- =?utf-8?B?WURmSHc2VE5wemg3U0pxOTR2bVBQSzU4cWJZMjhTRDlHMVlvU3praWZQS3BD?=
- =?utf-8?B?L1R4TXB2M2t2dXdneFNyWExJRGdsUmo1MEY2djVBZHdzNCtudEJrSFdEaWlJ?=
- =?utf-8?B?L2M4V0FuWXRNb3VrTEpwUjcwcVpYSTFVWU1PQVdZUWZHdmlFMG92R2FISlRF?=
- =?utf-8?B?ZUpxUGV5ZWFhL2NrWE1TdFZ1OUFhYnJOQWdTOThwWHQrME9oeDM1RHEyUDNF?=
- =?utf-8?B?NEJMYldlR3R2RFRXMW5xRURMZ2VYUGl5KzluOTdIUUJITHNtNHFZM2szYnVw?=
- =?utf-8?B?YlRmUk5hSkVYb1JucVVEK29hQThuVnZLYktXdkFqWG0zU3E3TGwwNkpSY1hI?=
- =?utf-8?B?cTh1RmtMeEJvWjRsODFmYy9UMGZLZHMvejQ1ZTRXWE5ES2NSbG1kczAyTDJj?=
- =?utf-8?B?Ri9HQmVCQmFZdnVDSkRXMEs1VVBDTFBLWnc1V3dGUGswbmVJelNYSXNGUDZD?=
- =?utf-8?B?YkdnWW9PZnRYWHgxOElVeDNsRk9TaTJaRXJTOXB6TEtTaDJGdUFhTEJHUWVn?=
- =?utf-8?Q?F1FzFdWGSaw4Uf91Q4?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 0d24deac-9ed6-45d4-4c11-08df1eea4477
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR12MB4999.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 30 Sep 2026 11:59:23.1099
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: b/0PyL92iVQkbnQ+45rOiIJJC1pnp98OdgB7hDyDIGpNgkpH9qBKUa053auxl6QkqZ7jipGxJKnK17eNKONRCg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB6847
-X-purgate-ID: tlsNG-d62444/1790769568-1FC69757-58DE4D5F/0/0
-X-purgate-type: clean
-X-purgate-size: 4735
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/6] xen/riscv: rename PTE "permissions" to "pte_flags"
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, xen-devel@lists.xenproject.org
+References: <1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech>
+ <1790699585.8631fc262581453bbf619ec5b2062170.1a0ee033eb9000b504@vates.tech>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <1790699585.8631fc262581453bbf619ec5b2062170.1a0ee033eb9000b504@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1790770056-F460277B-15C6B007/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 4564
 
-On Wed Sep 30, 2026 at 10:32 AM CEST, Roger Pau Monn=C3=A9 wrote:
-> On Wed, Sep 30, 2026 at 12:14:15AM +0200, Alejandro Vallejo wrote:
-> > On Tue Sep 29, 2026 at 4:52 PM CEST, Jan Beulich wrote:
-> > > On 29.09.2026 16:20, Roger Pau Monn=C3=A9 wrote:
-> > > > On Mon, Sep 28, 2026 at 10:24:04AM +0200, Alejandro Vallejo wrote:
-> > > >> On Fri Sep 25, 2026 at 6:30 PM CEST, Roger Pau Monne wrote:
-> > > >>>  static inline void rcu_quiesce_disable(void)
-> > > >>>  {
-> > > >>> +    unsigned int cpu =3D smp_processor_id();
-> > > >>> +
-> > > >>>      preempt_disable();
-> > > >>> -    this_cpu(rcu_lock_cnt)++;
-> > > >>> -    barrier();
-> > > >>> +    if ( !ACCESS_ONCE(per_cpu(rcu_lock_cnt, cpu))++ )
-> > > >>> +        ACCESS_ONCE(per_cpu(rcu_lock_epoch, cpu)) =3D ACCESS_ONC=
-E(rcu_epoch);
-> > > >>
-> > > >> I'm not terribly convinced about using ACCESS_ONCE() for atomic
-> > > >> accesses. In particular...
-> > > >>
-> > > >>> +    smp_mb();
-> > > >>>  }
-> > > >>> =20
-> > > >>>  static inline void rcu_quiesce_enable(void)
-> > > >>>  {
-> > > >>> -    barrier();
-> > > >>> -    this_cpu(rcu_lock_cnt)--;
-> > > >>> +
-> > > >>> +    smp_mb();
-> > > >>> +    ACCESS_ONCE(this_cpu(rcu_lock_cnt))--;
-> > > >>
-> > > >> ... this variable is to be read by remote CPUs and autodecrement s=
-eems
-> > > >> like the wrong tool for an atomic decrement.
-> > > >=20
-> > > > I can use {read,write}_atomic() instead, but there's been a tendenc=
-y
-> > > > to phase out the usage of those functions.  On x86 this should be a
-> > > > plain `addl` or `subl` instruction (the non-locked version of
-> > > > atomic_{inc,dec}()).
-> >=20
-> > I don't think the compiler can merge volatile reads and writes. It can
-> > shatter them (thus my fear), but they are meant to be distinct because
-> > each might have different side effects. Jan already mentioned this in
-> > other words.
-> >=20
-> > You don't need an atomic decrement though, just an atomic write. Note
-> > IRQs restore it on exit and other CPUs don't write to it.
-> >=20
-> >   unsigned int *lock_cnt =3D &this_cpu(rcu_lock_cnt);
-> >   write_atomic(lock_cnt, *lock_cnt - 1);
-> >=20
-> > and this yields a plain mov, through a static inline stub (plus the
-> > mov from the read access + dec)
-> >=20
-> > The problem with ACCESS_ONCE() is that the write isn't guaranteed to be
-> > atomic.
->
-> It has always been blurry to me using ACCESS_ONCE() to signal
-> unshattered accesses, but we seem to rely on this property in other
-> places already (which doesn't mean is correct).  See
-> ffa_negotiate_version() for example.
->
-> This is all kind of moot if we guarantee that all supported compilers
-> will never tear accesses up to machine word sizes.
->
-> > >
-> > > If remote CPUs are to access the variable, is a non-locked access oka=
-y
-> > > in the first place?
-> >=20
-> > You use locked access when you need sequential consistency or an atomic
-> > RMW, and that's not it here. There's a single writer (currrent CPU) and
-> > IRQs don't play a part because the restore the previous value before
-> > returning. So it's race-free. All we need to ensure is that remote CPUs
-> > never see a partial write.
-> >=20
-> > Another take would be to subsume the prior smp_mb() into the decrement.
-> > Something like:
-> >=20
-> >   arch_fetch_add(&this_cpu(rcu_lock_cnt), RCU_LOCK_CNT_MAX);
->
-> Kind of a nit (as I've already attempted this approach), but
-> arch_fetch_and_add() is not usable as-is here.  We we need to consume
-> the returned value, otherwise the compiler complains.
->
-> ./arch/x86/include/asm/system.h:189:6: error: value computed is not used =
-[-Werror=3Dunused-value]
+On 29.09.2026 18:32, Baptiste Le Duc wrote:
+> paddr_to_pte()'s "permissions" parameter, the matching local in
+> 
+> setup_initial_mapping() and p2m_set_permission() don't only deal with
+> 
+> permission bits: they also handle PTE_VALID, PTE_USER, PTE_ACCESSED and
+> 
+> PTE_DIRTY.
+> 
+> 
+> 
+> Rename them to "pte_flags" and p2m_set_pte_flags() respectively.
+> 
+> 
+> 
+> No functional change.
+> 
+> 
+> 
+> Requested-by: Jan Beulich <jbeulich@suse.com>
+> 
+> Assisted-by: Claude:claude-opus-5
+> 
+> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
-(void)arch_fetch_and_add() would shut up the warning, but...
+In principle
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
->
-> Could do:
->
-> unsigned int prev =3D arch_fetch_and_add(&this_cpu(rcu_lock_cnt), -1);
-> ASSERT(prev > 0);
->
-> > This would make the decrement itself atomic (through a locked insn), bu=
-t
-> > ensure sequential consistency as well, thus removing the need for the
-> > prior barrier. It's trickery through twos complement to behave like a u=
-nit
-> > decrement.
-> >=20
-> > My point isn't so much the "how" (should be obvious by now there's many
-> > ways), but to not use ACCESS_ONCE() where an atomic read or write was
-> > meant. Not necessarily a locked instruction. Just atomic.
->
-> I don't have a strong opinion of using smp_mb() vs
-> arch_fetch_and_add().  I think smp_mb() expresses the intention
-> better, and avoids explicitly using a locked instruction, which is not
-> required here.
+I won't, however, be able to apply this patch as-is. As you can see both above
+and below, extra newlines were inserted everywhere on the way here. The list
+archive doesn't show this issue, but instead shows undue wrapped lines. It is
+also only this one patch in the series which has this issue. You will need to
+resend for me to properly consume.
 
-... I agree. My point was rather on ACCESS_ONCE() avoidance. Let that be
-for now, it's clearly meat for another barbequeue.
+Jan
 
-Cheers,
-Alejandro
-
->
-> Thanks, Roger.
+> ---
+> 
+> Changes since v2:
+> 
+> - new patch
+> 
+> ---
+> 
+>  xen/arch/riscv/include/asm/mm.h | 5 +++--
+> 
+>  xen/arch/riscv/mm.c             | 8 ++++----
+> 
+>  xen/arch/riscv/p2m.c            | 4 ++--
+> 
+>  3 files changed, 9 insertions(+), 8 deletions(-)
+> 
+> 
+> 
+> diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+> 
+> index 9e28c24954..1ac66283ec 100644
+> 
+> --- a/xen/arch/riscv/include/asm/mm.h
+> 
+> +++ b/xen/arch/riscv/include/asm/mm.h
+> 
+> @@ -22,9 +22,10 @@ extern vaddr_t directmap_virt_start;
+> 
+>  #define paddr_to_pfn(pa)  ((unsigned long)((pa) >> PAGE_SHIFT))
+> 
+>  
+> 
+>  static inline pte_t paddr_to_pte(paddr_t paddr,
+> 
+> -                                 unsigned int permissions)
+> 
+> +                                 unsigned int pte_flags)
+> 
+>  {
+> 
+> -    return (pte_t) { .pte = (paddr_to_pfn(paddr) << PTE_PPN_SHIFT) | permissions };
+> 
+> +    return (pte_t) { .pte = (paddr_to_pfn(paddr) << PTE_PPN_SHIFT) |
+> 
+> +                            pte_flags };
+> 
+>  }
+> 
+>  
+> 
+>  static inline paddr_t pte_to_paddr(pte_t pte)
+> 
+> diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+> 
+> index 610d111945..0e26c5751f 100644
+> 
+> --- a/xen/arch/riscv/mm.c
+> 
+> +++ b/xen/arch/riscv/mm.c
+> 
+> @@ -140,7 +140,7 @@ static void __init setup_initial_mapping(struct mmu_desc *mmu_desc,
+> 
+>          case 1: /* Level 0 */
+> 
+>              {
+> 
+>                  unsigned long paddr = (page_addr - map_start) + pa_start;
+> 
+> -                unsigned int permissions = PTE_LEAF_DEFAULT;
+> 
+> +                unsigned int pte_flags = PTE_LEAF_DEFAULT;
+> 
+>                  unsigned long addr = is_identity_mapping
+> 
+>                                       ? page_addr : virt_to_maddr(page_addr);
+> 
+>                  pte_t pte_to_be_written;
+> 
+> @@ -149,13 +149,13 @@ static void __init setup_initial_mapping(struct mmu_desc *mmu_desc,
+> 
+>  
+> 
+>                  if ( is_kernel_text(addr) ||
+> 
+>                       is_kernel_inittext(addr) )
+> 
+> -                        permissions =
+> 
+> +                        pte_flags =
+> 
+>                              PTE_EXECUTABLE | PTE_READABLE | PTE_VALID;
+> 
+>  
+> 
+>                  if ( is_kernel_rodata(addr) )
+> 
+> -                    permissions = PTE_READABLE | PTE_VALID;
+> 
+> +                    pte_flags = PTE_READABLE | PTE_VALID;
+> 
+>  
+> 
+> -                pte_to_be_written = paddr_to_pte(paddr, permissions);
+> 
+> +                pte_to_be_written = paddr_to_pte(paddr, pte_flags);
+> 
+>  
+> 
+>                  if ( !pte_is_valid(pgtbl[index]) )
+> 
+>                      pgtbl[index] = pte_to_be_written;
+> 
+> diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+> 
+> index 1cea86512c..f7b380b90a 100644
+> 
+> --- a/xen/arch/riscv/p2m.c
+> 
+> +++ b/xen/arch/riscv/p2m.c
+> 
+> @@ -584,7 +584,7 @@ static inline void p2m_clean_pte(pte_t *p, bool clean_cache)
+> 
+>      p2m_write_pte(p, pte, clean_cache);
+> 
+>  }
+> 
+>  
+> 
+> -static void p2m_set_permission(pte_t *e, p2m_type_t t)
+> 
+> +static void p2m_set_pte_flags(pte_t *e, p2m_type_t t)
+> 
+>  {
+> 
+>      e->pte &= ~PTE_ACCESS_MASK;
+> 
+>  
+> 
+> @@ -676,7 +676,7 @@ static pte_t p2m_pte_from_mfn(mfn_t mfn, p2m_type_t t,
+> 
+>              break;
+> 
+>          }
+> 
+>  
+> 
+> -        p2m_set_permission(&e, t);
+> 
+> +        p2m_set_pte_flags(&e, t);
+> 
+>          p2m_set_type(&e, t, ctx);
+> 
+>      }
+> 
+>      else
+> 
+> 
+> 
 
 
