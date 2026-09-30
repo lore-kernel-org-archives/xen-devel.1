@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E591ECA5FC5
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 13:56:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437312.1656168 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6BB8CCA5FC5
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 13:59:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437321.1656177 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBunY-0001St-QG; Wed, 30 Sep 2026 13:56:40 +0000
+	id 1xBupr-0002Fw-87; Wed, 30 Sep 2026 13:59:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437312.1656168; Wed, 30 Sep 2026 13:56:40 +0000
+Received: by outflank-mailman (output) from mailman id 1437321.1656177; Wed, 30 Sep 2026 13:59:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBunY-0001Sm-MS; Wed, 30 Sep 2026 13:56:40 +0000
-Received: by outflank-mailman (input) for mailman id 1437312;
- Wed, 30 Sep 2026 13:56:38 +0000
+	id 1xBupr-0002Fp-34; Wed, 30 Sep 2026 13:59:03 +0000
+Received: by outflank-mailman (input) for mailman id 1437321;
+ Wed, 30 Sep 2026 13:59:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBunW-0001Q1-KL
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 13:56:38 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBupq-0002Fj-EG
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 13:59:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBunV-00CbA4-IN
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 15:56:37 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xBupp-006gEo-QU
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 15:59:01 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abd1500-2eae-0a2a0a5409dd-0a2a4509c584-36
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 15:56:37 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abd1515-be1a-0a2a45090019-d155802da528-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 15:56:37 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4a01b560392so2309145e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 06:56:37 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48b029be71csm4162887f8f.9.2026.09.30.06.56.30
+ (envelope-from <jbeulich@suse.com>)
+ id 6abd1590-2eae-0a2a0a5409dd-0a2a4504980a-42
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 15:59:01 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6abd15a5-b57f-0a2a45040019-4a7de18cde87-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 15:59:01 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49ff9621c5dso31320015e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 06:59:01 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a01e673d4asm1490755e9.11.2026.09.30.06.59.00
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Sep 2026 06:56:31 -0700 (PDT)
+ Wed, 30 Sep 2026 06:59:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,136 +52,176 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790776597; x=1791381397; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=suse.com; s=google; t=1790776741; x=1791381541; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ffDnjrv5gtZeAI6GHrZp9yvaTY/ZRPVjxIMSX8/YOkI=;
-        b=NR/D02AOQM/FjdBmMCwjos9+yT1aTjHqwBNJWSGTZS93Kc0JURMoKDRCQtdx5wCfMr
-         gMbQ7WqbS3YmDcbzGQi0HJqwDlitW7mjUPaL723XvgYQ9Kb2lNW/i43xgx6iP1m91zkL
-         XWIERuAA9E4BqXQosTdq9Kdc5aEJcLMl0/fvi1vHKmX1jxzrLH8zlUefW21YuDIiG2qz
-         PzXWfOyQ2SrbpNc4JiNP7OVPyEVQyzthLxgcV9w2MDXNiwb9rK/9oHW9cytwNGdO/wzG
-         afdoumJksSWoJjn6RC6FqNHmFG5/K6gO7vscekJ+DQDYH3w7Kku0PgMI2/mrXgEzOCAJ
-         V5zg==
+        bh=4AVoby2Pk5ebO+BZZaGXziPTKUz6FI6vnFKWzX/1MG8=;
+        b=CBRMA3UUY+2x2VyrN5Hp8zu80eDA1gqyCpPjNdSjFVHrd9Soc+JD6ig2oImZfPCvfV
+         wMmt0j2CCEh+N1qXSLmtyw6IU2YI7MQf2bVgFfQ+g4JjSf9faCOmrhuxucj/nfeOcApO
+         s1d41OMS8y0Na0DA7py9IAHC3tQJLVZmorAHkSxFW9myKtNaeX5DwEV6ta1MLV4yaZgw
+         EaVi+7Qdjo1RTslf7hD3XgfecI6zkFX1yblRjkcs38hwz6K0mgTZ9sWm54QJwI6GOMcM
+         Cgba3GqRJmrx+ct4F95L6uS0M+KVZycyUweboC9MzWDVNkmlHwq/2nx2++l1IwxPAZIV
+         5YaA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790776597; x=1791381397;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=1e100.net; s=20260707; t=1790776741; x=1791381541;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ffDnjrv5gtZeAI6GHrZp9yvaTY/ZRPVjxIMSX8/YOkI=;
-        b=g7Z45JhIWOY+0p2FuaJ2O55zifpnC0VMl+U8Wvt/uDSp7nOJCW9BGvjUDMNFW2LWLF
-         97M4cRl9FVH4TMk/0E3Q/LzYu1j3/ks+z8JIjeDc2uAz8DbNiiJB4eEChoJ3Zcv4AiF9
-         8hJCZPZeRSqsLvFpnOEBuH5T6o1pAbPLEP4nt6n+u170zMKpxZufdsh+b1tgrzubB8gU
-         IN2ZHC7vFawZZCkorbNz7nyKJcvyBSATknbxB4c/RAw2f4DN/TFEm9EFUfbb02IBpk2e
-         3tCPW2cU8i/g9CLlTtJsb2AhNyhT9pShvpmhpDA22arWCylhQ2wyRJcBdYg2MqUlQcN4
-         iziw==
-X-Forwarded-Encrypted: i=1; AKwUvBwC3g//x5V1gmS3h+ZuBiFlcG9fbbKrUzVCirPtHUGVxkZxaW17IE6YCNSjZwz53y1EvEZmQHixZzU=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mx/IXYsujYEuQ/Yp7cTNhLo1cZ0opABKgiUpoG5f0xx0OlZbKN
-	Uona8Jz0Y+8H7Dds6M+gIBD/zqAUaMGRZDdHqP0/0HKqk9SfOjNQ/FJ9
-X-Gm-Gg: AYBFou3zNjl6O/+i+v/qQhmGw+OMHN8b1+vM1sVijTuLWo1H/e0KsNSoT4gNsWS41CM
-	+ijPhEGVlH1Zh7rjfP24qGNjh4jq4c8s+X9kTu9XhdvwI7VsZwgf81z0HCU9f7PUUxw4ekvjr7U
-	ZCVYUmJNQ75c3Hq6ivg3XMPniw2f3gaJctV2AtIkQyATPF4gqZEscJ3A5tvGGBboIZeruFlGV3Q
-	0tC3OCLQGAx8Iys7vt+N3dvyGVLojAT2FMLvl9JMGg8wZ9f/aSKHpTlKY4GBuLXgi1XbiVjhtj2
-	YdHlRZqagAUS5mY2wD3S1v143g4nv7sKJI3pEI8jmUsnRHEfu7+mWc5ubX/oHTEs2fdvwY6PwfS
-	WOcQHdODhZWlg/IKOqOXUOX4oTDE92WDDx4Xt8EkVduyIDxKYC6LbpdU4Q+y28CLdQoQi//eSmB
-	oosS/pI6lWkQsIkJJ6yVhVwQ4j1+eV+UgCqM9YzjRDYeE9WdvKNJGEQharx9jKxt88JrpG5tRfQ
-	o5VJskvpGxNzfO98nafqKMh3+TK8DZcecbRTbJos3DM+TSVPw==
-X-Received: by 2002:a05:600c:47c9:b0:4a0:1c92:f989 with SMTP id 5b1f17b1804b1-4a01c92f9c2mr9406055e9.12.1790776596879;
-        Wed, 30 Sep 2026 06:56:36 -0700 (PDT)
-Message-ID: <aff1e60a-0420-4c44-8c65-b05f9e21a0b5@gmail.com>
-Date: Wed, 30 Sep 2026 15:56:29 +0200
+        bh=4AVoby2Pk5ebO+BZZaGXziPTKUz6FI6vnFKWzX/1MG8=;
+        b=jqqOqDOobDVmwBozyXMcZu/VfoqwgdYAyUYplLrjb++t0CoW3VEodl4N1xssDzqcTC
+         1RWXgCh5Cwgbx2Y8mGM56cXEyulXhndILEWa/wZV4q96z6qjrUYWBlFvM3eZFLYUaIK7
+         8ES0cbZ/wGVsQQKNPHCimB2WS2o+Ls3UHwDLjOfnxZ6kw+LUjrbu9MEITT3tbvzMp1Mq
+         OtNXmJkc5cp1vbDUc8aFE8PtZj9LFgczd2jBThABrZpVFy0bkaa67XGXVbaxVFiltT/K
+         knroBw1g7CyIrf9MgBAbFxriD/l3M3+T2+i9L5rrWme0v2Nb0YqL0VzHwAUIOLo+WNjN
+         kpXw==
+X-Forwarded-Encrypted: i=1; AKwUvBxXsIGYU4Fk0tqNT35epNi+tg72f3mOvguZFmI7fLdrBAPZbFgCVrqwlpT8h4uAOJjPXJiTLnI5pZs=@lists.xenproject.org
+X-Gm-Message-State: AFuF++n6YhFO31sEXtNhw7uWvV/Uil3YKS8Nvh4EfLdR3NpBHDDqE+kY
+	pbIrm6g9/s8ZYTxppsIS2CseBAmYWgKdUr30/4x2MHPzC+LqwbQux51BFPZC9AFVBg==
+X-Gm-Gg: AYBFou2E2kkF0/3c+HVQA4spzPGo+f3YMBK0GzNxPyKIW9ZY6o4T8OWeqhDnXnmYPgV
+	omT6pL2vS3hHHyM/MPT1N7m28k1lQiopCneOCHMgdK+S2IRktl4cMRF+geIh9vVwFE3Bc9dVkf/
+	8bLdcFa4tBfHLfgysffxIqGSpMYARlab0yPFnSj9540GHNYrCFSVJHK1fhKbm4HBmKdCwrDv2ii
+	lWP80m/7vAUG0Wzz2DbcIsb4cqAOnN8IJNzXVRfLqOrH0cZRu6OXOlN6BDkibKStys7//TdCX1j
+	WLC7iarChymRqCOwiKBk9JYxb4HkLDA/IGTPFTZXcxjPmmELmhlHLGVU/TQ2FUF7cyRi+m22E1c
+	5y2IMw/dVc5MG0lZNAHklObkGrRdMbGseZeEF4JgsHExWaSd/bNUBa14QMQ75/ldvCe10cxVhsP
+	I4v9CfaSOVZaYPcYSXow5PDmlXHc3JtDnSqxP4+YS5tlJtLNnKwpfdAi4kLJMfalQtD2l0vqNPM
+	d/dFkLcD6P+OpHBxhJwhE21lskOzzzAo5a6zHpY+TLpPBcVh33mrClPvhywOQ==
+X-Received: by 2002:a05:600c:348f:b0:49d:10d6:fd55 with SMTP id 5b1f17b1804b1-4a01adb2ae3mr28428165e9.1.1790776741148;
+        Wed, 30 Sep 2026 06:59:01 -0700 (PDT)
+Message-ID: <2e6f8a8e-7b02-41b4-812a-fa71c48ac48c@suse.com>
+Date: Wed, 30 Sep 2026 15:58:59 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/6] xen/riscv: rename PTE "permissions" to "pte_flags"
-To: Jan Beulich <jbeulich@suse.com>
+Subject: Re: [PATCH v3 3/6] xen/riscv: fix A/D bit handling in G-stage
+ mappings
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>, xen-devel@lists.xenproject.org
+ Connor Davis <connojdavis@gmail.com>, xen-devel@lists.xenproject.org,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>
 References: <1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech>
- <1790699585.8631fc262581453bbf619ec5b2062170.1a0ee033eb9000b504@vates.tech>
- <9f94af4b-f122-46e0-bbc4-7fecd51d4348@gmail.com>
- <f93e6f0d-0ceb-4db6-91f8-d571503ca58c@suse.com>
+ <1790699585.8631fc262581453bbf619ec5b2062170.1a0ee0340f9000b504@vates.tech>
+ <c2d30da2-6844-4df2-9029-238f5ce25838@suse.com>
+ <3419a5a5-fcb9-4222-9045-1acdd9609021@gmail.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <f93e6f0d-0ceb-4db6-91f8-d571503ca58c@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1790776597-BFCD7034-45D54B9B/10/78276251493
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <3419a5a5-fcb9-4222-9045-1acdd9609021@gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ebf023/1790776741-C18D1B50-943A890F/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2362
+X-purgate-size: 4416
 
-
-
-On 9/30/26 3:54 PM, Jan Beulich wrote:
-> On 30.09.2026 15:42, Oleksii Kurochko wrote:
->> On 9/29/26 6:32 PM, Baptiste Le Duc wrote:
->>> paddr_to_pte()'s "permissions" parameter, the matching local in
+On 30.09.2026 15:53, Oleksii Kurochko wrote:
+> On 9/30/26 2:20 PM, Jan Beulich wrote:
+>> On 29.09.2026 18:32, Baptiste Le Duc wrote:
+>>> --- a/xen/arch/riscv/p2m.c
+>>> +++ b/xen/arch/riscv/p2m.c
+>>> @@ -586,42 +586,24 @@ static inline void p2m_clean_pte(pte_t *p, bool clean_cache)
+>>>   
+>>>   static void p2m_set_pte_flags(pte_t *e, p2m_type_t t)
+>>>   {
+>>> +    bool svade = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade);
+>>> +    bool svadu = riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu);
+>>> +
+>>>       e->pte &= ~PTE_ACCESS_MASK;
+>>>   
+>>>       e->pte |= PTE_USER;
+>>>   
+>>>       /*
+>>> -     * Two schemes to manage the A and D bits are defined:
+>>> -     *   • The Svade extension: when a virtual page is accessed and the A bit
+>>> -     *     is clear, or is written and the D bit is clear, a page-fault
+>>> -     *     exception is raised.
+>>> -     *   • When the Svade extension is not implemented, the following scheme
+>>> -     *     applies.
+>>> -     *     When a virtual page is accessed and the A bit is clear, the PTE is
+>>> -     *     updated to set the A bit. When the virtual page is written and the
+>>> -     *     D bit is clear, the PTE is updated to set the D bit. When G-stage
+>>> -     *     address translation is in use and is not Bare, the G-stage virtual
+>>> -     *     pages may be accessed or written by implicit accesses to VS-level
+>>> -     *     memory management data structures, such as page tables.
+>>> -     * Thereby to avoid a page-fault in case of Svade is available, it is
+>>> -     * necessary to set A and D bits.
+>>> -     *
+>>> -     * TODO: For now, it’s fine to simply set the A/D bits, since OpenSBI
+>>> -     *       delegates page faults to a lower privilege mode and so OpenSBI
+>>> -     *       isn't expect to handle page-faults occured in lower modes.
+>>> -     *       By setting the A/D bits here, page faults that would otherwise
+>>> -     *       be generated due to unset A/D bits will not occur in Xen.
+>>> -     *
+>>> -     *       Currently, Xen on RISC-V does not make use of the information
+>>> -     *       that could be obtained from handling such page faults, which
+>>> -     *       could otherwise be useful for several use cases such as demand
+>>> -     *       paging, cache-flushing optimizations, memory access tracking,etc.
+>>> +     * A RISC-V implementation can choose to either:
+>>> +     * 1) Update 'A' and 'D' PTE bits in hardware.
+>>> +     * 2) Generate page fault when 'A' and/or 'D' PTE bits are not set so that
+>>> +     *    software can update these bits.
+>>>        *
+>>> -     *       To support the more general case and the optimizations mentioned
+>>> -     *       above, it would be better to stop setting the A/D bits here and
+>>> -     *       instead handle page faults that occur due to unset A/D bits.
+>>> +     * Xen supports both options mentioned above: unless the platform guarantees
+>>> +     * (1), i.e. only Svadu is present, set 'A' and 'D' so that (2) never
+>>> +     * faults.
+>>>        */
+>>> -    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
+>>> +    if ( !svadu || svade )
+>>>           e->pte |= PTE_ACCESSED | PTE_DIRTY;
 >>
->> Nit: s/the matching local/the matching local variable?
+>> I may have asked this already when the original conditional was introduced:
+>> What use is it to leave A and D clear, when we don't otherwise consume the
+>> bits? This way hardware has to issue more (atomic) writes, i.e. performance
+>> suffers for no gain.
 > 
-> What else could "local" on its own mean here? I think it's common
-> shorthand for "local variable".
+> It will be done only once, won't it? After that, if the A/D bits aren't 
+> cleared, there shouldn't be any performance impact, so it will basically 
+> behave the same as setting the A/D bits in software.
+> 
+> The idea was that, if Svadu is available, it should be the hardware's 
+> job to set the A/D bits. That way, when the A/D bits eventually start 
+> being used for some purpose in Xen, we won't miss an unconditional write 
+> of the A/D bits when Svadu is available.
+> 
+> If you think it's enough to just have the A/D bits set unconditionally, 
+> I'm okay with that, and we can go that way.
 
-I didn't think in that way. Now I agree that it is fine.
+I think starting simple (i.e. unconditional) here is the way to go. Making
+the setting of one or both flags conditional can be left to whenever that
+would become a necessity. Note that on x86 we haven't seen a need in all
+the time (for Xen's own page tables that is).
 
-> 
->>> setup_initial_mapping() and p2m_set_permission() don't only deal with
->>> permission bits: they also handle PTE_VALID, PTE_USER, PTE_ACCESSED and
->>> PTE_DIRTY.
->>>
->>> Rename them to "pte_flags" and p2m_set_pte_flags() respectively.
->>>
->>> No functional change.
->>>
->>> Requested-by: Jan Beulich <jbeulich@suse.com>
->>> Assisted-by: Claude:claude-opus-5
->>> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
->>> ---
->>> Changes since v2:
->>> - new patch
->>> ---
->>>    xen/arch/riscv/include/asm/mm.h | 5 +++--
->>>    xen/arch/riscv/mm.c             | 8 ++++----
->>>    xen/arch/riscv/p2m.c            | 4 ++--
->>>    3 files changed, 9 insertions(+), 8 deletions(-)
->>>
->>> diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
->>> index 9e28c24954..1ac66283ec 100644
->>> --- a/xen/arch/riscv/include/asm/mm.h
->>> +++ b/xen/arch/riscv/include/asm/mm.h
->>> @@ -22,9 +22,10 @@ extern vaddr_t directmap_virt_start;
->>>    #define paddr_to_pfn(pa)  ((unsigned long)((pa) >> PAGE_SHIFT))
->>>    
->>>    static inline pte_t paddr_to_pte(paddr_t paddr,
->>> -                                 unsigned int permissions)
->>> +                                 unsigned int pte_flags)
->>>    {
->>> -    return (pte_t) { .pte = (paddr_to_pfn(paddr) << PTE_PPN_SHIFT) | permissions };
->>> +    return (pte_t) { .pte = (paddr_to_pfn(paddr) << PTE_PPN_SHIFT) |
->>> +                            pte_flags };
->>
->> Nit: it could be one line.
-> 
-> Not if all the blanks are to be kept.
-> 
->> I am okay to go without last two Nit(s):
->>
->> Reveiwed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> 
-> Please clarify whether you insist on the description change for the tag
-> to be applied.
-> 
-Considering the your comment above, I agree local is just shorthand for 
-'local variable' so I am not insisting on the description change.
-
-~ Oleksii
+Jan
 
