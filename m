@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF11DCA5FAB
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 05:59:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436841.1655497 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D3B37CA5FAB
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 06:19:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436847.1655506 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBnLJ-0002rz-8V; Wed, 30 Sep 2026 05:59:01 +0000
+	id 1xBneE-0005ty-Mw; Wed, 30 Sep 2026 06:18:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436841.1655497; Wed, 30 Sep 2026 05:59:01 +0000
+Received: by outflank-mailman (output) from mailman id 1436847.1655506; Wed, 30 Sep 2026 06:18:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBnLJ-0002rs-51; Wed, 30 Sep 2026 05:59:01 +0000
-Received: by outflank-mailman (input) for mailman id 1436841;
- Wed, 30 Sep 2026 05:59:00 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBnLI-0002rm-3e
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 05:59:00 +0000
+	id 1xBneE-0005tr-Jz; Wed, 30 Sep 2026 06:18:34 +0000
+Received: by outflank-mailman (input) for mailman id 1436847;
+ Wed, 30 Sep 2026 06:18:33 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xBneD-0005tl-Ks
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 06:18:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBnLH-00Fp0i-1Q
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 07:58:59 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xBneC-009non-1e
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 08:18:32 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abca520-bab6-0a2a0a5309dd-0a2a4506bac4-4
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 07:58:58 +0200
-Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abca9a5-bab6-0a2a0a5309dd-0a2a4504cc60-42
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 08:18:31 +0200
+Received: from [74.125.225.98] (helo=mail-wr2-f34.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abca520-195a-0a2a45060019-4a7de18dce63-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 07:58:57 +0200
-Received: by mail-wm2-f13.google.com with SMTP id
- 5b1f17b1804b1-49e7d2bb404so6249785e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 22:58:57 -0700 (PDT)
+ id 6abca9b7-b57f-0a2a45040019-4a7de162ac14-3
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 08:18:31 +0200
+Received: by mail-wr2-f34.google.com with SMTP id
+ ffacd0b85a97d-48affb828f1so372066f8f.0
+ for <xen-devel@lists.xenproject.org>; Tue, 29 Sep 2026 23:18:31 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a0174f055csm21659335e9.9.2026.09.29.22.58.55
+ ffacd0b85a97d-48b029df5dbsm879910f8f.18.2026.09.29.23.18.30
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 29 Sep 2026 22:58:56 -0700 (PDT)
+ Tue, 29 Sep 2026 23:18:30 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,59 +54,61 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790747936; x=1791352736; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790749111; x=1791353911; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=P/1kr+oNfk9OMkGhSORIWxyYSxL+iPiey+wqxxzCezA=;
-        b=ftiPGJUL4Mxzka1WUDmvbATtwh4vOv8xxsTTDXaM0cEx31xG6LpeHrntkyH26AjbBR
-         SRe73KiTghVGiXzRlRw4jrvDpmzPMRfVWCCdygueuIl2/UEc7BEiGLC0tjtBOCbF4QWr
-         76/gviztJsDe98ZNNDX9yTQSfAiHVQEcCFFALZWVLHY3N2I9JpaPW1GNds7BoaT7CX5S
-         tDv0SZHuHpyViYeQJ89fRw3k/GZW1HQl3FG3hXu2loxYzbYL5qVp0LDKIzxhWbvZHmnQ
-         qA4L3RmQ67Cbm78KSKpjm8iEKPhc8W+McUbreRsliLSxQsbtz07TcKaVHLW/bGTwf1DH
-         T+OA==
+        bh=uG+JrpaFX4UYhhRwGLyiIXUwl5R3ivY4q9peoW+JSTo=;
+        b=Vqwp8o/4+eGaYvTCFNAEZfgOppTqeVuA0++N4iXURaYYE7uHKGeQz7FSm9+s9Osar5
+         nl3mI3XxUjzuCXi2coR17RS79MqAfpo/YSvME3ARQaPqgcpxqF7EUynNjQ3LWSuaDiXc
+         p9xct59TvnXFIfEQkHdC/MuMufsL+eBsto483x6avhBFdY28V5GY7WOlMKefrS2d1xWU
+         /8th+xeoPtddlVNqLJ9oB6TcZ5YqnGzAGJG/owlvv+vLHyZ90RVs5F6NwiTJlYZzoAwk
+         fw0v5A16hDYM5JJeDtarn3/ROtvV8lKIsrbSx6GUpn5KhqfRPwky140sOOARqApQ5Wwy
+         Z06w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790747936; x=1791352736;
+        d=1e100.net; s=20260707; t=1790749111; x=1791353911;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=P/1kr+oNfk9OMkGhSORIWxyYSxL+iPiey+wqxxzCezA=;
-        b=Zph9ShlOYMLDo+EwnMu+j6gCAssDsTDJTm5IsjvQm2tN3JxrUtFQFLAYdaJjQ7YX8Z
-         7H62/kZreQiwprJTiroB80mlXIxnXqZ2o6uEf7UBjLTcm5TH5DhkZ+FuMKYw2gkLnxNM
-         9hLDg8XJqMQv/teiGO0bM+tqOFKDkgcg/SMl5yHpfrkm/y6cSNOezFxfTVgoKx8EZ5Rz
-         O0eYg9oR/ew4cxeZ9Vv/ptDZ+kBfRst3DKOox2Z6X5M9SYAkBTAMof88mh5GAVqQ0LeA
-         ccWsMs1JY8UshzdE4Gojz0oVOqmnUGOcPBTAoQQPEEQ6k34cghN6KeqdDgSsyqUNi/bp
-         sslg==
-X-Gm-Message-State: AFuF++lCJLXC/fK9gdBFKVgIdcqNe24biGBT1WRIR5TwNgjXFC78piVq
-	8m6F/s26JZqu13X1Bkj2qYh0kRcbrlyUvrGs7PLvkpHqTsGlIsxWZC0eUEib52dyJA==
-X-Gm-Gg: AYBFou097HOvIwCwknlVVJBJmFdElBeHXmTDSTXBL6QozffgM9GD5350DP/PlMGhK+x
-	7qUPnwNvSoPcczp89SEh8NsKCI6eYucL+Q+adFZD5tuGpmSWXI38FIdIC8ALexdrYPC+FSYz5iF
-	sglnIR25EyYg/xbTlr0niHJr5GyVof4o3vIAIRVLqV/ahcqP+rW+/zkxYyE/dTHVJrvTK6bXusZ
-	gDSu0px2W3GsBxyQJmG/bUp1FQ9lABgYqHDqlbZ/qkAl98NVNNiInNuAbCdkwJbHpEMSTb7ns6b
-	iribHjR4yr8BZvy9IDj5dRKQKIJXB51soIyGd6UCaFBUqwvRDflS7qFYhaz+TMzRBH7H9ickpCl
-	hETraBc70G9V9Id5KPw8MjF2ngCt7ZUoc/BbfHXbEz8R2ENyti4Y+4VbOPKso8f7lzh39EC8TFA
-	sKl/2a1DetpaA3pDAi9t5Oq4xtBcTibggx1aPgr7sFlbDv7LxWN5mjKZqaaeOaz6LfAgG04xXb+
-	VfoaM/qTlaiQCzlIMV5ZarrZ2nDt5hmD0vZYh2IR/s0mIpMDl5+BSsSdvs86Q==
-X-Received: by 2002:a05:600c:1f95:b0:49f:c5aa:9ef4 with SMTP id 5b1f17b1804b1-4a01b1a1138mr2139515e9.8.1790747936603;
-        Tue, 29 Sep 2026 22:58:56 -0700 (PDT)
-Message-ID: <3e600ac0-3096-4cfb-967b-c6d87d8c04e6@suse.com>
-Date: Wed, 30 Sep 2026 07:58:55 +0200
+        bh=uG+JrpaFX4UYhhRwGLyiIXUwl5R3ivY4q9peoW+JSTo=;
+        b=IbYsdkSLW3kvYCaalygj5NtBMGO2eBO4v3Tbv/AZhfoYZcRlm/VVYwAtHWtGCfsbcE
+         Nv71gpl5ntWBANkWauRijmcipu3R1aGH7JMTDRKJJi2AyND0eEpXrYb2nEdmYACVMFEj
+         8ubny2J8/JAG1V4b3SyRGq8VKtjB7LgC0lZeu9TGfBFxpVrtrIAlmjExmr/5YiAU5BLX
+         gxyFKkwBalY5Bp7O7EBtDtP2UfOcvjwdVDxDWPgxlUY7lxz7HIiGW2WSLPWjkozHL+Qj
+         9gH2i8qXXV/+uzqlZ3CVrbJIOQbpsCkt2bE5PqUahBOIURWTTMss+cP18a80sbrstLKb
+         WUuw==
+X-Forwarded-Encrypted: i=1; AKwUvBxKVzrihGXlojB88nBkgHV0btFK4GIFw6kViZwVL+c8NzIVL9Lniqy5HGYbH3/M9LWiphFwNv8M/pQ=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYI8kfM2Z/ecuDbu8F8wkGOUFEmT4sqbwZAvD64XV5rh1tKmD0KW
+	taQOOlLTxmZ00iYkpd2b0s3KE1WbkwwqwnI0uhDLsyXIjux0WUYtUXsceebOI3DgdA==
+X-Gm-Gg: AYBFou177Cu9fmRyiqy0hBdLQ75mffBWfoMc83ROazLNnqrnjxFdWTxXnLgoyzPib97
+	qIOmQ9ztARRrC08ecT3eLN4csJwIu/N0SGZN/WQLtrEpwTRr80wRWVOOkyQJamp0Tn0jNLbYW+N
+	23/dsz33xnaPxaKUmOVRKDRmENEBzVa3bOliGr7rhi+1pFlov+UpIjrIwvOorPqvXRp+o+L7VNv
+	gXq+6gK8q/vnc05fYewNZlkCG5mvtvn+a6jLoS9PEaTn4ie6ffdA0ppBg0HiTwbaCUKm06IuFQH
+	ErU+vF+ZPO+E6v+5wfVTvGAXzbiZU22F3nWbTwfIZrb9O+pXD+/Zz6wQdDaJSbnPXCNIgkU3V6A
+	gGYgul8Ru6gxEHuk9rLcN7BUGSGq9ZXCbAReteDQiMHJgGr6K3LpNIL+NcCx6M2I+A9gIQV9rl1
+	mOyMfvHhqcE7OmbcYWnb4N+mXP8FGDOjXNbYDarfnVDMbGWpv7oFSyjm0zelDSFlbJ/ZMjLqtH6
+	rjWs67N+ZVtfU6+d8FJ6yrQhBOziW/nDCFvbg+o+JtbXuGiHqIx214o5cAGaFQ=
+X-Received: by 2002:a05:6000:1861:b0:48a:f11e:6d57 with SMTP id ffacd0b85a97d-48b024c5d52mr872975f8f.19.1790749111381;
+        Tue, 29 Sep 2026 23:18:31 -0700 (PDT)
+Message-ID: <9f74c9c1-72c0-4bad-8a64-8b694b9c4386@suse.com>
+Date: Wed, 30 Sep 2026 08:18:29 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] xen/rcu: introduce the concept of RCU epoch
-To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-Cc: xen-devel@lists.xenproject.org, Andrew Cooper
- <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+Subject: Re: [PATCH v3 1/6] docs/riscv: sync required ISA extensions with
+ required_extensions[]
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-References: <20260925163025.65217-1-roger@xenproject.org>
- <20260925163025.65217-2-roger@xenproject.org>
- <DLQSZY2KSYDH.1YSCWGQIQYP0H@amd.com> <arvJQSDecSSAU1WC@macbook.local>
- <50d1df6c-d969-470b-9b40-ca171c60618d@suse.com>
- <DLS5A4YDJ8ET.28ZIPQ6QEN2K4@amd.com>
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, xen-devel@lists.xenproject.org
+References: <1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech>
+ <1790699584.8631fc262581453bbf619ec5b2062170.1a0ee033d8d000b504@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -132,70 +134,31 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <DLS5A4YDJ8ET.28ZIPQ6QEN2K4@amd.com>
+In-Reply-To: <1790699584.8631fc262581453bbf619ec5b2062170.1a0ee033d8d000b504@vates.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1790747937-F7ACA77B-33E700F8/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ebf023/1790749111-520D5B50-BA097A0F/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2238
+X-purgate-size: 860
 
-On 30.09.2026 00:14, Alejandro Vallejo wrote:
-> On Tue Sep 29, 2026 at 4:52 PM CEST, Jan Beulich wrote:
->> On 29.09.2026 16:20, Roger Pau Monné wrote:
->>> On Mon, Sep 28, 2026 at 10:24:04AM +0200, Alejandro Vallejo wrote:
->>>> On Fri Sep 25, 2026 at 6:30 PM CEST, Roger Pau Monne wrote:
->>>>>  static inline void rcu_quiesce_disable(void)
->>>>>  {
->>>>> +    unsigned int cpu = smp_processor_id();
->>>>> +
->>>>>      preempt_disable();
->>>>> -    this_cpu(rcu_lock_cnt)++;
->>>>> -    barrier();
->>>>> +    if ( !ACCESS_ONCE(per_cpu(rcu_lock_cnt, cpu))++ )
->>>>> +        ACCESS_ONCE(per_cpu(rcu_lock_epoch, cpu)) = ACCESS_ONCE(rcu_epoch);
->>>>
->>>> I'm not terribly convinced about using ACCESS_ONCE() for atomic
->>>> accesses. In particular...
->>>>
->>>>> +    smp_mb();
->>>>>  }
->>>>>  
->>>>>  static inline void rcu_quiesce_enable(void)
->>>>>  {
->>>>> -    barrier();
->>>>> -    this_cpu(rcu_lock_cnt)--;
->>>>> +
->>>>> +    smp_mb();
->>>>> +    ACCESS_ONCE(this_cpu(rcu_lock_cnt))--;
->>>>
->>>> ... this variable is to be read by remote CPUs and autodecrement seems
->>>> like the wrong tool for an atomic decrement.
->>>
->>> I can use {read,write}_atomic() instead, but there's been a tendency
->>> to phase out the usage of those functions.  On x86 this should be a
->>> plain `addl` or `subl` instruction (the non-locked version of
->>> atomic_{inc,dec}()).
+On 29.09.2026 18:32, Baptiste Le Duc wrote:
+> From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 > 
-> I don't think the compiler can merge volatile reads and writes. It can
-> shatter them (thus my fear), but they are meant to be distinct because
-> each might have different side effects. Jan already mentioned this in
-> other words.
+> booting.txt listed only H, Zbb, Zihintpause and Svpbmt as required, while
+> required_extensions[] in cpufeature.c also checks for I, M, A, Zicsr,
+> Zifencei and, with CONFIG_RISCV_ISA_C=y, C. As the panic message printed
+> for a missing extension points to booting.txt, document the missing ones.
 > 
-> You don't need an atomic decrement though, just an atomic write. Note
-> IRQs restore it on exit and other CPUs don't write to it.
+> Also add a section pointing to riscv_isa_ext[] for the optional extensions
+> Xen recognises, and a comment above required_extensions[] to keep it in
+> sync with the document.
 > 
->   unsigned int *lock_cnt = &this_cpu(rcu_lock_cnt);
->   write_atomic(lock_cnt, *lock_cnt - 1);
+> No functional change.
 > 
-> and this yields a plain mov, through a static inline stub (plus the
-> mov from the read access + dec)
-> 
-> The problem with ACCESS_ONCE() is that the write isn't guaranteed to be
-> atomic.
+> Suggested-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
-It may not be properly written down anywhere, but at least the compilers
-we use are known to not tear aligned accesses up to a machine word in
-width.
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
 
