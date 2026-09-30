@@ -4,43 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BF3D3CA5FC1
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 08:34:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1436927.1655606 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AEE20CA5FB1
+	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 08:51:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1436837.1655616 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBplT-0002Sh-2Z; Wed, 30 Sep 2026 08:34:11 +0000
+	id 1xBq1t-0005Rg-Cm; Wed, 30 Sep 2026 08:51:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1436927.1655606; Wed, 30 Sep 2026 08:34:11 +0000
+Received: by outflank-mailman (output) from mailman id 1436837.1655616; Wed, 30 Sep 2026 08:51:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xBplS-0002Sa-Va; Wed, 30 Sep 2026 08:34:10 +0000
-Received: by outflank-mailman (input) for mailman id 1436927;
- Wed, 30 Sep 2026 08:34:09 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xBplR-0002SS-Js
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 08:34:09 +0000
+	id 1xBq1t-0005RZ-9W; Wed, 30 Sep 2026 08:51:09 +0000
+Received: by outflank-mailman (input) for mailman id 1436837;
+ Wed, 30 Sep 2026 05:10:39 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <anshuman.khandual@arm.com>) id 1xBmaV-00068r-Au
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 05:10:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xBplR-00AGIk-04
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 10:34:09 +0200
+ id 1xBmaU-004xPZ-Kf
+ for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 07:10:38 +0200
 Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abcc974-8faa-0a2a0a5109dd-0a2a4503c0c4-36
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 10:34:04 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abcc97b-fae8-0a2a45030019-4a7de18cd0a0-3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 10:34:04 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49b912d8239so41109545e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 01:34:04 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01751693bsm38661945e9.5.2026.09.30.01.34.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 30 Sep 2026 01:34:03 -0700 (PDT)
+ (envelope-from <anshuman.khandual@arm.com>)
+ id 6abc99c8-bab6-0a2a0a5309dd-0a2a4503ad56-16
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 07:10:38 +0200
+Received: from [217.140.110.172] (helo=foss.arm.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTP (eXpurgate 4.57.1)
+ (envelope-from <anshuman.khandual@arm.com>)
+ id 6abc99cd-fae8-0a2a45030019-d98c6eacb9ce-1
+ for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 07:10:38 +0200
+Received: from usa-sjc-imap-foss1.foss.arm.com (unknown [10.121.207.14])
+ by usa-sjc-mx-foss1.foss.arm.com (Postfix) with ESMTP id DD6551477;
+ Tue, 29 Sep 2026 22:10:33 -0700 (PDT)
+Received: from localhost (a085714.arm.com [10.164.19.28])
+ by usa-sjc-imap-foss1.foss.arm.com (Postfix) with ESMTPSA id CBBB73F763;
+ Tue, 29 Sep 2026 22:10:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,168 +51,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790757243; x=1791362043; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Ua74aYhrEbxV8JEoEvm+m2U8cDsQnkbJti3U8i4aieA=;
-        b=PyCPNezQapoztPjv2qFZ9dNE0OfPM1HHWF45tjI+Smo+ZIyRESn4aoPUDcWNNTFb0T
-         uooIDdSIByKSbxdWc5A6NTM/yIKycONvpkt5+3INT1iup8QxSWqvrp7l6VkZRzdEWvKj
-         hWoBdjqDpQsUXi7UlyCASdRMawS3tZqgfv760J7347OttfM6NXCV+SsfKuD6HWJbW+Bn
-         BcffJu6yXUY3UkeiPcSFXamqEZTQteBtSP533gHg9EKPKY+yHscbURrNOAlNIndW4pXr
-         qFC1ufUIJgQAg9fnYp5A+krHtUmCgbcDWaninL+aSAiugrYeLWdy8nO9e/aNOEEQu8iM
-         MfSQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790757243; x=1791362043;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Ua74aYhrEbxV8JEoEvm+m2U8cDsQnkbJti3U8i4aieA=;
-        b=j+hOiR7/iAVjHjX/vJEC+bePvKTqCpiUdb63LXfBbrBmN1hbuBLDi1h/vyr8wQ2AZB
-         f+8WSpIG16Qq2N7BZNxThktQbNnVt1aptf9dPdty2XwT8P73EeYbe9YyrJ7UjsYwlurk
-         amkCJZ724KzWXBvt1dH/Gf4ieojFcjfe+vj7wOWzFfQty5A18+LmpoPfdYazapy7NqRO
-         IYeiyr6IeL8FeaceP0J5pGbO7bEGqEqrrNeA9Gatzyf5wf7R3bnSW6N8O0sIqsCgpo8n
-         X6m2WFfyKIRJ2Iz7bmtBJ/c1MrcJFfHe1qXuuXtZglRWYDmDfhDfsbJGmknJCyH9AQlB
-         WrXA==
-X-Forwarded-Encrypted: i=1; AKwUvBz5uv/l4Nm3W3BRNRyloPILmQiKYGjwm3+lz6LNZws0yLSh9BQcSWVZes4+ICQxr5TI8k9/iEJrrKc=@lists.xenproject.org
-X-Gm-Message-State: AFuF++ncqVgQJrTrPMj5dy4J/QajStsV1hTfDrVhcnV4qzxpQjQlVgff
-	Yvu9x6RewcJxVvoz2E/eEW4MkHIXxJkR8cPOdquhw0kiULSnJksplsn29/PVa3ZBLw==
-X-Gm-Gg: AYBFou17On2jjgIDuf9k9qnsHAZhJx6ycGwewcUM+dt4RURWi01jjd8PkAdqkK2Pznu
-	7u1aGXwxwoJbc5w+3NY2km2vyNzSdEnXZG9x0bcO+ZZ530Fh58vsFJA1llghfKz2/K8X0waDGRq
-	SzgqFqqhNlPAjaKpYMA7BK4ozpWNOq7E4kIjfBb/8yGkQldViFasuB0zaY8+lIKjGq875Fx3YU0
-	O8RBAf9UxaWSMYKPgOkDi5KKU1zj7+JL5y7GYXi1H+Qot3wUP5tBXkHrqo88zJ8O5vl5liK9DOT
-	o/UZFH/y9arrh/4FNrDGmRxOVNBoINNnlcDGHgFKVIjhl/Q4r8GaWYuXyeUlhQM9d78PTFw75y3
-	2JfyBJbVckKh4nh61jZkOvbMoq7u0m8NkhSWaQcagiNg8Ds1q/3+eKZbv+aJXX4d/9npyBbQBfU
-	e6NWs9wQCUJBw3Hq1Dn3zqHtjsIa3ptW5aLPL7jWdNSwlPKnB59uhxHZF+TaqODXlg3K45GYKVR
-	riu/h+yHLLV5eCH/VE7kp3g/IKym87BTm/g/1DzpN/rwgaQYrX2XQnTx0T1Fw==
-X-Received: by 2002:a05:600c:5391:b0:49d:2562:d670 with SMTP id 5b1f17b1804b1-4a01afdcef8mr10294435e9.14.1790757243469;
-        Wed, 30 Sep 2026 01:34:03 -0700 (PDT)
-Message-ID: <3e2b41a5-5c85-4a6a-8f91-c2b979f87b86@suse.com>
-Date: Wed, 30 Sep 2026 10:34:02 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=foss header.d=arm.com header.i="@arm.com" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=arm.com; s=foss;
+	t=1790745037; bh=HBnOiO4lKi56PuSH4xu/j4eJs0RVLoWx4P6ztp2ydZk=;
+	h=Date:From:To:Cc:Subject:References:In-Reply-To:From;
+	b=XyyFJBwudHElfeviZ00ITo1a6Xr9Q3NyTSeWfTWp8zjFH4KJEZuFNbQ9z9esgxx36
+	 t4IFgPHmQLaWxfB8mibALu5LHDRYKETtddlKsa/mrM3VuXEUZdR5WzTLOHscsAE3WY
+	 77cVlx5yRsj+dQ5Rtn3DsHPDmyL7aOM2T6haf/KA=
+Date: Wed, 30 Sep 2026 10:40:33 +0530
+From: Anshuman Khandual <anshuman.khandual@arm.com>
+To: Muhammad Usama Anjum <usama.anjum@arm.com>
+Cc: Andrew Morton <akpm@linux-foundation.org>, 
+	David Hildenbrand <david@kernel.org>, Lorenzo Stoakes <ljs@kernel.org>, 
+	"Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>, 
+	Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>, 
+	Michal Hocko <mhocko@suse.com>, Xu Xin <xu.xin16@zte.com.cn>, 
+	Chengming Zhou <chengming.zhou@linux.dev>, Jann Horn <jannh@google.com>, 
+	Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>, 
+	Pedro Falcato <pfalcato@suse.de>, Arnd Bergmann <arnd@arndb.de>, Will Deacon <will@kernel.org>, 
+	"Aneesh Kumar K.V" <aneesh.kumar@kernel.org>, Nick Piggin <npiggin@gmail.com>, 
+	Peter Zijlstra <peterz@infradead.org>, Pasha Tatashin <pasha.tatashin@soleen.com>, 
+	Rik van Riel <riel@surriel.com>, Harry Yoo <harry@kernel.org>, Lance Yang <lance.yang@linux.dev>, 
+	Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>, 
+	Kemeng Shi <shikemeng@huaweicloud.com>, Nhat Pham <nphamcs@gmail.com>, Baoquan He <baoquan.he@linux.dev>, 
+	Barry Song <baohua@kernel.org>, Youngjun Park <youngjun.park@lge.com>, 
+	Uladzislau Rezki <urezki@gmail.com>, Steven Rostedt <rostedt@goodmis.org>, 
+	Masami Hiramatsu <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>, 
+	Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>, 
+	Andrii Nakryiko <andrii@kernel.org>, Eduard Zingerman <eddyz87@gmail.com>, 
+	Kumar Kartikeya Dwivedi <memxor@gmail.com>, Martin KaFai Lau <martin.lau@linux.dev>, 
+	Song Liu <song@kernel.org>, Yonghong Song <yonghong.song@linux.dev>, 
+	Jiri Olsa <jolsa@kernel.org>, Emil Tsalapatis <emil@etsalapatis.com>, 
+	Ihor Solodrai <ihor.solodrai@linux.dev>, Ingo Molnar <mingo@redhat.com>, 
+	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim <namhyung@kernel.org>, 
+	Mark Rutland <mark.rutland@arm.com>, Alexander Shishkin <alexander.shishkin@linux.intel.com>, 
+	Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>, 
+	James Clark <james.clark@linaro.org>, SJ Park <sj@kernel.org>, 
+	"Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>, Jason Gunthorpe <jgg@ziepe.ca>, 
+	John Hubbard <jhubbard@nvidia.com>, Peter Xu <peterx@redhat.com>, Leon Romanovsky <leon@kernel.org>, 
+	Zi Yan <ziy@nvidia.com>, Baolin Wang <baolin.wang@linux.alibaba.com>, 
+	Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>, Dev Jain <dev.jain@arm.com>, 
+	Usama Arif <usama.arif@linux.dev>, Kiryl Shutsemau <kas@kernel.org>, 
+	Andrey Ryabinin <ryabinin.a.a@gmail.com>, Alexander Potapenko <glider@google.com>, 
+	Andrey Konovalov <andreyknvl@gmail.com>, Dmitry Vyukov <dvyukov@google.com>, 
+	Vincenzo Frascino <vincenzo.frascino@arm.com>, Miaohe Lin <linmiaohe@huawei.com>, 
+	Naoya Horiguchi <nao.horiguchi@gmail.com>, Matthew Brost <matthew.brost@intel.com>, 
+	Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>, Byungchul Park <byungchul@sk.com>, 
+	Gregory Price <gourry@gourry.net>, Ying Huang <ying.huang@linux.alibaba.com>, 
+	Alistair Popple <apopple@nvidia.com>, Dennis Zhou <dennis@kernel.org>, Tejun Heo <tj@kernel.org>, 
+	Christoph Lameter <cl@gentwo.org>, Johannes Weiner <hannes@cmpxchg.org>, 
+	Qi Zheng <qi.zheng@linux.dev>, Shakeel Butt <shakeel.butt@linux.dev>, 
+	Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>, Wei Xu <weixugc@google.com>, 
+	Jani Nikula <jani.nikula@linux.intel.com>, Joonas Lahtinen <joonas.lahtinen@linux.intel.com>, 
+	Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin <tursulin@ursulin.net>, 
+	David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>, Juergen Gross <jgross@suse.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
+	linux-kernel@vger.kernel.org, linux-mm@kvack.org, linux-fsdevel@vger.kernel.org, 
+	linux-arch@vger.kernel.org, linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org, 
+	linux-perf-users@vger.kernel.org, damon@lists.linux.dev, kasan-dev@googlegroups.com, 
+	intel-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v3 4/9] mm: convert PTE table entries in ptep_get()
+Message-ID: <dhokijjou3rh3poqnqqpyoyac7wrqeprl4vlhzqokvh4lgjyya@g5hwn7sve3uw>
+References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
+ <20260922-pte0-v3-4-5670b8cb9059@arm.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/3] xen/rcu: introduce the concept of RCU epoch
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
- xen-devel@lists.xenproject.org, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <20260925163025.65217-1-roger@xenproject.org>
- <20260925163025.65217-2-roger@xenproject.org>
- <DLQSZY2KSYDH.1YSCWGQIQYP0H@amd.com> <arvJQSDecSSAU1WC@macbook.local>
- <50d1df6c-d969-470b-9b40-ca171c60618d@suse.com>
- <DLS5A4YDJ8ET.28ZIPQ6QEN2K4@amd.com>
- <3e600ac0-3096-4cfb-967b-c6d87d8c04e6@suse.com>
- <arzDzQMP5rGz1-QJ@macbook.local>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <arzDzQMP5rGz1-QJ@macbook.local>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1790757244-6D2D84E9-51680E52/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 3195
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20260922-pte0-v3-4-5670b8cb9059@arm.com>
+X-purgate-ID: tlsNG-33051d/1790745038-6EACC4E9-8B121C5B/0/0
+X-purgate-type: clean
+X-purgate-size: 1817
 
-On 30.09.2026 10:09, Roger Pau Monné wrote:
-> On Wed, Sep 30, 2026 at 07:58:55AM +0200, Jan Beulich wrote:
->> On 30.09.2026 00:14, Alejandro Vallejo wrote:
->>> On Tue Sep 29, 2026 at 4:52 PM CEST, Jan Beulich wrote:
->>>> On 29.09.2026 16:20, Roger Pau Monné wrote:
->>>>> On Mon, Sep 28, 2026 at 10:24:04AM +0200, Alejandro Vallejo wrote:
->>>>>> On Fri Sep 25, 2026 at 6:30 PM CEST, Roger Pau Monne wrote:
->>>>>>>  static inline void rcu_quiesce_disable(void)
->>>>>>>  {
->>>>>>> +    unsigned int cpu = smp_processor_id();
->>>>>>> +
->>>>>>>      preempt_disable();
->>>>>>> -    this_cpu(rcu_lock_cnt)++;
->>>>>>> -    barrier();
->>>>>>> +    if ( !ACCESS_ONCE(per_cpu(rcu_lock_cnt, cpu))++ )
->>>>>>> +        ACCESS_ONCE(per_cpu(rcu_lock_epoch, cpu)) = ACCESS_ONCE(rcu_epoch);
->>>>>>
->>>>>> I'm not terribly convinced about using ACCESS_ONCE() for atomic
->>>>>> accesses. In particular...
->>>>>>
->>>>>>> +    smp_mb();
->>>>>>>  }
->>>>>>>  
->>>>>>>  static inline void rcu_quiesce_enable(void)
->>>>>>>  {
->>>>>>> -    barrier();
->>>>>>> -    this_cpu(rcu_lock_cnt)--;
->>>>>>> +
->>>>>>> +    smp_mb();
->>>>>>> +    ACCESS_ONCE(this_cpu(rcu_lock_cnt))--;
->>>>>>
->>>>>> ... this variable is to be read by remote CPUs and autodecrement seems
->>>>>> like the wrong tool for an atomic decrement.
->>>>>
->>>>> I can use {read,write}_atomic() instead, but there's been a tendency
->>>>> to phase out the usage of those functions.  On x86 this should be a
->>>>> plain `addl` or `subl` instruction (the non-locked version of
->>>>> atomic_{inc,dec}()).
->>>
->>> I don't think the compiler can merge volatile reads and writes. It can
->>> shatter them (thus my fear), but they are meant to be distinct because
->>> each might have different side effects. Jan already mentioned this in
->>> other words.
->>>
->>> You don't need an atomic decrement though, just an atomic write. Note
->>> IRQs restore it on exit and other CPUs don't write to it.
->>>
->>>   unsigned int *lock_cnt = &this_cpu(rcu_lock_cnt);
->>>   write_atomic(lock_cnt, *lock_cnt - 1);
->>>
->>> and this yields a plain mov, through a static inline stub (plus the
->>> mov from the read access + dec)
->>>
->>> The problem with ACCESS_ONCE() is that the write isn't guaranteed to be
->>> atomic.
->>
->> It may not be properly written down anywhere, but at least the compilers
->> we use are known to not tear aligned accesses up to a machine word in
->> width.
+On Tue, Sep 22, 2026 at 06:12:32PM +0100, Muhammad Usama Anjum wrote:
+> ptep_get() now accepts a pointer to hw_pte_t storage but must continue to
+> return a software PTE value. Add __pte_from_hw for both generic hw_pte_t
+> definitions. Read the hw_pte_t table element atomically before converting
+> it to pte_t.
 > 
-> Then I possibly don't need the ACCESS_ONCE() at all, as I was using it
-> to guarantee unshattered accesses.  However this should be written
-> somewhere, maybe in docs/process/coding-best-practices.pandoc?
+> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+> ---
+> Changes since v1:
+> - Use software PTE value terminology.
+> 
+> Changes since RFC v1:
+> - Define __pte_from_hw for the opted-in generic wrapper.
+> - Apply READ_ONCE() to hw_pte_t before converting it to pte_t.
+> ---
+>  include/linux/pgtable.h       | 2 +-
+>  include/linux/pgtable_types.h | 2 ++
+>  2 files changed, 3 insertions(+), 1 deletion(-)
+> 
+> diff --git a/include/linux/pgtable.h b/include/linux/pgtable.h
+> index 19098e302b75a..41337da0d65aa 100644
+> --- a/include/linux/pgtable.h
+> +++ b/include/linux/pgtable.h
+> @@ -493,7 +493,7 @@ static inline int pudp_set_access_flags(struct vm_area_struct *vma,
+>  #ifndef ptep_get
+>  static inline pte_t ptep_get(hw_pte_t *ptep)
+>  {
+> -	return READ_ONCE(*ptep);
+> +	return __pte_from_hw(READ_ONCE(*ptep));
+>  }
 
-To write it down in any of our docs, we'd first need a proper reference
-to somewhere. "Known to" isn't quite sufficient imo to actually nail
-things down. There's still the possibility of compiler bugs, and there's
-also the possibility that volatile accesses have better guarantees than
-non-volatile ones. (Recall that in prior discussions it was actually said
-that we may need to make far more use of ACCESS_ONCE(), which wouldn't be
-warranted if collectively we were certain aligned accesses cannot be
-torn.)
+Just curious - when would other pgtable levels (PMD, PUD, P4D and PGD) be converted
+in this format as well ?
 
-Jan
+>  #endif
+>  
+> diff --git a/include/linux/pgtable_types.h b/include/linux/pgtable_types.h
+> index 07da05d375c2c..d6c5a7548550b 100644
+> --- a/include/linux/pgtable_types.h
+> +++ b/include/linux/pgtable_types.h
+> @@ -8,8 +8,10 @@
+>  
+>  #ifdef CONFIG_ARCH_HAS_HW_PTE_T
+>  typedef struct __hw_pte_t { pte_t __pte; } hw_pte_t;
+> +#define __pte_from_hw(pte)	((pte).__pte)
+>  #else
+>  #define hw_pte_t pte_t
+> +#define __pte_from_hw(pte)	(pte)
+>  #endif
+>  
+>  #endif /* !__ASSEMBLY__ */
+> 
+> -- 
+> 2.47.3
+> 
 
