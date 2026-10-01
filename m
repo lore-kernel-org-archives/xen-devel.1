@@ -4,43 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DFE9DCA5FB3
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:17:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438173.1657041 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECD64CA5FB3
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:32:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1438202.1657087 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCEmH-0008TF-TZ; Thu, 01 Oct 2026 11:16:41 +0000
+	id 1xCF1s-0004ud-5P; Thu, 01 Oct 2026 11:32:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438173.1657041; Thu, 01 Oct 2026 11:16:41 +0000
+Received: by outflank-mailman (output) from mailman id 1438202.1657087; Thu, 01 Oct 2026 11:32:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCEmH-0008T8-QH; Thu, 01 Oct 2026 11:16:41 +0000
-Received: by outflank-mailman (input) for mailman id 1438173;
- Thu, 01 Oct 2026 11:16:40 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xCEmF-0008S9-RQ
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:16:39 +0000
+	id 1xCF1r-0004sv-U2; Thu, 01 Oct 2026 11:32:47 +0000
+Received: by outflank-mailman (input) for mailman id 1438202;
+ Thu, 01 Oct 2026 11:24:25 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <david@kernel.org>) id 1xCEtl-00033d-50
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:24:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCEmE-001fY2-MJ
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:16:38 +0200
+ id 1xCEtk-009ZRi-IB
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:24:24 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abe410d-2eae-0a2a0a5409dd-0a2a4508b10a-30
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:16:38 +0200
-Received: from [74.125.225.99] (helo=mail-wr2-f35.google.com)
+ (envelope-from <david@kernel.org>)
+ id 6abe42da-bab6-0a2a0a5309dd-0a2a4508bf68-46
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:24:24 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6abe4116-f659-0a2a45080019-4a7de163bdf5-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:16:38 +0200
-Received: by mail-wr2-f35.google.com with SMTP id
- ffacd0b85a97d-48b05fdb2f9so881654f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 04:16:38 -0700 (PDT)
-Received: from fedora (user-109-243-71-234.play-internet.pl. [109.243.71.234])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48b068ff994sm5610427f8f.6.2026.10.01.04.16.36
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Thu, 01 Oct 2026 04:16:37 -0700 (PDT)
+ (envelope-from <david@kernel.org>)
+ id 6abe42e6-f659-0a2a45080019-aceafc1fdafc-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:24:24 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 6B58D4062D;
+ Thu,  1 Oct 2026 11:24:22 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A9C91F000FF;
+ Thu,  1 Oct 2026 11:23:51 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,99 +50,216 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790853398; x=1791458198; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=GnYzFbS1hSrt6OOinoAyibvEI4DxtFMfxt2gfSKVtJ8=;
-        b=ZF5nyIP6EH55B9YTBtOn0GHYPo7sCa3SdI+j3qfa0PKKHTt4/VZ5Igy9bTlYVyaO4L
-         B53PF7x5HJFgOcT+wa80cXhuIlI0vaPP6wIqd0XHyLDsng366arIebn++Ax5ZTLc6Vm3
-         HGEZvocMKMWGcZHrm4l1r8NNJi7V82D2k9eX6zuP5s6S61kHVS5m4Yfp+rmm+vnxxaB/
-         sqBP3zsybscu7liyzdJQGMXYrOP98SsyMjbRqsqJUxuOK2bSbKm72Nwv0yKOzeWUXIO0
-         P0KwNRPZoJiGy/S/5ozbXGfLTwkW7DE5E2zVYXPKkd42flLRrNxMmrRf5YRVFgWyspSv
-         UjVA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790853398; x=1791458198;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=GnYzFbS1hSrt6OOinoAyibvEI4DxtFMfxt2gfSKVtJ8=;
-        b=C6dIXtc5ubjcLzYr7dijuNCqXwZeClkAeYglQlpCUEdL4ElEPT3xNtZ3OvJ4BdXeoV
-         d4OObqMC4V+XlbxwPjyxPFn63eZpoCl83O/Vk89r5MxdlYABHjlCcu14Oaypu0drmNxL
-         x0Z8Xt0rTOBk+rpy539AOMAuDAc1BSqXbPYv+Fg/0zjlSgpdHxkd9YIm4ZfIVzkJ5iPf
-         ycNUqOpi98Zv0FipqfLSfRg5Wq+5QRsG5GVWY1DaySoBMUCJ0YixFjndwkeoHZhrJVj4
-         Cd43OQBYWwyAeJqlDD+NtScCbXdaPl2VsL0/tTv2ZnQaJ1qE1kgutmwMnHn6XVIMijDK
-         bGhQ==
-X-Gm-Message-State: AFq9FYIUy2gj6sboDPb5lU1tedkl/GJJfT3EVrKAwboyErzTysOndn/T
-	VdCmtJwJ4AIiyUSZHhkffFdRj8zZR6qmmWVN7b64y23lzjqw9Licf7BuJU7IrQ==
-X-Gm-Gg: AYBFou1gxZWUblXokkjrl/0qJ+IYhFp+IGE/U66ZOgmjMmbOXIY1lMfsssX/e+Nwdy3
-	sUJC2AesWq45oD13wNFz71J/Jl8RBXb4tIGea+uwXwo37Ej0hxAaocxxOaz+Ko099Rgii0kECuH
-	Sax5Y5nlxVxaq9xT3zspCuXRxTPa4n19b37vdjFiybxiLw2gvC2PeRbCv9O/H0si/sl4s6StAiT
-	0QPjc4jP7iM9IRS6YMX+5st9qNj3JiehlExvQNwXXPbeGfmQiY1oic4v/0oZviOQi3K1O/geOIf
-	5Hw3n3tdM+u4TV8l3pmK+m3fguicKIMcqCpgwDEYvZgtIYkMma8zTFvH1Xmj5c1s1rXVE0vV4mn
-	q5tipsOGyhscHOD2B9bGNQ60DwcXveN6th8HYBmXVeQ2s/cdpj/j3GhkxcI1eboDjSvduEIFYjZ
-	/eMN3v66m6i/+bja8MYkGZlOES+1ESQq+ZEDupJxpsUF+DkrOZjeL/he3Tp73mIHCvb0990QlOb
-	WVtSE9/a6OH7C6rMdAKwrMvsc+pI254qGYEu4NE
-X-Received: by 2002:adf:e19d:0:b0:48b:4a2:8175 with SMTP id ffacd0b85a97d-48b04a2819bmr6160815f8f.43.1790853397836;
-        Thu, 01 Oct 2026 04:16:37 -0700 (PDT)
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH 0/2] xen/device-tree: FDT dump helper and common discard_initial_modules()
-Date: Thu,  1 Oct 2026 13:16:28 +0200
-Message-ID: <20261001111630.112472-1-oleksii.kurochko@gmail.com>
-X-Mailer: git-send-email 2.55.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1790853862;
+	bh=E2dd2FaoT8IGI/PmgsNFfX51uTun/lYmybhUFgOLuQg=;
+	h=Date:Subject:To:Cc:References:From:In-Reply-To;
+	b=iSG5PXXsSQzGXjfn20lgjsoWKzQYmPp7ZZXFI6SGrx91yr02VUHV298N5BBJlMHaP
+	 M9ZYf/JJLZ9V8qfBwvqO39KJ8+pNUBetBcscChkH+0df5TkZ2sUcFBudzEgRioe8yb
+	 SSkRXj8/C/QKoSKPE6PW6Q2KDh9nZ+k4kuF1lqoDkQ0AIPD3Wb5f0fv4N/DCMAQq4z
+	 R7kwBsOJxrzykRLowKMFHGd4yy52IjUUPzYvPJjS5LMo0p5dAUpW9qrXPHDQCcdIJT
+	 g69Nx3deHliOYXzfa8TMAC4jPCvHeac6QoZcwkh6WGoSh+fwx0mvq3d2tEJx9NgDLq
+	 bPMwFw16qyx8Q==
+Message-ID: <28b5590b-e2e2-4eee-ac7b-c5c402822a24@kernel.org>
+Date: Thu, 1 Oct 2026 13:21:51 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1790853398-DFAD487B-A230D8A0/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 1475
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 8/9] drm/i915: use hw_pte_t for PTE range callbacks
+To: Muhammad Usama Anjum <usama.anjum@arm.com>,
+ Andrew Morton <akpm@linux-foundation.org>, Lorenzo Stoakes <ljs@kernel.org>,
+ "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
+ Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
+ Michal Hocko <mhocko@suse.com>, Xu Xin <xu.xin16@zte.com.cn>,
+ Chengming Zhou <chengming.zhou@linux.dev>, Jann Horn <jannh@google.com>,
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
+ Pedro Falcato <pfalcato@suse.de>, Arnd Bergmann <arnd@arndb.de>,
+ Will Deacon <will@kernel.org>, "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+ Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+ Pasha Tatashin <pasha.tatashin@soleen.com>, Rik van Riel <riel@surriel.com>,
+ Harry Yoo <harry@kernel.org>, Lance Yang <lance.yang@linux.dev>,
+ Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
+ Kemeng Shi <shikemeng@huaweicloud.com>, Nhat Pham <nphamcs@gmail.com>,
+ Baoquan He <baoquan.he@linux.dev>, Barry Song <baohua@kernel.org>,
+ Youngjun Park <youngjun.park@lge.com>, Uladzislau Rezki <urezki@gmail.com>,
+ Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
+ <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
+ Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>,
+ Andrii Nakryiko <andrii@kernel.org>, Eduard Zingerman <eddyz87@gmail.com>,
+ Kumar Kartikeya Dwivedi <memxor@gmail.com>,
+ Martin KaFai Lau <martin.lau@linux.dev>, Song Liu <song@kernel.org>,
+ Yonghong Song <yonghong.song@linux.dev>, Jiri Olsa <jolsa@kernel.org>,
+ Emil Tsalapatis <emil@etsalapatis.com>,
+ Ihor Solodrai <ihor.solodrai@linux.dev>, Ingo Molnar <mingo@redhat.com>,
+ Arnaldo Carvalho de Melo <acme@kernel.org>,
+ Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
+ Alexander Shishkin <alexander.shishkin@linux.intel.com>,
+ Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>,
+ James Clark <james.clark@linaro.org>, SJ Park <sj@kernel.org>,
+ "Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>,
+ Jason Gunthorpe <jgg@ziepe.ca>, John Hubbard <jhubbard@nvidia.com>,
+ Peter Xu <peterx@redhat.com>, Leon Romanovsky <leon@kernel.org>,
+ Zi Yan <ziy@nvidia.com>, Baolin Wang <baolin.wang@linux.alibaba.com>,
+ Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>,
+ Dev Jain <dev.jain@arm.com>, Usama Arif <usama.arif@linux.dev>,
+ Kiryl Shutsemau <kas@kernel.org>, Andrey Ryabinin <ryabinin.a.a@gmail.com>,
+ Alexander Potapenko <glider@google.com>,
+ Andrey Konovalov <andreyknvl@gmail.com>, Dmitry Vyukov <dvyukov@google.com>,
+ Vincenzo Frascino <vincenzo.frascino@arm.com>,
+ Miaohe Lin <linmiaohe@huawei.com>, Naoya Horiguchi
+ <nao.horiguchi@gmail.com>, Matthew Brost <matthew.brost@intel.com>,
+ Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
+ Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>,
+ Ying Huang <ying.huang@linux.alibaba.com>,
+ Alistair Popple <apopple@nvidia.com>, Dennis Zhou <dennis@kernel.org>,
+ Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@gentwo.org>,
+ Johannes Weiner <hannes@cmpxchg.org>, Qi Zheng <qi.zheng@linux.dev>,
+ Shakeel Butt <shakeel.butt@linux.dev>,
+ Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
+ Wei Xu <weixugc@google.com>, Jani Nikula <jani.nikula@linux.intel.com>,
+ Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
+ Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
+ <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
+ Simona Vetter <simona@ffwll.ch>, Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ linux-fsdevel@vger.kernel.org, linux-arch@vger.kernel.org,
+ linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
+ linux-perf-users@vger.kernel.org, damon@lists.linux.dev,
+ kasan-dev@googlegroups.com, intel-gfx@lists.freedesktop.org,
+ dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org
+References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
+ <20260922-pte0-v3-8-5670b8cb9059@arm.com>
+From: "David Hildenbrand (Arm)" <david@kernel.org>
+Content-Language: en-US
+Autocrypt: addr=david@kernel.org; keydata=
+ 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
+ qIws/H2t
+In-Reply-To: <20260922-pte0-v3-8-5670b8cb9059@arm.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1790853864-CCF4F87B-B2113664/0/0
+X-purgate-type: clean
+X-purgate-size: 2823
 
-Two small, independent device-tree changes. Arm is the only user of both
-at the moment; RISC-V is going to use them as well.
+On 9/22/26 19:12, Muhammad Usama Anjum wrote:
+> apply_to_page_range() now passes PTE table storage to its callback as
+> hw_pte_t *. Update the i915 remap and selftest callbacks to match the new
+> type.
+> 
+> Continue to use ptep_get() for software PTE values and set_pte_at() for
+> updates.
+> The type remains an alias of pte_t on x86 until that architecture opts in.
+> 
+> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+> ---
+> Changes since v1:
+> - Use software PTE value terminology.
+> 
+> Changes since RFC v1:
+> - Clarify the effect on architectures that have not opted in.
+> ---
+>  drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c | 4 ++--
+>  drivers/gpu/drm/i915/i915_mm.c                     | 4 ++--
+>  2 files changed, 4 insertions(+), 4 deletions(-)
+> 
+> diff --git a/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c b/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
+> index d01acfb7d93d0..056faf4a3618b 100644
+> --- a/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
+> +++ b/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
+> @@ -1690,7 +1690,7 @@ static int igt_mmap_gpu(void *arg)
+>  	return 0;
+>  }
+>  
+> -static int check_present_pte(pte_t *pte, unsigned long addr, void *data)
+> +static int check_present_pte(hw_pte_t *pte, unsigned long addr, void *data)
+>  {
+>  	pte_t ptent = ptep_get(pte);
+>  
+> @@ -1703,7 +1703,7 @@ static int check_present_pte(pte_t *pte, unsigned long addr, void *data)
+>  	return 0;
+>  }
+>  
+> -static int check_absent_pte(pte_t *pte, unsigned long addr, void *data)
+> +static int check_absent_pte(hw_pte_t *pte, unsigned long addr, void *data)
+>  {
+>  	pte_t ptent = ptep_get(pte);
+>  
+> diff --git a/drivers/gpu/drm/i915/i915_mm.c b/drivers/gpu/drm/i915/i915_mm.c
+> index fd89e7c7d8d6f..aab88e8edf946 100644
+> --- a/drivers/gpu/drm/i915/i915_mm.c
+> +++ b/drivers/gpu/drm/i915/i915_mm.c
+> @@ -48,7 +48,7 @@ static inline unsigned long sgt_pfn(const struct remap_pfn *r)
+>  		return r->sgt.pfn + (r->sgt.curr >> PAGE_SHIFT);
+>  }
+>  
+> -static int remap_sg(pte_t *pte, unsigned long addr, void *data)
+> +static int remap_sg(hw_pte_t *pte, unsigned long addr, void *data)
+>  {
+>  	struct remap_pfn *r = data;
+>  
+> @@ -70,7 +70,7 @@ static int remap_sg(pte_t *pte, unsigned long addr, void *data)
+>  #define EXPECTED_FLAGS (VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP)
+>  
+>  #if IS_ENABLED(CONFIG_X86)
+> -static int remap_pfn(pte_t *pte, unsigned long addr, void *data)
+> +static int remap_pfn(hw_pte_t *pte, unsigned long addr, void *data)
+>  {
+>  	struct remap_pfn *r = data;
+>  
+> 
 
-Patch 1 adds device_tree_dump(), which prints an FDT in a DTS-like format
-under CONFIG_DEVICE_TREE_DEBUG, to make it possible to inspect the device
-tree Xen generates for a dom0less domain.
+We really have to get rid of apply_to_page_range(). A horrible interface for
+drivers to hack around stuff.
 
-Patch 2 moves discard_initial_modules() from Arm to common device-tree
-code, as everything it uses is already common, so that other device-tree
-based architectures can reuse it. No functional change.
+For the time being
 
-Build-tested on arm64 and arm32.
+Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 
-CI tests: https://gitlab.com/xen-project/people/olkur/xen/-/pipelines/2900841778
-
-
-Oleksii Kurochko (2):
-  xen/device-tree: add a helper to dump an FDT in DTS-like format
-  xen/device-tree: move discard_initial_modules() to common code
-
- xen/Kconfig.debug                       |   3 +-
- xen/arch/arm/include/asm/setup.h        |   2 -
- xen/arch/arm/setup.c                    |  35 +----
- xen/common/device-tree/Makefile         |   1 +
- xen/common/device-tree/bootinfo.c       |  30 ++++
- xen/common/device-tree/dom0less-build.c |   4 +
- xen/common/device-tree/fdt-dump.c       | 180 ++++++++++++++++++++++++
- xen/include/xen/bootfdt.h               |  13 ++
- xen/include/xen/bootinfo.h              |   8 ++
- 9 files changed, 240 insertions(+), 36 deletions(-)
- create mode 100644 xen/common/device-tree/fdt-dump.c
-
-
-base-commit: f9b72572c8d5b6d312fd0b5014f65bed20efac40
 -- 
-2.55.0
+Cheers,
 
+David
 
