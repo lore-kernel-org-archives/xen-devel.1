@@ -4,47 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E884CA5FA5
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 09:05:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438047.1656924 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34498CA5FA5
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 09:07:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1438053.1656933 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCCiS-0008Lo-36; Thu, 01 Oct 2026 09:04:36 +0000
+	id 1xCClK-0000RY-Fd; Thu, 01 Oct 2026 09:07:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438047.1656924; Thu, 01 Oct 2026 09:04:36 +0000
+Received: by outflank-mailman (output) from mailman id 1438053.1656933; Thu, 01 Oct 2026 09:07:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCCiR-0008Lh-WA; Thu, 01 Oct 2026 09:04:35 +0000
-Received: by outflank-mailman (input) for mailman id 1438047;
- Thu, 01 Oct 2026 09:04:34 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xCCiP-0008Lb-NX
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 09:04:34 +0000
+	id 1xCClK-0000RR-CV; Thu, 01 Oct 2026 09:07:34 +0000
+Received: by outflank-mailman (input) for mailman id 1438053;
+ Thu, 01 Oct 2026 09:07:33 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xCClJ-0000RL-8P
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 09:07:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCCiO-00DlBv-M9
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:04:32 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xCClI-007rtg-L8
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:07:32 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@swg.vates.tech>)
- id 6abe221d-8faa-0a2a0a5109dd-0a2a4503dabe-24
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 11:04:32 +0200
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f6b801920003f66@swg.vates.tech>)
+ id 6abe22d4-e002-0a2a0a5209dd-0a2a450b9688-0
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 11:07:32 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@swg.vates.tech>)
- id 6abe221f-fae8-0a2a45030019-b9ff1c129739-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 11:04:32 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f6b801920003f66@swg.vates.tech>)
+ id 6abe22d4-b7e8-0a2a450b0019-b9ff1c22802d-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 11:07:32 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0f6b5397a0003f66.007 for <xen-devel@lists.xenproject.org>
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a0f6b801920003f66.006 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 01 Oct 2026 09:04:27 +0000
+ Thu, 01 Oct 2026 09:07:29 +0000
 Received: from leducb.home (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
  [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id ECD7482991;
- Thu,  1 Oct 2026 11:04:25 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 7AEC782407;
+ Thu,  1 Oct 2026 11:07:28 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,23 +56,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=+8QBoOIKOWfF9rnN5stnQrG/hubBCM2JvyP2H7Td2yY=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:feedback-id;
- b=nqrKHxssMdhd7GAORWMs0Tvyc+o0ZWeko4ceHwC9M7FR6mvvLZ97NPW3jFuihpFTGcFhsdbii
- 3kSMJ/QzFAmwX5l+hnQs3sFVL+szOgck1PdUxANxSKAOHgpmWP9ZYBQ8geGIiMaR9yFsNmTyPHw
- O/ii2wgondyi/RAxG2wYrbpmDt9Nf6veHmSvDyxvqsK5kmMJfkofL4fS/eZCEsBzleEGBTUPvj7
- ouYaLlK1sm7RSSyxPvR9MJPEK1ICkSZ1yAPWlD8IgNB8m/EO7aiVz9DEdwVpN2LqOwXahhevs6P
- 0ef1IjQVXW2sSuLyxQdnTMiILCgexcmUmIzPJlb1RR4g==
-X-Zone-Loop: 076be8fcac45071a0968a546e370431a92c87ffad0eb
+ q=dns/txt; s=selector1; bh=hIXBqLlDxx0K/kQnZq8JWDabTK1TpS/NxsX703pn8ic=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=H3+O53pYPeRZ9qrUglXRshbWWs397qeocUlaJUObrmfCZ8sfVX9ZgGQqIqBTIs06KI4b3YkH7
+ aQN0O1JEdDdpUxBpwUF5oTLVs7Qf0OGvRUO5SUdRN2dGE3DOBsJqzaHkNvXDdAfwTiroF03mtVf
+ vlc+IlBj7OwWBn1o02I0t3xqArX1FbcFYx0UOGiez5WO+asR7SZQpC0cRfLevCU5969iFAv3Xt5
+ gO/DBvU/nwP7FiE0L/JAR3rfCI4F01UGyiOnspQE98frIeAEp1Xy8MJhsu1Od23WHmsF40Swmgc
+ La5VN/qDHT5J/62Om+bSICbRwQ1702FkTPp04DEP7h1Q==
+X-Zone-Loop: 2004158124ce4150e84e21f7f2c5d74ccb3b91e1583f
 x-campaign-type: default
-x-transaction-id: d326a497-6f29-48f0-b832-bb067ebfdf75
-x-swg-uid: 01-37574318-7091-46b3-b068-3a4851b3a831
+x-transaction-id: 0f6fabbf-ea14-4bbe-8d6c-5c8504b73a66
+x-swg-uid: 01-4623a960-a353-4396-94b7-ca4492c5c873
 X-Mailer: Sweego
 Message-ID:
- <1790845467.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@vates.tech>
-x-swg-bid: 1790845467.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66
+ <1790845649.8631fc262581453bbf619ec5b2062170.1a0f6b801920003f66@vates.tech>
+x-swg-bid: 1790845649.8631fc262581453bbf619ec5b2062170.1a0f6b801920003f66
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -89,112 +89,121 @@ Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Alistair Francis <alistair.francis@wdc.com>,
 	Connor Davis <connojdavis@gmail.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Zheng Zhang <ZhengZhangzhangzheng@iscas.ac.cn>
-Subject: [PATCH v4 0/4] xen/riscv: fix boot on missing extensions and MMU setup bugs
-Date: Thu,  1 Oct 2026 11:04:15 +0200
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: [PATCH v4 1/4] xen/riscv: rename PTE "permissions" to "pte_flags"
+Date: Thu,  1 Oct 2026 11:07:20 +0200
+In-Reply-To: <1790845467.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@vates.tech>
+References: <1790845467.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@vates.tech>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
-X-Change-ID: 20260902-riscv-fix-boot-missing-ext-a79c23bad694
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1790845141; l=3999; i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id; bh=e2CqMJBv1Bm2wnQbRMy0Yn2dXx+BC5kTAZ1V7P6Uj+I=; b=sMBDyUgr16GLJd04ICfFhZTil8DmWZT2Be6hVA3DoTygSSMqYYijSh2u2FV6QIJ29ivY1FjuC N8DMGt8NFdmClLNDJsgGSqgUStmiYCkULZDdl1I+P9gCtepYnqrt3EZ
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790845141; l=3824; i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id; bh=XdiiczWFyM/LIOzMORFXdmlnH1HzIt2R6VuUNrV2b20=; b=zSkFUNXea73u4ALYVErAA0YFHJ6H5j9PC7kfm/v/aFUM/NiaZducfZe4uz43GsxUbm1YyQnsn NqcNyHeILROCMkDkEwnEXSBfcxbozateW2s8FIrLeoGbQ7JztEFGtzX
 X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519; pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
 Content-Transfer-Encoding: 8bit
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1790845466176
-X-purgate-ID: tlsNG-33051d/1790845472-6E0D14E9-AF9C9876/10/78276251493
+X-Bm-Transport-Timestamp: 1790845648690
+X-purgate-ID: tlsNG-42698a/1790845652-1BAD09EA-4C94B252/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 4001
+X-purgate-size: 3826
 
-This series introduces bugs fixes that were found while bringing up CI
-support for the HiFive Premier P550 board with a basic smoke test. The
-board-support series itself will follow separately as it depends on
-PLIC/vPLIC and dom0less support that have not been upstreamed yet. This
-series carries only the independent fixes found along the way, none of them
-need the board-support series to apply.
+paddr_to_pte()'s "permissions" parameter, the matching local in
+setup_initial_mapping() and p2m_set_permission() don't only deal with
+permission bits: they also handle PTE_VALID, PTE_USER, PTE_ACCESSED and
+PTE_DIRTY.
 
-This series:
-    1: Rename PTE "permissions" to "pte_flags"
-    2: Always preset A/D bits in G-stage PTEs
-    3: Fix A/D bit handling in Xen's page-table mappings
-    4: Use pte_is_valid() in pte_is_mapping()
+Rename them to "pte_flags" and p2m_set_pte_flags() respectively.
 
-CI pipeline:
-https://gitlab.com/xen-project/people/baptleduc/xen/-/pipelines/2900391526
+No functional change.
 
+Requested-by: Jan Beulich <jbeulich@suse.com>
+Assisted-by: Claude:claude-opus-5
+Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Acked-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 ---
 Changes since v3:
-- Drop v3 patches 1, 6 already upstreamed:
-    861e44a3ba8e ("xen/riscv: make Zihintpause no longer a required
-    extension")
-    469d83d42f5c ("docs/riscv: sync required ISA extensions with
-    required_extensions[]")
-- Add trailers (A-by and/or R-by).
-- Rename patch 3 to ("xen/riscv: always preset A/D bits in G-stage PTEs")
-  as it now always presets A/D bits instead of distinguish Svadu/Svade DT
-  bindings cases.
-- Address review comments.
-- Link to v3: https://patch.msgid.link/1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech
+- apply nits: fix indention and line length
 ---
 Changes since v2:
-- Drop v2 patches 5 and 6, already upstreamed:
-    d8ca89f26c8a ("xen/riscv: flush speculatively cached Bare-mode TLB entries in turn_on_mmu()")
-    08a898b93d21 ("xen/riscv: fix level_map_mask truncation on load_start")
-- Drop "xen/riscv: make Svpbmt no longer a required extension".
-  It relaxed Svpbmt so boards without it, like the HiFive P550, could boot.
-  But without Svpbmt, DMA-noncoherent devices do not snoop the CPU caches
-  and can read stale data from DRAM. Mainline Linux has the same problem,
-  which is explained and reproducible in [1]. Fixing it needs a lot of
-  machinery we do not need yet, and Svpbmt is mandatory in RVA23, so
-  keeping it required is simpler and safer. An RFC will follow with a fix
-  inspired by [2].
-- Add three new patches:
-    docs/riscv: sync required ISA extensions with required_extensions[]
-    xen/riscv: rename PTE "permissions" to "pte_flags"
-    xen/riscv: use pte_is_valid() in pte_is_mapping()
-- Address review comments.
-
-[1] https://github.com/davidlohr/vanilla-kernel-sifive-p550/tree/master
-[2] https://lwn.net/Articles/996819/
+- new patch
 ---
-Changes since v1:
-- address ML comments
-- rename some patchs
-- add new patch-fix: 242dd1f890e4 ("xen/riscv: fix level_map_mask
-  truncation on load_start") discovered when working on Spacemit K3 support
----
+ xen/arch/riscv/include/asm/mm.h |  5 +++--
+ xen/arch/riscv/mm.c             | 12 +++++-------
+ xen/arch/riscv/p2m.c            |  4 ++--
+ 3 files changed, 10 insertions(+), 11 deletions(-)
 
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>
-Cc: Michal Orzel <michal.orzel@amd.com>
-Cc: Jan Beulich <jbeulich@suse.com>
-Cc: Julien Grall <julien@xen.org>
-Cc: Roger Pau Monné <roger@xenproject.org>
-Cc: Stefano Stabellini <sstabellini@kernel.org>
-Cc: Alistair Francis <alistair.francis@wdc.com>
-Cc: Connor Davis <connojdavis@gmail.com>
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Zheng Zhang <Zheng Zhang <zhangzheng@iscas.ac.cn>
+diff --git a/xen/arch/riscv/include/asm/mm.h b/xen/arch/riscv/include/asm/mm.h
+index 9e28c24954..1ac66283ec 100644
+--- a/xen/arch/riscv/include/asm/mm.h
++++ b/xen/arch/riscv/include/asm/mm.h
+@@ -22,9 +22,10 @@ extern vaddr_t directmap_virt_start;
+ #define paddr_to_pfn(pa)  ((unsigned long)((pa) >> PAGE_SHIFT))
+ 
+ static inline pte_t paddr_to_pte(paddr_t paddr,
+-                                 unsigned int permissions)
++                                 unsigned int pte_flags)
+ {
+-    return (pte_t) { .pte = (paddr_to_pfn(paddr) << PTE_PPN_SHIFT) | permissions };
++    return (pte_t) { .pte = (paddr_to_pfn(paddr) << PTE_PPN_SHIFT) |
++                            pte_flags };
+ }
+ 
+ static inline paddr_t pte_to_paddr(pte_t pte)
+diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
+index 610d111945..a9bce48f4a 100644
+--- a/xen/arch/riscv/mm.c
++++ b/xen/arch/riscv/mm.c
+@@ -140,22 +140,20 @@ static void __init setup_initial_mapping(struct mmu_desc *mmu_desc,
+         case 1: /* Level 0 */
+             {
+                 unsigned long paddr = (page_addr - map_start) + pa_start;
+-                unsigned int permissions = PTE_LEAF_DEFAULT;
++                unsigned int pte_flags = PTE_LEAF_DEFAULT;
+                 unsigned long addr = is_identity_mapping
+                                      ? page_addr : virt_to_maddr(page_addr);
+                 pte_t pte_to_be_written;
+ 
+                 index = pt_index(0, page_addr);
+ 
+-                if ( is_kernel_text(addr) ||
+-                     is_kernel_inittext(addr) )
+-                        permissions =
+-                            PTE_EXECUTABLE | PTE_READABLE | PTE_VALID;
++                if ( is_kernel_text(addr) || is_kernel_inittext(addr) )
++                    pte_flags = PTE_EXECUTABLE | PTE_READABLE | PTE_VALID;
+ 
+                 if ( is_kernel_rodata(addr) )
+-                    permissions = PTE_READABLE | PTE_VALID;
++                    pte_flags = PTE_READABLE | PTE_VALID;
+ 
+-                pte_to_be_written = paddr_to_pte(paddr, permissions);
++                pte_to_be_written = paddr_to_pte(paddr, pte_flags);
+ 
+                 if ( !pte_is_valid(pgtbl[index]) )
+                     pgtbl[index] = pte_to_be_written;
+diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+index 1cea86512c..f7b380b90a 100644
+--- a/xen/arch/riscv/p2m.c
++++ b/xen/arch/riscv/p2m.c
+@@ -584,7 +584,7 @@ static inline void p2m_clean_pte(pte_t *p, bool clean_cache)
+     p2m_write_pte(p, pte, clean_cache);
+ }
+ 
+-static void p2m_set_permission(pte_t *e, p2m_type_t t)
++static void p2m_set_pte_flags(pte_t *e, p2m_type_t t)
+ {
+     e->pte &= ~PTE_ACCESS_MASK;
+ 
+@@ -676,7 +676,7 @@ static pte_t p2m_pte_from_mfn(mfn_t mfn, p2m_type_t t,
+             break;
+         }
+ 
+-        p2m_set_permission(&e, t);
++        p2m_set_pte_flags(&e, t);
+         p2m_set_type(&e, t, ctx);
+     }
+     else
 
----
-Baptiste Le Duc (4):
-      xen/riscv: rename PTE "permissions" to "pte_flags"
-      xen/riscv: always preset A/D bits in G-stage PTEs
-      xen/riscv: fix A/D bits in Xen's page-table mappings
-      xen/riscv: use pte_is_valid() in pte_is_mapping()
-
- xen/arch/riscv/cpufeature.c       |  1 -
- xen/arch/riscv/include/asm/mm.h   |  5 +++--
- xen/arch/riscv/include/asm/page.h | 35 ++++++++++++++++----------------
- xen/arch/riscv/mm.c               | 14 ++++++-------
- xen/arch/riscv/p2m.c              | 42 ++++++++++-----------------------------
- 5 files changed, 37 insertions(+), 60 deletions(-)
----
-base-commit: 4c1aba82cff95ab11f7fe4af8965a06703537288
-change-id: 20260902-riscv-fix-boot-missing-ext-a79c23bad694
-
-Best regards,
---  
-Baptiste Le Duc <baptiste.le-duc@vates.tech>
+-- 
+2.55.0
 
 
