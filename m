@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E702CCA5FB3
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 07:15:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437975.1656859 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F50CA5FC5
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 07:34:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437987.1656868 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCB04-0007du-5t; Thu, 01 Oct 2026 07:14:40 +0000
+	id 1xCBJP-0002JA-Lb; Thu, 01 Oct 2026 07:34:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437975.1656859; Thu, 01 Oct 2026 07:14:40 +0000
+Received: by outflank-mailman (output) from mailman id 1437987.1656868; Thu, 01 Oct 2026 07:34:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCB04-0007dn-32; Thu, 01 Oct 2026 07:14:40 +0000
-Received: by outflank-mailman (input) for mailman id 1437975;
- Thu, 01 Oct 2026 07:14:38 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xCB02-0007dh-GL
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 07:14:38 +0000
+	id 1xCBJP-0002J3-IW; Thu, 01 Oct 2026 07:34:39 +0000
+Received: by outflank-mailman (input) for mailman id 1437987;
+ Thu, 01 Oct 2026 07:34:38 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xCBJO-0002Iv-7b
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 07:34:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCB01-008kxM-Pt
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 09:14:37 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xCBJN-000pwd-Gm
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 09:34:37 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abe084f-8faa-0a2a0a5109dd-0a2a4508e28c-32
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 09:14:37 +0200
-Received: from [74.125.225.99] (helo=mail-wr2-f35.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abe0d0c-2eae-0a2a0a5409dd-0a2a45029532-2
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 09:34:37 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abe085d-f659-0a2a45080019-4a7de163963f-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 09:14:37 +0200
-Received: by mail-wr2-f35.google.com with SMTP id
- ffacd0b85a97d-48b0f4efe31so61202f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 00:14:37 -0700 (PDT)
+ id 6abe0d0d-6ca4-0a2a45020019-4a7de18cd0c0-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 09:34:37 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49b912d8239so49787225e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 00:34:37 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48b06778c3fsm4816891f8f.0.2026.10.01.00.14.35
+ 5b1f17b1804b1-4a01f99b113sm55016935e9.14.2026.10.01.00.34.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Oct 2026 00:14:36 -0700 (PDT)
+ Thu, 01 Oct 2026 00:34:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,55 +54,56 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790838877; x=1791443677; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790840077; x=1791444877; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Z8rH22Er45wWWjpv0r5L3KNPoam+oZEAngrcd1iyQ00=;
-        b=domQUpMQx+S18wCItGbHvPKwXKfB/aa/WwUeZBiMannibNSOalikGCNV3baWdFIFy7
-         ZKbNvwa+qY1r1fYdhlhMrgIrqIXVi/cGPXkGnpMxwxDyVjrmNtkDHpWE4YtLidqa7x8I
-         uTT4W52GKXZMB7ct8fAo62xIS4Pbbk/QDIwoaFTqAiEJFp2t3MkLEwUU3h5H4B15EvaM
-         OH+BCT3YB12jOiHKgU90/xJTHM3OrFMxt20vJJ759B7+bJ2gW1/Iio4H5+KnLngWCjsd
-         0kpl0UW6gTXvABxHMmOCfiIRkoJ2KyFOnen+/4J/ofX7m1wTKOAWrBLoPCP28BE1QwhB
-         6qWQ==
+        bh=xxEOhvYbGWasqHNN4kSw+sfo3fhK1ol662qvyK0BRIg=;
+        b=bII2L9uOfU1PprB65DG5ODpEozQG76/+aN8Ng3RtyaSPSuk0dFia5Z1hnr0Qr8SFVc
+         HcyAC7Is36CxP5bZh5AjB3xWPFXxzvcX5sZ8ZyelAIGV3AGehk348QxhXvSw+jBvEh+C
+         ZYK3VNwYVEqm+4pz8kPQ3fUEh2fburbYRjU7C9T9/gI/A/Xi76rq9ywE20lHOenp+792
+         fN3Rki+xVOw212ps7nT9IsygzMSJIrHou+hothvWtc8YkGDONEOSVsbfbWEdhCUE3sA8
+         1ygvVuP6VNyi7QJIC4unXxUxf7LSMuAvpYl2asALZd0Kj56SygM7Boa2R7al54iLddtM
+         aq+Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790838877; x=1791443677;
+        d=1e100.net; s=20260707; t=1790840077; x=1791444877;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=Z8rH22Er45wWWjpv0r5L3KNPoam+oZEAngrcd1iyQ00=;
-        b=oCyi61U+kExVCu4C0MR+dPcmlGigTashhEu5EXwD3BIbaXU6fipg72d1TOUw9r7IBT
-         W2RJvtwujPBUWmkeLBq1kfQe1nLeaG87ma5MM9tHU9sTy59moZ2KSclZRXmnNPJP5EcO
-         PgG60JgHuWlqSMRq7U6neAWIFgztFwKcbGsgeBYDFhml+YCU8RbJFkSSq1z4QqIKm3gL
-         FSDx7ypMWB4HvQqDvD3EKlJE2/eM9xaVcHSZvLLbbqtDTOz6b72RJHWfwyLHilJ3rNPm
-         P7YpSdZ5eqP3MeHe+jqgzoT3kCwP1wqKeiNh3e+eUovJb+p3oLPY7Pyx95VrAMHlaZ6W
-         ZrrA==
-X-Forwarded-Encrypted: i=1; AKwUvBxQRiSobDEOznaKM3WCoKL4ebPJDByrvelVRoCzrAOrCYp6IWp1JzrfQNDduiy7whakdwvCV0W2n/E=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIsNdVFqBHaR58IFhSJQPWHefKwgIyOB5Qp08uigVHii40oOmqw
-	oTtDfDqzdEXmYwUi2sEf3sIj22H3KamIX7Fg6wvSn4Fhg/qkdKoJQ9vcbrasFM5nZQ==
-X-Gm-Gg: AYBFou2fF8PuDpxVbrl0Duv+XkDt7tlxetgA2rMm4+/8jspvt/039IOBk/0Xq6h5bwh
-	CEwrtoSQxOF89ON8Buf3ZlPGReFHaILyo/UCrdK43Wy7AaHzNK5OdvW6cRBlBs16flHX9eITX1u
-	vQDvbpf8J9qCVr+HnG332tKDA5QGE0G8u+xKhEgN3hOYSdBBC3FT/NxPL8sauLYle4tZpR/jR8B
-	HOokr4kGabbGE/j3pFps9BsLhUN2YQX+YAMNBwi74z5Ju8OudFzkxzw3BvMDZiA//as/miPWQsJ
-	sXpjAkbJxSroCa8vonWWJeAoPi5zwGjLAFYUjI644EdSkqkfmXtcMttPWbZEqxq54DBi/oPCanW
-	WWa30oCMlp7tcEqGwDPLHcsfAxmFNIcqYd6KZwD0FRuJkRV15ED+bkE3xRDJQaLs980WMvXkTn9
-	Sp/0rxV2+id5lt4y7DUv+3x0NP9e17ECGmWHpo0Ue6PzHaLMJv/QpOrBwvCqQNAB0FUeBePti5j
-	XaJInyA2w65lRWA0LcKGA5mbXNCB57TOkbCnSINiKLtmXoqkKA+Q3B47vmx3rJk/1ycBlam
-X-Received: by 2002:a05:6000:26d1:b0:48a:f318:ac02 with SMTP id ffacd0b85a97d-48b024dc638mr7303226f8f.19.1790838876710;
-        Thu, 01 Oct 2026 00:14:36 -0700 (PDT)
-Message-ID: <332fec64-31f0-48b5-8c86-163e81899310@suse.com>
-Date: Thu, 1 Oct 2026 09:14:35 +0200
+        bh=xxEOhvYbGWasqHNN4kSw+sfo3fhK1ol662qvyK0BRIg=;
+        b=DuLoJs/lDUyi37Qwh596fYiZfdhGrZ5EKevLeyQmW2touUsq7Bidf9uhbQb7RirROY
+         oipK8AlLU4Po/yBj6gzyMG5qKkGeIXfqtAWarYh+vAH//wFsY1mOkx3NDp8eB5FDd2Di
+         nRcnpht/MHQFLweHACyBIafG9h/7cnwC+L//SbjUlqV5li6q3GngcXU7QuktLboFmLH3
+         njKNd09eAgZy3BrRR4U9YzmaTeFbqp8NenJntudroUxjcd+5KlsvW0kkwwk4f4GGCYgr
+         hNhVYPr7f6Qhcdb8wjCimIbmaJDXnJy9iubLUPplXj/sVDOV0AxssCugjq5n9D8Vb1Yn
+         rHmA==
+X-Forwarded-Encrypted: i=1; AKwUvBxeCV1tkGHh9nvgRYc8qChq0bY4bfkUpval8GiqtJQVyNzmF1+HbjrFED51Erfs6u34qgww5ddhz54=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kiEQHB3SC4dO/WKx5h4GGS5eY1Fcj+DCM8JAPOR29Mwf5z3l+J
+	YJgBKY1tnyk7pdHIlGzAFDfaYf5NDdsIC2vrr60g/pHRC8E14GiLKnXHkzSlvDqpog==
+X-Gm-Gg: AYBFou0OiEkd9xYDo4h3dcMPENKSZeWT5nlTQ2+HHYNTE6gz7yVh28vMuJHQi+y5PQd
+	h9ySL1xy+4s41mCkjYC4E1FlMjDR4hHxCYrPAJW990at8ONBLUZxwDMSyzAX6sbIZrkK1+Z7LLR
+	DqqnsHBHNPFkOuMRk5P7TttHAJ8FoTnWxZ1RbdZ/l2uBCPzvRhElx1bawjncPM/ScHqe6y1E80+
+	uAcXZZcMef5KU+QkoJS378NsgHtGbMevOKkvD7Ryz+1zt/VUb+vVv0W2IZ2rHDSsSxWLIyQbz7t
+	m0MTpCi+F4A7uNdHREji+YxOY9gNTUSG23oOLvoFMdMM1uZQByFdZ0wS2vqhM756KhVZChYi+Do
+	ER/0miexkKzR+enA8Sgh6AM7uA+xYRYnAVkByV40ZA73zkDDqTABiUzuI4j+EZdaNFsTV8Cwn+J
+	f8F03eurASB+0e37Mj5ssS2N/gVpk+DPT059Mg1Bbq2PBs0m4kiTDgL6LjdyP0IA1X7qSNyOfbd
+	uwhVF7hK1PTUt39ei4ZHoJAtWsvdcPiVBP3OxlbH8nrxbhwYSk18vfRVms6/lQ=
+X-Received: by 2002:a05:600c:8b88:b0:4a0:62d:4424 with SMTP id 5b1f17b1804b1-4a01addebd5mr56197735e9.8.1790840075908;
+        Thu, 01 Oct 2026 00:34:35 -0700 (PDT)
+Message-ID: <a9d59bc1-6e21-4a8b-84e5-6daac02997c3@suse.com>
+Date: Thu, 1 Oct 2026 09:34:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH v2] x86/ACPI: optimise C3 entry on AMD CPUs
-To: Olivier Lambert <olivier.lambert@vates.tech>
+Subject: Re: [PATCH] xen/x86: restrict XENFEAT_pae_pgdir_above_4gb setting to
+ PV guests
+To: Roger Pau Monne <roger@xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Jason Andryuk <jason.andryuk@amd.com>,
- xen-devel@lists.xenproject.org
-References: <1790796643.8631fc262581453bbf619ec5b2062170.1a0f3cc3da00003f66@vates.tech>
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260930191104.78141-1-roger@xenproject.org>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,102 +129,40 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1790796643.8631fc262581453bbf619ec5b2062170.1a0f3cc3da00003f66@vates.tech>
+In-Reply-To: <20260930191104.78141-1-roger@xenproject.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1790838877-CDB4987B-1C25A00F/10/78276251493
+X-purgate-ID: tlsNG-720697/1790840077-317CA2AC-6949FF58/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 3926
+X-purgate-size: 1269
 
-On 30.09.2026 21:30, Olivier Lambert wrote:
-> All Zen or newer CPU which support C3 shares cache. Its not necessary to
-> flush the caches in software before entering C3. This will cause drop in
-> performance for the cores which share some caches. ARB_DIS is not used
-> with current AMD C state implementation. So set related flags correctly.
-> 
-> Signed-off-by: Deepak Sharma <deepak.sharma@amd.com>
+On 30.09.2026 21:11, Roger Pau Monne wrote:
+> @@ -692,7 +690,9 @@ long do_xen_version(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+>              if ( is_pv_domain(d) )
+>                  fi.submap |= (1U << XENFEAT_mmu_pt_update_preserve_ad) |
+>                               (1U << XENFEAT_highmem_assist) |
+> -                             (1U << XENFEAT_gnttab_map_avail_bits);
+> +                             (1U << XENFEAT_gnttab_map_avail_bits) |
+> +                             (VM_ASSIST(d, pae_extended_cr3) ?
+> +                              (1U << XENFEAT_pae_pgdir_above_4gb) : 0);
 
-Shouldn't this be mirrored in a From: tag? (I'll try to remember to attribute
-the patch that way when committing.)
+Nit: Unlike binary operators, which we want to have placed at the end of
+wrapped lines, we generally prefer the ternary operator to be wrapped
+differently. E.g.
 
-> Acked-by: Thomas Gleixner <tglx@linutronix.de>
-> Signed-off-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
-> Origin: https://git.kernel.org/torvalds/p/a8fb40966f19
-> [Port to Xen.  Include Hygon.]
-> Assisted-by: Claude-Code:claude-opus-5-5
-> Signed-off-by: Olivier Lambert <olivier.lambert@vates.tech>
-> Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+                             (VM_ASSIST(d, pae_extended_cr3)
+                              ? (1U << XENFEAT_pae_pgdir_above_4gb) : 0);
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+or 
 
-Why the RFC, btw?
+                             (VM_ASSIST(d, pae_extended_cr3)
+                              ? (1U << XENFEAT_pae_pgdir_above_4gb)
+                              : 0);
 
-> ---
-> 
-> Notes:
->     Changes in v2:
->      - Resend with git send-email: my mail client stripped the whitespace from
->        v1, so its diff could not be applied.  No code change.
->      - Picked up Jason's Reviewed-by.
->     
->     Found on XCP-ng 8.3 (Xen 4.17.6) on a Ryzen 5 7600 (Zen 4, family 0x19)
->     whose _CST lists C1 (HLT) plus C2 and C3 as SYSIO states (C3 exit
->     latency 350us).  With bm_check == 0, every C3 entry executes WBINVD.
->     
->     Measured under a VM-to-VM network load, in 25s windows:
->      - ~140 WBINVD/s, 65-69us each on average, 300us at worst.
->      - Spinning on each CPU in turn with IRQs off and reading the TSC shows
->        gaps of up to 222us; none with this change.  The SMI count (PMC event
->        0x2b, validated by counting cycles on the same counter) stayed at 0,
->        and NMIs didn't line up with the gaps.
->      - credit1's do_schedule() occasionally took up to 262us, with IRQs
->        off; at most 4.4us with this change.
->      - xenpm set-max-cstate 1 removes the stalls too, which points at C3
->        entry.
->     
->     This change was booted and measured as a backport on 4.17.6 only.  On
->     staging it is build-tested.  It also covers Hygon, as Linux does today
->     through X86_FEATURE_ZEN; the original Linux commit was AMD-only.
->     
->     This will conflict trivially with Alejandro's pending "x86/acpi: Migrate
->     vendor checks to cpu_vendor()"; happy to rebase on top of it.
->     
->     Possibly a backport candidate.
+This isn't written down anywhere, so I'm not going to insist.
 
-Perhaps, yes.
-
-> --- a/xen/arch/x86/acpi/cpu_idle.c
-> +++ b/xen/arch/x86/acpi/cpu_idle.c
-> @@ -1065,6 +1065,24 @@ static void acpi_processor_power_init_bm_check(struct acpi_processor_flags *flag
->       */
->      if ( c->vendor == X86_VENDOR_INTEL )
->          flags->bm_control = 0;
-> +
-> +    if ( (c->vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) &&
-> +         c->family >= 0x17 )
-> +    {
-> +        /*
-> +         * For all AMD Zen or newer CPUs that support C3, caches
-> +         * should not be flushed by software while entering C3
-> +         * type state. Set bm_check to 1 so that Xen doesn't
-> +         * need to execute cache flush operation.
-> +         */
-> +        flags->bm_check = 1;
-> +        /*
-> +         * In current AMD C state implementation ARB_DIS is no longer
-> +         * used. So set bm_control to zero to indicate ARB_DIS is not
-> +         * required while entering C3 type state.
-> +         */
-> +        flags->bm_control = 0;
-> +    }
->  }
-
-Linux also deals with modern Centaur (VIA) and Zhaoxin (Shanghai) CPUs.
-We will want to mirror that too, provided we want to continue this
-mirroring. Alternatively we could have Linux'es xen-acpi-processor
-driver invoke acpi_processor_power_init_bm_check() before passing up
-C-state info. That would imo be better overall, with one downside: Non-
-Linux Dom0-s would then need to follow suit.
+Furthermore, wouldn't it be plausible to also add IS_ENABLED(CONFIG_PV32)
+(or, imo less desirably, opt_pv32)?
 
 Jan
 
