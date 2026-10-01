@@ -4,39 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 730CACA5FC4
-	for <xen-devel@archiver.kernel.org>; Wed, 30 Sep 2026 22:10:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437919.1656851 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E702CCA5FB3
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 07:15:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437975.1656859 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xC2VF-0000HO-Va; Wed, 30 Sep 2026 22:10:17 +0000
+	id 1xCB04-0007du-5t; Thu, 01 Oct 2026 07:14:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437919.1656851; Wed, 30 Sep 2026 22:10:17 +0000
+Received: by outflank-mailman (output) from mailman id 1437975.1656859; Thu, 01 Oct 2026 07:14:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xC2VF-0000HG-QP; Wed, 30 Sep 2026 22:10:17 +0000
-Received: by outflank-mailman (input) for mailman id 1437919;
- Wed, 30 Sep 2026 22:10:16 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <xakep.amatop@gmail.com>) id 1xC2VE-0000G3-IF
- for xen-devel@lists.xenproject.org; Wed, 30 Sep 2026 22:10:16 +0000
+	id 1xCB04-0007dn-32; Thu, 01 Oct 2026 07:14:40 +0000
+Received: by outflank-mailman (input) for mailman id 1437975;
+ Thu, 01 Oct 2026 07:14:38 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xCB02-0007dh-GL
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 07:14:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xC2VA-00CJT6-Nk
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 00:10:12 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xCB01-008kxM-Pt
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 09:14:37 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6abd887a-2eae-0a2a0a5409dd-0a2a4509cdd6-46
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 00:10:12 +0200
-Received: from [74.125.230.99] (helo=mail-lr2-f35.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <xakep.amatop@gmail.com>)
- id 6abd88c4-be1a-0a2a45090019-4a7de66384ab-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 00:10:12 +0200
-Received: by mail-lr2-f35.google.com with SMTP id
- 38308e7fff4ca-3a776fd3b88so8697731fa.3
- for <xen-devel@lists.xenproject.org>; Wed, 30 Sep 2026 15:10:12 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6abe084f-8faa-0a2a0a5109dd-0a2a4508e28c-32
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 09:14:37 +0200
+Received: from [74.125.225.99] (helo=mail-wr2-f35.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6abe085d-f659-0a2a45080019-4a7de163963f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 09:14:37 +0200
+Received: by mail-wr2-f35.google.com with SMTP id
+ ffacd0b85a97d-48b0f4efe31so61202f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 00:14:37 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48b06778c3fsm4816891f8f.0.2026.10.01.00.14.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 01 Oct 2026 00:14:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,492 +52,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1790806212; cv=none;
-        d=google.com; s=arc-20260327;
-        b=NEUZj0GrwLOEOt0j3+HYF5N98Y6jskBOoHiPLjJ7iYgndSWYgHAp9HDwQrlugSzzQG
-         9MtSpzje8ivx3Mx9nJgQX1dsZ8JKTNjbegNx26L+G9C+xzDl+qr0c+N285LJARjnOPIi
-         kSVI35B1nXAx8rUx8i8QG13TlePs1BHeUmWf4u/3bhb18Bb3oZmEQ6k9m0m/hu2eJSzC
-         C4fK6QqSDB3rVF/CsWFycqA/4vf+A3BMhTWCzfwXmPUVHw+7KP4819ffWdbyw7u9gRfO
-         TcMbm5sm/sS6WQinGfPCkGnN6HSA9BoaMvMj0Q6Z9C5UL5F96iZdTCBzdlYxRC/Mu3XV
-         Ks5Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=YT8FgYZx9j26FJn2n7QaV5qh1P2fD34fsZ+lPOPJufQ=;
-        fh=f2OySzG/ebpxZaoAL0gXyBE5IU56wlJG5B80LCel6Vg=;
-        b=IsL7hRztRqrLkFQUfgMcKIq61wg/u+MTDr58lAsJBiAOevheAkq9OL9dxl8amA59EP
-         LpECw5nAf7u0C10w12ndTmY6tqh7KrSFF1Vs3+6u4wGywskwCgiyDjiSaDn1wXMpevhb
-         u3qTgwxY5IfoPM5R+G1tEoQ5wHPDpkqcgLGFhyUH7yywH9hYQESp0/ZLLcjtFtVeWPNa
-         IZSZct5Ca24BN635pK/mrex930YxWtjZg8degOc4R2xx6A624Sfs1/e1XDhBe6BNYYIS
-         P4zC6IXvWkAey9rxm+5VjZ4qAnuZb/5EGLXbDaFexm1BjJrPsrhIsoB6DbVsSY/W/c4u
-         gxkw==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1790806212; x=1791411012; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=YT8FgYZx9j26FJn2n7QaV5qh1P2fD34fsZ+lPOPJufQ=;
-        b=gEtyg9h6Uq53EO+mZwKe0wpp19lgIuXqUAQYFTQB4yDB2FgixP+rXnLXdim2mLO9fy
-         hTy94nXaxUv1NtbjrWEsxotMxvRd9OFZn+gTnsrH3GffZ3+L5fGwktrPUz30xqkZQlBc
-         vmBNkQynDfGo+ZCkjI5gZEh6CzRqqqWLy5yND0WNNeWHBikcaIA2iNMjKaDvWr+KD0zu
-         FuF6BMTqeOhuFB0g0lVix55bPFdYmChDcsLNZoBearilfLN6aGqGHWGdZmbnG1hYxPLI
-         bdVUEWzxJ0eX+77Q8elE9ORNhHzxx0hgOQ5ppTOuYjJgTujZPdmpb3/lRNhHSNGCGJWP
-         dq1w==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790806212; x=1791411012;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1790838877; x=1791443677; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=YT8FgYZx9j26FJn2n7QaV5qh1P2fD34fsZ+lPOPJufQ=;
-        b=evQ0ffHOO2aTdrJzQao2CGuvCMGzhuoUf3cTsLBNsV+8vZYbMfT3LXxrm1GZKwp2F2
-         NG2W9OK3r4pBbuRygmV5Ld6Xs2c8jR+P+PHG2KZvFyeqKBlOFD3EA4P0+YpULsEH8Y4q
-         MdhqNrJfiwXnau+d9q0QK77fLiCAkoiV+ph4NyyKjXLkm61vdmdVrgXTp8hjmN3pUhl0
-         8fI/JyrFRV19BYOb6jHg2uACRN6TYQRJp7Q6QzP2yARnIWKcdC7KzPEChFXvRxZl7hLO
-         tBauoZXzRDWnZoETedmzNCUNnp3tBhgrbPUxRCOxJutFnljFMenZDiZV3JvpwIfdHpf8
-         irmg==
-X-Forwarded-Encrypted: i=1; AKwUvBx20Yl+AlzlzXhiT771l66A9k6XMzAxEbj8d6dRhL4ZWW3gpPPorZ6EV9jw5O/tfBLbiWnoeV4DA1E=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYJFuhCoSpz337r+gG7N9C60tOSbP195LEpoLToakCEXtyMrzsTQ
-	lw1H0NQLPMPS836ieyKD2sEvn3HCKNoJ7gaz3fNfLoL3aRcyivNAgNvXxRmWk9PTlthj7t4HnZU
-	L1g3bsly16D8nq9GPwAxY0QMqtOirkDg=
-X-Gm-Gg: AYBFou0nAFk5CDfAd8bpxhnmMqDEuD0EQjHoOIMPvdkYA+nMDEwdpPCZRR2tvmd/2RA
-	qAwHN/+6Aa2IJKdjtqz3EWSIwFjw44c2vbaV6lDPO3NurwvOVDKnpj8exyVqPjYwN/OuyOJp6kZ
-	6d3fdrDiqLq3cj/WikZcbFa09/tqEEw60Q3p65KJIlj6kzgxuxDBT+lU7kvxSc4+v891IE4PDfR
-	sEM6r7iKIb6W7REs4JfQV77irwReIkXl63vwrq/9KUbjS9EymkayZZvaPK2LprbgqyHagF/0iWw
-	qJMILY1RT3xgxLIwuJ2QrWXX18GJ2Wn2iYmABU2R6X5FBYrMQp5F/A==
-X-Received: by 2002:a05:6512:39c5:b0:5b8:f0a4:3501 with SMTP id
- 2adb3069b0e04-5ba402b8581mr1121622e87.2.1790806211708; Wed, 30 Sep 2026
- 15:10:11 -0700 (PDT)
+        bh=Z8rH22Er45wWWjpv0r5L3KNPoam+oZEAngrcd1iyQ00=;
+        b=domQUpMQx+S18wCItGbHvPKwXKfB/aa/WwUeZBiMannibNSOalikGCNV3baWdFIFy7
+         ZKbNvwa+qY1r1fYdhlhMrgIrqIXVi/cGPXkGnpMxwxDyVjrmNtkDHpWE4YtLidqa7x8I
+         uTT4W52GKXZMB7ct8fAo62xIS4Pbbk/QDIwoaFTqAiEJFp2t3MkLEwUU3h5H4B15EvaM
+         OH+BCT3YB12jOiHKgU90/xJTHM3OrFMxt20vJJ759B7+bJ2gW1/Iio4H5+KnLngWCjsd
+         0kpl0UW6gTXvABxHMmOCfiIRkoJ2KyFOnen+/4J/ofX7m1wTKOAWrBLoPCP28BE1QwhB
+         6qWQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790838877; x=1791443677;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Z8rH22Er45wWWjpv0r5L3KNPoam+oZEAngrcd1iyQ00=;
+        b=oCyi61U+kExVCu4C0MR+dPcmlGigTashhEu5EXwD3BIbaXU6fipg72d1TOUw9r7IBT
+         W2RJvtwujPBUWmkeLBq1kfQe1nLeaG87ma5MM9tHU9sTy59moZ2KSclZRXmnNPJP5EcO
+         PgG60JgHuWlqSMRq7U6neAWIFgztFwKcbGsgeBYDFhml+YCU8RbJFkSSq1z4QqIKm3gL
+         FSDx7ypMWB4HvQqDvD3EKlJE2/eM9xaVcHSZvLLbbqtDTOz6b72RJHWfwyLHilJ3rNPm
+         P7YpSdZ5eqP3MeHe+jqgzoT3kCwP1wqKeiNh3e+eUovJb+p3oLPY7Pyx95VrAMHlaZ6W
+         ZrrA==
+X-Forwarded-Encrypted: i=1; AKwUvBxQRiSobDEOznaKM3WCoKL4ebPJDByrvelVRoCzrAOrCYp6IWp1JzrfQNDduiy7whakdwvCV0W2n/E=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIsNdVFqBHaR58IFhSJQPWHefKwgIyOB5Qp08uigVHii40oOmqw
+	oTtDfDqzdEXmYwUi2sEf3sIj22H3KamIX7Fg6wvSn4Fhg/qkdKoJQ9vcbrasFM5nZQ==
+X-Gm-Gg: AYBFou2fF8PuDpxVbrl0Duv+XkDt7tlxetgA2rMm4+/8jspvt/039IOBk/0Xq6h5bwh
+	CEwrtoSQxOF89ON8Buf3ZlPGReFHaILyo/UCrdK43Wy7AaHzNK5OdvW6cRBlBs16flHX9eITX1u
+	vQDvbpf8J9qCVr+HnG332tKDA5QGE0G8u+xKhEgN3hOYSdBBC3FT/NxPL8sauLYle4tZpR/jR8B
+	HOokr4kGabbGE/j3pFps9BsLhUN2YQX+YAMNBwi74z5Ju8OudFzkxzw3BvMDZiA//as/miPWQsJ
+	sXpjAkbJxSroCa8vonWWJeAoPi5zwGjLAFYUjI644EdSkqkfmXtcMttPWbZEqxq54DBi/oPCanW
+	WWa30oCMlp7tcEqGwDPLHcsfAxmFNIcqYd6KZwD0FRuJkRV15ED+bkE3xRDJQaLs980WMvXkTn9
+	Sp/0rxV2+id5lt4y7DUv+3x0NP9e17ECGmWHpo0Ue6PzHaLMJv/QpOrBwvCqQNAB0FUeBePti5j
+	XaJInyA2w65lRWA0LcKGA5mbXNCB57TOkbCnSINiKLtmXoqkKA+Q3B47vmx3rJk/1ycBlam
+X-Received: by 2002:a05:6000:26d1:b0:48a:f318:ac02 with SMTP id ffacd0b85a97d-48b024dc638mr7303226f8f.19.1790838876710;
+        Thu, 01 Oct 2026 00:14:36 -0700 (PDT)
+Message-ID: <332fec64-31f0-48b5-8c86-163e81899310@suse.com>
+Date: Thu, 1 Oct 2026 09:14:35 +0200
 MIME-Version: 1.0
-References: <cover.1787838455.git.mykola_kvach@epam.com> <9d3cf11530edf478ae7a597f1c0934f4b7b1a270.1787838455.git.mykola_kvach@epam.com>
- <D16C084A-6BD6-4AF2-AB0F-80F29A3DC8C3@arm.com>
-In-Reply-To: <D16C084A-6BD6-4AF2-AB0F-80F29A3DC8C3@arm.com>
-From: Mykola Kvach <xakep.amatop@gmail.com>
-Date: Thu, 1 Oct 2026 01:10:00 +0300
-X-Gm-Features: AclHuK_zq7KViO1lA0QKkinPlDOWEW3X6rxvaluEe9h0acPsTndVRWXMXcZ43Rw
-Message-ID: <CAGeoDV-JiYAjCQ0tP-jQNbVjGwj0oX5ifVh+9VWyiJWRg=H4zA@mail.gmail.com>
-Subject: Re: [PATCH v12 13/13] xen/arm: Add host system suspend backend
-To: Bertrand Marquis <Bertrand.Marquis@arm.com>
-Cc: Mykola Kvach <mykola_kvach@epam.com>, 
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, 
-	Michal Orzel <michal.orzel@amd.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-bad1c0/1790806212-BC4CB034-CAE569E0/0/0
-X-purgate-type: clean
-X-purgate-size: 14445
+User-Agent: Mozilla Thunderbird
+Subject: Re: [RFC PATCH v2] x86/ACPI: optimise C3 entry on AMD CPUs
+To: Olivier Lambert <olivier.lambert@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, Jason Andryuk <jason.andryuk@amd.com>,
+ xen-devel@lists.xenproject.org
+References: <1790796643.8631fc262581453bbf619ec5b2062170.1a0f3cc3da00003f66@vates.tech>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <1790796643.8631fc262581453bbf619ec5b2062170.1a0f3cc3da00003f66@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1790838877-CDB4987B-1C25A00F/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 3926
 
-Hi Bertrand,
+On 30.09.2026 21:30, Olivier Lambert wrote:
+> All Zen or newer CPU which support C3 shares cache. Its not necessary to
+> flush the caches in software before entering C3. This will cause drop in
+> performance for the cores which share some caches. ARB_DIS is not used
+> with current AMD C state implementation. So set related flags correctly.
+> 
+> Signed-off-by: Deepak Sharma <deepak.sharma@amd.com>
 
-On Mon, Sep 28, 2026 at 7:20=E2=80=AFPM Bertrand Marquis
-<Bertrand.Marquis@arm.com> wrote:
->
-> Hi Mykola,
->
-> > On 27 Aug 2026, at 16:32, Mykola Kvach <mykola_kvach@epam.com> wrote:
-> >
-> > From: Mirela Simonovic <mirela.simonovic@aggios.com>
-> >
-> > Add the Xen-wide suspend/resume backend used after a control-domain
-> > vPSCI SYSTEM_SUSPEND request has been accepted. The vPSCI policy,
-> > runtime driver blockers and control-domain sequencing checks are handle=
-d
-> > by the preceding commit; this change adds the code that actually drives
-> > the host suspend attempt.
-> >
-> > The backend runs from a tasklet scheduled on pCPU0, because non-boot CP=
-Us
-> > are disabled during suspend. It freezes domains, disables the scheduler
-> > and then disables non-boot CPUs.
-> >
-> > Host-side suspend participants are handled in phases. IOMMU and console
-> > state are suspended first. Local IRQs are then disabled before suspendi=
-ng
-> > timer and GIC state. On resume or failure, the completed suspend phases
-> > are unwound in reverse: GIC and timer state are restored while IRQs are
-> > still disabled, local IRQs are restored, and then console and IOMMU sta=
-te
-> > are restored.
-> >
-> > On boot, init_ttbr is normally initialized during secondary CPU hotplug=
-.
-> > On uniprocessor systems this can leave init_ttbr uninitialized, so set =
-it
-> > from the boot CPU before entering suspend.
-> >
-> > Note: the code is behind CONFIG_HAS_SYSTEM_SUSPEND, which is currently
-> > only selected when UNSUPPORTED is set and MPU is not set.
-> >
-> > Signed-off-by: Mirela Simonovic <mirela.simonovic@aggios.com>
-> > Signed-off-by: Saeed Nowshadi <saeed.nowshadi@xilinx.com>
-> > Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-> > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> > ---
-> > Changes in V10:
-> > - Re-apply boot CPU local errata/workaround handling after SYSTEM_SUSPE=
-ND,
-> >  before resuming the rest of the host suspend path.
-> > - Move set_init_ttbr() declaration to asm/mmu/mm.h, since it is
-> >  MMU-specific.
-> >
-> > Changes in V9:
-> > - Split vPSCI availability policy, runtime host-suspend blockers and th=
-e
-> >  domain-readiness precheck into the preceding commit.
-> > - Trigger the host suspend backend from the control-domain SYSTEM_SUSPE=
-ND
-> >  path.
-> > - Reorder the host suspend/resume phases so the timer is suspended with
-> >  local IRQs disabled and local IRQs are restored after the GIC and time=
-r
-> >  resume paths, before the console and IOMMU resume paths.
-> > - Move HAS_HWDOM_SYSTEM_SUSPEND and related logic to policy patch.
-> >
-> > Changes in V8:
-> > - Add a pre-suspend check in system_suspend() after scheduler_disable()=
- to
-> >  require all domains to be in the shut down state with SHUTDOWN_suspend
-> >  before proceeding with the global suspend flow.
-> > - Drop the common-level depends on !ARM_64 || !SYSTEM_SUSPEND from
-> >  CONFIG_HAS_HWDOM_SHUTDOWN_ON_SUSPEND and model the ARM64 suspend case
-> >  with an arch-selected capability instead.
-> > - Rename CONFIG_HAS_HWDOM_SHUTDOWN_ON_SUSPEND to
-> >  CONFIG_HAS_HWDOM_SYSTEM_SUSPEND.
-> > - Rename need_hwdom_shutdown() to want_hwdom_shutdown().
-> >
-> > Changes in V7:
-> > - Control domain is responsible for host suspend.
-> > - Add an empty inline host_system_suspend() function when SYSTEM_SUSPEN=
-D
-> >  config is disabled.
-> > - Use IS_ENABLED() for config checking instead of #ifdef.
-> > - Replace #ifdef checks in domain_shutdown() with IS_ENABLED() to simpl=
-ify
-> >  control flow.
-> > - Factor hardware domain shutdown condition into a helper
-> >  (need_hwdom_shutdown()) to avoid preprocessor directives inside the
-> >  function.
-> > - Squash with iommu suspend/resume commit.
-> > ---
-> > xen/arch/arm/Kconfig                 |   1 +
-> > xen/arch/arm/cpuerrata.c             |   7 +-
-> > xen/arch/arm/include/asm/cpuerrata.h |   1 +
-> > xen/arch/arm/include/asm/mmu/mm.h    |   2 +
-> > xen/arch/arm/include/asm/suspend.h   |   2 +
-> > xen/arch/arm/mmu/smpboot.c           |   2 +-
-> > xen/arch/arm/suspend.c               | 156 +++++++++++++++++++++++++++
-> > xen/arch/arm/vpsci.c                 |  10 +-
-> > 8 files changed, 177 insertions(+), 4 deletions(-)
-> >
-> > diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-> > index 9027aa17eb..da1585ec50 100644
-> > --- a/xen/arch/arm/Kconfig
-> > +++ b/xen/arch/arm/Kconfig
-> > @@ -9,6 +9,7 @@ config ARM_64
-> > select 64BIT
-> > select HAS_DOMAIN_TYPE
-> > select HAS_FAST_MULTIPLY
-> > + select HAS_SYSTEM_SUSPEND if !MPU && UNSUPPORTED
-> > select HAS_VPCI_GUEST_SUPPORT if PCI_PASSTHROUGH
-> >
-> > config ARM
-> > diff --git a/xen/arch/arm/cpuerrata.c b/xen/arch/arm/cpuerrata.c
-> > index 3a32183618..e6499aaab3 100644
-> > --- a/xen/arch/arm/cpuerrata.c
-> > +++ b/xen/arch/arm/cpuerrata.c
-> > @@ -782,6 +782,11 @@ void check_local_cpu_errata(void)
-> >     update_cpu_capabilities(arm_errata, "enabled workaround for");
-> > }
-> >
-> > +int enable_local_cpu_errata_workarounds(void)
-> > +{
-> > +    return enable_nonboot_cpu_caps(arm_errata);
-> > +}
-> > +
-> > void __init enable_errata_workarounds(void)
-> > {
-> >     enable_cpu_capabilities(arm_errata);
-> > @@ -818,7 +823,7 @@ static int cpu_errata_callback(struct notifier_bloc=
-k *nfb,
-> >          * fixed to expect an error at CPU_STARTING phase.
-> >          */
-> >         ASSERT(system_state !=3D SYS_STATE_boot);
-> > -        rc =3D enable_nonboot_cpu_caps(arm_errata);
-> > +        rc =3D enable_local_cpu_errata_workarounds();
-> >         break;
-> >     default:
-> >         break;
-> > diff --git a/xen/arch/arm/include/asm/cpuerrata.h b/xen/arch/arm/includ=
-e/asm/cpuerrata.h
-> > index 1799a16d7e..b93521326f 100644
-> > --- a/xen/arch/arm/include/asm/cpuerrata.h
-> > +++ b/xen/arch/arm/include/asm/cpuerrata.h
-> > @@ -5,6 +5,7 @@
-> > #include <asm/alternative.h>
-> >
-> > void check_local_cpu_errata(void);
-> > +int enable_local_cpu_errata_workarounds(void);
-> > void enable_errata_workarounds(void);
-> >
-> > #define CHECK_WORKAROUND_HELPER(erratum, feature, arch)         \
-> > diff --git a/xen/arch/arm/include/asm/mmu/mm.h b/xen/arch/arm/include/a=
-sm/mmu/mm.h
-> > index 7f4d59137d..ee73a77777 100644
-> > --- a/xen/arch/arm/include/asm/mmu/mm.h
-> > +++ b/xen/arch/arm/include/asm/mmu/mm.h
-> > @@ -110,6 +110,8 @@ void dump_pt_walk(paddr_t ttbr, paddr_t addr,
-> > extern void switch_ttbr(uint64_t ttbr);
-> > extern void relocate_and_switch_ttbr(uint64_t ttbr);
-> >
-> > +void set_init_ttbr(lpae_t *root);
-> > +
-> > #endif /* __ARM_MMU_MM_H__ */
-> >
-> > /*
-> > diff --git a/xen/arch/arm/include/asm/suspend.h b/xen/arch/arm/include/=
-asm/suspend.h
-> > index 50dc6e9fdf..889a6509d9 100644
-> > --- a/xen/arch/arm/include/asm/suspend.h
-> > +++ b/xen/arch/arm/include/asm/suspend.h
-> > @@ -41,11 +41,13 @@ int prepare_resume_ctx(void);
-> > void hyp_resume(void);
-> > bool host_system_suspend_allowed(void);
-> > void host_system_suspend_disable(const char *reason);
-> > +void host_system_suspend(struct domain *d);
-> >
-> > #else /* !CONFIG_SYSTEM_SUSPEND */
-> >
-> > static inline bool host_system_suspend_allowed(void) { return false; }
-> > static inline void host_system_suspend_disable(const char *reason) {}
-> > +static inline void host_system_suspend(struct domain *d) {}
-> >
-> > #endif
-> >
-> > diff --git a/xen/arch/arm/mmu/smpboot.c b/xen/arch/arm/mmu/smpboot.c
-> > index 37e91d72b7..ff508ecf40 100644
-> > --- a/xen/arch/arm/mmu/smpboot.c
-> > +++ b/xen/arch/arm/mmu/smpboot.c
-> > @@ -72,7 +72,7 @@ static void clear_boot_pagetables(void)
-> >     clear_table(boot_third);
-> > }
-> >
-> > -static void set_init_ttbr(lpae_t *root)
-> > +void set_init_ttbr(lpae_t *root)
-> > {
-> >     /*
-> >      * init_ttbr is part of the identity mapping which is read-only. So
-> > diff --git a/xen/arch/arm/suspend.c b/xen/arch/arm/suspend.c
-> > index c7c26bcf03..3fe2ffa4fb 100644
-> > --- a/xen/arch/arm/suspend.c
-> > +++ b/xen/arch/arm/suspend.c
-> > @@ -1,10 +1,18 @@
-> > /* SPDX-License-Identifier: GPL-2.0-only */
-> >
-> > +#include <asm/cpuerrata.h>
-> > +#include <asm/cpufeature.h>
-> > +#include <asm/gic.h>
-> > #include <asm/psci.h>
-> > #include <asm/suspend.h>
-> >
-> > +#include <xen/console.h>
-> > +#include <xen/cpu.h>
-> > +#include <xen/iommu.h>
-> > #include <xen/lib.h>
-> > +#include <xen/sched.h>
-> > #include <xen/serial.h>
-> > +#include <xen/tasklet.h>
-> >
-> > struct resume_cpu_context resume_cpu_context;
-> >
-> > @@ -44,6 +52,154 @@ void host_system_suspend_disable(const char *reason=
-)
-> >            reason ? reason : "unsupported suspend/resume path");
-> > }
-> >
-> > +/* Xen suspend. data identifies the domain that initiated suspend. */
-> > +static void system_suspend(void *data)
-> > +{
-> > +    int status;
-> > +    unsigned long flags;
-> > +    struct domain *d =3D (struct domain *)data;
-> > +
-> > +    BUG_ON(system_state !=3D SYS_STATE_active);
-> > +
-> > +    system_state =3D SYS_STATE_suspend;
-> > +
-> > +    printk("Xen suspending...\n");
-> > +
-> > +    freeze_domains();
-> > +    scheduler_disable();
-> > +
-> > +    /*
-> > +     * Non-boot CPUs have to be disabled on suspend and enabled on res=
-ume
-> > +     * (hotplug-based mechanism). Disabling non-boot CPUs will lead to=
- PSCI
-> > +     * CPU_OFF to be called by each non-boot CPU. Depending on the und=
-erlying
-> > +     * platform capabilities, this may lead to the physical powering d=
-own of
-> > +     * CPUs.
-> > +     */
-> > +    status =3D disable_nonboot_cpus();
-> > +    if ( status )
-> > +    {
-> > +        system_state =3D SYS_STATE_resume;
-> > +        goto resume_nonboot_cpus;
-> > +    }
-> > +
-> > +    console_start_sync();
-> > +    status =3D iommu_suspend();
-> > +    if ( status )
-> > +    {
-> > +        system_state =3D SYS_STATE_resume;
-> > +        goto resume_end_sync;
-> > +    }
-> > +
-> > +    status =3D console_suspend();
-> > +    if ( status )
-> > +    {
-> > +        dprintk(XENLOG_ERR, "Failed to suspend the console, err=3D%d\n=
-", status);
-> > +        system_state =3D SYS_STATE_resume;
-> > +        goto resume_iommu;
-> > +    }
-> > +
-> > +    local_irq_save(flags);
-> > +
-> > +    time_suspend();
-> > +
-> > +    status =3D gic_suspend();
-> > +    if ( status )
-> > +    {
-> > +        system_state =3D SYS_STATE_resume;
-> > +        goto resume_time;
-> > +    }
-> > +
-> > +    set_init_ttbr(xen_pgtable);
-> > +
-> > +    /*
-> > +     * Enable identity mapping before entering suspend to simplify
-> > +     * the resume path
-> > +     */
-> > +    update_boot_mapping(true);
-> > +
-> > +    if ( prepare_resume_ctx() )
-> > +    {
-> > +        status =3D call_psci_system_suspend();
-> > +        /*
-> > +         * If suspend is finalized properly by above system suspend PS=
-CI call,
-> > +         * the code below in this 'if' branch will never execute. Exec=
-ution
-> > +         * will continue from hyp_resume which is the hypervisor's res=
-ume point.
-> > +         * In hyp_resume CPU context will be restored and since link-r=
-egister is
-> > +         * restored as well, it will appear to return from prepare_res=
-ume_ctx.
-> > +         * The difference in returning from prepare_resume_ctx on syst=
-em suspend
-> > +         * versus resume is in function's return value: on suspend, th=
-e return
-> > +         * value is a non-zero value, on resume it is zero. That is wh=
-y the
-> > +         * control flow will not re-enter this 'if' branch on resume.
-> > +         */
-> > +        if ( status )
-> > +            dprintk(XENLOG_WARNING, "PSCI system suspend failed, err=
-=3D%d\n",
-> > +                    status);
-> > +
-> > +        system_state =3D SYS_STATE_resume;
-> > +    }
-> > +    else
-> > +    {
-> > +        system_state =3D SYS_STATE_resume;
-> > +
-> > +        /*
-> > +         * CPU0 resumes directly from hyp_resume(), bypassing the CPU =
-hotplug
-> > +         * path that re-checks and re-enables errata workarounds for s=
-econdary
-> > +         * CPUs.
-> > +         */
-> > +        check_local_cpu_errata();
-> > +        check_local_cpu_features();
-> > +        BUG_ON(enable_local_cpu_errata_workarounds());
-> > +    }
-> > +
-> > +    update_boot_mapping(false);
-> > +
-> > +    gic_resume();
-> > +
-> > + resume_time:
-> > +    time_resume();
-> > +
-> > +    local_irq_restore(flags);
-> > +
-> > +    console_resume();
-> > +
-> > + resume_iommu:
-> > +    iommu_resume();
-> > +
-> > + resume_end_sync:
-> > +    console_end_sync();
-> > +
-> > + resume_nonboot_cpus:
-> > +    /*
-> > +     * The rcu_barrier() has to be added to ensure that the per cpu ar=
-ea is
-> > +     * freed before a non-boot CPU tries to initialize it (_free_percp=
-u_area()
-> > +     * has to be called before the init_percpu_area()). This scenario =
-occurs
-> > +     * when non-boot CPUs are hot-unplugged on suspend and hotplugged =
-on resume.
->
-> This line would need wrapping as it is over 80 chars.
->
-> > +     */
-> > +    rcu_barrier();
->
-> Could you clarify which per-CPU area needs freeing here?
->
-> system_state is SYS_STATE_suspend for every CPU taken down by
-> disable_nonboot_cpus(), so cpu_percpu_callback() does not queue
-> _free_percpu_area() for any of them.
->
-> So I do not quite get what your comment case actually is.
-> Could you explain ?
+Shouldn't this be mirrored in a From: tag? (I'll try to remember to attribute
+the patch that way when committing.)
 
-You are right. I checked the original patch and the code it was
-based on.
+> Acked-by: Thomas Gleixner <tglx@linutronix.de>
+> Signed-off-by: Rafael J. Wysocki <rafael.j.wysocki@intel.com>
+> Origin: https://git.kernel.org/torvalds/p/a8fb40966f19
+> [Port to Xen.  Include Hygon.]
+> Assisted-by: Claude-Code:claude-opus-5-5
+> Signed-off-by: Olivier Lambert <olivier.lambert@vates.tech>
+> Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
 
-The barrier was added in the 2018 series. At that time, the Arm
-CPU_DEAD callback queued _free_percpu_area() even during system
-suspend. If resume reached init_percpu_area() before that callback
-completed, it would return -EBUSY because the old area still
-existed. This would trigger BUG_ON() in enable_nonboot_cpus().
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
-The barrier ensured that the old area was freed before bringing
-the CPU back up.
+Why the RFC, btw?
 
-That reason no longer applies. The current code keeps the per-CPU
-areas during suspend and reuses them on resume.
+> ---
+> 
+> Notes:
+>     Changes in v2:
+>      - Resend with git send-email: my mail client stripped the whitespace from
+>        v1, so its diff could not be applied.  No code change.
+>      - Picked up Jason's Reviewed-by.
+>     
+>     Found on XCP-ng 8.3 (Xen 4.17.6) on a Ryzen 5 7600 (Zen 4, family 0x19)
+>     whose _CST lists C1 (HLT) plus C2 and C3 as SYSIO states (C3 exit
+>     latency 350us).  With bm_check == 0, every C3 entry executes WBINVD.
+>     
+>     Measured under a VM-to-VM network load, in 25s windows:
+>      - ~140 WBINVD/s, 65-69us each on average, 300us at worst.
+>      - Spinning on each CPU in turn with IRQs off and reading the TSC shows
+>        gaps of up to 222us; none with this change.  The SMI count (PMC event
+>        0x2b, validated by counting cycles on the same counter) stayed at 0,
+>        and NMIs didn't line up with the gaps.
+>      - credit1's do_schedule() occasionally took up to 262us, with IRQs
+>        off; at most 4.4us with this change.
+>      - xenpm set-max-cstate 1 removes the stalls too, which points at C3
+>        entry.
+>     
+>     This change was booted and measured as a backport on 4.17.6 only.  On
+>     staging it is build-tested.  It also covers Hygon, as Linux does today
+>     through X86_FEATURE_ZEN; the original Linux commit was AMD-only.
+>     
+>     This will conflict trivially with Alejandro's pending "x86/acpi: Migrate
+>     vendor checks to cpu_vendor()"; happy to rebase on top of it.
+>     
+>     Possibly a backport candidate.
 
-Also, since commit 540d4d60378c ("cpu: sync any remaining RCU
-callbacks before CPU up/down"), cpu_up() already calls
-rcu_barrier() through cpu_hotplug_begin(), before CPU_UP_PREPARE.
+Perhaps, yes.
 
-The separate barrier and its comment were carried over after these
-changes. I will remove both in v13. This also removes the line
-that needed wrapping.
+> --- a/xen/arch/x86/acpi/cpu_idle.c
+> +++ b/xen/arch/x86/acpi/cpu_idle.c
+> @@ -1065,6 +1065,24 @@ static void acpi_processor_power_init_bm_check(struct acpi_processor_flags *flag
+>       */
+>      if ( c->vendor == X86_VENDOR_INTEL )
+>          flags->bm_control = 0;
+> +
+> +    if ( (c->vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) &&
+> +         c->family >= 0x17 )
+> +    {
+> +        /*
+> +         * For all AMD Zen or newer CPUs that support C3, caches
+> +         * should not be flushed by software while entering C3
+> +         * type state. Set bm_check to 1 so that Xen doesn't
+> +         * need to execute cache flush operation.
+> +         */
+> +        flags->bm_check = 1;
+> +        /*
+> +         * In current AMD C state implementation ARB_DIS is no longer
+> +         * used. So set bm_control to zero to indicate ARB_DIS is not
+> +         * required while entering C3 type state.
+> +         */
+> +        flags->bm_control = 0;
+> +    }
+>  }
 
-Best regards,
-Mykola
+Linux also deals with modern Centaur (VIA) and Zhaoxin (Shanghai) CPUs.
+We will want to mirror that too, provided we want to continue this
+mirroring. Alternatively we could have Linux'es xen-acpi-processor
+driver invoke acpi_processor_power_init_bm_check() before passing up
+C-state info. That would imo be better overall, with one downside: Non-
+Linux Dom0-s would then need to follow suit.
+
+Jan
 
