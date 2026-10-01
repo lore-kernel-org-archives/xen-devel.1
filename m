@@ -4,40 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2AAB1CA5FCB
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 13:35:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438365.1657224 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 368CACA5FD2
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 13:54:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1438376.1657231 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCGwe-0004Uh-LD; Thu, 01 Oct 2026 13:35:32 +0000
+	id 1xCHEa-0007Jq-1F; Thu, 01 Oct 2026 13:54:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438365.1657224; Thu, 01 Oct 2026 13:35:32 +0000
+Received: by outflank-mailman (output) from mailman id 1438376.1657231; Thu, 01 Oct 2026 13:54:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCGwe-0004UW-HH; Thu, 01 Oct 2026 13:35:32 +0000
-Received: by outflank-mailman (input) for mailman id 1438365;
- Thu, 01 Oct 2026 13:35:31 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xCHEZ-0007Jj-Ui; Thu, 01 Oct 2026 13:54:03 +0000
+Received: by outflank-mailman (input) for mailman id 1438376;
+ Thu, 01 Oct 2026 13:54:03 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <nicola.vetrini@bugseng.com>) id 1xCGwd-0004UQ-31
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:35:31 +0000
+ (envelope-from <titouan.christophe@essensium.com>)
+ id 1xCHEY-0007Jd-Vd
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:54:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCGwc-00FzYm-G0
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 15:35:30 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xCHEX-00Ej1T-Vp
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 15:54:01 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <nicola.vetrini@bugseng.com>)
- id 6abe61a0-8faa-0a2a0a5109dd-0a2a450c93f0-6
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 15:35:30 +0200
-Received: from [162.55.131.47] (helo=support.bugseng.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <nicola.vetrini@bugseng.com>)
- id 6abe61a1-f479-0a2a450c0019-a237832fc208-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 15:35:29 +0200
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id 9980E4EE00D0;
- Thu,  1 Oct 2026 15:35:28 +0200 (CEST)
+ (envelope-from <titouan.christophe@essensium.com>)
+ id 6abe65f4-2eae-0a2a0a5409dd-0a2a4508ea10-14
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 15:54:01 +0200
+Received: from [74.125.228.171] (helo=mail-ej2-f43.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <titouan.christophe@essensium.com>)
+ id 6abe65f9-f659-0a2a45080019-4a7de4aba150-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 15:54:01 +0200
+Received: by mail-ej2-f43.google.com with SMTP id
+ a640c23a62f3a-c2a8b9acbc6so1010600066b.0
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 06:54:01 -0700 (PDT)
+Received: from ?IPV6:2a02:a03f:63ab:dc01:1291:d1ff:fe92:3b5a?
+ ([2a02:a03f:63ab:dc01:1291:d1ff:fe92:3b5a])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c2e31a3e50dsm167794166b.8.2026.10.01.06.54.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 01 Oct 2026 06:54:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,99 +55,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1790861729;
-	b=oBIhli+vQv07pXOwc11LZxAsDidCojCCSpg9deL0HIRCQQtnVsHM0LTwdHNxmwwS2jhw
-	 vy9iw/1aojmGGlxkHEb0JI3gzjXfvXa6VDQCStkaQ3CwUcI497gQXY6XX/Dz/PV3I/gqz
-	 8n4Ry111rDF1LH63R0H3PDNgPbvLe/QLiwsvAqua6vfpGRSllTLBAECbPvTapeZQm3dC8
-	 jlel1GXC6l4Xb5g2T4bIeJTDt/ZR7n/AuyIYdkUSri8k5XkdT2e8JLt0kFGmhSpRbzpQB
-	 4D8lyEqr+euUTurPfyKh9x9pYEgnasJtUr4yGKLVfvMFc1Ai6LFakOUDghbJwdbbtnMKA
-	 uLtcGWX6OLy6zaQ2ElVIh78Fxuh/uWQ0qqzrbiDvFrL0UjOggxKOOc8DY4wOd9EpwUo2u
-	 ekZeXdi5q+EEo78aa4XFA/yHwDAZMIQxBElGxcrW05G1I5E15QCRoAN68qAhgvvKuWdSJ
-	 oAEnhIGBPDEsLjW+VQqmVDpIQqitjeQkBbEH1axTz9X9bS1qeGDZx5aU4WiCO7Fu2CWar
-	 my3JpAdpM6jqwGOqz2smH0KPDWziSx6HQSMmmJcAlkQ7mCUgi0BJbwtyhKVuqYjOIzOBN
-	 hSMH6tM/h8znHXBCs9PBNA2OWri3LU2Mi2QbHJIBd5dsOXc8+fs9Ou0It8wmiJU=
-ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1790861729;
-	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
-	 Message-ID:X-Sender:Organization:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=PsgLv0+JVFkZZR//5DOG/cSKwYlJbO9mVstpnbJOOns=;
-	b=n4m/SA5w/S0TBm36bPuWQuSg+32KCA0E2OaGjPPgvE6SVgq1dGjGX4aBTYPpFhAwmM//
-	 DPJZL/6J0T1TdZzoOxGCixYkPNeIHHkOQow1n9VmFqRCWn0ZqqRTDEsbITokAB9C8BWUa
-	 UuWsrgpF7QFqSqdc+so5pvE1U2cCXoBBiu1QkLu8nHTIldZNGb8/UnvAq9Z3Erb6RkJWJ
-	 f8sqMeL+6t3lhzNXEckY5LhQFE+jY1XQ27ylU0tQBM5kTh6AalCMPP1Z+AIemTdEYwppk
-	 LmYs1sBokEO6vKo+Ruohdgxy4m31euRM7Zb+VvFajew6BtpqyDy/wOZZzMzkO4y/Bzh4z
-	 t98oSCfhIm0ddfxY+l/14E2Yoo4ANhT1KS6FHIkY+5FzwBUnJcHkLomLiN4rJ5VOyC2U0
-	 lHNLDJRiH+xfLlsDsO1tyEo6OcLVbauBio4Spj4vZbc0YCriZ/iiDeeis5jQBAcC8U0sD
-	 jUoBkIL/PeXLNp/PJU3nrE6kwolLDKvYkTiIszcibunkZ6ZlBTe8WttABgEukJRe4lQHo
-	 JOT/zmPofM9ZL68XgyytTKaXDCMTi77xNI6/HD2gjg6UPu1WS2p5FQlvKnZUaxhKvADaF
-	 MmdSmGYn7Ze6G8OgPbhNvii888HRwHmrpDh6eA292dIHA0DdNUXTT8od5a011dQ=
-ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=mind.be header.i="@mind.be" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mind.be; s=google; t=1790862841; x=1791467641; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=S4MbgcEsjubIC2iCQCMddW6AjL4DRlCofl7UhRJBcPQ=;
+        b=QG9USQu5LxWpoXHU6tAdiH8Y02FTvADcFjwQWSlUnzmJoukqWdnfU2to8zD/bqqNev
+         arvElSGgf1V1geJaCxYP66PSvGPgybkVyF4Zlya0Pn7d83BVCHbIfodWXOWRd5lDA6JL
+         etK6DWfpSJ5MQYE3Z7UE1Y1a5/fynr1X+f4myw74lFcTLlx5eod1m54Qlv8kwyIPOxvw
+         lTEleroVWAbdhwrfKBV1HHm+wcSmiE6mUqkEpWP+YQONZE3AOfStig9Epnpq4qhAEM/k
+         /0ySO1jaGzYLML7YcSIBJV7aBmHXHgfb8wXkm+hWpxbhuVLYfe9NXss9mNKkgHhDYCBR
+         VI5Q==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790862841; x=1791467641;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:to:subject:user-agent:mime-version:date
+         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=S4MbgcEsjubIC2iCQCMddW6AjL4DRlCofl7UhRJBcPQ=;
+        b=InWMrlEJOLlvh4NrvV1PakKHfqUt4MGkfR7HirIjkwWd3gknwrC8/o23DmQVX/aV2R
+         D2F8rnCGLkqbxC+QMOX12DqlVDUGal6uKr9Ny3vg1zOXn/BY8amn9ToGBQ0zY5mp5+gm
+         elGJN81fbL5c+/IQzNCzjNcQaAY7w1KISul4ykd1tVll2xfipvTE4MVBSQ/3KCBpJmcP
+         Vb1koG9Wq689Vr+VAPw3xRt3lYqZQEk9YlVgUyQOpLRrcIGTQVff5+tTyObl0AV1yjn6
+         oCS0MUOWCdM541OEARuKHojwE3OKkUA1jbk9VhpRvctRJQpxP7ZnoimtlMnQq1MUrcZr
+         9HxA==
+X-Forwarded-Encrypted: i=1; AKwUvBy6x5f7VgoNDJHXU6zSkxy8uaTCkvLM/Syc8IP9kdZi5/IsOIoep+FTQxEmuC/2xi/mGdt6m8RIip8=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJE7FS49fHEPyi4tdbeBxiOxW7//yq8uFE31ZDAafCajiEGtXWx
+	ZU5dhbr9L/8J/EePFSLBo9YygPvLlzK+CHre0YQPvmDBh1GFfMoqWQEkJ/ED8azAXgIqLxorJmn
+	RAvYr
+X-Gm-Gg: AYBFou2o2IJfUH0x5pVnxjJeJ4RC8iZvF9LKBxCtZ4v+j268f2h4YVOzgUUb2TMPUky
+	i6IUIUWUXUNJYdD868uc38+tKH4KhJnRgT2xTjfJMJKnNQ2wxRIX2IeLbTA8/SuxIpub3AHP5dF
+	vcJ2NnrQPl9aexaNbuvSJhlj+GmbDBjwQ61AVi8N34gpt0dGHD0EuQ5yH5lG3w/iq2C2qCwY0D1
+	OseNxkBiCtN940TxDmIqiHosJ9bRRxeNVaZTQmlEWVhqu+nrhhJqgTtcUL6JGGwy6CdHQMjnZoi
+	xHeaDCBjwYICUYjAutx23eWLAvZ4Nhl2p9cX9PHKOMwxH25Jsl6rrBzZSr1mMw20NUymJw/Fw1M
+	WZlqWfubOhW+ytfWLsFEym8JjG/X9b+MNcj0J9asy6ZBWofiHvJXSfLmg+W7psSIfo5i4jtKe8m
+	ul65P2wXkp6O8eWa0K6GcTwDaujqQWAWPg4W3rLxtKDVvS7O0fOd1lium2hsaGXglI9y/d0CN2j
+	yfMmyA3QVD4IzL0TwDP4VWhcWxom+L96odVIc5MxkmhtTJMS/Ayqnk4AA==
+X-Received: by 2002:a17:907:e1c9:20b0:c2e:378c:8cee with SMTP id a640c23a62f3a-c2e378cadf5mr151820966b.34.1790862841251;
+        Thu, 01 Oct 2026 06:54:01 -0700 (PDT)
+Message-ID: <ca609bd8-03dc-40dd-894d-3fbf16133389@mind.be>
+Date: Thu, 1 Oct 2026 15:54:00 +0200
 MIME-Version: 1.0
-Date: Thu, 01 Oct 2026 15:35:28 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Jan Beulich <jbeulich@suse.com>, Dmytro Prokopchuk1
- <dmytro_prokopchuk1@epam.com>, Doug Goldstein <cardoe@cardoe.com>, Stefano
- Stabellini <sstabellini@kernel.org>, Anthony PERARD
- <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, Julien
- Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] misra: deviate C library-style functions from Misra
- C:2012 rule 11.8
-In-Reply-To: <3cb25b4c-6470-44a4-bc46-55776317ea67@citrix.com>
-References: <4abcb11ef287170ced74935cbee60c90058c1307.1790671787.git.dmytro_prokopchuk1@epam.com>
- <0a286fe9-2133-4f28-8fab-59f4e51d1484@suse.com>
- <446354d93ae04a07b86d7293705d7e46@bugseng.com>
- <0373fcc0-5bc9-4140-a2c9-52a31c7e42b5@suse.com>
- <2a8557d7ba88e95ec75148ff180ae0a0@bugseng.com>
- <f68982e1-f46c-4640-88b7-36ef362bf340@citrix.com>
- <cefa3793-a319-4041-9204-fb115b9c5511@suse.com>
- <3cb25b4c-6470-44a4-bc46-55776317ea67@citrix.com>
-Message-ID: <a8e271ad6bfa70f8c080d4a454f6f052@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=UTF-8;
- format=flowed
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH test-artifacts] Build minimal images with Buildroot
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+References: <20261001115226.471814-1-titouan.christophe@mind.be>
+ <3b206b17-d1e5-4c63-9e75-1e10c68bf226@citrix.com>
+Content-Language: en-US
+From: Titouan Christophe <titouan.christophe@mind.be>
+In-Reply-To: <3b206b17-d1e5-4c63-9e75-1e10c68bf226@citrix.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1790861729-01AC4A5B-9EC37A87/0/0
+X-purgate-ID: tlsNG-c1860d/1790862841-DF6D687B-DFF4763A/0/0
 X-purgate-type: clean
-X-purgate-size: 1073
+X-purgate-size: 3996
 
-On 2026-10-01 15:16, Andrew Cooper wrote:
-> On 01/10/2026 1:43 pm, Jan Beulich wrote:
->> On 01.10.2026 14:39, Andrew Cooper wrote:
->>> We want _Generic() for const-correctness reasons only.  (And possibly
->>> API transition work - this has mixed results but can substantially
->>> reduce churn in a series if done well).
->>> 
->>> This depends on moving to C11, which we need to at some point anyway
->>> even if weren't for _Generic().
->> Why is this? Can't we use _Generic() as a compiler extension, i.e. 
->> without
->> fully going to C11?
-> 
-> AIUI, the parsing rules had to change in C11 to support _Generic()'s
-> syntax, and IIRC Eclair can't parse it without specifying C11 or later.
-> 
+On 1/10/26 14:32, Andrew Cooper wrote:
+> On 01/10/2026 12:52 pm, Titouan Christophe wrote:
+>> Add a way to build minimal Xen + Linux dom0 images, and their corresponding
+>> cross-compilation toolchains with Buildroot [1]. This effectively provides
+>> a consistent cross-architecture development environment.
+>>
+>> Buildroot is a project that makes it easy to build embedded system images,
+>> including Linux, Xen or bootloaders. Leverage that build system to build
+>> minimal images for use in the CI environment of Xen sub-projects, namely
+>> Unikraft.
+>>
+>> This approach is based on a Buildroot External tree [2] which currently only
+>> provides 2 target defconfigs (arm64 and x86_64, both running on qemu).
+>> It uses a recent development version of Buildroot that integrates changes
+>> to build Xen on x86_64 [3], on its latest official version 4.22.0 [4].
+>> It also includes the latest kernel (linux-7.2.7 at the time of writing).
+>>
+>> As a byproduct, aside xen+kernel+rootfs, we also get a cross-compilation
+>> toolchain (that runs on x86_64 hosts). This makes it easy to cross-compile
+>> domUs for arm64, and it alleviates dynamic libraries mismatches when
+>> adding userspace programs to the dom0 Linux image. As an example, one such
+>> problem: Alpine linux is based on musl while your regular development
+>> computer is probably based on glibc, which causes issues if you are
+>> recompiling `xl` and try to use it in the Alpine image.
+>>
+>> [1] https://buildroot.org/
+>> [2] https://buildroot.org/downloads/manual/manual.html#outside-br-custom
+>> [3] https://gitlab.com/buildroot.org/buildroot/-/commit/0bf8b2ecee6b1b41746e8863b57c2c5ba3a623b1
+>> [4] https://gitlab.com/buildroot.org/buildroot/-/commit/a962be2eea146e06661712159698bc7cbf3305f2
+>>
+>> This work is derived from this original series:
+>> https://gitlab.com/xen-project/fusa/unikraft/-/merge_requests/1
+>>
+>> Signed-off-by: Titouan Christophe <titouan.christophe@mind.be>
+> Thankyou for your submission.
+Hi Andrew, and thank you for having looked so quickly into this patch.
 
-That's not true, ECLAIR copes just fine with _Generic regardless of the 
--std:
+>
+> How are you intending to use this image?  There's no consumer shown, so
+> it's hard to judge the patch.
 
-0|$ cat p.c
-void f(void) {
-   int x;
-   _Generic(x, int: 0, unsigned: 1);
-}
-nicola@nico:~
-0|$ eclair_env -- gcc -std=c99 -c p.c
+The goal is to obtain a `binaries` directory containing xen, linux and 
+its rootfs; as well as the corresponding cross-compilation toolchain 
+(either additional linux applications, or "bare" domUs to run with Xen).
 
+Concretely, my next step would be to use that in Unikraft's CI in the 
+following manner:
+1. Download the latest binaries from test-artifacts (that should provide 
+the latest Xen and a suitable linux)
+2. Cross-compile a Unikraft application
+3. Launch it on Xen, and assert expected output (similarly to the smoke 
+tests in 
+https://gitlab.com/xen-project/xen/-/tree/staging/automation/scripts)
 
--- 
-Nicola Vetrini, B.Sc.
-Software Engineer
-BUGSENG (https://bugseng.com)
-LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
+Therefore, Xen serves as a base platform for the above, and it feels 
+like a stretch to have to recompile it from scratch in Unikraft's CI. 
+Perhaps there are other projects that could benefit from this ?
+
+As far as I understand, all Xen tests are currently run on their native 
+architecture (ie. arm64 runs on arm64 hosts etc...), and I had some 
+trouble adding programs to the alpine images due to dynamic libraries 
+mismatches (musl vs. glibc for example).
+
+> One thing I see is that it intentionally embeds a fixed kernel and
+> (commented but not actually added yet) Xen, and I'm not sure that's a
+> route we want to go down.
+
+Nit: Xen IS actually included, not sure to which commented section you 
+are referring ?
+
+>
+> As for compiling the binary somewhere and copying it to a different
+> environment, we have build containers for that, and I don't see how
+> using buildroot changes the problem.
+
+As you might guess, I'm quite new to the Xen Project :) Are these "build 
+containers" the ones obtained in the test-artifacts repository ? If not, 
+where are they coming from, and how are they created ?
+
+>
+> ~Andrew
+
+Kind regards,
+Titouan
 
