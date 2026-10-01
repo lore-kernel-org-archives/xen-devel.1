@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B497CA5FD2
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 31BE7CA5FCE
 	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:33:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438206.1657100 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1438198.1657074 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCF1s-0005CF-Rx; Thu, 01 Oct 2026 11:32:48 +0000
+	id 1xCF1r-0004hs-Ht; Thu, 01 Oct 2026 11:32:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438206.1657100; Thu, 01 Oct 2026 11:32:48 +0000
+Received: by outflank-mailman (output) from mailman id 1438198.1657074; Thu, 01 Oct 2026 11:32:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCF1s-00058d-KA; Thu, 01 Oct 2026 11:32:48 +0000
-Received: by outflank-mailman (input) for mailman id 1438206;
- Thu, 01 Oct 2026 11:26:25 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xCF1r-0004gz-D1; Thu, 01 Oct 2026 11:32:47 +0000
+Received: by outflank-mailman (input) for mailman id 1438198;
+ Thu, 01 Oct 2026 11:23:20 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <david@kernel.org>) id 1xCEvh-0003DA-OP
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:26:25 +0000
+ (envelope-from <david@kernel.org>) id 1xCEsi-0002xp-3y
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:23:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCEvh-0000kk-58
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:26:25 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xCEsh-002cuD-HN
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:23:19 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <david@kernel.org>)
- id 6abe4358-e002-0a2a0a5209dd-0a2a4502d4ac-22
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:26:25 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abe42a5-2eae-0a2a0a5409dd-0a2a4505e8ca-10
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:23:19 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <david@kernel.org>)
- id 6abe435f-6ca4-0a2a45020019-ac6904fec094-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:26:24 +0200
+ id 6abe42a5-4cb1-0a2a45050019-aceafc1f8286-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:23:19 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 5EC12601E4;
- Thu,  1 Oct 2026 11:26:23 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9CD141F000FF;
- Thu,  1 Oct 2026 11:25:51 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id CB11E43CDE;
+ Thu,  1 Oct 2026 11:23:16 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 09C481F000FF;
+ Thu,  1 Oct 2026 11:22:47 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,32 +52,30 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790853983;
-	bh=Gpkw0FkXm2sEcS5oXM/km9M95p6Lr/sv8WQxRY54vDc=;
+	s=k20260515; t=1790853796;
+	bh=e65AJN+dizDpNgTUq4a0Cxwv8xeFTHb03ml1zIvkCoQ=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=NVCLDxeTK413A0ZVScuOliWCL/BeACZG41ga59YonpVi33x8PdZhsMtn/8oq+ygOX
-	 ZKav51j3DB5hvxSALe8T+A85q01eQsw34pLNny1jJJ57fF2idAnltjr0LE9PQl0VtO
-	 2EgWIzgB/LmAzc1XT/UYRxAbbgoVPexalg8KVzcWsDnpuRLWtkfE2p7YRoWrQHp6d6
-	 Kpr9E/bjHpPeAud/sdVZeQRfNhP7XdrgducvsrOUBbVhR6XxxcX0rYUJMUmE+ipY0X
-	 +8tC+AQSxR9a/ZEWQqt9Y7lkR9+EqYVsu+deESVKbABTftQ15M+EZ1nyBJoEfAoSbU
-	 mz8vJo6ciRt9w==
-Message-ID: <b3e226c7-0cbd-4989-937a-edd28cc62ab2@kernel.org>
-Date: Thu, 1 Oct 2026 13:25:48 +0200
+	b=hq1jxQGWzfify63ZgZEC2/fTTtnkxCsb0bizh56Uwcr6HWZKYoDtzLAFE/he9Pr/3
+	 OBvyMZtgVbRz0AtkC8gljG+lq9UL50oTsGKJDPGHK8jZJIpT5dYB8hyBjZJXNOxLRz
+	 S1g4fJkhFx4OhWbRxwbh5UP/VmxG+SgV7NC4wNLWdSvJKJsZSB2wPLKQlnN6Pd/MOU
+	 AyvCel6IqNdq6bPj/vEEPmH4T2cCnmdvEGZQUWWySwrQ1KwV4DDeKV0/oxJqkb4dkM
+	 SU0m4lXhUuDVnTU/1yFOTftTVkqDtBxeH3Z1k8kBGVDEVovf+RLA3zW5xQqJ4ct+O6
+	 UbDMDSXAUlYtA==
+Message-ID: <2dcd9dbc-99ca-4f5e-8e25-f42977763c84@kernel.org>
+Date: Thu, 1 Oct 2026 13:19:19 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/9] mm: use hw_pte_t for generic PTE table storage
+Subject: Re: [PATCH v3 6/9] mm: add hw_pte_val for HW PTE storage
 To: Muhammad Usama Anjum <usama.anjum@arm.com>,
- Anshuman Khandual <anshuman.khandual@arm.com>
-Cc: Andrew Morton <akpm@linux-foundation.org>,
- Lorenzo Stoakes <ljs@kernel.org>, "Liam R. Howlett" <liam@infradead.org>,
- Vlastimil Babka <vbabka@kernel.org>, Mike Rapoport <rppt@kernel.org>,
- Suren Baghdasaryan <surenb@google.com>, Michal Hocko <mhocko@suse.com>,
- Xu Xin <xu.xin16@zte.com.cn>, Chengming Zhou <chengming.zhou@linux.dev>,
- Jann Horn <jannh@google.com>, Muchun Song <muchun.song@linux.dev>,
- Oscar Salvador <osalvador@suse.de>, Pedro Falcato <pfalcato@suse.de>,
- Arnd Bergmann <arnd@arndb.de>, Will Deacon <will@kernel.org>,
- "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>, Nick Piggin
- <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
+ Andrew Morton <akpm@linux-foundation.org>, Lorenzo Stoakes <ljs@kernel.org>,
+ "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
+ Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
+ Michal Hocko <mhocko@suse.com>, Xu Xin <xu.xin16@zte.com.cn>,
+ Chengming Zhou <chengming.zhou@linux.dev>, Jann Horn <jannh@google.com>,
+ Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
+ Pedro Falcato <pfalcato@suse.de>, Arnd Bergmann <arnd@arndb.de>,
+ Will Deacon <will@kernel.org>, "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
+ Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
  Pasha Tatashin <pasha.tatashin@soleen.com>, Rik van Riel <riel@surriel.com>,
  Harry Yoo <harry@kernel.org>, Lance Yang <lance.yang@linux.dev>,
  Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
@@ -124,17 +122,15 @@ Cc: Andrew Morton <akpm@linux-foundation.org>,
  <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
  Simona Vetter <simona@ffwll.ch>, Juergen Gross <jgross@suse.com>,
  Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- linux-kernel@vger.kernel.org, linux-mm@kvack.org,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  linux-fsdevel@vger.kernel.org, linux-arch@vger.kernel.org,
  linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
  linux-perf-users@vger.kernel.org, damon@lists.linux.dev,
  kasan-dev@googlegroups.com, intel-gfx@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org
 References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
- <20260922-pte0-v3-3-5670b8cb9059@arm.com>
- <xzlxdkrjilskjcagnl33eed7ijxrgfhoalmmmq5ks3wgjmkkhi@zchtxpr2amff>
- <63db3469-82d0-4997-9bcf-31bb3aa59deb@arm.com>
+ <20260922-pte0-v3-6-5670b8cb9059@arm.com>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -181,46 +177,56 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <63db3469-82d0-4997-9bcf-31bb3aa59deb@arm.com>
+In-Reply-To: <20260922-pte0-v3-6-5670b8cb9059@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1790853985-313CC2AC-0D452CF3/0/0
+X-purgate-ID: tlsNG-c201ff/1790853799-726B52A1-EBB95A23/0/0
 X-purgate-type: clean
-X-purgate-size: 1786
+X-purgate-size: 1651
 
-On 9/30/26 19:40, Muhammad Usama Anjum wrote:
-> On 30/09/2026 5:35 am, Anshuman Khandual wrote:
->> On Tue, Sep 22, 2026 at 06:12:31PM +0100, Muhammad Usama Anjum wrote:
->>> Generic page-table interfaces use pte_t * for both pointers to PTE table
->>> storage and pointers to software PTE values. Convert the generic
->>> declarations and their MM, fs, and kernel users together so parameters,
->>> return types, callbacks, and local pointers that designate table storage
->>> use hw_pte_t *.
->>>
->>> Include linux/pgtable_types.h from headers that expose the converted
->>> interfaces. It continues to provide pgprot_t to vmalloc.h through
->>> asm/page.h.
->>>
->>> Keep software PTE values as pte_t and retain pte_t * for value interfaces.
->>>
->>> No architecture selects ARCH_HAS_HW_PTE_T at this point, so hw_pte_t
->>> remains an alias of pte_t and this changes the interface vocabulary without
->>> changing representation or behavior.
->>>
->>> Most of this mechanical conversion was generated with the Coccinelle script
->>> included in the cover letter. The script deliberately ignores pte_t *
->>
->> Just wondering - should this Coccinelle script that converted all these
->> instances be saved inside ./scripts/coccinelle/ for future referene.
+On 9/22/26 19:12, Muhammad Usama Anjum wrote:
+> Atomic PTE updates need an lvalue for the bits stored in an HW PTE.
+> pte_val() only accepts a SW PTE value, so it cannot operate directly on
+> a distinct hw_pte_t.
 > 
-> Thanks for the suggestion. This script was written for this one-time conversion
-> and requires manual review to distinguish HW PTE table pointers from SW PTE
-> pointers. After the conversion, it would not be useful.
-> (Maybe other arch can use it to do their conversion. But they can always
-> copy script from the series)
+> Add hw_pte_val() to expose the underlying pte_val() lvalue. Access the
+> wrapper's __pte member when hw_pte_t is distinct, and use pte_val()
+> directly when it remains an alias of pte_t.
+> 
+> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+> ---
+> Changes in v3:
+> - Moved from the arm64 series to generic series as it makes more sense
+>   to add this in generic with all other changes. Usually we only add
+>   code where its get used. But this whole series wouldn't get used
+>   until an arch started using HW PTEs.
+> ---
+>  include/linux/pgtable_types.h | 4 ++++
+>  1 file changed, 4 insertions(+)
+> 
+> diff --git a/include/linux/pgtable_types.h b/include/linux/pgtable_types.h
+> index d6c5a7548550b..ee4eace5c3e1c 100644
+> --- a/include/linux/pgtable_types.h
+> +++ b/include/linux/pgtable_types.h
+> @@ -9,9 +9,13 @@
+>  #ifdef CONFIG_ARCH_HAS_HW_PTE_T
+>  typedef struct __hw_pte_t { pte_t __pte; } hw_pte_t;
+>  #define __pte_from_hw(pte)	((pte).__pte)
+> +
+> +#define hw_pte_val(x)  pte_val((x).__pte)
+>  #else
+>  #define hw_pte_t pte_t
+>  #define __pte_from_hw(pte)	(pte)
+> +
+> +#define hw_pte_val(x)  pte_val(x)
+>  #endif
 
-Agreed, the script is not expected to be reused once merged. Which is different
-to other conversions where the old way of doing it can silently sneak in again.
+I was just about to say: this series doesn't add any users. You should add that
+detail to the patch description: "prepare for usage in arch code" or sth like that.
+
+With that
+
+Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 
 -- 
 Cheers,
