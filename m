@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BC02CA5FD4
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B806ACA5FB3
 	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:33:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438194.1657068 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1438200.1657080 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCF1r-0004fR-91; Thu, 01 Oct 2026 11:32:47 +0000
+	id 1xCF1r-0004nZ-Ri; Thu, 01 Oct 2026 11:32:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438194.1657068; Thu, 01 Oct 2026 11:32:47 +0000
+Received: by outflank-mailman (output) from mailman id 1438200.1657080; Thu, 01 Oct 2026 11:32:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCF1r-0004fK-6H; Thu, 01 Oct 2026 11:32:47 +0000
-Received: by outflank-mailman (input) for mailman id 1438194;
- Thu, 01 Oct 2026 11:19:50 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xCF1r-0004n0-KR; Thu, 01 Oct 2026 11:32:47 +0000
+Received: by outflank-mailman (input) for mailman id 1438200;
+ Thu, 01 Oct 2026 11:23:52 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <david@kernel.org>) id 1xCEpK-0001oH-5e
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:19:50 +0000
+ (envelope-from <david@kernel.org>) id 1xCEtE-00030e-Q3
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:23:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCEpJ-001gBA-F8
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:19:49 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xCEtE-00CrPB-6n
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:23:52 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <david@kernel.org>)
- id 6abe41bb-8faa-0a2a0a5109dd-0a2a4502acfa-42
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:19:49 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abe42c8-2eae-0a2a0a5409dd-0a2a4505cd4c-0
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:23:52 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <david@kernel.org>)
- id 6abe41d3-6ca4-0a2a45020019-aceafc1f81d4-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:19:48 +0200
+ id 6abe42c6-4cb1-0a2a45050019-ac6904fe8580-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:23:51 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id A6BA243E25;
- Thu,  1 Oct 2026 11:19:46 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7E3D31F000FF;
- Thu,  1 Oct 2026 11:19:22 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 3B5B760A57;
+ Thu,  1 Oct 2026 11:23:50 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEA3E1F000FF;
+ Thu,  1 Oct 2026 11:23:19 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,21 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790853586;
-	bh=QFQFkWDnC7jLqttKnpyOh/RzATFY2MNc7SamlM3r9CY=;
+	s=k20260515; t=1790853829;
+	bh=kf6DGNVTAfNJlmV6n1mnXsg4ktNEvr3LbpOB3nxPaDE=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=nMbvvVKzbLfiBDmwx5000bOF+s2wwI5IUpFYTI/iQmTRFaqEIRPkxAnIgPgtRkbJ0
-	 aqsar7aBQQWF17j7qm7re98QK2MXp/SjTXPj6Jaave3l2lYP+m0Pz8NwLOPWtJii3d
-	 +/JslHjvapBJl1QgKIGa/tDOAtKuTUTa7pAFOFLGVfS4bA6CsFZeBwjmyDK95aJdS1
-	 9ukUJ793Yc9KrIfWLnhz27LyPhzI15LRk/k7ivImSysTbIiVyAS0KMu7lJbra/Pesz
-	 pWFxc9zKJFzMFMEYqdxKzyhJGBS5wy0U/BzhIpkvR+1jEWvnD3SfLtCnn4oQTcUb0z
-	 8MuItJ69xgTaw==
-Message-ID: <e94dd0fc-3381-4545-9ede-513fcb2b8243@kernel.org>
-Date: Thu, 1 Oct 2026 13:17:18 +0200
+	b=h4CPFsltJBUoB1HezA4bvarNWaCYFqBa9hBNxc+xCNO9nmfmhUT/wWKO5h1TlPXIc
+	 GDcAHYvPrvXUUAdbanMCx0eH+gZVlMuBMNeu1sx6Mkedl4IpqYJoXRAvrhcsyv+r6m
+	 RMOwLgwZt2tR6GpLFOAQOaF+G9JYEPfVrthsR+29KjdXDX9BD0jIpGaVMsh4wshd8/
+	 1V9HgLQZNdCr5wRgqJ8ZKr2TgosbMOG52qE9tjBdGDKvkUBI6BT95ilyElZCxT2gq2
+	 sTZn6z41rW5NtndnGGja5mbMNd0FQbRt4rsUAYkIglECZ5nHiJQcrjE0Gm51PZvf3T
+	 wzXZdyJs8fI4A==
+Message-ID: <f61c0ee3-0eb4-47c4-ac52-66b72764e242@kernel.org>
+Date: Thu, 1 Oct 2026 13:20:13 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 5/9] mm: convert PTE table entry to pte
+Subject: Re: [PATCH v3 7/9] mm/kasan: use hw_pte_t for the early shadow PTE
+ table
 To: Muhammad Usama Anjum <usama.anjum@arm.com>,
  Andrew Morton <akpm@linux-foundation.org>, Lorenzo Stoakes <ljs@kernel.org>,
  "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
@@ -130,7 +131,7 @@ Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  kasan-dev@googlegroups.com, intel-gfx@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org
 References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
- <20260922-pte0-v3-5-5670b8cb9059@arm.com>
+ <20260922-pte0-v3-7-5670b8cb9059@arm.com>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -177,79 +178,28 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <20260922-pte0-v3-5-5670b8cb9059@arm.com>
+In-Reply-To: <20260922-pte0-v3-7-5670b8cb9059@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1790853589-309C32AC-39732091/0/0
+X-purgate-ID: tlsNG-c201ff/1790853832-F4CA02A1-2F0249CE/0/0
 X-purgate-type: clean
-X-purgate-size: 2377
+X-purgate-size: 718
 
 On 9/22/26 19:12, Muhammad Usama Anjum wrote:
-> The non-MMU stub receives hw_pte_t but returns a software PTE value. It
-> has no attached PTE that requires ptep_get(), so convert only the stored
-> entry through __pte_from_hw().
+> kasan_early_shadow_pte is a complete PTE table rather than a software
+> PTE value. Declare and define its elements as hw_pte_t so the object uses
+> the PTE table storage type.
+> 
+> Read the first element through ptep_get(), which returns the software PTE
+> value expected by note_page_pte(), instead of accessing hw_pte_t storage
+> directly. This also uses the accessor selected by the architecture.
+> 
+> No architecture selects ARCH_HAS_HW_PTE_T at this point, so the storage
+> representation remains unchanged.
 > 
 > Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
-> ---
-> Changes since v1:
-> - Explain why the NOMMU stub does not use ptep_get().
-> - Use software PTE value terminology.
-> ---
->  include/linux/hugetlb.h | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
-> 
-> diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
-> index 0d2101facaa50..637fc863d3687 100644
-> --- a/include/linux/hugetlb.h
-> +++ b/include/linux/hugetlb.h
-> @@ -1278,7 +1278,8 @@ static inline pte_t huge_ptep_clear_flush(struct vm_area_struct *vma,
->  #ifdef CONFIG_MMU
->  	return ptep_get(ptep);
->  #else
-> -	return *ptep;
-> +	/* No attached PTE that requires ptep_get(). */
-> +	return __pte_from_hw(*ptep);
->  #endif
->  }
->  
-> 
 
-Okay, that looks quite odd. No NOMMU code should ever be calling this helper. I
-can understand that some NOMMU code might, for some odd reason, end up including
-hguetlb.h where we have !CONFIG_HUGETLB_PAGE.
-
-But let's see who actually calls huge_ptep_clear_flush():
-
-arch/arm64/mm/hugetlbpage.c: only with CONFIG_HUGETLB_PAGE
-mm/hugetlb.c: only with CONFIG_HUGETLB_PAGE
-mm/rmap.c: only after checking folio_test_hugetlb().
-
-I suspect we can simply do:
-
-diff --git a/include/linux/hugetlb.h b/include/linux/hugetlb.h
-index 80a5a03e9cee..8642c863c1b7 100644
---- a/include/linux/hugetlb.h
-+++ b/include/linux/hugetlb.h
-@@ -1268,15 +1268,8 @@ static inline void hugetlb_count_sub(long l, struct
-mm_struct *mm)
- pte_t huge_ptep_get(struct mm_struct *mm, unsigned long addr, pte_t *ptep);
- unsigned long huge_pte_dirty(pte_t pte);
-
--static inline pte_t huge_ptep_clear_flush(struct vm_area_struct *vma,
--                                         unsigned long addr, pte_t *ptep)
--{
--#ifdef CONFIG_MMU
--       return ptep_get(ptep);
--#else
--       return *ptep;
--#endif
--}
-+pte_t huge_ptep_clear_flush(struct vm_area_struct *vma, unsigned long addr,
-+               pte_t *ptep);
-
- static inline void set_huge_pte_at(struct mm_struct *mm, unsigned long addr,
-                                   pte_t *ptep, pte_t pte, unsigned long sz)
-
+Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 
 -- 
 Cheers,
