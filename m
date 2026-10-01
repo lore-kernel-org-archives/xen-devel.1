@@ -4,41 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CF3F6CA5FB3
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:33:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438204.1657091 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C6A09CA5FB3
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:52:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1438263.1657140 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCF1s-000524-CS; Thu, 01 Oct 2026 11:32:48 +0000
+	id 1xCFKx-0003Yj-Vi; Thu, 01 Oct 2026 11:52:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438204.1657091; Thu, 01 Oct 2026 11:32:48 +0000
+Received: by outflank-mailman (output) from mailman id 1438263.1657140; Thu, 01 Oct 2026 11:52:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCF1s-0004yt-6e; Thu, 01 Oct 2026 11:32:48 +0000
-Received: by outflank-mailman (input) for mailman id 1438204;
- Thu, 01 Oct 2026 11:24:58 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xCFKx-0003Yc-Sw; Thu, 01 Oct 2026 11:52:31 +0000
+Received: by outflank-mailman (input) for mailman id 1438263;
+ Thu, 01 Oct 2026 11:52:31 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <david@kernel.org>) id 1xCEuI-00037W-QF
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:24:58 +0000
+ (envelope-from <titouan.christophe@essensium.com>)
+ id 1xCFKw-0003YW-6h
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:52:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCEuI-00FWqd-6s
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:24:58 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xCFKv-0006tl-E5
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:52:29 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <david@kernel.org>)
- id 6abe42f0-2eae-0a2a0a5409dd-0a2a4501beee-36
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:24:58 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <david@kernel.org>)
- id 6abe4308-5984-0a2a45010019-ac6904fed124-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:24:57 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 7C18D601E4;
- Thu,  1 Oct 2026 11:24:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id AC6BE1F000FF;
- Thu,  1 Oct 2026 11:24:24 +0000 (UTC)
+ (envelope-from <titouan.christophe@essensium.com>)
+ id 6abe4963-bab6-0a2a0a5309dd-0a2a4508b992-38
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:52:29 +0200
+Received: from [74.125.228.171] (helo=mail-ej2-f43.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <titouan.christophe@essensium.com>)
+ id 6abe497d-f659-0a2a45080019-4a7de4aba3a5-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:52:29 +0200
+Received: by mail-ej2-f43.google.com with SMTP id
+ a640c23a62f3a-c2e20bb4583so257267866b.3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 04:52:29 -0700 (PDT)
+Received: from dragon.home ([2a02:a03f:63ab:dc01:1291:d1ff:fe92:3b5a])
+ by smtp.gmail.com with ESMTPSA id
+ a640c23a62f3a-c2e31c944aesm142248666b.17.2026.10.01.04.52.28
+ for <xen-devel@lists.xenproject.org>
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Oct 2026 04:52:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,155 +55,384 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790853896;
-	bh=OEsjZu9pCpcCr8EB0aUturWNWuV7FWxewuwQYtNdc3Q=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=HLd6ZytaONgcOlSzOhFnlQrczv91JhiZybTmAY3u05iS4ayseO+5Yx2VI45gfH68f
-	 mXtnRYNGaqZLs733sKIWSmsT/TbTok+iiekr8NPLYf79nh6ARU02xgvH/ohonwP3eo
-	 fETOL6iAjIxGEgoSPQobLYfo/Pzi78di1CBooBn4V2h2MI7S5tztfoznGBKtNplWg4
-	 eE+r5b2np7RtR7+yCaYzoZA4Lnf38OWea5/zFEHAYkRHQkMtrW1jiFt5EvED5gS914
-	 LqZITTH/DuzuhMUXkjsJtLA+anz87SER33y0MFu+awJN5mNP2XIoerPKjoK2r13Kqz
-	 aX2KDjXmrqxoA==
-Message-ID: <48123600-5843-4c71-9ca3-1a9f3062af67@kernel.org>
-Date: Thu, 1 Oct 2026 13:22:28 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=mind.be header.i="@mind.be" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:Subject:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=mind.be; s=google; t=1790855549; x=1791460349; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1LuPQtkjuq/IETZZ3B87abIAFWuwNq0Qb7879Nam4zY=;
+        b=PZmpNHpr1cCI56Y3/LR+u/PcAK0LZsuIoBpGiFyY4Ee0bZeXrdlhj929AWeDd7+tsa
+         WPLoKMbW5pEcQdmnNl62DGJwO6i+prI2jxcuk3O0F0mZiXaYlTRax2dufn1a7P8ElWRr
+         pTbde5KzZTerkDzeT4f+nHKTpi5EmR8DUo0b6ETJ0hOJRvW1xuBJ3iekvCz+HDP13m9R
+         sII1X5neOER9ti69RlMJv4NjVJ6ce2furgbCPTU6rU4PsDzUWTeOLe2KWGOGTvIqGT8r
+         fFJInkrxWSmiXvD6s2lGewPHweMKkW743a2K4YOx81trZD+2jKjswTf9Gd+opfstvUdS
+         3xIg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790855549; x=1791460349;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=1LuPQtkjuq/IETZZ3B87abIAFWuwNq0Qb7879Nam4zY=;
+        b=ff7ZK+XkZ9f1tHXgpDlOktK2zjjB+LzU8WMqxzmnMgULypavyrT0vsVspwrpO2En7U
+         1S6Ub0Vka8tMCWRjuYkTCXeN2luD9ioJQr94wgZB/ZOZFWMhYhKyrRppPl+nNQ+lsLSg
+         iC6qCr8XQTP7HmxEM8jWwW6bbkeIg6eoFqmgDsyMU0ySmSsD4XD+KDIautXduTWtGZ7z
+         MF4t2z/V9iEgcLp3N4xhxUM24KAwlcgVmzJ2+BZcAig0y3BVtyyl7Fih1xWjjUgXPtvw
+         /tV4MHK23jV+7F62gG5ZqHUKJPY6M/kvQ/6+7HJppTiqWsj/dCbVxGaGakpUBm9/1aMY
+         arGg==
+X-Gm-Message-State: AFuF++nPjABLeUizEpyVm2joAlVgk1A77SsNBsxi3XI7GJ2llTtG6IYV
+	v3DPVqIimER3dA/JLiXvWRHRK8oLzKMVR5O5ue8fwmnOKsMm3KfSerk4rsZMRfKKo/sAnoN5YJl
+	VI9Y/
+X-Gm-Gg: AYBFou3AXRn+nVDgIZhYjcA0Zd9kLQ1ThNsYxF6ZVOUqLGbrpNEVF871scdWRNsh/dA
+	wyx6J1+/axRyJpUm7bjEFF/lWZ/7e5vCivDHj+A04kNXAls6eAkh5zaDdVs7L8290Y7HOx1Gfx8
+	z00lHRkcyfIJfRqZacSC+AYrju6zWhMj/PtiQA/2OGNRgC2yN0PBuM6bwVkWBnvLHi6DyCSRev2
+	vCuqd7PcASVYQFGAcgjusdBuWUCFkoAfhBU4aT2tnR7XkU2DKn24p/p+EGhWIBOkEuPjyO3nqN3
+	buA9NqfSxm8Gij1KFZnGwu6Li09x5tAwoghwQ5z2cFu9o4+g+Sl1Or16/om8GS0dTQ9rrhp77lZ
+	06S7fW92buMQNgWboqg2sQR/9d0JDaQm8hkadBSHQmlVVNLZD0zMj+GYRqXoCYeAkN84MzTj0Ua
+	InnEeaiY1bBySzmGg3lwxDtfaGFuh6rU8FLhXyMmDHuBf1HVWTjHW1Oo7Zs8SJ4jkyPVwz4pAxw
+	mvUNobcSlA=
+X-Received: by 2002:a17:907:c15:b0:c2d:ca78:ea83 with SMTP id a640c23a62f3a-c2e23df5c63mr394338266b.38.1790855548583;
+        Thu, 01 Oct 2026 04:52:28 -0700 (PDT)
+From: Titouan Christophe <titouan.christophe@mind.be>
+To: xen-devel@lists.xenproject.org
+Subject: [PATCH test-artifacts] Build minimal images with Buildroot
+Date: Thu,  1 Oct 2026 13:52:25 +0200
+Message-ID: <20261001115226.471814-1-titouan.christophe@mind.be>
+X-Mailer: git-send-email 2.55.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 9/9] xen: use hw_pte_t for PTE range callbacks
-To: Muhammad Usama Anjum <usama.anjum@arm.com>,
- Andrew Morton <akpm@linux-foundation.org>, Lorenzo Stoakes <ljs@kernel.org>,
- "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
- Mike Rapoport <rppt@kernel.org>, Suren Baghdasaryan <surenb@google.com>,
- Michal Hocko <mhocko@suse.com>, Xu Xin <xu.xin16@zte.com.cn>,
- Chengming Zhou <chengming.zhou@linux.dev>, Jann Horn <jannh@google.com>,
- Muchun Song <muchun.song@linux.dev>, Oscar Salvador <osalvador@suse.de>,
- Pedro Falcato <pfalcato@suse.de>, Arnd Bergmann <arnd@arndb.de>,
- Will Deacon <will@kernel.org>, "Aneesh Kumar K.V" <aneesh.kumar@kernel.org>,
- Nick Piggin <npiggin@gmail.com>, Peter Zijlstra <peterz@infradead.org>,
- Pasha Tatashin <pasha.tatashin@soleen.com>, Rik van Riel <riel@surriel.com>,
- Harry Yoo <harry@kernel.org>, Lance Yang <lance.yang@linux.dev>,
- Chris Li <chrisl@kernel.org>, Kairui Song <kasong@tencent.com>,
- Kemeng Shi <shikemeng@huaweicloud.com>, Nhat Pham <nphamcs@gmail.com>,
- Baoquan He <baoquan.he@linux.dev>, Barry Song <baohua@kernel.org>,
- Youngjun Park <youngjun.park@lge.com>, Uladzislau Rezki <urezki@gmail.com>,
- Steven Rostedt <rostedt@goodmis.org>, Masami Hiramatsu
- <mhiramat@kernel.org>, Mathieu Desnoyers <mathieu.desnoyers@efficios.com>,
- Alexei Starovoitov <ast@kernel.org>, Daniel Borkmann <daniel@iogearbox.net>,
- Andrii Nakryiko <andrii@kernel.org>, Eduard Zingerman <eddyz87@gmail.com>,
- Kumar Kartikeya Dwivedi <memxor@gmail.com>,
- Martin KaFai Lau <martin.lau@linux.dev>, Song Liu <song@kernel.org>,
- Yonghong Song <yonghong.song@linux.dev>, Jiri Olsa <jolsa@kernel.org>,
- Emil Tsalapatis <emil@etsalapatis.com>,
- Ihor Solodrai <ihor.solodrai@linux.dev>, Ingo Molnar <mingo@redhat.com>,
- Arnaldo Carvalho de Melo <acme@kernel.org>,
- Namhyung Kim <namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>,
- Alexander Shishkin <alexander.shishkin@linux.intel.com>,
- Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>,
- James Clark <james.clark@linaro.org>, SJ Park <sj@kernel.org>,
- "Matthew Wilcox (Oracle)" <willy@infradead.org>, Jan Kara <jack@suse.cz>,
- Jason Gunthorpe <jgg@ziepe.ca>, John Hubbard <jhubbard@nvidia.com>,
- Peter Xu <peterx@redhat.com>, Leon Romanovsky <leon@kernel.org>,
- Zi Yan <ziy@nvidia.com>, Baolin Wang <baolin.wang@linux.alibaba.com>,
- Nico Pache <nico.pache@linux.dev>, Ryan Roberts <ryan.roberts@arm.com>,
- Dev Jain <dev.jain@arm.com>, Usama Arif <usama.arif@linux.dev>,
- Kiryl Shutsemau <kas@kernel.org>, Andrey Ryabinin <ryabinin.a.a@gmail.com>,
- Alexander Potapenko <glider@google.com>,
- Andrey Konovalov <andreyknvl@gmail.com>, Dmitry Vyukov <dvyukov@google.com>,
- Vincenzo Frascino <vincenzo.frascino@arm.com>,
- Miaohe Lin <linmiaohe@huawei.com>, Naoya Horiguchi
- <nao.horiguchi@gmail.com>, Matthew Brost <matthew.brost@intel.com>,
- Joshua Hahn <joshua.hahnjy@gmail.com>, Rakie Kim <rakie.kim@sk.com>,
- Byungchul Park <byungchul@sk.com>, Gregory Price <gourry@gourry.net>,
- Ying Huang <ying.huang@linux.alibaba.com>,
- Alistair Popple <apopple@nvidia.com>, Dennis Zhou <dennis@kernel.org>,
- Tejun Heo <tj@kernel.org>, Christoph Lameter <cl@gentwo.org>,
- Johannes Weiner <hannes@cmpxchg.org>, Qi Zheng <qi.zheng@linux.dev>,
- Shakeel Butt <shakeel.butt@linux.dev>,
- Axel Rasmussen <axelrasmussen@google.com>, Yuanchu Xie <yuanchu@google.com>,
- Wei Xu <weixugc@google.com>, Jani Nikula <jani.nikula@linux.intel.com>,
- Joonas Lahtinen <joonas.lahtinen@linux.intel.com>,
- Rodrigo Vivi <rodrigo.vivi@intel.com>, Tvrtko Ursulin
- <tursulin@ursulin.net>, David Airlie <airlied@gmail.com>,
- Simona Vetter <simona@ffwll.ch>, Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
-Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
- linux-fsdevel@vger.kernel.org, linux-arch@vger.kernel.org,
- linux-trace-kernel@vger.kernel.org, bpf@vger.kernel.org,
- linux-perf-users@vger.kernel.org, damon@lists.linux.dev,
- kasan-dev@googlegroups.com, intel-gfx@lists.freedesktop.org,
- dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org
-References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
- <20260922-pte0-v3-9-5670b8cb9059@arm.com>
-From: "David Hildenbrand (Arm)" <david@kernel.org>
-Content-Language: en-US
-Autocrypt: addr=david@kernel.org; keydata=
- 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
- qIws/H2t
-In-Reply-To: <20260922-pte0-v3-9-5670b8cb9059@arm.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1790853898-BF46D757-767D5534/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1790855549-D4D7087B-0E3D8B95/0/0
 X-purgate-type: clean
-X-purgate-size: 601
+X-purgate-size: 12760
 
-On 9/22/26 19:12, Muhammad Usama Anjum wrote:
-> Generic PTE range and remapping helpers now pass pointers to PTE table
-> storage as hw_pte_t *. Update the Xen callbacks to match those interfaces.
-> 
-> Keep software PTE values as pte_t and continue to access them through the
-> existing PTE helpers. This is required when Xen is built for an
-> architecture that selects the distinct hw_pte_t wrapper.
-> 
-> Reviewed-by: Juergen Gross <jgross@suse.com>
-> Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
+Add a way to build minimal Xen + Linux dom0 images, and their corresponding
+cross-compilation toolchains with Buildroot [1]. This effectively provides
+a consistent cross-architecture development environment.
 
-Acked-by: David Hildenbrand (Arm) <david@kernel.org>
+Buildroot is a project that makes it easy to build embedded system images,
+including Linux, Xen or bootloaders. Leverage that build system to build
+minimal images for use in the CI environment of Xen sub-projects, namely
+Unikraft.
 
+This approach is based on a Buildroot External tree [2] which currently only
+provides 2 target defconfigs (arm64 and x86_64, both running on qemu).
+It uses a recent development version of Buildroot that integrates changes
+to build Xen on x86_64 [3], on its latest official version 4.22.0 [4].
+It also includes the latest kernel (linux-7.2.7 at the time of writing).
+
+As a byproduct, aside xen+kernel+rootfs, we also get a cross-compilation
+toolchain (that runs on x86_64 hosts). This makes it easy to cross-compile
+domUs for arm64, and it alleviates dynamic libraries mismatches when
+adding userspace programs to the dom0 Linux image. As an example, one such
+problem: Alpine linux is based on musl while your regular development
+computer is probably based on glibc, which causes issues if you are
+recompiling `xl` and try to use it in the Alpine image.
+
+[1] https://buildroot.org/
+[2] https://buildroot.org/downloads/manual/manual.html#outside-br-custom
+[3] https://gitlab.com/buildroot.org/buildroot/-/commit/0bf8b2ecee6b1b41746e8863b57c2c5ba3a623b1
+[4] https://gitlab.com/buildroot.org/buildroot/-/commit/a962be2eea146e06661712159698bc7cbf3305f2
+
+This work is derived from this original series:
+https://gitlab.com/xen-project/fusa/unikraft/-/merge_requests/1
+
+Signed-off-by: Titouan Christophe <titouan.christophe@mind.be>
+---
+ .gitlab-ci.yml                                | 20 ++++++++++
+ br2-xendevel-external/.gitignore              |  2 +
+ br2-xendevel-external/Config.in               |  9 +++++
+ .../board/xendevel/common/rootfs-prune.sh     | 21 ++++++++++
+ .../xendevel/x86_64/linux-xen-dom0.fragment   | 40 +++++++++++++++++++
+ .../configs/xendevel_dom0_arm64_defconfig     | 34 ++++++++++++++++
+ .../configs/xendevel_dom0_x86_64_defconfig    | 38 ++++++++++++++++++
+ br2-xendevel-external/external.desc           |  2 +
+ br2-xendevel-external/external.mk             |  9 +++++
+ scripts/build-buildroot.sh                    | 35 ++++++++++++++++
+ 10 files changed, 210 insertions(+)
+ create mode 100644 br2-xendevel-external/.gitignore
+ create mode 100644 br2-xendevel-external/Config.in
+ create mode 100755 br2-xendevel-external/board/xendevel/common/rootfs-prune.sh
+ create mode 100644 br2-xendevel-external/board/xendevel/x86_64/linux-xen-dom0.fragment
+ create mode 100644 br2-xendevel-external/configs/xendevel_dom0_arm64_defconfig
+ create mode 100644 br2-xendevel-external/configs/xendevel_dom0_x86_64_defconfig
+ create mode 100644 br2-xendevel-external/external.desc
+ create mode 100644 br2-xendevel-external/external.mk
+ create mode 100755 scripts/build-buildroot.sh
+
+diff --git a/.gitlab-ci.yml b/.gitlab-ci.yml
+index d04822f..8db3a0b 100644
+--- a/.gitlab-ci.yml
++++ b/.gitlab-ci.yml
+@@ -81,3 +81,23 @@ linux-6.6.56-x86_64:
+ microcode-x86:
+   extends: .x86_64-artifacts
+   script: ./scripts/x86-microcode.sh
++
++
++#
++# Buildroot based artifacts
++#
++buildroot:
++  extends: .artifacts
++  image:
++    name: registry.gitlab.com/buildroot.org/buildroot/base:20250218.2110
++  parallel:
++    matrix:
++      - VARIANT: [arm64, x86_64]
++  cache:
++    key: buildroot-dl-${VARIANT}
++    paths:
++      - br2-xendevel-external/dl/
++  script:
++    - ./scripts/build-buildroot.sh "${VARIANT}"
++    - mkdir -p binaries
++    - cp br2-xendevel-external/xen-${VARIANT}/images/* binaries/
+diff --git a/br2-xendevel-external/.gitignore b/br2-xendevel-external/.gitignore
+new file mode 100644
+index 0000000..424351b
+--- /dev/null
++++ b/br2-xendevel-external/.gitignore
+@@ -0,0 +1,2 @@
++xen-arm64
++xen-x86_64
+diff --git a/br2-xendevel-external/Config.in b/br2-xendevel-external/Config.in
+new file mode 100644
+index 0000000..3c8e444
+--- /dev/null
++++ b/br2-xendevel-external/Config.in
+@@ -0,0 +1,9 @@
++# SPDX-License-Identifier: BSD-3-Clause
++#
++# Kconfig entry point for the XENDEVEL external tree. Entries appear under
++# "External options -> Xen dom0 + Unikraft domU development environment" in
++# `make menuconfig`.
++#
++# No XENDEVEL packages are defined yet; add
++#   source "$BR2_EXTERNAL_XENDEVEL_PATH/package/<name>/Config.in"
++# lines here as they are introduced.
+diff --git a/br2-xendevel-external/board/xendevel/common/rootfs-prune.sh b/br2-xendevel-external/board/xendevel/common/rootfs-prune.sh
+new file mode 100755
+index 0000000..7e3a661
+--- /dev/null
++++ b/br2-xendevel-external/board/xendevel/common/rootfs-prune.sh
+@@ -0,0 +1,21 @@
++#!/bin/sh
++# SPDX-License-Identifier: BSD-3-Clause
++#
++# Buildroot post-build script: shrink the dom0 target filesystem so the cpio
++# initramfs unpacks inside the dom0 memory window. $1 is the target directory.
++set -e
++T="$1"
++
++# qemu-xen BIOS/ROM/keymap blobs (~283MB) — unused by PV/PVH guests.
++rm -rf "$T/usr/share/qemu-xen"
++
++# Docs / man / info — not needed at runtime.
++rm -rf "$T/usr/share/doc" "$T/usr/share/man" "$T/usr/share/info"
++
++# The arch default kernel config is monolithic enough to boot dom0 without
++# loadable modules for the smoke test. Keep the xen-related modules if present,
++# drop the rest to shrink the initramfs.
++if [ -d "$T/lib/modules" ]; then
++	find "$T/lib/modules" -type f -name '*.ko' \
++		! -path '*xen*' -delete 2>/dev/null || true
++fi
+diff --git a/br2-xendevel-external/board/xendevel/x86_64/linux-xen-dom0.fragment b/br2-xendevel-external/board/xendevel/x86_64/linux-xen-dom0.fragment
+new file mode 100644
+index 0000000..a999333
+--- /dev/null
++++ b/br2-xendevel-external/board/xendevel/x86_64/linux-xen-dom0.fragment
+@@ -0,0 +1,40 @@
++# Linux kernel config fragment: x86_64 Xen dom0.
++#
++# The stock x86_64 kernel defconfig does NOT enable Xen (CONFIG_XEN is not set),
++# so the resulting bzImage carries no Xen PV ELF notes / PVH entry and Xen
++# refuses to build dom0 ("Will only load images built for the generic loader or
++# Linux images ... or with PHYS32_ENTRY set" / "Could not construct d0"). Turn on
++# Xen PV+PVH dom0, the hvc console, and the backend/toolstack devices (evtchn,
++# gntdev, gntalloc, xenfs, blk/net back) so the xl toolstack can drive the domU.
++CONFIG_HYPERVISOR_GUEST=y
++CONFIG_PARAVIRT=y
++CONFIG_XEN=y
++CONFIG_XEN_PV=y
++CONFIG_XEN_PV_SMP=y
++CONFIG_XEN_DOM0=y
++CONFIG_XEN_PV_DOM0=y
++CONFIG_XEN_PVH=y
++CONFIG_XEN_PVHVM=y
++CONFIG_XEN_SAVE_RESTORE=y
++CONFIG_XEN_BACKEND=y
++CONFIG_XENFS=y
++CONFIG_XEN_COMPAT_XENFS=y
++CONFIG_XEN_SYS_HYPERVISOR=y
++CONFIG_XEN_XENBUS_FRONTEND=y
++CONFIG_XEN_GNTDEV=y
++CONFIG_XEN_GRANT_DEV_ALLOC=y
++CONFIG_XEN_DEV_EVTCHN=y
++CONFIG_XEN_PRIVCMD=y
++CONFIG_XEN_BLKDEV_FRONTEND=y
++CONFIG_XEN_BLKDEV_BACKEND=y
++CONFIG_XEN_NETDEV_FRONTEND=y
++CONFIG_XEN_NETDEV_BACKEND=y
++CONFIG_HVC_XEN=y
++CONFIG_HVC_XEN_FRONTEND=y
++CONFIG_TTY=y
++# Monolithic kernel: build everything in, no loadable modules. This drops the
++# whole udev/libkmod module-loading path at boot (no .ko files to insert), so
++# the rootfs can also drop kmod + eudev. Every driver this QEMU dom0 needs
++# (ata_piix, e1000, virtio, 9p, xen blk/net back) is already =y in the x86_64
++# arch default config, so nothing required is lost.
++# CONFIG_MODULES is not set
+diff --git a/br2-xendevel-external/configs/xendevel_dom0_arm64_defconfig b/br2-xendevel-external/configs/xendevel_dom0_arm64_defconfig
+new file mode 100644
+index 0000000..cb802a8
+--- /dev/null
++++ b/br2-xendevel-external/configs/xendevel_dom0_arm64_defconfig
+@@ -0,0 +1,34 @@
++# aarch64 Xen dom0: hypervisor + xl toolstack + Linux
++
++BR2_aarch64=y
++BR2_cortex_a72=y
++
++BR2_TOOLCHAIN_EXTERNAL=y
++BR2_TOOLCHAIN_EXTERNAL_BOOTLIN=y
++BR2_TOOLCHAIN_EXTERNAL_BOOTLIN_AARCH64_GLIBC_STABLE=y
++
++BR2_TARGET_GENERIC_HOSTNAME="xen-dom0"
++BR2_TARGET_GENERIC_ISSUE="Xen dom0 (br2-xendevel-external)"
++BR2_TARGET_GENERIC_GETTY_PORT="console"
++
++# devtmpfs mounted by init + eudev, so /dev/null and the Xen
++# gnttab/evtchn/privcmd device nodes exist at runtime.
++BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_EUDEV=y
++
++BR2_LINUX_KERNEL=y
++BR2_LINUX_KERNEL_USE_ARCH_DEFAULT_CONFIG=y
++BR2_LINUX_KERNEL_NEEDS_HOST_OPENSSL=y
++
++BR2_PACKAGE_XEN=y
++BR2_PACKAGE_XEN_HYPERVISOR=y
++BR2_PACKAGE_XEN_TOOLS=y
++
++BR2_PACKAGE_KMOD=y
++BR2_PACKAGE_UTIL_LINUX_BINARIES=y
++
++BR2_TARGET_ROOTFS_CPIO=y
++BR2_TARGET_ROOTFS_CPIO_GZIP=y
++# BR2_TARGET_ROOTFS_TAR is not set
++BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL_XENDEVEL_PATH)/board/xendevel/common/rootfs-prune.sh"
++
++BR2_PACKAGE_HOST_ENVIRONMENT_SETUP=y
+diff --git a/br2-xendevel-external/configs/xendevel_dom0_x86_64_defconfig b/br2-xendevel-external/configs/xendevel_dom0_x86_64_defconfig
+new file mode 100644
+index 0000000..7e0d894
+--- /dev/null
++++ b/br2-xendevel-external/configs/xendevel_dom0_x86_64_defconfig
+@@ -0,0 +1,38 @@
++# x86_64 Xen dom0: hypervisor + xl toolstack + Linux
++
++BR2_x86_64=y
++
++BR2_TOOLCHAIN_EXTERNAL=y
++BR2_TOOLCHAIN_EXTERNAL_BOOTLIN=y
++BR2_TOOLCHAIN_EXTERNAL_BOOTLIN_X86_64_GLIBC_STABLE=y
++
++BR2_TARGET_GENERIC_HOSTNAME="xen-dom0"
++BR2_TARGET_GENERIC_ISSUE="Xen dom0 (br2-xendevel-external)"
++BR2_TARGET_GENERIC_GETTY_PORT="console"
++
++# The monolithic kernel has CONFIG_DEVTMPFS_MOUNT=y, so it creates every dev
++# (including the Xen control nodes /dev/xen/{evtchn,gntdev,privcmd,...} that
++# xenstored/xenconsoled need) at driver registration. That removes the need for
++# a userspace device manager and the libkmod/udev boot noise entirely.
++BR2_ROOTFS_DEVICE_CREATION_DYNAMIC_DEVTMPFS=y
++
++BR2_LINUX_KERNEL=y
++BR2_LINUX_KERNEL_USE_ARCH_DEFAULT_CONFIG=y
++BR2_LINUX_KERNEL_CONFIG_FRAGMENT_FILES="$(BR2_EXTERNAL_XENDEVEL_PATH)/board/xendevel/x86_64/linux-xen-dom0.fragment"
++BR2_LINUX_KERNEL_NEEDS_HOST_OPENSSL=y
++BR2_LINUX_KERNEL_NEEDS_HOST_LIBELF=y
++
++BR2_PACKAGE_XEN=y
++BR2_PACKAGE_XEN_HYPERVISOR=y
++BR2_PACKAGE_XEN_TOOLS=y
++
++# No kmod: the kernel is monolithic (CONFIG_MODULES=n), so there are no modules
++# to insert and nothing links against libkmod. Dropping it (and eudev, above)
++# removes the only consumer that was failing on the missing libkmod.so.2.
++
++BR2_TARGET_ROOTFS_CPIO=y
++BR2_TARGET_ROOTFS_CPIO_GZIP=y
++# BR2_TARGET_ROOTFS_TAR is not set
++BR2_ROOTFS_POST_BUILD_SCRIPT="$(BR2_EXTERNAL_XENDEVEL_PATH)/board/xendevel/common/rootfs-prune.sh"
++
++BR2_PACKAGE_HOST_ENVIRONMENT_SETUP=y
+diff --git a/br2-xendevel-external/external.desc b/br2-xendevel-external/external.desc
+new file mode 100644
+index 0000000..232eb0e
+--- /dev/null
++++ b/br2-xendevel-external/external.desc
+@@ -0,0 +1,2 @@
++name: XENDEVEL
++desc: Xen development environment
+diff --git a/br2-xendevel-external/external.mk b/br2-xendevel-external/external.mk
+new file mode 100644
+index 0000000..37cd1d8
+--- /dev/null
++++ b/br2-xendevel-external/external.mk
+@@ -0,0 +1,9 @@
++# SPDX-License-Identifier: BSD-3-Clause
++#
++# Buildroot external tree makefile fragment.
++#
++# Every package/*/*.mk under this tree is included by Buildroot. There are no
++# XENDEVEL-specific packages yet: the tree currently provides the dom0
++# defconfigs and board support files only.
++
++include $(sort $(wildcard $(BR2_EXTERNAL_XENDEVEL_PATH)/package/*/*.mk))
+diff --git a/scripts/build-buildroot.sh b/scripts/build-buildroot.sh
+new file mode 100755
+index 0000000..73ab123
+--- /dev/null
++++ b/scripts/build-buildroot.sh
+@@ -0,0 +1,35 @@
++#!/usr/bin/env bash
++
++set -e -o pipefail
++
++BR2_EXT_DIR=$(realpath $(dirname $0)/../br2-xendevel-external)
++
++BR_REPO=https://gitlab.com/buildroot.org/buildroot
++# First Buildroot version (2026.08-345-ga962be2eea) with Xen 4.22 on x86_64
++BR_COMMIT=a962be2eea146e06661712159698bc7cbf3305f2
++BR_DIR=${BR2_EXT_DIR}/buildroot
++export BR2_DL_DIR=${BR2_EXT_DIR}/dl
++
++# Not using `git clone --revision` as it requires git >= 2.49
++if [ "$(git -C ${BR_DIR} rev-parse HEAD 2>/dev/null)" != "${BR_COMMIT}" ]; then
++	git init -q ${BR_DIR}
++	git -C ${BR_DIR} fetch --depth=1 ${BR_REPO} ${BR_COMMIT}
++	git -C ${BR_DIR} checkout -q FETCH_HEAD
++fi
++
++do_build() {	
++	build_dir=${BR2_EXT_DIR}/xen-${1}
++	make BR2_EXTERNAL=${BR2_EXT_DIR} O=${build_dir} -C ${BR_DIR} xendevel_dom0_${1}_defconfig
++	make -C ${build_dir} source all sdk | grep '>>>'
++}
++
++for arg in $*; do
++	case "$arg" in
++		arm64|x86_64)
++			do_build $arg
++			;;
++		*)
++			echo "Unknown target $arg" >&2
++			exit 1
++	esac
++done
 -- 
-Cheers,
+2.55.0
 
-David
 
