@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B806ACA5FB3
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7001BCA5FCB
 	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:33:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438200.1657080 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1438208.1657107 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCF1r-0004nZ-Ri; Thu, 01 Oct 2026 11:32:47 +0000
+	id 1xCF1t-0005IO-AL; Thu, 01 Oct 2026 11:32:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438200.1657080; Thu, 01 Oct 2026 11:32:47 +0000
+Received: by outflank-mailman (output) from mailman id 1438208.1657107; Thu, 01 Oct 2026 11:32:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCF1r-0004n0-KR; Thu, 01 Oct 2026 11:32:47 +0000
-Received: by outflank-mailman (input) for mailman id 1438200;
- Thu, 01 Oct 2026 11:23:52 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xCF1s-0005GV-VZ; Thu, 01 Oct 2026 11:32:48 +0000
+Received: by outflank-mailman (input) for mailman id 1438208;
+ Thu, 01 Oct 2026 11:27:00 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <david@kernel.org>) id 1xCEtE-00030e-Q3
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:23:52 +0000
+ (envelope-from <david@kernel.org>) id 1xCEwF-0003GK-U2
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:27:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCEtE-00CrPB-6n
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:23:52 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xCEwE-00EDXV-OC
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:26:58 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <david@kernel.org>)
- id 6abe42c8-2eae-0a2a0a5409dd-0a2a4505cd4c-0
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:23:52 +0200
+ id 6abe437c-bab6-0a2a0a5309dd-0a2a450be7d4-28
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:26:58 +0200
 Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <david@kernel.org>)
- id 6abe42c6-4cb1-0a2a45050019-ac6904fe8580-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:23:51 +0200
+ id 6abe4381-b7e8-0a2a450b0019-ac6904fee5c6-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:26:58 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 3B5B760A57;
- Thu,  1 Oct 2026 11:23:50 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id BEA3E1F000FF;
- Thu,  1 Oct 2026 11:23:19 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id 38FCD60A59;
+ Thu,  1 Oct 2026 11:26:57 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 5706D1F00899;
+ Thu,  1 Oct 2026 11:26:26 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,21 +52,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790853829;
-	bh=kf6DGNVTAfNJlmV6n1mnXsg4ktNEvr3LbpOB3nxPaDE=;
+	s=k20260515; t=1790854016;
+	bh=IzfEyFhJfYK+uB46vBwebUVJX9+hiREC1XF3fSfGZUA=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=h4CPFsltJBUoB1HezA4bvarNWaCYFqBa9hBNxc+xCNO9nmfmhUT/wWKO5h1TlPXIc
-	 GDcAHYvPrvXUUAdbanMCx0eH+gZVlMuBMNeu1sx6Mkedl4IpqYJoXRAvrhcsyv+r6m
-	 RMOwLgwZt2tR6GpLFOAQOaF+G9JYEPfVrthsR+29KjdXDX9BD0jIpGaVMsh4wshd8/
-	 1V9HgLQZNdCr5wRgqJ8ZKr2TgosbMOG52qE9tjBdGDKvkUBI6BT95ilyElZCxT2gq2
-	 sTZn6z41rW5NtndnGGja5mbMNd0FQbRt4rsUAYkIglECZ5nHiJQcrjE0Gm51PZvf3T
-	 wzXZdyJs8fI4A==
-Message-ID: <f61c0ee3-0eb4-47c4-ac52-66b72764e242@kernel.org>
-Date: Thu, 1 Oct 2026 13:20:13 +0200
+	b=S+MQtz7zuMo19rFCKE3ytIWk7CFynaGBS50YcTRINWTK/69FE8EU5WXwU4YLcDdeI
+	 s9Do6bZlpvwiEVwgtaj9tIS7N18dxNolZ/ZEY2StJqCPVzklnEXLteF1u8hE+6KYAs
+	 76CrhAdicKoK7qFzSQ6inMlZtqgwGpP4vuGgEKL0Y9/HGMa27vAhF4L10zPhtXLPmP
+	 at8McMfify9jFinUv+Sdadf2Usvs5QzzGKfUxkmoykUDM3RjU/7T2ETtc60aAVnyot
+	 kxZGI1ar8zfZG4KRQbayNjm74RVS+RYzqvFsjwaotkhltxiPBfCZ6WHXWFzh5Tiq2g
+	 9ag/B8Tf96Twg==
+Message-ID: <fc9919bf-b9e2-45c2-bd7c-70b37341b664@kernel.org>
+Date: Thu, 1 Oct 2026 13:26:17 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 7/9] mm/kasan: use hw_pte_t for the early shadow PTE
- table
+Subject: Re: [PATCH v3 3/9] mm: use hw_pte_t for generic PTE table storage
 To: Muhammad Usama Anjum <usama.anjum@arm.com>,
  Andrew Morton <akpm@linux-foundation.org>, Lorenzo Stoakes <ljs@kernel.org>,
  "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
@@ -131,7 +130,7 @@ Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  kasan-dev@googlegroups.com, intel-gfx@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org
 References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
- <20260922-pte0-v3-7-5670b8cb9059@arm.com>
+ <20260922-pte0-v3-3-5670b8cb9059@arm.com>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -178,24 +177,35 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <20260922-pte0-v3-7-5670b8cb9059@arm.com>
+In-Reply-To: <20260922-pte0-v3-3-5670b8cb9059@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1790853832-F4CA02A1-2F0249CE/0/0
+X-purgate-ID: tlsNG-42698a/1790854018-A9EC69EA-4DBB3424/0/0
 X-purgate-type: clean
-X-purgate-size: 718
+X-purgate-size: 1265
 
 On 9/22/26 19:12, Muhammad Usama Anjum wrote:
-> kasan_early_shadow_pte is a complete PTE table rather than a software
-> PTE value. Declare and define its elements as hw_pte_t so the object uses
-> the PTE table storage type.
+> Generic page-table interfaces use pte_t * for both pointers to PTE table
+> storage and pointers to software PTE values. Convert the generic
+> declarations and their MM, fs, and kernel users together so parameters,
+> return types, callbacks, and local pointers that designate table storage
+> use hw_pte_t *.
 > 
-> Read the first element through ptep_get(), which returns the software PTE
-> value expected by note_page_pte(), instead of accessing hw_pte_t storage
-> directly. This also uses the accessor selected by the architecture.
+> Include linux/pgtable_types.h from headers that expose the converted
+> interfaces. It continues to provide pgprot_t to vmalloc.h through
+> asm/page.h.
 > 
-> No architecture selects ARCH_HAS_HW_PTE_T at this point, so the storage
-> representation remains unchanged.
+> Keep software PTE values as pte_t and retain pte_t * for value interfaces.
+> 
+> No architecture selects ARCH_HAS_HW_PTE_T at this point, so hw_pte_t
+> remains an alias of pte_t and this changes the interface vocabulary without
+> changing representation or behavior.
+> 
+> Most of this mechanical conversion was generated with the Coccinelle script
+> included in the cover letter. The script deliberately ignores pte_t *
+> pointers named ptentp because they designate software PTE values. The
+> result was then audited, and sites the script could not convert were
+> updated by hand.
 > 
 > Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
 
