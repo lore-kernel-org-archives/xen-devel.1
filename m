@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ECD64CA5FB3
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:32:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438202.1657087 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AF502CA5FCB
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:33:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1438210.1657113 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCF1s-0004ud-5P; Thu, 01 Oct 2026 11:32:48 +0000
+	id 1xCF1t-0005Ov-NH; Thu, 01 Oct 2026 11:32:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438202.1657087; Thu, 01 Oct 2026 11:32:48 +0000
+Received: by outflank-mailman (output) from mailman id 1438210.1657113; Thu, 01 Oct 2026 11:32:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCF1r-0004sv-U2; Thu, 01 Oct 2026 11:32:47 +0000
-Received: by outflank-mailman (input) for mailman id 1438202;
- Thu, 01 Oct 2026 11:24:25 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xCF1t-0005LC-BO; Thu, 01 Oct 2026 11:32:49 +0000
+Received: by outflank-mailman (input) for mailman id 1438210;
+ Thu, 01 Oct 2026 11:27:39 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <david@kernel.org>) id 1xCEtl-00033d-50
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:24:25 +0000
+ (envelope-from <david@kernel.org>) id 1xCEwt-0003HZ-EV
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:27:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCEtk-009ZRi-IB
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:24:24 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xCEws-002dQG-CH
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:27:38 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <david@kernel.org>)
- id 6abe42da-bab6-0a2a0a5309dd-0a2a4508bf68-46
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:24:24 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abe43aa-e002-0a2a0a5209dd-0a2a450a9328-0
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:27:38 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <david@kernel.org>)
- id 6abe42e6-f659-0a2a45080019-aceafc1fdafc-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:24:24 +0200
+ id 6abe43a9-f2d2-0a2a450a0019-ac6904fecc7c-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:27:38 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 6B58D4062D;
- Thu,  1 Oct 2026 11:24:22 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0A9C91F000FF;
- Thu,  1 Oct 2026 11:23:51 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id A0C48601E4;
+ Thu,  1 Oct 2026 11:27:36 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 7F5491F00898;
+ Thu,  1 Oct 2026 11:27:07 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,20 +52,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1790853862;
-	bh=E2dd2FaoT8IGI/PmgsNFfX51uTun/lYmybhUFgOLuQg=;
+	s=k20260515; t=1790854056;
+	bh=HRinFgClxsjCxzXrcM5ZxOKZ/5JIquj5jbimxGiUTO8=;
 	h=Date:Subject:To:Cc:References:From:In-Reply-To;
-	b=iSG5PXXsSQzGXjfn20lgjsoWKzQYmPp7ZZXFI6SGrx91yr02VUHV298N5BBJlMHaP
-	 M9ZYf/JJLZ9V8qfBwvqO39KJ8+pNUBetBcscChkH+0df5TkZ2sUcFBudzEgRioe8yb
-	 SSkRXj8/C/QKoSKPE6PW6Q2KDh9nZ+k4kuF1lqoDkQ0AIPD3Wb5f0fv4N/DCMAQq4z
-	 R7kwBsOJxrzykRLowKMFHGd4yy52IjUUPzYvPJjS5LMo0p5dAUpW9qrXPHDQCcdIJT
-	 g69Nx3deHliOYXzfa8TMAC4jPCvHeac6QoZcwkh6WGoSh+fwx0mvq3d2tEJx9NgDLq
-	 bPMwFw16qyx8Q==
-Message-ID: <28b5590b-e2e2-4eee-ac7b-c5c402822a24@kernel.org>
-Date: Thu, 1 Oct 2026 13:21:51 +0200
+	b=Ky6X3yIyUjjGya5AZ2z0J7ES0PO1SfluuP77TdLK4cH/5tB7JmDxOx5JmHguHbTS/
+	 /b53SZAJrduEMNol+itQc4hUm3oYIqiOIaUDFLDveSfCnkYT0toHIyq63iOl1Bcr0E
+	 LFrUwvyQRwIW6C5fp8PbruCBz0hBOSrd465V01o47SLY4K58h3wExxBgZh69KYO5ZH
+	 Wu118EUYFVgD1s1YuYtEhU8Vy5dw/GT2t4WKgiJR1s7vPjJz3t/3IedQszccKYRhy2
+	 so7DKhpsR4s+A5udrWW8RI/AbcWyEkjbKrIsp9SorRGRzmZoNzvimOYRr+/vcF4jm5
+	 3ubv4o7hB0KTg==
+Message-ID: <fe7ee974-fb29-43fd-8543-3d9f4e4755fb@kernel.org>
+Date: Thu, 1 Oct 2026 13:27:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 8/9] drm/i915: use hw_pte_t for PTE range callbacks
+Subject: Re: [PATCH v3 4/9] mm: convert PTE table entries in ptep_get()
 To: Muhammad Usama Anjum <usama.anjum@arm.com>,
  Andrew Morton <akpm@linux-foundation.org>, Lorenzo Stoakes <ljs@kernel.org>,
  "Liam R. Howlett" <liam@infradead.org>, Vlastimil Babka <vbabka@kernel.org>,
@@ -130,7 +130,7 @@ Cc: linux-kernel@vger.kernel.org, linux-mm@kvack.org,
  kasan-dev@googlegroups.com, intel-gfx@lists.freedesktop.org,
  dri-devel@lists.freedesktop.org, xen-devel@lists.xenproject.org
 References: <20260922-pte0-v3-0-5670b8cb9059@arm.com>
- <20260922-pte0-v3-8-5670b8cb9059@arm.com>
+ <20260922-pte0-v3-4-5670b8cb9059@arm.com>
 From: "David Hildenbrand (Arm)" <david@kernel.org>
 Content-Language: en-US
 Autocrypt: addr=david@kernel.org; keydata=
@@ -177,84 +177,20 @@ Autocrypt: addr=david@kernel.org; keydata=
  3iyY2Nsd7JxfKu1PRhCGwXzRw5TlfEsoRI7V9A8isUCoqE2Dzh3FvYHVeX4Us+bRL/oqareJ
  CIFqgYMyvHj7Q06kTKmauOe4Nf0l0qEkIuIzfoLJ3qr5UyXc2hLtWyT9Ir+lYlX9efqh7mOY
  qIws/H2t
-In-Reply-To: <20260922-pte0-v3-8-5670b8cb9059@arm.com>
+In-Reply-To: <20260922-pte0-v3-4-5670b8cb9059@arm.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1790853864-CCF4F87B-B2113664/0/0
+X-purgate-ID: tlsNG-4011c0/1790854058-514C7CFC-6E30D7BF/0/0
 X-purgate-type: clean
-X-purgate-size: 2823
+X-purgate-size: 439
 
 On 9/22/26 19:12, Muhammad Usama Anjum wrote:
-> apply_to_page_range() now passes PTE table storage to its callback as
-> hw_pte_t *. Update the i915 remap and selftest callbacks to match the new
-> type.
-> 
-> Continue to use ptep_get() for software PTE values and set_pte_at() for
-> updates.
-> The type remains an alias of pte_t on x86 until that architecture opts in.
+> ptep_get() now accepts a pointer to hw_pte_t storage but must continue to
+> return a software PTE value. Add __pte_from_hw for both generic hw_pte_t
+> definitions. Read the hw_pte_t table element atomically before converting
+> it to pte_t.
 > 
 > Signed-off-by: Muhammad Usama Anjum <usama.anjum@arm.com>
-> ---
-> Changes since v1:
-> - Use software PTE value terminology.
-> 
-> Changes since RFC v1:
-> - Clarify the effect on architectures that have not opted in.
-> ---
->  drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c | 4 ++--
->  drivers/gpu/drm/i915/i915_mm.c                     | 4 ++--
->  2 files changed, 4 insertions(+), 4 deletions(-)
-> 
-> diff --git a/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c b/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
-> index d01acfb7d93d0..056faf4a3618b 100644
-> --- a/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
-> +++ b/drivers/gpu/drm/i915/gem/selftests/i915_gem_mman.c
-> @@ -1690,7 +1690,7 @@ static int igt_mmap_gpu(void *arg)
->  	return 0;
->  }
->  
-> -static int check_present_pte(pte_t *pte, unsigned long addr, void *data)
-> +static int check_present_pte(hw_pte_t *pte, unsigned long addr, void *data)
->  {
->  	pte_t ptent = ptep_get(pte);
->  
-> @@ -1703,7 +1703,7 @@ static int check_present_pte(pte_t *pte, unsigned long addr, void *data)
->  	return 0;
->  }
->  
-> -static int check_absent_pte(pte_t *pte, unsigned long addr, void *data)
-> +static int check_absent_pte(hw_pte_t *pte, unsigned long addr, void *data)
->  {
->  	pte_t ptent = ptep_get(pte);
->  
-> diff --git a/drivers/gpu/drm/i915/i915_mm.c b/drivers/gpu/drm/i915/i915_mm.c
-> index fd89e7c7d8d6f..aab88e8edf946 100644
-> --- a/drivers/gpu/drm/i915/i915_mm.c
-> +++ b/drivers/gpu/drm/i915/i915_mm.c
-> @@ -48,7 +48,7 @@ static inline unsigned long sgt_pfn(const struct remap_pfn *r)
->  		return r->sgt.pfn + (r->sgt.curr >> PAGE_SHIFT);
->  }
->  
-> -static int remap_sg(pte_t *pte, unsigned long addr, void *data)
-> +static int remap_sg(hw_pte_t *pte, unsigned long addr, void *data)
->  {
->  	struct remap_pfn *r = data;
->  
-> @@ -70,7 +70,7 @@ static int remap_sg(pte_t *pte, unsigned long addr, void *data)
->  #define EXPECTED_FLAGS (VM_PFNMAP | VM_DONTEXPAND | VM_DONTDUMP)
->  
->  #if IS_ENABLED(CONFIG_X86)
-> -static int remap_pfn(pte_t *pte, unsigned long addr, void *data)
-> +static int remap_pfn(hw_pte_t *pte, unsigned long addr, void *data)
->  {
->  	struct remap_pfn *r = data;
->  
-> 
-
-We really have to get rid of apply_to_page_range(). A horrible interface for
-drivers to hack around stuff.
-
-For the time being
 
 Acked-by: David Hildenbrand (Arm) <david@kernel.org>
 
