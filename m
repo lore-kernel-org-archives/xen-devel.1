@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46910CA5FB3
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 12:33:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438296.1657169 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 493E8CA5FCB
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 12:40:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1438304.1657178 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCFyJ-00028Q-6M; Thu, 01 Oct 2026 12:33:11 +0000
+	id 1xCG5I-0003kN-PF; Thu, 01 Oct 2026 12:40:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438296.1657169; Thu, 01 Oct 2026 12:33:11 +0000
+Received: by outflank-mailman (output) from mailman id 1438304.1657178; Thu, 01 Oct 2026 12:40:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCFyJ-00028J-2l; Thu, 01 Oct 2026 12:33:11 +0000
-Received: by outflank-mailman (input) for mailman id 1438296;
- Thu, 01 Oct 2026 12:33:10 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xCG5I-0003kG-MW; Thu, 01 Oct 2026 12:40:24 +0000
+Received: by outflank-mailman (input) for mailman id 1438304;
+ Thu, 01 Oct 2026 12:40:23 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1xCFyH-00028D-Q4
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 12:33:09 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1xCG5H-0003kA-9U
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 12:40:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCFyD-000Fwl-QP
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 14:33:05 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xCG5G-001ulF-7s
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 14:40:22 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper@citrix.com>)
- id 6abe52fb-2eae-0a2a0a5409dd-0a2a450795e6-32
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 14:33:05 +0200
-Received: from [52.101.46.45]
- (helo=CO1PR03CU002.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abe54b3-bab6-0a2a0a5309dd-0a2a450587c8-16
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 14:40:22 +0200
+Received: from [52.101.193.28]
+ (helo=CH1PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrew.cooper@citrix.com>)
- id 6abe52ff-b4ea-0a2a45070019-34652e2de2df-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 14:33:05 +0200
+ id 6abe54b4-4cb1-0a2a45050019-3465c11c4959-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 14:40:21 +0200
 Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by CH9PR03MB731891.namprd03.prod.outlook.com (2603:10b6:610:315::18)
+ by CO1PR03MB5843.namprd03.prod.outlook.com (2603:10b6:303:6c::21)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.18; Thu, 1 Oct
- 2026 12:33:02 +0000
+ 2026 12:40:18 +0000
 Received: from CH8PR03MB8275.namprd03.prod.outlook.com
  ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
  ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0451.026; Thu, 1 Oct 2026
- 12:33:02 +0000
+ 12:40:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,30 +57,42 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=MQPvZtxlIoUuqBMAuyBG4VQFQQGpAkamF9+FGDTP6wBWowKU34pVnPIWBNoL6ZPcjt+RpcxC/h5g38sOjnjZ6rXM1bBc2gC01F0WXN+GTKhxdN9AXaaws5mj6Cv6qxT3E716feslrxkiMED0LAe+XYBoNyoh7gdwQTRfuvX3hyIlIGIDvocXicZ2X8TfNge4KWagzkyrIOTEOb1KXimMPPuUPfGHcVqKNgL9P9o/+OXBgJT1mOpMiXS66GBLPswPMCdryDUwizVTS7njlBLSYvKjjYPXC3gBOABu9hc5jHXLCToVF4WC308epn4yg30NPOEJPzE637Eh8KXwztnjxw==
+ b=vs1PxZq7JZ8/813m9RWEjXX7iGjAHWkLX7wL7GUC11Po7GyIvMRn8+zdMtct+48THgn+XbkhtHOHvm27WDvElm8se5cwMpUdg3koT8OfqFgyhj69V4crWIFx/44FikDFUQ7OQpFVmZN1JPcRxauLxqFvdZxFAus0YOk5PyD4xaWn2f78z3pDh4RbfHJ5Kj0RSDlE4k3akSv/Y0UpRyzWBoJMY2+ugqOjJK2VJQb5o3TxtIFvCaZEr6UQa7xJV3/4mYR1BR5yIPlqeJ48tXT1g93Qw57wSiFR6vG/BzcuQ8EECPC3BHq0RVmZafBiv7dDg50hKLtrbkDoQKv8cOwg5g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=iJ7udDsAE5YbltXcZPjf9RWVrFjR+37WTwSyC9Vm7js=;
- b=aYKb7l4dkmem8juIHbR53dscIrYBNyCb6GwaMpl5q8u2kSMpzFh3/u0RA/EorcAqbZbTxV2M8Jy6XyTGTUBFUAk9gv8N12+/09cRDfnzpA5xoC9hEQPqDXerwJUFmW7IeNVgKldLlp3JLb6YrMSP0sxsq7vyTKDz6Sd13WJ3kRJd80wW/wdQ9UPQjjA8uY53etFxkzU/GJegJB2/bKNAtVbuNXibRnZZWfnTj8MR4wE863uOrP+E4v9WogyIxWD+1FGFKwilZ070Ihj2rYCHHd4kwCa2oLK+9AlTbJWHQKlPwnY7KhznerVg5/uAigxKUvIWm36PhwnOa9HuwdnUFQ==
+ bh=Y4cere2LRtLINpQR31Xmx3gH2C2G6SLtbMgX1aAABLM=;
+ b=Kq/2UmYH6UCLx7juY5VJNBxuMxn5qoaS1Zqzs6DN/7vATyRrhDQSvElImm0y1d1dCa3SSos23AHtZPO85DsVeMFn9AmxbHz1TuRBZlzD0bIm5uMHQ4+dMAVgBq7zp8ibAWwifvvJuCgRWmRq+ZYgNnwzsWc6kTwCeihJSjsDZ+zVBk8FAVQH4zf27hgpVpkwDqdtxjORYowmnBHCQi1ntxC9Nf14PB334VvAH+YKz1S1f+3gkkoLhTPVXIIuOl/3hrseTonc56waFB2CBORF009EXxfJkmcnXkeoqwH/7N6JMT8wxCowckPE7f2qr0JyeRU0yI/gTa93aO3Xgb720Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=iJ7udDsAE5YbltXcZPjf9RWVrFjR+37WTwSyC9Vm7js=;
- b=q+xNTMsMEsLcb20rcqHtkvJYIqTI1WQ93HGZudPNG7+EuxvG2eXBBg9s7uFLV1LlNxqgxTY9CLP1IJelfT7irCUZMZdd1+ttFN4/FTTPKcRlG/E67w+FJm46TUSGm982gOcuuWy6zqHtxsegsOE+jgBDruJNMLQQiBkj6HJk7mg=
+ bh=Y4cere2LRtLINpQR31Xmx3gH2C2G6SLtbMgX1aAABLM=;
+ b=MzN0pLcZyv1yDjp3bI6fRBvP4vseWoPfYdMKeIRF8K5VeUV8j2Z57NSZCtJpowrm40eDKlxXdmSQOMMiSiZWH09DQtMqg0HjJVfLthuDuRzAbaTIjDlxRXRGdQoKUirHABOG7QTnxgRqDZxSqtLwD5DtGIK7JnpjRTHubFK0Csw=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <3b206b17-d1e5-4c63-9e75-1e10c68bf226@citrix.com>
-Date: Thu, 1 Oct 2026 13:32:58 +0100
+Message-ID: <f68982e1-f46c-4640-88b7-36ef362bf340@citrix.com>
+Date: Thu, 1 Oct 2026 13:39:55 +0100
 User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH test-artifacts] Build minimal images with Buildroot
-To: Titouan Christophe <titouan.christophe@mind.be>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>,
+ Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  xen-devel@lists.xenproject.org
-References: <20261001115226.471814-1-titouan.christophe@mind.be>
+Subject: Re: [PATCH] misra: deviate C library-style functions from Misra
+ C:2012 rule 11.8
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Jan Beulich <jbeulich@suse.com>
+References: <4abcb11ef287170ced74935cbee60c90058c1307.1790671787.git.dmytro_prokopchuk1@epam.com>
+ <0a286fe9-2133-4f28-8fab-59f4e51d1484@suse.com>
+ <446354d93ae04a07b86d7293705d7e46@bugseng.com>
+ <0373fcc0-5bc9-4140-a2c9-52a31c7e42b5@suse.com>
+ <2a8557d7ba88e95ec75148ff180ae0a0@bugseng.com>
 Content-Language: en-GB
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
@@ -126,126 +138,171 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <20261001115226.471814-1-titouan.christophe@mind.be>
+In-Reply-To: <2a8557d7ba88e95ec75148ff180ae0a0@bugseng.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: PA7P264CA0421.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:37d::22) To CH8PR03MB8275.namprd03.prod.outlook.com
+X-ClientProxiedBy: LO4P123CA0348.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18d::11) To CH8PR03MB8275.namprd03.prod.outlook.com
  (2603:10b6:610:2b9::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|CH9PR03MB731891:EE_
-X-MS-Office365-Filtering-Correlation-Id: 33e543b8-4640-4613-1609-08df1fb82291
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|CO1PR03MB5843:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7cfd2e86-a659-4289-a58f-08df1fb9263d
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|23010399003|1800799024|376014|22082099003|18002099003|10067099003|56012099006|11063799006;
+	BCL:0;ARA:13230040|23010399003|366016|1800799024|7416014|376014|18002099003|22082099003|4143699003|6133799003|3023799007|10067099003|56012099006|11063799006;
 X-Microsoft-Antispam-Message-Info:
-	VXH06qOeydCdF4hlgm2dGw/n2n/eTEO4tAOZbhP1fwD85z61VQvoZKe4iLQyChenJHHCUqveJrcPy3hBVwYlx0ZBbXonz7fTsXZ6hFJY3D1IIjsg1GF/18RrYqavthQ67+CODYIhSfYsBQYpCmz8LQ8Fwbh3cjJzC7+ELFyXrMP3lUYMVBEcFGvCTLdIeT6dTvzpiyDEL6b+cIE9f1lGuuuUhR/ViIFWGfQmuygj08I4bdNCjmEf84YXqAMkgSLEVYlSGMFIaG20U9uBb2+t/1k5me+d08bsU3dPfg8K83pCzrB+yCd25aRhAA9oSXE1h9Vq4JOrFOcbZzACD3wfUdC1tKm7PcRpsKu0H0X9Lo5WKiCLF8XEVCW6EhMgyKJhliJZ/VZKbQ9kXLXLfgqE4CpEqUZ12xZBtpUVCaAnGhNuTuHZANfufCQCjwbHOFHNWbOtiDY5E6igM+haIU4QYv+aNY+3s2pomoCdfIYb99pLKS523SZHQDYhrqCBfM2AZ/2GXlsGnOAfkFOFuqN+bb5TsbrN+qZFbMLuuH0D4KV9//PTZ1bZcoqYl/4U9dftkz9yAp8/aHM/WYIj1r4dEHkDNIU+np0+EO6BxS/YTNo=
+	Yn2tUuNQMNDsb6nShzVFyuRBZHjVzMZ6AKaxiYOt+nip+JFx0JDs4clYbvRhRLm4UqXZgswK+ejU4vw6G/G+mCSda9EN+YU951kXIOF3KH5RzLetI24qVeZuOY7i1TI3tiMyHY6rjPcj9j0lMtYlNjo/OXXKoTW+zYKcNDh+Zj9EUpe9UTySa+XQx4M9a4bFXdhHbPGnIy3aGoOotwOW3zrtgvT8ATzkqlDdvXEYuLpP9o7lo+0ETV+B4qRiz73YDkuQ02YNOQ5O5SLzi2p1UJ0PB3u6Bo9f3uRQNA3pYwlwY9diDUE6qZe2i1NBAnCjUdj4BGGxFmIzN+i4whQmu4gtA4cKoGgJZdohm3un+TwJFgHE1QPn5lbKi0ULPaEfW4UbKmriccfp86XpdxWVmyeW4CtABlq/QGkk8XC4bFlSR3TD9iWeBasTkTtJm6bTJuX7i7tasK5uyx9TO7a7FcV+yEeb1oStrrBuDoPpQ9xmsPmRupMVs26FpOyQ/+KFjVGxkoi1JAORpBHzI8NIgLp3RYWuopw2PNvOcvoI/a2oMUtJxC2Hf2SnRrLj6VuZ6e+Ra9mj+WoO50UIpLyMT4uRxc5Y8MU1V9r+XPOytAAchOn9PCmJpp6mZltMy3F5LsqafSkY9Cxh/8ujWwcLz/pB7u5uSN4K9ThIYjCMg3Q=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(22082099003)(18002099003)(10067099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(7416014)(376014)(18002099003)(22082099003)(4143699003)(6133799003)(3023799007)(10067099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?WXBENmRpd0pQRjhtM1FqS21scE9yL2o0dzNBM1A2UFVWMGY3Ky9aUVl4bTdH?=
- =?utf-8?B?WTJ3ZlJldWhaWFFRVFZNU1FqUWRQRUhHRE9ETWQ3U1oxZmNrOTMxUGt1UXpy?=
- =?utf-8?B?RGZTNGpmVittcVRqZThEZk1oS1FodmZvdEYzY3R3T0R2SmdQbStPQ2Z6UHV2?=
- =?utf-8?B?Mzh5WG5PazN4ZU55WUd3WkZONk1yTUdkWnNSYjUyRUhDU1h1czFKOHF3S0ta?=
- =?utf-8?B?a1o0SGY3N3ZOTlIxdHl3ZzkrUnRLZWtpNnAveE8xQ0F2enpJcTBwdDh3MExC?=
- =?utf-8?B?M1VXOFFxNlA0OUFSM2ZwYUlhc1lMQ0lsOHlZam1tWVJGWU1MTm54b2tPNzNF?=
- =?utf-8?B?NTFzUTRzS0d1QnhYaEc1elpJR2lWdEx3OSthWXRKaUJVcFVtdjg5Smpjc29F?=
- =?utf-8?B?REJQWHNOeUhhNkMwaENOSmxaOWhMR1Y4Wm51QzMvOTI1dk9JeEM1S2xnZjZa?=
- =?utf-8?B?ZkJWMU1pdHVYOEVCRVl4ZDZDckc3bWlMZEtwMTd4ZVBrb2FsM0NRODloMFdO?=
- =?utf-8?B?ZXVFL3Bpd0RxRHJtYjNNd01BSFRvRjB0OXRYYkdIQ3lYRFlFa01PZ2lZVVFB?=
- =?utf-8?B?aGp1dkxUNzlzRHFGWWFvbWNjVDZzbnZRUzBZMTVnRDUwT0VVUG5wZjMvRVJt?=
- =?utf-8?B?Sk1sMDNYb3FzR3NkTVJUSnpvcFBxYWtvK1RNRW5pYUhMRGVtcmY0YlkxV3dO?=
- =?utf-8?B?cWRCaWFFcjRwL01HcG8ycHhTcHF3MGpZdWZrdXpTeS9OY2pPajVsVHZ3Tjl4?=
- =?utf-8?B?SkFlMDhtUDNHWksvckgwZ3dWemJERUVZZElKNUR0U0RLbURXOFhPcXp3U2Nk?=
- =?utf-8?B?QU9WNldLalBGREZjT3I1VlpoeStkYmdiVUNxR3VtYi9xbzMyM1U1UkFHYnA3?=
- =?utf-8?B?dENGVjFmVlhUd2tPS0haMTB6SEJ1MVBGaDJvV1lBS0FDbDZ2WTZadlVjZFFL?=
- =?utf-8?B?NDJYYmdEbm5vWk0zcVgvMFRabE4yeTJaMTFLa25RdVYrSFVrbzhWN3ZuTjdJ?=
- =?utf-8?B?YkRzYXdKT2ZRVWxUelVpUlB1TjhqN3dkZHQrN3pibDhnNjEyaXRFMHFxYnQv?=
- =?utf-8?B?Zy91SU5nV3dReDMwZjVtUmcwUnpJZmtMaGNra0RhVjMxQzhnbzNVaXhUZDhT?=
- =?utf-8?B?Z2h3VjFkbmdsWUFJdU94d01WM1VLSEZMY0lnTkNxRTFDenpVYWg4WndSeDBr?=
- =?utf-8?B?Q1dmL0crK3B1MVVhZG9aTXVpNFNrTTRRWmVTa1VKVUxlc2ZOSWRWT0xjUUxE?=
- =?utf-8?B?RmNoa1hhUlRuRi8rTjg2SlFnQW5kUlpwMlZzM2MvTnd0SlUzbWpvZmhxd0dI?=
- =?utf-8?B?bVJuRzhpa2tlelJLTGE2eDhZeWEzSytXczFIejRSeW9jNS9tUm9tV0FKQzl3?=
- =?utf-8?B?WHlqVUY3TlpuRFhVNUdVcklqSVBXYmdoYktrMkcra2gza09WK296THVRRS8r?=
- =?utf-8?B?M080STJUVHdHT3B2WEFydm5wT3BUam9IRjlUbGxIOStkUVZ0NGIxR0dCSGQ1?=
- =?utf-8?B?dkFoN25BdEcrSkFSUTAwL0FyZTh0N0E0MUtwL1NtTWNQK1ZGSTQ2Tm5jVFlI?=
- =?utf-8?B?K3g2OW90cG9VaXZ2TCtJRllGck9ZdVByYU84UXVGUlZpUDljTnB3TmFTY2xY?=
- =?utf-8?B?Y2xxSnBwcUhrekhyYzdGdXNNdis0dEdxZWQ0N2RqbW5zaDJqZjNWMTJhYklk?=
- =?utf-8?B?SzQrRys0K2N6cFNFTm9UaFplUE4ySmloaUJRTFVocDUrNGNaUDNUSmswZGtP?=
- =?utf-8?B?RkVRV2J4MllvZW5XRWNnR1BkT1NMZGFHZUo5STFLYlpKelNFMHVVWnBzZWFl?=
- =?utf-8?B?a0xLai9QWC9YK3hpRE1taDJocGdoOGpBWVNKbzBMZFdDWTMxaUc5WFY5QXVO?=
- =?utf-8?B?cXRSa215SC8zV05FblFxNjd1Q1c2R0txLzlBamg0cnVlM2lkZzltK1hjT0gz?=
- =?utf-8?B?TDBDVWY5MXZuSjRsZzJtY0JiNDNVQ3ZrS1FaajZzQnk2WFlDT3ZNUzljQmpk?=
- =?utf-8?B?QVVVUFN5cjJWU0U4cUFSNERMTW5oNnFyejBiVjVPSG1ZVjc1TFJJSFBwK2dr?=
- =?utf-8?B?OVA2ZzE0blNvcG9iQjExYXI5MmhQQjlkOXYxN25IVkRpVkpZcGo0aUtCczg2?=
- =?utf-8?B?b1BFbStMTVQ5WmUvV0lKd21RbmVBVm9VcFIxdjNqbjJINDhZTzRoVUxJVG81?=
- =?utf-8?B?SVc0czNZaUxNRURFbXh5b1pQMEZmUVd0ZXBaRHIyaFBLeTdWenMxYWxqdCtE?=
- =?utf-8?B?c3U0MDlSaW5tZGU5aTFqK2FCNUx0VkxPNnlOeVM0M0FKZmphVGRaOUdPNVNU?=
- =?utf-8?B?eEhqWlFtazlndEYrRVVnKzgxd0ROb0IrOVhVN1Y4ZVBIS0Y5aTIxdz09?=
+	=?utf-8?B?dEpCR09KYTV4WHY5UDBhYWYvKzJLUzUzOHVZUU9DU2hRT0xyNi8wTUZ5SG5Z?=
+ =?utf-8?B?Mm5wVHJTU2dsS1EvM3E2eUljUkxnWnB6cG14VGw0cnlXbi9CQjdBcFZLM014?=
+ =?utf-8?B?eVg0T3pVRDlDa0tZb0JTTHBuVTk3a2ppbkJHcmFrcDQ0RzZvam9jTjI3Mkh5?=
+ =?utf-8?B?UVIvYVRlclBSR0xnQlFSUVpkVGQ1SS9xeUVpR1hkcFg0WEtXcHJIR0RjWkQ1?=
+ =?utf-8?B?WS8ySnlqb3RveFFFS1VMejc1V2lWWnNBdVVjZ1M3dGdZWmlpeXU0dW9kT2cr?=
+ =?utf-8?B?WkFocXBvYlVpeUh3S1pESm1tWnNncUdaclp6N0VmNVlKVXNJREkzSzU1WjRV?=
+ =?utf-8?B?Z0FobUgzb3RXd2JMbWJTdU9PRWppSDBwbzgxUVlyOWlaL1FLVWN2UWozZlVR?=
+ =?utf-8?B?YmlORWFlMThiZUk3blpLTk9ndHRiSmdIMGhsbDNNZjNOK1YzWXJ0bHN2SHNC?=
+ =?utf-8?B?N1NGeTZhY0JVWGxhaUJaQlZHOC9SUnJNTGtiUWg3M2NBdjRFOXcxQ3RjVjds?=
+ =?utf-8?B?c2dCSUZIdW12STFJb1N0RkVHY0NmUHdIRW5FRGtwVDJzalVnSzhDTk0vcnhn?=
+ =?utf-8?B?bEpQbmVMSk91U2ZhNlpWRTNBaklQUTR2TGNYV2Q3c1dFeElnRjQxQXRXU1gy?=
+ =?utf-8?B?S1czdGRFRjVLd0ZjQWg5aDdjVFVvQThvbEFoOXNIdkxxQ3E3OUhkQlI5azVD?=
+ =?utf-8?B?RTVPa25IUFJCNUE3bkRyN21pa25WZ1ExUWFLZCtnTlZvN3ZhanppK1p6RDB6?=
+ =?utf-8?B?SEdXOVNXSFpEMGk3cDdCbERYOUxrbXFvWmpBWG1vNjkzazF5WUtnVWZyeCtP?=
+ =?utf-8?B?TTd3ZlF6MG5hejYvWXh6TVNsTVhlY1FENGF0YXErNHMyTHhLeXJ3ZHBua0lY?=
+ =?utf-8?B?cWZ5K3JtRkRtNnhSYVg0dlN3ZGNlU3VSaE5wMkxIYkloczRncUpLaEgzdkxk?=
+ =?utf-8?B?Q0JSNHpXWVZLb0QrL3U4VTBlR2N4bENOdElvSDJBcVoydlJpWkd3dDN2QkQz?=
+ =?utf-8?B?VHZvYWo1TjNuR056ZUNlWldST2p0cjAzb0cvaFd5L2tqeG5CUjJGeUtkeWJB?=
+ =?utf-8?B?M3o0bkZoUHVOcVRkSzl2Ykt4OWhNRnFkM2U5L1owOHluT0VkN2o4WTFVSGhT?=
+ =?utf-8?B?OVJUQ05MSG8yMVR5VWRUN3pDMWZrd3N3Zmt5cTRHVG9uTlNBQTROSGt1RHFw?=
+ =?utf-8?B?WjNQV2FUOEUxL3kvaGxGM3RzaG9QdnBSNkExeGxacmFOelpNYmIrY2dvSjla?=
+ =?utf-8?B?OGk5THpacVBRdUl5L2pwejJBTmV1K3VnZExkQ0UzQ0dXMnV4M2lHaTUxbG5y?=
+ =?utf-8?B?OFpYNTlxOGNHSklVTHF4Y29sVTRXcklWSXRQVWVLSzVoZEc5c0JFUGszcG5B?=
+ =?utf-8?B?QjN1S0hpUXo2K3MvbzdDUXJzZW9UdjgvZnJ0SkNRUzZqRmtnMEgrMkNQb3Fs?=
+ =?utf-8?B?WGpXd3hia3BEandWSFZ1eG1DSVJFQTdPZ3JtZDI3MWlpUEx5L2ZqSW4rLzVP?=
+ =?utf-8?B?TnZlck4rbnNxN0gzdE5mSUVKUWtTbWVaOVpLR094Q3hDb05TWjNIMEkwajRy?=
+ =?utf-8?B?UitBcVNHRWh3TFVKRno2TEVPK2txd2lHZUorai9RTk9pclc3c1FBOW94RE5Z?=
+ =?utf-8?B?TVlsK3d3VVVTeFZ0ckdQUjAwYzRFcmsraEtaNHRJSytDejUrMVYrZ21EN2h6?=
+ =?utf-8?B?TVEyY0RXczVObFMrRWRLYmVCalM1OThKck0zVTc3cndZN3Z4YWwwK3B1MlRM?=
+ =?utf-8?B?cm5KRGwwZkQrWS9vbmhMeTZVWFJRZ2xzWEJiclNVdyswL0g4RjZBdXQyQWV1?=
+ =?utf-8?B?REZlYUtsdlFUamJkL2E4WFZ0Uzk4ZFhFUk1CWXhRMW05MWlqZC9RTEsyeFVY?=
+ =?utf-8?B?dDUvWTRtS1hqK2g1Q3VNWE5ibStoNGpxMFkrZFFqTnhYakJHR2dMOXJncnZy?=
+ =?utf-8?B?eHYwNWdUc0x0ZWY2TjRBTzc2V1Ywd05aYlltVVE4UkFwcU5yWkJPU2dvVjk0?=
+ =?utf-8?B?eUpFL3h3WmJOQXRFaDRsSkpWT05WV3pNV2FkWE54VTEwZWhtQUR1Q09OTU5L?=
+ =?utf-8?B?eDVlR0NvSWZabC9HMWd3UlZUbi80VlFYMGU4VlZURkkwM1dyK0FoU214UmZs?=
+ =?utf-8?B?aWxycHVuYXJDMjNLQlJzNXdrZ1cwU3BkN2ptSW9XaWRhVTBEd1ZDM2pCb0hD?=
+ =?utf-8?B?UG1Fa3RYT2djWURINXUxOXgxSk9Tdkh6aEhXNTA2NVlUMFlObTFWTEpXSXpU?=
+ =?utf-8?B?dUZtZVQ4K2tYMThwVDRHZ1Y1S2huUVBKTkRxQnRzNlp2dEplVTZTNXRTWjhM?=
+ =?utf-8?B?OVdBdHZpTjk3N0FqT1hoY3ZmODFaaWdMSEVLcHJoRURQY2l2ZHU0UT09?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 33e543b8-4640-4613-1609-08df1fb82291
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7cfd2e86-a659-4289-a58f-08df1fb9263d
 X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2026 12:33:02.5011
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2026 12:40:18.1657
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 69brDaPq1Bc9ldiYQb/zVsGLcvA8dDOQYnHflFev1Ycpi8RZqBO0xl96eOf5xsXkUd8rUY4zUEiW9J4Q+3Mf+GmseKXPWjog8Cu59FRwNOw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH9PR03MB731891
-X-purgate-ID: tlsNG-ef75cf/1790857985-3C212AE4-54BE517C/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: QwY++0w5wPwqARvTbN8LxTZKiOA4CTAP2RvKphzFlNeHM85JX4f00JMc1bzp628vTi5YO2DcslE0KMDV8JI/PfLpFim8FsF6Y2CkUaAkwxU=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB5843
+X-purgate-ID: tlsNG-c201ff/1790858422-724B42A1-A60B3083/0/0
 X-purgate-type: clean
-X-purgate-size: 2404
+X-purgate-size: 3790
 
-On 01/10/2026 12:52 pm, Titouan Christophe wrote:
-> Add a way to build minimal Xen + Linux dom0 images, and their corresponding
-> cross-compilation toolchains with Buildroot [1]. This effectively provides
-> a consistent cross-architecture development environment.
+On 29/09/2026 6:52 pm, Nicola Vetrini wrote:
+> On 2026-09-29 17:11, Jan Beulich wrote:
+>> On 29.09.2026 16:56, Nicola Vetrini wrote:
+>>> On 2026-09-29 15:40, Jan Beulich wrote:
+>>>> On 29.09.2026 11:03, Dmytro Prokopchuk1 wrote:
+>>>>> bsearch(), memchr(), memchr_inv(), strchr(), strpbrk(), strrchr() and
+>>>>> strstr() all accept a const pointer/object but return a non-const
+>>>>> pointer
+>>>>> to the matched element or byte, matching their standard C library
+>>>>> interfaces. The const qualifier is deliberately stripped so that
+>>>>> callers
+>>>>> searching a non-const object get back a mutable pointer to it. Fixing
+>>>>> this would require changing the public API, so document these uses as
+>>>>> deviations instead.
+>>>>>
+>>>>> Update docs/misra/rules.rst to note that this class of double-use
+>>>>> library functions is deviated on a per-function basis.
+>>>>>
+>>>>> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+>>>>
+>>>> When I prepared my 11.8 series [1], I was wondering whether we need to
+>>>> go
+>>>> as far as deviating these. Since we now uniformly take gcc5 as minimum
+>>>> baseline, there is (at least in theory) the option of using
+>>>> _Generic to
+>>>> cover the dual-use. One question there is whether Eclair would
+>>>> recognize
+>>>> such - Nicola? After all, looking at e.g. glibc's implementation, the
+>>>> functions themselves remain "unsafe" there; it's a macro wrapping them
+>>>> which puts the lost qualifier back.
+>>>
+>>> Could you provide a concrete example?
+>>
+>> From glibc 2.43:
+>>
+>> # define __glibc_const_generic(PTR, CTYPE, CALL)    \
+>>   _Generic (0 ? (PTR) : (void *) 1,            \
+>>         const void *: (CTYPE) (CALL),        \
+>>         default: CALL)
+>>
+>> while the declarations still are e.g.
+>>
+>> extern void *memchr (const void *__s, int __c, size_t __n)
+>>       __THROW __attribute_pure__ __nonnull ((1));
+>>
+>> (and hence the implementation still - necessarily - casts away
+>> const-ness).
+>>
 >
-> Buildroot is a project that makes it easy to build embedded system images,
-> including Linux, Xen or bootloaders. Leverage that build system to build
-> minimal images for use in the CI environment of Xen sub-projects, namely
-> Unikraft.
->
-> This approach is based on a Buildroot External tree [2] which currently only
-> provides 2 target defconfigs (arm64 and x86_64, both running on qemu).
-> It uses a recent development version of Buildroot that integrates changes
-> to build Xen on x86_64 [3], on its latest official version 4.22.0 [4].
-> It also includes the latest kernel (linux-7.2.7 at the time of writing).
->
-> As a byproduct, aside xen+kernel+rootfs, we also get a cross-compilation
-> toolchain (that runs on x86_64 hosts). This makes it easy to cross-compile
-> domUs for arm64, and it alleviates dynamic libraries mismatches when
-> adding userspace programs to the dom0 Linux image. As an example, one such
-> problem: Alpine linux is based on musl while your regular development
-> computer is probably based on glibc, which causes issues if you are
-> recompiling `xl` and try to use it in the Alpine image.
->
-> [1] https://buildroot.org/
-> [2] https://buildroot.org/downloads/manual/manual.html#outside-br-custom
-> [3] https://gitlab.com/buildroot.org/buildroot/-/commit/0bf8b2ecee6b1b41746e8863b57c2c5ba3a623b1
-> [4] https://gitlab.com/buildroot.org/buildroot/-/commit/a962be2eea146e06661712159698bc7cbf3305f2
->
-> This work is derived from this original series:
-> https://gitlab.com/xen-project/fusa/unikraft/-/merge_requests/1
->
-> Signed-off-by: Titouan Christophe <titouan.christophe@mind.be>
+> Ok, will look into that
 
-Thankyou for your submission.
+We are going to have to deviate the implementation, even if we are using
+_Generic() to force const-correct behaviour from the callers.
 
-How are you intending to use this image?  There's no consumer shown, so
-it's hard to judge the patch.
+We could duplicate the functions, but there's a different rule about
+that.  We can't use ELF aliasing tricks because that breaks software
+type-hashing techniques for control-flow integrity.
 
-One thing I see is that it intentionally embeds a fixed kernel and
-(commented but not actually added yet) Xen, and I'm not sure that's a
-route we want to go down.
+>
+>>> In passing, for stronger
+>>> guarantees w.r.t. _Generic it would be better to switch to MISRA C:2012
+>>> Amendment 3, which has specific support for that feature. Keeping AMD2
+>>> and using _Generic weakens a bit the safety argument (though one can do
+>>> an analysis himself, of course).
+>>
+>> As this keeps coming up, we surely want to discuss / progress this move.
+>>
+>> Jan
+>
+> That makes a lot of sense. We could add to the next community call or
+> maintainers/committers call to present the problem and propose a way
+> forward so that all stakeholders are aware. From my side, I can
+> explain what moving from one to the other can entail in terms of
+> static analysis, while others (e.g. Andrew Cooper) may expand a bit on
+> specific C11/C18 features is desirable aside from safety.
+>
 
-As for compiling the binary somewhere and copying it to a different
-environment, we have build containers for that, and I don't see how
-using buildroot changes the problem.
+What I've got for now is all in
+https://gitlab.com/xen-project/xen/-/work_items/201
+
+We want _Generic() for const-correctness reasons only.  (And possibly
+API transition work - this has mixed results but can substantially
+reduce churn in a series if done well).
+
+This depends on moving to C11, which we need to at some point anyway
+even if weren't for _Generic().
+
+
+The other area was the use of auto, but that's sorted now and will
+continue to be an implementation extension until we get to the point of
+considering C23.
 
 ~Andrew
 
