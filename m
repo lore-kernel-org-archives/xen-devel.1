@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 37F50CA5FC5
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 07:34:55 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1437987.1656868 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 025EFCA5FC5
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 07:41:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1437993.1656878 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCBJP-0002JA-Lb; Thu, 01 Oct 2026 07:34:39 +0000
+	id 1xCBPg-0003xl-A2; Thu, 01 Oct 2026 07:41:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1437987.1656868; Thu, 01 Oct 2026 07:34:39 +0000
+Received: by outflank-mailman (output) from mailman id 1437993.1656878; Thu, 01 Oct 2026 07:41:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCBJP-0002J3-IW; Thu, 01 Oct 2026 07:34:39 +0000
-Received: by outflank-mailman (input) for mailman id 1437987;
- Thu, 01 Oct 2026 07:34:38 +0000
+	id 1xCBPg-0003xe-6X; Thu, 01 Oct 2026 07:41:08 +0000
+Received: by outflank-mailman (input) for mailman id 1437993;
+ Thu, 01 Oct 2026 07:41:06 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xCBJO-0002Iv-7b
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 07:34:38 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xCBPe-0003xY-DA
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 07:41:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCBJN-000pwd-Gm
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 09:34:37 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xCBPd-00DRPc-JQ
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 09:41:05 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abe0d0c-2eae-0a2a0a5409dd-0a2a45029532-2
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 09:34:37 +0200
-Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abe0e87-e002-0a2a0a5209dd-0a2a4504be6c-16
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 09:41:05 +0200
+Received: from [74.125.225.106] (helo=mail-wr2-f42.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abe0d0d-6ca4-0a2a45020019-4a7de18cd0c0-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 09:34:37 +0200
-Received: by mail-wm2-f12.google.com with SMTP id
- 5b1f17b1804b1-49b912d8239so49787225e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 00:34:37 -0700 (PDT)
+ id 6abe0e91-b57f-0a2a45040019-4a7de16a8144-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 09:41:05 +0200
+Received: by mail-wr2-f42.google.com with SMTP id
+ ffacd0b85a97d-48b0622cc90so388183f8f.1
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 00:41:05 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01f99b113sm55016935e9.14.2026.10.01.00.34.35
+ 5b1f17b1804b1-4a01ff0cd17sm42938975e9.9.2026.10.01.00.41.03
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Oct 2026 00:34:35 -0700 (PDT)
+ Thu, 01 Oct 2026 00:41:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,56 +54,61 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790840077; x=1791444877; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790840465; x=1791445265; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=xxEOhvYbGWasqHNN4kSw+sfo3fhK1ol662qvyK0BRIg=;
-        b=bII2L9uOfU1PprB65DG5ODpEozQG76/+aN8Ng3RtyaSPSuk0dFia5Z1hnr0Qr8SFVc
-         HcyAC7Is36CxP5bZh5AjB3xWPFXxzvcX5sZ8ZyelAIGV3AGehk348QxhXvSw+jBvEh+C
-         ZYK3VNwYVEqm+4pz8kPQ3fUEh2fburbYRjU7C9T9/gI/A/Xi76rq9ywE20lHOenp+792
-         fN3Rki+xVOw212ps7nT9IsygzMSJIrHou+hothvWtc8YkGDONEOSVsbfbWEdhCUE3sA8
-         1ygvVuP6VNyi7QJIC4unXxUxf7LSMuAvpYl2asALZd0Kj56SygM7Boa2R7al54iLddtM
-         aq+Q==
+        bh=lITFgfzjfsByQ6k+Lmt1KlvLk2Xf1eVIo0/bN64sKHQ=;
+        b=Qg2oJdCRSee0ZOXmb/GDkPfUGmQT55mF9UCZCkYjW+FDMd8az4ZyknxNnw7vGLkQna
+         N4p189ScVW1hI3alxf7+HqiNm/qYmv71lhz1s8VTiHcc1VwV81tjcmy3cCkfggsV4Pye
+         Ph40TMhhVjL0v+BnTtVB0d1+vSRigupKwhu2U07HMSdljCYR9S0oHKARPhehA9Y+k4cO
+         Umv8WA/AdfQcYD1jOJsoY9TvNCfyJ45LgiVEnEYrC7dqpmssz5kdS69pBzSIz4gMtdFK
+         oT8DjHd+8pS288LNJSY7L3agB3zgXYoQnBn5zJzCQSBlQX/lod6vxm7xAE2mT/DIqAHL
+         0Jsw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790840077; x=1791444877;
+        d=1e100.net; s=20260707; t=1790840465; x=1791445265;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=xxEOhvYbGWasqHNN4kSw+sfo3fhK1ol662qvyK0BRIg=;
-        b=DuLoJs/lDUyi37Qwh596fYiZfdhGrZ5EKevLeyQmW2touUsq7Bidf9uhbQb7RirROY
-         oipK8AlLU4Po/yBj6gzyMG5qKkGeIXfqtAWarYh+vAH//wFsY1mOkx3NDp8eB5FDd2Di
-         nRcnpht/MHQFLweHACyBIafG9h/7cnwC+L//SbjUlqV5li6q3GngcXU7QuktLboFmLH3
-         njKNd09eAgZy3BrRR4U9YzmaTeFbqp8NenJntudroUxjcd+5KlsvW0kkwwk4f4GGCYgr
-         hNhVYPr7f6Qhcdb8wjCimIbmaJDXnJy9iubLUPplXj/sVDOV0AxssCugjq5n9D8Vb1Yn
-         rHmA==
-X-Forwarded-Encrypted: i=1; AKwUvBxeCV1tkGHh9nvgRYc8qChq0bY4bfkUpval8GiqtJQVyNzmF1+HbjrFED51Erfs6u34qgww5ddhz54=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kiEQHB3SC4dO/WKx5h4GGS5eY1Fcj+DCM8JAPOR29Mwf5z3l+J
-	YJgBKY1tnyk7pdHIlGzAFDfaYf5NDdsIC2vrr60g/pHRC8E14GiLKnXHkzSlvDqpog==
-X-Gm-Gg: AYBFou0OiEkd9xYDo4h3dcMPENKSZeWT5nlTQ2+HHYNTE6gz7yVh28vMuJHQi+y5PQd
-	h9ySL1xy+4s41mCkjYC4E1FlMjDR4hHxCYrPAJW990at8ONBLUZxwDMSyzAX6sbIZrkK1+Z7LLR
-	DqqnsHBHNPFkOuMRk5P7TttHAJ8FoTnWxZ1RbdZ/l2uBCPzvRhElx1bawjncPM/ScHqe6y1E80+
-	uAcXZZcMef5KU+QkoJS378NsgHtGbMevOKkvD7Ryz+1zt/VUb+vVv0W2IZ2rHDSsSxWLIyQbz7t
-	m0MTpCi+F4A7uNdHREji+YxOY9gNTUSG23oOLvoFMdMM1uZQByFdZ0wS2vqhM756KhVZChYi+Do
-	ER/0miexkKzR+enA8Sgh6AM7uA+xYRYnAVkByV40ZA73zkDDqTABiUzuI4j+EZdaNFsTV8Cwn+J
-	f8F03eurASB+0e37Mj5ssS2N/gVpk+DPT059Mg1Bbq2PBs0m4kiTDgL6LjdyP0IA1X7qSNyOfbd
-	uwhVF7hK1PTUt39ei4ZHoJAtWsvdcPiVBP3OxlbH8nrxbhwYSk18vfRVms6/lQ=
-X-Received: by 2002:a05:600c:8b88:b0:4a0:62d:4424 with SMTP id 5b1f17b1804b1-4a01addebd5mr56197735e9.8.1790840075908;
-        Thu, 01 Oct 2026 00:34:35 -0700 (PDT)
-Message-ID: <a9d59bc1-6e21-4a8b-84e5-6daac02997c3@suse.com>
-Date: Thu, 1 Oct 2026 09:34:34 +0200
+        bh=lITFgfzjfsByQ6k+Lmt1KlvLk2Xf1eVIo0/bN64sKHQ=;
+        b=CvkIzO3K2RdF4yBrrmSDP8sbZcPt4z9t5j2zQfksL6oTc6stsZTVPmFWedNjr5ePUx
+         52UJr9a7v6ThA/NTe16ptpA5k/z2zIWH0q3zhjFp+TdzDyKqJw+0cBx2xpPNbusg/nVF
+         93IBob4S8DXkj3ZbccV5OGsq5BU1PYHXnZb4jDrdnpNpuxPavyDIfMyjxKhuK/3jWOhg
+         LLl7rPMPB9vZppANx3WiuTh4yZcVM5OfHp86O1aNzNslSFdjVreIITO1DBchdgi9hp3A
+         3kIJeRFnZl1EYfxxx18uVDIvSNZbAic8WLp2WBYjvZtyRCqsVoAAFsa1E9LLcpUHcpdI
+         aQag==
+X-Forwarded-Encrypted: i=1; AKwUvBwR54uyxy1ZIAajxw+zT4TpSyeCslCJyYfd7k7G9hSy+Hi4xTc/st0OCnjsSlgNDFW3RVPWcyfAK2Y=@lists.xenproject.org
+X-Gm-Message-State: AFuF++luz3W4dYRF4N1i63K/9A50LdVGNkRqDttFj9igZBlEtTTfWd7E
+	YUSU0VjfJkgjhZ3UzOw7GcfHm+sIhnBcuvLI2jfb5yUUmZGMvPBkKazDXONtbeLjWQ==
+X-Gm-Gg: AYBFou2/ldeWlVHpLcXDIeKx6FFExWy8VoTEPuHD6rYnOXZHd2VonEejYMrDaZ8bkUH
+	VA65OkdgFzjtERxJrnqF8MmSnZ77oJnl5ou/RyPPCZPaXU8CVDSXB3TjPyz865LGXJvWJ8y89Da
+	aMvI5F/9xyPt5izgndrooTLyuR9jzAecsusV7Jlir7R1GGEa0A/Eeyt1IBp+C8AIhQ5g4mtXmEt
+	Qs8L44gXp8x5AIe50M4bYmAH+8Hdgi/K8dMUVKxFUuOsvS9oO0FRSqZQZCNk/ZJ7Yp5HhtMTY9U
+	Plh0cmVZ+mSLTAxXXHoL2QsNG0k9zF2FfzTKwM0nG8q1BvdKOQwGrgFVUAAxq7oA7YA+d+0YsX4
+	2bxF2RQLjZp3MhafqSEeXozN3iFDY9hoANx+cnmRb6/oSoiY+qGq78ca+0jCVzZmU03vjoh0lv7
+	7aedhJoqlFCzSCbykexSEh8TJwlW1zk+cKBvAr+yLqXZHNMAsaa0vXvduwLgO85vhdLwJSmtz8t
+	mUQOPHmWC1sAMHe+ItGpdHxLdTg/aKVSIRs+mQMuZ5J0RcSeuuwJXriunGU4tY=
+X-Received: by 2002:a05:600c:6815:b0:49f:cbf3:551c with SMTP id 5b1f17b1804b1-4a01b004e5bmr65470095e9.12.1790840464704;
+        Thu, 01 Oct 2026 00:41:04 -0700 (PDT)
+Message-ID: <48532706-23bc-4204-8ad4-8e67c53a2ba5@suse.com>
+Date: Thu, 1 Oct 2026 09:41:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/x86: restrict XENFEAT_pae_pgdir_above_4gb setting to
- PV guests
-To: Roger Pau Monne <roger@xenproject.org>
+Subject: Re: [PATCH v3 2/6] xen/riscv: rename PTE "permissions" to "pte_flags"
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20260930191104.78141-1-roger@xenproject.org>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>, xen-devel@lists.xenproject.org
+References: <1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech>
+ <1790699585.8631fc262581453bbf619ec5b2062170.1a0ee033eb9000b504@vates.tech>
+ <9f94af4b-f122-46e0-bbc4-7fecd51d4348@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,40 +134,27 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20260930191104.78141-1-roger@xenproject.org>
+In-Reply-To: <9f94af4b-f122-46e0-bbc4-7fecd51d4348@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1790840077-317CA2AC-6949FF58/10/78276251493
+X-purgate-ID: tlsNG-ebf023/1790840465-C36C2B50-A35A8D52/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1269
+X-purgate-size: 647
 
-On 30.09.2026 21:11, Roger Pau Monne wrote:
-> @@ -692,7 +690,9 @@ long do_xen_version(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
->              if ( is_pv_domain(d) )
->                  fi.submap |= (1U << XENFEAT_mmu_pt_update_preserve_ad) |
->                               (1U << XENFEAT_highmem_assist) |
-> -                             (1U << XENFEAT_gnttab_map_avail_bits);
-> +                             (1U << XENFEAT_gnttab_map_avail_bits) |
-> +                             (VM_ASSIST(d, pae_extended_cr3) ?
-> +                              (1U << XENFEAT_pae_pgdir_above_4gb) : 0);
+On 30.09.2026 15:42, Oleksii Kurochko wrote:
+> On 9/29/26 6:32 PM, Baptiste Le Duc wrote:
+>> @@ -149,13 +149,13 @@ static void __init setup_initial_mapping(struct mmu_desc *mmu_desc,
+>>   
+>>                   if ( is_kernel_text(addr) ||
+>>                        is_kernel_inittext(addr) )
+>> -                        permissions =
+>> +                        pte_flags =
+>>                               PTE_EXECUTABLE | PTE_READABLE | PTE_VALID;
+> 
+> Nit: it could be one line now.
 
-Nit: Unlike binary operators, which we want to have placed at the end of
-wrapped lines, we generally prefer the ternary operator to be wrapped
-differently. E.g.
-
-                             (VM_ASSIST(d, pae_extended_cr3)
-                              ? (1U << XENFEAT_pae_pgdir_above_4gb) : 0);
-
-or 
-
-                             (VM_ASSIST(d, pae_extended_cr3)
-                              ? (1U << XENFEAT_pae_pgdir_above_4gb)
-                              : 0);
-
-This isn't written down anywhere, so I'm not going to insist.
-
-Furthermore, wouldn't it be plausible to also add IS_ENABLED(CONFIG_PV32)
-(or, imo less desirably, opt_pv32)?
+I'll do not just that, but also correct indentation at the same time.
+With correct indentation it could have been one line already before.
 
 Jan
 
