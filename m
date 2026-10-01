@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E71BCA5FD4
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 17:48:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438614.1657339 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 313E2CA5FD2
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 19:05:54 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1438699.1657356 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCKst-0007mC-Rm; Thu, 01 Oct 2026 17:47:55 +0000
+	id 1xCM5w-00023Q-F3; Thu, 01 Oct 2026 19:05:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438614.1657339; Thu, 01 Oct 2026 17:47:55 +0000
+Received: by outflank-mailman (output) from mailman id 1438699.1657356; Thu, 01 Oct 2026 19:05:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCKst-0007m5-P4; Thu, 01 Oct 2026 17:47:55 +0000
-Received: by outflank-mailman (input) for mailman id 1438614;
- Thu, 01 Oct 2026 17:47:54 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <kevin.lampis@citrix.com>) id 1xCKss-0007ki-GT
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 17:47:54 +0000
+	id 1xCM5w-00023J-Bv; Thu, 01 Oct 2026 19:05:28 +0000
+Received: by outflank-mailman (input) for mailman id 1438699;
+ Thu, 01 Oct 2026 19:05:27 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xCM5v-00023D-BA
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 19:05:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCKsr-00Dr47-To
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 19:47:53 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xCM5u-00FPDP-OM
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 21:05:26 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <kevin.lampis@citrix.com>)
- id 6abe9cc9-2eae-0a2a0a5409dd-0a2a450ab482-0
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 19:47:53 +0200
-Received: from [52.101.62.40]
- (helo=DM5PR21CU001.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <kevin.lampis@citrix.com>)
- id 6abe9cc8-f2d2-0a2a450a0019-34653e28f4d3-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 19:47:53 +0200
-Received: from BY1PR03MB7996.namprd03.prod.outlook.com (2603:10b6:a03:5b2::8)
- by LV3PR03MB7658.namprd03.prod.outlook.com (2603:10b6:408:28d::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.18; Thu, 1 Oct
- 2026 17:45:41 +0000
-Received: from BY1PR03MB7996.namprd03.prod.outlook.com
- ([fe80::5068:e1b5:b478:8d07]) by BY1PR03MB7996.namprd03.prod.outlook.com
- ([fe80::5068:e1b5:b478:8d07%3]) with mapi id 15.21.0451.026; Thu, 1 Oct 2026
- 17:45:41 +0000
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6abeaeda-2eae-0a2a0a5409dd-0a2a4503b20e-48
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 21:05:26 +0200
+Received: from [74.125.225.99] (helo=mail-wr2-f35.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6abeaef1-fae8-0a2a45030019-4a7de1638482-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 21:05:21 +0200
+Received: by mail-wr2-f35.google.com with SMTP id
+ ffacd0b85a97d-482f63546c5so6094238f8f.2
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 12:05:21 -0700 (PDT)
+Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
+ [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48b38306dd4sm204087f8f.43.2026.10.01.12.05.19
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 01 Oct 2026 12:05:20 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,214 +52,206 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Y+Azn+hAkH4ayZAHeO3uOEKce67cW90te23kRF3QbRp1MUda0x9AHeizewMKQep/jZFDpJkyLa18WHKSOp+fkRhRAh67t9vj1f5j4Q3D+eOFcUDR0Asaspl6/EfwaZfKeCWoOlZcmWwn1ZFtcVe+pY9FHDhfd4uxVitwQWDSc7C7/GGnMcIlkgWGCySirjy/7yCcRcBuGFVpMdqH+QgJVkzr9qQEvVm9rrQDChNVnz/QO8yZQ171jgaBDD+Vqg8fuEGnsJ5NHmnj0yKCYB370f6qqqYu2+/T1f7/hssWzWZYJmm/USl7O6mC/gagAcXeddtqGU0AWLU5LxxXvPtCEw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=NkdwiKtK+tR0FPw7NQxvOIvKgkeU+OyZ3OFk30VN4lo=;
- b=ZCCkDLlHOGrHvismthtu1t55c//IbBX4VEWOI29u3+A7IaxRs1X7TGl6Gl0e3UUyESvtrxWUeRt9uwfScUxP5OEX2U6zOprxgwtgKwQGxNZiHlN5N7O8zQIeKrvI6n+uVdx+cCWYFxQK/TZ0H5zUeorR6xCT1gFEX+yZbFFpNec1hEoju33wUgCH1SlmgDnVi8KlTTG+NiAWOJ5E5S3uVWRXh1t1E2WCwyJB4Buo6R1IUjLxlusoDmr7l/9blWwKq3OBbCVqgXGyoPrIdv/ChdGO8V4e/vQeX7AZY6/uqpaZm4K3hZ+mR/dKtrolc1NP0p/++/OAQb36D3arAmwZKQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=NkdwiKtK+tR0FPw7NQxvOIvKgkeU+OyZ3OFk30VN4lo=;
- b=QmjBanjFylaAyUXOK3s9roscbrH7xmrpkjYoh5nqkNsWpwwZyQbuMCsGzgHWFjiNYDqb430XvuXb3ZWNcxgD7Ggtk/jsCudOGrNiJ+xjYOu75X0XC1TpSAwmEiAoFQ33/c/NyvhTO1Yaw2OYmoGuLD2NvfdlBE7zCJNtTw7MLjs=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Kevin Lampis <kevin.lampis@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	teddy.astie@vates.tech,
-	Kevin Lampis <kevin.lampis@citrix.com>
-Subject: [PATCH v3 0/6] unmap_page_range optimisation
-Date: Thu,  1 Oct 2026 18:47:43 +0100
-Message-ID: <20261001174749.2275245-1-kevin.lampis@citrix.com>
-X-Mailer: git-send-email 2.52.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: LO0P265CA0001.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:355::9) To BY1PR03MB7996.namprd03.prod.outlook.com
- (2603:10b6:a03:5b2::8)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1790881521; x=1791486321; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=FIVa2PiOVK72PchuP6HMQQz39IJEJGCAfEAUandj3qM=;
+        b=eJr5z3JFWqGCG7oVn8qXNLsmU399LxlcSbrrnMggrGXziJrZOsqYV9EA9wWILl/rof
+         R2TLKHQBxEU6tgWhR6TvmTa0L7top14acDfU+DZP6K3/jPEjvoGvnt7g7HMhlAqwsOPM
+         fDM8dtjA6mSuE92D3AAy9rtLsS3eU3aJNATIo=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790881521; x=1791486321;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=FIVa2PiOVK72PchuP6HMQQz39IJEJGCAfEAUandj3qM=;
+        b=cbi45I/7tmBVPoOrfD+9HS+jUwd21viT6bM85rFTx+amJ4jk+9kkcPy53+Cqh1swnz
+         a/Tzz6Wsun0xmLSMmmZH56aCuDU3amgZg724NZtxT0JfhGi8jXfFkzBr5DmEl4k1pzp5
+         utaUO8EBOQs7Dd0WhsP+9MrHZCEzC+rfZeXOBaK+oiq7jJsa5VDPNj4/KF4Jr6nHLkl5
+         cNdj9DHDRXKPXWrFHRkCiNCEKuiWFqT/C7eumFEWbdzN/FUzKgrvmnGCUAxvswldv4gC
+         ONQf5PLqyZ9kO89T7ShAUZD+xDfJgAyV+4lBoY0d2nhFFs0XJPuRNHW/fqRSAF4IafeJ
+         6Cmw==
+X-Gm-Message-State: AFq9FYLmFhd19xZ0K30CBVP4cJGSrQo/PlNLQUNRMTsIxff1vJIjNCGz
+	9wQGTxi9MSddr12la1q3qagb+wJsm4saozNu7GNtffspFi40dctrKXL9wwiK9PiiPnTnH/p8MwE
+	vjKRbW1I=
+X-Gm-Gg: AYBFou2qbRo9K+sL526jNYJnS1qs0akVIEp0fghABZhYDZmJ3XynLDnsr4jYPtOtW06
+	OlLCPh1tQlOv5vmBPt/uIfsVCM0KpmKRNhuDZH+0GOyfIot1qcpWVaBJkRX6MmavrJDcPHjXHo+
+	Xl06ISmbl++BSO3VZ74tL2P7W29d078P6fK5UcndGbiBQeYLXC0rmheF9yCZgs/jAFr706NGvUD
+	Z403486qJTuJ1aUDJ70K5XdVb96BHFDTm6HAfQpj0soQDpEP3p/U8Pjj677/HdfNzw5vFRXI43C
+	iqHYo+qcXlgq7ed95zcmaTyDlv/1mhURZzsHEOZPfsX6LMVw5XRIkT8TJqNEMOfEdqJvjkXr/ux
+	Q/H3c1ZhoScfT/5to277RmHNirBmD8C+uUJ5ImNYBxVLQVxLTL0kpr0G57OmZp1AQ556WoWwa23
+	f+zyEUqVDKxciki+sbdCtHapN51sGpPfBh1wqUdUIh/h7bDM4qDP1LpYutXdke4yLRg9CFbMSRp
+	Jjvd/7JeJfMaYnshPKyXzE+1Su73hjGK4VchnjsSKMAFgot
+X-Received: by 2002:a05:6000:4694:b0:48a:fbcf:6f43 with SMTP id ffacd0b85a97d-48b1276e0d5mr554389f8f.54.1790881520893;
+        Thu, 01 Oct 2026 12:05:20 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Jason Andryuk <jason.andryuk@amd.com>,
+	Ross Lagerwall <ross.lagerwall@citrix.com>,
+	Doug Covelli <doug.covelli@broadcom.com>,
+	Sean Christopherson <seanjc@google.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Borislav Petkov <bp@alien8.de>,
+	David Kaplan <david.kaplan@amd.com>,
+	David Woodhouse <dwmw2@amazon.co.uk>,
+	Shivansh Dhiman <shivansh.dhiman@amd.com>,
+	Nikunj Dadhania <nikunj.dadhania@amd.com>,
+	Santosh Shukla <santosh.shukla@amd.com>
+Subject: [PATCH] x86/svm: Work around VMRUN's corruption of VMCB.INTR_SHADOW
+Date: Thu,  1 Oct 2026 20:05:18 +0100
+Message-Id: <20261001190518.438643-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY1PR03MB7996:EE_|LV3PR03MB7658:EE_
-X-MS-Office365-Filtering-Correlation-Id: c68c9d13-0e0c-407d-a838-08df1fe3cfed
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|23010399003|366016|18002099003|10067099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info:
-	uNQRm6aKWGUkwPz7pSsKZALEjaEJ982+lw3sjbgS75XSbg3a9ZQvzz2lc0uy414ARJuaqasfTVqHjxqIAyMq73PwTVv7c4fcNyI00M7uk6YZuOamVyTLGOE5FrvzaVwTn4wqyLDxzvQWTj4dnpVdLx+32R9prJ7LcutfJ+/TEeqqSC2wR1Ih/ycJlIANd9N+HZ3vK84EdO7Ywix+4YXheoW1Yl1NiiF/NyxgLIJFxlwE+JRAcV8YIzc0SIO4gEL+69kv68kBlWePfPGBUUFT0svHc+RdgMTYqvGNMe9JJNIHbQlvm/rjy0qnjvx2VZXa2FVNpSsk1kCbEoFgeIrrcEsqVOVI5iGB77Q/SpXoytyhvPcl55U1JqIGOcLEiRlQeLvhozznzqTwtk+Dc4hOO2bDgFEDj1vDdOZAwZjB0ljcCS71VqCSGvKBkdQI97Ociad5KQ6gDjV9aO0x8R+UshWclww0AYAbhn+uIaVTiqcB1dzWAiT51s9Rxr9Ysmlo++jOqrIRYlRiIZSgKVlJOP6yVJerhh4qau9e8tqBl73q22NC7at2MFSd5aqpR97kihW0aaL+0Z0wFQeb08/2uwNx6CCzy8bWeX8x0xk7K6QhEur9WhXvpPHBYxDjn3t3FU6/HigaBDs+MfCJCu8IP8AnhOzaSBTgU+kkHmAVALk=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY1PR03MB7996.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(23010399003)(366016)(18002099003)(10067099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?mpja5antczOlYbEEHtLNGON1+MTXUyQ4BFYsNbZxxiNHCCWGsjj7lnr/7N/x?=
- =?us-ascii?Q?ZC+jLiDPUfBhDAZ/Hzqla3QdeA9QlC5nT2MTWPy8WxGOyFEf4zJHpQt4xJ9k?=
- =?us-ascii?Q?Vdgyc3kscGS6fpfVrzBv9xi2R8OymPyhazFwPUatwNfbF+IBC1LVMaxf9AXr?=
- =?us-ascii?Q?/NqD1Rb14jCg+YZgTYhF2/3rn6OBZSteY7lCfWEN4bbSUst3n7jIR+wdNrpQ?=
- =?us-ascii?Q?7ZRUBpgC0XWxqH2uDBq2KCzyFp1ny+OAPPkk9iN8laZI+TdQGbMti0/bz1+T?=
- =?us-ascii?Q?owrg10q7GtDTxbDTIWre31dVNRUVsFeD2GnckwTN5/RZ3TI3baT8UGKfIiZv?=
- =?us-ascii?Q?ZWGHrdhuQ4g4bYT6Rshl06Bxg0mMtKlUGPQ3y9WzK2OESgWdVYn1CQUi7QNG?=
- =?us-ascii?Q?vdkBVV7pySmqOxVLPPxMqiiIOuNOHu3nsLr8LvnfcrC42XNzdD7bddUS+o6Q?=
- =?us-ascii?Q?hHahGJ4xEhqSEdBzntpLBkP9Ym9wBaQKC9QoFAuZ0Bp1iLoEAUZ7DwHu2/Nu?=
- =?us-ascii?Q?IMkjvSayd0nbk+J/qJO0YhdBqS+rfrNCBuUbFqBoVq685qtcZfUHoly3Gw8f?=
- =?us-ascii?Q?Xf9UuSslSRtbJihReYhDIb/YEcPTN0AfYBYnXsODVjIlWFy8ymxpHXADKGFy?=
- =?us-ascii?Q?vo5FQCaZQukfdhPkh6Nh1huiVU9gUdKRQ1LV0sV1ObrNKS6pFLKy/Qx+5yo8?=
- =?us-ascii?Q?vLQeWywCEkX5LNWKHxyJ0WJ9DsCUQmaYstBDNCUIwCjR3f6xd+VurJYe1FU/?=
- =?us-ascii?Q?3XPobDUlqNZ3KRve9ebvA+Wn13J2w7M31Gp4w9QuvcU0X24y22mjQRhzCKBR?=
- =?us-ascii?Q?orCUlQZpHb9otyEimWIm0M+Nv9Br4gtUGpxPY4088GrrJKaF80K4+ZfjwoxC?=
- =?us-ascii?Q?5jps0tMaMeTm6+jDYd3IXAjaxJ6MfebJA+yWwrw5PDv99LLuWKUjDTQDVKWA?=
- =?us-ascii?Q?haAR1eHHZUUZZDtKLKrtc/NNWaRHyWyRL1Jy3b39AGnMBsTLutZNDidYoZyL?=
- =?us-ascii?Q?+iCStcfTU6gO2dcwZnktV02E6DMeP/gejfxNPWCxp9jGccEtO02JiphjWJNN?=
- =?us-ascii?Q?JROWaecSjI6ygH3BRnVP78NlAwah7P+J1Gv6PcUPvW8vJuwvB9Q0DlEIKNrW?=
- =?us-ascii?Q?IylzBgdD2EQnMdqOiuFH+/w8CfeawweNDrPFBDIz5JR3kIFj9nqav6gdKBdw?=
- =?us-ascii?Q?CIvnne28kClmVKRUMAWgNpQj0g4zuPJVSZHVenqdZylKc0p5kfkSqjUugsnV?=
- =?us-ascii?Q?HU3fMDyp3XmCH4UOV7mdCeU8dm4ZOHZWL9MzWVv0M/KdnFfHYEmKoxC9A1jo?=
- =?us-ascii?Q?p8DysHTP7z7pd18Ide/rwQl8+1T/oo3f6+oANPbQbxVg5JRAfJMMJ40yCD+U?=
- =?us-ascii?Q?SlyW0gFy2QKEZDVikxD03PkT6s+HHkakDYdF9tb1HQ+ISxy3XsiAwj1T9ORy?=
- =?us-ascii?Q?12T0N73WX0UIEZ8K/0MarCyiZqv+kO0jMYk8LY2vw22lKFQ3oHCnz0Dyq1co?=
- =?us-ascii?Q?EQiMt+6wQxouxp7NyA/F5SMEVC03STQ7VHVxMzsNDM6UYFCUgrmp4KXLL8X3?=
- =?us-ascii?Q?J/zbt0OLPDKSO+aLA+MhBOrgQFJPsh5VnVHluy623aPih+ENTkekC4hlObDB?=
- =?us-ascii?Q?mb42vRAuRpA30ZjhnKu+pxHLpnohWZtNcanIkHsKDiny22TDPXj3kRmG3eMz?=
- =?us-ascii?Q?1fXpC1H42qqEKRYhUH9D0ZgP9wGYKFvPSB95pyA5J3vF9F+pHOQMqCK7FGG6?=
- =?us-ascii?Q?Cr0Lwt9KTA=3D=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c68c9d13-0e0c-407d-a838-08df1fe3cfed
-X-MS-Exchange-CrossTenant-AuthSource: BY1PR03MB7996.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 01 Oct 2026 17:45:41.7376
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: eJR9IeU3Oz7SBhpqi1thNexUNIVUIFq4hncnw2ZR6L++IigYuV6fVQx4/yEFJXEEjFxbGA+vAGycixoMQY767Q==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV3PR03MB7658
-X-purgate-ID: tlsNG-4011c0/1790876873-50ACCCFC-646298FF/0/0
-X-purgate-type: clean
-X-purgate-size: 3276
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1790881526-76CF84E9-72E7AA16/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 5580
 
-v1:
-https://lore.kernel.org/xen-devel/20260727150615.1373200-1-kevin.lampis@citrix.com/
+I was asked me to explain the comment beside STI in the svm_asm_do_resume(),
+and, in trying to do so, things unravelled.
 
-Previous discussion:
-RFC: unmap_page_range optimisation (avoiding emulation faults during VM migration)
-https://lore.kernel.org/xen-devel/16133EFF-88FF-467F-B78F-E96EB148C3A5@citrix.com/
+The original fix inherited from KVM prevented the guests INTR_SHADOW being
+changed from 0 to 1.  This prevents undue delay to interrupts, but it caused
+the value to get changed from 1 to 0 if the guest was in an INTR_SHADOW.
 
-This series adds a new MMU_PT_UPDATE_SWAP sub-op to the mmu_update hypercall
-which Linux can use from a new pte_get_and_clear pv-op to significantly improve
-the performance of unmap_page_range.
+Whether this matters for IDT guests is unknown; it depends on what else VMRUN
+can do beside event injection and still write back the wrong value.  This does
+matter for FRED guests, as INTR_SHADOW is exposed architecturally in the FRED
+frame via the STB field.
 
-A microbenchmark[1] which allocates a large number of pages and then clears
-them shows a performance increase from 1100ms to 640ms using the
-new pte_get_and_clear pv-op.
+Fixes: c989ff614f6b ("x86/svm: Separate STI and VMRUN instructions in svm_asm_do_resume()")
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Roger Pau Monné <roger@xenproject.org>
+CC: Teddy Astie <teddy.astie@vates.tech>
+CC: Jason Andryuk <jason.andryuk@amd.com>
+CC: Ross Lagerwall <ross.lagerwall@citrix.com>
+CC: Doug Covelli <doug.covelli@broadcom.com>
+CC: Sean Christopherson <seanjc@google.com>
+CC: Paolo Bonzini <pbonzini@redhat.com>
+CC: Borislav Petkov <bp@alien8.de>
+CC: David Kaplan <david.kaplan@amd.com>
+CC: David Woodhouse <dwmw2@amazon.co.uk>
+CC: Shivansh Dhiman <shivansh.dhiman@amd.com>
+CC: Nikunj Dadhania <nikunj.dadhania@amd.com>
+CC: Santosh Shukla <santosh.shukla@amd.com>
 
-Further profiling the microbenchmark with bpftrace[2] shows that Linux calls
-unmap_page_range() 23 times with an average execution time of 48ms
-dropping to 28ms when using the new operation.
+AMD have confirmed this is broken back to at least Zen1.  Hopefully an erratum
+will be issued.
 
-Changes in v3:
-- Extend swap to work with l2/l3/l4 PTEs and any value not just 0
-- Other review comments
+Slightly RFC.  I don't currently have a Venice system to demonstrate the FRED
+part of this.  CC-ing the KVM folk and AMD FRED folk too, as someone will
+presumably want to adapt this fix.
 
-Changes in v2:
-- Add a sub-op to mmu_update instead of new hypercall
-- Add Linux patch
-- Other review comments
+Concerning encrypted VMs, there is no fix; INTR_SHADOW is encrypted state
+which the VMM can't access.
+---
+ xen/arch/x86/hvm/svm/entry.S      | 40 ++++++++++++++++++++++++-------
+ xen/arch/x86/x86_64/asm-offsets.c |  9 +++++++
+ 2 files changed, 41 insertions(+), 8 deletions(-)
 
-[1] microbenchmark
-#include <err.h>
-#include <sys/mman.h>
-#include <time.h>
-#include <stdint.h>
-#include <stdio.h>
-#include <unistd.h>
+diff --git a/xen/arch/x86/hvm/svm/entry.S b/xen/arch/x86/hvm/svm/entry.S
+index d9613a2a8fed..99a98050793f 100644
+--- a/xen/arch/x86/hvm/svm/entry.S
++++ b/xen/arch/x86/hvm/svm/entry.S
+@@ -57,6 +57,37 @@ __UNLIKELY_END(nsvm_hap)
+ 
+         clgi
+ 
++        /*
++         * Interrupts need enabling prior to VMRUN.  Anywhere after CLGI is
++         * safe.
++         *
++         * On all Zen CPUs to date, VMRUN has a bug and mixes up the host and
++         * guest INTR_SHADOW state.  If there is a VMExit during VMRUN
++         * (e.g. taking NPT_FAULT during event injection), then the host's
++         * INTR_SHADOW gets written back into the VMCB, corrupting guest
++         * state.
++         *
++         * This is believed to go unnoticed for pre-FRED guests (injecting
++         * events cancels INTR_SHADOW), but FRED changes this behaviour to be
++         * able to observe and restore the shadow via the STB field in a FRED
++         * frame.
++         *
++         * In order to fix, arrange for Xen's INTR_SHADOW at the point of
++         * VMRUN to match the guest's INTR_SHADOW.  This way, if a VMExit
++         * occurs, the VMCB is corrupted with the "correct" value.
++         *
++         * Commonly the guest will not be in an INTR_SHADOW.  In this case,
++         * execute STI early to get Xen's INTR_SHADOW over and done with; the
++         * second STI does nothing as INTR_SHADOW only occurs when IF changes
++         * from 0 to 1.  If the guest is in an INTR_SHADOW, skip the early STI
++         * so the late STI does trigger INTR_SHADOW and cover VMRUN.
++         */
++        mov     VCPU_svm_vmcb(%rbx), %rax
++        testb   $1, VMCB_int_stat(%rax)
++        jnz     1f
++        sti
++1:
++
+         /* WARNING! `ret`, `call *`, `jmp *` not safe beyond this point. */
+         /* SPEC_CTRL_EXIT_TO_SVM       Req: b=curr %rsp=regs/cpuinfo, Clob: acd */
+         .macro svm_vmentry_spec_ctrl
+@@ -74,19 +105,12 @@ __UNLIKELY_END(nsvm_hap)
+         ALTERNATIVE "", svm_vmentry_spec_ctrl, X86_FEATURE_SC_MSR_HVM
+         ALTERNATIVE "", DO_SPEC_CTRL_DIV, X86_FEATURE_SC_DIV
+ 
+-        /*
+-         * Set EFLAGS.IF after CLGI covers us from real interrupts, but not
+-         * immediately prior to VMRUN.  The VMRUN instruction leaks it's
+-         * INTR_SHADOW into guest state if a VMExit occurs before VMRUN
+-         * completes (e.g. taking #NPF during event injecting.)
+-         */
+-        sti
+-
+         mov  VCPU_svm_vmcb_pa(%rbx),%rax
+         POP_GPRS skip_rax=1 /* %rax restored by VMRUN. */
+ 
+         SPEC_CTRL_COND_VERW     /* Req: %rsp=eframe                    Clob: efl */
+ 
++        sti
+         vmrun
+ 
+         PUSH_AND_CLEAR_GPRS
+diff --git a/xen/arch/x86/x86_64/asm-offsets.c b/xen/arch/x86/x86_64/asm-offsets.c
+index baf266ab8013..4872ef89b0df 100644
+--- a/xen/arch/x86/x86_64/asm-offsets.c
++++ b/xen/arch/x86/x86_64/asm-offsets.c
+@@ -21,6 +21,10 @@
+ # include "../boot/video.h"
+ #endif
+ 
++#ifdef CONFIG_AMD_SVM
++# include "../hvm/svm/vmcb.h"
++#endif
++
+ #define DEFINE(_sym, _val)                                                 \
+     asm volatile ( "\n.ascii\"==>#define " #_sym " %0 /* " #_val " */<==\""\
+                    :: "i" (_val) )
+@@ -133,6 +137,11 @@ void __dummy__(void)
+     BLANK();
+ #endif
+ 
++#ifdef CONFIG_AMD_SVM
++    OFFSET(VMCB_int_stat, struct vmcb_struct, int_stat);
++    BLANK();
++#endif
++
+ #ifdef CONFIG_PV32
+     OFFSET(DOMAIN_is_32bit_pv, struct domain, arch.pv.is_32bit);
+     BLANK();
 
-static uint64_t nsec(void)
-{
-    struct timespec ts;
-    clock_gettime(CLOCK_MONOTONIC, &ts);
-    return (uint64_t)ts.tv_sec * 1e9 + ts.tv_nsec;
-}
-
-int main(int argc, char **argv)
-{
-    const size_t len = 1024UL * 1024 * 1024 * 4;
-    const long pagesz = sysconf(_SC_PAGESIZE);
-
-    char *p = mmap(NULL, len,
-                   PROT_READ | PROT_WRITE,
-                   MAP_PRIVATE | MAP_ANONYMOUS,
-                   -1, 0);
-    if ( p == MAP_FAILED )
-        err(1, "mmap");
-
-    /* Fault every page in */
-    for (size_t i = 0; i < len; i += pagesz)
-        p[i] = 1;
-
-    uint64_t start = nsec();
-
-    if ( madvise(p, len, MADV_DONTNEED) )
-        err(1, "madvise");
-
-    uint64_t end = nsec();
-
-    printf("MADV_DONTNEED on %zu MB took %.3f ms\n",
-           len / 1024 / 1024,
-           (end - start) / 1e6);
-
-    munmap(p, len);
-    return 0;
-}
-
-[2] bpftrace
-bpftrace -e '
-kprobe:unmap_page_range
-/comm == "a.out"/
-{
-    @start[tid] = nsecs;
-}
-
-kretprobe:unmap_page_range
-/@start[tid] && comm == "a.out"/
-{
-    $delta = nsecs - @start[tid];
-    @count = count();
-    @total = sum($delta);
-    delete(@start[tid]);
-}
-
-interval:s:10
-{
-    printf("avg call time = %d ns (%d calls)\n",
-           (@total / @count), (uint64)@count);
-    exit();
-}'
-
-
-Kevin Lampis (5):
-  x86: Remove return value from UPDATE_ENTRY
-  x86: extend update_intpte() to support atomic get-and-update
-  x86: extend mod_l*_entry() to optionally return the old PTE value
-  x86: extend do_mmu_update() to support returning the old PTE value
-  x86: New feature flag XENFEAT_mmu_pt_update_swap.
-
- xen/arch/x86/mm.c               | 215 +++++++++++++++++++++++---------
- xen/arch/x86/pv/grant_table.c   |  53 ++++----
- xen/arch/x86/pv/mm.h            |  32 +++--
- xen/arch/x86/pv/ro-page-fault.c |   3 +-
- xen/common/kernel.c             |   3 +-
- xen/include/public/features.h   |   3 +
- xen/include/public/xen.h        |   1 +
- 7 files changed, 208 insertions(+), 102 deletions(-)
-
+base-commit: f9b72572c8d5b6d312fd0b5014f65bed20efac40
 -- 
-2.52.0
+2.39.5
 
 
