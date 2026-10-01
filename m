@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1049CA5FB3
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 09:57:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438119.1657004 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 77863CA5FCE
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:01:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1438150.1657013 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCDX2-0003Yq-MC; Thu, 01 Oct 2026 09:56:52 +0000
+	id 1xCEWq-0005RA-8B; Thu, 01 Oct 2026 11:00:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438119.1657004; Thu, 01 Oct 2026 09:56:52 +0000
+Received: by outflank-mailman (output) from mailman id 1438150.1657013; Thu, 01 Oct 2026 11:00:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCDX2-0003Yj-JR; Thu, 01 Oct 2026 09:56:52 +0000
-Received: by outflank-mailman (input) for mailman id 1438119;
- Thu, 01 Oct 2026 09:56:50 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f6e5295a0003f66@swg.vates.tech>)
- id 1xCDX0-0003Yd-Qr
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 09:56:50 +0000
+	id 1xCEWq-0005R3-5f; Thu, 01 Oct 2026 11:00:44 +0000
+Received: by outflank-mailman (input) for mailman id 1438150;
+ Thu, 01 Oct 2026 11:00:43 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xCEWp-0005Qx-7x
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:00:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCDWz-00DwDv-Va
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:56:49 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f6e5295a0003f66@swg.vates.tech>)
- id 6abe2e43-2eae-0a2a0a5409dd-0a2a4507875a-46
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 11:56:49 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f6e5295a0003f66@swg.vates.tech>)
- id 6abe2e61-b4ea-0a2a45070019-b9ff1c22a2c5-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 11:56:49 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a0f6e5295a0003f66.004 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Thu, 01 Oct 2026 09:56:48 +0000
-Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 9551B829A3;
- Thu,  1 Oct 2026 11:56:47 +0200 (CEST)
+ id 1xCEWo-009VKa-L3
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:00:42 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6abe3d54-e002-0a2a0a5209dd-0a2a4509b9be-36
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:00:42 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6abe3d5a-be1a-0a2a45090019-4a7de18c8f4a-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:00:42 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49ffb83bf7aso42218495e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 04:00:42 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a01f6c5059sm53713695e9.0.2026.10.01.04.00.40
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 01 Oct 2026 04:00:41 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,199 +52,137 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=UN4JVgQy2aXXU1eEkzbdYD4BaaRvS3bghOXt+D3e4cs=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=cnHnsW8ukwXU3F2k3D1moH2fE2uWojTusEwfbWGpe2+Yt+jiUk3/5/4Abef0LBohwh1p8dEcX
- iZPQBU4XZOG/rjGnLddvkBWV37IimuPYAnSEgr8AyfdC7hUo5v0Aal1WqdBm33GK2Wctu1A2ash
- By9VT7S+2Wdl058Nyhx+wILHP7ZZAnmrY9I1mNJcMW8MNNC+xy1zR7I1pFocb/Ms4t3n8DWMKvS
- ZvKRHoUI2jCols1OFrPhUOHIlikDfh+z9CMCEl9tTNphqsr1jwHEWo6X1eYXRB802ed9eBAte2b
- F55EljpMpOPAsqBMt+ICjISUx8LmVwBW0cQEHyVyzR6Q==
-X-Zone-Loop: d141315132cb4b60a9e835950a95d84fe73edf09db84
-x-campaign-type: default
-x-transaction-id: 41292387-da57-4c2b-be8b-ee69add188e1
-x-swg-uid: 01-092db945-32bd-48cc-b0cd-c4974e26f224
-X-Mailer: Sweego
-Message-ID:
- <1790848608.8631fc262581453bbf619ec5b2062170.1a0f6e5295a0003f66@vates.tech>
-x-swg-bid: 1790848608.8631fc262581453bbf619ec5b2062170.1a0f6e5295a0003f66
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Thu, 1 Oct 2026 11:56:47 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1790852442; x=1791457242; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=FTJcU4w8z31zwCiwkKqD2MuLanrlejydS1dMYPugYlc=;
+        b=WDLpRFT+Mmegv8xQb0x/xkZqfUiaOmo2/KVxZFT+xWonHOoEl4T5fxvXIKaM6k28BP
+         P3EKUPBVNZYxmmimIqZkNhmY435tJTKuYYqZlsX+gfdhIwGtkLd4t8nZ4vryUq472/Tr
+         3l3+dxdxxDLtuoQ9WTeHmZuWlIWc4R0SJY7siroMZSeFFwe0EEKN8kLFHwm+gi2D/5XZ
+         UCefqGMsVuqAQHH3g26VSkVlcGTeofYwXuspC5f1B0KuU4Op13ZrxpkYozWUWaU36g4V
+         gt8btg7M/MBcgkcU4vY9tEgdrXtGNCSGQuSQRbWdlgopXgoALeoOpF1SVcD82jNFWTHX
+         b24g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790852442; x=1791457242;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=FTJcU4w8z31zwCiwkKqD2MuLanrlejydS1dMYPugYlc=;
+        b=XUoD7cA02mqItHrtZBfVcM9eIbDBDBm/vKt5VJAv/bVIlVU5+7zM5gn5rFxiDcyZSA
+         chKN976aJOHzOllRBLiuL2gKuuWqzciiXLmQsA5q4klehBEbvDWmAoUDMPIL0hVqADOq
+         1c2ZEbAPJGuqnDnZTZHWIjI3QXk4hJkQztMKWlFC5Je8nGAAnsu5+LKj3Any1A3GFRHJ
+         un84OTqjkWD2O0kyoZsL6MqF2bJTsHR7Pbw/vPdlHIwHR3EGFy1f52pDPyAFtfVUjKoF
+         HDzCCsHOT7HOywW5MjQ4k77UAEyLn0J17hXMSn/hSEsQrYSA0rTt1lvMJOQcx6KJLbaL
+         PNRw==
+X-Forwarded-Encrypted: i=1; AKwUvByfdZtKV+kqBawSPhQu2hwtT5XlhXzRPUtBByha0EMIiuq5glQ5/BYqGnsW2XrpgxeQ2qbuYE9bN2k=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kHapvnlyrM6uO6S6TjKHBPURmhQ1nsv/yMbA0yqrKWy5AR6I8E
+	ykEKKd5wFUfVjYD/E+/2wXLVWpaJONFjFnoP+J6ezdGE6P+mnCsNBhvyhaMGX3S5MQ==
+X-Gm-Gg: AYBFou2aMib4/XBBRJc+hap4mVmmk05980BH2uTp+j5qc74j7y0xlOBIaS2DHnfHnb4
+	hnlqkX84/zwfI2vKMYKP8faaygDuAVD+tus6XEa9p73lHNZbLMBkTP9xM3COeiqH+mXsjUIvZl7
+	21uo/PSTDI5iTU0m1AVE2EnGptlvZk10/D6kYVAo0CoZTI+2/h2nDbuN5sCFCBZKYtdQYm35PPb
+	LypAGcXv2h6cPIkkv/AhTxgV/RgtBBUpjUqDCbcpnBWU/XuQPR8nb7UoXu0u/e6ASh+sgwosjko
+	bOeZW9VrDYxFO9qYBwlVLgcIsH70SgogoimnX5DrBTinI5iaWksZcSCjTHS9y6edEfxUt5aFR3k
+	lpWRwlG+MrBN2N62XvX3szyLZQ1napEuC87jvy7uIwPotFXaRkpUQvn8He/pXl7KhtuPoLhw4Pv
+	lW2TWmXG0q3taBb+bdS/Cj2QIT8P3RU3x28IDmZoFERScGv+MoTqHPzkQRYWM2lc85NWb2kYqO+
+	aqfZj3K5KhrOSd1ezo3hpUTcYUhBUU7R3WJcj2/TUUqrOQbEnYVml1+0evVVICBa4RwOekUzg==
+X-Received: by 2002:a05:600c:3145:b0:49f:bd3c:bc1a with SMTP id 5b1f17b1804b1-4a01b00d9bamr70945215e9.21.1790852441696;
+        Thu, 01 Oct 2026 04:00:41 -0700 (PDT)
+Message-ID: <07e9f4c5-0e5a-4420-b926-9598f79b4d1e@suse.com>
+Date: Thu, 1 Oct 2026 13:00:40 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen/x86: restrict XENFEAT_pae_pgdir_above_4gb setting
- to PV guests
-To: Roger Pau Monne <roger@xenproject.org>, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH] xen/x86: restrict XENFEAT_pae_pgdir_above_4gb setting to
+ PV guests
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <20261001091921.94138-1-roger@xenproject.org>
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260930191104.78141-1-roger@xenproject.org>
+ <a9d59bc1-6e21-4a8b-84e5-6daac02997c3@suse.com> <ar4Z4EQo7FulrZXF@Mac.lan>
 Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20261001091921.94138-1-roger@xenproject.org>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------xZKH7EXP8kjIIK4wAVKnfauy"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1790848607776
-X-purgate-ID: tlsNG-ef75cf/1790848609-A4AC8AE4-CE4DC037/0/0
-X-purgate-type: clean
-X-purgate-size: 7281
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <ar4Z4EQo7FulrZXF@Mac.lan>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-bad1c0/1790852442-BC8C9034-67D80536/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2024
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------xZKH7EXP8kjIIK4wAVKnfauy
-Content-Type: multipart/mixed; boundary="------------y6m6bWfKa76eLfmrTTpWJpKl";
- protected-headers="v1"; hp="clear"
-Message-ID: <c4b3fc15-bb46-45a0-8aea-b1f7e213d9f8@vates.tech>
-Date: Thu, 1 Oct 2026 11:56:47 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen/x86: restrict XENFEAT_pae_pgdir_above_4gb setting
- to PV guests
-To: Roger Pau Monne <roger@xenproject.org>, xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <20261001091921.94138-1-roger@xenproject.org>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20261001091921.94138-1-roger@xenproject.org>
+On 01.10.2026 10:29, Roger Pau Monné wrote:
+> On Thu, Oct 01, 2026 at 09:34:34AM +0200, Jan Beulich wrote:
+>> On 30.09.2026 21:11, Roger Pau Monne wrote:
+>>> @@ -692,7 +690,9 @@ long do_xen_version(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
+>>>              if ( is_pv_domain(d) )
+>>>                  fi.submap |= (1U << XENFEAT_mmu_pt_update_preserve_ad) |
+>>>                               (1U << XENFEAT_highmem_assist) |
+>>> -                             (1U << XENFEAT_gnttab_map_avail_bits);
+>>> +                             (1U << XENFEAT_gnttab_map_avail_bits) |
+>>> +                             (VM_ASSIST(d, pae_extended_cr3) ?
+>>> +                              (1U << XENFEAT_pae_pgdir_above_4gb) : 0);
+>>
+>> Nit: Unlike binary operators, which we want to have placed at the end of
+>> wrapped lines, we generally prefer the ternary operator to be wrapped
+>> differently. E.g.
+>>
+>>                              (VM_ASSIST(d, pae_extended_cr3)
+>>                               ? (1U << XENFEAT_pae_pgdir_above_4gb) : 0);
+>>
+>> or 
+>>
+>>                              (VM_ASSIST(d, pae_extended_cr3)
+>>                               ? (1U << XENFEAT_pae_pgdir_above_4gb)
+>>                               : 0);
+>>
+>> This isn't written down anywhere, so I'm not going to insist.
+> 
+> I had it written as your first proposal, but then moved the ternary
+> operator at the end of the line as I've assumed it would be prefer to
+> match the position of the binary ones.
+> 
+>> Furthermore, wouldn't it be plausible to also add IS_ENABLED(CONFIG_PV32)
+>> (or, imo less desirably, opt_pv32)?
+> 
+> I could do:
+> 
+> if ( IS_ENABLED(CONFIG_PV32) && VM_ASSIST(d, pae_extended_cr3) )
+>     fi.submap |= 1U << XENFEAT_pae_pgdir_above_4gb
+> 
+> As I think adding the IS_ENABLED(CONFIG_PV32) check to the previous
+> expression is too much.
+> 
+> Let me know your preference.
 
---------------y6m6bWfKa76eLfmrTTpWJpKl
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+I'm okay with the if() variant, but as you know I'm also not afraid of
+long-ish ternary expressions.
 
-TGUgMDEvMTAvMjAyNiDDoCAxMToyMSwgUm9nZXIgUGF1IE1vbm5lIGEgw6ljcml0wqA6DQo+
-IFhFTkZFQVRfcGFlX3BnZGlyX2Fib3ZlXzRnYiBpcyBvbmx5IHVzZWQgYnkgMzJiaXQgUFYg
-Z3Vlc3RzLCBoZW5jZSBsaW1pdA0KPiBpdHMgc2V0dGluZyBpbiBYRU5WRVJfZ2V0X2ZlYXR1
-cmVzIHRvIHRoZSBpc19wdl9kb21haW4oKSBndWFyZGVkIHNlY3Rpb24sDQo+IHdpdGggdGhl
-IHJlc3Qgb2YgdGhlIFBWIHNwZWNpZmljIGZlYXR1cmVzLg0KPiANCj4gTm8gZnVuY3Rpb25h
-bCBjaGFuZ2UgaW50ZW5kZWQuDQo+IA0KPiBTaWduZWQtb2ZmLWJ5OiBSb2dlciBQYXUgTW9u
-bsOpIDxyb2dlckB4ZW5wcm9qZWN0Lm9yZz4NCj4gLS0tDQo+IENoYW5nZXMgc2luY2UgdjE6
-DQo+ICAgLSBKdXN0IG1vdmUgdGhlIGNvbmRpdGlvbmFsIGJ1dCBkb24ndCBtZXJnZSBpdC4N
-Cj4gLS0tDQo+ICAgeGVuL2NvbW1vbi9rZXJuZWwuYyB8IDYgKysrKy0tDQo+ICAgMSBmaWxl
-IGNoYW5nZWQsIDQgaW5zZXJ0aW9ucygrKSwgMiBkZWxldGlvbnMoLSkNCj4gDQo+IGRpZmYg
-LS1naXQgYS94ZW4vY29tbW9uL2tlcm5lbC5jIGIveGVuL2NvbW1vbi9rZXJuZWwuYw0KPiBp
-bmRleCBmNGJiZDg4MThmYTguLjY4MTE1OTlmOTVmZCAxMDA2NDQNCj4gLS0tIGEveGVuL2Nv
-bW1vbi9rZXJuZWwuYw0KPiArKysgYi94ZW4vY29tbW9uL2tlcm5lbC5jDQo+IEBAIC02Nzcs
-OCArNjc3LDYgQEAgbG9uZyBkb194ZW5fdmVyc2lvbihpbnQgY21kLCBYRU5fR1VFU1RfSEFO
-RExFX1BBUkFNKHZvaWQpIGFyZykNCj4gICAgICAgICAgICAgICAgICAgICAgICAgICAoMVUg
-PDwgWEVORkVBVF92Y3B1X3RpbWVfcGh5c19hcmVhKSB8DQo+ICAgI2VuZGlmDQo+ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgKDFVIDw8IFhFTkZFQVRfcnVuc3RhdGVfcGh5c19hcmVh
-KTsNCj4gLSAgICAgICAgICAgIGlmICggVk1fQVNTSVNUKGQsIHBhZV9leHRlbmRlZF9jcjMp
-ICkNCj4gLSAgICAgICAgICAgICAgICBmaS5zdWJtYXAgfD0gKDFVIDw8IFhFTkZFQVRfcGFl
-X3BnZGlyX2Fib3ZlXzRnYik7DQo+ICAgICAgICAgICAgICAgaWYgKCBwYWdpbmdfbW9kZV90
-cmFuc2xhdGUoZCkgKQ0KPiAgICAgICAgICAgICAgICAgICBmaS5zdWJtYXAgfD0NCj4gICAg
-ICAgICAgICAgICAgICAgICAgICgxVSA8PCBYRU5GRUFUX3dyaXRhYmxlX3BhZ2VfdGFibGVz
-KSB8DQo+IEBAIC02OTAsOSArNjg4LDEzIEBAIGxvbmcgZG9feGVuX3ZlcnNpb24oaW50IGNt
-ZCwgWEVOX0dVRVNUX0hBTkRMRV9QQVJBTSh2b2lkKSBhcmcpDQo+ICAgI2VuZGlmDQo+ICAg
-I2lmZGVmIENPTkZJR19YODYNCj4gICAgICAgICAgICAgICBpZiAoIGlzX3B2X2RvbWFpbihk
-KSApDQo+ICsgICAgICAgICAgICB7DQo+ICAgICAgICAgICAgICAgICAgIGZpLnN1Ym1hcCB8
-PSAoMVUgPDwgWEVORkVBVF9tbXVfcHRfdXBkYXRlX3ByZXNlcnZlX2FkKSB8DQo+ICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVORkVBVF9oaWdobWVtX2Fzc2lz
-dCkgfA0KPiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKDFVIDw8IFhFTkZFQVRf
-Z250dGFiX21hcF9hdmFpbF9iaXRzKTsNCj4gKyAgICAgICAgICAgICAgICBpZiAoIFZNX0FT
-U0lTVChkLCBwYWVfZXh0ZW5kZWRfY3IzKSApDQo+ICsgICAgICAgICAgICAgICAgICAgIGZp
-LnN1Ym1hcCB8PSAoMVUgPDwgWEVORkVBVF9wYWVfcGdkaXJfYWJvdmVfNGdiKTsNCj4gKyAg
-ICAgICAgICAgIH0NCj4gICAgICAgICAgICAgICBlbHNlDQo+ICAgICAgICAgICAgICAgICAg
-IGZpLnN1Ym1hcCB8PSAoMVUgPDwgWEVORkVBVF9odm1fc2FmZV9wdmNsb2NrKSB8DQo+ICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAoMVUgPDwgWEVORkVBVF9odm1fY2FsbGJh
-Y2tfdmVjdG9yKSB8DQoNClJldmlld2VkLWJ5OiBUZWRkeSBBc3RpZSA8dGVkZHkuYXN0aWVA
-dmF0ZXMudGVjaD4NCg0KVGVkZHkNCg==
-
---------------y6m6bWfKa76eLfmrTTpWJpKl--
-
---------------xZKH7EXP8kjIIK4wAVKnfauy
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmq+Ll8FAwAAAAAACgkQZg+p0QLLz9Dz
-3AwAhBYtuA3NQSuElrOTQ00cN7A5vR1fleJKL65Fao6PlojYdDf3nzessSZXebK/L6Kd5w+gQkn0
-JGr94guRlSKld/35ExG0Ib9xGnHjbSw9ki+UwvqEQZ7vanjBprp7/0SrZAkX69MonV3/rrQe13i+
-j5a40ZZ3/N9nRSJjP1xcK0iRQa0AXeBPAuhAruVQrHQp7GHgk/C7Lby9JFw8z3h1JpHvB0aJLyYY
-nqn/cEGmP/r6RTHxfUEqwqRIoKoM9s2kjb53ETEimeY2Lxw3KnUUEQGH+INBtEQT0mvBJusDInop
-Hl2GCG4PfXM57PlUQfELqpERcxdWXpfOG4/aVlXY9Omxurxu324a0TwMMpoU5BkhPSGe6ylH7f+Y
-rJzNsRAWBAh5SrmjvFIOQIZRKHOudEQHnnk8fzNBye5hlF9P84QDA/eJQKajKx3S279xcRiec2Rs
-pA7ivtaPHZMKHZ0k7GFrQIs/I8Dj4WKuCbvY0y3lLIaP9pm9m0jkSXvZdwTo
-=+g7Q
------END PGP SIGNATURE-----
-
---------------xZKH7EXP8kjIIK4wAVKnfauy--
+Jan
 
