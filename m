@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 80A3ACA5FB3
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:05:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438158.1657023 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2ADA2CA5FB3
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 11:09:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1438164.1657031 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCEbf-00067K-PH; Thu, 01 Oct 2026 11:05:43 +0000
+	id 1xCEeh-0006kl-5Q; Thu, 01 Oct 2026 11:08:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438158.1657023; Thu, 01 Oct 2026 11:05:43 +0000
+Received: by outflank-mailman (output) from mailman id 1438164.1657031; Thu, 01 Oct 2026 11:08:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCEbf-00067D-M4; Thu, 01 Oct 2026 11:05:43 +0000
-Received: by outflank-mailman (input) for mailman id 1438158;
- Thu, 01 Oct 2026 11:05:42 +0000
+	id 1xCEeh-0006ke-2T; Thu, 01 Oct 2026 11:08:51 +0000
+Received: by outflank-mailman (input) for mailman id 1438164;
+ Thu, 01 Oct 2026 11:08:49 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xCEbe-000676-Hj
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:05:42 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xCEef-0006kR-EP
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:08:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCEbd-008KP8-UW
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:05:41 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xCEee-00FTyt-Hf
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 13:08:48 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abe3e75-e002-0a2a0a5209dd-0a2a4504d9a8-32
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:05:41 +0200
-Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abe3f36-e002-0a2a0a5209dd-0a2a4505a24c-40
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:08:48 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6abe3e84-b57f-0a2a45040019-4a7de18dd3ec-3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:05:40 +0200
-Received: by mail-wm2-f13.google.com with SMTP id
- 5b1f17b1804b1-49b912e4b11so38146395e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 04:05:40 -0700 (PDT)
+ id 6abe3f40-4cb1-0a2a45050019-4a7de18ca40e-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 13:08:48 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49b912d391aso48960195e9.2
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 04:08:48 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a01f96d01csm43801495e9.2.2026.10.01.04.05.39
+ 5b1f17b1804b1-4a01f6db98fsm51406635e9.0.2026.10.01.04.08.47
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 01 Oct 2026 04:05:39 -0700 (PDT)
+ Thu, 01 Oct 2026 04:08:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,56 +54,60 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790852740; x=1791457540; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1790852928; x=1791457728; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=BdY+cB2fNcNO2e6k4oQvAntu10bBGWQCjhFtQXa2zTw=;
-        b=ZtHEGURR2gptICOVn/Rga27c5czwFMTjhQh6kczXChqqz9uecY9nxEGRJl9b+gUGBo
-         8WVixVUAeRxVCqREHqOd/XKWA3c5xLX2a3LBXkYDOImTnm4d0ecHOYbgI4eo/XUFLLK+
-         4nkXOU06LoiW1Gnk9fXUn57/BRWehSj9z78T+wGsZOxC/Y0fxrD3vwwvJoMH72Z0B2wV
-         P6NDxRTpR2ge4oE7TiBpnbwUnoNyeemPZafERW7d4S42WmXaBgtnEB+Y2olnEYiupRk3
-         eoOtVrwBi1xsb7RnDIvr5Q2D8ZUZkfyoFFCZypfG+RksNxaVrpYoK42y6wTczYylgLaD
-         eKIA==
+        bh=pfOHFJUM1kARODcyi40nJaFMEVGuV9H/jMBu2s8f/z0=;
+        b=N/BH+q29NsJVHaaJFUmDKCP1svrO7iHnwCuM6kz1BrIsR7KtfGY9EUysR9QdfT6wfq
+         w0Ag5yQtkP5klIWild1+z+VgNMFSZeF+WD5CcrP4YLISeawLC9Rk+EY5pd8+BoMUI6jg
+         HLUxSEr25+kyni+sspmTtlKkScYPfrUbXULz1U1FoK2z8DVxkNcxmpylFw7zBFDlUeDL
+         qWy23pg9EV5UCpyZVUhsZ8roVvjdNhwrMS+faG60oXHPlsfumM1lDQT1BNFpq1SgmyJ2
+         ECpgQFpaQH8cU3LpwqGjd8Z6F1Vi/3L5wl6Qg4mSfqbFzukY0+PPQ/2ammXk56witdJD
+         5oyA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790852740; x=1791457540;
+        d=1e100.net; s=20260707; t=1790852928; x=1791457728;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=BdY+cB2fNcNO2e6k4oQvAntu10bBGWQCjhFtQXa2zTw=;
-        b=s9J1H8veP0hNc/uCRDCJhpWfSpPOKj4dmf8bZoZJuV+hOLGryoNDSshvpC78GnRIlF
-         OzCzkPTB7GRgq39KJgAAqfUyZrK1i0JUlAUPAWCwuDCmAi0KuZRjCP3pNrJ/x98nTeYc
-         +QoWkGUFEPSSwUsqlCZuyBpPNzDmdwQTCMIIGeNYr03025zwWKC79CPPyXN1gj5m4kWa
-         Dko0bVzf9VVg9jpBq0fBc6SipPatHbVhU1SJvvd9qTfhwvPB34a7hbdLwi28goJFCvGh
-         81NOHZDIfZ2OFUL3MpzcAMpr6qMj+fcWvfwgG2ihiGOqgnOhZZdB9RnCVoDoE8iaao5P
-         KumA==
-X-Forwarded-Encrypted: i=1; AKwUvBxzvVaRcio2NdAljCs0ak5ByNmhUFfkbmWcJX2aYuDGpCDTMDgRzlDYqheIGDeAPfypcYQ4SCX3HMk=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kButDAUrJo/M+nhq57W/H72O0glqzh+GnPfke2A9ClCAjhcgkE
-	+fB8YqE15tjxGQJeHbjn2sPzk5xtB6TkjACWZo2iQaohCDy4NKRSTUCCS4I6n2KS1g==
-X-Gm-Gg: AYBFou21fidoAUuu8sXidGkw0jGtOwIkIYFxAFN+Ny80xptUWPCFg6KD26wPDY/4xQ2
-	aohZbd5tZw9zH/8LPcaFWN/fEbqKLih01rA6eMUDrqo6nIMi6Q0370ynIna3tVHlUWlrpCn86s5
-	V88Gg0iCI4oI250+80tGJawRtGVpmjkBrPXgRDGLRvV9sPFX8ujlo1hIqtUXWdQCtEY8762NSR6
-	sswH4xTz8ZB+NtgIQpxyzM6HaI3aQLWOFgK0XXBgWiEBE4RL7JNgmJxVrPqBmeSOSvEgP96Fo2a
-	WnZNDFWaB4eeb8mAw+Yh5ssH7nQ45Gjq2uqSekx8vOWpspZMrw+jZoxavE7Z32U5AE4WC46aEor
-	wbXmbashd39+Vm4v+VYXAnwEKRZ3JTqMWw2F/EjvS/W/AqjECWFINTHiIM7Y8hm5AhoElUP8O6J
-	mmgnKtWQRfnvRj80kpfysaxblSocqJSjWYGI9fu3AZ/2ZiIxZ4fT/tZPsQmgc69/sk4PDxKDqIO
-	JbsoFSKxd4GYY/GzyRGcsx0V5Gfzk7NQQ5J1t8PgmgFLmD59yVK443rrE9p2g==
-X-Received: by 2002:a05:600c:474f:b0:49e:6e7c:d895 with SMTP id 5b1f17b1804b1-4a01aff4fa9mr71566825e9.26.1790852740082;
-        Thu, 01 Oct 2026 04:05:40 -0700 (PDT)
-Message-ID: <5ff32e79-76c4-4f05-8290-14c248a79afb@suse.com>
-Date: Thu, 1 Oct 2026 13:05:39 +0200
+        bh=pfOHFJUM1kARODcyi40nJaFMEVGuV9H/jMBu2s8f/z0=;
+        b=TWdqan2w1wrOgpBG+q1GTHljsNajRd1cB2xOoAa8nW6sHcMXWViQ6swSW0J/6q71tw
+         Kk7uFgGAUwMNNPHh4OfWJwYmuGb4WLYgFfDKY3AKoBkUUcfxqeU7uZcsOODXe4Bnxw92
+         hzyDl9KUdH3u+bTtOBQEyULcr4A82cH0IAgHplD/N2kfsBFEKryverxu02X/x94h0ouz
+         Jfdco51IuFKUFlLKNbJkCUoiUoqStc4NL+AIqSmVG1rScloBQU83Q7X3/S1g2Rac/wPx
+         99XJLiUOwZd3AQVXjTyH8yBK96G17VshqKpFB76cO0Ie0LukuAciFnuuKCySge+pe0Bl
+         Su/A==
+X-Gm-Message-State: AFuF++kpWBRCU70MPRzLlNeHzmXYzi8FyExGmtGBRdEso2T6ieuFHO65
+	O/PRUnf6LcN5fczkbaoyyq3/rIydqiUWqcph5GgF/LapjJq8ar9G2CKUtwPl+djBZQ==
+X-Gm-Gg: AYBFou2LADzeh6KrVuZStLAAzWs2enw5rOzOADA8JPIbZX4xE/VGJdG0I1MYkxq47J/
+	l2IzGTUSBuC3v3KUyfKdFYOrNIntLkFDL//IOTMYewHFwAvmzs1UpjYBSSrB8h7BCSSn4DYEGPO
+	PEenOjimIcTO5FNCnUqRtfqkxsWoOc/jx4P361/gFiwI75N14N/lhMySTmBk0MgGn2TUqOe0x+Z
+	ulj54bR4VzxWVHf6xLuWsW9YPxErLTn+WeNw3vXtZ4vK1rYX0K46ejrlobawqJ3zWmN1GPUe9l2
+	8vLBIv4RNdd/bvUP7ZDibSu2Fb/SkA3/mDG9V2kDxrtqgMo5WQkownusFs2FHqHfyrGwqBEQMD/
+	2xFRaDvp53yHsM7uLWfB14z9V8B1K9weutNEEfthF3ygyXWkbHWEOTkxH9FPlb3fMQ/gUIy87yE
+	y5H80tr0Aj9yc8ihaYc4geHadC0wlwlgWyjKtscx+DlUiyPfqpuFANh4sjyh3Vz2CXv46DIO396
+	MLzXlRNrCV1j8B01r7BAJBG2gvpw4HjAXPzhXI9PycB3Ls/EZc+YhDfMzjxHes=
+X-Received: by 2002:a05:600c:5020:b0:4a0:1efa:c746 with SMTP id 5b1f17b1804b1-4a01efad733mr36150775e9.21.1790852927874;
+        Thu, 01 Oct 2026 04:08:47 -0700 (PDT)
+Message-ID: <2a9c133f-004b-4360-af53-2c8127f9a0bf@suse.com>
+Date: Thu, 1 Oct 2026 13:08:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen/x86: restrict XENFEAT_pae_pgdir_above_4gb setting
- to PV guests
-To: Roger Pau Monne <roger@xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
+Subject: Re: [PATCH v4 4/4] xen/riscv: use pte_is_valid() in pte_is_mapping()
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20261001091921.94138-1-roger@xenproject.org>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <1790845467.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@vates.tech>
+ <1790845650.8631fc262581453bbf619ec5b2062170.1a0f6b805100003f66@vates.tech>
+ <1790846121.8631fc262581453bbf619ec5b2062170.1a0f6bf34f40003f66@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,26 +133,33 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261001091921.94138-1-roger@xenproject.org>
+In-Reply-To: <1790846121.8631fc262581453bbf619ec5b2062170.1a0f6bf34f40003f66@vates.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1790852740-52ECEB50-336A07F7/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c201ff/1790852928-F5EA92A1-4475EA17/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 471
+X-purgate-size: 728
 
-On 01.10.2026 11:19, Roger Pau Monne wrote:
-> XENFEAT_pae_pgdir_above_4gb is only used by 32bit PV guests, hence limit
-> its setting in XENVER_get_features to the is_pv_domain() guarded section,
-> with the rest of the PV specific features.
+On 01.10.2026 11:15, Baptiste Le Duc wrote:
+> On 2026-10-01 11:07 +0200, Baptiste Le Duc wrote:
+>> Use pte_is_valid() instead of open-coding the PTE_VALID check.
+>>
+>> No functional change.
+>>
+>> Assisted-by: Claude:claude-opus-5
+>> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 > 
-> No functional change intended.
+> I forgot the changelog for this patch:
 > 
-> Signed-off-by: Roger Pau Monné <roger@xenproject.org>
-> ---
-> Changes since v1:
->  - Just move the conditional but don't merge it.
+> Changes since v3:
+> - Rebase on the pte_is_reserved() -> pte_has_reserved_rwx() rename in
+> patch 3, only the context line changes.
+> 
+> Sorry for the noise, I didn't know if the reviewed-by
+> Oleksii gave applied here as I rebased the patch.
 
-And still no CONFIG_PV32 dependency?
+If it's a re-base which doesn't affect or alter the code change you're
+doing, I don't think an R-b needs dropping.
 
 Jan
 
