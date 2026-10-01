@@ -4,32 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 24E2ECA5FA5
-	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 08:30:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438029.1656895 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9E884CA5FA5
+	for <xen-devel@archiver.kernel.org>; Thu,  1 Oct 2026 09:05:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1438047.1656924 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCCAW-0002iV-D1; Thu, 01 Oct 2026 08:29:32 +0000
+	id 1xCCiS-0008Lo-36; Thu, 01 Oct 2026 09:04:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438029.1656895; Thu, 01 Oct 2026 08:29:32 +0000
+Received: by outflank-mailman (output) from mailman id 1438047.1656924; Thu, 01 Oct 2026 09:04:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCCAW-0002iO-9L; Thu, 01 Oct 2026 08:29:32 +0000
-Received: by outflank-mailman (input) for mailman id 1438029;
- Thu, 01 Oct 2026 08:29:31 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger@xenproject.org>) id 1xCCAU-0002iI-V3
- for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 08:29:30 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1xCCAR-009L3t-05;
- Thu, 01 Oct 2026 08:29:27 +0000
-Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
- helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1xCCAQ-001qM0-2u;
- Thu, 01 Oct 2026 08:29:27 +0000
+	id 1xCCiR-0008Lh-WA; Thu, 01 Oct 2026 09:04:35 +0000
+Received: by outflank-mailman (input) for mailman id 1438047;
+ Thu, 01 Oct 2026 09:04:34 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xCCiP-0008Lb-NX
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 09:04:34 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xCCiO-00DlBv-M9
+ for xen-devel@lists.xenproject.org; Thu, 01 Oct 2026 11:04:32 +0200
+Received: from [10.42.69.3] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@swg.vates.tech>)
+ id 6abe221d-8faa-0a2a0a5109dd-0a2a4503dabe-24
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 11:04:32 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@swg.vates.tech>)
+ id 6abe221f-fae8-0a2a45030019-b9ff1c129739-3
+ for <xen-devel@lists.xenproject.org>; Thu, 01 Oct 2026 11:04:32 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a0f6b5397a0003f66.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 01 Oct 2026 09:04:27 +0000
+Received: from leducb.home (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
+ [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id ECD7482991;
+ Thu,  1 Oct 2026 11:04:25 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,72 +56,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:
-	References:Message-ID:Subject:Cc:To:From:Date;
-	bh=ERCkGy06F6WaYlQs1OJpg1kfBZNvGF0EFHPqMlyYbZw=; b=WHzvazPuYkujEX6olOCjuiM2ib
-	d6hRd2lY5ZQn+kK9IlJM0H9X3N4DjYpaC3SGDfDex8aHSJQM/0UkaTwvo5yM8jA4Aztk1vfVArkH9
-	rjmQv+9cA1+qwo8PzBldO5NwY1ooHgeVI/be8LtsrwpLQFCn/svM+yJf8YY+FP5R0Z4Q=;
-Date: Thu, 1 Oct 2026 10:29:20 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=+8QBoOIKOWfF9rnN5stnQrG/hubBCM2JvyP2H7Td2yY=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:feedback-id;
+ b=nqrKHxssMdhd7GAORWMs0Tvyc+o0ZWeko4ceHwC9M7FR6mvvLZ97NPW3jFuihpFTGcFhsdbii
+ 3kSMJ/QzFAmwX5l+hnQs3sFVL+szOgck1PdUxANxSKAOHgpmWP9ZYBQ8geGIiMaR9yFsNmTyPHw
+ O/ii2wgondyi/RAxG2wYrbpmDt9Nf6veHmSvDyxvqsK5kmMJfkofL4fS/eZCEsBzleEGBTUPvj7
+ ouYaLlK1sm7RSSyxPvR9MJPEK1ICkSZ1yAPWlD8IgNB8m/EO7aiVz9DEdwVpN2LqOwXahhevs6P
+ 0ef1IjQVXW2sSuLyxQdnTMiILCgexcmUmIzPJlb1RR4g==
+X-Zone-Loop: 076be8fcac45071a0968a546e370431a92c87ffad0eb
+x-campaign-type: default
+x-transaction-id: d326a497-6f29-48f0-b832-bb067ebfdf75
+x-swg-uid: 01-37574318-7091-46b3-b068-3a4851b3a831
+X-Mailer: Sweego
+Message-ID:
+ <1790845467.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@vates.tech>
+x-swg-bid: 1790845467.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: xen-devel@lists.xenproject.org
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
 	Stefano Stabellini <sstabellini@kernel.org>,
-	xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] xen/x86: restrict XENFEAT_pae_pgdir_above_4gb setting to
- PV guests
-Message-ID: <ar4Z4EQo7FulrZXF@Mac.lan>
-References: <20260930191104.78141-1-roger@xenproject.org>
- <a9d59bc1-6e21-4a8b-84e5-6daac02997c3@suse.com>
+	Alistair Francis <alistair.francis@wdc.com>,
+	Connor Davis <connojdavis@gmail.com>,
+	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	Zheng Zhang <ZhengZhangzhangzheng@iscas.ac.cn>
+Subject: [PATCH v4 0/4] xen/riscv: fix boot on missing extensions and MMU setup bugs
+Date: Thu,  1 Oct 2026 11:04:15 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-In-Reply-To: <a9d59bc1-6e21-4a8b-84e5-6daac02997c3@suse.com>
+Content-Type: text/plain; charset="utf-8"
+X-Change-ID: 20260902-riscv-fix-boot-missing-ext-a79c23bad694
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1790845141; l=3999; i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id; bh=e2CqMJBv1Bm2wnQbRMy0Yn2dXx+BC5kTAZ1V7P6Uj+I=; b=sMBDyUgr16GLJd04ICfFhZTil8DmWZT2Be6hVA3DoTygSSMqYYijSh2u2FV6QIJ29ivY1FjuC N8DMGt8NFdmClLNDJsgGSqgUStmiYCkULZDdl1I+P9gCtepYnqrt3EZ
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519; pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+Content-Transfer-Encoding: 8bit
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1790845466176
+X-purgate-ID: tlsNG-33051d/1790845472-6E0D14E9-AF9C9876/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 4001
 
-On Thu, Oct 01, 2026 at 09:34:34AM +0200, Jan Beulich wrote:
-> On 30.09.2026 21:11, Roger Pau Monne wrote:
-> > @@ -692,7 +690,9 @@ long do_xen_version(int cmd, XEN_GUEST_HANDLE_PARAM(void) arg)
-> >              if ( is_pv_domain(d) )
-> >                  fi.submap |= (1U << XENFEAT_mmu_pt_update_preserve_ad) |
-> >                               (1U << XENFEAT_highmem_assist) |
-> > -                             (1U << XENFEAT_gnttab_map_avail_bits);
-> > +                             (1U << XENFEAT_gnttab_map_avail_bits) |
-> > +                             (VM_ASSIST(d, pae_extended_cr3) ?
-> > +                              (1U << XENFEAT_pae_pgdir_above_4gb) : 0);
-> 
-> Nit: Unlike binary operators, which we want to have placed at the end of
-> wrapped lines, we generally prefer the ternary operator to be wrapped
-> differently. E.g.
-> 
->                              (VM_ASSIST(d, pae_extended_cr3)
->                               ? (1U << XENFEAT_pae_pgdir_above_4gb) : 0);
-> 
-> or 
-> 
->                              (VM_ASSIST(d, pae_extended_cr3)
->                               ? (1U << XENFEAT_pae_pgdir_above_4gb)
->                               : 0);
-> 
-> This isn't written down anywhere, so I'm not going to insist.
+This series introduces bugs fixes that were found while bringing up CI
+support for the HiFive Premier P550 board with a basic smoke test. The
+board-support series itself will follow separately as it depends on
+PLIC/vPLIC and dom0less support that have not been upstreamed yet. This
+series carries only the independent fixes found along the way, none of them
+need the board-support series to apply.
 
-I had it written as your first proposal, but then moved the ternary
-operator at the end of the line as I've assumed it would be prefer to
-match the position of the binary ones.
+This series:
+    1: Rename PTE "permissions" to "pte_flags"
+    2: Always preset A/D bits in G-stage PTEs
+    3: Fix A/D bit handling in Xen's page-table mappings
+    4: Use pte_is_valid() in pte_is_mapping()
 
-> Furthermore, wouldn't it be plausible to also add IS_ENABLED(CONFIG_PV32)
-> (or, imo less desirably, opt_pv32)?
+CI pipeline:
+https://gitlab.com/xen-project/people/baptleduc/xen/-/pipelines/2900391526
 
-I could do:
+---
+Changes since v3:
+- Drop v3 patches 1, 6 already upstreamed:
+    861e44a3ba8e ("xen/riscv: make Zihintpause no longer a required
+    extension")
+    469d83d42f5c ("docs/riscv: sync required ISA extensions with
+    required_extensions[]")
+- Add trailers (A-by and/or R-by).
+- Rename patch 3 to ("xen/riscv: always preset A/D bits in G-stage PTEs")
+  as it now always presets A/D bits instead of distinguish Svadu/Svade DT
+  bindings cases.
+- Address review comments.
+- Link to v3: https://patch.msgid.link/1790699381.8631fc262581453bbf619ec5b2062170.1a0ee00218b000b504@vates.tech
+---
+Changes since v2:
+- Drop v2 patches 5 and 6, already upstreamed:
+    d8ca89f26c8a ("xen/riscv: flush speculatively cached Bare-mode TLB entries in turn_on_mmu()")
+    08a898b93d21 ("xen/riscv: fix level_map_mask truncation on load_start")
+- Drop "xen/riscv: make Svpbmt no longer a required extension".
+  It relaxed Svpbmt so boards without it, like the HiFive P550, could boot.
+  But without Svpbmt, DMA-noncoherent devices do not snoop the CPU caches
+  and can read stale data from DRAM. Mainline Linux has the same problem,
+  which is explained and reproducible in [1]. Fixing it needs a lot of
+  machinery we do not need yet, and Svpbmt is mandatory in RVA23, so
+  keeping it required is simpler and safer. An RFC will follow with a fix
+  inspired by [2].
+- Add three new patches:
+    docs/riscv: sync required ISA extensions with required_extensions[]
+    xen/riscv: rename PTE "permissions" to "pte_flags"
+    xen/riscv: use pte_is_valid() in pte_is_mapping()
+- Address review comments.
 
-if ( IS_ENABLED(CONFIG_PV32) && VM_ASSIST(d, pae_extended_cr3) )
-    fi.submap |= 1U << XENFEAT_pae_pgdir_above_4gb
+[1] https://github.com/davidlohr/vanilla-kernel-sifive-p550/tree/master
+[2] https://lwn.net/Articles/996819/
+---
+Changes since v1:
+- address ML comments
+- rename some patchs
+- add new patch-fix: 242dd1f890e4 ("xen/riscv: fix level_map_mask
+  truncation on load_start") discovered when working on Spacemit K3 support
+---
 
-As I think adding the IS_ENABLED(CONFIG_PV32) check to the previous
-expression is too much.
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>
+Cc: Michal Orzel <michal.orzel@amd.com>
+Cc: Jan Beulich <jbeulich@suse.com>
+Cc: Julien Grall <julien@xen.org>
+Cc: Roger Pau Monné <roger@xenproject.org>
+Cc: Stefano Stabellini <sstabellini@kernel.org>
+Cc: Alistair Francis <alistair.francis@wdc.com>
+Cc: Connor Davis <connojdavis@gmail.com>
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Zheng Zhang <Zheng Zhang <zhangzheng@iscas.ac.cn>
 
-Let me know your preference.
+---
+Baptiste Le Duc (4):
+      xen/riscv: rename PTE "permissions" to "pte_flags"
+      xen/riscv: always preset A/D bits in G-stage PTEs
+      xen/riscv: fix A/D bits in Xen's page-table mappings
+      xen/riscv: use pte_is_valid() in pte_is_mapping()
 
-Thanks, Roger.
+ xen/arch/riscv/cpufeature.c       |  1 -
+ xen/arch/riscv/include/asm/mm.h   |  5 +++--
+ xen/arch/riscv/include/asm/page.h | 35 ++++++++++++++++----------------
+ xen/arch/riscv/mm.c               | 14 ++++++-------
+ xen/arch/riscv/p2m.c              | 42 ++++++++++-----------------------------
+ 5 files changed, 37 insertions(+), 60 deletions(-)
+---
+base-commit: 4c1aba82cff95ab11f7fe4af8965a06703537288
+change-id: 20260902-riscv-fix-boot-missing-ext-a79c23bad694
+
+Best regards,
+--  
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
+
 
