@@ -4,43 +4,47 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id AE67ECA5FD9
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2026 08:09:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1438914.1657437 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B58CA5FD9
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2026 08:31:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1438923.1657445 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCYKI-0006rt-Ea; Fri, 02 Oct 2026 08:09:06 +0000
+	id 1xCYg0-0002RB-1r; Fri, 02 Oct 2026 08:31:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1438914.1657437; Fri, 02 Oct 2026 08:09:06 +0000
+Received: by outflank-mailman (output) from mailman id 1438923.1657445; Fri, 02 Oct 2026 08:31:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCYKI-0006rm-Bg; Fri, 02 Oct 2026 08:09:06 +0000
-Received: by outflank-mailman (input) for mailman id 1438914;
- Fri, 02 Oct 2026 08:09:05 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xCYKH-0006rg-0A
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 08:09:05 +0000
+	id 1xCYfz-0002R4-VT; Fri, 02 Oct 2026 08:31:31 +0000
+Received: by outflank-mailman (input) for mailman id 1438923;
+ Fri, 02 Oct 2026 08:31:31 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xCYfy-0002Qy-32
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 08:31:31 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCYKG-00FQHM-DG
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 10:09:04 +0200
+ id 1xCYfx-004MGb-Fv
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 10:31:29 +0200
 Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abf6699-2eae-0a2a0a5409dd-0a2a4509cd42-42
- for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 10:09:04 +0200
-Received: from [74.125.225.141] (helo=mail-wm2-f13.google.com)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0fbbd5a1c0003f66@swg.vates.tech>)
+ id 6abf6be0-2eae-0a2a0a5409dd-0a2a450999b0-2
+ for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 10:31:29 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
  by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6abf66a0-be1a-0a2a45090019-4a7de18da4de-3
- for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 10:09:04 +0200
-Received: by mail-wm2-f13.google.com with SMTP id
- 5b1f17b1804b1-49e7bcb94d3so55825805e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 01:09:04 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a027734b49sm64020455e9.10.2026.10.02.01.09.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 02 Oct 2026 01:09:03 -0700 (PDT)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a0fbbd5a1c0003f66@swg.vates.tech>)
+ id 6abf6be0-be1a-0a2a45090019-b9ff1c22b5df-3
+ for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 10:31:28 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a0fbbd5a1c0003f66.001 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Fri, 02 Oct 2026 08:31:25 +0000
+Received: from [192.168.1.37] (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
+ [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id ECB4081E20
+ for <xen-devel@lists.xenproject.org>; Fri,  2 Oct 2026 10:31:24 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,132 +56,97 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1790928544; x=1791533344; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=MwvkEj/TS31JfS5RSjKTLCVJrQdmgPv68p4D/s3l3eo=;
-        b=Js8+8xcVRToXZR7X4uitsukzOLx/t7QMs/KQXM+F8gxSydCGBwcci1FfMoOk39L8EG
-         6DiaHkM7JrNdXOXxYDUwM0GEa7bWxXvx9ciCWsA7sRhc8SvIUn8CzkXvuXrcSalfdzuR
-         SPGGtwvBt2BenKFTnUossy+yswEODU+MTGHowSQd6nbSqvq5rdTxGAL5u6kDzlaMIhYv
-         X0YvPNt2DUxTo2CvBTGB1+fDusJWDerVrjxc/eQLRO+nBmQ59r8AkaD4XC9etRblEh54
-         QrEOCfFgfrtofqSfw5d0whj8pROPGoWHBM7IE6b5zuxtgxg2OjLhVeEO22Pg7efOdwfH
-         QH5g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1790928544; x=1791533344;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=MwvkEj/TS31JfS5RSjKTLCVJrQdmgPv68p4D/s3l3eo=;
-        b=mKPFYOIPhHmPcTUpt81DmjGYmuOeriWauGV6yOY5yWlxEJbsVmpZFPZOZ11rnKEwlF
-         1swJgkMDl1Mtffrll8h0w0Rts0iHZuRfXDTRX20wS8btwAfJRpHewfGtmCd5JNwsm+68
-         8e6xtdRigsaeBX+ZrRFrTfpekNijf+lUAhhcmHd0ko6vkGWo4OVpenr39X2C5/BVW3bo
-         jKSQJv36ouzod7C9Ka9PiOp9R5rw+4iUTYOGe6MmeycBvP3sERz8RMEWLogqTkxvEnD/
-         M6+D0dr8V+QawL+k1FnGCvuZ6ormnJWo29RdqQ4GPQmHY6InMLu2wTwRROpHlREVU9UH
-         ktqQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxtEkNOa96L59ci3SfZSdUvhMArhwmIdgFnrrfDsiWYCTJsmdIKXSn2tewcQH79qZkpWTsPXpbDAXo=@lists.xenproject.org
-X-Gm-Message-State: AFuF++nHchXwivMh6PZpfXDom2KOsVbY4MmYAjT57l4wXeyjgKTWqGBZ
-	1Ygf3ytFhaOxH489BAJ7C6ItelFFD0IsLwBbq7j7X6Ti2G8P6EaKiknI0E5DgOJ5Qc9ukVZwtjp
-	w+ipbBg==
-X-Gm-Gg: AYBFou2ijFXTvL9a8o1wq7zwYh1Eax06AWpD3c+a4NWztPXlhmU+Tm29ngbIoAR+HZq
-	A8HWmrm+E6GSZoArIaaR1GjYkq4y4HqNrdk24UD2glrczjTXkafdpk0fzyTXyHz5enW1mizRzvB
-	VC4Ok3jSfYLHvcvBWkeT7HYqNkXihtfA/YfR+XHKpQf+xO7zUAkOr2gGrR8tVaHILcpBej+FUa1
-	FbiwOH9W+K2SRdEVkk/ZA3FlSMYRHa3hm1mtoMuad4noZD4zqwfpTDBRYRwAW6bZb4c66V+qnka
-	JDYcWqNjwUA+qTqCn8y4KZzL0ZoDCFqFBeQSuwc2e/4dKnqem/cusx7p9Bt7cu+8PFwqf0OFg5x
-	rD9PQIiZbjggXtxzNhL9W9u3HCpJTsXW6kU2uGhjYM3UgU7y0EK6OWdLqzH+9SeZyz8BBwtjVgZ
-	q7anIP8IyY29/oA3DwjlZV0UUIEjEJRDt65zFizjQ9tNdNYiOZdCRuu+aFRw6FP+baKFCTVNduO
-	UWEaHOUOBe1VZ3CIrWQ2sUjaOKrKaacLyp68BfoheEyuAltsabf85OBcvQ0xQ==
-X-Received: by 2002:a05:600c:34cb:b0:4a0:1fe2:d4c8 with SMTP id 5b1f17b1804b1-4a02754224amr36092125e9.5.1790928543491;
-        Fri, 02 Oct 2026 01:09:03 -0700 (PDT)
-Message-ID: <1226702d-5bb4-4e7a-8e6a-6534002cfd8c@suse.com>
-Date: Fri, 2 Oct 2026 10:09:02 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=twKilgUD4v/y+COTK4YKEPJ7GAm3QgTdy1ysTdL3a6w=;
+ h=from:subject:date:message-id:to:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=WFjjX7zPhiFrRieWpggPU761KIdgie2gCIea/8Jwwca76mE3I5OIGtxRXmslYDbL+alKig2EE
+ vomBdYvURHBwyMyeTSSGhS3cFQBeZK+izAveg0m0u+LyxNq8ncz5kRZ0cb1OhohEAc9ZLLTolMq
+ FdAB4j1kKj60E2d+MH3HJc6fLwrcHSg9wfX1DXERkOJpcU3Dwm3fiMCes1eLClbOiSvvLEg2Hf4
+ ejsxnfA85HqQJaX7J7l/Er374B5IyGRww2SMNCv5NsKvxUkYSYNSEF0i0MrdNZbUvYrl048WVjW
+ G+AJFST2zpU2OwUmGyNq/+KAZfsh67YvTl8knDacC5ng==
+X-Zone-Loop: 827b38d0d8f3aad8936923eb5ab7fa9c5f36a6ff0203
+x-campaign-type: default
+x-transaction-id: d4523994-7390-4549-876a-f962665297b1
+x-swg-uid: 01-519338c7-ce9e-4b8d-a203-454f2357a0db
+X-Mailer: Sweego
+Message-ID:
+ <1790929885.8631fc262581453bbf619ec5b2062170.1a0fbbd5a1c0003f66@vates.tech>
+x-swg-bid: 1790929885.8631fc262581453bbf619ec5b2062170.1a0fbbd5a1c0003f66
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Fri, 2 Oct 2026 10:31:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/domain: restrict context switch hooks for the idle
- domain
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: Grygorii Strashko <grygorii_strashko@epam.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20261001142757.98255-1-roger@xenproject.org>
- <f3754c45-7899-4e76-bb29-dc8deca0903b@suse.com> <ar9htQD7BC6dRCRS@Mac.lan>
- <4eb32155-1b04-4f04-ab9b-f30e584cb033@suse.com> <ar9l3GKKZtIjfgaP@Mac.lan>
+Subject: Re: [PATCH v4 4/4] xen/riscv: use pte_is_valid() in pte_is_mapping()
+To: xen-devel@lists.xenproject.org
+References: <1790845467.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@vates.tech>
+ <1790845650.8631fc262581453bbf619ec5b2062170.1a0f6b805100003f66@vates.tech>
+ <1790846121.8631fc262581453bbf619ec5b2062170.1a0f6bf34f40003f66@vates.tech>
+ <2a9c133f-004b-4360-af53-2c8127f9a0bf@suse.com>
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ar9l3GKKZtIjfgaP@Mac.lan>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1790928544-BFCD7034-2B9CC734/10/78276251493
+Autocrypt: addr=baptiste.le-duc@vates.tech; keydata=
+ xsBNBGoPSX8BCADSuTikqW3FD4mscQugY1thRaKlIhcJ2G9YCWYXAlp+xosvTlzfIftOZZim
+ 750MLvyKtLPkQzB6TZtFZBiexSraaF/MdDKRTT5DcVa3r7ZnHgqMclWlPa4ioysS4yFcJanL
+ cyNOT7HUFvIdirMMqiViedfYtS0GORPBBPVISD6ClMz3ecHIxqllfq9CHYQn4amKEfHmh6tm
+ Rufo4Gjl6x8cUFZZlRQf+aCmUzdSPA0P5u3sueYH1uEz4w/jbD53MlKqzCvxUeOsfS2swTQA
+ 6mS9jIgOjNadpUTOzKfDHMgFirtG+HFpm45Nwp6KQizxgDVOfTnOfVHm5Gwqm3ETl9y5ABEB
+ AAHNPEJhcHRpc3RlIExlIER1YyAoVmF0ZXMgWXViaWtleSkgPGJhcHRpc3RlLmxlLWR1Y0B2
+ YXRlcy50ZWNoPsLAjgQTAQoAOBYhBGiSJ6HgW88MgT/gfu2Cu2XL9M6QBQJqD0l/AhsDBQsJ
+ CAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEO2Cu2XL9M6QuMcH/ihiy/Nrxp919AmY0ENnc0NK
+ r/2LDvW/hrX4FfbpxAmrGmQ7MU1aQTk0JDbfcsG8OYH6wO5sqnXb1gz50YrEdpfVSbHz5YTZ
+ EhDIxE4g7NrvJZh3Qc0m0CAyjYTNHen7J6olVaCMjrOH7uRHUYZ7Pl3am9mZosfLmez/aWJO
+ a6ihQxBXHI75brlk1teIURkep2kP7P0Flmfl4cA//saREoTF7GXCtjOSQk/xg8PP0Sswqp5G
+ TdJptn3FQn6lAzfz0eFSYqkaoX2c2k1MDa7o+UX9cfGPL8ybMKnYkasLxck6eOWGJWf+YTrm
+ ga/r0kBaftmqNDgt5nI2jNTDwZcT9g3OwE0Eag9JfwEIAM6IWbuBSvz+erv27oGDDpo8M6Fp
+ dGUvft7v+WceHUfxiXpYFx9qgIU6XGy6y+3lJMAvNcltS8DuhioqMlfKRSYGKZlpliY65dNP
+ 557IuM4ctVJ+I9CVclvv9eahARQKgF5auLJAAlvGSmU+ufNvlwTUmLIRcrPviTmB6X5jJYc+
+ fiNeyI0HcsgcN21C0r62tUCypuZ+vgEJXw2bx1V8mVGZKxdGJPh58QF6kRK+xmd4kEComLGV
+ BeM6BcVOtEjDcGNC0tLhXb0p9g1Ys55iA8sd6s4WacyolW2J6rwmcOkjiWexWw1caYgIWAV1
+ 004M3gwUaOz0dGq2i7HQ0AiVfVkAEQEAAcLAdgQYAQoAIBYhBGiSJ6HgW88MgT/gfu2Cu2XL
+ 9M6QBQJqD0l/AhsMAAoJEO2Cu2XL9M6QovYH/RjstyL5o/V5K74ylBtz0j5t3pLX5JKbwApi
+ 656rGgDdqElImyvvZppNMl/mgHNzvxmfFAhJXnSX9f1fqVEQKOGEhLUastnl/ssBiE5x7btM
+ V0GAffxXbXJZbVv4b/DI+gVrOPc2YXlVwruapvTZNtD3hqPrkjrmq5WTtGR2loIVSe62hmh0
+ BGD2Fy79b/hYWyBqhayPBEjwGW75u4/yn+Yqy1PgG3hIcvg7GSuT3akhHZSB2Mbguzcoyf9Q
+ DJl6t33JxPRkkNrEdkPPmRlQCTSiUkVjKqMDF3jlINWsJ5t4jKFsNF91ksdw7aQgiX+tQIpE
+ ugMC1NuNi5dDGip66bw=
+In-Reply-To: <2a9c133f-004b-4360-af53-2c8127f9a0bf@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1790929885017
+X-purgate-ID: tlsNG-bad1c0/1790929889-BCCCF034-CAD344BC/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 1793
+X-purgate-size: 865
 
-On 02.10.2026 10:05, Roger Pau Monné wrote:
-> On Fri, Oct 02, 2026 at 09:55:09AM +0200, Jan Beulich wrote:
->> On 02.10.2026 09:48, Roger Pau Monné wrote:
->>> On Fri, Oct 02, 2026 at 07:45:07AM +0200, Jan Beulich wrote:
->>>> On 01.10.2026 16:27, Roger Pau Monne wrote:
->>>>> --- a/xen/arch/x86/domain.c
->>>>> +++ b/xen/arch/x86/domain.c
->>>>> @@ -813,8 +813,6 @@ static bool emulation_flags_ok(const struct domain *d, uint32_t emflags)
->>>>>  void __init arch_init_idle_domain(struct domain *d)
->>>>>  {
->>>>>      static const struct arch_csw idle_csw = {
->>>>> -        .from = paravirt_ctxt_switch_from,
->>>>> -        .to   = paravirt_ctxt_switch_to,
->>>>>          .tail = idle_loop,
->>>>>      };
->>>>
->>>> Leaving NULL pointers around isn't a good thing, though. May I suggest to
->>>> at least poison the pointers then?
+Ok so:
+Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+
+On 10/1/26 1:11 PM, Jan Beulich wrote:
+> On 01.10.2026 11:15, Baptiste Le Duc wrote:
+>> On 2026-10-01 11:07 +0200, Baptiste Le Duc wrote:
+>>> Use pte_is_valid() instead of open-coding the PTE_VALID check.
 >>>
->>> I don't mind doing so, but I don't think we usually do that for other
->>> hook structures, ie: hvm_function_table for example doesn't poison
->>> unset hooks (and it possibly can't, because there are .hook != NULL
->>> checks).
+>>> No functional change.
 >>>
->>> TBH I'm missing a benefit of the poisoning here.  Using NULL or a
->>> poisoned value will both trigger a page-fault, and NULL has the
->>> benefit of callers easily checking whether the hook is set.
+>>> Assisted-by: Claude:claude-opus-5
+>>> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 >>
->> NULL in the context of a HVM vCPU will #PF. NULL in the context of a PV
->> one may not, depending on what the guest may have put there.
+>> I forgot the changelog for this patch:
+>>
+>> Changes since v3:
+>> - Rebase on the pte_is_reserved() -> pte_has_reserved_rwx() rename in
+>> patch 3, only the context line changes.
+>>
+>> Sorry for the noise, I didn't know if the reviewed-by
+>> Oleksii gave applied here as I rebased the patch.
 > 
-> It still feels a bit arbitrary to do here but not in other places,
+> If it's a re-base which doesn't affect or alter the code change you're
+> doing, I don't think an R-b needs dropping.
+> 
+> Jan
 
-We should imo resolve this by replacing NULLs wherever hooks could, due
-to other issues, end up "in sight" on paths reachable for PV guests. This
-would then also cover potential speculation along such paths.
-
-> but never mind, I will adjust and send v2.
-
-Thanks.
-
-Jan
 
