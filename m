@@ -4,52 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F151BCA5FD4
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2026 17:23:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1439440.1657906 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0E845CA5FE0
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2026 19:15:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1439557.1657913 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCgyW-0003J9-ID; Fri, 02 Oct 2026 17:23:12 +0000
+	id 1xCij3-0000fa-2v; Fri, 02 Oct 2026 19:15:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1439440.1657906; Fri, 02 Oct 2026 17:23:12 +0000
+Received: by outflank-mailman (output) from mailman id 1439557.1657913; Fri, 02 Oct 2026 19:15:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCgyW-0003Hj-Bk; Fri, 02 Oct 2026 17:23:12 +0000
-Received: by outflank-mailman (input) for mailman id 1439440;
- Fri, 02 Oct 2026 17:23:11 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xCij2-0000fT-WE; Fri, 02 Oct 2026 19:15:21 +0000
+Received: by outflank-mailman (input) for mailman id 1439557;
+ Fri, 02 Oct 2026 19:15:20 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xCgyV-00037y-4x
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 17:23:11 +0000
+ (envelope-from <gabi.qs.mail@gmail.com>) id 1xCij1-0000fN-VN
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 19:15:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCgyT-00D6mJ-G0
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 19:23:09 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xCij0-00H36G-Sf
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 21:15:18 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6abfe86a-8faa-0a2a0a5109dd-0a2a4508a864-4
- for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 19:23:09 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6abfe840-f659-0a2a45080019-aa0a857c827d-3
- for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 19:22:09 +0200
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-8-lVaX_vJSOX6-g8URbd2QEA-1; Fri,
- 02 Oct 2026 13:22:02 -0400
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 851721954B20; Fri,  2 Oct 2026 17:22:01 +0000 (UTC)
-Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.114])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id A41B01800351; Fri,  2 Oct 2026 17:22:00 +0000 (UTC)
+ (envelope-from <gabi.qs.mail@gmail.com>)
+ id 6ac002ab-2eae-0a2a0a5409dd-0a2a4502b584-18
+ for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 21:15:18 +0200
+Received: from [74.125.225.98] (helo=mail-wr2-f34.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <gabi.qs.mail@gmail.com>)
+ id 6ac002c6-6ca4-0a2a45020019-4a7de1628bb7-3
+ for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 21:15:18 +0200
+Received: by mail-wr2-f34.google.com with SMTP id
+ ffacd0b85a97d-48af9f88c95so76653f8f.0
+ for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 12:15:18 -0700 (PDT)
+Received: from ws-fedora.tail006fee.ts.net (cm-93-156-216-249.telecable.es.
+ [93.156.216.249]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a166bfaf73sm14012525e9.4.2026.10.02.12.15.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 02 Oct 2026 12:15:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,66 +53,138 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1790961728;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=1nTk5h441BlUCx/NZYxRViDuR1MPXYhtJViIj4n3aPc=;
-	b=E8vhUd5fPa9P7pmD8DliruU77E2m4Ee8mdDri6zvrh91DTb3MXI/0UvYkCiz9ttoNjZpkH
-	AHU08nL7AiBFaIPnsq8TI4KQxoqjNnMzcsraaxk9/X0Nmjn0VvlMVRU559ml/FMr6dvl7c
-	xpAONUXoYNidfMvp1A5yqSLjhq27eVo=
-X-MC-Unique: lVaX_vJSOX6-g8URbd2QEA-1
-X-Mimecast-MFC-AGG-ID: lVaX_vJSOX6-g8URbd2QEA_1790961721
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1790968518; x=1791573318; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=7hzVLCLqTCo6ZZjXX7PS4ZOVN+xMW/Fn8WqC339I+g8=;
+        b=eNtO3ZeIDQiQlmfQB8PdwqhJ1G3SYafc0Gf1kuy1Wva3m2zqExXGonywpj6xEQZuez
+         f89O75Q98mJjSb7nsDZLHnlHgZA8VJayGECR1qpXtIii2ju4EilaqVzH+C0eaMb/Him3
+         7PHpta+APgRZ8nAJOPTxY6deuablVIblaOL+lfAAREM8RBhBfQe2kQKoXEB9L5jmB7c6
+         +w7s4Zsf7Iz3ypFk96yQnhjyKhDEQn+u27u0JiWFWSf0UIfXEY7mlnVWd151LBchs8N8
+         ca6w830YoLQyDPtoo/cP0x0Umw+3nO9gojAWd37PO1pYAqncA3nCoMAlw2k4afIRPEGf
+         giWg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1790968518; x=1791573318;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=7hzVLCLqTCo6ZZjXX7PS4ZOVN+xMW/Fn8WqC339I+g8=;
+        b=u09I04SKK+LuwxGfGewQa1LxVHuzlor2IJJbetZ1oOqJ2/0MaXrSksBckMcFf/zW/q
+         QJYhxYcoJnm3i2Wjry5IHqFRPNo3pOauiPV9mpl2/GdZOkAdbLlqfK1H8xsEK0oYRCk+
+         eRXn8BV53RUMhMKeKI0wjTGBncWNdO530klJ282jRm328e/NsM0mFwhUvlZ479TfOlmI
+         K2b0Q+nIFzE/n+n6sNKJqD6o3pgmnzuFDLZzZBhLxgmYTGOQNS7hHLCh/c266sJlQxMb
+         vrPduCQebnE8y5K2yUC5YOq3YpPC60YFwM22Z3JwvlJM5IeSsISEWI6Icn/989jsIbRG
+         CaYA==
+X-Gm-Message-State: AFuF++m3tUymhiRFvG/5dEKPZNFLsnfmBAA3sawWgCwKhFHOh8O7Wymn
+	NA5ghga/a8kLzIBOdwIIbGpFomMr81On3tfK3ihXNRR/jI53Nk4MLo7k3LbK6QDIrGM=
+X-Gm-Gg: AYBFou15HMUMHqZB0KYhlbwHaZUQFIw55goFjXC+4CWgQUNeyJZLTlQUqXdxS0pKh31
+	6cZfktyuFINXTIyIgb+mbU4OTq91LQRpRL9XPwewyfQbMCaDxBkqsfhMCoexpneFHR1vtM8NUkR
+	NR5MR/zO6k7IUoUVP2pYgjsR5cNNBSef6G3gHYExnpKqBL5NaWuKVnMz3P3Z0gXnd2sH5E6uRQg
+	0HxSJ7JxM582M6xj7EPrIMddWmuWXu7kgfByaNurJoi2a33XzlGiz9oVSHwB4hISIGB3gtEXArv
+	qTRd02ruObJD932yuWWILirs8YLh8kTuMRtKRUYxcJ1fms9eQtrDkxcPj9LC8Xo5+R/VQzAnqOx
+	x7uA8uUwMFIEWHYvme2cgDBC0Z1N9wvtzgT6Gr8pYvJb+5At37bNSg2K4MTXckCrGgSjEpqTVyv
+	EjOUNu9p/ckGTlnWns7G7iTnSJ9IBoomJqdS/D9q39kzPBT6f6/CLaebM7i1vg38faNuiTeeU1z
+	xXwv7bjVOChjXtHZg3oKyXppH+AOXoo7PMA2JsuJ0ZhOD7pt+L544k=
+X-Received: by 2002:a05:600c:3b05:b0:49e:715d:95ca with SMTP id 5b1f17b1804b1-4a027561e0fmr62509815e9.13.1790968518152;
+        Fri, 02 Oct 2026 12:15:18 -0700 (PDT)
+From: =?UTF-8?q?Gabriel=20Quint=C3=A1ns=20Souto?= <gabi.qs.mail@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: michal.orzel@amd.com,
+	julien@xen.org,
+	bertrand.marquis@arm.com,
+	sstabellini@kernel.org,
+	=?UTF-8?q?Gabriel=20Quint=C3=A1ns=20Souto?= <gabi.qs.mail@gmail.com>
+Subject: [PATCH v1] xen/arm: validate non-common page-table ranges
+Date: Fri,  2 Oct 2026 21:14:18 +0200
+Message-ID: <20261002191418.287819-1-gabi.qs.mail@gmail.com>
+X-Mailer: git-send-email 2.54.0
 MIME-Version: 1.0
-Subject: Re: [PATCH 15/28] hw: define most common PCI types as secure
-From: marcandre.lureau@redhat.com
-To: =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
-Cc: qemu-devel@nongnu.org, xen-devel@lists.xenproject.org, 
- qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-block@nongnu.org, 
- qemu-s390x@nongnu.org, qemu-arm@nongnu.org
-In-Reply-To: <20260911143627.2743803-16-berrange@redhat.com>
-References: <20260911143627.2743803-1-berrange@redhat.com>
- <20260911143627.2743803-16-berrange@redhat.com>
-Date: Fri, 02 Oct 2026 21:21:01 +0400
-Message-Id: <179096166122.3025252.2345560702508398440.b4-review@b4>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=305;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=S5LgpxEbmDgv4nz2+w3MAekw+e8ZUjn4pTaaJOhl7I4=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqv+gClYQc6x9HdvVuTz3orxL5k19B0JWDKbBeO
- 2UgDlZ3atSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCar/oAgAKCRDa6OEJdZac
- 5QCGD/4v3MxlW9xcT2gilvuqgxjpT1DxHwa00sDRs5T+gRudU6o1ntWoLU1qAc7JZwaJ/aqChOd
- IKsduJD+1Yalyd+onaPKwClZFmIj9njmtkFoJwrqiK0G5YZJDw5Lru0MvY97a1t2EuSQMVZfjim
- z2F+s4CJm7MsgLBZV4Uvcv7ON+jwC3kLFiMH1rl89BmM/FmVWCPE175WC2mdtLoj5xq6bt3+FY3
- ZLEMvjIn0YLigHAmkKeWitG8N8SZuCCP8GK4EVxHTj3+b1sTbexIng7XhmDleJlUtMeHJf6gck2
- BrknT+6fYa9FNDyuoI5kOPwGONw3mbBxpLSTcFWBsAKyAJZyaVjVVAzIk4B6Amki3NFeFde8ZFl
- 1bnaSYcMCZh7UAnNJDTvWTWWNJZkAJWG+uZVVoHI9YdB1hhkpI4qrz61UNvUy0vgvAz8BgIbSL2
- fUgE1s76avvtH6uGlnp+tK68m/7haS/kJsSrQNw/03rkPBLsTNEdBVBGX1oF4d2NOOX7eLRkRBT
- S4kLfXZ/jIK232Bg2hpMqUEWvIxPbemtrDq/ofdByqfw1RiUvhLLH5UKUHjJWgUU7UkbN7taxj3
- xYthEKHzY5c0A8E0thzpO8xoGF91S61FwW5b+VrOIDC9CycnIJWAuTzg8Ggx0/c70BXc7hzd34R
- 1AGq6NK7FV7PPiQ==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: usW13rGZnBexJtBakL0IxxVgNWC17CyNbxfvVhMGDhE_1790961721
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1790961729-D6D4087B-9496FDFB/13/0
-X-purgate-type: bulk
-X-purgate-size: 307
+X-purgate-ID: tlsNG-720697/1790968518-F2AB52AC-BB20AB6C/0/0
+X-purgate-type: clean
+X-purgate-size: 2497
 
-> Essentially all PCI infrastructure is in scope for the virtualization
-> use case, aside from the niche simba bridge.
-> 
+On arm32, page-tables are different on each CPUs, although they share some
+common mappings.
 
-You should exclude the CXL bits though, as stated on cover letter.
+The xen_pt_update function assumed that only said mappings would be
+modified, but did not check this assumption.
 
-Also questionable perhaps: xio3130, pcie_pci, pxb
+Add a range check to reject modifications to non-common mappings.
 
+Signed-off-by: Gabriel Quintáns Souto <gabi.qs.mail@gmail.com>
+---
+ xen/arch/arm/mmu/pt.c | 36 +++++++++++++++++++++++++++++-------
+ 1 file changed, 29 insertions(+), 7 deletions(-)
+
+diff --git a/xen/arch/arm/mmu/pt.c b/xen/arch/arm/mmu/pt.c
+index 621b47d..ad0d1e6 100644
+--- a/xen/arch/arm/mmu/pt.c
++++ b/xen/arch/arm/mmu/pt.c
+@@ -13,6 +13,7 @@
+ 
+ #include <asm/current.h>
+ #include <asm/fixmap.h>
++#include <asm/mmu/layout.h>
+ 
+ #ifdef NDEBUG
+ static inline void
+@@ -589,6 +590,29 @@ static unsigned int xen_pt_check_contig(unsigned long vfn, mfn_t mfn,
+     return XEN_PT_4K_NR_CONTIG;
+ }
+ 
++#ifdef CONFIG_ARM_32
++static bool ranges_overlap(unsigned long start1, unsigned long size1,
++                           unsigned long start2, unsigned long size2)
++{
++    if ( start1 < start2 )
++        return start2 - start1 < size1;
++
++    return start1 - start2 < size2;
++}
++
++static bool xen_pt_range_is_non_common(unsigned long virt,
++                                       unsigned long size)
++{
++    unsigned long temporary_start = TEMPORARY_AREA_ADDR(0);
++    unsigned long temporary_size = XEN_PT_LEVEL_SIZE(1);
++
++    return ranges_overlap(virt, size,
++                          DOMHEAP_VIRT_START, DOMHEAP_VIRT_SIZE) ||
++           ranges_overlap(virt, size,
++                          temporary_start, temporary_size);
++}
++#endif
++
+ static DEFINE_SPINLOCK(xen_pt_lock);
+ 
+ static int xen_pt_update(unsigned long virt,
+@@ -601,15 +625,13 @@ static int xen_pt_update(unsigned long virt,
+     unsigned long vfn = virt >> PAGE_SHIFT;
+     unsigned long left = nr_mfns;
+ 
+-    /*
+-     * For arm32, page-tables are different on each CPUs. Yet, they share
+-     * some common mappings. It is assumed that only common mappings
+-     * will be modified with this function.
+-     *
+-     * XXX: Add a check.
+-     */
+     const mfn_t root = maddr_to_mfn(READ_SYSREG64(TTBR0_EL2));
+ 
++    #ifdef CONFIG_ARM_32
++    if ( xen_pt_range_is_non_common(virt, nr_mfns * PAGE_SIZE) )
++        return -EINVAL;
++    #endif
++
+     if ( flags_has_rwx(flags) )
+     {
+         mm_printk("Mappings should not be both Writeable and Executable.\n");
 -- 
-Marc-André Lureau <marcandre.lureau@redhat.com>
+2.54.0
 
 
