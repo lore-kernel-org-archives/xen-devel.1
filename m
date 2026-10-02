@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 012FCCA5FDD
-	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2026 17:22:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1439387.1657797 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0484DCA5FD4
+	for <xen-devel@archiver.kernel.org>; Fri,  2 Oct 2026 17:22:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1439382.1657788 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCgxj-0005xo-55; Fri, 02 Oct 2026 17:22:23 +0000
+	id 1xCgxf-0005Zo-Tj; Fri, 02 Oct 2026 17:22:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1439387.1657797; Fri, 02 Oct 2026 17:22:23 +0000
+Received: by outflank-mailman (output) from mailman id 1439382.1657788; Fri, 02 Oct 2026 17:22:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xCgxj-0005xf-24; Fri, 02 Oct 2026 17:22:23 +0000
-Received: by outflank-mailman (input) for mailman id 1439387;
- Fri, 02 Oct 2026 17:22:22 +0000
+	id 1xCgxf-0005Zd-Px; Fri, 02 Oct 2026 17:22:19 +0000
+Received: by outflank-mailman (input) for mailman id 1439382;
+ Fri, 02 Oct 2026 17:22:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xCgxi-0005uL-2n
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 17:22:22 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xCgxe-0005Wc-Nd
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 17:22:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xCgxh-00Dbhx-EX
- for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 19:22:21 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xCgxe-00Dbhx-4T
+ for xen-devel@lists.xenproject.org; Fri, 02 Oct 2026 19:22:18 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6abfe839-2eae-0a2a0a5409dd-0a2a4507a19a-20
- for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 19:22:21 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6abfe803-2eae-0a2a0a5409dd-0a2a4501875e-48
+ for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 19:22:17 +0200
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6abfe84c-b4ea-0a2a45070019-aa0a817ceaaf-3
- for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 19:22:21 +0200
+ id 6abfe848-5984-0a2a45010019-aa0a857c866f-3
+ for <xen-devel@lists.xenproject.org>; Fri, 02 Oct 2026 19:22:17 +0200
 Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-459-v8ouDKR6NlSSUtDTyP2BdQ-1; Fri,
- 02 Oct 2026 13:22:16 -0400
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-196-tB0D-qP7One0EVL5uzWu0Q-1; Fri,
+ 02 Oct 2026 13:22:13 -0400
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0C7E21954B20; Fri,  2 Oct 2026 17:22:15 +0000 (UTC)
+ id 033DD1955DDC; Fri,  2 Oct 2026 17:22:12 +0000 (UTC)
 Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.114])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 4027B1956086; Fri,  2 Oct 2026 17:22:13 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 3792330000E4; Fri,  2 Oct 2026 17:22:10 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -63,58 +63,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1790961740;
+	s=mimecast20190719; t=1790961736;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=RMimm96Yzckh6J/xjCo++Izm66UFIO5I4/eH3KrRSmI=;
-	b=AU0QyGo5+iX7lyvnZnx4LWs5QkHzXYZXHCJqNoFC8SJmGNT7C4wpOGnQ/kqSTsTy4zwvzn
-	3OaVgf2RnBjzJD9b1FsY320NXASHoAwRqq1TRuMVKCT0qLm+jHJKwXRM7c8aSsLe+5888/
-	rEkghNLbb/HfzUYp0AM/vERIqXnWgys=
-X-MC-Unique: v8ouDKR6NlSSUtDTyP2BdQ-1
-X-Mimecast-MFC-AGG-ID: v8ouDKR6NlSSUtDTyP2BdQ_1790961735
+	bh=odsg6seDL1A3x8nMCICjbWM1bqx8pH3GiORy5lEZxIs=;
+	b=KbCBoJuXtSL2OWdINgYUef0c8GsOKvh+IloSEpz3SZqizah7rfnzkAHQhVqnuxhPWS04c+
+	LqYZq4luw28Z+FCmN/8MqEG0kUVUxywPK64N5Kqv6MVYQBvy3Rf5eipfhJHMeYSy4KNrVP
+	7b1tkcfYblCpL6qKzxEs27sONHdoceY=
+X-MC-Unique: tB0D-qP7One0EVL5uzWu0Q-1
+X-Mimecast-MFC-AGG-ID: tB0D-qP7One0EVL5uzWu0Q_1790961732
 MIME-Version: 1.0
-Subject: Re: [PATCH 19/28] hw/misc: mark pvpanic, vmcoreinfo as secure
+Subject: Re: [PATCH 18/28] hw/tpm: mark all TPM implementations as secure
 From: marcandre.lureau@redhat.com
 To: =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>
 Cc: qemu-devel@nongnu.org, xen-devel@lists.xenproject.org, 
  qemu-riscv@nongnu.org, qemu-ppc@nongnu.org, qemu-block@nongnu.org, 
  qemu-s390x@nongnu.org, qemu-arm@nongnu.org
-In-Reply-To: <20260911143627.2743803-20-berrange@redhat.com>
+In-Reply-To: <20260911143627.2743803-19-berrange@redhat.com>
 References: <20260911143627.2743803-1-berrange@redhat.com>
- <20260911143627.2743803-20-berrange@redhat.com>
+ <20260911143627.2743803-19-berrange@redhat.com>
 Date: Fri, 02 Oct 2026 21:21:01 +0400
-Message-Id: <179096166128.3025252.2520972277677656810.b4-review@b4>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=307;
+Message-Id: <179096166127.3025252.52837397415486624.b4-review@b4>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=311;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=gLEzL6V1J5mLj97slKrKoYt9+Fjt2KNc7dTNIJXcKgY=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqv+gCM0uqO+eCD5hgODJho/LKl0+Oc8OdiGqnu
- tZeQE1P18eJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCar/oAgAKCRDa6OEJdZac
- 5WOqEACHrLMPQxduSunRW/Ocbo4XsahQZMtVTSyghHJLKVbcCv1NrLJOPp6p/SfsYRmPdP1UMIR
- P1d9PbPfd9ZnmFNlrnqwBDNb/MwJXBh6aARpgS3yi3YNdsLjAyMkD4JVm+kjAJ1/TiiqEjBD3bd
- rypRrS7Z0OLaUyRicvtdUWOmMkiPxF18nZDj6bvTZRved55YurKk9R/KvfIIS/tPcxSSZ+2qF9/
- 1giVeuRBGETVMTrykedEcO3m4kwp4xNJU1uCrvFiDmibOk3LU2Sk9gaWkANtP58RDnf7JkorGJY
- ZOwWX4VfmdLgBz4/07vb7uoBBIXD6a/FEk22DDFMPvFh0B690dzudNsQwNE/sdLjtP8NSmjBBbf
- kxixKYZcymykF7VXzRggGlm7ot5+rPTB5/fT277irwXB85698Y/3MyvFrb3c5I5z1c5jEe0WObG
- GpaI6VLTQLZPWZT3hCAwFYgi3Fkq5Ex+YbGaYthHUpctoQRGl1J7U51jidCDP5J1dbudeDNGCWW
- Pnwi/ktgXgxO6prMX7CxXxyNN1YUFOG7e0Ri13BVlkHYUyvTNq7SYRFZWiY8iLuvCdbH7yv6Mhs
- pRhpIWX/OSKOt8XcrczRLyQkxDCop2VPvXxDuNmE2omoxNSdtpXKChvm/Vo9Iaol20ZwUWCHNH7
- kphu3iVgT6cwL+g==
+ bh=5ib7kbnvMQLEGT4quBiHZZ2xblFgOBBV7yGe0Fw3Eh8=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqv+gCa0cJy16Wm8FxYIqcRoer4PF17CoBL3y11
+ 1AUOS+zCLCJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCar/oAgAKCRDa6OEJdZac
+ 5SmxD/9UFyXaFIeiqXGMM2zVmi7AkR5hpeBWSCU9yDDbATqMKXA3Ey7hKwxCx8t+KRLdwudNtxI
+ o1ziuFYsn+WWmZwAU4gWuv12PiKjkGx401ZKI0DLyFTZU18MUCa+Y2xCEMcCcFLP9djc/KB2hSE
+ ZIbUiUqzF5lPVBnmXzlbw9ktpxstl9ycinv5Kw/XWdlWMFJRuZVFQY68XQo5PBxYkwZQt60DnQ1
+ XOsvz1xDFUBFu/DFqASYR6yq48vaSlatcqiUhowGgmY+/BO8enodwLO/wyXLz/p1f5lkEzcuSIW
+ DBqFweDnbPqE9yUcykSiyS1UCvCBEVhuggqZjumDA2fFpH8qoorePuvUPVrsUMBHzmQhvwCP7lg
+ 53YiP1Z25rgudsIFFGAJI8wyLUu69bKO0ht88tyzcp+61+XDOYP8ooQUBQZ8MDKp09FP1Yb1CZB
+ Bb1Yr74cG/YrRhBDRFhgP4vxjqig7E5o3zJIFGHRY+kZEfE3m3FUI1KodddfGrwPZGvjHR264PM
+ eWX0Vx1J+m2Nma7ID9ZyPzoJvu9quUz3c65NkYnz/m+2sN0ryJUj/QAev/pveFbdmVA8HtQ4BTE
+ eLM1VCaZkbZqNL0cLkjJOnyb8phNbf6Wjfa2nGu2mWEBgNMxTeDhHfsBK3OQxUZIlVqGMrwRcj9
+ G+W6tP5K0QlWstQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: zIkLMCj51WM9vVNqUs2PVnr_OV4tvqPqb5xcTXYawEo_1790961735
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: p9umoHIoYCCclHIxfj3BulkkKLkBp6xvWhcHIqVlzik_1790961732
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1790961741-368D9AE4-65F96969/0/0
+X-purgate-ID: tlsNG-d62444/1790961737-BD67C757-8A41CD69/0/0
 X-purgate-type: clean
-X-purgate-size: 309
+X-purgate-size: 313
 
-On Fri, 11 Sep 2026 15:36:18 +0100, Daniel P. Berrangé <berrange@redhat.com> wrote:
-> The first two devices are common debug aids for virtualized
-> guests so must be marked secure.
+On Fri, 11 Sep 2026 15:36:17 +0100, Daniel P. Berrangé <berrange@redhat.com> wrote:
+> All of the TPM implementations are in scope of virtualization
+> usage, so mark them all as secure.
 
 Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 
