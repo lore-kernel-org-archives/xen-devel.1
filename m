@@ -4,52 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 88D3ACA5FEC
-	for <xen-devel@archiver.kernel.org>; Sun,  4 Oct 2026 10:27:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1440282.1657951 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3F84CA5FF0
+	for <xen-devel@archiver.kernel.org>; Sun,  4 Oct 2026 21:06:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1440519.1657959 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xDJQO-0007vS-Hg; Sun, 04 Oct 2026 10:26:32 +0000
+	id 1xDTOu-0003BS-9m; Sun, 04 Oct 2026 21:05:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1440282.1657951; Sun, 04 Oct 2026 10:26:32 +0000
+Received: by outflank-mailman (output) from mailman id 1440519.1657959; Sun, 04 Oct 2026 21:05:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xDJQO-0007vG-C6; Sun, 04 Oct 2026 10:26:32 +0000
-Received: by outflank-mailman (input) for mailman id 1440282;
- Sun, 04 Oct 2026 10:26:32 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xDTOu-0003BK-4Z; Sun, 04 Oct 2026 21:05:40 +0000
+Received: by outflank-mailman (input) for mailman id 1440519;
+ Sun, 04 Oct 2026 21:05:38 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xDJQO-0007vA-0b
- for xen-devel@lists.xenproject.org; Sun, 04 Oct 2026 10:26:32 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1xDTOs-0003BE-Oh
+ for xen-devel@lists.xenproject.org; Sun, 04 Oct 2026 21:05:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xDJQN-004Ezj-Dw
- for xen-devel@lists.xenproject.org; Sun, 04 Oct 2026 12:26:31 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xDTOr-000cZF-N6
+ for xen-devel@lists.xenproject.org; Sun, 04 Oct 2026 23:05:37 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6ac22953-bab6-0a2a0a5309dd-0a2a4503d802-40
- for <xen-devel@lists.xenproject.org>; Sun, 04 Oct 2026 12:26:31 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marcandre.lureau@redhat.com>)
- id 6ac229d5-fae8-0a2a45030019-aa0a857cdff3-3
- for <xen-devel@lists.xenproject.org>; Sun, 04 Oct 2026 12:26:30 +0200
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-442-TlmWfE4SMRG4aIAdNINZ6Q-1; Sun,
- 04 Oct 2026 06:26:26 -0400
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
- (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 1C571195FCD0; Sun,  4 Oct 2026 10:26:25 +0000 (UTC)
-Received: from localhost (headnet03.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.114])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 10A8630000E5; Sun,  4 Oct 2026 10:26:23 +0000 (UTC)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6ac2bf73-e002-0a2a0a5209dd-0a2a450bc472-24
+ for <xen-devel@lists.xenproject.org>; Sun, 04 Oct 2026 23:05:37 +0200
+Received: from [162.55.131.47] (helo=support.bugseng.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6ac2bfa1-b7e8-0a2a450b0019-a237832f84e6-3
+ for <xen-devel@lists.xenproject.org>; Sun, 04 Oct 2026 23:05:37 +0200
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id 389754EE0056;
+ Sun,  4 Oct 2026 23:05:37 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -61,133 +49,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1791109589;
-	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
-	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=gXJO7banlPNaWvQpKTCq/gTnTWMwrS/tryCeQOKlZyU=;
-	b=XDIaAWc+7qsS7peUCW4sbYWoYtY/ND8znTYuLNiRi1W1L8I3VijoUVM5zmszA6hQaUMDuD
-	dwmq6uRiDEfphjG6ukG4bX0ZZSIu601OXTQjQeHvz6cDmS22DTa/opP2y8GzYgA6cgOZpa
-	Tcpm3YIOTlng+eP6KtrdwTXry261wSU=
-X-MC-Unique: TlmWfE4SMRG4aIAdNINZ6Q-1
-X-Mimecast-MFC-AGG-ID: TlmWfE4SMRG4aIAdNINZ6Q_1791109585
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Sun, 04 Oct 2026 14:24:01 +0400
-Subject: [PATCH 47/63] hw/display/xenfb: fix 24-bit pixel read in BLT macro
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1791147937;
+	b=5VsbfVqh1MMxnAS/zbCXjv3s4V5hzs4Ulj+5qUgjBjp6DQNOl+TZqEB0+DvZI6xc+hQ5
+	 2b4dhHL7j54XoWwj7rtJpS1u6Xb/cfXwOEmZ9RCn+rN2SaJgypSbaxlpX8I7mJo6Jvsvy
+	 Q4MmMPJ4lpYSIDPPasyrx0LLT1QlsknA7ELxMIH3rL5w8wLW+N7ilWoMPB+N1Y7YMl+PR
+	 VtymFPZ11rLW/liw5SWgr3MN77dy0dUhinGJ9V4V9QbCSnBB7rbrK/u9htQIxWbsR2/Ap
+	 z1KXHMUsrp5gRxTDK/2jYPNuAORo6M+DQHMpd4BsywZ+8tbMlFAxEqM0n27k1f5dT9zD5
+	 QoHnmIEXbjXuTYcBYOfAcDG6Qyg0aSAbEZO+UhIECi9fIqee35yVqU6xcqPCYxTacgnfh
+	 J/hmqGYckRgFBUZ13OWFxLayoEAEzsFnW+jSm40bFINGSFJN4Gm2VufcNSHaolrmdkEuG
+	 UZNmiuqV1jeAFOg3hQxBcgVjdpvbp6/v1PAOsZ4gxAVeu0g3EnDBvQ74gjsZnwsNUBDha
+	 U/ksD6m+Rao+frqQyi0DXNpftgsZ1joloQI2TOOBxe6FXh45W3LCMIADC7ju33j1BeSK1
+	 0bx4nCVFDh962bqT0XGGfA1LVqsnjl5m8D3w2SXLDy6vyQdIYqfMT+60Osyf9gw=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791147937;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=pIXzNPGV2mEcYZM8LYJWcaxfMFv2rTyU1Gv2VXgAUSc=;
+	b=pmXSezW1aqtxmQK9toKOxacDRQiv/x4TofRswArvKmxHFaf853svXyWDFxrvBnna+Sc0
+	 wxQq1hRZ7Dj6OUgwyyrMIrOjhpE54MTeqjBAcwPnPYh++jEfzzblH2AqCgtaLTKubrXgQ
+	 o2AvK4PdAO6mpnKrF9VDQIDWr9VeS15V4Z9BX7YosEXkZq7IcLLPZtJbDSSRdsBW3i68q
+	 JE9g1A//feghByP1jt0eHrnUe7iM7lwsSwJ+NMxAF9CzZH9T+a84e7LP8HG5sq4LpPCo4
+	 OsnX2J9/j5sLVTZURl0ejM3lQ2s4IUkYNBph+IAaEMTKM7PiGJvXtS/+74Y/5E2iLMHWA
+	 /7fv2G+0xVbjLhbcaTrrvSG7z6E8hpNznHFSt63b7LLB6Ix61/YHuQjT4RIvjCUyrix0o
+	 BYjIgv95nvxbQfPgiu7Go5hSUrfWL03Fz/grpKMrf/4Mls01Bs5eVz/e899wWQWy/XNto
+	 ETiILTwiwQ/OWJ4m7haZHQlLmRMVuthASNrudZ40oGo9+LTOihSNS4jQiFUH1Uu1jt5rb
+	 WgOUTvGHzEkCMRjOfI4IQxkJ43395MhuqJiNNsFgY9HrzaqF+r1jomUSnuRcP+JvMAgoh
+	 6q6bN3vkBbd/zYazuG4X3hsvt0eeh1usEndE51Phf3glBl7XvzBkeWBNGy296t0=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-Message-Id: <20261004-issue-4560-v1-47-ccbef537cbeb@redhat.com>
-References: <20261004-issue-4560-v1-0-ccbef537cbeb@redhat.com>
-In-Reply-To: <20261004-issue-4560-v1-0-ccbef537cbeb@redhat.com>
-To: qemu-devel@nongnu.org
-Cc: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
- Pavee Hui <phui@google.com>, Stefano Stabellini <sstabellini@kernel.org>, 
- Anthony PERARD <anthony@xenproject.org>, 
- "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
- xen-devel@lists.xenproject.org
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3382;
- i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=zPjYLwlhuI6ZQ9yvZpvzI4AvCIHAUk5mFH0I3g1TZjg=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBqwikk7HNFX7afDB5DABXPRs5rbBsffV7svWPPq
- UApayLs6IyJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCasIpJAAKCRDa6OEJdZac
- 5VqYEACkAao9kDJ5SI46eSyZjrxK9IdIbft6+yD34ZFDLvDEv+vce2KlbA2KR6V6FdnBWVkpani
- y+AmaJlYRP26Wq7AzshR6YcwhrH0xyiIkMlYWM7UQfdTloxhYB7dHwunCUO55ipjfCgaDsTq0QX
- MpoScVV8xMOfWXYcaAnCatguc7lHg8+/Ztd7VWVfPETHFUbTT7hFLgD3zHayjDaIFJofKLLQvDS
- Y9w1XQWd4mHmPQknUbjivURRm76xk3DTsxydFtVCOTU7cwTOayfxZkfAZr29yUc+wHigK+y2znA
- 2nJZGiAbEXGjEfxhvn0+1MKdVDc4NI3qT9rqyF8qGZ6jDtzLkZbrGFgZWuRuuJU8DsA7bfHH1en
- MFS1orVH17BL0/taT4k/t7FeMb0ZBQefvm63AkNvlDN09C67AO3q+arVNSe+SFsLqOJ6JFSiVej
- GrfYmZNFvGoNJ+Ze2bZ5ReS5tVhgIAyDR/+futNGDV/lTc+ObDtkfaA/m5TPWJ146IP1q7hvk+Q
- xVPQOKwNdXnPlWCB0xSh3ILGyNUeqOjgHAc+RZEketKHRQqy3Xz+l8/5P2q14MM1ungyK2bn8Bb
- 8P4WoFNg24hImRnQLlsBe2a98IAWdxkuMImDHLTjD+0DXDFqQlu+ZLkA8IzntM5xWATdS7hhfQ8
- AdjVZ3y2eGM5VZw==
-X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
- fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: ttdl83Wqw9cPQ74srvhpgQj5-vIN0sj_aD6lTkhcI7U_1791109585
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset="utf-8"
+Date: Sun, 04 Oct 2026 23:05:37 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, Jbeulich <jbeulich@suse.com>
+Cc: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Doug Goldstein
+ <cardoe@cardoe.com>, Stefano Stabellini <sstabellini@kernel.org>, Anthony
+ PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, xen-devel@lists.xenproject.org
+Subject: Re: [PATCH] misra: deviate C library-style functions from Misra
+ C:2012 rule 11.8
+In-Reply-To: <f68982e1-f46c-4640-88b7-36ef362bf340@citrix.com>
+References: <4abcb11ef287170ced74935cbee60c90058c1307.1790671787.git.dmytro_prokopchuk1@epam.com>
+ <0a286fe9-2133-4f28-8fab-59f4e51d1484@suse.com>
+ <446354d93ae04a07b86d7293705d7e46@bugseng.com>
+ <0373fcc0-5bc9-4140-a2c9-52a31c7e42b5@suse.com>
+ <2a8557d7ba88e95ec75148ff180ae0a0@bugseng.com>
+ <f68982e1-f46c-4640-88b7-36ef362bf340@citrix.com>
+Message-ID: <e67e84f5f619c38ed8269ebe5464ac6e@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=UTF-8;
+ format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1791109591-6C2E04E9-E3F0B58F/0/0
+X-purgate-ID: tlsNG-42698a/1791147937-AACDF9EA-46789270/0/0
 X-purgate-type: clean
-X-purgate-size: 3384
+X-purgate-size: 3558
 
-For depth == 24, each pixel is 3 bytes, but the BLT macro was using
-uint32_t as the source type, reading 4 bytes per pixel. The last pixel
-on the last row would read 1 byte past the framebuffer.
+On 2026-10-01 14:39, Andrew Cooper wrote:
+> On 29/09/2026 6:52 pm, Nicola Vetrini wrote:
+>> On 2026-09-29 17:11, Jan Beulich wrote:
+>>> On 29.09.2026 16:56, Nicola Vetrini wrote:
+>>>> On 2026-09-29 15:40, Jan Beulich wrote:
+>>>>> On 29.09.2026 11:03, Dmytro Prokopchuk1 wrote:
+>>>>>> bsearch(), memchr(), memchr_inv(), strchr(), strpbrk(), strrchr() 
+>>>>>> and
+>>>>>> strstr() all accept a const pointer/object but return a non-const
+>>>>>> pointer
+>>>>>> to the matched element or byte, matching their standard C library
+>>>>>> interfaces. The const qualifier is deliberately stripped so that
+>>>>>> callers
+>>>>>> searching a non-const object get back a mutable pointer to it. 
+>>>>>> Fixing
+>>>>>> this would require changing the public API, so document these uses 
+>>>>>> as
+>>>>>> deviations instead.
+>>>>>> 
+>>>>>> Update docs/misra/rules.rst to note that this class of double-use
+>>>>>> library functions is deviated on a per-function basis.
+>>>>>> 
+>>>>>> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+>>>>> 
+>>>>> When I prepared my 11.8 series [1], I was wondering whether we need 
+>>>>> to
+>>>>> go
+>>>>> as far as deviating these. Since we now uniformly take gcc5 as 
+>>>>> minimum
+>>>>> baseline, there is (at least in theory) the option of using
+>>>>> _Generic to
+>>>>> cover the dual-use. One question there is whether Eclair would
+>>>>> recognize
+>>>>> such - Nicola? After all, looking at e.g. glibc's implementation, 
+>>>>> the
+>>>>> functions themselves remain "unsafe" there; it's a macro wrapping 
+>>>>> them
+>>>>> which puts the lost qualifier back.
+>>>> 
+>>>> Could you provide a concrete example?
+>>> 
+>>> From glibc 2.43:
+>>> 
+>>> # define __glibc_const_generic(PTR, CTYPE, CALL)    \
+>>>   _Generic (0 ? (PTR) : (void *) 1,            \
+>>>         const void *: (CTYPE) (CALL),        \
+>>>         default: CALL)
+>>> 
+>>> while the declarations still are e.g.
+>>> 
+>>> extern void *memchr (const void *__s, int __c, size_t __n)
+>>>       __THROW __attribute_pure__ __nonnull ((1));
+>>> 
+>>> (and hence the implementation still - necessarily - casts away
+>>> const-ness).
+>>> 
+>> 
+>> Ok, will look into that
+> 
+> We are going to have to deviate the implementation, even if we are 
+> using
+> _Generic() to force const-correct behaviour from the callers.
+> 
+> We could duplicate the functions, but there's a different rule about
+> that.  We can't use ELF aliasing tricks because that breaks software
+> type-hashing techniques for control-flow integrity.
+> 
 
-Read 24-bit pixels byte-by-byte instead, so the access stays within
-the 3-byte pixel boundary.
+Yeah. The internal cast is clearly still signaled by ECLAIR, regardless 
+of the surrounding context. That being said, the trick is quite nice and 
+it would actually be a stronger argument for a deviation in my opinion: 
+it mitigates the risk pointed out by the MISRA rule at the callsites. It 
+is also true that the C23 signature is a lot nicer in terms of typing 
+[1].
 
-Reported-by: Pavee Hui <phui@google.com>
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
----
- hw/display/xenfb.c | 19 +++++++++++++------
- 1 file changed, 13 insertions(+), 6 deletions(-)
+There's a slight friction with MISRA C Rule 23.5 ("A generic selection 
+should not depend on implicit pointer type conversion") from MISRA 
+C:2012 Amendment 3 for the non-const input case, because the type of the 
+controlling expression could match either alternative depending on the 
+context, but that's not a strong concern (Advisory rule, no associated 
+UB).
 
-diff --git a/hw/display/xenfb.c b/hw/display/xenfb.c
-index ae302b217fe9..10785e6843ae 100644
---- a/hw/display/xenfb.c
-+++ b/hw/display/xenfb.c
-@@ -560,8 +560,13 @@ static int xenfb_configure_fb(struct XenFB *xenfb, size_t fb_len_lim,
-     return 0;
- }
- 
-+static inline uint32_t read_pixel24(const uint8_t *p)
-+{
-+    return p[0] | (p[1] << 8) | (p[2] << 16);
-+}
-+
- /* A convenient function for munging pixels between different depths */
--#define BLT(SRC_T,DST_T,RSB,GSB,BSB,RDB,GDB,BDB)                        \
-+#define BLT(SRC_T,DST_T,READ_PIX,RSB,GSB,BSB,RDB,GDB,BDB)               \
-     for (line = y ; line < (y+h) ; line++) {                            \
-         SRC_T *src = (SRC_T *)(xenfb->pixels                            \
-                                + xenfb->offset                          \
-@@ -584,7 +589,7 @@ static int xenfb_configure_fb(struct XenFB *xenfb, size_t fb_len_lim,
-         const uint32_t GDM = (~0U) << (32 - GDB);                       \
-         const uint32_t BDM = (~0U) << (32 - BDB);                       \
-         for (col = x ; col < (x+w) ; col++) {                           \
--            uint32_t spix = *src;                                       \
-+            uint32_t spix = READ_PIX(src);                              \
-             *dst = (((spix << RSS) & RSM & RDM) >> RDS) |               \
-                 (((spix << GSS) & GSM & GDM) >> GDS) |                  \
-                 (((spix << BSS) & BSM & BDM) >> BDS);                   \
-@@ -593,6 +598,8 @@ static int xenfb_configure_fb(struct XenFB *xenfb, size_t fb_len_lim,
-         }                                                               \
-     }
- 
-+#define READ_DEREF(p) (*(p))
-+
- 
- /*
-  * This copies data from the guest framebuffer region, into QEMU's
-@@ -612,18 +619,18 @@ static void xenfb_guest_copy(struct XenFB *xenfb, int x, int y, int w, int h)
-         switch (xenfb->depth) {
-         case 8:
-             if (bpp == 16) {
--                BLT(uint8_t, uint16_t,   3, 3, 2,   5, 6, 5);
-+                BLT(uint8_t, uint16_t, READ_DEREF, 3, 3, 2,  5, 6, 5);
-             } else if (bpp == 32) {
--                BLT(uint8_t, uint32_t,   3, 3, 2,   8, 8, 8);
-+                BLT(uint8_t, uint32_t, READ_DEREF, 3, 3, 2,  8, 8, 8);
-             } else {
-                 oops = 1;
-             }
-             break;
-         case 24:
-             if (bpp == 16) {
--                BLT(uint32_t, uint16_t,  8, 8, 8,   5, 6, 5);
-+                BLT(uint8_t, uint16_t, read_pixel24, 8, 8, 8,  5, 6, 5);
-             } else if (bpp == 32) {
--                BLT(uint32_t, uint32_t,  8, 8, 8,   8, 8, 8);
-+                BLT(uint8_t, uint32_t, read_pixel24, 8, 8, 8,  8, 8, 8);
-             } else {
-                 oops = 1;
-             }
+[1] https://en.cppreference.com/c/string/byte/memchr
 
 -- 
-2.56.0.rc0.29.g47ce80527c56
-
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
