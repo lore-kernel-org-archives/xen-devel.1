@@ -4,47 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C8A2CA5FF0
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2026 10:02:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1440686.1658139 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7111BCA5FF0
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2026 10:27:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1440716.1658156 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xDfWk-0002vu-8Q; Mon, 05 Oct 2026 10:02:34 +0000
+	id 1xDfuj-0008VD-A7; Mon, 05 Oct 2026 10:27:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1440686.1658139; Mon, 05 Oct 2026 10:02:34 +0000
+Received: by outflank-mailman (output) from mailman id 1440716.1658156; Mon, 05 Oct 2026 10:27:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xDfWk-0002vj-4d; Mon, 05 Oct 2026 10:02:34 +0000
-Received: by outflank-mailman (input) for mailman id 1440686;
- Mon, 05 Oct 2026 10:02:33 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xDfWj-0002jg-7q
- for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 10:02:33 +0000
+	id 1xDfuj-0008V6-6Y; Mon, 05 Oct 2026 10:27:21 +0000
+Received: by outflank-mailman (input) for mailman id 1440716;
+ Mon, 05 Oct 2026 10:27:20 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <coolhaoyt@gmail.com>) id 1xDfui-0008Uu-81
+ for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 10:27:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xDfWi-00C22F-Kc
- for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 12:02:32 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a10b8384c50003f66@swg.vates.tech>)
- id 6ac375b2-2eae-0a2a0a5409dd-0a2a4507bfb6-18
- for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 12:02:32 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a10b8384c50003f66@swg.vates.tech>)
- id 6ac375b8-b4ea-0a2a45070019-b9ff1c22b187-3
- for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 12:02:32 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a10b8384c50003f66.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 05 Oct 2026 10:02:11 +0000
-Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 5CE7782233;
- Mon,  5 Oct 2026 12:02:10 +0200 (CEST)
+ id 1xDfug-00Ag0X-Hl
+ for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 12:27:18 +0200
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <coolhaoyt@gmail.com>)
+ id 6ac37b71-bab6-0a2a0a5309dd-0a2a4502a0f2-42
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 12:27:18 +0200
+Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <coolhaoyt@gmail.com>)
+ id 6ac37b86-6ca4-0a2a45020019-d155802be803-3
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 12:27:18 +0200
+Received: by mail-wm1-f43.google.com with SMTP id
+ 5b1f17b1804b1-49d05d51553so11053535e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 03:27:18 -0700 (PDT)
+Received: from LukeW.mynet ([143.58.214.168]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a0280b2e3csm384732015e9.5.2026.10.05.03.27.16
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 05 Oct 2026 03:27:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,351 +52,180 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=jYgBYO2+/pVSYOaFH86+bomzi3sUUgzqL/IMu7ODsKs=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=jG9XRpt/li9GdxGfcsD4oRF/j1Dpv6wGlXn/V7lAQYh/L5iNG3WBq7MtSAS3gordPO5ML/iyZ
- BRFd9yVoFsS4dAYH+sJOp6ZDYizA1mBAAFZWALdWs4Oi7QauFrF9h2FgPxjHkPZWpjetFb4GaZC
- arJjfaFaYbdGP8WDiV0AZJTSpSIZNRxn8WBifQWTW3xKawGMOkXuac/X52YAfZmq9VFQyABlkP2
- +KYF22XlDiDmVxxjM1H+zJFVs0asCDrr8aLLcoZj0BEr0MXgnyO4qehVSuuYwbeXFBfSUV+0+pq
- KHSoR3t4/mRtkAiDXUjGASnPkk1uslUIuZHChg9Qg0DA==
-X-Zone-Loop: 092ea1dffb59ccfa57fca626cad2b7a01157a8ec0909
-x-campaign-type: default
-x-transaction-id: a35cbfd6-00bd-462e-89b0-959ae06bd3b9
-x-swg-uid: 01-94ed7337-9093-4faa-a79e-bdd141f90b69
-X-Mailer: Sweego
-Message-ID:
- <1791194531.8631fc262581453bbf619ec5b2062170.1a10b8384c50003f66@vates.tech>
-x-swg-bid: 1791194531.8631fc262581453bbf619ec5b2062170.1a10b8384c50003f66
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791196038; x=1791800838; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=kYmAFEk+9DyfFKrorv/uXWuca7Y+Cy0LJB7RP8dB/zM=;
+        b=nB/xryQkI2FUZ+jpFe60U5k5su9dT74Puu4/jZo6W3xGVM+y2tAOGLWB4zJzC397Ve
+         8NaTWZEkdwQGDsrAhO2c3gvPxZ935yCxI1hIReuh4rz7rHg+6B7Pjf7f6J5oqYtp81Sq
+         agjaSbmrR9s/Uwv8a4U0dYi+y59ITj+/WWSzgKasLqKZvioeLLZKgNUP7IjbyY3DuBaS
+         NUU8Z0Rbw7QL84HBu48G5Tuklqnw78RWZYEbgbsUsCdEH+px0Hl/pBC2/c0uQwAKJrqE
+         sRMTT7Qp0cd9mGUV3790vNoofGWNaABzuA8hzi51hjmUImNdLhSMvmhVV2jeciDhCvLR
+         7WmA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791196038; x=1791800838;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=kYmAFEk+9DyfFKrorv/uXWuca7Y+Cy0LJB7RP8dB/zM=;
+        b=PTm3eLc4yzjZXSh72/s0WAon98l/gIE8pIEo6w0VoLkM/CCFBKv12OYjmb6DjJSIA4
+         Z6K1lbl7t58mvljBjfHVtoyZDZoaWXvncRKz61b3c97Hfnm/j8OPBL5nskdvyDatrNg6
+         u4dBKORn9P7BwiEGPKfoqYZjmrtvn4XD7F+WS4q6iMDNxEFrfLTmTAGbQ+MONzqczfz6
+         tnklX8dksI4Pk+PX8fwNPlQdXvo5sR0dI45qbWrzM4tLlUBg4cONNNPWJs9qIn0IgBHE
+         UPzjQ22WFuXKNDwG9RNWf2judj2pCiRuvCXhSX0mPBSn35HGtV0jyxGyrqPmgpqMPkFN
+         dLRg==
+X-Gm-Message-State: AFuF++lDvz57CBCajkgjBKBk4cAWu3OoAWqkl/jWBurCF+K9NpuIHA3D
+	Fh4SkV+LzOQNbx7Wc42mh1MFMYh7QR+eHQv2urgY2pRyc2WRDDRzCJOyeSJHpu50FdVTEg==
+X-Gm-Gg: AYBFou3r0apvbhYzgsFZtOIIXVmbWMsIOurKP6HLgVqN4TaOLEnSPPb6uV/N2KJx+IQ
+	4WRXqBuqpjFZnAtgCYajPXcr7bd0tTWHCc3g71E0JoRX4ekYyZ8Tlx86GbhxSjnty7l+GH80sRz
+	FxE5eWyvLG+JS1bqgxBfuCJtKYSdNVSyks+qdjalGumOvQFwcoWZGqmknXviLojsL46QVVW+fgN
+	p7lYexjDh5p1Dx40YrUAdWtR5UtxHeupVmMkTqhXW7ni8vPcwE/J4hpJqF6RS/XrfLtJGkIafwi
+	pxCw212ILLAHcYSiDV41NwFThyuYh2Gdyye/qTP9S39G3NcgdVeynjzUwH3spJDyVdZjRuqMgZ/
+	MVK34fS0MSNMyiiO3/4/GLl+lH8BESQuFRjmRG3T+kSb6Tfbg8MVIvoaYNmhByo0RALP7GP8i5N
+	NWfwEOHaPzoQ0bpeHR6BO86US9c2KtFwnuJjxJVEg0d/Om2272ef3TcjjX45aa3nwoM54S+rg=
+X-Received: by 2002:a05:600c:314f:b0:49c:fc6e:a3e1 with SMTP id 5b1f17b1804b1-4a168106a95mr101986325e9.32.1791196037601;
+        Mon, 05 Oct 2026 03:27:17 -0700 (PDT)
+From: Weiqi Wang <coolhaoyt@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: roger@xenproject.org,
+	jbeulich@suse.com,
+	andrew.cooper3@citrix.com,
+	anthony.perard@vates.tech,
+	michal.orzel@amd.com,
+	julien@xen.org,
+	sstabellini@kernel.org,
+	lucas.cordeiro@manchester.ac.uk,
+	Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
+Subject: [PATCH v2] xen/pdx: reject regions crossing a lookup table index
+Date: Mon,  5 Oct 2026 11:27:16 +0100
+Message-Id: <20261005102716.94054-1-coolhaoyt@gmail.com>
+X-Mailer: git-send-email 2.34.1
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v3 06/39] xen/riscv: introduce device-agnostic MMIO
- emulation dispatch
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, 
- Romain Caritey <Romain.Caritey@microchip.com>, 
- Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- Zheng Zhang <zhangzheng@iscas.ac.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <cafb356d9cc3148d74df846e08c4961da72bea0e.1790779209.git.oleksii.kurochko@gmail.com>
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <cafb356d9cc3148d74df846e08c4961da72bea0e.1790779209.git.oleksii.kurochko@gmail.com>
-Date: Mon, 05 Oct 2026 12:01:55 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791194522; l=10702;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=ah3KiSHFmBcrh/7SpADjFfm0QKjZcmYlujruQnPhoVQ=;
- b=3OPCgs+Ns3SdqXXQc5hgFOUPnLbf/OzN1l3as362seZRauBR+OULMciQvIBamo4xnRfA4QM1t
- fm5ac7ZBLEZBP+OnF2P3CbsvsRHIHFHB9WTCk1ST+FWGZy4E7cDauAU
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1791194530573
-X-purgate-ID: tlsNG-ef75cf/1791194552-342F4AE4-73CF6F90/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 10702
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1791196038-F1AAD2AC-8B9ECB51/0/0
+X-purgate-type: clean
+X-purgate-size: 5679
 
-> A RISC-V guest can be given several emulated devices at distinct GPA
-> ranges; the virtual interrupt controllers alone account for vPLIC on
-> legacy machines and vAPLIC together with vIMSIC on AIA-compliant ones.
-> Routing MMIO faults via a per-device is_access() check in the trap
-> handler would couple that handler to every device it must serve,
-> requiring a new conditional branch in the fault path for each emulated
-> device added.
-> 
-> Introduce a per-domain MMIO handler registration table, modeled
-> after the equivalent ARM framework, so that virtual devices
-> self-register their GPA ranges and read/write callbacks at domain
-> creation time. The MMIO fault path delegates to a single do_mmio()
-> entry point and remains agnostic of which device owns a particular
-> address.
-> 
-> Nothing registers a handler and do_mmio() has no callers yet, so this
-> patch is a no-op; the trap handler is left untouched.
-> 
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> ---
-> do_mmio() gets its first caller in "xen/riscv: add guest load emulation
-> for trapped MMIO accesses" in this series.
-> ---
-> Changes in v3:
->  - Update the commit message.
->  - Capitalize the comments inside mmio_info_t and drop the list of access
->    widths from the one on len, as it could go stale.
->  - Drop the parentheses around the typedef names.
->  - Reject an access width which isn't a power of 2 in do_mmio().
->  - Fold the !size check of register_mmio_handler() into end <= addr.
->  - Return -EADDRINUSE instead of -EEXIST for an overlapping region.
->  - Drop setting d->arch.vmmio.num_entries to 0, as struct domain starts
->    out zero-filled.
-> ---
-> Changes in v2:
->  - Drop copyright from mmio.c as it will go stale anyway as code moves
->    around.
->  - Drop the max_count parameter of domain_io_init() (MAX_IO_HANDLER is a
->    global boundary) and embed the handler array directly in struct vmmio
->    as struct mmio_handler handlers[MAX_IO_HANDLER].  This removes the
->    xvzalloc_array() allocation, the max_num_entries field and
->    domain_io_free() altogether; domain_io_init() consequently cannot fail
->    any longer and now returns void. Note this goes slightly beyond the
->    suggested variant in that max_num_entries is dropped as well, since
->    ARRAY_SIZE(vmmio->handlers) serves the same purpose.
->  - Drop the separate register_t argument of mmio_read_t/mmio_write_t;
->    handlers now produce and consume the value through info->data.
->    handle_read()/handle_write() are gone as a result, with
->    try_handle_mmio() invoking ops->read()/ops->write() directly.
->  - Turn mmio_read_t/mmio_write_t into function types rather than
->    pointer-to-function types, so that pointer-ness is visible at the use
->    sites in struct mmio_handler_ops. Constify the mmio_info_t * of the
->    write callback, which has no reason to modify it any more.
->  - register_mmio_handler() returns int instead of BUG_ON()ing on a full
->    table: -ENOSPC now lets the caller fail domain creation. It also
->    validates its inputs, rejecting a NULL ops (or one with a missing
->    read/write callback) as well as zero-sized and address-wrapping
->    regions with -EINVAL.
->  - Guarantee the non-overlap property that cmp_mmio_handler() relies on:
->    register_mmio_handler() checks the new region against both neighbours
->    of its insertion slot and returns -EEXIST on overlap.
->  - Replace the sort() call per registration with an insertion into the
->    already sorted array: locate the slot and memmove() the tail up by
->    one. sort(), swap_mmio_handler() and <xen/sort.h> are gone.
->  - Extend cmp_mmio_handler()'s comment to state that it is a bsearch()
->    comparator and to explain the key/elem asymmetry; document why the
->    neighbours' addr + size cannot overflow.
->  - Fix over-long lines and a mis-indented label.
-> ---
-> ---
->  xen/arch/riscv/Makefile             |   1 +
->  xen/arch/riscv/domain.c             |   3 +
->  xen/arch/riscv/include/asm/domain.h |   3 +
->  xen/arch/riscv/include/asm/mmio.h   |  63 ++++++++++
->  xen/arch/riscv/mmio.c               | 175 ++++++++++++++++++++++++++++
->  5 files changed, 245 insertions(+)
->  create mode 100644 xen/arch/riscv/include/asm/mmio.h
->  create mode 100644 xen/arch/riscv/mmio.c
->
-> diff --git a/xen/arch/riscv/Makefile b/xen/arch/riscv/Makefile
-> index 665ec26933..5454517724 100644
-> --- a/xen/arch/riscv/Makefile
-> +++ b/xen/arch/riscv/Makefile
-> @@ -14,6 +14,7 @@ obj-y += intc.o
->  obj-y += irq.o
->  obj-y += kernel.init.o
->  obj-y += mm.o
-> +obj-y += mmio.o
->  obj-y += p2m.o
->  obj-y += paging.o
->  obj-y += pt.o
-> diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-> index d94652809e..fd62296356 100644
-> --- a/xen/arch/riscv/domain.c
-> +++ b/xen/arch/riscv/domain.c
-> @@ -12,6 +12,7 @@
->  #include <asm/cpufeature.h>
->  #include <asm/csr.h>
->  #include <asm/intc.h>
-> +#include <asm/mmio.h>
->  #include <asm/riscv_encoding.h>
->  #include <asm/vtimer.h>
->  
-> @@ -310,6 +311,8 @@ int arch_domain_create(struct domain *d,
->      if ( (rc = p2m_init(d, config)) != 0)
->          goto fail;
->  
-> +    domain_io_init(d);
-> +
->      if ( (rc = domain_vintc_init(d)) )
->          goto fail;
->  
-> diff --git a/xen/arch/riscv/include/asm/domain.h b/xen/arch/riscv/include/asm/domain.h
-> index e035b33ddf..15e8fa1968 100644
-> --- a/xen/arch/riscv/include/asm/domain.h
-> +++ b/xen/arch/riscv/include/asm/domain.h
-> @@ -9,6 +9,7 @@
->  
->  #include <asm/cpufeature.h>
->  #include <asm/guest-layout.h>
-> +#include <asm/mmio.h>
->  #include <asm/p2m.h>
->  #include <asm/vtimer.h>
->  
-> @@ -101,6 +102,8 @@ struct arch_domain {
->      const unsigned long *isa;
->  
->      struct vintc *vintc;
-> +
-> +    struct vmmio vmmio;
->  };
->  
->  #include <xen/sched.h>
-> diff --git a/xen/arch/riscv/include/asm/mmio.h b/xen/arch/riscv/include/asm/mmio.h
-> new file mode 100644
-> index 0000000000..1bf48571a9
-> --- /dev/null
-> +++ b/xen/arch/riscv/include/asm/mmio.h
-> @@ -0,0 +1,63 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +#ifndef RISCV_MMIO_H
-Should be ASM__RISCV_MMIO_H instead to be consistant with other header
-files in riscv/include/asm.
-> +#define RISCV_MMIO_H
-> +
-> +#include <xen/lib.h>
-> +#include <xen/rwlock.h>
-> +
-> +struct domain;
-> +struct vcpu;
-> +
-> +#define MAX_IO_HANDLER  16
-> +
-> +typedef struct {
-> +    paddr_t gpa;
-> +    unsigned int len;  /* Access width in bytes */
-> +    bool is_write;
-> +    /* Store: value to write; load: value read (set by handler) */
-> +    register_t data;
-> +} mmio_info_t;
-> +
-> +enum io_state
-> +{
-Style: should be directly after enum io_state.
-> +    IO_ABORT,       /* The IO was handled and led to an abort. */
-> +    IO_HANDLED,     /* The IO was successfully handled. */
-> +    IO_UNHANDLED,   /* No handler found for the IO. */
-> +};
-> +
-> +typedef enum io_state mmio_read_t(struct vcpu *v, mmio_info_t *info);
-> +typedef enum io_state mmio_write_t(struct vcpu *v, const mmio_info_t *info);
-> +
-> +struct mmio_handler_ops {
-> +    mmio_read_t *read;
-> +    mmio_write_t *write;
-> +};
-> +
-> +struct mmio_handler {
-> +    paddr_t addr;
-> +    paddr_t size;
-> +    const struct mmio_handler_ops *ops;
-> +};
-> +
-> +struct vmmio {
-> +    unsigned int num_entries;
-> +    rwlock_t lock;
-> +    struct mmio_handler handlers[MAX_IO_HANDLER];
-> +};
-> +
-> +int do_mmio(mmio_info_t *info, paddr_t fault_addr, unsigned int len);
-> +int register_mmio_handler(struct domain *d,
-> +                          const struct mmio_handler_ops *ops,
-> +                          paddr_t addr, paddr_t size);
-> +void domain_io_init(struct domain *d);
-> +
-> +#endif /* RISCV_MMIO_H */
-> +
-> +/*
-> + * Local variables:
-> + * mode: C
-> + * c-file-style: "BSD"
-> + * c-basic-offset: 4
-> + * indent-tabs-mode: nil
-> + * End:
-> + */
-> diff --git a/xen/arch/riscv/mmio.c b/xen/arch/riscv/mmio.c
-> new file mode 100644
-> index 0000000000..cf739a790a
-> --- /dev/null
-> +++ b/xen/arch/riscv/mmio.c
-> @@ -0,0 +1,175 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +
-> +#include <xen/bsearch.h>
-> +#include <xen/lib.h>
-> +#include <xen/rwlock.h>
-> +#include <xen/sched.h>
-> +#include <xen/string.h>
-> +
-> +#include <asm/current.h>
-> +#include <asm/mmio.h>
-> +
-> +/*
-> + * bsearch() comparator: @key holds the address to look up in its addr field,
-> + * @elem is an entry of vmmio->handlers. Relies on the regions not
-> + * overlapping, which register_mmio_handler() enforces.
-> + */
-> +static int cmp_mmio_handler(const void *key, const void *elem)
-> +{
-> +    const struct mmio_handler *handler0 = key;
-> +    const struct mmio_handler *handler1 = elem;
-> +
-> +    if ( handler0->addr < handler1->addr )
-> +        return -1;
-> +
-> +    if ( handler0->addr >= (handler1->addr + handler1->size) )
-> +        return 1;
-> +
-> +    return 0;
-> +}
-> +
-> +/*
-> + * Return a copy of the matching handler rather than a pointer into
-> + * vmmio->handlers: a concurrent register_mmio_handler() shifts entries
-> + * up to keep the array sorted, so an escaped pointer could refer to a
-> + * different (or torn) entry once the lock is dropped. The copy stays
-> + * valid as the ops structures are never freed.
-> + */
-> +static bool find_mmio_handler(struct domain *d, paddr_t gpa,
-> +                              struct mmio_handler *out)
-> +{
-> +    struct vmmio *vmmio = &d->arch.vmmio;
-> +    struct mmio_handler key = { .addr = gpa };
-> +    const struct mmio_handler *handler;
-> +
-> +    read_lock(&vmmio->lock);
-> +    handler = bsearch(&key, vmmio->handlers, vmmio->num_entries,
-> +                      sizeof(*handler), cmp_mmio_handler);
-> +    if ( handler )
-> +        *out = *handler;
-> +    read_unlock(&vmmio->lock);
-> +
-> +    return handler != NULL;
-> +}
-> +
-> +static enum io_state try_handle_mmio(mmio_info_t *info)
-> +{
-> +    struct vcpu *v = current;
-> +    struct mmio_handler handler = {};
-> +
-> +    if ( !find_mmio_handler(v->domain, info->gpa, &handler) )
-> +        return IO_UNHANDLED;
-> +
-> +    if ( info->is_write )
-> +        return handler.ops->write(v, info);
-> +    else
-The else is not necessary here, misra would call that "dead code".
-Here are two suggestions:
+From: Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
 
-      if ( info->is_write )
-          return handler.ops->write(v, info);
+pdx_is_region_compressible() only looks up the table entry of the first
+page, and checks the region against [pfn_base, pfn_base +
+pdx_region_size).  pfn_base need not be aligned to the table index
+granularity, so that window can extend into the next index, which belongs
+to a different range with a different offset.  A region whose tail lies
+there is reported compressible, yet its last page on its own is not, and
+translates through the wrong offset.
 
-      return handler.ops->read(v, info);
-or:
+Also require the first and last page of the region to use the same table
+index.
 
-      return info->is_write ? handler.ops->write(v, info)
-                            : handler.ops->read(v, info);
+This can be reached from the coverage check in srat_parse_regions() when an
+e820 RAM range is not covered by the SRAT ranges, which is the case that
+check is meant to catch.
 
+Found with the ESBMC bounded model checker.  The counterexample was
+confirmed by running it natively against the unmodified code.
+
+Fixes: c5c45bcbd6a1 ("pdx: introduce a new compression algorithm based on region offsets")
+Assisted-by: Claude Code:claude-opus-5-5 # finding the issue with ESBMC, patch creation
+Signed-off-by: Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
+---
+
+Notes:
+    Changes in v2:
+    - the issue is not tied to huge addresses (Jan): replaced the example
+      with a ~5 GB reproduction and dropped the 2^51 remark
+    
+    RFC because this was discussed when the offset compression was reviewed.
+    In the v2 thread [1] Jan asked whether pdx_is_region_compressible() is
+    correct when a region crosses a lookup table slot boundary.  The thread
+    concluded it was not an issue, on the basis that pages contiguous in MFN
+    space are also contiguous in PDX space.  The reproducer below is a case
+    where that does not hold for the code as merged: the region is reported
+    compressible, its last page on its own is not, and that page round-trips
+    to a different PFN.
+    
+    The ranges are as srat_parse_regions() would see them.  The RAM range is
+    not covered by either SRAT range, which is the situation the coverage
+    check in srat_parse_regions() is meant to detect.  Built from
+    tools/tests/pdx like test-pdx-offset, on staging (e4da182973) plus patch
+    "xen/pdx: fix merging of a range contained in the previous one":
+    
+      region [0x4ca9b, 0x12982e) compressible: 1
+      last page: pfn 0x12982d -> pdx 0xa982d -> pfn 0xe982d
+    
+    The region is reported compressible, yet its last page round-trips to a
+    different PFN.  With this patch the region is reported not compressible, and
+    srat_parse_regions() disables compression.
+    
+    8<----------------------------------------------------------------------
+    /* Build like test-pdx-offset, from tools/tests/pdx:
+     *   gcc -D__XEN_TOOLS__ -DCONFIG_PDX_OFFSET_COMPRESSION \
+     *       -I../../include -o repro-window repro-window.c
+     * (after generating pdx.h as the Makefile does). */
+    #include "harness.h"
+    #include "../../xen/common/pdx.c"
+    
+    int main(void)
+    {
+        /* Two SRAT-like ranges, in PFNs, on a ~5 GB machine. */
+        pfn_pdx_add_region(pfn_to_paddr(0x5bbd3UL),
+                           pfn_to_paddr(0xf18f2UL - 0x5bbd3UL));
+        pfn_pdx_add_region(pfn_to_paddr(0x1869bdUL),
+                           pfn_to_paddr(0x189f58UL - 0x1869bdUL));
+        if ( !pfn_pdx_compression_setup(0) )
+            return puts("compression not enabled"), EXIT_FAILURE;
+    
+        /* A RAM range not covered by either, as srat_parse_regions() checks. */
+        unsigned long s = 0x4ca9bUL, e = 0x12982eUL;
+    
+        printf("region [%#lx, %#lx) compressible: %d\n", s, e,
+               pdx_is_region_compressible(pfn_to_paddr(s), e - s));
+        printf("last page: pfn %#lx -> pdx %#lx -> pfn %#lx\n",
+               e - 1, pfn_to_pdx(e - 1), pdx_to_pfn(pfn_to_pdx(e - 1)));
+    
+        return pdx_is_region_compressible(pfn_to_paddr(s), e - s) &&
+               pdx_to_pfn(pfn_to_pdx(e - 1)) != e - 1 ? EXIT_FAILURE : EXIT_SUCCESS;
+    }
+    8<----------------------------------------------------------------------
+    
+    Other callers that rely on the same answer are mem_hotadd_check() and
+    the EFI ram_range_valid() check.  I have not run those paths.
+    
+    One behavioural change to check: with npages == 0 the new condition
+    compares against pfn - 1.  The callers I looked at never pass 0.
+    
+    Model checking (ESBMC, 2 SRAT ranges and 2 e820 RAM ranges, all free
+    within a bounded address range, the srat_parse_regions() coverage
+    check modelled) finds
+    no accepted RAM page that fails to round-trip with both patches applied.
+    It also finds no layout where the coverage check now rejects what setup
+    accepted, with RAM equal to the SRAT ranges.  This is bounded to 2 ranges.
+    
+    The existing tests in tools/tests/pdx pass in both mask and offset mode.
+    
+    [1] https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg194095.html
+
+ xen/common/pdx.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/xen/common/pdx.c b/xen/common/pdx.c
+index 23655ef3bd..52928faa15 100644
+--- a/xen/common/pdx.c
++++ b/xen/common/pdx.c
+@@ -324,7 +324,8 @@ bool pdx_is_region_compressible(paddr_t base, unsigned long npages)
+     unsigned long pfn_base = pfn_bases[PFN_TBL_IDX(pfn)];
+ 
+     return pfn >= pfn_base &&
+-           pfn + npages <= pfn_base + pdx_region_size;
++           pfn + npages <= pfn_base + pdx_region_size &&
++           PFN_TBL_IDX(pfn) == PFN_TBL_IDX(pfn + npages - 1);
+ }
+ 
+ static int __init cf_check cmp_node(const void *a, const void *b)
 -- 
-Baptiste Le Duc <baptiste.le-duc@vates.tech>
+2.34.1
+
 
