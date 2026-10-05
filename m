@@ -4,43 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E99DCA5FF0
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2026 10:57:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1440743.1658184 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94867CA5FCE
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2026 11:18:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1440751.1658193 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xDgNy-0006Rh-1S; Mon, 05 Oct 2026 10:57:34 +0000
+	id 1xDgiH-0001wY-K3; Mon, 05 Oct 2026 11:18:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1440743.1658184; Mon, 05 Oct 2026 10:57:34 +0000
+Received: by outflank-mailman (output) from mailman id 1440751.1658193; Mon, 05 Oct 2026 11:18:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xDgNx-0006Ra-VC; Mon, 05 Oct 2026 10:57:33 +0000
-Received: by outflank-mailman (input) for mailman id 1440743;
- Mon, 05 Oct 2026 10:57:32 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xDgNw-0006RT-FW
- for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 10:57:32 +0000
+	id 1xDgiH-0001wR-Go; Mon, 05 Oct 2026 11:18:33 +0000
+Received: by outflank-mailman (input) for mailman id 1440751;
+ Mon, 05 Oct 2026 11:18:32 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xDgiF-0001wK-TM
+ for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 11:18:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xDgNv-0027G4-LO
- for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 12:57:31 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xDgiE-00CFYe-M6
+ for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 13:18:30 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ac3829a-bab6-0a2a0a5309dd-0a2a4504cdb8-8
- for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 12:57:31 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ac3829b-b57f-0a2a45040019-d155802de509-3
- for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 12:57:31 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4a1682bff3cso8242085e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 03:57:31 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a027734b49sm334709605e9.10.2026.10.05.03.57.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 05 Oct 2026 03:57:30 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ac38773-8faa-0a2a0a5109dd-0a2a4507c1d4-20
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 13:18:30 +0200
+Received: from [40.107.209.58]
+ (helo=PH8PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ac38784-b4ea-0a2a45070019-286bd13a2532-3
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 13:18:29 +0200
+Received: from BN0PR04CA0069.namprd04.prod.outlook.com (2603:10b6:408:ea::14)
+ by SN7PR12MB7955.namprd12.prod.outlook.com (2603:10b6:806:34d::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.16; Mon, 5 Oct
+ 2026 11:18:23 +0000
+Received: from BN3PEPF0000B072.namprd04.prod.outlook.com
+ (2603:10b6:408:ea:cafe::29) by BN0PR04CA0069.outlook.office365.com
+ (2603:10b6:408:ea::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.20 via Frontend Transport; Mon, 5
+ Oct 2026 11:18:23 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN3PEPF0000B072.mail.protection.outlook.com (10.167.243.117) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.472.14 via Frontend Transport; Mon, 5 Oct 2026 11:18:23 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Mon, 5 Oct
+ 2026 06:18:22 -0500
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
+ Transport; Mon, 5 Oct 2026 06:18:20 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,152 +66,143 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791197851; x=1791802651; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=HTY8bzu+cDTyCDUClH21Sly/rB51hRSymRuDrk9f9/k=;
-        b=kqXfu4bGLtwhteJVEiF8eiBjldYcouhxROQpTTK2ETLTmJWop5eivuaX2eyPvbcBIK
-         6ZhG49xIy6xd9tfEvtz9CLa/Vciu9jUaKLHrceF6U9hV/W35U/z8Wi+rBFA5n9N4C1ks
-         irFVhp7LIJLqiSvlPFkLlPE/cuWkPGnCC06EVsEBlHAavgA5tS5GF8T3di4aQ4ZIfWdT
-         5M+0y+dVrMMhkef6THRdTvzaWGSwEruuA8lQGubOdvAVKlUMFjyVHquTwTBkJVmvpJsK
-         PW1CSEz3L8tTT3sr4LBfRstfPLof2UlxA/fTE9RWG5Pk20E0ojbtdPdJn4+O7HgTKaJI
-         kCIg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791197851; x=1791802651;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=HTY8bzu+cDTyCDUClH21Sly/rB51hRSymRuDrk9f9/k=;
-        b=R8p/A70yQezumtOz985VUfMK6qn0/p/AMk1TRrpnJ6pGwhEISn4zqryTWdtl2XkQfH
-         qT4pz5+tY9gnvj/JrzU2k+w872YxOlW+PktCIlrjuxGJKEuRbkfwSs4X5kSJVligez0p
-         N0UYnxUfwKGpr8zY9cKzkpL8iMUan4HYlss5iOITkjQpxzBKKt/vv2O62sIt08dRKQH+
-         QtdvL5LUzt19obtd9yFD3EzN/sO6OL3dPG81cwZv5Ki4+/aD21drLV4Hilywq9wYV9UF
-         Le9wda6x+CgPF5aKn7AYBoMHsyjVliUYtw8LpZ58hFwRkWtBGMazmsvvPd+vEJwvDq5Y
-         N4FQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwCWPvMoRwZqlAGpT4om8M2acmzzwYBFtSDm0GQqHYcSVsoBCJk2Nv3XLcoS2nHRoGSorsk9c/pDNI=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kkjVEwM+EhIZwUsxn5PkfIKCKWxitprhQ+u4LoMQEiLp8Uu29X
-	chOB7C5Ibm4BeG5cemhCMSwtLEGPgeZKZTVvvwygtvGm0htVlukv3oz6
-X-Gm-Gg: AYBFou26ITjTjOUCV75lWi+srPjGqWZyi4GcUm+GD7kM4QW4RU4H1ApJJ2mjgdccDhU
-	AeEYI92weCvtMCfXZns1L/Mv+KUEZE1IhDrVrCLMxHC6SyPNdANlyvOyshIpbf/Iv/nLwXvrHGH
-	dSavVRRPfur/314P01AKMtguPd7+lkT62Va5oq+o/KQwjTtvDepTJ5cDq5jVRiwJeLdVIn6CRLC
-	W9KQihvo5TN7LhwKs2ZJouTrBxaxh5WshEtOEytoqjlKiFQ9RkOqExike+gImtqi6IrVrNEDoVZ
-	/jotbKSd9UU7FmJZR0q4btfXtQBnE8bLySgmFgYTZNCvAkvtyadoQv/EQ/yN68Fxx1YomPCk35t
-	aigs7a1ikvHCelKBtrLAyhrES8eYbSVzfk+z1oAcunNF8Qa6GZryFn7My7pqUlMx2S0jBVg4xJz
-	6EMuwS/fHN6s/vzR88c0b2wog3d8fw6SI6fSre/d30OtLfyqX79goZz52kkd1sHblkCJo7OzdEO
-	SEMvx2L/CXxHB2CHHPcFDVL1SdNE5GdByFA8Josto+zmF71HUE=
-X-Received: by 2002:a05:600c:4453:b0:4a0:2423:946 with SMTP id 5b1f17b1804b1-4a1680f109emr119833595e9.15.1791197850898;
-        Mon, 05 Oct 2026 03:57:30 -0700 (PDT)
-Message-ID: <81c01b14-e998-443a-a7ee-722acb86dce8@gmail.com>
-Date: Mon, 5 Oct 2026 12:57:29 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=IcJwrJavRaMXGsF7AN+HbqM6K6J04CPb4tk8TJtXx11WBehWEBuLWLht3kb8+os99e+1sHG7YHO6tlsFXJHj9SMQQs7Ny32pINBaZELPKZTKaUhVf5/pD/eVwDH6RZgz2BrFJ3xfd3bLi3Q3jiprhlxqezMRYTDv24vktcp2r2OBmdbLO+1eX54vHru5z7ZBzYpwDfS0yyK515HW/rzXq2/1Q7jBNnGLcN9n6gOXX7Xb2Yo/ONlPIMJl88KCKMzrH6dxpehA49H5yAHce0IuHPv+Y1gzHYg7EmUkvppvyf5v6avJTlh6vdSpS5sCYwP1BMg/U8AMrC1QG6MCiapQWg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=pO0A2nt1kh4fhy/HQuaKlMRaisCjegx2Wo6tPOv36cU=;
+ b=bKEeuDNQt1ZoZINmi2uZS6ephep0Nyp46mD4nKaFT+SlqSvhE0A2ryR57/5h9k/LaZ1g18sqfI5y5zvX0ZvV+QEYezGJO4t+Xm1undchFyP2tftzQ7NHxOd3LI+TJH/OSkcJsfTfWdfBkH8EKtMY1NE19Do4sa8Kdyb3SBrN6O09XLcXy8NyKN3tu+xL5KaDfd44OHpSuodio+rMP4xixjVxXJkz/RonB37ZRaK+hAaxOzkjGHcoHnaSJHQLxjKsWazOoYjTrTlF+CNIXZyo2oMf6qVW1dfg2DPFEi+5NlltPIROf2borIdBdDjovQamZAlhXCfC7Mq69yMMo79eJA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=apertussolutions.com smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=pO0A2nt1kh4fhy/HQuaKlMRaisCjegx2Wo6tPOv36cU=;
+ b=Kpzbv3vHCa+NbFBKPAS2aKP7MB1fPPMFKdSZ12FA/BI22xQAMdMf+5fTtmOh+Zb44iQ4C1ULHH42pbqRx3IEXja2OXYjfHBrun5+UOEtGuanB82RgrgQorS58gQY0WF8uwhIJo+swYS+MdUsxOwj7w71kFcryIqx4T3dXbbXvdI=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <593c8714-44d5-43d7-88d9-f5438112e467@amd.com>
+Date: Mon, 5 Oct 2026 13:18:20 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/4] xen/riscv: always preset A/D bits in G-stage PTEs
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>
-References: <1790845467.8631fc262581453bbf619ec5b2062170.1a0f6b5397a0003f66@vates.tech>
- <1790845649.8631fc262581453bbf619ec5b2062170.1a0f6b802ba0003f66@vates.tech>
+Subject: Re: [PATCH v3] common: dom0less-bindings: introduce XSM labels
+To: "Daniel P. Smith" <dpsmith@apertussolutions.com>, Sergiy Kibrik
+	<Sergiy_Kibrik@epam.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Jan Beulich <jbeulich@suse.com>
+References: <20261002102521.565675-1-Sergiy_Kibrik@epam.com>
+ <f24de507-2aac-4619-83f8-37e66f93cfb9@apertussolutions.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1790845649.8631fc262581453bbf619ec5b2062170.1a0f6b802ba0003f66@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1791197851-C3AC0B50-7E096694/10/73395122804
+In-Reply-To: <f24de507-2aac-4619-83f8-37e66f93cfb9@apertussolutions.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF0000B072:EE_|SN7PR12MB7955:EE_
+X-MS-Office365-Filtering-Correlation-Id: a28b79be-361c-462d-d923-08df22d25e85
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|82310400026|23010399003|36860700016|56012099006|11063799006|10067099003|6133799003|4143699003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	TF91zb3u053jQ95ghk7zsLlMMabqEWcUS8cmEjsBJV/iTFDbpQlQyxnMVNc8iGE+19HMW8ASK4dwT9TZUx+skt+ubEe/81TjgMGJtR8jqxUTnH1hcKq7mjjzvRFZePBjLw7Z3ywElZk/f+HUrWXHL/RgjI9ScKpZxQM3ZYX8wGqqoNfaeLZlI37ZrycTq9qSe/9nFhtg6ccI5q69iZrD+fX/phAPRNabRoGL1DcJ6TrLC+5ZjDMvpfNTxJ0QTE1sHoMuC2aUY5WCtfaav9MNb0B1tshw9X883B1kbKLipnrDu4GorXyd8VvEOD32+yh1WRoFkGvLJmWcenXTYmQnPzuuICGg87ydMANXXJibtJzukUSa7wT0bkHoMFGQeZcUx73yy70kn60lpPjTY95P0U6ubaYrHjy5+AX29e6hem/OHhhKxziLi2aSuiVbAnqSrg+9DXqDFSG9KavSLNkhUy+VAb71SEbqf10sVf2NC05RiXXUOLlYv1juuVXGrpbyTodXMKUNxGp6TF7OnGAXm6zOdOGLgERJBQXmiIDB5K2niJcWqRh+Am3bp5wHnyvM3bf4M1jzuSsKP3quP5eU8UxWulso+BvciV2kgzXKzA4TAFk+KMT4NnGl+rOgFkkQ+JBlnovh2pwGbJKHAIpa8KsIyBE7HqBw2ru7DYRMuuDFs7FZ4S09ScatAQRs8yd1/UbX+bguz8KIbQlRME+FhA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(82310400026)(23010399003)(36860700016)(56012099006)(11063799006)(10067099003)(6133799003)(4143699003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	YeZxgSRB2dyICOEjvMCNAkXN0beNzCYze6eZ7tLhVMQB7M7rBFWqhJQezoomZOgjg4vFELbL6jkabzufPz7kvTjsNdMa0hbBmgUm/aBcKWF5vEXi/62bqcW3NGqtjSUy4FbGfIMSeVpxA21dReisv+ANVY5U7DI26Kx6ZRE7JTXp/FfuqKVpA7xZi4GvZ+V5MTmsi4Yo+DzXehpdNU1RE8NZikKn1AVwsJNcqv3WsLgZnfP0is/d0wAnY2F+DMwOUzsAgtQ2rFF25KrcKev6Eld5A/dyia4ywfkrpqaEgd+N4uBCI3bz9iBmFU02gWGxSwDvvUgZe/aacURLs71D6tvXOUA1s3chiEq2JZ/B8yxhiI3WPsOpG8r/4hSbWFcAXvPAUCvXKpA3433cBRcIkTpqqxBCx5qqkT0wkswc8pkJqiynksKxIbvJgQtfkKP+
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2026 11:18:23.3773
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: a28b79be-361c-462d-d923-08df22d25e85
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN3PEPF0000B072.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB7955
+X-purgate-ID: tlsNG-ef75cf/1791199110-A78D1AE4-0B7FA80E/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 3711
+X-purgate-size: 2747
 
 
 
-On 10/1/26 11:07 AM, Baptiste Le Duc wrote:
-> A RISC-V implementation can manage the PTE A/D bits in one of two ways:
->      1) Update the 'A' and 'D' PTE bits in hardware (ratified as Svadu).
->      2) Generate a page fault when 'A' and/or 'D' is clear, so that software
->         can set them (ratified as Svade).
+On 03-Oct-26 23:34, Daniel P. Smith wrote:
+> On 10/2/26 6:25 AM, Sergiy Kibrik wrote:
+>> Add "seclabel" property to be able to specify security label for a domain
+>> when XSM Flask is enabled, similar to xl configuration files.
+>>
+>> Currently guest domain can't be created by Xen in dom0less configuration when
+>> Flask is enabled, as domain is assigned "system_u:system_r:unlabeled_t" label
+>> by default, which Flask denies to create according to current policy.
+>>
+>> Because code from outside of flask can't directly execute its internal API
+>> a new routine flask_context_to_sid() introduced as part of XSM API exposed
+>> to rest of Xen, which is a direct wrapper for security_context_to_sid().
+>>
+>> Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+>> CC: Daniel P. Smith <dpsmith@apertussolutions.com>
+>> CC: Andrew Cooper <andrew.cooper3@citrix.com>
+>> CC: Michal Orzel <michal.orzel@amd.com>
+>> CC: Jan Beulich <jbeulich@suse.com>
+>> ---
+>> changes in v3:
+>>   - panic if `seclabel` property found but FLASK is disabled
+>> changes in v2:
+>>   - add & use flask_context_to_sid() wrapper
+>> ---
 > 
-> p2m_set_pte_flags() presets A/D in G-stage PTEs only when the device tree
-> advertises Svade. Platforms that use scheme (2) without advertising Svade,
-> such as the HiFive Premier P550, then hit guest-page faults that Xen does
-> not handle.
+> <snip/>
 > 
-> Always preset A/D in G-stage PTEs so scheme (2) never faults. This is
-> harmless with (1): software just does what hardware would have done on
-> first access.
+>> diff --git a/xen/common/device-tree/dom0less-bindings.c b/xen/common/device-tree/dom0less-bindings.c
+>> index 41d72d0d58..01d5cc1bc9 100644
+>> --- a/xen/common/device-tree/dom0less-bindings.c
+>> +++ b/xen/common/device-tree/dom0less-bindings.c
+>> @@ -11,6 +11,8 @@
+>>   #include <public/bootfdt.h>
+>>   #include <public/domctl.h>
+>>   
+>> +#include <xsm/xsm.h>
+>> +
+>>   int __init parse_dom0less_node(struct dt_device_node *node,
+>>                                  struct boot_domain *bd)
+>>   {
+>> @@ -21,6 +23,7 @@ int __init parse_dom0less_node(struct dt_device_node *node,
+>>       bool has_dtb = false;
+>>       bool iommu = false;
+>>       const char *dom0less_iommu = NULL;
+>> +    const char *xsm_seclabel = NULL;
+>>   
+>>       if ( !dt_device_is_compatible(node, "xen,domain") )
+>>           return -ENOENT;
+>> @@ -141,5 +144,15 @@ int __init parse_dom0less_node(struct dt_device_node *node,
+>>           panic("'llc-colors' found, but LLC coloring is disabled\n");
+>>   #endif
+>>   
+>> +    if ( !dt_property_read_string(node, "seclabel", &xsm_seclabel) )
+>> +    {
+>> +        if ( !IS_ENABLED(CONFIG_XSM_FLASK) )
+>> +            panic("'seclabel' found, but FLASK is disabled\n");
 > 
-> Drop the now-unused svade entry from riscv_isa_ext[], and the TODO about
-> handling A/D faults, since nothing uses that information yet.
-> 
-> Fixes: ff14053983b0 ("xen/riscv: Implement p2m_pte_from_mfn() and support PBMT configuration")
-> Assisted-by: Claude:claude-opus-5
+> Ultimately it's up to you, but I'm not sure you really will want to 
+> panic here. I personally would warn it was set but ignored because FLASK 
+> is not enabled.
+I explicitly requested this in v2 to match the user/Xen contract we want on Arm
+(we want to panic on unsatisfied user requests to prevent silent degradation of
+functionality).
 
-Out of curiosity, what kind of assistance did Claude provide for this patch?
-
-> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-> ---
-> Changes since v3:
-> - always preset A/D bits in G-stage mappings instead of keying off the DT:
->    it may not reflect what the hardware actually does.
-> - change commit title/message.
-> - drop svade as it is now-unused.
-> ---
-> Changes since v2:
-> - change commit title.
-> - preset A/D bits in p2m_set_pte_flags() if (!svadu || svade), instead of
-> setting RISCV_ISA_EXT_svade in the riscv_isa bitmap for cases 1, 2 and 4.
-> - riscv_resolve_ad_scheme() now only warns when both Svade and Svadu are
-> present and SBI FWFT is missing; drop the dead 'svadu && svade' operand.
-> - repeat XENLOG_WARNING on each line of the warning.
-> - drop ASSERT(svade != svadu) from p2m_set_pte_flags().
-> - only add the sbi_probe_extension() declaration to sbi.h.
-> - rework the comment in p2m_set_pte_flags().
-> ---
-> Changes since v1:
-> - change commit title
-> - expose RISCV_ISA_EXT_svadu so the two extensions can be told apart.
-> - move the Svade/Svadu resolution to a new riscv_resolve_ad_scheme(),
->    called once from riscv_fill_hwcap().
-> - expose sbi_probe_extension() (was static) to probe for SBI FWFT.
-> - stop presetting A/D bits unconditionally in p2m_set_permission(), do it
->    only when Svade is present.
-> ---
->   xen/arch/riscv/cpufeature.c |  1 -
->   xen/arch/riscv/p2m.c        | 38 ++++++++------------------------------
->   2 files changed, 8 insertions(+), 31 deletions(-)
-> 
-> diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
-> index aaf544d13f..6d3c15a37f 100644
-> --- a/xen/arch/riscv/cpufeature.c
-> +++ b/xen/arch/riscv/cpufeature.c
-> @@ -199,7 +199,6 @@ static const struct riscv_isa_ext_entry __initconstrel riscv_isa_ext[] = {
->       RISCV_ISA_EXT_ENTRY(smstateen,      ANY),
->       RISCV_ISA_EXT_ENTRY(ssaia,          ANY),
->       RISCV_ISA_EXT_ENTRY(sstc,           NONE),
-> -    RISCV_ISA_EXT_ENTRY(svade,          NONE),
-
-I’m not sure we should drop this from riscv_isa_ext[]. I agree that we 
-currently don’t have any users in the code that check whether Svade is 
-supported, but such users may appear in the future.
-
-Since this line already existed before this patch, keeping it would also 
-make the changes in this patch smaller. I also don’t see much harm in 
-having the Svade extension listed in this array. If Svade is present in 
-the riscv,isa string, it seems reasonable to set the corresponding bit 
-in the bitmap for potential future use.
-
-Other changes looks good to me so I just cut them.
-
-[...]
-
-~ Oleksii
+~Michal
 
 
