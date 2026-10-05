@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0F44CA5FFC
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2026 14:53:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1440925.1658453 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 771EFCA5FF0
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2026 14:53:59 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1440926.1658461 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xDk4T-0004ks-SA; Mon, 05 Oct 2026 14:53:41 +0000
+	id 1xDk4b-0004ys-2j; Mon, 05 Oct 2026 14:53:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1440925.1658453; Mon, 05 Oct 2026 14:53:41 +0000
+Received: by outflank-mailman (output) from mailman id 1440926.1658461; Mon, 05 Oct 2026 14:53:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xDk4T-0004kl-P7; Mon, 05 Oct 2026 14:53:41 +0000
-Received: by outflank-mailman (input) for mailman id 1440925;
- Mon, 05 Oct 2026 14:53:41 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a10c8e56370003f66@swg.vates.tech>)
- id 1xDk4T-0004kf-4u
- for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 14:53:41 +0000
+	id 1xDk4a-0004yl-Vc; Mon, 05 Oct 2026 14:53:48 +0000
+Received: by outflank-mailman (input) for mailman id 1440926;
+ Mon, 05 Oct 2026 14:53:47 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xDk4Z-0004y0-JO
+ for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 14:53:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xDk4S-003Alk-Hk
- for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 16:53:40 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a10c8e56370003f66@swg.vates.tech>)
- id 6ac3b9d8-bab6-0a2a0a5309dd-0a2a450a8776-30
- for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 16:53:40 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a10c8e56370003f66@swg.vates.tech>)
- id 6ac3b9f3-f2d2-0a2a450a0019-b9ff1c22a9f9-3
- for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 16:53:40 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a10c8e56370003f66.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 05 Oct 2026 14:53:37 +0000
-Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 7A57D822C6;
- Mon,  5 Oct 2026 16:53:36 +0200 (CEST)
+ id 1xDk4Y-002r38-H5
+ for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 16:53:46 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ac3b9ee-2eae-0a2a0a5409dd-0a2a4508b0d2-30
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 16:53:46 +0200
+Received: from [74.125.225.140] (helo=mail-wm2-f12.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ac3b9fa-f659-0a2a45080019-4a7de18cb17a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 16:53:46 +0200
+Received: by mail-wm2-f12.google.com with SMTP id
+ 5b1f17b1804b1-49fff72474fso13188385e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 07:53:46 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a02854073csm318301535e9.3.2026.10.05.07.53.45
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 05 Oct 2026 07:53:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,91 +52,133 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=ZwjpMuD3dD57MrlsOKy3LAP82RZWtZIixknLFQvmnO4=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=Wqt3emVQGB3UCaKt0xR8NzSmyCP8EmcpqfiBvnVOUHOU9cqMoLE6x4w5Avr1AIg567uONPIIV
- 3UPPkr9IzCDE6LsaiYyxWp078JhoP/qj4YDD5nFTh8cO4xTGDid9PBf5FPAC9psNwrK6AoWxLKr
- bhEfNa7kzxYc9CunW258p+8k1PHu31XfoMANZHIpQn7ygJwIrN8bwWmnxrfjNZKL6b7AapxF2e6
- Ku3fOliwvnZAodk0d0bvctGdQLpUSFhe4jmhMKVyhyRvb4M988u24oaZ72d6AQ78z5UmDY8q/7x
- 4vvp/aCi174GTzcLjhFfg2ThJ5/dD4f3mdq2pfeZPheA==
-X-Zone-Loop: 8ec3ef9587124b76650f64ab85364d5103f65fda136d
-x-campaign-type: default
-x-transaction-id: ed6863e1-72bb-48e2-8aac-b25f129ca312
-x-swg-uid: 01-d6ec714d-384c-44c4-9271-3a2a9bda3ebf
-X-Mailer: Sweego
-Message-ID:
- <1791212017.8631fc262581453bbf619ec5b2062170.1a10c8e56370003f66@vates.tech>
-x-swg-bid: 1791212017.8631fc262581453bbf619ec5b2062170.1a10c8e56370003f66
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1791212026; x=1791816826; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=/zg5WP4q4WzOI6ts6VftupUgXE26i4tuaBfvOcS8VNQ=;
+        b=ZnelNsBb12QhWRSiUdSwbDUbsT4fAAn+HbhrMRYdlgdOpffbnPWOIZUNItPLjmM8Ra
+         BMWexOxYZ4b6P/RqF5Nyax6+Tg6IpBcD0tuRUzkpY3m/rfKlhYno+JTLc+WHl8ci3H7x
+         i0a5oPkNS5ZiJNtxvYs+gdWKvw7umBd370GniyGiovCXhjgyMfTeoyIvNqydWeAy8gFh
+         BInSgfFKnucKJTUL0cOBVbRLqUpIaTk2q2HPfGnQzI7HBfCerqzX0TaZNYn62KvbE3IN
+         kTOtTiJwmEgYxR3r7sP27cabsnCm6Ltynpo6S7snci5+csfiI73/oWPMW60AHyVwxk+v
+         ax8g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791212026; x=1791816826;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=/zg5WP4q4WzOI6ts6VftupUgXE26i4tuaBfvOcS8VNQ=;
+        b=E+BaJ2UkTBrHXXG3ZdwaIZUhR3S8pr4or4eYmbRaRXwtzL0IPJ88KACTtJZNZQNG/Q
+         Cd0YM8Ynbg85iME8ttJZnjFcSd8z4EaPgLZ5XFxyl//4su9P+jBRsLHO5DjxBv3G891X
+         jxF1DEUw3hvDK8NtSVS081yNbA7pYWksYkWkPr4q60b9pEZwrkGhSYwupvgL27xmncRi
+         5vuxo/bBI78D+rreje+QpC++S3aOcqrIi0gQKjbfKJkiBhx/rs4EV55SNPdOVQyVt0ma
+         mAjn/oJJqeY68rUjbfMv3Ovb4RRTOVyPUooxD/2NdYAWnXKa/Kd8JZ7DRiRprnwPbrw7
+         cMGA==
+X-Gm-Message-State: AFuF++kEBHOHqxIOoM+wlBhoP3UVVLpXrrzrVf6U+lhntojp8WUz4s8U
+	s2OtG7kUvSeo2D847LLX1XV20JUjjvBKbinuAdfEPME2cA24AaTZO4pxI1OoDFb30w==
+X-Gm-Gg: AYBFou29dtg8PoBHa3C1j/2nhpD+uYB9LPmRKsi23K6+p+6qTsY6RTUjaL8BZ9f4qb1
+	zHmUo46Y7v3O0oO6hYif/jLZmvkvO2xTIFbsApDMlp+QbLHCf05OnJrKtyF1y59+MaqPH9KFLGZ
+	qdzv9B5Qte2oQM2wg6riY8Tk6i/jfczuk6A5uxqisGmSzRM6f4+esSxDQVWXoYCMeopA6w4hUjz
+	HQ3HTJphWnkaAfkodJqEiXINqngH59af73uq8nP2mHaQi06UhgEd7W9pQLNWdFYDEKv9aYEB9P3
+	Z//dgP6lYj2++P83rxxoG5bAt7GuX7/z0g7iINrwK1qftJBXKTUwwbYZw8Y8pw+kakwS3YDxpFh
+	+hu0eESwxWl//B3gw7VeFVvISJEeCj8MoSWc2X9BneMn5Utu8OBi7+ruYwWLNY0aGD45T0bR3v8
+	dj56xc0xYwx/20JqJo0OBQq6yTEn+kZ5gppmfPlEtdAmdf0Bb0rrn0PfFOyxVIfcBFh7VPgxZWh
+	1tnQ2dKc8R5bU4yCGB1QdtVtBilBj8A0F4yA5kW3B2X35KwQUBCbOwrbN5wD1EPmPi352i216w=
+X-Received: by 2002:a05:600c:a011:b0:49f:ce78:356f with SMTP id 5b1f17b1804b1-4a0276b869fmr165154345e9.32.1791212025604;
+        Mon, 05 Oct 2026 07:53:45 -0700 (PDT)
+Message-ID: <dbdc3fe2-3cda-44cf-9a57-c9b2173d1ad9@suse.com>
+Date: Mon, 5 Oct 2026 16:53:44 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] EFI: refine cfgfile buffer allocation
+From: Jan Beulich <jbeulich@suse.com>
+To: Marek Marczykowski <marmarek@invisiblethingslab.com>,
+ Daniel Smith <dpsmith@apertussolutions.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <7e332eec-5c5c-4c1b-aeeb-c65e046b1318@suse.com>
+Content-Language: en-US
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <7e332eec-5c5c-4c1b-aeeb-c65e046b1318@suse.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v3 07/39] xen/riscv: introduce CPU_NONE
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, 
- Romain Caritey <Romain.Caritey@microchip.com>, 
- Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- Zheng Zhang <zhangzheng@iscas.ac.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <d35b280c0bf075a2a730f9cb69ced407e346ebd5.1790779209.git.oleksii.kurochko@gmail.com>
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <d35b280c0bf075a2a730f9cb69ced407e346ebd5.1790779209.git.oleksii.kurochko@gmail.com>
-Date: Mon, 05 Oct 2026 16:53:30 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791212011; l=1408;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=DVpF4XmuD3vIbw0CPe5ayj74ZGG/78GS69wrRuKHW4k=;
- b=P/ifraCcbY4/ZNMZkC0mTIGFfw3ULzOsZ4HRISpQMkaAreWiOYGvQ/Kx4xxufSQcXPko2n4/M
- hNevP9cDIxQCFBnXibg/y34aOymsKKDBgtVq6miPYbDDLU1EbQauz6o
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1791212016707
-X-purgate-ID: tlsNG-4011c0/1791212020-599C1CFC-DC7C58C2/0/0
-X-purgate-type: clean
-X-purgate-size: 1408
+X-purgate-ID: tlsNG-c1860d/1791212026-D4F4F87B-505D3613/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2273
 
-> Introduce CPU_NONE, a CPU number which doesn't identify any physical
-> CPU, to be used wherever a pCPU has to be recorded but there may be
-> none.
+On 21.09.2026 11:09, Jan Beulich wrote:
+> Use of AllocateMaxAddress requires that the variable pointed to by the
+> last argument of ->AllocatePages() is initialized. For cfgfile buffers we
+> don't need AllocateMaxAddress though, at which point initialization of
+> "addr" also isn't necessary anymore.
 > 
-> Its first user is vsfile_cpu in struct vimsic_state, which records the
-> pCPU whose h/w guest interrupt file backs the vCPU's IMSIC VS-file.
-> NR_CPUS has been used there as the value meaning that there is no such
-> pCPU, i.e. that the s/w VS-file is in use. NR_CPUS is however an upper
-Nit: It's hard to understand when reading the message why s/w is mentioning.
-I'd reword it to:
-    ```
-    NR_CPUS has been used there to mean that no h/w guest interrupt file is
-    attached (i.e. the vCPU uses the s/w VS-file), so there is no pCPU to
-    record.
-    ```
-> bound rather than a "no CPU" marker, and it already carries other
-> meanings: hartid_to_cpuid() returns it for a hart Xen doesn't know, and
-> pcpu_info[] uses it for an entry whose processor_id isn't valid yet.
-> Use CPU_NONE for vsfile_cpu instead, so that the s/w VS-file case can't
-> be mistaken for any of those.
-Nit: Same as above, I'd prefer something like:
-    ```
-    Use CPU_NONE for vsfile_cpu instead, so that "no h/w guest interrupt
-    file attached" can't be mistaken for an unknown hart or a not-yet-valid
-    pcpu_info[] entry.
-    ```
+> Mirror the lack of address constraint also to the main / central buffer
+> allocation in read_file().
+> 
+> Fixes: df75f77092c1 ("EFI: avoid OOB config file reads")
+> Assisted-by: Sashiko + Opus 5.0
+> Reported-by: George Dunlap <dunlapg@umich.edu>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+May I please ask for maintainer feedback regarding this patch? If this
+small variant is acceptable, I'd like to get it in. If the larger form
+Ross suggested is going to be a requirement, I'd like to know so I can
+plan the re-work accordingly.
 
--- 
-Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Thanks, Jan
+
+> --- a/xen/common/efi/boot.c
+> +++ b/xen/common/efi/boot.c
+> @@ -878,8 +878,13 @@ static bool __init read_file(EFI_FILE_HA
+>      what = L"Allocation";
+>      file->addr = min(1UL << (32 + PAGE_SHIFT),
+>                       HYPERVISOR_VIRT_END - DIRECTMAP_VIRT_START);
+> -    /* For config files allocate an extra byte to put a NUL there. */
+> -    ret = efi_bs->AllocatePages(AllocateMaxAddress, EfiLoaderData,
+> +    /*
+> +     * For config files allocate an extra byte to put a NUL there.  There's
+> +     * also no constraint on addresses for them.
+> +     */
+> +    ret = efi_bs->AllocatePages(file != &cfg ? AllocateMaxAddress
+> +                                             : AllocateAnyPages,
+> +                                EfiLoaderData,
+>                                  PFN_UP(size + (file == &cfg)), &file->addr);
+>      if ( EFI_ERROR(ret) )
+>          goto fail;
+> @@ -931,7 +936,7 @@ static bool __init read_section(const EF
+>      if ( file == &cfg && file->size && !iscntrl(file->str[file->size - 1]) )
+>      {
+>          EFI_PHYSICAL_ADDRESS addr;
+> -        EFI_STATUS ret = efi_bs->AllocatePages(AllocateMaxAddress,
+> +        EFI_STATUS ret = efi_bs->AllocatePages(AllocateAnyPages,
+>                                                 EfiLoaderData,
+>                                                 PFN_UP(file->size + 1), &addr);
+>  
+
 
