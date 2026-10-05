@@ -4,57 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 07A23CA5FF0
-	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2026 16:13:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1441006.1658607 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96365CA5FFC
+	for <xen-devel@archiver.kernel.org>; Mon,  5 Oct 2026 16:13:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1441011.1658616 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xDlIq-0004rB-Pc; Mon, 05 Oct 2026 16:12:36 +0000
+	id 1xDlJb-0005JP-4P; Mon, 05 Oct 2026 16:13:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1441006.1658607; Mon, 05 Oct 2026 16:12:36 +0000
+Received: by outflank-mailman (output) from mailman id 1441011.1658616; Mon, 05 Oct 2026 16:13:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xDlIq-0004r4-Mc; Mon, 05 Oct 2026 16:12:36 +0000
-Received: by outflank-mailman (input) for mailman id 1441006;
- Mon, 05 Oct 2026 16:12:36 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xDlIp-0004qy-OS
- for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 16:12:35 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xDlIo-006gLH-CQ
- for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 18:12:34 +0200
-Received: from [10.42.69.11] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6ac3cc6b-e002-0a2a0a5209dd-0a2a450be156-12
- for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 18:12:33 +0200
-Received: from [40.93.196.21]
- (helo=SA9PR02CU001.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6ac3cc70-b7e8-0a2a450b0019-285dc4150d18-3
- for <xen-devel@lists.xenproject.org>; Mon, 05 Oct 2026 18:12:33 +0200
-Received: from BY1P220CA0018.NAMP220.PROD.OUTLOOK.COM (2603:10b6:a03:5c3::8)
- by EAYPR12MB999157.namprd12.prod.outlook.com (2603:10b6:303:2bf::20) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Mon, 5 Oct
- 2026 16:12:30 +0000
-Received: from SJ1PEPF000037B7.namprd05.prod.outlook.com
- (2603:10b6:a03:5c3:cafe::68) by BY1P220CA0018.outlook.office365.com
- (2603:10b6:a03:5c3::8) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.20 via Frontend Transport; Mon, 5
- Oct 2026 16:12:30 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ1PEPF000037B7.mail.protection.outlook.com (10.167.244.201) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.496.14 via Frontend Transport; Mon, 5 Oct 2026 16:12:29 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Mon, 5 Oct
- 2026 11:12:29 -0500
-Received: from [192.168.19.2] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Mon, 5 Oct 2026 11:12:28 -0500
+	id 1xDlJb-0005JI-18; Mon, 05 Oct 2026 16:13:23 +0000
+Received: by outflank-mailman (input) for mailman id 1441011;
+ Mon, 05 Oct 2026 16:13:21 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <roger@xenproject.org>) id 1xDlJZ-0005Iq-JU
+ for xen-devel@lists.xenproject.org; Mon, 05 Oct 2026 16:13:21 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <roger@xenproject.org>) id 1xDlJX-00G7u8-2j;
+ Mon, 05 Oct 2026 16:13:19 +0000
+Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
+ helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <roger@xenproject.org>) id 1xDlJX-0036w0-10;
+ Mon, 05 Oct 2026 16:13:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -66,80 +41,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=TVP31y+YaEn4gRiKZYIhTM/h3y3SMXtdXahoQxdnWovoi2/SLMlb/iQ0YQ3Qva4H8sG9ItOCecn04Nyp6uh4tzIJdJv9H2HL7eLlGW8opg2VJaDLAE6N2j1Q0gD4eVRrCJccJ8pfOsJMvsSxwSx0DsUyPH45hcY+bCo0yXuKXaoRPn8qTukpmwP8H/HcCZv/ZVZ7qUiDxifnH4HUotgV9qS5WDcY4hOpO1SYb5FptbP/QYfdHatm/DVioAEyWdu5+NGI45GOVSpp4vmHdUmZCd4p3bKcRRjmG2C7wGRDTYoZFvuJeN55061tlWroKuBH/ENyp4rFah2OulD/kybpqA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tGv4IG7K24ZePJBTtc9k/uQ44iY3l43QCGxrjY5+koM=;
- b=xPMRt1dzfDVBND4WqqhtU6Ryvx0BFMJ0mO8gEhmbPVtdY+EwwTXC6UM5og4hzKdorhiZa3cy2kMYkkk/y1obhJDwhr/LdbNgJMOu6ZmFcAcly3h1gJVGZZf0jCGqqk+k4bNCZHsZJQUithW3LDTrIp9e71owF+YPy6kjdlGvLOlXLh/ejaCfdPZEp719op6EjairLCFWnD7TIjttKWW0EnXAli3xpWIEDjt19UoSvyv+8bY023H3o+2v+BkENggswpnP7iU/hUaEp+geqvn/wFNPIxLgtAoIBintcfAznONtPdlnFtXQvX8AeaVWuv388npzcpIKIFkw+wi04rLmxA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tGv4IG7K24ZePJBTtc9k/uQ44iY3l43QCGxrjY5+koM=;
- b=UShpqv0Qko6KV9AxDnN+H8PvLFPfXl9oKyYXJpbbi4ZwnzRrZFXnSdVrvMhayUwrr5NkVsHYOcLqm65te0nfzWQFPTTX5/+6x9tYGymVKHK9623pBbaKzYnzL+UCIt+SNB6OizSmXU/0KYL/+aGL/K4c5HCHTwVhtj7uHKSNgfk=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <fff9c2b9-d81e-4f1d-9dc8-7683fe2a7e07@amd.com>
-Date: Mon, 5 Oct 2026 12:12:23 -0400
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date;
+	bh=NqECvEkxeA24ZJ3cXmcqerUDz0GeBRnX3XtWfCxlQ84=; b=gVNTAwLpHIDhnzRoWfCWUsh7z6
+	lLZh1hFT6P0+RJ68U+Mmz8Ciabs2MY4YQFaR6Ns5nZKBc+z5jJ0JI+pA97VpZSlvyCse4iCNQ2EJV
+	W95kLMZl4uhooZKnEqMeIWldp5iIrie3B5C0Ek0Skorbi6uZVjbiDPLkoVUSdhxrAB60=;
+Date: Mon, 5 Oct 2026 18:13:13 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
+To: Weiqi Wang <coolhaoyt@gmail.com>
+Cc: xen-devel@lists.xenproject.org, jbeulich@suse.com,
+	andrew.cooper3@citrix.com, anthony.perard@vates.tech,
+	michal.orzel@amd.com, julien@xen.org, sstabellini@kernel.org,
+	lucas.cordeiro@manchester.ac.uk,
+	Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
+Subject: Re: [PATCH v2] xen/pdx: fix offset-compression merge of a contained
+ range
+Message-ID: <asPMmanV3CYRDLNU@Mac.lan>
+References: <20261005102713.94033-1-coolhaoyt@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/PVH: correct PVH Dom0 E820 region merge
-To: Jan Beulich <jbeulich@suse.com>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Teddy Astie
-	<teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger@xenproject.org>
-References: <012de89f-000c-45b3-a600-544114346e5b@suse.com>
-Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <012de89f-000c-45b3-a600-544114346e5b@suse.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000037B7:EE_|EAYPR12MB999157:EE_
-X-MS-Office365-Filtering-Correlation-Id: f94d5ca6-9cf4-4460-3879-08df22fb74ab
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|23010399003|36860700016|376014|1800799024|18002099003|22082099003|10067099003|56012099006|11063799006;
-X-Microsoft-Antispam-Message-Info:
-	IzZq62YXTrTiDQtGQ8aXofxmgTtTLAVMxwj35G/dmAY1Nsipnx+WV0ar/+TyWU9R3pSmiBtadp3jsBPSJaWH6WA8FF2S/fCmn1frzY9xvs25WUVXMBzHDqxTlVsJuzkAI86JZ0Jd7/NsTm2WTnUILH651238yIgywHxzfw3WDY2p8dhzpO8yf0hF00wuPrMqspIY1OZ3HRml2dqv75eyYsq7cexjigBfyXkAD4baL82Ui6kRO/19/HDRKoDFCKefZb57vAgihTy5jyRFJywnDuMTlam0zq447tkJcDY1wgU6UAiLCXjik5ZGSTfB1lYBrDPGMM6RzZ0gQJZnGQOKSwvkceXYeDiM0hektV4GXsKs41OTKjf5LVz7hOYMkpssvvaR8v/6RR3HJfd//xXpGsLQ0WDvFsQIEXXnTrdECAm73p7SKBJ3RVg0HVYDWaaI9oPIZynqNZhVjIdr1QXnTKoP2d167uCwiAHENpeV/IQZAzlAexV7gX9kMPmsLE6B5Dib79vjf23cYQgpP31RBzHWvo9khpZjj+v2Of9R1g/rkCDh8cLFbeYfRu+7gIuhN/De+hYv9mJloZv8suuNOHyZghtSr7H5qALb0Ss7aDzdp3LZbkEQc8S7FsPIdRjF+yGYUpadqbPibilEvU9HRzfTsGN/dhb3pK0XVW0j9bRVaJEQjDvpSSKVufKvO25BaLIQtOPkwh32IUKfiO3VyQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(23010399003)(36860700016)(376014)(1800799024)(18002099003)(22082099003)(10067099003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	B4E/usIn2QsXRPL2GdXvWxJbMUKm4dxwNASPAWDfOAxO6ye3vfUrpIcLc6RKmZOP8Unxa2mc5iKfgk10xZKJTlFkJcShK+Uia5gFtzjhYbu55edKJZnggFfqnQOSMVcb5L5CD4Vdl3X5VuJqbAZZLrUf5Y1rn215mI7onkIII9KZ0PJqv7uLT9Y3Nq7FRDCJMdgmT9slE3EWg9DkXKQIIEgM7/MGkqdRz8CqTUkP5QHdb1tZE3L84gb4T1jvw4FjSDlSTzAG8n+Pftdjg8lBYneKn4BEYzBGjUrLY9nPr7esSmhr2OH/S+ejKdQy4BIVQBe80HLcyA5kVOC92dGk79aV26FPWqI0M/TF7oSkt9ufuB8zKUx1Ou/k5j/64dKlmbRuszutUIeqfTbd4Lbn2QEsGLv5IFOVS9Y69el4jJvFnLL5mucKornda0riMkRX
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Oct 2026 16:12:29.8134
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: f94d5ca6-9cf4-4460-3879-08df22fb74ab
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF000037B7.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: EAYPR12MB999157
-X-purgate-ID: tlsNG-42698a/1791216753-1B8D19EA-71A6A82A/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 381
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261005102713.94033-1-coolhaoyt@gmail.com>
 
-On 2026-10-05 12:01, Jan Beulich wrote:
-> Folding with an immediately successive region can't be done by merely
-> lowering the start of the region. The size of the region needs increasing
-> as well.
+On Mon, Oct 05, 2026 at 11:27:13AM +0100, Weiqi Wang wrote:
+> From: Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
 > 
-> Fixes: 5427134eae81 ("x86: populate PVHv2 Dom0 physical memory map")
-> Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+> When sorting and merging overlapping ranges in
+> pfn_pdx_compression_setup(), the merged range is set to end where the
+> second range ends.  If the second range is fully contained in the first,
+> this truncates the first range, and the tail of it is then neither
+> compressible nor translated correctly.
+> 
+> Keep the end of the merged range as the maximum of both ends.
+> 
+> On x86 the ranges come from the SRAT memory affinity entries, and
+> overlapping entries for the same node are tolerated with a warning by the
+> NUMA code.  The caller's subsequent coverage check catches the truncated
+> range, so the effect is that PDX compression is disabled with a "RAM
+> region ... not covered" message rather than memory being mistranslated.
+> 
+> Add a test case that fails without this change.
+> 
+> Found with the ESBMC bounded model checker.  The counterexample was
+> confirmed by running it natively against the unmodified code.
+> 
+> Fixes: c5c45bcbd6a1 ("pdx: introduce a new compression algorithm based on region offsets")
+> Assisted-by: Claude Code:claude-opus-5-5 # finding the issue with ESBMC, patch creation
+> Signed-off-by: Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
+> ---
+> 
+> Notes:
+>     Changes in v2:
+>     - clarify in the title that this is the offset-compression instance (Jan)
+>     - parenthesise the test multiplications against the binary ORs (Jan)
+>     
+>     Also seen in a real boot: the hypervisor alone under QEMU (pc, 8 GiB),
+>     built from defconfig, with no -numa and a hand-built SRAT passed with
+>     -acpitable.  Memory affinity entries, all PXM 0:
+>     
+>       [0, 3G)  [4G, 9G)  [5G, 6G)  [1T, 1T+1G)
+>     
+>     The third entry lies inside the second.  The NUMA code prints "overlaps
+>     with itself" for it and accepts it.  Without this patch:
+>     
+>       (XEN) PFN compression using lookup table shift 23 and region size 0x200000
+>       (XEN)  range   0 [0000000000000, 000000017ffff] PFN IDX   0 : 0000000000000
+>       (XEN)  range   1 [0000010000000, 000001003ffff] PFN IDX  32 : 000000fe00000
+>       (XEN) PFN compression disabled, RAM region [0x100000000, 0x23fffffff] not covered
+>     
+>     With it, the same output as without the third entry:
+>     
+>       (XEN) PFN compression using lookup table shift 28 and region size 0x400000
+>       (XEN)  range   0 [0000000000000, 000000023ffff] PFN IDX   0 : 0000000000000
+>       (XEN)  range   1 [0000010000000, 000001003ffff] PFN IDX   1 : 000000fc00000
+> 
+>  tools/tests/pdx/test-pdx.c | 12 ++++++++++++
+>  xen/common/pdx.c           |  5 +++--
+>  2 files changed, 15 insertions(+), 2 deletions(-)
+> 
+> diff --git a/tools/tests/pdx/test-pdx.c b/tools/tests/pdx/test-pdx.c
+> index 4de8d43d86..8d271a488f 100644
+> --- a/tools/tests/pdx/test-pdx.c
+> +++ b/tools/tests/pdx/test-pdx.c
+> @@ -87,6 +87,18 @@ int main(int argc, char **argv)
+>              },
+>              .compress = true,
+>          },
+> +        /* Range contained in a previous one. */
+> +        {
+> +            .ranges = {
+> +                { .start =                                                 0,
+> +                  .end   =                          ((1UL << MAX_ORDER) * 1) },
+> +                { .start = (1UL << (MAX_ORDER * 2)) |                      0,
+> +                  .end   = (1UL << (MAX_ORDER * 2)) | ((1UL << MAX_ORDER) * 4) },
+> +                { .start = (1UL << (MAX_ORDER * 2)) | ((1UL << MAX_ORDER) * 1),
+> +                  .end   = (1UL << (MAX_ORDER * 2)) | ((1UL << MAX_ORDER) * 2) },
+> +            },
+> +            .compress = true,
+> +        },
+
+You place this in the __LP64__ protected section, but AFAICT this is
+not needed?  Those values all fit in a 32bit integer.
+
+Also, I think the example could be simpler:
+
+        /* Range contained in a previous one. */
+        {
+            .ranges = {
+                /* Overlapping ranges. */
+                { .start = 0, .end = (1UL << MAX_ORDER) * 2 },
+                { .start = 0, .end = (1UL << MAX_ORDER) * 1 },
+                /* Extra range to force offset compression to be engaged. */
+                { .start = (1UL << MAX_ORDER) * 3,
+                  .end   = (1UL << MAX_ORDER) * 4 },
+
+            },
+#ifdef CONFIG_PDX_OFFSET_COMPRESSION
+            .compress = true,
+#else
+            .compress = false,
+#endif
+        },
+
+FWIW, we could also make the fully contained range not start at 0, to
+avoid the sorting from reordering those, but I think that's not
+possible given the (current) compare function cmp_node().
+
+>  #endif
+>          /* PDX compression, 2 ranges covered by the lower mask. */
+>          {
+> diff --git a/xen/common/pdx.c b/xen/common/pdx.c
+> index e7e16e193e..23655ef3bd 100644
+> --- a/xen/common/pdx.c
+> +++ b/xen/common/pdx.c
+> @@ -393,8 +393,9 @@ bool __init pfn_pdx_compression_setup(paddr_t base)
+>               (ranges[i - 1].base_pfn + ranges[i - 1].pages) )
+>              continue;
+>  
+> -        ranges[i - 1].pages = ranges[i].base_pfn + ranges[i].pages -
+> -                              ranges[i - 1].base_pfn;
+> +        ranges[i - 1].pages = max(ranges[i - 1].pages,
+> +                                  ranges[i].base_pfn + ranges[i].pages -
+> +                                  ranges[i - 1].base_pfn);
+
+The fix LGTM, thanks.
+
+Regards, Roger.
 
