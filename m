@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67B7FCA5FFC
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 12:30:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1441475.1659089 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0C248CA5FF0
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 13:07:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1441494.1659097 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE4Iq-00022Q-6E; Tue, 06 Oct 2026 12:29:52 +0000
+	id 1xE4sk-0000Je-RB; Tue, 06 Oct 2026 13:06:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1441475.1659089; Tue, 06 Oct 2026 12:29:52 +0000
+Received: by outflank-mailman (output) from mailman id 1441494.1659097; Tue, 06 Oct 2026 13:06:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE4Iq-00022J-3K; Tue, 06 Oct 2026 12:29:52 +0000
-Received: by outflank-mailman (input) for mailman id 1441475;
- Tue, 06 Oct 2026 12:29:51 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xE4sk-0000JX-Ob; Tue, 06 Oct 2026 13:06:58 +0000
+Received: by outflank-mailman (input) for mailman id 1441494;
+ Tue, 06 Oct 2026 13:06:57 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Alejandro.GarciaVallejo@amd.com>) id 1xE4Ip-00022C-7v
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 12:29:51 +0000
+ (envelope-from <coolhaoyt@gmail.com>) id 1xE4sj-0000JR-P4
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 13:06:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xE4Io-00C3F2-LB
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 14:29:50 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xE4si-00Acg7-GJ
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 15:06:56 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Alejandro.GarciaVallejo@amd.com>)
- id 6ac4e9b1-e002-0a2a0a5209dd-0a2a450981ee-30
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 14:29:49 +0200
-Received: from [40.93.198.26]
- (helo=CY7PR03CU001.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Alejandro.GarciaVallejo@amd.com>)
- id 6ac4e9bb-be1a-0a2a45090019-285dc61a983b-4
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 14:29:49 +0200
-Received: from BY5PR12MB4999.namprd12.prod.outlook.com (2603:10b6:a03:1da::13)
- by MW5PR12MB5597.namprd12.prod.outlook.com (2603:10b6:303:192::8)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Tue, 6 Oct
- 2026 12:29:44 +0000
-Received: from BY5PR12MB4999.namprd12.prod.outlook.com
- ([fe80::a890:d230:e0a8:6740]) by BY5PR12MB4999.namprd12.prod.outlook.com
- ([fe80::a890:d230:e0a8:6740%3]) with mapi id 15.21.0496.010; Tue, 6 Oct 2026
- 12:29:43 +0000
+ (envelope-from <coolhaoyt@gmail.com>)
+ id 6ac4f26e-bab6-0a2a0a5309dd-0a2a45028844-8
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 15:06:56 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <coolhaoyt@gmail.com>)
+ id 6ac4f270-6ca4-0a2a45020019-d1558031c063-3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 15:06:56 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4a1698ea378so5787305e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 06:06:56 -0700 (PDT)
+Received: from LukeW.manchester.ac.uk (uom-130-88-226-5.manchester.ac.uk.
+ [130.88.226.5]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a03043fae5sm254460855e9.0.2026.10.06.06.06.53
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 06 Oct 2026 06:06:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,131 +53,204 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=jT51usW4g3monHE6hM2LSH5Y21a8JA1yIcgyrMO7cGVtYj9RX0f42O/j2qnv9lZhkz1jBx9/rgIQaPJxUTp9PAj6aViTztrfmUZSUCSrcoB9S3Pv6J0xukRXT0A+JtTR//6xHCkMRtbIhVF3j09klUFlcDVhpSeF498oCZqmjb7a/DVh0cgYANic0hXgXnVKXdz4/ZSDDCIKxSUz2Dn0oWgf3etuGVEzWt/ltYc+dN8GEajwAnV1oO9kq94/bzhqL8kudBH2v95jq/yzy7+Ez3OsFIuCsbcGcX66xpll+6ZL1q7kvzLPzeLOOmGPADRW6bZu2cS3jjc2nXTMGburiA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=DuG09F/PZRagwLzwz0P6+lF7+4aB+HcTYJQYawMjQVU=;
- b=lTTccw1tRfgj4wtKTxfeQ/tw2Dnw6sbqJ3C9P3bIErNwnRl1EmZlKH7HzJUrSzII+lrhlXKcJiCMK1gbqmvE4waWsEmwdH/Y1HP/Kc6qdajmFnrjhl/AvpniYC4YqB6RFIrwuQrSSSo4MH0BfUQLJOQLkuenSHBLtB0lNLgZUWgiW/Yk7gavyv5fo94VDTrCXcV4NN04KWkLJOPn7YQkVpl0f2VNxURjtx3pxh8daSfBMlTjjyDNIe39msfnIszLCAwzHoH5V6mPkSb0Jt30hf+bRwNn8gsWgSDwKL4qEXLioov/xulmaRpmzzhWxGp0Q7diKrhVH+Rnj65iAnN5RA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=DuG09F/PZRagwLzwz0P6+lF7+4aB+HcTYJQYawMjQVU=;
- b=e2tMfPh85XJpVY6xwmOKqy+NZO9j/jegO7/5doVdTp3MVc4H5S3copaCWtRP5jYPH1YuSt5HqAtde28elelIfhpOwvyMyZougfpBTj6UY1jPjABe28zU6jUO2tHUGPxh4F0z6javANRFkQmORNGrlMlBwpJRCaptgnEB5dDw9t8=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Content-Transfer-Encoding: quoted-printable
-Content-Type: text/plain; charset=UTF-8
-Date: Tue, 06 Oct 2026 14:29:39 +0200
-Message-Id: <DLXR8CB96NCX.1ZRUEBZZG88GC@amd.com>
-Cc: "Stefano Stabellini" <sstabellini@kernel.org>, "Julien Grall"
- <julien@xen.org>, "Bertrand Marquis" <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>
-Subject: Re: [PATCH] arm/nospec: Make nospec helpers always_inline
-From: "Alejandro Vallejo" <alejandro.garciavallejo@amd.com>
-To: "Orzel, Michal" <michal.orzel@amd.com>, <xen-devel@lists.xenproject.org>
-X-Mailer: aerc 0.17.0
-References: <20261006103142.139422-1-alejandro.garciavallejo@amd.com>
- <f9c2cb00-e334-4dab-a173-4cbffff18d94@amd.com>
-In-Reply-To: <f9c2cb00-e334-4dab-a173-4cbffff18d94@amd.com>
-X-ClientProxiedBy: MR1P264CA0184.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:501:58::6) To BY5PR12MB4999.namprd12.prod.outlook.com
- (2603:10b6:a03:1da::13)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791292016; x=1791896816; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=WFYOvHs1zHB2tYA6ImDHS5zPbAzxghlTOpxWyn9IDQI=;
+        b=GArXisX0hHMK96EjcPYs2snlXiwxQCzet2xcZLMbuzDmzEFDQg30f22EFLHE2EVPeE
+         dv5JhBFaARRR9yKN14P7vMPPby3FmNo5Yrxt/zy3ZOTUm7m7JHZcd5OvOVLbug1pXDnd
+         6i0BcmrCfRj5o5aotZMgCRaQFUqerqqTb+ucacWjLVXEqSprKI//+I4JqXAPjRG3nLZu
+         xwhmBV4KAhCIqBi4mg1zCYNdtagxfsswyfQdmVUPp/KDhj2pKuu/slBEuRC5WtNOfVTC
+         lzu0RKLCEUVn4X72idatvKS7TQlIj8v8gTvjZ+sWYDJx3gcDWywNQj9LWp0nqFe4K8YT
+         1wwA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791292016; x=1791896816;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=WFYOvHs1zHB2tYA6ImDHS5zPbAzxghlTOpxWyn9IDQI=;
+        b=lM9MkzXxwaoFDo9fbgsKSqIXEJ0wWWHSDrKf4Gv6mdcOoZk4oOdA2kCUEA0WW7Zn+C
+         rB5aca+MIP1pvNCe9bYY7cbua19jNTWeDqeVnXA3WiU47MEc6uQ972BAOPaSw+6ZXODy
+         s0UEcmLcqTteSSJTjPPuzGwNngQt+6A59SQD0qY81/O69LCzl2VQ5tWDKta7/AKdBP5X
+         joMfi6t6DTHMGg3bpXl8HXCfhdyfj+C/I2UAUeuz2X5X6UwVgQLZh7bcY+QPZH/XGW7a
+         a0F9WmqQUie1WT2lVc/QH1cLaqr1qkDL1r6rqKn20w/PNrdcNFNb7YDAJfezyBT1F7+Z
+         1w4g==
+X-Gm-Message-State: AFuF++m1v7lvMnasmgmDU2XTbVaie4Qg46JovFa/bGrFSbcEBbCYNxqH
+	kunI4b1QOMkHyA8a1rHAAbJWd2msCzFVG+8wlUt1wm6JDgVgdqPPP89zfLghcH1Ypu0=
+X-Gm-Gg: AYBFou3IpFx42KLVJttDbvjQDmavLkBhSK3CGvrVtNGA3JKkDFRmbE5XYZXtvbuFv53
+	v8CRkLO4O+/agbyLKoOgddMafikypOWunsUTrqzeAVGIhgcuexPoroGPhVgrleyC5ooAGGPXYAr
+	sc0Jp3KTLEl1aaJd3MYMAk0Oq22ULW1jw5pyOEpXhd4X0yk/0PhfEphoZZ5ZctePywrgHBhv5y0
+	P7+iqHOrl1YRJKQECk+ymQuUH877XCfd4eULTpxZorCxwhII7dgefTtB2rzYbLALooFjtMtJ8Js
+	dbLeZJ7yR6wShGIUF/8sF4z+Bo20cYuosLeU87N1QSMvKK1c8CVehsjj+Og9fQf3/nEBPSA4aAr
+	XPC1bOfr6qHdJE/XutDGB0Dp78sbrrjdnZp76Zed/SqMFmy1zG+sPcwMZGrSgexEVVgTmqP1kNs
+	dwjd8nFmoY8atCl10hAwF2n574RWv+PiWx8zJot+RmBlPsCoVpuv5IzE10iXwVFXCUZZv/9LP1m
+	s5qwWIqJ1e+N2HAvU/FVueXC/8ttk0U/bp4oZCXk7uBV6s=
+X-Received: by 2002:a05:600d:9:b0:4a0:2391:6529 with SMTP id 5b1f17b1804b1-4a17b55241fmr25854435e9.29.1791292014912;
+        Tue, 06 Oct 2026 06:06:54 -0700 (PDT)
+From: Weiqi Wang <coolhaoyt@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: jbeulich@suse.com,
+	andrew.cooper3@citrix.com,
+	anthony.perard@vates.tech,
+	michal.orzel@amd.com,
+	julien@xen.org,
+	sstabellini@kernel.org,
+	roger@xenproject.org,
+	lucas.cordeiro@manchester.ac.uk,
+	Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
+Subject: [PATCH v3 2/2] xen/pdx: reject regions crossing a lookup table index
+Date: Tue,  6 Oct 2026 14:06:50 +0100
+Message-Id: <71fe1a0cff0563db66df7f427d115fdd1953938e.1791291898.git.weiqi.wang-2@postgrad.manchester.ac.uk>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <c3ba7ec05772614c4f84f9bba1e4f3e54d21c14d.1791291898.git.weiqi.wang-2@postgrad.manchester.ac.uk>
+References: <c3ba7ec05772614c4f84f9bba1e4f3e54d21c14d.1791291898.git.weiqi.wang-2@postgrad.manchester.ac.uk>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY5PR12MB4999:EE_|MW5PR12MB5597:EE_
-X-MS-Office365-Filtering-Correlation-Id: 987d0c2f-6c3b-4fb6-98f8-08df23a57fb1
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|23010399003|376014|366016|10067099003|56012099006|11063799006|4143699003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	qTHGLbvZPWMZq4OtVBo5Oexe92jHaDYvFn54+DneuIY+hgJP210BMSF0l00xFBbCeQwzdB7isHjaRQ8IH6hkG0nSY/VS2w0talDvAZtoghv15veyB6jCc/G6UKoJq9sDrIX+OWwJ+AldJS2vZ9+ZRCGcjBZ9Eta7ecigsgWpwlPTlmLUbdBTED+QVxBRlSDWvK3pf4YgzeqGME6W8D7ARvvet2fMZkxrkPz0Hy3klEbHLVkAVXL1BO/0cFPxcrljeRgHBaveoauWZuTxsV4GHpI4ZWQ0d0DSjLGvP63bMWB/rTwk+gkOAeUpxIeBcRwAORPvF5Iq2FGl6JOL4Vx7H/6Ykt1w2YjhIDAAAWlmCksp2DNk4YxOKu+8tzjLDXKQ05BA6BAFrSWv1bfD2/XfaNfl4cpU9PH0Hq1WjbzuejrmvAB86rbCvD/6szhCfVP9PQgKFDgBhBf5XvEIF1gQANjuNuGcUtrsEGk8dnMkqH3Ukyb5siYNAsptnLR8/DelzGdmu5aqZMNdGfqavzl31H3LL4UvdDsS+mHY/bmCZoteOwuLujQfKP/wjQBFviXNRSKH1384ltOt8VLNQx0bqCY+k/hYNeip+wRgb5i4lc/D3z6ef+zK7r15tGGea44bAPNxYdYA8reZZASXidva3yqIXGVzav+wsoDNZM1ASzg=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR12MB4999.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(10067099003)(56012099006)(11063799006)(4143699003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?ckprRlFqTkVXenpubjk1ZzVOQjh6Y3B0WmhtSXBHZ1k4U2pPemtTMHRHSXZk?=
- =?utf-8?B?V2VzU1BFaEVnQWliK1RMbFFYdW5nM1UvYzB4MGZpY2ViNDUyTnpzWDdoZGsz?=
- =?utf-8?B?STZoOFJiSXdFaFBiT1Jodk9vbTFDN2pPSDFiODc4WTlOcmlvTHJ1ZmVkeU41?=
- =?utf-8?B?QWF5VFpiRVJhWTJVQ0ZIVDBHZG8xMDFvSm1hbklHVXI3UVg2TVRucWJqS0gy?=
- =?utf-8?B?YzJ2cGpnUTVJSDFtUS9ERVh4dEJjLys4VHV1L0tOdzNhTUxoRUVuUkNhQlBG?=
- =?utf-8?B?SHo5MWRKbVhPTFNIa2I3ektiOEZrQW1SSXRmeS9UUkJpRDh3VGJ3Q2ZydHVR?=
- =?utf-8?B?UW1xM0s5b3l0RkdwSzlCQUlNcUw4NFZYVzlPT1B6Y2EvYUg3SmpuOWR3YjIw?=
- =?utf-8?B?dlo3VHRvcktuQUVkVm93V3Bwb2g4clh3RC9hUlk0VzJIY2hjT09pNys2MVpm?=
- =?utf-8?B?Z212RlpxRUFCYUFTV1BEaW1QTTA5b2hGWm16L3hpdmtSQ3k4UWg5WnQ3LzRK?=
- =?utf-8?B?cDZuMXJZdUZmRTk5dks2Q1laTm5jWVhQeDJGN21PckkrVExNUHNyaFlzMVVm?=
- =?utf-8?B?SDNCeWxUcCtlSnBoZlE5QVJ0RzZoYndRZkFmcXZyc3BXcWFBcjhNcnJ1ZHJt?=
- =?utf-8?B?TVRPOTNlak9UcmRYNXZtcEdZYmZaeTVQcnlSYXdUSmhDNERxR3JvazNOY3JM?=
- =?utf-8?B?cUswS2JKYkFVQ05Ha1NJaEZXNis3ajJsMERuNHNwQ0VLeUE2eGY4MFJrMHdS?=
- =?utf-8?B?V2dIS2NQZTJWNE9qZnNDYUxZTFEybGxiVEREQ3AxbEEyMjgxT1piSm5xOHEz?=
- =?utf-8?B?WTVveVcvOWdFdFRlK1FwYm1CK0RsOXdaTitXZ1Z3N2c4T0IwV1lZNkNyVkdj?=
- =?utf-8?B?ck14eTVia2Fram1taEJDOGxrWWRVK1FYeFE2aXlvckNNYXU1RjBFeXU4T1ha?=
- =?utf-8?B?SkgrNnd0RmhsQUpRMXBkaW5PeDRFOUVDaU9zaFUwVTIxK1VubUNkN3l6YUs5?=
- =?utf-8?B?Skl3bndMTzk1UjdNVFNaMjhpS3ZQSGF1V3Q0OHJqd2ZqQitrb25PNUVIaHZp?=
- =?utf-8?B?OGxrZnRkYU5Ma3N1eVVLczB1WisxQkN6dlB1MGdzNjk3eGd2eEc2d2FUWEZq?=
- =?utf-8?B?ZnN6cExSWVhmeHQ0WHc2RjVldGxCaTBrb00wbERheGd1c0MwMUJpdnRrNEtt?=
- =?utf-8?B?WnpzTjR6clI2TDR1RUNwdDAyMUF4TG8vbEZxVk1NNzdPZTV3ajB3K0xQN1ln?=
- =?utf-8?B?YlRUdHcrdDhYZUhYMyt1cEZYTFRNYkFpeWpEQ0g1TmJSMERGN2JQZ1N2RERu?=
- =?utf-8?B?cVpXODZnWDZxNVB3cE52QkdLcXB2eVpKeVc4djZtOTB0QmdoeXBXMU0wK1lz?=
- =?utf-8?B?SUZBRHVjU2VXRDlyK0p5bEV5QjFHazRMK3RXYStDUUJ0RXByWlJKRXJ4U3hw?=
- =?utf-8?B?N1B5MWJ6bGQxU0d5NmptSXZIbk82R3FmUE84cGcyZHlBQTJ3WTlzcWg0Q1JX?=
- =?utf-8?B?YXNXRSthN1IwWThYemVpanowUHMvM1hVUFF4Q21Sd05aYjVJR3JqT0lCTTJX?=
- =?utf-8?B?RW5IdkZIdmJjRHpUVVpyY0JZVThGM3cxbm9zVkFUa2F2NTRyYlhiZ05RK3lm?=
- =?utf-8?B?aGQ0ZEJpYkhvMFJWMlhyRU5jYlQ4amF0K1ZselRpQzltakxkRDhjTGtiVGd6?=
- =?utf-8?B?ZkRvdUpOeThEVkRxa09GMmM0dW5YNllNVU1XcVVyY3Nva3IvSlVkNnA3SlV0?=
- =?utf-8?B?ei9aY3ZjN3pOUXY3eWUxOFZKVWNNTnZpVHErckhDc1luZ2J3QzVTYy9VajRV?=
- =?utf-8?B?elRJVUVNR2xjNXBuV2V3bUpMZXlCeVpzWkcyWnM2S2d0Qld3QWtYMzNSbHNn?=
- =?utf-8?B?YUMrdXNPa2dIaEpWUkpSR1FQMFYvYkJpVGFscXplVjVqdHlEUkJ0R2hqRTRV?=
- =?utf-8?B?WERlTWNRKytnUkZscmkxSFMwdDg3bXE5Ump1NTB2bUdibEVhOGU2QjI3RTdH?=
- =?utf-8?B?SkR5YVZNdFF6dzNUNEw2S29sOFBQY3ZYV3F4WU9vV0tQVzNBeFA0Z001ZmR6?=
- =?utf-8?B?NUlmMEEraUFkTXQvdmFiSDhlVkpET2w0Zm1XdzFUZzNtUmk5UTdRdHVOeUt3?=
- =?utf-8?B?MHJ5WHJMdlN3Y0Zoc1ZaaVl1ZkkzUVlzdzlMdlVNR2NIQkxCMlAzK0dwa0h6?=
- =?utf-8?B?UC9YN3kvSzFDdWdza3ZGMiswU1RVUTc0VWtweXFZZkExQjFXb3ZZb3lXY0Rz?=
- =?utf-8?B?VCtxUFN1T29XUkdhekQvWi9SaHdyY2g2R3BRVWZmOXdwOFR6OHdyeG9UU29C?=
- =?utf-8?B?Zm4zQUpQMGhVdCt5Nk1SYU1tNTF0ZUg5MjJDb28vOFVYdWY4alhRZz09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 987d0c2f-6c3b-4fb6-98f8-08df23a57fb1
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR12MB4999.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 12:29:42.9618
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Tlc4Wq0ntOHf0S6u6IY3Wt0gAyzdF3RPbK8COBGqmuq5cLy+zW10nb/xWh/vwyhREmtMfh0PhWKwsfBos1H4hA==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MW5PR12MB5597
-X-purgate-ID: tlsNG-bad1c0/1791289789-BDEC6034-D876F640/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1791292016-30FCE2AC-0EA17957/0/0
 X-purgate-type: clean
-X-purgate-size: 722
+X-purgate-size: 6148
 
-On Tue Oct 6, 2026 at 12:45 PM CEST, Orzel, Michal wrote:
->
->
-> On 06-Oct-26 12:31, Alejandro Vallejo wrote:
-> > While today they don't implement fencing in a way that would block
-> > speculation, once/if they do they'll absolutely need to be inlined, eve=
-n
-> > if -fno-inline or -fno-early-inlining are passed.
-> >=20
-> > Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
->
-> but this should be done for Arm, RISCV and PPC at once in which case you =
-can
-> keep my tag for v2 # for Arm.
+From: Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
 
-Neither RISCV nor PPC implement nospec.h today. Should I considered the
-R-by just settled for this patch?
+pdx_is_region_compressible() only looks up the table entry of the first
+page, and checks the region against [pfn_base, pfn_base +
+pdx_region_size).  pfn_base need not be aligned to the table index
+granularity, so that window can extend into the next index, which belongs
+to a different range with a different offset.  A region whose tail lies
+there is reported compressible, yet its last page on its own is not, and
+translates through the wrong offset.
 
-Cheers,
-Alejandro
+Require the first and last page of the region to use the same table
+index.
 
->
-> ~Michal
+This can be reached from the coverage check in srat_parse_regions() when an
+e820 RAM range is not covered by the SRAT ranges, which is the case that
+check is meant to catch.
+
+Add a test case that fails without this change.
+
+Found with the ESBMC bounded model checker, and confirmed by running the
+failing case natively against the unmodified code.
+
+Fixes: c5c45bcbd6a1 ("pdx: introduce a new compression algorithm based on region offsets")
+Assisted-by: Claude Code:claude-opus-5-5 # finding the issue with ESBMC, patch creation
+Signed-off-by: Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
+---
+
+Notes:
+    Changes in v3:
+    - reword the second paragraph to start with "Require" (Roger)
+    - reword the ESBMC line so it no longer names a counterexample that is
+      not part of the commit log (Roger)
+    - add the reproduction as a test case in tools/tests/pdx (Roger)
+    
+    Changes in v2:
+    - the issue is not tied to huge addresses (Jan): replaced the example
+      with a ~5 GB reproduction and dropped the 2^51 remark
+    
+    This was discussed when the offset compression was reviewed.  In the v2
+    thread [1] Jan asked whether pdx_is_region_compressible() is correct when
+    a region crosses a lookup table slot boundary.  The thread concluded it
+    was not an issue, on the basis that pages contiguous in MFN space are also
+    contiguous in PDX space.  The case below is one where that does not hold
+    for the code as merged: the region is reported compressible, its last page
+    on its own is not, and that page round-trips to a different PFN.
+    
+    The ranges are as srat_parse_regions() would see them.  The RAM range is
+    not covered by either SRAT range, which is the situation the coverage
+    check in srat_parse_regions() is meant to detect.  On staging plus the
+    first patch of this series, before this patch:
+    
+      region [0x4ca9b, 0x12982e) compressible: 1
+      last page: pfn 0x12982d -> pdx 0xa982d -> pfn 0xe982d
+    
+    With this patch the region is reported not compressible, and
+    srat_parse_regions() disables compression.  The test case added here is
+    this same ~5 GB layout, checked through pdx_is_region_compressible()
+    directly; it fails before the change and passes after.  The existing
+    tests in tools/tests/pdx continue to pass in both mask and offset mode.
+    
+    Other callers that rely on the same answer are mem_hotadd_check() and the
+    EFI ram_range_valid() check.  I have not run those paths.
+    
+    One behavioural change to check: with npages == 0 the new condition
+    compares against pfn - 1.  The callers I looked at never pass 0.
+    
+    Model checking (ESBMC, 2 SRAT ranges and 2 e820 RAM ranges, all free
+    within a bounded address range, the srat_parse_regions() coverage check
+    modelled) finds no accepted RAM page that fails to round-trip with both
+    patches applied.  It also finds no layout where the coverage check now
+    rejects what setup accepted, with RAM equal to the SRAT ranges.  This is
+    bounded to 2 ranges.
+    
+    [1] https://www.mail-archive.com/xen-devel@lists.xenproject.org/msg194095.html
+
+ tools/tests/pdx/test-pdx.c | 33 +++++++++++++++++++++++++++++++++
+ xen/common/pdx.c           |  3 ++-
+ 2 files changed, 35 insertions(+), 1 deletion(-)
+
+diff --git a/tools/tests/pdx/test-pdx.c b/tools/tests/pdx/test-pdx.c
+index 6728ffc7a5..10c659b775 100644
+--- a/tools/tests/pdx/test-pdx.c
++++ b/tools/tests/pdx/test-pdx.c
+@@ -288,6 +288,39 @@ int main(int argc, char **argv)
+         }
+     }
+ 
++#ifdef CONFIG_PDX_OFFSET_COMPRESSION
++    /*
++     * srat_parse_regions() passes e820 RAM ranges to
++     * pdx_is_region_compressible(), and these can be wider than any single
++     * SRAT range.  A region must be rejected when its first and last page
++     * resolve through different lookup table indices, even if it fits within
++     * pdx_region_size.  The values are PFNs from a ~5 GiB layout.
++     */
++    {
++        unsigned long ram_start = 0x4ca9bUL, ram_end = 0x12982eUL;
++
++        pfn_pdx_compression_reset();
++        pfn_pdx_add_region(pfn_to_paddr(0x5bbd3UL),
++                           pfn_to_paddr(0xf18f2UL - 0x5bbd3UL));
++        pfn_pdx_add_region(pfn_to_paddr(0x1869bdUL),
++                           pfn_to_paddr(0x189f58UL - 0x1869bdUL));
++
++        if ( !pfn_pdx_compression_setup(0) )
++        {
++            printf("table-index crossing test: compression disabled\n");
++            ret_code = EXIT_FAILURE;
++        }
++        else if ( pdx_is_region_compressible(pfn_to_paddr(ram_start),
++                                             ram_end - ram_start) )
++        {
++            printf(
++    "region [%#lx, %#lx) crosses a table index but was accepted\n",
++                   ram_start, ram_end);
++            ret_code = EXIT_FAILURE;
++        }
++    }
++#endif
++
+     return ret_code;
+ }
+ 
+diff --git a/xen/common/pdx.c b/xen/common/pdx.c
+index 23655ef3bd..52928faa15 100644
+--- a/xen/common/pdx.c
++++ b/xen/common/pdx.c
+@@ -324,7 +324,8 @@ bool pdx_is_region_compressible(paddr_t base, unsigned long npages)
+     unsigned long pfn_base = pfn_bases[PFN_TBL_IDX(pfn)];
+ 
+     return pfn >= pfn_base &&
+-           pfn + npages <= pfn_base + pdx_region_size;
++           pfn + npages <= pfn_base + pdx_region_size &&
++           PFN_TBL_IDX(pfn) == PFN_TBL_IDX(pfn + npages - 1);
+ }
+ 
+ static int __init cf_check cmp_node(const void *a, const void *b)
+-- 
+2.34.1
 
 
