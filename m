@@ -4,46 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E700FCA5FF0
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 09:53:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1441322.1658906 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10E58CA5FF0
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 10:22:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1441335.1658915 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE1rQ-0004Ro-Nt; Tue, 06 Oct 2026 09:53:24 +0000
+	id 1xE2JP-0000cv-TE; Tue, 06 Oct 2026 10:22:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1441322.1658906; Tue, 06 Oct 2026 09:53:24 +0000
+Received: by outflank-mailman (output) from mailman id 1441335.1658915; Tue, 06 Oct 2026 10:22:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE1rQ-0004Rg-Ku; Tue, 06 Oct 2026 09:53:24 +0000
-Received: by outflank-mailman (input) for mailman id 1441322;
- Tue, 06 Oct 2026 09:53:23 +0000
+	id 1xE2JP-0000co-QY; Tue, 06 Oct 2026 10:22:19 +0000
+Received: by outflank-mailman (input) for mailman id 1441335;
+ Tue, 06 Oct 2026 10:22:18 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1xE1rP-0004Ra-FE
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 09:53:23 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1xE2JN-0000ci-Qj
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 10:22:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xE1rO-005Hci-S5
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 11:53:22 +0200
+ id 1xE2JL-00E0Vp-QU
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 12:22:15 +0200
 Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6ac4c50a-bab6-0a2a0a5309dd-0a2a4507a10e-22
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 11:53:22 +0200
-Received: from [40.107.201.37]
- (helo=CH4PR04CU002.outbound.protection.outlook.com)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ac4cbd2-e002-0a2a0a5209dd-0a2a45079fb6-18
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:22:15 +0200
+Received: from [40.93.195.23]
+ (helo=SN4PR2101CU001.outbound.protection.outlook.com)
  by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6ac4c511-b4ea-0a2a45070019-286bc925ca12-3
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 11:53:22 +0200
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
- by DM6PR03MB5114.namprd03.prod.outlook.com (2603:10b6:5:1ef::20) with
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ac4cbd4-b4ea-0a2a45070019-285dc317fb8a-3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:22:13 +0200
+Received: from BN1PR12CA0002.namprd12.prod.outlook.com (2603:10b6:408:e1::7)
+ by MN0PR12MB6103.namprd12.prod.outlook.com (2603:10b6:208:3c9::19) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Tue, 6 Oct
- 2026 09:53:14 +0000
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0496.010; Tue, 6 Oct 2026
- 09:53:13 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.451.18; Tue, 6 Oct
+ 2026 10:22:07 +0000
+Received: from BN2PEPF000044A3.namprd02.prod.outlook.com
+ (2603:10b6:408:e1:cafe::27) by BN1PR12CA0002.outlook.office365.com
+ (2603:10b6:408:e1::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.20 via Frontend Transport; Tue, 6
+ Oct 2026 10:22:06 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN2PEPF000044A3.mail.protection.outlook.com (10.167.243.154) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.496.14 via Frontend Transport; Tue, 6 Oct 2026 10:22:06 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 6 Oct
+ 2026 05:22:04 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 6 Oct
+ 2026 05:22:04 -0500
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
+ Transport; Tue, 6 Oct 2026 05:22:02 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,144 +71,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=s43iHrtebMfPHlmmIRmahRL0rhVA4J+3SE1zDCz4WdVi5CHsuoWlZ9rxL/eeV4zpwheo3wUWvokJSr9HmtzqzPmuipaJe96DCoeNZLggFarWSBdKVjUbvtK4VY9tqlT3kYhQACGlZWCd/UL1gn1rXGfoQRKev8QzuxaPThwHlHh4LoDijnF9MR2rBKmqwsByb9hg5FWICxteqphIGVtYXpkQobYOeht5T5UV8ppzqdArRLXXLkHB+0HrBs6slXvz6AUEeseKmgCaKk3/Rbx7/NKX5+sFF6/Cxu38rRQfx7XvpGCtY2Gxat8Grspu8ahACbyXJin92jShsnLnIAfNAA==
+ b=YkaOzxq7qwhIgz8YAmNiyj+fcCJIg0FZAK66CufypMsqEU14imOC8In+pnWPkt1ySsVk99yfDBoLt80b5cdSA0qg9HYkL94QFuoH0im94PgsGevY2tFQXtQl0CRmdF5lXyzGry2uGm5mBjp9WzRRRwqCufjsHfXhButDD+QFXckeeexp/qdY93Z7pBBdc6B6zhKHgjVx5tmeTqhkCkJ7DQtNkgefQf+wOZinWpc1pkW2pVzyckLVaXX0JR2gFAmPfN1bGYuA0WvJs4QDXmfSERvkW4bESdQi7aAHFvMAXYFnBd51q3o94UlA2CwxZBJgZQzVB0C0SRJ2OVWQ9mPdmQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=FBKbnSwT38Ox90wLcSxenGv+kipT2bjKYVcjPp2CxFQ=;
- b=dCq4+2W1mWOloVJkeTjCnCieQggrODgdV11odAqK3xXnB/shA01JAp+oY1Z0xIwHAulUciz6k84hqpmf7MkjgfX7d2EvYIuX/X60bO6LQa0F9vvCb7RlDBkdxP8B8/A3rEcQI7yP35mT3S4Uh/2hSKJOTWdudGYcrxhP4E/gwzKI1pLEghyIAwDVrLJnnXNUBObHy/fiJ1yEl+zm/MBPle/l5us193Ik+SAjRfYE7ITXr+DzJ3dzTnGFJQMbEyOr2ccY4HmoTVdyUJh7deV+Lu1PdSGu3nMoZcvSZe46d4HyNGfmK3O/+5l1SR0rNHxWQCX3GZyrjwRwLHlfe7EDEA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
+ bh=ySFOSfm4QWV6mZA+7DMYS6OCfeRFgu2gtuH5FW9VWEM=;
+ b=Qlx0KeLNevmMfRX4TNpoVuxp16hJzqWgq5Wse91F3h4vkV+RPGQ+1vRlAMxy5F2S6pQ1utUQIp6ks8S5pHnso2T3Zn+FiumkGAXOEwvQ22mYGRL9Xj9RemrpqfmZuj1taOHhPl6f4uS8SGg8RF60VqyNekJsl806gDRoz7QF8mhJmmsLebx3v31eby2Ddp0L2R8l4HQD4NgdHgwkcx8Bt7ew003TgUbnzsV8vBq3f8X+ieUgSfz4O64gcIRwyFjViBBrqs4X+gNMygqWQzHzKOQUBYo+K+/tXE3Qkc7YzBx79Bf0HmV63J9muGRP8EocqVyY6hpBdldgsu0XT79F3w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=FBKbnSwT38Ox90wLcSxenGv+kipT2bjKYVcjPp2CxFQ=;
- b=UIDMCDv8PiecTD1rR9NSCzHksp5IrKvUqcHWNdtQVM9YxI9I8Nfyp0dcIdEQMojWEwrraToogtRrG+PQOb3/3Fd2mhYgBFvYMC0X7JkAg2MNkDO3u3hDhwekmcenjFRcbI5WBW981gvJK/c9oHQCYXPdOCvwPidTm5wxXqaTyBs=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <3f9dfbc2-888d-4065-ab86-319910545d97@citrix.com>
-Date: Tue, 6 Oct 2026 10:53:08 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/shim: Report -ENOSYS instead of -EOPNOTSUPP
-To: Jan Beulich <jbeulich@suse.com>, Teddy Astie <teddy.astie@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- xen-devel@lists.xenproject.org
-References: <1791211375.8631fc262581453bbf619ec5b2062170.1a10c848c9a0003f66@vates.tech>
- <5058c588-662b-4435-b205-52ee3ab01ab8@suse.com>
-Content-Language: en-US
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-In-Reply-To: <5058c588-662b-4435-b205-52ee3ab01ab8@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: LO2P265CA0512.GBRP265.PROD.OUTLOOK.COM
- (2603:10a6:600:13b::19) To CH8PR03MB8274.namprd03.prod.outlook.com
- (2603:10b6:610:2ba::5)
+ bh=ySFOSfm4QWV6mZA+7DMYS6OCfeRFgu2gtuH5FW9VWEM=;
+ b=gHeEysgXyGb+80ACvYr3epGWUxjIQGcgPBSxjUktMbhi0n2Lh7q0Y3MxfJspEPUDOzfwKf1epnQ9vSwFtS653YAGDkORwuAIzNUJs8nx1QwCjyd6YhW+PC/irF9qUtI239rTrTnsXadMC9Q0Oa8oLz11xlT0Tx4NiGcC2WDHb+4=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <da9dbb1b-2d9b-4da5-a645-d98359c8d943@amd.com>
+Date: Tue, 6 Oct 2026 12:22:03 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] xen/arm: gicv3: initialize eSPI unconditionally
+To: Mykola Kvach <xakep.amatop@gmail.com>, Leonid Komarianskyi
+	<Leonid_Komarianskyi@epam.com>
+CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	"Stefano Stabellini" <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+	"Bertrand Marquis" <bertrand.marquis@arm.com>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Julien Grall <jgrall@amazon.com>
+References: <13181424f9be3f5e31977fbd505209cd0508571b.1790102501.git.leonid_komarianskyi@epam.com>
+ <CAGeoDV8sN2P9nqHwxcYz72u+L-DEQDbOcHENvX=jpzJ2=Z-gNQ@mail.gmail.com>
+ <d7f902ed-af19-4d06-8bea-b73b4b385533@epam.com>
+ <CAGeoDV_v3DxCNvPQvOs9YQLBg0cgxZsjH8rHyVPCEmYws8nEpA@mail.gmail.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <CAGeoDV_v3DxCNvPQvOs9YQLBg0cgxZsjH8rHyVPCEmYws8nEpA@mail.gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|DM6PR03MB5114:EE_
-X-MS-Office365-Filtering-Correlation-Id: d7860dd8-a9cd-431c-c311-08df238fa331
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A3:EE_|MN0PR12MB6103:EE_
+X-MS-Office365-Filtering-Correlation-Id: 49a8f3b3-1b80-41db-b25e-08df2393ac5b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|366016|23010399003|11063799006|4143699003|10067099003|56012099006|22082099003|18002099003;
+	BCL:0;ARA:13230040|82310400026|376014|23010399003|1800799024|36860700016|56012099006|6133799003|5023799004|10067099003|11063799006|22082099003|4143699003|18002099003;
 X-Microsoft-Antispam-Message-Info:
-	EOo1F+ROKsXembdryQ+TNe9NKfLMlnVOza21ziYywRCj1cCqeEbOLnYDzSzfGcFzMjhpTV4G/O5yHDtJ+TMqECO/6rZfF243Lb9/hsFD30Q3vfH/LTy3vNHqDSuTJlTBMviMbvLSxYDPt6+yiYq1bP7Am/39crTIcWHVpX4TaPTpGsCEnVJ4/eAn0enDJAzC27T/Zq438Ctiz0DlJgAcuq48kt2YFB4Gjh0Z5/C0qPNpRm8QRpT7SG8Ci7Ykh3xRPBMVp081yTICsIS4lh1D7kiECD/fAt45FBkJIJ6pMnjK00/z23c7bpGUvTpqdFtgTdwWTF/Nq661tuh0ROJdYogp6+c3ZQpqGgTrmIjDqy6fpEAcK5Sli0+5buvfAdU3Pe4fGSgPdBHi2Utx2jVc84MJffg7MiHpyuiffvKZEZT3FtmapsZo2F8/s44t8beDkmyj3+213uQkuy6mpTtRF76nIhCdyFDhceKSveaWP81qub0gttS6B+WWLD+349lw0iiN44ipZFX9wtQ30HnEr/VTDIXnXeLrTNzsHWw9niIp8VMO4ByQiZiOWBcxqjfDdHfmKN/d5724jGOAqGR9M8FNjjh6SVkyuIu/jfgzNrryKf48WP8GxX5nW1eAHO43ngi9ITTbMOWM0BAC+OwfbwvEBmiyoHG1kxYLGPeN/xA=
+	UMZayClMkBKA7dRxICcVk/IL4sYXGQJkROJRGvz41f+mOChVMjBOvzuWvuIFRgpZAlHdIyDyzjpEKdLFJSMEaOGZFzIw2FrNNEc/FTXrmjIOcnuF4nTlryDyjiGADXFgaeQC8wx8TCxH4fVovxf6lh+iTptjR/d6Iy+eeQ/qH4LxA5zpbO2PL4lGG4qQpDLp6npigCAe1uJ4c6EpL9fW2fkqmcFv/iC1ynWNPPzyMpa7X8ud9nPbUZrCBpN6OZQWmsE+1ojZ5LtnyA5ya4Gm8ruwZ+A+Nla3c+72xj0d3V0SDSQM/cMR0v965scyh4oTdfJqR5TXg2pl+qU8WLTm5soJvpIbLJoT+938OfLD6+JM4zQAA20kYftKba4mPC2tBeMfr7SEN3BOR/+qIYKzWk+NORzYLu2rWR1b7vu6uHdLiq+qSmN3u9Zo4KwywoXrn5PKZH1Bu5iPLStqR+lnO/8x2MvucUq9onT7/ZmN7AyRUQdexFPbWKBbGTUHfeCVbuJLFd8iTNT3IcgYhya6W4zODfPHfXApkdLY0tWxKa+426YWtIwBYYSXmlq3OYIXHI51StxsdlFiz8vbaZLnMuTCk4cC0rMcrb/hIm0AReUFWxUL148exQxhqjj2vv0JCy6H3d2o1YHlkntelE038oDirFbDpH7Eff/aOOr6hUo=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(11063799006)(4143699003)(10067099003)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(23010399003)(1800799024)(36860700016)(56012099006)(6133799003)(5023799004)(10067099003)(11063799006)(22082099003)(4143699003)(18002099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?S2xPUzVLQnptNURjeWhkWmdTNzZCQ1Nza1MvSDNvc3kyRW96QmhZVlhWVDhO?=
- =?utf-8?B?dTRBWDlSbi9SaXA1NW4wTmcxeTdBTGcrSXQvQlQ0Y2ZmVU1XeDFlNVl5RjNm?=
- =?utf-8?B?NWtPOFc3QXN1UTBXRG1JaXF3Tms3bUluU0tNS293ai9idmkwd0tmckltQmw0?=
- =?utf-8?B?WlQreDZibjRLalRGNjhkNURrMEU0eTNDa1NVODFkR3J4bTdVTEpoR3lMeWMy?=
- =?utf-8?B?dVA5bFBPOVR1aG53RnQrazQzeG1teVBJUC9vNklyY29xaXl5V1NzRzlwdytK?=
- =?utf-8?B?a2s4cVdVQVpwR2xlRGV0MVdvZStDWG9wbmlpNWF5R3c5MDRPUlRNYXVvRGx1?=
- =?utf-8?B?dERENkNoVHlsWmU5ZnFIWjFGcCtSdFgxc3BQejVwWkxubG9ldUNBN25uci9s?=
- =?utf-8?B?S1dpT21KaE9INWVsOTVFUWE5Sko5SkNDeXZtZjMvdzZES0JlZ3RZdWZZdDBN?=
- =?utf-8?B?VFlNbjJMNjBvNFpmUTQralRhTFI0aWZlRGUwemVkSzQ2OUNxN0FxT1g4ZmR2?=
- =?utf-8?B?SkIzSUpxZGc0T2FiOFRBRllOSjNFRU1WWVk0eUw2NkZDZDhjTDZkK0RGaGwr?=
- =?utf-8?B?NE1WQ1JmNit1YWJ6YngrR0l6UjVEZ3hsbzhJaGlvOXlZdzBxdkxCMVdJU2k2?=
- =?utf-8?B?RWdvVXR2QTZISERnL2N1REpnQVNkN2h3b010cVBMUjl5Zng5Q09vMmRWT1Q0?=
- =?utf-8?B?clZLR1RadlZicUpPVmZQc3o3UDRpYU9DbDM4UDdjdWtvS1QyS2pRR0pGWlR5?=
- =?utf-8?B?eTZieWZiZUhQclN5TDc4RzYwbmZtTHhiV0J3Um1NYlpoeGVpcDg2ZmVYNlh6?=
- =?utf-8?B?ZUtwRmJIUCttTDBud2hFMEdwbFNLcFBDcDdSU1c0b1FlQ01KemV5NWlETXpw?=
- =?utf-8?B?M1dWbWRrR2M1THo4MEhWamdVeXFRNnVzT0NQZ2xyTnM4ZXF3ZHh2eU91d2hG?=
- =?utf-8?B?SWpqd2FPMHJSNjdEakgvVlJ1VUVVdGlPcjJ6T2UvMXI3dUE0SksvK2VKUDdL?=
- =?utf-8?B?ODBhMXNzMndxTm5rOXArajdNam13cHZNd0Vyd1VnTnYwWDlDSTE4UVpOYU45?=
- =?utf-8?B?TFZEZ0xPL1JyZi9ETXFCbW5uQmdYbnBRSXMyOXpwbEtleUdGd1QrNG1OTlRQ?=
- =?utf-8?B?WjE4OWZGK09CK3lma3VjWG1aTzdzZXhjZjhoZDZ4RUowbUtRYkJoQ1djVzlG?=
- =?utf-8?B?R2dMem5PdVFWQzlXNzl6S3Z3UVNTZ1dJb1pWdlV1L3RUTjN0UTlMN0hSUEIx?=
- =?utf-8?B?VzBiU2pTbHRMQW5RKzZRTTRhc2tEeVZMeWdyUURrRk5IQjRBaldUWFJmcGJp?=
- =?utf-8?B?N2xRdFhod0M1c2lPQ2V1b2ZnWk8wSEh2WVVrMUw1UTk5RGhkTDJtQUtIb0RH?=
- =?utf-8?B?eXEzR0dhZFZtQzZnRGtBZk9UTW9JdUhyYmZpdk92S2U5bThnZUcveWRBZnVJ?=
- =?utf-8?B?ZjlQVDlNQU9MMTAzT3pPZlBhOE9NK2tvUlE5dzhpazlKVmpoMGhid2NXL0U1?=
- =?utf-8?B?V01XUkFnUE5qQXRyY0V0S2N3TnF1Q0RlbmpNcFpvaXFxSWlOVzVaTEJzajlK?=
- =?utf-8?B?ZXNkZlJkQlB5ZllsSkJ1cW5LUjFPQnFKTkRVend6KzJqMFlSaXlZcElwTnlX?=
- =?utf-8?B?ZE9GYkxQWHRELzUwcUxxWGpNcWxVV1hQQTV5ZlJXajYyVXR4NmZzM0xFek5K?=
- =?utf-8?B?UDN4dTU5TFhTTllYOTk1QUMyWjdjS3F2MmxFOHRUTkZTZzhJUm9jMHlDOGJU?=
- =?utf-8?B?Y1hqK0JBZkI2ZnQ4Q0tTN1VTOWluLzFsWVF0c2QrZTR6cXNRM2FqRFZlazRv?=
- =?utf-8?B?MCtFOXMwb2d5YzFvOC8yYS9XYnMwNGhxbWJFeVBXQlkxOHZYbHkvVUdzN2hM?=
- =?utf-8?B?bmE3Yys3cGFBaUVpNStIcU82bE1DV3BIOUlIMms4TUxGV1RKbzNTdXc1bUdC?=
- =?utf-8?B?dXhhUytZaXFpVjhmZmVudk96L08vZSs5czFYcGRla1NyQzk5akQ1cWJyNXF4?=
- =?utf-8?B?OUFLM29PWXVpZk5aUVl6S2xnRm94Yzl4bnhodVZXbFRYM2V0d21ONTRvUmgy?=
- =?utf-8?B?M01va0pwL1l3K0IxdGR1OFRTMGdZeEE4REFrQmR3YU11RzBaY1BWd0xDdHdn?=
- =?utf-8?B?ZEZYNGQwYU5HdVcyalF1NU0vaUJGZVlWRSsyWUkvRm5VdDdGOVhCOUZ4Y1ZD?=
- =?utf-8?B?ZHF1MDJDL3NWR2JwdHl5UEhLMXdWNkVRWFhEekNmU2VmREJrU3dEZkxxSlBL?=
- =?utf-8?B?OWg1MVlsL1didDgyWXprbjRaUUkyTTJBZEJiaVF4cUZVYlgzOEFXRDVQS0l5?=
- =?utf-8?B?OW5jZGM2bVQzWTFMdHg3R0R2MjYxVkN2WnQ3d2ZCaVJBRXpsSEhUblV3R1VE?=
- =?utf-8?Q?Io2+uXYaTaCSG4mc=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d7860dd8-a9cd-431c-c311-08df238fa331
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 09:53:13.6977
+	3ptDOUpHUVcZiXqUDhczz5KgZRvyNb7HPnllGCsBJgWKAQIXLwe9fvCVYutzfsGV3Uc9JAYeemX0D8SB5FPUmk2OcANtZPff0mFdZOETQGRCmmK/S88KGCoxW37moz+ascdluhROvXoFLa/qM7NwqI2u9ulYVo/ZEbK2JjYcT+9ciK75mXx6EP0g9bqIhrrmV27Ttf/nRZTqOCQkOD+VgjzK6icWr0e0TM0dQOZjuzX5RSqWC5L4orJvLdhCoBSZzY6LRLzUemzXySGm70d7aoFk93c6SmRP4tEFR/7sbOn+Zs9q7bBdtepkl59d5qTbG2ktTPhPcGAG4is4if1oQUVGyQxu50BNe8zHlO8x0PfjtFgwtKRJniC/UlVZCPVNNP00dek5n5Q4hCm4bIjOAMK0hyVjxjtKtNbF6ZdEyAzXBDszdMz4qCUddoS8wjaq
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 10:22:06.8314
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: J6eC/WcmX7beENaAar8YkVowWta2lu4oUuUfI96vHp2LFyBYP8EIi5RcfOWEBUa8qepjpcSNnacvK0a5LklxtFgB9UlxLcd2pA1WTPgpIOA=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR03MB5114
-X-purgate-ID: tlsNG-ef75cf/1791280402-3C411AE4-3BC5D93B/0/0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 49a8f3b3-1b80-41db-b25e-08df2393ac5b
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN2PEPF000044A3.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN0PR12MB6103
+X-purgate-ID: tlsNG-ef75cf/1791282133-A6EDEAE4-399F55C6/0/0
 X-purgate-type: clean
-X-purgate-size: 1503
+X-purgate-size: 4937
 
-On 10/5/26 4:11 PM, Jan Beulich wrote:
-> On 05.10.2026 16:41, Teddy Astie wrote:
->> Main Xen reported -ENOSYS if the operation is not implemented, however,
->> shim errorneously reported it as -EOPNOTSUPP, potentially confusing the
->> guest.
+
+
+On 29-Sep-26 17:14, Mykola Kvach wrote:
+> Hi Leonid,
 > 
-> I question "erroneously". -ENOSYS has, according to my understanding, exactly
-> one valid use case: A top-level hypercall (normally: syscall) function which
-> is not implemented. Unknown sub-ops etc shouldn't be using that error
-> indicator, or else callers can't tell one from the other.
-
-Maybe they shouldn't be using -ENOSYS but AFAICT the majority of hypercalls with
-subops do return -ENOSYS for unknown subops (with the exception of kexec_op).
-This is something we tripped over when implementing the hypercall filter for
-XenServer's Secure Boot.
-
-Ross
-
-> 
-> That said, it may still be legitimate to make the change here, as making the
-> change in do_grant_table_op() and do_event_channel_op() can be viewed as an
-> ABI change, which then we cannot easily do.
-> 
->> Make shim more consistent with Xen by reporting -ENOSYS instead.
+> On Wed, Sep 23, 2026 at 8:55 PM Leonid Komarianskyi
+> <Leonid_Komarianskyi@epam.com> wrote:
 >>
->> Fixes: 49f79fe03dfe ("xen/pvshim: add grant table operations")
->> Fixes: 368ae9a05fee ("xen/pvshim: forward evtchn ops between L0 Xen and L2 DomU")
->> Reported-by: Teddy Astie <teddy.astie@vates.tech>
->> Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
->> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+>> Hello Mykola,
+>>
+>> Thank you for your review.
+>>
+>> On 9/23/26 11:04, Mykola Kvach wrote:
+>>> Hi Leonid,
+>>>
+>>> Thank you for the patch.
+>>>
+>>> On Tue, Sep 22, 2026 at 9:59 PM Leonid Komarianskyi
+>>> <Leonid_Komarianskyi@epam.com> wrote:
+>>>>
+>>>> Since the firmware may initialize eSPIs before Xen, and without
+>>>> CONFIG_GICV3_ESPI enabled, Xen would not reinitialize them properly
+>>>> during boot. In such cases, once the GIC is re-enabled in Xen,
+>>>> interrupts may be received that cannot be handled.
+>>>>
+>>>> To ensure proper operation on hardware with eSPI feature, even when the eSPI
+>>>> config is disabled, gicv3_dist_espi_common_init() should be invoked
+>>>> regardless of whether CONFIG_GICV3_ESPI is enabled or not. This will not
+>>>> affect hardware without eSPI support, as the function checks if the
+>>>> hardware supports eSPIs by reading the GICD_TYPER.ESPI field (using
+>>>> GICD_TYPER_ESPIS_NUM macro), which indicates whether the extended SPI
+>>>> range is supported. If the hardware does not support eSPI, the function
+>>>> will not perform any actions.
+>>>>
+>>>> There are no functional changes for setups where CONFIG_GICV3_ESPI=y.
+>>>>
+>>>> Suggested-by: Julien Grall <jgrall@amazon.com>
+>>>> Signed-off-by: Leonid Komarianskyi <leonid_komarianskyi@epam.com>
+>>>> Acked-by: Julien Grall <jgrall@amazon.com>
+>>>> ---
+>>>> Changes in v2:
+>>>> - rebased on the current staging
+>>>> - placed Suggested-by tag first to keep tags in chronological order
+>>>> - added Acked-by from Julien Grall
+>>>>
+>>>> This is a follow-up patch related to the discussion:
+>>>> https://lore.kernel.org/xen-devel/820704d0-4047-4f02-a058-01daba2765f1@xen.org/
+>>>>
+>>>> Sending v2 with the requested changes, as I only now noticed
+>>>> that this patch has not been merged yet.
+>>>> ---
+>>>>   xen/arch/arm/gic-v3.c                  | 32 ++++++++++++++------------
+>>>>   xen/arch/arm/include/asm/gic_v3_defs.h |  2 --
+>>>>   2 files changed, 17 insertions(+), 17 deletions(-)
+>>>>
+>>>> diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
+>>>> index acdac22953..463769d77b 100644
+>>>> --- a/xen/arch/arm/gic-v3.c
+>>>> +++ b/xen/arch/arm/gic-v3.c
+>>>> @@ -703,17 +703,32 @@ unsigned int gic_number_espis(void)
+>>>>       return gic_hw_ops->info->nr_espi;
+>>>>   }
+>>>>
+>>>> +static void __init gicv3_dist_espi_init_aff(uint64_t affinity)
+>>>> +{
+>>>> +    unsigned int i;
+>>>> +
+>>>> +    for ( i = 0; i < gicv3_info.nr_espi; i++ )
+>>>> +        writeq_relaxed_non_atomic(affinity, GICD + GICD_IROUTERnE + i * 8);
+>>>> +}
+>>>> +#else
+>>>> +
+>>>> +static void __init gicv3_dist_espi_init_aff(uint64_t affinity) { }
+>>>> +#endif
+>>>> +
+>>>>   static void __init gicv3_dist_espi_common_init(uint32_t type)
+>>>
+>>> I think the ordering in gicv3_dist_espi_common_init() needs to be
+>>> revisited now that this function is also called with
+>>> CONFIG_GICV3_ESPI=n.
+>>>
+>>> The motivation for this patch is that firmware may have left an eSPI
+>>> enabled. However, we currently program GICD_ICFGRnE before clearing
+>>> the corresponding enable bit in GICD_ICENABLERnE.
+>>>
+>>> The GIC architecture requires an interrupt to be individually disabled
+>>> before changing Int_config; otherwise the behavior is UNPREDICTABLE.
+>>> See Arm IHI 0069H.b, section 12.9.9 (GICD_ICFGR<n>).
+>>>
+>>
+>> Section 12.9.9 describes GICD_ICFGR<n>, i.e. the regular SPI range, and
+>> it indeed contains this requirement. However, the code in
+>> gicv3_dist_espi_common_init() programs GICD_ICFGR<n>E, which is
+>> described in 12.9.10, and I could not find an equivalent requirement there.
 > 
-> Reported-by for yourself is pretty unusual, btw.
+> Thanks for checking. You're right, the eSPI section does not state
+> the same requirement. Sorry for the confusion.
 > 
-> Jan
+>>
+>> The only related rule I found that also covers the extended SPI range is
+>> in Arm IHI 0069H.b section 4.5:
+>>
+>> "Changing the configuration of an interrupt from level-sensitive to
+>> edge-triggered, or from edge-triggered to level-sensitive, when there is
+>> a pending interrupt, leaves the interrupt in an UNKNOWN state."
+>>
+>> That rule is about the pending state rather than the enable state, though.
+>>
+>> Also, the current eSPI initialization sequence mirrors the one used for
+>> regular SPIs in gicv3_dist_init(), where the requirement from 12.9.9
+>> does apply. So if we decide to reorder the initialization, I think it
+>> should be done for regular SPIs as well, ideally in a separate
+>> preparatory patch.
 > 
+> For regular SPIs, let's wait for the maintainers' feedback. I think
+> any fix there should be a separate patch and should not block this
+> one.
+I agree. That's the pre-existing issue and can be fixed in a follow-up patch.
+
+~Michal
 
