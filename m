@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5FCFFCA5FED
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 15:30:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1441606.1659206 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 770F7CA5FED
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 15:54:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1441622.1659215 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE777-00029E-3o; Tue, 06 Oct 2026 15:29:57 +0000
+	id 1xE7UQ-0006Xw-1e; Tue, 06 Oct 2026 15:54:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1441606.1659206; Tue, 06 Oct 2026 15:29:57 +0000
+Received: by outflank-mailman (output) from mailman id 1441622.1659215; Tue, 06 Oct 2026 15:54:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE777-000297-13; Tue, 06 Oct 2026 15:29:57 +0000
-Received: by outflank-mailman (input) for mailman id 1441606;
- Tue, 06 Oct 2026 15:29:55 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xE775-00028v-25
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 15:29:55 +0000
+	id 1xE7UP-0006Xp-V9; Tue, 06 Oct 2026 15:54:01 +0000
+Received: by outflank-mailman (input) for mailman id 1441622;
+ Tue, 06 Oct 2026 15:54:01 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xE7UP-0006Xe-9y
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 15:54:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xE774-00CbYT-Ey
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 17:29:54 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xE7UO-006NKR-N5
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 17:54:00 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac513e2-e002-0a2a0a5209dd-0a2a450cb50e-20
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 17:29:54 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ac51993-bab6-0a2a0a5309dd-0a2a4505d61e-8
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 17:54:00 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac513f2-f479-0a2a450c0019-d1558029dc62-3
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 17:29:54 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-4a16aaf2067so34618355e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 08:29:54 -0700 (PDT)
+ id 6ac51998-4cb1-0a2a45050019-d155dd31ed72-3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 17:54:00 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-48afcfc4bf5so2547415f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 08:54:00 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a178daa062sm80543095e9.8.2026.10.06.08.29.52
+ ffacd0b85a97d-48c71bd7983sm397837f8f.6.2026.10.06.08.53.58
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Oct 2026 08:29:53 -0700 (PDT)
+ Tue, 06 Oct 2026 08:53:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,53 +54,61 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791300594; x=1791905394; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791302040; x=1791906840; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=GPM7tKYSfVV9A3TLCFS0unR2J4EGEcNKPYw+N+p8nTU=;
-        b=C+3Ry2pKbPKvgdIDVc/BZ8EqYH175MAeEhsNQ0B4xhRyHF07gXbhL4URvTpBp0B2Za
-         Lo1wjMICM2YoMnf6m+TQV4gN3XzX1raeiTd6c+1Yfxaxd/faD06wjHN+NaEIdKDL64F8
-         MftWxbEJdoiMXusOkmB3RH0OmMyMAToAf3mBCUDzcWW+01BbetNJg4SZvz4itc5QpF7O
-         g3UJdchStvJdrkM7gFBMnTaIUzKBVwqvN7V6RUypWKeb4IJQ944yaxp+3LeNRXOi1u8e
-         8GG0Hl8+IEI6yn0W/oX2svTRrRnW2iywgSAhpG9jfyRUGxzjiYlIoVFojgLld5zvBCpg
-         iifw==
+        bh=4g9CXwELqpWjzsgCZoklKrzBPFR4ZL4W/Epm/kBzmpk=;
+        b=Hj3Q2kPNkP6JGzVMi72BGXfanQhb38GGFScyzP37XdYsTD4DIj7JnAnbnbgX53GSAG
+         2pfglQEzR5G/gyJynKwjV0GCcuS1zNzXvNF4jygjrR47hG0ojhwuYvKLht4yZoicaSx/
+         cdhn109uMwULgZlrvdtr5Zoz+3kl9+6QvKqqQc5EkOC9axapyOGI+SYG8QumNWikt8mX
+         ZZv3C+FNwdJ/11eljIQeHfXu4NQMNkYwgDbNrsVb0HpUqo1jfsyzw6QjJvdDQVwlZn+b
+         TGTXQj0kwegFSfd6q7wchU/PKEr7rc/r2xBBw7p9Ks7SrhmMin0B8w5Lj7vn5PxsxvWE
+         gehw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791300594; x=1791905394;
+        d=1e100.net; s=20260707; t=1791302040; x=1791906840;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=GPM7tKYSfVV9A3TLCFS0unR2J4EGEcNKPYw+N+p8nTU=;
-        b=v+pjphd+1PBk1qrRcKvHVXerkqDHJJQjXfEihU+FdADhHXkRLaNGTQ+CUXbYICePXu
-         cdd8Q93CT4lkVJE5HG7op1WKcOGNUrHfi0TMXoFIOF4G0aWs6EUPLzPBmvHMUnCc9o3h
-         sZeAyNPcLQpPnHjRro79h+hMBLjr4RAdz+805nR5yWBakJ5xVivmYLna/LE+8eNRjdC3
-         FFy4Zth4cz8Ix5Q23QtgqhHph/Sm5JDG7wBmXxJrbZ4UqcZBdyJSm6oh+AALsu166Z7H
-         +qebH2UbTcgRvzYB1N8LIRLwO3nA+pPZr3K7uH/WedYGzquN8w5oxDR5y+P+LamQjPnh
-         dYRQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzUZ1O+golosXrYiHemL1iQKeBwgphDQiZ01jkVnjBKEMyniGogqTkrriUZWvfu9xYtZsU3Iy3r7wA=@lists.xenproject.org
-X-Gm-Message-State: AFuF++mLQrmaEhzbFG7QT6pjhCTr+DnLbS9VHeAfi24+0oEuMyFXvOWH
-	8spJrDSlwwd7s9iihX9JuCj5XNoIiiBQ3Vt8iDSVCDmT8VGYqedc12OdpZDRJPr1wA==
-X-Gm-Gg: AYBFou3XM2FtIOn4bpMpzy+GOXKPvRG53Gt6GwQojhLu8C+3DEcrht7Mze4zFPA7lSG
-	chUzsDpbmp3Rt1Z4sNAT9N0/D8NrG4p5WE1mZna6qdXNDN8vejyxi7JvB+/5Q9LccXmWnLDLzFP
-	sFIhHnHV64nFNBJhbQLWbTT4Akg8I8ajYnKKzSQf/VKQgmK+XVc26Mc/0TH+3s42rZ5Yo+ycchL
-	wBximGPveXBkMbvD31CSk1vk18190o4yP0ci8BJvdQHVUR6URA55uKnB8Z97q/iq668/uJo9Wju
-	2Zkc6L8jHiqv8TsGSUUd41vNEvdkGqpFMJ6E785q9U0U6Vupp5sTEZlxwIri9gkFEKA8qQEGEHA
-	xZGHraMPokCgsOFPRSvMgLKIRXBG5qe/5+Je5aFtVsJJ0NLG2t2O39f/8DDX1ZnD7u1FYXdgbRI
-	wm0SX/NnDnqQ3lOV2naMxOQaztfnWVv2W9Ajg22BXo0VF11UAk1f1YDk287W4G/4Ipfv4CQ880J
-	BdWEhq0zVKrP6VB/kQhRIHMK4lkP1nMpjH+wif7zFB/SSP+B98PEEYHb4Sdm6wsltE0TOj0Fw==
-X-Received: by 2002:a05:600d:82e7:b0:4a1:7baa:7303 with SMTP id 5b1f17b1804b1-4a17baa75dfmr31284515e9.7.1791300593802;
-        Tue, 06 Oct 2026 08:29:53 -0700 (PDT)
-Message-ID: <17bc987f-6624-4580-a8ee-ee593092e051@suse.com>
-Date: Tue, 6 Oct 2026 17:29:52 +0200
+        bh=4g9CXwELqpWjzsgCZoklKrzBPFR4ZL4W/Epm/kBzmpk=;
+        b=V8jHLFLCm8zFhFehLOg0ztMQPdvJzr375gOSPpwDPug8cmRan4xQTepL44jetUeRfO
+         FkZYm9ZLDTleyFyfhSGgBArw9AcPu2FqUU+Jgb403Cve32AawqysIVqFBZeN7WmBe063
+         W8vR1UnCRGGuZkq0DqCGLuHAdQHkLjs23dHFXHC+Aj79kPonw5nBx+9QpF85tTloyV/p
+         R+axWdKPZ4p1D6zu9RPt6GVwajmOMe0Hn2rozWmDYXCF1c4xBOkjYazckMxrNaHRpFZJ
+         N2wK1srIBLz5kYS5wwMyk8T4WqVptLeRvCSeEdjG2FjxSnGwYOC0xZ79X8mn02/3NXDk
+         UCXw==
+X-Gm-Message-State: AFq9FYL8V506drmxPVJi3BKK5zKYeU6XpdjjPNSyUT9vvfoctS4mUalv
+	Fh8FJXR6HpBUGXUHo1v9Gf8NHolRuF2h5eVdzTsaZN5T9v4A6i7b0vG+fQNEsNTHew==
+X-Gm-Gg: AYBFou1qPP5gp5jyNhYfMaIaDl/wvGfOBWmD+mLYUDxYJ4lxIELXQB3xHDh9JS87UZB
+	mE/6+wmD0OXT+5OMU2kCq+FkJq52BhujcIZb6pLT3hxsboq9m87JybTyrBWpl5ipT+ywOZtdO37
+	qfYmTLxe/MBY+57GnZWrq2ct9YsROOdeaw2VjpZeRCOO0oMNFAMhqaf8a+ci4c4gZXrAHp0CPnJ
+	qmjTxBorJhfbZO5DT2jb3mzh10Xm9wiRP9QvK4VufZd0u1iRCMxAMec2zJm4PypkAvl9P6/Rj5W
+	ihdZwZzifRvaxZJbXi76AW0yKIAaks/2/PnisZvFVtNfpVLOgQiL3+CjcICJOxzdqmwDIECq4dB
+	Lcd1AoJtEMJV95oOQM1BIBX8UbQkHCixPe0QhMcJhZ14jJbw+JWLjdJlR16v8G6K4kWGo0GjKJj
+	BnB+G3QqGUgvUyIaqa26tMIHQsVOhKPcRt8LxNsuRlvYNiKZz4gpRnoejcqniLpKCcoExFSZAfH
+	zJFVosbzhAH8FA3b0yeskVUEULBuKHY0D7uBOpWWr71u0MSBKUdBPuwWOC7gA==
+X-Received: by 2002:a05:6000:2413:b0:48a:fcec:2a29 with SMTP id ffacd0b85a97d-48c6d15fa2fmr2828598f8f.20.1791302039838;
+        Tue, 06 Oct 2026 08:53:59 -0700 (PDT)
+Message-ID: <cb07a11c-397e-4942-a66a-58a59610b8f3@suse.com>
+Date: Tue, 6 Oct 2026 17:53:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6] x86/nSVM: Check injected event consistency
-To: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-Cc: andrew.cooper3@citrix.com, roger@xenproject.org, jason.andryuk@amd.com,
- teddy.astie@vates.tech, xen-devel@lists.xenproject.org
-References: <5d6d418ef2c89c706e220d38f230a351d4266d66.1790779581.git.abdelkareem.abdelsaamad@citrix.com>
+Subject: Re: [PATCH 09/14] ACPI: address a Misra rule 11.8 violation in Arm
+ code
+To: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Bertrand Marquis <bertrand.marquis@arm.com>
+References: <0ff5676d-2ad3-49e3-a94b-90e7c3edb55f@suse.com>
+ <f6362f01-0057-476e-ba7b-b0bd8154c86e@suse.com> <87qzim6p5i.fsf@epam.com>
+ <8fd025af-f429-488e-9977-aec3fea2e78b@suse.com> <87y0ct5zan.fsf@epam.com>
+ <c3585a8f-df34-425c-b504-7702f638cf37@suse.com> <87h5jh56ji.fsf@epam.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -126,122 +134,78 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <5d6d418ef2c89c706e220d38f230a351d4266d66.1790779581.git.abdelkareem.abdelsaamad@citrix.com>
+In-Reply-To: <87h5jh56ji.fsf@epam.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1791300594-016C6A5B-E9663F09/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c201ff/1791302040-716AD2A1-38884D9D/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 6815
+X-purgate-size: 2991
 
-On 30.09.2026 17:50, Abdelkareem Abdelsaamad wrote:
-> On the AMD platforms, allowing a VMRUN instruction with a malformed VMCB has
-> debugging complications, security and performance implications. The APM
-> volume #2, Section 15.20, Event Injection, states the two possibilities that
-> VMRUN will immediately exit with VMEXIT_INVALID due to the injected event.
-> These are
-> • Reserved values of TYPE have been specified.
-> • TYPE = 3 (exception) has been specified with a vector that does not
->   correspond to an exception (this includes vector 2, which is an NMI, not
->   an exception).
+On 22.09.2026 23:18, Volodymyr Babchuk wrote:
+> Jan Beulich <jbeulich@suse.com> writes:
+>> On 22.09.2026 12:57, Volodymyr Babchuk wrote:
+>>> Jan Beulich <jbeulich@suse.com> writes:
+>>>> On 22.09.2026 03:38, Volodymyr Babchuk wrote:
+>>>>> Jan Beulich <jbeulich@suse.com> writes:
+>>>>>> Outside of drivers/acpi/tables/ (which is excluded from Eclair reporting
+>>>>>> for dubious reasons), arch/arm/acpi/domain_build.c is the only user of
+>>>>>> ACPI_COMPARE_NAME(). Make the macro const correct, at the expense of
+>>>>>> introducing a "const" variant of ACPI_CAST_PTR(), and at the expense of
+>>>>>
+>>>>> I think you can avoid adding ACPI_CAST_PTR() by providing a const
+>>>>> type. Like this:
+>>>>>
+>>>>> +#define ACPI_COMPARE_NAME(a, b)         (*ACPI_CAST_PTR (const u32, a) == \
+>>>>> +                                         *ACPI_CAST_PTR (const u32, b))
+>>>>
+>>>> I don't think so. You did notice ...
+>>>>
+>>>>>> --- a/xen/include/acpi/acmacros.h
+>>>>>> +++ b/xen/include/acpi/acmacros.h
+>>>>>> @@ -103,6 +103,7 @@
+>>>>>>   * Pointer manipulation
+>>>>>>   */
+>>>>>>  #define ACPI_CAST_PTR(t, p)             ((t *) (acpi_uintptr_t) (p))
+>>>>>> +#define ACPI_CAST_CPTR(t, p)            ((const t *) (const acpi_uintptr_t) (p))
+>>>>
+>>>> ... this, I assume. On the surface it looks odd, because one would expect
+>>>> acpi_uintptr_t to be a scalar type, like uintptr_t is. But it isn't:
+>>>>
+>>>> #ifndef acpi_uintptr_t
+>>>> #define acpi_uintptr_t                  void *
+>>>> #endif
+>>>
+>>> Well, that was unexpected. Talk about principle of least surprise...
+>>>
+>>>> The only alternative I see (somewhat more risky overall) would be to
+>>>> introduce
+>>>>
+>>>> #define acpi_uintptr_t                  uintptr_t
+>>>
+>>> What are the risks? I'd really prefer to have fewer gotchas in the code.
+>>
+>> It hides casting away of const-ness. Right here we would like that, yet in
+>> the general case I think we don't. Otoh Linux switched to the above in the
+>> 5.18 dev cycle.
 > 
-> Furthermore, reading through the APM shows that the exception vector validity
-> can also depend on the guest mode, the CPU generation and the
-> microarchitectural constraints. Some vectors are only valid starting with the
-> specific CPU generation that introduced the corresponding feature, the guest
-> mode or whether the guest opted-in for specific CPU capability. The Upstream
-> KVM introduced a similar consistency check that reflects on this dependency
-> with the commit
-> 7e79f71bca5c ("KVM: nSVM: Add missing consistency check for EVENTINJ").
-> However, the KVM implementation did allow the Overflow (X86_EXC_OF) and the
-> BOUND Range (X86_EXC_BR) vectors injection in 64-bit mode. According to the APM
-> Volume #2, Section 15.20, Event Injection and Volume #3, Chapter 3,
-> General-Purpose Instruction Reference (INTO Interrupt to Overflow Vector),
-> injecting these exceptions while the guest is in 64-bit mode is invalid and
-> triggers an immediate VMEXIT_INVALID. This architectural mismatch in the KVM
-> implementation was reported here:
-> https://lore.kernel.org/all/20260803225402.2324595-1-abdelkareem.abdelsaamad@citrix.com/
+> ... but for different reason. clang complained about pointer
+> subtraction with a null pointer. This does not fired in Xen because we
+> are not using ACPI_PTR_DIFF() yet. But, if we are going to use it, we'll
+> face the same problem.
 > 
-> To verify the hardware behaviour with the various vectors, A case-by-case
-> testing on 64-bit mode Windows guest is performed. The hardware exception event
-> is manually injected at the end of svm_vmexit_handler and the consequence
-> is observed:
->  - If VMEXIT_INVALID is triggered, the injection is invalid.
->  - If a guest triple fault is triggered, the event passed the hardware checks
->    and completed the event delivery. It is valid.
+> So, if we are already touching this parts, maybe it is better port that
+> Linux patch ([1]) and use const types as I suggested?
 > 
-> Extend the VMCB validation to check for the VMCB event injection inconsistency.
 > 
-> While at it, extend the svm_vmcb_isvalid usage to the non-nested VMEXIT_INVALID
-> debugging.
-> 
-> Signed-off-by: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>
-> ---
-> Changes in v6:
-> - Replace APM revision numbers with section titles in the commit message and
->   in the comments.
-> - Review and Correct the testing matrix
->   - Correct the swapped Naples/Genoa entries in the testing matrix.
->   - Add the missing X86_EXC_MC, X86_EXC_XM along with the other missing
->     vectors.
-> - Combine #BR and #OF exception vectors handling.
-> - Change the vmcb_valid_event_inj_types_mask type to unsigned int.
-> - Drop the logging of the exception type from the invalid vector error log.
-> - Drop the clean up of the svm_vmcb_isvalid function.
+> [1] https://lore.kernel.org/linux-acpi/20210927121338.938994-1-arnd@kernel.org, 
 
-Code changes themselves look good now, yet of course only as far as we
-have reached agreement. The remaining open issues (#XM, #MC) are
-attempted to be covered by the testing matrix, yet I remain unconvinced.
-I'd therefore make ack-ing this change dependent on buy-in by other
-x86 maintainers.
-
-> ---
-> Testing:
->  - Using a locally developed XTF nested virt setup, I manually tested VMRUN
->    instruction handling with a malformed VMCB:
->    1) Inject event with the type (7).
->       The hypervisor logs show the message
->       (XEN) [  645.155609] d2v0[nsvm_vmcb_prepare4vmrun]: eventinj: Invalid
->             Injected Event Type: 0x7.
->    2) Inject event with the exception value (3) and the vector value (2) for
->       NMI. The hypervisor logs show the message
->       (XEN) [  645.157277] d2v0[nsvm_vmcb_prepare4vmrun]: eventinj: Invalid
->             exception vector: 0x2.
->    3) To perform more detailed bare-metal testing, I set up a testing matrix
->       using a XenServer Windows 10 64-bit VM and manually injected the
->       various events according to the testing matrix below:
->  ----------------------------------------------------------------------------
-> | Ex. Vector |    AMD Naples    |     AMD Genoa    |    Testing Conditions   |
-> |------------|------------------|------------------|-------------------------|
-> | X86_EXC_OF | VMEXIT_INVALID   |  VMEXIT_INVALID  | - Verified that 64bit   |
-> | X86_EXC_BR |                  |                  | mode is active before   |
-> |            |                  |                  | injecting the event.    |
-> |------------|------------------|------------------|-------------------------|
-> |            |                  |                  | - Verified that the     |
-> |            |                  |                  | Genoa host does not have|
-> | X86_EXC_CP | VMEXIT_INVALID   |Guest Triple fault| guest_cr[4] X86_CR4_CET |
-> |            |                  |                  | set and the VMCB does   |
-> |            |                  |                  | not have CR4 X86_CR4_CET|
-> |            |                  |                  | set                     |
-> |------------|------------------|------------------|-------------------------|
-> |            |                  |                  | - APM states only valid |
-> | X86_EXC_HV | VMEXIT_INVALID   |  VMEXIT_INVALID  | to inject into VMSAs    |
-> |            |                  |                  | that execute with       |
-> |            |                  |                  | Restricted Injection.   |
-> |------------|------------------|------------------|-------------------------|
-> | X86_EXC_DE |                  |                  | - Verified that hosts   |
-> | X86_EXC_DB |                  |                  | do not have guest_cr[4] |
-> | X86_EXC_UD |                  |                  | X86_CR4_OSXMMEXCPT set  |
-> | X86_EXC_NM |                  |                  | and the VMCB does not   |
-> | X86_EXC_DF |                  |                  | have CR4                |
-> | X86_EXC_TS |                  |                  | X86_CR4_OSXMMEXCPT set  |
-> | X86_EXC_NP |Guest Triple fault|Guest Triple fault| with the vector         |
-> | X86_EXC_SS |                  |                  | X86_EXC_XM.             |
-> | X86_EXC_GP |                  |                  | with the vector         |
-> | X86_EXC_PF |                  |                  | X86_EXC_MC.             |
-
-This continues to be odd: I can't help the impression that the start of the
-last sentence was lost. With #XM and #MC being somewhat special anyway, I
-wonder whether they wouldn't have deserved their own separate cells.
+This has nothing to do with acpi_uintptr_t, and also looks to never have
+been committed. Were you instead meaning to refer to Linux commit
+ae57857b9b63? (Oddly enough that commit links the URL you quote above,
+just that that's not the patch which was committed.) If so, from a Misra
+perspective this has a significant downside: ACPI_CAST_PTR() could then
+be used to silently cast away constness. This, imo, is something we want
+to avoid when the goal is to make our code more safe.
 
 Jan
 
