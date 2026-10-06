@@ -4,61 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD4A0CA5FFC
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 11:47:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1441444.1659047 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7800CA5FED
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 12:22:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1441467.1659080 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE3dB-0002ox-IA; Tue, 06 Oct 2026 11:46:49 +0000
+	id 1xE4Az-00017t-FK; Tue, 06 Oct 2026 12:21:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1441444.1659047; Tue, 06 Oct 2026 11:46:49 +0000
+Received: by outflank-mailman (output) from mailman id 1441467.1659080; Tue, 06 Oct 2026 12:21:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE3dB-0002oq-FS; Tue, 06 Oct 2026 11:46:49 +0000
-Received: by outflank-mailman (input) for mailman id 1441444;
- Tue, 06 Oct 2026 11:46:48 +0000
+	id 1xE4Az-00017m-CW; Tue, 06 Oct 2026 12:21:45 +0000
+Received: by outflank-mailman (input) for mailman id 1441467;
+ Tue, 06 Oct 2026 12:21:44 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xE3dA-0002ok-02
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 11:46:48 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>) id 1xE4Ay-00017g-GN
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 12:21:44 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xE3d8-004ieN-P2
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 13:46:46 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xE4Ax-00C1u1-8C
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 14:21:43 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ac4dfa5-2eae-0a2a0a5409dd-0a2a4501c6b2-2
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 13:46:46 +0200
-Received: from [52.101.46.40]
- (helo=CO1PR03CU002.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ac4dfa1-5984-0a2a45010019-34652e289af9-4
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 13:46:43 +0200
-Received: from CH5P222CA0005.NAMP222.PROD.OUTLOOK.COM (2603:10b6:610:1ee::16)
- by DS2PR12MB101350.namprd12.prod.outlook.com (2603:10b6:8:70c::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.15; Tue, 6 Oct
- 2026 11:44:56 +0000
-Received: from CH01EPF000BE942.namprd02.prod.outlook.com
- (2603:10b6:610:1ee:cafe::14) by CH5P222CA0005.outlook.office365.com
- (2603:10b6:610:1ee::16) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.20 via Frontend Transport; Tue, 6
- Oct 2026 11:44:56 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- CH01EPF000BE942.mail.protection.outlook.com (10.167.244.134) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.472.14 via Frontend Transport; Tue, 6 Oct 2026 11:44:55 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 6 Oct
- 2026 06:44:54 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 6 Oct
- 2026 06:44:54 -0500
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Tue, 6 Oct 2026 06:44:52 -0500
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6ac4e7ce-8faa-0a2a0a5109dd-0a2a4508cae0-10
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 14:21:42 +0200
+Received: from [40.107.208.57]
+ (helo=PH0PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6ac4e7d5-f659-0a2a45080019-286bd03977fe-3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 14:21:42 +0200
+Received: from BY5PR12MB4999.namprd12.prod.outlook.com (2603:10b6:a03:1da::13)
+ by DM4PR12MB6208.namprd12.prod.outlook.com (2603:10b6:8:a5::10) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Tue, 6 Oct
+ 2026 12:21:33 +0000
+Received: from BY5PR12MB4999.namprd12.prod.outlook.com
+ ([fe80::a890:d230:e0a8:6740]) by BY5PR12MB4999.namprd12.prod.outlook.com
+ ([fe80::a890:d230:e0a8:6740%3]) with mapi id 15.21.0496.010; Tue, 6 Oct 2026
+ 12:21:32 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -70,278 +55,144 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nO1Y/Hdx4UpOybCEnuO6PrJ3GgR1nrOn8elbz7utEV+qOgk0c8PAcS9ngncIr+qClCqGRAsFzOjaRb4R80b6fH+Nj3fZXRZMj2xjH2+TvoTIB2BwZz5iLxHOOI0qEJcys2nCop1HwzPN+P4Ymk91lihQ4KA7Xk8J6F+M7vsN9Oob87Oy9vxpntcB7XaYotEhLBrKwciET3CUYXYr5anEVi4uLdLHHQvV7dxiPukRPjy2X1mhwf9ZmqtipkNNbNv/cqBLU+Z1bsZHKLq8SjGdwB34r+q4KCauW2SAhJ9TYIypX/hqhjg0dzEpfbemPyWqO+vqG74tb1M6wzQKlQ8JFA==
+ b=O+xmDdBpY4l+ybgD2Qu+1HolYym40xVO+8cT4+8S2aTamSI/fUW1RMyY8wcq40yOUOUxZQuFFS220Xv3nKyu+9/GR+xyNBxDg/AgFSjwERKtacdnXDhAuuTxc1iYoU3oBCctG8VrrcYXdI4UKvXmkyIssFI89IyUXfZ50sMy0Kzj3P0p5Nf59FYdMHYmoKglKZnzfct39rx+W7Ax9A2q5U0YcWmEUkpTe0JKJGqNXLDy8T7bpsWnkdP4s5q5lQ3nU6hu+ajrRTYYJ75G7b9AeL/JBUUZpPrS+1sJlqrcDhTAwVAyUOSlRlHWVprA9EwKyP2kydVjBdlhHH0l+5+VuQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=PoIyXDHzmHyxkVK7AU6CkW5eKjdahmgD6PSzYSvP+zA=;
- b=pxtAIpjUoc7S1/cncWZtucJOgk0FXG5FlvPnWolhWyZJOTFQ1mZcgqqd58oBUZ4VfPJvLN551DWCu/Gr72L9UM1smp7S54ZaZauNP7yt3oTDzKFx+UMdN1gs/6gj84p2agDbE0QhTeoP1bjLSv/c+gxccoLQFMSQHt9xu18T13x0NQDDIjzQ5XQZJXNakTs6GIJa6y3dSrGCRod3QoMacg0AI0jhCkWem4C1J0Vb9m0lSxgO1hIP2arbbby7/v8XtWvcDJzNJ+LEw3g3/ylcT2PaDdFevIZKhqhtgfPiwmEwXjky4DshD6LtAwZyRaaZ4Dz88uEOSOJ0NHibSepZcQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
+ bh=0L0TIWnnKQVHg5t9SZCiwB1zz6+si0noHsKHjoNk8iw=;
+ b=aAZ+AK0pO6mkTArqQ/XT8HuEhymaxRiwHumdfGDfrgN7a7xxfCluJvWBWQ2Jtb0qPwsQHDb3MqN0BFv5HD8WV9Em1ZWSYyuJso3+SfFRdzwAJfks7jNH649XUhoo7pEBFX4i71HIiTbkDtCdObZ0lwiAY5/VL1yLxSBjw5RXkAMl2zRREJgrIi43mK4o0BG1cM9LKtRMOY8+6s0dKnJdaUDaXFydMGK3Sh0kY34cNIrzphcU0xwTQwxTllQj4vlbskwkTsvnq3elL1jiNZzRImtpr4pMTdCaomfTKKnyMj8zP4kUDWOLtCDy/31B/FyyA6j7kgmvlUTEdCpR6yanQw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
+ header.d=amd.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=PoIyXDHzmHyxkVK7AU6CkW5eKjdahmgD6PSzYSvP+zA=;
- b=h0ScYJdTaIzAhJklVvrbEyq3JhMlcu6sWdkF/smy99AxCDB9r13pwuEs+q3bSFfd7rOVDNK7rmu3W/CcbHJqgZDiJFdip09pdaeKzkf7j4z0dOPO/9Ph8qooM6Cy6DejaDMiqIuHET/b6iyPuQw2sGurl57zo0j5tErBV2nWrlE=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <3aa383cb-5850-4975-8054-cade5afd38ea@amd.com>
-Date: Tue, 6 Oct 2026 13:44:47 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5] xen/arm, xen/common: Add Kconfig option to control
- Dom0 boot
-To: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Bertrand Marquis <bertrand.marquis@arm.com>,
-	"Jan Beulich" <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Teddy Astie <teddy.astie@vates.tech>, "Volodymyr
+ bh=0L0TIWnnKQVHg5t9SZCiwB1zz6+si0noHsKHjoNk8iw=;
+ b=WJjjMVvFrq+gaTdn+ylKZM9PfdUd8myU4T5y29Vz7UJDRnqsEhj79ir8vGls/PEUx1oSUCtnNSbmRcyW1N8ikpTFu5R7LDofxH4+nVBsWsFJjkkAmBPaQ7ZOQjo+43Tua6djv0hc0arwGJo17Z22uBc0BLzpa89LOSrzQtXUpE0=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=amd.com;
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=UTF-8
+Date: Tue, 06 Oct 2026 14:21:28 +0200
+Message-Id: <DLXR22SBHLW3.2SACLO55074LM@amd.com>
+Cc: "Stefano Stabellini" <sstabellini@kernel.org>, "Julien Grall"
+ <julien@xen.org>, "Bertrand Marquis" <bertrand.marquis@arm.com>, "Volodymyr
  Babchuk" <Volodymyr_Babchuk@epam.com>
-References: <41d073a1c07e10f0d86da4a31e7a91b7ffadd8d3.1790947567.git.oleksii_moisieiev@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <41d073a1c07e10f0d86da4a31e7a91b7ffadd8d3.1790947567.git.oleksii_moisieiev@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
+Subject: Re: [PATCH] arm/nospec: Make nospec helpers always_inline
+From: "Alejandro Vallejo" <alejandro.garciavallejo@amd.com>
+To: "Andrew Cooper" <andrew.cooper3@citrix.com>, "Orzel, Michal"
+ <michal.orzel@amd.com>, <xen-devel@lists.xenproject.org>
+X-Mailer: aerc 0.17.0
+References: <20261006103142.139422-1-alejandro.garciavallejo@amd.com>
+ <f9c2cb00-e334-4dab-a173-4cbffff18d94@amd.com>
+ <d66c1a89-b448-45d1-b17f-ef63a34acc8b@citrix.com>
+In-Reply-To: <d66c1a89-b448-45d1-b17f-ef63a34acc8b@citrix.com>
+X-ClientProxiedBy: MA3P292CA0066.ESPP292.PROD.OUTLOOK.COM
+ (2603:10a6:250:49::11) To BY5PR12MB4999.namprd12.prod.outlook.com
+ (2603:10b6:a03:1da::13)
+MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH01EPF000BE942:EE_|DS2PR12MB101350:EE_
-X-MS-Office365-Filtering-Correlation-Id: 230a51f4-81ed-4cae-5193-08df239f3e2b
+X-MS-TrafficTypeDiagnostic: BY5PR12MB4999:EE_|DM4PR12MB6208:EE_
+X-MS-Office365-Filtering-Correlation-Id: 39ce28b0-6008-4461-db8d-08df23a45aed
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|36860700016|82310400026|23010399003|1800799024|18002099003|22082099003|11063799006|6133799003|10067099003|56012099006;
+	BCL:0;ARA:13230040|23010399003|376014|366016|1800799024|11063799006|56012099006|4143699003|10067099003|18002099003|22082099003;
 X-Microsoft-Antispam-Message-Info:
-	VUaHVD45Nhdg8P+xspFc6am7rVgxgmExcRR7eR5NTRdLnM9ID8lmunW0Fa189h7VEqI4Yb1q+N838uuTGoxWtgDJItdsG4Emzo76Uc5VVF+8Ki03iZLrcBPwBk1kgfdVukJxIagD3it7sozCkh0iA6izsF3Xe8Y/bPyGjgbhW/n9CXJUJYUwGfNK2nfxkeoGMKV9pXsi+vIEPurCv1Y/V4cn+1w68h8amqScMXImkPzYz+NjtEOggRk/qWLrZkQNsOjMM1phQo5wMlj3aPcGXLybtd7+iF2EOSmQB34VjJrRlNH1t32bHUjCFYZjoZ7uIoa/9XHJdAoLLS6tmtHgQIjrMi2YRR32p22leDMb4xAnk96CMnZNS48aI/Qi6cuVwQ2bBpC9Ui0d/ZPctHCb55T7cW3j9FozQn7dGVKgTxqZXt+zzq5o0IdGFcc0ur0+LJpTSyC2KvxmPBoUzZEEaRJA9SlMox4STNNV3C0CJ+M3enWx5Fy0CK0GJmkQ7AiQLk51I0GTJvzZDbHbXBiAtfDuI0xYZ3mJW4fT+nkKX8gYL7er+v2I8kSlJwf5mgKkjY3p1IPSVa1EgFrFGvxv0uYCNVgf0AJqMfbqI4/TIzLlXrg0e1v7U2FiX/btd7TBYuGWSiKOI3oo8mhp3i88EkMdBTVXL/q1HhvmUMMbd/tThtai41Xlpui+Wzoy0Xq/mnYmxu9uexi/bcBIaTdSmQ==
+	qwchgW8qu3K5x9TN4+zq7njqZTLiLHAsddDzhciXMjrAMfRLvUSofQ6j2LDJ9IFFuC71OzGxofIvqjhjar6e1sycmyRdb7B6Dv9mRMwLXbXntnT+9hg3AQkoryU7nChdRFSr6wWzcy4n9p6dkWJxjqVgEXbU+4Wf6NIf2VS1/7y5msxDpZ0rPkCKTe7H6SXbW1x0y6uJMJYmBYXCZ7YRa+1DZ5pndDJ/Ith1Eb/UlXQO5yEACOkJvs1XmUyVShdN7ohQSKiSe873k9cAZBWxHAoFISZULaNk36kAeHQnnlSmwGPWf13S0lQqDjjrD7gy3qcxrneaSZiUB/EuuC5uxtCR3nNg0t3qn7bNFIKjY8a4I53GDqYTM5UkDxG/YEhA4brkchaLDdJ9Cf8+P42uiq3mpkd/zjswiLdefySah1N21LEhjNBOPjMEs3FJKv+gLKMCGHtspA9MIEGbreE3UNpAktU079YgPGdohPcM3LYYhW59qaX/P2/yYZ1q91suiVy5zlp3wYBYvkr5wvAPjgJqC9SwyYBnWP1qGbjfJVN9tUpzPAjsPkmyXyTjyh+5/yPEKsz4ZA0ubgzJzdsSBDcLTjDEtGBjhA6XYRayvJtG5ifbyHxQ4jzXW336Ryhpv9Roi2R3F+IKzuH7XT55wpAFPXIxJBs6wRbaWc7lH5g=
 X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(7416014)(36860700016)(82310400026)(23010399003)(1800799024)(18002099003)(22082099003)(11063799006)(6133799003)(10067099003)(56012099006);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR12MB4999.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(11063799006)(56012099006)(4143699003)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	e8VlQVuumN09BJus78YsRwP92Z/s3MJfE0QcgzNnV6WJk6DFTz/LHravl8w00PXO4mSYpqmnmZ/D7pl5PSLNIpvpcYxzujZXjT0mpBTPy2cl7gZkndzUHtr4Ov9Xr1azaVheC0TMGb+B1JshYJegCK8yfr2idebWBLhjBdFm7esYlIOinMIs39NE/1y/zevhiwAYe8k9mOVk3LL3U1inRGF4GVwsbuOPjqZmavFP0jZG+0wd+ZZrGxHSw/OIfCTuyNTVCEJDoa7m0z3RsyLHcBKNr3aiFsSabSWXoKDU8LP2DdWPSs5BPn935aUqIIABpgmUUkaN6txxHixFvpP895R/B24uz8M1Aa+lEvzrgMv2XTYyGr2Au3aLIW0YHPs7h+d7Rp7F0V76LmM6uMlhnCxuXZQ7J0wPueyleeHhb9XK422uAxBQSzoWHuhAKO9d
+	=?utf-8?B?VWUvd3Z1eGZyZ3ZqUVo2ckZVWHNwKzVOL0Y2S0FFWDlOU1ZETFoxeUtlM3Jq?=
+ =?utf-8?B?Zm1UczYxV1hTa2I1MDBabTBKdGI4UURXeDR6bHlJaDRXTm9hR2g5QXRWNUlI?=
+ =?utf-8?B?VVM1QldBV3FXRDRGQzJ3ME9NZXFzalFpb0pVOTV2RUJHTFdTVUhWTlRZdWVy?=
+ =?utf-8?B?RGlwOGIxTkljVEtER0lRWHZZQzVzRi9ONE0xZjMwbkNhcUUvMmNkYlFIMWVj?=
+ =?utf-8?B?ZVhZcm9EWWJiYktubDA5eXl6MFQ2QnFta2FNdVI0R3dJTy9wMmtBeDExQzBH?=
+ =?utf-8?B?ejdFVVMzZ0tDR3RLOGhmby8xWmtMaE9mNnpxcW5PRVF5Z1FBb0d4TVF4QU9y?=
+ =?utf-8?B?bG1WMll1c3IxUGhNRHpGcWd4dnJRVER0NE5yMkdlcWk0M3NENG11YjZ6ODJu?=
+ =?utf-8?B?WUJ2bjBCYjBnQ1FoMThtZ3RpMFN0ajloYzFJOHVYWEhvY1VPQnhsaEdCc0li?=
+ =?utf-8?B?MUozcGdPUHAwWnJVd3R5am9hQTRId3hUU2tPQzdEbUVZbzRWWGVrRnpOMmov?=
+ =?utf-8?B?MXl0WDFiMjltS0hMYm5wb2NPZXl6TEdlc2xpU25TQmI3WWhYWGdjOGZrbSs4?=
+ =?utf-8?B?ZEtwUVQ5WGpmSUZJWmd2UmZrd1lxbHpwcmtlTnZ2M2dWU1pEbTVNN01zRlp1?=
+ =?utf-8?B?U2pYN3lmQ2xRd1RVKzk5S0hpbXJpbFZMdUdhUDVCWHhOY1JtNnplTnhuYTlK?=
+ =?utf-8?B?Q1ZibnpMUGU4V0dmSEJ5aTRpUlFrL2lCNU5YakNVVTRWWkhxTVQxaVZCRHhM?=
+ =?utf-8?B?R1lBWmRGMmhLcHk5OWN6R0ZJU0JrUVVHQXh2c1Jta05VUWc4OTFIZHVKUDAv?=
+ =?utf-8?B?WE02NERhS0Uxa3JGSGhTMVNkYVgxNU1lYUEwb0Y5dUtyWlZkSENmOVdhYWhW?=
+ =?utf-8?B?VmdTeFVabVdNQ1F2NWlXV2NHWXV5RTZKRjY5djZUZFVxMUNQSE93RkVJRmVG?=
+ =?utf-8?B?ZWhKQWN6UGRVSk1UMC9vR3labHVMWDAzamhrRjdZaGxMWjRyOGNjRk83Y01G?=
+ =?utf-8?B?UVczdG9MT3U1Vmo4R1FpQnlBVnNWZk5OaXRFZjUxZ0Nya3BFanlwL3ZTUHEr?=
+ =?utf-8?B?UTc2NCswdUh2MjMyZXE3My9aOHJvSTkyT2RUOUd5L0pNTzc3ak1VK2F4RDV6?=
+ =?utf-8?B?S1MzM1RQWCtybUlYbyt5bnhqV0NSUnVhcG12R2xWVUNRb0Z6OFpJdUJWQjVl?=
+ =?utf-8?B?N2ZsOHhQNjlwNGEzTlovZThOV29aVExxWlVjYW4wWFNpTzNOSVBUYllHb1NH?=
+ =?utf-8?B?V2t6YmsxR0ZQUk9PcnlzUFpSa3paUmRvbUllVEs5UEFsQnNUalVkc0xsNEtq?=
+ =?utf-8?B?ZGdZRHAwRC9wVWk1RjdxditQNkdCSDgwdnJGRTdDVHUwdEtGcnh2OGdBVW4v?=
+ =?utf-8?B?Wi9FdnZ4SVQ0czNjbi9kdkhoRGZYTFR1ZldYNmJ4RVNHc2U1NGdLZVNrVUtn?=
+ =?utf-8?B?dGQvVW5lcVIrbDN0SnBGQWFUYVlTUGNEak5HYUJScVJuQTg1cEJMOU90OHpG?=
+ =?utf-8?B?VlJ1ZjZCV2pPdXhqNTdYOURpbEFRYzRQYjZlNFFCL1RkZ0Z4UTFrWWYwUVNk?=
+ =?utf-8?B?Z3c3RVV4TjNoWTBYQURDZHR1SmFTZGFmMjdBZFdpODQxT3VhZlNuNDZNZGpx?=
+ =?utf-8?B?a0Qwa2wwWkl4T3pTNWhkKzdBSitFTXM4a1IycEhTTTNDQVJncmtCbGFDaE5N?=
+ =?utf-8?B?aHUxaVBXd1dNOGp1Rlkweklmd1Rjd3MrMmNYK1psekp1NjZKVTZ4ajZwOUxN?=
+ =?utf-8?B?QThhOTY3Q0FOM3BPNXZCKzdmM3d4dkxPMHQyM2ZzWFhHRWNUY0NMaERoak1p?=
+ =?utf-8?B?STVrbEhqTW5acm0xVDUvZHhXWFdmeENZcVN3U0ZydmdOdVBMWXgxaU5qYzNx?=
+ =?utf-8?B?N1ZraHZzdXhPM0xrNVErMHZaN09TdW1aNU9kaGJFN0VFMjg0QmFFaVNJMUxK?=
+ =?utf-8?B?RERsLytFanVNYktjbnA3OEhXU2kraWRmQndXQWYvRHNJUFdNQjZnOUl0UUlI?=
+ =?utf-8?B?ZitsK3ZVeTRHUFozVVZJM0hUTXIvNEtUNVk2N0ZNdStOZXNnL0tUNVM3S0NF?=
+ =?utf-8?B?NStDRHZnNlpKRTBUdm0wN0RTTnR0ckRxMVoyb3FBTFJHSEo5THdZYkVyelBS?=
+ =?utf-8?B?OWpXMHRoUWZwM2NVN2YzV2RvdFFLdEl3MVVnaEMvNmZBS1kvM1FwaUFiMk8w?=
+ =?utf-8?B?L0VLbGhxVnZKcWlVM2hBaVo4RHFkaEFPY3haM29TSWkvRm1VYzU5VEg4eENs?=
+ =?utf-8?B?LzE0TVNkc2huQWo0blB4TEp2ZWRlMzFyS2RGSTlDcVc3VTFjY2w5T1o5eWtz?=
+ =?utf-8?B?N2htVTdOMzZFZGJUQXNxRko2T2FRYjlaQmtVY2NuVXJNWWdUenlyQT09?=
 X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 11:44:55.9370
+X-MS-Exchange-CrossTenant-Network-Message-Id: 39ce28b0-6008-4461-db8d-08df23a45aed
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR12MB4999.namprd12.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 12:21:31.8932
  (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 230a51f4-81ed-4cae-5193-08df239f3e2b
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CH01EPF000BE942.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS2PR12MB101350
-X-purgate-ID: tlsNG-d62444/1791287203-C5540757-905ACC69/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 7425
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: eKUp03HGXrqv6UugvKf4UXaNOcUoqmn95+HD3OvdVouj4IngfCRN8vQ6F0jWD9U8b2vkPU4M9NNckG+YmlhAtA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB6208
+X-purgate-ID: tlsNG-c1860d/1791289302-D574B87B-6C542CF2/0/0
+X-purgate-type: clean
+X-purgate-size: 1158
 
+On Tue Oct 6, 2026 at 12:51 PM CEST, Andrew Cooper wrote:
+> On 06/10/2026 11:45 am, Orzel, Michal wrote:
+> >
+> > On 06-Oct-26 12:31, Alejandro Vallejo wrote:
+> >> While today they don't implement fencing in a way that would block
+> >> speculation, once/if they do they'll absolutely need to be inlined, ev=
+en
+> >> if -fno-inline or -fno-early-inlining are passed.
+> >>
+> >> Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+> > Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+> >
+> > but this should be done for Arm, RISCV and PPC at once in which case yo=
+u can
+> > keep my tag for v2 # for Arm.
+>
+> I previously had a patch series which made this all common, for these
+> kinds of reasons.
+>
+> I think I'd prefer to kick that over the line, than to keep on taking
+> micro-bugfixes like this.
 
+for reference:
+    https://lore.kernel.org/all/20240304161041.3465897-1-andrew.cooper3@cit=
+rix.com/
 
-On 02-Oct-26 15:26, Oleksii Moisieiev wrote:
-> This commit introduces a new Kconfig option, `CONFIG_DOM0_BOOT`, to
-> allow for building Xen without support for booting a regular domain (Dom0).
-> This functionality is primarily intended for the ARM architecture.
-> 
-> A new Kconfig symbol, `HAS_DOM0`, has been added and is selected by
-> default for ARM and X86 architecture. This symbol signifies that an
-> architecture has the capability to support a Dom0.
-> 
-> The `DOM0_BOOT` option depends on `HAS_DOM0` and defaults to 'y'. For
-> expert users, this option can be disabled (`CONFIG_EXPERT=y` and no
-> `CONFIG_DOM0_BOOT` in the config), which will compile out the Dom0
-> creation code on ARM. This is useful for embedded or dom0less-only
-> scenarios to reduce binary size and complexity.
-> 
-> The ARM boot path has been updated to panic if it detects a non-dom0less
-> configuration while `CONFIG_DOM0_BOOT` is disabled, preventing an invalid
-> boot.
-> 
-> Signed-off-by: Oleksii Moisieiev <oleksii_moisieiev@epam.com>
-> Acked-by: Jan Beulich <jbeulich@suse.com>
-> 
-> ---
-> 
-> Changes in v5:
-> - rebased on top of the latest staging.
-> - add Ack
-> 
-> Changes in v4:
-> - change Misra rule to 2.1 from 2.2 in description
-> - remove extra dependencies for ARM architecture from DOM0_BOOT
-> - rephrase DOM0_BOOT help by adding hyperlaunch
-> - DOM0_BOOT is mandatory for x86 architecture
-> 
-> Changes in v3:
-> - rephrase error message when dom0less mode wasn't detected while dom0
-> is disabled.
-> - rephrase help message for DOM0_BOOT config option
-> - update DOM0_BOOT dependencies for X86
-> 
-> Changes in v2:
-> - decided not to rename HAS_DOM0 (HAS_OPTIONAL_DOM0 was another option
-> suggested in ML) because in this case HAS_DOM0LESS should be renamed
-> either.
-> - fix order of HAS_DOM0 config parameter
-> - add HAS_DOM0 option to x86 architecture.
-> 
-> CONFIG_DOM0_BOOT Kconfig option was introduced to make the Dom0
-> regular (legacy) domain an optional feature that can be compiled out
-> from the Xen hypervisor build.
-> 
-> The primary motivation for this change is to enhance modularity and
-> produce a cleaner, more specialized hypervisor binary when a control
-> domain is not needed. In many embedded or dedicated systems, Xen is
-> used in a "dom0less" configuration where guests are pre-configured and
-> launched directly by the hypervisor. In these scenarios, the entire
-> subsystem for booting and managing Dom0 is unnecessary.
-> 
-> This approach aligns with software quality standards like MISRA C,
-> which advocate for the removal of unreachable or unnecessary code to
-> improve safety and maintainability. Specifically, this change helps adhere to:
-> 
-> MISRA C:2012  Rule 2.1: "A project shall not contain unreachable code"
-But with this patch you will introduce a lot of unreachable code anyway.
+I wouldn't mind that, I can R-by it if you resend it. I'll still send a
+v2 of this on the grounds that it's a strict improvement over existing
+matters and might land faster.
 
-> 
-> In a build configured for a dom0less environment, the code responsible
-> for creating Dom0 would be considered "dead code" as it would never be
-> executed. By using the preprocessor to remove it before compilation,
-> we ensure that the final executable is free from this unreachable
-> code. This simplifies static analysis, reduces the attack surface,
-> and makes the codebase easier to verify, which is critical for
-> systems requiring high levels of safety and security.
-> 
-> ---
->  xen/arch/arm/Kconfig        |  1 +
->  xen/arch/arm/domain_build.c |  8 ++++++++
->  xen/arch/arm/setup.c        | 13 ++++++++++---
->  xen/arch/x86/Kconfig        |  1 +
->  xen/common/Kconfig          | 12 ++++++++++++
->  5 files changed, 32 insertions(+), 3 deletions(-)
-> 
-> diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
-> index 06289005f4..6d0936b353 100644
-> --- a/xen/arch/arm/Kconfig
-> +++ b/xen/arch/arm/Kconfig
-> @@ -18,6 +18,7 @@ config ARM
->  	select GENERIC_UART_INIT
->  	select HAS_ALTERNATIVE if HAS_VMAP
->  	select HAS_DEVICE_TREE_DISCOVERY
-> +	select HAS_DOM0
->  	select HAS_DOM0LESS
->  	select HAS_GRANT_CACHE_FLUSH if GRANT_TABLE
->  	select HAS_SHARED_INFO
-> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-> index 72d5316180..cc932d7686 100644
-> --- a/xen/arch/arm/domain_build.c
-> +++ b/xen/arch/arm/domain_build.c
-> @@ -43,8 +43,10 @@
->  #include <asm/grant_table.h>
->  #include <xen/serial.h>
->  
-> +#ifdef CONFIG_DOM0_BOOT
->  static unsigned int __initdata opt_dom0_max_vcpus;
->  integer_param("dom0_max_vcpus", opt_dom0_max_vcpus);
-> +#endif
-What about the other dom0-only options: dom0_mem (and CONFIG_DOM0_MEM),
-dom0-llc-colors and dom0=sve?
+Cheers,
+Alejandro
 
->  
->  /*
->   * If true, the extended regions support is enabled for dom0 and
-> @@ -123,6 +125,7 @@ paddr_t __init hwdom_get_fdt_alloc_size(void)
->      return ACPI_DOM0_FDT_MIN_SIZE;
->  }
->  
-> +#ifdef CONFIG_DOM0_BOOT
->  unsigned int __init dom0_max_vcpus(void)
->  {
->      if ( opt_dom0_max_vcpus == 0 )
-> @@ -135,6 +138,7 @@ unsigned int __init dom0_max_vcpus(void)
->  
->      return opt_dom0_max_vcpus;
->  }
-> +#endif
->  
->  /*
->   * Insert the given pages into a memory bank, banks are ordered by address.
-> @@ -1862,6 +1866,7 @@ int __init construct_domain(struct domain *d, struct kernel_info *kinfo)
->      return 0;
->  }
->  
-> +#ifdef CONFIG_DOM0_BOOT
->  static int __init construct_dom0(struct domain *d)
-This makes dom0_set_llc_colors() unreachable. The same goes for
-prepare_acpi() with ACPI=y, as dom0less is DT only. ACPI should be prevented
-when DOM0_BOOT=n.
-
->  {
->      struct kernel_info kinfo = KERNEL_INFO_INIT;
-> @@ -1893,6 +1898,7 @@ static int __init construct_dom0(struct domain *d)
->  
->      return construct_hwdom(&kinfo, NULL);
->  }
-> +#endif
->  
->  int __init construct_hwdom(struct kernel_info *kinfo,
->                             const struct dt_device_node *node)
-> @@ -1944,6 +1950,7 @@ int __init construct_hwdom(struct kernel_info *kinfo,
->      return construct_domain(d, kinfo);
->  }
->  
-> +#ifdef CONFIG_DOM0_BOOT
->  void __init create_dom0(void)
->  {
->      struct domain *dom0;
-> @@ -2001,6 +2008,7 @@ void __init create_dom0(void)
->  
->      set_xs_domain(dom0);
->  }
-> +#endif /* CONFIG_DOM0_BOOT */
->  
->  /*
->   * Local variables:
-> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
-> index 16f899dff5..ea9c037fba 100644
-> --- a/xen/arch/arm/setup.c
-> +++ b/xen/arch/arm/setup.c
-> @@ -491,11 +491,18 @@ void asmlinkage __init noreturn start_xen(unsigned long fdt_paddr)
->  
->      do_init_boottests();
->  
-> -    /* Create initial domain 0. */
-> -    if ( !is_dom0less_mode() )
-> +    if ( IS_ENABLED(CONFIG_DOM0_BOOT) && !is_dom0less_mode() )
-> +    {
-> +        /* Create initial domain 0. */
->          create_dom0();
-> +    }
->      else
-> -        printk(XENLOG_INFO "Xen dom0less mode detected\n");
-> +    {
-> +        if ( is_dom0less_mode())
-Missing space after () and before )
-
-> +            printk(XENLOG_INFO "Xen dom0less mode detected\n");
-> +        else
-> +            panic("Neither dom0 nor dom0less mode was detected, aborting\n");
-> +    }
-To avoid calling is_dom0less_mode() twice, how about:
-
-    if ( is_dom0less_mode() )
-        printk(XENLOG_INFO "Xen dom0less mode detected\n");
-    else if ( IS_ENABLED(CONFIG_DOM0_BOOT) )
-        create_dom0();
-    else
-        panic("Neither dom0 nor dom0less mode was detected, aborting\n");
-
-~Michal
+>
+> ~Andrew
 
 
