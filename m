@@ -4,46 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 864F9CA5FED
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 14:00:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1441525.1659124 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 627F5CA6001
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 14:15:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1441536.1659134 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE5iX-0002NB-46; Tue, 06 Oct 2026 14:00:29 +0000
+	id 1xE5wk-0004qd-Cj; Tue, 06 Oct 2026 14:15:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1441525.1659124; Tue, 06 Oct 2026 14:00:29 +0000
+Received: by outflank-mailman (output) from mailman id 1441536.1659134; Tue, 06 Oct 2026 14:15:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE5iX-0002N4-19; Tue, 06 Oct 2026 14:00:29 +0000
-Received: by outflank-mailman (input) for mailman id 1441525;
- Tue, 06 Oct 2026 14:00:28 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xE5wk-0004qW-A0; Tue, 06 Oct 2026 14:15:10 +0000
+Received: by outflank-mailman (input) for mailman id 1441536;
+ Tue, 06 Oct 2026 14:15:09 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ross.lagerwall@citrix.com>) id 1xE5iW-0002My-3Y
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 14:00:28 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xE5iV-00Gu1r-B7
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 16:00:27 +0200
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6ac4fef8-e002-0a2a0a5209dd-0a2a450492e8-18
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 16:00:27 +0200
-Received: from [52.101.85.16]
- (helo=BYAPR05CU005.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ross.lagerwall@citrix.com>)
- id 6ac4fef9-b57f-0a2a45040019-34655510ef9b-3
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 16:00:26 +0200
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
- by BL1PR03MB6086.namprd03.prod.outlook.com (2603:10b6:208:31c::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Tue, 6 Oct
- 2026 13:58:22 +0000
-Received: from CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
- ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0496.010; Tue, 6 Oct 2026
- 13:58:22 +0000
+ (envelope-from <roger@xenproject.org>) id 1xE5wj-0004qQ-Ay
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 14:15:09 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <roger@xenproject.org>) id 1xE5wh-0004Wq-2i;
+ Tue, 06 Oct 2026 14:15:07 +0000
+Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
+ helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <roger@xenproject.org>) id 1xE5wh-00CcPD-1V;
+ Tue, 06 Oct 2026 14:15:07 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,146 +41,82 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=POMZoS6ntfaMquniUF6vy+olWi2ODdhTz779ZYjbPIRdgi8Ijh3lybfkgVJM6C9WkIA7EBKdWhDC/9r7enRluW9WsisZuiflxujBMXY+3SfBSM8VmDXbctgBvOhvPSmYKzvStPSoRDh9gCT/iSnNYdJ20bDvEIs28DrbB9AChnApHadzhJDBxuCSvzyYCnRNeAZhhwscubfnyOgOy1zEY7OMF1Sx+cJPRitErvXdf5t7FRxzSdhU7ynEsulzANf6YqJaTt9Pu7pI4Pw+ggXbIvD+ticMtDwPflj24ygSGBYDbSbXE4ILPJvc1JzDDybgRjPXWXe2ZuLELMQV9W08Xw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lX8X2R1DDq8edidJA8juOKqxFOJ2vapFzb/jiC8u58U=;
- b=g6FyaB3lP2g52vrnKmDj/67AqfuotkRAnD6714EETNEbUd+eGz01DCoZcufwJ6E5Je8XmoCNAHK2qZpHAlc6VtlK0tktiS/ce0EQkjTGxNHVERprT+g2MWMg/YfEGBAlAgUqJ/nTAhX4tqfy6rdUrnNAQ6cVrdDVTVPoePFtcpzrNG72uaTmyaE2MMglCIUhhGHLsl/WheAI6SywYQFTcQ4fEbXGyd0Mc2x2HM4oOfdmqmRKoMm37ulgqgWxZ2mHGqfZEzuOoCMpON4/kyXNfvgOwlGAN9h11fzS8gglkRYPK9+WCXuSEnlfZfAnrvn1Kbtrfbg9g+54XsdVzYMqEA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lX8X2R1DDq8edidJA8juOKqxFOJ2vapFzb/jiC8u58U=;
- b=sAc03lntszfRbSsCOosByqVmvmao5apYqUzIlVgvdKCp0jGGlJKSi7xklft0ZUVmQfUrltGC1cpzZLqmWBWf4+Orwg5YkEMp6JH/nW23aup0GFk9t2sQYAkA7dBThwb58rm83ai0TCQbjV+fb4fNts3D6OuKS+7PDI1QW7UHd3A=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Ross Lagerwall <ross.lagerwall@citrix.com>
-To: xen-devel@lists.xenproject.org,
-	linux-block@vger.kernel.org,
-	linux-kernel@vger.kernel.org
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Juergen Gross <jgross@suse.com>,
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date;
+	bh=okmclJRF1nfHx7FuFEK7SpCGpSWkeD/ZoJo0CdoObYY=; b=XsmRSIuwu20k6VAg1325KMHecr
+	rKy9zx4PwtiLvCMT8/W2aus/0cH1s+AYEnHQwLmq/NARJaO232XKtqg1nNWjR9w0Wi4+FstzPXj2e
+	8o5REMrrdE8+OxK6dWsgVU++cWqXcV7o7uYceNpx+Fi3gDJQWVrf5l2nCXuTZiOPbe6s=;
+Date: Tue, 6 Oct 2026 16:14:58 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
+To: Ross Lagerwall <ross.lagerwall@citrix.com>
+Cc: xen-devel@lists.xenproject.org, linux-block@vger.kernel.org,
+	linux-kernel@vger.kernel.org, Juergen Gross <jgross@suse.com>,
 	Stefano Stabellini <sstabellini@kernel.org>,
 	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Jens Axboe <axboe@kernel.dk>,
-	stable@vger.kernel.org
-Subject: [PATCH] xen-blkfront: Fix IO race during unplug
-Date: Tue,  6 Oct 2026 14:58:06 +0100
-Message-ID: <20261006135807.2571779-1-ross.lagerwall@citrix.com>
-X-Mailer: git-send-email 2.55.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: LO4P302CA0004.GBRP302.PROD.OUTLOOK.COM
- (2603:10a6:600:2c2::9) To CH8PR03MB8274.namprd03.prod.outlook.com
- (2603:10b6:610:2ba::5)
+	Jens Axboe <axboe@kernel.dk>, stable@vger.kernel.org
+Subject: Re: [PATCH] xen-blkfront: Fix IO race during unplug
+Message-ID: <asUCYtIJkFchdbNH@Mac.lan>
+References: <20261006135807.2571779-1-ross.lagerwall@citrix.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|BL1PR03MB6086:EE_
-X-MS-Office365-Filtering-Correlation-Id: 829da2cb-2c0d-427c-b64e-08df23b1e262
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|23010399003|1800799024|376014|10067099003|56012099006|18002099003|11063799006;
-X-Microsoft-Antispam-Message-Info:
-	L3M/Qb2JU21SdjhNLTGBgTacUclL0m/4MCmOPLo3LhwXu00OOFn2EP7mGimKtYdE+SwgFc8m2mO5ZWHlSn8qOtlTZqmyVP8dekWVv+kSqeOtpD5FOJIc7eO0dISNR5ICVzWhGAeqBbzY3MDzR75sN9E5B8caYDgU2GdT28G/SCjkL5II+m1sxnqKFIDs3DODR10XkHZhnI7KV1MZwC0Gmb/dKjYtjKrh5S/zjy0VjjiGFdsT6gvYN6vgL5k9gDegRr/A88BSXmo5UfAyG0QCAhhCEtBUGz0axyyveo7PBkJ4iUmD8kssyy4D+upqu5HNT0OLu9dg8O3bl+sxPd1hOhRtXrmXH3lHX0JtrqHGH+NQQM6uIXZhwmEPIX6Z4WXn6oKRc55utVau0bUE4aIeph0Xzpk3gNsyCi9UAQim/j90Tx8INajK886g61xai3phuylhjg185oLK9vRRPt55AMDpHnQv/QJF3U5OLE5thgf42ftE+NSri8nZdwSgmBMnKOOBnwlkaKftU040mKxEsxq7C9CbpeYQTZ/VsVVfIPr6gzXMCK4MS+crNNhWGLOdgsSVgsyt01GK/QcPgLvQ6fjfcRDqiqdwyFks/qRKxDtx/fyKpDcb26ICF7HeBshxQsBpSbn/yrzEvlE0CCwUGwkSr9HJNsec7o1rNTrOKns=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(10067099003)(56012099006)(18002099003)(11063799006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?l5MZ5bTFcUntVBoYYTGCZYOuO8iZ1FqmTddfi5dpm1+G9RvmXFu5UHT0Dsz0?=
- =?us-ascii?Q?Uygghsa09PFz2yXuuOv/ddyEJGeI/vChlg7D/htlIVoC6N3YGmnVjHN+YgsD?=
- =?us-ascii?Q?Y6F2APlKk0UpBEZVumCCTOsS65gDVN7Wetgze9WNjefAgzDMnocIiBt8NNZf?=
- =?us-ascii?Q?xekL+ey5ttFPZj+WZ70hwQibFDRJMuPMdFK1/CvIbSiNcT1BLmJa1WKAnFkf?=
- =?us-ascii?Q?2jPDqq7lIGEnNIHyELiLHDfDOZHx8WWgYTWmfD/P6MFPCoJZnxMgDFFhh9I+?=
- =?us-ascii?Q?f44WbCrD/YGzeGvOD24lBqlqozg4WjMuKPBCsvUpRheGA+mfrMi9Kes8TB+V?=
- =?us-ascii?Q?YQIF88Gf8nC7tyEYRhqCrVW1gKuFmm4tqaARSOyz10w6yN2/TA9+BF1JiKqC?=
- =?us-ascii?Q?4XWx5Z9K6QTBM2s2+yAhRtBU7qRx+itIfJu+wgjjfaUMb40lHc0Fp68bngfR?=
- =?us-ascii?Q?dO/HTwD++r4BjKt62U1BgIdW49xa6nH0QJeBcdmZT5bfaCTFXIMp3Q/bPydJ?=
- =?us-ascii?Q?vA6D7izEgVZ9zq72UKyKmUZyrk+rZSrmSCazkBCIGTVetHfh0PjZ4sdaSfmk?=
- =?us-ascii?Q?y/YM5pLm8rdIuhklbtyozje5GyD5hfNSR8popccBFcFHeoI8SvjoyKx4UrBj?=
- =?us-ascii?Q?hOa/ZXYcELkdW9rDR99/5ZNloLZCelHmhCj6x/bXrDhz62NEMMXdjiHGoEUF?=
- =?us-ascii?Q?c5a3WNdpGKfMIdkSfVlGmStr/G3t5eSlQshBf3poO2U/SJxTTrvKq59PxTCg?=
- =?us-ascii?Q?IAE59yHbPNppIzEw1nw+JvOkixEo+oxgwi15k5wUzzGc5U2BixcmXcXgLgu7?=
- =?us-ascii?Q?8b49WmMUc8KJ6iQoN5pexxYMoGPMc5/c+Z+IElkM6pItX4VASd9SkOi/H2VX?=
- =?us-ascii?Q?SqxRYCu02E+dGO8tXEhtSfZhyAFws9HIIgF1mlMy5XVn7H6Iv9BguYNFbDt6?=
- =?us-ascii?Q?S/Kqv1DOMYDR8pOLKSC/53VIz8w8NjZAngmRL0VcrlRRW09zh26lYE3wq5WT?=
- =?us-ascii?Q?i61lvgNK/K6Z4PODaCmg1o+KBl/ggVFk4NDoBJGDVi3fuOffRMvSKyY6EiXF?=
- =?us-ascii?Q?cPh95DddsZgkaLcolYaqhVZ5J8oSxG/7bR9VqJMcnaTXKfs7GXofB8tyb4/u?=
- =?us-ascii?Q?QIX4YZhq8o7knu88sksRVoOXv5pMX+GSTs1tCOJuVhGu65NVxr0L0dJmVJrt?=
- =?us-ascii?Q?2HmMwHX1tgeYANDlDOrvvXp3A71aCgoKZHH6Yo4FO8G3W4E5+5woK11iw4CO?=
- =?us-ascii?Q?ofYL/lzoLC/bUAOeIyR33JWV2bd8JRHY9DOam3ORD9pMNMDpZPspqb6Sjuu+?=
- =?us-ascii?Q?ClGVzQWtDdq4o13FDZkmWPFF9ie4CbiEqUS/CcPjUXjKb9OrSfMH6tK+CxP+?=
- =?us-ascii?Q?Rk+GOsNXAiUGkszsBxSvZkK1NyhXOtDQnZ/DI0tZpZoouQCdvKNB6rGOnw3s?=
- =?us-ascii?Q?8BlrzzPAyDVk88Un6KM4SiIPo54/ZlCJpA7ESYyI+QPFUboUW3SEfc/kJbc1?=
- =?us-ascii?Q?45OOUQU4yaE6Mdzxu/gjTapSMtmL2KuGa7cZNyp5i/0HRBtANNGk7LGe07H+?=
- =?us-ascii?Q?lsFFGVgxHO6CKFMRQs5lakB5spgcEwbnKdw7DKTcimqfKxPVIO4QD5t3y5/F?=
- =?us-ascii?Q?A9Bvr8dHRHzq2qECiWIT96iw8vH0x5v73KsMAyuey7aoDMXc+21XVQxDmUTB?=
- =?us-ascii?Q?NEpXlJCY5xEMtjmFoqsEpyh0yDZLkTsN0u9yXrPkrdGbGWxODSefdhiNM2KB?=
- =?us-ascii?Q?43sjE864174CriJgfRR9kOBcQ/uD8dM=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 829da2cb-2c0d-427c-b64e-08df23b1e262
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 13:58:22.4995
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Re4Fg4Jp14KLzr5fnXUK6HX8M18IRnUs0rKX/As7+q2sre9AiKvOkT3kuvcsufFDGjoQUgncXVPkn38Kuj1w/QPgv9hXtb3pdz/7kM0iumo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL1PR03MB6086
-X-purgate-ID: tlsNG-ebf023/1791295227-538C1B50-0788F003/0/0
-X-purgate-type: clean
-X-purgate-size: 1611
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261006135807.2571779-1-ross.lagerwall@citrix.com>
 
-During unplug, blkfront stops the hw queues and marks the disk as dead,
-then later during removal calls del_gendisk(). However, IO issued after
-the hw queues are stopped but before the call to del_gendisk() will be
-queued but never handled. This causes del_gendisk() to hang forever
-waiting for the queue refcount to drop to zero.
+On Tue, Oct 06, 2026 at 02:58:06PM +0100, Ross Lagerwall wrote:
+> During unplug, blkfront stops the hw queues and marks the disk as dead,
+> then later during removal calls del_gendisk(). However, IO issued after
+> the hw queues are stopped but before the call to del_gendisk() will be
+> queued but never handled. This causes del_gendisk() to hang forever
+> waiting for the queue refcount to drop to zero.
+> 
+> This can be reproduced by issuing IO during an artificial delay after
+> stopping the hw queues.
 
-This can be reproduced by issuing IO during an artificial delay after
-stopping the hw queues.
+So the window is between the blk_mq_stop_hw_queues() and
+blk_mark_disk_dead() calls where requests would be queued and never
+processed?
 
-Fix this by simply not stopping the hw queues directly. Marking the disk
-as dead also freezes the queue which prevents new requests being added
-and it synchronously runs the hw queues to clear anything pending.
+> Fix this by simply not stopping the hw queues directly. Marking the disk
+> as dead also freezes the queue which prevents new requests being added
+> and it synchronously runs the hw queues to clear anything pending.
 
-Fixes: 8e141f9eb803 ("block: drain file system I/O on del_gendisk")
-Cc: stable@vger.kernel.org
-Assisted-by: LLM
-Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
----
+I think this likely needs expanding a bit: the disk is already marked
+as dead with the current logic, and in the same place in the code.
 
-I'm not sure about the Fixes tag. It's the most likely looking candidate
-to me but I didn't confirm whether it actually introduced the
-regression.
+> Fixes: 8e141f9eb803 ("block: drain file system I/O on del_gendisk")
+> Cc: stable@vger.kernel.org
+> Assisted-by: LLM
+> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+> ---
+> 
+> I'm not sure about the Fixes tag. It's the most likely looking candidate
+> to me but I didn't confirm whether it actually introduced the
+> regression.
 
- drivers/block/xen-blkfront.c | 4 +---
- 1 file changed, 1 insertion(+), 3 deletions(-)
+I was wondering the same, and even then someone might argue this was a
+latent bug in blkfront itself, and the reference commit just exposed
+it.  I don't have a strong opinion.
 
-diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
-index 8dad7bf5f664..69a2315a1b20 100644
---- a/drivers/block/xen-blkfront.c
-+++ b/drivers/block/xen-blkfront.c
-@@ -2138,10 +2138,8 @@ static void blkfront_closing(struct blkfront_info *info)
- 		return;
- 
- 	/* No more blkif_request(). */
--	if (info->rq && info->gd) {
--		blk_mq_stop_hw_queues(info->rq);
-+	if (info->gd)
- 		blk_mark_disk_dead(info->gd);
--	}
- 
- 	for_each_rinfo(info, rinfo, i) {
- 		/* No more gnttab callback work. */
--- 
-2.55.0
+> 
+>  drivers/block/xen-blkfront.c | 4 +---
+>  1 file changed, 1 insertion(+), 3 deletions(-)
+> 
+> diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+> index 8dad7bf5f664..69a2315a1b20 100644
+> --- a/drivers/block/xen-blkfront.c
+> +++ b/drivers/block/xen-blkfront.c
+> @@ -2138,10 +2138,8 @@ static void blkfront_closing(struct blkfront_info *info)
+>  		return;
+>  
+>  	/* No more blkif_request(). */
+> -	if (info->rq && info->gd) {
+> -		blk_mq_stop_hw_queues(info->rq);
+> +	if (info->gd)
+>  		blk_mark_disk_dead(info->gd);
 
+So blk_mark_disk_dead() behaves differently when called with the
+queues still active?
+
+Thanks, Roger.
 
