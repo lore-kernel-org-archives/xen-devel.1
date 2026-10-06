@@ -4,62 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE4FDCA5FED
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 10:23:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1441340.1658925 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7271BCA5FF0
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 10:24:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1441346.1658934 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE2KJ-00015t-6V; Tue, 06 Oct 2026 10:23:15 +0000
+	id 1xE2Lp-0001hY-JX; Tue, 06 Oct 2026 10:24:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1441340.1658925; Tue, 06 Oct 2026 10:23:15 +0000
+Received: by outflank-mailman (output) from mailman id 1441346.1658934; Tue, 06 Oct 2026 10:24:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE2KJ-00015i-32; Tue, 06 Oct 2026 10:23:15 +0000
-Received: by outflank-mailman (input) for mailman id 1441340;
- Tue, 06 Oct 2026 10:23:13 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xE2KH-00014V-N4
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 10:23:13 +0000
+	id 1xE2Lp-0001hR-G5; Tue, 06 Oct 2026 10:24:49 +0000
+Received: by outflank-mailman (input) for mailman id 1441346;
+ Tue, 06 Oct 2026 10:24:48 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xE2Lo-0001hJ-KJ
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 10:24:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xE2KG-00GD4T-JN
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 12:23:12 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xE2Lo-00Bgz2-0h
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 12:24:48 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ac4cc07-2eae-0a2a0a5409dd-0a2a4507b9c6-32
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:23:12 +0200
-Received: from [40.107.208.16]
- (helo=PH0PR06CU001.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ac4cc0e-b4ea-0a2a45070019-286bd0107d4a-3
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:23:12 +0200
-Received: from CH0PR03CA0427.namprd03.prod.outlook.com (2603:10b6:610:10e::30)
- by SA1PR12MB7037.namprd12.prod.outlook.com (2603:10b6:806:24c::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Tue, 6 Oct
- 2026 10:23:06 +0000
-Received: from BL02EPF00029927.namprd02.prod.outlook.com
- (2603:10b6:610:10e:cafe::5f) by CH0PR03CA0427.outlook.office365.com
- (2603:10b6:610:10e::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.20 via Frontend Transport; Tue, 6
- Oct 2026 10:23:05 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BL02EPF00029927.mail.protection.outlook.com (10.167.249.52) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.496.14 via Frontend Transport; Tue, 6 Oct 2026 10:23:05 +0000
-Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 6 Oct
- 2026 05:23:04 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb09.amd.com
- (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 6 Oct
- 2026 05:23:03 -0500
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Tue, 6 Oct 2026 05:23:02 -0500
+ (envelope-from <jbeulich@suse.com>)
+ id 6ac4cc60-bab6-0a2a0a5309dd-0a2a4504a8ac-36
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:24:47 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ac4cc6f-b57f-0a2a45040019-d1558035ccc3-3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:24:47 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-4a168355946so5425095e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 03:24:47 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a17c7b7f00sm13803035e9.13.2026.10.06.03.24.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 06 Oct 2026 03:24:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,133 +52,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=kHBoaaWfMBP1gqFg7pWv8yV8/piN0nzJBWhiLE+z1AceNVy8Oc3l5iZMy6AEiYXzBefEUB+yOcNt2UMBgDUKWQ8L7vumc8KeYbo9YClbPxeVHxK1j381vjKxKLcFkz4TVfUwEGNOg3UpU4GYA4Fv48tWeV8oTa4NYPSefGLb5gMgPa4Cz+FYOqb5Hg1qA4Em36JF9Ep2CgLc1VSOGIYMm7h8ity02s+ygHuISMF2DW4z2i4o//9+PJlS4AG0yUFMpvhPUNiZlBbrnBXxgqIZQYiTuJz6V6fZjwbacjaHqxiC9DzbxGrmDmPWMUPmfUSoaiyZEESiL5JmLSz/ynI5qA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=lfNd1lVOmWIcKJtfAvE5HZDVpRKAV40UT90Eetbqppk=;
- b=hM32WG3VeqSnklFoynkr3CPKlOmeZIrGh5qIh5lN8TsDla8NTCgJRiFfmpUEQCTnLetY9PNbRuMNhaIp7WCHpBycyyPQRCOn/RBIqyFW55HHiBOKhhXzJDaV6gBbs7I2ltkQkjoGfmyMVjQw+RnUd9DSDbcZQEJcfZNwvaUVFKjEIuZLNILJALPjjynmUyebt0nQgs48acElRb5WwwPU9+4VW9vN1tul2utZUmzFXRcCFl8m9dCXfr5K3VzZ1gR27gPOsQ9QK9NQFEy4GBO3+SiC62Vjdz9MZiYWHRixHXvoAtatoCvc1tFkKj/z3Gn9DMcZmBpXru3mUqyMVu6krw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=lfNd1lVOmWIcKJtfAvE5HZDVpRKAV40UT90Eetbqppk=;
- b=rK9voV+8sosNw2up0NGojkpsi5iAQgWf4hgUbAZn4OeTAyuFBflXw7PaNIkvOf4lo8MppYgT0yvnxX7VfU5fWE+PH3bTA7nnkALREqvexAlTJrv7fXjUBlUropKKVA8lt9HQ5W9Zshkmb68JpU+HE/tOc63AQy58WtO20D5up8U=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <2c5da778-2e5e-42ed-9e12-930043316b8d@amd.com>
-Date: Tue, 6 Oct 2026 12:22:58 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1791282287; x=1791887087; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=3whEvDDGudRFBdQmtdVS8fdNXFeYB7xx89+j7BgZ5Lk=;
+        b=Tw+ppuiycfn2E7gT+WLsgoB2D9tVBpqtKWk8ztjx+HWwPM1fj7k4D5DteER3AbqIfC
+         EiWp5DIv9GIMkVDzcHoqK8hqrkCGUkBuo2f7KpY/fGniyk57FJKhr6X9RyG0SxG+t7SW
+         5BcXZ8EeCEedJuT87HtmIrhnC6yb/n+3FyKGqISBbw3/UojOG1QGG1iFwnrB4ppBgf+a
+         Eo7A1WxE6EytsQEOaJignkwSz7aT7rEKAWW8bMnWeyeslU7ocW94s35ArMh2yenwH1eJ
+         RSfBYrBrCpVcUyw98z8vDNG86hJ5SaDajTCjbe7B3wlcpJgdBjagdAKxKqn1bnX7WZ+2
+         fCrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791282287; x=1791887087;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3whEvDDGudRFBdQmtdVS8fdNXFeYB7xx89+j7BgZ5Lk=;
+        b=R+8gEYCrWkgAUNSDabh1u3vo0O4Ck9fG2HilvCwg90PmVk5JJwL/ePPrfqA3kEqU8z
+         YFtbb2/xdGpYvMeSkfcqcAWbioALXKCVNqTbwgbgSycmqiHZT+wo0JkZcmHSCVwY2K8k
+         7S3lSOQjkSpPz+BKUCTo19tPG1tr+ZAaLAvVVh0ymQ8WmOvqQ8QIYFdnMfWWC7vJURPt
+         ezKhmvTxAqdLcgCb3NkYSSR8O7vIqDZGWrANt/JPj8+D0PtGYjIXPVulFDRpgI05So85
+         kFnaj6KDdWCB33j03TKaYBj/ldtpcFHmUGPSaqDoTsJrGrG7Tt2QiQPq5+k4gSSYaFOH
+         F2nA==
+X-Gm-Message-State: AFuF++n70nveKciTxgUtPdYiaOpaAxa1XL9j90iSlttq87OIavjLLX4/
+	Q6ZyOuS1pYmwaV8mNK5kMHiDLCk1rKiHRMiNHB5K7vvlulQVaeTsEr0DBtuV0REzHeMisrZlvlA
+	7acyZIA==
+X-Gm-Gg: AYBFou3HewtIuCzHZ2ayFamL+1QKwznoe20kDadUc+rPXE3tJ2GXpLatZ+aoyKjkGdA
+	LzbwAcZHTmpwSrKBzshjeWZFRgoZmDKZmRuOORBbKA0pFnRrAQzQDiltze4c9tJYppHtjRatthD
+	afVxXHZ2oOxkKSmsZ4sKviSApVy0bhqqP8ko/B8uFhsnFfsCzT1izJHBjF7I5R10TVQyGLx/OZV
+	WGS6k3Viq02SojYbJwzkw+xD9I7BarHHeja8A7IhuorcjgWRoLL9jWsr118vx59M+atNqeJzeON
+	+HiKeCMW7YDj8VviC7O6jtYAF5hjRkHBSsgaqDTRscXH3gH77djC7j5biBJNVdSEcxU+NGr7kB2
+	laRvRVhlQ2JlLZt4fNGqk4TCvCXYx5joM+Tp23Ax2m5cM6x82inhIzBJvj4ukDTreH3hsjfu+mC
+	4QLMjerGxdpmGyIPctQDbam/mM+aw6PbPNBq4jc6pjEzDAGtEh/9X4KinYIbXqBxk+Bscvpn0RJ
+	N7ojJORzRJgM5ylaKE9N4sPgxE3HilccdeO1Cb9rtwdRqXGTvgVwM36hT8ldhvLa6OvcIgn5w==
+X-Received: by 2002:a05:600c:c491:b0:49e:69ff:c6b1 with SMTP id 5b1f17b1804b1-4a17b562d60mr16865665e9.31.1791282287291;
+        Tue, 06 Oct 2026 03:24:47 -0700 (PDT)
+Message-ID: <29e67a54-119d-4991-a301-5f0351b125d7@suse.com>
+Date: Tue, 6 Oct 2026 12:24:46 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen/arm: gicv3: initialize eSPI unconditionally
-To: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Julien Grall <jgrall@amazon.com>
-References: <13181424f9be3f5e31977fbd505209cd0508571b.1790102501.git.leonid_komarianskyi@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-In-Reply-To: <13181424f9be3f5e31977fbd505209cd0508571b.1790102501.git.leonid_komarianskyi@epam.com>
-Content-Type: text/plain; charset="UTF-8"
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH v2] x86: add noreturn in a few more places
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL02EPF00029927:EE_|SA1PR12MB7037:EE_
-X-MS-Office365-Filtering-Correlation-Id: 37ac1213-b73c-4070-e359-08df2393cf40
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|82310400026|376014|23010399003|36860700016|1800799024|6133799003|22082099003|18002099003|10067099003|56012099006|11063799006|5023799004;
-X-Microsoft-Antispam-Message-Info:
-	JPDIWpFaTVL72sS/MC/BXaZX9lmaos1Wuj7SzDcqpz9ZjVRrS6ykm1ubn3idSJxL+vIPOmuGU87N2xTJoUGlnNq4SZp9Y6DvOMHvRPMMKSPMAPONSANuUx6fo0IQ7WxyUlfmMihOy/DQbNOMkRP8Ye/QTZB6SpQip8xKMX4Eu0KFbG7EhRBRw99wygHDhG5t3qfORxWKQye+qDiuATCjtnh3Ww1IJTfctnONz2eiKRWTOBux3DhI7LiBYmXtVFW9ZCfTb0qqr9SwKPvzLWrMDRZie/xVBc43aGgKHgAcyl8HSEocwBAiPYkdwoysiH80hfeWAk8OF3QgxIYQQqnj7bqbQKizTnXfI33X8eMrmJSZOeu1e+NmZ7/Cc/JMB3BGduD/R0rzr5u02dV0rfdBqeVcnIO8hR6ZXmoKXyJPC4H1d7RszxJIyaWJIHZZcfYjyi03NDSU2ifexz0TCjpD1Y5efXRP/veGjpukY9P6+eMP+4/UUsZGwottu7EF01bDH2cfrWEV/yyIPR5uyJzhAb9NzjhLU6ERr8l/SWmk62O5xDGvALp4/IYwU8BsWLhXbpelmGqAA2jI1LVE7SEBfvu2vTJtwoG/USV0XMrY7e6lt5GFxFp0zABXZHGMK/cKVV2lhomwLOdUiw0RI2OsoQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(23010399003)(36860700016)(1800799024)(6133799003)(22082099003)(18002099003)(10067099003)(56012099006)(11063799006)(5023799004);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	1YQ6i7uP27BcRhh4XKqp8/96kENj0i4NThNwsJZgNyDsOPZQWNNQOOm4hiLyeTjOZsYCSYuLfRvpe6JaLpJPq1l39Fo3TSqZrUqDmQsn0LftsDxKaZr8LqxSq2icEADFlolo3qGoNJTF8gZTOAsOlqB9r8r/MynL/wg0RTFQ7rCOXZrM5UktaVGMhQ32EzKIQp6T5Zc08RXn49SYhpBe/GNSVOzp3xWrzGFYOICWK4CQyZIkICBN26VmvelsMdY4ap25RbBddW6PJ5h9VQV7dPlje5qua0s7cqctpitorJxHyiEH7J+9bAu8LzrpN8mOgAjiHgJz2GltiFXQkkupYSf/e9QJ9MkvDa7aX5CM6V6oafXpPNR2xzT/y8mQjEsdn6r2KIXthLj7S3YMCFTZfawPaWHGRME3MXWZ5Av7IoESPTnDX6dJDATGOrO25uC2
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 10:23:05.3719
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 37ac1213-b73c-4070-e359-08df2393cf40
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BL02EPF00029927.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB7037
-X-purgate-ID: tlsNG-ef75cf/1791282192-360C5AE4-D52F64C1/0/0
-X-purgate-type: clean
-X-purgate-size: 2372
+X-purgate-ID: tlsNG-ebf023/1791282287-52ECEB50-99D6B3A7/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 3545
 
+start_secondary(), do_double_fault(), play_dead(), and tboot_s3_error()
+never return, so would better be annotated anyway.
 
+context_switch() and continue_running() are odd: We can't
+(unconditionally) add noreturn to their declarations, as Arm's variants do
+return. Put the attribute on x86'es definitions instead (the use of
+unreachable() in reset_stack_and_call_ind() allows the compiler to figure
+that out itself, but Eclair wants the annotation in addition).
 
-On 22-Sep-26 20:58, Leonid Komarianskyi wrote:
-> Since the firmware may initialize eSPIs before Xen, and without
-> CONFIG_GICV3_ESPI enabled, Xen would not reinitialize them properly
-> during boot. In such cases, once the GIC is re-enabled in Xen,
-> interrupts may be received that cannot be handled.
-> 
-> To ensure proper operation on hardware with eSPI feature, even when the eSPI
-> config is disabled, gicv3_dist_espi_common_init() should be invoked
-> regardless of whether CONFIG_GICV3_ESPI is enabled or not. This will not
-> affect hardware without eSPI support, as the function checks if the
-> hardware supports eSPIs by reading the GICD_TYPER.ESPI field (using
-> GICD_TYPER_ESPIS_NUM macro), which indicates whether the extended SPI
-> range is supported. If the hardware does not support eSPI, the function
-> will not perform any actions.
-> 
-> There are no functional changes for setups where CONFIG_GICV3_ESPI=y.
-> 
-> Suggested-by: Julien Grall <jgrall@amazon.com>
-> Signed-off-by: Leonid Komarianskyi <leonid_komarianskyi@epam.com>
-> Acked-by: Julien Grall <jgrall@amazon.com>
-> ---
-> Changes in v2:
-> - rebased on the current staging
-> - placed Suggested-by tag first to keep tags in chronological order
-> - added Acked-by from Julien Grall
-> 
-> This is a follow-up patch related to the discussion:
-> https://lore.kernel.org/xen-devel/820704d0-4047-4f02-a058-01daba2765f1@xen.org/
-> 
-> Sending v2 with the requested changes, as I only now noticed
-> that this patch has not been merged yet.
-> ---
->  xen/arch/arm/gic-v3.c                  | 32 ++++++++++++++------------
->  xen/arch/arm/include/asm/gic_v3_defs.h |  2 --
->  2 files changed, 17 insertions(+), 17 deletions(-)
-> 
-> diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
-> index acdac22953..463769d77b 100644
-> --- a/xen/arch/arm/gic-v3.c
-> +++ b/xen/arch/arm/gic-v3.c
-> @@ -703,17 +703,32 @@ unsigned int gic_number_espis(void)
->      return gic_hw_ops->info->nr_espi;
->  }
->  
-> +static void __init gicv3_dist_espi_init_aff(uint64_t affinity)
-> +{
-> +    unsigned int i;
-> +
-> +    for ( i = 0; i < gicv3_info.nr_espi; i++ )
-> +        writeq_relaxed_non_atomic(affinity, GICD + GICD_IROUTERnE + i * 8);
-> +}
-> +#else
-> +
-NIT: no blank line here. I'll remove on commit.
+Note that adding "noreturn" to do_double_fault() causes new violations of
+the same rule (2.1) at the two call sites in entry_from_{pv,xen}().
 
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+---
+https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2916849077
 
-~Michal
+entry_from_pv() wants the annotation only when PV=n, yet once added gcc
+then warns about "return" being used in a "noreturn" function. Is there
+any other approach to address this besides adding #ifdef inside the
+function (i.e. replacing the !IS_ENABLED(CONFIG_PV) check that's there)?
+Perhaps need to deviate it?
+---
+v2: Drop entry_from_{pv,xen}() changes, for being controversial.
 
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -2163,7 +2163,7 @@ static void __context_switch(void)
+     per_cpu(curr_vcpu, cpu) = n;
+ }
+ 
+-void context_switch(struct vcpu *prev, struct vcpu *next)
++void noreturn context_switch(struct vcpu *prev, struct vcpu *next)
+ {
+     unsigned int cpu = smp_processor_id();
+     struct cpu_info *info = get_cpu_info();
+@@ -2240,7 +2240,7 @@ void context_switch(struct vcpu *prev, s
+     reset_stack_and_call_ind(nextd->arch.ctxt_switch->tail);
+ }
+ 
+-void continue_running(struct vcpu *same)
++void noreturn continue_running(struct vcpu *same)
+ {
+     reset_stack_and_call_ind(same->domain->arch.ctxt_switch->tail);
+ }
+--- a/xen/arch/x86/include/asm/cpuidle.h
++++ b/xen/arch/x86/include/asm/cpuidle.h
+@@ -26,7 +26,7 @@ static inline int mwait_idle_init(struct
+ int cpuidle_init_cpu(unsigned int cpu);
+ void cf_check default_dead_idle(void);
+ void cf_check acpi_dead_idle(void);
+-void play_dead(void);
++void noreturn play_dead(void);
+ void trace_exit_reason(u32 *irq_traced);
+ void update_idle_stats(struct acpi_processor_power *power,
+                        struct acpi_processor_cx *cx,
+--- a/xen/arch/x86/include/asm/tboot.h
++++ b/xen/arch/x86/include/asm/tboot.h
+@@ -126,7 +126,7 @@ int tboot_in_measured_env(void);
+ int tboot_protect_mem_regions(void);
+ int cf_check tboot_parse_dmar_table(acpi_table_handler dmar_handler);
+ int tboot_s3_resume(void);
+-void tboot_s3_error(int error);
++void noreturn tboot_s3_error(int error);
+ int tboot_wake_ap(int apicid, unsigned long sipi_vec);
+ #else
+ static inline void tboot_probe(void) {}
+--- a/xen/arch/x86/smpboot.c
++++ b/xen/arch/x86/smpboot.c
+@@ -326,7 +326,7 @@ static void set_cpu_sibling_map(unsigned
+     }
+ }
+ 
+-void asmlinkage start_secondary(void)
++void asmlinkage noreturn start_secondary(void)
+ {
+     struct cpu_info *info = get_cpu_info();
+     unsigned int cpu = smp_processor_id();
+--- a/xen/arch/x86/traps.c
++++ b/xen/arch/x86/traps.c
+@@ -1080,7 +1080,7 @@ const char *vector_name(unsigned int vec
+     return (vec < ARRAY_SIZE(names) && names[vec][0]) ? names[vec] : "???";
+ }
+ 
+-void asmlinkage do_double_fault(struct cpu_user_regs *regs)
++void asmlinkage noreturn do_double_fault(struct cpu_user_regs *regs)
+ {
+     unsigned int cpu;
+     struct extra_state state;
 
