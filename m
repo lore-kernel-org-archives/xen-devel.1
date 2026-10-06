@@ -4,32 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C7F35CA5FED
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 10:37:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1441368.1658950 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91DD5CA5FFC
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 10:45:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1441378.1658959 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE2Xk-0004QH-Pi; Tue, 06 Oct 2026 10:37:08 +0000
+	id 1xE2fv-0006Vg-HZ; Tue, 06 Oct 2026 10:45:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1441368.1658950; Tue, 06 Oct 2026 10:37:08 +0000
+Received: by outflank-mailman (output) from mailman id 1441378.1658959; Tue, 06 Oct 2026 10:45:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE2Xk-0004QA-Mo; Tue, 06 Oct 2026 10:37:08 +0000
-Received: by outflank-mailman (input) for mailman id 1441368;
- Tue, 06 Oct 2026 10:37:07 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1xE2fv-0006VZ-Ex; Tue, 06 Oct 2026 10:45:35 +0000
+Received: by outflank-mailman (input) for mailman id 1441378;
+ Tue, 06 Oct 2026 10:45:33 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xE2Xj-0004Q1-1L
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 10:37:07 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1xE2Xi-00Hb1P-1D;
- Tue, 06 Oct 2026 10:37:06 +0000
-Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1xE2Xi-00AYEe-0F;
- Tue, 06 Oct 2026 10:37:06 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1xE2ft-0006VD-MK
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 10:45:33 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xE2fs-00E4O2-Kv
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 12:45:32 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ac4d141-8faa-0a2a0a5109dd-0a2a4509d548-32
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:45:32 +0200
+Received: from [52.101.53.68]
+ (helo=BL0PR03CU003.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ac4d14b-be1a-0a2a45090019-34653544ffbb-3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:45:32 +0200
+Received: from BN0PR02CA0013.namprd02.prod.outlook.com (2603:10b6:408:e4::18)
+ by SJ2PR12MB7961.namprd12.prod.outlook.com (2603:10b6:a03:4c0::20)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Tue, 6 Oct
+ 2026 10:45:27 +0000
+Received: from BN2PEPF00004FBB.namprd04.prod.outlook.com
+ (2603:10b6:408:e4:cafe::7c) by BN0PR02CA0013.outlook.office365.com
+ (2603:10b6:408:e4::18) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.20 via Frontend Transport; Tue, 6
+ Oct 2026 10:45:27 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN2PEPF00004FBB.mail.protection.outlook.com (10.167.243.181) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.496.14 via Frontend Transport; Tue, 6 Oct 2026 10:45:27 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 6 Oct
+ 2026 05:45:25 -0500
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
+ Transport; Tue, 6 Oct 2026 05:45:24 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,180 +67,87 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	Message-ID:Date:Subject:Cc:To:From;
-	bh=Fddexj0qF+CV/q7hZq0askrBKEoYQXsJn4bqOqq+0zs=; b=1qdx7cANRdyNj3MwZ7VDqZu/1B
-	INygTAjR4BGhgryHY+YLwJRPEH4Jrju5dWoOX+dsCzsRPsck5/7eN/rbiGweT/6KbHgyXj3Po9R0X
-	2FtiiNH9do7gFzpWNadxL/Og37HNo1Vaz5RqHMuyHkDhOy8M4FeWz7S2w5ejPuv3uGuY=;
-From: George Dunlap <gwd@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH] x86/pv: drop the old GDT frames only after their translations are flushed
-Date: Tue,  6 Oct 2026 11:37:01 +0100
-Message-ID: <20261006103702.55276-1-gwd@xenproject.org>
-X-Mailer: git-send-email 2.55.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ksItfQmw72TGK3qGgY2kV95i5ykgyWMJRC8YysFotZfKSOYSVdWKzb0jl2bzhxhVHuJ/34lKEW6vZxn4QJUPSiW5zH+gFiRHWSXu9Yt6JFlHkEpV3QTgiBdqIG6XYhBObNgZFtC1CaxCzP7OBRliIw1GsTUCZoCS/5nWqY6G8+eh7fXqcsc4znDEEfm+xWfb1IsQUbrF/d5/3Jd7t44SuP58UITouyPDpgVrlaKl3LtghUyTG2sbHqwDNiVcg5C4ct9faH4qfbSZQYauTifiv4kcG5rgtqrowzpM9LveY/b8UPHuRmB7dVldkCOmqUtiOKvp+moJ8atIyNNhEL19aw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=O+Gue58WhydqS9oPe9T3U2QhGrFn9zlVd9joxzISyC4=;
+ b=ii74mQ4m/9JcoFemckFpS8ZvGTk0e/ljoB0EXWz4n5nGhmcCk4ZMyBsTzEzN6V5vWl9QcvOoS9q1YlIKUi9+vEMvCBFDHm4cf82+fwswyjsRmiuhzjYvVehqm71gI9QUdOGMFEUwLV+3X/wOFHeOuiC92kSPqI8u9mQBOD0RaJZLmCtvnh0VrKl0+CG+TxqwSyzRaFX7cXxUBe8NRip+sgn9f8uzPH4baTm9BKVAyAw9iJC457t3gZVkES6uYr5SUB6wMnw8J3+G3uQY4Y53XdHNBP5a/tPquMPps+0qTiaNcxsBOkxhxekRObBbYd2ZrVgLyt9EH3tM6nMMKJg5Yw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=O+Gue58WhydqS9oPe9T3U2QhGrFn9zlVd9joxzISyC4=;
+ b=JlRiJOJ3+/CncQ0ApMiCwbBbYbcWfKLFH8LdPoXjM5wLOQhLru703WFigw/2TRyaXja6nnkuvtyL/FFwHfd9TTCYSW7h5LrSqsRUWU2TSp06/sNVqziIfmcoA8qGeSO3keLNEpNDsVcQPS0c28uaiMaWeO/DWiv3DcGssHr+Iqs=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <f9c2cb00-e334-4dab-a173-4cbffff18d94@amd.com>
+Date: Tue, 6 Oct 2026 12:45:20 +0200
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] arm/nospec: Make nospec helpers always_inline
+To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
+	<xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>
+References: <20261006103142.139422-1-alejandro.garciavallejo@amd.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <20261006103142.139422-1-alejandro.garciavallejo@amd.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF00004FBB:EE_|SJ2PR12MB7961:EE_
+X-MS-Office365-Filtering-Correlation-Id: bc2cd641-3510-42ea-8ce2-08df2396eef3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|376014|82310400026|23010399003|1800799024|11063799006|56012099006|10067099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	slGKS2YXYYoZ3foXviefUdUlrD6Gu/a+ATDOS82P8L5d2Zefe4NmvAJjhOea7ztPGrwIMvGUb1Sat+IMyXgF+367yZk+uk+c9QUpq6nPduqVyR/WcnxYAq8PmYWVqH1fmXNRHf/TnVGQqhKDNHeiXhBmXmp+eUAOVRovqt6qPnZowmiZymCPdHVs6ScJ1CyfZWatc00SYFr13sizsYGVYkeSQ0u/V2d9vakvEFpHD4W/2XLLy9Rg+SnzQ65uueEqXNDOdLmn7JTbBLfTaIGxmGcyWiOeDx20Un1Ad4Wdl0H+58tqcDXK8SnMrNjxrSGWaEt5eBfuurxyfwBqlV2saKN6yX5YTC17ivn5DC65CM3L6IYY9lqCYbEmNZEa1iycIpDpEsZJOtEPfEDMy/jNpXhEhSTFuvkoCB73JaIwBg7yXC0VSKw1pmSPN6LAEqjvDCyv7PAretphRIcyK4hr2651tcE3IkzVdCVgpoYl5HFUHue1gHZahsCPPgLpyRz5Sp/TN2+rkCThEhR9OTgXSXzgE+BIpi1IGIv197k9bpcf/nz9zEQpmWH6NAu8okX8JEluiWnAp3QEjR9zX0I8J+qHTlezo00c6CA5QBAJuOr62BOC7QZAHWXDbp5ZHAVh/jvDWISjNoqjH031jxFN1Ioci4sQJsze8XXVmCsUW/nNN6adGi5+2NRH25I8DnsfiQIzu3pUaUtuz5WQtLPcSw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(376014)(82310400026)(23010399003)(1800799024)(11063799006)(56012099006)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	9Po0CTlQ7ORqPnfGaGsNjs7yACZFmJ/aS3SngatqnNaLFxJnqcTWD5QeubzoVpF6ARaBWFyMWZlAXgq/yTb1PVrN+Lc97SSGrcXhkzP/gkw3OUMXQo+S2U0vdGUhX6qLEdxRaJPx2JP4EJwxRyt/S4IGZaEEMVDo3OI4HkYOLoHhEV2wnraDYvWDZ7A3KFpc3A3Ly7wuJBrsSo7KP91ARg+ix8Rpbe0OHvb+vlSEkcw/AnApd0MLhJQ86GHvEFFW2m6/CcoGL1e2PKD7r2xvzAi2DGKbae2SMn+B6atElxWxnaGClXySppbpEXJR/B0z0pa8s1qpPiB//gZyERDTzFGVHXWjsN5dPMVzHL1TnrSwMFq5AJzdHoxqGFIiihFlpsWPVTv8KUjUWSYTtkxJR0RRRVeD+iHovdcj3WL6ko0wRzMNW5g/EhWa7vG78Xvj
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 10:45:27.0438
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bc2cd641-3510-42ea-8ce2-08df2396eef3
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN2PEPF00004FBB.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR12MB7961
+X-purgate-ID: tlsNG-bad1c0/1791283532-FC817034-A40E5320/0/0
+X-purgate-type: clean
+X-purgate-size: 497
 
-pv_set_gdt() tears down the old GDT before installing the new one, and
-the teardown, pv_destroy_gdt(), puts each old frame's reference before
-it rewrites the slot's entry; the flush of the slot's translation is
-left to the hypercall wrappers, after pv_set_gdt() returns.  If a put
-drops the last reference, the frame can be freed and reused while this
-pCPU's TLB still translates the slot to it.
 
-This is safe today only by inspection.  The only consumers of a vCPU's
-GDT slots are descriptor fetches by that vCPU and Xen's trap-handling
-paths on its behalf, none of which run between the put and the flush;
-and every other caller of pv_destroy_gdt() acts on a vCPU that no pCPU
-has loaded, which holds no translations at all.  pv_destroy_ldt() is
-in the same position: it unmaps and puts, and returns whether its
-callers need to flush, so there too the put precedes the flush, and
-the arrangement holds only because nothing fetches through the slots
-in between.
 
-Restructure pv_set_gdt() so that the flush sits between the two: take
-the references on the new frames, install them (and the zero page over
-the unused slots) over the old mappings, flush if the vCPU is the
-current one, and only then put the old frames.  The flush moves out of
-do_set_gdt() and compat_set_gdt() to sit next to what it protects.
-pv_destroy_gdt() is then only reached for vCPUs that are not loaded
-anywhere, so it asserts that directly (!vcpu_cpu_dirty()), which also
-covers the lazy switched-out state that a plain v != current test
-would let through.  Like pv_destroy_ldt(), it does no flush of its own
-and is safe because the mappings it tears down are not live; it
-unmaps before it puts all the same, so that a flush has its natural
-place should one ever become necessary there.
+On 06-Oct-26 12:31, Alejandro Vallejo wrote:
+> While today they don't implement fencing in a way that would block
+> speculation, once/if they do they'll absolutely need to be inlined, even
+> if -fno-inline or -fno-early-inlining are passed.
+> 
+> Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
-No change to what guests observe: a slot always holds the old frame,
-the new frame, or the zero page; there is never an unmapped slot.
+but this should be done for Arm, RISCV and PPC at once in which case you can
+keep my tag for v2 # for Arm.
 
-Assisted-by: Claude Code:claude-fable-5
-Signed-off-by: George Dunlap <gwd@xenproject.org>
----
-This is a candidate for backport.
-
-This was originally requested to be packaged as a backport-able fix
-during review of v2 of my version of the ASI series; I've taken a
-slightly different direction, so posting this separately.
----
- xen/arch/x86/pv/descriptor-tables.c | 57 +++++++++++++++++++++--------
- 1 file changed, 41 insertions(+), 16 deletions(-)
-
-diff --git a/xen/arch/x86/pv/descriptor-tables.c b/xen/arch/x86/pv/descriptor-tables.c
-index 8a32b9ae5c..7a97ae753c 100644
---- a/xen/arch/x86/pv/descriptor-tables.c
-+++ b/xen/arch/x86/pv/descriptor-tables.c
-@@ -54,19 +54,27 @@ void pv_destroy_gdt(struct vcpu *v)
-     l1_pgentry_t zero_l1e = l1e_from_mfn(zero_mfn, __PAGE_HYPERVISOR_RO);
-     unsigned int i;
- 
--    ASSERT(v == current || !vcpu_cpu_dirty(v));
-+    /*
-+     * Only reached for a vCPU that no pCPU has loaded (paused and synced,
-+     * or never run), so no TLB holds a translation of its GDT slots and
-+     * no flush is needed between unmapping and putting the frames.  Keep
-+     * that order all the same, so a flush has its place should one ever
-+     * become necessary here.  Replacing a running vCPU's own GDT is
-+     * pv_set_gdt()'s job.
-+     */
-+    ASSERT(!vcpu_cpu_dirty(v));
- 
-     v->arch.pv.gdt_ents = 0;
-     for ( i = 0; i < FIRST_RESERVED_GDT_PAGE; i++ )
-     {
--        mfn_t mfn = l1e_get_mfn(pl1e[i]);
--
--        if ( (l1e_get_flags(pl1e[i]) & _PAGE_PRESENT) &&
--             !mfn_eq(mfn, zero_mfn) )
--            put_page_and_type(mfn_to_page(mfn));
-+        l1_pgentry_t l1e = pl1e[i];
- 
-         l1e_write(&pl1e[i], zero_l1e);
-         v->arch.pv.gdt_frames[i] = 0;
-+
-+        if ( (l1e_get_flags(l1e) & _PAGE_PRESENT) &&
-+             !mfn_eq(l1e_get_mfn(l1e), zero_mfn) )
-+            put_page_and_type(l1e_get_page(l1e));
-     }
- }
- 
-@@ -75,6 +83,9 @@ int pv_set_gdt(struct vcpu *v, const unsigned long frames[],
- {
-     struct domain *d = v->domain;
-     l1_pgentry_t *pl1e;
-+    l1_pgentry_t zero_l1e = l1e_from_mfn(_mfn(virt_to_mfn(zero_page)),
-+                                         __PAGE_HYPERVISOR_RO);
-+    unsigned long old_frames[ARRAY_SIZE(v->arch.pv.gdt_frames)];
-     unsigned int i, nr_frames = DIV_ROUND_UP(entries, 512);
- 
-     ASSERT(v == current || !vcpu_cpu_dirty(v));
-@@ -92,18 +103,34 @@ int pv_set_gdt(struct vcpu *v, const unsigned long frames[],
-             goto fail;
-     }
- 
--    /* Tear down the old GDT. */
--    pv_destroy_gdt(v);
-+    /*
-+     * Install the new GDT over the old one, flush, and only then drop the
-+     * old frames: a translation of an old frame must be gone from this
-+     * pCPU's TLB before the reference keeping the frame allocated is put.
-+     * A vCPU that is not current is not loaded on any pCPU (see the
-+     * assertion above), so nothing holds a translation and no flush is
-+     * needed.
-+     */
-+    memcpy(old_frames, v->arch.pv.gdt_frames, sizeof(old_frames));
- 
--    /* Install the new GDT. */
-     v->arch.pv.gdt_ents = entries;
-     pl1e = pv_gdt_ptes(v);
--    for ( i = 0; i < nr_frames; i++ )
-+    for ( i = 0; i < ARRAY_SIZE(v->arch.pv.gdt_frames); i++ )
-     {
--        v->arch.pv.gdt_frames[i] = frames[i];
--        l1e_write(&pl1e[i], l1e_from_pfn(frames[i], __PAGE_HYPERVISOR_RW));
-+        v->arch.pv.gdt_frames[i] = i < nr_frames ? frames[i] : 0;
-+        l1e_write(&pl1e[i],
-+                  i < nr_frames ? l1e_from_pfn(frames[i], __PAGE_HYPERVISOR_RW)
-+                                : zero_l1e);
-     }
- 
-+    if ( v == current )
-+        flush_tlb_local();
-+
-+    /* MFN 0 can never pass get_page_and_type(), so 0 marks unused slots. */
-+    for ( i = 0; i < ARRAY_SIZE(old_frames); i++ )
-+        if ( old_frames[i] )
-+            put_page_and_type(mfn_to_page(_mfn(old_frames[i])));
-+
-     return 0;
- 
-  fail:
-@@ -130,8 +157,7 @@ long do_set_gdt(
- 
-     domain_lock(curr->domain);
- 
--    if ( (ret = pv_set_gdt(curr, frames, entries)) == 0 )
--        flush_tlb_local();
-+    ret = pv_set_gdt(curr, frames, entries);
- 
-     domain_unlock(curr->domain);
- 
-@@ -168,8 +194,7 @@ int compat_set_gdt(
- 
-     domain_lock(curr->domain);
- 
--    if ( (ret = pv_set_gdt(curr, frames, entries)) == 0 )
--        flush_tlb_local();
-+    ret = pv_set_gdt(curr, frames, entries);
- 
-     domain_unlock(curr->domain);
- 
--- 
-2.55.0
+~Michal
 
 
