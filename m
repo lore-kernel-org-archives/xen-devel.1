@@ -4,43 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1E8AFCA5FED
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 14:26:13 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1441549.1659152 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C0C02CA5FFC
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 14:44:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1441563.1659162 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE67F-00075z-Gn; Tue, 06 Oct 2026 14:26:01 +0000
+	id 1xE6Oc-0001zJ-0H; Tue, 06 Oct 2026 14:43:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1441549.1659152; Tue, 06 Oct 2026 14:26:01 +0000
+Received: by outflank-mailman (output) from mailman id 1441563.1659162; Tue, 06 Oct 2026 14:43:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE67F-00075s-E0; Tue, 06 Oct 2026 14:26:01 +0000
-Received: by outflank-mailman (input) for mailman id 1441549;
- Tue, 06 Oct 2026 14:26:00 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xE67E-00075m-73
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 14:26:00 +0000
+	id 1xE6Ob-0001zC-T0; Tue, 06 Oct 2026 14:43:57 +0000
+Received: by outflank-mailman (input) for mailman id 1441563;
+ Tue, 06 Oct 2026 14:43:57 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <ross.lagerwall@citrix.com>) id 1xE6Ob-0001z6-9t
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 14:43:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xE67D-00CQSk-K7
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 16:25:59 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xE6Oa-009gXe-JZ
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 16:43:56 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ac504ed-bab6-0a2a0a5309dd-0a2a45018224-28
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 16:25:59 +0200
-Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ac504f7-5984-0a2a45010019-d155dd2be431-3
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 16:25:59 +0200
-Received: by mail-wr1-f43.google.com with SMTP id
- ffacd0b85a97d-48b0ef9c76eso2645874f8f.0
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 07:25:59 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48c6228d948sm10016500f8f.23.2026.10.06.07.25.56
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Oct 2026 07:25:57 -0700 (PDT)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6ac5092c-bab6-0a2a0a5309dd-0a2a4505e8ec-0
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 16:43:56 +0200
+Received: from [52.101.53.27]
+ (helo=BL0PR03CU003.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <ross.lagerwall@citrix.com>)
+ id 6ac5092b-4cb1-0a2a45050019-3465351bd633-3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 16:43:56 +0200
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com (2603:10b6:610:2ba::5)
+ by CH3PR03MB7459.namprd03.prod.outlook.com (2603:10b6:610:1a0::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.15; Tue, 6 Oct
+ 2026 14:43:50 +0000
+Received: from CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096]) by CH8PR03MB8274.namprd03.prod.outlook.com
+ ([fe80::ebe2:32c1:d2be:a096%4]) with mapi id 15.21.0496.010; Tue, 6 Oct 2026
+ 14:43:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,422 +55,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791296759; x=1791901559; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=w0XrXL3ix2wzt12ozCR3hhZOlExIpLHth1wjUxti/TA=;
-        b=Z2B2r3WfwqCr1I2S5LgvSuEZJl8dkFJJr6fY62bfedRO820u/T9jmL6NDuXhJglriL
-         MKYYfjk4utKrj18gfFbIADLF+i1WUEpahZ3KSw430qbZmchzTO8BolFxp6ghk6SW4S0X
-         pELp7sBEgoi+MutgzST6tjginbO0o/Smx3c5TE0EcRhMGUirXFiIJupcz6WmphcCmcTP
-         mp+WXS0KZRyoT2zOAr4v253xVhT5+Cb/juW4s6GkZQteV4ewTfGIzV8kq559kny4MSXD
-         gfdSbRIZq8HYDsKoKP4tDGyq0AeNPA1bkizjAf/c+AV9IC7/XiVZ7D1tBTQaQvMPfrpN
-         vLPQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791296759; x=1791901559;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=w0XrXL3ix2wzt12ozCR3hhZOlExIpLHth1wjUxti/TA=;
-        b=fMolFVyczsyNYXWGzjoQVsf5zXeXS/AAdACV2TWMUlEUdkHxO49jL6AiCTwgmblP9Y
-         c4tVO+FBIoBgBDFUTOj0eBM4JgY7opEd8RfLlx0XGKp2Xje94qhoagMdX7QaXVxc2Nu1
-         +d7s875NNhF1kob1y0vnpsAvLN5IKxaGioqW5w1HjZ7QFCzqHxmz4EBDGEEFNHfWxBSH
-         SeJ6tjxYrkswH+OCNq9ZKqsqf87FwLPIn/hVEXTARH17svEXeoGUQOyJqYv/jBOWP6Q5
-         zZn+44fWVJlnAv+gjvN3U2uT+3pvLXeJiGV59HU5pJyJg/wRejXyhZMQDqsOdGZaw6NM
-         oqWw==
-X-Gm-Message-State: AFq9FYKBLAAyLH/pX6YOMOGk0an56kcjy3lUCOh3p6oWxcJxWTXdBBwN
-	lGfFGAxMMRTKGOaHvi6VqE1IKDs6g/Q4bDX37u0hlqe7jxPNs14gghBjjCLokw==
-X-Gm-Gg: AYBFou0URIP0IcmGaCARAAJGICAWHiHR4zmgfkUKCXd7cXIhB3jEuJ399rUOQSsNny6
-	C08hmpS2kww39dIAN86uLW4++xlc9UqXg00Keutw5nH3RfWemEUo2FblgC9PxkcmQBaa1pCUK4v
-	VUPb2++5hLXW1B3gsDE1dQ3Ze6TYZ57g+HO0wB4yWOZsLMutTqBd2njCZEye/NcQeBjWlAMfsuf
-	IjFHd9QIgV6ewonYhLEtMLEnoSDAe9kDH1lU5p63WwqM0R34uaDr2fZ299L5kF7xgUnjh05Y7vQ
-	5YCXsefDlVY3UiFOe9PiUIHW2uI0PgGGWzm+rNS1gW7yBOIWPjND0sBw3tjmt1XhWJxd5t8FiGe
-	kdqWId1aJFNle2dfyUKTlH5yf7A2eCx2Tba9+B7nPbfMfegfmrDNuaTbN70pZ6GxttYjfG/bs3l
-	P3rokKSr6ujPRyHJ1x8amfofOH0Iyo3ZWnyaC9+v1qnE/8Eeq/I/RpNv3CSxneY2GFP5lgVy+yc
-	v3O39EOYEplqiT/KeonXRD7fMPafHLYh+ZywdzgRbb5hSNC0w==
-X-Received: by 2002:a05:6000:41d7:b0:488:89e4:c3af with SMTP id ffacd0b85a97d-48c480089c5mr18389145f8f.45.1791296758258;
-        Tue, 06 Oct 2026 07:25:58 -0700 (PDT)
-Message-ID: <c77101fe-2505-4cdb-8520-52f92a1c668d@gmail.com>
-Date: Tue, 6 Oct 2026 16:25:55 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=RSZG6PIOrWZ6sqwU6NOv8mVzS8R/kN/9FPpUj374XZUh3g6e5qCABFNXaLSDAiY6Bcy1r5DVfKBy2H6sxCpapDv0kSyv8nI5lA82W0mi1AaQdo/Vvrzmq6H1aeTi5avk7AWmRpG25Ar7z6BOYXLHU0KHAb+SKWcYEezR6gUit/gVxG0GFyIKmVooDuRX56M3W9eG8DDyIzKPB23E68Agr+ygFj3cRmdqpktpvp2fjld65SadIPI0dyEqoHcKmE+djf2xjhmZIMt0tkXrJQzggduKYFA8fz5nw67u/zK0bEELX6pgOJbrgk5T8WjanSGr1NzMfdg//wY0j7Gj7B0gIw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=lhQaN5T1hU1rRx42cQYMLNsDzKy6RS7+ImA5ST0O1uA=;
+ b=aKuV98wh4TuBGAktz9vBSRkpPCDMUxtMVIKqefc8C13NL/LHS8fqHAYSr9B/i1nzoo1tzCNcwqip44w9U4aL/QOBEuEDOjU43r21AtOFs6oOcnuKYcdrXYC29zDoXXjJ2VNmxX1GWiboXHuVcUECMXJ0Lt7T+Eeoexo5/e6Ap7+dyx3GxOeEIirur6EaFgfsrvAvEhjzFrTFkNSsxWi4VdtBSyhnJuFEDYwvqw7DC2w/y/DrJwhcGTGFQxXwN+u+5ekKZZRALNgZBdrbQa4Qw6yQbrH5Qw+bMZNzMtEFT0pJCCzAWH0WMN45mxgfmCYa5ugXdQRwhDXTz1Xcv0i1Vg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=lhQaN5T1hU1rRx42cQYMLNsDzKy6RS7+ImA5ST0O1uA=;
+ b=mwcbv/1uNSrsKccut0rXlY1w/NlNWw5x+/ZZjhrkvjuh1LgZhQ5jm7x92fbc/MNcls6PPsto9kSJ0gy4r4aXQU5LcO8Dh8S4HRnvUvyU1EIzNMwu7d1CQpklBPkuO+Bog/ERqhnZwRxcXdvoE6h68FrJFw2olqtC9SGvDgujTAg=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <cf503bba-9f46-4cf6-9c42-710d0ffe4120@citrix.com>
+Date: Tue, 6 Oct 2026 15:43:44 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 30/39] xen/riscv: implement APLIC-IMSIC-hart sync
- barrier for vCPU migration
-To: xen-devel@lists.xenproject.org
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <2075cb10e5f6df787b29f2f087632c82b787a007.1790779209.git.oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH] xen-blkfront: Fix IO race during unplug
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, linux-block@vger.kernel.org,
+ linux-kernel@vger.kernel.org, Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ Jens Axboe <axboe@kernel.dk>, stable@vger.kernel.org
+References: <20261006135807.2571779-1-ross.lagerwall@citrix.com>
+ <asUCYtIJkFchdbNH@Mac.lan>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <2075cb10e5f6df787b29f2f087632c82b787a007.1790779209.git.oleksii.kurochko@gmail.com>
+From: Ross Lagerwall <ross.lagerwall@citrix.com>
+In-Reply-To: <asUCYtIJkFchdbNH@Mac.lan>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1791296759-1E867757-D433DB0E/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 13663
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P302CA0009.GBRP302.PROD.OUTLOOK.COM
+ (2603:10a6:600:2c2::17) To CH8PR03MB8274.namprd03.prod.outlook.com
+ (2603:10b6:610:2ba::5)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8274:EE_|CH3PR03MB7459:EE_
+X-MS-Office365-Filtering-Correlation-Id: 34faecf3-9617-41e7-1ceb-08df23b83c40
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|376014|23010399003|1800799024|11063799006|4143699003|6133799003|10067099003|56012099006|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	NGHT28ITpfGjij1ElAPudr0jFeJDXg3D+tCudvNj72BEksabQ09ChWik+/Tb3jtYD9Fgnnu3afPnFkFECkEswb55IiCGdFhSnAkGCshvwxo5W3AQPum6zeECgoTPVg3FQT6HIllzgCbDUiSrXvQkmOYqw6lCTnD+blS3WkE+1oILYH65Z4LEyT6WhD8yNqodZrV/XSOJFCA89WVg1NJKtg2N9A1sBich6iJVuasd/tDccfwF1Twm3ogijNcFJHtWlKZH/zhuaDzsIf1hSfhIX+PoOPhrzJcL++V/zlL9TyXP1U+yA0/ofGgymctNoqWguu3AEbPEVrpuzluirjqjxmSsLQVHj3S84zs7rnW0BTFKq3FonbUNYyNOD21Ld0vXfi9RBSswByrOE30t2+FGklr8648qDveZ0GtXJIe0miwL+Ax9erxLXRkrJI5G59R0is+bfQltks2r3ugBWa/t+2ebcATaylhzVPbFAPn9K6XlumrG/MJEmpGEmrU0CCV4F2WQtNkrjmJXUubPX0tamC5MTIQ9AG4qJS5nXCaxX2icyj3rCcLL7t4TWbj22oWrbdYD6oWt+qnaioiaQTO7v+UIiu22f5PuX9JxQtQU5PoXHzcsPwOEHNjkVN9PKbvquPxY8utF0blBIt5EQXbtRLOc3jvMg69sbtArLJP6y+8=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8274.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(11063799006)(4143699003)(6133799003)(10067099003)(56012099006)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?QWxtdURMWXk1TzQrcHhwNkFDeDE1WUJ4RlN5YVVaeXdBbVMyZlFJYTdFRUhH?=
+ =?utf-8?B?Rkc5bTdITlVrY1IycmVYcTFIMWxVWkhRSGtHWkt5SXg1bWl6MklIZ2o3MzJD?=
+ =?utf-8?B?RDhEcll6TFVwZ2NCMjlEWm4yRGVCejVJWFg1VW8yays2V2RsOFYxVkdQbWV2?=
+ =?utf-8?B?TFY3ZFB5NHlXOTJXUXlCQk93K3ZFL1BNaWpLdUpyWFZScG5hN01UMjRxSzZW?=
+ =?utf-8?B?S3lXdkRXYm15aEYrRUo0R09zYVU3MHNzNlhTVkNXRk5xb2dUZlFHWXN4elZU?=
+ =?utf-8?B?bUkveUJ0N1d3U2k4MXJCUVZwdWZWaDZUU1dBRjZGR1RhQjJwTmE3d1dPWXg2?=
+ =?utf-8?B?UlViRm1rVisrdEsrbWFXazM0RFdYMVBkbndXeFVHTjl3d1RNOUdxMllhcW01?=
+ =?utf-8?B?a05PNjk3MUo1RUlsNmJPM1RmbUZXTmpmMTdXY2R5cjBOZ0s0ZzV3Q2p6Y3FI?=
+ =?utf-8?B?V2l4Y1JjTVI2NFVjRVVqQ0RUaEIrckFneFN5eGU2M0dDSVpmNDRtRERQU2Ni?=
+ =?utf-8?B?QnhLbVh4WmJqOG04SmRlVXh6S2NGZTA2SnhxMGFzQ0RKZkdxelZKRnEzSGE1?=
+ =?utf-8?B?MWpZUkUwYlRwdHVkU1RBazhhSXZTQzY5dm5yM0FnekpBdS9kU3VZOUFFVnBF?=
+ =?utf-8?B?dmJudVN0eENHSzI0VHhxdFZPczllWEltUm5mWmFNc0VtNHJISGdIYm5ERXN4?=
+ =?utf-8?B?RFU3Q1pLbDB4NVZacDhlcXFXRkdmOFA5cEJ0RGMyQWNMTmorL2NpK0FkWWcx?=
+ =?utf-8?B?TWpoOVFWeWtwSHhSanBZd1FXeFdHTlVLaWFpUkxFR3E3T1I1RzBxTEZlaFRs?=
+ =?utf-8?B?MUk2MEVEYzdQUXY4dzQ5TFlOMWpoWGpzRjlTSS83Qld4ZjkxakR6K1QzaWhN?=
+ =?utf-8?B?ZlhpV21hSm12bG5ZR2lSaS95SDBCREZ2SndPMnhNYTlQMThjRk1RdVRhNVAx?=
+ =?utf-8?B?WmlvRm1uY1F0Z2Q3UUJ4bkJORWgwZmI0aVN2bytFbWNUV3VWdzVhbnM0UXFP?=
+ =?utf-8?B?Y1NFUzV3Skx3QWl3SXlqbll4SGYxOUNzc2FmcnA4YkpKRXppM2p0VGdDb2ZF?=
+ =?utf-8?B?c293N2lhQ3JteFNaWUgzS2wxOURmMzhtVk9nL3NVb1ZoR09YQi9jL1ZLZ0tT?=
+ =?utf-8?B?akU4L0RzM1BxdXl2VXBqTFltTnBoUEFNdmFzMDNpK05qQnh0QWl6clB1dW5T?=
+ =?utf-8?B?cFYwRjJmUmpMdVBwUWYwcHQyVUhTWTV3VHZYWHMyUUZqaUc0TFF0UUROdElY?=
+ =?utf-8?B?MVhOeDlDSHdoSjk3TVhZVVVUWVpWemlGZ2tPZlROS1N3NW9Hb1lZV2dLYkpN?=
+ =?utf-8?B?T25jUE9sUzRNRFZxZ3lQSlM2VUpmMVFtM3BBUm1temFmdkxENEJuU29lMmxH?=
+ =?utf-8?B?Rm1ZSkkyK0dnblYzVjF6YzlSNFJVRGFMcy9GazdnK3dxRXJXZGZqNDJlaThP?=
+ =?utf-8?B?UlI5cEkwakxOTTB1T1p3OW5CUGZsQnJvbWpQMFFyYXErMzlwcVUxSmYxZzJI?=
+ =?utf-8?B?cW5wU2tRSGJTQ25wWnhJaE1MQjR4c21lSkR4QkFtTlppVWowK3JCR3ZCa2wr?=
+ =?utf-8?B?d2JHUjJNSU8wRDhhY29Rd3dndktjUmhKVEJqMjVDNmlxUDEvS3ZLUGgyd1Z6?=
+ =?utf-8?B?WVZIRWJyeDZTS2NqeEpnZTYyY0d1NzhRSW9OQXI4YXQvVEdnbUM5bFkzc1dB?=
+ =?utf-8?B?NkRrTTJNZGJJbnI2dGZrZk1kZTMzUXZhMTdjbHlVUlZ6cVJaampVK0Q0R3Zp?=
+ =?utf-8?B?dG9VU0tzWTk3OVR4UlMvWWpjVENORjFaTjhWQ2MyL2VyNHZaWEZNM2tCcXZw?=
+ =?utf-8?B?TUhwYjlUZ1E1REJoNlE3c3ZpQnNQMVMxdSt1U3NVdGF3amZZN0VSMUxBOG9S?=
+ =?utf-8?B?MkE1Sm5LL0UrMUpXYUJKM2ZnSXozTno2U2dyNjZVMkxvUDhyakJtMU0xblIz?=
+ =?utf-8?B?dThkNXJTdWRTYUVOOHBsbVBmOGVldzN5aWN6RDBGZVZweGVBY1FvNGF0VFFZ?=
+ =?utf-8?B?QXlNQXVYLzVLaVpWZkhWYzlwQTlZM1E1K0JPQ0tGdHhXQVNzU01Ja2wxdjRE?=
+ =?utf-8?B?THFTTHJzZlRnQ3RGYnNSZE1DZ2VEbHI3TFNFR1VJd2l0KzFiWWlWM0ZRNnBo?=
+ =?utf-8?B?T2M3ODJ1dVluc1BtRFhkS0JVbGJkNFRMcjZpcjJnNWVGNWxGKzJVd0xKYUIz?=
+ =?utf-8?B?ZEFnL3FxakRJWUJ5OVBkWXAyM0dQYXBNbHRlbFJsZHE3cm5aZi9ZMlc5eGlL?=
+ =?utf-8?B?eGpoeTY1LytES0l1NG5HL1UxbG5vTUV6WXAwVGs3Qkx6Z3dZanJLcnZkamMw?=
+ =?utf-8?B?dmN2b3ByRFZDVXFtdER2SVcyWGZTc2p4aVh4S1pRVXpELzNra0RTTmk3Tzkx?=
+ =?utf-8?Q?pLnpNMHBB20ERKUA=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 34faecf3-9617-41e7-1ceb-08df23b83c40
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8274.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 14:43:50.3521
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: dLpIFAqkka1k3aQVyaT1YBkuCrRDKSm2Bra01Vd77TFkTSdxiVmz3QKEgGuf9G4ZIOTiLSRfO3wvTUHLGtYLgsPoWmvSdtLJri5nqyEdfWc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH3PR03MB7459
+X-purgate-ID: tlsNG-c201ff/1791297836-F4AA72A1-BC4857C0/0/0
+X-purgate-type: clean
+X-purgate-size: 3033
 
-
-
-On 9/30/26 6:23 PM, Oleksii Kurochko wrote:
-> When a vCPU is moved to a different guest interrupt file, MSIs that the
-> APLIC has already sent towards the old file may still be in flight. They
-> must land before the old file's state is saved and the switch is done,
-> otherwise they would be lost.
+On 10/6/26 3:14 PM, Roger Pau Monné wrote:
+> On Tue, Oct 06, 2026 at 02:58:06PM +0100, Ross Lagerwall wrote:
+>> During unplug, blkfront stops the hw queues and marks the disk as dead,
+>> then later during removal calls del_gendisk(). However, IO issued after
+>> the hw queues are stopped but before the call to del_gendisk() will be
+>> queued but never handled. This causes del_gendisk() to hang forever
+>> waiting for the queue refcount to drop to zero.
+>>
+>> This can be reproduced by issuing IO during an artificial delay after
+>> stopping the hw queues.
 > 
-> To wait for them, use the APLIC's genmsi register. Writing it makes the
-> APLIC itself send an MSI (an "extempore" MSI) with a given interrupt
-> identity to a given hart. genmsi can only target the hart's hypervisor-
-> level interrupt file, not a guest one, but the AIA spec guarantees that
-> all MSIs previously sent by the same APLIC to the same hart become
-> visible at the hart's IMSIC before the extempore MSI does. So once the
-> extempore MSI has been delivered, no older MSI from this APLIC to the
-> hart can still be in flight, whichever interrupt file it targets.
+> So the window is between the blk_mq_stop_hw_queues() and
+> blk_mark_disk_dead() calls where requests would be queued and never
+> processed?
+
+Yes.
+
 > 
-> genmsi's Busy bit clearing only tells that the APLIC has sent the
-> extempore MSI, not that it has arrived, so the sequence described in the
-> AIA spec under "Synchronizing interactions between a hart and the APLIC"
-> is split in two. aplic_genmsi_barrier() does the APLIC side, while
-> imsic_aplic_sync() does the hart side: it clears the pending bit of the
-> reserved identity before the genmsi write and spins on it afterwards,
-> which is what tells that the extempore MSI, and hence every older MSI
-> from this APLIC to this hart, has really arrived. Keeping the hart side
-> in imsic.c leaves the APLIC code free of the IMSIC local CSR accessors.
+>> Fix this by simply not stopping the hw queues directly. Marking the disk
+>> as dead also freezes the queue which prevents new requests being added
+>> and it synchronously runs the hw queues to clear anything pending.
 > 
-> The last interrupt identity (nr_ids) is reserved for this purpose.
+> I think this likely needs expanding a bit: the disk is already marked
+> as dead with the current logic, and in the same place in the code.
 > 
-> Migration doesn't use the barrier at this stage, so imsic_migrate_vcpu()
-> only references imsic_aplic_sync() to keep the compiler from complaining
-> about it being unused.
+>> Fixes: 8e141f9eb803 ("block: drain file system I/O on del_gendisk")
+>> Cc: stable@vger.kernel.org
+>> Assisted-by: LLM
+>> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+>> ---
+>>
+>> I'm not sure about the Fixes tag. It's the most likely looking candidate
+>> to me but I didn't confirm whether it actually introduced the
+>> regression.
 > 
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> ---
-> Changes in v3:
->   - Rename from "xen/riscv: implement APLIC-hart sync barrier for vCPU
->     migration", as the barrier waits for the MSIs to reach the hart's IMSIC.
->   - Re-word the commit message, describing in it how the sequence is split
->     between aplic_genmsi_barrier() and imsic_aplic_sync().
->   - Move imsic_aplic_sync(), imsic_local_is_pending() and imsic_csr_read()
->     here from "xen/riscv: remap interrupts to new IMSIC VS-file", so that
->     both halves of the synchronization sequence are introduced together.
->   - s/aplic_hart_field/aplic_hart_index/ following the rename of the helper
->     in "xen/riscv: implement virtual APLIC MMIO emulation".
->   - Drop masking of sync_id with APLIC_TARGET_EIID, which could silently
->     chop off bits; instead add BUILD_BUG_ON() and ASSERT() to make it
->     explicit that sync_id always fits into the EIID field.
->   - Drop the redundant parentheses around the macro argument in
->     imsic_csr_read().
->   - Use unsigned int for isel in imsic_local_is_pending() and drop the
->     redundant !! as the function returns bool.
->   - Rename the unused argument of imsic_aplic_sync() to unused.
-> ---
-> Changes in v2:
->   - New patch.
-> ---
-> ---
->   xen/arch/riscv/aplic.c             | 33 +++++++++++++++++++
->   xen/arch/riscv/imsic.c             | 52 ++++++++++++++++++++++++++++++
->   xen/arch/riscv/include/asm/aplic.h |  3 ++
->   xen/arch/riscv/include/asm/imsic.h |  8 +++++
->   4 files changed, 96 insertions(+)
+> I was wondering the same, and even then someone might argue this was a
+> latent bug in blkfront itself, and the reference commit just exposed
+> it.  I don't have a strong opinion.
+
+Good point, I might be inclined to drop it then.
+
 > 
-> diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
-> index 283e5d6046a6..5f9a894b5a76 100644
-> --- a/xen/arch/riscv/aplic.c
-> +++ b/xen/arch/riscv/aplic.c
-> @@ -27,7 +27,9 @@
->   #include <asm/imsic.h>
->   #include <asm/intc.h>
->   #include <asm/io.h>
-> +#include <asm/processor.h>
->   #include <asm/riscv_encoding.h>
-> +#include <asm/smp.h>
->   
->   static struct aplic_priv aplic = {
->       .lock = SPIN_LOCK_UNLOCKED,
-> @@ -183,6 +185,37 @@ void aplic_hw_write_reg(unsigned int offset, uint32_t value)
->       spin_unlock_irqrestore(&aplic.lock, flags);
->   }
->   
-> +/*
-> + * As needed, synchronize with all IOMMUs and APLICs to ensure that no
-> + * straggler MSIs will arrive at the old interrupt file after this step.
-> + */
-> +void aplic_genmsi_barrier(void)
-> +{
-> +    const struct imsic_config *imsic = imsic_get_config();
-> +    unsigned int cpu = smp_processor_id();
-> +    unsigned long flags;
-> +    uint32_t val;
-> +
-> +    /*
-> +     * sync_id is nr_ids, which imsic_parse_node() limits to IMSIC_MAX_ID,
-> +     * so it always fits into the EIID field.
-> +     */
-> +    BUILD_BUG_ON(IMSIC_MAX_ID > MASK_EXTR(~0U, APLIC_TARGET_EIID));
-> +    ASSERT(imsic->sync_id <= IMSIC_MAX_ID);
-> +
-> +    val = MASK_INSR(aplic_hart_index(cpu), APLIC_TARGET_HART_IDX) |
-> +          imsic->sync_id;
-> +
-> +    spin_lock_irqsave(&aplic.lock, flags);
-> +
-> +    writel(val, &aplic.regs->genmsi);
-> +
-> +    while ( readl(&aplic.regs->genmsi) & APLIC_GENMSI_BUSY )
-> +        cpu_relax();
-> +
-> +    spin_unlock_irqrestore(&aplic.lock, flags);
-> +}
-> +
->   static void __init aplic_init_hw_interrupts(void)
->   {
->       unsigned int i;
-> diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-> index f1e44dc56bb8..8e0273eab902 100644
-> --- a/xen/arch/riscv/imsic.c
-> +++ b/xen/arch/riscv/imsic.c
-> @@ -27,6 +27,7 @@
->   #include <xen/xvmalloc.h>
->   
->   #include <asm/aia.h>
-> +#include <asm/aplic.h>
->   #include <asm/imsic.h>
->   
->   #define IMSIC_HART_SIZE(guest_bits) (BIT(guest_bits, U) * IMSIC_MMIO_PAGE_SZ)
-> @@ -60,6 +61,12 @@ static unsigned int __ro_after_init guest_num_msis;
->   #define IMSIC_DISABLE_EITHRESHOLD   1
->   #define IMSIC_ENABLE_EITHRESHOLD    0
->   
-> +#define imsic_csr_read(c)       \
-> +({                              \
-> +    csr_write(CSR_SISELECT, c); \
-> +    csr_read(CSR_SIREG);        \
-> +})
-> +
->   #define imsic_csr_write(c, v)   \
->   do {                            \
->       csr_write(CSR_SISELECT, c); \
-> @@ -203,6 +210,15 @@ void imsic_irq_enable(unsigned int irq)
->        */
->       ASSERT(!local_irq_is_enabled());
->   
-> +    if ( irq == imsic_cfg.sync_id )
-> +    {
-> +        printk(XENLOG_WARNING
-> +               "irq%u is reserved for APLIC sync so shouldn't be set by %s\n",
-> +               irq, __func__);
-> +
-> +        return;
-> +    }
-> +
->       spin_lock(&imsic_cfg.lock);
->       /*
->        * There is no irq - 1 here (look at aplic_set_irq_type()) because:
-> @@ -241,6 +257,15 @@ void imsic_irq_disable(unsigned int irq)
->       spin_unlock(&imsic_cfg.lock);
->   }
->   
-> +static bool imsic_local_is_pending(unsigned int id)
-> +{
-> +    unsigned int isel =
-> +        (id / BITS_PER_LONG) * (BITS_PER_LONG / IMSIC_EIPx_BITS) + IMSIC_EIP0;
-> +    unsigned long bit = BIT(id % BITS_PER_LONG, UL);
-> +
-> +    return imsic_csr_read(isel) & bit;
-> +}
-> +
->   /* Callers aren't intended to changed imsic_cfg so return const. */
->   const struct imsic_config *imsic_get_config(void)
->   {
-> @@ -387,6 +412,9 @@ static int __init imsic_parse_node(const struct dt_device_node *node,
->   
->       imsic_cfg.nr_eix = DIV_ROUND_UP(imsic_cfg.nr_ids + 1, 64);
->   
-> +    /* Reserve last identity for APLIC-to-hart synchronization */
-> +    imsic_cfg.sync_id = imsic_cfg.nr_ids;
-> +
->       /* Compute base address */
->       *nr_mmios = 0;
->       rc = dt_device_get_address(node, *nr_mmios, &base_addr, NULL);
-> @@ -497,6 +525,27 @@ static void imsic_call_on_cpu(unsigned int cpu, void (*func)(void *),
->           on_selected_cpus(cpumask_of(cpu), func, data, 1);
->   }
->   
-> +/*
-> + * Ensure that all the MSIs the APLIC has already generated for the hart this
-> + * runs on have really reached the hart's IMSIC.
-> + *
-> + * The barrier is the one described by the AIA specification in
-> + * "Synchronizing interactions between a hart and the APLIC": ask the APLIC to
-> + * send an MSI to the hart itself and wait until it shows up as pending in the
-> + * hart's own interrupt file. As it says nothing about MSIs on their way to
-> + * any other hart, it has to be executed by the pCPU owning the interrupt file
-> + * the MSIs were being sent to.
-> + */
-> +static void cf_check imsic_aplic_sync(void *unused)
-> +{
-> +    imsic_local_eix_update(imsic_cfg.sync_id, 1, true, false);
-> +
-> +    aplic_genmsi_barrier();
-> +
-> +    while ( !imsic_local_is_pending(imsic_cfg.sync_id) )
-> +        cpu_relax();
-> +}
-> +
->   static void cf_check imsic_vsfile_local_clear(void *data)
->   {
->       unsigned int i;
-> @@ -862,5 +911,8 @@ void imsic_migrate_vcpu(struct vcpu *v)
->       /* Zero-out new IMSIC VS-file */
->       imsic_call_on_cpu(v->processor, imsic_vsfile_local_clear, &vsfile_data);
->   
-> +    /* Avoid an unused-function error until the barrier has a user. */
-> +    (void)imsic_aplic_sync;
-> +
->       BUG_ON("unimplemented");
->   }
-> diff --git a/xen/arch/riscv/include/asm/aplic.h b/xen/arch/riscv/include/asm/aplic.h
-> index 9018936ca95a..bfb510b2ae5e 100644
-> --- a/xen/arch/riscv/include/asm/aplic.h
-> +++ b/xen/arch/riscv/include/asm/aplic.h
-> @@ -94,6 +94,7 @@
->   #define APLIC_SETIPNUM_LE               0x2000
->   
->   #define APLIC_GENMSI                    0x3000
-> +#define APLIC_GENMSI_BUSY               BIT(12, U)
->   
->   #define APLIC_TARGET_BASE               0x3004
->   #define APLIC_TARGET_LAST               0x3ffc
-> @@ -177,4 +178,6 @@ struct aplic_regs {
->   uint32_t aplic_hw_read_reg(unsigned int offset);
->   void aplic_hw_write_reg(unsigned int offset, uint32_t value);
->   
-> +void aplic_genmsi_barrier(void);
-> +
->   #endif /* ASM_RISCV_APLIC_H */
-> diff --git a/xen/arch/riscv/include/asm/imsic.h b/xen/arch/riscv/include/asm/imsic.h
-> index 8130d125f5c3..f86407e21765 100644
-> --- a/xen/arch/riscv/include/asm/imsic.h
-> +++ b/xen/arch/riscv/include/asm/imsic.h
-> @@ -62,6 +62,14 @@ struct imsic_config {
->        */
->       unsigned int nr_eix;
->   
-> +    /*
-> +     * Interrupt identity reserved exclusively for APLIC-to-hart
-> +     * synchronization.
-> +     *
-> +     * Must not be allocated to any interrupt source.
-> +     */
-> +    unsigned int sync_id;
-> +
->       /* MSI */
->       const struct imsic_msi *msi;
->   
+>>
+>>   drivers/block/xen-blkfront.c | 4 +---
+>>   1 file changed, 1 insertion(+), 3 deletions(-)
+>>
+>> diff --git a/drivers/block/xen-blkfront.c b/drivers/block/xen-blkfront.c
+>> index 8dad7bf5f664..69a2315a1b20 100644
+>> --- a/drivers/block/xen-blkfront.c
+>> +++ b/drivers/block/xen-blkfront.c
+>> @@ -2138,10 +2138,8 @@ static void blkfront_closing(struct blkfront_info *info)
+>>   		return;
+>>   
+>>   	/* No more blkif_request(). */
+>> -	if (info->rq && info->gd) {
+>> -		blk_mq_stop_hw_queues(info->rq);
+>> +	if (info->gd)
+>>   		blk_mark_disk_dead(info->gd);
+> 
+> So blk_mark_disk_dead() behaves differently when called with the
+> queues still active?
 
+Yes. In both cases, the queues are frozen and the hw queues synchronously run,
+but the latter is a no-op when the hw queues are in the stopped state,
+therefore it could leave requests unprocessed.
 
-I think it also makes sense here to apply the following fixup patch:
+How about this for the final paragraph of the commit message?
 
-commit db57e94ed8405c98d7a21f4f88764fa5e0ea2d04 
-(riscv-next-upstreaming-fixups)
-Author: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Date:   Tue Oct 6 15:59:52 2026 +0200
+"""
+Fix this by simply not stopping the hw queues directly. Marking the disk
+as dead already freezes the queue which prevents new requests being added
+and it synchronously runs the hw queues to clear anything pending. If the hw
+queues are stopped when calling blk_mark_disk_dead(), running the hw queues
+is a no-op and can leave queued requests unprocessed.
+"""
 
-     fixup! xen/riscv: implement APLIC-IMSIC-hart sync barrier for vCPU 
-migration
-
-     In MSI delivery mode the MSI of APLIC source N carries identity N, by
-     which Xen recognises it in its own IMSIC interrupt file. A source
-     numbered sync_id or higher can't be told apart: its identity either
-     isn't implemented, so its MSIs are dropped, or is the one reserved for
-     the sync barrier, which it would satisfy early and whose pending bit
-     would swallow its interrupt. Limit the usable sources to those below
-     sync_id, and document how the identities of Xen's interrupt file are
-     allocated.
-
-diff --git a/xen/arch/riscv/aplic.c b/xen/arch/riscv/aplic.c
-index 96aa4edb3958..86ff3cae984d 100644
---- a/xen/arch/riscv/aplic.c
-+++ b/xen/arch/riscv/aplic.c
-@@ -246,6 +246,7 @@ static int __init cf_check aplic_init(void)
-      uint64_t size, paddr;
-      const struct dt_device_node *imsic_node;
-      const struct dt_device_node *node = aplic_info.node;
-+    const struct imsic_config *imsic;
-      int rc;
-
-      /* Check for associated imsic node */
-@@ -270,6 +271,22 @@ static int __init cf_check aplic_init(void)
-          panic("%s: failed to get number of interrupt sources\n",
-                node->full_name);
-
-+    /*
-+     * In MSI delivery mode the MSI of source N carries identity N, by 
-which
-+     * Xen recognises it in its own IMSIC interrupt file. Hence the sources
-+     * numbered from sync_id on can't be used: their identities either 
-aren't
-+     * implemented or are the one reserved for the APLIC-IMSIC sync 
-barrier.
-+     */
-+    imsic = imsic_get_config();
-+    if ( aplic_info.num_irqs >= imsic->sync_id )
-+    {
-+        printk(XENLOG_WARNING
-+               "%s: only %u of %u interrupt sources usable with %u 
-IMSIC identities\n",
-+               node->full_name, imsic->sync_id - 1, aplic_info.num_irqs,
-+               imsic->nr_ids);
-+        aplic_info.num_irqs = imsic->sync_id - 1;
-+    }
-+
-      guest_aplic_num_sources = min(GUEST_APLIC_MAX_SOURCES, 
-aplic_info.num_irqs);
-
-      if ( aplic_info.num_irqs > ARRAY_SIZE(aplic.regs->sourcecfg) )
-diff --git a/xen/arch/riscv/imsic.c b/xen/arch/riscv/imsic.c
-index ca5243826726..408b94b22ee9 100644
---- a/xen/arch/riscv/imsic.c
-+++ b/xen/arch/riscv/imsic.c
-@@ -533,7 +533,15 @@ static int __init imsic_parse_node(const struct 
-dt_device_node *node,
-
-      imsic_cfg.nr_eix = DIV_ROUND_UP(imsic_cfg.nr_ids + 1, 64);
-
--    /* Reserve last identity for APLIC-to-hart synchronization */
-+    /*
-+     * The identities of Xen's own interrupt file are allocated statically:
-+     *  - the APLIC sources take 1 .. riscv,num-sources, as the MSI of 
-source
-+     *    N carries identity N (aplic_init() drops the sources which 
-don't fit
-+     *    below sync_id);
-+     *  - the last one, nr_ids, is reserved for APLIC-to-hart 
-synchronization.
-+     * Anything else taking identities from this file has to stay clear of
-+     * both.
-+     */
-      imsic_cfg.sync_id = imsic_cfg.nr_ids;
-
-      /* Compute base address */
-
-Any thoughts about it?
-
-Thanks in advance.
-
-~ Oleksii
-
+Ross
 
