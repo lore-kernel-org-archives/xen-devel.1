@@ -4,43 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7271BCA5FF0
-	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 10:24:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1441346.1658934 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 09F2FCA5FED
+	for <xen-devel@archiver.kernel.org>; Tue,  6 Oct 2026 10:32:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1441360.1658941 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE2Lp-0001hY-JX; Tue, 06 Oct 2026 10:24:49 +0000
+	id 1xE2Sq-0003f9-8z; Tue, 06 Oct 2026 10:32:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1441346.1658934; Tue, 06 Oct 2026 10:24:49 +0000
+Received: by outflank-mailman (output) from mailman id 1441360.1658941; Tue, 06 Oct 2026 10:32:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xE2Lp-0001hR-G5; Tue, 06 Oct 2026 10:24:49 +0000
-Received: by outflank-mailman (input) for mailman id 1441346;
- Tue, 06 Oct 2026 10:24:48 +0000
+	id 1xE2Sq-0003f2-67; Tue, 06 Oct 2026 10:32:04 +0000
+Received: by outflank-mailman (input) for mailman id 1441360;
+ Tue, 06 Oct 2026 10:32:03 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xE2Lo-0001hJ-KJ
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 10:24:48 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>) id 1xE2Sp-0003ew-61
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 10:32:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xE2Lo-00Bgz2-0h
- for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 12:24:48 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xE2So-005dbB-Iy
+ for xen-devel@lists.xenproject.org; Tue, 06 Oct 2026 12:32:02 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ac4cc60-bab6-0a2a0a5309dd-0a2a4504a8ac-36
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:24:47 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ac4cc6f-b57f-0a2a45040019-d1558035ccc3-3
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:24:47 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-4a168355946so5425095e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 03:24:47 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a17c7b7f00sm13803035e9.13.2026.10.06.03.24.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 06 Oct 2026 03:24:47 -0700 (PDT)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6ac4ce1a-8faa-0a2a0a5109dd-0a2a4501b568-24
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:32:02 +0200
+Received: from [40.93.201.40]
+ (helo=CY3PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6ac4ce20-5984-0a2a45010019-285dc928d3e4-3
+ for <xen-devel@lists.xenproject.org>; Tue, 06 Oct 2026 12:32:02 +0200
+Received: from SJ0PR03CA0284.namprd03.prod.outlook.com (2603:10b6:a03:39e::19)
+ by LV8PR12MB9641.namprd12.prod.outlook.com (2603:10b6:408:295::18)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Tue, 6 Oct
+ 2026 10:31:57 +0000
+Received: from SJ5PEPF000001F7.namprd05.prod.outlook.com
+ (2603:10b6:a03:39e:cafe::72) by SJ0PR03CA0284.outlook.office365.com
+ (2603:10b6:a03:39e::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.20 via Frontend Transport; Tue, 6
+ Oct 2026 10:31:56 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SJ5PEPF000001F7.mail.protection.outlook.com (10.167.242.75) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.496.14 via Frontend Transport; Tue, 6 Oct 2026 10:31:56 +0000
+Received: from espagarciav-lx01.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Tue, 6 Oct
+ 2026 05:31:54 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,172 +64,105 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791282287; x=1791887087; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=3whEvDDGudRFBdQmtdVS8fdNXFeYB7xx89+j7BgZ5Lk=;
-        b=Tw+ppuiycfn2E7gT+WLsgoB2D9tVBpqtKWk8ztjx+HWwPM1fj7k4D5DteER3AbqIfC
-         EiWp5DIv9GIMkVDzcHoqK8hqrkCGUkBuo2f7KpY/fGniyk57FJKhr6X9RyG0SxG+t7SW
-         5BcXZ8EeCEedJuT87HtmIrhnC6yb/n+3FyKGqISBbw3/UojOG1QGG1iFwnrB4ppBgf+a
-         Eo7A1WxE6EytsQEOaJignkwSz7aT7rEKAWW8bMnWeyeslU7ocW94s35ArMh2yenwH1eJ
-         RSfBYrBrCpVcUyw98z8vDNG86hJ5SaDajTCjbe7B3wlcpJgdBjagdAKxKqn1bnX7WZ+2
-         fCrg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791282287; x=1791887087;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=3whEvDDGudRFBdQmtdVS8fdNXFeYB7xx89+j7BgZ5Lk=;
-        b=R+8gEYCrWkgAUNSDabh1u3vo0O4Ck9fG2HilvCwg90PmVk5JJwL/ePPrfqA3kEqU8z
-         YFtbb2/xdGpYvMeSkfcqcAWbioALXKCVNqTbwgbgSycmqiHZT+wo0JkZcmHSCVwY2K8k
-         7S3lSOQjkSpPz+BKUCTo19tPG1tr+ZAaLAvVVh0ymQ8WmOvqQ8QIYFdnMfWWC7vJURPt
-         ezKhmvTxAqdLcgCb3NkYSSR8O7vIqDZGWrANt/JPj8+D0PtGYjIXPVulFDRpgI05So85
-         kFnaj6KDdWCB33j03TKaYBj/ldtpcFHmUGPSaqDoTsJrGrG7Tt2QiQPq5+k4gSSYaFOH
-         F2nA==
-X-Gm-Message-State: AFuF++n70nveKciTxgUtPdYiaOpaAxa1XL9j90iSlttq87OIavjLLX4/
-	Q6ZyOuS1pYmwaV8mNK5kMHiDLCk1rKiHRMiNHB5K7vvlulQVaeTsEr0DBtuV0REzHeMisrZlvlA
-	7acyZIA==
-X-Gm-Gg: AYBFou3HewtIuCzHZ2ayFamL+1QKwznoe20kDadUc+rPXE3tJ2GXpLatZ+aoyKjkGdA
-	LzbwAcZHTmpwSrKBzshjeWZFRgoZmDKZmRuOORBbKA0pFnRrAQzQDiltze4c9tJYppHtjRatthD
-	afVxXHZ2oOxkKSmsZ4sKviSApVy0bhqqP8ko/B8uFhsnFfsCzT1izJHBjF7I5R10TVQyGLx/OZV
-	WGS6k3Viq02SojYbJwzkw+xD9I7BarHHeja8A7IhuorcjgWRoLL9jWsr118vx59M+atNqeJzeON
-	+HiKeCMW7YDj8VviC7O6jtYAF5hjRkHBSsgaqDTRscXH3gH77djC7j5biBJNVdSEcxU+NGr7kB2
-	laRvRVhlQ2JlLZt4fNGqk4TCvCXYx5joM+Tp23Ax2m5cM6x82inhIzBJvj4ukDTreH3hsjfu+mC
-	4QLMjerGxdpmGyIPctQDbam/mM+aw6PbPNBq4jc6pjEzDAGtEh/9X4KinYIbXqBxk+Bscvpn0RJ
-	N7ojJORzRJgM5ylaKE9N4sPgxE3HilccdeO1Cb9rtwdRqXGTvgVwM36hT8ldhvLa6OvcIgn5w==
-X-Received: by 2002:a05:600c:c491:b0:49e:69ff:c6b1 with SMTP id 5b1f17b1804b1-4a17b562d60mr16865665e9.31.1791282287291;
-        Tue, 06 Oct 2026 03:24:47 -0700 (PDT)
-Message-ID: <29e67a54-119d-4991-a301-5f0351b125d7@suse.com>
-Date: Tue, 6 Oct 2026 12:24:46 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=unPSKZ6MGr3AahWjc6PsOAUBbrlVjS3QN6rOfJg6jHRujg/+VppCgXybRmRw222lgFAkItypSlz1jpn8+QVuz+CBUmX7dgsM5TcPA/eOLupFKn2tXehAY5NZxHdP6C9QHKGmn/iorZHBTG6pmJpJZRd62rYISNqqPPvDF03OBFnx7rm1OAbD6rli2xTvm34sKAUV6IZWvNvLjjSwq0RBMks9LyKHJN74oXPT5jKWha2DMBuDw74TF/cZiqB9TsNG5aMeoAiM9JJ/990fnq6SR078cxWgVoi3BHvFmsBtCpPXs4PdfhdTKi3wA7rC5NEAm1jqSv8/BnOO801iRrpoKw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SaWkWhr8Df7fn3pAXC2CTiSVEyMc+gf6VWML+h9pGoA=;
+ b=sPYn1j1iMylT9WfpjNC/AXxyJ+aixZ1IgjAfeYokJh598Tvg40KMVNoegzLGA1Qfy4j+Z6rSI9N64UY38Q8fuUu1ZltXwI2fFQY19Djfp83/Dtsl7cHtTRTsRJ2glgyOBRE11d+gHumXBGqzCTwww707fZE0zgHRQZnQdzyQYGDrwtpbHUASaVQomvw8IgSqnHlZz2jeX/UdAIY0KX7eqAIVR9uu47hf7yxzSefeg4tIj2OTuPhrrRYKZBelEAARHBhlC8+DxNon+Q+/Rr/oLLBNyf+B38L3Y52ZuqqCLM4SXyZUjne3HhsBXgI4XPWaO6Uu651whjLsV2qZIHlI8g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SaWkWhr8Df7fn3pAXC2CTiSVEyMc+gf6VWML+h9pGoA=;
+ b=I0If4aCVxG35hWcUfIWhRDsYFGhW/bJ1u6MmTpQtHU8ub5XSCbw0OJEIm0BBnZ2w6sgu4PCJxKpwq2jC7fW30q+aR3peez2KDB6buggcKqjAH7Ab43B06f5IBIarkUaM9O8qc0E2z2FYz0L9LO2giat6ffSE6Aa5Jns+p6plZFw=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	Michal Orzel <michal.orzel@amd.com>
+Subject: [PATCH] arm/nospec: Make nospec helpers always_inline
+Date: Tue, 6 Oct 2026 12:31:40 +0200
+Message-ID: <20261006103142.139422-1-alejandro.garciavallejo@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH v2] x86: add noreturn in a few more places
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1791282287-52ECEB50-99D6B3A7/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 3545
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ5PEPF000001F7:EE_|LV8PR12MB9641:EE_
+X-MS-Office365-Filtering-Correlation-Id: f6df2be3-bd37-46eb-cf52-08df23950bb9
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|23010399003|376014|1800799024|36860700016|18002099003|10067099003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	T7aWvoM75eC09qK3ykCWPDgUr0GldBgcODPJqlf8vT+9jtpJCv8JOAzc11I/gHCU9bB1uoEfz/1vggPiXFp+FyOBWCSBm8yECyU6nHPu6bqN7jd/F89D3T87zhEkesvz1sCLrLo4snm7KD6xnQeZOs71gRer5q9eyHm1lVXtCoPrn5yYh20loVqG3eLvDHC4CqJ8drk1EnhBdlJIPZ16L5Mxi0xEVhpUdA/duiSKn+lmwz4QUknItUWMHWOk4gcg8Jdk1aDRDy9RzCxf6lUJ4Sqo8dA2RMl40cDSdexAgk9w4Sadoc1nZ110XGkh5hNFWmZWUeeOXyybLJtn+VJ+thpplY9E8Cvd4dZP9gMdE+aMGNmoczf+nxjMpOydMkwm08SZartlxOfC+A1cKsFvOXzStx+VWgppG6e9JBls/ASgE4LO9CSoOp+vlx1ResZjWLvbcD3ZQQnlDZZtfOuN5udPgUUOL/LOulPhbg3RXgB7dq+0s5Pg2wDN+e3XXu8RxoArZX1Mn99ulxMcfzMUCAOspy1BqIvSasfVz6b0+YQIihlbeRIfbxOduLvHyZArtboCEfmX189hvVlq9ZYAbEz3Z7MC/r6LvW7RNXzXokKUlVLM9YqVxEyLA57AyFWYHhVi7YPSGx/N3SHNhsGRvCPpEH9K5sY+uowyk3hgCbogXCmsyD7L5SgrGNtl9miW/n78y+lol4+UT4CeyxwKDA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(23010399003)(376014)(1800799024)(36860700016)(18002099003)(10067099003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	pgctTiA6ADwzG9XOqc0ioXMj7mXNcUYIYfLVcCebcGasIcu0QsF/zh/HPYiaK5D1h4fv9O3c4Mc4K7eCUJwIYoUOW8o3qxT2HeOV2uXVC86C3xDfqRgyb5t9c+dQRRk1mLtxIuya56J9QOShKwZlzON0MsoeLjFc1QoJAqoY0KoiK3opLhn8R7U5NbY8DcXbgZlas72iMNvLHOcon9hox0l/M2kS52Sgh2i/1jNp6XhE5U2rZsJx1pONwmErSs4C+d2tOj8tXsGIVkMeqvaurTutSgQLwqljpUUOdMiljXN5NWE/Nv4XvK005ap5QYgLVJa4gCyc3LadMyDxEPAsbFWPlVotmrejp4Z0pVYdUf9R9a+Jlxtb/HlItRyQetC6fCimC2Wh91MpLwGnXBjPfbqCbkyUeQnyCaud5zqlkzLgmhEOO55RKZetrXqssCPr
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 06 Oct 2026 10:31:56.3051
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: f6df2be3-bd37-46eb-cf52-08df23950bb9
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ5PEPF000001F7.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV8PR12MB9641
+X-purgate-ID: tlsNG-d62444/1791282722-1D87F757-8270B616/0/0
+X-purgate-type: clean
+X-purgate-size: 974
 
-start_secondary(), do_double_fault(), play_dead(), and tboot_s3_error()
-never return, so would better be annotated anyway.
+While today they don't implement fencing in a way that would block
+speculation, once/if they do they'll absolutely need to be inlined, even
+if -fno-inline or -fno-early-inlining are passed.
 
-context_switch() and continue_running() are odd: We can't
-(unconditionally) add noreturn to their declarations, as Arm's variants do
-return. Put the attribute on x86'es definitions instead (the use of
-unreachable() in reset_stack_and_call_ind() allows the compiler to figure
-that out itself, but Eclair wants the annotation in addition).
-
-Note that adding "noreturn" to do_double_fault() causes new violations of
-the same rule (2.1) at the two call sites in entry_from_{pv,xen}().
-
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 ---
-https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2916849077
+ xen/arch/arm/include/asm/nospec.h | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
 
-entry_from_pv() wants the annotation only when PV=n, yet once added gcc
-then warns about "return" being used in a "noreturn" function. Is there
-any other approach to address this besides adding #ifdef inside the
-function (i.e. replacing the !IS_ENABLED(CONFIG_PV) check that's there)?
-Perhaps need to deviate it?
----
-v2: Drop entry_from_{pv,xen}() changes, for being controversial.
+diff --git a/xen/arch/arm/include/asm/nospec.h b/xen/arch/arm/include/asm/nospec.h
+index 51c7aea4f4..b84f8dff45 100644
+--- a/xen/arch/arm/include/asm/nospec.h
++++ b/xen/arch/arm/include/asm/nospec.h
+@@ -4,12 +4,12 @@
+ #ifndef _ASM_ARM_NOSPEC_H
+ #define _ASM_ARM_NOSPEC_H
+ 
+-static inline bool evaluate_nospec(bool condition)
++static always_inline bool evaluate_nospec(bool condition)
+ {
+     return condition;
+ }
+ 
+-static inline void block_speculation(void)
++static always_inline void block_speculation(void)
+ {
+ }
+ 
 
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -2163,7 +2163,7 @@ static void __context_switch(void)
-     per_cpu(curr_vcpu, cpu) = n;
- }
- 
--void context_switch(struct vcpu *prev, struct vcpu *next)
-+void noreturn context_switch(struct vcpu *prev, struct vcpu *next)
- {
-     unsigned int cpu = smp_processor_id();
-     struct cpu_info *info = get_cpu_info();
-@@ -2240,7 +2240,7 @@ void context_switch(struct vcpu *prev, s
-     reset_stack_and_call_ind(nextd->arch.ctxt_switch->tail);
- }
- 
--void continue_running(struct vcpu *same)
-+void noreturn continue_running(struct vcpu *same)
- {
-     reset_stack_and_call_ind(same->domain->arch.ctxt_switch->tail);
- }
---- a/xen/arch/x86/include/asm/cpuidle.h
-+++ b/xen/arch/x86/include/asm/cpuidle.h
-@@ -26,7 +26,7 @@ static inline int mwait_idle_init(struct
- int cpuidle_init_cpu(unsigned int cpu);
- void cf_check default_dead_idle(void);
- void cf_check acpi_dead_idle(void);
--void play_dead(void);
-+void noreturn play_dead(void);
- void trace_exit_reason(u32 *irq_traced);
- void update_idle_stats(struct acpi_processor_power *power,
-                        struct acpi_processor_cx *cx,
---- a/xen/arch/x86/include/asm/tboot.h
-+++ b/xen/arch/x86/include/asm/tboot.h
-@@ -126,7 +126,7 @@ int tboot_in_measured_env(void);
- int tboot_protect_mem_regions(void);
- int cf_check tboot_parse_dmar_table(acpi_table_handler dmar_handler);
- int tboot_s3_resume(void);
--void tboot_s3_error(int error);
-+void noreturn tboot_s3_error(int error);
- int tboot_wake_ap(int apicid, unsigned long sipi_vec);
- #else
- static inline void tboot_probe(void) {}
---- a/xen/arch/x86/smpboot.c
-+++ b/xen/arch/x86/smpboot.c
-@@ -326,7 +326,7 @@ static void set_cpu_sibling_map(unsigned
-     }
- }
- 
--void asmlinkage start_secondary(void)
-+void asmlinkage noreturn start_secondary(void)
- {
-     struct cpu_info *info = get_cpu_info();
-     unsigned int cpu = smp_processor_id();
---- a/xen/arch/x86/traps.c
-+++ b/xen/arch/x86/traps.c
-@@ -1080,7 +1080,7 @@ const char *vector_name(unsigned int vec
-     return (vec < ARRAY_SIZE(names) && names[vec][0]) ? names[vec] : "???";
- }
- 
--void asmlinkage do_double_fault(struct cpu_user_regs *regs)
-+void asmlinkage noreturn do_double_fault(struct cpu_user_regs *regs)
- {
-     unsigned int cpu;
-     struct extra_state state;
+base-commit: 290959692726bed9a9404fbb151767dba9928c5b
+-- 
+2.43.0
+
 
