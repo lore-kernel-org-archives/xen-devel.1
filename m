@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE6C8CA5FFC
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 18:16:58 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442678.1660272 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66B58CA6007
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 18:17:00 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442674.1660245 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEWCA-0001Vs-Jw; Wed, 07 Oct 2026 18:16:50 +0000
+	id 1xEWC3-0000ea-Lx; Wed, 07 Oct 2026 18:16:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442678.1660272; Wed, 07 Oct 2026 18:16:50 +0000
+Received: by outflank-mailman (output) from mailman id 1442674.1660245; Wed, 07 Oct 2026 18:16:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEWCA-0001VZ-Fe; Wed, 07 Oct 2026 18:16:50 +0000
-Received: by outflank-mailman (input) for mailman id 1442678;
- Wed, 07 Oct 2026 18:16:48 +0000
+	id 1xEWC3-0000eR-Hy; Wed, 07 Oct 2026 18:16:43 +0000
+Received: by outflank-mailman (input) for mailman id 1442674;
+ Wed, 07 Oct 2026 18:16:43 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1xEWC8-0001Ds-H6
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 18:16:48 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1xEWC2-0000Uw-Tk
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 18:16:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEWC7-00GBp9-T5
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 20:16:47 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xEWC2-00A5su-Ao
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 20:16:42 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6ac68c68-e002-0a2a0a5209dd-0a2a4504b38e-30
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 20:16:47 +0200
-Received: from [209.85.160.178] (helo=mail-qt1-f178.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ac68c88-8faa-0a2a0a5109dd-0a2a4506d70c-4
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 20:16:42 +0200
+Received: from [209.85.222.169] (helo=mail-qk1-f169.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6ac68c8e-b57f-0a2a45040019-d155a0b2e537-3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 20:16:47 +0200
-Received: by mail-qt1-f178.google.com with SMTP id
- d75a77b69052e-5351748222cso34596061cf.1
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 11:16:47 -0700 (PDT)
-Received: from toxicpanda.com ([153.61.196.242])
+ id 6ac68c89-195a-0a2a45060019-d155dea9d146-3
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 20:16:42 +0200
+Received: by mail-qk1-f169.google.com with SMTP id
+ af79cd13be357-93e4c00d71aso163416385a.3
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 11:16:41 -0700 (PDT)
+Received: from toxicpanda.com ([153.61.196.250])
  by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-53572103ae6sm26011521cf.15.2026.10.07.11.16.45
+ af79cd13be357-93e9915a259sm272174685a.22.2026.10.07.11.16.40
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Oct 2026 11:16:45 -0700 (PDT)
+ Wed, 07 Oct 2026 11:16:40 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,52 +55,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1791397006; x=1792001806; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1791397001; x=1792001801; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=HlPhbKKLwkJ8jfy0wR1jO0OPJAX2t4fwgDWWxi6hd3M=;
-        b=gwJNpiayR9qjcJ8E7j/M60zn7pM1oyOWHoImbq6U2PIbEErFBmdJcLXof0itK35sD1
-         7ihqZpUan2j8IzSYUzzQ/zC+cmjzaT3/mkitwWYOGb0JmQIBawf0zJiLmdSZpOfM962b
-         XP533ZrdZOk/guKz3PP7Y4MW2tFxaR2cFgk/9NAvv9ego6ibKqsXh2kfAvyQag9SG0D8
-         4rXWyONtj+o8UJW9Byv3uDH4kcpJdAm/EYBTQ1UTHTbxBuQXKkGyT+x6ECQ4HsvhHCJK
-         LR+D1lDbCFgh0OAX+HPZr1sA4OzDOoz7uObvG2lrVjr9SKvbk4gEwpBlDde1VhM1i3NS
-         YpXQ==
+        bh=sSCgQuUXGYAa0Wwwh5eq4aENwa4g4z1qSYLp4/+HlX0=;
+        b=kgz+XjzJSHj62mJROPlLOd+zkISk/fKGacJO+vW/RSqeqq5G/QUhOTHrIqLvi/xT53
+         THNJ91vpkvX3eiP741heH01ASqFV1p1NxyumdtXRWRD5UEE8dOiaLbWbb00H6tbFRNZq
+         XAgKVQEeFX7oAeZY/UqaQazNuPsM8pRgx3zvgHbXG7rGbXXU0CNlRCM4mPnppw5Bot+F
+         YeI79j10aVhJz0i8xj/QhCYrO/FVtBJkHDJoxkAuBxeLT0UO4VAX4d9oDB+xzpkPto17
+         0T7zHmB8KAa6P6WB03q3zp1dq8HQxVHJBv4zy1wykBAhryKTJFWoaXwP0x6sYOHCeZv7
+         dqgw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791397006; x=1792001806;
+        d=1e100.net; s=20260707; t=1791397001; x=1792001801;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=HlPhbKKLwkJ8jfy0wR1jO0OPJAX2t4fwgDWWxi6hd3M=;
-        b=GIh80iU9dXxb2Mp/QsRhFB+slkSCsp/HJLxpjV9Q8ah/3WjU/L6WPGRiUTv873IMUA
-         1Zl+piMmQNZ3AIhI9GF+NyMsJFRO5zdbrSMfTmdzDbbCtMqfH5czdagv8FlVBA7asI4j
-         TiOYAT9l9hY+DHkITcCMv+14F1blhfj5AaJeckt/dwpTfaLTNOpJs/EKCsazFAfciiSr
-         4xGRle9p2M2+riVT/Kp3D0q1tKau7YXrPLpXZg8eOtISJZ8pFYA6dERFhdMHLd8/gNTv
-         kOQxQUAxIUuXHSIyOBIZsiXskslDLQQPlnAYnw4ZBXL6I7lUUvnkr2nQSTOs7eWvRqeZ
-         lQAA==
-X-Forwarded-Encrypted: i=1; AKwUvByO6HkiIpGORS+3BwmYDJ02R6+uAWnCr7JujcrkgOHGJiFUDDrgn1dHo62Vvq4Si7aYtZXUIkD/u6g=@lists.xenproject.org
-X-Gm-Message-State: AFuF++l7DSEwGyf52oercrJ8eNBf+VcwzmhSRSN2YkUqsqsJP1hg313s
-	KZeGpI5Epme/UhjeybDvU8USvGVQbaoEfvB356kD11Y1eX6IKJwiaChYv3fWNoehTYd1OYeznQ1
-	uNt84gr0jtA==
-X-Gm-Gg: AYBFou3C7SZfr7KNWlHBulK0BEj4w/wlCgYyq/ElCiRawuOGtq2JA0L1MmgLy/5caKQ
-	BnLxutT/6wmqMG1JnkRS4CJxCGFeVZolHgK8pY/HFQcVj5u1UC0hGEjWxI5yOMWi0I671Kq4P9Y
-	YlImVNWZ4m88ql4y1A9A9MwQZQSzIXSKIkoWQXGJ1WpPtJ/h0DjwgR1IQj508gA1Q9Ryb/Vn2Qe
-	zaEP/00aYzwcxKn79hgmSVYAcy2ayLZ1Oya//0IZsXhVZu6z3R9+YVCC5imTKhPDt6aNVPRrCF3
-	5JIP+aZNGVlWPKNeGGIgM1WRqmgDeiwUxDgPc089IBV3htm6TtaN+qUb9dVeJi+9p5VUC37NAOW
-	fi/NDTq13o0sZ49ypuhAnsUE2bQ7T2qF8JW1Denq4M/3QH2ICZw8ydN09QIghRjZ4V8/G759KCs
-	J/8lgiawFXLWJNoU7j9IJb9xEqnQr0Y1hl8F5zHn3YYEIzPftK83w+Qxv4KjQqHNICSsisKcxlY
-	UECuzhT9D81avM=
-X-Received: by 2002:a05:622a:4106:b0:533:3d48:37f0 with SMTP id d75a77b69052e-53575555c86mr50817771cf.47.1791397006325;
-        Wed, 07 Oct 2026 11:16:46 -0700 (PDT)
+        bh=sSCgQuUXGYAa0Wwwh5eq4aENwa4g4z1qSYLp4/+HlX0=;
+        b=WFnjQEQp/ox2zRKhp/gzSvaMPe+z4a/mrwoUA7QxPQuBeb1YyHNFLysWi4GJWRoTxp
+         BTBKFpP8U8iAndifdmlTfsmP9f34Qm7/jG0J5CBw+DrFXBvB21zEfqDwlzIxoqaOXYem
+         Mb7WtInqyzDrs+qARJfTbl5o2AATNbOyQxsvIjrHuVd8+t/ASkNjBAFi0YNrAoEbEB8k
+         73LUZ/q7TJpKgCfD5zA6NVYumBeRCME+868aFU0wXXpfGPyR23U8KxIofCNznwaAdYk+
+         oSzVjlscHoOZhmSRaznmSI0l5cwcx/gZ4Ni4QprlE0SkXpQbJGR8aCA4MTJCC0Vjw+0n
+         Sljw==
+X-Forwarded-Encrypted: i=1; AKwUvBwNrnTczdXGoPcDQ+QytEn1NlTX8O538qZbBE9Vx0ZkSV2J6Qn2ntEzwAeQTfNghy0vmNGcesEa9qk=@lists.xenproject.org
+X-Gm-Message-State: AFuF++li6p/UFqONAf5jJ/cVa0wCHumO5GxHkBO1NRI795k5LEt+zpDB
+	xkRFoTOLYU2m3O1bfA33v1sJ+1/iRBMG7utJ9ltrKmD88TYA7aJsIXAYAVb00ROdGXbnrIiifWX
+	4MWrBzLcmdg==
+X-Gm-Gg: AYBFou3fJg/bhioe2BpsoXbkBtEh5vfb2GWcY66/I1bQtDNs857P9sImbSXnH+6kxWX
+	lFmlnROje2EX1py2bhq08V2kV4IJL0x82zI4iLt9ql3NgqyNV+0Za7E3/KwxLHxWVenrlgKCF4t
+	9iDDMCPUzLI6ZA6E7J80jKl/bI/NAknqgZk27NS+fNPSXGAE5mldtsAVaYCGeyonptkBNT/uz2B
+	BOH/IkSxIDeWTx6p44qpfiBloJKfTfSmcAiGJOfxYcgAl3k1pxmp3ssMe2Bn+V/jpsVkCaccRbg
+	VPJKdkX5KJcvhPXlAyfN2rWJTobkOkq8/2/2nj82M61Z++r4r57BcgIbgMKVsiCXfez/xl2ojxl
+	YjSRXyPk2jdNEb0D1Go4SbgXotymyZl6WXzKq4mrvzStioak5KEztNYqf+l3UAiai5foZ0LOjG+
+	QnuQn3VBUZrnpPgoyr/Gc79DulFqRXEX6UTBLPjAYugiKrO0Vo4jrzLyNFFpPuWVEvq0QFaALPg
+	95J6C/KIKys1fc=
+X-Received: by 2002:a05:620a:29c7:b0:936:dc4c:3bf4 with SMTP id af79cd13be357-93e9b7436bamr598926085a.28.1791397000824;
+        Wed, 07 Oct 2026 11:16:40 -0700 (PDT)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Wed, 07 Oct 2026 18:16:20 +0000
-Subject: [PATCH net-next 7/9] netxen: use pskb_may_pull() to pull excess TX
- frags into the head
+Date: Wed, 07 Oct 2026 18:16:17 +0000
+Subject: [PATCH net-next 4/9] xen/netfront: check for failure when pulling
+ in xennet_fill_frags()
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261007-b4-pskb-pull-tail-drivers-v1-7-9512b0fb977b@toxicpanda.com>
+Message-Id: <20261007-b4-pskb-pull-tail-drivers-v1-4-9512b0fb977b@toxicpanda.com>
 References: <20261007-b4-pskb-pull-tail-drivers-v1-0-9512b0fb977b@toxicpanda.com>
 In-Reply-To: <20261007-b4-pskb-pull-tail-drivers-v1-0-9512b0fb977b@toxicpanda.com>
 To: Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, 
@@ -120,44 +120,76 @@ Cc: Saeed Mahameed <saeedm@nvidia.com>, Tariq Toukan <tariqt@nvidia.com>,
  xen-devel@lists.xenproject.org, intel-wired-lan@lists.osuosl.org, 
  Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1791396985; l=1110;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1791396985; l=2095;
  i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=McO8YjXlypOeoX4QkYeNrhdO3XuQh8G3BcccmslsJYQ=;
+ bh=SzoPfHs/Y0Yp5wMeUYR89lBIZmoL94dSQOZucEHgjz8=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
  JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QEER6Cf6YiSeQas1SDvrXyD48BT2JMKt5v+EgNKlM2X9W7DYLscC2uLR/v/alcS1X9KdG7G/jh6
- TE0kjRM5PRAc=
+ QE2mPs8pQLqezwaIQAKe007VJT1pjZBj9lcqG8tW/4kuSaDQpOlcqMEPoJV+xlZe2oi4kfjBSKZ
+ BVy2K6gSrcAQ=
 X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
  fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-ebf023/1791397007-512DCB50-5877B80D/0/0
+X-purgate-ID: tlsNG-16d1c6/1791397002-F6C7777B-3A4C5F99/0/0
 X-purgate-type: clean
-X-purgate-size: 1112
+X-purgate-size: 2097
 
-netxen_nic_xmit_frame() pulls the frags that don't fit in a TX
-descriptor into the head with __pskb_pull_tail().  It already checks
-the result.  Switch to pskb_may_pull(), which takes the length the head
-should end up with and checks it against the skb, so this driver no
-longer calls __pskb_pull_tail() directly.
+When the skb already has MAX_SKB_FRAGS frags, xennet_fill_frags() pulls
+the start of the packet into the head to try to free up a frag slot.
+It ignores the return value of __pskb_pull_tail(), which works out only
+because the nr_frags check right after it drops the packet if no slot
+was freed.
+
+Use pskb_may_pull() and take the error path explicitly if it fails.
+pskb_may_pull() does nothing if the head already holds pull_to bytes,
+so the BUG_ON() for pull_to < skb_headlen(skb), which protected the
+subtraction, can go.
 
 Assisted-by: LLM
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- drivers/net/ethernet/qlogic/netxen/netxen_nic_main.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ drivers/net/xen-netfront.c | 22 ++++++++++------------
+ 1 file changed, 10 insertions(+), 12 deletions(-)
 
-diff --git a/drivers/net/ethernet/qlogic/netxen/netxen_nic_main.c b/drivers/net/ethernet/qlogic/netxen/netxen_nic_main.c
-index 67d9bf69f8f2..202deb64ddef 100644
---- a/drivers/net/ethernet/qlogic/netxen/netxen_nic_main.c
-+++ b/drivers/net/ethernet/qlogic/netxen/netxen_nic_main.c
-@@ -2045,7 +2045,7 @@ netxen_nic_xmit_frame(struct sk_buff *skb, struct net_device *netdev)
- 			delta += skb_frag_size(frag);
- 		}
+diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
+index 2ed673649c48..6e01a883cc64 100644
+--- a/drivers/net/xen-netfront.c
++++ b/drivers/net/xen-netfront.c
+@@ -1174,18 +1174,11 @@ static int xennet_fill_frags(struct netfront_queue *queue,
  
--		if (!__pskb_pull_tail(skb, delta))
-+		if (!pskb_may_pull(skb, skb_headlen(skb) + delta))
- 			goto drop_packet;
+ 		RING_COPY_RESPONSE(&queue->rx, ++cons, &rx);
  
- 		frag_count = 1 + skb_shinfo(skb)->nr_frags;
+-		if (skb_shinfo(skb)->nr_frags == MAX_SKB_FRAGS) {
+-			unsigned int pull_to = NETFRONT_SKB_CB(skb)->pull_to;
+-
+-			BUG_ON(pull_to < skb_headlen(skb));
+-			__pskb_pull_tail(skb, pull_to - skb_headlen(skb));
+-		}
+-		if (unlikely(skb_shinfo(skb)->nr_frags >= MAX_SKB_FRAGS)) {
+-			xennet_set_rx_rsp_cons(queue,
+-					       ++cons + skb_queue_len(list));
+-			kfree_skb(nskb);
+-			return -ENOENT;
+-		}
++		if (skb_shinfo(skb)->nr_frags == MAX_SKB_FRAGS &&
++		    unlikely(!pskb_may_pull(skb, NETFRONT_SKB_CB(skb)->pull_to)))
++			goto err;
++		if (unlikely(skb_shinfo(skb)->nr_frags >= MAX_SKB_FRAGS))
++			goto err;
+ 
+ 		skb_add_rx_frag(skb, skb_shinfo(skb)->nr_frags,
+ 				skb_frag_page(nfrag),
+@@ -1198,6 +1191,11 @@ static int xennet_fill_frags(struct netfront_queue *queue,
+ 	xennet_set_rx_rsp_cons(queue, cons);
+ 
+ 	return 0;
++
++err:
++	xennet_set_rx_rsp_cons(queue, ++cons + skb_queue_len(list));
++	kfree_skb(nskb);
++	return -ENOENT;
+ }
+ 
+ static int checksum_setup(struct net_device *dev, struct sk_buff *skb)
 
 -- 
 2.55.0
