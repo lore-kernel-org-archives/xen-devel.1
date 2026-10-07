@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D9385CA5FF1
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 09:13:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442065.1659602 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 951ECCA5FF1
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 10:04:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442081.1659611 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xENiM-0000vu-5Z; Wed, 07 Oct 2026 09:13:30 +0000
+	id 1xEOUo-00005u-Od; Wed, 07 Oct 2026 10:03:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442065.1659602; Wed, 07 Oct 2026 09:13:30 +0000
+Received: by outflank-mailman (output) from mailman id 1442081.1659611; Wed, 07 Oct 2026 10:03:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xENiM-0000vn-2K; Wed, 07 Oct 2026 09:13:30 +0000
-Received: by outflank-mailman (input) for mailman id 1442065;
- Wed, 07 Oct 2026 09:13:28 +0000
+	id 1xEOUo-00005n-Lq; Wed, 07 Oct 2026 10:03:34 +0000
+Received: by outflank-mailman (input) for mailman id 1442081;
+ Wed, 07 Oct 2026 10:03:34 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a115a38ea30003f66@swg.vates.tech>)
- id 1xENiK-0000vf-MW
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 09:13:28 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xEOUn-00005f-Qj
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 10:03:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xENiJ-008Vhi-W4
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 11:13:28 +0200
-Received: from [10.42.69.8] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a115a38ea30003f66@swg.vates.tech>)
- id 6ac60d2d-8faa-0a2a0a5109dd-0a2a4508ed84-42
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 11:13:27 +0200
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a115a38ea30003f66@swg.vates.tech>)
- id 6ac60d37-f659-0a2a45080019-b9ff1c128f37-3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 11:13:27 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a115a38ea30003f66.001 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 07 Oct 2026 09:13:22 +0000
-Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 1B8968233F;
- Wed,  7 Oct 2026 11:13:22 +0200 (CEST)
+ id 1xEOUl-00HIUO-Qg
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 12:03:31 +0200
+Received: from [10.42.69.4] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ac618a3-8faa-0a2a0a5109dd-0a2a4504b4d6-34
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 12:03:31 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ac618f3-b57f-0a2a45040019-d1558030e0f4-3
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 12:03:31 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-4a1635f7c89so37257915e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 03:03:31 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
+ [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a17f51beffsm59968245e9.2.2026.10.07.03.03.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 07 Oct 2026 03:03:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,347 +52,250 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=ojFYZS8maUGImwXqG3ZeKe5T0crpp+V1kSjqN1hbyrc=;
- h=from:subject:date:message-id:to:mime-version:content-type:in-reply-to:references:feedback-id;
- b=E0+oVSV4RIqXN7K11Jq3zTLQFUJ+u4/LZ0HvdujNNvjBVt4X/ap8KHQjZme50ih+uAUx2hNDu
- YxQhVLfBq4MFc6TG7PmWq+7eslkBSgnw6nGNOKzbIMAr0TnfhP5SIQNMh2x1W4BHR77xAVqKo/8
- LVLY8daM/M0mxoC63FXSc53ZyHZ0lzgtBBa/LKHPG60tec7un3PbKYNTBFvk405AXb6LwKwEkPu
- L3ZiPzxooXvni8OBwgoqBry294NxnhBPP4IVSVWFrFJcLtl1cUIhV+6KemqKBHwkeFKvj3hmF9o
- Y+tcJZrqlxxhQ/l/alNRuxQy90b6pF9Mh/t/+V3snASA==
-X-Zone-Loop: 618143cedf6e22ec084116a0007d10de2944c26c5544
-x-campaign-type: default
-x-transaction-id: 7cdbbb1f-e8b7-4649-b085-d2a4e56ae651
-x-swg-uid: 01-91b5b443-6589-4d91-bb4b-06dadccc981d
-X-Mailer: Sweego
-Message-ID:
- <1791364402.8631fc262581453bbf619ec5b2062170.1a115a38ea30003f66@vates.tech>
-x-swg-bid: 1791364402.8631fc262581453bbf619ec5b2062170.1a115a38ea30003f66
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Wed, 7 Oct 2026 11:13:21 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791367411; x=1791972211; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=yOGoC8k/+o27Ntp+OuBXBAJ0vJdmg5oYVfJKR3ii81E=;
+        b=Lw4kp9te/Y/91DwJzGlsj5ZKX1R6ur8Nfa6rtjpSisJ6Ern46z+TXkov+eCsFBC1pX
+         AYAGMZlqL5dnv2y7+uMPUO1UWU4TIwARC7DOB+1DeC1oYGZxl0ltEzRD2NmkQaeFy5FJ
+         N5rqPw6EpqQgNf3sxIlsTtvHukI7+/qcCMsH8dGBI6bwr77i81wullSiQegCC1k2Ts4J
+         MWau6hCbqUYa54nT+Qr6mlXtYvNOqhFGFpZInEOefW033LUH4ThZ4KPgiShhQxP8H9Zy
+         bB5ex0KNBdWk4vBQFYJiyEIJm4VokWTrm/cJ1BWPgp1KXr7l9tg/XpUJrq6gacunENTz
+         0xOg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791367411; x=1791972211;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=yOGoC8k/+o27Ntp+OuBXBAJ0vJdmg5oYVfJKR3ii81E=;
+        b=ObHSppOLe7EG5IHVP8cUKns89XyGZlybmHLu5WVP36GagOUvi9Vj15AS0yA043NlFn
+         z2PAaJhyf0n/NtDtQZ8oi+XlxpecetGqLfO+O7vnVBX49qEBNccljpFa9fJ+IO3FHdwf
+         ZLZqBEPZbo/GxqEwyqAshs+F9BVU2c3oEHxTZjFM3UhUC5ac7Ezd+vfZ0bxqk1hcQdvO
+         YbRKkvYHHbY53gt0fou+03T8yQGe07xtfPsixekWcKr28ArLGRa2RhGOvXTWzKLO56V8
+         N5MwxyGFYgnVxuaPfPyhMxvhS/GeIH3dT3P5t0q3FYsdxe8l5ztRv6D6h+erDIRlWy0v
+         fo8g==
+X-Forwarded-Encrypted: i=1; AKwUvBx7AUw2TUUYlYgitH5bTmj6CSOrycaDPagwH/oIofSPdzlQ9/PmcdRRgf+HHiIMLRKTIXgCDr0KEEk=@lists.xenproject.org
+X-Gm-Message-State: AFuF++koDz4+kfyyOxMMq66+mDFz6GptkvILiaB1tr5leBuAL8QUekSV
+	04aaOM9zhaeC1Xhg+fouC2/LJnR9PwzAW2qWN5JVk4kGAUrD6j7bVxA/
+X-Gm-Gg: AYBFou2/vgOQBeVF66jHNuKa8wD6lJ/KcO+OX7MiV3c+BngPiStEOloMUE1vU/ES77L
+	4KILHa2BXbN5YHBqiYCNm5xWvkz6JxQMT71zXBV0C9eiVky8hc4IpCdNVLaKuMiRhVf2wHTE1jt
+	nZllS2LXqIEfO6RJpMWAX6A+a1IF52r2nMQI2pURXKRW2aSj5tOJOjUFy8WgdvbdEmm+fwiEuif
+	d1+gq3ofuQl1QPndcj6fD8IMIlxYDPpMcWKdKNWlYfGXzjOG7vTPoBjNCgc00g6cGRiLS6wBSuD
+	AxrC6pR3prTPcuDm22JUxpilu1Y00N0LuAgxB7DUUkGlGaT0NlxifDH4o0bUnLL0N7dwobz6XFE
+	6P8uvGlRhoJFqc0t/vr80wNC/1s7pxJOUg5XYuxBBfEcuwCVxIVADEXyuQpClKFT4iSO8c9kwv+
+	5n3UIvuWxG/rFzvvIb+JvmI8AajWSdOwlvbwCLZOtgnRdClInzdA/3lmZVzdQlEnZDjg3tXTEOq
+	M0YUrQ4y6je5we+rVdMxNoUYRUw53ntLNTmJ7T1LR55r8fNLg==
+X-Received: by 2002:a05:600c:64c6:b0:49f:fe90:de63 with SMTP id 5b1f17b1804b1-4a180455e85mr26206385e9.28.1791367410728;
+        Wed, 07 Oct 2026 03:03:30 -0700 (PDT)
+Message-ID: <4a0b0d62-c312-43c1-908a-fcff7c081149@gmail.com>
+Date: Wed, 7 Oct 2026 12:03:28 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v5 1/3] xen/riscv: always preset A/D bits in G-stage PTEs
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+To: Jan Beulich <jbeulich@suse.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>, Zheng Zhang <zhangzheng@iscas.ac.cn>,
  xen-devel@lists.xenproject.org
 References: <1791215925.8631fc262581453bbf619ec5b2062170.1a10cc9f7c20003f66@vates.tech>
  <1791216017.8631fc262581453bbf619ec5b2062170.1a10ccb5ec20003f66@vates.tech>
- <1791327013.8631fc262581453bbf619ec5b2062170.1a113690c000003f66@vates.tech>
- <1791361284.8631fc262581453bbf619ec5b2062170.1a11573f8520003f66@vates.tech>
+ <793b6d0d-68ca-4f9d-8ca5-c37f2c013478@suse.com>
 Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <1791361284.8631fc262581453bbf619ec5b2062170.1a11573f8520003f66@vates.tech>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------WYCOH5lZIV0R4buNC0zn0Emm"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1791364402193
-X-purgate-ID: tlsNG-c1860d/1791364407-CD74B87B-5DF54D7A/0/0
-X-purgate-type: clean
-X-purgate-size: 18437
-
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------WYCOH5lZIV0R4buNC0zn0Emm
-Content-Type: multipart/mixed; boundary="------------rS8oI0PpMQN9AOKUU04WK8nI";
- protected-headers="v1"; hp="clear"
-Message-ID: <d093d35c-644d-44db-b1d0-19833fbb2203@vates.tech>
-Date: Wed, 7 Oct 2026 11:13:21 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/3] xen/riscv: always preset A/D bits in G-stage PTEs
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- xen-devel@lists.xenproject.org
-References: <1791215925.8631fc262581453bbf619ec5b2062170.1a10cc9f7c20003f66@vates.tech>
- <1791216017.8631fc262581453bbf619ec5b2062170.1a10ccb5ec20003f66@vates.tech>
- <1791327013.8631fc262581453bbf619ec5b2062170.1a113690c000003f66@vates.tech>
- <1791361284.8631fc262581453bbf619ec5b2062170.1a11573f8520003f66@vates.tech>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <1791361284.8631fc262581453bbf619ec5b2062170.1a11573f8520003f66@vates.tech>
-
---------------rS8oI0PpMQN9AOKUU04WK8nI
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <793b6d0d-68ca-4f9d-8ca5-c37f2c013478@suse.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ebf023/1791367411-C3CC7B50-BD3B2A75/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 8534
 
-TGUgMDcvMTAvMjAyNiDDoCAxMDoyNCwgQmFwdGlzdGUgTGUgRHVjIGEgw6ljcml0wqA6DQo+
-IE9uIDEwLzcvMjYgMDA6NTAsIFRlZGR5IEFzdGllIHdyb3RlOg0KPj4gTGUgMDUvMTAvMjAy
-NiDDoCAxODowMiwgQmFwdGlzdGUgTGUgRHVjIGEgw6ljcml0wqA6DQo+Pj4gQSBSSVNDLVYg
-aW1wbGVtZW50YXRpb24gY2FuIG1hbmFnZSB0aGUgUFRFIEEvRCBiaXRzIGluIG9uZSBvZiB0
-d28gd2F5czoNCj4+PiDCoMKgwqDCoCAxKSBVcGRhdGUgdGhlICdBJyBhbmQgJ0QnIFBURSBi
-aXRzIGluIGhhcmR3YXJlIChyYXRpZmllZCBhcyBTdmFkdSkuDQo+Pj4gwqDCoMKgwqAgMikg
-R2VuZXJhdGUgYSBwYWdlIGZhdWx0IHdoZW4gJ0EnIGFuZC9vciAnRCcgaXMgY2xlYXIsIHNv
-IHRoYXQgDQo+Pj4gc29mdHdhcmUNCj4+PiDCoMKgwqDCoMKgwqDCoCBjYW4gc2V0IHRoZW0g
-KHJhdGlmaWVkIGFzIFN2YWRlKS4NCj4+Pg0KPj4+IHAybV9zZXRfcHRlX2ZsYWdzKCkgcHJl
-c2V0cyBBL0QgaW4gRy1zdGFnZSBQVEVzIG9ubHkgd2hlbiB0aGUgZGV2aWNlIA0KPj4+IHRy
-ZWUNCj4+PiBhZHZlcnRpc2VzIFN2YWRlLiBQbGF0Zm9ybXMgdGhhdCB1c2Ugc2NoZW1lICgy
-KSB3aXRob3V0IGFkdmVydGlzaW5nIA0KPj4+IFN2YWRlLA0KPj4+IHN1Y2ggYXMgdGhlIEhp
-Rml2ZSBQcmVtaWVyIFA1NTAsIHRoZW4gaGl0IGd1ZXN0LXBhZ2UgZmF1bHRzIHRoYXQgWGVu
-IA0KPj4+IGRvZXMNCj4+PiBub3QgaGFuZGxlLg0KPj4NCj4+IEkgc2Vjb25kIHdoYXQgSmFu
-IHNhaWQgKHRoaXMgaXMgbGlrZWx5IGEgZmlybXdhcmUgYnVnLCBnaXZlbiB0aGF0IHRoZSAN
-Cj4+IGVudW1lcmF0ZWQgYmVoYXZpb3IgaXMgbm90IGNvbnNpc3RlbnQgd2l0aCB0aGUgc3Bl
-Y2lmaWNhdGlvbiwgYXMgDQo+PiBleGlzdGVuY2Ugb2YgU3ZhZHUvU3ZhZGUgYWx0ZXJzIG9i
-c2VydmFibGUgYmVoYXZpb3IpLg0KPj4NCj4gVGhhbmtzLCBhZ3JlZWQgb24gYm90aCBwb2lu
-dHMuDQo+IA0KPiBJJ2xsIHJld29yZCB0aGUgY29tbWl0IG1lc3NhZ2U6IGl0IHNob3VsZG4n
-dCBpbXBseSB0aGF0IFN2YWRlIGluIHRoZSBEVCANCj4gbWVhbnMgZmF1bHRzIHdpbGwgb2Nj
-dXIsIHNpbmNlIHdpdGggU3ZhZHUgYWxzbyBwcmVzZW50IHRoYXQgZGVwZW5kcyBvbiANCj4g
-aGVudmNmZy5BRFVFLg0KPiANCj4gT24gdGhlIGZpcm13YXJlLWJ1ZyBwb2ludDogSSBkb24n
-dCB0aGluayB0aGUgUDU1MCBpcyByZWFsbHkgaW5jb25zaXN0ZW50IA0KPiB3aXRoIHRoZSBz
-cGVjLiBTdmFkZSBhbmQgU3ZhZHUgZGlkbid0IGV4aXN0IHdoZW4gdGhlIFA1NTAgY29yZSB3
-YXMgDQo+IGRlc2lnbmVkLiBUaGV5IHdlcmUgb25seSByYXRpZmllZCBsYXRlciwgdG8gbmFt
-ZSB0aGUgdHdvIGJlaGF2aW9ycyB0aGF0IA0KPiBhbHJlYWR5IGV4aXN0ZWQgaW4gdGhlIHdp
-bGQuIEJlZm9yZSB0aGF0LCB0aGUgcHJpdmlsZWdlZCBzcGVjIGp1c3QgDQo+IGFsbG93ZWQg
-ZWl0aGVyOiBoYXJkd2FyZSB1cGRhdGluZyBBL0QsIG9yIHJhaXNpbmcgYSBwYWdlIGZhdWx0
-LiBUaGUgUDU1MCANCj4gaW1wbGVtZW50cyB0aGUgc2Vjb25kLCBhbmQgdGhlcmUgd2FzIG5v
-IGV4dGVuc2lvbiBpdCBjb3VsZCBhZHZlcnRpc2UgZm9yIA0KPiBpdC4NCj4gVGhlcmVmb3Jl
-LCB0aGUgRFQgbGFja3Mgc3ZhZGUgYmVjYXVzZSB0aGUgZXh0ZW5zaW9uIGRpZG4ndCBleGlz
-dCB3aGVuIA0KPiB0aGUgcGxhdGZvcm0gZGVzY3JpcHRpb24gd2FzIHdyaXR0ZW4sIG5vdCBi
-ZWNhdXNlIHRoZSB2ZW5kb3IgDQo+IG1pc2Rlc2NyaWJlZCBhbnl0aGluZy4NCj4gDQoNCkF0
-IGxlYXN0IGluIGxhdGVzdCBzcGVjaWZpY2F0aW9uLCBhYnNlbmNlIG9mIFN2YWRlIGltcGxp
-ZXMgdGhhdCBBL0QgYml0IA0KaXMgdXBkYXRlZCBvbiBwYWdlLXRhYmxlIGFjY2Vzcy4NCg0K
-VGhlIHNwZWMgYWxzbyBpbnNpc3Qgb24gdGhlIG5vLVN2YWRlIGJlaGF2aW9yLg0KDQogPiBU
-aGUgU3ZhZGUgZXh0ZW5zaW9uOiB3aGVuIGEgdmlydHVhbCBwYWdlIGlzIGFjY2Vzc2VkIGFu
-ZCB0aGUgQSBiaXQgaXMNCiA+IGNsZWFyLCBvciBpcyB3cml0dGVuIGFuZCB0aGUgRCBiaXQg
-aXMgY2xlYXIsIGEgcGFnZS1mYXVsdCBleGNlcHRpb24gaXMNCiA+IHJhaXNlZC4NCiA+DQog
-PiBXaGVuIHRoZSBTdmFkZSBleHRlbnNpb24gaXMgbm90IGltcGxlbWVudGVkLCB0aGUgZm9s
-bG93aW5nIHNjaGVtZQ0KID4gYXBwbGllcy4NCiA+DQogPiAoLi4uIGhhcmR3YXJlIHVwZGF0
-ZXMgQS9EIGJpdCkNCg0KVGhlIG5vLVN2YWRlIGJlaGF2aW9yIGNhbiB0aGVuIGJlIHJlLWlu
-dHJvZHVjZWQgd2l0aCBTdmFkdSB3aXRoIEFEVUU9MQ0KDQogPiBJZiB0aGUgU3ZhZHUgZXh0
-ZW5zaW9uIGlzIGltcGxlbWVudGVkLCB0aGUgQURVRSBiaXQgY29udHJvbHMgd2hldGhlcg0K
-ID4gaGFyZHdhcmUgdXBkYXRpbmcgb2YgUFRFIEEvRCBiaXRzIGlzIGVuYWJsZWQgZm9yIFZT
-LXN0YWdlIGFkZHJlc3MNCiA+IHRyYW5zbGF0aW9uLiBXaGVuIEFEVUU9MSwgaGFyZHdhcmUg
-dXBkYXRpbmcgb2YgUFRFIEEvRCBiaXRzIGlzIGVuYWJsZWQNCiA+IGR1cmluZyBWUy1zdGFn
-ZSBhZGRyZXNzIHRyYW5zbGF0aW9uLCBhbmQgdGhlIGltcGxlbWVudGF0aW9uIGJlaGF2ZXMg
-YXMNCiA+IHRob3VnaCB0aGUgU3ZhZGUgZXh0ZW5zaW9uIHdlcmUgbm90IGltcGxlbWVudGVk
-IGZvciBWUy1tb2RlIGFkZHJlc3MNCiA+IHRyYW5zbGF0aW9uLiBXaGVuIEFEVUU9MCwgdGhl
-IGltcGxlbWVudGF0aW9uIGJlaGF2ZXMgYXMgdGhvdWdoIFN2YWRlDQogPiB3ZXJlIGltcGxl
-bWVudGVkIGZvciBWUy1zdGFnZSBhZGRyZXNzIHRyYW5zbGF0aW9uLiBJZiBTdmFkdSBpcyBu
-b3QNCiA+IGltcGxlbWVudGVkLCBBRFVFIGlzIHJlYWQtb25seSB6ZXJvLg0KDQpUaGUgc3Bl
-Y2lmaWNhdGlvbiBpcyB1bmZvcnR1bmF0ZWx5IHdyaXR0ZW4gYSBiaXQgc2lkZXdheXMsIHRo
-ZSBiYXNlIA0KYmVoYXZpb3IgaGFwcGVucyB0byBiZSAib3B0LWluIiB0aHJvdWdoIGFub3Ro
-ZXIgZXh0ZW5zaW9uLg0KDQpCdXQgdGhhdCdzIHNwZWNpZmljYXRpb24sIGFuZCBpdCdzIHBv
-c3NpYmxlIHRoYXQgZmlybXdhcmUgZm9sbG93cyBhIA0KZWFybGllciByZXZpc2lvbiBvZiBp
-dCB0aGF0IGhhcyB1bnNwZWNpZmllZCBBL0Qgc2VtYW50aWNzIGluc3RlYWQuIEJ1dCANCmlu
-IHRoaXMgY2FzZSwgdGhlIGZpcm13YXJlIGlzIG91dCBvZiBzeW5jIHdpdGggY3VycmVudCBz
-cGVjaWZpY2F0aW9ucyANCmFuZCBwcm9iYWJseSB3YW50cyB0byBiZSB1cGRhdGVkLg0KDQo+
-IEkgYWdyZWUgdGhhdCwgd2hlcmUgU3ZhZHUgaXMgYXZhaWxhYmxlLCBYZW4gc2hvdWxkIGlk
-ZWFsbHkgY29uZmlndXJlIGEgDQo+IGNvbnNpc3RlbnQgc2NoZW1lIChBRFVFPTEpIGFuZCB1
-c2UgQURVRT0wIG9ubHkgZm9yIHNwZWNpZmljIG5lZWRzIHN1Y2ggDQo+IGFzIGRpcnR5IHRy
-YWNraW5nLiBCdXQgWGVuIGRvZXNuJ3Qgc3VwcG9ydCBTdmFkdSB0b2RheSwgc28gdGhhdCBp
-cyBhIA0KPiBzZXBhcmF0ZSBwaWVjZSBvZiB3b3JrIHdoaWNoIEknZCBwcmVmZXIgdG8gZG8g
-bGF0ZXIuDQo+IA0KPiBJbiB0aGUgbWVhbnRpbWUswqBwcmVzZXR0aW5nIEEvRCBpbiB0aGUg
-Ry1zdGFnZSBQVEVzIGlzIHRoZSBvbmx5IHdheSB0byANCj4gYXZvaWQgdGhlIGZhdWx0cyBv
-biBoYXJkd2FyZSBsaWtlIHRoZSBQNTUwLCBhbmQgaXQgaXMgaGFybWxlc3Mgb24gDQo+IGhh
-cmR3YXJlIHRoYXQgdXBkYXRlcyBBL0QgaXRzZWxmLg0KDQpMb29rcyBnb29kIHRvIG1lLg0K
-DQo+IA0KPiBGb3IgdjYgSSdsbCBrZWVwIHRoZSB1bmNvbmRpdGlvbmFsIHByZXNldCBhbmQg
-cmV3b3JkIHRoZSBjb21taXQgbWVzc2FnZSANCj4gdG8gc2F5IHRoaXMsIHdoYXQgZG8geW91
-IHRoaW5rPw0KPiANCj4+Pg0KPj4+IEFsd2F5cyBwcmVzZXQgQS9EIGluIEctc3RhZ2UgUFRF
-cyBzbyBzY2hlbWUgKDIpIG5ldmVyIGZhdWx0cy4gVGhpcyBpcw0KPj4+IGhhcm1sZXNzIHdp
-dGggKDEpOiBzb2Z0d2FyZSBqdXN0IGRvZXMgd2hhdCBoYXJkd2FyZSB3b3VsZCBoYXZlIGRv
-bmUgb24NCj4+PiBmaXJzdCBhY2Nlc3MuDQo+Pj4NCj4+PiBEcm9wIHRoZSBUT0RPIHN1Z2dl
-c3RpbmcgdG8gaGFuZGxlIEEvRCBmYXVsdHM6IG9ubHkgU3ZhZGUgcmFpc2VzIA0KPj4+IHRo
-ZW0sIHNvDQo+Pj4gaXQgd291bGQgbm90IHdvcmsgb24gU3ZhZHUuIERpcnR5L2FjY2VzcyB0
-cmFja2luZyBjYW4gcmVzdHJpY3QgdGhlIFJXWA0KPj4+IHBlcm1pc3Npb25zIG9mIHAybSBl
-bnRyaWVzLCBhcyB4ODYgYW5kIEFybSBkby4NCj4+IFlldCwgZXhpc3RlbmNlIG9mIFN2YWRl
-IGFsb25lIGRvZXNuJ3QgbWFuZGF0ZSB0aGUgYWN0dWFsIGJlaGF2aW9yLCBpdCANCj4+IGlz
-IGFsc28gZGVwZW5kYW50IG9uIHRoZSB2YWx1ZSBvZiBBRFVFIGJpdCBpbiBjb25maWd1cmF0
-aW9uIHJlZ2lzdGVycy4NCj4+DQo+PiBJZGVhbGx5IChpbiBjYXNlcyB3ZSBjYW4pIHdlIHdv
-dWxkIHdhbnQgdG8gY29uZmlndXJlIGhhcmR3YXJlIHRvIA0KPj4gZm9sbG93IGEgY29uc2lz
-dGVudCBzY2hlbWUgKHdpdGggdGhlIG9uZSB0aGF0IHVwZGF0ZXMgQS9EIHdpdGggDQo+PiBo
-YXJkd2FyZSBpLmUgQURVRT0xLCBhcyBpdCdzIGNvbnNpc3RlbnQgdG8gd2l0aG91dCBTdmFk
-ZSkgYW5kIG9ubHkgDQo+PiBjb25zaWRlciB0aGUgQURVRT0wIGJlaGF2aW9yIGZvciBzcGVj
-aWZpYyBuZWVkcyBsaWtlIGRpcnR5IHRyYWNraW5nLg0KPj4NCj4+PiA+IEZpeGVzOiBmZjE0
-MDUzOTgzYjAgKCJ4ZW4vcmlzY3Y6IEltcGxlbWVudCBwMm1fcHRlX2Zyb21fbWZuKCkgYW5k
-IA0KPj4gc3VwcG9ydCBQQk1UIGNvbmZpZ3VyYXRpb24iKQ0KPj4+IEFzc2lzdGVkLWJ5OiBD
-bGF1ZGU6Y2xhdWRlLW9wdXMtNQ0KPj4+IFNpZ25lZC1vZmYtYnk6IEJhcHRpc3RlIExlIER1
-YyA8YmFwdGlzdGUubGUtZHVjQHZhdGVzLnRlY2g+DQo+Pj4gLS0tDQo+Pj4gQ2hhbmdlcyBz
-aW5jZSB2NDoNCj4+PiAtIHJlc3RvcmUgc3ZhZGUgYW5kIHVwZGF0ZSB0aGUgY29tbWl0IG1l
-c3NhZ2UgYWNjb3JkaW5nbHkuDQo+Pj4gLSByZWJhc2Ugb24gdG9wIG9mIHN0YWdpbmcuDQo+
-Pj4gLS0tDQo+Pj4gQ2hhbmdlcyBzaW5jZSB2MzoNCj4+PiAtIGFsd2F5cyBwcmVzZXQgQS9E
-IGJpdHMgaW4gRy1zdGFnZSBtYXBwaW5ncyBpbnN0ZWFkIG9mIGtleWluZyBvZmYgDQo+Pj4g
-dGhlIERUOg0KPj4+IMKgwqAgaXQgbWF5IG5vdCByZWZsZWN0IHdoYXQgdGhlIGhhcmR3YXJl
-IGFjdHVhbGx5IGRvZXMuDQo+Pj4gLSBjaGFuZ2UgY29tbWl0IHRpdGxlL21lc3NhZ2UuDQo+
-Pj4gLSBkcm9wIHN2YWRlIGFzIGl0IGlzIG5vdy11bnVzZWQuDQo+Pj4gLS0tDQo+Pj4gQ2hh
-bmdlcyBzaW5jZSB2MjoNCj4+PiAtIGNoYW5nZSBjb21taXQgdGl0bGUuDQo+Pj4gLSBwcmVz
-ZXQgQS9EIGJpdHMgaW4gcDJtX3NldF9wdGVfZmxhZ3MoKSBpZiAoIXN2YWR1IHx8IHN2YWRl
-KSwgDQo+Pj4gaW5zdGVhZCBvZg0KPj4+IHNldHRpbmcgUklTQ1ZfSVNBX0VYVF9zdmFkZSBp
-biB0aGUgcmlzY3ZfaXNhIGJpdG1hcCBmb3IgY2FzZXMgMSwgMiANCj4+PiBhbmQgNC4NCj4+
-PiAtIHJpc2N2X3Jlc29sdmVfYWRfc2NoZW1lKCkgbm93IG9ubHkgd2FybnMgd2hlbiBib3Ro
-IFN2YWRlIGFuZCBTdmFkdSBhcmUNCj4+PiBwcmVzZW50IGFuZCBTQkkgRldGVCBpcyBtaXNz
-aW5nOyBkcm9wIHRoZSBkZWFkICdzdmFkdSAmJiBzdmFkZScgb3BlcmFuZC4NCj4+PiAtIHJl
-cGVhdCBYRU5MT0dfV0FSTklORyBvbiBlYWNoIGxpbmUgb2YgdGhlIHdhcm5pbmcuDQo+Pj4g
-LSBkcm9wIEFTU0VSVChzdmFkZSAhPSBzdmFkdSkgZnJvbSBwMm1fc2V0X3B0ZV9mbGFncygp
-Lg0KPj4+IC0gb25seSBhZGQgdGhlIHNiaV9wcm9iZV9leHRlbnNpb24oKSBkZWNsYXJhdGlv
-biB0byBzYmkuaC4NCj4+PiAtIHJld29yayB0aGUgY29tbWVudCBpbiBwMm1fc2V0X3B0ZV9m
-bGFncygpLg0KPj4+IC0tLQ0KPj4+IENoYW5nZXMgc2luY2UgdjE6DQo+Pj4gLSBjaGFuZ2Ug
-Y29tbWl0IHRpdGxlDQo+Pj4gLSBleHBvc2UgUklTQ1ZfSVNBX0VYVF9zdmFkdSBzbyB0aGUg
-dHdvIGV4dGVuc2lvbnMgY2FuIGJlIHRvbGQgYXBhcnQuDQo+Pj4gLSBtb3ZlIHRoZSBTdmFk
-ZS9TdmFkdSByZXNvbHV0aW9uIHRvIGEgbmV3IHJpc2N2X3Jlc29sdmVfYWRfc2NoZW1lKCks
-DQo+Pj4gwqDCoCBjYWxsZWQgb25jZSBmcm9tIHJpc2N2X2ZpbGxfaHdjYXAoKS4NCj4+PiAt
-IGV4cG9zZSBzYmlfcHJvYmVfZXh0ZW5zaW9uKCkgKHdhcyBzdGF0aWMpIHRvIHByb2JlIGZv
-ciBTQkkgRldGVC4NCj4+PiAtIHN0b3AgcHJlc2V0dGluZyBBL0QgYml0cyB1bmNvbmRpdGlv
-bmFsbHkgaW4gcDJtX3NldF9wZXJtaXNzaW9uKCksIA0KPj4+IGRvIGl0DQo+Pj4gwqDCoCBv
-bmx5IHdoZW4gU3ZhZGUgaXMgcHJlc2VudC4NCj4+PiAtLS0NCj4+PiDCoCB4ZW4vYXJjaC9y
-aXNjdi9wMm0uYyB8IDM4ICsrKysrKysrLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0t
-DQo+Pj4gwqAgMSBmaWxlIGNoYW5nZWQsIDggaW5zZXJ0aW9ucygrKSwgMzAgZGVsZXRpb25z
-KC0pDQo+Pj4NCj4+PiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gvcmlzY3YvcDJtLmMgYi94ZW4v
-YXJjaC9yaXNjdi9wMm0uYw0KPj4+IGluZGV4IGY3YjM4MGI5MGEuLjE0Y2FlN2RjZDcgMTAw
-NjQ0DQo+Pj4gLS0tIGEveGVuL2FyY2gvcmlzY3YvcDJtLmMNCj4+PiArKysgYi94ZW4vYXJj
-aC9yaXNjdi9wMm0uYw0KPj4+IEBAIC01OTEsMzggKzU5MSwxNiBAQCBzdGF0aWMgdm9pZCBw
-Mm1fc2V0X3B0ZV9mbGFncyhwdGVfdCAqZSwgDQo+Pj4gcDJtX3R5cGVfdCB0KQ0KPj4+IMKg
-wqDCoMKgwqAgZS0+cHRlIHw9IFBURV9VU0VSOw0KPj4+IMKgIMKgwqDCoMKgwqAgLyoNCj4+
-PiAtwqDCoMKgwqAgKiBUd28gc2NoZW1lcyB0byBtYW5hZ2UgdGhlIEEgYW5kIEQgYml0cyBh
-cmUgZGVmaW5lZDoNCj4+PiAtwqDCoMKgwqAgKsKgwqAg4oCiIFRoZSBTdmFkZSBleHRlbnNp
-b246IHdoZW4gYSB2aXJ0dWFsIHBhZ2UgaXMgYWNjZXNzZWQgYW5kIA0KPj4+IHRoZSBBIGJp
-dA0KPj4+IC3CoMKgwqDCoCAqwqDCoMKgwqAgaXMgY2xlYXIsIG9yIGlzIHdyaXR0ZW4gYW5k
-IHRoZSBEIGJpdCBpcyBjbGVhciwgYSBwYWdlLWZhdWx0DQo+Pj4gLcKgwqDCoMKgICrCoMKg
-wqDCoCBleGNlcHRpb24gaXMgcmFpc2VkLg0KPj4+IC3CoMKgwqDCoCAqwqDCoCDigKIgV2hl
-biB0aGUgU3ZhZGUgZXh0ZW5zaW9uIGlzIG5vdCBpbXBsZW1lbnRlZCwgdGhlIA0KPj4+IGZv
-bGxvd2luZyBzY2hlbWUNCj4+PiAtwqDCoMKgwqAgKsKgwqDCoMKgIGFwcGxpZXMuDQo+Pj4g
-LcKgwqDCoMKgICrCoMKgwqDCoCBXaGVuIGEgdmlydHVhbCBwYWdlIGlzIGFjY2Vzc2VkIGFu
-ZCB0aGUgQSBiaXQgaXMgY2xlYXIsIA0KPj4+IHRoZSBQVEUgaXMNCj4+PiAtwqDCoMKgwqAg
-KsKgwqDCoMKgIHVwZGF0ZWQgdG8gc2V0IHRoZSBBIGJpdC4gV2hlbiB0aGUgdmlydHVhbCBw
-YWdlIGlzIA0KPj4+IHdyaXR0ZW4gYW5kIHRoZQ0KPj4+IC3CoMKgwqDCoCAqwqDCoMKgwqAg
-RCBiaXQgaXMgY2xlYXIsIHRoZSBQVEUgaXMgdXBkYXRlZCB0byBzZXQgdGhlIEQgYml0LiBX
-aGVuIA0KPj4+IEctc3RhZ2UNCj4+PiAtwqDCoMKgwqAgKsKgwqDCoMKgIGFkZHJlc3MgdHJh
-bnNsYXRpb24gaXMgaW4gdXNlIGFuZCBpcyBub3QgQmFyZSwgdGhlIEctIA0KPj4+IHN0YWdl
-IHZpcnR1YWwNCj4+PiAtwqDCoMKgwqAgKsKgwqDCoMKgIHBhZ2VzIG1heSBiZSBhY2Nlc3Nl
-ZCBvciB3cml0dGVuIGJ5IGltcGxpY2l0IGFjY2Vzc2VzIHRvIA0KPj4+IFZTLWxldmVsDQo+
-Pj4gLcKgwqDCoMKgICrCoMKgwqDCoCBtZW1vcnkgbWFuYWdlbWVudCBkYXRhIHN0cnVjdHVy
-ZXMsIHN1Y2ggYXMgcGFnZSB0YWJsZXMuDQo+Pj4gLcKgwqDCoMKgICogVGhlcmVieSB0byBh
-dm9pZCBhIHBhZ2UtZmF1bHQgaW4gY2FzZSBvZiBTdmFkZSBpcyBhdmFpbGFibGUsIA0KPj4+
-IGl0IGlzDQo+Pj4gLcKgwqDCoMKgICogbmVjZXNzYXJ5IHRvIHNldCBBIGFuZCBEIGJpdHMu
-DQo+Pj4gK8KgwqDCoMKgICogQSBSSVNDLVYgaW1wbGVtZW50YXRpb24gY2FuIGVpdGhlcjoN
-Cj4+PiArwqDCoMKgwqAgKiAxKSBVcGRhdGUgdGhlICdBJyBhbmQgJ0QnIFBURSBiaXRzIGlu
-IGhhcmR3YXJlLg0KPj4+ICvCoMKgwqDCoCAqIDIpIEdlbmVyYXRlIGEgcGFnZSBmYXVsdCB3
-aGVuICdBJyBhbmQvb3IgJ0QnIGlzIGNsZWFyLCBzbyB0aGF0DQo+Pj4gK8KgwqDCoMKgICrC
-oMKgwqAgc29mdHdhcmUgY2FuIHNldCB0aGVtLg0KPj4NCj4+DQo+Pg0KPj4+IMKgwqDCoMKg
-wqDCoCAqDQo+Pj4gLcKgwqDCoMKgICogVE9ETzogRm9yIG5vdywgaXTigJlzIGZpbmUgdG8g
-c2ltcGx5IHNldCB0aGUgQS9EIGJpdHMsIHNpbmNlIA0KPj4+IE9wZW5TQkkNCj4+PiAtwqDC
-oMKgwqAgKsKgwqDCoMKgwqDCoCBkZWxlZ2F0ZXMgcGFnZSBmYXVsdHMgdG8gYSBsb3dlciBw
-cml2aWxlZ2UgbW9kZSBhbmQgc28gDQo+Pj4gT3BlblNCSQ0KPj4+IC3CoMKgwqDCoCAqwqDC
-oMKgwqDCoMKgIGlzbid0IGV4cGVjdCB0byBoYW5kbGUgcGFnZS1mYXVsdHMgb2NjdXJlZCBp
-biBsb3dlciBtb2Rlcy4NCj4+PiAtwqDCoMKgwqAgKsKgwqDCoMKgwqDCoCBCeSBzZXR0aW5n
-IHRoZSBBL0QgYml0cyBoZXJlLCBwYWdlIGZhdWx0cyB0aGF0IHdvdWxkIA0KPj4+IG90aGVy
-d2lzZQ0KPj4+IC3CoMKgwqDCoCAqwqDCoMKgwqDCoMKgIGJlIGdlbmVyYXRlZCBkdWUgdG8g
-dW5zZXQgQS9EIGJpdHMgd2lsbCBub3Qgb2NjdXIgaW4gWGVuLg0KPj4+IC3CoMKgwqDCoCAq
-DQo+Pj4gLcKgwqDCoMKgICrCoMKgwqDCoMKgwqAgQ3VycmVudGx5LCBYZW4gb24gUklTQy1W
-IGRvZXMgbm90IG1ha2UgdXNlIG9mIHRoZSANCj4+PiBpbmZvcm1hdGlvbg0KPj4+IC3CoMKg
-wqDCoCAqwqDCoMKgwqDCoMKgIHRoYXQgY291bGQgYmUgb2J0YWluZWQgZnJvbSBoYW5kbGlu
-ZyBzdWNoIHBhZ2UgZmF1bHRzLCANCj4+PiB3aGljaA0KPj4+IC3CoMKgwqDCoCAqwqDCoMKg
-wqDCoMKgIGNvdWxkIG90aGVyd2lzZSBiZSB1c2VmdWwgZm9yIHNldmVyYWwgdXNlIGNhc2Vz
-IHN1Y2ggYXMgDQo+Pj4gZGVtYW5kDQo+Pj4gLcKgwqDCoMKgICrCoMKgwqDCoMKgwqAgcGFn
-aW5nLCBjYWNoZS1mbHVzaGluZyBvcHRpbWl6YXRpb25zLCBtZW1vcnkgYWNjZXNzIA0KPj4+
-IHRyYWNraW5nLGV0Yy4NCj4+PiAtwqDCoMKgwqAgKg0KPj4+IC3CoMKgwqDCoCAqwqDCoMKg
-wqDCoMKgIFRvIHN1cHBvcnQgdGhlIG1vcmUgZ2VuZXJhbCBjYXNlIGFuZCB0aGUgb3B0aW1p
-emF0aW9ucyANCj4+PiBtZW50aW9uZWQNCj4+PiAtwqDCoMKgwqAgKsKgwqDCoMKgwqDCoCBh
-Ym92ZSwgaXQgd291bGQgYmUgYmV0dGVyIHRvIHN0b3Agc2V0dGluZyB0aGUgQS9EIGJpdHMg
-DQo+Pj4gaGVyZSBhbmQNCj4+PiAtwqDCoMKgwqAgKsKgwqDCoMKgwqDCoCBpbnN0ZWFkIGhh
-bmRsZSBwYWdlIGZhdWx0cyB0aGF0IG9jY3VyIGR1ZSB0byB1bnNldCBBL0QgDQo+Pj4gYml0
-cy4NCj4+PiArwqDCoMKgwqAgKiBYZW4gc3VwcG9ydHMgYm90aCwgc28gc2V0ICdBJyBhbmQg
-J0QnIHVwIGZyb250IHRvIGF2b2lkIHRoZSANCj4+PiBmYXVsdHMNCj4+PiArwqDCoMKgwqAg
-KiBvZiAoMikuIFRoaXMgaXMgaGFybWxlc3Mgd2l0aCAoMSk6IHNvZnR3YXJlIGp1c3QgZG9l
-cyB3aGF0IA0KPj4+IGhhcmR3YXJlDQo+Pj4gK8KgwqDCoMKgICogd291bGQgaGF2ZSBkb25l
-IG9uIGZpcnN0IGFjY2Vzcy4NCj4+PiDCoMKgwqDCoMKgwqAgKi8NCj4+PiAtwqDCoMKgIGlm
-ICggcmlzY3ZfaXNhX2V4dGVuc2lvbl9hdmFpbGFibGUoTlVMTCwgUklTQ1ZfSVNBX0VYVF9z
-dmFkZSkgKQ0KPj4+IC3CoMKgwqDCoMKgwqDCoCBlLT5wdGUgfD0gUFRFX0FDQ0VTU0VEIHwg
-UFRFX0RJUlRZOw0KPj4+ICvCoMKgwqAgZS0+cHRlIHw9IFBURV9BQ0NFU1NFRCB8IFBURV9E
-SVJUWTsNCj4+DQo+PiBPbiB0aGUgY29kZSBjaGFuZ2UgaXRzZWxmLCBpdCBsb29rcyBnb29k
-IHRvIG1lLCBhcyB3ZSBkb24ndCBtYWtlIHVzZSANCj4+IG9mIEEvRCBiaXQgYW55d2F5IChh
-bmQgaW4gY2FzZSB3ZSB3b3VsZCBuZWVkIHRvLCB3ZSB3b3VsZCBuZWVkIHRvIA0KPj4gY2xl
-YXIgdGhlbSBhbnl3YXkpLg0KPj4NCj4+PiDCoCDCoMKgwqDCoMKgIHN3aXRjaCAoIHQgKQ0K
-Pj4+IMKgwqDCoMKgwqAgew0KPj4+DQo+Pg0KPiANCg0K
 
---------------rS8oI0PpMQN9AOKUU04WK8nI--
 
---------------WYCOH5lZIV0R4buNC0zn0Emm
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+On 10/6/26 5:20 PM, Jan Beulich wrote:
+> On 05.10.2026 18:00, Baptiste Le Duc wrote:
+>> A RISC-V implementation can manage the PTE A/D bits in one of two ways:
+>>      1) Update the 'A' and 'D' PTE bits in hardware (ratified as Svadu).
+>>      2) Generate a page fault when 'A' and/or 'D' is clear, so that software
+>>         can set them (ratified as Svade).
+>>
+>> p2m_set_pte_flags() presets A/D in G-stage PTEs only when the device tree
+>> advertises Svade.
 
------BEGIN PGP SIGNATURE-----
+According to the code it seems like it is setting A/D bits always 
+independently on what is DT file.  Baptiste, am I missing something?
 
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmrGDTEFAwAAAAAACgkQZg+p0QLLz9Bu
-zAv/dk6nWEtlFzVa3iF8tElJTyNsFu7yf/OU1fMOej8Regxjg7pRuoRaO1+6qWBmZiYIImm6OTAT
-D1dV9i07esU+lRzT3mllYciiA/GZ+oK8Ui3lh+AijSTYLbdrjVC1pJ+xFUfilaX/hu5Zzviy4r0P
-NySghEEKsJyb3wDf0yI7d7KIybRMfsMnVRCqNDiIAmiKm7Liq+e2x8LIGtknqud3+RELHoDA9TqQ
-2OJoPYxqD54MCe0mOsEvQ1xQ2ODj0FxYcrZ3ggSIkOb6Vt1VXO9ZUQgkIXjqJnm6N/PcyexWMqb8
-vqNCI5ZXp1chfyhNJNbuiX67mDMkBHyxhwOUeNRj8YmQKHpUL2jDbxCyLTYjmKRpO4SlvkmBYFjt
-V1eSVc1TAhF0gmBZMjZ10t2UM0LOkgEg1yn7ex2tC2NOOEW8V1KLJTh1k7KdvNIsGbbY9rYwf7qD
-XQ7TmRItWlPMXGNG5tg39eKt74WSYVwyNe/fEUP4vb6zqGq1mw7CAvR2FxrU
-=PK7C
------END PGP SIGNATURE-----
+  Platforms that use scheme (2) without advertising Svade,
+>> such as the HiFive Premier P550, then hit guest-page faults that Xen does
+>> not handle.
+> 
+> Is that a quirk then (to avoid the word "bug")? Since it's all DT that
+> conveys available ISA information, why can't the DT for those systems
+> simply be fixed? Depending on the answer here I might question the
+> presence of the Fixes: tag below.
 
---------------WYCOH5lZIV0R4buNC0zn0Emm--
+I think it can at some point. Let me clarify why "at some point"...
+
+So how the things are working now:
+
+OpenSBI detects the available ISA extensions in two steps:
+1. It parses the CPU nodes in the DTB. If a node has the 
+riscv,isa-extensions property, OpenSBI uses it; otherwise it falls back 
+to riscv,isa. riscv,isa-extensions describes the same extensions as 
+riscv,isa, but as a list of strings, which makes it easier to parse. 
+ From this, OpenSBI builds a per-hart bitmap of available extensions 
+(basically what we do in Xen). (Platform-specific code can also add 
+extensions to the bitmap at this step.)
+2. It then probes a small, fixed set of extensions (Sstc, Smaia, 
+Sscofpmf, Smstateen, Ssstateen, Smcntrpmf, Sdtrig) by reading a CSR that 
+the extension introduces and checking whether the access traps. This is 
+similar to what we do for Sstc in Xen.
+
+Step 2 only adds extensions to the bitmap. It does not check or clear 
+the extensions that came from the DT; the only exception is Zicntr, 
+which is detected purely by probing. So for extensions such as 
+Svade/Svadu, which have no CSR to probe, the DT is the only source of truth.
+Now, what OpenSBI does with Svade/Svadu specifically. First, it disables 
+hardware A/D updating by default, i.e. it clears menvcfg.ADUE:
+
+Now, what OpenSBI does with Svade/Svadu specifically. First, it disables 
+hardware A/D updating by default, i.e. it clears menvcfg.ADUE:
+
+   /* Disable HW A/D updating by default */
+   menvcfg_val &= ~ENVCFG_ADUE;
+
+Then it sets ADUE again, depending on which extensions are listed in the 
+DTB:
+
+   /*
+    * Assume only Svadu is supported when it is the only extension
+    * present in the ISA string. Svade is assumed when neither are
+    * present. When both are present we must default to Svade (see
+    * the zero reset value of FWFT.PTE_AD_HW_UPDATING).
+    */
+   if (!sbi_hart_has_extension(scratch, SBI_HART_EXT_SVADE))
+	__set_menvcfg_ext(SBI_HART_EXT_SVADU, ENVCFG_ADUE);
+
+So all OpenSBI does is set or clear menvcfg.ADUE based on what is 
+mentined in DTB.
+
+So, to answer your original question: yes, this can be fixed just by 
+updating the DTS. OpenSBI will then configure menvcfg.ADUE according to 
+the extensions listed there. Note that the logic above is from OpenSBI 
+v1.9. Versions v1.5–v1.8 behave the same when the DT lists only svadu, 
+only svade, or both. When neither is listed, they leave ADUE unchanged 
+instead of clearing it. Versions before v1.5 don't handle Svade/Svadu at 
+all.
+
+But IIRC such approach was suggested in one of vX and it was rejected 
+because we can't in Xen be sure that passed DTB is correct and 
+corresponds to how real h/w is configured as specifically with ADUE bit 
+in menvcfg we can't read it in HS-mode as an exception will occur as it 
+is M-mode register. So we have to trust that OpenSBI (or other firmware 
+will configure the A/D update scheme according to what is mentioned in DTS).
+
+So then basically the question is do we want to rely on that how OpenSBI 
+configures h/w?
+
+It seems like it could be fine. For example, without support for the 
+FWFT extension, we can't access or change the menvcfg bit anyway. The 
+FWFT extension was ratified in 2025, so we have to trust OpenSBI anyway 
+(or introduce our own extension or port the FWFT extension to an earlier 
+OpenSBI version) before FWFT is started to be available.
+
+With this explanation would you (Jan) be okay to go with just providing 
+proper DTS?
+
+> 
+>> Always preset A/D in G-stage PTEs so scheme (2) never faults. This is
+>> harmless with (1): software just does what hardware would have done on
+>> first access.
+>>
+>> Drop the TODO suggesting to handle A/D faults: only Svade raises them, so
+> 
+> This contradicts the earlier paragraph, where you say that page faults can
+> also occur without Svade.
+> 
+>> it would not work on Svadu. Dirty/access tracking can restrict the RWX
+>> permissions of p2m entries, as x86 and Arm do.
+> 
+> I'm also not convinced that this is what the TODO was after. Oleksii would
+> be able to clarify, I suppose.
+
+I think the TODO below in the code should be added back, as it indicates 
+that something needs to be changed if (or when) we decide to support 
+tracking of the A/D bits.
+
+~ Oleksii
+
+> 
+>> Fixes: ff14053983b0 ("xen/riscv: Implement p2m_pte_from_mfn() and support PBMT configuration")
+>> Assisted-by: Claude:claude-opus-5
+>> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+>>
+>> --- a/xen/arch/riscv/p2m.c
+>> +++ b/xen/arch/riscv/p2m.c
+>> @@ -591,38 +591,16 @@ static void p2m_set_pte_flags(pte_t *e, p2m_type_t t)
+>>       e->pte |= PTE_USER;
+>>   
+>>       /*
+>> -     * Two schemes to manage the A and D bits are defined:
+>> -     *   • The Svade extension: when a virtual page is accessed and the A bit
+>> -     *     is clear, or is written and the D bit is clear, a page-fault
+>> -     *     exception is raised.
+>> -     *   • When the Svade extension is not implemented, the following scheme
+>> -     *     applies.
+>> -     *     When a virtual page is accessed and the A bit is clear, the PTE is
+>> -     *     updated to set the A bit. When the virtual page is written and the
+>> -     *     D bit is clear, the PTE is updated to set the D bit. When G-stage
+>> -     *     address translation is in use and is not Bare, the G-stage virtual
+>> -     *     pages may be accessed or written by implicit accesses to VS-level
+>> -     *     memory management data structures, such as page tables.
+>> -     * Thereby to avoid a page-fault in case of Svade is available, it is
+>> -     * necessary to set A and D bits.
+>> +     * A RISC-V implementation can either:
+>> +     * 1) Update the 'A' and 'D' PTE bits in hardware.
+>> +     * 2) Generate a page fault when 'A' and/or 'D' is clear, so that
+>> +     *    software can set them.
+>>        *
+>> -     * TODO: For now, it’s fine to simply set the A/D bits, since OpenSBI
+>> -     *       delegates page faults to a lower privilege mode and so OpenSBI
+>> -     *       isn't expect to handle page-faults occured in lower modes.
+>> -     *       By setting the A/D bits here, page faults that would otherwise
+>> -     *       be generated due to unset A/D bits will not occur in Xen.
+>> -     *
+>> -     *       Currently, Xen on RISC-V does not make use of the information
+>> -     *       that could be obtained from handling such page faults, which
+>> -     *       could otherwise be useful for several use cases such as demand
+>> -     *       paging, cache-flushing optimizations, memory access tracking,etc.
+>> -     *
+>> -     *       To support the more general case and the optimizations mentioned
+>> -     *       above, it would be better to stop setting the A/D bits here and
+>> -     *       instead handle page faults that occur due to unset A/D bits.
+>> +     * Xen supports both, so set 'A' and 'D' up front to avoid the faults
+>> +     * of (2). This is harmless with (1): software just does what hardware
+>> +     * would have done on first access.
+> 
+> "Xen supports both" to me means it suitably handles the page faults resulting
+> with Svade. May I suggest "To support both, set ..."?
+> 
+>>        */
+>> -    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
+>> -        e->pte |= PTE_ACCESSED | PTE_DIRTY;
+>> +    e->pte |= PTE_ACCESSED | PTE_DIRTY;
+>>   
+>>       switch ( t )
+>>       {
+>>
+> 
+
 
