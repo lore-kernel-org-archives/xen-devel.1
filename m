@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1B10CA5FFC
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 10:41:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442100.1659628 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5B135CA600A
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 10:41:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442099.1659620 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEP55-0006EA-L6; Wed, 07 Oct 2026 10:41:03 +0000
+	id 1xEP52-000619-FQ; Wed, 07 Oct 2026 10:41:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442100.1659628; Wed, 07 Oct 2026 10:41:03 +0000
+Received: by outflank-mailman (output) from mailman id 1442099.1659620; Wed, 07 Oct 2026 10:41:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEP55-0006E3-I5; Wed, 07 Oct 2026 10:41:03 +0000
-Received: by outflank-mailman (input) for mailman id 1442100;
- Wed, 07 Oct 2026 10:41:02 +0000
+	id 1xEP52-000612-Ci; Wed, 07 Oct 2026 10:41:00 +0000
+Received: by outflank-mailman (input) for mailman id 1442099;
+ Wed, 07 Oct 2026 10:40:59 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xEP54-0006DR-1M
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 10:41:02 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xEP51-00060w-Eq
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 10:40:59 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1xEP53-001bi9-2d;
- Wed, 07 Oct 2026 10:41:01 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xEP51-001bht-0j
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 10:40:59 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1xEP51-001QnT-2w;
- Wed, 07 Oct 2026 10:41:00 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xEP50-001QnT-3C
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 10:40:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,224 +42,124 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=2RJgLX/T1ocfyreFYfWOaC+F5mQipEttx11jUlqCQM0=; b=tMkIj0NdqAsng2M5MZct4j4SKp
-	t5kSrOztB1EGFXGdlcQNQsrlJhJFG6bstpFNicTIGu24fE0DsX+FVmORPQUxLZkOG2diQqUqCfspd
-	mIO06AozB/lw/DRLWPHaeogU7ko5vwI9QxYAYec2LwR9AHA7x9/Wcgtk8wiefXRAcbHo=;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
+	MIME-Version:Message-ID:Date:Subject:To:From;
+	bh=MAkw5G1K3FbvfvIIjecvRR1tqFdb7fcdhV92wmhQAjE=; b=OGL6eKRS8BOPr6hXX3OcKKHozG
+	SVmZ07YFN7NGjafcx8wsJHjPsQLsFqxCWDAZCJXpDGRTLoL/pVFMap5hmHeOvxWKd7YidZr+LQ9mA
+	xnmVW6ILJQVW0kJzKTyfV5H/LdGFtIp4joaBN1KSk6U/Xb1gF3QT7AuaEqQnYlEdGQXc=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v3 01/18] x86/PoD: map one page at a time in p2m_pod_zero_check()
-Date: Wed,  7 Oct 2026 11:40:34 +0100
-Message-ID: <20261007104051.48841-2-gwd@xenproject.org>
+Subject: [PATCH v3 00/18] ASI: HVM per-vCPU areas and sparse-view directmap
+Date: Wed,  7 Oct 2026 11:40:33 +0100
+Message-ID: <20261007104051.48841-1-gwd@xenproject.org>
 X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261007104051.48841-1-gwd@xenproject.org>
-References: <20261007104051.48841-1-gwd@xenproject.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 
-p2m_pod_zero_check() maps every page of its batch that passes its
-checks, up to POD_SWEEP_STRIDE (16) of them, and keeps them mapped
-across the p2m lookups and updates which follow, each of which maps
-page-table pages of its own.  Its callers hold mappings too: the p2m
-lookup which found the entry to populate still has its page-table page
-mapped, and a PV mmu_update() the L1 page it is writing.
+In an attempt to reach something useful for XenServer sooner, I've
+changed the approach somewhat.
 
-map_domain_page() cannot always provide that many at once.  It uses the
-mapcache on behalf of PV vCPUs only: in debug builds for every page, in
-release builds for pages beyond the reach of the directmap in PV guests'
-page-tables (5TiB, 3.5TiB with CONFIG_BIGMEM).  The mapcache has
-MAPCACHE_VCPU_ENTRIES (16) slots per vCPU of the domain, shared by its
-vCPUs, and a mapping which finds no slot free or reclaimable hits the
-BUG_ON() in map_domain_page(): the host crashes.
+The previous approach implemented sparse direct-map and intra-domain
+isolation everywhere, for all types of guests.  Implementing
+intra-domain isolation for PV guests introduces a large amount of
+complexity, due to the ABI of Xen running on guest pagetables.
 
-The sweep runs in the context of whichever vCPU populates a PoD entry
-while the domain's PoD cache is empty.  The guest's own vCPUs, being
-HVM, map through the directmap; a PV vCPU gets there when its domain
-maps or copies the guest's memory: a device model in dom0 or in a stub
-domain, a backend doing grant copies.  A PV domain with a single vCPU,
-as a device-model stub domain or a dom0 booted with dom0_max_vcpus=1
-is, has 16 slots, and a sweep over 16 candidate pages needs more.
+Start from the other direction instead, and focus just on getting ASI
+and intra-domain isolation for HVM guests.
 
-The sweep has mapped its whole batch at once since 9ad9a1609fbe ("PoD
-memory 5/9: emergency scan"), when x86-64 reached all memory through the
-directmap.  The per-vCPU budget came with the mapcache's return to
-x86-64 in 4b28bf6ae90b ("x86: re-introduce map_domain_page() et al").
+This series looks like this:
 
-Map one page at a time instead, as p2m_pod_zero_check_superpage()
-already does: map a page for the quick check and unmap it again, and
-map it anew for the full check after the p2m update and the TLB flush.
-The checks and their order are unchanged.  Each page is mapped twice,
-which costs little next to scanning it, and the error paths no longer
-have mappings to undo.
+- A fix that should be considered for backport (01).
 
-Fixes: 4b28bf6ae90b ("x86: re-introduce map_domain_page() et al")
-Assisted-by: Claude Code:claude-opus-5-5
-Signed-off-by: George Dunlap <gwd@xenproject.org>
----
-NB this issue was raised in review and verified only by code
-inspection; it hasn't been demonstrated.
----
- xen/arch/x86/mm/p2m-pod.c | 72 +++++++++++++++++++--------------------
- 1 file changed, 35 insertions(+), 37 deletions(-)
+- Implement per-vCPU per-domain area and per-vCPU mapcaches for HVM
+guests.  (02-11).  This is much simpler since each HVM vcpu already
+has its own monitor table.
 
-diff --git a/xen/arch/x86/mm/p2m-pod.c b/xen/arch/x86/mm/p2m-pod.c
-index 4602c32cff..0b0beca15a 100644
---- a/xen/arch/x86/mm/p2m-pod.c
-+++ b/xen/arch/x86/mm/p2m-pod.c
-@@ -901,7 +901,8 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
- {
-     mfn_t mfns[POD_SWEEP_STRIDE];
-     p2m_type_t types[POD_SWEEP_STRIDE];
--    unsigned long *map[POD_SWEEP_STRIDE];
-+    bool check[POD_SWEEP_STRIDE];
-+    const unsigned long *map;
-     struct domain *d = p2m->domain;
-     unsigned int i, j, max_ref = 1;
- 
-@@ -911,7 +912,12 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
-     if ( paging_mode_shadow(d) )
-         max_ref++;
- 
--    /* First, get the gfn list, translate to mfns, and map the pages. */
-+    /*
-+     * First, get the gfn list, translate to mfns, and pick the pages to
-+     * check.  They are mapped one at a time below, as in
-+     * p2m_pod_zero_check_superpage(): a vCPU can hold only a few transient
-+     * mappings at once, and the p2m lookups and updates here need some too.
-+     */
-     for ( i = 0; i < count; i++ )
-     {
-         p2m_access_t a;
-@@ -921,18 +927,17 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
- 
-         /*
-          * If this is ram, and not a pagetable or a special page, and
--         * probably not mapped elsewhere, map it; otherwise, skip.
-+         * probably not mapped elsewhere, check it; otherwise, skip.
-          */
--        map[i] = NULL;
-+        check[i] = false;
-         if ( p2m_is_ram(types[i]) )
-         {
-             const struct page_info *pg = mfn_to_page(mfns[i]);
- 
--            if ( !is_special_page(pg) &&
--                 (pg->count_info & PGC_allocated) &&
--                 !(pg->count_info & PGC_shadowed_pt) &&
--                 ((pg->count_info & PGC_count_mask) <= max_ref) )
--                map[i] = map_domain_page(mfns[i]);
-+            check[i] = !is_special_page(pg) &&
-+                       (pg->count_info & PGC_allocated) &&
-+                       !(pg->count_info & PGC_shadowed_pt) &&
-+                       ((pg->count_info & PGC_count_mask) <= max_ref);
-         }
-     }
- 
-@@ -942,18 +947,24 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
-      */
-     for ( i = 0; i < count; i++ )
-     {
--        if ( !map[i] )
-+        if ( !check[i] )
-             continue;
- 
-         /* Quick zero-check */
-+        map = map_domain_page(mfns[i]);
-         for ( j = 0; j < 16; j++ )
--            if ( *(map[i] + j) != 0 )
--                goto skip;
-+            if ( map[j] != 0 )
-+                break;
-+        unmap_domain_page(map);
- 
-         /* Try to remove the page, restoring old mapping if it fails. */
--        if ( p2m_set_entry(p2m, gfns[i], INVALID_MFN, PAGE_ORDER_4K,
-+        if ( j < 16 ||
-+             p2m_set_entry(p2m, gfns[i], INVALID_MFN, PAGE_ORDER_4K,
-                            p2m_populate_on_demand, p2m->default_access) )
--            goto skip;
-+        {
-+            check[i] = false;
-+            continue;
-+        }
- 
-         /*
-          * See if the page was successfully unmapped.  (Allow one refcount
-@@ -961,6 +972,8 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
-          */
-         if ( (mfn_to_page(mfns[i])->count_info & PGC_count_mask) > 1 )
-         {
-+            check[i] = false;
-+
-             /*
-              * If the previous p2m_set_entry call succeeded, this one shouldn't
-              * be able to fail.  If it does, crashing the domain should be safe.
-@@ -970,14 +983,8 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
-             {
-                 ASSERT_UNREACHABLE();
-                 domain_crash(d);
--                goto out_unmap;
-+                return;
-             }
--
--        skip:
--            unmap_domain_page(map[i]);
--            map[i] = NULL;
--
--            continue;
-         }
-     }
- 
-@@ -986,22 +993,20 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
-     /* Now check each page for real */
-     for ( i = 0; i < count; i++ )
-     {
--        if ( !map[i] )
-+        if ( !check[i] )
-             continue;
- 
--        for ( j = 0; j < (PAGE_SIZE / sizeof(*map[i])); j++ )
--            if ( *(map[i] + j) != 0 )
-+        map = map_domain_page(mfns[i]);
-+        for ( j = 0; j < (PAGE_SIZE / sizeof(*map)); j++ )
-+            if ( map[j] != 0 )
-                 break;
--
--        unmap_domain_page(map[i]);
--
--        map[i] = NULL;
-+        unmap_domain_page(map);
- 
-         /*
-          * See comment in p2m_pod_zero_check_superpage() re gnttab
-          * check timing.
-          */
--        if ( j < (PAGE_SIZE / sizeof(*map[i])) )
-+        if ( j < (PAGE_SIZE / sizeof(*map)) )
-         {
-             /*
-              * If the previous p2m_set_entry call succeeded, this one shouldn't
-@@ -1012,14 +1017,7 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
-             {
-                 ASSERT_UNREACHABLE();
-                 domain_crash(d);
-- out_unmap:
--                /*
--                 * Something went wrong, probably crashing the domain.  Unmap
--                 * everything and return.
--                 */
--                for ( i = 0; i < count; i++ )
--                    if ( map[i] )
--                        unmap_domain_page(map[i]);
-+                return;
-             }
-         }
-         else
+- Maintain two "views" of the directmap (12-18): A full directmap, and
+a sparse directmap.  The full directmap is what we have now; the
+sparse directmap, which removes non-xenheap heap memory.
+
+The key patch to get feedback on is patch 13/18.
+
+Note that at the end of this series, PV guests can be given the sparse
+direct-map; this isolates them from other domains, but doesn't isolate
+vCPUs within a domain.
+
+An advantage of this is that it allows us to easily turn the sparse
+directmap off for dom0 (or other system domains).  Some quick tests on
+my local test rig show that network throughput from dom0 to a guest
+drops 31% when the sparse directmap is enabled for dom0 vs not.
+
+The rest of the series would look like this:
+
+- Implement a per-vCPU state area, and move key bits of guest state into it.
+
+- Implement per-pCPU stacks.  In this mode, per-pCPU stacks would only
+be for HVM guests using the "sparse directmap".  Until we get per-vCPU
+root pagetables for PV guests, it's not practical to prevent a PV
+guest from seeing all the stacks.
+
+A dependency graph of the above functionality can be found here:
+
+https://xenbits.xenproject.org/people/gdunlap/asi-series-deps.html
+
+Extending the intra-domain isolation to PV guests would involve
+implementing per-vCPU root pagetables for PV guests.  There are draft
+implementations of this, but they are quite complicated.
+
+George Dunlap (9):
+  x86/PoD: map one page at a time in p2m_pod_zero_check()
+  x86/domain_page: don't unmap a mapcache entry that is not present
+  x86/mm: let Xen's page-table walker operate on a given root
+  x86/mm: build and maintain a sparse view of the directmap
+  x86/domain_page: key the directmap fast paths on the loaded view
+  x86/mm: flush owned pages before reuse with the sparse directmap view
+  x86/domain_page: keep the maphash's slots, not their mappings
+  x86/mm: run guest contexts on the sparse directmap view
+  x86/spec-ctrl: wire the sparse directmap view into the asi= option
+
+Roger Pau Monné (9):
+  x86/mm: purge unneeded destroy_perdomain_mapping()
+  x86/mm: prepare destroy_perdomain_mapping() for per-vCPU perdomain
+    areas
+  x86/domain_page: drop redundant create_perdomain_mapping() call
+  x86/mm: prepare create_perdomain_mapping() for per-vCPU perdomain
+    areas
+  x86/spec-ctrl: introduce Address Space Isolation command line option
+  x86/hvm: introduce per-vCPU L3 page-table
+  x86/domain_page: prepare the mapcache for per-vCPU accounting
+  x86/domain_page: move struct mapcache_vcpu to struct arch_vcpu
+  x86/hvm: introduce per-vCPU mapcache for vCPU-PT domains
+
+ docs/misc/xen-command-line.pandoc           |  49 ++
+ xen/arch/x86/Kconfig                        |   1 +
+ xen/arch/x86/Makefile                       |   1 +
+ xen/arch/x86/domain.c                       |  21 +-
+ xen/arch/x86/domain_page.c                  | 311 ++++++++---
+ xen/arch/x86/hvm/hvm.c                      |   6 -
+ xen/arch/x86/include/asm/domain.h           |  62 ++-
+ xen/arch/x86/include/asm/mm.h               |  26 +-
+ xen/arch/x86/include/asm/sparse-directmap.h |  98 ++++
+ xen/arch/x86/include/asm/spec_ctrl.h        |   2 +
+ xen/arch/x86/mm.c                           | 259 +++++++--
+ xen/arch/x86/mm/hap/hap.c                   |   2 +-
+ xen/arch/x86/mm/p2m-pod.c                   |  72 ++-
+ xen/arch/x86/mm/shadow/hvm.c                |   2 +-
+ xen/arch/x86/mm/shadow/multi.c              |   5 +-
+ xen/arch/x86/pv/dom0_build.c                |   6 +-
+ xen/arch/x86/pv/domain.c                    |  14 +-
+ xen/arch/x86/setup.c                        |   7 +
+ xen/arch/x86/sparse-directmap.c             | 570 ++++++++++++++++++++
+ xen/arch/x86/spec_ctrl.c                    | 194 ++++++-
+ xen/arch/x86/x86_64/mm.c                    |  10 +-
+ xen/common/Kconfig                          |  18 +
+ xen/common/page_alloc.c                     |  55 +-
+ xen/include/xen/mm.h                        |  41 ++
+ 24 files changed, 1615 insertions(+), 217 deletions(-)
+ create mode 100644 xen/arch/x86/include/asm/sparse-directmap.h
+ create mode 100644 xen/arch/x86/sparse-directmap.c
+
 -- 
 2.55.0
 
