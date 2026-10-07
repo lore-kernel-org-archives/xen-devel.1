@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51C5BCA600A
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 11:00:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442172.1659733 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 60921CA5FFC
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 11:00:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442177.1659764 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEPNr-00061S-R7; Wed, 07 Oct 2026 11:00:27 +0000
+	id 1xEPNt-0006ZL-LN; Wed, 07 Oct 2026 11:00:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442172.1659733; Wed, 07 Oct 2026 11:00:27 +0000
+Received: by outflank-mailman (output) from mailman id 1442177.1659764; Wed, 07 Oct 2026 11:00:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEPNr-00060h-NC; Wed, 07 Oct 2026 11:00:27 +0000
-Received: by outflank-mailman (input) for mailman id 1442172;
+	id 1xEPNt-0006XJ-Ad; Wed, 07 Oct 2026 11:00:29 +0000
+Received: by outflank-mailman (input) for mailman id 1442177;
  Wed, 07 Oct 2026 11:00:26 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xEPNq-0005y7-DU
+ (envelope-from <gwd@xenproject.org>) id 1xEPNq-0005yd-QZ
  for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 11:00:26 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1xEPNq-001bwS-0k;
- Wed, 07 Oct 2026 11:00:26 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xEPNp-001bwA-3B;
+ Wed, 07 Oct 2026 11:00:25 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1xEP5D-001QnT-2H;
- Wed, 07 Oct 2026 10:41:11 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xEP5H-001QnT-13;
+ Wed, 07 Oct 2026 10:41:15 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,42 +44,58 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=s8gKbLWFi6wgE9b8CopwbaynqyW9W4JENY9bvZeWPyQ=; b=RTJdZXiZ9hOcVUqeIYc0rzDHem
-	KQEr6odiA8Vib09s/JCjysCQbx64bRWAttC2MnHSmlc88ttE/AMeAuvsIE0ZjTB4UDMIwGXBe9NYK
-	sU1kymKGSoxusls3hoNU0qAaY83+5HX8cx7oASKlMn+2PFkUDmepItVd6NeNSe1c0B50=;
+	bh=lKK7xvuX4KaLB6q8iiI3K8qFh2zb9vOgIFdBlslvfS4=; b=SbnMG71qmDmAShULXYcfZDKMO/
+	7vaer8XkcruYMK9QQs0whBB9/ckI9o485iK2WNcUMFTGg93/lxcbg1aBssljhsgj2UYISaPVV/5NY
+	xybQ0No0nYsvGRooTrlSDKRFw6CRiBJwrAykq4na0ANReJ2hxhm4XRV2jRgaRVqXkPQE=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v3 12/18] x86/mm: let Xen's page-table walker operate on a given root
-Date: Wed,  7 Oct 2026 11:40:45 +0100
-Message-ID: <20261007104051.48841-13-gwd@xenproject.org>
+	Teddy Astie <teddy.astie@vates.tech>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Julien Grall <julien@xen.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v3 15/18] x86/mm: flush owned pages before reuse with the sparse directmap view
+Date: Wed,  7 Oct 2026 11:40:48 +0100
+Message-ID: <20261007104051.48841-16-gwd@xenproject.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261007104051.48841-1-gwd@xenproject.org>
 References: <20261007104051.48841-1-gwd@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-map_pages_to_xen() and modify_xen_mappings() maintain Xen's own mappings,
-walking from idle_pg_table, whose Xen slots every other root page-table
-copies.  A later patch introduces a second directmap hierarchy: page
-tables for the directmap virtual address range that some guest contexts
-use in place of idle_pg_table's.  It needs the same maintenance at the
-same virtual addresses.
+Since d7bf1b8ea275 ("x86/mm: limit deferred TLB flushing to PV domain
+support") a page freed by its owner is flushed from TLBs before it is
+handed out again only in builds with PV support, on the premise that PV
+domains, with their (limited) control over the host MMU and over when
+flushes happen, are the only ones to leave stale entries behind.
 
-Give virt_to_xen_l{3,2,1}e() the L4 to walk from, and move the bodies of
-map_pages_to_xen() and modify_xen_mappings() into map_pages_in() and
-modify_mappings_in(), which take the root as well.  The public functions
-pass idle_pg_table.  The EFI runtime-services page-tables mirror
-idle_pg_table's L4 entries only, so a newly allocated L3 is propagated
-to them only when the root is idle_pg_table.
+Xen's transient mappings of domain pages are another source.  The
+mapcache zaps a slot when it is unmapped but defers the flush: the
+slot's translation can stay in the TLB of the CPU which used it until
+that CPU next flushes, by which time the page may have been freed and
+handed to another domain.  Before "x86/hvm: introduce per-vCPU
+mapcache for vCPU-PT domains", only PV vCPUs use the mapcache, so the
+PV condition covers it.  Now that the vCPUs of an HVM domain with
+per-vCPU page-tables have one as well.
 
-TLB flushing is unaffected: it is by virtual address, and the same
-addresses are mapped in either hierarchy.
+While the full directmap is loaded in every context, stale transient
+mappings only map what's already mapped in the full directmap.  On the
+sparse view of the directmap, a stale translation of a page handed to
+another domain would keep it reachable from a context which has
+nothing to do with it.
 
-No functional change.
+So flush owned pages before reuse wherever a sparse view is
+configured, as before d7bf1b8ea275.  In builds without PV support,
+mark_page_free() now also asks a new hook,
+arch_freed_pages_need_tlbflush(), declared with the xenheap hooks the
+sparse view already uses.  x86 answers with sparse_dmap_configured();
+without CONFIG_SPARSE_DIRECTMAP, and on other architectures, the
+answer is no.  Builds with PV support flush as before, and HVM-only
+builds keep d7bf1b8ea275's saving unless a sparse view is configured,
+which nothing does until a later patch.
 
 Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
@@ -87,170 +103,86 @@ Signed-off-by: George Dunlap <gwd@xenproject.org>
 Changes in v3:
 - New in this version.
 ---
- xen/arch/x86/mm.c | 55 ++++++++++++++++++++++++++++++++++-------------
- 1 file changed, 40 insertions(+), 15 deletions(-)
+ xen/arch/x86/sparse-directmap.c | 14 ++++++++++++++
+ xen/common/page_alloc.c         | 14 +++++++++-----
+ xen/include/xen/mm.h            |  6 ++++++
+ 3 files changed, 29 insertions(+), 5 deletions(-)
 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 7258935528..94b96c3d9b 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -5201,13 +5201,14 @@ static DEFINE_SPINLOCK(map_pgdir_lock);
- 
- /*
-  * For virt_to_xen_lXe() functions, they take a linear address and return a
-- * pointer to Xen's LX entry. Caller needs to unmap the pointer.
-+ * pointer to Xen's LX entry in the page-table hierarchy rooted at @root
-+ * (idle_pg_table for Xen's own mappings).  Caller needs to unmap the pointer.
-  */
--static l3_pgentry_t *virt_to_xen_l3e(unsigned long v)
-+static l3_pgentry_t *virt_to_xen_l3e(l4_pgentry_t *root, unsigned long v)
- {
-     l4_pgentry_t *pl4e;
- 
--    pl4e = &idle_pg_table[l4_table_offset(v)];
-+    pl4e = &root[l4_table_offset(v)];
-     if ( !(l4e_get_flags(*pl4e) & _PAGE_PRESENT) )
-     {
-         bool locking = system_state > SYS_STATE_boot;
-@@ -5223,7 +5224,8 @@ static l3_pgentry_t *virt_to_xen_l3e(unsigned long v)
-             l4_pgentry_t l4e = l4e_from_mfn(l3mfn, __PAGE_HYPERVISOR);
- 
-             l4e_write(pl4e, l4e);
--            efi_update_l4_pgtable(l4_table_offset(v), l4e);
-+            if ( root == idle_pg_table )
-+                efi_update_l4_pgtable(l4_table_offset(v), l4e);
-             l3mfn = INVALID_MFN;
-         }
-         if ( locking )
-@@ -5234,11 +5236,11 @@ static l3_pgentry_t *virt_to_xen_l3e(unsigned long v)
-     return map_l3t_from_l4e(*pl4e) + l3_table_offset(v);
+diff --git a/xen/arch/x86/sparse-directmap.c b/xen/arch/x86/sparse-directmap.c
+index a41731ccfa..ef13f9e95d 100644
+--- a/xen/arch/x86/sparse-directmap.c
++++ b/xen/arch/x86/sparse-directmap.c
+@@ -185,6 +185,20 @@ bool arch_xenheap_needs_scrub(void)
+     return sparse_dmap_configured();
  }
  
--static l2_pgentry_t *virt_to_xen_l2e(unsigned long v)
-+static l2_pgentry_t *virt_to_xen_l2e(l4_pgentry_t *root, unsigned long v)
- {
-     l3_pgentry_t *pl3e, l3e;
- 
--    pl3e = virt_to_xen_l3e(v);
-+    pl3e = virt_to_xen_l3e(root, v);
-     if ( !pl3e )
-         return NULL;
- 
-@@ -5272,11 +5274,11 @@ static l2_pgentry_t *virt_to_xen_l2e(unsigned long v)
-     return map_l2t_from_l3e(l3e) + l2_table_offset(v);
- }
- 
--static l1_pgentry_t *virt_to_xen_l1e(unsigned long v)
-+static l1_pgentry_t *virt_to_xen_l1e(l4_pgentry_t *root, unsigned long v)
- {
-     l2_pgentry_t *pl2e, l2e;
- 
--    pl2e = virt_to_xen_l2e(v);
-+    pl2e = virt_to_xen_l2e(root, v);
-     if ( !pl2e )
-         return NULL;
- 
-@@ -5352,7 +5354,7 @@ mfn_t xen_map_to_mfn(unsigned long va)
-     bool locking = system_state > SYS_STATE_boot;
-     unsigned int l2_offset = l2_table_offset(va);
-     unsigned int l1_offset = l1_table_offset(va);
--    const l3_pgentry_t *pl3e = virt_to_xen_l3e(va);
-+    const l3_pgentry_t *pl3e = virt_to_xen_l3e(idle_pg_table, va);
-     const l2_pgentry_t *pl2e = NULL;
-     const l1_pgentry_t *pl1e = NULL;
-     struct page_info *l3page;
-@@ -5392,7 +5394,12 @@ mfn_t xen_map_to_mfn(unsigned long va)
-     return ret;
- }
- 
--int map_pages_to_xen(
 +/*
-+ * map_pages_to_xen() in the hierarchy rooted at @root: idle_pg_table's, or
-+ * another hierarchy sharing its virtual addresses.
++ * Pages freed by their owner are flushed from TLBs before reuse once a
++ * sparse view is configured.  Contexts on the sparse view reach domain-heap
++ * memory only through mappings made for the purpose, and the mapcache zaps a
++ * transient mapping when it is dropped but defers the flush: a translation
++ * left behind would keep the page reachable after it has been handed to
++ * another owner.  With PV support, owned pages are flushed before reuse
++ * anyway.
 + */
-+static int map_pages_in(
-+    l4_pgentry_t *root,
-     unsigned long virt,
-     mfn_t mfn,
-     unsigned long nr_mfns,
-@@ -5443,7 +5450,7 @@ int map_pages_to_xen(
-         UNMAP_DOMAIN_PAGE(pl3e);
-         UNMAP_DOMAIN_PAGE(pl2e);
++bool arch_freed_pages_need_tlbflush(void)
++{
++    return sparse_dmap_configured();
++}
++
+ /* Pages have been allocated from the heap as xenheap pages. */
+ int arch_xenheap_pages_alloc(mfn_t mfn, unsigned int order)
+ {
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 69e8e982b6..477301ef7c 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -1539,12 +1539,16 @@ static bool mark_page_free(struct page_info *pg, mfn_t mfn)
+     }
  
--        pl3e = virt_to_xen_l3e(virt);
-+        pl3e = virt_to_xen_l3e(root, virt);
-         if ( !pl3e )
-             goto out;
+     /*
+-     * If a page has no owner and there's no PV domain support it does not need
+-     * a safety TLB flush.  PV domains are the only domain types that can keep
+-     * stale entries on the TLB, as they have (limited) control over the host
+-     * MMU and when flushes are performed.
++     * If a page has no owner, or there's no PV domain support and the
++     * architecture doesn't ask for one, it does not need a safety TLB flush.
++     * PV domains can keep stale entries on the TLB, as they have (limited)
++     * control over the host MMU and when flushes are performed.  On x86,
++     * while a sparse directmap view is configured, so can Xen's transient
++     * mappings of the page, whose translations may outlive the mappings.
+      */
+-    pg->u.free.need_tlbflush = IS_ENABLED(CONFIG_PV) && page_get_owner(pg);
++    pg->u.free.need_tlbflush = page_get_owner(pg) &&
++                               (IS_ENABLED(CONFIG_PV) ||
++                                arch_freed_pages_need_tlbflush());
+     if ( pg->u.free.need_tlbflush )
+         page_set_tlbflush_timestamp(pg);
  
-@@ -5567,7 +5574,7 @@ int map_pages_to_xen(
-             free_xen_pagetable(l2mfn);
-         }
- 
--        pl2e = virt_to_xen_l2e(virt);
-+        pl2e = virt_to_xen_l2e(root, virt);
-         if ( !pl2e )
-             goto out;
- 
-@@ -5612,7 +5619,7 @@ int map_pages_to_xen(
-             /* Normal page mapping. */
-             if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
-             {
--                pl1e = virt_to_xen_l1e(virt);
-+                pl1e = virt_to_xen_l1e(root, virt);
-                 if ( pl1e == NULL )
-                     goto out;
-             }
-@@ -5797,6 +5804,15 @@ int map_pages_to_xen(
-     return rc;
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 2bcc45cf58..1628f7a897 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -110,6 +110,8 @@ bool arch_xenheap_needs_scrub(void);
+ int arch_xenheap_pages_alloc(mfn_t mfn, unsigned int order);
+ /* Xenheap pages are to be freed.  Non-zero: failed, don't reuse them. */
+ int arch_xenheap_pages_free(mfn_t mfn, unsigned int order);
++/* Pages freed by their owner need a TLB flush before they are reused. */
++bool arch_freed_pages_need_tlbflush(void);
+ #else
+ static inline bool arch_heap_pages_init(mfn_t mfn, unsigned long nr)
+ {
+@@ -127,6 +129,10 @@ static inline int arch_xenheap_pages_free(mfn_t mfn, unsigned int order)
+ {
+     return 0;
  }
- 
-+int map_pages_to_xen(
-+    unsigned long virt,
-+    mfn_t mfn,
-+    unsigned long nr_mfns,
-+    pte_attr_t flags)
++static inline bool arch_freed_pages_need_tlbflush(void)
 +{
-+    return map_pages_in(idle_pg_table, virt, mfn, nr_mfns, flags);
++    return false;
 +}
-+
- int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
- {
-     return map_pages_to_xen(virt, INVALID_MFN, nr_mfns, MAP_SMALL_PAGES);
-@@ -5813,8 +5829,12 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
-  * flags are ignored.
-  *
-  * It is an error to call with present flags over an unpopulated range.
-+ *
-+ * modify_mappings_in() does so in the hierarchy rooted at @root, as
-+ * map_pages_in() does.
-  */
--int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
-+static int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
-+                              unsigned long e, pte_attr_t nf)
- {
-     bool locking = system_state > SYS_STATE_boot;
-     l3_pgentry_t *pl3e = NULL;
-@@ -5841,7 +5861,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
-         UNMAP_DOMAIN_PAGE(pl2e);
-         UNMAP_DOMAIN_PAGE(pl3e);
+ #endif
  
--        pl3e = virt_to_xen_l3e(v);
-+        pl3e = virt_to_xen_l3e(root, v);
-         if ( !pl3e )
-             goto out;
- 
-@@ -6092,6 +6112,11 @@ int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
- 
- #undef flush_area
- 
-+int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
-+{
-+    return modify_mappings_in(idle_pg_table, s, e, nf);
-+}
-+
- int destroy_xen_mappings(unsigned long s, unsigned long e)
- {
-     return modify_xen_mappings(s, e, _PAGE_NONE);
+ /* Free an allocation, and zero the pointer to it. */
 -- 
 2.55.0
 
