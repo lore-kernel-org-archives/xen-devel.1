@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5681ACA5FFC
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 12:36:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442286.1659854 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1C7FECA5FFC
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 12:38:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442292.1659864 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEQry-000097-V7; Wed, 07 Oct 2026 12:35:38 +0000
+	id 1xEQub-0000sl-Fv; Wed, 07 Oct 2026 12:38:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442286.1659854; Wed, 07 Oct 2026 12:35:38 +0000
+Received: by outflank-mailman (output) from mailman id 1442292.1659864; Wed, 07 Oct 2026 12:38:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEQry-000090-RV; Wed, 07 Oct 2026 12:35:38 +0000
-Received: by outflank-mailman (input) for mailman id 1442286;
- Wed, 07 Oct 2026 12:35:38 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xEQub-0000sc-B6; Wed, 07 Oct 2026 12:38:21 +0000
+Received: by outflank-mailman (input) for mailman id 1442292;
+ Wed, 07 Oct 2026 12:38:20 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1xEQrx-00008u-NZ
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 12:35:38 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1xEQua-0000rk-23
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 12:38:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEQrw-002HVv-Vs
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 14:35:36 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xEQuZ-0097lM-F5
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 14:38:19 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper@citrix.com>)
- id 6ac63c8d-2eae-0a2a0a5409dd-0a2a450ca420-42
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 14:35:36 +0200
-Received: from [40.107.208.44]
- (helo=PH0PR06CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ac63d32-bab6-0a2a0a5309dd-0a2a4505d94c-30
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 14:38:19 +0200
+Received: from [52.101.85.24]
+ (helo=BYAPR05CU005.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrew.cooper@citrix.com>)
- id 6ac63c97-f479-0a2a450c0019-286bd02c7d87-3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 14:35:36 +0200
+ id 6ac63d38-4cb1-0a2a45050019-346555182a2c-4
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 14:38:18 +0200
 Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by SJ2PR03MB7499.namprd03.prod.outlook.com (2603:10b6:a03:556::12)
+ by IA3PR03MB8023.namprd03.prod.outlook.com (2603:10b6:208:509::12)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.15; Wed, 7 Oct
- 2026 12:33:26 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Wed, 7 Oct
+ 2026 12:38:12 +0000
 Received: from CH8PR03MB8275.namprd03.prod.outlook.com
  ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
  ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0496.015; Wed, 7 Oct 2026
- 12:33:26 +0000
+ 12:38:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,24 +57,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=i+AnVgEJG4KRPdsCkYAhgzvA/lcI8ecaxTOiHYiRQo7K5ULlGKX+m2vqzNQtKG6x8REPSAffTYHv85bVTxrOA6jRASB60a9qRinCs1KmtKqLlKMayzMGWTW4InfgG3UjopGUjTx3XurDZ0JAAtG8QdgJwE2UFpHfotti6FlxTBbs659f3KUSd2Sa0FSlyC+oRG9JrZ4NuDm9sdDbEZasdPtWr6WEQj+1sZUzdiXTySijJbBCtLKSlaljTJ9DE5Feug4V9fBWEmnhBt31X57Lchmm8Vg4qRCtvi5b27/p/5m1KsIjqnOKAVcDjhbiwfKxowYOwxTFqqH97ORC5j4BvA==
+ b=Ht3rcRBzlAKpi55BkdxKiLtt4aZ4RhM8v16QTqbuNVqj8jR+DM7rvZl4wsKVmPrkhVczQ3IYPfZ7aamiCQQCxPunKAvfpo5E+/McNDJ8clmvT7HHFr8Jq1Is3GHXCFXWaWk/exmSEEWxgSR4TIe0IupktOk9ApJtXjs5QgGqOTi7+9Mn2COWfVLoqK7ADbDKVNpCtzcxF6NcR05WOtDsdhMRmCwqf02YTDwnNGnDoWJzAlNy7O/1EC+gARwozypAPiYuLoeIxD56T9j3USxoXooCSiE8pjk0boq/rWY91xVg6uqNl3PV2u4dKk03fWORtfb96xf3Sii2CDAxw56z8g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=2qgHDDAYykJYNq8u3LGBiFBWecoR5UPdHfjjJSkKE1w=;
- b=fzONIwHeYNuPJppmGyMH1lF+62QAnQYYEvkXgPeB9FgSkvihgzzOQYJSFUfgmTY0Gh8O/deU0Zq/Pz7lwZd9wAjW34F1KDcqCE1DQ2QHRSGoSFmskjD+E9NYYbIakiGEAx8ZpiBgwKxKBnEfMM6fFf1G+T+NesDPwuuiRShX2iDIsjEVY46xEopKEdMD++3OPB4zc7mN9AoRKGauM/iXVlmVnib+cSAdnZxMonh4gkuDPaQ+5skRTfODenKV3rVMVUN9ssYg1YRB1OjRQXxF4SJpsksl1TMSICSPRpv8UHuohcwuUKp1E1XUF3z/6XsWyn0GGMtvy0qxbWrWIzlH4Q==
+ bh=8YY9cqyUfKoDTK1PGZqm8ng1IS/cVdxO+SikKAV7S3g=;
+ b=NUa3xkTSV4HdfZoRW4zUWJ01o89UzsF4jH6CROU1UH8mKW0oQQ+MiTeT2K2z3zuxR5tAXGIErbBcl/DwuZMf4LVSgAlhiv/gnWi4Ti/+BpnSawFs9ovD5J+zofb7K4yZzHSQ+E+ml77H5ejIY56jinHlWUbifGxzRg8/lvxsxtQY7UCRIO5cM0Rqf+1GkmYDC2yIZUtjAIT+OyzKwILShWTP7NkkZRQWxR0axgq6Zeh7cDIreGvK8OXKkbGo0+G+cFZ6eNwnfKJsjBIy8nlCdwkVyzsBhb/q/XOpTgvyMFk4vKKfkMXBWalI+dLhmjzJWBF764Vt9i0Cl/IPHF1GFg==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=2qgHDDAYykJYNq8u3LGBiFBWecoR5UPdHfjjJSkKE1w=;
- b=VxoJE+kGPVAPmMcG5CtG/6l1SWa8q0jyNNnHNeGRU1F9WPeCp5SqFfBbe9b3GLS4WeysVROptjLJpOvs6QSFIKtEDyFwXnRk2HzAkkDF//PdYdZgrxIqOmVMTSh2humVkukCrsHbWRs40EMWsrAT3Oh/wK0R8jnk/0x46j6j4DY=
+ bh=8YY9cqyUfKoDTK1PGZqm8ng1IS/cVdxO+SikKAV7S3g=;
+ b=vOH+brCE4qaXb4vgxwmX/uJ9bNVLZAdq3R19p5yYWXpydt3ssGpFXExzY0JH0XvQv1mD73gX0pEakaaAYQeYP0qm9EBYF9eeuS2VNLEnLAZ/PWLF1jfEoDcsRz0OCA2Q+3dyt0rwciXft4LeHpqmoEW37W6jWmOQSS73xvSa0u0=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <f21cbbfd-fd69-4d37-8255-b069c0b68969@citrix.com>
-Date: Wed, 7 Oct 2026 13:33:22 +0100
+Message-ID: <cb2a5856-e3de-4ea6-8a3a-00f2999eef92@citrix.com>
+Date: Wed, 7 Oct 2026 13:38:08 +0100
 User-Agent: Mozilla Thunderbird
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
  <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
@@ -132,144 +132,82 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
 In-Reply-To: <20261007104051.48841-2-gwd@xenproject.org>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: LO4P123CA0246.GBRP123.PROD.OUTLOOK.COM
- (2603:10a6:600:1a7::17) To CH8PR03MB8275.namprd03.prod.outlook.com
+X-ClientProxiedBy: LO4P302CA0039.GBRP302.PROD.OUTLOOK.COM
+ (2603:10a6:600:317::12) To CH8PR03MB8275.namprd03.prod.outlook.com
  (2603:10b6:610:2b9::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SJ2PR03MB7499:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4be7ee36-0c88-4125-7750-08df246f2f04
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|IA3PR03MB8023:EE_
+X-MS-Office365-Filtering-Correlation-Id: 5000a09c-ccbc-4a08-e158-08df246fd9a4
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|18002099003|22082099003|10067099003|11063799006|56012099006|4143699003;
+	BCL:0;ARA:13230040|376014|23010399003|1800799024|366016|22082099003|10067099003|18002099003|4143699003|56012099006|11063799006;
 X-Microsoft-Antispam-Message-Info:
-	nYmUCeoWGx/yFoyu7C4gdh0xvgQxsBvX+j8of0WbLG1n/RqPl79PdSg5pkpBwzugzWDKXW2ynW4G/USGSfwcx/wrbD3y7HRr2482YvpmkQrxqFCQEPHjqS9tJYJtMk4jRwUVN2cDH2i6Fg5HExz8gomXr1IT7eHclkJpNQySlvJZNdDRYZwG4WG9VNr4MfVGhlsSowuOKsjzlv1HVSvJI4fHEKtJNQ+0+lf3PGjVBYFZZHv/TI6ByyfZ2oqI0Lt0qdE9wgiB7/5lP/PkdXLxq6pw06xklIxxWHGMX4gFHU+ETe/8oXvvr9sXlAZEVe7DA/SX5T3+oIxxUDREQ5wmIKODtU0Kn0c+YY/zK8pN5DKk+VQHwgBpOLOOuSp9B7t3TSYn/+To6Vnakkc2HFvpKFhqcq9ZF4Cne8h42mYso3ASaO2GBUwvQ543o/ZhSMFdwgevxPRylENj8ZXZzRzU98d4D4hwHJum7RLb44JH4nmf6FKFhtVe0fJn9XkzlTN8tHCbmN/LvuuE87MNKYLUX/CkOdCW6Q/paLML14z5K7mmMKKWjrOQM1xo62gyfIhavgd5BtYNa81hvHJemMPUa0duMgFL6Ltvq3vMcU3e2DCkcsDDnIaUwOgk+yTOKCsb7W3wC4eiNToLr3IEL3dLybsf6Q3c4oiVR6CJWgv8B+c=
+	bf984I6LyuKanhzTZV7cZuRueaJFUzrtT1PHDMStk3YGY1EasLr/wVsCwSNgitF/Q12HvKiRxo6q7c3T/Rt7oCM/aNNbribxGPaIHg5oynWtoDMyrmSGUtgPS4RYdGCTsrEva8UVYjw7cZCfxmU6ztW5GdB4s8HEDwktV+7WYwqppai21kBLmL/mGt326J04b91Vf60rBgWkj5IheI55LBGX8+zO0hR2WR3/aXOJjib1CNgWlDWGa22JHRy1MYJ0zEsP/OLZfY84qYt1JByQ765JOUfgRpjfYP9toot3QT7rmPJJJ0vRwSV6+gPSRnXs85X9pFvgTjsZzt4OKBOtBIS+Z9FwY45S8s6MK2EZCrHwaAyl0tbKF1wGeHTWSKlxmqstCZaK4/GZxy9gy+2QjI7OqcQpSubnKlZwzR9R1x6l90mobCxF275udV48sHpcJqD7uRky5dY4yce52FN7swhVY2739w9JciMjKapp3HSLk9sEzXkRGWVPxv3S665Agn14fI1LjmzTSDEexxc2ZWfdLsVd6X3fsnlXCXihv6aIFsdHQUw0M2zICy2+jj7BqrmD3FQytZlIapwpOOvL3Qr3yG1Huyh8tECNedrosGOWG2O961IKDqo0oOn7co6q+H+f9lDAgdz4T8AX/OuAtHzhv5fkrAOAyHX7uJD6kcw=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(18002099003)(22082099003)(10067099003)(11063799006)(56012099006)(4143699003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(22082099003)(10067099003)(18002099003)(4143699003)(56012099006)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?bTJuMEFGL1FoNjlubFJ3aTBlU3RzN2I1U0JqNE92bDNSTmFISFVKekwwMC9G?=
- =?utf-8?B?RStKSGZ1eHgySEdGbFZMcytORCt4b1VqR0VSZGcyMzQ4ZnQ1Uk1NRG14R3M1?=
- =?utf-8?B?dCtzNkFoWDRvbWxPNFFQd2haUGxnRGsyei9KS2tGL3FoV3o4d21SYm9sYWx1?=
- =?utf-8?B?dFVIRjdEemlVVFVvTnFEY3dGZUtRcWdpa1daUTZNRzUxSmtzVDJDY2ppOEZh?=
- =?utf-8?B?OFNyRWh4ZE5Cbi84RmxMTGE1MVlIdU95UzJSYk1xd3BtZ25sK3RLYVB5SmFY?=
- =?utf-8?B?S1R1WDJPeEJ1SE16WmxxUUlWRmF3ZTVuNEVsckliQTQ4M01DcGJyQkZRS0Rq?=
- =?utf-8?B?ZTZ4dG4weEhQQndxTGE4bXV5VzJwYjNtUTZkVGJydURNSkoxS0Q2enJwTnN4?=
- =?utf-8?B?ZDZlM0ZDQjdmc1QvUW4rb09WdkN1SHJrTUJqZXM3aFhqLy9tUndpQmQ0YUU3?=
- =?utf-8?B?alVzK1ZGVXJLMWNmcGx3K25NZjkwalBWaFpBRjhuYi9OdnBXcGVkZzNsRmJs?=
- =?utf-8?B?b2NXRmEzblZ1d2JOWlRoUml1RGkvbitWNUhwK2ErL3FuRDhRbW9XSStyUnkz?=
- =?utf-8?B?enl1aDFvL2NRa09YczNVYnRXTElnNTNHUmpTWGI4L0hlQ1ZTb1dmRWRsVVhI?=
- =?utf-8?B?bGpwalhpYkNqd1lLdzVuQU9yRnBBR2hlLzJXZFkyN2R2Nm81U3ZmS2pxUjVF?=
- =?utf-8?B?OW1rUkJocm9YK2x4Sm53QzloeXRhZjE1dURrdDRnS2JKNE1sUVBjZVNPelI2?=
- =?utf-8?B?WGlmVkRiQjgyUUNhM0NWZmZzYjFKdVF5QzJldzRreHlsUGd0c1dqRUxXdWYw?=
- =?utf-8?B?czh5SHZJdWpwYlVxQjFlWFFBNEp3aU1lKy9ud0txTEl2akVzTEdLalNkdU4w?=
- =?utf-8?B?Y0hmbUZrQVBPNURHaVJXY3F1bWdaalBtMzRiZEhaMWVRT3ZEdjRXdUI4Rkts?=
- =?utf-8?B?aE43VEdXZENqWWgvcVNrUFVoSXB6Z0MzQWJZTjl5ZWt0aWg4MjBselVpRHhp?=
- =?utf-8?B?dDFZZUlBYzRhTjVqRGdTTmFTSzlMdXVtUWxyVlVxR3JUUEJqWklJeUd3eTcz?=
- =?utf-8?B?em1DcWlEYk15SElRa3d6dUxiOWxnTENQdkZ5bjhKeWtueG1VamY3MllkOWpH?=
- =?utf-8?B?ZXVveHByWG5WcXNyR2tFVmxRZS9vZDVTckFIeUFlcFlEWUR4Qm1KVzNEU0Rw?=
- =?utf-8?B?WkdQQnVsYk5FMW5DNVEzZStiSkNHdk1HM0NML1RTVDdhRURCeG5tcnNmcWlq?=
- =?utf-8?B?ZTVrZ29GblhnVHZaRmUvY3RiOUxiTVp6VVVneEtrUHlwUE9Oam52NEVYbUor?=
- =?utf-8?B?T2oxNkcrSG0yUnJEaUhFZnFlR1ZRSXExY0hFak9jSmV1NHIybmppOXUxUitS?=
- =?utf-8?B?Y3FpZXBySmVRdkdyOXQxK1hIQ2lkOUc0M2tJY0FVL2xMWUg0WkIvWHBIT3l6?=
- =?utf-8?B?VThFQ0NTYkNtQkNWRUhIMlhST2pOY3hYWFdpcTR2MTdiMndOUitmd0l2TFkv?=
- =?utf-8?B?V0diZGtMSGlvMkQxZUEyUnFrK1E4T3dwNFd5eUJORHM0aG1PL0pnOXpvTGFi?=
- =?utf-8?B?S0lCaExoeGxWdElFTmhDSjJhaFl3ZnRadFhPT3BlR00vdlZFdkpDekRvVTRE?=
- =?utf-8?B?d1JmN1VvYis2QnBHQVFZL0RpajZxcWRHeE5kVDNwc01mWlpvRjhjcXdEY09s?=
- =?utf-8?B?QVJEZEdLWVhNNTA1dzlyUWhKa0ZzUnhMZTlDQm5DNDNqMFBIV3gwRVRCL2ZW?=
- =?utf-8?B?eVExVUtqWGxRdldWQzdORm5XZ2xoQlhxWEF1WldTaC9rMysxaUZ1bVRieG9J?=
- =?utf-8?B?NzdGLzFRQ3J6cE5oU1JiblpoQlA5dGx0UzdveGJ2NkY4MHRyZ1VNdi82dVRr?=
- =?utf-8?B?cEY5ODVxYjErQkFHQ2lNS01LemJNbEFHMGVpbkpvSU5NY0YwWGF1azYyTG52?=
- =?utf-8?B?Q3NzYWhPeU1XOGl6NDhyL2IwUElTOXhTT0VDQ3ZydzN3YzZNRzIrR29hbFF0?=
- =?utf-8?B?UXRFUTR4QXJ2UnZlZTJ4ZndWRThIZWhPOFdJMmVWQjcrRUxiOEVFdG1WU1NC?=
- =?utf-8?B?TmwvbGpFNVZUL2Y0dVYybEZqL3FUS3dLY3Y1WHduNW12THREaEo3eGJzYk5i?=
- =?utf-8?B?aGUvY3R5R0J6ZEVUYjhxc1QrQm1kRmcxZXI0bDFQcGF3YVdpTXRYRWU0V0p4?=
- =?utf-8?B?dmMzTUlveDMyOWQ0UDY2NFJEQm5KcElpS25ZLzFNL25uYXRvK2Rwc1A3WGQv?=
- =?utf-8?B?ZjdraWNuaG5GeEZ6bkh4eG5nWUhnNEkwL1k1bytvUGRRbUxhUDFITkkxSklz?=
- =?utf-8?B?MTFlS2xwMWs1cUkwRVMvRnBXMTd2RG5DcUFZb1FnMVJnWXBxcEtXUT09?=
+	=?utf-8?B?bys1bUdQVWR5VE9IM0ZONnpUdksvSUVXcmhsOEhKbE4xNlI1YmRlZnhiVUEz?=
+ =?utf-8?B?a1Vwenh4YlkxSDl6SGR2bVYxc2tTM1BCZHVQZFR5b1BuYmsrZWR2Y3RnUFQr?=
+ =?utf-8?B?VVdYNElHdDk3YTNHU2FUMmhqWE05czFnYjN1Y3BYVmd6dmhnazI1TWtScXlZ?=
+ =?utf-8?B?ejV1MGM2eXFWVjduUEdBZ0QvUUtqeEpQSFdrWDBPUW93aWhwMDl3MnROc0RD?=
+ =?utf-8?B?OG1FdlozQ09ydFArZ3lkb3dKbzN5dmhLS2kxY1ljZ09UQ1dlcTI2dUt2ZEZZ?=
+ =?utf-8?B?QmJYay80OWVNK1FEM2d2V2xlOExWRWZWeTZzL1Qrc0xKU1dtV3FHYXEvd3l1?=
+ =?utf-8?B?Q0ROUkRNajJPMFh2S3pRMm5ob2ozako0dzdmSkxFeGMxSUNZbThhSDFTMmN5?=
+ =?utf-8?B?bi9RRVIxVTY1aWF2MFF6YlZsamFvdzk0SXVjSnRuMFZLbHdnSkVWMEYvWDh4?=
+ =?utf-8?B?bGFmeHN6LzFJclpUbWQ5dmNHK0FpQVZ0Z3VvUjRKWXVWY011aGFCUkNHU0t5?=
+ =?utf-8?B?aGJnRlgxYitSejIyeFB6ZE1yb3dIMkZBUFBmTnM0TndoTnl6dUNUMkJ0Ulhv?=
+ =?utf-8?B?VjFtV1ZLclkvcHRCUHlUMzB1dzlaai95TzBvMmc2MEhhaDVqOTV1S1NseDI2?=
+ =?utf-8?B?NC9hZENEYURCaWNNNDUxL3pTenl5RjJ6UVV4M09oVkE0TGZaeE9pVEc5b0Er?=
+ =?utf-8?B?Ymw2cTd1QkxKMzF2blF6bDViOERiTldTNDJReXBDd09Pc0tnaTRPRitzNlI1?=
+ =?utf-8?B?dEVYUVZZOVg2UjZYeXc1SFU0N0huQ1R0dERrei8rZWIwbW55SVJNaUdKMUpG?=
+ =?utf-8?B?dE5EekNmYXh3MWxmdmdpWENDUVA5ZUdTNUhYalc4ajNaZTFwekpKZXlpNDZ5?=
+ =?utf-8?B?OE1BcnBrWHVhRWlEcnlWL2pZYXMydmFxeXBRdVVSRlBHSXJSeU1HSE9XZDcy?=
+ =?utf-8?B?Qm1SYkhDMXh5UzU2ZjZYeUpxWEJYMUJBcFlSZTVXVXo4MmZtaE5ITExSR0xj?=
+ =?utf-8?B?N1ZWaGVoZjdoeFpTV0pIeUxXTEN2cXFOa3N4RmhQMVVYcWtVNldneVNuQnVl?=
+ =?utf-8?B?bnl4UjZyU05VNnAzRy9nbjBpZ3prKzl4alg0RGJHR2grUHZQNlRrZ2t3UnYw?=
+ =?utf-8?B?MmxrSnRYNzFCYkNIYTFuZlpQWCtEaTNOWm5GTUJadXVEbUtlZFZHbGtyV0h1?=
+ =?utf-8?B?d09QT3grTlgyYkZjRnc4Q3Z4UDBFSjFhUVk5NWVKaGM4VWlpQzlPS3A4bEF2?=
+ =?utf-8?B?VzB2K3pRb1lyQm55ZUZTTFZYOWpuaDhXTHRpd0hHM1QwdjBJNXZKSklpSHpO?=
+ =?utf-8?B?OThZaWtkU2pYMmdzZjhuZUhEeUJqTnlYRWlkVW44bDhUdUZOR2tsYUlnd0cr?=
+ =?utf-8?B?M2hGS3lDQUthdkQvdENoczhLODFmc2xqTHhYV2daL2JzOXJ0QkVob2s0RUZF?=
+ =?utf-8?B?UEk4N0pYazhjSUdwK0l5ZlV6bld2QXlPUU43R2ZGWWJHYjRGbnBXMHEybnhW?=
+ =?utf-8?B?aE1DTHZRSXBVZWxtMVhYSFVVQmFZbzVKZytSMFFyTjRDSkEyWWF2bkMwTUth?=
+ =?utf-8?B?SjNEOGJBbmVObWcwYTZxM2ZXSysySGxEbURpVld3UXVHQllTS0NVWVFKRWxq?=
+ =?utf-8?B?V0NLeWptcjhNdXEyU09mc3drN2ZIQllEbitBaC9Mcy90SCtXeXBGYkFXdFA5?=
+ =?utf-8?B?VHVsWEMzeFg1VE1UNnZOT2h6K0Jvb245NGxiTHBRWGt5aHNDWFlOWk1zb2Vu?=
+ =?utf-8?B?aTJ5ODFFY2ltNFJkcUdQQ2FPS1lMczVIQVE1dzB4Um5CS1Jza3hGbmVqdFZS?=
+ =?utf-8?B?UnpqamNSS3VtRmJDbHZUOFV5aGIrdlpEWlRYTGtvN09lejh0dXN0MHVnNUJw?=
+ =?utf-8?B?L2plMXNGVHFVcDFPaFE2RktxY0JKTnh2RTdsOVh0cHd2aEM4TTFqcHlKWStD?=
+ =?utf-8?B?SjdtdEZ3aGtmWXJnN1FTeFlvWlQyaTgwT3RnZjZBYkZpTTJpdWdGWFlycFdx?=
+ =?utf-8?B?WmlsY1F3S0djN3l1U1lzTm5kcDAvVXdTL1dDeDFheS9mZG5JbDh4SHhNdkVO?=
+ =?utf-8?B?cjhhWnE1WWtFejBqVlFoNitWemFsUWRSQ212eGxMdVlJb2pDQWRjcDBqaDRh?=
+ =?utf-8?B?QnlSSzlxbDV1OTFSdHcrekNrdU1MVG1YekFuZk1QcWpXRUQ5UmtnVnljVStR?=
+ =?utf-8?B?Q3cybVAraTRIOEc1aDkrK20rVUgvMUR5dkx6MGVqVGl1VVE5NThTVmpnRzVv?=
+ =?utf-8?B?b0lNVlNJaG52L0pLZzQ5VjVrakhyQ291cms2UzVkZmcrSUtLblVweVZvWHZn?=
+ =?utf-8?B?Ym0zRDl1d1hORlVTdzFBZEUvdFMzSTJPdkMyZWQ5dGM2SDNSQjluQT09?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4be7ee36-0c88-4125-7750-08df246f2f04
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5000a09c-ccbc-4a08-e158-08df246fd9a4
 X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Oct 2026 12:33:25.9549
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Oct 2026 12:38:12.2122
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: M3Jf6jOnAA9/YjRTDdg2bGAWpbSP0i0g1IUSZdZyZjlO+VUckBljB5Rkfi7l2OSOZ8ykc3g6feI6Qpo2H3NAdqgOzMZPtSvoicjKQun9a9E=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ2PR03MB7499
-X-purgate-ID: tlsNG-d25034/1791376536-01CC3A5B-838C20FE/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: jnLGt0eLSnepB2o/fUuIH1WlVGLdluDr9PVxbq3pNlDxozlBIbSmNT89vMadjOBq9f1g8K/ZiPNZXiqsUSREjwE5DS5+tvUOoWxPNIouMhk=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA3PR03MB8023
+X-purgate-ID: tlsNG-c201ff/1791376699-F74BC2A1-AFD56B14/0/0
 X-purgate-type: clean
-X-purgate-size: 7560
+X-purgate-size: 1149
 
 On 07/10/2026 11:40 am, George Dunlap wrote:
-> p2m_pod_zero_check() maps every page of its batch that passes its
-> checks, up to POD_SWEEP_STRIDE (16) of them, and keeps them mapped
-> across the p2m lookups and updates which follow, each of which maps
-> page-table pages of its own.  Its callers hold mappings too: the p2m
-> lookup which found the entry to populate still has its page-table page
-> mapped, and a PV mmu_update() the L1 page it is writing.
->
-> map_domain_page() cannot always provide that many at once.  It uses the
-> mapcache on behalf of PV vCPUs only: in debug builds for every page, in
-> release builds for pages beyond the reach of the directmap in PV guests'
-> page-tables (5TiB, 3.5TiB with CONFIG_BIGMEM).  The mapcache has
-> MAPCACHE_VCPU_ENTRIES (16) slots per vCPU of the domain, shared by its
-> vCPUs, and a mapping which finds no slot free or reclaimable hits the
-> BUG_ON() in map_domain_page(): the host crashes.
->
-> The sweep runs in the context of whichever vCPU populates a PoD entry
-> while the domain's PoD cache is empty.  The guest's own vCPUs, being
-> HVM, map through the directmap; a PV vCPU gets there when its domain
-> maps or copies the guest's memory: a device model in dom0 or in a stub
-> domain, a backend doing grant copies.  A PV domain with a single vCPU,
-> as a device-model stub domain or a dom0 booted with dom0_max_vcpus=1
-> is, has 16 slots, and a sweep over 16 candidate pages needs more.
->
-> The sweep has mapped its whole batch at once since 9ad9a1609fbe ("PoD
-> memory 5/9: emergency scan"), when x86-64 reached all memory through the
-> directmap.  The per-vCPU budget came with the mapcache's return to
-> x86-64 in 4b28bf6ae90b ("x86: re-introduce map_domain_page() et al").
->
-> Map one page at a time instead, as p2m_pod_zero_check_superpage()
-> already does: map a page for the quick check and unmap it again, and
-> map it anew for the full check after the p2m update and the TLB flush.
-> The checks and their order are unchanged.  Each page is mapped twice,
-> which costs little next to scanning it, and the error paths no longer
-> have mappings to undo.
->
-> Fixes: 4b28bf6ae90b ("x86: re-introduce map_domain_page() et al")
-> Assisted-by: Claude Code:claude-opus-5-5
-> Signed-off-by: George Dunlap <gwd@xenproject.org>
-> ---
-> NB this issue was raised in review and verified only by code
-> inspection; it hasn't been demonstrated.
-> ---
->  xen/arch/x86/mm/p2m-pod.c | 72 +++++++++++++++++++--------------------
->  1 file changed, 35 insertions(+), 37 deletions(-)
->
 > diff --git a/xen/arch/x86/mm/p2m-pod.c b/xen/arch/x86/mm/p2m-pod.c
 > index 4602c32cff..0b0beca15a 100644
 > --- a/xen/arch/x86/mm/p2m-pod.c
 > +++ b/xen/arch/x86/mm/p2m-pod.c
-> @@ -901,7 +901,8 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
->  {
->      mfn_t mfns[POD_SWEEP_STRIDE];
->      p2m_type_t types[POD_SWEEP_STRIDE];
-> -    unsigned long *map[POD_SWEEP_STRIDE];
-> +    bool check[POD_SWEEP_STRIDE];
-> +    const unsigned long *map;
->      struct domain *d = p2m->domain;
->      unsigned int i, j, max_ref = 1;
-
-I agree with getting rid of the map batching, but your LLM has done a
-poor job doing so.
-
-An array of 16 bools is excessive.  You want "unsigned int check = 0;"
-here, so ...
-
->  
 > @@ -911,7 +912,12 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
 >      if ( paging_mode_shadow(d) )
 >          max_ref++;
@@ -281,108 +219,13 @@ here, so ...
 > +     * p2m_pod_zero_check_superpage(): a vCPU can hold only a few transient
 > +     * mappings at once, and the p2m lookups and updates here need some too.
 > +     */
->      for ( i = 0; i < count; i++ )
->      {
->          p2m_access_t a;
-> @@ -921,18 +927,17 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
->  
->          /*
->           * If this is ram, and not a pagetable or a special page, and
-> -         * probably not mapped elsewhere, map it; otherwise, skip.
-> +         * probably not mapped elsewhere, check it; otherwise, skip.
->           */
-> -        map[i] = NULL;
-> +        check[i] = false;
 
-... this can be dropped, and ...
+Actually, I think this wants almost entirely dropping.   Yes, "and maps
+the pages." needs editing, and should probably say "and check for being
+a plausible candidate" or so, which was missing previously.
 
->          if ( p2m_is_ram(types[i]) )
->          {
->              const struct page_info *pg = mfn_to_page(mfns[i]);
->  
-> -            if ( !is_special_page(pg) &&
-> -                 (pg->count_info & PGC_allocated) &&
-> -                 !(pg->count_info & PGC_shadowed_pt) &&
-> -                 ((pg->count_info & PGC_count_mask) <= max_ref) )
-> -                map[i] = map_domain_page(mfns[i]);
-> +            check[i] = !is_special_page(pg) &&
-> +                       (pg->count_info & PGC_allocated) &&
-> +                       !(pg->count_info & PGC_shadowed_pt) &&
-> +                       ((pg->count_info & PGC_count_mask) <= max_ref);
-
-... this can be put back to it's older if() form, with `check |= (1U <<
-i);` instead, so ...
-
->          }
->      }
->  
-> @@ -942,18 +947,24 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
->       */
->      for ( i = 0; i < count; i++ )
->      {
-> -        if ( !map[i] )
-> +        if ( !check[i] )
->              continue;
-
-... this and ...
-
->  
->          /* Quick zero-check */
-> +        map = map_domain_page(mfns[i]);
->          for ( j = 0; j < 16; j++ )
-> -            if ( *(map[i] + j) != 0 )
-> -                goto skip;
-> +            if ( map[j] != 0 )
-> +                break;
-> +        unmap_domain_page(map);
->  
->          /* Try to remove the page, restoring old mapping if it fails. */
-> -        if ( p2m_set_entry(p2m, gfns[i], INVALID_MFN, PAGE_ORDER_4K,
-> +        if ( j < 16 ||
-> +             p2m_set_entry(p2m, gfns[i], INVALID_MFN, PAGE_ORDER_4K,
->                             p2m_populate_on_demand, p2m->default_access) )
-> -            goto skip;
-> +        {
-> +            check[i] = false;
-> +            continue;
-> +        }
->  
->          /*
->           * See if the page was successfully unmapped.  (Allow one refcount
-> @@ -961,6 +972,8 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
->           */
->          if ( (mfn_to_page(mfns[i])->count_info & PGC_count_mask) > 1 )
->          {
-> +            check[i] = false;
-> +
->              /*
->               * If the previous p2m_set_entry call succeeded, this one shouldn't
->               * be able to fail.  If it does, crashing the domain should be safe.
-> @@ -970,14 +983,8 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
->              {
->                  ASSERT_UNREACHABLE();
->                  domain_crash(d);
-> -                goto out_unmap;
-> +                return;
->              }
-> -
-> -        skip:
-> -            unmap_domain_page(map[i]);
-> -            map[i] = NULL;
-> -
-> -            continue;
->          }
->      }
->  
-> @@ -986,22 +993,20 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const gfn_t *gfns, unsigned int count
->      /* Now check each page for real */
->      for ( i = 0; i < count; i++ )
->      {
-> -        if ( !map[i] )
-> +        if ( !check[i] )
->              continue;
-
-... this can turn into for_each_set_bit() loops.
+The rest is a justification of why we do mapping in the same way we do
+it generally, and not useful to have in the source code.
 
 ~Andrew
 
