@@ -4,40 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9C958CA5FF1
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 05:46:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1441978.1659513 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7791FCA5FFF
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 07:47:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442000.1659521 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEKTA-0001Z3-RQ; Wed, 07 Oct 2026 05:45:36 +0000
+	id 1xEMN8-0000tk-2X; Wed, 07 Oct 2026 07:47:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1441978.1659513; Wed, 07 Oct 2026 05:45:36 +0000
+Received: by outflank-mailman (output) from mailman id 1442000.1659521; Wed, 07 Oct 2026 07:47:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEKTA-0001Ys-MK; Wed, 07 Oct 2026 05:45:36 +0000
-Received: by outflank-mailman (input) for mailman id 1441978;
- Wed, 07 Oct 2026 05:45:35 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <nicola.vetrini@bugseng.com>) id 1xEKT9-0001Ym-2b
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 05:45:35 +0000
+	id 1xEMN7-0000td-VX; Wed, 07 Oct 2026 07:47:29 +0000
+Received: by outflank-mailman (input) for mailman id 1442000;
+ Wed, 07 Oct 2026 07:47:29 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xEMN6-0000tX-RC
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 07:47:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEKT7-00CRx5-Ob
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 07:45:33 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xEMN5-008CkA-FK
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 09:47:27 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <nicola.vetrini@bugseng.com>)
- id 6ac5dc6e-bab6-0a2a0a5309dd-0a2a450b98d2-14
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 07:45:33 +0200
-Received: from [162.55.131.47] (helo=support.bugseng.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <nicola.vetrini@bugseng.com>)
- id 6ac5dc7d-b7e8-0a2a450b0019-a237832facce-3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 07:45:33 +0200
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id 3BB144EE01FB;
- Wed,  7 Oct 2026 07:45:33 +0200 (CEST)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ac5f90a-8faa-0a2a0a5109dd-0a2a45049c10-14
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 09:47:27 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ac5f90e-b57f-0a2a45040019-d155dd2de960-3
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 09:47:27 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-48bbb06e746so1952346f8f.3
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 00:47:27 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a1808d7b52sm17254795e9.2.2026.10.07.00.47.25
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 07 Oct 2026 00:47:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,130 +52,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1791351933;
-	b=w/3JMW86rJQTwqW4oeDBjWstPixHRYuIM9LP41wdGCu/5nz0m4nl8RxOMDfApxFtFpFP
-	 lgtBdOOB32nECFJv9O6GT8nBW0QbP52hrkmIYk/P9NyHO4M8BCB/9Arz68vWdJhbs+9Mc
-	 +w51kxT0claRQwc07LHDla+Yst6WS4xRWB5s18MmZ1/pNjMSIqXwZ0x4CtOlNjSwAqtdR
-	 hgUk7iIF1Jjtfepfpj6C81lpTSHKC0WK7N4easmphtlc7q2nOVj6kj7B7N/aE3tGigBY9
-	 UKu7a7gFH2w6y6kLilh7uR4kLK7LHO5RM37OrrlQ4fZP5NPH5lKNwqFRa51u9NTQzfIvE
-	 0Ee80zFSmtulmSrHBbmOxDuFHIT6xOnh1EaDblVU4QcLE0LEIz0b+z6HD6TubKuae7RyW
-	 kpvbigsB5jLXVvpVBy16tDJAnqIr568PlB0tqHc4YausNf+BEI6cTENh91iKkMrpgmRJh
-	 I5ZNthbwG2/BboC8NXKCP7yeUPxNU0w/CTFPXPLu3lGaTnajj92CdH0YQISbz7akOBGJe
-	 HFZYHiYkssNkMNy1dgtL820Op7iPZN6L7TKEsRvJAMHK1JkjpHJTBQPXDs5tkCu8lDq4d
-	 hiy+uXyIDJjH/RWrspqWSn4mMWM7nyMPEujZbjLGlqwKrXBiGx83jDOP0/tpuA0=
-ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791351933;
-	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
-	 Message-ID:X-Sender:Organization:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=rex59e9VM4dDveOiR19eBUpIma2cN/MESd8hU5/XKJ4=;
-	b=V4bjuhFq99hWEKt91JsYE2pGVH9G27rCG1m5avxGpoc8+8XfnzmQL0FO6qDl9rNNTZrF
-	 KZtZglwV6EtMV7lFizV0SrSKeCQU0gmUGZymz5ZBTMo7u4JwfW0FrbfzwdkARecS7yTCE
-	 z96J/vZ0TUnzD5UIwIntvmR8qU0icWgDX4TCrf5HNBSa7lhKo3nT1hunFfkjh87PhOjpK
-	 eYOjkUldk3VBoijbsQV3+S+IlXhew/xbROfa+l1PmDS8mCdh6RXdIChYHxehtPcpWvagk
-	 n162llBFPZ2i3709UJhqoMAIDjN1c0yPBtT6AHb5WTfGZU47Oadu3U/PENWUqHQ3QRCsn
-	 Muq93gBzPsf4WqvDvzjKfnW9quuvH0bT4CMBIob8ho+v+3ASZyxTHc1glzS4ks4M5DL5D
-	 VURa6JLN7KcTRVcinc0cIxSlGME2NfXGoUPsvlK5Y/Ygbn41IuR/idtkESMejGVkE4hGF
-	 MTYXrGAJfJkavlFiWoP0O7vjJaTfnITXaVDtY3rVugWk/cdNyQzTamAbojJHmag1hc9py
-	 mkek5g/axnwCMiHrirmT1PXHMFTx0udc+gUVitTgm5xVcnWwWFBqZd0qH3Djmc3wXawgT
-	 ovESTxF3B13kzcFLoITh5DVP2hkh/ATZEOKnvEnbY0/maG/xrnFios5adkWnOVw=
-ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1791359246; x=1791964046; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=g7ljQ8QJLZNNdO100l4fN08FN/ZzE/N+9TqclgR6ffQ=;
+        b=ADrB1f/TUvSGXi/fV9VPc6sSvPU+MR1+7eD23kMnylKHzqU2HRggXAwWIsLul3KLH/
+         3TQ2MyssZTVYEfU+++YDwZhb9Q6g8YBq7F9xNd3TkyIvLxB8A5IWIrsQY6NbheSpQkHb
+         ECZ6UHpz6T+obyKuMicwtN94l2qj08qgk3RihBwH+XHbiWQAmKYM3rs9NawSjH2HfL5H
+         6cOBQje4mFCjwyr8HFJemP9zokOTWSxx8rRhwCr4k/VpmgHfnl5dAiePxhSoOkFKXU06
+         KaKI+bSVYxWebB5asT9da4cV/JMia2jRfZqPwWLkWhERYC+T6ozfB7fjePMvKFm8bp8Q
+         HmRg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791359246; x=1791964046;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=g7ljQ8QJLZNNdO100l4fN08FN/ZzE/N+9TqclgR6ffQ=;
+        b=rYwKmNu8H7/lF2CXC+ROteQjWnx3grZVW/CZhqKWSl/Cjwcufgd3Y26dI0DCFLjPY/
+         YCqO+cnPCdU93uqsO1MojB/uBADz/wlsxiyeZ/MHi0U7Z9s3X7pjnPirZe84NyYIsetA
+         w40c8BzZIv58xQin0LRDm2K6giqA0k7PZSzJ/4+ef8azdrwvh4mlBFA7Dtx+n0j3Ygeh
+         m6HoLeKJLsgC4HcMlaJspC7O9SzQ6ft1ImvmaVuOAyxlWZLagZD2fOvXR8r7eiiqI2O0
+         AKYRNVMmGCmTqxkbhLfHr3AvOVz4k9n8oj6YbWxnLC21oIcPxJ1bHfbHDINzlkfkLR+x
+         YcmQ==
+X-Forwarded-Encrypted: i=1; AKwUvByjZws6r4B4w4G6kLQ+0/EcASuF0t+Bdh2VXt0YWEz7YEaYySHjzsl7Cghslo8aB4fJrl6/CKza7Y0=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kebg31aAZQyNcvEvWdp94TrI1FDsPzONW3mLvowSTSICluVBqL
+	743X4LZMp3W247Y7qia0UnzWE5syX8uNx8wWdNbwFM+CiTU6P8sJYZNETyYwA+GS0Yg6VhEkhpO
+	5ZPx3yQ==
+X-Gm-Gg: AYBFou2JqnpfC4wGkIvDxoAXoweHPNlTCvncu89CtDcJ/haF9pVWL/xJJWUOWwh5DU5
+	ExfbhDnhA9f1gDnH41cIf6H+6VtyDd2MHsV8dKT9QUCcJBfI/GSQ//xzWUCV7AmenVS4t5ugaVG
+	8TsMtE4heDBN2tnBW8/8YzHXKXyEGLCvsfch0jJ0EQI/LKXLF8tsqJ+dGWEVq11n5z2BaDxCDjR
+	EO4zZFdXygQ6EVGNc1rHKmeOQpOLoHPi9NabDVf65hNY4aLzuLacRp8+LDZdK/7nwh2mbEZKGeL
+	a9t+GBLjxchTq/xF41DtifI8GRMBrEsFWU6oKPnFq0Vel3nQeJDA7JHzlMHMLPslsXKEQBZSRaS
+	1rRE9HXeI7MyWyHtKFbhyJRnkzHuBdiRnJyvtC5KXL2zpeDJTsAVfN2pmpohOe3wcBZgW3GIPr9
+	QirwxAa5CldwZDaDTMj8iKR3yn3EJYz30sLlVpr4pInylwyhvDOYRMo9F9kLGfDdex2smy2/VYq
+	1JJBGteIqhc3sDZEOp/92uzgYtvyoBqAZeSxEcQQ5PXo+X1PZi6AGDXH0QcVQ==
+X-Received: by 2002:a05:600c:64c6:b0:49f:cbf1:e765 with SMTP id 5b1f17b1804b1-4a18008688cmr17973355e9.0.1791359246584;
+        Wed, 07 Oct 2026 00:47:26 -0700 (PDT)
+Message-ID: <5f5dca6c-92ff-43d8-8dc3-2ee171bd1ca3@suse.com>
+Date: Wed, 7 Oct 2026 09:47:24 +0200
 MIME-Version: 1.0
-Date: Wed, 07 Oct 2026 07:45:33 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
-Cc: Jan Beulich <jbeulich@suse.com>, Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH] Eclair: scan the last xen-syms linking pass on Arm
-In-Reply-To: <8d3b26df-a42a-4d34-bc6c-81ed26839006@epam.com>
-References: <2f67ef7c4593d3ab94b75b5b819e7e046e055796.1791293680.git.dmytro_prokopchuk1@epam.com>
- <03338d69-cbde-4918-8ffd-c309230d337f@suse.com>
- <8d3b26df-a42a-4d34-bc6c-81ed26839006@epam.com>
-Message-ID: <22ed9e39767c74e820e964acc2e32a32@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1791351933-182F49EA-489EDD47/0/0
-X-purgate-type: clean
-X-purgate-size: 2867
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] x86/kexec: Annotate more noreturns
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20261006105445.511099-1-andrew.cooper3@citrix.com>
+ <3bade5ec-e91d-4181-89d9-de35bd42ce62@suse.com>
+ <288b7c58-8375-41a8-9923-a4884830cc40@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <288b7c58-8375-41a8-9923-a4884830cc40@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ebf023/1791359247-510DDB50-904E4A63/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2884
 
-On 2026-10-06 18:09, Dmytro Prokopchuk1 wrote:
-> On 10/6/26 18:03, Jan Beulich wrote:
->> On 06.10.2026 16:23, Dmytro Prokopchuk1 wrote:
->>> Hiding .xen-syms.[013] assumed the almost-final image is always pass 
->>> 2.
->>> On x86 LAST_LINKING_PASS is 2, so .xen-syms.2 stays visible. On Arm
->>> LAST_LINKING_PASS is 3 and the final image is .xen-syms.3, which was
->>> hidden. Pass 2 is usually only a symlink, so Eclair saw no program 
->>> link
->>> and reported every translation unit as unreachable.
->> 
->> When I did that work, rule 2.1 ended up clean for both ARM64-* 
->> analysis
->> jobs (iirc). Upon re-checking I now see that ARM64-amd has 177 
->> violations
->> (apparently that's what you talk about above), but ARM64-allcode has 
->> none
->> (https://gitlab.com/xen-project/hardware/xen/-/pipelines/2916569232).
->> 
->>> Stop hiding pass 3. Passes 0 and 1 remain excluded.
->> 
->> This will cause scanning of both passes 2 and 3, i.e. consume more 
->> time
->> and report duplicate violations when both passes are real linking 
->> steps.
->> I think we want to be smarter than that, to really scan exactly once. 
->> I
->> don't have a good idea just yet how to achieve that, though (and I was
->> wondering already when putting together the original patch).
->> 
->> Jan
+On 06.10.2026 21:01, Andrew Cooper wrote:
+> On 06/10/2026 12:26 pm, Jan Beulich wrote:
+>> On 06.10.2026 12:54, Andrew Cooper wrote:
+>>> kexec_reloc() does not return.  Plumbing this property upwards lets us mark
+>>> machine_kexec() and machine_reboot_kexec() noreturn too.
+>> The latter already is annotated such (see also next remark) as of 4d2ed2f88a0c.
 > 
-> Hmm
-> 
-> At the moment
-> (https://gitlab.com/xen-project/hardware/xen/-/pipelines/2917375773) I
-> see ARM64 R2.1 violations:
-> - 177 in AMD
-> - 249 in allcode
-> 
-> Anyway, we can have if-else like this (copied from
-> automation/eclair_analysis/ECLAIR/tagging.ecl):
-> 
-> -setq=target,getenv("XEN_TARGET_ARCH")
-> if(string_equal(target,"x86_64"),
->      file_tag+({"xen_syms_tmp", "^xen/\\.xen-syms\\.[013]$"}),
->      if(string_equal(target,"arm64"),
->          file_tag+({"xen_syms_tmp", "^xen/\\.xen-syms\\.[012]$"})
->      )
-> )
-> 
-> ^^^ test pipeline is here:
-> https://gitlab.com/xen-project/people/dimaprkp4k/xen/-/pipelines/2918571749
-> 
-> BR, Dmytro.
+> You missed half of it.  I'm surprised that it didn't create a MISRA
+> violation.
 
-In theory we could even generate a configuration file on the fly just 
-before invoking make. See e.g. [1] and [2]. In this way, we can 
-determine programmatically which is the linking step to consider, since 
-the logic involves some conditionals in the Makefile rules. In any case 
-intercepting one more command that is just a symlink does not incur in a 
-big cost: only if the intercepted step is another linking command ~5 
-more minutes are needed.
+Please clarify what it is that I missed.
 
-[1] 
-https://gitlab.com/xen-project/hardware/xen/-/blob/staging/automation/eclair_analysis/ECLAIR/generate_ecl.sh?ref_type=heads
-[2] 
-https://gitlab.com/xen-project/hardware/xen/-/blob/staging/automation/eclair_analysis/ECLAIR/generate-linker-symbols.sh?ref_type=heads
+>>> --- a/xen/arch/x86/machine_kexec.c
+>>> +++ b/xen/arch/x86/machine_kexec.c
+>>> @@ -142,15 +142,14 @@ void machine_kexec_unload(struct kexec_image *image)
+>>>      /* no-op. kimage_free() frees all control pages. */
+>>>  }
+>>>  
+>>> -void machine_reboot_kexec(struct kexec_image *image)
+>>> +void noreturn machine_reboot_kexec(struct kexec_image *image)
+>>>  {
+>>>      BUG_ON(smp_processor_id() != 0);
+>>>      smp_send_stop();
+>>>      machine_kexec(image);
+>>> -    BUG();
+>>>  }
+>>>  
+>>> -void machine_kexec(struct kexec_image *image)
+>>> +void noreturn machine_kexec(struct kexec_image *image)
+>>>  {
+>>>      int i;
+>>>      unsigned long reloc_flags = 0;
+>> The annotations here aren't needed, are they? I.e. this hunk can shrink
+>> to just the removal of the BUG() invocation.
+> 
+> Readers of this code are not psychic.  They shouldn't need to be in
+> order to follow what's going on.
 
+"Psychic"? What are you trying to tell me? There's nothing wrong with
+repeating this kind of annotation on the definition, but there also is
+no need for doing so. Hence as far as I can judge, the change I made
+was self-consistent. If you feel like repeating the annotation is
+wanted, then that's different from you (half implicitly, half
+explicitly) claiming it's _needed_.
 
--- 
-Nicola Vetrini, B.Sc.
-Software Engineer
-BUGSENG (https://bugseng.com)
-LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
+>>> --- a/xen/include/xen/kexec.h
+>>> +++ b/xen/include/xen/kexec.h
+>>> @@ -49,7 +49,7 @@ int machine_kexec_load(struct kexec_image *image);
+>>>  void machine_kexec_unload(struct kexec_image *image);
+>>>  void machine_kexec_reserved(xen_kexec_reserve_t *reservation);
+>>>  void noreturn machine_reboot_kexec(struct kexec_image *image);
+>>> -void machine_kexec(struct kexec_image *image);
+>>> +void noreturn machine_kexec(struct kexec_image *image);
+>> The annotations on the declarations are sufficient, with another Misra
+>> rule making sure we don't omit the inclusion of the header in the CU
+>> having the definitions.
+>>
+>> Preferably with the redundant annotations omitted, and with the description
+>> slightly adjusted:
+>> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+> 
+> I am not inclined to make changes.
+
+Well, so be it then. Yet it again indicates that in certain situations
+you're simply not willing to accept that there may be (valid)
+viewpoints other than yours. Or, if you think those aren't valid, make
+clear what's objectively wrong.
+
+Jan
 
