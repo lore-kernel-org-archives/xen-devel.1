@@ -4,44 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 15501CA6002
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 17:58:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442633.1660163 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784ACCA6002
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 18:08:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442645.1660173 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEVtr-00036X-9n; Wed, 07 Oct 2026 17:57:55 +0000
+	id 1xEW3R-0004uV-5B; Wed, 07 Oct 2026 18:07:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442633.1660163; Wed, 07 Oct 2026 17:57:55 +0000
+Received: by outflank-mailman (output) from mailman id 1442645.1660173; Wed, 07 Oct 2026 18:07:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEVtr-00036P-6S; Wed, 07 Oct 2026 17:57:55 +0000
-Received: by outflank-mailman (input) for mailman id 1442633;
- Wed, 07 Oct 2026 17:57:54 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xEW3R-0004uO-2T; Wed, 07 Oct 2026 18:07:49 +0000
+Received: by outflank-mailman (input) for mailman id 1442645;
+ Wed, 07 Oct 2026 18:07:48 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1xEVtp-00034i-Uj
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 17:57:53 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1xEW3Q-0004uC-7B
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 18:07:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEVtp-002J09-Bc
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 19:57:53 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xEW3P-008tbe-4q
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 20:07:47 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6ac687e2-2eae-0a2a0a5409dd-0a2a4503edca-36
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 19:57:53 +0200
-Received: from [209.85.160.179] (helo=mail-qt1-f179.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6ac68820-fae8-0a2a45030019-d155a0b3addf-3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 19:57:53 +0200
-Received: by mail-qt1-f179.google.com with SMTP id
- d75a77b69052e-53512cd2f85so21065801cf.1
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 10:57:52 -0700 (PDT)
-Received: from toxicpanda.com ([153.61.196.251])
- by smtp.gmail.com with ESMTPSA id
- af79cd13be357-93e991fe1a1sm269754085a.43.2026.10.07.10.57.51
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 07 Oct 2026 10:57:51 -0700 (PDT)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6ac68a34-8faa-0a2a0a5109dd-0a2a450aa69e-30
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 20:07:47 +0200
+Received: from [162.55.131.47] (helo=support.bugseng.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6ac68a72-f2d2-0a2a450a0019-a237832fc924-3
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 20:07:47 +0200
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id B78464EE0216;
+ Wed,  7 Oct 2026 20:07:46 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,126 +49,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1791395872; x=1792000672; darn=lists.xenproject.org;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=MAJHQ2Wkik4PqvnpAIT0i+1papDfY48uBw0Kb6tIGEA=;
-        b=qk/aAx7b+rnaAChXJbeGcOdBURVLhhOc1OfbrcAWjvAFQa/allMxGwNUwj5WQdq7Z1
-         n2sgYpi3N+PEX5X5LjYA8QdaOpZPx2WvXwV6MyqJRGZzlIOCqkATIFjO2e/5Mk9emA8b
-         +AJu+KZLOzHGhQHnCJu6h3y7YylN6glWs5aQZTydS7MFUBMSOco6AMz4VHAB3fTHII/7
-         xpCDMjv9HHDnRs7wy5EFSFs8N8aDRMCbZAixaMG/igTrG+Oha9+npmIcyQqj6cSNdHxc
-         QR1CXjqurW5nXDfawhZ6EgW8k7aJ3FeD3jAM0cl1lDyhPTgxgytpHol8BdTguoJPr87m
-         HFfw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791395872; x=1792000672;
-        h=cc:to:message-id:content-transfer-encoding:content-type
-         :mime-version:subject:date:from:x-gm-gg:x-gm-message-state:from:to
-         :cc:subject:date:message-id:reply-to:content-type;
-        bh=MAJHQ2Wkik4PqvnpAIT0i+1papDfY48uBw0Kb6tIGEA=;
-        b=kS0girR8SRxtpoJSyg5yADcxSOF22oZbJ4azVSAbf6lnIjSN+bkZynF5UXb+XYf4Lh
-         sXtbTSHzMdxNYsQrM6hxVjg7jMCrrZvE97MqT9xOxTAuB0n1YyXr7QZkfGmVDgqPO5cm
-         1s7UgV/BhWi5T1USin4c8YpK/71hkvR+gySr6faqufh6wFHNvkpfQF1+01WVJjf6Q6hb
-         /U2F5VR9udoZqHhezJSYczo6C+qg+ToNHCZQucGEWXh3OPQImeAGbGF2SEEjWLuYlu0t
-         G/rS0BDipNXwJjiNQ4iDAb9y8hyYaT6ZLtWomLHlQrz31tRTQpWccU7g7k6zCfQSOm83
-         /vyQ==
-X-Gm-Message-State: AFuF++nEoR5fioJOGg324CiIpho6HFMLLpVYT2RLUGPb2LaFi6omptt5
-	9yaZjVYsPXiPHI8zXY9WseGXGRLdiYkBl9wN79vRk7ejj/VL71O/iPnilmL2ojqFIfI=
-X-Gm-Gg: AYBFou0dUczssVppJcsmmLvTvqQKIhStSlA67CFZQyLCoeS3xsKxd2wxKcUHvfpEtNd
-	aKsTEnFhcmEmf48x87t54CyKLbfSgrDf3j3A1AmC0sGA06gjp0dnFp4MLh0DG0r7YqetP5dpWsX
-	ywkSATn5Dqmdi8BhARjUO+1uKAyx8QLgpn6kSYNYUY5D8FuL1+KqKiQrGRSIEaBNI2gTqEW0yPB
-	vELNqno2ATjD7Z6pqXQwXtRa6eLuSkLZJUIZZQ1C9gUYbSUz1C5jD7ALdOR07sObE0vuYt0uNU+
-	lZeM1BQcxTGiQWJ784UHMXcZYaKs1qgY62GII8mwy5ebVKjl4qV9FpTTfwGLlFlskHQ5qpiOh7M
-	JAcxtNdxUXCFkWssV+UFZDGVhS45YayMQzy76ZFzfiINt3PEosy32t+cZbuCJAPDYlgnpktuQgS
-	Ss2rOZ8FMLfXtalZgkmpYdsSwA/m05ZM0bYrnngBxQMPAxDUsHrXCTHquovSDBgkXaNMCWA6tCO
-	Z1TPR/Cdj/FdWU=
-X-Received: by 2002:a05:620a:890c:b0:93e:5b69:fa8 with SMTP id af79cd13be357-93e9b80d367mr562281185a.66.1791395871851;
-        Wed, 07 Oct 2026 10:57:51 -0700 (PDT)
-From: Josef Bacik <josef@toxicpanda.com>
-Date: Wed, 07 Oct 2026 17:57:32 +0000
-Subject: [PATCH net] xen/netfront: don't leak the skb when
- xennet_fill_frags() fails
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1791396466;
+	b=SCPO44R4CA9S8Vsk+kzF5079r1Yvh8vpWUUlplHi5KNywCMSGkLurEdFLn/8yHCxIObN
+	 smgAIVWg1xBYZ4VipDisQOIceYks89BCCibhTFI7GHSx6zSfi89dXbbTiLUKpSYBTIMgx
+	 TLDfYw/CGnttthy83K8dO/Ie4usdoRxfzPI5uFb2czcsxlpOtoh+VtMCyYzZPcOTDtYZq
+	 afi7oEUhjLSzN8+PERdE4+4AagoHxyUkQOSw5LNW1jZINdwG18eZ/xi3667+ijkV1ou+4
+	 Zpq27a8g2wnD4M62Dc4FhWr3v2bIs0QtR7uhXINmlh1+y7JjVJKVolRJl++k5BgwkgKZu
+	 6/rpQsqbhsl/Cob2EZR69CGF8Hrq+07TpU/mEswaCpfHN9EaO8Z70gMZMBBmHuZv+PPTV
+	 PNUkkawKFE49POsKMU+2G8fKGFZTw2bX7HSlDQQgKMienLwJlZ+DCkSCtkUcYES6exryu
+	 /dBaM5MYtH3hIzgJDFikBJqAQ1g5eY7loKLnPyZsxyUTXr+fpR75r6yieKIpL9e094LnD
+	 kqdYJZTZVKSTmEGJVrT0ASjP1YUjOp+n2ZbcLEhda0ZmFIH/cKrd8wv8elKpVrLKwAqqj
+	 OBJh7NmpV+1LfZDrbL4/sBW2za0cMfWduavuCM6LGxR7GdCU2Ukfenp6Zs2+VMg=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791396466;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=kKoqfZ9oNLAGrvGPtldZE8hf6KjD7k5BKmZFYhyYQog=;
+	b=CkdN9Bck7HmwNPqNK7PDaLejtzxzzugaSCjP3cTEGzBggwbFYJn+cckx3AA88lqOM/fU
+	 vNGMZ0Tzfji3txdDw/jCXGAe360jp06Olpb2oxBf05pV64oMnXALyMPRxMfGEqlh+kwy5
+	 7wuZQtBzM3Fg7xNHXThT3brsTK7MWh5YWsyRdxKrUjG2FXG8f0P9nJj9ec9m8FNV8edKE
+	 l959P3l7L2RiXwm1S0zsTNTSlb4lL7/MG0LqMgIAuqAGGlb3wtkBbrQiFv5sB097vN8Vm
+	 Ob67sm1yahKAdCCR3taCyZQ67sRI6VTvKih6DLi5aoasuco2gnHp3SQPs8DteJo90dQEC
+	 zi5ziUcXVwGYhg8FVRc8id0zZoB/qmD6QvgnS2SLMK0RMlutvtJ0MeMybmLd+WDCjtEnU
+	 V5noJWgrgjqCO6QG7TojRTBpEF+eTLyBJgNdbX9NJSXesFO2x89YVaxSmZPf0GDzNBIu2
+	 W4gDEDzWFhr+G/jYfM1/pM1HtRJDmhp8Tzs6208QHMo5r8nYIQm69uiS4ltLh7cxHV63T
+	 eXpWhy2iOGdcp/uMeLVvBZW2A6G1GUyYy20dIEkEyNtmXRBmD5wrQ6hQHPjztNFqD2KXu
+	 R6d0Llxz2ox/HfAmgjUhaTzrulemNDuDMNYxgxQvn1XsCKhmar9VsHP4tMdQ9kc=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Date: Wed, 07 Oct 2026 20:07:46 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v2] Eclair: scan the last xen-syms linking pass on Arm
+In-Reply-To: <e73c282694e68083305d03219f983bf74a8bf494.1791392326.git.dmytro_prokopchuk1@epam.com>
+References: <e73c282694e68083305d03219f983bf74a8bf494.1791392326.git.dmytro_prokopchuk1@epam.com>
+Message-ID: <bbc500e1808a7bca4385189e35eb6434@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261007-b4-xen-netfront-fill-frags-leak-v1-1-a8a01ff9cd52@toxicpanda.com>
-X-B4-Tracking: v=1; b=H4sIAAyIxmoC/32NQQ6DIBREr2L+uj+ipZD0Ko0LwI/SEjRAGxPj3
- Qt23+W8zMzbIVF0lODe7BDp45JbQgndpQEzqzARurFk6FkvOsYkao4bBQyUbVxCRuu8RxvVlNC
- TeuH1Jo2SXIwkNJSXNZJ122l4QFnB8IPprZ9kcv2uNa0SoY4qmLkiv7aatyf8Z4Pj+AJbKHhWw
- gAAAA==
-X-Change-ID: 20261007-b4-xen-netfront-fill-frags-leak-357ca746de6b
-To: Juergen Gross <jgross@suse.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, 
- Andrew Lunn <andrew+netdev@lunn.ch>, 
- "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>, 
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>
-Cc: xen-devel@lists.xenproject.org, netdev@vger.kernel.org, 
- linux-kernel@vger.kernel.org, stable@vger.kernel.org, 
- Josef Bacik <josef@toxicpanda.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1791395867; l=1952;
- i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=8siqpym+SZiWtWrY6ilp/qzOSB35ebH+f54wdBWICCI=;
- b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
- JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QKPBUTwP/hi5b4ZMT7RDyKAACyTKaU+F86iAtqdwrk+vWoZzfHOvsW0aj2tgmsgdCJbxvHAP8g7
- hKN5N3lq1pwY=
-X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
- fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-33051d/1791395873-77CC34E9-2CC44285/0/0
+X-purgate-ID: tlsNG-4011c0/1791396467-518C5CFC-A2FFB00D/0/0
 X-purgate-type: clean
-X-purgate-size: 1954
+X-purgate-size: 4428
 
-When a response chain has more slots than fit in the skb's frags,
-xennet_fill_frags() returns an error and xennet_poll() jumps to its
-error path.  That path moves what's left on tmpq to errq to be freed,
-but the skb being filled was already dequeued from tmpq, so it's never
-freed.  Each chain that overflows leaks the skb and the pages attached
-to it as frags, and the backend decides how many slots it sends.
+On 2026-10-07 19:12, Dmytro Prokopchuk1 wrote:
+> The hide pattern .xen-syms.[013] leaves pass 2 visible. On x86
+> LAST_LINKING_PASS is 2, so that is the final link. On Arm
+> LAST_LINKING_PASS is 3 and the final image is .xen-syms.3. Pass 2 is
+> usually only a symlink, so Eclair saw no program link and reported 
+> every
+> translation unit as unreachable.
+> 
+> Before the analysis build, read LAST_LINKING_PASS from the architecture
+> makefile and the pass numbers from the foreach list in
+> xen/scripts/Makefile.link. Hide every pass except that one. An earlier
+> pass that is a real link stays hidden.
+> 
+> Fixes: a401b5c9dc35 ("Eclair: re-enable scanning of the (almost) final 
+> linking step")
+> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+> ---
+> Current patch isn't tested, sent just for review (if this accepted, 
+> I'll run pipeline).
+> 
+> Changes in v2:
+> - update commit message
+> - generate hide pattern before analysis
+> - read LAST_LINKING_PASS from the arch Makefile and pass numbers from 
+> the Makefile.link
+> 
+> Link to v1:
+> https://patchew.org/Xen/2f67ef7c4593d3ab94b75b5b819e7e046e055796.1791293680.git.dmytro._5Fprokopchuk1@epam.com/
+> ---
+>  .../eclair_analysis/ECLAIR/analysis.ecl       |  2 +-
+>  automation/eclair_analysis/ECLAIR/analyze.sh  |  3 +++
+>  .../ECLAIR/generate-xen-syms-passes.sh        | 20 +++++++++++++++++++
+>  3 files changed, 24 insertions(+), 1 deletion(-)
+>  create mode 100755 
+> automation/eclair_analysis/ECLAIR/generate-xen-syms-passes.sh
+> 
+> diff --git a/automation/eclair_analysis/ECLAIR/analysis.ecl 
+> b/automation/eclair_analysis/ECLAIR/analysis.ecl
+> index c6e1a7a95d..df1006bcaa 100644
+> --- a/automation/eclair_analysis/ECLAIR/analysis.ecl
+> +++ b/automation/eclair_analysis/ECLAIR/analysis.ecl
+> @@ -37,7 +37,7 @@ their Standard Library equivalents."
+>  -doc_begin="Do not analyze intermediate linking artifacts, as they do 
+> not differ from their final
+>  counterparts for the purposes of MISRA C static analysis."
+>  -file_tag+={xen_efi_tmp, "^xen/\\.xen\\.efi\\.([01]|alt\\..*)$"}
+> --file_tag+={xen_syms_tmp, "^xen/\\.xen-syms\\.[013]$"}
+> +-eval_file=xen_syms_passes.ecl
+>  -frames+={hide, "kind(program)&&target(xen_syms_tmp||xen_efi_tmp)"}
+>  -doc_end
+> 
 
-Put the skb back on tmpq before taking the error path, like the
-xennet_set_skb_gso() failure just above it does.
+> diff --git a/automation/eclair_analysis/ECLAIR/analyze.sh 
+> b/automation/eclair_analysis/ECLAIR/analyze.sh
+> index 2356fc4007..ef59e87212 100755
+> --- a/automation/eclair_analysis/ECLAIR/analyze.sh
+> +++ b/automation/eclair_analysis/ECLAIR/analyze.sh
+> @@ -78,6 +78,9 @@ export ECLAIR_PROJECT_NAME="XEN_${VARIANT}-${SET}"
+>  rm -rf "${ECLAIR_OUTPUT_DIR:?}/*"
+>  mkdir -p "${ECLAIR_DATA_DIR}"
+> 
+> +# Generate hide pattern.
+> +"${SCRIPT_DIR}/generate-xen-syms-passes.sh"
+> +
 
-Fixes: ad4f15dc2c70 ("xen/netfront: don't bug in case of too many frags")
-Cc: stable@vger.kernel.org
-Assisted-by: LLM
-Signed-off-by: Josef Bacik <josef@toxicpanda.com>
----
-I found this while testing an unrelated netfront fix under QEMU's KVM
-Xen emulation, with QEMU's xen_nic backend changed to spread frames
-over more RX slots than netfront can fit.  kmemleak reported one
-unreferenced skb from xennet_alloc_rx_buffers() for every frame that
-overflowed.  With this patch the overflowing frames still take the
-error path, and kmemleak no longer finds any skbs left behind by them.
+I would prefer it integrated in [1] instead, running in prepare.sh. At 
+least we keep these calls to ECL generation scripts together.
 
-Thanks,
-Josef
----
- drivers/net/xen-netfront.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+[1] 
+https://gitlab.com/xen-project/hardware/xen/-/blob/staging/automation/eclair_analysis/ECLAIR/generate_ecl.sh?ref_type=heads
 
-diff --git a/drivers/net/xen-netfront.c b/drivers/net/xen-netfront.c
-index 2ed673649c48..e8675bdca595 100644
---- a/drivers/net/xen-netfront.c
-+++ b/drivers/net/xen-netfront.c
-@@ -1338,8 +1338,10 @@ static int xennet_poll(struct napi_struct *napi, int budget)
- 		skb->data_len = rx->status;
- 		skb->len += rx->status;
- 
--		if (unlikely(xennet_fill_frags(queue, skb, &tmpq)))
-+		if (unlikely(xennet_fill_frags(queue, skb, &tmpq))) {
-+			__skb_queue_head(&tmpq, skb);
- 			goto err;
-+		}
- 
- 		if (rx->flags & XEN_NETRXF_csum_blank)
- 			skb->ip_summed = CHECKSUM_PARTIAL;
+>  # Perform the build (from scratch) in an ECLAIR environment.
+>  "${ECLAIR_BIN_DIR}eclair_env" \
+>      "-config_file='${SCRIPT_DIR}/analysis.ecl'" \
+> diff --git 
+> a/automation/eclair_analysis/ECLAIR/generate-xen-syms-passes.sh 
+> b/automation/eclair_analysis/ECLAIR/generate-xen-syms-passes.sh
+> new file mode 100755
+> index 0000000000..e3795e8234
+> --- /dev/null
+> +++ b/automation/eclair_analysis/ECLAIR/generate-xen-syms-passes.sh
+> @@ -0,0 +1,20 @@
+> +#!/bin/bash
+> +
+> +# Hide every xen-syms linking pass except LAST_LINKING_PASS.
+> +# The pass list is the foreach in xen/scripts/Makefile.link.
+> +
+> +set -e
+> +
+> +cd "$(dirname "$0")"
+> +arch=$(echo "${XEN_TARGET_ARCH}" | sed -e 's/x86.*/x86/' -e 
+> 's/arm.*/arm/')
+> +last=$(sed -n 's/^LAST_LINKING_PASS *:= *\([0-9]\).*/\1/p' \
+> +    "../../../xen/arch/${arch}/Makefile" | head -n 1)
+> +passes=$(sed -n 's/.*foreach n,\([0-9 ]*\).*/\1/p' \
+> +    ../../../xen/scripts/Makefile.link | head -n 1)
+> +test -n "${last}"
+> +test -n "${passes}"
+> +hidden=$(printf '%s' "${passes}" | tr -d " ${last}")
+> +
+> +printf '%s\n' \
+> +    "-file_tag+={xen_syms_tmp, 
+> \"^xen/\\\\.xen-syms\\\\.[${hidden}]\$\"}" \
+> +    >xen_syms_passes.ecl
 
----
-base-commit: 23609bce9e1de525d1d0e73fc68c6e7971d0b49e
-change-id: 20261007-b4-xen-netfront-fill-frags-leak-357ca746de6b
-
+-- 
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
