@@ -4,40 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 784ACCA6002
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 18:08:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442645.1660173 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38291CA6007
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 18:11:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442652.1660192 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEW3R-0004uV-5B; Wed, 07 Oct 2026 18:07:49 +0000
+	id 1xEW6s-0006jh-R9; Wed, 07 Oct 2026 18:11:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442645.1660173; Wed, 07 Oct 2026 18:07:49 +0000
+Received: by outflank-mailman (output) from mailman id 1442652.1660192; Wed, 07 Oct 2026 18:11:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEW3R-0004uO-2T; Wed, 07 Oct 2026 18:07:49 +0000
-Received: by outflank-mailman (input) for mailman id 1442645;
- Wed, 07 Oct 2026 18:07:48 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xEW6s-0006ja-MI; Wed, 07 Oct 2026 18:11:22 +0000
+Received: by outflank-mailman (input) for mailman id 1442652;
+ Wed, 07 Oct 2026 18:11:21 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <nicola.vetrini@bugseng.com>) id 1xEW3Q-0004uC-7B
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 18:07:48 +0000
+ (envelope-from <Mykola_Kvach@epam.com>) id 1xEW6q-0006Wm-TI
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 18:11:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEW3P-008tbe-4q
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 20:07:47 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xEW6q-0012q7-AB
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 20:11:20 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <nicola.vetrini@bugseng.com>)
- id 6ac68a34-8faa-0a2a0a5109dd-0a2a450aa69e-30
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 20:07:47 +0200
-Received: from [162.55.131.47] (helo=support.bugseng.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <nicola.vetrini@bugseng.com>)
- id 6ac68a72-f2d2-0a2a450a0019-a237832fc924-3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 20:07:47 +0200
-Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
- (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id B78464EE0216;
- Wed,  7 Oct 2026 20:07:46 +0200 (CEST)
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6ac68b33-2eae-0a2a0a5409dd-0a2a4505d320-26
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 20:11:20 +0200
+Received: from [52.101.65.72]
+ (helo=DU2PR03CU002.outbound.protection.outlook.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6ac68b47-4cb1-0a2a45050019-34654148161e-3
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 20:11:20 +0200
+Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
+ (2603:10a6:10:430::13) by PAWPR03MB9788.eurprd03.prod.outlook.com
+ (2603:10a6:102:2ef::14) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.15; Wed, 7 Oct
+ 2026 18:11:18 +0000
+Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
+ ([fe80::f257:38e:c0af:df28]) by DB3PR0302MB9208.eurprd03.prod.outlook.com
+ ([fe80::f257:38e:c0af:df28%5]) with mapi id 15.21.0472.016; Wed, 7 Oct 2026
+ 18:11:18 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,163 +55,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1791396466;
-	b=SCPO44R4CA9S8Vsk+kzF5079r1Yvh8vpWUUlplHi5KNywCMSGkLurEdFLn/8yHCxIObN
-	 smgAIVWg1xBYZ4VipDisQOIceYks89BCCibhTFI7GHSx6zSfi89dXbbTiLUKpSYBTIMgx
-	 TLDfYw/CGnttthy83K8dO/Ie4usdoRxfzPI5uFb2czcsxlpOtoh+VtMCyYzZPcOTDtYZq
-	 afi7oEUhjLSzN8+PERdE4+4AagoHxyUkQOSw5LNW1jZINdwG18eZ/xi3667+ijkV1ou+4
-	 Zpq27a8g2wnD4M62Dc4FhWr3v2bIs0QtR7uhXINmlh1+y7JjVJKVolRJl++k5BgwkgKZu
-	 6/rpQsqbhsl/Cob2EZR69CGF8Hrq+07TpU/mEswaCpfHN9EaO8Z70gMZMBBmHuZv+PPTV
-	 PNUkkawKFE49POsKMU+2G8fKGFZTw2bX7HSlDQQgKMienLwJlZ+DCkSCtkUcYES6exryu
-	 /dBaM5MYtH3hIzgJDFikBJqAQ1g5eY7loKLnPyZsxyUTXr+fpR75r6yieKIpL9e094LnD
-	 kqdYJZTZVKSTmEGJVrT0ASjP1YUjOp+n2ZbcLEhda0ZmFIH/cKrd8wv8elKpVrLKwAqqj
-	 OBJh7NmpV+1LfZDrbL4/sBW2za0cMfWduavuCM6LGxR7GdCU2Ukfenp6Zs2+VMg=
-ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1791396466;
-	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
-	 Message-ID:X-Sender:Organization:Content-Type:
-	 Content-Transfer-Encoding;
-	bh=kKoqfZ9oNLAGrvGPtldZE8hf6KjD7k5BKmZFYhyYQog=;
-	b=CkdN9Bck7HmwNPqNK7PDaLejtzxzzugaSCjP3cTEGzBggwbFYJn+cckx3AA88lqOM/fU
-	 vNGMZ0Tzfji3txdDw/jCXGAe360jp06Olpb2oxBf05pV64oMnXALyMPRxMfGEqlh+kwy5
-	 7wuZQtBzM3Fg7xNHXThT3brsTK7MWh5YWsyRdxKrUjG2FXG8f0P9nJj9ec9m8FNV8edKE
-	 l959P3l7L2RiXwm1S0zsTNTSlb4lL7/MG0LqMgIAuqAGGlb3wtkBbrQiFv5sB097vN8Vm
-	 Ob67sm1yahKAdCCR3taCyZQ67sRI6VTvKih6DLi5aoasuco2gnHp3SQPs8DteJo90dQEC
-	 zi5ziUcXVwGYhg8FVRc8id0zZoB/qmD6QvgnS2SLMK0RMlutvtJ0MeMybmLd+WDCjtEnU
-	 V5noJWgrgjqCO6QG7TojRTBpEF+eTLyBJgNdbX9NJSXesFO2x89YVaxSmZPf0GDzNBIu2
-	 W4gDEDzWFhr+G/jYfM1/pM1HtRJDmhp8Tzs6208QHMo5r8nYIQm69uiS4ltLh7cxHV63T
-	 eXpWhy2iOGdcp/uMeLVvBZW2A6G1GUyYy20dIEkEyNtmXRBmD5wrQ6hQHPjztNFqD2KXu
-	 R6d0Llxz2ox/HfAmgjUhaTzrulemNDuDMNYxgxQvn1XsCKhmar9VsHP4tMdQ9kc=
-ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=PbBfH6jY8/4fr0pyCcc5K9En9PqUd/eft9GL01ElB4JPDW2wCaAXL0gE5ajmeCoEo1TJ8d7zMKaoyzbbl3564gpFUqHCvMj4AJFMtxsxOxYDpi5CjJMm0VtYfph3A16HIX4UdgL7BLlwpd2RAMxWhN5YzRw37036uUqjnjLvaDYi32sOquDJpFUQOEBDq8HUfGxW3AVnOnkbbzfozc+Eg313oBEoiFQoX8PRyQPFs2MjCyBZGfKm0jZgzp3GHHOmP1dh+G8l8rPiFIdr6WDSQoU9RpBib7TM2Z1S0X3xklSdJMCXugf3JUEm2AdexsHU3XNwHtmqbXkYxNeTYNpLxQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KJ/SWrGIpUv/PLRbu/p6/k51GXDlaNdmbUFmS03sfGo=;
+ b=Ydnax2fSyFb6nhjX1leLzRUo666C7y3dYNw9gEJJE68kZLO63ly7FOjIn1RVo8VUX3rbzboHpS4v/AlIQh2kH1QUO5/wftJYmt0e0rA09piuJ8rs2fisLPRZoH8y81zUtUbYseWs1cyBC0VeXc00N4dZ0tGUaWXpZUs0zaRtHq4noe+lbEMdCjlnxEeyAo7sE5vPOc1CDfQ4vZ57qzFa70yG678085qYlI45jnPZvAl73FEVHbfiWexS0GnRjeKccj+mB9UgF9MKF3CLjozPuGuWtV6Tkwwf+Va2CKCWaax1g+TNrjjDuwA13hPAULB+mdRvs3Y+iPbSnVYg0ClzFQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KJ/SWrGIpUv/PLRbu/p6/k51GXDlaNdmbUFmS03sfGo=;
+ b=VmfoKegU41IM4HMFgvi082651Gtu0tu1+b1fbreGt6/HTo+qu8HgCnriw0Ge8br8tqcGToyQWA+fP83Jkftj6SszYvuCjFL1zHuxPLZmD1zf7b0TX/NNW3aVJ3sRqPpE15i/5KeQ/P9P2ga3c8BC3FC4wVaIvn1gztzQAwyyeRUzEsc/aEn4cwUPslbYLIhfYJLUJMkkzhP7sIn7AaRCSCbZX4VNG2wBF9krcQR4NzIcIU8Rxp78NaP//CAmWZN6AzU19ZoLUfyAHC5je2CWyVuejwcOaoW74NMgPl3OYSPZZqHE/TpYOAccK8xcAXSSOkkwtwGnPYQqA7XxQ5iKMw==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+From: Mykola Kvach <mykola_kvach@epam.com>
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 1/2] tools/symbols: reject names exceeding the runtime limit
+Date: Wed,  7 Oct 2026 21:11:02 +0300
+Message-ID: <f7d04bee801bf4a5d261451822b0e029e8e59291.1791384310.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.53.0
+In-Reply-To: <cover.1791384310.git.mykola_kvach@epam.com>
+References: <cover.1791384310.git.mykola_kvach@epam.com>
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: WA1PEPF00005B8B.POLP291.PROD.OUTLOOK.COM
+ (2603:10a6:1d8::63c) To DB3PR0302MB9208.eurprd03.prod.outlook.com
+ (2603:10a6:10:430::13)
 MIME-Version: 1.0
-Date: Wed, 07 Oct 2026 20:07:46 +0200
-From: Nicola Vetrini <nicola.vetrini@bugseng.com>
-To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
-Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2] Eclair: scan the last xen-syms linking pass on Arm
-In-Reply-To: <e73c282694e68083305d03219f983bf74a8bf494.1791392326.git.dmytro_prokopchuk1@epam.com>
-References: <e73c282694e68083305d03219f983bf74a8bf494.1791392326.git.dmytro_prokopchuk1@epam.com>
-Message-ID: <bbc500e1808a7bca4385189e35eb6434@bugseng.com>
-X-Sender: nicola.vetrini@bugseng.com
-Organization: BUGSENG s.r.l.
-Content-Type: text/plain; charset=US-ASCII;
- format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1791396467-518C5CFC-A2FFB00D/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DB3PR0302MB9208:EE_|PAWPR03MB9788:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4539ccd7-a4d8-4cb5-98f3-08df249e6223
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|376014|1800799024|23010399003|56012099006|11063799006|10067099003|22082099003|18002099003|6133799003|3023799007;
+X-Microsoft-Antispam-Message-Info:
+	hhaFBTVMKT5Lp9L+9BHKYekxkosV0arxSZWoZ3RbNq0I2ptWQkAmFJt3U00ka26gLDmpp3V+lJW+ghy2XDiFZz9D3AO8Eeb/BMWihOacv9eS4Ior14vI75hCRuEFLbLzbrMpcH/xcUrNxpDhFcgmZT3xgw65mdLxF9URWOezSaHcYIEEN0TmANdvnLAcC4UPtTYlkFmZcxQ6eCduLjHZ4YWeIaOpu5G9juJ8FDqzR5iY3tMtHW0akZI2d7FLbqBWTEB4SXbYNE+FcPNnH8eNwx3m7WtwN2DMsrXLGZoQFbp++H8TIv2eZmxDwqtSDbrIYomB+Kv6BE1JL0qpQoSOlbhj+/PL+xtF4fLUpKN//7wSUfsDLEpMkVWb+QpQ7YFpX539dLNgsUH+zW8GDT8sIPVV5UnIzz0WlWnZHD5mR8l1o7zFLeFVMTIJimjxZQwyr7pb98uRzD6V+krK/BVSV1jd+B/5lo6OYzelC9duLSN5pXxh5YqMY7YYMLK4ZBjk+Ev4vNDgbJUl1ZBzTriAj94mG76Ay3pDY+NB7N+fdBuJ+HXgumzZQsE5wGpOwwXev/0pyT8/6sxnyW9OFuzZWZjCeJsRKoU3sBr8vPRW3ipb36+FcIIsoYiw31eXl9w4EWdnAYdRysdbuFzq+2vNYXw4Evo87JanhcJnj2nv2Tw=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB3PR0302MB9208.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(56012099006)(11063799006)(10067099003)(22082099003)(18002099003)(6133799003)(3023799007);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?nHchEU1yBLCXcxysOgqLrWpGwKTBQXVe/F9cHMivU7mMTxm4ihuSh3XBuhZU?=
+ =?us-ascii?Q?9SJxVMKLjpDV0xeHGtpaR7AUVwGRlzUusIOJu3HoL8vfI5nJjr8LRakcxCtB?=
+ =?us-ascii?Q?XiOyLSyineDdrVUxHUdooWzXojSZ4a/r0Xhsr4Wzhlvv9Uzt/LAQFpBlzfjt?=
+ =?us-ascii?Q?+iMkZyCjGAcOxtKtcDdCIA+GlJmYrwjuiqrtXpsIKa2bmB1MxalsbkWy0iH/?=
+ =?us-ascii?Q?kerE26xW8FjdGeoJyRch8hQEzND9S3Kz7DztBNMsxUCrjEAqaVXFiSnhpeYG?=
+ =?us-ascii?Q?4z8aa7GEAxM4UCI8VnEi25ySJil7u6giuaFlwOpfDM/AmJL1ewnwH25toeG+?=
+ =?us-ascii?Q?UgW96taI2Rz1T4LzqpUct68NBAGMY8Z3csFU8oXXnbSRajteiNXrNZ1eL8gd?=
+ =?us-ascii?Q?LryWPQek7cRkJxSWB6qDrgpQG2a4pJZQFygTI4UqYzMZ1s7QJDg3Re0gH4rK?=
+ =?us-ascii?Q?kE5s2H1HbHznB4ueiVdJw56A4NHu/IHGlowLSMTxsVj6OAyEvBj1PHZBm9mt?=
+ =?us-ascii?Q?zRe63YDHm6jSPx7+8g3dIEdTSUjmc17P7ipBv08tiKutx2sKQvfQFks40cQD?=
+ =?us-ascii?Q?MHpy9lFEmoAQlulJ0ei2AAUhoJ1G0QctCBV5C375qJiqj2WN7xrujwLkRO90?=
+ =?us-ascii?Q?vF0/MlQ5poqfUmKin7YRRnZXnnJI25hZ1BbaS6DsrHubVUH3uS+St+PcJ/99?=
+ =?us-ascii?Q?BvNQQaFyKx6j82IPo9Udo8RNxHk9JY2jkYna09ATWs/ob65C6KfJ6iCM+6bF?=
+ =?us-ascii?Q?O9AOI2Y9wc5ILBVVVp+2wFpjzUgNVMUJecMGqzp5EQgXSm09BxE5vB3vw+cq?=
+ =?us-ascii?Q?TizRKA6IRrJvs4nwoz4y3Kc9KnCbn8mteEYHRh6Y6xLtHvIr7iSpXLOtDhuw?=
+ =?us-ascii?Q?iz+tsLK7tYNr/RVk/lBnf4R5pmn8w4GLWrBlfnmf4HX9Pi9AxZB/ingyYygn?=
+ =?us-ascii?Q?zJho02BdbGE4Va41QiPB7T71DfLsaqtG/06aI7JWmW4ngtwppUvOZWrOn8B7?=
+ =?us-ascii?Q?HMGSzS3CswGMym8sQ+CB9v+egxHW7jwPLKrkq7x9Bk9CXPibJn6IHSR/sLUO?=
+ =?us-ascii?Q?GnM+p+4xjtscgQXTUET3QCafT7wCYIrbOeq49dWBVHrdcEpQFA2xGtEw6Jbi?=
+ =?us-ascii?Q?3nVFQ/E8shBw7q8n264uP7OjOykxaOcfI39fLU8s4i3+7OUgskCqgJUZ5+Zo?=
+ =?us-ascii?Q?Hx7gUpvTiPUxcIlqVxdSyTEO8cB7rhjCv1L6qiiGG4aovRuWA/BfslI2Cgul?=
+ =?us-ascii?Q?fIQMho+rh5R7V+MwH26pK1/Ot0ZIAoVqjQpgK34G5gTYATkiX1ZSYlEe8b03?=
+ =?us-ascii?Q?4ujKjcrVJtyjl0P4VfgUYBwzq2jZIAlwb7g4BKTw06zt2i9AS9CmFdoUrOaX?=
+ =?us-ascii?Q?Qkp80HV82DI5yxie0G7bHVQLk9a6I3sfAKMFU0eWqy4XtnMvAJElTjiIO+oE?=
+ =?us-ascii?Q?rNAe/4/1iujslkq6L2eWvwHhatBLdfOmK5XfAjha+560/4lYJWClxSWeWEOF?=
+ =?us-ascii?Q?MnZwK8dBZKtO7mHFlnCstjhl27aVfc/CZePMKa3SFylSVK+dqD4cx+VQd+iZ?=
+ =?us-ascii?Q?p6q6yqXAaEpDvN1k+5ZVQ4c5ZKUlwpMgaaSGjhbAYUBB29r3k+CtvzqXXxgU?=
+ =?us-ascii?Q?E7AWmuw15ORPHPMcSpAm3w3BLTAnd/+hosYNouPBUtUG8yBW/ZVomOFq/nj4?=
+ =?us-ascii?Q?Vecdb3f4Mr3j+DPZX0GkQDTaajCHXxRw59xn9T86cuRzZb4cZlkN5Ompi+IR?=
+ =?us-ascii?Q?u0M1dAGuOQ=3D=3D?=
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4539ccd7-a4d8-4cb5-98f3-08df249e6223
+X-MS-Exchange-CrossTenant-AuthSource: DB3PR0302MB9208.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Oct 2026 18:11:18.0565
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: kXSbbOQLRxmo8g78XLRtr/5gY6OnFeT/u4s3D/tKGU9N3VBUCLO50YtJmesoGwGf4TiFQctd9aGLvskyx+GaMA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PAWPR03MB9788
+X-purgate-ID: tlsNG-c201ff/1791396680-F78BE2A1-C8F1633E/0/0
 X-purgate-type: clean
-X-purgate-size: 4428
+X-purgate-size: 2507
 
-On 2026-10-07 19:12, Dmytro Prokopchuk1 wrote:
-> The hide pattern .xen-syms.[013] leaves pass 2 visible. On x86
-> LAST_LINKING_PASS is 2, so that is the final link. On Arm
-> LAST_LINKING_PASS is 3 and the final image is .xen-syms.3. Pass 2 is
-> usually only a symlink, so Eclair saw no program link and reported 
-> every
-> translation unit as unreachable.
-> 
-> Before the analysis build, read LAST_LINKING_PASS from the architecture
-> makefile and the pass numbers from the foreach list in
-> xen/scripts/Makefile.link. Hide every pass except that one. An earlier
-> pass that is a real link stays hidden.
-> 
-> Fixes: a401b5c9dc35 ("Eclair: re-enable scanning of the (almost) final 
-> linking step")
-> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
-> ---
-> Current patch isn't tested, sent just for review (if this accepted, 
-> I'll run pipeline).
-> 
-> Changes in v2:
-> - update commit message
-> - generate hide pattern before analysis
-> - read LAST_LINKING_PASS from the arch Makefile and pass numbers from 
-> the Makefile.link
-> 
-> Link to v1:
-> https://patchew.org/Xen/2f67ef7c4593d3ab94b75b5b819e7e046e055796.1791293680.git.dmytro._5Fprokopchuk1@epam.com/
-> ---
->  .../eclair_analysis/ECLAIR/analysis.ecl       |  2 +-
->  automation/eclair_analysis/ECLAIR/analyze.sh  |  3 +++
->  .../ECLAIR/generate-xen-syms-passes.sh        | 20 +++++++++++++++++++
->  3 files changed, 24 insertions(+), 1 deletion(-)
->  create mode 100755 
-> automation/eclair_analysis/ECLAIR/generate-xen-syms-passes.sh
-> 
-> diff --git a/automation/eclair_analysis/ECLAIR/analysis.ecl 
-> b/automation/eclair_analysis/ECLAIR/analysis.ecl
-> index c6e1a7a95d..df1006bcaa 100644
-> --- a/automation/eclair_analysis/ECLAIR/analysis.ecl
-> +++ b/automation/eclair_analysis/ECLAIR/analysis.ecl
-> @@ -37,7 +37,7 @@ their Standard Library equivalents."
->  -doc_begin="Do not analyze intermediate linking artifacts, as they do 
-> not differ from their final
->  counterparts for the purposes of MISRA C static analysis."
->  -file_tag+={xen_efi_tmp, "^xen/\\.xen\\.efi\\.([01]|alt\\..*)$"}
-> --file_tag+={xen_syms_tmp, "^xen/\\.xen-syms\\.[013]$"}
-> +-eval_file=xen_syms_passes.ecl
->  -frames+={hide, "kind(program)&&target(xen_syms_tmp||xen_efi_tmp)"}
->  -doc_end
-> 
+The symbol generator accepts names longer than the runtime lookup
+buffers, which hold KSYM_NAME_LEN + 1 bytes. SYSV input prefixes local
+symbols with their filename, so an absolute assembly source path can
+produce an oversized name even when the symbol itself is short.
 
-> diff --git a/automation/eclair_analysis/ECLAIR/analyze.sh 
-> b/automation/eclair_analysis/ECLAIR/analyze.sh
-> index 2356fc4007..ef59e87212 100755
-> --- a/automation/eclair_analysis/ECLAIR/analyze.sh
-> +++ b/automation/eclair_analysis/ECLAIR/analyze.sh
-> @@ -78,6 +78,9 @@ export ECLAIR_PROJECT_NAME="XEN_${VARIANT}-${SET}"
->  rm -rf "${ECLAIR_OUTPUT_DIR:?}/*"
->  mkdir -p "${ECLAIR_DATA_DIR}"
-> 
-> +# Generate hide pattern.
-> +"${SCRIPT_DIR}/generate-xen-syms-passes.sh"
-> +
+This caused a debug Xen boot to crash on an Orange Pi 5. The expanded
+name ending in mmu/head.S#identity_mapping_removed was 145 bytes long.
+During the test_symbols() constructor (CONFIG_SELF_TESTS),
+symbols_lookup_by_name() expanded it into a 128-byte buffer and
+overwrote the saved frame pointer and return address.
 
-I would prefer it integrated in [1] instead, running in prepare.sh. At 
-least we keep these calls to ECL generation scripts together.
+The board reported:
 
-[1] 
-https://gitlab.com/xen-project/hardware/xen/-/blob/staging/automation/eclair_analysis/ECLAIR/generate_ecl.sh?ref_type=heads
+  (XEN) [    5.064767] Hypervisor Trap. HSR=0x0000008a000000 EC=0x22 IL=1 Syndrome=0x0
+  (XEN) [    5.066709] PC:     65766f6d65725f67 65766f6d65725f67
+  (XEN) [    5.067190] LR:     65766f6d65725f67
+  (XEN) [    5.074749]     X27: 0000000000000000 X28: 0000000049000000  FP: 6e697070616d5f79
 
->  # Perform the build (from scratch) in an ECLAIR environment.
->  "${ECLAIR_BIN_DIR}eclair_env" \
->      "-config_file='${SCRIPT_DIR}/analysis.ecl'" \
-> diff --git 
-> a/automation/eclair_analysis/ECLAIR/generate-xen-syms-passes.sh 
-> b/automation/eclair_analysis/ECLAIR/generate-xen-syms-passes.sh
-> new file mode 100755
-> index 0000000000..e3795e8234
-> --- /dev/null
-> +++ b/automation/eclair_analysis/ECLAIR/generate-xen-syms-passes.sh
-> @@ -0,0 +1,20 @@
-> +#!/bin/bash
-> +
-> +# Hide every xen-syms linking pass except LAST_LINKING_PASS.
-> +# The pass list is the foreach in xen/scripts/Makefile.link.
-> +
-> +set -e
-> +
-> +cd "$(dirname "$0")"
-> +arch=$(echo "${XEN_TARGET_ARCH}" | sed -e 's/x86.*/x86/' -e 
-> 's/arm.*/arm/')
-> +last=$(sed -n 's/^LAST_LINKING_PASS *:= *\([0-9]\).*/\1/p' \
-> +    "../../../xen/arch/${arch}/Makefile" | head -n 1)
-> +passes=$(sed -n 's/.*foreach n,\([0-9 ]*\).*/\1/p' \
-> +    ../../../xen/scripts/Makefile.link | head -n 1)
-> +test -n "${last}"
-> +test -n "${passes}"
-> +hidden=$(printf '%s' "${passes}" | tr -d " ${last}")
-> +
-> +printf '%s\n' \
-> +    "-file_tag+={xen_syms_tmp, 
-> \"^xen/\\\\.xen-syms\\\\.[${hidden}]\$\"}" \
-> +    >xen_syms_passes.ecl
+The FP and LR values decode to "y_mappin" and "g_remove", respectively,
+matching bytes 128 through 143 of the expanded name.
 
+Reject retained names exceeding the existing KSYM_NAME_LEN limit before
+compression. Report the offending name and its byte length, so that the
+build fails with, for example (name shortened here)::
+
+  Symbol '...#compatibility_mode' is too long (128 bytes, maximum 127)
+
+A build from a very long absolute source path now stops at link time,
+instead of producing an image with a latent overflow. Apply the check
+after symbol filtering and preserve unrestricted human-readable
+--xensyms maps.
+
+Fixes: d37d63d4b548 ("symbols: prefix static symbols with their source file names")
+Assisted-by: Codex:GPT-6.1
+Assisted-by: Copilot:claude-sonnet-5.5 # host and x86 build tests
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+ xen/tools/symbols.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/xen/tools/symbols.c b/xen/tools/symbols.c
+index 9db1c0a20c..e15273a8ad 100644
+--- a/xen/tools/symbols.c
++++ b/xen/tools/symbols.c
+@@ -485,6 +485,13 @@ static void build_initial_tok_table(void)
+ 	pos = 0;
+ 	for (i = 0; i < table_cnt; i++) {
+ 		if ( symbol_valid(&table[i]) ) {
++			if (!map_only && table[i].len > KSYM_NAME_LEN + 1) {
++				fprintf(stderr,
++					"Symbol '%s' is too long (%u bytes, maximum %u)\n",
++					SYMBOL_NAME(&table[i]), table[i].len - 1,
++					KSYM_NAME_LEN);
++				exit(1);
++			}
+ 			if (pos != i)
+ 				table[pos] = table[i];
+ 			learn_symbol(table[pos].sym, table[pos].len);
 -- 
-Nicola Vetrini, B.Sc.
-Software Engineer
-BUGSENG (https://bugseng.com)
-LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
+2.53.0
+
 
