@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE2EFCA5FFF
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 08:21:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442025.1659539 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 714A9CA5FFF
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 08:28:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442031.1659547 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEMu5-0007QQ-66; Wed, 07 Oct 2026 08:21:33 +0000
+	id 1xEN0u-00083m-RZ; Wed, 07 Oct 2026 08:28:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442025.1659539; Wed, 07 Oct 2026 08:21:33 +0000
+Received: by outflank-mailman (output) from mailman id 1442031.1659547; Wed, 07 Oct 2026 08:28:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEMu5-0007QJ-3K; Wed, 07 Oct 2026 08:21:33 +0000
-Received: by outflank-mailman (input) for mailman id 1442025;
- Wed, 07 Oct 2026 08:21:31 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xEN0u-00083f-Ou; Wed, 07 Oct 2026 08:28:36 +0000
+Received: by outflank-mailman (input) for mailman id 1442031;
+ Wed, 07 Oct 2026 08:28:35 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a11573f8520003f66@swg.vates.tech>)
- id 1xEMu3-0007QD-5o
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 08:21:31 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1157a77720003f66@swg.vates.tech>)
+ id 1xEN0t-00083Z-42
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 08:28:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEMu1-00GvLM-Oc
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 10:21:29 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xEN0r-00Bm35-Ko
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 10:28:33 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a11573f8520003f66@swg.vates.tech>)
- id 6ac600fc-e002-0a2a0a5209dd-0a2a4505c4b0-34
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 10:21:29 +0200
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1157a77720003f66@swg.vates.tech>)
+ id 6ac602aa-bab6-0a2a0a5309dd-0a2a45079c82-14
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 10:28:33 +0200
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a11573f8520003f66@swg.vates.tech>)
- id 6ac60108-4cb1-0a2a45050019-b9ff1c128a35-3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 10:21:29 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1157a77720003f66@swg.vates.tech>)
+ id 6ac602b0-b4ea-0a2a45070019-b9ff1c23a1ed-3
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 10:28:33 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a11573f8520003f66.001 for <xen-devel@lists.xenproject.org>
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1157a77720003f66.007 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 07 Oct 2026 08:21:24 +0000
+ Wed, 07 Oct 2026 08:28:29 +0000
 Received: from [192.168.1.17] (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
- [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 7D059823E5
- for <xen-devel@lists.xenproject.org>; Wed,  7 Oct 2026 10:21:23 +0200 (CEST)
+ [90.112.87.96]) (Authenticated sender: baptiste.le-duc@vates.tech)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 33F2381F2B;
+ Wed,  7 Oct 2026 10:28:29 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,233 +58,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=4pLwyzQQFJGhtYUNy17q8KGyMjzeB42hdIs0/iMhWPM=;
- h=from:subject:date:message-id:to:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=RTjJPE+9aTEzdtuK5d5oY/UMd3+LbB2O2rAHdaylBFtiLLJZZDQDhF5PoRCOCEQvDXop4ysB5
- /NoafheKI6Q5PZN7MePdNnsVyJTCCvQBMKNqAPaPqIf+0fEjkcKZmwRb6AMJsrH8Xq7VDivfzFU
- GqH96oAkfiPudAcbl7d1i958tFcXmZgnupt2ojFSBRugms2i3OeFAIvZPB9agryi/JrpXlPfOX7
- ENeYda/wdfOBxiIRRCmVZvKkUG1Ro9TZVCh+N+b9p5CYPDkBZtfgULVHXsqveHemOyjxZMTpCeI
- 4Gn37OL7Cq2zaRUAMM/HVOJ2QYRYJLbnGqgnSOI5FwhQ==
-X-Zone-Loop: fdcbe07ba325e44e47c8a3d60219734b7c28015dbdc2
+ q=dns/txt; s=selector1; bh=qIkZ+a1KoGAxP/lnvgZm+8EOQN8dXV21ZS1R8VY/MMg=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=tvnik4BPKuPau6L36RKpzJK9kP6rhRgBzYug97xUD4r9HlVDh5JVfYkRRmlxOmJr5rPZWGSHg
+ nxdzBlte7BcQ56RLEhnq78mYweWb4mMJ9SjKtbryAW8NUW4LT9ylyhAFB7CVQdJDFpi0TpJWwny
+ 5UVh2r+gdl8G6NteCsctFHOvDq2k8ahYEdggRKu4NAkqDyyFElcP8DPHgcBdAZk1rg8h6GQ/GeR
+ MnWhl/5XJsws2IjxOfNVkric6DTsQWhROtzu8GfbpvjKbe5ptUpOWSWpG7Ms1T41gq2o+nNpaLa
+ dyzizWRTS2eC0AMhBjBSOxsIFWkHC0awJ8OKo1OOQudg==
+X-Zone-Loop: 54648ba53d8986a92f9f41d56634693e085a46c26df9
 x-campaign-type: default
-x-transaction-id: 377ae544-48bf-4437-8a6a-02b8e5b05ef4
-x-swg-uid: 01-38b5aa80-e042-423f-ad45-41a057740fe5
+x-transaction-id: 8cb1486e-4714-434b-a759-a1a819c474f4
+x-swg-uid: 01-2100764c-f83a-4b4c-b3ac-9e693dc3d7c9
 X-Mailer: Sweego
 Message-ID:
- <1791361284.8631fc262581453bbf619ec5b2062170.1a11573f8520003f66@vates.tech>
-x-swg-bid: 1791361284.8631fc262581453bbf619ec5b2062170.1a11573f8520003f66
+ <1791361710.8631fc262581453bbf619ec5b2062170.1a1157a77720003f66@vates.tech>
+x-swg-bid: 1791361710.8631fc262581453bbf619ec5b2062170.1a1157a77720003f66
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
 X-Originating-IP: [37.26.189.201]
-Date: Wed, 7 Oct 2026 10:21:23 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5 1/3] xen/riscv: always preset A/D bits in G-stage PTEs
-To: xen-devel@lists.xenproject.org
-References: <1791215925.8631fc262581453bbf619ec5b2062170.1a10cc9f7c20003f66@vates.tech>
- <1791216017.8631fc262581453bbf619ec5b2062170.1a10ccb5ec20003f66@vates.tech>
- <1791327013.8631fc262581453bbf619ec5b2062170.1a113690c000003f66@vates.tech>
-Content-Language: en-US
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v3 11/39] xen/riscv: implement vCPU context switching
 From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-In-Reply-To: <1791327013.8631fc262581453bbf619ec5b2062170.1a113690c000003f66@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ xen-devel@lists.xenproject.org, 
+ Romain Caritey <Romain.Caritey@microchip.com>, 
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <2d5f2558-e4f7-43d5-888c-36727519270d@suse.com>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <6e539cc5ded7f62c4347781785af714840893184.1790779209.git.oleksii.kurochko@gmail.com>
+ <1791305420.8631fc262581453bbf619ec5b2062170.1a1121f8fef0003f66@vates.tech>
+ <2d5f2558-e4f7-43d5-888c-36727519270d@suse.com>
+Date: Wed, 07 Oct 2026 10:27:30 +0200
+X-Developer-Signature: v=1; a=openssh-sha256; t=1791361709; l=1374;
+ i=baptiste.le-duc@vates.tech; h=from:subject:message-id;
+ bh=B7EBBZ55K7PX7Zp//Piz5dkiUp8tYHWwTqgPL6BclH8=;
+ b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgQKqDblDzOFimZyyhA+RsKnxim2EiA
+ 60KatQBsuueKYUAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
+ QDnXNO6Q3pqnoNYfCUZRKU4+n2YAmAi5APU5ZrSZGq1Id+WZ0ifGg6KN/HzYYXAE0Jvrk5RaLRv
+ jFZXMxbFDWAw=
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=openssh;
+ fpr=SHA256:YieMhmvNcCYpeUbL6HuedGp4rwSlu4mQ+D7EJoVHM+k
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1791361283560
-X-purgate-ID: tlsNG-c201ff/1791361289-F54AC2A1-133829DC/0/0
+X-Bm-Transport-Timestamp: 1791361709459
+X-purgate-ID: tlsNG-ef75cf/1791361713-366DAAE4-F99999EB/0/0
 X-purgate-type: clean
-X-purgate-size: 8317
+X-purgate-size: 1378
 
-On 10/7/26 00:50, Teddy Astie wrote:
-> Le 05/10/2026 à 18:02, Baptiste Le Duc a écrit :
->> A RISC-V implementation can manage the PTE A/D bits in one of two ways:
->>      1) Update the 'A' and 'D' PTE bits in hardware (ratified as Svadu).
->>      2) Generate a page fault when 'A' and/or 'D' is clear, so that 
->> software
->>         can set them (ratified as Svade).
->>
->> p2m_set_pte_flags() presets A/D in G-stage PTEs only when the device 
->> tree
->> advertises Svade. Platforms that use scheme (2) without advertising 
->> Svade,
->> such as the HiFive Premier P550, then hit guest-page faults that Xen 
->> does
->> not handle.
->
-> I second what Jan said (this is likely a firmware bug, given that the 
-> enumerated behavior is not consistent with the specification, as 
-> existence of Svadu/Svade alters observable behavior).
->
-Thanks, agreed on both points.
+On 2026-10-07 10:04:12+02:00, Jan Beulich wrote:
+> On 06.10.2026 18:50, Baptiste Le Duc wrote:
+> 
+> >> Implement context_switch() and the helpers it needs: save/restore of
+> 
+> First: None of the reply context above is relevant in your reply. Why
+> did you keep it? As indicated before, this way you make every reader
+> scroll through many lines, until they would finally find the first
+> piece of the actual reply. (I've deliberately kept it all, to show
+> the percentage of the overall reply that this occupied.)
+> 
+Yes sorry, I thought b4 would have trimmed for me. I would be careful
+about that in next replies.
+> >> --- a/xen/arch/riscv/include/asm/csr.h
+> > This violates Misra 20.12 rule (docs/misra/rules.rst) as we use macro
+> > parameter `csr` as an operand of ##, while it could be expanded as a
+> > macro (e.g. csr_read64(CSR_HENVCFG)).
+> 
+> Yes. But: You say nothing as to a possible (and plausible) different
+> way of coding this. Imo the best way to deal with this is by a
+> deviation (iirc we already have a few), yet I don't think we're going
+> to add deviations for RISC-V until we actually are about to routinely
+> scan the code.
+I didn't propose anything because I didn't have any other way to code
+this. Concerning the fact to not add deviation for RISC-V I agree that
+it doesn't make too much sense for the moment.
+> 
+> Jan
 
-I'll reword the commit message: it shouldn't imply that Svade in the DT 
-means faults will occur, since with Svadu also present that depends on 
-henvcfg.ADUE.
-
-On the firmware-bug point: I don't think the P550 is really inconsistent 
-with the spec. Svade and Svadu didn't exist when the P550 core was 
-designed. They were only ratified later, to name the two behaviors that 
-already existed in the wild. Before that, the privileged spec just 
-allowed either: hardware updating A/D, or raising a page fault. The P550 
-implements the second, and there was no extension it could advertise for 
-it.
-Therefore, the DT lacks svade because the extension didn't exist when 
-the platform description was written, not because the vendor 
-misdescribed anything.
-
-I agree that, where Svadu is available, Xen should ideally configure a 
-consistent scheme (ADUE=1) and use ADUE=0 only for specific needs such 
-as dirty tracking. But Xen doesn't support Svadu today, so that is a 
-separate piece of work which I'd prefer to do later.
-
-In the meantime, presetting A/D in the G-stage PTEs is the only way to 
-avoid the faults on hardware like the P550, and it is harmless on 
-hardware that updates A/D itself.
-
-For v6 I'll keep the unconditional preset and reword the commit message 
-to say this, what do you think?
-
->>
->> Always preset A/D in G-stage PTEs so scheme (2) never faults. This is
->> harmless with (1): software just does what hardware would have done on
->> first access.
->>
->> Drop the TODO suggesting to handle A/D faults: only Svade raises 
->> them, so
->> it would not work on Svadu. Dirty/access tracking can restrict the RWX
->> permissions of p2m entries, as x86 and Arm do.
-> Yet, existence of Svade alone doesn't mandate the actual behavior, it 
-> is also dependant on the value of ADUE bit in configuration registers.
->
-> Ideally (in cases we can) we would want to configure hardware to 
-> follow a consistent scheme (with the one that updates A/D with 
-> hardware i.e ADUE=1, as it's consistent to without Svade) and only 
-> consider the ADUE=0 behavior for specific needs like dirty tracking.
->
->> > Fixes: ff14053983b0 ("xen/riscv: Implement p2m_pte_from_mfn() and 
-> support PBMT configuration")
->> Assisted-by: Claude:claude-opus-5
->> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
->> ---
->> Changes since v4:
->> - restore svade and update the commit message accordingly.
->> - rebase on top of staging.
->> ---
->> Changes since v3:
->> - always preset A/D bits in G-stage mappings instead of keying off 
->> the DT:
->>    it may not reflect what the hardware actually does.
->> - change commit title/message.
->> - drop svade as it is now-unused.
->> ---
->> Changes since v2:
->> - change commit title.
->> - preset A/D bits in p2m_set_pte_flags() if (!svadu || svade), 
->> instead of
->> setting RISCV_ISA_EXT_svade in the riscv_isa bitmap for cases 1, 2 
->> and 4.
->> - riscv_resolve_ad_scheme() now only warns when both Svade and Svadu are
->> present and SBI FWFT is missing; drop the dead 'svadu && svade' operand.
->> - repeat XENLOG_WARNING on each line of the warning.
->> - drop ASSERT(svade != svadu) from p2m_set_pte_flags().
->> - only add the sbi_probe_extension() declaration to sbi.h.
->> - rework the comment in p2m_set_pte_flags().
->> ---
->> Changes since v1:
->> - change commit title
->> - expose RISCV_ISA_EXT_svadu so the two extensions can be told apart.
->> - move the Svade/Svadu resolution to a new riscv_resolve_ad_scheme(),
->>    called once from riscv_fill_hwcap().
->> - expose sbi_probe_extension() (was static) to probe for SBI FWFT.
->> - stop presetting A/D bits unconditionally in p2m_set_permission(), 
->> do it
->>    only when Svade is present.
->> ---
->>   xen/arch/riscv/p2m.c | 38 ++++++++------------------------------
->>   1 file changed, 8 insertions(+), 30 deletions(-)
->>
->> diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
->> index f7b380b90a..14cae7dcd7 100644
->> --- a/xen/arch/riscv/p2m.c
->> +++ b/xen/arch/riscv/p2m.c
->> @@ -591,38 +591,16 @@ static void p2m_set_pte_flags(pte_t *e, 
->> p2m_type_t t)
->>       e->pte |= PTE_USER;
->>         /*
->> -     * Two schemes to manage the A and D bits are defined:
->> -     *   • The Svade extension: when a virtual page is accessed and 
->> the A bit
->> -     *     is clear, or is written and the D bit is clear, a page-fault
->> -     *     exception is raised.
->> -     *   • When the Svade extension is not implemented, the 
->> following scheme
->> -     *     applies.
->> -     *     When a virtual page is accessed and the A bit is clear, 
->> the PTE is
->> -     *     updated to set the A bit. When the virtual page is 
->> written and the
->> -     *     D bit is clear, the PTE is updated to set the D bit. When 
->> G-stage
->> -     *     address translation is in use and is not Bare, the 
->> G-stage virtual
->> -     *     pages may be accessed or written by implicit accesses to 
->> VS-level
->> -     *     memory management data structures, such as page tables.
->> -     * Thereby to avoid a page-fault in case of Svade is available, 
->> it is
->> -     * necessary to set A and D bits.
->> +     * A RISC-V implementation can either:
->> +     * 1) Update the 'A' and 'D' PTE bits in hardware.
->> +     * 2) Generate a page fault when 'A' and/or 'D' is clear, so that
->> +     *    software can set them.
->
->
->
->>        *
->> -     * TODO: For now, it’s fine to simply set the A/D bits, since 
->> OpenSBI
->> -     *       delegates page faults to a lower privilege mode and so 
->> OpenSBI
->> -     *       isn't expect to handle page-faults occured in lower modes.
->> -     *       By setting the A/D bits here, page faults that would 
->> otherwise
->> -     *       be generated due to unset A/D bits will not occur in Xen.
->> -     *
->> -     *       Currently, Xen on RISC-V does not make use of the 
->> information
->> -     *       that could be obtained from handling such page faults, 
->> which
->> -     *       could otherwise be useful for several use cases such as 
->> demand
->> -     *       paging, cache-flushing optimizations, memory access 
->> tracking,etc.
->> -     *
->> -     *       To support the more general case and the optimizations 
->> mentioned
->> -     *       above, it would be better to stop setting the A/D bits 
->> here and
->> -     *       instead handle page faults that occur due to unset A/D 
->> bits.
->> +     * Xen supports both, so set 'A' and 'D' up front to avoid the 
->> faults
->> +     * of (2). This is harmless with (1): software just does what 
->> hardware
->> +     * would have done on first access.
->>        */
->> -    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
->> -        e->pte |= PTE_ACCESSED | PTE_DIRTY;
->> +    e->pte |= PTE_ACCESSED | PTE_DIRTY;
->
-> On the code change itself, it looks good to me, as we don't make use 
-> of A/D bit anyway (and in case we would need to, we would need to 
-> clear them anyway).
->
->>         switch ( t )
->>       {
->>
->
 
 
