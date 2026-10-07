@@ -4,58 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E740CA5FFC
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 13:59:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442373.1659925 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD683CA600B
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 14:06:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442383.1659935 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xESAk-00079d-9w; Wed, 07 Oct 2026 13:59:06 +0000
+	id 1xESHe-0000OU-VW; Wed, 07 Oct 2026 14:06:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442373.1659925; Wed, 07 Oct 2026 13:59:06 +0000
+Received: by outflank-mailman (output) from mailman id 1442383.1659935; Wed, 07 Oct 2026 14:06:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xESAk-00079W-7F; Wed, 07 Oct 2026 13:59:06 +0000
-Received: by outflank-mailman (input) for mailman id 1442373;
- Wed, 07 Oct 2026 13:59:04 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xESHe-0000ON-Sn; Wed, 07 Oct 2026 14:06:14 +0000
+Received: by outflank-mailman (input) for mailman id 1442383;
+ Wed, 07 Oct 2026 14:06:13 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xESAi-00079O-Dy
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 13:59:04 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xESAh-001mD6-8l
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 15:59:03 +0200
-Received: from [10.42.69.11] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ac65022-bab6-0a2a0a5309dd-0a2a450bac9c-20
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 15:59:02 +0200
-Received: from [40.107.200.32]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ac65022-b7e8-0a2a450b0019-286bc8200569-3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 15:59:02 +0200
-Received: from CH2PR04CA0020.namprd04.prod.outlook.com (2603:10b6:610:52::30)
- by DS7PR12MB6262.namprd12.prod.outlook.com (2603:10b6:8:96::7) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.451.26; Wed, 7 Oct 2026 13:58:52 +0000
-Received: from DM2PEPF00003FC8.namprd04.prod.outlook.com
- (2603:10b6:610:52:cafe::ab) by CH2PR04CA0020.outlook.office365.com
- (2603:10b6:610:52::30) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.496.5 via Frontend Transport; Wed, 7
- Oct 2026 13:58:52 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- DM2PEPF00003FC8.mail.protection.outlook.com (10.167.23.26) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.496.14 via Frontend Transport; Wed, 7 Oct 2026 13:58:52 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Wed, 7 Oct
- 2026 08:58:50 -0500
-Received: from APPOL-18KY0J4.amd.com (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
- Transport; Wed, 7 Oct 2026 08:58:49 -0500
+ (envelope-from <roger@xenproject.org>) id 1xESHd-0000OF-I7
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 14:06:13 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <roger@xenproject.org>) id 1xESHc-001f6P-2t;
+ Wed, 07 Oct 2026 14:06:12 +0000
+Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
+ helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <roger@xenproject.org>) id 1xESHc-002gsy-1l;
+ Wed, 07 Oct 2026 14:06:12 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,96 +41,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZSNXPvcOlfC0JIRANksZxO43kSQymnZtUyLFYnr22oyX5599yECAXBCj1/Kfq7NJ40nnwph/VM4GqeK19xTkZdsmAtbP306mLkgeJHYwZ8NFa/YgO5QX5f0jxp+EzxZcPTT/0asaVVz/DKNnRnUeFv6Bujl2Yl9ZuKR3WjtyjuseD1wLl1giC9NDgywPbfytWOHO6gPk1rNg4UEuV3I2smyl/fwAf/2EPYPc9u2axkWIjAYvfb4YFZ1Cvt2GEyv3uo26DnrKt7S/Tlq4Jhp9A/flBT5cZSvuo2XfNoOz/jstP14Ce02Uwr8AxF7AB1zemX9mrMnNZQ6jvIATYXRmBg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=AolQ6BjlzNs+PwrahIUve3U3eotV5pf1jtleJTOhi1M=;
- b=HcRHHVdruIg6aDWtKepMVLrZyNWKox17Tj2QWvfa3iRoOPX1p+gCcwayHcon7ha926He8+QUQHRSiQGdyqIzuaeXkZ43i9wxliUhK+F1kX/aH9klD7o0FPMbXmSdjpPG8RRGGV8+pdL+OHIWGeiqRVlmZNnIkfUYzzhJW2df9Ue7y6XwaOlhTYvCzlZtwE/5ADwB4aitKK9L+LtLGOoQMes4x4qr+yGQJta3dUKVZg2/2tlIxYyV3lquW6jjFASIhtLcm7trxdCbLhE588QG4KFhFy7fRXzGXeG/pKW3KEmPOD5mueSCvPqo2NiDP71+6Rt0lBXazOf6qztq0qVTug==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=AolQ6BjlzNs+PwrahIUve3U3eotV5pf1jtleJTOhi1M=;
- b=SgD2FSBLFnyR1WxnFmVSkMkTCjUDVZTMXUqnNdg47CCAaTmQ611gQF1IrtmWXhmceOAgNBrwq0OYOmWOQWQ2qNCf47csH/KCxy2T9l9eR6JbEsMNWJhNzXFtc8tWV6+YLQSUW1snDg+lCzutaD7qaVtBY7yG5BCNhV5O3ulbrls=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-From: Michal Orzel <michal.orzel@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-Subject: [PATCH] xen/arm: Fix under-mapping in map_range_to_domain()
-Date: Wed, 7 Oct 2026 15:58:48 +0200
-Message-ID: <20261007135848.220047-1-michal.orzel@amd.com>
-X-Mailer: git-send-email 2.43.0
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
+	bh=Vv5lG8kNckQBl7yOzo92aC95niVE4Zl0Y7N88RjR8ME=; b=NmdwHEYvkuhZ1BMY6iJao9i8JN
+	W/audPmvampMAv3STBxKyzFX6oC+mf2Itn2r67VTgW6lEYDzq0nC07lDeSxe9mapy813clZNug8U1
+	UIcMCUVfToK0bdnzCnztoA2kB4wDGqVLWyLVMg3U9/pFjHqD3sLgNlfGvKFBg3gtUhII=;
+Date: Wed, 7 Oct 2026 16:06:07 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
+To: George Dunlap <gwd@xenproject.org>
+Cc: xen-devel@lists.xenproject.org,
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: Re: [PATCH v3 02/18] x86/mm: purge unneeded
+ destroy_perdomain_mapping()
+Message-ID: <asZRz9iFoTWXTVFx@Mac.lan>
+References: <20261007104051.48841-1-gwd@xenproject.org>
+ <20261007104051.48841-3-gwd@xenproject.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM2PEPF00003FC8:EE_|DS7PR12MB6262:EE_
-X-MS-Office365-Filtering-Correlation-Id: 413cf0df-e157-43f9-90a0-08df247b1e8b
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|82310400026|36860700016|376014|11063799006|6133799003|56012099006|10067099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	J+dYTxb706WFa25UM9huY8z+i5GfLJljQgnGsah1xX1FW3gNHr+0dfeW1sh+gNox/VjF+pOsvsg38bW+fTSZWcVTcD0eZl7yktTMe0aW967/VLQrtq8vbLp0K5N4Dc+EhbM+JPGptJ43FIiPwsPn0juSPxiwGD4XLQaifdNm6mVRlUwB9gE6M3DPAE8IfFHSjPCr1+tBUioO1vMIJCsZ9S+j+PUXTH75qszw6SnkaXPct9RHC1xy5szbuwhHv7418FcD8eZlGUz/aciyVjQewA2m9u4SAUd5budB9XzyEZbAZVQuhhmn3Out0prmj5qXjFOEVPltfgyqtm1jxVgguAX1RBBeHykIyGzK0ptia4XFFOCqmRIxxx9RhCPsDoz9nMKQMIdqWvCEVNj1jDJp7PsANxoZjWCFg5m5/SnGUgWMRlDiK1NVUZJDCS8GBFN5lHlE1ED1Cgw+E0FBwPWjLgSFdHJAckNsF7LKW/lAkEsUwGx0oZ9s4XedtNgNdUs6YIQ5J7DzR9zY0u0wW0c51KP6l2RTVVLeWdR9ItdqPeOCtjowOZuD7L9lf3Ib5ez3pz+RqVLJZF0QAZFyxuqTiUvJXHZhwJsQ1bbEhcmlk4iW9sEsmfu0wKtsulYabZtpGMNiwHd2taByP6l1vYaikToNvc3t08BcEDD6Lg+laMSMCedwDeFw5EMDon7Dqiov2Z9vYG5xL+oaYxWK4IDfew==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(82310400026)(36860700016)(376014)(11063799006)(6133799003)(56012099006)(10067099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	4y7wWS6cSqKnv4/zNHxuME9yQR0aX16eplU0FWnedZPVJFELJocgzRRR2Bpj9rSQQ26DvSYGPAKj0cuKKTDR2tOCSqJRSduPheSEbQ+XL0ElEVIK4jJ49gH8T3AAG3ySJbq+WY5X29fxONaV/JNsZwNxNrQaRS8rNHVw2XPO8tsiZR2VLqoKwY2yuYR/A1954vKSJciWm+szp07W37tkbJX+Y5Xfu3Pu8+qE/QWTzoa7fIY1BGeG3dziNyf+MsSf7lVyZHT0foN6Xi4OmBKYjCBJjzO1nprG/DaRoy6ee4Gu5aMAbpBfdUo1AbeVzh4LMWr8j42+bmWyHIPfAOlgq1RhJ8UJMJqMLFYagzMIJtXnn/3qyvSbuOno3Afv4li6nne3uJY+m458Vf03TfE//S5qY6GLGn8KJiLJeC4PhhiL5SxZZ8/eRIahhRjhwypk
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 07 Oct 2026 13:58:52.1035
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 413cf0df-e157-43f9-90a0-08df247b1e8b
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	DM2PEPF00003FC8.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR12MB6262
-X-purgate-ID: tlsNG-42698a/1791381542-192CC9EA-0A5000C4/0/0
-X-purgate-type: clean
-X-purgate-size: 1165
+In-Reply-To: <20261007104051.48841-3-gwd@xenproject.org>
 
-If the memory region to be mapped does not start at the page boundary
-and its end spans over the page boundary, map_range_to_domain() passes
-a number of pages that is short by one to map_regions_p2mt(). Domain's
-attempt to access memory within that page will fail. Fix it by calculating
-the number of pages to be mapped taking into account the start offset.
+On Wed, Oct 07, 2026 at 11:40:35AM +0100, George Dunlap wrote:
+> From: Roger Pau Monné <roger.pau@citrix.com>
+> 
+> We want to change per-domain mappings to be per-vCPU mappings.  In
+> preparation for that, we want to arrange that
+> destroy_perdomain_mapping() work either with a single perdomain area,
+> or with a per-vCPU perdomain area.
+> 
+> There are two calls made from domain-scoped contexts; both calls turn
+> out to be unnecessary:
+> 
+> - destroy_perdomain_mapping() is not logically the undo of
+>   create_perdomain_mapping(), as the name and its use in
+>   hvm_domain_initialise() suggest.  create_ allocates a per-domain L3,
+>   but destroy_ tears down mappings without freeing it; and since the
+>   call here passes nr == 0, it tears down nothing at all.  The
+>   per-domain L3 page is actually freed by free_perdomain_mappings(),
+>   which hvm_domain_initialise()'s caller, arch_domain_create(),
+>   already invokes on its failure path.
+> 
+> - The call in pv_domain_destroy() is redundant at both of its call
+>   sites.  arch_domain_destroy() unconditionally calls
+>   free_perdomain_mappings(), which tears down the same entries and
+>   additionally frees the page-table structures; and the other caller,
+>   the error path of pv_domain_initialise(), returns into
+>   arch_domain_create()'s failure path, which invokes
+>   free_perdomain_mappings() as well.
+> 
+> One vCPU-scoped caller, pv_destroy_gdt_ldt_l1tab(), is covered the
+> same way: a vCPU is only ever destroyed together with its domain, or
+> on the failure path of creating it, and both routes end in
+> free_perdomain_mappings(); the GDT/LDT slots hold no area-owned pages,
+> so there is nothing else for the call to do.  While we're getting rid
+> of unneccessary callers, drop this one too.
+> 
+> Note that free_compat_arg_xlat() keeps its explicit teardown: in
+> addition to vCPU teardown, it serves switch_compat()'s undo path,
+> where the domain lives on as a 64-bit one and the argument-translation
+> pages have to go.  Add a comment to make sure it isn't missed.
+> 
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> Assisted-by: Claude Code:claude-fable-5
+> Signed-off-by: George Dunlap <gwd@xenproject.org>
+> ---
+> Changes in v3:
+> - Note that pv_domain_destroy()'s other call site, the error path of
+>   pv_domain_initialise(), is covered the same way (Jan).
+> - Also drop pv_destroy_gdt_ldt_l1tab(), the per-vCPU teardown call
+>   (Jan), and comment on why free_compat_arg_xlat() keeps its own.  The
+>   Reviewed-by tags given for the previous form are dropped.
+> 
+> Changes in v2:
+> - Added to the series
+> 
+> Changes since the previously posted version:
+> - Reworked the commit message to make it more clear how it fits in
+>   with the larger series.  No functional change.
+> ---
+>  xen/arch/x86/hvm/hvm.c   |  1 -
+>  xen/arch/x86/pv/domain.c | 10 ----------
+>  xen/arch/x86/x86_64/mm.c |  5 +++++
+>  3 files changed, 5 insertions(+), 11 deletions(-)
+> 
+> diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+> index 192309c2fc..3924c1b204 100644
+> --- a/xen/arch/x86/hvm/hvm.c
+> +++ b/xen/arch/x86/hvm/hvm.c
+> @@ -730,7 +730,6 @@ int hvm_domain_initialise(struct domain *d,
+>      XFREE(d->arch.hvm.irq);
+>   fail0:
+>      hvm_destroy_cacheattr_region_list(d);
+> -    destroy_perdomain_mapping(d, PERDOMAIN_VIRT_START, 0);
+>   fail:
+>      hvm_domain_relinquish_resources(d);
+>      XFREE(d->arch.hvm.io_handler);
+> diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
+> index 03262a4952..07ea4bb4d2 100644
+> --- a/xen/arch/x86/pv/domain.c
+> +++ b/xen/arch/x86/pv/domain.c
+> @@ -332,12 +332,6 @@ static int pv_create_gdt_ldt_l1tab(struct vcpu *v)
+>                                      NULL);
+>  }
+>  
+> -static void pv_destroy_gdt_ldt_l1tab(struct vcpu *v)
+> -{
+> -    destroy_perdomain_mapping(v->domain, GDT_VIRT_START(v),
+> -                              1U << GDT_LDT_VCPU_SHIFT);
+> -}
+> -
+>  void pv_vcpu_destroy(struct vcpu *v)
+>  {
+>      if ( is_pv_32bit_vcpu(v) )
+> @@ -346,7 +340,6 @@ void pv_vcpu_destroy(struct vcpu *v)
+>          release_compat_l4(v);
+>      }
+>  
+> -    pv_destroy_gdt_ldt_l1tab(v);
+>      XFREE(v->arch.pv.trap_ctxt);
+>  }
+>  
+> @@ -394,9 +387,6 @@ void pv_domain_destroy(struct domain *d)
+>  {
+>      pv_l1tf_domain_destroy(d);
+>  
+> -    destroy_perdomain_mapping(d, GDT_LDT_VIRT_START,
+> -                              GDT_LDT_MBYTES << (20 - PAGE_SHIFT));
+> -
+>      XFREE(d->arch.pv.cpuidmasks);
+>  
+>      FREE_XENHEAP_PAGE(d->arch.pv.gdt_ldt_l1tab);
+> diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+> index 8eadab7933..2a1805964d 100644
+> --- a/xen/arch/x86/x86_64/mm.c
+> +++ b/xen/arch/x86/x86_64/mm.c
+> @@ -737,6 +737,11 @@ int setup_compat_arg_xlat(struct vcpu *v)
+>                                      NULL, NIL(struct page_info *));
+>  }
+>  
+> +/*
+> + * Besides vCPU teardown, which free_perdomain_mappings() would cover, this
+> + * serves switch_compat()'s undo path: the domain lives on as a 64-bit one
+> + * there, so the translation area has to go right away.
 
-Fixes: 88c10b0d6eee ("arch/arm: let map_mmio_regions() use start and count")
-Signed-off-by: Michal Orzel <michal.orzel@amd.com>
----
- xen/arch/arm/device.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+I'm unsure we want to be that verbose, but if so I would mention PV
+explicitly, possible: "the PV domain lives ..."
 
-diff --git a/xen/arch/arm/device.c b/xen/arch/arm/device.c
-index b11366d722ef..ad50838b9f11 100644
---- a/xen/arch/arm/device.c
-+++ b/xen/arch/arm/device.c
-@@ -89,7 +89,7 @@ int __overlay_init map_range_to_domain(const struct dt_device_node *dev,
-     {
-         res = map_regions_p2mt(d,
-                                gaddr_to_gfn(addr),
--                               PFN_UP(len),
-+                               PFN_UP(addr + len) - PFN_DOWN(addr),
-                                maddr_to_mfn(addr),
-                                mr_data->p2mt);
- 
--- 
-2.43.0
+Otherwise LGTM, but I don't think I can RB or Ack it being also the
+author.
 
+Thanks, Roger.
 
