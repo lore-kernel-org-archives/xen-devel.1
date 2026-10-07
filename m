@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 642BCCA6007
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 11:00:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442175.1659750 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 10176CA5FF1
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 11:00:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442174.1659744 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEPNs-0006JX-NV; Wed, 07 Oct 2026 11:00:28 +0000
+	id 1xEPNs-0006BR-Ck; Wed, 07 Oct 2026 11:00:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442175.1659750; Wed, 07 Oct 2026 11:00:28 +0000
+Received: by outflank-mailman (output) from mailman id 1442174.1659744; Wed, 07 Oct 2026 11:00:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEPNs-0006HI-IQ; Wed, 07 Oct 2026 11:00:28 +0000
-Received: by outflank-mailman (input) for mailman id 1442175;
+	id 1xEPNs-0006AJ-6J; Wed, 07 Oct 2026 11:00:28 +0000
+Received: by outflank-mailman (input) for mailman id 1442174;
  Wed, 07 Oct 2026 11:00:26 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xEPNq-0005y3-FD
+ (envelope-from <gwd@xenproject.org>) id 1xEPNq-0005y6-FB
  for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 11:00:26 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1xEPNq-001bwM-0X;
+ (envelope-from <gwd@xenproject.org>) id 1xEPNq-001bwO-0d;
  Wed, 07 Oct 2026 11:00:26 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1xEP5I-001QnT-0o;
- Wed, 07 Oct 2026 10:41:16 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xEP5J-001QnT-0V;
+ Wed, 07 Oct 2026 10:41:17 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,64 +44,55 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=uTtFastgCN5QzSIxMSLM2WRMVTyMNwx08i8QJomPSZ4=; b=E/3A8IsJsQ8CdM5jaS3m1u6wCc
-	MAfj8CUS0mhwRfZtW0E/DI7wswq0NEUGyP/mGzmDs0gQa8MbsiBpzeVG4BJ4Fl4KTHd/KsRRYK2B7
-	OR+YgZwi/PQbLU07SpnvZIXi+fke+SaQGfI+nElTTto0z3tCI092ceDbBw/t7+hO93b8=;
+	bh=oxwTS9MOb2PIX3bMecdpJFmahOt3FYv9Hqo2e2XCx8U=; b=oRHmf+2uFw+h+kuvyOl50xczl3
+	eS5WBPGkfTapjD4dO5FbUguoCgNPpmVty2iWkybo1VvOh9IaRXt7UVwvQ7/vgeQaKKxJqHOqeSEqB
+	DAT5ldXrpxNsualX40jTSCVfQtLQzMIubjQ50hvMcVVZzN5eZyZkqvTVu7ZZ0ugHZJvg=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v3 16/18] x86/domain_page: keep the maphash's slots, not their mappings
-Date: Wed,  7 Oct 2026 11:40:49 +0100
-Message-ID: <20261007104051.48841-17-gwd@xenproject.org>
+Subject: [PATCH v3 17/18] x86/mm: run guest contexts on the sparse directmap view
+Date: Wed,  7 Oct 2026 11:40:50 +0100
+Message-ID: <20261007104051.48841-18-gwd@xenproject.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261007104051.48841-1-gwd@xenproject.org>
 References: <20261007104051.48841-1-gwd@xenproject.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
 
-unmap_domain_page() keeps a recently unmapped slot in the vCPU's
-maphash (MAPHASH_ENTRIES, 8 per vCPU) for a quick remap of the same
-MFN, and leaves its PTE in place until the entry is displaced by a later
-unmap or reclaimed by a full cache.  Until then the page stays mapped,
-although nothing refers to the mapping and the mapcache holds no
-reference to the page.  A page freed meanwhile and handed to another
-domain stays mapped in the previous user's mapcache: in the vCPU's own
-area for a domain with per-vCPU page-tables, in the domain-wide area of
-a PV domain, where all of its vCPUs can reach it.
+In init_xen_l4_slots(), if d->arch.sparse_dmap is set, point the
+directmap L3 at the sparse view.
 
-While the full directmap is loaded, that reaches nothing it does not
-map anyway.  On the sparse view of the directmap, Xen reaches
-domain-heap memory only through mappings made for the purpose, and a
-mapping kept in the maphash would leave another domain's page
-reachable from a context which has nothing to do with it.
+d->arch.sparse_dmap is decided at domain creation: PV domains all have a
+mapcache, HVM domains need per-vCPU page-tables for one.  No option asks
+for the sparse view yet.
 
-Keep the slot, not the mapping: unmapping the last reference zaps the
-PTE and keeps the hash entry, and a later hit maps the page again in the
-same slot.  The slot has mapped nothing else in between, so that needs
-no flush.  Reusing the slot for another page still goes through the
-garbage map, or through the replacement of a hash entry when the cache
-is full, both of which flush first.  A translation of the zapped PTE
-left in a TLB is covered, for owned pages, by the flush the page
-allocator arranges before a freed page is reused wherever a sparse view
-is configured ("x86/mm: flush owned pages before reuse with the sparse
-directmap view").
+The sparse view becomes active once dom0 is built, before it first runs:
+dom0's construction runs on the full directmap, which it needs, and its
+root page-tables so far (a PV dom0's first L4s, a PVH dom0's monitor
+tables) are switched over then.  A PV dom0 booted with dom0=shadow is
+switched as well: shadow mode is enabled only later, from a tasklet, and
+its shadow L4s then get the sparse view from init_xen_l4_slots(), as for
+any PV domain entering shadow mode.  Anything built later gets the
+sparse view from init_xen_l4_slots().  The sparse view's slots are
+marked NX at activation, as the full directmap's slots are.
 
-The cost is one PTE write per unmap into the maphash and per remap from
-it.  A second unmap of an entry in the maphash now finds its PTE not
-present and is caught by the check unmap_domain_page() has for entries
-the first unmap zapped, rather than by the reference count's ASSERT()
-in debug builds only.
-
-The change does not depend on asi= or on a sparse view of the directmap
-being configured.  PV vCPUs use the domain-wide mapcache on the default
-command line too: in debug builds for every page, in release builds for
-pages beyond the reach of the full directmap in their page-tables (5TiB,
-3.5TiB with CONFIG_BIGMEM).  For them the change adds the PTE writes
-above.  It also leaves up to MAPHASH_ENTRIES fewer pages per vCPU mapped
-in the domain-wide area.
+The two directmaps differ where the sparse view leaves memory out, so no
+translation of the full directmap may remain usable on page-tables
+carrying the sparse view.  Directmap mappings stay global nevertheless:
+every CR3 write which can move a CPU onto the sparse view goes through
+switch_cr3_cr4(), which flushes the old page-tables' translations,
+global entries included, before it returns.  The CR3 writes which keep
+entries -- a PV vCPU's switch between its kernel and user page-tables,
+XPTI's entry and exit -- stay within one vCPU's page-tables, which carry
+the same directmap, or go to XPTI's per-CPU root, which maps only Xen's
+own per-CPU pages there.  Removals from the sparse view are flushed on
+every CPU, global entries included.  PV guests running with global
+pages, a PV dom0 not using the sparse view among them, so keep their
+directmap TLB entries across switches between guest kernel and user
+mode.
 
 Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
@@ -109,98 +100,256 @@ Signed-off-by: George Dunlap <gwd@xenproject.org>
 Changes in v3:
 - New in this version.
 ---
- xen/arch/x86/domain_page.c        | 34 +++++++++++++++++++++++--------
- xen/arch/x86/include/asm/domain.h |  5 ++++-
- 2 files changed, 30 insertions(+), 9 deletions(-)
+ xen/arch/x86/include/asm/sparse-directmap.h |  11 ++
+ xen/arch/x86/mm.c                           |   9 +-
+ xen/arch/x86/setup.c                        |   3 +
+ xen/arch/x86/sparse-directmap.c             | 129 ++++++++++++++++++++
+ xen/arch/x86/spec_ctrl.c                    |   7 ++
+ 5 files changed, 157 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index 48f85b670d..eee66b848c 100644
---- a/xen/arch/x86/domain_page.c
-+++ b/xen/arch/x86/domain_page.c
-@@ -195,6 +195,14 @@ void *map_domain_page(mfn_t mfn)
-     {
-         idx = hashent->idx;
-         ASSERT(idx < cache->entries);
+diff --git a/xen/arch/x86/include/asm/sparse-directmap.h b/xen/arch/x86/include/asm/sparse-directmap.h
+index 512f8064d6..41866b77e9 100644
+--- a/xen/arch/x86/include/asm/sparse-directmap.h
++++ b/xen/arch/x86/include/asm/sparse-directmap.h
+@@ -33,7 +33,15 @@ static inline bool sparse_dmap_configured(void)
+     return opt_sparse_dmap_pv || opt_sparse_dmap_hvm;
+ }
+ 
++/* Whether a new domain of the given type is to use the sparse view. */
++static inline bool sparse_dmap_wanted(bool pv)
++{
++    return sparse_dmap_root && (pv ? opt_sparse_dmap_pv : opt_sparse_dmap_hvm);
++}
++
+ void sparse_dmap_init(void);
++void sparse_dmap_activate(void);
++void sparse_dmap_install(l4_pgentry_t *l4t, bool pv);
+ int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn, unsigned long nr,
+                            pte_attr_t flags);
+ int sparse_dmap_mirror_modify(unsigned long s, unsigned long e,
+@@ -46,7 +54,10 @@ int sparse_dmap_drop_pagetable(mfn_t mfn);
+ #define sparse_dmap_active false
+ 
+ static inline bool sparse_dmap_configured(void) { return false; }
++static inline bool sparse_dmap_wanted(bool pv) { return false; }
+ static inline void sparse_dmap_init(void) {}
++static inline void sparse_dmap_activate(void) {}
++static inline void sparse_dmap_install(l4_pgentry_t *l4t, bool pv) {}
+ static inline int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn,
+                                          unsigned long nr, pte_attr_t flags)
+ {
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 4a1bd9d146..4e2f9e1f12 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -1662,7 +1662,8 @@ struct page_info *perdomain_l3(const struct vcpu *v)
+  * share; it is mandatory for a vCPU-PT domain, whose per-domain area is
+  * per-vCPU.  All other parameters are optional and will either fill or zero
+  * the appropriate slots.  Pagetables not shared with guests will gain the
+- * extended directmap.
++ * extended directmap, unless the domain runs on the sparse view of the
++ * directmap, which replaces the directmap slots (see sparse_dmap_install()).
+  */
+ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
+                        const struct domain *d, const struct vcpu *v,
+@@ -1670,7 +1671,7 @@ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
+ {
+     /*
+      * PV vcpus need a shortened directmap.  HVM and Idle vcpus get the full
+-     * directmap.
++     * directmap, unless the domain runs on the sparse view (below).
+      */
+     bool short_directmap = !paging_mode_external(d);
+ 
+@@ -1743,6 +1744,10 @@ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
+                (ROOT_PAGETABLE_FIRST_XEN_SLOT + slots -
+                 l4_table_offset(XEN_VIRT_START)) * sizeof(*l4t));
+     }
++
++    /* The domain's contexts may run on the sparse view of the directmap. */
++    if ( sparse_dmap_active && d->arch.sparse_dmap )
++        sparse_dmap_install(l4t, short_directmap);
+ }
+ 
+ bool fill_ro_mpt(mfn_t mfn)
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index e52388ad28..21edab9cea 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -2216,6 +2216,9 @@ void asmlinkage __init noreturn __start_xen(void)
+     if ( !dom0 )
+         panic("Could not set up DOM0 guest OS\n");
+ 
++    /* Before dom0 first runs, and after it was built on the full directmap. */
++    sparse_dmap_activate();
++
+     heap_init_late();
+ 
+     init_constructors();
+diff --git a/xen/arch/x86/sparse-directmap.c b/xen/arch/x86/sparse-directmap.c
+index ef13f9e95d..54a6e36132 100644
+--- a/xen/arch/x86/sparse-directmap.c
++++ b/xen/arch/x86/sparse-directmap.c
+@@ -46,8 +46,10 @@
+ #include <xen/lib.h>
+ #include <xen/mm.h>
+ #include <xen/numa.h>
++#include <xen/sched.h>
+ #include <xen/sort.h>
+ 
++#include <asm/flushtlb.h>
+ #include <asm/page.h>
+ #include <asm/sparse-directmap.h>
+ 
+@@ -437,3 +439,130 @@ void __init sparse_dmap_init(void)
+ 
+     printk(XENLOG_INFO "Sparse directmap: %lu pages mapped\n", mapped);
+ }
++
++/*
++ * Point the directmap slots of the root page-table @l4t at the sparse view.
++ * Every slot it covers gets its L3, whatever the full directmap has there,
++ * so that memory added later is covered too.  A PV root has guest slots
++ * above; any other root loses the rest of the directmap, which the sparse
++ * view does not cover.
++ *
++ * Directmap mappings may be global, in either hierarchy.  Translations of
++ * the full directmap must not remain usable on a root carrying the sparse
++ * view: every CR3 write which can move a CPU from the one to the other goes
++ * through switch_cr3_cr4(), which flushes what the old root left in the TLB,
++ * global entries included, before it returns.  The other CR3 writes, which
++ * may keep global or PCID-tagged entries (_toggle_guest_pt(), XPTI's entry
++ * and exit paths), switch between one vCPU's roots, which carry the same
++ * directmap, or to XPTI's per-CPU root, which maps only this CPU's stack,
++ * IDT and TSS there.  Removals from the sparse view flush all CPUs, global
++ * entries included.
++ */
++void sparse_dmap_install(l4_pgentry_t *l4t, bool pv)
++{
++    unsigned int i;
++
++    ASSERT(sparse_dmap_root);
++
++    for ( i = l4_table_offset(SPARSE_DMAP_START);
++          i < l4_table_offset(SPARSE_DMAP_END); i++ )
++        l4t[i] = sparse_dmap_root[i];
++
++    if ( !pv )
++        for ( ; i < l4_table_offset(DIRECTMAP_VIRT_END); i++ )
++            l4t[i] = l4e_empty();
++}
++
++static void __init sparse_dmap_install_mfn(mfn_t mfn, bool pv)
++{
++    l4_pgentry_t *l4t = map_domain_page(mfn);
++
++    sparse_dmap_install(l4t, pv);
++    unmap_domain_page(l4t);
++}
++
++/*
++ * Let guest contexts run on the sparse view.  Root page-tables built from
++ * here on carry it (init_xen_l4_slots()); those of the domains built so far
++ * (dom0, which has not run yet) are switched over here.  Its construction ran
++ * on the full directmap, and needed to.
++ */
++void __init sparse_dmap_activate(void)
++{
++    struct domain *d;
++    struct vcpu *v;
++    unsigned long va, mapped = 0;
++    unsigned int i, switched = 0;
++
++    if ( !sparse_dmap_root )
++        return;
++
++    /*
++     * Nothing in the directmap is executed: as subarch_init_memory() does
++     * for the full directmap, mark the sparse view's slots NX, before any
++     * root page-table takes a copy of them.
++     */
++    if ( cpu_has_nx )
++        for ( i = l4_table_offset(SPARSE_DMAP_START);
++              i < l4_table_offset(SPARSE_DMAP_END); i++ )
++            l4e_add_flags(sparse_dmap_root[i], _PAGE_NX_BIT);
++
++    rcu_read_lock(&domlist_read_lock);
++
++    for_each_domain ( d )
++    {
++        if ( !d->arch.sparse_dmap )
++            continue;
++
 +        /*
-+         * An entry the maphash kept holds on to its slot, not to its mapping
-+         * (see unmap_domain_page()): map the page again.  No flush is needed,
-+         * as the slot has mapped nothing else since.
++         * A PV domain runs on shadow L4s only in shadow mode, which boot
++         * does not enter before this point: dom0=shadow enables it later,
++         * from a tasklet, and the shadow L4s then get the sparse view from
++         * init_xen_l4_slots(), as for any PV domain entering shadow mode.
 +         */
-+        if ( !hashent->refcnt )
-+            l1e_write(&MAPCACHE_L1ENT(idx),
-+                      l1e_from_mfn(mfn, __PAGE_HYPERVISOR_RW));
-         hashent->refcnt++;
-         ASSERT(hashent->refcnt);
-         ASSERT(mfn_eq(l1e_get_mfn(MAPCACHE_L1ENT(idx)), mfn));
-@@ -227,8 +235,8 @@ void *map_domain_page(mfn_t mfn)
-                 if ( hashent->idx != MAPHASHENT_NOTINUSE && !hashent->refcnt )
-                 {
-                     idx = hashent->idx;
--                    ASSERT(l1e_get_pfn(MAPCACHE_L1ENT(idx)) == hashent->mfn);
--                    l1e_write(&MAPCACHE_L1ENT(idx), l1e_empty());
-+                    ASSERT(!(l1e_get_flags(MAPCACHE_L1ENT(idx)) &
-+                             _PAGE_PRESENT));
-                     hashent->idx = MAPHASHENT_NOTINUSE;
-                     hashent->mfn = ~0UL;
-                     break;
-@@ -298,25 +306,35 @@ void unmap_domain_page(const void *ptr)
- 
-     local_irq_save(flags);
- 
++        switched++;
++        for_each_vcpu ( d, v )
++        {
++            if ( is_hvm_vcpu(v) )
++            {
++                if ( !pagetable_is_null(v->arch.hvm.monitor_table) )
++                    sparse_dmap_install_mfn(
++                        pagetable_get_mfn(v->arch.hvm.monitor_table), false);
++                continue;
++            }
++
++            if ( !pagetable_is_null(v->arch.guest_table) )
++                sparse_dmap_install_mfn(
++                    pagetable_get_mfn(v->arch.guest_table), true);
++            if ( !pagetable_is_null(v->arch.guest_table_user) )
++                sparse_dmap_install_mfn(
++                    pagetable_get_mfn(v->arch.guest_table_user), true);
++        }
++    }
++
++    rcu_read_unlock(&domlist_read_lock);
++
 +    /*
-+     * The maphash keeps recently freed slots for a quick remap of the same
-+     * page, but not their mappings: the page may change hands meanwhile, and
-+     * must not stay reachable from this context then.  A translation left in
-+     * a TLB is covered, for owned pages, by the flush the page allocator
-+     * arranges before a freed page is handed out again wherever a sparse
-+     * directmap view is configured; without one, the directmap maps the page
-+     * anyway.
++     * Belt and braces: nothing runs on these page-tables yet, and PV dom0's
++     * construction, which ran on its own, returned to the idle page-tables
++     * through switch_cr3_cr4(), dropping what it left in the TLB.
 +     */
-     if ( hashent->idx == idx )
-     {
-         ASSERT(hashent->mfn == mfn);
-         ASSERT(hashent->refcnt);
-         hashent->refcnt--;
-+        if ( !hashent->refcnt )
-+            l1e_write(&MAPCACHE_L1ENT(idx), l1e_empty());
-     }
-     else if ( !hashent->refcnt )
-     {
-+        /* The entry replaced has no mapping left: mark its slot as garbage. */
-         if ( hashent->idx != MAPHASHENT_NOTINUSE )
-         {
--            /* /First/, zap the PTE. */
--            ASSERT(l1e_get_pfn(MAPCACHE_L1ENT(hashent->idx)) ==
--                   hashent->mfn);
--            l1e_write(&MAPCACHE_L1ENT(hashent->idx), l1e_empty());
--            /* /Second/, mark as garbage. */
-+            ASSERT(!(l1e_get_flags(MAPCACHE_L1ENT(hashent->idx)) &
-+                     _PAGE_PRESENT));
-             set_bit(hashent->idx, cache->garbage);
-         }
++    flush_all(FLUSH_TLB_GLOBAL);
++
++    sparse_dmap_active = true;
++
++    for ( va = SPARSE_DMAP_START; va < SPARSE_DMAP_END; )
++    {
++        pte_attr_t flags;
++        unsigned long n;
++
++        if ( !mfn_eq(xen_mapping_lookup(sparse_dmap_root, va, &flags, &n),
++                     INVALID_MFN) )
++            mapped += n;
++        va += n << PAGE_SHIFT;
++    }
++
++    printk(XENLOG_INFO
++           "Sparse directmap: active, %lu pages mapped, %u domain(s) on it\n",
++           mapped, switched);
++}
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index 999e41aefa..46105ef185 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -1940,6 +1940,13 @@ void spec_ctrl_init_domain(struct domain *d)
  
--        /* Add newly-freed mapping to the maphash. */
-+        /* Add the newly-freed slot to the maphash, without its mapping. */
-+        l1e_write(&MAPCACHE_L1ENT(idx), l1e_empty());
-         hashent->mfn = mfn;
-         hashent->idx = idx;
-     }
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 76a22b4040..51741f9d42 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -74,7 +74,10 @@ struct mapcache_vcpu {
-     /* Shadow of mapcache_domain.epoch. */
-     unsigned int shadow_epoch;
- 
--    /* Lock-free per-VCPU hash of recently-used mappings. */
+     d->arch.vcpu_pt = !pv && (is_hardware_domain(d) ? opt_vcpu_pt_hwdom
+                                                     : opt_vcpu_pt_hvm);
++
 +    /*
-+     * Lock-free per-VCPU hash of recently-used mappings.  An entry without
-+     * references keeps its slot but not its mapping (see unmap_domain_page()).
++     * The sparse directmap view needs a mapcache: PV domains all have one,
++     * HVM domains through per-vCPU page-tables.
 +     */
-     struct vcpu_maphash_entry {
-         unsigned long mfn;
-         uint32_t      idx;
++    d->arch.sparse_dmap = pv ? sparse_dmap_wanted(true)
++                             : d->arch.vcpu_pt && sparse_dmap_wanted(false);
+ }
+ 
+ void __init init_speculation_mitigations(void)
 -- 
 2.55.0
 
