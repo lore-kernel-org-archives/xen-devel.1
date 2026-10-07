@@ -4,32 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 96F1DCA5FFC
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 10:41:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442106.1659682 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C4698CA5FFC
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 10:45:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442154.1659710 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEP5B-0007cF-L3; Wed, 07 Oct 2026 10:41:09 +0000
+	id 1xEP8p-0002RA-7F; Wed, 07 Oct 2026 10:44:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442106.1659682; Wed, 07 Oct 2026 10:41:09 +0000
+Received: by outflank-mailman (output) from mailman id 1442154.1659710; Wed, 07 Oct 2026 10:44:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEP5B-0007bw-HU; Wed, 07 Oct 2026 10:41:09 +0000
-Received: by outflank-mailman (input) for mailman id 1442106;
- Wed, 07 Oct 2026 10:41:08 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xEP5A-0007Tq-3D
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 10:41:08 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1xEP5A-001bj0-01;
- Wed, 07 Oct 2026 10:41:08 +0000
-Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.96)
- (envelope-from <gwd@xenproject.org>) id 1xEP59-001QnT-2n;
- Wed, 07 Oct 2026 10:41:07 +0000
+	id 1xEP8p-0002R3-4F; Wed, 07 Oct 2026 10:44:55 +0000
+Received: by outflank-mailman (input) for mailman id 1442154;
+ Wed, 07 Oct 2026 10:44:54 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xEP8o-0002Qx-82
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 10:44:54 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xEP8n-00HQBU-L9
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 12:44:53 +0200
+Received: from [10.42.69.10] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ac6229e-2eae-0a2a0a5409dd-0a2a450abbe2-14
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 12:44:53 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ac622a5-f2d2-0a2a450a0019-d155dd2edd77-3
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 12:44:53 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-48b03f23305so3343259f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 03:44:53 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48c71c0b708sm4185375f8f.12.2026.10.07.03.44.52
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 07 Oct 2026 03:44:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,405 +52,202 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=dhqUQmvZLvbJ486b5VhpqBi7A5iX71jVcCO1Kn2eJgk=; b=Oux8bGxlk0zuVswcqf2KM8B1xF
-	qPJZf1b1rdYN1TRjZZy7yzL/qU9OLjTt2xD/bE79ikYVkc4o3Tpip4VDlmqIju3EeWbuxlzRr7rVj
-	fqjl3Bo3eE+S/kuzK5eQxi9TJTUUgvsSsf530NRrAolbf6TMQQJtCtrI6zPL6EOFyA1Y=;
-From: George Dunlap <gwd@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v3 08/18] x86/domain_page: prepare the mapcache for per-vCPU accounting
-Date: Wed,  7 Oct 2026 11:40:41 +0100
-Message-ID: <20261007104051.48841-9-gwd@xenproject.org>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261007104051.48841-1-gwd@xenproject.org>
-References: <20261007104051.48841-1-gwd@xenproject.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1791369893; x=1791974693; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=jALpHFmm/OFAU5+//4GxIdjSbZ+7OUdEp+033IIftcs=;
+        b=B/McBp0ocT9mYMj5nZ1sIakem8o1jRlc4Ao6bVFVhQAyYZIPq0BUDnE+iALYVx+WFT
+         p2hQ6MGnmaNIKViZHwwfwDWX2KN3Y93ARkaitFnLKtxULw6CpfRksKqe4KixNJn5ZJsy
+         VG/vQYB3llpA0YKtRnSLo3G3sLTQHWKLVrebVtsNaJf+cSZtfRIQe+SlSRxez1PbvSIJ
+         FRmmdPy6ZFSSKxtaxb3x4C+XH1uxyZ47luIJ9gqy5vwvTINazlGi3zOix+GUHh5KNU/I
+         6zg2Vrem/gfCXtTKwMZwWexv9VNV0poEFA6UQeNv+ZAcb553yDvraXSoaI9J6Ydz3fvZ
+         EnSw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791369893; x=1791974693;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=jALpHFmm/OFAU5+//4GxIdjSbZ+7OUdEp+033IIftcs=;
+        b=lUfCSuWymZjyQcKlZdEVkDQ1zmgK2EsjiticG9+hfH9CeOUNphlUE92ArECLdEmz/3
+         iis6o4qvnMTIheyQ/VvfzkbWOPQZGh62XiJVrAyDKiftbY8dA1B6X+MxhVdAQ4jIrSgA
+         kyGoh5T96/3JYkde/Cnp6S/KuWhNQZiO5nLg2F1uFbZG4XknuolDenVMDtwUzuhX+ATP
+         2PeXW6UxCRy/DKOor0ISs2Rv4ac855R6qlMCZMTW9oRmDPaGLEe71dR3V9VTUf+ND5QL
+         SOEbcxSzXnOJqprco2NIxgy0nUAcsK9ETE2AQvq7euv1+OYInt40ysifMTlc/sKGChcw
+         Nq5w==
+X-Forwarded-Encrypted: i=1; AKwUvByD367JTv2leSCL01seyKGYYI1QiCCBnFNMDc45E4PgQ/R8DZmjhT0Ybdfp35TRLO7tQzeVZJTTT6I=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJJnOj0W2oqCXdnxUL7MwcYm9kDFSnvBmEsyXe4I3h2fuiQKoKh
+	7CgdfTxk8o0ncQAE7cQH/l8rcqzwNWpQViua3otO57grUiuoE4XSiA8CiE8CI7Wyaw==
+X-Gm-Gg: AYBFou133Pt16rET63XmW0WlIyxj1ZQ6Vhw9rybrI13wEvZgqIQZnpxvm815ZyRNVUS
+	c3warIsG9Xwu3kPiDd5kqOS9GOqpHzJbSsJ/sL7PZ4iC4711rxTz1iWZy0Aay2T7bc426DjlOBB
+	qAN9NOhYkEkg5hLQZGvU3GY4rePKvJ+XbQhfimpcKvlgXLKq7gQVOzto+hjz4oHTQ/L2UYElZFU
+	j7A3H/I+mj68pqbD5VV0mo2F06CjSqSkcEejdK28xNUGvrz/Ehq2ZIIwo3dA0T8Gd25RGmWkz+A
+	7FGKXg8ZvIBHyYvufI0naqVxNfXZEmCCSuseRPcN6Hbwj4V6o6NjWV9t7vnF5OTtB71NRWk8nnG
+	wVSTJ9iCEQQ7kkOfFAj1u8b/THcNW3WwFcF2uEm0nxokVPaKsNhM4ed3p4CA6hPL/DFsQVIyAnS
+	LyEuFGRcimukYqnyoITvOxtabnKwrPgNolCXUjNS58F0fCHkaLXSG2aFFofC+Q0JcMjM1V1LEE+
+	XOgIB/1Bu1OT5B1VxDHi1fXMrGI6tyFArdjvkbBC63j8M+mdbSXYYMu8JIfLFiqyv1NerN7
+X-Received: by 2002:a5d:484f:0:b0:48b:12f:50da with SMTP id ffacd0b85a97d-48c7277c64amr2878088f8f.23.1791369892847;
+        Wed, 07 Oct 2026 03:44:52 -0700 (PDT)
+Message-ID: <4fa78acf-4de9-48bc-aea8-fed774d80cfa@suse.com>
+Date: Wed, 7 Oct 2026 12:44:51 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/3] xen/riscv: always preset A/D bits in G-stage PTEs
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>, Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ xen-devel@lists.xenproject.org, Baptiste Le Duc <baptiste.le-duc@vates.tech>
+References: <1791215925.8631fc262581453bbf619ec5b2062170.1a10cc9f7c20003f66@vates.tech>
+ <1791216017.8631fc262581453bbf619ec5b2062170.1a10ccb5ec20003f66@vates.tech>
+ <793b6d0d-68ca-4f9d-8ca5-c37f2c013478@suse.com>
+ <4a0b0d62-c312-43c1-908a-fcff7c081149@gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <4a0b0d62-c312-43c1-908a-fcff7c081149@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-4011c0/1791369893-593C4CFC-7282BDCE/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 5429
 
-From: Roger Pau Monné <roger.pau@citrix.com>
+On 07.10.2026 12:03, Oleksii Kurochko wrote:
+> On 10/6/26 5:20 PM, Jan Beulich wrote:
+>> On 05.10.2026 18:00, Baptiste Le Duc wrote:
+>>> A RISC-V implementation can manage the PTE A/D bits in one of two ways:
+>>>      1) Update the 'A' and 'D' PTE bits in hardware (ratified as Svadu).
+>>>      2) Generate a page fault when 'A' and/or 'D' is clear, so that software
+>>>         can set them (ratified as Svade).
+>>>
+>>> p2m_set_pte_flags() presets A/D in G-stage PTEs only when the device tree
+>>> advertises Svade.
+> 
+> According to the code it seems like it is setting A/D bits always 
+> independently on what is DT file.  Baptiste, am I missing something?
+> 
+>   Platforms that use scheme (2) without advertising Svade,
+>>> such as the HiFive Premier P550, then hit guest-page faults that Xen does
+>>> not handle.
+>>
+>> Is that a quirk then (to avoid the word "bug")? Since it's all DT that
+>> conveys available ISA information, why can't the DT for those systems
+>> simply be fixed? Depending on the answer here I might question the
+>> presence of the Fixes: tag below.
+> 
+> I think it can at some point. Let me clarify why "at some point"...
+> 
+> So how the things are working now:
+> 
+> OpenSBI detects the available ISA extensions in two steps:
+> 1. It parses the CPU nodes in the DTB. If a node has the 
+> riscv,isa-extensions property, OpenSBI uses it; otherwise it falls back 
+> to riscv,isa. riscv,isa-extensions describes the same extensions as 
+> riscv,isa, but as a list of strings, which makes it easier to parse. 
+>  From this, OpenSBI builds a per-hart bitmap of available extensions 
+> (basically what we do in Xen). (Platform-specific code can also add 
+> extensions to the bitmap at this step.)
+> 2. It then probes a small, fixed set of extensions (Sstc, Smaia, 
+> Sscofpmf, Smstateen, Ssstateen, Smcntrpmf, Sdtrig) by reading a CSR that 
+> the extension introduces and checking whether the access traps. This is 
+> similar to what we do for Sstc in Xen.
+> 
+> Step 2 only adds extensions to the bitmap. It does not check or clear 
+> the extensions that came from the DT; the only exception is Zicntr, 
+> which is detected purely by probing. So for extensions such as 
+> Svade/Svadu, which have no CSR to probe, the DT is the only source of truth.
+> Now, what OpenSBI does with Svade/Svadu specifically. First, it disables 
+> hardware A/D updating by default, i.e. it clears menvcfg.ADUE:
+> 
+> Now, what OpenSBI does with Svade/Svadu specifically. First, it disables 
+> hardware A/D updating by default, i.e. it clears menvcfg.ADUE:
+> 
+>    /* Disable HW A/D updating by default */
+>    menvcfg_val &= ~ENVCFG_ADUE;
+> 
+> Then it sets ADUE again, depending on which extensions are listed in the 
+> DTB:
+> 
+>    /*
+>     * Assume only Svadu is supported when it is the only extension
+>     * present in the ISA string. Svade is assumed when neither are
+>     * present. When both are present we must default to Svade (see
+>     * the zero reset value of FWFT.PTE_AD_HW_UPDATING).
+>     */
+>    if (!sbi_hart_has_extension(scratch, SBI_HART_EXT_SVADE))
+> 	__set_menvcfg_ext(SBI_HART_EXT_SVADU, ENVCFG_ADUE);
+> 
+> So all OpenSBI does is set or clear menvcfg.ADUE based on what is 
+> mentined in DTB.
+> 
+> So, to answer your original question: yes, this can be fixed just by 
+> updating the DTS. OpenSBI will then configure menvcfg.ADUE according to 
+> the extensions listed there. Note that the logic above is from OpenSBI 
+> v1.9. Versions v1.5–v1.8 behave the same when the DT lists only svadu, 
+> only svade, or both. When neither is listed, they leave ADUE unchanged 
+> instead of clearing it. Versions before v1.5 don't handle Svade/Svadu at 
+> all.
+> 
+> But IIRC such approach was suggested in one of vX and it was rejected 
+> because we can't in Xen be sure that passed DTB is correct and 
+> corresponds to how real h/w is configured as specifically with ADUE bit 
+> in menvcfg we can't read it in HS-mode as an exception will occur as it 
+> is M-mode register. So we have to trust that OpenSBI (or other firmware 
+> will configure the A/D update scheme according to what is mentioned in DTS).
+> 
+> So then basically the question is do we want to rely on that how OpenSBI 
+> configures h/w?
+> 
+> It seems like it could be fine. For example, without support for the 
+> FWFT extension, we can't access or change the menvcfg bit anyway. The 
+> FWFT extension was ratified in 2025, so we have to trust OpenSBI anyway 
+> (or introduce our own extension or port the FWFT extension to an earlier 
+> OpenSBI version) before FWFT is started to be available.
+> 
+> With this explanation would you (Jan) be okay to go with just providing 
+> proper DTS?
 
-Currently, only PV domains have a mapcache, which is domain-wide one.
-In preparation for enabling per-vCPU mapcaches for HVM domains, split
-the accounting out into a struct mapcache, embedded in struct
-mapcache_domain.
+I can't answer this, as I lack details on where the DTS is coming from.
+So far I thought this was a blob handed to Xen (as kind of a module) at
+boot. What you say above makes me uncertain about that. If it is a blob
+as I thought, how difficult is it for people to edit a broken blob, for
+it to correctly reflect their hardware's capabilities?
 
-Introduce has_mapcache(), for whether a vCPU has a mapcache, and
-vcpu_mapcache(), which returns the accounting for a vCPU's mapcache
-and, in *dcache, the domain-wide mapcache whose lock and TLB epoch the
-caller has to take into account.  For now has_mapcache() is
-is_pv_vcpu(), and vcpu_mapcache() always returns the domain's
-accounting.  map_domain_page() and unmap_domain_page() stop repeating
-the is_pv_vcpu() check mapcache_current_vcpu() has made.
+If that's not "very simple", or if there's concern that people may
+object to doing such editing, then I think we could (should) go without
+that. All I then would ask is that the description be clarified a
+little further (clarifying that absence of both extensions is a valid,
+albeit historical situation).
 
-Move map_domain_page()'s handling of the domain-wide lock and TLB epoch
-into three helpers: mapcache_lock() takes the lock and catches up with
-a wrap another vCPU caused, mapcache_new_epoch() starts a new epoch
-after a wrap, and mapcache_unlock() drops the lock.  A per-vCPU
-mapcache can then skip them without map_domain_page() being
-re-indented.
-
-struct mapcache_domain keeps its size (40 bytes, x86_64 debug build),
-and so do the structures containing it.
-
-No functional change.
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
-Signed-off-by: George Dunlap <gwd@xenproject.org>
----
-Changes in v3:
-- New in this version, split out of "x86/hvm: introduce per-vCPU
-  mapcache for vCPU-PT domains" for review.
----
- xen/arch/x86/domain_page.c        | 155 ++++++++++++++++++++----------
- xen/arch/x86/include/asm/domain.h |  19 ++--
- 2 files changed, 116 insertions(+), 58 deletions(-)
-
-diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index 9119f735f5..5d90f77bed 100644
---- a/xen/arch/x86/domain_page.c
-+++ b/xen/arch/x86/domain_page.c
-@@ -18,17 +18,23 @@
- #include <asm/hardirq.h>
- #include <asm/setup.h>
- 
-+/*
-+ * Whether v has a mapcache: PV vCPUs (whose domain-wide mapcache may still be
-+ * disabled, see mapcache_domain_init()).  HVM vCPUs reach everything through
-+ * the directmap, which covers all physical address space for them.
-+ */
-+static bool has_mapcache(const struct vcpu *v)
-+{
-+    return is_pv_vcpu(v);
-+}
-+
- static inline struct vcpu *mapcache_current_vcpu(void)
- {
-     struct vcpu *v = this_cpu(pgtable_vcpu);
-     struct vcpu *curr = current;
- 
--    /*
--     * During early boot pgtable_vcpu is not set, callers must handle NULL.
--     * Non-PV domains don't have a mapcache, the directmap covers all physical
--     * address space.
--     */
--    if ( !v || !is_pv_vcpu(v) )
-+    /* During early boot pgtable_vcpu is not set, callers must handle NULL. */
-+    if ( !v || !has_mapcache(v) )
-         return NULL;
- 
-     /*
-@@ -54,6 +60,55 @@ static inline struct vcpu *mapcache_current_vcpu(void)
-     return ACCESS_ONCE(this_cpu(pgtable_vcpu));
- }
- 
-+/*
-+ * The accounting for v's mapcache: the domain's, with *dcache set so the
-+ * caller takes the domain-wide lock and TLB-epoch machinery into account.
-+ */
-+static struct mapcache *vcpu_mapcache(struct vcpu *v,
-+                                      struct mapcache_domain **dcache)
-+{
-+    struct domain *d = v->domain;
-+
-+    *dcache = &d->arch.pv.mapcache;
-+    return &(*dcache)->cache;
-+}
-+
-+/*
-+ * The domain-wide mapcache's lock and TLB-epoch machinery, taken around
-+ * allocating a slot: the domain's vCPUs share the mapcache's slots, and each
-+ * catches up with a wrap another one caused, flushing its TLB if it has not
-+ * been flushed since.
-+ */
-+static void mapcache_lock(struct mapcache_domain *dcache,
-+                          struct mapcache_vcpu *vcache)
-+{
-+    spin_lock(&dcache->lock);
-+
-+    /* Has some other CPU caused a wrap? We must flush if so. */
-+    if ( unlikely(dcache->epoch != vcache->shadow_epoch) )
-+    {
-+        vcache->shadow_epoch = dcache->epoch;
-+        if ( NEED_FLUSH(this_cpu(tlbflush_time), dcache->tlbflush_timestamp) )
-+        {
-+            perfc_incr(domain_page_tlb_flush);
-+            flush_tlb_local();
-+        }
-+    }
-+}
-+
-+/* A wrap has just flushed this CPU's TLB: start a new epoch. */
-+static void mapcache_new_epoch(struct mapcache_domain *dcache,
-+                               struct mapcache_vcpu *vcache)
-+{
-+    vcache->shadow_epoch = ++dcache->epoch;
-+    dcache->tlbflush_timestamp = tlbflush_current_time();
-+}
-+
-+static void mapcache_unlock(struct mapcache_domain *dcache)
-+{
-+    spin_unlock(&dcache->lock);
-+}
-+
- #define mapcache_l2_entry(e) ((e) >> PAGETABLE_ORDER)
- #define MAPCACHE_L2_ENTRIES (mapcache_l2_entry(MAPCACHE_ENTRIES - 1) + 1)
- #define MAPCACHE_L1ENT(idx) \
-@@ -66,6 +121,7 @@ void *map_domain_page(mfn_t mfn)
-     struct vcpu *v;
-     struct mapcache_domain *dcache;
-     struct mapcache_vcpu *vcache;
-+    struct mapcache *cache;
-     struct vcpu_maphash_entry *hashent;
- 
- #ifdef NDEBUG
-@@ -74,12 +130,12 @@ void *map_domain_page(mfn_t mfn)
- #endif
- 
-     v = mapcache_current_vcpu();
--    if ( !v || !is_pv_vcpu(v) )
-+    if ( !v )
-         return mfn_to_virt(mfn_x(mfn));
- 
--    dcache = &v->domain->arch.pv.mapcache;
-+    cache = vcpu_mapcache(v, &dcache);
-     vcache = &v->arch.pv.mapcache;
--    if ( !dcache->inuse )
-+    if ( !cache->inuse )
-         return mfn_to_virt(mfn_x(mfn));
- 
-     perfc_incr(map_domain_page_count);
-@@ -90,41 +146,30 @@ void *map_domain_page(mfn_t mfn)
-     if ( hashent->mfn == mfn_x(mfn) )
-     {
-         idx = hashent->idx;
--        ASSERT(idx < dcache->entries);
-+        ASSERT(idx < cache->entries);
-         hashent->refcnt++;
-         ASSERT(hashent->refcnt);
-         ASSERT(mfn_eq(l1e_get_mfn(MAPCACHE_L1ENT(idx)), mfn));
-         goto out;
-     }
- 
--    spin_lock(&dcache->lock);
--
--    /* Has some other CPU caused a wrap? We must flush if so. */
--    if ( unlikely(dcache->epoch != vcache->shadow_epoch) )
--    {
--        vcache->shadow_epoch = dcache->epoch;
--        if ( NEED_FLUSH(this_cpu(tlbflush_time), dcache->tlbflush_timestamp) )
--        {
--            perfc_incr(domain_page_tlb_flush);
--            flush_tlb_local();
--        }
--    }
-+    mapcache_lock(dcache, vcache);
- 
--    idx = find_next_zero_bit(dcache->inuse, dcache->entries, dcache->cursor);
--    if ( unlikely(idx >= dcache->entries) )
-+    idx = find_next_zero_bit(cache->inuse, cache->entries, cache->cursor);
-+    if ( unlikely(idx >= cache->entries) )
-     {
-         unsigned long accum = 0, prev = 0;
- 
-         /* /First/, clean the garbage map and update the inuse list. */
--        for ( i = 0; i < BITS_TO_LONGS(dcache->entries); i++ )
-+        for ( i = 0; i < BITS_TO_LONGS(cache->entries); i++ )
-         {
-             accum |= prev;
--            dcache->inuse[i] &= ~xchg(&dcache->garbage[i], 0);
--            prev = ~dcache->inuse[i];
-+            cache->inuse[i] &= ~xchg(&cache->garbage[i], 0);
-+            prev = ~cache->inuse[i];
-         }
- 
--        if ( accum | (prev & BITMAP_LAST_WORD_MASK(dcache->entries)) )
--            idx = find_first_zero_bit(dcache->inuse, dcache->entries);
-+        if ( accum | (prev & BITMAP_LAST_WORD_MASK(cache->entries)) )
-+            idx = find_first_zero_bit(cache->inuse, cache->entries);
-         else
-         {
-             /* Replace a hash entry instead. */
-@@ -144,19 +189,18 @@ void *map_domain_page(mfn_t mfn)
-                     i = 0;
-             } while ( i != MAPHASH_HASHFN(mfn_x(mfn)) );
-         }
--        BUG_ON(idx >= dcache->entries);
-+        BUG_ON(idx >= cache->entries);
- 
-         /* /Second/, flush TLBs. */
-         perfc_incr(domain_page_tlb_flush);
-         flush_tlb_local();
--        vcache->shadow_epoch = ++dcache->epoch;
--        dcache->tlbflush_timestamp = tlbflush_current_time();
-+        mapcache_new_epoch(dcache, vcache);
-     }
- 
--    set_bit(idx, dcache->inuse);
--    dcache->cursor = idx + 1;
-+    set_bit(idx, cache->inuse);
-+    cache->cursor = idx + 1;
- 
--    spin_unlock(&dcache->lock);
-+    mapcache_unlock(dcache);
- 
-     l1e_write(&MAPCACHE_L1ENT(idx), l1e_from_mfn(mfn, __PAGE_HYPERVISOR_RW));
- 
-@@ -170,6 +214,7 @@ void unmap_domain_page(const void *ptr)
-     unsigned int idx;
-     struct vcpu *v;
-     struct mapcache_domain *dcache;
-+    struct mapcache *cache;
-     unsigned long va = (unsigned long)ptr, mfn, flags;
-     struct vcpu_maphash_entry *hashent;
- 
-@@ -179,10 +224,10 @@ void unmap_domain_page(const void *ptr)
-     ASSERT(va >= MAPCACHE_VIRT_START && va < MAPCACHE_VIRT_END);
- 
-     v = mapcache_current_vcpu();
--    ASSERT(v && is_pv_vcpu(v));
-+    ASSERT(v);
- 
--    dcache = &v->domain->arch.pv.mapcache;
--    ASSERT(dcache->inuse);
-+    cache = vcpu_mapcache(v, &dcache);
-+    ASSERT(cache->inuse);
- 
-     idx = PFN_DOWN(va - MAPCACHE_VIRT_START);
-     mfn = l1e_get_pfn(MAPCACHE_L1ENT(idx));
-@@ -205,7 +250,7 @@ void unmap_domain_page(const void *ptr)
-                    hashent->mfn);
-             l1e_write(&MAPCACHE_L1ENT(hashent->idx), l1e_empty());
-             /* /Second/, mark as garbage. */
--            set_bit(hashent->idx, dcache->garbage);
-+            set_bit(hashent->idx, cache->garbage);
-         }
- 
-         /* Add newly-freed mapping to the maphash. */
-@@ -217,7 +262,7 @@ void unmap_domain_page(const void *ptr)
-         /* /First/, zap the PTE. */
-         l1e_write(&MAPCACHE_L1ENT(idx), l1e_empty());
-         /* /Second/, mark as garbage. */
--        set_bit(idx, dcache->garbage);
-+        set_bit(idx, cache->garbage);
-     }
- 
-     local_irq_restore(flags);
-@@ -239,9 +284,9 @@ void mapcache_domain_init(struct domain *d)
-                  2 * PFN_UP(BITS_TO_LONGS(MAPCACHE_ENTRIES) * sizeof(long))) >
-                  MAPCACHE_VIRT_START + (PERDOMAIN_SLOT_MBYTES << 20));
-     bitmap_pages = PFN_UP(BITS_TO_LONGS(MAPCACHE_ENTRIES) * sizeof(long));
--    dcache->inuse = (void *)MAPCACHE_VIRT_END + PAGE_SIZE;
--    dcache->garbage = dcache->inuse +
--                      (bitmap_pages + 1) * PAGE_SIZE / sizeof(long);
-+    dcache->cache.inuse = (void *)MAPCACHE_VIRT_END + PAGE_SIZE;
-+    dcache->cache.garbage = dcache->cache.inuse +
-+                            (bitmap_pages + 1) * PAGE_SIZE / sizeof(long);
- 
-     spin_lock_init(&dcache->lock);
- }
-@@ -249,15 +294,23 @@ void mapcache_domain_init(struct domain *d)
- int mapcache_vcpu_init(struct vcpu *v)
- {
-     struct domain *d = v->domain;
--    struct mapcache_domain *dcache = &d->arch.pv.mapcache;
-+    struct mapcache_domain *dcache;
-+    struct mapcache *cache;
-     unsigned long i;
--    unsigned int ents = d->max_vcpus * MAPCACHE_VCPU_ENTRIES;
--    unsigned int nr = PFN_UP(BITS_TO_LONGS(ents) * sizeof(long));
-+    unsigned int ents, nr;
- 
--    if ( !is_pv_vcpu(v) || !dcache->inuse )
-+    if ( !has_mapcache(v) )
-         return 0;
- 
--    if ( ents > dcache->entries )
-+    cache = vcpu_mapcache(v, &dcache);
-+    if ( !cache->inuse )
-+        /* Domain-wide mapcache disabled (fully direct-mapped build). */
-+        return 0;
-+
-+    ents = d->max_vcpus * MAPCACHE_VCPU_ENTRIES;
-+    nr = PFN_UP(BITS_TO_LONGS(ents) * sizeof(long));
-+
-+    if ( ents > cache->entries )
-     {
-         /* Populate page tables. */
-         int rc = create_perdomain_mapping(v, MAPCACHE_VIRT_START, ents,
-@@ -265,16 +318,16 @@ int mapcache_vcpu_init(struct vcpu *v)
- 
-         /* Populate bit maps. */
-         if ( !rc )
--            rc = create_perdomain_mapping(v, (unsigned long)dcache->inuse,
-+            rc = create_perdomain_mapping(v, (unsigned long)cache->inuse,
-                                           nr, NULL, NIL(struct page_info *));
-         if ( !rc )
--            rc = create_perdomain_mapping(v, (unsigned long)dcache->garbage,
-+            rc = create_perdomain_mapping(v, (unsigned long)cache->garbage,
-                                           nr, NULL, NIL(struct page_info *));
- 
-         if ( rc )
-             return rc;
- 
--        dcache->entries = ents;
-+        cache->entries = ents;
-     }
- 
-     /* Mark all maphash entries as not in use. */
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index a6c6eaf53a..6f5873879e 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -57,6 +57,16 @@ struct trap_bounce {
-     unsigned long eip;
- };
- 
-+struct mapcache {
-+    /* The number of array entries, and a cursor into the array. */
-+    unsigned int entries;
-+    unsigned int cursor;
-+
-+    /* Which mappings are in use, and which are garbage to reap next epoch? */
-+    unsigned long *inuse;
-+    unsigned long *garbage;
-+};
-+
- #define MAPHASH_ENTRIES 8
- #define MAPHASH_HASHFN(pfn) ((pfn) & (MAPHASH_ENTRIES-1))
- #define MAPHASHENT_NOTINUSE ((u32)~0U)
-@@ -73,10 +83,6 @@ struct mapcache_vcpu {
- };
- 
- struct mapcache_domain {
--    /* The number of array entries, and a cursor into the array. */
--    unsigned int entries;
--    unsigned int cursor;
--
-     /* Protects map_domain_page(). */
-     spinlock_t lock;
- 
-@@ -84,9 +90,8 @@ struct mapcache_domain {
-     unsigned int epoch;
-     u32 tlbflush_timestamp;
- 
--    /* Which mappings are in use, and which are garbage to reap next epoch? */
--    unsigned long *inuse;
--    unsigned long *garbage;
-+    /* Accounting of the domain-wide mapcache. */
-+    struct mapcache cache;
- };
- 
- void mapcache_domain_init(struct domain *d);
--- 
-2.55.0
-
+Jan
 
