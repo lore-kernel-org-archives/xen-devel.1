@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7791FCA5FFF
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 07:47:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442000.1659521 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0555BCA5FF1
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 08:04:34 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442016.1659529 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEMN8-0000tk-2X; Wed, 07 Oct 2026 07:47:30 +0000
+	id 1xEMdO-0004WK-O9; Wed, 07 Oct 2026 08:04:18 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442000.1659521; Wed, 07 Oct 2026 07:47:30 +0000
+Received: by outflank-mailman (output) from mailman id 1442016.1659529; Wed, 07 Oct 2026 08:04:18 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEMN7-0000td-VX; Wed, 07 Oct 2026 07:47:29 +0000
-Received: by outflank-mailman (input) for mailman id 1442000;
- Wed, 07 Oct 2026 07:47:29 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xEMN6-0000tX-RC
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 07:47:28 +0000
+	id 1xEMdO-0004WD-LU; Wed, 07 Oct 2026 08:04:18 +0000
+Received: by outflank-mailman (input) for mailman id 1442016;
+ Wed, 07 Oct 2026 08:04:17 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xEMdN-0004W6-JT
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 08:04:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEMN5-008CkA-FK
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 09:47:27 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xEMdN-00BgAJ-0E
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 10:04:17 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac5f90a-8faa-0a2a0a5109dd-0a2a45049c10-14
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 09:47:27 +0200
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ac5fcf1-2eae-0a2a0a5409dd-0a2a4505e886-48
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 10:04:16 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac5f90e-b57f-0a2a45040019-d155dd2de960-3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 09:47:27 +0200
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-48bbb06e746so1952346f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 00:47:27 -0700 (PDT)
+ id 6ac5fd00-4cb1-0a2a45050019-d1558029d44d-3
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 10:04:16 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4a02667ccebso12321325e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 01:04:16 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1808d7b52sm17254795e9.2.2026.10.07.00.47.25
+ 5b1f17b1804b1-4a17f4480a4sm37883315e9.0.2026.10.07.01.04.13
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 07 Oct 2026 00:47:25 -0700 (PDT)
+ Wed, 07 Oct 2026 01:04:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,57 +54,63 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791359246; x=1791964046; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791360256; x=1791965056; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=g7ljQ8QJLZNNdO100l4fN08FN/ZzE/N+9TqclgR6ffQ=;
-        b=ADrB1f/TUvSGXi/fV9VPc6sSvPU+MR1+7eD23kMnylKHzqU2HRggXAwWIsLul3KLH/
-         3TQ2MyssZTVYEfU+++YDwZhb9Q6g8YBq7F9xNd3TkyIvLxB8A5IWIrsQY6NbheSpQkHb
-         ECZ6UHpz6T+obyKuMicwtN94l2qj08qgk3RihBwH+XHbiWQAmKYM3rs9NawSjH2HfL5H
-         6cOBQje4mFCjwyr8HFJemP9zokOTWSxx8rRhwCr4k/VpmgHfnl5dAiePxhSoOkFKXU06
-         KaKI+bSVYxWebB5asT9da4cV/JMia2jRfZqPwWLkWhERYC+T6ozfB7fjePMvKFm8bp8Q
-         HmRg==
+        bh=UFvLNkFrmQ9GmESvDDrjahsnp3/aj+8+4G1fgvZAmw4=;
+        b=FQUN30/nev7yU0hynJjgvyvq3OOf8VWnDYMs8AtEbqqourIm+5qjDksG8HdS0JyavA
+         qmPtFd0JAgz2YMPBMpA6l0GVZBwrw1BToekg/lCmA9vpmGUWGsiIHzdCp39f778URf6f
+         eiI62Kz9Ep8nV+2LlFYIFtA0Y3QRXRb03Di909ICfhJGn4bdzaTiwNIQtUQseVJMiUBi
+         3Yt4GctuE3VoQObiTy8eQw8OfggZ/JVDW/JhhkUF4kFldV+sPb8/9HJO9mp1Gvy5w3ll
+         dQ4U6p4yQdTmn9nzKcmd3eUIGD+k5eFPzFOiuFKKxPnu+NfyK7BiMP+Wvc8B8DDzlb0J
+         AuEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791359246; x=1791964046;
+        d=1e100.net; s=20260707; t=1791360256; x=1791965056;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=g7ljQ8QJLZNNdO100l4fN08FN/ZzE/N+9TqclgR6ffQ=;
-        b=rYwKmNu8H7/lF2CXC+ROteQjWnx3grZVW/CZhqKWSl/Cjwcufgd3Y26dI0DCFLjPY/
-         YCqO+cnPCdU93uqsO1MojB/uBADz/wlsxiyeZ/MHi0U7Z9s3X7pjnPirZe84NyYIsetA
-         w40c8BzZIv58xQin0LRDm2K6giqA0k7PZSzJ/4+ef8azdrwvh4mlBFA7Dtx+n0j3Ygeh
-         m6HoLeKJLsgC4HcMlaJspC7O9SzQ6ft1ImvmaVuOAyxlWZLagZD2fOvXR8r7eiiqI2O0
-         AKYRNVMmGCmTqxkbhLfHr3AvOVz4k9n8oj6YbWxnLC21oIcPxJ1bHfbHDINzlkfkLR+x
-         YcmQ==
-X-Forwarded-Encrypted: i=1; AKwUvByjZws6r4B4w4G6kLQ+0/EcASuF0t+Bdh2VXt0YWEz7YEaYySHjzsl7Cghslo8aB4fJrl6/CKza7Y0=@lists.xenproject.org
-X-Gm-Message-State: AFuF++kebg31aAZQyNcvEvWdp94TrI1FDsPzONW3mLvowSTSICluVBqL
-	743X4LZMp3W247Y7qia0UnzWE5syX8uNx8wWdNbwFM+CiTU6P8sJYZNETyYwA+GS0Yg6VhEkhpO
-	5ZPx3yQ==
-X-Gm-Gg: AYBFou2JqnpfC4wGkIvDxoAXoweHPNlTCvncu89CtDcJ/haF9pVWL/xJJWUOWwh5DU5
-	ExfbhDnhA9f1gDnH41cIf6H+6VtyDd2MHsV8dKT9QUCcJBfI/GSQ//xzWUCV7AmenVS4t5ugaVG
-	8TsMtE4heDBN2tnBW8/8YzHXKXyEGLCvsfch0jJ0EQI/LKXLF8tsqJ+dGWEVq11n5z2BaDxCDjR
-	EO4zZFdXygQ6EVGNc1rHKmeOQpOLoHPi9NabDVf65hNY4aLzuLacRp8+LDZdK/7nwh2mbEZKGeL
-	a9t+GBLjxchTq/xF41DtifI8GRMBrEsFWU6oKPnFq0Vel3nQeJDA7JHzlMHMLPslsXKEQBZSRaS
-	1rRE9HXeI7MyWyHtKFbhyJRnkzHuBdiRnJyvtC5KXL2zpeDJTsAVfN2pmpohOe3wcBZgW3GIPr9
-	QirwxAa5CldwZDaDTMj8iKR3yn3EJYz30sLlVpr4pInylwyhvDOYRMo9F9kLGfDdex2smy2/VYq
-	1JJBGteIqhc3sDZEOp/92uzgYtvyoBqAZeSxEcQQ5PXo+X1PZi6AGDXH0QcVQ==
-X-Received: by 2002:a05:600c:64c6:b0:49f:cbf1:e765 with SMTP id 5b1f17b1804b1-4a18008688cmr17973355e9.0.1791359246584;
-        Wed, 07 Oct 2026 00:47:26 -0700 (PDT)
-Message-ID: <5f5dca6c-92ff-43d8-8dc3-2ee171bd1ca3@suse.com>
-Date: Wed, 7 Oct 2026 09:47:24 +0200
+        bh=UFvLNkFrmQ9GmESvDDrjahsnp3/aj+8+4G1fgvZAmw4=;
+        b=kRnXbwdT8co/LvWlMlszTumwhVGkBNyCK9DwMF97gGfTayi9GEA/gadbbyr/LkOc8A
+         kxQ7d4LqixfIn+obzXGyZ3K6kPeHFYBJzLSpzzxFmx4yvDo762/ni79lvFfS1XcQP+fa
+         Waox0NEYfOms2Y9Mvd2fTuSg9UnKIrVwNTMkf3Tw0EfGSEURjVtrJIedoKOnzI7F6dYH
+         eZTOR8gb4zIeYPBoloZZi0TjJi3BuBTAAfj3ulnrB81dZFfiySL6iNwsGWbuken9eNRW
+         P1UjaGFJ4E5uc235CpGE+2M7PCNQtWZj1/83fxMaGIZDvh5z+7DT4ftK9lGxqXDmhv8g
+         uZCw==
+X-Gm-Message-State: AFuF++m18bUv1xApQjS0tM4VIkJDTsgb4vTUmaOfpdPSOlNTDMUBAX9a
+	dXnetRXaWXZEY3WO/22f4YUj7v/4KPrYRKeKf9q+sK5KXSKw2Qos1Te/jZ5SrG5qyQ==
+X-Gm-Gg: AYBFou1/UYy5v5ScJWOgytkNROLeFin5Ub/81iq+w3W5as5L+huZWSpeMo3gu9i818s
+	i0yZcYNuj5iat7SQ4Mt9U0sUYSXKPslniV7GhfMemInI/w4Pt9D4wMZo+jFDf+xhWh6MKmzkQsx
+	ftSog9bwBZvEDaUmX9uOeR7NMmx6vKbZtwkrZSauXHHyXENJhuhqG3x6wDfS9DcCZ06OjYxDdJA
+	zxrDyAsW/5CV4JSldy3SP5yAI+nQP9VoQITRIAWdeYMPkQczeH5Lp+p2aUUxaX4/nY2/xkDS0gj
+	LpYgbT34m5PIEA990JiVQUpj9i4C9THC1Q0X/47mU1p2FlrdrXyMtFm8yldR0+UkROESV/vXhAz
+	7hUXZod42YPlRoUpxv0a2mpQMkeiH5C6iXyktXoUt5ZewxW58gd7t1IjMUNyR0+QnDrX/+N6JPH
+	YDB+zVuyD8SZ5fiohdkcwS85qhryaChRuHu5tmAjV4ySEr6+4uWA7HH/wjkJy4/WpSXSTl6s9Qn
+	fuF4xRH3sN/3J/aE5NUYAkT21Fa7+UFI5Vb1A/bFmCpT1Lab2f7EADA8kc4b4W3H8UYcFT8pg==
+X-Received: by 2002:a05:600c:4ecb:b0:49f:ff7b:f056 with SMTP id 5b1f17b1804b1-4a180409410mr18598795e9.9.1791360254656;
+        Wed, 07 Oct 2026 01:04:14 -0700 (PDT)
+Message-ID: <2d5f2558-e4f7-43d5-888c-36727519270d@suse.com>
+Date: Wed, 7 Oct 2026 10:04:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/kexec: Annotate more noreturns
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20261006105445.511099-1-andrew.cooper3@citrix.com>
- <3bade5ec-e91d-4181-89d9-de35bd42ce62@suse.com>
- <288b7c58-8375-41a8-9923-a4884830cc40@citrix.com>
+Subject: Re: [PATCH v3 11/39] xen/riscv: implement vCPU context switching
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <6e539cc5ded7f62c4347781785af714840893184.1790779209.git.oleksii.kurochko@gmail.com>
+ <1791305420.8631fc262581453bbf619ec5b2062170.1a1121f8fef0003f66@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,80 +136,346 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <288b7c58-8375-41a8-9923-a4884830cc40@citrix.com>
+In-Reply-To: <1791305420.8631fc262581453bbf619ec5b2062170.1a1121f8fef0003f66@vates.tech>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1791359247-510DDB50-904E4A63/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c201ff/1791360256-F64B42A1-52A83C43/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2884
+X-purgate-size: 13836
 
-On 06.10.2026 21:01, Andrew Cooper wrote:
-> On 06/10/2026 12:26 pm, Jan Beulich wrote:
->> On 06.10.2026 12:54, Andrew Cooper wrote:
->>> kexec_reloc() does not return.  Plumbing this property upwards lets us mark
->>> machine_kexec() and machine_reboot_kexec() noreturn too.
->> The latter already is annotated such (see also next remark) as of 4d2ed2f88a0c.
-> 
-> You missed half of it.  I'm surprised that it didn't create a MISRA
-> violation.
-
-Please clarify what it is that I missed.
-
->>> --- a/xen/arch/x86/machine_kexec.c
->>> +++ b/xen/arch/x86/machine_kexec.c
->>> @@ -142,15 +142,14 @@ void machine_kexec_unload(struct kexec_image *image)
->>>      /* no-op. kimage_free() frees all control pages. */
->>>  }
->>>  
->>> -void machine_reboot_kexec(struct kexec_image *image)
->>> +void noreturn machine_reboot_kexec(struct kexec_image *image)
->>>  {
->>>      BUG_ON(smp_processor_id() != 0);
->>>      smp_send_stop();
->>>      machine_kexec(image);
->>> -    BUG();
->>>  }
->>>  
->>> -void machine_kexec(struct kexec_image *image)
->>> +void noreturn machine_kexec(struct kexec_image *image)
->>>  {
->>>      int i;
->>>      unsigned long reloc_flags = 0;
->> The annotations here aren't needed, are they? I.e. this hunk can shrink
->> to just the removal of the BUG() invocation.
-> 
-> Readers of this code are not psychic.  They shouldn't need to be in
-> order to follow what's going on.
-
-"Psychic"? What are you trying to tell me? There's nothing wrong with
-repeating this kind of annotation on the definition, but there also is
-no need for doing so. Hence as far as I can judge, the change I made
-was self-consistent. If you feel like repeating the annotation is
-wanted, then that's different from you (half implicitly, half
-explicitly) claiming it's _needed_.
-
->>> --- a/xen/include/xen/kexec.h
->>> +++ b/xen/include/xen/kexec.h
->>> @@ -49,7 +49,7 @@ int machine_kexec_load(struct kexec_image *image);
->>>  void machine_kexec_unload(struct kexec_image *image);
->>>  void machine_kexec_reserved(xen_kexec_reserve_t *reservation);
->>>  void noreturn machine_reboot_kexec(struct kexec_image *image);
->>> -void machine_kexec(struct kexec_image *image);
->>> +void noreturn machine_kexec(struct kexec_image *image);
->> The annotations on the declarations are sufficient, with another Misra
->> rule making sure we don't omit the inclusion of the header in the CU
->> having the definitions.
+On 06.10.2026 18:50, Baptiste Le Duc wrote:
+>> Implement context_switch() and the helpers it needs: save/restore of
+>> H/VS CSRs, virtual timer and P2M context, and __context_switch() in
+>> assembly, which switches Xen's own callee-saved state (and thereby the
+>> stack) from prev to next. The virtual interrupt controller state isn't
+>> switched here.
 >>
->> Preferably with the redundant annotations omitted, and with the description
->> slightly adjusted:
->> Reviewed-by: Jan Beulich <jbeulich@suse.com>
-> 
-> I am not inclined to make changes.
+>> Add offsets of struct arch_vcpu's xen_saved_context to asm-offsets.c for
+>> use by __context_switch().
+>>
+>> henvcfg, htimedelta and vsie are 64-bit on both RV32 and RV64, so store
+>> them as uint64_t and access them with csr_{read,write}64(). For that
+>> purpose introduce csr_read64().
+>>
+>> The VMID has to be claimed on the context switch rather than on guest
+>> entry: once p2m_ctxt_switch_to() writes HGATP, speculation can populate
+>> G-stage entries under whatever VMID is written there. This is done by
+>> p2m_vmid_switch_to(), called right before the HGATP write:
+>>
+>>  - VMIDs are a per-hart resource, so the (generation, vmid) pair of a
+>>    vCPU which last ran on another hart is invalidated before a VMID is
+>>    claimed for it. The local flush for a wrapped generation moves along
+>>    with the claim.
+>>  - Nothing is switched in for the idle vCPU, so HGATP keeps pointing at
+>>    the p2m of the domain which ran on the hart last. Track that domain
+>>    per hart (hgatp_owner) and keep the hart in its dirty_cpumask until a
+>>    vCPU of another domain is switched in: p2m_tlb_flush() then goes on
+>>    reaching the hart, and a domain which idles between two runs on the
+>>    same hart keeps its VMIDs.
+>>  - When the owner changes, the hart leaves the old owner's dirty_cpumask
+>>    while its TLB may still hold that domain's G-stage translations, so it
+>>    is moved to a new VMID generation, which makes none of them reachable
+>>    again. It joins the new owner's dirty_cpumask before HGATP is written;
+>>    a full barrier there, paired with one in p2m_tlb_flush(), guarantees
+>>    that a concurrent P2M change either reaches the hart with an
+>>    HFENCE.GVMA or is visible to it before it walks the p2m.
+>>
+>> That leaves p2m_handle_vmenter() with nothing to do, so drop it together
+>> with its call from check_for_pcpu_work(): a VMID is only ever invalidated
+>> while its vCPU isn't running, and p2m_tlb_flush() drops stale entries
+>> with a remote HFENCE.GVMA rather than by retiring VMIDs. Unlike
+>> p2m_handle_vmenter(), HGATP is written unconditionally, as it holds the
+>> G-stage root too, which on a context switch belongs to another domain.
+>>
+>> While at it, fix the inclusion order of headers in asm-offsets.c: Xen's
+>> headers go first, then arch specific ones.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> ---
+>> Changes in v3:
+>>  - Update the commit message.
+>>  - Introduce csr_read64(), as vsie is 64-bit on RV32 too, i.e. has to be
+>>    accessed as the vsie/vsieh pair there.
+>>  - Make vsie declared as uint64_t instead of register_t.
+>>  - Rename the parameter of save_csr_regs() to p and of restore_csr_regs()
+>>    to n, to match their callers ctxt_switch_from()/ctxt_switch_to() and the
+>>    rest of the context switch helpers (p2m_ctxt_switch_{from,to}(),
+>>    vtimer_ctxt_switch_{from,to}()).
+>>  - s/save_csr_regs/csr_regs_ctxt_switch_from/
+>>  - s/restore_csr_regs/csr_regs_ctxt_switch_to/
+>>  - Drop the forward declaration of struct vcpu in <asm/system.h>: the
+>>    return type of __context_switch() already declares the tag at file
+>>    scope.
+>>  - Make the next parameter of __context_switch() pointer-to-const, as
+>>    next's saved context is only read.
+>>  - Extend the comment above __context_switch(): as ra is switched too, it
+>>    doesn't return to its caller, but to where next last called it from
+>>    (next's own context_switch(), or continue_new_vcpu() for a vCPU which
+>>    has never run).
+>>  - Call vtimer_ctxt_switch_to() after csr_regs_ctxt_switch_to(), so that
+>>    ctxt_switch_to() restores state in the reverse order of
+>>    ctxt_switch_from() saving it.
+>>  - Rework p2m's VMID handling in the context switch: track the domain
+>>    whose p2m HGATP points at in a per-CPU hgatp_owner, so a pass through
+>>    idle no longer drops the hart from that domain's dirty_cpumask nor
+>>    burns a VMID generation; move the dirty_cpumask update and the
+>>    invalidation of a VMID brought from another hart from schedule_tail()
+>>    and ctxt_switch_to() to p2m_ctxt_switch_to(), next to the VMID claim;
+>>    add the barriers ordering the dirty_cpumask update against
+>>    p2m_tlb_flush().
+>>  - Initialise arch_vcpu.last_cpu to CPU_NONE instead of NR_CPUS.
+>>  - Mark prev's dirty_cpu clean before ctxt_switch_to() and set current's
+>>    after it.
+>> ---
+>> Changes in v2:
+>>  - New patch.
+>> ---
+>> ---
+>>  xen/arch/riscv/domain.c              | 127 ++++++++++++++++++++++
+>>  xen/arch/riscv/entry.S               |  48 ++++++++
+>>  xen/arch/riscv/include/asm/csr.h     |  13 +++
+>>  xen/arch/riscv/include/asm/domain.h  |  15 ++-
+>>  xen/arch/riscv/include/asm/p2m.h     |   1 -
+>>  xen/arch/riscv/include/asm/system.h  |   2 +
+>>  xen/arch/riscv/p2m.c                 | 157 ++++++++++++++++++---------
+>>  xen/arch/riscv/riscv64/asm-offsets.c |  19 +++-
+>>  xen/arch/riscv/stubs.c               |   5 -
+>>  xen/arch/riscv/traps.c               |   2 -
+>>  10 files changed, 330 insertions(+), 59 deletions(-)
+>>
+>> diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
+>> index fd62296356..f80643e2d8 100644
+>> --- a/xen/arch/riscv/domain.c
+>> +++ b/xen/arch/riscv/domain.c
+>> @@ -11,6 +11,7 @@
+>>  #include <asm/bitops.h>
+>>  #include <asm/cpufeature.h>
+>>  #include <asm/csr.h>
+>> +#include <asm/current.h>
+>>  #include <asm/intc.h>
+>>  #include <asm/mmio.h>
+>>  #include <asm/riscv_encoding.h>
+>> @@ -152,6 +153,8 @@ int arch_vcpu_create(struct vcpu *v)
+>>      if ( is_idle_vcpu(v) )
+>>          return 0;
+>>  
+>> +    v->arch.last_cpu = CPU_NONE;
+>> +
+>>      vcpu_csr_init(v);
+>>  
+>>      if ( (rc = vcpu_vtimer_init(v)) )
+>> @@ -323,6 +326,130 @@ int arch_domain_create(struct domain *d,
+>>      return rc;
+>>  }
+>>  
+>> +static void csr_regs_ctxt_switch_from(struct vcpu *p)
+>> +{
+>> +    /*
+>> +     * There is no need to save these CSRs as only hypervisor writes them in
+>> +     * csr_regs_ctxt_switch_to() and guest can't access them so they shouldn't
+>> +     * be stored here. Keep them commented here just for symmetry with the
+>> +     * restore CSRs register part.
+>> +     *
+>> +     * p->arch.hedeleg = csr_read(CSR_HEDELEG);
+>> +     * p->arch.hideleg = csr_read(CSR_HIDELEG);
+>> +     * p->arch.henvcfg = csr_read64(CSR_HENVCFG);
+>> +     * p->arch.hcounteren = csr_read(CSR_HCOUNTEREN);
+>> +     * p->arch.htimedelta = csr_read64(CSR_HTIMEDELTA);
+>> +     *
+>> +     * if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
+>> +     *     p->arch.hstateen0 = csr_read(CSR_HSTATEEN0);
+>> +     */
+>> +
+>> +    p->arch.hvip = csr_read(CSR_HVIP);
+>> +
+>> +    p->arch.vsstatus = csr_read(CSR_VSSTATUS);
+>> +    p->arch.vsie = csr_read64(CSR_VSIE);
+>> +    p->arch.vstvec = csr_read(CSR_VSTVEC);
+>> +    p->arch.vsscratch = csr_read(CSR_VSSCRATCH);
+>> +    p->arch.vscause = csr_read(CSR_VSCAUSE);
+>> +    p->arch.vstval = csr_read(CSR_VSTVAL);
+>> +    p->arch.vsepc = csr_read(CSR_VSEPC);
+>> +}
+>> +
+>> +static void csr_regs_ctxt_switch_to(struct vcpu *n)
+>> +{
+>> +    csr_write(CSR_HEDELEG, n->arch.hedeleg);
+>> +    csr_write(CSR_HIDELEG, n->arch.hideleg);
+>> +    csr_write(CSR_HVIP, n->arch.hvip);
+>> +    csr_write64(CSR_HENVCFG, n->arch.henvcfg);
+>> +    csr_write(CSR_HCOUNTEREN, n->arch.hcounteren);
+>> +    csr_write64(CSR_HTIMEDELTA, n->arch.htimedelta);
+>> +
+>> +    if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_smstateen) )
+>> +        csr_write(CSR_HSTATEEN0, n->arch.hstateen0);
+>> +
+>> +    csr_write(CSR_VSSTATUS, n->arch.vsstatus);
+>> +    csr_write64(CSR_VSIE, n->arch.vsie);
+>> +    csr_write(CSR_VSTVEC, n->arch.vstvec);
+>> +    csr_write(CSR_VSSCRATCH, n->arch.vsscratch);
+>> +    csr_write(CSR_VSCAUSE, n->arch.vscause);
+>> +    csr_write(CSR_VSTVAL, n->arch.vstval);
+>> +    csr_write(CSR_VSEPC, n->arch.vsepc);
+>> +}
+>> +
+>> +static void ctxt_switch_from(struct vcpu *p)
+>> +{
+>> +    /*
+>> +     * When the idle VCPU is running, Xen will always stay in hypervisor
+>> +     * mode.
+>> +     * Therefore we don't need to save the context of an idle VCPU.
+>> +     */
+>> +    if ( is_idle_vcpu(p) )
+>> +        return;
+>> +
+>> +    p2m_ctxt_switch_from(p);
+>> +
+>> +    vtimer_ctxt_switch_from(p);
+>> +
+>> +    csr_regs_ctxt_switch_from(p);
+>> +}
+>> +
+>> +static void ctxt_switch_to(struct vcpu *n)
+>> +{
+>> +    /*
+>> +     * When the idle VCPU is running, Xen will always stay in hypervisor
+>> +     * mode.
+>> +     * Therefore we don't need to restore the context of an idle VCPU.
+>> +     */
+>> +    if ( is_idle_vcpu(n) )
+>> +        return;
+>> +
+>> +    csr_regs_ctxt_switch_to(n);
+>> +
+>> +    vtimer_ctxt_switch_to(n);
+>> +
+>> +    p2m_ctxt_switch_to(n);
+>> +}
+>> +
+>> +static void schedule_tail(struct vcpu *prev)
+>> +{
+>> +    unsigned int cpu = smp_processor_id();
+>> +
+>> +    ASSERT(prev != current);
+>> +
+>> +    ctxt_switch_from(prev);
+>> +
+>> +    write_atomic(&prev->dirty_cpu, VCPU_CPU_CLEAN);
+>> +
+>> +    ctxt_switch_to(current);
+>> +
+>> +    write_atomic(&current->dirty_cpu, cpu);
+>> +
+>> +    current->arch.last_cpu = cpu;
+>> +
+>> +    /*
+>> +     * sched_context_switched() internally uses a spinlock,
+>> +     * which requires interrupts to be enabled.
+>> +     */
+>> +    local_irq_enable();
+>> +
+>> +    sched_context_switched(prev, current);
+>> +}
+>> +
+>> +void context_switch(struct vcpu *prev, struct vcpu *next)
+>> +{
+>> +    ASSERT(local_irq_is_enabled());
+>> +    ASSERT(prev != next);
+>> +    ASSERT(!vcpu_cpu_dirty(next));
+>> +
+>> +    local_irq_disable();
+>> +
+>> +    set_current(next);
+>> +
+>> +    prev = __context_switch(prev, next);
+>> +
+>> +    schedule_tail(prev);
+>> +}
+>> +
+>>  static void __init __maybe_unused build_assertions(void)
+>>  {
+>>      /*
+>> diff --git a/xen/arch/riscv/entry.S b/xen/arch/riscv/entry.S
+>> index 202a35fb03..017fbb0626 100644
+>> --- a/xen/arch/riscv/entry.S
+>> +++ b/xen/arch/riscv/entry.S
+>> @@ -99,3 +99,51 @@ restore_registers:
+>>  
+>>          sret
+>>  END(handle_trap)
+>> +
+>> +/*
+>> + * struct vcpu *__context_switch(struct vcpu *prev, const struct vcpu *next)
+>> + *
+>> + * This is called on prev's stack, and returns on next's. As ra is
+>> + * switched too, it doesn't return to its caller: it returns to where
+>> + * next last called it from, i.e. into next's own context_switch(), or,
+>> + * for a vCPU which has never run, to continue_new_vcpu() with an empty
+>> + * stack.
+>> + *
+>> + * a0 - prev
+>> + * a1 - next
+>> + *
+>> + * Returns prev in a0
+>> + */
+>> +FUNC(__context_switch)
+>> +        REG_S   s0, VCPU_XEN_SAVED_CONTEXT_S0(a0)
+>> +        REG_S   s1, VCPU_XEN_SAVED_CONTEXT_S1(a0)
+>> +        REG_S   s2, VCPU_XEN_SAVED_CONTEXT_S2(a0)
+>> +        REG_S   s3, VCPU_XEN_SAVED_CONTEXT_S3(a0)
+>> +        REG_S   s4, VCPU_XEN_SAVED_CONTEXT_S4(a0)
+>> +        REG_S   s5, VCPU_XEN_SAVED_CONTEXT_S5(a0)
+>> +        REG_S   s6, VCPU_XEN_SAVED_CONTEXT_S6(a0)
+>> +        REG_S   s7, VCPU_XEN_SAVED_CONTEXT_S7(a0)
+>> +        REG_S   s8, VCPU_XEN_SAVED_CONTEXT_S8(a0)
+>> +        REG_S   s9, VCPU_XEN_SAVED_CONTEXT_S9(a0)
+>> +        REG_S   s10, VCPU_XEN_SAVED_CONTEXT_S10(a0)
+>> +        REG_S   s11, VCPU_XEN_SAVED_CONTEXT_S11(a0)
+>> +        REG_S   sp, VCPU_XEN_SAVED_CONTEXT_SP(a0)
+>> +        REG_S   ra, VCPU_XEN_SAVED_CONTEXT_RA(a0)
+>> +
+>> +        REG_L   s0, VCPU_XEN_SAVED_CONTEXT_S0(a1)
+>> +        REG_L   s1, VCPU_XEN_SAVED_CONTEXT_S1(a1)
+>> +        REG_L   s2, VCPU_XEN_SAVED_CONTEXT_S2(a1)
+>> +        REG_L   s3, VCPU_XEN_SAVED_CONTEXT_S3(a1)
+>> +        REG_L   s4, VCPU_XEN_SAVED_CONTEXT_S4(a1)
+>> +        REG_L   s5, VCPU_XEN_SAVED_CONTEXT_S5(a1)
+>> +        REG_L   s6, VCPU_XEN_SAVED_CONTEXT_S6(a1)
+>> +        REG_L   s7, VCPU_XEN_SAVED_CONTEXT_S7(a1)
+>> +        REG_L   s8, VCPU_XEN_SAVED_CONTEXT_S8(a1)
+>> +        REG_L   s9, VCPU_XEN_SAVED_CONTEXT_S9(a1)
+>> +        REG_L   s10, VCPU_XEN_SAVED_CONTEXT_S10(a1)
+>> +        REG_L   s11, VCPU_XEN_SAVED_CONTEXT_S11(a1)
+>> +        REG_L   sp, VCPU_XEN_SAVED_CONTEXT_SP(a1)
+>> +        REG_L   ra, VCPU_XEN_SAVED_CONTEXT_RA(a1)
+>> +
+>> +        ret
+>> +END(__context_switch)
 
-Well, so be it then. Yet it again indicates that in certain situations
-you're simply not willing to accept that there may be (valid)
-viewpoints other than yours. Or, if you think those aren't valid, make
-clear what's objectively wrong.
+First: None of the reply context above is relevant in your reply. Why
+did you keep it? As indicated before, this way you make every reader
+scroll through many lines, until they would finally find the first
+piece of the actual reply. (I've deliberately kept it all, to show
+the percentage of the overall reply that this occupied.)
+
+>> --- a/xen/arch/riscv/include/asm/csr.h
+>> +++ b/xen/arch/riscv/include/asm/csr.h
+>> @@ -40,6 +40,13 @@
+>>      csr_write(csr ## H, v_ >> 32);  \
+>>  })
+>>  
+>> +#define csr_read64(csr)                 \
+>> +({                                      \
+>> +    uint64_t v_ = csr_read(csr ## H);   \
+> This violates Misra 20.12 rule (docs/misra/rules.rst) as we use macro
+> parameter `csr` as an operand of ##, while it could be expanded as a
+> macro (e.g. csr_read64(CSR_HENVCFG)).
+
+Yes. But: You say nothing as to a possible (and plausible) different
+way of coding this. Imo the best way to deal with this is by a
+deviation (iirc we already have a few), yet I don't think we're going
+to add deviations for RISC-V until we actually are about to routinely
+scan the code.
 
 Jan
 
