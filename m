@@ -4,43 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7D296CA5FFC
-	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 11:40:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1442240.1659826 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1CE4FCA5FF1
+	for <xen-devel@archiver.kernel.org>; Wed,  7 Oct 2026 11:59:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1442259.1659836 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEQ0b-0007pD-Fl; Wed, 07 Oct 2026 11:40:29 +0000
+	id 1xEQIl-0001k8-2D; Wed, 07 Oct 2026 11:59:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1442240.1659826; Wed, 07 Oct 2026 11:40:29 +0000
+Received: by outflank-mailman (output) from mailman id 1442259.1659836; Wed, 07 Oct 2026 11:59:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEQ0b-0007p6-DB; Wed, 07 Oct 2026 11:40:29 +0000
-Received: by outflank-mailman (input) for mailman id 1442240;
- Wed, 07 Oct 2026 11:40:28 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xEQ0a-0007p0-8O
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 11:40:28 +0000
+	id 1xEQIk-0001k1-V2; Wed, 07 Oct 2026 11:59:14 +0000
+Received: by outflank-mailman (input) for mailman id 1442259;
+ Wed, 07 Oct 2026 11:59:13 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1163b4a7d0003f66@swg.vates.tech>)
+ id 1xEQIi-0001jt-RW
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 11:59:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEQ0Z-00959A-Ep
- for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 13:40:27 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ac62f9f-e002-0a2a0a5209dd-0a2a4506d762-30
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 13:40:27 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ac62fab-195a-0a2a45060019-d1558035b470-3
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 13:40:27 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-4a021c809e3so17362535e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 04:40:27 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a178c33091sm146321435e9.4.2026.10.07.04.40.25
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 07 Oct 2026 04:40:26 -0700 (PDT)
+ id 1xEQIh-00CQ4C-QS
+ for xen-devel@lists.xenproject.org; Wed, 07 Oct 2026 13:59:11 +0200
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1163b4a7d0003f66@swg.vates.tech>)
+ id 6ac6340e-2eae-0a2a0a5409dd-0a2a4507ed40-8
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 13:59:11 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1163b4a7d0003f66@swg.vates.tech>)
+ id 6ac6340f-b4ea-0a2a45070019-b9ff1c22af61-3
+ for <xen-devel@lists.xenproject.org>; Wed, 07 Oct 2026 13:59:11 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1163b4a7d0003f66.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Wed, 07 Oct 2026 11:59:06 +0000
+Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
+ (Authenticated sender: teddy.astie)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 02EA782388;
+ Wed,  7 Oct 2026 13:59:05 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,52 +58,33 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791373227; x=1791978027; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=fxQn707ALc/LL3QUmDsNHwOoEljnAO3jUsJRBgN2r8U=;
-        b=Pf9f1r8YKNAu/4c6v1C1FmDgiW54idOe95XTC4cdv5NLFBDr/Kp3vbXjohlUK/z69m
-         Hcac7t/eEA4Zm04nYeWOAPB14yncHQMuULeGTb7jOEMRLfAK2YFe5Dq4sjoKJP3Wp1wB
-         bCA58KXPzn22BaFMMKdUdfu5b8nFXieP9EtIIFVXOY39Aha2iLs5KlgGnRehI0k5pXmH
-         kCVpO1nugS9uQXa/df7mL0tRoeK3pFnzuraMhR9zzG/se5hqfPQt9gm54lZATzUB508w
-         XRPzACYt4njkucKTVzuH8lFDYwRKn9hOiWc2XqtkS46m9ovFfc+QnOTdfkGKr5csUAfk
-         m8Bw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791373227; x=1791978027;
-        h=content-transfer-encoding:content-type:in-reply-to:content-language
-         :references:cc:to:from:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=fxQn707ALc/LL3QUmDsNHwOoEljnAO3jUsJRBgN2r8U=;
-        b=DIQPF7QU6wgFrmL47o6j0z+CdKX370N77Y5nY+DGZ9HF2fUIcmTak1oNJcT0gHpQj4
-         FQ5Ik+IMkE8NADF505lktixZNNKnuMu4/qnvq0nwd2vLLE1T4AMxKpCln3RT4xYruz2g
-         YUz9+Xv5AAC6MZxC00GlYshy5AixrvM0/8MO9LIUaVtLwEnWHmhdkID/Mfn24cQCoOMD
-         aVdrE4SNhH56P5Y79yY+OtoG2RsaVfzE5/tD9hsfGwn0Nx/RYmly1uH7SyR0np7IzCkp
-         Zxpp0JSXp2ieECvTS5sGelzar05hzCw/hdWjIKQpzfNTXKwlKQWkGu1Ki/KfgudvE/on
-         jTyA==
-X-Forwarded-Encrypted: i=1; AKwUvBzMdsxuZQy2jf9FEUoQ8fvhl+dVulZyBbqUt9/PAyppVK+0xA7eDUhb726j65KEQHg3HA3pJ+zqDg0=@lists.xenproject.org
-X-Gm-Message-State: AFuF++l/ynSbgfuqR0Pgm6qPFQBLIjvctMz2R0noRqSN9oUFOk2/P4QH
-	pHGQxtexa+Ftx1m657RTa/o3088vRy8YZWSgzyW7NI/kchqGeCRsCsqf
-X-Gm-Gg: AYBFou2zKPIWjVqtNfrkNdg5qfcg1LQBgCBiJiLbP9wHcuzPmSS7p8ptad2mNOrxZDc
-	P/CxyjMMF0xH04VAVtrM/j5P+TEt8lWDnoWnTWri8hZiJb6iXtiZkar1lcHCLCLTaZHH7EkI4nH
-	3Klx0hoaz2QYuMmvsfRf9ZOneBkzOHwdxWqAqS72nhyLagTASwtJ334zA3v018SI41L4Awg0D5E
-	PIzxuUrMVQToI6YcNHTs3qMkyGxbhIFAjJyJVHO00epnfk4CqFoU90c4Zrrm4+J9WzRhNsWIWrY
-	viTgMXSBWp/4+6QDwxYXBQ0qwU4JtbAZgu7laEvpC243Z+SAUYiKLRwqfnvcwcMUWWk8sDjqKk9
-	Zj3L2Fj1zLKhE7LPtDb8MIFRKRidnTEpF6a/kPnZSLyWqmZfn809Jx0fskf2+BWRDu8/guwGovq
-	RaOmVd+t97FhmM5R7vWgxKNEQgl2VLmGuaLj+y9Jg5W6VTnV/zxlwPpdTV083jgGwvxGc+t0XjX
-	J0xsKEfJto2nX2DrmGqJY0LG3Qx1UfpTTZebLCp2EpNDjcdOA==
-X-Received: by 2002:a05:600c:818c:b0:499:b65e:49c9 with SMTP id 5b1f17b1804b1-4a180419643mr26080295e9.10.1791373226729;
-        Wed, 07 Oct 2026 04:40:26 -0700 (PDT)
-Message-ID: <eafdbdc4-c616-4345-888b-70c4c39ed039@gmail.com>
-Date: Wed, 7 Oct 2026 13:40:25 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=tVc3zRgmDIOuP2JV7CZKp5R4gCp9SFNVyZHsnrd3Wm0=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=P9SNCCFHUf4O5jdzEceiSPbVNG+Q2SCLt6+RkhI5zexCt7g/pTX27/oC//FT8bFjlhLRDnKxs
+ PsSJfigDTw3NrtVtcy3Zsc4eoKfLCnKiaUceNwQ/0Q9TrL4KSoLcLu5rN51FthirjXiB+ryj7Br
+ sLbqAPKwS86IuewUUDij9z96wpzINKYX+geuZnUvz4ZsuNeL3G58bNTHodp6xYZ0ti4NcqACnHz
+ FYOuiGNzuJd3V53YjqP5H0PxtuwRsAyoXWTTY5E9XE6nhy98U828itdjXIUCDMhgA/T3mR0Ynoi
+ K+qKRviseT1qtJI2wXBiBb5kuSJmc0q2pY8YJ2KtUr5A==
+X-Zone-Loop: d688e437cafd28e1079eb9061beb36ad0b68a70c8241
+x-campaign-type: default
+x-transaction-id: 6777d653-77e1-4c36-b90d-f657b87c2ffd
+x-swg-uid: 01-fb820b22-1ddf-4d79-80bb-e7d86c0231b4
+X-Mailer: Sweego
+Message-ID:
+ <1791374346.8631fc262581453bbf619ec5b2062170.1a1163b4a7d0003f66@vates.tech>
+x-swg-bid: 1791374346.8631fc262581453bbf619ec5b2062170.1a1163b4a7d0003f66
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Wed, 7 Oct 2026 13:59:04 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v5 1/3] xen/riscv: always preset A/D bits in G-stage PTEs
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-To: Jan Beulich <jbeulich@suse.com>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Jan Beulich <jbeulich@suse.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
@@ -113,188 +100,180 @@ References: <1791215925.8631fc262581453bbf619ec5b2062170.1a10cc9f7c20003f66@vate
  <4fa78acf-4de9-48bc-aea8-fed774d80cfa@suse.com>
  <a4db81fc-03ec-4521-8424-7c9486ec9be2@gmail.com>
 Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+Autocrypt: addr=teddy.astie@vates.tech; keydata=
+ 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
+ x9fhaZEsniw8/bYgC3igkk5YJiOa
 In-Reply-To: <a4db81fc-03ec-4521-8424-7c9486ec9be2@gmail.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------yK1TrqNChZZZM4x4ILmMMtCG"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1791374346259
+X-purgate-ID: tlsNG-ef75cf/1791374351-364DBAE4-575C653C/0/0
+X-purgate-type: clean
+X-purgate-size: 8178
+
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------yK1TrqNChZZZM4x4ILmMMtCG
+Content-Type: multipart/mixed; boundary="------------l1VK03TfshMeovI68YfiQXRP";
+ protected-headers="v1"; hp="clear"
+Message-ID: <9f170b09-7868-4352-adc2-df22f439e819@vates.tech>
+Date: Wed, 7 Oct 2026 13:59:04 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v5 1/3] xen/riscv: always preset A/D bits in G-stage PTEs
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>, Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ xen-devel@lists.xenproject.org, Baptiste Le Duc <baptiste.le-duc@vates.tech>
+References: <1791215925.8631fc262581453bbf619ec5b2062170.1a10cc9f7c20003f66@vates.tech>
+ <1791216017.8631fc262581453bbf619ec5b2062170.1a10ccb5ec20003f66@vates.tech>
+ <793b6d0d-68ca-4f9d-8ca5-c37f2c013478@suse.com>
+ <4a0b0d62-c312-43c1-908a-fcff7c081149@gmail.com>
+ <4fa78acf-4de9-48bc-aea8-fed774d80cfa@suse.com>
+ <a4db81fc-03ec-4521-8424-7c9486ec9be2@gmail.com>
+Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+Autocrypt: addr=teddy.astie@vates.tech; keydata=
+ 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
+ x9fhaZEsniw8/bYgC3igkk5YJiOa
+In-Reply-To: <a4db81fc-03ec-4521-8424-7c9486ec9be2@gmail.com>
+
+--------------l1VK03TfshMeovI68YfiQXRP
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1791373227-FD80D77B-B8306C4D/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 8716
+Content-Transfer-Encoding: base64
 
+TGUgMDcvMTAvMjAyNiDDoCAxMzozNSwgT2xla3NpaSBLdXJvY2hrbyBhIMOpY3JpdMKgOg0K
+PiBBbHNvIEkgYW0gbG9va2luZyBhdCBoZW52Y2ZnIHJlZ2lzdGVyIHdoaWNoIHdlIGNvdWxk
+IGFjY2VzcyBpbiBIUy1tb2RlIA0KPiBhbmQgaXQgYWxzbyBoYXMgQURVRSBiaXQgYW5kIHRo
+ZSBkZXNjcmlwdGlvbiBmb3IgaXQgaXMgdGhlIGZvbGxvd2luZzoNCj4gYGBgDQo+IElmIHRo
+ZSBTdmFkdSBleHRlbnNpb24gaXMgaW1wbGVtZW50ZWQsIHRoZSBBRFVFIGJpdCBjb250cm9s
+cyB3aGV0aGVyIA0KPiBoYXJkd2FyZSB1cGRhdGluZyBvZiBQVEUgQS9EIGJpdHMgaXMgZW5h
+YmxlZCBmb3IgVlMtc3RhZ2UgYWRkcmVzcyANCj4gdHJhbnNsYXRpb24uIFdoZW4gQURVRT0x
+LCBoYXJkd2FyZSB1cGRhdGluZyBvZiBQVEUgQS9EIGJpdHMgaXMgZW5hYmxlZCANCj4gZHVy
+aW5nIFZTLXN0YWdlIGFkZHJlc3MgdHJhbnNsYXRpb24sIGFuZCB0aGUgaW1wbGVtZW50YXRp
+b24gYmVoYXZlcyBhcyANCj4gdGhvdWdoIHRoZSBTdmFkZSBleHRlbnNpb24gd2VyZSBub3Qg
+aW1wbGVtZW50ZWQgZm9yIFZTLW1vZGUgYWRkcmVzcyANCj4gdHJhbnNsYXRpb24uIFdoZW4g
+QURVRT0wLCB0aGUgaW1wbGVtZW50YXRpb24gYmVoYXZlcyBhcyB0aG91Z2ggU3ZhZGUgDQo+
+IHdlcmUgaW1wbGVtZW50ZWQgZm9yIFZTLXN0YWdlIGFkZHJlc3MgdHJhbnNsYXRpb24uIElm
+IFN2YWR1IGlzIG5vdCANCj4gaW1wbGVtZW50ZWQsIEFEVUUgaXMgcmVhZC1vbmx5IHplcm8N
+Cj4gYGBgDQo+IA0KPiBTbywgYXQgc29tZSBwb2ludCwgd2UgY291bGQgdmVyaWZ5IGhvdyBP
+cGVuU0JJIGNvbmZpZ3VyZWQgdGhlIGhhcmR3YXJlIA0KPiBhbmQgY29tcGFyZSBpdCB3aXRo
+IHdoYXQgaXMgc3BlY2lmaWVkIGluIHRoZSBEVFMgZmlsZS4NCj4gDQo+IFRoZSBvbmx5IHBy
+b2JsZW0gaXMgaG93IHRvIGludGVycHJldCB0aGlzIHBhcnQ6IOKAnElmIFN2YWR1IGlzIG5v
+dCANCj4gaW1wbGVtZW50ZWQsIEFEVUUgaXMgcmVhZC1vbmx5IHplcm8u4oCdIFRoZSBzcGVj
+IGRvZXMgbm90IGV4cGxpY2l0bHkgc3RhdGUgDQo+IHRoYXQgU3ZhZGUgd2lsbCBiZSB1c2Vk
+IGluIHRoaXMgY2FzZSwgYnV0IGxvZ2ljYWxseSwgaXQgc2VlbXMgdGhhdCBpZiANCj4gU3Zh
+ZHUgaXMgbm90IGltcGxlbWVudGVkLCB0aGUgaW1wbGVtZW50YXRpb24gaGFzIG5vIG90aGVy
+IGNob2ljZSBidXQgdG8gDQo+IHByb3ZpZGUgU3ZhZGUgYW5kIHNvIGJhc2ljYWxseSB3ZSBj
+b3VsZCBkZXRlY3QgaWYgU3ZhZGUgaXMgdXNlZCBiYXNlZCANCj4gb25seSBvbiBBRFVFIGJp
+dC4NCj4gDQoNClRvIG15IHVuZGVyc3RhbmRpbmcsIHdoZW4gIVN2YWRlICYmICFTdmFkdSBB
+RFVFIGJpdCBkb2Vzbid0IGV4aXN0IGFuZCBpcyANCk1CWi4gVGhhdCBkb2Vzbid0IGltcGx5
+IFN2YWRlIHNlbWFudGljcyBtdXN0IGJlIHVuY29uZGl0aW9uYWxseSBhcHBsaWVkLCANCmJ1
+dCB0aGUgY29udHJhcnkgKG90aGVyd2lzZSwgaXQgd291bGQgY29udHJhZGljdCB0aGUgbWFp
+biBzcGVjKS4NCg0KQUlVSSwgU3ZhZHUgJiYgIVN2YWRlIGJlaGF2ZXMgdGhlIHNhbWUgYXMg
+U3ZhZHUgJiYgU3ZhZGUsIGFzIGluIHRoaXMgDQpjYXNlLCBBRFVFIG1hbmRhdGUgdGhlIFBU
+RSBBL0Qgc2NoZW1lIHRoYXQgaXMgZWZmZWN0aXZlLg0KSWYgYnkgZGVmYXVsdCBBRFVFIGlz
+IDAsIHRoZW4gd2UgaGF2ZSBTdmFkZSBzZW1hbnRpY3MgYnkgZGVmYXVsdCBpbiANCnByYWN0
+aWNlLCBidXQgdGhhdCBjYW4gKCptYXliZSopIGJlIG9wdGVkLW91dC4NCg0KSXQgY291bGQg
+YmUgaW50ZXJlc3RpbmcgdG8gY2hlY2sgaWYgdGhlIFA1NTAgaGFzIFN2YWR1ICYmICFTdmFk
+ZSwgYXMgaXQgDQptYXkgZXhwbGFpbiB3aHkgU3ZhZGUgc2VtYW50aWNzIGFyZSBlZmZlY3Rp
+dmUgd2hpbGUgbm90IGhhdmluZyBTdmFkZSANCmV4dGVuc2lvbi4NCg0KPiBJZiB3ZSBhY2Nl
+cHQgdGhpcyBhc3N1bXB0aW9uLCB3ZSBjb3VsZCBmdWxseSB2ZXJpZnksIGluIEhTLW1vZGUs
+IGJvdGggDQo+IHdoYXQgaXMgc3BlY2lmaWVkIGluIHRoZSBEVFMgYW5kIGhvdyBPcGVuU0JJ
+IGNvbmZpZ3VyZWQgdGhlIGhhcmR3YXJlLiANCj4gVGhpcyB3b3VsZCBhbGxvdyB1cyB0byBy
+ZXF1aXJlIHVzZXJzIHRvIHByb3ZpZGUgYSBwcm9wZXIgRFRTIHdpdGggdGhlIEEvIA0KPiBE
+IGJpdHMgdXBkYXRlIHNjaGVtZSBjb3JyZWN0bHkgc3BlY2lmaWVkLg0KPiANCj4gfiBPbGVr
+c2lpDQoNClRlZGR5DQo=
 
+--------------l1VK03TfshMeovI68YfiQXRP--
 
-On 10/7/26 1:32 PM, Oleksii Kurochko wrote:
-> 
-> 
-> On 10/7/26 12:44 PM, Jan Beulich wrote:
->> On 07.10.2026 12:03, Oleksii Kurochko wrote:
->>> On 10/6/26 5:20 PM, Jan Beulich wrote:
->>>> On 05.10.2026 18:00, Baptiste Le Duc wrote:
->>>>> A RISC-V implementation can manage the PTE A/D bits in one of two 
->>>>> ways:
->>>>>       1) Update the 'A' and 'D' PTE bits in hardware (ratified as 
->>>>> Svadu).
->>>>>       2) Generate a page fault when 'A' and/or 'D' is clear, so 
->>>>> that software
->>>>>          can set them (ratified as Svade).
->>>>>
->>>>> p2m_set_pte_flags() presets A/D in G-stage PTEs only when the 
->>>>> device tree
->>>>> advertises Svade.
->>>
->>> According to the code it seems like it is setting A/D bits always
->>> independently on what is DT file.  Baptiste, am I missing something?
->>>
->>>    Platforms that use scheme (2) without advertising Svade,
->>>>> such as the HiFive Premier P550, then hit guest-page faults that 
->>>>> Xen does
->>>>> not handle.
->>>>
->>>> Is that a quirk then (to avoid the word "bug")? Since it's all DT that
->>>> conveys available ISA information, why can't the DT for those systems
->>>> simply be fixed? Depending on the answer here I might question the
->>>> presence of the Fixes: tag below.
->>>
->>> I think it can at some point. Let me clarify why "at some point"...
->>>
->>> So how the things are working now:
->>>
->>> OpenSBI detects the available ISA extensions in two steps:
->>> 1. It parses the CPU nodes in the DTB. If a node has the
->>> riscv,isa-extensions property, OpenSBI uses it; otherwise it falls back
->>> to riscv,isa. riscv,isa-extensions describes the same extensions as
->>> riscv,isa, but as a list of strings, which makes it easier to parse.
->>>   From this, OpenSBI builds a per-hart bitmap of available extensions
->>> (basically what we do in Xen). (Platform-specific code can also add
->>> extensions to the bitmap at this step.)
->>> 2. It then probes a small, fixed set of extensions (Sstc, Smaia,
->>> Sscofpmf, Smstateen, Ssstateen, Smcntrpmf, Sdtrig) by reading a CSR that
->>> the extension introduces and checking whether the access traps. This is
->>> similar to what we do for Sstc in Xen.
->>>
->>> Step 2 only adds extensions to the bitmap. It does not check or clear
->>> the extensions that came from the DT; the only exception is Zicntr,
->>> which is detected purely by probing. So for extensions such as
->>> Svade/Svadu, which have no CSR to probe, the DT is the only source of 
->>> truth.
->>> Now, what OpenSBI does with Svade/Svadu specifically. First, it disables
->>> hardware A/D updating by default, i.e. it clears menvcfg.ADUE:
->>>
->>> Now, what OpenSBI does with Svade/Svadu specifically. First, it disables
->>> hardware A/D updating by default, i.e. it clears menvcfg.ADUE:
->>>
->>>     /* Disable HW A/D updating by default */
->>>     menvcfg_val &= ~ENVCFG_ADUE;
->>>
->>> Then it sets ADUE again, depending on which extensions are listed in the
->>> DTB:
->>>
->>>     /*
->>>      * Assume only Svadu is supported when it is the only extension
->>>      * present in the ISA string. Svade is assumed when neither are
->>>      * present. When both are present we must default to Svade (see
->>>      * the zero reset value of FWFT.PTE_AD_HW_UPDATING).
->>>      */
->>>     if (!sbi_hart_has_extension(scratch, SBI_HART_EXT_SVADE))
->>>     __set_menvcfg_ext(SBI_HART_EXT_SVADU, ENVCFG_ADUE);
->>>
->>> So all OpenSBI does is set or clear menvcfg.ADUE based on what is
->>> mentined in DTB.
->>>
->>> So, to answer your original question: yes, this can be fixed just by
->>> updating the DTS. OpenSBI will then configure menvcfg.ADUE according to
->>> the extensions listed there. Note that the logic above is from OpenSBI
->>> v1.9. Versions v1.5–v1.8 behave the same when the DT lists only svadu,
->>> only svade, or both. When neither is listed, they leave ADUE unchanged
->>> instead of clearing it. Versions before v1.5 don't handle Svade/Svadu at
->>> all.
->>>
->>> But IIRC such approach was suggested in one of vX and it was rejected
->>> because we can't in Xen be sure that passed DTB is correct and
->>> corresponds to how real h/w is configured as specifically with ADUE bit
->>> in menvcfg we can't read it in HS-mode as an exception will occur as it
->>> is M-mode register. So we have to trust that OpenSBI (or other firmware
->>> will configure the A/D update scheme according to what is mentioned 
->>> in DTS).
->>>
->>> So then basically the question is do we want to rely on that how OpenSBI
->>> configures h/w?
->>>
->>> It seems like it could be fine. For example, without support for the
->>> FWFT extension, we can't access or change the menvcfg bit anyway. The
->>> FWFT extension was ratified in 2025, so we have to trust OpenSBI anyway
->>> (or introduce our own extension or port the FWFT extension to an earlier
->>> OpenSBI version) before FWFT is started to be available.
->>>
->>> With this explanation would you (Jan) be okay to go with just providing
->>> proper DTS?
->>
->> I can't answer this, as I lack details on where the DTS is coming from.
->> So far I thought this was a blob handed to Xen (as kind of a module) at
->> boot. What you say above makes me uncertain about that. If it is a blob
->> as I thought, how difficult is it for people to edit a broken blob, for
->> it to correctly reflect their hardware's capabilities?
-> 
-> It depends...
-> 
-> So usually the things are going in this way products like U-boot, Linux 
-> has dts in its code source base and then these DTSes are compiled by 
-> build system to DTB, and then this DTB is put to the place where U-boot, 
-> Linux can reach it, or U-boot provides through a register DTB to Linux.
-> Sometimes it also could be a case when what is U-boot/Linux source code 
-> base is taken as a base and then a new dts is provided  based on them, 
-> for example, to choose what h/w should be enabled/disabled or probably 
-> for some specific board some device is connected to a different pin and 
-> so DTS will be needed to be updated, and so on...
-> 
->  From one side, it could be super easy as DTB (blob) could be taken by 
-> anyone then just decompile (it using a default dtc compiler) to DTS, 
-> update the necessary properties and then updated DTS (using dtc compiler 
-> again) compile back to DTB.
-> 
-> But on the other side it could be some kind of secure boot where all the 
-> binaries are signed and then it will be pretty hard to decompile and 
-> compile DTB with the same sign....
-> 
->>
->> If that's not "very simple", or if there's concern that people may
->> object to doing such editing, then I think we could (should) go without
->> that. All I then would ask is that the description be clarified a
->> little further (clarifying that absence of both extensions is a valid,
->> albeit historical situation).
->>
-> 
-> Also I am looking at henvcfg register which we could access in HS-mode 
-> and it also has ADUE bit and the description for it is the following:
-> ```
-> If the Svadu extension is implemented, the ADUE bit controls whether 
-> hardware updating of PTE A/D bits is enabled for VS-stage address 
-> translation. When ADUE=1, hardware updating of PTE A/D bits is enabled 
-> during VS-stage address translation, and the implementation behaves as 
-> though the Svade extension were not implemented for VS-mode address 
-> translation. When ADUE=0, the implementation behaves as though Svade 
-> were implemented for VS-stage address translation. If Svadu is not 
-> implemented, ADUE is read-only zero
-> ```
-> 
-> So, at some point, we could verify how OpenSBI configured the hardware 
-> and compare it with what is specified in the DTS file.
-> 
-> The only problem is how to interpret this part: “If Svadu is not 
-> implemented, ADUE is read-only zero.” The spec does not explicitly state 
-> that Svade will be used in this case, but logically, it seems that if 
-> Svadu is not implemented, the implementation has no other choice but to 
-> provide Svade and so basically we could detect if Svade is used based 
-> only on ADUE bit.
-> 
-> If we accept this assumption, we could fully verify, in HS-mode, both 
-> what is specified in the DTS and how OpenSBI configured the hardware. 
-> This would allow us to require users to provide a proper DTS with the A/ 
-> D bits update scheme correctly specified.
+--------------yK1TrqNChZZZM4x4ILmMMtCG
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-Probably we could do such assumption as I found the following in the spec:
+-----BEGIN PGP SIGNATURE-----
 
-The Svade extension requires page-fault exceptions be raised when PTE 
-A/D bits need be set, hence Svade is implemented when ADUE=0.
+wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmrGNAkFAwAAAAAACgkQZg+p0QLLz9DJ
+8gv/TsFbkq7CdD6MPOX7I3ftXbFEtXZcrt85lIeszXmN/lhNDoQQT17nL6S7ZjUwuVjm8kmbEQj5
+ssIg5wJ3KJVY3+SQSXimYZN2re1oOJOGHA2T6PGYIqdNIJMF3QI9f1ZZbbpzWmuRasdyIsNL5sLa
+xq/TUEu7LA4ayeq2SH1vrUfzcVrq/uvuZ1OqVpNAyKYQWGYOPAkrciPJeOeJcsUs7B5d8qW3mTJv
+Q80hplNjLuaOjYEz+fGFqW6Yt0yj8q/J4bAJTCe478d67IUo1MURCIM+5+x6fgSzt+bbbVxUEuoc
+Z3tq6FY5HXKrTPT/LpRLdHEwgV9a6UokFqVMGiKYMkjUcncdl8V0Xu0Anoxrjcp4Xj5JRy8cPW5n
+fdA89McsX8LiQEUYx5C2B1endLTghhzwDSmPHW6u8pdHZypMO2F5U0vo1027RKS0+HSpv/rv860o
+JuEt/HDkCmNKH9qTkN55dTC37TeRWFx2UTzLRgk3zUKPBTjidNyjC76p2Les
+=VrXC
+-----END PGP SIGNATURE-----
 
-~ Oleksii
+--------------yK1TrqNChZZZM4x4ILmMMtCG--
 
