@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3B0AACA600A
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 08:41:05 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1443054.1660432 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B7739CA6007
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 08:47:31 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1443059.1660440 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEjgJ-00010p-GJ; Thu, 08 Oct 2026 08:40:51 +0000
+	id 1xEjmZ-0001gH-8K; Thu, 08 Oct 2026 08:47:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1443054.1660432; Thu, 08 Oct 2026 08:40:51 +0000
+Received: by outflank-mailman (output) from mailman id 1443059.1660440; Thu, 08 Oct 2026 08:47:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEjgJ-00010i-Dh; Thu, 08 Oct 2026 08:40:51 +0000
-Received: by outflank-mailman (input) for mailman id 1443054;
- Thu, 08 Oct 2026 08:40:50 +0000
+	id 1xEjmZ-0001gA-5Y; Thu, 08 Oct 2026 08:47:19 +0000
+Received: by outflank-mailman (input) for mailman id 1443059;
+ Thu, 08 Oct 2026 08:47:18 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xEjgI-00010c-0f
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 08:40:50 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xEjmX-0001g4-VR
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 08:47:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEjgH-00Ab0I-DZ
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 10:40:49 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xEjmW-000MjN-NP
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 10:47:16 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac75707-8faa-0a2a0a5109dd-0a2a4507cb80-32
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 10:40:49 +0200
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ac7588c-2eae-0a2a0a5409dd-0a2a450bd148-28
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 10:47:13 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac75710-b4ea-0a2a45070019-d155dd2ac8fc-3
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 10:40:48 +0200
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-48c4d870d54so1771051f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 01:40:48 -0700 (PDT)
+ id 6ac75891-b7e8-0a2a450b0019-d155802acc0f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 10:47:13 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-4a168355946so24938525e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 01:47:13 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48c75b4e399sm8936643f8f.56.2026.10.08.01.40.47
+ 5b1f17b1804b1-4a1843cb256sm49360005e9.5.2026.10.08.01.47.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Oct 2026 01:40:47 -0700 (PDT)
+ Thu, 08 Oct 2026 01:47:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,56 +54,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791448848; x=1792053648; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791449233; x=1792054033; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=4vMvz8pjS1xywNZLHwQXBMAQcuHHZcZfe8Xkd/FjYQk=;
-        b=Dr3O2QAsER61ogBpvkDiw/YiUWkpGduOlzbbsVrdc5UFYo3a9xMsNCXnKZQ8T0vp+Y
-         3Vrifek4EDdIBP2bG/VTd80laHfx6z09HykiNx3Gmd51LHJIfvnfGgrlOVVSab3SJjX6
-         ghLyCWtQ2phv0UxXFKxRl1Cm0Ci4wiILOYm7ZPuK1fyiEkXSxHw3b2LF/kpfi5vjTgtk
-         wPgON7HLMDtEU1rwup6ajuwnoynEds5dZ5GzlGgY/BCIgJ+oajT9iIlqZdDoC85JBwHN
-         BJjEyMjHlAriJY4JI7gFdTXl7MXn0TSUkBy0AEB0GMUDeSh0kjDxFhzA3zAhju6SYU+G
-         JvAg==
+        bh=aFTz6/ey6PBFnkyw1RG2MwqdUAInL3A+nwIFvu9l3GU=;
+        b=REfM6hR1f6IXCU6B8GiCXHSU9S1FkcYrafwUZHEYLvJGs7C1s1MBctFDAluO7fVUjx
+         MG5VKAaww9UFZe7P3Bv7XwZZg6tlGsgFBYg/G8j7wW8M1xaCksc7nKIavFav0LPNVddo
+         AVJ/rEH2VWj8qiUB2/dhTfYJSA+pyzo35h7v9Hv56V1qHygTiWxp98GbZv0/17XXby+y
+         8CH6dfIlXRRvfdnntsAJVhGLoX2Q5I0slwe09GoULMDepW325jbPJBbWQdtXFFVPGNIG
+         OaGg4to+p/sw3KZU0UEo3PRj19oDqdIeLPmN6N9J8b8iQhgDIAH8GDFOst8H9LkLOFqq
+         CU6A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791448848; x=1792053648;
+        d=1e100.net; s=20260707; t=1791449233; x=1792054033;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=4vMvz8pjS1xywNZLHwQXBMAQcuHHZcZfe8Xkd/FjYQk=;
-        b=SWY00Aj3kLNLG8BdLl94wAmtcpV3dd9rDdfU9Oww3cuBjK4JCOE/NQeXeQrNr7eMyy
-         6LuqZLXa9uT9I/ZLtUxKa8SZCNhAakyzJMhadd6iwqH4XjuYbOTdWP92K0KFCengSTmI
-         PANF8O/qqdey9ZEsp2sFVMbzDfDn9ylcjrkh1BUa69yIeE8MFHPz3qWkhl1EYRYUPN3R
-         CXQbN3wSCfzX6SGeF/4b/anw0cSklKffRyKXshEbzaxNwg4wD3pdirqoodTBEpr8/yi6
-         7OrH6dZXqlQrOIeuypu4rXpptvj3auIdkrSQmRPlvTXNJC+z3PUzjsg94c8kFwUs/zDp
-         SZBw==
-X-Forwarded-Encrypted: i=1; AKwUvBzoslxl6gW511rU+rXk+th3OC8OtKe0JoYWW9pYkDe+TnUE0lgTK7BtjZqDtOZeP58Tltizp3HfE1c=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYJWG1sDejfoUvgEYwUN5yRiNHJ3J6fzp2+fHIL2BeR6Z4q8Udb9
-	SOOy0GuJ17kySQl6NC2dqmYfZ9LtXtGE0QqlEEtlSjlFhs8SJt4SkezX7Gziv610Dg==
-X-Gm-Gg: AYBFou3KQ6i7/fNJYc8z3Rzg3VUU5bqO4c6LqBm9Ilnywf3Z+1zF5qBYi0PPul/WR3P
-	YH4PzOUaVqc4VjTF/uV0YAx0QCl7BH62r94ATw5Ve9gj0xr41DvYEftcRItOWp5gz+FIP8TnT8i
-	NfRUU/IOBQzMfvgFCSnA427okUCqlrUzPQqGDjDB3mMWz+Qcy9cXAQMbOzLWfpH89PLv9KOLsIs
-	geDDcNEtn1Vdt3jdal0xDdzfbPkC6OztKqmF8PD0PGxyUKyjoFfmqHzHkWsQmLLAomKPP1ZbKlw
-	Z8F4LB7RthtbTmD6eh0nxVK+flMRFPuY95kAQQRV4r/p0VgK1500OpBVHxxv+fj1GGb3Jtg9ByI
-	oiTFhhpfJSvhyVH37G3VWaUCLCfl4D4hoRsaB//ldM9/t8NOrAnERgOe0g3B8uB7g0JYQK7UCUr
-	zT4xxlF+6qb2GGgv+eh1KOeT+riG/mt2B1T9PXTbQHx5OEzNt2LTGMLPk6sm9J7RhYgqrru3LVI
-	Cff8UOhUVtQL4IBmja38NllSij5KnYExTwGaJH4/i6qUdL2kjncbhfvdogPhQ==
-X-Received: by 2002:a05:6000:1846:b0:48b:d17:139c with SMTP id ffacd0b85a97d-48c728858b5mr9256437f8f.51.1791448848142;
-        Thu, 08 Oct 2026 01:40:48 -0700 (PDT)
-Message-ID: <7bced27f-5391-4120-b9cf-b97bb88758ca@suse.com>
-Date: Thu, 8 Oct 2026 10:40:46 +0200
+        bh=aFTz6/ey6PBFnkyw1RG2MwqdUAInL3A+nwIFvu9l3GU=;
+        b=mkTte3O+HF5HLy5jsLPGot6+JdQmzMfuq8HZ4c7MW9ze7vhclEDrP8vDp4d40n1tRx
+         6jRRbgUTcMXIO7Byj6NiKPQuATWqUweO/t9LTX43+oyU5oHBx/JmiJAfirpazZ25jnr7
+         Q6gd5z6OOX7/tCn34jWR5bo/pmGvvEzDz8xFE7yXwiu603Ny+/ay66bEArBxn+lIm4dL
+         OxFE2bb2BEvry0RULntic71cga+Eu5JsyxegstD0gu2dTaNvWZ7CJA+w+QSGDxCmKYhp
+         eD8TltrfR+RL5aYN9jCTo5Z5fCAEpCDtGi8gmF/9URc0BlLoTaVuWLrr7YaqycjFk2N7
+         4inQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwWR4lPEWonIkP6E/cyms2URRWzKtF8TCSV8LS6Rff3u+9tNe8fyRfQB8/2iaz7ZLpZjH2Qv9caQps=@lists.xenproject.org
+X-Gm-Message-State: AFuF++m2hWo5rQ6D9slvks72rDZnbRMHxr8Cav9gIEDPVR/6BU5ZEL8D
+	UAp9Iy82PL+jTxHlozhfOwx3QNUdfCzmxGaVdSY2f4Jat0aTXO2d3HKkUkRLLPh1WA==
+X-Gm-Gg: AYBFou3fD2z5prfNm3kztIiByNwzTYWplstWt3RPDDYh9XqtvPBHsrDw0AEtoEgyKOo
+	//QMl7JNdtqX9u0uWSzUwqd4HBWa2EZIuUNQH4Y65+F6Dqm5RrUEiMBBt72w+FM/hyPjIWaoW2M
+	5YUEnicQCT0GXrWIAb/BdH1e+GXNhzUlhlBV1Ydc/PyG++ZKud7RBTBIgcnvxqt1/SaYlng1PnR
+	CyfaBfQCPMAqvxqoX83/u43vYxDit79ySPoaLdB8xy2aSmOu4cDNavzL1/VN++dJEY5y9g/vCm6
+	xljbxOL5w7jbSxNkeRFP4NBjYhCc434ruYZ9bxr/jbCl3b8nGbC6chhm8FWySABED8tzJwoM4X4
+	En5r/O8+0CfZPJH05gEbCMFPGp9de/Qnehr+2mIi5SEy0EuD3GH26G6bR4bNOc5vr7sCcvleOnF
+	LuObtUu3rxsYaP78avQs3rczZiHGvvdmvKNOs7Qwwn6jeWCQO4y/clo8/szZzFSwkvzpff1Wxda
+	iXIBNkEwtnB1W5gtjTN6IaTTbCtnBIBo7HRbNZrhO+T1WFoWmv3qig04b9PqDE=
+X-Received: by 2002:a05:600c:8116:b0:4a0:108:3b48 with SMTP id 5b1f17b1804b1-4a18030428cmr83460935e9.7.1791449232671;
+        Thu, 08 Oct 2026 01:47:12 -0700 (PDT)
+Message-ID: <506d21d6-a6e7-4abd-b054-aeccd59565cf@suse.com>
+Date: Thu, 8 Oct 2026 10:47:10 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 07/18] x86/hvm: introduce per-vCPU L3 page-table
-To: George Dunlap <gwd@xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Tim Deegan <tim@xen.org>,
+Subject: Re: [PATCH v3 2/2] xen/pdx: reject regions crossing a lookup table
+ index
+To: Weiqi Wang <coolhaoyt@gmail.com>
+Cc: andrew.cooper3@citrix.com, anthony.perard@vates.tech,
+ michal.orzel@amd.com, julien@xen.org, sstabellini@kernel.org,
+ roger@xenproject.org, lucas.cordeiro@manchester.ac.uk,
+ Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>,
  xen-devel@lists.xenproject.org
-References: <20261007104051.48841-1-gwd@xenproject.org>
- <20261007104051.48841-8-gwd@xenproject.org>
+References: <c3ba7ec05772614c4f84f9bba1e4f3e54d21c14d.1791291898.git.weiqi.wang-2@postgrad.manchester.ac.uk>
+ <71fe1a0cff0563db66df7f427d115fdd1953938e.1791291898.git.weiqi.wang-2@postgrad.manchester.ac.uk>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,37 +131,81 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261007104051.48841-8-gwd@xenproject.org>
+In-Reply-To: <71fe1a0cff0563db66df7f427d115fdd1953938e.1791291898.git.weiqi.wang-2@postgrad.manchester.ac.uk>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1791448848-368D9AE4-E0DF25F5/10/78276251493
+X-purgate-ID: tlsNG-42698a/1791449233-AB2DC9EA-E6CF3655/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1078
+X-purgate-size: 3032
 
-On 07.10.2026 12:40, George Dunlap wrote:
-> @@ -1835,7 +1853,7 @@ static int promote_l4_table(struct page_info *page)
->      if ( !rc )
->      {
->          init_xen_l4_slots(pl4e, l4mfn,
-> -                          d, INVALID_MFN, VM_ASSIST(d, m2p_strict));
-> +                          d, NULL, INVALID_MFN, VM_ASSIST(d, m2p_strict));
+On 06.10.2026 15:06, Weiqi Wang wrote:
+> From: Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
+> 
+> pdx_is_region_compressible() only looks up the table entry of the first
+> page, and checks the region against [pfn_base, pfn_base +
+> pdx_region_size).  pfn_base need not be aligned to the table index
+> granularity, so that window can extend into the next index, which belongs
+> to a different range with a different offset.  A region whose tail lies
+> there is reported compressible, yet its last page on its own is not, and
+> translates through the wrong offset.
+> 
+> Require the first and last page of the region to use the same table
+> index.
+> 
+> This can be reached from the coverage check in srat_parse_regions() when an
+> e820 RAM range is not covered by the SRAT ranges, which is the case that
+> check is meant to catch.
+> 
+> Add a test case that fails without this change.
+> 
+> Found with the ESBMC bounded model checker, and confirmed by running the
+> failing case natively against the unmodified code.
+> 
+> Fixes: c5c45bcbd6a1 ("pdx: introduce a new compression algorithm based on region offsets")
+> Assisted-by: Claude Code:claude-opus-5-5 # finding the issue with ESBMC, patch creation
+> Signed-off-by: Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
 
-Nit: Take the opportunity and re-flow the statement (i.e. move more args
-onto the 1st line)?
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+with ...
 
-> --- a/xen/arch/x86/pv/domain.c
-> +++ b/xen/arch/x86/pv/domain.c
-> @@ -127,7 +127,7 @@ static int setup_compat_l4(struct vcpu *v)
->      mfn = page_to_mfn(pg);
->      l4tab = map_domain_page(mfn);
->      clear_page(l4tab);
-> -    init_xen_l4_slots(l4tab, mfn, v->domain, INVALID_MFN, false);
-> +    init_xen_l4_slots(l4tab, mfn, v->domain, v, INVALID_MFN, false);
+> --- a/tools/tests/pdx/test-pdx.c
+> +++ b/tools/tests/pdx/test-pdx.c
+> @@ -288,6 +288,39 @@ int main(int argc, char **argv)
+>          }
+>      }
+>  
+> +#ifdef CONFIG_PDX_OFFSET_COMPRESSION
+> +    /*
+> +     * srat_parse_regions() passes e820 RAM ranges to
+> +     * pdx_is_region_compressible(), and these can be wider than any single
+> +     * SRAT range.  A region must be rejected when its first and last page
+> +     * resolve through different lookup table indices, even if it fits within
+> +     * pdx_region_size.  The values are PFNs from a ~5 GiB layout.
+> +     */
+> +    {
+> +        unsigned long ram_start = 0x4ca9bUL, ram_end = 0x12982eUL;
+> +
+> +        pfn_pdx_compression_reset();
+> +        pfn_pdx_add_region(pfn_to_paddr(0x5bbd3UL),
+> +                           pfn_to_paddr(0xf18f2UL - 0x5bbd3UL));
+> +        pfn_pdx_add_region(pfn_to_paddr(0x1869bdUL),
+> +                           pfn_to_paddr(0x189f58UL - 0x1869bdUL));
+> +
+> +        if ( !pfn_pdx_compression_setup(0) )
+> +        {
+> +            printf("table-index crossing test: compression disabled\n");
+> +            ret_code = EXIT_FAILURE;
+> +        }
+> +        else if ( pdx_is_region_compressible(pfn_to_paddr(ram_start),
+> +                                             ram_end - ram_start) )
+> +        {
+> +            printf(
+> +    "region [%#lx, %#lx) crosses a table index but was accepted\n",
 
-This being PV-only code, don't you want to pass NULL here? The description
-talks about this, but (a) it's not quite clear why PV32 would want handling
-differently from PV64 at this point and (b) in sh_make_shadow() you do pass
-NULL unconditionally.
+... this format string placed normally. We don't mind format strings going
+past 80 columns. Possibly the word "region" could also be omitted. (Surely
+this adjustment can be done while committing; no need to submit v4 just
+for this.)
 
 Jan
 
