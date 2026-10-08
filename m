@@ -4,32 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A21DFCA6007
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 11:04:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1443190.1660592 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5168CA600B
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 11:10:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1443197.1660600 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xElv5-0002bn-DE; Thu, 08 Oct 2026 11:04:15 +0000
+	id 1xEm0e-0003K7-Vb; Thu, 08 Oct 2026 11:10:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1443190.1660592; Thu, 08 Oct 2026 11:04:15 +0000
+Received: by outflank-mailman (output) from mailman id 1443197.1660600; Thu, 08 Oct 2026 11:10:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xElv5-0002bg-AU; Thu, 08 Oct 2026 11:04:15 +0000
-Received: by outflank-mailman (input) for mailman id 1443190;
- Thu, 08 Oct 2026 11:04:14 +0000
+	id 1xEm0e-0003K0-Sh; Thu, 08 Oct 2026 11:10:00 +0000
+Received: by outflank-mailman (input) for mailman id 1443197;
+ Thu, 08 Oct 2026 11:09:59 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger@xenproject.org>) id 1xElv4-0002ba-BS
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 11:04:14 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xEm0d-0003Ju-Rs
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 11:09:59 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1xElv3-003BWA-2S;
- Thu, 08 Oct 2026 11:04:13 +0000
-Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
- helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
- (envelope-from <roger@xenproject.org>) id 1xElv3-009oBp-1J;
- Thu, 08 Oct 2026 11:04:13 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xEm0d-003BcX-1X
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 11:09:59 +0000
+Received: from mail-lj1-f169.google.com ([209.85.208.169])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.96)
+ (envelope-from <gwd@xenproject.org>) id 1xEm0d-009qdD-1O
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 11:09:59 +0000
+Received: by mail-lj1-f169.google.com with SMTP id
+ 38308e7fff4ca-3a76ac0bdafso4588481fa.1
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 04:09:59 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -42,72 +45,72 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
-	bh=ngGCyRPdLWaA1HcZq2VYElzwvYRaginNeAyaLOLh6bg=; b=beHsGFXI2m3keavbJNghEizx56
-	FMNyMQCSqSg22Dv9hBiGAhaHxvAbx8ZL+96q7VQC36KJtYkNvYHALuXhJ6hwtyRdUKN3bLKx3U9GW
-	GxkjAQ29kzwPUutnX6y7s+OT417DwkLBIjs1LhOMOu+C/dB7ao6ujaZKxP8uJrt20bTs=;
-Date: Thu, 8 Oct 2026 13:03:59 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
-To: George Dunlap <gwd@xenproject.org>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH v3 10/18] x86/domain_page: don't unmap a mapcache entry
- that is not present
-Message-ID: <asd4n82y4m8VPFAV@Mac.lan>
-References: <20261007104051.48841-1-gwd@xenproject.org>
- <20261007104051.48841-11-gwd@xenproject.org>
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
+	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
+	bh=XXwEq2jkEw3cHBn/lYvFEYcp02xt6GrgrRtn3to52sg=; b=B0M2CbRZCcued7RS2dhpT4mPoJ
+	6ITX4rBBI6QjTtiKgjJffNGUeLxvrJ48Kyhw/vJPo3PdIAORDkdgNNxQWFTfjrJB1MkZvemOIA5XN
+	mQqulKc+2bzysRW8B8UPKiXCNGl2/nHbWI3i+bJOewdXlTiYZMShaMLfmmM5VtxplUVg=;
+X-Gm-Message-State: AFq9FYJsJCDn6EE9OPkbmHnv+7khwBvMsTGQm9KEfkXii+BhKPucWyBl
+	C1GSMVvYY0y3MfckPbawmTQDTfy1xCKvjydUdU0/f1B4+A8yoHIJy5hTP7JX0wZKNupgODTiNQy
+	XkJCEgcxb98xv+fGvC3/h2nJ0ccq22fI=
+X-Received: by 2002:a2e:8b8e:0:b0:3a6:6e61:2887 with SMTP id
+ 38308e7fff4ca-3a9ae46553bmr4296861fa.1.1791457798346; Thu, 08 Oct 2026
+ 04:09:58 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261007104051.48841-11-gwd@xenproject.org>
+References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-2-gwd@xenproject.org>
+ <cb2a5856-e3de-4ea6-8a3a-00f2999eef92@citrix.com>
+In-Reply-To: <cb2a5856-e3de-4ea6-8a3a-00f2999eef92@citrix.com>
+From: George Dunlap <gwd@xenproject.org>
+Date: Thu, 8 Oct 2026 12:09:45 +0100
+X-Gmail-Original-Message-ID: <CAFLBxZa9CH6AT=cVLPrcqe2X1WkWFkUXP+acLvRMMKkX+Ry-TQ@mail.gmail.com>
+X-Gm-Features: AclHuK8JkFHQBCJhfFEW2qfskbg9BL7uxifZZaRbUZ0VUf7FQe6olxlBwR3FO38
+Message-ID: <CAFLBxZa9CH6AT=cVLPrcqe2X1WkWFkUXP+acLvRMMKkX+Ry-TQ@mail.gmail.com>
+Subject: Re: [PATCH v3 01/18] x86/PoD: map one page at a time in p2m_pod_zero_check()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
+	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+	Teddy Astie <teddy.astie@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 07, 2026 at 11:40:43AM +0100, George Dunlap wrote:
-> Mappings must be torn down by the vCPU that created them, and only
-> once.  Have unmap_domain_page() check that the entry it is handed is
-> present and bail out otherwise (ASSERT_UNREACHABLE()), rather than read
-> an MFN out of an empty PTE and act on it, as a second unmap of an entry
-> the first one zapped would.  (A second unmap of an entry the maphash
-> kept is caught, as before, only by the refcount ASSERT() in debug
-> builds.)
-> 
-> Assisted-by: Claude Code:claude-opus-5-5
-> Signed-off-by: George Dunlap <gwd@xenproject.org>
+On Wed, Oct 7, 2026 at 1:38=E2=80=AFPM Andrew Cooper <andrew.cooper3@citrix=
+.com> wrote:
+>
+> On 07/10/2026 11:40 am, George Dunlap wrote:
+> > diff --git a/xen/arch/x86/mm/p2m-pod.c b/xen/arch/x86/mm/p2m-pod.c
+> > index 4602c32cff..0b0beca15a 100644
+> > --- a/xen/arch/x86/mm/p2m-pod.c
+> > +++ b/xen/arch/x86/mm/p2m-pod.c
+> > @@ -911,7 +912,12 @@ p2m_pod_zero_check(struct p2m_domain *p2m, const g=
+fn_t *gfns, unsigned int count
+> >      if ( paging_mode_shadow(d) )
+> >          max_ref++;
+> >
+> > -    /* First, get the gfn list, translate to mfns, and map the pages. =
+*/
+> > +    /*
+> > +     * First, get the gfn list, translate to mfns, and pick the pages =
+to
+> > +     * check.  They are mapped one at a time below, as in
+> > +     * p2m_pod_zero_check_superpage(): a vCPU can hold only a few tran=
+sient
+> > +     * mappings at once, and the p2m lookups and updates here need som=
+e too.
+> > +     */
+>
+> Actually, I think this wants almost entirely dropping.   Yes, "and maps
+> the pages." needs editing, and should probably say "and check for being
+> a plausible candidate" or so, which was missing previously.
+>
+> The rest is a justification of why we do mapping in the same way we do
+> it generally, and not useful to have in the source code.
 
-Reviewed-by: Roger Pau Monné <roger@xenporject.org>
+Yes, sorry about the verbose comment, I forgot to go back and give
+this a more detailed review.  I'll trim back the comment.
 
-> ---
-> Changes in v3:
-> - New in this version, split out of "x86/hvm: introduce per-vCPU
->   mapcache for vCPU-PT domains" for review.
-> ---
->  xen/arch/x86/domain_page.c | 10 ++++++++++
->  1 file changed, 10 insertions(+)
-> 
-> diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-> index f91ec8a75a..708df90a00 100644
-> --- a/xen/arch/x86/domain_page.c
-> +++ b/xen/arch/x86/domain_page.c
-> @@ -230,6 +230,16 @@ void unmap_domain_page(const void *ptr)
->      ASSERT(cache->inuse);
->  
->      idx = PFN_DOWN(va - MAPCACHE_VIRT_START);
-> +    /*
-> +     * Mappings must be unmapped once, by the vCPU that created them.  With
-> +     * nothing present there is nothing to tear down: leave the hash and the
-> +     * bitmaps alone rather than act on a stale or foreign pointer.
+Re the bool array: I assumed the compiler would turn that into a
+bitmask.  That not being the case, I'll switch to bitops.
 
-The comment makes more claims that what can be checked for: there's no
-check that the unmap is being done by the same vCPU that created it,
-neither is easy to add one.  Any mismatch like that would become more
-obvious once we switch to a per-vCPU mapcache.  I would possibly
-reduce the comment to:
-
-/* Ensure the entry to unmap is populated. */
-
-The commit message already have the lengthily details.
-
-Thanks, Roger.
+Thanks,
+ -George
 
