@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 352EBCA6007
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 14:35:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1443423.1660731 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3274CA6007
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 14:36:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1443428.1660739 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEpD6-0003Gy-AO; Thu, 08 Oct 2026 14:35:04 +0000
+	id 1xEpEa-0003ls-K3; Thu, 08 Oct 2026 14:36:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1443423.1660731; Thu, 08 Oct 2026 14:35:04 +0000
+Received: by outflank-mailman (output) from mailman id 1443428.1660739; Thu, 08 Oct 2026 14:36:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEpD6-0003Gr-7N; Thu, 08 Oct 2026 14:35:04 +0000
-Received: by outflank-mailman (input) for mailman id 1443423;
- Thu, 08 Oct 2026 14:35:03 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xEpD5-0003Gl-Cy
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 14:35:03 +0000
+	id 1xEpEa-0003ll-H0; Thu, 08 Oct 2026 14:36:36 +0000
+Received: by outflank-mailman (input) for mailman id 1443428;
+ Thu, 08 Oct 2026 14:36:35 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xEpEZ-0003lf-Hz
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 14:36:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEpD4-00Bos5-BB
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 16:35:02 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xEpEY-003zGN-Ut
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 16:36:34 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac7aa0e-e002-0a2a0a5209dd-0a2a4502a57a-20
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 16:35:02 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ac7aa61-2eae-0a2a0a5409dd-0a2a4504bfcc-46
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 16:36:34 +0200
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac7aa16-6ca4-0a2a45020019-d155dd33e53e-3
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 16:35:02 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-48441a2ba1bso3162628f8f.1
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 07:35:02 -0700 (PDT)
+ id 6ac7aa72-b57f-0a2a45040019-d155dd34d975-3
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 16:36:34 +0200
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-48afcd7ba9bso1840165f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 07:36:34 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48c75b4e399sm10814734f8f.56.2026.10.08.07.35.00
+ ffacd0b85a97d-48c71d04c0fsm11497458f8f.10.2026.10.08.07.36.33
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Oct 2026 07:35:01 -0700 (PDT)
+ Thu, 08 Oct 2026 07:36:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,49 +54,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791470102; x=1792074902; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791470194; x=1792074994; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=h21BfFZWA4UUJWMfzdIoAAxeKQm/P1kA2SL5dyMpd+A=;
-        b=GzzMtLhx+hTkkLLxGW/eGWPYl16BrQ+jGhgtTwsAqWuMpZlNdCLAOBhUwI9KYIt4Z0
-         1Kw8QuzZMs0xF0z03Bd57vydC2IZJ7uPt4LzYwEKt3EW2sDaZ4VbX/IHAYCRbRvox9ld
-         Ke/8/GxLDCqzcyyuFofTn2Onpu8Nss57uS567ov7KTi3fVbf1lICtofUx0Xyr2XBoQa0
-         V5MhVWWKMmdwZWVvh3YNfFmVXyFgD22RohOVZrqfd/KtJ2m/K5iIXTv5hr0sqPJEKH7o
-         pWsStU7D3RT1pP1mDLrWQOpkTM31ETcRI6BwtIdtSjd2WizfudaZOv6g/k0b9DnS8Cvh
-         1yGw==
+        bh=5uMleNFgQuIv1PK7feFhdNwrJNvYuYO1HHmx6TRacQE=;
+        b=N3hilyTT4+f0Uon4ERYU23hwDB4fUCruh07jukck/k1Y1sAXgT4FS9AC38p8THoUSK
+         e2Y0AyhjpLG+t6TK7LgZfWWBaa0+RlM3So7z1qAhjlbD2xqgP3Z4RwyL0tmdnmczdBjp
+         AgVb4zH71uSOXS54tk37VmqbaHWDpnj69hDZPxmVA5k48yb4IDz2prdu5ONmD58jd6Ft
+         PW8owyYX4HauWUdNwTXKQCDT9Vg/wkBTIoOd1tAkxI8JYuwHztRwQs67wKrI7W346RPQ
+         ue8al9K7QfljpWz9ZNEQONRXtUzHFpwuTApzAGluv68jQhKoFY3ZpLCmq89OhbxQSIjF
+         bZDQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791470102; x=1792074902;
+        d=1e100.net; s=20260707; t=1791470194; x=1792074994;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=h21BfFZWA4UUJWMfzdIoAAxeKQm/P1kA2SL5dyMpd+A=;
-        b=VwaN/QULv8OOT0y30FjGy9f+A3Sg4rA/LCDSwlD/bVauV5QAKSqQwT8+dh4CpWR5jc
-         lqYb1XB5KZCSzU0pNMqfCbJ0iBNPP0oyzkfouhxidVPkEGQOam0tasbb+qk7gsUUyQaU
-         Bk4q0vIrYn8GF8iMqn4oX6gT37F82BlI9CtASJDLtkVdZghsr/R9S6IreOMLlaQammBE
-         JlV6hiC/gph1SKZt39CuMq0tAEZa9r/U54Z9xmBrRn8z8r/toMTRTnxATkqKPC22wWsZ
-         yXEE+x3DlZmdA9pfuphgSKl5xSk7wqt69Ay/tRQNYKnd1PEsr8oV9AYbI0oz78l3XCO0
-         fCxw==
-X-Gm-Message-State: AFq9FYKfH/qmxca8bhvw3N10Czd+yEhNC8gkfkTBFbe+TOO6Tk+mzgmn
-	LLS7Iv0EafH+fa3u6dEPYCpKtKJMYt1SU5yZeG+p6CfxWgeeXkXRmSgLL+5IbLHaMQ==
-X-Gm-Gg: AYBFou0IyLleRnXoC4DHNyaHDVOremgCL3Vu+RoK/p9GSvq5Vn6iFdqjWY56ooHfNZS
-	JeBp4RwZUo5O+bwEWH4yACID5379TQyEL7d1VNtXYAML+d+y6KDht9dnNiQVKnjhb6SEI66Qv7q
-	wqLX1vE89FzmYT3PUZv4OfgzTJAMs06usxFZwshz4OFFQ8YbedD2Oz3e6XmX8vqx0Iwm9eEa/Nl
-	0qtsDFPN3u2jf2Y1a8P9v3veQD9I95Xyc+kGVEdvp85IHMdrr9N/FE4mUlLup+84PRVXWQMuCfe
-	X2QDIJA3cdplXwkzS0LCI5Q+VUreKZxQLrdjdAH+UmQFUU63gFRn4yEkufdJn5xCkd/gXaerzU6
-	wsk3Nfb6OsGFLodcthF+uo3dXN12lRnBIN5gOEPZI+rzP0g/l2TswChunXnPcHSWCk2Tpe3lBY3
-	lfHbzVOIXWNDnjwZRdZeLGumebzoPRI+CJr2s9pMZ4XhFWQ5svSZk08ernWERwsOwjUs+nqBfha
-	FAMMvaXiA3+nRgoAs2oaFKBGxZ3QNW7NEhr25kb08yPRwCGyz0Jiw6ZSK7PkA==
-X-Received: by 2002:a05:6000:4308:b0:488:6561:b324 with SMTP id ffacd0b85a97d-48c727878e3mr11341233f8f.9.1791470101662;
-        Thu, 08 Oct 2026 07:35:01 -0700 (PDT)
-Message-ID: <86d08b6a-a1ce-4aae-8a4c-6b0bcc0b9696@suse.com>
-Date: Thu, 8 Oct 2026 16:35:00 +0200
+        bh=5uMleNFgQuIv1PK7feFhdNwrJNvYuYO1HHmx6TRacQE=;
+        b=nr+lrXRfSQ/EwHhY1VIgY/Hw8Na1Orl5WYM3gNkAJ2/n23aL8J1QFxq2wSkZgw0rCr
+         fhe712oCI+EcZ1TFUay8INRbrS3d2JicH/glfKjH8xpNk/0V6nE4ud4b62IpDR0e+/8x
+         N2pDZAbmAQcI9AGhwNaUAYp1O+xnZLREk7DWOWUDz0vRTWVVz+jeSwE1ZUW6xhxkq0Lz
+         6OvQAMwAsqWmSzOcv66zn/ymeQkEbRMvQDGXPbh1Pz3C0lfInSFtq4PgpMJe1CEvdi7z
+         AX2l5I7yDoO/sk173+jpcF3apWkSBri9cR9uLUKKqBizPWEYtWqqKQtTVaw+1OTkuhWx
+         U9Cg==
+X-Gm-Message-State: AFq9FYKl/aJpSVQa87Oo5Spgv24cK2wN3AqK4qUBy7o6rcN3qunMz/JU
+	2ikAPrLm7rwE63HD3Azog8uPOwEf8NQEsGKkdrloY6tX1Zt/bOzwsZ61NE1AVD3KITCZbyhwPde
+	0Ah4Sqw==
+X-Gm-Gg: AYBFou3B8Pvo2CJ9F1XCO/8omM2LYyVl7gJmzW1Z+ij1+3fiiXj0rMPTkc/jhMrat0u
+	cwmG6NlK7gpeEcq+N6fcJLf5OLo813U4ncZAFtsCLPRZPCPY3eXPwSiJxPyS49MK0HNsHVcEKhp
+	2237K4fTFDiLV2uxuz/dsudQVM8gOeA4yQw3y9uKsh07GnKLAlUXEeRTUGyKespEcAc5ZSxPu1U
+	jqJyZeUoxMO2TLyO80xPsQu6cQ7Rh1kFRmw0rBoqHzxprSYk04oySIt3AMbChRh0974K47w2C7c
+	pWSrTRTPQuaIw/sE+8v3AY9eqd0Wx3YxnN6Wrd/wOvmc1t6nJb0T8d1J7MEbfFdw3OhvraZu2lu
+	l8/fuuiUO0tDWjZusqDow/YW3emgRT6HfxtRrORvGCEatpU+B84Lq9QTVLSInUl3Lc4vttgS6qb
+	OOLE/jQqLKsO1NSC8/lL1N4V3jDP88zqm7Onc/rLT/9Yyq8osCcwiUvNr+JT8B5vSRR6ingvU4T
+	DAvMKEPDG0SJG4wM0KRG8qIzOqiBfRw3GHy5Jerc/POn5FZbVgvkrcSBCMerQ==
+X-Received: by 2002:a05:6000:24c3:b0:48c:7386:af18 with SMTP id ffacd0b85a97d-48c7386b121mr9751068f8f.8.1791470194279;
+        Thu, 08 Oct 2026 07:36:34 -0700 (PDT)
+Message-ID: <e4a9499c-ae1b-414e-bfcd-25a42c53c4f8@suse.com>
+Date: Thu, 8 Oct 2026 16:36:32 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 01/39] xen/riscv: drop INSN_{16,32}BIT_MASK and report
- unknown instruction lengths
+Subject: Re: [PATCH v3 02/39] xen/riscv: set the domain type for 64-bit kernel
+ images
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: xen-devel@lists.xenproject.org,
  Romain Caritey <Romain.Caritey@microchip.com>,
@@ -110,8 +111,8 @@ Cc: xen-devel@lists.xenproject.org,
  Stefano Stabellini <sstabellini@kernel.org>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>
 References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <f3c8b78cd0bbbebf51892c56967a12cb8ea6c226.1790779209.git.oleksii.kurochko@gmail.com>
- <1791194529.8631fc262581453bbf619ec5b2062170.1a10b837ff10003f66@vates.tech>
+ <bd072fd8e2406a80aa783b1b81c41d4fe8739eeb.1790779209.git.oleksii.kurochko@gmail.com>
+ <1791194530.8631fc262581453bbf619ec5b2062170.1a10b8381180003f66@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -137,23 +138,23 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1791194529.8631fc262581453bbf619ec5b2062170.1a10b837ff10003f66@vates.tech>
+In-Reply-To: <1791194530.8631fc262581453bbf619ec5b2062170.1a10b8381180003f66@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1791470102-F1EAB2AC-DC97AE4A/10/78276251493
+X-purgate-ID: tlsNG-ebf023/1791470194-C34C3B50-452569AE/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 820
+X-purgate-size: 580
 
 On 05.10.2026 12:01, Baptiste Le Duc wrote:
-> On Wed, 30 Sep 2026 18:18:43 +0200, Oleksii Kurochko <oleksii.kurochko@gmail.com> wrote:
->> Both constants were inherited from OpenSBI and their names are misleading.
->> The length of an instruction is encoded in its low bits: bits[1:0] != 11
->> means 16 bits, otherwise bits[4:2] != 111 means 32 bits, and anything else
->> is 48 bits or wider. 0x3 and 0x1c are the patterns compared against in
->> these two tests, not masks selecting a 16-bit or a 32-bit instruction. As
->> each constant is needed in one place only, once INSN_IS_16BIT() and
->> INSN_IS_32BIT() encapsulate the tests, drop them and spell the values out
->> in those two macros instead.
+> On Wed, 30 Sep 2026 18:18:44 +0200, Oleksii Kurochko <oleksii.kurochko@gmail.com> wrote:
+>> kernel_image64_probe() never set info->type, so every domain kept the
+>> DOMAIN_32BIT value a zeroed KERNEL_INFO_INIT leaves behind, even though
+>> Xen on RISC-V is only built for RV64 and accepts nothing but a 64-bit
+>> Image.
+>>
+>> Nothing consumes d->type on RISC-V yet, so there is no functional change.
+>>
+>> [...]
 > 
 > Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
