@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 92CD8CA600A
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 07:56:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1443003.1660373 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 82F92CA6007
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 08:05:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1443022.1660382 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEiyk-0006cV-PQ; Thu, 08 Oct 2026 07:55:50 +0000
+	id 1xEj88-0000pN-1c; Thu, 08 Oct 2026 08:05:32 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1443003.1660373; Thu, 08 Oct 2026 07:55:50 +0000
+Received: by outflank-mailman (output) from mailman id 1443022.1660382; Thu, 08 Oct 2026 08:05:32 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEiyk-0006cM-Mh; Thu, 08 Oct 2026 07:55:50 +0000
-Received: by outflank-mailman (input) for mailman id 1443003;
- Thu, 08 Oct 2026 07:55:50 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xEiyk-0006cG-6U
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 07:55:50 +0000
+	id 1xEj87-0000pG-VJ; Thu, 08 Oct 2026 08:05:31 +0000
+Received: by outflank-mailman (input) for mailman id 1443022;
+ Thu, 08 Oct 2026 08:05:30 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xEj86-0000pA-Kk
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 08:05:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEiyi-00Ex35-Ns
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 09:55:48 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xEj86-00ASNz-1G
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 10:05:30 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac74c82-bab6-0a2a0a5309dd-0a2a45018ca4-20
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 09:55:48 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ac74ec8-8faa-0a2a0a5109dd-0a2a450bca38-8
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 10:05:29 +0200
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac74c84-5984-0a2a45010019-d155802ec813-3
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 09:55:48 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4956869750eso15842425e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 00:55:48 -0700 (PDT)
+ id 6ac74ec9-b7e8-0a2a450b0019-d155dd2fb96b-3
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 10:05:29 +0200
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-487048857f6so2273752f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 01:05:29 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1814ce9a0sm106828745e9.3.2026.10.08.00.55.47
+ ffacd0b85a97d-48c71c0b604sm10153971f8f.13.2026.10.08.01.05.28
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Oct 2026 00:55:47 -0700 (PDT)
+ Thu, 08 Oct 2026 01:05:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,56 +54,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791446148; x=1792050948; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791446729; x=1792051529; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=aR8wWmpS7pUtclz8GpE0BatDzkEzQxBuP1Dw0ecl2N4=;
-        b=geu0j54+iOLBa8deOdqeI0MPYV2Wgn077n8TbmvtdNnRL8xpHEEnSSQ3u9oSD0oYZg
-         fLx+6SQaWjBmjmjZ88MGPvOwIZLg2wJzITkl7CGgYT2I84/DyKHEd920XxmQIsy5bP29
-         zp482ot5db58I6j9SoHPTUTvohJc+pRgn7lk5PYLrGYC6K3vhHwV7mAsw+OXk7HUyqJH
-         33sLG0NoMaNdqWpxcMZMBl9CM+OtoJEfXyJHMy2u211f0q1HRIRzb8e1FyB7OxbcPSw6
-         UNPebzryLr6qkmEeNbJ0zN9YWXcWmPRX+piTNcc0mKjztTkbM6XiHSvzJqHi/BynkFoC
-         MhBw==
+        bh=mT/WMTwC9Pntbn7PkhRaBjdPQb+5Cm86/PMMKaL6YGw=;
+        b=QQ/EFpcl99zbW1885RelSZx7r4o3nnjfNkL9WKNgH91dWVmoTNnAVXeSBV7vpKtjcO
+         hsy9MjJ4XfBTk4i7bLIqVWY3u8974wLo0qbRuzUZAiw08uy8X5CUEdJ+fF7QShb9X+IV
+         6c6ieBzUOFiXjUsr5V/ti7fE3+yR3uof8dmxzUHPg1k39VGaiFV2WoeSPAf7K/8ZP7YJ
+         3FzssjlhKY77yh+ROqnmqlxxNtRhL3OAPxMvc0iVZBu4Fetd9vTT9HYemQ/Q8KXf3Ted
+         C1IDQzvbE+kL69ZEbnyvFoPh3JWnguUrc8pLEVRtT3ffhAzqMWo5LfQlwr7crb8l5nJr
+         Wxpg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791446148; x=1792050948;
+        d=1e100.net; s=20260707; t=1791446729; x=1792051529;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=aR8wWmpS7pUtclz8GpE0BatDzkEzQxBuP1Dw0ecl2N4=;
-        b=ecspj6TVAzkZ85HHchNev+aDzqqO++2WgE0OvOFpgmTYT7LEa/G3UjjpZFXLwg129S
-         Lfy/EHpY/qr7rztZEEOLEi8KREKcHXNS+AXtjLSLnAP3RxlF5wfuLpB67uaIkiAvRLzQ
-         Ed+beobjtyrwbOU2maL1KT4YRYV/ptNDHExuHYstZW4q8OnW89ZUSA5Gp0mhWH63IcGQ
-         0C0zmZww4tBd96JzIpRFOD/UKg7YEMxDQaHKlbz8oxnd7mTVbmwuUos4lhgp4iRyQqm1
-         o4fQbgXQI7v1LrmacLcioeH/EWxBLeFwt0XdDnt9eWw4nC6DZ6U8f3IAA0zgPsuGM8Yf
-         AfKg==
-X-Forwarded-Encrypted: i=1; AKwUvBxU+GagcW7+GE5x52bOhd/Vz554vIIR+h0rQbp8cEtFcW7G+NT4H1srbaf0gckltEwdZSApJMRS44g=@lists.xenproject.org
-X-Gm-Message-State: AFuF++lJaQ/dcsU+ETK9IXhLH8Av1wvA3ElOht0VKh0EQVMkJD3QDWmc
-	QA9fuRhK9Gn2YwUIxDFXs5VyIRQ7Onnx6F1JWJhmQ40Hqsd1rCsUD7aFidZAAsv9hg==
-X-Gm-Gg: AYBFou1FjJO8Htc4NN4yY+WM5eQsKQV0aUIQGar8ymxnwa/I51xpEnaRYzFhoN2K9OB
-	AshGyUNjiX9QCm3UA2BCmPcDSaLgtHIgO6ksTYX9ZLCkNlIg9SLfaSC4+UqzE/gBxtZTLlDPqRE
-	qlQUij6MGlatt0u9vd5U78pZc1aHe00ECEcVX49fv+qylHryRv5Lh+WBAT2vaIq73SwGW/f33kX
-	N4faET6b88kwqpAxjxhMQV7netfnfPDx5pUklktFc7+urbBIGZdinyKrN88uBYnbXoXtUCYolxm
-	+N7csnqwryda+1wV5huIDOMdQMn+gNEuR0gm3OvRef8iO/eBRN35hJdWxleg8jwGlL86z+jL8oG
-	X7JBtKW8aWVgKmFbI5wfzcGR2zahtvXwsEnde5pBNDkjWfVgJd5rWGILa3OjzA24IOweisugQm7
-	ASUIHEuzu1UGv1xH7NncuW+gsKdZBhMcUow7tGsTWy7OxOvD3eyLh/RQ7ez0zS+SY6bfU8QnPSw
-	q9+Eu0+TfSjGWkhS2g79VHhavMHwmxGg6Dj6OZ7p3Z9D4+YKOpb8sdm5LhCo0Y=
-X-Received: by 2002:a05:600c:470d:b0:4a0:1c17:4fb2 with SMTP id 5b1f17b1804b1-4a180648f8amr84783045e9.31.1791446148077;
-        Thu, 08 Oct 2026 00:55:48 -0700 (PDT)
-Message-ID: <0149f2e4-e35c-4593-b2d2-0358913d353f@suse.com>
-Date: Thu, 8 Oct 2026 09:55:46 +0200
+        bh=mT/WMTwC9Pntbn7PkhRaBjdPQb+5Cm86/PMMKaL6YGw=;
+        b=XzM/X5eV+gg3NSYYPxGDMsKnZae9ia3Z2Gbe+GYqvmDjcNzBoU7cvfCs/goD6qySuB
+         oBXgwFJ0bPls+1prcENWp6QvnWM9KLI7CeWmBW8AAgsuwU3KWzwkG0AtbVo12uwkhWyw
+         JrQiy92oD3TjfWhwTYJVVgTOphPw5yOIKT382jVRZOuAJXiAm9alYFKYr71v6Wfl17I6
+         wQr+8bFgv1H5ydR9+TzGepplgqq3oVVee7sAiXilKEB30heMNVzlsrfP2dde45VwSAV7
+         x35dMhtlB2VvnpL3DV3181EcmwdaPljG4ov/XLvL0+E1zfsuGFftzoZupwTK+UavnEIG
+         MM6g==
+X-Forwarded-Encrypted: i=1; AKwUvBx+BYHSzv4Kl9Qlg+aKh0A7sfFGJaaM4BEsdz1x/Ys0Yag0jfxwPx269DAKlNUVQx3gw5zuM1FFrUA=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIkH8CAETrhXUByxM3kHbCcxZvxvAMtXMY+mfVlfz1kkqlL//Qa
+	aKCjyLOmtY1kYdLpbL6er7EPwFGeeuhmGHZdJSIHN7TxXpxQMBPM87dhVQfcJT6LzmYQclOftNI
+	GHYd+IA==
+X-Gm-Gg: AYBFou12DXQkHxtsHNz1deR//MouWe0Rt1UUCUNm7QRXPTZhdORJqG3spn02Hc4JYuo
+	57/jwuBz8shcPzFDM/R8rHAXQHnzoi8EW9Cp/T9aXuxlzFTV/IvuJfYSxB4BMHe8d37KIR/ljP6
+	QZIUtINFwlXlHruX/rWtqhYepJKSthEJsubL9rActg+YtNnHpuHvpCZKmjX32b+jCU+CGzy2gho
+	nITAJcl7zJqCAg55aqg27SMbbRgViJDGBofnHUcIcDJpdizPloI78vgsCibagGouzsS+j6LUh6P
+	ZkgRP91EGCYF/YCZBhCE2MAvn+Faq33IvXsRoYNhNMF3GrnAgP8U4/T3Fo2gRu/PIxBdZIcVemE
+	PqDMPsYizksiNX3NqRgT2qDURb+ggvIuMxnh94b5j/Ty9e0gWE3UkxCcWFjj49kRSbWum5ldXsC
+	HfdopD/fT0RIGLyPNLQpr9KNN9soQm2eiKZu2dFn6Y8A/svxEeeBl8XqM8DxrEvvTyPtd4GHXzO
+	O3pknQzBhvfe0XSRSnMSWdM1zVtyBDYktqQHGT0dNyI8GY2waak4Xdmdi8+0ufxzVuGwnIZkg==
+X-Received: by 2002:a05:6000:38f:b0:48a:fb6e:bc50 with SMTP id ffacd0b85a97d-48c727891c3mr8801688f8f.27.1791446729056;
+        Thu, 08 Oct 2026 01:05:29 -0700 (PDT)
+Message-ID: <4042778c-8648-44a6-9b9a-eeec138b1d58@suse.com>
+Date: Thu, 8 Oct 2026 10:05:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 02/18] x86/mm: purge unneeded
- destroy_perdomain_mapping()
+Subject: Re: [PATCH v3 05/18] x86/mm: prepare create_perdomain_mapping() for
+ per-vCPU perdomain areas
 To: George Dunlap <gwd@xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
 References: <20261007104051.48841-1-gwd@xenproject.org>
- <20261007104051.48841-3-gwd@xenproject.org>
+ <20261007104051.48841-6-gwd@xenproject.org>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,30 +130,61 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261007104051.48841-3-gwd@xenproject.org>
+In-Reply-To: <20261007104051.48841-6-gwd@xenproject.org>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1791446148-1D073757-0D921E9E/10/78276251493
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1791446729-19CC79EA-EE02236E/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 824
+X-purgate-size: 2820
 
 On 07.10.2026 12:40, George Dunlap wrote:
-> --- a/xen/arch/x86/x86_64/mm.c
-> +++ b/xen/arch/x86/x86_64/mm.c
-> @@ -737,6 +737,11 @@ int setup_compat_arg_xlat(struct vcpu *v)
->                                      NULL, NIL(struct page_info *));
->  }
->  
-> +/*
-> + * Besides vCPU teardown, which free_perdomain_mappings() would cover, this
-> + * serves switch_compat()'s undo path: the domain lives on as a 64-bit one
-> + * there, so the translation area has to go right away.
-> + */
+> From: Roger Pau Monné <roger.pau@citrix.com>
+> 
+> We want to change per-domain mappings to be per-vCPU mappings.  In
+> preparation for that, we want to arrange that
+> create_perdomain_mapping() work either with a single perdomain area,
+> or with a per-vCPU perdomain area.
+> 
+> Most of the remaining callers are already in a vCPU context.  This is
+> no accident: the perdomain area has always been laid out in per-vCPU
+> slices -- each vCPU has its own GDT/LDT window, its own
+> COMPAT_ARG_XLAT pages, its own window of mapcache entries -- and each
+> vCPU's slice is set up as that vCPU is created.  For these callers, we
+> just need to change the parameter from a domain pointer to a vCPU
+> pointer.  Once the perdomain area itself becomes per-vCPU, the same
+> calls will populate the owning vCPU's own area rather than slices of a
+> shared one.
+> 
+> One exception is the call in hvm_domain_initialise().  An HVM vCPU's
+> monitor table is created during vCPU initialisation, and
+> init_xen_l4_slots() stamps the perdomain slot into it at that point --
+> far earlier than for PV, where the Xen slots are written only once
+> guest page tables are built.  hvm_domain_initialise() therefore had an
+> explicit create_perdomain_mapping() call just to make the perdomain
+> root exist ahead of that.  Move it to arch_vcpu_create(), covering HVM
+> and PV alike.  With a single shared area, the call allocates at most
+> once per domain; but once each vCPU has its own perdomain area, this
+> is the call that will allocate every vCPU's root before any page
+> tables referencing it are built.  vCPU creation is
+> where the call must end up; move it there directly.  For PV guests
+> nothing observable changes: the root was already being created during
+> vCPU creation as a side effect (by mapcache_vcpu_init(), or failing
+> that pv_create_gdt_ldt_l1tab()); it now merely becomes explicit.
+> 
+> Note that we cannot yet do a parallel movement of
+> free_perdomain_mappings(): the per-domain page-table hierarchy is
+> still a single domain-wide structure shared by all vCPUs, so tearing
+> it down from a per-vCPU path would pull the mappings out from under
+> sibling vCPUs (e.g.  on a partially failed, retryable
+> XEN_DOMCTL_max_vcpus), and vCPU-create error paths can rely on domain
+> destruction to free a partially set up hierarchy.  Teardown will move
+> to vCPU scope only once the structure itself becomes per-vCPU.
+> 
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
+> Signed-off-by: George Dunlap <gwd@xenproject.org>
 
-Is it really "has to"? The xlat area is simply unused for 64-bit guests,
-so it would be merely "needlessly occupying resources" if we deferred
-freeing until domain destruction. Preferably with a respective adjustment
-(and perhaps also the adjustment suggested by Roger):
+Preferably with Roger's suggested comment adjustment:
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
 Jan
