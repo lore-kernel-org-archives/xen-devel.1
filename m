@@ -4,52 +4,52 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44384CA6007
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 10:34:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1443153.1660557 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 23363CA6007
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 10:37:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1443161.1660570 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xElRU-00058y-KJ; Thu, 08 Oct 2026 10:33:40 +0000
+	id 1xElUp-0005tW-6d; Thu, 08 Oct 2026 10:37:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1443153.1660557; Thu, 08 Oct 2026 10:33:40 +0000
+Received: by outflank-mailman (output) from mailman id 1443161.1660570; Thu, 08 Oct 2026 10:37:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xElRU-00058r-Gv; Thu, 08 Oct 2026 10:33:40 +0000
-Received: by outflank-mailman (input) for mailman id 1443153;
- Thu, 08 Oct 2026 10:33:39 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xElUp-0005tP-3z; Thu, 08 Oct 2026 10:37:07 +0000
+Received: by outflank-mailman (input) for mailman id 1443161;
+ Thu, 08 Oct 2026 10:37:06 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1xElRT-00058h-1X
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 10:33:39 +0000
+ (envelope-from <jgross@suse.com>) id 1xElUo-0005sC-0j
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 10:37:06 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xElRS-003D3T-4G
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 12:33:38 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xElUn-000kGa-DR
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 12:37:05 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jgross@suse.com>)
- id 6ac77179-e002-0a2a0a5209dd-0a2a4501ab0a-30
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 12:33:38 +0200
+ id 6ac77248-2eae-0a2a0a5409dd-0a2a450ab014-22
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 12:37:05 +0200
 Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jgross@suse.com>)
- id 6ac77181-5984-0a2a45010019-c387df83ebba-3
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 12:33:37 +0200
+ id 6ac77250-f2d2-0a2a450a0019-c387df83b986-3
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 12:37:04 +0200
 Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
  [IPv6:2a07:de40:b281:104:10:150:64:97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id 23FF31F441;
- Thu,  8 Oct 2026 10:33:36 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 53D0F1F441;
+ Thu,  8 Oct 2026 10:37:03 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 9248A136DC;
- Thu,  8 Oct 2026 10:33:35 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 03FC51339F;
+ Thu,  8 Oct 2026 10:37:02 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id MYidHH9xx2rsRQAAD6G6ig
- (envelope-from <jgross@suse.com>); Thu, 08 Oct 2026 10:33:35 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id oh2aMk5yx2rwSQAAD6G6ig
+ (envelope-from <jgross@suse.com>); Thu, 08 Oct 2026 10:37:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,28 +62,26 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"
+Authentication-Results: smtp-out2.suse.de;
+	none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
-	t=1791455616; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	t=1791455823; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
 	 mime-version:mime-version:content-type:content-type:
 	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
-	bh=gbr1u+u80m70NFdYTGfZHIyUnPU4YMbmIwhVKiS1bl4=;
-	b=NnJ8RDl51A5KdqM2QzEUDmI4KLpTAF2kavp0tkeSL7YBnlNS+VZKpRfeBlEtqLrGF67RDb
-	MHKv0BlQ2G9z4ZqJcDKF8LbgsgqFLlSF0GYYQ1jQKerVloJnnVZf8ZcTGpFvX3Pg9MFuXZ
-	clz2H+okBiB2Ep0BBweesZTpDLznvy0=
-Authentication-Results: smtp-out2.suse.de;
-	dkim=none
-Message-ID: <b89b0a57-ecb6-44c9-9a3c-ef913756fa79@suse.com>
-Date: Thu, 8 Oct 2026 12:33:35 +0200
+	bh=6LF2uQsgvY/fzl3eAWc6/iZ2APHLSLZu8+2XZlkFoAA=;
+	b=W/K+h4iGfHSf/2qELGHqBCVMLWXJnK3sAaCy/ftEIDaV2G/vcVv2Rz3gXiEjKOk9SGIOdY
+	cHqYCCTZappnG5jl3CjLOhb4PcbRY9s8L63/Uk7vOD383MwTf2oG9b4BlYgbPv87c1IIpU
+	RkPCczZkXgUuf9RUDYevhhu0ALeXy+w=
+Message-ID: <576bbb3d-48a3-436c-b626-b0f2dd493a9e@suse.com>
+Date: Thu, 8 Oct 2026 12:37:02 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen/pcifront: check that an AER callback exists before
- calling it
-To: Yehyeong Lee <yhlee@isslab.korea.ac.kr>, sstabellini@kernel.org,
- oleksandr_tyshchenko@epam.com, bhelgaas@google.com, jbeulich@suse.com,
- konrad.wilk@oracle.com, xen-devel@lists.xenproject.org,
- linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc: stable@vger.kernel.org
-References: <20261006023443.338194-1-yhlee@isslab.korea.ac.kr>
+Subject: Re: [PATCH] xen/privcmd: Only claim ioreqs matching an ioeventfd
+To: Koichiro Den <den@valinux.co.jp>, Viresh Kumar <viresh.kumar@linaro.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+References: <20260821084112.2374949-1-den@valinux.co.jp>
 Content-Language: en-US
 From: Juergen Gross <jgross@suse.com>
 Autocrypt: addr=jgross@suse.com; keydata=
@@ -109,123 +107,63 @@ Autocrypt: addr=jgross@suse.com; keydata=
  HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
  QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
  ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <20261006023443.338194-1-yhlee@isslab.korea.ac.kr>
+In-Reply-To: <20260821084112.2374949-1-den@valinux.co.jp>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------8gctMZysacNUg04EXglOdQFe"
+ boundary="------------e46aryaWW0KyeUhbWDPpmWNY"
+X-Spamd-Result: default: False [0.00 / 50.00]
+X-Spamd-Bar: /
+X-Rspamd-Queue-Id: 53D0F1F441
 X-Rspamd-Pre-Result: action=no action;
 	module=Unknown lua;
 	unknown reason
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
-X-Spamd-Result: default: False [4.53 / 50.00];
-	NEURAL_SPAM_LONG(3.50)[1.000];
-	BAYES_HAM(-3.00)[100.00%];
-	NEURAL_SPAM_SHORT(2.83)[0.943];
-	R_DKIM_NA(2.20)[];
-	SIGNED_PGP(-2.00)[];
-	MIME_BASE64_TEXT_BOGUS(1.00)[];
-	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
-	MIME_BASE64_TEXT(0.10)[];
-	MIME_UNKNOWN(0.10)[application/pgp-keys];
-	XM_UA_NO_VERSION(0.01)[];
-	MX_GOOD(-0.01)[];
-	MIME_TRACE(0.00)[0:+,1:+,2:+,3:+,4:~,5:~];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	ARC_NA(0.00)[];
-	DKIM_SIGNED(0.00)[suse.com:s=susede1];
-	RBL_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:104:10:150:64:97:from];
-	FROM_HAS_DN(0.00)[];
-	RCVD_TLS_ALL(0.00)[];
-	HAS_ATTACHMENT(0.00)[];
-	DNSWL_BLOCKED(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	RCVD_COUNT_TWO(0.00)[2];
-	FROM_EQ_ENVFROM(0.00)[];
-	TO_DN_SOME(0.00)[];
-	RCPT_COUNT_SEVEN(0.00)[10];
-	MID_RHS_MATCH_FROM(0.00)[];
-	RECEIVED_SPAMHAUS_BLOCKED_OPENRESOLVER(0.00)[2a07:de40:b281:106:10:150:64:167:received];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[suse.com:email,imap1.dmz-prg2.suse.org:helo,imap1.dmz-prg2.suse.org:rdns,korea.ac.kr:email]
-X-Spamd-Bar: ++++
-X-Rspamd-Queue-Id: 23FF31F441
 X-Rspamd-Action: no action
-X-purgate-ID: tlsNG-d62444/1791455617-1DA7E757-515B0F6C/35/110847
+X-Rspamd-Server: rspamd1.dmz-prg2.suse.org
+X-purgate-ID: tlsNG-4011c0/1791455824-502F0CFC-3CB1C65A/35/110847
 X-purgate-type: clean
-X-purgate-size: 9527
+X-purgate-size: 7257
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------8gctMZysacNUg04EXglOdQFe
-Content-Type: multipart/mixed; boundary="------------6rtO6HI61SAhPorWYYQy3SMb";
+--------------e46aryaWW0KyeUhbWDPpmWNY
+Content-Type: multipart/mixed; boundary="------------qu7IWwy8QFAhpVzf0SBiucwQ";
  protected-headers="v1"
 From: Juergen Gross <jgross@suse.com>
-To: Yehyeong Lee <yhlee@isslab.korea.ac.kr>, sstabellini@kernel.org,
- oleksandr_tyshchenko@epam.com, bhelgaas@google.com, jbeulich@suse.com,
- konrad.wilk@oracle.com, xen-devel@lists.xenproject.org,
- linux-pci@vger.kernel.org, linux-kernel@vger.kernel.org
-Cc: stable@vger.kernel.org
-Message-ID: <b89b0a57-ecb6-44c9-9a3c-ef913756fa79@suse.com>
-Subject: Re: [PATCH v2] xen/pcifront: check that an AER callback exists before
- calling it
-References: <20261006023443.338194-1-yhlee@isslab.korea.ac.kr>
-In-Reply-To: <20261006023443.338194-1-yhlee@isslab.korea.ac.kr>
-Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
- ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
- Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
- pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
- tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
- OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
- v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
- 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
- jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
- DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
- Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
- dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
- AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
+To: Koichiro Den <den@valinux.co.jp>, Viresh Kumar <viresh.kumar@linaro.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>
+Cc: xen-devel@lists.xenproject.org, linux-kernel@vger.kernel.org
+Message-ID: <576bbb3d-48a3-436c-b626-b0f2dd493a9e@suse.com>
+Subject: Re: [PATCH] xen/privcmd: Only claim ioreqs matching an ioeventfd
+References: <20260821084112.2374949-1-den@valinux.co.jp>
+In-Reply-To: <20260821084112.2374949-1-den@valinux.co.jp>
 
---------------6rtO6HI61SAhPorWYYQy3SMb
-Content-Type: multipart/mixed; boundary="------------pwuvVF7TOmy7zbxc0yi1FJKI"
+--------------qu7IWwy8QFAhpVzf0SBiucwQ
+Content-Type: multipart/mixed; boundary="------------LGUGRzYu6Aev1yfiF9nnrIok"
 
---------------pwuvVF7TOmy7zbxc0yi1FJKI
+--------------LGUGRzYu6Aev1yfiF9nnrIok
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
-T24gMDYuMTAuMjYgMDQ6MzQsIFllaHllb25nIExlZSB3cm90ZToNCj4gcGNpZnJvbnRfY29t
-bW9uX3Byb2Nlc3MoKSBoYW5kbGVzIGFuIEFFUiByZXF1ZXN0IGZyb20gdGhlIGJhY2tlbmQg
-YnkNCj4gZGlzcGF0Y2hpbmcgb24gYWVyX29wLmNtZCB0byB0aGUgYm91bmQgZHJpdmVyJ3Mg
-UENJIGVycm9yIGhhbmRsZXIuICBJdA0KPiBvbmx5IGNoZWNrcyB0aGF0IGVycl9oYW5kbGVy
-IGFuZCBlcnJfaGFuZGxlci0+ZXJyb3JfZGV0ZWN0ZWQgYXJlIHByZXNlbnQsDQo+IHRoZW4g
-Zm9yIHRoZSBtbWlvX2VuYWJsZWQsIHNsb3RfcmVzZXQgYW5kIHJlc3VtZSBjb21tYW5kcyBp
-dCBjYWxscyB0aGUNCj4gY29ycmVzcG9uZGluZyBjYWxsYmFjayB1bmNvbmRpdGlvbmFsbHku
-ICBUaG9zZSB0aHJlZSBjYWxsYmFja3MgYXJlDQo+IG9wdGlvbmFsIC0tIHRoZSBQQ0kgY29y
-ZSBOVUxMLWNoZWNrcyBlYWNoIG9mIHRoZW0gaW5kaXZpZHVhbGx5IGJlZm9yZQ0KPiB1c2Ug
-LS0gYW5kIG1hbnkgZHJpdmVycyAoZm9yIGV4YW1wbGUgaWdiLCBpZ2MsIGljZSBhbmQgaXhn
-YmV2ZikgaW5zdGFsbA0KPiBlcnJvcl9kZXRlY3RlZCB3aXRob3V0IGFsbCBvZiB0aGVtLg0K
-PiANCj4gYWVyX29wLmNtZCBjb21lcyBmcm9tIHRoZSBzaGFyZWQgcmluZywgc28gYSBtYWxp
-Y2lvdXMgb3IgYnVnZ3kgYmFja2VuZA0KPiBjYW4gc2VuZCBYRU5fUENJX09QX2Flcl9tbWlv
-IChvciBfc2xvdHJlc2V0L19yZXN1bWUpIGZvciBhIGRldmljZSB3aG9zZQ0KPiBkcml2ZXIg
-bGVhdmVzIHRoYXQgY2FsbGJhY2sgTlVMTCBhbmQgbWFrZSB0aGUgZnJvbnRlbmQgY2FsbCB0
-aHJvdWdoIGENCj4gTlVMTCBwb2ludGVyLCBjcmFzaGluZyB0aGUgZ3Vlc3QuDQo+IA0KPiBD
-aGVjayBlYWNoIGNhbGxiYWNrIGJlZm9yZSBjYWxsaW5nIGl0LiAgV2hlbiBtbWlvX2VuYWJs
-ZWQgb3Igc2xvdF9yZXNldCBpcw0KPiBhYnNlbnQsIHJldHVybiBQQ0lfRVJTX1JFU1VMVF9S
-RUNPVkVSRUQgc28gcmVjb3ZlcnkgcHJvY2VlZHMsIGFzIHRoZSBQQ0kNCj4gY29yZSBkb2Vz
-IGZvciBhIG1pc3NpbmcgY2FsbGJhY2s7IHJldHVybmluZyBQQ0lfRVJTX1JFU1VMVF9OT05F
-IHdvdWxkDQo+IGluc3RlYWQgbWFrZSB4ZW4tcGNpYmFjayB0ZWFyIHRoZSBndWVzdCBkb21h
-aW4gZG93bi4NCj4gDQo+IEZpeGVzOiA5NTZhOTIwMmNkMTIgKCJ4ZW4tcGNpZnJvbnQ6IFhl
-biBQQ0kgZnJvbnRlbmQgZHJpdmVyLiIpDQo+IENjOiBzdGFibGVAdmdlci5rZXJuZWwub3Jn
-DQo+IFNpZ25lZC1vZmYtYnk6IFllaHllb25nIExlZSA8eWhsZWVAaXNzbGFiLmtvcmVhLmFj
-LmtyPg0KDQpSZXZpZXdlZC1ieTogSnVlcmdlbiBHcm9zcyA8amdyb3NzQHN1c2UuY29tPg0K
-DQoNCkp1ZXJnZW4NCg==
---------------pwuvVF7TOmy7zbxc0yi1FJKI
+T24gMjEuMDguMjYgMTA6NDEsIEtvaWNoaXJvIERlbiB3cm90ZToNCj4gVGhlIGlvZXZlbnRm
+ZCBoYW5kbGVyIHNoYXJlcyBpdHMgZXZlbnQgY2hhbm5lbCB3aXRoIHRoZSB1c2Vyc3BhY2Ug
+ZGV2aWNlDQo+IG1vZGVsLiBJdCBtdXN0IG9ubHkgY2xhaW0gcmVxdWVzdHMgdGhhdCBtYXRj
+aCBhIHJlZ2lzdGVyZWQgaW9ldmVudGZkLg0KPiBPdGhlciByZXF1ZXN0cyBhcmUgbGVmdCBm
+b3IgdXNlcnNwYWNlLg0KPiANCj4gaW9ldmVudGZkX2ludGVycnVwdCgpIGN1cnJlbnRseSBt
+YXJrcyBldmVyeSBNTUlPIHdyaXRlIElOUFJPQ0VTUyBiZWZvcmUNCj4gbG9va2luZyBmb3Ig
+YSBtYXRjaC4gRm9yIGFuIHVubWF0Y2hlZCByZXF1ZXN0IGl0IGRyb3BzIHRoZSBsb2NrIGFu
+ZA0KPiByZXN0b3JlcyBSRUFEWS4gVXNlcnNwYWNlIG1heSBzZWUgSU5QUk9DRVNTIGFuZCBz
+a2lwIGl0LiBSZXN0b3JpbmcgUkVBRFkNCj4gZG9lcyBub3Qgc2VuZCBhbm90aGVyIG5vdGlm
+aWNhdGlvbi4gSWYgdXNlcnNwYWNlIGhhbmRsZXMgdGhlIHJlcXVlc3QgYXQNCj4gdGhlIHNh
+bWUgdGltZSwgdGhlIFJFQURZIHN0b3JlIG1heSBvdmVyd3JpdGUgaXRzIHN0YXRlLg0KPiAN
+Cj4gRmluZCBhIG1hdGNoaW5nIGlvZXZlbnRmZCBiZWZvcmUgY2hhbmdpbmcgdGhlIHJlcXVl
+c3Qgc3RhdGUuDQo+IA0KPiBUaGUgbG9jayBub3cgcHJvdGVjdHMgb25seSB0aGUgaW9ldmVu
+dGZkIGxpc3QuIFVzZSBleHBsaWNpdCB2aXJ0XyptYigpDQo+IGJhcnJpZXJzIGZvciB0aGUg
+aW9yZXEgc2hhcmVkIHdpdGggWGVuLg0KPiANCj4gRml4ZXM6IGYwZDdkYjdiMzMyNCAoInhl
+bjogcHJpdmNtZDogQWRkIHN1cHBvcnQgZm9yIGlvZXZlbnRmZCIpDQo+IENjOiBzdGFibGVA
+dmdlci5rZXJuZWwub3JnDQo+IFNpZ25lZC1vZmYtYnk6IEtvaWNoaXJvIERlbiA8ZGVuQHZh
+bGludXguY28uanA+DQoNClJldmlld2VkLWJ5OiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3Vz
+ZS5jb20+DQoNCg0KSnVlcmdlbg0K
+--------------LGUGRzYu6Aev1yfiF9nnrIok
 Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Description: OpenPGP public key
@@ -292,25 +230,25 @@ kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
 =3DeeAB
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------pwuvVF7TOmy7zbxc0yi1FJKI--
+--------------LGUGRzYu6Aev1yfiF9nnrIok--
 
---------------6rtO6HI61SAhPorWYYQy3SMb--
+--------------qu7IWwy8QFAhpVzf0SBiucwQ--
 
---------------8gctMZysacNUg04EXglOdQFe
+--------------e46aryaWW0KyeUhbWDPpmWNY
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmrHcX8FAwAAAAAACgkQsN6d1ii/Ey9s
-Vwf9HRlL7X7EoZ/5DXTpuK59X/4TndaeW2HGoPGrzPzsqLw5jW7om6qB6QAOpy3S6OyI22T6nFdh
-2nYnzhF3+urGGpqwcF8409TqxXJPxUjOH0ycNkdwP0qJ2+7UlHA8JoLUXMOnrRreuEBuQGGWXnVO
-pdwiTuFiizRyq3nocUyc65gQY/x/8zDApoeba/kA6N8E6g1FwpICBE08u1NRJ8TILprZJ/unbePZ
-qGEU/XRbxpT+Zd4bH+qg1UvoL3DmfAy8XOXSmk/o0+RTfAY35rDjiGLLyyT1TBBTjM6oDgvoEtpK
-NjwQRPebqHHpLdWSOIchxJ2lAqeCoCln5/pkvFMjiA==
-=IJGy
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmrHck4FAwAAAAAACgkQsN6d1ii/Ey/M
+ZQgAhkQLIt4TjQvAFXWfjlDCaBYqZUEB7jUItizu1VaYHKsmDNqz8Ys+xTvKCDBBnvlTLaXe3rbx
+AZyukz0JlgiE2cw+zeMnPe4GXt/xHCI3qXjyPz/p76bHSCNriViLWbyzrLGU5waW45m3HyE5zYZS
+diCx8hRHLqrexRaghbzoq3GiLib60CrvtT/PrXxdPKtsKlh5g8My5A1QlEMZ+me4L72G5FFPz0fL
+greynD0JpO6oLNVU45MedP1A3x10a3piEo92BTwre6Ez9Vb2efTbLoQ29qtOPOdeL8xHxBiQ41SH
+wjpAIGdbDFDrIbcOR2PjThuCpQoFrFoMsnvulZitKQ==
+=OQxM
 -----END PGP SIGNATURE-----
 
---------------8gctMZysacNUg04EXglOdQFe--
+--------------e46aryaWW0KyeUhbWDPpmWNY--
 
