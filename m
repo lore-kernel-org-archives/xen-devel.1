@@ -4,46 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8C1C5CA600B
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 11:52:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1443242.1660619 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 34BF3CA600B
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 11:57:39 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1443250.1660627 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEmfe-0002BS-8l; Thu, 08 Oct 2026 11:52:22 +0000
+	id 1xEmkY-0002nj-PE; Thu, 08 Oct 2026 11:57:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1443242.1660619; Thu, 08 Oct 2026 11:52:22 +0000
+Received: by outflank-mailman (output) from mailman id 1443250.1660627; Thu, 08 Oct 2026 11:57:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEmfe-0002BL-5L; Thu, 08 Oct 2026 11:52:22 +0000
-Received: by outflank-mailman (input) for mailman id 1443242;
- Thu, 08 Oct 2026 11:52:21 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmytro_prokopchuk1@epam.com>) id 1xEmfd-0002BF-KL
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 11:52:21 +0000
+	id 1xEmkY-0002nc-MX; Thu, 08 Oct 2026 11:57:26 +0000
+Received: by outflank-mailman (input) for mailman id 1443250;
+ Thu, 08 Oct 2026 11:57:25 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xEmkX-0002nW-BE
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 11:57:25 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEmfc-005T0N-TL
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 13:52:20 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xEmkW-00CPFC-L4
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 13:57:24 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6ac783d1-2eae-0a2a0a5409dd-0a2a450ae50a-48
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 13:52:20 +0200
-Received: from [40.107.162.138]
- (helo=PA4PR04CU001.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6ac783f4-f2d2-0a2a450a0019-286ba28a320c-3
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 13:52:20 +0200
-Received: from AM9SPR01MB0028.eurprd03.prod.outlook.com
- (2603:10a6:20b:410::12) by PA4PR03MB8223.eurprd03.prod.outlook.com
- (2603:10a6:102:26d::7) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.17; Thu, 8 Oct
- 2026 11:52:18 +0000
-Received: from AM9SPR01MB0028.eurprd03.prod.outlook.com
- ([fe80::851:da2d:b88a:1b50]) by AM9SPR01MB0028.eurprd03.prod.outlook.com
- ([fe80::851:da2d:b88a:1b50%6]) with mapi id 15.21.0496.015; Thu, 8 Oct 2026
- 11:52:18 +0000
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ac7850d-e002-0a2a0a5209dd-0a2a45038f42-44
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 13:57:24 +0200
+Received: from [40.93.196.31]
+ (helo=SA9PR02CU001.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ac78520-fae8-0a2a45030019-285dc41f6d5a-3
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 13:57:23 +0200
+Received: from PH8P221CA0060.NAMP221.PROD.OUTLOOK.COM (2603:10b6:510:349::9)
+ by SJ0PR12MB5612.namprd12.prod.outlook.com (2603:10b6:a03:427::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.16; Thu, 8 Oct
+ 2026 11:57:16 +0000
+Received: from SA2PEPF00003F62.namprd04.prod.outlook.com
+ (2603:10b6:510:349:cafe::7e) by PH8P221CA0060.outlook.office365.com
+ (2603:10b6:510:349::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.496.5 via Frontend Transport; Thu, 8
+ Oct 2026 11:57:16 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SA2PEPF00003F62.mail.protection.outlook.com (10.167.248.37) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.496.14 via Frontend Transport; Thu, 8 Oct 2026 11:57:15 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.49; Thu, 8 Oct
+ 2026 06:57:11 -0500
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.49 via Frontend
+ Transport; Thu, 8 Oct 2026 06:57:09 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,142 +66,215 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=EyU5ZGETtHfOr68qXGAhr4IefJVo96vCE1couCn9Kh+3/CVZtbBS3JREHIG/EdPPuSEwhUQB7BmknSOej+ldRD31GyQM+ZrPK1lNa0sQTgjKAl9aYNRrS1QFrPS4lCaLm6UUY4olmP1zBrjFRwPQ8dva7QeU3KWSxlEaySNqvZ/Ih77jc1tZIfg336y4A2n5xXZdVdyxSgCx73PQhdH8VkI0j9Ma+47837Jk7w6u/QcgOuyOKFAgL7ReQPHh69O4rkC6FclnR6J9OQHXEc3yqPOJG/5Zs90b2u51MrVR5j6uwYGckbswpgtsnSYntLx63GVv2D6gg4lI1oeAIzNKeA==
+ b=J2XKYqwZo6vRK8GmMovUaEEa10t5s2lNackhTUGUPajnnn/NoYarjE7zwciQwBrpRYi/HEb6N7fgjeOwvKOl2bO+8/i7rR3Z0Ds0M3hAJQFuLKxv67nfS7Mx+wDX/G6x7zDer6/azekVrajf5t1nAEYvrTqHf42tL/zu/PYgMz0g/wzFAt3S+OAgE1uEsPM7hPY3RguBRHQHTF1uIZ7U0Yr0FMxMF/MtDnGRPx7tkN/oo04At7kYuGSqDaF16PonwMU5o5KpAgcp2gje6Fn/iURxLVzDXSpy8AYEetV/LZ6vB4+7AmHTZyHSzOsMu6bSPeGuWCnw9eq/aqtUJFrdnA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sZDA2glfVKsohaT+q9MvuOP/DiisaMtmTAUR0MP4+R8=;
- b=sDVKvYUoCVqhhtXmH75mJYtsfdjwUrMVPaIbIIrvzbpxiSx/gj64wIRSk5RB2N18/f3JlGPIE0U7g3nueyjbIBgbZLNwVtaO/Jp1BgVgwAXxwKfNEcn3XkSqspCIb/Q40cYLhECrPsgo5uVO+QwungswSsbucGVChaNwyDzd6/luP9eXVtwOnlJHk8B1fj+WcxIht3Evmktak1hSD2Dw/kru0D05fssnyT+CQjzlYDnvzrTB3Tnab6f5pJnpVpL2Q6RCY31gRHcaqDE9bcKZs2Kz8gsXKiC0POyltnFzy+tLor2JwhICHE8MA21Gvph7ct2UbY+3fZqhgnuiSPrBNQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ bh=OvUcOoxGa9GM4rKmJX/AvXT9lpP1bCoPA6uImLgNC5Q=;
+ b=FWtgFBN+6polqRmdCstjKk4Jg4iIDqo5sl1rwFfQKgIoDvI9eOPWUQtwAudnA5JqOLV50M8MRlcjTgscEOQ21+Gx5dzASFSXR9jGuCzJS4A+Ewii3fB8dKoxfbiSHRU1APjh3m+AhLfgd6m5+E1NCDEx6ylMbxDxgrojlhH8Nrr/rbE0RIkLR2q3UQO/QZf/IR+2uTkH5OSydNMnaF2uSAQlWN6bFLHqz0lZy05uJAEvAjoFFppd7O2p/hzfmDC+K+NaI9FvUIpMCH5thatSyVObdH8jI3GIM/264qj8I0cnkq38JDEXThbtPxDxUObc3aflDuBWyrJOT/iPNYNuBA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sZDA2glfVKsohaT+q9MvuOP/DiisaMtmTAUR0MP4+R8=;
- b=PyBNYmL8Y51VoORCqGf9ukoMtY2qdoe4UdDMId12Hid4qRM0F5tAhPt1YptPK1ykR37ASuKBNGN1RlsTiB4jhxbMxPkWNbRWkbyHI1XOmWL0qOlYyuvTy1A2/Z+Fa54PA4BiKZVmcvmskmiMQBBWfA7vjW/1TQI2znTDiwUaOgMKxuaAsylITlQ8r8shHdEcQAsL4zkGccQPEADPXOaqbIR6I4yqJeh+ECQ5LpCX1SK4afs+i7ivgFi6Ra1+ZY3+RaBmzBm9wU6nRc+QvEuOFdrtXHRkCuwr9fZSL60Y8fLZQbV0hE3VPRYSjsZGiTZCG6lABJUS3mKFFXRH42LjUg==
-From: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien
- Grall <julien@xen.org>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
-	<roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH] virtual_region: address Misra C:2012 rule 18.3
-Thread-Topic: [PATCH] virtual_region: address Misra C:2012 rule 18.3
-Thread-Index: AQHdVxt4SHehqFazWUu0IFdrUKTAbA==
-Date: Thu, 8 Oct 2026 11:52:18 +0000
-Message-ID:
- <2281ddbddfaec79635ba8d2cf8aec669ac858e89.1791458533.git.dmytro_prokopchuk1@epam.com>
-Accept-Language: en-US, uk-UA, ru-RU
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AM9SPR01MB0028:EE_|PA4PR03MB8223:EE_
-x-ms-office365-filtering-correlation-id: 724c8204-b68b-43c0-2b1f-08df25329ad1
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|23010399003|376014|42112799006|366016|1800799024|18002099003|10067099003|38070700021|11063799006|260925021311599003|260925022911599003|260925021911599003|56012099006;
-x-microsoft-antispam-message-info:
- a1XUUD3luA3j5qsxyXWNTcjAVQ7sR+HR1zJio9qWuOxy7rMkY/u+zsAAWkFsZPbSo5OCnhHlXqlhcouNtttJa2Iv6YooU/bpI/yX+I+EI3qGdOkR0ZYMHcpuzX1ism1W9Ax0n5O/HNLrLmYINRzqRNE16GlKL+KJyCAP1AWuUExFCYR3vpGoVijTpATP44fjpDCYdWrOfKinU0DpJksA+/Kr0DrGKhL+tp6dmO1JYJ3MxCSrk/pd7NfAEyfKrFALu3RUwheDlELnVvy/08GptsZnUABsy8I4/ljfos7grx0riLYi3UUjURqcIUzKB2iI3gWM8NGfLZnKtWgOprPNYf9ymVnjnXWnp3RVXQP9H+K8pLM/loA/StVPX1CtXy19yRmfGuEIy4wc4pnaKj7u1KtEpzCk6IP/jx9d+cQji+7UxRDh7ZmQYneiOsXiZ9OtroTbxBi2eWwSevrdnYyTAWRvX3IcRu0dWZQueYfQLP+SvUByctrEyhvp3J/8Mjw/A4VsxlVD4muRYY/o0vUypKipaMQCPuOpmE3JTWwUfErZXPur5k9eEuWIntBqt88FIc5lucDjqOrErI4WJ5zeRjfmG6/cfs7rs06tmdPXXb5jt9bToKebBK2KOxtZrqdvJQxe8JN9St6/TJolgtgKXu4sA/aUvCa3Vzbfds4FB8w=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9SPR01MB0028.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(42112799006)(366016)(1800799024)(18002099003)(10067099003)(38070700021)(11063799006)(260925021311599003)(260925022911599003)(260925021911599003)(56012099006);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?e+MmtGZb0T3lA5SG8pqDYNAs20+jIekReAkd2iKH5AzD1HsfeeG3ZGK2DA?=
- =?iso-8859-1?Q?daTiyPliOeObAsWMd0dmTckBADtv2+Cececb1SWZZ0oUqbXX5lbEuaFR1P?=
- =?iso-8859-1?Q?wD2VffKvHp/XDTu6YkMMDTR1HE+qNiDPI6eX/ObQYovT7TI1ruj27MIKrY?=
- =?iso-8859-1?Q?o/srzDGvZWnW3UFvI11DYkNoiHE1EKuOQeb/st3K2rR5o9yWi1YNe2wPJv?=
- =?iso-8859-1?Q?TUZah40IYKJ5/KCS97KhxsYtWW8y6n13BO0YUCqyEYnF39pjuQP/tKfzDB?=
- =?iso-8859-1?Q?n7SYDelO1xKFKvemCcifdauNv8kWsQPwhTGyUm2TJwnRfMGWSbkmmz2twD?=
- =?iso-8859-1?Q?+tsbM+NijZeC0zzv51yDBdxuRMs/dcau4C+QMSemkFc2TzH9tPSAFoGydd?=
- =?iso-8859-1?Q?RhWM8dAUr7i11dA94gEXOt9IhS9zOlrPqzOdL7fBlmsLOToqxhAUFlmeyI?=
- =?iso-8859-1?Q?ksXVsltbZEnzwbB2/0t9TX1E5w7Z9R76nRdKBYdEf9Vx1JJDIXBoK8bHTN?=
- =?iso-8859-1?Q?RmsYbyOovLmoSL8VG1X0hn/XvXkAy+eXMI94LIPW1Ci8EtMR556aey0n43?=
- =?iso-8859-1?Q?SKGC45qsXbqOOC4Qnjl1P/hLQF7qG3sdEdJDZCA6fQZXuyjzlkT8VUwGSW?=
- =?iso-8859-1?Q?Fxa5fzdSB3L0F1m1KAsPathchMRQ/UPHkcLRrHEhhP9T6W9h0tYoN4Q8zt?=
- =?iso-8859-1?Q?y5Vu0BimfvDPbX+jCbyjy7ZNqFpxsYqfWT+hJSD9o9cJeLxMZfjZ0cp3Tz?=
- =?iso-8859-1?Q?uwFxeFdpoHyxmrq/ywOFSxDZ/Kpfhjm+qNCyC1CHfThr5FtW2hUUEYb/iI?=
- =?iso-8859-1?Q?DOt1r5A1Z7o9DHd+qqjJcB0P5TtTyclL1zmLsIwOqO80Ww9GJYWvtItGQR?=
- =?iso-8859-1?Q?0jkkqAHLNVZydb0Oj2KXou3lubAHjhEgrBDmBM7pt5aGT6iHz3PRPoAkk0?=
- =?iso-8859-1?Q?dTnsOnBoGQO14eaK8zvoecLr/rilXwJZbh2U1bmrlwcVrD9OkGv6D0zxfF?=
- =?iso-8859-1?Q?70SP4xUYSCveVtQgAolOWkBOU9t0+C+HnlFwVVnIU5d3ZoZaFW9UZbIIjU?=
- =?iso-8859-1?Q?pYWqNjtaKzekrGjptWafXNucvs1zGmq+MWwLUazhZF0xquZVQPsdKpnsth?=
- =?iso-8859-1?Q?BQ8bRRKYVbUeBgbrP9jv5FvpeMUwWredHoXltBjysR3z0B6ThNsRUkisda?=
- =?iso-8859-1?Q?y++UeQYnfZ/mn2lZ8PT6H9XmRSOXLeYcQ/3Qs2Aqbmg1O9gOrKwwzILOrj?=
- =?iso-8859-1?Q?3+vcFJJrRRGauUl1GCHKDBB84qSwn5DlEFzKrqpUwhTrHusKJ6I3TpW/sK?=
- =?iso-8859-1?Q?naQKn8/BNNZEmdWQF37el1EkHH34CAvlA48uzpfnNV/ONTFccHtrCdVyaj?=
- =?iso-8859-1?Q?hqX+dScLhH5sGmx3YjP+drrYN5ybx+Mc0kkgscYbrg0MwPC4/IAGwvR9tQ?=
- =?iso-8859-1?Q?kb20nf0feO/6w4hmfKpegJXLJDQfu6YNWuS8FF4G+/Zmsg10xsDeGfxtmP?=
- =?iso-8859-1?Q?KLFyZuUfZ0jy5It6dNiI/0dlX60nkM7NoWKCwm01gpEzVzr3aIco+KTQdu?=
- =?iso-8859-1?Q?n4DJ91T1Wpk4i33d63/0Kb8U4DlxRvV398owV6svWHotnP0SNorUSoBGuD?=
- =?iso-8859-1?Q?PXX8RjPjfW3/knW055Xk+ej18lxq28x5plmTt9M7y+wkDkCz96UlMoE+HW?=
- =?iso-8859-1?Q?7WiX0W7SgBhzcRyZnl94LdpC3KxeNM/W9JgzMsAhFTCk1/Dlk5qgSBo+1O?=
- =?iso-8859-1?Q?GvGQ8cBjDsVxFIWWu7nbgEkAy3OhObF/FI8BY04sitIeUEbZ4nZqSkBcHJ?=
- =?iso-8859-1?Q?P3+Nxz2MZeAOlkjxLU/AQk1haqmK6M0=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ bh=OvUcOoxGa9GM4rKmJX/AvXT9lpP1bCoPA6uImLgNC5Q=;
+ b=UW3qwsMg8AvWtTkz/U1h5SUpC9LKAQac4WXOYWguZwD2/htIWzDuUGgObWTkJUv3Hx5D6LCqqxq3xXtyu6NP6igdPp5CU+zvNP/W2GHuGyuwn5EpJ8m+TKTHGCCAImIL3ACkZQPWCvRH2nrYLsTbfOYpGJRDlDj2oKtahBwGuwM=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <e4f83aff-b140-48dc-8858-d60657568fa9@amd.com>
+Date: Thu, 8 Oct 2026 13:57:08 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM9SPR01MB0028.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 724c8204-b68b-43c0-2b1f-08df25329ad1
-X-MS-Exchange-CrossTenant-originalarrivaltime: 08 Oct 2026 11:52:18.5327
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/2] xen/device-tree: add a helper to dump an FDT in
+ DTS-like format
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	<xen-devel@lists.xenproject.org>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>, Julien Grall
+	<julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>
+References: <20261001111630.112472-1-oleksii.kurochko@gmail.com>
+ <20261001111630.112472-2-oleksii.kurochko@gmail.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <20261001111630.112472-2-oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SA2PEPF00003F62:EE_|SJ0PR12MB5612:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4911ef6f-4459-4f78-be77-08df25334c12
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|36860700016|82310400026|376014|1800799024|6133799003|11063799006|5023799004|56012099006|4143699003|10067099003|22082099003|18002099003|3023799007;
+X-Microsoft-Antispam-Message-Info:
+	plWMpPiKYY8Np+5PdcKZ4VUs7oxFXvySykqxVSZN36qOhJGyS2RwIey0w6kftQnD2HCJWqohUE66/+kLtPW/tmBUUSgrXuC/+EDtTJ/LgJThM+o4T+3fTktXhXzPOKqtgB7rAgVw2FH5d12MCWH7BWdBKJjLIZrXYan6oFkDUHkgrniD/RhDnmKSL+3bxpFxt48p5k/sTKAjN4CEpd/Ltb+TW5OpA66eAFOggYDTMrT+u8ntrev676aIjkTIycyXgnutzhunLy5ZSIYQp/metbJUnTfa6usl1iMwqjNs/8I4bgTqxc5ZjXbj4qvNWz16E7YFO8835Yma4t8B2HZMYf6Z4pTPaN4oWmvOA0SXOfRqvc4VJ4LP7BN0b8aGL/IaVGP5/hraP+9SQZb7cEpqcBK1TSsXUA/zJH5f5R2DTZqF8Y405bXkqTFfV1tm+atiGk4dE4TsoTg8oD70NbUD8t0eyAor7ZsWP+ScgTuoxmh9tJFXT7hmlg0hImG7DdorBesFP26vAZp099kPLi+ah8Zrsp5h1pZ7z9dJpYQxErXOrfSNCiMQAxgoiESctRaGnJjhPkGOrH8HO03kEq6eyvlXjNzbm+S7kNN8mpoOWKHap7JlGE98EGcQ3c4NYr1h/YCpw/5TFs9g3meXi/WZbNqPZwzT7incOuLlAZuv/gZ3htQvCx7k5pbRQFEPSTEq3tDywHhWpmH1TZ+Et6eLSw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(36860700016)(82310400026)(376014)(1800799024)(6133799003)(11063799006)(5023799004)(56012099006)(4143699003)(10067099003)(22082099003)(18002099003)(3023799007);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	pP1Oywsnu7GlM5JPUW+RhnzSIr8S2vlZCivVQ9UD/AAzzBN3KBl4PdZY2/RVL+iYOYFf1YqmtrLkzEi7KTqzHLY8ALJOb/835XhDbtGFjnZpMnZDa0f45vV0MUvGxjLMt8wpJKPxtx8msvQ6T1eWtPAHVAGeG9suJVDAMG/W9jVLy7arzLLbQWduSIk9nyk1E0Cyn2FGUaNdbjF0ylm/zQ+poa2sXgYIs7Zy8H1dgyHgke49eQ/2w4zVgkDNpt7zJG2IEuOwhICyq+FOKn7PmKdq1vLiRb2ddGYkL0NwYt679BD0inx8PItdT87n9QWR1W9rNOhE1IHKFPGrNvp2JVzawXat3vtRZe4E1ZZryGG3y5SWaoU1ZOSL7aUnNd+o5ooiBzB71gigDbuuTG81KdzcQ7XuUpBVNI2P5Y/2cY29rpiq/gS4gdxC1UjPjlEe
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 08 Oct 2026 11:57:15.9133
  (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: jZUou34u7RLHgo+U4RKLHjDCopdez/l1aiFbP9jWLOsBZ65uJB0aKLR7A/Sk0r5FlfEAtVeVpJyAbDGZcqVM6KMyE3EUGtCj+0qPkUCyLyU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB8223
-X-purgate-ID: tlsNG-4011c0/1791460340-508CDCFC-0D865313/0/0
-X-purgate-type: clean
-X-purgate-size: 1582
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4911ef6f-4459-4f78-be77-08df25334c12
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SA2PEPF00003F62.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB5612
+X-purgate-ID: tlsNG-33051d/1791460644-754844E9-031CB6EB/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 5531
 
-find_text_region() tests whether an arbitrary address lies inside
-[text_start, text_end). The address and those bounds are not known to
-point into one object, so relational operators on the pointers are
-undefined behaviour and violate Misra C:2012 rule 18.3.
 
-The bounds are cast to unsigned long because addr already has that
-type. The type is wide enough to hold a pointer, so the comparison
-result stays the same.
 
-No functional changes.
+On 01-Oct-26 13:16, Oleksii Kurochko wrote:
+> The device tree Xen builds for a dom0less domain is only ever consumed
+> by the guest, so a mistake in it surfaces as an obscure failure inside
+> the domain, far away from the code which produced the tree.
+> 
+> Add device_tree_dump(). The output follows dtc's format so that a dump
+> can be diffed against the source DTS or fed back to dtc; the value
+> formatting heuristics are ported from dtc's utilfdt_print_data() for
+> that reason. The walk itself goes through libfdt rather than decoding
+> the tag stream by hand as dtc's fdtdump does.
+> 
+> Dumping a whole tree is only useful while debugging and costs both code
+> size and a lot of console output, hence CONFIG_DEVICE_TREE_DEBUG. Mention
+> the dump in the help text of the option.
+We should also dump the DTB for dom0/hwdom in prepare_dtb_hwdom(). Please add
+that to this patch.
 
-Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
----
-A deviation does not fit because find_text_region() compares an arbitrary a=
-ddress
-with bounds (as was proposed here:
-https://patchew.org/Xen/901917945f704643e95842a773be9e8676f76d10.1755690681=
-.git.dmytro._5Fprokopchuk1@epam.com/).
+> 
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> ---
+>  xen/Kconfig.debug                       |   3 +-
+>  xen/common/device-tree/Makefile         |   1 +
+>  xen/common/device-tree/dom0less-build.c |   4 +
+>  xen/common/device-tree/fdt-dump.c       | 180 ++++++++++++++++++++++++
+>  xen/include/xen/bootfdt.h               |  13 ++
+>  5 files changed, 200 insertions(+), 1 deletion(-)
+>  create mode 100644 xen/common/device-tree/fdt-dump.c
+> 
+> diff --git a/xen/Kconfig.debug b/xen/Kconfig.debug
+> index d900d926c555..664f50bf8a96 100644
+> --- a/xen/Kconfig.debug
+> +++ b/xen/Kconfig.debug
+> @@ -95,7 +95,8 @@ config DEVICE_TREE_DEBUG
+>  	depends on DEVICE_TREE_PARSE
+>  	help
+>  	  Device tree parsing and DOM0 device tree building messages are
+> -	  logged in the Xen ring buffer.
+> +	  logged in the Xen ring buffer. The device tree generated for each
+> +	  dom0less domU is dumped there as well, in a DTS-like format.
+I think we could have a separate option DEVICE_TREE_DUMP that depends on
+DEVICE_TREE_PARSE. Sometimes all we need is just to see how the generated DTB
+look like without seeing thousands of other DT debug messages. Especially that
+nothing in fdt-dump.c depends on DEVICE_TREE_DEBUG.
 
-Casting resolve this MISRA violation.
----
- xen/common/virtual_region.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+>  	  If unsure, say N here.
+>  
+>  config SCRUB_DEBUG
+> diff --git a/xen/common/device-tree/Makefile b/xen/common/device-tree/Makefile
+> index 9036e455d66a..959dd2a9fd30 100644
+> --- a/xen/common/device-tree/Makefile
+> +++ b/xen/common/device-tree/Makefile
+> @@ -6,6 +6,7 @@ obj-$(CONFIG_DOMAIN_BUILD_HELPERS) += domain-build.init.o
+>  obj-$(filter $(CONFIG_DOM0LESS_BOOT),$(CONFIG_HAS_DEVICE_TREE_DISCOVERY)) += dom0less-build.init.o
+>  obj-$(CONFIG_DOM0LESS_BOOT) += dom0less-bindings.init.o
+>  obj-$(CONFIG_OVERLAY_DTB) += dt-overlay.o
+> +obj-$(CONFIG_DEVICE_TREE_DEBUG) += fdt-dump.init.o
+>  obj-$(CONFIG_HAS_DEVICE_TREE_DISCOVERY) += intc.o
+>  obj-$(CONFIG_DOMAIN_BUILD_HELPERS) += kernel.o
+>  obj-$(CONFIG_STATIC_EVTCHN) += static-evtchn.init.o
+> diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
+> index fcbeb8adbd73..182201384faf 100644
+> --- a/xen/common/device-tree/dom0less-build.c
+> +++ b/xen/common/device-tree/dom0less-build.c
+> @@ -1,5 +1,6 @@
+>  /* SPDX-License-Identifier: GPL-2.0-only */
+>  
+> +#include <xen/bootfdt.h>
+>  #include <xen/bootinfo.h>
+>  #include <xen/device_tree.h>
+>  #include <xen/dom0less-build.h>
+> @@ -587,6 +588,9 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
+>      if ( ret < 0 )
+>          goto err;
+>  
+> +    dt_dprintk("Device tree for %pd:\n", d);
+Move this message to device_tree_dump.
 
-diff --git a/xen/common/virtual_region.c b/xen/common/virtual_region.c
-index 1dc2e9f592..a30e6b9c30 100644
---- a/xen/common/virtual_region.c
-+++ b/xen/common/virtual_region.c
-@@ -83,8 +83,8 @@ const struct virtual_region *find_text_region(unsigned lo=
-ng addr)
-     rcu_read_lock(&rcu_virtual_region_lock);
-     list_for_each_entry_rcu ( iter, &virtual_region_list, list )
-     {
--        if ( (void *)addr >=3D iter->text_start &&
--             (void *)addr <  iter->text_end )
-+        if ( addr >=3D (unsigned long)iter->text_start &&
-+             addr < (unsigned long)iter->text_end )
-         {
-             region =3D iter;
-             break;
---=20
-2.43.0
+> +    device_tree_dump(kinfo->fdt);
+> +
+>      return 0;
+>  
+>    err:
+> diff --git a/xen/common/device-tree/fdt-dump.c b/xen/common/device-tree/fdt-dump.c
+> new file mode 100644
+> index 000000000000..fc3d9eca5891
+> --- /dev/null
+> +++ b/xen/common/device-tree/fdt-dump.c
+> @@ -0,0 +1,180 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +/*
+> + * Dump a flattened device tree blob in a DTS-like format.
+> + *
+> + * is_printable_string() and print_value() are derived from
+> + * util_is_printable_string() and utilfdt_print_data() in the device tree
+> + * compiler (dtc).
+> + *
+> + * Copyright 2011 The Chromium Authors, All Rights Reserved.
+> + * Copyright 2008 Jon Loeliger, Freescale Semiconductor, Inc.
+> + * util_is_printable_string contributed by
+> + *      Pantelis Antoniou <pantelis.antoniou AT gmail.com>
+> + */
+> +
+> +#include <xen/bootfdt.h>
+> +#include <xen/ctype.h>
+> +#include <xen/init.h>
+> +#include <xen/lib.h>
+> +#include <xen/libfdt/libfdt.h>
+> +#include <xen/types.h>
+> +
+> +/* Deeper nodes are still printed, but not indented any further. */
+> +#define DUMP_MAX_INDENT_DEPTH 32
+> +
+> +/* Indentation, in characters, of a node at depth @depth. */
+> +static int __init indent_of(int depth)
+> +{
+> +    return 2 * min(depth, DUMP_MAX_INDENT_DEPTH);
+> +}
+> +
+> +static bool __init is_printable_string(const void *data, unsigned int len)
+> +{
+> +    const char *s = data;
+> +    const char *se = s + len;
+> +
+> +    /* A zero length property, or one which isn't NUL terminated, isn't one. */
+> +    if ( (len == 0) || (s[len - 1] != '\0') )
+> +        return false;
+> +
+> +    while ( s < se )
+> +    {
+> +        const char *ss = s;
+> +
+> +        while ( (s < se) && *s && isprint(*s) )
+Xen's is_print() behaves differently than what dtc uses. You need to combine it
+with is_ascii. Otherwise 0xff would be marked as printable.
+
+~Michal
+
 
