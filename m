@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3E7E2CA6007
-	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 09:29:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1443088.1660467 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id AB61BCA600E
+	for <xen-devel@archiver.kernel.org>; Thu,  8 Oct 2026 09:48:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1443108.1660496 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEkQp-0000H2-Ih; Thu, 08 Oct 2026 09:28:55 +0000
+	id 1xEkjw-0003lB-CF; Thu, 08 Oct 2026 09:48:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1443088.1660467; Thu, 08 Oct 2026 09:28:55 +0000
+Received: by outflank-mailman (output) from mailman id 1443108.1660496; Thu, 08 Oct 2026 09:48:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xEkQp-0000Gu-Fw; Thu, 08 Oct 2026 09:28:55 +0000
-Received: by outflank-mailman (input) for mailman id 1443088;
- Thu, 08 Oct 2026 09:28:54 +0000
+	id 1xEkjw-0003l4-9K; Thu, 08 Oct 2026 09:48:40 +0000
+Received: by outflank-mailman (input) for mailman id 1443108;
+ Thu, 08 Oct 2026 09:48:38 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xEkQo-0000Go-7r
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 09:28:54 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xEkju-0003ky-Aq
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 09:48:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xEkQn-0049km-7H
- for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 11:28:53 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xEkjt-004DXj-Nv
+ for xen-devel@lists.xenproject.org; Thu, 08 Oct 2026 11:48:37 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac7624f-e002-0a2a0a5209dd-0a2a4508e5b0-36
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 11:28:53 +0200
-Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ac766f5-2eae-0a2a0a5409dd-0a2a4503be1e-2
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 11:48:37 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac76254-f659-0a2a45080019-d155802ad820-3
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 11:28:52 +0200
-Received: by mail-wm1-f42.google.com with SMTP id
- 5b1f17b1804b1-4a020e65269so21289825e9.2
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 02:28:52 -0700 (PDT)
+ id 6ac766f5-fae8-0a2a45030019-d1558031a48c-3
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 11:48:37 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4a16c1608faso6031855e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 02:48:37 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48c71d123b5sm9930222f8f.24.2026.10.08.02.28.51
+ 5b1f17b1804b1-4a17f4480a4sm101044835e9.0.2026.10.08.02.48.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Oct 2026 02:28:51 -0700 (PDT)
+ Thu, 08 Oct 2026 02:48:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,57 +54,53 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791451732; x=1792056532; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791452917; x=1792057717; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
          :content-language:user-agent:mime-version:date:message-id:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=q5TXs4tm9M71FUzuIHR7e3tnd6xBqprQJ5FUBQIYQts=;
-        b=ewKdn65c4Do1TY0AGgH9xBfphl1ps1ZTxw20k+hHL5lwUwSFnYWa8yCcUfLgnlennG
-         8oxdKnilDtsRXPvmKS+OiWLyoC2l6fpgK6pK+CmkI8yiWu3AmJblR4xbWc1k035o1a7K
-         Vdk+QDsmF5PY39HGElIJuz/kpTnoI1Ax+XjdqbiWS4Q+6j1H2i/xP6iIe+Ya4DEQ07RP
-         H5U/a+u7LowfNwkR1eb+Tgz7TmCPF31S3ZdirAhZo/64af1cbp0iF62+jEMRmuXTxWYk
-         ZjgBKh7WaORd9qYq9TNo1GHXcYGFCuOMjU+S6H+8TiAWp3JdGiUcgiN1+DatcgXMjxrj
-         Hf7A==
+        bh=DWfH1DGE58SIHUKFq2jZgD9LIrfRjNCQ+Kf8MfrXNwo=;
+        b=IZz1HWsYYRp2hIbfisybyHPsIUtQQPt2hR+F3Gozxbt/UXqw3/2dL+wGh9lOmnMtWJ
+         j+nQqT5SBkG0eytWUM/6EJmBZH+cz4WT5s/V8ZswUm+WdxoN4HS67URknoM8s9SwusZ4
+         pUfYXbck7wkfUHP3ChxKkMXlpsWcdxZ2zZzUCd+nJsAPVmpQJUFNEnguJ2uK1D7H4VNw
+         BXxJSYgppF6aFK7/EDad9pGdJpPKZzHJci8FshF4ynpuj5oHNb3bGzAMfxkVpm7tP5W8
+         eUqG2/sM/ucgP9uHshs3F3VcfnWESXZHQVwoSY0fM9KlK08rT2PzLm1IzZ6rE39we2tt
+         1aJw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791451732; x=1792056532;
+        d=1e100.net; s=20260707; t=1791452917; x=1792057717;
         h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
          :content-language:user-agent:mime-version:date:message-id:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=q5TXs4tm9M71FUzuIHR7e3tnd6xBqprQJ5FUBQIYQts=;
-        b=bwWb9UuCruIvoO9FR07WiqZcyFu6KY/4/0znabH/XzUUeuNBhysax87mfw83s1cr3W
-         4+hPbvU72eyvuFQNkL5YDum8PZZH//S3RvN4Z0rpRJlxMvzapP6x/ZRQOmgyvWrLTC44
-         A7GVx0K+vaYyT8i6KUZ4ZewAMUoU0ACVPCLKp860GGlK552VjHujy+9Gm5q9OC8fAQ9n
-         clAhyEnw8RjTESTFGaJPropfG1B3F0cgu4y+PCzVD7lHTyWBXK/SrLe1d2cjrwjCPtuQ
-         3qd7Y0PHCSXn31EjbbZiujJOj4EA5wB539BGi+tL8lU0AvQbpEaCcu8mgz9v8Q09ecVQ
-         1tUg==
-X-Gm-Message-State: AFuF++nJxVTlOzOJVf+aiL3sJxvaDOnOv2bCs4SWrDR7hXkeJfM3/jBq
-	Rs8kMMpYybOWKw7BbJGuaC44Q6JONymoS2GsEQofg8mlW4TQMQ9bcK2BlUGVW5E7vOkhWozjLGl
-	b25Tvuw==
-X-Gm-Gg: AYBFou331AnmKVLW6vPlF1VxuBoly3wzsMDyYGZVQ4QwKOapW66fPEsNXGXQ29BklX0
-	u2KFr/AHxERG0GAJh4C5fpKkx7YFQX8CVX5KyGncurbeSZl4phTVcaed1stFYiVYjV6OaAuYD/k
-	MM2W0CSJ99XkEsKWTrcwpFSuYAJ+rsIjUvJn3QN1xU7BBIfHNixK1vPHca95THmfudTdaWCgRGW
-	Q4eY0HMxw2PeAscUl9teGLbZCMsDWeyeIFIIOoNMW72QAHqfiSUsO+VyNF9/Y1Cbplc7EuqpZI5
-	AauUhJ+26ftLO6XEjc6870Wy7NMHyLmDzOXqIE9N+bF/pojsptSCkpg8A0cXPykN2Bmhrbo3Rm+
-	hFgEcor3ClzcrEItCuWDLCWe8raHk5ZAZK6rgb9CIterxS9Jt6iUTuMZndUm4rw6Ol4aKFUOH3o
-	WdEbf5nWx5WurmiW2p6MVi7+/Wx6Fg58zR89+NjRuO2nSMIzJOmH0Cv9WU6xaBI4rlPc2PJdcT8
-	6WxKN7bzPRSWfxavZhQueJnbEbueS1gcd2d2RYsIXVEWKmM9F9vo/hpJDi2VEgYEhBJ3yV4tQ==
-X-Received: by 2002:a05:600c:19c7:b0:4a1:70f0:ac2 with SMTP id 5b1f17b1804b1-4a180648d69mr89183895e9.24.1791451732053;
-        Thu, 08 Oct 2026 02:28:52 -0700 (PDT)
-Message-ID: <e604cb44-8827-435c-b1e7-7e9b28f18fa3@suse.com>
-Date: Thu, 8 Oct 2026 11:28:50 +0200
+        bh=DWfH1DGE58SIHUKFq2jZgD9LIrfRjNCQ+Kf8MfrXNwo=;
+        b=bE89iACoECTF9WGXSiWDLgMk2qPVcn5MH7J5nj3OGWlZMmAJObuOVlMfiXhwgEOF2J
+         vgRMKCl4JZrDNgvDjD1T8MCeuO1dRb0DOcMJL/RtVoZ0Y7o1rHB+SkIEntmPiW3jq9Lr
+         a56OxC3oGkCVLi/IFf+15kqsZoyj3AM2LtW9MJz33OsUQ/rriFrPgAWT9Tg5aax58Yy6
+         5CqUce2J7xByeP61xi3muZsIil6NRH+3gez/+SQjdVZQszG6z+Vn0RlWLE/QqrOiJQG1
+         ZbxX1cWKGwV6wl5bWiEApHKpwNSiTH3icf9CMoZpF6nwyin6SlrCOqUnzi3nhyfcQ3Po
+         MQGA==
+X-Gm-Message-State: AFuF++lQ4TSL+RxQ79ZKzzhBSLctab/uimlSpwF9WC6n+geUPIKfRlod
+	URHBTPdCZ/ZEbck9MhBwXjB1JRwSOQP9E6HcvL6tkyZ4BDuVxgL7SVNcVx8NHZX2PgEmI2oPvwc
+	x8s+dlg==
+X-Gm-Gg: AYBFou3H8EpJP2YsWOHDBbsStXQ81sg9WinP9N/D6cW5n382xADew31Rob+XNz0vMgg
+	OxPOCfcm7oh+L6O4ml+n/Q4o12AyjLCb8gBtTBp9EZskTWtctVUTpLn7lXrG1n0KhSjHLL7a2QA
+	0fmwYIOTPYokWRvDnbbq041LoD64fcMfhq6Oy0cosIkspaKkdQpM+btFo4JIM5ltoFij6kWqQov
+	UcafYRVTyRYOtW31x1NvTHQAmgSpuF9NB+MJIjHJKJB9IY5lwUdfVOL12PF6wMP+m9CBR6XSxTn
+	XGypedROIC5+KZDEVZzD5L52uaoIfCVAadrf/xwR5lkIld8iYrGFIX5gTK9YmjcDFfzzRBbN/dr
+	YYqETs/KDsQuzJK8RdECRoOnIBYjcua+eIqUwl8Hb4NoobjhMc/BifsPxCZ2vsz/A3kv5tW90wn
+	/hEZtPH3Qmt+TCbp3DKEyyZ2cYRYa9rf/akb2/uydXKVzCalNIHYc77weNyqETlZAT8zgAgQePe
+	zJXpCzQRuovWuQhg11BMNuK7SA9dc8+66DEOqWRdCce+jKKgvWapG2pki5iGw==
+X-Received: by 2002:a05:600c:3ca0:b0:4a0:1b14:d009 with SMTP id 5b1f17b1804b1-4a1851a34b3mr32197565e9.1.1791452916413;
+        Thu, 08 Oct 2026 02:48:36 -0700 (PDT)
+Message-ID: <9698d810-6664-4a9d-a847-18ad124261e0@suse.com>
+Date: Thu, 8 Oct 2026 11:48:35 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Content-Language: en-US
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
+Cc: Juergen Gross <jgross@suse.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] gnttab: avoid use of raw_shah and union grant_combo in
- _set_status_v2()
+Subject: [PATCH LINUX] x86/PVH: don't truncate initrd address/size
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -130,120 +126,27 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1791451732-CE34587B-C68E68AE/10/78276251493
+X-purgate-ID: tlsNG-33051d/1791452917-75C804E9-485E0624/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 4586
+X-purgate-size: 750
 
-The main issue here being the cast to establish raw_shah; where possible
-such casts are best avoided. (The (ab)use of unions is an issue as well,
-but we have uses like this all over the place.)
+Consuming merely the lower halves of the provided values isn't very
+useful. (While generally loaders try to place it below 4G, especially
+when it's huge it may not fit there.)
 
-With shared and status entries separated, we don't really need to mirror
-_set_status_v1() behavior here. The shared entry fields can be accessed
-normally, merely using compiler barriers to ensure checks are done on
-stable local copies. In particular, torn reads (not that we expect the
-compiler to emit such, i.e. this is a purely theoretical concern here
-anyway) are not a problem.
-
-While there also avoid unnecessary use of a fixed-width type for the
-"mask" local variable (which wants to match "flags" anyway).
-
+Fixes: 7243b93345f7 ("xen/pvh: Bootstrap PVH guest")
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
----
-I'm puzzled by gcc's codegen with uint16_t vs unsigned int for the two
-local variables: Use of unsigned int in principle would allow to generate
-better code, if only the compiler wouldn't (as per observations with
-gcc16)
-- emit redundant MOVZWL,
-- needlessly clobber a register variable, thus causing use of %ebx (and
-  hence saving/restoring of %rbx).
-Overall there's no change in size of compiled code (when really it could
-shrink). Note that no similar odd effects are observable for Arm.
 
---- a/xen/common/grant_table.c
-+++ b/xen/common/grant_table.c
-@@ -832,26 +832,26 @@ static int _set_status_v2(const grant_en
-                           domid_t  ldomid)
- {
-     int      rc    = GNTST_okay;
--    const uint32_t *raw_shah = (const uint32_t *)shah;
--    union grant_combo scombo;
--    uint16_t mask  = GTF_type_mask;
-+    domid_t  domid = shah->domid;
-+    unsigned int flags = shah->flags, mask = GTF_type_mask;
+--- a/arch/x86/platform/pvh/enlighten.c
++++ b/arch/x86/platform/pvh/enlighten.c
+@@ -78,7 +78,9 @@ static void __init init_pvh_bootparams(b
+ 		struct hvm_modlist_entry *modaddr =
+ 			__va(pvh_start_info.modlist_paddr);
+ 		pvh_bootparams.hdr.ramdisk_image = modaddr->paddr;
++		pvh_bootparams.ext_ramdisk_image = modaddr->paddr >> 32;
+ 		pvh_bootparams.hdr.ramdisk_size = modaddr->size;
++		pvh_bootparams.ext_ramdisk_size = modaddr->size >> 32;
+ 	}
  
--    scombo.raw = ACCESS_ONCE(*raw_shah);
--
--    /* if this is a grant mapping operation we should ensure GTF_sub_page
-+    /* If this is a grant mapping operation we should ensure GTF_sub_page
-        is not set */
-     if ( mapflag )
-         mask |= GTF_sub_page;
- 
-+    /* Make sure all checks below are done on stable local copies. */
-+    barrier();
-+
-     /* If not already pinned, check the grant domid and type. */
-     if ( !act->pin &&
--         ((((scombo.flags & mask) != GTF_permit_access) &&
--           (mapflag || ((scombo.flags & mask) != GTF_transitive))) ||
--          (scombo.domid != ldomid)) )
-+         ((((flags & mask) != GTF_permit_access) &&
-+           (mapflag || ((flags & mask) != GTF_transitive))) ||
-+          (domid != ldomid)) )
-     {
-         gdprintk(XENLOG_WARNING,
-                  "Bad flags (%x) or dom (%d); expected d%d, flags %x\n",
--                 scombo.flags, scombo.domid, ldomid, mask);
-+                 flags, domid, ldomid, mask);
-         rc = GNTST_general_error;
-         goto done;
-     }
-@@ -862,7 +862,7 @@ static int _set_status_v2(const grant_en
-     }
-     else
-     {
--        if ( unlikely(scombo.flags & GTF_readonly) )
-+        if ( unlikely(flags & GTF_readonly) )
-         {
-             gdprintk(XENLOG_WARNING,
-                      "Attempt to write-pin a r/o grant entry\n");
-@@ -876,26 +876,30 @@ static int _set_status_v2(const grant_en
-        still valid */
-     smp_mb();
- 
--    scombo.raw = ACCESS_ONCE(*raw_shah);
-+    flags = shah->flags;
-+    domid = shah->domid;
-+
-+    /* Again, all checks below need doing on stable local copies. */
-+    barrier();
- 
-     if ( !act->pin )
-     {
--        if ( (((scombo.flags & mask) != GTF_permit_access) &&
--              (mapflag || ((scombo.flags & mask) != GTF_transitive))) ||
--             (scombo.domid != ldomid) ||
--             (!readonly && (scombo.flags & GTF_readonly)) )
-+        if ( (((flags & mask) != GTF_permit_access) &&
-+              (mapflag || ((flags & mask) != GTF_transitive))) ||
-+             (domid != ldomid) ||
-+             (!readonly && (flags & GTF_readonly)) )
-         {
-             gnttab_clear_flags(rd, GTF_writing | GTF_reading, status);
-             gdprintk(XENLOG_WARNING,
-                      "Unstable flags (%x) or dom (%d); expected d%d (r/w: %d)\n",
--                     scombo.flags, scombo.domid, ldomid, !readonly);
-+                     flags, domid, ldomid, !readonly);
-             rc = GNTST_general_error;
-             goto done;
-         }
-     }
-     else
-     {
--        if ( unlikely(scombo.flags & GTF_readonly) )
-+        if ( unlikely(flags & GTF_readonly) )
-         {
-             gnttab_clear_flags(rd, GTF_writing, status);
-             gdprintk(XENLOG_WARNING, "Unstable grant readonly flag\n");
+ 	/*
 
