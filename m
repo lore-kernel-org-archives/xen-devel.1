@@ -4,43 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44481CA601E
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 13:36:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1444401.1661264 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F3A6CCA601E
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 13:44:02 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1444411.1661273 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFAlt-0004gu-U8; Fri, 09 Oct 2026 13:36:25 +0000
+	id 1xFAt2-0006Qm-Jd; Fri, 09 Oct 2026 13:43:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1444401.1661264; Fri, 09 Oct 2026 13:36:25 +0000
+Received: by outflank-mailman (output) from mailman id 1444411.1661273; Fri, 09 Oct 2026 13:43:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFAlt-0004gn-RQ; Fri, 09 Oct 2026 13:36:25 +0000
-Received: by outflank-mailman (input) for mailman id 1444401;
- Fri, 09 Oct 2026 13:36:24 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xFAt2-0006Qf-Gm; Fri, 09 Oct 2026 13:43:48 +0000
+Received: by outflank-mailman (input) for mailman id 1444411;
+ Fri, 09 Oct 2026 13:43:47 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1xFAls-0004ge-5I
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 13:36:24 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1xFAt0-0006QZ-Re
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 13:43:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xFAlr-00G9ik-Hx
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 15:36:23 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xFAt0-004grD-0l
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 15:43:46 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6ac8edb6-e002-0a2a0a5209dd-0a2a4506aa7a-30
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 15:36:23 +0200
-Received: from [103.168.172.144] (helo=fout-a1-smtp.messagingengine.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6ac8edd5-195a-0a2a45060019-67a8ac90948f-3
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 15:36:22 +0200
-Received: from phl-compute-04.internal (phl-compute-04.internal [10.202.2.44])
- by mailfout.phl.internal (Postfix) with ESMTP id BB13EEC0011
- for <xen-devel@lists.xenproject.org>; Fri,  9 Oct 2026 09:36:21 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-04.internal (MEProxy); Fri, 09 Oct 2026 09:36:21 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Fri,
- 9 Oct 2026 09:36:19 -0400 (EDT)
+ (envelope-from <josef@toxicpanda.com>)
+ id 6ac8ef8b-e002-0a2a0a5209dd-0a2a4505caf8-10
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 15:43:46 +0200
+Received: from [74.125.82.177] (helo=mail-dy1-f177.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <josef@toxicpanda.com>)
+ id 6ac8ef90-4cb1-0a2a45050019-4a7d52b1b55e-3
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 15:43:45 +0200
+Received: by mail-dy1-f177.google.com with SMTP id
+ 5a478bee46e88-354ba08cfd1so680699eec.1
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 06:43:45 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,180 +48,116 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm1 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:Message-ID:MIME-Version:Subject:To"; dkim=pass header.s=fm2 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:Feedback-ID:From:Message-ID:MIME-Version:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:from:from:in-reply-to
-	:message-id:mime-version:reply-to:subject:subject:to:to; s=fm1;
-	 t=1791552981; x=1791639381; bh=eXX7bS2mbjbkizKF4zKhStCw3lsDydTB
-	T7bx3WXvOA4=; b=nNJy7JmXICst/tn1L87d54gMmNGltMpbqOTxCaHouqEc9KKv
-	ik6PnofFZU+FhSTAmL7ank2P22X/nDyKjAwkgKFNtsyuBhd59VRMD68mElhhvfQj
-	Pj2Nh9R2RBJEaXN9SzYL0395tsM/SHM1JDOSO8swFbvjYaCRv5qP+OBrJGjFXl/x
-	FaXOrNlvJLDXkeOkWJKv8Is3DgrvTmTpnrl6qh2ihffxoRkS27eLpm2d7Vr1LJqK
-	xgMMRjwAZUmYw4QK4KPXt07xB0chdN/K0J3e+K5tb3IltWJPolZjjERs6Zb0GkA4
-	hADQNnpqlRDMD4LxITbHdzEyBfqsq4sHjkKvSQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-transfer-encoding
-	:content-type:content-type:date:date:feedback-id:feedback-id
-	:from:from:in-reply-to:message-id:mime-version:reply-to:subject
-	:subject:to:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=
-	fm2; t=1791552981; x=1791639381; bh=eXX7bS2mbjbkizKF4zKhStCw3lsD
-	ydTBT7bx3WXvOA4=; b=NQIpbmCvYF2XegLyjdjvPOkj5y0P8vc/rVaWf3XB7rNQ
-	Ki325tsZ9zv2/DQjcIDOxZNkwhm5/qTNP/sLYPJk/OJdAvYWjpsLFmHaXb2NOgJI
-	AlO9TXJYrAerHJ5Ert1sIoza73dq3QhjLXK36rO6WDf/DsZlR7o0fBCj/AS0cKUX
-	5kO+7/rK4kAkpu4L4NJ6d+py9Mzx9Ddrr54ESX7kn2t34QThXV/fd1sjBxZQeNxG
-	ePvIobT7wrOMJLguhlQ/49jOLCvC7S7SdEQRLk3RQMMuSfiaQv6ulh5at7sSqcev
-	8nOPE7/xkkot04afy8KykPROhOI9KU84wG/D383Yog==
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
-	repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
-	action=sign d=invisiblethingslab.com a=rsa-sha256;
-DKIM2-Signature: i=1; m=1; t=1791552981; d=invisiblethingslab.com;
-	mf=PG1hcm1hcmVrQGludmlzaWJsZXRoaW5nc2xhYi5jb20+;
-	rt=PHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZz4=;
-	s=fm1:rsa-sha256:NVftbXvxRFoIm41IVip0BxiQM4f2h0E+GtzS72B+FqE9eEr
-	GnPNSjrTu4XXOHmU1s7WXjFAIIadJRRaoeRTtEv+XQXZQJcn5DLCQgq22W+CkMq1
-	CYn0OJQHi4Vzns83ZHiZB14HgkZ/bqut/2dC2fjyeZwf+Xw5LQ+FYd2KZbRg+Z+b
-	0DjusDZB3UbYlivP+99W5BJv4Cowf9Xp4fdeCLF5hm2i2PhNICyWyW8NnUYZ0dCS
-	SGVz4ikuNVBi4wQxY3cFrkYUVLaWjGecjHJS/gSmngkeySjGOSfZY504lpK59NGw
-	OYUYZkBTFcgPiAeeSMDWFbYibJzeYxkMENKtt0A==;
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-06;
-	repo=github.com/dkim2wg/interop; date=2026-10-04; sw=lmtpprox;
-	action=mi-m=1; hc=10;
-	hn=cc,content-transfer-encoding,content-type,date,feedback-id,
-	from,message-id,mime-version,subject,to;
-Message-Instance: m=1; h=sha256:7uwuMWbTpbHUAfMaQVF36ZGVCwEwIZ2gjszEZTuPovo=:PpZLmPaIJnAfjiy/T1yKfWLq73e3pYLK+GJXD1hQdoM=;
-X-ME-Sender: <xms:1e3IamHVfHzS50Wg38LX-OGbSSIy3mtK1vRotlfg1Wj_yGd7epANEw>
-    <xme:1e3Iap7g-y5zft5HX5KeayzsqQHQR1ef5gYcTR6aeyBjV_QTcxstoLYxmItSwxTYD
-    Kbc817-32bz94Zx8mRJdp59OifeKeYsqUpiCtd1rFSu11XYNg>
-X-ME-Received: <xmr:1e3Iajxs0unxzwEcu-1CK01yTBDiRkWRi6rRxtWYWQS1pjs7O-WjYHVnoYB0MinG4vTHZzNw9s9cm4VCPIzwKM7Vg8ExFJqPSeJu6S7Hs7o6j0SEKoU>
-X-ME-Proxy-Cause: dmFkZTGlrcD0Gt8OPHBnJoYu0c5vrj1VXyOadjJd/B0SotCdtEJeJKOcxmTCBOJ8jYevPz
-    nfRpRYAQMyP9BfRZxXnYeRAtcy4tAYVR/Um/W0RXo3lXQjgc94YyT7Drgzt0RUe+BlS1Yu
-    e592xh2497B1+GEus7HXoFClW6h26UwGadJ7gpc6r8+MCDb0ad5zU/JtTKir0WfFUZ8IPv
-    rmkr7bhOkA9YryVTjR+FdJ4jMpfsodE9+m9D1S5bKLQvRe/X7t96JDTz/QMMckgs0iKmlB
-    c5PgGFV3k3c50pLaNrCZcEVI/Pb840fydYflRK5s0iRC5QrAG9TXacR45qJQMRd6ESESq0
-    6ku12fveDAnLAn/pKTs2Ofbu9vIJ+XO1TM/eJqeiduXnTp8mzvFtUwPedWL6uP8fsdRpVL
-    BwtYF2v2DaTEHNeqj5DJKJDnByz401wzC3i+ap63Oc7zpeIEnrK/Ir5mCKSBOwL+T6Hd1x
-    ViKZAjWtQNIbn1T0eO+zyass1IlLNs/74g4/AqXj40/S0lOM+mXoZUGG677nsnSbzI+QBw
-    8C62DWHjdYxO23pRSyC3/imXYSf5XEZNYeXjmUY75SQT85faL7hMpf2LWEedD9Shg0boDr
-    +TLe6ww/Fn5mXF0yJQCI2nkG+hTldYkQ/+XBCjDdyridIFlujNJWNzteBzlA
-X-ME-Proxy: <xmx:1e3IagOzsnjKegK1fXqZ8hl8OW1YwdgXyJlXxpCX5XwisUzHiRiVmA>
-    <xmx:1e3IahkaLxMEOpTwwazJJQzPrd2jEPNxbLlXzcawd-v3TiRxNXal2g>
-    <xmx:1e3IatRILktzabX3yjasyKcIKwS6ip26LedaHJicX427-KXemaLgHg>
-    <xmx:1e3IaoV2mlx04Xdb2mwBZQrOCsbfvOL8axcUf6i8N8kRV8IdRMES4w>
-    <xmx:1e3Iald1YsVGi9rfiByC9RhWxUDgrvqbUR6u4aV55gp4xCsg6FbZyyyW>
-Feedback-ID: i1568416f:Fastmail
-From: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2] drivers/char: add timeout for XHCI console cable
-Date: Fri,  9 Oct 2026 15:35:59 +0200
-Message-ID: <20261009133608.364312-1-marmarek@invisiblethingslab.com>
-X-Mailer: git-send-email 2.54.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1791553424; cv=none;
+        d=google.com; s=arc-20260327;
+        b=NYFhxVb5diyr7jjBZJbK8Aude9UoV43ZL0UR/Pc8WHI608GtNj+/LpT5RrUtoie8Vi
+         mhxFSQVUKbEKRkFh1e33AyC6Yi3mRhNZJ7Ss+C9lpAAgtn7uRZ6WYTuDQFi2K9Hu126Z
+         GXMmwQKNRcd58f1rxAD/12Lhuc9DYTpig4l2O8W0MPjhbOkBc95EvwDDFpySQmcTd7pM
+         BqRq3A57Hhqy8RIMr26UmvmsNyjn19EDh136TUXc1fvcxm6e0zfdPwdvj970hH7TsE2i
+         lrq7U5EaBA+1w1IyoJrgiMA0MkhjL4x5TOGv/zUWSBal9fJIZBpstnpXVGJ+IInBdZgr
+         9snA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=content-transfer-encoding:cc:to:subject:message-id:date:from
+         :in-reply-to:references:mime-version:dkim-signature;
+        bh=Cr53QXzLPPnzzAYL9+Ow9RuREkmHHvveZLDzlgyx6as=;
+        fh=f4v+fmtPwzY0SRokZxYCwr5G2OFpMlb0pe8xMOD0FGI=;
+        b=UXnu9gGWD9cs1LJhf1y0axFIHtB/mJYvDG4x+IFKcoSe9pvAzrDFYqP7I0Ukkp5HLo
+         RZmFHQUrX6/+3v3JGRWuoDvBh13J0jpdfrkVSEKn8/7/2UoAEkawtkBeBf1u74USkrSM
+         WGWSAvCi8sSi41wXTMEwUAYPaAifQ8Xm0JUaXke6EE+mJvzChx9PAbChelu9vnA+3ZUn
+         LbpcyIb8wCiyx+D7wgcCkt3qe3CR//lVIQylqxbSTeN7UpKEtDpoAFtRLbZheCVjztPw
+         b84gD/NOJR6pdbiaI9K3iEAMA2zZYAArK6HLBIDUHGLHxIybxqi3HtZkmisUVYVO2jPj
+         ujxA==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=toxicpanda.com; s=google; t=1791553424; x=1792158224; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=Cr53QXzLPPnzzAYL9+Ow9RuREkmHHvveZLDzlgyx6as=;
+        b=KzydRzWAOYmFgCqUUo02orS01mOz665E0xgWIYfLnrcLNQf8TYBITw/3gzkcaI0+cn
+         DZNUEX3aRhBMGoW8LAKdEmde0PVdHqcXRlhi0XDoPYIRFOpC2hbYVMZ6tL+UViNEDU6H
+         u4No0FuySeKW8G2P5uUjEsYth2OVJBfz+n4u6NICiu2U7mIfY9BRYrPZZDR8oOUl6Om7
+         dw/yKsYoxRVI1ue8ySdyco2a+UzXEUzImVHqOd4/Zh2P4QdUZFiNIwna4eiqkpy7LXXJ
+         QgCgPUT0TEAKqoHZdrVc+F7reyW9QNjneksZll/B27U3ecQ+jGBow4G3NWdr2NCeXsDN
+         MezQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791553424; x=1792158224;
+        h=content-transfer-encoding:content-type:cc:to:subject:message-id
+         :date:from:in-reply-to:references:mime-version:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Cr53QXzLPPnzzAYL9+Ow9RuREkmHHvveZLDzlgyx6as=;
+        b=zvUYi4Fb7x2hxjHxgvRUfqkzgU6uLpefQ3rPHJFJIdoUH1xycouJn4GxWeYn6YisVQ
+         zOUzzsdesOQ8MPzOOAdzqY7XLSxSgJgxCRES/Z8NlF2HFnS2QYkuJqi0DyawzWNHiKwC
+         vflSXj8H64+WlBHej0HKtSeUDUXuS/qdwZmn4d8UZY4sstCulXOvAyCZvuYU1NUbtI5G
+         qaKKjbaLxechFRaPmS75Wp6vOGtxA0h6sCYzLan3dZEhZb5Ip2yfby0mMpxGepgcTiKl
+         DrPvXqj8iZ3yq88SJxArlYArJGgIE1iUYW58EONMXffxQjdnb3yfW2kTsu7lyqW0N/JK
+         yTjA==
+X-Forwarded-Encrypted: i=1; AKwUvBzUtGkMeHTGkr793aUkcJXqk30J/0c+WqJNRF06HLqw9Gn47SVZsraDMpfX1FTifomZisQ+3r+dm88=@lists.xenproject.org
+X-Gm-Message-State: AFuF++n0QckBO5cEbsH9GMtxBC76hmRYeYWu76rYf1zQ3bgTg21vwwG7
+	qTjtFjNfg6RrOZUN4VIoWfOa24ZeKt+mH5hf8Z4vHjWV6mRvLVT7zKCYcxJOkiQvX5UYH5irIxs
+	KPnOV4cA1u3kGwJE+uvK8u9LPCDMOcC4+vBsZGDNsCg==
+X-Gm-Gg: AYBFou3kLI9gme3yxHGvYBja22GxagoknZwpTU4NuESQQVpYopKSM6hdr0SUixVnPqL
+	EtSxZVkkYlP/nsJpcieBZ0oDfDX6A4mvC7naA2UYHFCWBXd8ODwZKT7pMHokhV06e+ldNadImfa
+	hq0mp3cBw00b00Ch/du/HoqIldVRRw1mpGo3qyW4gIy9+UZNqmtu8M292ujrKRm9hC73RfyHSfq
+	4QHXlp+mItYfmNK3Qbs+xJnfiYZFbDi0N3zUYZSaszN0dJowqkHooELF2TpxTfYjKGFSDxLQsHp
+	hVaTeAqdPlGm1keHfPMd/ePOF+BtTwSszmpx4eKrgcWf6IfwNhorLMbFBKLX2J3fVNZlouLIGXB
+	TUW+ZgqyLOa+zEA==
+X-Received: by 2002:a05:7301:6e98:b0:33c:e74:4624 with SMTP id
+ 5a478bee46e88-3537e112919mr2778982eec.27.1791553422908; Fri, 09 Oct 2026
+ 06:43:42 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1791552983-F7ACA77B-9D273087/0/0
+References: <20261008-b4-pskb-pull-tail-drivers-v2-0-8f2bd9bee138@toxicpanda.com>
+ <20261008141131.0ac356dd@kernel.org>
+In-Reply-To: <20261008141131.0ac356dd@kernel.org>
+From: Josef Bacik <josef@toxicpanda.com>
+Date: Fri, 9 Oct 2026 09:43:31 -0400
+X-Gm-Features: AclHuK9i2kH_QiKyGXflCaQStHSk6ronnlxME5kUtzkQ0rs0GpgdrjH4gnmAJRI
+Message-ID: <CAEzrpqfgBrvwy0Q_AX8X1s3ogq3g1U=JmpqHAM8QUmMHAqWPsw@mail.gmail.com>
+Subject: Re: [PATCH net-next v2 00/10] net: stop calling __pskb_pull_tail()
+ from drivers
+To: Jakub Kicinski <kuba@kernel.org>
+Cc: Paolo Abeni <pabeni@redhat.com>, Eric Dumazet <edumazet@kernel.org>, 
+	"David S. Miller" <davem@davemloft.net>, Andrew Lunn <andrew+netdev@lunn.ch>, 
+	Saeed Mahameed <saeedm@nvidia.com>, Tariq Toukan <tariqt@nvidia.com>, Mark Bloch <mbloch@nvidia.com>, 
+	Leon Romanovsky <leon@kernel.org>, Juergen Gross <jgross@suse.com>, 
+	Stefano Stabellini <sstabellini@kernel.org>, 
+	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Tony Nguyen <anthony.l.nguyen@intel.com>, 
+	Przemek Kitszel <przemyslaw.kitszel@intel.com>, Manish Chopra <manishc@marvell.com>, 
+	Rahul Verma <rahulv@marvell.com>, GR-Linux-NIC-Dev@marvell.com, 
+	Shahed Shaikh <shshaikh@marvell.com>, Simon Horman <horms@kernel.org>, netdev@vger.kernel.org, 
+	linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org, 
+	xen-devel@lists.xenproject.org, intel-wired-lan@lists.osuosl.org
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-c201ff/1791553425-F4EA12A1-1B794979/0/0
 X-purgate-type: clean
-X-purgate-size: 3851
+X-purgate-size: 1089
 
-Do not wait indefinitely for XHCI to configure console connection. If
-the cable is not plugged in, timeout after about 1s and continue boot.
-If the cable is plugged in later, the console will be activated then
-(see final part of dbc_ensure_running()). When timeout occurs, print a
-warning message - it will be saved in the console ring buffer, to be
-later retrieved from dom0, or possibly later printed when the cable is
-finally connected. But, do not print the warning when waiting after
-controller reset, as that may have been called from from console
-dbc_putc() and printing here would result in (possibly infinite)
-recursion.
+On Thu, Oct 8, 2026 at 5:11=E2=80=AFPM Jakub Kicinski <kuba@kernel.org> wro=
+te:
+>
+> On Thu, 08 Oct 2026 21:02:47 +0000 Josef Bacik wrote:
+> > v1->v2:
+> > - New 1/10: skb_drop_empty_frags(). xen-netfront, netxen and qlcnic
+> >   relied on __pskb_pull_tail() releasing zero-length frags even when
+> >   there's nothing to pull, which pskb_may_pull() doesn't do (Sashiko).
+> > - xen-netfront, netxen, qlcnic: call skb_drop_empty_frags() after
+> >   pskb_may_pull().
+> > - skb_drop_empty_frags() checked with a boot-time test under KASAN and
+> >   kmemleak, on cloned and uncloned skbs.
+>
+> Please keep in mind that we ask people to limit themselves to 15
+> outstanding patches per tree. You have 18 right now.
+> (200 active netdev contributors + an LLM) x 20 patches =3D=3D insanity :/
 
-Try the timeout to be about 1s, which is way above time needed for
-configuring already connected cable. But, since this part runs very
-early in the Xen startup, time is not calibrated yet, and functions like
-NOW() do not work yet. Use raw TSC and estimate needed time to be at
-least 1s on a fast CPU (5GHz), and possibly longer on a slower one. This
-is not very accurate method, but fortunately it doesn't need to be.
+Eesh sorry Jakub, the skbuff BUG_ON() removal series is the more
+important one, this series is the followup so I can finish that work.
+By outstanding do you mean per-merge window or once I get
+notifications for things being merged I'm good to send the next batch?
+ Thanks,
 
-This also helps with similar situation on resuming from suspend - if
-cable got unplugged in the meantime, system will not hang waiting for
-the console anymore. And finally, on some systems, when dom0 is also
-allowed to access the USB controller, it may put the device into low
-power mode that in some older controllers (for example Kaby Lake)
-disables also debug capability. In such a case, adding a timeout allows
-the system to resume, then dom0 can wake up the controller and Xen will
-resume XHCI console.
-
-Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
-Changes in v2:
-- use get_cycles() and cycles_t type (Jan)
----
- xen/drivers/char/xhci-dbc.c | 20 ++++++++++++++++----
- 1 file changed, 16 insertions(+), 4 deletions(-)
-
-diff --git a/xen/drivers/char/xhci-dbc.c b/xen/drivers/char/xhci-dbc.c
-index d85c8cd6c36a..ddb1051b0832 100644
---- a/xen/drivers/char/xhci-dbc.c
-+++ b/xen/drivers/char/xhci-dbc.c
-@@ -851,9 +851,15 @@ static void dbc_reset_debug_port(struct dbc *dbc)
-     }
- }
- 
--static void dbc_enable_dbc(struct dbc *dbc)
-+static bool dbc_enable_dbc(struct dbc *dbc)
- {
-     struct dbc_reg *reg = dbc->dbc_reg;
-+    cycles_t start;
-+    /*
-+     * Too early for proper time calibration, assume a 5GHz CPU and let it wait
-+     * about 1s, with still reasonable timeout on a slower CPU.
-+     */
-+    cycles_t timeout_ticks = 5UL * 1000 * 1000 * 1000;
- 
-     wmb();
-     writel(readl(&reg->ctrl) | (1U << DBC_CTRL_DCE), &reg->ctrl);
-@@ -870,8 +876,12 @@ static void dbc_enable_dbc(struct dbc *dbc)
-     writel(readl(&reg->portsc) | (1U << DBC_PSC_PED), &reg->portsc);
-     wmb();
- 
--    while ( (readl(&reg->ctrl) & (1U << DBC_CTRL_DCR)) == 0 )
-+    start = get_cycles();
-+    while ( (readl(&reg->ctrl) & (1U << DBC_CTRL_DCR)) == 0 &&
-+            get_cycles() - start < timeout_ticks )
-         cpu_relax();
-+
-+    return readl(&reg->ctrl) & (1U << DBC_CTRL_DCR);
- }
- 
- static void dbc_disable_dbc(struct dbc *dbc)
-@@ -970,7 +980,8 @@ static bool __init dbc_open(struct dbc *dbc)
- 
-     dbc_init_work_ring(dbc, &dbc->dbc_owork);
-     dbc_init_work_ring(dbc, &dbc->dbc_iwork);
--    dbc_enable_dbc(dbc);
-+    if ( !dbc_enable_dbc(dbc) )
-+        printk(XENLOG_WARNING "Timeout waiting for XHCI console cable\n");
-     dbc->open = true;
- 
-     return true;
-@@ -1307,7 +1318,8 @@ static void cf_check dbc_uart_resume(struct serial_port *port)
-         return;
-     }
- 
--    dbc_enable_dbc(dbc);
-+    if ( !dbc_enable_dbc(dbc) )
-+        printk(XENLOG_WARNING "Timeout waiting for XHCI console cable\n");
-     dbc->suspended = false;
-     dbc_flush(dbc, &dbc->dbc_oring, &dbc->dbc_owork);
-     set_timer(&uart->timer, NOW() + MICROSECS(DBC_POLL_INTERVAL));
--- 
-2.54.0
-
+Josef
 
