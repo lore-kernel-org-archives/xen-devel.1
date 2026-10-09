@@ -4,46 +4,40 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D6220CA6019
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 15:25:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1444495.1661327 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A64F0CA601D
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 15:37:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1444509.1661337 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFCTQ-0006J1-De; Fri, 09 Oct 2026 15:25:28 +0000
+	id 1xFCew-0008CR-Gh; Fri, 09 Oct 2026 15:37:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1444495.1661327; Fri, 09 Oct 2026 15:25:28 +0000
+Received: by outflank-mailman (output) from mailman id 1444509.1661337; Fri, 09 Oct 2026 15:37:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFCTQ-0006Iq-8t; Fri, 09 Oct 2026 15:25:28 +0000
-Received: by outflank-mailman (input) for mailman id 1444495;
- Fri, 09 Oct 2026 15:25:27 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xFCew-0008CK-CS; Fri, 09 Oct 2026 15:37:22 +0000
+Received: by outflank-mailman (input) for mailman id 1444509;
+ Fri, 09 Oct 2026 15:37:21 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1xFCTO-0006Ih-SH
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 15:25:27 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1xFCev-0008CE-50
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 15:37:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xFCTN-00GQzu-Cs
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 17:25:25 +0200
+ id 1xFCeu-002GpV-IP
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 17:37:20 +0200
 Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6ac9073e-8faa-0a2a0a5109dd-0a2a4506c6c4-38
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 17:25:25 +0200
-Received: from [40.93.198.39]
- (helo=CY7PR03CU001.outbound.protection.outlook.com)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6ac90a04-bab6-0a2a0a5309dd-0a2a4506a652-20
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 17:37:20 +0200
+Received: from [162.55.131.47] (helo=support.bugseng.com)
  by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrew.cooper@citrix.com>)
- id 6ac90760-195a-0a2a45060019-285dc627b1f8-3
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 17:25:25 +0200
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by SN4PR03MB998611.namprd03.prod.outlook.com (2603:10b6:806:218::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.15; Fri, 9 Oct
- 2026 15:25:18 +0000
-Received: from CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
- ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0496.015; Fri, 9 Oct 2026
- 15:25:18 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6ac90a30-195a-0a2a45060019-a237832f9a9c-3
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 17:37:20 +0200
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id 64A4F4EE0211;
+ Fri,  9 Oct 2026 17:37:19 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,163 +49,197 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Y8LkXIFZRmCQm8DNUeS/f6jqGj3BHjk1YEsm30t8ft8gyyueI/03XugeEF09FicKLdcxdI3kO9DXIARdbf6wp+dwUQQgAXtLqMRgxXl2R2Ma2jyL0PRx1+Wh9gIV93VM7xw5tsOrzrzAoTd0PIXPQkt6roS/+gby+Jgh6XVupObZSSZKbqEJG+BaV8TGjSwWTz6Mgl+f+HrYaQaQCzvtWyGtPBVNMQLCrzrJb0yztLQ96uaxIUk6bzVDNWwY/Tf8CKl+wWPGPy5z4tc/nxalzVu3wjg2f2e7Urj/QmTqbhzsVs0cz++4Jb2kd827A77f0VNuI5zLmzSyP1ZIA0Vu/w==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ingmyAoLJQaBTry0Pl4sw5csPWCENmolAoLeZlfxa24=;
- b=MUv/zpg9lOtghuKItcYc4bzlk57RumzZm2dUzEQx5HBx5f+6thQuY/MxtPGAq8hSJtNgV8HFXxXEZy4bQtIa4CMlN6Lh8mXYclXKAnH1h6WGTmJ6Fvasuj7Hzta/tk0TClzOaoPxa1rJNR2YJ3+DeqMCT7uL6RoduJe5CU5zxxqt8FCzbwiWaTMT7odoE9z6C26If9wLYMF0JBnyipAZforpDmmQKAVE9qMYW4qKVXG6OOAE8KckDL4epFtxSXjYXncRDCcwe0HiauNw1Xi/EjUtzRePqerlePq0z83nTJuDyOL2tBhQuFRQPrj4PLbgV2Gfjfs321xxzErKN3V8ew==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ingmyAoLJQaBTry0Pl4sw5csPWCENmolAoLeZlfxa24=;
- b=tXduahzN87ytat82RFqKut8cyY8XtCmSNdjBT5tAUDKLuSDNTYLVUqa2ole8iHZr6cj1tb6tUzUXTX5tumidAGzqWSDBHYSCADvzrbrSw8e1zLp9iMrjSGbwNxSBBVaYC5mFTHma0u4V3BqZqrNb4M2TI0YV+D4zn+edAUlF4hc=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <1f48cb36-49eb-4f9e-8aac-25c1bc86674c@citrix.com>
-Date: Fri, 9 Oct 2026 16:25:15 +0100
-User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- "teddy.astie@vates.tech" <teddy.astie@vates.tech>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [PATCH v3 1/6] x86: Remove return value from UPDATE_ENTRY
-To: Kevin Lampis <kevin.lampis@citrix.com>, Jan Beulich <jbeulich@suse.com>
-References: <20261001174749.2275245-1-kevin.lampis@citrix.com>
- <20261001174749.2275245-2-kevin.lampis@citrix.com>
- <a91fef08-3a0a-4a71-9618-9d6d3e74112d@suse.com>
- <BY1PR03MB799623147B668DE6406228E4F3892@BY1PR03MB7996.namprd03.prod.outlook.com>
- <2db46bf6-87e7-4f1f-b440-b73be1f86b55@suse.com>
- <BY1PR03MB7996277A01F884028C5C2D04F3892@BY1PR03MB7996.namprd03.prod.outlook.com>
-Content-Language: en-GB
-From: Andrew Cooper <andrew.cooper3@citrix.com>
-Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
- 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
- 6+ahAA==
-In-Reply-To: <BY1PR03MB7996277A01F884028C5C2D04F3892@BY1PR03MB7996.namprd03.prod.outlook.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: PA7P264CA0519.FRAP264.PROD.OUTLOOK.COM
- (2603:10a6:102:3db::14) To CH8PR03MB8275.namprd03.prod.outlook.com
- (2603:10b6:610:2b9::7)
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1791560240;
+	b=cW2mQL+CBni6hwK0hTJFX4cJCOl9UydalDxkk5t1l81qPzPKt8OCHDoETgbW+22hmZHX
+	 R57wtoS+L/Z2L/O04cT3uWLpO0fMFZK2dgBkwIeJwCwej5pBSQAuPAzKxingbStekACjB
+	 wpVkpAGNH4waGF5phGPTpQHE/azt00SKlEA0J2f2UK84bf91VYIuIgRhiLnbMwykN7u9G
+	 efNAtLFNjZioTaJtnXcJNnpLdjyxDa3FpMbd36Wnog5KV8qAKUAYtQD/zxDziQpm6pUR1
+	 PesnRQKDAFPVTUILAGpKEFkp2TjcZa6ceFxy93y5I+XEfoSPGEHZW9/zyd7BIDlzDNIY1
+	 62qX1Y2m/NhSJO0X/S0e/1if05S2BuNinPlu0X8jr7KLuzNRLmu5kCFf+JuLCT6K/2HPf
+	 xJSyHbf8sTfQSSoOx+tt1g9GbUagcCbetFWo6zDiikCkYn7TksiAN3HgGKOiXPq7w9r58
+	 DKWTyL9/GY2sRDc52kibIZ0Icptez8DKMBtMbwn8WgaWxXiezp4GUeZlsbGyVVa8TeHek
+	 lTEBHJYZk3e1mhjVrEUfW2NxEZxV+A9DHplyx8C1a9VI1ki9Fv9fxrfmTyrohhOXJPOHt
+	 d9oNAGD40UxaqMq98UnIrA8GWhv0LSz2Gs+P0c1nxsmELdj0Ze8H34kh3JPcjHs=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1791560240;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=wnQK4qWyR832CxicqxWHinwbzaeqLnPL4WpG+H3T6YQ=;
+	b=5EeF8JHZ/Oze/amMmnMH6q8yLDYPFYeQD/nvvRX4SAZk6D/jYbY7wGXRVMPCjAQGFjIF
+	 6W0gz860hJ7ilXo4Ssztub4nFNwQA2Nb6FKfvP7aZ/rgtPNZukPY4NEYNwqmx00QT8mEQ
+	 4VSnfGhBT2ji/0EXZM4VakoYsdkyYArkG+0eAkXcj+dBlKBBkzjrQXrOe2ZQKdIeJdlxv
+	 3XknLJX1e2xbtXCjWA/84c8RuOnSSogKXMdV2ub2SRQ6ou5kJ8x09kKibeSlRPDXf3mL6
+	 JF0f8YntWFeWFE9b1arPymKo9dudYomcDULJ3X3u231kz59xaJzOCa8XMbCuGk1w/8H/n
+	 WKax7K06k+brAqmOXNrhOE15oiIn/EKvBj1tXnmBZ0OTl64QRwwLD4bu0u3nZNWPMGuXv
+	 34JefHDgajirvz9T6pVQua8AIajt5e/itTZRqxFRA/3i8G4UkpZMmrcAtQdgUq+WtJAld
+	 5H40WMCe9FHJC7r7+sEzlWZBB++YcfjaWaLirtFGNYWBjBQ1jdECOF/1ltx+UDN4/Kwdm
+	 L7w9o3UIzr+8tV0MmFtSqR9EkyyanJnnn+85x/cvGFnPyMSh4zA40AKyWw2pS+8LuNZWz
+	 Ol3WFHaWhNIR9ZqZm4Loe3WupQeIo+SOtznKyTq7zup3ZNmgqrMRNbydt+VpnQE=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SN4PR03MB998611:EE_
-X-MS-Office365-Filtering-Correlation-Id: 4528f9db-e39a-4f9b-0160-08df261986b0
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|376014|366016|22082099003|18002099003|10067099003|4143699003|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	yjXK3Kn2G4rLlzbIt7o8YiMNsz1EBSw4Oktlq92NwjiGQXVFgScbF2VOCuN+HPY3kTPPIJMjMb+kY4GHTlY5prstfC6dKe5JUMRP8/CjUWJq6iV1B3P6Jm5p/WHfAUDMbo0r4Olmul5u1OW/VZ9zSRetLxXbkpX5ZWXM8jd/zYt+vqLivOWxe1jLyA0gHtlYyqNaffHgkDb6KMuQ1Sn03ZnMYz62+TleNyQVjUNFbV62zhPKbngbKHrTm1Fnqw+/geqloxm6R2aQ99VKKrtMFWVaWaBE+8GnJR4imt6HQ+px4cu0jidGi7mrY33Nj1lv1QpMucAGzuHatAXpJ82xn22jwkXuuEG81ZKK8krscxwZ269hLRHikgE2qPfKEQrD7dqDTX/tb5AhV+zxhlNIiMsk2vAVJpptlV+MFJQvbEIWileFRNDm3kU+CMhwHZdLIltKwcBK2gXITtYFrU3b/jffIwEjIR9WRDB5WWGLBOJp63C9PSTnlRntpL5oOUt22ZfyZ5jATyMhLeTIcrZCnp2gQp5iqU/lUbaW693laZbw91aSuwaTdqql9HfgVmbeOJp17b3mYAy0SviQFeIQslo27fkxv5xsSA9bFolj09gPMbMYOcxRs8mJCQ0jnKdl
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(22082099003)(18002099003)(10067099003)(4143699003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?ZmhRdjQ4ZFJPTFJkTWpmZnVveVJiWHhYMmJoc2tRTUhhMkNVYlVJWmNYWVll?=
- =?utf-8?B?RWNSSXBHRTY5WHQ0YjdJdi9hR1FPN1BZMURXUXJDdWd1K2tnRThGM1lLaFdM?=
- =?utf-8?B?VG4wMFg4Z3VUOFExYzhkb0ZDM2pqNWM4SGFlMHpPOHdMT05ob3NLWHdmaHFT?=
- =?utf-8?B?aG5xcWlrNEhKUFYyaCsvcVFxVjVRWm80ajcrSFpYMXl1ZzBxUmtEaFRSTW5l?=
- =?utf-8?B?R0NwMUY4dXpxanV4OUR2WDdPaU1ZS1cwTkNqZStVUFV3ekVYeElRM3pKQjlw?=
- =?utf-8?B?Uy95QkQ1bjcvdzRiSXdXNU82Z3AvS28xZFQyVW5TTlMwMlhaRWlQNGtFNHRM?=
- =?utf-8?B?QWpzcUorY2FMZ3RiSnRtQzFqMDFtVnB1bW9aaUNjTmhtYkgzMVFaRlp4V0ZP?=
- =?utf-8?B?UktCUytTL1pLaE9qTTdrOGxSSytsZUpUMGxUUDlnR1pXOTJZK2NzN3lDczkw?=
- =?utf-8?B?d1Q5WmJBNFpiTTdkU2VwamdOMXo4RGdWN2JaU0RNUWl0WlVLRmVTNkkxRnQz?=
- =?utf-8?B?YTYwd0VpRWxXT3dVanRXY3djbU8vaFY2QTRnQVorTnRFemkrWVluaWlBSHNY?=
- =?utf-8?B?SnpnM2duR2hEMytlQW11VEhsalpwbnJaemFmYS9GNXExTFdhNitPcFVoUTBS?=
- =?utf-8?B?TGpROGtjbnppT0J1ajBZNTdTY3dMdW9jY2ZERmsyOGp1ZlZCTEpqMmxOWmUw?=
- =?utf-8?B?T1ExVXVRYm9uUklDVDhhSUpDOFQwbkk2ZmtUZGd0aHZFNzFVc1JWdEZURTFB?=
- =?utf-8?B?Q1hyakpmYjY0S25ZU0pVa016eE9ZRStBQ0J4b1Ezclo5VHQ5NFBtdnh1Nys0?=
- =?utf-8?B?TDBZbFIrZElCcDdOaVpNdE1KeldoYjRDck53WUxzUDdHWmI3NEVsZjl1ZHJx?=
- =?utf-8?B?dDFTejVMSVg5Smt3ZUJZVG05aHRuKyt4TXd2MG1MSEp5OFg3MEFmS3cwUjFa?=
- =?utf-8?B?NWNSa25XYlowLzhUR3ZBcURyTmJ6bTYrSlBEOGQ4ZDRIVGZnZy9PdVViNXIx?=
- =?utf-8?B?RE1OZGkwSnVIalo3a2pOckw1RXFPY1dOaWNqUEE4L1RMTGdhbk1tSjlSTGhR?=
- =?utf-8?B?VXcrcWVjZEllUzlyTC9rVzRPSnY1L3c1MlJnbUtYZVZsUG5BcGEvQ1JjdjRt?=
- =?utf-8?B?MkpwcE5SQUdUVjh0WmRHdzBBVjN3ZVJveUFrZFF0aFMydnhPKzJLclY0TFVV?=
- =?utf-8?B?TnJNVmxpZ2RDcGlXOWZQdVhyQzQyQ2RiMEc3R3NMVWtBN1VQM3lVcGh1TTBw?=
- =?utf-8?B?MS9tZTNBL25MU2NJcGtHdHMrbkoxeFBuMzltOTR5MmpmeDZPaVFIbEQwWkdU?=
- =?utf-8?B?SWRxdWVIZUNwSzJZUEZvaEpDSVJvdytSU2p4NWZWRk0xYk5HTWxDa2gvNmVx?=
- =?utf-8?B?WW5BZVArdUg5a0h1VEw0disyblRuMTN6R0xISGdTNjIyeU1LRmJDV2M5SFBV?=
- =?utf-8?B?clBFOXRFcVdXU2N6ZXo5ZmpVdzQ0ZVpndkxlZkIwQTJnM1psVkh6d0FtUzRC?=
- =?utf-8?B?YmsrbFhlNHFXOVM5a05JL3FJZXZqWndOaWQwSTBJUEZqRk5od0o3STlFOVVS?=
- =?utf-8?B?U1VpdEttcjVOYVBkU2FsUGpScFByNEFXNDMrMXBBVjIyRnRZYklOZzJSaHdQ?=
- =?utf-8?B?MnM5ditJeko1R2FQN21FejVacVVxeGpVT0tYS3JBcHUwSFFoUC9MRVg0SXRO?=
- =?utf-8?B?UUlldlBPczJoZVBlUGdjU1ZXK1BSUnVMTi9YU29iR3Nlbmd6d1BOajVETUxT?=
- =?utf-8?B?Q1EwTTlNQk9jU0VhcWFtOURxRnFpM0JaTUhyYmR5T3YrRXRtNnZ5K0xCb3dv?=
- =?utf-8?B?UTVPUGdOaEZuUFlJUlJ0bXFRaFZ5aUNnUmNCNGRxL0pFNDRIaWFkQk5zU1Qr?=
- =?utf-8?B?M2phcGg0YjFtTkNpTWVEMXJxSDhId2plNHZnYW1Ma3hEZHZTTGlleFdSTVgw?=
- =?utf-8?B?SzM3OVJJMDFFRDdtQWtGaytrWmh2WFVJdHFnZkxWbWlQaWtjYys2Q0t0N1ZV?=
- =?utf-8?B?QUFudi95SFAvZ2RHTGxOakR2RlpzRklOeWFIbDh2bm1HYXFaaGN0YkhzSVBX?=
- =?utf-8?B?b0lUR0wzWnA1SXNpTHFZT3kwb24zMFZXTkV2M0NXU1lXRXdPUDgwWjJPdGVO?=
- =?utf-8?B?TUQyVjBBSnVHYmlPVThzYitBTm5VOXlJdkp4L013Q2xqazlkYTFZdzBVQlg0?=
- =?utf-8?B?ampmNW45RmplbXlKQ3BqWllVZkJQT0tHQkhBK1JnWUN1YWVyVlhwaS9Qb0Nm?=
- =?utf-8?B?RWtnSXM5QlFaLy9zTlN6YU9kZjdRdjh0Rit2N1JLUWc1bDM0cDdvbWtmTytS?=
- =?utf-8?B?blVTbWs3dGJoSW9qMjRwb09sOWpjRDZyOUE1TU80eno1d2lWZ0NMZz09?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 4528f9db-e39a-4f9b-0160-08df261986b0
-X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 09 Oct 2026 15:25:18.6840
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: gs65yJiEW6eacHU3/1V2B3ZOiAmYQBLmEvKWraf+YA+X+yegj3KnwPUmSQZvNVfyYFNbwPhfnflfkH3Y0US8h8ZCJP9IjyYBo06/NW4DXd0=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN4PR03MB998611
-X-purgate-ID: tlsNG-16d1c6/1791559525-F687577B-4494D9E3/0/0
+Date: Fri, 09 Oct 2026 17:37:19 +0200
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien
+ Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+Subject: Re: [PATCH] automation/eclair: generalize the noreturn
+ function-pointer deviation
+In-Reply-To: <d68c56607781bfa829766aed36eeb31f06080fbc.1791224638.git.dmytro_prokopchuk1@epam.com>
+References: <d68c56607781bfa829766aed36eeb31f06080fbc.1791224638.git.dmytro_prokopchuk1@epam.com>
+Message-ID: <5b5cccc8bbbc4c87fc99427eb4c1c413@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1791560240-F687577B-5FD8B61F/0/0
 X-purgate-type: clean
-X-purgate-size: 317
+X-purgate-size: 6049
 
-On 02/10/2026 11:52 am, Kevin Lampis wrote:
->> https://xenbits.xen.org/gitweb/?p=xen.git;a=commit;h=5ec86c22b4b3f26eab0fe9af4cbd0f90d315d820
-> I'm sorry for missing that, I should have rebased.
+On 2026-10-05 20:56, Dmytro Prokopchuk1 wrote:
+> The R11.1 safe cast only matched void noreturn (*)(void *). Accept any
+> noreturn function pointer converted to a compatible function pointer.
+> canonical() covers typeof destinations, and compatible_deep_unqualified
+> keeps the parameter and return types aligned.
+> 
+> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+> ---
+> 
+> This patch tries to cover both of these:
+> 
+> 1. eclair: widen R11.1 noreturn cast deviation
+> https://patchew.org/Xen/c6632dd805a119aca54b9d1ae2eea68ef9c1334c.1790674358.git.dmytro._5Fprokopchuk1@epam.com/
+> 
+> 2. Eclair: relax "noreturn" function-pointer conversion deviation
+> https://patchew.org/Xen/6d212d60-5c0b-4909-996d-5d6a4906b7e1@suse.com/4cca58b6-b555-4064-aa26-5204dc4b99cc@suse.com/
+> 
+> Test CI pipeline:
+> https://gitlab.com/xen-project/people/dimaprkp4k/xen/-/pipelines/2914802667
+> 
+> The only one Rule11.1 violation remains, which is covered by this Jan's 
+> patch:
+> x86/kexec: address Misra rule 11.1 violation in machine_kexec_load()
+> 
 
-Yes, I had to take this patch together with the first one in order to
-untangle the XenServer patchqueue.
+The change itself is fine, but the aspect I'm concerned with is the 
+following: if you have a function marked noreturn, the compiler is 
+entitled to
+essentially remove any code following it, so in principle this could be 
+the case also when invoking a function pointer (i.e. the compiler has no 
+obligation to retain code after a call to a function pointer that is 
+actually a noreturn function). While this in practice may not happen 
+often (e.g., the analysis done by a compiler is probably too shallow to 
+actually infer paths where the function pointer is only ever assigned to 
+noreturn functions when it is called), it is still not completely true 
+to say that the behavior is not altered by casting away noreturn. I have 
+given in [1] my R-by to the previous form of this deviation, but I 
+realize that this aspect should be mentioned. This is of course 
+supported by testing and code coverage evidence that the behavior is 
+indeed the same, or a suitable guarantee from the compiler vendor that 
+the behavior never diverges.
 
-~Andrew
+[1] 
+https://gitlab.com/xen-project/hardware/xen/-/commit/b5497ad4a4a2b9a97100ca002cc82b573b198071
+
+> ---
+>  automation/eclair_analysis/ECLAIR/deviations.ecl | 9 +++++----
+>  docs/misra/deviations.rst                        | 8 ++++----
+>  docs/misra/rules.rst                             | 7 ++++---
+>  3 files changed, 13 insertions(+), 11 deletions(-)
+> 
+> diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl 
+> b/automation/eclair_analysis/ECLAIR/deviations.ecl
+> index 6cdb10a129..d89976a894 100644
+> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
+> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+> @@ -394,11 +394,12 @@ constant expressions are required.\""
+>  }
+>  -doc_end
+> 
+> --doc_begin="The conversion from 'void noreturn (*)(void *)' to 'void 
+> (*)(void *)' is safe
+> -because the semantics of the 'noreturn' attribute do not alter the 
+> calling convention or behavior of the resulting code."
+> +-doc_begin="The conversion from a noreturn function pointer to a 
+> function pointer
+> +with a compatible signature is safe because the semantics of the 
+> 'noreturn'
+> +attribute do not alter the calling convention or behavior of the 
+> resulting code."
+>  -config=MC3A2.R11.1,casts+={safe,
+> -  
+> "kind(bitcast)&&to(type(pointer(inner(return(builtin(void))&&all_param(1, 
+> pointer(builtin(void)))))))&&from(expr(skip(!syntactic(),
+> -   ref(property(noreturn)))))"}
+> +  
+> "kind(bitcast)&&to(type(canonical(__function_pointer_types)))&&from(expr(skip(!syntactic(),
+> +   ref(property(noreturn)))))&&relation(compatible_deep_unqualified)"}
+>  -doc_end
+> 
+>  -doc_begin="The conversion from a pointer to an incomplete type to 
+> unsigned long does not lose any information, provided that the target 
+> type has enough bits to store it."
+> diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
+> index 6bcc2adf95..ed7129b8dc 100644
+> --- a/docs/misra/deviations.rst
+> +++ b/docs/misra/deviations.rst
+> @@ -392,10 +392,10 @@ Deviations related to MISRA C:2012 Rules:
+>       - Tagged as `safe` for ECLAIR.
+> 
+>     * - R11.1
+> -     - The conversion from 'void noreturn (*)(...)' to 'void (*)(...)' 
+> is safe
+> -       because the semantics of the 'noreturn' attribute do not alter 
+> the calling
+> -       convention or behavior of the resulting code, parameters 
+> handling remain
+> -       consistent.
+> +     - The conversion from a noreturn function pointer to a function 
+> pointer
+> +       with a compatible signature is safe because the semantics of 
+> the
+> +       'noreturn' attribute do not alter the calling convention or 
+> behavior
+> +       of the resulting code.
+>       - Tagged as `safe` for ECLAIR.
+> 
+>     * - R11.2
+> diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
+> index a59cf1782e..bd288bba29 100644
+> --- a/docs/misra/rules.rst
+> +++ b/docs/misra/rules.rst
+> @@ -435,9 +435,10 @@ maintainers if you want to suggest a change.
+>         and any other type
+>       - All conversions to integer types are permitted if the 
+> destination
+>         type has enough bits to hold the entire value. Conversions to 
+> bool
+> -       and void* are permitted. Conversions from 'void noreturn 
+> (*)(...)'
+> -       to 'void (*)(...)' are permitted. Conversions from [unsigned] 
+> long
+> -       or '(void *)' to a function pointer are permitted.
+> +       and void* are permitted. Conversions from a noreturn function 
+> pointer
+> +       to a function pointer with a compatible signature are 
+> permitted.
+> +       Conversions from [unsigned] long or '(void *)' to a function 
+> pointer
+> +       are permitted.
+>         Example::
+> 
+>             unsigned long func_addr = (unsigned long)&some_function;
+
+-- 
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
