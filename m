@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CA89CA6015
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 05:57:18 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1444007.1661038 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73EB1CA6012
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 07:07:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1444021.1661046 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xF3bI-0007cT-Tp; Fri, 09 Oct 2026 05:57:00 +0000
+	id 1xF4h5-00013e-Nc; Fri, 09 Oct 2026 07:07:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1444007.1661038; Fri, 09 Oct 2026 05:57:00 +0000
+Received: by outflank-mailman (output) from mailman id 1444021.1661046; Fri, 09 Oct 2026 07:07:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xF3bI-0007cL-Pr; Fri, 09 Oct 2026 05:57:00 +0000
-Received: by outflank-mailman (input) for mailman id 1444007;
- Fri, 09 Oct 2026 05:56:59 +0000
+	id 1xF4h5-00013W-KO; Fri, 09 Oct 2026 07:07:03 +0000
+Received: by outflank-mailman (input) for mailman id 1444021;
+ Fri, 09 Oct 2026 07:07:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xF3bH-0007cD-Mn
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 05:56:59 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xF4h4-00013Q-4V
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 07:07:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xF3bH-00EaxV-3i
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 07:56:59 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xF4h3-00Ep9J-HG
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 09:07:01 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac8821d-2eae-0a2a0a5409dd-0a2a4509e1fc-26
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 07:56:59 +0200
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ac89286-e002-0a2a0a5209dd-0a2a4507bc4a-14
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 09:06:57 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ac8822a-be1a-0a2a45090019-d155dd2dc042-3
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 07:56:58 +0200
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-48b042c0759so2981138f8f.2
- for <xen-devel@lists.xenproject.org>; Thu, 08 Oct 2026 22:56:58 -0700 (PDT)
+ id 6ac89290-b4ea-0a2a45070019-d155802dc456-3
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 09:06:57 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-4a018792ab3so33742085e9.0
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 00:06:57 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48db98c38f4sm2323024f8f.27.2026.10.08.22.56.57
+ 5b1f17b1804b1-4a18bf2343asm64123705e9.9.2026.10.09.00.06.55
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 08 Oct 2026 22:56:57 -0700 (PDT)
+ Fri, 09 Oct 2026 00:06:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,58 +54,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791525418; x=1792130218; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791529616; x=1792134416; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=l+rL8v2kQ8U6lg4n2oLB7unBdmY9A+5fNdSo4wCgado=;
-        b=c9Da7gqeqoY7Cajhif7xKfn5PhVSUutbkYUmO1klRpY1rKPYzqKDwz5R4ytAVOZ73t
-         /IV19CTilZvleD9iNICFUz0MrpyDraJklWx91bvkpFQvwY6iCS23mGNh0FLdnBAwAYvV
-         TFrwsgM9UvONZ3zhYMJb4QbUrknd8zj/U8XlY9Qgz0VNUJ6nqK+AuJLw/RxuGBUdOw6q
-         8yj0OLett22JxBvPoUwvFz05nLeGBaStzLnV6CNwbb9qpn30UcHH8LqclQCge3V/K0SH
-         dyAnzCBpE7sREULJMRQPmsNLdcRQyjQZqIEivMN051fYZUJf00SKVRZ6x1jJtR2frapg
-         lrbQ==
+        bh=VLtL/UQ4aw9dMmG4Iu9JqlxjJJAQbHVRvsBfn3pquMw=;
+        b=RgcbAzpV5nHtvcM7KaJel3ytPSApdcefg8HCFV8qBCHY4tZ4FAVq9yVcJ7Y1X5MmNg
+         86YI0mpqXkwc4KerAcS8rUEVAFnoLtf6PSRh0+fF9hiUnMr0u4Yq1wtKVWtKH0UDg4vv
+         2h0TuSMLgQLOIPPlTNbIV6tUsbj0OJw6TF0wh61EXITv5zDM7vLgFSz6BzcciD1YeoMi
+         fnPQm8IGJCUBwMss67m/b2szn9JaD0hNQLYo6eLjTtYFJl5ADy+nq0MCIp2sXWuFSUbW
+         ehWwpLOLLQJXf4nYCTxpTYG4WBTgkD70BXSYZyLAA1N0gP4zj2PxIBW2VgyhLjaDse3d
+         TKEg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791525418; x=1792130218;
+        d=1e100.net; s=20260707; t=1791529616; x=1792134416;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=l+rL8v2kQ8U6lg4n2oLB7unBdmY9A+5fNdSo4wCgado=;
-        b=FPforxVgRUOh1L8QzPzeMIfIFjulhTjw0skAjk25XsMSfya0wrRne3CBsqR1weMZ1V
-         qc00YdlLnifgXqoF4zGnGZdD1/yZZTLRQCMzKObLkSwv7+McPyVCIuVFNHqG90On9Svz
-         1aTjr7o81rRk8IQBHTi0X3PmPsCRpQY7rVrOAFZ5C0VJ0TNN1aqoGCemXzPj0cj/GnhG
-         yGAGaQ67PuUnhy5xkQ27oELihnnU6uZdXI4DYIEemA2ELDXyaR+1W6IhfvO9C2tOB+BC
-         pe33TVqz8adOMbw2LZ1/UPcvwy684krYizHSbmvmRQ35+vU+Nuq0Od5PBMBtJgIT84ZZ
-         8JGg==
-X-Forwarded-Encrypted: i=1; AKwUvBzgbkVoogCLLqTXGpdjuLd+N2Q6hYBabK1RNNW3+F96UlfZ7tjGhmMw+JK6Kew0KV2sB+exQPW4i18=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKeVhsKJxlYf6yMVUzUMyyI7FAwSXZYqiXQb0J1g783saZ0zGfz
-	rbBhXhcEot15i/Hsuzfk2VcmzxPn5e/bCivVTaUBfqum48Bvfuhx6W0IxrLLjxv8KQ==
-X-Gm-Gg: AYBFou3+y+dQuRfxkSi+yqY5FIE3VyxvHInj1odPZC/fDwVIkbx9MxW9O4PIW5u5TNz
-	DL+78GVHxkRxNsYTFylNy9C/Zf1qHNcKltVCNfLCbURmUc8hlCqKTPIyb3+s4xZQi83GGSpAfXD
-	EFopHgzvzFoV05286FptrP6qF17aCFYqNxeunuyQXIMRUDjG+Yy2SbyTYuRklR+ZFzrLF6Spjn3
-	0g4X3XtIyLkPm/A+ZYv3v3ELXGoVPCUESgw2F5EzSxmK5LE16F4JVX5R0f/Igh9mt58N07o9sVd
-	M/HaRUnNWRK0JlewtfiX4DWtZgaIO4o4k65LqaOxeN31SFsVm0n9DEzHgQz/SASdgduKl+bkClR
-	gQxqZxbKwgtlnHhUQQdRxlVXZMzi13pA0Dz7Gn4SqyjNuD42cliwaQTp6x8NyrRi785yFYVnXtN
-	qaSrEf/NhE22Vqw71MW2HptwPOljCsj0QP8eeX/KsVwzPnLh3EMSwiK3cPKBEKtandm7ek/y0dQ
-	IxQI0Lkyhl4/dbiqanaHVpg3KmAchoVp8YdSfGZ5e+Zzju8OJa81XZPQoevhLNR
-X-Received: by 2002:a05:6000:2992:10b0:488:654b:ccd8 with SMTP id ffacd0b85a97d-48dba7819famr976363f8f.6.1791525417754;
-        Thu, 08 Oct 2026 22:56:57 -0700 (PDT)
-Message-ID: <c2b31aba-3a05-419c-a688-4add24433260@suse.com>
-Date: Fri, 9 Oct 2026 07:56:56 +0200
+        bh=VLtL/UQ4aw9dMmG4Iu9JqlxjJJAQbHVRvsBfn3pquMw=;
+        b=PkTysTI+xsgB1ExEiJjunr7fCNIMTCDPvxzVFvbjKf7h4/o+YLiQ5SgnoUIX/bFHyE
+         mNmF+azX8mcMqMb7R4RN/d4bP306jMao1sdQ7sdHxbWU6f86SBrNhwj17rr7lR5GAOA1
+         3rRvV4R42pTeG3FTkTg+W3vIeZbvM8uU9TkI9XN1hW4I/5K9YDXog4J/LUkzGk9dq+4B
+         9gyofutlB7G7jqcZpLbKUCpjE6k4r+FGQACkg43NTzc98IvP8eaid04pVYMLkhd6d2eH
+         +PhrCKBNU1He53/qOjyqWQfcb0SpMJQO5kaE5LZQ/0NIdTR5NIwRp3k4LvUyxDTDZzau
+         amnA==
+X-Forwarded-Encrypted: i=1; AKwUvBxfLAqIeDshRTRNzj0rM49+FiedwZ/r+f1LPCTZ6krbASN0NdtTxVj78f1UFqehOWLvlUv7E7kt1r8=@lists.xenproject.org
+X-Gm-Message-State: AFuF++m0r9TWl9TOO62PW6flCNRNCnd4YpDybY6UW9VUdeCrTRYeqNu3
+	pGi6rFjnGjsTTEHFwMX6aE1GfjKaUNxua1wiEO1DCmtLJpXP+rim76HNpyHjqmNHzg==
+X-Gm-Gg: AYBFou0/Jby4Ipp4DqraZ9V8jKAMm+t1Ys1ZcDhnf5SXLtT8ZAEi6HKCuga+azH2EtX
+	auzT9qfjbQOhW5REFYixn0N4CWEwg4e+dsOV+f2xLNFGUYFOzW3aMvnh9ro8F4k7XQpClp5b8R7
+	5B93Kd6NDWKwFOztVaGRlEL1mNFyjdI8GF621l83kAQ1puGjSeHMEcSmKZhDDj2IxS2/IEwcibu
+	BpCDox8mtRvnKYw0gX/daYwl89mH4HxOG6G3uT/zAtJYBTCmO9FbR1+NphIaiKz5PUm2Xrsp0Um
+	ZF+MlhW3zsifdv1M4VUKyNgCg4UzoxrqmzdCg7icnCWaAoKu/pnf13A91dCsnHnlFNR5Yr4yoiI
+	zQHMnU245ehmQrN7gV1YrCyS265UQLjto9mhpn9aFy7ocOR5rRknGza924svPC1mg8n3w5F2AQd
+	GPWlUnzGTtB7o3Ys1TCbjyN7hbBOU/8HUh/zQcdF9z35cj7jKgBH03lba2EUb8zgg4eeLK1gIVv
+	H1ncg4tmmIac0w4ugMKd6VE7VCrIdtc97tzQm+G5WKJeoe9X49hevdfATTaKQ==
+X-Received: by 2002:a05:600c:8184:b0:4a0:1c17:4fb2 with SMTP id 5b1f17b1804b1-4a18e4d854cmr12053725e9.31.1791529616576;
+        Fri, 09 Oct 2026 00:06:56 -0700 (PDT)
+Message-ID: <10316579-4372-4ade-9114-53c737053e0c@suse.com>
+Date: Fri, 9 Oct 2026 09:06:55 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drivers/char: add timeout for XHCI console cable
-To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v3 07/18] x86/hvm: introduce per-vCPU L3 page-table
+To: George Dunlap <gwd@xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20261008150528.359731-1-marmarek@invisiblethingslab.com>
- <8f61b665-17ca-4eda-b452-313eff8bff93@suse.com> <ase_8Flu9BEr5r5N@mail-itl>
+ Teddy Astie <teddy.astie@vates.tech>, Tim Deegan <tim@xen.org>,
+ xen-devel@lists.xenproject.org
+References: <20261007104051.48841-1-gwd@xenproject.org>
+ <20261007104051.48841-8-gwd@xenproject.org>
+ <7bced27f-5391-4120-b9cf-b97bb88758ca@suse.com>
+ <CAFLBxZYi+k3Zn7ALqzATsWA+XAXkPvAxeq-Z4pSca3PMocUrZQ@mail.gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,79 +131,41 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ase_8Flu9BEr5r5N@mail-itl>
+In-Reply-To: <CAFLBxZYi+k3Zn7ALqzATsWA+XAXkPvAxeq-Z4pSca3PMocUrZQ@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1791525418-BDEC6034-71982DB8/10/78276251493
+X-purgate-ID: tlsNG-ef75cf/1791529617-A56C2AE4-1DDA1060/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2966
+X-purgate-size: 1414
 
-On 08.10.2026 18:08, Marek Marczykowski-Górecki wrote:
-> On Thu, Oct 08, 2026 at 05:54:53PM +0200, Jan Beulich wrote:
->> On 08.10.2026 17:05, Marek Marczykowski-Górecki wrote:
->>> Do not wait indefinitely for XHCI to configure console connection. If
->>> the cable is not plugged in, timeout after about 1s and continue boot.
->>> If the cable is plugged in later, the console will be activated then
->>> (see final part of dbc_ensure_running()). When timeout occurs, print a
->>> warning message - it will be saved in the console ring buffer, to be
->>> later retrieved from dom0, or possibly later printed when the cable is
->>> finally connected. But, do not print the warning when waiting after
->>> controller reset, as that may have been called from from console
->>> dbc_putc() and printing here would result in (possibly infinite)
->>> recursion.
->>>
->>> Try the timeout to be about 1s, which is way above time needed for
->>> configuring already connected cable. But, since this part runs very
->>> early in the Xen startup, time is not calibrated yet, and functions like
->>> NOW() do not work yet. Use raw TSC and estimate needed time to be at
->>> least 1s on a fast CPU (5GHz), and possibly longer on a slower one. This
->>> is not very accurate method, but fortunately it doesn't need to be.
+On 08.10.2026 23:00, George Dunlap wrote:
+> On Thu, Oct 8, 2026 at 9:40 AM Jan Beulich <jbeulich@suse.com> wrote:
+>> On 07.10.2026 12:40, George Dunlap wrote:
+>>> --- a/xen/arch/x86/pv/domain.c
+>>> +++ b/xen/arch/x86/pv/domain.c
+>>> @@ -127,7 +127,7 @@ static int setup_compat_l4(struct vcpu *v)
+>>>      mfn = page_to_mfn(pg);
+>>>      l4tab = map_domain_page(mfn);
+>>>      clear_page(l4tab);
+>>> -    init_xen_l4_slots(l4tab, mfn, v->domain, INVALID_MFN, false);
+>>> +    init_xen_l4_slots(l4tab, mfn, v->domain, v, INVALID_MFN, false);
 >>
->> A little fragile, but well...
->>
->>> --- a/xen/drivers/char/xhci-dbc.c
->>> +++ b/xen/drivers/char/xhci-dbc.c
->>> @@ -851,9 +851,15 @@ static void dbc_reset_debug_port(struct dbc *dbc)
->>>      }
->>>  }
->>>  
->>> -static void dbc_enable_dbc(struct dbc *dbc)
->>> +static bool dbc_enable_dbc(struct dbc *dbc)
->>>  {
->>>      struct dbc_reg *reg = dbc->dbc_reg;
->>> +    s_time_t start;
->>> +    /*
->>> +     * Too early for proper time calibration, assume a 5GHz CPU and let it wait
->>> +     * about 1s, with still reasonable timeout on a slower CPU.
->>> +     */
->>> +    unsigned long timeout_ticks = 5UL*1000*1000*1000;
->>
->> Even if right now we don't use the driver in any 32-bit env, I think we
->> better wouldn't deliberately break such a possible use. IOW unsigned
->> long isn't a suitable type to use here.
+>> This being PV-only code, don't you want to pass NULL here? The description
+>> talks about this, but (a) it's not quite clear why PV32 would want handling
+>> differently from PV64 at this point and (b) in sh_make_shadow() you do pass
+>> NULL unconditionally.
 > 
-> So, uint64_t?
-
-No, as per ...
-
->> Also, nit (style): Blanks please around *.
->>
->>> @@ -870,8 +876,12 @@ static void dbc_enable_dbc(struct dbc *dbc)
->>>      writel(readl(&reg->portsc) | (1U << DBC_PSC_PED), &reg->portsc);
->>>      wmb();
->>>  
->>> -    while ( (readl(&reg->ctrl) & (1U << DBC_CTRL_DCR)) == 0 )
->>> +    start = rdtsc_ordered();
->>> +    while ( (readl(&reg->ctrl) & (1U << DBC_CTRL_DCR)) == 0 &&
->>> +            rdtsc_ordered() - start < timeout_ticks )
->>
->> Urgh - now the driver's truly becoming x86-specific. Is there a reason
->> this cannot be get_cycles()?
+> This is actually left over from the previous iteration of the series
+> which supports PV guests; and apparently it would be a lot easier for
+> implement per-vCPU pagetables for 32-bit PV guests, since the L4
+> doesn't belong to the guest.  But it's outside of the scope of the
+> current work.
 > 
-> Sure, it can be get_cycles(). I just need it to not try to apply scaling
-> that works only after calibration, but indeed get_cycles() should work.
+> At any rate, I'm going to try passing a single vcpu, as Roger
+> suggested.  That restricts toolstacks to not being able to promote PV
+> L4s before calling XEN_DOMCTL_max_vcpus, but that seems fine to me.
 
-... this it would want to be cycles_t.
+But my question was why it's not NULL that is being passed here.
 
 Jan
 
