@@ -4,43 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73EB1CA6012
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 07:07:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1444021.1661046 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D93C2CA6012
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 07:59:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1444035.1661056 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xF4h5-00013e-Nc; Fri, 09 Oct 2026 07:07:03 +0000
+	id 1xF5VF-0008DV-Aj; Fri, 09 Oct 2026 07:58:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1444021.1661046; Fri, 09 Oct 2026 07:07:03 +0000
+Received: by outflank-mailman (output) from mailman id 1444035.1661056; Fri, 09 Oct 2026 07:58:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xF4h5-00013W-KO; Fri, 09 Oct 2026 07:07:03 +0000
-Received: by outflank-mailman (input) for mailman id 1444021;
- Fri, 09 Oct 2026 07:07:02 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xF4h4-00013Q-4V
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 07:07:02 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xF4h3-00Ep9J-HG
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 09:07:01 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ac89286-e002-0a2a0a5209dd-0a2a4507bc4a-14
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 09:06:57 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ac89290-b4ea-0a2a45070019-d155802dc456-3
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 09:06:57 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4a018792ab3so33742085e9.0
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 00:06:57 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bf2343asm64123705e9.9.2026.10.09.00.06.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 09 Oct 2026 00:06:56 -0700 (PDT)
+	id 1xF5VF-0008DN-74; Fri, 09 Oct 2026 07:58:53 +0000
+Received: by outflank-mailman (input) for mailman id 1444035;
+ Fri, 09 Oct 2026 07:58:51 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <roger@xenproject.org>) id 1xF5VD-0008DH-Hm
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 07:58:51 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.96)
+ (envelope-from <roger@xenproject.org>) id 1xF5VC-004haQ-2s;
+ Fri, 09 Oct 2026 07:58:50 +0000
+Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
+ helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.96)
+ (envelope-from <roger@xenproject.org>) id 1xF5VC-000xRX-1h;
+ Fri, 09 Oct 2026 07:58:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,120 +41,337 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791529616; x=1792134416; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=VLtL/UQ4aw9dMmG4Iu9JqlxjJJAQbHVRvsBfn3pquMw=;
-        b=RgcbAzpV5nHtvcM7KaJel3ytPSApdcefg8HCFV8qBCHY4tZ4FAVq9yVcJ7Y1X5MmNg
-         86YI0mpqXkwc4KerAcS8rUEVAFnoLtf6PSRh0+fF9hiUnMr0u4Yq1wtKVWtKH0UDg4vv
-         2h0TuSMLgQLOIPPlTNbIV6tUsbj0OJw6TF0wh61EXITv5zDM7vLgFSz6BzcciD1YeoMi
-         fnPQm8IGJCUBwMss67m/b2szn9JaD0hNQLYo6eLjTtYFJl5ADy+nq0MCIp2sXWuFSUbW
-         ehWwpLOLLQJXf4nYCTxpTYG4WBTgkD70BXSYZyLAA1N0gP4zj2PxIBW2VgyhLjaDse3d
-         TKEg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791529616; x=1792134416;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=VLtL/UQ4aw9dMmG4Iu9JqlxjJJAQbHVRvsBfn3pquMw=;
-        b=PkTysTI+xsgB1ExEiJjunr7fCNIMTCDPvxzVFvbjKf7h4/o+YLiQ5SgnoUIX/bFHyE
-         mNmF+azX8mcMqMb7R4RN/d4bP306jMao1sdQ7sdHxbWU6f86SBrNhwj17rr7lR5GAOA1
-         3rRvV4R42pTeG3FTkTg+W3vIeZbvM8uU9TkI9XN1hW4I/5K9YDXog4J/LUkzGk9dq+4B
-         9gyofutlB7G7jqcZpLbKUCpjE6k4r+FGQACkg43NTzc98IvP8eaid04pVYMLkhd6d2eH
-         +PhrCKBNU1He53/qOjyqWQfcb0SpMJQO5kaE5LZQ/0NIdTR5NIwRp3k4LvUyxDTDZzau
-         amnA==
-X-Forwarded-Encrypted: i=1; AKwUvBxfLAqIeDshRTRNzj0rM49+FiedwZ/r+f1LPCTZ6krbASN0NdtTxVj78f1UFqehOWLvlUv7E7kt1r8=@lists.xenproject.org
-X-Gm-Message-State: AFuF++m0r9TWl9TOO62PW6flCNRNCnd4YpDybY6UW9VUdeCrTRYeqNu3
-	pGi6rFjnGjsTTEHFwMX6aE1GfjKaUNxua1wiEO1DCmtLJpXP+rim76HNpyHjqmNHzg==
-X-Gm-Gg: AYBFou0/Jby4Ipp4DqraZ9V8jKAMm+t1Ys1ZcDhnf5SXLtT8ZAEi6HKCuga+azH2EtX
-	auzT9qfjbQOhW5REFYixn0N4CWEwg4e+dsOV+f2xLNFGUYFOzW3aMvnh9ro8F4k7XQpClp5b8R7
-	5B93Kd6NDWKwFOztVaGRlEL1mNFyjdI8GF621l83kAQ1puGjSeHMEcSmKZhDDj2IxS2/IEwcibu
-	BpCDox8mtRvnKYw0gX/daYwl89mH4HxOG6G3uT/zAtJYBTCmO9FbR1+NphIaiKz5PUm2Xrsp0Um
-	ZF+MlhW3zsifdv1M4VUKyNgCg4UzoxrqmzdCg7icnCWaAoKu/pnf13A91dCsnHnlFNR5Yr4yoiI
-	zQHMnU245ehmQrN7gV1YrCyS265UQLjto9mhpn9aFy7ocOR5rRknGza924svPC1mg8n3w5F2AQd
-	GPWlUnzGTtB7o3Ys1TCbjyN7hbBOU/8HUh/zQcdF9z35cj7jKgBH03lba2EUb8zgg4eeLK1gIVv
-	H1ncg4tmmIac0w4ugMKd6VE7VCrIdtc97tzQm+G5WKJeoe9X49hevdfATTaKQ==
-X-Received: by 2002:a05:600c:8184:b0:4a0:1c17:4fb2 with SMTP id 5b1f17b1804b1-4a18e4d854cmr12053725e9.31.1791529616576;
-        Fri, 09 Oct 2026 00:06:56 -0700 (PDT)
-Message-ID: <10316579-4372-4ade-9114-53c737053e0c@suse.com>
-Date: Fri, 9 Oct 2026 09:06:55 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 07/18] x86/hvm: introduce per-vCPU L3 page-table
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Type:MIME-Version:
+	References:Message-ID:Subject:Cc:To:From:Date;
+	bh=lr4MY+D+xpnz1ymcfppbFvLxwpTSo1hOMK+sxi+OY5Q=; b=qWd+Vts5xpqkOpHTIijYAbme4C
+	SktYu+1WhN56Itb2VXl/Yh5TLQY5O8Ug1D9pmrmT9h2wsZyVpbYgjc1HG2WXRn5sS/1+vpglk5F5G
+	b6L3ScqdvqKY2hcktTscC31cZi+ixP2SkDo5HIaVYOkbOIqLMNHGK5JRlyNQZzaYBW1k=;
+Date: Fri, 9 Oct 2026 09:58:45 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
 To: George Dunlap <gwd@xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Tim Deegan <tim@xen.org>,
- xen-devel@lists.xenproject.org
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: Re: [PATCH v3 17/18] x86/mm: run guest contexts on the sparse
+ directmap view
+Message-ID: <asietfC0LX4Z7xI7@Mac.lan>
 References: <20261007104051.48841-1-gwd@xenproject.org>
- <20261007104051.48841-8-gwd@xenproject.org>
- <7bced27f-5391-4120-b9cf-b97bb88758ca@suse.com>
- <CAFLBxZYi+k3Zn7ALqzATsWA+XAXkPvAxeq-Z4pSca3PMocUrZQ@mail.gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAFLBxZYi+k3Zn7ALqzATsWA+XAXkPvAxeq-Z4pSca3PMocUrZQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1791529617-A56C2AE4-1DDA1060/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 1414
+ <20261007104051.48841-18-gwd@xenproject.org>
+MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+In-Reply-To: <20261007104051.48841-18-gwd@xenproject.org>
 
-On 08.10.2026 23:00, George Dunlap wrote:
-> On Thu, Oct 8, 2026 at 9:40 AM Jan Beulich <jbeulich@suse.com> wrote:
->> On 07.10.2026 12:40, George Dunlap wrote:
->>> --- a/xen/arch/x86/pv/domain.c
->>> +++ b/xen/arch/x86/pv/domain.c
->>> @@ -127,7 +127,7 @@ static int setup_compat_l4(struct vcpu *v)
->>>      mfn = page_to_mfn(pg);
->>>      l4tab = map_domain_page(mfn);
->>>      clear_page(l4tab);
->>> -    init_xen_l4_slots(l4tab, mfn, v->domain, INVALID_MFN, false);
->>> +    init_xen_l4_slots(l4tab, mfn, v->domain, v, INVALID_MFN, false);
->>
->> This being PV-only code, don't you want to pass NULL here? The description
->> talks about this, but (a) it's not quite clear why PV32 would want handling
->> differently from PV64 at this point and (b) in sh_make_shadow() you do pass
->> NULL unconditionally.
+On Wed, Oct 07, 2026 at 11:40:50AM +0100, George Dunlap wrote:
+> In init_xen_l4_slots(), if d->arch.sparse_dmap is set, point the
+> directmap L3 at the sparse view.
 > 
-> This is actually left over from the previous iteration of the series
-> which supports PV guests; and apparently it would be a lot easier for
-> implement per-vCPU pagetables for 32-bit PV guests, since the L4
-> doesn't belong to the guest.  But it's outside of the scope of the
-> current work.
+> d->arch.sparse_dmap is decided at domain creation: PV domains all have a
+> mapcache, HVM domains need per-vCPU page-tables for one.  No option asks
+> for the sparse view yet.
+
+Is it strictly needed to tie the sparse directmap to having a per-vCPU
+mapcache on HVM?  AFAICT HVM domains could also use the classic
+per-domain mapcache.
+
+> The sparse view becomes active once dom0 is built, before it first runs:
+> dom0's construction runs on the full directmap, which it needs, and its
+> root page-tables so far (a PV dom0's first L4s, a PVH dom0's monitor
+> tables) are switched over then.  A PV dom0 booted with dom0=shadow is
+> switched as well: shadow mode is enabled only later, from a tasklet, and
+> its shadow L4s then get the sparse view from init_xen_l4_slots(), as for
+> any PV domain entering shadow mode.  Anything built later gets the
+> sparse view from init_xen_l4_slots().  The sparse view's slots are
+> marked NX at activation, as the full directmap's slots are.
+
+Is NX worth mentioning here?  The expectation is that the sparse dmap
+slots will use the same attributes as the full dmap, and hence I
+would focus on the differences (if any).
+
+> The two directmaps differ where the sparse view leaves memory out, so no
+> translation of the full directmap may remain usable on page-tables
+> carrying the sparse view.  Directmap mappings stay global nevertheless:
+> every CR3 write which can move a CPU onto the sparse view goes through
+> switch_cr3_cr4(), which flushes the old page-tables' translations,
+> global entries included, before it returns.  The CR3 writes which keep
+> entries -- a PV vCPU's switch between its kernel and user page-tables,
+> XPTI's entry and exit -- stay within one vCPU's page-tables, which carry
+> the same directmap, or go to XPTI's per-CPU root, which maps only Xen's
+> own per-CPU pages there.  Removals from the sparse view are flushed on
+> every CPU, global entries included.  PV guests running with global
+> pages, a PV dom0 not using the sparse view among them, so keep their
+> directmap TLB entries across switches between guest kernel and user
+> mode.
 > 
-> At any rate, I'm going to try passing a single vcpu, as Roger
-> suggested.  That restricts toolstacks to not being able to promote PV
-> L4s before calling XEN_DOMCTL_max_vcpus, but that seems fine to me.
+> Assisted-by: Claude Code:claude-opus-5-5
+> Signed-off-by: George Dunlap <gwd@xenproject.org>
+> ---
+> Changes in v3:
+> - New in this version.
+> ---
+>  xen/arch/x86/include/asm/sparse-directmap.h |  11 ++
+>  xen/arch/x86/mm.c                           |   9 +-
+>  xen/arch/x86/setup.c                        |   3 +
+>  xen/arch/x86/sparse-directmap.c             | 129 ++++++++++++++++++++
+>  xen/arch/x86/spec_ctrl.c                    |   7 ++
+>  5 files changed, 157 insertions(+), 2 deletions(-)
+> 
+> diff --git a/xen/arch/x86/include/asm/sparse-directmap.h b/xen/arch/x86/include/asm/sparse-directmap.h
+> index 512f8064d6..41866b77e9 100644
+> --- a/xen/arch/x86/include/asm/sparse-directmap.h
+> +++ b/xen/arch/x86/include/asm/sparse-directmap.h
+> @@ -33,7 +33,15 @@ static inline bool sparse_dmap_configured(void)
+>      return opt_sparse_dmap_pv || opt_sparse_dmap_hvm;
+>  }
+>  
+> +/* Whether a new domain of the given type is to use the sparse view. */
+> +static inline bool sparse_dmap_wanted(bool pv)
+> +{
+> +    return sparse_dmap_root && (pv ? opt_sparse_dmap_pv : opt_sparse_dmap_hvm);
+> +}
+> +
+>  void sparse_dmap_init(void);
+> +void sparse_dmap_activate(void);
+> +void sparse_dmap_install(l4_pgentry_t *l4t, bool pv);
+>  int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn, unsigned long nr,
+>                             pte_attr_t flags);
+>  int sparse_dmap_mirror_modify(unsigned long s, unsigned long e,
+> @@ -46,7 +54,10 @@ int sparse_dmap_drop_pagetable(mfn_t mfn);
+>  #define sparse_dmap_active false
+>  
+>  static inline bool sparse_dmap_configured(void) { return false; }
+> +static inline bool sparse_dmap_wanted(bool pv) { return false; }
+>  static inline void sparse_dmap_init(void) {}
+> +static inline void sparse_dmap_activate(void) {}
+> +static inline void sparse_dmap_install(l4_pgentry_t *l4t, bool pv) {}
+>  static inline int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn,
+>                                           unsigned long nr, pte_attr_t flags)
+>  {
+> diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+> index 4a1bd9d146..4e2f9e1f12 100644
+> --- a/xen/arch/x86/mm.c
+> +++ b/xen/arch/x86/mm.c
+> @@ -1662,7 +1662,8 @@ struct page_info *perdomain_l3(const struct vcpu *v)
+>   * share; it is mandatory for a vCPU-PT domain, whose per-domain area is
+>   * per-vCPU.  All other parameters are optional and will either fill or zero
+>   * the appropriate slots.  Pagetables not shared with guests will gain the
+> - * extended directmap.
+> + * extended directmap, unless the domain runs on the sparse view of the
+> + * directmap, which replaces the directmap slots (see sparse_dmap_install()).
+>   */
+>  void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
+>                         const struct domain *d, const struct vcpu *v,
+> @@ -1670,7 +1671,7 @@ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
+>  {
+>      /*
+>       * PV vcpus need a shortened directmap.  HVM and Idle vcpus get the full
+> -     * directmap.
+> +     * directmap, unless the domain runs on the sparse view (below).
+>       */
+>      bool short_directmap = !paging_mode_external(d);
+>  
+> @@ -1743,6 +1744,10 @@ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
+>                 (ROOT_PAGETABLE_FIRST_XEN_SLOT + slots -
+>                  l4_table_offset(XEN_VIRT_START)) * sizeof(*l4t));
+>      }
+> +
+> +    /* The domain's contexts may run on the sparse view of the directmap. */
+> +    if ( sparse_dmap_active && d->arch.sparse_dmap )
+> +        sparse_dmap_install(l4t, short_directmap);
 
-But my question was why it's not NULL that is being passed here.
+Instead of doing the copy of the full directmap from the idle page
+tables, and then rewriting, won't it be simpler if the copied
+directmap was the correct one right away rather than doing a fixup
+afterwards?
 
-Jan
+>  }
+>  
+>  bool fill_ro_mpt(mfn_t mfn)
+> diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+> index e52388ad28..21edab9cea 100644
+> --- a/xen/arch/x86/setup.c
+> +++ b/xen/arch/x86/setup.c
+> @@ -2216,6 +2216,9 @@ void asmlinkage __init noreturn __start_xen(void)
+>      if ( !dom0 )
+>          panic("Could not set up DOM0 guest OS\n");
+>  
+> +    /* Before dom0 first runs, and after it was built on the full directmap. */
+> +    sparse_dmap_activate();
+> +
+>      heap_init_late();
+>  
+>      init_constructors();
+> diff --git a/xen/arch/x86/sparse-directmap.c b/xen/arch/x86/sparse-directmap.c
+> index ef13f9e95d..54a6e36132 100644
+> --- a/xen/arch/x86/sparse-directmap.c
+> +++ b/xen/arch/x86/sparse-directmap.c
+> @@ -46,8 +46,10 @@
+>  #include <xen/lib.h>
+>  #include <xen/mm.h>
+>  #include <xen/numa.h>
+> +#include <xen/sched.h>
+>  #include <xen/sort.h>
+>  
+> +#include <asm/flushtlb.h>
+>  #include <asm/page.h>
+>  #include <asm/sparse-directmap.h>
+>  
+> @@ -437,3 +439,130 @@ void __init sparse_dmap_init(void)
+>  
+>      printk(XENLOG_INFO "Sparse directmap: %lu pages mapped\n", mapped);
+>  }
+> +
+> +/*
+> + * Point the directmap slots of the root page-table @l4t at the sparse view.
+> + * Every slot it covers gets its L3, whatever the full directmap has there,
+> + * so that memory added later is covered too.  A PV root has guest slots
+> + * above; any other root loses the rest of the directmap, which the sparse
+> + * view does not cover.
+> + *
+> + * Directmap mappings may be global, in either hierarchy.  Translations of
+> + * the full directmap must not remain usable on a root carrying the sparse
+> + * view: every CR3 write which can move a CPU from the one to the other goes
+> + * through switch_cr3_cr4(), which flushes what the old root left in the TLB,
+> + * global entries included, before it returns.  The other CR3 writes, which
+> + * may keep global or PCID-tagged entries (_toggle_guest_pt(), XPTI's entry
+> + * and exit paths), switch between one vCPU's roots, which carry the same
+> + * directmap, or to XPTI's per-CPU root, which maps only this CPU's stack,
+> + * IDT and TSS there.  Removals from the sparse view flush all CPUs, global
+> + * entries included.
+
+IMO parts of this comment are likely out of scope here.  It's fine to
+discuss about the flushing strategy in the commit message, however
+doing so in a comment here, that's disconnected from the definitions
+of switch_cr3_cr4() and _toggle_guest_pt() seems out of place.
+
+I would also avoid referencing function names in code comments: it's
+fine to do so in the commit message, but it's likely those references
+in comments will go stale as functions change names or disappear.
+Commit messages are otherwise tied to a specific point in time, so the
+context and the referenced functions are always accurate and it will
+never go stale in the context is was committed.
+
+> + */
+> +void sparse_dmap_install(l4_pgentry_t *l4t, bool pv)
+> +{
+> +    unsigned int i;
+> +
+> +    ASSERT(sparse_dmap_root);
+> +
+> +    for ( i = l4_table_offset(SPARSE_DMAP_START);
+> +          i < l4_table_offset(SPARSE_DMAP_END); i++ )
+> +        l4t[i] = sparse_dmap_root[i];
+> +
+> +    if ( !pv )
+> +        for ( ; i < l4_table_offset(DIRECTMAP_VIRT_END); i++ )
+> +            l4t[i] = l4e_empty();
+> +}
+> +
+> +static void __init sparse_dmap_install_mfn(mfn_t mfn, bool pv)
+> +{
+> +    l4_pgentry_t *l4t = map_domain_page(mfn);
+> +
+> +    sparse_dmap_install(l4t, pv);
+> +    unmap_domain_page(l4t);
+> +}
+> +
+> +/*
+> + * Let guest contexts run on the sparse view.  Root page-tables built from
+> + * here on carry it (init_xen_l4_slots()); those of the domains built so far
+> + * (dom0, which has not run yet) are switched over here.  Its construction ran
+> + * on the full directmap, and needed to.
+> + */
+> +void __init sparse_dmap_activate(void)
+> +{
+> +    struct domain *d;
+> +    struct vcpu *v;
+> +    unsigned long va, mapped = 0;
+> +    unsigned int i, switched = 0;
+> +
+> +    if ( !sparse_dmap_root )
+> +        return;
+> +
+> +    /*
+> +     * Nothing in the directmap is executed: as subarch_init_memory() does
+> +     * for the full directmap, mark the sparse view's slots NX, before any
+> +     * root page-table takes a copy of them.
+> +     */
+> +    if ( cpu_has_nx )
+> +        for ( i = l4_table_offset(SPARSE_DMAP_START);
+> +              i < l4_table_offset(SPARSE_DMAP_END); i++ )
+> +            l4e_add_flags(sparse_dmap_root[i], _PAGE_NX_BIT);
+
+Shouldn't this be done when the sparse directmap L4 are populated,
+instead of here?
+
+> +
+> +    rcu_read_lock(&domlist_read_lock);
+> +
+> +    for_each_domain ( d )
+> +    {
+> +        if ( !d->arch.sparse_dmap )
+> +            continue;
+
+You should likely ensure the domain is paused here, otherwise nothing
+good can came out of playing with its root page-table.
+
+> +
+> +        /*
+> +         * A PV domain runs on shadow L4s only in shadow mode, which boot
+> +         * does not enter before this point: dom0=shadow enables it later,
+> +         * from a tasklet, and the shadow L4s then get the sparse view from
+> +         * init_xen_l4_slots(), as for any PV domain entering shadow mode.
+> +         */
+> +        switched++;
+> +        for_each_vcpu ( d, v )
+> +        {
+> +            if ( is_hvm_vcpu(v) )
+
+nit: you could pull is_hvm_vcpu() out of the loop and store in a
+boolean, so that you don't need to call it for each domain vCPU.
+
+> +            {
+> +                if ( !pagetable_is_null(v->arch.hvm.monitor_table) )
+> +                    sparse_dmap_install_mfn(
+> +                        pagetable_get_mfn(v->arch.hvm.monitor_table), false);
+> +                continue;
+> +            }
+> +
+> +            if ( !pagetable_is_null(v->arch.guest_table) )
+> +                sparse_dmap_install_mfn(
+> +                    pagetable_get_mfn(v->arch.guest_table), true);
+> +            if ( !pagetable_is_null(v->arch.guest_table_user) )
+> +                sparse_dmap_install_mfn(
+> +                    pagetable_get_mfn(v->arch.guest_table_user), true);
+> +        }
+> +    }
+> +
+> +    rcu_read_unlock(&domlist_read_lock);
+> +
+> +    /*
+> +     * Belt and braces: nothing runs on these page-tables yet, and PV dom0's
+> +     * construction, which ran on its own, returned to the idle page-tables
+> +     * through switch_cr3_cr4(), dropping what it left in the TLB.
+> +     */
+> +    flush_all(FLUSH_TLB_GLOBAL);
+> +
+> +    sparse_dmap_active = true;
+> +
+> +    for ( va = SPARSE_DMAP_START; va < SPARSE_DMAP_END; )
+> +    {
+> +        pte_attr_t flags;
+> +        unsigned long n;
+> +
+> +        if ( !mfn_eq(xen_mapping_lookup(sparse_dmap_root, va, &flags, &n),
+> +                     INVALID_MFN) )
+> +            mapped += n;
+> +        va += n << PAGE_SHIFT;
+> +    }
+
+This looks to be extremely expensive just for the purposes of printing
+the number of mapped pages in the sparse directmap, it should be under
+CONFIG_DEBUG if anything.
+
+Thanks, Roger.
 
