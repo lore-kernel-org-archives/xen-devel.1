@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1754CCA601E
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 17:24:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1444600.1661373 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03996CA9EBD
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 17:38:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1444612.1661380 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFEKm-0000Ag-ES; Fri, 09 Oct 2026 17:24:40 +0000
+	id 1xFEXI-0002Dp-Eu; Fri, 09 Oct 2026 17:37:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1444600.1661373; Fri, 09 Oct 2026 17:24:40 +0000
+Received: by outflank-mailman (output) from mailman id 1444612.1661380; Fri, 09 Oct 2026 17:37:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFEKm-0000AZ-Az; Fri, 09 Oct 2026 17:24:40 +0000
-Received: by outflank-mailman (input) for mailman id 1444600;
- Fri, 09 Oct 2026 17:24:39 +0000
+	id 1xFEXI-0002Di-CF; Fri, 09 Oct 2026 17:37:36 +0000
+Received: by outflank-mailman (input) for mailman id 1444612;
+ Fri, 09 Oct 2026 17:37:35 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmytro_prokopchuk1@epam.com>) id 1xFEKl-0000AT-4J
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 17:24:39 +0000
+ (envelope-from <olekstysh@gmail.com>) id 1xFEXG-0002DQ-TD
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 17:37:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xFEKk-009OPC-0p
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 19:24:38 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xFEXF-009Q9J-Kr
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 19:37:33 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6ac92344-e002-0a2a0a5209dd-0a2a4503ba3e-18
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 19:24:37 +0200
-Received: from [52.101.72.77]
- (helo=AM0PR02CU008.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6ac92355-fae8-0a2a45030019-3465484dfd52-4
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 19:24:37 +0200
-Received: from PAXPR03MB7531.eurprd03.prod.outlook.com (2603:10a6:102:1da::11)
- by PA4PR03MB7373.eurprd03.prod.outlook.com (2603:10a6:102:108::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.16; Fri, 9 Oct
- 2026 17:24:36 +0000
-Received: from PAXPR03MB7531.eurprd03.prod.outlook.com
- ([fe80::77bc:127a:5664:10e]) by PAXPR03MB7531.eurprd03.prod.outlook.com
- ([fe80::77bc:127a:5664:10e%3]) with mapi id 15.21.0496.015; Fri, 9 Oct 2026
- 17:24:36 +0000
+ (envelope-from <olekstysh@gmail.com>)
+ id 6ac9264b-bab6-0a2a0a5309dd-0a2a4508ec7e-6
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 19:37:31 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <olekstysh@gmail.com>)
+ id 6ac9265b-f659-0a2a45080019-d155802fa594-3
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 19:37:31 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-4a166199820so661575e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 10:37:31 -0700 (PDT)
+Received: from [192.168.0.114] ([91.123.150.146])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a18ee9bd19sm46952685e9.1.2026.10.09.10.37.29
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 09 Oct 2026 10:37:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,141 +53,326 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UEkOkw0xGsMy9OWLBn5k1DptzmUK0R6Pu/gzlgJCMn7tXeMQNCi1HLuOjO1XB28GgxRciq6xIugOlhOzhbKRfNdquzHMyxdbYbzeAb5qeprq3xTn2/ds9BP4eGHIWWzDfpt0fZ14Y9IDps7vK1HHP4ETs8AKBoj6yYpAigGShSHPkaWi+qLHyqg1u30q9zmsuE40fSbiR0yp1J9nWMzl7a7bIG7luqWRUAgevc+jq1MmD0x/qHvMS4ZHdMkt/pyaw+wXwRGxhX7QD+06ctBHwR9e8Qh1TqlqsAzVCcWmeznetMttOFcO1quorBsvqb0/PvirnvOFw0ao7RzlRBNohw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/kG0Nrink/VIjzZVh3uGkOeZoaYXZYdL5u63rSihIUQ=;
- b=wF8apXMnHQWyt9c4ezDKtBvru8KQCtt4DIlU6s5xmUkURjjAfTBj+4Fr7Krbkxv7qRtkYOJjmiQtLZiuEX8rUD/R7TnLfHsOg0YvPYpi+m/hMrI5tkRSMF8av19O5CBXrbl6ttFbnoPsG7qPdaCKpjJiCMJNAOelBMfcXdG8O3hmH4eYcuY0kKA1cYLde7uPJFWZIZ1yQkw54TnrEy+ApThbKTXrOQyqHijP4CD8PrekNqpCyKFUHJtukXeCht+3ngvDiej05wAu778q1SOVmSf3CfZ+RagB1rNGTRqmcAzMgBzQHjIG9YHmWlGZBgnYVHSm3NjJ2/o/gb7molFk7Q==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/kG0Nrink/VIjzZVh3uGkOeZoaYXZYdL5u63rSihIUQ=;
- b=kLUKMMwOr9BeVnTgT4CVA0TRkxASMsKhKhssQBbo/uf6OYIyw65WEs4pMF3paGWu8Ko4bNyvdGmwQwARUbFkYL+Nz87x62EdFilmqxymWFIf4gBam6VrFutae153fDJwxklyCpT9KeVWvpTMT9F5O76A+cCANnZJxsgy2Uz6SYO2D+KVGCUVIXtNoCe4ghikj6emXE5mcwVaq3de5ZRkXHr657Ecv4P/fTHkmoiR252f+jRHErZNdeLWLo3+sfSS1oOn6067I5dCBasxEs8Qk/oLkLkXG0esKR6s6XtaZ4QXUsZvTMRuNxj9QuIyzYeAHKLac1BrgfQQOwhbxEGhbg==
-From: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Subject: Re: [RFC PATCH 10/19] arm/its: Keep track of BASER regs
-Thread-Topic: [RFC PATCH 10/19] arm/its: Keep track of BASER regs
-Thread-Index: AQHclF+MPQ/oNp2C80CWhnrkrdvP0rb2/VyA
-Date: Fri, 9 Oct 2026 17:24:35 +0000
-Message-ID: <4965f6c4-0c37-4f55-9e10-72990ba40090@epam.com>
-References: <cover.1770046465.git.mykyta_poturai@epam.com>
- <cc8390af73d86c72d5274e6cc3c314fe018a2c8d.1770046465.git.mykyta_poturai@epam.com>
-In-Reply-To:
- <cc8390af73d86c72d5274e6cc3c314fe018a2c8d.1770046465.git.mykyta_poturai@epam.com>
-Accept-Language: en-US, uk-UA, ru-RU
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAXPR03MB7531:EE_|PA4PR03MB7373:EE_
-x-ms-office365-filtering-correlation-id: 8d32759b-7390-4341-4ff9-08df262a30e3
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|366016|376014|42112799006|23010399003|38070700021|56012099006|10067099003|4143699003|11063799006|18002099003|22082099003;
-x-microsoft-antispam-message-info:
- iBLQyyKH0dMXnAUfZqAks6DMtt7cCYFDyZuQZuE1mItV5OJQ0VTU8BmBKqlbKGPatGQmJn5QjqT2ZyfZFz83lv6QA5NfDINmwDgkd3VYRjT4i/a55uHwPhFKKXJcDS8a8UGc23W5AW9KwS4avQsVu2D8S6JYPNsYCDBYZGG5O+h2hnJwl9g46PgbZthDsEpqe3EBgti2B4xuyyWdZ7vrGxblRXpIXxAQjQ7w0mTH2DtQA966C6xg90FCnnjXUShbzKxNmlwTtub2m08FZdRTYRP0otAnc4f/upMSqkOHCroToeiFrjY1OqZSBMoWQesIgNZG+cBOYfZmrX4oBR2VUA/Y+6iwZ+OxdudF7dSBJowjAvPMPzB/GW1KI7JkkGkdYM53/N4ARPBjyvRAICYwm+26zBEJ8aoyS4yqy3rL9lr+ugh18CXKxxLgw1N5DsJmdf8P9g1hR5OtpDU0vayCmWDJ9N/mBXt6ipusnFxoQuWaFZfLag+MNMEnMtNRgnFGIh3BxwExWsyYWzVPfRNSfAta/rLxAlrVZNu1/4/VJ/yzkWmc1Aj6oE/CWqgLF9EqZBUGuuIBUxOo4jNX1uTCRmVtglQginybWmDry3TCySbU+aBgFQdcolkXWcoTWVgzDbxVsbGLUBJ7UnmdtCIJ88grLug5TN8c1wFIbyCOfzhPPmJnN+klcYxZm/oswWrG7FhCoJZ8YcK8nJ364KYlfBAPuNjQV5BsMgpecAbLBYc=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAXPR03MB7531.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(42112799006)(23010399003)(38070700021)(56012099006)(10067099003)(4143699003)(11063799006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?cTBFZ1hsNEtJblpaMGgybWpaNEVlcksxVWswZ09TTTZJMzJZbVE4WEdOSW5w?=
- =?utf-8?B?djY4MFp4QXBUSDFnTyszTkFFcWxyV2laVDZiR0dHTDJzc1Zha2w0RHZhNlF4?=
- =?utf-8?B?VUtnaWlBVHpLTmIxVjJPdHBqVUl6eFYwU25TT2F0WlBscit3Tzk3ZlhXQS9X?=
- =?utf-8?B?Mmw5Qmg3b293cXBpeGhrZjhTU0lZc1VuNkE2M2NHV0lSTjZMbTR3aUpsL1hT?=
- =?utf-8?B?MVROMFl5NDhuRHpqZkdWcVRFM3M3Wlg3eTBLUXNrM0piYmJhUGQybW5BNDZh?=
- =?utf-8?B?K20xUW5IVUpVbEY3NC9xTGc1cjNwalRrR05aa1pONkJ2SUVPTGlHUlpSY0hY?=
- =?utf-8?B?WkMzTG81K3lVaFBRelp0U0VUREsxdDArM280QXRKVG1TampIbG8wbkFnbVZs?=
- =?utf-8?B?VWFJdWx2MGk1Nk1odnZEUDRjTEVDS0dUaFlaMjdnT2pRc1dSS0pUMC90MVlM?=
- =?utf-8?B?azBOZWRJT3JWZnBYOHoyNHBGYUVOcWpubjBQRS9IbzBxRnRwclZha2ZkVDZB?=
- =?utf-8?B?MkFNZUlvU1hhaW8xUTJFeUhaKzFXQmdQcG9WNVhEN3p6bjdlWE9ET0VmZG9U?=
- =?utf-8?B?OWdkK3ozb0c2dkkzOHJ3eEo1QUNsT1k3Nmt2ekVyQ1dmMmxUZkVyOTE4c3Ex?=
- =?utf-8?B?bUZVdU5TVHY1VUl6Nm1ia2FBVDQwZE1VMGpVaEhBaExXZVN4WkxXT0t4ZVly?=
- =?utf-8?B?VHNGSXB5bnhYd01lSDNaV3FycTdXRU1zUjdOTVJDU1A1WXpqQldTcXVZbDdE?=
- =?utf-8?B?cVFOaVhYM3M5eTJidExoQ0RjeGxCamV4Z3RRcWd6dkNCL0JqN1V5TlVPWTZQ?=
- =?utf-8?B?UUJCR3BPM3A0aGg1SCtiKy9uM1dha2FhcHZpYm5wbU5MY1FZSUREZjkwaDR3?=
- =?utf-8?B?VU11Mkk2RjY3Zk1WZHZ1Rjl5NWF2YStOM2tyS082S3YySjNodE9DdVlNNW1K?=
- =?utf-8?B?N1QyUGVON1p2YkMyWjRIT3Rpa1pxTi9Wa3JtYmc4cUZrVFRLZ0IrTmFXcHNH?=
- =?utf-8?B?aU5qdk9lTU1jZ0MxWFhWL1Y3M01kM01weC82TG40YUFpTVA5T08yY1RRaEZx?=
- =?utf-8?B?bFhYcUl2blBKNWw2bnBEWlgzQ3RHaE4yQTJweFo5R2xBN1VNSjRCUXVYQzBs?=
- =?utf-8?B?UjdkMWFNTk1jdTBIUTFuUXh6NzRwUlR3NHBUeWdpVXhXRUZTKzlCVTZyb1F3?=
- =?utf-8?B?SzBGMGNYRHM3dlVxcUUwY0c4Nk5tVjRQSWlZbjZYSEF0cFJnYng4dmZHUGl4?=
- =?utf-8?B?VmJQV1o5Z3pyV1BOT09LRTJvR3RtNExYUERCWlN5Y1RDL1NEdVZWUjBUbnpz?=
- =?utf-8?B?NEZJbm1rdGxrNXU1UDdacmM4S0tCWk5teTltNE1ybWxyUlc5ZUQzUGMyODRt?=
- =?utf-8?B?NUNiOW1KQXpjQWp4WU1kR1ZVemNwNlF4N1dUUEtxZllDZCtyUHMvN2hlZE5x?=
- =?utf-8?B?dEpkbmQ4K2N5WjVJLzhSMWNHbURJY1NrMzMza0tTQXhzTzZHSVNQYkx1MHA0?=
- =?utf-8?B?akhQSjlLM21vMFNjbmdUQkI3NUdvZW03UjFEVVF5UWhMKy9wKzRBdGkwYkc2?=
- =?utf-8?B?Y3VJb281UUlOQ2hzeFc1ZWhmSG9lcE1VSUtQMFJYcTFwZ1JGdWpSeTEvK2xC?=
- =?utf-8?B?ZEhyWENUVkZqVDRJVzgwRllCWWNLRlltR2xJUHFrelZIeGJzUmdFZ2JpVlQ1?=
- =?utf-8?B?SUR2STI5emxsQ1d4cWVieEZPN3c1ck53QmM1ejV0UmU1eGJITmxXdjBUYzhL?=
- =?utf-8?B?MzJnS3NiQ0R0RHloZE9zZURBVnFjQ3owdVB0aUEvMGpoMlFBUWc4YThvYy9C?=
- =?utf-8?B?Wk4rTVEyOS9DUDFGbG93SE9OUHFvcWVEQStCem5odUw3dXZMY2ZoU1BybVg2?=
- =?utf-8?B?NnEvRm9uMjZRSjA1UW8xVTlaczgzK3NDQWh4MzZrVG1lcWJSd00yT29NUlJW?=
- =?utf-8?B?Zlpic2M0VGltNG81eVVwNEkrb1RZaGszem96TXdwbGRBWXJpWlBYTHBDSmZZ?=
- =?utf-8?B?TmpTdFJ6TnlYMG1Ia2lXNHlwTDd5dmZINW5LaFJDeFhWZ3VkSDJxZkFHekNq?=
- =?utf-8?B?QmJsU1daZXBxZ0UwSEpsMkxscnAzeUt6OVNZQmtxNlBqeitaNWx3a0s4NzY4?=
- =?utf-8?B?aWRmQkVwZXhVWlAvNEw2TVR5cnhwOWk0Y2diN3lQZlMrL1FlZzdSbTExbEg5?=
- =?utf-8?B?V1Btc1JmR014akp2NXlZZHA1TXhYUnZYQ0hCWkVQeitWbk1aNm9rRnZWNkRJ?=
- =?utf-8?B?d1lnODY5QjRobzVpeWU3TG9zcUZGd0tkTXFFdjBod0F6NElEUEszZjJxZWZq?=
- =?utf-8?B?UnlBcUtBNGh1a0JUNGVOdU5INFhWb29YOElTL1dmQmlVSTNtY3c4SVFWa09z?=
- =?utf-8?Q?dw3kETzPaPggbveM=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <B639700B2A67F945B30575F434ED4095@eurprd03.prod.outlook.com>
-Content-Transfer-Encoding: base64
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791567451; x=1792172251; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=uHmt7UFh3M6yXtrvb6bO+ouICIWFWyTELgpVwoR0wF4=;
+        b=Ut1nJCr80YJJ0xd/qKq2rTOdUphmi4Vbmfd5f3h9gzeeb0B1J1XPhXcZnGUj13iE0V
+         Flcko3A6Kpv8mPGvnUd+GMhzz3r6L4pqYtVO9IrWxsDjURhJsGKgxFDw52H9BMGmAtrm
+         ceZeFHpqHo4xCwGaSLCkPQqgDEk/6thJMP/z3lkaOaPAL+EuZts3EqZ6QV97EDoHdQmZ
+         vUKf+wR1JJ1IIY4N56Gs5y3fJcChy+mdFDIkE//ygcGkwzzpiGKbcS95gxAMUpkyVLSb
+         cUPer1JPTx/YZid0OceLX3jk8f5mu9nFvIW7LxuYb89tUDiN0dm2DfCMjySA5bEQrEN1
+         8A/A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791567451; x=1792172251;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=uHmt7UFh3M6yXtrvb6bO+ouICIWFWyTELgpVwoR0wF4=;
+        b=zzwSUl9M4UQoSC0Eb2ThNwJbEPGIxmYmIyGO9LmbbzzYsmTHvLNOAiKRFAmH9s8JIz
+         7/9fa9gBRBOhbfOzDPtowfC2Posx+JPr3rouYy7JQax1JYV799VKsQzK+tC0fC9PfnSF
+         0AiPt8XLqzXGezexYqWweT6bHQdpEmvu0izzKV1GxmIYGT9m2Jue0DS0mwsFIz0wIywN
+         EmRc3pJYN4/zSdz87YwCQ4sG28tDEwwJp6Gb3+89D9vRZukTHSvG55/PR4IL4lLKVtsK
+         pLuOHKRNT0TuNesACr/0jT4ifgocBcal7IfVwOjNe16qHGAsfxqEHUOuj7Vf4kZFl/h4
+         6gUA==
+X-Forwarded-Encrypted: i=1; AKwUvBzAPY4JiQ4ogZMLE7zN07OFgx/mNPY0YSO4gCXCwNpquSW1GngG4E0HNd4dIBrMBFnpq6/bK3N6uiM=@lists.xenproject.org
+X-Gm-Message-State: AFuF++n9cGUo3gX02vjhcWVh29qCHVFfoRaPjORTk0RmUX5woJqVNud/
+	YctvhinOrkBON2O/VmuLTlDO65kyUccxiwOP+qQd2tdklfT4CC4uNY2c
+X-Gm-Gg: AYBFou3QCiZaf+6ky6ckmVEcYffJNmqsVLhLRJunfPu3RYP4kCzAS8dDKoszLLSOeFL
+	JGRX9Rz8gGFvYOBlULvaqgbJRbf2K7Bh5ry8StwJVJlkGr43Qi6Jm2aQLZoMOLDn9+B83fKFBhl
+	QBdz6tUYiYQF++eh6YJDc9ARfYnEb9F/QWryxaDJSI87PcXfLtFDd6ZZYLuVQsM+Jul9yvCn0dC
+	aWSkGy8qOiJPCg0d+GjZXMnutAnAqq7jBo+vVRWFQSV950rvpOdThzQvhVZ3E8oZ42xim9TDD+R
+	HdiGLTXPoQ9oyXGJwQy9OZFfzKmfaJXE2iZ3OmNqYPBpcJrIym83txBuFsuFjiLmsj7Q9dhBzPx
+	QPuoXaxO6J6h8P9VLXnYYETAfZhUuOyAz42jVoKRGLG9L/Ei5p5wRe0vgdXZyx28IeEYdN7PeyO
+	aKHyfvErlJgr0HfELq99f96nF/ln4qkPQzreMUJULDR4pRzhGQTJ0Hou+SApilkJJewD7chSAFH
+	nbs0DMSZ5hTrQ==
+X-Received: by 2002:a05:600c:3b0a:b0:4a1:8963:b865 with SMTP id 5b1f17b1804b1-4a18e447e9emr52422685e9.1.1791567450673;
+        Fri, 09 Oct 2026 10:37:30 -0700 (PDT)
+Message-ID: <ef146c92-fc46-4ba6-b863-fe7aadf97b59@gmail.com>
+Date: Fri, 9 Oct 2026 20:37:28 +0300
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAXPR03MB7531.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8d32759b-7390-4341-4ff9-08df262a30e3
-X-MS-Exchange-CrossTenant-originalarrivaltime: 09 Oct 2026 17:24:36.0010
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: myrjhowcAjKJOsfulaFvJrhIKj+4KFPLRz+pL2NstY+C7r2Qakj0Jbb8b7QIREqu/64JcIkEFSc2b7JaChVeGp3+Rymuspv1XTKAiR1SDdw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB7373
-X-purgate-ID: tlsNG-33051d/1791566677-77EC24E9-DC5BC314/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 02/22] xen/arm: smmuv3: Add support for stage-1 and
+ nested stage translation
+To: Milan Djokic <milan_djokic@epam.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Rahul Singh <rahul.singh@arm.com>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <cover.1791328190.git.milan_djokic@epam.com>
+ <6e45683f154be94e573a4a5e5d25c7efcc29fbe5.1791328190.git.milan_djokic@epam.com>
+Content-Language: en-US
+From: Oleksandr Tyshchenko <olekstysh@gmail.com>
+In-Reply-To: <6e45683f154be94e573a4a5e5d25c7efcc29fbe5.1791328190.git.milan_djokic@epam.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c1860d/1791567451-DF8D587B-28E33593/0/0
 X-purgate-type: clean
-X-purgate-size: 2570
+X-purgate-size: 8725
 
-DQoNCk9uIDIvMi8yNiAxODoxNCwgTXlreXRhIFBvdHVyYWkgd3JvdGU6DQo+IEtlZXAgYWxsIHRo
-ZSBpbmZvIGFib3V0IEJBU0VSIHJlZ3MgaW4gaG9zdF9pdHMgc3RydWN0dXJlIHRvIGJlIGFibGUg
-dG8gZWFzaWx5DQo+IGFjY2VzcyBpdCBsYXRlci4NCj4gDQo+IFNpZ25lZC1vZmYtYnk6IE15a3l0
-YSBQb3R1cmFpIDxteWt5dGFfcG90dXJhaUBlcGFtLmNvbT4NCj4gLS0tDQo+ICAgeGVuL2FyY2gv
-YXJtL2dpYy12My1pdHMuYyAgICAgICAgICAgICB8IDM2ICsrKysrKysrKysrKysrKysrKysrKy0t
-LS0tLQ0KPiAgIHhlbi9hcmNoL2FybS9pbmNsdWRlL2FzbS9naWNfdjNfaXRzLmggfCAxNCArKysr
-KysrKysrKw0KPiAgIDIgZmlsZXMgY2hhbmdlZCwgNDMgaW5zZXJ0aW9ucygrKSwgNyBkZWxldGlv
-bnMoLSkNCj4gDQo+IGRpZmYgLS1naXQgYS94ZW4vYXJjaC9hcm0vZ2ljLXYzLWl0cy5jIGIveGVu
-L2FyY2gvYXJtL2dpYy12My1pdHMuYw0KPiBpbmRleCBjNjI4OTU5ZjQyLi4yMzI4NTk1YTg1IDEw
-MDY0NA0KPiAtLS0gYS94ZW4vYXJjaC9hcm0vZ2ljLXYzLWl0cy5jDQo+ICsrKyBiL3hlbi9hcmNo
-L2FybS9naWMtdjMtaXRzLmMNCj4gQEAgLTQzMCwxNiArNDMwLDMyIEBAIHN0YXRpYyB2b2lkICpp
-dHNfbWFwX2NiYXNlcihzdHJ1Y3QgaG9zdF9pdHMgKml0cykNCj4gICAvKiBUaGUgSVRTIEJBU0Ug
-cmVnaXN0ZXJzIHdvcmsgd2l0aCBwYWdlIHNpemVzIG9mIDRLLCAxNksgb3IgNjRLLiAqLw0KPiAg
-ICNkZWZpbmUgQkFTRVJfUEFHRV9CSVRTKHN6KSAoKHN6KSAqIDIgKyAxMikNCj4gICANCj4gK3N0
-cnVjdCBpdHNfYmFzZXIgKml0c19nZXRfYmFzZXIoc3RydWN0IGhvc3RfaXRzICpod19pdHMsIHVp
-bnQzMl90IHR5cGUpDQo+ICt7DQo+ICsgICAgdW5zaWduZWQgaW50IGk7DQo+ICsNCj4gKyAgICBm
-b3IgKCBpID0gMDsgaSA8IEdJVFNfQkFTRVJfTlJfUkVHUzsgaSsrICkNCj4gKyAgICB7DQo+ICsg
-ICAgICAgIGlmIChHSVRTX0JBU0VSX1RZUEUoaHdfaXRzLT50YWJsZXNbaV0udmFsKSA9PSB0eXBl
-KQ0KPiArICAgICAgICAgICAgcmV0dXJuICZod19pdHMtPnRhYmxlc1tpXTsNCj4gKyAgICB9DQo+
-ICsNCj4gKyAgICByZXR1cm4gTlVMTDsNCj4gK30NCj4gKw0KPiAgIHN0YXRpYyBpbnQgaXRzX21h
-cF9iYXNlcih2b2lkIF9faW9tZW0gKmJhc2VyZWcsIHVpbnQ2NF90IHJlZ2MsDQo+IC0gICAgICAg
-ICAgICAgICAgICAgICAgICAgdW5zaWduZWQgaW50IG5yX2l0ZW1zKQ0KPiArICAgICAgICAgICAg
-ICAgICAgICAgICAgIHVuc2lnbmVkIGludCBucl9pdGVtcywgc3RydWN0IGl0c19iYXNlciAqYmFz
-ZXIpDQo+ICAgew0KPiAgICAgICB1aW50NjRfdCBhdHRyLCByZWc7DQo+ICAgICAgIHVuc2lnbmVk
-IGludCBlbnRyeV9zaXplID0gR0lUU19CQVNFUl9FTlRSWV9TSVpFKHJlZ2MpOw0KPiAtICAgIHVu
-c2lnbmVkIGludCBwYWdlc3ogPSAyOyAgICAvKiB0cnkgNjRLIHBhZ2VzIGZpcnN0LCB0aGVuIGdv
-IGRvd24uICovDQo+ICsgICAgdW5zaWduZWQgaW50IHBhZ2Vfc2l6ZVs0XSA9IHtTWl80SywgU1pf
-MTZLLCBTWl82NEssIFNaXzY0S307DQo+ICsgICAgdW5zaWduZWQgaW50IHBhZ2VzeiA9IDA7ICAg
-IC8qIHRyeSA2NEsgcGFnZXMgZmlyc3QsIHRoZW4gZ28gZG93bi4gKi8NCg0KQ29tbWVudCBzYXlz
-ICJ0cnkgNjRLIHBhZ2VzIGZpcnN0IiwgYnV0IHBhZ2VzeiBzdGFydHMgZnJvbSAwIChmcm9tIDRL
-KS4NCg0KQW5kIHRoZXJlIGlzIGEgY2hlY2sgYXQgdGhlIGVuZCBvZiB0aGlzIGZ1bmN0aW9uOg0K
-DQogICAgIGlmICggcGFnZXN6LS0gPiAwICkNCiAgICAgICAgIGdvdG8gcmV0cnk7DQoNCndoaWNo
-IGRvZXNuJ3Qgd29yayBhdCBhbGwgd2hlbiBwYWdlc3ogPSAwOw0KDQpCUiwgRG15dHJvLg0K
+
+
+On 10/7/26 03:06, Milan Djokic wrote:
+
+Hello Milan
+
+> From: Rahul Singh <rahul.singh@arm.com>
+> 
+> Xen SMMUv3 driver only supports stage-2 translation. Add support for
+> Stage-1 translation that is required to support nested stage
+> translation.
+> 
+> In true nested mode, both s1_cfg and s2_cfg will coexist.
+> Let's remove the union. When nested stage translation is setup, both
+> s1_cfg and s2_cfg are valid.
+> 
+> We introduce a new smmu_domain abort field that will be set
+> upon guest stage-1 configuration passing. If no guest stage-1
+> config has been attached, it is ignored when writing the STE.
+> 
+> arm_smmu_write_strtab_ent() is modified to write both stage
+> fields in the STE and deal with the abort field.
+> 
+> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
+> Signed-off-by: Milan Djokic <milan_djokic@epam.com>
+> ---
+>   xen/drivers/passthrough/arm/smmu-v3.c | 96 +++++++++++++++++++++++----
+>   xen/drivers/passthrough/arm/smmu-v3.h |  9 +++
+>   2 files changed, 93 insertions(+), 12 deletions(-)
+> 
+> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+> index 7162473d62..d3e88d5a55 100644
+> --- a/xen/drivers/passthrough/arm/smmu-v3.c
+> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
+> @@ -683,8 +683,10 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
+>   	 * 3. Update Config, sync
+>   	 */
+>   	u64 val = le64_to_cpu(dst[0]);
+> -	bool ste_live = false;
+> +	bool s1_live = false, s2_live = false, ste_live = false;
+> +	bool abort, translate = false;
+>   	struct arm_smmu_device *smmu = NULL;
+> +	struct arm_smmu_s1_cfg *s1_cfg = NULL;
+>   	struct arm_smmu_s2_cfg *s2_cfg = NULL;
+>   	struct arm_smmu_domain *smmu_domain = NULL;
+>   	struct arm_smmu_cmdq_ent prefetch_cmd = {
+> @@ -699,30 +701,57 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
+>   		smmu = master->smmu;
+>   	}
+>   
+> -	if (smmu_domain)
+> -		s2_cfg = &smmu_domain->s2_cfg;
+> +	if (smmu_domain) {
+> +		switch (smmu_domain->stage) {
+> +		case ARM_SMMU_DOMAIN_S1:
+> +			s1_cfg = &smmu_domain->s1_cfg;
+> +			break;
+> +		case ARM_SMMU_DOMAIN_NESTED:
+> +			s1_cfg = &smmu_domain->s1_cfg;
+> +			fallthrough;
+> +		case ARM_SMMU_DOMAIN_S2:
+> +			s2_cfg = &smmu_domain->s2_cfg;
+> +			break;
+> +		default:
+> +			break;
+> +		}
+> +		translate = s1_cfg || s2_cfg;
+> +	}
+>   
+>   	if (val & STRTAB_STE_0_V) {
+>   		switch (FIELD_GET(STRTAB_STE_0_CFG, val)) {
+>   		case STRTAB_STE_0_CFG_BYPASS:
+>   			break;
+> +		case STRTAB_STE_0_CFG_S1_TRANS:
+> +			s1_live = true;
+> +			break;
+>   		case STRTAB_STE_0_CFG_S2_TRANS:
+> -			ste_live = true;
+> +			s2_live = true;
+> +			break;
+> +		case STRTAB_STE_0_CFG_NESTED:
+> +			s1_live = true;
+> +			s2_live = true;
+>   			break;
+>   		case STRTAB_STE_0_CFG_ABORT:
+> -			BUG_ON(!disable_bypass);
+>   			break;
+>   		default:
+>   			BUG(); /* STE corruption */
+>   		}
+>   	}
+>   
+> +	ste_live = s1_live || s2_live;
+> +
+>   	/* Nuke the existing STE_0 value, as we're going to rewrite it */
+>   	val = STRTAB_STE_0_V;
+>   
+>   	/* Bypass/fault */
+> -	if (!smmu_domain || !(s2_cfg)) {
+> -		if (!smmu_domain && disable_bypass)
+> +	if (!smmu_domain)
+> +		abort = disable_bypass;
+> +	else
+> +		abort = smmu_domain->abort;
+> +
+> +	if (abort || !translate) {
+> +		if (abort)
+>   			val |= FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_ABORT);
+>   		else
+>   			val |= FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_BYPASS);
+> @@ -740,7 +769,32 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
+>   		return;
+>   	}
+>   
+> +	if (ste_live) {
+> +		/* First invalidate the live STE */
+> +		dst[0] = cpu_to_le64(STRTAB_STE_0_CFG_ABORT);
+> +		arm_smmu_sync_ste_for_sid(smmu, sid);
+> +	}
+> +
+> +	if (s1_cfg) {
+> +		dst[1] = cpu_to_le64(
+> +			 FIELD_PREP(STRTAB_STE_1_S1DSS, STRTAB_STE_1_S1DSS_SSID0) |
+> +			 FIELD_PREP(STRTAB_STE_1_S1CIR, STRTAB_STE_1_S1C_CACHE_WBRA) |
+> +			 FIELD_PREP(STRTAB_STE_1_S1COR, STRTAB_STE_1_S1C_CACHE_WBRA) |
+> +			 FIELD_PREP(STRTAB_STE_1_S1CSH, ARM_SMMU_SH_ISH) |
+> +			 FIELD_PREP(STRTAB_STE_1_STRW, STRTAB_STE_1_STRW_NSEL1));
+> +
+> +		if (smmu->features & ARM_SMMU_FEAT_STALLS &&
+> +		   !(smmu->features & ARM_SMMU_FEAT_STALL_FORCE))
+> +			dst[1] |= cpu_to_le64(STRTAB_STE_1_S1STALLD);
+> +
+> +		val |= (s1_cfg->s1ctxptr & STRTAB_STE_0_S1CTXPTR_MASK) |
+> +			FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_S1_TRANS) |
+> +			FIELD_PREP(STRTAB_STE_0_S1CDMAX, s1_cfg->s1cdmax) |
+> +			FIELD_PREP(STRTAB_STE_0_S1FMT, s1_cfg->s1fmt);
+> +	}
+> +
+>   	if (s2_cfg) {
+> +		u64 vttbr = s2_cfg->vttbr & STRTAB_STE_3_S2TTB_MASK;
+>   		u64 strtab =
+>   			 FIELD_PREP(STRTAB_STE_2_S2VMID, s2_cfg->vmid) |
+>   			 FIELD_PREP(STRTAB_STE_2_VTCR, s2_cfg->vtcr) |
+> @@ -750,12 +804,19 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
+>   			 STRTAB_STE_2_S2PTW | STRTAB_STE_2_S2AA64 |
+>   			 STRTAB_STE_2_S2R;
+>   
+> -		BUG_ON(ste_live);
+> +		if (s2_live) {
+> +			u64 s2ttb = le64_to_cpu(dst[3]) & STRTAB_STE_3_S2TTB_MASK;
+> +			BUG_ON(s2ttb != vttbr);
+> +		}
+> +
+>   		dst[2] = cpu_to_le64(strtab);
+>   
+> -		dst[3] = cpu_to_le64(s2_cfg->vttbr & STRTAB_STE_3_S2TTB_MASK);
+> +		dst[3] = cpu_to_le64(vttbr);
+>   
+>   		val |= FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_S2_TRANS);
+> +	} else {
+> +		dst[2] = 0;
+> +		dst[3] = 0;
+>   	}
+>   
+>   	if (master->ats_enabled)
+> @@ -1254,8 +1315,16 @@ static int arm_smmu_domain_finalise(struct iommu_domain *domain,
+>   {
+>   	int ret;
+>   	struct arm_smmu_domain *smmu_domain = to_smmu_domain(domain);
+> +	struct arm_smmu_device *smmu = smmu_domain->smmu;
+> +
+> +	if (!(smmu->features & ARM_SMMU_FEAT_TRANS_S2))
+> +		return 0;
+
+
+I am not fully confident I understood all the magic here correctly, but 
+it appears the initial state may be broken on SMMUs without stage-2
+(stage-1-only hosts).
+
+Here we return early without setting a stage, and the zeroed domain has 
+stage-1 (enum value 0). So a new domain is left in a default stage-1 
+state with no real config. The first attach then writes a live S1 STE 
+with s1ctxptr = 0 in arm_smmu_write_strtab_ent(), so the hardware reads 
+a context descriptor from physical address 0. I wonder we should default 
+the domain to abort.
+
+Could you please double-check?
+
+Also, it is my understanding that without stage-2 translation the 
+guest’s s1ctxptr and the stage-1 output address are used as host 
+physical addresses. The guest decides where the hardware reads and 
+writes. I wonder whether we should refuse this mode for non-hardware 
+(non-direct-mapped) domains.
+
+Apologies if this has already been discussed.
+
+>   
+> -	/* Restrict the stage to what we can actually support */
+> +	/*
+> +	 * Default to stage-2 support and initialize it. Stage-1 will be
+> +	 * initialized during guest config attachment, if nested or stage-1
+> +	 * mode is required
+> +	 */
+>   	smmu_domain->stage = ARM_SMMU_DOMAIN_S2;
+>   
+>   	ret = arm_smmu_domain_finalise_s2(smmu_domain, master);
+> @@ -2398,11 +2467,14 @@ static int arm_smmu_device_hw_probe(struct arm_smmu_device *smmu)
+>   		break;
+>   	}
+>   
+> +	if (reg & IDR0_S1P)
+> +		smmu->features |= ARM_SMMU_FEAT_TRANS_S1;
+> +
+>   	if (reg & IDR0_S2P)
+>   		smmu->features |= ARM_SMMU_FEAT_TRANS_S2;
+>   
+> -	if (!(reg & IDR0_S2P)) {
+> -		dev_err(smmu->dev, "no stage-2 translation support!\n");
+> +	if (!(reg & (IDR0_S1P | IDR0_S2P))) {
+> +		dev_err(smmu->dev, "no translation support!\n");
+>   		return -ENXIO;
+>   	}
+>   
+> diff --git a/xen/drivers/passthrough/arm/smmu-v3.h b/xen/drivers/passthrough/arm/smmu-v3.h
+> index ab1f29f6c7..e257de6db9 100644
+> --- a/xen/drivers/passthrough/arm/smmu-v3.h
+> +++ b/xen/drivers/passthrough/arm/smmu-v3.h
+> @@ -197,6 +197,7 @@
+>   #define STRTAB_STE_0_CFG_BYPASS		4
+>   #define STRTAB_STE_0_CFG_S1_TRANS	5
+>   #define STRTAB_STE_0_CFG_S2_TRANS	6
+> +#define STRTAB_STE_0_CFG_NESTED		7
+>   
+>   #define STRTAB_STE_0_S1FMT		GENMASK_ULL(5, 4)
+>   #define STRTAB_STE_0_S1FMT_LINEAR	0
+> @@ -549,6 +550,12 @@ struct arm_smmu_strtab_l1_desc {
+>   	dma_addr_t			l2ptr_dma;
+>   };
+>   
+> +struct arm_smmu_s1_cfg {
+> +	u64				s1ctxptr;
+> +	u8				s1fmt;
+> +	u8				s1cdmax;
+> +};
+> +
+>   struct arm_smmu_s2_cfg {
+>   	u16				vmid;
+>   	u64				vttbr;
+> @@ -669,6 +676,8 @@ struct arm_smmu_domain {
+>   	atomic_t			nr_ats_masters;
+>   
+>   	enum arm_smmu_domain_stage	stage;
+> +	bool			abort;
+> +	struct arm_smmu_s1_cfg	s1_cfg;
+>   	struct arm_smmu_s2_cfg	s2_cfg;
+>   
+>   	/* Xen domain associated with this SMMU domain */
+
 
