@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D033ACA5FED
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 08:53:19 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1444096.1661114 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3001DCA6019
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 09:43:58 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1444181.1661156 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xF6Ld-0002Ui-Ti; Fri, 09 Oct 2026 08:53:01 +0000
+	id 1xF78Z-0002In-3H; Fri, 09 Oct 2026 09:43:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1444096.1661114; Fri, 09 Oct 2026 08:53:01 +0000
+Received: by outflank-mailman (output) from mailman id 1444181.1661156; Fri, 09 Oct 2026 09:43:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xF6Ld-0002TO-NY; Fri, 09 Oct 2026 08:53:01 +0000
-Received: by outflank-mailman (input) for mailman id 1444096;
- Fri, 09 Oct 2026 08:53:00 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julieng@xenbits.xen.org>)
- id 1xF6Lc-0002RJ-LR; Fri, 09 Oct 2026 08:53:00 +0000
+	id 1xF78Z-0002Ig-03; Fri, 09 Oct 2026 09:43:35 +0000
+Received: by outflank-mailman (input) for mailman id 1444181;
+ Fri, 09 Oct 2026 09:43:33 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xF78X-0002Ia-Be
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 09:43:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xF6Lb-0020KT-Ny; Fri, 09 Oct 2026 10:52:59 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xF78W-001BU3-9c
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 11:43:32 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <julieng@xenbits.xen.org>)
- id 6ac8ab68-8faa-0a2a0a5109dd-0a2a45078778-18
- for <multiple-recipients>; Fri, 09 Oct 2026 10:52:59 +0200
-Received: from [104.130.215.37] (helo=mail.xenproject.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <julieng@xenbits.xen.org>)
- id 6ac8ab6a-b4ea-0a2a45070019-6882d725ae08-3
- for <multiple-recipients>; Fri, 09 Oct 2026 10:52:59 +0200
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.96)
- (envelope-from <julieng@xenbits.xen.org>) id 1xF6LU-004j7d-2d;
- Fri, 09 Oct 2026 08:52:52 +0000
-Received: from julieng by xenbits.xenproject.org with local (Exim 4.96)
- (envelope-from <julieng@xenbits.xen.org>) id 1xF6LU-001PzP-2R;
- Fri, 09 Oct 2026 08:52:52 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ac8b73d-bab6-0a2a0a5309dd-0a2a450bb406-28
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 11:43:32 +0200
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ac8b744-b7e8-0a2a450b0019-d155dd2fbd91-3
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 11:43:32 +0200
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-486e8faff03so2113356f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 02:43:32 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
+ [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48db9acfa28sm3043407f8f.51.2026.10.09.02.43.30
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 09 Oct 2026 02:43:31 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,153 +52,184 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
-Content-Transfer-Encoding: binary
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791539012; x=1792143812; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=QkYQAmoOaC2itQPGRrtVr/J2+wfI4WHHCUFX5ylxF7I=;
+        b=IgjSus313JlGXnm/mzMKz5L1QhBVc5HfXP4aZuhh1dzOEaXJwBJqnDO/k0oYB0DdT7
+         8hQdVm1dHiksQVyfnZIvTcQbuv6Iw7sdvXcHaXlFEmar6MVLY/yXijZ9VLCv5tgAaXyN
+         nEVFUjhmOwA1faTYpX+/NroectaSeVb+seMjZH/VWSZFLvjpKs/SkJ9q2TrGAXGPxWOD
+         IaPYKZHqIu5a9z2qN71PKcyClv82F34+/5MwueXInjTOeBPJrMpA7PP7nLKCs21OvYkM
+         /kNA5IC66qozGdgYR4GXvmjoEgEvaNMvgl2Cq3VKrLX3f/n+CXhkkvfuID3OCiuU3zzm
+         nfcA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791539012; x=1792143812;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=QkYQAmoOaC2itQPGRrtVr/J2+wfI4WHHCUFX5ylxF7I=;
+        b=AbgsdPUp5SM7sugrQM7ORslpXMPZ/No8EWBhAJ9bo6pt03lbVqlfg5oJGS8l8EWu4j
+         fN8eWPmR5sQL5zxmLMtfIam8UCYW1afUCZq2NuH3OokNjhY/BIFy1kQFzfLNDxS5Jgyi
+         ReHm2l8rqUyB1LrxF4xXHIdjSRLq0EMEii2zNAzFRiFGXG/Jf/weR7ootB+0J74OvgqA
+         R4IEopG99JGE09/lTKMRrDWC2e7jGsIIOItJj6M7denp8dPMoJ1goeIRSlnMySCG0PKG
+         ef8iMII8SB2WeC5z+Ai++2IhuOk5jqpYl62JYtGAZwarz4lCRPqgg7QfRxVOnmxa2Vi4
+         kkJw==
+X-Forwarded-Encrypted: i=1; AKwUvBxzXvbtZs7y8P5mvMTBVutTV9+OGC5bAqeTg6lD+V0T0Hc4DWM20ceWp2cuWFLevLn4F+hejI+UaD4=@lists.xenproject.org
+X-Gm-Message-State: AFuF++kHIsWx3ITBII/bG1q2mXeYp5CxmKglJlUB1L3s6Bxz5G8l6ac1
+	490VzyAqiZ+/F6xtVH5Z8mYadEg3nGRPLYTuOidWG9fs2+vZ/9QzRa7p
+X-Gm-Gg: AYBFou3rfUk3y+xRDAJ5Ip68tkleYhdSt2Nq/08VzmVgjSHEJxGtfglBwXLaUU0nxXE
+	Aozvc0Fxe2eDr28bVnAHOKqNywn6n69Yx0W/lvnJpvyfrHbUYtl4COyyX6scCAs6dcpuHE44QLe
+	BnRkagnEABxYAlEX7/Cd65mnROgPQRsG6w80rGvIPjprrfXcK1NRImDBzq7uycmqwGk8bSlmq0r
+	PGP3DF8OwFsiY2FZVh6PZbk9I6Ws5qi2SYWDzkmwdmyxNxlQeW/tIEmIpa2LZ3aL6oZXc+uQ30n
+	9HboV7gXrBAWjFvYVRp03XR+McYArnt7conZ9X6xRnLsoFsgyVyjjXnH5Fs4YnpKP9nQLvrHp4h
+	CMroMHlGhtcS8gIjnORTfxQfY0Zb6DK1EOy+bjzZcsavy9T4SigQQ6CVYXLBD5KBlc81BPWxtbA
+	ssufedkwLd8FtYg6hhpk7al7KGjBS2npyPiOowjP1UlnRRvpoTdgCEOL7c0k10q9+Eet2S+cD0H
+	H3I93POzwZJMnhM0aZP6OvZjByukop25jmc/zzKat6G3Y8AQQ==
+X-Received: by 2002:a05:600c:3146:b0:49d:1fd8:b874 with SMTP id 5b1f17b1804b1-4a18e4af3a8mr25219235e9.19.1791539011531;
+        Fri, 09 Oct 2026 02:43:31 -0700 (PDT)
+Message-ID: <80c6fcbd-f411-4869-a71f-5be8e2d62b82@gmail.com>
+Date: Fri, 9 Oct 2026 11:43:30 +0200
 MIME-Version: 1.0
-X-Mailer: MIME-tools 5.510 (Entity 5.510)
-To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
- xen-users@lists.xen.org, oss-security@lists.openwall.com
-From: Xen.org security team <security@xen.org>
-CC: Xen.org security team <security-team-members@xen.org>
-Subject: Xen Security Advisory 522 v1 (CVE-2026-98375) - Linux
- xen-netfront: backend can crash guest via malformed RX packets
-Message-Id: <E1xF6LU-001PzP-2R@xenbits.xenproject.org>
-Date: Fri, 09 Oct 2026 08:52:52 +0000
-X-purgate-ID: tlsNG-ef75cf/1791535979-378D1AE4-126C4B0D/0/0
-X-purgate-type: clean
-X-purgate-size: 5448
-
---=separator
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/2] xen/device-tree: move discard_initial_modules() to
+ common code
+To: "Orzel, Michal" <michal.orzel@amd.com>, xen-devel@lists.xenproject.org
+Cc: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+ <julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>,
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+References: <20261001111630.112472-1-oleksii.kurochko@gmail.com>
+ <20261001111630.112472-3-oleksii.kurochko@gmail.com>
+ <f15c39d3-b4f1-4fa8-bd2e-fd10d33b698f@amd.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <f15c39d3-b4f1-4fa8-bd2e-fd10d33b698f@amd.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-42698a/1791539012-1B2DC9EA-59850B9B/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 3910
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA256
 
-            Xen Security Advisory CVE-2026-98375 / XSA-522
 
- Linux xen-netfront: backend can crash guest via malformed RX packets
+On 10/8/26 1:19 PM, Orzel, Michal wrote:
+> 
+> 
+> On 01-Oct-26 13:16, Oleksii Kurochko wrote:
+>> Everything discard_initial_modules() touches is already common code:
+>> bootinfo.modules, using_static_heap and fw_unreserved_regions(). Move it
+>> out of Arm into common/device-tree/bootinfo.c, next to the boot allocator
+>> handling of the same memory, and declare it in xen/bootinfo.h, so that
+>> other device-tree based architectures can reuse it instead of growing a
+>> copy of their own.
+>>
+>> The arch-specific remove_early_mappings() is not moved along with it:
+>> how the early FDT mapping is torn down is up to the architecture. As the
+>> DTB is one of the boot modules being released, the mapping has to go once
+>> they are discarded, so call it from start_xen() right after
+>> discard_initial_modules(), which keeps the common function free of any
+>> arch dependency.
+>>
+>> While moving it, use unsigned int for the loop counter and replace the
+>> "goto out" by a plain return, as there is nothing left to do at the label.
+>>
+>> No functional change.
+>>
+>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>> ---
+>>   xen/arch/arm/include/asm/setup.h  |  2 --
+>>   xen/arch/arm/setup.c              | 35 ++-----------------------------
+>>   xen/common/device-tree/bootinfo.c | 30 ++++++++++++++++++++++++++
+>>   xen/include/xen/bootinfo.h        |  8 +++++++
+>>   4 files changed, 40 insertions(+), 35 deletions(-)
+>>
+>> diff --git a/xen/arch/arm/include/asm/setup.h b/xen/arch/arm/include/asm/setup.h
+>> index c491c567298f..02fdf2b56c9c 100644
+>> --- a/xen/arch/arm/include/asm/setup.h
+>> +++ b/xen/arch/arm/include/asm/setup.h
+>> @@ -40,8 +40,6 @@ int acpi_make_efi_nodes(void *fdt, struct membank tbl_add[]);
+>>   
+>>   void create_dom0(void);
+>>   
+>> -void discard_initial_modules(void);
+>> -
+>>   void init_pdx(void);
+>>   void setup_mm(void);
+>>   
+>> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+>> index 16f899dff57b..a65c3d2a655e 100644
+>> --- a/xen/arch/arm/setup.c
+>> +++ b/xen/arch/arm/setup.c
+>> @@ -210,39 +210,6 @@ static void __init processor_id(void)
+>>       processor_setup();
+>>   }
+>>   
+>> -void __init discard_initial_modules(void)
+>> -{
+>> -    struct boot_modules *mi = &bootinfo.modules;
+>> -    int i;
+>> -
+>> -    /*
+>> -     * When using static heap feature, don't give boot_modules memory back to
+>> -     * the heap allocator
+>> -     */
+>> -    if ( using_static_heap )
+>> -        goto out;
+>> -
+>> -    for ( i = 0; i < mi->nr_mods; i++ )
+>> -    {
+>> -        paddr_t s = mi->module[i].start;
+>> -        paddr_t e = s + PAGE_ALIGN(mi->module[i].size);
+>> -
+>> -        if ( mi->module[i].kind == BOOTMOD_XEN )
+>> -            continue;
+>> -
+>> -        if ( !mfn_valid(maddr_to_mfn(s)) ||
+>> -             !mfn_valid(maddr_to_mfn(e)) )
+>> -            continue;
+>> -
+>> -        fw_unreserved_regions(s, e, init_domheap_pages, 0);
+>> -    }
+>> -
+>> -    mi->nr_mods = 0;
+>> -
+>> - out:
+>> -    remove_early_mappings();
+>> -}
+>> -
+>>   /* Relocate the FDT in Xen heap */
+>>   static void __init relocate_fdt(const void **dtb_vaddr, size_t dtb_size)
+>>   {
+>> @@ -509,6 +476,8 @@ void asmlinkage __init noreturn start_xen(unsigned long fdt_paddr)
+>>        */
+>>       discard_initial_modules();
+> The comment above is now duplicated with the one you added in xen/bootinfo.h.
+> I'd drop it from here (can be done on commit).
 
-ISSUE DESCRIPTION
-=================
+I will drop it in v2 (if it won't merged at the moment when I will start 
+address the comments for this patch series).
 
-If a RX packet sent from the networking backend to the Linux xen-netfront
-driver is split into multiple slots and the first slot is shorter than
-an Ethernet header, a BUG() will crash the guest. This is a backend induced
-Denial of Service (DoS).
+> 
+> Other than that:
+> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
-IMPACT
-======
+Thanks!
 
-A malicious network backend can cause a DoS affecting the entire guest it
-is serving.
 
-VULNERABLE SYSTEMS
-==================
+> 
+> NIT for the future: if you send a series of patches, please move the fixes/code
+> movement changes at the beginning of the series.
+> 
 
-All Linux guests being served by a potentially untrusted network backend
-(i.e. a network backend in a driver domain) are affected.
+I will take into account that in the future.
 
-Linux guests with a kernel from 2.6.23 onwards are affected.
+~ Oleksii
 
-MITIGATION
-==========
-
-Using a trusted network backend will avoid the issue in the guests.
-
-CREDITS
-=======
-
-This issue was discovered by Josef Bacik of Anthropic.
-
-RESOLUTION
-==========
-
-Applying the attached patch resolves this issue.
-
-xsa522-linux.patch           Linux
-
-$ sha256sum xsa522*
-5bd78edbf9f039b6e12e725c883a44485fd60e7e8e06c493d57bb2ecfeccbb6e  xsa522-linux.patch
-$
-
-NOTE REGARDING LACK OF EMBARGO
-==============================
-
-This issue was disclosed in public.
------BEGIN PGP SIGNATURE-----
-
-iQFcBAEBCABGFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmrIqswbFIAAAAAABAAO
-bWFudTIsMi41KzEuMTIsMCwzDBxwZ3BAeGVuLm9yZwAKCRCD/hTJV+gr2Z0aB/4x
-lyvVclfKLPKO7TezBS0Du+ee3t8PbwMfWe7Gw3rMOkaytQs+XbBZrZ/lF9uNgSyu
-a+bwaALjNvTuBJiU2Hq6w6qSMjrDb4Kfn1vRe+iw/MXj5K1q8J6NzXP/rZGkIPCl
-E1NyC8RPiRzva/X3CgfO59nsHNxmVxy5cFowP4oxGjp/sAqTLR4JMbK9tALa50Hz
-5dc+CUC7i9YlbVgcn1KatORknlSBBqvefRM/zF/uLtGi5YCmVWVc7QlHF5BCBgio
-Gu5zjEqA+De5/Rg0o5gHH3Jh6xWTtfThoZewROQgu+P9QYUmHZpGKfCkYazTddzi
-Ns9Hz1obvGY4JuCanYvF
-=QR/D
------END PGP SIGNATURE-----
-
---=separator
-Content-Type: application/octet-stream; name="xsa522-linux.patch"
-Content-Disposition: attachment; filename="xsa522-linux.patch"
-Content-Transfer-Encoding: base64
-
-RnJvbSBjODQzZGRhMTg3YmQ0NGExMmQ4YTJiMWI1NmFlYmZjN2Y2NzFiODIw
-IE1vbiBTZXAgMTcgMDA6MDA6MDAgMjAwMQpGcm9tOiBKb3NlZiBCYWNpayA8
-am9zZWZAdG94aWNwYW5kYS5jb20+CkRhdGU6IFdlZCwgNyBPY3QgMjAyNiAx
-Nzo1NTo0MCArMDAwMApTdWJqZWN0OiBbUEFUQ0hdIHhlbi9uZXRmcm9udDog
-ZHJvcCBSWCBwYWNrZXRzIHdpdGggYSBzaG9ydCBFdGhlcm5ldCBoZWFkZXIK
-CmhhbmRsZV9pbmNvbWluZ19xdWV1ZSgpIHB1bGxzIHB1bGxfdG8gYnl0ZXMg
-aW50byB0aGUgaGVhZCBiZWZvcmUKY2FsbGluZyBldGhfdHlwZV90cmFucygp
-LiAgcHVsbF90byBpcyB0aGUgbGVuZ3RoIG9mIHRoZSBmaXJzdCBSWCBzbG90
-LApjYXBwZWQgYXQgUlhfQ09QWV9USFJFU0hPTEQsIGFuZCB0aGF0IGxlbmd0
-aCBjb21lcyBmcm9tIHRoZSBiYWNrZW5kLgpOb3RoaW5nIGNoZWNrcyBpdCBh
-Z2FpbnN0IEVUSF9ITEVOLgoKSWYgdGhlIGZpcnN0IHNsb3QgaXMgc2hvcnRl
-ciB0aGFuIEVUSF9ITEVOIGFuZCBtb3JlIHNsb3RzIGZvbGxvdywgdGhlCmhl
-YWQgZW5kcyB1cCBzaG9ydGVyIHRoYW4gYW4gRXRoZXJuZXQgaGVhZGVyIHdo
-aWxlIHNrYi0+bGVuIGlzIGxvbmdlciwKYW5kIGV0aF90eXBlX3RyYW5zKCkg
-QlVHKClzIGluIF9fc2tiX3B1bGwoKS4gIElmIHRoZSB3aG9sZSBwYWNrZXQg
-aXMKc2hvcnRlciB0aGFuIEVUSF9ITEVOLCBldGhfdHlwZV90cmFucygpIHJl
-YWRzIHRoZSBoZWFkZXIgcGFzdCB0aGUgZW5kCm9mIHRoZSBkYXRhIGluc3Rl
-YWQuCgpQdWxsIGF0IGxlYXN0IEVUSF9ITEVOLCBhbmQgZHJvcCB0aGUgcGFj
-a2V0IGlmIHRoYXQgZmFpbHMsIHdoaWNoIGFsc28KZHJvcHMgcGFja2V0cyB0
-b28gc2hvcnQgdG8gaG9sZCBhbiBFdGhlcm5ldCBoZWFkZXIuICBUaGlzIGFs
-c28gY2hlY2tzCnRoZSByZXR1cm4gdmFsdWUgb2YgdGhlIHB1bGwsIHdoaWNo
-IHdhcyBpZ25vcmVkLgoKVGhpcyBpcyBYU0EtNTIyIC8gQ1ZFLTIwMjYtOTgz
-NzUKCkZpeGVzOiAwZDE2MDIxMTk2NWIgKCJ4ZW46IGFkZCB2aXJ0dWFsIG5l
-dHdvcmsgZGV2aWNlIGRyaXZlciIpCkNjOiBzdGFibGVAdmdlci5rZXJuZWwu
-b3JnCkFzc2lzdGVkLWJ5OiBMTE0KU2lnbmVkLW9mZi1ieTogSm9zZWYgQmFj
-aWsgPGpvc2VmQHRveGljcGFuZGEuY29tPgpNZXNzYWdlLUlEOiA8MjAyNjEw
-MDctYjQteGVuLW5ldGZyb250LXNob3J0LWhlYWQtdjEtMS0xMmQ3MTEzYTdl
-NGVAdG94aWNwYW5kYS5jb20+ClJldmlld2VkLWJ5OiBKdWVyZ2VuIEdyb3Nz
-IDxqZ3Jvc3NAc3VzZS5jb20+ClNpZ25lZC1vZmYtYnk6IEp1ZXJnZW4gR3Jv
-c3MgPGpncm9zc0BzdXNlLmNvbT4KLS0tCiBkcml2ZXJzL25ldC94ZW4tbmV0
-ZnJvbnQuYyB8IDEyICsrKysrKysrKystLQogMSBmaWxlIGNoYW5nZWQsIDEw
-IGluc2VydGlvbnMoKyksIDIgZGVsZXRpb25zKC0pCgpkaWZmIC0tZ2l0IGEv
-ZHJpdmVycy9uZXQveGVuLW5ldGZyb250LmMgYi9kcml2ZXJzL25ldC94ZW4t
-bmV0ZnJvbnQuYwppbmRleCAyZWQ2NzM2NDljNDguLmQyNjk0NTdlODM5ZSAx
-MDA2NDQKLS0tIGEvZHJpdmVycy9uZXQveGVuLW5ldGZyb250LmMKKysrIGIv
-ZHJpdmVycy9uZXQveGVuLW5ldGZyb250LmMKQEAgLTEyMzQsOCArMTIzNCwx
-NiBAQCBzdGF0aWMgaW50IGhhbmRsZV9pbmNvbWluZ19xdWV1ZShzdHJ1Y3Qg
-bmV0ZnJvbnRfcXVldWUgKnF1ZXVlLAogCXdoaWxlICgoc2tiID0gX19za2Jf
-ZGVxdWV1ZShyeHEpKSAhPSBOVUxMKSB7CiAJCWludCBwdWxsX3RvID0gTkVU
-RlJPTlRfU0tCX0NCKHNrYiktPnB1bGxfdG87CiAKLQkJaWYgKHB1bGxfdG8g
-PiBza2JfaGVhZGxlbihza2IpKQotCQkJX19wc2tiX3B1bGxfdGFpbChza2Is
-IHB1bGxfdG8gLSBza2JfaGVhZGxlbihza2IpKTsKKwkJLyogcHVsbF90byBj
-b21lcyBmcm9tIHRoZSBmaXJzdCBzbG90J3MgbGVuZ3RoLCB3aGljaCB0aGUK
-KwkJICogYmFja2VuZCBjb250cm9scy4gIE1ha2Ugc3VyZSB0aGUgaGVhZCBo
-b2xkcyBhdCBsZWFzdCBhbgorCQkgKiBFdGhlcm5ldCBoZWFkZXIgZm9yIGV0
-aF90eXBlX3RyYW5zKCkuCisJCSAqLworCQlpZiAoIXBza2JfbWF5X3B1bGwo
-c2tiLCBtYXgocHVsbF90bywgRVRIX0hMRU4pKSkgeworCQkJa2ZyZWVfc2ti
-KHNrYik7CisJCQlwYWNrZXRzX2Ryb3BwZWQrKzsKKwkJCXF1ZXVlLT5pbmZv
-LT5uZXRkZXYtPnN0YXRzLnJ4X2Vycm9ycysrOworCQkJY29udGludWU7CisJ
-CX0KIAogCQkvKiBFdGhlcm5ldCB3b3JrOiBEZWxheWVkIHRvIGhlcmUgYXMg
-aXQgcGVla3MgdGhlIGhlYWRlci4gKi8KIAkJc2tiLT5wcm90b2NvbCA9IGV0
-aF90eXBlX3RyYW5zKHNrYiwgcXVldWUtPmluZm8tPm5ldGRldik7Ci0tIAoy
-LjU1LjAKCg==
-
---=separator--
 
