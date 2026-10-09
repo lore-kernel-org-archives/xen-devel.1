@@ -4,52 +4,51 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E970DCA5FED
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 08:18:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1444056.1661073 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33C4CCA5FED
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 08:23:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1444063.1661082 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xF5nb-00040D-DP; Fri, 09 Oct 2026 08:17:51 +0000
+	id 1xF5tD-0005da-0A; Fri, 09 Oct 2026 08:23:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1444056.1661073; Fri, 09 Oct 2026 08:17:51 +0000
+Received: by outflank-mailman (output) from mailman id 1444063.1661082; Fri, 09 Oct 2026 08:23:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xF5nb-000405-AL; Fri, 09 Oct 2026 08:17:51 +0000
-Received: by outflank-mailman (input) for mailman id 1444056;
- Fri, 09 Oct 2026 08:17:50 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xF5tC-0005dT-TB; Fri, 09 Oct 2026 08:23:38 +0000
+Received: by outflank-mailman (input) for mailman id 1444063;
+ Fri, 09 Oct 2026 08:23:37 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <jgross@suse.com>) id 1xF5nZ-0003zx-Tu
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 08:17:50 +0000
+ (envelope-from <jgross@suse.com>) id 1xF5tA-0005dN-St
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 08:23:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xF5nY-008213-Av
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 10:17:48 +0200
+ id 1xF5tA-00FCc6-6S
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 10:23:36 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jgross@suse.com>)
- id 6ac8a328-8faa-0a2a0a5109dd-0a2a4505a00e-12
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 10:17:48 +0200
-Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
+ id 6ac8a47e-e002-0a2a0a5209dd-0a2a4505b01a-32
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 10:23:36 +0200
+Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jgross@suse.com>)
- id 6ac8a32b-4cb1-0a2a45050019-c387df83df84-3
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 10:17:48 +0200
-Received: from imap1.dmz-prg2.suse.org (imap1.dmz-prg2.suse.org
- [IPv6:2a07:de40:b281:104:10:150:64:97])
+ id 6ac8a487-4cb1-0a2a45050019-c387df82d61a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 10:23:36 +0200
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by smtp-out2.suse.de (Postfix) with ESMTPS id CE52F1F790;
- Fri,  9 Oct 2026 08:17:47 +0000 (UTC)
+ by smtp-out1.suse.de (Postfix) with ESMTPS id 983F021B63;
+ Fri,  9 Oct 2026 08:23:35 +0000 (UTC)
 Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 754251368B;
- Fri,  9 Oct 2026 08:17:47 +0000 (UTC)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 375B61368B;
+ Fri,  9 Oct 2026 08:23:35 +0000 (UTC)
 Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id IJlUEyujyGp3DwAAD6G6ig
- (envelope-from <jgross@suse.com>); Fri, 09 Oct 2026 08:17:47 +0000
+ by imap1.dmz-prg2.suse.org with ESMTPSA id Az2LAYekyGqwFAAAD6G6ig
+ (envelope-from <jgross@suse.com>); Fri, 09 Oct 2026 08:23:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,19 +61,20 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
-Authentication-Results: smtp-out2.suse.de;
+Authentication-Results: smtp-out1.suse.de;
 	none
-Message-ID: <57604f7f-fc89-4b9d-bf54-467399436fb2@suse.com>
-Date: Fri, 9 Oct 2026 10:17:46 +0200
+Message-ID: <90cc2e5c-8e45-46bb-8a06-d80be43cb36c@suse.com>
+Date: Fri, 9 Oct 2026 10:23:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen-pciback: Fix pcistub_device ref leak in
- pcistub_get_gsi_from_sbdf()
-To: Wentao Liang <vulab@iscas.ac.cn>, Jiqian.Chen@amd.com
-Cc: linux-kernel@vger.kernel.org, oleksandr_tyshchenko@epam.com,
- ray.huang@amd.com, sstabellini@kernel.org, xen-devel@lists.xenproject.org,
- stable@vger.kernel.org
-References: <20260916171141.2086627-1-vulab@iscas.ac.cn>
+Subject: Re: [PATCH] xen/pcifront: Fix PCI device reference leak in
+ pcifront_common_process()
+To: Wentao Liang <vulab@iscas.ac.cn>, bhelgaas@google.com
+Cc: boris.ostrovsky@oracle.com, linux-kernel@vger.kernel.org,
+ linux-pci@vger.kernel.org, oleksandr_tyshchenko@epam.com,
+ sstabellini@kernel.org, u.kleine-koenig@pengutronix.de,
+ xen-devel@lists.xenproject.org, stable@vger.kernel.org
+References: <20260917132944.2153421-1-vulab@iscas.ac.cn>
 Content-Language: en-US
 From: Juergen Gross <jgross@suse.com>
 Autocrypt: addr=jgross@suse.com; keydata=
@@ -100,60 +100,59 @@ Autocrypt: addr=jgross@suse.com; keydata=
  HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
  QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
  ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
-In-Reply-To: <20260916171141.2086627-1-vulab@iscas.ac.cn>
+In-Reply-To: <20260917132944.2153421-1-vulab@iscas.ac.cn>
 Content-Type: multipart/signed; micalg=pgp-sha256;
  protocol="application/pgp-signature";
- boundary="------------PVMbtoKQccvREt1EzLZT7aiE"
+ boundary="------------mMsoEsECVXshZ3a54icb6Ldr"
 X-Rspamd-Pre-Result: action=no action;
 	module=Unknown lua;
 	unknown reason
-X-Spamd-Bar: /
-X-Rspamd-Queue-Id: CE52F1F790
 X-Rspamd-Pre-Result: action=no action;
 	module=Unknown lua;
 	unknown reason
-X-Rspamd-Action: no action
-X-Rspamd-Server: rspamd2.dmz-prg2.suse.org
 X-Spamd-Result: default: False [0.00 / 50.00]
-X-purgate-ID: tlsNG-c201ff/1791533868-73ABF2A1-AE600CD6/0/0
+X-purgate-ID: tlsNG-c201ff/1791534216-F7EB92A1-D2782E59/0/0
 X-purgate-type: clean
-X-purgate-size: 6728
+X-purgate-size: 6955
 
 This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------PVMbtoKQccvREt1EzLZT7aiE
-Content-Type: multipart/mixed; boundary="------------7uCpS5pR8FWWGFP0rwJ19PkT";
+--------------mMsoEsECVXshZ3a54icb6Ldr
+Content-Type: multipart/mixed; boundary="------------gXANajgOhKNMZShjzPUCU41g";
  protected-headers="v1"
 From: Juergen Gross <jgross@suse.com>
-To: Wentao Liang <vulab@iscas.ac.cn>, Jiqian.Chen@amd.com
-Cc: linux-kernel@vger.kernel.org, oleksandr_tyshchenko@epam.com,
- ray.huang@amd.com, sstabellini@kernel.org, xen-devel@lists.xenproject.org,
- stable@vger.kernel.org
-Message-ID: <57604f7f-fc89-4b9d-bf54-467399436fb2@suse.com>
-Subject: Re: [PATCH] xen-pciback: Fix pcistub_device ref leak in
- pcistub_get_gsi_from_sbdf()
-References: <20260916171141.2086627-1-vulab@iscas.ac.cn>
-In-Reply-To: <20260916171141.2086627-1-vulab@iscas.ac.cn>
+To: Wentao Liang <vulab@iscas.ac.cn>, bhelgaas@google.com
+Cc: boris.ostrovsky@oracle.com, linux-kernel@vger.kernel.org,
+ linux-pci@vger.kernel.org, oleksandr_tyshchenko@epam.com,
+ sstabellini@kernel.org, u.kleine-koenig@pengutronix.de,
+ xen-devel@lists.xenproject.org, stable@vger.kernel.org
+Message-ID: <90cc2e5c-8e45-46bb-8a06-d80be43cb36c@suse.com>
+Subject: Re: [PATCH] xen/pcifront: Fix PCI device reference leak in
+ pcifront_common_process()
+References: <20260917132944.2153421-1-vulab@iscas.ac.cn>
+In-Reply-To: <20260917132944.2153421-1-vulab@iscas.ac.cn>
 
---------------7uCpS5pR8FWWGFP0rwJ19PkT
-Content-Type: multipart/mixed; boundary="------------w4z6D0h0DWAil0ycWEiPBP9K"
+--------------gXANajgOhKNMZShjzPUCU41g
+Content-Type: multipart/mixed; boundary="------------LvJtMZGI3ErSL3r97uVzAYoM"
 
---------------w4z6D0h0DWAil0ycWEiPBP9K
+--------------LvJtMZGI3ErSL3r97uVzAYoM
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: base64
 
-T24gMTYuMDkuMjYgMTk6MTEsIFdlbnRhbyBMaWFuZyB3cm90ZToNCj4gcGNpc3R1Yl9nZXRf
-Z3NpX2Zyb21fc2JkZigpIG9idGFpbnMgdGhlIHN0dWIgZGV2aWNlIHdpdGgNCj4gcGNpc3R1
-Yl9kZXZpY2VfZmluZCgpLCB3aGljaCByZXR1cm5zIGl0IHdpdGggaXRzIGtyZWYgaW5jcmVt
-ZW50ZWQsIGFuZA0KPiByZXR1cm5zIHBzZGV2LT5nc2kgd2l0aG91dCBkcm9wcGluZyB0aGF0
-IHJlZmVyZW5jZSBhZ2Fpbi4gIFRoZSBjYWxsZXINCj4gY2Fubm90IHJlbGVhc2UgaXQgZWl0
-aGVyLCBzbyBldmVyeSBsb29rdXAgbGVha3Mgb25lIHJlZmVyZW5jZSB0byB0aGUNCj4gc3R1
-YiBkZXZpY2UuDQo+IA0KPiBSZWxlYXNlIHRoZSByZWZlcmVuY2UgYWZ0ZXIgcmVhZGluZyBn
-c2kuDQo+IA0KPiBGaXhlczogMmZhZTZiYjdiZTMyICgieGVuL3ByaXZjbWQ6IEFkZCBuZXcg
-c3lzY2FsbCB0byBnZXQgZ3NpIGZyb20gZGV2IikNCj4gQ2M6IHN0YWJsZUB2Z2VyLmtlcm5l
-bC5vcmcNCj4gU2lnbmVkLW9mZi1ieTogV2VudGFvIExpYW5nIDx2dWxhYkBpc2Nhcy5hYy5j
-bj4NCg0KUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4NCg0K
-DQpKdWVyZ2VuDQo=
---------------w4z6D0h0DWAil0ycWEiPBP9K
+T24gMTcuMDkuMjYgMTU6MjksIFdlbnRhbyBMaWFuZyB3cm90ZToNCj4gcGNpZnJvbnRfY29t
+bW9uX3Byb2Nlc3MoKSBnZXRzIGEgcmVmZXJlbmNlIHRvIHRoZSBQQ0kgZGV2aWNlIHdpdGgN
+Cj4gcGNpX2dldF9kb21haW5fYnVzX2FuZF9zbG90KCkgYW5kIG9ubHkgZHJvcHMgaXQgb24g
+dGhlIGVhcmx5IGVycm9yDQo+IHBhdGguICBSZXR1cm5pbmcgZGlyZWN0bHkgZnJvbSB0aGUg
+QUVSIGhhbmRsZXIgc3dpdGNoIGluc3RlYWQgb2YNCj4gcmVjb3JkaW5nIHRoZSByZXN1bHQg
+YW5kIGZhbGxpbmcgdGhyb3VnaCB0byB0aGUgY29tbW9uDQo+IHBjaV9kZXZfcHV0KHBjaWRl
+dikgbGVha3MgdGhlIHJlZmVyZW5jZSBvbiBldmVyeSBzdWNjZXNzZnVsIGNhbGwuDQo+IA0K
+PiBDb2xsZWN0IHRoZSBoYW5kbGVyIHJlc3VsdCBpbiBhIHZhcmlhYmxlIGFuZCBkcm9wIHRo
+ZSByZWZlcmVuY2Ugb24gdGhlDQo+IHNpbmdsZSBleGl0IHBhdGggYWdhaW4uDQo+IA0KPiBG
+aXhlczogMzRhYjMxNmQ3Mjg3ICgieGVuL3BjaWZyb250OiBEcm9wIHBjaWZyb250X2NvbW1v
+bl9wcm9jZXNzKCkgdGVzdHMgb2YgcGNpZGV2LCBwZHJ2IikNCj4gQ2M6IHN0YWJsZUB2Z2Vy
+Lmtlcm5lbC5vcmcNCj4gU2lnbmVkLW9mZi1ieTogV2VudGFvIExpYW5nIDx2dWxhYkBpc2Nh
+cy5hYy5jbj4NCg0KUmV2aWV3ZWQtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNv
+bT4NCg0KDQpKdWVyZ2VuDQo=
+--------------LvJtMZGI3ErSL3r97uVzAYoM
 Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
 Content-Description: OpenPGP public key
@@ -220,25 +219,25 @@ kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
 =3DeeAB
 -----END PGP PUBLIC KEY BLOCK-----
 
---------------w4z6D0h0DWAil0ycWEiPBP9K--
+--------------LvJtMZGI3ErSL3r97uVzAYoM--
 
---------------7uCpS5pR8FWWGFP0rwJ19PkT--
+--------------gXANajgOhKNMZShjzPUCU41g--
 
---------------PVMbtoKQccvREt1EzLZT7aiE
+--------------mMsoEsECVXshZ3a54icb6Ldr
 Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
 Content-Description: OpenPGP digital signature
 Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
 -----BEGIN PGP SIGNATURE-----
 
-wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmrIoysFAwAAAAAACgkQsN6d1ii/Ey98
-2Af/YpPQ8dl3lICFTOxJwMHYlDJSemck+tgHfkkeZVguq1vOKcyyLJTsTAzOevyvSrA0qQDWAaa/
-4pyW3h15QqMhvv5sqLgwVQ1BcGKrzYP9DJSUpvrPW6rAhAhrZVWOczvTAUR0Ig9d1FJ9OEgtuHFV
-CpcU1KInU6Ccp0XdbpcQL9drbhzzhxa5nJBYClZBGcjWny5DNi9Fa4xBIt6IxLQUVsOkQAVe+6N9
-N4sLhKkByTVc1hur6AgynWi4zlFcPrgh1haVHgq6v8G8ctDevPjaIt2NATSpKse1dHOFW4/3+njR
-kOQQU9mP0QRvmMmwhM7aEY+48WBX3zQrC72zWjhC8w==
-=KTjX
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmrIpIYFAwAAAAAACgkQsN6d1ii/Ey/m
+3wgAjglIjBSKYXaGC2w43B7mNrPNirCK2TyXTOfygAaZnRdil6ktJl4XE6HZL7jVQlJJV2vg8/82
+SU7YQ/qvEylJPAp8yRe1xZnZnT0LigKEqi7b5g9wbhZqHtETYDPfLQhno8QsUQ6M/GktcfQoOOau
+cJSoxGX11eu+6Ux9BOD2upjnIgJkMucH+Xh/t26EyCyo/FDnWXqM4cw9PDG4bZA0kFf37oWq3Hmd
+bIMF2tFS+UeRi7HZ3DgvcTo4Btn96ekscxNSkTD+fyZC7SehN9YbMATBS4ImXv/JzEs8lP7jI6/F
+bCAn2vnK3sxf+x8JziwytIKbsTqe9Hz+BA5IbGw2Pw==
+=gIOM
 -----END PGP SIGNATURE-----
 
---------------PVMbtoKQccvREt1EzLZT7aiE--
+--------------mMsoEsECVXshZ3a54icb6Ldr--
 
