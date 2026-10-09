@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03996CA9EBD
-	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 17:38:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1444612.1661380 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 02143CA9EBB
+	for <xen-devel@archiver.kernel.org>; Fri,  9 Oct 2026 20:26:29 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1444696.1661390 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFEXI-0002Dp-Eu; Fri, 09 Oct 2026 17:37:36 +0000
+	id 1xFHAG-0000W5-U6; Fri, 09 Oct 2026 20:26:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1444612.1661380; Fri, 09 Oct 2026 17:37:36 +0000
+Received: by outflank-mailman (output) from mailman id 1444696.1661390; Fri, 09 Oct 2026 20:26:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFEXI-0002Di-CF; Fri, 09 Oct 2026 17:37:36 +0000
-Received: by outflank-mailman (input) for mailman id 1444612;
- Fri, 09 Oct 2026 17:37:35 +0000
+	id 1xFHAG-0000Vx-QL; Fri, 09 Oct 2026 20:26:00 +0000
+Received: by outflank-mailman (input) for mailman id 1444696;
+ Fri, 09 Oct 2026 20:26:00 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <olekstysh@gmail.com>) id 1xFEXG-0002DQ-TD
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 17:37:35 +0000
+ (envelope-from <benjamin@edera.dev>) id 1xFHAF-0000Vo-PG
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 20:26:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xFEXF-009Q9J-Kr
- for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 19:37:33 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xFHAF-009hdL-6B
+ for xen-devel@lists.xenproject.org; Fri, 09 Oct 2026 22:25:59 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <olekstysh@gmail.com>)
- id 6ac9264b-bab6-0a2a0a5309dd-0a2a4508ec7e-6
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 19:37:31 +0200
-Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <olekstysh@gmail.com>)
- id 6ac9265b-f659-0a2a45080019-d155802fa594-3
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 19:37:31 +0200
-Received: by mail-wm1-f47.google.com with SMTP id
- 5b1f17b1804b1-4a166199820so661575e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 10:37:31 -0700 (PDT)
-Received: from [192.168.0.114] ([91.123.150.146])
+ (envelope-from <benjamin@edera.dev>)
+ id 6ac94dc0-8faa-0a2a0a5109dd-0a2a4506df62-14
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 22:25:59 +0200
+Received: from [209.85.128.175] (helo=mail-yw1-f175.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <benjamin@edera.dev>)
+ id 6ac94dd6-195a-0a2a45060019-d15580afa8f7-3
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 22:25:59 +0200
+Received: by mail-yw1-f175.google.com with SMTP id
+ 00721157ae682-8aca54b75d4so16860147b3.0
+ for <xen-devel@lists.xenproject.org>; Fri, 09 Oct 2026 13:25:58 -0700 (PDT)
+Received: from StolidWingnut.localdomain ([174.80.170.224])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18ee9bd19sm46952685e9.1.2026.10.09.10.37.29
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 09 Oct 2026 10:37:29 -0700 (PDT)
+ 00721157ae682-8b07f1eab6csm11469547b3.20.2026.10.09.13.25.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Fri, 09 Oct 2026 13:25:56 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,326 +53,191 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=edera.io header.i="@edera.io" header.h="Content-Transfer-Encoding:MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791567451; x=1792172251; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=uHmt7UFh3M6yXtrvb6bO+ouICIWFWyTELgpVwoR0wF4=;
-        b=Ut1nJCr80YJJ0xd/qKq2rTOdUphmi4Vbmfd5f3h9gzeeb0B1J1XPhXcZnGUj13iE0V
-         Flcko3A6Kpv8mPGvnUd+GMhzz3r6L4pqYtVO9IrWxsDjURhJsGKgxFDw52H9BMGmAtrm
-         ceZeFHpqHo4xCwGaSLCkPQqgDEk/6thJMP/z3lkaOaPAL+EuZts3EqZ6QV97EDoHdQmZ
-         vUKf+wR1JJ1IIY4N56Gs5y3fJcChy+mdFDIkE//ygcGkwzzpiGKbcS95gxAMUpkyVLSb
-         cUPer1JPTx/YZid0OceLX3jk8f5mu9nFvIW7LxuYb89tUDiN0dm2DfCMjySA5bEQrEN1
-         8A/A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791567451; x=1792172251;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+        d=edera.io; s=google; t=1791577557; x=1792182357; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=uHmt7UFh3M6yXtrvb6bO+ouICIWFWyTELgpVwoR0wF4=;
-        b=zzwSUl9M4UQoSC0Eb2ThNwJbEPGIxmYmIyGO9LmbbzzYsmTHvLNOAiKRFAmH9s8JIz
-         7/9fa9gBRBOhbfOzDPtowfC2Posx+JPr3rouYy7JQax1JYV799VKsQzK+tC0fC9PfnSF
-         0AiPt8XLqzXGezexYqWweT6bHQdpEmvu0izzKV1GxmIYGT9m2Jue0DS0mwsFIz0wIywN
-         EmRc3pJYN4/zSdz87YwCQ4sG28tDEwwJp6Gb3+89D9vRZukTHSvG55/PR4IL4lLKVtsK
-         pLuOHKRNT0TuNesACr/0jT4ifgocBcal7IfVwOjNe16qHGAsfxqEHUOuj7Vf4kZFl/h4
-         6gUA==
-X-Forwarded-Encrypted: i=1; AKwUvBzAPY4JiQ4ogZMLE7zN07OFgx/mNPY0YSO4gCXCwNpquSW1GngG4E0HNd4dIBrMBFnpq6/bK3N6uiM=@lists.xenproject.org
-X-Gm-Message-State: AFuF++n9cGUo3gX02vjhcWVh29qCHVFfoRaPjORTk0RmUX5woJqVNud/
-	YctvhinOrkBON2O/VmuLTlDO65kyUccxiwOP+qQd2tdklfT4CC4uNY2c
-X-Gm-Gg: AYBFou3QCiZaf+6ky6ckmVEcYffJNmqsVLhLRJunfPu3RYP4kCzAS8dDKoszLLSOeFL
-	JGRX9Rz8gGFvYOBlULvaqgbJRbf2K7Bh5ry8StwJVJlkGr43Qi6Jm2aQLZoMOLDn9+B83fKFBhl
-	QBdz6tUYiYQF++eh6YJDc9ARfYnEb9F/QWryxaDJSI87PcXfLtFDd6ZZYLuVQsM+Jul9yvCn0dC
-	aWSkGy8qOiJPCg0d+GjZXMnutAnAqq7jBo+vVRWFQSV950rvpOdThzQvhVZ3E8oZ42xim9TDD+R
-	HdiGLTXPoQ9oyXGJwQy9OZFfzKmfaJXE2iZ3OmNqYPBpcJrIym83txBuFsuFjiLmsj7Q9dhBzPx
-	QPuoXaxO6J6h8P9VLXnYYETAfZhUuOyAz42jVoKRGLG9L/Ei5p5wRe0vgdXZyx28IeEYdN7PeyO
-	aKHyfvErlJgr0HfELq99f96nF/ln4qkPQzreMUJULDR4pRzhGQTJ0Hou+SApilkJJewD7chSAFH
-	nbs0DMSZ5hTrQ==
-X-Received: by 2002:a05:600c:3b0a:b0:4a1:8963:b865 with SMTP id 5b1f17b1804b1-4a18e447e9emr52422685e9.1.1791567450673;
-        Fri, 09 Oct 2026 10:37:30 -0700 (PDT)
-Message-ID: <ef146c92-fc46-4ba6-b863-fe7aadf97b59@gmail.com>
-Date: Fri, 9 Oct 2026 20:37:28 +0300
+        bh=viiD07VAm0wzPwhi7WCLojzjM3p/uz3mpHV0GNtwMuE=;
+        b=NLpS+QGJPwlc+gxi4SrepdIdDcZm8znZBNYWKPAvAcoisdZKnqHVhv1zRggl1i4TnZ
+         BSO5DqrY4Eh3m/PAfbuWeeEfVsN8Tin4WRDny1vjkNxQ7qfgHs5nhkTpzNdt86K5uRoE
+         02o/2fhjtQzfbRibuijeMEg7lbwcZjuyxKyL8wE0M8RMGuIo32Nzl30zo6TxcDUEhARO
+         kKuKEZaWC9MIhT+nszOnGjdhx2VLD0MYBCablb0B35/OC6uTp9/P5bTUJmsmjF8sqnr4
+         VDnBW2+A9BK0nuoPjB444EnKTGgQjkUyo8A0Q8T48i30Xo1sZXh6SyUpR5B/OgPbb0P5
+         nj9w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791577557; x=1792182357;
+        h=content-transfer-encoding:mime-version:references:in-reply-to
+         :message-id:date:subject:cc:to:from:x-gm-gg:x-gm-message-state:from
+         :to:cc:subject:date:message-id:reply-to:content-type;
+        bh=viiD07VAm0wzPwhi7WCLojzjM3p/uz3mpHV0GNtwMuE=;
+        b=OtYBFhvZEBNHUTg9PW2S7jrRy9RHkIcB1n5M8bEZopCGvLmU1NZD2xSqa7E1WT7qPO
+         BdQtxSiILxlNQE0S2P3W8M9PNzzulqFCTXoDDSnB+dDQxw6V8T+xeTTxBV095ngeGbq5
+         4WPFOey8DaJei//mupEDnBh6MkB4t2DE6xNQ4oLMm41jJJpMCcNJ/vrkOC1QxLX6vSso
+         nPpeIdO6Za/AVMfbvbEnr5I7VCjX8nY0dkV9ml4Waq35tPe0BX5EOfikhmwvyabrrxnp
+         U7ZWmlNbowyWoQj2VRFoFu00HAkNf/GG6b9EXVcxLQbKtZ5YYgCeAJ8uMaxcneuZC/Cw
+         f3ZA==
+X-Gm-Message-State: AFq9FYKllLiKh0SxTu5QuoFyNrJvdTKCMzcrNkvR9XvW4uBPr9od+ZfV
+	0730NAUT+e4TYHl78SHhPjKJDr86zCKXGyCVgy3mDRQiTIPtUhZjD6+jf6/d9Mzawt6H6yurjk/
+	UthslKQUBJg==
+X-Gm-Gg: AYBFou3THsk7YmeAhc9S4mKjdBVI6TBB54raBFtxVdIcaWmi7HMhKR4fIdZP+f58sVb
+	/L30M+bcV7Ozs/HQYaUTbv0qPDAUtwlSRJuZCwifAVYkICarSWqLDkQflDSU2oHJKWh6GJbJCkx
+	7tYnOcahgj1w84WtJlKMIQk1cwhIvN64v4WhmC7ippkUw/QliEynfGg1PJzc9zR820LDwhIRhVh
+	pylrPOvgE9UrU9ow8uiGwZF19aXO9j7eBih3bXy0nXNHj6wHqlAV7exKiDYH5AS8k2dqwaLaPXi
+	onyUGRLEAz0sKPaYaXM3459KxTOuXFHQRrFPr0MHHGViUSkxmS+h0itaSh6vhm/VXVefFmmjxBX
+	bktLbJ5LLQ1oMtvWbNZWW5A5O5XNl5ZI+GoKtDVSj4MLnefZOOnY2Uy5n1A9j30TNtk2sRPQiIb
+	TK6nB0kOL0CDGTZCnfd9IRY5bxWo45f74jofhE7tAdf05dCqCwb4U0GkgZwLalh3IQuVJAfV9zH
+	Y4toS9hPJh/Bjc9E9Q8QpZHLdGHGCjySf7BzRp5n0E+z2lZLYK8m//AO9VdNyVXSwZ0FAc=
+X-Received: by 2002:a05:690c:c50d:b0:890:f416:7a27 with SMTP id 00721157ae682-8b07ed91534mr9377927b3.19.1791577557288;
+        Fri, 09 Oct 2026 13:25:57 -0700 (PDT)
+From: Benjamin Leggett <benjamin@edera.io>
+To: xen-devel@lists.xenproject.org
+Cc: Benjamin Leggett <benjamin@edera.io>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH] ns16550: add "auto" to scan PCI only when the default base has no UART
+Date: Fri,  9 Oct 2026 16:24:47 -0400
+Message-ID: <20261009202447.852414-1-benjamin@edera.io>
+X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20260922184316.324817-1-benjamin@edera.io>
+References: <20260922184316.324817-1-benjamin@edera.io>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 02/22] xen/arm: smmuv3: Add support for stage-1 and
- nested stage translation
-To: Milan Djokic <milan_djokic@epam.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Rahul Singh <rahul.singh@arm.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <cover.1791328190.git.milan_djokic@epam.com>
- <6e45683f154be94e573a4a5e5d25c7efcc29fbe5.1791328190.git.milan_djokic@epam.com>
-Content-Language: en-US
-From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-In-Reply-To: <6e45683f154be94e573a4a5e5d25c7efcc29fbe5.1791328190.git.milan_djokic@epam.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1791567451-DF8D587B-28E33593/0/0
+X-purgate-ID: tlsNG-16d1c6/1791577559-F6C7777B-A7031A45/0/0
 X-purgate-type: clean
-X-purgate-size: 8725
+X-purgate-size: 5461
 
+On some systems the console UART is at the legacy I/O port, and on
+others, such as Amazon EC2 bare metal instances, the only UART is on
+PCI. "com1=...,pci" finds the PCI UART, but it prefers any PCI serial
+device to the legacy port, so it is not correct on a system that has
+both. No option today says "use the legacy port, and scan PCI only if
+it has no UART". A deployment that boots one command line on many
+kinds of machine needs exactly that.
 
+Add "auto" as a value in the <io-base> position. With it, Xen probes
+the default base as usual. Only if check_existence() fails there does
+it scan PCI, as "pci" does. Without "auto", nothing changes.
 
-On 10/7/26 03:06, Milan Djokic wrote:
+The scan runs only when the command line asks for it, at the same
+point in boot as "pci" and "amt". There is no console yet, but the
+scan is not silent: it logs the device that it picked, and
+PARSE_ERR() logs a failure. Both messages go to the console ring, and
+console_init_preirq() replays the ring to each console that comes up,
+VGA included. Only a hang or a crash inside the scan goes unreported,
+as with "pci" and "amt" today.
 
-Hello Milan
+To limit what an unexpected scan can touch, "auto" only considers
+devices that are in uart_config[]. A serial-class device without
+built-in parameters is skipped before its BARs are sized, so a
+firmware that misreports the legacy port cannot move com1 to an
+arbitrary plug-in card.
 
-> From: Rahul Singh <rahul.singh@arm.com>
-> 
-> Xen SMMUv3 driver only supports stage-2 translation. Add support for
-> Stage-1 translation that is required to support nested stage
-> translation.
-> 
-> In true nested mode, both s1_cfg and s2_cfg will coexist.
-> Let's remove the union. When nested stage translation is setup, both
-> s1_cfg and s2_cfg are valid.
-> 
-> We introduce a new smmu_domain abort field that will be set
-> upon guest stage-1 configuration passing. If no guest stage-1
-> config has been attached, it is ignored when writing the STE.
-> 
-> arm_smmu_write_strtab_ent() is modified to write both stage
-> fields in the STE and deal with the abort field.
-> 
-> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
-> Signed-off-by: Milan Djokic <milan_djokic@epam.com>
-> ---
->   xen/drivers/passthrough/arm/smmu-v3.c | 96 +++++++++++++++++++++++----
->   xen/drivers/passthrough/arm/smmu-v3.h |  9 +++
->   2 files changed, 93 insertions(+), 12 deletions(-)
-> 
-> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-> index 7162473d62..d3e88d5a55 100644
-> --- a/xen/drivers/passthrough/arm/smmu-v3.c
-> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-> @@ -683,8 +683,10 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
->   	 * 3. Update Config, sync
->   	 */
->   	u64 val = le64_to_cpu(dst[0]);
-> -	bool ste_live = false;
-> +	bool s1_live = false, s2_live = false, ste_live = false;
-> +	bool abort, translate = false;
->   	struct arm_smmu_device *smmu = NULL;
-> +	struct arm_smmu_s1_cfg *s1_cfg = NULL;
->   	struct arm_smmu_s2_cfg *s2_cfg = NULL;
->   	struct arm_smmu_domain *smmu_domain = NULL;
->   	struct arm_smmu_cmdq_ent prefetch_cmd = {
-> @@ -699,30 +701,57 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
->   		smmu = master->smmu;
->   	}
->   
-> -	if (smmu_domain)
-> -		s2_cfg = &smmu_domain->s2_cfg;
-> +	if (smmu_domain) {
-> +		switch (smmu_domain->stage) {
-> +		case ARM_SMMU_DOMAIN_S1:
-> +			s1_cfg = &smmu_domain->s1_cfg;
-> +			break;
-> +		case ARM_SMMU_DOMAIN_NESTED:
-> +			s1_cfg = &smmu_domain->s1_cfg;
-> +			fallthrough;
-> +		case ARM_SMMU_DOMAIN_S2:
-> +			s2_cfg = &smmu_domain->s2_cfg;
-> +			break;
-> +		default:
-> +			break;
-> +		}
-> +		translate = s1_cfg || s2_cfg;
-> +	}
->   
->   	if (val & STRTAB_STE_0_V) {
->   		switch (FIELD_GET(STRTAB_STE_0_CFG, val)) {
->   		case STRTAB_STE_0_CFG_BYPASS:
->   			break;
-> +		case STRTAB_STE_0_CFG_S1_TRANS:
-> +			s1_live = true;
-> +			break;
->   		case STRTAB_STE_0_CFG_S2_TRANS:
-> -			ste_live = true;
-> +			s2_live = true;
-> +			break;
-> +		case STRTAB_STE_0_CFG_NESTED:
-> +			s1_live = true;
-> +			s2_live = true;
->   			break;
->   		case STRTAB_STE_0_CFG_ABORT:
-> -			BUG_ON(!disable_bypass);
->   			break;
->   		default:
->   			BUG(); /* STE corruption */
->   		}
->   	}
->   
-> +	ste_live = s1_live || s2_live;
-> +
->   	/* Nuke the existing STE_0 value, as we're going to rewrite it */
->   	val = STRTAB_STE_0_V;
->   
->   	/* Bypass/fault */
-> -	if (!smmu_domain || !(s2_cfg)) {
-> -		if (!smmu_domain && disable_bypass)
-> +	if (!smmu_domain)
-> +		abort = disable_bypass;
-> +	else
-> +		abort = smmu_domain->abort;
-> +
-> +	if (abort || !translate) {
-> +		if (abort)
->   			val |= FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_ABORT);
->   		else
->   			val |= FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_BYPASS);
-> @@ -740,7 +769,32 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
->   		return;
->   	}
->   
-> +	if (ste_live) {
-> +		/* First invalidate the live STE */
-> +		dst[0] = cpu_to_le64(STRTAB_STE_0_CFG_ABORT);
-> +		arm_smmu_sync_ste_for_sid(smmu, sid);
-> +	}
-> +
-> +	if (s1_cfg) {
-> +		dst[1] = cpu_to_le64(
-> +			 FIELD_PREP(STRTAB_STE_1_S1DSS, STRTAB_STE_1_S1DSS_SSID0) |
-> +			 FIELD_PREP(STRTAB_STE_1_S1CIR, STRTAB_STE_1_S1C_CACHE_WBRA) |
-> +			 FIELD_PREP(STRTAB_STE_1_S1COR, STRTAB_STE_1_S1C_CACHE_WBRA) |
-> +			 FIELD_PREP(STRTAB_STE_1_S1CSH, ARM_SMMU_SH_ISH) |
-> +			 FIELD_PREP(STRTAB_STE_1_STRW, STRTAB_STE_1_STRW_NSEL1));
-> +
-> +		if (smmu->features & ARM_SMMU_FEAT_STALLS &&
-> +		   !(smmu->features & ARM_SMMU_FEAT_STALL_FORCE))
-> +			dst[1] |= cpu_to_le64(STRTAB_STE_1_S1STALLD);
-> +
-> +		val |= (s1_cfg->s1ctxptr & STRTAB_STE_0_S1CTXPTR_MASK) |
-> +			FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_S1_TRANS) |
-> +			FIELD_PREP(STRTAB_STE_0_S1CDMAX, s1_cfg->s1cdmax) |
-> +			FIELD_PREP(STRTAB_STE_0_S1FMT, s1_cfg->s1fmt);
-> +	}
-> +
->   	if (s2_cfg) {
-> +		u64 vttbr = s2_cfg->vttbr & STRTAB_STE_3_S2TTB_MASK;
->   		u64 strtab =
->   			 FIELD_PREP(STRTAB_STE_2_S2VMID, s2_cfg->vmid) |
->   			 FIELD_PREP(STRTAB_STE_2_VTCR, s2_cfg->vtcr) |
-> @@ -750,12 +804,19 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
->   			 STRTAB_STE_2_S2PTW | STRTAB_STE_2_S2AA64 |
->   			 STRTAB_STE_2_S2R;
->   
-> -		BUG_ON(ste_live);
-> +		if (s2_live) {
-> +			u64 s2ttb = le64_to_cpu(dst[3]) & STRTAB_STE_3_S2TTB_MASK;
-> +			BUG_ON(s2ttb != vttbr);
-> +		}
-> +
->   		dst[2] = cpu_to_le64(strtab);
->   
-> -		dst[3] = cpu_to_le64(s2_cfg->vttbr & STRTAB_STE_3_S2TTB_MASK);
-> +		dst[3] = cpu_to_le64(vttbr);
->   
->   		val |= FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_S2_TRANS);
-> +	} else {
-> +		dst[2] = 0;
-> +		dst[3] = 0;
->   	}
->   
->   	if (master->ats_enabled)
-> @@ -1254,8 +1315,16 @@ static int arm_smmu_domain_finalise(struct iommu_domain *domain,
->   {
->   	int ret;
->   	struct arm_smmu_domain *smmu_domain = to_smmu_domain(domain);
-> +	struct arm_smmu_device *smmu = smmu_domain->smmu;
-> +
-> +	if (!(smmu->features & ARM_SMMU_FEAT_TRANS_S2))
-> +		return 0;
+When the scan finds nothing, pci_uart_config() puts back the original
+base, and check_existence() does not test MMIO addresses. Thus
+ps_bdf_enable, not check_existence(), tells whether a device was
+found.
 
+Assisted-by: Claude:claude-opus-5-5
+Signed-off-by: Benjamin Leggett <benjamin@edera.io>
+---
+ docs/misc/xen-command-line.pandoc |  5 ++++-
+ xen/drivers/char/ns16550.c        | 31 ++++++++++++++++++++++++++++++-
+ 2 files changed, 34 insertions(+), 2 deletions(-)
 
-I am not fully confident I understood all the magic here correctly, but 
-it appears the initial state may be broken on SMMUs without stage-2
-(stage-1-only hosts).
-
-Here we return early without setting a stage, and the zeroed domain has 
-stage-1 (enum value 0). So a new domain is left in a default stage-1 
-state with no real config. The first attach then writes a live S1 STE 
-with s1ctxptr = 0 in arm_smmu_write_strtab_ent(), so the hardware reads 
-a context descriptor from physical address 0. I wonder we should default 
-the domain to abort.
-
-Could you please double-check?
-
-Also, it is my understanding that without stage-2 translation the 
-guest’s s1ctxptr and the stage-1 output address are used as host 
-physical addresses. The guest decides where the hardware reads and 
-writes. I wonder whether we should refuse this mode for non-hardware 
-(non-direct-mapped) domains.
-
-Apologies if this has already been discussed.
-
->   
-> -	/* Restrict the stage to what we can actually support */
-> +	/*
-> +	 * Default to stage-2 support and initialize it. Stage-1 will be
-> +	 * initialized during guest config attachment, if nested or stage-1
-> +	 * mode is required
-> +	 */
->   	smmu_domain->stage = ARM_SMMU_DOMAIN_S2;
->   
->   	ret = arm_smmu_domain_finalise_s2(smmu_domain, master);
-> @@ -2398,11 +2467,14 @@ static int arm_smmu_device_hw_probe(struct arm_smmu_device *smmu)
->   		break;
->   	}
->   
-> +	if (reg & IDR0_S1P)
-> +		smmu->features |= ARM_SMMU_FEAT_TRANS_S1;
-> +
->   	if (reg & IDR0_S2P)
->   		smmu->features |= ARM_SMMU_FEAT_TRANS_S2;
->   
-> -	if (!(reg & IDR0_S2P)) {
-> -		dev_err(smmu->dev, "no stage-2 translation support!\n");
-> +	if (!(reg & (IDR0_S1P | IDR0_S2P))) {
-> +		dev_err(smmu->dev, "no translation support!\n");
->   		return -ENXIO;
->   	}
->   
-> diff --git a/xen/drivers/passthrough/arm/smmu-v3.h b/xen/drivers/passthrough/arm/smmu-v3.h
-> index ab1f29f6c7..e257de6db9 100644
-> --- a/xen/drivers/passthrough/arm/smmu-v3.h
-> +++ b/xen/drivers/passthrough/arm/smmu-v3.h
-> @@ -197,6 +197,7 @@
->   #define STRTAB_STE_0_CFG_BYPASS		4
->   #define STRTAB_STE_0_CFG_S1_TRANS	5
->   #define STRTAB_STE_0_CFG_S2_TRANS	6
-> +#define STRTAB_STE_0_CFG_NESTED		7
->   
->   #define STRTAB_STE_0_S1FMT		GENMASK_ULL(5, 4)
->   #define STRTAB_STE_0_S1FMT_LINEAR	0
-> @@ -549,6 +550,12 @@ struct arm_smmu_strtab_l1_desc {
->   	dma_addr_t			l2ptr_dma;
->   };
->   
-> +struct arm_smmu_s1_cfg {
-> +	u64				s1ctxptr;
-> +	u8				s1fmt;
-> +	u8				s1cdmax;
-> +};
-> +
->   struct arm_smmu_s2_cfg {
->   	u16				vmid;
->   	u64				vttbr;
-> @@ -669,6 +676,8 @@ struct arm_smmu_domain {
->   	atomic_t			nr_ats_masters;
->   
->   	enum arm_smmu_domain_stage	stage;
-> +	bool			abort;
-> +	struct arm_smmu_s1_cfg	s1_cfg;
->   	struct arm_smmu_s2_cfg	s2_cfg;
->   
->   	/* Xen domain associated with this SMMU domain */
+diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
+index ea0e3368b1..58ef53a5b2 100644
+--- a/docs/misc/xen-command-line.pandoc
++++ b/docs/misc/xen-command-line.pandoc
+@@ -357,7 +357,7 @@ ACPI indicating none to be there.
+ 
+ ### com1 (x86)
+ ### com2 (x86)
+-> `= <baud>[/<base-baud>][,[DPS][,[<io-base>|pci|amt][,[<irq>|msi][,[<port-bdf>][,[<bridge-bdf>]]]]]]`
++> `= <baud>[/<base-baud>][,[DPS][,[<io-base>|pci|amt|auto][,[<irq>|msi][,[<port-bdf>][,[<bridge-bdf>]]]]]]`
+ 
+ Both option `com1` and `com2` follow the same format.
+ 
+@@ -387,6 +387,9 @@ Both option `com1` and `com2` follow the same format.
+   avoiding Intel AMT devices.
+ * `amt` indicated that Xen should scan the PCI bus for the UART,
+   including Intel AMT devices if present.
++* `auto` indicates that Xen should use the default I/O base if a UART
++  responds there, and otherwise scan the PCI bus for the UART as `pci`
++  does, but only for devices with built-in parameters in Xen.
+ 
+ A typical setup for most situations might be `com1=115200,8n1`
+ 
+diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+index cdda28879e..ab55e2ba45 100644
+--- a/xen/drivers/char/ns16550.c
++++ b/xen/drivers/char/ns16550.c
+@@ -66,6 +66,7 @@ static struct ns16550 {
+     bool dw_usr_bsy;
+ #ifdef NS16550_PCI
+     /* PCI card parameters. */
++    bool pci_fallback;      /* if =1, scan PCI if io_base has no UART */
+     bool pb_bdf_enable;     /* if =1, pb-bdf effective, port behind bridge */
+     bool ps_bdf_enable;     /* if =1, ps_bdf effective, port on pci card */
+     pci_sbdf_t pci_bridge;
+@@ -1321,6 +1322,10 @@ pci_uart_config(struct ns16550 *uart, bool skip_amt, unsigned int idx)
+                     }
+                 }
+ 
++                /* Keep "auto" off unknown devices, including their BARs. */
++                if ( uart->pci_fallback && i == ARRAY_SIZE(uart_config) )
++                    continue;
++
+                 if ( port_idx >= param->max_ports )
+                 {
+                     idx -= param->max_ports;
+@@ -1628,6 +1633,11 @@ static bool __init parse_positional(struct ns16550 *uart, char **str)
+                 return true;
+             conf += 3;
+         }
++        else if ( strncmp(conf, "auto", 4) == 0 )
++        {
++            uart->pci_fallback = true;
++            conf += 4;
++        }
+         else
+ #endif
+         {
+@@ -1819,7 +1829,26 @@ static void __init ns16550_parse_port_config(
+     if ( uart->io_base == 0 )
+         PARSE_ERR("I/O base address must be specified.");
+     if ( !check_existence(uart) )
+-        PARSE_ERR("16550-compatible serial UART not present");
++    {
++#ifdef CONFIG_HAS_PCI
++        if ( uart->pci_fallback )
++        {
++            pci_uart_config(uart, 1 /* skip AMT */, uart - ns16550_com);
++            if ( uart->ps_bdf_enable )
++                printk("ns16550: com%u: no UART at default base, using %pp\n",
++                       (unsigned int)(uart - ns16550_com) + 1,
++                       &uart->pci_device);
++        }
++
++        /*
++         * A failed scan puts back the rejected base, and check_existence()
++         * passes MMIO addresses untested, so only ps_bdf_enable says that
++         * a device was found.
++         */
++        if ( !uart->ps_bdf_enable || !check_existence(uart) )
++#endif
++            PARSE_ERR("16550-compatible serial UART not present");
++    }
+ 
+     /* Register with generic serial driver. */
+     serial_register_uart(uart - ns16550_com, &ns16550_driver, uart);
+-- 
+2.55.0
 
 
