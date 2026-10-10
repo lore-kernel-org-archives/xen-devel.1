@@ -4,39 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 712E0CA6004
-	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2026 03:32:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1444845.1661417 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DAA15CA6004
+	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2026 04:05:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1444858.1661426 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFNoL-0002mM-AN; Sat, 10 Oct 2026 03:31:49 +0000
+	id 1xFOKx-0007NK-RJ; Sat, 10 Oct 2026 04:05:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1444845.1661417; Sat, 10 Oct 2026 03:31:49 +0000
+Received: by outflank-mailman (output) from mailman id 1444858.1661426; Sat, 10 Oct 2026 04:05:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFNoL-0002mE-6v; Sat, 10 Oct 2026 03:31:49 +0000
-Received: by outflank-mailman (input) for mailman id 1444845;
- Sat, 10 Oct 2026 03:31:48 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xFOKx-0007NC-NW; Sat, 10 Oct 2026 04:05:31 +0000
+Received: by outflank-mailman (input) for mailman id 1444858;
+ Sat, 10 Oct 2026 04:05:30 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <zhangzheng@iscas.ac.cn>) id 1xFNoK-0002m8-Bp
- for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 03:31:48 +0000
+ (envelope-from <chunjie.zhu@citrix.com>) id 1xFOKv-0007N4-S6
+ for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 04:05:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xFNoJ-008b6O-C2
- for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 05:31:47 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xFOKv-0068Z3-5O
+ for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 06:05:29 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6ac9b176-bab6-0a2a0a5309dd-0a2a4504e0fc-18
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 05:31:46 +0200
-Received: from [159.226.251.21] (helo=cstnet.cn)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6ac9b19f-b57f-0a2a45040019-9fe2fb15aef8-3
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 05:31:45 +0200
-Received: from iscas-ws (unknown [36.110.52.2])
- by APP-01 (Coremail) with SMTP id qwCowABnP_OasclqbmRqCg--.37430S2;
- Sat, 10 Oct 2026 11:31:39 +0800 (CST)
+ (envelope-from <chunjie.zhu@citrix.com>)
+ id 6ac9b965-e002-0a2a0a5209dd-0a2a4503a36e-10
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 06:05:29 +0200
+Received: from [52.101.193.1]
+ (helo=CH1PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <chunjie.zhu@citrix.com>)
+ id 6ac9b987-fae8-0a2a45030019-3465c101a39f-4
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 06:05:28 +0200
+Received: from BY5PR03MB5315.namprd03.prod.outlook.com (2603:10b6:a03:229::23)
+ by SA5PR03MB8428.namprd03.prod.outlook.com (2603:10b6:806:476::21)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.17; Sat, 10 Oct
+ 2026 04:05:26 +0000
+Received: from BY5PR03MB5315.namprd03.prod.outlook.com
+ ([fe80::f586:75e3:eb6a:9550]) by BY5PR03MB5315.namprd03.prod.outlook.com
+ ([fe80::f586:75e3:eb6a:9550%2]) with mapi id 15.21.0496.017; Sat, 10 Oct 2026
+ 04:05:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,217 +55,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Date: Sat, 10 Oct 2026 11:32:02 +0800
-From: Zhang Zheng <zhangzheng@iscas.ac.cn>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, 
-	Alistair Francis <alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, 
-	Baptiste Le Duc <baptiste.le-duc@vates.tech>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v1 0/1] [RISC-V] replace SBI early console with 8250 UART
-Message-ID: <asmuU6EtrCS7nrp9@iscas-ws>
-References: <20260928023857.1030884-1-zhangzheng@iscas.ac.cn>
- <5919f1f2-e24c-4b0e-a7dd-126ac6fbe38f@gmail.com>
- <aronfcYWtc1CHQgH@iscas-ws>
- <3152e70f-881f-4a58-9b2d-df661887dc80@gmail.com>
- <arpi6szfHazQg07N@iscas-ws>
- <arsr7FV_KDQpyTcS@iscas-ws>
- <8836d1e3-77c8-4447-b1ef-132620a71441@gmail.com>
-MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=m7qpeppD6tNuYH9cPFiEnK6NzRP00HEIdWaxZHuhmh14Q1oOxQQFcZYxBlAUyvu88rL3tTmmkFmWd/MqFQiiCM2fDgiyx3IQJpKiyUASlY0KyG0whvigmjJhE3NS9sXIE+n0PCw4C1VbLm95MH+MpLEj3OgP0Mgm2JR62irqN5oQ1zEhrPPiyhOTOUMhx5Apq33oUU5HBGbBplt8wbBH1jW8eHCeeHpDcDvpjtdY8Mg4JdsJdCLmHsMAD2oyW0TYaon/L/Yjv59RLfbWvo2JprFbuS3ixmpm8oD//Dka0D1cRMKCnllCQ5QAsh1xU3rOPilPIgbI9obJDEXxzfvIZw==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=eqy7CVCB5sQxyVXT2EVuVVOIkP3k3Vbdge2Vuw9ZONA=;
+ b=QvZQVnEzAoQJhlghOlErI8wqcWcExlbGlv1L1GgSX3+DOZYR9H8vPRECcfGSrk1MaczNYsyx4ST2gerJ5Pl3utL77elYdMbfy+JfYfy9TKQXRe9WvQLsPiYVb8yJATOA7RVxsg8bT1/ApElUU/j5VjagjxuXGFFvbQuyVP3sCAnm65msLO4MoM77l32mqMQbwFv5z3KUpyHsrUxEPBzDZZkP5otS+uwVhBUeBFb6lqSPEbG/oV9xYwUvt194U65fl0HFGkhy45W7PJUerRm/cf5RQ7hLeBQOsxvUAciQc+oQT+g8pjaA2GOjOYJQAp/AaPNzi/DUBUcIr4vdcLnokw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=eqy7CVCB5sQxyVXT2EVuVVOIkP3k3Vbdge2Vuw9ZONA=;
+ b=n7cNnyVezF8pRla8pCIbrg93ubUM9aJ8GX6sBKJDktmRf2WV7EJXEQL8cP3t5wgmuZIghhb3gKOnIXbOWUjHehr5oS53niKTPHRddEpjkK+dgda9CGzGGoX05aF0lYdqyGpXHyv2XFMxmuaeGuppzf+jKi6UWgPVDjB3XJcfYcY=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+From: chunjie.zhu@citrix.com
+To: andrew.cooper3@citrix.com,
+	xen-devel@lists.xenproject.org
+Cc: chunjie.zhu@citrix.com,
+	jason.andryuk@amd.com,
+	jbeulich@suse.com,
+	roger@xenproject.org,
+	ross.lagerwall@citrix.com,
+	teddy.astie@vates.tech
+Subject: [PATCH v2] x86/svm: Sync nextrip during virtual VMRUN
+Date: Sat, 10 Oct 2026 12:05:02 +0800
+Message-Id: <20261010040502.96413-1-chunjie.zhu@citrix.com>
+X-Mailer: git-send-email 2.34.1
+In-Reply-To: <0835710d-f67d-4678-ba39-4597b9c9c7f7@citrix.com>
+References: <0835710d-f67d-4678-ba39-4597b9c9c7f7@citrix.com>
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <8836d1e3-77c8-4447-b1ef-132620a71441@gmail.com>
-X-CM-TRANSID:qwCowABnP_OasclqbmRqCg--.37430S2
-X-Coremail-Antispam: 1UD129KBjvJXoW3WryDZw1UJry8uF43WFWxJFb_yoWxKw1kpF
-	W3Ka15tFs5JFWa9rn2vw4kJFWrt395GF4UWrn5J3yUZwn8tryrArW7tF45ua4DJrs3Jr12
-	vF4jv343Wa4UZaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUvGb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwV
-	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
-	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Gr1j6F
-	4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkI
-	wI1lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr
-	0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY
-	17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcV
-	C0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY
-	6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa
-	73UjIFyTuYvjxUqdHjUUUUU
-X-Originating-IP: [36.110.52.2]
-X-CM-SenderInfo: x2kd0wx2kh0w46lvutnvoduhdfq/
-X-purgate-ID: tlsNG-ebf023/1791603106-51CD7B50-AFCE491F/0/0
+Content-Type: text/plain
+X-ClientProxiedBy: KL1PR0401CA0022.apcprd04.prod.outlook.com
+ (2603:1096:820:e::9) To BY5PR03MB5315.namprd03.prod.outlook.com
+ (2603:10b6:a03:229::23)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BY5PR03MB5315:EE_|SA5PR03MB8428:EE_
+X-MS-Office365-Filtering-Correlation-Id: c416e868-83c2-493d-b238-08df2683b564
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|376014|23010399003|18002099003|22082099003|10067099003|6133799003|261009223027099003|5023799004|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	g+MCYWehBdo9AvPVCbNnGD6Ty0bk1gilucd8pUk5zzbopUOieDpW8wTKEzoD+jam7uLc+MLqlv7UX549Mmli22mik0x/w6Q3f0Mh5LQta8mT2++ZckGZHBJD7/MQkd+4+zNFLawc2ozLopNstjEhJp2aGGL8mI+yCHVYkV3yFCf3v10oe4aEWp4d8hlWlllwJsEyYpD7a3roANvhCBz4gqZx/hD4s4wnq7UziH3iAzB6znz+kaX8Zc0Rzw5cMBevYOka7SgkJy5sZCida6TAKTN69CH4SloJ32pAWLkjpqbGOQzutEQNdFgXIX2xFURi+bCW08AOe1uf/6f/xZm+8+etEDUhPRzQpUHgsSeTLT+ydnlrLCSWZkUK330LKXjPRZa0cR8Cyhz1+BBWXR037PPDV7VPCLJUZR7mvxtbBcDLzahZZgAZIvD3SsYsgySEVJKV5c1SnAzPnoSTOxHE3m41qnNX/qf8UKMAPbNOtAWP5dp5eBsXQTotc+5vbX0DKFeVOoktpjakwcZxh8JeNdun6XsYhNjfwKssz3CVJWIZF4ZGPqmFB6vHvwej2yJ44CvLdBe+zmnIrNTsIrYrmcj+dTdb/fy9xh1fnkDbzG0LgXr5lOLfBVsKWzipO+tyU77OjuZhFGXXlgLkCgLUivLLmuAJTAO1O+3B+FWJvr8=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR03MB5315.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(18002099003)(22082099003)(10067099003)(6133799003)(261009223027099003)(5023799004)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?us-ascii?Q?NrjUIt6uUIatFaw8y02KVXbV21jAGSe6VQMC6aDOxk6/AZWcevkMRLoAC5Vr?=
+ =?us-ascii?Q?yNaM9ITbfgZfw6cLAIBaJmVNivLfnyaG1i4uPGpILyKxIi3+CyMUFE7aV2TW?=
+ =?us-ascii?Q?nKA0AiHAzpmaBMC8lDiEbVyx6Tueiv8mm+FUO1neMKeIbHiCMf+dq+MM85Id?=
+ =?us-ascii?Q?ELaN1DE/SN6yqb1K/IvnDtt9hpC1NgEBmEmdM1a+pKvIAAWba8BvxP5cSmjc?=
+ =?us-ascii?Q?zu7vxBlbq43KfGiuJJw2e6y0iawgeEOrMWG5pECqOzXqGSc3SdXUeD/FjU7q?=
+ =?us-ascii?Q?842ZTumK2l9qoqV7I4v3M5Oh8Oi35GbG79CyFBoqfesi3EuEzicyKLkYhPTa?=
+ =?us-ascii?Q?V+k2geNpqdW1M60LWPa0Qt/LdrP3FxabwVITu5fvlZXSPu+b9r31m8XUynjD?=
+ =?us-ascii?Q?XwIdSALRqiSII2KOB3K6myZItrcf2WhYMxtUdrqJyEEE/S28270/eiK30G/A?=
+ =?us-ascii?Q?xYU5NvM2OeHmskc1hQfeSM++yVQ+BT+XZABQk+KxL4r5JR0BX4G0WiOfHIJs?=
+ =?us-ascii?Q?pRTnSp/5dx00ymBb5NTQ+UoX+zW0UWhyAY57TDBQccd3jtiOJpWC5J+XjPLr?=
+ =?us-ascii?Q?Y/K9MHsjkQA4S/kr+e5QQeCyb6Xn6IRabKHuUjh2x/wOFROyKjUlLv5uPnL/?=
+ =?us-ascii?Q?64q9GoI3DeXNXf6xfbY+5omxXoBi3PBwZQg9u/iaei6ynTcW8duQLl4OQeVR?=
+ =?us-ascii?Q?ptBvl5RQPBzs2Fun+Kl5xDJ8cyeoMh5HLRVrRJlDExgnxGUFxM7Y9YQtbk3E?=
+ =?us-ascii?Q?PwJsJuuHvcAsynDgO3ldKtoMh09AtMZl36BxenxvkNiQTiCIRwImHDKR/5bY?=
+ =?us-ascii?Q?kAGxqzxtSqa+F2+DOGoVFIvdNltnd2vTFtMXxvIQ7Slc/U2nSNMHTJbRkT7V?=
+ =?us-ascii?Q?5uMaCKWDmAfAjUcBga6UUSBEpr+E7d8CV4fVpQKoHc1RpTeqjtP0T5/8ZgKz?=
+ =?us-ascii?Q?FbrPPxKp81BfBl94U6KvMwb61U97kTFLg8Z7xL4OAVR/c4yhLDfSYxGiLW8O?=
+ =?us-ascii?Q?3gqZ+6AdvqSUvDYstJmFYfc3Ba5zHxTs1xIFYItevI/uvOeSXtKzyMMFI+DW?=
+ =?us-ascii?Q?SDNnHke6jBhrGbKLsZSjTLdloA4vDwzopplBvSp6xXq2sk7y8O8wM65IIaap?=
+ =?us-ascii?Q?R20/+mlWEdCk1oRo994Ptb5axCA8ZGtqsYBNXKrl50JUof6FncHpN055Z8AT?=
+ =?us-ascii?Q?zuYPgr5DRMwM6zQu3AQmMbEAW7dxRf4NcLSkbzb9ImK1XodxyGgqP46wgFvF?=
+ =?us-ascii?Q?AxzCyo91/e0WleS1GKVJVhj6REyI36JhnuxKGtjZZ30ABQatXUHeIxWqXhaE?=
+ =?us-ascii?Q?6bh7EsHdlb5TJGUd/cw3seohpi8B3kF+pbb+4fH1uzAxP88w2cxe/6Jb/Eax?=
+ =?us-ascii?Q?+ALiOhHTGJX06dQuPV6aVTezul6VqfMocDnj+CfqG9FsuvNmP3pfemotoa2B?=
+ =?us-ascii?Q?/RZbig0ueDWV7Lt0xoCC+omqFJK8mW3QZkoOgiT14x1MQKlBBxyzBCGoqtu2?=
+ =?us-ascii?Q?RbkG7hjtWLzanBL/9KQzIHzbBngSsEGeBjTzJRWc5nXaBlExQTWoukx7mPM9?=
+ =?us-ascii?Q?PEmNeLgFTDp50156hTwTiUjwokz/dWL3N/fy89ZqxU4bVAlT80oBZL5Ukz5B?=
+ =?us-ascii?Q?0gaLG9VRVauSxpxeupYmDgVhEPNKcA9hjIQ3UrFzzzF2q6IA4m5QtPbSGqFU?=
+ =?us-ascii?Q?DD4xUpn+SLUx4gNPdqcuOpzl+pryonCBY3QRzZwekfMGJj7Ubbq1E05YD31V?=
+ =?us-ascii?Q?6tkmDNkaGw=3D=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: c416e868-83c2-493d-b238-08df2683b564
+X-MS-Exchange-CrossTenant-AuthSource: BY5PR03MB5315.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2026 04:05:25.8867
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: EFyn8/aa7+xrEvHC0/ZgUgw8CyL+wBzZp4I6fgXnt9n2XfnZ7FB7tA2bCntCqC+AIu5kG6q+Ma0oRWl4H4yylQ==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA5PR03MB8428
+X-purgate-ID: tlsNG-33051d/1791605129-7488A4E9-1E2ADA3F/0/0
 X-purgate-type: clean
-X-purgate-size: 7774
+X-purgate-size: 2578
 
-On Wed, Sep 30, 2026 at 01:22:46PM +0200, Oleksii Kurochko wrote:
-> Hello Zheng,
-> 
-> On 9/29/26 5:10 AM, Zhang Zheng wrote:
-> > On Mon, Sep 28, 2026 at 08:53:15PM +0800, Zhang Zheng wrote:
-> > > On Mon, Sep 28, 2026 at 11:31:06AM +0200, Oleksii Kurochko wrote:
-> > > > 
-> > > > 
-> > > > On 9/28/26 10:40 AM, Zhang Zheng wrote:
-> > > > > On Mon, Sep 28, 2026 at 09:38:14AM +0200, Oleksii Kurochko wrote:
-> > > > > > 
-> > > > > > 
-> > > > > > On 9/28/26 4:38 AM, Zhang Zheng wrote:
-> > > > > > > The legacy SBI console extension is planned for deprecation. Replace the
-> > > > > > > RISC-V early printk backend with direct access to 8250 UART MMIO.
-> > > > > > 
-> > > > > > Won't it better just to start to add support of newer SBI? It provides
-> > > > > > pretty good support + faster as it supports passing of string instead of one
-> > > > > > char.
-> > > > > > 
-> > > > > 
-> > > > > Using the newer SBI DBCN extension would indeed result in a smaller change. At
-> > > > > the time, I mainly followed the direction suggested by the TODO and referred
-> > > > > directly to the arm64 implementation, from which most of the code was adapted.
-> > > > 
-> > > > I think TODO was written at that way because I missed DBCN (or it wasn't
-> > > > ratified at that moment). Considering that it is ratified now ...
-> > > > 
-> > > > > 
-> > > > > > Also, I think it will lead to lesser changes.
-> > > > > > 
-> > > > > 
-> > > > > If falling back to SBI console putchar is acceptable, DBCN should work
-> > > > > well here.
-> > > > 
-> > > > ... I prefer to use SBI functionality (in the current case DBCN) as maximum
-> > > > as possible so if there is no any reason (and I don't see at the moment it)
-> > > > which doesn't allow us to use DBCN here, I would prefer to use DBCN.
-> > > > 
-> > > 
-> > > Given that Xen on RISC-V is expected to target relatively recent RVA23 hardware,
-> > > which should ship with a recent version of OpenSBI, I think you are right that
-> > > there is no real need to provide a fallback here.
-> > > 
-> > > > If you still want to in the way suggested by TODO then some parts which are
-> > > > common between Arm and RISC-V should be moved to common instead of
-> > > > introducing them in RISC-V specific folder.
-> > > > 
-> > > 
-> > > I also tried to make the current patch as minimal as possible, but it would
-> > > still end up touching quite a few places.
-> > > 
-> > > > Let me know which approach you are going to follow. If the current one you
-> > > > already introduced then I will start to review it, if you will go SBI-way
-> > > > then I prefer to wait for your v2.
-> > > > 
-> > > > ~ Oleksii
-> > > > 
-> > > 
-> > > I misunderstood the TODO comment, I thought that would be the preferred
-> > > implementation. Therefore, I will switch to using DBCN and send a v2.
-> 
-> I think I didn’t word it in the best way.
-> 
-> For early debug, I think it would be better to use the SBI function. At some
-> point, it doesn’t really matter which one we use, SBI 0.1 or DBCN. If we
-> switch to using the UART’s MMIO directly, we wouldn’t need to change the
-> privilege mode or perform a context switch, so it should be faster.
-> 
-> However, considering that the early console is mainly used during bring-up,
-> it seems like the overhead of an SBI function call isn’t a big price to pay.
-> In return, we could potentially have early printk support even for UARTs
-> that aren’t currently supported by Xen.
-> 
-> > > 
-> > > Best regards,
-> > > 
-> > > Zhang
-> > > 
-> > 
-> > Hi Oleksii,
-> > 
-> > I initially assumed that the DBCN console-write call would wait until the
-> > whole string had been transmitted. After checking the SBI specification
-> > and the Linux implementation, I found that this is not the case.
-> 
-> I think Linux does roughly the same here: its SBI earlycon
-> calls sbi_debug_console_write() (or something like that) in a loop until the
-> whole buffer has been written.
-> 
-> Also note that Linux supports both the legacy SBI v0.1 console_putchar
-> and DBCN console write for earlycon. It picks DBCN when the firmware
-> provides it and falls back to v0.1 otherwise (when CONFIG_RISCV_SBI_V01
-> is enabled). I would really like Xen to do the same rather than drop
-> SBI v0.1 support. A board might not support DBCN, or might implement only
-> the legacy SBI extensions, and we still want console output there. So we
-> should keep both.
-> 
-> I'd go further: we probably don't need to add DBCN support at this point.
-> It would be enough to fix the bug you originally hit with the legacy SBI
-> call.
-> 
-> Also, in Linux the SBI console is only used as an early (boot) console.
-> Once the UART driver has probed and registered a real console, printk
-> switches to it and unregisters the boot console (unless keep_bootcon is
-> passed). So this switch doesn't cause any issues in Linux, and I don't see
-> why it should be a problem in our case either. Switching to DBCN, or the
-> approach taken in the current patch, looks to me like it is just hiding an
-> issue somewhere else.
-> 
-> > 
-> > The DBCN Console Write function is explicitly non-blocking. Linux uses DBCN
-> > through the HVC console driver, so the DBCN backend remains the owner of the
-> > console and the 8250 driver does not subsequently reinitialize the same UART
-> > or clear its FIFO.
-> > 
-> > On the other hand, when Linux uses an 8250 earlycon, it accesses the UART
-> > directly and waits for UART_LSR_TEMT before the regular 8250 driver takes
-> > over.
-> > 
-> > The current Xen setup combines these two paths: early printk uses the SBI
-> > console, while the later 8250 driver initializes the same UART. During this
-> > handover, the 8250 driver clears the TX FIFO, which can discard characters
-> > that were accepted by SBI but have not yet been transmitted by the UART.
-> 
-> Isn't a question just doing flush before switch to 8250 so we won't loose
-> anything? (and then again why Linux doesn't have such issue considering that
-> they have the similar way of work, even without virtualization)
-> 
-> > 
-> > Therefore, if Xen is going to use the 8250 driver after early printk, I
-> > think the early console should use the same 8250 MMIO path, as Linux does
-> > with 8250 earlycon. This keeps the early-console backend consistent with
-> > the driver that takes ownership of the UART and allows Xen to wait for
-> > UART_LSR_TEMT before reinitialization.
-> 
-> At some point, yes, but then we could lose support for other UARTs that
-> OpenSBI could provide out of the box for initial bring-up debugging.
-> 
-> Also, we could have both implementations for early printk (SBI-based and
-> MMIO-based), configurable through some option, and allow the user to choose
-> which approach to use. But for now, I think we could live with the SBI-based
-> implementation (even with support only for old SBI console call for a
-> while), as it is more generic, until we actually face a performance issue
-> where the MMIO-based approach would start to provide a benefit.
-> 
-> ~ Oleksii
+From: Chunjie Zhu <chunjie.zhu@citrix.com>
 
-Hi Oleksii,
+NextRIP is consumed on VMRUN as the return address pushed onto the
+stack for injected soft exceptions/interrupts.  nsvm_vmcb_prepare4vmrun()
+builds n2vmcb from the virtual VMCB on every entry to the L2 guest, but
+never copied this field, leaving n2vmcb->nextrip stale.  Injecting an
+event in this state can wedge the L2 vCPU, as the APM does not define
+behaviour for a VMRUN with a garbage NextRIP.
 
-Thanks for the clarification and suggestion.
+Nested virt is only offered on NRIPS-capable hardware, and NRIPS is
+required to be advertised to L1 (see start_nested_svm()), so the L1
+hypervisor is required to keep NextRIP correct.  Therefore no
+conditional logic is needed here; an unconditional sync suffices.
 
-I have sent v2, keeping the existing SBI early console unchanged.  Following
-your suggestion, it drains pending TX data before ns16550 reinitializes the
-UART.
+Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Signed-off-by: Chunjie Zhu <chunjie.zhu@citrix.com>
+---
+Changes in v2:
+- Retitle from "x86/svm: mandatory update VMCB nextrip for soft
+  interrupts" to "x86/svm: Sync nextrip during virtual VMRUN" (Andrew
+  Cooper).
+- Move the rationale out of the in-code comment and into the commit
+  message; keep the code comment short (Jan Beulich).
+- Drop the stray non-ASCII whitespace characters from the comment
+  (Jan Beulich).
+- Drop the speculation about garbage/invalid NextRIP values: nested
+  virt is only enabled on NRIPS-capable hardware and NRIPS is
+  mandatorily advertised to L1, so the L1 hypervisor is required to
+  keep NextRIP valid and no conditional sync is needed (Andrew
+  Cooper).
+- Cc AMD SVM maintainers/reviewers per submission guidelines (Jan
+  Beulich).
 
-While bringing up Xen on K3 I also encountered an issue with its
-XScale-compatible UART, so v2 includes a separate fix to detect and preserve
-the UART_IER_UUE bit.  As a result, v2 now mainly fixes UART handover issues
-rather than changing the RISC-V early printk implementation.
+ xen/arch/x86/hvm/svm/nestedsvm.c | 9 ++++++++-
+ 1 file changed, 8 insertions(+), 1 deletion(-)
 
-I'm not sure whether carrying these fixes as v2 of the original series is the
-best approach, so please let me know if you have any concerns.
-
-Zhang
+diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
+index faacfe007832..f2f3f9d14ec6 100644
+--- a/xen/arch/x86/hvm/svm/nestedsvm.c
++++ b/xen/arch/x86/hvm/svm/nestedsvm.c
+@@ -465,7 +465,14 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
+     n2vmcb->virt_ext.bytes =
+         n1vmcb->virt_ext.bytes | ns_vmcb->virt_ext.bytes;
+ 
+-    /* NextRIP - only evaluated on #VMEXIT. */
++    /*
++     * NextRIP is consumed on VMRUN as the return address pushed on the
++     * stack for injected soft exceptions/interrupts. Nested virt is only
++     * available on NRIPS-capable hardware and NRIPS is required to be
++     * advertised to L1 (see start_nested_svm), so the L1 hypervisor is
++     * required to keep this field correct.
++     */
++    n2vmcb->nextrip = ns_vmcb->nextrip;
+ 
+     /*
+      * VMCB Save State Area
+-- 
+2.34.1
 
 
