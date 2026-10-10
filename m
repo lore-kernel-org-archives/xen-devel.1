@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5316FCA9EBE
-	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2026 14:48:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445166.1661579 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B605CCA9EBE
+	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2026 15:17:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1445187.1661587 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFYMg-0007bd-Iy; Sat, 10 Oct 2026 14:47:58 +0000
+	id 1xFYoq-0004Mv-Nq; Sat, 10 Oct 2026 15:17:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445166.1661579; Sat, 10 Oct 2026 14:47:58 +0000
+Received: by outflank-mailman (output) from mailman id 1445187.1661587; Sat, 10 Oct 2026 15:17:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFYMg-0007bW-G9; Sat, 10 Oct 2026 14:47:58 +0000
-Received: by outflank-mailman (input) for mailman id 1445166;
- Sat, 10 Oct 2026 14:47:58 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xFYoq-0004Mo-KZ; Sat, 10 Oct 2026 15:17:04 +0000
+Received: by outflank-mailman (input) for mailman id 1445187;
+ Sat, 10 Oct 2026 15:17:03 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <olekstysh@gmail.com>) id 1xFYMf-0007bQ-U9
- for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 14:47:58 +0000
+ (envelope-from <olekstysh@gmail.com>) id 1xFYop-0004La-Cg
+ for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 15:17:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xFYMf-00HDZl-6i
- for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 16:47:57 +0200
+ id 1xFYoo-00AbL3-3S
+ for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 17:17:02 +0200
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <olekstysh@gmail.com>)
- id 6aca5017-bab6-0a2a0a5309dd-0a2a450b9ab6-2
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 16:47:57 +0200
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ id 6aca56c9-e002-0a2a0a5209dd-0a2a450b9748-34
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 17:17:02 +0200
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <olekstysh@gmail.com>)
- id 6aca501d-b7e8-0a2a450b0019-d155dd33f077-3
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 16:47:57 +0200
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-48afe75f055so573922f8f.2
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 07:47:57 -0700 (PDT)
+ id 6aca56ed-b7e8-0a2a450b0019-d155802ab500-3
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 17:17:02 +0200
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-4a180fbeef5so5867855e9.1
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 08:17:01 -0700 (PDT)
 Received: from [192.168.0.114] ([91.123.150.146])
  by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48db9ae17e9sm9563108f8f.57.2026.10.10.07.47.53
+ 5b1f17b1804b1-4a18dcd7dd3sm86534725e9.2.2026.10.10.08.16.59
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 10 Oct 2026 07:47:54 -0700 (PDT)
+ Sat, 10 Oct 2026 08:17:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,382 +55,604 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791643676; x=1792248476; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1791645421; x=1792250221; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=i9CJCR04M4KEKAlC6TAhPNCSjMy7tExBRGygibQ8+QA=;
-        b=C0PB0VpOEmkh3a12iU2hdcArlQz24yxgvMWVATbveNxiiilUik2iHWt+CNMgi5yYRp
-         D7Y/KS/r5zZao6bb/j1AhF1up4hPF1wRmBJoDC6090y1W4+El3qDbSNWoF1ayFYEgSmm
-         ArbA5NdEMGeuGJd3x9X8ZXy/ZGdoqdBjPMIonS/B7DCt6PKXdfuyiKcw22NASY5Z2L2/
-         mwV1I0f/bsKf57y11qDFn9g7K0BfLUfIVoDEBtGHL+iWTstKRwv0kLZ4hqCvg2Isu3qY
-         pby17DGW9rC1e78WwPO6yMfRVUiMIPQjiwVi1hkMIC7TIUmgaaXSZMBVJrcliKjlcH5k
-         dWHg==
+        bh=NjlFr7guwoLOFhLjs/XB8izsuXbGxHF7rFdwL0lpGts=;
+        b=ixhjA0ZaD2vWV3PGPzuCjFFXezb3D7XMwT6lF0ZN7IkMDXOkjgJcU90Zx+tD7ubOC4
+         CDHaAwGF/SiTxGwov0G6Gkz0aOAjxlAAYuy2PoGiBdDr4MkjxKY7uMdw3resxJKrCKgJ
+         0sKDdrv7mQurulhwoiOve2IkyDWuPWF1Ow2bVFkYwb6ICul3eAEZyVIpUtij49aQv/Q4
+         LF5znae3/qLa8PB8YOodE+b1S3gMmFxOBUIMzggJqeRl6kpveH+u5xFex3lMzYK8Q4jl
+         CLUxhrZzIL6zaahOEVDKKnaFdSQdU+VcKBHNERGzRc0wSToekzZhKMuatJpEoa4UPnNm
+         qDrg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791643676; x=1792248476;
+        d=1e100.net; s=20260707; t=1791645421; x=1792250221;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=i9CJCR04M4KEKAlC6TAhPNCSjMy7tExBRGygibQ8+QA=;
-        b=u4cfjboJsqlD8ZCo+4Clxt36MiBTHEJrwqIcAJjnE/dOfdVKiM1ZgrGH53ajklanvg
-         fLrHYxxLIQcPD7xQ5C9s4RkmYTi6OgqUcxxTdVWMyWfIJhs86/w7Nwserjw4fEx9z5ie
-         BO+4A7p9Cgdg/+sLLlJbnOjzGCl2vQ+D720WAftrA15XSVcJspGELpxcYESnPG8DL6Vs
-         M0g6059UkDW01FTe+zjs9TYrtvIzp6byjgJQpzX5B2SXkvNv4keANPnJzg79D06akpc0
-         I4r/SKCzHVFaDqpDuE4ZBDjUE3f6WoVlGIVm205IONWg2YzlY71Si3cAzl4V/pO9g6xg
-         9CRg==
-X-Forwarded-Encrypted: i=1; AKwUvBxFQ1WzR7LMry1Ln7rOoMjHKmxn7zU9gu0D6y5Av9QrOiknuhUnYtxqFYvl1CM3RiLmYqCvBiJULik=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYLBCf53v8O+una/ARiOuQMSSGppWbFCMqmMda1+hmyJniz2lbn3
-	ld571B4zC3uZMxLFlS+ej0dpcvIm1JaksoH1YmZz1Svl3Ejmfyf2HKn8
-X-Gm-Gg: AYBFou1KbgJNcPFX1LMwKrfCKwdAHiHYu/Xeud4kMJgV3cQsznGnLNH1FNH8H9V2F3B
-	2g6R+uwXchJ9+6ivfLF+MHucqHqM2bWc/WCAWFKCd1vry3M/uF7/UqCzbuC5/pL9ETdFtxHvLk6
-	nJGV63rV51AFeAjOX7lWBlFtM5RaZ/HbyaVqqanPROmaCVRcRoCLbDx7WrFHp25gcvBg5hoY0xI
-	v473afiwzJEg9cRM4dDC8Y23q6zzYhpLkFt3WkxF8u0yI4oxB0Dw5d3/r55aCqn2zea8MoX4wWj
-	/aXhA8exAfPgGhfdpHOHuF730cQI6LhtMfUrAcL5Dw7xfxyWIQ1JpKWYYmo8v7ecN4mezqW07gx
-	wRyoyLkBPYtPNYGdcf+rBoNrim8fKTK6zNILA5ANorvFmeBQzUNHRy8lcUN0StMaJIxOpWPIFuy
-	1oIK9MDw3RaMcMBmxxbBq+Gba/qbHLmucYS/TWZCdkx+5HMQhPWMAI2Rq5g0xBI4SL8Dko3bdPT
-	Y4=
-X-Received: by 2002:a05:6000:29c3:b0:488:764c:7a17 with SMTP id ffacd0b85a97d-48dba788922mr6170623f8f.1.1791643676372;
-        Sat, 10 Oct 2026 07:47:56 -0700 (PDT)
-Message-ID: <84d8b1c8-f716-41bf-82f7-fdfdb6207c04@gmail.com>
-Date: Sat, 10 Oct 2026 17:47:51 +0300
+        bh=NjlFr7guwoLOFhLjs/XB8izsuXbGxHF7rFdwL0lpGts=;
+        b=rRNcaHsU4q7SLrowJ+RFAwPw8aR7UAMxIsCgGxQqn6CaDY1jtBQv0zsRcHPEZB087a
+         Q6yn8O0hGLHWOcuLKF6HjyBqRkGXCtAD94/iToVMbBh9qj7MNXpesWsX9duyt0ylvX5W
+         YcKrXoE3rgoSqEl/EYSRx6ePnnCDjB9we/BTsx+7+nsMQld+RrIQSIWsQrinfon69zrJ
+         nYpK5X1kKOjEumRw9EECcUrvr593t4zAwKvZVRC1euq5yM8pLaSHb6WHGwAeeOVoNF8r
+         MqCKz2XmTC/tUVszUzAZm5wkpUbXTcDmr1usySVhguBJLK7YGIgvMvPNoP+zSeKRaPbq
+         sRqQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzOXcG9qTow9udBRQTr+wFDQILXXnK23kUdVgv6VGBpekIET34hi50EgNAGBv9Z8ucq39NwNvyKrzc=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIycHDDw3ObxWNg/wJRXBKZ+l86YGgIytv+jNvWgOGIFzpV02x8
+	uUjpboFOyXv03or3bbea6EhekIfaIf5QsD3xBPVM99L67lY6/hFoL3YB
+X-Gm-Gg: AYBFou1us0MUZoU7bRRNJpKtKuRJb77U/JCW2OIXXUn2Uliw/Zpg9WANGfiOfODJ9Rf
+	VSuyS/CNpCr0w0YWTJ/OzoopSV8pllNgeF/GhbsZPMjMo0YhjZgxk+Bx+hMI1dFsxvmyed2wlp3
+	i7mwp15f4j/L7UcH7OJC6Q5w8KM20K75NuGBj2kuntP2u/UqVZdkN1IXWnkz8vjV2rjYQwnoOSZ
+	b3Lnj4pAxgrZ6INq0J28XUkMBNWjy2hFGb4j/7u10SO6u8X+YU6AJo7Qy1VpRIZZEWK0GHo4bI0
+	4iiDQbHJWl8jDXq712dTf/kJnYDqijCKj9CUsDD8ePYTVfbCYJvFDY/F66/edGpUMT5Z/ooAePI
+	peoru4OJIQtuYvjocAHFGrJd/ZqFd7CB75L/W3TxI14Rpqnvb1+Hk+kxANTvfAGyJIsygNqnNNE
+	f8wK0v4RCt8f1hSFcRe7kcUXPAG5QccXK5Vi+xZvSFIcOWyhwwgtt/OCAI0QinY3puSgd7fxHLP
+	VM=
+X-Received: by 2002:a05:600c:1553:b0:49f:e8bf:8f9b with SMTP id 5b1f17b1804b1-4a18e443ea6mr94381545e9.4.1791645421283;
+        Sat, 10 Oct 2026 08:17:01 -0700 (PDT)
+Message-ID: <1396633e-8e1b-4ceb-82e4-f5b0b40eae0c@gmail.com>
+Date: Sat, 10 Oct 2026 18:16:59 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 11/22] xen/arm: vsmmuv3: Attach Stage-1 configuration
- to SMMUv3 hardware
+Subject: Re: [PATCH v4 22/22] doc/arm: vIOMMU design document
 To: Milan Djokic <milan_djokic@epam.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Rahul Singh <rahul.singh@arm.com>,
- Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
 References: <cover.1791328190.git.milan_djokic@epam.com>
- <4f83a0ee7f46e19c6afec3460a2a7e1bbe8e3c1a.1791328190.git.milan_djokic@epam.com>
+ <da2b9469ffb63d8bb63c2b9bf14ebecfd56dea22.1791328190.git.milan_djokic@epam.com>
 Content-Language: en-US
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-In-Reply-To: <4f83a0ee7f46e19c6afec3460a2a7e1bbe8e3c1a.1791328190.git.milan_djokic@epam.com>
+In-Reply-To: <da2b9469ffb63d8bb63c2b9bf14ebecfd56dea22.1791328190.git.milan_djokic@epam.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1791643677-AA6DA9EA-63932922/0/0
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-42698a/1791645422-A8AC89EA-B0ABF6E3/0/0
 X-purgate-type: clean
-X-purgate-size: 11172
+X-purgate-size: 21286
 
 
 
-On 10/7/26 03:07, Milan Djokic wrote:
-
+On 10/7/26 03:08, Milan Djokic wrote:
 
 Hello Milan
 
-> From: Rahul Singh <rahul.singh@arm.com>
-> 
-> Attach the Stage-1 configuration to device STE to support nested
-> translation for the guests.
 
-My review of this is based on the full series being applied and includes 
-the surrounding code context.
-
+> This document outlines the design of the emulated IOMMU,
+> including supported features, security considerations
+> and future improvements.
 > 
-> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 > Signed-off-by: Milan Djokic <milan_djokic@epam.com>
 > ---
->   xen/arch/arm/include/asm/iommu.h       |   7 ++
->   xen/drivers/passthrough/arm/smmu-v3.c  | 105 +++++++++++++++++++++++++
->   xen/drivers/passthrough/arm/smmu-v3.h  |   1 +
->   xen/drivers/passthrough/arm/vsmmu-v3.c |  18 +++++
->   xen/include/xen/iommu.h                |   6 ++
->   5 files changed, 137 insertions(+)
+>   docs/designs/arm-viommu.rst | 502 ++++++++++++++++++++++++++++++++++++
+>   1 file changed, 502 insertions(+)
+>   create mode 100644 docs/designs/arm-viommu.rst
 > 
-> diff --git a/xen/arch/arm/include/asm/iommu.h b/xen/arch/arm/include/asm/iommu.h
-> index ad15477e24..56bc9314a7 100644
-> --- a/xen/arch/arm/include/asm/iommu.h
-> +++ b/xen/arch/arm/include/asm/iommu.h
-> @@ -20,6 +20,13 @@ struct arch_iommu
->       void *priv;
->   };
->   
-> +struct iommu_guest_config {
-> +    paddr_t     s1ctxptr;
-> +    uint8_t     config;
-> +    uint8_t     s1fmt;
-> +    uint8_t     s1cdmax;
-> +};
+> diff --git a/docs/designs/arm-viommu.rst b/docs/designs/arm-viommu.rst
+> new file mode 100644
+> index 0000000000..c68e771711
+> --- /dev/null
+> +++ b/docs/designs/arm-viommu.rst
+> @@ -0,0 +1,502 @@
+> +==========================================================
+> +Design Proposal: Add SMMUv3 Stage-1 Support for XEN Guests
+> +==========================================================
 > +
->   const struct iommu_ops *iommu_get_ops(void);
->   void iommu_set_ops(const struct iommu_ops *ops);
->   
-> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-> index 9d2b8a708b..196ac660ef 100644
-> --- a/xen/drivers/passthrough/arm/smmu-v3.c
-> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-> @@ -3003,6 +3003,37 @@ static struct arm_smmu_device *arm_smmu_get_by_dev(const struct device *dev)
->   	return NULL;
->   }
->   
-> +static struct iommu_domain *arm_smmu_get_domain_by_sid(struct domain *d,
-> +				u32 sid)
-> +{
-> +	int i;
-> +	unsigned long flags;
-> +	struct iommu_domain *io_domain;
-> +	struct arm_smmu_domain *smmu_domain;
-> +	struct arm_smmu_master *master;
-> +	struct arm_smmu_xen_domain *xen_domain = dom_iommu(d)->arch.priv;
+> +:Author:     Milan Djokic <milan_djokic@epam.com>
+> +:Date:       2026-02-13
+> +:Status:     Draft
 > +
-> +	/*
-> +	 * Loop through the &xen_domain->contexts to locate a context
-> +	 * associated with the target SMMU and device SID
-> +	 */
-> +	list_for_each_entry(io_domain, &xen_domain->contexts, list) {
-> +		smmu_domain = to_smmu_domain(io_domain);
+> +Introduction
+> +============
 > +
-> +		spin_lock_irqsave(&smmu_domain->devices_lock, flags);
-> +		list_for_each_entry(master, &smmu_domain->devices, domain_head) {
-> +			for (i = 0; i < master->num_streams; i++) {
-> +				if (sid != master->streams[i].id)
-> +					continue;
-> +				spin_unlock_irqrestore(&smmu_domain->devices_lock, flags);
-> +				return io_domain;
-> +			}
-> +		}
-> +		spin_unlock_irqrestore(&smmu_domain->devices_lock, flags);
-> +	}
-> +	return NULL;
-> +}
-> +
->   static struct iommu_domain *arm_smmu_get_domain(struct domain *d,
->   				struct device *dev)
->   {
-> @@ -3216,6 +3247,79 @@ static void arm_smmu_iommu_xen_domain_teardown(struct domain *d)
->   	xfree(xen_domain);
->   }
->   
-> +static int arm_smmu_attach_guest_config(struct domain *d, uint32_t sid,
-> +		const struct iommu_guest_config *cfg)
-> +{
-> +	int ret = -EINVAL;
-> +	unsigned long flags;
-> +	struct arm_smmu_master *master;
-> +	struct arm_smmu_domain *smmu_domain;
-> +	struct arm_smmu_xen_domain *xen_domain = dom_iommu(d)->arch.priv;
-> +	struct iommu_domain *io_domain = arm_smmu_get_domain_by_sid(d, sid);
-> +
-> +	if (!io_domain)
-> +		return -ENODEV;
-> +
-> +	smmu_domain = to_smmu_domain(io_domain);
+> +The SMMUv3 supports two stages of translation. Each stage of translation
+> +can be
+> +independently enabled. An incoming address is logically translated from
+> +VA to
+> +IPA in stage 1, then the IPA is input to stage 2 which translates the IPA to
+> +the output PA. Stage 1 translation support is required to provide
+> +isolation between different
+> +devices within OS. XEN already supports Stage 2 translation but there is no
+> +support for Stage 1 translation.
+> +This design proposal outlines the introduction of Stage-1 SMMUv3 support
+> +in Xen for ARM guests.
 
+Look like this doc does not mention the stage-1-only fallback.
 
-I might be wrong, but it feels to me that io_domain should be fetched 
-after acquiring the lock below since concurrent deassign can free the 
-io_domain. arm_smmu_deassign_dev() takes xen_domain->lock, decrements 
-io_domain->ref, and if it hits 0, calls arm_smmu_destroy_iommu_domain() 
-which frees the memory.
 
 > +
-> +	spin_lock(&xen_domain->lock);
+> +Motivation
+> +==========
 > +
-> +	switch (cfg->config) {
-> +	case ARM_SMMU_DOMAIN_ABORT:
-> +		smmu_domain->abort = true;
-> +		smmu_domain->stage = cfg->config;
-> +		break;
-> +	case ARM_SMMU_DOMAIN_BYPASS:
-> +		smmu_domain->abort = false;
-> +		smmu_domain->stage = cfg->config;
-
-I am not quite sure where the best place is to leave this comment, but 
-unless I am missing something, it looks like a guest can trivially 
-disable stage-2 translation.
-
-If the guest requests CFG_BYPASS, arm_vsmmu_decode_ste() sets bypassed
-and guest_cfg.config becomes ARM_SMMU_DOMAIN_BYPASS. 
-arm_smmu_attach_guest_config() then sets that stage. Consequently, 
-arm_smmu_write_strtab_ent() finds neither s1_cfg nor s2_cfg and writes 
-the physical STE as CFG_BYPASS, which bypasses both stages.
-
-So any device the guest puts in bypass (which Linux might legitimately 
-do for identity domains) can read and write any physical memory, 
-including Xen’s memory. Even for well-behaved guests, this is 
-problematic: the device would use IOVA (which equals IPA) directly as a 
-host physical address instead of going through the domain’s P2M.
-
-I think that guest bypass request should map to S2-only physical STE.
-
-
-> +		break;
-> +	case ARM_SMMU_DOMAIN_S1:
-> +		/* Check stage-1 support */
-> +		if (!(smmu_domain->smmu->features & ARM_SMMU_FEAT_TRANS_S1)) {
-> +			dev_info(smmu_domain->smmu->dev,
-> +					"stage-1 not implemented\n");
-> +			goto out;
-> +		}
+> +ARM systems utilizing SMMUv3 require stage-1 address translation to
+> +ensure secure DMA and
+> +guest managed I/O memory mappings.
+> +With stage-1 enabled, guest manages IOVA to IPA mappings through its own
+> +IOMMU driver.
 > +
-> +		/* If stage-2 is not supported, configure stage-1 only */
-> +		if (!(smmu_domain->smmu->features & ARM_SMMU_FEAT_TRANS_S2)) {
-> +				dev_warn(smmu_domain->smmu->dev,
-> +						"SMMU does not implement stage-2 translation support. "
-> +						"Fallback to stage-1-only translation configuration\n");
-> +			/* Enable Stage-1 translation. */
-> +			smmu_domain->stage = ARM_SMMU_DOMAIN_S1;
-
-As I already mentioned for commit #02/22, Without stage-2 there is no 
-layer to turn the stage-1 output's IPA into PA. Should we allow this 
-fallback only for privileged, direct-mapped domains?
-
-And apologies if this has already been discussed.
-
-
-> +		}
-> +		else {
-> +			/* Check nested support */
-> +			if (!(smmu_domain->smmu->features & ARM_SMMU_FEAT_NESTING)) {
-> +					dev_info(smmu_domain->smmu->dev,
-> +							"Nested translation not supported\n");
-> +					goto out;
-
-According to commit #07/22 "MMU-600 variant < 2 and all MMU-700" are 
-affected. But it seems that Xen still offers SMMU, a guest still sees 
-SMMU and might believe it is working. The attach fails with only a log 
-line (gdprintk in arm_vsmmu_handle_cmds()) and the guest is never told. 
-Device DMA then might land in the wrong guest memory.
-
-Please consider gating this at viommu_get_type() or at domain creation.
-
-
-> +			}
-> +			smmu_domain->stage = ARM_SMMU_DOMAIN_NESTED;
-> +		}
+> +This feature enables:
 > +
-> +		/* Enable Stage-1 translation. */
-> +		smmu_domain->s1_cfg.s1ctxptr = cfg->s1ctxptr;
-> +		smmu_domain->s1_cfg.s1fmt = cfg->s1fmt;
-> +		smmu_domain->s1_cfg.s1cdmax = cfg->s1cdmax;
-> +		smmu_domain->abort = false;
-
-Since all this stored per smmu_domain, one domain-wide S1 config 
-(bypass, abort, context pointer) is applied to all of device’s SIDs 
-(from the design doc I got this as intentional for current driver 
-implementation) ...
-
-
-> +		break;
-> +	default:
-> +		goto out;
-> +	}
+> +- Stage-1 translation for the guest domain
+> +- Device passthrough with per-device I/O address space
 > +
-> +	spin_lock_irqsave(&smmu_domain->devices_lock, flags);
-> +	list_for_each_entry(master, &smmu_domain->devices, domain_head)
-> +		arm_smmu_install_ste_for_dev(master);
+> +Design Overview
+> +===============
+> +
+> +These changes provide emulated SMMUv3 support:
+> +
+> +- **SMMUv3 Stage-1 Translation**: stage-1 and nested translation support
+> +  in SMMUv3 driver.
+> +- **vIOMMU Abstraction**: Virtual IOMMU framework for guest stage-1
+> +  handling.
+> +- **Register/Command Emulation**: SMMUv3 register emulation and command
+> +  queue handling.
+> +- **Device Tree Extensions**: Adds `iommus` and virtual SMMUv3 nodes to
+> +  device trees for dom0 and dom0less scenarios.
+> +- **Build Configuration**: Introduces a Kconfig arguments
+> +  (CONFIG_ARM_VIRTUAL_IOMMU, CONFIG_VIRTUAL_ARM_SMMU_V3) for build-time
+> +  enablement.
+> +
+> +Depending on the domain type, the emulated IOMMU model is the following:
+> +
+> +- For the hardware domain, the host layout is re-used. The number of exposed
+> +  IOMMUs to hardware domain is equal to number of physical IOMMUs
+> +  present (1-1 mapping).
+> +- For non-hardware domain, a single vIOMMU device is exposed to the guest and
+> +  mapped to one or more physical IOMMUs through a Xen-managed translation layer
+> +
+> +The vIOMMU feature provides a generic framework together with a backend
+> +implementation specific to the target IOMMU type. The backend is responsible
+> +for implementing the hardware-specific data structures and command handling
+> +logic (currently only SMMUv3 is supported).
+> +
+> +This modular design allows the stage-1 support to be reused
+> +for other IOMMU architectures in the future.
+> +
+> +vIOMMU architecture
+> +===================
+> +
+> +Responsibilities:
+> +
+> +Guest:
+> + - Configures stage-1 via vIOMMU commands.
+> + - Handles stage-1 faults received from Xen.
+> +
+> +Xen:
+> + - Emulates the IOMMU interface (registers, commands, events).
+> + - Provides vSID->pSID mappings.
+> + - Programs stage-1/stage-2 configuration in the physical IOMMU.
+> + - Propagate stage-1 faults to guest.
+> +
+> +The stage-1 context is shared between streams assigned to the same device.
+> +This follows the Linux SMMUv3 driver model, where the IOMMU domain is associated
+> +with the master/device, while the individual SIDs are represented by separate
+> +STEs pointing to the same translation context. This is considered sufficient for
+> +the current SMMUv3 driver model, although the SMMUv3 architecture does not
+> +forbid having separate translation contexts for different SIDs.
+> +
+> +vIOMMU commands and faults are transmitted between guest and Xen via
+> +command and event queues (one command/event queue created per guest).
+> +
+> +vIOMMU command Flow:
+> +
+> +::
+> +
+> +    Guest:
+> +        smmu_cmd(vSID, IOVA -> IPA)
+> +
+> +    Xen:
+> +        trap MMIO read/write
+> +        translate vSID->pSID
+> +        store stage-1 state
+> +        program pIOMMU for (pSID, IPA -> PA)
+> +
+> +All hardware programming of the physical IOMMU is performed exclusively by Xen.
+> +
+> +vIOMMU Stage-1 fault handling flow:
+> +
+> +::
+> +
+> +    Xen:
+> +        receives stage-1 fault
+> +        triggers vIOMMU callback
+> +        injects virtual fault
+> +
+> +    Guest:
+> +        receives and handles fault
+> +
+> +Register access
+> +---------------
+> +
+> +Guest accesses to SMMUV3 registers are trapped via MMIO regions. vIOMMU emulates
+> +a subset of SMMUv3 registers relevant to currently supported features.
+> +Unsupported registers are handled as RAZ (Read-As-Zero) and WI (Write-Ignored)
+> +for the register read and write operations, respectively.
+> +
+> +vSMMUv3 is a partially emulated resource for the guest domain. Some
+> +feature register bits (SMMU_IDR) are reflecting what the underlying HW actually
+> +support while the rest is preset in the emulation layer to limit guest from
+> +using features which are not supported by the emulation. Also, implementer
+> +identification register is fully emulated, providing generic ARM implementer
+> +ID values, to avoid activating errata/quirk paths in the guest SMMUv3 driver.
+> +
+> +Supported SMMUv3 Commands
+> +-------------------------
+> +
+> +The vIOMMU implementation currently supports a subset of the SMMUv3
+> +architectural command set required for stage-1 translation management.
+> +
+> +Commands are submitted by the guest through the virtual Command Queue
+> +(CMDQ) and consumed by Xen, which translates them into operations on the
+> +physical SMMUv3 hardware.
+> +
+> +Some commands are fully handled by the emulation layer, while others are
+> +currently treated as architectural no-ops because the required behavior
+> +is either implicitly guaranteed by Xen or not yet modeled explicitly.
+> +
+> +Emulation handled commands:
+> +
+> +- CMD_CFGI_STE
+> +- CMD_TLBI_NH_ASID
+> +- CMD_TLBI_NSNH_ALL
+> +- CMD_TLBI_NH_VA
+> +
+> +No-op/Implicitly handled commands:
+> +
+> +- CMD_SYNC
+> +- CMD_PREFETCH_CFG
+> +- CMD_CFGI_CD
+> +- CMD_CFGI_CD_ALL
+> +- CMD_CFGI_ALL
+> +
+> +Command Handling Model
+> +----------------------
+> +
+> +The guest submits commands through the virtual CMDQ interface.
+> +
+> +Xen:
+> +
+> +- Validates commands
+> +- Translates virtual identifiers (vSID->pSID) where required
+> +- Programs the physical SMMU
+> +- Performs synchronization
+> +
+> +The physical SMMU executes the resulting invalidation or configuration
+> +operations.
+> +
+> +Unsupported Commands
+> +--------------------
+> +
+> +Commands associated with currently unsupported architectural features
+> +are not implemented.
+> +
+> +This includes commands related to:
+> +
+> +- PRI
+> +- ATS
+> +- Address/Range TLB invalidation (currently, all TLBI commands perform complete
+> +  domain TLB invalidation)
+> +- Advanced stall/retry semantics
+> +- CD runtime update/sync
+> +
+> +vSID Mapping Layer
+> +------------------
+> +
+> +Each non-hardware domain-visible Stream ID (vSID) is mapped by Xen to a physical
+> +Stream ID (pSID). The mapping is maintained per-domain. The allocation policy
+> +guarantees vSID uniqueness within a domain while allowing reuse of pSIDs for
+> +different pIOMMUs.
+> +
+> +* Platform devices receive individually allocated vSIDs.
+> +* PCI devices receive a contiguous vSID range derived from RID space.
+> +
+> +
+> +Supported Device Model
+> +======================
+> +
+> +Currently, the vIOMMU framework supports only devices described via the
+> +Device Tree (DT) model. This includes platform devices and basic PCI
+> +devices support instantiated through the vPCI DT node. ACPI-described
+> +devices are not supported.
+> +
+> +Guest assigned platform devices are mapped via `iommus` property:
+> +
+> +::
+> +
+> +    <&pIOMMU pSID> -> <&vIOMMU vSID>
+> +
+> +PCI devices use RID-based mapping via the root complex `iommu-map`:
 
-  ... ^^^ loops over all masters and applies the identical config to all 
-of them. If, lets say, a device (PCI?) exposes several SIDs, and the 
-guest tries to program SID 0 with one mappings and SID 1 with a 
-different mappings, the second command will silently overwrite SID 0's 
-mappings.
-
-I do not want to ask for extra work, but should Xen at least report an 
-error when a guest programs different configs, rather than silently 
-overwriting the previous one? Or at least leave a TODO?
+I failed to find iommu-map generation in libxl or dom0less.
 
 
-> +	spin_unlock_irqrestore(&smmu_domain->devices_lock, flags);
 > +
-> +	ret = 0;
-> +out:
-> +	spin_unlock(&xen_domain->lock);
-> +	return ret;
-> +}
+> +::
 > +
->   static const struct iommu_ops arm_smmu_iommu_ops = {
->   	.page_sizes		= PAGE_SIZE_4K,
->   	.init			= arm_smmu_iommu_xen_domain_init,
-> @@ -3228,6 +3332,7 @@ static const struct iommu_ops arm_smmu_iommu_ops = {
->   	.unmap_page		= arm_iommu_unmap_page,
->   	.dt_xlate		= arm_smmu_dt_xlate,
->   	.add_device		= arm_smmu_add_device,
-> +	.attach_guest_config = arm_smmu_attach_guest_config,
->   };
->   
->   static __init int arm_smmu_dt_init(struct dt_device_node *dev,
-> diff --git a/xen/drivers/passthrough/arm/smmu-v3.h b/xen/drivers/passthrough/arm/smmu-v3.h
-> index ef492098ae..4a912be740 100644
-> --- a/xen/drivers/passthrough/arm/smmu-v3.h
-> +++ b/xen/drivers/passthrough/arm/smmu-v3.h
-> @@ -402,6 +402,7 @@ enum arm_smmu_domain_stage {
->   	ARM_SMMU_DOMAIN_S2,
->   	ARM_SMMU_DOMAIN_NESTED,
->   	ARM_SMMU_DOMAIN_BYPASS,
-> +	ARM_SMMU_DOMAIN_ABORT,
->   };
->   
->   /* Xen specific code. */
-> diff --git a/xen/drivers/passthrough/arm/vsmmu-v3.c b/xen/drivers/passthrough/arm/vsmmu-v3.c
-> index 25ba734fa7..3f557d1c4d 100644
-> --- a/xen/drivers/passthrough/arm/vsmmu-v3.c
-> +++ b/xen/drivers/passthrough/arm/vsmmu-v3.c
-> @@ -319,8 +319,11 @@ static int arm_vsmmu_handle_cfgi_ste(struct virt_smmu *smmu, uint64_t *cmdptr)
->   {
->       int ret;
->       uint64_t ste[STRTAB_STE_DWORDS];
-> +    struct domain *d = smmu->d;
-> +    struct domain_iommu *hd = dom_iommu(d);
->       struct arm_vsmmu_s1_trans_cfg s1_cfg = {0};
->       uint32_t sid = smmu_cmd_get_sid(cmdptr[0]);
-> +    struct iommu_guest_config guest_cfg = {0};
->   
->       ret = arm_vsmmu_find_ste(smmu, sid, ste);
->       if ( ret )
-> @@ -330,6 +333,21 @@ static int arm_vsmmu_handle_cfgi_ste(struct virt_smmu *smmu, uint64_t *cmdptr)
->       if ( ret )
->           return (ret == -EAGAIN ) ? 0 : ret;
->   
-> +    guest_cfg.s1ctxptr = s1_cfg.s1ctxptr;
-> +    guest_cfg.s1fmt = s1_cfg.s1fmt;
-> +    guest_cfg.s1cdmax = s1_cfg.s1cdmax;
+> +    <RID-base &viommu vSID-base length>
 > +
-> +    if ( s1_cfg.bypassed )
-> +        guest_cfg.config = ARM_SMMU_DOMAIN_BYPASS;
-> +    else if ( s1_cfg.aborted )
-> +        guest_cfg.config = ARM_SMMU_DOMAIN_ABORT;
-> +    else
-> +        guest_cfg.config = ARM_SMMU_DOMAIN_S1;
+> +PCI Topology Assumptions and Constraints:
 > +
-> +    ret = hd->platform_ops->attach_guest_config(d, sid, &guest_cfg);
-> +    if ( ret )
-> +        return ret;
+> +- RID space must be contiguous
+> +- Pre-defined continuous pSID space (0-0x1000)
+> +- No runtime PCI reconfiguration
+> +- Single root complex assumed
+> +- Mapping is fixed at guest DT construction
 > +
->       return 0;
->   }
->   
-> diff --git a/xen/include/xen/iommu.h b/xen/include/xen/iommu.h
-> index 37c4a1dc82..253f8bb6cb 100644
-> --- a/xen/include/xen/iommu.h
-> +++ b/xen/include/xen/iommu.h
-> @@ -312,6 +312,7 @@ static inline int iommu_add_dt_pci_sideband_ids(struct pci_dev *pdev)
->   #endif /* HAS_DEVICE_TREE_DISCOVERY */
->   
->   struct page_info;
-> +struct iommu_guest_config;
->   
->   /*
->    * Any non-zero value returned from callbacks of this type will cause the
-> @@ -387,6 +388,11 @@ struct iommu_ops {
->   #endif
->       /* Inhibit all interrupt generation, to be used at shutdown. */
->       void (*quiesce)(void);
+> +Constraints for PCI devices will be addressed as part of the future work on
+> +this feature.
 > +
-> +#ifdef CONFIG_ARM
-> +    int (*attach_guest_config)(struct domain *d, uint32_t sid,
-> +                               const struct iommu_guest_config *cfg);
-> +#endif
->   };
->   
->   /*
+> +Security Considerations
+> +=======================
+> +
+> +Stage-1 translation provides isolation between guest devices by
+> +enforcing a per-device I/O address space, preventing unauthorized DMA.
+> +With the introduction of emulated IOMMU, additional protection
+> +mechanisms are required to minimize security risks.
+> +
+> +1. Observation:
+> +---------------
+> +Support for Stage-1 translation in SMMUv3 introduces new data structures
+> +(`s1_cfg` alongside `s2_cfg`)
+> +and logic to write both Stage-1 and Stage-2 entries in the Stream Table
+> +Entry (STE), including an `abort`
+> +field to handle partial configuration states.
+> +
+> +**Risk:**
+> +Without proper handling, a partially applied configuration
+> +might leave guest DMA mappings in an inconsistent state, potentially
+> +enabling unauthorized access or causing cross-domain interference.
+> +
+> +**Mitigation:** *(Handled by design)*
+> +This feature introduces logic that writes both `s1_cfg` and `s2_cfg` to
+> +STE and manages the `abort` field - only considering
+> +configuration if fully attached. This ensures  incomplete or invalid
+> +device configurations are safely ignored by the hypervisor.
+
+
+Please see a potential bypass issue in commit #11/22
+
+> +
+> +2. Observation:
+> +---------------
+> +Guests can now invalidate Stage-1 caches; invalidation needs forwarding
+> +to SMMUv3 hardware to maintain coherence.
+> +
+> +**Risk:**
+> +Failing to propagate cache invalidation could allow stale mappings,
+> +enabling access to old mappings and possibly
+> +data leakage or misrouting between devices assigned to the same guest.
+> +
+> +**Mitigation:**
+> +The guest must issue appropriate invalidation commands whenever
+> +its stage-1 I/O mappings are modified to ensure that translation caches
+> +remain coherent.
+> +
+> +3. Observation:
+> +---------------
+> +Introducing optional per-guest enabled features (`viommu` argument in xl
+> +guest config) means some guests
+> +may opt-out.
+> +
+> +**Risk:**
+> +Guests without vIOMMU enabled (stage-2 only) could potentially dominate
+> +access to the physical command and event queues, since they bypass the
+> +emulation layer and processing is faster comparing to vIOMMU-enabled guests.
+> +
+> +**Mitigation:**
+> +Audit the impact of emulation overhead effect on IOMMU processing fairness
+> +in a multi-guest environment.
+> +Consider enabling/disabling stage-1 on a system level, instead of per-domain.
+> +
+> +4. Observation:
+> +---------------
+> +Guests have the ability to issue Stage-1 IOMMU commands like cache
+> +invalidation, stream table entries
+> +configuration, etc. An adversarial guest may issue a high volume of
+> +commands in rapid succession.
+> +
+> +**Risk:**
+> +Excessive commands requests can cause high hypervisor CPU consumption
+> +and disrupt scheduling,
+> +leading to degraded system responsiveness and potential
+> +denial-of-service scenarios.
+> +
+> +**Mitigation:**
+> +
+> +- Implement vIOMMU commands execution restart and continuation support:
+> +
+> +  - Introduce processing budget with only a limited amount of commands
+> +    handled per invocation.
+> +  - If additional commands remain pending after the budget is exhausted,
+> +    defer further processing and resume it asynchronously, e.g. via a
+> +    per-domain tasklet.
+> +
+> +- Batch multiple commands of same type to reduce emulation overhead:
+> +
+> +  - Inspect the command queue and group commands that can be processed
+> +    together (e.g. multiple successive invalidation requests or STE
+> +    updates for the same SID).
+> +  - Execute the entire batch in one go, reducing repeated accesses to
+> +    guest memory and emulation overhead per command.
+> +  - This reduces CPU time spent in the vIOMMU command processing loop.
+> +    The optimization is applicable only when consecutive commands of the
+> +    same type operate on the same SID/context.
+> +
+> +5. Observation:
+> +---------------
+> +Some guest commands issued towards vIOMMU are propagated to pIOMMU
+> +command queue (e.g. TLB invalidate).
+> +
+> +**Risk:**
+> +Excessive commands requests from abusive guest can cause flooding of
+> +physical IOMMU command queue,
+> +leading to degraded pIOMMU responsiveness on commands issued from other
+> +guests.
+> +
+> +**Mitigation:**
+> +
+> +- Batch commands that are propagated to the pIOMMU command queue and
+> +  implement batch execution pause/continuation.
+> +  Rely on the same mechanisms as in the previous observation
+> +  (command continuation and batching of pIOMMU-related commands of the same
+> +  type and context).
+> +- If possible, implement domain penalization by adding a per-domain budget
+> +  for vIOMMU/pIOMMU usage:
+> +
+> +  - Apply per-domain dynamic budgeting of allowed IOMMU commands to
+> +    execute per invocation, reducing the budget for guests with
+> +    excessive command requests over a longer period of time
+> +  - Combine with command continuation mechanism
+> +
+> +6. Observation:
+> +---------------
+> +The vIOMMU feature includes an event queue used to forward IOMMU events
+> +to the guest (e.g. translation faults, invalid Stream IDs, permission errors).
+> +A malicious guest may misconfigure its IOMMU state or intentionally trigger
+> +faults at a high rate.
+> +
+> +**Risk:**
+> +Occurrence of IOMMU events with high frequency can cause Xen to flood the
+> +event queue and disrupt scheduling with
+> +high hypervisor CPU load for events handling.
+> +
+> +**Mitigation:**
+> +
+> +- Implement fail-safe state by disabling events forwarding when faults
+> +  are occurred with high frequency and
+> +  not processed by guest:
+> +
+> +  - Introduce a per-domain pending event counter.
+> +  - Stop forwarding events to the guest once the number of unprocessed
+> +    events reaches a predefined threshold.
+> +
+> +- Consider disabling the emulated event queue for untrusted guests.
+> +- Note that this risk is more general and may also apply to stage-2-only
+> +  guests. This section addresses mitigations in the emulated IOMMU layer
+> +  only. Mitigation of physical event queue flooding should also be considered
+> +  in the target pIOMMU driver.
+> +
+> +7. Observation:
+> +---------------
+> +vIOMMU `CFGI_STE` commands can trigger serialized STE programming on the pIOMMU
+> +while `xen_domain->lock`, `devices_lock` and `cmd_queue_lock` are held, with
+> +local interrupts disabled. STE programming may issue multiple polling CMD_SYNC
+> +operations, each with a one-second timeout.
+> +
+> +**Risk:**
+> +An abusive guest can issue CFGI_STE commands that cause multiple CMD_SYNC
+> +operations to reach their polling timeout. This can keep a pCPU with interrupts
+> +disabled for a significant period of time, delaying interrupt handling and
+> +potentially degrading the responsiveness of Xen and other domains running on
+> +the same pCPU.
+> +
+> +**Mitigation:**
+> +
+> +- Implement pinning or otherwise maintaining the lifetime of the required
+> +  objects before releasing the relevant locks, allowing the
+> +  serialized STE programming to be performed without holding locks and with
+> +  local interrupts enabled.
+> +- Consider redesigning the SMMUv3 command processing and locking model in
+> +  future improvements to avoid performing potentially long-running pIOMMU
+> +  operations while holding locks and with local interrupts disabled.
+> +
+> +Performance Impact
+> +==================
+> +
+> +With iommu stage-1 and nested translation inclusion, performance
+> +overhead is introduced comparing to existing,
+> +stage-2 only usage in Xen. Once mappings are established, translations
+> +should not introduce significant overhead.
+> +Emulated paths may introduce moderate overhead, primarily affecting
+> +device initialization and event/command handling.
+> +Testing is performed on Renesas R-Car platform.
+> +Performance is mostly impacted by emulated vIOMMU operations, results
+> +shown in the following table.
+> +
+> ++-------------------------------+---------------------------------+
+> +| vIOMMU Operation              | Execution time in guest         |
+> ++===============================+=================================+
+> +| Reg read                      | median: 645ns, worst-case: 2us  |
+> ++-------------------------------+---------------------------------+
+> +| Reg write                     | median: 630ns, worst-case: 1us  |
+> ++-------------------------------+---------------------------------+
+> +| Invalidate TLB                | median: 2us, worst-case: 10us   |
+> ++-------------------------------+---------------------------------+
+> +| Invalidate STE                | median: 5us worst_case: 100us   |
+> ++-------------------------------+---------------------------------+
+> +
+> +With vIOMMU exposed to guest, guest OS has to initialize IOMMU device
+> +and configure stage-1 mappings for the devices
+> +attached to it.
+> +Following table shows initialization stages which impact stage-1 enabled
+> +guest boot time and compares it with
+> +stage-1 disabled guest.
+> +
+> +NOTE: Device probe execution time varies depending on device complexity.
+> +A USB host controller was selected as the test device in this case.
+> +
+> ++---------------------+-----------------------+------------------------+
+> +| Stage               | Stage-1 Enabled Guest | Stage-1 Disabled Guest |
+> ++=====================+=======================+========================+
+> +| IOMMU Init          | ~10ms                 | /                      |
+> ++---------------------+-----------------------+------------------------+
+> +| Dev Attach / Mapping| ~100ms                | ~90ms                  |
+> ++---------------------+-----------------------+------------------------+
+> +
+> +For devices configured with dynamic DMA mappings, DMA allocate/map/unmap
+> +operations performance is
+> +also impacted on stage-1 enabled guests.
+> +Dynamic DMA mapping operation trigger emulated IOMMU functions like mmio
+> +write/read and TLB invalidations.
+> +
+> ++---------------+---------------------------+--------------------------+
+> +| DMA Op        | Stage-1 Enabled Guest     | Stage-1 Disabled Guest   |
+> ++===============+===========================+==========================+
+> +| dma_alloc     | median: 20us, worst: 5ms  | median: 8us, worst: 60us |
+> ++---------------+---------------------------+--------------------------+
+> +| dma_free      | median: 500us, worst: 10ms| median: 6us, worst: 30us |
+> ++---------------+---------------------------+--------------------------+
+> +| dma_map       | median: 12us, worst: 60us | median: 3us, worst: 20us |
+> ++---------------+---------------------------+--------------------------+
+> +| dma_unmap     | median: 400us, worst: 5ms | median: 5us, worst: 20us |
+> ++---------------+---------------------------+--------------------------+
+> +
+> +Testing
+> +=======
+> +
+> +- QEMU-based ARM system tests for Stage-1 translation.
+> +- Actual hardware validation to ensure compatibility with real SMMUv3
+> +  implementations.
+> +- Unit/Functional tests validating correct translations (not implemented).
+> +
+> +Migration and Compatibility
+> +===========================
+> +
+> +This optional feature defaults to disabled (CONFIG_ARM_VIRTUAL_IOMMU=n,
+> +CONFIG_VIRTUAL_ARM_SMMU_V3=n).
+> +
+> +Future improvements
+> +===================
+> +
+> +- Implement the proposed mitigations to address security risks that are
+> +  not covered by the current design
+> +  (events batching, commands execution continuation)
+> +- PCI support
+> +- Support for other IOMMU HW (Renesas, RISC-V, etc.)
+> +
+> +References
+> +==========
+> +
+> +- Original feature implemented by Rahul Singh:
+> +
+> +https://patchwork.kernel.org/project/xen-devel/cover/cover.1669888522.git.rahul.singh@arm.com/
+> +
+> +- SMMUv3 architecture documentation
+> +- Existing vIOMMU code patterns (KVM, QEMU)
+> \ No newline at end of file
 
 
