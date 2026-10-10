@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66FECCA6004
-	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2026 03:14:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1444825.1661409 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 712E0CA6004
+	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2026 03:32:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1444845.1661417 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFNX4-0007iY-Uu; Sat, 10 Oct 2026 03:13:58 +0000
+	id 1xFNoL-0002mM-AN; Sat, 10 Oct 2026 03:31:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1444825.1661409; Sat, 10 Oct 2026 03:13:58 +0000
+Received: by outflank-mailman (output) from mailman id 1444845.1661417; Sat, 10 Oct 2026 03:31:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFNX4-0007iO-Qo; Sat, 10 Oct 2026 03:13:58 +0000
-Received: by outflank-mailman (input) for mailman id 1444825;
- Sat, 10 Oct 2026 03:13:57 +0000
+	id 1xFNoL-0002mE-6v; Sat, 10 Oct 2026 03:31:49 +0000
+Received: by outflank-mailman (input) for mailman id 1444845;
+ Sat, 10 Oct 2026 03:31:48 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <zhangzheng@iscas.ac.cn>) id 1xFNX3-0007ew-PD
- for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 03:13:57 +0000
+ (envelope-from <zhangzheng@iscas.ac.cn>) id 1xFNoK-0002m8-Bp
+ for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 03:31:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xFNX3-0001Y0-6T
- for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 05:13:57 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xFNoJ-008b6O-C2
+ for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 05:31:47 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6ac9ad71-e002-0a2a0a5209dd-0a2a4503dc34-2
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 05:13:55 +0200
+ id 6ac9b176-bab6-0a2a0a5309dd-0a2a4504e0fc-18
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 05:31:46 +0200
 Received: from [159.226.251.21] (helo=cstnet.cn)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6ac9ad70-fae8-0a2a45030019-9fe2fb15c5f4-3
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 05:13:54 +0200
+ id 6ac9b19f-b57f-0a2a45040019-9fe2fb15aef8-3
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 05:31:45 +0200
 Received: from iscas-ws (unknown [36.110.52.2])
- by APP-01 (Coremail) with SMTP id qwCowACXa+9prclqNfdpCg--.21498S3;
- Sat, 10 Oct 2026 11:13:47 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowABnP_OasclqbmRqCg--.37430S2;
+ Sat, 10 Oct 2026 11:31:39 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,112 +49,216 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
+Date: Sat, 10 Oct 2026 11:32:02 +0800
 From: Zhang Zheng <zhangzheng@iscas.ac.cn>
-To: xen-devel@lists.xenproject.org
-Cc: Zhang Zheng <zhangzheng@iscas.ac.cn>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Baptiste Le Duc <baptiste.le-duc@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v2 1/2] xen/ns16550: detect and preserve UART_IER_UUE
-Date: Sat, 10 Oct 2026 11:14:05 +0800
-Message-ID: <20261010031406.2057735-2-zhangzheng@iscas.ac.cn>
-X-Mailer: git-send-email 2.54.0
-In-Reply-To: <20261010031406.2057735-1-zhangzheng@iscas.ac.cn>
-References: <20261010031406.2057735-1-zhangzheng@iscas.ac.cn>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org, 
+	Alistair Francis <alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, 
+	Baptiste Le Duc <baptiste.le-duc@vates.tech>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
+	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
+	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH v1 0/1] [RISC-V] replace SBI early console with 8250 UART
+Message-ID: <asmuU6EtrCS7nrp9@iscas-ws>
+References: <20260928023857.1030884-1-zhangzheng@iscas.ac.cn>
+ <5919f1f2-e24c-4b0e-a7dd-126ac6fbe38f@gmail.com>
+ <aronfcYWtc1CHQgH@iscas-ws>
+ <3152e70f-881f-4a58-9b2d-df661887dc80@gmail.com>
+ <arpi6szfHazQg07N@iscas-ws>
+ <arsr7FV_KDQpyTcS@iscas-ws>
+ <8836d1e3-77c8-4447-b1ef-132620a71441@gmail.com>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-CM-TRANSID:qwCowACXa+9prclqNfdpCg--.21498S3
-X-Coremail-Antispam: 1UD129KBjvJXoW7uFWxGry7Jry3CFW7Kw18Grg_yoW8uw17pF
-	WxKFnYyrWDtr10kr9Iq3Wjga1xWas3X34FkrZ3u39xXr1kJw40kF4UJF17Xr4kur4ktr4U
-	uFs2yrWUAF98Zr7anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUmF14x267AKxVWrJVCq3wAFc2x0x2IEx4CE42xK8VAvwI8IcIk0
-	rVWrJVCq3wAFIxvE14AKwVWUJVWUGwA2048vs2IY020E87I2jVAFwI0_Jr4l82xGYIkIc2
-	x26xkF7I0E14v26r4j6ryUM28lY4IEw2IIxxk0rwA2F7IY1VAKz4vEj48ve4kI8wA2z4x0
-	Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xIIjxv20xvEc7CjxVAFwI0_Cr0_Gr1UM2
-	8EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwVC2z280aVCY1x0267AKxVW0oVCq3wAS
-	0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC0VAKzVAqx4xG6I80ewAv7VC0I7IYx2
-	IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Gr1j6F4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1l
-	F7xvr2IYc2Ij64vIr41lF7I21c0EjII2zVCS5cI20VAGYxC7M4IIrI8v6xkF7I0E8cxan2
-	IY04v7MxkF7I0En4kS14v26r1q6r43MxAIw28IcxkI7VAKI48JMxC20s026xCaFVCjc4AY
-	6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCjr7xvwVAFwI0_JrI_JrWlx4CE17
-	CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6xIIjxv20xvE14v26r1j6r1xMIIF
-	0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAIw20EY4v20xvaj40_Jr0_JF4lIx
-	AIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x0267AKxVW8JVW8JrUvcSsGvfC2
-	KfnxnUUI43ZEXa7VUjhFxUUUUUU==
+In-Reply-To: <8836d1e3-77c8-4447-b1ef-132620a71441@gmail.com>
+X-CM-TRANSID:qwCowABnP_OasclqbmRqCg--.37430S2
+X-Coremail-Antispam: 1UD129KBjvJXoW3WryDZw1UJry8uF43WFWxJFb_yoWxKw1kpF
+	W3Ka15tFs5JFWa9rn2vw4kJFWrt395GF4UWrn5J3yUZwn8tryrArW7tF45ua4DJrs3Jr12
+	vF4jv343Wa4UZaDanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUvGb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
+	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
+	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwV
+	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
+	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUAVWUtwAv7VC2z280aVAFwI0_Gr1j6F
+	4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkI
+	wI1lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr
+	0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK67AKxVWUGVWUWwC2zVAF1VAY
+	17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI8IcVAFwI0_Jr0_JF4lIxAIcV
+	C0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAvwI8IcIk0rVWUJVWUCwCI42IY
+	6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I0E14v26r4j6r4UJbIYCTnIWIevJa
+	73UjIFyTuYvjxUqdHjUUUUU
 X-Originating-IP: [36.110.52.2]
 X-CM-SenderInfo: x2kd0wx2kh0w46lvutnvoduhdfq/
-X-purgate-ID: tlsNG-33051d/1791602035-778C54E9-F3C38F06/0/0
+X-purgate-ID: tlsNG-ebf023/1791603106-51CD7B50-AFCE491F/0/0
 X-purgate-type: clean
-X-purgate-size: 2347
+X-purgate-size: 7774
 
-XScale-compatible UARTs require UART_IER_UUE to remain set.  Probe the
-bit during setup and preserve it when enabling receive interrupts, so
-the xscale/PXA UART remains operational after ns16550 takes over.
+On Wed, Sep 30, 2026 at 01:22:46PM +0200, Oleksii Kurochko wrote:
+> Hello Zheng,
+> 
+> On 9/29/26 5:10 AM, Zhang Zheng wrote:
+> > On Mon, Sep 28, 2026 at 08:53:15PM +0800, Zhang Zheng wrote:
+> > > On Mon, Sep 28, 2026 at 11:31:06AM +0200, Oleksii Kurochko wrote:
+> > > > 
+> > > > 
+> > > > On 9/28/26 10:40 AM, Zhang Zheng wrote:
+> > > > > On Mon, Sep 28, 2026 at 09:38:14AM +0200, Oleksii Kurochko wrote:
+> > > > > > 
+> > > > > > 
+> > > > > > On 9/28/26 4:38 AM, Zhang Zheng wrote:
+> > > > > > > The legacy SBI console extension is planned for deprecation. Replace the
+> > > > > > > RISC-V early printk backend with direct access to 8250 UART MMIO.
+> > > > > > 
+> > > > > > Won't it better just to start to add support of newer SBI? It provides
+> > > > > > pretty good support + faster as it supports passing of string instead of one
+> > > > > > char.
+> > > > > > 
+> > > > > 
+> > > > > Using the newer SBI DBCN extension would indeed result in a smaller change. At
+> > > > > the time, I mainly followed the direction suggested by the TODO and referred
+> > > > > directly to the arm64 implementation, from which most of the code was adapted.
+> > > > 
+> > > > I think TODO was written at that way because I missed DBCN (or it wasn't
+> > > > ratified at that moment). Considering that it is ratified now ...
+> > > > 
+> > > > > 
+> > > > > > Also, I think it will lead to lesser changes.
+> > > > > > 
+> > > > > 
+> > > > > If falling back to SBI console putchar is acceptable, DBCN should work
+> > > > > well here.
+> > > > 
+> > > > ... I prefer to use SBI functionality (in the current case DBCN) as maximum
+> > > > as possible so if there is no any reason (and I don't see at the moment it)
+> > > > which doesn't allow us to use DBCN here, I would prefer to use DBCN.
+> > > > 
+> > > 
+> > > Given that Xen on RISC-V is expected to target relatively recent RVA23 hardware,
+> > > which should ship with a recent version of OpenSBI, I think you are right that
+> > > there is no real need to provide a fallback here.
+> > > 
+> > > > If you still want to in the way suggested by TODO then some parts which are
+> > > > common between Arm and RISC-V should be moved to common instead of
+> > > > introducing them in RISC-V specific folder.
+> > > > 
+> > > 
+> > > I also tried to make the current patch as minimal as possible, but it would
+> > > still end up touching quite a few places.
+> > > 
+> > > > Let me know which approach you are going to follow. If the current one you
+> > > > already introduced then I will start to review it, if you will go SBI-way
+> > > > then I prefer to wait for your v2.
+> > > > 
+> > > > ~ Oleksii
+> > > > 
+> > > 
+> > > I misunderstood the TODO comment, I thought that would be the preferred
+> > > implementation. Therefore, I will switch to using DBCN and send a v2.
+> 
+> I think I didn’t word it in the best way.
+> 
+> For early debug, I think it would be better to use the SBI function. At some
+> point, it doesn’t really matter which one we use, SBI 0.1 or DBCN. If we
+> switch to using the UART’s MMIO directly, we wouldn’t need to change the
+> privilege mode or perform a context switch, so it should be faster.
+> 
+> However, considering that the early console is mainly used during bring-up,
+> it seems like the overhead of an SBI function call isn’t a big price to pay.
+> In return, we could potentially have early printk support even for UARTs
+> that aren’t currently supported by Xen.
+> 
+> > > 
+> > > Best regards,
+> > > 
+> > > Zhang
+> > > 
+> > 
+> > Hi Oleksii,
+> > 
+> > I initially assumed that the DBCN console-write call would wait until the
+> > whole string had been transmitted. After checking the SBI specification
+> > and the Linux implementation, I found that this is not the case.
+> 
+> I think Linux does roughly the same here: its SBI earlycon
+> calls sbi_debug_console_write() (or something like that) in a loop until the
+> whole buffer has been written.
+> 
+> Also note that Linux supports both the legacy SBI v0.1 console_putchar
+> and DBCN console write for earlycon. It picks DBCN when the firmware
+> provides it and falls back to v0.1 otherwise (when CONFIG_RISCV_SBI_V01
+> is enabled). I would really like Xen to do the same rather than drop
+> SBI v0.1 support. A board might not support DBCN, or might implement only
+> the legacy SBI extensions, and we still want console output there. So we
+> should keep both.
+> 
+> I'd go further: we probably don't need to add DBCN support at this point.
+> It would be enough to fix the bug you originally hit with the legacy SBI
+> call.
+> 
+> Also, in Linux the SBI console is only used as an early (boot) console.
+> Once the UART driver has probed and registered a real console, printk
+> switches to it and unregisters the boot console (unless keep_bootcon is
+> passed). So this switch doesn't cause any issues in Linux, and I don't see
+> why it should be a problem in our case either. Switching to DBCN, or the
+> approach taken in the current patch, looks to me like it is just hiding an
+> issue somewhere else.
+> 
+> > 
+> > The DBCN Console Write function is explicitly non-blocking. Linux uses DBCN
+> > through the HVC console driver, so the DBCN backend remains the owner of the
+> > console and the 8250 driver does not subsequently reinitialize the same UART
+> > or clear its FIFO.
+> > 
+> > On the other hand, when Linux uses an 8250 earlycon, it accesses the UART
+> > directly and waits for UART_LSR_TEMT before the regular 8250 driver takes
+> > over.
+> > 
+> > The current Xen setup combines these two paths: early printk uses the SBI
+> > console, while the later 8250 driver initializes the same UART. During this
+> > handover, the 8250 driver clears the TX FIFO, which can discard characters
+> > that were accepted by SBI but have not yet been transmitted by the UART.
+> 
+> Isn't a question just doing flush before switch to 8250 so we won't loose
+> anything? (and then again why Linux doesn't have such issue considering that
+> they have the similar way of work, even without virtualization)
+> 
+> > 
+> > Therefore, if Xen is going to use the 8250 driver after early printk, I
+> > think the early console should use the same 8250 MMIO path, as Linux does
+> > with 8250 earlycon. This keeps the early-console backend consistent with
+> > the driver that takes ownership of the UART and allows Xen to wait for
+> > UART_LSR_TEMT before reinitialization.
+> 
+> At some point, yes, but then we could lose support for other UARTs that
+> OpenSBI could provide out of the box for initial bring-up debugging.
+> 
+> Also, we could have both implementations for early printk (SBI-based and
+> MMIO-based), configurable through some option, and allow the user to choose
+> which approach to use. But for now, I think we could live with the SBI-based
+> implementation (even with support only for old SBI console call for a
+> while), as it is more generic, until we actually face a performance issue
+> where the MMIO-based approach would start to provide a benefit.
+> 
+> ~ Oleksii
 
-Signed-off-by: Zhang Zheng <zhangzheng@iscas.ac.cn>
----
- xen/drivers/char/ns16550.c  | 12 +++++++++++-
- xen/include/xen/8250-uart.h |  1 +
- 2 files changed, 12 insertions(+), 1 deletion(-)
+Hi Oleksii,
 
-diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-index cdda28879e..c174465059 100644
---- a/xen/drivers/char/ns16550.c
-+++ b/xen/drivers/char/ns16550.c
-@@ -64,6 +64,7 @@ static struct ns16550 {
-     bool intr_works;
-     bool force_polling;
-     bool dw_usr_bsy;
-+    bool xscale;
- #ifdef NS16550_PCI
-     /* PCI card parameters. */
-     bool pb_bdf_enable;     /* if =1, pb-bdf effective, port behind bridge */
-@@ -352,6 +353,14 @@ static void ns16550_setup_preirq(struct ns16550 *uart)
-     /* No interrupts. */
-     ns_write_reg(uart, UART_IER, 0);
- 
-+    uart->xscale = false;
-+    if ( !(ns_read_reg(uart, UART_IER) & UART_IER_UUE) )
-+    {
-+        ns_write_reg(uart, UART_IER, UART_IER_UUE);
-+        if ( ns_read_reg(uart, UART_IER) & UART_IER_UUE )
-+            uart->xscale = true;
-+    }
-+
-     /* Handle the DesignWare 8250 'busy-detect' quirk. */
-     handle_dw_usr_busy_quirk(uart);
- 
-@@ -446,7 +455,8 @@ static void ns16550_setup_postirq(struct ns16550 *uart)
-                      UART_MCR, UART_MCR_OUT2 | UART_MCR_DTR | UART_MCR_RTS);
- 
-         /* Enable receive interrupts. */
--        ns_write_reg(uart, UART_IER, UART_IER_ERDAI);
-+        ns_write_reg(uart, UART_IER,
-+                     UART_IER_ERDAI | (uart->xscale ? UART_IER_UUE : 0));
-     }
- 
-     if ( uart->irq >= 0 )
-diff --git a/xen/include/xen/8250-uart.h b/xen/include/xen/8250-uart.h
-index d13352940c..358d264698 100644
---- a/xen/include/xen/8250-uart.h
-+++ b/xen/include/xen/8250-uart.h
-@@ -42,6 +42,7 @@
- #define UART_IER_ETHREI   0x02    /* tx reg. empty        */
- #define UART_IER_ELSI     0x04    /* rx line status       */
- #define UART_IER_EMSI     0x08    /* MODEM status         */
-+#define UART_IER_UUE      0x40    /* UART unit enable (XScale/PXA) */
- 
- /* Interrupt Identification Register */
- #define UART_IIR_NOINT    0x01    /* no interrupt pending */
--- 
-2.54.0
+Thanks for the clarification and suggestion.
+
+I have sent v2, keeping the existing SBI early console unchanged.  Following
+your suggestion, it drains pending TX data before ns16550 reinitializes the
+UART.
+
+While bringing up Xen on K3 I also encountered an issue with its
+XScale-compatible UART, so v2 includes a separate fix to detect and preserve
+the UART_IER_UUE bit.  As a result, v2 now mainly fixes UART handover issues
+rather than changing the RISC-V early printk implementation.
+
+I'm not sure whether carrying these fixes as v2 of the original series is the
+best approach, so please let me know if you have any concerns.
+
+Zhang
 
 
