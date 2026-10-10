@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30808CA9EBE
-	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2026 15:30:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445201.1661598 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 52A9ECA9EC1
+	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2026 16:14:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1445238.1661605 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFZ1e-0007bV-Ul; Sat, 10 Oct 2026 15:30:18 +0000
+	id 1xFZiD-0006Mg-0f; Sat, 10 Oct 2026 16:14:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445201.1661598; Sat, 10 Oct 2026 15:30:18 +0000
+Received: by outflank-mailman (output) from mailman id 1445238.1661605; Sat, 10 Oct 2026 16:14:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFZ1e-0007bO-RS; Sat, 10 Oct 2026 15:30:18 +0000
-Received: by outflank-mailman (input) for mailman id 1445201;
- Sat, 10 Oct 2026 15:30:17 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xFZiC-0006MZ-Tf; Sat, 10 Oct 2026 16:14:16 +0000
+Received: by outflank-mailman (input) for mailman id 1445238;
+ Sat, 10 Oct 2026 16:14:15 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <olekstysh@gmail.com>) id 1xFZ1d-0007bI-Cy
- for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 15:30:17 +0000
+ (envelope-from <olekstysh@gmail.com>) id 1xFZiA-0006MN-Us
+ for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 16:14:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xFZ1c-00HHMl-QD
- for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 17:30:16 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xFZi9-004fC0-UD
+ for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 18:14:13 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <olekstysh@gmail.com>)
- id 6aca59be-e002-0a2a0a5209dd-0a2a45099080-26
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 17:30:16 +0200
+ id 6aca6407-2eae-0a2a0a5409dd-0a2a4504d3ec-34
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 18:14:13 +0200
 Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <olekstysh@gmail.com>)
- id 6aca5a08-be1a-0a2a45090019-d155802ed178-3
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 17:30:16 +0200
+ id 6aca6455-b57f-0a2a45040019-d155802ebd0a-3
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 18:14:13 +0200
 Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4a1923f15afso1988725e9.3
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 08:30:16 -0700 (PDT)
+ 5b1f17b1804b1-4a02718da81so5041335e9.1
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 09:14:13 -0700 (PDT)
 Received: from [192.168.0.114] ([91.123.150.146])
  by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18e481993sm114124975e9.2.2026.10.10.08.30.14
+ 5b1f17b1804b1-4a18bf31b83sm146824735e9.12.2026.10.10.09.14.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Sat, 10 Oct 2026 08:30:15 -0700 (PDT)
+ Sat, 10 Oct 2026 09:14:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,50 +55,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791646216; x=1792251016; darn=lists.xenproject.org;
+        d=gmail.com; s=20251104; t=1791648853; x=1792253653; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=rdsCltFn/cNp2RN68Rx6lk8r6oZbvRWdm6uZaoASPZ4=;
-        b=VcMY5bpzaJqfdYSUD4HsUJAofXx9vgzizgUvQAeweMkVHhyPhuX8jFij5P+3F2ag0p
-         V/cvCGsyR5SkHySKIujMbc6xSg2VQEdHAtig7vuValyVTxGOhnsLWxX02NfZui+SW5wd
-         QqXOzkIS+HfK4D+lB090bIrCsAfhlzDJYmc2ZDUEgKyosfLwzGcaWzq0B98r9fC1HEhg
-         /I4kPTb7acPtW1Fg8Dz3bGlWLqht/3Vh4iCFlvDh57ze4f/lY/37jAZ0wgFfb+/e86ii
-         WoJ25beejIPwNtbO4rHsOEULNViujn5yUWPu7VkzDjAp1HvgzJOr2MV+uHoept9X0w6A
-         h7Dw==
+        bh=0QFp0ewMEzIch4eJ6rQSol9C79n5M8aePUwxgayz468=;
+        b=ClIaGA/AMCRHRomkb1iu/gC66M2ySUbB9BatleAI9HyPM9DX6kWJ/ahJ/3nS1R/TO5
+         o7MaGquYPOh0P1Omp6F0/VLt71GKcA/B8iJvhHH+mRX//foZdHLBGoxGc/s6ZBc2KrXZ
+         I/5zm6NQBAUbzbAen0TSXkIYCDHFhhu2Qkg7nmIPT2sRHD7ICUV/xgW8sze7T9d7SnTK
+         gzZjqLTrycl/pL+/7+Hl/ypv9+oM4dNyhbXa0pLp8KHUpiTAaMglNuhs95tBPCtp9H3v
+         7zr8EbeWRBtgA70O2bxYIg/mBR/XqMXFJ68KNcJOlSv0mccepRR7OzkeCPHLVmmghQhC
+         aJJg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791646216; x=1792251016;
+        d=1e100.net; s=20260707; t=1791648853; x=1792253653;
         h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=rdsCltFn/cNp2RN68Rx6lk8r6oZbvRWdm6uZaoASPZ4=;
-        b=Htsq7KYXfIIkDkamIIzQz7r7zczJgigrw/ZOOQmdMZOKBoL5RumXmMtcFeQDK2fXAN
-         w4vQ+LsQpOX//mT6hg0FA3Bjka8jI6RRi04558Z3Ug4ovV3xkur++yqRR0bPAnXZIYSE
-         QxkJo513PSacODhrxMGt6XdxtPFajwt+ouBVak9+SWa5nqggYCZd8cMvYDB3tRGKoLP/
-         QxPwxc6/icwkWO1S+JIRK4Hl992Qz3kcJabJeTJMvdVJft2BHCGJFEQV9AWsunwFx4x8
-         4iuxuhVEl//czDG3OW+canMZUPfOkDim7B7/ihAQk0jZqt/9X22kjX+GFt6p7ViNw1U4
-         LsqA==
-X-Forwarded-Encrypted: i=1; AKwUvBwaL++IuvRJxl8pQFv37tRQT4pQJjpMO9Ua1z+DJPSO3QTDBK1RVi0b6CTfDGgZ030LdTdYN4pyjsw=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKTtjlTr9QYYkzPbeAEoOOhXnue7MU4bJb/uyKtgRPWRYXAKGr/
-	541cjLisnNN3iZlvQiOrl+fyrj0KQ5fta6o50ar3SNxRadPm4zqC4Ux1
-X-Gm-Gg: AYBFou1deO29MEDi2IipL7uvvBE/3zdhEuOAQ8gnSyPGVqjJNJStvvLKDdZ3MOCK94f
-	03h56EOuDlg4wdSB80Y2CmRlJKEiEtAnjSUx/nlRMoEDorPLCodxJ/vaoKxRvhhJ0dNTXf/s0+1
-	9tHZf/i9RNqkJ2XunDfC6Vz+g3i24llsz7YBtgfAiQIO4CQ66rHWcL/22A22vAwzdopWqH6OYls
-	Shbexj+zT/jQJcLpRnKrGRg7+QlgsOi62ixihOCvNTqV/nzkoonPom4PiU/6wgiLka8vzWqDekd
-	bUarHRa82QWIHWKRz2D0Z6lUy5Byd3CFK9OpGxUP/6nebxDoRslEeiGmnlmD3s+pkTqkw8bltki
-	4rOQCIcW1nDmbY/T96QoyW96zXE3GPYZKydFJYptkMUmCHemS4N1dyI1Zbl9bHlGzDCBUzicZOE
-	MK1g53MVpQz10pk0k90dyHZktVllsttNqIy+a1N19aSXeyqI9aAt5gQbVHCHSXLWeGr4O+fTDy9
-	TY=
-X-Received: by 2002:a05:600c:354a:b0:49c:d019:70c5 with SMTP id 5b1f17b1804b1-4a18e3ef23cmr88925775e9.0.1791646215886;
-        Sat, 10 Oct 2026 08:30:15 -0700 (PDT)
-Message-ID: <b92b4b48-f4b3-452b-a973-d98744adfb2d@gmail.com>
-Date: Sat, 10 Oct 2026 18:30:14 +0300
+        bh=0QFp0ewMEzIch4eJ6rQSol9C79n5M8aePUwxgayz468=;
+        b=f72YONMvbZQ73Kox9hf92uDB55kgANMyHmBiN3FOxyHwFjz9hRLqdbZTc2a1P6y46B
+         V/UFqVZd1iqKgIJnnlco+n+G/4O+9wodM0tyWzxup5P1W4ignIN1EzeQR8dcKV+7vz0C
+         qki7inYpLs5i1AmyqcRfSdOUjDQYQ/IQfS2Psw//cf2x6akbsC4/yQhdocU0fn8AV4gO
+         BoqX+4pNKezXp4/oryXDU5fRsuJsSQJ7BTo6Rrid5tDKmB4+N6CXIkOXZqlc31on1eT6
+         fFSTEuOzowLFjlLcB4O0EMowrLBU7nomA3v5XYDdv1Qz0IZOzmxzGT1evtzkK84sBMT2
+         bX9Q==
+X-Forwarded-Encrypted: i=1; AKwUvBxwALkwhwzQu/zHgkjDtf+kW8Hgq7WspA/fi6/YHi7oWd/tUmSPayhpvieF66CgJVPZDe3Lnnwa/lc=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJARdBVNymEfc41RErtnyIFrHqa0CvYkQpyEzVX3Rcy/h/5heAl
+	Ksmh1/TpGeD5Ivo5wqtrlx059DxCpfxF+k2TW6+PtBtP9T/iWntEjF43
+X-Gm-Gg: AYBFou1ThUCbR8uykK2p+mL4NB363DJib0xlEsB/HnYr+IBxqbUyQgGHLwxgTjEC6WL
+	K1FMY8fMnlbKzRjNZL6nT2tbl0Lem3/u+/D9B4J9HHAgci+m9qQOBFmmt69NQtPY9skOdmY6XXP
+	LmxVmtHQun3YL6zwaf5wtt9E7dMCsMZ/f7Y45oHsSbeQTttgDjf1BwWiuBUzY5dr9KCexyrP9li
+	PrWc5wEJtPzRotqaJZ8pUTUZ10dX5eNM4CJSWw4QSJAHFAwt+QdZk59vvnTcVvXDpSxDsT06xja
+	W4jIg7nyEQhc09h3PGRQBtUIimpDeHUOzy1gWRYtZD+MCc06Px0t/X1YrjKP0HKC7C+qgjndmNl
+	EkEf2hIsdna6wOd05R+Y6L/64cwgXb9f7E66AlObn3TDdlx+E8CiVndwmUtSCCsDg7N+A7bhUer
+	RAROogg7XPcRTepr7WriSZjT+NplHi9uPwUF9ho/EjD7Axo05uPt30bj63+Qn34b5aXG1Um2Ug5
+	Mc9+GcfHQvP2Aw=
+X-Received: by 2002:a05:600c:3b0a:b0:4a1:779c:dc8e with SMTP id 5b1f17b1804b1-4a18e4a01b7mr100792775e9.10.1791648853208;
+        Sat, 10 Oct 2026 09:14:13 -0700 (PDT)
+Message-ID: <d85d5cd1-e426-41d9-a3af-dfb09413ca27@gmail.com>
+Date: Sat, 10 Oct 2026 19:14:10 +0300
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 13/22] xen/arm: vsmmuv3: IOMMU device tree node for
- dom0
+Subject: Re: [PATCH v4 10/22] xen/arm: vsmmuv3: Add support for command
+ CMD_CFGI_STE
 To: Milan Djokic <milan_djokic@epam.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Rahul Singh <rahul.singh@arm.com>,
@@ -107,184 +107,240 @@ Cc: Rahul Singh <rahul.singh@arm.com>,
  Michal Orzel <michal.orzel@amd.com>,
  Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 References: <cover.1791328190.git.milan_djokic@epam.com>
- <c38b1a9476f54e42050e4712a98b19bf1d97f3a0.1791328190.git.milan_djokic@epam.com>
+ <de962fe524d632a9bcb8a07bf07e1dc6e041edaa.1791328190.git.milan_djokic@epam.com>
 Content-Language: en-US
 From: Oleksandr Tyshchenko <olekstysh@gmail.com>
-In-Reply-To: <c38b1a9476f54e42050e4712a98b19bf1d97f3a0.1791328190.git.milan_djokic@epam.com>
+In-Reply-To: <de962fe524d632a9bcb8a07bf07e1dc6e041edaa.1791328190.git.milan_djokic@epam.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1791646216-3AEDE034-C78D83DD/0/0
+X-purgate-ID: tlsNG-ebf023/1791648853-51CD7B50-667F1062/0/0
 X-purgate-type: clean
-X-purgate-size: 5618
+X-purgate-size: 8033
 
 
 
-On 10/7/26 03:07, Milan Djokic wrote:
+On 10/7/26 03:06, Milan Djokic wrote:
 
 Hello Milan
 
 > From: Rahul Singh <rahul.singh@arm.com>
 > 
-> XEN will create an IOMMU device tree node in the device tree
-> to enable the dom0 to discover the virtual SMMUv3 during dom0 boot.
-> IOMMU device tree node will only be created when viommu is enabled
-> via Kconfig build options.
-> 
-> "iommus" property will be added for dom0 devices to virtual
-> IOMMU node to enable the dom0 linux kernel to configure the IOMMU.
+> CMD_CFGI_STE is used to invalidate/validate the STE. Emulated vSMMUv3
+> driver in XEN will read the STE from the guest memory space and capture
+> the Stage-1 configuration required to support nested translation.
 > 
 > Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 > Signed-off-by: Milan Djokic <milan_djokic@epam.com>
 > ---
->   xen/arch/arm/domain_build.c       | 102 +++++++++++++++++++++++++++++-
->   xen/arch/arm/include/asm/viommu.h |   1 +
->   2 files changed, 101 insertions(+), 2 deletions(-)
+>   xen/drivers/passthrough/arm/vsmmu-v3.c | 169 +++++++++++++++++++++++++
+>   1 file changed, 169 insertions(+)
 > 
-> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
-> index cd2e09f005..6513140133 100644
-> --- a/xen/arch/arm/domain_build.c
-> +++ b/xen/arch/arm/domain_build.c
-> @@ -557,9 +557,12 @@ static int __init write_properties(struct domain *d, struct kernel_info *kinfo,
->               continue;
->           }
+> diff --git a/xen/drivers/passthrough/arm/vsmmu-v3.c b/xen/drivers/passthrough/arm/vsmmu-v3.c
+> index 10143927e7..25ba734fa7 100644
+> --- a/xen/drivers/passthrough/arm/vsmmu-v3.c
+> +++ b/xen/drivers/passthrough/arm/vsmmu-v3.c
+> @@ -78,6 +78,21 @@
 >   
-> -        if ( iommu_node )
-> +        /*
-> +         * Expose IOMMU specific properties to hwdom when vIOMMU is
-> +         * enabled.
-> +         */
-> +        if ( iommu_node && viommu_get_type() == XEN_DOMCTL_CONFIG_VIOMMU_NONE )
->           {
-> -            /* Don't expose IOMMU specific properties to hwdom */
->               if ( dt_property_name_is_equal(prop, "iommus") )
->                   continue;
+>   /* Helper Macros */
+>   #define smmu_cmd_get_command(x)     FIELD_GET(CMDQ_0_OP, x)
+> +#define smmu_cmd_get_sid(x)         FIELD_GET(CMDQ_CFGI_0_SID, x)
+> +#define smmu_get_ste_s1cdmax(x)     FIELD_GET(STRTAB_STE_0_S1CDMAX, x)
+> +#define smmu_get_ste_s1fmt(x)       FIELD_GET(STRTAB_STE_0_S1FMT, x)
+> +#define smmu_get_ste_s1stalld(x)    FIELD_GET(STRTAB_STE_1_S1STALLD, x)
+> +#define smmu_get_ste_s1ctxptr(x)    FIELD_PREP(STRTAB_STE_0_S1CTXPTR_MASK, \
+> +                                    FIELD_GET(STRTAB_STE_0_S1CTXPTR_MASK, x))
+> +
+> +/* stage-1 translation configuration */
+> +struct arm_vsmmu_s1_trans_cfg {
+> +    paddr_t s1ctxptr;
+> +    uint8_t s1fmt;
+> +    uint8_t s1cdmax;
+> +    bool    bypassed;             /* translation is bypassed */
+> +    bool    aborted;              /* translation is aborted */
+> +};
 >   
-> @@ -1457,6 +1460,95 @@ int __init make_timer_node(const struct kernel_info *kinfo)
->       return res;
+>   /* virtual smmu queue */
+>   struct arm_vsmmu_queue {
+> @@ -165,6 +180,159 @@ static void dump_smmu_command(uint64_t *command)
+>       gprintk(XENLOG_ERR, "cmd 0x%02llx: %016"PRIx64" %016"PRIx64"\n",
+>                smmu_cmd_get_command(command[0]), command[0], command[1]);
 >   }
->   
-> +#ifdef CONFIG_ARM_VIRTUAL_IOMMU
-> +static int __init make_hwdom_viommu_node(const struct kernel_info *kinfo)
+> +
+> +static int arm_vsmmu_find_ste(struct virt_smmu *smmu, uint32_t sid,
+> +                              uint64_t *ste)
 > +{
-> +    uint32_t len;
-> +    int res;
-> +    char buf[24];
-> +    void *fdt = kinfo->fdt;
-> +    const void *prop = NULL;
-> +    const struct dt_device_node *iommu = NULL;
-> +    struct host_iommu *iommu_data;
-> +    gic_interrupt_t intr;
+> +    paddr_t addr, strtab_base;
+> +    struct domain *d = smmu->d;
+> +    uint32_t log2size;
+> +    int strtab_size_shift;
+> +    int ret;
 > +
-> +    if ( list_empty(&host_iommu_list) )
-> +        return 0;
+> +    spin_lock(&smmu->strtab_cfg_lock);
+> +    log2size = MIN(FIELD_GET(STRTAB_BASE_CFG_LOG2SIZE, smmu->strtab_base_cfg),
+> +                SMMU_IDR1_SIDSIZE);
+> +    spin_unlock(&smmu->strtab_cfg_lock);
 > +
-> +    list_for_each_entry( iommu_data, &host_iommu_list, entry )
+> +    if ( sid >= (1U << log2size) )
+> +        return -EINVAL;
+> +
+> +    spin_lock(&smmu->strtab_cfg_lock);
+> +    if ( FIELD_GET(STRTAB_BASE_CFG_FMT, smmu->strtab_base_cfg) ==
+> +         STRTAB_BASE_CFG_FMT_2LVL )
 > +    {
-> +        if ( iommu_data->hwdom_node_created )
-> +            return 0;
+> +        int idx, max_l2_ste, span;
+> +        paddr_t l1ptr, l2ptr;
+> +        uint64_t l1std;
+> +        uint8_t sid_split = FIELD_GET(STRTAB_BASE_CFG_SPLIT,
+> +                              smmu->strtab_base_cfg);
 > +
-> +        iommu = iommu_data->dt_node;
-> +
-> +        snprintf(buf, sizeof(buf), "iommu@%"PRIx64, iommu_data->addr);
-> +
-> +        res = fdt_begin_node(fdt, buf);
-> +        if ( res )
-> +            return res;
-> +
-> +        prop = dt_get_property(iommu, "compatible", &len);
-> +        if ( !prop )
+> +        /*
+> +        * Reserved SPLIT values behave as 6 according to the architecture.
+> +        */
+> +        if ( sid_split != 0x6 && sid_split != 0x8 && sid_split != 0xA )
 > +        {
-> +            res = -FDT_ERR_XEN(ENOENT);
-> +            return res;
+> +            sid_split = 0x6;
 > +        }
 > +
-> +        res = fdt_property(fdt, "compatible", prop, len);
-> +        if ( res )
-> +            return res;
+> +        strtab_size_shift = MAX(5, (int)log2size - sid_split - 1 + 3);
+> +        strtab_base = smmu->strtab_base & STRTAB_BASE_ADDR_MASK &
+> +                        ~GENMASK_ULL(strtab_size_shift, 0);
+> +        spin_unlock(&smmu->strtab_cfg_lock);
+> +        idx = (sid >> sid_split) * STRTAB_L1_DESC_DWORDS;
+> +        l1ptr = (paddr_t)(strtab_base + idx * sizeof(l1std));
 > +
-> +        if ( iommu->phandle )
+> +        ret = access_guest_memory_by_gpa(d, l1ptr, &l1std,
+> +                                         sizeof(l1std), false);
+> +        if ( ret )
 > +        {
-> +            res = fdt_property_cell(fdt, "phandle", iommu->phandle);
-> +            if ( res )
-> +                return res;
+> +            gdprintk(XENLOG_ERR,
+> +                     "Could not read L1PTR at 0X%"PRIx64"\n", l1ptr);
+> +            return ret;
 > +        }
 > +
-> +        /* Use the same reg regions as the IOMMU node in host DTB. */
-> +        prop = dt_get_property(iommu, "reg", &len);
-> +        if ( !prop )
+> +        span = FIELD_GET(STRTAB_L1_DESC_SPAN, l1std);
+> +
+> +        /* Validate SPAN against the architecturally defined range and SPLIT. */
+> +        if ( !span || span > 0xB || span > sid_split + 1 )
 > +        {
-> +            printk(XENLOG_ERR "vIOMMU: Can't find IOMMU reg property.\n");
-> +            res = -FDT_ERR_XEN(ENOENT);
-> +            return res;
+> +            /* L2Ptr is invalid; this descriptor matches no valid STEs. */
+> +            return -EINVAL;
 > +        }
 > +
-> +        res = fdt_property(fdt, "reg", prop, len);
-> +        if ( res )
-> +            return res;
-> +
-> +        prop = dt_get_property(iommu, "#iommu-cells", &len);
-> +        if ( !prop )
+> +        max_l2_ste = (1U << (span - 1)) - 1;
+> +        l2ptr = FIELD_PREP(STRTAB_L1_DESC_L2PTR_MASK,
+> +                    FIELD_GET(STRTAB_L1_DESC_L2PTR_MASK, l1std));
+> +        idx = sid & ((1 << sid_split) - 1);
+> +        if ( idx > max_l2_ste )
 > +        {
-> +            res = -FDT_ERR_XEN(ENOENT);
-> +            return res;
+> +            gdprintk(XENLOG_ERR, "idx=%d > max_l2_ste=%d\n",
+> +                     idx, max_l2_ste);
+> +            return -EINVAL;
 > +        }
-> +
-> +        res = fdt_property(fdt, "#iommu-cells", prop, len);
-> +        if ( res )
-> +            return res;
-> +
-> +        res = fdt_property_string(fdt, "interrupt-names", "combined");
-> +        if ( res )
-> +            return res;
-> +
-> +        set_interrupt(intr, iommu_data->irq, 0xf, DT_IRQ_TYPE_LEVEL_HIGH);
-> +
-> +        res = fdt_property_interrupts(kinfo, &intr, 1);
-> +        if ( res )
-> +            return res;
-> +
-> +        iommu_data->hwdom_node_created = true;
-> +
-> +        fdt_end_node(fdt);
+> +        addr = l2ptr + idx * sizeof(*ste) * STRTAB_STE_DWORDS;
+> +    }
+> +    else
+> +    {
+> +        strtab_size_shift = log2size + 5;
+> +        strtab_base = smmu->strtab_base & STRTAB_BASE_ADDR_MASK &
+> +                      ~GENMASK_ULL(strtab_size_shift, 0);
+> +        spin_unlock(&smmu->strtab_cfg_lock);
+> +        addr = strtab_base + sid * sizeof(*ste) * STRTAB_STE_DWORDS;
+> +    }
+> +    ret = access_guest_memory_by_gpa(d, addr, ste, sizeof(*ste), false);
+> +    if ( ret )
+> +    {
+> +        gdprintk(XENLOG_ERR,
+> +                "Cannot fetch pte at address=0x%"PRIx64"\n", addr);
+> +        return -EINVAL;
 > +    }
 > +
-> +    return res;
+> +    return 0;
 > +}
-> +#endif
 > +
->   static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
->                                 struct dt_device_node *node,
->                                 p2m_type_t p2mt)
-> @@ -1525,6 +1617,12 @@ static int __init handle_node(struct domain *d, struct kernel_info *kinfo,
->       if ( dt_match_node(timer_matches, node) )
->           return make_timer_node(kinfo);
->   
-> +#ifdef CONFIG_ARM_VIRTUAL_IOMMU
-> +    if ( device_get_class(node) == DEVICE_IOMMU &&
-> +         viommu_get_type() != XEN_DOMCTL_CONFIG_VIOMMU_NONE )
-> +        return make_hwdom_viommu_node(kinfo);
-
-So all vIOMMU nodes are created at the position of the first pIOMMU 
-node, right? If so, could it be possible in real life for IOMMUs to sit 
-under different buses (under different parent nodes)?
-
-
-> +#endif
+> +static int arm_vsmmu_decode_ste(struct virt_smmu *smmu, uint32_t sid,
+> +                                struct arm_vsmmu_s1_trans_cfg *cfg,
+> +                                uint64_t *ste)
+> +{
+> +    uint64_t val = ste[0];
 > +
->       /* Skip nodes used by Xen */
->       if ( dt_device_used_by(node) == DOMID_XEN )
->       {
-> diff --git a/xen/arch/arm/include/asm/viommu.h b/xen/arch/arm/include/asm/viommu.h
-> index 844cf34d56..5ae21042f0 100644
-> --- a/xen/arch/arm/include/asm/viommu.h
-> +++ b/xen/arch/arm/include/asm/viommu.h
-> @@ -20,6 +20,7 @@ struct host_iommu {
->       paddr_t size;
->       /* Used for dom0 EVTQ and GERROR interrupts (1-1 IRQ mapping) */
->       uint32_t irq;
-> +    bool hwdom_node_created;
->   };
->   
->   struct viommu_ops {
+> +    if ( !(val & STRTAB_STE_0_V) )
+> +        return -EAGAIN;
+
+I am sorry, but I do not follow why invalid entry ...
+
+
+> +
+> +    switch ( FIELD_GET(STRTAB_STE_0_CFG, val) )
+> +    {
+> +    case STRTAB_STE_0_CFG_BYPASS:
+> +        cfg->bypassed = true;
+> +        return 0;
+> +    case STRTAB_STE_0_CFG_ABORT:
+> +        cfg->aborted = true;
+> +        return 0;
+> +    case STRTAB_STE_0_CFG_S1_TRANS:
+> +        break;
+> +    case STRTAB_STE_0_CFG_S2_TRANS:
+> +        gdprintk(XENLOG_ERR, "vSMMUv3 does not support stage 2 yet\n");
+> +        goto bad_ste;
+> +    default:
+> +        gdprintk(XENLOG_ERR, "Invalid STE config type\n");
+> +        goto bad_ste;
+> +    }
+> +
+> +    cfg->s1ctxptr = smmu_get_ste_s1ctxptr(val);
+> +    cfg->s1fmt = smmu_get_ste_s1fmt(val);
+> +    cfg->s1cdmax = smmu_get_ste_s1cdmax(val);
+> +    if ( cfg->s1cdmax != 0 )
+> +    {
+> +        gdprintk(XENLOG_ERR,
+> +                 "vSMMUv3 does not support multiple context descriptors\n");
+> +        goto bad_ste;
+> +    }
+> +
+> +    return 0;
+> +
+> + bad_ste:
+> +    return -EINVAL;
+> +}
+> +
+> +static int arm_vsmmu_handle_cfgi_ste(struct virt_smmu *smmu, uint64_t *cmdptr)
+> +{
+> +    int ret;
+> +    uint64_t ste[STRTAB_STE_DWORDS];
+
+NIT: Looks like ste[0] is only used today (first 8 bytes), the rest is 
+uninitialised.
+
+> +    struct arm_vsmmu_s1_trans_cfg s1_cfg = {0};
+> +    uint32_t sid = smmu_cmd_get_sid(cmdptr[0]);
+> +
+> +    ret = arm_vsmmu_find_ste(smmu, sid, ste);
+> +    if ( ret )
+> +        return ret;
+> +
+> +    ret = arm_vsmmu_decode_ste(smmu, sid, &s1_cfg, ste);
+> +    if ( ret )
+> +        return (ret == -EAGAIN ) ? 0 : ret;
+
+  ... is treated as success an no-op. The physical STE keeps its old 
+guest_cfg (added by subsequent commit) after the guest invalidates it. 
+Could you please clarify why this is ok. Should not it become abort?
+
+> +
+> +    return 0;
+> +}
+> +
+>   static int arm_vsmmu_handle_cmds(struct virt_smmu *smmu)
+>   {
+>       struct arm_vsmmu_queue *q = &smmu->cmdq;
+> @@ -191,6 +359,7 @@ static int arm_vsmmu_handle_cmds(struct virt_smmu *smmu)
+>           switch ( smmu_cmd_get_command(command[0]) )
+>           {
+>           case CMDQ_OP_CFGI_STE:
+> +            ret = arm_vsmmu_handle_cfgi_ste(smmu, command);
+>               break;
+>           case CMDQ_OP_PREFETCH_CFG:
+>           case CMDQ_OP_CFGI_CD:
 
 
