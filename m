@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D83C8CA6017
-	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2026 10:16:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445003.1661535 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A24BCA9EBE
+	for <xen-devel@archiver.kernel.org>; Sat, 10 Oct 2026 10:16:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1445006.1661543 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFU7s-0005M1-7R; Sat, 10 Oct 2026 10:16:24 +0000
+	id 1xFU7z-0005jt-FZ; Sat, 10 Oct 2026 10:16:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445003.1661535; Sat, 10 Oct 2026 10:16:24 +0000
+Received: by outflank-mailman (output) from mailman id 1445006.1661543; Sat, 10 Oct 2026 10:16:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFU7s-0005Lr-38; Sat, 10 Oct 2026 10:16:24 +0000
-Received: by outflank-mailman (input) for mailman id 1445003;
- Sat, 10 Oct 2026 10:16:23 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xFU7z-0005jj-Az; Sat, 10 Oct 2026 10:16:31 +0000
+Received: by outflank-mailman (input) for mailman id 1445006;
+ Sat, 10 Oct 2026 10:16:30 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <chunjie.zhu@citrix.com>) id 1xFU7q-0005KM-Vi
- for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 10:16:23 +0000
+ (envelope-from <chunjie.zhu@citrix.com>) id 1xFU7y-0005ha-4N
+ for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 10:16:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xFU7q-0044YC-Cb
- for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 12:16:22 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xFU7x-00A73P-HT
+ for xen-devel@lists.xenproject.org; Sat, 10 Oct 2026 12:16:29 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <chunjie.zhu@citrix.com>)
- id 6aca1031-2eae-0a2a0a5409dd-0a2a4506baae-44
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 12:16:22 +0200
-Received: from [40.93.196.50]
- (helo=SA9PR02CU001.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6aca1066-bab6-0a2a0a5309dd-0a2a4509df26-12
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 12:16:29 +0200
+Received: from [40.107.200.27]
+ (helo=CH5PR02CU005.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <chunjie.zhu@citrix.com>)
- id 6aca1075-195a-0a2a45060019-285dc432211c-3
- for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 12:16:22 +0200
+ id 6aca107c-be1a-0a2a45090019-286bc81b868f-3
+ for <xen-devel@lists.xenproject.org>; Sat, 10 Oct 2026 12:16:29 +0200
 Received: from MN2PR03MB5328.namprd03.prod.outlook.com (2603:10b6:208:1e2::7)
  by DS7PR03MB5591.namprd03.prod.outlook.com (2603:10b6:5:2ca::13) with
  Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.17; Sat, 10 Oct
- 2026 10:16:19 +0000
+ 2026 10:16:26 +0000
 Received: from MN2PR03MB5328.namprd03.prod.outlook.com
  ([fe80::2d54:a272:35fa:b154]) by MN2PR03MB5328.namprd03.prod.outlook.com
  ([fe80::2d54:a272:35fa:b154%3]) with mapi id 15.21.0496.017; Sat, 10 Oct 2026
- 10:16:19 +0000
+ 10:16:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,20 +57,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LVt/0Sq1/kO7btGQRs7eN34zFohMbDr7hWvyUmgMNqZwNWx7mfMuL8kGYTQGINQ79OQUiHeYzP/Ak/y5BhtX/otL3Ab6clCeUkYZt7gyu1cP1NdhXL4WNW9YO6PBnkJ1MH9lRTEifL/6sGvjA0+IXLi2dpSVt+CbDlRk/20jtwlo9Bjx5fxa3RBzJewrGmy766oj7bZJDmTP7rkjPBt1fds4+WpJj41JD1H0BP+8NTjAnz1ZBz6JY3rTTCb3twNz1QDkCfFbILM+dDPmbzEoAjaF3zbk+cXoOrd/MKcDD5xf1uWh1qzomdCRBVg8Izxgn02v6KOEddWOD3Tg0/Xz3Q==
+ b=xpEVIvRfiu0uGcPK88LXRRLhLy1v0rjwgF16OUrO5VHaH42j2fPaKD+8mJ1YQF7It/YXkeT3k9S5gjKTBH+MErfvSOn3DOqoXDgqBldakSfw1kzPt2jhP23rX8KZ/8zPRsUSgGZvwc/ofbEACfZ0wSLCJJv6PQuiEZ16871BaVzJNUG9ul40KxHc9v4ZOJaGfM0GKO/JUuQTrs4YlZ/nyujPdLxnrT5kbYb6dIQpY7yMf7YnqPYFi34wpxzaUbha92P9I9rjju79wbGZE3UBfd6+Kuhs0yvAN6izca2Tl/GZSOjG3aJmiBuFY5G5okzG3Rwkyoy/qdLBOppeWchx1w==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dpFZYPmjLYrTEbmLk/yLvFaJ1oQ2qJLie7e4rkLRGzY=;
- b=jNxiYzzzQz8Fn9ah1XO/cB+QgpHEbiuXXFJ9oGSLWC0Zff0PcLClc6bkMjx7mUdCdcTCimBiNIy4htmhyAJFqnBIYOqjhaouljZYjntUIIZ6hS670bpGEiQstRYNjiYWd46aWRlt3cbbDUCc3D3dbqs4cIzjPVB8LYiMAm26xE1JQapaHeciHztwi6MqfF6sQYsVX/S6cPhJaEFzCLmjUQ6RcveFkngfv5DWETiobmBEUea+65GwJlAV75pSDYDjyV/aR+UQg0wItd4HSn7Gx7fCU8vEWw+BSCB3aAXBA/eK/DCs+nxJuwYJuxMEOJSZpMUx8GFT11/NNFpw4aIOkQ==
+ bh=84G7VyoSq6ahE+el+e03faUCiDHk31YLBplLXYBqCOI=;
+ b=Jcd5vmhW4e8BzO6SyCRTU9mvdiKXvjptai2SFuosC0H2RgdTNwn/vKqiWF4YW8eDzTUXTR31BdLJvuU/u51ocbxJ3t+L93nYiPJiSCihUnfYtdTOxMByR7JHI4D5j9x3+vkjpeGXi53DVbFKrRbY1n96h1sHGx+x7oi361vhriD6G57bCDpPXi+7bK0nWvJnDBxMHfDjuEOdwgmGF3gjmY4VjLDGtmdiyFl58/GgGbsrpp1S6DNmGvrvQrgEgCsIzHY/piSP4VVEGPJ+3p439AMVU25EruOfDEB56U8DpITEY2pGO/F9oPwNr0VX3CZOXWdmVoD4Qw+4uxg3JEbYTA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dpFZYPmjLYrTEbmLk/yLvFaJ1oQ2qJLie7e4rkLRGzY=;
- b=z7x15iiXS7YLCB24wDuBDLVC+EThTn2K1bUMBAB8zeY5Ixz+loWzUFhPKwPvY48TYueNNR9vnmVOh3da+dZKFTL36qGgSzxXXv86oX4uwh3e2AcLjIMsZd56IIkQdMovT16rw9q2vc8NBVVoi1HSUeZ1MN89fFlOnxc8/nBUCbc=
+ bh=84G7VyoSq6ahE+el+e03faUCiDHk31YLBplLXYBqCOI=;
+ b=t6EU9Spm6lYKDgRkobOEJ5u5tn43EsHTEavrJ3qpMXr83502D/B0nWiYAWgt7lEVwBc3+ePD4gPPrI5chWlCMchZCd3C3gBo5TE0oOYZVdQnRtuArwUXXK89RCYDl2UPz7TKQjjGE94svvy3hrpT1IUIMT591TjeGEsmUu8cxTQ=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 From: chunjie.zhu@citrix.com
@@ -84,275 +84,152 @@ Cc: ross.lagerwall@citrix.com,
 	stephen.cheng@citrix.com,
 	lin.liu01@citrix.com,
 	Chunjie Zhu <chunjie.zhu@citrix.com>
-Subject: [PATCH v2 11/13] x86/nestedsvm: update vmrun without pending or deferred
-Date: Sat, 10 Oct 2026 18:13:24 +0800
-Message-Id: <2ad85517317a823d22ca5fc02fcb7ee1432b9ec8.1791625578.git.chunjie.zhu@citrix.com>
+Subject: [PATCH v2 12/13] x86/nestedsvm: remove nv_vmentry_pending
+Date: Sat, 10 Oct 2026 18:13:25 +0800
+Message-Id: <c2702630e43055d0bf45b400d69114ef3b4d7cc9.1791625578.git.chunjie.zhu@citrix.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1791625578.git.chunjie.zhu@citrix.com>
 References: <21b02d5c-4e21-43fb-b371-201a125bfdbb@citrix.com> <cover.1791625578.git.chunjie.zhu@citrix.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: KU0P306CA0070.MYSP306.PROD.OUTLOOK.COM
- (2603:1096:d10:23::13) To MN2PR03MB5328.namprd03.prod.outlook.com
+X-ClientProxiedBy: KU2P306CA0074.MYSP306.PROD.OUTLOOK.COM
+ (2603:1096:d10:3a::14) To MN2PR03MB5328.namprd03.prod.outlook.com
  (2603:10b6:208:1e2::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
 X-MS-TrafficTypeDiagnostic: MN2PR03MB5328:EE_|DS7PR03MB5591:EE_
-X-MS-Office365-Filtering-Correlation-Id: a251c11a-e4a1-4349-4ee5-08df26b786b5
+X-MS-Office365-Filtering-Correlation-Id: 26a91fac-e4d6-4152-0e84-08df26b78b09
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
 	BCL:0;ARA:13230040|366016|1800799024|376014|23010399003|4143699003|56012099006|11063799006|22082099003|18002099003|10067099003|261009223027099003;
 X-Microsoft-Antispam-Message-Info:
-	XI5jg4/UDO0KZ4UnRl3rJgGvjmcBSNoEosdZedNvK0A80wP9AUTaqOedpJLfC27zqSsQsmBdmKikWG8KnbewHH/ea8Ddg10WanQYs482tHozLofRnN1eYsKQstsaRv+4hHUAvslpZ0z4xHBIfg8SUiLJkQw9shB/KGdSiAWlJyWXsSfMXKkxi+cV9Fvk7WFGa3XjLDngiS77PZYauPj1w+aMenSBu8gHhbcb4R/xkbi+fI3YctvFMlvyrm4OaDnqUOITCo6cAXKf50VqNCcIL56P7Z1WvUSlClVmqe4I5Q0G+7HGETUEqZJjImNzMgDDgU2k40YQ35565VpwV+lwBGQt5Ifn/7KFG4OmrRe5KgFGAjqqdknMSjkX9oEkEHIca5z31pF77eYCkiKleyu3qB1yLBpWoFVaaDFQNbu0xmDCf3b/oeek1GriIzfuU3rPwMAK07/kwDSLgUtYqr4SfokA/ND66edJ9n/pfzWdCSoSaGvGuxvhS3ArtaehR+KK/2riv8AR3UgDY/6n1yIrn/NlRfETNQVwMkDFKJvtK5x/k29aw1VVXgYWZZ3A9em4kAaEaJHbgRVedl9SS8nsolbM4yD/XCqVLeeVPMSU5nUm/qA8BBVJ6cckfvTqsSJJArgmQ9ZinYzQiteb8ZPjxE31v9yFMRyZa01y+/6RxsY=
+	2iElmtdqJOAGpoks50hl6mlSWKKAc7+1NAEQatSGq5/iowt5+EaGcucFEOuGu0rTa0eAqzmRq9OVfgrP8kw+f8IYCT4kcqru/lLF9wlYHGrtTN7qkH6I325P3iBkigKy0TD7GoCQrx2gRaaGv8vQ+HZaVkt2BmJfn3++kuDhddlaQZd9sr9MHLUCqoZGIfQJwyHIFS9wbJSe9V3DApRbLSh+OYLDvnHhugJUxeUpikMvYYqo5XYcvYl84i4UXbWjVZx+yUyQjNRFgzq5zCbciXVAgxhRe+uykcKMQ4Zi2dWroy3Ad/v+QJ0vBKjhRBODpfqXZTXHar4gZKji/ZdYFmw+/CSpCfUfuiwjF29J1sPfdkXJLRFWvYnOxEpDrwGfKoDX2CYpyCeNCvIPBFFymUoRPsYl03VmWGq7cF9kcrK0CCmdMNsm5Y7Vzeho7CK9UimPDCWL38n/s/DqyEBKcf2aKjKOHnealE/VTukqYYK/G8xC4RFLf+qrSykpFIeukkfdFf8clWBNszebg+3rxx0ji7ehO3Ja3b6MkRYMPrzBeATQuEUODDxBrVAiMsXdGbbGKeUIIwT26k/+j0iEjV0ElEEp8Ph/Z/psQ99R7z6I+YDNQEA0BdrkcvzfQBfIe5lZI7TDHkPvA/PiuQ6mhjgT/UljzqWSmQ1J6Fc/07Q=
 X-Forefront-Antispam-Report:
 	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:MN2PR03MB5328.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(23010399003)(4143699003)(56012099006)(11063799006)(22082099003)(18002099003)(10067099003)(261009223027099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?9ggxsVFS9APJH6lcoeCURNCJewxQoeT8ehmv17bgxsCOF9v2+wP/kjHL4xh4?=
- =?us-ascii?Q?3rnMG14XqcV8gY6pq6uIPyP4et1vfi2bOOAubALJal5Pajlf7Mu4sdIaS3yT?=
- =?us-ascii?Q?yXiZRQpgcJeRsGmApApGbfXm2IHplf0JlZV0a7rw7VzRewe6R8u/hZ7nDH7I?=
- =?us-ascii?Q?0iwSgyrI4FGeplVOlE3ZKSU4Xp1pKl20My31DVfxtORPG9Bv18dHTFZUA0BP?=
- =?us-ascii?Q?uUurteu0OD5FpfeV3NS15WaMc1UenbWqenpSiUNn5hG2rDjlZ6BiXBbZlsRT?=
- =?us-ascii?Q?I9kVmCZ6KTCMZOipD3qoNk25oo9dmZtpGKo/PuFSxmaXv4FbwRhv3zbZ32gv?=
- =?us-ascii?Q?Lm5B2MS5Cs1thmRhrVcmP+bALtmuxUgHEDhwLpbLngwp2wC0bKqaYzOmKtjS?=
- =?us-ascii?Q?uO8BzqMkvWYnHwcLhZAVMxbB0PVAeZZGWG9HU3eHYeH11tSLcu6QDyBL170o?=
- =?us-ascii?Q?AyeUKxan9fK/FqPYcUXl1NJTkxvh2PAB3Fn5t0l//ly+T/Hp/ZAIBtWWfnc7?=
- =?us-ascii?Q?8Al0lj6odgnw6xj+0VqBlG0O/JeLAYCeIAqKPXbBV9LLtPbi0mDKNPGffnnk?=
- =?us-ascii?Q?55Xa8twNEHqF0csBocQTukI9mvlmm5k3tQMKOojO0o3fhvy2UqP7BrzQI+aX?=
- =?us-ascii?Q?SXsTmMKMEl6NftZJBWDoCBgsDSBFhpcv2uGz7GY2IX6byoDGxrVjffqKL08E?=
- =?us-ascii?Q?JzD49t00+A1JWpvJNvhSMnPhQ1LPk+9MaZdnDTTR4YsC+2OeM8ekLUSj0A9P?=
- =?us-ascii?Q?cO4huWJXUrzvmQAo8zndIrYpdx38LlyeXR56G3EpWT0/xDITDhPcKwgyhjba?=
- =?us-ascii?Q?NmJAICWg+iR4Xrr93HP/js1yV2ui+4HBvZLEproFsj9L++W/t+Nr/Zp3jpf7?=
- =?us-ascii?Q?/sVtFYEMZzhvfoYBF3oOdTEHbQbLGSZqk5ARL3Km378RCl1JUu6m0gHo9+r0?=
- =?us-ascii?Q?xb79ojSIWj5gS+eZkwLMI4ryZ5GSysAbrD3u3/xdi2NDhzPRO8lBmY5sQ0GD?=
- =?us-ascii?Q?Di0MUW9snFs+CRbz+pbFsiFfCitwm8terjPuJMuZUW8MLfybu9VlaSo89Ux8?=
- =?us-ascii?Q?M6wKJ33EfxLGVcVQGxaI+DqVNXJm0lmB+lAamEo/zwjERk9pstt6qhl1Ji4Z?=
- =?us-ascii?Q?SL6ksThDGS8wGOHsBPGMwIxiYWYtlZv14KpAuwYLvKGRPJR6uDs30C3SV08z?=
- =?us-ascii?Q?ARJ8C7kkxdmF2is1maPXtPuQ9VyYYWkIht0xu0z8EsIz0nc3tKRNweCTAAOk?=
- =?us-ascii?Q?J0W+ZFbxNaEvVXCtz1tRb3s2qvp4nspcn+iqX+/zsYMpgp+FwmdxlHJNfCuR?=
- =?us-ascii?Q?FBlCjn+etimIZ+n9wwU9BglIZ5En+b8gXyoLtn2s0BSLnozpJBSsZa595s5o?=
- =?us-ascii?Q?axmOi1UlrcMArix7y4c/AtRkWnKA3//sHph0Jg7CpL2AhWKKgM7bC9Wa64JZ?=
- =?us-ascii?Q?nVQ4NSxj/WGSajgs4leylkQGlgxEv6gAjGGCjxDCmotXwSbrElzsB0LRVRit?=
- =?us-ascii?Q?KaLYRCox+MvyK/E+Xaein984xsiHYt3/VEPgKPyMkSgwzRqYG4I7mFTl+jmp?=
- =?us-ascii?Q?vQSDpKbIwNKRe/SMU0MAsAX4AxQ/93Tu/3Up6StNUpEYlr97LuvTFW1Os/8i?=
- =?us-ascii?Q?okFwv2g3mmtUVIE19Z6w1qJkxARk+uSJFM3aM5epzHRZX21fPIZ7lTvn3iQF?=
- =?us-ascii?Q?NrXsM15YYfZ4KKNXjzBlLi0cnrwHVpklvfyChoS9XjuLCcqiCpk5CcppE2rd?=
- =?us-ascii?Q?9RZLDVC0oA=3D=3D?=
+	=?us-ascii?Q?IJfnkZk2/KOs4ApXr1veOoCSsJ0x1FWyLqKRxL2qGBcjIcUHsVCvWDW488lQ?=
+ =?us-ascii?Q?jI1dHW4+nO24zzbcP+Uc+lMxKu30FCUl16uqfwUklxJKjTb81AQGu5rWTLC9?=
+ =?us-ascii?Q?3Cez9NsdlUnmfiBLp0f7BxL90CzYlmnLOCUI3LOd1HmWUPh3neD9fw8ST6QO?=
+ =?us-ascii?Q?CG0NxM1HW6GJyIhVpy/P1w7f0QmTpkxIXcMUnumNb3Yw631fC/Kn/lyE1kFf?=
+ =?us-ascii?Q?9SyYVioLYdsEkf5vLCDuzrgSCBVzS3iUcZ7R5VlyfsXpRZqBEPiYfZxM7EG0?=
+ =?us-ascii?Q?StpFTV/qARiDMlzduIawTBmczZ2ODycoS54NWP5Kbd7B/RJJkNInEhQbo9Cv?=
+ =?us-ascii?Q?4h5uTFt7uA06UzMpBpC6lW02qoxZYeDXbgjsDmimG+oNLF2ZgiIkquDJtLYp?=
+ =?us-ascii?Q?WdUiAVmy4XWaQnPP4aSs/q8TCMZ0ujPRrtbTKVBjQHN0Kg5pzMJFCE1VV/C5?=
+ =?us-ascii?Q?AOu4wMUW0YRJSUvV+2qMYQz8cAr7jBDVmFzScZXoUo5DaYjXAQAlZ1kNrCR0?=
+ =?us-ascii?Q?CgjtpJdwGL0OFjFES7iDXQoRcthNziWpRBGH+Oly4ObubSQJHsFW22dAIzDT?=
+ =?us-ascii?Q?3nyI2LAnr0Yn0f4OPLDzJ+SIN23ybYfjyZ2Ms0UpC1C5wxbUeAx4LndungAR?=
+ =?us-ascii?Q?7z0HTjqxPKNQs84eacP5EhTJMVDyGN9jLJoaiAHU1UcznVlILu7ubt6X8S2/?=
+ =?us-ascii?Q?TN2+egkGcLL5HyxaNNDbitpIHhi+6I2eJLS2XOwUjncyiYbg1cnUm/fQ4ztC?=
+ =?us-ascii?Q?wX/dw/8WAhQElqR4VL5lKxxfIbtqh3RcZD7fos2aK3PQQtjUVhL5/IWe1TD0?=
+ =?us-ascii?Q?UulnQvDxQudqy4jQ3t0TPkaz1CUJOey8rgnESkPro6mSaJ0O7P4b2dHjRZSm?=
+ =?us-ascii?Q?suj4K+pXIKDcOjzjUkKyu+MaeMjoNkLjAx8kDRs6IsCsgy91grmK/iTMeXXy?=
+ =?us-ascii?Q?bdmNAshCbnI3IUcBUewc8jUKl1ecnvkoHIZGGpEruIkmkj19d03wdBds+hyc?=
+ =?us-ascii?Q?N/Xs6CXa91v2X0lchtXsFi7vnNZtZlU7cc7sP5tOy/be+e4d8AowFSSdLsxo?=
+ =?us-ascii?Q?m0mfyLuCcmH0SBvu/WnfLTlscz6vwocKp5NUiwXkUxj1FsxfkpbHTfW5oyjq?=
+ =?us-ascii?Q?sL08zdioPfCHgX1foXx6EOpFpG3m9T4rbJIRhg4ytKjF3t+BdIrCPGiweK4i?=
+ =?us-ascii?Q?X/TTwgPSB316F7+PSfZn8ThCko7OskAMAzYFI0BoQVixn7SKXnNz6iAnJHWw?=
+ =?us-ascii?Q?8zIYnsyzgH+W0lKPtTGR4JV8ZxAClLL8o/3SbjLamKqKZqII/kOBPWkRXvyo?=
+ =?us-ascii?Q?GWJGyRM3ftdOKuwW5q3cw5ky6xyVRqYi6pQ2PNA5qFfqAntAyfySZ1y2RIYc?=
+ =?us-ascii?Q?n5SOWJjuYHwR0ZCSNnkaqNrHUtvuZdI/Gy9Juj4q3FkA4UD6tBMydxA/3p+T?=
+ =?us-ascii?Q?EqPr7QD2q5NUN86NFof6KBsiFeWghUHr/PozVztEjeeUHtoLWWPtkJszEXor?=
+ =?us-ascii?Q?NJKTQ4CpbtKBifqConhvtWAEzSN/3kGkp8cMk2WpUsdMx7/X0EOKIm/EU/O9?=
+ =?us-ascii?Q?kqhRWseRUn5k9jUXKHpP31WOGsCdSPDTuZ8R7tR5az2CuI30cwWaPbb4SB3I?=
+ =?us-ascii?Q?Lu1zJeh2sLY2qDZkVCbW8huXELLVdSEOEisXfAaDZEAcKdyWvBi/UaBpgs1v?=
+ =?us-ascii?Q?0VaMwaEiBPPD+pkI7uQpBkPF2dJJ2fcU8xL6Z1la/1ycaknNYtnPURWhj2Ah?=
+ =?us-ascii?Q?6f9CaXPtLQ=3D=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a251c11a-e4a1-4349-4ee5-08df26b786b5
+X-MS-Exchange-CrossTenant-Network-Message-Id: 26a91fac-e4d6-4152-0e84-08df26b78b09
 X-MS-Exchange-CrossTenant-AuthSource: MN2PR03MB5328.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2026 10:16:19.3873
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 10 Oct 2026 10:16:26.7089
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: e4n7zzW0pl2Oh386VaELYDhWxtzR31yOG6cpTLl/yybnQQoU+yBKVdRYsqrtYYnYf5B/w6TZ/ajnmP3JLLLi8g==
+X-MS-Exchange-CrossTenant-UserPrincipalName: DaEHV5OvFoM9TZ374/IYUsF65g/7iTqTfy7dj/VkVFRH+EPWsbD9XCin4eHbzqbUuJgbaFmtIq21pfTkJaapOA==
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS7PR03MB5591
-X-purgate-ID: tlsNG-16d1c6/1791627382-1FCCD77B-BCF8292D/0/0
+X-purgate-ID: tlsNG-bad1c0/1791627389-39AC0034-C970A118/0/0
 X-purgate-type: clean
-X-purgate-size: 7105
+X-purgate-size: 2570
 
 From: Chunjie Zhu <chunjie.zhu@citrix.com>
 
 Signed-off-by: Chunjie Zhu <chunjie.zhu@citrix.com>
 ---
 Changes in v2:
- - Fold the nested p2m related part of the v1 "fix up" patch in here:
-   nsvm_vcpu_update_nestedp2m() now clears nv->stale_np2m before checking
-   whether the host CR3 needs updating, so a concurrent flush that sets it
-   again is not lost.
- - Rebased on top of the preceding patches; no other functional change.
+ - No functional change, rebased only.
 
- xen/arch/x86/hvm/svm/entry.S      | 48 +++++++++++++++++++++++--------
- xen/arch/x86/hvm/svm/nestedhvm.h  |  1 +
- xen/arch/x86/hvm/svm/nestedsvm.c  | 33 ++++++++++++++++++++-
- xen/arch/x86/hvm/svm/svm.c        | 11 +++++--
- xen/arch/x86/x86_64/asm-offsets.c |  1 +
- 5 files changed, 79 insertions(+), 15 deletions(-)
+ xen/arch/x86/hvm/svm/intr.c      | 18 ------------------
+ xen/arch/x86/hvm/svm/nestedsvm.c | 23 -----------------------
+ 2 files changed, 41 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/svm/entry.S b/xen/arch/x86/hvm/svm/entry.S
-index d9613a2a8fed..59d865635fd5 100644
---- a/xen/arch/x86/hvm/svm/entry.S
-+++ b/xen/arch/x86/hvm/svm/entry.S
-@@ -28,31 +28,51 @@ FUNC(svm_asm_do_resume)
-         GET_CURRENT(bx)
- .Lsvm_do_resume:
-         call svm_intr_assist
--        call nsvm_vcpu_switch
--        ASSERT_NOT_IN_ATOMIC
+diff --git a/xen/arch/x86/hvm/svm/intr.c b/xen/arch/x86/hvm/svm/intr.c
+index 4b0debfa9a2e..7f6cafb6db78 100644
+--- a/xen/arch/x86/hvm/svm/intr.c
++++ b/xen/arch/x86/hvm/svm/intr.c
+@@ -77,24 +77,6 @@ static void svm_enable_intr_window(struct vcpu *v, struct hvm_intack intack)
  
--        mov  VCPU_processor(%rbx),%eax
--        lea  irq_stat+IRQSTAT_softirq_pending(%rip),%rdx
-+        /*
-+         * The nested p2m repair below may need to take nestedp2m_lock and
-+         * issue synchronous cross-CPU TLB flush IPIs, doing this with
-+         * interrupts disabled can deadlock.
-+         */
-         xor  %ecx,%ecx
--        shl  $IRQSTAT_shift,%eax
--        cli
--        cmp  %ecx,(%rdx,%rax,1)
--        jne  .Lsvm_process_softirqs
+     ASSERT(intack.source != hvm_intsrc_none);
+ 
+-    if ( nestedhvm_enabled(v->domain) )
+-    {
+-        struct nestedvcpu *nv = &vcpu_nestedhvm(v);
 -
-         cmp  %cl,VCPU_nsvm_hap_enabled(%rbx)
- UNLIKELY_START(ne, nsvm_hap)
-+        cmpb $0,VCPU_nhvm_guestmode(%rbx)
-+        UNLIKELY_DONE(z, nsvm_hap)
-+        cmpb $0,VCPU_nhvm_stale_np2m(%rbx)
-+        jne  .Lsvm_update_nestedp2m
-         cmp  %rcx,VCPU_nhvm_p2m(%rbx)
-         sete %al
-         test VCPU_nhvm_guestmode(%rbx),%al
-         UNLIKELY_DONE(z, nsvm_hap)
-+.Lsvm_update_nestedp2m:
-         /*
--         * Someone shot down our nested p2m table; go round again
--         * and nsvm_vcpu_switch() will fix it for us.
-+         * The nested p2m table is stale, fix it here.
-          */
--        sti
-+        mov  %rbx,%rdi
-+        call nsvm_vcpu_update_nestedp2m
-         jmp  .Lsvm_do_resume
- __UNLIKELY_END(nsvm_hap)
+-        if ( nv->nv_vmentry_pending )
+-        {
+-            struct vmcb_struct *gvmcb = nv->nv_vvmcx;
+-
+-            /* check if l1 guest injects interrupt into l2 guest via vintr.
+-             * return here or l2 guest looses interrupts, otherwise.
+-             */
+-            ASSERT(gvmcb != NULL);
+-            intr = vmcb_get_vintr(gvmcb);
+-            if ( intr.fields.irq )
+-                return;
+-        }
+-    }
+-
+     TRACE(TRC_HVM_INTR_WINDOW, intack.vector, intack.source,
+           vmcb->event_inj.v ? vmcb->event_inj.vector : -1);
  
-+        ASSERT_NOT_IN_ATOMIC
-+
-+        mov  VCPU_processor(%rbx),%eax
-+        lea  irq_stat+IRQSTAT_softirq_pending(%rip),%rdx
-+        xor  %ecx,%ecx
-+        shl  $IRQSTAT_shift,%eax
-+        cli
-+        cmp  %ecx,(%rdx,%rax,1)
-+        jne  .Lsvm_process_softirqs
-+
-+        cmp  %cl,VCPU_nsvm_hap_enabled(%rbx)
-+        je   .Lsvm_vmenter
-+        cmpb $0,VCPU_nhvm_guestmode(%rbx)
-+        je   .Lsvm_vmenter
-+        cmpb $0,VCPU_nhvm_stale_np2m(%rbx)
-+        jne  .Lsvm_retry_nestedp2m
-+
-+.Lsvm_vmenter:
-+
-         call svm_vmenter_helper
- 
-         clgi
-@@ -148,4 +168,8 @@ __UNLIKELY_END(nsvm_hap)
-         sti
-         call do_softirq
-         jmp  .Lsvm_do_resume
-+
-+.Lsvm_retry_nestedp2m:
-+        sti
-+        jmp  .Lsvm_do_resume
- END(svm_asm_do_resume)
-diff --git a/xen/arch/x86/hvm/svm/nestedhvm.h b/xen/arch/x86/hvm/svm/nestedhvm.h
-index 9bb04a043430..e22ef259c171 100644
---- a/xen/arch/x86/hvm/svm/nestedhvm.h
-+++ b/xen/arch/x86/hvm/svm/nestedhvm.h
-@@ -41,6 +41,7 @@ void cf_check nsvm_vcpu_destroy(struct vcpu *v);
- int cf_check nsvm_vcpu_initialise(struct vcpu *v);
- int cf_check nsvm_vcpu_reset(struct vcpu *v);
- int nsvm_vcpu_vmrun(struct vcpu *v, struct cpu_user_regs *regs);
-+void nsvm_vcpu_update_nestedp2m(struct vcpu *v);
- int cf_check nsvm_vcpu_vmexit_event(struct vcpu *v,
-                                     const struct x86_event *event);
- uint64_t cf_check nsvm_vcpu_hostcr3(struct vcpu *v);
 diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index 3b0afb828c91..09a2187ac7e0 100644
+index 09a2187ac7e0..da5cd4848bb6 100644
 --- a/xen/arch/x86/hvm/svm/nestedsvm.c
 +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -356,6 +356,37 @@ static void nestedsvm_vmcb_set_nestedp2m(struct vcpu *v,
-     n2vmcb->_h_cr3 = pagetable_get_paddr(p2m_get_pagetable(p2m));
- }
- 
-+void nsvm_vcpu_update_nestedp2m(struct vcpu *v)
-+{
-+    struct nestedvcpu *nv;
-+    struct nestedsvm *svm;
-+    struct vmcb_struct *vvmcb, *n2vmcb;
-+    struct p2m_domain *p2m;
-+
-+    ASSERT(v != NULL);
-+
-+    nv = &vcpu_nestedhvm(v);
-+    svm = &vcpu_nestedsvm(v);
-+    vvmcb = nv->nv_vvmcx;
-+    n2vmcb = nv->nv_n2vmcx;
-+
-+    if ( !nestedhvm_paging_mode_hap(v) )
-+        return;
-+
-+    p2m = p2m_get_nestedp2m(v);
-+    nv->stale_np2m = false;
-+
-+    /*
-+     * This may happen if we've handled VMEXIT_NPF at the same time as a
-+     * nested flush IPI from another CPU.  We've got a different P2M so the
-+     * host CR3 needs updating.
-+     */
-+    if ( svm->ns_vmcb_hostcr3 != vvmcb->_h_cr3 ||
-+         n2vmcb->_h_cr3 !=
-+         pagetable_get_paddr(p2m_get_pagetable(p2m)) )
-+        nestedsvm_vmcb_set_nestedp2m(v, vvmcb, n2vmcb);
-+}
-+
- static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
- {
-     struct nestedvcpu *nv = &vcpu_nestedhvm(v);
-@@ -511,7 +542,7 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
-         /* host nested paging + guest nested paging. */
-         vmcb_set_np(n2vmcb, true);
- 
--        nestedsvm_vmcb_set_nestedp2m(v, ns_vmcb, n2vmcb);
-+        nsvm_vcpu_update_nestedp2m(v);
- 
-         /* hvm_set_cr3() below sets v->arch.hvm.guest_cr[3] for us. */
-         rc = hvm_set_cr3(ns_vmcb->_cr3, false, true);
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 5aeffd5e416f..cb09e924dcd3 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -2129,6 +2129,8 @@ static void
- svm_vmexit_do_vmrun(struct cpu_user_regs *regs,
-                     struct vcpu *v, uint64_t vmcbaddr)
- {
-+    int rc;
-+
-     if ( !nsvm_efer_svm_enabled(v) )
-     {
-         hvm_inject_hw_exception(X86_EXC_UD, X86_EVENT_NO_EC);
-@@ -2142,8 +2144,13 @@ svm_vmexit_do_vmrun(struct cpu_user_regs *regs,
+@@ -1407,31 +1407,8 @@ void asmlinkage nsvm_vcpu_switch(void)
+     vmexit:
+         nestedsvm_vcpu_vmexit(v, regs, svm->ns_vmexit.exitcode);
+         nv->nv_vmexit_pending = 0;
+-        nv->nv_vmentry_pending = 0;
          return;
      }
- 
--    vcpu_nestedhvm(v).nv_vmentry_pending = 1;
--    return;
-+    rc = nsvm_vcpu_vmrun(v, regs);
-+    if ( rc )
-+    {
-+        if ( nestedsvm_vcpu_vmexit(v, regs, VMEXIT_INVALID, 0, 0) ==
-+             NESTEDHVM_VMEXIT_FATALERROR )
-+            domain_crash(v->domain);
-+    }
+-
+-    if ( nv->nv_vmentry_pending )
+-    {
+-        int ret;
+-        ASSERT(!nv->nv_vmexit_pending);
+-        ret = nsvm_vcpu_vmrun(v, regs);
+-        if ( ret )
+-            goto vmexit;
+-
+-        ASSERT(nestedhvm_vcpu_in_guestmode(v));
+-        nv->nv_vmentry_pending = 0;
+-    }
+-
+-    if ( nestedhvm_vcpu_in_guestmode(v) && nestedhvm_paging_mode_hap(v) )
+-    {
+-        /* In case left the l2 guest due to a physical interrupt (e.g. IPI)
+-         * that is not for the l1 guest then we continue running the l2 guest
+-         * but check if the nestedp2m is still valid.
+-         */
+-        if ( nv->nv_p2m == NULL )
+-            nestedsvm_vmcb_set_nestedp2m(v, nv->nv_vvmcx, nv->nv_n2vmcx);
+-    }
  }
  
- static void
-diff --git a/xen/arch/x86/x86_64/asm-offsets.c b/xen/arch/x86/x86_64/asm-offsets.c
-index baf266ab8013..772d1959e5a5 100644
---- a/xen/arch/x86/x86_64/asm-offsets.c
-+++ b/xen/arch/x86/x86_64/asm-offsets.c
-@@ -129,6 +129,7 @@ void __dummy__(void)
- 
-     OFFSET(VCPU_nhvm_guestmode, struct vcpu, arch.hvm.nvcpu.nv_guestmode);
-     OFFSET(VCPU_nhvm_p2m, struct vcpu, arch.hvm.nvcpu.nv_p2m);
-+    OFFSET(VCPU_nhvm_stale_np2m, struct vcpu, arch.hvm.nvcpu.stale_np2m);
-     OFFSET(VCPU_nsvm_hap_enabled, struct vcpu, arch.hvm.nvcpu.u.nsvm.ns_hap_enabled);
-     BLANK();
- #endif
+ /* Interrupts, Virtual GIF */
 -- 
 2.34.1
 
