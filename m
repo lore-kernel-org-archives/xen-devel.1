@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 812BACC6B33
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4D24ACC6B34
 	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 12:06:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445731.1665833 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1445727.1665823 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKEI-00071p-1r; Thu, 15 Oct 2026 12:06:38 +0000
+	id 1xHKEH-0006qb-Db; Thu, 15 Oct 2026 12:06:37 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445731.1665833; Thu, 15 Oct 2026 12:06:37 +0000
+Received: by outflank-mailman (output) from mailman id 1445727.1665823; Thu, 15 Oct 2026 12:06:37 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKEH-0006zY-Qq; Thu, 15 Oct 2026 12:06:37 +0000
-Received: by outflank-mailman (input) for mailman id 1445731;
- Sun, 11 Oct 2026 19:04:11 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xHKEH-0006pH-8H; Thu, 15 Oct 2026 12:06:37 +0000
+Received: by outflank-mailman (input) for mailman id 1445727;
+ Sun, 11 Oct 2026 19:04:08 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <netdev-bot+sashiko@kernel.org>) id 1xFyqB-000469-Od
- for xen-devel@lists.xenproject.org; Sun, 11 Oct 2026 19:04:11 +0000
+ (envelope-from <netdev-bot+sashiko@kernel.org>) id 1xFyq8-000455-So
+ for xen-devel@lists.xenproject.org; Sun, 11 Oct 2026 19:04:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xFyqB-00CH6J-5d
- for xen-devel@lists.xenproject.org; Sun, 11 Oct 2026 21:04:11 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xFyq7-007fhG-BJ
+ for xen-devel@lists.xenproject.org; Sun, 11 Oct 2026 21:04:07 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <netdev-bot+sashiko@kernel.org>)
- id 6acbdd99-e002-0a2a0a5209dd-0a2a4501cc46-10
- for <xen-devel@lists.xenproject.org>; Sun, 11 Oct 2026 21:04:11 +0200
+ id 6acbdd67-8faa-0a2a0a5109dd-0a2a4507b238-28
+ for <xen-devel@lists.xenproject.org>; Sun, 11 Oct 2026 21:04:07 +0200
 Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <netdev-bot+sashiko@kernel.org>)
- id 6acbdda9-5984-0a2a45010019-ac6904febc18-3
- for <xen-devel@lists.xenproject.org>; Sun, 11 Oct 2026 21:04:10 +0200
+ id 6acbdda6-b4ea-0a2a45070019-ac6904febda2-3
+ for <xen-devel@lists.xenproject.org>; Sun, 11 Oct 2026 21:04:07 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 9AE8A602C3;
- Sun, 11 Oct 2026 19:04:09 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id DE4261F0089B;
- Sun, 11 Oct 2026 19:04:07 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id BC14D601E4;
+ Sun, 11 Oct 2026 19:04:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 4241F1F0089B;
+ Sun, 11 Oct 2026 19:04:04 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,17 +52,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Subject:From:To:Cc:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791745449;
-	bh=4vxOlSiy9OgWc0Y0eZ4LnuQ00GAjNw7bsz9uahntp8s=;
+	s=k20260515; t=1791745445;
+	bh=Ig+0+y+f6lfiozGzYQzbwtDL6sxb4GUQ6Cp/t/tcq3s=;
 	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=CjY4UeAJxeRG+6zxZ2JMQ37NUAAJU7B0QFD0x9u4mXCWNj3x6vTki4Ex4jmP5nmTr
-	 nEldysQH5Y/i+i6Ds1cl7TMCoF4zbdO7g9CiGRvRY0SLb70r/ihN0mDoEIRqtoYn3w
-	 2uzBXoO+p4seJUiCIHK2K9XYeWjuiQQAxemBKvKRSUv+qTLZogLvdD8pFDes31UBO/
-	 qqqUxMv4TP2EuoPSEBNUPyElJS9DYJKkxV4am0zKNhEx33NSG7p9azBdb6wpDNxnk6
-	 PRlz/r8bMcy04afRZ+RkwV6mpYk6jovQOrSnOeAcoCdhP2F5rRABrdly4WqTQ13wd+
-	 m9WvDT+KPx5QA==
-Subject: Re: [PATCH net-next 8/9] qlcnic: use pskb_may_pull() to pull excess
- TX frags into the head
+	b=BZo2F/SwAn3E6EeHf7x+ECDWtVASPkWlWNzltBFSHAwoxQnOlT+nh1NASgrpE4PGO
+	 lZQJ4xmjJ39tPWzPWN99gpIMFwxDgHEVLl8vW+139XhWKJoem1PGY312qI1g10Ubhz
+	 jX2cHNndfHdZo5gAY8Nz9UtzxUb2LGjZ5ZaqGV3HG3JWhA4HpZMHhde5fFLf0wPGiv
+	 WnfkWQSQTZa3/h1B9bg3CDJ3KZnuk8xPoWmwECdRyAI7EEfq6BGXDkog+blD6JuDSL
+	 KISORjp/9xhmHxYaTyNNpF0/gThUv4mpigBSi66Ksw1rhYxCevY2lkJHqHQXsNHnPx
+	 TILMeHZD3vnCA==
+Subject: Re: [PATCH net-next 6/9] e1000e: use pskb_may_pull() in the 82571/2/3
+ TSO workaround
 From: netdev-bot+sashiko@kernel.org
 To: josef@toxicpanda.com
 Cc: kuba@kernel.org, pabeni@redhat.com, edumazet@kernel.org,
@@ -74,19 +74,19 @@ Cc: kuba@kernel.org, pabeni@redhat.com, edumazet@kernel.org,
  horms@kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
  linux-rdma@vger.kernel.org, xen-devel@lists.xenproject.org,
  intel-wired-lan@lists.osuosl.org
-Date: Sun, 11 Oct 2026 19:04:07 +0000
-Message-ID: <179174544742.434549.15432453849443944349@kernel.org>
+Date: Sun, 11 Oct 2026 19:04:03 +0000
+Message-ID: <179174544385.434549.3694135096916688968@kernel.org>
 In-Reply-To:
- <20261007-b4-pskb-pull-tail-drivers-v1-8-9512b0fb977b@toxicpanda.com>
+ <20261007-b4-pskb-pull-tail-drivers-v1-6-9512b0fb977b@toxicpanda.com>
 References:
- <20261007-b4-pskb-pull-tail-drivers-v1-8-9512b0fb977b@toxicpanda.com>
+ <20261007-b4-pskb-pull-tail-drivers-v1-6-9512b0fb977b@toxicpanda.com>
 X-sashiko-severity: Low
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 MIME-Version: 1.0
-X-purgate-ID: tlsNG-d62444/1791745451-C475B757-EDAD2C47/0/0
+X-purgate-ID: tlsNG-ef75cf/1791745447-A70DDAE4-4BFD6840/0/0
 X-purgate-type: clean
-X-purgate-size: 3254
+X-purgate-size: 2458
 
 Thank you for your contribution! Sashiko AI review found more severe
 issue(s) in other patches of this series. This mail is only an FYI, in case
@@ -94,87 +94,62 @@ you want to address the nit picks below when you respin.
 
 Low priority / nit picks for your consideration:
 
-- [Low] In qlcnic_xmit_frame()
-  (drivers/net/ethernet/qlogic/qlcnic/qlcnic_io.c:681-688), changing…
+- [Low] After this patch, two unrelated error paths in e1000e log the
+  same message.
 
 --
 
-qlcnic: use pskb_may_pull() to pull excess TX frags into the head
+e1000e: use pskb_may_pull() in the 82571/2/3 TSO workaround
 
-This patch changes qlcnic_xmit_frame() so that it no longer calls
-__pskb_pull_tail(skb, delta) directly when a non-GSO skb has more frags
-than QLCNIC_MAX_FRAGS_PER_TX. It calls pskb_may_pull(skb,
-skb_headlen(skb) + delta) instead. The commit message presents this as
-an equivalent API swap.
+This commit changes the 82571/2/3 TSO workaround in e1000_xmit_frame() to
+use pskb_may_pull(skb, len + pull_size) in place of a direct
+__pskb_pull_tail() call. With this change the driver no longer calls
+__pskb_pull_tail() itself. The error message printed on failure is
+updated to match.
 
-> diff --git a/drivers/net/ethernet/qlogic/qlcnic/qlcnic_io.c b/drivers/net/ethernet/qlogic/qlcnic/qlcnic_io.c
-> index 761ef3bc8193a..4a81d499e51c0 100644
-> --- a/drivers/net/ethernet/qlogic/qlcnic/qlcnic_io.c
-> +++ b/drivers/net/ethernet/qlogic/qlcnic/qlcnic_io.c
-> @@ -682,7 +682,7 @@ netdev_tx_t qlcnic_xmit_frame(struct sk_buff *skb, struct net_device *netdev)
->  		for (i = 0; i < (frag_count - QLCNIC_MAX_FRAGS_PER_TX); i++)
->  			delta += skb_frag_size(&skb_shinfo(skb)->frags[i]);
+> diff --git a/drivers/net/ethernet/intel/e1000e/netdev.c b/drivers/net/ethernet/intel/e1000e/netdev.c
+> index 844f31ab37ad4..e216868e15cba 100644
+> --- a/drivers/net/ethernet/intel/e1000e/netdev.c
+> +++ b/drivers/net/ethernet/intel/e1000e/netdev.c
+> @@ -5859,8 +5859,8 @@ static netdev_tx_t e1000_xmit_frame(struct sk_buff *skb,
+>  			unsigned int pull_size;
 >  
-> -		if (!__pskb_pull_tail(skb, delta))
-> +		if (!pskb_may_pull(skb, skb_headlen(skb) + delta))
->  			goto drop_packet;
->  
->  		frag_count = 1 + skb_shinfo(skb)->nr_frags;
+>  			pull_size = min_t(unsigned int, 4, skb->data_len);
+> -			if (!__pskb_pull_tail(skb, pull_size)) {
+> -				e_err("__pskb_pull_tail failed.\n");
+> +			if (!pskb_may_pull(skb, len + pull_size)) {
+> +				e_err("pskb_may_pull failed.\n");
 
 [Severity: Low]
-Is this exactly equivalent when delta is 0?
+This isn't a bug, but this TX message now matches a message that
+already exists on the jumbo RX path in the same file:
 
-delta is a byte count. It is 0 if all of the leading excess frags of a
-non-GSO skb with more than 14 frags are zero-length.
-
-In that case pskb_may_pull_reason() returns early and never calls
-__pskb_pull_tail():
-
-include/linux/skbuff.h:pskb_may_pull_reason() {
+drivers/net/ethernet/intel/e1000e/netdev.c:e1000_clean_jumbo_rx_irq() {
     ...
-	if (likely(len <= skb_headlen(skb)))
-		return SKB_NOT_DROPPED_YET;
-    ...
-}
-
-The old direct call to __pskb_pull_tail(skb, 0) always reached the
-pull_pages loop. With eat == 0, every zero-size frag matches
-size <= eat, so it is unreferenced and dropped from frags[]:
-
-net/core/skbuff.c:__pskb_pull_tail() {
-    ...
-pull_pages:
-	eat = delta;
-	k = 0;
-	for (i = 0; i < skb_shinfo(skb)->nr_frags; i++) {
-		int size = skb_frag_size(&skb_shinfo(skb)->frags[i]);
-
-		if (size <= eat) {
-			skb_frag_unref(skb, i);
-			eat -= size;
-		} else {
-    ...
-	}
-	skb_shinfo(skb)->nr_frags = k;
+		/* eth type trans needs skb->data to point to something */
+		if (!pskb_may_pull(skb, ETH_HLEN)) {
+			e_err("pskb_may_pull failed.\n");
+			dev_kfree_skb_irq(skb);
+			goto next_desc;
+		}
     ...
 }
 
-With the new call, nr_frags does not change. The recomputed frag_count
-stays above QLCNIC_MAX_FRAGS_PER_TX, and nothing checks it again.
+e_err() expands to netdev_err(adapter->netdev, ...). The log line
+therefore shows only the device name, not the function or the
+direction.
 
-After that, qlcnic_map_tx_skb() maps every frag, including the
-zero-length ones. qlcnic_set_tx_frags_len() then writes this frag_count
-into the first descriptor. The descriptor loop programs more than 14
-buffers for a non-TSO packet, which the comment above this block says
-the hardware does not support:
+Before this patch the TX site printed "__pskb_pull_tail failed.", so the
+two failures could be told apart in dmesg. After it, a failed RX
+ETH_HLEN pull and a failed pull in the TX TSO workaround print the same
+line.
 
-	/* 14 frags supported for normal packet and
-	 * 32 frags supported for TSO packet
-	 */
+Could the TX site use a TX-specific message instead, for example
+"TSO workaround pskb_may_pull failed.\n"?
 
-This needs an unusual skb layout, and no in-tree producer of it is
-known. Even so, could the frag_count be rechecked after the pull, or the
-commit message mention this difference?
+>  				dev_kfree_skb_any(skb);
+>  				return NETDEV_TX_OK;
+>  			}
 
 -- 
 Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261007-b4-pskb-pull-tail-drivers-v1-0-9512b0fb977b%40toxicpanda.com
