@@ -4,49 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C1A46CA9EC5
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 12:33:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446248.1662329 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E73B9CA9EC5
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 12:44:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446263.1662348 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGFD7-0008Dp-Ty; Mon, 12 Oct 2026 12:32:57 +0000
+	id 1xGFOE-00025k-W3; Mon, 12 Oct 2026 12:44:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446248.1662329; Mon, 12 Oct 2026 12:32:57 +0000
+Received: by outflank-mailman (output) from mailman id 1446263.1662348; Mon, 12 Oct 2026 12:44:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGFD7-0008Di-RJ; Mon, 12 Oct 2026 12:32:57 +0000
-Received: by outflank-mailman (input) for mailman id 1446248;
- Mon, 12 Oct 2026 12:32:57 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1301a072300080d7@swg.vates.tech>)
- id 1xGFD7-0008DW-9C
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 12:32:57 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGFD6-006Bfk-MG
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 14:32:56 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1301a072300080d7@swg.vates.tech>)
- id 6accd370-8faa-0a2a0a5109dd-0a2a4506c066-32
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 14:32:56 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1301a072300080d7@swg.vates.tech>)
- id 6accd378-195a-0a2a45060019-b9ff1c22a20d-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 14:32:56 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a1301a072300080d7.003 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 12 Oct 2026 12:32:54 +0000
-Received: from l14 (areims-651-1-80-194.w90-18.abo.wanadoo.fr [90.18.187.194])
- (Authenticated sender: anthony.perard)
- by mail2.vates.fr (Postfix) with ESMTPSA id 0F98A80034;
- Mon, 12 Oct 2026 14:32:54 +0200 (CEST)
+	id 1xGFOE-00025d-Rw; Mon, 12 Oct 2026 12:44:26 +0000
+Received: by outflank-mailman (input) for mailman id 1446263;
+ Mon, 12 Oct 2026 12:44:25 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <gwd@xenproject.org>) id 1xGFOD-00025X-IY
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 12:44:25 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xGFOD-00000001jxz-38Z3
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 12:44:25 +0000
+Received: from mail-lf1-f45.google.com ([209.85.167.45])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xGFOD-0000000CCIz-0Bpr
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 12:44:25 +0000
+Received: by mail-lf1-f45.google.com with SMTP id
+ 2adb3069b0e04-5ba35c0df4fso1448778e87.0
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 05:44:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,76 +44,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=TRItMS2pSkRZLCpQz88uDSxTxfgiGW/RRK6HOy1TP4w=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=jT0jTtQqcuB9SnW845bpIdORa4LS73+XIF9N8fiuc24tBFFcFw+otQz7xtroYFbbFEz2SEvFJ
- ksu2quzTZRuCcUp0aphRZasfd76rMG/FO56Lap5aQ5AtlWoTA3TFKcaZakGTFf+nTU226dALNXw
- l6nt31Vvughss9XfquLwpkAWBB2634X25z8mHqCCK6oomrfTSDOraB0+BwFvXdsqHkI6GdeUP1X
- YW2rfYsp54HBYGdLaG7JXV3Ekua6T/HUK46/ObxGeQoctdLSCC2+zUoyMI5HyWtnAmjfwqKXjkf
- 8zhICHsCB7A/744dB+H8D7b8n8vwX9ezuUKDX2yybwrw==
-X-Zone-Loop: ea6a248fc4df45b76cc64d8f09ac81fe4f22cee01858
-x-campaign-type: default
-x-transaction-id: 9e6f4687-d3de-4409-92a2-990a0fda0cad
-x-swg-uid: 01-0372ff0a-7f7f-4414-8b46-f644ff8fb406
-X-Mailer: Sweego
-Message-ID:
- <1791808374.8631fc262581453bbf619ec5b2062170.1a1301a072300080d7@vates.tech>
-x-swg-bid: 1791808374.8631fc262581453bbf619ec5b2062170.1a1301a072300080d7
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Mon, 12 Oct 2026 14:32:53 +0200
-From: Anthony PERARD <anthony.perard@vates.tech>
-To: Jason Andryuk <jandryuk@gmail.com>
-Cc: Leigh Brown <leigh@solinno.co.uk>, xen-devel@lists.xenproject.org,
-	Andrew Cooper <andrew.cooper3@citrix.com>
-Subject: Re: [PATCH v4 2/2] tools/examples: Example Linux bridge VLAN config
-References: <20240517140506.8460-1-leigh@solinno.co.uk>
- <20240517140506.8460-3-leigh@solinno.co.uk>
- <CAKf6xpsHhe1v1evHOaRE_EBqAnC3vN2URsXkUwTu1dzWXP6BHQ@mail.gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
+	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
+	bh=2lakZq7nkwnKjI8o8lIDJC9hlEHtJLlkNZI0jXdhd44=; b=AOa6R6tftEzT5Q0amykelivJM2
+	iInfVw5BFIn2diuDkzGZxsMCnuhh3l/GjdiHYYhnD4qjLdSG4lS7Xa2uza0v18AZ109/+98sJvc5B
+	FNHLKvpFKgaDg9tG/q9pwfyOVg/wI+lJs+CMZSFg98rBI9XJ+loXXIt1p2lSnbNb+b4A=;
+X-Gm-Message-State: AFq9FYLzi5JCdDae6NOH8yJhf98kHEfTJ1OFWYiF/u3MJ7HtSbSR+JQI
+	5f93adTKpA8Sw2RmBU7ZfPw3QqJoQ1+WYNygQTjfRSgbS/0tnD+Owtjcs8pHwPiUPwktX1bpzqd
+	XDABUmR5CVB5ncN5BG/IA6RQCgVgefdw=
+X-Received: by 2002:a05:651c:a38d:10b0:3a6:65c1:425e with SMTP id
+ 38308e7fff4ca-3a9c53b328fmr13255231fa.24.1791809064333; Mon, 12 Oct 2026
+ 05:44:24 -0700 (PDT)
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <CAKf6xpsHhe1v1evHOaRE_EBqAnC3vN2URsXkUwTu1dzWXP6BHQ@mail.gmail.com>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.f4.16c921bfbd0a5524.1a1301a057c.ecbb5b2007da3ad3=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1791808374140
-X-purgate-ID: tlsNG-16d1c6/1791808376-F5C0F77B-171F16B7/0/0
-X-purgate-type: clean
-X-purgate-size: 939
-
----=Part.f4.16c921bfbd0a5524.1a1301a057c.ecbb5b2007da3ad3=-
-Content-Type: text/plain; charset=utf-8
+References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-6-gwd@xenproject.org>
+ <asZz-SmakR9xR0gP@Mac.lan>
+In-Reply-To: <asZz-SmakR9xR0gP@Mac.lan>
+From: George Dunlap <gwd@xenproject.org>
+Date: Mon, 12 Oct 2026 13:44:11 +0100
+X-Gmail-Original-Message-ID: <CAFLBxZa_Uys=GkZ0ThzrL9ARrwO7WnbTpkCDSSedCp2PjekHOA@mail.gmail.com>
+X-Gm-Features: AclHuK_mwRG_3QRIcdMTtObW-fQZ0bjGcOzRC3Cc-30GrriPpWqUV8YninavBjQ
+Message-ID: <CAFLBxZa_Uys=GkZ0ThzrL9ARrwO7WnbTpkCDSSedCp2PjekHOA@mail.gmail.com>
+Subject: Re: [PATCH v3 05/18] x86/mm: prepare create_perdomain_mapping() for
+ per-vCPU perdomain areas
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
+	Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	Teddy Astie <teddy.astie@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: quoted-printable
 
-On Sun, May 19, 2024 at 10:54:25AM -0400, Jason Andryuk wrote:
-> On Fri, May 17, 2024 at 10:05=E2=80=AFAM Leigh Brown <leigh@solinno=2Eco=
-=2Euk> wrote:
+On Wed, Oct 7, 2026 at 5:32=E2=80=AFPM Roger Pau Monn=C3=A9 <roger@xenproje=
+ct.org> wrote:
+>
+> On Wed, Oct 07, 2026 at 11:40:38AM +0100, George Dunlap wrote:
+> > From: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
 > >
-> > Add a new directory linux-bridge-vlan with example files showing
-> > how to configure systemd-networkd to support a bridge VLAN
-> > configuration=2E
+> > We want to change per-domain mappings to be per-vCPU mappings.  In
+> > preparation for that, we want to arrange that
+> > create_perdomain_mapping() work either with a single perdomain area,
+> > or with a per-vCPU perdomain area.
 > >
-> > Signed-off-by: Leigh Brown <leigh@solinno=2Eco=2Euk>
->=20
-> The systemd network config looks like it matches the the systemd man pag=
-es, so:
-> Reviewed-by: Jason Andryuk <jason=2Eandryuk@amd=2Ecom>
+> > Most of the remaining callers are already in a vCPU context.  This is
+> > no accident: the perdomain area has always been laid out in per-vCPU
+> > slices -- each vCPU has its own GDT/LDT window, its own
+> > COMPAT_ARG_XLAT pages, its own window of mapcache entries -- and each
+> > vCPU's slice is set up as that vCPU is created.  For these callers, we
+> > just need to change the parameter from a domain pointer to a vCPU
+> > pointer.  Once the perdomain area itself becomes per-vCPU, the same
+> > calls will populate the owning vCPU's own area rather than slices of a
+> > shared one.
+> >
+> > One exception is the call in hvm_domain_initialise().  An HVM vCPU's
+> > monitor table is created during vCPU initialisation, and
+> > init_xen_l4_slots() stamps the perdomain slot into it at that point --
+> > far earlier than for PV, where the Xen slots are written only once
+> > guest page tables are built.  hvm_domain_initialise() therefore had an
+> > explicit create_perdomain_mapping() call just to make the perdomain
+> > root exist ahead of that.  Move it to arch_vcpu_create(), covering HVM
+> > and PV alike.  With a single shared area, the call allocates at most
+> > once per domain; but once each vCPU has its own perdomain area, this
+> > is the call that will allocate every vCPU's root before any page
+> > tables referencing it are built.  vCPU creation is
+> > where the call must end up; move it there directly.
+>
+> I think it's clear from the paragraph above the call must be moved
+> there, there's likely no need to re-iterate that fact.
+>
+> > For PV guests
+> > nothing observable changes: the root was already being created during
+> > vCPU creation as a side effect (by mapcache_vcpu_init(), or failing
+> > that pv_create_gdt_ldt_l1tab()); it now merely becomes explicit.
+> >
+> > Note that we cannot yet do a parallel movement of
+> > free_perdomain_mappings(): the per-domain page-table hierarchy is
+> > still a single domain-wide structure shared by all vCPUs, so tearing
+> > it down from a per-vCPU path would pull the mappings out from under
+> > sibling vCPUs (e.g.  on a partially failed, retryable
+> > XEN_DOMCTL_max_vcpus), and vCPU-create error paths can rely on domain
+> > destruction to free a partially set up hierarchy.  Teardown will move
+> > to vCPU scope only once the structure itself becomes per-vCPU.
+>
+> Even then - we will still need to support non-ASI (PV domains) not
+> using a per-vCPU slot, and hence the call can't be moved as-is just
+> when per-vCPU support is available?
+>
+> > Signed-off-by: Roger Pau Monn=C3=A9 <roger.pau@citrix.com>
+> > Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, C=
+laude Code:claude-opus-5-5
+> > Signed-off-by: George Dunlap <gwd@xenproject.org>
+> > ---
+> > Changes in v3:
+> > - Rebased onto staging without the GDT/LDT conversions (for the
+> >   HVM-only series): the capture parameters stay, as the PV GDT/LDT
+> >   stash still uses them.
+> >
+> > Changes in v2:
+> > - Added to the series
+> >
+> > Changes since the previously posted version:
+> > - Keep free_perdomain_mappings() (and hence perdomain teardown)
+> >   domain-scoped.
+> > - Keep the idle domain without a perdomain area.
+> > - Retitle (was: "x86/mm: switch {create,destroy}_perdomain_mapping()
+> >   domain parameter to vCPU"); destroy_perdomain_mapping() was switched
+> >   in a separate patch.
+> > - Split the removal of mapcache_domain_init()'s redundant
+> >   create_perdomain_mapping() call into its own (preceding) patch.
+> > ---
+> >  xen/arch/x86/domain.c         | 10 ++++++++++
+> >  xen/arch/x86/domain_page.c    |  6 +++---
+> >  xen/arch/x86/hvm/hvm.c        |  5 -----
+> >  xen/arch/x86/include/asm/mm.h |  2 +-
+> >  xen/arch/x86/mm.c             |  3 ++-
+> >  xen/arch/x86/pv/domain.c      |  2 +-
+> >  xen/arch/x86/x86_64/mm.c      |  2 +-
+> >  7 files changed, 18 insertions(+), 12 deletions(-)
+> >
+> > diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+> > index 85cedc3d03..b670cea52b 100644
+> > --- a/xen/arch/x86/domain.c
+> > +++ b/xen/arch/x86/domain.c
+> > @@ -517,6 +517,16 @@ int arch_vcpu_create(struct vcpu *v)
+> >
+> >      if ( !is_idle_domain(d) )
+> >      {
+> > +        /*
+> > +         * Make sure the per-domain L3 exists ahead of any consumer (e=
+.g.
+> > +         * init_xen_l4_slots() for the HVM monitor tables): with
+> > +         * create_perdomain_mapping() taking a vCPU this can no longer=
+ be
+> > +         * done when creating the domain.
+>
+> I think the comment here is not very useful - it's not helpful that
+> the comment here references the previous position of the call.  It
+> only makes sense in the context of this change, but not for someone
+> looking at the code after this commit has landed.  I would terminate
+> the commit at the ":".
+>
+> The code itself looks good to me.
 
-Acked-by: Anthony PERARD <anthony=2Eperard@vates=2Etech>
+Done, thanks.
 
-Thanks,
-
-
--- 
-Anthony Perard | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vate=
-s solutions
-
-web: https://vates=2Etech
----=Part.f4.16c921bfbd0a5524.1a1301a057c.ecbb5b2007da3ad3=---
+ -George
 
