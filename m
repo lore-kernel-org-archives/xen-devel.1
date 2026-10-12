@@ -4,35 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 284DACA9ED0
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 16:08:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446477.1662590 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9A4AECA9ED1
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 16:23:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446487.1662598 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGIZ4-0004AV-Pg; Mon, 12 Oct 2026 16:07:50 +0000
+	id 1xGInt-0007Jh-3v; Mon, 12 Oct 2026 16:23:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446477.1662590; Mon, 12 Oct 2026 16:07:50 +0000
+Received: by outflank-mailman (output) from mailman id 1446487.1662598; Mon, 12 Oct 2026 16:23:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGIZ4-0004AO-MG; Mon, 12 Oct 2026 16:07:50 +0000
-Received: by outflank-mailman (input) for mailman id 1446477;
- Mon, 12 Oct 2026 16:07:48 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xGIZ2-0004AI-Qw
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 16:07:48 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xGIZ2-00000001o3q-3XWr
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 16:07:48 +0000
-Received: from mail-lj1-f178.google.com ([209.85.208.178])
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xGIZ2-0000000HT88-0WyR
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 16:07:48 +0000
-Received: by mail-lj1-f178.google.com with SMTP id
- 38308e7fff4ca-3a75f960be3so18594481fa.2
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 09:07:48 -0700 (PDT)
+	id 1xGInt-0007Ja-0h; Mon, 12 Oct 2026 16:23:09 +0000
+Received: by outflank-mailman (input) for mailman id 1446487;
+ Mon, 12 Oct 2026 16:23:07 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGInr-0007IN-Lj
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 16:23:07 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xGInq-00G11Q-JP
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 18:23:06 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <andrewprecious388@gmail.com>)
+ id 6acd0954-e002-0a2a0a5209dd-0a2a4509803e-38
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 18:23:06 +0200
+Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrewprecious388@gmail.com>)
+ id 6acd096a-be1a-0a2a45090019-d1558034d873-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 18:23:06 +0200
+Received: by mail-wm1-f52.google.com with SMTP id
+ 5b1f17b1804b1-4a020e65269so13019275e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 09:23:06 -0700 (PDT)
+Received: from andrew-B650M-DS3H.. ([102.213.49.86])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a18dd15659sm197285685e9.4.2026.10.12.09.23.03
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Oct 2026 09:23:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,138 +52,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
-	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
-	bh=8ncPgslNiNqkxP2CDhkltwMZWX45x9XZsA1CUpG25C0=; b=JvmuYdX03MSWNmw/kbtyIdrpa1
-	v2ygCQyXa49JGID7cnhM7fnU+93VZt6ExF2jXfG1qnipZM7CYRShwqTzMufW7JFipod3HJ0TdxQ6d
-	EMXjtiBdqwi4H4DTxUCPPkJ4G5McMrwwc3H81wdcx1nN5LIQ8Vm8je6RE8cvTVl3uhCY=;
-X-Forwarded-Encrypted: i=1; AKwUvBz1Cyjg/bxMt+F+ecrxFQ8gNHd4c1RYMSQmledDjDTaH+1ngZvdTKp+MLD7ukpj8G2Lo8ZJrjLbKlg=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYLo70j3mI9r90pDsHnpcG1X355g/6oYTvc5Lup+wC9BHJgNkpH/
-	TD7X81lyiubMXW8cpF0Zaiizay6nufdRIVxYtkgaKYRSGeTOjhgiBHbdG1d0hFMwOcfi2gEJ9JW
-	oyTFRSz0F5KX9mo/OkPH1t4a/7M/H2fo=
-X-Received: by 2002:a2e:a58d:0:b0:3a9:926c:c276 with SMTP id
- 38308e7fff4ca-3a9c53808fcmr22686631fa.17.1791821267291; Mon, 12 Oct 2026
- 09:07:47 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791822186; x=1792426986; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=IQE/x4hoVQgY+EdpQ1pgD1gNzudfoGE1aTGqMHPFuu8=;
+        b=QR7wZFXFIIWIukfyDMYK4CRpfUwX8fBRPKBtDvBDr/GKEKK8pQIIpz84epbPP4jTHi
+         LGO19brzgH1AXVhuZXU9FGhLxJBZwCLY0x4NjaTHgu+A2N6aH23QV/h6wM2Wi6GmaNuk
+         adJbpgsaqwRYjvJB5QDV6HLvVdwkVWq4slDox+o6EUdSaZDvfz7YW9mToTumpOMc9QCX
+         sr95hF43UCOQBwvRgt1Lb1Gt4b7tSappNwjM0c03sVBzX0xuySFVC60JFpQ/vvRanJqR
+         2FzEjjedFkA9MFlx7I2tKvKfE7/orXpiW/x7ZgsM3ivJOAD0WEnTmcW8zCzRcFBn4Qda
+         Fhww==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791822186; x=1792426986;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=IQE/x4hoVQgY+EdpQ1pgD1gNzudfoGE1aTGqMHPFuu8=;
+        b=si5DcwxjJMmcjYficKTwjuMiMYykW3MhBPgQ+ULEm0AOLphZzk8VBGt8M5eJNjQTPH
+         FJPSs3/iyw7ByicOQmtl+uSJ6Hb1QW0ig1xYbex5QujfTDx+RCFKJ3ZQw05ajVpj1tx7
+         f6qUu2tH9Hg0zxI6RHT02d7y+Qv4nJDt5atSMbPZfHa1x850JWYEVDLrY8bhY16OLy6z
+         TIbX3WGJQsP416tGSjzfqEehGQtI5RYWgFicoDX+MtbdLi+uTUCafizPZTX9pzXt+VEJ
+         mOCk/fpvawhfpsMKm5IyNy9ljoBS24DFFc6noFhUZC6z097ZZXR54tbXfVV4/v6Vyd4A
+         JW3Q==
+X-Gm-Message-State: AFq9FYKTgGyOkCoR55HP2oKqa2oV3giEIB9lF1D9AsW9s+K81qnSB7Dm
+	HXfQ30CyZC/zxiwFmLsHe7FK1x+98vjFUUzoxFTEx5Sa8Q5RSHwF5aYJqrG3bN1R
+X-Gm-Gg: AYBFou1/sLzuRBM647WTM8KgZhUozu4YZxjbb7WzA58MvYVSUec/DaNXenZ0vu4U8Xq
+	pbkH5WoXR9KTtxaod4jxuTepERBcsw6fNWYVgBCpYlAHPh9khRMxPjFtwLN7COQWor7os10sghQ
+	KW8mquyflSczPGrML7bteEgDIHQScLPJstFVr6frLNaixIHZp16RhoFkHyOz6Fr+L2LhgQBF2K2
+	rMznI0u9AqrkJgX8cZF+qOtHb9uA0v4BST5JU5//+JeLP0IxAduXlOTv+28WJoH2tcQpN2Yd5sr
+	GP4ilc/zNbAV5ZwLe8g8O6flq7LkfOHb/ps1lOKlPvibjq3Vn49KP5lDEmpFTzw25SwMk37jPI6
+	QcjtT17nfdrLIIfHLt2C+zM++s14KfHo4c/fGjHeSdJSf4HWDve5s7nkhhXKWf/m7UHbgGGDTDX
+	BQ9J0U8WjO7cXdQmx/KwiE/FrujGQlPXVpDu9MSunNr3kKgPXC20JPxHUx70cj6anC0wTG9RVI8
+	G7oj+F7QV6IbBwv
+X-Received: by 2002:a05:600c:1d20:b0:49f:fd40:80fa with SMTP id 5b1f17b1804b1-4a18e4f50ecmr201060925e9.34.1791822185721;
+        Mon, 12 Oct 2026 09:23:05 -0700 (PDT)
+From: Andrew Mbugua <andrewprecious388@gmail.com>
+To: xen-devel@lists.xenproject.org
+Cc: andrew.cooper3@citrix.com,
+	andriy.sultanov@vates.tech,
+	guillaume.thouvenin@vates.tech,
+	anthony.perard@vates.tech,
+	Andrew Mbugua <andrewprecious388@gmail.com>
+Subject: [PATCH] tools/oxenstored: preserve socket fds across exec live-update, document SIGTERM limit
+Date: Mon, 12 Oct 2026 19:22:58 +0300
+Message-ID: <20261012162258.811103-1-andrewprecious388@gmail.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-9-gwd@xenproject.org>
- <8514b7b6-cf1c-44d9-827c-675fd5a6708e@suse.com>
-In-Reply-To: <8514b7b6-cf1c-44d9-827c-675fd5a6708e@suse.com>
-From: George Dunlap <gwd@xenproject.org>
-Date: Mon, 12 Oct 2026 17:07:34 +0100
-X-Gmail-Original-Message-ID: <CAFLBxZYOHGDbp_=rBP0aRd9J3LJ-B79zpt4B9LQyjKQiWjb6ig@mail.gmail.com>
-X-Gm-Features: AclHuK8XpG1UKDIhUjMyuSao_joQaIosu8BwgX2tQGdNbHdUb4nbW6hz9nsTVyY
-Message-ID: <CAFLBxZYOHGDbp_=rBP0aRd9J3LJ-B79zpt4B9LQyjKQiWjb6ig@mail.gmail.com>
-Subject: Re: [PATCH v3 08/18] x86/domain_page: prepare the mapcache for
- per-vCPU accounting
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
-	Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-bad1c0/1791822186-3AEDE034-27FEE0B9/10/77776452383
+X-purgate-type: spam
+X-purgate-size: 3581
 
-On Mon, Oct 12, 2026 at 2:48=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wro=
-te:
-> > @@ -54,6 +60,55 @@ static inline struct vcpu *mapcache_current_vcpu(voi=
-d)
-> >      return ACCESS_ONCE(this_cpu(pgtable_vcpu));
-> >  }
-> >
-> > +/*
-> > + * The accounting for v's mapcache: the domain's, with *dcache set so =
-the
-> > + * caller takes the domain-wide lock and TLB-epoch machinery into acco=
-unt.
-> > + */
-> > +static struct mapcache *vcpu_mapcache(struct vcpu *v,
-> > +                                      struct mapcache_domain **dcache)
-> > +{
-> > +    struct domain *d =3D v->domain;
-> > +
-> > +    *dcache =3D &d->arch.pv.mapcache;
-> > +    return &(*dcache)->cache;
-> > +}
->
-> This function only retrieves data. Can't its first parameter therefore be
-> pointer-to-const?
+Resending this patch a new after fixing mailing list spam rejection
 
-Currently that's true; but in a further patch, it may be
-&v->arch.mapcache.cache, which is in the vcpu structure itself,
-effectively stripping off the const-ness by pointing to individual
-fields in a struct.
+The TODO comment at connection.ml: has_extra_connection_data dates back to
+commit 42f0581a91 ("tools/oxenstored: Implement live update for socket
+connections"), which started dumping anonymous (dom0 toolstack) socket
+connections as "socket,fd" plus watches, but left the SIGTERM /
+file-based restart case unsolved:
 
->
-> > @@ -74,12 +130,12 @@ void *map_domain_page(mfn_t mfn)
-> >  #endif
-> >
-> >      v =3D mapcache_current_vcpu();
-> > -    if ( !v || !is_pv_vcpu(v) )
-> > +    if ( !v )
-> >          return mfn_to_virt(mfn_x(mfn));
->
-> I don't quite understand why this is_pv_vcpu() is okay to drop. What
-> mapcache_current_vcpu() returns isn't what it ran is_pv_vcpu() on. (Same
-> in unmap_domain_page() then, obviously.)
+  (* TODO: what about SIGTERM, should use systemd to store FDS
+      || has_socket (* dom0 sockets not * dumped yet *) *)
 
-So mapcache_current_vcpu() is a bit weird; the actual invariant is,
-"Return the vcpu whose cache structure we should use if present; or
-NULL if there's no cache structure to check and no need to sync."  So
-if pgtable_vcpu is HVM, return NULL and just use the raw address,
-because at this point in the series, both HVM and the idle domain have
-full directmaps; if pgtable_vcpu is PV, then maybe sync, and then
-return the result of the sync.  That may be a PV domain with a
-mapcache, or an idle domain with no mapcache, but in either case you
-can then read cache.inuse to see if there's something there.
+An fd number is only meaningful for an exec-based live-update where the
+fd is inherited. It cannot survive a SIGTERM/file-based restart
+where fd numbers from the old process are meaningless. That would
+require stashing the fds in systemd.
 
-So yes, it's a different vCPU; but it's still defined in such a way to
-be safe to check cache.inuse.  The only possible value *change* after
-a sync is the idle domain; I don't think we need to do another check
-to make sure it's still a PV domain.
+Additionally, Connection.dump never cleared CLOEXEC on the socket fd
+(unlike DB.to_channel which does so for the listening socket), so even
+an exec live-update including a forced one with `live-update -F`
+which bypasses prevents_quit, loses the connection and restore hits
+"Ignoring invalid socket FD".
 
-In fact, there's an argument that we should modify
-mapcache_current_vcpu() to take pointers to dcache, and vcache, and
-return just cache; that gets rid of v as a local variable of
-map_domain_page entirely, and makes the logic ("get the cache we
-should use") more clean, and gets rid of one mfn_to_virt() instance.
-That would require some non-trivial changes, so I'd rather avoid that,
-but I can do it if you want.
+Resolving the TODO without regressing commit 42f0581a91:
+- keep allowing idle sockets for exec live-update; pending partial
+  I/O still blocks via has_in/has_out and SIGTERM clients
+  simply reconnect.
+- clear CLOEXEC in Connection.dump so the dumped fd actually survives
+  exec.
+- replace the TODO with a comment explaining the remaining systemd fd
+  store future work for SIGTERM.
 
-> > @@ -249,15 +294,23 @@ void mapcache_domain_init(struct domain *d)
-> >  int mapcache_vcpu_init(struct vcpu *v)
-> >  {
-> >      struct domain *d =3D v->domain;
-> > -    struct mapcache_domain *dcache =3D &d->arch.pv.mapcache;
-> > +    struct mapcache_domain *dcache;
-> > +    struct mapcache *cache;
-> >      unsigned long i;
-> > -    unsigned int ents =3D d->max_vcpus * MAPCACHE_VCPU_ENTRIES;
-> > -    unsigned int nr =3D PFN_UP(BITS_TO_LONGS(ents) * sizeof(long));
-> > +    unsigned int ents, nr;
-> >
-> > -    if ( !is_pv_vcpu(v) || !dcache->inuse )
-> > +    if ( !has_mapcache(v) )
-> >          return 0;
-> >
-> > -    if ( ents > dcache->entries )
-> > +    cache =3D vcpu_mapcache(v, &dcache);
-> > +    if ( !cache->inuse )
-> > +        /* Domain-wide mapcache disabled (fully direct-mapped build). =
-*/
-> > +        return 0;
->
-> While technically not wrong, this comment appears to be quite a bit
-> forward-looking.
+Ive verified that make builds oxenstored cleanly
 
-Yes; I'll drop the last bit.
+Signed-off-by: Andrew Mbugua <andrewprecious388@gmail.com>
+---
+ tools/ocaml/xenstored/connection.ml | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
 
->
-> > +    ents =3D d->max_vcpus * MAPCACHE_VCPU_ENTRIES;
-> > +    nr =3D PFN_UP(BITS_TO_LONGS(ents) * sizeof(long));
->
-> Is there a reason these cannot be the initializers of their variables
-> anymore?
-
-No reason.  I'll put them back.
-
- -George
+diff --git a/tools/ocaml/xenstored/connection.ml b/tools/ocaml/xenstored/connection.ml
+index 37eb2444b9..e535e7cea6 100644
+--- a/tools/ocaml/xenstored/connection.ml
++++ b/tools/ocaml/xenstored/connection.ml
+@@ -435,9 +435,15 @@ let has_extra_connection_data con =
+   let has_in = has_partial_input con in
+   let has_out = has_output con in
+   let has_nondefault_perms = make_perm con.dom <> con.perm in
++  (* Socket (dom0 toolstack) connections are dumped as "socket,fd" plus
++     watches by Connection.dump below. The fd number only survives an
++     exec-based live-update when the fd is preserved across exec (see
++     dump); it cannot survive a SIGTERM / file-based restart, where fd
++     numbers are meaningless. That case would require stashing the fds
++     in systemd (fd store / socket activation). Pending input/output
++     already blocks above, so idle sockets are safe for exec live-update
++     and SIGTERM clients simply reconnect. *)
+   has_in || has_out
+-  (* TODO: what about SIGTERM, should use systemd to store FDS
+-     	|| has_socket (* dom0 sockets not * dumped yet *) *)
+   || has_nondefault_perms (* set_target not dumped yet *)
+ 
+ let has_transaction_data con =
+@@ -464,9 +470,13 @@ let dump con chan =
+       Domain.dump dom chan;
+       domid
+     | None ->
+-      let fd = con |> get_fd |> Utils.FD.to_int in
+-      Printf.fprintf chan "socket,%d\n" fd;
+-      -fd
++      let fd = con |> get_fd in
++      (* Keep the fd across exec so an (exec-based, possibly forced)
++         live-update can restore it via "socket,%d". File-based
++         SIGTERM/restart cannot restore fds; that needs systemd fd store. *)
++      Unix.clear_close_on_exec fd;
++      Printf.fprintf chan "socket,%d\n" (Utils.FD.to_int fd);
++      -(Utils.FD.to_int fd)
+   in
+   (* dump watches *)
+   List.iter (fun (path, token) ->
+-- 
+2.43.0
 
