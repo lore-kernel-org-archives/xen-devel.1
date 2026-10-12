@@ -4,62 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EDFECA9ED0
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:49:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446009.1661920 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2BA7DCA9ED0
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 09:20:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446031.1661960 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBiZ-0003OU-94; Mon, 12 Oct 2026 08:49:11 +0000
+	id 1xGCCq-0001Yt-S7; Mon, 12 Oct 2026 09:20:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446009.1661920; Mon, 12 Oct 2026 08:49:11 +0000
+Received: by outflank-mailman (output) from mailman id 1446031.1661960; Mon, 12 Oct 2026 09:20:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBiZ-0003ON-5p; Mon, 12 Oct 2026 08:49:11 +0000
-Received: by outflank-mailman (input) for mailman id 1446009;
- Mon, 12 Oct 2026 08:49:09 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xGBiX-0003OE-NH
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 08:49:09 +0000
+	id 1xGCCq-0001Ym-PX; Mon, 12 Oct 2026 09:20:28 +0000
+Received: by outflank-mailman (input) for mailman id 1446031;
+ Mon, 12 Oct 2026 09:20:27 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGCCp-0001Yg-Kb
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 09:20:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGBiW-00EfJt-Gn
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:49:08 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xGCCm-00E1bq-Sf
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 11:20:24 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6acc9f00-8faa-0a2a0a5109dd-0a2a450995a8-16
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:49:07 +0200
-Received: from [52.101.85.66]
- (helo=BYAPR05CU005.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6acc9f02-be1a-0a2a45090019-346555420c39-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:49:07 +0200
-Received: from BLAPR03CA0039.namprd03.prod.outlook.com (2603:10b6:208:32d::14)
- by LV5PR12MB9780.namprd12.prod.outlook.com (2603:10b6:408:304::11)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.21; Mon, 12 Oct
- 2026 08:49:02 +0000
-Received: from IA0PEPF0000003B.namprd03.prod.outlook.com
- (2603:10b6:208:32d:cafe::1c) by BLAPR03CA0039.outlook.office365.com
- (2603:10b6:208:32d::14) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.19 via Frontend Transport; Mon,
- 12 Oct 2026 08:49:02 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- IA0PEPF0000003B.mail.protection.outlook.com (10.167.249.72) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.522.6 via Frontend Transport; Mon, 12 Oct 2026 08:49:02 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 12 Oct
- 2026 03:48:56 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 12 Oct
- 2026 03:48:56 -0500
-Received: from [10.27.77.50] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
- Transport; Mon, 12 Oct 2026 03:48:53 -0500
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6acca656-8faa-0a2a0a5109dd-0a2a450ae754-16
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 11:20:24 +0200
+Received: from [209.85.208.41] (helo=mail-ed1-f41.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6acca658-f2d2-0a2a450a0019-d155d029c8ad-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 11:20:24 +0200
+Received: by mail-ed1-f41.google.com with SMTP id
+ 4fb4d7f45d1cf-6aa9164072cso2345368a12.2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 02:20:24 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
+ [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6b179e001ebsm4818360a12.33.2026.10.12.02.20.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 12 Oct 2026 02:20:23 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,163 +52,173 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=CWUZcZVp0sMQtzGGn+2cmzYOyhmv4pVWKH52gmWgpzwq3Dcn2q73kgzYsaWByE7KI1Rkr2YcNHp9T51MeyWTYh0x8Er+3yKfVZ9c1b/8DaKi1CmhA9/SMORuE1PVf5kKbsYgBtwaoKdv65r8E3Kmsww2CzFe+mm7+HwYUhC0+ktbVySG22vvvLZIBihA9o2rHVbp4V+XbI/kV6f8LAzIf9qTLjRm5lAwJfmn7qnN0aq0jj0loxXq71BxoR7DEi6oJrFRKTDIgyb/PKTImLFN/GnZakzeitPl53ZLolMVolXe8MdaXWRlUNv4PUOWMPaQKQzUc+wCHbeXwivfnODZmQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=oCR1mn7eIpteDAuy0Pd6JjVVXFIuKedDakhSMcIovI8=;
- b=KsXYyiNcB4OABuYLiHvpegVluhJBka6L8at3rYdfD9nLLNpvUtO3vhwh4XwHoI7Sge1gmK7L4B8OhQUR4u1fhyHmi2UwirRROcYCxPUMiAdG2SLdbh3Tl8d7gGBEEDdemMEkZqVoM2kpOSGjlH29q/U7KpS5ztEIOciql/j1igYUTdwO195YDw/jEgCl26Yf9XRyEqfWDDZwp9+pvGcHhssnWQf2FIgF3wRkuoDgY2VRGz/RYeuySdK41uuKwe5qCNfP4ygZWh7Djw24fdh3ZpEVMfcM/cVIkpEyu4So7gRaBNY+Xu3+N8288edzQIdgf3YKWCEjtSyTPu/mmGbmRg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=oCR1mn7eIpteDAuy0Pd6JjVVXFIuKedDakhSMcIovI8=;
- b=yLzQVDTSW9GP3+xQNozWWRTLdmkS9I0X71s3P7wiGz2VfkRb0jo5A2134B2rscbPUF3AALzGZvVjQ/VdXuRpAFrthyfz/Zafj7Zf61HTb4aJqGhwOApEQFzaxrT9O1XklceF6Cav5DGccDH/91D1ghRqypuJmmsRDpmKI1iVrd4=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <482b2414-affc-4f43-bdbb-8a7a012d542d@amd.com>
-Date: Mon, 12 Oct 2026 10:48:58 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791796824; x=1792401624; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=RRZHuiyjVsALp4+EaJw5EmjOztVvZ52iaBmxwTpxoAs=;
+        b=pyIKhah7E2q8RcfV8W0IM3MYrxS0qA+5VJV4YXbnrYtZsPyEO7bpx0ZB6H3jKB3X6I
+         NBxGlGz+d1ui401BYvGJTKfhE2UqseW7IgNPacuIjxqUnMTo1W2S7+3lkIU7iLdnn+ac
+         8ofMgBEyWiJuSZiUATYpim/tTqIXxaAA8JDq42EyRuTf7OJ6YAelKq3c00G+DLZ+D6wD
+         T/2YG45iUbyjqdOKeyicVkAVv+9I5IjhTC/7G1x1U5sN37Lq2HRY2V0MeKCStZ7MqqIa
+         HxYx0yOmVPtytWNI7j7bA+iw3JucTW5/RWKevN2ftiuSY09L3qjXfC+Ko1Y7KnYGZbg6
+         FVqA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791796824; x=1792401624;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=RRZHuiyjVsALp4+EaJw5EmjOztVvZ52iaBmxwTpxoAs=;
+        b=X0JVnLp4nFknGSEV8hUki091MMnp0lGHRTpKED9fwDowEGOkD5mt3YQOfVVtGbHhI3
+         f4rbqqsNA51Mk5LHUz09EQj3AvrqxdIubQbPa5aFTHmhEAgXR66rf/NUK+C4oAnvWEXj
+         JLleZ0iotmDJeIT25gc2cF1+ip9Tre7hb3Yofu3ZrFcRDlvgTqIWkL2cVKUVdqnViJ5s
+         vD6ksWPxNndH6l7/GdnxVvXjCskmQ1lZMYlpd2YZSWG4yJHQ/KE9qI0vkYauVHsARzTh
+         ZF55xfQcMF1YhpAgnqsLaIKOqcF2CExB40nPchpqrpNq1Lw7lOFPkifyRpO2CTiNItQg
+         9KmQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxNoQBgHUTcNKva93faUjIDVH0MefcgZOS4hvwgvYywAnOdpRSWhXz9F42qMSxt35QeuqFUGRV0rHc=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYITC9HAVFtAzqmODWrMpDHjh68P2GkA0Vt2gF3nEAwm4Ufk9v/U
+	zF8L0P/zDwptoPBwQahw19wGvObP5K4taZfsxombWucgfMPTzaT6xOpw
+X-Gm-Gg: AYBFou0oLEUDeHqPqr/PIkIIhHALCsNHzMgC59P9S/HDO2yw3U8Ps1BaAdUo9uEw2gD
+	OptPEA6l6TPKjG+QQs0ZUTXqiIhOmDa4d2KtWqIS+clckuD5PxdaNoPPYpo2nVbdqv/1yJL8MrJ
+	D1UW/r5VUDWxDrup0LwSjHhQqY0Y2sFxZXqvheUJu87GYzUijph5U9xI0oSZDlE64CnqP+2vlbS
+	Sm3/Nq5dj10tPaF0rpb8Genzi7yDO7tq02p5cC4xrK62BGa8vd3G8BPdV+YYKsoiI5+oAnsWXyo
+	/3I4g3kuacbdbt1Cjcn9F5Sxmn4pG9fvOJ0amU1de0mlqA5Xn4tqUGdKsMMyddaZ/2kxFM53PqY
+	j97c+mkUpwmiMMk+yUV2H03MIRQAjuJvy1YfOGDntPMm+dWCSFPR8vvEGPLvu2GguhTFJBYBYWM
+	rtW16Q5cWo1Ly89FTgy6nFtTI8pdUDZT5AGZM4TRz7FhVCrwX7YG5iratafEXiVa7UVp/cI1Uhx
+	VVxnDHezRKVijKNTPwJ7zZHKhrD+uwfjfjpQ+Jsy3624V9KHw==
+X-Received: by 2002:a05:6402:321d:b0:6aa:f198:4e39 with SMTP id 4fb4d7f45d1cf-6b17c294025mr8126477a12.44.1791796824153;
+        Mon, 12 Oct 2026 02:20:24 -0700 (PDT)
+Message-ID: <1a6cdfbf-8116-48ca-b2cb-567e39fabe4f@gmail.com>
+Date: Mon, 12 Oct 2026 11:20:22 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/arm: Sanity test specified domain's memory for being
- a multiple of a page size
-To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
-	<xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
- Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
- Beulich" <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger@xenproject.org>
-References: <20261007124813.177940-1-michal.orzel@amd.com>
- <DLYNCSBJ3FOE.IQ4BMB5FFYGL@amd.com>
- <45cb2679-c79e-4d67-abaf-a4fe8e5ddc51@amd.com>
- <DLYO8NTSYU10.23RIZURXYV9ME@amd.com>
- <9600e1ea-d85c-4c59-abf9-bb90b1e8cd72@amd.com>
- <DM05YCBPLKR8.4ISDKVT1L933@amd.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH v2 1/2] xen/ns16550: detect and preserve UART_IER_UUE
+To: Zhang Zheng <zhangzheng@iscas.ac.cn>, xen-devel@lists.xenproject.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <20261010031406.2057735-1-zhangzheng@iscas.ac.cn>
+ <20261010031406.2057735-2-zhangzheng@iscas.ac.cn>
 Content-Language: en-US
-In-Reply-To: <DM05YCBPLKR8.4ISDKVT1L933@amd.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <20261010031406.2057735-2-zhangzheng@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: IA0PEPF0000003B:EE_|LV5PR12MB9780:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7d615455-b1a6-4a7e-bfd0-08df283daa20
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|1800799024|23010399003|376014|82310400026|10067099003|261009223027099003|11063799006|4143699003|18002099003|22082099003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	VIzeSloXBnTcEYa8ulfV6NCH8gFz/NW+Igx58j1/Aw2H20+sIjk4Pt+fbxJBw/Po7GPbi2T9YhAUTZinzfIN45xOs4kYPFuYaHi2rWAfUXrBRjocx2Z5RcsPAyUCS4WxucfsfLVroVKT5IM35PTdybeiGuNBWwhim4HQ+VDG07E+B2TA5bfo4nasY7qEBReE58ItbMgslPrL69cxMzE9j31vdZNu6iInSkS8FqkyJUocK8XRbDt1mQ2yvicnJJS77gbw2B2DlHZqVFBbWF11ucqk2n96hopCqFgKYqDcgmvdgW++/l/5vKA5ouDv5wt1KlQ07N0z0aAAGqKqsJE6A/ZdMPSScswM6YpI6XO7arWJrP9gcYuF51Q/FcO/dUqcrRSM9ljRrpYeP0sFXRbA8gnQVT6RaZC3H9VbB6CkZ9rfELchcAiJ4BO6LfKo5SKlVl393SWJVqKmsF2oe5cbUcGWCmY97Z6fJqLwRZfD8MuaM4cVe0X7OiNq56hT2YjFtrWKwE5tO2b6vnzE3pJ0lAc+4D1AV43mVHPMqSPAFMOGqcPZiW5TS8JGRuabt/sp21dfE9+vl0/WThz8Q10x4uRw07fFl+AKKGHApnuDhxFaV0vVDAc0r8TIJbTvt9vNQk37Lo49LKjRpadAXJ8//oVOONvWCF5PoMpjj4FhsNnP0VeLjbK1Ytph+TYxNrkoM+RWA6ZTXxnSD7jsywMfIw==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(23010399003)(376014)(82310400026)(10067099003)(261009223027099003)(11063799006)(4143699003)(18002099003)(22082099003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	vsFy8deMAoK0AsFubMBDifhKHd2JsIRM/qJQI+A53GgiTx0CMuXHVpm/VTm55pOPDjFXgWshwRcwTctmFOGayflKoRgY8He1feroQ2t+oM4Y/oUAMy6I9awmYTABuFHolTXxAcwrFD1vUswXsvb/5EfjQROBeFgrvyMJ1zu98YhJbd3mngosYnIu61QZvAuNipY6dlYDZvSdCHyMCfq1W/56uKbfW8yLZZzDU8HEbR99NVUgkOwvbwshzC2cl5cAwa8fCI4dKHOHxW/1wJ2WLgFt2LtnecMgE3ktTQu5/wtOLOZIDFMdtGmz3kKUE1hgIRy+Io1glIFIE3EfRSHpkQn2r/kDzJ2HqeadfjJ4+wGAIB7Dr15xLnmH8IDuBkkMT0BGavYGIWbkZO2Zr5nHLEZXQu9Cm3dvgcYwKNtwLmFi9ZxMQoECQvNMuGncTKP9
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2026 08:49:02.1843
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7d615455-b1a6-4a7e-bfd0-08df283daa20
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	IA0PEPF0000003B.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV5PR12MB9780
-X-purgate-ID: tlsNG-bad1c0/1791794947-BC6CA034-A96C8BE6/0/0
-X-purgate-type: clean
-X-purgate-size: 3848
+X-purgate-ID: tlsNG-4011c0/1791796824-51AC4CFC-D16074E7/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 4097
 
 
 
-On 09-Oct-26 10:27, Alejandro Vallejo wrote:
-> On Wed Oct 7, 2026 at 4:31 PM CEST, Orzel, Michal wrote:
->>
->>
->> On 07-Oct-26 16:21, Alejandro Vallejo wrote:
->>> On Wed Oct 7, 2026 at 4:11 PM CEST, Orzel, Michal wrote:
->>>>
->>>>
->>>> On 07-Oct-26 15:40, Alejandro Vallejo wrote:
->>>>> On Wed Oct 7, 2026 at 2:48 PM CEST, Michal Orzel wrote:
->>>>>> We require memory to allocate for a domain as RAM to be a multiple of a
->>>>>> page size. However, we neither document this nor sanity test. Specifying
->>>>>> memory size that does not conform to this requirement fails the domain
->>>>>> memory allocation in the non-obvious way that is difficult to parse for
->>>>>> the user (printing over-allocation messages followed by the panic that Xen
->>>>>> could not allocate the requested amount of memory).
->>>>>>
->>>>>> While there, fix indentation from tabs to spaces for "memory" parameter in
->>>>>> booting.txt.
->>>>>>
->>>>>> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
->>>>>> ---
->>>>>>  docs/misc/arm/device-tree/booting.txt   | 4 ++--
->>>>>>  docs/misc/xen-command-line.pandoc       | 5 +++--
->>>>>>  xen/arch/arm/domain_build.c             | 6 ++++++
->>>>>>  xen/common/device-tree/dom0less-build.c | 7 +++++++
->>>>>>  4 files changed, 18 insertions(+), 4 deletions(-)
->>>>>>
->>>>>> diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
->>>>>> index bcb06bc796bf..7dfac2062a37 100644
->>>>>> --- a/docs/misc/arm/device-tree/booting.txt
->>>>>> +++ b/docs/misc/arm/device-tree/booting.txt
->>>>>> @@ -155,8 +155,8 @@ with the following properties:
->>>>>>  
->>>>>>  - memory
->>>>>>  
->>>>>> -	A 64-bit integer specifying the amount of kilobytes of RAM to
->>>>>> -    allocate to the guest.
->>>>>> +    A 64-bit integer specifying the amount of kilobytes of RAM to
->>>>>> +    allocate to the guest. Must be a multiple of 4KB (the page size).
->>>>>
->>>>> nit: s/KB/KiB
->>>> Is it? I don't think it matters at all seeing the number of occurrences in the code.
->>>>
->>>>>
->>>>> But page size isn't always 4KiB on all ports. PowerPC has 64KiB pages.
->>>>> IMO, 4KB shouldn't be here or elsewhere in documentation.
->>>> This is Arm doc and on Arm we only support 4KB at the moment. User should not
->>>> need to dig into the code to check what is the page size. It's better imo to
->>>> give this information right away and change in the future when we add support
->>>> for 16 and 64KB pages on Arm.
->>>
->>> This is already the only reference the other ports have for dom0less.
->>> The document shouldn't be here since the movement of dom0less to common
->>> code, but the side effect of it is that this no longer an arm-only reference.
->>>
->>> I won't be annoying about moving the doc on this patch because that's a
->>> separate matter, but not adding more easily avoidable debt seems
->>> warranted.
->> I don't quite understand your reasoning. If you worry about dom0less != Arm,
->> then on that basis HAS_DOM0LESS is selected only for Arm and RISCV where
->> PAGE_SIZE is 4KB. I don't think I'm introducing any doubt here. I can remove the
->> 4KB mentioning from the docs if you really insist but at least for me it's
->> clearer for the user to know right away what's the requirement for the size.
+On 10/10/26 5:14 AM, Zhang Zheng wrote:
+> XScale-compatible UARTs require UART_IER_UUE to remain set.  Probe the
+> bit during setup and preserve it when enabling receive interrupts, so
+> the xscale/PXA UART remains operational after ns16550 takes over.
 > 
-> It's a small adjustment to make the documentation truly generic. And
-> prevents the pgsz == 4KiB assumption from spreading further. Many docs
-> are spawned from copying other docs.
+> Signed-off-by: Zhang Zheng <zhangzheng@iscas.ac.cn>
+> ---
+>   xen/drivers/char/ns16550.c  | 12 +++++++++++-
+>   xen/include/xen/8250-uart.h |  1 +
+>   2 files changed, 12 insertions(+), 1 deletion(-)
 > 
-> If you're so strongly against, that's fine; it's not incorrect today.
-> I still think the 4K should be gone, but if don't want to block the
-> patch on such silly things.
-Fine, I'll remove 4KB mentioning from the docs.
+> diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+> index cdda28879e..c174465059 100644
+> --- a/xen/drivers/char/ns16550.c
+> +++ b/xen/drivers/char/ns16550.c
+> @@ -64,6 +64,7 @@ static struct ns16550 {
+>       bool intr_works;
+>       bool force_polling;
+>       bool dw_usr_bsy;
+> +    bool xscale;
+>   #ifdef NS16550_PCI
+>       /* PCI card parameters. */
+>       bool pb_bdf_enable;     /* if =1, pb-bdf effective, port behind bridge */
+> @@ -352,6 +353,14 @@ static void ns16550_setup_preirq(struct ns16550 *uart)
+>       /* No interrupts. */
+>       ns_write_reg(uart, UART_IER, 0);
+>   
+> +    uart->xscale = false;
+> +    if ( !(ns_read_reg(uart, UART_IER) & UART_IER_UUE) )
+> +    {
+> +        ns_write_reg(uart, UART_IER, UART_IER_UUE);
+> +        if ( ns_read_reg(uart, UART_IER) & UART_IER_UUE )
+> +            uart->xscale = true;
+> +    }
+> +
 
-> 
->   Reviewed-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
-Thanks. I'll handle the changes on commit.
+This probe only checks whether IER bit 6 is writable, which isn't
+specific to XScale. On UARTs with an EFR (e.g. ST16C650, TI TL16C752,
+Exar XR17V35x) the upper IER bits become writable once EFR[4] (ECB) is
+set, and bit 6 is then the RTS interrupt enable. If ECB is already set
+when the probe runs, it would report XScale, and the driver would then
+keep the RTS interrupt enabled.
 
-~Michal
+Could the flag be derived from the compatible in ns16550_uart_dt_init()
+instead, the same way dw_usr_bsy is?
+
+     uart->xscale = dt_device_is_compatible(dev, "intel,xscale-uart");
+
+That compatible would also need adding to ns16550_dt_match[]. The
+SpacemiT K1 nodes, for example, have no "ns16550a" fallback.
+
+>       /* Handle the DesignWare 8250 'busy-detect' quirk. */
+>       handle_dw_usr_busy_quirk(uart);
+>   
+> @@ -446,7 +455,8 @@ static void ns16550_setup_postirq(struct ns16550 *uart)
+>                        UART_MCR, UART_MCR_OUT2 | UART_MCR_DTR | UART_MCR_RTS);
+>   
+>           /* Enable receive interrupts. */
+> -        ns_write_reg(uart, UART_IER, UART_IER_ERDAI);
+> +        ns_write_reg(uart, UART_IER,
+> +                     UART_IER_ERDAI | (uart->xscale ? UART_IER_UUE : 0));
+
+It seems like not all cases are covered. For example, 
+ns16550_interrupt() writes 0 to IER when it switches to polling, which 
+would turn off the UART on XScale. Am I missing something? If not then 
+something like:
+
+static void ns_write_ier(const struct ns16550 *uart, uint8_t ier)
+{
+     if ( uart->xscale )
+         ier |= UART_IER_UUE;
+
+     ns_write_reg(uart, UART_IER, ier);
+}
+
+would be needed, used in ns16550_setup_preirq(), ns16550_setup_postirq()
+and ns16550_interrupt().
+
+ns16550_start_tx()/ns16550_stop_tx() do a read-modify-write of IER, so
+they read UUE back from the register and write it out again unchanged.
+They therefore work correctly without the wrapper. They could be
+switched to ns_write_ier() as well for consistency, but that isn't
+strictly necessary and likely could be left in way it looks like now.
+
+~ Oleksii
+
+>       }
+>   
+>       if ( uart->irq >= 0 )
+> diff --git a/xen/include/xen/8250-uart.h b/xen/include/xen/8250-uart.h
+> index d13352940c..358d264698 100644
+> --- a/xen/include/xen/8250-uart.h
+> +++ b/xen/include/xen/8250-uart.h
+> @@ -42,6 +42,7 @@
+>   #define UART_IER_ETHREI   0x02    /* tx reg. empty        */
+>   #define UART_IER_ELSI     0x04    /* rx line status       */
+>   #define UART_IER_EMSI     0x08    /* MODEM status         */
+> +#define UART_IER_UUE      0x40    /* UART unit enable (XScale/PXA) */
+>   
+>   /* Interrupt Identification Register */
+>   #define UART_IIR_NOINT    0x01    /* no interrupt pending */
 
 
