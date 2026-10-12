@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1405BCA9ED1
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 11:24:57 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446162.1662233 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C322CCA9ED1
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 11:29:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446176.1662242 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGE9A-0001nQ-6a; Mon, 12 Oct 2026 11:24:48 +0000
+	id 1xGED7-0002mX-Jy; Mon, 12 Oct 2026 11:28:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446162.1662233; Mon, 12 Oct 2026 11:24:48 +0000
+Received: by outflank-mailman (output) from mailman id 1446176.1662242; Mon, 12 Oct 2026 11:28:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGE9A-0001nF-2A; Mon, 12 Oct 2026 11:24:48 +0000
-Received: by outflank-mailman (input) for mailman id 1446162;
- Mon, 12 Oct 2026 11:24:47 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGE99-0001mk-9F
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 11:24:47 +0000
+	id 1xGED7-0002mQ-Gt; Mon, 12 Oct 2026 11:28:53 +0000
+Received: by outflank-mailman (input) for mailman id 1446176;
+ Mon, 12 Oct 2026 11:28:52 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGED6-0002mK-Mu
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 11:28:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGE98-00Fxbk-MQ
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 13:24:46 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xGED6-00FCNG-3c
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 13:28:52 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6accc37e-bab6-0a2a0a5309dd-0a2a450b909a-4
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 13:24:46 +0200
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6accc464-e002-0a2a0a5209dd-0a2a4507ad70-20
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 13:28:48 +0200
+Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6accc37e-b7e8-0a2a450b0019-d155dd32f17b-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 13:24:46 +0200
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-48c4649b35bso1636745f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 04:24:46 -0700 (PDT)
+ id 6accc470-b4ea-0a2a45070019-d155dd36c0c7-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 13:28:48 +0200
+Received: by mail-wr1-f54.google.com with SMTP id
+ ffacd0b85a97d-48b042c0759so1291418f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 04:28:48 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48db9ac6a91sm17237676f8f.41.2026.10.12.04.24.45
+ 5b1f17b1804b1-4a18c198134sm281873115e9.15.2026.10.12.04.28.46
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 04:24:45 -0700 (PDT)
+ Mon, 12 Oct 2026 04:28:47 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,55 +54,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791804286; x=1792409086; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791804528; x=1792409328; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=trovYTQ1qQeJdTRvV9e/YhxXnvEDm8E7HM6+VcmASq8=;
-        b=TxT7pU8ozphOa8chxH2NvBvkHXHLfw1qy7rsme0soJ/aWhwIPPdqgc3ovX3mIm66Zc
-         6EvIOCnknVl3kW5PqQjkz3JQVoUXJMU7nB6tmgRXprIuii81+cJ/dErfznNa7/mHp2FM
-         07vK96IhGPTXM+/bEgdPN7RSPHUURobq/1NoUJWFQkskqSbz9lX0P+dXRMnBoePP492k
-         vBaYSpddQ1jNU951YteqMb2QGQUMu0WCJi0iga8A6SK+iBO2jDdkfb0pMC9NE+YqAW1J
-         7XMWkth2sU94bGFc+M/X4X0jwMZQ0jt3hrYm2dUchyOLExrF7Udx6hL9lS7fbmYoMZ+q
-         TsvQ==
+        bh=DvG4uFbxyMBQZHqSDuK9l64EmZUsssHbs9zC8VGLI9o=;
+        b=Sg2S9mWtKV7mdrwmYHiBJPigXP3vCMYHgg3oIzyrnDfmS7KP9RpQWRrom3nih6JOrc
+         s+hNKLAiKPkQq5HVlqjMTingAl1hqvBcZ44bEIcgvai6CwZBh79WDE9lqT/rjEiylC8l
+         exxiOYFQqLybJzSlN1zDw+LvuWJZKU3ayjdOEfBXFdGPaBaQaULjhrr5AE5R6IZdtRbg
+         3nNlU2mzQPoegXOEyO7++QTRfUTK3NMypui4RuRXofRguvUoZh+Fz5+TIOzva3ySRzKv
+         +5yx5NFMkFeBzuhlaO5N7lGUefPqIto8rlnL44woqcBcZg9XYrgtmVcGJcfdTlaYokIE
+         oDFw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791804286; x=1792409086;
+        d=1e100.net; s=20260707; t=1791804528; x=1792409328;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=trovYTQ1qQeJdTRvV9e/YhxXnvEDm8E7HM6+VcmASq8=;
-        b=CEkKiKcrF6NA0nrAmQMOVaK1qVuMiThoJoWEoT1afhMrhW9MMq6TUOT3dEPkFX4c2Q
-         DQvGB+vDM42/39I1yKYqpMYTjsFx25JHxVoRw720jIUlv1YsAFTJJM4tE+TrlD+Qqtgq
-         eqgyvwwgB9lmA8vGujKOL6y/Kvsz0cMZoG6hMBsJ2f6Dvhv2JpMcbPkpvK1lmHbw1Ww7
-         tNXgen5KQOXoVDFw25aKIMnCI1uSjI1svWD7u9+9z8VtxZvFoI6J9QY7hrCyEws6g3Yw
-         ihzQrq3AdM01jj8OBkGLbFf3zAy32LPA/GCCE6GSu1eEFaxRV2k4LS8RLBq4TSU/Y7Iw
-         aZvg==
-X-Forwarded-Encrypted: i=1; AKwUvBy7lsEciCuiI3/zRnF+oVvsqvwMRtPCfC6p2J+7ebewYEYxRraSs9C4AxVL0LVW3y+M8THPlq68GDo=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYJkuDIIaQ6J0kzxFUY1K1A2aeXdSwtZG46mNGjmqYBhk1k2n1wJ
-	azwMeWod8uWIHVNwlsd8TB4e/OVrrGMJ11sIQicIkUvGC+veAQGPY1GyIC7LP70VGg==
-X-Gm-Gg: AYBFou3sufdStdgxAkVR+TFLeJ1OyH4n7qxKVsyvBuJKxfKg0qIdgq86WZ9YT0L7IBt
-	WeJMuWTYnEE/xlVFPLXqU7JxGi9ioakCEyOVF5k3bi4083iLgvTKjxGQ14+vmiaOrUIo4Nwenje
-	rir4euVJoXMo0KF3J2xgy1xct2zkL/PCBuy8qQuo/A2Eirckazl7yIHIGbTnNVXhfVamLqnDSfK
-	F9N2cEVXcyX1W9VXiQn1/uDfgh8Qrci0bdNfePthAVcARlOczey8MUWr9vg1nFcACsxyv/0iBjp
-	ovw9zxLM/xGtztPDqFJE7sCOb7xm7qKg1HOju5d7CJfMhafh74bYRy/P0BayXa1RyOpPbiKTrNT
-	tu6zlbmciwcXbDP0lphvlNjJDMMfqsUwjmWsbj2HFq2E2gtS5HwLVHb1DimOswybuTFhk4DhIOd
-	r25Pb7bHbr+DSxSItirZ5gtG9YXrBc/NyNRjahoLZ1xxnh7SpEK58wGvFGHwhPJ7yjh8UsP+wgQ
-	DtrHQE87U8h46vxRcQF3JLSi/F/rhGp8N0RStwRfUsyxo9KfDmBOBNmk27zZg==
-X-Received: by 2002:a05:6000:420b:b0:48c:a08:5858 with SMTP id ffacd0b85a97d-48dbaae6fa0mr15610360f8f.23.1791804285832;
-        Mon, 12 Oct 2026 04:24:45 -0700 (PDT)
-Message-ID: <1c29b7f1-3cc1-45eb-b3fe-42dec36a9ba6@suse.com>
-Date: Mon, 12 Oct 2026 13:24:46 +0200
+        bh=DvG4uFbxyMBQZHqSDuK9l64EmZUsssHbs9zC8VGLI9o=;
+        b=lydChGFfT1eSy/X8xixqzHdiN/Nxu2JR35849CD7ZDMPGWnRqm/oZQ2oU14dGrhJaL
+         GhBI4WomD2kJTLztDyb75SxEIcb+AmiUTUEHwJovMWV+KrostZFBjKFqNVS/f17RZM/v
+         c4nDYNTJdCDUA0QfT1sqzr4jbrMWNXb5+S8KAp8GPg1gYue9LPGxNqB6Hp9JzbT3YWBg
+         c5ktJqJnGRV8qibw//1gbfIWbIUKvq4lo5ZebPvR1BSiUpsONln6t0qhDc1rRPK3ld/e
+         D3THv+i5XZY0FvMO12z09qeyWCsUNrEHwl+TqyhmeQVHeR7LhuchVm8AlE62N5jh+Pt2
+         TTVw==
+X-Forwarded-Encrypted: i=1; AKwUvBxExlbav71ukyz8hezUEPj3p5tsgrW0KqBg9U0CbQE4vT5rWLd5FtOws7OXszwDiI5zmv6YOSkhhBo=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIX08dhjMhu+OEr7cuSeunF71CRL6yNx1rQ+nHtDI3lLe23l0L+
+	r5XpANV5UJfgTtmNdeI9mjLa7D70nANZZ325I++bT/ku7IQQX74A2GjBmYI2eVJZS4sASCOw7tv
+	Obxl7Qw==
+X-Gm-Gg: AYBFou2pTlNnbrF6sfZ8nbuEmppbNLf5BrEw/BUjhq/kOQt6kuNZW4X6Kv6K96jOnvy
+	N3SH9hZ/lxYSL88Ui26SyfTf6fG35kBc9wMgCMbuxaW2pNLxxvpgwv2Z9MShQUMuW/QEPxPk6PN
+	bDoAPfQWKFpY+RY93s9+loIozuIP7YWWqCgQYlw2B9NgFyNxbpraOMOr+WNDBkMXHKOxBWL7fYg
+	GL+juY5nec+ycM03xazRvLApDMsjdbsZTa8R/touvV5yBA2odx90glT5qJ5GQfsXAdkTOvkciCd
+	Co+7xY7KbepScXG0GTBpVHg99uMCIatg+xBd2SA+PQPXdobSb1Q6WTVidJMd07gCkPkNM8fuv5k
+	gAzHbc8UAa7hOxh5go18Vh11NZAyj30tLJlCLSUmJLi+1oL62vzdRAKUTSssFf/bIUHsIS+yq5q
+	TwS4nFGTRJF0W44kvbjd+OfV8BYXch+tOSfr/c5/zrkE0LA3vyzfw8L7jRtfZWwN1TjzzezXGQP
+	jJ2v334ySiLH2uZjMfUg9v2CbpKVlyRbCX1HwzJ2OyRFLnGEXNUqTuEIkLrEg==
+X-Received: by 2002:a05:600c:3b87:b0:4a0:1b15:8852 with SMTP id 5b1f17b1804b1-4a18e4a977fmr219566305e9.16.1791804527667;
+        Mon, 12 Oct 2026 04:28:47 -0700 (PDT)
+Message-ID: <b98261e6-5257-4cf6-9037-3b5cb6cead88@suse.com>
+Date: Mon, 12 Oct 2026 13:28:48 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 3/6] x86: extend mod_l*_entry() to optionally return
+Subject: Re: [PATCH v3 4/6] x86: extend do_mmu_update() to support returning
  the old PTE value
 To: Kevin Lampis <kevin.lampis@citrix.com>
 Cc: andrew.cooper3@citrix.com, teddy.astie@vates.tech,
- xen-devel@lists.xenproject.org
+ xen-devel@lists.xenproject.org, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
 References: <20261001174749.2275245-1-kevin.lampis@citrix.com>
- <20261001174749.2275245-4-kevin.lampis@citrix.com>
+ <20261001174749.2275245-5-kevin.lampis@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,23 +130,26 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261001174749.2275245-4-kevin.lampis@citrix.com>
+In-Reply-To: <20261001174749.2275245-5-kevin.lampis@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1791804286-1B8D19EA-0479DBCD/10/78276251493
+X-purgate-ID: tlsNG-ef75cf/1791804528-A5AC0AE4-C630DB0C/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 520
+X-purgate-size: 749
 
 On 01.10.2026 19:47, Kevin Lampis wrote:
-> Calling mod_l*_entry() with a valid ol*e_out pointer will do an atomic
-> xchg to set the new pte value and return the old pte value through the
-> ol*e_out pointer. If the ol*e_out pointer is NULL then old behavior is
-> preserved.
+> --- a/xen/include/public/xen.h
+> +++ b/xen/include/public/xen.h
+> @@ -349,6 +349,7 @@ DEFINE_XEN_GUEST_HANDLE(xen_ulong_t);
+>  #define MMU_PT_UPDATE_PRESERVE_AD  2 /* atomically: *ptr = val | (*ptr&(A|D)) */
+>  #define MMU_PT_UPDATE_NO_TRANSLATE 3 /* checked '*ptr = val'. ptr is MA.      */
+>                                       /* val never translated.                 */
+> +#define MMU_PT_UPDATE_SWAP         4 /* Update and return the old value. */
+Imo "atomically" wants adding here, or else the operation isn't going to be
+of much value to callers (due to the lack of guarantee of atomicity).
 
-Since you say "xchg" - as Andrew has pointed out, it would be nice for
-it to be a simple XCHG, but for the time being it's still a loop over
-CMPXCHG, isn't it? As this is somewhat relevant, I think it wants
-expressing correctly.
+Also, spotting only now: Is there a reason the entire series wasn't Cc-ed
+to Roger?
 
 Jan
 
