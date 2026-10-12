@@ -4,43 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 243EECA9ED1
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:43:26 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446002.1661912 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2EDFECA9ED0
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:49:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446009.1661920 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBci-0002VB-J7; Mon, 12 Oct 2026 08:43:08 +0000
+	id 1xGBiZ-0003OU-94; Mon, 12 Oct 2026 08:49:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446002.1661912; Mon, 12 Oct 2026 08:43:08 +0000
+Received: by outflank-mailman (output) from mailman id 1446009.1661920; Mon, 12 Oct 2026 08:49:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBci-0002V3-FJ; Mon, 12 Oct 2026 08:43:08 +0000
-Received: by outflank-mailman (input) for mailman id 1446002;
- Mon, 12 Oct 2026 08:43:07 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGBch-0002Ux-Ey
- for xen-devel@lists.xen.org; Mon, 12 Oct 2026 08:43:07 +0000
+	id 1xGBiZ-0003ON-5p; Mon, 12 Oct 2026 08:49:11 +0000
+Received: by outflank-mailman (input) for mailman id 1446009;
+ Mon, 12 Oct 2026 08:49:09 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Michal.Orzel@amd.com>) id 1xGBiX-0003OE-NH
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 08:49:09 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGBcg-008j8D-70
- for xen-devel@lists.xen.org; Mon, 12 Oct 2026 10:43:06 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xGBiW-00EfJt-Gn
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:49:08 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acc9d97-bab6-0a2a0a5309dd-0a2a450ba330-0
- for <xen-devel@lists.xen.org>; Mon, 12 Oct 2026 10:43:03 +0200
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acc9d97-b7e8-0a2a450b0019-d1558029f194-3
- for <xen-devel@lists.xen.org>; Mon, 12 Oct 2026 10:43:03 +0200
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-4a140e7405dso19174015e9.3
- for <xen-devel@lists.xen.org>; Mon, 12 Oct 2026 01:43:03 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bea0f1csm395457535e9.9.2026.10.12.01.43.02
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 01:43:02 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6acc9f00-8faa-0a2a0a5109dd-0a2a450995a8-16
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:49:07 +0200
+Received: from [52.101.85.66]
+ (helo=BYAPR05CU005.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6acc9f02-be1a-0a2a45090019-346555420c39-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:49:07 +0200
+Received: from BLAPR03CA0039.namprd03.prod.outlook.com (2603:10b6:208:32d::14)
+ by LV5PR12MB9780.namprd12.prod.outlook.com (2603:10b6:408:304::11)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.21; Mon, 12 Oct
+ 2026 08:49:02 +0000
+Received: from IA0PEPF0000003B.namprd03.prod.outlook.com
+ (2603:10b6:208:32d:cafe::1c) by BLAPR03CA0039.outlook.office365.com
+ (2603:10b6:208:32d::14) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.19 via Frontend Transport; Mon,
+ 12 Oct 2026 08:49:02 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ IA0PEPF0000003B.mail.protection.outlook.com (10.167.249.72) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.522.6 via Frontend Transport; Mon, 12 Oct 2026 08:49:02 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 12 Oct
+ 2026 03:48:56 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 12 Oct
+ 2026 03:48:56 -0500
+Received: from [10.27.77.50] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
+ Transport; Mon, 12 Oct 2026 03:48:53 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,139 +71,163 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791794583; x=1792399383; darn=lists.xen.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=C5MU5s8GjKUuc/tujX6IkCZkv91mwkdLwUwTaQKBEdU=;
-        b=M0987V5K2ZnmuuTJKJRWVfCqBwqBMIOTme2Fn/MVAXM+aagQYbTBM9V7CVX+2vm1mQ
-         KvIQ4PVbEsw+3TX091KlPhRGWMD7RrGRtgU7Sj+L6fIMo9CoIOgyyEriNULooXzKra4r
-         tNxQeTWw1YMFYWyGp364kEsDGK/d4NycTOCN5c9plXI9iViooLiIBKv8fCrj7zWb+vK7
-         oney2VH3Z/xjezt36PE0duq4ArRtdTfeo7qBW/MUZuUIZ36rvb2vVb1R037yz+I2Y/WK
-         7zgeuz4Tk47cdpEc0nH8bqbsBhxQpVbBngLWt5pff7dP8GSpAdtP/7K10CI5hWP5YveH
-         f16A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791794583; x=1792399383;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=C5MU5s8GjKUuc/tujX6IkCZkv91mwkdLwUwTaQKBEdU=;
-        b=CHi/ma0TfChLMnby7uSbTKm9WU1JDNuqPVriCZedV957dfaBXj4eivIXQdt4mX0Vsb
-         aA2wG4VS5JHdVeeeJGzSI7D807NL9uJJdwUfr1bXY5aukw/Vo0SKchmaMTjOa3cvtYFz
-         8mjUS0GzP6EdxXf30k/Dwf1OTY9v7TzyL0SI2GUR50pnQAGUbcHuAuX2p8arOPxSC2Uq
-         3ZfZ3HokERuvCOSiujg6GGDxpkpR4KgYm0bLPuTrPKNbSUPHogaaZnTE8lizEUOUO2i1
-         t70h38ujUIt6AzUdgz+WZwJ/lFyAwProoQyvDp1Mu1XKsMYZzkswX7ux199s4C8ZXK9B
-         M3sA==
-X-Gm-Message-State: AFq9FYK+ceD3wWQkWWrShKKJ8FUwFbV+ZdDDgBO4k0P174G6HopOe5Cm
-	nS8T8vy+DA/38FX/wrZQVDHHsf+zZUFChh7kv5HzcVpckJEe/PXio7UuyDYgKfo4EA==
-X-Gm-Gg: AYBFou0ndO4MRt5ENyY7fmN3Ve5a2aHDMNc2art/v/r724oYwp6zIj1uZyXmaFmWsdn
-	jhjffMaBXhoKoZlolt06tP+RCvNCWOox2mjZPB4KAMkWX1y3cWsGfqoxr88tyarGEd5RfZ6EjiX
-	OmrpiyA+wdHD+ygJo/83IEKvjI8WpYLTZ4tljm5jXVfBK/rPr9HIP0sq4rBuSbyb8H05Ou2ymW6
-	cNURpLnWDpQuQQwGs7K9IVBMu4LF605RWyqKV59DKaia0kt8Xk62ck7Tc0e2P8Ye+f4XM/zpRL0
-	peA1mev+/+EOEDW8mxZGNYbA+07gdDC6dYLeb6UHZ2S62Ats6KiCIBAb2fHpCMRn+Jqhi1FpbOo
-	Ug28l/4gYg0HAG3LF8hd0+Zdu/0Q16qpz11nw0DDe4ab30yidvVsOJ33avKioWw/pf82XiWiURe
-	wYPB85CWVZxEowJeATR9W9wwOZF+7JofiMd0aykQTOsaPBY+hDXZPps22gYaIZVHyoIUJtLQq7m
-	lX6gjWCxz0TLIZn/hd3TMU0cyb3/t7nK74NlgWLoHtEb6dG4lCIlv9YGf/S3BA=
-X-Received: by 2002:a05:600c:c092:b0:4a1:9831:a69c with SMTP id 5b1f17b1804b1-4a19831a9f7mr60949015e9.30.1791794582789;
-        Mon, 12 Oct 2026 01:43:02 -0700 (PDT)
-Message-ID: <e3aa9017-1481-417b-8588-6c7af6c4875f@suse.com>
-Date: Mon, 12 Oct 2026 10:43:03 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=CWUZcZVp0sMQtzGGn+2cmzYOyhmv4pVWKH52gmWgpzwq3Dcn2q73kgzYsaWByE7KI1Rkr2YcNHp9T51MeyWTYh0x8Er+3yKfVZ9c1b/8DaKi1CmhA9/SMORuE1PVf5kKbsYgBtwaoKdv65r8E3Kmsww2CzFe+mm7+HwYUhC0+ktbVySG22vvvLZIBihA9o2rHVbp4V+XbI/kV6f8LAzIf9qTLjRm5lAwJfmn7qnN0aq0jj0loxXq71BxoR7DEi6oJrFRKTDIgyb/PKTImLFN/GnZakzeitPl53ZLolMVolXe8MdaXWRlUNv4PUOWMPaQKQzUc+wCHbeXwivfnODZmQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=oCR1mn7eIpteDAuy0Pd6JjVVXFIuKedDakhSMcIovI8=;
+ b=KsXYyiNcB4OABuYLiHvpegVluhJBka6L8at3rYdfD9nLLNpvUtO3vhwh4XwHoI7Sge1gmK7L4B8OhQUR4u1fhyHmi2UwirRROcYCxPUMiAdG2SLdbh3Tl8d7gGBEEDdemMEkZqVoM2kpOSGjlH29q/U7KpS5ztEIOciql/j1igYUTdwO195YDw/jEgCl26Yf9XRyEqfWDDZwp9+pvGcHhssnWQf2FIgF3wRkuoDgY2VRGz/RYeuySdK41uuKwe5qCNfP4ygZWh7Djw24fdh3ZpEVMfcM/cVIkpEyu4So7gRaBNY+Xu3+N8288edzQIdgf3YKWCEjtSyTPu/mmGbmRg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=oCR1mn7eIpteDAuy0Pd6JjVVXFIuKedDakhSMcIovI8=;
+ b=yLzQVDTSW9GP3+xQNozWWRTLdmkS9I0X71s3P7wiGz2VfkRb0jo5A2134B2rscbPUF3AALzGZvVjQ/VdXuRpAFrthyfz/Zafj7Zf61HTb4aJqGhwOApEQFzaxrT9O1XklceF6Cav5DGccDH/91D1ghRqypuJmmsRDpmKI1iVrd4=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <482b2414-affc-4f43-bdbb-8a7a012d542d@amd.com>
+Date: Mon, 12 Oct 2026 10:48:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] Xen Dom0 fails to boot with "nvme.poll_queues=24" and
- "dom0_max_vcpus=6 dom0_vcpus_pin"
-To: Egon Ojamaa <egon.ojamaa@protonmail.com>
-References: <U7HCP3LJd4EyfAH4QnOSFByAb7GtqgCBigeGGjopZ501a2wAYBQ8ySpQ5_tHz9UCQ8Si5_3lEV0trGVLcQO0c2_ZWGnlwK0kF2gRVOHTv5w=@protonmail.com>
+Subject: Re: [PATCH] xen/arm: Sanity test specified domain's memory for being
+ a multiple of a page size
+To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
+	<xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
+	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, "Volodymyr
+ Babchuk" <Volodymyr_Babchuk@epam.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, "Jan
+ Beulich" <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger@xenproject.org>
+References: <20261007124813.177940-1-michal.orzel@amd.com>
+ <DLYNCSBJ3FOE.IQ4BMB5FFYGL@amd.com>
+ <45cb2679-c79e-4d67-abaf-a4fe8e5ddc51@amd.com>
+ <DLYO8NTSYU10.23RIZURXYV9ME@amd.com>
+ <9600e1ea-d85c-4c59-abf9-bb90b1e8cd72@amd.com>
+ <DM05YCBPLKR8.4ISDKVT1L933@amd.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-Cc: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <U7HCP3LJd4EyfAH4QnOSFByAb7GtqgCBigeGGjopZ501a2wAYBQ8ySpQ5_tHz9UCQ8Si5_3lEV0trGVLcQO0c2_ZWGnlwK0kF2gRVOHTv5w=@protonmail.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <DM05YCBPLKR8.4ISDKVT1L933@amd.com>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1791794583-1ACDF9EA-64A2D17E/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 2267
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: IA0PEPF0000003B:EE_|LV5PR12MB9780:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7d615455-b1a6-4a7e-bfd0-08df283daa20
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|1800799024|23010399003|376014|82310400026|10067099003|261009223027099003|11063799006|4143699003|18002099003|22082099003|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	VIzeSloXBnTcEYa8ulfV6NCH8gFz/NW+Igx58j1/Aw2H20+sIjk4Pt+fbxJBw/Po7GPbi2T9YhAUTZinzfIN45xOs4kYPFuYaHi2rWAfUXrBRjocx2Z5RcsPAyUCS4WxucfsfLVroVKT5IM35PTdybeiGuNBWwhim4HQ+VDG07E+B2TA5bfo4nasY7qEBReE58ItbMgslPrL69cxMzE9j31vdZNu6iInSkS8FqkyJUocK8XRbDt1mQ2yvicnJJS77gbw2B2DlHZqVFBbWF11ucqk2n96hopCqFgKYqDcgmvdgW++/l/5vKA5ouDv5wt1KlQ07N0z0aAAGqKqsJE6A/ZdMPSScswM6YpI6XO7arWJrP9gcYuF51Q/FcO/dUqcrRSM9ljRrpYeP0sFXRbA8gnQVT6RaZC3H9VbB6CkZ9rfELchcAiJ4BO6LfKo5SKlVl393SWJVqKmsF2oe5cbUcGWCmY97Z6fJqLwRZfD8MuaM4cVe0X7OiNq56hT2YjFtrWKwE5tO2b6vnzE3pJ0lAc+4D1AV43mVHPMqSPAFMOGqcPZiW5TS8JGRuabt/sp21dfE9+vl0/WThz8Q10x4uRw07fFl+AKKGHApnuDhxFaV0vVDAc0r8TIJbTvt9vNQk37Lo49LKjRpadAXJ8//oVOONvWCF5PoMpjj4FhsNnP0VeLjbK1Ytph+TYxNrkoM+RWA6ZTXxnSD7jsywMfIw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(23010399003)(376014)(82310400026)(10067099003)(261009223027099003)(11063799006)(4143699003)(18002099003)(22082099003)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	vsFy8deMAoK0AsFubMBDifhKHd2JsIRM/qJQI+A53GgiTx0CMuXHVpm/VTm55pOPDjFXgWshwRcwTctmFOGayflKoRgY8He1feroQ2t+oM4Y/oUAMy6I9awmYTABuFHolTXxAcwrFD1vUswXsvb/5EfjQROBeFgrvyMJ1zu98YhJbd3mngosYnIu61QZvAuNipY6dlYDZvSdCHyMCfq1W/56uKbfW8yLZZzDU8HEbR99NVUgkOwvbwshzC2cl5cAwa8fCI4dKHOHxW/1wJ2WLgFt2LtnecMgE3ktTQu5/wtOLOZIDFMdtGmz3kKUE1hgIRy+Io1glIFIE3EfRSHpkQn2r/kDzJ2HqeadfjJ4+wGAIB7Dr15xLnmH8IDuBkkMT0BGavYGIWbkZO2Zr5nHLEZXQu9Cm3dvgcYwKNtwLmFi9ZxMQoECQvNMuGncTKP9
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2026 08:49:02.1843
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7d615455-b1a6-4a7e-bfd0-08df283daa20
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	IA0PEPF0000003B.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV5PR12MB9780
+X-purgate-ID: tlsNG-bad1c0/1791794947-BC6CA034-A96C8BE6/0/0
+X-purgate-type: clean
+X-purgate-size: 3848
 
-On 09.10.2026 05:41, Egon Ojamaa wrote:
-> Hello, Real human writing, not AI here ;)
 
-Good to know such can still happen.
 
-> #### Problem:
+On 09-Oct-26 10:27, Alejandro Vallejo wrote:
+> On Wed Oct 7, 2026 at 4:31 PM CEST, Orzel, Michal wrote:
+>>
+>>
+>> On 07-Oct-26 16:21, Alejandro Vallejo wrote:
+>>> On Wed Oct 7, 2026 at 4:11 PM CEST, Orzel, Michal wrote:
+>>>>
+>>>>
+>>>> On 07-Oct-26 15:40, Alejandro Vallejo wrote:
+>>>>> On Wed Oct 7, 2026 at 2:48 PM CEST, Michal Orzel wrote:
+>>>>>> We require memory to allocate for a domain as RAM to be a multiple of a
+>>>>>> page size. However, we neither document this nor sanity test. Specifying
+>>>>>> memory size that does not conform to this requirement fails the domain
+>>>>>> memory allocation in the non-obvious way that is difficult to parse for
+>>>>>> the user (printing over-allocation messages followed by the panic that Xen
+>>>>>> could not allocate the requested amount of memory).
+>>>>>>
+>>>>>> While there, fix indentation from tabs to spaces for "memory" parameter in
+>>>>>> booting.txt.
+>>>>>>
+>>>>>> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+>>>>>> ---
+>>>>>>  docs/misc/arm/device-tree/booting.txt   | 4 ++--
+>>>>>>  docs/misc/xen-command-line.pandoc       | 5 +++--
+>>>>>>  xen/arch/arm/domain_build.c             | 6 ++++++
+>>>>>>  xen/common/device-tree/dom0less-build.c | 7 +++++++
+>>>>>>  4 files changed, 18 insertions(+), 4 deletions(-)
+>>>>>>
+>>>>>> diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
+>>>>>> index bcb06bc796bf..7dfac2062a37 100644
+>>>>>> --- a/docs/misc/arm/device-tree/booting.txt
+>>>>>> +++ b/docs/misc/arm/device-tree/booting.txt
+>>>>>> @@ -155,8 +155,8 @@ with the following properties:
+>>>>>>  
+>>>>>>  - memory
+>>>>>>  
+>>>>>> -	A 64-bit integer specifying the amount of kilobytes of RAM to
+>>>>>> -    allocate to the guest.
+>>>>>> +    A 64-bit integer specifying the amount of kilobytes of RAM to
+>>>>>> +    allocate to the guest. Must be a multiple of 4KB (the page size).
+>>>>>
+>>>>> nit: s/KB/KiB
+>>>> Is it? I don't think it matters at all seeing the number of occurrences in the code.
+>>>>
+>>>>>
+>>>>> But page size isn't always 4KiB on all ports. PowerPC has 64KiB pages.
+>>>>> IMO, 4KB shouldn't be here or elsewhere in documentation.
+>>>> This is Arm doc and on Arm we only support 4KB at the moment. User should not
+>>>> need to dig into the code to check what is the page size. It's better imo to
+>>>> give this information right away and change in the future when we add support
+>>>> for 16 and 64KB pages on Arm.
+>>>
+>>> This is already the only reference the other ports have for dom0less.
+>>> The document shouldn't be here since the movement of dom0less to common
+>>> code, but the side effect of it is that this no longer an arm-only reference.
+>>>
+>>> I won't be annoying about moving the doc on this patch because that's a
+>>> separate matter, but not adding more easily avoidable debt seems
+>>> warranted.
+>> I don't quite understand your reasoning. If you worry about dom0less != Arm,
+>> then on that basis HAS_DOM0LESS is selected only for Arm and RISCV where
+>> PAGE_SIZE is 4KB. I don't think I'm introducing any doubt here. I can remove the
+>> 4KB mentioning from the docs if you really insist but at least for me it's
+>> clearer for the user to know right away what's the requirement for the size.
 > 
-> Booting Xen hypervisor with Linux Dom0.
-> GRUB loads, Xen kernel messages load up to "Using 6 CPU"
+> It's a small adjustment to make the documentation truly generic. And
+> prevents the pgsz == 4KiB assumption from spreading further. Many docs
+> are spawned from copying other docs.
 > 
-> # From this point:
-> Next screen goes black and stays blank for 10+minutes.
-> Have to force reboot and choose non XEN kernel booting option via GRUB.
-> 
-> # From this point expected behaviour without bug:
-> Next screen goes black and stays so for 30-70sec and Dom0 kernel messages appear,
-> Next login is possible and system is running, "xl info" and other xl commands function.
-> 
-> #### Cause:
-> I spent 2 days rebooting to narrow this down..
-> 
-> This happens if we set both settings same time:
-> NVME io polling and XEN kernel CPU limits, via default grub configs:
-> 
-> GRUB_CMDLINE_LINUX_DEFAULT="nvme.poll_queues=24"
-> 
-> # Can also be set via /mnt/oldroot/etc/modprobe.d/nvme.conf
-> # For proper polling setup nvme.io_poll=1 should also be set,
-> # but symptom already appears if we set only nvme.poll_queues=24
-> 
-> and
-> 
-> GRUB_CMDLINE_XEN_DEFAULT="dom0_max_vcpus=6 dom0_vcpus_pin"
+> If you're so strongly against, that's fine; it's not incorrect today.
+> I still think the 4K should be gone, but if don't want to block the
+> patch on such silly things.
+Fine, I'll remove 4KB mentioning from the docs.
 
-Did you isolate which of the two options it actually is that causes the
-problem, or whether it needs to be both together? Also, is 6 a necessary
-(exact) precondition to the issue occurring?
-
-> Sadly not my personal system, so I can not do further heavy testing on it.
-> io polling does give very good performance boost to Gen5 NVME, and even Gen4.
-> Sad we cant use it, as CPU pinning is more important for XEN hypervizor system.
 > 
-> This has been also reported to launchpad.net:
-> https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2170270
+>   Reviewed-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+Thanks. I'll handle the changes on commit.
 
-As was meanwhile also indicated in that report: What's completely missing
-here, but very likely necessary for further analysis, are logs. That may
-also help establishing whether it's the kernel (driver) that's hung, or
-whether the system as a whole (i.e. Xen) is stuck. If nothing else in the
-log has any indication either way, issuing a debug key (for starters just
-'h', later maybe others) may help telling one from the other. If issuing
-debug keys isn't possible anymore, try adding "watchdog" to the Xen
-command line.
+~Michal
 
-Jan
 
