@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A597CCA9ED0
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 11:12:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446138.1662187 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 864DECA9ED0
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 11:17:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446144.1662197 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGDwl-0006W9-9P; Mon, 12 Oct 2026 11:11:59 +0000
+	id 1xGE1O-0007CM-QR; Mon, 12 Oct 2026 11:16:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446138.1662187; Mon, 12 Oct 2026 11:11:59 +0000
+Received: by outflank-mailman (output) from mailman id 1446144.1662197; Mon, 12 Oct 2026 11:16:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGDwl-0006W2-6h; Mon, 12 Oct 2026 11:11:59 +0000
-Received: by outflank-mailman (input) for mailman id 1446138;
- Mon, 12 Oct 2026 11:11:58 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGDwk-0006Vt-2t
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 11:11:58 +0000
+	id 1xGE1O-0007CF-N0; Mon, 12 Oct 2026 11:16:46 +0000
+Received: by outflank-mailman (input) for mailman id 1446144;
+ Mon, 12 Oct 2026 11:16:46 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGE1N-0007C9-WF
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 11:16:46 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGDwj-00BgUY-0Z
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 13:11:57 +0200
+ id 1xGE1M-00F9d9-QK
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 13:16:44 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6accc06f-e002-0a2a0a5209dd-0a2a4505d9cc-36
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 13:11:56 +0200
-Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
+ id 6accc192-bab6-0a2a0a5309dd-0a2a4505b6c6-26
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 13:16:44 +0200
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6accc07c-4cb1-0a2a45050019-d155dd30c86d-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 13:11:56 +0200
-Received: by mail-wr1-f48.google.com with SMTP id
- ffacd0b85a97d-48c4d870d54so988260f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 04:11:56 -0700 (PDT)
+ id 6accc19c-4cb1-0a2a45050019-d155dd34ddc4-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 13:16:44 +0200
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-48b03f23305so1469057f8f.1
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 04:16:44 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48db94e4018sm19213715f8f.11.2026.10.12.04.11.55
+ ffacd0b85a97d-48db9abda3csm20186562f8f.36.2026.10.12.04.16.42
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 04:11:55 -0700 (PDT)
+ Mon, 12 Oct 2026 04:16:43 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,56 +52,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791803516; x=1792408316; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=WB7JnN3Pnr9p97cTZkiKT+bs6AiP8D5jZZ9qQ2uMm24=;
-        b=XOExxaIRj86L07l2CFfMMya9akN8lid/Hhn0hp1gfTqbmKNZrLAgYGWlyQOeUZ5RTS
-         q4F638Ric9qRbbZxOrseak5n+2iFskshhGfAZeNMNdM4oMuR7+66OYm9e6/wOQcfloTE
-         DAa3gx3oqEuFMDixFEEs5qbdoxvmBzkp7jSTZ1YET+2IX5CrfOEEdXG0JEH4aZeI0XZo
-         yQd4Wf/xPRWS+m8U0E2CnKOVJAr5CHZkBmzn0NHFSEau1f5OaGLBsk6w2xDQUJoBM/rF
-         +gar1FKQn5oA+h/L7j3XfwY2wDnbuIyB3PkbubnH3Ymxvlsxwn7SASdy6Y92z7wS4mHF
-         dPlA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791803516; x=1792408316;
-        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
-         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=suse.com; s=google; t=1791803804; x=1792408604; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=WB7JnN3Pnr9p97cTZkiKT+bs6AiP8D5jZZ9qQ2uMm24=;
-        b=I3XUzYX3x8EJWfPZFEuH1QBgSVZ9Tfe8++mPtnW/Iwu+3L3xkf8fbgLBwpift9eKYO
-         oo9WS07NcNXJAoYJXWLg+jdnMFWKxvj/fK/2NU9qepDOpGD1+RZtgErHWZuog6q7OIqE
-         paoB0HQHh72RofgwBGeh4wsut5lN6k5S1v4pqNj8BeW1DZ5jB7vkFDXghBbpVHdg3jO/
-         ktS0E9jlEVKcgKoX2xVmSd7Uko+LlZUm5c2dZvFsVDJ7h9hSfzWcOjEadbIZ0uUfBjLf
-         krdhbnQWWiYJ+WpTMPU/M/B74L0wdmyfZ/vEvoCYvPr28P016gHe7gp2T6YxcZ1fGaON
-         B7gw==
-X-Gm-Message-State: AFq9FYKQWvvwf8CbK+9H56mjSED2qSPQSDrCEhbzegcYrojSckwK2hVI
-	o3rkxndht7AyN1Au3pE7ss7jlN8vTnvv6Niwj8LzciPLorG0XIgTzJCKeje4Sxa9SPffwhsXxN1
-	ykeGcUg==
-X-Gm-Gg: AYBFou0yRy0gg0Z+j9REepdVN5d9ZYdD6+0C4FmTQjdeulFBZgPYkY0fEi71xtRQK7u
-	XrwmmQt/pRPmi6ralA4mhHm9s0ff44TzrtdXlJSbNsP0feIb5zT0NMvcuABMuql322bAhQc/Skk
-	3A4b3FxLd7ovLj/9Czf00aCFt0B2F0lltvdPkn+wpvRS/2Kj/DUulmUATTGBbi9yxBP+Q8d0oZw
-	T/dtHLVa44ZXpuT0PaoHqYKsfYJmJK6a9seSb/coY5vnm4kE+Tb0o3UgnDACHcSJk1mjqBrYbRT
-	U8OArJV2Hk02mI1mLHSDhF4FvqMh+PtuK5VDXJUQE/Mlvuhqeaxzx6ueX4XiBtRePrboIlNTlp0
-	w6JZ1gNgGU1oi6E7dgB0lBYdwqt8dsOu0y3tfOdp3LFBqL692eM3HEWUwglrS90K4BSf9gcIjMX
-	CpisfczY4NX3fwPjDw12HJXoCCX2slj7zosN2UHWjCIk5DO1JCK6Ucy7pofBOyewHQwBni5YzIk
-	I7UUSxNv4MEcvvZ7xsuKO8xl2dY82gCLpDgQ4fJqnmttmkiy6k/vouPpJYKhw==
-X-Received: by 2002:a05:6000:1290:b0:488:83f7:633a with SMTP id ffacd0b85a97d-48dbaaf0096mr11363905f8f.28.1791803515927;
-        Mon, 12 Oct 2026 04:11:55 -0700 (PDT)
-Message-ID: <ca7cc14c-e860-4626-9d20-820796a91024@suse.com>
-Date: Mon, 12 Oct 2026 13:11:56 +0200
+        bh=9GW8RSHZ7q65SmBGCALc7Bnt3JFbRru/E5/UAECuWIk=;
+        b=JabTwVRcQSbU096AQmCBdiTYJW9FN+DynXaLHt3Q5lT+GlmYh7XILP7vz3bA6KQQzM
+         XShCD8QmFas8XMZIL2MOuv5l/VVifdey/6BivT87RhtLLE5KpbQH9ypnCfhIba+XddRp
+         ctLwSMCaMvC53yjMgSi1EwqpiNJtbm97EkgWXb1DrAHqbUOHXmuq+5pOr3yNK68uTo0W
+         k/P+WAD8FoU5Xp7IPfVZRHGQNMnSwX0Kp7K4VqhSW29loa2/aPD6B5ejUf9omA4jP+3I
+         Ad+Kcd9KjkLR1EwRXWA+94ZG//MUyIdWL/8Pv3bVx89LWOd0SZRThpMpe7zs8KdcrSmj
+         65jQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791803804; x=1792408604;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=9GW8RSHZ7q65SmBGCALc7Bnt3JFbRru/E5/UAECuWIk=;
+        b=yeHMYvej+Nhe0nJ0wug4Ukgd7OWtUHpV9IBONx0OixYzhchToml2kfDs8w8i+UmtYo
+         h84K2s2ng4DVZ0byrg4lfcN36Lv+u/DWa0ukG8ubhukE5H09lep9krXk6bB1XXCkqkFN
+         zo6+DTLMWO+IG1FXk+h36pMWDOoEEKeBXvbAdhvS6BhkbFGB4BGGTM/wjQMrpaNcjImM
+         R8zhpHo7kdDzWaMvyNMSgAqbfISD3wKlQapJ9V+xUSsrdcQkW9qTJup56VlXZW34s4oe
+         FVNNmRCaZURwCiFsEacsHpHznaow+M7eEDRBwTdpuZg+Sx1V7tfwcYzZZHI4EfegcRqC
+         eLCg==
+X-Forwarded-Encrypted: i=1; AKwUvBxk+vFpXOw/k0assw+8gtNmax6W3uO2OAkyYFIcz26BDHq2bG+pDlvsPcIZSVfj62Q9EHU6XxcTdIo=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJBXY6kTdvabYB5apJnGDsZycX0aUVncQrQEg8THcFOk/qdre2Z
+	+NtoidNgmx9w9Dc3M32F9OnSQ5Huz1FnQDAZNVw8sXGn7TPEYJdaYJOajnUGXeL0Xw==
+X-Gm-Gg: AYBFou36LV/SCXgiE2BLrA3dDuXuu4iiZIpSk8cGHWwqXIL0wZzlV+p186DYsrGw/tw
+	vlkfJS8Yp1OrVJhJXZtJhGVNJ9GobHwlFgjijrkLklj0ZvvhyGPr09IJqA2KhF43dqNewWngkNk
+	ziFA/wI8FXrWC+SOaLyo1qZ/H/nR6xaoZsKFxE0a0dL1wjzjW/ErjIkLKzI86uSG3NtdFkwRo3g
+	HFZDIRViyhx2zcdOpg/nGttMifxYHUrhEYOpGrcROhsZTAXEC9UQtNYubh2GPVzw+aRK8GawUH1
+	HwcspWpGTqqDgybSGol+Z/4VgUCG4PxG0JjfY7knsiTBGO8hl2wNz7v18JscgKR9ud5u6fNgQBr
+	zhZv0ixjasgKebcgkFfmfoq4XvHHWw43ZM4YLJWG/rmynKpnGuice9vQs4ob1r1NpjnUAz6PLzj
+	ozjtYsH6tykCRzBuqYGMmMZiV7tLA3FmyuYPtOR6jOjhRT5IM3LyQxHtBNixQizl0uQw0M96HWY
+	aHg/r5NBaW0Le5Sb41qK9trfiG2kBwYgM8zPknCYBdVbSqQfm7Foo1DoC4TQq8=
+X-Received: by 2002:a05:6000:2913:b0:487:834:9307 with SMTP id ffacd0b85a97d-48dbacf06d8mr18489405f8f.50.1791803803714;
+        Mon, 12 Oct 2026 04:16:43 -0700 (PDT)
+Message-ID: <ee1fa909-f916-4a97-a3e7-8b9474569288@suse.com>
+Date: Mon, 12 Oct 2026 13:16:44 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 2/6] x86: extend update_intpte() to support atomic
+ get-and-update
+To: Kevin Lampis <kevin.lampis@citrix.com>
+Cc: andrew.cooper3@citrix.com, teddy.astie@vates.tech,
+ xen-devel@lists.xenproject.org
+References: <20261001174749.2275245-1-kevin.lampis@citrix.com>
+ <20261001174749.2275245-3-kevin.lampis@citrix.com>
 Content-Language: en-US
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, George Dunlap <gwd@xenproject.org>
 From: Jan Beulich <jbeulich@suse.com>
-Subject: [PATCH] x86: invoke xenheap_max_mfn() unconditionally
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -125,62 +128,35 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261001174749.2275245-3-kevin.lampis@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1791803516-253192A1-063D8CA9/10/78276251493
+X-purgate-ID: tlsNG-c201ff/1791803804-F62AB2A1-4186720D/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1839
+X-purgate-size: 981
 
-Calling the function only conditionally can, when highmem_start isn't set
-and when hotplugged memory appears above the boundary where the "short"
-directmap ends, result in Xenheap allocations to yield memory which isn't
-accessible through the "short" directmap. Accesses from PV guest context
-would then either fault or access guest controlled memory.
+On 01.10.2026 19:47, Kevin Lampis wrote:
+> @@ -95,17 +102,26 @@ static inline void update_intpte(intpte_t *p, intpte_t old, intpte_t new,
+>              old = t;
+>          }
+>      }
+> +    return old;
+>  }
+>  
+>  /*
+>   * Macro that wraps the appropriate type-changes around update_intpte().
+>   * Arguments are: type, ptr, old, new, mfn, vcpu
+>   */
+> -#define UPDATE_ENTRY(_t ,_p ,_o ,_n ,_m ,_v , fl)                   \
+> -    update_intpte(&_t ## e_get_intpte(*(_p)),                       \
+> -                  _t ## e_get_intpte(_o), _t ## e_get_intpte(_n),   \
+> +#define UPDATE_ENTRY(_t ,_p ,_o ,_n ,_m ,_v , fl)                 \
+> +    update_intpte(&_t ## e_get_intpte(*(_p)),                     \
+> +                  _t ## e_get_intpte(_o), _t ## e_get_intpte(_n), \
+>                    _m, _v, fl)
 
-With this the bifurcation done by 88e3ed61642b ("x86/NUMA: make
-init_node_heap() respect Xen heap limit") can also be undone:
-end_boot_allocator() can be called from a single place, and system_state
-is bumped right afterwards.
+If I'm not mistaken, nothing changes here except for the placement of the
+backslashes. Can such unnecessary churn please be avoided?
 
-Fixes: adc5afbf1c70 ("x86: support up to 16Tb")
-Assisted-by: Claude Opus 5.5
-Reported-by: George Dunlap <gwd@xenproject.org>
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-
---- a/xen/arch/x86/setup.c
-+++ b/xen/arch/x86/setup.c
-@@ -1908,16 +1908,17 @@ if(j == 1/*bm->kind == BOOTMOD_RAMDISK*/
- 
-     numa_initmem_init(0, raw_max_page);
- 
-+    if ( !highmem_start )
-+        xenheap_max_mfn(virt_to_mfn(HYPERVISOR_VIRT_END - 1));
-+
-+    end_boot_allocator();
-+    system_state = SYS_STATE_boot;
-+
-     if ( max_page - 1 > virt_to_mfn(HYPERVISOR_VIRT_END - 1) )
-     {
-         unsigned long lo = virt_to_mfn(HYPERVISOR_VIRT_END - 1);
-         uint64_t mask = PAGE_SIZE - 1;
- 
--        if ( !highmem_start )
--            xenheap_max_mfn(lo);
--
--        end_boot_allocator();
--
-         /* Pass the remaining memory in (lo, max_page) to the allocator. */
-         for ( i = 0; i < boot_e820.nr_map; i++ )
-         {
-@@ -1936,10 +1937,6 @@ if(j == 1/*bm->kind == BOOTMOD_RAMDISK*/
-             init_domheap_pages(s, e);
-         }
-     }
--    else
--        end_boot_allocator();
--
--    system_state = SYS_STATE_boot;
- 
-     bsp_stack = cpu_alloc_stack(0); /* Needs to know IDT vs FRED */
-     if ( !bsp_stack )
+Jan
 
