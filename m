@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F24F1CA9ED1
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:34:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445996.1661902 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 243EECA9ED1
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:43:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446002.1661912 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBUF-0008Jy-Qi; Mon, 12 Oct 2026 08:34:23 +0000
+	id 1xGBci-0002VB-J7; Mon, 12 Oct 2026 08:43:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445996.1661902; Mon, 12 Oct 2026 08:34:23 +0000
+Received: by outflank-mailman (output) from mailman id 1446002.1661912; Mon, 12 Oct 2026 08:43:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBUF-0008Jr-Nj; Mon, 12 Oct 2026 08:34:23 +0000
-Received: by outflank-mailman (input) for mailman id 1445996;
- Mon, 12 Oct 2026 08:34:22 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGBUE-0008Jl-5w
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 08:34:22 +0000
+	id 1xGBci-0002V3-FJ; Mon, 12 Oct 2026 08:43:08 +0000
+Received: by outflank-mailman (input) for mailman id 1446002;
+ Mon, 12 Oct 2026 08:43:07 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGBch-0002Ux-Ey
+ for xen-devel@lists.xen.org; Mon, 12 Oct 2026 08:43:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGBUC-00DprD-S8
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:34:20 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xGBcg-008j8D-70
+ for xen-devel@lists.xen.org; Mon, 12 Oct 2026 10:43:06 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acc9b8a-e002-0a2a0a5209dd-0a2a4501e37e-34
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:34:20 +0200
+ id 6acc9d97-bab6-0a2a0a5309dd-0a2a450ba330-0
+ for <xen-devel@lists.xen.org>; Mon, 12 Oct 2026 10:43:03 +0200
 Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acc9b8c-5984-0a2a45010019-d1558029bc36-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:34:20 +0200
+ id 6acc9d97-b7e8-0a2a450b0019-d1558029f194-3
+ for <xen-devel@lists.xen.org>; Mon, 12 Oct 2026 10:43:03 +0200
 Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-4a171b677d2so9103405e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 01:34:20 -0700 (PDT)
+ 5b1f17b1804b1-4a140e7405dso19174015e9.3
+ for <xen-devel@lists.xen.org>; Mon, 12 Oct 2026 01:43:03 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a19303d4a8sm111092365e9.2.2026.10.12.01.34.18
+ 5b1f17b1804b1-4a18bea0f1csm395457535e9.9.2026.10.12.01.43.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 01:34:19 -0700 (PDT)
+ Mon, 12 Oct 2026 01:43:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,54 +54,53 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791794060; x=1792398860; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791794583; x=1792399383; darn=lists.xen.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :cc:content-language:references:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=vKrzVRURgsqxMnlxn6tsEXwvnxfCko5owfMEa5IQtSM=;
-        b=WKNMrZP4HUVxJpu9IvKSALDwIVnoZdjTXc9rSwqGlKovUemz7psFvJq+dI/MNJzK34
-         voNYZ9BUWz2ou0PXgDWLcyg+Qu1DRpBAWJZ0996FZiCOJp176lZcFNek+Ct9KVCcB2MG
-         A8vXpgLX9k8GJliWXZK3RgJjgwd+9IAdjrHRqXAe4mNjJyWjH/HCPasEAdCOQ+Z6SlPK
-         enR6tZxYhGWC3DTugimFF6U3XER6XsmCkFIjkVkYxcj8Fyv75m+mRoFd01pIpKOkT+hK
-         cYYW8L+Dt8fiJWUH5Fby34q2k/UA8D95cvJzJvxyji1jrBrf0sFXhAa1HbTUg5Oa/pHe
-         zwkw==
+        bh=C5MU5s8GjKUuc/tujX6IkCZkv91mwkdLwUwTaQKBEdU=;
+        b=M0987V5K2ZnmuuTJKJRWVfCqBwqBMIOTme2Fn/MVAXM+aagQYbTBM9V7CVX+2vm1mQ
+         KvIQ4PVbEsw+3TX091KlPhRGWMD7RrGRtgU7Sj+L6fIMo9CoIOgyyEriNULooXzKra4r
+         tNxQeTWw1YMFYWyGp364kEsDGK/d4NycTOCN5c9plXI9iViooLiIBKv8fCrj7zWb+vK7
+         oney2VH3Z/xjezt36PE0duq4ArRtdTfeo7qBW/MUZuUIZ36rvb2vVb1R037yz+I2Y/WK
+         7zgeuz4Tk47cdpEc0nH8bqbsBhxQpVbBngLWt5pff7dP8GSpAdtP/7K10CI5hWP5YveH
+         f16A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791794060; x=1792398860;
+        d=1e100.net; s=20260707; t=1791794583; x=1792399383;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :cc:content-language:references:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=vKrzVRURgsqxMnlxn6tsEXwvnxfCko5owfMEa5IQtSM=;
-        b=C99LyeVIIaYj+fnylSYjljA+18krX6cPEYuyWrgvIf5V3tp8PZTUvowUNOHTuh6f/H
-         IJdKlxM6wXjc3Z9xDnPewsrd28Bc66A0PTIDNHlmXFTw7YiV8SgR3irQsk44GrP6/uaK
-         YdH9UkXt8lE0mqrmqf9hBdzclf65lkwR7+yLnqghKBX3NvuImKX8mNHxK5OMU4NlWNkQ
-         DxWvk5yqLLtl/lgwJIHNefYt9JwMPvHbE5jAe6qHiHwWAKqcPJRWw3N+iQD5Ee7HRHMu
-         KPw/2ISkV68M7P/r0b42Nd3kds/hEqJhPUI1NsEZna2qclvkPsIxuJQxx4yq1nTFIwKI
-         UR6A==
-X-Gm-Message-State: AFq9FYLv6CqVS2VEcO0VHvNAWABZk0MJNFo5RgOT6FPTlyyOli7dQTr4
-	fVug8TMe2TYcygwmWjPleAfmSxRBKcSevZRwemY7GWgXY+8wYkAcfwTZSGAyvak1vq0GptclBRB
-	q1XKeBg==
-X-Gm-Gg: AYBFou1BUOE2W0evuiw8wsInD5sDmBVJO3UrNqYoS3FwNppp9czNdGb8eqDqs14POxL
-	kj/OknFjGfbV6YQEJ2GKAl2vovryYQbuxnR9FYAVAKX0voUvEwHNt3k0ky/8yVJ3W2GS+R7THBA
-	F5fuptZG6BeT0FV86tJTbhhBai4tXpkOtUT8wDcBiejkHvfiiY4cKICbGIYDzb9zQtiQc3Zuphu
-	mngZxv8XXssRp2f/VmAYsgE5MxwkeP7zPLXkP4Lsj0wHgqMkPfK+e9DO7cFqTQIFQpVeYENkrXV
-	RWhtbi8TeiATHrMewEQiDMYtMi87vEyhpsz2/V0FqyWr3T3BG0nSGERYIDjtUHciWQ6Yl+xyqmb
-	FvD2SUGhpUocDgdbKuie0FvnmF33TfYIv7HNJpKYRgQ6sS6AOha3PDdW7cfkX1hSIGzZHDHJc5S
-	c5ZbLOGC+JPGL56nErvnorVuiZ3SB4X2owFUhmkOsWX2MJqhAtj5+FFOCMJZNpl1iQOnymQowFx
-	0uxoTo06DOh0CK/lc1sbhl3xywXc82d6zirCE784buViKJ+eo+IjYOOOFWQ21AG3AqJCN57
-X-Received: by 2002:a05:600c:e557:20b0:49f:dd9f:6038 with SMTP id 5b1f17b1804b1-4a18e4bff94mr103407215e9.25.1791794060036;
-        Mon, 12 Oct 2026 01:34:20 -0700 (PDT)
-Message-ID: <56cdf5c7-2a2f-4d46-91ed-ba0a361ea649@suse.com>
-Date: Mon, 12 Oct 2026 10:32:47 +0200
+        bh=C5MU5s8GjKUuc/tujX6IkCZkv91mwkdLwUwTaQKBEdU=;
+        b=CHi/ma0TfChLMnby7uSbTKm9WU1JDNuqPVriCZedV957dfaBXj4eivIXQdt4mX0Vsb
+         aA2wG4VS5JHdVeeeJGzSI7D807NL9uJJdwUfr1bXY5aukw/Vo0SKchmaMTjOa3cvtYFz
+         8mjUS0GzP6EdxXf30k/Dwf1OTY9v7TzyL0SI2GUR50pnQAGUbcHuAuX2p8arOPxSC2Uq
+         3ZfZ3HokERuvCOSiujg6GGDxpkpR4KgYm0bLPuTrPKNbSUPHogaaZnTE8lizEUOUO2i1
+         t70h38ujUIt6AzUdgz+WZwJ/lFyAwProoQyvDp1Mu1XKsMYZzkswX7ux199s4C8ZXK9B
+         M3sA==
+X-Gm-Message-State: AFq9FYK+ceD3wWQkWWrShKKJ8FUwFbV+ZdDDgBO4k0P174G6HopOe5Cm
+	nS8T8vy+DA/38FX/wrZQVDHHsf+zZUFChh7kv5HzcVpckJEe/PXio7UuyDYgKfo4EA==
+X-Gm-Gg: AYBFou0ndO4MRt5ENyY7fmN3Ve5a2aHDMNc2art/v/r724oYwp6zIj1uZyXmaFmWsdn
+	jhjffMaBXhoKoZlolt06tP+RCvNCWOox2mjZPB4KAMkWX1y3cWsGfqoxr88tyarGEd5RfZ6EjiX
+	OmrpiyA+wdHD+ygJo/83IEKvjI8WpYLTZ4tljm5jXVfBK/rPr9HIP0sq4rBuSbyb8H05Ou2ymW6
+	cNURpLnWDpQuQQwGs7K9IVBMu4LF605RWyqKV59DKaia0kt8Xk62ck7Tc0e2P8Ye+f4XM/zpRL0
+	peA1mev+/+EOEDW8mxZGNYbA+07gdDC6dYLeb6UHZ2S62Ats6KiCIBAb2fHpCMRn+Jqhi1FpbOo
+	Ug28l/4gYg0HAG3LF8hd0+Zdu/0Q16qpz11nw0DDe4ab30yidvVsOJ33avKioWw/pf82XiWiURe
+	wYPB85CWVZxEowJeATR9W9wwOZF+7JofiMd0aykQTOsaPBY+hDXZPps22gYaIZVHyoIUJtLQq7m
+	lX6gjWCxz0TLIZn/hd3TMU0cyb3/t7nK74NlgWLoHtEb6dG4lCIlv9YGf/S3BA=
+X-Received: by 2002:a05:600c:c092:b0:4a1:9831:a69c with SMTP id 5b1f17b1804b1-4a19831a9f7mr60949015e9.30.1791794582789;
+        Mon, 12 Oct 2026 01:43:02 -0700 (PDT)
+Message-ID: <e3aa9017-1481-417b-8588-6c7af6c4875f@suse.com>
+Date: Mon, 12 Oct 2026 10:43:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: Cannot boot PVH dom0 with big initrd
-To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-References: <aY6iVr990vWeO2p5@mail-itl>
+Subject: Re: [BUG] Xen Dom0 fails to boot with "nvme.poll_queues=24" and
+ "dom0_max_vcpus=6 dom0_vcpus_pin"
+To: Egon Ojamaa <egon.ojamaa@protonmail.com>
+References: <U7HCP3LJd4EyfAH4QnOSFByAb7GtqgCBigeGGjopZ501a2wAYBQ8ySpQ5_tHz9UCQ8Si5_3lEV0trGVLcQO0c2_ZWGnlwK0kF2gRVOHTv5w=@protonmail.com>
 Content-Language: en-US
-Cc: xen-devel <xen-devel@lists.xenproject.org>
+Cc: "xen-devel@lists.xen.org" <xen-devel@lists.xen.org>
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -126,46 +125,66 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <aY6iVr990vWeO2p5@mail-itl>
+In-Reply-To: <U7HCP3LJd4EyfAH4QnOSFByAb7GtqgCBigeGGjopZ501a2wAYBQ8ySpQ5_tHz9UCQ8Si5_3lEV0trGVLcQO0c2_ZWGnlwK0kF2gRVOHTv5w=@protonmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1791794060-BEA66757-44AAA372/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-42698a/1791794583-1ACDF9EA-64A2D17E/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1446
+X-purgate-size: 2267
 
-On 13.02.2026 05:02, Marek Marczykowski-Górecki wrote:
-> After fixing the xhci crash, I hit another issue - booting with 236MB
-> initrd doesn't work, I get:
+On 09.10.2026 05:41, Egon Ojamaa wrote:
+> Hello, Real human writing, not AI here ;)
+
+Good to know such can still happen.
+
+> #### Problem:
 > 
->     (XEN) [    3.151856] *** Building a PVH Dom0 ***
->     ...
->     (XEN) [    3.593940] Unable to allocate memory with order 0!
->     (XEN) [    3.597110] Failed to setup Dom0 physical memory map
->     (XEN) [    3.599884] 
->     (XEN) [    3.602482] ****************************************
->     (XEN) [    3.605272] Panic on CPU 0:
->     (XEN) [    3.607928] Could not construct d0
->     (XEN) [    3.610692] ****************************************
->     (XEN) [    3.613463] 
->     (XEN) [    3.616035] Reboot in five seconds...
->     (XEN) [    8.626565] Resetting with ACPI MEMORY or I/O RESET_REG.
+> Booting Xen hypervisor with Linux Dom0.
+> GRUB loads, Xen kernel messages load up to "Using 6 CPU"
 > 
-> Full console log: https://gist.github.com/marmarek/c9dbc87bf07b76f2899781755762f565
+> # From this point:
+> Next screen goes black and stays blank for 10+minutes.
+> Have to force reboot and choose non XEN kernel booting option via GRUB.
 > 
-> If I skip initrd, then it boots just fine (but dom0 is not happy about
-> that). 164MB initrd failed too, but 13MB started ok.
-> Just in case, I tried skipping XHCI console, but it didn't change
-> anything.
+> # From this point expected behaviour without bug:
+> Next screen goes black and stays so for 30-70sec and Dom0 kernel messages appear,
+> Next login is possible and system is running, "xl info" and other xl commands function.
+> 
+> #### Cause:
+> I spent 2 days rebooting to narrow this down..
+> 
+> This happens if we set both settings same time:
+> NVME io polling and XEN kernel CPU limits, via default grub configs:
+> 
+> GRUB_CMDLINE_LINUX_DEFAULT="nvme.poll_queues=24"
+> 
+> # Can also be set via /mnt/oldroot/etc/modprobe.d/nvme.conf
+> # For proper polling setup nvme.io_poll=1 should also be set,
+> # but symptom already appears if we set only nvme.poll_queues=24
+> 
+> and
+> 
+> GRUB_CMDLINE_XEN_DEFAULT="dom0_max_vcpus=6 dom0_vcpus_pin"
 
-You may want to give [1] a try, minimally up to patch 11 (patches 01
-and 02 are unrelated, so could be omitted as well).
+Did you isolate which of the two options it actually is that causes the
+problem, or whether it needs to be both together? Also, is 6 a necessary
+(exact) precondition to the issue occurring?
 
-> Interestingly, this appear to have worked on Xen 4.19.3.
+> Sadly not my personal system, so I can not do further heavy testing on it.
+> io polling does give very good performance boost to Gen5 NVME, and even Gen4.
+> Sad we cant use it, as CPU pinning is more important for XEN hypervizor system.
+> 
+> This has been also reported to launchpad.net:
+> https://bugs.launchpad.net/ubuntu/+source/linux/+bug/2170270
 
-If so, then - judging from the changes which needed making - only out of
-luck.
+As was meanwhile also indicated in that report: What's completely missing
+here, but very likely necessary for further analysis, are logs. That may
+also help establishing whether it's the kernel (driver) that's hung, or
+whether the system as a whole (i.e. Xen) is stuck. If nothing else in the
+log has any indication either way, issuing a debug key (for starters just
+'h', later maybe others) may help telling one from the other. If issuing
+debug keys isn't possible anymore, try adding "watchdog" to the Xen
+command line.
 
 Jan
-
-[1] https://lists.xen.org/archives/html/xen-devel/2026-10/msg00491.html
 
