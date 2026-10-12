@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 824C3CA9EC5
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:19:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445902.1661768 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 178CDCA9ED2
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:20:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1445909.1661776 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBG2-0006aO-Av; Mon, 12 Oct 2026 08:19:42 +0000
+	id 1xGBGd-00086G-K8; Mon, 12 Oct 2026 08:20:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445902.1661768; Mon, 12 Oct 2026 08:19:42 +0000
+Received: by outflank-mailman (output) from mailman id 1445909.1661776; Mon, 12 Oct 2026 08:20:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBG2-0006aF-6u; Mon, 12 Oct 2026 08:19:42 +0000
-Received: by outflank-mailman (input) for mailman id 1445902;
- Mon, 12 Oct 2026 08:19:40 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGBG0-0006Yl-L1
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 08:19:40 +0000
+	id 1xGBGd-000869-Gz; Mon, 12 Oct 2026 08:20:19 +0000
+Received: by outflank-mailman (input) for mailman id 1445909;
+ Mon, 12 Oct 2026 08:20:17 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGBGb-00085j-L6
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 08:20:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGBFz-009Avp-NY
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:19:39 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xGBGb-008dPg-1h
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:20:17 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acc9812-2eae-0a2a0a5409dd-0a2a450ad75a-28
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:19:39 +0200
-Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6acc9836-e002-0a2a0a5209dd-0a2a4505db12-28
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:20:16 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acc981b-f2d2-0a2a450a0019-d155dd31bc09-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:19:39 +0200
-Received: by mail-wr1-f49.google.com with SMTP id
- ffacd0b85a97d-48c45111bebso842116f8f.0
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 01:19:39 -0700 (PDT)
+ id 6acc9840-4cb1-0a2a45050019-d1558030b1f5-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:20:16 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-4a061a13884so13544685e9.3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 01:20:16 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48db9463499sm17335044f8f.3.2026.10.12.01.19.38
+ ffacd0b85a97d-48db9463230sm19785814f8f.1.2026.10.12.01.20.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 01:19:38 -0700 (PDT)
+ Mon, 12 Oct 2026 01:20:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,49 +54,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791793179; x=1792397979; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791793216; x=1792398016; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=Ne1we7oWBnWjye1X1yXvq3Rk57Agg+SPNNApBuN6AbA=;
-        b=ZwDY9OygvvmW66jhiSiK++vcedPm0VMw2OrQOppRUvO8N0+FypbsgGeMDi2sILap5f
-         BTlwi9IJqlU7Tkn4p4QXbdb9HnWlTphGFG2fe5EGqyJNwWxPq1puHdVX6rrfM+Jq8iVD
-         glZIDbsX+Qya/VtsAOmib1YV0IIw6/y9i1JPIGuzYb8IFdHDVqVhYsIabhC4pODcs0aB
-         3inZeZk4XAYA6iOyx/5qejq3Ney1lG7+a6fZvkCwMxZncxPApcgt2AfgNSqSV12FZkV1
-         dI7F/l6AJNJLWCvBXdjJ6+3Nnsgs1XSflSuZbn/kLT3yxdstJBE61a5ag+bzSEpXoS6y
-         pzZA==
+        bh=sfs9vuHfnurXyzPhSvFEZTPE91v+YY4wNKDoi7B1ZQk=;
+        b=GKFPipOiLJ9pR56Q7zgEGV8R6CF/z42vKn/KHW1IGo0Lm5QguLjDlKK2BI4ZkIfFz1
+         5yithxvREin3J2HDLe45Ih2oPaihZ/N7y5XBPXwPCcTo9h/0kQJjkpBUOkIp+/taDWlk
+         6/zZ++YNM/5PpawBVN2HeGOKs7GqUP7jWUerg9FcLCmAQcQG5GRSxEmC5ZaR7C6XKiyK
+         uj+X9/rH30yrwR9SQXy+/hIoYEKQrSyEec6Z3MGnt4adgXaoABhh63KqqYrhcQebeVc4
+         TnjruipbCdUXFGi8dkZav8aPq0oJX+Hr1QuGt8aoa2dPa5SJlV6g2U9vR7xQnGJQL7iN
+         hxtw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791793179; x=1792397979;
+        d=1e100.net; s=20260707; t=1791793216; x=1792398016;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=Ne1we7oWBnWjye1X1yXvq3Rk57Agg+SPNNApBuN6AbA=;
-        b=L+2vpkLqDnPUXOo8Kb//A6tpn5GeLlNMjxCH6xlmFsE2wGtNhL1cH096X8NIPdB6eF
-         GpieN2HtuWx26uN3jB2nEs75QnfXY9XA6OCwwZakQP+GCYhby6viCkA3I9xX8/ru60iY
-         hAjkRXhGxZL/wXeRFtmjmbtLCP8Mm6scOhj4ymVEpXX6vf4sAseA+FctggWRrcFXe0GZ
-         DZfRwlSHi7dH6WrRIr0A3sbQ9rbtkZQYxu/WmA9HDWpvGGs3madsNFRscWNfGDntZwI0
-         InckEsx3YKU4SJeqrC5D3ftAyhJDVeiF1XbnG3orp1/Uv6Uulg19Ttfr3TXdzN1D7Ps6
-         yplQ==
-X-Gm-Message-State: AFq9FYKzqtpyJ8vbgcVCcFXjPiPe9l8DXX2XOG4JkacKJAz6KuE0BeHS
-	74EZyEoxlMGNWF/wrV/dsjq3TAxMWpPc7wsfFieF1GRq0l4v+Z5Cue2hb3pvhS2DLa0gDeiUbzU
-	YAs2m0A==
-X-Gm-Gg: AYBFou1ckr8KaASDUZzeksXLu++A4fr3evbr191SWVSIuZMwQipgMdpz7J1hz2yYIcc
-	tRmbuWmcLysUs3W0r0Sc2GjHIJdL2dFHbuxfnYTVdoRCt15cewxOqO/EB7e51DcfZlA37tGeIfN
-	GFKBy2oQUuWczuVzfwiqDnoy+i8AInZnNbVyuU9SowD0QV3Bru4dm1CxV2hBAPrg7h9GL5UM+nW
-	LXt6/ew2N9V+7VwqJ5pVfjQ1XR2wZZxGJdCQK26XqvoOeVv+0vGNen09dwj8bn4OzdCYJUly4Xz
-	12hu9kRfErAG9ES4Lz+ZLZ5U6LkJ+F6WJA4w0paOUyHVk7C0E/b6b6Goh9ehKU0ns6/1v5FguqU
-	0V1Tp2FIW47SfYfPfC3ZG4eJke7M7sXzC0MK/bqcJLTk7aR8pUUKBwdmIuSLU8Dmo73ruKoO3eT
-	qGDt1Tq3RBMXvckMRdU+ahpf11FcTIfBYl5IHzk5GBiFLNrUftqEl8VdbvrcOM2QPShhRkfMxDJ
-	aaO8hVWrZUoskx0MFNP+SQkM9cVccU63F6WDnQpfyz8mI9M6dyUUC6YSdEsmh4=
-X-Received: by 2002:a05:6000:29ce:b0:48c:6fa4:fc89 with SMTP id ffacd0b85a97d-48dbaadb050mr10446761f8f.12.1791793179001;
-        Mon, 12 Oct 2026 01:19:39 -0700 (PDT)
-Message-ID: <0c6f1d50-9eb2-44c1-aea5-c366204316e3@suse.com>
-Date: Mon, 12 Oct 2026 10:19:39 +0200
+        bh=sfs9vuHfnurXyzPhSvFEZTPE91v+YY4wNKDoi7B1ZQk=;
+        b=A75Q6B7jx2YwV11uNQbKcQeYz5faRibzf9mWlPI3YvHJ0mT4fupGcXP8y7BJ+QhwUA
+         T1LOZjEDlU+hoihxgsVxd01sVQQ6WJbN90K2fwuughd4Fso1Ak3l/7FrAGG2kzOrpBlQ
+         r93X6Mhy5mRBUIipSXOx6BTZy8UlVENRhLCjTUmtD185Tg/Ox9rke80BxAdhGa4VVSkO
+         HoBhiSKfS+U4UqdPR1OPE+6NVRI0NKDf2nppj48yx+wYQuAX2llTattPQ9g62ezOwVFs
+         DoKbw5xRrQANr6qFwPAU7gu/RuTuAgPo2hJ7Ln+NPLf64RCVE62x3n0QnJ5B8kcpm0ui
+         eNYw==
+X-Gm-Message-State: AFq9FYIb5dSaq2c47fiDksL3F5sE0qnZFkWwJbU5ZYfPbDhw64awQ+/3
+	UGPzG2o4OQ/bQjO4lto6yZkAr6V65ocUrEIYlEKRs5OaDt24FPEOfwFGW/IGL6urPvsomqx51RP
+	F8UoKpQ==
+X-Gm-Gg: AYBFou38PSPUN5L43712cvUtG/FqYhRauwaO82+GCE5DtFeSiQGI0hOd2Qm5aUJZad/
+	rG3W2L2KzVVGoWNBIv+NDF776lFQottN4vO4t03CM9uSbDxZLynOo4igXKPc2zzd5SntHQ+Izc5
+	oXQ1Ktw382j3yrlmJt7aKXqccHBLPK0knA/jHT9oABo+YRx63x6kr+ty+UqTQ32CRp0exprH+UY
+	sUyZSgnuQ/dbVPGEZgPNVL571A5leUYvLrlZWYjV95kjHY+Bq3j29j2QXEvE3nzZwq7ZFa0lJVg
+	EXD4/5R1p8nvG1YDsuGNQVrwvorV5Ly7Cdg4rDs5tGInuiebg3T4Jg87Dm4a6iA5/1BLG7bcNmn
+	P7TiCjvKogQ4bZixxO4jkA3pLXfq3S21HEP39lobjZi5HPwmNAy1sH2M1/9lYV/skowhF1JguKj
+	sU5aD57Uv66wDh7LOtZfjIkazVMtEixam7v+aryfyb2QosztG6EichCtlsbT8Ywdj54CrbM9ONx
+	TeB+rd6upZOe/ocp2DgOyp8+uPeJ7IXjdY0JwQcUEdkMOmCl5eH8YobYVWBrIo=
+X-Received: by 2002:a05:600c:3ba5:b0:4a1:70d4:c69 with SMTP id 5b1f17b1804b1-4a18e4c03bbmr187729245e9.28.1791793216076;
+        Mon, 12 Oct 2026 01:20:16 -0700 (PDT)
+Message-ID: <d1a67360-838e-4d9b-8b91-1ebfd9e6f613@suse.com>
+Date: Mon, 12 Oct 2026 10:20:16 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 02/15] x86/PV: make better use of assign_pages()
+Subject: [PATCH 03/15] x86/setup: break out E820_RAM accumulation
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,45 +130,73 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1791793179-520C1CFC-BE8775AF/10/78276251493
+X-purgate-ID: tlsNG-c201ff/1791793216-F58AE2A1-D6C71979/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1598
+X-purgate-size: 2452
 
-As of the referenced commit there's no reason to open-code the loop
-anymore. With that replaced by a single call, there's then also no point
-in using the local "mfn" in this code.
+We already have two instances of this, and we're about to gain a third.
 
-Amends: 5260e8fb93f0 ("xen: re-define assign_pages and introduce a new function assign_page")
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
---- a/xen/arch/x86/pv/dom0_build.c
-+++ b/xen/arch/x86/pv/dom0_build.c
-@@ -618,12 +618,12 @@ static int __init dom0_construct(const s
-                      (vinitrd_start - v_start) >> PAGE_SHIFT :
-                      domain_tot_pages(d);
-         initrd_mfn = paddr_to_pfn(initrd->start);
--        mfn = initrd_mfn;
-         count = PFN_UP(initrd_len);
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -1007,6 +1007,17 @@ static unsigned int __init copy_bios_e82
+     return n;
+ }
  
- #ifdef CONFIG_PV32
-         if ( d->arch.pv.physaddr_bitsize &&
--             ((mfn + count - 1) >> (d->arch.pv.physaddr_bitsize - PAGE_SHIFT)) )
-+             ((initrd_mfn + count - 1) >>
-+              (d->arch.pv.physaddr_bitsize - PAGE_SHIFT)) )
-         {
-             order = get_order_from_pages(count);
-             page = alloc_domheap_pages(d, order, MEMF_no_scrub);
-@@ -648,9 +648,8 @@ static int __init dom0_construct(const s
-         else
- #endif
-         {
--            while ( count-- )
--                if ( assign_pages(mfn_to_page(_mfn(mfn++)), 1, d, 0) )
--                    BUG();
-+            if ( assign_pages(mfn_to_page(_mfn(initrd_mfn)), count, d, 0) )
-+                BUG();
-             /*
-              * We have mapped the initrd directly into dom0, and assigned the
-              * pages. Tell the boot_module handling that we've freed it, so the
++static unsigned long __init nr_ram_pages(void)
++{
++    unsigned long nr_pages = 0;
++
++    for ( unsigned int i = 0; i < e820.nr_map; i++ )
++        if ( e820.map[i].type == E820_RAM )
++            nr_pages += e820.map[i].size >> PAGE_SHIFT;
++
++    return nr_pages;
++}
++
+ /*
+  * Calculate the maximum possible size of the dom0 cmdline.  Pieces of the
+  * dom0 cmdline optionally come from the bootloader directly, from Xen's
+@@ -1139,7 +1150,7 @@ void asmlinkage __init noreturn __start_
+     struct cpu_info *info = get_cpu_info(), *bsp_info;
+     unsigned int initrdidx, num_parked = 0;
+     struct boot_info *bi;
+-    unsigned long nr_pages, raw_max_page;
++    unsigned long raw_max_page;
+     int i, j, bytes = 0;
+     unsigned long eb_start, eb_end;
+     bool acpi_boot_table_init_done = false, relocated = false;
+@@ -1491,11 +1502,7 @@ void asmlinkage __init noreturn __start_
+     memcpy(&boot_e820, &e820, sizeof(e820));
+ 
+     /* Early kexec reservation (explicit static start address). */
+-    nr_pages = 0;
+-    for ( i = 0; i < e820.nr_map; i++ )
+-        if ( e820.map[i].type == E820_RAM )
+-            nr_pages += e820.map[i].size >> PAGE_SHIFT;
+-    set_kexec_crash_area_size((u64)nr_pages << PAGE_SHIFT);
++    set_kexec_crash_area_size(nr_ram_pages() << PAGE_SHIFT);
+     kexec_reserve_area();
+ 
+     for ( i = 0; i < bi->nr_modules; i++ )
+@@ -1862,14 +1869,10 @@ void asmlinkage __init noreturn __start_
+                         (unsigned long)__va(__pa(__2M_rodata_end)),
+                         PAGE_HYPERVISOR_RO);
+ 
+-    nr_pages = 0;
+-    for ( i = 0; i < e820.nr_map; i++ )
+-        if ( e820.map[i].type == E820_RAM )
+-            nr_pages += e820.map[i].size >> PAGE_SHIFT;
++    total_pages = nr_ram_pages();
+     printk("System RAM: %luMB (%lukB)\n",
+-           nr_pages >> (20 - PAGE_SHIFT),
+-           nr_pages << (PAGE_SHIFT - 10));
+-    total_pages = nr_pages;
++           total_pages >> (20 - PAGE_SHIFT),
++           total_pages << (PAGE_SHIFT - 10));
+ 
+     /* Sanity check for unwanted bloat of certain hypercall structures. */
+     BUILD_BUG_ON(sizeof_field(struct xen_platform_op, u) !=
 
 
