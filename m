@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7B61CA9ED1
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 13:48:36 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446378.1662508 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8F3ECA9ED1
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 13:50:42 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446385.1662517 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGGO7-0003Oi-Df; Mon, 12 Oct 2026 13:48:23 +0000
+	id 1xGGPx-0004wt-Nz; Mon, 12 Oct 2026 13:50:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446378.1662508; Mon, 12 Oct 2026 13:48:23 +0000
+Received: by outflank-mailman (output) from mailman id 1446385.1662517; Mon, 12 Oct 2026 13:50:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGGO7-0003Ob-AY; Mon, 12 Oct 2026 13:48:23 +0000
-Received: by outflank-mailman (input) for mailman id 1446378;
- Mon, 12 Oct 2026 13:48:21 +0000
+	id 1xGGPx-0004wm-LM; Mon, 12 Oct 2026 13:50:17 +0000
+Received: by outflank-mailman (input) for mailman id 1446385;
+ Mon, 12 Oct 2026 13:50:16 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGGO5-0003OT-9d
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 13:48:21 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGGPw-0004wg-DF
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 13:50:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGGO4-004gvH-1s
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 15:48:20 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xGGPv-005jto-Pn
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 15:50:15 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acce521-e002-0a2a0a5209dd-0a2a4503a566-8
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:48:19 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acce523-fae8-0a2a45030019-d1558033dcc3-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:48:19 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-4a16aaf2067so23567415e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 06:48:19 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bb6b3cbsm232843565e9.0.2026.10.12.06.48.18
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6acce58e-8faa-0a2a0a5109dd-0a2a450c90f4-36
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:50:15 +0200
+Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6acce597-f479-0a2a450c0019-d155802cdcd9-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:50:15 +0200
+Received: by mail-wm1-f44.google.com with SMTP id
+ 5b1f17b1804b1-4a16aaf2067so23588175e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 06:50:15 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
+ [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48db9ade914sm18121261f8f.54.2026.10.12.06.50.12
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 06:48:18 -0700 (PDT)
+ Mon, 12 Oct 2026 06:50:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,227 +52,188 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791812899; x=1792417699; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=gmail.com; s=20251104; t=1791813015; x=1792417815; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=0JJgzXibs2L8Ozots3TUohDX9JTUp65Qyaj9d4ug+z4=;
-        b=de0qNkV7oLOHjpnKRjry7TTmpSajk+l2Ogn7eXQIdYmyLNQRn2olTHaNIxtAKnMsnw
-         u6jV+j+gUsKqB5MkIXEIZaRjN7JpAgYvzyk5sY0c2vchWX5V8qmf1uhlMhp4i30CUew0
-         eBZbF9S8uzHrgKuN7gfXXtL6RbPAwQUS+GObEQ2TzT/3AzILoYQcfPdvUSzmE6QOpK/b
-         g5mT9QJTej713dFV07UU9Y7v/xL6V+qy2hODwq2L2Q800vDUtHzCxaOQsMUp0+Zcb14x
-         Im6W9jIPcVliYbQPY+95tiSIN8+KMOtMNCE6xBfnJJKVSZFFaEW5vcizzld+HqLA9mHc
-         cA+w==
+        bh=ytP0QNn9MIUxZonDK/H7HrHHAAyzmi7idecn6+c9uV0=;
+        b=WOIgDP5Xn8n70jYuImHxINtmtdd0rFJHG2YbP06HRrsNMo5HDO45xqAdOV/yHwvvq3
+         KvkoHXH+CTKRr/8qfcfdE4ephYz/AmRIax6ah5/nWc7DYd0GoRJJHuTykH5u87bxobaq
+         GXAeBpw+Ymdc9/SlEIjuIMgfWCNctpbqHfbQDslBJZGBpxX29b9cWoFkO5DXgIYal/sr
+         8316fnp6yhhWhlZ1oZLlY0JurlHgkljyrxlTfBVqz93bAGo1IZ+IeRSHxmDFPMIeYD/N
+         p4ap+yFif8jWPc4s1Sf892WF9ffwjtpNcyajsTaZ2Zfmf4OcEzpinX3jEvqwNwzcIxkb
+         NerQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791812899; x=1792417699;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=1e100.net; s=20260707; t=1791813015; x=1792417815;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=0JJgzXibs2L8Ozots3TUohDX9JTUp65Qyaj9d4ug+z4=;
-        b=QhPzSaWkHrppqla5y85euRjyHq7geurU8UITnnldKVQkk3J1qSFsD5S2lOVOI9Wv1/
-         WJp9j+hz2irlc1d2ZKiYzib+5VtDeyM7A5GjjSPbH1o/tP3Tj863oj0pOCq6NSUTP8wf
-         T9jD41vd4QSWNSPOMhM/uf81iEajx4JJf6Cye+mPjd1v0mdNJ1l0LjRMaH/HTp6RYU/G
-         LEKprsp71XeXEiSaD8MOiDrGAFR6915YR9mk1C40XHSwuFEgCwV+UFG5Y8ANSqKLGqYv
-         jUaIi5HqP/cnBuxdXmYO6MGYc1XqArNtgmFfn/IqSLGNOdQofQ+qQcXGMqeW4YMyGjQk
-         4ciA==
-X-Forwarded-Encrypted: i=1; AKwUvBx6ae9YvK+TxbMH0iqBvqwAi0ZSlLZkLrIscgR9jGPDikSN2VVd7r/jIOjEnxZyZTgTk0QtAQ3V+NI=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIBMy42zm+n4olTJfo6rvwKW1xuPNv82HRohb+7652VZ3fh0nL+
-	DhlFhvMvaXRQxgiPrFqkrRpMjeB7SMfJtNTebt+cHIvhKnQ8qrwvvNOBlVYyY0gkJQ==
-X-Gm-Gg: AYBFou0coHeLt3BWk3PyFf/pk3jM4Rv+3of05RvScK4f1zwd8UG6GrD+ZxB2EZaizH2
-	5yK8nbQ/X3AkoXDEbZofevMtL9ZDGUiPD5GgktV4r8PTgmeB/yN1ONgVul87UmjhQNF/ezMw/KK
-	I0Nn7Jg0GZWMUizfR4gvHeVdi7qysFHlwwGfEyS15CmWib3SWvsM1zcTpTcqj1tgqWtpLISl0Mm
-	Jw8xqYIf9EIiZolilRRcsrO2k6CyNwG6k4atWA81gBTgMG0yPDFhWCVQpjQ09rmGurZrjVo/KZi
-	VSbDp+gn2jGdV5Ss67vIu4c4MPzZvXV8CkqAT+t0aneRwZOLaaf1l1vYPMPCNEyda31I2PszKjT
-	TciaMKLQH/mali61Vepu2/BmlYn4qfKsTPRTN19mjrXuvXIGUIJ8DA/y+BxxNzA94fBzntlizyG
-	kEkFseY1hyRoNKD730jO0E+d+9j4xb8x6phHXWKM3OyNs0L2f318g26b38Tjc9iscGl5XbGEChk
-	aIWS4FLXLvUjgyxIfautQs7ARB76rlr7AjZ37BIX4RvaZTD7DFWtG7PquxfkQ==
-X-Received: by 2002:a05:600c:4ecb:b0:4a1:76c9:5408 with SMTP id 5b1f17b1804b1-4a18e4a510emr192106875e9.11.1791812899172;
-        Mon, 12 Oct 2026 06:48:19 -0700 (PDT)
-Message-ID: <8514b7b6-cf1c-44d9-827c-675fd5a6708e@suse.com>
-Date: Mon, 12 Oct 2026 15:48:19 +0200
+        bh=ytP0QNn9MIUxZonDK/H7HrHHAAyzmi7idecn6+c9uV0=;
+        b=kgOmRJqudKx0zFx3sekaLxZIuqQ+9McqQ4DbVxaBYtbdAtwASDWR+5k89A2DznxpHN
+         Fm9GgLkLGnHlLII2yuGMEa7iV33nPruC1tjCwAXf1ucHtFYG8mqtfnU3cSAzq/Yn71TI
+         T+ChmVXTpjpOP4sYHWbZLNYfdSc9xoYLRPBr78IB/AQ1hg2pTyrgiQmLKE1VTLI8ygxg
+         A/BLoxzntimlyrTlE0KuzNWxDroBlmUCeDPbxfkiPhPvPknN6yqmvabpWr/K68yttZ48
+         lkWhYOX+NbRw1DjKCiS5xTgvKQEMe/H8GrNXkqNaCiSGqhiDIPAz4gqH9FaXNs2A2gai
+         MZiQ==
+X-Gm-Message-State: AFq9FYLJxH4/2HM6r3BXHgIbKBa+D0fassf7wL1ZRsBiyXfzFP4pU3k6
+	fxVbstq3AFXVXdVtsgNEJoNQTdnKmp+3Y+54DJUntc+uDfEjV3W0DasI
+X-Gm-Gg: AYBFou2rMptVb9wl4A0VWbKAq9An5t5jw/p9/hLc1oGmTiT3hOt0saS4Ir1lhnBl1Fd
+	ipcPU/4lLKwwppKyEgyf9r03HUmWcgoC0Dayk4MrJ7aJyxuIoxez/zxPzpeKgNFTHCU1Rr1Aa3E
+	S6qyiNGsh2jgHokXXtl4xmbgHVGSG+16HUUg6GzRGM8JBCJUmTyAN72SllbWW5IbGwWr79C4KMl
+	5Z0JpyxD/o4mPrbiLzZeVkMneF/TC2ctCYspPwUbXHBeIMYYUJ242QTzgeNIjQEncM2jFONa5oh
+	p59dM3GlHou/jzt2RZ3BBaym66HCMJHRMROhc8t2pleg0Dsg9EMsgIj00AannqeebV2CaZ9rdmj
+	LtZvso49HkaDYybVp7igeDnIg6Tw/Vhc55DuDRAjxJ1xWCoXYFB52WnFZGMuBfgosxUl2SfG93k
+	mxj8C2y4a40A+B8vwijTEbpzmHO2s21HqIQ8W6c7q8+lJjhd9ZGRxe+qsyM6MJXPTojChqQzbYj
+	m+XMhGolooI67KGvtU0UbWOVWn/FbBuYpo9t4O6OgpPYSRFQw==
+X-Received: by 2002:a05:600c:4f46:b0:49f:cbf1:e77b with SMTP id 5b1f17b1804b1-4a18e4a5355mr229518845e9.10.1791813014741;
+        Mon, 12 Oct 2026 06:50:14 -0700 (PDT)
+Message-ID: <1960669d-0a07-4bf5-9219-c079cb9d0081@gmail.com>
+Date: Mon, 12 Oct 2026 15:50:12 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 08/18] x86/domain_page: prepare the mapcache for
- per-vCPU accounting
-To: George Dunlap <gwd@xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20261007104051.48841-1-gwd@xenproject.org>
- <20261007104051.48841-9-gwd@xenproject.org>
+Subject: Re: [PATCH v3 06/39] xen/riscv: introduce device-agnostic MMIO
+ emulation dispatch
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <cafb356d9cc3148d74df846e08c4961da72bea0e.1790779209.git.oleksii.kurochko@gmail.com>
+ <1791194531.8631fc262581453bbf619ec5b2062170.1a10b8384c50003f66@vates.tech>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261007104051.48841-9-gwd@xenproject.org>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1791812899-6F6C64E9-E980086C/10/78276251493
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1791194531.8631fc262581453bbf619ec5b2062170.1a10b8384c50003f66@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d25034/1791813015-51538A5B-646B575C/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 5285
+X-purgate-size: 3681
 
-On 07.10.2026 12:40, George Dunlap wrote:
-> From: Roger Pau Monné <roger.pau@citrix.com>
+
+
+On 10/5/26 12:01 PM, Baptiste Le Duc wrote:
+
+[...]
+
+>> diff --git a/xen/arch/riscv/include/asm/mmio.h b/xen/arch/riscv/include/asm/mmio.h
+>> new file mode 100644
+>> index 0000000000..1bf48571a9
+>> --- /dev/null
+>> +++ b/xen/arch/riscv/include/asm/mmio.h
+>> @@ -0,0 +1,63 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+>> +#ifndef RISCV_MMIO_H
+> Should be ASM__RISCV_MMIO_H instead to be consistant with other header
+> files in riscv/include/asm.
+
+According to the coding style document it should be 
+<arch>_<something>_H. I understand that some headers in RISC-V looks in 
+the way ASM__arch_something_H only becuase they were introduced before 
+the header guard recommendations have been updated.
+
+I think I could suggest a separate patch to rename all header guards, at 
+least, for RISC-V to avoid such type of confusion in future.
+
+>> +#define RISCV_MMIO_H
+>> +
+>> +#include <xen/lib.h>
+>> +#include <xen/rwlock.h>
+>> +
+>> +struct domain;
+>> +struct vcpu;
+>> +
+>> +#define MAX_IO_HANDLER  16
+>> +
+>> +typedef struct {
+>> +    paddr_t gpa;
+>> +    unsigned int len;  /* Access width in bytes */
+>> +    bool is_write;
+>> +    /* Store: value to write; load: value read (set by handler) */
+>> +    register_t data;
+>> +} mmio_info_t;
+>> +
+>> +enum io_state
+>> +{
+> Style: should be directly after enum io_state.
+
+I will fix that.
+
+>> +    IO_ABORT,       /* The IO was handled and led to an abort. */
+>> +    IO_HANDLED,     /* The IO was successfully handled. */
+>> +    IO_UNHANDLED,   /* No handler found for the IO. */
+>> +};
+>> +
+
+[...]
+
+>> +static enum io_state try_handle_mmio(mmio_info_t *info)
+>> +{
+>> +    struct vcpu *v = current;
+>> +    struct mmio_handler handler = {};
+>> +
+>> +    if ( !find_mmio_handler(v->domain, info->gpa, &handler) )
+>> +        return IO_UNHANDLED;
+>> +
+>> +    if ( info->is_write )
+>> +        return handler.ops->write(v, info);
+>> +    else
+> The else is not necessary here, misra would call that "dead code".
+> Here are two suggestions:
 > 
-> Currently, only PV domains have a mapcache, which is domain-wide one.
-> In preparation for enabling per-vCPU mapcaches for HVM domains, split
-> the accounting out into a struct mapcache, embedded in struct
-> mapcache_domain.
+>        if ( info->is_write )
+>            return handler.ops->write(v, info);
 > 
-> Introduce has_mapcache(), for whether a vCPU has a mapcache, and
-> vcpu_mapcache(), which returns the accounting for a vCPU's mapcache
-> and, in *dcache, the domain-wide mapcache whose lock and TLB epoch the
-> caller has to take into account.  For now has_mapcache() is
-> is_pv_vcpu(), and vcpu_mapcache() always returns the domain's
-> accounting.  map_domain_page() and unmap_domain_page() stop repeating
-> the is_pv_vcpu() check mapcache_current_vcpu() has made.
+>        return handler.ops->read(v, info);
+
+Sure, I'll drop the else and go with the first variant in the next
+version.
+
+I am not too much into MISRA stuff and just for my education could you 
+please specify what MISRA rule has been violdated here?
+
+I suppose it is because of Rule 2.2 (or 2.1?). I don't think Rule 2.2 
+applies here. MISRA C:2012 defines dead code as "any operation that is 
+executed but whose removal would not affect program behaviour" (as 
+quoted in [1], Section IV). The else doesn't introduce any such 
+operation: both forms have the same semantics, and the read() call under 
+the else is executed whenever is_write is false, so it is neither dead 
+nor unreachable (Rule 2.1).
+
+FWIW, I also compared what gcc 16 generates for RISC-V: at -O0 and -Os
+the variants with and without the else are byte-identical, and at
+-O1/-O2 the only difference is which of the two calls is laid out as the
+fall-through path; the instructions are otherwise the same. But probably 
+this is not the best way to verify things...
+
+Also, R2.2 is disapplied project-wide for Xen anyway (see 
+docs/misra/deviations.rst).
+
+[1] https://arxiv.org/abs/2212.13933
+
+> or:
 > 
-> Move map_domain_page()'s handling of the domain-wide lock and TLB epoch
-> into three helpers: mapcache_lock() takes the lock and catches up with
-> a wrap another vCPU caused, mapcache_new_epoch() starts a new epoch
-> after a wrap, and mapcache_unlock() drops the lock.  A per-vCPU
-> mapcache can then skip them without map_domain_page() being
-> re-indented.
+>        return info->is_write ? handler.ops->write(v, info)
+>                              : handler.ops->read(v, info);
 > 
-> struct mapcache_domain keeps its size (40 bytes, x86_64 debug build),
-> and so do the structures containing it.
-> 
-> No functional change.
-> 
-> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-> Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
-> Signed-off-by: George Dunlap <gwd@xenproject.org>
-> ---
-> Changes in v3:
-> - New in this version, split out of "x86/hvm: introduce per-vCPU
->   mapcache for vCPU-PT domains" for review.
-> ---
->  xen/arch/x86/domain_page.c        | 155 ++++++++++++++++++++----------
->  xen/arch/x86/include/asm/domain.h |  19 ++--
->  2 files changed, 116 insertions(+), 58 deletions(-)
-> 
-> diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-> index 9119f735f5..5d90f77bed 100644
-> --- a/xen/arch/x86/domain_page.c
-> +++ b/xen/arch/x86/domain_page.c
-> @@ -18,17 +18,23 @@
->  #include <asm/hardirq.h>
->  #include <asm/setup.h>
->  
-> +/*
-> + * Whether v has a mapcache: PV vCPUs (whose domain-wide mapcache may still be
-> + * disabled, see mapcache_domain_init()).  HVM vCPUs reach everything through
-> + * the directmap, which covers all physical address space for them.
-> + */
-> +static bool has_mapcache(const struct vcpu *v)
-> +{
-> +    return is_pv_vcpu(v);
-> +}
-> +
->  static inline struct vcpu *mapcache_current_vcpu(void)
->  {
->      struct vcpu *v = this_cpu(pgtable_vcpu);
->      struct vcpu *curr = current;
->  
-> -    /*
-> -     * During early boot pgtable_vcpu is not set, callers must handle NULL.
-> -     * Non-PV domains don't have a mapcache, the directmap covers all physical
-> -     * address space.
-> -     */
-> -    if ( !v || !is_pv_vcpu(v) )
-> +    /* During early boot pgtable_vcpu is not set, callers must handle NULL. */
-> +    if ( !v || !has_mapcache(v) )
->          return NULL;
 
-(For context below: The replacement of is_pv_vcpu() here is easy to follow.)
+If I am not confused something above then why thos option doesn't 
+violate MISRA rule abouve 'dead code' isn't ternary operation just an 
+equivalent to if/else?
 
-> @@ -54,6 +60,55 @@ static inline struct vcpu *mapcache_current_vcpu(void)
->      return ACCESS_ONCE(this_cpu(pgtable_vcpu));
->  }
->  
-> +/*
-> + * The accounting for v's mapcache: the domain's, with *dcache set so the
-> + * caller takes the domain-wide lock and TLB-epoch machinery into account.
-> + */
-> +static struct mapcache *vcpu_mapcache(struct vcpu *v,
-> +                                      struct mapcache_domain **dcache)
-> +{
-> +    struct domain *d = v->domain;
-> +
-> +    *dcache = &d->arch.pv.mapcache;
-> +    return &(*dcache)->cache;
-> +}
+Thanks for review!
 
-This function only retrieves data. Can't its first parameter therefore be
-pointer-to-const?
+~ Oleksii
 
-> @@ -74,12 +130,12 @@ void *map_domain_page(mfn_t mfn)
->  #endif
->  
->      v = mapcache_current_vcpu();
-> -    if ( !v || !is_pv_vcpu(v) )
-> +    if ( !v )
->          return mfn_to_virt(mfn_x(mfn));
 
-I don't quite understand why this is_pv_vcpu() is okay to drop. What
-mapcache_current_vcpu() returns isn't what it ran is_pv_vcpu() on. (Same
-in unmap_domain_page() then, obviously.)
-
-> @@ -249,15 +294,23 @@ void mapcache_domain_init(struct domain *d)
->  int mapcache_vcpu_init(struct vcpu *v)
->  {
->      struct domain *d = v->domain;
-> -    struct mapcache_domain *dcache = &d->arch.pv.mapcache;
-> +    struct mapcache_domain *dcache;
-> +    struct mapcache *cache;
->      unsigned long i;
-> -    unsigned int ents = d->max_vcpus * MAPCACHE_VCPU_ENTRIES;
-> -    unsigned int nr = PFN_UP(BITS_TO_LONGS(ents) * sizeof(long));
-> +    unsigned int ents, nr;
->  
-> -    if ( !is_pv_vcpu(v) || !dcache->inuse )
-> +    if ( !has_mapcache(v) )
->          return 0;
->  
-> -    if ( ents > dcache->entries )
-> +    cache = vcpu_mapcache(v, &dcache);
-> +    if ( !cache->inuse )
-> +        /* Domain-wide mapcache disabled (fully direct-mapped build). */
-> +        return 0;
-
-While technically not wrong, this comment appears to be quite a bit
-forward-looking.
-
-> +    ents = d->max_vcpus * MAPCACHE_VCPU_ENTRIES;
-> +    nr = PFN_UP(BITS_TO_LONGS(ents) * sizeof(long));
-
-Is there a reason these cannot be the initializers of their variables
-anymore?
-
-Jan
 
