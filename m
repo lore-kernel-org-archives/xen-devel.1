@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0F423CA9ED0
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 12:00:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446203.1662269 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5CB72CA9EC5
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 12:03:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446209.1662278 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGEh7-0008T3-BQ; Mon, 12 Oct 2026 11:59:53 +0000
+	id 1xGEkh-0001q0-UG; Mon, 12 Oct 2026 12:03:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446203.1662269; Mon, 12 Oct 2026 11:59:53 +0000
+Received: by outflank-mailman (output) from mailman id 1446209.1662278; Mon, 12 Oct 2026 12:03:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGEh7-0008Sw-7y; Mon, 12 Oct 2026 11:59:53 +0000
-Received: by outflank-mailman (input) for mailman id 1446203;
- Mon, 12 Oct 2026 11:59:51 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGEh5-0008Sq-9m
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 11:59:51 +0000
+	id 1xGEkh-0001pt-RV; Mon, 12 Oct 2026 12:03:35 +0000
+Received: by outflank-mailman (input) for mailman id 1446209;
+ Mon, 12 Oct 2026 12:03:34 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGEkg-0001pn-U2
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 12:03:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGEh4-00FIOR-MX
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 13:59:50 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xGEkf-00BqU1-Ib
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 14:03:33 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acccb99-8faa-0a2a0a5109dd-0a2a4505e4fa-46
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 13:59:50 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6acccc93-2eae-0a2a0a5409dd-0a2a4508c6f2-2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 14:03:33 +0200
+Received: from [209.85.221.43] (helo=mail-wr1-f43.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acccbb6-4cb1-0a2a45050019-d155802dac70-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 13:59:50 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4a01933b584so15705745e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 04:59:50 -0700 (PDT)
+ id 6acccc95-f659-0a2a45080019-d155dd2be41f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 14:03:33 +0200
+Received: by mail-wr1-f43.google.com with SMTP id
+ ffacd0b85a97d-48b0ef9c76eso1496151f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 05:03:33 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a19c8244edsm115716965e9.2.2026.10.12.04.59.49
+ ffacd0b85a97d-48db9462ebcsm19780624f8f.8.2026.10.12.05.03.31
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 04:59:49 -0700 (PDT)
+ Mon, 12 Oct 2026 05:03:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,57 +54,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791806390; x=1792411190; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791806613; x=1792411413; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=fmmpCIyDBuwvHjkLzk3Y9dfyUmxSxY9kcRGuz5iGdHE=;
-        b=CzjAPUdx1u6yTXuWqPJa7UcGFEekMbN9LsRun2HujVz8d6iHaEgXrIWWDq7JcfzMkg
-         FTh/5I+g/sf3Ef4qV4cvocS4VdQ7s9qEobpOZVRyA8a2/S56Mv8x0SCl9fseutdigVCG
-         GdQAh9hHMLiDrUB5vpq75ulv8AKeMt+fWDp34qdwrpYAeB8tGPHoj32/hDRe9EhspL8t
-         hBykFt++gjobA07qaMoqzTsbpV7nhwHgw/7/UEg1YxdOE4irdO18hbMek1T0T3PwfOpi
-         2xXv4WLhs2O8C2qn1UkCF5hU9EUW7PIBYntFjhW0apgmE1SU67dLZ4Hi00MZzOKTOpPU
-         qD4A==
+        bh=g/5uWLhmc5giyZICWRpR/uieQ7PcO2wnmlPt6EKMsCk=;
+        b=WOQbrp+A01aCK9M0yb2QKLsp6+g36cqjoReAgT2ihN0C9AF8z7738Mj7YKvEDLHz6k
+         tposxIXuo61Gn/tFpBi8Eo592Ak7wqkBi8sPvT7zQfqVNZccelkG0jmagH/zoAtSDeqv
+         skdbgMlbgQC/Dj0vZXQZLFALV/HRO2Q/nokCjOgSZHoWpgEvlMo83i1V6CP/mgwgHckW
+         hTy5dLZZlRMn+7b2Pky4yNvbS8L3YvlMd2F0h664cx0w+MTFl9KHaN59LdYtf8Jrll4O
+         Kfo5jNzK2vePfpfkJ7ZzEJAi3CUZk0tZkFP+HM175liS9q3J2abBsky7yr0V8VYgKOqK
+         wcqQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791806390; x=1792411190;
+        d=1e100.net; s=20260707; t=1791806613; x=1792411413;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=fmmpCIyDBuwvHjkLzk3Y9dfyUmxSxY9kcRGuz5iGdHE=;
-        b=GrAXCpp0W/SWJ0LIC6Uiqtryn9xmPZ5gsaGC/1nAPuh/1+r3LHhoXwsQXq5Le/mkpN
-         Ef1u3d1bnxgrkNYTzgUHDdVDgJQuUoXGmNkC0PdxqpnjaAHSrg9aITHq/RJMXqQMuPOL
-         ZXki0vPK+LtChPaCGLLHGQI7icW9w4XUF27b6WKzA9whdYEV2etT1o8tTBZXZxzsek2v
-         APRjk4DpyC6Q3bcaurPFycUZfxwQ12YyzhjxPywlPXXs8/Xy6D90Ch0sL+aaVI5IBT9x
-         SUSQzI4kpxVXWHfnK1LkkXR/Nvvgkkq8vG+pI10qa1AUGK4402tqjBaAp0SW0PLXw7B4
-         5rfg==
-X-Forwarded-Encrypted: i=1; AKwUvBy3oPev3DQ6p8g2oqMwinq+pM/dgw2847OZhb0AlArCg9lRTGClELl90+qRiy0Wi6K6omOFiLFT034=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKQXzhWbLT3WLaG0lhymLneD/QIXtq0Zf2ovwJDJJZl6RPXx8ou
-	2/z0mq77m8GBnhY6KpKb2Pb2XwveL+aVliuX1ZawqCNh8Xr7OnlGWTqATmLMqHzjgg==
-X-Gm-Gg: AYBFou2qRqSPnIMxpo1ZWf+6PZPnpXG9cu4jH6kuoMPEwSt3pftSkas6q+h6uvzm68T
-	JTrYwnAtjY7VnRlgQHJN0c4qxRoWH/YvfRWAuHnKPXK8K7SIvogzvgPQbs7SD6/0F6fpVJQ3OqV
-	IlfG3R1CjO7UYt8ISBtYM61PpY4us8PtjvX/XXs5k8VyVXbFajwrATwVEuM7HKx7084zzqj+0nA
-	mGkE7v7r6C6pegpRSyxWQHeTexoefI8naAmxKEfEMYy4G+QI/C7LcHpxPzInUvkO5qwPWFD/uUa
-	oqnHyM40zJ4ph4H78KsBshKW4JG3mcoMqy1Z23WWfC9C6Rm7qx10Qd0ca/VChFt0sgRunX794Qu
-	7W2dBFQL07HGDoWD4/9yzljwXIIlsgDFPTtbQnons5vjRapJomZPv59tGD70VqNLMwsBW3FJPXi
-	tKPTFLQ40srVBzyCCYL9UV72C2gTvB/RKFRwwCo3mJn/TROg6ZalJjkyjWCbrNhaINiCWKE/F+l
-	g8Vk2RTD/moRF9HwYVXDyG9cHBTEI/YFmUQrXPPZhDue2ZmvlACI6fmQOsDdA==
-X-Received: by 2002:a05:600c:83c7:b0:4a1:698d:3044 with SMTP id 5b1f17b1804b1-4a18e493020mr171577745e9.11.1791806389941;
-        Mon, 12 Oct 2026 04:59:49 -0700 (PDT)
-Message-ID: <4587c4c9-4744-4e96-bb39-d9209b973628@suse.com>
-Date: Mon, 12 Oct 2026 13:59:50 +0200
+        bh=g/5uWLhmc5giyZICWRpR/uieQ7PcO2wnmlPt6EKMsCk=;
+        b=dZtocQs0AwnPbpXtwGvfIElZiiEox9zFs6p0upRokAAE2nwwWYwNzEi/A2LYbOHqEw
+         D+3cguxHwEjJ/14t1Z7uafhCOfSCBy6Y9X7zg7tVQIK9o0uzDWzLDILCWdtwCSDSOovh
+         msWFucpyc0yDxXeJwWyCktrla19uoz2ddi2jY/aL3Mv0lZePO/20AsykwSgc+WWRfFEc
+         oiIQLyekDa7SAHdAVXfinj1oJfGCIb1roKh9aeCawxOq66zeb0A5B1+6z8QOQv+vKvUX
+         UY6DE/qtI3DCwWBaGCegX8i/gU2x/b65/JCuL4KS48bNSBSjs/wh5bMX4rUok/X4VS5G
+         evmg==
+X-Forwarded-Encrypted: i=1; AKwUvBxD+qe2XBQVEdh2P+oKDUAFkGtPEvv72Txptup1X1Mkv5MBPueFZ17t6fDkLKxukdDyZ69PSAZ5dqU=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKSSH3bW4I3ddtF3UJHOKUhwM29PSVwEBQwUOXQtoQGoJwslF7U
+	yqZRdzNRJq8qdGRThhcVRmgXdIN0vpO+54+bKCkA+M8SGqDvL+grTuO+++Yqy/PDRQ==
+X-Gm-Gg: AYBFou2Fpn5sNQHQBzIabnlxxx3ms/8bePabfIcLdKNfMsX4BWYCfM+HgCckBAlm7yY
+	h5abGKkipietXwuf2Qzsp2ut90lW74XQwULHbrYDPItnoG3yKkood4VTL5xEzNIqCxLTUbJbcbz
+	2aUW3/xbEuZ7nWKIlgp+QxcENCzGjX87gYqp3yozv0gvi9vkIUTof9uszQqEtyOXEB7hnzoHxRS
+	QZd12vynVhPmlwm0RlMPNQs7Do+KPwD8HePRZ/FzXF/M9jju9PPrtEK8OFu3K/rIQhNe67CP5xS
+	YqaLoR6+sJwgdMohdLLXkhJeo+92wtsQ3LlLduAaE6pru7YCO8ebQmvZhKj20Q2ckM0vMKdYpd5
+	bwDFLXMnMbd4In7mAhk53dfFx+xEzruCBtXHcGjYHvQ+rS8Wb2NO+XXRgf6qyZk0fFW8tMn02sp
+	y0adBFPaiO8L2Q3NIQ5vdxr1VGaWexlnr+cgDQhZwZBCM/VNgZuJebymd3OEC7GJiZQBh9PEwrU
+	Rklmg+fxP58WsXdxKyBsDK7H+tuq8L6m9XdVTipUf7wjLajUG0ws90QgYt+/A==
+X-Received: by 2002:adf:d002:0:b0:48a:f11a:c34a with SMTP id ffacd0b85a97d-48dbaaecf8fmr13540892f8f.52.1791806612700;
+        Mon, 12 Oct 2026 05:03:32 -0700 (PDT)
+Message-ID: <b2158d78-9a43-4d18-a64e-b3dd88d13947@suse.com>
+Date: Mon, 12 Oct 2026 14:03:33 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] drivers/char: add timeout for XHCI console cable
-To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20261009133608.364312-1-marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH v2] x86/svm: Sync nextrip during virtual VMRUN
+To: chunjie.zhu@citrix.com
+Cc: jason.andryuk@amd.com, roger@xenproject.org, ross.lagerwall@citrix.com,
+ teddy.astie@vates.tech, andrew.cooper3@citrix.com,
+ xen-devel@lists.xenproject.org
+References: <0835710d-f67d-4678-ba39-4597b9c9c7f7@citrix.com>
+ <20261010040502.96413-1-chunjie.zhu@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,42 +128,30 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261009133608.364312-1-marmarek@invisiblethingslab.com>
+In-Reply-To: <20261010040502.96413-1-chunjie.zhu@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1791806390-2551A2A1-73D03860/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1791806613-D654487B-C3ED9869/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1827
+X-purgate-size: 967
 
-On 09.10.2026 15:35, Marek Marczykowski-Górecki wrote:
-> Do not wait indefinitely for XHCI to configure console connection. If
-> the cable is not plugged in, timeout after about 1s and continue boot.
-> If the cable is plugged in later, the console will be activated then
-> (see final part of dbc_ensure_running()). When timeout occurs, print a
-> warning message - it will be saved in the console ring buffer, to be
-> later retrieved from dom0, or possibly later printed when the cable is
-> finally connected. But, do not print the warning when waiting after
-> controller reset, as that may have been called from from console
-> dbc_putc() and printing here would result in (possibly infinite)
-> recursion.
+On 10.10.2026 06:05, chunjie.zhu@citrix.com wrote:
+> From: Chunjie Zhu <chunjie.zhu@citrix.com>
 > 
-> Try the timeout to be about 1s, which is way above time needed for
-> configuring already connected cable. But, since this part runs very
-> early in the Xen startup, time is not calibrated yet, and functions like
-> NOW() do not work yet. Use raw TSC and estimate needed time to be at
-> least 1s on a fast CPU (5GHz), and possibly longer on a slower one. This
-> is not very accurate method, but fortunately it doesn't need to be.
+> NextRIP is consumed on VMRUN as the return address pushed onto the
+> stack for injected soft exceptions/interrupts.  nsvm_vmcb_prepare4vmrun()
+> builds n2vmcb from the virtual VMCB on every entry to the L2 guest, but
+> never copied this field, leaving n2vmcb->nextrip stale.  Injecting an
+> event in this state can wedge the L2 vCPU, as the APM does not define
+> behaviour for a VMRUN with a garbage NextRIP.
 > 
-> This also helps with similar situation on resuming from suspend - if
-> cable got unplugged in the meantime, system will not hang waiting for
-> the console anymore. And finally, on some systems, when dom0 is also
-> allowed to access the USB controller, it may put the device into low
-> power mode that in some older controllers (for example Kaby Lake)
-> disables also debug capability. In such a case, adding a timeout allows
-> the system to resume, then dom0 can wake up the controller and Xen will
-> resume XHCI console.
+> Nested virt is only offered on NRIPS-capable hardware, and NRIPS is
+> required to be advertised to L1 (see start_nested_svm()), so the L1
+> hypervisor is required to keep NextRIP correct.  Therefore no
+> conditional logic is needed here; an unconditional sync suffices.
 > 
-> Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+> Suggested-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> Signed-off-by: Chunjie Zhu <chunjie.zhu@citrix.com>
 
 Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
