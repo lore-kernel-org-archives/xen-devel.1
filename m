@@ -4,47 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 386F6CA9ED1
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 13:42:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446355.1662500 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7B61CA9ED1
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 13:48:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446378.1662508 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGGIZ-0001hF-RI; Mon, 12 Oct 2026 13:42:39 +0000
+	id 1xGGO7-0003Oi-Df; Mon, 12 Oct 2026 13:48:23 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446355.1662500; Mon, 12 Oct 2026 13:42:39 +0000
+Received: by outflank-mailman (output) from mailman id 1446378.1662508; Mon, 12 Oct 2026 13:48:23 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGGIZ-0001h4-O0; Mon, 12 Oct 2026 13:42:39 +0000
-Received: by outflank-mailman (input) for mailman id 1446355;
- Mon, 12 Oct 2026 13:42:38 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGGIY-0001YS-8q
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 13:42:38 +0000
+	id 1xGGO7-0003Ob-AY; Mon, 12 Oct 2026 13:48:23 +0000
+Received: by outflank-mailman (input) for mailman id 1446378;
+ Mon, 12 Oct 2026 13:48:21 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGGO5-0003OT-9d
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 13:48:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGGIX-00GP0q-Lk
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 15:42:37 +0200
-Received: from [10.42.69.1] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a130599b7500080d7@swg.vates.tech>)
- id 6acce3c1-2eae-0a2a0a5409dd-0a2a4501b832-48
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:42:37 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a130599b7500080d7@swg.vates.tech>)
- id 6acce3ca-5984-0a2a45010019-b9ff1c229cbf-4
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:42:37 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a130599b7500080d7.00a for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 12 Oct 2026 13:42:21 +0000
-Received: from julian.home (82-67-211-29.subs.proxad.net [82.67.211.29])
- (Authenticated sender: julian.vetter@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id BF5FB82ABB;
- Mon, 12 Oct 2026 15:42:19 +0200 (CEST)
+ id 1xGGO4-004gvH-1s
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 15:48:20 +0200
+Received: from [10.42.69.3] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6acce521-e002-0a2a0a5209dd-0a2a4503a566-8
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:48:19 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6acce523-fae8-0a2a45030019-d1558033dcc3-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:48:19 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4a16aaf2067so23567415e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 06:48:19 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a18bb6b3cbsm232843565e9.0.2026.10.12.06.48.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 12 Oct 2026 06:48:18 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,293 +52,227 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=HDu/Fw7oeKygRixM8HOEunsHyOEsS5YFjTMxW4Jmr/w=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=VvwNwPvbMu8yMw2VFlBG0Vkfvbs7vk+s7lWnt8hJyph7jK+SdavHCYHUuPBTogj2tJz82x7SE
- M+9Qa6bZ57Ul4WwEtgdaiJ0fDxHnCy3dUl+527A5m/xVlEZvWMvCnM3Z8teUo17ffzlQIWli9Mb
- OflPIaXG6ypR3VNfWYlLJCeZZ7N1cGxpZS3khg8f6Th20GVKrr54PTZ/ueBXMV4KQso6Sqj1tj1
- liKcEsZLt0DQ/wTeUCA7wvAwE/ZhG1yI0+SpEnQ4dOsQMhrVCpCuGwIbiZ9HKGAD49xh4mHPF1T
- v/R5vUaokdGSmEHixoen64Ft6N0c9rSFQu0J7B3Du4TA==
-X-Zone-Loop: f91de126b8f844e3aa5de818495f828789c1b314360d
-x-campaign-type: default
-x-transaction-id: 160b10c5-2321-4789-93c5-6d90ae55376a
-x-swg-uid: 01-a4bd44e3-41d2-488b-ae1b-997e74e84669
-X-Mailer: Sweego
-Message-ID:
- <1791812541.8631fc262581453bbf619ec5b2062170.1a130599b7500080d7@vates.tech>
-x-swg-bid: 1791812541.8631fc262581453bbf619ec5b2062170.1a130599b7500080d7
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Julian Vetter <julian.vetter@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Community Manager <community.manager@xenproject.org>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Juergen Gross <jgross@suse.com>,
-	Andrii Sultanov <andriy.sultanov@vates.tech>,
-	Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
-	Timothy Pearson <tpearson@raptorengineering.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Teddy Astie <teddy.astie@vates.tech>,
-	Julian Vetter <julian.vetter@vates.tech>
-Subject: [PATCH v7 5/5] xen: make config argument const
-Date: Mon, 12 Oct 2026 15:42:07 +0200
-In-Reply-To: <1791812199.8631fc262581453bbf619ec5b2062170.1a13054627300080d7@vates.tech>
-References: <1791812199.8631fc262581453bbf619ec5b2062170.1a13054627300080d7@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1791812899; x=1792417699; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=0JJgzXibs2L8Ozots3TUohDX9JTUp65Qyaj9d4ug+z4=;
+        b=de0qNkV7oLOHjpnKRjry7TTmpSajk+l2Ogn7eXQIdYmyLNQRn2olTHaNIxtAKnMsnw
+         u6jV+j+gUsKqB5MkIXEIZaRjN7JpAgYvzyk5sY0c2vchWX5V8qmf1uhlMhp4i30CUew0
+         eBZbF9S8uzHrgKuN7gfXXtL6RbPAwQUS+GObEQ2TzT/3AzILoYQcfPdvUSzmE6QOpK/b
+         g5mT9QJTej713dFV07UU9Y7v/xL6V+qy2hODwq2L2Q800vDUtHzCxaOQsMUp0+Zcb14x
+         Im6W9jIPcVliYbQPY+95tiSIN8+KMOtMNCE6xBfnJJKVSZFFaEW5vcizzld+HqLA9mHc
+         cA+w==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791812899; x=1792417699;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=0JJgzXibs2L8Ozots3TUohDX9JTUp65Qyaj9d4ug+z4=;
+        b=QhPzSaWkHrppqla5y85euRjyHq7geurU8UITnnldKVQkk3J1qSFsD5S2lOVOI9Wv1/
+         WJp9j+hz2irlc1d2ZKiYzib+5VtDeyM7A5GjjSPbH1o/tP3Tj863oj0pOCq6NSUTP8wf
+         T9jD41vd4QSWNSPOMhM/uf81iEajx4JJf6Cye+mPjd1v0mdNJ1l0LjRMaH/HTp6RYU/G
+         LEKprsp71XeXEiSaD8MOiDrGAFR6915YR9mk1C40XHSwuFEgCwV+UFG5Y8ANSqKLGqYv
+         jUaIi5HqP/cnBuxdXmYO6MGYc1XqArNtgmFfn/IqSLGNOdQofQ+qQcXGMqeW4YMyGjQk
+         4ciA==
+X-Forwarded-Encrypted: i=1; AKwUvBx6ae9YvK+TxbMH0iqBvqwAi0ZSlLZkLrIscgR9jGPDikSN2VVd7r/jIOjEnxZyZTgTk0QtAQ3V+NI=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIBMy42zm+n4olTJfo6rvwKW1xuPNv82HRohb+7652VZ3fh0nL+
+	DhlFhvMvaXRQxgiPrFqkrRpMjeB7SMfJtNTebt+cHIvhKnQ8qrwvvNOBlVYyY0gkJQ==
+X-Gm-Gg: AYBFou0coHeLt3BWk3PyFf/pk3jM4Rv+3of05RvScK4f1zwd8UG6GrD+ZxB2EZaizH2
+	5yK8nbQ/X3AkoXDEbZofevMtL9ZDGUiPD5GgktV4r8PTgmeB/yN1ONgVul87UmjhQNF/ezMw/KK
+	I0Nn7Jg0GZWMUizfR4gvHeVdi7qysFHlwwGfEyS15CmWib3SWvsM1zcTpTcqj1tgqWtpLISl0Mm
+	Jw8xqYIf9EIiZolilRRcsrO2k6CyNwG6k4atWA81gBTgMG0yPDFhWCVQpjQ09rmGurZrjVo/KZi
+	VSbDp+gn2jGdV5Ss67vIu4c4MPzZvXV8CkqAT+t0aneRwZOLaaf1l1vYPMPCNEyda31I2PszKjT
+	TciaMKLQH/mali61Vepu2/BmlYn4qfKsTPRTN19mjrXuvXIGUIJ8DA/y+BxxNzA94fBzntlizyG
+	kEkFseY1hyRoNKD730jO0E+d+9j4xb8x6phHXWKM3OyNs0L2f318g26b38Tjc9iscGl5XbGEChk
+	aIWS4FLXLvUjgyxIfautQs7ARB76rlr7AjZ37BIX4RvaZTD7DFWtG7PquxfkQ==
+X-Received: by 2002:a05:600c:4ecb:b0:4a1:76c9:5408 with SMTP id 5b1f17b1804b1-4a18e4a510emr192106875e9.11.1791812899172;
+        Mon, 12 Oct 2026 06:48:19 -0700 (PDT)
+Message-ID: <8514b7b6-cf1c-44d9-827c-675fd5a6708e@suse.com>
+Date: Mon, 12 Oct 2026 15:48:19 +0200
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.104.ec8451bfddb2c110.1a130599957.6665c0d17a0b07b8=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1791812540759
-X-purgate-ID: tlsNG-d62444/1791812557-1F262757-C5FEA3D5/10/78276251493
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 08/18] x86/domain_page: prepare the mapcache for
+ per-vCPU accounting
+To: George Dunlap <gwd@xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20261007104051.48841-1-gwd@xenproject.org>
+ <20261007104051.48841-9-gwd@xenproject.org>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261007104051.48841-9-gwd@xenproject.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1791812899-6F6C64E9-E980086C/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 8367
+X-purgate-size: 5285
 
----=Part.104.ec8451bfddb2c110.1a130599957.6665c0d17a0b07b8=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 07.10.2026 12:40, George Dunlap wrote:
+> From: Roger Pau Monné <roger.pau@citrix.com>
+> 
+> Currently, only PV domains have a mapcache, which is domain-wide one.
+> In preparation for enabling per-vCPU mapcaches for HVM domains, split
+> the accounting out into a struct mapcache, embedded in struct
+> mapcache_domain.
+> 
+> Introduce has_mapcache(), for whether a vCPU has a mapcache, and
+> vcpu_mapcache(), which returns the accounting for a vCPU's mapcache
+> and, in *dcache, the domain-wide mapcache whose lock and TLB epoch the
+> caller has to take into account.  For now has_mapcache() is
+> is_pv_vcpu(), and vcpu_mapcache() always returns the domain's
+> accounting.  map_domain_page() and unmap_domain_page() stop repeating
+> the is_pv_vcpu() check mapcache_current_vcpu() has made.
+> 
+> Move map_domain_page()'s handling of the domain-wide lock and TLB epoch
+> into three helpers: mapcache_lock() takes the lock and catches up with
+> a wrap another vCPU caused, mapcache_new_epoch() starts a new epoch
+> after a wrap, and mapcache_unlock() drops the lock.  A per-vCPU
+> mapcache can then skip them without map_domain_page() being
+> re-indented.
+> 
+> struct mapcache_domain keeps its size (40 bytes, x86_64 debug build),
+> and so do the structures containing it.
+> 
+> No functional change.
+> 
+> Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+> Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
+> Signed-off-by: George Dunlap <gwd@xenproject.org>
+> ---
+> Changes in v3:
+> - New in this version, split out of "x86/hvm: introduce per-vCPU
+>   mapcache for vCPU-PT domains" for review.
+> ---
+>  xen/arch/x86/domain_page.c        | 155 ++++++++++++++++++++----------
+>  xen/arch/x86/include/asm/domain.h |  19 ++--
+>  2 files changed, 116 insertions(+), 58 deletions(-)
+> 
+> diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
+> index 9119f735f5..5d90f77bed 100644
+> --- a/xen/arch/x86/domain_page.c
+> +++ b/xen/arch/x86/domain_page.c
+> @@ -18,17 +18,23 @@
+>  #include <asm/hardirq.h>
+>  #include <asm/setup.h>
+>  
+> +/*
+> + * Whether v has a mapcache: PV vCPUs (whose domain-wide mapcache may still be
+> + * disabled, see mapcache_domain_init()).  HVM vCPUs reach everything through
+> + * the directmap, which covers all physical address space for them.
+> + */
+> +static bool has_mapcache(const struct vcpu *v)
+> +{
+> +    return is_pv_vcpu(v);
+> +}
+> +
+>  static inline struct vcpu *mapcache_current_vcpu(void)
+>  {
+>      struct vcpu *v = this_cpu(pgtable_vcpu);
+>      struct vcpu *curr = current;
+>  
+> -    /*
+> -     * During early boot pgtable_vcpu is not set, callers must handle NULL.
+> -     * Non-PV domains don't have a mapcache, the directmap covers all physical
+> -     * address space.
+> -     */
+> -    if ( !v || !is_pv_vcpu(v) )
+> +    /* During early boot pgtable_vcpu is not set, callers must handle NULL. */
+> +    if ( !v || !has_mapcache(v) )
+>          return NULL;
 
-arch_sanitise_domain_config() validates the configuration requested by
-the toolstack, and should not fill anything in=2E The config struct passed
-to createdomain is supposed to be pure input=2E ARM used to abuse this
-(GIC_NATIVE resolution, now removed) to smuggle output back to the
-toolstack=2E Making the parameter const stops that type of abuse from
-happening on any architecture=2E
+(For context below: The replacement of is_pv_vcpu() here is easy to follow.)
 
-The x86 implementation turned out to have its own instance of the same
-issue=2E It set XEN_DOMCTL_CDF_oos_off into config->flags for non-HVM
-guests=2E Since The sanitisation runs before the function domain_create()
-copies config->flags into d->options, this relied on mutating the
-toolstack's config to take effect=2E Move the default onto d->options
-directly in arch_domain_create() (which runs after d->options is
-populated), where all the remaining domain options are resolved=2E This
-has the same effect and no mutation of the input config is required=2E
+> @@ -54,6 +60,55 @@ static inline struct vcpu *mapcache_current_vcpu(void)
+>      return ACCESS_ONCE(this_cpu(pgtable_vcpu));
+>  }
+>  
+> +/*
+> + * The accounting for v's mapcache: the domain's, with *dcache set so the
+> + * caller takes the domain-wide lock and TLB-epoch machinery into account.
+> + */
+> +static struct mapcache *vcpu_mapcache(struct vcpu *v,
+> +                                      struct mapcache_domain **dcache)
+> +{
+> +    struct domain *d = v->domain;
+> +
+> +    *dcache = &d->arch.pv.mapcache;
+> +    return &(*dcache)->cache;
+> +}
 
-ARM, PPC and RISC-V need no equivalent change, Their implementations
-were already read-only=2E
+This function only retrieves data. Can't its first parameter therefore be
+pointer-to-const?
 
-Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
-Reviewed-by: Jan Beulich <jbeulich@suse=2Ecom> # x86
-Reviewed-by: Michal Orzel <michal=2Eorzel@amd=2Ecom>
----
-Changes in v7:
-- No changes=2E
----
- xen/arch/arm/domain=2Ec                   |  2 +-
- xen/arch/arm/firmware/sci=2Ec             |  2 +-
- xen/arch/arm/firmware/scmi-smc=2Ec        |  2 +-
- xen/arch/arm/include/asm/firmware/sci=2Eh |  6 +++---
- xen/arch/ppc/stubs=2Ec                    |  2 +-
- xen/arch/riscv/domain=2Ec                 |  2 +-
- xen/arch/x86/domain=2Ec                   | 16 ++++++++--------
- xen/include/xen/sched=2Eh                 |  5 ++---
- 8 files changed, 18 insertions(+), 19 deletions(-)
+> @@ -74,12 +130,12 @@ void *map_domain_page(mfn_t mfn)
+>  #endif
+>  
+>      v = mapcache_current_vcpu();
+> -    if ( !v || !is_pv_vcpu(v) )
+> +    if ( !v )
+>          return mfn_to_virt(mfn_x(mfn));
 
-diff --git a/xen/arch/arm/domain=2Ec b/xen/arch/arm/domain=2Ec
-index 4ca3a3749f=2E=2E34b5a85f9f 100644
---- a/xen/arch/arm/domain=2Ec
-+++ b/xen/arch/arm/domain=2Ec
-@@ -557,7 +557,7 @@ static bool v8r_el1_msa_domain_sanitise_config(
-     }
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     unsigned int max_vcpus;
-     unsigned int flags_required =3D (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_=
-hap);
-diff --git a/xen/arch/arm/firmware/sci=2Ec b/xen/arch/arm/firmware/sci=2Ec
-index aa93cda7f0=2E=2Ef73ed06092 100644
---- a/xen/arch/arm/firmware/sci=2Ec
-+++ b/xen/arch/arm/firmware/sci=2Ec
-@@ -45,7 +45,7 @@ int sci_domain_init(struct domain *d, struct xen_domctl_=
-createdomain *config)
-     return cur_mediator->domain_init(d, config);
- }
-=20
--int sci_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+int sci_domain_sanitise_config(const struct xen_domctl_createdomain *conf=
-ig)
- {
-     if ( !cur_mediator )
-         return 0;
-diff --git a/xen/arch/arm/firmware/scmi-smc=2Ec b/xen/arch/arm/firmware/sc=
-mi-smc=2Ec
-index a0cc6c6192=2E=2E391df8b945 100644
---- a/xen/arch/arm/firmware/scmi-smc=2Ec
-+++ b/xen/arch/arm/firmware/scmi-smc=2Ec
-@@ -68,7 +68,7 @@ static bool scmi_handle_smc(struct cpu_user_regs *regs)
- }
-=20
- static int
--scmi_smc_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+scmi_smc_domain_sanitise_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     if ( config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_NONE =
-&&
-          config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_=
-SMC )
-diff --git a/xen/arch/arm/include/asm/firmware/sci=2Eh b/xen/arch/arm/incl=
-ude/asm/firmware/sci=2Eh
-index 485ce211c9=2E=2E1d566be8e2 100644
---- a/xen/arch/arm/include/asm/firmware/sci=2Eh
-+++ b/xen/arch/arm/include/asm/firmware/sci=2Eh
-@@ -32,7 +32,7 @@ struct sci_mediator_ops {
-      * it to sanitize domain SCI configuration parameters=2E
-      * Optional=2E
-      */
--    int (*domain_sanitise_config)(struct xen_domctl_createdomain *config)=
-;
-+    int (*domain_sanitise_config)(const struct xen_domctl_createdomain *c=
-onfig);
-=20
-     /*
-      * Called during domain destruction, releases all resources, that
-@@ -101,7 +101,7 @@ int sci_domain_init(struct domain *d, struct xen_domct=
-l_createdomain *config);
-  * Sanitise domain configuration parameters=2E
-  *
-  */
--int sci_domain_sanitise_config(struct xen_domctl_createdomain *config);
-+int sci_domain_sanitise_config(const struct xen_domctl_createdomain *conf=
-ig);
-=20
- /*
-  * Destroy SCI domain instance=2E
-@@ -162,7 +162,7 @@ static inline int sci_domain_init(struct domain *d,
- }
-=20
- static inline int
--sci_domain_sanitise_config(struct xen_domctl_createdomain *config)
-+sci_domain_sanitise_config(const struct xen_domctl_createdomain *config)
- {
-     if ( config->arch=2Earm_sci_type !=3D XEN_DOMCTL_CONFIG_ARM_SCI_NONE =
-)
-         return -EINVAL;
-diff --git a/xen/arch/ppc/stubs=2Ec b/xen/arch/ppc/stubs=2Ec
-index a333f06119=2E=2E82a289af85 100644
---- a/xen/arch/ppc/stubs=2Ec
-+++ b/xen/arch/ppc/stubs=2Ec
-@@ -162,7 +162,7 @@ void arch_vcpu_destroy(struct vcpu *v)
-     BUG_ON("unimplemented");
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     BUG_ON("unimplemented");
- }
-diff --git a/xen/arch/riscv/domain=2Ec b/xen/arch/riscv/domain=2Ec
-index d94652809e=2E=2Ecfce8e91fa 100644
---- a/xen/arch/riscv/domain=2Ec
-+++ b/xen/arch/riscv/domain=2Ec
-@@ -284,7 +284,7 @@ void sync_vcpu_execstate(struct vcpu *v)
-     /* Nothing to do -- no lazy switching */
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     return 0;
- }
-diff --git a/xen/arch/x86/domain=2Ec b/xen/arch/x86/domain=2Ec
-index 6ebe6c5052=2E=2E368e4deff3 100644
---- a/xen/arch/x86/domain=2Ec
-+++ b/xen/arch/x86/domain=2Ec
-@@ -590,7 +590,7 @@ void arch_vcpu_destroy(struct vcpu *v)
-         ASSERT_UNREACHABLE();
- }
-=20
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig)
- {
-     bool hvm =3D config->flags & XEN_DOMCTL_CDF_hvm;
-     bool hap =3D config->flags & XEN_DOMCTL_CDF_hap;
-@@ -633,13 +633,6 @@ int arch_sanitise_domain_config(struct xen_domctl_cre=
-atedomain *config)
-         return -EINVAL;
-     }
-=20
--    if ( !hvm )
--        /*
--         * It is only meaningful for XEN_DOMCTL_CDF_oos_off to be clear
--         * for HVM guests=2E
--         */
--        config->flags |=3D XEN_DOMCTL_CDF_oos_off;
--
-     if ( nested_virt && !hvm_nested_virt_supported() )
-     {
-         dprintk(XENLOG_INFO, "Nested virt requested but not available\n")=
-;
-@@ -833,6 +826,13 @@ int arch_domain_create(struct domain *d,
-=20
-     spin_lock_init(&d->arch=2Ee820_lock);
-=20
-+    /*
-+     * It is only meaningful for XEN_DOMCTL_CDF_oos_off to be clear for H=
-VM
-+     * guests=2E
-+     */
-+    if ( !is_hvm_domain(d) )
-+        d->options |=3D XEN_DOMCTL_CDF_oos_off;
-+
-     if ( d->domain_id && cpu_has_amd_erratum(&boot_cpu_data, AMD_ERRATUM_=
-121) )
-     {
-         if ( !opt_allow_unsafe )
-diff --git a/xen/include/xen/sched=2Eh b/xen/include/xen/sched=2Eh
-index 73c54794ac=2E=2Ece1fa636db 100644
---- a/xen/include/xen/sched=2Eh
-+++ b/xen/include/xen/sched=2Eh
-@@ -772,10 +772,9 @@ static inline void domain_update_node_affinity(struct=
- domain *d)
- }
-=20
- /*
-- * To be implemented by each architecture, sanity checking the configurat=
-ion
-- * and filling in any appropriate defaults=2E
-+ * To be implemented by each architecture, sanity checking the configurat=
-ion=2E
-  */
--int arch_sanitise_domain_config(struct xen_domctl_createdomain *config);
-+int arch_sanitise_domain_config(const struct xen_domctl_createdomain *con=
-fig);
-=20
- /*
-  * Create a domain: the configuration is only necessary for real domain
---=20
-2=2E53=2E0
+I don't quite understand why this is_pv_vcpu() is okay to drop. What
+mapcache_current_vcpu() returns isn't what it ran is_pv_vcpu() on. (Same
+in unmap_domain_page() then, obviously.)
 
+> @@ -249,15 +294,23 @@ void mapcache_domain_init(struct domain *d)
+>  int mapcache_vcpu_init(struct vcpu *v)
+>  {
+>      struct domain *d = v->domain;
+> -    struct mapcache_domain *dcache = &d->arch.pv.mapcache;
+> +    struct mapcache_domain *dcache;
+> +    struct mapcache *cache;
+>      unsigned long i;
+> -    unsigned int ents = d->max_vcpus * MAPCACHE_VCPU_ENTRIES;
+> -    unsigned int nr = PFN_UP(BITS_TO_LONGS(ents) * sizeof(long));
+> +    unsigned int ents, nr;
+>  
+> -    if ( !is_pv_vcpu(v) || !dcache->inuse )
+> +    if ( !has_mapcache(v) )
+>          return 0;
+>  
+> -    if ( ents > dcache->entries )
+> +    cache = vcpu_mapcache(v, &dcache);
+> +    if ( !cache->inuse )
+> +        /* Domain-wide mapcache disabled (fully direct-mapped build). */
+> +        return 0;
 
+While technically not wrong, this comment appears to be quite a bit
+forward-looking.
 
--- 
-Julian Vetter | Vates Hypervisor & Kernel Developer
+> +    ents = d->max_vcpus * MAPCACHE_VCPU_ENTRIES;
+> +    nr = PFN_UP(BITS_TO_LONGS(ents) * sizeof(long));
 
-XCP-ng & Xen Orch=
-estra - Vates solutions
+Is there a reason these cannot be the initializers of their variables
+anymore?
 
-web: https://vates=2Etech
----=Part.104.ec8451bfddb2c110.1a130599957.6665c0d17a0b07b8=---
+Jan
 
