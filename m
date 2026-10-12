@@ -4,43 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6AAA0CA9ED1
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 13:26:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446322.1662428 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7C7BDCA9EC5
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 13:27:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446325.1662437 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGG2K-00040k-Lf; Mon, 12 Oct 2026 13:25:52 +0000
+	id 1xGG3r-0004Uo-W8; Mon, 12 Oct 2026 13:27:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446322.1662428; Mon, 12 Oct 2026 13:25:52 +0000
+Received: by outflank-mailman (output) from mailman id 1446325.1662437; Mon, 12 Oct 2026 13:27:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGG2K-00040d-Ig; Mon, 12 Oct 2026 13:25:52 +0000
-Received: by outflank-mailman (input) for mailman id 1446322;
- Mon, 12 Oct 2026 13:25:52 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGG2K-00040V-1r
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 13:25:52 +0000
+	id 1xGG3r-0004Uh-T0; Mon, 12 Oct 2026 13:27:27 +0000
+Received: by outflank-mailman (input) for mailman id 1446325;
+ Mon, 12 Oct 2026 13:27:27 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1304beaaa00080d7@swg.vates.tech>)
+ id 1xGG3r-0004UZ-25
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 13:27:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGG2J-004cIm-1R
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 15:25:51 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6accdfcf-bab6-0a2a0a5309dd-0a2a45068df8-48
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:25:51 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6accdfde-195a-0a2a45060019-d155802da524-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:25:50 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4a166199820so11913405e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 06:25:50 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18e48db03sm407940865e9.3.2026.10.12.06.25.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 06:25:49 -0700 (PDT)
+ id 1xGG3q-00FYhN-F7
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 15:27:26 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1304beaaa00080d7@swg.vates.tech>)
+ id 6acce030-e002-0a2a0a5209dd-0a2a450bd6cc-46
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:27:26 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1304beaaa00080d7@swg.vates.tech>)
+ id 6acce03d-b7e8-0a2a450b0019-b9ff1c22b595-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 15:27:26 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1304beaaa00080d7.002 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 12 Oct 2026 13:27:24 +0000
+Received: from l14 (areims-651-1-80-194.w90-18.abo.wanadoo.fr [90.18.187.194])
+ (Authenticated sender: anthony.perard)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 043E8804EE;
+ Mon, 12 Oct 2026 15:27:23 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,130 +58,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791811550; x=1792416350; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=P9+MB/Z1Xmt/uUTQiiC8cla9bqudcNF/hHQ9kFRjU+k=;
-        b=WvkztLeIOEJ4ucfa0Yvh+fIPKJM9QKhMe686Bz0I9Ow5Faj5OFaRDUHXy0wrk/kdni
-         c1r7CXZB9bdCLHGbbwxxDvu4l0JACuSvv10+l5yEFuNl/rPpnPETResiAGL2I3Ada9Py
-         I6CBmEDe5qX0C6J6s7F5ZOXUUlzzFN3BXA5YpSkzzdf1ckCD8b/rlOnNXl8qVaiBWs24
-         eQlI7R2f60GT7z9dlHL/+HmU6i8lsnb/tnV1ZtrvwxHeso+1qnbnQnnqfWE4U09g8MH7
-         JR++VVJUfypFq6hOJVAKeRq0Yy3MyQGcNjClLyAlh37R7xktMnH+T1J+6QE1G/oa4iEA
-         Fb+Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791811550; x=1792416350;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=P9+MB/Z1Xmt/uUTQiiC8cla9bqudcNF/hHQ9kFRjU+k=;
-        b=DCnYVsycQVR5oz8ZdiEILZ9bW3reuXgOc3fru5mZfaJSTclhbHLVu/tVzVKILfT6Hf
-         GFOROoEr6TfYhF+4Y3RM7LoNbH5NLZTpNsscoG6jIu2oMmMTq5ss43dcxHTopXDhRkMl
-         VZrhOocuRS9nWqW86Z309H6J+RJ4ROPHm/i2dVmnKJL8UX025+FR4WQ9hNq4nR+Nb/yB
-         pgTHvEHTNmTot8QhlQyIET1XS/jxnFu9ppSGg5BI/kqXCkxhBIyGrz5hXKQ527k3kllv
-         rJX/qhuCh+4UvQQb94Dyv4QQFmIYvqlE93v4a4Wwk1V20LBWeYHArUlfq4T3bZhNPHwx
-         i+bA==
-X-Forwarded-Encrypted: i=1; AKwUvBwb5ukRsius8LvtpDBk54b0VyAnbGXcBwbttaNMFbXyOXEM3Ixl/7nBIaeVL13Twpw1dS40I3ppIJM=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYLIZwMCfaen3AnhuJatdN/+HDDPGd9NB/yqCEzsfDPvT/zUHJYi
-	do6smjntu1hvk8h0qB9bxUrxd0RefmPQANxMolqYTsgDyOT43P1HnnYU
-X-Gm-Gg: AYBFou2DlDTvyVROTUWukoWqtd5Xk4M2OokLpinMwfsaiVzWY7qyW87+0STd7w7v0pH
-	VWWnZzmBPmq8Svwz5O+eQWhAfUMMQgx21w/VXhDKuZc+/NhVHGgbqQ/JKyT+OTggMPRJTMM6qNT
-	27ZSVvanrHcT6CoLKeSQaJxJn+rfBsa0Y0CKiXZ++flYY5MjMlUgJ7WtAUCZVtzyYXCqehTM9OZ
-	Plb3tAuL6sfqUx8ImWisGPxeOV54hB9maM7fnfLcbZQBqN7NuKhq+uQTU72PnPUgpB4JxhKCHJT
-	MI8z0vPF9vuGNTZ76/qsqpbRIasQRkW94LoT7BXZsvpxyPruTcqhRqplHj1lQ1u2aIY6r1FYDOL
-	inDmYAJNc8rkNLqMlM58T4O6R+pjOWnr6WlkEI53/vC1tyszkNyDVTTL73g6p2FD1F5LTIR4lbT
-	HhbsvndUTbuRb8Mq+ugKSzt4Jf+ZsLPc08NUIW9A/kcVtFXqlQZtb2z7YuDOwagwX7ggyUWYX3y
-	GtVmuL8M/a72FDt1ShXjUWezuJ3tAzut5fR+sj5k1R/vgFFu41Apouy6Nt0
-X-Received: by 2002:a05:600c:c10e:b0:4a1:93fd:913 with SMTP id 5b1f17b1804b1-4a193fd0ad6mr95790335e9.10.1791811550198;
-        Mon, 12 Oct 2026 06:25:50 -0700 (PDT)
-Message-ID: <a68d7699-4efc-498e-92d8-538370cb0f09@gmail.com>
-Date: Mon, 12 Oct 2026 15:25:48 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=EFNKMyIy5Fpjf5Xqfq4As6aZwcB1BCpuczevb8LKC/o=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=MNWiX6hglGuLFEczuspNusLnqKkVdoHc5G44R9stLsNuLpK+RYiKuAufRuFm8ugw34s+wezxB
+ 2NBf/DOg5RokZVTZ7zsCQdGqCYhf/krgcdlg23mTISzUrYZ53p4vasqskofar2CNbtwcD9pwArL
+ cchLMfTRYVPzcY2a0OQmLKlMdhnW4f6iPf1FeVS7y0oanaVhmEFpUY3FaqNqOUE325tQQK6RCva
+ 8CA4ZtQRqWEnkFSGZtn8Umgi2lrG/5z9Z5pXb6Mt/KBdJnmhB7wWW0ybUKEfZ1uXq85aa4CeeJa
+ aiPudvAeH4rXqKFYUrh7tFt/kBB2VWeJmPBMQmP4zApg==
+X-Zone-Loop: 441f2a207fcbe493bf92bb392b34d2789b5350fcebb8
+x-campaign-type: default
+x-transaction-id: 87acc4cc-5b84-491b-8f9c-d6596bbb3585
+x-swg-uid: 01-aa6d9334-8ca0-4a5a-b436-d3952a1b240f
+X-Mailer: Sweego
+Message-ID:
+ <1791811644.8631fc262581453bbf619ec5b2062170.1a1304beaaa00080d7@vates.tech>
+x-swg-bid: 1791811644.8631fc262581453bbf619ec5b2062170.1a1304beaaa00080d7
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Mon, 12 Oct 2026 15:27:22 +0200
+From: Anthony PERARD <anthony.perard@vates.tech>
+To: Matthias Goergens <matthias.goergens@gmail.com>
+Cc: xen-devel@lists.xenproject.org
+Subject: Re: [PATCH] tools/xentop: reject invalid --delay and --iterations
+ arguments
+References: <20260805135521.790750-1-matthias.goergens@gmail.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/2] xen/ns16550: drain TX before reinitializing
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Zhang Zheng <zhangzheng@iscas.ac.cn>, xen-devel@lists.xenproject.org
-References: <20261010031406.2057735-1-zhangzheng@iscas.ac.cn>
- <20261010031406.2057735-3-zhangzheng@iscas.ac.cn>
- <ec65306d-ec1d-4c5a-93f8-b37f7dfea8b5@gmail.com>
- <be9c9f29-e211-4b84-a3b1-fd65f3b52315@suse.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <be9c9f29-e211-4b84-a3b1-fd65f3b52315@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1791811551-FD80D77B-37CD3DDC/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 2280
+Content-Disposition: inline
+In-Reply-To: <20260805135521.790750-1-matthias.goergens@gmail.com>
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.fd.e2cc01512bd5603f.1a1304be6c6.393d4994110ca2b7=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1791811643079
+X-purgate-ID: tlsNG-42698a/1791811646-AB4D39EA-7B152B40/0/0
+X-purgate-type: clean
+X-purgate-size: 2674
+
+---=Part.fd.e2cc01512bd5603f.1a1304be6c6.393d4994110ca2b7=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+On Wed, Aug 05, 2026 at 09:55:21PM +0800, Matthias Goergens wrote:
+> xentop parses -d/--delay and -i/--iterations with atoi(), so invalid
+> input is silently accepted with surprising results: a fractional delay
+> such as "-d 2=2E5" is truncated to 2; "-d abc" parses as 0, which in
+> batch mode turns the output loop into a busy loop; "-d -1" wraps to an
+> effective delay of about 136 years; and "-i 0" (or any unparsable
+> iterations count) decrements an unsigned counter from zero, running
+> for about 2^32 iterations=2E  atoi() also has undefined behaviour on
+> out-of-range input=2E
+>=20
+> Parse both options with strtoull() instead, and reject anything that
+> is not a plain decimal integer in range: a sign, a fractional part,
+> trailing junk or overflow now produce an error and exit rather than a
+> silently wrong value=2E
+>=20
+> Compatibility considerations: "--delay 0" remains accepted, since
+> updating as fast as possible is a plausible deliberate choice and
+> works today; "--iterations 0" is rejected, since running the loop
+> 2^32 times cannot be what the caller meant=2E  The interactive 'D'
+> prompt already validates its input and is unchanged=2E  The only
+> previously useful invocation this breaks is a fractional delay, which
+> now fails loudly instead of silently rounding down - which is the
+> point of the change=2E
+>=20
+> A patch documenting the --delay truncation was posted in 2010 but
+> never applied:
+> Link: https://lore=2Ekernel=2Eorg/xen-devel/01ea26d2420e3562eb30=2E12926=
+04768@chilopoda=2Euk=2Exensource=2Ecom/
+>=20
+> Signed-off-by: Matthias Goergens <matthias=2Egoergens@gmail=2Ecom>
+> ---
+> Tested by compiling with -Wall -Wextra (no new warnings) and by running
+> the parse helper, extracted verbatim from the patched file, against a
+> 19-case input matrix covering both the accepted and the rejected inputs
+> listed above=2E  Not run against a live Xen host: the change is confined
+> to command line parsing, ahead of any hypervisor interaction=2E
+>=20
+> Happy to add a CHANGELOG=2Emd entry under "Changed" if that is wanted fo=
+r
+> a tools CLI change of this size=2E
+
+No, I don't think it's necessary, this patch is just error handling, and
+a bit of clarification I suppose=2E
+
+Reviewed-by: Anthony PERARD <anthony=2Eperard@vates=2Etech>
+
+Thanks,
 
 
+-- 
+Anthony Perard | Vates XCP-ng Developer
 
-On 10/12/26 2:56 PM, Jan Beulich wrote:
-> On 12.10.2026 12:20, Oleksii Kurochko wrote:
->> On 10/10/26 5:14 AM, Zhang Zheng wrote:
->>> --- a/xen/drivers/char/ns16550.c
->>> +++ b/xen/drivers/char/ns16550.c
->>> @@ -427,6 +427,10 @@ static void __init cf_check ns16550_init_preirq(struct serial_port *port)
->>>    #endif
->>>        }
->>>    
->>> +    /* Preserve output queued by firmware before taking over the UART. */
->> я'
->> Could the comment say why the wait is needed at this point? Something
->> like:
->>
->>       /*
->>        * Output written before ns16550 takes over (e.g. by firmware or the
->>        * early console) may still be in the transmitter. Let it drain before
->>        * ns16550_setup_preirq() reprograms the line settings and resets the
->>        * FIFOs.
->>        */
->>
->>> +    while ( !(ns_read_reg(uart, UART_LSR) & UART_LSR_TEMT) )
->>> +        cpu_relax();
->>> +
->>
->> IMO waiting for TEMT rather than THRE is the right choice: besides
->> resetting the FIFOs, ns16550_setup_preirq() reprograms the divisor and
->> LCR, which would corrupt a character still being shifted out. (Linux
->> waits for UART_LSR_BOTH_EMPTY, i.e. THRE | TEMT, but on a 16550 TEMT
->> already implies THRE.)
->>
->> The unbounded wait can hang early Xen boot if the UART never reports
->> TEMT for some reason(?). Bounding the wait would make console
->> initialization more robust, allowing boot to continue when the UART is
->> unavailable
->>
->>       for ( i = 0; i < 50000; i++ )
->>       {
->>           if ( ns_read_reg(uart, UART_LSR) & UART_LSR_TEMT )
->>               break;
->>           udelay(10);
->>       }
->>
->> would need udelay() on RISC-V, which is still a BUG_ON() stub, so a
->> separate patch would be needed for that. On x86, udelay() doesn't delay
->> yet at this point (cpu_khz is only set by early_time_init()), so there
->> the loop would just be an iteration count. Perhaps someone has a better
->> idea of how to implement a timeout here.
-> 
-> Whatever it is, it's going to be more or less crude. See e.g. Marek's
-> solution for a similar issue (yet to be committed):
-> https://lists.xen.org/archives/html/xen-devel/2026-10/msg00439.html
+XCP-ng & Xen Orchestra - Vate=
+s solutions
 
-I am perfectly okay with the way suggested by Marek.
-
-~ Oleksii
+web: https://vates=2Etech
+---=Part.fd.e2cc01512bd5603f.1a1304be6c6.393d4994110ca2b7=---
 
