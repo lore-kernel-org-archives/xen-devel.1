@@ -4,43 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5F2BCA9ED0
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 10:32:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446114.1662160 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 321D2CA9ED1
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 10:35:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446121.1662170 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGDJz-0007oz-0D; Mon, 12 Oct 2026 10:31:55 +0000
+	id 1xGDNA-0008JW-DK; Mon, 12 Oct 2026 10:35:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446114.1662160; Mon, 12 Oct 2026 10:31:54 +0000
+Received: by outflank-mailman (output) from mailman id 1446121.1662170; Mon, 12 Oct 2026 10:35:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGDJy-0007os-TQ; Mon, 12 Oct 2026 10:31:54 +0000
-Received: by outflank-mailman (input) for mailman id 1446114;
- Mon, 12 Oct 2026 10:31:53 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGDJx-0007om-Nf
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:31:53 +0000
+	id 1xGDNA-0008JP-9x; Mon, 12 Oct 2026 10:35:12 +0000
+Received: by outflank-mailman (input) for mailman id 1446121;
+ Mon, 12 Oct 2026 10:35:10 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Sergiy_Kibrik@epam.com>) id 1xGDN8-0008JJ-Ca
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:35:10 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGDJu-009aTx-RU
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 12:31:50 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xGDN7-00BZBQ-IO
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 12:35:09 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6accb70c-bab6-0a2a0a5309dd-0a2a4507b5c4-24
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 12:31:50 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6accb716-b4ea-0a2a45070019-d1558032c814-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 12:31:50 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4956869750eso13551355e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 03:31:50 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bf2e0dbsm295840355e9.11.2026.10.12.03.31.49
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 03:31:49 -0700 (PDT)
+ (envelope-from <Sergiy_Kibrik@epam.com>)
+ id 6accb7bf-e002-0a2a0a5209dd-0a2a4503c72e-46
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 12:35:09 +0200
+Received: from [40.107.130.138]
+ (helo=MRWPR03CU001.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Sergiy_Kibrik@epam.com>)
+ id 6accb7dd-fae8-0a2a45030019-286b828a5716-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 12:35:09 +0200
+Received: from AS8PR03MB9192.eurprd03.prod.outlook.com (2603:10a6:20b:5c0::11)
+ by PA1PR03MB11363.eurprd03.prod.outlook.com (2603:10a6:102:56b::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.21; Mon, 12 Oct
+ 2026 10:35:05 +0000
+Received: from AS8PR03MB9192.eurprd03.prod.outlook.com
+ ([fe80::61a0:97f5:ac5f:e292]) by AS8PR03MB9192.eurprd03.prod.outlook.com
+ ([fe80::61a0:97f5:ac5f:e292%6]) with mapi id 15.21.0496.019; Mon, 12 Oct 2026
+ 10:35:05 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,112 +55,159 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791801110; x=1792405910; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=D3EkwhjPwR0pwICmf55sHME9fFLTOEn62ss/srOgbW4=;
-        b=Yp4XA8pAOPKAYXXKAF/66gMKu6ZGeIPRfOt4jRIF7eNVkEAbQcXlLAV+ZskRewV9P6
-         rPyrjoUBHGzLsi4yI9XUT25N7lygyJSbA+DYL+42Zrq7cFwRPhddHHn0IEmu1AsifFJS
-         f+fXtpewe365WEkewV/zlykXYdL04/e85iRrsiri+pCWNw6in1yYugKstXjQXOWZO/9v
-         MfQ5O3GbHtoOFUPw2WaUlWk0rLklG3y44SeS7PwavuEcdAwDj1LETV4iQ6PP1EGLVgld
-         Lq1Jc0GfjvJBr4/Sk4hV1K8YNMkaJjCBR9J4m1GlqaE9fHg/8Sv5thU7A21dLvCrJ7ID
-         f1QA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791801110; x=1792405910;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=D3EkwhjPwR0pwICmf55sHME9fFLTOEn62ss/srOgbW4=;
-        b=1ejEBJtmLRz3QBYwWvJ9zg5HH+/TgbeE+xOG5VU7/WnCzP2u3ymZxXW0L6VXsi2jN7
-         5vyye7tkLuoPj7o5+71mykLa0GPXV9TP1qMQAKXIGnwkLoq6B9xrVEX73iX4BaB5JEYh
-         DkjSdQ3gGSpPNndst4ipaRCKCDmQJgDpe109Pe9LrrDbkGqggt1JHNds6hroOcF2ZpuG
-         8M6s+ZRUhiTeFXFhTh/ILew83vpK6hW6KDQrDR5UwTlUCh1Y3W9snzEVhdLddue1AagU
-         20yxOEBCKbreRukNfgnOZ/BLVGuGQWJTczlA7JG+gFLm7fpahbsEQpQFJ/OMJOhHyTx3
-         Ve9w==
-X-Forwarded-Encrypted: i=1; AKwUvByFlr6W4l+VoiO8WbN7uxI9qdVDyrXKh9FTe1/254oy2KCXSi6f2izBqG4YZdSqZUAHjEcNBEmefg0=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIQPdm/gzVBjTi4eh5//xaM6mSlbqIj+0T0MuNdJjmnjF6AOUse
-	TYnyednmtNJSG/LUPeiBsPglajPOH68zp/3cGo6PrCpXvbRz5wz0ZpVUWbWQcFo+7lkIsMT+70i
-	YhZmhGg==
-X-Gm-Gg: AYBFou3WLunIM0acbZLu0kDF5Buhlzl02XbQEy+XgWK2IX59gSJFxaMzGsMsnzPkgff
-	GHFnxt57XzqrsutwU3Kiw1Z0neUL7jrS0zwP9lCs/uczNsfdxnvAX9AGFZNXxnWzhCpwSqGhzEV
-	NRGF3tVpLDWdSqBS5yY1KeQ/5aODf0W9DdN7me8KI2IyqAlZKlKWbHuN5W8WWDqt/CzVlTnUA/9
-	zIsZU/FfEIZumqgC9lzW0Yt0CQmRcSO31oP10VIwDXWVksWXpF9FtN3I/7nELzaH6JGotP4XftG
-	MJFCQoYJXC1G5MttGcgxSrsntm9rO025q3vPK9Xk5CQzrWetRWcuH+ysrz8pR9oR/Yxl201ZwBz
-	ItRt63tBInayqzk2XdaVyo46RsWWKFx6mRHUtlBGT6DGTqBU17apF347YwtS/0tFzvM4zYrvsc3
-	F+DdQ1PaSEfUdCG7LSC4Lm7XN8kWrHN+2QQD3IeYpidFNPYpl1/N+XW+Ts8miTCPlkLFRfz+DoR
-	AYZSgaJz85zJvjeZIXB5e/GJM4ub0xNcievlr/vrZ4JGKXAHS6Wop9aHyHcxq4=
-X-Received: by 2002:a05:600c:4ecb:b0:49f:f099:6fb1 with SMTP id 5b1f17b1804b1-4a18e4adcd0mr174585275e9.15.1791801110012;
-        Mon, 12 Oct 2026 03:31:50 -0700 (PDT)
-Message-ID: <293db510-108b-4fa4-976a-2f794a8cec3a@suse.com>
-Date: Mon, 12 Oct 2026 12:31:51 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/argo: make the ring copy length check overflow-safe
-To: Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
-Cc: WeiqiW <coolhaoyt@gmail.com>, Jason Andryuk <jason.andryuk@amd.com>,
- "Daniel P . Smith" <dpsmith@apertussolutions.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <20261010132845.36208-1-lukewang19@outlook.com>
- <0e9d573f-299a-4459-81d0-94c905c85c8e@suse.com>
- <313B6C1B-0F8A-45D4-9392-90116DDBFD82@postgrad.manchester.ac.uk>
- <56F5DC58-E7C5-4C24-996D-4D9997AA8506@postgrad.manchester.ac.uk>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=jfv+yyoQQXxWNLMNEaTl364gTejEjng3mzk/Fze3sxpIhLBi9qPXGxYjZil2ijwL+b0JQgZ+ZYtwllza5413LY5pShoOxdEwmj4kvV/gIJwpA1IB8fCr1okn4npolEJcJTKgrjdy+nDII8OkkpSc3Y7tdHWo7BtlN2vQeCtOd82qQ/6sHnnWWSWOr/nhM/c0Qed/RS30k72jy42UZES9Vmd1iSER7slrTFCCFK3v3tBLU2+HTDc3dAwUlDGGz5jPKeGR1tpXheVzvW1i4zX98umAJIcnbJUN7C9SUM+D2hpz0tDdGjEwBp8Th99EvfHFP7J9wP0buq83LH44bnW3XA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+wNqtXDBjGhsye4upC2DSzCQvfIpnWcmdwayz8TVGyo=;
+ b=Y5QLiOT5IOHDCiDE9h2denjFbDvxZ4Lafuxgf3Feh09dyEISrHpnKKLMWTQnsGVw4oR64uSPOC8bxNpCh8irjUSMsR58mNVLqpKodh2zfbHrycSULpel6mkvyaUI6UWDBnxNfLRxqva6oX4JshNbuHTPn+9mmEIIBSGUBD+mDEguP8dtlrEXUIdEjXSMAGtzMkmBxfMzdZsID8dws7VRx2ugpY0mBlc0hYpVFj0t34zxaEoDnYnzWokZRXFhEWfsfgiqOIEweG7z0oGf3wLC3Xn0U+RBxAzDrnD2MFNmRxyXzjIvk4FbdmXUgrw4P/ZBx4PN+CAJwiALQVOc9EnXeg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+wNqtXDBjGhsye4upC2DSzCQvfIpnWcmdwayz8TVGyo=;
+ b=hVmY3JIKg64i17I1Xfh4UKfOUpCZNhRbtQFSGPGYBlQMHfq9s7zM5GQPdtslDw6/D2CQVktIxXvwZywcN0mvzFBqS1b0xg7HMKVlf7OnScV7+ibnWZjKNiU93XAqNcG4eP1Ylxl8LMAhf4Tld09DdN6ntuE72LK0vwF+XkMjoLeM8twIZh0k4zX6qOfWXWUVEWvtpvjsRVNqvxVwDTnGg3H/Gsx5thmWBrkyNaQde3ZWMCNLb522/DjWQdUiciMOaI1DB7uitlHqUiHCVlqiaJsTv4DuSwHfQdDmP0UcQoZaBkZ0gNmE3TFAWEt8SgPXDlYuXe9svLXGwKYhscAGyw==
+From: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+CC: Sergiy Kibrik <Sergiy_Kibrik@epam.com>, "Daniel P. Smith"
+	<dpsmith@apertussolutions.com>, "Daniel P . Smith"
+	<dpsmith@apertussoutions.com>
+Subject: [PATCH v2] xen/xsm: flask: restore sidtab state on policy load
+ failure
+Thread-Topic: [PATCH v2] xen/xsm: flask: restore sidtab state on policy load
+ failure
+Thread-Index: AQHdWjVYBo9DplgOwUK4YbEqpVPTqw==
+Date: Mon, 12 Oct 2026 10:35:05 +0000
+Message-ID: <20261012103504.964430-1-Sergiy_Kibrik@epam.com>
+Accept-Language: en-US
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <56F5DC58-E7C5-4C24-996D-4D9997AA8506@postgrad.manchester.ac.uk>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1791801110-A46CAAE4-E488CB16/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 1461
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: AS8PR03MB9192:EE_|PA1PR03MB11363:EE_
+x-ms-office365-filtering-correlation-id: e8eb8d69-301e-4bf2-a2f4-08df284c7ac2
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|1800799024|23010399003|376014|366016|10067099003|261009223027099003|38070700021|11063799006|18002099003|56012099006;
+x-microsoft-antispam-message-info:
+ jbQw+ltm+SdFstHR3IZ+wvBjTt1FikCExtoPSAlV1oASK1fzq5rcM294okkdekVtO0JxEDbwZU5d+XMzA/61hwSQlb22QeS7ARlkyFfKl/hEVg8aZzeuI2lGWXCe07zi28lnfSgJHQOOPC+otOrqOvBp5UHdei52Vx/8hlQXRe0KrsnRuq3FlBGV+U55cVIVdl1Zhiz+MnyMt6v/exwrMwQyYNAP1Lz2slrUm4WHl0hKSgHjFSHd8r/g8xWLgWEXLaTS4UjjLyHxuL3O6/TyvaXy4IFXQCOHBEWvODob32l/5frBwSi9VVyWiSbo7QCDqS1oJqB4y5vWvEIql1HvblvIP0/N48xQL2tCB7gM534YN90vkxU3JpaYSx1BiBdAyO+Qshac8QZuG1UUdT/KpxSTS1bQAysMqz49mF2yubqsJsGUdexwCCfg3nhqDGm1/+X/SyePP8bZ3PUmxePP+fi7Cfwv0BgwCtVQxj3PTkhUK3cdXogbS567RDY+aDIV5SVVYTynzkHsloyalczBoaeH0kcY/Cs6ysbcmtJQTMQGrMXq0xnR6lbnC0RX4MauLmg06cjwiCFdzKHlXKPdBxUKMYvn60ffnLGrjXdcFqWaiu44aI1YO5oXUoNRgLdADjnJQRkcJ/vXicGCPRW4sk56ZRaEQkKPIoC6q/BlOzPfEBdVGrCr9FQ/nu8bIglkI4ezBr4b4ZDl2XPQRdltDRGRs/MT/jib8XMy4Y0Trio=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS8PR03MB9192.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(23010399003)(376014)(366016)(10067099003)(261009223027099003)(38070700021)(11063799006)(18002099003)(56012099006);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?iso-8859-1?Q?i6jZBdG5O9d3bevUVZHaPzW59h2alTDQ1I5JKup7hnU0LHuOQQR+pA5cf6?=
+ =?iso-8859-1?Q?3ym7W4qG+Ub8/mIZu/PU5/qP0t/k6raxIDnAKyCR1U/1zSVflg4nP8vyr5?=
+ =?iso-8859-1?Q?EXUmtMM+ox3YOMdF4iL1Ahj5QsSzMe80ysrNAddIQq4g260SNMshLxwx01?=
+ =?iso-8859-1?Q?WSqUXYUU+nGW88Q7sx0l1ELj1gZgiSUn5GZxr5+yJH42CsgY+v235kXwNZ?=
+ =?iso-8859-1?Q?+vBVHgifkspuEbb0w6YOY77LkR2Oz5S7oIFK2lHKIhNrz3pEw/y0oSnx2k?=
+ =?iso-8859-1?Q?1CS8dY5XWIs/n7Rx1xfeTMfb36PZ1KWQdJX61ctD3B79JteZHeIODSAZqe?=
+ =?iso-8859-1?Q?Y2TOoCSv7B52xaqn2XlFyINiHrmK17U80+mPMgX1CEekK3VUmal23ZQ7hx?=
+ =?iso-8859-1?Q?metwrjkQUwg5R2dJz5NFYY/Fc86gGGMaKXeTxrX6G6xm/0VbEHP+lYIDki?=
+ =?iso-8859-1?Q?D+lRKPndVS40qlaYVRlM0/+sBi91CfbclQRQR97AZgvuiK6jncX+aJpkcm?=
+ =?iso-8859-1?Q?2q6WNgh5QpHWHMl2m9qg6jCzOjmzxfGcWmhcwMFmw3X0/2o6vVJlC4yrrU?=
+ =?iso-8859-1?Q?Lyr0EhTm8z8sNxz2C67sctWMhN/PXMnmaVQRWvS53LxhqVrQ+pMAPO71Ya?=
+ =?iso-8859-1?Q?0+Ryt9NXsO9pmB1qBsS1gqWvssBw1yh/yxom5g/ZgpiXSaaLfFf474t5Si?=
+ =?iso-8859-1?Q?LsemM0ZM8hxKzLfnqC1NieimZV4LZp0PqBScD2bl1qy8qEoYRNWU9ZtvmF?=
+ =?iso-8859-1?Q?S8w9mTJEDOzn1fIDPC6BP/bOmsWF00zhzCbliqkxNj7sF0SZfwIaxU7J+P?=
+ =?iso-8859-1?Q?vs1MgALzYrsRGcBLtkFgZ9MiPwws4eCBUPu5dAcwPo7wT1MWSipXHawc8q?=
+ =?iso-8859-1?Q?Ano7bJQBM84shCWGupwcnh06qOzynoM3F86hwKLo+LuFJh/ad4+Z/TyMYW?=
+ =?iso-8859-1?Q?upsVtkcaWBhkms4xS8vkGB9z9yGKL3z/ZvnP/h5imPHJPx3Kkyk7RMRQnb?=
+ =?iso-8859-1?Q?pQ+Z/w4vaHKRdxITjRaximixwfDBPn/tHwH+MAX+FCRoC23XOwhHxJ2mrn?=
+ =?iso-8859-1?Q?QSftQNWsiTlpsDi0hq7sjsZs73ydqp4ECgVoJne53YD10oCq7VSRh/abfC?=
+ =?iso-8859-1?Q?ZhE855RACX3jlhdTZ6ySbdtAJBI850ooanOY9lDBroKfLPvROqmhrEYl2s?=
+ =?iso-8859-1?Q?rwGpfEshhtbXStBOnztQ4kX+yzz/DJ08mkRRHg8Vo7nakRVpmpa7VWQUUv?=
+ =?iso-8859-1?Q?/eXLTQ4rwukFn9vdTk4tPHziDKEYjPFCNi/p/KciUiTooNXBMaOoMQSn64?=
+ =?iso-8859-1?Q?7oIbzpDbqOSydFnD+/60yfBg/qTp57LnSDy4SpePXejZH1filIXMCFDsAB?=
+ =?iso-8859-1?Q?Ag4tVHg5oUkFhvkRyoaR82D16usr4Tn6fwGBQcblxMeetmv/D2LGY2Sa4k?=
+ =?iso-8859-1?Q?5r2JQpe2gfnTAdl30SHZRumPBYhKdnJk/VdbM7s+OfAck963Aq9VaoGJ/j?=
+ =?iso-8859-1?Q?Tv20LR96/vtRtg+rjo3InsqmknMTsx4BbGJsfKhxfk2TU/aj+Nb3KslmZ0?=
+ =?iso-8859-1?Q?lt/pCC4wHcLCSGyaWsqfmv43RR2B+3Y7bYUWSjnsYUUnZx0v4mFlZYJtCO?=
+ =?iso-8859-1?Q?TSvg1q8F2AwnE89DFfSc3xRVfm34KPJccXWgtguOhuNCDZM3biFQiiVtOt?=
+ =?iso-8859-1?Q?7RXe7ay588WwjgV1Eoqsc6rqQ9q2WLugpaxilkamsHIgNe3//ZYshdWRQ4?=
+ =?iso-8859-1?Q?5H+69zGNnuEET4mF8pMfjCrywN9JjYahgVa7T0pFUfX39JD3eFjhmT4lGi?=
+ =?iso-8859-1?Q?KmYjcWdQsw=3D=3D?=
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: AS8PR03MB9192.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e8eb8d69-301e-4bf2-a2f4-08df284c7ac2
+X-MS-Exchange-CrossTenant-originalarrivaltime: 12 Oct 2026 10:35:05.1697
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: kGcVEBFuNLbVFrN7IG8MTQ8PNs1TMxZoc+yLiGKp89DLfUdemEauuWmv62dTcj/rdzJEvCkamtIaYxb4KikWBg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA1PR03MB11363
+X-purgate-ID: tlsNG-33051d/1791801309-7488A4E9-8E8539EC/0/0
+X-purgate-type: clean
+X-purgate-size: 1996
 
-On 12.10.2026 12:01, Weiqi Wang wrote:
-> 2026年10月12日 11:00，Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk> 写道：
-> 
-> Apologies for the confusion. The two names and three addresses are all me: "Weiqi Wang" and "WeiqiW" are the same person, and lukewang19@outlook.com, lukewang19@icloud.com and weiqi.wang-2@postgrad.manchester.ac.uk are all my addresses. From now on I will use one identity for everything.
-> 
-> I will resend the patch so the From header, the commit author and the Signed-off-by line all read:
-> 
->     Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
-> 
-> Please disregard the earlier Signed-off-by under the outlook address. Nothing else in the change is affected. Thank you for catching it.
+Error path of failed sidtab_map() leaves global sidtab in shutdown state an=
+d
+from that point system is unable to allocate new SIDs in sidtab_context_to_=
+sid().
+To restore sidtab state new function sidtab_cancel_shutdown() is introduced=
+,
+which only resets shutdown flag, rewinding effect of sidtab_shutdown().
 
-Thanks for clarifying.
+Signed-off-by: Sergiy Kibrik <Sergiy_Kibrik@epam.com>
+Acked-by: Daniel P. Smith <dpsmith@apertussoutions.com>
+---
+changes in v2:
+ - rename sidtab_activate() --> sidtab_cancel_shutdown()
+---
+ xen/xsm/flask/ss/services.c | 1 +
+ xen/xsm/flask/ss/sidtab.c   | 7 +++++++
+ xen/xsm/flask/ss/sidtab.h   | 1 +
+ 3 files changed, 9 insertions(+)
 
-> Resent patch attached (bound len first, then compare offset against the room that is left, as you suggested). I checked it against the original guard over a grid of in-range (len, offset) pairs and found no behavioural difference, and separately confirmed the overflow case you flagged: with len close to UINT_MAX the old guard wrongly lets the request through, the new one correctly rejects it.
-
-Unlike in the original submission there suddenly is a comment. If it was a
-brief one, I probably wouldn't mind, but for the situation at hand it's imo
-too verbose. Preferably with it dropped again (which I can easily do while
-committing)
-Acked-by: Jan Beulich <jbeulich@suse.com>
-
-Jan
+diff --git a/xen/xsm/flask/ss/services.c b/xen/xsm/flask/ss/services.c
+index 57beaafa9f..9e01e8f730 100644
+--- a/xen/xsm/flask/ss/services.c
++++ b/xen/xsm/flask/ss/services.c
+@@ -1428,6 +1428,7 @@ int security_load_policy(const void *data, size_t len=
+)
+     if ( sidtab_map(&sidtab, clone_sid, &newsidtab) )
+     {
+         rc =3D -ENOMEM;
++        sidtab_cancel_shutdown(&sidtab);
+         goto err;
+     }
+=20
+diff --git a/xen/xsm/flask/ss/sidtab.c b/xen/xsm/flask/ss/sidtab.c
+index 69fc3389b3..74fafba75b 100644
+--- a/xen/xsm/flask/ss/sidtab.c
++++ b/xen/xsm/flask/ss/sidtab.c
+@@ -320,3 +320,10 @@ void sidtab_shutdown(struct sidtab *s)
+     s->shutdown =3D 1;
+     SIDTAB_UNLOCK(s);
+ }
++
++void sidtab_cancel_shutdown(struct sidtab *s)
++{
++    SIDTAB_LOCK(s);
++    s->shutdown =3D 0;
++    SIDTAB_UNLOCK(s);
++}
+diff --git a/xen/xsm/flask/ss/sidtab.h b/xen/xsm/flask/ss/sidtab.h
+index 0e48ec6eae..f664cbed60 100644
+--- a/xen/xsm/flask/ss/sidtab.h
++++ b/xen/xsm/flask/ss/sidtab.h
+@@ -49,5 +49,6 @@ void sidtab_hash_eval(struct sidtab *h, char *tag);
+ void sidtab_destroy(struct sidtab *s);
+ void sidtab_set(struct sidtab *dst, struct sidtab *src);
+ void sidtab_shutdown(struct sidtab *s);
++void sidtab_cancel_shutdown(struct sidtab *s);
+=20
+ #endif    /* _SS_SIDTAB_H_ */
+--=20
+2.43.0
 
