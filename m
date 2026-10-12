@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1B6ECCA9ED1
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 15:28:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446435.1662553 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EB019CA9EDE
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 15:40:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446445.1662563 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGHwq-0004GX-5O; Mon, 12 Oct 2026 15:28:20 +0000
+	id 1xGI8i-0007C5-A7; Mon, 12 Oct 2026 15:40:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446435.1662553; Mon, 12 Oct 2026 15:28:20 +0000
+Received: by outflank-mailman (output) from mailman id 1446445.1662563; Mon, 12 Oct 2026 15:40:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGHwq-0004GQ-2P; Mon, 12 Oct 2026 15:28:20 +0000
-Received: by outflank-mailman (input) for mailman id 1446435;
- Mon, 12 Oct 2026 15:28:19 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGHwp-0004GH-Ii
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 15:28:19 +0000
+	id 1xGI8i-0007By-6k; Mon, 12 Oct 2026 15:40:36 +0000
+Received: by outflank-mailman (input) for mailman id 1446445;
+ Mon, 12 Oct 2026 15:40:35 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGI8h-0007Bs-B2
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 15:40:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGHwo-005zik-Vj
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 17:28:18 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xGI8g-006fpX-CJ
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 17:40:34 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6accfc91-8faa-0a2a0a5109dd-0a2a450b9646-6
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 17:28:18 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6accff71-8faa-0a2a0a5109dd-0a2a45059a4a-2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 17:40:34 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6accfc92-b7e8-0a2a450b0019-d1558034b02c-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 17:28:18 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4a0213948d3so12581655e9.2
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 08:28:18 -0700 (PDT)
+ id 6accff71-4cb1-0a2a45050019-d1558032ac0a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 17:40:33 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4a01933b584so17837455e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 08:40:33 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bea0f1csm426231665e9.9.2026.10.12.08.28.16
+ 5b1f17b1804b1-4a190344032sm299774415e9.15.2026.10.12.08.40.32
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 08:28:17 -0700 (PDT)
+ Mon, 12 Oct 2026 08:40:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,50 +54,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791818898; x=1792423698; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791819633; x=1792424433; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=I9CZ+QPoXRZjlLdO5+Gb+JA+BVEBctyw3tli7YGGjms=;
-        b=ea6jpWOrMan5btjb07+6Bpoha361TT6kKx/3zzK8EWjzskHqxZlZij6ZBjPfFtOw2y
-         YwvErRBAFlWmAXQf5o1+9qEV/txSP3gN1ewaGKBV3lT4PcaHxiLIeVaPUYliAm+qje28
-         V+1KWipuPfj3VefFW8eu2Icsn6vv23z8KMpAD3enSDOPV4li/XBw3LZ9NZDm+aozX2rH
-         ERxfaifKuxCXbPz5XZ4XSiJbKsU3tu1oIhCnAA2KyDOctdVghjoIX3cP/VT3C6ApvmLX
-         v0mAyEMshnPgPGRYNh5dH4sTlEnJ0Eo+MtbTIRRRGJrAr6Gc1mf4bg7CI28EUtbYuabf
-         l2/A==
+        bh=OHcbuaX8ZY8NhWtfaUQWJtUiZ5954j21xRi4n3rwmzo=;
+        b=ZYfnBBGm5vexkx68h1HSjTVFKjIPj28srzK6gO6W4R4uLiwDZ5zAs7Rv88vRu4+SZK
+         bvWPlFA7ZiRxupJXHD+9rnV1ujr2U3evhRuZC2U4gHOKZk8oZaxOCXesrtC7wijCMdhF
+         mySw462gwKcCdzq8vYWNafu81zyoKdwyqQUfkIMf6VLdkKff7LGcY3ptk4E2pb0/87VW
+         IyC/epPbJwlmXIEvTfA+4nnIuREn6QVQeaEEhAqeVjxtBhHTjzKsyAfsubcsp9fnVVax
+         xMh8Wrw2qKGrJtznuXEWmV+hL22kvOoT1k3/Vxi9zBxPX5fSL64/VAU1YcH4eVZ/N6KN
+         nS/w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791818898; x=1792423698;
+        d=1e100.net; s=20260707; t=1791819633; x=1792424433;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=I9CZ+QPoXRZjlLdO5+Gb+JA+BVEBctyw3tli7YGGjms=;
-        b=rdvNj9u+zVYfdF9qITTrl+m3gounNWvEdjbxEhqKJWp57J+JQaenZKopyxz+c5G8eJ
-         8gTkr42usafXf0icTVqozBezSR8rHv3hNzVDaRgT+uAhsrqo7LgZCJnMgqoOQ4dR8fjO
-         dtMdc6z4zJ1iitE3TkFrQPO62J2mvHL/PN5idOw8I3P6qWUnq+PedNDFLxA1Jx5NhxQ7
-         rFY45vhViJKKWirolJ/jtCHNqD7oCV0W8+IzEX5DuqtYHGAjEojssIdXkIZ+cTU+nLIf
-         /FR0NLRm9kFvgP8N8zuE35hcgt4zsxUOpU+gd++/KjtBGC8UbdCwTXpG8TEJbXQDgma3
-         uf0A==
-X-Forwarded-Encrypted: i=1; AKwUvBwyDb+SSfbZe9eDHEDRvHsFXPMf4b8WZd3diZE/PR+3xdfHee/bJrwphzONO87E7+2x9vooGA1tocg=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYLrnLA2kYTSfiufrYtaNXmDP2N1CmvmCtg0mN2LOiLQnM5HXN1F
-	cMoaDnTtdRdHaAHk/tGWLRkvpAjVbIL6W0mYIfjQGYo/lwPQ9s+aSsRgxuEQL1pfow==
-X-Gm-Gg: AYBFou1AodopNNzG7l3ciItLSnXtoEEovozREPegU8gkkawKLc13DhBKo2My0T1GjAS
-	H8gVXB/tmZ0Kq47i+y9Mhv0agQw9YiP9dBbE5sRgLLb8lphzapW/qSo2Dq5tMagVyXUY+jtf0dl
-	DQkENRfSCZPBh8V1AXCJrW65zDEQ7HsB+8iaT73+EMwdKdMfasW4mfOJpz/Py1u1oTwJiXc62nv
-	po7zzQpNieAW+PUcHOeCeKpxBghW6MpfCcSTYFF2jyTM2KhG2Fx55huWAGLl0AutOwzRQDGV9yG
-	DFIX3TIvei1CX1R6tIfAO31XPnj/g3aTX/J32/QSSSb64qMCE7jrBzL3nhAO7rTkoMgBOoNMvb2
-	ef0ocE+LdBkBkOXwEIQJe2uPjncqPXLZvjAqBJgtrscMatnRUeTcL6ETg0PZu+Iz+bkZidD1JYT
-	rL/+00YU/KaPdt4Fo5ZWy1jouHgBQmVoaMywhyTjgWVajAb6xoOwbembMEjflPUDmxP3FmxM+32
-	dlLUdKrBJEY4BCYhLbr/JshXB9vv+Y94C4+mtdhBMn6iJ9WdGK7xxmYqNF7C6A=
-X-Received: by 2002:a05:600c:c113:b0:4a1:985b:83a9 with SMTP id 5b1f17b1804b1-4a1985b87f5mr78682915e9.4.1791818897919;
-        Mon, 12 Oct 2026 08:28:17 -0700 (PDT)
-Message-ID: <aa82fc34-0074-422a-87da-0cab24bb43c8@suse.com>
-Date: Mon, 12 Oct 2026 17:28:15 +0200
+        bh=OHcbuaX8ZY8NhWtfaUQWJtUiZ5954j21xRi4n3rwmzo=;
+        b=pa5ZCBOQOxdOR38//BqljE5ew4I1hLTLhKP7wBgi4PVo8MIy22gB/H0P1rqTyrIeU5
+         31vHq/0SI4IYo/tre/CdVKRM/hhEX+bHb83FkhGc/Fu49UUHOjb70AAaD6CpZsPYq4+N
+         JistLmWYJNRmwk5TOei3PdWPZpqfLJ4ENDR6mdCVXRht0H6c2hAK1c+f1BH5cIXh0Puk
+         K8OCcxOtg5BUjilcHyNXNnQuhmlnXrGWJcgu5VISHn4IQMCYYNakBGZoYDrkA+ia1KwE
+         gwCnKWTWvFZEpFU8dcEK54KkW3o9lT2Se2+3bl6ryUdEvPSlx3p94oYX04a4yWsRTuyL
+         /DuQ==
+X-Forwarded-Encrypted: i=1; AKwUvByfMwbSVmOcy0oGKdTajIPKaRFFr1GjxuqIfGtTwzp93Cn1rVoLFlA0LQfoURDYbnONw7X0wMuwz30=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKzFzjPAevv3+2rGMdmnOmYihYXA4haCH4xWz8ofhwbFvsjti6y
+	x7akNnbC/6yoVgMumqfVN+Ca2c4zMdB3NCPOgTiWS2sOERpfm0slTCTjZ9imqozmDg==
+X-Gm-Gg: AYBFou1Ni6RPAnW9r0U0CsBi6Rh4rN8I1/giyejzKvyKhKndcQLD/BD2Sfk9A+MQrPN
+	IV+pW8FL3MGh51oee6lwkjeerIXQU6Y3Ixrxe3mvlaSBFDV/cdP6cYkHT2GL8Y5C9U1fVi5VQQA
+	nWpbsMVr8Soq97BmmA62P5Or5g9idZDS8VgcrvHmYJvz4XuRahw0qpYZjgyniEr+cRUq5PPoyLV
+	yu+/1jRrjfBZdLiER95n+ItG0bZVwWs0/JNqxS3Rs3Rvzbg8xAiiIYEOFXw2ILj2e2N6x8mXwRq
+	30AjmTbDwBJiz7Yp3Xv4AvDmYWUNdBcy8Dr5bAR+Q53cQFm4TYcSxgV3jQYFmsw1T66UJyYeRGT
+	fzoDTI0jGFJW6I2r3Ie6Ovi3nsPjtY2/COAdBPsxcUE7F970tpuczvHTf4ZVWNi4zSIDnHJfxWH
+	5x3/0wiycwTkXijsbmg3v66nn+rfhRpYyFaFLHA9DWl4uKWcPUq/YqSxY1WrBNbnm8YgzYA3PqU
+	W0fu775elnPj6BBmPgOpEyv4YEqKFiRCZR4yJrKdREAPESwrdz779EYiAMaXCH+nPSgqRtkXPs=
+X-Received: by 2002:a05:600c:3554:b0:4a0:1b14:e283 with SMTP id 5b1f17b1804b1-4a18e43a1cemr190157205e9.1.1791819633318;
+        Mon, 12 Oct 2026 08:40:33 -0700 (PDT)
+Message-ID: <d08b6491-8b87-49ba-80bd-36d4448a59b3@suse.com>
+Date: Mon, 12 Oct 2026 17:40:31 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 06/39] xen/riscv: introduce device-agnostic MMIO
- emulation dispatch
+Subject: Re: [PATCH v3 07/39] xen/riscv: introduce CPU_NONE
 To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  Baptiste Le Duc <baptiste.le-duc@vates.tech>,
@@ -110,7 +109,7 @@ Cc: Romain Caritey <Romain.Caritey@microchip.com>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
 References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <cafb356d9cc3148d74df846e08c4961da72bea0e.1790779209.git.oleksii.kurochko@gmail.com>
+ <d35b280c0bf075a2a730f9cb69ced407e346ebd5.1790779209.git.oleksii.kurochko@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -136,121 +135,69 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <cafb356d9cc3148d74df846e08c4961da72bea0e.1790779209.git.oleksii.kurochko@gmail.com>
+In-Reply-To: <d35b280c0bf075a2a730f9cb69ced407e346ebd5.1790779209.git.oleksii.kurochko@gmail.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-42698a/1791818898-A98C19EA-759207F6/10/78276251493
+X-purgate-ID: tlsNG-c201ff/1791819633-F56AD2A1-DA91C03D/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 3595
+X-purgate-size: 2134
 
 On 30.09.2026 18:18, Oleksii Kurochko wrote:
-> --- a/xen/arch/riscv/include/asm/domain.h
-> +++ b/xen/arch/riscv/include/asm/domain.h
-> @@ -9,6 +9,7 @@
+> Introduce CPU_NONE, a CPU number which doesn't identify any physical
+> CPU, to be used wherever a pCPU has to be recorded but there may be
+> none.
+> 
+> Its first user is vsfile_cpu in struct vimsic_state, which records the
+> pCPU whose h/w guest interrupt file backs the vCPU's IMSIC VS-file.
+> NR_CPUS has been used there as the value meaning that there is no such
+> pCPU, i.e. that the s/w VS-file is in use. NR_CPUS is however an upper
+> bound rather than a "no CPU" marker, and it already carries other
+> meanings: hartid_to_cpuid() returns it for a hart Xen doesn't know, and
+> pcpu_info[] uses it for an entry whose processor_id isn't valid yet.
+
+Yet these could (and imo should, subsequently) entirely plausibly also be
+switched to CPU_NONE. IOW I don't think ...
+
+> Use CPU_NONE for vsfile_cpu instead, so that the s/w VS-file case can't
+> be mistaken for any of those.
+
+... this is a plausible justification (nor in its re-written form as per
+Baptiste's suggestion).
+
+If you want such a distinction, you'll need separate sentinels for every
+one such field.
+
+> --- a/xen/arch/riscv/include/asm/config.h
+> +++ b/xen/arch/riscv/include/asm/config.h
+> @@ -136,6 +136,9 @@
+>  #define OPT_CONSOLE_STR "dtuart"
+>  #define INVALID_VCPU_ID MAX_VIRT_CPUS
 >  
->  #include <asm/cpufeature.h>
->  #include <asm/guest-layout.h>
-> +#include <asm/mmio.h>
->  #include <asm/p2m.h>
->  #include <asm/vtimer.h>
->  
-> @@ -101,6 +102,8 @@ struct arch_domain {
->      const unsigned long *isa;
->  
->      struct vintc *vintc;
+> +/* A CPU number which doesn't identify any physical CPU. */
+> +#define CPU_NONE (~0U)
 > +
-> +    struct vmmio vmmio;
+>  /* Linkage for RISCV */
+>  #ifdef __ASSEMBLER__
+>  #define CODE_FILL /* empty */
+> --- a/xen/arch/riscv/include/asm/imsic.h
+> +++ b/xen/arch/riscv/include/asm/imsic.h
+> @@ -71,7 +71,7 @@ struct vimsic_state {
+>       */
+>      unsigned int guest_file_id;
+>      /*
+> -     * s/w IMSIC VS-file -> vsfile_cpu == NR_CPUS
+> +     * s/w IMSIC VS-file -> vsfile_cpu == CPU_NONE
+>       * h/w IMSIC VS-file -> vsfile_cpu < NR_CPUS
+>       */
+>      unsigned int vsfile_cpu;
 
-This is a decent size structure, so I wonder whether this really wants
-embedding in struct domain. If it was a pointer here (with the struct
-dynamically allocated), the struct definition itself may not even need
-exposing in a header.
+As can be seen from the comment alone, there's now the risk of
+CPU_NONE < NR_CPUS, at which point users of the field will be
+screwed. I think you want
 
-> --- /dev/null
-> +++ b/xen/arch/riscv/mmio.c
-> @@ -0,0 +1,175 @@
-> +/* SPDX-License-Identifier: GPL-2.0-or-later */
-> +
-> +#include <xen/bsearch.h>
-> +#include <xen/lib.h>
-> +#include <xen/rwlock.h>
-> +#include <xen/sched.h>
-> +#include <xen/string.h>
-> +
-> +#include <asm/current.h>
-> +#include <asm/mmio.h>
-> +
-> +/*
-> + * bsearch() comparator: @key holds the address to look up in its addr field,
-> + * @elem is an entry of vmmio->handlers. Relies on the regions not
-> + * overlapping, which register_mmio_handler() enforces.
-> + */
-> +static int cmp_mmio_handler(const void *key, const void *elem)
-> +{
-> +    const struct mmio_handler *handler0 = key;
-> +    const struct mmio_handler *handler1 = elem;
-> +
-> +    if ( handler0->addr < handler1->addr )
-> +        return -1;
-> +
-> +    if ( handler0->addr >= (handler1->addr + handler1->size) )
-> +        return 1;
-> +
-> +    return 0;
-> +}
-> +
-> +/*
-> + * Return a copy of the matching handler rather than a pointer into
-> + * vmmio->handlers: a concurrent register_mmio_handler() shifts entries
-> + * up to keep the array sorted, so an escaped pointer could refer to a
-> + * different (or torn) entry once the lock is dropped. The copy stays
-> + * valid as the ops structures are never freed.
-> + */
-> +static bool find_mmio_handler(struct domain *d, paddr_t gpa,
+    BUILD_BUG_ON(CPU_NONE < NR_CPUS);
 
-The first parameter here apparently wants to be named currd, much like ...
-
-> +                              struct mmio_handler *out)
-> +{
-> +    struct vmmio *vmmio = &d->arch.vmmio;
-> +    struct mmio_handler key = { .addr = gpa };
-> +    const struct mmio_handler *handler;
-> +
-> +    read_lock(&vmmio->lock);
-> +    handler = bsearch(&key, vmmio->handlers, vmmio->num_entries,
-> +                      sizeof(*handler), cmp_mmio_handler);
-> +    if ( handler )
-> +        *out = *handler;
-> +    read_unlock(&vmmio->lock);
-> +
-> +    return handler != NULL;
-> +}
-> +
-> +static enum io_state try_handle_mmio(mmio_info_t *info)
-> +{
-> +    struct vcpu *v = current;
-
-... this variable wants to be named curr. Unless of course there are
-plans to not unconditionally use current here.
-
-> +int register_mmio_handler(struct domain *d,
-> +                          const struct mmio_handler_ops *ops,
-> +                          paddr_t addr, paddr_t size)
-> +{
-> +    struct vmmio *vmmio = &d->arch.vmmio;
-> +    struct mmio_handler *handlers = vmmio->handlers;
-> +    paddr_t end = addr + size;
-> +    unsigned int i;
-> +    int rc = 0;
-> +    bool overlap;
-> +
-> +    if ( !ops || !ops->read || !ops->write || end <= addr )
-> +        return -EINVAL;
-
-I think this checking goes a little too far: It's absurd for some call site
-to pass NULL into this function. The other three checks are sufficiently
-plausible, albeit I wonder whether this wouldn't want to be an assertion
-then.
+somewhere.
 
 Jan
 
