@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A1267CA9ED2
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:26:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445970.1661874 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DB884CA9ED2
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:27:07 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1445978.1661883 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBMY-00054I-IP; Mon, 12 Oct 2026 08:26:26 +0000
+	id 1xGBN5-0005hi-UW; Mon, 12 Oct 2026 08:26:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445970.1661874; Mon, 12 Oct 2026 08:26:26 +0000
+Received: by outflank-mailman (output) from mailman id 1445978.1661883; Mon, 12 Oct 2026 08:26:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBMY-00054B-FY; Mon, 12 Oct 2026 08:26:26 +0000
-Received: by outflank-mailman (input) for mailman id 1445970;
- Mon, 12 Oct 2026 08:26:24 +0000
+	id 1xGBN5-0005hb-Rv; Mon, 12 Oct 2026 08:26:59 +0000
+Received: by outflank-mailman (input) for mailman id 1445978;
+ Mon, 12 Oct 2026 08:26:59 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGBMW-00051n-Oj
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 08:26:24 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGBN5-0005gJ-47
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 08:26:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGBMW-00B9bw-5V
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:26:24 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xGBN4-00B9lk-Gr
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:26:58 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acc99af-2eae-0a2a0a5409dd-0a2a4506cd1e-2
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:26:24 +0200
-Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6acc99cb-2eae-0a2a0a5409dd-0a2a4502a292-18
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:26:58 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acc99af-195a-0a2a45060019-d155dd2cd05c-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:26:24 +0200
-Received: by mail-wr1-f44.google.com with SMTP id
- ffacd0b85a97d-48afe0081a6so1083685f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 01:26:24 -0700 (PDT)
+ id 6acc99d2-6ca4-0a2a45020019-d155802fd4ab-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:26:58 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-4a02667ccebso10434985e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 01:26:58 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48db9abce2fsm18374605f8f.33.2026.10.12.01.26.22
+ ffacd0b85a97d-48db9acc936sm18062413f8f.44.2026.10.12.01.26.57
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 01:26:23 -0700 (PDT)
+ Mon, 12 Oct 2026 01:26:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,49 +54,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791793583; x=1792398383; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791793618; x=1792398418; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=3Fk8ubxGACynMKa2lozxkb2C5OaTEVTs40otMwFTXqk=;
-        b=aOcG8Aq4+bzIRntKvjo82UdKnLklVy9vTQkYrj0HYIEBB37fQD985JVANwpLyLIn+M
-         wu8C++5kCkyB5aQAniE3WHLBmEsJoWD0Eal/oZ1TiQndQNUIF75Y72MTfP38ZXZwIe4p
-         FjubqEnvv42bQN6hBZ+POel9DpkEahcrtRzRt1qyvYlwqi1oK0cr1m4r3FhHE/GDos/3
-         kWcIhFJ7deGcer810yG1MB6ClkmFqD8IjzwTPlDAeRrH+g2kpvTasJ7zDZJfADMrW91S
-         0ZcxG0qIUs5hrptnO/7GfjQsXkUdcIuEVN/o3pwr6iwWrXoSasjrpcbY7tosvGvB/WpG
-         MTeQ==
+        bh=QQBVOxw25q4egEqsMoJm6AFAF/6zt2nS86ied2+T6eQ=;
+        b=AFLLHhCX1Op1dAcSlnYJhgKmdfTDNau4dcRMBIF84+1OG58x7u+vDvkHq/JAmbZbuc
+         IT1TNE+zTTyvynCG1iFlFr9QNMz8CMd27Y8jffgfOgP1SsbNc6OV3QQv48gpWN9eALxF
+         MExq7HNqYlDl1XoomYXrQFOSKLTXRj4hqMoSkVuMI7I7ywv9Xu8RyCfiPxwfeEwjK/yP
+         eVITTkxvbpKicGE9fD40vxGf7LjyFspblp+2Rq7mm+AweI0+4fZG6/SzXjIo5XNF9PyD
+         Vhiqq4qi1KCDCHhMMV7FH7bfC/pis8yMo2TjE4Eb+5OEqc4eHhz4XREMTxNW12v3uMb+
+         G5Fg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791793583; x=1792398383;
+        d=1e100.net; s=20260707; t=1791793618; x=1792398418;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=3Fk8ubxGACynMKa2lozxkb2C5OaTEVTs40otMwFTXqk=;
-        b=xZwiy3KQ1dBlQ7dFlhfdgnPaRyDFoQoQjX3b278cjCk7ybOuGxUDmMPMIMcHDctHDm
-         qGiyVjKxdMroVRrwqdaM9ce8dKVLpP3kt4pgqXgc7Th0Eyv45yaH1K28iy1egkEyccuP
-         9fOGard7RbL/SogtGIFTfyhrZqkZJBbV3q1M7mU2hAHc3++43lsBYm1DhdtqgcVTeEzu
-         /ctg7Il6KlFey5jEM8K2rCJnpU92lckIB3WvBrOs+yd9FqeRxsRyEvcQrl6EorR6+DUk
-         tkW0Jbzx3J0GKzJEhaE7UwAEGOEYhcfpGrs7WO8qgOMUcdUKBXGyN8o+zr7kN4/HCFMq
-         Bk5g==
-X-Gm-Message-State: AFq9FYKNQWfXLZb8mvRxOG8gSWtry21yCzoGo0cjQTRMnMqavoKDbKWk
-	YfW7GWBmTUIqRNm7n6PbfrkaOhx48icYJMOktAXA3VQvKOAgw/3dxXbgE+BqilZz1k0dV+Tp3l9
-	ftgGcwg==
-X-Gm-Gg: AYBFou1GoWN8L9qze9zA/6daT2LLa+DPzKKNtwxh8jrKhB0gXqeTdt2gN9Q4cL60M9T
-	phXM/VBHDCykLci3XIyY4xosLDoqSZILjQP5aqujezHCM5paEIvUUxp9Sv82m85UVK044eo1yh1
-	U0AY1EnMK4MLN+ScFfmiB9twEHSI8g31KvRtQQs4DHt88c3J/w3Su50d4q+QQUCdcE6spAF0xTZ
-	CskG/Xbr5Qa7cfojTNli1MV+ISti6BrQ6NgFYy1KjcZDmdxQzuwsPjA4oVFWwpJAFuyBlWWLAq2
-	mfj0ItTa7sea6gdKpgITWyn5cm6XiuRlEHaM6YnsYvnUrDdaD9/W1sUg4an9JtXCR1F8NhZ3zrn
-	3vMaGWq4atuV34HBq/NOixP8SIPtF6jFYa17oD7IDbwzYHqhwnA0AKIlpbbxylol4dC9ZRR5pix
-	FocYPnytAxhPyAF4mbAWAVbgpJQ9vr9otuR30OXje87KbHngCebUQvipwUHXMiBpeYOJHwW17z2
-	L3/D7k47mTI8Hv/x91tUW9CM8oR/qZz4YvmvEwDuInaYGRcuSCX59pwDgV3M6k=
-X-Received: by 2002:a05:6000:151:b0:487:21be:dcc6 with SMTP id ffacd0b85a97d-48dbaae53b4mr12788221f8f.21.1791793583338;
-        Mon, 12 Oct 2026 01:26:23 -0700 (PDT)
-Message-ID: <f5cb5cdc-17b0-4678-aa0b-36a0a8a00cc3@suse.com>
-Date: Mon, 12 Oct 2026 10:26:24 +0200
+        bh=QQBVOxw25q4egEqsMoJm6AFAF/6zt2nS86ied2+T6eQ=;
+        b=1ghn6CGrtOnLbOdCxpS/SpgmI9gpnB91KhXaiR6XIA96GoSYbUKb9oCnN6n7LTcRsp
+         8XjN7OVQQd302X+5KhY20L8luUcsBtau1kz84qoqZMD49IDTpZJQM0NAfZsNRjJaFTwT
+         wUCe6LOT7SRBVfpfKw6ksYd/3IaCBKDXG8Zo0dEHrEInGe4cmwhGUgQxQpti4GIaDkIH
+         Zv/Wimh0BLUqNJ6Q9+cx6cS+X3fBD8UNZGL5AIrt03MZC3xiFTHb9FrQ93BJbe6zvuHH
+         JXuQCDS++2e/nXYmsuKKlRbjQouaWT2xydLuAc1UkzHijGe5EBArV0oIIGaJJT56AlSz
+         jXzA==
+X-Gm-Message-State: AFq9FYKyFqrXSmI3rEjpGIOu+y7u6A1ziqtCW8OuT7beQscs1AF4BQTD
+	Mkbbr5h7unEe+x7kkxEiTdnnHKueJMbc8Mp9DL/mMPcrTV42gI7eFcmsojwqb5h9SMq5rA3CW+i
+	QLYKyDQ==
+X-Gm-Gg: AYBFou31MWfy110gjLPm4XLEdSLByL6/y9tCwDWme54OvlyZ3wuwGf6+mQ5M4Q1zLtO
+	tEJ+XGIo85GQkO0g3zZvlXHoQjQtkHxHDXH4895TSX/1cGiiIcKrjUD+KRpYZx3ocm7bTvwN5Xf
+	QvKFhbBRxzEgP+uk3zCHUs8lwVcm1s74pKhnNkSyqcLGfJ85OAk/BvAPdG1AFOHRZ/tq0AurP0G
+	TMcBOZN3qPf8HDwLtlUo1gpnnEtTesndg14/+J2N59eGOw7KpKj1TeA1fD6sAiZaNC8YA1ZK6Gs
+	Fjll+0/h/8fdA8iclqm7PWPzsGBpRdvme80hIitz8Qr8mJiUM280LdCqOYzx7WW62WbWcco+7ZQ
+	I1wwcUsSH9AeFos+A80wgKyDFea/G/kErFcX5B8HgHizz0lfK5EPjvAf9roib/+3UP0YIgQvKZY
+	r46k4CSA1W4t6hd/Rx/0YPlBcnrzGc9cPIzqJEr2+DQKVqQrW0wiurB/uRYfI7MMoUahYVDJXIF
+	okxcXWwYpZ631PSKtf7FG9vd3Fj62wHSMQc2zKbAwLyr1Ui6Lvm0GcHsIfqPA==
+X-Received: by 2002:a05:600d:4452:20b0:4a1:90d7:88a8 with SMTP id 5b1f17b1804b1-4a190d7891emr105478065e9.25.1791793617885;
+        Mon, 12 Oct 2026 01:26:57 -0700 (PDT)
+Message-ID: <bcf7efcc-2648-42e0-ba0b-7f6e32e65f11@suse.com>
+Date: Mon, 12 Oct 2026 10:26:58 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 14/15] x86/PVH: log Dom0's E820 map earlier
+Subject: [PATCH 15/15] x86/PVH: simplify writing of Dom0's RSDP
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,75 +130,92 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1791793584-FCC0777B-F215BB58/10/78276251493
+X-purgate-ID: tlsNG-720697/1791793618-307C22AC-EDB727F3/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2038
+X-purgate-size: 2878
 
-Do this as soon as it's final. For debug builds also mark it final, with
-assertions put in place to make sure it won't further be altered. (For a
-release build such further altering isn't the end of the world normally,
-so the situation is left alone there.)
-
-Switch to using %pd while moving the code up.
+Now that we establish where the RSDP is to live before actually loading
+the kernel (and writing start-info there) we can simply hand the pointer
+there, eliminating the need for the (fragile) separate write to the field
+out of pvh_setup_acpi().
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+Alternatively we could move start_info to the top-level function, have
+pvh_load_kernel() and pvh_setup_acpi() fill what need filling, and do
+the write from the top-level function. Yet it looks to me as if this was
+more churn for little extra gain.
 
 --- a/xen/arch/x86/hvm/dom0_build.c
 +++ b/xen/arch/x86/hvm/dom0_build.c
-@@ -46,6 +46,9 @@
-  */
- #define HVM_VM86_TSS_SIZE 265
+@@ -976,7 +976,8 @@ static int __init pvh_load_kernel(
+     const struct boot_domain *bd,
+     struct elf_binary *elf,
+     struct hvm_modlist_entry *mod,
+-    paddr_t *start_info_addr)
++    paddr_t *start_info_addr,
++    paddr_t rsdp)
+ {
+     struct domain *d = bd->d;
+     struct boot_module *initrd = bd->initrd;
+@@ -1110,6 +1111,7 @@ static int __init pvh_load_kernel(
  
-+/* Marker set once Dom0's E820 isn't supposed to change anymore */
-+static bool __initdata e820_finalized;
-+
- static unsigned int __initdata acpi_intr_overrides;
- static struct acpi_madt_interrupt_override __initdata *intsrcovr;
- 
-@@ -195,6 +198,8 @@ static int __init pvh_steal_ram(struct d
-     struct e820entry *good = NULL;
-     unsigned int i = d->arch.nr_e820;
- 
-+    ASSERT(!e820_finalized);
-+
-     /*
-      * Alignment 0 should be set to 1, so it doesn't wrap around in the
-      * calculations below.
-@@ -241,6 +246,8 @@ static int __init pvh_add_mem_range(stru
-     struct e820entry *map;
-     unsigned int i;
- 
-+    ASSERT(!e820_finalized);
-+
-     for ( i = 0; i < d->arch.nr_e820; i++ )
+     start_info.magic = XEN_HVM_START_MAGIC_VALUE;
+     start_info.flags = SIF_PRIVILEGED | SIF_INITDOMAIN;
++    start_info.rsdp_paddr = rsdp;
+     rc = hvm_copy_to_guest_phys(last_addr, &start_info, sizeof(start_info), v);
+     if ( rc )
      {
-         uint64_t rs = d->arch.e820[i].addr;
-@@ -1759,6 +1766,13 @@ int __init dom0_construct_pvh(const stru
+@@ -1587,10 +1589,7 @@ static int __init pvh_place_acpi(
+     return 0;
+ }
  
-     pvh_place_initrd(bd, &elf, &initrd, &blob_start, &blob_end);
- 
-+    if ( opt_dom0_verbose )
-+    {
-+        printk("%pd memory map:\n", d);
-+        print_e820_memory_map(d->arch.e820, d->arch.nr_e820);
-+        e820_finalized = true;
-+    }
-+
-     rc = pvh_populate_p2m(d, orig_e820, nr_orig_e820,
-                           PFN_DOWN(blob_start), PFN_UP(blob_end));
-     if ( rc )
-@@ -1794,12 +1808,6 @@ int __init dom0_construct_pvh(const stru
-     if ( rc )
+-static int __init pvh_setup_acpi(
+-    struct domain *d,
+-    struct acpi_info *info,
+-    paddr_t start_info)
++static int __init pvh_setup_acpi(struct domain *d, struct acpi_info *info)
+ {
+     int rc;
+     struct acpi_table_rsdp *native_rsdp, rsdp = {
+@@ -1642,20 +1641,6 @@ static int __init pvh_setup_acpi(
          return rc;
+     }
  
--    if ( opt_dom0_verbose )
+-    /* Copy RSDP address to start_info. */
+-    BUILD_BUG_ON(sizeof(info->rsdp) !=
+-                 sizeof_field(struct hvm_start_info, rsdp_paddr));
+-    rc = hvm_copy_to_guest_phys(start_info +
+-                                offsetof(struct hvm_start_info, rsdp_paddr),
+-                                &info->rsdp,
+-                                sizeof_field(struct hvm_start_info, rsdp_paddr),
+-                                d->vcpu[0]);
+-    if ( rc )
 -    {
--        printk("Dom%u memory map:\n", d->domain_id);
--        print_e820_memory_map(d->arch.e820, d->arch.nr_e820);
+-        printk("Unable to copy RSDP address to start info\n");
+-        return rc;
 -    }
 -
      return 0;
  }
  
+@@ -1783,7 +1768,7 @@ int __init dom0_construct_pvh(const stru
+ 
+     xvfree(orig_e820);
+ 
+-    rc = pvh_load_kernel(bd, &elf, &initrd, &start_info);
++    rc = pvh_load_kernel(bd, &elf, &initrd, &start_info, acpi.rsdp);
+     if ( rc )
+     {
+         printk("Failed to load Dom0 kernel\n");
+@@ -1797,7 +1782,7 @@ int __init dom0_construct_pvh(const stru
+         return rc;
+     }
+ 
+-    rc = pvh_setup_acpi(d, &acpi, start_info);
++    rc = pvh_setup_acpi(d, &acpi);
+     if ( rc )
+     {
+         printk("Failed to setup Dom0 ACPI tables: %d\n", rc);
 
 
