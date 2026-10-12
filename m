@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CA23FCA9ED1
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 10:23:50 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446086.1662067 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id E5F2BCA9ED0
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 10:32:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446114.1662160 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGDC0-00056u-TL; Mon, 12 Oct 2026 10:23:40 +0000
+	id 1xGDJz-0007oz-0D; Mon, 12 Oct 2026 10:31:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446086.1662067; Mon, 12 Oct 2026 10:23:40 +0000
+Received: by outflank-mailman (output) from mailman id 1446114.1662160; Mon, 12 Oct 2026 10:31:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGDC0-00056n-QY; Mon, 12 Oct 2026 10:23:40 +0000
-Received: by outflank-mailman (input) for mailman id 1446086;
- Mon, 12 Oct 2026 10:23:39 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGDBz-00056h-Ly
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:23:39 +0000
+	id 1xGDJy-0007os-TQ; Mon, 12 Oct 2026 10:31:54 +0000
+Received: by outflank-mailman (input) for mailman id 1446114;
+ Mon, 12 Oct 2026 10:31:53 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGDJx-0007om-Nf
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:31:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGDBy-00Fmmk-En
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 12:23:38 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xGDJu-009aTx-RU
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 12:31:50 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6accb528-8faa-0a2a0a5109dd-0a2a4509b2f0-10
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 12:23:38 +0200
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6accb70c-bab6-0a2a0a5309dd-0a2a4507b5c4-24
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 12:31:50 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6accb52a-be1a-0a2a45090019-d155802ed1d3-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 12:23:38 +0200
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4a19cba5c14so10157575e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 03:23:38 -0700 (PDT)
+ id 6accb716-b4ea-0a2a45070019-d1558032c814-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 12:31:50 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4956869750eso13551355e9.2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 03:31:50 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bf31b83sm287559035e9.12.2026.10.12.03.23.36
+ 5b1f17b1804b1-4a18bf2e0dbsm295840355e9.11.2026.10.12.03.31.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 03:23:37 -0700 (PDT)
+ Mon, 12 Oct 2026 03:31:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,56 +54,58 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791800618; x=1792405418; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791801110; x=1792405910; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=8ansDgR7RJt96a3kt/TMeDi3Mw9LXC4Q0H5qpIUi/wc=;
-        b=MaRbJ87CCAN9OaH4XBpkiM+hamjTcP1XXGi2BYbkpOuwsTGDKErUbmsHMfx4ti9RDY
-         pyTpvVzcO9rDP8lOh0qSh+nXs3VimPa76r/rqUQkmJRrRHRuavZYbNnYi9XQnMfmcv/b
-         F8uMQy/gNyZSem7iGJcZmlTVTKt7ziHG2ENQW+pPLdhZVxaeC6MoKBWW8V2EJ0UPzcyR
-         KswX3K5/t7BAKRQJDM1coDPoiRs9Hq60vF6/pBV1dcEBll/+IFM/Nw49c+pMnJ9K+FgK
-         6LibC9bzYjmkbbc48Fj50WXhM35CY+O61MJBDTcro/sb8cgVMrl3W+CcHaqgloDM3PgX
-         ZXKw==
+        bh=D3EkwhjPwR0pwICmf55sHME9fFLTOEn62ss/srOgbW4=;
+        b=Yp4XA8pAOPKAYXXKAF/66gMKu6ZGeIPRfOt4jRIF7eNVkEAbQcXlLAV+ZskRewV9P6
+         rPyrjoUBHGzLsi4yI9XUT25N7lygyJSbA+DYL+42Zrq7cFwRPhddHHn0IEmu1AsifFJS
+         f+fXtpewe365WEkewV/zlykXYdL04/e85iRrsiri+pCWNw6in1yYugKstXjQXOWZO/9v
+         MfQ5O3GbHtoOFUPw2WaUlWk0rLklG3y44SeS7PwavuEcdAwDj1LETV4iQ6PP1EGLVgld
+         Lq1Jc0GfjvJBr4/Sk4hV1K8YNMkaJjCBR9J4m1GlqaE9fHg/8Sv5thU7A21dLvCrJ7ID
+         f1QA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791800618; x=1792405418;
+        d=1e100.net; s=20260707; t=1791801110; x=1792405910;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=8ansDgR7RJt96a3kt/TMeDi3Mw9LXC4Q0H5qpIUi/wc=;
-        b=BNANVcD3oitCj+LdGF1zK/sXD4ubX4NlXqImDYJ2a+J0Wzl6Oci552UZ1GgCrS/NWE
-         yQuWpft+DuLdQlEaSSvPxt77bCR0K1L+/zTMMuTT+k4mzPiqNp2waieysxnFywv+DX+0
-         DjDwOB79SmBeANoxIsEkGaDlfSN6l8yhSSroBTcbpv7m9aCHH8v0333BCxlTm5ecDMTq
-         /z9LzNC2VslXBnd66ydGjj5YuMtsW11Ep1wT+llFxuRaCRKHrdwJgts0pKA7SgS6sYRf
-         zhYSeXtzaJ4nMnviTGgeUnK5w5JAIP8wnmkk7U964RR5Ikiap1YOi5vrEwKM0lj7m/1G
-         SuNg==
-X-Gm-Message-State: AFq9FYIGe4r1pkwu5lw9PgfzcmsopyrEUpeLC8E8Hcy1XwHmOt0tK/4D
-	b0SG4zhX0vKmVo3eyyIcNfWly6sbposXZmIOhKi+xzpPpmJ2JmsAtCdcxduewi7Orw==
-X-Gm-Gg: AYBFou3neubCpJCvzAy/XlK4/YvV2p1GPVLR9SYXBNZODfgYCFCf84OntUasypJGv/J
-	bJGoVTjcUmHpAywEIgN7ENz2lOJL4Re345/0GbCZ+X200dU/mRDtwXFT3H/nxnRxSkooj8T5TpC
-	bn9CaG1M0iPdqheVF/zVBRVRphxJ7GD71e4rWhqBVZ2cyiN0CisEiz7yZLVKmrBoJb85FC4rLky
-	HaImoScd9JY0y8W/qkZyYhVb896AiqAs9hZbLWn5UGZCWVkPwL7NbUU34QaYlEcb9wuXNc8LTgG
-	Y0F3hBoaqCDlBS5Fl7PL3ZvwzjhMj1dl1Ewlv0FNgL6xLMQwxiwGgLHBRRn0CJtTjppzITO+lQ7
-	Er5PevJnlXUjHymBOr/O4Sk75R73N36DRbW3bUAF2DJVDbUWYgHg+a5Wo5mvb+FZCAnfghDZtYL
-	qJtER/q+j9QpV6V3BWZiEpDJR0FUc4GvO7OmfiOmmrYC+RlcHWzDBJuvmxbvzkJbpRPKjIS58FM
-	K7CQHXoa/bcGpuF5pJZG45v/SCzpWCnCTAY0kyF2SiF3tz4moPWJzVQvHqIpXY=
-X-Received: by 2002:a05:600c:4e11:b0:4a1:7f41:b9dc with SMTP id 5b1f17b1804b1-4a18e4d67famr175900485e9.23.1791800617610;
-        Mon, 12 Oct 2026 03:23:37 -0700 (PDT)
-Message-ID: <059a456c-9f84-40d3-8f88-7c9599abb04d@suse.com>
-Date: Mon, 12 Oct 2026 12:23:38 +0200
+        bh=D3EkwhjPwR0pwICmf55sHME9fFLTOEn62ss/srOgbW4=;
+        b=1ejEBJtmLRz3QBYwWvJ9zg5HH+/TgbeE+xOG5VU7/WnCzP2u3ymZxXW0L6VXsi2jN7
+         5vyye7tkLuoPj7o5+71mykLa0GPXV9TP1qMQAKXIGnwkLoq6B9xrVEX73iX4BaB5JEYh
+         DkjSdQ3gGSpPNndst4ipaRCKCDmQJgDpe109Pe9LrrDbkGqggt1JHNds6hroOcF2ZpuG
+         8M6s+ZRUhiTeFXFhTh/ILew83vpK6hW6KDQrDR5UwTlUCh1Y3W9snzEVhdLddue1AagU
+         20yxOEBCKbreRukNfgnOZ/BLVGuGQWJTczlA7JG+gFLm7fpahbsEQpQFJ/OMJOhHyTx3
+         Ve9w==
+X-Forwarded-Encrypted: i=1; AKwUvByFlr6W4l+VoiO8WbN7uxI9qdVDyrXKh9FTe1/254oy2KCXSi6f2izBqG4YZdSqZUAHjEcNBEmefg0=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIQPdm/gzVBjTi4eh5//xaM6mSlbqIj+0T0MuNdJjmnjF6AOUse
+	TYnyednmtNJSG/LUPeiBsPglajPOH68zp/3cGo6PrCpXvbRz5wz0ZpVUWbWQcFo+7lkIsMT+70i
+	YhZmhGg==
+X-Gm-Gg: AYBFou3WLunIM0acbZLu0kDF5Buhlzl02XbQEy+XgWK2IX59gSJFxaMzGsMsnzPkgff
+	GHFnxt57XzqrsutwU3Kiw1Z0neUL7jrS0zwP9lCs/uczNsfdxnvAX9AGFZNXxnWzhCpwSqGhzEV
+	NRGF3tVpLDWdSqBS5yY1KeQ/5aODf0W9DdN7me8KI2IyqAlZKlKWbHuN5W8WWDqt/CzVlTnUA/9
+	zIsZU/FfEIZumqgC9lzW0Yt0CQmRcSO31oP10VIwDXWVksWXpF9FtN3I/7nELzaH6JGotP4XftG
+	MJFCQoYJXC1G5MttGcgxSrsntm9rO025q3vPK9Xk5CQzrWetRWcuH+ysrz8pR9oR/Yxl201ZwBz
+	ItRt63tBInayqzk2XdaVyo46RsWWKFx6mRHUtlBGT6DGTqBU17apF347YwtS/0tFzvM4zYrvsc3
+	F+DdQ1PaSEfUdCG7LSC4Lm7XN8kWrHN+2QQD3IeYpidFNPYpl1/N+XW+Ts8miTCPlkLFRfz+DoR
+	AYZSgaJz85zJvjeZIXB5e/GJM4ub0xNcievlr/vrZ4JGKXAHS6Wop9aHyHcxq4=
+X-Received: by 2002:a05:600c:4ecb:b0:49f:f099:6fb1 with SMTP id 5b1f17b1804b1-4a18e4adcd0mr174585275e9.15.1791801110012;
+        Mon, 12 Oct 2026 03:31:50 -0700 (PDT)
+Message-ID: <293db510-108b-4fa4-976a-2f794a8cec3a@suse.com>
+Date: Mon, 12 Oct 2026 12:31:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 03/15] x86/setup: break out E820_RAM accumulation
-To: George Dunlap <gwd@xenproject.org>
-Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>
-References: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
- <d1a67360-838e-4d9b-8b91-1ebfd9e6f613@suse.com>
- <CAFLBxZbOTQ=BoAU6Q=kweUSTVi_MxnDANTKSVn7TSgZ+YZ6vgg@mail.gmail.com>
+Subject: Re: [PATCH] xen/argo: make the ring copy length check overflow-safe
+To: Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
+Cc: WeiqiW <coolhaoyt@gmail.com>, Jason Andryuk <jason.andryuk@amd.com>,
+ "Daniel P . Smith" <dpsmith@apertussolutions.com>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <20261010132845.36208-1-lukewang19@outlook.com>
+ <0e9d573f-299a-4459-81d0-94c905c85c8e@suse.com>
+ <313B6C1B-0F8A-45D4-9392-90116DDBFD82@postgrad.manchester.ac.uk>
+ <56F5DC58-E7C5-4C24-996D-4D9997AA8506@postgrad.manchester.ac.uk>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,24 +131,33 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAFLBxZbOTQ=BoAU6Q=kweUSTVi_MxnDANTKSVn7TSgZ+YZ6vgg@mail.gmail.com>
+In-Reply-To: <56F5DC58-E7C5-4C24-996D-4D9997AA8506@postgrad.manchester.ac.uk>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1791800618-FD06B034-999596D1/10/78276251493
+X-purgate-ID: tlsNG-ef75cf/1791801110-A46CAAE4-E488CB16/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 414
+X-purgate-size: 1461
 
-On 12.10.2026 12:20, George Dunlap wrote:
-> On Mon, Oct 12, 2026 at 9:20 AM Jan Beulich <jbeulich@suse.com> wrote:
->>
->> We already have two instances of this, and we're about to gain a third.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+On 12.10.2026 12:01, Weiqi Wang wrote:
+> 2026年10月12日 11:00，Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk> 写道：
 > 
-> Reviewed-by: George Dunlap <gwd@laleolanguage.com>
+> Apologies for the confusion. The two names and three addresses are all me: "Weiqi Wang" and "WeiqiW" are the same person, and lukewang19@outlook.com, lukewang19@icloud.com and weiqi.wang-2@postgrad.manchester.ac.uk are all my addresses. From now on I will use one identity for everything.
+> 
+> I will resend the patch so the From header, the commit author and the Signed-off-by line all read:
+> 
+>     Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
+> 
+> Please disregard the earlier Signed-off-by under the outlook address. Nothing else in the change is affected. Thank you for catching it.
 
-Thanks, yet to double check - did you really mean to use this more private
-email of yours?
+Thanks for clarifying.
+
+> Resent patch attached (bound len first, then compare offset against the room that is left, as you suggested). I checked it against the original guard over a grid of in-range (len, offset) pairs and found no behavioural difference, and separately confirmed the overflow case you flagged: with len close to UINT_MAX the old guard wrongly lets the request through, the new one correctly rejects it.
+
+Unlike in the original submission there suddenly is a comment. If it was a
+brief one, I probably wouldn't mind, but for the situation at hand it's imo
+too verbose. Preferably with it dropped again (which I can easily do while
+committing)
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
 Jan
 
