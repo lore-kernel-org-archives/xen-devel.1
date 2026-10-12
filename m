@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2F9FDCA9ED2
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 07:39:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445875.1661735 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 03861CA9EC5
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:18:20 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1445894.1661749 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGAdA-0007Rp-Ix; Mon, 12 Oct 2026 07:39:32 +0000
+	id 1xGBEG-0005eI-Qg; Mon, 12 Oct 2026 08:17:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445875.1661735; Mon, 12 Oct 2026 07:39:32 +0000
+Received: by outflank-mailman (output) from mailman id 1445894.1661749; Mon, 12 Oct 2026 08:17:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGAdA-0007Ri-GF; Mon, 12 Oct 2026 07:39:32 +0000
-Received: by outflank-mailman (input) for mailman id 1445875;
- Mon, 12 Oct 2026 07:39:31 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGAd9-0007Rc-3v
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 07:39:31 +0000
+	id 1xGBEG-0005eB-Nb; Mon, 12 Oct 2026 08:17:52 +0000
+Received: by outflank-mailman (input) for mailman id 1445894;
+ Mon, 12 Oct 2026 08:17:52 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGBEG-0005e5-3h
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 08:17:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGAd8-004Yjm-DE
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 09:39:30 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xGBEE-00FKXj-Ni
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:17:50 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6acc8eb2-e002-0a2a0a5209dd-0a2a4503e04e-0
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 09:39:30 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6acc8eb2-fae8-0a2a45030019-d1558031d4f2-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 09:39:30 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4a02667ccebso10074185e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 00:39:30 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-71-234.play-internet.pl.
- [109.243.71.234]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18c85009csm210608885e9.2.2026.10.12.00.39.28
+ (envelope-from <jbeulich@suse.com>)
+ id 6acc979b-bab6-0a2a0a5309dd-0a2a45048b56-2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:17:50 +0200
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6acc97ae-b57f-0a2a45040019-d155dd33d87a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:17:50 +0200
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-48c4649b3aaso870157f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 01:17:50 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48db9462ebcsm18792340f8f.8.2026.10.12.01.17.49
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 00:39:29 -0700 (PDT)
+ Mon, 12 Oct 2026 01:17:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,256 +52,113 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:To:Autocrypt:Subject:From:Cc:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791790770; x=1792395570; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=vmbB8deohtfma7MFZruRY7kPcQzqKJfblRZurzIi8WU=;
-        b=XshMj7kS7jq4MsB2SVVY9XyUlccrsjfbrzaJav/qifd7LIfrpuvMf+p5oxB8Vs/GDm
-         UR9pN7Fgk21Z55fGd6ncAGIceJsLJeIKUqXxyAx4dDq0G9M7gfYjyOM9/51ReyvjiDSo
-         vnHmDa0IMJyQy3+4XyoerW3vKjWCcHzv1behMvv7BaNSfxtyqiADwGczvoJEWtQFwgOW
-         YASS7qIY0dKiCE99uWOZ7VqxvNArqMkG6AFPLIx3W3YzUv6/1fWIseFzMf9fpXed4vk3
-         TF56seEkI1+QWCbr/MF6KTKvgeKv0XgCMkkcTMDElM0i2EuwzCpDWrTeaX6g3Dg3UC0F
-         UKPw==
+        d=suse.com; s=google; t=1791793070; x=1792397870; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:to:autocrypt:subject:from:cc
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=OHWjBqyyg8UYml9PaDVcL9L7xfErHxLUmSgaLenq97k=;
+        b=XVmbFQmApsACuHzol1oKtLiFf9d/RFS9nFY3a/anv43i2yIAeRF2vVxzZYRZyEKMS6
+         tBNXADxAtItOj/T7oBCG/dekJ7BQWaJB8NCnVoWtadDTu3qyPu8OoDZ9OUDqxhG+9cxu
+         0oX63aDkFtRJvyQGFIII+szmXu0/eVO+ag7tNlCNnBhdSLc3PFGXMex/VlD+Om1hav+2
+         7Ao+rzVpLoDYb7oQNMiUoZ7Se7UHeQ6s8wIdVKVbty1FVGwMPua3b5UjBaQiBrsAHkP3
+         lwWyoXn21bGWg9BmMHUQ7RiP47Oyx5PGD9btsO5AEwkssYReVi2RVSwJr8oOojDX+6JP
+         7Sww==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791790770; x=1792395570;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=vmbB8deohtfma7MFZruRY7kPcQzqKJfblRZurzIi8WU=;
-        b=gCFRFHrXleKwW5MKlhO0arGl8dWaV8P1yzb5C/IzHyIq4TdrlKKv/Gj/ldXIFAB/yO
-         8EwCpt+PWWEEVVGINyvb0bNkZdrRRiw9/vBKFvDPGSHzuiMs2aUxy61du98skmZ6j8We
-         B73wdwHl7oJw7BFm2P31kXIpsYRuxGuLiLC2lk5J1OqQJ/GifeWuB3mt4wreA16Tcauo
-         q0DKDu55LR+vS4ItDTSFLusDO7yEuliqf90L/8506D4b+/0Xcs0jEZbI6LdLDJZ4eezI
-         twQZ0rebTny+/LZOIj6c/60AC4x2cy2g8AUBVZ5jRxf2mqB/5RiL8WBqmD7mSdsPZjGw
-         I74A==
-X-Gm-Message-State: AFq9FYLUNVQC8wAVs/feDvPTjSPO9lyD+1cDyBduciML8Dbz66U6lvtQ
-	XB/LfyTvGb+xhCcmIeDGfc1C2bSFFmnBXfphAxLRc4XGwMytCSIY3tdF
-X-Gm-Gg: AYBFou36ajcWAAMXLvk3wEWJEY9zg/C2gYs29vM1XaWSKuaP9XIcLL/FH3QovMOjoCw
-	V/QvSAjJvJv4BQQ3Ev+oYlMqaRtV2R/xs8PRYCrLHe/LElJlg3Xlal1trDRr29l+ZBcEIMV9hLm
-	9bBB/MUDvEJbNbi06qNh+AHAbla2Oj4rd0uNScn8CZRb2672R3ST4HX/hP+43x0aaHs68UdNKQR
-	BkLw0nYl/1dSOdWd8zDVjVSIMfoZweBhlw9iOeQwUZnHJ5CgArLYj6+eIfVgyLv+EERCCjRHcx6
-	3vOzC6yRGy/ZiOmYO+okKMCbmfvZvwen0Ku2BAuUNHRtLgPfpLqbC5c9JxONyNtXA56AWAF4irb
-	si9YVj2Y7N6auoaYv4nsgVYB++bgKSsZ7rWA273VASpb8IOMAeVpFgyHQM/h87KK+Q1XHXSX/jV
-	qPz8L6/3HiYDRDnpmgs5JoIhTcw6t0BDnXSE4T0a0THjNGqb2Y97cBtUjrAWB5f/6AlxXCOZaUO
-	cmjvcBPZGdwvKyKQ+h36E6gbQbeaSmhGFfCpaTMzx6M469/YisEgaArxah6
-X-Received: by 2002:a05:600c:8b28:b0:49f:ff7b:f056 with SMTP id 5b1f17b1804b1-4a18e4a3c24mr139892275e9.9.1791790769674;
-        Mon, 12 Oct 2026 00:39:29 -0700 (PDT)
-Message-ID: <55dd5d53-34f8-41e2-a5b4-fbac30b791f8@gmail.com>
-Date: Mon, 12 Oct 2026 09:39:28 +0200
+        d=1e100.net; s=20260707; t=1791793070; x=1792397870;
+        h=content-transfer-encoding:content-type:to:autocrypt:subject:from:cc
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=OHWjBqyyg8UYml9PaDVcL9L7xfErHxLUmSgaLenq97k=;
+        b=wuvOhza0a7rButqHxrtS+XPduGm8uTbJGpW7bMiY25K7Pn/gGBZdoerhBlNZ4Txs0s
+         PEKZ1HIq0HVo90gRh11fSdgjD8RDG6YqD9tAzI7eEArE75FJpyWf9ZHpcrGg0GNZ/Bza
+         BDy/nSEcwGpTmlrhkYSQqQS5e18krReE3PaxI86dOZhFqmNJDmEOpdROwAa7bvJ/TJ3B
+         OmWx8E3VHBNxxuA/aQiENOb1oKcah7cUescGwKzcpes98EP05KLcGTVk62hfmdk9JOPS
+         AKOXjyAyyqW3b/CCTcu2br/HVaZfjQj2uhzGgwYer3WYe9qGN3gfBKH2gNkZWHNYvoSg
+         kYgA==
+X-Gm-Message-State: AFq9FYI0RxnJD+2YlG8aM+HkTuEtViylioxySPAupEE39oorlAO21G0w
+	JPyxEWTsIivAxT6HuiM92XXiHJzC2R2nFJchCeKSBjyVCwwKLZ/TY2+m1mqBuZTwUInkyDQ3gXV
+	L/HyzaA==
+X-Gm-Gg: AYBFou0hkcERyTSJpcKuVaMAwviSFYEKBUViYnYE2UHJ8GajkPyk1U7+JsQIEJC8yYB
+	wNWo00rJ5ImDx3HVn8fkne3h9ygIShPmr8RyMerw1n1VQLGkSzK7A1OHCKL5GmoflieLuqxHf9R
+	67RCw3eVxp4M3gb3wn1T1PIijgpir5X900Hf/Cxsy9rN2jwJu5mAm/dqxRVDwUMdKxIzNqI9nTH
+	FpvC+jbAoT06mzj8bMExFU1SHA006Uj92RuzsZ2r8JHLF+kLheC3ampTxIxyGcGE6xdzQrePLjE
+	JqDbVI4v1EiXfQJyKstrgr7AZcy8bJl22kXcIp+pZy7VhCAp0GpfkR/eZ79O7gJpl0xQfgIo6sX
+	E4Au2sTm037LE7BnVxGk0DcIuf8f5NG2cC4HuOSdkEcW089AMBq6HJKF+s8KU6R7+Q8hidXGVMw
+	FuTUwc4FBXbUXmrnE92p5HxRa+K9o+h3uZeb1/knTIApr8J80SrEO0ZxYRX+bgT8l29i92u9E3G
+	N4yieNngn6tJTIuGnHk/0Bcwhh9+zIW4gNW26rq6mfmLQJEF9UI6qHfB1Vx/ks=
+X-Received: by 2002:a5d:5cc2:0:b0:488:8212:5d73 with SMTP id ffacd0b85a97d-48dbacda836mr12404637f8f.31.1791793069859;
+        Mon, 12 Oct 2026 01:17:49 -0700 (PDT)
+Message-ID: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
+Date: Mon, 12 Oct 2026 10:17:50 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v1 0/1] [RISC-V] replace SBI early console with 8250 UART
-To: Zhang Zheng <zhangzheng@iscas.ac.cn>
-Cc: xen-devel@lists.xenproject.org,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <20260928023857.1030884-1-zhangzheng@iscas.ac.cn>
- <5919f1f2-e24c-4b0e-a7dd-126ac6fbe38f@gmail.com> <aronfcYWtc1CHQgH@iscas-ws>
- <3152e70f-881f-4a58-9b2d-df661887dc80@gmail.com> <arpi6szfHazQg07N@iscas-ws>
- <arsr7FV_KDQpyTcS@iscas-ws> <8836d1e3-77c8-4447-b1ef-132620a71441@gmail.com>
- <asmuU6EtrCS7nrp9@iscas-ws>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <asmuU6EtrCS7nrp9@iscas-ws>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-33051d/1791790770-6F2C84E9-3D9877EB/10/73395122804
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH 00/15] x86: PVH Dom0 loading rework
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ebf023/1791793070-518D1B50-72218272/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 8069
+X-purgate-size: 1413
 
+The primary goal is to accommodate large initrd-s without requiring people
+to restrict Dom0's memory just for that. Other issues are being addressed
+as well, though, and some cleanup is done, in part even outside of the main
+target area of this series.
 
+01: EFI: guard against oversized modules
+02: PV: make better use of assign_pages()
+03: setup: break out E820_RAM accumulation
+04: setup: special treatment of initrd for PVH Dom0
+05: PVH: split pvh_load_kernel()
+06: PVH: keep a copy of Dom0's initial E820 map
+07: PVH: lift E820 alignment requirement
+08: PVH: split pvh_setup_acpi()
+09: PVH: split pvh_setup_acpi()
+10: PVH: convert find_memory() to using a rangeset
+11: PVH: try to map initrd directly into Dom0
+12: PVH: heed the kernel in pvh_steal_ram()
+13: PVH: prefer smaller E820 regions for stealing from
+14: PVH: log Dom0's E820 map earlier
+15: PVH: simplify writing of Dom0's RSDP
 
-On 10/10/26 5:32 AM, Zhang Zheng wrote:
-> On Wed, Sep 30, 2026 at 01:22:46PM +0200, Oleksii Kurochko wrote:
->> Hello Zheng,
->>
->> On 9/29/26 5:10 AM, Zhang Zheng wrote:
->>> On Mon, Sep 28, 2026 at 08:53:15PM +0800, Zhang Zheng wrote:
->>>> On Mon, Sep 28, 2026 at 11:31:06AM +0200, Oleksii Kurochko wrote:
->>>>>
->>>>>
->>>>> On 9/28/26 10:40 AM, Zhang Zheng wrote:
->>>>>> On Mon, Sep 28, 2026 at 09:38:14AM +0200, Oleksii Kurochko wrote:
->>>>>>>
->>>>>>>
->>>>>>> On 9/28/26 4:38 AM, Zhang Zheng wrote:
->>>>>>>> The legacy SBI console extension is planned for deprecation. Replace the
->>>>>>>> RISC-V early printk backend with direct access to 8250 UART MMIO.
->>>>>>>
->>>>>>> Won't it better just to start to add support of newer SBI? It provides
->>>>>>> pretty good support + faster as it supports passing of string instead of one
->>>>>>> char.
->>>>>>>
->>>>>>
->>>>>> Using the newer SBI DBCN extension would indeed result in a smaller change. At
->>>>>> the time, I mainly followed the direction suggested by the TODO and referred
->>>>>> directly to the arm64 implementation, from which most of the code was adapted.
->>>>>
->>>>> I think TODO was written at that way because I missed DBCN (or it wasn't
->>>>> ratified at that moment). Considering that it is ratified now ...
->>>>>
->>>>>>
->>>>>>> Also, I think it will lead to lesser changes.
->>>>>>>
->>>>>>
->>>>>> If falling back to SBI console putchar is acceptable, DBCN should work
->>>>>> well here.
->>>>>
->>>>> ... I prefer to use SBI functionality (in the current case DBCN) as maximum
->>>>> as possible so if there is no any reason (and I don't see at the moment it)
->>>>> which doesn't allow us to use DBCN here, I would prefer to use DBCN.
->>>>>
->>>>
->>>> Given that Xen on RISC-V is expected to target relatively recent RVA23 hardware,
->>>> which should ship with a recent version of OpenSBI, I think you are right that
->>>> there is no real need to provide a fallback here.
->>>>
->>>>> If you still want to in the way suggested by TODO then some parts which are
->>>>> common between Arm and RISC-V should be moved to common instead of
->>>>> introducing them in RISC-V specific folder.
->>>>>
->>>>
->>>> I also tried to make the current patch as minimal as possible, but it would
->>>> still end up touching quite a few places.
->>>>
->>>>> Let me know which approach you are going to follow. If the current one you
->>>>> already introduced then I will start to review it, if you will go SBI-way
->>>>> then I prefer to wait for your v2.
->>>>>
->>>>> ~ Oleksii
->>>>>
->>>>
->>>> I misunderstood the TODO comment, I thought that would be the preferred
->>>> implementation. Therefore, I will switch to using DBCN and send a v2.
->>
->> I think I didn’t word it in the best way.
->>
->> For early debug, I think it would be better to use the SBI function. At some
->> point, it doesn’t really matter which one we use, SBI 0.1 or DBCN. If we
->> switch to using the UART’s MMIO directly, we wouldn’t need to change the
->> privilege mode or perform a context switch, so it should be faster.
->>
->> However, considering that the early console is mainly used during bring-up,
->> it seems like the overhead of an SBI function call isn’t a big price to pay.
->> In return, we could potentially have early printk support even for UARTs
->> that aren’t currently supported by Xen.
->>
->>>>
->>>> Best regards,
->>>>
->>>> Zhang
->>>>
->>>
->>> Hi Oleksii,
->>>
->>> I initially assumed that the DBCN console-write call would wait until the
->>> whole string had been transmitted. After checking the SBI specification
->>> and the Linux implementation, I found that this is not the case.
->>
->> I think Linux does roughly the same here: its SBI earlycon
->> calls sbi_debug_console_write() (or something like that) in a loop until the
->> whole buffer has been written.
->>
->> Also note that Linux supports both the legacy SBI v0.1 console_putchar
->> and DBCN console write for earlycon. It picks DBCN when the firmware
->> provides it and falls back to v0.1 otherwise (when CONFIG_RISCV_SBI_V01
->> is enabled). I would really like Xen to do the same rather than drop
->> SBI v0.1 support. A board might not support DBCN, or might implement only
->> the legacy SBI extensions, and we still want console output there. So we
->> should keep both.
->>
->> I'd go further: we probably don't need to add DBCN support at this point.
->> It would be enough to fix the bug you originally hit with the legacy SBI
->> call.
->>
->> Also, in Linux the SBI console is only used as an early (boot) console.
->> Once the UART driver has probed and registered a real console, printk
->> switches to it and unregisters the boot console (unless keep_bootcon is
->> passed). So this switch doesn't cause any issues in Linux, and I don't see
->> why it should be a problem in our case either. Switching to DBCN, or the
->> approach taken in the current patch, looks to me like it is just hiding an
->> issue somewhere else.
->>
->>>
->>> The DBCN Console Write function is explicitly non-blocking. Linux uses DBCN
->>> through the HVC console driver, so the DBCN backend remains the owner of the
->>> console and the 8250 driver does not subsequently reinitialize the same UART
->>> or clear its FIFO.
->>>
->>> On the other hand, when Linux uses an 8250 earlycon, it accesses the UART
->>> directly and waits for UART_LSR_TEMT before the regular 8250 driver takes
->>> over.
->>>
->>> The current Xen setup combines these two paths: early printk uses the SBI
->>> console, while the later 8250 driver initializes the same UART. During this
->>> handover, the 8250 driver clears the TX FIFO, which can discard characters
->>> that were accepted by SBI but have not yet been transmitted by the UART.
->>
->> Isn't a question just doing flush before switch to 8250 so we won't loose
->> anything? (and then again why Linux doesn't have such issue considering that
->> they have the similar way of work, even without virtualization)
->>
->>>
->>> Therefore, if Xen is going to use the 8250 driver after early printk, I
->>> think the early console should use the same 8250 MMIO path, as Linux does
->>> with 8250 earlycon. This keeps the early-console backend consistent with
->>> the driver that takes ownership of the UART and allows Xen to wait for
->>> UART_LSR_TEMT before reinitialization.
->>
->> At some point, yes, but then we could lose support for other UARTs that
->> OpenSBI could provide out of the box for initial bring-up debugging.
->>
->> Also, we could have both implementations for early printk (SBI-based and
->> MMIO-based), configurable through some option, and allow the user to choose
->> which approach to use. But for now, I think we could live with the SBI-based
->> implementation (even with support only for old SBI console call for a
->> while), as it is more generic, until we actually face a performance issue
->> where the MMIO-based approach would start to provide a benefit.
->>
->> ~ Oleksii
-> 
-> Hi Oleksii,
+While repeatedly looking at the logs, the memory allocation stats logged
+further suggested that we may be able to do better in populating the P2M.
+I was hoping that by going backwards, we might be able to allow for one
+more 1G mapping. Yet testing that (now omitted) change on two sufficiently
+different systems resulted in "makes no difference". I conclude (without
+having proven it) that perhaps earlier during boot we shatter an order-18
+page, when perhaps we could avoid doing so.
 
-Hello Zheng,
-
-> 
-> Thanks for the clarification and suggestion.
-> 
-> I have sent v2, keeping the existing SBI early console unchanged.  Following
-> your suggestion, it drains pending TX data before ns16550 reinitializes the
-> UART.
-
-I will check your v2 during this week.
-
-> 
-> While bringing up Xen on K3 I also encountered an issue with its
-> XScale-compatible UART, so v2 includes a separate fix to detect and preserve
-> the UART_IER_UUE bit.  As a result, v2 now mainly fixes UART handover issues
-> rather than changing the RISC-V early printk implementation.
-
-Sounds good to me!
-
-> 
-> I'm not sure whether carrying these fixes as v2 of the original series is the
-> best approach, so please let me know if you have any concerns.
-
-I think I don't have any concern but probably it would be better to say 
-that it is v1 as patches don't touch RISC-V specific code anymore. But 
-you mentioned basically why it is v2 in cover letter and it is okay to 
-me, at least.
-
-Thanks for v2!
-
-~ Oleksii
+Jan
 
