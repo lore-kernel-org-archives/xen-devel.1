@@ -4,32 +4,58 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 8E351CA9EBD
-	for <xen-devel@archiver.kernel.org>; Sun, 11 Oct 2026 15:16:38 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445626.1661660 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5DA16CA9ED1
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 06:01:37 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1445827.1661669 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFvHY-0005nB-CI; Sun, 11 Oct 2026 15:16:12 +0000
+	id 1xG95x-0007pe-HH; Mon, 12 Oct 2026 06:01:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445626.1661660; Sun, 11 Oct 2026 15:16:12 +0000
+Received: by outflank-mailman (output) from mailman id 1445827.1661669; Mon, 12 Oct 2026 06:01:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xFvHY-0005n2-8u; Sun, 11 Oct 2026 15:16:12 +0000
-Received: by outflank-mailman (input) for mailman id 1445626;
- Sun, 11 Oct 2026 15:16:10 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1xG95x-0007pV-Bq; Mon, 12 Oct 2026 06:01:09 +0000
+Received: by outflank-mailman (input) for mailman id 1445827;
+ Mon, 12 Oct 2026 06:01:08 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien@xen.org>) id 1xFvHW-0005mu-J4
- for xen-devel@lists.xenproject.org; Sun, 11 Oct 2026 15:16:10 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <julien@xen.org>) id 1xFvHW-000000007d7-04i7;
- Sun, 11 Oct 2026 15:16:09 +0000
-Received: from [2a02:8012:3a1:0:94b1:aa8d:8098:b789]
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
- (envelope-from <julien@xen.org>) id 1xFvHS-00000000I5D-2QvK;
- Sun, 11 Oct 2026 15:16:07 +0000
+ (envelope-from <KPrateek.Nayak@amd.com>) id 1xG95w-0007pN-DN
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 06:01:08 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xG95u-00AhKf-Ko
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 08:01:06 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <KPrateek.Nayak@amd.com>)
+ id 6acc779f-8faa-0a2a0a5109dd-0a2a4509be46-4
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 08:01:06 +0200
+Received: from [40.107.209.28]
+ (helo=PH8PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <KPrateek.Nayak@amd.com>)
+ id 6acc77a0-be1a-0a2a45090019-286bd11c6cf9-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 08:01:05 +0200
+Received: from BN0PR04CA0020.namprd04.prod.outlook.com (2603:10b6:408:ee::25)
+ by DM4PR12MB5915.namprd12.prod.outlook.com (2603:10b6:8:68::12) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.17; Mon, 12 Oct
+ 2026 06:00:50 +0000
+Received: from BL2PEPF000352CE.namprd02.prod.outlook.com
+ (2603:10b6:408:ee:cafe::4d) by BN0PR04CA0020.outlook.office365.com
+ (2603:10b6:408:ee::25) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.496.15 via Frontend Transport; Mon,
+ 12 Oct 2026 06:00:50 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BL2PEPF000352CE.mail.protection.outlook.com (10.167.249.136) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.522.6 via Frontend Transport; Mon, 12 Oct 2026 06:00:50 +0000
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 12 Oct
+ 2026 01:00:44 -0500
+Received: from [10.136.45.168] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
+ Transport; Mon, 12 Oct 2026 01:00:21 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -41,66 +67,161 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; d=xen.org;
-	s=20200302mail; h=Content-Transfer-Encoding:Content-Type:In-Reply-To:From:
-	References:Cc:To:Subject:MIME-Version:Date:Message-ID;
-	bh=4vLAabyXUF+p1z3Sk2EwmJMzDuyIAWDYxx95hcnUxRk=; b=htp/H6G1qOBJ9rFlGqggGBSmM6
-	/jdAMuEJhBjfICdtvO2t/OE0e9mJ6Llm7juM1y8H5LNSFLl7ms5Pg85JqKxXs/3fQe+0TaBhgBUAv
-	7s7GV7OfKzRs1iF/hYgc0CZoSJKlBKNmpsV7YtpNfJDeiEMF6s8DT7822cRZfGCWSl1k=;
-Message-ID: <0304e375-ddbf-4760-b61c-3c563e67416d@xen.org>
-Date: Sun, 11 Oct 2026 16:16:03 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=YdndVQv7Pp/pjB5WZW1ATFwHqVZf7bIhmQY5jsohIhPKQK7sZtLw8qPP40XcUUs6lk1v3PEIQ2bmmmsNavAlf/5BlhXEdQ9l2ZUm+jA900TSAkAHW+aCzoaeQta+OOKqdCKNuhykMSzTkqk+k7jklOZVBKVYgYQjbaAtCA7pFausMrbujP9/PcNo4QMY/DKaz7FW+TxGGAgJmqJyjcEKdmdkX3G/1HZTWG08SKnhDVM4ziQGTYo8GKAyj3awAVe4zffhDquOkOWT60KfyvTTAjq4jKxA5xVdQb5/XQq66fAmXAVylf4BYN2POrL2IR+z4zNslAiX8JKow2ji1He7rg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7Smck2Bpq2BqceuhanfQ8/7aHT50jGp8guUJfZ5IM5M=;
+ b=LDvY6hp+Ap5qA+w75mmWJGWvnibPSCwJtgFM3FbeIIPWnicycJ+H8vDuPvxLVnbqsqtkePLJ/7TED/Bdyzo0XDOY+Ao5siob7w6+YVWjqLBVHNHNHC89o/71QRDPKadlgLHP235IntuKPI2Mu71pWt9UdGUAeLkk4vtPNQtZFw9xp4/0scjf27iuBOU3Uo0oawz0iU3gz/ql4IPFY3HgL9wa2MForacGndCb1q/y12LSgOdrRAoPTtWNrsYp8emOlEko5wviW2r1TCpKhWArIOaIytL/1ZkPhbNznHufevgNX1EDPA58HEr2O+cQiVoXGyyV/U+hTribXz/I3VkPJg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7Smck2Bpq2BqceuhanfQ8/7aHT50jGp8guUJfZ5IM5M=;
+ b=REvgliFe6xqeGmJaHQpBPQkuDcwnC+71UR0LQltJw4zmcdi+ul5Edno40nCS2b8kCnBCy2MdkkhnLagyiHXQoz4nJNO+GH9rrb5HIxUjIgeXsOoxFvc3Qdv8Y4HYw1atKJLnaq8aU2EfwdemOoFyUWu4kNwujEiK3uPZ1l0PgJo=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <c40415f4-7bc8-4479-a07c-22b9f67a7613@amd.com>
+Date: Mon, 12 Oct 2026 11:30:15 +0530
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC PATCH 0/1] static-memory: allow skipping the cache flush
-To: Jan Setje-Eilers <Jan.SetjeEilers@oracle.com>,
- xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20260829050611.3353566-1-Jan.SetjeEilers@oracle.com>
- <d071b84a-2c92-4ef8-acde-c0419e259017@xen.org>
- <1da5f563-9fb3-4043-b13e-fa7a4f390911@oracle.com>
-Content-Language: en-GB
-From: Julien Grall <julien@xen.org>
-In-Reply-To: <1da5f563-9fb3-4043-b13e-fa7a4f390911@oracle.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v4 12/13] treewide: convert rdmsrq() from a macro to an
+ inline function
+To: Juergen Gross <jgross@suse.com>, <linux-kernel@vger.kernel.org>,
+	<x86@kernel.org>, <linux-perf-users@vger.kernel.org>,
+	<linux-hyperv@vger.kernel.org>, <kvm@vger.kernel.org>,
+	<virtualization@lists.linux.dev>, <linux-edac@vger.kernel.org>,
+	<linux-pci@vger.kernel.org>, <linux-pm@vger.kernel.org>,
+	<linux-coco@lists.linux.dev>, <linux-acpi@vger.kernel.org>,
+	<linux-ide@vger.kernel.org>, <dri-devel@lists.freedesktop.org>,
+	<linux-crypto@vger.kernel.org>, <linux-gpio@vger.kernel.org>,
+	<linux-hwmon@vger.kernel.org>, <linux-mtd@lists.infradead.org>,
+	<platform-driver-x86@vger.kernel.org>, <linux-fbdev@vger.kernel.org>
+CC: Thomas Gleixner <tglx@kernel.org>, Ingo Molnar <mingo@redhat.com>,
+	Borislav Petkov <bp@alien8.de>, Dave Hansen <dave.hansen@linux.intel.com>,
+	"H. Peter Anvin" <hpa@zytor.com>, Peter Zijlstra <peterz@infradead.org>,
+	Arnaldo Carvalho de Melo <acme@kernel.org>, Namhyung Kim
+	<namhyung@kernel.org>, Mark Rutland <mark.rutland@arm.com>, "Alexander
+ Shishkin" <alexander.shishkin@linux.intel.com>, Jiri Olsa <jolsa@kernel.org>,
+	Ian Rogers <irogers@google.com>, Adrian Hunter <adrian.hunter@intel.com>,
+	James Clark <james.clark@linaro.org>, "K. Y. Srinivasan" <kys@microsoft.com>,
+	Haiyang Zhang <haiyangz@microsoft.com>, Wei Liu <wei.liu@kernel.org>, "Dexuan
+ Cui" <decui@microsoft.com>, Long Li <longli@microsoft.com>, "Sean
+ Christopherson" <seanjc@google.com>, Paolo Bonzini <pbonzini@redhat.com>,
+	"Ajay Kaher" <ajay.kaher@broadcom.com>, Alexey Makhalov
+	<alexey.makhalov@broadcom.com>, Broadcom internal kernel review list
+	<bcm-kernel-feedback-list@broadcom.com>, Josh Poimboeuf
+	<jpoimboe@kernel.org>, Pawan Gupta <pawan.kumar.gupta@linux.intel.com>, "Pu
+ Wen" <puwen@hygon.cn>, Tony Luck <tony.luck@intel.com>, Reinette Chatre
+	<reinette.chatre@intel.com>, Dave Martin <Dave.Martin@arm.com>, James Morse
+	<james.morse@arm.com>, Babu Moger <babu.moger@amd.com>, Tony W Wang-oc
+	<TonyWWang-oc@zhaoxin.com>, Vitaly Kuznetsov <vkuznets@redhat.com>, "Andy
+ Lutomirski" <luto@kernel.org>, Bjorn Helgaas <bhelgaas@google.com>, "Rafael
+ J. Wysocki" <rafael@kernel.org>, Pavel Machek <pavel@kernel.org>, "Kiryl
+ Shutsemau" <kas@kernel.org>, Rick Edgecombe <rick.p.edgecombe@intel.com>,
+	Boris Ostrovsky <boris.ostrovsky@oracle.com>, Len Brown <lenb@kernel.org>,
+	Damien Le Moal <dlemoal@kernel.org>, Niklas Cassel <cassel@kernel.org>,
+	"David Airlie" <airlied@redhat.com>, Olivia Mackall <olivia@selenic.com>,
+	Herbert Xu <herbert@gondor.apana.org.au>, Viresh Kumar
+	<viresh.kumar@linaro.org>, "Huang Rui" <ray.huang@amd.com>, Mario Limonciello
+	<mario.limonciello@amd.com>, "Perry Yuan" <perry.yuan@amd.com>, Srinivas
+ Pandruvada <srinivas.pandruvada@linux.intel.com>, Yazen Ghannam
+	<yazen.ghannam@amd.com>, Linus Walleij <linusw@kernel.org>, Bartosz
+ Golaszewski <brgl@kernel.org>, Guenter Roeck <linux@roeck-us.net>, Artem
+ Bityutskiy <artem.bityutskiy@linux.intel.com>, Artem Bityutskiy
+	<dedekind1@gmail.com>, Arnd Bergmann <arnd@arndb.de>, Greg Kroah-Hartman
+	<gregkh@linuxfoundation.org>, Miquel Raynal <miquel.raynal@bootlin.com>,
+	Richard Weinberger <richard@nod.at>, Vignesh Raghavendra <vigneshr@ti.com>,
+	Ashok Raj <ashok.raj.linux@gmail.com>, Hans de Goede <hansg@kernel.org>,
+	=?UTF-8?Q?Ilpo_J=C3=A4rvinen?= <ilpo.jarvinen@linux.intel.com>, "Rajneesh
+ Bhardwaj" <irenic.rajneesh@gmail.com>, Xi Pardee <xi.pardee@linux.intel.com>,
+	Daniel Lezcano <daniel.lezcano@kernel.org>, Zhang Rui <rui.zhang@intel.com>,
+	Lukasz Luba <lukasz.luba@arm.com>, Helge Deller <deller@gmx.de>,
+	<xen-devel@lists.xenproject.org>, <linux-geode@lists.infradead.org>, "Michael
+ Kelley" <mhklinux@outlook.com>, Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>
+References: <20261008071839.2247074-1-jgross@suse.com>
+ <20261008071839.2247074-13-jgross@suse.com>
+Content-Language: en-US
+From: K Prateek Nayak <kprateek.nayak@amd.com>
+In-Reply-To: <20261008071839.2247074-13-jgross@suse.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 8bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL2PEPF000352CE:EE_|DM4PR12MB5915:EE_
+X-MS-Office365-Filtering-Correlation-Id: 7cfeebe3-ee41-47b1-9a45-08df28262b02
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|32650700020|82310400026|23010399003|1800799024|376014|36860700016|7416014|18002099003|10067099003|22082099003|921020|4143699003|11063799006|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	iF/4vsFZ0oCxke5nY+IzxcsajSzz5fPHlKfX0Y7e1Yx6IxBZC2sr3ME/4gk3EsXUGoPLFu//3fq/5B93Fmnz6J+cejonYpLtAT5O3MoE9q/2qtUyA6JQVe9/KyUI0Zq2D53G0gSEYWNHVkklvOhGU3AX60Gl1/Dp2o8a7kr9auN2+ROJk55lgWuFVdOkGsnI/RjqR5yBE4YcIzdhUzo75yL+R1wluPkHvKzcBNUfJfs6UStcg3RvocQJvos3t8Ie55dbTBkmiXWO4GzaPMQMnWvyrNt99CU+kzYB2REQ6ZgmORiF6Vk/sQETKzhd/wI0RnhOuijITF21qZ+26lP8Z1rMGjpDfGCIA9/mHEWxy19fLdKyoLhnKunjb3sOk/NjA6nyZye1VKAQiR8L+P5Ix+8q4LpC4K9NO5pUbHiCkPwvUKcnq+gpAnjBtETeBz9J8IgxTvjLZVYS/5A/5aHcDzbNe/52x+IvEtxiu4QwbGgfgQNEwe5+0Ldvt/OFZn81u5mxvzdiUgvrqnm5Z0EPSmw6fhhzpuABtp4EULwt7/UHejEZxA8hCVUgDY1Q+MtNR7qd7b7NKZfskF+X+GyK6f1MXX9RGTjpff8PVrN7Vh2ybgNyjgBkyttYSxy15Sbssdy9hqKgVgE1S47frdT5p4BSbk28gX3HPHxEKRKgrLPQYvWGajX7RRYx+4XJkjMv2YlOgsIGCq/STIrTUogxtK+o1EhIKanpaAYU/pnTG0R/okTYWsplHnynkYPwx2IJ
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(32650700020)(82310400026)(23010399003)(1800799024)(376014)(36860700016)(7416014)(18002099003)(10067099003)(22082099003)(921020)(4143699003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	7oS2RettfJciXjAoPrqIpsgslkhkkpGAiW01FyzZHJNa6VOeV1Fs9l0RKNylshp8F43mwG7dYZK4yEnC3v2OZJfklqhnVYV8xmuueMD12u9jjbrj9fZR1VkqsUWmm6umnN6nxJeXy+PoYlQEQJEoloPH4EFw7pN+5lvyUMKMLbcWDF1wFCxmgit2RPf6HuaBXte6l7/4hBbWSHicYtdXGpY5AbGKJBmFA25RMv92aM3cXFiCCKCvG1U1CnGToXMhntV12UFo+3Pw59MKrc8GTvPBosZ0etwE2n1Wp4DIHjySvFMuIGuPBtltL9UDWxOmFJngwwXyApuTDlKSDb3h4ptwXkO8ss96jh/qHKPb0lo2Kg4bHCwK5V1iWIh7xJJ4YSFLPtrgDz0pQVTJQQpgka82T+jZZUitzlQX5OGrgr2p+XXZY9v881FQ+I0KBjNe
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2026 06:00:50.4752
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 7cfeebe3-ee41-47b1-9a45-08df28262b02
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource: BL2PEPF000352CE.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM4PR12MB5915
+X-purgate-ID: tlsNG-bad1c0/1791784865-3B6D2034-3203A458/0/0
+X-purgate-type: clean
+X-purgate-size: 1221
 
-Hi Jan,
+Hello Juergen,
 
-On 18/09/2026 22:23, Jan Setje-Eilers wrote:
-> On 9/17/26 04:06, Grall, Julien wrote:
->> A few years ago, Arm introduced FEAT_FWB to rework how stage-2 + stage-1
->> memory attributes works. Currently in Xen, we are using the "old"
->> approach where the used attributes is the strongest of the two. For
->> instance, the guest has the MMU off, then the access will bypass the
->> cache. With FEAT_FWB, you can force the memory attributes to be
->> cacheable even when the MMU is off.
->>
->> I believe FEAT_FWB should solve the problem you have (assume your HW
->> supports it). In term of effort, it is mostly updating the stage-2
->> memory attributes and then getting rid of some cache operations (include
->> set/way emulation) when the feature is enabled.
->   I found that as well, but at least some of my hardware is from just
-> before that shows up.
+On 10/8/2026 12:48 PM, Juergen Gross wrote:
+> Today rdmsrq() is a macro using its second parameter as the target for
+> storing the read MSR value.
+> 
+> Convert rdmsrq() to an inline function returning the MSR value.
+> 
+> The users have been converted using the following semantic patch:
+> 
+>   // Options: --include-headers
+> 
+>   virtual patch
+>   virtual report
+> 
+>   @@
+>   expression msr, val;
+>   @@
+>   (
+>   - rdmsrq(msr,val)
+>   + val = rdmsrq(msr)
+>   )
+> 
+> Signed-off-by: Juergen Gross <jgross@suse.com>
+> Acked-by: Damien Le Moal <dlemoal@kernel.org>      # ATA
+> Reviewed-by: Michael Kelley <mhklinux@outlook.com> # Hyper-V
+> Acked-by: Rafael J. Wysocki (Intel) <rafael@kernel.org> # ACPI, cpufreq, powercap, thermal
+> Acked-by: Sean Christopherson <seanjc@google.com>
+> Acked-by: Reinette Chatre <reinette.chatre@intel.com> # resctrl
+> Reviewed-by: Zhongqiu Han <zhongqiu.han@oss.qualcomm.com> # cpufreq
+> Acked-by: Ilpo Järvinen <ilpo.jarvinen@linux.intel.com>		# pdx86
 
-Thanks for clarification. I would have though most of such HW are pretty 
-much gone :).
+Feel free to include:
 
-I am not entirely sure what's the best way forward for HW not supporting 
-FEAT_FWB. With your approach, I am concerned we may be missing some 
-cases after boot, so we could potentially skip the flush if the pages 
-have not been touched for Xen (you said the pages are not scrubbed for 
-static memory). I'd like some opinions from Bertrand, Michal and Stefano 
-on this.
-
-Cheers,
+Reviewed-by: K Prateek Nayak <kprateek.nayak@amd.com> # amd-pstate
+Tested-by: K Prateek Nayak <kprateek.nayak@amd.com>
 
 -- 
-Julien Grall
+Thanks and Regards,
+Prateek
 
 
