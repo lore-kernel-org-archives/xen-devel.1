@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6E23CCA9EC5
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:25:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445960.1661857 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0BDD6CA9EC5
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 08:26:15 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1445965.1661866 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBLq-00046R-5f; Mon, 12 Oct 2026 08:25:42 +0000
+	id 1xGBMD-0004dU-Bq; Mon, 12 Oct 2026 08:26:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445960.1661857; Mon, 12 Oct 2026 08:25:42 +0000
+Received: by outflank-mailman (output) from mailman id 1445965.1661866; Mon, 12 Oct 2026 08:26:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGBLq-00046I-26; Mon, 12 Oct 2026 08:25:42 +0000
-Received: by outflank-mailman (input) for mailman id 1445960;
- Mon, 12 Oct 2026 08:25:41 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGBLp-000463-5q
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 08:25:41 +0000
+	id 1xGBMD-0004dN-8a; Mon, 12 Oct 2026 08:26:05 +0000
+Received: by outflank-mailman (input) for mailman id 1445965;
+ Mon, 12 Oct 2026 08:26:04 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGBMC-0004bx-8c
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 08:26:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGBLo-005Nw8-Ik
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:25:40 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xGBMB-00B9Um-Li
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 10:26:03 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acc9982-8faa-0a2a0a5109dd-0a2a4505d08c-14
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:25:40 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6acc9997-2eae-0a2a0a5409dd-0a2a450aaf64-8
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:26:03 +0200
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acc9984-4cb1-0a2a45050019-d1558035cd23-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:25:40 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-4a022fee0caso13416615e9.1
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 01:25:40 -0700 (PDT)
+ id 6acc999b-f2d2-0a2a450a0019-d1558030dc5a-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 10:26:03 +0200
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-4a16aaf2067so19667845e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 01:26:03 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bf2caf4sm299209375e9.10.2026.10.12.01.25.38
+ 5b1f17b1804b1-4a18bf2caf4sm299236925e9.10.2026.10.12.01.26.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 01:25:39 -0700 (PDT)
+ Mon, 12 Oct 2026 01:26:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,49 +54,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791793540; x=1792398340; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791793563; x=1792398363; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=nPflYh9iV2cqTwtU0Ycr8SkIvuVGwONc8rRZZ7gFcoo=;
-        b=aagVS14P1v3Hc2rxFb0qERnxKHZQtTtzDjyCMfqSd9inlQQswgfHRlQ8jlSofMTmvn
-         evCyLSN5apamWDMD+wV5h0V0wnL9whEI1dexq0QowttFZefZiJHQZ03w/UmIuYahSehr
-         e4feCf694tQOHWo9UVA/FOUmgL+8w7wQe06AICkUrj4iKIWzicDU5UmKNfSnSfGkFE3V
-         42owcxHrxxqZ5+FPWq2fihm9OtmjSttgtE+lg9pSLKpPsmRr+YO+vmsF0G/zIgR6q2SV
-         w61CZRh4YwgCQx+BEXVXIpj7zzdCd6xopFJ0+ccj2e2B3HEuIN6UDnhFqoRgzeUU9DXe
-         2dCA==
+        bh=gbCqWsCuxEY5XIFrNsxca019l5IysgC/aX8g/IMX/Vc=;
+        b=ejrPi7yNprjNkkaUc7fC4Ub2CCgzigCpjaIFGKL/tjp5isbfv2Q80Kc+BE0b2n5v4u
+         qnQOvqyQGVzkrxsYB+q/Sw8eaYKvZY1MzNjcjap1bnKdCQxgvxQTEwhclLQ0hXYAd9Hx
+         YAvh/rO0Z9yNTSaOE+Pnq8c6t02nTRuFaFcILsrkt1H9l2RvnROWcdjeMZvK1CY8nlyx
+         HbyY4vGnNLQTqquxnKeBu8gwNEPpMJAUe/TV7yx2QhBqNw3sH7OrkBBbnYJbJ8TPcS6N
+         o56S4nlNAGJlCbPJEj+RKS9aD3uVxffdKTMs6YXDKANBGBSKoMBpx9SRDSGAjyl6wAK/
+         JbQg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791793540; x=1792398340;
+        d=1e100.net; s=20260707; t=1791793563; x=1792398363;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=nPflYh9iV2cqTwtU0Ycr8SkIvuVGwONc8rRZZ7gFcoo=;
-        b=l0co/xxlPd4hIHGlXHPRcAt4hadai1UXfNXEJqqqbtEDPTOwZViFLNVH+m29GWTlos
-         9rZ+/5BSfc/uilWxdqI1Jb7mTZcJU+HgZYwRs+wbP6Wq5pgpFAsbhDnAXgsYoboLsOTC
-         X1KzMFXhJG6IW2qJmgE0oUQW7siMOKVy/6Imuf0dK1awy03MLYdCBgwZxFcveXaKbuRI
-         o40ogT1zGmNdZwzMMa0tk5/VDjGH9SRsPLJ10a3y6SXRJBxL8xfv1FXuMBZGZA51QLcs
-         12VRnmPv0zdF+F4zRaUtCZhh9Fw/s56JLOHFSNO14v+tktDy02mBn0lUC6ll3bLdKkYK
-         tyIQ==
-X-Gm-Message-State: AFq9FYKzIsnumIWuth1b8n0963P1DY+emCYGIn1IOZj/A/L7HLdFrFmD
-	1LG7dIj3k3YfrmetaesjpWomy8yHdjhipyvgSYoC91eKsUIimfHzfGhEoJRxMMjZuPA+FNzhd1o
-	TI6t7HQ==
-X-Gm-Gg: AYBFou2Yul8iZjTpPP6rvasbjpWB6IRCiM4gm9uIa0snd0Y4aE3vPuUckDRbZp0i8bt
-	wuhI7YE1ZQdQz5+5ythsH9dFJ2XOXj7s7mJgerekNYWnIJXy3Jx+d1Wkhou0+lOUganO96MAOdR
-	DIp4/xJDtB2fFPCA/PL5jXaas+xjxm76wFDPyWE88r4agfNp6HuZHCEG/S2SFUom/ZcMTER3BE1
-	yf0bRIulKkfWj0GfgoTDVi3612+1/Eor9CxxWDhOpElnM0NL4UEf61kPu6NyZAQ8nqbFwx2BnDN
-	xSgTmK6hqnA+MV05THZw8UfPlu8fT5rNWlCppGLCHBKnSBJiEj/9K5eaiWUgiQK3M6w5qf7BYKE
-	/yxgSxLmAEglDpDavthyDqENx+/JrXTXv6VK8mDK3boi13d8ii0t0Z7lQtMbGq2KKK0SWe6w8TO
-	UYQJrRnZW5+qc80s8lxoRZFffWkP0VgX4yZE3QLDRY/F8Hac6n5iJR4lOiDkwA7+JdcPJJfzvE9
-	AD2NtGvS0yf1fP3XuaJBylhBg+M7/fOqk5eo3qdFe1oCdAuwj/p8VB5T6nGaAQNj2QpTJp6
-X-Received: by 2002:a05:600c:354a:b0:49c:d019:70c5 with SMTP id 5b1f17b1804b1-4a18e3ef23cmr156159795e9.0.1791793539659;
-        Mon, 12 Oct 2026 01:25:39 -0700 (PDT)
-Message-ID: <032c1cb0-55b8-489d-bcf4-4d4c14a590ae@suse.com>
-Date: Mon, 12 Oct 2026 10:25:40 +0200
+        bh=gbCqWsCuxEY5XIFrNsxca019l5IysgC/aX8g/IMX/Vc=;
+        b=Df6VIwxegJHPEXV7MOgKf2afOtp1GJYRZRT/dZASsDGHYA31Pmukkj2vDzRNdrfZYR
+         d0wknU4Ci0MsJTJHgtrItuhrc1L9vlZBJBjjbS37SUZ4M0KYQuG3vSXZNODC3JVXp/GM
+         UWMs41Thw0+UM3sZeq3uAYiL+g+JaUPYtyyMrjMqGNaNi1wOC/Yhp+a2VCq6u/D+S+Jv
+         kKnUoFJHtyLczBSbw/Q/S7lByR1HhEYDZX+qzfw26s/G8d8ZAGBadA5aYCr7bAim1o9W
+         BN1n5sbW9dEcdXvyxtCdo4Sg6668xcQi9d9EuVpPkclLCJXKKjEBw1oTwp4Yl9HOqiwY
+         CIUA==
+X-Gm-Message-State: AFq9FYKxTGayj35mDleY/Nql0/iV5LmHzrf19pkBKlwhAF0VCyMwoDhF
+	LktbrQHOHbfE2l2yFJIJC1U8+ec+r+qm6YBBGeMb2vwkWTFeHad/JyEPVNTPFT+CBE4xA0ATU7R
+	Njeaa/Q==
+X-Gm-Gg: AYBFou0L3RfBF5rH/VWK/Q9XKM9O9zIv65LE6AQulhPJjL7dELcLwOZe2KQaVZbBPIb
+	6mDkWrUSdE+W3w6BvvCehzkR22HkvSZgltlrGFDl1HvI/o8oG6K6F6FJ4BlgLvGyBuAVY9DyEDX
+	IMe8Qy/lkItsIwvc/NcXGOQUvMnotjFUrG/ddGcZYB6wIowGbspJDIV/ZovfF7S7p+LNyLkLMOS
+	2DyboUr0ORPC64vSuA5x9VF3nxvv8z/T7cQ3hubXbJhaR/8Qk4zLImAHOlwDNRIK1tC9FimQqSb
+	RJ9UJxn6dpvzcT+UgVKXbkGx5okSKEzFrDYFpbtANIIqbggi91i3JgAX3MIHm5kANyma1AtNjci
+	96ksngsv9EX30oeRTkWCJqz7libUiAwH5pi73yAyn5qM7UfOi/nt3/u46phSCdlf5z274vXPoMq
+	zNNgurBytCgCJrve6VwTBth01xNpH+oHtNYxF8ehsOEkpXjK2jxKvVJ0LRyG9U5i8v42rFpVySt
+	NiFtar2iz0iJ56oY6dIhUQzldanuy1YuD30LBT2wkfd1ktkUhvzn2P4OYNquQQ=
+X-Received: by 2002:a05:600c:609a:b0:4a1:7108:c2b6 with SMTP id 5b1f17b1804b1-4a18e4effabmr161479985e9.31.1791793562962;
+        Mon, 12 Oct 2026 01:26:02 -0700 (PDT)
+Message-ID: <cdfa9dea-1fc9-4df9-9b96-f10655573ebb@suse.com>
+Date: Mon, 12 Oct 2026 10:26:03 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 12/15] x86/PVH: heed the kernel in pvh_steal_ram()
+Subject: [PATCH 13/15] x86/PVH: prefer smaller E820 regions for stealing from
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,171 +130,77 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1791793540-F58AE2A1-475A7483/10/78276251493
+X-purgate-ID: tlsNG-4011c0/1791793563-58FC6CFC-A7FF35A4/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 5992
+X-purgate-size: 2429
 
-While the function working downwards will typically result in no conflict
-with the kernel range, there's no guarantee of that.
+Nibbling from the end of large regions tends to split full 2Mb (or even
+full 1Gb) ranges, which Dom0 may otherwise be able to use superpage
+mappings for (when, like Linux, it e.g. has a direct-map).
 
-Fixes: 1d74282c455f ("x86: setup PVHv2 Dom0 ACPI tables")
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+---
+Instead of comparing original sizes, we may want to compare remaining
+sizes. That may (slightly) further increase the risk of successive steals
+not ending up adjacent, though.
+
+There is the (pre-existing and purely theoretical at this point) risk of
+(entry->addr + entry->size - size) underflowing. Do we think we need to
+cover that remote case?
 
 --- a/xen/arch/x86/hvm/dom0_build.c
 +++ b/xen/arch/x86/hvm/dom0_build.c
-@@ -186,8 +186,12 @@ static int __init pvh_populate_memory_ra
- /* Steal RAM from the end of a memory region. */
- static int __init pvh_steal_ram(struct domain *d, unsigned long size,
-                                 unsigned long align, paddr_t limit,
-+                                const struct elf_binary *elf,
-                                 paddr_t *addr)
- {
-+    paddr_t kernel_start = (paddr_t)elf->dest_base & PAGE_MASK;
-+    paddr_t kernel_end = ROUNDUP((paddr_t)elf->dest_base + elf->dest_size,
-+                                 PAGE_SIZE);
+@@ -192,6 +192,7 @@ static int __init pvh_steal_ram(struct d
+     paddr_t kernel_start = (paddr_t)elf->dest_base & PAGE_MASK;
+     paddr_t kernel_end = ROUNDUP((paddr_t)elf->dest_base + elf->dest_size,
+                                  PAGE_SIZE);
++    struct e820entry *good = NULL;
      unsigned int i = d->arch.nr_e820;
  
      /*
-@@ -203,6 +207,11 @@ static int __init pvh_steal_ram(struct d
+@@ -202,26 +203,35 @@ static int __init pvh_steal_ram(struct d
+     while ( i-- )
+     {
+         struct e820entry *entry = &d->arch.e820[i];
++        paddr_t res;
+ 
+         if ( entry->type != E820_RAM || entry->addr + entry->size > limit )
              continue;
  
-         *addr = (entry->addr + entry->size - size) & ~(align - 1);
-+
-+        /* Avoid kernel range, if this is the region it lives in. */
-+        if ( *addr < kernel_end && *addr + size > kernel_start )
-+            *addr = (kernel_start - size) & ~(align - 1);
-+
-         if ( *addr < entry->addr ||
+-        *addr = (entry->addr + entry->size - size) & ~(align - 1);
++        res = (entry->addr + entry->size - size) & ~(align - 1);
+ 
+         /* Avoid kernel range, if this is the region it lives in. */
+-        if ( *addr < kernel_end && *addr + size > kernel_start )
+-            *addr = (kernel_start - size) & ~(align - 1);
++        if ( res < kernel_end && res + size > kernel_start )
++            res = (kernel_start - size) & ~(align - 1);
+ 
+-        if ( *addr < entry->addr ||
++        if ( res < entry->addr ||
               /* Don't steal from the low 1MB due to the copying done there. */
-              *addr < MB(1) )
-@@ -275,6 +284,7 @@ struct vmx_info {
+-             *addr < MB(1) )
++             res < MB(1) )
+             continue;
  
- static int __init pvh_place_vmx_realmode_helpers(
-     struct domain *d,
-+    const struct elf_binary *elf,
-     struct vmx_info *info)
- {
-     paddr_t gaddr;
-@@ -285,7 +295,7 @@ static int __init pvh_place_vmx_realmode
-      * structure (which accounts for the first 104b) doesn't cross a page
-      * boundary.
-      */
--    if ( !pvh_steal_ram(d, HVM_VM86_TSS_SIZE, 128, GB(4), &gaddr) )
-+    if ( !pvh_steal_ram(d, HVM_VM86_TSS_SIZE, 128, GB(4), elf, &gaddr) )
-     {
-         d->arch.hvm.params[HVM_PARAM_VM86_TSS_SIZED] =
-             VM86_TSS_UPDATED | ((uint64_t)HVM_VM86_TSS_SIZE << 32) | gaddr;
-@@ -300,7 +310,7 @@ static int __init pvh_place_vmx_realmode
-         printk("Unable to allocate VM86 TSS area\n");
+-        entry->size = *addr - entry->addr;
+-        return 0;
++        if ( !good || good->size > entry->size )
++        {
++            good = entry;
++            *addr = res;
++        }
+     }
  
-     /* Steal some more RAM for the identity page tables. */
--    if ( pvh_steal_ram(d, PAGE_SIZE, PAGE_SIZE, GB(4), &gaddr) )
-+    if ( pvh_steal_ram(d, PAGE_SIZE, PAGE_SIZE, GB(4), elf, &gaddr) )
-     {
-         printk("Unable to find memory to stash the identity page tables\n");
-         return -ENOMEM;
-@@ -1157,7 +1167,10 @@ static int __init cf_check acpi_set_intr
-     return 0;
+-    return -ENOMEM;
++    if ( !good )
++        return -ENOMEM;
++
++    good->size = *addr - good->addr;
++
++    return 0;
  }
  
--static int __init pvh_setup_acpi_madt(struct domain *d, paddr_t *addr)
-+static int __init pvh_setup_acpi_madt(
-+    struct domain *d,
-+    const struct elf_binary *elf,
-+    paddr_t *addr)
- {
-     struct acpi_table_madt *madt;
-     struct acpi_table_header *table;
-@@ -1182,7 +1195,7 @@ static int __init pvh_setup_acpi_madt(st
-     if ( !*addr )
-     {
-         /* Reserve space to place the new MADT in guest memory space. */
--        if ( pvh_steal_ram(d, size, 0, GB(4), addr) )
-+        if ( pvh_steal_ram(d, size, 0, GB(4), elf, addr) )
-         {
-             printk("Unable to steal guest RAM for MADT\n");
-             return -ENOMEM;
-@@ -1337,8 +1350,11 @@ static bool __init pvh_acpi_xsdt_table_a
-             strncmp(sig, ACPI_SIG_FACS, ACPI_NAME_SIZE));
- }
- 
--static int __init pvh_setup_acpi_xsdt(struct domain *d, paddr_t madt_addr,
--                                      paddr_t *addr)
-+static int __init pvh_setup_acpi_xsdt(
-+    struct domain *d,
-+    paddr_t madt_addr,
-+    const struct elf_binary *elf,
-+    paddr_t *addr)
- {
-     struct acpi_table_xsdt *xsdt;
-     struct acpi_table_header *table;
-@@ -1374,7 +1390,7 @@ static int __init pvh_setup_acpi_xsdt(st
-     if ( !*addr )
-     {
-         /* Reserve space to place the new XSDT in guest memory space. */
--        if ( pvh_steal_ram(d, size, 0, GB(4), addr) )
-+        if ( pvh_steal_ram(d, size, 0, GB(4), elf, addr) )
-         {
-             printk("Unable to find guest RAM for XSDT\n");
-             return -ENOMEM;
-@@ -1473,6 +1489,7 @@ struct acpi_info {
- 
- static int __init pvh_place_acpi(
-     struct domain *d,
-+    const struct elf_binary *elf,
-     struct acpi_info *info)
- {
-     unsigned int i;
-@@ -1529,15 +1546,15 @@ static int __init pvh_place_acpi(
-         }
-     }
- 
--    rc = pvh_setup_acpi_madt(d, &info->madt);
-+    rc = pvh_setup_acpi_madt(d, elf, &info->madt);
-     if ( rc )
-         return rc;
- 
--    rc = pvh_setup_acpi_xsdt(d, info->madt, &info->xsdt);
-+    rc = pvh_setup_acpi_xsdt(d, info->madt, elf, &info->xsdt);
-     if ( rc )
-         return rc;
- 
--    if ( pvh_steal_ram(d, sizeof(struct acpi_table_rsdp), 0, GB(4),
-+    if ( pvh_steal_ram(d, sizeof(struct acpi_table_rsdp), 0, GB(4), elf,
-                        &info->rsdp) )
-     {
-         printk("Unable to allocate guest RAM for RSDP\n");
-@@ -1565,11 +1582,11 @@ static int __init pvh_setup_acpi(
-         .length = sizeof(rsdp),
-     };
- 
--    rc = pvh_setup_acpi_madt(d, &info->madt);
-+    rc = pvh_setup_acpi_madt(d, NULL, &info->madt);
-     if ( rc )
-         return rc;
- 
--    rc = pvh_setup_acpi_xsdt(d, info->madt, &info->xsdt);
-+    rc = pvh_setup_acpi_xsdt(d, info->madt, NULL, &info->xsdt);
-     if ( rc )
-         return rc;
- 
-@@ -1707,7 +1724,7 @@ int __init dom0_construct_pvh(const stru
-         return rc;
-     }
- 
--    rc = pvh_place_acpi(d, &acpi);
-+    rc = pvh_place_acpi(d, &elf, &acpi);
-     if ( rc )
-     {
-         printk("Failed to place Dom0 ACPI tables: %d\n", rc);
-@@ -1725,7 +1742,7 @@ int __init dom0_construct_pvh(const stru
-           */
-          !vmx_unrestricted_guest(d->vcpu[0]) )
-     {
--        rc = pvh_place_vmx_realmode_helpers(d, &vmx);
-+        rc = pvh_place_vmx_realmode_helpers(d, &elf, &vmx);
-         if ( rc )
-             return rc;
-     }
+ /* NB: memory map must be sorted at all times for this to work correctly. */
 
 
