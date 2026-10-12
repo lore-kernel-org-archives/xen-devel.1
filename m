@@ -4,43 +4,62 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39C61CA9ED5
-	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 07:05:09 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445840.1661688 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2A5EBCA9ED2
+	for <xen-devel@archiver.kernel.org>; Mon, 12 Oct 2026 07:32:40 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1445849.1661700 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGA5X-0000NU-0v; Mon, 12 Oct 2026 07:04:47 +0000
+	id 1xGAWC-0005CZ-3y; Mon, 12 Oct 2026 07:32:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445840.1661688; Mon, 12 Oct 2026 07:04:46 +0000
+Received: by outflank-mailman (output) from mailman id 1445849.1661700; Mon, 12 Oct 2026 07:32:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGA5W-0000NN-TQ; Mon, 12 Oct 2026 07:04:46 +0000
-Received: by outflank-mailman (input) for mailman id 1445840;
- Mon, 12 Oct 2026 07:04:46 +0000
+	id 1xGAWC-0005CS-1M; Mon, 12 Oct 2026 07:32:20 +0000
+Received: by outflank-mailman (input) for mailman id 1445849;
+ Mon, 12 Oct 2026 07:32:19 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGA5V-0000NG-Ti
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 07:04:46 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <Michal.Orzel@amd.com>) id 1xGAWA-0005CK-RB
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 07:32:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGA5R-0055a0-TV
- for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 09:04:41 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xGAW9-005BA0-IC
+ for xen-devel@lists.xenproject.org; Mon, 12 Oct 2026 09:32:17 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acc867d-2eae-0a2a0a5409dd-0a2a4503c17a-34
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 09:04:41 +0200
-Received: from [209.85.221.50] (helo=mail-wr1-f50.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acc8689-fae8-0a2a45030019-d155dd32a4bd-3
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 09:04:41 +0200
-Received: by mail-wr1-f50.google.com with SMTP id
- ffacd0b85a97d-48b02a2359aso1393515f8f.0
- for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 00:04:41 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48db9aba3e5sm17507061f8f.31.2026.10.12.00.04.39
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 12 Oct 2026 00:04:40 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6acc8cfb-bab6-0a2a0a5309dd-0a2a4507d784-40
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 09:32:17 +0200
+Received: from [40.107.209.46]
+ (helo=PH8PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6acc8cff-b4ea-0a2a45070019-286bd12e4ce1-3
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 09:32:16 +0200
+Received: from BY3PR05CA0032.namprd05.prod.outlook.com (2603:10b6:a03:39b::7)
+ by SAWPR12MB999142.namprd12.prod.outlook.com (2603:10b6:806:4e1::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.21; Mon, 12 Oct
+ 2026 07:32:11 +0000
+Received: from SJ1PEPF000037AB.namprd03.prod.outlook.com
+ (2603:10b6:a03:39b:cafe::6d) by BY3PR05CA0032.outlook.office365.com
+ (2603:10b6:a03:39b::7) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.4 via Frontend Transport; Mon, 12
+ Oct 2026 07:32:11 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SJ1PEPF000037AB.mail.protection.outlook.com (10.167.244.185) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.522.6 via Frontend Transport; Mon, 12 Oct 2026 07:32:10 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 12 Oct
+ 2026 02:31:58 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 12 Oct
+ 2026 02:31:58 -0500
+Received: from [10.27.77.50] (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
+ Transport; Mon, 12 Oct 2026 02:31:56 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,127 +71,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791788681; x=1792393481; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=t5H9B39Nd5D95c8kb4KNIU0U3j7Hw+T4Kk/G3QmQq88=;
-        b=STHEUxJPWJ+CduLhPGuUPUkq2xPMkJ8EV60/mObF0qCwGoab2ErdXauKPcDs8wBU5Z
-         AG6ooB9K7iR29bddVVhynDsD38u1x0Gmzv9VBi7XdDbn4TbkNS4osgQIxjXDBVf0JxsS
-         1eTTtEmW3Y2pMnLuhS9ZZ7zvbEHvw6gt7fgo+pd8r9F6sUsBBicblhDRgg2nWEXBiJHn
-         sgu0GpQmDPigb1fi8MJltwTaJruTeExoxRz2RIlyhnksNvIb3bkJMQyrnigYyiO/NIw2
-         Gh7P10SJH5GCYHU1pZOjAN6xo1PoCACv+oHC2gfNrKmHAH+3Jrf8fWpNYyMgEgZ1Ww/0
-         jFLA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791788681; x=1792393481;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=t5H9B39Nd5D95c8kb4KNIU0U3j7Hw+T4Kk/G3QmQq88=;
-        b=LBBVo1n+RHcME5iNeiE8npoP/B/eUBUbIiMSwin00H/6/kCPL7m84ulYbER4s+tFlt
-         IXW/5Y7uhdb7KwxXT/Vhc/jpeZFVU/gQXt2XEE6M0yMnyPOb7lbNGpWaMP4oejii6+N+
-         mdszJMhClfO77WFI5J+N7w81CqxdybSZYL3amIc4A3GjgTJhWkSch02VYhHVBcTjebMG
-         v3tm4jQpDYHJ6DzW2y7qhcDRuEnU/235mxW+sscczEsTpmsPRPclK7E8SWsHkH6QYDug
-         qTd6mCezK0LLpdiYoDnJi6IzSwV9RLHvtPc9lI4dEeVLb6/LRTM+bI5QxOqmmAZImCL3
-         7xow==
-X-Forwarded-Encrypted: i=1; AKwUvByoEANmel0mrSOOu8rz1odAI+YSmrPJy6WoqHpduZwO+B4qAcdQ6KZMSY3XjXh0Z8GUs84l8lqo5gU=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKG37JYbUeLErVzNJu5cZrv8FSn2Gr3NmiIoT9Ncf6uRzjvxgAo
-	9/vYzjp936b5pXIv1fcVOX0yfVDex3Ed/pBKxMytFzxi8q3M05dVhdyeTWU9JvGnuiRxmDX13Ck
-	4jIxVnw==
-X-Gm-Gg: AYBFou3rpM8/wmVhukmAEnctIhfUGRE8gl8G/8A7EVE2rmpUrhZDSsidQ+bWUfTPJ6G
-	h+nOR/sJn8wawHIOl+AcFDW1McQ6T20wJpKqsWbywvlsT/nEzn73VgykNtImXMAM2zoBq6Dt6tw
-	Vi/kUzQu5UxerDMUH7JBuGxHdOErxlq7349WNOHyzlrKUreL508oS3i3alWzasM0xhnjv0WegDk
-	MFc0croG7IoJk69crGiJ6dHn/7RlZ7GLSxGEHXmrs5JZxlZoH+yIbqZVH2figdvSq16EfgLfFOc
-	wT6fjq0JNePMBvGjOzKEneGHYkmSpeN5op++0wkGYElMx5IRPHOYI4ITsrpVzmBlXnpe0IK5C7V
-	Z8WJcTXFKaaWGDb1hYIGxDLnJqECo/JcgV82vo5BcYEaWW5EWRbjr8UfD+0zGFAwItl8h9DkU+U
-	NXqyVvhlq6osyva5vTuPwBHoH3demNSdlEIvi2/2Yr/OUdlVrAsLi6TgDJTVkTRKroRmqxeYXtG
-	HRCWI6JOe4GPB/x8RCoaSaU24cO1T9SAGUuUhjCxUc0qwO18aM0+UE6YKOJZBXJsz/nfuQd6Q==
-X-Received: by 2002:a05:6000:25e8:b0:48c:55c1:fb47 with SMTP id ffacd0b85a97d-48db9464fbemr17188299f8f.10.1791788681016;
-        Mon, 12 Oct 2026 00:04:41 -0700 (PDT)
-Message-ID: <0e9d573f-299a-4459-81d0-94c905c85c8e@suse.com>
-Date: Mon, 12 Oct 2026 09:04:41 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=p2PULSOcAM9VJIi9Z2/rjbDb2ZQ6GCjBEOXgxVeQwfB//VwXk8Rcu1Yh8lN4eb/QuORTsZWQY5kuWJm2V7v1on0hJw6k1TVAY8OM8blB6IWbAEsiLRShw6poyEkz7ARhNzkzYqfyrDQ4VqYyfhX9rAPIMsugEyhDs8CX5LJSvNSUvHHKMyF26nHQKP26mzxS8x6A3c7KMbijE01XoMGWT5JBkcCX+BMDbPDQTLvGvFJU2mqmHkwUfH7DBkgwkdILyCDTK5xdpYznprIoJ0K1tV9CQaOMgq5fYftRb8iqT89mYvEuYk3z4Cc+NmS+ED/AlzBu9rJr1m9XFC6Y7sP1Xg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=/MxTUYpqdo3ktSYxb0sZm0A+NJ1qRXX6YhLwnGe9o7Y=;
+ b=bwYd2ZqsiN4D3+gLKCA0nYie1zA8dLXielZ0yRQjkIpZz5+ii1WqfSbepIiCeKeR+5XWPLXF3z7nQ8ITf9KUcVLe6ATEXRFGc2Jb6sC3NK8riJAPG+VuwC3cC6EtrwLPP/RaE59nn/f8bLMy8gz7uGR4AIMdljX0NGgh8on/zk1QJn7bQl0YTZlEn72Ny5/ytl4FRLxtHPNIJ1EJIKLGl4Q95/5gHcfoSAvZCjDfE0ty/Q8yZW3fAGbr2ffeC0oUJwzCtmAwpYDWNTWN5PIX2q1YKGVgFozgl1/pcMBJ+KKjVKEkNXM6XbkKfanwmTyO1749Qqi2S94tiVcJMNTK7g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=xen.org smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=/MxTUYpqdo3ktSYxb0sZm0A+NJ1qRXX6YhLwnGe9o7Y=;
+ b=wtqFS8wNBBxtw9FkIP6qXmS5qy7cxaus0s1fnrLpxDG7L9fWWZONIpxr/jj+0cVXhZRJ5bf2acTCFgCcfdIKXl0nCE5lTwYP0LBwpHwmvRkH6dbR9iGt3024Z6TNM/1bB8sf1Jtc2op3f/AQ6VTRrEO70/3yqGtqZJPBEfA1l18=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <9d970022-6b08-421c-aca0-589a0b5c2c27@amd.com>
+Date: Mon, 12 Oct 2026 09:32:00 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/argo: make the ring copy length check overflow-safe
-To: WeiqiW <coolhaoyt@gmail.com>
-Cc: Jason Andryuk <jason.andryuk@amd.com>,
- "Daniel P . Smith" <dpsmith@apertussolutions.com>,
- Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>,
- WeiqiW <lukewang19@outlook.com>, xen-devel@lists.xenproject.org
-References: <20261010132845.36208-1-lukewang19@outlook.com>
+Subject: Re: [PATCH] xen/arm: Fix under-mapping in map_range_to_domain()
+To: Julien Grall <julien@xen.org>, <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <sstabellini@kernel.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+References: <20261007135848.220047-1-michal.orzel@amd.com>
+ <055dc887-0cfd-4274-a5f6-e5afdd576746@xen.org>
+ <9a4f56d4-4c2e-4d5a-8489-9300170729a3@amd.com>
+ <71defbe4-44a1-4b76-8d0a-bcc6ab40515f@xen.org>
+From: "Orzel, Michal" <michal.orzel@amd.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261010132845.36208-1-lukewang19@outlook.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <71defbe4-44a1-4b76-8d0a-bcc6ab40515f@xen.org>
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1791788681-6F0C94E9-0F0F064A/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 1554
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000037AB:EE_|SAWPR12MB999142:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8fbc0f5b-b930-48d5-4531-08df2832ed8f
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|36860700016|1800799024|23010399003|376014|82310400026|10067099003|5023799004|11063799006|4143699003|6133799003|56012099006|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	BqV7DRvHDkHxaVYoYMfycCmmOnNkxBpDeW8FxcFIW9adOGI+BLffS7/cQ5LWJll50CNRAXy4a3CiaXzZMaKZeuDxQX8LlR66BFI3MLofVI10iFJsIt4v0c4fKNfN6QcGWDPgPdBtfHfsLHNc1XLuewICJNS23DtulXlarFKDQVUmBRzfxrwhDabtOp9nt6skjQn/2hrpJGNjh7nKU1XjJIZj32jq9uxcq+ukJXvJ0wQUo8TpBHOsLTEPH5Chzd4O6SqwNgl4uow5sNiH8QuCcZL96XRD1gZ5Ttlji++5HQheC/CoecR8yZ5wspoW7smiZ1fRw7CIlAKOWiJapWaaiyiITS3Z1lxHSQXLvRA7575Fpj2kTZ4BYQnbcQE9z1MpNTwF1q0o4zDF496EcMUFufh0dvCBfL8c87rYi7rUnkTvv9K7NhzENm5JDrDK43zFAMfc7t5LkLM0zDheYh1AZ6ff2ELN1/K7SfBYcBj7Nkqm1zj+z7FLOLv9anLIOJ2qhR1A3B5qnX3NDSp7Rd0Gv2Hqm0nRt/3N16fsg5EqKfVSBiF41BELYrCEjyIaJT3eUNooRrVKuwOmZyzSvOfxxFwghlm6N7UhrDzKxxg/67x86hXZHYSe4MLF1q0nDiIng33V7qgR3Re9tUh5Xg7Pp5dToSWY0xCT3tQkyMPiFqiSLdBCfNRXzG2uvTUn8KFYyOaPm9MKS4h2oykTJCl+WA==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(23010399003)(376014)(82310400026)(10067099003)(5023799004)(11063799006)(4143699003)(6133799003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	xkJSNGv/06ZaYPoEwgXnzExPSH9cm4OXtAgiBufPsJiMgPxHDABwSO63HSEdtShEcyH1ZAGIWcKDC3ylLG6IzbGSh45VVgxhPlCjlcrC5bbmpqNX6Zt4kHWBpMT0cGhoWib9eE9f7eqIHeYNdxqyo92gGWZAR9MkpWE14HaMZ4nZ5E8L9ARN2Zu2MzPaG3i7uL3F+o6pdFRXxgei2EzxPlodlAd9MtdRSilXtzaDHpeYwBqO/jlAhty/8TCTAKb4dPYibTHKDy9x5FvnqUCCa9Chh59x/GO2T4Q3QGnclD2E74PB+GL5KHNU+AenJHWu7mIOYHEGDDOxWxcB7eFPXLmG16aPQX16ks6qiccTPk/xSXCDeRXItMQXIanHBL69t4egcHkiE12k5GG7JuFik5OoubidvS5QXChb/JxGJc1vhAI7VjoPhTbrflUWop4t
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 12 Oct 2026 07:32:10.7694
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8fbc0f5b-b930-48d5-4531-08df2832ed8f
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ1PEPF000037AB.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SAWPR12MB999142
+X-purgate-ID: tlsNG-ef75cf/1791790337-360C5AE4-7790CA99/0/0
+X-purgate-type: clean
+X-purgate-size: 4267
 
-On 10.10.2026 15:28, WeiqiW wrote:
-> From: Weiqi Wang <weiqi.wang-2@postgrad.manchester.ac.uk>
+
+
+On 10-Oct-26 12:38, Julien Grall wrote:
+> Hi Michal,
 > 
-> memcpy_to_guest_ring() bounds the copy against the ring size with
+> On 08/10/2026 11:50, Orzel, Michal wrote:
+>>
+>>
+>> On 07-Oct-26 22:20, Grall, Julien wrote:
+>>> Hi Michal,
+>>>
+>>> On 07/10/2026 15:58, Michal Orzel wrote:
+>>>> If the memory region to be mapped does not start at the page boundary
+>>>> and its end spans over the page boundary, map_range_to_domain() passes
+>>>> a number of pages that is short by one to map_regions_p2mt(). Domain's
+>>>> attempt to access memory within that page will fail. Fix it by calculating
+>>>> the number of pages to be mapped taking into account the start offset.
+>>>
+>>> Can you provide an example where the caller doesn't suitably align?
+>> Sure. Example is handle_device() being called on the hwdom DTB creation time for
+>> a node whose address is not page aligned i.e. /reserved-memory node or basically
+>> any node, given that DT spec does not mention anything about memory region
+>> alignment and there are existing DTs like that. With reg = <0x0 0x800 0x0
+>> 0x1000>, today we only map 0x0-0xfff and an access to 0x1000-0x17ff faults.
 > 
->     if ( len + offset > XEN_ARGO_MAX_RING_SIZE )
+> Thanks!
+>>
+>>>
+>>>>
+>>>> Fixes: 88c10b0d6eee ("arch/arm: let map_mmio_regions() use start and count")
+>>>> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+>>>
+>>> The fix LGTM in the current context. However given map_range_to_domain()
+>>> is now used in more places (e.g. overlay), I wonder whether this is the
+>>> right decision to allow map_range_to_domain() with non-aligned region.
+>>>
+>>> Imagine a user say "I want to map 0x400 - 0x1000 to domain A and map
+>>> domain B "0x0 - 0x400". This could result to interesting behavior if the
+>>> user is not aware of the alignment (this would become even more
+>>> problematic if we decide to ever support different page granularity on Arm).
+>> I agree this is not great, but this is not something introduced here:
+>> iomem_permit_access() and the iomem_ranges rangeset already cover whole pages
+>> and we already map the full first page.This patch only makes the p2m mapping
+>> match what we already allow.
 > 
-> where len and offset are unsigned int.  offset is masked below PAGE_SIZE
-> just above, but a len close to UINT_MAX makes len + offset wrap below
-> XEN_ARGO_MAX_RING_SIZE and pass the check.  The head_len computation in
-> the loop wraps the same way, so the copy length is no longer bounded.
+> I am possibly misinterpreting what you wrote, but I disagree with such 
+> statement. The fact existing code may be wrong doesn't mean we should 
+> continue with the wrongness.
+It was just to clarify that this patch does not change who can access the page.
+
 > 
-> All current callers bound len via iov_count(), so this is not reachable
-> in practice.
-
-Which makes it questionable whether the change is actually needed. But as
-it doesn't look to introduce (e.g.) dead code, the change is likely fine
-to make.
-
-However, there's a formal aspect which may need sorting:
-
->  Do not rely on that: bound len first, then compare offset
-> against the room that is left.
+>>
+>> I don't think we can reject unaligned regions in map_range_to_domain()
+>> though, as the host DT is not under our control and hwdom would fail to
+>> boot on platforms with sub-page devices. I asked AI to look at the Linux boards
+>> for Arm and Arm64 (140 boards in total with unaligned regions) and even the
+>> boards we claim to support have nodes that would fail:
+>> - RPI4: hdmi@7ef00700, <0x7ef01f00 0x400>
+>> - IMX8QXP: clock-controller@5b290004, <0x5b290004 0x10000>
 > 
-> No functional change for in-range inputs.
+> I am not suggesting to reject unaligned regions when mapped into the 
+> hardware domain. I am suggesting to reject it when we want to 
+> passthrough to another domain. So we don't end up in a situation two 
+> different devices on the same page are passthrough to two different 
+> domains (or between Xen and a domain).
 > 
-> Signed-off-by: WeiqiW <lukewang19@outlook.com>
+> Codewise, it would mean map_range_to_domain() would enforce the 
+> alignment and the caller will be left to decide what to do. We could 
+> also decide about the alignment base don whether this is the HW domain 
+> or not within the function.
+For passthrough this is already the case. map_range_to_domain() does
+not map anything for nodes with xen,passthrough and the domU mapping is done by
+handle_passthrough_prop(), which rejects mstart, gstart and size that are not
+page aligned.
 
-There are two different real names and three different email addresses
-involved in your submission. Generally we'd expect at least the From:
-that's going to be transformed to commit author to match the S-o-b. The
-mail coming from yet another email address is maybe okay-ish, but not
-helpful. The main problem being - how would anyone (reliably) determine
-that all three belong to one an the same person, not several merely
-happening to have identical / similar names.
+The remaining case is the overlay which can be attached to any 1:1 domain and
+this goes through handle_device() -> map_range_to_domain() without any alignment
+check. All the other callers operate on hwdom, so I think we could reject a
+region that is not page aligned if d is not the hardware domain, before granting
+the iomem permission in map_range_to_domain().
 
-Hence no ack just yet.
+Shouldn't we accept this patch as is so that we can backport (overlay is not
+supported) it as a fix and then add a second one with a rejection mentioned
+above that will help the overlay (and any future) case?
 
-Jan
+~Michal
+
 
