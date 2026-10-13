@@ -4,35 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4A8E4CC6B1A
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 16:23:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448166.1664237 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1A7ACC6B19
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 16:27:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448181.1664245 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGfHr-0004Da-5m; Tue, 13 Oct 2026 16:23:35 +0000
+	id 1xGfL6-00053t-IJ; Tue, 13 Oct 2026 16:26:56 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448166.1664237; Tue, 13 Oct 2026 16:23:35 +0000
+Received: by outflank-mailman (output) from mailman id 1448181.1664245; Tue, 13 Oct 2026 16:26:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGfHr-0004DT-2P; Tue, 13 Oct 2026 16:23:35 +0000
-Received: by outflank-mailman (input) for mailman id 1448166;
- Tue, 13 Oct 2026 16:23:34 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1xGfL6-00053m-Fc; Tue, 13 Oct 2026 16:26:56 +0000
+Received: by outflank-mailman (input) for mailman id 1448181;
+ Tue, 13 Oct 2026 16:26:54 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xGfHq-0004DL-6T
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 16:23:34 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xGfHq-00000003SlZ-1Vhp
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 16:23:34 +0000
-Received: from mail-yx1-f41.google.com ([74.125.224.41])
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xGfHp-00000004WfH-2jkz
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 16:23:34 +0000
-Received: by mail-yx1-f41.google.com with SMTP id
- 956f58d0204a3-67921b515a6so2413568d50.1
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 09:23:34 -0700 (PDT)
+ (envelope-from <peter.maydell@linaro.org>) id 1xGfL4-00053g-OK
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 16:26:54 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xGfL4-00G4P5-5I
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 18:26:54 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6ace5bc9-e002-0a2a0a5209dd-0a2a450bb0c4-8
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 18:26:54 +0200
+Received: from [209.85.128.181] (helo=mail-yw1-f181.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6ace5bcd-b7e8-0a2a450b0019-d15580b5ac3f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 18:26:53 +0200
+Received: by mail-yw1-f181.google.com with SMTP id
+ 00721157ae682-8726acc5eadso24297607b3.0
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 09:26:53 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,106 +48,103 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
-	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
-	bh=s6uEOKcMzohNhGkt1Fr81Jumh96m8F/BTpz62rtwgwE=; b=xIelQXDCnodtrsx1Xhm1T3Nowj
-	XV2b7kggwyyjU+BodMt72yYLIjD4tKpBl35oMXSfH6FCtE6p+k6IFIpqP4g5O3xF/GCzGPhQyhL7p
-	YUdhELZyl5CwWRG2k2RfAL16EZCkl8v3PZ6YTde4sXlXPjg+4csCGJRbDG5Gl5j962hg=;
-X-Gm-Message-State: AFq9FYKdCJmvOVCkLy1rY10wr5TRalG5QNwnsM5GLkOUdLTMBDnQneKT
-	OUY/h3Ws0jNU3bb2mWIeRGzth1Qd/kYWVrGCzg0gdiU8GOztlv3fgyaywBWVUhORNs8IvJmDAyw
-	sNjATS2x7iwW+yLQ+/7edeHtvUNJyb4U=
-X-Received: by 2002:a05:690e:43cf:b0:671:631:785c with SMTP id
- 956f58d0204a3-679360662eamr2435293d50.57.1791908613721; Tue, 13 Oct 2026
- 09:23:33 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1791908812; cv=none;
+        d=google.com; s=arc-20260327;
+        b=ATbktG6+tw+meNWDiT1JJIaiBsg1SnUCURcbYeKkpYNbzckOmfFJMPF2HhnfwG1gpW
+         wxhZxHhCbZX3TYceshSqa4o8KG1N2ErURmfIOBgkW+hNyIzlrTzeK+laocwKgU6v84PJ
+         ik2tIoo7etis8wsIeQvBqNSHIYAE/YhRARcp5ZZdB+ElGBqlc7PO0Km3fs4U/nCzgWvJ
+         1WcXeyA+XXycLxMEmGVpRNNASshIxB8DzpO1TDhR8iVYCISjmsV0juH+ZrBLhkRAREUn
+         5lprpetpWVunPEm/l9DeWkLtFcqXKLkN9hbefgFo2iiO0Av8S0fq/wnJbLFG6bcKqNM1
+         9/Dg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=lfW0nUOSaRUIuZAH3PPaoOxVv0uganAcfQGMmdwJiqI=;
+        fh=9VMul4XEbI4AZThU/pUXmxEzBjQG999I7MjlUiUptPs=;
+        b=GMEDKwkl8zMfWRj5DpDxXSFdsFg4T83BRkcMiyDyE1xDvgW5qbl/AmmVzucq1FfFWA
+         KWz3yyFeI0Dm2N19xiOLbxRLzcLXml/5M9G1sLavBvekxXsxH5Mc6HpMm3klwcKWPGDx
+         tJD/ffATRDRJYACBqBQdjSPylPmgpg2BCDEaLQThH8Y+IYAr4szX7lXB+LgazrXoKZYr
+         fF/UkOi/qV1CdefUpLSVCL+AJZ9N14u1zTQUCheJlfpxerMvv1GJfVNQWzFfTuvmiyX1
+         XXgOhT1RWgLvcGV5WQmTaUx1mt64Pez6SBDgM3RXUUJRDnLZvVKLSsdRtUaOs/PFtpKu
+         HsPQ==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1791908812; x=1792513612; darn=lists.xenproject.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=lfW0nUOSaRUIuZAH3PPaoOxVv0uganAcfQGMmdwJiqI=;
+        b=kNovbmlIm13kSlVsqTlGmVbVYdLMA6Q7xxWlpI8vjjOV4A4Y1D1ldCGSCgJOANmYbH
+         AR2Ix6FoaS69GIlPl5JUmofIBDOi9++gCpXWAcWhVfRuxW2Nu9xK3b0dx1lese1jEvIv
+         /HSRaCbFVsg2n2iGUPg5UkYDFE/L1jCze8ciXJz4aQ4m7pHG/pBnH6VVkHjZXWguld4D
+         Zg12SqrjGhdEJV7I7lpOjtp8jcP1zeeN7I2VAHy6MeQQnEJF9ikaHHi1R53FDShwdW7p
+         Gw6mg/8Ecbzhonnj5GZWBYr86NH3hY//SZbfyiLEaULCqvJuIfoFGTs+wqnQDiUwwpzD
+         ZmnA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791908812; x=1792513612;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=lfW0nUOSaRUIuZAH3PPaoOxVv0uganAcfQGMmdwJiqI=;
+        b=Z0cCT36ejORszgOwRa/TJDe9SwF8MEYJd7dEVKHsn/R3huSPVq6nfXn5kldo9M9O4k
+         5KI9Ku12LRuhxOpu6ZDXW4YfzVaWoj7YMkN7nSzc8bUeIJccNx0pC35ayjj8ejzrQJUh
+         2tJMmHfIBJwL7OHtcdhSt1hYvt4IO58Z+CWwT5AGcil5ffnunumHvtay9C+9X0OSb3h9
+         JKTNqWYrG6vjHdCMnlcGYxVvvcYCDdp67hFr3SUWnaZ3PvMwCppKNVnhRie4REhbqnrm
+         p+fqZ5M2Q9v9Rf3Q5PLD/ooeIfmdFsuKzV2GKJ/30Iuifo5y7mxXyfuAARH9xDYYcKFn
+         mmuA==
+X-Forwarded-Encrypted: i=1; AKwUvBzb14xX7/y92GUTF0HhVbbzFWBHYpY5uZtxpBXTAJUgxawkoDKSWCK5+wwo2QSD/lD6/MsLToRcZxY=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYL7Sea5Za3+D7i/YYNwSMpM6vt7P/sEKJX81RO5jK9DU66Va5U7
+	Xaqw5Abd3wXB/u1cPI9LbymEJOiu+pgCZKMeIZRdnjOcytd2e07fL3FGatY+ZL1bJGxlQUAt9Nr
+	RlU1ePa2/We7/6Xcbz6UiMqgIqfMzKjZ6+sPmMLg4NQ==
+X-Gm-Gg: AYBFou3gkaO/3JpBG2ceEtxU7eQ7hP7WZOlc+LMDcqfp2C4me8b7qGu7/2G6XxexoVj
+	6xnQTJeG9kqP/Y5fZL4TcBdg6BxbOR9910CXioK86tYvhkS/+ZhdWVTei/G+LjdprF94pYYPPcN
+	mtE+BASbIoNk5so62biAozAXWC65ue/ja/rQryR5PB2Z2n6jOqxRLziRKNROyy+rkv2Zcy6TG5d
+	0frfBwKmH/Ks/X7drOXLa6AQEgRV9M4ANGUWpqO8T80qIlxCAOpjj5YdfpL6NzJ/tgZEvZno6HV
+	XkBBGS6k3l26Im3YHL9LDrXF8OLFSrWA6X9h0TU4E0rA0tr6wlm+sa1GHX1qjTzrNCx9K4P3xPD
+	h/oVtw/KnW00brqmvfWuS8IphmBY9xHFVzPR6C4o=
+X-Received: by 2002:a05:690c:e3cd:b0:8b0:ad62:19aa with SMTP id
+ 00721157ae682-8b0ad6230f0mr19157117b3.33.1791908812379; Tue, 13 Oct 2026
+ 09:26:52 -0700 (PDT)
 MIME-Version: 1.0
-References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-12-gwd@xenproject.org>
- <aseg8F5OA4AmLg3n@Mac.lan>
-In-Reply-To: <aseg8F5OA4AmLg3n@Mac.lan>
-From: George Dunlap <gwd@xenproject.org>
-Date: Tue, 13 Oct 2026 17:23:20 +0100
-X-Gmail-Original-Message-ID: <CAFLBxZYvgaFxBP1_tHkqMTuJTdyHO-DLY1PCsn0i3PXK5Sk7-Q@mail.gmail.com>
-X-Gm-Features: AclHuK8LsJ0STSPjLMN7gImzbgWt9u8z0q8MgEoQx6XLgwfF-7rNynB3R26w4hc
-Message-ID: <CAFLBxZYvgaFxBP1_tHkqMTuJTdyHO-DLY1PCsn0i3PXK5Sk7-Q@mail.gmail.com>
-Subject: Re: [PATCH v3 11/18] x86/hvm: introduce per-vCPU mapcache for vCPU-PT domains
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: xen-devel@lists.xenproject.org, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger.pau@citrix.com>, 
-	Jan Beulich <jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Teddy Astie <teddy.astie@vates.tech>
+References: <20260916104435.600211-1-mark.caveayland@nutanix.com> <20260916104435.600211-21-mark.caveayland@nutanix.com>
+In-Reply-To: <20260916104435.600211-21-mark.caveayland@nutanix.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Tue, 13 Oct 2026 17:26:41 +0100
+X-Gm-Features: AclHuK9LMqtW-CAAZ3xrwGlJrfDwYU71aDjAnimvRogO_6sdanZdfIn2PpOI6Zc
+Message-ID: <CAFEAcA-BxUQAg6uVPn7EMP=xJ_J7oa6FD6hxZFrmQJmf=-VhoQ@mail.gmail.com>
+Subject: Re: [PATCH 20/22] i8259.c: switch isa_pic from I8259CommonState to I8259PICState
+To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com, 
+	sstabellini@kernel.org, anthony@xenproject.org, edgar.iglesias@gmail.com, 
+	qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
 Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-42698a/1791908814-1AEDE9EA-5F644D85/0/0
+X-purgate-type: clean
+X-purgate-size: 964
 
-On Thu, Oct 8, 2026 at 2:56=E2=80=AFPM Roger Pau Monn=C3=A9 <roger@xenproje=
-ct.org> wrote:
-> > Unlike a domain-wide mapcache, a per-vCPU one cannot, by design,
-> > borrow slots from other vCPUs: MAPCACHE_VCPU_ENTRIES (16) is the most
-> > single-page mappings such a vCPU can hold at once, interrupt handlers'
-> > included, and one more hits the BUG_ON() in map_domain_page(). The PoD
-> > zero-page sweep held up to 16 on top of its callers' until "x86/PoD: ma=
-p
-> > one page at a time in p2m_pod_zero_check()".
+On Wed, 16 Sept 2026 at 11:49, Mark Cave-Ayland
+<mark.caveayland@nutanix.com> wrote:
 >
-> Is it really the best approach to keep the same limit?  As you note,
-> with the mapcache being per-vcpu the limit of 16 active mappings is
-> going to be strictly enforce, which it wasn't before.
+> The isa_pic variable exists to allow the output to be fetched or read (fetched
+> and acknowledged) from the x86 PIC. Since this can also contain a cascaded
+> interrupt from a slave i8259, switch isa_pic from I8259CommonState to
+> I8259PICState and update both pic_get_output() and pic_read_irq() accordingly.
 >
-> The per-vcpu mapcache area is a whole L1 page-directory (it cannot be
-> smaller), so that's 512 entries per-vcpu, of which we limit ourselves
-> to 16.
+> This has the advantage that a i8259-based PIC device contains its own internal
+> reference to both the primary and secondary i8259s, and therefore it becomes
+> possible to completely remove the slave_pic variable.
 >
-> Can we consider using bigger per-vcpu mapcaches, maybe 512 is overkill
-> for the bitmap sizes, but using greater than 16 will likely avoid
-> frequent TLB flushes to re-use the entries.  Maybe 64 entries, so the
-> bitmap is still a single unsigned long on 64bit arches.  Note that
-> declare bitmap will already use at least an unsigned long for the
-> bitmap itself.
+> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+> ---
 
-Yes, I think that's a good idea.  I'd thought about extending the
-mapcaches since they'd be now per-vCPU, but didn't want to change two
-things at once; but we're already changing 2 things at once by taking
-away the overflow mechanism.  64 bits is a good number, given that
-we've got anunsigned long "bitmap" anyway.
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
-> > @@ -191,7 +207,12 @@ void *map_domain_page(mfn_t mfn)
-> >          }
-> >          BUG_ON(idx >=3D cache->entries);
-> >
-> > -        /* /Second/, flush TLBs. */
-> > +        /*
-> > +         * /Second/, flush TLBs.  A per-vCPU mapcache needs a local fl=
-ush
-> > +         * only: its entries are never _PAGE_GLOBAL, and this vCPU's
-> > +         * page-tables can only have been loaded on another pCPU via
-> > +         * switch_cr3_cr4(), which flushes non-global mappings.
-> > +         */
->
-> Shouldn't the above comment be inside of mapcache_new_epoch()?  It's a
-> bit disconnected from the code here, as apparently there's no
-> different handling here between per-domain and per-vcpu mapcaches.
+(That isa_pic global is kind of ugly; in an ideal world the callers
+would have a pointer to the PIC they cared about rather than relying
+on there being exactly one in the system...)
 
-Ack
-
->
-> >          perfc_incr(domain_page_tlb_flush);
-> >          flush_tlb_local();
-> >          mapcache_new_epoch(dcache, vcache);
-> > @@ -313,11 +334,19 @@ int mapcache_vcpu_init(struct vcpu *v)
-> >          return 0;
-> >
-> >      cache =3D vcpu_mapcache(v, &dcache);
-> > -    if ( !cache->inuse )
-> > +    if ( !dcache )
-> > +    {
-> > +        /* Per-vCPU bitmaps are a word each: they live in the vCPU its=
-elf. */
-> > +        cache->inuse =3D v->arch.mapcache.inuse;
-> > +        cache->garbage =3D v->arch.mapcache.garbage;
->
-> Well, the size of the bitmap is set to 16 bits, but due to the usage of
-> DECLARE_BITMAP() the underlying type is unsigned long, so it's
-> effectively using 64 bits (a quad).
-
-I'll adjust the comment.
-
- -George
+thanks
+-- PMM
 
