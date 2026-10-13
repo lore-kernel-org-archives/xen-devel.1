@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 05839CC6B03
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 12:29:10 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1447132.1663426 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1FC64CA9ED2
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 12:29:12 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1447120.1663395 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGbcq-0000jO-LM; Tue, 13 Oct 2026 12:29:00 +0000
+	id 1xGbcl-00082h-8k; Tue, 13 Oct 2026 12:28:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1447132.1663426; Tue, 13 Oct 2026 12:29:00 +0000
+Received: by outflank-mailman (output) from mailman id 1447120.1663395; Tue, 13 Oct 2026 12:28:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGbcp-0000h9-W6; Tue, 13 Oct 2026 12:29:00 +0000
-Received: by outflank-mailman (input) for mailman id 1447132;
- Tue, 13 Oct 2026 12:28:58 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xGbck-00080O-Ec; Tue, 13 Oct 2026 12:28:54 +0000
+Received: by outflank-mailman (input) for mailman id 1447120;
+ Tue, 13 Oct 2026 12:28:52 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xGbcm-0008PB-KU; Tue, 13 Oct 2026 12:28:56 +0000
+ id 1xGbci-0007Kx-05; Tue, 13 Oct 2026 12:28:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGbcl-00DIPB-Vs; Tue, 13 Oct 2026 14:28:55 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xGbch-00FMox-CS; Tue, 13 Oct 2026 14:28:51 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6ace2403-2eae-0a2a0a5409dd-0a2a4501ece6-14
- for <multiple-recipients>; Tue, 13 Oct 2026 14:28:55 +0200
+ id 6ace2401-bab6-0a2a0a5309dd-0a2a4509de3a-6
+ for <multiple-recipients>; Tue, 13 Oct 2026 14:28:51 +0200
 Received: from [104.130.215.37] (helo=mail.xenproject.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6ace2406-5984-0a2a45010019-6882d7259974-3
- for <multiple-recipients>; Tue, 13 Oct 2026 14:28:55 +0200
+ id 6ace2402-be1a-0a2a45090019-6882d725a2c4-3
+ for <multiple-recipients>; Tue, 13 Oct 2026 14:28:51 +0200
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xGbci-00000003NHh-2Uhh; Tue, 13 Oct 2026 12:28:52 +0000
+ id 1xGbce-00000003NHL-0WzF; Tue, 13 Oct 2026 12:28:47 +0000
 Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.98.2)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xGbci-0000000F8xP-1Sbi; Tue, 13 Oct 2026 12:28:52 +0000
+ id 1xGbcd-0000000F8nY-3bRd; Tue, 13 Oct 2026 12:28:47 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,13 +60,13 @@ To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
  xen-users@lists.xen.org, oss-security@lists.openwall.com
 From: Xen.org security team <security@xen.org>
 CC: Xen.org security team <security-team-members@xen.org>
-Subject: Xen Security Advisory 518 v2 (CVE-2026-79611) - VMX: VMentry
- failure with branch tracing and blocked states
-Message-Id: <E1xGbci-0000000F8xP-1Sbi@xenbits.xenproject.org>
-Date: Tue, 13 Oct 2026 12:28:52 +0000
-X-purgate-ID: tlsNG-d62444/1791894535-1E664757-CCC5F802/0/0
+Subject: Xen Security Advisory 517 v2 (CVE-2026-79610) - grant-table:
+ double version change race
+Message-Id: <E1xGbcd-0000000F8nY-3bRd@xenbits.xenproject.org>
+Date: Tue, 13 Oct 2026 12:28:47 +0000
+X-purgate-ID: tlsNG-bad1c0/1791894531-FD469034-5AEEE705/0/0
 X-purgate-type: clean
-X-purgate-size: 13424
+X-purgate-size: 7295
 
 --=separator
 Content-Type: text/plain; charset="utf-8"
@@ -76,10 +76,10 @@ Content-Transfer-Encoding: 7bit
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA256
 
-            Xen Security Advisory CVE-2026-79611 / XSA-518
+            Xen Security Advisory CVE-2026-79610 / XSA-517
                                version 2
 
-      VMX: VMentry failure with branch tracing and blocked states
+                grant-table: double version change race
 
 UPDATES IN VERSION 2
 ====================
@@ -89,41 +89,44 @@ Public release.
 ISSUE DESCRIPTION
 =================
 
-For XSA-308 logic was introduced, as VMX VMEntry checks do not like the
-exact combination of state which occurs when #DB in intercepted, Single
-Stepping is active, and blocked by STI/MovSS is active, despite this being
-a legitimate state to be in.  The resulting VMEntry failure is fatal to
-the guest.
-
-Sadly there is another special sub-case of the above, with branch tracing
-enabled.  In that case the prior adjustment would still cause a VMentry
-failure, as before fatal to the guest.
+XSA-501 was about issues with v1 -> v2 and v2 -> v1 changes racing certain
+other grant table operations.  Sadly a v2 -> v1 -> v2 change has yet
+another effect which wasn't accounted for: During the first change, status
+pages would be freed.  During the second change they would be allocated
+again.  Hence across the full pair of change the addresses of the status
+pages may change, rendering stale previously calculated pointers into the
+status array.
 
 IMPACT
 ======
 
-HVM/PVH guest userspace code may be able to crash the guest, resulting
-in a guest Denial of Service.
+An unprivileged guest may be able to elevate its privileges to that of the
+host.  Information leaks and Denial of Service (DoS) are possible as well.
 
 VULNERABLE SYSTEMS
 ==================
 
-All versions of Xen are affected.
+All Xen versions from 4.0 onwards are vulnerable.  Xen versions 3.4 and
+earlier are not vulnerable.
 
-Only systems supporting VMX hardware virtual extensions (Intel, VIA or
-Zhaoxin CPUs) are affected.  Arm as well as AMD and Hygon systems are
-unaffected.
+Only x86 guests permitted to use grant table version 2 interfaces can
+leverage this vulnerability.  On Arm, grant table v2 use is explicitly
+unsupported.
 
-Only HVM/PVH guests are affected.  PV guests cannot leverage the
-vulnerability.
+Only multi-vCPU guests can leverage this vulnerability.
+
+Xen versions 4.13 and newer offer a way to build Xen without grant table
+support.  Such hypervisors (CONFIG_GRANT_TABLE turned off) are not
+vulnerable.
 
 MITIGATION
 ==========
 
-Running only PV guests will avoid this vulnerability.
+Using the "gnttab=max-ver:1" hypervisor command line option will avoid
+the vulnerability.
 
-Running HVM guests on only AMD or Hygon hardware will also avoid this
-vulnerability.
+Using the "max_grant_version=1" guest configuration option for guests will
+also avoid the vulnerability.
 
 CREDITS
 =======
@@ -141,175 +144,96 @@ apply to the stable branches, and may not apply cleanly to the most
 recent release tarball.  Downstreams are encouraged to update to the
 tip of the stable branch before applying these patches.
 
-xsa518.patch           xen-unstable - Xen 4.21.x
-xsa518-4.20.patch      Xen 4.20.x - Xen 4.17.x
+xsa517.patch           xen-unstable - Xen 4.17.x
 
-$ sha256sum xsa518*
-a703af59b22f1e47543af0668c8715b4e4011ba4fc05fd8b94bf05503dce88ef  xsa518.patch
-a1a1b3548166e051f62a0759af5df8d365f524ae52f4bbbe642d45692a1f8bde  xsa518-4.20.patch
+$ sha256sum xsa517*
+0f114af84cd925f8bc69b26386e2e4a95a52f947bc400f961a9e1ba46c0a2e05  xsa517.patch
 $
 
 DEPLOYMENT DURING EMBARGO
 =========================
 
-Deployment of the patches and/or mitigations described above (or
-others which are substantially similar) is permitted during the
-embargo, even on public-facing systems with untrusted guest users and
-administrators.
+Deployment of the patches described above (or others which are
+substantially similar) is permitted during the embargo, even on public-
+facing systems with untrusted guest users and administrators.
 
-But: Distribution of updated software is prohibited (except to other
+HOWEVER, deployment of the mitigation is NOT permitted (except where
+all the affected systems and VMs are administered and used only by
+organisations which are members of the Xen Project Security Issues
+Predisclosure List).  Specifically, deployment on public cloud systems
+is NOT permitted.
+
+This is because restricting the available grant table version is a guest
+visible configuration change, which may lead to re-discovery of the issue.
+
+Deployment of this mitigation is permitted only AFTER the embargo ends.
+
+AND: Distribution of updated software is prohibited (except to other
 members of the predisclosure list).
 
 Predisclosure list members who wish to deploy significantly different
 patches and/or mitigations, please contact the Xen Project Security
 Team.
+
+(Note: this during-embargo deployment notice is retained in
+post-embargo publicly released Xen Project advisories, even though it
+is then no longer applicable.  This is to enable the community to have
+oversight of the Xen Project Security Team's decisionmaking.)
+
+For more information about permissible uses of embargoed information,
+consult the Xen Project community's agreed Security Policy:
+  http://www.xenproject.org/security-policy.html
 -----BEGIN PGP SIGNATURE-----
 
-iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmrOIooMHHBncEB4ZW4u
-b3JnAAoJEIP+FMlX6CvZTOUIAMMapd/RMFzQxmwdwICbmj2zDnEWutkzQyV0bMMK
-Ui2VleXQ7pDWH5OEfDNl6644Gs6x4zB9lrTZFubAFvXjqNUk9C3QxU6LOlV0RQAq
-a96/glbPhXhOONdn1K5DuJq35sKjhGdsy8B+Ati+IGPstT8bGytrz+CVbdR1bnLb
-3XvnRHqFSEHoQxejE/aRXpRw4k1HHD5wFQ/WfvgOEKYj+Ghjm+KE2sNhcahxxFf4
-ys8v9JWBKhnLAe+mJIiMPGiKmX5uUVl6HhdX6SjTHuzzbsmITF3VOwsnHZR9vLn1
-BqUwLG/uQKes4LRinfOA5RrOMt/q/ChjXPw2x6IZZJLjHVk=
-=hyph
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmrOIlkMHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZAGUH/3wERoCBP6lIwfFmIMiAcqVVctqz6/8OgplQEp8A
+inNRPR8Avx++0lt4AdERiNYy3xwxGAZzJsxYC3ipCaHvMwOmm11DiMX5yuhvefNw
+TJxWaWut2QmF0Vi0G4acvvlfslb9JA9quEgLDzF/2dMiyHzTL4xvdeJ5OR5zXAoD
+hexjk0DCSDcYRHnD0OautofMGTaBaGJVHz08uRNkz3gOxumAeKnxmfelF8QgnTb3
+jRYIt5z+Kye8oXZ0uTVY86YR7YbuiaHAJx1YZzceyfaVjJzvS8ZsTFt2CXshcex8
+33fw3iQnY9ImA/NC11y4OLt8F8nb+Ge2Cge98wBt8NPSoBc=
+=SAIu
 -----END PGP SIGNATURE-----
 
 --=separator
-Content-Type: application/octet-stream; name="xsa518.patch"
-Content-Disposition: attachment; filename="xsa518.patch"
+Content-Type: application/octet-stream; name="xsa517.patch"
+Content-Disposition: attachment; filename="xsa517.patch"
 Content-Transfer-Encoding: base64
 
-RnJvbTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KU3ViamVjdDog
-eDg2L3ZteDogUmV3b3JrICNEQiBpbnRlcmNlcHQgbG9naWMgdG8gZml4IFZNRW50cnkgZmFpbHVy
-ZSB3aXRoIEJURgoKVGhlIGNvbnNpc3RlbmN5IGNoZWNrcyBpbiBlZmZlY3Qgd2hlbiBCbG9ja2Vk
-LWJ5LVNUSS9Nb3ZTUyBhcmUgYWN0aXZlIGluY2x1ZGVzCkRFQlVHQ1RMLkJURiB0b28uICBUYWtl
-IHRoaXMgaW50byBhY2NvdW50IHdoZW4gZWRpdGluZyBQRU5ESU5HX0RCRy5CUy4KClRoaXMgZW5k
-cyB1cCBuYXJyb3dpbmcgdGhlIGNhc2VzIHdoZXJlIFBFTkRJTkdfREJHIGlzIG1vZGlmaWVkLiAg
-UmV3b3JrIHRoZQpjb21tZW50IHRvIGJlIG1vcmUgcHJlY2lzZS4KClRoaXMgaXMgWFNBLTUxOCAv
-IENWRS0yMDI2LTc5NjExLgoKRml4ZXM6IDFkM2ViODI1OTgwNCAoIng4Ni92dHg6IFdvcmsgYXJv
-dW5kIFNpbmdsZVN0ZXAgKyBTVEkvTW92U1MgVk1FbnRyeSBmYWlsdXJlcyIpClJlcG9ydGVkLWJ5
-OiBUZWRkeSBBc3RpZSA8dGVkZHkuYXN0aWVAdmF0ZXMudGVjaD4KU2lnbmVkLW9mZi1ieTogQW5k
-cmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KUmV2aWV3ZWQtYnk6IEphbiBC
-ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KUmV2aWV3ZWQtYnk6IFRlZGR5IEFzdGllIDx0ZWRk
-eS5hc3RpZUB2YXRlcy50ZWNoPgotLS0KIHhlbi9hcmNoL3g4Ni9odm0vdm14L3ZteC5jIHwgNDEg
-KysrKysrKysrKysrKysrKystLS0tLS0tLS0tLS0tLS0tLS0tLS0KIDEgZmlsZSBjaGFuZ2VkLCAx
-OCBpbnNlcnRpb25zKCspLCAyMyBkZWxldGlvbnMoLSkKCmRpZmYgLS1naXQgYS94ZW4vYXJjaC94
-ODYvaHZtL3ZteC92bXguYyBiL3hlbi9hcmNoL3g4Ni9odm0vdm14L3ZteC5jCmluZGV4IDYyMzc2
-MjNhNGMxNi4uOTdkZDM3ZGQ3Y2U0IDEwMDY0NAotLS0gYS94ZW4vYXJjaC94ODYvaHZtL3ZteC92
-bXguYworKysgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYwpAQCAtNDM5NiwzMyArNDM5Niwy
-OCBAQCB2b2lkIGFzbWxpbmthZ2Ugdm14X3ZtZXhpdF9oYW5kbGVyKHN0cnVjdCBjcHVfdXNlcl9y
-ZWdzICpyZWdzKQogICAgICAgICAgICAgICogV2UgaW50ZXJjZXB0ICNEQiB1bmNvbmRpdGlvbmFs
-bHkgdG8gd29yayBhcm91bmQgQ1ZFLTIwMTUtODEwNCAvCiAgICAgICAgICAgICAgKiBYU0EtMTU2
-IChndWVzdC1rZXJuZWwgaW5kdWNlZCBob3N0IERvUykuCiAgICAgICAgICAgICAgKgotICAgICAg
-ICAgICAgICogU1RJL01vdlNTIHNoYWRvd3MgYmxvY2svZGVmZXIgaW50ZXJydXB0cy9leGNlcHRp
-b25zIChleGFjdAotICAgICAgICAgICAgICogZGV0YWlscyBhcmUgY29tcGxpY2F0ZWQgYW5kIHBv
-b3JseSBkb2N1bWVudGVkKS4gIERlYnVnCi0gICAgICAgICAgICAgKiBleGNlcHRpb25zIGRlbGF5
-ZWQgZm9yIGFueSByZWFzb24gYXJlIHN0b3JlZCBpbiB0aGUKLSAgICAgICAgICAgICAqIFBFTkRJ
-TkdfREJHX0VYQ0VQVElPTlMgZmllbGQuCisgICAgICAgICAgICAgKiBNb3N0IHNvdXJjZXMgb2Yg
-I0RCIGFjY3VtdWF0ZSBzdGF0dXMgaW4gUEVORElOR19EQkcsIHdoaWNoIGFyZQorICAgICAgICAg
-ICAgICogdGhlbiBkaXNwYXRjaGVkIGluIHByaW9yaXR5IG9yZGVyIHByaW9yIHRvIGZldGNoaW5n
-IHRoZSBuZXh0CisgICAgICAgICAgICAgKiBpbnN0cnVjdGlvbi4gIFdoZW4gdGhlICNEQiBpbnRl
-cmNlcHQgdHJpZ2dlcnMsIFBFTkRJTkdfREJHIGlzIDAKKyAgICAgICAgICAgICAqIHdpdGggdGhl
-IHN0YXR1cyBiaXRzIGhhdmluZyBtb3ZlZCBpbnRvIEVYSVRfUVVBTElGSUNBVElPTi4KICAgICAg
-ICAgICAgICAqCi0gICAgICAgICAgICAgKiBUaGUgZmFsbGluZyBlZGdlIG9mIFBFTkRJTkdfREJH
-IGNhdXNlcyAjREIgdG8gYmUgZGVsaXZlcmVkLAotICAgICAgICAgICAgICogcmVzdWx0aW5nIGlu
-IGEgVk1FeGl0LCBhcyAjREIgaXMgaW50ZXJjZXB0ZWQuICBUaGUgVk1DUyBzdGlsbAotICAgICAg
-ICAgICAgICogcmVwb3J0cyBibG9ja2VkLWJ5LVNUSS9Nb3ZTUy4KKyAgICAgICAgICAgICAqIEF0
-IGFueSBwb2ludCBpZiBCbG9ja2VkLWJ5LVNUSS9Nb3ZTUyBhcmUgYWN0aXZlLCBleHRyYSBWTUVu
-dHJ5CisgICAgICAgICAgICAgKiBjb25zaXN0ZW5jeSBjaGVja3MgYXJlIGFwcGxpZWQsIGNyb3Nz
-LWNoZWNraW5nIEVGTEFHUy5URiwKKyAgICAgICAgICAgICAqIFBFTkRJTkdfREJHLkJTIGFuZCBE
-RUJVR0NUTC5CVEYuICBUaGVzZSBjb25zaXN0ZW5jeSBjaGVja3MKKyAgICAgICAgICAgICAqIGFw
-cGx5IHRvIEFjdGl2aXR5LXN0YXRlLUhMVCB0b28sIGJ1dCBYZW4gZG9lc24ndCBzdXBwb3J0IHRo
-aXMuCiAgICAgICAgICAgICAgKgotICAgICAgICAgICAgICogVGhlIFZNRW50cnkgY2hlY2tzIHdo
-ZW4gRUZMQUdTLlRGIGlzIHNldCBkb24ndCBsaWtlIGEgVk1DUyBpbgotICAgICAgICAgICAgICog
-dGhpcyBzdGF0ZS4gIERlc3BpdGUgYSAjREIgcXVldWVkIGluIFZNRU5UUllfSU5UUl9JTkZPLCB0
-aGUKLSAgICAgICAgICAgICAqIHN0YXRlIGlzIHJlamVjdGVkIGFzIERSNi5CUyBpc24ndCBwZW5k
-aW5nLiAgRml4IHRoaXMgdXAuCisgICAgICAgICAgICAgKiBUaGUgVk1DUyBzdGF0ZSBhdCB0aGUg
-cG9pbnQgb2YgI0RCIGludGVyY2VwdCBkb2VzIG5vdCBzYXRpc2Z5CisgICAgICAgICAgICAgKiB0
-aGUgY29uc2lzdGVuY3kgY2hlY2tzLiAgSW4gdGhlIGNhc2UgdGhhdCBhIFNpbmdsZVN0ZXAgc2hv
-dWxkCisgICAgICAgICAgICAgKiBiZSBwZW5kaW5nLCBmaWxsIFBFTkRJTkdfREJHIGJhY2sgaW4g
-dG8gc2F0aXNmeSB0aGUgY29uc2l0ZW5jeQorICAgICAgICAgICAgICogY2hlY2suCiAgICAgICAg
-ICAgICAgKi8KLSAgICAgICAgICAgIGlmICggdW5saWtlbHkocmVncy0+ZWZsYWdzICYgWDg2X0VG
-TEFHU19URikgKQorICAgICAgICAgICAgaWYgKCB1bmxpa2VseShyZWdzLT5lZmxhZ3MgJiBYODZf
-RUZMQUdTX1RGKSAmJgorICAgICAgICAgICAgICAgICAodm1yZWFkKEdVRVNUX0lOVEVSUlVQVElC
-SUxJVFlfSU5GTykgJgorICAgICAgICAgICAgICAgICAgKFZNWF9JTlRSX1NIQURPV19TVEkgfCBW
-TVhfSU5UUl9TSEFET1dfTU9WX1NTKSkgJiYKKyAgICAgICAgICAgICAgICAgISh2bXJlYWQoR1VF
-U1RfSUEzMl9ERUJVR0NUTCkgJiBJQTMyX0RFQlVHQ1RMTVNSX0JURikgKQogICAgICAgICAgICAg
-ewotICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgaW50X2luZm87Ci0KLSAgICAgICAgICAg
-ICAgICBfX3ZtcmVhZChHVUVTVF9JTlRFUlJVUFRJQklMSVRZX0lORk8sICZpbnRfaW5mbyk7Ci0K
-LSAgICAgICAgICAgICAgICBpZiAoIGludF9pbmZvICYgKFZNWF9JTlRSX1NIQURPV19TVEkgfCBW
-TVhfSU5UUl9TSEFET1dfTU9WX1NTKSApCi0gICAgICAgICAgICAgICAgewotICAgICAgICAgICAg
-ICAgICAgICB1bnNpZ25lZCBsb25nIHBlbmRpbmdfZGJnOwotCi0gICAgICAgICAgICAgICAgICAg
-IF9fdm1yZWFkKEdVRVNUX1BFTkRJTkdfREJHX0VYQ0VQVElPTlMsICZwZW5kaW5nX2RiZyk7Ci0g
-ICAgICAgICAgICAgICAgICAgIF9fdm13cml0ZShHVUVTVF9QRU5ESU5HX0RCR19FWENFUFRJT05T
-LAotICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcGVuZGluZ19kYmcgfCBEUl9TVEVQKTsK
-LSAgICAgICAgICAgICAgICB9CisgICAgICAgICAgICAgICAgQVNTRVJUKHZtcmVhZChHVUVTVF9Q
-RU5ESU5HX0RCR19FWENFUFRJT05TKSA9PSAwKTsKKyAgICAgICAgICAgICAgICBfX3Ztd3JpdGUo
-R1VFU1RfUEVORElOR19EQkdfRVhDRVBUSU9OUywgWDg2X0RSNl9CUyk7CiAgICAgICAgICAgICB9
-CiAKICAgICAgICAgICAgIGlmICggIXYtPmRvbWFpbi0+ZGVidWdnZXJfYXR0YWNoZWQgKQo=
-
---=separator
-Content-Type: application/octet-stream; name="xsa518-4.20.patch"
-Content-Disposition: attachment; filename="xsa518-4.20.patch"
-Content-Transfer-Encoding: base64
-
-RnJvbTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KU3ViamVjdDog
-eDg2L3ZteDogUmV3b3JrICNEQiBpbnRlcmNlcHQgbG9naWMgdG8gZml4IFZNRW50cnkgZmFpbHVy
-ZSB3aXRoIEJURgoKVGhlIGNvbnNpc3RlbmN5IGNoZWNrcyBpbiBlZmZlY3Qgd2hlbiBCbG9ja2Vk
-LWJ5LVNUSS9Nb3ZTUyBhcmUgYWN0aXZlIGluY2x1ZGVzCkRFQlVHQ1RMLkJURiB0b28uICBUYWtl
-IHRoaXMgaW50byBhY2NvdW50IHdoZW4gZWRpdGluZyBQRU5ESU5HX0RCRy5CUy4KClRoaXMgZW5k
-cyB1cCBuYXJyb3dpbmcgdGhlIGNhc2VzIHdoZXJlIFBFTkRJTkdfREJHIGlzIG1vZGlmaWVkLiAg
-UmV3b3JrIHRoZQpjb21tZW50IHRvIGJlIG1vcmUgcHJlY2lzZS4KClRoaXMgaXMgWFNBLTUxOCAv
-IENWRS0yMDI2LTc5NjExLgoKRml4ZXM6IDFkM2ViODI1OTgwNCAoIng4Ni92dHg6IFdvcmsgYXJv
-dW5kIFNpbmdsZVN0ZXAgKyBTVEkvTW92U1MgVk1FbnRyeSBmYWlsdXJlcyIpClJlcG9ydGVkLWJ5
-OiBUZWRkeSBBc3RpZSA8dGVkZHkuYXN0aWVAdmF0ZXMudGVjaD4KU2lnbmVkLW9mZi1ieTogQW5k
-cmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KUmV2aWV3ZWQtYnk6IEphbiBC
-ZXVsaWNoIDxqYmV1bGljaEBzdXNlLmNvbT4KUmV2aWV3ZWQtYnk6IFRlZGR5IEFzdGllIDx0ZWRk
-eS5hc3RpZUB2YXRlcy50ZWNoPgoKLS0tIGEveGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMKKysr
-IGIveGVuL2FyY2gveDg2L2h2bS92bXgvdm14LmMKQEAgLTQyODEsMjYgKzQyODEsMzAgQEAgdm9p
-ZCBhc21saW5rYWdlIHZteF92bWV4aXRfaGFuZGxlcihzdHJ1YwogICAgICAgICAgICAgICogV2Ug
-aW50ZXJjZXB0ICNEQiB1bmNvbmRpdGlvbmFsbHkgdG8gd29yayBhcm91bmQgQ1ZFLTIwMTUtODEw
-NCAvCiAgICAgICAgICAgICAgKiBYU0EtMTU2IChndWVzdC1rZXJuZWwgaW5kdWNlZCBob3N0IERv
-UykuCiAgICAgICAgICAgICAgKgotICAgICAgICAgICAgICogU1RJL01vdlNTIHNoYWRvd3MgYmxv
-Y2svZGVmZXIgaW50ZXJydXB0cy9leGNlcHRpb25zIChleGFjdAotICAgICAgICAgICAgICogZGV0
-YWlscyBhcmUgY29tcGxpY2F0ZWQgYW5kIHBvb3JseSBkb2N1bWVudGVkKS4gIERlYnVnCi0gICAg
-ICAgICAgICAgKiBleGNlcHRpb25zIGRlbGF5ZWQgZm9yIGFueSByZWFzb24gYXJlIHN0b3JlZCBp
-biB0aGUKLSAgICAgICAgICAgICAqIFBFTkRJTkdfREJHX0VYQ0VQVElPTlMgZmllbGQuCisgICAg
-ICAgICAgICAgKiBNb3N0IHNvdXJjZXMgb2YgI0RCIGFjY3VtdWF0ZSBzdGF0dXMgaW4gUEVORElO
-R19EQkcsIHdoaWNoIGFyZQorICAgICAgICAgICAgICogdGhlbiBkaXNwYXRjaGVkIGluIHByaW9y
-aXR5IG9yZGVyIHByaW9yIHRvIGZldGNoaW5nIHRoZSBuZXh0CisgICAgICAgICAgICAgKiBpbnN0
-cnVjdGlvbi4gIFdoZW4gdGhlICNEQiBpbnRlcmNlcHQgdHJpZ2dlcnMsIFBFTkRJTkdfREJHIGlz
-IDAKKyAgICAgICAgICAgICAqIHdpdGggdGhlIHN0YXR1cyBiaXRzIGhhdmluZyBtb3ZlZCBpbnRv
-IEVYSVRfUVVBTElGSUNBVElPTi4KICAgICAgICAgICAgICAqCi0gICAgICAgICAgICAgKiBUaGUg
-ZmFsbGluZyBlZGdlIG9mIFBFTkRJTkdfREJHIGNhdXNlcyAjREIgdG8gYmUgZGVsaXZlcmVkLAot
-ICAgICAgICAgICAgICogcmVzdWx0aW5nIGluIGEgVk1FeGl0LCBhcyAjREIgaXMgaW50ZXJjZXB0
-ZWQuICBUaGUgVk1DUyBzdGlsbAotICAgICAgICAgICAgICogcmVwb3J0cyBibG9ja2VkLWJ5LVNU
-SS9Nb3ZTUy4KKyAgICAgICAgICAgICAqIEF0IGFueSBwb2ludCBpZiBCbG9ja2VkLWJ5LVNUSS9N
-b3ZTUyBhcmUgYWN0aXZlLCBleHRyYSBWTUVudHJ5CisgICAgICAgICAgICAgKiBjb25zaXN0ZW5j
-eSBjaGVja3MgYXJlIGFwcGxpZWQsIGNyb3NzLWNoZWNraW5nIEVGTEFHUy5URiwKKyAgICAgICAg
-ICAgICAqIFBFTkRJTkdfREJHLkJTIGFuZCBERUJVR0NUTC5CVEYuICBUaGVzZSBjb25zaXN0ZW5j
-eSBjaGVja3MKKyAgICAgICAgICAgICAqIGFwcGx5IHRvIEFjdGl2aXR5LXN0YXRlLUhMVCB0b28s
-IGJ1dCBYZW4gZG9lc24ndCBzdXBwb3J0IHRoaXMuCiAgICAgICAgICAgICAgKgotICAgICAgICAg
-ICAgICogVGhlIFZNRW50cnkgY2hlY2tzIHdoZW4gRUZMQUdTLlRGIGlzIHNldCBkb24ndCBsaWtl
-IGEgVk1DUyBpbgotICAgICAgICAgICAgICogdGhpcyBzdGF0ZS4gIERlc3BpdGUgYSAjREIgcXVl
-dWVkIGluIFZNRU5UUllfSU5UUl9JTkZPLCB0aGUKLSAgICAgICAgICAgICAqIHN0YXRlIGlzIHJl
-amVjdGVkIGFzIERSNi5CUyBpc24ndCBwZW5kaW5nLiAgRml4IHRoaXMgdXAuCisgICAgICAgICAg
-ICAgKiBUaGUgVk1DUyBzdGF0ZSBhdCB0aGUgcG9pbnQgb2YgI0RCIGludGVyY2VwdCBkb2VzIG5v
-dCBzYXRpc2Z5CisgICAgICAgICAgICAgKiB0aGUgY29uc2lzdGVuY3kgY2hlY2tzLiAgSW4gdGhl
-IGNhc2UgdGhhdCBhIFNpbmdsZVN0ZXAgc2hvdWxkCisgICAgICAgICAgICAgKiBiZSBwZW5kaW5n
-LCBmaWxsIFBFTkRJTkdfREJHIGJhY2sgaW4gdG8gc2F0aXNmeSB0aGUgY29uc2l0ZW5jeQorICAg
-ICAgICAgICAgICogY2hlY2suCiAgICAgICAgICAgICAgKi8KICAgICAgICAgICAgIGlmICggdW5s
-aWtlbHkocmVncy0+ZWZsYWdzICYgWDg2X0VGTEFHU19URikgKQogICAgICAgICAgICAgewotICAg
-ICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgaW50X2luZm87CisgICAgICAgICAgICAgICAgdW5z
-aWduZWQgbG9uZyBpbnRfaW5mbywgZGVidWdjdGw7CiAKICAgICAgICAgICAgICAgICBfX3ZtcmVh
-ZChHVUVTVF9JTlRFUlJVUFRJQklMSVRZX0lORk8sICZpbnRfaW5mbyk7CisgICAgICAgICAgICAg
-ICAgX192bXJlYWQoR1VFU1RfSUEzMl9ERUJVR0NUTCwgJmRlYnVnY3RsKTsKIAotICAgICAgICAg
-ICAgICAgIGlmICggaW50X2luZm8gJiAoVk1YX0lOVFJfU0hBRE9XX1NUSSB8IFZNWF9JTlRSX1NI
-QURPV19NT1ZfU1MpICkKKyAgICAgICAgICAgICAgICBpZiAoIChpbnRfaW5mbyAmIChWTVhfSU5U
-Ul9TSEFET1dfU1RJIHwgVk1YX0lOVFJfU0hBRE9XX01PVl9TUykpICYmCisgICAgICAgICAgICAg
-ICAgICAgICAhKGRlYnVnY3RsICYgSUEzMl9ERUJVR0NUTE1TUl9CVEYpICkKICAgICAgICAgICAg
-ICAgICB7CiAgICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGxvbmcgcGVuZGluZ19kYmc7CiAK
+RnJvbTogSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPgpTdWJqZWN0OiBnbnR0YWI6IGFk
+ZHJlc3MgZmFsbG91dCBmcm9tIFhTQS01MDEKCkEgdjEgLT4gdjIgY2hhbmdlIGlzbid0IHRoZSBv
+bmx5IHNjZW5hcmlvIHdoZXJlICJzdGF0dXMiIG1heSBnbyBzdGFsZSBpbgptYXBfZ3JhbnRfcmVm
+KCkuIEFjcm9zcyBhIHYyIC0+IHYxIC0+IHYyIGNoYW5nZSB0aGUgc3RhdHVzIHBhZ2VzIHdvdWxk
+CmhhdmUgYmVlbiBmcmVlZCBhbmQgcmUtcG9wdWxhdGVkLCBwb3NzaWJseSBjaGFuZ2luZyB0aGUg
+cGFnZXMgdXNlZCBmb3IgdGhlCmFycmF5LiBDaGVjayB0aGUgcG9pbnRlciBhZ2FpbnN0IHRoZSBl
+eHBlY3RlZCB2ZXJzaW9uLWRlcGVuZGVudCB2YWx1ZS4KClRoaXMgaXMgWFNBLTUxNyAvIENWRS0y
+MDI2LTc5NjEwLgoKRml4ZXM6IDk2ZGZlYjQxNzc0YSAoImdudHRhYjogY29wZSB3aXRoIHZlcnNp
+b24gY2hhbmdlcyByYWNpbmcgb3RoZXIgb3BlcmF0aW9ucyIpCkFzc2lzdGVkLWJ5OiBDbGF1ZGUK
+UmVwb3J0ZWQtYnk6IFRlZGR5IEFzdGllIDx0ZWRkeS5hc3RpZUB2YXRlcy50ZWNoPgpTaWduZWQt
+b2ZmLWJ5OiBKYW4gQmV1bGljaCA8amJldWxpY2hAc3VzZS5jb20+ClJldmlld2VkLWJ5OiBUZWRk
+eSBBc3RpZSA8dGVkZHkuYXN0aWVAdmF0ZXMudGVjaD4KLS0tCnYyOiBBZGQgcGFyZW50aGVzZXMg
+YXJvdW5kIHRoZSB8fCBleHByZXNzaW9uLgoKLS0tIGEveGVuL2NvbW1vbi9ncmFudF90YWJsZS5j
+CisrKyBiL3hlbi9jb21tb24vZ3JhbnRfdGFibGUuYwpAQCAtMTM1MCwxMyArMTM1MCwxOSBAQCBt
+YXBfZ3JhbnRfcmVmKAogCiAgICAgZ3JhbnRfcmVhZF9sb2NrKHJndCk7CiAKLSAgICBpZiAoIHVu
+bGlrZWx5KGV2YWx1YXRlX25vc3BlYygocmd0LT5ndF92ZXJzaW9uID09IDEpICE9Ci0gICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgICAgICAgKHN0YXR1cyA9PSAmc2hhaC0+ZmxhZ3MpKSkgKQor
+ICAgIC8qCisgICAgICogQWZ0ZXIgYSB2MSAtPiB2MiBjaGFuZ2UgYmVoaW5kIG91ciBiYWNrcyAi
+cmVmIiBtYXkgbm93IGJlIG91dCBvZgorICAgICAqIGJvdW5kcy4gIFdoaWxlIGFmdGVyIGEgdjIg
+LT4gdjEgLT4gdjIgY2hhbmdlICJyZWYiIHdvdWxkIHN0aWxsIGJlCisgICAgICogc3VpdGFibHkg
+Ym91bmRlZCwgdGhlIHVuZGVybHlpbmcgc3RhdHVzIHBhZ2UgbWF5IGhhdmUgbW92ZWQuCisgICAg
+ICovCisgICAgaWYgKCBldmFsdWF0ZV9ub3NwZWMocmd0LT5ndF92ZXJzaW9uID09IDEKKyAgICAg
+ICAgICAgICAgICAgICAgICAgICA/IHN0YXR1cyAhPSAmc2hhaC0+ZmxhZ3MKKyAgICAgICAgICAg
+ICAgICAgICAgICAgICA6IChyZWYgPj0gbnJfZ3JhbnRfZW50cmllcyhyZ3QpIHx8CisgICAgICAg
+ICAgICAgICAgICAgICAgICAgICAgc3RhdHVzICE9ICZzdGF0dXNfZW50cnkocmd0LCByZWYpKSkg
+KQogICAgIHsKICAgICAgICAgLyoKLSAgICAgICAgICogQWZ0ZXIgYSB2MSAtPiB2MiBjaGFuZ2Ug
+YmVoaW5kIG91ciBiYWNrcyAicmVmIiBtYXkgbm93IGJlIG91dCBvZgotICAgICAgICAgKiBib3Vu
+ZHMuICBSZWNhbGN1bGF0ZSBpdCwgYnV0IG9ubHkgZm9yIHJlc2VydmVkIGVudHJpZXMuICBPdGhl
+cnMKLSAgICAgICAgICogd2lsbCBoYXZlIGJlZW4gY2xlYXJlZCBhbnl3YXkgYnkgdGhlIHZlcnNp
+b24gY2hhbmdlLgorICAgICAgICAgKiBSZWNhbGN1bGF0ZSBzdGF0dXMsIGJ1dCBvbmx5IGZvciBy
+ZXNlcnZlZCBlbnRyaWVzLiAgT3RoZXJzIHdpbGwKKyAgICAgICAgICogaGF2ZSBiZWVuIGNsZWFy
+ZWQgYW55d2F5IGJ5IHRoZSB2ZXJzaW9uIGNoYW5nZShzKS4KICAgICAgICAgICovCiAgICAgICAg
+IGlmICggcmVmIDwgR05UVEFCX05SX1JFU0VSVkVEX0VOVFJJRVMgKQogICAgICAgICAgICAgc3Rh
+dHVzID0gZXZhbHVhdGVfbm9zcGVjKHJndC0+Z3RfdmVyc2lvbiA9PSAxKQo=
 
 --=separator--
 
