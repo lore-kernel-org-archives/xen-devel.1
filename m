@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1A7ACC6B19
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 16:27:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448181.1664245 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30868CC6B19
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 16:29:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448187.1664255 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGfL6-00053t-IJ; Tue, 13 Oct 2026 16:26:56 +0000
+	id 1xGfNW-00060k-1V; Tue, 13 Oct 2026 16:29:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448181.1664245; Tue, 13 Oct 2026 16:26:56 +0000
+Received: by outflank-mailman (output) from mailman id 1448187.1664255; Tue, 13 Oct 2026 16:29:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGfL6-00053m-Fc; Tue, 13 Oct 2026 16:26:56 +0000
-Received: by outflank-mailman (input) for mailman id 1448181;
- Tue, 13 Oct 2026 16:26:54 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xGfNV-00060d-UZ; Tue, 13 Oct 2026 16:29:25 +0000
+Received: by outflank-mailman (input) for mailman id 1448187;
+ Tue, 13 Oct 2026 16:29:24 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <peter.maydell@linaro.org>) id 1xGfL4-00053g-OK
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 16:26:54 +0000
+ (envelope-from <peter.maydell@linaro.org>) id 1xGfNU-00060P-EB
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 16:29:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGfL4-00G4P5-5I
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 18:26:54 +0200
+ id 1xGfNT-001oJf-GX
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 18:29:23 +0200
 Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <peter.maydell@linaro.org>)
- id 6ace5bc9-e002-0a2a0a5209dd-0a2a450bb0c4-8
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 18:26:54 +0200
-Received: from [209.85.128.181] (helo=mail-yw1-f181.google.com)
+ id 6ace5c58-bab6-0a2a0a5309dd-0a2a450b9c24-16
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 18:29:23 +0200
+Received: from [209.85.128.170] (helo=mail-yw1-f170.google.com)
  by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <peter.maydell@linaro.org>)
- id 6ace5bcd-b7e8-0a2a450b0019-d15580b5ac3f-3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 18:26:53 +0200
-Received: by mail-yw1-f181.google.com with SMTP id
- 00721157ae682-8726acc5eadso24297607b3.0
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 09:26:53 -0700 (PDT)
+ id 6ace5c62-b7e8-0a2a450b0019-d15580aac90e-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 18:29:23 +0200
+Received: by mail-yw1-f170.google.com with SMTP id
+ 00721157ae682-8ab38a051aaso25228897b3.3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 09:29:22 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,102 +49,128 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1791908812; cv=none;
+ARC-Seal: i=1; a=rsa-sha256; t=1791908962; cv=none;
         d=google.com; s=arc-20260327;
-        b=ATbktG6+tw+meNWDiT1JJIaiBsg1SnUCURcbYeKkpYNbzckOmfFJMPF2HhnfwG1gpW
-         wxhZxHhCbZX3TYceshSqa4o8KG1N2ErURmfIOBgkW+hNyIzlrTzeK+laocwKgU6v84PJ
-         ik2tIoo7etis8wsIeQvBqNSHIYAE/YhRARcp5ZZdB+ElGBqlc7PO0Km3fs4U/nCzgWvJ
-         1WcXeyA+XXycLxMEmGVpRNNASshIxB8DzpO1TDhR8iVYCISjmsV0juH+ZrBLhkRAREUn
-         5lprpetpWVunPEm/l9DeWkLtFcqXKLkN9hbefgFo2iiO0Av8S0fq/wnJbLFG6bcKqNM1
-         9/Dg==
+        b=O2dfiuxpdKwluCw/PBHCErVYzmxJpNTylN6I4W+1dtfzgXUQuqk9lwNFmY7azc/jDR
+         tf9AkgL4A1pqpFR6fm8i+CAr0sJFirnBU5U8lFeB/7v2cPgvxbSvOk815PUr//Pu48Ob
+         xVyapa7X44UI4HiMa+eWzoJr8y85AEAmOfRRHp2U7InAfHphtpfjf+wlOrJua0i9Vzch
+         LpXU0P50/BVLezXJdx/fJdNSshrVyTpEtKL3tUClgp8T+FcG0jX2CbU7PWtirh6iROpo
+         HueVET0Lhc/oBXr0CcancZdywGVhQU5OhdboE1PU39nUX7zf/88Dv792Xw7Hqmmo95s3
+         005Q==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=lfW0nUOSaRUIuZAH3PPaoOxVv0uganAcfQGMmdwJiqI=;
-        fh=9VMul4XEbI4AZThU/pUXmxEzBjQG999I7MjlUiUptPs=;
-        b=GMEDKwkl8zMfWRj5DpDxXSFdsFg4T83BRkcMiyDyE1xDvgW5qbl/AmmVzucq1FfFWA
-         KWz3yyFeI0Dm2N19xiOLbxRLzcLXml/5M9G1sLavBvekxXsxH5Mc6HpMm3klwcKWPGDx
-         tJD/ffATRDRJYACBqBQdjSPylPmgpg2BCDEaLQThH8Y+IYAr4szX7lXB+LgazrXoKZYr
-         fF/UkOi/qV1CdefUpLSVCL+AJZ9N14u1zTQUCheJlfpxerMvv1GJfVNQWzFfTuvmiyX1
-         XXgOhT1RWgLvcGV5WQmTaUx1mt64Pez6SBDgM3RXUUJRDnLZvVKLSsdRtUaOs/PFtpKu
-         HsPQ==;
+        bh=jXo9q1ZmZcN51gvyAI6giPbieASxcFI/Rz78Tc/rF4k=;
+        fh=soxJElAlokBxb0qXlToTWx+nLUSaWOMvgPaeVh3fGx8=;
+        b=mW9pfk8bDz7ey1bAQ5MjmKfvm1F85E+Loa1nc6XBb0JTTxQ6DUxx4CMfx7g2RNU06Y
+         rpGxZt6gNb1/u4pCVRQ/Qgm93qgocuSdwJ/w2VrJfoJqJKTQonfU0ZxrqBNhLHfjiuFs
+         vtN8DNMqli3S3VXwEb8PVAkRiIGPSsjuWLw6CCotIlMI8BoTQsi2LOfbMDTiXMGC5903
+         X7mQydqnfKuB/xBHxZ1k+cV/j1nQyC73Ps7cstYw6yYCZYns0NnUjVYigERCv+L0vu+/
+         wHLhPj50Td/uHXPpZwmmNYg6r4CWOZUqHp8jcTPDk7veNkkdGBUC9+30Jh8t0qZh915o
+         LPHQ==;
         darn=lists.xenproject.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791908812; x=1792513612; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1791908962; x=1792513762; darn=lists.xenproject.org;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=lfW0nUOSaRUIuZAH3PPaoOxVv0uganAcfQGMmdwJiqI=;
-        b=kNovbmlIm13kSlVsqTlGmVbVYdLMA6Q7xxWlpI8vjjOV4A4Y1D1ldCGSCgJOANmYbH
-         AR2Ix6FoaS69GIlPl5JUmofIBDOi9++gCpXWAcWhVfRuxW2Nu9xK3b0dx1lese1jEvIv
-         /HSRaCbFVsg2n2iGUPg5UkYDFE/L1jCze8ciXJz4aQ4m7pHG/pBnH6VVkHjZXWguld4D
-         Zg12SqrjGhdEJV7I7lpOjtp8jcP1zeeN7I2VAHy6MeQQnEJF9ikaHHi1R53FDShwdW7p
-         Gw6mg/8Ecbzhonnj5GZWBYr86NH3hY//SZbfyiLEaULCqvJuIfoFGTs+wqnQDiUwwpzD
-         ZmnA==
+        bh=jXo9q1ZmZcN51gvyAI6giPbieASxcFI/Rz78Tc/rF4k=;
+        b=dUPCRbkbVGnQgh56hdz9PnC/FzbqZzGNjxKgnaXZEUBVS4zEWdrg32WoS5Fg9GUnHJ
+         kgXm78l0mV2uXws6JQ6lk6K/RHzLQby0I8MfWIbKxojKS1QsbprqyjugctMfNee8gsYQ
+         bKaL+F4NAoe0k5NQFwHyrERNOo1/Ja/YHVNyRVXBKFbQyHABgHaY+DuvqSwYPJ0xBEh1
+         PBn0o8xF70X2PrGmCz/n8pRCE4KFAWu7n0HwpDzXEcX3ouH8+pP88cXL8TvT3IPgdhJM
+         cAqjHy6aFrMVwvYxtPJKzKu5Uq10O0Iksp21TLFy1pZeXZqSmV6P+qrNqKQVW9o7RZdc
+         9miA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791908812; x=1792513612;
+        d=1e100.net; s=20260707; t=1791908962; x=1792513762;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=lfW0nUOSaRUIuZAH3PPaoOxVv0uganAcfQGMmdwJiqI=;
-        b=Z0cCT36ejORszgOwRa/TJDe9SwF8MEYJd7dEVKHsn/R3huSPVq6nfXn5kldo9M9O4k
-         5KI9Ku12LRuhxOpu6ZDXW4YfzVaWoj7YMkN7nSzc8bUeIJccNx0pC35ayjj8ejzrQJUh
-         2tJMmHfIBJwL7OHtcdhSt1hYvt4IO58Z+CWwT5AGcil5ffnunumHvtay9C+9X0OSb3h9
-         JKTNqWYrG6vjHdCMnlcGYxVvvcYCDdp67hFr3SUWnaZ3PvMwCppKNVnhRie4REhbqnrm
-         p+fqZ5M2Q9v9Rf3Q5PLD/ooeIfmdFsuKzV2GKJ/30Iuifo5y7mxXyfuAARH9xDYYcKFn
-         mmuA==
-X-Forwarded-Encrypted: i=1; AKwUvBzb14xX7/y92GUTF0HhVbbzFWBHYpY5uZtxpBXTAJUgxawkoDKSWCK5+wwo2QSD/lD6/MsLToRcZxY=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYL7Sea5Za3+D7i/YYNwSMpM6vt7P/sEKJX81RO5jK9DU66Va5U7
-	Xaqw5Abd3wXB/u1cPI9LbymEJOiu+pgCZKMeIZRdnjOcytd2e07fL3FGatY+ZL1bJGxlQUAt9Nr
-	RlU1ePa2/We7/6Xcbz6UiMqgIqfMzKjZ6+sPmMLg4NQ==
-X-Gm-Gg: AYBFou3gkaO/3JpBG2ceEtxU7eQ7hP7WZOlc+LMDcqfp2C4me8b7qGu7/2G6XxexoVj
-	6xnQTJeG9kqP/Y5fZL4TcBdg6BxbOR9910CXioK86tYvhkS/+ZhdWVTei/G+LjdprF94pYYPPcN
-	mtE+BASbIoNk5so62biAozAXWC65ue/ja/rQryR5PB2Z2n6jOqxRLziRKNROyy+rkv2Zcy6TG5d
-	0frfBwKmH/Ks/X7drOXLa6AQEgRV9M4ANGUWpqO8T80qIlxCAOpjj5YdfpL6NzJ/tgZEvZno6HV
-	XkBBGS6k3l26Im3YHL9LDrXF8OLFSrWA6X9h0TU4E0rA0tr6wlm+sa1GHX1qjTzrNCx9K4P3xPD
-	h/oVtw/KnW00brqmvfWuS8IphmBY9xHFVzPR6C4o=
-X-Received: by 2002:a05:690c:e3cd:b0:8b0:ad62:19aa with SMTP id
- 00721157ae682-8b0ad6230f0mr19157117b3.33.1791908812379; Tue, 13 Oct 2026
- 09:26:52 -0700 (PDT)
+        bh=jXo9q1ZmZcN51gvyAI6giPbieASxcFI/Rz78Tc/rF4k=;
+        b=cTl9IAqXMWIyqbrcqFKpn3PEG0U3jv9etLR4Vl3SBpwYVtrTOQQUcdsf5/gdBkO0Jl
+         vzhgLEEOBOkabSXp7ggDMNwC5UD5nVcqNoJ05yocmEJfAnpqNXU+ZYGF4mZYVbaO1Zop
+         NdjIPjLRN2ev7aPUH6+4+mMQtCk/990JVNjBabXrA58fEUNrAemFDhO/LAEBEQf6xx43
+         Mcw9GEYMuNcXIOWWdrxbtSvTvCNKm/7LrrQBBg2l5SaQOvdKQSzczIFRPmYKHkElvA3i
+         jJyjBZunaenyhc5f53ODHNVKhfdsqS+lhmz5qVaN72vYpqpNJRPR/pvvejW2eRvF0ePT
+         HdlQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwQ6PvVTvM709WUJPLz7Gcgg5ETVypGZ2eJHveiGMd7OVFUjMBtzrxPpnBI0MObbbbtOECeohlNl7w=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJOsHbGRUdCQ0ZMJfu5yuBnFkK0pwEI8inrwGYbHh9Hu5tNP2ob
+	vDQxoUU+iOcSOdpwyHgyINemY11kG0CTRlfCgCf+wlIUqAua5wa8ZbMIXWYw0nCzPSZMl+vawFP
+	Y3INmplbgBgJOaGGqx7bUPxZRcCCGXqQbHtO5plkwYw==
+X-Gm-Gg: AYBFou35IJhzH2NT30TylvCT/MpGw2qfC04/sqWKXrlxV2rqPDDPEM6w/dGPmwbuMG0
+	b6LFCZmUlrG+ONeZ2nHKZnzeSuC+K9n8M5zlF6aHvdxFhngb9jCznCzwrHJpF3QfhFMK5uc/niG
+	i6amdEwQ3djtowbKiIc3F80aOJ5U4JOg+Q3vRR9boLS/eJtCcAQZqgPAsWl77y3+rMiHb88x49u
+	TwOzOLFvLxUvMcfru0aPwnJPf7OggyOd4fL6LC7lYxhzKykYcuOwJqyHIUMcwhHnMEP8+2tenQ/
+	q1anVKpvCeJYZucI9EAGfy+/3aXo2Byya5ccSDL7CnCUvpCeGDJK+7TzcGR9/yrP/To0g8ey61Q
+	sp79NFcPr+QSkmYLO/jt6JqFlhK+m14ezcT0Th+w=
+X-Received: by 2002:a05:690c:e1d9:10b0:8ae:dfee:cd30 with SMTP id
+ 00721157ae682-8b07ee80677mr32738227b3.56.1791908961569; Tue, 13 Oct 2026
+ 09:29:21 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260916104435.600211-1-mark.caveayland@nutanix.com> <20260916104435.600211-21-mark.caveayland@nutanix.com>
-In-Reply-To: <20260916104435.600211-21-mark.caveayland@nutanix.com>
+References: <20260916104435.600211-1-mark.caveayland@nutanix.com> <20260916104435.600211-22-mark.caveayland@nutanix.com>
+In-Reply-To: <20260916104435.600211-22-mark.caveayland@nutanix.com>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 13 Oct 2026 17:26:41 +0100
-X-Gm-Features: AclHuK9LMqtW-CAAZ3xrwGlJrfDwYU71aDjAnimvRogO_6sdanZdfIn2PpOI6Zc
-Message-ID: <CAFEAcA-BxUQAg6uVPn7EMP=xJ_J7oa6FD6hxZFrmQJmf=-VhoQ@mail.gmail.com>
-Subject: Re: [PATCH 20/22] i8259.c: switch isa_pic from I8259CommonState to I8259PICState
+Date: Tue, 13 Oct 2026 17:29:10 +0100
+X-Gm-Features: AclHuK-eFYommmfqG_nkwY0m20Dw4f51-5ZNktl8ml0khtEb6QlSNypivh2nwj4
+Message-ID: <CAFEAcA9vm7004bytZqYwXCNj_+VNy1RzKMqG3TDnJkswpNhLUg@mail.gmail.com>
+Subject: Re: [PATCH 21/22] i8259_common.c: remove static irq_count and
+ irq_level variables
 To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
 Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com, 
 	sstabellini@kernel.org, anthony@xenproject.org, edgar.iglesias@gmail.com, 
 	qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-42698a/1791908814-1AEDE9EA-5F644D85/0/0
+X-purgate-ID: tlsNG-42698a/1791908963-1AAD89EA-03191650/0/0
 X-purgate-type: clean
-X-purgate-size: 964
+X-purgate-size: 1568
 
-On Wed, 16 Sept 2026 at 11:49, Mark Cave-Ayland
+On Wed, 16 Sept 2026 at 11:50, Mark Cave-Ayland
 <mark.caveayland@nutanix.com> wrote:
 >
-> The isa_pic variable exists to allow the output to be fetched or read (fetched
-> and acknowledged) from the x86 PIC. Since this can also contain a cascaded
-> interrupt from a slave i8259, switch isa_pic from I8259CommonState to
-> I8259PICState and update both pic_get_output() and pic_read_irq() accordingly.
+> Adjust the parameters to i8259_stat_update_irq() to allow passing in pointers
+> to the irq_count and irq_level arrays, and then move the arrays into the
+> corresponding i8259 PIC and KVM PIC devices.
 >
-> This has the advantage that a i8259-based PIC device contains its own internal
-> reference to both the primary and secondary i8259s, and therefore it becomes
-> possible to completely remove the slave_pic variable.
+> Doing this allows the statistics capture logic in i8259_set_irq() that handles
+> incoming cascading interrupts to be removed.
 >
 > Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-> ---
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+> diff --git a/hw/i386/kvm/i8259.c b/hw/i386/kvm/i8259.c
+> index 421c9279cd..ca661afc02 100644
+> --- a/hw/i386/kvm/i8259.c
+> +++ b/hw/i386/kvm/i8259.c
+> @@ -30,6 +30,9 @@ struct KVMI8259PICState {
+>
+>      ISABus *isabus;
+>      I8259CommonState i8259[2];
+> +
+> +    int irq_level[ISA_NUM_IRQS];
+> +    uint64_t irq_count[ISA_NUM_IRQS];
+>  };
 
-(That isa_pic global is kind of ugly; in an ideal world the callers
-would have a pointer to the PIC they cared about rather than relying
-on there being exactly one in the system...)
 
-thanks
+> diff --git a/hw/intc/i8259.c b/hw/intc/i8259.c
+> index 3f10777036..ac43995ce4 100644
+> --- a/hw/intc/i8259.c
+> +++ b/hw/intc/i8259.c
+> @@ -49,14 +49,16 @@ struct I8259PICState {
+>      ISABus *isabus;
+>      IRQState i8259_primary_out_irq;
+>      I8259CommonState i8259[2];
+> +
+> +    int irq_level[ISA_NUM_IRQS];
+> +    uint64_t irq_count[ISA_NUM_IRQS];
+> +#ifdef DEBUG_IRQ_LATENCY
+> +    int64_t irq_time[ISA_NUM_IRQS];
+> +#endif
+>  };
+
+Would it make sense for these two types to have a common base
+class (where the stats stuff could then live)? AIUI they're
+both intending to provide the same interface ("pair of i8259
+devices cascaded together in the way that x86 does it").
+
 -- PMM
 
