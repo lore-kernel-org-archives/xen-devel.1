@@ -4,67 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B84ACC6B3D
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 12:07:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448893.1665883 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1855ACC6B34
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 12:07:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446671.1665870 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKEq-0000pI-0v; Thu, 15 Oct 2026 12:07:12 +0000
+	id 1xHKEp-0000Zy-6Q; Thu, 15 Oct 2026 12:07:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448893.1665883; Thu, 15 Oct 2026 12:07:11 +0000
+Received: by outflank-mailman (output) from mailman id 1446671.1665870; Thu, 15 Oct 2026 12:07:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKEp-0000o2-Ob; Thu, 15 Oct 2026 12:07:11 +0000
-Received: by outflank-mailman (input) for mailman id 1448893;
- Wed, 14 Oct 2026 12:05:36 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xHKEp-0000Ys-0q; Thu, 15 Oct 2026 12:07:11 +0000
+Received: by outflank-mailman (input) for mailman id 1446671;
+ Tue, 13 Oct 2026 05:36:32 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <sumanthk@linux.ibm.com>) id 1xGxjk-00029M-0m
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:05:36 +0000
+ (envelope-from <tpk.teshan@gmail.com>) id 1xGVBg-0004ns-1n
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 05:36:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGxjj-00GdSw-D4
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 14:05:35 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xGVBf-000dO6-Ec
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 07:36:31 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <sumanthk@linux.ibm.com>)
- id 6acf7006-8faa-0a2a0a5109dd-0a2a4504c278-24
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:05:35 +0200
-Received: from [148.163.156.1] (helo=mx0a-001b2d01.pphosted.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <sumanthk@linux.ibm.com>)
- id 6acf700d-b57f-0a2a45040019-94a39c01a69c-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:05:34 +0200
-Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69E9waOp2016607; Wed, 14 Oct 2026 12:04:53 GMT
-Received: from ppma21.wdc07v.mail.ibm.com
- (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4h7dugm5g8-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 14 Oct 2026 12:04:52 +0000 (GMT)
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma21.wdc07v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69EAnqN23211855; Wed, 14 Oct 2026 12:04:51 GMT
-Received: from smtprelay02.fra02v.mail.ibm.com ([9.218.2.226])
- by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4h9q2ymp38-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Wed, 14 Oct 2026 12:04:51 +0000 (GMT)
-Received: from smtpav01.fra02v.mail.ibm.com (smtpav01.fra02v.mail.ibm.com
- [10.20.54.100])
- by smtprelay02.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 69EC4l5Q50397474
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Wed, 14 Oct 2026 12:04:47 GMT
-Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 287A32004B;
- Wed, 14 Oct 2026 12:04:47 +0000 (GMT)
-Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 7EC8420040;
- Wed, 14 Oct 2026 12:04:45 +0000 (GMT)
-Received: from li-0f4bfd12-9554-4bfb-8b14-7ccf0f0767af.ibm.com (unknown
- [9.111.94.206])
- by smtpav01.fra02v.mail.ibm.com (Postfix) with ESMTPS;
- Wed, 14 Oct 2026 12:04:45 +0000 (GMT)
+ (envelope-from <tpk.teshan@gmail.com>)
+ id 6acdc35b-8faa-0a2a0a5109dd-0a2a450cba12-14
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 07:36:31 +0200
+Received: from [209.85.216.43] (helo=mail-pj1-f43.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <tpk.teshan@gmail.com>)
+ id 6acdc35d-f479-0a2a450c0019-d155d82bd831-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 07:36:31 +0200
+Received: by mail-pj1-f43.google.com with SMTP id
+ 98e67ed59e1d1-3a0aaa0fd13so1758365a91.2
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 22:36:30 -0700 (PDT)
+Received: from laptop ([175.157.230.130]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3ab38f4863esm22898117a91.11.2026.10.12.22.36.26
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Oct 2026 22:36:28 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -76,125 +52,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-type:date:from:in-reply-to:message-id:mime-version
-	:references:subject:to; s=pp1; bh=ajZHd+qh6V9vTCXwQWUfdpmTLNkyLK
-	ozm1g9bOoFoFc=; b=JYQ2N0nSXD/tQ/r+o3naoBOH1U+r2oPu+xjGpN+7txoDex
-	Z0IWl63DxMAVur3sx+kmGREDCBqZc6k1HCDRjrOoEK+taOKH1OloSc9taF9O0FWY
-	WpVjMbVUV3y+904j6Wquin+qDgUZtE0vakTE5A47rqq/xC7whZpk/bAH05j6NUMo
-	GyNvztnXQB+E5AUtc1L0KRpmZ7LHjGzNNOr8tWNd56WpJVQz0J/T0JweCGvwVkOM
-	38Ai7Y5IXwL6To2w1AEdek15AbDAMLoAedQcEW17k9uz90AlYajIG2XNMhTS+zOV
-	bWm4qcBhLuQq6bVn5TQRsfV9c0VsPZQvM+kgHPMQ==
-Date: Wed, 14 Oct 2026 14:04:44 +0200
-From: Sumanth Korikkar <sumanthk@linux.ibm.com>
-To: Ian Rogers <irogers@google.com>
-Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-        "Rafael J . Wysocki" <rafael@kernel.org>,
-        Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
-        Kees Cook <kees@kernel.org>, Nathan Chancellor <nathan@kernel.org>,
-        Nick Desaulniers <ndesaulniers@google.com>,
-        Bill Wendling <morbo@google.com>,
-        Justin Stitt <justinstitt@google.com>,
-        Jonathan Corbet <corbet@lwn.net>,
-        Madhavan Srinivasan <maddy@linux.ibm.com>,
-        Michael Ellerman <mpe@ellerman.id.au>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        Christophe Leroy <chleroy@kernel.org>,
-        Nayna Jain <nayna@linux.ibm.com>,
-        Yoshinori Sato <ysato@users.sourceforge.jp>,
-        Rich Felker <dalias@libc.org>,
-        John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
-        Viresh Kumar <viresh.kumar@linaro.org>,
-        David Teigland <teigland@redhat.com>,
-        Alexander Aring <aahringo@redhat.com>, Juergen Gross <jgross@suse.com>,
-        Stefano Stabellini <sstabellini@kernel.org>,
-        Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-        Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
-        Alexander Gordeev <agordeev@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Sven Schnelle <svens@linux.ibm.com>,
-        Richard Weinberger <richard@nod.at>,
-        Zhihao Cheng <chengzhihao1@huawei.com>,
-        Felix Kuehling <Felix.Kuehling@amd.com>,
-        Alex Deucher <alexander.deucher@amd.com>,
-        Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-        driver-core@lists.linux.dev, llvm@lists.linux.dev,
-        linux-hardening@vger.kernel.org, linux-doc@vger.kernel.org,
-        linuxppc-dev@lists.ozlabs.org, linux-sh@vger.kernel.org,
-        linux-pm@vger.kernel.org, linux-acpi@vger.kernel.org,
-        gfs2@lists.linux.dev, xen-devel@lists.xenproject.org,
-        linux-s390@vger.kernel.org, linux-mtd@lists.infradead.org,
-        amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-        linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 08/11] s390/sclp_mem: Allocate struct sclp_mem
- dynamically and add kobject release
-Message-ID: <as9v3PUb0TymCvsc@li-0f4bfd12-9554-4bfb-8b14-7ccf0f0767af.ibm.com>
-References: <20261013223946.1836757-1-irogers@google.com>
- <20261013223946.1836757-9-irogers@google.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791869789; x=1792474589; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=31jej+zw5eC3wdks2N/0FrXz19KzIMeRP96y4F0yMqY=;
+        b=lB5Y4BVdzKoAhMkIvOAKLK+rpLLKjqFM0LN2xkM5Q+xB/qohtXxUpe7MTDBf7GpQ/M
+         IhFwbOWaLmS62NkTR0Mym2IpSZtaGNIHXXOex+PGf7f70Jh410OZWIQq+T8GryKKHujB
+         aAQPlXS+O52xD5iSRuT6UpQ/K9RAktSYDPqaWfi5tFGpq4geqa+tQNJlcYLvF8i8FFGd
+         URRUZB91MDatTz4ll0dadSCd4Q0KGbbp9HxM5QSQJjSHyjplhQAZL9WnPNSsudZmBF/F
+         Vr2g+7AQa4p6xduTzL5GNkvc7KBxer+7uledE2asNwO+L40aE4f/whQxmBDNXszPcC5c
+         TIWA==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791869789; x=1792474589;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=31jej+zw5eC3wdks2N/0FrXz19KzIMeRP96y4F0yMqY=;
+        b=CaCfvC9D0EIQbvz9382zSh+qHKMhV49VkhKylEQ1lbXkaTi/i7pqlmcHsNYq/cDr20
+         camNCQAojT09FyptdRltecnnMFfYaYs6/8s+Uusw1gFKmCd6Q4ANWjWXRIYuWwHOjsSm
+         GFFAkPMacDrjH8MAF7QGr3hJlZXpo6uYRg7Wd278BtwTIvW9idxm7OxIAVeU12PlWyq5
+         fqLXzcSzY8hWf7Txf+r3ozWG9wM4RNJBHOKjzt4rVE9554foafch125h8vyh+5xvnbtZ
+         vaS5kTmBfxXRd+atDFrH5bCBinPrMi7n1JJjtVWxhToJs7lpB+PuG4eaMXCNV8b13bRn
+         6gsg==
+X-Forwarded-Encrypted: i=1; AKwUvBxKBn9M4a1qIJ2ONYsci2gNt8QbW0DUMFdsOAMktaIw0hMZBNx2MgdnGyI7F854wvkt6gvOn4DuA0Y=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYLmO8wKuOQboJ3b/aG1nfyrR0b696H0YtyIurEYtXBXgg5cxr2q
+	TS4R4ZMpsPdksu8ex/h4bf8cPUCGlhNL2dvWyKOIijQSoYgI5y4pNIxpOF2/jtx3
+X-Gm-Gg: AYBFou0mKsYvgyARwDjUvXf0RSueJN8qBkMjt+oI8bmBZxeRew1H/A530wJiEMRyUvl
+	9v7NWYaLTGZ1hnhqtcJFBSJa9mMONfhUilprLB/kLf35cXrYrcOWCAh0tNKGQCN6N37Os/nhjEQ
+	4vCm8PTeYK6uvln0SoYArU86ie6BXYFzPsvTatlT+tV75OXqC1IHG7/X2UpRxs6ZWVdtbO1hkvx
+	RiK9e/S0X9ontfZz8yz03JUGn0IBmcygA4jf40sGVfm81T+Im+kNE8rlOAT3na2fFvodR26kKEb
+	d9mP4ImxV+Co45sSBjLDHOvI/+bUPcvEe/tFFhSW+R2785vSH+X4wrHn6t5+TD8ulpjqskWMXPv
+	4KkC9fDfJS+COe7QyESIaeLWY5jDjcs/AtMKyQ1xhBGWxnPtJhwRxf9Z3zqzpyXa59AhWmNykDm
+	c892/EVhOfsNb0wjmHvO1S20ofS44UTYzGZsi0Io6lDUDohWbxXb4wiFQLb3cfTEzS3NjuwmOjI
+	5x78nBOZMa7rkskmkG8GmrSLWG0du3igWUoeyqBBeqZfgyk6MhiC2sqsA==
+X-Received: by 2002:a17:90b:314e:b0:3ab:3201:310c with SMTP id 98e67ed59e1d1-3ab3a9aa90amr9458427a91.63.1791869789235;
+        Mon, 12 Oct 2026 22:36:29 -0700 (PDT)
+From: Teshan Kannangara <tpk.teshan@gmail.com>
+To: jgross@suse.com
+Cc: sstabellini@kernel.org,
+	oleksandr_tyshchenko@epam.com,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org,
+	Teshan Kannangara <tpk.teshan@gmail.com>
+Subject: [PATCH] xen/platform-pci: Disable device before releasing PCI regions
+Date: Tue, 13 Oct 2026 11:06:14 +0530
+Message-ID: <20261013053614.1337340-1-tpk.teshan@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <20261013223946.1836757-9-irogers@google.com>
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Authority-Analysis: v=2.4 cv=Cr0q4X4D c=1 sm=1 tr=0 ts=6acf6fe5 cx=c_pps
- a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
- a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=iQ6ETzBq9ecOQQE5vZCe:22 a=1XWaLZrsAAAA:8
- a=1KnzZOXWGbpzuJ82zDMA:9 a=CjuIK1q_8ugA:10
-X-Proofpoint-GUID: _EktMNlxNi0Zhojhx4ASfWVXd_b7DOlL
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA0NiBTYWx0ZWRfX0fUPhxARNcJa
- 9nS/iCLcc7dEQrcybdImltBqHci5KonN9BgYs2DYbqx1d8S2XOqe29HUtCRqWBLErMceEtiShcs
- 4sOis3II/pHWvCugYS8aQjzU25z5oQrs/O3mU6gDGKNdZjvK+pDPTKbfQLhBgdreLHYt/eXKSLj
- 8iaqk3GpEmiCS1rkaREHPfI9BfxMESceMf6fSb58kgdsHk98lVK94W4Z13ZaUDqucgF8UHsrXAF
- s2Mz0WmLaipai7UjCU1P9wfoh1rJSRoR35Qnnl4GViW47ZEhEXi38+rmYIbdZGaRW5Gb4NFboLC
- VDaNe6VnoQav6/qOqN3N/a+a+5cDALYf91XsQVsXP8nIWP35y0wihJcXC0kc0O7eYfGysmumoj8
- nH3TGHAss/iHicos4JusXZh5QK06OZzsWCTSFTnMelfNV7UtEZDijv++v8M3SGrsGa+NyH77MdL
- 5RJO9I7QJmKjVLI0vig==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA0NiBTYWx0ZWRfXzh8XCAetvSto
- U4lKpTbi/IJ/4y5zYP4Ex816LutfdS+PI20y7l1acTJ0MKa2avnNDCgOzXRPOLPzbCG+UhRciiw
- hNFMfBzpg0MTAxSwj76JilCNvE6uZfI=
-X-Proofpoint-ORIG-GUID: IbMwSeABL9gn-KtBlV7Mt5gD5Rq_VQT_
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 spamscore=0 adultscore=0 priorityscore=1501 suspectscore=0
- malwarescore=0 clxscore=1011 impostorscore=0 lowpriorityscore=0 phishscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610140046
-X-purgate-ID: tlsNG-ebf023/1791979535-534C3B50-4B7EC079/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d25034/1791869791-00CCBA5B-FCF871B2/0/0
 X-purgate-type: clean
-X-purgate-size: 1250
+X-purgate-size: 1873
 
-On Tue, Oct 13, 2026 at 03:39:43PM -0700, Ian Rogers wrote:
-> sclp_init_mem() allocated a single array of struct sclp_mem with
-> kzalloc_objs() and registered each embedded kobject using a kobj_type
-> without a .release callback. Allocate each struct sclp_mem individually
-> with kzalloc_obj() instead and add sclp_mem_release() to free it.
-> 
-> Fixes: ff18dcb19aab ("s390/sclp: Add support for dynamic (de)configuration of memory")
-> Assisted-by: Antigravity:gemini-3.1-pro
-> Signed-off-by: Ian Rogers <irogers@google.com>
+   The probe error paths release the PCI regions before disabling the
+   device. Documentation/PCI/pci.rst specifies that drivers should disable
+   the device before releasing its regions to prevent devices from
+   colliding on the same address range.
 
-Hi Ian,
+   Track successfully requested BARs in a bitmask and use a common cleanup
+   path to disable the device before releasing those regions.
 
-The entries under /sys/firmware/memory/memoryX in sclp_mem.c are
-permanent. They are backed by a single array allocated at boot and
-remain for the lifetime of the system.
+Signed-off-by: Teshan Kannangara <tpk.teshan@gmail.com>
+---
+ drivers/xen/platform-pci.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-Memory hotplug can add or remove memory blocks under
-/sys/devices/system/memory/, but it does not remove these firmware
-entries. The /sys/firmware/memory/memoryX kobjects are never
-unregistered or freed, so I think there is no need for
-kobject_put() and no execution of a .release callback.
+diff --git a/drivers/xen/platform-pci.c b/drivers/xen/platform-pci.c
+index f2438232518c..a12ac57274a6 100644
+--- a/drivers/xen/platform-pci.c
++++ b/drivers/xen/platform-pci.c
+@@ -95,6 +95,7 @@ static int platform_pci_probe(struct pci_dev *pdev,
+ 			      const struct pci_device_id *ent)
+ {
+ 	int i, ret;
++	int requested_bars = 0;
+ 	long ioaddr;
+ 	long mmio_addr, mmio_len;
+ 	unsigned int max_nr_gframes;
+@@ -115,16 +116,18 @@ static int platform_pci_probe(struct pci_dev *pdev,
+ 	if (mmio_addr == 0 || ioaddr == 0) {
+ 		dev_err(&pdev->dev, "no resources found\n");
+ 		ret = -ENOENT;
+-		goto pci_out;
++		goto out;
+ 	}
+ 
+ 	ret = pci_request_region(pdev, 1, DRV_NAME);
+ 	if (ret < 0)
+-		goto pci_out;
++		goto out;
++	requested_bars |= BIT(1);
+ 
+ 	ret = pci_request_region(pdev, 0, DRV_NAME);
+ 	if (ret < 0)
+-		goto mem_out;
++		goto out;
++	requested_bars |= BIT(0);
+ 
+ 	platform_mmio = mmio_addr;
+ 	platform_mmiolen = mmio_len;
+@@ -165,11 +168,8 @@ static int platform_pci_probe(struct pci_dev *pdev,
+ 	if (!xen_have_vector_callback)
+ 		free_irq(pdev->irq, pdev);
+ out:
+-	pci_release_region(pdev, 0);
+-mem_out:
+-	pci_release_region(pdev, 1);
+-pci_out:
+ 	pci_disable_device(pdev);
++	pci_release_selected_regions(pdev, requested_bars);
+ 	return ret;
+ }
+ 
+-- 
+2.53.0
 
-Instead, could this follow the approach used in Patch 11 of this series?
-static const struct kobj_type ktype = {
-	.release = NULL, /* Permanent firmware kobjects, never freed */
-	.sysfs_ops = &kobj_sysfs_ops,
-};
-
-Thank you
 
