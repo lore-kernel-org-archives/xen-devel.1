@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 839DECA9ED0
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 02:59:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446662.1662755 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00D38CC6B0E
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 06:26:36 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446677.1662765 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGSjS-0007vE-2M; Tue, 13 Oct 2026 02:59:14 +0000
+	id 1xGVxZ-00038F-CK; Tue, 13 Oct 2026 06:26:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446662.1662755; Tue, 13 Oct 2026 02:59:14 +0000
+Received: by outflank-mailman (output) from mailman id 1446677.1662765; Tue, 13 Oct 2026 06:26:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGSjR-0007v7-W2; Tue, 13 Oct 2026 02:59:13 +0000
-Received: by outflank-mailman (input) for mailman id 1446662;
- Tue, 13 Oct 2026 02:59:12 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Volodymyr_Babchuk@epam.com>) id 1xGSjQ-0007v1-4P
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 02:59:12 +0000
+	id 1xGVxZ-000384-7y; Tue, 13 Oct 2026 06:26:01 +0000
+Received: by outflank-mailman (input) for mailman id 1446677;
+ Tue, 13 Oct 2026 06:26:00 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGVxY-00037y-Bs
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 06:26:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGSjP-00DesR-EE
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 04:59:11 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xGVxX-00Bfqe-8d
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 08:25:59 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6acd9e7d-8faa-0a2a0a5109dd-0a2a45029404-6
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 04:59:11 +0200
-Received: from [52.101.72.72]
- (helo=AM0PR02CU008.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6acd9e7f-6ca4-0a2a45020019-34654848b25b-3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 04:59:11 +0200
-Received: from VE1PR03MB6078.eurprd03.prod.outlook.com (2603:10a6:803:113::29)
- by GVXPR03MB11092.eurprd03.prod.outlook.com (2603:10a6:150:2a9::13)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.23; Tue, 13 Oct
- 2026 02:59:06 +0000
-Received: from VE1PR03MB6078.eurprd03.prod.outlook.com
- ([fe80::4722:b91:9b24:ee48]) by VE1PR03MB6078.eurprd03.prod.outlook.com
- ([fe80::4722:b91:9b24:ee48%4]) with mapi id 15.21.0496.020; Tue, 13 Oct 2026
- 02:59:06 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6acdcef6-2eae-0a2a0a5409dd-0a2a4503dc22-0
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 08:25:58 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6acdcef6-fae8-0a2a45030019-d1558029acfc-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 08:25:58 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4a01933b584so21919525e9.0
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 23:25:58 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a18bf2343asm628836405e9.9.2026.10.12.23.25.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 12 Oct 2026 23:25:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,274 +52,148 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=WHReWNORxjACEptDw82Gy3MH+PnU+A+4SvkphC4zF19+HMrKqbNmh3AxjgqQ9MWNWzIveFwQrDtWwYfNxHUd0bvKa7tpnoJ03Vm4BujpmpLDhPXzKZ91p+RooPcONNUJd8+OGnhDjSiraQ2ORXoJSdzIlYXMlud5gAtqSrup6b92HrXcEmMZBVMXkj4K2mUhw1buen4xH/u/EF0qj2X12BVeldiol7UPhNtiH3wYakkvim2dFUx/Z09teGhyXvOr/7saqh4V5mfZm1aGFFW/qJLo6GTlvPwzMAMC+qZ23m7DSowuFWzVAGhrYTzfx8T982g/bHkbsuiOJrZP4M5b0Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=4mQc2r15wOLTA8zOhQs/kKQnVWeEG1CIJ/D1gPI2Kcw=;
- b=jSRr6yn+S6zpXvCovOwF2EFGW1mp5JSJHQ3eiCQIBkt3aCWGRvHNePCghQiq0KnfOHw4jvOl5q/oQcYjv2367COK1YJRc0uxj+8WVNKpHPi3HHJOqV6Bvx5o3NP50/MTT/mNiNPmL5dPzeiWaXHsaOgWydRiINh5lPz+BZ0z2ZRzhbGyaLW23oJYLr/NPS3+cTJx73q9nMUPTTp8KTNWFJ0HKsBa2wZUVkO37hlJk0CQlIR0V+Lum4NZ8OEwZ7UVxkELWaAaAblmzxeqWMIK4yhi9Wz7WJqYGuI/5H12vonqUGJJlK2l53e0V/7P/bfMfhynm0YTn2NtNV+LSJYATg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=4mQc2r15wOLTA8zOhQs/kKQnVWeEG1CIJ/D1gPI2Kcw=;
- b=Q0U8tH0YwbONoWuQpLrrZV/cEeWvN6sYggaLHd1dAhhGhxHTxZnoxJ/tfq2nAG/J52B/QwjJtFKmyrgi9tHKjG06gDGDIJhNtvGpeLbi5DnzqDN/hlIq97G3WsQ4pWDSESVXtM72KQgWP6+RgUwdYzA5E08zood/WyqRDZJE7MR74u+5zQOygUKKijnALEErmCjD+LDlPjsmigq2gFS/D6SoY28i9PgZW8yfFfTBYlIiEFCxW4k2fLmkOu+RfUJ7AQeFJ67gcwt/95hQR0VGkbY2QkRDGTRavT9TKXG2oIOblGPH/H7BSHg4+8I/HeDtdl+Y8vE4mEbs5BR59+orRQ==
-From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-To: Mykola Kvach <Mykola_Kvach@epam.com>
-CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
- Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
- Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>
-Subject: Re: [PATCH v4 3/4] xen/arm: its: refactor ITS quirk matching
-Thread-Topic: [PATCH v4 3/4] xen/arm: its: refactor ITS quirk matching
-Thread-Index: AQHdUEUWBir3UQDjYEWvHkcwQ5Z1KA==
-Date: Tue, 13 Oct 2026 02:59:05 +0000
-Message-ID: <875wz6wbk6.fsf@epam.com>
-References: <cover.1790707009.git.mykola_kvach@epam.com>
-	<b29ddd0b36b5564c564c31f511ecddb1d681afeb.1790707009.git.mykola_kvach@epam.com>
-In-Reply-To:
- <b29ddd0b36b5564c564c31f511ecddb1d681afeb.1790707009.git.mykola_kvach@epam.com>
-	(Mykola Kvach's message of "Tue, 29 Sep 2026 22:02:12 +0300")
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-user-agent: mu4e 1.14.3; emacs 30.2
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: VE1PR03MB6078:EE_|GVXPR03MB11092:EE_
-x-ms-office365-filtering-correlation-id: 11f498ff-013c-4649-5145-08df28d5f1cd
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|366016|1800799024|376014|42112799006|23010399003|38070700021|11063799006|56012099006|4143699003|261009223027099003|10067099003|18002099003|22082099003;
-x-microsoft-antispam-message-info:
- SN/XEY6HxB3IEw3B8duZ02q9e4Jv5fo32Kyc+pn6ZMuG77OLzB+mX0ZrmBz1NWPs83JBZbyWenS2DfrU9/wAaj75FMP+wYxDe1xh3zjgWv4xXIU2olL14ZVpb++T3ZrG/2Wydb7zIp0QKZmEh6L5GWlkNW3qnkFPxiK9xN1bJdizwo1m3hiYL3rsiSY9ZXtk9opl7Mv9KynNufsqQMPEOkSM5mhTYL5T6BO3MFHygRG/CxdjgFgZr8wSyy1CI829oIdGvD3fg+Nxb0Wlfyi9S2S/0yXAespDs2Amw63JC/TI0U0IxwY5G6VKFOzL9IVqcXIdIViZWqv0P4iRQyH71O82P/lbX9fqrEBb5sQHj0CFQjUInFibspXEvneLkNXImYsgdFMj6b5lJyQhBzWwN+C8IUTNfrDADJxhKGcHh78FqWzsmtYcgfA8PiexCYqY+aMuLLmwaDcRwrGvunMlxi9DVjAGyjOoVCYzrZy5p2zfZOr8Gc9Gzq3XYPp3MzBukAamBwk+Mt4ie/Be4znptKc75OnzXc4rSihSPk6lGLnZ2WOYFd2ReigsFuwS7FANfSVcTi3jAcOcJQzFUXGse85BQpMBCHynjziOxvuYSqB95TR1uylG2a8AWtHcm3IgX4ui1nCdPLIakkzmJ4VSUPbgdN3L2UQtesKjyxil6roxdS7rJDMmj75qo9bEkb5uHlmJnvgIp4N37z5/+RZkuZChHMgq1oH5gpvxGpfA0uk=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR03MB6078.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(376014)(42112799006)(23010399003)(38070700021)(11063799006)(56012099006)(4143699003)(261009223027099003)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?ebEpedceUdDUhLWFq9P3SEEFpIC8eEyX2+2BYGb1XxCr6ie0HCImxkeEK3?=
- =?iso-8859-1?Q?4GuYhXij8uHPvckcrxPOaHbdu9AzqCtKcBUFxEFdK963q5b2pnfGRCwp/S?=
- =?iso-8859-1?Q?vI6SrXqk1JBC5kn3LT2W5D+28Fbt00lkzRELEUgEEsISKya0tM9Mt2+Zgs?=
- =?iso-8859-1?Q?Cei7GygoQ59qMVDLp9q+oCZlAPDEIJXzKsCZUZ8xLSP4702JcSLo2uZmWH?=
- =?iso-8859-1?Q?UBSqyX3KEkWW+zTX5tIotBqD4YCO/HKs/U/Zx/ykdvPBiKZzFjdBvmHol/?=
- =?iso-8859-1?Q?4UJJJ//hQTVP5aWTN+Mew/8MWE9HKAaY4cmmGnm1Z89oK6EFdCU+RmsYfi?=
- =?iso-8859-1?Q?wr5zcbIGnqiYK9uzBQwWm1gB+Wy1V0QGGAmCcm6qZiN4AocKFLZB25ohhj?=
- =?iso-8859-1?Q?dzBwOpxHo5NjUyKa84sFcKGsLawA9QSJvPybgU5mgsgbPchKpe0YEMZwf4?=
- =?iso-8859-1?Q?4L785IdrvgPvUfcFcwjjk52LXdOuIdqCpnFHODCYiBF7gOP4V14V2U+KvK?=
- =?iso-8859-1?Q?J/WYRaabTTMVnCal4+K9bwFzlJ4mcUGdltMKm4hrpWbfgPUS5tAnovQKUr?=
- =?iso-8859-1?Q?8bRblX1izWPYxuXvipzpXcg4NQOwGc+DvXqJqHATWy0KTj+9YN04DvWRKD?=
- =?iso-8859-1?Q?guVob9FrRe7vE8Ky3yY61HrDS0N3pRTf9/m5YfhCpWOzTZ8R00ogj2RSKH?=
- =?iso-8859-1?Q?ZM/iG2N/m5YM7q5Tomqifqz70kGhL2w/IiqGYYNYp97lFIiGmSAKGkB5xh?=
- =?iso-8859-1?Q?K1WvZJZ/YEAMd0VZxVM1/+L29EGIzql2GW6SnX8bnbUX4CHEDUDnkk1gLi?=
- =?iso-8859-1?Q?TTsuh8Qz3QzximgxldgTzIBLTtt5FZQZ4aB7i6gpuWtsF2VR18yxz9EZZt?=
- =?iso-8859-1?Q?hGwzM9k+J1U1zJkjYw+jQuKPC43WKwCLmHxVH2NjYWZGRfXk5vvzXjhd23?=
- =?iso-8859-1?Q?UVPjTzivgQn1DpdeGTh2EUl7HsCfGkBX9K/FoTpod3SE647NVTAxHR45OD?=
- =?iso-8859-1?Q?C14UgUP67V62a6UFkd/e/cNJOJwxIgiPuzoRcLOWo9w9YIb5vusSKs2U8R?=
- =?iso-8859-1?Q?Nif3SBHukTRDBeLT1h+sTH6Wy0FGrdNTBKwWCNtmFEXbQNYt2Bi+eFNHis?=
- =?iso-8859-1?Q?V0h3dymtx+s1O5aG1mjgxZ43Bd+rU5zQi0xK8WOVq1GHZcL8RIL4wIt2+d?=
- =?iso-8859-1?Q?NV2+0o0fhp0AQGulk+Yly6i4sD5x19Sj/sgF7QrQ1HCaJM6nlWHca2fMM8?=
- =?iso-8859-1?Q?gjljOKgwdCA58+VATA3K4Lz2aAY+M/rvH6CaxbQBI9U/Yeuz85PaDU61kX?=
- =?iso-8859-1?Q?iMD5vulIkUsH16wAoKNZjjMItdNO3bnO4ByB9twWncQd3EUyNyFbjnsHtq?=
- =?iso-8859-1?Q?CvEDrgRyi2SWHIBk+xyhWw8ltfKNOG7UxC3f+G9F8MbNgF5f/GXCn4kVtO?=
- =?iso-8859-1?Q?9QKJPj7PnmlsEzl9dBTvUle5Hjim27iMLfyQeDuYNvrpTnFbh5mEDLoJia?=
- =?iso-8859-1?Q?Tt0FeZ3N+70mQMIFLAJabv72nV9vJFzse1/aDy5tYjT5/iEOL2oQWNk8wY?=
- =?iso-8859-1?Q?vuh+iXeDBYbdXwqijwsVHP+8bD6uV+StUXA8+xgHk28qwpd9NA23Nh2Jgf?=
- =?iso-8859-1?Q?NqG9rfzjDdFpEOQe7iO40Qf8HCJkh4izKvb5LN5LNXJcpli8027pJYcnj6?=
- =?iso-8859-1?Q?D1FSE9gpA0olfpXayjp/JM9lMx3Erxpy63qoGSNQOkkUh0/X5vlQddQO4N?=
- =?iso-8859-1?Q?uBvkkRFREShW++TlVe9rrK/1SIogk0DyM9M1Nx7QHel0YY+tW480uYYqgt?=
- =?iso-8859-1?Q?BSPIieVaWRj8+MCf3oFzHx/rQTyZIoc=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1791872758; x=1792477558; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=pPpsKBaqXYpwTdj4AMUqYlftnFOL6OAbWY290AmRxXY=;
+        b=C+r2tqqGIUz9G30+HVRQ1TO949iOi7MigQE/0JuBMQJhj31RCLBHRmICBbIfoP/s94
+         kr1n6coqy1Yo+0GoV5ZET8JNBNdr71uH8EFJK4tC7LyFxkWJCjQGVXEsnoXNGPmtmUAG
+         FrV9dRk4hXPAkY1Njv5Idfbu809haV1QHf+8oGMKUUwxK/acqEVNs3wzRH7hRaBEWWAF
+         0tUtdOAg+aqhMeNR7XITXeOrDaFzOofY0FZTYV3NFDKPuEMmJYSNOTn1PWOyjMx36wCu
+         bNY2D+7Jecs1tHE3uSlADAgLhZ00mGn6spP5TOQ8va/tsKeGdCL06fpa8ib/NeEJc2SI
+         MFrg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791872758; x=1792477558;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=pPpsKBaqXYpwTdj4AMUqYlftnFOL6OAbWY290AmRxXY=;
+        b=nDGGLdmSPF7/GR0uY/IlGfJV+mgVqPGdf1ZBHJqZq9gXfsjd8pqqZKtSbjpRG51gy2
+         RX3Q6HiOOb2tznvK0Y/w+aQnqfdISFB/9KYgme6osZHluxUVseeZJQ62RohhXx7hioQT
+         jL7E0IGuoJ83Ogg37VhpDnGiOutufgzguH82DINQRAxM+sIfzgfkXfjfSplo5xLvNNw8
+         0VGakUknVo7DdGO5lALNvtsD6xwn3MEQiCwp3gQh2/ss6rCjRD7U2aq5sIBBNNO39nvX
+         W/P64nQRqvicC+4HAUiezy2yEiIdy3QvOIkFXATG143HfEH1DaCD7YsCnw8470pJ8dq4
+         ZpJw==
+X-Forwarded-Encrypted: i=1; AKwUvBx2g1hEb58TvgcqpmQt9PhGR95KF4hWtCxlzrLKxSFOIjzFr9ns6yrHXpzcPUtrjz60kI8Y0Qpb+ME=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJYACuNY3MehwBQwgvciVhtFrkX8lk1pgX9YIhQBh7GEQaKmP4Q
+	2QQ+2wlo9vxZZj71PrdlnQdW3iN4aTQfh7xTHH+sg6KO29cJKxvHgwZH8DVfTncOwA==
+X-Gm-Gg: AYBFou1NCHcYEduNlag+85pou1g7NwG/EpmU+5ezgUJEaRUWXRV5ncvubatpwmqf1Wo
+	1ua0lZShfg9JTDExC7HZTkh/qyvZrCQ9uqj+sq4JKNxAyQL8kQTUtLSeEXQ/TZzvf4dsApKIrFH
+	fBZrKkRDU6KGIVuelOPxOB0sHSej4VeHd0ND0wk9LTM0hOIC047+eyz7UhN0l+aTSv/79j8HuYV
+	h0/7OIl8L6oGw9EMvcVQ0zOrGL/PidyQHaWccH4loG4QMQ9r9iKx20l3LfDuyoOWYavuekdJ0+n
+	FTKt1SZyVWvdqH0BtOv00tlmsbFrXuhGV7paahvI/3qnGRTcXn4qQhVKE2NBgToyj7qPBCLxN5u
+	iL5+VZ5EcpuJ5GeYiva5kRhdaq6W10PopmRRk+U8HXsNigb987mg2od5aaUg30fp+nXK7XqIDvM
+	PGhmO3amDbcTePRj6aafqPzgNQfKKdpWfeh7Cc9gYL9aeYBNsQMg5XcJQGTcm+scoOQFcyzoYO6
+	fqHMud8p7jFD2whwNkWB1V/4GwcGOiSCsrhgPO1Ywgyh7I6ZM+pPD9wZlbJPpEjrHwLN6uo7Q==
+X-Received: by 2002:a05:600c:1e0f:b0:4a0:1f51:ba2d with SMTP id 5b1f17b1804b1-4a18e4adcbamr206715175e9.22.1791872758322;
+        Mon, 12 Oct 2026 23:25:58 -0700 (PDT)
+Message-ID: <43f7a948-669f-48cb-8e1f-9d1a8a98a8f5@suse.com>
+Date: Tue, 13 Oct 2026 08:25:56 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: VE1PR03MB6078.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 11f498ff-013c-4649-5145-08df28d5f1cd
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Oct 2026 02:59:05.9193
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: rZDOwEcPMkDRfVmJwkgjscn+c95rNwPsvebobGTLCcEYVv9huKuWkdokBSqyuL+T+Mh7dQUwX19BwOoz75JDu3CyKiawiKcPtpe5k8AU2Jw=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: GVXPR03MB11092
-X-purgate-ID: tlsNG-720697/1791860351-674BE2AC-E95EB5A7/0/0
-X-purgate-type: clean
-X-purgate-size: 6057
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 08/18] x86/domain_page: prepare the mapcache for
+ per-vCPU accounting
+To: George Dunlap <gwd@xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20261007104051.48841-1-gwd@xenproject.org>
+ <20261007104051.48841-9-gwd@xenproject.org>
+ <8514b7b6-cf1c-44d9-827c-675fd5a6708e@suse.com>
+ <CAFLBxZYOHGDbp_=rBP0aRd9J3LJ-B79zpt4B9LQyjKQiWjb6ig@mail.gmail.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <CAFLBxZYOHGDbp_=rBP0aRd9J3LJ-B79zpt4B9LQyjKQiWjb6ig@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-33051d/1791872758-75EFF4E9-889696D0/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2920
 
-Hi,
+On 12.10.2026 18:07, George Dunlap wrote:
+> On Mon, Oct 12, 2026 at 2:48 PM Jan Beulich <jbeulich@suse.com> wrote:
+>>> @@ -74,12 +130,12 @@ void *map_domain_page(mfn_t mfn)
+>>>  #endif
+>>>
+>>>      v = mapcache_current_vcpu();
+>>> -    if ( !v || !is_pv_vcpu(v) )
+>>> +    if ( !v )
+>>>          return mfn_to_virt(mfn_x(mfn));
+>>
+>> I don't quite understand why this is_pv_vcpu() is okay to drop. What
+>> mapcache_current_vcpu() returns isn't what it ran is_pv_vcpu() on. (Same
+>> in unmap_domain_page() then, obviously.)
+> 
+> So mapcache_current_vcpu() is a bit weird; the actual invariant is,
+> "Return the vcpu whose cache structure we should use if present; or
+> NULL if there's no cache structure to check and no need to sync."  So
+> if pgtable_vcpu is HVM, return NULL and just use the raw address,
 
-Mykola Kvach <mykola_kvach@epam.com> writes:
+I was going to say "But there's no returning of NULL there if
+pgtable_vcpu is HVM, at least not at this point of the series." Only
+then I realized that I was being confused by there being both v and
+curr, and neither of them being pointer-to-const (i.e. both being
+equal in terms of which of the two might be returned from the function,
+yet as a result of earlier changes neither is being returned anymore).
 
-> ITS quirks are matched only by IIDR and mask fields stored in each table
-> entry. That is too coarse when the same GIC IP block appears on several
-> platforms but a workaround is valid only for some of them.
->
-> Replace the fixed IIDR fields with a generic match(hw_its, data)
-> callback and an opaque data pointer. Add an IIDR matcher as a reusable
-> building block and use it from the R-Car Gen4 matcher after checking the
-> Renesas machine compatibles.
->
-> This intentionally narrows the R-Car Gen4 quirk. Previously every ITS
-> with IIDR 0x0201743b matched. Now it matches only a DT-discovered ITS on
-> an r8a779f0 or r8a779g0 machine. ACPI-discovered ITSes and the same IIDR
-> on other platforms no longer match.
->
-> Keep first-match semantics explicit. Use BUG_ON() if a non-sentinel
-> entry has no matcher or the IIDR matcher receives no data. A broken
-> entry must stop Xen in both debug and release builds, as skipping a
-> required workaround could cause a failure later. Place the matcher data
-> and table in init-only read-only sections.
->
-> The matched entry still supplies separate ITS and LPI flags; this patch
-> only changes how the entry is selected.
->
-> Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+> because at this point in the series, both HVM and the idle domain have
+> full directmaps; if pgtable_vcpu is PV, then maybe sync, and then
+> return the result of the sync.  That may be a PV domain with a
+> mapcache, or an idle domain with no mapcache, but in either case you
+> can then read cache.inuse to see if there's something there.
+> 
+> So yes, it's a different vCPU; but it's still defined in such a way to
+> be safe to check cache.inuse.  The only possible value *change* after
+> a sync is the idle domain; I don't think we need to do another check
+> to make sure it's still a PV domain.
 
-Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+Yet then - aren't the is_pv_vcpu() you drop here redundant already
+before this patch/series? In which case (since it's not entirely
+straightforward to reason about and beneficial in its own right),
+might it make sense to have this be a separate change, with (in
+particular) dedicated justification? (ISTR having thought about
+making a patch to this effect a little while ago - perhaps around when
+Roger last touched this logic -, but then deciding that something was
+wrong about my reasoning. That may have been a mistake, as it looks
+now.)
 
+> In fact, there's an argument that we should modify
+> mapcache_current_vcpu() to take pointers to dcache, and vcache, and
+> return just cache; that gets rid of v as a local variable of
+> map_domain_page entirely, and makes the logic ("get the cache we
+> should use") more clean, and gets rid of one mfn_to_virt() instance.
+> That would require some non-trivial changes, so I'd rather avoid that,
+> but I can do it if you want.
 
-> ---
-> Changes in v4:
-> - Use BUG_ON() for missing IIDR match data or a missing match callback.
-> - Keep the existing quirks variable name in gicv3_its_find_quirk().
->
-> Changes in v3:
-> - Document the intentional narrowing of the R-Car Gen4 match.
-> - Add the non-debug NULL-data guard.
-> - Put the matcher data and table in init-only read-only sections.
->
-> Changes in v2:
-> - Replace v1's optional platform callback plus fixed IIDR/mask fields
->   with a single generic match(hw_its, data) selector.
-> - Add a reusable IIDR matcher and use it after the R-Car Gen4
->   machine-compatible checks.
-> - Document that the R-Car Gen4 quirk remains DT-only.
-> - Keep the split ITS and host LPI quirk scopes when applying the matched
->   entry.
-> - Document first-match ordering in the lookup path and guard against
->   entries without a match callback or IIDR match data.
-> ---
->  xen/arch/arm/gic-v3-its.c | 64 +++++++++++++++++++++++++++++++--------
->  1 file changed, 52 insertions(+), 12 deletions(-)
->
-> diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
-> index 280ace0577..43804a6c7a 100644
-> --- a/xen/arch/arm/gic-v3-its.c
-> +++ b/xen/arch/arm/gic-v3-its.c
-> @@ -54,8 +54,8 @@ struct its_device {
-> =20
->  struct its_quirk {
->      const char *desc;
-> -    uint32_t iidr;
-> -    uint32_t mask;
-> +    bool (*match)(const struct host_its *hw_its, const void *data);
-> +    const void *data;
->      uint32_t its_flags;
->      /*
->       * lpi_flags are ORed into the global host LPI policy and must only
-> @@ -65,11 +65,49 @@ struct its_quirk {
->      uint32_t lpi_flags;
->  };
-> =20
-> -static const struct its_quirk its_quirks[] =3D {
-> +struct its_quirk_match_iidr {
-> +    uint32_t iidr;
-> +    uint32_t mask;
-> +};
-> +
-> +static bool __init gicv3_its_match_iidr(const struct host_its *hw_its,
-> +                                        const void *data)
-> +{
-> +    const struct its_quirk_match_iidr *match;
-> +    uint32_t iidr;
-> +
-> +    BUG_ON(!data);
-> +
-> +    match =3D data;
-> +    iidr =3D readl_relaxed(hw_its->its_base + GITS_IIDR);
-> +
-> +    return (iidr & match->mask) =3D=3D match->iidr;
-> +}
-> +
-> +static bool __init gicv3_its_match_quirk_gen4(const struct host_its *hw_=
-its,
-> +                                              const void *data)
-> +{
-> +    if ( !hw_its->dt_node )
-> +        return false;
-> +
-> +    if ( !dt_machine_is_compatible("renesas,r8a779f0") &&
-> +         !dt_machine_is_compatible("renesas,r8a779g0") )
-> +        return false;
-> +
-> +    return gicv3_its_match_iidr(hw_its, data);
-> +}
-> +
-> +static const struct its_quirk_match_iidr rcar_gen4_iidr __initconst =3D =
-{
-> +    /* Implementer 0x43b identifies Arm Ltd. */
-> +    .iidr =3D 0x0201743b,
-> +    .mask =3D 0xffffffffU,
-> +};
-> +
-> +static const struct its_quirk its_quirks[] __initconstrel =3D {
->      {
-> -        .desc	=3D "R-Car Gen4",
-> -        .iidr	=3D 0x0201743b,
-> -        .mask	=3D 0xffffffffU,
-> +        .desc =3D "R-Car Gen4",
-> +        .match =3D gicv3_its_match_quirk_gen4,
-> +        .data =3D &rcar_gen4_iidr,
->          .its_flags =3D GICV3_QUIRK_MEM_NC_NS | GICV3_QUIRK_MEM_32BIT_ADD=
-R,
->          .lpi_flags =3D GICV3_QUIRK_MEM_NC_NS | GICV3_QUIRK_MEM_32BIT_ADD=
-R,
->      },
-> @@ -78,17 +116,20 @@ static const struct its_quirk its_quirks[] =3D {
->      }
->  };
-> =20
-> -static const struct its_quirk *__init gicv3_its_find_quirk(uint32_t iidr=
-)
-> +static const struct its_quirk *__init gicv3_its_find_quirk(
-> +    const struct host_its *hw_its)
->  {
->      const struct its_quirk *quirks =3D its_quirks;
-> =20
->      /*
-> -     * The first matching quirk wins. More specific quirks must be liste=
-d
-> -     * before broader IIDR-only entries.
-> +     * The first matching quirk wins. Entries that match a specific plat=
-form
-> +     * must be listed before broader IIDR-only entries.
->       */
->      for ( ; quirks->desc; quirks++ )
->      {
-> -        if ( quirks->iidr =3D=3D (quirks->mask & iidr) )
-> +        BUG_ON(!quirks->match);
-> +
-> +        if ( quirks->match(hw_its, quirks->data) )
->              return quirks;
->      }
-> =20
-> @@ -97,8 +138,7 @@ static const struct its_quirk *__init gicv3_its_find_q=
-uirk(uint32_t iidr)
-> =20
->  static void __init gicv3_its_collect_quirks(struct host_its *hw_its)
->  {
-> -    uint32_t iidr =3D readl_relaxed(hw_its->its_base + GITS_IIDR);
-> -    const struct its_quirk *quirk =3D gicv3_its_find_quirk(iidr);
-> +    const struct its_quirk *quirk =3D gicv3_its_find_quirk(hw_its);
-> =20
->      if ( quirk )
->      {
+Sounds entirely plausible, but can as well be done as cleanup later.
 
---=20
-WBR, Volodymyr=
+Jan
 
