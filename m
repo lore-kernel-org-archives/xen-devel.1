@@ -4,39 +4,55 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30868CC6B19
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 16:29:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448187.1664255 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EE543CC6B19
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 16:44:53 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448200.1664264 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGfNW-00060k-1V; Tue, 13 Oct 2026 16:29:26 +0000
+	id 1xGfcG-0002Oe-8q; Tue, 13 Oct 2026 16:44:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448187.1664255; Tue, 13 Oct 2026 16:29:26 +0000
+Received: by outflank-mailman (output) from mailman id 1448200.1664264; Tue, 13 Oct 2026 16:44:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGfNV-00060d-UZ; Tue, 13 Oct 2026 16:29:25 +0000
-Received: by outflank-mailman (input) for mailman id 1448187;
- Tue, 13 Oct 2026 16:29:24 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xGfcG-0002OX-5W; Tue, 13 Oct 2026 16:44:40 +0000
+Received: by outflank-mailman (input) for mailman id 1448200;
+ Tue, 13 Oct 2026 16:44:39 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <peter.maydell@linaro.org>) id 1xGfNU-00060P-EB
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 16:29:24 +0000
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>) id 1xGfcF-0002OR-Aa
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 16:44:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGfNT-001oJf-GX
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 18:29:23 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xGfcE-00Des8-Gs
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 18:44:38 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <peter.maydell@linaro.org>)
- id 6ace5c58-bab6-0a2a0a5309dd-0a2a450b9c24-16
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 18:29:23 +0200
-Received: from [209.85.128.170] (helo=mail-yw1-f170.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <peter.maydell@linaro.org>)
- id 6ace5c62-b7e8-0a2a450b0019-d15580aac90e-3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 18:29:23 +0200
-Received: by mail-yw1-f170.google.com with SMTP id
- 00721157ae682-8ab38a051aaso25228897b3.3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 09:29:22 -0700 (PDT)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6ace5fe1-8faa-0a2a0a5109dd-0a2a4502d328-26
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 18:44:38 +0200
+Received: from [40.107.200.14]
+ (helo=CH5PR02CU005.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Alejandro.GarciaVallejo@amd.com>)
+ id 6ace5ff4-6ca4-0a2a45020019-286bc80e0ccb-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 18:44:37 +0200
+Received: from CH0P221CA0032.NAMP221.PROD.OUTLOOK.COM (2603:10b6:610:11d::11)
+ by PH8PR12MB6795.namprd12.prod.outlook.com (2603:10b6:510:1c6::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Tue, 13 Oct
+ 2026 16:44:28 +0000
+Received: from BN2PEPF00004FBD.namprd04.prod.outlook.com
+ (2603:10b6:610:11d:cafe::8e) by CH0P221CA0032.outlook.office365.com
+ (2603:10b6:610:11d::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.472.20 via Frontend Transport; Tue,
+ 13 Oct 2026 16:44:24 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN2PEPF00004FBD.mail.protection.outlook.com (10.167.243.183) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.522.6 via Frontend Transport; Tue, 13 Oct 2026 16:44:24 +0000
+Received: from espagarciav-lx01.amd.com (10.180.168.240) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 13 Oct
+ 2026 11:44:11 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,129 +64,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1791908962; cv=none;
-        d=google.com; s=arc-20260327;
-        b=O2dfiuxpdKwluCw/PBHCErVYzmxJpNTylN6I4W+1dtfzgXUQuqk9lwNFmY7azc/jDR
-         tf9AkgL4A1pqpFR6fm8i+CAr0sJFirnBU5U8lFeB/7v2cPgvxbSvOk815PUr//Pu48Ob
-         xVyapa7X44UI4HiMa+eWzoJr8y85AEAmOfRRHp2U7InAfHphtpfjf+wlOrJua0i9Vzch
-         LpXU0P50/BVLezXJdx/fJdNSshrVyTpEtKL3tUClgp8T+FcG0jX2CbU7PWtirh6iROpo
-         HueVET0Lhc/oBXr0CcancZdywGVhQU5OhdboE1PU39nUX7zf/88Dv792Xw7Hqmmo95s3
-         005Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=jXo9q1ZmZcN51gvyAI6giPbieASxcFI/Rz78Tc/rF4k=;
-        fh=soxJElAlokBxb0qXlToTWx+nLUSaWOMvgPaeVh3fGx8=;
-        b=mW9pfk8bDz7ey1bAQ5MjmKfvm1F85E+Loa1nc6XBb0JTTxQ6DUxx4CMfx7g2RNU06Y
-         rpGxZt6gNb1/u4pCVRQ/Qgm93qgocuSdwJ/w2VrJfoJqJKTQonfU0ZxrqBNhLHfjiuFs
-         vtN8DNMqli3S3VXwEb8PVAkRiIGPSsjuWLw6CCotIlMI8BoTQsi2LOfbMDTiXMGC5903
-         X7mQydqnfKuB/xBHxZ1k+cV/j1nQyC73Ps7cstYw6yYCZYns0NnUjVYigERCv+L0vu+/
-         wHLhPj50Td/uHXPpZwmmNYg6r4CWOZUqHp8jcTPDk7veNkkdGBUC9+30Jh8t0qZh915o
-         LPHQ==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791908962; x=1792513762; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=jXo9q1ZmZcN51gvyAI6giPbieASxcFI/Rz78Tc/rF4k=;
-        b=dUPCRbkbVGnQgh56hdz9PnC/FzbqZzGNjxKgnaXZEUBVS4zEWdrg32WoS5Fg9GUnHJ
-         kgXm78l0mV2uXws6JQ6lk6K/RHzLQby0I8MfWIbKxojKS1QsbprqyjugctMfNee8gsYQ
-         bKaL+F4NAoe0k5NQFwHyrERNOo1/Ja/YHVNyRVXBKFbQyHABgHaY+DuvqSwYPJ0xBEh1
-         PBn0o8xF70X2PrGmCz/n8pRCE4KFAWu7n0HwpDzXEcX3ouH8+pP88cXL8TvT3IPgdhJM
-         cAqjHy6aFrMVwvYxtPJKzKu5Uq10O0Iksp21TLFy1pZeXZqSmV6P+qrNqKQVW9o7RZdc
-         9miA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791908962; x=1792513762;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=jXo9q1ZmZcN51gvyAI6giPbieASxcFI/Rz78Tc/rF4k=;
-        b=cTl9IAqXMWIyqbrcqFKpn3PEG0U3jv9etLR4Vl3SBpwYVtrTOQQUcdsf5/gdBkO0Jl
-         vzhgLEEOBOkabSXp7ggDMNwC5UD5nVcqNoJ05yocmEJfAnpqNXU+ZYGF4mZYVbaO1Zop
-         NdjIPjLRN2ev7aPUH6+4+mMQtCk/990JVNjBabXrA58fEUNrAemFDhO/LAEBEQf6xx43
-         Mcw9GEYMuNcXIOWWdrxbtSvTvCNKm/7LrrQBBg2l5SaQOvdKQSzczIFRPmYKHkElvA3i
-         jJyjBZunaenyhc5f53ODHNVKhfdsqS+lhmz5qVaN72vYpqpNJRPR/pvvejW2eRvF0ePT
-         HdlQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwQ6PvVTvM709WUJPLz7Gcgg5ETVypGZ2eJHveiGMd7OVFUjMBtzrxPpnBI0MObbbbtOECeohlNl7w=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYJOsHbGRUdCQ0ZMJfu5yuBnFkK0pwEI8inrwGYbHh9Hu5tNP2ob
-	vDQxoUU+iOcSOdpwyHgyINemY11kG0CTRlfCgCf+wlIUqAua5wa8ZbMIXWYw0nCzPSZMl+vawFP
-	Y3INmplbgBgJOaGGqx7bUPxZRcCCGXqQbHtO5plkwYw==
-X-Gm-Gg: AYBFou35IJhzH2NT30TylvCT/MpGw2qfC04/sqWKXrlxV2rqPDDPEM6w/dGPmwbuMG0
-	b6LFCZmUlrG+ONeZ2nHKZnzeSuC+K9n8M5zlF6aHvdxFhngb9jCznCzwrHJpF3QfhFMK5uc/niG
-	i6amdEwQ3djtowbKiIc3F80aOJ5U4JOg+Q3vRR9boLS/eJtCcAQZqgPAsWl77y3+rMiHb88x49u
-	TwOzOLFvLxUvMcfru0aPwnJPf7OggyOd4fL6LC7lYxhzKykYcuOwJqyHIUMcwhHnMEP8+2tenQ/
-	q1anVKpvCeJYZucI9EAGfy+/3aXo2Byya5ccSDL7CnCUvpCeGDJK+7TzcGR9/yrP/To0g8ey61Q
-	sp79NFcPr+QSkmYLO/jt6JqFlhK+m14ezcT0Th+w=
-X-Received: by 2002:a05:690c:e1d9:10b0:8ae:dfee:cd30 with SMTP id
- 00721157ae682-8b07ee80677mr32738227b3.56.1791908961569; Tue, 13 Oct 2026
- 09:29:21 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=MrGnZ77sr1KDPlTWPWSMe1LL2p0aHf6paT9wlYNwQsOLbbgSzLOyDOM4EvHlD4vKpYtS2X58rbGgU0cqEPH+cB07FOQFEEqmoGKTHmeURbBmfA9qSOt6MYUOswsJk7aHRFFBMHw4DsNhW4PxKMBMz63HQkKM1Yga3JxO4uOhlVLcG9bGlKCUtMw3o0H/j1UHa7jcbrx+m/3jQDdkj3SSjrOkqBWGo/dy8HtCaMU7Qd7vmGDeXs+N4L+DyMaID4S3X54j4rfKtsVS9g0UrtCAPcfJSvILQA32/QHzo8If9w55NtW90Skz1X2IbAsYnzegupJApeM+cZFw7QqR2N0oKQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=wZwU6Sjg+jgCW0wNM7COHOGNdp+jY+I3apDmc7RdrcU=;
+ b=fHbflLCx1kSXhC4gWW21uBMK8IxhsSoDGBwfpOgodJKY2gJi/Z142bhuCTS4EH13jWqsSZvPv17b76Ns1ug76A2yhxkHJSpQYLsJ13cZ0kTySoyEkAlu1e+njZcZn+3MGDikoUNjlHWxlENpi7tGVkyCA/oxaW+V2RuQrFPIwdWZbBZ+thFdyWT6Mp6XKrF0VSEKlKaCH9UYd9bGMowrEwsWQI7IycRk0fEal/qR0P1MDb1xVFlIi43FMEBnwruD6uvzdFXGNaaEpfRCRvym3YvN5RpEPVkOPdgmgez8TmMU1J8kt1iuCFuS2rK1ENAspFq2Jk52wcEOI+WBcbPQCw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=wZwU6Sjg+jgCW0wNM7COHOGNdp+jY+I3apDmc7RdrcU=;
+ b=mnn8DOHHGqPk98xu4hGJj/WeFLdBIRFvfgGG7JebJLuYArolmS8u/7ITOlAKBir+5nB62YDaadD+2JfOeywqrP05xi83Jg4KmvEZ3YWJfvwKpWqKp+vD8SC8N5N3KOsBIo3hzteYEPwVQgEgji2ATuhQkpsOAUKdTBfa2AN2p5o=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Alejandro Vallejo <alejandro.garciavallejo@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>, Teddy Astie
+	<teddy.astie@vates.tech>
+Subject: [PATCH] x86/hvm: Fix UB on defensive default case in handle_pio()
+Date: Tue, 13 Oct 2026 18:43:56 +0200
+Message-ID: <20261013164404.361893-1-alejandro.garciavallejo@amd.com>
+X-Mailer: git-send-email 2.43.0
 MIME-Version: 1.0
-References: <20260916104435.600211-1-mark.caveayland@nutanix.com> <20260916104435.600211-22-mark.caveayland@nutanix.com>
-In-Reply-To: <20260916104435.600211-22-mark.caveayland@nutanix.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 13 Oct 2026 17:29:10 +0100
-X-Gm-Features: AclHuK-eFYommmfqG_nkwY0m20Dw4f51-5ZNktl8ml0khtEb6QlSNypivh2nwj4
-Message-ID: <CAFEAcA9vm7004bytZqYwXCNj_+VNy1RzKMqG3TDnJkswpNhLUg@mail.gmail.com>
-Subject: Re: [PATCH 21/22] i8259_common.c: remove static irq_count and
- irq_level variables
-To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com, 
-	sstabellini@kernel.org, anthony@xenproject.org, edgar.iglesias@gmail.com, 
-	qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-42698a/1791908963-1AAD89EA-03191650/0/0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-Originating-IP: [10.180.168.240]
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF00004FBD:EE_|PH8PR12MB6795:EE_
+X-MS-Office365-Filtering-Correlation-Id: 44ce009c-4117-4e15-94d7-08df29493d46
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|82310400026|376014|36860700016|23010399003|1800799024|6133799003|18002099003|10067099003|11063799006|261009223027099003|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	sCLjz16AISPYJWJgK5BaixiZ3NyaDSfXF7JtmOGkFxetTRVHmJNNmtHC6bcME4OvS8JsqHXbj+RgNgqUOSCfGJpXFghWbWXFIndxRtwQ5H3i/sV5cnQYbWCEkY+cuLHTLJ4Ds4IHQcxsTUr2r8go+QGk302vOfwjHmnuMWMjJz6bzaw4jhbJZ3cK9WpgACVuT7RaoJ1AtaeCAJEn6Y9HGZcftwmW1LDW+K2jMq6mS1jrIGrV/BCU+oIrnDQUDph2+S2siivVRZiraMLV31kMv6+enGvIlHC7s2A7zdXzAY37ItfBI2vNb7cmeIkWW6riZAd6hkSGYh7GN2Wz6z6RcNc56q8fAkDb7iZlWV9gQcQtko35qGnnpdbkJvD+l9wc8jcrlwiXqF5zYZSGvP8PxLQbLThO6SML1Ova9Rs+Obvq7NoCeDxmQ8qUmErlWZLLOlAjnnms6NxrSwdPedRUu2XWe8Ey4KaDMYY8DlQK81ckjto4QHTpNvkkXDeh9dn19z781FSDii+vthEcKiRooquijRcV/kziBJI0ndehNfV7U293L1B2LNhrl/FmabA4yFNVS+ltz3DgSs1C+gGSuaHFz1m/2y+e1LkGXUNdGjY5D9r1drEYuQlDMtEDU4A9c+76C+JtRWER0c1eOo+opXYyYkfLWO+nCA3tdE+pZyyFahNtHY+Y/iRcUa5y0RgWuB7MgzIxbgPVK/co4PqXXw==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(82310400026)(376014)(36860700016)(23010399003)(1800799024)(6133799003)(18002099003)(10067099003)(11063799006)(261009223027099003)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	eiCZqVBeq9998rvvY7Ty+yEFTJ4ctj+GXJ5b6CXfioM+wHFkw6I27ueIgSfDdopJJ1gfDnLfbFHvzEUm82ML/67MmgQUiHzJ9u+ujw+kBWFvzzrOWQ8G246r0d4RGcO7eAI83Uuh9jZa6egDElu7rYHs5w9uFeQi+dD6tLP82UQV217V5fmFChvG6aKJB5/HMKN418vZfWckUXOz/S7rBuZiHeTl8fnuaTelvWzGqN7og2EihwMWGlyLg3iECFUfPNoot1a+O3KI6vC7/x5rOXjLnwZlVIvVyb8Frw2Zp82RZM5Ztne+Wqj7NmCHLbv6DAIR2lpYD4eQa3BknMWrm0D0Vv0hBymXVpPMDigDgiIcVpaaucRiQBVCpXcZjh2zDjn41wVbvNSPBSSA82cPOYJNgjxoSk3ASVu9gI2ymLpr10f5rtduFxJ1PhVGvmE+
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2026 16:44:24.6814
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 44ce009c-4117-4e15-94d7-08df29493d46
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN2PEPF00004FBD.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH8PR12MB6795
+X-purgate-ID: tlsNG-720697/1791909878-313CC2AC-1D9EEF2C/0/0
 X-purgate-type: clean
-X-purgate-size: 1568
+X-purgate-size: 1081
 
-On Wed, 16 Sept 2026 at 11:50, Mark Cave-Ayland
-<mark.caveayland@nutanix.com> wrote:
->
-> Adjust the parameters to i8259_stat_update_irq() to allow passing in pointers
-> to the irq_count and irq_level arrays, and then move the arrays into the
-> corresponding i8259 PIC and KVM PIC devices.
->
-> Doing this allows the statistics capture logic in i8259_set_irq() that handles
-> incoming cascading interrupts to be removed.
->
-> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+There's a potential 32bit left-shift (when size is 4) to a 32bit value,
+which would trigger UB and tickle UBSAN the wrong way. Shifting right an
+all-ones mask fixes the issue.
 
-> diff --git a/hw/i386/kvm/i8259.c b/hw/i386/kvm/i8259.c
-> index 421c9279cd..ca661afc02 100644
-> --- a/hw/i386/kvm/i8259.c
-> +++ b/hw/i386/kvm/i8259.c
-> @@ -30,6 +30,9 @@ struct KVMI8259PICState {
->
->      ISABus *isabus;
->      I8259CommonState i8259[2];
-> +
-> +    int irq_level[ISA_NUM_IRQS];
-> +    uint64_t irq_count[ISA_NUM_IRQS];
->  };
+Fixes: 4609fc8eb04e ("x86/hvm: Improve error information in handle_pio()")
+Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
+---
+ xen/arch/x86/hvm/io.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
+diff --git a/xen/arch/x86/hvm/io.c b/xen/arch/x86/hvm/io.c
+index 912e55d416..91cc2e1dcb 100644
+--- a/xen/arch/x86/hvm/io.c
++++ b/xen/arch/x86/hvm/io.c
+@@ -135,7 +135,7 @@ bool handle_pio(uint16_t port, unsigned int size, int dir)
+     default:
+         gprintk(XENLOG_ERR, "Unexpected PIO status %d, port %#x %s 0x%0*x\n",
+                 rc, port, dir == IOREQ_WRITE ? "write" : "read",
+-                size * 2, data & ((1u << (size * 8)) - 1));
++                size * 2, data & (UINT32_MAX >> (32 - size * 8)));
+         domain_crash(curr->domain);
+         return false;
+     }
 
-> diff --git a/hw/intc/i8259.c b/hw/intc/i8259.c
-> index 3f10777036..ac43995ce4 100644
-> --- a/hw/intc/i8259.c
-> +++ b/hw/intc/i8259.c
-> @@ -49,14 +49,16 @@ struct I8259PICState {
->      ISABus *isabus;
->      IRQState i8259_primary_out_irq;
->      I8259CommonState i8259[2];
-> +
-> +    int irq_level[ISA_NUM_IRQS];
-> +    uint64_t irq_count[ISA_NUM_IRQS];
-> +#ifdef DEBUG_IRQ_LATENCY
-> +    int64_t irq_time[ISA_NUM_IRQS];
-> +#endif
->  };
+base-commit: 6b30eca0e388e5aaa4319c647a777d703d7ee752
+-- 
+2.43.0
 
-Would it make sense for these two types to have a common base
-class (where the stats stuff could then live)? AIUI they're
-both intending to provide the same interface ("pair of i8259
-devices cascaded together in the way that x86 does it").
-
--- PMM
 
