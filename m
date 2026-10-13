@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 91F9ECC6B12
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD7A4CC6B0F
 	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 22:40:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448328.1664328 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1448336.1664364 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGlAQ-0006V7-5S; Tue, 13 Oct 2026 22:40:18 +0000
+	id 1xGlAh-0007Xm-4K; Tue, 13 Oct 2026 22:40:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448328.1664328; Tue, 13 Oct 2026 22:40:18 +0000
+Received: by outflank-mailman (output) from mailman id 1448336.1664364; Tue, 13 Oct 2026 22:40:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGlAQ-0006V0-2c; Tue, 13 Oct 2026 22:40:18 +0000
-Received: by outflank-mailman (input) for mailman id 1448328;
- Tue, 13 Oct 2026 22:40:16 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xGlAh-0007Xb-19; Tue, 13 Oct 2026 22:40:35 +0000
+Received: by outflank-mailman (input) for mailman id 1448336;
+ Tue, 13 Oct 2026 22:40:34 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3TLPOagcKCUsv41tr45t11tyr.p1zAr0-qr8ryyv565.Ar0241wrp6.14t@flex--irogers.bounces.google.com>)
- id 1xGlAO-0006Ut-9o
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 22:40:16 +0000
+ <3XrPOagcKCV0DMJB9MNBJJBG9.7JHS9I-89Q9GGDNON.S9IKMJE97O.JMB@flex--irogers.bounces.google.com>)
+ id 1xGlAg-0007WY-71
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 22:40:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGlAN-003MCl-Je
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 00:40:15 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xGlAf-00Eh2E-KD
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 00:40:33 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3TLPOagcKCUsv41tr45t11tyr.p1zAr0-qr8ryyv565.Ar0241wrp6.14t@flex--irogers.bounces.google.com>)
- id 6aceb32c-8faa-0a2a0a5109dd-0a2a45028124-14
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:15 +0200
-Received: from [74.125.82.198] (helo=mail-dy1-f198.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <3XrPOagcKCV0DMJB9MNBJJBG9.7JHS9I-89Q9GGDNON.S9IKMJE97O.JMB@flex--irogers.bounces.google.com>)
+ id 6aceb35a-e002-0a2a0a5209dd-0a2a450bd1da-10
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:33 +0200
+Received: from [74.125.82.200] (helo=mail-dy1-f200.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3TLPOagcKCUsv41tr45t11tyr.p1zAr0-qr8ryyv565.Ar0241wrp6.14t@flex--irogers.bounces.google.com>)
- id 6aceb34e-6ca4-0a2a45020019-4a7d52c6bc56-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:15 +0200
-Received: by mail-dy1-f198.google.com with SMTP id
- 5a478bee46e88-30bcb065bfdso6715948eec.0
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 15:40:14 -0700 (PDT)
+ <3XrPOagcKCV0DMJB9MNBJJBG9.7JHS9I-89Q9GGDNON.S9IKMJE97O.JMB@flex--irogers.bounces.google.com>)
+ id 6aceb360-b7e8-0a2a450b0019-4a7d52c8bdd3-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:33 +0200
+Received: by mail-dy1-f200.google.com with SMTP id
+ 5a478bee46e88-33c35f5ca6cso7840779eec.1
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 15:40:33 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,43 +50,47 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:Mime-Version:Date"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1791931213; x=1792536013; darn=lists.xenproject.org;
-        h=content-type:cc:to:from:subject:message-id:mime-version:date:from
-         :to:cc:subject:date:message-id:reply-to:content-type;
-        bh=6CWZGGdh7JOQ6UqV1gxmMbPkjK0LPv1nbOU26QpmZ10=;
-        b=C8fvNosO2IgQu0e5orrRxXymtHE8QjkmVwVLKfu8B9YcnJIKvbSwDqEMUkprtpea38
-         8MeSNUha/jNCh1Nx1KL9tHdJSF+r/cGgSlNaO0mcD8FaT3h7r40Qps23jJDtUNZKNgsA
-         hqIn6rgSmAiUjov0hk3uiOoP+4Q0nap72DpjSk1eaywNTKgDhFX1wdGqOtF/NaAkryUw
-         5yEQGxASURBK9EcCzNQnTC6+38RbZ4SE8GxMtnJ1OpGwLaCjlJwMzBUlKwyPHlVHU5u1
-         P/RYDh253vNgtweiZE+r2CjdzIZ5q5DH3YRo9PLLVg8RhXTogXN26AXheW2Jz16n8BUg
-         uHKg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791931213; x=1792536013;
-        h=content-type:cc:to:from:subject:message-id:mime-version:date
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+        d=google.com; s=20251104; t=1791931231; x=1792536031; darn=lists.xenproject.org;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=6CWZGGdh7JOQ6UqV1gxmMbPkjK0LPv1nbOU26QpmZ10=;
-        b=sqqEHPRSNvKrGaDp1wMaUp1VbFaWW1sabcVtnI5E9so8qwVPcV/FG717nJkn2kFYsz
-         eBhO7B/N5wi2iucq+Mh7eNOrN2+mnIoKsEy+RuRoENDJbAKLk7B9XqvvEwZEaxVQ/qwE
-         9Horv/ZT9L5x9tKogbAZ02babd643Zq9qFF9InLyXAJvakfE20+MRBxd9LbXiiURQw3U
-         EkHc2a0X+g6CnQx1o0EhINkPbW6pD3uEzhmSDV2vljV4/zL2wBwKReuUvdpkPH85dat0
-         7Dgy+7dEwrFcChVjw2nMq0zf+qs5LceDmSLxlcV/PewqPHb4NjEmuGzBnzXmZxVu40ZV
-         +RYg==
-X-Forwarded-Encrypted: i=1; AKwUvByl1B22Cr9P8ynjzo1yJF0HnymSxwIEMk7fNnRj83fB3iqaoLU5uUahO4R67RpQH7sR0il++HxKqHA=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIngwcylbWZo5OPtq3qREN4yy1Cj5K74WdpjFA+aDvhD5b3uiW/
-	b2mhqQiupifo42+lGIt4vuOXzlDxuT8lfta83b+wXkekIp/mK3grWT+FjLOo0flkG4kQtjnqh7P
-	3Votuy1VXyA==
-X-Received: from dlak14.prod.google.com ([2002:a05:701b:290e:b0:14e:f9ab:6f83])
- (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:701b:2309:b0:153:7a27:b89
- with SMTP id a92af1059eb24-16a5ed4008cmr22709999c88.21.1791931212336; Tue, 13
- Oct 2026 15:40:12 -0700 (PDT)
-Date: Tue, 13 Oct 2026 15:39:35 -0700
+        bh=E3db36lwsPWQArDIHzP6eqDHTacNJpd6D0FMiQjZlVc=;
+        b=kB3ric9bZZKCJLDWJEBGQf40QadbfDOVFWIFp5iKE4kkW8ly1Aq0nfu+FYraj8H/La
+         hpUjkR+UutJ0CXsCHpY9nEgBbrWpcSZZPlb3pNwzebf4I7bwQLMVR+WPbNj1J2nCFF2M
+         GmiSC/y88xDFEZjWXcgbXzaguAWe1kbBGUxWKnlTnUzNk0plOr8WnUYFN1+52ei7lMrD
+         39RXacg4MorsGHWO1eV4eX9HrXeK2CUxl69goX44xTSmBHJRRj8UFTWLLAH/agaPAxFf
+         6RKOfCUakn169RZQb5KYm+SsioJIcgHepjDdviDWTuAUiFpZ4jNc3Xlm6Jrf0bMjYAop
+         lGfg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791931231; x=1792536031;
+        h=content-type:cc:to:from:subject:message-id:references:mime-version
+         :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=E3db36lwsPWQArDIHzP6eqDHTacNJpd6D0FMiQjZlVc=;
+        b=Vg7ORvOB6aIzR2UrqO3uEfYmfn5a2KHgQCdO+uVWC5aALdF1x9Eev9dTHAFEBMyi3o
+         wZdryshXnPEAiT4mRePM5d3eFNeG8kPYgPrEgniGJLS2GA5W37MUKe9ojRgnwcLtSigW
+         T8t869MwEJmtZQ1Ca2Tn9viH42f8hlpRqU+bjBiMgN1a7D4erLIZ+GbLO2RNPxLlN5AV
+         cHPt8+9jwApjWKRR0eeNzstbjIu4ftvbHBq31TmJVgbjZDewBD+ewltxj26ooZOuBCCT
+         TpXbvQcw3XBkLT682hFjgPuED/S/KE/tJ3XZrdQnBOX4w4HN7cYZ6jCZrWkJq95T9qNR
+         BbxQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzHEAt94h9uMqtwHL4Dj/KMS+6aPr9DgeSP6GsA7r837xKiYj53inVktvqtskIk2QyunBNBGz+v7uc=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJELABkKD8wGLbXDqi2rdSt7s0I+xOP8W4sW3zGJK0cCPGG/ip8
+	JQ6Ja533injx+3UUVNpzIee50B4tRHAuNNXSSQXiUulY1i5CFTRhYuRbyY3HMjrs0eUZ9tq4lfQ
+	7z8JUnvl25w==
+X-Received: from dybmd37.prod.google.com ([2002:a05:7301:1825:b0:351:1da6:c2e7])
+ (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:7301:78cb:b0:351:515b:4e85
+ with SMTP id 5a478bee46e88-3537e088bd7mr19706222eec.16.1791931230851; Tue, 13
+ Oct 2026 15:40:30 -0700 (PDT)
+Date: Tue, 13 Oct 2026 15:39:43 -0700
+In-Reply-To: <20261013223946.1836757-1-irogers@google.com>
 Mime-Version: 1.0
+References: <20261013223946.1836757-1-irogers@google.com>
 X-Mailer: git-send-email 2.56.0.385.gd3acb90ef8-goog
-Message-ID: <20261013223946.1836757-1-irogers@google.com>
-Subject: [PATCH 00/11] kobject: Require explicit initialization of struct kobj_type::release
+Message-ID: <20261013223946.1836757-9-irogers@google.com>
+Subject: [PATCH 08/11] s390/sclp_mem: Allocate struct sclp_mem dynamically and
+ add kobject release
 From: Ian Rogers <irogers@google.com>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J . Wysocki" <rafael@kernel.org>, 
 	Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, Kees Cook <kees@kernel.org>, 
@@ -114,90 +118,180 @@ Cc: Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling <morbo@google.com>
 	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
 	Ian Rogers <irogers@google.com>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-720697/1791931215-30DC12AC-E5852568/0/0
+X-purgate-ID: tlsNG-42698a/1791931233-184CB9EA-E98CBEF7/0/0
 X-purgate-type: clean
-X-purgate-size: 4246
+X-purgate-size: 5639
 
-Clang supports the 'require_explicit_initialization' attribute on struct
-fields to enforce that the field is explicitly initialized when an
-aggregate object is constructed, emitting -Wuninitialized-explicit-init
-(enabled by default) if the field is omitted.
+sclp_init_mem() allocated a single array of struct sclp_mem with
+kzalloc_objs() and registered each embedded kobject using a kobj_type
+without a .release callback. Allocate each struct sclp_mem individually
+with kzalloc_obj() instead and add sclp_mem_release() to free it.
 
-Following discussion at the Linux Plumbers Conference [1], this series
-introduces __require_explicit_initialization in
-include/linux/compiler_attributes.h and applies it to
-struct kobj_type::release.
+Fixes: ff18dcb19aab ("s390/sclp: Add support for dynamic (de)configuration of memory")
+Assisted-by: Antigravity:gemini-3.1-pro
+Signed-off-by: Ian Rogers <irogers@google.com>
+---
+ drivers/s390/char/sclp_mem.c | 73 +++++++++++++++++-------------------
+ 1 file changed, 34 insertions(+), 39 deletions(-)
 
-As Documentation/core-api/kobject.rst notes:
-  "One important point cannot be overstated: every kobject must have a
-  release() method, and the kobject must persist (in a consistent state)
-  until that method is called. If these constraints are not met, the code
-  is flawed."
-
-Annotating struct kobj_type::release caught 30 struct kobj_type
-definitions across the tree that omitted .release:
-- Patches 2-10 fix 10 struct kobj_type definitions where dynamically
-  allocated kobjects, ksets, or enclosing structures were either leaked on
-  kobject_put() or freed prematurely before kobject release (risking a
-  use-after-free when CONFIG_DEBUG_KOBJECT_RELEASE=y).
-- Patch 11 annotates struct kobj_type::release with
-  __require_explicit_initialization and explicitly sets .release = NULL
-  (with explanatory comments) on the remaining legacy struct kobj_type
-  definitions whose kobjects are static, per-CPU, or embedded in devm- or
-  parent-managed structures.
-
-[1] https://lpc.events/event/20/contributions/2392/
-
-Ian Rogers (11):
-  Compiler Attributes: Add __require_explicit_initialization macro
-  powerpc/secvar: Add missing kobject release callback to secvar_ktype
-  sh: sq: Add missing kobject release callback to ktype_percpu_entry
-  cpufreq: Initialize kobj_type release callback in ondemand and
-    conservative governors
-  ACPI: CPPC: Free cpc_desc in kobject release callback
-  dlm: Free dlm_ls in kobject release callback
-  xen/sys-hypervisor: Add release callback to hyp_sysfs_kobj_type
-  s390/sclp_mem: Allocate struct sclp_mem dynamically and add kobject
-    release
-  ubifs: sysfs: Use kset_create_and_add() for ubifs_kset
-  drm/amdkfd: Free queue in procfs_queue_type kobject release callback
-  kobject: Require explicit initialization of struct kobj_type::release
-
- Documentation/conf.py                         |  1 +
- arch/arm64/kernel/cpuinfo.c                   |  2 +
- arch/powerpc/kernel/secvar-sysfs.c            |  6 ++
- arch/sh/kernel/cpu/sh4/sq.c                   |  6 ++
- drivers/acpi/cppc_acpi.c                      | 39 +++++-----
- drivers/acpi/sysfs.c                          |  2 +
- drivers/cpufreq/cpufreq_conservative.c        |  5 +-
- drivers/cpufreq/cpufreq_governor.c            |  3 +-
- drivers/cpufreq/cpufreq_governor.h            |  1 +
- drivers/cpufreq/cpufreq_ondemand.c            |  5 +-
- drivers/dma/ioat/sysfs.c                      |  2 +
- drivers/gpu/drm/amd/amdgpu/amdgpu_xcp.c       |  4 +
- drivers/gpu/drm/amd/amdkfd/kfd_process.c      | 10 ++-
- drivers/gpu/drm/amd/amdkfd/kfd_queue.c        |  5 +-
- drivers/infiniband/hw/hfi1/sysfs.c            |  2 +
- drivers/infiniband/hw/usnic/usnic_ib_sysfs.c  |  2 +
- drivers/parisc/pdc_stable.c                   |  2 +
- drivers/power/supply/ab8500_fg.c              |  2 +
- drivers/s390/char/sclp_mem.c                  | 73 +++++++++----------
- drivers/soc/hisilicon/kunpeng_hccs.c          |  6 ++
- .../fbdev/omap2/omapfb/dss/display-sysfs.c    |  2 +
- .../fbdev/omap2/omapfb/dss/manager-sysfs.c    |  2 +
- .../fbdev/omap2/omapfb/dss/overlay-sysfs.c    |  2 +
- drivers/xen/sys-hypervisor.c                  |  6 ++
- fs/dlm/lockspace.c                            | 19 +++--
- fs/erofs/sysfs.c                              |  4 +
- fs/f2fs/sysfs.c                               |  6 ++
- fs/ocfs2/cluster/masklog.c                    |  2 +
- fs/ubifs/sysfs.c                              | 24 ++----
- include/linux/compiler_attributes.h           | 11 +++
- include/linux/kobject.h                       |  2 +-
- scripts/checkpatch.pl                         |  1 +
- tools/lib/python/kdoc/xforms_lists.py         |  1 +
- 33 files changed, 170 insertions(+), 90 deletions(-)
-
+diff --git a/drivers/s390/char/sclp_mem.c b/drivers/s390/char/sclp_mem.c
+index 6df1926d4c62..f7c161e0d836 100644
+--- a/drivers/s390/char/sclp_mem.c
++++ b/drivers/s390/char/sclp_mem.c
+@@ -49,11 +49,6 @@ struct sclp_mem {
+ #endif
+ };
+ 
+-struct sclp_mem_arg {
+-	struct sclp_mem *sclp_mems;
+-	struct kset *kset;
+-};
+-
+ struct assign_storage_sccb {
+ 	struct sccb_header header;
+ 	u16 rn;
+@@ -304,7 +299,15 @@ static ssize_t sclp_memmap_on_memory_store(struct kobject *kobj, struct kobj_att
+ 	return rc ? rc : count;
+ }
+ 
++static void sclp_mem_release(struct kobject *kobj)
++{
++	struct sclp_mem *sclp_mem = container_of(kobj, struct sclp_mem, kobj);
++
++	kfree(sclp_mem);
++}
++
+ static const struct kobj_type ktype = {
++	.release = sclp_mem_release,
+ 	.sysfs_ops = &kobj_sysfs_ops,
+ };
+ 
+@@ -321,36 +324,40 @@ static struct attribute_group sclp_mem_attr_group = {
+ 	.attrs = sclp_mem_attrs,
+ };
+ 
+-static int sclp_create_mem(struct sclp_mem *sclp_mem, struct kset *kset,
+-			   unsigned int id, bool config, bool memmap_on_memory)
++static int sclp_create_mem(struct kset *kset, unsigned int id, bool config,
++			   bool memmap_on_memory)
+ {
++	struct sclp_mem *sclp_mem;
+ 	int rc;
+ 
++	sclp_mem = kzalloc_obj(*sclp_mem);
++	if (!sclp_mem)
++		return -ENOMEM;
+ 	sclp_mem->memmap_on_memory = memmap_on_memory;
+ 	sclp_mem->config = config;
+ #ifdef CONFIG_KASAN
+ 	sclp_mem->early_shadow_mapped = config;
+ #endif
+ 	sclp_mem->id = id;
+-	kobject_init(&sclp_mem->kobj, &ktype);
+-	rc = kobject_add(&sclp_mem->kobj, &kset->kobj, "memory%d", id);
+-	if (rc)
++	rc = kobject_init_and_add(&sclp_mem->kobj, &ktype, &kset->kobj,
++				  "memory%d", id);
++	if (rc) {
++		kobject_put(&sclp_mem->kobj);
+ 		return rc;
+-	return sysfs_create_group(&sclp_mem->kobj, &sclp_mem_attr_group);
++	}
++	rc = sysfs_create_group(&sclp_mem->kobj, &sclp_mem_attr_group);
++	if (rc) {
++		kobject_put(&sclp_mem->kobj);
++		return rc;
++	}
++	return 0;
+ }
+ 
+ static int sclp_create_configured_mem(struct memory_block *mem, void *argument)
+ {
+-	struct sclp_mem *sclp_mems;
+-	struct sclp_mem_arg *arg;
+-	struct kset *kset;
+-	unsigned int id;
++	struct kset *kset = argument;
+ 
+-	id = mem->dev.id;
+-	arg = (struct sclp_mem_arg *)argument;
+-	sclp_mems = arg->sclp_mems;
+-	kset = arg->kset;
+-	return sclp_create_mem(&sclp_mems[id], kset, id, true, false);
++	return sclp_create_mem(kset, mem->dev.id, true, false);
+ }
+ 
+ static void __init align_to_block_size(unsigned long *start,
+@@ -368,8 +375,7 @@ static void __init align_to_block_size(unsigned long *start,
+ 	*size = size_align;
+ }
+ 
+-static int __init sclp_create_standby_mems_merged(struct sclp_mem *sclp_mems,
+-						  struct kset *kset, u16 rn)
++static int __init sclp_create_standby_mems_merged(struct kset *kset, u16 rn)
+ {
+ 	unsigned long start, size, addr, block_size;
+ 	static u16 first_rn, num;
+@@ -394,7 +400,7 @@ static int __init sclp_create_standby_mems_merged(struct sclp_mem *sclp_mems,
+ 		goto skip_add;
+ 	for (addr = start; addr < start + size; addr += block_size) {
+ 		id = addr / block_size;
+-		rc = sclp_create_mem(&sclp_mems[id], kset, id, false,
++		rc = sclp_create_mem(kset, id, false,
+ 				     mhp_supports_memmap_on_memory());
+ 		if (rc)
+ 			break;
+@@ -405,45 +411,34 @@ static int __init sclp_create_standby_mems_merged(struct sclp_mem *sclp_mems,
+ 	return rc;
+ }
+ 
+-static int __init sclp_create_standby_mems(struct sclp_mem *sclp_mems, struct kset *kset)
++static int __init sclp_create_standby_mems(struct kset *kset)
+ {
+ 	struct memory_increment *incr;
+ 	int rc = 0;
+ 
+ 	list_for_each_entry(incr, &sclp_mem_list, list) {
+ 		if (incr->standby)
+-			rc = sclp_create_standby_mems_merged(sclp_mems, kset, incr->rn);
++			rc = sclp_create_standby_mems_merged(kset, incr->rn);
+ 		if (rc)
+ 			return rc;
+ 	}
+-	return sclp_create_standby_mems_merged(sclp_mems, kset, 0);
++	return sclp_create_standby_mems_merged(kset, 0);
+ }
+ 
+ static int __init sclp_init_mem(void)
+ {
+-	const unsigned long block_size = memory_block_size_bytes();
+-	unsigned int max_sclp_mems;
+-	struct sclp_mem *sclp_mems;
+-	struct sclp_mem_arg arg;
+ 	struct kset *kset;
+ 	int rc;
+ 
+-	max_sclp_mems = roundup(sclp.rnmax * sclp.rzm, block_size) / block_size;
+-	/* Allocate memory for all blocks ahead of time. */
+-	sclp_mems = kzalloc_objs(struct sclp_mem, max_sclp_mems);
+-	if (!sclp_mems)
+-		return -ENOMEM;
+ 	kset = kset_create_and_add("memory", NULL, firmware_kobj);
+ 	if (!kset)
+ 		return -ENOMEM;
+ 	/* Initial memory is in the "configured" state already. */
+-	arg.sclp_mems = sclp_mems;
+-	arg.kset = kset;
+-	rc = for_each_memory_block(&arg, sclp_create_configured_mem);
++	rc = for_each_memory_block(kset, sclp_create_configured_mem);
+ 	if (rc)
+ 		return rc;
+ 	/* Standby memory is "deconfigured". */
+-	return sclp_create_standby_mems(sclp_mems, kset);
++	return sclp_create_standby_mems(kset);
+ }
+ 
+ static void __init insert_increment(u16 rn, int standby, int assigned)
 -- 
 2.56.0.385.gd3acb90ef8-goog
 
