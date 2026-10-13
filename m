@@ -4,47 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 53A71CC6B03
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 10:07:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446888.1663016 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3BC04CC6B03
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 10:09:08 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446906.1663035 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGZPy-0004fN-2h; Tue, 13 Oct 2026 10:07:34 +0000
+	id 1xGZRF-0006ML-Jk; Tue, 13 Oct 2026 10:08:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446888.1663016; Tue, 13 Oct 2026 10:07:34 +0000
+Received: by outflank-mailman (output) from mailman id 1446906.1663035; Tue, 13 Oct 2026 10:08:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGZPx-0004fG-WD; Tue, 13 Oct 2026 10:07:34 +0000
-Received: by outflank-mailman (input) for mailman id 1446888;
- Tue, 13 Oct 2026 10:07:32 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGZPw-0004e9-I3
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 10:07:32 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGZPv-009Aep-V8
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 12:07:31 +0200
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a134bb191b0008425@swg.vates.tech>)
- id 6ace02e2-bab6-0a2a0a5309dd-0a2a4502bb5e-10
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 12:07:31 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a134bb191b0008425@swg.vates.tech>)
- id 6ace02e2-6ca4-0a2a45020019-b9ff1c238655-3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 12:07:31 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a134bb191b0008425.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Tue, 13 Oct 2026 10:07:19 +0000
-Received: from leducb.home (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
- [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id A8F6D82A32;
- Tue, 13 Oct 2026 12:07:18 +0200 (CEST)
+	id 1xGZRF-0006ME-Gp; Tue, 13 Oct 2026 10:08:53 +0000
+Received: by outflank-mailman (input) for mailman id 1446906;
+ Tue, 13 Oct 2026 10:08:52 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <roger@xenproject.org>) id 1xGZRE-0006M6-8e
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 10:08:52 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <roger@xenproject.org>) id 1xGZRD-00000003Ksh-3PFF;
+ Tue, 13 Oct 2026 10:08:51 +0000
+Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
+ helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98.2)
+ (envelope-from <roger@xenproject.org>) id 1xGZRC-0000000AxZ4-3Tbo;
+ Tue, 13 Oct 2026 10:08:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,233 +41,66 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=TYcEAn0o+duldPjksK5lNbTyrPK4j1Hmo32hqY1SRSk=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=VA2b1gtp2GAQWASewBEGbZPsfEe4ks3hN/NQXUHSzQup8lf4v0mhld7NlXG6U0QV+3C+SZr00
- M10uizGSCR+zNlGj4NWlK63XsjiEozNhnGCkzr6btSijVirGLvSzelONLmDhirkf+3RXvPLM5cX
- g0ZT5VBDrpc5qfA7TDRZOTQtwfoufhdpKhBqBHsEz/QbHfpnNWyaJXkgMboanS/fgTbxlqiqQWV
- pZocUzWBP2z4KCfvzT7plZnR5PL1TXduc4MBZBaHGMufXaDFy/j0aTPVPVlUpXuvK2yvDP4NtZC
- UwsAjUsrlfD4jRI/QQlLBN/gdlu+j/dtFIQNRF15WwqQ==
-X-Zone-Loop: 722c9c76425bc8b00d376c4d17e734fb70d517433e60
-x-campaign-type: default
-x-transaction-id: eee22e5f-b357-4705-83e2-143bf6c162aa
-x-swg-uid: 01-c900d9ae-357d-4f84-813f-5b00ff797ed5
-X-Mailer: Sweego
-Message-ID:
- <1791886039.8631fc262581453bbf619ec5b2062170.1a134bb191b0008425@vates.tech>
-x-swg-bid: 1791886039.8631fc262581453bbf619ec5b2062170.1a134bb191b0008425
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
+	bh=EJ7wNjl4IBOa/oa0kfVKJ9Mqxz/Lly+NqGFPA74zNFM=; b=m2GK7ACfa+nsu5z0lyT88uacCD
+	XtVAI/yP/J6rxWHU/MNng3Bamg6v89/Wq5APYYNEWFaPJaRqM8r8tVGAWu8IpZsql5SqjWrCGLBvc
+	QzM+iOsTSI+6RwLjwYkFyHQpZ1oQ5h/CZNJc1e+V8vOHYK+EhHbJQxHF4+N9yRlGmPFU=;
+Date: Tue, 13 Oct 2026 12:08:42 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Zheng Zhang <zhangzheng@iscas.ac.cn>
-Subject: [PATCH v6 3/4] xen/riscv: fix A/D bits in Xen's page-table mappings
-Date: Tue, 13 Oct 2026 12:07:12 +0200
-In-Reply-To: <1791885904.8631fc262581453bbf619ec5b2062170.1a134b909b40008425@vates.tech>
-References: <1791885904.8631fc262581453bbf619ec5b2062170.1a134b909b40008425@vates.tech>
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: Re: [PATCH 1/2] x86: constify local variables in
+ mapcache_current_vcpu()
+Message-ID: <as4DKjCDU5EQUt9Z@Mac.lan>
+References: <942facb0-c42b-4f09-9081-6cfb006c7bfc@suse.com>
+ <d7ddc188-0e92-46c3-a38b-9a628eb60cd2@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1791885856; l=7701; i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id; bh=Jrbvgl2ZleNh0b6oBc9NXBIKurYx2aHFGmESflVTzm4=; b=K2KCJ8ZvBka/XXVcZwJ6WwUlg89W8hgF1rfaKnGarh5pDSN7zxMGHxAzI6Taor5+19jHoob+p 4x5ienbd/1BBjA7l46J7Hp9hrOOI8hDZ+Wzn4fWI5WQe0blc/kbx/cx
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519; pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1791886038889
-X-purgate-ID: tlsNG-720697/1791886051-31BC82AC-E4839CFC/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 7703
+In-Reply-To: <d7ddc188-0e92-46c3-a38b-9a628eb60cd2@suse.com>
 
-Xen does not handle page faults caused by clear A/D bits, so it presets
-them when creating PTEs. pt_update_entry() does so, but three places build
-leaf PTEs directly without going through it: setup_initial_mapping() (the
-boot page tables), check_pgtbl_mode_support() (the temporary root entry
-used to probe SATP mode support) and arch_pmap_map() (the fixmap).
+On Tue, Oct 13, 2026 at 11:05:44AM +0200, Jan Beulich wrote:
+> As of the referenced commit v won't be returned from the function anymore.
+> Yet that was the sole reason for it to not be pointer-to-const. curr,
+> which was introduced by that change, had no reason to be pointer-to-non-
+> const from the start.
+> 
+> Amends: 622c9a5ba95d ("x86/mm: accurately track which vCPU page-tables are loaded")
 
-Without Svadu, all three fault on first access. For
-check_pgtbl_mode_support(), the fault is raised by the instruction fetch
-right after the SATP write, before any trap handler is set.
+I think I recall how this ended the way it is: initially I was
+returning v, which was wrong because this_cpu(pgtable_vcpu) will have
+changed after the sync_local_execstate().  Later I adjusted the return
+value of the function to be this_cpu(pgtable_vcpu), but didn't made v
+const.
 
-Add PTE_ACCESSED and PTE_DIRTY to PAGE_HYPERVISOR_RO, and build
-PAGE_HYPERVISOR_RW and PAGE_HYPERVISOR_RX on top of it. PTE_DIRTY is set in
-all cases for consistency with pt_update_entry() which sets it at runtime.
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-This fixes arch_pmap_map() for free, since it already builds its PTE from
-PAGE_HYPERVISOR_RW. Switch setup_initial_mapping() to use these macros for
-its default, text and rodata permissions, and check_pgtbl_mode_support() to
-use PAGE_HYPERVISOR_RX for its temporary root entry. The latter drops
-PTE_WRITABLE, going from RWX to RX, but this is harmless, as that entry
-only has to make the current instruction stream fetchable between the two
-CSR_SATP writes, and nothing writes through it.
+Acked-by: Roger Pau Monné <roger@xenproject.org>
 
-Drop the now-redundant PTE_LEAF_DEFAULT, since converting the last
-open-coded site above leaves it with no user outside page.h itself.
+> ---
+> I was heavily tempted to also replace the smp_processor_id() at this
+> occasion (by curr->processor). With gcc16, that leads to the function
+> actually being inlined (in debug builds), i.e. a significant change in
+> generated code, and a measurable increase in code size. From the function
+> being declared "inline", that looks to have been the intention, yet then
+> that use of "inline" doesn't quite fit our principles. The main reasoning
+> for this as a secondary change would be:
+> - "curr" could be dropped (instead of having const added) if code
+>   generated from ASSERT() wouldn't matter quality-wise,
+> - if generated code quality matters there, then the unnecessary use of
+>   smp_processor_id() should matter, too.
+> However, an adjustment along these lines may better fit in a subsequent
+> change dealing with the repeated this_cpu() here.
 
-pte_is_table() and pte_is_mapping() both assert that a PTE doesn't use one
-of the two reserved encodings, (V=1, W=1, R=0) and (V=1, X=1, W=1, R=0), by
-masking it with PAGE_HYPERVISOR_RW. Now that PAGE_HYPERVISOR_RW also
-carries A and D, a reserved PTE with A or D set would no longer be caught.
-Mask with the V, R and W bits explicitly instead, and factor the check out
-into pte_has_reserved_rwx().
+We might want to introduce a local cpu variable to hold
+curr->processor and then replace the this_cpu() with per_cpu(),
+together with removing the usage of smp_processor_id().  Shouldn't
+make the code more complicated IMO.
 
-Fixes: e66003e7be19 ("xen/riscv: introduce setup_initial_pages")
-Assisted-by: Claude:claude-opus-5
-Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
----
-Changes since v5:
-- no changes, already reviewed and waiting to be merged.
----
-Changes since v4:
-- rebase on top of staging.
-- add a missing changes line in "Changes since v3".
----
-Changes since v3:
-- rebase patch 2/6 which modified wrong indentation.
-- change commit message to address review comments.
-- rename pte_is_reserved() to pte_has_reserved_rwx()
----
-Changes since v2:
-- add fixes commit ref.
-- add A/D bits to PAGE_HYPERVISOR_RO and derive PAGE_HYPERVISOR_RW/RX
-  from it for consistency with runtime.
-- introduce pte_is_reserved() to factor out the reserved-encoding assert
-  shared by pte_is_table() and pte_is_mapping().
-- reword commit title
----
-Changes since v1:
-- change commit title
-- mention in patch message that arch_pmap_map() is fixed too, via the
-  PAGE_HYPERVISOR_RW change, not just setup_initial_mapping().
-- convert check_pgtbl_mode_support()'s temporary root entry to
-  PAGE_HYPERVISOR_RX, as it's harmless.
-- drop PTE_LEAF_DEFAULT entirely instead of keeping it, now that no site
-  open-codes it anymore.
-- drop the pte_is_table() comment line that referenced PAGE_HYPERVISOR_RW,
-  now stale.
----
- xen/arch/riscv/include/asm/page.h | 33 +++++++++++++++++----------------
- xen/arch/riscv/mm.c               | 11 +++++------
- 2 files changed, 22 insertions(+), 22 deletions(-)
-
-diff --git a/xen/arch/riscv/include/asm/page.h b/xen/arch/riscv/include/asm/page.h
-index b465a90325..8a3e3e1e66 100644
---- a/xen/arch/riscv/include/asm/page.h
-+++ b/xen/arch/riscv/include/asm/page.h
-@@ -46,12 +46,12 @@
- #define PTE_PBMT_NOCACHE            BIT(61, UL)
- #define PTE_PBMT_IO                 BIT(62, UL)
- 
--#define PTE_LEAF_DEFAULT            (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
- #define PTE_TABLE                   (PTE_VALID)
- 
--#define PAGE_HYPERVISOR_RO          (PTE_VALID | PTE_READABLE)
--#define PAGE_HYPERVISOR_RW          (PTE_VALID | PTE_READABLE | PTE_WRITABLE)
--#define PAGE_HYPERVISOR_RX          (PTE_VALID | PTE_READABLE | PTE_EXECUTABLE)
-+#define PAGE_HYPERVISOR_RO          (PTE_VALID | PTE_READABLE | \
-+                                     PTE_ACCESSED | PTE_DIRTY)
-+#define PAGE_HYPERVISOR_RW          (PAGE_HYPERVISOR_RO | PTE_WRITABLE)
-+#define PAGE_HYPERVISOR_RX          (PAGE_HYPERVISOR_RO | PTE_EXECUTABLE)
- 
- #define PAGE_HYPERVISOR             PAGE_HYPERVISOR_RW
- /*
-@@ -161,31 +161,32 @@ static inline bool pte_is_valid(pte_t p)
-  *      X W R Meaning
-  *      0 0 0 Pointer to next level of page table.
-  *      0 0 1 Read-only page.
-- *      0 1 0 Reserved for future use.
-+ *      0 1 0 Reserved for future use. [1]
-  *      0 1 1 Read-write page.
-  *      1 0 0 Execute-only page.
-  *      1 0 1 Read-execute page.
-- *      1 1 0 Reserved for future use.
-+ *      1 1 0 Reserved for future use. [2]
-  *      1 1 1 Read-write-execute page.
-+ *
-+ *   So if V=1 and W=1 then R also needs to be 1 as R = 0 is reserved for
-+ *   future use ([1], [2]).
-  */
-+static inline bool pte_has_reserved_rwx(pte_t p)
-+{
-+    return (p.pte & (PTE_VALID | PTE_READABLE | PTE_WRITABLE)) ==
-+           (PTE_VALID | PTE_WRITABLE);
-+}
-+
- static inline bool pte_is_table(pte_t p)
- {
--    /*
--     * According to the spec if V=1 and W=1 then R also needs to be 1 as
--     * R = 0 is reserved for future use ( look at the Table 4.5 ) so check
--     * in ASSERT that if (V==1 && W==1) then R isn't 0.
--     *
--     * PAGE_HYPERVISOR_RW contains PTE_VALID too.
--     */
--    ASSERT(((p.pte & PAGE_HYPERVISOR_RW) != (PTE_VALID | PTE_WRITABLE)));
-+    ASSERT(!pte_has_reserved_rwx(p));
- 
-     return ((p.pte & (PTE_VALID | PTE_ACCESS_MASK)) == PTE_VALID);
- }
- 
- static inline bool pte_is_mapping(pte_t p)
- {
--    /* See pte_is_table() */
--    ASSERT(((p.pte & PAGE_HYPERVISOR_RW) != (PTE_VALID | PTE_WRITABLE)));
-+    ASSERT(!pte_has_reserved_rwx(p));
- 
-     return (p.pte & PTE_VALID) && (p.pte & PTE_ACCESS_MASK);
- }
-diff --git a/xen/arch/riscv/mm.c b/xen/arch/riscv/mm.c
-index 06f0406781..6f7dcd10b2 100644
---- a/xen/arch/riscv/mm.c
-+++ b/xen/arch/riscv/mm.c
-@@ -140,19 +140,18 @@ static void __init setup_initial_mapping(struct mmu_desc *mmu_desc,
-         case 1: /* Level 0 */
-             {
-                 unsigned long paddr = (page_addr - map_start) + pa_start;
--                unsigned int pte_flags = PTE_LEAF_DEFAULT;
-+                unsigned int pte_flags = PAGE_HYPERVISOR_RW;
-                 unsigned long addr = is_identity_mapping
-                                      ? page_addr : virt_to_maddr(page_addr);
-                 pte_t pte_to_be_written;
- 
-                 index = pt_index(0, page_addr);
- 
--                if ( is_kernel_text(addr) ||
--                     is_kernel_inittext(addr) )
--                    pte_flags = PTE_EXECUTABLE | PTE_READABLE | PTE_VALID;
-+                if ( is_kernel_text(addr) || is_kernel_inittext(addr) )
-+                    pte_flags = PAGE_HYPERVISOR_RX;
- 
-                 if ( is_kernel_rodata(addr) )
--                    pte_flags = PTE_READABLE | PTE_VALID;
-+                    pte_flags = PAGE_HYPERVISOR_RO;
- 
-                 pte_to_be_written = paddr_to_pte(paddr, pte_flags);
- 
-@@ -197,7 +196,7 @@ static bool __init check_pgtbl_mode_support(struct mmu_desc *mmu_desc,
- 
-     index = pt_index(page_table_level, aligned_load_start);
-     stage1_pgtbl_root[index] = paddr_to_pte(aligned_load_start,
--                                            PTE_LEAF_DEFAULT | PTE_EXECUTABLE);
-+                                            PAGE_HYPERVISOR_RX);
- 
-     sfence_vma();
-     csr_write(CSR_SATP,
-
--- 
-2.55.0
-
+Thanks, Roger.
 
