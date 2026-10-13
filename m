@@ -4,41 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7143BCC6B34
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 12:06:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1445728.1665829 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 64A63CC6B34
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 12:07:19 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446669.1665863 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKEH-0006uH-PL; Thu, 15 Oct 2026 12:06:37 +0000
+	id 1xHKEo-0000TJ-Qp; Thu, 15 Oct 2026 12:07:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1445728.1665829; Thu, 15 Oct 2026 12:06:37 +0000
+Received: by outflank-mailman (output) from mailman id 1446669.1665863; Thu, 15 Oct 2026 12:07:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKEH-0006rw-GK; Thu, 15 Oct 2026 12:06:37 +0000
-Received: by outflank-mailman (input) for mailman id 1445728;
- Sun, 11 Oct 2026 19:04:10 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xHKEo-0000T9-Mw; Thu, 15 Oct 2026 12:07:10 +0000
+Received: by outflank-mailman (input) for mailman id 1446669;
+ Tue, 13 Oct 2026 05:35:52 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <netdev-bot+sashiko@kernel.org>) id 1xFyqA-00045Y-29
- for xen-devel@lists.xenproject.org; Sun, 11 Oct 2026 19:04:10 +0000
+ (envelope-from <tpk.teshan@gmail.com>) id 1xGVB2-0004ln-II
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 05:35:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xFyq9-00CH6J-3i
- for xen-devel@lists.xenproject.org; Sun, 11 Oct 2026 21:04:09 +0200
+ id 1xGVAz-000dC6-3S
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 07:35:49 +0200
 Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <netdev-bot+sashiko@kernel.org>)
- id 6acbdd99-e002-0a2a0a5209dd-0a2a4501cc46-8
- for <xen-devel@lists.xenproject.org>; Sun, 11 Oct 2026 21:04:09 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ (envelope-from <tpk.teshan@gmail.com>)
+ id 6acdc31d-8faa-0a2a0a5109dd-0a2a4501b136-30
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 07:35:48 +0200
+Received: from [209.85.216.47] (helo=mail-pj1-f47.google.com)
  by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <netdev-bot+sashiko@kernel.org>)
- id 6acbdda7-5984-0a2a45010019-ac6904feb7e0-3
- for <xen-devel@lists.xenproject.org>; Sun, 11 Oct 2026 21:04:08 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 8847560234;
- Sun, 11 Oct 2026 19:04:07 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 0CDB91F0089C;
- Sun, 11 Oct 2026 19:04:06 +0000 (UTC)
+ (envelope-from <tpk.teshan@gmail.com>)
+ id 6acdc333-5984-0a2a45010019-d155d82fe4ca-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 07:35:48 +0200
+Received: by mail-pj1-f47.google.com with SMTP id
+ 98e67ed59e1d1-381b831d535so3018871a91.0
+ for <xen-devel@lists.xenproject.org>; Mon, 12 Oct 2026 22:35:48 -0700 (PDT)
+Received: from laptop ([175.157.230.130]) by smtp.gmail.com with ESMTPSA id
+ 98e67ed59e1d1-3ab38f5509fsm19656383a91.12.2026.10.12.22.35.42
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Mon, 12 Oct 2026 22:35:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,151 +52,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Subject:From:To:Cc:Date:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791745447;
-	bh=WuowvedJwpfz9l4BSl0jWJ9ure/QdY1u7QLk9R2KaLE=;
-	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=RjO6s4KjJvi7xkGcHN5EHGT6aPnhgDHeKBQR4KlNGg7G3veS5ERT6aUTK0AaS+4Au
-	 QseF9/l1US2IoNpmNX9S4or7ctEpEDBqd4luzSXcwVwLvWC/ob4sSqW50KbQFv8VP+
-	 cSKMW70BgZb4peazc+WL0283hDfOSOndopEX2uDci/VjZ3T9uvQjL7oxNMNy4J6w4a
-	 ZwHUFm0MglbCCDknOMuQEuBbGKN1yCMBhv60uStpzDWgSMLVy2rZ/sdk7S2gq+AV/p
-	 +L+qnEjLswbYR/fpUhp92yCUmV+pDpVv08AfapC+huhSJ0OAdvt+J8K2Qskq7fTlCj
-	 rEvn6Jy/KogHg==
-Subject: Re: [PATCH net-next 7/9] netxen: use pskb_may_pull() to pull excess
- TX frags into the head
-From: netdev-bot+sashiko@kernel.org
-To: josef@toxicpanda.com
-Cc: kuba@kernel.org, pabeni@redhat.com, edumazet@kernel.org,
- davem@davemloft.net, andrew+netdev@lunn.ch, saeedm@nvidia.com,
- tariqt@nvidia.com, mbloch@nvidia.com, leon@kernel.org, jgross@suse.com,
- sstabellini@kernel.org, oleksandr_tyshchenko@epam.com,
- anthony.l.nguyen@intel.com, przemyslaw.kitszel@intel.com, manishc@marvell.com,
- rahulv@marvell.com, GR-Linux-NIC-Dev@marvell.com, shshaikh@marvell.com,
- horms@kernel.org, netdev@vger.kernel.org, linux-kernel@vger.kernel.org,
- linux-rdma@vger.kernel.org, xen-devel@lists.xenproject.org,
- intel-wired-lan@lists.osuosl.org
-Date: Sun, 11 Oct 2026 19:04:05 +0000
-Message-ID: <179174544563.434549.2218178416870785309@kernel.org>
-In-Reply-To:
- <20261007-b4-pskb-pull-tail-drivers-v1-7-9512b0fb977b@toxicpanda.com>
-References:
- <20261007-b4-pskb-pull-tail-drivers-v1-7-9512b0fb977b@toxicpanda.com>
-X-sashiko-severity: Medium
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791869747; x=1792474547; darn=lists.xenproject.org;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=31jej+zw5eC3wdks2N/0FrXz19KzIMeRP96y4F0yMqY=;
+        b=OHrUm715gA0pDQU1qXyaUS/LRfb/JKe2hwZl+rfHUngBFNvf1nckouQHI3p8KWuVQi
+         BCHlnm6fNihYikhOvpqNIIXINREkXrwZ2hHD11mCyjbIQ39trdyo5HUwbBTn9cYmxfDR
+         aNEI+hIVHiswHAYXDf8SQtaInpHo2tDvT4RuxHPKPD+DFFpcyj/sh/JyOk2YQzUZ1M2L
+         VxSV1SVguQ7Fbm4sL66tke6vz6gFyedPEw9E5cFMkrrVrLbCRfZTnP31bawZSnSX6r+U
+         /Iz4gNgdxWBfps5Y8KNINUOpY4K58xFiNAYKxYIc2fXfThIBCr7hzyUjhgV6dl3nc7Ut
+         3iSQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791869747; x=1792474547;
+        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
+         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=31jej+zw5eC3wdks2N/0FrXz19KzIMeRP96y4F0yMqY=;
+        b=rtSpTurph5BH884JViExpAmuu42GeA3FBLv0E4x1wxr3Y2xSwX8gdVSF/SQH7m6mG9
+         NrXeoqRTlN0sKEK1s3XJt6P+MlrFm3euf16tsqer1O3GV6s3Zg7bf19jOdBVvRERiEu+
+         uSxVbbIVscoF1hj1UcWPurrFtUcW23IYD4sUdnIPncPCg70LyZEaRsrL5X0ZhHFJKEog
+         z4QdT55BdI89CcudrN1RakC28q9M4O3RSCql9WYylBcHCg7uhzkRLsS6mSl1iUEWJPAc
+         FdBi63RZZyLFuWADOpzeXEqcQoYY1aIBAWhs8Py8OsXWeIFdvmpeRRI2Q/sRLbnnkQxB
+         MiEQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwkpk9LQG50bj+AHLLA54pxqQmLvSPE3pfdJZ2D2wYdZ15KaXHxEtVtod6BGbTYiMUqken/hV58ozQ=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYICwQKmEs2at9vHRL612L7N+tT2Kmphi5IXVPrGU5nFgGFWzHyg
+	nK1YnjZyqoHhbjxj1mVgcc8oymgnjaEkOocEh+O7+Tbs1sjHwvQKFEqL
+X-Gm-Gg: AYBFou2wquvY7BoJq2oQpcTrLwzfYMf9gxo4LUIo+dQSndZD8Hp1aNxf2xVuDjeZTqb
+	0j396pkKdOCbmwWGZ1JQgrjG7ZnkpnTpmk9btgPvrg99NZKP2AAl7ObvZC3+RbbsSl3pQejTA/P
+	S/m8/ObVfLNgjg7582W0GEk5xMQaMi7vDxZzo6GVOvZc7fjNexif+Ro3XBJJr6UjKdbqY5DK/2X
+	zfiRmo4EB3HM+qSwvNYa9YUPSuUIQbmWY7JN1QIT9nQUtM7yoFCiFmlU60wD4GqFxKnFnqn/59r
+	fjrU4ccxvtYeo9uB0w1BpF8astspbtWQ+KsyToq6D0A9SdjgiiJIgqmTI24LjBmbWhoEMeU8lXL
+	2cKFd+51+tZrIla1O55RixMj8gskjOF3B0tSAYVhrloiBh1sMUXheB8jk5CUf04d6QvJmw+cA/h
+	Z7xYW85iQU4zYTJ6ElfPAaqMQQcd4z3mQGgeIjrrNzJNl2nwNEbHLITZwBCD6riQ2JBeIwvysGX
+	QwHsuLDcY9PMdC67B7AQnn3ivekppSAdPx7hjTYxLhB/5rhVYIJIuGb
+X-Received: by 2002:a17:90b:4e83:b0:3ab:4f1:4f7e with SMTP id 98e67ed59e1d1-3ab3a9dfb4amr9315608a91.28.1791869746831;
+        Mon, 12 Oct 2026 22:35:46 -0700 (PDT)
+From: Teshan Kannangara <tpk.teshan@gmail.com>
+To: jgross@suse.com
+Cc: sstabellini@kernel.org,
+	oleksandr_tyshchenko@epam.com,
+	xen-devel@lists.xenproject.org,
+	linux-kernel@vger.kernel.org,
+	Teshan Kannangara <tpk.teshan@gmail.com>
+Subject: [PATCH] xen/platform-pci: Disable device before releasing PCI regions
+Date: Tue, 13 Oct 2026 11:05:26 +0530
+Message-ID: <20261013053526.1336149-1-tpk.teshan@gmail.com>
+X-Mailer: git-send-email 2.53.0
 MIME-Version: 1.0
-X-purgate-ID: tlsNG-d62444/1791745449-1D47D757-50357006/0/0
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1791869748-BF063757-AE1F3130/0/0
 X-purgate-type: clean
-X-purgate-size: 4093
+X-purgate-size: 1873
 
-Thank you for your contribution! Sashiko AI review found 1 potential
-issue(s) to consider.
+   The probe error paths release the PCI regions before disabling the
+   device. Documentation/PCI/pci.rst specifies that drivers should disable
+   the device before releasing its regions to prevent devices from
+   colliding on the same address range.
 
-Critical: 0 · High: 0 · Medium: 1 · Low: 0
+   Track successfully requested BARs in a bitmask and use a common cleanup
+   path to disable the device before releasing those regions.
 
-If you believe none of the issues are legitimate, please reply to each
-issue of Medium severity or higher and explain why the AI is wrong.
-If any of them are legitimate and you plan to respin, please let patchwork
-know by including "pw-bot: cr" as a separate line at the end of your reply
-(one such reply per series is enough).
+Signed-off-by: Teshan Kannangara <tpk.teshan@gmail.com>
+---
+ drivers/xen/platform-pci.c | 14 +++++++-------
+ 1 file changed, 7 insertions(+), 7 deletions(-)
 
-- [Medium] In netxen_nic_xmit_frame()
-  (drivers/net/ethernet/qlogic/netxen/netxen_nic_main.c), the new…
-
---
-
-netxen: use pskb_may_pull() to pull excess TX frags into the head
-
-This patch changes how netxen_nic_xmit_frame() pulls the TX frags that
-don't fit in a descriptor into the head. It used to call
-__pskb_pull_tail(skb, delta) directly. It now calls
-pskb_may_pull(skb, skb_headlen(skb) + delta).
-
-> diff --git a/drivers/net/ethernet/qlogic/netxen/netxen_nic_main.c b/drivers/net/ethernet/qlogic/netxen/netxen_nic_main.c
-> index 67d9bf69f8f29..202deb64ddefb 100644
-> --- a/drivers/net/ethernet/qlogic/netxen/netxen_nic_main.c
-> +++ b/drivers/net/ethernet/qlogic/netxen/netxen_nic_main.c
-> @@ -2045,7 +2045,7 @@ netxen_nic_xmit_frame(struct sk_buff *skb, struct net_device *netdev)
->  			delta += skb_frag_size(frag);
->  		}
->  
-> -		if (!__pskb_pull_tail(skb, delta))
-> +		if (!pskb_may_pull(skb, skb_headlen(skb) + delta))
->  			goto drop_packet;
->  
->  		frag_count = 1 + skb_shinfo(skb)->nr_frags;
-
-[Severity: Medium]
-Does this behave the same as the old call when delta is 0?
-
-delta is the sum of the sizes of the leading excess frags. It is 0 when
-every frag in frags[0 .. frag_count - NETXEN_MAX_FRAGS_PER_TX - 1] has
-size 0.
-
-The old __pskb_pull_tail(skb, 0) still ran the pull_pages loop. With
-eat == 0, every zero-size frag matched the size <= eat test:
-
-net/core/skbuff.c:__pskb_pull_tail() {
-    ...
-	eat = delta;
-	k = 0;
-	for (i = 0; i < skb_shinfo(skb)->nr_frags; i++) {
-		int size = skb_frag_size(&skb_shinfo(skb)->frags[i]);
-
-		if (size <= eat) {
-			skb_frag_unref(skb, i);
-			eat -= size;
-		} else {
-		...
-	}
-	skb_shinfo(skb)->nr_frags = k;
-    ...
-}
-
-So those frags were dropped, and the recomputed frag_count was back
-within the limit.
-
-With this patch the length passed is exactly skb_headlen(skb). That makes
-pskb_may_pull_reason() return early without calling __pskb_pull_tail():
-
-include/linux/skbuff.h:pskb_may_pull_reason() {
-    ...
-	if (likely(len <= skb_headlen(skb)))
-		return SKB_NOT_DROPPED_YET;
-    ...
-}
-
-The skb is left unchanged, so frag_count stays above
-NETXEN_MAX_FRAGS_PER_TX (14), and nothing checks it again. After that:
-
-netxen_nic_xmit_frame()
-    netxen_map_tx_skb()        maps every frag, zero-length ones included
-    netxen_set_tx_frags_len()  writes the oversized frag count
-    descriptor loop            posts buffer_length[k] = 0 entries across
-                               extra cmd_desc_type0 descriptors
-
-The comment above this block says only 14 frags are supported for normal
-(non-TSO) packets. Could this post a descriptor chain the hardware
-doesn't support?
-
-When delta > 0 the two calls are equivalent, so only the delta == 0 case
-changes. It isn't clear whether zero-length leading frags can reach a TX
-driver today. Nothing on the TX path appears to rule them out, though.
-
-The commit message describes this as a direct swap:
-
-  "It already checks the result.  Switch to pskb_may_pull(), which takes
-  the length the head should end up with and checks it against the skb"
-
-Would it make sense to re-check frag_count against
-NETXEN_MAX_FRAGS_PER_TX after the pull, and drop or linearize the skb if
-it is still too large?
-
-The later patch "qlcnic: use pskb_may_pull() to pull excess TX frags into
-the head" makes the same change in qlcnic_xmit_frame(). It looks like it
-has the same delta == 0 gap.
-
+diff --git a/drivers/xen/platform-pci.c b/drivers/xen/platform-pci.c
+index f2438232518c..a12ac57274a6 100644
+--- a/drivers/xen/platform-pci.c
++++ b/drivers/xen/platform-pci.c
+@@ -95,6 +95,7 @@ static int platform_pci_probe(struct pci_dev *pdev,
+ 			      const struct pci_device_id *ent)
+ {
+ 	int i, ret;
++	int requested_bars = 0;
+ 	long ioaddr;
+ 	long mmio_addr, mmio_len;
+ 	unsigned int max_nr_gframes;
+@@ -115,16 +116,18 @@ static int platform_pci_probe(struct pci_dev *pdev,
+ 	if (mmio_addr == 0 || ioaddr == 0) {
+ 		dev_err(&pdev->dev, "no resources found\n");
+ 		ret = -ENOENT;
+-		goto pci_out;
++		goto out;
+ 	}
+ 
+ 	ret = pci_request_region(pdev, 1, DRV_NAME);
+ 	if (ret < 0)
+-		goto pci_out;
++		goto out;
++	requested_bars |= BIT(1);
+ 
+ 	ret = pci_request_region(pdev, 0, DRV_NAME);
+ 	if (ret < 0)
+-		goto mem_out;
++		goto out;
++	requested_bars |= BIT(0);
+ 
+ 	platform_mmio = mmio_addr;
+ 	platform_mmiolen = mmio_len;
+@@ -165,11 +168,8 @@ static int platform_pci_probe(struct pci_dev *pdev,
+ 	if (!xen_have_vector_callback)
+ 		free_irq(pdev->irq, pdev);
+ out:
+-	pci_release_region(pdev, 0);
+-mem_out:
+-	pci_release_region(pdev, 1);
+-pci_out:
+ 	pci_disable_device(pdev);
++	pci_release_selected_regions(pdev, requested_bars);
+ 	return ret;
+ }
+ 
 -- 
-Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261007-b4-pskb-pull-tail-drivers-v1-0-9512b0fb977b%40toxicpanda.com
+2.53.0
+
 
