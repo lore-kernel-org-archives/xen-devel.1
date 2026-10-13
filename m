@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFBEDCC6B12
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 15:41:04 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448050.1664049 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id BECC7CC6B16
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 15:42:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448056.1664057 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGeca-0004Na-9H; Tue, 13 Oct 2026 15:40:56 +0000
+	id 1xGedW-0004wt-Ib; Tue, 13 Oct 2026 15:41:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448050.1664049; Tue, 13 Oct 2026 15:40:56 +0000
+Received: by outflank-mailman (output) from mailman id 1448056.1664057; Tue, 13 Oct 2026 15:41:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGeca-0004NO-5V; Tue, 13 Oct 2026 15:40:56 +0000
-Received: by outflank-mailman (input) for mailman id 1448050;
- Tue, 13 Oct 2026 15:40:55 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xGedW-0004wm-FF; Tue, 13 Oct 2026 15:41:54 +0000
+Received: by outflank-mailman (input) for mailman id 1448056;
+ Tue, 13 Oct 2026 15:41:53 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <peter.maydell@linaro.org>) id 1xGecZ-0004N7-EA
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 15:40:55 +0000
+ (envelope-from <peter.maydell@linaro.org>) id 1xGedV-0004wR-5p
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 15:41:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGecY-00DVoj-RI
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 17:40:54 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xGedU-00Dt7I-BY
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 17:41:52 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <peter.maydell@linaro.org>)
- id 6ace5105-bab6-0a2a0a5309dd-0a2a4501cb40-2
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 17:40:54 +0200
-Received: from [209.85.128.172] (helo=mail-yw1-f172.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ace5140-8faa-0a2a0a5109dd-0a2a45099946-0
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 17:41:52 +0200
+Received: from [74.125.224.42] (helo=mail-yx1-f42.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <peter.maydell@linaro.org>)
- id 6ace5105-5984-0a2a45010019-d15580acc418-3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 17:40:54 +0200
-Received: by mail-yw1-f172.google.com with SMTP id
- 00721157ae682-885cf67963eso24236967b3.0
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 08:40:54 -0700 (PDT)
+ id 6ace513f-be1a-0a2a45090019-4a7de02ad886-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 17:41:52 +0200
+Received: by mail-yx1-f42.google.com with SMTP id
+ 956f58d0204a3-679334baa1fso2484681d50.2
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 08:41:51 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,95 +49,96 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1791906053; cv=none;
+ARC-Seal: i=1; a=rsa-sha256; t=1791906111; cv=none;
         d=google.com; s=arc-20260327;
-        b=qE3QfvjlupPJLD9azoSmCBQMMiXRgdDvryL6FbHKEVwGJHv+fbodAxoYiGN6Cximgo
-         mxDrIdXRxiTG4J6g0K8oc7I8g/6qbhKtOWW13uQSMbHfl74rrY3a0jos1+PniJwdldnd
-         46COmwYIFnyxnMP42ueCplv1u2JNfB7MSw43NSQ6TzAxGF1w42g51X9XL7wZ4rQJjyUz
-         0NM3c+sG1D8tQkHBXzJ8BvT4KvarL2nHh3qwOg3R4y5MP7XR7ReaZE3376kmRTWzd3Ib
-         kQ5FwxI+plvJii6ThGIZSovLaHKrNLTWqUxwD6PL9iQph0Skz7aMLH3TlE2HWg28oUbn
-         JpWw==
+        b=XwbcBF1Bws5FjXCER3tsRaCyHIft3F0RKHimi9hz9k+RrcMSKg6t7b/sGXYHL/9jd2
+         jTC8pLXvG+JNOgufjln7CwX/b/O/fb+Z6YMcyjqmHn9oXCaxR29uZdNj9sTAEEOkSgvE
+         DAiftet27bNDVxRkmJjGP3Rv75AkFHE/xSbLRCAHmczBi3ezRSK92XTcLyN8poPaUNVg
+         lXhiXVqvmQopsn6kN4B3eBt1UmZuiC9YermmNYizjusoj2Ik196BI6hVYZD58phPtyDU
+         UtZhZlMnMboKJxb8hF6beSExdN0a9O8Y+BG9Uz1M68zoWVm7GdcYvl6sKurElS4lSnJW
+         cvVg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
         h=cc:to:subject:message-id:date:from:in-reply-to:references
          :mime-version:dkim-signature;
-        bh=Xl4zRxtbD4rZ1QPQ9stJXKNnuMepND9L/DXbpKoF8Eg=;
-        fh=fgQKDctxAI5TI6zXWYRConjB89fdqUcvPsob07+javM=;
-        b=boBTgFZJvo0VtFtXmE+nkO2EvzcenmzDet9i+68BxQ+aqjhlKgqckL6TsAnaorVlWn
-         JdteeQQ1bnIU2SNILzo5c5VIjnHRJwXph5CLczRMJyCrqi/2wyVDXNgaJ4cYk2irFJN9
-         /CsgPBt5uqwyGfY+N3efihdaYdo2893dlViNqj01Wmm7a4HOhmWLS3hnpUGSq7mA5F1p
-         JFyvkuP8k5QyfaBHN/QI5b9i7vOR/P5hh89IcJiTNC8vXwGv1WKd4I6dTyqQh3d8HOhL
-         QVBBxszYwqpotpZlCOYee7S1BvywXW7UL16abVdbgUk+mEbLG9iyCaRdE3/O7g7JUIn9
-         rc4g==;
+        bh=/y32TPfvpVgGIoKvh7+P09B6jQ5P/y+ctFLf2J9HI1g=;
+        fh=lXrDPzAEzj0Gw8S2EQqZ7WoXPo/Bne6vsqMMHnhZ57w=;
+        b=TL+si3Di72tZNt1Xn6PSNR2t2/PIe2+1b4d8KzxLtLSw89fLYsTG0GxueGDQyVnFym
+         4H3l0FKnvK2BlseEVs0J1mxTwVZZUm/Bw4+Z8P86NL7YOsOoTRCi0kaD5cnEb4vTndLu
+         jQFDNgkVxspG22YVHneXyHvb3V0ZFBAbfUBK9GDR7juVQOVa79nkutp1H+iJpYMZ76G4
+         h5XXL2uzqOKs97agXhfAaCcX4ApCTIJ1/X2I+KkY2tcuGsypYQ6yizPDTx5Q2L6witNu
+         P2vRBIn4OW1k5Y6P8mroJNT0hXa5HjzPTug9x9PJSD6MnXX1Q67XDRz2lORjDDKs4qHV
+         7B2w==;
         darn=lists.xenproject.org
 ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791906053; x=1792510853; darn=lists.xenproject.org;
+        d=linaro.org; s=google; t=1791906111; x=1792510911; darn=lists.xenproject.org;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=Xl4zRxtbD4rZ1QPQ9stJXKNnuMepND9L/DXbpKoF8Eg=;
-        b=CjVAqVjTE1FGtkOEvdEyaWlJUkMxC8B4IJTPoiFKX0wzLO4pMipKSm1GmiiWwha3Ma
-         M8nB7fNiBg7ImuOACF4A5eGyw1FZ/oS4gKpS9TWdXkKVu6CMpUP50RBV7Dtal/C9bxFc
-         Kzo9RUucCka2WHqv5sAuR2BDieYc8yvN6Zi1fLqFiIfIWt6r16l/qnFxaaR8/mKSzTUD
-         NYOxDFkrNqSSBO38IH0qiz/P+w9vj2wBfBGwF+cFxVXlAsXzH2hqO+CcfWOxWbLwlyUa
-         SD0C1KdxjQXT7rRVUDW/b8DuuLKzeq8EvTA2Rn9iGSKipxOpBNJAZO5r8bvX9W9OdrtR
-         WmKA==
+        bh=/y32TPfvpVgGIoKvh7+P09B6jQ5P/y+ctFLf2J9HI1g=;
+        b=lLIIjwL14tLNcLCyuQBKZmfPtVkin4WaVM59X22yiU8a9rd4muWmE5MBiR7Nqj/rSc
+         OMlrRMQNzTe0rO6jf8v5gzoeNjxWgxYgnMqDx/14J0v8XDre5YdqUNE3chHtvqiYSqcC
+         cbl8agZrnPL77aCQPN2kb7fMw+5nWTPtTCmNMWp0E3wOq83lcdl6W9Vbmkg9wKpOuCYV
+         S1XG2q3iBNIppxjRQW+YOx6/NNwHBblIDs3qRlQaB+fB5/VWnybZZ4acclrcb4hrur9U
+         5va8Hr7HeE7Jsnz2DFZ524k0YhzCLLYrlu3tA7+y/hwNx+lg1hS0r4RFSTU6TubTTlww
+         JSLw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791906053; x=1792510853;
+        d=1e100.net; s=20260707; t=1791906111; x=1792510911;
         h=content-type:cc:to:subject:message-id:date:from:in-reply-to
          :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=Xl4zRxtbD4rZ1QPQ9stJXKNnuMepND9L/DXbpKoF8Eg=;
-        b=wstv/rVZs9NOMv4SmdM/PObwQW4TijxLaULmmI4MrcLCr4vfpJx0UqwUF87VjQwFQq
-         zpvThxkGcO1QNhCGQb7YrKNtw8xTkJSgAswJqX8VEZ5Ls+88oqpZRY7XB58VhnvLa72J
-         4GsHy+nhg8f1B1/a0tVcJKtwHyo5z2u6b/lZZa/KxD1ozs1eATHnV0K0Ua9OIF4mnrHj
-         ULHSYOKr1TlsQEUzZs5MINbdgIc/bOEue22jSEXEQ+HPYkmYjI3tLdz1CmtP+HRDMfQq
-         sRq0BX+9SjGj9JKCettHH2yOkJB9Rk/YI+Jm2Mo0Ck/A1gZ7/YcFIwtl/P7NlTZXkwUv
-         XEvQ==
-X-Forwarded-Encrypted: i=1; AKwUvBz7T82A8TFLoVUR3yVsixz6dl7aXkXqUI9b0Qi0ZfvGXOJcF0V4uHVr29Raf1OGqBMmmZph4bKr3Zo=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKdzi8ebX+99gM7VQIt3UUdmOzdIjyKBH134No1uCZttwpubSyR
-	rscCk8vXAcWBwB2j1xM+ws3N2EblqdZA3+g7V0X1FeVaotHNLR9/hwucmYOGfjXEImWwyAVs5zs
-	BjPq3rnYa7kH+Ai0lj1IMtS38G5QBU/LrLFmCK3Al2Q==
-X-Gm-Gg: AYBFou06NXKNCSqNKcpRBd0TujoBSXu3La3bHQRGD4sQGr3pTatc/G+GIXBu7gCHcB5
-	9sUwYaiFdwawmPqZgFM4kdbqIO/gJ3Ap0+NOfyc3qVaaj8kN5sjsIvUCVj8tz1hQgCOuvopHgyc
-	x478tZA379F/jYAK0qEecIgbySga4ZmPs2c8thPc9tzKW6vRvnwQhXfYkQMEwOhX1Y/k9xXRCqz
-	HnqC74WwbAXNB1ozjIDuxCQs9dhZ1v2Txt5L9xD0r6kIWDvgg0Ivl12HbtSKdkez8ZOWf5zIjvt
-	OdP4RCJDDYvv7el1yGL8oM53bSWJsrtE6/naWOgXOmsfCrC8ot3/xXQZUosgcGECJkdB6xuGRHD
-	2/0AbQ3rBaW6saetjOSidOdEI8o+9W320Gco/hbk=
-X-Received: by 2002:a05:690c:e145:b0:8a8:7fda:15db with SMTP id
- 00721157ae682-8b07edb0b40mr36974837b3.22.1791906053032; Tue, 13 Oct 2026
- 08:40:53 -0700 (PDT)
+        bh=/y32TPfvpVgGIoKvh7+P09B6jQ5P/y+ctFLf2J9HI1g=;
+        b=IWI8i81nVJ1/wp6gS7gkf8arW50TBIAqt21grMv9GSKM4GvpwFNZ0gSNX2SjkNw8La
+         c+iWkOblCLoawBftmneyifzam7yenO8RJoOq3Ru9yfDHjQHbs9XadRE+8c5d0KbEUSmq
+         N6R8/CpQppFDh3mOSEHooRt4Q76oYk4ZV+CjZA2BWnUL4TPCtE5cj6GSfJbW/RdfTE/7
+         Ph4FpGdwLEFWphXm9RurQSMWV3m5KLFSwkwldiy+vJzX6+idMiZ0MiW/9Pkmev8Tz+lU
+         BfPYbvRmoEjpYHKQWze54tKXmU+OkBCouAZgVrMhhgYyPzb2abiEZxHMVZeI95Vm2XtB
+         aUoQ==
+X-Forwarded-Encrypted: i=1; AKwUvByTBjkl2JDzDXmE0VOJar17r66+2qTD31ji2xSoM5Pu0KNqAwZbd2ZIk7HtoOYwNIZhh6u5defMShs=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKIsClldoUtQ4ykneC1B70hJqa2guKODgfpd+luTRKZcj5pyNSQ
+	aU6YvFWIukW4Lgyr3PAMjfKIRNlVLZlB3sIrOlQKF5KvYUNLbpsWb0s4neNTJrmR0DnxtpiXSmk
+	2I+O4lRrlrqmf7oLm1+pLWE+oZGlBUNqHQy6bKWHP7A==
+X-Gm-Gg: AYBFou0gQrYce6exmTtpCpK4q+Jt0GXtVtFsWG/1khG1VcaE4zUnrgeMsXBhPbmjuKN
+	OoEKn/OuTxtIhhsMO1KYAcuxU/B8hpkQRJvfJKNB+lw0vlMhQmhGPqq2Krp4diGhkU8o+z4TCMw
+	MaX1LxWPII2gjq+biqXcaRlFstsh02L6ajSozOIItLfs/4NYsuZCd92+Vewei//7cF89lCjVzfo
+	ldgXohJjIOsytQIXYT8kz1tYxQ2eIjJM4PPoEe78c85Zy4SogrY+EJiOEe0lWS40Aluor3edM5N
+	r2UQMKvYzPL46Tfs/wQTDkNzbRSNmtT478kEqDzxoEcenqObt296HWzjRJPHKvj+p1f5yVTpY1W
+	YxiOj4YccH5Wa8K2Ss26SypZ/WzzQ4bhRuoe7+oo=
+X-Received: by 2002:a05:690e:148b:b0:672:99e0:ebfe with SMTP id
+ 956f58d0204a3-67936346e62mr3002172d50.150.1791906110511; Tue, 13 Oct 2026
+ 08:41:50 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260916104435.600211-1-mark.caveayland@nutanix.com> <20260916104435.600211-4-mark.caveayland@nutanix.com>
-In-Reply-To: <20260916104435.600211-4-mark.caveayland@nutanix.com>
+References: <20260916104435.600211-1-mark.caveayland@nutanix.com> <20260916104435.600211-3-mark.caveayland@nutanix.com>
+In-Reply-To: <20260916104435.600211-3-mark.caveayland@nutanix.com>
 From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 13 Oct 2026 16:40:40 +0100
-X-Gm-Features: AclHuK8SESetnPbkPIzW7fzFCm5Cs0Lztvlg79zYn30l_K_hxeD1jY48AGkU2b4
-Message-ID: <CAFEAcA-7Y5AErqcOajBVjPSZywrvmCc8Ok792U8vBD9ZZfZzTw@mail.gmail.com>
-Subject: Re: [PATCH 03/22] i8259_internal.h: rename PICCommonState to I8259CommonState
+Date: Tue, 13 Oct 2026 16:41:36 +0100
+X-Gm-Features: AclHuK__b2UbCjZFZDrffJnvH_-1ukAWp5TaM48C8WqZ5JfCRPxpvF1PnMp4eNs
+Message-ID: <CAFEAcA8M6tO1-xnC5SD4gheqfVney3vy7Z5xj_164=NPRvu5UA@mail.gmail.com>
+Subject: Re: [PATCH 02/22] i8259_internal.h: rename TYPE_I8259_COMMON to i8259-common
 To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
 Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com, 
 	sstabellini@kernel.org, anthony@xenproject.org, edgar.iglesias@gmail.com, 
 	qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-d62444/1791906054-1D272757-849B1037/0/0
+X-purgate-ID: tlsNG-bad1c0/1791906112-BD6C2034-FB1F0002/0/0
 X-purgate-type: clean
-X-purgate-size: 574
+X-purgate-size: 555
 
-On Wed, 16 Sept 2026 at 11:47, Mark Cave-Ayland
+On Wed, 16 Sept 2026 at 11:50, Mark Cave-Ayland
 <mark.caveayland@nutanix.com> wrote:
+>
+> This is to emphasise that child types of PIC_COMMON are all instances of an
+> an 8259 PIC.
 >
 > Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
 > ---
->  include/hw/intc/i8259.h         |  8 ++---
->  include/hw/isa/i8259_internal.h | 10 +++---
->  hw/i386/kvm/i8259.c             | 10 +++---
->  hw/intc/i8259.c                 | 34 +++++++++----------
->  hw/intc/i8259_common.c          | 58 ++++++++++++++++-----------------
->  5 files changed, 60 insertions(+), 60 deletions(-)
->
+>  include/hw/isa/i8259_internal.h | 2 +-
+>  1 file changed, 1 insertion(+), 1 deletion(-)
 
 Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+
+(I checked that we don't use the typename in a vmstate struct
+name, so renaming won't accidentally break migration compat)
 
 thanks
 -- PMM
