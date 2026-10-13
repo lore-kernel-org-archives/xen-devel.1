@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A5E3CC6B15
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 22:44:46 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448372.1664408 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id EBE2ACC6B0F
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 22:45:41 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448380.1664417 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGlEd-0002Gg-Qq; Tue, 13 Oct 2026 22:44:39 +0000
+	id 1xGlFS-0002zK-2n; Tue, 13 Oct 2026 22:45:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448372.1664408; Tue, 13 Oct 2026 22:44:39 +0000
+Received: by outflank-mailman (output) from mailman id 1448380.1664417; Tue, 13 Oct 2026 22:45:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGlEd-0002GZ-Nq; Tue, 13 Oct 2026 22:44:39 +0000
-Received: by outflank-mailman (input) for mailman id 1448372;
- Tue, 13 Oct 2026 22:44:38 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xGlFR-0002zD-W3; Tue, 13 Oct 2026 22:45:29 +0000
+Received: by outflank-mailman (input) for mailman id 1448380;
+ Tue, 13 Oct 2026 22:45:28 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3YLPOagcKCV8FOLDBOPDLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--irogers.bounces.google.com>)
- id 1xGlEc-0002Fs-K6
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 22:44:38 +0000
+ <3V7POagcKCVY6FC42FG4CC492.0CAL2B-12J2996GHG.L2BDFC720H.CF4@flex--irogers.bounces.google.com>)
+ id 1xGlFQ-0002yv-H0
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 22:45:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGlEc-00A5xn-17
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 00:44:38 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xGlFP-00EJzO-JP
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 00:45:27 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3YLPOagcKCV8FOLDBOPDLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--irogers.bounces.google.com>)
- id 6aceb441-e002-0a2a0a5209dd-0a2a45088676-20
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:44:38 +0200
-Received: from [74.125.82.71] (helo=mail-dl1-f71.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <3V7POagcKCVY6FC42FG4CC492.0CAL2B-12J2996GHG.L2BDFC720H.CF4@flex--irogers.bounces.google.com>)
+ id 6aceb42c-2eae-0a2a0a5409dd-0a2a450c859e-48
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:45:27 +0200
+Received: from [74.125.82.200] (helo=mail-dy1-f200.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3YLPOagcKCV8FOLDBOPDLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--irogers.bounces.google.com>)
- id 6aceb364-f659-0a2a45080019-4a7d5247b464-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:37 +0200
-Received: by mail-dl1-f71.google.com with SMTP id
- a92af1059eb24-1665200f4c2so4837985c88.0
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 15:40:37 -0700 (PDT)
+ <3V7POagcKCVY6FC42FG4CC492.0CAL2B-12J2996GHG.L2BDFC720H.CF4@flex--irogers.bounces.google.com>)
+ id 6aceb359-f479-0a2a450c0019-4a7d52c8bc93-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:26 +0200
+Received: by mail-dy1-f200.google.com with SMTP id
+ 5a478bee46e88-30bcb065bfdso6716197eec.0
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 15:40:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,44 +52,44 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1791931235; x=1792536035; darn=lists.xenproject.org;
+        d=google.com; s=20251104; t=1791931225; x=1792536025; darn=lists.xenproject.org;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=gurzTkqqRagMZrBgJFBCVz7i93uSa3r8+lp0iuHqO9A=;
-        b=BWmFxJzxUz7vC/efRk6VrtLsD1knKxkdFUm98UWWO2X9S6/2hE6fPjgmbxczbbMEd3
-         7mYQG2/huk1DrZMOchPbMN5147owBZ0irLigfn6JJsQbbtsS/OmjZuOxTYkM9Ch+R9PA
-         6SFB99UDSykCWXLmaD+1CRwvjasfHSityTg3WrlWtSGsBPo7ZAJryacqyJ3Td1Jajxb0
-         nIG7uul4U8URZduDqlhRwOmlmR1jNkUz4nl9C/TmZW+5w1/41aL/kd2S8MIbip+ZafNg
-         NwzGjLvywEO/WnsPCCFxk8VJFLtnoynIlA0lLRoMEoEUE8uz6RUZyu+xjAb/w7ojrHP7
-         b8mA==
+        bh=wbjJdHqZPRkvVZnH2yPkFa6V1wQ6/MdT39yYoogCQX4=;
+        b=SmS32V5OWk4jGARU3BEnixrfw5uMJpcDHtjupdonA4HcAja2tq7SNQm3E9w1Sn27Yi
+         gORg7K3yP+UOGbCopymG/cIJzSmAD0EuN53Zp71TrhOf0zj1c0C9pb8hA3izi0sP7URm
+         l8OTrGmT+RGGwji9AnbnIkWw0hIaN8xHobamGJJNt2D3ysr95ma5YddyjxbNOTwCZMm2
+         wWgFHqtNqj+e1QnlWv7eZZ50zfzflDyM4JIbL/XI/fWngHf2qhbhgto3CvYh3TiEqJPa
+         6Tuc7JA8T7DdCym4u81jjAcM0Ukxb7kCWan69sNHg1XMrcqZiDNBcEbZfC/r5EXaszl7
+         6kEA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791931235; x=1792536035;
+        d=1e100.net; s=20260707; t=1791931225; x=1792536025;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gurzTkqqRagMZrBgJFBCVz7i93uSa3r8+lp0iuHqO9A=;
-        b=vEgaGaRBOGmvR/6FNsVfpIy6oC3LbhiPid5+D7CbMDz2p/Tym6J11AXFT4kWUIlf9q
-         4rfh7uIt8z/jaH/S75Mcb/l1yAHsr1yXtRyW1mCCc5JX1viOU62DQAk3FJ5l/oE0AN8q
-         F8V3Dao6x8sR8hfANt6ESKrSOR7styqgTUJPua1rFX5ZEu0Dep7HXIzpIBmtbFiIqJ1q
-         Py26U0xs0TNYkAkDu8OhpXlJgNXp8Wc+DzvlVqRZoOA6FDwRHBjjOoBXwzGPBY6Yb2Uq
-         oB/g03MET3dW5YyqXTob6GflJ82a2lrCJim4H+fZN9gGaVMv/ya+h1aZLvw68A/iUvUc
-         8tuw==
-X-Forwarded-Encrypted: i=1; AKwUvByFU4nCELaGfp3bqznzeBZ205oWcXC7dgE0kmtQeGG/ElMvrtIcFlEfBmXH7x/5DQ0IUTgF+5BTqXs=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIfh1L1jzA3czagOnww7LBFnDG3SQ+Q7XqEES/xjGfMsH6e/PNE
-	8rr5NKHC+0q4gzSujW8PoaO4tD4PDGSg2jwYLoIK4zoc9mzEeKO/DWHIVBnnuBjJDJGtL0EXW9F
-	+B1kcg3NUig==
-X-Received: from dleg6-n1.prod.google.com ([2002:a05:701b:4306:10b0:160:bb23:390d])
- (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:701b:4586:20b0:169:b1b1:1445
- with SMTP id a92af1059eb24-16a5dbfe73dmr17947821c88.31.1791931232672; Tue, 13
- Oct 2026 15:40:32 -0700 (PDT)
-Date: Tue, 13 Oct 2026 15:39:44 -0700
+        bh=wbjJdHqZPRkvVZnH2yPkFa6V1wQ6/MdT39yYoogCQX4=;
+        b=Be8NFsdX3h7uWapkrBR/bSzurIqeY2XaIruahMCPxA5N9hbEXdAXlwUx1p5DaJDFXB
+         RPSmLU4zndbW3mNEgCMEWs1t1wHuKAsyKk20DjORGckfBlNzczBUEWqwi6Hths/nvK9P
+         /8AxgFImaDhzdnjBbactY8G/rvaNvbv7a4TB29NTaO1E6yzw3Ni2dfJw/lpK2E/cg/Mo
+         pAGNIkVe/0NDH0a+HfBmqEx8/xPV4DBA6rLSqTa8XHBmRwtbkibvIoR1qO/TdWPMQ1Ov
+         X0p+sRseRXzig9CrRpgDtX5um6y540ijPtbnOn2jsiek+0z8emDJMSFD4TGeCseELnzB
+         cXUg==
+X-Forwarded-Encrypted: i=1; AKwUvBxPJp45cYCm9qSMKBQog5g/ucSv6ANqUCKlwgVi2iNYRGvQUge4K7tA4xy90IA3UhtYD+hA2blGtwM=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJiDCSyVsURYDr2P4DT+yr6O1rVA7fuPTSdEjSeWhqwxoXfo6pm
+	OqhFTjDVvHmiGwa8FP3i0fhrFJJhQ4FGyj4DjugYUJfKjmJpDVNnt1eeAphPesSa79KNb5+4C1/
+	FuN+IVcViYg==
+X-Received: from dyr27.prod.google.com ([2002:a05:693c:401b:b0:359:e5f1:14fb])
+ (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:7301:470e:b0:35c:73ca:a1e0
+ with SMTP id 5a478bee46e88-35c73caae65mr4317399eec.15.1791931223446; Tue, 13
+ Oct 2026 15:40:23 -0700 (PDT)
+Date: Tue, 13 Oct 2026 15:39:40 -0700
 In-Reply-To: <20261013223946.1836757-1-irogers@google.com>
 Mime-Version: 1.0
 References: <20261013223946.1836757-1-irogers@google.com>
 X-Mailer: git-send-email 2.56.0.385.gd3acb90ef8-goog
-Message-ID: <20261013223946.1836757-10-irogers@google.com>
-Subject: [PATCH 09/11] ubifs: sysfs: Use kset_create_and_add() for ubifs_kset
+Message-ID: <20261013223946.1836757-6-irogers@google.com>
+Subject: [PATCH 05/11] ACPI: CPPC: Free cpc_desc in kobject release callback
 From: Ian Rogers <irogers@google.com>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J . Wysocki" <rafael@kernel.org>, 
 	Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, Kees Cook <kees@kernel.org>, 
@@ -117,77 +117,116 @@ Cc: Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling <morbo@google.com>
 	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
 	Ian Rogers <irogers@google.com>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-c1860d/1791931237-CDD4887B-2C610901/0/0
+X-purgate-ID: tlsNG-d25034/1791931227-772D8A5B-4B46A7DF/13/0
 X-purgate-type: clean
-X-purgate-size: 1991
+X-purgate-size: 3453
 
-ubifs_kset was a static struct kset using a custom ubifs_ktype that
-had no default_groups and no .release callback. With
-CONFIG_DEBUG_KOBJECT_RELEASE=y, unloading the ubifs module while delayed
-kobject release is pending causes a use-after-free on the static kset.
+cpc_desc_ptr embeds a struct kobject that is registered in sysfs via
+kobject_init_and_add(), but cppc_ktype lacked a .release callback and
+acpi_cppc_processor_exit() freed cpc_ptr immediately after kobject_put().
+With CONFIG_DEBUG_KOBJECT_RELEASE=y, this causes a use-after-free when
+kobject_delayed_cleanup() runs on freed memory.
 
-Replace the static ubifs_kset and empty ubifs_ktype with a dynamically
-allocated kset via kset_create_and_add().
+Move the sys_mem_vaddr unmapping and kfree(cpc_ptr) into a new
+cppc_release() callback on cppc_ktype, and initialize the kobject on
+allocation so kobject_put() handles cleanup in all paths.
 
-Fixes: 203a55f04f66 ("ubifs: Fix memory leak in ubifs_sysfs_init()")
+Fixes: 158c998ea44b ("ACPI / CPPC: add sysfs support to compute delivered performance")
 Assisted-by: Antigravity:gemini-3.1-pro
 Signed-off-by: Ian Rogers <irogers@google.com>
 ---
- fs/ubifs/sysfs.c | 24 +++++++-----------------
- 1 file changed, 7 insertions(+), 17 deletions(-)
+ drivers/acpi/cppc_acpi.c | 39 ++++++++++++++++++---------------------
+ 1 file changed, 18 insertions(+), 21 deletions(-)
 
-diff --git a/fs/ubifs/sysfs.c b/fs/ubifs/sysfs.c
-index dbf967dcf26e..e20931e3a62f 100644
---- a/fs/ubifs/sysfs.c
-+++ b/fs/ubifs/sysfs.c
-@@ -80,13 +80,7 @@ static const struct kobj_type ubifs_sb_ktype = {
- 	.release	= ubifs_sb_release,
+diff --git a/drivers/acpi/cppc_acpi.c b/drivers/acpi/cppc_acpi.c
+index fef54fcd00b7..2a80404f85d3 100644
+--- a/drivers/acpi/cppc_acpi.c
++++ b/drivers/acpi/cppc_acpi.c
+@@ -297,7 +297,22 @@ static struct attribute *cppc_attrs[] = {
  };
+ ATTRIBUTE_GROUPS(cppc);
  
--static const struct kobj_type ubifs_ktype = {
--	.sysfs_ops	= &ubifs_attr_ops,
--};
--
--static struct kset ubifs_kset = {
--	.kobj	= {.ktype = &ubifs_ktype},
--};
-+static struct kset *ubifs_kset;
++static void cppc_release(struct kobject *kobj)
++{
++	struct cpc_desc *cpc_ptr = to_cpc_desc(kobj);
++	unsigned int i;
++
++	for (i = 2; i < cpc_ptr->num_entries; i++) {
++		void __iomem *addr = cpc_ptr->cpc_regs[i - 2].sys_mem_vaddr;
++
++		if (addr)
++			iounmap(addr);
++	}
++	kfree(cpc_ptr);
++}
++
+ static const struct kobj_type cppc_ktype = {
++	.release = cppc_release,
+ 	.sysfs_ops = &kobj_sysfs_ops,
+ 	.default_groups = cppc_groups,
+ };
+@@ -799,6 +814,7 @@ int acpi_cppc_processor_probe(struct acpi_processor *pr)
+ 		ret = -ENOMEM;
+ 		goto out_buf_free;
+ 	}
++	kobject_init(&cpc_ptr->kobj, &cppc_ktype);
  
- int ubifs_sysfs_register(struct ubifs_info *c)
- {
-@@ -107,7 +101,7 @@ int ubifs_sysfs_register(struct ubifs_info *c)
+ 	/* First entry is NumEntries. */
+ 	cpc_obj = &out_obj->package.elements[0];
+@@ -1001,11 +1017,9 @@ int acpi_cppc_processor_probe(struct acpi_processor *pr)
+ 	/* Plug PSD data into this CPU's CPC descriptor. */
+ 	per_cpu(cpc_desc_ptr, pr->id) = cpc_ptr;
+ 
+-	ret = kobject_init_and_add(&cpc_ptr->kobj, &cppc_ktype, &cpu_dev->kobj,
+-			"acpi_cppc");
++	ret = kobject_add(&cpc_ptr->kobj, &cpu_dev->kobj, "acpi_cppc");
+ 	if (ret) {
+ 		per_cpu(cpc_desc_ptr, pr->id) = NULL;
+-		kobject_put(&cpc_ptr->kobj);
  		goto out_free;
  	}
  
--	c->kobj.kset = &ubifs_kset;
-+	c->kobj.kset = ubifs_kset;
- 	init_completion(&c->kobj_unregister);
+@@ -1013,14 +1027,7 @@ int acpi_cppc_processor_probe(struct acpi_processor *pr)
+ 	return 0;
  
- 	ret = kobject_init_and_add(&c->kobj, &ubifs_sb_ktype, NULL,
-@@ -139,18 +133,14 @@ void ubifs_sysfs_unregister(struct ubifs_info *c)
- 
- int __init ubifs_sysfs_init(void)
- {
--	int ret;
-+	ubifs_kset = kset_create_and_add("ubifs", NULL, fs_kobj);
-+	if (!ubifs_kset)
-+		return -ENOMEM;
- 
--	kobject_set_name(&ubifs_kset.kobj, "ubifs");
--	ubifs_kset.kobj.parent = fs_kobj;
--	ret = kset_register(&ubifs_kset);
--	if (ret)
--		kset_put(&ubifs_kset);
+ out_free:
+-	/* Free all the mapped sys mem areas for this CPU */
+-	for (i = 2; i < cpc_ptr->num_entries; i++) {
+-		void __iomem *addr = cpc_ptr->cpc_regs[i-2].sys_mem_vaddr;
 -
--	return ret;
-+	return 0;
- }
+-		if (addr)
+-			iounmap(addr);
+-	}
+-	kfree(cpc_ptr);
++	kobject_put(&cpc_ptr->kobj);
  
- void ubifs_sysfs_exit(void)
+ out_buf_free:
+ 	kfree(output.pointer);
+@@ -1037,8 +1044,6 @@ EXPORT_SYMBOL_GPL(acpi_cppc_processor_probe);
+ void acpi_cppc_processor_exit(struct acpi_processor *pr)
  {
--	kset_unregister(&ubifs_kset);
-+	kset_unregister(ubifs_kset);
+ 	struct cpc_desc *cpc_ptr;
+-	unsigned int i;
+-	void __iomem *addr;
+ 	int pcc_ss_id = per_cpu(cpu_pcc_subspace_idx, pr->id);
+ 
+ 	if (pcc_ss_id >= 0 && pcc_data[pcc_ss_id]) {
+@@ -1056,15 +1061,7 @@ void acpi_cppc_processor_exit(struct acpi_processor *pr)
+ 	if (!cpc_ptr)
+ 		return;
+ 
+-	/* Free all the mapped sys mem areas for this CPU */
+-	for (i = 2; i < cpc_ptr->num_entries; i++) {
+-		addr = cpc_ptr->cpc_regs[i-2].sys_mem_vaddr;
+-		if (addr)
+-			iounmap(addr);
+-	}
+-
+ 	kobject_put(&cpc_ptr->kobj);
+-	kfree(cpc_ptr);
  }
+ EXPORT_SYMBOL_GPL(acpi_cppc_processor_exit);
+ 
 -- 
 2.56.0.385.gd3acb90ef8-goog
 
