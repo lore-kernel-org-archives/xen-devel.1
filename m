@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id D34B0CC6B0F
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 22:44:41 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448371.1664401 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6A5E3CC6B15
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 22:44:46 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448372.1664408 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGlEV-00020R-IF; Tue, 13 Oct 2026 22:44:31 +0000
+	id 1xGlEd-0002Gg-Qq; Tue, 13 Oct 2026 22:44:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448371.1664401; Tue, 13 Oct 2026 22:44:31 +0000
+Received: by outflank-mailman (output) from mailman id 1448372.1664408; Tue, 13 Oct 2026 22:44:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGlEV-00020K-E9; Tue, 13 Oct 2026 22:44:31 +0000
-Received: by outflank-mailman (input) for mailman id 1448371;
- Tue, 13 Oct 2026 22:44:30 +0000
+	id 1xGlEd-0002GZ-Nq; Tue, 13 Oct 2026 22:44:39 +0000
+Received: by outflank-mailman (input) for mailman id 1448372;
+ Tue, 13 Oct 2026 22:44:38 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3WrPOagcKCVk9IF75IJ7FF7C5.3FDO5E-45M5CC9JKJ.O5EGIFA53K.FI7@flex--irogers.bounces.google.com>)
- id 1xGlEU-00020D-Jz
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 22:44:30 +0000
+ <3YLPOagcKCV8FOLDBOPDLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--irogers.bounces.google.com>)
+ id 1xGlEc-0002Fs-K6
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 22:44:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGlEU-00A5rG-0n
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 00:44:30 +0200
+ id 1xGlEc-00A5xn-17
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 00:44:38 +0200
 Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3WrPOagcKCVk9IF75IJ7FF7C5.3FDO5E-45M5CC9JKJ.O5EGIFA53K.FI7@flex--irogers.bounces.google.com>)
- id 6aceb441-e002-0a2a0a5209dd-0a2a45088676-14
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:44:30 +0200
-Received: from [74.125.82.70] (helo=mail-dl1-f70.google.com)
+ <3YLPOagcKCV8FOLDBOPDLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--irogers.bounces.google.com>)
+ id 6aceb441-e002-0a2a0a5209dd-0a2a45088676-20
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:44:38 +0200
+Received: from [74.125.82.71] (helo=mail-dl1-f71.google.com)
  by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3WrPOagcKCVk9IF75IJ7FF7C5.3FDO5E-45M5CC9JKJ.O5EGIFA53K.FI7@flex--irogers.bounces.google.com>)
- id 6aceb35b-f659-0a2a45080019-4a7d5246b457-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:29 +0200
-Received: by mail-dl1-f70.google.com with SMTP id
- a92af1059eb24-1665200f4c2so4837740c88.0
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 15:40:28 -0700 (PDT)
+ <3YLPOagcKCV8FOLDBOPDLLDIB.9LJUBK-ABSBIIFPQP.UBKMOLGB9Q.LOD@flex--irogers.bounces.google.com>)
+ id 6aceb364-f659-0a2a45080019-4a7d5247b464-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:37 +0200
+Received: by mail-dl1-f71.google.com with SMTP id
+ a92af1059eb24-1665200f4c2so4837985c88.0
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 15:40:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,44 +52,44 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1791931227; x=1792536027; darn=lists.xenproject.org;
+        d=google.com; s=20251104; t=1791931235; x=1792536035; darn=lists.xenproject.org;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=zqg4bcg4yTM1CSL1NV7gzxaOXxYgsDcagY96onRKZWw=;
-        b=ms5bfVUokn/E9shSpIVEquBlyHDO3H6U557K4fDoPMX/Y41ASH4zgjhqt2MXom7goS
-         UpQoOXtIEz9Kv/BMVzxIBBJ9bgwRSTSn+bge2L4i5zLWSSm1SE7L6zb64/iGchM1f8cV
-         OwmaMM/aKfz5P48uHEw5TWgpCEU4GhOCCHJ2AxH2Ro+3owFGIBNjCOooiwdZ9mCQ9O+i
-         bN8XFf+V6VwslGZ7AYaWJzjRRSch3osrdCHgZQw58Lc/0SqwBdiXd7XaFDWKjFEghqfx
-         barHaAIrpMSPn3jUMBmfNk3ve1zvZtNgYEHza1Xx1FWqkhSAkOQRNNgse5rKjKJjAXBI
-         s0FA==
+        bh=gurzTkqqRagMZrBgJFBCVz7i93uSa3r8+lp0iuHqO9A=;
+        b=BWmFxJzxUz7vC/efRk6VrtLsD1knKxkdFUm98UWWO2X9S6/2hE6fPjgmbxczbbMEd3
+         7mYQG2/huk1DrZMOchPbMN5147owBZ0irLigfn6JJsQbbtsS/OmjZuOxTYkM9Ch+R9PA
+         6SFB99UDSykCWXLmaD+1CRwvjasfHSityTg3WrlWtSGsBPo7ZAJryacqyJ3Td1Jajxb0
+         nIG7uul4U8URZduDqlhRwOmlmR1jNkUz4nl9C/TmZW+5w1/41aL/kd2S8MIbip+ZafNg
+         NwzGjLvywEO/WnsPCCFxk8VJFLtnoynIlA0lLRoMEoEUE8uz6RUZyu+xjAb/w7ojrHP7
+         b8mA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791931227; x=1792536027;
+        d=1e100.net; s=20260707; t=1791931235; x=1792536035;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=zqg4bcg4yTM1CSL1NV7gzxaOXxYgsDcagY96onRKZWw=;
-        b=tQ/AHJ+X1JmodoU3R3CU9RN3qEt7SpBy5M33D4hX8JNQ813cq8cYstkD2Z+n6FEzA8
-         ghzwsaOy7HhIi+AytAfpFOCIfnmdbow4IG19c+1DnFL43wQ53Zg+3LD7dapJzoOikFQM
-         h9RAH7y3ECMPiNoz+CPGb4bl3dEJp7GKIMnaJ4A6MxwWd35A2IOaWd8EhOMY5poNYVZf
-         6YqKUBa5An8Wo0WrhO+BhLwWRCRFGdfVJAu8MImIVX+t9AekAHlf4/ffNRXzFaMOkZuH
-         WRHFSLQUeIsKTA50AmS7V+BUwFLNyODa0F8LIerbtA7tJjwI1l5N0JTf8wnECo0PRr0/
-         smaA==
-X-Forwarded-Encrypted: i=1; AKwUvByxGH8I8rjXLOwXPH5kLPJIOY68jSM34PLtQ1pZxPDyuEuIaOeBMYKf5xNcHx7lhmTO5E8CGK6nQKE=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYJX5zMTNLYyt3SukTQkWm8MqWWVFEiakeDuWH3At2p8uQEBo6+R
-	yTyJlRkkVeN0k1NYUb+k7ZV6e4pTSaH6zvD4SPVxXvyaxIgfk3Y7VPYsqmjHA8Sys5zIC/3iZzS
-	VjG73zdynTg==
-X-Received: from dldyq19-n1.prod.google.com ([2002:a05:701b:4553:10b0:164:47f8:a96a])
- (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:701b:4286:10b0:144:c128:4c4b
- with SMTP id a92af1059eb24-16a5e49c474mr18578865c88.36.1791931226644; Tue, 13
- Oct 2026 15:40:26 -0700 (PDT)
-Date: Tue, 13 Oct 2026 15:39:41 -0700
+        bh=gurzTkqqRagMZrBgJFBCVz7i93uSa3r8+lp0iuHqO9A=;
+        b=vEgaGaRBOGmvR/6FNsVfpIy6oC3LbhiPid5+D7CbMDz2p/Tym6J11AXFT4kWUIlf9q
+         4rfh7uIt8z/jaH/S75Mcb/l1yAHsr1yXtRyW1mCCc5JX1viOU62DQAk3FJ5l/oE0AN8q
+         F8V3Dao6x8sR8hfANt6ESKrSOR7styqgTUJPua1rFX5ZEu0Dep7HXIzpIBmtbFiIqJ1q
+         Py26U0xs0TNYkAkDu8OhpXlJgNXp8Wc+DzvlVqRZoOA6FDwRHBjjOoBXwzGPBY6Yb2Uq
+         oB/g03MET3dW5YyqXTob6GflJ82a2lrCJim4H+fZN9gGaVMv/ya+h1aZLvw68A/iUvUc
+         8tuw==
+X-Forwarded-Encrypted: i=1; AKwUvByFU4nCELaGfp3bqznzeBZ205oWcXC7dgE0kmtQeGG/ElMvrtIcFlEfBmXH7x/5DQ0IUTgF+5BTqXs=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIfh1L1jzA3czagOnww7LBFnDG3SQ+Q7XqEES/xjGfMsH6e/PNE
+	8rr5NKHC+0q4gzSujW8PoaO4tD4PDGSg2jwYLoIK4zoc9mzEeKO/DWHIVBnnuBjJDJGtL0EXW9F
+	+B1kcg3NUig==
+X-Received: from dleg6-n1.prod.google.com ([2002:a05:701b:4306:10b0:160:bb23:390d])
+ (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:701b:4586:20b0:169:b1b1:1445
+ with SMTP id a92af1059eb24-16a5dbfe73dmr17947821c88.31.1791931232672; Tue, 13
+ Oct 2026 15:40:32 -0700 (PDT)
+Date: Tue, 13 Oct 2026 15:39:44 -0700
 In-Reply-To: <20261013223946.1836757-1-irogers@google.com>
 Mime-Version: 1.0
 References: <20261013223946.1836757-1-irogers@google.com>
 X-Mailer: git-send-email 2.56.0.385.gd3acb90ef8-goog
-Message-ID: <20261013223946.1836757-7-irogers@google.com>
-Subject: [PATCH 06/11] dlm: Free dlm_ls in kobject release callback
+Message-ID: <20261013223946.1836757-10-irogers@google.com>
+Subject: [PATCH 09/11] ubifs: sysfs: Use kset_create_and_add() for ubifs_kset
 From: Ian Rogers <irogers@google.com>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J . Wysocki" <rafael@kernel.org>, 
 	Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, Kees Cook <kees@kernel.org>, 
@@ -117,92 +117,77 @@ Cc: Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling <morbo@google.com>
 	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
 	Ian Rogers <irogers@google.com>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-c1860d/1791931229-D437587B-6D81C9D5/0/0
+X-purgate-ID: tlsNG-c1860d/1791931237-CDD4887B-2C610901/0/0
 X-purgate-type: clean
-X-purgate-size: 2861
+X-purgate-size: 1991
 
-struct dlm_ls embeds a struct kobject (ls_kobj), but dlm_ktype lacked a
-.release callback and dlm freed the lockspace structure directly via
-kfree(ls). With CONFIG_DEBUG_KOBJECT_RELEASE=y, freeing ls before the
-kobject release runs causes a use-after-free.
+ubifs_kset was a static struct kset using a custom ubifs_ktype that
+had no default_groups and no .release callback. With
+CONFIG_DEBUG_KOBJECT_RELEASE=y, unloading the ubifs module while delayed
+kobject release is pending causes a use-after-free on the static kset.
 
-Add dlm_ls_release() to free struct dlm_ls when the last reference to
-ls_kobj is dropped, use kobject_del() in release_lockspace(), and drop
-the final kobject reference in free_lockspace().
+Replace the static ubifs_kset and empty ubifs_ktype with a dynamically
+allocated kset via kset_create_and_add().
 
-Fixes: 3514faca19a6 ("kobject: remove struct kobj_type from struct kset")
+Fixes: 203a55f04f66 ("ubifs: Fix memory leak in ubifs_sysfs_init()")
 Assisted-by: Antigravity:gemini-3.1-pro
 Signed-off-by: Ian Rogers <irogers@google.com>
 ---
- fs/dlm/lockspace.c | 19 +++++++++++++------
- 1 file changed, 13 insertions(+), 6 deletions(-)
+ fs/ubifs/sysfs.c | 24 +++++++-----------------
+ 1 file changed, 7 insertions(+), 17 deletions(-)
 
-diff --git a/fs/dlm/lockspace.c b/fs/dlm/lockspace.c
-index a9c98b4f378f..1d226b27d8e6 100644
---- a/fs/dlm/lockspace.c
-+++ b/fs/dlm/lockspace.c
-@@ -179,7 +179,15 @@ static const struct sysfs_ops dlm_attr_ops = {
- 	.store = dlm_attr_store,
+diff --git a/fs/ubifs/sysfs.c b/fs/ubifs/sysfs.c
+index dbf967dcf26e..e20931e3a62f 100644
+--- a/fs/ubifs/sysfs.c
++++ b/fs/ubifs/sysfs.c
+@@ -80,13 +80,7 @@ static const struct kobj_type ubifs_sb_ktype = {
+ 	.release	= ubifs_sb_release,
  };
  
-+static void dlm_ls_release(struct kobject *kobj)
-+{
-+	struct dlm_ls *ls = container_of(kobj, struct dlm_ls, ls_kobj);
-+
-+	kfree(ls);
-+}
-+
- static struct kobj_type dlm_ktype = {
-+	.release        = dlm_ls_release,
- 	.default_groups = dlm_groups,
- 	.sysfs_ops     = &dlm_attr_ops,
- };
-@@ -355,7 +363,7 @@ static void free_lockspace(struct work_struct *work)
- 	 */
- 	rhashtable_free_and_destroy(&ls->ls_rsbtbl, rhash_free_rsb, NULL);
+-static const struct kobj_type ubifs_ktype = {
+-	.sysfs_ops	= &ubifs_attr_ops,
+-};
+-
+-static struct kset ubifs_kset = {
+-	.kobj	= {.ktype = &ubifs_ktype},
+-};
++static struct kset *ubifs_kset;
  
--	kfree(ls);
-+	kobject_put(&ls->ls_kobj);
+ int ubifs_sysfs_register(struct ubifs_info *c)
+ {
+@@ -107,7 +101,7 @@ int ubifs_sysfs_register(struct ubifs_info *c)
+ 		goto out_free;
+ 	}
+ 
+-	c->kobj.kset = &ubifs_kset;
++	c->kobj.kset = ubifs_kset;
+ 	init_completion(&c->kobj_unregister);
+ 
+ 	ret = kobject_init_and_add(&c->kobj, &ubifs_sb_ktype, NULL,
+@@ -139,18 +133,14 @@ void ubifs_sysfs_unregister(struct ubifs_info *c)
+ 
+ int __init ubifs_sysfs_init(void)
+ {
+-	int ret;
++	ubifs_kset = kset_create_and_add("ubifs", NULL, fs_kobj);
++	if (!ubifs_kset)
++		return -ENOMEM;
+ 
+-	kobject_set_name(&ubifs_kset.kobj, "ubifs");
+-	ubifs_kset.kobj.parent = fs_kobj;
+-	ret = kset_register(&ubifs_kset);
+-	if (ret)
+-		kset_put(&ubifs_kset);
+-
+-	return ret;
++	return 0;
  }
  
- static int new_lockspace(const char *name, const char *cluster,
-@@ -436,6 +444,8 @@ static int new_lockspace(const char *name, const char *cluster,
- 	atomic_set(&ls->ls_count, 0);
- 	init_waitqueue_head(&ls->ls_count_wait);
- 	ls->ls_flags = 0;
-+	ls->ls_kobj.kset = dlm_kset;
-+	kobject_init(&ls->ls_kobj, &dlm_ktype);
- 
- 	if (ops && dlm_config.ci_recover_callbacks) {
- 		ls->ls_ops = ops;
-@@ -567,9 +577,7 @@ static int new_lockspace(const char *name, const char *cluster,
- 	wait_event(ls->ls_recover_lock_wait,
- 		   test_bit(LSFL_RECOVER_LOCK, &ls->ls_flags));
- 
--	ls->ls_kobj.kset = dlm_kset;
--	error = kobject_init_and_add(&ls->ls_kobj, &dlm_ktype, NULL,
--				     "%s", ls->ls_name);
-+	error = kobject_add(&ls->ls_kobj, NULL, "%s", ls->ls_name);
- 	if (error)
- 		goto out_recoverd;
- 	kobject_uevent(&ls->ls_kobj, KOBJ_ADD);
-@@ -615,7 +623,6 @@ static int new_lockspace(const char *name, const char *cluster,
- 	rhashtable_destroy(&ls->ls_rsbtbl);
-  out_lsfree:
- 	kobject_put(&ls->ls_kobj);
--	kfree(ls);
-  out:
- 	module_put(THIS_MODULE);
- 	return error;
-@@ -759,7 +766,7 @@ static int release_lockspace(struct dlm_ls *ls, unsigned int release_option)
- 
- 	dlm_delete_debug_file(ls);
- 
--	kobject_put(&ls->ls_kobj);
-+	kobject_del(&ls->ls_kobj);
- 
- 	xa_destroy(&ls->ls_recover_xa);
- 	kfree(ls->ls_recover_buf);
+ void ubifs_sysfs_exit(void)
+ {
+-	kset_unregister(&ubifs_kset);
++	kset_unregister(ubifs_kset);
+ }
 -- 
 2.56.0.385.gd3acb90ef8-goog
 
