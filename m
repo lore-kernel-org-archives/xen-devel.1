@@ -4,42 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 950A3CC6B03
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 12:29:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1447195.1663527 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D1154CC6B03
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 12:37:35 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1447781.1663625 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGbdI-0005eS-F1; Tue, 13 Oct 2026 12:29:28 +0000
+	id 1xGbkq-00083c-14; Tue, 13 Oct 2026 12:37:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1447195.1663527; Tue, 13 Oct 2026 12:29:27 +0000
+Received: by outflank-mailman (output) from mailman id 1447781.1663625; Tue, 13 Oct 2026 12:37:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGbdG-0005XD-Mo; Tue, 13 Oct 2026 12:29:26 +0000
-Received: by outflank-mailman (input) for mailman id 1447195;
- Tue, 13 Oct 2026 12:29:11 +0000
+	id 1xGbkp-00083V-Uh; Tue, 13 Oct 2026 12:37:15 +0000
+Received: by outflank-mailman (input) for mailman id 1447781;
+ Tue, 13 Oct 2026 12:37:15 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xGbcx-000207-KN; Tue, 13 Oct 2026 12:29:07 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGbkp-00083P-7a
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 12:37:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGbcw-00DIaV-Tv; Tue, 13 Oct 2026 14:29:06 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xGbko-00DJqI-Jq
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 14:37:14 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6ace2401-e002-0a2a0a5209dd-0a2a4503a296-40
- for <multiple-recipients>; Tue, 13 Oct 2026 14:29:06 +0200
-Received: from [104.130.215.37] (helo=mail.xenproject.org)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6ace2411-fae8-0a2a45030019-6882d725a7b0-3
- for <multiple-recipients>; Tue, 13 Oct 2026 14:29:06 +0200
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xGbct-00000003NJD-2Axv; Tue, 13 Oct 2026 12:29:03 +0000
-Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.98.2)
- (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xGbct-0000000F9PF-18JY; Tue, 13 Oct 2026 12:29:03 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6ace25ef-bab6-0a2a0a5309dd-0a2a4501ba7e-38
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 14:37:14 +0200
+Received: from [209.85.208.49] (helo=mail-ed1-f49.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ace25fa-5984-0a2a45010019-d155d031c8db-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 14:37:14 +0200
+Received: by mail-ed1-f49.google.com with SMTP id
+ 4fb4d7f45d1cf-6aa9164072cso4169884a12.2
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 05:37:14 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 4fb4d7f45d1cf-6b1c6df3794sm2284214a12.32.2026.10.13.05.37.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 13 Oct 2026 05:37:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -51,170 +52,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
-Content-Transfer-Encoding: binary
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1791895034; x=1792499834; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=/QrB9/Ew6Sxj4YNHE/qGuA6q1KlvGkxTi9ld3Z9JK2g=;
+        b=aojU7Gzyj3zvq9UdDP6ZIIrgyRjFAMgueGj4awS3+IIf+hSagfLnGkAhcCKUH5jlJA
+         bgAHiX24sqiFqHgIrTn/uBsPkDbSZhC1eDsaK+khWgGz3syOTwffeK2kL8c+1KyStD7l
+         9UrgIlCsXtFULUfp6pFsx32SUZlWlsA8/5tO0HPnOJ9XrfOcCh28XWojxOXR9UKl0YNK
+         mnqn9MFBNd5Bu29kjBM3lPJv2qnUDqrLr3TNMeGXzrLrTpryGCtX95d5i+Sxql0pKHzX
+         gLfDbSrg8eLmtjbRAaLEOfO6kkMPJRz/EvXSWP1116yfk7Mk3a+z+7ZPzGwnH0YYktSx
+         iy6g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791895034; x=1792499834;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=/QrB9/Ew6Sxj4YNHE/qGuA6q1KlvGkxTi9ld3Z9JK2g=;
+        b=0ooGEAmEsCDdwTSd0YFVjrIQR4GT1vlXYhBbnxDjobhOF8ZtAgMZrPKSi3DIAVkA2J
+         M3wv8LNqOOSQ7ROgsfwsmNi/qfvW1LV2F8QPaJgvwV6FVizyDsfe7sOGcyueiFEvKDPr
+         Bk358e9edNXbulQdJvA2oWLPzAkfkRJo+Bx7kIwMDNxw/bnY8/MoB6u+tO+I9o5zA+GF
+         wnCBVz6NgTi95viQye1ds9iZCVIcr3kF9iEN4mY52UnRytqzCtKa5/Ehan6GA61LwbX8
+         2cjuzk5mBmN6BmpUmQGc6XDixMK+Nj5W7EZ+mUUn1jriZhg2VkLHDqxOjWVDLhmzeVZo
+         lp+A==
+X-Gm-Message-State: AFq9FYLg5f1707fWJoPMurzqfx6Ir0tX+d0GLNixO6TE27a8jaa1DZ0r
+	O+RO3UpVhikYP8Cob+haIFqLiXQ2gr6NR7EO7ADiNRyQt8yNS4sIpvppznC4BUc/0g==
+X-Gm-Gg: AYBFou1yDqAp187GG0yyTQzrSArEblFIk499qDcH8q9KgEJ2JgG3d3alrkNRqVAxihF
+	aoZB9whdY93C+YgRuwVyo6EEws5GGoMSjFIp/Yu5eGk/julIHhM+VKoRCSuLVSVKvppo41gw+GC
+	nhMKsqVxdHImy0G5JPik6UE8BGk6K8nhiSinKeeKwGr1UuFRKHw4blOA+yX/yLHx1Br/yq/lVV2
+	THIm4E+U9KySPa85IRmVBtYbpKTvN/3lthqbwhIcmaIA+ereBxqu1/6as8CI+B7AwlQarH0yMKU
+	X+h5hBxZk8LMrhrN6Cog/TZKLPbHoXZj2EnLn2lskWZgL/ioaaWVFACfjEbp/cwo/GbbnZ+xNce
+	gQIJuxn2ngwsiVFNaGVG5+NMTgv4/VFm2Pm8s47tIte2fepqLEn2QdYte2Ovsdy+7IHoamSXcAn
+	Xf991ybo4yOrbxA5sFzOmSYZWIIaysFVqa7ELXInbLSthX1V2YVZ3sShgkjojq1vkXeedQYZpSC
+	m4qcA+/6zl/ClpE2PAEOJ+aIHQ2c1YNb0AiQ5FN0XKam0nL3dBmtzAy7W+HZA==
+X-Received: by 2002:a05:6402:2351:b0:6b1:b626:5bd9 with SMTP id 4fb4d7f45d1cf-6b1b6265e2fmr5235342a12.0.1791895033213;
+        Tue, 13 Oct 2026 05:37:13 -0700 (PDT)
+Message-ID: <870ae4c3-9776-49b0-bb62-5db71c9f6192@suse.com>
+Date: Tue, 13 Oct 2026 14:37:11 +0200
 MIME-Version: 1.0
-X-Mailer: MIME-tools 5.515 (Entity 5.515)
-To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
- xen-users@lists.xen.org, oss-security@lists.openwall.com
-From: Xen.org security team <security@xen.org>
-CC: Xen.org security team <security-team-members@xen.org>
-Subject: Xen Security Advisory 521 v2 (CVE-2026-102701) - tapdisk:
- Out-of-bounds access in tap_ctl_connect_xenblkif()
-Message-Id: <E1xGbct-0000000F9PF-18JY@xenbits.xenproject.org>
-Date: Tue, 13 Oct 2026 12:29:03 +0000
-X-purgate-ID: tlsNG-33051d/1791894546-77EC24E9-556037BB/0/0
-X-purgate-type: clean
-X-purgate-size: 6574
-
---=separator
-Content-Type: text/plain; charset="utf-8"
-Content-Disposition: inline
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] automation/eclair: generalize the noreturn
+ function-pointer deviation
+To: Nicola Vetrini <nicola.vetrini@bugseng.com>
+Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+References: <d68c56607781bfa829766aed36eeb31f06080fbc.1791224638.git.dmytro_prokopchuk1@epam.com>
+ <5b5cccc8bbbc4c87fc99427eb4c1c413@bugseng.com>
+ <96319798-7cf6-4905-9b1b-37bb6a41bdcd@suse.com>
+ <d66bcdda409b9144da2c9bc75d3afd1b@bugseng.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <d66bcdda409b9144da2c9bc75d3afd1b@bugseng.com>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1791895034-BFE68757-28CCB2C8/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2935
 
------BEGIN PGP SIGNED MESSAGE-----
-Hash: SHA256
+On 13.10.2026 13:46, Nicola Vetrini wrote:
+> On 2026-10-12 08:52, Jan Beulich wrote:
+>> On 09.10.2026 17:37, Nicola Vetrini wrote:
+>>> On 2026-10-05 20:56, Dmytro Prokopchuk1 wrote:
+>>>> The R11.1 safe cast only matched void noreturn (*)(void *). Accept 
+>>>> any
+>>>> noreturn function pointer converted to a compatible function pointer.
+>>>> canonical() covers typeof destinations, and 
+>>>> compatible_deep_unqualified
+>>>> keeps the parameter and return types aligned.
+>>>>
+>>>> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+>>>> ---
+>>>>
+>>>> This patch tries to cover both of these:
+>>>>
+>>>> 1. eclair: widen R11.1 noreturn cast deviation
+>>>> https://patchew.org/Xen/c6632dd805a119aca54b9d1ae2eea68ef9c1334c.1790674358.git.dmytro._5Fprokopchuk1@epam.com/
+>>>>
+>>>> 2. Eclair: relax "noreturn" function-pointer conversion deviation
+>>>> https://patchew.org/Xen/6d212d60-5c0b-4909-996d-5d6a4906b7e1@suse.com/4cca58b6-b555-4064-aa26-5204dc4b99cc@suse.com/
+>>>>
+>>>> Test CI pipeline:
+>>>> https://gitlab.com/xen-project/people/dimaprkp4k/xen/-/pipelines/2914802667
+>>>>
+>>>> The only one Rule11.1 violation remains, which is covered by this 
+>>>> Jan's
+>>>> patch:
+>>>> x86/kexec: address Misra rule 11.1 violation in machine_kexec_load()
+>>>>
+>>>
+>>> The change itself is fine, but the aspect I'm concerned with is the
+>>> following: if you have a function marked noreturn, the compiler is
+>>> entitled to
+>>> essentially remove any code following it, so in principle this could 
+>>> be
+>>> the case also when invoking a function pointer (i.e. the compiler has 
+>>> no
+>>> obligation to retain code after a call to a function pointer that is
+>>> actually a noreturn function). While this in practice may not happen
+>>> often (e.g., the analysis done by a compiler is probably too shallow 
+>>> to
+>>> actually infer paths where the function pointer is only ever assigned 
+>>> to
+>>> noreturn functions when it is called), it is still not completely true
+>>> to say that the behavior is not altered by casting away noreturn.
+>>
+>> With "behavior" here you mean that of the compiler? Because Xen's 
+>> behavior
+>> won't change if the code following such an indirect call isn't 
+>> eliminated.
+>> It will "just" be unreachable code then.
+>>
+>> That said, ...
+> 
+> I was more worried about the other direction: code that is expected to 
+> be executed by the developer that is instead removed by the compiler, 
+> with (rightfully) no diagnostic. Clearly if code is not removed it would 
+> be unreachable, but such that a static analysis tool or compiler will 
+> likely not diagnose, precisely because the attribute is dropped, so 
+> there may be missing diagnostics.
 
-           Xen Security Advisory CVE-2026-102701 / XSA-521
-                              version 2
+Hmm, interesting. The noreturn attribute isn't visible at call sites
+anyway, so I don't quite see how that would be any more unexpected than
+for a normal (direct) function call.
 
-      tapdisk: Out-of-bounds access in tap_ctl_connect_xenblkif()
-
-UPDATES IN VERSION 2
-====================
-
-Public release.
-
-ISSUE DESCRIPTION
-=================
-
-Tapdisk is a userspace xen-blkback implementation used by the XAPI
-toolstack.
-
-During connection, multi-page rings may be negotiated between the
-frontend and backend.  Tapdisk had no boundary check on the size
-requested by the frontend, and assumed it did not exceed 8.
-
-IMPACT
-======
-
-A buggy or malicious guest can cause a stack overflow in tapdisk,
-potentially leading to code execution.  Tapdisk normally runs as root.
-
-VULNERABLE SYSTEMS
-==================
-
-All versions of tapdisk are vulnerable.
-
-MITIGATION
-==========
-
-There are no mitigations.
-
-CREDITS
-=======
-
-This issue was discovered by Claude Opus and diagnosed as a security issue
-by Teddy Astie of Vates.
-
-RESOLUTION
-==========
-
-Applying the attached patch resolves this issue.
-
-xsa521.patch           blktap master
-
-$ sha256sum xsa521*
-72ece150e9d0836f217f3382c8dc76cd51bffbe4b7610c00f219b90e5600cbc5  xsa521.patch
-$
-
-DEPLOYMENT DURING EMBARGO
-=========================
-
-Deployment of the patches and/or mitigations described above (or
-others which are substantially similar) is permitted during the
-embargo, even on public-facing systems with untrusted guest users and
-administrators.
-
-But: Distribution of updated software is prohibited (except to other
-members of the predisclosure list).
-
-Predisclosure list members who wish to deploy significantly different
-patches and/or mitigations, please contact the Xen Project Security
-Team.
-
-
-(Note: this during-embargo deployment notice is retained in
-post-embargo publicly released Xen Project advisories, even though it
-is then no longer applicable.  This is to enable the community to have
-oversight of the Xen Project Security Team's decisionmaking.)
-
-For more information about permissible uses of embargoed information,
-consult the Xen Project community's agreed Security Policy:
-  http://www.xenproject.org/security-policy.html
------BEGIN PGP SIGNATURE-----
-
-iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmrOIvgMHHBncEB4ZW4u
-b3JnAAoJEIP+FMlX6CvZgdgIAKXTyop/90HNxeBpRVbYP2vrPCm2YBMzoc3YtxdM
-0wWdbFvUptHWnzypCWuUGJWq8ZFf4lInnkJrj0sJ9te+OSQDqcfwTMEQuDWzBM08
-lQ27H0kcum3rble2V2CFCK4uOoLYwOYX/bA5vCeGiiPQcUU3m++6IoAMaRY7G2V7
-RTNJmNCtbGiC7l3ExUX9KxnFCSaX9gL99YkygybBecSsjJhdlGZj7pzvJtomv1sC
-fVSAFmXkivLGKX8TXQdj/48xmdqNSIQgYbdSdyZgGjmy7bxIgxB576FHwlN/fzf7
-ZzpeEO8yZTFWeCJCKZavvjsq/7u2vxUtpoL3c81vSKWCOLc=
-=w1aW
------END PGP SIGNATURE-----
-
---=separator
-Content-Type: application/octet-stream; name="xsa521.patch"
-Content-Disposition: attachment; filename="xsa521.patch"
-Content-Transfer-Encoding: base64
-
-RnJvbTogVGVkZHkgQXN0aWUgPHRlZGR5LmFzdGllQHZhdGVzLnRlY2g+ClN1YmplY3Q6IEVuc3Vy
-ZSBwYXNzZWQgcmluZy1wYWdlLW9yZGVyIGlzIHZhbGlkCgpUaGUgY3VycmVudCBsb2dpYyBhY2Nl
-cHRzIGFueSBndWVzdCBwcm92aWRlZCByaW5nIG9yZGVyLCB3aGljaCBjYW4gY2F1c2UgYQpzdGFj
-ayBvdmVyZmxvdyBpbiB0YXBfY3RsX2Nvbm5lY3RfeGVuYmxraWYoKSBhcyB0YXBkaXNrX21lc3Nh
-Z2VfYmxraWY6OmdyZWYKY2FuIG9ubHkgc3RvcmUgOCBncmFudCByZWZlcmVuY2VzLCB5ZXQgb3Jk
-ZXIgbWF5IGJlIGxhcmdlciB0aGFuIDMuCgpGaXggdGhpcyBieSBjaGVja2luZyB0aGF0IHJpbmcg
-b3JkZXIgdmFsdWVzIGlzIGluIFswLi4zXSByYW5nZS4gIEFsc28gY2xhcmlmeQp0aGUgZ3JlZiBh
-cnJheSBzaXplIGluIHRhcGRpc2tfbWVzc2FnZV9ibGtpZiAoZml4ZXMgVE9ETykuCgpUaGlzIGlz
-IFhTQS01MjEgLyBDVkUtMjAyNi0xMDI3MDEuCgpTaWduZWQtb2ZmLWJ5OiBUZWRkeSBBc3RpZSA8
-dGVkZHkuYXN0aWVAdmF0ZXMudGVjaD4KUmV2aWV3ZWQtYnk6IFJvc3MgTGFnZXJ3YWxsIDxyb3Nz
-LmxhZ2Vyd2FsbEBjaXRyaXguY29tPgpUZXN0ZWQtYnk6IEFsZXggQnJldHQgPGFsZXguYnJldHRA
-Y2l0cml4LmNvbT4KCmRpZmYgLS1naXQgYS9jb250cm9sL3RhcC1jdGwteGVuLmMgYi9jb250cm9s
-L3RhcC1jdGwteGVuLmMKaW5kZXggZjA5Yjc2ZWE4MjU1Li4zN2RmZjA2NjIzYmYgMTAwNjQ0Ci0t
-LSBhL2NvbnRyb2wvdGFwLWN0bC14ZW4uYworKysgYi9jb250cm9sL3RhcC1jdGwteGVuLmMKQEAg
-LTQ1LDYgKzQ1LDggQEAKICNpbmNsdWRlIDxzdHJpbmcuaD4KICNpbmNsdWRlIDx1bmlzdGQuaD4K
-IAorI2luY2x1ZGUgInhlbl9ibGtpZi5oIgorI2luY2x1ZGUgImRlYnVnLmgiCiAjaW5jbHVkZSAi
-dGFwLWN0bC5oIgogI2luY2x1ZGUgImNvbXBpbGVyLmgiCiAjaW5jbHVkZSAidXRpbC5oIgpAQCAt
-NTgsNyArNjAsOSBAQCB0YXBfY3RsX2Nvbm5lY3RfeGVuYmxraWYoY29uc3QgcGlkX3QgcGlkLCBj
-b25zdCBkb21pZF90IGRvbWlkLCBjb25zdCBpbnQgZGV2aWQsCiAgICAgdGFwZGlza19tZXNzYWdl
-X3QgbWVzc2FnZTsKICAgICBpbnQgaSwgZXJyOwogCi0JbWVtc2V0KCZtZXNzYWdlLCAwLCBzaXpl
-b2YobWVzc2FnZSkpOworICAgIEFTU0VSVChvcmRlciA+PSAwICYmIG9yZGVyIDw9IE1BWF9SSU5H
-X1BBR0VfT1JERVIpOworCisgICAgbWVtc2V0KCZtZXNzYWdlLCAwLCBzaXplb2YobWVzc2FnZSkp
-OwogICAgIG1lc3NhZ2UudHlwZSA9IFRBUERJU0tfTUVTU0FHRV9YRU5CTEtJRl9DT05ORUNUOwog
-ICAgIG1lc3NhZ2UuY29va2llID0gbWlub3I7CiAKZGlmZiAtLWdpdCBhL2luY2x1ZGUvdGFwZGlz
-ay1tZXNzYWdlLmggYi9pbmNsdWRlL3RhcGRpc2stbWVzc2FnZS5oCmluZGV4IDQ4OTAxN2NhNjkw
-OS4uNzIzMWExNGQzMDFjIDEwMDY0NAotLS0gYS9pbmNsdWRlL3RhcGRpc2stbWVzc2FnZS5oCisr
-KyBiL2luY2x1ZGUvdGFwZGlzay1tZXNzYWdlLmgKQEAgLTM0LDYgKzM0LDggQEAKICNpbmNsdWRl
-IDxpbnR0eXBlcy5oPgogI2luY2x1ZGUgPHN5cy90eXBlcy5oPgogCisjaW5jbHVkZSAieGVuX2Js
-a2lmLmgiCisKIC8qCiAgKiBUT0RPIFRoaXMgaXMgcXVpdGUgc21hbGwgc2luY2Ugd2UgZG9uJ3Qg
-YWxsb3cgcGF0aCBiaWdnZXIgdGhhbiAyNTYgY2hhcnMuIElmCiAgKiB3ZSBldmVyIGluY3JlYXNl
-IHRoaXMsIG1ha2Ugc3VyZSB0YXBkaXNrX21lc3NhZ2VfdCBzdHJ1Y3R1cmVzIGFyZSBub3QKQEAg
-LTEzNSw5ICsxMzcsOCBAQCB0eXBlZGVmIHN0cnVjdCB0YXBkaXNrX21lc3NhZ2VfYmxraWYgewog
-CiAJLyoqCiAJICogR3JhbnQgcmVmZXJlbmNlcyBmb3IgdGhlIHNoYXJlZCByaW5nLgotCSAqIFRP
-RE8gV2h5IDggc3BlY2lmaWNhbGx5PwogCSAqLwotCXVpbnQzMl90IGdyZWZbOF07CisJdWludDMy
-X3QgZ3JlZltNQVhfUklOR19QQUdFU107CiAKIAkvKioKIAkgKiBOdW1iZXIgb2YgcGFnZXMgaW4g
-dGhlIHJpbmcsIGV4cHJlc3NlZCBhcyBhIHBhZ2Ugb3JkZXIuCmRpZmYgLS1naXQgYS90YXBiYWNr
-L2Zyb250ZW5kLmMgYi90YXBiYWNrL2Zyb250ZW5kLmMKaW5kZXggMjQzZjg0MjUyZGQ2Li45ODZm
-NDU2NDdiZjYgMTAwNjQ0Ci0tLSBhL3RhcGJhY2svZnJvbnRlbmQuYworKysgYi90YXBiYWNrL2Zy
-b250ZW5kLmMKQEAgLTExOSw2ICsxMTksMTIgQEAgY29ubmVjdF90YXAodmJkX3QgKiBjb25zdCBk
-ZXZpY2UpCiAgICAgICAgICAgICAgICAgIiVkIiwgJm9yZGVyKSkKICAgICAgICAgb3JkZXIgPSAw
-OwogCisgICAgaWYgKG9yZGVyIDwgMCB8fCBvcmRlciA+IE1BWF9SSU5HX1BBR0VfT1JERVIpIHsK
-KyAgICAgICAgV0FSTihkZXZpY2UsICJmcm9udC1lbmQgYXNrZWQgZm9yIGFuIGludmFsaWQgcmlu
-ZyBvcmRlcjogJWRcbiIsIG9yZGVyKTsKKyAgICAgICAgZXJyID0gRUlOVkFMOworICAgICAgICBn
-b3RvIG91dDsKKyAgICB9CisKICAgICAgbnJfcGFnZXMgPSAxIDw8IG9yZGVyOwogCiAgICAgaWYg
-KCEoZ3JlZiA9IGNhbGxvYyhucl9wYWdlcywgc2l6ZW9mKGdyYW50X3JlZl90KSkpKSB7Cg==
-
---=separator--
+Jan
 
