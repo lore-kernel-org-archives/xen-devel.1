@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 33D84CA9EC5
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 02:32:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446642.1662729 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DD13CA9ED0
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 02:36:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446647.1662738 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGSIN-0003ha-DE; Tue, 13 Oct 2026 02:31:15 +0000
+	id 1xGSNO-0004Id-Sn; Tue, 13 Oct 2026 02:36:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446642.1662729; Tue, 13 Oct 2026 02:31:15 +0000
+Received: by outflank-mailman (output) from mailman id 1446647.1662738; Tue, 13 Oct 2026 02:36:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGSIN-0003hR-89; Tue, 13 Oct 2026 02:31:15 +0000
-Received: by outflank-mailman (input) for mailman id 1446642;
- Tue, 13 Oct 2026 02:31:14 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xGSNO-0004IW-Q9; Tue, 13 Oct 2026 02:36:26 +0000
+Received: by outflank-mailman (input) for mailman id 1446647;
+ Tue, 13 Oct 2026 02:36:26 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Volodymyr_Babchuk@epam.com>) id 1xGSIM-0003hL-It
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 02:31:14 +0000
+ (envelope-from <Volodymyr_Babchuk@epam.com>) id 1xGSNN-0004IQ-TJ
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 02:36:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGSIL-00BXmE-7S
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 04:31:13 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xGSNM-000IbZ-NR
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 04:36:24 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6acd97b3-2eae-0a2a0a5409dd-0a2a4502b4ec-48
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 04:31:13 +0200
-Received: from [52.101.66.81]
- (helo=DUZPR83CU001.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6acd9907-2eae-0a2a0a5409dd-0a2a4501829e-26
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 04:36:24 +0200
+Received: from [52.101.69.127]
+ (helo=AM0PR83CU005.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6acd97f0-6ca4-0a2a45020019-34654251faf0-3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 04:31:13 +0200
+ id 6acd9928-5984-0a2a45010019-3465457f80ef-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 04:36:24 +0200
 Received: from VE1PR03MB6078.eurprd03.prod.outlook.com (2603:10a6:803:113::29)
  by DBBPR03MB7131.eurprd03.prod.outlook.com (2603:10a6:10:1f4::12)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.23; Tue, 13 Oct
- 2026 02:31:10 +0000
+ 2026 02:36:22 +0000
 Received: from VE1PR03MB6078.eurprd03.prod.outlook.com
  ([fe80::4722:b91:9b24:ee48]) by VE1PR03MB6078.eurprd03.prod.outlook.com
  ([fe80::4722:b91:9b24:ee48%4]) with mapi id 15.21.0496.020; Tue, 13 Oct 2026
- 02:31:10 +0000
+ 02:36:22 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,38 +57,36 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=liuIdE0ovptn0Df0L5tXmFi11tm5mbbxLm2FoMDUE8Zx6KafqrDhO6QwKvFcTDEkifzpMJBY1WwyLJOepBIuV6Smu1+bRtxmtrbE4tkDra3mqNxJZ06Jw9E2Xk/ubjFof4eYN7oq7Jj8PYgIpxzPL/FrAydGs94MSojArvhYnf0s+ZHUoAtvxZoXRJyQYwaVJnFPKw0EIbm166gRxI092NNc+BS2se16uCbfydC4zD6eQKc9INIRBg9nBmrQnUFSHDtAsw91sReXItBKh4J/MAeljyanZdzruF81OZSy9zG/QvRg39+1eKzKZck1b76WZHrms9gEY7iEctM5p+JKFg==
+ b=omz/JBFtzmN3q6/kwgewMiiGI2qmlGAKpa6h0IfC43SwTm8mGsGBesQiXLSxIM7c0y4TwVoANV+9nRG5O5LUUBhkr5h3WFtchMen2HKEyM0wkYpJ5CWItQ7CCNOCopWQGB8788iZj1DeSDVHKOqkJm/kTJR8m0oINR9dNhl64RGqxyIf47SNEtk/ZFfEAxZZZYflMYpESH9H8h1vX4U8NRW5OLzCQPx00MfmFcT51A6l/6CnC7AyZylSBQIt6E7slHUQJgpN7k5p9UIqhJDK2YwZF87oe9SXqKyWFqO9Zpo8ILZWPLOeIvsmA92t8CA9xTodhjPEPNKRKC5xWqaS8A==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ot9hhRh9OnXRZP4Ej2WBfGAjnd50GSuNZ4BtxnTZubQ=;
- b=rD1RKKTEd/AEEZ3xuSIFrGE2N+9OHpwLEVf1eHgZsRai70sJ2wQ5vGG3mqZdmFDLKeesZDl2Pe2BH0Gz2zs6mvw6FWLsX3JAsC75KGlFIQXgOCac3nlKVl4nWY12rXonfvadwHyyIqamKS9Y9IYE15Vb4CX2G4eGXTO7/ynFAwkPALO813dJm6588eOtdSVQJpiMG4Y/U2XHruk8w5ZHAXt4HxFh/11g7Kg+75nzLRZ5d+4828ca8TpongX5SCwovkpl9l7U/R60v2ujaZGUStlCDwmzsFegbzbPHAAAoNruxj/4mC83CpfatNpAnaIdcEWinyx1gHN9x+BInRZYFA==
+ bh=JPUAuZ0kYTtEPwG/2/FzO313L0dzqENwj5fDeJV7Wj4=;
+ b=JvwbUi2LX1M2MFGKOmOkKPL5lNAr0LfmFNpNSmh15gSfGbBUgZKj7iYIYjZWEDGdxdHTp9CHYg1ds40I87acQf9jo8rMbhWibcHgmje/Tq8YDvRhgPnc+kIMlQkYbQ7dkqaiymJBKXk1SQl6Xz0VhlcOg72xCn17/IkySoXk6Fz8xtcBGIs14Vk4VBlkI5/Bn8M6q2JRuc7eGic9EsUMyuV9JC5RwYL8/QabQduoEIT9PcB2j8VfECcu7oX1EUYm+ztfUdPuGBoi+cCbxb13kYvz7rIA0L1QKcnviraN9mOxGIxyqFM0YnIXRPujIGksZWWoPU8VzORWUn2MSUQSHw==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ot9hhRh9OnXRZP4Ej2WBfGAjnd50GSuNZ4BtxnTZubQ=;
- b=PRmRUoPdQz5qV+0cRmm79r2xzZbb86tSAAwBJHXco1QDOj8nG0CxHVkgolGKrVB5AWVljK61akdvD6gTjRi6LwEN0xlzcTopM8SB/XNN8SdOAlREpCgx7dvrpmQLSEFprmDKhgQSC63c5kfp9GoNZ2XrvL+gAv3mwQzSlnA0qmtcTFp1wf71ituRm7LmcLczRwQZRFrd82iV8IasQ5SpH4gNQTGWcsxb6QAFpmvUX27SZBZXRp77uMkreyVnkaGskwkj3oDtCzcIeD0tDYn4oAhN/ylSDz61lC7lk7T+RNKP9aMHvUk5Nk1KTKsZpjfK3qjV92VihxwqfRxHgqyk3A==
+ bh=JPUAuZ0kYTtEPwG/2/FzO313L0dzqENwj5fDeJV7Wj4=;
+ b=d9fSGrDe6+scQCeB+gaoCFUSXvwS/dYUToa9WXNtsPm0RUWykOJPfViOGLOK65QqcCPMG/181HpgMunlUftsibPSVozIWg4p3vesPeCAyTqhBFzhxaEfAH/AzuNj2dd9+myOmMzYseFfvS6syDcaKDBEG/vq8pyQzdD1eoIXS2WhG5IZ0bLR/Poow/jQ+BiXRdjhJNx1XFa9cOjJPYflcNE0pOBp3wd9YsU6ngAr9kf2PAYHS83YCbwlqiQ6lmendAgIuBvvic4tj9NfcOl0lnpTeTQKLiKLOERBg7x3Sqo/0H16x0U1Ki+NyTfmAaChoUwRVTMdD3QsgTIDPNlx4A==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
 To: Mykola Kvach <Mykola_Kvach@epam.com>
 CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
  Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
- Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
-	=?iso-8859-1?Q?Roger_Pau_Monn=E9?= <roger@xenproject.org>, Jens Wiklander
-	<jenswi@kernel.org>
-Subject: Re: [PATCH v6 1/4] xen/arm: handle irq_set_type() failures
-Thread-Topic: [PATCH v6 1/4] xen/arm: handle irq_set_type() failures
-Thread-Index: AQHdUDM172HH4zh0KU2n7bf3fDWjHw==
-Date: Tue, 13 Oct 2026 02:31:10 +0000
-Message-ID: <87se2awcuq.fsf@epam.com>
-References: <cover.1790699282.git.mykola_kvach@epam.com>
-	<1cc5a52b61d3ed8176b2a12f23f284a44a8a72d8.1790699282.git.mykola_kvach@epam.com>
+ Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>
+Subject: Re: [PATCH v4 1/4] xen/arm: its: initialize host LPI state before
+ activating ITSes
+Thread-Topic: [PATCH v4 1/4] xen/arm: its: initialize host LPI state before
+ activating ITSes
+Thread-Index: AQHdUEUSTD/ibdik3UGXPUfUToT1lQ==
+Date: Tue, 13 Oct 2026 02:36:22 +0000
+Message-ID: <87jynmwcm2.fsf@epam.com>
+References: <cover.1790707009.git.mykola_kvach@epam.com>
+	<0afac276107d8b2a170489950d75e611c69a599b.1790707009.git.mykola_kvach@epam.com>
 In-Reply-To:
- <1cc5a52b61d3ed8176b2a12f23f284a44a8a72d8.1790699282.git.mykola_kvach@epam.com>
-	(Mykola Kvach's message of "Tue, 29 Sep 2026 19:54:09 +0300")
+ <0afac276107d8b2a170489950d75e611c69a599b.1790707009.git.mykola_kvach@epam.com>
+	(Mykola Kvach's message of "Tue, 29 Sep 2026 22:02:10 +0300")
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -98,312 +96,242 @@ authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VE1PR03MB6078:EE_|DBBPR03MB7131:EE_
-x-ms-office365-filtering-correlation-id: 2d98a68c-816f-4dbc-245c-08df28d20afe
+x-ms-office365-filtering-correlation-id: 8df07605-0243-4fd4-3cba-08df28d2c52d
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|42112799006|23010399003|7416014|376014|1800799024|366016|6133799003|18002099003|22082099003|10067099003|38070700021|11063799006|4143699003|261009223027099003|56012099006;
+ BCL:0;ARA:13230040|42112799006|23010399003|376014|1800799024|366016|6133799003|18002099003|22082099003|260925021311599003|260925022911599003|260925021911599003|10067099003|3023799007|38070700021|11063799006|4143699003|261009223027099003|56012099006;
 x-microsoft-antispam-message-info:
- tTOcxkOZYZ91UWcBN6KF6DDWRFOE/DI4f3FUllQNgDfVCvl4gAuwFuXizVBd2Cbw4SWk49+S4sg/pKdNxsSNnV17pi73smW143fvS/HHX9FkrPUSUNffU400x5tZkLdVwY/L37C/a5iYry8BiSAS4fgg1DJFZVQCMwvmzarQoyTZpJHzKRYruV7VHV1iVXhs4GTyGwZAhQ6uSZpWBRQQipUmSMAzJOiQSCDUjwi+dQEgIghaAMJnVNqVOIjXqZ3t5OG0OlJzEGWbT0uiWG0krbdBgr4g3+yilK0Qi2tsuukgip6yE0x0qBRhS41PruUiKSCdg0a+UED8g3JesuP32AXfNmibzvBR2fpb0Ipa2w1bXCeutWuLGhz5q6tlC8Z5t4nKaMVKcy5MFlHFn7Eu0rbV3YD+HuB8FbcL1aK2uHUVEdBUas+6Bfb2o93lA/yJx74fMd9F+Kgrs7QDGi/oqlbdSlaFBAtPn20jhj/zS/LQaMF9Kt4m/WOotN7LNnzf8uzJrJ1SzRqefNxpiUUR9ldWJdyNx/SqUVNmS3N8ed8u62avkAnRTN/uc5gzDe0CA4Du+U1bKdhSqP3z97YcLzgBaV5gsxORlnAx0ST5jJvmPdfbmPyWuhXLXG+lQPgYc+MSR90lrJioYt0O/il8WwK9e88JP7vlYsruNCf/cH8DubWJ+8Ymo5noQyPnJ8r2rGnleoOsHbizEni9aRn+aGu3cdCxppvpHhGfngo611I=
+ P7U03EB38TNOTboi5mEA1qx1wLMnFxoXsolsRC+EvG80ZrWBqNf8QVEfdPhG2D33TPGofXr6+kzckFwj4dLCDorSDdawZrzR0qSgiZ5iHsE4KoiMQpsLmjV63DEd+yqiJ4GtgGy9ijlZTrN7uQnshdi6YI16eTLKaaDCmhZXTnkWh7QCS0RP6DhEcBpMEVKnVu/dAruF0+iE8YD373MWAn/A68JYVekr4+9R78/M5LZv7J9hzOJV8TGypr3F/N3/c+T3BDWb3sh2x3ldz9BdBQmhpuGuAeFw69Pv5qCW4ZqwD/l7k9HvaPArUCrDp8BV55i6SJjnhGDllzkDVWLMeJMeqaMw/f2pi9RYiU18V2sYOlpsOtmJbcsfIA/ZHTfc6ZgPvmQRJR9/3xolnrAg7ewd4+3PH6pIsw+6xuETEXWoiaY6VwxBKd9ZjoAv/KyMQ/2BMaE6g+dHel5rbhXPrgwtSURkvvXz2EBnI59OYeEetGusVSMOQct8QeubObr6QqSEIQ0hKQ/1xNkHHumn1kksvh89eCv3KIKjwRpt03yq9myE6d1zbnbw1/0MgPclL4ZhR/QgPN2SJaS4RMYUUIbXN0sygscvkJwX5oBSUCKFPsHLo1b180dIOvK+zJ4zNK5oRE+1OrwuomA+evStkxCYYbQsKgfb+5ElKlkxgZQ=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR03MB6078.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(42112799006)(23010399003)(7416014)(376014)(1800799024)(366016)(6133799003)(18002099003)(22082099003)(10067099003)(38070700021)(11063799006)(4143699003)(261009223027099003)(56012099006);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR03MB6078.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(42112799006)(23010399003)(376014)(1800799024)(366016)(6133799003)(18002099003)(22082099003)(260925021311599003)(260925022911599003)(260925021911599003)(10067099003)(3023799007)(38070700021)(11063799006)(4143699003)(261009223027099003)(56012099006);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?YEo/eubAjZQIJMt4tfoFwKkwyAmwzl7XmEXRIIBOYQ75BZOP937yIxMc4Z?=
- =?iso-8859-1?Q?ahtpNHBmBdUmWl9/Q0J2YbNIi9c9UxkcELeR8483gQpsmB0q80ZZXObchk?=
- =?iso-8859-1?Q?EdLmgd+NCXP3yr45fYwI9ptXEYebn/zx0B8YrSk3MVycb1l9HD0jZpA1fE?=
- =?iso-8859-1?Q?tUHpbMciOAE6UM/QAsJIzKZhPhrfUGTxU6zkttZI1gZ69U/735CzxWaDcp?=
- =?iso-8859-1?Q?jDzpeQR6jxvfOHgCQrPOqQz+Iq+9WcdhlYNIcOcJ9nproSDTguA/bqqYtr?=
- =?iso-8859-1?Q?yRp8yngpJJeSGZmaqOXNjfBS8NeNF5p10tJybfYZRuG+8dGHnFiRZfgJWP?=
- =?iso-8859-1?Q?cKP/DOAI37sxLPQeAO0xCkV7Ld0Tv2/8JB9jJnoMfrL1EjeXPO7jLQZ2rg?=
- =?iso-8859-1?Q?x9D/T8wJQEn60B8QJHmHU8oh8IP9bdX8ptVJzrs2Bdj1pJW73vvgArkUd1?=
- =?iso-8859-1?Q?5VVq7JfMJ8NG5LtQkew/8zK5bOzWTdRAVJ2chvRGfF8z77wcwGnW9s4U5M?=
- =?iso-8859-1?Q?n97uB6ZrwWhjPOQjjZg9n0CHEtay855Mstq2UkJB3/5AGwdQOuugdO7w/0?=
- =?iso-8859-1?Q?0Ksk/8NRelGRzuCNA7x0KLnHv8XVOupOPy+XT8XZKagmFRTUbLT7ETBTWP?=
- =?iso-8859-1?Q?FqIYFxdwWGeBcpIQ/bNavNJElFESOmVOIlndPBHNhSIoYT6N2yMNj0pUWJ?=
- =?iso-8859-1?Q?xnNcv9pkp333b9gP+bLA6DC4LDcq0VDiORPP3pEe5A396/y2OSLz5bMl5G?=
- =?iso-8859-1?Q?CfXbctS98mSibwYLr/5RtpPkQBVcWDHcVWtSE+Y5DM9v5RJEYG4jZxc7u7?=
- =?iso-8859-1?Q?l6FoJtGPku7Po6ifk9byxSBwWaBC/7xKaFacMjvLvfsmAoBSBI5iObV+rr?=
- =?iso-8859-1?Q?rEvEOzez5bzuV1NfctWCYuQ6e1Z9FStVAawbJPxXik2un1CnD13KIcv53I?=
- =?iso-8859-1?Q?XqE8h6xm3pBzKD0zG49A+ymOFdHLa7lTM+S4iloBqQGvwBoI5hwaCoVNJK?=
- =?iso-8859-1?Q?8Tuh2xKTE4a6Jau2AkxBO3pjBEFNowqagnOPzO4fuAkQAnGlEnsE92ZmNr?=
- =?iso-8859-1?Q?bOgTtZOS5139GS2/RanlPkWS/Izo0KzTwF/eCVUkF1ZX0FqiFQV26JZ04T?=
- =?iso-8859-1?Q?LnLBz5pt9+Lzy9KNAhUSshlwsjZ1Ss9m1RX4YULoeBSgXPyYAbO7kL3sxF?=
- =?iso-8859-1?Q?2P1L9AFcDJW8RSmqpqIAnE03ARO2OjqD5CZ6jK0JkUwn0//Z8RClDCPvB8?=
- =?iso-8859-1?Q?CW+tvC01gDqbjSGmN/SYdbSjrR3sOfWyXZPfj+K+ek+xCOK+1URDBaaBTn?=
- =?iso-8859-1?Q?fSOBtzeydRTMlMfILNhGya3eG06imFdmy96JEGNeOf22bZmpwOnIE7D6sF?=
- =?iso-8859-1?Q?ENnuFEgMENX4vkOV0v99Pd9WFf+QHr+CILRs+937QRkF6+5cnB67ItGDnL?=
- =?iso-8859-1?Q?M0mWYzkmcPqDbs15AQoBi16AhhRe7kuUK/lXzIVYNByHfnXlLBVfll4LKT?=
- =?iso-8859-1?Q?zhEb0xxSlR1YmYYKU7oZnx1pyJRLV/kY+UV0be37zbbujWJ+Io+ELUHjGr?=
- =?iso-8859-1?Q?/sbPZW1uPPkO+2QhG0P7eTfYNVe6eZJVNn0hXhTbQ3VXnLuPOnQwio7XPV?=
- =?iso-8859-1?Q?MbB1twddf+lJTbTMPmF5nxkHH1wkevLC8K9nMbU+lRvcsgnHvhcjAyd2hk?=
- =?iso-8859-1?Q?059NhQQxCTIEMQ1o7vmd3wdSXUZAn5F4ZljNsoCJRvsqfSYyRmiOAZbQxn?=
- =?iso-8859-1?Q?nIiFfO4yXQtZFPOKA80Q1ggV2QAy6j6Jtlakc/rdtsYiu0ytzUq3GSr+UY?=
- =?iso-8859-1?Q?xhdhLSEWKvDAEyoouuUQSfJ3JEm1EWY=3D?=
+ =?iso-8859-1?Q?0mYyeq9Q250oNr8b8cH6HPjbRHFORWCRgwLfuBR5kOzUmrVQ3Kl2sBQPV6?=
+ =?iso-8859-1?Q?7a9DURUyemcGLEUB7+XWYUX/ju3Ga99BxKaHH84kUK6DKWB9G3t8Qb/8uX?=
+ =?iso-8859-1?Q?1Zh69sLDxDSOJESkFW8PKtKvVV2LD1lV5JzVq5znnXbXGn39SRX3Gb65W1?=
+ =?iso-8859-1?Q?h1KeKrpxiKzgPx4qycSX19M4+4mJHCH1MzU1k8LhqDJkTOFmA2fN7sOf5D?=
+ =?iso-8859-1?Q?Z154WtHTs/3SNSyiOsNx0x5i+QW+nKzNo+6FIHEhiq+RSVHt22zY1RS2KR?=
+ =?iso-8859-1?Q?yQ0gEWbccca7jzfslJj5AGkVkWqBb+i2zPAOebv8A1HUFEr1r9NgOPgwwT?=
+ =?iso-8859-1?Q?t/NtOv2Glva4K5V3grwC0ROC7FeKdThL0MuM14YjxRfsAeLCuWgTegwfEj?=
+ =?iso-8859-1?Q?C/gUOCYPDEFQhfRaHYxCqQFTOU6ab0hKKdxhEIzdksiIAhWGCK41C6j4tP?=
+ =?iso-8859-1?Q?ZpCW6tZygdIm2oBj87DOECoS5gsL4akWrZ59QgiuyOugMiv3TC8ltx3s2O?=
+ =?iso-8859-1?Q?xB9I1y+ikNybn9jrn88H7rmmOEu6lg6dNW7kNsZty5yESotECGChioTgYY?=
+ =?iso-8859-1?Q?4y4KEFuuz2rJBar/OHWHwAUh+RnTpHBTn8qPD/Za44hS5kueySeyD885Cb?=
+ =?iso-8859-1?Q?uhFcrYC5eH81GNlbGP5gLGJl4vGM4OWSy/WeHEQJHeyWXfp9SzuwSvedJ5?=
+ =?iso-8859-1?Q?8WQ7EgEZhDBQ57JG3QhBqmBbrumuTYE/7S3+WwTi4bSB6Cz5acm4h54fuT?=
+ =?iso-8859-1?Q?ihjIo2BRsxtJttGxZ0QgDaaG3ii1U9JDFpw54owSHd/YsSvzcdqw9CPQ/H?=
+ =?iso-8859-1?Q?TLNYgdQA/5P1Wl8umiffmECCM3hTpIoHWTZ6B10TyXrHmT35FP28aHxT5D?=
+ =?iso-8859-1?Q?VBukskSyPQ6UOQboJSdPkfA0jIPcc1MzaoSOJKZRPBHv8ZCBpN6hhaUn2K?=
+ =?iso-8859-1?Q?k0xi3uvLckhV6oKXU5jo1hdqlLo2fTYvfjIFKzbnMpByJPb6LbqmH6ksy8?=
+ =?iso-8859-1?Q?x4RHZ8HQ1paBYH+142w5L8qVLUNexnxn58d+CTa4mGEoQVz47RW3WKvV7p?=
+ =?iso-8859-1?Q?P0ozgpkVvL6kEVK1Wh4znoy6e1N3rEUeDvmxnLsKOnbLLHC1HFyDozs1Pq?=
+ =?iso-8859-1?Q?cqPeWSZ0fTOBIQvAU19vV3SMDipSaDN7IO/t2ZaS/CArXImu8BEZnpDLQH?=
+ =?iso-8859-1?Q?x7BXstPSU1wScARe21k9WWddorkJ369vPJ8kny22fb2mOATLAYCkx7BV9t?=
+ =?iso-8859-1?Q?Tdq1y1m8i5xPu+q4dMVeICu7UVUVGhHZhTxQWPpjRxU+4UDLCo75tH5l/L?=
+ =?iso-8859-1?Q?cYLwmxs7Ujnelr0OB5EPLL+QxzXIhBJK/wyjEQL6QvI3HQMG7jHg98eSSH?=
+ =?iso-8859-1?Q?SFVeqT8vnL38oLzZzmFUFLk/FtdnyRHjj/FRkKhZDtGXR9aGO9NbLJqotK?=
+ =?iso-8859-1?Q?6tfEBpjuujcZvZtEHn5dG35yQEZlu7qL9mbb6tKb2g4O2n5ChTc8Qf/KuF?=
+ =?iso-8859-1?Q?sUhXsDrwMbegqyGvV48umDO2k1pZds/zO2v6BBLo/h2FkVTI79CzorvOL/?=
+ =?iso-8859-1?Q?+LhXV6+2f1DO5kt7UJeW24d7xZX2BScz6D+itYUMA+14/qJE2bUUOshuDZ?=
+ =?iso-8859-1?Q?1Xx2+2HQ871zekTe4u8nBfmliwr6ZguhRflm3KFgL6Net8NEzymqiy3c7f?=
+ =?iso-8859-1?Q?Q1okihLIq88pO4Gtjx+pB+f2hiqyid5mpNzr6XlLCzGJ8IpILNQnNk7BIw?=
+ =?iso-8859-1?Q?+2GAflXUoBdH3iMP7nejMyqupmFesUaytquzhTl9djnrZ16o7Ks2H1Pw22?=
+ =?iso-8859-1?Q?5AEbFjZ3p3J9M/SqBefjiqC6VCSeczk=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR03MB6078.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2d98a68c-816f-4dbc-245c-08df28d20afe
-X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Oct 2026 02:31:10.2114
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8df07605-0243-4fd4-3cba-08df28d2c52d
+X-MS-Exchange-CrossTenant-originalarrivaltime: 13 Oct 2026 02:36:22.5800
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: BHsnS9sZiAJoAqedbd3fQkXaGdQTn+5cpGpOC/n5Udkh4IRGIBVIDN/sbF0HkjirXk5cOCnpb/XghPxWHgGCqriOKF4SS9PbFqVXRsZ+cw8=
+X-MS-Exchange-CrossTenant-userprincipalname: yj8pPNqwZTYZukBK8IAuKDnfuyQl0n5bkaIZrn6FDf3UBlp1igYe4AgYKuYafN9TrXEy0gXdOaBYQ0GIXlQyI9iWaVu1B35OkZXH1YULY6E=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBBPR03MB7131
-X-purgate-ID: tlsNG-720697/1791858673-672B12AC-91AB7E82/0/0
+X-purgate-ID: tlsNG-d62444/1791858984-1F66C757-83BAEC3F/0/0
 X-purgate-type: clean
-X-purgate-size: 9252
+X-purgate-size: 5996
 
 Hi Mykola,
 
 Mykola Kvach <mykola_kvach@epam.com> writes:
 
-> Several Arm firmware initialization paths discard irq_set_type()'s return
-> value, violating MISRA C Rule 17.7. If trigger configuration fails,
-> initialization continues with an IRQ that was not configured as requested=
-.
+> The boot CPU pending table must use the memory attributes selected by
+> ITS quirks. gicv3_lpi_init_host_lpis() is therefore called after
+> gicv3_its_init(). However, gicv3_its_init() also programs and enables
+> each ITS before host LPI state is allocated. No ITS commands are
+> submitted at that point, but this ordering relies on that implementation
+> detail.
 >
-> GTDT and MADT retain rejected timer and maintenance INTIDs.
-> check_timer_irq_cfg() and release_irq() later perform unconditional
-> descriptor lookups on those values. Xen has no backing descriptors for
-> INTIDs 1024 through 4095, so retaining one can cause an out-of-bounds
-> access.
+> Split per-ITS initialization into preparation and activation phases.
+> First map and disable every ITS and collect its quirks. Then initialize
+> host LPI state. Only after that, allocate and program the ITS tables and
+> command queue, and enable each ITS.
 >
-> Check the return value in the GTDT, MADT, SPCR, and FF-A paths. Store tim=
-er
-> INTIDs only after successful trigger configuration, make GTDT parsing
-> failure fatal, and stop notification setup when trigger configuration
-> fails. Keep the NS16550 and PL011 consoles available by falling back to
-> polling, with a warning, if their IRQ trigger configuration fails.
+> The subsequent gicv3_cpu_init() sequence remains unchanged: it programs
+> the Redistributor LPI tables, enables LPIs, and then submits the first
+> MAPC and SYNC commands.
 >
+> Suggested-by: Julien Grall <julien@xen.org>
 > Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
-> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-
-Not sure that this is a good idea to leave R-b tags if you are doing
-functional changes to the patches.
-
-You can have my R-b though:
 
 Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 
 > ---
-> Changes in v6:
-> - Fall back to polling with a warning when ACPI IRQ configuration fails
->   for NS16550 or PL011, preserving the console.
+> Changes in v4:
+> - Move the empty ITS list check before the preparation loop.
 >
 > Changes in v3:
-> - Avoid partial state updates and simplify maintenance IRQ setup.
+> - New patch implementing the post-4.22 initialization order discussed
+>   during review of the ordering fix.
 >
-> Changes in v2:
-> - New patch.
+> Link: https://patchew.org/Xen/341edd8de63dcd84ccc6e7b6c03e9e8fc7105184.17=
+81847061.git.mykola._5Fkvach@epam.com/
 > ---
->  xen/arch/arm/gic-v2.c        | 15 +++++++++------
->  xen/arch/arm/gic-v3.c        | 15 +++++++++------
->  xen/arch/arm/tee/ffa_notif.c | 10 +++++++++-
->  xen/arch/arm/time.c          | 18 ++++++++++++++----
->  xen/drivers/char/ns16550.c   |  8 +++++++-
->  xen/drivers/char/pl011.c     | 12 ++++++++++--
->  6 files changed, 58 insertions(+), 20 deletions(-)
+>  xen/arch/arm/gic-v3-its.c             | 32 ++++++++++++++++++++++-----
+>  xen/arch/arm/gic-v3.c                 | 15 ++-----------
+>  xen/arch/arm/include/asm/gic_v3_its.h |  4 ++--
+>  3 files changed, 31 insertions(+), 20 deletions(-)
 >
-> diff --git a/xen/arch/arm/gic-v2.c b/xen/arch/arm/gic-v2.c
-> index d05c574d88..87eda9d322 100644
-> --- a/xen/arch/arm/gic-v2.c
-> +++ b/xen/arch/arm/gic-v2.c
-> @@ -1166,17 +1166,20 @@ gic_acpi_parse_madt_cpu(struct acpi_subtable_head=
-er *header,
->      /* Read from APIC table and fill up the GIC variables */
->      if ( cpu_base_assigned =3D=3D 0 )
->      {
-> +        int rc;
+> diff --git a/xen/arch/arm/gic-v3-its.c b/xen/arch/arm/gic-v3-its.c
+> index 325835b0ad..511e49a116 100644
+> --- a/xen/arch/arm/gic-v3-its.c
+> +++ b/xen/arch/arm/gic-v3-its.c
+> @@ -11,6 +11,7 @@
+>  #include <xen/lib.h>
+>  #include <xen/delay.h>
+>  #include <xen/iocap.h>
+> +#include <xen/init.h>
+>  #include <xen/libfdt/libfdt.h>
+>  #include <xen/mm.h>
+>  #include <xen/rbtree.h>
+> @@ -549,10 +550,9 @@ static int gicv3_disable_its(struct host_its *hw_its=
+)
+>      return -ETIMEDOUT;
+>  }
+> =20
+> -static int gicv3_its_init_single_its(struct host_its *hw_its)
+> +static int __init gicv3_its_prepare_single_its(struct host_its *hw_its)
+>  {
+> -    uint64_t reg;
+> -    int i, ret;
+> +    int ret;
+> =20
+>      hw_its->its_base =3D ioremap_nocache(hw_its->addr, hw_its->size);
+>      if ( !hw_its->its_base )
+> @@ -564,6 +564,14 @@ static int gicv3_its_init_single_its(struct host_its=
+ *hw_its)
+> =20
+>      gicv3_its_enable_quirks(hw_its);
+> =20
+> +    return 0;
+> +}
 > +
-> +        rc =3D irq_set_type(processor->vgic_interrupt,
-> +                          processor->flags & ACPI_MADT_VGIC_IRQ_MODE ?
-> +                          IRQ_TYPE_EDGE_BOTH : IRQ_TYPE_LEVEL_MASK);
+> +static int __init gicv3_its_init_single_its(struct host_its *hw_its)
+> +{
+> +    uint64_t reg;
+> +    int i, ret;
 > +
-> +        if ( rc )
-> +            return rc;
-> +
->          cbase =3D processor->base_address;
->          csize =3D SZ_8K;
->          hbase =3D processor->gich_base_address;
->          vbase =3D processor->gicv_base_address;
->          gicv2_info.maintenance_irq =3D processor->vgic_interrupt;
-> -
-> -        if ( processor->flags & ACPI_MADT_VGIC_IRQ_MODE )
-> -            irq_set_type(gicv2_info.maintenance_irq, IRQ_TYPE_EDGE_BOTH)=
-;
-> -        else
-> -            irq_set_type(gicv2_info.maintenance_irq, IRQ_TYPE_LEVEL_MASK=
-);
-> -
->          cpu_base_assigned =3D 1;
->      }
+>      reg =3D readq_relaxed(hw_its->its_base + GITS_TYPER);
+>      hw_its->devid_bits =3D GITS_TYPER_DEVICE_ID_BITS(reg);
+>      hw_its->evid_bits =3D GITS_TYPER_EVENT_ID_BITS(reg);
+> @@ -1189,7 +1197,7 @@ static void gicv3_its_acpi_init(void)
+> =20
+>  #endif
+> =20
+> -int gicv3_its_init(void)
+> +int __init gicv3_its_init(unsigned int host_lpi_bits)
+>  {
+>      struct host_its *hw_its;
+>      int ret;
+> @@ -1199,15 +1207,29 @@ int gicv3_its_init(void)
 >      else
+>          gicv3_its_acpi_init();
+> =20
+> +    if ( list_empty(&host_its_list) )
+> +        return 0;
+> +
+>      list_for_each_entry(hw_its, &host_its_list, entry)
+>      {
+> -        ret =3D gicv3_its_init_single_its(hw_its);
+> +        ret =3D gicv3_its_prepare_single_its(hw_its);
+>          if ( ret )
+>              return ret;
+>      }
+> =20
+>      gicv3_its_validate_quirks();
+> =20
+> +    ret =3D gicv3_lpi_init_host_lpis(host_lpi_bits);
+> +    if ( ret )
+> +        return ret;
+> +
+> +    list_for_each_entry(hw_its, &host_its_list, entry)
+> +    {
+> +        ret =3D gicv3_its_init_single_its(hw_its);
+> +        if ( ret )
+> +            return ret;
+> +    }
+> +
+>      return 0;
+>  }
+> =20
 > diff --git a/xen/arch/arm/gic-v3.c b/xen/arch/arm/gic-v3.c
-> index acdac22953..b32a9b5009 100644
+> index acdac22953..6bc3e313be 100644
 > --- a/xen/arch/arm/gic-v3.c
 > +++ b/xen/arch/arm/gic-v3.c
-> @@ -1743,15 +1743,18 @@ gic_acpi_parse_madt_cpu(struct acpi_subtable_head=
-er *header,
->      /* Read from APIC table and fill up the GIC variables */
->      if ( !cpu_base_assigned )
+> @@ -1984,20 +1984,9 @@ static int __init gicv3_init(void)
+> =20
+>      if ( gic_dist_supports_lpis() )
 >      {
-> +        int rc;
-> +
-> +        rc =3D irq_set_type(processor->vgic_interrupt,
-> +                          processor->flags & ACPI_MADT_VGIC_IRQ_MODE ?
-> +                          IRQ_TYPE_EDGE_BOTH : IRQ_TYPE_LEVEL_MASK);
-> +
-> +        if ( rc )
-> +            return rc;
-> +
->          cbase =3D processor->base_address;
->          vbase =3D processor->gicv_base_address;
->          gicv3_info.maintenance_irq =3D processor->vgic_interrupt;
+> -        res =3D gicv3_its_init();
+> +        res =3D gicv3_its_init(intid_bits);
+>          if ( res )
+> -            panic("GICv3: ITS: initialization failed: %d\n", res);
 > -
-> -        if ( processor->flags & ACPI_MADT_VGIC_IRQ_MODE )
-> -            irq_set_type(gicv3_info.maintenance_irq, IRQ_TYPE_EDGE_BOTH)=
-;
-> -        else
-> -            irq_set_type(gicv3_info.maintenance_irq, IRQ_TYPE_LEVEL_MASK=
-);
-> -
->          cpu_base_assigned =3D 1;
+> -        /*
+> -         * Host LPI allocation uses ITS-derived memory attributes, so de=
+fer it
+> -         * until after gicv3_its_init() has discovered ITS workarounds.
+> -         */
+> -        if ( gicv3_its_host_has_its() )
+> -        {
+> -            res =3D gicv3_lpi_init_host_lpis(intid_bits);
+> -            if ( res )
+> -                panic("GICv3: LPI initialization failed: %d\n", res);
+> -        }
+> +            panic("GICv3: ITS/LPI initialization failed: %d\n", res);
 >      }
->      else
-> diff --git a/xen/arch/arm/tee/ffa_notif.c b/xen/arch/arm/tee/ffa_notif.c
-> index 186e726412..c64bc39f03 100644
-> --- a/xen/arch/arm/tee/ffa_notif.c
-> +++ b/xen/arch/arm/tee/ffa_notif.c
-> @@ -407,7 +407,15 @@ void ffa_notif_init(void)
->          irq =3D resp.a2;
->          notif_sri_irq =3D irq;
->          if ( irq >=3D NR_GIC_SGI )
-> -            irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
-> +        {
-> +            ret =3D irq_set_type(irq, IRQ_TYPE_EDGE_RISING);
-> +            if ( ret )
-> +            {
-> +                printk(XENLOG_ERR "ffa: irq_set_type irq %u failed: erro=
-r %d\n",
-> +                       irq, ret);
-> +                return;
-> +            }
-> +        }
->          ret =3D request_irq(irq, 0, notif_irq_handler, "FF-A notif", NUL=
-L);
->          if ( ret )
->          {
-> diff --git a/xen/arch/arm/time.c b/xen/arch/arm/time.c
-> index be54b87438..ccfb76e20f 100644
-> --- a/xen/arch/arm/time.c
-> +++ b/xen/arch/arm/time.c
-> @@ -60,20 +60,27 @@ static int __init arch_timer_acpi_init(struct acpi_ta=
-ble_header *header)
->  {
->      u32 irq_type;
->      struct acpi_table_gtdt *gtdt;
-> +    int rc;
 > =20
->      gtdt =3D container_of(header, struct acpi_table_gtdt, header);
+>      res =3D gicv3_cpu_init();
+> diff --git a/xen/arch/arm/include/asm/gic_v3_its.h b/xen/arch/arm/include=
+/asm/gic_v3_its.h
+> index 02c083f210..e1322b94f8 100644
+> --- a/xen/arch/arm/include/asm/gic_v3_its.h
+> +++ b/xen/arch/arm/include/asm/gic_v3_its.h
+> @@ -156,7 +156,7 @@ int gicv3_lpi_init_rdist(void __iomem * rdist_base);
 > =20
->      /* Initialize all the generic timer IRQ variable from GTDT table */
->      irq_type =3D acpi_get_timer_irq_type(gtdt->non_secure_el1_flags);
-> -    irq_set_type(gtdt->non_secure_el1_interrupt, irq_type);
-> +    rc =3D irq_set_type(gtdt->non_secure_el1_interrupt, irq_type);
-> +    if ( rc )
-> +        return rc;
->      timer_irq[TIMER_PHYS_NONSECURE_PPI] =3D gtdt->non_secure_el1_interru=
-pt;
+>  /* Initialize the host structures for LPIs and the host ITSes. */
+>  int gicv3_lpi_init_host_lpis(unsigned int host_lpi_bits);
+> -int gicv3_its_init(void);
+> +int gicv3_its_init(unsigned int host_lpi_bits);
 > =20
->      irq_type =3D acpi_get_timer_irq_type(gtdt->virtual_timer_flags);
-> -    irq_set_type(gtdt->virtual_timer_interrupt, irq_type);
-> +    rc =3D irq_set_type(gtdt->virtual_timer_interrupt, irq_type);
-> +    if ( rc )
-> +        return rc;
->      timer_irq[TIMER_VIRT_PPI] =3D gtdt->virtual_timer_interrupt;
-> =20
->      irq_type =3D acpi_get_timer_irq_type(gtdt->non_secure_el2_flags);
-> -    irq_set_type(gtdt->non_secure_el2_interrupt, irq_type);
-> +    rc =3D irq_set_type(gtdt->non_secure_el2_interrupt, irq_type);
-> +    if ( rc )
-> +        return rc;
->      timer_irq[TIMER_HYP_PPI] =3D gtdt->non_secure_el2_interrupt;
-> =20
+>  /* Store the physical address and ID for each redistributor as read from=
+ DT. */
+>  void gicv3_set_redist_address(paddr_t address, unsigned int redist_id);
+> @@ -245,7 +245,7 @@ static inline int gicv3_lpi_init_host_lpis(unsigned i=
+nt host_lpi_bits)
 >      return 0;
-> @@ -81,7 +88,10 @@ static int __init arch_timer_acpi_init(struct acpi_tab=
-le_header *header)
-> =20
->  static void __init preinit_acpi_xen_time(void)
->  {
-> -    acpi_table_parse(ACPI_SIG_GTDT, arch_timer_acpi_init);
-> +    int rc =3D acpi_table_parse(ACPI_SIG_GTDT, arch_timer_acpi_init);
-> +
-> +    if ( rc )
-> +        panic("Timer: Failed to configure interrupts from GTDT: %d\n", r=
-c);
 >  }
->  #else
->  static void __init preinit_acpi_xen_time(void) { }
-> diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-> index 593d208483..cdda28879e 100644
-> --- a/xen/drivers/char/ns16550.c
-> +++ b/xen/drivers/char/ns16550.c
-> @@ -1990,8 +1990,14 @@ static int __init ns16550_acpi_uart_init(const voi=
-d *data)
->      uart->reg_width =3D spcr->serial_port.access_width;
 > =20
->      /* The trigger/polarity information is not available in spcr. */
-> -    irq_set_type(spcr->interrupt, IRQ_TYPE_LEVEL_HIGH);
->      uart->irq =3D spcr->interrupt;
-> +    if ( irq_set_type(spcr->interrupt, IRQ_TYPE_LEVEL_HIGH) )
-> +    {
-> +        printk(XENLOG_WARNING
-> +               "ns16550: unable to configure IRQ %u, using polling\n",
-> +               spcr->interrupt);
-> +        uart->irq =3D 0;
-> +    }
-> =20
->      uart->vuart.base_addr =3D uart->io_base;
->      uart->vuart.size =3D uart->io_size;
-> diff --git a/xen/drivers/char/pl011.c b/xen/drivers/char/pl011.c
-> index a336241033..612d457fe0 100644
-> --- a/xen/drivers/char/pl011.c
-> +++ b/xen/drivers/char/pl011.c
-> @@ -347,6 +347,7 @@ static int __init pl011_acpi_uart_init(const void *da=
-ta)
+> -static inline int gicv3_its_init(void)
+> +static inline int gicv3_its_init(unsigned int host_lpi_bits)
 >  {
->      acpi_status status;
->      struct acpi_table_spcr *spcr =3D NULL;
-> +    unsigned int irq;
->      int res;
->      bool sbsa;
-> =20
-> @@ -363,10 +364,17 @@ static int __init pl011_acpi_uart_init(const void *=
-data)
->              spcr->interface_type =3D=3D ACPI_DBG2_SBSA_32);
-> =20
->      /* trigger/polarity information is not available in spcr */
-> -    irq_set_type(spcr->interrupt, IRQ_TYPE_LEVEL_HIGH);
-> +    irq =3D spcr->interrupt;
-> +    if ( irq_set_type(irq, IRQ_TYPE_LEVEL_HIGH) )
-> +    {
-> +        printk(XENLOG_WARNING
-> +               "pl011: unable to configure IRQ %u, using polling\n",
-> +               irq);
-> +        irq =3D 0;
-> +    }
-> =20
->      /* TODO - mmio32 proper handling (for now set to true) */
-> -    res =3D pl011_uart_init(spcr->interrupt, spcr->serial_port.address,
-> +    res =3D pl011_uart_init(irq, spcr->serial_port.address,
->                            PAGE_SIZE, sbsa, true);
->      if ( res < 0 )
->      {
+>      return 0;
+>  }
 
 --=20
 WBR, Volodymyr=
