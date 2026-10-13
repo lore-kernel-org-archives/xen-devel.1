@@ -4,42 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C3E1CA9ED2
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 12:28:48 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1447103.1663276 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 313B7CC6B03
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 12:28:56 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1447107.1663315 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGbcS-0004tg-Uk; Tue, 13 Oct 2026 12:28:36 +0000
+	id 1xGbcX-0005oE-V4; Tue, 13 Oct 2026 12:28:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1447103.1663276; Tue, 13 Oct 2026 12:28:36 +0000
+Received: by outflank-mailman (output) from mailman id 1447107.1663315; Tue, 13 Oct 2026 12:28:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGbcS-0004sr-Oz; Tue, 13 Oct 2026 12:28:36 +0000
-Received: by outflank-mailman (input) for mailman id 1447103;
- Tue, 13 Oct 2026 12:28:35 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xGbcX-0005ns-R9; Tue, 13 Oct 2026 12:28:41 +0000
+Received: by outflank-mailman (input) for mailman id 1447107;
+ Tue, 13 Oct 2026 12:28:39 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xGbcR-0004oV-4U; Tue, 13 Oct 2026 12:28:35 +0000
+ id 1xGbcV-0005hb-LM; Tue, 13 Oct 2026 12:28:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGbcQ-00FMeE-HP; Tue, 13 Oct 2026 14:28:34 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xGbcV-00DIG6-2E; Tue, 13 Oct 2026 14:28:39 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6ace23ec-bab6-0a2a0a5309dd-0a2a4501bdb4-6
- for <multiple-recipients>; Tue, 13 Oct 2026 14:28:34 +0200
+ id 6ace23ef-2eae-0a2a0a5409dd-0a2a4505bd54-26
+ for <multiple-recipients>; Tue, 13 Oct 2026 14:28:39 +0200
 Received: from [104.130.215.37] (helo=mail.xenproject.org)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 6ace23f0-5984-0a2a45010019-6882d725c4a6-3
- for <multiple-recipients>; Tue, 13 Oct 2026 14:28:34 +0200
+ id 6ace23f5-4cb1-0a2a45050019-6882d725d400-3
+ for <multiple-recipients>; Tue, 13 Oct 2026 14:28:38 +0200
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xGbcM-00000003NGC-2C5h; Tue, 13 Oct 2026 12:28:30 +0000
+ id 1xGbcR-00000003NGX-1oab; Tue, 13 Oct 2026 12:28:35 +0000
 Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.98.2)
  (envelope-from <andrewcoop@xenbits.xen.org>)
- id 1xGbcM-0000000F8M0-0z6F; Tue, 13 Oct 2026 12:28:30 +0000
+ id 1xGbcR-0000000F8S9-0jrW; Tue, 13 Oct 2026 12:28:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -60,13 +60,13 @@ To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
  xen-users@lists.xen.org, oss-security@lists.openwall.com
 From: Xen.org security team <security@xen.org>
 CC: Xen.org security team <security-team-members@xen.org>
-Subject: Xen Security Advisory 514 v2 (CVE-2026-79607) - Xenstore: Guests
- can crash xenstored during Live Update
-Message-Id: <E1xGbcM-0000000F8M0-0z6F@xenbits.xenproject.org>
-Date: Tue, 13 Oct 2026 12:28:30 +0000
-X-purgate-ID: tlsNG-d62444/1791894514-1F66C757-68071524/0/0
+Subject: Xen Security Advisory 515 v2 (CVE-2026-79608) - x86/AMD:
+ ineffectual Zenbleed workaround
+Message-Id: <E1xGbcR-0000000F8S9-0jrW@xenbits.xenproject.org>
+Date: Tue, 13 Oct 2026 12:28:35 +0000
+X-purgate-ID: tlsNG-c201ff/1791894518-720AA2A1-ABEF8E1F/0/0
 X-purgate-type: clean
-X-purgate-size: 5581
+X-purgate-size: 6623
 
 --=separator
 Content-Type: text/plain; charset="utf-8"
@@ -76,10 +76,10 @@ Content-Transfer-Encoding: 7bit
 -----BEGIN PGP SIGNED MESSAGE-----
 Hash: SHA256
 
-            Xen Security Advisory CVE-2026-79607 / XSA-514
+            Xen Security Advisory CVE-2026-79608 / XSA-515
                                version 2
 
-        Xenstore: Guests can crash xenstored during Live Update
+               x86/AMD: ineffectual Zenbleed workaround
 
 UPDATES IN VERSION 2
 ====================
@@ -89,38 +89,53 @@ Public release.
 ISSUE DESCRIPTION
 =================
 
-During Xenstore live update the state record for a Xenstore watch with
-specified watch depth is written with two bytes missing.  This results
-in an inconsistent state when reading the state back in the new Xenstore,
-causing a crash of Xenstore or wrong Xenstore data.
+The workaround for XSA-433 (Zenbleed, CVE-2023-20593) was later
+re-worked to better integrate with other manipulations of the same MSR.
+In this rework an inverted conditional was introduced, resulting in the
+workaround to not be applied when needed and vice versa.
+
+For more details, see:
+  http://xenbits.xen.org/xsa/advisory-433.html
 
 IMPACT
 ======
 
-An unprivileged guest can cause the Xenstore service to crash or to get
-corrupted during a live update of Xenstore, causing a DoS of the host
-regarding further domain administration actions.
+An attacker can exploit this bug to read data from different contexts on
+the same core.  Examples of such data includes key material, cypher and
+plaintext from the AES-NI instructions, or the contents of REP-MOVS
+instructions, commonly used to implement memcpy().
 
 VULNERABLE SYSTEMS
 ==================
 
-Only systems running Xen 4.22 are vulnerable.  Systems running Xen 4.21
-or older are not vulnerable.
+Xen versions 4.19.4 and onwards, 4.20.3 and onwards, 4.21.1 and onwards,
+and 4.22 are affected.  Xen versions 4.18, minor versions 4.19.3 and
+earlier, minor versions 4.20.2 and earlier, and 4.21.0 are not affected.
 
-Only systems running C xenstore either as daemon or as stubdom are
-vulnerable. Systems running oxenstored are not vulnerable.
+The vulnerability can only be leveraged on systems running out-of-date
+microcode.  Microcode fixing Zenbleed was published in late 2023.
+Updated firmware subseqeuent to this, or e.g. updated amd-ucode from
+linux-firmware (for the subset of CPUs covered by linux-firmware) are
+not vulnerable.
+
+The original issue and hence the applicability of the workaround is
+specific to the AMD Zen2 microarchitecture.  AMD do not believe that
+other microarchitectures are affected.
 
 MITIGATION
 ==========
 
-Not doing a live update of Xenstore avoids the vulnerability.
-
-Switching to oxenstored avoids the vulnerability.
+This issue can be mitigated by disabling AVX, either by booting Xen with
+`cpuid=no-avx` on the command line, or by specifying `cpuid="host:avx=0"` in
+the vm.cfg file of all untrusted VMs.  However, this will come with a
+significant impact on the system and is not recommended for anyone able to
+deploy the microcode or patch described below.
 
 CREDITS
 =======
 
-This issue was discovered by Andrii Sultanov of Vates.
+This issue was discovered by Sashiko + Opus 5.0 and diagnosed as a
+security issue by George Dunlap.
 
 RESOLUTION
 ==========
@@ -132,22 +147,31 @@ apply to the stable branches, and may not apply cleanly to the most
 recent release tarball.  Downstreams are encouraged to update to the
 tip of the stable branch before applying these patches.
 
-xsa514.patch           xen-unstable - Xen 4.22.x
+xsa515.patch           xen-unstable - Xen 4.19.x
 
-$ sha256sum xsa514*
-8774d9b45db75851560db70a9be06d5e379311bd3042d9049bc29456e141ae7d  xsa514.patch
+$ sha256sum xsa515*
+d54c5f5443209e523c1d1b456063d105792058d402513bc1e56246b5938de6d8  xsa515.patch
 $
 
 DEPLOYMENT DURING EMBARGO
 =========================
 
-Deployment of the patches described above (or others which are substantially similar)
-is permitted during the embargo, even on public-facing systems with untrusted guest
-users and administrators.  Not doing a live update of Xenstore as a mitigation is
-permitted.  Switching to oxenstored is not permitted, as this is a guest visible
-configuration change.
+Deployment of the patches described above (or others which are
+substantially similar) is permitted during the embargo, even on public-
+facing systems with untrusted guest users and administrators.
 
-But: Distribution of updated software is prohibited (except to other
+HOWEVER, deployment of the mitigation is NOT permitted (except where
+all the affected systems and VMs are administered and used only by
+organisations which are members of the Xen Project Security Issues
+Predisclosure List).  Specifically, deployment on public cloud systems
+is NOT permitted.
+
+This is because altering exposure of AVX is a guest visible configuration
+change, which may lead to re-discovery of the issue.
+
+Deployment of this mitigation is permitted only AFTER the embargo ends.
+
+AND: Distribution of updated software is prohibited (except to other
 members of the predisclosure list).
 
 Predisclosure list members who wish to deploy significantly different
@@ -164,45 +188,42 @@ consult the Xen Project community's agreed Security Policy:
   http://www.xenproject.org/security-policy.html
 -----BEGIN PGP SIGNATURE-----
 
-iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmrOIa8MHHBncEB4ZW4u
-b3JnAAoJEIP+FMlX6CvZB5YH+wf2251Z1DOOtQcCB1LV9vsunIaEGd5l7pHdIZ3a
-3j9A6r/KGc+RtSgDB9TWCMgjKLbBfwivOxBHHhxjhejsfnUKUJNryJFLn86plFdu
-VRrdk5pHmypNgb9mCf3KQ8BQputnuAu36QuIlw3F5z5XAanmyurT1QJKV0RXLrQF
-J3ROkGAGYp6gHhPDBFwCi/dWE/I1PRfvi53oyPPflj2kAh3DPwycpPQV0JZommjC
-ljh1uvyPMnwr76nnh5e4LmismWa9Gks/p3BQuF01w3Prj/vR4wRxLEMCPjhK6xV6
-PLcKgrt+DGn/xwj7fEdaAVlXyh4YcxQlmUWHzaNm94Knq+8=
-=BuOZ
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmrOIhsMHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZKrYIAIKTxPm+Rvb9K2SvRJoHgjFDGTG0OxXqWFDjPnUR
+DKTx/URFmXCFT4PCGuAearWnkw25x0e80TdNfCrdHxDJzENSCcmb+5iIuM8nUtgo
+hMwNON4YUWn0GhBe3fcgAdlmxwWfhIJZHWt0LDrZrO9Nr21hmgVhvzME2VtH0EkA
+Yafi6ZixVwheA48w2to1cBjx27J5XucmvFoMgSRfW40YhpCmWDLDMv1F0vwxioyy
+vWVrk7pfYEj8n/hiap2MoI/pTDD6PruF+lWsO1fzHFwZHcUPOU+rV/elfEAA027E
+rRVsxob58ljY1IH/sMYOmSm7OQaGjau0kS7vC9kXtm7lmBQ=
+=NxYd
 -----END PGP SIGNATURE-----
 
 --=separator
-Content-Type: application/octet-stream; name="xsa514.patch"
-Content-Disposition: attachment; filename="xsa514.patch"
+Content-Type: application/octet-stream; name="xsa515.patch"
+Content-Disposition: attachment; filename="xsa515.patch"
 Content-Transfer-Encoding: base64
 
-RnJvbSA2ODE2M2U3MzI5OTQ5ZjUwOWQ2MGMyMzllMDRlNWVkN2YwYzZiYzBlIE1vbiBTZXAgMTcg
-MDA6MDA6MDAgMjAwMQpGcm9tOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CkRhdGU6
-IEZyaSwgMTggU2VwIDIwMjYgMTI6MjU6MDcgKzAyMDAKU3ViamVjdDogW1BBVENIXSB0b29scy94
-ZW5zdG9yZWQ6IGZpeCBsaXZlIHVwZGF0ZSB3aXRoIHdhdGNoZXMgc3BlY2lmeWluZwogZGVwdGgK
-CkR1ZSB0byBhIHR5cG8gdGhlIHN0YXRlIHJlY29yZCBmb3IgYSB3YXRjaCBzcGVjaWZ5aW5nIGEg
-ZGVwdGggaXMKd3JpdHRlbiBvbmx5IHBhcnRpYWxseS4gSW5zdGVhZCBvZiB1c2luZyB0aGUgY29y
-cmVjdCBsZW5ndGggb2YgdGhlCnhzX3N0YXRlX3dhdGNoX2V4dCBzdHJ1Y3R1cmUgb25seSB0aGUg
-bGVuZ3RoIG9mIHRoZSB4c19zdGF0ZV93YXRjaApzdHJ1Y3R1cmUgd2FzIHVzZWQgd2hlbiB3cml0
-aW5nIHRoZSBkYXRhLgoKRml4IHRoYXQgYnkgdXNpbmcgdGhlIGNvcnJlY3QgbGVuZ3RoLgoKVGhp
-cyBpcyBYU0EtNTE0IC8gQ1ZFLTIwMjYtNzk2MDcKCkZpeGVzOiBkYjk4ZGUxMjBjYjggKCJ0b29s
-cy94ZW5zdG9yZWQ6IGFkZCBkZXB0aCBpbmZvcm1hdGlvbiB0byB3YXRjaGVzIikKUmVwb3J0ZWQt
-Ynk6IEFuZHJpaSBTdWx0YW5vdiA8YW5kcml5LnN1bHRhbm92QHZhdGVzLnRlY2g+ClNpZ25lZC1v
-ZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KLS0tCiB0b29scy94ZW5zdG9y
-ZWQvd2F0Y2guYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxl
-dGlvbigtKQoKZGlmZiAtLWdpdCBhL3Rvb2xzL3hlbnN0b3JlZC93YXRjaC5jIGIvdG9vbHMveGVu
-c3RvcmVkL3dhdGNoLmMKaW5kZXggYzE0M2U2ZmJjZi4uNzA5N2FiMGIwZCAxMDA2NDQKLS0tIGEv
-dG9vbHMveGVuc3RvcmVkL3dhdGNoLmMKKysrIGIvdG9vbHMveGVuc3RvcmVkL3dhdGNoLmMKQEAg
-LTM1NCw3ICszNTQsNyBAQCBjb25zdCBjaGFyICpkdW1wX3N0YXRlX3dhdGNoZXMoRklMRSAqZnAs
-IHN0cnVjdCBjb25uZWN0aW9uICpjb25uLAogCQkJcmV0dXJuICJEdW1wIHdhdGNoIHN0YXRlIGVy
-cm9yIjsKIAogCQlpZiAod2F0Y2gtPmRlcHRoID49IDApIHsKLQkJCWlmIChmd3JpdGUoJnN3ZSwg
-c2l6ZW9mKHN3KSwgMSwgZnApICE9IDEpCisJCQlpZiAoZndyaXRlKCZzd2UsIHNpemVvZihzd2Up
-LCAxLCBmcCkgIT0gMSkKIAkJCQlyZXR1cm4gIkR1bXAgd2F0Y2ggc3RhdGUgZXh0IGVycm9yIjsK
-IAkJfSBlbHNlIHsKIAkJCWlmIChmd3JpdGUoJnN3LCBzaXplb2Yoc3cpLCAxLCBmcCkgIT0gMSkK
-LS0gCjIuNTUuMAoK
+RnJvbTogQW5kcmV3IENvb3BlciA8YW5kcmV3LmNvb3BlcjNAY2l0cml4LmNvbT4KU3ViamVjdDog
+eDg2L2FtZDogRml4IGludmVydGVkIGNvbmRpdGlvbiBpbiB6ZW5ibGVlZF91c2VfY2hpY2tlbmJp
+dCgpCgpUaGUgaWRlbnRpZmllZCBjb21taXQgaW52ZXJ0ZWQgdGhlIGNvbmRpdGlvbiB1bmRlciB3
+aGljaCBYZW4gY2hvb3Nlcwp0byBzZXQgdGhlIFplbmJsZWVkIGNoaWNrZW5iaXQuCgpVbmRvIHRo
+YXQsIGFuZCBsZWF2ZSBhIGJldHRlciBjb21tZW50IGV4cGxhaW5pbmcgd2h5LgoKRm91bmQgYnkg
+QUkgcmV2aWV3IG9mIHRoZSByZWZlcmVuY2VkIGNvbW1pdC4KClRoaXMgaXMgWFNBLTUxNSAvIENW
+RS0yMDI2LTc5NjA4LgoKRml4ZXM6IGQwYzc1ZGM0YzAyOCAoIng4Ni9hbWQ6IEZpeCByYWNlIGVk
+aXRpbmcgREVfQ0ZHIikKQXNzaXN0ZWQtYnk6IFNhc2hpa28gKyBPcHVzIDUuMApSZXBvcnRlZC1i
+eTogR2VvcmdlIER1bmxhcCA8ZHVubGFwZ0B1bWljaC5lZHU+ClNpZ25lZC1vZmYtYnk6IEFuZHJl
+dyBDb29wZXIgPGFuZHJldy5jb29wZXIzQGNpdHJpeC5jb20+ClJldmlld2VkLWJ5OiBKYW4gQmV1
+bGljaCA8amJldWxpY2hAc3VzZS5jb20+CgpkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2NwdS9h
+bWQuYyBiL3hlbi9hcmNoL3g4Ni9jcHUvYW1kLmMKaW5kZXggNzA3ODNjOWEwYWYwLi4xNDg4ODZm
+ZTJlYTEgMTAwNjQ0Ci0tLSBhL3hlbi9hcmNoL3g4Ni9jcHUvYW1kLmMKKysrIGIveGVuL2FyY2gv
+eDg2L2NwdS9hbWQuYwpAQCAtODg3LDcgKzg4NywxMiBAQCBzdGF0aWMgYm9vbCB6ZW5ibGVlZF91
+c2VfY2hpY2tlbmJpdCh2b2lkKQogICAgICAgICByZXR1cm4gaXNfemVuMl91YXJjaCgpOwogICAg
+IH0KIAotICAgIHJldHVybiAodWludDhfdCljdXJyX3JldiA+PSBmaXhlZF9yZXY7CisgICAgLyoK
+KyAgICAgKiBaZW5ibGVlZCBjYW4gYmUgbWl0aWdhdGVkIGJ5IGRpc2FibGluZyBGbG9hdGluZy1Q
+b2ludAorICAgICAqIE1vdi1FbGltaW5hdGlvbiwgYnV0IHRoaXMgaXMgZXhwZW5zaXZlLiAgT25s
+eSBkbyBzbyB3aGVuIHdlCisgICAgICogZG9uJ3QgaGF2ZSBhIGZpeCBpbiBtaWNyb2NvZGUuCisg
+ICAgICovCisgICAgcmV0dXJuICh1aW50OF90KWN1cnJfcmV2IDwgZml4ZWRfcmV2OwogfQogCiB2
+b2lkIGFtZF9pbml0X2RlX2NmZyhjb25zdCBzdHJ1Y3QgY3B1aW5mb194ODYgKmMpCg==
 
 --=separator--
 
