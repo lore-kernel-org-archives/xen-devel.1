@@ -4,58 +4,42 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id E0F37CA9ED2
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 12:25:25 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1447096.1663258 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4C3E1CA9ED2
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 12:28:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1447103.1663276 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGbZ2-0004A6-6H; Tue, 13 Oct 2026 12:25:04 +0000
+	id 1xGbcS-0004tg-Uk; Tue, 13 Oct 2026 12:28:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1447096.1663258; Tue, 13 Oct 2026 12:25:04 +0000
+Received: by outflank-mailman (output) from mailman id 1447103.1663276; Tue, 13 Oct 2026 12:28:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGbZ2-00049z-2F; Tue, 13 Oct 2026 12:25:04 +0000
-Received: by outflank-mailman (input) for mailman id 1447096;
- Tue, 13 Oct 2026 12:25:02 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xGbcS-0004sr-Oz; Tue, 13 Oct 2026 12:28:36 +0000
+Received: by outflank-mailman (input) for mailman id 1447103;
+ Tue, 13 Oct 2026 12:28:35 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xGbZ0-00049t-Es
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 12:25:02 +0000
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 1xGbcR-0004oV-4U; Tue, 13 Oct 2026 12:28:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGbYz-00DHHK-RD
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 14:25:01 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xGbcQ-00FMeE-HP; Tue, 13 Oct 2026 14:28:34 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ace230c-2eae-0a2a0a5409dd-0a2a450a97fa-44
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 14:25:01 +0200
-Received: from [52.101.62.50]
- (helo=DM5PR21CU001.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ace231b-f2d2-0a2a450a0019-34653e32925b-3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 14:25:01 +0200
-Received: from SJ0PR03CA0188.namprd03.prod.outlook.com (2603:10b6:a03:2ef::13)
- by CY5PR12MB6276.namprd12.prod.outlook.com (2603:10b6:930:f::6) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Tue, 13 Oct
- 2026 12:23:56 +0000
-Received: from CO1PEPF00012E81.namprd03.prod.outlook.com
- (2603:10b6:a03:2ef:cafe::7b) by SJ0PR03CA0188.outlook.office365.com
- (2603:10b6:a03:2ef::13) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.4 via Frontend Transport; Tue, 13
- Oct 2026 12:23:55 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- CO1PEPF00012E81.mail.protection.outlook.com (10.167.249.56) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.522.6 via Frontend Transport; Tue, 13 Oct 2026 12:23:55 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 13 Oct
- 2026 07:23:49 -0500
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
- Transport; Tue, 13 Oct 2026 07:23:45 -0500
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 6ace23ec-bab6-0a2a0a5309dd-0a2a4501bdb4-6
+ for <multiple-recipients>; Tue, 13 Oct 2026 14:28:34 +0200
+Received: from [104.130.215.37] (helo=mail.xenproject.org)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 6ace23f0-5984-0a2a45010019-6882d725c4a6-3
+ for <multiple-recipients>; Tue, 13 Oct 2026 14:28:34 +0200
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 1xGbcM-00000003NGC-2C5h; Tue, 13 Oct 2026 12:28:30 +0000
+Received: from andrewcoop by xenbits.xenproject.org with local (Exim 4.98.2)
+ (envelope-from <andrewcoop@xenbits.xen.org>)
+ id 1xGbcM-0000000F8M0-0z6F; Tue, 13 Oct 2026 12:28:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -67,150 +51,158 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=rJTMp4rafzZ/nEvcx9nP1IzeioOp8Ms89qvP85vPzmkln9iYfobzGaO8lS+L+VwovTVkqaTn/sViYGAOCfd2qza5I63TPLdkubJMXjlqnPnsMi37xkHBzsnMDXdESucs5FSkCRb6zd2/5P9ulG+dD0ujl5M0gORNqqPWZWmK+twO0SEMTPwJqUywXb+T+sa1wpWj8o9GCFib6qf3WG4G/E+AyaeXmYJTRerpJAQ9jvB8iziX3jaf3WKBVY6PLc9ibTZCzfdUrnSnRzAZqzidda5gPFC5s7dFT9WeTHNVVestwj/GgTrjIVLgKKuNn7eNMgYLKuJ0pVl7WCVj9SyU4Q==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=1MV+J66FUncJRlCASOx9QYe8gbX+W2R4uu+cGPHcPQ4=;
- b=ZaBF+PFtrAQZJaO7Ri2UAk7E2wvb7Fr13GDAGL3jd+Raw/US8t+SeWlc3jDUpCiUC89a9X+4gbZ1W+vJvtQ3XI1d+efjEFqHUH5ue70MclGph9K7E7vVjTHwZF09/8frT0E6D4r3FZqEk1R/30GqCFQ+zSQEzYu8o/qEZx+NPMLp79cQAptHB/0/SRZCElSjdckQCWgc8Qdh+NNDFv82N1WxkWNHf5vNaH7/tR3BgPUs+1vEhE/CNANsU5b4iLVbu1WEFc3L8B56P/m3Iemb6sikF8646wrEZvi6i1xrVgGtXoILCCAtJN7aPiORAfKNtlMl2DUlIyS8pHowN5mYkg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=vates.tech smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=1MV+J66FUncJRlCASOx9QYe8gbX+W2R4uu+cGPHcPQ4=;
- b=W7Nay17ivo5FLOxzZYbxDdMA6gD/N0va4DQFS1oaAtoZGuoU3SydYatZ3HNcYtUEcxctqAt+O9CC+SFds29yY8z5pOoV9z0SYMy/sgLTDNJqKDQVBBaxUeURKl9n0muU/rGxxI6/uSUhOmN5LsuDbVfN7orgOrKM6hmV0DFn2xU=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-Message-ID: <2482f3cc-e9b6-48d9-b8d5-a463feb82dfa@amd.com>
-Date: Tue, 13 Oct 2026 14:23:45 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Content-Type: multipart/mixed; boundary="=separator"; charset="utf-8"
+Content-Transfer-Encoding: binary
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 0/5] Fix ARM domcreate
-To: Julian Vetter <julian.vetter@vates.tech>, <xen-devel@lists.xenproject.org>
-CC: Oleksii Kurochko <oleksii.kurochko@gmail.com>, Community Manager
-	<community.manager@xenproject.org>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>, Jan
- Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>,
-	=?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, Stefano Stabellini
-	<sstabellini@kernel.org>, Juergen Gross <jgross@suse.com>, Andrii Sultanov
-	<andriy.sultanov@vates.tech>, Guillaume Thouvenin
-	<guillaume.thouvenin@vates.tech>, =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
-	<marmarek@invisiblethingslab.com>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Oleksii Moisieiev <oleksii_moisieiev@epam.com>, Timothy Pearson
-	<tpearson@raptorengineering.com>, Alistair Francis
-	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, Teddy Astie
-	<teddy.astie@vates.tech>
-References: <1791812199.8631fc262581453bbf619ec5b2062170.1a13054627300080d7@vates.tech>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <1791812199.8631fc262581453bbf619ec5b2062170.1a13054627300080d7@vates.tech>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PEPF00012E81:EE_|CY5PR12MB6276:EE_
-X-MS-Office365-Filtering-Correlation-Id: 78a4f7e5-1be8-4361-0c10-08df2924d98f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|7416014|23010399003|82310400026|36860700016|56012099006|11063799006|261009223027099003|10067099003|22082099003|18002099003|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	S1t96G7mS1lerRVrywf90sL2g4x+8z6jHrwS5CGWadaeCaz9mdWlhLAaxD43kbCzVmimHxOU6w4TdBchPoowSdGjO+JyPaJ5VhXBqeK/EodpskrMg4oJn59eFWskzUPU/uESsmOZelswRvfGRAebINcAQCwoCY9xXg+tvS4KFIMvp1hOLzcBCSNeyvjG4l6BQThSo8h8AoyIID4eZNVHNT2Gj4sbyhFRzYgTXfaot4gE4g33W8G/waI0qzMGYD/SJ1kE9/+G53jWZ+wSSFi5EmRFZgD1AiVT5/jRt2fBsUoNdEluYrXv/uHgVt6Tm2dyXh0ijykOsvEFapnRjGWCfbBpqzQ7AvCbAHDu1yve+VjVgK4Qbac0tgXJrQHnGM8ha1s4xJF2pxc3yazrltt4rM7TScup8WIVjCzpUuW90nYj0FA9SNXMPbqA8VHnO+2/hmX3RVrrnHs4D8ozPVvwlsJMXKHbQx9zVtK64duCWQ6SWP6Q+Gdx98fclyI8k2BQlrm9YY5tQgdo9Q5kgQGpYnG3lb82gYLc0vVEuTRb0+YvrVNvJhgO9XL+UVVUmEQgUAQI9w8qzcMA/BpEDnkz4vxSZiTuPvSHZsy6dnf1dnxDHDwMYzG5tjqL5KInDQBlgKilABox4x1VRoAIA7VbCoJVBxxAuI7fnBRr28DwQt14VGojEAgO45h5IgKCwP61qxnmFjwQpgkU0sB8lHrSbg==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(7416014)(23010399003)(82310400026)(36860700016)(56012099006)(11063799006)(261009223027099003)(10067099003)(22082099003)(18002099003)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	v+JPuMNDAcJ9p+TyYmxKQvHsSxdrXYegd67O3xoIs7NNPwTYz6mkntYcmQNfo9CKS6nGguFKOvgitOsMrlO6/Lb65CjXT/DtPsOHuRfN23XK1z1d4jNWBm/2mntyRoUyZ76wlW28u0vXoEepY0B6dWRwHomg+Z28/7D06uBC1HdvoT+J7iv1YrUQzkH31S4R57v0CGSs2yfhcvcpSi05vxFUbN9dz96JrPcYvXWyuy2uIiJ97sOLE5+77QF0I08Zq5zJyLaHNhztRTnYhbXWGdDIkbWqdR9kMtdLmHpGuzcl4QOww02a+gwL586coDL6NlXp7tkaMvqcBJOoC15zQxfOljwDCxEuSbUexCvXUYzgPcUTL3b+HrqxdRQR8vlnyMTF1me8yXcDNoWy4cc9o4zLYucF1AbWu9AjWz0IIxWqeBr1+oyKp9ZYjG95ADfr
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2026 12:23:55.4128
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 78a4f7e5-1be8-4361-0c10-08df2924d98f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	CO1PEPF00012E81.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6276
-X-purgate-ID: tlsNG-4011c0/1791894301-59BC0CFC-041A249E/0/0
+X-Mailer: MIME-tools 5.515 (Entity 5.515)
+To: xen-announce@lists.xen.org, xen-devel@lists.xen.org,
+ xen-users@lists.xen.org, oss-security@lists.openwall.com
+From: Xen.org security team <security@xen.org>
+CC: Xen.org security team <security-team-members@xen.org>
+Subject: Xen Security Advisory 514 v2 (CVE-2026-79607) - Xenstore: Guests
+ can crash xenstored during Live Update
+Message-Id: <E1xGbcM-0000000F8M0-0z6F@xenbits.xenproject.org>
+Date: Tue, 13 Oct 2026 12:28:30 +0000
+X-purgate-ID: tlsNG-d62444/1791894514-1F66C757-68071524/0/0
 X-purgate-type: clean
-X-purgate-size: 3359
+X-purgate-size: 5581
 
+--=separator
+Content-Type: text/plain; charset="utf-8"
+Content-Disposition: inline
+Content-Transfer-Encoding: 7bit
 
-On 12-Oct-26 15:36, Julian Vetter wrote:
-> Hello Michal and Anthony,
-> thank you for the reviews and acks! Michal, I have addressed your
-> remaining remarks on the "xen/arm: report clock_frequency via sysctl
-> physinfo, not createdomain" patch. The golang bindings are regenerated
-> for the new arm_clock_frequency_hz physinfo field, and
-> alloc_domaininfo() no longer references the removed clock_frequency
-> field. Apart from that I have collected the Acked-by/Reviewed-by tags.
-> 
-> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
-I was about to commit the series but I found out that some tests like
-test-mem-claim and possibly others still pass gic_version=0 which will cause the
-domain creation to fail. You need to update the tests.
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA256
 
-> 
-> Andrew Cooper (1):
->   ARM/sysctl: Expose the supported guest GIC modes in physinfo
-> 
-> Julian Vetter (4):
->   tools/arm: choose GIC version explicitly instead of relying on
->     GIC_NATIVE
->   xen/arm: remove XEN_DOMCTL_CONFIG_GIC_NATIVE from the ABI
->   xen/arm: report clock_frequency via sysctl physinfo, not createdomain
->   xen: make config argument const
-Here you are still missing tags from e.g. RISCV I think.
+            Xen Security Advisory CVE-2026-79607 / XSA-514
+                               version 2
 
-~Michal
+        Xenstore: Guests can crash xenstored during Live Update
 
-> 
->  CHANGELOG.md                                  |  4 ++
->  docs/man/xl.cfg.5.pod.in                      |  4 +-
->  tools/golang/xenlight/helpers.gen.go          |  2 +
->  tools/golang/xenlight/types.gen.go            |  1 +
->  .../include/xen-tools/arm-arch-capabilities.h | 31 ++++++++
->  tools/libs/light/libxl.c                      |  1 +
->  tools/libs/light/libxl_arm.c                  | 72 +++++++++++++++++--
->  tools/libs/light/libxl_types.idl              |  1 +
->  tools/ocaml/libs/xc/xenctrl.ml                |  1 -
->  tools/ocaml/libs/xc/xenctrl.mli               |  1 -
->  tools/ocaml/libs/xc/xenctrl_stubs.c           |  5 +-
->  tools/python/xen/lowlevel/xc/xc.c             | 18 ++++-
->  xen/arch/arm/dom0less-build.c                 |  3 +-
->  xen/arch/arm/domain.c                         | 32 ++++-----
->  xen/arch/arm/domain_build.c                   |  3 +-
->  xen/arch/arm/firmware/sci.c                   |  2 +-
->  xen/arch/arm/firmware/scmi-smc.c              |  2 +-
->  xen/arch/arm/gic.c                            | 15 ++++
->  xen/arch/arm/include/asm/firmware/sci.h       |  6 +-
->  xen/arch/arm/include/asm/gic.h                |  6 ++
->  xen/arch/arm/include/asm/time.h               |  7 +-
->  xen/arch/arm/include/asm/vgic.h               |  6 ++
->  xen/arch/arm/include/asm/vtimer.h             |  3 +-
->  xen/arch/arm/sysctl.c                         | 34 +++++++++
->  xen/arch/arm/time.c                           |  9 ++-
->  xen/arch/arm/vgic-v2.c                        |  5 ++
->  xen/arch/arm/vgic/vgic-v2.c                   |  5 ++
->  xen/arch/arm/vtimer.c                         |  4 +-
->  xen/arch/ppc/stubs.c                          |  2 +-
->  xen/arch/riscv/domain.c                       |  2 +-
->  xen/arch/x86/domain.c                         | 16 ++---
->  xen/include/public/arch-arm.h                 | 18 +----
->  xen/include/public/domctl.h                   |  4 +-
->  xen/include/public/sysctl.h                   | 22 +++++-
->  xen/include/xen/sched.h                       |  5 +-
->  35 files changed, 269 insertions(+), 83 deletions(-)
-> 
+UPDATES IN VERSION 2
+====================
 
+Public release.
+
+ISSUE DESCRIPTION
+=================
+
+During Xenstore live update the state record for a Xenstore watch with
+specified watch depth is written with two bytes missing.  This results
+in an inconsistent state when reading the state back in the new Xenstore,
+causing a crash of Xenstore or wrong Xenstore data.
+
+IMPACT
+======
+
+An unprivileged guest can cause the Xenstore service to crash or to get
+corrupted during a live update of Xenstore, causing a DoS of the host
+regarding further domain administration actions.
+
+VULNERABLE SYSTEMS
+==================
+
+Only systems running Xen 4.22 are vulnerable.  Systems running Xen 4.21
+or older are not vulnerable.
+
+Only systems running C xenstore either as daemon or as stubdom are
+vulnerable. Systems running oxenstored are not vulnerable.
+
+MITIGATION
+==========
+
+Not doing a live update of Xenstore avoids the vulnerability.
+
+Switching to oxenstored avoids the vulnerability.
+
+CREDITS
+=======
+
+This issue was discovered by Andrii Sultanov of Vates.
+
+RESOLUTION
+==========
+
+Applying the attached patch resolves this issue.
+
+Note that patches for released versions are generally prepared to
+apply to the stable branches, and may not apply cleanly to the most
+recent release tarball.  Downstreams are encouraged to update to the
+tip of the stable branch before applying these patches.
+
+xsa514.patch           xen-unstable - Xen 4.22.x
+
+$ sha256sum xsa514*
+8774d9b45db75851560db70a9be06d5e379311bd3042d9049bc29456e141ae7d  xsa514.patch
+$
+
+DEPLOYMENT DURING EMBARGO
+=========================
+
+Deployment of the patches described above (or others which are substantially similar)
+is permitted during the embargo, even on public-facing systems with untrusted guest
+users and administrators.  Not doing a live update of Xenstore as a mitigation is
+permitted.  Switching to oxenstored is not permitted, as this is a guest visible
+configuration change.
+
+But: Distribution of updated software is prohibited (except to other
+members of the predisclosure list).
+
+Predisclosure list members who wish to deploy significantly different
+patches and/or mitigations, please contact the Xen Project Security
+Team.
+
+(Note: this during-embargo deployment notice is retained in
+post-embargo publicly released Xen Project advisories, even though it
+is then no longer applicable.  This is to enable the community to have
+oversight of the Xen Project Security Team's decisionmaking.)
+
+For more information about permissible uses of embargoed information,
+consult the Xen Project community's agreed Security Policy:
+  http://www.xenproject.org/security-policy.html
+-----BEGIN PGP SIGNATURE-----
+
+iQFABAEBCAAqFiEEI+MiLBRfRHX6gGCng/4UyVfoK9kFAmrOIa8MHHBncEB4ZW4u
+b3JnAAoJEIP+FMlX6CvZB5YH+wf2251Z1DOOtQcCB1LV9vsunIaEGd5l7pHdIZ3a
+3j9A6r/KGc+RtSgDB9TWCMgjKLbBfwivOxBHHhxjhejsfnUKUJNryJFLn86plFdu
+VRrdk5pHmypNgb9mCf3KQ8BQputnuAu36QuIlw3F5z5XAanmyurT1QJKV0RXLrQF
+J3ROkGAGYp6gHhPDBFwCi/dWE/I1PRfvi53oyPPflj2kAh3DPwycpPQV0JZommjC
+ljh1uvyPMnwr76nnh5e4LmismWa9Gks/p3BQuF01w3Prj/vR4wRxLEMCPjhK6xV6
+PLcKgrt+DGn/xwj7fEdaAVlXyh4YcxQlmUWHzaNm94Knq+8=
+=BuOZ
+-----END PGP SIGNATURE-----
+
+--=separator
+Content-Type: application/octet-stream; name="xsa514.patch"
+Content-Disposition: attachment; filename="xsa514.patch"
+Content-Transfer-Encoding: base64
+
+RnJvbSA2ODE2M2U3MzI5OTQ5ZjUwOWQ2MGMyMzllMDRlNWVkN2YwYzZiYzBlIE1vbiBTZXAgMTcg
+MDA6MDA6MDAgMjAwMQpGcm9tOiBKdWVyZ2VuIEdyb3NzIDxqZ3Jvc3NAc3VzZS5jb20+CkRhdGU6
+IEZyaSwgMTggU2VwIDIwMjYgMTI6MjU6MDcgKzAyMDAKU3ViamVjdDogW1BBVENIXSB0b29scy94
+ZW5zdG9yZWQ6IGZpeCBsaXZlIHVwZGF0ZSB3aXRoIHdhdGNoZXMgc3BlY2lmeWluZwogZGVwdGgK
+CkR1ZSB0byBhIHR5cG8gdGhlIHN0YXRlIHJlY29yZCBmb3IgYSB3YXRjaCBzcGVjaWZ5aW5nIGEg
+ZGVwdGggaXMKd3JpdHRlbiBvbmx5IHBhcnRpYWxseS4gSW5zdGVhZCBvZiB1c2luZyB0aGUgY29y
+cmVjdCBsZW5ndGggb2YgdGhlCnhzX3N0YXRlX3dhdGNoX2V4dCBzdHJ1Y3R1cmUgb25seSB0aGUg
+bGVuZ3RoIG9mIHRoZSB4c19zdGF0ZV93YXRjaApzdHJ1Y3R1cmUgd2FzIHVzZWQgd2hlbiB3cml0
+aW5nIHRoZSBkYXRhLgoKRml4IHRoYXQgYnkgdXNpbmcgdGhlIGNvcnJlY3QgbGVuZ3RoLgoKVGhp
+cyBpcyBYU0EtNTE0IC8gQ1ZFLTIwMjYtNzk2MDcKCkZpeGVzOiBkYjk4ZGUxMjBjYjggKCJ0b29s
+cy94ZW5zdG9yZWQ6IGFkZCBkZXB0aCBpbmZvcm1hdGlvbiB0byB3YXRjaGVzIikKUmVwb3J0ZWQt
+Ynk6IEFuZHJpaSBTdWx0YW5vdiA8YW5kcml5LnN1bHRhbm92QHZhdGVzLnRlY2g+ClNpZ25lZC1v
+ZmYtYnk6IEp1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT4KLS0tCiB0b29scy94ZW5zdG9y
+ZWQvd2F0Y2guYyB8IDIgKy0KIDEgZmlsZSBjaGFuZ2VkLCAxIGluc2VydGlvbigrKSwgMSBkZWxl
+dGlvbigtKQoKZGlmZiAtLWdpdCBhL3Rvb2xzL3hlbnN0b3JlZC93YXRjaC5jIGIvdG9vbHMveGVu
+c3RvcmVkL3dhdGNoLmMKaW5kZXggYzE0M2U2ZmJjZi4uNzA5N2FiMGIwZCAxMDA2NDQKLS0tIGEv
+dG9vbHMveGVuc3RvcmVkL3dhdGNoLmMKKysrIGIvdG9vbHMveGVuc3RvcmVkL3dhdGNoLmMKQEAg
+LTM1NCw3ICszNTQsNyBAQCBjb25zdCBjaGFyICpkdW1wX3N0YXRlX3dhdGNoZXMoRklMRSAqZnAs
+IHN0cnVjdCBjb25uZWN0aW9uICpjb25uLAogCQkJcmV0dXJuICJEdW1wIHdhdGNoIHN0YXRlIGVy
+cm9yIjsKIAogCQlpZiAod2F0Y2gtPmRlcHRoID49IDApIHsKLQkJCWlmIChmd3JpdGUoJnN3ZSwg
+c2l6ZW9mKHN3KSwgMSwgZnApICE9IDEpCisJCQlpZiAoZndyaXRlKCZzd2UsIHNpemVvZihzd2Up
+LCAxLCBmcCkgIT0gMSkKIAkJCQlyZXR1cm4gIkR1bXAgd2F0Y2ggc3RhdGUgZXh0IGVycm9yIjsK
+IAkJfSBlbHNlIHsKIAkJCWlmIChmd3JpdGUoJnN3LCBzaXplb2Yoc3cpLCAxLCBmcCkgIT0gMSkK
+LS0gCjIuNTUuMAoK
+
+--=separator--
 
