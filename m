@@ -4,39 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 66724CC6B12
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 15:42:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448060.1664066 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 68B83CC6B16
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 15:49:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448079.1664110 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGedy-0005Lu-Oo; Tue, 13 Oct 2026 15:42:22 +0000
+	id 1xGek3-0006VU-Oy; Tue, 13 Oct 2026 15:48:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448060.1664066; Tue, 13 Oct 2026 15:42:22 +0000
+Received: by outflank-mailman (output) from mailman id 1448079.1664110; Tue, 13 Oct 2026 15:48:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGedy-0005Ln-MM; Tue, 13 Oct 2026 15:42:22 +0000
-Received: by outflank-mailman (input) for mailman id 1448060;
- Tue, 13 Oct 2026 15:42:21 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xGek3-0006VN-M8; Tue, 13 Oct 2026 15:48:39 +0000
+Received: by outflank-mailman (input) for mailman id 1448079;
+ Tue, 13 Oct 2026 15:48:38 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <peter.maydell@linaro.org>) id 1xGedx-0005KM-Jl
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 15:42:21 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGedx-001hrE-0e
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 17:42:21 +0200
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <peter.maydell@linaro.org>)
- id 6ace514d-bab6-0a2a0a5309dd-0a2a4503a784-12
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 17:42:20 +0200
-Received: from [209.85.128.179] (helo=mail-yw1-f179.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <peter.maydell@linaro.org>)
- id 6ace515b-fae8-0a2a45030019-d15580b3d5f9-3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 17:42:20 +0200
-Received: by mail-yw1-f179.google.com with SMTP id
- 00721157ae682-888cbacf70eso36769887b3.1
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 08:42:20 -0700 (PDT)
+ (envelope-from <gwd@xenproject.org>) id 1xGek2-0006VH-06
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 15:48:38 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xGek2-00000003RcM-0kZ3
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 15:48:37 +0000
+Received: from mail-lj1-f182.google.com ([209.85.208.182])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xGek1-00000003a53-1vCf
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 15:48:37 +0000
+Received: by mail-lj1-f182.google.com with SMTP id
+ 38308e7fff4ca-3a9c92ae2baso25722701fa.3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 08:48:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,95 +44,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1791906139; cv=none;
-        d=google.com; s=arc-20260327;
-        b=JKXaZ3pR9xxQAnZ93xSHXgVNLyvzrzQnM6ErjCFwjw+SELYtjxJdeL2cCTTMlpyJTy
-         x1x8p1YWxBp0MMU7/xFy45dBtHoG1Wbx0z9Ym5Bu2rIUI0wF3BsXL7+3Esiq0bnxBqJY
-         LC25xUO/yFiqyzTpROC6M48x6mtTDr6rSWz4yDDLyd8UA+9959iV9jB1NC4nD/yozUSO
-         0HGZGROtpvUMYjSRNE/k8y0KSGc4cx4bt8zpPzOcLAhhvsJWnqJa5jwWQi8ibLpOBWtI
-         wkcaMHfaYOQTvrvQ97SzMIfGEM+Z8JZzlmfcak1zmZjLdJL0qMXIoVZgaP0JQ7EuvcZ9
-         w0qQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=Rm0LyYlJ+YzNGdvtjIb3BVxriPsy574YHZ4IY77q+sA=;
-        fh=1z0eNiLUr5Ed0zexgTkBekzCx/6ZMToTOzssRSDUExM=;
-        b=QKiL4G+7c+1D8lK1PQDj1ddc9rUrstXQUhepq9dtW+m9H15YUva0VJMx+2nzKoCPLq
-         mrg09AZwpFe1J+5nbPS51RqPNYgiZYnRJxcLjYzhMd/JZKOLyXFk74y4IgFU5hY9Ix3r
-         1ZXuD+xW1iB6w5cfpmYbpobBzPtF0uvdsLynKJU45C2Cf6iuSjvfYa+TcuvEL/reNuxF
-         +yn1ZnqVvEsGfazWeKYEvjsPAhHAO8VT2vjj9zgkh7iw2ZlWtzTgAD1LffRejYGX1JSa
-         N872R3bgHa1O1Cu+3FGKNe4mV9X7BW/3uuBmi3YvmknPBjd03QwYdB2iLgJRCVMQSytr
-         +Rkg==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1791906139; x=1792510939; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Rm0LyYlJ+YzNGdvtjIb3BVxriPsy574YHZ4IY77q+sA=;
-        b=CWpslIwxz/9jQtgmekiwyYup3MDVLtwLjbhpkUtilcXW177k/Hd/GbK0feRKKo/R3+
-         xJzvOX7j6ufii0gbYxC3lL61NpWHqTcd05JyAvpD0OgjGBhYWTbL+9dIm41jGYCaRdq9
-         imOJ5G9LhEQTFddEAlxy9HqCpzlfv3Nkpn40HC2vC+lnvM2MjOkq/7/8/nIHelta3FQZ
-         t0gr+642QB7yFuR4IgJGo9hQusrlqVrBP/B8eDBuMAcdAodKxlJ9o/EV8nPTHPQsxP5A
-         HzrlnUIl46NgcoOVS5PqDjdMVJOZ4tO1igWOcTynH3F2COn88XpYTm2SD3OxFOEERZAk
-         NQgA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791906139; x=1792510939;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=Rm0LyYlJ+YzNGdvtjIb3BVxriPsy574YHZ4IY77q+sA=;
-        b=YDe4OHIRX/SffYO2e01QdM0wBbj9bR5P6ka9VNDKK7WRTIW4ntkmZBHUyqC2ntca/9
-         ARWUVBzdKTs1B4FxKwgzMMhqCbqn9F/FxSuohqDvf9lgHw2foOl62XCuSeFt/BO3YAfk
-         X2ahUEBjpSnE5nOrNr4S2ckGy6CZ+yFpj8bXJmUmi4uYFzOqv6EyC+XaB1KZCaLDKv1w
-         VWdB80ihmHLYwwh3GGqaQ4DVPCm3zguszVnyjdHrOGAvRhYs+W9+uIH54Xdk9bCfynZK
-         iZy01bNzOSdbLtqtLHlvEDQpwkmU7mpTyGdwBzkY0tZKZoNzw5UiV5ge4wUm7flSdYuN
-         CIgA==
-X-Forwarded-Encrypted: i=1; AKwUvBy/Xyh0PF5m4amMisK13j/ui/da73km7ELgE1oimxJ/e/etcfrNESqfrUoo64Yb5QhXLfgwfjxipTI=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYJN4rAsodki8jCNHPNl5e3ZPXDmhZQu6zwpV2rbZFj9XmMthnhZ
-	OcUVa/WShdP4Z0ypxqSFinkKV6ieNQFvpElGyyH6S8XjMDD/DTOVrQRCwr2C58DtUwR31ZjTF/r
-	MZMPtB7iGLXmTMwYmoG60WjxTn2+aDseuJtcmA82Zfw==
-X-Gm-Gg: AYBFou2SOObp0uzIjk+xbqSO4y9lAAnLKAwXOdnAxC7mu2/SM9r6Y2npy0XOEJncrku
-	c3bD+x4Y1QfFLCsjjAz5vqKkSlJJ2DUw7A8t4zf7+zz7nNfzAVZbmP/fbqchJ2Siw52IFSoaNlB
-	wUJmFsUKuSvxhw5h1PsxHe54I4UWVQ5bJxvQpT5/mIGuJPGG/4dp/zgGzeR5aUTZXexqHQHV1zN
-	+aVICp8mizDCLez+sKpzfbjMpeeT7rbIuw5UnarkZ9gflZUn7VTRk2LEkTB740PhGN6KMG6ZBBn
-	deuCu3ggUuvKW50NF8tcCI3LOSSD46r4EWwqsZl0I0HGLzjXE9FuEhUKonLcXSJTjZwXFGDymow
-	7oEFhg6KJp33GcDbtGskATWrw98O1slvwkw8SrH4=
-X-Received: by 2002:a05:690c:3685:b0:87a:c454:6d67 with SMTP id
- 00721157ae682-8b07ee526b0mr38663537b3.52.1791906139243; Tue, 13 Oct 2026
- 08:42:19 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
+	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
+	bh=b1gLppnw973pyALDGv3yX2duTrhwU3is9vl2LGizV84=; b=0dWUp4U5Rl10I/rAYKqrR3PbJn
+	akr6I8tyadazB2vPs5r4zYOmErV8HGaVSFJ9gIpOpqDNHb9T0dPdhvI0hX3IrCh9OU9pCuUfXtsz3
+	xCaOo5fVS3RBExrvkV0ao7KCuXU5Zv/Kw0P9hxdqmbkopaT0w7+eraW2sNFkQ5+1+VcI=;
+X-Forwarded-Encrypted: i=1; AKwUvBw03+nZ5o+fcE7PUcQJkKJMWJ2aiJZr21AV4eCJvPULxBk/CV7aPxTKysXsIS+hAQNsRLo1Bd/DcnU=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYLcBLT+v/KiRZeunYN1Di4nkFGEtJM82v7YeyfzM0ngMeu2Bzrl
+	RCGlpxmCo6JwJP5Scxxfz/0hCSL3BWwre1YTqAEaCwpRyjbYSJrcNFnvC0Wdkx2JBTdJKpCObzR
+	BzAzRCMRLLZi1c9LJJZMEM2JeYquHtmg=
+X-Received: by 2002:a2e:be25:0:b0:3a9:7d11:a790 with SMTP id
+ 38308e7fff4ca-3a9c56f09aamr34192141fa.21.1791906516525; Tue, 13 Oct 2026
+ 08:48:36 -0700 (PDT)
 MIME-Version: 1.0
-References: <20260916104435.600211-1-mark.caveayland@nutanix.com> <20260916104435.600211-5-mark.caveayland@nutanix.com>
-In-Reply-To: <20260916104435.600211-5-mark.caveayland@nutanix.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Tue, 13 Oct 2026 16:42:07 +0100
-X-Gm-Features: AclHuK9bqSLzLVQB4VCGAk6mL6XXtifWp7anaSaKyJr9Tn_7wu7r2UfWe3SiG8s
-Message-ID: <CAFEAcA_NVw4_xPfb7aTXoNxgC+N+D7arQ7X+7vAokNuZxd4p9g@mail.gmail.com>
-Subject: Re: [PATCH 04/22] i8259_internal.h: rename PICCommonClass to I8259CommonClass
-To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com, 
-	sstabellini@kernel.org, anthony@xenproject.org, edgar.iglesias@gmail.com, 
-	qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
+References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-9-gwd@xenproject.org>
+ <8514b7b6-cf1c-44d9-827c-675fd5a6708e@suse.com> <CAFLBxZYOHGDbp_=rBP0aRd9J3LJ-B79zpt4B9LQyjKQiWjb6ig@mail.gmail.com>
+ <43f7a948-669f-48cb-8e1f-9d1a8a98a8f5@suse.com> <CAFLBxZbQrLzDy8cguzwQr9e1c+s9OnP47rqFN+-5Pzv=r35Sig@mail.gmail.com>
+ <71f51ddc-3034-4501-b532-e76eb9f898ba@suse.com>
+In-Reply-To: <71f51ddc-3034-4501-b532-e76eb9f898ba@suse.com>
+From: George Dunlap <gwd@xenproject.org>
+Date: Tue, 13 Oct 2026 16:48:23 +0100
+X-Gmail-Original-Message-ID: <CAFLBxZZqFHkjZjEr6yqd3AhSu7QX=W=pc-M1mX=_egOprt5=8w@mail.gmail.com>
+X-Gm-Features: AclHuK_qBAlEjSkNMx6DoTYKTB_F5w96JoVxjOCe2kNFohYEcIujYaZPGzfR6mw
+Message-ID: <CAFLBxZZqFHkjZjEr6yqd3AhSu7QX=W=pc-M1mX=_egOprt5=8w@mail.gmail.com>
+Subject: Re: [PATCH v3 08/18] x86/domain_page: prepare the mapcache for
+ per-vCPU accounting
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+	Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-33051d/1791906140-6F4C74E9-423DB5A6/0/0
-X-purgate-type: clean
-X-purgate-size: 470
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, 16 Sept 2026 at 11:50, Mark Cave-Ayland
-<mark.caveayland@nutanix.com> wrote:
+On Tue, Oct 13, 2026 at 12:57=E2=80=AFPM Jan Beulich <jbeulich@suse.com> wr=
+ote:
 >
-> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-> ---
->  include/hw/isa/i8259_internal.h | 4 ++--
->  hw/i386/kvm/i8259.c             | 4 ++--
->  hw/intc/i8259.c                 | 2 +-
->  hw/intc/i8259_common.c          | 6 +++---
->  4 files changed, 8 insertions(+), 8 deletions(-)
+> On 13.10.2026 11:53, George Dunlap wrote:
+> > On Tue, Oct 13, 2026 at 7:26=E2=80=AFAM Jan Beulich <jbeulich@suse.com>=
+ wrote:
+> >>
+> >> On 12.10.2026 18:07, George Dunlap wrote:
+> >>> On Mon, Oct 12, 2026 at 2:48=E2=80=AFPM Jan Beulich <jbeulich@suse.co=
+m> wrote:
+> >>>>> @@ -74,12 +130,12 @@ void *map_domain_page(mfn_t mfn)
+> >>>>>  #endif
+> >>>>>
+> >>>>>      v =3D mapcache_current_vcpu();
+> >>>>> -    if ( !v || !is_pv_vcpu(v) )
+> >>>>> +    if ( !v )
+> >>>>>          return mfn_to_virt(mfn_x(mfn));
+> >>>>
+> >>>> I don't quite understand why this is_pv_vcpu() is okay to drop. What
+> >>>> mapcache_current_vcpu() returns isn't what it ran is_pv_vcpu() on. (=
+Same
+> >>>> in unmap_domain_page() then, obviously.)
+> >>>
+> >>> So mapcache_current_vcpu() is a bit weird; the actual invariant is,
+> >>> "Return the vcpu whose cache structure we should use if present; or
+> >>> NULL if there's no cache structure to check and no need to sync."  So
+> >>> if pgtable_vcpu is HVM, return NULL and just use the raw address,
+> >>
+> >> I was going to say "But there's no returning of NULL there if
+> >> pgtable_vcpu is HVM, at least not at this point of the series." Only
+> >> then I realized that I was being confused by there being both v and
+> >> curr, and neither of them being pointer-to-const (i.e. both being
+> >> equal in terms of which of the two might be returned from the function=
+,
+> >> yet as a result of earlier changes neither is being returned anymore).
+> >>
+> >>> because at this point in the series, both HVM and the idle domain hav=
+e
+> >>> full directmaps; if pgtable_vcpu is PV, then maybe sync, and then
+> >>> return the result of the sync.  That may be a PV domain with a
+> >>> mapcache, or an idle domain with no mapcache, but in either case you
+> >>> can then read cache.inuse to see if there's something there.
+> >>>
+> >>> So yes, it's a different vCPU; but it's still defined in such a way t=
+o
+> >>> be safe to check cache.inuse.  The only possible value *change* after
+> >>> a sync is the idle domain; I don't think we need to do another check
+> >>> to make sure it's still a PV domain.
+> >>
+> >> Yet then - aren't the is_pv_vcpu() you drop here redundant already
+> >> before this patch/series? In which case (since it's not entirely
+> >> straightforward to reason about and beneficial in its own right),
+> >> might it make sense to have this be a separate change, with (in
+> >> particular) dedicated justification? (ISTR having thought about
+> >> making a patch to this effect a little while ago - perhaps around when
+> >> Roger last touched this logic -, but then deciding that something was
+> >> wrong about my reasoning. That may have been a mistake, as it looks
+> >> now.)
+> >>
+> >>> In fact, there's an argument that we should modify
+> >>> mapcache_current_vcpu() to take pointers to dcache, and vcache, and
+> >>> return just cache; that gets rid of v as a local variable of
+> >>> map_domain_page entirely, and makes the logic ("get the cache we
+> >>> should use") more clean, and gets rid of one mfn_to_virt() instance.
+> >>> That would require some non-trivial changes, so I'd rather avoid that=
+,
+> >>> but I can do it if you want.
+> >>
+> >> Sounds entirely plausible, but can as well be done as cleanup later.
+> >
+> > I'm a bit confused about what, if any, change you're requesting here.
+> > Are you requesting a preparatory patch just removing the is_pv_vcpu(),
+> > with an argument as to why it's redundant?  Or are you OK with having
+> > this cleanup work be put until later?  Or do you want me to put the
+> > is_pv_vcpu() back until we feel like cleaning it up properly?
+>
+> Now the confusion is on my side: Aren't what you suggested as further
+> cleanup and the dropping of the is_pv_vcpu() independent? If it had
+> been just your first question, I would have said "yes, if possible".
+> But the following question starting with "Or" is irritating. Yes,
+> that _other_ cleanup work can (as I thought you also suggested) be
+> deferred.
+>
+> Putting back the is_pv_vcpu() isn't really necessary, as long as
+> their removal can be properly justified. (Hence why I think that would
+> be better as a separate change.)
 
-Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+I've added a new patch.
 
-thanks
--- PMM
+ -George
 
