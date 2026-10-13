@@ -4,43 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2B7C2CC6B03
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 11:57:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1447052.1663208 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51732CA9ED2
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 11:58:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1447058.1663220 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGb7t-0005tv-0z; Tue, 13 Oct 2026 11:57:01 +0000
+	id 1xGb8w-0006VO-9u; Tue, 13 Oct 2026 11:58:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1447052.1663208; Tue, 13 Oct 2026 11:57:01 +0000
+Received: by outflank-mailman (output) from mailman id 1447058.1663220; Tue, 13 Oct 2026 11:58:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGb7s-0005to-Td; Tue, 13 Oct 2026 11:57:00 +0000
-Received: by outflank-mailman (input) for mailman id 1447052;
- Tue, 13 Oct 2026 11:57:00 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGb7r-0005ti-VU
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 11:57:00 +0000
+	id 1xGb8w-0006VH-7L; Tue, 13 Oct 2026 11:58:06 +0000
+Received: by outflank-mailman (input) for mailman id 1447058;
+ Tue, 13 Oct 2026 11:58:05 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1352076650008425@swg.vates.tech>)
+ id 1xGb8v-0006V2-85
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 11:58:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGb7r-007lal-84
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 13:56:59 +0200
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ace1c8b-8faa-0a2a0a5109dd-0a2a450995aa-0
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 13:56:59 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ace1c8a-be1a-0a2a45090019-d1558035a9aa-3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 13:56:59 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-49e73611928so30711415e9.1
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 04:56:59 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18c85009csm280040665e9.2.2026.10.13.04.56.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Oct 2026 04:56:57 -0700 (PDT)
+ id 1xGb8u-001ree-L3
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 13:58:04 +0200
+Received: from [10.42.69.3] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1352076650008425@swg.vates.tech>)
+ id 6ace1cc4-8faa-0a2a0a5109dd-0a2a4503a3aa-36
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 13:58:04 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1352076650008425@swg.vates.tech>)
+ id 6ace1ccc-fae8-0a2a45030019-b9ff1c128637-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 13:58:04 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1352076650008425.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Tue, 13 Oct 2026 11:58:02 +0000
+Received: from [192.168.1.37] (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
+ [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 8EFB4827DA;
+ Tue, 13 Oct 2026 13:58:01 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,170 +58,160 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791892618; x=1792497418; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Yo727WvnGhExRxgrLCwn3w6kydndywV/v9mdbK8SEqM=;
-        b=g7RC44AvQeV+N7H32O+qXg7Z48T9v0+5i4v4y/qF40OVS0kM9+gwSYZ6eRMdZRig/M
-         jf08EtoipRxcfGDwAUUrY/NPa5jD1t1Q2E3vKdrG+eWOYeaL3wn/JITPfxY69eh3ixUz
-         qCjfzKXYmh6HybHXClebQsJ73dalrmQooGTcOKngTlh87yYiBFGZM0zYrYeY4Vv9eqkT
-         EL+vmVTuS1I4Btq2r7unqpEcr7WRqFB2Wu7f/eBN4sHKJIVQd7aeRiE0Mg2/mdCoK1t3
-         G3z3nlvYYXxbUwfsQwapRb0cNao3xKsliuVD5TbMzyATjow4XFV+aQuCpJlOsamHYypq
-         hY1Q==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791892618; x=1792497418;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Yo727WvnGhExRxgrLCwn3w6kydndywV/v9mdbK8SEqM=;
-        b=NopJqWNr7vL7zfxb7wgyIBsR8PEMqEotQZSDOn+V89DgvI+sTNwGXsEoZc9lGVJN1c
-         gpJzmrUbQ/lRiqAsR+Nkbh7JqVbr9ELE9oWBWwdHwVQrofETBcjcZrP4brtnYHW6Klpu
-         RMgN8JSnlCmX7mr4o7vh0c0Go/8G97HYWSugaetPK+zPu21873WN53xKR+plGG0/onD0
-         T51GZL9cwaOg9Bl3gRBlycYE5uz8dSz0TX4DMV8A7SBkyzcrPSaLpsFI9bd/oRFKmfi6
-         cSFkMt0kuRFhX3pvB/PHhGS4J/4i6kO2WBHWoOGbcjfbj8FttYleTQz8iM5DtVQJDA81
-         a22g==
-X-Forwarded-Encrypted: i=1; AKwUvBywbcYXCKZXYfEWiXVq+A4COfY2OQd9cLTm70HhsuTt6ak7zkS3xeyA4xpOXTJ7SzusHgOFFXwoGGc=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIlH7/umgTNiw2Z7uQBdEemAAbTT/TxC9pUserzLuB5+KDMI0yQ
-	GDjVpELLN4GqNfRM2BMVSv6MTP3+nXM6NJZiFS8qYDZ+fn0QxQqhncefsgmBnoLFuA==
-X-Gm-Gg: AYBFou38EpmqWfMBDWVOsE//TD89BFdUsBZpKwxrlifG5gZN/bG/er7AbY7QoCnqRUg
-	5rtFRoru8v84zFDJyGbM94e2CIqf7FlnUUnfSCS1h6O79IVT/TDoI+7Uq+pwaGUjheb24rxSBN2
-	8W6dcHOH/qNCbZG+poPiEr6UYoAMYQ3Ah/nesnel2RnyqHzyPxKKTcLfT1mjbSOQZWTS9Uhdesr
-	4fuyc31hN/2LU0TamsbpaQp/6kHePtWgI5xH8+anSPKkYqmTZxIN8W7s78v/CIjcb71VxkRrsUT
-	MWfcdr01bqOoCQpb1nb80c0lyxT6ZRLLZVVzTNn6p24VIY3NEls8AClQnFOVBKpBGyqz8eb5Q4R
-	ZrkwCaYu2WeUjyqXkSpRDqbbOFkWRiBRMwcycRrNOuP+qndPU9SF4+rgJK+CZ7Hii+CoIPDmf3W
-	iCTrGNGtF/lrC97UTUweVRfwJgJ2macey8ysVUuS0Crm7AV1SY/8TsyFjoOM3MBrwdrt1W7jd0P
-	ClKVUkTKNH/15mh8Qr/RBM2nZ+11VEWXBeEvTzZavZ4401ypMsC6YUfSItDlA==
-X-Received: by 2002:a05:600c:5254:b0:4a0:20b4:ba93 with SMTP id 5b1f17b1804b1-4a18e4aa11dmr250270595e9.16.1791892618512;
-        Tue, 13 Oct 2026 04:56:58 -0700 (PDT)
-Message-ID: <71f51ddc-3034-4501-b532-e76eb9f898ba@suse.com>
-Date: Tue, 13 Oct 2026 13:56:57 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=jlH5NbqAOH1MTnY6GYHY4LB8qfq/5ty+AI5nIqMo93o=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=fWAupGOBej2Oy0rSg1ncrIqO3LuvR/AkisgAaxdOMDYxRz/gBL8Udy0geSGqRapF+A2eKEEXR
+ wyErLrvkNxpS/GTd76tW/aMrgVrOS+3t8rHlKtysZn61k0hUzPK5SNdgKx8SciFfu7wjJfaLQHV
+ dAxcJFkAVdwNzMjW6zPZu7sOIhao6kgsNnJNpth2LjwkQdOIEalNNqHuub0ruBMxzLfGM0q5OC1
+ tnH1YHKucSLydNOsav6jTtDYbMskUKKhOie4dkrRx4PIrRBjctf1rmGDb5IoPop8Aci44QAltP6
+ biDCaMZvWVw4liLVjD2B1H0LS9CUB9zIZgE3V9buARfg==
+X-Zone-Loop: af9a13719ebc29d1a885dc2cc64fa44cc7e17218230a
+x-campaign-type: default
+x-transaction-id: d9e15f8d-2ad5-47c7-84ee-4a013b031c97
+x-swg-uid: 01-cab0f3a3-358c-4c44-8454-e1310414f82b
+X-Mailer: Sweego
+Message-ID:
+ <1791892682.8631fc262581453bbf619ec5b2062170.1a1352076650008425@vates.tech>
+x-swg-bid: 1791892682.8631fc262581453bbf619ec5b2062170.1a1352076650008425
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 08/18] x86/domain_page: prepare the mapcache for
- per-vCPU accounting
-To: George Dunlap <gwd@xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <20261007104051.48841-1-gwd@xenproject.org>
- <20261007104051.48841-9-gwd@xenproject.org>
- <8514b7b6-cf1c-44d9-827c-675fd5a6708e@suse.com>
- <CAFLBxZYOHGDbp_=rBP0aRd9J3LJ-B79zpt4B9LQyjKQiWjb6ig@mail.gmail.com>
- <43f7a948-669f-48cb-8e1f-9d1a8a98a8f5@suse.com>
- <CAFLBxZbQrLzDy8cguzwQr9e1c+s9OnP47rqFN+-5Pzv=r35Sig@mail.gmail.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <CAFLBxZbQrLzDy8cguzwQr9e1c+s9OnP47rqFN+-5Pzv=r35Sig@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1791892619-FCE14034-97A8858A/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 4062
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v6 1/4] xen/riscv: probe the PTE A/D bits update scheme
+ at boot
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, xen-devel@lists.xenproject.org
+In-Reply-To: <21a48f53-385b-4f36-958c-cc82bf390c89@suse.com>
+References: <1791885904.8631fc262581453bbf619ec5b2062170.1a134b909b40008425@vates.tech>
+ <1791886038.8631fc262581453bbf619ec5b2062170.1a134bb169d0008425@vates.tech>
+ <21a48f53-385b-4f36-958c-cc82bf390c89@suse.com>
+Date: Tue, 13 Oct 2026 13:57:56 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791892676; l=4006;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=+LcknYPnhKs9gYEONHko0QbEaF3wRIXTL8NmWlffUJg=;
+ b=b7uC8eD3TLUwg8FLHW/GudOM5cxIAHTZwnDCZi3IYcXB+qvnYzEZ7F8zqx9H2yNB9tIvBK2j4
+ bz9Fj4yGLcaBkP8JtiUEDJz1vpek4ocToIukmScjeW4CT8rTmE2PIE+
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1791892681780
+X-purgate-ID: tlsNG-33051d/1791892684-766FB4E9-FAB8AC6D/0/0
+X-purgate-type: clean
+X-purgate-size: 4006
 
-On 13.10.2026 11:53, George Dunlap wrote:
-> On Tue, Oct 13, 2026 at 7:26 AM Jan Beulich <jbeulich@suse.com> wrote:
->>
->> On 12.10.2026 18:07, George Dunlap wrote:
->>> On Mon, Oct 12, 2026 at 2:48 PM Jan Beulich <jbeulich@suse.com> wrote:
->>>>> @@ -74,12 +130,12 @@ void *map_domain_page(mfn_t mfn)
->>>>>  #endif
->>>>>
->>>>>      v = mapcache_current_vcpu();
->>>>> -    if ( !v || !is_pv_vcpu(v) )
->>>>> +    if ( !v )
->>>>>          return mfn_to_virt(mfn_x(mfn));
->>>>
->>>> I don't quite understand why this is_pv_vcpu() is okay to drop. What
->>>> mapcache_current_vcpu() returns isn't what it ran is_pv_vcpu() on. (Same
->>>> in unmap_domain_page() then, obviously.)
->>>
->>> So mapcache_current_vcpu() is a bit weird; the actual invariant is,
->>> "Return the vcpu whose cache structure we should use if present; or
->>> NULL if there's no cache structure to check and no need to sync."  So
->>> if pgtable_vcpu is HVM, return NULL and just use the raw address,
->>
->> I was going to say "But there's no returning of NULL there if
->> pgtable_vcpu is HVM, at least not at this point of the series." Only
->> then I realized that I was being confused by there being both v and
->> curr, and neither of them being pointer-to-const (i.e. both being
->> equal in terms of which of the two might be returned from the function,
->> yet as a result of earlier changes neither is being returned anymore).
->>
->>> because at this point in the series, both HVM and the idle domain have
->>> full directmaps; if pgtable_vcpu is PV, then maybe sync, and then
->>> return the result of the sync.  That may be a PV domain with a
->>> mapcache, or an idle domain with no mapcache, but in either case you
->>> can then read cache.inuse to see if there's something there.
->>>
->>> So yes, it's a different vCPU; but it's still defined in such a way to
->>> be safe to check cache.inuse.  The only possible value *change* after
->>> a sync is the idle domain; I don't think we need to do another check
->>> to make sure it's still a PV domain.
->>
->> Yet then - aren't the is_pv_vcpu() you drop here redundant already
->> before this patch/series? In which case (since it's not entirely
->> straightforward to reason about and beneficial in its own right),
->> might it make sense to have this be a separate change, with (in
->> particular) dedicated justification? (ISTR having thought about
->> making a patch to this effect a little while ago - perhaps around when
->> Roger last touched this logic -, but then deciding that something was
->> wrong about my reasoning. That may have been a mistake, as it looks
->> now.)
->>
->>> In fact, there's an argument that we should modify
->>> mapcache_current_vcpu() to take pointers to dcache, and vcache, and
->>> return just cache; that gets rid of v as a local variable of
->>> map_domain_page entirely, and makes the logic ("get the cache we
->>> should use") more clean, and gets rid of one mfn_to_virt() instance.
->>> That would require some non-trivial changes, so I'd rather avoid that,
->>> but I can do it if you want.
->>
->> Sounds entirely plausible, but can as well be done as cleanup later.
+On 2026-10-13 12:36 +0200, Jan Beulich wrote:
+> On 13.10.2026 12:07, Baptiste Le Duc wrote:
+> > @@ -620,6 +623,98 @@ static void __init compute_guest_isa(void)
+> >          panic("Failed to build guest \"riscv,isa\" string\n");
+> >  }
+> >  
+> > +static bool __init probe_hw_ad_update(void)
+> > +{
+> > +    bool updated = false;
+> > +    unsigned int slot = FIX_MISC;
+> > +    vaddr_t va = FIXMAP_ADDR(slot);
+> > +    struct page_info *pg;
+> > +    pte_t *entry, pte;
+> > +    mfn_t mfn;
+> > +    unsigned long tmp;
+> > +
+> > +    pg = alloc_domheap_page(NULL, 0);
+> > +    if ( !pg )
+> > +        return false;
 > 
-> I'm a bit confused about what, if any, change you're requesting here.
-> Are you requesting a preparatory patch just removing the is_pv_vcpu(),
-> with an argument as to why it's redundant?  Or are you OK with having
-> this cleanup work be put until later?  Or do you want me to put the
-> is_pv_vcpu() back until we feel like cleaning it up properly?
+> Why would you need a fresh page here? Can't you create a secondary mapping
+> of a page already in use (e.g. one from Xen's .data or .bss section, or the
+> stack page you're running on)?
+You're right, I will map the current stack page.
+> 
+> > +    mfn = page_to_mfn(pg);
+> > +
+> > +    arch_pmap_map(FIX_MISC, mfn);
+> > +    entry = &xen_fixmap[slot];
+> > +    pte = pte_from_mfn(mfn, PTE_VALID | PTE_READABLE);
+> > +    write_pte(entry, pte);
+> > +
+> > +    flush_tlb_one_local(va);
+> > +
+> > +    asm_inline volatile (
+> > +        "1: ld %[tmp], 0(%[va])\n"
+> > +        "   li %[updated], 1\n"
+> 
+> If you mapped the stack page, you could preset a variable there to 1, load
+> from the alias mapping of that variable, and then avoid the LI altogether.
+Yes mapping the stack page appears to be the best way.
+> 
+> > +        "2:\n"
+> > +        ASM_EXTABLE(1b, 2b)
+> > +        : [tmp] "=&r" (tmp), [updated] "+r" (updated)
+> > +        : [va] "r" (va)
+> > +        : "memory" );
+> > +
+> > +    arch_pmap_unmap(slot);
+> > +    free_domheap_page(pg);
+> > +
+> > +    return updated;
+> > +}
+> 
+> Imo you'd better check that A also was actually set in the PTE.
+Right, I will do that.
+> 
+> > +
+> > +    /* Neither advertised: trust the probe. */
+> > +    __set_bit(has_hw_update ? RISCV_ISA_EXT_svadu : RISCV_ISA_EXT_svade,
+> > +              riscv_isa);
+> 
+> Hmm, this feels fragile. Other schemes are possible, e.g. A being updated
+> by hardware but D being left to software. Are such truly precluded by the
+> spec, including older versions thereof? Furthermore, probe_hw_ad_update()
+> can (right now) return false for unrelated reasons.
+Since 1.10 the spec lists exactly two schemes, and each one covers A and
+D together: either a clear A (or a clear D on a store) raises a page
+fault, or hardware sets the corresponding bit(s). A-bit being set by
+hardware while D is left to software isn't one of them. Before 1.10, the
+hardware must set the two bits. Therefore, there is not other schemes
+possible.
+> As a consequence, patch 2 imo also can't leave the A/D pre-setting unaltered.
+> It perhaps needs doing unless Svadu is positively identified as present.
+I agree it is more robust to preset A/D bits unless Svadu is truly
+identified, i.e. advertised in the DTS (without Svade) and confirmed by
+probe_hw_ad_update(). The worst case then becomes the probe failing for
+an unrelated reason on hardware which does update A/D: we'd preset A/D
+needlessly, which is harmless, as hardware only writes the PTE when a
+bit is clear.
 
-Now the confusion is on my side: Aren't what you suggested as further
-cleanup and the dropping of the is_pv_vcpu() independent? If it had
-been just your first question, I would have said "yes, if possible".
-But the following question starting with "Or" is irritating. Yes,
-that _other_ cleanup work can (as I thought you also suggested) be
-deferred.
+To sum up, and to avoid unnecessary respins, would you be fine with:
+1) Keeping the probe as it is, with your remarks addressed (map stack page).
+2) Presetting A/D bits unless Svadu is truly identified as above.
+> 
+> > --- a/xen/arch/riscv/include/asm/cpufeature.h
+> > +++ b/xen/arch/riscv/include/asm/cpufeature.h
+> > @@ -42,6 +42,7 @@ enum riscv_isa_ext_id {
+> >      RISCV_ISA_EXT_sstc,
+> >      RISCV_ISA_EXT_svade,
+> >      RISCV_ISA_EXT_svpbmt,
+> > +    RISCV_ISA_EXT_svadu,
+> 
+> Isn't there some sort of sorting in effect here?
+No, as it is mentioned in the docstring that:
+    * New extensions should just be added to the bottom, rather than added
+    * alphabetically, in order to avoid unnecessary shuffling.
 
-Putting back the is_pv_vcpu() isn't really necessary, as long as
-their removal can be properly justified. (Hence why I think that would
-be better as a separate change.)
-
-Jan
+-- 
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
