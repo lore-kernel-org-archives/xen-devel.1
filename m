@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2265CC6B08
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 10:01:39 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446866.1662972 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2E6C9CC6B03
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 10:02:49 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446873.1662980 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGZJx-0002Yp-AG; Tue, 13 Oct 2026 10:01:21 +0000
+	id 1xGZLC-00033l-LT; Tue, 13 Oct 2026 10:02:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446866.1662972; Tue, 13 Oct 2026 10:01:21 +0000
+Received: by outflank-mailman (output) from mailman id 1446873.1662980; Tue, 13 Oct 2026 10:02:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGZJx-0002Yi-6s; Tue, 13 Oct 2026 10:01:21 +0000
-Received: by outflank-mailman (input) for mailman id 1446866;
- Tue, 13 Oct 2026 10:01:20 +0000
+	id 1xGZLC-00033e-Ie; Tue, 13 Oct 2026 10:02:38 +0000
+Received: by outflank-mailman (input) for mailman id 1446873;
+ Tue, 13 Oct 2026 10:02:37 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGZJw-0002Yb-LR
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 10:01:20 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGZLB-00033W-H9
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 10:02:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGZJv-007MuN-Uo
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 12:01:19 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xGZLA-008KqQ-U1
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 12:02:36 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ace0169-2eae-0a2a0a5409dd-0a2a4508e124-32
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 12:01:19 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ace01b9-8faa-0a2a0a5109dd-0a2a4502839c-20
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 12:02:36 +0200
+Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ace016f-f659-0a2a45080019-d1558031f16f-3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 12:01:19 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4a140e7405dso31703265e9.3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 03:01:19 -0700 (PDT)
+ id 6ace01bc-6ca4-0a2a45020019-d1558033b12d-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 12:02:36 +0200
+Received: by mail-wm1-f51.google.com with SMTP id
+ 5b1f17b1804b1-4a061a13884so23835185e9.3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 03:02:36 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a198c80cb3sm167750445e9.3.2026.10.13.03.01.17
+ 5b1f17b1804b1-4a18ca51465sm266695565e9.4.2026.10.13.03.02.35
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Oct 2026 03:01:18 -0700 (PDT)
+ Tue, 13 Oct 2026 03:02:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,50 +54,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791885679; x=1792490479; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791885756; x=1792490556; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=pIv2XFtlpp6kdQOhPGZBJOWTybPv3CvTi9JYIWsAtpg=;
-        b=Ibj0Tv2/beFBDNJiJ/9+Bohcgiav8+VbIib5cVbHV7Bo04MAhaunpH6RpVFTL3RzBs
-         p63gNAaK36mBa6M7fLuCRSyS2rV9QdO44uVJ5Kqfi5nE1bA9+dDYwTl63xpY6fNsEsfo
-         PbTLIgZU3U/gM3ySzCHz9DdjXfO5C75rf1LXX0DyhaP6B0ujG2DUWmXh7zglap0FYVyz
-         kQa/00AB2t56kkjHXO6aP5Zyk0nUsN9ntxeqxPGOb6pqeDq6feXYzYzRMLuBHGTP4Rra
-         MtBXHHf/x2FmDaVKFIi3vlBlnsuBsQoctwoqOUftUcOJdzech/VoYxK6Eiz3BjVDpizr
-         ZWeQ==
+        bh=jnNfUjR5ts0AhBZ8/zYArDz7AA7tizmaC4J+0l6WxyM=;
+        b=QpxbrygI1ID1cu3FF5zuOHt+bIAPFQmxbgse3FdahKRQlKi+iRKzfL7iCsL+8uo8W+
+         5VSAyWBZbVj/tbvGA7lB48JRgrUusSrAqDPcx9fcNdxMbM5pTbml2SERvh2c8xt5kSlZ
+         aUdWg4pPYoHu1T44JkdHP2jki2sSFv1iMwAGjra2w++2NMXtxtuGcw1bNIUi3r95/Tdw
+         C2byR1T53BQnrd9CDK+4X3C/OadNHTGwQT1R9VLwWjRSMRYN5E+bRCMg8H8yr8ZlPLvq
+         iJNXNBlDQWSO8qpx1Ul9bq1jGPjoaX1Yn9tWbKeMAv7+c2aKWV6UIy0Eqess+CSBKBpy
+         EEWg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791885679; x=1792490479;
+        d=1e100.net; s=20260707; t=1791885756; x=1792490556;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=pIv2XFtlpp6kdQOhPGZBJOWTybPv3CvTi9JYIWsAtpg=;
-        b=x7iLBzuDMA++ZZDeKzRwCIhbierjOc6fMT4ZKccckc/noOGoN+gl7VwRX2ACGa8OZi
-         NwjVRL5qY6xvLYJzeV1JhHknBfNQu3j4LLkJuJWVZq4EgGHWHCdKag7DStY3Fm7QxaJP
-         CEMX8fLjwjC9DB0i/G/IW5evW7dg5iLYJA2uTIY9ZW2DYO6nfP5zqwe/UNyAKeyUiLM6
-         5GUOquodIheTc543k6kKiyC6AQpDP4jV9ZfWSSK8hQvrW5sINUCt3ERrYELWVn1piPJg
-         jqvQg/3SEGkU1vbETyh7xqRWSkGuUm/FsFZmKTzmIZBrCKbYyCOT7518NStNHoM9qeRO
-         pbiA==
-X-Forwarded-Encrypted: i=1; AKwUvBzW4gbipKIERn5RrPV1vIGhaXMTv4OclDemEEDxktOkeTLNznKW3UcTogFZZk7TLoMmnBQ47TsnRy0=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYJ5bD/szsONKjX35QKG61W6RaZgmSOrs9n0r9pD4b69O/Jw7EAp
-	o+vSBzPiSWSYI/bKFL9yKKoJ8MLwS5ywnlaPJb0w2i9JCvYvlOWRsAoHno1UkFHQTw==
-X-Gm-Gg: AYBFou3l7euX8yzpL7wz13b0s0FOes7nicut/6V5UGfsWGH7/yr2UMQZuVNETiRhA9a
-	PTZ0hcUz0NzsQ9mRoiKRvtFf2tQe2gfa5JxELqKy+F500EjvpjdzoJb1K2wHY1agLDeMkuimGGJ
-	0z0Kv8zOwHW6EHz9+DpXtxbZgxpAN3w4iHKfPyW7iyzqv//+qJJXNqJptW4/xpj0CtTscSxvKOL
-	398jhwF/qNx/ic5McUEraS+koVFBBvBqci3Rn2XS9ZbJ3Nw9xEK/8fuJtwAkW6gUqhcTKxsV8zJ
-	86gqTBalWx70zt5ShEMO6WCuxKY6NmeV/VDVDAQILgJDCid09qADMI+y0IH3nKpq9GYIkZa8uGY
-	RX5yj6IxO9qPskXQ68XGtjxWwdrTP2aloKFPL84BQQbbMMgC1RN09QTn4A/LxrN3LT/T5de6iMT
-	2c0u2iNxtQmMwqHknPvcWLZQ7Sib8F2nLV0d+n5uWjH4uJjDiYetdQCg6KxK/H7+lBeHUk5zYgH
-	BP4OEeu3btfQfIkrcDLy8719xle4SpSYkx4UNfkIqid7DyIJLeTiuDx1Nh4gg==
-X-Received: by 2002:a05:600c:3b98:b0:499:79b9:e220 with SMTP id 5b1f17b1804b1-4a18e49886amr265964215e9.10.1791885679143;
-        Tue, 13 Oct 2026 03:01:19 -0700 (PDT)
-Message-ID: <775b1f5a-ec70-41e6-9926-2c817c0e0521@suse.com>
-Date: Tue, 13 Oct 2026 12:01:17 +0200
+        bh=jnNfUjR5ts0AhBZ8/zYArDz7AA7tizmaC4J+0l6WxyM=;
+        b=Z8rUF6UEIumMN19fLFambGWafH66jZ1jkdVOVsuMV03H9fgLK8dsC6+S4KYFpesIY7
+         5TDL0+rhGh6d48U1yO7bfI5T+nvoo6KYrVHvief0bkQCBKmL2peCeD4ZHdsQdSFRSOEb
+         AXtLNnS4Y2IDVDU77/KC9A/KTG4cxpQChkR1K6xJcHwk7njJLiCpGF2y3CQDLFj6NKkw
+         M68JehOAKpiZfU4d2FSBAa0YvbmAW9KsFyuAK6xF+xs7820GlHtLTmOk5mvX+MqM4zeb
+         vyP3HiJPlFxc98Xr6xZ5C8tpF2xfHOXqBTZzmNrKbPEpxieUSQkZdanNaZOaRq9niWk8
+         oncw==
+X-Forwarded-Encrypted: i=1; AKwUvByAOSZD+b0LZS0exE2FYVQ+5Md9SDzWaS+FYGBjICIHpqGWir8/FyJtzx39H7wMUUjrJsdODvxrJfI=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIGn/REHjT6TTD9xSHhuetAJOyuPVIpBD0ZoAi6OGmqA0uQ4ZZl
+	/KZcaI0OqQMY1hVrSQjgokE1qb+Apj9vl0dzKyCIMQSQ+MhMxRZmmnKNM9IR4PeHvQ==
+X-Gm-Gg: AYBFou0gzlx3ykR85ODZ0PWqpOcMvNU7wCgOLb9Sw98j3hj6Q7VH8quTcIlF/rSwrYA
+	OcGWOc2fmtS6p4IrgEuFOTWxGjqZgzTPo14x2LxeiXRWL92HiJwnfPXBMZsTwBpSQfshQuIPyVD
+	ycIUpoZAtl70t2T659DQYI0JnIoJfK45owSS1FqkwxzxSQuwOg52cvQVaKr0OH7D6wZauAEtmeY
+	3Tadv8W28l5wtYiw2BXV8KsPXrslYLxyG3mJlkIVJf2w5e8ynGnd/DRrgrUz2xn+BphhD+jZ2+d
+	0VzxvhXwf9bPL4Hw3PDyY3gzwFEAEVYEoAW7xRoR7LgbrhCaKXKebuW2Y5tT44YzufYbPvnLZO1
+	qMh4FjAw+7FOJmVCIQ1TgDSv9/WCB1yyo5HTN+aAsNEJoXjhGuv5CjA3SruNRRUPS5T1NCfRyBo
+	YfcPpfEwt4nc8TIQi6ZnWX8HmuQqaxs1JGbMcG6GBEj6naPOdz3+NvZEelKvGw29a3DkepaJ+i3
+	6/v+gxG974ouPRCBGbl6WwPHqCBcl00WTWd8+1gKAuQtm5oxHedHHHTq4DPUCNOUf59gzEk
+X-Received: by 2002:a05:600c:c113:b0:4a1:985b:83a9 with SMTP id 5b1f17b1804b1-4a1985b87f5mr113090375e9.4.1791885755870;
+        Tue, 13 Oct 2026 03:02:35 -0700 (PDT)
+Message-ID: <8c0c3bbf-6365-4964-8454-ad545f76cde6@suse.com>
+Date: Tue, 13 Oct 2026 12:02:34 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 08/13] nestedsvm: Don't set VMCB(1-2)'s NP_ENABLE and
- N_CR3 during VMEXIT to L1
+Subject: Re: [PATCH v2 00/13] x86/nestedsvm: rework nested VMRUN/VMEXIT
+ handling
 To: chunjie.zhu@citrix.com
 Cc: ross.lagerwall@citrix.com, andrew.cooper3@citrix.com,
  roger@xenproject.org, jason.andryuk@amd.com, teddy.astie@vates.tech,
@@ -105,7 +105,6 @@ Cc: ross.lagerwall@citrix.com, andrew.cooper3@citrix.com,
  xen-devel@lists.xenproject.org
 References: <21b02d5c-4e21-43fb-b371-201a125bfdbb@citrix.com>
  <cover.1791625578.git.chunjie.zhu@citrix.com>
- <a3e8db38ebb9cb6cfcf06c26e93522b3b95e7566.1791625578.git.chunjie.zhu@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,24 +130,33 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <a3e8db38ebb9cb6cfcf06c26e93522b3b95e7566.1791625578.git.chunjie.zhu@citrix.com>
+In-Reply-To: <cover.1791625578.git.chunjie.zhu@citrix.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1791885679-D674387B-FC8A72E6/10/78276251493
+X-purgate-ID: tlsNG-720697/1791885756-668B42AC-AD50090D/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 588
+X-purgate-size: 930
 
 On 10.10.2026 12:13, chunjie.zhu@citrix.com wrote:
-> From: Ross Lagerwall <ross.lagerwall@citrix.com>
+> From: Chunjie Zhu <chunjie.zhu@citrix.com>
 > 
-> As per the VMRUN pseudocode in APM Vol 3 3.38, the VMCB's NP_ENABLE and
-> N_CR3 fields are not set during a VMEXIT so don't do this when updating
-> VMCB(1-2). At the same time, cleanup the somewhat bogus and irrelevant
-> comments. Not clearing N_CR3 does not introduce a security hole as
-> stated since L1 can set it regardless and it is never used directly when
-> running L2.
-> 
-> Signed-off-by: Ross Lagerwall <ross.lagerwall@citrix.com>
+> This series simplifies nested SVM execution by removing pending and
+> deferred state from the VMRUN and VMEXIT paths, and includes the nested
+> SVM / Viridian fixes the rework depends on.
 
-Where did Teddy's R-b go? 
+After having spotted the 3rd questionable patch in this series now (see
+below) I have to ask: What is this series aiming at? Mixing random
+changes and adding confusion by improper versioning, due to inclusion
+of patches which were previously submitted standalone, doesn't help.
+
+> Stephen Cheng (1):
+>   x86/svm: require VMSAVEvirt for nested virt
+
+This patch was at v3 already. Now you're moving it back to v2.
+
+Before I go look further, may I please ask that the state of things be
+properly clarified here? And - meanwhile I have to assume almost the
+entire series is affected by this - where's your own S-o-b?
+
+Jan
 
