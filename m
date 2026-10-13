@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DBD6CC6B03
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 09:05:56 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446785.1662875 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 75CF8CC6B08
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 09:06:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1446791.1662884 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGYSD-0005gy-Ew; Tue, 13 Oct 2026 09:05:49 +0000
+	id 1xGYSv-00069z-NP; Tue, 13 Oct 2026 09:06:33 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446785.1662875; Tue, 13 Oct 2026 09:05:49 +0000
+Received: by outflank-mailman (output) from mailman id 1446791.1662884; Tue, 13 Oct 2026 09:06:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGYSD-0005gr-CB; Tue, 13 Oct 2026 09:05:49 +0000
-Received: by outflank-mailman (input) for mailman id 1446785;
- Tue, 13 Oct 2026 09:05:48 +0000
+	id 1xGYSv-00069s-KY; Tue, 13 Oct 2026 09:06:33 +0000
+Received: by outflank-mailman (input) for mailman id 1446791;
+ Tue, 13 Oct 2026 09:06:32 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGYSC-0005fw-4V
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 09:05:48 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGYSt-00069h-U3
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 09:06:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGYSB-00CGXx-39
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 11:05:47 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xGYSt-001JZA-Ay
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 11:06:31 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acdf468-8faa-0a2a0a5109dd-0a2a4507e806-14
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 11:05:47 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6acdf48b-8faa-0a2a0a5109dd-0a2a4504ad52-42
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 11:06:31 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acdf46a-b4ea-0a2a45070019-d155802cecfe-3
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 11:05:47 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4a1688d7769so22758605e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 02:05:46 -0700 (PDT)
+ id 6acdf497-b57f-0a2a45040019-d1558032ec23-3
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 11:06:31 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4a1688d7769so22765525e9.0
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 02:06:31 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18d12fe04sm216034835e9.4.2026.10.13.02.05.45
+ 5b1f17b1804b1-4a190344032sm357590515e9.15.2026.10.13.02.06.29
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Oct 2026 02:05:45 -0700 (PDT)
+ Tue, 13 Oct 2026 02:06:29 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,49 +54,49 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791882346; x=1792487146; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791882391; x=1792487191; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=J8/RNEe1LKfSGu/L13fCO0FEseR/7iXO6dPS72xbEQc=;
-        b=aZCKUm7eHRPW2Th12/gcAUP7wPBvhlvnXAnC1+/I/M8KEN8n9Au46RylSx1XswaeUF
-         kgdNPgBV1Pto6zjM1nmWjRC4ctdKdQgUCglGb1BS2Xbyz33evCxu8eOXwU8E3yopJZJ8
-         4H3sjNJyAmYHmw1LldovUmWYj1/qJ4izgb51ViFGQy2YKuV20kYhOsHNM6FBPvq/pY8a
-         XbJod5xWy1f9/OysnDKEt+e9rH0bd1ktprBHt6GGpNo6fusSl4iYOoFCplPWWori+Liz
-         oVvxxcCP6rCM4N+Rrx2CYuKWw++noMhKTNQQr4WyCpE+qTVh5SdHAC77zutswDAlj8ln
-         DEqw==
+        bh=OPUrzZTmhVKr/M+6DGPNI55GA5hLgwRu4wcXea+aI0c=;
+        b=IJbZOOs3ZMXjcKZmdzCXE6C4Srz5gYniO3zutcPTMCd9iZ5N1MW1NckgNlIhasX098
+         IDZBw6uCJlYCfS39xHa/W4WnvhLUXfjKCZiZLa6sOVDIuwBz6hrv9GnczH/HUgF6kupT
+         zQIxdM/oHIQj5zYhLx6cjDtK+DZH9Oyf0Oh5ebeirpJqTYym8E1cEr/wJsNTg44Nd8sY
+         rf9T8COZhfribY8pgip6q45Biyl9TxyX9Ug2kZrGb66cwMtr0JsHm1u0s9+w7RC66bTH
+         oP6VJtFmjMOTNAvKY220NpyiP4+XCcQW88VeUKkfli59FjgMHlpUmLurypW4e/Hb6jWH
+         w04A==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791882346; x=1792487146;
+        d=1e100.net; s=20260707; t=1791882391; x=1792487191;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=J8/RNEe1LKfSGu/L13fCO0FEseR/7iXO6dPS72xbEQc=;
-        b=oX/tmQRzPGLHJZvda/Iy1wguRuHN64YkisB4FD1ZMiF9BBYQVtR1Cqbrmam2rpzaAr
-         wTGONkE4yt0EEcx8DsjyNbLLKl4H0jyHnY1B6EE7ycKrHs86PzRbgcH90PtH4kzvAhdK
-         9LmxPe7QgOs5n+CR4MnhEUmm5+OSjJkTrHpuSXodhj1Ma3WN3OIBOcpSKH151kXNZVDC
-         MSRiScJDND4XMCCuPHQ1ofLKMddbP/yXxEGqFmxROVqeSAD61OX/jkdwqFY+pAenEjLo
-         WY4TfRxyAAv6aWSyiyxnNmKYUVKOTGgStep6kxd6WZvQsC6B2JhCN8++xNh+4yE6016O
-         CJ6g==
-X-Gm-Message-State: AFq9FYLQMNORbDMtpSkgknUKV4Vw2QJR1BdW6twL3w7JzSOWYsR20/TF
-	IxNn/qJiSeCV64ia/Iv0CsGrhakroj9c/KURqO9ZA3snfaSOeS3KmOGR4Ri69wSK7ZPMDsenOZN
-	UBifnnw==
-X-Gm-Gg: AYBFou35/TEAWT7YA7gAMbUO/mVlF28r0n8bMfFsZ3CRspdmjZz6tBS+lr5deQX8hsb
-	Y+i54d5QvLzr8+c2VDHU47ShBj53ci6ynj06aIMOCivOm07y2OSQcjOYjCFZFp+yBk7eIuQ+NLS
-	rP929h/x0wwi7eBdCV9nGJ7EB/PTfHIjQUDto23jW5AxDVpkifQvPIk4tz6ppCHcsDNDuKRaIDN
-	OCWMzn/xii7EcNlTC/KnWNsJ0fCokaEHQNsVIOo0sTORWMr3BiWMMOZVqwenoc4yM7f4l2p0Hff
-	6vQcuNDP0YuFl8hhRJBDU387aeexxreP5XjXHA54q7PCSGmepgPZ9xLxtPnw91ZERspWsmxEGr1
-	0FjUXbVBhugIzDsSBX0Z0Q9ZOXkKUqkf/W1OMRfUYhY8MJlTROIAmvy/Ppr1H6wDgMY7ejxm4/s
-	ObcE35JNzOME92EMksH70xPLz2aAwN1ycRX6cjchxxZ9SbZQV/1gBNRomvjCcqcqNMqdZnLYRO5
-	i4psrJQeTRL0iSgcLEIM6M91xME7ZWG+l1QevM2hR4HFQIn+Vqm4WJcYpSriw==
-X-Received: by 2002:a05:600c:198c:b0:4a0:1c0e:b136 with SMTP id 5b1f17b1804b1-4a18e4cdbfbmr237371805e9.29.1791882346406;
-        Tue, 13 Oct 2026 02:05:46 -0700 (PDT)
-Message-ID: <d7ddc188-0e92-46c3-a38b-9a628eb60cd2@suse.com>
-Date: Tue, 13 Oct 2026 11:05:44 +0200
+        bh=OPUrzZTmhVKr/M+6DGPNI55GA5hLgwRu4wcXea+aI0c=;
+        b=Zo+zTtXm3dvZzehu+bGJ1IgDLXi+/y5JGS21i/2JM1e3TW/33A6+DvtaLkFCDm8tR5
+         cHFFf0VCVvDF5xX8MPQKpTY5SWSu9v7USJQqj8DaQWP8LZ74Kt6f23PT/iklX2RIvexo
+         NesQrnz+vfmIq/87WPHfLSa5Z/jhDp7KFFUC+savY0HDo6zjIqpyAYM44bY4WM3THe0C
+         l+ZhTzzVCS/AhPZ+AZOm5mFU7Nnqqim/KcsvZcpPNPTVgn+V0kbW+eHTit8pcnz8xA3y
+         xNwPdD/adfDwLoiOrOnJ4MLsD9L6xSyb3qzzPAjdOLlpvyhYnQatbUGtNlQgakW97BxU
+         T9ng==
+X-Gm-Message-State: AFq9FYKKr8za3szIANMaQg/5KzjqmTIXk9sMXxn96qTeGNiolmkgaxGS
+	esQ/DtZgVA6LXlYe0hi3TZGd8fvj/5riRvqe+eqd4I39FodraH0YW3BNnibYCqqUd4kKhdR/uZ2
+	F53Bghw==
+X-Gm-Gg: AYBFou34LYUPdLGpNfr50yDyublVIJLNGMOQYToPR0vAp7GPg6u872hEF1xMgc1BH3X
+	SuqK+1pgftzvvPyFUVTcSf3uOF1GGmMOrbWgXhypgXz7N9HkSyTeJwYSbQbTwalODm+V2u6Jay+
+	3jWIU+lwk5l2fh5rpT0d+Tw/C+vPNBdBRLKdH5NLbqfnB2feDEiisQRry2BDcOomfmmyzKawJyh
+	9Mf9yKrFNvBthtbb7ufQqrDFx2DsLAdnVyBhWNrBW7Rmp70YixkpnFvb7Mgg58jekXdFlp1O3+0
+	DrqQV/bEgzmV3OUTnR+6xG83DyKL0Tt4SoLmRREMwKkbVpBqPJq4law4cAisfVKCYEh0nKnBwd0
+	p2sxCUmBuNMi4bZzsQHQRzfxcJ22g9a9LfxUKafj2ZZepj6pfXnlLXvyq+NNfCEJ7s335zrOAYX
+	tEsE5a0ElVbx+7DpoG4om39+K8c+U5Fob0mROsJd7D8EPFS3hnJWTwAEZQuzVyxvJ/eHxzM1YGd
+	goIICqQmgsM0M1L8DFewa4JJHHHpfpTWDEG56/fbTlPvNxeeWr2kc1QIMN5dQ==
+X-Received: by 2002:a05:600c:83c7:b0:4a1:7733:5102 with SMTP id 5b1f17b1804b1-4a18e4a3fc8mr222669895e9.15.1791882390595;
+        Tue, 13 Oct 2026 02:06:30 -0700 (PDT)
+Message-ID: <f404f8fd-f1ec-476e-bc7b-b6ad8909501a@suse.com>
+Date: Tue, 13 Oct 2026 11:06:27 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH 1/2] x86: constify local variables in mapcache_current_vcpu()
+Subject: [PATCH 2/2] x86: replace this_cpu() uses in mapcache_current_vcpu()
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -130,44 +130,60 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <942facb0-c42b-4f09-9081-6cfb006c7bfc@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ef75cf/1791882347-35CC7AE4-8121BE56/10/78276251493
+X-purgate-ID: tlsNG-ebf023/1791882391-C06DAB50-35FC6238/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1646
+X-purgate-size: 2240
 
-As of the referenced commit v won't be returned from the function anymore.
-Yet that was the sole reason for it to not be pointer-to-const. curr,
-which was introduced by that change, had no reason to be pointer-to-non-
-const from the start.
+We have accumulated three of them, plus a hidden similar 4th construct
+from smp_processor_id(). Latch the result of the latter into a local
+variable and use the slightly more efficient per_cpu() instead.
 
-Amends: 622c9a5ba95d ("x86/mm: accurately track which vCPU page-tables are loaded")
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
 ---
-I was heavily tempted to also replace the smp_processor_id() at this
-occasion (by curr->processor). With gcc16, that leads to the function
-actually being inlined (in debug builds), i.e. a significant change in
-generated code, and a measurable increase in code size. From the function
-being declared "inline", that looks to have been the intention, yet then
-that use of "inline" doesn't quite fit our principles. The main reasoning
-for this as a secondary change would be:
-- "curr" could be dropped (instead of having const added) if code
-  generated from ASSERT() wouldn't matter quality-wise,
-- if generated code quality matters there, then the unnecessary use of
-  smp_processor_id() should matter, too.
-However, an adjustment along these lines may better fit in a subsequent
-change dealing with the repeated this_cpu() here.
+A 5th such construct is "current", yet to replace that we'd need to open-
+code both it (i.e. get_current()) and then also smp_processor_id(). I
+wasn't quite sure whether that would be deemed acceptable.
+
+Like indicated in the earlier patch, this similarly leads to the function
+actually being inlined (and hence generated code size actually growing) in
+gcc16 debug builds. In release builds (with older gcc) the function is
+being inlined no matter what. Overall, having looked at generated code
+differences, I'm not quite sure anymore whether the earlier observed
+inefficiency with repeated this_cpu() really is much of an issue (here or
+maybe even more generally).
 
 --- a/xen/arch/x86/domain_page.c
 +++ b/xen/arch/x86/domain_page.c
-@@ -20,8 +20,8 @@
+@@ -20,7 +20,8 @@
  
  static inline struct vcpu *mapcache_current_vcpu(void)
  {
--    struct vcpu *v = this_cpu(pgtable_vcpu);
--    struct vcpu *curr = current;
-+    const struct vcpu *v = this_cpu(pgtable_vcpu);
-+    const struct vcpu *curr = current;
+-    const struct vcpu *v = this_cpu(pgtable_vcpu);
++    unsigned int cpu = smp_processor_id();
++    const struct vcpu *v = per_cpu(pgtable_vcpu, cpu);
+     const struct vcpu *curr = current;
  
      /*
-      * During early boot pgtable_vcpu is not set, callers must handle NULL.
+@@ -37,9 +38,9 @@ static inline struct vcpu *mapcache_curr
+      * change the page tables under our feet an invalidate any in-use mapcache
+      * entries.
+      */
+-    if ( unlikely(this_cpu(curr_vcpu) != curr) )
++    if ( unlikely(per_cpu(curr_vcpu, cpu) != curr) )
+     {
+-        ASSERT(curr == idle_vcpu[smp_processor_id()]);
++        ASSERT(curr == idle_vcpu[cpu]);
+         sync_local_execstate();
+         /* We must now be running on the idle page table. */
+         ASSERT(cr3_pa(read_cr3()) == __pa(idle_pg_table));
+@@ -51,7 +52,7 @@ static inline struct vcpu *mapcache_curr
+      * FLUSH_VCPU_STATE IPI has done so behind our back.  Use ACCESS_ONCE to
+      * ensure the compiler never returns the locally cached pgtable_vcpu value.
+      */
+-    return ACCESS_ONCE(this_cpu(pgtable_vcpu));
++    return ACCESS_ONCE(per_cpu(pgtable_vcpu, cpu));
+ }
+ 
+ #define mapcache_l2_entry(e) ((e) >> PAGETABLE_ORDER)
 
 
