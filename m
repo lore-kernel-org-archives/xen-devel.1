@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id DD7A4CC6B0F
-	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 22:40:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448336.1664364 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30A1ECC6B12
+	for <xen-devel@archiver.kernel.org>; Tue, 13 Oct 2026 22:40:48 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448337.1664372 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGlAh-0007Xm-4K; Tue, 13 Oct 2026 22:40:35 +0000
+	id 1xGlAm-0007tN-AS; Tue, 13 Oct 2026 22:40:40 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448336.1664364; Tue, 13 Oct 2026 22:40:35 +0000
+Received: by outflank-mailman (output) from mailman id 1448337.1664372; Tue, 13 Oct 2026 22:40:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGlAh-0007Xb-19; Tue, 13 Oct 2026 22:40:35 +0000
-Received: by outflank-mailman (input) for mailman id 1448336;
- Tue, 13 Oct 2026 22:40:34 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xGlAm-0007tG-7i; Tue, 13 Oct 2026 22:40:40 +0000
+Received: by outflank-mailman (input) for mailman id 1448337;
+ Tue, 13 Oct 2026 22:40:39 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <3XrPOagcKCV0DMJB9MNBJJBG9.7JHS9I-89Q9GGDNON.S9IKMJE97O.JMB@flex--irogers.bounces.google.com>)
- id 1xGlAg-0007WY-71
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 22:40:34 +0000
+ <3Y7POagcKCWIIROGERSGOOGLE.COMXEN-DEVELLISTS.XENPROJECT.ORG@flex--irogers.bounces.google.com>)
+ id 1xGlAk-0007pR-SP
+ for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 22:40:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGlAf-00Eh2E-KD
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 00:40:33 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xGlAk-009GuA-2U
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 00:40:38 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <3XrPOagcKCV0DMJB9MNBJJBG9.7JHS9I-89Q9GGDNON.S9IKMJE97O.JMB@flex--irogers.bounces.google.com>)
- id 6aceb35a-e002-0a2a0a5209dd-0a2a450bd1da-10
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:33 +0200
-Received: from [74.125.82.200] (helo=mail-dy1-f200.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <3Y7POagcKCWIIROGERSGOOGLE.COMXEN-DEVELLISTS.XENPROJECT.ORG@flex--irogers.bounces.google.com>)
+ id 6aceb34e-8faa-0a2a0a5109dd-0a2a4509c84a-12
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:38 +0200
+Received: from [74.125.82.70] (helo=mail-dl1-f70.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <3XrPOagcKCV0DMJB9MNBJJBG9.7JHS9I-89Q9GGDNON.S9IKMJE97O.JMB@flex--irogers.bounces.google.com>)
- id 6aceb360-b7e8-0a2a450b0019-4a7d52c8bdd3-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:33 +0200
-Received: by mail-dy1-f200.google.com with SMTP id
- 5a478bee46e88-33c35f5ca6cso7840779eec.1
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 15:40:33 -0700 (PDT)
+ <3Y7POagcKCWIIROGERSGOOGLE.COMXEN-DEVELLISTS.XENPROJECT.ORG@flex--irogers.bounces.google.com>)
+ id 6aceb364-be1a-0a2a45090019-4a7d5246c420-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:40:37 +0200
+Received: by mail-dl1-f70.google.com with SMTP id
+ a92af1059eb24-1663fb7e005so4564876c88.0
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 15:40:37 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,45 +52,45 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Type:Cc:To:From:Subject:Message-ID:References:Mime-Version:In-Reply-To:Date"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1791931231; x=1792536031; darn=lists.xenproject.org;
+        d=google.com; s=20251104; t=1791931236; x=1792536036; darn=lists.xenproject.org;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=E3db36lwsPWQArDIHzP6eqDHTacNJpd6D0FMiQjZlVc=;
-        b=kB3ric9bZZKCJLDWJEBGQf40QadbfDOVFWIFp5iKE4kkW8ly1Aq0nfu+FYraj8H/La
-         hpUjkR+UutJ0CXsCHpY9nEgBbrWpcSZZPlb3pNwzebf4I7bwQLMVR+WPbNj1J2nCFF2M
-         GmiSC/y88xDFEZjWXcgbXzaguAWe1kbBGUxWKnlTnUzNk0plOr8WnUYFN1+52ei7lMrD
-         39RXacg4MorsGHWO1eV4eX9HrXeK2CUxl69goX44xTSmBHJRRj8UFTWLLAH/agaPAxFf
-         6RKOfCUakn169RZQb5KYm+SsioJIcgHepjDdviDWTuAUiFpZ4jNc3Xlm6Jrf0bMjYAop
-         lGfg==
+        bh=5eLIAAx2L+9DvCRKYW0jDBbtdiyv3jUNIhafttj/B0g=;
+        b=WVfjU86RK8GWjB2A/gzsaiso4A+6/lpvBTmjDqf9xL/Jo1Yf3xtV1qdwwC16D9v95N
+         3WBf9pGGAKr1f15dS/OGqx2D6FAVDTUepiAW3o+S8VLIobLDnQ3YOK8GOPBCQokSnGEM
+         aKkvHoiznv9cioAXQAhNyZMMevlFPSH9wctxnJCq4LCeM5nSPHLYd5K6CZVDxwk59NeR
+         eXxNhJ8t2VnN8DehSJhxapF96YxV7BbinPz5FTdjOYgkoyERRlRMqzKNEV/r7M7YdakE
+         /eSq73Ay9yFv5AogZDZlETMDncH1cr/dcloTNwfK0B5LDHDrLsg5wGgmaG5vGbaxtVdx
+         T04Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791931231; x=1792536031;
+        d=1e100.net; s=20260707; t=1791931236; x=1792536036;
         h=content-type:cc:to:from:subject:message-id:references:mime-version
          :in-reply-to:date:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=E3db36lwsPWQArDIHzP6eqDHTacNJpd6D0FMiQjZlVc=;
-        b=Vg7ORvOB6aIzR2UrqO3uEfYmfn5a2KHgQCdO+uVWC5aALdF1x9Eev9dTHAFEBMyi3o
-         wZdryshXnPEAiT4mRePM5d3eFNeG8kPYgPrEgniGJLS2GA5W37MUKe9ojRgnwcLtSigW
-         T8t869MwEJmtZQ1Ca2Tn9viH42f8hlpRqU+bjBiMgN1a7D4erLIZ+GbLO2RNPxLlN5AV
-         cHPt8+9jwApjWKRR0eeNzstbjIu4ftvbHBq31TmJVgbjZDewBD+ewltxj26ooZOuBCCT
-         TpXbvQcw3XBkLT682hFjgPuED/S/KE/tJ3XZrdQnBOX4w4HN7cYZ6jCZrWkJq95T9qNR
-         BbxQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzHEAt94h9uMqtwHL4Dj/KMS+6aPr9DgeSP6GsA7r837xKiYj53inVktvqtskIk2QyunBNBGz+v7uc=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYJELABkKD8wGLbXDqi2rdSt7s0I+xOP8W4sW3zGJK0cCPGG/ip8
-	JQ6Ja533injx+3UUVNpzIee50B4tRHAuNNXSSQXiUulY1i5CFTRhYuRbyY3HMjrs0eUZ9tq4lfQ
-	7z8JUnvl25w==
-X-Received: from dybmd37.prod.google.com ([2002:a05:7301:1825:b0:351:1da6:c2e7])
- (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:7301:78cb:b0:351:515b:4e85
- with SMTP id 5a478bee46e88-3537e088bd7mr19706222eec.16.1791931230851; Tue, 13
- Oct 2026 15:40:30 -0700 (PDT)
-Date: Tue, 13 Oct 2026 15:39:43 -0700
+        bh=5eLIAAx2L+9DvCRKYW0jDBbtdiyv3jUNIhafttj/B0g=;
+        b=s2OpxmNm6VhYRfulJ3RFitgOojvkNhopJxisotRipOx3cfxxPM6b9e5QhsLGnAm63B
+         aZcEPD1WIjdFGi9E58X68PKzvPTiZ5t2Q8mbMxdDJ7v4UQ90Rq5jmFMVB5YAvwJaz2vJ
+         +59ucrm0O6os8SLVUX51drP6feRUsn1UwrFNRXpgoe93xrNS1sc0GzpHN25r5XG1GaIb
+         hlh4mknT7Y5ND8TCG6KPrHdhaLSRkCwfMYVc55atJIe1OkGkJItXchRsBWPwHP9p1dlq
+         bMTHp1jVjJNH4Iv5vBT12tIbqhwznns1WDyRAzd4S19H9Rsl5ysYIk7mzOupMwIK9sXh
+         Y2uQ==
+X-Forwarded-Encrypted: i=1; AKwUvBw32FTv72yeIZ/4UJkJRzZ35A6JXZbGjr+n/fKzym+0+cjt825gqv8oR85tBp4r1MLLadcB31yCa/8=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYLPhwBiEsPv7VOFVB2pZw6U7yvM5bl4HHGgf75Q/2IEtl1LKLGr
+	QAU4MeVLhE6V+RMOLSrfR0+1Rj9mBqFN4vYKBuxXItO6y+4Zhx5cn9FFNQgnGEP2Og8HpBopV4O
+	btHKNxpaXyQ==
+X-Received: from dlbuu9.prod.google.com ([2002:a05:7022:7e89:b0:16c:bd18:1ee2])
+ (user=irogers job=prod-delivery.src-stubby-dispatcher) by 2002:a05:701b:231b:b0:165:55e2:2d69
+ with SMTP id a92af1059eb24-16a640fcc35mr21018967c88.46.1791931235508; Tue, 13
+ Oct 2026 15:40:35 -0700 (PDT)
+Date: Tue, 13 Oct 2026 15:39:45 -0700
 In-Reply-To: <20261013223946.1836757-1-irogers@google.com>
 Mime-Version: 1.0
 References: <20261013223946.1836757-1-irogers@google.com>
 X-Mailer: git-send-email 2.56.0.385.gd3acb90ef8-goog
-Message-ID: <20261013223946.1836757-9-irogers@google.com>
-Subject: [PATCH 08/11] s390/sclp_mem: Allocate struct sclp_mem dynamically and
- add kobject release
+Message-ID: <20261013223946.1836757-11-irogers@google.com>
+Subject: [PATCH 10/11] drm/amdkfd: Free queue in procfs_queue_type kobject
+ release callback
 From: Ian Rogers <irogers@google.com>
 To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J . Wysocki" <rafael@kernel.org>, 
 	Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, Kees Cook <kees@kernel.org>, 
@@ -118,180 +118,80 @@ Cc: Nick Desaulniers <ndesaulniers@google.com>, Bill Wendling <morbo@google.com>
 	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org, 
 	Ian Rogers <irogers@google.com>
 Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-42698a/1791931233-184CB9EA-E98CBEF7/0/0
+X-purgate-ID: tlsNG-bad1c0/1791931238-BDEC6034-B6F97FF2/0/0
 X-purgate-type: clean
-X-purgate-size: 5639
+X-purgate-size: 2469
 
-sclp_init_mem() allocated a single array of struct sclp_mem with
-kzalloc_objs() and registered each embedded kobject using a kobj_type
-without a .release callback. Allocate each struct sclp_mem individually
-with kzalloc_obj() instead and add sclp_mem_release() to free it.
+struct queue embeds a struct kobject (q->kobj) for procfs entries, but
+procfs_queue_type had no .release callback and uninit_queue() freed q
+immediately after kfd_procfs_del_queue() called kobject_put(&q->kobj).
+With CONFIG_DEBUG_KOBJECT_RELEASE=y, this causes a use-after-free.
 
-Fixes: ff18dcb19aab ("s390/sclp: Add support for dynamic (de)configuration of memory")
+Add kfd_procfs_queue_release() to free struct queue from the kobject
+release callback, change kfd_procfs_del_queue() to only remove the
+kobject from sysfs via kobject_del(), and drop the final reference in
+uninit_queue() via kobject_put().
+
+Fixes: 6d220a7e7971 ("drm/amdkfd: Add queue information to sysfs")
 Assisted-by: Antigravity:gemini-3.1-pro
 Signed-off-by: Ian Rogers <irogers@google.com>
 ---
- drivers/s390/char/sclp_mem.c | 73 +++++++++++++++++-------------------
- 1 file changed, 34 insertions(+), 39 deletions(-)
+ drivers/gpu/drm/amd/amdkfd/kfd_process.c | 10 ++++++++--
+ drivers/gpu/drm/amd/amdkfd/kfd_queue.c   |  5 ++++-
+ 2 files changed, 12 insertions(+), 3 deletions(-)
 
-diff --git a/drivers/s390/char/sclp_mem.c b/drivers/s390/char/sclp_mem.c
-index 6df1926d4c62..f7c161e0d836 100644
---- a/drivers/s390/char/sclp_mem.c
-+++ b/drivers/s390/char/sclp_mem.c
-@@ -49,11 +49,6 @@ struct sclp_mem {
- #endif
+diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_process.c b/drivers/gpu/drm/amd/amdkfd/kfd_process.c
+index 0a7c1900da95..6099cb893573 100644
+--- a/drivers/gpu/drm/amd/amdkfd/kfd_process.c
++++ b/drivers/gpu/drm/amd/amdkfd/kfd_process.c
+@@ -510,7 +510,15 @@ static const struct sysfs_ops procfs_queue_ops = {
+ 	.show = kfd_procfs_queue_show,
  };
  
--struct sclp_mem_arg {
--	struct sclp_mem *sclp_mems;
--	struct kset *kset;
--};
--
- struct assign_storage_sccb {
- 	struct sccb_header header;
- 	u16 rn;
-@@ -304,7 +299,15 @@ static ssize_t sclp_memmap_on_memory_store(struct kobject *kobj, struct kobj_att
- 	return rc ? rc : count;
- }
- 
-+static void sclp_mem_release(struct kobject *kobj)
++static void kfd_procfs_queue_release(struct kobject *kobj)
 +{
-+	struct sclp_mem *sclp_mem = container_of(kobj, struct sclp_mem, kobj);
++	struct queue *q = container_of(kobj, struct queue, kobj);
 +
-+	kfree(sclp_mem);
++	kfree(q);
 +}
 +
- static const struct kobj_type ktype = {
-+	.release = sclp_mem_release,
- 	.sysfs_ops = &kobj_sysfs_ops,
+ static const struct kobj_type procfs_queue_type = {
++	.release = kfd_procfs_queue_release,
+ 	.sysfs_ops = &procfs_queue_ops,
+ 	.default_groups = procfs_queue_groups,
  };
- 
-@@ -321,36 +324,40 @@ static struct attribute_group sclp_mem_attr_group = {
- 	.attrs = sclp_mem_attrs,
- };
- 
--static int sclp_create_mem(struct sclp_mem *sclp_mem, struct kset *kset,
--			   unsigned int id, bool config, bool memmap_on_memory)
-+static int sclp_create_mem(struct kset *kset, unsigned int id, bool config,
-+			   bool memmap_on_memory)
- {
-+	struct sclp_mem *sclp_mem;
- 	int rc;
- 
-+	sclp_mem = kzalloc_obj(*sclp_mem);
-+	if (!sclp_mem)
-+		return -ENOMEM;
- 	sclp_mem->memmap_on_memory = memmap_on_memory;
- 	sclp_mem->config = config;
- #ifdef CONFIG_KASAN
- 	sclp_mem->early_shadow_mapped = config;
- #endif
- 	sclp_mem->id = id;
--	kobject_init(&sclp_mem->kobj, &ktype);
--	rc = kobject_add(&sclp_mem->kobj, &kset->kobj, "memory%d", id);
--	if (rc)
-+	rc = kobject_init_and_add(&sclp_mem->kobj, &ktype, &kset->kobj,
-+				  "memory%d", id);
-+	if (rc) {
-+		kobject_put(&sclp_mem->kobj);
- 		return rc;
--	return sysfs_create_group(&sclp_mem->kobj, &sclp_mem_attr_group);
-+	}
-+	rc = sysfs_create_group(&sclp_mem->kobj, &sclp_mem_attr_group);
-+	if (rc) {
-+		kobject_put(&sclp_mem->kobj);
-+		return rc;
-+	}
-+	return 0;
- }
- 
- static int sclp_create_configured_mem(struct memory_block *mem, void *argument)
- {
--	struct sclp_mem *sclp_mems;
--	struct sclp_mem_arg *arg;
--	struct kset *kset;
--	unsigned int id;
-+	struct kset *kset = argument;
- 
--	id = mem->dev.id;
--	arg = (struct sclp_mem_arg *)argument;
--	sclp_mems = arg->sclp_mems;
--	kset = arg->kset;
--	return sclp_create_mem(&sclp_mems[id], kset, id, true, false);
-+	return sclp_create_mem(kset, mem->dev.id, true, false);
- }
- 
- static void __init align_to_block_size(unsigned long *start,
-@@ -368,8 +375,7 @@ static void __init align_to_block_size(unsigned long *start,
- 	*size = size_align;
- }
- 
--static int __init sclp_create_standby_mems_merged(struct sclp_mem *sclp_mems,
--						  struct kset *kset, u16 rn)
-+static int __init sclp_create_standby_mems_merged(struct kset *kset, u16 rn)
- {
- 	unsigned long start, size, addr, block_size;
- 	static u16 first_rn, num;
-@@ -394,7 +400,7 @@ static int __init sclp_create_standby_mems_merged(struct sclp_mem *sclp_mems,
- 		goto skip_add;
- 	for (addr = start; addr < start + size; addr += block_size) {
- 		id = addr / block_size;
--		rc = sclp_create_mem(&sclp_mems[id], kset, id, false,
-+		rc = sclp_create_mem(kset, id, false,
- 				     mhp_supports_memmap_on_memory());
- 		if (rc)
- 			break;
-@@ -405,45 +411,34 @@ static int __init sclp_create_standby_mems_merged(struct sclp_mem *sclp_mems,
- 	return rc;
- }
- 
--static int __init sclp_create_standby_mems(struct sclp_mem *sclp_mems, struct kset *kset)
-+static int __init sclp_create_standby_mems(struct kset *kset)
- {
- 	struct memory_increment *incr;
- 	int rc = 0;
- 
- 	list_for_each_entry(incr, &sclp_mem_list, list) {
- 		if (incr->standby)
--			rc = sclp_create_standby_mems_merged(sclp_mems, kset, incr->rn);
-+			rc = sclp_create_standby_mems_merged(kset, incr->rn);
- 		if (rc)
- 			return rc;
+@@ -550,7 +558,6 @@ int kfd_procfs_add_queue(struct queue *q)
+ 	if (ret < 0) {
+ 		pr_warn("Creating proc/<pid>/queues/%u failed",
+ 			q->properties.queue_id);
+-		kobject_put(&q->kobj);
+ 		return ret;
  	}
--	return sclp_create_standby_mems_merged(sclp_mems, kset, 0);
-+	return sclp_create_standby_mems_merged(kset, 0);
+ 
+@@ -699,7 +706,6 @@ void kfd_procfs_del_queue(struct queue *q)
+ 		return;
+ 
+ 	kobject_del(&q->kobj);
+-	kobject_put(&q->kobj);
  }
  
- static int __init sclp_init_mem(void)
+ int kfd_process_create_wq(void)
+diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_queue.c b/drivers/gpu/drm/amd/amdkfd/kfd_queue.c
+index 15eeaaebbbcd..8d1afc5b47e2 100644
+--- a/drivers/gpu/drm/amd/amdkfd/kfd_queue.c
++++ b/drivers/gpu/drm/amd/amdkfd/kfd_queue.c
+@@ -83,7 +83,10 @@ int init_queue(struct queue **q, const struct queue_properties *properties)
+ 
+ void uninit_queue(struct queue *q)
  {
--	const unsigned long block_size = memory_block_size_bytes();
--	unsigned int max_sclp_mems;
--	struct sclp_mem *sclp_mems;
--	struct sclp_mem_arg arg;
- 	struct kset *kset;
- 	int rc;
- 
--	max_sclp_mems = roundup(sclp.rnmax * sclp.rzm, block_size) / block_size;
--	/* Allocate memory for all blocks ahead of time. */
--	sclp_mems = kzalloc_objs(struct sclp_mem, max_sclp_mems);
--	if (!sclp_mems)
--		return -ENOMEM;
- 	kset = kset_create_and_add("memory", NULL, firmware_kobj);
- 	if (!kset)
- 		return -ENOMEM;
- 	/* Initial memory is in the "configured" state already. */
--	arg.sclp_mems = sclp_mems;
--	arg.kset = kset;
--	rc = for_each_memory_block(&arg, sclp_create_configured_mem);
-+	rc = for_each_memory_block(kset, sclp_create_configured_mem);
- 	if (rc)
- 		return rc;
- 	/* Standby memory is "deconfigured". */
--	return sclp_create_standby_mems(sclp_mems, kset);
-+	return sclp_create_standby_mems(kset);
+-	kfree(q);
++	if (q && q->kobj.state_initialized)
++		kobject_put(&q->kobj);
++	else
++		kfree(q);
  }
  
- static void __init insert_increment(u16 rn, int standby, int assigned)
+ #if IS_ENABLED(CONFIG_HSA_AMD_SVM)
 -- 
 2.56.0.385.gd3acb90ef8-goog
 
