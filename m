@@ -4,53 +4,61 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C3B3FCC6B1A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 11:09:24 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448773.1664797 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 38A5DCC6B1A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 11:14:18 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448785.1664805 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGwr7-0002Kh-FV; Wed, 14 Oct 2026 11:09:09 +0000
+	id 1xGwvq-0004DV-0P; Wed, 14 Oct 2026 11:14:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448773.1664797; Wed, 14 Oct 2026 11:09:09 +0000
+Received: by outflank-mailman (output) from mailman id 1448785.1664805; Wed, 14 Oct 2026 11:14:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGwr7-0002Ka-Cg; Wed, 14 Oct 2026 11:09:09 +0000
-Received: by outflank-mailman (input) for mailman id 1448773;
- Wed, 14 Oct 2026 11:09:08 +0000
+	id 1xGwvp-0004DO-U9; Wed, 14 Oct 2026 11:14:01 +0000
+Received: by outflank-mailman (input) for mailman id 1448785;
+ Wed, 14 Oct 2026 11:14:01 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mark.caveayland@nutanix.com>) id 1xGwr6-0002KU-HH
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 11:09:08 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGwvp-0004DI-12
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 11:14:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGwr5-00CzCV-SW
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 13:09:07 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xGwvo-00D0Ei-E4
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 13:14:00 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mark.caveayland@nutanix.com>)
- id 6acf62c5-8faa-0a2a0a5109dd-0a2a4507bfa8-48
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 13:09:07 +0200
-Received: from [148.163.155.12] (helo=mx0b-002c1b01.pphosted.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <mark.caveayland@nutanix.com>)
- id 6acf62d1-b4ea-0a2a45070019-94a39b0c7b84-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 13:09:07 +0200
-Received: from pps.filterd (m0127843.ppops.net [127.0.0.1])
- by mx0b-002c1b01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69E8Mm3M3222478; Wed, 14 Oct 2026 04:09:02 -0700
-Received: from sj2pr03cu001.outbound.protection.outlook.com
- (mail-westusazon11022094.outbound.protection.outlook.com [52.101.43.94])
- by mx0b-002c1b01.pphosted.com (PPS) with ESMTPS id 4h9qsxth28-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 14 Oct 2026 04:09:02 -0700 (PDT)
-Received: from PH0PR02MB7159.namprd02.prod.outlook.com (2603:10b6:510:16::8)
- by SA1PR02MB8672.namprd02.prod.outlook.com (2603:10b6:806:1ff::24) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.13; Wed, 14 Oct
- 2026 11:09:00 +0000
-Received: from PH0PR02MB7159.namprd02.prod.outlook.com
- ([fe80::8e97:bc32:822c:b250]) by PH0PR02MB7159.namprd02.prod.outlook.com
- ([fe80::8e97:bc32:822c:b250%4]) with mapi id 15.21.0522.012; Wed, 14 Oct 2026
- 11:09:00 +0000
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6acf63f7-e002-0a2a0a5209dd-0a2a4508e2a0-0
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 13:13:59 +0200
+Received: from [40.93.194.63]
+ (helo=SN4PR0501CU005.outbound.protection.outlook.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6acf63f6-f659-0a2a45080019-285dc23f18ef-4
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 13:13:59 +0200
+Received: from BN9PR03CA0596.namprd03.prod.outlook.com (2603:10b6:408:10d::31)
+ by SA0PR12MB7090.namprd12.prod.outlook.com (2603:10b6:806:2d5::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.15; Wed, 14 Oct
+ 2026 11:13:52 +0000
+Received: from BN1PEPF00006001.namprd05.prod.outlook.com
+ (2603:10b6:408:10d:cafe::62) by BN9PR03CA0596.outlook.office365.com
+ (2603:10b6:408:10d::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.4 via Frontend Transport; Wed, 14
+ Oct 2026 11:13:49 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ BN1PEPF00006001.mail.protection.outlook.com (10.167.243.233) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.522.6 via Frontend Transport; Wed, 14 Oct 2026 11:13:49 +0000
+Received: from Satlexmb09.amd.com (10.181.42.218) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Wed, 14 Oct
+ 2026 06:13:43 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb09.amd.com
+ (10.181.42.218) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Wed, 14 Oct
+ 2026 06:13:43 -0500
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
+ Transport; Wed, 14 Oct 2026 06:13:42 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,239 +70,226 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=proofpoint20171006 header.d=nutanix.com header.i="@nutanix.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector1 header.d=nutanix.com header.i="@nutanix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	proofpoint20171006; bh=ceUQZb/+uXyAFG6dehWJW59UQ6BGwcQSh+PNJeRoX
-	Ok=; b=ylr4m+KzGyp5utofvPE19Lr/Nl302DEWXnGKlBXC0wXaEbSb5U3f8XsE5
-	3UrXv3iZKNjIR0PlEs7v/fZYbLFhcIh+xMN2rneN+EF5dmunkRpQuC0px396/Jhx
-	EJRDonToHcTWTJ2zsDEmb/XvTKiqWbfr5Vd++eByJr4PAfwQIUFIAUcOdG4r3gRn
-	0PAT2AFmcRiwq+1Fy8vjNY1aCsDRVdbLJn8GKm+7ofF40V/8lkTBerEruYsLAiak
-	unHPgZ4H9w4/NWA5MtMtrhGnf6fzPfHfm0J/uwXyHWDd3diqEJHcMn/c8BKAgEUO
-	hDpwDt6z0rXawNmFjAX4kxwqDs+zg==
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ZRCYMtkI2WQae9s7qEjNjDDL++K95zWEmMuBCzwqq2Hb1YpS2gycrfhh7E0Wevqh4D/nYN6LRYHhuF5AEErduPgW37aY0td0QnCjPtZ8uHz2YZ1bPGbjdIEl5mhcpDyQp1t2Fc23ebk/qveaR3bcOAhG/mdbC5njeq3NNAE4dYqi1xDvE9zePsIeV8I8/rIwZq/szAMPKgABwLNPj31rSguH5A1dQU7mBdA0SwoJqjyLF4d/Msazx97Dc7A3dVCaQl6iPw21ylXaSh17LCzJaFBMTD85ZgiHAXNS4ntfND5svZ197yFpcPFJV81IKp/JH7/qKuyl1+Sh9ge/hhpIzg==
+ b=VW/aXjU7g/zxSGYE/AnkqvAZYfia8taqqHRFIUZCuAR4jXRGD9zm9P0GpyDTgAjORthsMEZzQVGLlGLTHkdvqF7ityJwxBwIcB+6H+hYcepCbRFGbAEC4lB+QpZ+U5VQkwvFriaq8XdvBseivrIoWvknpI667p8vGrFHEdrwB2dWbucYv8Cc1uvTlDrV/XwXiZI+vny3aqAXF8A7YHvZv0gP93VzhuJ7+cauDIBXGaBXmF+eb7FiJBbgI3zFyxuDX+jCLPzyznoW/89cVz0GQ+iz2YLFBKj4lTEaSPVkK7jw3+euU4YmA8purUkoSxrEoiM10MsGi9uw9vqCd0xK1g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ceUQZb/+uXyAFG6dehWJW59UQ6BGwcQSh+PNJeRoXOk=;
- b=Ayg5++xZJ7Y82Stbj4a6kuYLzQaDPK5Us/mCQNC/0q3M1xjh6nY7IXDnYIuQEFFUfb0ymzxo9QQD+O5fYLbMAbeiSqufLgVMf7fGKAYOFKEoJOPHvkd2uyaWN0PlNWkFPGXLJzSQK/Xbg7r0bQc4vdHRPVm+Hs0MsA3z0UfbZDAoMV9i+xvHlBbyJ3ylsN09nNonZ3LSRB3XjgjCcOKN8ZFkX6ATfpn4XzS5+CKoy65O4cCy6DOyC2ExXOWcXbcdIFZ0duZptDYfWwFyuMkAQFMOTnbqnl/98oIj9n+xrIWgmgekvXRO71mr6PzsNzonMtuTPW79j0x+i0aXtGPjFg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
- dkim=pass header.d=nutanix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
- s=selector1;
+ bh=QG0iiK5AHSkN91Yj6j7J15cv20E7oo64Eit3FfQ24K8=;
+ b=E9i8k3dkuFdJpu4zKiiCcXIUKSpyUWO//RCQwbicSrMU62qKgFig2z670CaRS+ZAjdY4xPAqhDUGG6NzIBy2lbNUvaQL9CkwDrg/8tp2eYk6zCsTflIYyCP4/PLwxPaKrX7edm1+0kHzt7kJOuZN3yoUpgE2NaRdvLlB7QMZ4GdHpuuSv2cXhSRhOurBXeCTPlP1TOJnwUudGAq1cpt9fV1zfMufT3aSQmQ9MplEF9uy9a/1M/VnZqtzmW2NiZS2eA9PA+73dsz8TB1rAfEnbNH1mWfffH0bdsaRQRaCmsvzp6Fn9gfaqZZg/scBWMYsjwnADe05+BFaszxIpQvXTA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ceUQZb/+uXyAFG6dehWJW59UQ6BGwcQSh+PNJeRoXOk=;
- b=vfAeEfxkjEdLL5PcSk8wTtQfz1u0TdaRwhmSOGWd08vjHfK3jZNoX6F6akujDSGINchpZytdmGiisgDTWJERPYXZHWeLRzwbm8xcRPjFIbbfwx2w6rd4vYLCHptwC/ISZYhIpjoA+/dZKA8qcuqfyOwa8m4PCoBcDz10TfTUI8VjpFHYopL8JwETYd5Ws64bZNaJcxWirXxgqDjDE/u+MmVrjVt/DosdElmCpYEpFCQ/a/8pXW9/zIU48L1rX17S3nXWCrG9w2nndVdrYVS63D+7KCxArt4oapjIpnQEZgavNSjQUWLb2xP9ASb+TmouBQmQDJNJE/9rp3fOF8Ybmw==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nutanix.com;
-Message-ID: <c444a8ed-eb83-4a69-87e5-57c71f3a6d01@nutanix.com>
-Date: Wed, 14 Oct 2026 12:08:55 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 13/22] i8259.c: introduce TYPE_I8259_PIC device
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com,
-        sstabellini@kernel.org, anthony@xenproject.org,
-        edgar.iglesias@gmail.com, qemu-devel@nongnu.org,
-        xen-devel@lists.xenproject.org
-References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
- <20260916104435.600211-14-mark.caveayland@nutanix.com>
- <CAFEAcA-FFiWEs3ZLztVwZ72_TGLuhEBbfKnaZ3NFJJ1W-Wd33A@mail.gmail.com>
-Content-Language: en-US
-From: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-In-Reply-To: <CAFEAcA-FFiWEs3ZLztVwZ72_TGLuhEBbfKnaZ3NFJJ1W-Wd33A@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BY5PR03CA0028.namprd03.prod.outlook.com
- (2603:10b6:a03:1e0::38) To PH0PR02MB7159.namprd02.prod.outlook.com
- (2603:10b6:510:16::8)
+ bh=QG0iiK5AHSkN91Yj6j7J15cv20E7oo64Eit3FfQ24K8=;
+ b=ghl9oZ9BFJJ3HVP1oZVSe5nbO0WncJaBEMsD8h94eQWGQ5PAlqS5W6UIDvH3J3hOUr5gki1FgDOMFLI7oeN2J2yONt7hgl8/M1uyIBHnxTvsRD5wcFQexCippMI33h8C4YC6iN0Xi6cwx7Wr081f8Pwe1vtcrTWYUSPP7oLKe6E=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <4e820fd2-6ed3-49bc-a41b-58af36790f62@amd.com>
+Date: Wed, 14 Oct 2026 13:13:48 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] xen/device-tree: add a helper to dump an FDT in
+ DTS-like format
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+	<xen-devel@lists.xenproject.org>
+References: <20261012073442.15819-1-oleksii.kurochko@gmail.com>
+ <20261012073442.15819-3-oleksii.kurochko@gmail.com>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <20261012073442.15819-3-oleksii.kurochko@gmail.com>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH0PR02MB7159:EE_|SA1PR02MB8672:EE_
-X-MS-Office365-Filtering-Correlation-Id: f66841c3-b061-417a-0567-08df29e38c6e
-x-proofpoint-crosstenant: true
+X-MS-TrafficTypeDiagnostic: BN1PEPF00006001:EE_|SA0PR12MB7090:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3e0a0124-b48b-44d7-b42d-08df29e43930
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|23010399003|366016|6133799003|18002099003|22082099003|10067099003|4143699003|261009223027099003|56012099006;
+	BCL:0;ARA:13230040|23010399003|376014|82310400026|1800799024|36860700016|18002099003|6133799003|22082099003|10067099003|261009223027099003|3023799007|4143699003|11063799006|56012099006;
 X-Microsoft-Antispam-Message-Info:
-	HjLh7jhzegQVsBLL20qCabp9QDW52mQPzl6qfFqadYGIw3SVglsTU+pj6VSfsWQgqMZXiXVrq22jsx8dkQdrj62EyViw3mneLz1rdcpBKBcyWHZ818oSH48s3xJVmnDE56tcmNlVoSbPN0dtWbzSGWtdp4tCfV3x5Kv+oC5YXEa2WTtt0Ka1itNDHGR+70vt2zi9vZfDIDlLZpRwINpiuGPbpbxODtoS/zsthQXWjU3qsx+8tlkzBciD8d4dUMjEhrHsJKAPgIMgh84R8/wfeJEdMnVGOtS1IiNni9A1fNDQSxeNuvR6e00K/0tQDvra8qw0DJYsOA7EBvNzunnxMHCUy0yGGY8fmFwTRFavo1CBhaQJyHy1XaB1oU6ltY3PnCtZ0p68l5WC0fsdYiRNcOtfVOEU2k9EoCiU40NLrk9taK6UBTEYJ2FvmXeCO+36SJ7fyglU3piu8gYeqI8SWlVgFs3gLT6zMkAp/n+VPE3tpHKdaF2wSWQpaKS6DRUFEw8q2RPHZsx3JsS5Fbl3Yc4tYXxjb3vPgoU6rxiB2AF1i4yb55GoglMOKgs3ZZylDTuj9mz0lA3YEse/WYtDZE5fdu6i3oAl6Q+g+29qH1xm3YdeH3aq9qz5nsI8J17awu2gpYp53jBMF2os6xLh2HTtq0odaLuj1PnwoFUDBjk=
+	13Yb2yyFousUQH6Fq+X9bMjKkoO8/DKD+XrVlUWYPlQKAoiAXQexEEdSbvGygHgiDUQF3iGe7ZhuEVlmCeRNSnZysSJRIcv3byJT/woNeRcTssPqrwUu6gYfxXsQIrAd2qiW56WA4/fvsNXcdJFT/MJLP4VZlmMfrptoGdm9xNHHGpnuY07WDjhiOHWstaH4G6j4qZQQH63OB1+gXtY2bkgjqzgUV11EindTuPOWkhmdIygccrSDfNU47sJTI913fPEvnv6dZqg1Pi8FSNiYhztjkbjNhrvdvCbdba+wOXfMKkNj1rqNdJHsDAYYJp1Lv3GesoZ33EYN/9yeha7+r8Exh+G6K0buApX4/h2CiwB/0YFPzTL0g5H0zjm75jUWUNRuDwJn5BAAxrZMtcBk/dEi8N97wiWZTRhw/KWltDxSVOgjkdJFJKoRoqhVWdHl7JIjhnIdIqz1Y1C22qDuGfLsLrJAcxkDCj1L1UT425ue7317TVE6gHE5m42AuQDsnOlWpn/RgIuhoV94pzVGDklG+xfiYTi6WJ8Q4vXS+oEj6Ts0Krn75Gy/kEYtYguifUYkiKjrdkYJL+8btyU00uDYVrSbOczbUA4ReCKOFo4HGYvPCUTwgs0BiRRsF5NvDG06yYN2yYEHnCuSmZZKzzT0w8Fx/3Q7y2pqr/Uw8qQB9JinnTp41sAUI5ND7SCFCElL+oh7UVFVJoBtD33sWw==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR02MB7159.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(366016)(6133799003)(18002099003)(22082099003)(10067099003)(4143699003)(261009223027099003)(56012099006);DIR:OUT;SFP:1102;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(23010399003)(376014)(82310400026)(1800799024)(36860700016)(18002099003)(6133799003)(22082099003)(10067099003)(261009223027099003)(3023799007)(4143699003)(11063799006)(56012099006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?bktYVU1nbXAvUDdPYmxyNmhzZ1BiUmJ1bHdDQ2Evc09JY3JpR0dhVHhzKzY3?=
- =?utf-8?B?aEx2QTNoWDBUeXFaUVpucXI2ZUdLNC9DdkpXOFYyYzR4S0s1M2VnZndtenVS?=
- =?utf-8?B?M2M3U2dOdVVKbjB1WHBKc0tYdUVXNjBRWnRpdjBBMTBjQ0tLNWdERTk1UWJ3?=
- =?utf-8?B?K2pMdkQvTjMxYVI2MHp6V2RpNXFPZWE0T2JOTDRibzZ6VmZTMFcwYzBmRzFF?=
- =?utf-8?B?Z1RIa1Jqa2I5NFZCN0NxYUF1OWZuT3JUM2wvc29IU0orTlhhWjNCUFJRSFRZ?=
- =?utf-8?B?Y1JJM2hRMy9JeElraWREdjgyNUMxM2ZCalZzYTJrV3kzYXJOLzVaK3pSNldG?=
- =?utf-8?B?bkwzd21jNW1QVTZXQWVJbnJobHg2dlNTbnlRMVRtQWwxVnpYTWlDVk04Wmd3?=
- =?utf-8?B?THdOb0ZqZ2RQRDd6cHFsY2FZU2UxSS8zODlxTUl2SzNqQUFGLzM4aVlSckJB?=
- =?utf-8?B?Qnh3ZFpBamdiUjVVbXZpK0FvTnZvVUpqbUZhVzh2MDF4RlJGMzhrcGRFUXkr?=
- =?utf-8?B?Sk1WalRpVWJ2ZUpjemdtOGlxS3BOK0grdU9NOU5MV1hoamRCbHNSQmZ3RFdu?=
- =?utf-8?B?NEcxQTdKSTZnWnkveFNBRE5PWUwwa2tkWnRqdktXamQvS0hPYXE1Q2RxMW54?=
- =?utf-8?B?MG5SSG9RSVVhN1U4ODFKc0t1YkExTkVFSWs5WUNHcFpZYllHdXRIbmNZMUds?=
- =?utf-8?B?MWo1djc2LzVUcDRxQTdjV0s3dXh2bHRLd2szVTVxek8wK2FWZGtjaEliZkVo?=
- =?utf-8?B?cFUvVitmVE5uRENqWDhNVFdHdVl2emExTyt4SDdSY0FRL0w2TStwVndOWW5i?=
- =?utf-8?B?b0tyK1RYSzZkNGladjNnaUhyTzdMZ0o2MXVLS3F2L05FYVhQaGdQeW12VDBK?=
- =?utf-8?B?UExoRzRoaUQxME1WT3pYRHJIczFzNjA4eWhCQ1FiczZlZ1hXZkFZcG01a1hH?=
- =?utf-8?B?bnZUckN0YUFjR2NsM2ZOOElKZVlsakV4SVhQVHlFRU0rcnBFS0ZRV2tHWGNw?=
- =?utf-8?B?bVJTTkIzUlVLaTM5dmRwTUdyMkNodjdVSDhxV1FzaXNHZlVXVU1ud2xPVzVv?=
- =?utf-8?B?K1dMcWg0amRMa2V5YWlqZ3VPWGJiTGM2dDBmdnpVRytFYWt4UUo5dUxwd0JB?=
- =?utf-8?B?VEcwTjR1ZDN6UG9uN0gwWlZWS2E0WUJTZEJPeWg2RXdqT2ttdCtxYzRsOHRX?=
- =?utf-8?B?SjVBaGM3NngvRVpWSkMwaU9kS1hKeGZrcjBSRW1kTlhUbmpuMTgvS21PbFVi?=
- =?utf-8?B?T05yQ0VYaTIwOWZ4RGw3aU5yV1lDWk1yU0VTS29mQlU3R3RYS215SDdPYy9i?=
- =?utf-8?B?d0xKQjFOVDVodmhBdm01NlNzaERsZHNMbEJwandLdGlwREhMRTlmR2l2TnVm?=
- =?utf-8?B?eWpza3VndEJyS0s5YzZkemFpc1F0RzBWQTl4YVNaQXBTbHp3WUtoTlJnYzF4?=
- =?utf-8?B?L2ZzblhRQ1VZelUyYit5U21Eb216a2x6Kzh3dGc4cHlYRXpkUGpST0ZHUXJn?=
- =?utf-8?B?dE91WDhnMGtlQjE5YUEycHZmY0RYZEtVUEhXYSs0Q01vT3FtdTQxN3EvSjBp?=
- =?utf-8?B?cDhKaThpMGdMVTd0VWp5OWdYZnpHYnNOeC8wK3ZMUEdRbmhHQ0tVYkZTK3Rm?=
- =?utf-8?B?cmxBU3hQK3pCVmdrQWErZ1p3ZVFPZU52UTBHbXZjenF5djYzYVlWSFBvUWNw?=
- =?utf-8?B?OHBqV3llYTZFY2xvSFlBYm5ETjc3WE16OUV6YmZ1b0srMW1iMVBxaVpqaEs0?=
- =?utf-8?B?YlBNVFJTdzBPV1c0NVpqUHhZTW5PendnV3hDVi92cHdaZDVwY3hnTWxZL1Iv?=
- =?utf-8?B?KzFFUWRIWURKamhQcjhDajhBcUIwWi9iaXdlQkRwcFZyTU8zRHBsQUx6bFlQ?=
- =?utf-8?B?U3o0Wm56SWpRcDVEdXlEMWNTSW9ka284NTlUNDdPSnJBTXl6a3dSNTRJdkt5?=
- =?utf-8?B?bG02QkNjaUc3TnRZUFRWNnJkYXpCVFdoQ3V5QlMyclhsNnZTMUtsOE9BRG1s?=
- =?utf-8?B?QzlyaWZrUDNIQXhMZHNmTGFRZ0FIMUNSeGtYb0o2RWJKZGVIZjZXMnc5REdQ?=
- =?utf-8?B?TWwxMkhMZ0RxcHBrQjVPZThTdXJybllsTmpNNW01Q2ZLN0tGckcrclFGUlNq?=
- =?utf-8?B?RWkzK1d0N1VLNVVweUVDUFpoSkdXU2ticGVRS0JDYTJwVWFqQWg0N0Nma3hE?=
- =?utf-8?B?VTVpT01rWThtejFjWkdiazVFTWVHblpxY01ENDdhOVV6VkUxaXI2akRYRWtq?=
- =?utf-8?B?T0RzNjh0TTc2KzBEQTgvRndBZnIzWlFiZDA5TjFCcC9GQXBTWW4ydkRjaS8z?=
- =?utf-8?B?ZWYvdWNDMnllZm5QNjd4OUpPYWR4YWo4MXVUTzN5NnA3aEphUnhkRXp6MnRI?=
- =?utf-8?Q?iXuNHn4dQi6bwG8g=3D?=
-X-Exchange-RoutingPolicyChecked:
-	QFHEPuem7pTLVYjV66CSzeAKEdAjeEtAixGAZC/uHlQCf+fbxtykyzlLEx5PlkBeMbKBuBy9m5FQCWvzwjkxe00Hd0FrwHue6k/SqwLjSUJUZY/RdghttKG2dNvqAqalLNYd+T0tkwNVOW1zy5i1xTR4OnnNcBXxAbPYVZu8wlSr/7DS0VxwXgaYFeVUbs0NQdYBuoYm9GMrmis/yttC2TAx41Ihko/5iAnFUcefHGe3+W5jpfksDN5m0E8A1YGjO8wh0rEhv1mUU/VVihLTmrbRr8GdRd/MYGouXSEdU2rwCyga8FYHds4k7rF2YTzIMbhQlRyZxUD52JM87LZGww==
-X-OriginatorOrg: nutanix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: f66841c3-b061-417a-0567-08df29e38c6e
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR02MB7159.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 11:09:00.2340
+	2E5eNqQMKbjVEinhkeLDBa2qVEXTZI3D+R5sFV9EJda4JqFg54y3qBo/RRwt+qlXt1BnHl720RdUlSN+7qhVqzg4j7ZvcTYIfQOex+GsLkNchrF8VJukX3vzu4VL1+FGI6BQaEOQ89rnL6ktxmXXwV1MydtBP+74EjSV9kmvHQLvFfMXMCLB5iqqluVxCmwVzI4EWL4Vtnu91gj6Ffml47fLsa3C1JohQ1J7Qr1eQ3LzNFs8ic8/w+wIzXD4/pUcQvAY/aHQUyPeUX+2pWizgnLIliiwgAlGFozu63oLwQKqqac9IsVf8nkhv6PX4EfkOx8uri0PFMkXSUwDMgRptahUtR9jC1dGoSDa6tGGQ+XcsqtXtRtxYh3dzXVPTWAHRB3OS27eOd7gPm3pLWeMD8v7roIrU55nBn79iF0/wxI4n3PVLjjQp/t1W2ZXX8tP
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 11:13:49.8253
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: bb047546-786f-4de1-bd75-24e5b6f79043
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Db4D5J+ml4jt604Mx//K2UXYPcjeEbtZ7IOMh4cpD3fbPS2CsC+ISM8gBAVNpaD1ynoWE91jYE8+alDaWCA8bXpjlLzbvSE0vnj6+pQLKMg=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR02MB8672
-X-Proofpoint-GUID: 8xa-p4iMcHw0axHyTo0eEvtH_V9ZlgPS
-X-Authority-Analysis: v=2.4 cv=OeYNnRTY c=1 sm=1 tr=0 ts=6acf62ce cx=c_pps
- a=13WRnYNq68uQF2pe1ZmaJw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=0kUYKlekyDsA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=VofLwUrZ8Iiv6rRUPXIb:22 a=dEe9Ve2bX-KnNSUMM2s9:22
- a=64Cc0HZtAAAA:8 a=aSKH6cZiDhi615JTPwYA:9 a=QEXdDO2ut3YA:10
-X-Proofpoint-ORIG-GUID: 8xa-p4iMcHw0axHyTo0eEvtH_V9ZlgPS
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA0NCBTYWx0ZWRfX6wNEDceETEl/
- aNAxfKNBxtDexxKEJkqlVhPFblYmUtm0yEvZUhIwq0rb/HhyLI7cMmZiPAT+Bqm33kBvWcXSyvb
- 1kG78wlBU1v2TzYSKHGPeu81cRNBIm/pMsUQ9Qg+RiEkNOrTFKMSx7U2wGKwTCn9fkiVCh8Lb5L
- 4mRcTFDac5FLri4Tzsx1G9oNcsnNjweYSsP8z8xwJ/j8kYbl038lsnidqhps7dQxKQsZFpVR9RG
- GLCzHjhYV67ypwMQgrPfzTHGhjQ1X9RmXhhRIyJcGxqDWIIy4es+rdErvg49RNj+AiS1aIeFDQP
- 62F59uEPDCT3RXEkisQiUq2HTmQSrGKW5WU4PvW0FWsofrnBWnUXv2u5okVXhtVUYUdOYUBm0Vu
- 6npTH+ZIQrVEd0FilzIIKLOkt+EARAD9geYKPkNqvkZgjEUgTrkx7jcNC+1bvmAIgwp5CwJXP2G
- o3NxpgrArQk2tz72PTA==
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA0NCBTYWx0ZWRfX0E2wFliSYCXS
- wGJnEscOYPLlDBH6678XaCzUZ4BL8mE+swJn25Uq2VKaj7j++L2QtVpI1dLbrzcLcjTBfAafHo/
- 2SVmq3DYqSjrAY1180CRyzDPrpIm5v0=
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Reason: safe
-X-purgate-ID: tlsNG-ef75cf/1791976147-A60C5AE4-C304881E/0/0
-X-purgate-type: clean
-X-purgate-size: 3025
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3e0a0124-b48b-44d7-b42d-08df29e43930
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN1PEPF00006001.namprd05.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR12MB7090
+X-purgate-ID: tlsNG-c1860d/1791976439-CF35D87B-E8468E7F/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 6190
 
-On 13/10/2026 17:17, Peter Maydell wrote:
 
-> On Wed, 16 Sept 2026 at 11:50, Mark Cave-Ayland
-> <mark.caveayland@nutanix.com> wrote:
->>
->> This device represents a PIC for an x86 machine consisting of 2 cascaded i8259
->> devices wired accordingly.
->>
->> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
->> ---
->>   hw/intc/i8259.c | 133 ++++++++++++++++++++++++++++++++++++++++++------
->>   1 file changed, 118 insertions(+), 15 deletions(-)
->>
->> diff --git a/hw/intc/i8259.c b/hw/intc/i8259.c
->> index af33b71591..fcc94e12f8 100644
->> --- a/hw/intc/i8259.c
->> +++ b/hw/intc/i8259.c
->> @@ -25,7 +25,9 @@
->>   #include "qemu/osdep.h"
->>   #include "hw/intc/i8259.h"
->>   #include "hw/core/irq.h"
->> +#include "hw/core/qdev-properties.h"
->>   #include "hw/isa/isa.h"
->> +#include "qapi/error.h"
->>   #include "qemu/timer.h"
->>   #include "qemu/log.h"
->>   #include "hw/isa/i8259_internal.h"
->> @@ -36,6 +38,22 @@
->>
->>   #define TYPE_I8259 "isa-i8259"
->>
->> +#define TYPE_I8259_PIC "isa-i8259-pic"
->> +
->> +struct I8259PICState {
->> +    DeviceState parent_obj;
->> +
->> +    qemu_irq pic_out_irq;
->> +    qemu_irq pass_irqs[ISA_NUM_IRQS];
->> +
->> +    ISABus *isabus;
->> +    IRQState i8259_primary_out_irq;
->> +    I8259CommonState i8259[2];
+
+On 12-Oct-26 09:34, Oleksii Kurochko wrote:
+> The device tree Xen builds for dom0/hwdom or for a dom0less domain is
+> only ever consumed by the guest, so a mistake in it surfaces as an
+> obscure failure inside the domain, far away from the code which
+> produced the tree.
 > 
-> This allocates only enough space for the common base class's
-> instance struct, but later we do an object_initialize_child()
-> of the child class. If the child class's state struct is
-> ever bigger than the common class, this will break.
-
-That's true. In theory this should be something like I8259State, however 
-I didn't think it was worth adding a specific 
-OBJECT_DECLARE_SIMPLE_TYPE() if there were no extra fields. I did 
-quickly check that if this happens, then the assert() in 
-object_initialize() fires so if this did happen then we'd find out 
-really quickly.
-
->>   static const TypeInfo i8259_type_infos[] = {
->>       {
->>           .name       = TYPE_I8259,
->>           .parent     = TYPE_I8259_COMMON,
->>           .class_init = i8259_class_init,
->>       },
->> +    {
->> +        .name          = TYPE_I8259_PIC,
->> +        .parent        = TYPE_DEVICE,
+> Add device_tree_dump(). The output follows dtc's format so that a dump
+> can be diffed against the source DTS or fed back to dtc; the value
+> formatting heuristics are ported from dtc's utilfdt_print_data() for
+> that reason. The walk itself goes through libfdt rather than decoding
+> the tag stream by hand as dtc's fdtdump does.
 > 
-> Devices that directly inherit from TYPE_DEVICE are awkward,
-> because they never get reset. Conviently this device doesn't
-> currently need a reset method, but still, is this a good idea?
-
-In this case I think it's correct, because the PIC device in this case 
-is a container for 2 cascaded i8259s which are connected separately to 
-the ISA bus. Therefore each i8259 will have its reset triggered via a 
-reset of the ISA bus.
-
-The container itself can't exist on the ISA bus because it would then 
-appear as a separate device which doesn't make sense in this case.
-
->> +        .class_init    = i8259_pic_class_init,
->> +        .instance_init = i8259_pic_init,
->> +        .instance_size = sizeof(I8259PICState),
->> +    },
->>   };
->>
->>   DEFINE_TYPES(i8259_type_infos)
+> Dumping a whole tree is only useful while debugging and costs both code
+> size and a lot of console output, so it is put under its own option,
+> CONFIG_DEVICE_TREE_DUMP. It is separate from CONFIG_DEVICE_TREE_DEBUG
+> because the generated tree is often all that is needed, without the rest
+> of the device tree debug messages.
 > 
-> -- PMM
+> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+> ---
+> Changes in v2:
+>  - Dump the device tree generated for dom0/hwdom as well.
+>  - Put the dump under its own CONFIG_DEVICE_TREE_DUMP instead of
+>    CONFIG_DEVICE_TREE_DEBUG.
+>  - Pass the domain to device_tree_dump() and print the "Device tree for"
+>    header from it.
+>  - Combine isprint() with isascii(), as Xen's isprint() also accepts
+>    the characters 0xa0-0xff, unlike the one dtc uses.
+>  - Update the commit message.
+> ---
+> ---
+>  xen/Kconfig.debug                       |  10 ++
+>  xen/arch/arm/domain_build.c             |   2 +
+>  xen/common/device-tree/Makefile         |   1 +
+>  xen/common/device-tree/dom0less-build.c |   3 +
+>  xen/common/device-tree/fdt-dump.c       | 185 ++++++++++++++++++++++++
+>  xen/include/xen/bootfdt.h               |  16 ++
+>  6 files changed, 217 insertions(+)
+>  create mode 100644 xen/common/device-tree/fdt-dump.c
+> 
+> diff --git a/xen/Kconfig.debug b/xen/Kconfig.debug
+> index d900d926c555..45cff9dbc467 100644
+> --- a/xen/Kconfig.debug
+> +++ b/xen/Kconfig.debug
+> @@ -98,6 +98,16 @@ config DEVICE_TREE_DEBUG
+>  	  logged in the Xen ring buffer.
+>  	  If unsure, say N here.
+>  
+> +config DEVICE_TREE_DUMP
+> +	bool "Dump generated device trees"
+> +	depends on DEVICE_TREE_PARSE
+> +	help
+> +	  The device tree Xen generates for dom0/hwdom and for each dom0less
+> +	  domain is printed on the Xen console in a DTS-like format.
+> +	  The dump is logged at debug level, so on a non-debug build it is
+> +	  only shown with "loglvl=all".
+That's not correct. loglvl="debug" is enough. That said, I don't find it
+particularly necessary for the second part of the sentence to be part of the
+help message. If you want to keep it, fix the loglvl.
 
+> +	  If unsure, say N here.
+> +
+>  config SCRUB_DEBUG
+>  	bool "Page scrubbing test"
+>  	default DEBUG
+> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+> index 72d531618045..6a20af23e1bb 100644
+> --- a/xen/arch/arm/domain_build.c
+> +++ b/xen/arch/arm/domain_build.c
+> @@ -1705,6 +1705,8 @@ static int __init prepare_dtb_hwdom(struct domain *d, struct kernel_info *kinfo)
+>      if ( ret < 0 )
+>          goto err;
+>  
+> +    device_tree_dump(d, kinfo->fdt);
+> +
+>      return 0;
+>  
+>    err:
+> diff --git a/xen/common/device-tree/Makefile b/xen/common/device-tree/Makefile
+> index 9036e455d66a..730d202349eb 100644
+> --- a/xen/common/device-tree/Makefile
+> +++ b/xen/common/device-tree/Makefile
+> @@ -6,6 +6,7 @@ obj-$(CONFIG_DOMAIN_BUILD_HELPERS) += domain-build.init.o
+>  obj-$(filter $(CONFIG_DOM0LESS_BOOT),$(CONFIG_HAS_DEVICE_TREE_DISCOVERY)) += dom0less-build.init.o
+>  obj-$(CONFIG_DOM0LESS_BOOT) += dom0less-bindings.init.o
+>  obj-$(CONFIG_OVERLAY_DTB) += dt-overlay.o
+> +obj-$(CONFIG_DEVICE_TREE_DUMP) += fdt-dump.init.o
+>  obj-$(CONFIG_HAS_DEVICE_TREE_DISCOVERY) += intc.o
+>  obj-$(CONFIG_DOMAIN_BUILD_HELPERS) += kernel.o
+>  obj-$(CONFIG_STATIC_EVTCHN) += static-evtchn.init.o
+> diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
+> index fcbeb8adbd73..24a9c6b1e3e1 100644
+> --- a/xen/common/device-tree/dom0less-build.c
+> +++ b/xen/common/device-tree/dom0less-build.c
+> @@ -1,5 +1,6 @@
+>  /* SPDX-License-Identifier: GPL-2.0-only */
+>  
+> +#include <xen/bootfdt.h>
+>  #include <xen/bootinfo.h>
+>  #include <xen/device_tree.h>
+>  #include <xen/dom0less-build.h>
+> @@ -587,6 +588,8 @@ static int __init prepare_dtb_domU(struct domain *d, struct kernel_info *kinfo)
+>      if ( ret < 0 )
+>          goto err;
+>  
+> +    device_tree_dump(d, kinfo->fdt);
+> +
+>      return 0;
+>  
+>    err:
+> diff --git a/xen/common/device-tree/fdt-dump.c b/xen/common/device-tree/fdt-dump.c
+> new file mode 100644
+> index 000000000000..296ae0d90d12
+> --- /dev/null
+> +++ b/xen/common/device-tree/fdt-dump.c
+> @@ -0,0 +1,185 @@
+> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+> +/*
+> + * Dump a flattened device tree blob in a DTS-like format.
+> + *
+> + * is_printable_string() and print_value() are derived from
+> + * util_is_printable_string() and utilfdt_print_data() in the device tree
+> + * compiler (dtc).
+> + *
+> + * Copyright 2011 The Chromium Authors, All Rights Reserved.
+> + * Copyright 2008 Jon Loeliger, Freescale Semiconductor, Inc.
+> + * util_is_printable_string contributed by
+> + *      Pantelis Antoniou <pantelis.antoniou AT gmail.com>
+> + */
+> +
+> +#include <xen/bootfdt.h>
+> +#include <xen/ctype.h>
+> +#include <xen/init.h>
+> +#include <xen/lib.h>
+> +#include <xen/libfdt/libfdt.h>
+> +#include <xen/types.h>
+> +
+> +/* Deeper nodes are still printed, but not indented any further. */
+> +#define DUMP_MAX_INDENT_DEPTH 32
+> +
+> +/* Indentation, in characters, of a node at depth @depth. */
+> +static int __init indent_of(int depth)
+> +{
+> +    return 2 * min(depth, DUMP_MAX_INDENT_DEPTH);
+Can we use 4 spaces instead of 2 here and in print_properties() call. It does
+look more readable IMO and matches the indentation (1 tab = 4 spaces) of dtc
+when converting dtb to dts.
 
-ATB,
+Other than that:
+Reviewed-by: Michal Orzel <michal.orzel@amd.com>
 
-Mark.
+~Michal
 
 
