@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A03CECC6B1A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 11:38:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448837.1664860 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B438CC6B1D
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 11:45:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448845.1664870 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGxJ1-0002qI-0u; Wed, 14 Oct 2026 11:37:59 +0000
+	id 1xGxQD-000569-Oq; Wed, 14 Oct 2026 11:45:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448837.1664860; Wed, 14 Oct 2026 11:37:58 +0000
+Received: by outflank-mailman (output) from mailman id 1448845.1664870; Wed, 14 Oct 2026 11:45:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGxJ0-0002qB-UX; Wed, 14 Oct 2026 11:37:58 +0000
-Received: by outflank-mailman (input) for mailman id 1448837;
- Wed, 14 Oct 2026 11:37:57 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13a3453cd0008425@swg.vates.tech>)
- id 1xGxIy-0002oF-UV
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 11:37:57 +0000
+	id 1xGxQD-000562-LP; Wed, 14 Oct 2026 11:45:25 +0000
+Received: by outflank-mailman (input) for mailman id 1448845;
+ Wed, 14 Oct 2026 11:45:23 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGxQB-00055w-QA
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 11:45:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGxIy-00GY0D-50
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 13:37:56 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13a3453cd0008425@swg.vates.tech>)
- id 6acf6985-8faa-0a2a0a5109dd-0a2a4506db84-36
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 13:37:56 +0200
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13a3453cd0008425@swg.vates.tech>)
- id 6acf6993-195a-0a2a45060019-b9ff1c1296e1-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 13:37:55 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a13a3453cd0008425.00a for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 14 Oct 2026 11:37:50 +0000
-Received: from [192.168.27.69] (82-67-211-29.subs.proxad.net [82.67.211.29])
- (Authenticated sender: julian.vetter)
- by mail2.vates.fr (Postfix) with ESMTPSA id 7A4DF81C40;
- Wed, 14 Oct 2026 13:37:48 +0200 (CEST)
+ id 1xGxQA-001BsC-Pj
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 13:45:22 +0200
+Received: from [10.42.69.9] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6acf6b45-2eae-0a2a0a5409dd-0a2a45099850-44
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 13:45:22 +0200
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6acf6b50-be1a-0a2a45090019-d155dd34c587-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 13:45:20 +0200
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-48b042c0728so933410f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 04:45:20 -0700 (PDT)
+Received: from [172.20.10.5] (public-gprs376522.centertel.pl. [37.47.102.11])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48de0ac35dfsm11655349f8f.33.2026.10.14.04.45.18
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Oct 2026 04:45:19 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,152 +52,124 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=bcazpVnqkdFyGQ5XMhN/ZYe7RqYqiecYYMqSrWxxu9I=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=ARECPwwdJBLsv+oVD17Ar7oTedenPvDFdwGYKVJuVy5ysadzOvZVtNLUWj+ZLUcxQHG+vV1BN
- V7p6IGeCndXpM5ocG3mimr3w0DAi0xYkWZfyqm9qdg8BFWCj8jmzT0mRxkzXXCv/Fyx+YDuOJu/
- uoRygQfiNV44l7MUM0lXpFS63QYDVg1TSaaCtQ8aBqpvXTUUUu8e/MU/5f1HxR+n2lVZNmXV/G7
- mhSxciV+kWjic+TCGmoTIXQrn8JyOBN6laP64n6VD05uO3PuXQH/P4K+xBToi7pz0ymLne4331R
- h6B0KnUYBXliNplVAxN0k5PRr534WaJ14zJfiTVKC7Dg==
-X-Zone-Loop: 5ccbbaf0ed233bbc27aa51e3f4f169cb6a024cadae9a
-x-campaign-type: default
-x-transaction-id: cbe75cd9-4821-419b-9cfb-d6ff75fd1e31
-x-swg-uid: 01-fee874a4-b743-474c-bde6-0621a24b9a92
-X-Mailer: Sweego
-Message-ID:
- <1791977870.8631fc262581453bbf619ec5b2062170.1a13a3453cd0008425@vates.tech>
-x-swg-bid: 1791977870.8631fc262581453bbf619ec5b2062170.1a13a3453cd0008425
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Wed, 14 Oct 2026 13:37:42 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791978320; x=1792583120; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=KRNKjH5pVqXD1rzVhV2/qbL5QXfAVoAd2SGKZnnMh3k=;
+        b=joymwXt+clKREMBdZpzVkjopM4qF9H30DRmfcCZA+M+/95kJQaE744xdrfew5Lou3o
+         F3Bax+Ldu1mQv+Oyft4TOrL9Xnm8YEXmKL3cRQX6tCA/wEu9SgbfJbDsmExijlFX9t4C
+         iJmB0MOl2HLOBdc54kkDtT+3o79puNEKi4YJiow391+b72xgpCaGigaJym+0UIgrZGFr
+         PODmGNuMukXtxww88++qXYQtAe24HgKw/hgWisstVApcfE7JZq0Qv82EXLObUO9pedKP
+         6t6NDBxqdWzSypgFulJz2xi1EFusGhc5ZkCloSDjtf2tbYdZccAu/RUpxBaINmYyrSDz
+         Ky/g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791978320; x=1792583120;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=KRNKjH5pVqXD1rzVhV2/qbL5QXfAVoAd2SGKZnnMh3k=;
+        b=HJFFaDCXgD++tJsErNp794vKWYGCtk4jkSE7KoCfrtKrMwix8sJPgAGxX1xRZYW4i0
+         xvv8L9ir2VOijVUt9sKUt/XK66OJDhARheNhdx+AYkx7CbTk1npQET42kMbrEI4LoyzR
+         Mw4RR8k1UwNWSB9G8zXd+88QCmyenqPCqLvkgKoRxHTI+hP1f5JxvF3MnZGaee7/jvqV
+         vtRfj4fRGE3wuLxE9qbmpoyIhc+a+wkEPdBFt0McgXFO9lD+WfRQ/0/sifCUZL6DOJuU
+         qp4X6IwzSoZCTaUo5X/+s3p8eCFO0YfwWGht8N1oqN3QitlRez2Csb3kvi6xt51xIQw4
+         jO5Q==
+X-Gm-Message-State: AFq9FYL5217WNwbR/4EritmsFfqBC/rnmc1wLjyDVnv3amUiVPHQO6YC
+	/sK/4wnZAOBbZiG82cV6YNjTgRS9QUl3GRKf93N5p8fbRITpgLcC27UZ
+X-Gm-Gg: AYBFou0x7hbW+lqR9A/yFhZ5J8h4mys682FS7zd77dEKfAOJrE4kKF5XKHYOSP3TwSw
+	Jr7pnVH+6ugamai2O49HBXkgkp4kF1MYi76GNEFEbT19rXEt8g+XKIx4dj/SOxVuS3LLX9Dazt1
+	VqpycA6/AEAP0mmZHYq4ZlfUORelo1U7JLxU7nQM/2Imi2vXUb6tNWQabhqDhxjB3FnscV9JyRa
+	rmvGEQ37ydBweTX2gAF/UdUJn8BeuwzCl0r9b2D4zxaEJXerd5+CYsvXsZwW79VnsKkICsWDp+9
+	7VBSvCkOgXX/iKlDA0GkjWGSVuaRdUpp2dylcaMEPxCE9rCjjsM6GteMt1952p4EzSUYrBSveAj
+	Um9fgs3BYRwgZG0085fnT1f8BAl3xWYjpjM1Pw7HHU9krl//U66gPKO2kPT/Bl7e10Ej8AfZw+3
+	eTPjFZAKauWiADiO9ob/5XNb7wuawOrGCa/OEhYqMeZlVz5yUYRG6yTlLMCiHjFdwTBH6hsE8+e
+	BYgZHkh/VrqUvp7ThnvpVNHw+DvQILjXkovMMA=
+X-Received: by 2002:a05:6000:24c3:b0:48a:fb55:416c with SMTP id ffacd0b85a97d-48dbaae89d3mr26907436f8f.21.1791978319957;
+        Wed, 14 Oct 2026 04:45:19 -0700 (PDT)
+Message-ID: <10748eac-05e2-454f-9baa-35f015d70135@gmail.com>
+Date: Wed, 14 Oct 2026 13:45:15 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 0/5] Fix ARM domcreate
-To: "Orzel, Michal" <michal.orzel@amd.com>, xen-devel@lists.xenproject.org
-Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Community Manager <community.manager@xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Juergen Gross <jgross@suse.com>, Andrii Sultanov
- <andriy.sultanov@vates.tech>,
- Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
- Oleksii Moisieiev <oleksii_moisieiev@epam.com>,
- Timothy Pearson <tpearson@raptorengineering.com>,
+Subject: Re: [PATCH v3 08/39] xen/riscv: implement virtual APLIC MMIO
+ emulation
+To: Jan Beulich <jbeulich@suse.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
  Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>, Teddy Astie <teddy.astie@vates.tech>
-References: <1791812199.8631fc262581453bbf619ec5b2062170.1a13054627300080d7@vates.tech>
- <2482f3cc-e9b6-48d9-b8d5-a463feb82dfa@amd.com>
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <bd546cae116c93c88706b49e7c24a125b4e5237c.1790779209.git.oleksii.kurochko@gmail.com>
+ <1791212017.8631fc262581453bbf619ec5b2062170.1a10c8e58370003f66@vates.tech>
+ <c645f0b5-62f7-465c-9518-226cbd124bac@gmail.com>
+ <6428c5da-0289-41ee-835c-ae5def434c52@suse.com>
 Content-Language: en-US
-From: Julian Vetter <julian.vetter@vates.tech>
-In-Reply-To: <2482f3cc-e9b6-48d9-b8d5-a463feb82dfa@amd.com>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.1c0.67e1c98e15f75819.1a13a34510e.93d265343ff7e2f1=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1791977869587
-X-purgate-ID: tlsNG-16d1c6/1791977876-F7ACA77B-5727601E/0/0
-X-purgate-type: clean
-X-purgate-size: 3324
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <6428c5da-0289-41ee-835c-ae5def434c52@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-bad1c0/1791978320-BEEDE034-794914EA/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 2356
 
----=Part.1c0.67e1c98e15f75819.1a13a34510e.93d265343ff7e2f1=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
 
-On 10/13/26 2:28 PM, Orzel, Michal wrote:
->=20
-> On 12-Oct-26 15:36, Julian Vetter wrote:
->> Hello Michal and Anthony,
->> thank you for the reviews and acks! Michal, I have addressed your
->> remaining remarks on the "xen/arm: report clock_frequency via sysctl
->> physinfo, not createdomain" patch=2E The golang bindings are regenerate=
-d
->> for the new arm_clock_frequency_hz physinfo field, and
->> alloc_domaininfo() no longer references the removed clock_frequency
->> field=2E Apart from that I have collected the Acked-by/Reviewed-by tags=
-=2E
+
+On 10/14/26 8:16 AM, Jan Beulich wrote:
+> On 13.10.2026 18:06, Oleksii Kurochko wrote:
+>> On 10/5/26 4:53 PM, Baptiste Le Duc wrote:
+>>>> Guests running under Xen program interrupt routing by writing to APLIC
+>>>> MMIO registers. Xen must intercept these accesses to enforce interrupt
+>>>> isolation between domains and to translate guest routing intent into the
+>>>> underlying physical MSI topology.
+>>>>
+>>>> Register the vAPLIC range with the MMIO dispatch and emulate the accesses:
+>>>>    - reads and writes are masked with the domain's authorised interrupt
+>>>>      bitmap, so that a guest can neither observe nor affect interrupts it
+>>>>      does not own;
+>>>>    - target registers are shadowed per source, so that a guest reads back
+>>>>      what it wrote. The h/w register instead gets the hart index and guest
+>>>>      interrupt file of the pCPU the target vCPU's interrupt file lives on,
+>>>>      as the APLIC uses these fields directly to compute the MSI address. As
+>>>>      long as the target vCPU has no h/w guest interrupt file, only the
+>>>>      shadow copy is updated;
+>>>>    - only MSI delivery mode is emulated: target writes made while the
+>>>>      guest's domaincfg.DM is clear are ignored.
+>>>>
+>>>> Delegation (APLIC_SOURCECFG_D) is not yet supported.
+>>>>
+>>>> Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
+>>>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+>>> Co-developed-by: needs a matching Signed-off-by: from Romain right after
+>>> it.
 >>
->> Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
-> I was about to commit the series but I found out that some tests like
-> test-mem-claim and possibly others still pass gic_version=3D0 which will=
- cause the
-> domain creation to fail=2E You need to update the tests=2E
+>> I will contact Romain and ask for his Signed-off-by.
+> 
+> Just to mention: Co-developed-by: can mean many things. We haven't been
+> insisting on matching S-o-b before. Plus if there was an S-o-b, why
+> would there want/need to be Co-developed-by: as well?
 
-Yes, thank you=2E I didn't see this=2E I have fixed the tests, and ran the=
-m=20
-on a QEMU setup=2E 2 of them now pass the domain creation at least just=20
-like on master (1 doesn't work on QEMU because there is no IOMMU=20
-emulation?!):
+I haven't checked if it is true for Xen (my fault). I know that such 
+rule is in Linux 
+(https://docs.kernel.org/process/submitting-patches.html#when-to-use-acked-by-cc-and-co-developed-by):
+   ...
+   Since Co-developed-by: denotes authorship, every Co-developed-by: 
+must   be immediately followed by a Signed-off-by:
+   ...
 
-```
-@@@ RUN test-mem-claim
-Memory claims tests
-Free pages: 254208, Oustanding claims: 0
-   Created d1
-   Failed to populate physmap domain: 16 - Resource busy
-@@@ RESULT test-mem-claim rc=3D1
-@@@ RUN test-paging-mempool
-Paging mempool tests
-(XEN) [   28=2E386587] common/domain=2Ec:845: IOMMU requested but not avai=
-lable
-   Skip: 22 - Invalid argument
-@@@ RESULT test-paging-mempool rc=3D0
-@@@ RUN test-resource
-XENMEM_acquire_resource tests
-Test ARM
-   Created d3
-   Failed to populate physmap domain: 16 - Resource busy
-@@@ RESULT test-resource rc=3D1
-@@@ ALL DONE
-```
+I've never thought in that way about S-o-b and I think I can agree with 
+that there is no point to have Co-developed-by if there is correspondent 
+S-o-b, i.e. S-o-b by default includes C-o-b.
 
-But, unfortunately, these tests seem broken on ARM even on master,=20
-because on ARM domains start with an empty P2M pool, and since these=20
-tests call xc_domain_create() without setting the pool size first, they=20
-fail on the populate physmap call=2E I'm not sure how to proceed on this=
-=2E=20
-Should I fix these tests in their entirety or leave this for another=20
-patch set? Thank you for your advice=2E
-
->=20
->>
->> Andrew Cooper (1):
->>    ARM/sysctl: Expose the supported guest GIC modes in physinfo
->>
->> Julian Vetter (4):
->>    tools/arm: choose GIC version explicitly instead of relying on
->>      GIC_NATIVE
->>    xen/arm: remove XEN_DOMCTL_CONFIG_GIC_NATIVE from the ABI
->>    xen/arm: report clock_frequency via sysctl physinfo, not createdomai=
-n
->>    xen: make config argument const
-> Here you are still missing tags from e=2Eg=2E RISCV I think=2E
->=20
-> ~Michal
->=20
-
-Thank you again for pointing this out! Unfortunately neither PPC nor=20
-RISC-V have a formal maintainer defined in the MAINTAINERS file, so it's=
-=20
-actually "THE REST" responsible(s), which is also you ;-) For RISC-V I=20
-have asked internally to do a review, but this will only add a=20
-'Reviewed-By' not a full 'Ack'=2E So, not sure what to do about it=2E
-
-
--- 
-Julian Vetter | Vates Hypervisor & Kernel Developer
-
-XCP-ng & Xen Orch=
-estra - Vates solutions
-
-web: https://vates=2Etech
----=Part.1c0.67e1c98e15f75819.1a13a34510e.93d265343ff7e2f1=---
+~ Oleksii
 
