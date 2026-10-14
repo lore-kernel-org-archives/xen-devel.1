@@ -4,49 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9EE2ACC6B1A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 12:08:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448906.1664905 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51BFACC6B1A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 12:31:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448935.1664915 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGxlt-00031t-LF; Wed, 14 Oct 2026 12:07:49 +0000
+	id 1xGy8R-0000cA-CB; Wed, 14 Oct 2026 12:31:07 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448906.1664905; Wed, 14 Oct 2026 12:07:49 +0000
+Received: by outflank-mailman (output) from mailman id 1448935.1664915; Wed, 14 Oct 2026 12:31:07 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGxlt-00031k-I3; Wed, 14 Oct 2026 12:07:49 +0000
-Received: by outflank-mailman (input) for mailman id 1448906;
- Wed, 14 Oct 2026 12:07:47 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13a4fb0c00008425@swg.vates.tech>)
- id 1xGxlr-00031a-Bn
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:07:47 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGxlq-005Mz8-Oa
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 14:07:46 +0200
-Received: from [10.42.69.5] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13a4fb0c00008425@swg.vates.tech>)
- id 6acf7092-8faa-0a2a0a5109dd-0a2a4505e408-0
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:07:46 +0200
-Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13a4fb0c00008425@swg.vates.tech>)
- id 6acf7092-4cb1-0a2a45050019-b9ff1c22842d-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:07:46 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a13a4fb0c00008425.003 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 14 Oct 2026 12:07:43 +0000
-Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 7FEED81B9A;
- Wed, 14 Oct 2026 14:07:42 +0200 (CEST)
+	id 1xGy8R-0000c3-85; Wed, 14 Oct 2026 12:31:07 +0000
+Received: by outflank-mailman (input) for mailman id 1448935;
+ Wed, 14 Oct 2026 12:31:05 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <gwd@xenproject.org>) id 1xGy8P-0000bx-FI
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:31:05 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xGy8P-000000052VO-1OVv
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:31:05 +0000
+Received: from mail-lj1-f171.google.com ([209.85.208.171])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xGy8O-00000004lvl-2XPP
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:31:05 +0000
+Received: by mail-lj1-f171.google.com with SMTP id
+ 38308e7fff4ca-3a1eb6fa0f4so42032221fa.2
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 05:31:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,315 +44,220 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=Y8Z4go3Y5vNQSGZeTsul5O5rVoL34cRs0k0o0epOjyA=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=YgFoNzclRrbzFuhaf4LLHgG580YJkbXqqwFc6wI1PdkG0xTczip5cp2LWljhJUokAwEC+nbxM
- A0WCpIucMBRwHVFoTHWONmnnQS8ZM/YIIdQ6w/zzBcrUOweW3k5zoO95PmcS1/VRg3Cfu1if02z
- AgTCgpoSTNlRbJ4+Mh/EJO4pvdLtNdYQktfz6zYHt+ehVd9UhTFk+RQ4+rFzeDZ5FXOmKHk8N2v
- z28D3xJJoz6uBAtsvN4ehvTPK5N8vT/3Jg9KWOdmxA6MB2PVoQ6elcq6w8FeQHBztcsZP8I69wW
- 0/bkb4vdbGVSL6CU6eJjreRHsh6q2M75rAMpOKToNt1w==
-X-Zone-Loop: df6ad2b7510c7e8090fdfa5db827d2f548c7164ef422
-x-campaign-type: default
-x-transaction-id: 2d77eea0-aff6-40a3-bcf9-6282b33aa976
-x-swg-uid: 01-9434b632-45da-4d0b-b026-b4c568c3828b
-X-Mailer: Sweego
-Message-ID:
- <1791979663.8631fc262581453bbf619ec5b2062170.1a13a4fb0c00008425@vates.tech>
-x-swg-bid: 1791979663.8631fc262581453bbf619ec5b2062170.1a13a4fb0c00008425
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Wed, 14 Oct 2026 14:07:41 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
+	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
+	bh=1XoQ0iJcWS81MGA7D94FjGmXdVcFN4bgOM97NImPNq4=; b=gSAEHQKQ3SQV6o+2rKkvAdgL/Y
+	X4PuhsWsCSEaIuN07pNqhIr0smqh1RqATKhe1tHobISXbe7OoVZ/dUKGooh70rDBs3sW/F4MCwTYl
+	cj+DQ12FO/+WjSLs0VtoQ+Yt1Q4QTxYesff5au37qmTkrOjPpFjf0BgUWwVuVPT+ZZgs=;
+X-Gm-Message-State: AFq9FYJhTTWnmDRKTeH6zscLRUYr/+76UfDgn5KGMhCPFhUnRvl2/WhB
+	5JeSPobfINmNvvnRmhDeJvAqFIReN98+issA3fGkXT4afS0tBiDE9nKRaMIqbMVhCCjfPEz4VM1
+	5hKOl/fwIHUVfeQuV/fIiwXqs2MhVCjc=
+X-Received: by 2002:a05:651c:198f:b0:3a7:812b:d1c with SMTP id
+ 38308e7fff4ca-3a9c4844a20mr36797111fa.0.1791981063805; Wed, 14 Oct 2026
+ 05:31:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/emulator: Add Linear Address Space Separation (LASS)
- support
-To: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>,
- xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, roger@xenproject.org
-References: <3e42ad91a038fe21b09f2bb7b6b8a47e1c8d6718.1791973459.git.abdelkareem.abdelsaamad@citrix.com>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- xsDNBGn5sK8BDACuzSrrTjpVf4ay06OYB6yY0J1PqKffihoNMtrQRZjAHxoAPC7LTBVHV/XO
- Zw5HJc+9R71z1JV+iYg6z3jPziGKzX8Fj3ZXlzJPmpf1PuETH3KdbvtJT4ny+OGntnJntUoR
- KRPhTirr6yNeBk/637O3CQXjtqFUPZnko8OI/o1yawIBhJJAWicutjkkUgd28Bh6HV9EIumH
- tCBgn5/1A/fpm9624MMgYLsA8qjC4XsoovQvFCaO8HEhvfzrrTZHjn/nPeB9SigxIxXW8YaT
- VqMdqul07o72m3eA2mf+LMu9a04FX/d4wbxBLtELm+1jIrbtyaFZEMOLv/haSiS/Lj3btJH/
- EoucejoZ5SH49ksmVAmKOLktOaTQ8b2gEvP7iaKiIiszCCtOSRohr+2GvDsDeLvVZnlR3I+S
- PhHar7TPKjFz0G3DPNolyjXywNqOAMpomSPi8lSwjAFsxOtQbcck/qRGRSNk4DAmH70pA+89
- MXfQXZ3qt1Q01B1+sU0I8xsAEQEAAc0kVGVkZHkgQXN0aWUgPHRlZGR5LmFzdGllQHZhdGVz
- LnRlY2g+wsENBBMBCAA3FiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmn5sK8FCQWjmoACGwME
- CwkIBwUVCAkKCwUWAgMBAAAKCRBmD6nRAsvP0ID6DACGOktArFbLKHNzuyOVCskwfUZPla6Z
- pd3GZ8r61SrAKePIr2BnpgPkd0hV3bSRkRLIrgjzR2NRCzfp0x0HfuhcYfAYPR46XHTvjaJE
- v99sT/vGUG1BZguYDOScSEpgSNaNlYum3RKZbMuROxdK8G+YHccJY8PvWSq2K2yiae2KGiAv
- 1yjnZxug9/PtDfX8vQFUSg2w1ukRDf50wvDohN1zUQfFtofOP2xCRsDZiHAlQ0pF+aUjXQhP
- eP3IdpfWc8cyRLXF06Rk46YMYCytweGtGdHcqAfrVthl84129ZPN422k/voW0sm14gjYlGcT
- UwgnYlFRk2FLq0QeKEDcS0aj3o3EVAQCrayoGzi1pnlIKE3PRGUcUzjGVvzQ/po24gOjwba9
- Egr/Wmu3MQlx/7A8zT5QBzF/n+RYdLNQ0Eu6YnUwf0Z1uieqNaon+olyIRFiLb/hCZHO6ekN
- f5vrm2clHUbQAYaPQebknujoKBo6ZLHg0WM1gZS01Gz+aUpKsUfOwM0EafmwsAEMAKiQiZa3
- yQMmc/h3sDbfVHPSiBA4IMI/NAB7IotzPHq1GzCpsoVILAhF/INbWjxJ3DbVf+en3/FvdVZg
- 2S38xtnth0njNdlVKpyxm054phKjbdoFDwaknWolS4hrddTmetSG5/52AjtmPFtlXAk0NmLv
- fJnW3seXVQbgM7sW/MNXPP5UKDpkGnLhnvej+GU0s3109sJeXT5ImVdphFs9cvyZyBT9t1Pb
- Rowv58EgV0zE4hbAeVkULAbxFV5b/ExTjjGVHoX7CVhWxvCiTqCUoXZRkUE9C3FnkzEFRkKb
- Yu6NCfiHfEyB3Xyg9hfdrRgjMRq907zCof+nDtWxGz1MSEuvTj1g9GZ049Bennqzjc/Q+0ov
- XoK4jm+Py0FiUGUaA6yhexficjH+kCR/xDbVnWrMhSLB4AuTBT9HjfZI6gk3uYLhoT8Pig4/
- eVtR2Q1wZIJsFToR6ofGuyECwFcs+PUXN7fmGRSiPXgjAr/zIUBdW0VWCE3OGPNqtRk2E5s6
- IQARAQABwsD8BBgBCAAmFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmn5sLAFCQWjmoACGwwA
- CgkQZg+p0QLLz9DncQwAg76IehTemLIfrB8T9WIBZrI4kUV7G7a4rjiVoUiHYN5QwhnbZnsa
- JDlt+Ezoqy/510eo2bCSzvW5xXYPgyjcuOPwgQo1Qp764QxyX6rld2f2RcWkDuBHun55ZWXj
- by8o21ginPRwruBVYY5rVf3DV1iBu4NurUeHtyFk/dS0XTOQi2wVUb17sW/+ybCEokdVacZG
- zOqP/OmwHrF8ylXlXnhQq6e3r+J+T8fuoGJelm/CJiMwyP6cEWE8sxVqX/iqwjwUYkuOCpE+
- lOWSvdNHgoEkWR0RXBPQjnGmLKbfTl/QDXLk6NP2/r9uxm2HL6Ei3QJKSEdrp+XZaVnk/Off
- O485NOTKwGOxyWb006cTMh53xPkAJFQu4Tvdj+odsHz88jqw5wfPG0BYWx0I/FspYj7N9kZR
- 8ULR9nX0LvpzJ/kB4NgHIUt8YtIL6ZSfM2dbF7fKzvx1UqFfvozJZwFzfEieJLXa4nlGgR6D
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <3e42ad91a038fe21b09f2bb7b6b8a47e1c8d6718.1791973459.git.abdelkareem.abdelsaamad@citrix.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------shPc4mcuG1hVQ467m1rlFl2t"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1791979662654
-X-purgate-ID: tlsNG-c201ff/1791979666-F68B62A1-29D0F88C/0/0
-X-purgate-type: clean
-X-purgate-size: 16104
+References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-15-gwd@xenproject.org>
+ <asfmGUr17vgaXmYk@Mac.lan>
+In-Reply-To: <asfmGUr17vgaXmYk@Mac.lan>
+From: George Dunlap <gwd@xenproject.org>
+Date: Wed, 14 Oct 2026 13:30:51 +0100
+X-Gmail-Original-Message-ID: <CAFLBxZZsYZEG1h1A8d4A=i7yK3_R=yMcCEAUwDTeax3Ec4UKUw@mail.gmail.com>
+X-Gm-Features: AclHuK9thxVo-ndJBU-izWzLPQObYaEocYNCCH4qOVkts_0e5UsZPX1F1bbgaE8
+Message-ID: <CAFLBxZZsYZEG1h1A8d4A=i7yK3_R=yMcCEAUwDTeax3Ec4UKUw@mail.gmail.com>
+Subject: Re: [PATCH v3 14/18] x86/domain_page: key the directmap fast paths on
+ the loaded view
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------shPc4mcuG1hVQ467m1rlFl2t
-Content-Type: multipart/mixed; boundary="------------LslxXoHdkVmcfJKUojxZN60L";
- protected-headers="v1"; hp="clear"
-Message-ID: <7a1e3b79-9cb1-40ba-81e4-29aacfeb4ddf@vates.tech>
-Date: Wed, 14 Oct 2026 14:07:41 +0200
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/emulator: Add Linear Address Space Separation (LASS)
- support
-To: Abdelkareem Abdelsaamad <abdelkareem.abdelsaamad@citrix.com>,
- xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com, andrew.cooper3@citrix.com, roger@xenproject.org
-References: <3e42ad91a038fe21b09f2bb7b6b8a47e1c8d6718.1791973459.git.abdelkareem.abdelsaamad@citrix.com>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <3e42ad91a038fe21b09f2bb7b6b8a47e1c8d6718.1791973459.git.abdelkareem.abdelsaamad@citrix.com>
+On Thu, Oct 8, 2026 at 7:51=E2=80=AFPM Roger Pau Monn=C3=A9 <roger@xenproje=
+ct.org> wrote:
+>
+> On Wed, Oct 07, 2026 at 11:40:47AM +0100, George Dunlap wrote:
+> > map_domain_page() returns directmap addresses whenever it can: for any
+> > MFN the directmap covers in release builds, and for vCPUs without a
+> > mapcache.  Once guest contexts may run on the sparse view of the
+> > directmap, modify this to take the fast path returning the directmap
+> > address only when the full directmap is loaded.
+> >
+> > The release-build shortcut ahead of the vCPU lookup looks at the vCPU
+> > whose page-tables are loaded, without completing a lazy context
+> > switch: if that vCPU is not on the sparse view, its page-tables map
+> > the page through the directmap, and completing the switch would only
+> > move the CPU to the idle vCPU's page-tables, which map it too.
+> >
+> > mapcache_current_vcpu() may complete the lazy context switch
+> > (sync_local_execstate()) and switch us onto the idle vCPU (which has a
+> > full view), so check again if we can use the directmap afterwards.
+> >
+> > A vCPU on the sparse view always has a mapcache: HVM ones through
+> > per-vCPU page-tables, PV ones through the domain-wide mapcache, which
+> > mapcache_domain_init() now sets up for a domain using the sparse view i=
+n
+> > release builds too, rather than only when the directmap does not cover
+> > all memory.
+> >
+> > map_domain_page_global() mappings must be valid in every context: use
+> > vmap() for all of them once a sparse view is configured, as
+> > arch_mfns_in_directmap() then says.
+> >
+> > Add d->arch.sparse_dmap and sparse_dmap_active for this; nothing sets
+> > them yet.
+> >
+> > No functional change.
+> >
+> > Assisted-by: Claude Code:claude-opus-5-5
+> > Signed-off-by: George Dunlap <gwd@xenproject.org>
+> > ---
+> > Changes in v3:
+> > - New in this version.
+> > ---
+> >  xen/arch/x86/domain_page.c                  | 44 +++++++++++++++++++--
+> >  xen/arch/x86/include/asm/domain.h           |  6 +++
+> >  xen/arch/x86/include/asm/sparse-directmap.h |  8 ++++
+> >  xen/arch/x86/sparse-directmap.c             |  1 +
+> >  4 files changed, 56 insertions(+), 3 deletions(-)
+> >
+> > diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
+> > index 0500bb9dba..48f85b670d 100644
+> > --- a/xen/arch/x86/domain_page.c
+> > +++ b/xen/arch/x86/domain_page.c
+> > @@ -61,6 +61,16 @@ static inline struct vcpu *mapcache_current_vcpu(voi=
+d)
+> >      return ACCESS_ONCE(this_cpu(pgtable_vcpu));
+> >  }
+> >
+> > +/*
+> > + * Whether the directmap in @v's page-tables is the sparse view, which=
+ maps
+> > + * none of the heap's memory beyond the xenheap: the mapcache must ser=
+ve
+> > + * every mapping then.
+> > + */
+> > +static bool on_sparse_dmap(const struct vcpu *v)
+> > +{
+> > +    return sparse_dmap_active && v->domain->arch.sparse_dmap;
+> > +}
+> > +
+> >  /*
+> >   * The accounting for v's mapcache: its own for a vCPU-PT domain, the =
+domain's
+> >   * otherwise, in which case *dcache is set so the caller takes the dom=
+ain-wide
+> > @@ -142,17 +152,39 @@ void *map_domain_page(mfn_t mfn)
+> >
+> >  #ifdef NDEBUG
+> >      if ( mfn_x(mfn) <=3D PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
+> > -        return mfn_to_virt(mfn_x(mfn));
+> > +    {
+> > +        const struct vcpu *pt_vcpu =3D this_cpu(pgtable_vcpu);
+> > +
+> > +        /*
+> > +         * The page-tables loaded map @mfn through the directmap, unle=
+ss they
+> > +         * carry the sparse view.  Don't complete a lazy context switc=
+h to
+> > +         * find out: it would only move this CPU to the idle vCPU's
+> > +         * page-tables, which map @mfn too.
+> > +         */
+> > +        if ( !pt_vcpu || !on_sparse_dmap(pt_vcpu) )
+> > +            return mfn_to_virt(mfn_x(mfn));
+> > +    }
+> >  #endif
+> >
+> > +    /* No vCPU (early boot), or no mapcache: the full directmap is loa=
+ded. */
+> >      v =3D mapcache_current_vcpu();
+> >      if ( !v )
+> >          return mfn_to_virt(mfn_x(mfn));
+> >
+> > +#ifdef NDEBUG
+> > +    /* The lookup may have completed a lazy switch off the sparse view=
+. */
+> > +    if ( !on_sparse_dmap(v) &&
+> > +         mfn_x(mfn) <=3D PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
+> > +        return mfn_to_virt(mfn_x(mfn));
+> > +#endif
+> > +
+> >      cache =3D vcpu_mapcache(v, &dcache);
+> >      vcache =3D &v->arch.mapcache;
+> >      if ( !cache->inuse )
+> > +    {
+> > +        ASSERT(!on_sparse_dmap(v));
+> >          return mfn_to_virt(mfn_x(mfn));
+> > +    }
+> >
+> >      perfc_incr(map_domain_page_count);
+> >
+> > @@ -307,7 +339,9 @@ void mapcache_domain_init(struct domain *d)
+> >      ASSERT(is_pv_domain(d));
+> >
+> >  #ifdef NDEBUG
+> > -    if ( !mem_hotplug && max_page <=3D PFN_DOWN(__pa(HYPERVISOR_VIRT_E=
+ND - 1)) )
+> > +    /* Not needed when the directmap loaded for the domain covers ever=
+ything. */
+> > +    if ( !d->arch.sparse_dmap && !mem_hotplug &&
+> > +         max_page <=3D PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
+> >          return;
+> >  #endif
+> >
+> > @@ -392,8 +426,12 @@ void *map_domain_page_global(mfn_t mfn)
+> >               system_state < SYS_STATE_active) ||
+> >              local_irq_is_enabled()));
+> >
+> > +    /*
+> > +     * Global mappings must hold in every context: a sparse view of th=
+e
+> > +     * directmap rules the directmap out.
+> > +     */
+> >  #ifdef NDEBUG
+> > -    if ( mfn_x(mfn) <=3D PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
+> > +    if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
+> >          return mfn_to_virt(mfn_x(mfn));
+> >  #endif
+> >
+> > diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/a=
+sm/domain.h
+> > index 80415ab2c2..76a22b4040 100644
+> > --- a/xen/arch/x86/include/asm/domain.h
+> > +++ b/xen/arch/x86/include/asm/domain.h
+> > @@ -499,6 +499,12 @@ struct arch_domain
+> >       */
+> >      bool vcpu_pt;
+> >
+> > +    /*
+> > +     * Root page-tables carry the sparse view of the directmap, once i=
+t is
+> > +     * active (see asm/sparse-directmap.h).
+> > +     */
+> > +    bool sparse_dmap;
+>
+> What do you mean with "once it is active"?  Either a domain is using
+> the sparse direct map or not, but it shouldn't have an external
+> dependency on anything.  Or maybe I'm reading the comment the wrong
+> way.
 
---------------LslxXoHdkVmcfJKUojxZN60L
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+I've reworded it.
 
-TGUgMTQvMTAvMjAyNiDDoCAxMzowOSwgQWJkZWxrYXJlZW0gQWJkZWxzYWFtYWQgYSDDqWNy
-aXTCoDoNCj4gTGluZWFyIEFkZHJlc3MgU3BhY2UgU2VwYXJhdGlvbiAoTEFTUykgaXMgYW4g
-YXJjaGl0ZWN0dXJhbCBzZWN1cml0eSBmZWF0dXJlDQo+IHRoYXQgaXMgaW50ZW5kZWQgdG8g
-cHJldmVudCBjcm9zcyB1c2Vyc3BhY2Uva2VybmVsc3BhY2UgbWVtb3J5IGJvdW5kYXJ5IGFj
-Y2Vzcw0KPiB3aXRoIHRoZSBDUFUgaGFyZHdhcmUgc3VwcG9ydC4gVW5saWtlIHRoZSByZWxh
-dGVkIG1vZGUtYmFzZWQgcGFnaW5nIHByb3RlY3Rpb25zDQo+IHN1Y2ggYXMgdGhlIFN1cGVy
-dmlzb3IgTW9kZSBBY2Nlc3MgUHJldmVudGlvbiAoU01BUCkgYW5kIHRoZSBTdXBlcnZpc29y
-IE1vZGUNCj4gRXhlY3V0aW9uIFByZXZlbnRpb24gKFNNRVApLCBMQVNTIHByb3ZpZGVzIHRo
-ZSBlZmZpY2llbnQgbWVjaGFuaXNtIHRvIGd1YXJkDQo+IGFnYWluc3QgdGhlIGNyb3NzIG1l
-bW9yeSBib3VuZGFyeSBhY2Nlc3NlcyB3aXRob3V0IHRyYXZlcnNpbmcgdGhlIHBhZ2luZw0K
-PiBzdHJ1Y3R1cmVzLiBUaGlzIHByb3ZpZGVzIGEgbW9yZSBlZmZpY2llbnQgZ3VhcmRpbmcg
-bWVjaGFuaXNtIGFnYWluc3QgdGhlIGNsYXNzDQo+IG9mIG1hbGljaW91cyBzb2Z0d2FyZSBh
-dHRhY2tzIHRoYXQgcmVsaWVzIG9uIHBhZ2luZy1iYXNlZCB0aW1pbmcgaW5mb3JtYXRpb24s
-DQo+IHNlZSAoMSkgZm9yIG1vcmUgaW5mb3JtYXRpb24uIEVubGlnaHRlbiB0aGUgeDg2IGlu
-c3RydWN0aW9uIGVtdWxhdG9yIHRvIGNvbXBseQ0KPiB3aXRoIHRoZSBoYXJkd2FyZSBJbnRl
-bCdzIENQVSBzdXBwb3J0IGZvciB0aGUgTEFTUy4NCj4gDQo+IFRoZSBMQVNTIHZpb2xhdGlv
-biBjaGVjayBsb2dpYyBpcyBhZGFwdGVkIGZyb20gdGhlIHJldmlld2VkIGxvZ2ljIGluIHRo
-ZSBMaW51eA0KPiBLVk0gbWFpbGluZyBsaXN0ICgyKSBmb3IgdGhlIExBU1MgdmlvbGF0aW9u
-IGNoZWNrcy4NCj4gDQo+IFsxXSBodHRwczovL2NkcmR2Mi1wdWJsaWMuaW50ZWwuY29tLzc3
-NDk5MC9hcmNoaXRlY3R1cmUtaW5zdHJ1Y3Rpb24tc2V0LWV4dGVuc2lvbnMtcHJvZ3JhbW1p
-bmctcmVmZXJlbmNlLnBkZg0KPiBbMl0gaHR0cHM6Ly9sd24ubmV0L21sL2xpbnV4LWtlcm5l
-bC8yMDIzMDkxMzEyNDIyNy4xMjU3NC0xNi1iaW5iaW4ud3VAbGludXguaW50ZWwuY29tLw0K
-PiAtLS0NCj4gVGVzdGluZzoNCj4gICAtIFdpdGggQSB2aXJ0dWFsIG1hY2hpbmUgc2V0dXAg
-d2l0aCBpbnN0YWxsaW5nIHRoZSBmZWRvcmEgcmF3aGlkZS9mNDUgZGV2ZWxvcG1lbnQNCj4g
-ICAgIGJyYW5jaCB3aGljaCBpcyBiYXNlZCBvbiB0aGUgTGludXgga2VybmVsIDcuMSwgSSB2
-ZXJpZmllZCB0aGUgZm9sbG93aW5nIHRlc3QgY2FzZXMNCj4gICAgIDEtIFVzaW5nIHRoZSBY
-ZW4gU2VydmVyLCBJIGVuYWJsZWQgdGhlIGxhc3MgY3B1IGZldGF1cmUuIFJ1bm5pbmcgdGhl
-IGNvbW1hbmQNCj4gICAgICAgIGdyZXAgJ2xhc3MnIC9wcm9jL2NwdWluZm8NCj4gICAgICAg
-IGlzIHN1Y2Nlc3NmdWxseSByZXBvcnRpbmcgYW5kIHZlcmlmeWluZyBsYXNzIGlzIHN1cHBv
-cnRlZCBieSB0aGUgZ3Vlc3Qga2VybmVsLg0KPiANCj4gICAgIDItIE9uIHRoZSBzZXR1cCBn
-dWVzdCwgSSB3cm90ZSB0aGUgZm9sbG93aW5nIGNvZGUgdG8gdmVyaWZ5IHRoZSBrZXJuZWxz
-cGFjZSBsaW5lYXINCj4gICAgICAgIGFkZHJlc3MgYWNjZXNzIGZyb20gdXNlcnNwYWNlIGlz
-IHByZXZlbnRlZCB3aXRoICNHUC4gRGlzYWJsaW5nIGxhc3MgZnJvbSB0aGUgZ3Vlc3QNCj4g
-ICAgICAgIGFuZCBjb21tZW50aW5nIHRoZSBGRVAgaXMgcmF0aGVyIHJlcG9ydGluZyAjUEYu
-DQo+IA0KPiAgICAgICAgaW50IG1haW4odm9pZCl7DQo+ICAgICAgICAgICAgY2hhciB1c3Jz
-cGFjZV9idWZbMTZdID0gezB9Ow0KPiAgICAgICAgICAgIGNoYXIqIHVzcnNwYWNlID0gdXNy
-c3BhY2VfYnVmOw0KPiAgICAgICAgICAgIGNoYXIqIGtlcm5zcGFjZSA9IChjaGFyKikgMHhm
-ZmZmODAwMDAwMDAwMDAwOw0KPiANCj4gICAgICAgICAgICBhc20gdm9sYXRpbGUgKA0KPiAg
-ICAgICAgICAgICAgICAiLmJ5dGUgMHgwZiwgMHgwYiwgMHg3OCwgMHg2NSwgMHg2ZVxuXHQi
-DQo+ICAgICAgICAgICAgICAgICJyZXAgbW92c2IiDQo+ICAgICAgICAgICAgICAgIDogIitT
-IiAodXNyc3BhY2UpLCAiK0QiIChrZXJuc3BhY2UpDQo+ICAgICAgICAgICAgICAgIDogImMi
-ICgxNikNCj4gICAgICAgICAgICAgICAgOiAibWVtb3J5Ig0KPiAgICAgICAgICAgICk7DQo+
-IA0KPiAgICAgICAgICAgIHJldHVybiAwOw0KPiAgICAgICAgfQ0KPiANCj4gDQo+ICAgICAz
-LSBPbiB0aGUgc2V0dXAgZ3Vlc3QsIEkgd3JvdGUgdGhlIGZvbGxvd2luZyBrZXJuZWwgbW9k
-dWxlIHRvIHZlcmlmeSB0aGUgdXNlcnNwYWNlIGxpbmVhcg0KPiAgICAgICAgYWRkcmVzcyBh
-Y2Nlc3MgZnJvbSB0aGUga2VybmVsc3BhY2UgaXMgcHJldmVudGVkIHdpdGggI0dQLiBEaXNh
-YmxpbmcgbGFzcyBmcm9tIHRoZSBndWVzdA0KPiAgICAgICAgaXMgcmF0aGVyIHJlcHJ0aW5n
-ICNQRi4gRXhlY3V0aW5nIHRoZSBjb2RlIHdpdGggY29tbWVudHRlZCBGb3JjZWQgRW11bGF0
-aW9uIFByZWZpeA0KPiAgICAgICAgKEZFUCkgYW5kIHRoZSBsYXNzIGZlYXR1cmUgZW5hYmxl
-ZCBpcyByZXBvcnRpbmcgI0dQLg0KPiANCj4gICAgICAgICNpbmNsdWRlIDxsaW51eC9tb2R1
-bGUuaD4NCj4gICAgICAgICNpbmNsdWRlIDxsaW51eC9zbGFiLmg+DQo+IA0KPiAgICAgICAg
-TU9EVUxFX0xJQ0VOU0UoIkdQTCIpOw0KPiAgICAgICAgTU9EVUxFX0RFU0NSSVBUSU9OKCJU
-ZXN0aW5nIE1vZHVsZSBmb3IgSW50ZWwncyBMQVNTIFhlbiBUcmFwIik7DQo+IA0KPiAgICAg
-ICAgc3RhdGljIGludCBfX2luaXQgbXlfbW9kdWxlX2luaXQodm9pZCl7DQo+ICAgICAgICAg
-ICAgY2hhciogdXNyc3BhY2UgPSAoY2hhciopIDB4MDAwMDdmZmZmZmZmZmQwMDsNCj4gICAg
-ICAgICAgICBjaGFyKiBrZXJuc3BhY2UgPSBremFsbG9jKDE2LCBHRlBfS0VSTkVMKTsNCj4g
-DQo+ICAgICAgICAgICAgaWYgKCFrZXJuc3BhY2UpIHsNCj4gICAgICAgICAgICAgICAgcHJf
-ZXJyKCJNZW1vcnkgYWxsb2NhdGlvbiBmYWlsZWRcbiIpOw0KPiAgICAgICAgICAgICAgICBy
-ZXR1cm4gLUVOT01FTTsNCj4gICAgICAgICAgICB9DQo+IA0KPiAgICAgICAgICAgIGFzbSB2
-b2xhdGlsZSAoDQo+ICAgICAgICAgICAgIi5ieXRlIDB4MGYsIDB4MGIsIDB4NzgsIDB4NjUs
-IDB4NmVcblx0Ig0KPiAgICAgICAgICAgICJyZXAgbW92c2IiDQo+ICAgICAgICAgICAgOiAi
-K1MiICh1c3JzcGFjZSksICIrRCIgKGtlcm5zcGFjZSkNCj4gICAgICAgICAgICA6ICJjIiAo
-MTYpDQo+ICAgICAgICAgICAgOiAibWVtb3J5Ig0KPiAgICAgICAgICAgICk7DQo+IA0KPiAg
-ICAgICAgICAgIHJldHVybiAwOw0KPiAgICAgICAgfQ0KPiANCj4gICAgICAgIHN0YXRpYyB2
-b2lkIF9fZXhpdCBteV9tb2R1bGVfZXhpdCh2b2lkKXsNCj4gICAgICAgICAgICBwcl9pbmZv
-KCJteSBtb2R1bGUgIik7DQo+ICAgICAgICB9DQo+IA0KPiAgICAgICAgbW9kdWxlX2luaXQo
-bXlfbW9kdWxlX2luaXQpOw0KPiAgICAgICAgbW9kdWxlX2V4aXQobXlfbW9kdWxlX2V4aXQp
-Ow0KPiANCj4gICAgIDQtIE9uIHRoZSBzZXR1cCBndWVzdCwgSSB3cm90ZSB0aGUgZm9sbG93
-aW5nIGNvZGUgdG8gdmVyaWZ5IHRoZSBpbXBsaWNpdCBzeXN0ZW0gKHNwZXJ2aXNvcikNCj4g
-ICAgICAgIGFkZHJlc3MgYWNjZXNzIGZyb20gdXNlcnNwYWNlIGlzIG5vdCBwcmV2ZW50ZWQg
-d2l0aCAjR1AuDQo+IA0KPiAgICAgICAgI2luY2x1ZGUgPHN0ZGlvLmg+DQo+IA0KPiAgICAg
-ICAgI2RlZmluZSBYRU5fRkVQICIuYnl0ZSAweDBmLCAweDBiLCAweDc4LCAweDY1LCAweDZl
-XG5cdCINCj4gDQo+ICAgICAgICBpbnQgbWFpbigpIHsNCj4gICAgICAgICAgICBhc20gdm9s
-YXRpbGUgKFhFTl9GRVAgIm1vdiAlW3NlbF0sICUlZnMiIDo6IFtzZWxdICJyIiAoMTUqOCsz
-KSk7DQo+ICAgICAgICAgICAgcmV0dXJuIDA7DQo+ICAgICAgICB9DQo+IA0KPiAgICAgIDUt
-IENJIHRlc3RzOg0KPiBodHRwczovL2dpdGxhYi5jb20veGVuLXByb2plY3QvcGVvcGxlL2Fh
-YmRlbHNhL3hlbi8tL3BpcGVsaW5lcy8yOTQ2NDMwNTAzDQo+IC0tLQ0KPiAgIHhlbi9hcmNo
-L3g4Ni9odm0vaHZtLmMgfCA3MyArKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy0t
-LS0tLS0tLS0NCj4gICAxIGZpbGUgY2hhbmdlZCwgNTYgaW5zZXJ0aW9ucygrKSwgMTcgZGVs
-ZXRpb25zKC0pDQo+IA0KPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gveDg2L2h2bS9odm0uYyBi
-L3hlbi9hcmNoL3g4Ni9odm0vaHZtLmMNCj4gaW5kZXggZWY5YzdjZDA1Ny4uMzQ3N2Q2MmQ0
-MyAxMDA2NDQNCj4gLS0tIGEveGVuL2FyY2gveDg2L2h2bS9odm0uYw0KPiArKysgYi94ZW4v
-YXJjaC94ODYvaHZtL2h2bS5jDQo+IEBAIC0yNTU3LDYgKzI1NTcsNDAgQEAgaW50IGh2bV9z
-ZXRfY3I0KHVuc2lnbmVkIGxvbmcgdmFsdWUsIGJvb2wgbWF5X2RlZmVyKQ0KPiAgICAgICBy
-ZXR1cm4gWDg2RU1VTF9PS0FZOw0KPiAgIH0NCj4gICANCj4gK3N0YXRpYyBib29sIGlzX2xh
-c3NfdmlvbGF0aW9uKHN0cnVjdCB2Y3B1ICp2LCB1bnNpZ25lZCBsb25nIGFkZHIsDQo+ICsg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBsb25nIHNpemUsDQo+ICsg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBlbnVtIGh2bV9hY2Nlc3NfdHlwZSBhY2Nl
-c3NfdHlwZSwNCj4gKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGJvb2wgaXNfaW1w
-bGljaXRfc3VwZXJ2aXNvcl9hY2Nlc3MpDQo+ICt7DQo+ICsgICAgY29uc3QgYm9vbCBpc19z
-dXBlcnZpc29yX2FkZHJlc3MgPSAhIShhZGRyICYgKDFVTEwgPDwgNjMpKTsNCj4gKw0KDQpX
-aGF0IGhhcHBlbnMgaWYgYWRkciBpcyBub3QgaW4gTEFTUyByYW5nZSwgYnV0IGFkZHIuLmFk
-ZHIrc2l6ZSBjcm9zc2VzIA0KaXQgKGZvciBpbnN0YW5jZSwgaWYgYWRkciBpcyAweDdGRkZG
-RkZGRkZGRkZGRkYgYW5kIHNpemUgaXMgMTYpID8NCg0KV2Ugd291bGQgaGF2ZSBpc19zdXBl
-cnZpc29yX2FkZHJlc3MgPT0gZmFsc2UsIGFzIHdlIG9ubHkgY2hlY2tlZCB0aGUgDQpzdGFy
-dGluZyBhZGRyZXNzLCBidXQgdGhlcmUgaXMgYSBwYXJ0IG9mIHRoZSBhY2Nlc3Mgd2l0aGlu
-IHRoZSBMQVNTIA0KcmFuZ2UgKHdpdGggYml0IDYzKS4NCg0KPiArICAgIGlmICggISh2LT5h
-cmNoLmh2bS5ndWVzdF9jcls0XSAmIFg4Nl9DUjRfTEFTUykgfHwgIWh2bV9sb25nX21vZGVf
-YWN0aXZlKHYpICkNCj4gKyAgICAgICAgcmV0dXJuIGZhbHNlOw0KPiArDQo+ICsgICAgaWYg
-KCAhaXNfaW1wbGljaXRfc3VwZXJ2aXNvcl9hY2Nlc3MgJiYgaHZtX2dldF9jcGwodikgPT0g
-MyApDQo+ICsgICAgICAgIHJldHVybiBpc19zdXBlcnZpc29yX2FkZHJlc3M7DQo+ICsNCj4g
-KyAgICAvKg0KPiArICAgICAqIEluIHRoZSBzdWJzZXF1ZW50IGxvZ2ljLCB3ZSBhcmUgZW11
-bGF0aW5nIGEgdmVyaWZpZWQgc3VwZXJ2aXNvcg0KPiArICAgICAqIGFjY2VzcyBMQVNTIGNo
-ZWNrLg0KPiArICAgICAqLw0KPiArDQo+ICsgICAgaWYgKCBhY2Nlc3NfdHlwZSAhPSBodm1f
-YWNjZXNzX2luc25fZmV0Y2ggKQ0KPiArICAgIHsNCj4gKyAgICAgICAgaWYgKCAhKHYtPmFy
-Y2guaHZtLmd1ZXN0X2NyWzRdICYgWDg2X0NSNF9TTUFQKSApDQo+ICsgICAgICAgICAgICBy
-ZXR1cm4gZmFsc2U7DQo+ICsNCj4gKyAgICAgICAgaWYgKCAhaXNfaW1wbGljaXRfc3VwZXJ2
-aXNvcl9hY2Nlc3MgJiYNCj4gKyAgICAgICAgICAgICBndWVzdF9jcHVfdXNlcl9yZWdzKCkt
-PmVmbGFncyAmIFg4Nl9FRkxBR1NfQUMgKQ0KPiArICAgICAgICAgICAgcmV0dXJuIGZhbHNl
-Ow0KPiArICAgIH0NCj4gKw0KPiArICAgIGlmICggc2l6ZSAmJiAhKChhZGRyICsgc2l6ZSAt
-IDEpICYgKDFVTEwgPDwgNjMpKSApDQo+ICsgICAgICAgIHJldHVybiB0cnVlOw0KPiArDQo+
-ICsgICAgcmV0dXJuICFpc19zdXBlcnZpc29yX2FkZHJlc3M7DQo+ICt9DQoNCkknbSBub3Qg
-c3VyZSB0byBmb2xsb3cgdGhlIGVudGlyZSBsb2dpYw0KDQpBSVVJLCBMQVNTIHZpb2xhdGlv
-bnMgaGFwcGVucyB3aGVuIDoNCi0gdXNlci1tb2RlIDogQW55IGFjY2VzcyB0byBMQVNTIHJh
-bmdlIChiaXQgNjMgPSAxKQ0KLSBzdXBlcnZpc29yLW1vZGUgYWNjZXNzIDoNCiAgIC0gQW55
-IGFjY2VzcyB0byBub24tTEFTUyByYW5nZSAoYml0IDYzID0gMCkgaWYgU01BUCAmJiAoQUM9
-MCB8fCANCiJpbXBsaWNpdCBzdXBlcnZpc29yLW1vZGUgYWNjZXNzIikNCiAgIC0gQW55IGlu
-c3RydWN0aW9uIGZldGNoIHRvIG5vbi1MQVNTIHJhbmdlIChiaXQgNjMgPSAwKQ0KDQo+ICsN
-Cj4gICBib29sIGh2bV92Y3B1X3ZpcnR1YWxfdG9fbGluZWFyKA0KPiAgICAgICBzdHJ1Y3Qg
-dmNwdSAqdiwNCj4gICAgICAgZW51bSB4ODZfc2VnbWVudCBzZWcsDQo+IEBAIC0yNjAyLDI2
-ICsyNjM2LDMxIEBAIGJvb2wgaHZtX3ZjcHVfdmlydHVhbF90b19saW5lYXIoDQo+ICAgICAg
-ICAgICBpZiAoIG1heChvZmZzZXQsIGxhc3RfYnl0ZSkgPj4gMTYgKQ0KPiAgICAgICAgICAg
-ICAgIGdvdG8gb3V0Ow0KPiAgICAgICB9DQo+IC0gICAgZWxzZSBpZiAoIGh2bV9sb25nX21v
-ZGVfYWN0aXZlKHYpICYmDQo+IC0gICAgICAgICAgICAgIChpc194ODZfc3lzdGVtX3NlZ21l
-bnQoc2VnKSB8fCBhY3RpdmVfY3MtPmwpICkNCj4gKyAgICBlbHNlIGlmICggaHZtX2xvbmdf
-bW9kZV9hY3RpdmUodikgKQ0KPiAgICAgICB7DQo+IC0gICAgICAgIC8qDQo+IC0gICAgICAg
-ICAqIFVzZXIgc2VnbWVudHMgYXJlIGFsd2F5cyB0cmVhdGVkIGFzIHByZXNlbnQuICBTeXN0
-ZW0gc2VnbWVudCBtYXkNCj4gLSAgICAgICAgICogbm90IGJlLCBhbmQgYWxzbyBpbmN1ciBs
-aW1pdCBjaGVja3MuDQo+IC0gICAgICAgICAqLw0KPiAtICAgICAgICBpZiAoIGlzX3g4Nl9z
-eXN0ZW1fc2VnbWVudChzZWcpICYmDQo+IC0gICAgICAgICAgICAgKCFyZWctPnAgfHwgKG9m
-ZnNldCArIGJ5dGVzIC0gISFieXRlcykgPiByZWctPmxpbWl0KSApDQo+IC0gICAgICAgICAg
-ICBnb3RvIG91dDsNCj4gKyAgICAgICAgaWYgKCAoaXNfeDg2X3N5c3RlbV9zZWdtZW50KHNl
-ZykgfHwgYWN0aXZlX2NzLT5sKSApDQo+ICsgICAgICAgIHsNCj4gKyAgICAgICAgICAgIC8q
-DQo+ICsgICAgICAgICAgICAgKiBVc2VyIHNlZ21lbnRzIGFyZSBhbHdheXMgdHJlYXRlZCBh
-cyBwcmVzZW50LiAgU3lzdGVtIHNlZ21lbnQgbWF5DQo+ICsgICAgICAgICAgICAgKiBub3Qg
-YmUsIGFuZCBhbHNvIGluY3VyIGxpbWl0IGNoZWNrcy4NCj4gKyAgICAgICAgICAgICAqLw0K
-PiArICAgICAgICAgICAgIGlmICggaXNfeDg2X3N5c3RlbV9zZWdtZW50KHNlZykgJiYNCj4g
-KyAgICAgICAgICAgICAgICAgICghcmVnLT5wIHx8IChvZmZzZXQgKyBieXRlcyAtICEhYnl0
-ZXMpID4gcmVnLT5saW1pdCkgKQ0KPiArICAgICAgICAgICAgICAgICBnb3RvIG91dDsNCj4g
-ICANCj4gLSAgICAgICAgLyoNCj4gLSAgICAgICAgICogTE9ORyBNT0RFOiBGUywgR1MgYW5k
-IHN5c3RlbSBzZWdtZW50czogYWRkIHNlZ21lbnQgYmFzZS4gQWxsDQo+IC0gICAgICAgICAq
-IGFkZHJlc3NlcyBtdXN0IGJlIGNhbm9uaWNhbC4NCj4gLSAgICAgICAgICovDQo+IC0gICAg
-ICAgIGlmICggc2VnID49IHg4Nl9zZWdfZnMgKQ0KPiAtICAgICAgICAgICAgYWRkciArPSBy
-ZWctPmJhc2U7DQo+ICsgICAgICAgICAgICAvKg0KPiArICAgICAgICAgICAgICogTE9ORyBN
-T0RFOiBGUywgR1MgYW5kIHN5c3RlbSBzZWdtZW50czogYWRkIHNlZ21lbnQgYmFzZS4gQWxs
-DQo+ICsgICAgICAgICAgICAgKiBhZGRyZXNzZXMgbXVzdCBiZSBjYW5vbmljYWwuDQo+ICsg
-ICAgICAgICAgICAgKi8NCj4gKyAgICAgICAgICAgIGlmICggc2VnID49IHg4Nl9zZWdfZnMg
-KQ0KPiArICAgICAgICAgICAgICAgIGFkZHIgKz0gcmVnLT5iYXNlOw0KPiArDQo+ICsgICAg
-ICAgICAgICBsYXN0X2J5dGUgPSBhZGRyICsgYnl0ZXMgLSAhIWJ5dGVzOw0KPiArICAgICAg
-ICAgICAgaWYgKCAhaXNfY2Fub25pY2FsX2FkZHJlc3MoKGxvbmcpYWRkciA8IDAgPyBhZGRy
-IDogbGFzdF9ieXRlKSApDQo+ICsgICAgICAgICAgICAgICAgZ290byBvdXQ7DQo+ICsgICAg
-ICAgIH0NCj4gICANCj4gLSAgICAgICAgbGFzdF9ieXRlID0gYWRkciArIGJ5dGVzIC0gISFi
-eXRlczsNCj4gLSAgICAgICAgaWYgKCAhaXNfY2Fub25pY2FsX2FkZHJlc3MoKGxvbmcpYWRk
-ciA8IDAgPyBhZGRyIDogbGFzdF9ieXRlKSApDQo+ICsgICAgICAgIGlmICggaXNfbGFzc192
-aW9sYXRpb24odiwgYWRkciwgYnl0ZXMsIGFjY2Vzc190eXBlLCBpc194ODZfc3lzdGVtX3Nl
-Z21lbnQoc2VnKSkgKQ0KPiAgICAgICAgICAgICAgIGdvdG8gb3V0Ow0KPiAgICAgICB9DQo+
-ICAgICAgIGVsc2UNCg0KVGVkZHkNCg==
+> > +/*
+> > + * Set once guest contexts run on the sparse view: from then on, the r=
+oot
+> > + * page-tables of domains with d->arch.sparse_dmap carry it.
+> > + */
+> > +extern bool sparse_dmap_active;
+>
+> Shouldn't sparse_dmap_active be opt_sparse_dmap_pv ||
+> opt_sparse_dmap_hvm?  I'm afraid I don't understand the point of
+> tracking whether there are domain using the sparse direct map or not,
+> that's already tracked by d->arch.sparse_dmap?
 
---------------LslxXoHdkVmcfJKUojxZN60L--
+Yeah, sparse_dmap_active was originally meant to be used to shortcut
+certain things when no domains were using the sparse directmap; but it
+hasn't turned out to be needed.  I'll remove it.
 
---------------shPc4mcuG1hVQ467m1rlFl2t
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
-
------BEGIN PGP SIGNATURE-----
-
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmrPcI0FAwAAAAAACgkQZg+p0QLLz9CS
-Pgv/aT6vcr7voGDmYe5DrkhdXZi9/eKZYfgd7vA/Tthr1ZMbntsVyYO4/auAmza1SH7jZlD33tfg
-PkLaaK/BGThEDG9hrTfo4nsQbujgrySpvNYy2RdQS8PYAdW9PpX4jbDV6aBDUMtpHqgy4rRWQ+NQ
-C3J6n9PqILF3BN4hhnbhzm2V4cp3fuyPVkZ+pzozcmBqfP5bCfjNT6KYqhZa/PVwI7ls0yEXQimW
-0AtAm9EtIC4Ivo5dlhJWhtZe8P87pZzbSkAqgLXNR3ZSc+3U1WMqBEABCgheXBnd43RQv5VnrMSD
-ZKQcHx+Hj4Y6EPpNuMZO8kteL7eIvpEPHLylMrVDgBdFHsV0RlPP69CuUvTkusypMDAd8R9gCC0c
-1QRxxFA6OJCwWGBg64kqcU6pAVVLSCZVlyUwY1gN6YqeI9tKCScmrkPL9v8rt3XzCu0LAehmCIhE
-BBC1USBi/aykeqmA4ratXwx9Osyly5vHz1aEtqPnJcnBPZJOgpy1xslOCWUU
-=Umxr
------END PGP SIGNATURE-----
-
---------------shPc4mcuG1hVQ467m1rlFl2t--
+ -George
 
