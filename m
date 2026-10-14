@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B159DCC6B1A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 14:03:30 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1449112.1665048 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73412CC6B1D
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 14:06:04 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1449121.1665058 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGzZZ-0006Hv-7O; Wed, 14 Oct 2026 14:03:13 +0000
+	id 1xGzc8-0006wK-Jc; Wed, 14 Oct 2026 14:05:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1449112.1665048; Wed, 14 Oct 2026 14:03:13 +0000
+Received: by outflank-mailman (output) from mailman id 1449121.1665058; Wed, 14 Oct 2026 14:05:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGzZZ-0006Ho-4H; Wed, 14 Oct 2026 14:03:13 +0000
-Received: by outflank-mailman (input) for mailman id 1449112;
- Wed, 14 Oct 2026 14:03:11 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGzZX-0006Hi-MU
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 14:03:11 +0000
+	id 1xGzc8-0006wD-GU; Wed, 14 Oct 2026 14:05:52 +0000
+Received: by outflank-mailman (input) for mailman id 1449121;
+ Wed, 14 Oct 2026 14:05:52 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGzc7-0006w7-RS
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 14:05:51 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGzZW-004p7n-Sb
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 16:03:10 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xGzc7-00CRsc-8R
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 16:05:51 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acf8b9c-e002-0a2a0a5209dd-0a2a45068362-10
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 16:03:10 +0200
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acf8b9c-195a-0a2a45060019-d155dd36cc3d-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 16:03:09 +0200
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-48c4207ac26so3920471f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 07:03:09 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48de0aaaa3fsm12387294f8f.10.2026.10.14.07.03.07
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6acf8c31-8faa-0a2a0a5109dd-0a2a450aebb0-48
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 16:05:51 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6acf8c3e-f2d2-0a2a450a0019-d1558035e5f4-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 16:05:50 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-4a1682bff3cso4616625e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 07:05:50 -0700 (PDT)
+Received: from [172.20.10.5] (public-gprs378609.centertel.pl. [37.47.110.50])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a1bcf3c8b8sm3707235e9.10.2026.10.14.07.05.48
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Oct 2026 07:03:07 -0700 (PDT)
+ Wed, 14 Oct 2026 07:05:49 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,123 +52,286 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791986588; x=1792591388; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=gmail.com; s=20251104; t=1791986750; x=1792591550; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=MzesA1TjVBQoe30CWqEdg0oqAxt64RgmXVRAhfJfcw0=;
-        b=YR/ktzN81uOuTYJCj3i4Fuws/oXfNtwazAF0A3QypaAcMnQQixf74VnLfGdERmPcEl
-         W4zezshKenfc6f6JKcWenV71BeKNYJEyrspIpF6KqqC2+lrStjaDSiJ83BBXnR311PVh
-         zFZx/knJoGp9GpiCTNGbYRSKoIulhbDeFrFkI3l0qwLSVVs5h5CgqOMtjyNSWYoV06PR
-         v/9TnIQDhXiRGNMtnCmBESJ5TqK6VcuJyXveILIXYpJUTaeFeybhawx1Mm7033Sag1gt
-         ael5/5ITEubGpNgSQgIlkrgRKHsXSOV5OrhJ5VmP2+Z7YY8MWQ5mGj3Mq/LCmVVVu3Jj
-         7v4A==
+        bh=FFJJL+9AqxcnZpFPPjUKvHI8vqTS8pUG9i6dcJfjtco=;
+        b=HfgxHG60p2sxSkSp1arBoTwqsJXmAP94KL0tHUvE7DRD1dKzYIamB/eXq2/PjMew6j
+         SvMnmYMCciFW4vtSG5EaF/0nHkv0qcqRDBjHUeaCCWl6H/YmnjIa/uy7S5lDX5nb93tI
+         IqOO+SnnYoFX3E9xCFXUmzPomuv8ZrBJoa4Xyr1hW+VYDahUQfjV9dF2no8fZGKJmkaJ
+         L1rrtZtaSKB1bIrFWt75s9rXAgP05mzpNREuqwSaWUB7tJc2YpkAwzy/kBy7zwLAd5fN
+         gCTlf1v2n8vQTrSTe/Gp3o3ZPXOSbf+3d+U4iRDVSflvcBUj6h0UnEm4OdsdbFROXl2Y
+         GZ/Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791986588; x=1792591388;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+        d=1e100.net; s=20260707; t=1791986750; x=1792591550;
+        h=content-transfer-encoding:content-type:in-reply-to:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=MzesA1TjVBQoe30CWqEdg0oqAxt64RgmXVRAhfJfcw0=;
-        b=u/gaD3q4kxotJO0e+6oRtyWQAKLl8rSSjY/YX1q16F3MxIqddDIumTmYYCwyOAu14O
-         dkH7Bz4e/MzaT7pCey+TpmqEL4Id5UsCpzYAEXG2fVudbPhdzBx8QsmwQIee0SJfWROZ
-         vIGpc9uSi0zUvzenAuz5A0UD+AWpzCbJ/P/LCKzms28IIJ4yMlr/m0hNpCXki29cveUW
-         fRAtJDtbA4+tFr8evlE4eFvhD/Aa7YCyOJyMIsB+im2hs8UqkOSU1Lf9M0hazfhXPMAi
-         zmsUksLqmUGz1TF4Kt1EJjfHG27jIAtEgVGp+ncKg/8/4wWl5rwdBYFVBrftrYBc8h5f
-         AiHQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzjIeYcgLk1xj9bBkdTARssrkXS3ZklJZIj6NI3Fh98bufjZNcGOoekQLCh6NhgAmQPg4P7XOtddO8=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYL8ylovMPMaR03lo0nHp7dVZgxr2e+W5eD2hZUCfAyj8YFxn+X/
-	oE6xHYAMtwGDPX28FrB1E475zAZkBku8FeXQEayoyDyp9FJ7rT3ixLaJ/Mi/lTobAw==
-X-Gm-Gg: AYBFou3yh0aFFjzxxrWrE4ab5gSkt+v4/ucRVbUrEaJBAgxL/DJv+JsTFa849Io2unz
-	s76M5wsoyTrh6ryLsMX64OR3LXxeGRxNzAuJZsKlOdLvvN6zDZUaAxEW5Nw8TMWpTzEa7goUYXb
-	VVuzy1fLf0FBlZ8PsAcOVM9feGBNKtCFiB5hXFmqMTkH9JzSz8sLRcJE+qVQ/I8EbucXJg9OQUJ
-	OruTHPwkLtbCWnu8XbqUdCEDbP3zg6WyywTaiTka4WDnnlegagCGad+W9MfPOgydEf+JoZU3eDl
-	zY6W8rgNlC5fkSny+WbE2POHOgi0Ss+zvJ4S3DiNW9ZbaNlIwWHz55WJ6bi+qCQKvWNVo9z00Yc
-	4TYAbWRlgBoecgKXEXkb6onYLQfE9htyTt+12ERYsjnZN729FYXX9vSJGKnutUniVo3WwkF+lkY
-	prQ6BkF/wFprv6SHkXb5pgxQuVi1xrGcbDez2WGA4La8qwGw2z0GEe0Bc+pOsWLjH5PXzsvQX+g
-	MwApR1ur+dUCpuuTBcqSBy1x+sua38F1w2SlN/KLJMuG2engDJpOLcaq5otEk1yTAv6LPmr
-X-Received: by 2002:adf:f307:0:b0:48c:54c0:4cf1 with SMTP id ffacd0b85a97d-48dbaadd3e5mr23647661f8f.9.1791986588535;
-        Wed, 14 Oct 2026 07:03:08 -0700 (PDT)
-Message-ID: <27c8f0bb-4c59-4605-ac61-9a3e5434fc64@suse.com>
-Date: Wed, 14 Oct 2026 16:03:06 +0200
+        bh=FFJJL+9AqxcnZpFPPjUKvHI8vqTS8pUG9i6dcJfjtco=;
+        b=zkjHlxVpYm2b5qwuO1zQuVFPexopXvkCBzgCfU7G3X62RLcxHRutvLjIA5kL8c3YfO
+         umTGcVtfnngJ2V8C3IuSXitT8km0v1ypfdBbtoR4Kl1iEt/GZbqJ2yQi9gQw/ag34AvQ
+         XOwy1cKP01P7LFb979+W/hEYbFodNqMDbdoxzUov9p58UlA5lxMXNYOPM5IcpOzZG0QA
+         Bpy0U96QyCVnZ1qTyJZ/vwp9jA43WGBq7LkJfkW/nMuuH+MjoqaHBe9KDqDfLVcOPn34
+         FF0d2T1Osg8hgN+PUtneSWJqi2cmwVsljBnb+IEO7Ebp8MtPcfHVH7+YzjX/sNJh4A7b
+         QRfQ==
+X-Gm-Message-State: AFq9FYKxHVGvcgv4DSnMu9cqnWn9gmroy1RvvabVFsIrJZ2wQmPR4eCL
+	wFy5wm15aWgxcmiDVp2/Lat5SugtuT6PXHsw2/HM4WSoj2/mtwc72Imy
+X-Gm-Gg: AYBFou3bFTY7s4uiig/fdBBX4zl8NyOuPBJk774Ycd7WSE+RUX+ivsiOlulCfCUlXVa
+	Bq9+VumQT8uzWwjXUu54FrPMAhjsM+vvYXV1W1DYh8xZOx7w3arH5KRhIClRJshnoSmGHHL+aPm
+	SDu936yryQs9Q0FTbDmRuoMu11yIjiE255SM4OdKKxpFIzmBMFvOmlzZH6JviKTc6x99T0BPWy2
+	IicVBdGFj9Z2uD/+fnUZb9Cfhz/UyEes4NCxirJ3Khl+rxzOjAtQJe6zierQt1oFR8nQO0n/M8W
+	rVmlOLfC7FYAuxotfJQ1wNBhr6Rn0HPdNe31X/C3xV2UbGG1AjTgxfUVsZOmUmrwJpJIIkg3fna
+	2Iq7GhKpXw1UcdsPEKQ9vAENcjmJSur/n1qpomYFPGBMhzKGA5+o4x0jcVIZBeRpH0ShXSfiq1V
+	meCQl6BL/CK8hSRTJJYeH720wE/68PBBM9hh55Z3uDPDmUHvZFezMGTGKJdfb+SL3X8fRNu5UjG
+	vUdfP+SuzwMZRf3yQ5ZbL0ALdAkgVdF7u3Tzxk=
+X-Received: by 2002:a05:600c:c16f:b0:49f:cbf1:e765 with SMTP id 5b1f17b1804b1-4a18e3ef314mr305314675e9.0.1791986749968;
+        Wed, 14 Oct 2026 07:05:49 -0700 (PDT)
+Message-ID: <9ac3fdbe-9f3b-4abd-ab8d-7e252a7cf809@gmail.com>
+Date: Wed, 14 Oct 2026 16:05:47 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 09/39] xen/riscv: build the target hart index via
- aplic_hart_index()
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+Subject: Re: [PATCH v3 11/39] xen/riscv: implement vCPU context switching
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Cc: xen-devel@lists.xenproject.org,
+ Romain Caritey <Romain.Caritey@microchip.com>,
  Zheng Zhang <zhangzheng@iscas.ac.cn>,
  Alistair Francis <alistair.francis@wdc.com>,
  Connor Davis <connojdavis@gmail.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
 References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <ba71bd0de931eab1205a1139e160f40b72bda421.1790779209.git.oleksii.kurochko@gmail.com>
+ <6e539cc5ded7f62c4347781785af714840893184.1790779209.git.oleksii.kurochko@gmail.com>
+ <1791305420.8631fc262581453bbf619ec5b2062170.1a1121f8fef0003f66@vates.tech>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <ba71bd0de931eab1205a1139e160f40b72bda421.1790779209.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <1791305420.8631fc262581453bbf619ec5b2062170.1a1121f8fef0003f66@vates.tech>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1791986589-FDA0C77B-91848352/10/78276251493
+X-purgate-ID: tlsNG-4011c0/1791986750-536D6CFC-5EC1067A/10/73395122804
 X-purgate-type: spam
-X-purgate-size: 1136
+X-purgate-size: 8399
 
-On 30.09.2026 18:18, Oleksii Kurochko wrote:
-> --- a/xen/arch/riscv/aplic.c
-> +++ b/xen/arch/riscv/aplic.c
-> @@ -335,9 +335,7 @@ static unsigned int aplic_get_cpu_from_mask(const cpumask_t *cpumask)
->  static void cf_check aplic_set_irq_affinity(struct irq_desc *desc, const cpumask_t *mask)
->  {
->      unsigned int cpu;
-> -    uint64_t group_index, base_ppn;
-> -    uint32_t hhxw, lhxw, hhxs, value;
-> -    const struct imsic_config *imsic = aplic.imsic_cfg;
-> +    uint32_t value;
->  
->      /*
->       * TODO: Currently, APLIC is supported only with MSI interrupts.
-> @@ -350,27 +348,18 @@ static void cf_check aplic_set_irq_affinity(struct irq_desc *desc, const cpumask
->  
->      ASSERT(spin_is_locked(&desc->lock));
->  
-> -    cpu = cpuid_to_hartid(aplic_get_cpu_from_mask(mask));
-> -    hhxw = imsic->group_index_bits;
-> -    lhxw = imsic->hart_index_bits;
-> +    cpu = aplic_get_cpu_from_mask(mask);
+[...]
 
-Any reason this can't be the initializer of the variable? There is a
-related assertion in between, but as long as the variable isn't otherwise
-used ahead of that, such ordering if fine afaict.
+>> diff --git a/xen/arch/riscv/include/asm/csr.h b/xen/arch/riscv/include/asm/csr.h
+>> index a5cb24c863..aad82c6a6d 100644
+>> --- a/xen/arch/riscv/include/asm/csr.h
+>> +++ b/xen/arch/riscv/include/asm/csr.h
+>> @@ -40,6 +40,13 @@
+>>       csr_write(csr ## H, v_ >> 32);  \
+>>   })
+>>   
+>> +#define csr_read64(csr)                 \
+>> +({                                      \
+>> +    uint64_t v_ = csr_read(csr ## H);   \
+> This violates Misra 20.12 rule (docs/misra/rules.rst) as we use macro
+> parameter `csr` as an operand of ##, while it could be expanded as a
+> macro (e.g. csr_read64(CSR_HENVCFG)).
 
-Jan
+To avoid MISRA violation, if i understand it correctly, I will do the 
+following:
+
++#define csr_read64(name)                       \
++({                                             \
++    uint64_t v_ = csr_read(CSR_ ## name ## H); \
++                                               \
++    (v_ << 32) | csr_read(CSR_ ## name);       \
+
+and ...
+
+>> +                                        \
+>> +    (v_ << 32) | csr_read(csr);         \
+>> +})
+>> +
+>>   /*
+>>    * The two halves are read by separate instructions, so a CSR which hardware
+>>    * increments can carry from the low half into the high one in between,
+>> @@ -72,6 +79,12 @@
+>>       (void)csr ## H;                 \
+>>       csr_read(csr);                  \
+>>   })
+>> +
+>> +#define csr_read64(csr)             \
+>> +({                                  \
+>> +    (void)csr ## H;                 \
+> Same as above.
+
+... the following here:
+
++#define csr_read64(name) csr_read(CSR_ ## name)
+
+
+>> +    csr_read(csr);                  \
+>> +})
+>>   #endif
+
+[...]
+
+>> diff --git a/xen/arch/riscv/p2m.c b/xen/arch/riscv/p2m.c
+>> index de25607247..02e7f6364f 100644
+>> --- a/xen/arch/riscv/p2m.c
+>> +++ b/xen/arch/riscv/p2m.c
+>> @@ -243,6 +243,15 @@ static void p2m_tlb_flush(struct p2m_domain *p2m)
+>>   
+>>       p2m->need_flush = false;
+>>   
+>> +    /*
+>> +     * Order the p2m updates above against the read of dirty_cpumask below,
+>> +     * pairing with the barrier in p2m_vmid_switch_to(). Either that hart is
+>> +     * seen here and gets an HFENCE.GVMA, or it adds itself to the mask
+>> +     * afterwards, in which case it starts walking this p2m only once the
+>> +     * updates are visible to it.
+>> +     */
+>> +    smp_mb();
+>> +
+>>       sbi_remote_hfence_gvma(d->dirty_cpumask, 0, 0);
+>>   }
+>>   
+>> @@ -1504,16 +1513,110 @@ void p2m_ctxt_switch_from(struct vcpu *p)
+>>        * VMID, world-switch code should zero vsatp, then swap hgatp, then
+>>        * finally write the new vsatp value what will be done in
+>>        * p2m_ctxt_switch_to().
+>> -     * Note, that also HGATP update could happen in p2m_handle_vmenter().
+>>        */
+>>       p->arch.vsatp = csr_swap(CSR_VSATP, 0);
+>>   
+>>       /*
+>> -     * Nothing to do with HGATP as it will be update in p2m_ctxt_switch_to()
+>> -     * or/and in p2m_handle_vmenter().
+>> +     * Nothing to do with HGATP as it will be updated in
+>> +     * p2m_ctxt_switch_to().
+>>        */
+>>   }
+>>   
+>> +/*
+>> + * Domain whose p2m this hart's HGATP points at. ctxt_switch_to() bails out
+>> + * early for the idle vCPU, so HGATP survives a pass through idle and keeps
+>> + * pointing at the domain which ran here last. That domain, rather than the
+>> + * one the scheduler switched away from, is what owns this hart's G-stage
+>> + * translations. The hart also keeps its place in the owner's dirty_cpumask:
+>> + * p2m_tlb_flush() goes on reaching it, and a domain which idles between two
+>> + * runs on the same hart keeps its VMIDs.
+>> + *
+>> + * TODO: nothing resets hgatp_owner when its domain is destroyed, so a hart
+>> + *       which stays idle from the domain's last run until it is freed is
+>> + *       left with a dangling pointer. Once domain_relinquish_resources()
+>> + *       tears down the p2m, it has to reset hgatp_owner of every hart still
+>> + *       pointing at the domain (cmpxchg() against d), i.e. before the RCU
+>> + *       grace period of domain_destroy() and so before the domain is freed.
+>> + */
+>> +static DEFINE_PER_CPU(struct domain *, hgatp_owner);
+>> +
+>> +/*
+>> + * Update this hart's place in the dirty_cpumask of the domains involved and
+>> + * claim a VMID for n. Must be called before HGATP is pointed at n's p2m, as
+>> + * it is written with the VMID claimed here.
+>> + */
+>> +static void p2m_vmid_switch_to(struct vcpu *n)
+>> +{
+>> +    unsigned int cpu = smp_processor_id();
+>> +    struct domain *owner = this_cpu(hgatp_owner);
+>> +    bool need_flush;
+>> +
+>> +    ASSERT(!is_idle_vcpu(n));
+>> +
+>> +    if ( owner != n->domain )
+>> +    {
+>> +        /*
+>> +         * Once this hart drops out of the owner's dirty_cpumask it stops
+>> +         * being a target of p2m_tlb_flush(), while its TLB may still hold
+>> +         * G-stage translations of that domain: none of the vCPUs of that
+>> +         * domain which ran here has had its VMID invalidated. Move the hart
+>> +         * to a new VMID generation so that none of them can be reached
+>> +         * again.
+>> +         *
+>> +         * This has to precede the VMID claim below, so that n gets a VMID of
+>> +         * the new generation.
+>> +         */
+>> +        if ( owner )
+>> +        {
+>> +            vmid_flush_hart();
+>> +
+>> +            cpumask_clear_cpu(cpu, owner->dirty_cpumask);
+>> +        }
+>> +
+>> +        /*
+>> +         * Mark this hart in the incoming domain's dirty_cpumask before HGATP
+>> +         * is pointed at its p2m: from that write on the hart may cache the
+>> +         * p2m's translations, so p2m_tlb_flush() must already reach it.
+>> +         */
+>> +        cpumask_set_cpu(cpu, n->domain->dirty_cpumask);
+>> +
+>> +        /*
+>> +         * Pairs with the barrier in p2m_tlb_flush(). cpumask_set_cpu() is an
+>> +         * unordered AMO on RISC-V, so without this a concurrent flusher could
+>> +         * read the mask without this hart in it while this hart is already
+>> +         * walking the p2m it is about to be pointed at.
+>> +         */
+>> +        smp_mb();
+>> +
+>> +        this_cpu(hgatp_owner) = n->domain;
+>> +    }
+>> +
+>> +    /*
+>> +     * A VMID is meaningful only on the hart whose pool issued it: generations
+>> +     * are per-hart counters which all start at 1 and advance independently,
+>> +     * so the pair a vCPU brings from another hart may match this hart's
+>> +     * generation by coincidence, leaving the vCPU under a VMID which is live
+>> +     * here for someone else.
+>> +     */
+> So if I understand correctly, we are setting generation to 0 to mark the
+> vCPU that it is coming from other hart right?
+
+Yes, at least that is the case this code deals with. Strictly speaking,
+generation 0 just invalidates the vCPU's VMID, so that a new one is
+claimed on the next VM entry; vmid_flush_vcpu() could be used wherever
+that is needed, coming from another hart being one such case.
+
+> Nit: If it's the case I may simplify the comment to:
+>        /*
+>         * VMIDs and generations are per hart, so a pair issued on another hart
+>         * may match this hart's generation by coincidence. Reset the generation
+>         * to 0, which no hart ever uses, so that a fresh VMID is claimed from
+>         * this hart's pool.
+>         */
+> 
+
+Looks good to me, I'll take it.
+
+
+>> +    if ( n->arch.last_cpu != cpu )
+>> +        vmid_flush_vcpu(n);
+>>
+> Nit: I had to read this a couple of times to get why the guest entry is too
+> late. "makes HGATP live" doesn't say what happens once it is: if it's
+> because of speculation filling the TLB with G-stage entries tagged with
+> the VMID in HGATP, like you explained in the commit message then it may
+
+I thought that having "HGATP live" would be clear.
+
+> worth spell out:
+> 
+>        /*
+>         * Claim the VMID before the caller writes HGATP rather than on guest
+>         * entry: from that write on, speculation may fill the TLB with this
+>         * domain's G-stage entries tagged with that VMID. A stale VMID may
+>         * already have been re-issued to a vCPU of another domain, which would
+>         * then hit these entries.
+>         */
+> 
+
+Indeed, that's clearer. I'll take your wording.
+
+Thanks!
+
+~ Oleksii
+
 
