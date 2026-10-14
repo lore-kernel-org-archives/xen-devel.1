@@ -4,43 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACC62CC6B1A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 13:52:34 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1449081.1665031 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67BB8CC6B1A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 13:58:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1449102.1665039 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGzP3-0002xe-W7; Wed, 14 Oct 2026 13:52:21 +0000
+	id 1xGzUi-0004Si-MM; Wed, 14 Oct 2026 13:58:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1449081.1665031; Wed, 14 Oct 2026 13:52:21 +0000
+Received: by outflank-mailman (output) from mailman id 1449102.1665039; Wed, 14 Oct 2026 13:58:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGzP3-0002xX-SU; Wed, 14 Oct 2026 13:52:21 +0000
-Received: by outflank-mailman (input) for mailman id 1449081;
- Wed, 14 Oct 2026 13:52:20 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGzP2-0002wQ-L9
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 13:52:20 +0000
+	id 1xGzUi-0004Sb-Je; Wed, 14 Oct 2026 13:58:12 +0000
+Received: by outflank-mailman (input) for mailman id 1449102;
+ Wed, 14 Oct 2026 13:58:11 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <mark.caveayland@nutanix.com>) id 1xGzUh-0004SV-Kh
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 13:58:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGzP1-004nEZ-RP
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 15:52:19 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xGzUg-00DYWb-UR
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 15:58:10 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acf890f-2eae-0a2a0a5409dd-0a2a4501daf8-12
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:52:19 +0200
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acf8913-5984-0a2a45010019-d155dd2dc968-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:52:19 +0200
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-48b0946c2c2so2666092f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 06:52:19 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48de72c7e36sm6598086f8f.37.2026.10.14.06.52.17
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Oct 2026 06:52:18 -0700 (PDT)
+ (envelope-from <mark.caveayland@nutanix.com>)
+ id 6acf8a60-8faa-0a2a0a5109dd-0a2a4504e1f6-46
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:58:10 +0200
+Received: from [148.163.155.12] (helo=mx0b-002c1b01.pphosted.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <mark.caveayland@nutanix.com>)
+ id 6acf8a71-b57f-0a2a45040019-94a39b0cb9fa-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:58:10 +0200
+Received: from pps.filterd (m0127844.ppops.net [127.0.0.1])
+ by mx0b-002c1b01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69E7wO9p3014631; Wed, 14 Oct 2026 06:58:05 -0700
+Received: from bl2pr02cu003.outbound.protection.outlook.com
+ (mail-eastusazon11021074.outbound.protection.outlook.com [52.101.52.74])
+ by mx0b-002c1b01.pphosted.com (PPS) with ESMTPS id 4h9pvvu4jp-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Wed, 14 Oct 2026 06:58:05 -0700 (PDT)
+Received: from PH0PR02MB7159.namprd02.prod.outlook.com (2603:10b6:510:16::8)
+ by DS4PR02MB11308.namprd02.prod.outlook.com (2603:10b6:8:2fb::17) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Wed, 14 Oct
+ 2026 13:58:03 +0000
+Received: from PH0PR02MB7159.namprd02.prod.outlook.com
+ ([fe80::8e97:bc32:822c:b250]) by PH0PR02MB7159.namprd02.prod.outlook.com
+ ([fe80::8e97:bc32:822c:b250%4]) with mapi id 15.21.0522.012; Wed, 14 Oct 2026
+ 13:58:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,445 +62,201 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791985939; x=1792590739; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ezXCXUWK6SsuGyAG3eCrrjeZLo0IOueiBha//yJ648E=;
-        b=AkOp2IbatdOIxPHvT41Tae/fGhhsDq4QfyhRF6DxOQIjmMr87lzjWrmaOOaoCf8ZWi
-         ioIl0T9021zuM4k4+8XD3QMjctNS7T+ZWZLy/QJoT1vKhvxSZbYtCyIrB4x5zIN/x6wI
-         v6ELOyuCVE8qN8U75lnYs6pxgE2m9rEBY322wUPC3ckYMc5IPmtoVX0U2nnwzDATAb2Z
-         tWkVrp17ynYWNXaw4cAn8b1hz6DI7fm+EYD7FFPgR9mn+Q6Egw5dM6JquJWHaqRq2zM9
-         2s7m3wID4HMwyGnrNzk2Wk1KXi/MijxiaT8nigKWG1AXNpccB72anftxALSBzWhG4dbJ
-         HyPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791985939; x=1792590739;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ezXCXUWK6SsuGyAG3eCrrjeZLo0IOueiBha//yJ648E=;
-        b=vLJ5+M02njBk1kW/ukJSRX6P0KPz1uEzeQTjVopkDcnQ8wjU0NmYc66udIClGhXgip
-         uwlZIENeqF4qvfr3z9SJ7VVwVK0y5K90+E0O1ktPCytfABLzvjSnbhksBiHXctwYyRyE
-         WOU3fNaSKPi3/fo5Vxj1nlkoNB2cDqKDB5277Quf6Ktwyismh8HgobYm8YMhhDzAHhTk
-         cVZnoH7kDmYKY/FOVvi1cgv2/i3r0xiun9ReTTOjfe1agzlpzt3/h9l7lSrkMcAkCe2Q
-         avo0/30n7nb3QzN0ghbFq7IUCXt57cDXV0imaGSKAEhAwgycZdcA4tuKQopQ50VJa2di
-         aFnQ==
-X-Forwarded-Encrypted: i=1; AKwUvBwCFJIkF3bEqdcBSAl/ivz6NSSHmyMn9O5C8Oy1vvkYI79izC6SuGhf8CB3+McmxVj0KS/jPFQbE6c=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIm78EDm54Wxw5BPYk7BEQMiQG4CyEfO/SEhKZnlZigv3PBisbl
-	tCGpGhZPh+4mQ/OEKXAfF2KGk5igVTjQIOJBnycPM6fdmjUDL6inNuzTEzFAmgb5hg==
-X-Gm-Gg: AYBFou3YGr84eTyvsl0Lcv9dnvE/8UnFiRe5lmtjxv/UG0LUlysoGBfqVQ7iYev/loK
-	WOwvUMqiAO+Hc7pLbK1F9UPWmKv9LpjzdQWdWQtAobBCi2WFwNVH4shGQyn93dbi/SRFGLxAXWn
-	MzZnM2UMRyugicNrZx6vQvwWoz4HqfNA79xi103N8L6cTpmkoS954o7dBoO3WI194blYIPHdf+5
-	ujYzAe2I1q6KOttfvn+qwSh3HNX43A9sxlqKXxENURvnPmn0qUtokkSU3Q9Y6xHI+v1Osu1Cgpd
-	BqOV7J2fOBOB8DcD7/L/Ct3uVFdO2xZ22wNOGHqjEz5mxDajvfEBvL26JnOTAGa4rVs92gzW23z
-	IpAc5+XM6qsoTymZ/KLtzT2JOd3AVYCUABkyMMqAdfgK5qLBnfHgbBzj+eK3j8VDL1/EaA5IYY2
-	pA6LLxruPGDsnrZvlz7ZWBtbgn7q+WjnGiE5h8L8nW+f73i4c3omaiJVfSeWQ1QnBjkrjNUQI6W
-	j/wMlecj7za4AwSl4SpdRPtzT1f93hGbT9PGFnlmJ6aROu/WWiTQWBqI21La9KlYvve2uBD
-X-Received: by 2002:a05:6000:2dc1:b0:488:8850:50ec with SMTP id ffacd0b85a97d-48de2b4d7e5mr10736800f8f.46.1791985938638;
-        Wed, 14 Oct 2026 06:52:18 -0700 (PDT)
-Message-ID: <6de1f79c-2e2b-4794-8eba-ad7ac224d24d@suse.com>
-Date: Wed, 14 Oct 2026 15:52:17 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=proofpoint20171006 header.d=nutanix.com header.i="@nutanix.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector1 header.d=nutanix.com header.i="@nutanix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	proofpoint20171006; bh=bMjWdRXxtjv4GFn65tABCCzXTinBZVZXyMVJ/CljQ
+	8U=; b=qJ931WmHysASO20LE0mdkczIdZS04aLfWroSJOM1t62oVDD3Nng0Aztxy
+	QLBoElTXNr1ms7x4PI5oHBBi7w10kl1m3FggBNW7WeEzDpVSY6cEMqmiTBQ6ICTW
+	7ft17K4O9bzEt/Dhs78zivRbK29y7GAJmwEQ8CvVdZH4HiI5SjPbxSkQ+NubF/I0
+	GX89BxR03AR0XXucTCxZADxJsNySFGgjMnn7KwnWUzEOpVXwpZtQEMwPHf4sHwPL
+	moBp2sLDgpqTe5Xf57d7TEhQObrbLR07w5zQ6KjOrxeVKv+R13BxqA4Add0mJAWS
+	BwS5ZlKyAKbRMaZl6GBnQbQKM7wdw==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=hYgWnoniDCEscDx4VTpjnlnVamlYOf9HMMxYEXg77J5FcleCSZr1zNRyX3LYxLfsAqfvyI0y8wQzYJcuTfxDLb24RRtUjWxB0au2O2wQ3LKxVZYOSATxO19oz495GbyvcX+Q7B4QsZL7NrzrZyxN6bQaFSduSnYyMfkKGFSwbfRLa5Ark2ERRYZLDdLvFswuHtCYkeN+0ROeOOaK5F7HJzpAaXG8Ub7Ce2KQ+ciIFEMr1Pzg0iSitRGppUeYPQBw3oSUZRw6y9/Sq76r0wmQlxxxDfsNXe8+gHQt5u+1n8RWvqcV3vWb+/z0ZXkF8WJiu7owIDQ3v1ZOy/lLFTUMQQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=bMjWdRXxtjv4GFn65tABCCzXTinBZVZXyMVJ/CljQ8U=;
+ b=PpAaXgFmIXluqyDOwb+6ons4wGSNxgrXPM1RcBit0KMkSFmFdeNTZFKk/CCarZN8a6M7Zt+tD4c+X/rfUF9kjkcRy/nsuiH4W/coRuFVWD4yfTutY/BxVu26fmbFYQxaKii0whkEbKQ67w6MXz66Cl+gDCzUSGW7O7Tt2Pf2ccH6TgMzbrFm1C8KpCSX3YfcaYaGyJKbiiaUjDQW9AJSn+Au6LNci+wX3TF8yi4NN0chkqt3f9E04hOyPGAPg3ZyiPTVUVC9qExSX/YI2ktvGNu6qUSOpG1Nbgd71cn9poxLPwL4jLhpLmXiQJfevZilHsBVMFPLJxFusRKWLoz3IA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
+ dkim=pass header.d=nutanix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=bMjWdRXxtjv4GFn65tABCCzXTinBZVZXyMVJ/CljQ8U=;
+ b=prlflYA5xKbQXY4uXcpyrpWa3MeoRN4GB0FIK0Ve/RX42SAZe9BSoJYv1Fpz/9xeCrnrQTpYWC1zPwrbhdUtfXIzDP7Ky3w1qaxCnAmiIChvqyhLvRDzlJyLcU/Gv57Lt+wZPDfeU8p7y2w+tj4m/Ns8oozYzCbhzdFmqaLJjIzp/Q6KDhon+vBjTGiBo2qXJxC/Iuakc5U75C12evuhaVCx348DZCAfH3zHT7f8MRU8h6d9lxUlKLYfe1IVnBI6PeOQmERtMCWaV7bPr9EzFi0wTrXGTNfxPwfaP8NAP3oGPuX7taiAT186y/xHJtud+I88d6YdnoO8Tnns817yZA==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nutanix.com;
+Message-ID: <ca07d55b-3a6b-455c-b456-8944459f051f@nutanix.com>
+Date: Wed, 14 Oct 2026 14:57:57 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 08/39] xen/riscv: implement virtual APLIC MMIO
- emulation
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <bd546cae116c93c88706b49e7c24a125b4e5237c.1790779209.git.oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH 05/22] i8259.c: move parent_realize from PICClass to
+ I8259CommonClass
+From: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com,
+        sstabellini@kernel.org, anthony@xenproject.org,
+        edgar.iglesias@gmail.com, qemu-devel@nongnu.org,
+        xen-devel@lists.xenproject.org
+References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
+ <20260916104435.600211-6-mark.caveayland@nutanix.com>
+ <CAFEAcA9eucRyzG=PR2tpx8ObHkdK6xUmOjQ+-nNbJ2dVHaptOA@mail.gmail.com>
+ <876b66cd-0ea6-4943-9a0e-c0abf2ad6e26@nutanix.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <bd546cae116c93c88706b49e7c24a125b4e5237c.1790779209.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8
+In-Reply-To: <876b66cd-0ea6-4943-9a0e-c0abf2ad6e26@nutanix.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1791985939-1D67C757-82538338/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 13595
+X-ClientProxiedBy: SJ0PR03CA0210.namprd03.prod.outlook.com
+ (2603:10b6:a03:2ef::35) To PH0PR02MB7159.namprd02.prod.outlook.com
+ (2603:10b6:510:16::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH0PR02MB7159:EE_|DS4PR02MB11308:EE_
+X-MS-Office365-Filtering-Correlation-Id: e4d88314-ac09-45cf-0f59-08df29fb2a6f
+x-proofpoint-crosstenant: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|10067099003|18002099003|22082099003|261009223027099003|4143699003|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	DiFS4kpry1GkAWUTN2v56O5lYV0OrhIJ6fixToVLMqjTdjkUCrTia2rIHJ27aTmRakIadydFcvxpxGkPsr5HYx1y/rPNEqbak4ffVOmmbiSiAWolc3XciWM/tfzAQ1n9tDSu1sjE2a70TJKGl7EkvUkMLqN7xvzLFkL6O1rDCVhlARb+g7sJj72RZXkYmw82MNARCwmubWJK+EDUw7Tskm/AVVK8jprfswGpDFff3TtaGLe5bMuS6bKolW4kTjAOYf8wZ8WetmMywwGDb5/3gOVbmwrZfe66sFXj+jHGigb2g2MAm6jiY5m8swh1y8Y4dmvNjqHuqDUi31FfX9Ywi7wJitYCckhsT8KY97BYL9KQIfZRt/+kR6pL5G+alwlhRCeT0dXJTfUbtJm8nI5P7uQqnge4LQWbH7E+BQk+SLhu0uKWPgO6PeFPX2V7G1MXb7lRdFEDIdXaMh1TcD+yNMUhIrSbIBNSWL1VL9z4U4iVl2g/GFwxqBRXiyAKWlATPeHwCy1+f7kGImg4U2b1GxXMoBwaKq8tcqtCgVDndj9tZLccgopdQGxSLFGObXEoGBEdrckh7eOxubSuUF3fpirqWHmUTNdWKlZOn2+3Ohw60BDiSzLAdJTwZSzG1BkswXjB5pFFJ5N6I7AaCt2CcnR9WM/4T1vdZCwdx8yGcOg=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR02MB7159.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(10067099003)(18002099003)(22082099003)(261009223027099003)(4143699003)(56012099006);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?eXQ2MUxuQlVJTFlkZTZ4WW9hQTY3MXdZY3VFUitvMXBjRzUxclNuNDVycTFS?=
+ =?utf-8?B?cm5RNXM3U1FmUHRLWDk1dHU3QmtTOFBhajdKM1lGMjlvTHdIT1QyODlOSFdm?=
+ =?utf-8?B?cUpKSTNsS2g2NFRhRzAzUThJZ0NtMFdkVkw5eHF0QTFyUWx0bGxRd1A2RVJp?=
+ =?utf-8?B?TkQ0aHltdkRHQnFibmRUcmZjc3RZZkUrcUdMQnloVlpDZ1dxWjBjM29RdFJL?=
+ =?utf-8?B?bnBvMTRkTmpvaFNyYWt6UFk1azMxYVF5OFdNeWJEeXJ2VDVTVXF3aCtDREdB?=
+ =?utf-8?B?YzVHbFBjZE1hd3FMYkJobTBKRHF0NGxneGZkcjBPa25qd2VPNVdNYTd3TGFM?=
+ =?utf-8?B?dk5zTUcxZ2srbEwvQ2lVWitGUVgzTVh1MDFJZkJOalo1azIrSDRaYWErL0RH?=
+ =?utf-8?B?cGpUekRXTXJKVnVSS1hlOG9IMzUrZXF4TDMvMk0vVVJoTFNxQW0rbkNza1Nt?=
+ =?utf-8?B?Z0pLbTJFOXpwY2lTQ2RGdHFUYnBrTDh4L1lFUWs0NUdKakZUblEzNFRRbjgw?=
+ =?utf-8?B?QXcxaG1SbGsvb2lYUmhEZXFjT09mUXkyblFTZXNwNjAwUEpFc0ZPR3JDZ2pN?=
+ =?utf-8?B?NVVVWGFteithSG5pUE5vUHVNVlVNUWFHOWVQUnRQNFFVVzFTbGhmSTNIa1Fh?=
+ =?utf-8?B?MkN1c0h5UzhtTW4zUWJweEV1NjRTWjFlWTNJek95cUUyS3FjOXhycGtvMmZy?=
+ =?utf-8?B?UllsSytsY2RUY0d6MnpqbDlkT0ZLYnZxY0pGLzNRTG5CQmVBTlM3Y25nOTMy?=
+ =?utf-8?B?V1pxTmNnQk9ET2U1QkJxSkNjWFhJeXYycXhKTHBhOHNSUDFzWkszZnJzSlRq?=
+ =?utf-8?B?VXdEanBuSS9sUjRRYUtsdWdBUlZXSWdVcGdFVllTTVJGRkRVUXV5QnROOUUz?=
+ =?utf-8?B?cWgxcjBzRUlnQ0d5ZUxWakdTeGoyL013dEI0YnRWVVJGL2FrVzBBSU9DZHY2?=
+ =?utf-8?B?Ui9LeW80M0RMTCthclU4QkpZOFRNUm93R3NkNWd4YnQzUVB6RWE4UUVhVXp0?=
+ =?utf-8?B?U1dTNm0zYU11aTUwaEFNVFNFYzRsRjJoUDJvdHIvTEJRZDVndGdPcDVzZDhN?=
+ =?utf-8?B?TUROanEzblUrNWRURFlaSmxrS1c4Z0tlYW9kZGpOcmMvckhObjM5aUJYdGRk?=
+ =?utf-8?B?eTdTQ1dUU2lVa0VZYUhneW83cGRoRHNOYTRWamtXZ25lNnU3d0ZBT3VBZDRX?=
+ =?utf-8?B?T2xTOFNzdlVVb2N4US94b3pVd0VRSFBVQ2dPV0lWcWtEZ0pycW9ndDl5N3Uw?=
+ =?utf-8?B?NnVqcGZKWjJtRmZpL3Q3ekZtdDBsTkdDa0NOYW1TcW0xTkRycWVPOGJuQUdl?=
+ =?utf-8?B?cEVuWHprS3JlVE9NQnJtNmNGUHhkTnptTklXMFpqUk9IZ0l0b0NhbHQySk1V?=
+ =?utf-8?B?Q1Y5U1F6am9rcTRia01JUkQ1VjB6OUJDb2pCMkhNbVJubjIyQ3dGbHhKQWN5?=
+ =?utf-8?B?dUNBd3BBQUFlOFBHVjVuUitOakNHNGZTQUpXZ1JRZzhNQjhPY0kyWmtDVzlQ?=
+ =?utf-8?B?dlFtazExSjRLcTdSL2FWcHhoaW9pL0FpS1htY1RqWDgrVnVoQkozUUZabHVi?=
+ =?utf-8?B?NmIwb1p5Uk1RWUVFOE1EZTdycjU0bGtLL3RKaDZDalY0MEtLNWYrQWlmWmRu?=
+ =?utf-8?B?VFRocjFkRFVteGFnT0FMQ3NvcDhDeU1kVUVod25ydGd2Vkl3YzFVZEFscVpF?=
+ =?utf-8?B?QitDNTJYN1hvdG1VMjN1NUY5eVNUOWg5bUxQeFpmMFFTZjQ5NVdieWsycUJJ?=
+ =?utf-8?B?cWxRTW5SUTRjd3N4SUQrWmR2SVdwclBZamVVaUVTR3ZXM05iR3dlSytxRm8w?=
+ =?utf-8?B?VDJrSEpRNG9NWjFlVnVicjlTd2FWQmpUb0U1UzFkSmR3c244QVVvL2lpNGhZ?=
+ =?utf-8?B?eTdXQlY2b2tSSlpuZVQvNlBFVUNEZ3JQUXlPaWtndGtsL096UklOYWQrWi9i?=
+ =?utf-8?B?bUxMZmZpak5nQ3QyVHZoQ3RYSmVrV2l0VlhSUFRCa1NNeURydU8xTERmTmJs?=
+ =?utf-8?B?MDBoR05BdXdRQlhucVptRjRDQlVsSDM3UjBYSy9LU3drdUhmb09YUXMwN1FI?=
+ =?utf-8?B?c0VWTzQrT3BXQjVCSlNDemxsOFNDS0VkZlhTQXBEak55V3JmQWhnQVh6QzVB?=
+ =?utf-8?B?YlhFbkk5Ri91VlpzT1doU0lWeDdRU1ozWlJBaVRRZks0UnF6aEtmdWg4dXlM?=
+ =?utf-8?B?dVBuNXZjZU8zZngzM005d0pmY0psbDQ3aGZrKy9RWEZJZTk3U1dDN08wdWlO?=
+ =?utf-8?B?amV2Ui8wSVE3clk4eXg2NEVhdjczdVlveG1Mc1cydHQrNkVMM1kyVlZXRm1G?=
+ =?utf-8?B?cGJ2Z3VrSGs2QndVS2Y3NVRKQjMraWdSYVdjR2pzeUF5QTlaUUptellmc3Zk?=
+ =?utf-8?Q?Y+akJqVJcVcCJQcU=3D?=
+X-Exchange-RoutingPolicyChecked:
+	HsefsZCZT0YDPVzxWznzQTyeLmtq3EkxY++FAmAgE4D1RBCOExgIntOvJFv0te4zjmvm/2ii5UAmHMdSU3PeTmWq4kKRwCjBD7UT99+9kScdPeNUVmFzpBGbiTop6cGyiBLFZql6I5vTcsGp0iFeh0LXan1voDUAbdYRSOtIZsc3d/684ts7FdHIa3t0bKjA3nt6fWu9m3qj446AARcaZ2XTrO3npvyj+bCIxkK8CPm081jSXcj8keAlhmt8eTJxquaaaD8+GgxpqiiPm3o1U+uslw5alMkZVJ/vRN91q1FNkZBle5b01bIyDvFEXuqNQdJ72K4+a8noLP5ziNb+nA==
+X-OriginatorOrg: nutanix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e4d88314-ac09-45cf-0f59-08df29fb2a6f
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR02MB7159.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 13:58:03.7332
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: bb047546-786f-4de1-bd75-24e5b6f79043
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 1zzzIxIe6kZSPa/ZUous/AMhsfwdbppoYtpvsw7R9u9lOSuHUnC7JGL3pocfBG2zXG8MYlBt+EOscpkRM7NnY1alJiPFM7B3zemTywpWOvo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR02MB11308
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA1NSBTYWx0ZWRfX9GzzQXRgQJV2
+ hOxZSvxT8CZPBSRbFIoZqQ+KRbW9qMt5ou66054SZ9u+UBVAiRFKDYbWtA5xPW0Qh4J0Dm/aC2r
+ DC4W8C5Lg/4fJKQ/zbhkhFV0D0dmacA=
+X-Authority-Analysis: v=2.4 cv=dfgVTnXe c=1 sm=1 tr=0 ts=6acf8a6d cx=c_pps
+ a=b/aSlx19e507fu+kRueGxg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=0kUYKlekyDsA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=VofLwUrZ8Iiv6rRUPXIb:22 a=0LlEyIVc8U2lsR7dKhuH:22
+ a=64Cc0HZtAAAA:8 a=bD7yre_yaOKMDD93RBsA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-ORIG-GUID: WWEwIOaM9Ilu-JSXUqNjNVxZXw3aVIx4
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA1NSBTYWx0ZWRfX9/JFe+Qn0YG8
+ rDvXLsMPKMLMSPbPuj4tcMuug8eO3xtIz4SWTrMhm3RRbKuRPWUZcooJv/bVC5RChkAULI1eDqJ
+ pZLCM3fx49A2YmJhj4oeoDz7ZbhFIRWXQ92q404dfzv27DlFK/PDvjxbPB9LdO9k9cU3yfc4N/L
+ SZvccj+MdvImEiwNzd6nNu1aFjwVMUEqiGwSXsyvGSPp5n5phtjbIpMYD0a5M4rhq094V4HGdo/
+ 0c5oWgNtgu1oLtxrl3axkKZacteLi8F3yNlS8j/M2Lu4IfW/wJWja4VqFuciXkhqJK25AKosAYU
+ hYerJ07XXV7s0GpIFGg7AcgAUGgGxfJismkJQ7M2q4BdvfOKyRtTtlOJDeFJC1maLTyYN2yKNcL
+ wBfseGTqVdqPFCEJD2Vecg5tb8u0T2kVcdp7I+y9/yxa4bAs2Ftn/TyyFMyvVxK7R6QvIK13e9m
+ YgOJMn3wc4iRxmzuVzA==
+X-Proofpoint-GUID: WWEwIOaM9Ilu-JSXUqNjNVxZXw3aVIx4
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Reason: safe
+X-purgate-ID: tlsNG-ebf023/1791986290-524CBB50-CF23DF18/0/0
+X-purgate-type: clean
+X-purgate-size: 2380
 
-On 30.09.2026 18:18, Oleksii Kurochko wrote:
-> --- a/xen/arch/riscv/include/asm/aplic.h
-> +++ b/xen/arch/riscv/include/asm/aplic.h
-> @@ -39,6 +39,13 @@
->  #define  APLIC_DOMAINCFG_IE             BIT(8, U)
->  #define  APLIC_DOMAINCFG_DM             BIT(2, U)
->  #define  APLIC_DOMAINCFG_BE             BIT(0, U)
-> +/*
-> + * The bits a write may change. Everything else, including the read-only zero
-> + * bit 7 and the reserved bits, has to read back as zero, and BE is WARL and
-> + * hardwired to 0 as Xen is little-endian only.
-> + */
-> +#define  APLIC_DOMAINCFG_WMASK          (APLIC_DOMAINCFG_IE | \
-> +                                         APLIC_DOMAINCFG_DM)
->  
->  #define APLIC_SOURCECFG_BASE            0x0004
->  #define APLIC_SOURCECFG_LAST            0x0ffc
-> @@ -58,6 +65,12 @@
->  #define   APLIC_SOURCECFG_SM_EDGE_FALL  0x5
->  #define   APLIC_SOURCECFG_SM_LEVEL_HIGH 0x6
->  #define   APLIC_SOURCECFG_SM_LEVEL_LOW  0x7
-> +/*
-> + * All other bits of sourcecfg[] are reserved and read as zero, so drop them
-> + * on a write.
-> + */
-> +#define  APLIC_SOURCECFG_WMASK          (APLIC_SOURCECFG_D | \
-> +                                         APLIC_SOURCECFG_SM)
+On 14/10/2026 12:00, Mark Cave-Ayland wrote:
 
-You don't drop any bits here; that would happen at the use site of this
-constant. The comment would better be worded accordingly. (The comment
-a few lines up, for APLIC_DOMAINCFG_WMASK, is better in this regard.)
+> On 13/10/2026 16:54, Peter Maydell wrote:
+> 
+>> On Wed, 16 Sept 2026 at 11:49, Mark Cave-Ayland
+>> <mark.caveayland@nutanix.com> wrote:
+>>>
+>>> Both the emulated and KVM i8259 implementations store a reference to the
+>>> parent_realize function in their respective classes. Start by moving
+>>> parent_realize from PICClass to I8259CommonClass and removing 
+>>> PICClass since
+>>> it is no longer required.
+>>>
+>>> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+>>
+>> This is one of those things where I think we're not 100% consistent
+>> about whether we think the parent_realize field should go in the
+>> child class struct or the parent class struct. The name "parent_realize"
+>> implies it ought to be in the child struct, though, and I think we
+>> do that more often than we put it in the parent class. This also
+>> makes some kind of separation-of-concerns sense too: it's the child
+>> that knows (a) that it exists at all and that (b) it wants to have a
+>> realize method that will mean it needs to chain back to the parent.
+>>
+>> The docs for device_class_set_parent_realize() claim the parent
+>> realize ptr is stored "usually in the instance structure" which
+>> I think is just completely wrong.
+>>
+>> I could be persuaded otherwise. As usual with QOM/qdev, I'm
+>> mostly interested in (a) consistency and (b) documenting what the
+>> "right thing" is. Realize, reset and unrealize are the three
+>> methods where QOM's lack of convenient support for "child
+>> implementation of method will need to chain to parent impl"
+>> is most awkward.
+> Yeah it's a tricky one. This patch was really just refactoring what was 
+> already there, but I'm open to moving it into the instance if you think 
+> that is better. I agree with your point about the child instance being 
+> the one that knows it needs to chain back to the parent.
+> 
+> I'll have an experiment and if it looks good, I'll move it to the 
+> instance in v2.
+I did a search over the codebase and checked all references to 
+DeviceRealize, and they are all stored in QOM classes and make use of 
+device_class_set_parent_realize(). So for now I think we can say it is 
+the documentation for device_class_set_parent_realize() that is wrong, 
+and I will leave it this way in v2 of the series.
 
-> @@ -89,6 +102,9 @@
->  #define  APLIC_TARGET_GUEST_IDX         GENMASK(17, 12)
->  /* Bit 11 is reserved and reads as zero */
->  #define  APLIC_TARGET_EIID              GENMASK(10, 0)
-> +/* If target is in direct delivery mode (domaincfg.DM = 0) */
-> +#define  APLIC_TARGET_IPRIO             GENMASK(7, 0)
-> +#define   APLIC_TARGET_IPRIO_DEFAULT    1U
 
-With this overlap of bits with EEID, should that one gain a similar
-comment?
+ATB,
 
-> @@ -98,6 +114,24 @@
->  #define APLIC_SIZE(nr_cpus) \
->      (APLIC_MIN_SIZE + APLIC_SIZE_ALIGN(APLIC_IDC_SIZE * (nr_cpus)))
->  
-> +/*
-> + * Using setip is fine here, as all SET* and CLR* register groups consist of 32
-> + * registers and therefore have identical sizes.
-> + *
-> + * Lowest 2 bits are always zero for SET* and CLR* registers.
-> + */
-> +#define APLIC_SETCLR_OFFSET_MASK \
-> +    (sizeof_field(struct aplic_regs, setip) - sizeof(uint32_t))
-> +
-> +#define APLIC_xMSICFGADDR_PPN_SHIFT IMSIC_MMIO_PAGE_SHIFT
-> +
-> +#define APLIC_xMSICFGADDR_PPN_HHX_MASK(hhxw) (BIT(hhxw, UL) - 1)
-> +#define APLIC_xMSICFGADDR_PPN_HHX_SHIFT(hhxs) \
-> +    ((hhxs) + APLIC_xMSICFGADDR_PPN_SHIFT)
-> +
-> +#define APLIC_xMSICFGADDR_PPN_LHX_MASK(lhxw) (BIT(lhxw, UL) - 1)
-> +#define APLIC_xMSICFGADDR_PPN_LHX_SHIFT(lhxs) (lhxs)
+Mark.
 
-As previously indicated (perhaps in other contexts): Pairs of masks and
-shifts are almost always ambiguous. Hence why we have MASK_EXTR() and
-MASK_INSR(), requiring only a mask: The shift value can be derived from
-the mask.
-
-> --- a/xen/arch/riscv/vaplic.c
-> +++ b/xen/arch/riscv/vaplic.c
-> @@ -17,6 +17,7 @@
->  #include <asm/aia.h>
->  #include <asm/imsic.h>
->  #include <asm/intc.h>
-> +#include <asm/mmio.h>
->  #include <asm/vaplic.h>
->  
->  #include "aplic-priv.h"
-> @@ -27,6 +28,313 @@ unsigned int __ro_after_init guest_aplic_num_sources;
->  
->  #define FDT_VAPLIC_INT_CELLS 2
->  
-> +#define AUTH_IRQ_BIT(d, irqn) \
-> +    (((irqn) < (d)->arch.vintc->nr_virqs) && \
-> +     test_bit(irqn, (d)->arch.vintc->used_irqs))
-> +
-> +/*
-> + * Convert a byte offset (within a SETIP/CLRIP/SETIE/CLRIE register group) to
-> + * a 32-bit word index into the used_irqs bitmap. Each word covers 32
-> + * interrupt sources. For SOURCECFG and TARGET groups the same division also
-> + * yields the interrupt number directly, because those arrays store one 32-bit
-> + * register per source.
-> + */
-> +#define regoffset_to_word_idx(reg_val) ((reg_val) / sizeof(uint32_t))
-> +
-> +static uint32_t vaplic_target_read(const struct domain *d, unsigned int irqn)
-> +{
-> +    const struct vaplic *vaplic = to_vaplic(d);
-> +
-> +    /* target[0] doesn't exist so irqn == 0 should be impossible */
-> +    if ( !irqn || irqn >= vaplic->vintc.nr_virqs )
-> +        return 0;
-> +
-> +    return read_atomic(&vaplic->regs.sources[irqn].target);
-> +}
-
-I wonder whether in cases like this one, where you work with guest controlled
-array indexes, you wouldn't be better off using array_{access,index}_nospec()
-right away.
-
-> +static bool vaplic_emulate_store(const struct vcpu *curr, paddr_t addr,
-> +                                 uint32_t value)
-> +{
-> +    const struct domain *currd = curr->domain;
-> +    unsigned int offset = addr & APLIC_CTRL_REGION_OFFSET_MASK;
-> +
-> +    ASSERT(curr == current);
-> +
-> +    switch ( offset )
-> +    {
-> +    case APLIC_DOMAINCFG:
-> +    {
-> +        struct vaplic *vaplic = to_vaplic(currd);
-
-In vaplic_emulate_load() you have this at function scope? Why do you do
-it differently here, despite there being at least one more instance
-later in the function? With this moved, the oddly placed (yet still
-style conforming) figure braces also wouldn't be needed.
-
-> +        vaplic->regs.domaincfg = APLIC_DOMAINCFG_RO |
-> +                                 (value & APLIC_DOMAINCFG_WMASK);
-> +
-> +        return true;
-> +    }
-> +
-> +    case APLIC_SOURCECFG_BASE ... APLIC_SOURCECFG_LAST:
-> +        /*
-> +         * Only D (bit 10) and SM (bits 2:0) are implemented, the rest of the
-> +         * bits are reserved and read as zero, so ignore what a guest writes
-> +         * to them.
-> +         */
-> +        value &= APLIC_SOURCECFG_WMASK;
-> +
-> +        if ( value & APLIC_SOURCECFG_D )
-> +        {
-> +            gdprintk(XENLOG_ERR, "APLIC_SOURCECFG_D isn't supported\n");
-> +
-> +            goto fail;
-> +        }
-> +
-> +        /*
-> +         * SM is WARL, so the reserved values 0x2 and 0x3 need no handling
-> +         * here: vAPLIC keeps no shadow copy of sourcecfg[], the value is
-> +         * written straight to the h/w register and is read back from it, so
-> +         * it is the h/w which substitutes a legal value for an illegal one.
-> +         *
-> +         * TODO: when vAPLIC starts to shadow sourcecfg[], the WARL behaviour
-> +         * will have to be emulated here instead, e.g.:
-> +         *   if ( value == 0x2 || value == 0x3 )
-> +         *       value = APLIC_SOURCECFG_SM_INACTIVE;
-> +         */
-> +
-> +        /*
-> +         * As sourcecfg register starts from 1:
-> +         *   0x0000 domaincfg
-> +         *   0x0004 sourcecfg[1]
-> +         *   0x0008 sourcecfg[2]
-> +         *    ...
-> +         *   0x0FFC sourcecfg[1023]
-> +         * It is necessary to calculate an interrupt number by subtracting
-> +         * APLIC_DOMAINCFG instead of APLIC_SOURCECFG_BASE.
-> +         */
-> +        if ( !AUTH_IRQ_BIT(currd,
-> +                           regoffset_to_word_idx(offset - APLIC_DOMAINCFG)) )
-> +            /* Interrupt not enabled, ignore it */
-> +            return true;
-> +
-> +        break;
-> +
-> +    case APLIC_SETIP_BASE ... APLIC_SETIP_LAST:
-> +    case APLIC_CLRIP_BASE ... APLIC_CLRIP_LAST:
-> +    case APLIC_SETIE_BASE ... APLIC_SETIE_LAST:
-> +    case APLIC_CLRIE_BASE ... APLIC_CLRIE_LAST:
-> +    {
-> +        unsigned int word_idx =
-> +            regoffset_to_word_idx(offset & APLIC_SETCLR_OFFSET_MASK);
-> +
-> +        value &= generate_auth_mask(currd, word_idx);
-> +
-> +        break;
-> +    }
-> +
-> +    case APLIC_SETIPNUM:
-> +    case APLIC_CLRIPNUM:
-> +    case APLIC_SETIENUM:
-> +    case APLIC_CLRIENUM:
-> +    case APLIC_SETIPNUM_LE:
-> +        if ( !value || !AUTH_IRQ_BIT(currd, value) )
-> +            return true;
-> +
-> +        break;
-> +
-> +    case APLIC_TARGET_BASE ... APLIC_TARGET_LAST:
-> +    {
-> +        struct vaplic *vaplic = to_vaplic(currd);
-> +        /*
-> +         * Look at vaplic_emulate_load() for explanation why APLIC_GENMSI is
-> +         * subtracted.
-> +         */
-> +        unsigned int srcn = regoffset_to_word_idx(offset - APLIC_GENMSI);
-> +
-> +        if ( !AUTH_IRQ_BIT(currd, srcn) )
-> +            /* Interrupt not enabled, ignore it */
-> +            return true;
-> +
-> +        if ( vaplic->regs.domaincfg & APLIC_DOMAINCFG_DM )
-> +        {
-> +            struct vaplic_source *src = &vaplic->regs.sources[srcn];
-> +            struct vcpu *target_vcpu;
-> +            unsigned int guest_hart_idx =
-> +                MASK_EXTR(value, APLIC_TARGET_HART_IDX);
-> +            unsigned long flags;
-> +            struct vimsic_state *vimsic_state;
-> +
-> +            target_vcpu = domain_vcpu(currd, guest_hart_idx);
-> +
-> +            if ( !target_vcpu )
-> +            {
-> +                gdprintk(XENLOG_ERR, "Invalid vCPU id in target register\n");
-> +
-> +                /* Ignore such writings */
-> +                return true;
-> +            }
-> +
-> +            vimsic_state = target_vcpu->arch.vimsic_state;
-> +
-> +            /*
-> +             * A non-zero guest index asks for delivery to an interrupt file
-> +             * of a nested guest. The vIMSIC node has no riscv,guest-index-bits
-> +             * property, so a guest is told its harts have no guest interrupt
-> +             * files and the field reads as zero for them. Such a write is
-> +             * illegal and is therefore ignored as a whole: the stored copy
-> +             * keeps the zero it was allocated with, so the field never needs
-> +             * to be masked out here.
-> +             * What ends up in the h/w register is Xen's own value anyway:
-> +             * aplic_msi_target_gen() overwrites the field with
-> +             * vcpu_guest_file_id() of the target vCPU.
-> +             */
-> +            if ( MASK_EXTR(value, APLIC_TARGET_GUEST_IDX) )
-> +            {
-> +                printk_once(XENLOG_WARNING
-> +                            "%pd: vAPLIC target guest index != 0 is unsupported\n",
-> +                            currd);
-> +
-> +                return true;
-> +            }
-> +
-> +            /*
-> +             * src->lock keeps the stored copy and the h/w register updated
-> +             * as a pair.
-> +             */
-> +            spin_lock_irqsave(&src->lock, flags);
-> +
-> +            write_atomic(&src->target, value);
-> +
-> +            /* IRQs are already off under src->lock. */
-> +            read_lock(&vimsic_state->vsfile_lock);
-> +
-> +            /*
-> +             * The h/w register names the hart and the guest interrupt file
-> +             * MSIs are sent to, and there is none of either until the target
-> +             * vCPU is given a h/w guest interrupt file. The stored copy
-> +             * reaches the h/w at that point.
-> +             *
-> +             * TODO: once s/w guest interrupt files are supported, a vCPU using
-> +             * one still needs its MSIs, so the h/w register will have to be
-> +             * written for it too, pointing at an interrupt file Xen receives
-> +             * them in on the vCPU's behalf.
-> +             */
-> +            if ( vimsic_state->vsfile_cpu != CPU_NONE )
-> +                aplic_hw_write_reg(offset,
-> +                                   aplic_msi_target_gen(target_vcpu, value));
-> +
-> +            read_unlock(&vimsic_state->vsfile_lock);
-> +
-> +            spin_unlock_irqrestore(&src->lock, flags);
-> +
-> +            return true;
-> +        }
-> +
-> +        /* printk_once(), as a guest could otherwise flood the log. */
-> +        printk_once(XENLOG_WARNING
-> +                    "%pd: vAPLIC direct delivery mode isn't supported\n",
-> +                    currd);
-> +
-> +        return true;
-> +    }
-> +
-> +    default:
-> +    fail:
-> +        gdprintk(XENLOG_WARNING,
-> +                 "Unhandled APLIC write at offset %#x (value %#x)\n", offset,
-> +                 value);
-> +
-> +        return false;
-> +    }
-> +
-> +    aplic_hw_write_reg(offset, value);
-
-I continue to struggle with this passing through of writes (reads are
-passed through as well, but at least those don't alter state). Aren't
-different guests going to interfere with their writes to setip, clrip,
-setie, clrie, and apparently also {set,clr}i{p,e}num?
-
-> @@ -95,6 +403,56 @@ static const struct vintc_init_ops __initconstrel init_ops = {
->      .make_domu_dt_node = vaplic_make_domu_dt_node,
->  };
->  
-> +static enum io_state cf_check vaplic_mmio_read(struct vcpu *v,
-> +                                               mmio_info_t *info)
-> +{
-> +    uint32_t val;
-> +
-> +    ASSERT(v == current);
-> +
-> +    if ( info->len != sizeof(uint32_t) ||
-> +         !IS_ALIGNED(info->gpa, sizeof(uint32_t)) )
-> +    {
-> +        gdprintk(XENLOG_DEBUG,
-> +                 "VAPLIC: unaligned/wrong-width read gpa=%"PRIpaddr" len=%u\n",
-> +                 info->gpa, info->len);
-> +        return IO_ABORT;
-> +    }
-> +
-> +    if ( !vaplic_emulate_load(v, info->gpa, &val) )
-> +        return IO_ABORT;
-> +
-> +    /* APLIC registers are 32-bit; zero-extend to the guest register width. */
-> +    info->data = val;
-
-How do you know info->data has the size of registers as seen by guests? Plus,
-how does this matter anyway? You reject info->len being other than 4, which
-means the originating insn will necessarily have been a 4-byte load. What
-happens to the upper bits (if there are any) depends on the behavior of the
-insn that's being emulated, not on what you do here when storing into
-info->data.
-
-Jan
 
