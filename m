@@ -4,35 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51BFACC6B1A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 12:31:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448935.1664915 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3DA39CC6B1A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 12:53:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448977.1664924 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGy8R-0000cA-CB; Wed, 14 Oct 2026 12:31:07 +0000
+	id 1xGyTS-0004aw-53; Wed, 14 Oct 2026 12:52:50 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448935.1664915; Wed, 14 Oct 2026 12:31:07 +0000
+Received: by outflank-mailman (output) from mailman id 1448977.1664924; Wed, 14 Oct 2026 12:52:50 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGy8R-0000c3-85; Wed, 14 Oct 2026 12:31:07 +0000
-Received: by outflank-mailman (input) for mailman id 1448935;
- Wed, 14 Oct 2026 12:31:05 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xGy8P-0000bx-FI
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:31:05 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xGy8P-000000052VO-1OVv
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:31:05 +0000
-Received: from mail-lj1-f171.google.com ([209.85.208.171])
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xGy8O-00000004lvl-2XPP
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:31:05 +0000
-Received: by mail-lj1-f171.google.com with SMTP id
- 38308e7fff4ca-3a1eb6fa0f4so42032221fa.2
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 05:31:04 -0700 (PDT)
+	id 1xGyTS-0004al-0E; Wed, 14 Oct 2026 12:52:50 +0000
+Received: by outflank-mailman (input) for mailman id 1448977;
+ Wed, 14 Oct 2026 12:52:49 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGyTR-0004ae-41
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:52:49 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xGyTQ-005Wdy-Gs
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 14:52:48 +0200
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6acf7b1a-bab6-0a2a0a5309dd-0a2a4506d40a-10
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:52:48 +0200
+Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6acf7b20-195a-0a2a45060019-d1558032dc77-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:52:48 +0200
+Received: by mail-wm1-f50.google.com with SMTP id
+ 5b1f17b1804b1-4a16aaf2067so12017585e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 05:52:48 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a1bca808casm1553075e9.0.2026.10.14.05.52.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Oct 2026 05:52:46 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,220 +52,106 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
-	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
-	bh=1XoQ0iJcWS81MGA7D94FjGmXdVcFN4bgOM97NImPNq4=; b=gSAEHQKQ3SQV6o+2rKkvAdgL/Y
-	X4PuhsWsCSEaIuN07pNqhIr0smqh1RqATKhe1tHobISXbe7OoVZ/dUKGooh70rDBs3sW/F4MCwTYl
-	cj+DQ12FO/+WjSLs0VtoQ+Yt1Q4QTxYesff5au37qmTkrOjPpFjf0BgUWwVuVPT+ZZgs=;
-X-Gm-Message-State: AFq9FYJhTTWnmDRKTeH6zscLRUYr/+76UfDgn5KGMhCPFhUnRvl2/WhB
-	5JeSPobfINmNvvnRmhDeJvAqFIReN98+issA3fGkXT4afS0tBiDE9nKRaMIqbMVhCCjfPEz4VM1
-	5hKOl/fwIHUVfeQuV/fIiwXqs2MhVCjc=
-X-Received: by 2002:a05:651c:198f:b0:3a7:812b:d1c with SMTP id
- 38308e7fff4ca-3a9c4844a20mr36797111fa.0.1791981063805; Wed, 14 Oct 2026
- 05:31:03 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1791982368; x=1792587168; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=q/+VDWZQRxNSZfvFQaF0HGohNlNj8Digp/UjXxEXHXk=;
+        b=DGcLsapiedF8BNI2hQ3xxVIfa7yXndSEHfs2nk5suNcKLyYfpHF1+YRWcXMKlwaSRI
+         6zCqKznysjZYbDrXKBlWbNGymVnK9g5HTlxpbccjrSn7VD547Pn56BYGPo/y96Ajnso7
+         1n2YF9Ix7ItZbrbihKXpb3Kh8l2t9C7lBXHbDSGtzWeDniTLtmemwJHndH8PGfZFphMW
+         KqXZ2gFsI7HWR/O9mxpFpS1WZq+wmZm+DhZFM5T0uPlnb1riQwyLnS8NUlhaeMHDMdpL
+         0Vg98r21BXwssWkje19xKRvYO3q1GZb+uKf/EsfQGvb4Er9X/yhqQilAyNNPBEQIXFoL
+         A7Gg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791982368; x=1792587168;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=q/+VDWZQRxNSZfvFQaF0HGohNlNj8Digp/UjXxEXHXk=;
+        b=cOVTaxuxSNLgCLBNXc+yKTeWmg3uWZkCrOEW1WTvTlSUgfMWkh1gANIfvMfABBLi9i
+         ShaDxm3xmNnryz1yYFFDad4iRWy1ospYNgj2x9hRV1lqeGQbocdCiab051Dz56itDzHx
+         wL2MM11G1ecVc/epcpxR7/jmEUTyzrlqhdSiEFI6jUAzi0qAtPNkAAt69jO8Xq++xhjo
+         GO/F9sQMhPH8FrA0BYeImJ9IIydY45w+O6Q7aU3And6lr1xk7cpg6vCBBKFR/Uvq7wiI
+         jp5jZtMqKyYOnozplxziXWGeQsZWabKQ04lwHjJnbLJeMuNKogFnL6sL+gLirD5LEVzL
+         NI4g==
+X-Gm-Message-State: AFq9FYICdB7e43uIM1FeOZ+XEBaZbJy5HS88tlrXjipmCVrucw6kT7cz
+	6Xngqkvjv1AMP97pT05Upg5eYk4Dk2nmChlp/KM6RDFF3Vttek+awopilfSsikOamTTihBZkdaW
+	8c9VqwA==
+X-Gm-Gg: AYBFou1VdGOZ0zFYqoQJsHW6a48+zpxhOWcUBTbaQCkYn1LL6PNrMYca+/I/NXXj7Ie
+	A0kUHMufL5K2dynYhT2IkPXNFtMLzAScqeAHsZrtxN0JjjjDLGmYnKjnRn4bGs8QeO0wC61WjSG
+	z7A+helnU9A6bD+XPMW9D58kf5aVLR6C41yzO40YAdIDpv06g+iKU5UJXvnYQF3i3CNAutsgLmy
+	vL6CINoridNl072zv30+/S5dOQ1B7ivq5GNiOF7XRHP8tqKdniS3lXHCep1GDOoPO3EimvLHsCp
+	LPQTvIprwJtadvwoqijWkBA+mVmN3b79r55JbfkKRE9Ad7BDDtOGZltYiP15+2SS6RwT5XfjmEJ
+	JBBE7oY0JQ5BTdX+wwbebAlNxWdMfgWvxp/fd3Ylox3ndgNlxQDfef+VpNJCuQZLNrwBPovJZd+
+	Q/3CyO9ngDkc0ohH8geQ4fAAi4LRbj7UbpH/nImkJYVmT7cv02RugaCnrf+iclugbEqQlw0qf9q
+	d62R8Ppc8kUlNAUg/F6eE8AmNiaGjCnD9LuIHT9GbU5e+s4LXjXk0ItiDH3rWg=
+X-Received: by 2002:a05:600c:5391:b0:4a1:ac66:6ac8 with SMTP id 5b1f17b1804b1-4a1ac6671c7mr105488805e9.4.1791982367862;
+        Wed, 14 Oct 2026 05:52:47 -0700 (PDT)
+Message-ID: <6d0acc68-9d07-4e0a-b27b-0095a51ebe42@suse.com>
+Date: Wed, 14 Oct 2026 14:52:45 +0200
 MIME-Version: 1.0
-References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-15-gwd@xenproject.org>
- <asfmGUr17vgaXmYk@Mac.lan>
-In-Reply-To: <asfmGUr17vgaXmYk@Mac.lan>
-From: George Dunlap <gwd@xenproject.org>
-Date: Wed, 14 Oct 2026 13:30:51 +0100
-X-Gmail-Original-Message-ID: <CAFLBxZZsYZEG1h1A8d4A=i7yK3_R=yMcCEAUwDTeax3Ec4UKUw@mail.gmail.com>
-X-Gm-Features: AclHuK9thxVo-ndJBU-izWzLPQObYaEocYNCCH4qOVkts_0e5UsZPX1F1bbgaE8
-Message-ID: <CAFLBxZZsYZEG1h1A8d4A=i7yK3_R=yMcCEAUwDTeax3Ec4UKUw@mail.gmail.com>
-Subject: Re: [PATCH v3 14/18] x86/domain_page: key the directmap fast paths on
- the loaded view
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] gnttab: drop bogus check from _cache_flush()
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1791982368-FE47377B-C5D80245/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 829
 
-On Thu, Oct 8, 2026 at 7:51=E2=80=AFPM Roger Pau Monn=C3=A9 <roger@xenproje=
-ct.org> wrote:
->
-> On Wed, Oct 07, 2026 at 11:40:47AM +0100, George Dunlap wrote:
-> > map_domain_page() returns directmap addresses whenever it can: for any
-> > MFN the directmap covers in release builds, and for vCPUs without a
-> > mapcache.  Once guest contexts may run on the sparse view of the
-> > directmap, modify this to take the fast path returning the directmap
-> > address only when the full directmap is loaded.
-> >
-> > The release-build shortcut ahead of the vCPU lookup looks at the vCPU
-> > whose page-tables are loaded, without completing a lazy context
-> > switch: if that vCPU is not on the sparse view, its page-tables map
-> > the page through the directmap, and completing the switch would only
-> > move the CPU to the idle vCPU's page-tables, which map it too.
-> >
-> > mapcache_current_vcpu() may complete the lazy context switch
-> > (sync_local_execstate()) and switch us onto the idle vCPU (which has a
-> > full view), so check again if we can use the directmap afterwards.
-> >
-> > A vCPU on the sparse view always has a mapcache: HVM ones through
-> > per-vCPU page-tables, PV ones through the domain-wide mapcache, which
-> > mapcache_domain_init() now sets up for a domain using the sparse view i=
-n
-> > release builds too, rather than only when the directmap does not cover
-> > all memory.
-> >
-> > map_domain_page_global() mappings must be valid in every context: use
-> > vmap() for all of them once a sparse view is configured, as
-> > arch_mfns_in_directmap() then says.
-> >
-> > Add d->arch.sparse_dmap and sparse_dmap_active for this; nothing sets
-> > them yet.
-> >
-> > No functional change.
-> >
-> > Assisted-by: Claude Code:claude-opus-5-5
-> > Signed-off-by: George Dunlap <gwd@xenproject.org>
-> > ---
-> > Changes in v3:
-> > - New in this version.
-> > ---
-> >  xen/arch/x86/domain_page.c                  | 44 +++++++++++++++++++--
-> >  xen/arch/x86/include/asm/domain.h           |  6 +++
-> >  xen/arch/x86/include/asm/sparse-directmap.h |  8 ++++
-> >  xen/arch/x86/sparse-directmap.c             |  1 +
-> >  4 files changed, 56 insertions(+), 3 deletions(-)
-> >
-> > diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-> > index 0500bb9dba..48f85b670d 100644
-> > --- a/xen/arch/x86/domain_page.c
-> > +++ b/xen/arch/x86/domain_page.c
-> > @@ -61,6 +61,16 @@ static inline struct vcpu *mapcache_current_vcpu(voi=
-d)
-> >      return ACCESS_ONCE(this_cpu(pgtable_vcpu));
-> >  }
-> >
-> > +/*
-> > + * Whether the directmap in @v's page-tables is the sparse view, which=
- maps
-> > + * none of the heap's memory beyond the xenheap: the mapcache must ser=
-ve
-> > + * every mapping then.
-> > + */
-> > +static bool on_sparse_dmap(const struct vcpu *v)
-> > +{
-> > +    return sparse_dmap_active && v->domain->arch.sparse_dmap;
-> > +}
-> > +
-> >  /*
-> >   * The accounting for v's mapcache: its own for a vCPU-PT domain, the =
-domain's
-> >   * otherwise, in which case *dcache is set so the caller takes the dom=
-ain-wide
-> > @@ -142,17 +152,39 @@ void *map_domain_page(mfn_t mfn)
-> >
-> >  #ifdef NDEBUG
-> >      if ( mfn_x(mfn) <=3D PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
-> > -        return mfn_to_virt(mfn_x(mfn));
-> > +    {
-> > +        const struct vcpu *pt_vcpu =3D this_cpu(pgtable_vcpu);
-> > +
-> > +        /*
-> > +         * The page-tables loaded map @mfn through the directmap, unle=
-ss they
-> > +         * carry the sparse view.  Don't complete a lazy context switc=
-h to
-> > +         * find out: it would only move this CPU to the idle vCPU's
-> > +         * page-tables, which map @mfn too.
-> > +         */
-> > +        if ( !pt_vcpu || !on_sparse_dmap(pt_vcpu) )
-> > +            return mfn_to_virt(mfn_x(mfn));
-> > +    }
-> >  #endif
-> >
-> > +    /* No vCPU (early boot), or no mapcache: the full directmap is loa=
-ded. */
-> >      v =3D mapcache_current_vcpu();
-> >      if ( !v )
-> >          return mfn_to_virt(mfn_x(mfn));
-> >
-> > +#ifdef NDEBUG
-> > +    /* The lookup may have completed a lazy switch off the sparse view=
-. */
-> > +    if ( !on_sparse_dmap(v) &&
-> > +         mfn_x(mfn) <=3D PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
-> > +        return mfn_to_virt(mfn_x(mfn));
-> > +#endif
-> > +
-> >      cache =3D vcpu_mapcache(v, &dcache);
-> >      vcache =3D &v->arch.mapcache;
-> >      if ( !cache->inuse )
-> > +    {
-> > +        ASSERT(!on_sparse_dmap(v));
-> >          return mfn_to_virt(mfn_x(mfn));
-> > +    }
-> >
-> >      perfc_incr(map_domain_page_count);
-> >
-> > @@ -307,7 +339,9 @@ void mapcache_domain_init(struct domain *d)
-> >      ASSERT(is_pv_domain(d));
-> >
-> >  #ifdef NDEBUG
-> > -    if ( !mem_hotplug && max_page <=3D PFN_DOWN(__pa(HYPERVISOR_VIRT_E=
-ND - 1)) )
-> > +    /* Not needed when the directmap loaded for the domain covers ever=
-ything. */
-> > +    if ( !d->arch.sparse_dmap && !mem_hotplug &&
-> > +         max_page <=3D PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
-> >          return;
-> >  #endif
-> >
-> > @@ -392,8 +426,12 @@ void *map_domain_page_global(mfn_t mfn)
-> >               system_state < SYS_STATE_active) ||
-> >              local_irq_is_enabled()));
-> >
-> > +    /*
-> > +     * Global mappings must hold in every context: a sparse view of th=
-e
-> > +     * directmap rules the directmap out.
-> > +     */
-> >  #ifdef NDEBUG
-> > -    if ( mfn_x(mfn) <=3D PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
-> > +    if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
-> >          return mfn_to_virt(mfn_x(mfn));
-> >  #endif
-> >
-> > diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/a=
-sm/domain.h
-> > index 80415ab2c2..76a22b4040 100644
-> > --- a/xen/arch/x86/include/asm/domain.h
-> > +++ b/xen/arch/x86/include/asm/domain.h
-> > @@ -499,6 +499,12 @@ struct arch_domain
-> >       */
-> >      bool vcpu_pt;
-> >
-> > +    /*
-> > +     * Root page-tables carry the sparse view of the directmap, once i=
-t is
-> > +     * active (see asm/sparse-directmap.h).
-> > +     */
-> > +    bool sparse_dmap;
->
-> What do you mean with "once it is active"?  Either a domain is using
-> the sparse direct map or not, but it shouldn't have an external
-> dependency on anything.  Or maybe I'm reading the comment the wrong
-> way.
+There's no such thing as an alive domain without ->grant_table, and system
+domains (on Arm) don't own any pages. The check should also not be left
+there "just in case", because if that check could legitimately yield
+"false", the page reference obtained would then need dropping on the
+subsequent error path (see XSA-520).
 
-I've reworded it.
+Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+Reported-by: Yehyeong Lee <yhlee@isslab.korea.ac.kr>
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
 
-> > +/*
-> > + * Set once guest contexts run on the sparse view: from then on, the r=
-oot
-> > + * page-tables of domains with d->arch.sparse_dmap carry it.
-> > + */
-> > +extern bool sparse_dmap_active;
->
-> Shouldn't sparse_dmap_active be opt_sparse_dmap_pv ||
-> opt_sparse_dmap_hvm?  I'm afraid I don't understand the point of
-> tracking whether there are domain using the sparse direct map or not,
-> that's already tracked by d->arch.sparse_dmap?
-
-Yeah, sparse_dmap_active was originally meant to be used to shortcut
-certain things when no domains were using the sparse directmap; but it
-hasn't turned out to be needed.  I'll remove it.
-
- -George
+--- a/xen/common/grant_table.c
++++ b/xen/common/grant_table.c
+@@ -3637,7 +3637,7 @@ static int _cache_flush(gnttab_cache_flu
+ 
+     page = mfn_to_page(mfn);
+     owner = page_get_owner_and_reference(page);
+-    if ( !owner || !owner->grant_table )
++    if ( !owner )
+     {
+         rcu_unlock_domain(d);
+         return -EPERM;
 
