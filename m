@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BDB50CC6B19
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 06:46:54 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448469.1664501 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7055CC6B1A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 07:01:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448477.1664510 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGskq-00073o-AT; Wed, 14 Oct 2026 06:46:24 +0000
+	id 1xGsyx-0002Tj-Hh; Wed, 14 Oct 2026 07:00:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448469.1664501; Wed, 14 Oct 2026 06:46:24 +0000
+Received: by outflank-mailman (output) from mailman id 1448477.1664510; Wed, 14 Oct 2026 07:00:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGskq-00073h-6R; Wed, 14 Oct 2026 06:46:24 +0000
-Received: by outflank-mailman (input) for mailman id 1448469;
- Wed, 14 Oct 2026 06:46:22 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGsko-00073Z-2k
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 06:46:22 +0000
+	id 1xGsyx-0002Tc-EF; Wed, 14 Oct 2026 07:00:59 +0000
+Received: by outflank-mailman (input) for mailman id 1448477;
+ Wed, 14 Oct 2026 07:00:58 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGsyw-0002TW-PV
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 07:00:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGskm-00Ayl9-BL
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 08:46:20 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xGsyv-004IBs-SF
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 09:00:57 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acf253a-2eae-0a2a0a5409dd-0a2a4509a8f0-12
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 08:46:19 +0200
-Received: from [209.85.128.51] (helo=mail-wm1-f51.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6acf28a9-8faa-0a2a0a5109dd-0a2a450bb65e-4
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 09:00:57 +0200
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acf253b-be1a-0a2a45090019-d1558033e45b-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 08:46:19 +0200
-Received: by mail-wm1-f51.google.com with SMTP id
- 5b1f17b1804b1-4a17baef589so4983075e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 23:46:19 -0700 (PDT)
+ id 6acf28a9-b7e8-0a2a450b0019-d1558031b597-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 09:00:57 +0200
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4a180fbeef5so33649355e9.1
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:00:57 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bea1021sm386381625e9.10.2026.10.13.23.46.18
+ 5b1f17b1804b1-4a18bf135fasm373082645e9.5.2026.10.14.00.00.51
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Oct 2026 23:46:18 -0700 (PDT)
+ Wed, 14 Oct 2026 00:00:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,58 +54,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791960379; x=1792565179; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791961257; x=1792566057; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=LqBOqFLs/eV4H9jqZg5HZ9qpSspn1YA3+yTesdco6z0=;
-        b=DvrTTYcEjr5VCiNsA0PFrJLjld7ktYnt25+8bzpYFoiRx4mkpvzkBwJmDkD+ZciomW
-         7hpl0EYPoXGY4ygNKhVhUEmu66kEW2djVL5w9epCuay56BOeZDSvIw7yFQHRznETwE9R
-         7FS43UWr+2hniFH2znLIOC63Lgd7lrTY+T72VZmorIbsZtwHCicuu+v9J/X9ZO2xTm+/
-         mJnWrjGcwaXTwrpUpc1/ebuj5s9hGyc2C/Gt458aWJD7yGh+QlViOsd423ubhuyFI/+a
-         2/V7lK6GY+gZeHSJnlT8A7acEnggXl2giWRABG3c4sr8/T8QOF2pDoE2vmQmfCzWgB99
-         Axxg==
+        bh=+cHPWvU8QOywGgl3wB33A3xCPcasAradKrbFRfKRYVU=;
+        b=gcyDBgNw7Fc7IUgUZOj8zvx42TYMsTlNF1YFMI7POUAkCk7LA7hmj9vZpNZ4+//pD1
+         QH0QTLGoVHaOdjvaFT5PjNYH8f2i8ZP3bZICnEQzyf3BuGDv8sSOA73lfl/wCnWWfesA
+         HGZAuNnovhSnSTHjXRtIJ7fqAmSWXYjFPLj2zP6zuy247O1hHq1uTRIyxF89OiH4fUgv
+         5wLgMLJsTpCdLj2y/JLP09RYDMJVPw0fDmtJbmURNznFiKqjHsBvYfjeeZaLm1W0PjuA
+         AN9cX8LlKyvOt4EbTFmLQdJ3vI7ojPTQ7qTgyNz4+jTZAJ8U7+RFWPUUOZnHbUphW9Ws
+         gP7Q==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791960379; x=1792565179;
+        d=1e100.net; s=20260707; t=1791961257; x=1792566057;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=LqBOqFLs/eV4H9jqZg5HZ9qpSspn1YA3+yTesdco6z0=;
-        b=ymszlTjEUl3SzXCUBslrwoakVD3a/9K/76myGqsG8mLh2iHv8UhLI1v6z9ufCT6W1B
-         NyBQq2hPK3bdJmuoMxHP/ujliJxE9mB56tej0Dx5+QYpOM8NwwwMsS/5EiQbfmAHDreA
-         Xrekmv+RuDpwHDmnsRMg8MY52ktkeyjWHLvkDm2hJy+DnVAMidY2C+uOD4mbcQupzBnN
-         4mddGPvgE0S2Nnmgt/g4h8lWZ2D8VOzqHPXpbQiG9vw4uBqiqv4nWaIVysKIzlQhDUbu
-         76tZwRur3MZX7nCJjzxPhQZhDcmKX8xRa/25EiSq60poy3fyValv64w6XAMI8jwoUY5d
-         xK5w==
-X-Forwarded-Encrypted: i=1; AKwUvBxDJAJ2gclHYFLQW9lfSpWSLKgyNMdxtHYf3qI8KeqYLaMNzXcIgN9Mb5pQ56oo3YrcCMInBnztXA8=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKC1UBBvFlnOmI5pAihCOhaqzaJbejGc+myyLAlbxQiVmgh1b57
-	xEf2jEk3fZtumZeVl/CcReR4wEBngwpNEq2cFd0Zgs+FO8V69EL5vY257L/5p0N1Ow==
-X-Gm-Gg: AYBFou2USnFJnQmv+pUg0MFLE5BiEwSk9+5jJ/0v6jE8JFjcwVcryuG/SY8PMDto3Oy
-	WjgtUEkk+7ZSZq8KnXwy79M//fLzmNi2wtvQojDkJEJP+Ya7lGRdINZWYEtbmmH5rBFvjI5J9PT
-	ZL5IiPB0z+4/ycv7g8EJgY9nZ36WYxgZ5IN2YxwtihGop84Ui7W7JMgvVYb3iytYhbR6c2yLbed
-	yflaBPjhviI9d2WyDq9g3WyYKTlm79fzYdj7pc2fhjM+7xwUO+i9WFsoRZhBA8Cs/IVC0ZHHqmF
-	d1+L5llhI70XY31YCXJRgwkg2K3gFtsLx/J1ke4gXhcVj5pKMcAnEMyDWLXklFU/nD7WIzrRpTI
-	wxjiL4beq4bi1/vqa3RWB87xb29syCoeDk2+5JEMDAZsebMzw4uUnz9aRGaOy2TPlRPmSgR8G+c
-	18c6iRLUKUjWdN0dbvRn3UwJ3DESbIsP4hKrGA8IlMhurSjaumNq2VKCNtrxP4tW9UzmNLIirn5
-	T3X77T3tWl0Zpcyr0sgq3JqRiA05Mbh0L36fJaiW7NDGBcdXnERM0Xpn1Mwfw==
-X-Received: by 2002:a05:600c:1549:b0:4a0:25c:8af2 with SMTP id 5b1f17b1804b1-4a18e491051mr328938875e9.17.1791960379395;
-        Tue, 13 Oct 2026 23:46:19 -0700 (PDT)
-Message-ID: <4eb23457-0831-4cd1-af39-b4ad182f33f2@suse.com>
-Date: Wed, 14 Oct 2026 08:46:17 +0200
+        bh=+cHPWvU8QOywGgl3wB33A3xCPcasAradKrbFRfKRYVU=;
+        b=cGzfkKtW3xNDfm4yQ5wOiqdXQ7O9vZe6q0XaY6/NiaALIeeZeeC2nkNKqqgOenDvLW
+         qSrI2pI65J12bArASEgAausRbaNNG6MXszj8LZ8P/09EEkz5+WfTfJwQbd5l/IFUHATN
+         ka/TBKRsp7bwKxOUGNNfmLbR2xrqColIHay+30k5Rr8vJt+qzPd5MAz/KWd/n7fwefT/
+         0lVds90AZrutsKGlgOGdFUriAmLYEYnpspe1AELD8f34kyU87lcdMLnrvX4O4Q29OiF/
+         tNgjJBlCAW7TpmzeRiPyhV1WweF+s76DXbG1CzZp8wVdp2ZC64VWmEKfTI5HRGT6DSxw
+         vhrA==
+X-Forwarded-Encrypted: i=1; AKwUvByOHLXAoK/AlSk4uEAE1++fuUKp3XiHn+qdq9B5SEV/HCwh/PM8NltJZyWOTWXSCcYkCA1G7eSNKHk=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKd8a4l+pYiV9ExpKT+brbmaJv6NsLLE0xK3cf8rgkalWaKhtSd
+	Z2xpfhIPNQBPGiLcaph8gs/EO6kCYoEHT69h+/MYfbw/ki54xTol0spj6knx+Aj58g==
+X-Gm-Gg: AYBFou1jfiTrP1e4emfG9zDKfbHeEt3lhqTn4P4sBUw2Rz0pY46jQB+pZii8aWJjTLT
+	XwbUsZd6ac+h3oMjC7dFz3dnFh+qk78In0xnyRh4bVpRV//yW3DyHvtxwu/KoJ2qewnJ9lW3Hc5
+	4J5k1FqVimSuJdt0esOeV9vlrGi0eXE5ReDpVDcFTrlkr4G2Hr2+ofgau4xsPgrinmu9ywdX70K
+	C60S+BaJT3aC4iUN1s8YCOWMTffumnOhDdy/YVzfqrrIHzLhNrb1/V+t78yAd4+MmdNpQLXqMRS
+	rBzYgifus09UBefYeoufpYiZJrx+LKCpVaPYzOHLr35m3vykVutWAoyou3DPJtrmCwhDfkt3+Qj
+	mmRC0J5OrdDQJ+1c0nhFElW6AR5erBMUlDf7phGbNLsoVWnqHgM59vYul6VfeTrjfi3cQeqX5ec
+	aDNjYwQeWYosXY/1jx5djfWVY5N+8xdkjPpG4uX6VK5/m1E5qU7382SirJ6FuuReNMJ3ggt0Y25
+	CTsPEDB6BCloVZg0dZQ6Ma8Hq+v1dleLi6LmxGlonrF9k7SKNevdmVZub6LGg==
+X-Received: by 2002:a05:600c:4fcb:b0:4a1:811c:8083 with SMTP id 5b1f17b1804b1-4a18e4c3600mr292058985e9.33.1791961254025;
+        Wed, 14 Oct 2026 00:00:54 -0700 (PDT)
+Message-ID: <05f2677a-977d-410f-a150-e24981faea32@suse.com>
+Date: Wed, 14 Oct 2026 09:00:51 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] ns16550: add "auto" to scan PCI only when the default
- base has no UART
-To: Benjamin Leggett <benjamin@edera.io>
+Subject: Re: [PATCH] drivers/char: Add several newer PCI IDs for Intel LPSS
+To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
+ <marmarek@invisiblethingslab.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20261009202447.852414-1-benjamin@edera.io>
- <20261013204946.1980090-1-benjamin@edera.io>
+References: <20261013190735.365024-1-marmarek@invisiblethingslab.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -131,118 +130,39 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261013204946.1980090-1-benjamin@edera.io>
+In-Reply-To: <20261013190735.365024-1-marmarek@invisiblethingslab.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1791960379-BE8D9034-DC01EC5D/10/78276251493
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1791961257-1A8D99EA-CDC70FB7/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 4115
+X-purgate-size: 1155
 
-On 13.10.2026 22:49, Benjamin Leggett wrote:
-> @@ -737,9 +739,9 @@ static int __init check_existence(struct ns16550 *uart)
->       * if we're getting MMIO UARTs, the arch code knows what it's doing.
->       */
->      if ( uart->io_base >= 0x10000 )
-> -        return 1;
-> +        return -1;
->  #else
-> -    return 1; /* Everything is MMIO */
-> +    return -1; /* Everything is MMIO */
->  #endif
+On 13.10.2026 21:07, Marek Marczykowski-Górecki wrote:
+> Include PCI IDs of UART ports on Intel RPL - PTL. Based on Linux driver
+> and hwdata, they all share the same parameters.
+> 
+> Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
 
-While this addresses my main concern towards false positives, the rest of
-this function is still weak enough that I'm unconvinced it can be used for
-the new purpose here. I wonder what others think.
+Acked-by: Jan Beulich <jbeulich@suse.com>
+albeit imo better with the subject prefix changed to drivers/ns16550 or just
+ns16550.
 
-> @@ -1785,6 +1801,7 @@ static void __init ns16550_parse_port_config(
->  {
->      char com_console_options[128];
->      char *str;
-> +    int present;
->  
->      /* No user-specified configuration? */
->      if ( (conf == NULL) || (*conf == '\0') )
-> @@ -1818,8 +1835,29 @@ static void __init ns16550_parse_port_config(
->          PARSE_ERR("%d stop bits are unsupported.", uart->stop_bits);
->      if ( uart->io_base == 0 )
->          PARSE_ERR("I/O base address must be specified.");
-> -    if ( !check_existence(uart) )
-> -        PARSE_ERR("16550-compatible serial UART not present");
-> +    present = check_existence(uart);
-> +#ifdef CONFIG_HAS_PCI
-> +    if ( uart->pci_fallback && present < 0 )
-> +        PARSE_ERR("\"auto\" needs a base that can be probed");
+> ---
+> I tested it on MTL, but given Linux driver handles them uniformly, I
+> assume others work too.
+> 
+> The list gets quite long, would it be preferred to have a macro to
+> reduce (at least similar) entries to one-liners? In Linux driver it
+> looks this way:
+>     /* MTL-P */
+>     { PCI_VDEVICE(INTEL, 0x7e25), .driver_data = (kernel_ulong_t)&bxt_uart_info },
+>     { PCI_VDEVICE(INTEL, 0x7e26), .driver_data = (kernel_ulong_t)&bxt_uart_info },
+>     ...
 
-This, imo, is a misleading / unhelpful message. "auto" sits in the place where
-a base would be specified, i.e. suggesting that a base is needed when auto-
-detection was requested is odd. Furthermore, it is an implementation shortcoming
-that devices accessed via MMIO aren't probed. Maybe "\"auto\" doesn't cope with
-MMIO-based devices" or some such?
-
-Yet then - this isn't about the to-be-auto-probed device anyway, it's about the
-data that was put in by early arch startup code.
-
-> +#endif
-> +    if ( !present )
-> +    {
-> +#ifdef CONFIG_HAS_PCI
-> +        if ( uart->pci_fallback )
-> +            pci_uart_config(uart, 1 /* skip AMT */, uart - ns16550_com);
-> +
-> +        /*
-> +         * A failed scan puts back the rejected base, and check_existence()
-> +         * can't test an MMIO BAR, so only ->param says that a device was
-> +         * found.
-> +         */
-> +        if ( uart->pci_fallback && uart->param && check_existence(uart) )
-
-Don't you want to check for > 0 here? Yet then the comment looks to suggest
-you deliberately want to accept -1 here as well. (The comment wants further
-adjustment anyway, as "... only ->param says ..." contradicts your use of
-check_existence().)
-
-> +            printk("ns16550: com%zd: no UART at default base, using %pp\n",
-> +                   uart - ns16550_com + 1, &uart->pci_device);
-> +        else
-> +#endif
-> +            PARSE_ERR("16550-compatible serial UART not present");
-> +    }
->  
->      /* Register with generic serial driver. */
->      serial_register_uart(uart - ns16550_com, &ns16550_driver, uart);
-
-I think this wants doing with just a single #ifdef, it at all possible. Not
-having actually tried it in practice (and leaving aside the other questions
-above), something like
-
-    present = check_existence(uart);
-#ifdef CONFIG_HAS_PCI
-    if ( present <= 0 && uart->pci_fallback )
-    {
-        if ( present < 0 )
-            PARSE_ERR("\"auto\" needs a base that can be probed");
-        else
-        {
-            pci_uart_config(uart, 1 /* skip AMT */, uart - ns16550_com);
-
-            /*
-             * A failed scan puts back the rejected base, and check_existence()
-             * can't test an MMIO BAR, so only ->param says that a device was
-             * found.
-             */
-            if ( uart->param && check_existence(uart) )
-            {
-                printk("ns16550: com%zd: no UART at default base, using %pp\n",
-                       uart - ns16550_com + 1, &uart->pci_device);
-                present = 1;
-            }
-        }
-    }
-#endif
-    if ( !present )
-        PARSE_ERR("16550-compatible serial UART not present");
-
-may do.
+Yes, with a bloat like this it may be nice to get volume shrunk down. In a
+follow-on patch, perhaps. I also notice the Linux driver has uses of
+bxt_uart_info beyond the set we have plus what is being added here (not the
+least, considering the identifier, BXT itself).
 
 Jan
 
