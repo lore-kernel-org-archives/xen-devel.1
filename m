@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73CBACC6B19
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 06:17:01 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448456.1664478 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8D7DCC6B19
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 06:21:45 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448462.1664487 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGsI9-0001S7-Ue; Wed, 14 Oct 2026 06:16:45 +0000
+	id 1xGsMi-0003FX-FV; Wed, 14 Oct 2026 06:21:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448456.1664478; Wed, 14 Oct 2026 06:16:45 +0000
+Received: by outflank-mailman (output) from mailman id 1448462.1664487; Wed, 14 Oct 2026 06:21:28 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGsI9-0001S0-Rh; Wed, 14 Oct 2026 06:16:45 +0000
-Received: by outflank-mailman (input) for mailman id 1448456;
- Wed, 14 Oct 2026 06:16:44 +0000
+	id 1xGsMi-0003FQ-CS; Wed, 14 Oct 2026 06:21:28 +0000
+Received: by outflank-mailman (input) for mailman id 1448462;
+ Wed, 14 Oct 2026 06:21:26 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGsI8-0001Ru-6v
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 06:16:44 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGsMg-0003FK-DN
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 06:21:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGsI7-00FUfQ-5q
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 08:16:43 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xGsMf-003Kz5-Q8
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 08:21:25 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acf1e33-2eae-0a2a0a5409dd-0a2a4508d438-36
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 08:16:43 +0200
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6acf1f5b-e002-0a2a0a5209dd-0a2a450bc210-24
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 08:21:25 +0200
+Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acf1e4a-f659-0a2a45080019-d1558032c476-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 08:16:43 +0200
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4a018792ab3so30410105e9.0
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 23:16:42 -0700 (PDT)
+ id 6acf1f65-b7e8-0a2a450b0019-d1558035c8a7-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 08:21:25 +0200
+Received: by mail-wm1-f53.google.com with SMTP id
+ 5b1f17b1804b1-4956869750eso26399655e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 23:21:25 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a190344032sm431262495e9.15.2026.10.13.23.16.41
+ 5b1f17b1804b1-4a19f249692sm405268785e9.3.2026.10.13.23.21.24
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 13 Oct 2026 23:16:42 -0700 (PDT)
+ Tue, 13 Oct 2026 23:21:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,65 +54,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791958602; x=1792563402; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791958885; x=1792563685; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=0c8IdlqqkdayqULr8G37+0RkkILvk5tcc5RQ6p3d6mA=;
-        b=Nn3lAwizGUmVlStPOASh60yYkkE+7rs5mNoNPo0dlfe5G2YDhoyhgdCzeKHSHAxa8C
-         x9O6ybkgJnQkmT8ITznwXGBVx+Kg1TsUhq7yZcTtVucqvz6ckzXl92hLRMngKGtvwrAg
-         AnIxfAR3BPOF3qO3LDodRM6wq4HXkNLYTLNTu5T0r5xK0HyC6rCk1Wc47ai4P/vGSOia
-         YUpoRpSqtD++OlL2Ohhv4luiCLRhkBgy4Md5mE09hfu4RbeHp1Dq05easXI8yQXMQZx+
-         aBNoKQX7y600cmN8BqU6W1jPLoM6s4gQwve/Z4YIkIBDdgGOOFBiZ2Tx2IbSdM7IA3gc
-         9KgQ==
+        bh=noYBIJiktNRyqfUuXS8gQRRDHhRezXm9D75uOzMy6mQ=;
+        b=e15LNspGX8j2dCSgbN5lRPJriNth4hopbwUA/FxFl9cdAsBiwcrg9JM7m3qHx5ng5f
+         3YiEkhrA2GOsmI2VpOk8DHlZQWalWYw1BP/VyWZjsFJTwKsjr/CrgeGqvdxeUtWpD6Oc
+         W3+14zftZhvdQNgkj/3pXwgLC9oog6DmeisEkdyUAkX31i+qjheioVq9qFMzzlCEXv4+
+         gjlU1tA8Ip1TjKkiItooMAASwT4VlhP5vkJpytAnNc10fivfCHkjlCy+9FyDMUZd8iRZ
+         v7zbsPySgKrx3lFpBkIetEqAgU+2Jgc1lfj7jGcAxsw3hfNt9ZtFTv9rGVEkF8+9LllD
+         0frQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791958602; x=1792563402;
+        d=1e100.net; s=20260707; t=1791958885; x=1792563685;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=0c8IdlqqkdayqULr8G37+0RkkILvk5tcc5RQ6p3d6mA=;
-        b=SrOcr4ekoGhkv+hoYmpfmf+xCP6iyuTwu5y6bAg4UtuRH0eC3BTqgibDNZtvMEE5UI
-         iUqx9n3BXon5Gc8iji5D66n0/uC8nuOzbOIu91kHMlnhNtf34e+yOFjk/iIffWK/oLBU
-         T6DllQFqLoleKoUeuJLycQgkP51Dgkb1kPC2TKlNsHk+EtrrdPq+TcLdX5L+0gSKHmN3
-         Ktl+KZT5zbs1zVY/KpdW+UJBeBZpzg4XAqYbmYWo7pJlW0yaSvKxMFrspPxINdQ0kP53
-         60fpS20ta9xNaqKWhq+NGh445Vxn7LPVnxnohSW8BKPwRpNwfJxY11AF9yeoOXteDSRE
-         /0vA==
-X-Gm-Message-State: AFq9FYJT99SgCI4GSTGu6EpY2jEiY546vYl29kDOh8wbECvSGXOYpp0q
-	15E+7klHpU5dmZg7dnjXQ+T0p1EGp8/a4VO96dKZqkKIwvwOZ8jqZZdioHFKBsASYA==
-X-Gm-Gg: AYBFou0Z3DRV8tNIIcLAojK3UTaBKAgfAF3p3r9/kbQDKhtyyqUFS/U4+J41KP6hytH
-	yWZc/nsqmRpuUZCG8YJ+u+5kOgPjPT5Kjq8/PBIhod7oQ88Pjs5FSTEcLlbzV8Iw449uSlBHAsz
-	by1G/BQExycOXyfAc0YisLjdfJfnfOMBovhUlDb9KGdZCO+KSCWcZ5VaBql77G+nQmIoFJd1bFN
-	wRSoam7QznnY8psybDBi6S3MxDdWG2XPJqUrYlym1X0ex3Tq7zXTcU3gCQPJ7DPwpeOy6DLj6Ks
-	SymlQjNRwlGtBs+TfuUS/c1LVI4aTe7tuF6w3EBTeJhGZn5xJTIbxsyqwWKcOIm1e/vOF1GYofs
-	7Ksb/PLTX+lQg4rbvQFjhMgs3yyUnS29HpNnBR6WYYXRuCvIwquOyKxKzc2bw3ISKIxSUBsXWyB
-	9s/7px6EAhIiLBSA2ddVVm2ow3HDP1NieN2ILrIYk4Witmvou1/zIjeUK6NxjQ68gp39Y6NFvI6
-	dosL+AEu1L8G3E7kP3bLK7NVhEX6QZmgCFfDG1p8+hLXeWp7GPfoUp3eBheIP1yd1jOVREoBg==
-X-Received: by 2002:a05:600c:8218:b0:49f:ffdc:939d with SMTP id 5b1f17b1804b1-4a18e49d9f5mr281627095e9.9.1791958602413;
-        Tue, 13 Oct 2026 23:16:42 -0700 (PDT)
-Message-ID: <6428c5da-0289-41ee-835c-ae5def434c52@suse.com>
-Date: Wed, 14 Oct 2026 08:16:40 +0200
+        bh=noYBIJiktNRyqfUuXS8gQRRDHhRezXm9D75uOzMy6mQ=;
+        b=gbh9XhamGJXXOcCH9wVNrbhx8PM8R9xOpTWu2OcT0m+stDDT8bO3cXHjnWFj2zcja2
+         Al0M6iHNaT8f/dh2GGnULXDrdGXW7V/eEkiFMehZi2xPlG75Ne4uvcaq6G3rqBsh7tRM
+         Sbb18wqpT9L+fP/08w550csSmBkqUso8rUY7qsDTgKe7Wg9qm+zrsK0i6BWSv1HA97lR
+         d1bvConXwyI64fwwlHG8F0TdDZD1GC7Vhb5H95lm/PO59OUFpaKQTmuvNYpNP9JTcS8E
+         B680778Qennk5oVFuZVfNAihC0Q2mS8q1s/DPxzPjTOaOwSdOkMeR9v2591CZZWO+9oH
+         UAkg==
+X-Forwarded-Encrypted: i=1; AKwUvBxC1mZP1g7M9kuANpF3fMjK1jHONUMh9YY2X5Bj73axBSwlVpiWVOyfan0y6pVi3NKZRDqJGcT9Z1g=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKSYSe1gqAoIwpwQ6kIfk9dfxH65Xza4n7WRX3dKXte873kmQJ5
+	qfQ87ASlZlTwdCH/uEy0XtaCcOw4bbSFxYqnbGUmYz4s68ykDlWNLhuaaAA7b99wYg==
+X-Gm-Gg: AYBFou3A+aChnY2pK2OueBjd382pgrXCKlU16B9/fSPALuNZ/sMqtTAD7M9lYgMJ70I
+	ypYlRv2CSdgY6FsjT+Si+7kyMIArC7lQi/+c8iKnzQ7/NahXff6w48rQyawj09EzDh8KjEh9FF1
+	xaxmgWnCvrOkSbzjvJIxn/csszByc28hEimnuisfx058kmeEAPe4yfGQaEvN5lbNePZX0EqUcal
+	CKk4oAtjIZh9CcbQRkVKNwvZ4ZACfquB5Jk/Pn/h8R9jiVLtRoaaPAQC50k9qa2FyRm7tyRb/M5
+	tTj8Ihol3qUagp0dFgEavocECbC1hkFKcKfY+h8dVtZylaibPE5fCBJO4s+SDUrkaW+LxsBTKpA
+	5KXG/MDVyfrWubN6+xM9kioO3CUBpB3sOEZ76aeJZFp+LOFvQz20+DMasyrvYtUONoGnQNOvf16
+	VUi1XLFUx/a/G5CLbom0uARYPoia67/wIapqPC7BOndaxuWFnZtOVcu0iyuWTWA98ZsW7+RaZbN
+	M21acHH38aPXrm2OhikyHlbkbyOd8VesbmkJG4/UyXiGeSxo4Um7fnDfdT9+DXO
+X-Received: by 2002:a05:600c:6207:b0:49f:ff73:9971 with SMTP id 5b1f17b1804b1-4a18e4aff66mr283175425e9.18.1791958885195;
+        Tue, 13 Oct 2026 23:21:25 -0700 (PDT)
+Message-ID: <a6a65b86-958f-434d-a070-e425990344df@suse.com>
+Date: Wed, 14 Oct 2026 08:21:24 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 08/39] xen/riscv: implement virtual APLIC MMIO
- emulation
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
- Romain Caritey <Romain.Caritey@microchip.com>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
+Subject: Re: [PATCH] ns16550: add "auto" to scan PCI only when the default
+ base has no UART
+To: Benjamin Leggett <benjamin@edera.io>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <bd546cae116c93c88706b49e7c24a125b4e5237c.1790779209.git.oleksii.kurochko@gmail.com>
- <1791212017.8631fc262581453bbf619ec5b2062170.1a10c8e58370003f66@vates.tech>
- <c645f0b5-62f7-465c-9518-226cbd124bac@gmail.com>
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <20260922184316.324817-1-benjamin@edera.io>
+ <20261009202447.852414-1-benjamin@edera.io>
+ <236fed46-c64f-4bfc-86a5-2147ae34d5d9@suse.com> <87bj8xs54e.fsf@edera.io>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -138,45 +132,52 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <c645f0b5-62f7-465c-9518-226cbd124bac@gmail.com>
+In-Reply-To: <87bj8xs54e.fsf@edera.io>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1791958603-D4D7087B-8C2D511D/10/78276251493
+X-purgate-ID: tlsNG-42698a/1791958885-184CB9EA-3732733C/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1726
+X-purgate-size: 1925
 
-On 13.10.2026 18:06, Oleksii Kurochko wrote:
-> On 10/5/26 4:53 PM, Baptiste Le Duc wrote:
->>> Guests running under Xen program interrupt routing by writing to APLIC
->>> MMIO registers. Xen must intercept these accesses to enforce interrupt
->>> isolation between domains and to translate guest routing intent into the
->>> underlying physical MSI topology.
->>>
->>> Register the vAPLIC range with the MMIO dispatch and emulate the accesses:
->>>   - reads and writes are masked with the domain's authorised interrupt
->>>     bitmap, so that a guest can neither observe nor affect interrupts it
->>>     does not own;
->>>   - target registers are shadowed per source, so that a guest reads back
->>>     what it wrote. The h/w register instead gets the hart index and guest
->>>     interrupt file of the pCPU the target vCPU's interrupt file lives on,
->>>     as the APLIC uses these fields directly to compute the MSI address. As
->>>     long as the target vCPU has no h/w guest interrupt file, only the
->>>     shadow copy is updated;
->>>   - only MSI delivery mode is emulated: target writes made while the
->>>     guest's domaincfg.DM is clear are ignored.
->>>
->>> Delegation (APLIC_SOURCECFG_D) is not yet supported.
->>>
->>> Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
->>> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->> Co-developed-by: needs a matching Signed-off-by: from Romain right after
->> it.
+On 13.10.2026 22:44, Benjamin Leggett wrote:
+> Jan Beulich <jbeulich@suse.com> writes:
 > 
-> I will contact Romain and ask for his Signed-off-by.
+>> On 09.10.2026 22:24, Benjamin Leggett wrote:
+>>> On some systems the console UART is at the legacy I/O port, and on
+>>> others, such as Amazon EC2 bare metal instances, the only UART is on
+>>> PCI. "com1=...,pci" finds the PCI UART, but it prefers any PCI serial
+>>> device to the legacy port, so it is not correct on a system that has
+>>> both. No option today says "use the legacy port, and scan PCI only if
+>>> it has no UART". A deployment that boots one command line on many
+>>> kinds of machine needs exactly that.
+>>>
+>>> Add "auto" as a value in the <io-base> position. With it, Xen probes
+>>> the default base as usual. Only if check_existence() fails there does
+>>> it scan PCI, as "pci" does. Without "auto", nothing changes.
+>>
+>> I've always been considering check_existence() as somewhat fragile (it's
+>> not very difficult for it to yield a false positive, especially when
+>> HAS_IOPORTS=n), which means that I'm not really convinced it can (reliably)
+>> be used for the purpose here.
+> 
+> How do you feel about making the retval for check_existence() work like so:
+> - 1: a UART answered the probe at io_base.
+> - 0: the probe ran, and no UART answered.
+> - -1: the function cannot probe this base, so it did not test it.
+> 
+> and returning the -1 in cases that would spuriously return 1 and be
+> "false positives" today, so we don't try to probe something we
+> shouldn't?
+> 
+> That at least covers the cases I can see, including the HAS_IOPORTS one.
+> 
+> e.g. `if auto && -1` -> we bail with "can't probe"
 
-Just to mention: Co-developed-by: can mean many things. We haven't been
-insisting on matching S-o-b before. Plus if there was an S-o-b, why
-would there want/need to be Co-developed-by: as well?
+Makes sense, yet I wonder: Why did you raise the question here if 5 min
+later you send a new version of the patch anyway?
+
+And btw - that patch can't possibly be v1 anymore, yet it neither says
+which version it is, nor what has changed from the earlier version.
 
 Jan
 
