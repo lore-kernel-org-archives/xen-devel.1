@@ -4,46 +4,67 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30CBDCC6B3C
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B84ACC6B3D
 	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 12:07:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1446871.1665877 (Exim 4.92)
+Received: from list by lists.xenproject.org with outflank-mailman.1448893.1665883 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKEp-0000gm-Mi; Thu, 15 Oct 2026 12:07:11 +0000
+	id 1xHKEq-0000pI-0v; Thu, 15 Oct 2026 12:07:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1446871.1665877; Thu, 15 Oct 2026 12:07:11 +0000
+Received: by outflank-mailman (output) from mailman id 1448893.1665883; Thu, 15 Oct 2026 12:07:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKEp-0000gF-Dm; Thu, 15 Oct 2026 12:07:11 +0000
-Received: by outflank-mailman (input) for mailman id 1446871;
- Tue, 13 Oct 2026 10:02:21 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xHKEp-0000o2-Ob; Thu, 15 Oct 2026 12:07:11 +0000
+Received: by outflank-mailman (input) for mailman id 1448893;
+ Wed, 14 Oct 2026 12:05:36 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <tariqt@nvidia.com>) id 1xGZKv-000317-GI
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 10:02:21 +0000
+ (envelope-from <sumanthk@linux.ibm.com>) id 1xGxjk-00029M-0m
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:05:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGZKu-00HUv6-Jx
- for xen-devel@lists.xenproject.org; Tue, 13 Oct 2026 12:02:20 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xGxjj-00GdSw-D4
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 14:05:35 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <tariqt@nvidia.com>)
- id 6ace01a1-8faa-0a2a0a5109dd-0a2a4506cbfc-34
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 12:02:20 +0200
-Received: from [40.107.200.2]
- (helo=CH5PR02CU005.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <tariqt@nvidia.com>)
- id 6ace01aa-195a-0a2a45060019-286bc80245dd-4
- for <xen-devel@lists.xenproject.org>; Tue, 13 Oct 2026 12:02:19 +0200
-Received: from SA0PR12MB7090.namprd12.prod.outlook.com (2603:10b6:806:2d5::16)
- by IA0PPFB67404FBA.namprd12.prod.outlook.com
- (2603:10b6:20f:fc04::be2) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Tue, 13 Oct
- 2026 10:02:15 +0000
-Received: from SA0PR12MB7090.namprd12.prod.outlook.com
- ([fe80::de78:df30:c2e6:7adc]) by SA0PR12MB7090.namprd12.prod.outlook.com
- ([fe80::de78:df30:c2e6:7adc%3]) with mapi id 15.21.0472.015; Tue, 13 Oct 2026
- 10:02:15 +0000
+ (envelope-from <sumanthk@linux.ibm.com>)
+ id 6acf7006-8faa-0a2a0a5109dd-0a2a4504c278-24
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:05:35 +0200
+Received: from [148.163.156.1] (helo=mx0a-001b2d01.pphosted.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <sumanthk@linux.ibm.com>)
+ id 6acf700d-b57f-0a2a45040019-94a39c01a69c-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:05:34 +0200
+Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
+ by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69E9waOp2016607; Wed, 14 Oct 2026 12:04:53 GMT
+Received: from ppma21.wdc07v.mail.ibm.com
+ (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
+ by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4h7dugm5g8-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Wed, 14 Oct 2026 12:04:52 +0000 (GMT)
+Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
+ by ppma21.wdc07v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69EAnqN23211855; Wed, 14 Oct 2026 12:04:51 GMT
+Received: from smtprelay02.fra02v.mail.ibm.com ([9.218.2.226])
+ by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4h9q2ymp38-1
+ (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
+ Wed, 14 Oct 2026 12:04:51 +0000 (GMT)
+Received: from smtpav01.fra02v.mail.ibm.com (smtpav01.fra02v.mail.ibm.com
+ [10.20.54.100])
+ by smtprelay02.fra02v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
+ 69EC4l5Q50397474
+ (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
+ Wed, 14 Oct 2026 12:04:47 GMT
+Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 287A32004B;
+ Wed, 14 Oct 2026 12:04:47 +0000 (GMT)
+Received: from smtpav01.fra02v.mail.ibm.com (unknown [127.0.0.1])
+ by IMSVA (Postfix) with ESMTP id 7EC8420040;
+ Wed, 14 Oct 2026 12:04:45 +0000 (GMT)
+Received: from li-0f4bfd12-9554-4bfb-8b14-7ccf0f0767af.ibm.com (unknown
+ [9.111.94.206])
+ by smtpav01.fra02v.mail.ibm.com (Postfix) with ESMTPS;
+ Wed, 14 Oct 2026 12:04:45 +0000 (GMT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,168 +76,125 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=temperror header.s=selector2 header.d=Nvidia.com header.i="@Nvidia.com"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=QRaKut8a9XWnL4T3t0TBkRcvdizbpoYJeB6bXyJ9HDT888S8XHBXnON3v8bxZOfhRH2oWkGk0e8i0Y6Ea4VKgVS4EIkNlv3iC/OM9A22c/9Re6H9YVYbW/7nCuJRyXYjxSYUuB6JDn4ja83H3CjZhHZY22JWuTqEHmtm8YlbtWD+fUvCpVn2Wm53DEKwGCEhDo0WTbXyJqCfY4039qFpSYYA/XLK0iHASQvS10BfpHPuIazLkUm5fI+ThDuGTUEYhWCItVBIJaU2D4lEZyHbR3q0ICvgVhQuuXvFFdvB3tlVGjAWWuElp7CZvztZCNJe2h6M1VYGw1MM1ldPHtZXNQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qy3yY+PUMpUueTE2NMgzBPOfbGqmLKllDDTa+SFEff8=;
- b=Uu6ukrAFF6q7kfFruSgbCXeoN7KIsKKfyiC+03DsulNkvcr1Qh+a/wU3EFLbdjDRGMW7UonF9DAIaDdHUEo61/mEFfWC4/Am3tIP7hyY62WFxL7x8Zf+qfRJX/HGAHPJ8wwKjv9IYXj2LR0DXHhIqdDH3R+5F2ghi7fWkBpQJSh8tzqggAqT33kjZmMyR4aQkP0o88T8gW3zJa2mWJSVe2U8AYuvLbALoqWq9yFNGJxxItzlI8Lob3lg1BmQcTJ6I/A/VAssP51MSeeG3lDfxuKGbYjjQSQcILNroSIky1qSlGjk7BX/QKyCFS3RUMRRJalVbKeZFF5wAw7HRrjyyA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nvidia.com; dmarc=pass action=none header.from=nvidia.com;
- dkim=pass header.d=nvidia.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=Nvidia.com;
- s=selector2;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qy3yY+PUMpUueTE2NMgzBPOfbGqmLKllDDTa+SFEff8=;
- b=qLPIBpuTgwEwKCAgw39H58bUa6naVSHxmT+onDbWszy56iY/2ven6GZpbJ2H7Q+skHsQd+zuWAjGJTuYmsazQTNaNzYzwuACofh3ZTTtsflorZLUe69SYlq16Y4RsrKKHJRNaI8v4sBoJ+rBMR448UcQs8lCD+Esl2+oTuBn66pflMqJuynyK+7VGbabInLuP37PUa5hx+ABog3fhzp1SzDkgkLZmoLxQOnKFLD5gE8MgImi9hkhYOURbnZnZFXpPcC1Stf4unrRqkC4VfaFCdmo1s8rG8WYcAR57o0l6D0WIZ8sITWaa9Nc6ZLXV7cA0q+jfPtkuZzSLtYG05jtqA==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nvidia.com;
-Message-ID: <5f025a06-da70-4cd9-96b4-d86f6d3ce9c4@nvidia.com>
-Date: Tue, 13 Oct 2026 13:02:06 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v2 03/10] net/mlx5e: check for failure when
- pulling the Ethernet header after XDP
-To: Josef Bacik <josef@toxicpanda.com>, Jakub Kicinski <kuba@kernel.org>,
- Paolo Abeni <pabeni@redhat.com>, Eric Dumazet <edumazet@kernel.org>,
- "David S. Miller" <davem@davemloft.net>, Andrew Lunn <andrew+netdev@lunn.ch>
-Cc: Saeed Mahameed <saeedm@nvidia.com>, Tariq Toukan <tariqt@nvidia.com>,
- Mark Bloch <mbloch@nvidia.com>, Leon Romanovsky <leon@kernel.org>,
- Juergen Gross <jgross@suse.com>, Stefano Stabellini
- <sstabellini@kernel.org>,
- Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
- Tony Nguyen <anthony.l.nguyen@intel.com>,
- Przemek Kitszel <przemyslaw.kitszel@intel.com>,
- Manish Chopra <manishc@marvell.com>, Rahul Verma <rahulv@marvell.com>,
- GR-Linux-NIC-Dev@marvell.com, Shahed Shaikh <shshaikh@marvell.com>,
- Simon Horman <horms@kernel.org>, netdev@vger.kernel.org,
- linux-kernel@vger.kernel.org, linux-rdma@vger.kernel.org,
- xen-devel@lists.xenproject.org, intel-wired-lan@lists.osuosl.org
-References: <20261008-b4-pskb-pull-tail-drivers-v2-0-8f2bd9bee138@toxicpanda.com>
- <20261008-b4-pskb-pull-tail-drivers-v2-3-8f2bd9bee138@toxicpanda.com>
-Content-Language: en-US
-From: Tariq Toukan <tariqt@nvidia.com>
-In-Reply-To: <20261008-b4-pskb-pull-tail-drivers-v2-3-8f2bd9bee138@toxicpanda.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: FR4P281CA0230.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:e9::20) To SA0PR12MB7090.namprd12.prod.outlook.com
- (2603:10b6:806:2d5::16)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
+	:content-type:date:from:in-reply-to:message-id:mime-version
+	:references:subject:to; s=pp1; bh=ajZHd+qh6V9vTCXwQWUfdpmTLNkyLK
+	ozm1g9bOoFoFc=; b=JYQ2N0nSXD/tQ/r+o3naoBOH1U+r2oPu+xjGpN+7txoDex
+	Z0IWl63DxMAVur3sx+kmGREDCBqZc6k1HCDRjrOoEK+taOKH1OloSc9taF9O0FWY
+	WpVjMbVUV3y+904j6Wquin+qDgUZtE0vakTE5A47rqq/xC7whZpk/bAH05j6NUMo
+	GyNvztnXQB+E5AUtc1L0KRpmZ7LHjGzNNOr8tWNd56WpJVQz0J/T0JweCGvwVkOM
+	38Ai7Y5IXwL6To2w1AEdek15AbDAMLoAedQcEW17k9uz90AlYajIG2XNMhTS+zOV
+	bWm4qcBhLuQq6bVn5TQRsfV9c0VsPZQvM+kgHPMQ==
+Date: Wed, 14 Oct 2026 14:04:44 +0200
+From: Sumanth Korikkar <sumanthk@linux.ibm.com>
+To: Ian Rogers <irogers@google.com>
+Cc: Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
+        "Rafael J . Wysocki" <rafael@kernel.org>,
+        Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
+        Kees Cook <kees@kernel.org>, Nathan Chancellor <nathan@kernel.org>,
+        Nick Desaulniers <ndesaulniers@google.com>,
+        Bill Wendling <morbo@google.com>,
+        Justin Stitt <justinstitt@google.com>,
+        Jonathan Corbet <corbet@lwn.net>,
+        Madhavan Srinivasan <maddy@linux.ibm.com>,
+        Michael Ellerman <mpe@ellerman.id.au>,
+        Nicholas Piggin <npiggin@gmail.com>,
+        Christophe Leroy <chleroy@kernel.org>,
+        Nayna Jain <nayna@linux.ibm.com>,
+        Yoshinori Sato <ysato@users.sourceforge.jp>,
+        Rich Felker <dalias@libc.org>,
+        John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
+        Viresh Kumar <viresh.kumar@linaro.org>,
+        David Teigland <teigland@redhat.com>,
+        Alexander Aring <aahringo@redhat.com>, Juergen Gross <jgross@suse.com>,
+        Stefano Stabellini <sstabellini@kernel.org>,
+        Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+        Heiko Carstens <hca@linux.ibm.com>, Vasily Gorbik <gor@linux.ibm.com>,
+        Alexander Gordeev <agordeev@linux.ibm.com>,
+        Christian Borntraeger <borntraeger@linux.ibm.com>,
+        Sven Schnelle <svens@linux.ibm.com>,
+        Richard Weinberger <richard@nod.at>,
+        Zhihao Cheng <chengzhihao1@huawei.com>,
+        Felix Kuehling <Felix.Kuehling@amd.com>,
+        Alex Deucher <alexander.deucher@amd.com>,
+        Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
+        driver-core@lists.linux.dev, llvm@lists.linux.dev,
+        linux-hardening@vger.kernel.org, linux-doc@vger.kernel.org,
+        linuxppc-dev@lists.ozlabs.org, linux-sh@vger.kernel.org,
+        linux-pm@vger.kernel.org, linux-acpi@vger.kernel.org,
+        gfs2@lists.linux.dev, xen-devel@lists.xenproject.org,
+        linux-s390@vger.kernel.org, linux-mtd@lists.infradead.org,
+        amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
+        linux-kernel@vger.kernel.org
+Subject: Re: [PATCH 08/11] s390/sclp_mem: Allocate struct sclp_mem
+ dynamically and add kobject release
+Message-ID: <as9v3PUb0TymCvsc@li-0f4bfd12-9554-4bfb-8b14-7ccf0f0767af.ibm.com>
+References: <20261013223946.1836757-1-irogers@google.com>
+ <20261013223946.1836757-9-irogers@google.com>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SA0PR12MB7090:EE_|IA0PPFB67404FBA:EE_
-X-MS-Office365-Filtering-Correlation-Id: 6442062d-825f-4097-6ffb-08df29110eaf
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|7416014|10067099003|22082099003|18002099003|11063799006|4143699003|261009223027099003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	ymrZ3l7BC9mT6DTwEnN6BkRaGIRJGOVZHLv7Y+XBqOBU/8oByGeyuJSpG5bblbzfG5BQ3Yi4duCVBYOQ79+35xQ4igslKCWk81L9YR7tIoottftmADKpC6qDdgaNiHphUr2ePAMMRPevedNHrrKnewjKMPbhN9UMbAUVSF0OW7IHylx2H/fywEZR7+iW6zWQSAAI6WdpM9RWh0vfNIj5lU4yELB5fvKtM2UYe2tk1QyWPQet9sAIHcPInscDmwOPCV7ANMuidFjYjLajtl9MJ1CcJZjykaZnSMElnS403bBFv63FLkmMBBL+Mc9Q4pUhi2mrvlrOtKBiC5SqQPNSx0tIx1jJOfh9Ifdv6FzSkf9RObk/dCtwI7Brkbr1lhuh/w79PGgPqr/whzsAmHqEh9YuJM4h9D/SS0xlgBwSPdIsOrmtcWt4F8OvrHq9BbKuufirsOJ5Gge+jlxM4guTdyIc9qkPEAxRosBoDggzxemyWT+Lo03JKGqajrqXjCwEoF8fgu/Jk13MUplYP5CNcNYv3a3Cf6vd37R1eEMGUzKS4G7DmC7r+tGqvFK5UUYtx2zFJ7c77SGbS3pA1up+MW5pMeDnDiKhVQEFnvhpK35im8rRH08dtT4+jFOc6RGHQW72/rxmlM5238vy0gGKseEhZYKaPY892Xsnokj8cGg=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:SA0PR12MB7090.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(7416014)(10067099003)(22082099003)(18002099003)(11063799006)(4143699003)(261009223027099003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?QzliZGlXR0c2cHkvcThlZWF2NmRyUDlONm9nMnFUZHF5amtLNDNtcDdaN3lB?=
- =?utf-8?B?YUtIa3hTMlBOVmtPMkF2UXRCbWd3OHNlNHp4VkdsVTIzMlg2YXAzc1pURWF5?=
- =?utf-8?B?TjgvRmNFMXBPeWhLbXNtN1RIMGtpZEk0ZkdDb1N4N01qb0NHQWRBd1hiQXFp?=
- =?utf-8?B?c1AyM1V3RVZqYUZtemU5Q0RweDRVa2ZQaWZQdWZIdlJkMWJoV0NZTjVWdkpq?=
- =?utf-8?B?ajhmWm8wc2V4RytlbUJrcXBDSy9sQ3pNZFFPd2V2Ylg2LzQrUjl2M3FIdjdW?=
- =?utf-8?B?L25NQU5aYVgzNHBVUzlMS3owaEF0SHFadmVRS01GZ0dNS2RIR0hwc2hpMTc1?=
- =?utf-8?B?RXhTMTliOTc4QXUxNzI1T0h3TlNTcDQyUEpGRHZETkRwWThPK2hCRVRER1Az?=
- =?utf-8?B?U3NOeGZqdFYzUlV3ak00alJWenBuNUM5aTdMb3ZoQlliQW85am03VitLMkVy?=
- =?utf-8?B?L2kyWFFDNU93ZzJiS01JQzVYSFJuemlIMmJRdDMzZWc0aURzNnFnNmlGa1BC?=
- =?utf-8?B?QmlaUDlGbDlSNHNmbUs4UllqNWxuTUdEc1FKMlNUUldvaVpwcXdJTklWbTYw?=
- =?utf-8?B?WFNuVnBxMXE4TmtMT1pUNnN2TjV2TXJRak5HSHJlVmFYa1lSUnc5UlQwOEcy?=
- =?utf-8?B?RWk5dGlBNHl3M0g4NWo3RlVoajMxTmlWRHBNZUNaWTRvRGczUkwvMkhNT28w?=
- =?utf-8?B?bGZabXFuT1ozNHo1d1pnWFpUM1hMWHZwRVpHaUdtbnA5TzB0Y0diK2ZleDF3?=
- =?utf-8?B?V3RWa2lHNFZXeVBrWGhBWFhSdUp0Tjg4UWZaYWRIdmNna0dydFU3MytlNyt5?=
- =?utf-8?B?WmRWNGVFWVhhdW9uc2xLSUs3bXV1Y3BrdHdieHA0ZzJKbGhGMTROVGNYMFhk?=
- =?utf-8?B?SlZqa0FwR0JZL2N6RUEweit5ano4NU9BV1U4Z3RGeDBocjI5ZzhNUUlocUJm?=
- =?utf-8?B?ZUtTZ2JKS2prZlFqaHhBQy9raEpMMlVtVHJwWklKbjkvTHZmRFRCdnpIendV?=
- =?utf-8?B?ZFU1dDdpdlRnMlJFdDFOZ2Z6MFVIUVBDVXc2U2hSMjZudzNybm9QTE8vYlAy?=
- =?utf-8?B?a1huNFdaZnozWFlnYUpXcWdleU1jNmVGcTl6M0FuWEpvejRxZ3BBamRiWDZz?=
- =?utf-8?B?OGlMSldOdHBqRWRJckV3WnA1cE11dFNPZk5uemlSZjN3NmRIcDhlc2xiejNq?=
- =?utf-8?B?NHUwZHgzdlEvL3ZpSzM0UzZ2VURVZEVLVmxuQXFiZUlCclRFdk5RNW8vRG1N?=
- =?utf-8?B?NDNRMVIxQytRa0ZxWnFhTkNlN2hrc2x6QjcyRk5ON0NuNE9EUHhlamhYd0NY?=
- =?utf-8?B?V1BydTVPTjJJNVBUVFowYk0zb2hFVVJKUUozVncvZnFKUFhiWW1QRlN0MnRW?=
- =?utf-8?B?ZVBoRFh2YXFuYXordDc2Mm1HRkhZQ1ZjeGErYkhlRG5rYnhGck9ULzlYaFJM?=
- =?utf-8?B?cnhNSWpBSUNsUk5Mc09EWngwVkVyQWkwOHQ2RTg5aEJvN0FzU1B3ZndmY04r?=
- =?utf-8?B?R1c5ZjUrZVRMekRoZ1h5cytISk94ekFoQVpzcXU5aitDbGFrdVc1RXJXeEJF?=
- =?utf-8?B?VStTc1JpemcyMlNnN1NCdlZZcndyMFBaeVl5RWpSWXNtVjNmNzhYSDRuR2hl?=
- =?utf-8?B?VENUUGNBNmNsVE1rUWJteEJjVGUxS05rMElNcTZwT2NneDhSbVc5VkRMWXpC?=
- =?utf-8?B?UDFUcVprZlBsMjNQZE50NSt0M1VPaU9KYlpUaWx4cWhVam0rU2hSL0FRWmo4?=
- =?utf-8?B?N3ozWG9rbTROMi9mVmQ4VExGaFFmbVJWWSt6eWhqbU0yOXd0TGtRd2Z4NE9N?=
- =?utf-8?B?eHNBZ01PSUtlb1F5Yis0MDVNQTJRbnJtbDlNTGQ1SEhaY2VyU2FUajNRYklu?=
- =?utf-8?B?ZjRtQ2x3WXpIOVdKVkpqRmVFQWZMY0FxMXBSN09FZngrYUczNlI1b0V3dHJL?=
- =?utf-8?B?R3o0NnRZdTNXODlFd0loeklQWXdCVXhTbmVYd2U2Qko0Y1NONGpaaG5uRHM1?=
- =?utf-8?B?T0Zka3VGLyt5V2VHUjFFd0I4Qk00aWs4dC9ZeGFxc0JjQkdjL1djK014cmNP?=
- =?utf-8?B?QmtaYU96UEtQaEZIa2lrWUE0aS82K1E3UHJkcUh6WUZyZ2NjNUY2T0pnSFd0?=
- =?utf-8?B?dW5KUGZwaEx5T3p6ZWFheGlmTVNUOU1VZlN1Rk1DYS8zRWVqS2xtZzhBTTE1?=
- =?utf-8?B?V0RXQTYvdklUamtIZkxKRFRjeTlyK1NVYXJlZlQrVi9sdjMxWnRKcHg2N2tZ?=
- =?utf-8?B?TTFLenlad1hYQWNYRUNzS0JCeGV3VVQ3K0hNWERKVVh6a3ZFNlIwUnNsZ1k4?=
- =?utf-8?B?WDZNbkhKSi9IbHhhd253TWRMZ3pBWXZ0MWxkSGpKVVdpMnM3enBmdz09?=
-X-OriginatorOrg: Nvidia.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 6442062d-825f-4097-6ffb-08df29110eaf
-X-MS-Exchange-CrossTenant-AuthSource: SA0PR12MB7090.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 13 Oct 2026 10:02:14.9877
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 43083d15-7273-40c1-b7db-39efd9ccc17a
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: bciWORfVVIrRKX1hXIJ6bGsHxUhf4C6dQSyEvolKbyLmrI63DyBiDzYAvCOGwZD/FFpUq7zBD7UWRVbHeu9riw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA0PPFB67404FBA
-X-purgate-ID: tlsNG-16d1c6/1791885739-F5C0F77B-D313711E/0/0
+Content-Type: text/plain; charset=us-ascii
+Content-Disposition: inline
+In-Reply-To: <20261013223946.1836757-9-irogers@google.com>
+X-TM-AS-GCONF: 00
+X-Proofpoint-Reinject: loops=2 maxloops=12
+X-Authority-Analysis: v=2.4 cv=Cr0q4X4D c=1 sm=1 tr=0 ts=6acf6fe5 cx=c_pps
+ a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
+ a=kj9zAlcOel0A:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
+ a=RnoormkPH1_aCDwRdu11:22 a=iQ6ETzBq9ecOQQE5vZCe:22 a=1XWaLZrsAAAA:8
+ a=1KnzZOXWGbpzuJ82zDMA:9 a=CjuIK1q_8ugA:10
+X-Proofpoint-GUID: _EktMNlxNi0Zhojhx4ASfWVXd_b7DOlL
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA0NiBTYWx0ZWRfX0fUPhxARNcJa
+ 9nS/iCLcc7dEQrcybdImltBqHci5KonN9BgYs2DYbqx1d8S2XOqe29HUtCRqWBLErMceEtiShcs
+ 4sOis3II/pHWvCugYS8aQjzU25z5oQrs/O3mU6gDGKNdZjvK+pDPTKbfQLhBgdreLHYt/eXKSLj
+ 8iaqk3GpEmiCS1rkaREHPfI9BfxMESceMf6fSb58kgdsHk98lVK94W4Z13ZaUDqucgF8UHsrXAF
+ s2Mz0WmLaipai7UjCU1P9wfoh1rJSRoR35Qnnl4GViW47ZEhEXi38+rmYIbdZGaRW5Gb4NFboLC
+ VDaNe6VnoQav6/qOqN3N/a+a+5cDALYf91XsQVsXP8nIWP35y0wihJcXC0kc0O7eYfGysmumoj8
+ nH3TGHAss/iHicos4JusXZh5QK06OZzsWCTSFTnMelfNV7UtEZDijv++v8M3SGrsGa+NyH77MdL
+ 5RJO9I7QJmKjVLI0vig==
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA0NiBTYWx0ZWRfXzh8XCAetvSto
+ U4lKpTbi/IJ/4y5zYP4Ex816LutfdS+PI20y7l1acTJ0MKa2avnNDCgOzXRPOLPzbCG+UhRciiw
+ hNFMfBzpg0MTAxSwj76JilCNvE6uZfI=
+X-Proofpoint-ORIG-GUID: IbMwSeABL9gn-KtBlV7Mt5gD5Rq_VQT_
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
+ bulkscore=0 spamscore=0 adultscore=0 priorityscore=1501 suspectscore=0
+ malwarescore=0 clxscore=1011 impostorscore=0 lowpriorityscore=0 phishscore=0
+ classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
+ reason=mlx scancount=1 engine=8.22.0-2610080000 definitions=main-2610140046
+X-purgate-ID: tlsNG-ebf023/1791979535-534C3B50-4B7EC079/0/0
 X-purgate-type: clean
-X-purgate-size: 1732
+X-purgate-size: 1250
 
-
-
-On 09/10/2026 0:02, Josef Bacik wrote:
-> When an XDP program leaves less than ETH_HLEN in the linear part of a
-> multi-buffer packet, mlx5e_skb_from_cqe_mpwrq_nonlinear() pulls the rest
-> of the Ethernet header in from the frags with __pskb_pull_tail() and
-> ignores the return value.  If that pull fails, eth_type_trans() later
-> finds less than ETH_HLEN in the head and BUG()s in __skb_pull().
+On Tue, Oct 13, 2026 at 03:39:43PM -0700, Ian Rogers wrote:
+> sclp_init_mem() allocated a single array of struct sclp_mem with
+> kzalloc_objs() and registered each embedded kobject using a kobj_type
+> without a .release callback. Allocate each struct sclp_mem individually
+> with kzalloc_obj() instead and add sclp_mem_release() to free it.
 > 
-> Use pskb_may_pull() instead and drop the packet if it fails.  Pulling
-> min(ETH_HLEN, skb->len) keeps today's behaviour for a frame shorter
-> than an Ethernet header.
-> 
-> Assisted-by: LLM
-> Signed-off-by: Josef Bacik <josef@toxicpanda.com>
-> ---
->   drivers/net/ethernet/mellanox/mlx5/core/en_rx.c | 9 ++++++---
->   1 file changed, 6 insertions(+), 3 deletions(-)
-> 
+> Fixes: ff18dcb19aab ("s390/sclp: Add support for dynamic (de)configuration of memory")
+> Assisted-by: Antigravity:gemini-3.1-pro
+> Signed-off-by: Ian Rogers <irogers@google.com>
 
-Hi,
+Hi Ian,
 
-I posted relevant comments on V1.
+The entries under /sys/firmware/memory/memoryX in sclp_mem.c are
+permanent. They are backed by a single array allocated at boot and
+remain for the lifetime of the system.
 
-https://lore.kernel.org/all/d2d64d12-24a9-4bf1-b505-3008e0e25c40@nvidia.com/
+Memory hotplug can add or remove memory blocks under
+/sys/devices/system/memory/, but it does not remove these firmware
+entries. The /sys/firmware/memory/memoryX kobjects are never
+unregistered or freed, so I think there is no need for
+kobject_put() and no execution of a .release callback.
 
-> diff --git a/drivers/net/ethernet/mellanox/mlx5/core/en_rx.c b/drivers/net/ethernet/mellanox/mlx5/core/en_rx.c
-> index e3f915beebe1..b1e1e30a77e2 100644
-> --- a/drivers/net/ethernet/mellanox/mlx5/core/en_rx.c
-> +++ b/drivers/net/ethernet/mellanox/mlx5/core/en_rx.c
-> @@ -2060,9 +2060,12 @@ mlx5e_skb_from_cqe_mpwrq_nonlinear(struct mlx5e_rq *rq, struct mlx5e_mpw_info *w
->   				pagep->frags++;
->   			while (++pagep < frag_page);
->   
-> -			if (len < ETH_HLEN)
-> -				__pskb_pull_tail(skb, min(ETH_HLEN - len,
-> -							  skb->data_len));
-> +			if (len < ETH_HLEN &&
-> +			    !pskb_may_pull(skb, min(ETH_HLEN, skb->len))) {
-> +				rq->stats->buff_alloc_err++;
-> +				dev_kfree_skb_any(skb);
-> +				return NULL;
-> +			}
->   		}
->   	} else {
->   		if (xdp_buff_has_frags(&mxbuf->xdp)) {
-> 
+Instead, could this follow the approach used in Patch 11 of this series?
+static const struct kobj_type ktype = {
+	.release = NULL, /* Permanent firmware kobjects, never freed */
+	.sysfs_ops = &kobj_sysfs_ops,
+};
 
+Thank you
 
