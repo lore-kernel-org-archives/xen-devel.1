@@ -4,47 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 898D7CC6B1D
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 12:04:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448885.1664877 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 17B6DCC6B1A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 12:05:26 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448891.1664888 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGxiN-0001HL-Ks; Wed, 14 Oct 2026 12:04:11 +0000
+	id 1xGxjP-0001lt-UO; Wed, 14 Oct 2026 12:05:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448885.1664877; Wed, 14 Oct 2026 12:04:11 +0000
+Received: by outflank-mailman (output) from mailman id 1448891.1664888; Wed, 14 Oct 2026 12:05:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGxiN-0001HE-Hl; Wed, 14 Oct 2026 12:04:11 +0000
-Received: by outflank-mailman (input) for mailman id 1448885;
- Wed, 14 Oct 2026 12:04:10 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGxiM-0001H8-OM
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:04:10 +0000
+	id 1xGxjP-0001lm-QP; Wed, 14 Oct 2026 12:05:15 +0000
+Received: by outflank-mailman (input) for mailman id 1448891;
+ Wed, 14 Oct 2026 12:05:14 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <peter.maydell@linaro.org>) id 1xGxjO-0001la-Iy
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:05:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGxiL-00GOyP-U5
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 14:04:09 +0200
-Received: from [10.42.69.9] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13a4c5fce0008425@swg.vates.tech>)
- id 6acf6fb2-e002-0a2a0a5209dd-0a2a4509dbc6-40
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:04:09 +0200
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13a4c5fce0008425@swg.vates.tech>)
- id 6acf6fb9-be1a-0a2a45090019-b9ff1c12a30f-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:04:09 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a13a4c5fce0008425.001 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 14 Oct 2026 12:04:06 +0000
-Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 007CF81DF2
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:04:03 +0200 (CEST)
+ id 1xGxjN-001GVx-W8
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 14:05:14 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6acf6ff3-e002-0a2a0a5209dd-0a2a450bb57a-38
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:05:13 +0200
+Received: from [209.85.128.172] (helo=mail-yw1-f172.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6acf6ff8-b7e8-0a2a450b0019-d15580aca996-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 14:05:13 +0200
+Received: by mail-yw1-f172.google.com with SMTP id
+ 00721157ae682-8ae9bc9a2fcso48056807b3.1
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 05:05:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -56,263 +48,153 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=lVZY4m8lq60yyKfkLI9HNVvE+A7IfZPVIooGJDCfPF4=;
- h=from:subject:date:message-id:to:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=TcXal8Wqn4Hqdb8FNDdZo6f1yuQ06M8ENgNWkDAAoz9sZ0vHFBjobufLVMuaJxQ++VKfaCuss
- PSXstVZk36CBamQZ4WitZwmij/snUFKulj96+xcIGiPBw75dCM+1uShJvrUHKGPja9UMAZxOIIB
- eO+FEqTjyMjEKa/11h5NpMeb+51zLdffsE8iPKYUIyI6/5XTrIL111K7qEwWzCCw+QhpCtnPVEr
- Mijnc5Mk9mb0y8SmA8l3PBKAB6/UyG3uOlDrzIE1tMT8VUKEcFqSghR8t2QjuDzd42XUVOHJxAr
- 565Xk2n33r4um2CAjzJnCK7WBT3tAxQgKMGV7QnzRy/Q==
-X-Zone-Loop: 2e12086df38e1b4c07fe3cf8839b59f9d48427a28f70
-x-campaign-type: default
-x-transaction-id: 4aca05ae-54da-40e0-9f01-40b6cf0f1ed0
-x-swg-uid: 01-0d082fdd-e87a-4d6b-8685-451fef1fea02
-X-Mailer: Sweego
-Message-ID:
- <1791979446.8631fc262581453bbf619ec5b2062170.1a13a4c5fce0008425@vates.tech>
-x-swg-bid: 1791979446.8631fc262581453bbf619ec5b2062170.1a13a4c5fce0008425
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-Date: Wed, 14 Oct 2026 14:04:03 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1791979512; cv=none;
+        d=google.com; s=arc-20260327;
+        b=h03FcXtawEAiWwo821LVcAnkM1OnTYDMYbIaNbxDI6bFKPP1fiUrQoyJW1axww4DWW
+         V1D2JiCldLvcOOyf/P7QIrq5BqUsT0IqsDQwwg34ZNqCWjffoWd+XPTDYpXbDZAoe2yL
+         xqtLn7GCLxEoFTiV3voFIDjgx6X6884gxCYvWotO5wK40qAcyE7loZSOZezeQBcz/W12
+         3kZjZ0/jlRgxAks7GkGjv/h5wvFFLtiXkd5Cpc0uVXiBkkGHZSsrxik6faP2RJMGJ9u4
+         qNI6eBk/C4iW06Nnh2F6Lvq9u9ACixOzRWUNiKSmfyQkJqY9KzDL0PMsujXAd+NCWDPF
+         09WQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=M9Nyl9xH3QF3gMvTwTw/sBu2NY+4Q2lch/paE09DFwI=;
+        fh=/uRV87p3TPAlKpbDSvWDgcJqLfiqm7CwGwR7GDFLvbY=;
+        b=pwYkZwKMDEk6mJhHCcvT9wkC9Uw0JIdV4ya7hZELy1FOLub+Agko/S6XmCa3yCfO7B
+         /lJwarPchwSXPxxDag+SnAJsJz5/Cgny5NDP5m7T6XzpWuZ1hnbPjcSGN/jSRU++pgC+
+         o0drozRywfx9J4AHMCl0G4qNcYMWpba5+bOrrOUSQOf9JGpOU+tRXcFslDCeN1fD+5Ph
+         36ZvYflLk1G8Na/FwdaBye3OIVKToPN1mex9jRGdbFKwAjS4IZmXs6pLZcpln/FV/48s
+         nlXatlNnSG4x8GT9270y3coRSid4V3JyOyZEM09UoN7COoCzQ+PugroCYzkSvuagV5ff
+         iNhA==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1791979512; x=1792584312; darn=lists.xenproject.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=M9Nyl9xH3QF3gMvTwTw/sBu2NY+4Q2lch/paE09DFwI=;
+        b=y90HAjs1VzzalP78dA+W1XKM8+jFdyvEFtXMMAFjopuS9sWm+tYL0ILcgqRbxF8zlQ
+         fX5lrOrBon6qkkNiSx/mKQG5xXC/WgNZUtYJRapMA3RXwisTD3M6el3nhZlVcgB9W6I/
+         NOXFUyrZ0QTbLPDewHgc+Saj1+R9B81Fx3CZ0OTEd29/ktLPmWVm1yLX/lRa7soGaD1g
+         L2i2yr3JCbnV3aMBvNjk+fuLKArwvTbKcS0Tx5E26pr2ygy4VxorxQ6rgU4ieXce08ol
+         CY9RXDeql7oTt9aE0FMSchLMeCMBfRdrurwQH9aPum3P4jRSHZLNmLXVSnTyr8UGqxeb
+         UT0A==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791979512; x=1792584312;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=M9Nyl9xH3QF3gMvTwTw/sBu2NY+4Q2lch/paE09DFwI=;
+        b=YOHXtWv3FH5dJc0yiJmDBNBmMJxyj68SXeTI40uh4BmNmc8Er75SXNOj2bFwgeTVXd
+         QFvCHfozjOdP8LudaP9OkqbmG3i2jbdy6IWy+pWfYc7nm5MVMR+um2TvAiNcPSc2tGtq
+         Q93h/xKj2uJLvBCVae7pqJEmj5Iek3G5zMyVqP9UTezcE0tUjDXb0MpRY8TOP60pCnUM
+         /IuPj5fyYHNOrFquenDgcN9CGkYmgWIgTCkrxz5H3vOwXJ7ZmcDhYt2b5ZLpNPOpbP5A
+         xNkyoIr1p/FSpsa/PGhy/ocaM/o4x2qD0x9G4Ngq1ZR0EjADmKxRV+TWBRiOn80XRUXt
+         kiKg==
+X-Forwarded-Encrypted: i=1; AKwUvBwypD9DvUjh4aDchEYJ0Mtpi7djfW/BlyTMe8AAwafJSKFyWBKCgbcgKqHsvl4QTpW0CQfPgUil3yA=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYK+fUoJyDDJ9JDQVKGceFnCxEZUK10xyZQnBy523xvpStT4gpZS
+	2E3CtqKN3fQaVcZy8D40h3RS1JuWon6Vtt0de7zzBX5QB0OKgmc9OZMjy1tLsI6/LO46ipj5IOt
+	ltt1H5JKMDCLH8EpMNsnRWiZ4vDXr395lQPrrIr/TZg==
+X-Gm-Gg: AYBFou2GDJD07RjTMmtFJSZCrCJEiihdplrfV9kDuPrFMUn67AmYI1iQ/vQik/u310i
+	maHlbk3vJJ20LGDYK8YM4xVx/EePNp8inO2Bz5PzVVBdyryYS/utX+YV34Xt1s+x1iYFTcHJXLQ
+	LXzTFr2P74/hR0zvJrDHyOvC1YcM7beFnH4gicFhp2ELqVvZCeTbXIkrRFwc6jlDALg5x3wtnpy
+	7lfQeqv/IPoK9G4wJ+UWi+1XTWGSGSDWBe8RQPOb3PPINApXWcwDIuGWvdXIk1bHDPmJxpgRWqC
+	ztrfvBZ/19VJlX52R1hVovsKY1JMBiyUvcBb+Y8CcS5XTMGF+LRxD5wmWnrFxgKQxZxm10D2CIU
+	AYRthpq7dC5b6ijpMX/UJ4sO8BFmo7nL0KvhAnQyDrwiq9d5BzA==
+X-Received: by 2002:a05:690c:13:b0:8b0:a30a:7f31 with SMTP id
+ 00721157ae682-8b0a30a9167mr33446427b3.29.1791979512090; Wed, 14 Oct 2026
+ 05:05:12 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 5/5] xen: make config argument const
-To: xen-devel@lists.xenproject.org
-References: <1791812199.8631fc262581453bbf619ec5b2062170.1a13054627300080d7@vates.tech>
- <1791812541.8631fc262581453bbf619ec5b2062170.1a130599b7500080d7@vates.tech>
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Content-Language: en-US
-Autocrypt: addr=baptiste.le-duc@vates.tech; keydata=
- xsBNBGoPSX8BCADSuTikqW3FD4mscQugY1thRaKlIhcJ2G9YCWYXAlp+xosvTlzfIftOZZim
- 750MLvyKtLPkQzB6TZtFZBiexSraaF/MdDKRTT5DcVa3r7ZnHgqMclWlPa4ioysS4yFcJanL
- cyNOT7HUFvIdirMMqiViedfYtS0GORPBBPVISD6ClMz3ecHIxqllfq9CHYQn4amKEfHmh6tm
- Rufo4Gjl6x8cUFZZlRQf+aCmUzdSPA0P5u3sueYH1uEz4w/jbD53MlKqzCvxUeOsfS2swTQA
- 6mS9jIgOjNadpUTOzKfDHMgFirtG+HFpm45Nwp6KQizxgDVOfTnOfVHm5Gwqm3ETl9y5ABEB
- AAHNPEJhcHRpc3RlIExlIER1YyAoVmF0ZXMgWXViaWtleSkgPGJhcHRpc3RlLmxlLWR1Y0B2
- YXRlcy50ZWNoPsLAjgQTAQoAOBYhBGiSJ6HgW88MgT/gfu2Cu2XL9M6QBQJqD0l/AhsDBQsJ
- CAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEO2Cu2XL9M6QuMcH/ihiy/Nrxp919AmY0ENnc0NK
- r/2LDvW/hrX4FfbpxAmrGmQ7MU1aQTk0JDbfcsG8OYH6wO5sqnXb1gz50YrEdpfVSbHz5YTZ
- EhDIxE4g7NrvJZh3Qc0m0CAyjYTNHen7J6olVaCMjrOH7uRHUYZ7Pl3am9mZosfLmez/aWJO
- a6ihQxBXHI75brlk1teIURkep2kP7P0Flmfl4cA//saREoTF7GXCtjOSQk/xg8PP0Sswqp5G
- TdJptn3FQn6lAzfz0eFSYqkaoX2c2k1MDa7o+UX9cfGPL8ybMKnYkasLxck6eOWGJWf+YTrm
- ga/r0kBaftmqNDgt5nI2jNTDwZcT9g3OwE0Eag9JfwEIAM6IWbuBSvz+erv27oGDDpo8M6Fp
- dGUvft7v+WceHUfxiXpYFx9qgIU6XGy6y+3lJMAvNcltS8DuhioqMlfKRSYGKZlpliY65dNP
- 557IuM4ctVJ+I9CVclvv9eahARQKgF5auLJAAlvGSmU+ufNvlwTUmLIRcrPviTmB6X5jJYc+
- fiNeyI0HcsgcN21C0r62tUCypuZ+vgEJXw2bx1V8mVGZKxdGJPh58QF6kRK+xmd4kEComLGV
- BeM6BcVOtEjDcGNC0tLhXb0p9g1Ys55iA8sd6s4WacyolW2J6rwmcOkjiWexWw1caYgIWAV1
- 004M3gwUaOz0dGq2i7HQ0AiVfVkAEQEAAcLAdgQYAQoAIBYhBGiSJ6HgW88MgT/gfu2Cu2XL
- 9M6QBQJqD0l/AhsMAAoJEO2Cu2XL9M6QovYH/RjstyL5o/V5K74ylBtz0j5t3pLX5JKbwApi
- 656rGgDdqElImyvvZppNMl/mgHNzvxmfFAhJXnSX9f1fqVEQKOGEhLUastnl/ssBiE5x7btM
- V0GAffxXbXJZbVv4b/DI+gVrOPc2YXlVwruapvTZNtD3hqPrkjrmq5WTtGR2loIVSe62hmh0
- BGD2Fy79b/hYWyBqhayPBEjwGW75u4/yn+Yqy1PgG3hIcvg7GSuT3akhHZSB2Mbguzcoyf9Q
- DJl6t33JxPRkkNrEdkPPmRlQCTSiUkVjKqMDF3jlINWsJ5t4jKFsNF91ksdw7aQgiX+tQIpE
- ugMC1NuNi5dDGip66bw=
-In-Reply-To: <1791812541.8631fc262581453bbf619ec5b2062170.1a130599b7500080d7@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1791979444040
-X-purgate-ID: tlsNG-bad1c0/1791979449-3BED6034-18812A6C/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 8299
+References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
+ <20260916104435.600211-14-mark.caveayland@nutanix.com> <CAFEAcA-FFiWEs3ZLztVwZ72_TGLuhEBbfKnaZ3NFJJ1W-Wd33A@mail.gmail.com>
+ <c444a8ed-eb83-4a69-87e5-57c71f3a6d01@nutanix.com>
+In-Reply-To: <c444a8ed-eb83-4a69-87e5-57c71f3a6d01@nutanix.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Wed, 14 Oct 2026 13:04:59 +0100
+X-Gm-Features: AclHuK_fKBiA6YUTOHdzTar_zcSRcOFWB6_EBRpgQCUFNyZdpL7rStVJCTFbRZ0
+Message-ID: <CAFEAcA8v+pcFz+HsgT9M6xb_16qBKK5FOuf8WupP5KuQK+aNcQ@mail.gmail.com>
+Subject: Re: [PATCH 13/22] i8259.c: introduce TYPE_I8259_PIC device
+To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com, 
+	sstabellini@kernel.org, anthony@xenproject.org, edgar.iglesias@gmail.com, 
+	qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
+X-purgate-ID: tlsNG-42698a/1791979513-AA8D99EA-9770F51D/0/0
+X-purgate-type: clean
+X-purgate-size: 2917
 
+On Wed, 14 Oct 2026 at 12:09, Mark Cave-Ayland
+<mark.caveayland@nutanix.com> wrote:
+>
+> On 13/10/2026 17:17, Peter Maydell wrote:
+>
+> > On Wed, 16 Sept 2026 at 11:50, Mark Cave-Ayland
+> > <mark.caveayland@nutanix.com> wrote:
+> >> +struct I8259PICState {
+> >> +    DeviceState parent_obj;
+> >> +
+> >> +    qemu_irq pic_out_irq;
+> >> +    qemu_irq pass_irqs[ISA_NUM_IRQS];
+> >> +
+> >> +    ISABus *isabus;
+> >> +    IRQState i8259_primary_out_irq;
+> >> +    I8259CommonState i8259[2];
+> >
+> > This allocates only enough space for the common base class's
+> > instance struct, but later we do an object_initialize_child()
+> > of the child class. If the child class's state struct is
+> > ever bigger than the common class, this will break.
+>
+> That's true. In theory this should be something like I8259State, however
+> I didn't think it was worth adding a specific
+> OBJECT_DECLARE_SIMPLE_TYPE() if there were no extra fields. I did
+> quickly check that if this happens, then the assert() in
+> object_initialize() fires so if this did happen then we'd find out
+> really quickly.
 
+I think that every QOM class ought to define its own instance
+struct, even if it doesn't contain anything beyond the base
+class. This means that when we do need to add a field in future
+we don't have to go around and find the places which currently
+use the parent-class struct but really want the leaf-class
+struct. (There are places where we don't catch mistakes like
+this -- for instance I think if you don't update the
+.instance_size in a type then that doesn't get noticed:
+we've had a bug or too like that).
 
-On 10/12/26 3:44 PM, Julian Vetter wrote:
-> arch_sanitise_domain_config() validates the configuration requested by
-> the toolstack, and should not fill anything in. The config struct passed
-> to createdomain is supposed to be pure input. ARM used to abuse this
-> (GIC_NATIVE resolution, now removed) to smuggle output back to the
-> toolstack. Making the parameter const stops that type of abuse from
-> happening on any architecture.
-> 
-> The x86 implementation turned out to have its own instance of the same
-> issue. It set XEN_DOMCTL_CDF_oos_off into config->flags for non-HVM
-> guests. Since The sanitisation runs before the function domain_create()
-> copies config->flags into d->options, this relied on mutating the
-> toolstack's config to take effect. Move the default onto d->options
-> directly in arch_domain_create() (which runs after d->options is
-> populated), where all the remaining domain options are resolved. This
-> has the same effect and no mutation of the input config is required.
-> 
-> ARM, PPC and RISC-V need no equivalent change, Their implementations
-> were already read-only.
-> 
-> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
-> Reviewed-by: Jan Beulich <jbeulich@suse.com> # x86
-> Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-LGTM on riscv.
-Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech> # riscv> ---
-> Changes in v7:
-> - No changes.
-> ---
->   xen/arch/arm/domain.c                   |  2 +-
->   xen/arch/arm/firmware/sci.c             |  2 +-
->   xen/arch/arm/firmware/scmi-smc.c        |  2 +-
->   xen/arch/arm/include/asm/firmware/sci.h |  6 +++---
->   xen/arch/ppc/stubs.c                    |  2 +-
->   xen/arch/riscv/domain.c                 |  2 +-
->   xen/arch/x86/domain.c                   | 16 ++++++++--------
->   xen/include/xen/sched.h                 |  5 ++---
->   8 files changed, 18 insertions(+), 19 deletions(-)
-> 
-> diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
-> index 4ca3a3749f..34b5a85f9f 100644
-> --- a/xen/arch/arm/domain.c
-> +++ b/xen/arch/arm/domain.c
-> @@ -557,7 +557,7 @@ static bool v8r_el1_msa_domain_sanitise_config(
->       }
->   }
->   
-> -int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-> +int arch_sanitise_domain_config(const struct xen_domctl_createdomain *config)
->   {
->       unsigned int max_vcpus;
->       unsigned int flags_required = (XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap);
-> diff --git a/xen/arch/arm/firmware/sci.c b/xen/arch/arm/firmware/sci.c
-> index aa93cda7f0..f73ed06092 100644
-> --- a/xen/arch/arm/firmware/sci.c
-> +++ b/xen/arch/arm/firmware/sci.c
-> @@ -45,7 +45,7 @@ int sci_domain_init(struct domain *d, struct xen_domctl_createdomain *config)
->       return cur_mediator->domain_init(d, config);
->   }
->   
-> -int sci_domain_sanitise_config(struct xen_domctl_createdomain *config)
-> +int sci_domain_sanitise_config(const struct xen_domctl_createdomain *config)
->   {
->       if ( !cur_mediator )
->           return 0;
-> diff --git a/xen/arch/arm/firmware/scmi-smc.c b/xen/arch/arm/firmware/scmi-smc.c
-> index a0cc6c6192..391df8b945 100644
-> --- a/xen/arch/arm/firmware/scmi-smc.c
-> +++ b/xen/arch/arm/firmware/scmi-smc.c
-> @@ -68,7 +68,7 @@ static bool scmi_handle_smc(struct cpu_user_regs *regs)
->   }
->   
->   static int
-> -scmi_smc_domain_sanitise_config(struct xen_domctl_createdomain *config)
-> +scmi_smc_domain_sanitise_config(const struct xen_domctl_createdomain *config)
->   {
->       if ( config->arch.arm_sci_type != XEN_DOMCTL_CONFIG_ARM_SCI_NONE &&
->            config->arch.arm_sci_type != XEN_DOMCTL_CONFIG_ARM_SCI_SCMI_SMC )
-> diff --git a/xen/arch/arm/include/asm/firmware/sci.h b/xen/arch/arm/include/asm/firmware/sci.h
-> index 485ce211c9..1d566be8e2 100644
-> --- a/xen/arch/arm/include/asm/firmware/sci.h
-> +++ b/xen/arch/arm/include/asm/firmware/sci.h
-> @@ -32,7 +32,7 @@ struct sci_mediator_ops {
->        * it to sanitize domain SCI configuration parameters.
->        * Optional.
->        */
-> -    int (*domain_sanitise_config)(struct xen_domctl_createdomain *config);
-> +    int (*domain_sanitise_config)(const struct xen_domctl_createdomain *config);
->   
->       /*
->        * Called during domain destruction, releases all resources, that
-> @@ -101,7 +101,7 @@ int sci_domain_init(struct domain *d, struct xen_domctl_createdomain *config);
->    * Sanitise domain configuration parameters.
->    *
->    */
-> -int sci_domain_sanitise_config(struct xen_domctl_createdomain *config);
-> +int sci_domain_sanitise_config(const struct xen_domctl_createdomain *config);
->   
->   /*
->    * Destroy SCI domain instance.
-> @@ -162,7 +162,7 @@ static inline int sci_domain_init(struct domain *d,
->   }
->   
->   static inline int
-> -sci_domain_sanitise_config(struct xen_domctl_createdomain *config)
-> +sci_domain_sanitise_config(const struct xen_domctl_createdomain *config)
->   {
->       if ( config->arch.arm_sci_type != XEN_DOMCTL_CONFIG_ARM_SCI_NONE )
->           return -EINVAL;
-> diff --git a/xen/arch/ppc/stubs.c b/xen/arch/ppc/stubs.c
-> index a333f06119..82a289af85 100644
-> --- a/xen/arch/ppc/stubs.c
-> +++ b/xen/arch/ppc/stubs.c
-> @@ -162,7 +162,7 @@ void arch_vcpu_destroy(struct vcpu *v)
->       BUG_ON("unimplemented");
->   }
->   
-> -int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-> +int arch_sanitise_domain_config(const struct xen_domctl_createdomain *config)
->   {
->       BUG_ON("unimplemented");
->   }
-> diff --git a/xen/arch/riscv/domain.c b/xen/arch/riscv/domain.c
-> index d94652809e..cfce8e91fa 100644
-> --- a/xen/arch/riscv/domain.c
-> +++ b/xen/arch/riscv/domain.c
-> @@ -284,7 +284,7 @@ void sync_vcpu_execstate(struct vcpu *v)
->       /* Nothing to do -- no lazy switching */
->   }
->   
-> -int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-> +int arch_sanitise_domain_config(const struct xen_domctl_createdomain *config)
->   {
->       return 0;
->   }
-> diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-> index 6ebe6c5052..368e4deff3 100644
-> --- a/xen/arch/x86/domain.c
-> +++ b/xen/arch/x86/domain.c
-> @@ -590,7 +590,7 @@ void arch_vcpu_destroy(struct vcpu *v)
->           ASSERT_UNREACHABLE();
->   }
->   
-> -int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
-> +int arch_sanitise_domain_config(const struct xen_domctl_createdomain *config)
->   {
->       bool hvm = config->flags & XEN_DOMCTL_CDF_hvm;
->       bool hap = config->flags & XEN_DOMCTL_CDF_hap;
-> @@ -633,13 +633,6 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
->           return -EINVAL;
->       }
->   
-> -    if ( !hvm )
-> -        /*
-> -         * It is only meaningful for XEN_DOMCTL_CDF_oos_off to be clear
-> -         * for HVM guests.
-> -         */
-> -        config->flags |= XEN_DOMCTL_CDF_oos_off;
-> -
->       if ( nested_virt && !hvm_nested_virt_supported() )
->       {
->           dprintk(XENLOG_INFO, "Nested virt requested but not available\n");
-> @@ -833,6 +826,13 @@ int arch_domain_create(struct domain *d,
->   
->       spin_lock_init(&d->arch.e820_lock);
->   
-> +    /*
-> +     * It is only meaningful for XEN_DOMCTL_CDF_oos_off to be clear for HVM
-> +     * guests.
-> +     */
-> +    if ( !is_hvm_domain(d) )
-> +        d->options |= XEN_DOMCTL_CDF_oos_off;
-> +
->       if ( d->domain_id && cpu_has_amd_erratum(&boot_cpu_data, AMD_ERRATUM_121) )
->       {
->           if ( !opt_allow_unsafe )
-> diff --git a/xen/include/xen/sched.h b/xen/include/xen/sched.h
-> index 73c54794ac..ce1fa636db 100644
-> --- a/xen/include/xen/sched.h
-> +++ b/xen/include/xen/sched.h
-> @@ -772,10 +772,9 @@ static inline void domain_update_node_affinity(struct domain *d)
->   }
->   
->   /*
-> - * To be implemented by each architecture, sanity checking the configuration
-> - * and filling in any appropriate defaults.
-> + * To be implemented by each architecture, sanity checking the configuration.
->    */
-> -int arch_sanitise_domain_config(struct xen_domctl_createdomain *config);
-> +int arch_sanitise_domain_config(const struct xen_domctl_createdomain *config);
->   
->   /*
->    * Create a domain: the configuration is only necessary for real domain
+We don't write that down in https://wiki.qemu.org/Documentation/QOMConventions
+but we do have some similar rules about class structs that
+boil down to "either you're a leaf class and provide none
+of these things, or else you should provide them all; don't
+have a halfway-house 'we happen to only need X and Y but
+not Z right now' setup".
 
+> >>   static const TypeInfo i8259_type_infos[] = {
+> >>       {
+> >>           .name       = TYPE_I8259,
+> >>           .parent     = TYPE_I8259_COMMON,
+> >>           .class_init = i8259_class_init,
+> >>       },
+> >> +    {
+> >> +        .name          = TYPE_I8259_PIC,
+> >> +        .parent        = TYPE_DEVICE,
+> >
+> > Devices that directly inherit from TYPE_DEVICE are awkward,
+> > because they never get reset. Conviently this device doesn't
+> > currently need a reset method, but still, is this a good idea?
+>
+> In this case I think it's correct, because the PIC device in this case
+> is a container for 2 cascaded i8259s which are connected separately to
+> the ISA bus. Therefore each i8259 will have its reset triggered via a
+> reset of the ISA bus.
+>
+> The container itself can't exist on the ISA bus because it would then
+> appear as a separate device which doesn't make sense in this case.
+
+OK.
+
+-- PMM
 
