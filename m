@@ -4,43 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1311CC6B1D
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 10:52:22 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448725.1664761 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4DC00CC6B1A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 11:01:06 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448740.1664771 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGwaX-0006O7-Ei; Wed, 14 Oct 2026 10:52:01 +0000
+	id 1xGwix-0008SF-7b; Wed, 14 Oct 2026 11:00:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448725.1664761; Wed, 14 Oct 2026 10:52:01 +0000
+Received: by outflank-mailman (output) from mailman id 1448740.1664771; Wed, 14 Oct 2026 11:00:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGwaX-0006O0-Bn; Wed, 14 Oct 2026 10:52:01 +0000
-Received: by outflank-mailman (input) for mailman id 1448725;
- Wed, 14 Oct 2026 10:52:00 +0000
+	id 1xGwix-0008S8-3Z; Wed, 14 Oct 2026 11:00:43 +0000
+Received: by outflank-mailman (input) for mailman id 1448740;
+ Wed, 14 Oct 2026 11:00:41 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGwaW-0006Nu-1a
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 10:52:00 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <mark.caveayland@nutanix.com>) id 1xGwiv-0008S2-Gh
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 11:00:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGwaV-000zxu-EX
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:51:59 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xGwiu-0012XH-Sr
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 13:00:40 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6acf5ecb-bab6-0a2a0a5309dd-0a2a4508af28-40
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 12:51:59 +0200
-Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6acf5ecf-f659-0a2a45080019-d155dd29e51f-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 12:51:59 +0200
-Received: by mail-wr1-f41.google.com with SMTP id
- ffacd0b85a97d-48441a2ba1bso202320f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 03:51:59 -0700 (PDT)
-Received: from [172.20.10.5] (public-gprs376522.centertel.pl. [37.47.102.11])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48de0514ab1sm14639482f8f.0.2026.10.14.03.51.57
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Oct 2026 03:51:58 -0700 (PDT)
+ (envelope-from <mark.caveayland@nutanix.com>)
+ id 6acf60cd-e002-0a2a0a5209dd-0a2a4509b648-34
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 13:00:40 +0200
+Received: from [148.163.155.12] (helo=mx0b-002c1b01.pphosted.com)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <mark.caveayland@nutanix.com>)
+ id 6acf60d7-be1a-0a2a45090019-94a39b0cc20a-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 13:00:40 +0200
+Received: from pps.filterd (m0127842.ppops.net [127.0.0.1])
+ by mx0b-002c1b01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69EAYIpM3386605; Wed, 14 Oct 2026 04:00:29 -0700
+Received: from bl2pr02cu003.outbound.protection.outlook.com
+ (mail-eastusazon11021136.outbound.protection.outlook.com [52.101.52.136])
+ by mx0b-002c1b01.pphosted.com (PPS) with ESMTPS id 4ha83mr1ux-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Wed, 14 Oct 2026 04:00:29 -0700 (PDT)
+Received: from PH0PR02MB7159.namprd02.prod.outlook.com (2603:10b6:510:16::8)
+ by SA0PR02MB7209.namprd02.prod.outlook.com (2603:10b6:806:da::7) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.13; Wed, 14 Oct
+ 2026 11:00:27 +0000
+Received: from PH0PR02MB7159.namprd02.prod.outlook.com
+ ([fe80::8e97:bc32:822c:b250]) by PH0PR02MB7159.namprd02.prod.outlook.com
+ ([fe80::8e97:bc32:822c:b250%4]) with mapi id 15.21.0522.012; Wed, 14 Oct 2026
+ 11:00:27 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,208 +62,192 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791975119; x=1792579919; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=pJ40mdVF2h3U99L6LSkoNg9S+JOxwfRKomS8IAjHB+w=;
-        b=HNAGVhK6Vc1SEerQUM9v79gRy469quGojFQrLpOEGLZSH23W76HrTbLX7aREcXkyp4
-         eY0moBlRY+97Z8yuiWbuYehDz2R6N6Qd6ak8qRS7iXzZ9Jq1L3/fSquLigKcG7hMshJ1
-         u4QREP9rRr+m9SA13JuksOO/3xeRIoYXF9/208P6l4A6nKXGTYxcFPn+ZZcvZmsTkNFd
-         uVV8mHXy6aHIBr3iya+yhR+CFy/vTZLj0hDJHM+sUkV0GHWu8SWkjXGV0WgGtlDQhsOl
-         VeZiVsugyLTM7cE9N4BUUTg6f+3miKwblv4/5kql6PjKAzsvkvjbSXsaNW3fr6Ben3/0
-         eSHw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791975119; x=1792579919;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=pJ40mdVF2h3U99L6LSkoNg9S+JOxwfRKomS8IAjHB+w=;
-        b=sDV9XRKidAdFJCzgMNmMUzVlIOfEC83VyvvkLq0jlld26zk5zbgFVAIZ5Alv7z0Ai+
-         YkN6DGHI/WOCBnkn7nfeHW2r5ZLhK7v4+MIMxiN+OmSihOmuBPc4vT4VbuA9tAi1nsbx
-         5TjdtuHgxs2dTzoBe8QgbLBJEK6GIV4zkwY/XlzZQmKLZpTjdmY4P5zds3IRfL9POP6U
-         mYjjWGooLvOK27/BZB+ejWUQaMX2my1cXeBx65DxTscIzsFrWZh9mpRFyKcAi/7DPTxR
-         tcqRacbMc+UQFykJvxfRRyGLx60OHUIgB0bqXUkgDS109PCt/pHgauPv5ZhTuwtN1AkZ
-         1NSA==
-X-Forwarded-Encrypted: i=1; AKwUvBwb43EtF0/wb4F3/ovZqjzKlFElB+FkCYv3YwZHBhF3w9fG9SYd/V+6/6vq2Om3OJJjXN4WF0BPEec=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYK+3i5PLMF0F+LBVxfGB8wDBJvyiyOCoQl+ZJxPtV3JpYhPbtyg
-	l3D2JGKVSM2Mfq3B+oPS84aTVrTFPkZ4lfyaRHpobY5l70/MRIXerWrW
-X-Gm-Gg: AYBFou1zSSFPJHYvO3BLvCcXPC3sNuBIzxvoszx3WyUCqLgHNQJ6FHHr4IYAd9NsPfi
-	fdCvng7Ezj2Grcid3TrCRkJxUtlschpLkNcNRTv4Cz3EiyEFGcSDNLwCVGd+ADbDp1I/is5nRO4
-	puSRR9adrXLnUW15xvJhELMJsQ6Kf3Hp/3wbF+ndZ2+UN20JQ66siJ0YJgCqdYXwBlOquMLEtEI
-	cIvle1Ggyhy7bkX4rK/gIuBh6F2NpdQS/KjAGFIoihuKMaDEOn0Tp3TFcRVSD5h0YHMUebtepoi
-	UgoChTIwtrvzKRu6TUNRvZCM/K/fccQyRSsakQKTIW3HSPvBrqvlMngiJs0KOgEF1MuF0TPOnuA
-	wfgdwPpSEdX2S50061Cfu9pUb7p99wZqS1l3/MLHKomXCbEBOQHo602/eDCARWbCtYNnCumT0rP
-	NCEV4irjI44bYAV59R5C7VkE7rpbS7Cmziq3NZYBPMc7IgDB1i+E3ZTsXe//wUTXwN9e7O6R1Br
-	VaZEy/hPcCj63dTIHBQmW+r+2pJLSTj0/8notc=
-X-Received: by 2002:a5d:6346:0:b0:488:8a3d:b58a with SMTP id ffacd0b85a97d-48dbaaed83fmr22972310f8f.53.1791975118646;
-        Wed, 14 Oct 2026 03:51:58 -0700 (PDT)
-Message-ID: <66fd20a7-4849-48b9-8030-9154c5100301@gmail.com>
-Date: Wed, 14 Oct 2026 12:51:56 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=proofpoint20171006 header.d=nutanix.com header.i="@nutanix.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector1 header.d=nutanix.com header.i="@nutanix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	proofpoint20171006; bh=KBYwAnvbdjNZHrkxbLQynUxu0Z0J9UzLCBTZRqdFF
+	5c=; b=ZCvj6MyY5YRo75xXDgkwaGWKjbXwUd3k50Y/6wkxdA9UHJynPvx8SIq3M
+	AcfsTSVFAmSfDQB0fxuqb4joz9Wqq1lBh/m7eenU1UFIW152MrbeKw+gb0K1TvdK
+	OVpbir4G4v8dWnrwnW4vPdFrHSIFVXbZGMpDPH1q3RSyjkRp2As6+qfxRXLlBPdN
+	9mJGb+aaMpqps7EJf5xr5z8WlTLHFUgNN3OK0tvpam1MWbmYbOGEOhMeVbpGaTJZ
+	oyhBhGlmy/UeDwUD9NIQ4DklO2ObW10kW0xxwK0JENGiWMb9IzJUXSKo2eOmns3I
+	bm4II56aNcl3ym2+ILd+aryf+1+dA==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=g4bWWI57XD9154dtvNxnToPF3bQynN+iuZxOwZgHDmfkgwwEvxpHz+JvWlu6S6GSTCNi8bNmx0KYBc5BYZGf1Mb4+fbgm9vZTqLvpld8JmKfbygzUgfbXmGF9iui11JZTO7lAvZuScfql0faAXT6fc8MF19Lr3j25vbBl/JSaCWLiOITW94l7DjndBT8A6oiWjBGestw9frKBmAke2q6VBZwWZZ18Jy5g2UMOsn2WEZrAgDc0HNS9oqAW8qa9uFCyMeWVSlUlF2hAEZuK9PEHvlkxFukXKwi2bQMI6RWKPF9sHpcFWtx0E2aS8DFTLD/vCjI0UMpZjQn5eLDcNhwIA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=KBYwAnvbdjNZHrkxbLQynUxu0Z0J9UzLCBTZRqdFF5c=;
+ b=HwHiKPNKC4AmWnJdBPpfSbXhO4spWR0gYzbhA/HeJ3VvuIjyAFanMJFUNsRgA6MklziFw4aC0oct5VWfgEoKId0o1FYlAWYB7otbLb0tiIDhZy0GpTF59lzBnOCCGM03wAPFLyQQTCkuBFuSiXX0WGrlmEITaQQGxqs95vWJJxba2Vi9Zj2J2e/QL5aTRafbP4XVAGE1ZnoqPYCxfzalCzm55xqjk7ai1Aq2zX1+LCb72GQM8V5uBhB4+mSlXMg5+GxH+IeV+3og9HWdikjUiCpKyhJqH+bGECs88PiaCW6aMSSHzZ9CxDUJR00NhAx1yI7lsZAmSWSzMsxITShdfw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
+ dkim=pass header.d=nutanix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=KBYwAnvbdjNZHrkxbLQynUxu0Z0J9UzLCBTZRqdFF5c=;
+ b=BZPlhfzlms1Fj6R89nM/H4nFV0BY09r8rX7pksyfymY8PW2ZCAlvNUktpBzX4dbElLpsuGe2welHFZcK91YvnRNqxS5VEY48t0UtSwywEG5QixohA2Bgm5Rx8mw5Xj+dXgDGIDvWUlop7ZpD3Psp9vIwyxEM0Cp56HK8vy1qmHClf63BNlHw3dVshmyAL3dgf3zrtcniC5cSFsg5P3koiiBBllgxNbTQgGkAQtpcz4rtnqeXgAvIK75+7acaCXtHcQHRVL1Xl3FYLSMMsQsTF2I+VLat+pSYBY3X2szuY+x5rh/5l1eDxKMk1uCi4TOLCht8C+UFpaB20Ah5owcHEg==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nutanix.com;
+Message-ID: <876b66cd-0ea6-4943-9a0e-c0abf2ad6e26@nutanix.com>
+Date: Wed, 14 Oct 2026 12:00:20 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 06/39] xen/riscv: introduce device-agnostic MMIO
- emulation dispatch
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <cafb356d9cc3148d74df846e08c4961da72bea0e.1790779209.git.oleksii.kurochko@gmail.com>
- <aa82fc34-0074-422a-87da-0cab24bb43c8@suse.com>
+Subject: Re: [PATCH 05/22] i8259.c: move parent_realize from PICClass to
+ I8259CommonClass
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com,
+        sstabellini@kernel.org, anthony@xenproject.org,
+        edgar.iglesias@gmail.com, qemu-devel@nongnu.org,
+        xen-devel@lists.xenproject.org
+References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
+ <20260916104435.600211-6-mark.caveayland@nutanix.com>
+ <CAFEAcA9eucRyzG=PR2tpx8ObHkdK6xUmOjQ+-nNbJ2dVHaptOA@mail.gmail.com>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <aa82fc34-0074-422a-87da-0cab24bb43c8@suse.com>
+From: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+In-Reply-To: <CAFEAcA9eucRyzG=PR2tpx8ObHkdK6xUmOjQ+-nNbJ2dVHaptOA@mail.gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1791975119-CED4087B-BE7263B3/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 4646
+X-ClientProxiedBy: BY5PR03CA0009.namprd03.prod.outlook.com
+ (2603:10b6:a03:1e0::19) To PH0PR02MB7159.namprd02.prod.outlook.com
+ (2603:10b6:510:16::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH0PR02MB7159:EE_|SA0PR02MB7209:EE_
+X-MS-Office365-Filtering-Correlation-Id: 46173ebc-b5be-4608-0704-08df29e25a46
+x-proofpoint-crosstenant: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|1800799024|366016|23010399003|56012099006|4143699003|261009223027099003|22082099003|18002099003|10067099003;
+X-Microsoft-Antispam-Message-Info:
+	ZGJBoQWpFqccJUT4Ppb8RB4+eirfTMzvJG7otdwjLLdHeNJ89Euwywez+eVLKBCtZAi7YPJ1ntI7o3psMbRBX4RoAyqR2Fu4X49W/bSzUKNU8/waLta+q1HJjUXTmsRNOi2P4CDrig1hua0r/XhWT3MaagtppmRs8JkvFTG+9jitHoqfU6dMAwjP3UMqk4WAbLFCyc+MiXciVqFXbopSsdTSRvpl872JUv81NUunl0CqmY61KCaFk9koy/uEYlseADyE7UKu6PXlKEd2WK61SDQcMrYRCr3E1y4M6j3aHjN78UUTNL2X9iOdKL1zc+PUyBpS/iI8wGR+TG2eeid7BkYvsDDzfNBAaPvJLrSrn9LXaqxr3K+wHlBKv00r3zYExPt7tbtzhuBU7pmZx4mdOH27W8FRbM17KasfesGGwmB6MC7DKPLg13+11Fks/ZaIpCY4M2QQ7eJEQzcaZYBMf7KlWGYjHMtyUIHT0Dc9MyHqeoPLefNsPLgJFlZTdn1gjjgHqKXhxKv/iHgLPSIkiwFmupA+Y0HxaPHZntNB2BTFv9uqVXTa5s9QN+EXdcJB69uRXZrbTotQibkmvEoFXrUGeKHMdx4NdJkvqFcnwg3I21FEiH/wtk+QLHn8b8nRGPrfpJRPp5WZT17Tvg2QYk/bbBdQhgAUyLnq/dXChJ8=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR02MB7159.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(23010399003)(56012099006)(4143699003)(261009223027099003)(22082099003)(18002099003)(10067099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?ZmRZUUNuSGJHL0FnVnVBWmduYTNtQjRlZjV3RjNPMEt1WFVSWm9pNUxPT3NG?=
+ =?utf-8?B?L0s4TjhUMFg0djBxOU14NDY2UlNEcWQ3b3VJSHlFRlBpY2lwTkdGK3Y0NFpU?=
+ =?utf-8?B?SmdzNnF2cy8zUWFYUGVRYXJ6Y0l4VmMrTCtoSW5TUzFsczdvU29sSEhMWGpF?=
+ =?utf-8?B?TDFZRFE3WGxFY0IrNkZIMzAyZjBpclI4cENFUWVBRTYwL0dhbTlwVDdEaXpJ?=
+ =?utf-8?B?VHIwb2FhWERnWDN5UGgyWmVUbUlCRm1rejhZRnpCWEdGYy85VVM0TTJkYU9n?=
+ =?utf-8?B?ckFkVksyN2tuK3Vhd2l2ZWJNYWNwUStRczV4VVU5Z1g0cDVaOVF4UG8zNG41?=
+ =?utf-8?B?Zkgya0xlRlkyTVUxTTJndFFWMnpnejM4Nm81NGx3OHRDSDVhVHAyaHNXTkM1?=
+ =?utf-8?B?dC83N2xGaDRHNTR1NloyT1JnR24wcElXOHdNK2tIMUQ3SnNhT2c1WkpxMjhm?=
+ =?utf-8?B?c2k1WXlSNEV0OFBJSzV4U3VtbWI1SHVEQnJaRi9EM3ZRTHZMa3NNQzBWb3FH?=
+ =?utf-8?B?RlB3WXNXeGpuYmg4bWRxN21EbnE2cXZHQnNqclhSeGVVclhFYnZ2NFJ3dGFu?=
+ =?utf-8?B?WlNWUkdvWlNyeXYvUjRUNlE2ZjFNMSs0VlkrRjFqdGdiQ1FTM1d3dkgrYUs1?=
+ =?utf-8?B?aG5FcmpGUUxQa2VUQ1IzNHpteGN5WmdXcHFXa2pCZ1dVMDFHSHVMbXg5VDc1?=
+ =?utf-8?B?ZmZpK2VpTWVJQ2QvYzh5V0Nwd29rTFljZ3hjUDJTMmY5YXBOV0o3TjRuWmQy?=
+ =?utf-8?B?UndNNjg5bXdxYzk5bUExR0RPMUFQRUZxZW5NL2g4Vm84cVBsZVVCK2x5QVZO?=
+ =?utf-8?B?Y0dNbWszZEczUzBtM2FBUkI2OEJySHBOMElaa2FJR014K281c25oRVZrUUxy?=
+ =?utf-8?B?bWVzOWdFU0xQV0U4NnFFYzUycWVSeDJMYWMrb2xoNjNTUTJacUVFQ2syVEQ2?=
+ =?utf-8?B?TkRNZ2R3TEpTYTZYdEhtYkdleVM0VzExSCtOcXB4U3JKdTNmVVdUQ1ZvY3la?=
+ =?utf-8?B?VlU3dGRiSG5DakVPQ3NseklZR3JwbjkrbTlJRFl4UTh2eHR6RnZ3cTFjU3hZ?=
+ =?utf-8?B?YjlpRmxNUWUxNm0ybnZnN1hzTUsxcXRsTUl2YU4rTjJEK3lLTGdESXhGRGZr?=
+ =?utf-8?B?NW52SkM2bnl5eHIvaGJTUE1rdEgyNEpMaC9ZT3RheVZDR3hQSVZUNXBjTC9a?=
+ =?utf-8?B?eTB4VFlYTjUxMHZwM1NZUFRWMnV0OXRiei8rU2hoZFlJUDJEaEEzaVhPa1hz?=
+ =?utf-8?B?b0E2QzloSnhsVjVpcDNBRFZDcm9rMmhrRUJXMm9hcDBTeWZDKzR0R1M4NEVx?=
+ =?utf-8?B?MElmL3ZpMENIZFRLYXQ4NDRhSDh5Ymlickp5dHBxRHp4TXN2MFV5VkluWU5O?=
+ =?utf-8?B?Y2J3TWlQMXZFTDd1RTVqV0lsT25lTGVoc1lWNkVpMlBPRTRJNlJMWXlZYlRX?=
+ =?utf-8?B?TTB5bG9kK2xCZmIzaDQvWWFpdVl6VllKU3lJZVpHNGx1S3BhVURSMTdSNjFT?=
+ =?utf-8?B?dFJHN3Fyb0VrOEhoS1VodlNtVXJtRXA0SjAwek1Uanh2UldWcUJDRE9rTzAv?=
+ =?utf-8?B?ZURHbUNWUmVwMkFkenZRMnV2cXNxb1BaeXZONDR6SEgrMXpwVmMyN1luczlP?=
+ =?utf-8?B?N3B2a2c0MkVnQ0Nqblo4MzFpLzkrNysvUHJDdWk2ODVEVDNwQmxOUkFYa3dH?=
+ =?utf-8?B?SzFNWEF6VG1aOHBwUUZLbG85M0ZaazhHSEhPczJ4MUgrT0hCTkRDVEJWcHZB?=
+ =?utf-8?B?TU9vNXJFcTJ3SnJaYTRsNDRoNXp6ZjdyckIrN09XY0k2RDdUQTFFSUc5eDBh?=
+ =?utf-8?B?Z2JFbnJlNkRHYnp5R1lKRE9wQmsxajhSVkxpWXpqUFpscW4ybm85Ly81eUth?=
+ =?utf-8?B?b3VqR3E1VGtucnU5SmFGNU9vZW96bCtZRlRQSHRHbnltWGVnSzYzRWhhdnp5?=
+ =?utf-8?B?WEpiWWp6UlEvTXg3bllJeHA0VUpnWG4vZk1DWjZYUjRmdU1BRnlBdnVQdlFH?=
+ =?utf-8?B?dWtRTit2eXl6VnZhQ1JxUHJPOHdpRDc2aVBjOFNFZkVlMy9KY2ZtVXBuaUU0?=
+ =?utf-8?B?T0J1YTZiSDlKdjZzbk9BRjVwUFdQS2tQK2wxOEdCYVEvd2N5MHg2QjF5NTBH?=
+ =?utf-8?B?S05iUFljdE1vaVZoaEw0WDFpUlIzdUlEWjRsSDVVUzBpNTU1T1ZnVDJOT3NS?=
+ =?utf-8?B?S0hjaUJSbnMwMjJmQld1MTZBU2NnVGlCMldEMlZUK3BCcEdjK1hEMjhKSGlH?=
+ =?utf-8?B?MjFVc0dXZ1J4bVd1NVd0djluUDlLZFlnMGxQSDFSOUQ5WkpNL2llWHpMb2ky?=
+ =?utf-8?B?end4V0plMVQzOTNFbjArQnBIZXFlWHREa3V1S0hVSzNadll1T3NHTlcvdXhi?=
+ =?utf-8?Q?uZX3lOiB9B733pvg=3D?=
+X-Exchange-RoutingPolicyChecked:
+	RbPrNdZzokPsxfoE4xoClneC+ueTp4BOLoiQpQk24Q+FCfthhcfww2I17x8hoaASBdMhV6tsG0YliCpXy9mk2z03uAP8EOmP2OTQcCqU+JPER60WoK1zOWGh1QQhZ2tJ/xyYVicArcwIcJUDtsFe2Z7V/y9+pD/2hmKqGIiEZjqXY2EOgrCIJWcWSL+IfMEtAACzjUtYB/v+B0r55dq2tIZ0yIs9BzA1hMA78Js1i/Yr6B/8SHp9lUaahwVg8MtnykukW4SCHwZiDS852Cac52qGqxm3rzNlseJJnwDhCHFZibJ+RSX+ONbtcdDD7YiZbuwl9a1mAWG/n83vHgNS1A==
+X-OriginatorOrg: nutanix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 46173ebc-b5be-4608-0704-08df29e25a46
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR02MB7159.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 11:00:27.0385
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: bb047546-786f-4de1-bd75-24e5b6f79043
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0xEKrK3SZEXoCaFyx0G3qYt9Z2nU+BDhSJYYcAJaMWV8diXf92DAznul3fhICzi8Q4/JOBRKl8Rs70dwIpr5UBVRIARB+4GGQjmP18JinjI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA0PR02MB7209
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA0MyBTYWx0ZWRfXyK9tZ3oJPo5Y
+ Kk1Ri7VXXRv5fd+kC5sCU+MVxuNRuGVULnKRfw0vk1t5c/d37YxaY3yW9plQI0QR7b8C8skP4oL
+ wFscrb7qtdgMYmguuN+koRtRUMMQwJI=
+X-Authority-Analysis: v=2.4 cv=BroIUoX5 c=1 sm=1 tr=0 ts=6acf60cd cx=c_pps
+ a=IN/ktsHfyviFoRwGlsjPrQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=0kUYKlekyDsA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=VofLwUrZ8Iiv6rRUPXIb:22 a=VUi8bpU7OL1Oj2-RSIOF:22
+ a=64Cc0HZtAAAA:8 a=AWkEWHTIOsQDqs_bE0YA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA0MyBTYWx0ZWRfX4mB5yBKYqrBj
+ zkpcQpITlq6z1EZyycJbv//wstKprYEHXnabH9D5REj3lylTw+okT4tbRuE3aI8F7zFuTP22y0E
+ Mo3g2jF/wUlMhOo8JvNgsawZaZTCWN5Tn56G6UW1LgRwciYZaXMbmzizyWatGd0qGBIE7XYqtmV
+ oAJulbqnIKI5rR07z/v7Res7hoFhe2aeUgFEHkqwry4fKuVNmWwbK5J0MHoQ20shnu6qmWNklrL
+ 4vTQ7jKmtzvpZew8E4puz8HPbXIqI6l9gb3i4s04CCp04yJLTm6mHEe9JPgkGDjZDk8q9Y06l1Z
+ qRy0z+AIOk0YIYZzJt5yZsg6POJewph5+eWmYbDjbBFt8N32Vr5LcNi3AQNdM/l0nt+7nw2Qaei
+ +jZXxrTRsbvoDizgr1HzMKVOOf8Ls6KiU4vWN6IrUoijFaeKc3gJH97bsZSQzY51VE3CmOwh5jW
+ 5O+vb6OGj36qBQTHLRA==
+X-Proofpoint-ORIG-GUID: L4g0Y_Yz4cX-YoZfZ-mr8Wb7Mn1wRLGw
+X-Proofpoint-GUID: L4g0Y_Yz4cX-YoZfZ-mr8Wb7Mn1wRLGw
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Reason: safe
+X-purgate-ID: tlsNG-bad1c0/1791975640-BD8C1034-5ADB8581/0/0
+X-purgate-type: clean
+X-purgate-size: 1948
 
+On 13/10/2026 16:54, Peter Maydell wrote:
 
-
-On 10/12/26 5:28 PM, Jan Beulich wrote:
-> On 30.09.2026 18:18, Oleksii Kurochko wrote:
->> --- a/xen/arch/riscv/include/asm/domain.h
->> +++ b/xen/arch/riscv/include/asm/domain.h
->> @@ -9,6 +9,7 @@
->>   
->>   #include <asm/cpufeature.h>
->>   #include <asm/guest-layout.h>
->> +#include <asm/mmio.h>
->>   #include <asm/p2m.h>
->>   #include <asm/vtimer.h>
->>   
->> @@ -101,6 +102,8 @@ struct arch_domain {
->>       const unsigned long *isa;
->>   
->>       struct vintc *vintc;
->> +
->> +    struct vmmio vmmio;
+> On Wed, 16 Sept 2026 at 11:49, Mark Cave-Ayland
+> <mark.caveayland@nutanix.com> wrote:
+>>
+>> Both the emulated and KVM i8259 implementations store a reference to the
+>> parent_realize function in their respective classes. Start by moving
+>> parent_realize from PICClass to I8259CommonClass and removing PICClass since
+>> it is no longer required.
+>>
+>> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
 > 
-> This is a decent size structure, so I wonder whether this really wants
-> embedding in struct domain. If it was a pointer here (with the struct
-> dynamically allocated), the struct definition itself may not even need
-> exposing in a header.
-
-Makes sense. I'll make it a pointer allocated in domain_io_init(), with
-struct vmmio (along with MAX_IO_HANDLER and struct mmio_handler) moved
-into mmio.c (as they then will be used only there), so that 
-<asm/domain.h> doesn't need <asm/mmio.h> anymore.
-
+> This is one of those things where I think we're not 100% consistent
+> about whether we think the parent_realize field should go in the
+> child class struct or the parent class struct. The name "parent_realize"
+> implies it ought to be in the child struct, though, and I think we
+> do that more often than we put it in the parent class. This also
+> makes some kind of separation-of-concerns sense too: it's the child
+> that knows (a) that it exists at all and that (b) it wants to have a
+> realize method that will mean it needs to chain back to the parent.
 > 
->> --- /dev/null
->> +++ b/xen/arch/riscv/mmio.c
->> @@ -0,0 +1,175 @@
->> +/* SPDX-License-Identifier: GPL-2.0-or-later */
->> +
->> +#include <xen/bsearch.h>
->> +#include <xen/lib.h>
->> +#include <xen/rwlock.h>
->> +#include <xen/sched.h>
->> +#include <xen/string.h>
->> +
->> +#include <asm/current.h>
->> +#include <asm/mmio.h>
->> +
->> +/*
->> + * bsearch() comparator: @key holds the address to look up in its addr field,
->> + * @elem is an entry of vmmio->handlers. Relies on the regions not
->> + * overlapping, which register_mmio_handler() enforces.
->> + */
->> +static int cmp_mmio_handler(const void *key, const void *elem)
->> +{
->> +    const struct mmio_handler *handler0 = key;
->> +    const struct mmio_handler *handler1 = elem;
->> +
->> +    if ( handler0->addr < handler1->addr )
->> +        return -1;
->> +
->> +    if ( handler0->addr >= (handler1->addr + handler1->size) )
->> +        return 1;
->> +
->> +    return 0;
->> +}
->> +
->> +/*
->> + * Return a copy of the matching handler rather than a pointer into
->> + * vmmio->handlers: a concurrent register_mmio_handler() shifts entries
->> + * up to keep the array sorted, so an escaped pointer could refer to a
->> + * different (or torn) entry once the lock is dropped. The copy stays
->> + * valid as the ops structures are never freed.
->> + */
->> +static bool find_mmio_handler(struct domain *d, paddr_t gpa,
+> The docs for device_class_set_parent_realize() claim the parent
+> realize ptr is stored "usually in the instance structure" which
+> I think is just completely wrong.
 > 
-> The first parameter here apparently wants to be named currd, much like ...
+> I could be persuaded otherwise. As usual with QOM/qdev, I'm
+> mostly interested in (a) consistency and (b) documenting what the
+> "right thing" is. Realize, reset and unrealize are the three
+> methods where QOM's lack of convenient support for "child
+> implementation of method will need to chain to parent impl"
+> is most awkward.
+Yeah it's a tricky one. This patch was really just refactoring what was 
+already there, but I'm open to moving it into the instance if you think 
+that is better. I agree with your point about the child instance being 
+the one that knows it needs to chain back to the parent.
 
-With having vmmio member of arch_domain struct declared as pointer then 
-here it could be const struct domain *currd.
+I'll have an experiment and if it looks good, I'll move it to the 
+instance in v2.
 
-> 
->> +                              struct mmio_handler *out)
->> +{
->> +    struct vmmio *vmmio = &d->arch.vmmio;
->> +    struct mmio_handler key = { .addr = gpa };
->> +    const struct mmio_handler *handler;
->> +
->> +    read_lock(&vmmio->lock);
->> +    handler = bsearch(&key, vmmio->handlers, vmmio->num_entries,
->> +                      sizeof(*handler), cmp_mmio_handler);
->> +    if ( handler )
->> +        *out = *handler;
->> +    read_unlock(&vmmio->lock);
->> +
->> +    return handler != NULL;
->> +}
->> +
->> +static enum io_state try_handle_mmio(mmio_info_t *info)
->> +{
->> +    struct vcpu *v = current;
-> 
-> ... this variable wants to be named curr. Unless of course there are
-> plans to not unconditionally use current here.
 
-Indeed, both always refer to current. I'll rename them to currd and curr
-(and make currd a pointer to const while at it).
+ATB,
 
-> 
->> +int register_mmio_handler(struct domain *d,
->> +                          const struct mmio_handler_ops *ops,
->> +                          paddr_t addr, paddr_t size)
->> +{
->> +    struct vmmio *vmmio = &d->arch.vmmio;
->> +    struct mmio_handler *handlers = vmmio->handlers;
->> +    paddr_t end = addr + size;
->> +    unsigned int i;
->> +    int rc = 0;
->> +    bool overlap;
->> +
->> +    if ( !ops || !ops->read || !ops->write || end <= addr )
->> +        return -EINVAL;
-> 
-> I think this checking goes a little too far: It's absurd for some call site
-> to pass NULL into this function. The other three checks are sufficiently
-> plausible, albeit I wonder whether this wouldn't want to be an assertion
-> then.
+Mark.
 
-Agreed, NULL ops can be dropped. As the callbacks always come from a
-static ops structure, I'll turn their check into an ASSERT(). I'd keep
-end <= addr as a run-time check though, as the region bounds may be
-computed (e.g. from max_vcpus) rather than being constants, and the
-overlap check below relies on addr + size not wrapping.
-
-Thanks.
-
-~ Oleksii
 
