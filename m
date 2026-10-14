@@ -4,39 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 427F7C3DA7A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 16:44:53 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1449346.1665211 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 25AB8C3DA7A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 16:45:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1449357.1665221 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xH25t-0000wz-4i; Wed, 14 Oct 2026 16:44:45 +0000
+	id 1xH26R-0001ZX-EF; Wed, 14 Oct 2026 16:45:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1449346.1665211; Wed, 14 Oct 2026 16:44:45 +0000
+Received: by outflank-mailman (output) from mailman id 1449357.1665221; Wed, 14 Oct 2026 16:45:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xH25t-0000ws-1E; Wed, 14 Oct 2026 16:44:45 +0000
-Received: by outflank-mailman (input) for mailman id 1449346;
- Wed, 14 Oct 2026 16:44:44 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <ndesaulniers@google.com>) id 1xH25r-0000wF-RM
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 16:44:43 +0000
+	id 1xH26R-0001ZP-9d; Wed, 14 Oct 2026 16:45:19 +0000
+Received: by outflank-mailman (input) for mailman id 1449357;
+ Wed, 14 Oct 2026 16:45:18 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13b4dc2b50008425@swg.vates.tech>)
+ id 1xH26P-0001Z5-Gt
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 16:45:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xH25r-00E2c3-86
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 18:44:43 +0200
-Received: from [10.42.69.1] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <ndesaulniers@google.com>)
- id 6acfb167-bab6-0a2a0a5309dd-0a2a4501d5f4-28
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 18:44:43 +0200
-Received: from [209.85.128.52] (helo=mail-wm1-f52.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <ndesaulniers@google.com>)
- id 6acfb17a-5984-0a2a45010019-d1558034d1c3-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 18:44:43 +0200
-Received: by mail-wm1-f52.google.com with SMTP id
- 5b1f17b1804b1-4a19cba5c14so38176935e9.3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 09:44:43 -0700 (PDT)
+ id 1xH26O-006AMC-QO
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 18:45:16 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13b4dc2b50008425@swg.vates.tech>)
+ id 6acfb17c-8faa-0a2a0a5109dd-0a2a450897fa-40
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 18:45:16 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13b4dc2b50008425@swg.vates.tech>)
+ id 6acfb19c-f659-0a2a45080019-b9ff1c22905d-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 18:45:16 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a13b4dc2b50008425.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Wed, 14 Oct 2026 16:45:14 +0000
+Received: from [192.168.1.46] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 5761782A6A;
+ Wed, 14 Oct 2026 18:45:13 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,152 +58,110 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1791996282; cv=none;
-        d=google.com; s=arc-20260327;
-        b=HEChk0KhBioVZRM/QcIEUHrR68ZEm7sraBhfpPWy9JUb29QzlKkYsAQwhIKZPgbjWG
-         wACxGdSM1CICXLl/a9eqaDfhyeJrRb79Vh0FvL3mpf46ojY5/SQmXSMBfRkELZRK4iYt
-         sd4xFv6RYLtjDpvjE49KnHfcL0ncs0tZmn6ZRI4kiTGieXeI6l9dGB7HoqWEnhlHaqPq
-         l6BW6zJFw/K+IHN237hf+dDEZtw9aKGU5roJXoNCIUCpgDJFMhoBd2PWfHJw7JB6NZma
-         DZF2/4JIQph6nP1DCmrZL5kGGxbdqpuxZJ6PYurRlQP1WojuNMouhZun5pQ33vQYfPQs
-         q8rA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=hsPwLhsDZInozncTdS3m6Cc033xIb80Yu7bEmy4I9fE=;
-        fh=L6H7EPb7hTW+cJ3+u2BMq1G6CAt6RhdOe/toZLWtnj4=;
-        b=kux7tFmBSru57IR1eHYRELrFRTQX3Zpx2IFE5f8KRFN0caN+izdFgaOGexAJVi1Bky
-         EN4RJvdS2qVA1GVF7NSET64XvTS86rdTRabByGH6Kl+WhIsx0juWU6V4qj4gRpGydfyz
-         BhrEOouJftAWU1t7Cj9Eue2AGlMoPj8wjnenNn/SvvbtyRrGmMegH9XDsYttAEL2n0Am
-         RmAWUrHGV1/8NzkCUOIkmwd1dTApWZIGxWrhggDOaL6hIfeju0GJKJityluD/QSZk0NL
-         Kmri+SzeJW48vyOs1ImKULUH0O0s2Tm9Vm3KapgFVuA2LobRqKctFRtC0wMoqX8QPCkS
-         gVmg==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1791996282; x=1792601082; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=hsPwLhsDZInozncTdS3m6Cc033xIb80Yu7bEmy4I9fE=;
-        b=QZiQ5K8jQS8c949kRNpughGR9WWy4btWTYHZGNXc654GHpYaL8dHxAh4wIe0laM53f
-         VMEnVJsRV6o86NzBY2sy20wn3BmrO9dg1glfQ3Vdw688ZCYUlhI/eEELznpt6ZL2kFn0
-         wHY+BYR6/cTM+625kBRC1SqZ+AIqRaUvJUeiovbpEXBKtZ8D1VIxMp1ZIlJv4e9bVCs3
-         JQGVANAhRE4oBuF7xLUtstqhCTtJv3+6cCD1C7PlGssQbsLvrPkt7iskv+YwzchT5CfM
-         T8QRxxVw7T7VR9MUsNAibUP28CemzTjuzUNn7neN0R9TdIbPEOuaeFqJK4bISywJ3X7Y
-         ND3g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791996282; x=1792601082;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=hsPwLhsDZInozncTdS3m6Cc033xIb80Yu7bEmy4I9fE=;
-        b=CQTDmgyxTEGHqQgCACe1qC0k3tDUWeobw/vjGx8sEn2kvTNj5Gs2fzU+oP3KO3YC5R
-         x0yHiqVsjSNFWj7mdTAv0hS6fE66Uo04KfzM/SiGp2z7CoITsG5XOEbITFEKZxg1zwSz
-         lB3hhma/Y82jPq/sb1s2yEoN5oBrCptSOPXSz1NIzf1mVtYmDJyzDsdt6F9omRpRZwGR
-         rGvB+41tkzxB7s797YAwV06yrS1BnpvlrDbDdeS6vIdgEAEdDvr8d3cfLXlELQ6AuImM
-         Tr93Y2/7kOP/RL0al3JlIjwmh7DfqrErqxyebz7BG+CASgdsVMQarY5JwaDl8E0c8DFe
-         dyuQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxEiKWymhycGp1x7tnPaJ0kxsHzEKUp35Qe55XBLSn5Wg+ZqhaCIYm7JuETu8Rw8ItkgUElwLB2Iz0=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYK3A9Ke5CSTPJa76ORoVHZX14qQJZXhO8DM96tmWzAHdF6Kbi6E
-	9o0iZQJrwSAE4j3boQ0LV9cu4NBMu3u6KqYeJPSqq1384ExKBfwjFsA7VFYFgTihGpG4dIcVYKg
-	qilAwbFCspkIp3+1C/qJusNpC8aMxg/FXUFW5jCcm
-X-Gm-Gg: AYBFou2SvdscWqUXPLi5zJAr2dLxZbPY1L9krAMGz7XvJr4nBHyqLVcnNThykQwBasv
-	C0bv/VHVjUdtubjbSG/f36hrlz1VNtlduxQitGeR2OTaP9BHMCSoupaatZpm+yXABYFpWPA1QL9
-	/o/FBJkodzdrhmc5PT+zQ0h3zWpm82rnSKe0nAamkWY9oEP+A6XsnYpnPk0QDC48FCJqdqR+WrK
-	X43uumz1dNLC82ap5nu0qz7No6wQ8i8MZGKEO0jD/7VZz7DGS223QPfL1F6wkS/3a0R3J3CSSzI
-	oiUfdJNgV5hQfJwVapRlBi10F+GDKWjWSau4x3tUlfZqzQ0FpbOQMMmev3H5Fb8MrAMyY7/EMMH
-	xizI3v2zSzQMLsIs/+IRuG3smoDQ3Be2f4sbaDjO+XFmV9GazKC6BM4GabYhyyzLTIXHRw6pOGd
-	Vf7KkHuDYRJ2E7J6vHNbEt8ePROJj0paW2zeWYHFw6kpb85iiQJNmb
-X-Received: by 2002:a05:600c:354a:b0:49c:d019:70c5 with SMTP id
- 5b1f17b1804b1-4a18e3ef23cmr329192565e9.0.1791996281614; Wed, 14 Oct 2026
- 09:44:41 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=eJ2IsZxNtYLq4D15UVisMaarAvx5i1eeBT44+IuIkLY=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=mR4OnDzTWpGMkUwTOOOla+8PQADmEIKeRid7by/FY9wKP/7TTXLOI7YkISBTTwwrUof/1/JhD
+ Ol92U75se7xV7DQ2OBwkgcWpz6OOcxXtAFrM1XbXqrxJX5JUijYUmE4KxfLiMcG4+vq2vu4lH4b
+ jGf+VFncSqCFdEhH1YDuIRz1HtrlxjoB+wJjtXnJDtpOGC9tUBkZWR40BmapgiSepQFRy4RCJ4Z
+ I3ZIKPRuBMGWDk8CzdUVBI//4e3OO5Om2JqmjmivaG5hiZk1hHXB+P5lz2ZS2AB0KZODy8wzVaT
+ iVusL4VBVFxwVILZtvlS636LBHToanqGxx3uWwvLnPvg==
+X-Zone-Loop: fb5f1280fceee81298920fe136c0f589117817b8d174
+x-campaign-type: default
+x-transaction-id: 6aa0b9e4-f386-490a-a017-c06356cef225
+x-swg-uid: 01-0e827c5e-9033-456f-b1ea-1475779ac107
+X-Mailer: Sweego
+Message-ID:
+ <1791996314.8631fc262581453bbf619ec5b2062170.1a13b4dc2b50008425@vates.tech>
+x-swg-bid: 1791996314.8631fc262581453bbf619ec5b2062170.1a13b4dc2b50008425
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
 MIME-Version: 1.0
-References: <20261013223946.1836757-1-irogers@google.com> <20261013223946.1836757-2-irogers@google.com>
- <CANiq72mLUh1JB=9e=tqStuL_H3=Ormx5v-uFkCDp-0zZm7tBrQ@mail.gmail.com> <202610140937.B68C8C9AAC@keescook>
-In-Reply-To: <202610140937.B68C8C9AAC@keescook>
-From: Nick Desaulniers <ndesaulniers@google.com>
-Date: Wed, 14 Oct 2026 09:44:29 -0700
-X-Gm-Features: AclHuK9LUe2FvddsKjj0vYiArabpm2vrSaqioSsrjl7koqqOn_VyYRh6l-6milM
-Message-ID: <CAKwvOdm6nO6skW4-AZtmzpGoNyO126L_AN3Mz2fu23+3QXcshg@mail.gmail.com>
-Subject: Re: [PATCH 01/11] Compiler Attributes: Add __require_explicit_initialization
- macro
-To: Kees Cook <kees@kernel.org>, Ian Rogers <irogers@google.com>
-Cc: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>, 
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>, "Rafael J . Wysocki" <rafael@kernel.org>, 
-	Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>, 
-	Nathan Chancellor <nathan@kernel.org>, Bill Wendling <morbo@google.com>, 
-	Justin Stitt <justinstitt@google.com>, Jonathan Corbet <corbet@lwn.net>, 
-	Madhavan Srinivasan <maddy@linux.ibm.com>, Michael Ellerman <mpe@ellerman.id.au>, 
-	Nicholas Piggin <npiggin@gmail.com>, Christophe Leroy <chleroy@kernel.org>, Nayna Jain <nayna@linux.ibm.com>, 
-	Yoshinori Sato <ysato@users.sourceforge.jp>, Rich Felker <dalias@libc.org>, 
-	John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>, Viresh Kumar <viresh.kumar@linaro.org>, 
-	David Teigland <teigland@redhat.com>, Alexander Aring <aahringo@redhat.com>, 
-	Juergen Gross <jgross@suse.com>, Stefano Stabellini <sstabellini@kernel.org>, 
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>, Heiko Carstens <hca@linux.ibm.com>, 
-	Vasily Gorbik <gor@linux.ibm.com>, Alexander Gordeev <agordeev@linux.ibm.com>, 
-	Christian Borntraeger <borntraeger@linux.ibm.com>, Sven Schnelle <svens@linux.ibm.com>, 
-	Richard Weinberger <richard@nod.at>, Zhihao Cheng <chengzhihao1@huawei.com>, 
-	Felix Kuehling <Felix.Kuehling@amd.com>, Alex Deucher <alexander.deucher@amd.com>, 
-	=?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
-	driver-core@lists.linux.dev, llvm@lists.linux.dev, 
-	linux-hardening@vger.kernel.org, linux-doc@vger.kernel.org, 
-	linuxppc-dev@lists.ozlabs.org, linux-sh@vger.kernel.org, 
-	linux-pm@vger.kernel.org, linux-acpi@vger.kernel.org, gfs2@lists.linux.dev, 
-	xen-devel@lists.xenproject.org, linux-s390@vger.kernel.org, 
-	linux-mtd@lists.infradead.org, amd-gfx@lists.freedesktop.org, 
-	dri-devel@lists.freedesktop.org, linux-kernel@vger.kernel.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-d62444/1791996283-1E07B757-BF507E53/0/0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v6 1/4] xen/riscv: probe the PTE A/D bits update scheme
+ at boot
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, xen-devel@lists.xenproject.org
+In-Reply-To: <db0d448a-ff1f-4549-84f1-c53e3e4a711e@suse.com>
+References: <1791885904.8631fc262581453bbf619ec5b2062170.1a134b909b40008425@vates.tech>
+ <1791886038.8631fc262581453bbf619ec5b2062170.1a134bb169d0008425@vates.tech>
+ <21a48f53-385b-4f36-958c-cc82bf390c89@suse.com>
+ <1791901979.8631fc262581453bbf619ec5b2062170.1a135ae53690008425@vates.tech>
+ <7ed5d117-80d5-4862-af60-c3e0143564ea@suse.com>
+ <1791968412.8631fc262581453bbf619ec5b2062170.1a139a403a30008425@vates.tech>
+ <db0d448a-ff1f-4549-84f1-c53e3e4a711e@suse.com>
+Date: Wed, 14 Oct 2026 18:45:07 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1791996308; l=1796;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=iCrnAvwrcPaAIA79U7FkKQjIY/ERt8PKItSdv5VSwQY=;
+ b=uA8EA/lw96x5EC+Aju+TNdUE8Alxvq0OLuU2apHO2cWQopavBrhuYA5jrSxHqFtpuSjGCRjDG
+ mtHlyxl48WkCBcwGLn4FukqR9dly7yPzXpOZrzH2LLj97TsiF9X0npd
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1791996313556
+X-purgate-ID: tlsNG-c1860d/1791996316-CEF5F87B-8310C79A/0/0
 X-purgate-type: clean
-X-purgate-size: 1366
+X-purgate-size: 1796
 
-On Wed, Oct 14, 2026 at 9:37=E2=80=AFAM Kees Cook <kees@kernel.org> wrote:
->
-> On Wed, Oct 14, 2026 at 01:28:55PM +0200, Miguel Ojeda wrote:
-> > On Wed, Oct 14, 2026 at 12:40=E2=80=AFAM Ian Rogers <irogers@google.com=
-> wrote:
-> > >
-> > > +/*
-> > > + * Optional: not supported by gcc
-> > > + *
-> > > + * clang: https://clang.llvm.org/docs/AttributeReference.html#requir=
-e-explicit-initialization
-> > > + */
-> > > +#if __has_attribute(__require_explicit_initialization__)
-> > > +# define __require_explicit_initialization __attribute__((__require_=
-explicit_initialization__))
-> > > +#else
-> > > +# define __require_explicit_initialization
-> > > +#endif
-> >
-> > The LPC slides mention Clang 14+, but from a quick test in Compiler
-> > Explorer and a `git log --grep` on the LLVM repository to confirm, it
-> > seems the attribute was introduced in Clang 20+, no?
-> >
-> > If that is correct, then it is not available in all LLVM versions we
-> > support (LLVM 17+), so we should add:
-> >
-> >      * Optional: only supported since clang >=3D 20.0
-> >
-> > With that:
-> >
-> > Acked-by: Miguel Ojeda <ojeda@kernel.org>
->
-> Yup, I can confirm, I only see it with 20+ too.
+On 2026-10-14 11:09:58+02:00, Jan Beulich wrote:
+> On 14.10.2026 11:00, Baptiste Le Duc wrote:
+> 
+> In which case it would need to be
+> 
+>     if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) ||
+>          !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu) )
+>         e->pte |= PTE_ACCESSED | PTE_DIRTY;
+> 
+> albeit I have to admit that permitting two contradicting extensions to
+> be exposed at the same time is irritating.
+> 
+> > I see two ways to address this:
+> > 
+> > 1) Keep checking Svade:
+> > 
+> >     if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
+> >         e->pte |= PTE_ACCESSED | PTE_DIRTY;
+> > 
+> >     After resolve_ad_scheme(), the Svade bit is set in every case where
+> >     software has to preset the A/D bits. The only imprecise case is both
+> >     extensions advertised with hardware updating already enabled by
+> >     firmware, where presetting A/D is unnecessary but harmless.
+> > 
+> > 2) Record the probe result in a global, e.g.
+> > 
+> >     static bool __ro_after_init hw_ad_update;
+> > 
+> >     and use:
+> > 
+> >     if ( !hw_ad_update )
+> >         e->pte |= PTE_ACCESSED | PTE_DIRTY;
+> > 
+> >     This is exact in all cases, at the cost of a new global that mostly
+> >     duplicates what resolve_ad_scheme() already records in the ISA bitmap.
+> > 
+> > I discussed with Oleksii and we are fine with either. What do you prefer?
+> 
+> As to 1), see above. For 2), while maybe okay, I think we're better off
+Sorry, I don't fully follow the issue with 1). Compared to what you proposed,
+it only differs when neither Svade nor Svadu is recorded, which cannot
+happen as resolve_ad_scheme() runs before and always records one of the
+two.
 
-Fix up the comment and have a coin, witcher.
-Reviewed-by: Nick Desaulniers <ndesaulniers@google.com>
-
->
-> --
-> Kees Cook
-
-
-
---=20
-Thanks,
-~Nick Desaulniers
+-- 
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
