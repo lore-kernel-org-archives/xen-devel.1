@@ -4,53 +4,57 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0345CC6B2A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 13:03:28 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1449005.1664967 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12BA7CC6B1D
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 13:20:09 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1449042.1664977 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGydY-0008GW-VZ; Wed, 14 Oct 2026 13:03:16 +0000
+	id 1xGytY-0003Bf-DP; Wed, 14 Oct 2026 13:19:48 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1449005.1664967; Wed, 14 Oct 2026 13:03:16 +0000
+Received: by outflank-mailman (output) from mailman id 1449042.1664977; Wed, 14 Oct 2026 13:19:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGydY-0008GP-Sl; Wed, 14 Oct 2026 13:03:16 +0000
-Received: by outflank-mailman (input) for mailman id 1449005;
- Wed, 14 Oct 2026 13:03:15 +0000
+	id 1xGytY-0003BY-9U; Wed, 14 Oct 2026 13:19:48 +0000
+Received: by outflank-mailman (input) for mailman id 1449042;
+ Wed, 14 Oct 2026 13:19:47 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mark.caveayland@nutanix.com>) id 1xGydX-0008Fv-BD
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 13:03:15 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGytX-0003BS-6J
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 13:19:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGydW-00DNFf-OB
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 15:03:14 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xGytW-00DQfe-Bn
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 15:19:46 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mark.caveayland@nutanix.com>)
- id 6acf7d8d-e002-0a2a0a5209dd-0a2a4508bac6-22
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:03:14 +0200
-Received: from [148.163.155.12] (helo=mx0b-002c1b01.pphosted.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <mark.caveayland@nutanix.com>)
- id 6acf7d90-f659-0a2a45080019-94a39b0cff58-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:03:13 +0200
-Received: from pps.filterd (m0127841.ppops.net [127.0.0.1])
- by mx0b-002c1b01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69E8BftW3105948; Wed, 14 Oct 2026 06:03:05 -0700
-Received: from mw6pr02cu001.outbound.protection.outlook.com
- (mail-westus2azon11022125.outbound.protection.outlook.com [52.101.48.125])
- by mx0b-002c1b01.pphosted.com (PPS) with ESMTPS id 4h9nym34su-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Wed, 14 Oct 2026 06:03:02 -0700 (PDT)
-Received: from PH0PR02MB7159.namprd02.prod.outlook.com (2603:10b6:510:16::8)
- by CY5PR02MB8990.namprd02.prod.outlook.com (2603:10b6:930:39::11) with
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6acf8163-e002-0a2a0a5209dd-0a2a45018b24-40
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:19:45 +0200
+Received: from [52.101.193.33]
+ (helo=CH1PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6acf816e-5984-0a2a45010019-3465c121ea9a-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:19:45 +0200
+Received: from PH5P220CA0012.NAMP220.PROD.OUTLOOK.COM (2603:10b6:510:34a::9)
+ by CY5PR12MB6059.namprd12.prod.outlook.com (2603:10b6:930:2c::15) with
  Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.23; Wed, 14 Oct
- 2026 13:02:59 +0000
-Received: from PH0PR02MB7159.namprd02.prod.outlook.com
- ([fe80::8e97:bc32:822c:b250]) by PH0PR02MB7159.namprd02.prod.outlook.com
- ([fe80::8e97:bc32:822c:b250%4]) with mapi id 15.21.0522.012; Wed, 14 Oct 2026
- 13:02:59 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.24; Wed, 14 Oct
+ 2026 13:19:36 +0000
+Received: from CY4PEPF000392D8.namprd03.prod.outlook.com
+ (2603:10b6:510:34a:cafe::96) by PH5P220CA0012.outlook.office365.com
+ (2603:10b6:510:34a::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.4 via Frontend Transport; Wed, 14
+ Oct 2026 13:19:35 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ CY4PEPF000392D8.mail.protection.outlook.com (10.167.247.118) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.522.6 via Frontend Transport; Wed, 14 Oct 2026 13:19:35 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Wed, 14 Oct
+ 2026 08:19:28 -0500
+Received: from [192.168.31.141] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
+ Transport; Wed, 14 Oct 2026 08:19:25 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,233 +66,576 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=proofpoint20171006 header.d=nutanix.com header.i="@nutanix.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector1 header.d=nutanix.com header.i="@nutanix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	proofpoint20171006; bh=qDGlc4KIzab57tfuuVXGckOObyjamYQELX8K6xpSR
-	Tc=; b=u13z+ITSShFY5YXw19ij7uj3fnF/axBEpukBlCyrJB9/B34H8T4zzV2r9
-	0qbNkiYDFgzJPDUOTJDw5VMVH1HqTQAFess/LnYy/3r0WKEePeRru1DeYDd9WWu0
-	/Bf6vCNVfMN7Tvwq3iOgys7CY++ZcvcCibch+7vts+mqPO7TIQs98FHY1q9VyiWW
-	aJ950BT9gx01DISk4eZgheA1V3eZpBoVCJidBJ9tAz1T1SCzyf0igqi0+CS/zh3N
-	CJfH8j3GYhKENvjiFxogaQIyO5yoS6LSWwC/BnpQnW2VAwojV8OAsD4B3dwUESGe
-	8gL31xOFLPAPTKoA+b4w7Nf0Lk+Ow==
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ySknHBSwSHeRoj4V+l3Ds4EhQmhxPC4aQUzaV2+qr2abKXZtQ0USip7A5KcvZwGAK4wdJFYCM+BcwgS2qthcEKRZtYc4xIsXWdDt+Wjpn5vNzWOW1asna46jBswU6+rtaP3KXiWRul/hWOo8ngK+kQ2v/zPDeiJlfe14jHUy7J5F+PdPP9oth7OV2Ymi3inRkMC9bzNttsDzI3tQ8lWSgubpHanUB4/Mm7qNHgimVup5My2pYqE9MAYfCmga7LuatPu2PgknsEBepCb8jEdLqpdvunswXZ0jLNUILPviy8Qg4XSiMFmMJIbfDcDalmoEnT7zHCf/sG8OO4qK0Nc9xQ==
+ b=nDvc6yct3ZyhiWrD4GBhC2d3gCuHAslkz/hcRb4FSgmr6WlXQGUyaxCEhRLE6WihWC4VgYcOqJloEoX4MbrdqgBUwnumlfgKoTteCwIHCGiHcUC6LXCuAoy/92VwecLZeZyeZE0vMOWqTdPGPEmS1OYJweDrdNEuoBEK5tHT8/QwsTXVzS4t/utzXfIA72JCu0AhIxFRPDcPAQhoTuzYbd4YHdbpVek2dJ4K39TBS9+s4dRu1fAsQzcaZviygIFTvaK4n7ahLyHq9Y9htFaWRbUClc8bq5boFWAnM6ypytAsZ8kE08xtod3P+U8q+tBcQ/NNaQ5C9tDS/YPXUavFbw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=qDGlc4KIzab57tfuuVXGckOObyjamYQELX8K6xpSRTc=;
- b=vAx1Ehmvxp16uZkxUXz1APg/y+IBcUt+K+1CaMZ89yK76U0zqMz23pfi9uQrox4caxZjVLsvcZPidEYPPYVyLj5u+WxB4vHdxZ5Ohwt/qlXuNpLbbV2I/ft9WQXhuLGnt/KU/7/JQJtZOsGqOOzq4hO0JpGvapxz4RQwdn9hkvUfT0xQ2cGYRo2DH9IoRmN+t2OnlZ8nXKHUpXo1WRUQUHcYS9NgpfvdsK3DIxiD/+IhL0c33JnIPYO+dMwyK9nxG63iRFkYCuBjF7B7J8GBUGDPzrcFylhplCmZSfFA+ymOFnue7yYkbo4Mbx+iK6R0vq//ULdZQhpUs60Yp9wvDg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
- dkim=pass header.d=nutanix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
- s=selector1;
+ bh=p6JqJhXRW78SsZJTBP/YdbipCJKRMjtHmjWjEZeUgu0=;
+ b=msCluKa1ryBVdSlCEkbeJ6z7Ohg4Y+44DDlPkpvLocc/jQFEWl0UgzI3wv1nB9MbJFUnKmXPAnJgajK0bxXXkg6hcysVFWh4DZToNhfK/DK2u57MCMgvMkFca6IQn6VaD5zGmvxOO5IGVe+sGbzkG1wLMb2TZ2g9G30BQB+mX4ZkRj93Ml774Fw4ujA/bEMP7Kui2hsS+eGbLHnliRKnh26HijNTT4zciuxuiiW2itLN0c/1EcLmAFAQufYsYUflESy53l3C+xsWnIey4e+0zhFW1WF4gMsJl9G3HDJu6TQq/mDXRGLrrrBnvjas+kovFAZnRoHFTaSDuGdEC1Vuug==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=valinux.co.jp smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=qDGlc4KIzab57tfuuVXGckOObyjamYQELX8K6xpSRTc=;
- b=YXZGSebN/JVJxQe5FUSG7i1JmeeDQLTqAlWS2VlVzlj3tXusbcKU5KfEmKUWW1YEdbV9nIUQruOv10tR6kBvOpx5qlatYjOhEr8ZNccB43A9RitSNWN5lKgPmwl97GiaiVueCEB8zBZUoFL4BI+mRPz+iUn0pGyNnuESENavBALqHYsLpfFA6i1bIBABVTcmKTSlEu+eGHdn2kJ3pfFg1nJfk1kHeFjHOEjHLr9UOZ+9+GvCaLlSwGq7Y7fT70EN8AwE1N86ftUL7VtbsuDAIcoiRa+O+OpIuX6QIuJLSuvG1ADEATADRKJVhxcvdifrJBIprmPxlWF80/YBoltbdQ==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nutanix.com;
-Message-ID: <6ba4cc53-d32b-4b18-af34-f0bcdb8f58a7@nutanix.com>
-Date: Wed, 14 Oct 2026 14:02:54 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 13/22] i8259.c: introduce TYPE_I8259_PIC device
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com,
-        sstabellini@kernel.org, anthony@xenproject.org,
-        edgar.iglesias@gmail.com, qemu-devel@nongnu.org,
-        xen-devel@lists.xenproject.org
-References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
- <20260916104435.600211-14-mark.caveayland@nutanix.com>
- <CAFEAcA-FFiWEs3ZLztVwZ72_TGLuhEBbfKnaZ3NFJJ1W-Wd33A@mail.gmail.com>
- <c444a8ed-eb83-4a69-87e5-57c71f3a6d01@nutanix.com>
- <CAFEAcA8v+pcFz+HsgT9M6xb_16qBKK5FOuf8WupP5KuQK+aNcQ@mail.gmail.com>
-Content-Language: en-US
-From: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-In-Reply-To: <CAFEAcA8v+pcFz+HsgT9M6xb_16qBKK5FOuf8WupP5KuQK+aNcQ@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: BY3PR05CA0004.namprd05.prod.outlook.com
- (2603:10b6:a03:254::9) To PH0PR02MB7159.namprd02.prod.outlook.com
- (2603:10b6:510:16::8)
+ bh=p6JqJhXRW78SsZJTBP/YdbipCJKRMjtHmjWjEZeUgu0=;
+ b=gc9xkidNLFXV+W1HscPVaPyRmnOdkH9eCXzHRLeAbHa2D6rRzOA2PruFhdU3tNrHM7wBYSRc9fV+oSUtPjmE6wU3ENCNeK+2CtByIxo4bBiCgxg5nvQ9PTFB7q/mfJPg5HDYUpqySZ+KhIjNaOSFm2k7sRWGoLZ95vi06pto970=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+Message-ID: <0d892635-2284-40bf-8b0b-3c067d49d465@amd.com>
+Date: Wed, 14 Oct 2026 15:19:31 +0200
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v11 1/4] xen/device-tree: Parse 'cpu-map' node for CPU
+ topology exploration
+To: Hirokazu Takahashi <taka@valinux.co.jp>, <xen-devel@lists.xenproject.org>
+CC: <Mykyta_Poturai@epam.com>, Jan Beulich <jbeulich@suse.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
+ Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger@xenproject.org>
+References: <20261013103616.121916-1-taka@valinux.co.jp>
+ <20261013103616.121916-2-taka@valinux.co.jp>
+From: "Orzel, Michal" <michal.orzel@amd.com>
+Content-Language: en-US
+In-Reply-To: <20261013103616.121916-2-taka@valinux.co.jp>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH0PR02MB7159:EE_|CY5PR02MB8990:EE_
-X-MS-Office365-Filtering-Correlation-Id: d4308393-fb3f-46ac-9b8b-08df29f378de
-x-proofpoint-crosstenant: true
+X-MS-TrafficTypeDiagnostic: CY4PEPF000392D8:EE_|CY5PR12MB6059:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0f6be8fd-1012-49bc-f6eb-08df29f5ca80
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|366016|376014|6133799003|10067099003|22082099003|18002099003|4133799003|4143699003|261009223027099003|56012099006;
+	BCL:0;ARA:13230040|36860700016|1800799024|23010399003|7416014|376014|82310400026|56012099006|4143699003|11063799006|261009223027099003|260925021911599003|260925021311599003|260925022911599003|10067099003|22082099003|18002099003|6133799003;
 X-Microsoft-Antispam-Message-Info:
-	ZN+RIySVFW8i7GbMof/ZfOWqved2PPoD7wypBQymXTbkaL7604FMcWF+XiZ01yoqP1gFVQ86ty2IyxEK1/7+IZYWtlHMjqhT5GOFmFEksgtUoG4e6JlaJpmTbe5kDGFaSviUNiWZIWJU6/HmgyCebKZGAuYLzNBqnZ47hroHUrAryw7yQA34aVczTSOMBJb4ah+y20ff6TNS9mBWErTmUyO3341TDPF4zPazahfz1rKNjZDAW2LlhL4/r5OYFE90sDMlkAaCw8M2Xv8IAouBF9l2w/HaUGDN4IByuVRt9yJMwkidoFneidR9ZwwKt9pPLzos3hUqqkiKF1SXg9kL26X2+lj/jDA7wc00OjS37/PVJFN/yvSuVzVwVKzuEx3z91gRsgRV44TJP+iyHH6xgdfHukqeiuyMGOboF833YRAGAKTPm5KLi3xzJlbQZAtUFHP9cS9xkJIqUOpgya1GAb97QYLhdmsdRcmUszG4eYEsHD/hT9mEcDb15EulkYh05wsFwRTsYMKjjjZKgI86ZJ6/HYv73bWsUTLGGkKgu5xOWxTAYabJ4Qy3eLrRdSQY+bYzda3FyHjFn7hLhz/aw2BUyGKiBoL10EjJx6/Zm2LQVjFdx4zUkJhq5XgzovBg
+	dnR1mDnCBYnJDI/tciD0KZCOII7mFKuQ/U3K8rD3vUJSRS6J1oazpMqqRVMEL8ZW/yimYdwYVPtnavBq+JyjdfCka6IX7e4m/XX799gRt2hCmvv7LZav426dyhDp1S6v5pmlaQS2nlSCScXaVZPLFbISSdzwWKXKoVJnWoQCSEu6j2PP4nmSV/svZKj9MWL7H8wrWUoDoei7q72h6MDQoMnpiqE00B01NEvuhuUnwdMdwgZvwkJD+pGIfjlHWuIACsXNnuZ9q0/N9PClYcbXJjyOMuEWMg4DkHqE04uUSd/sJzdCMuz2O/feddDVMPZDc/y7poJX1xBZKqxVyM/Jc9Xs62tXowHOsTku9i+kfZ54oS582hNW+9lPGgCIHKCnNek7IOWDXtWWPwXlIyKzMGQVxiUIqSXM+mWhpLymi5VJNGilCNgaxNdhcE1ve2+Dl3YuriQeDqanWSCmany3jiTlGyd4Lh0oIO2jn03X84TdckUgiBviBq6WXTPuTW0i2xvogt1+1xeHq69hUI7xahYAbG/2MTH7IHvWNlvD1cCauT2iDpwCwx22WusNogLdh2X3DxJO9AarlaHjLEpZx79/RxC1A3hhrJz/brY6kj09d48UhHTrxYdpsWPYsf5dsmYe96NAkohG3hhgVLuLLX1kG6JTvr5YevQZq856EEotABkW6r7Cp8vNDkBzaT2mmUg59i0bRMEWiSa2MncyUA==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR02MB7159.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(366016)(376014)(6133799003)(10067099003)(22082099003)(18002099003)(4133799003)(4143699003)(261009223027099003)(56012099006);DIR:OUT;SFP:1102;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(1800799024)(23010399003)(7416014)(376014)(82310400026)(56012099006)(4143699003)(11063799006)(261009223027099003)(260925021911599003)(260925021311599003)(260925022911599003)(10067099003)(22082099003)(18002099003)(6133799003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?REM0bERCQ0VDZXU0NWt5R1BEVFhtRWtySjJIQVNTaU94ckhmZ29aekM5YU9S?=
- =?utf-8?B?WkJ6MmIxU0JNeDJTSlJTbGNvaFpWWHFITGlyd2ViQVZMOC9MU1JPSGtsbklq?=
- =?utf-8?B?MHMrc1JqMTB4L0lVRDNEaEdvSDBlYldIRDhJQjE2TmIrNUJVSHVwck1hZWN5?=
- =?utf-8?B?VWpFT1c5YW5ROWVNSDRoV2dlSmtDR0MyWFh6V0pMTDVqRnI0KzRaSm9uTmhH?=
- =?utf-8?B?M0xOZWphR2VGYTl6Vmg3RmFIa2xQYjE2R1NPRExlT0NEdzhZN1E2SmhZaGRt?=
- =?utf-8?B?TTdmd1JYbkY1dXJLQUJFbkFBZXNHQjNpYWlVU1d2VGFYZEVSYjhtMWoxVDQz?=
- =?utf-8?B?M1ZYTWk0MHZlRWdUV29Iek9VZnVZY0xpUmxleDQ1c2ZUWnlrVU42UEVnbmE0?=
- =?utf-8?B?SXEwQm5uV2VSVkw5bVNmcWdUWmYzdDlXbnlJb1hZaC9QZkpaT1VEVlBpSFBy?=
- =?utf-8?B?SWJ2bC9CNG9ncWFFQ25wTnBPMHJQVldoMG1ZdTBrZ0ZPM2JqNXZNUW9NNzJn?=
- =?utf-8?B?ZVNtRytLS1lVQjMwSWlzSEE0b01OYUtBcXpUbENTZVdLb2VpWFgxUi9GcE4x?=
- =?utf-8?B?ZjAwT3RtSDVrdDBaUU5ubFJiS3pYRk1MRmVJcVVWUFRUMmFabWE3VUxzRHA5?=
- =?utf-8?B?dVVDVnd2ME15R09pK2xRZ1lsdVJKVy93OUlheStQN21UK1JXZHBQK3g2bG9X?=
- =?utf-8?B?Y2U3djdNb2M1R1lUT2FFNkw5L3V2cFpqa3lJMUdLRzhKR0hhc2duTW9JcTV5?=
- =?utf-8?B?bThNK0VJZlFVR29BNFp6SGlxeDczenB1TG4yUzhWc1h6aUVSQWNIMm5rWjdk?=
- =?utf-8?B?TGNNWTI5MUpMUUl5dVNJdDZ4YzdwVGc4aDhFWDVSV1paaVVNcjJKa0RYSWpZ?=
- =?utf-8?B?QjMva3NTeDhDWXJaL211MjdmTHI0TERLZW1kTTJCS2k4V2xYV3Y2RUtnMmFu?=
- =?utf-8?B?UmtRK3o3ZGtEL1REMTJYNnRhd2xYSGw4czd0aSthbDFqdGhscmtFQTVqY3k4?=
- =?utf-8?B?L3l6YzUvbU95NlJzamlGVkpvSUUwaytSMGhjNHRySWQ2dkpHV1pubDlOeE0w?=
- =?utf-8?B?cEV1cER5bUtmSEkrZUo4Tkd1Zzlpb3V5RkpqNHpQbEJFZ1JkZ3NoMjFxMXFN?=
- =?utf-8?B?WjJSR2ZJbUZNYVN1ditURGpaWVpTYXAxaWcxSVhXaUNaREdpdlRwOU9oN1d5?=
- =?utf-8?B?VEQzRkpXbHZkRU5aWkFOQlIwdFNUQVNseS9tMHU0SlYxVVU0UmZZc212SDds?=
- =?utf-8?B?WVNFNHByc2FLQVMzTzMwNnJFU3dLZGVyRS9qMmRNNTRhcnZ6L3NuQ1Q0K2tQ?=
- =?utf-8?B?ODNwYzRjbDUzN0E5SisyRTBlN3ZTWlZHdzV5SEw1am5obEpPeWdIeWZ6cXhV?=
- =?utf-8?B?RS9VaEdrWmpSWjVXQ2xJYXJHSDhvMURVVUhDYzlNT1lCNFYySjZiU1dHT3FN?=
- =?utf-8?B?OVh4V050U0h5Z0lZZDdyV1RKREdZZExYcmlCTXZ2RlVLRzBQZ1gybXZSaHZ3?=
- =?utf-8?B?R0JQT3BMVEk1eDVYSy83S2NWa1l2Wko0SEZ1VDZGUnJTRE9iZyt3QmVuTE5y?=
- =?utf-8?B?R294bHJmaElRenRkd0JNS3Q4M1NUMTErY21FN05PN3RQRGtWTzBDbFBRYklm?=
- =?utf-8?B?V2VrNng4WjNRakxqM0dtWHMxMVhoMWlyZTZNQVdYTzd4MHc3MzFGR3JaczUw?=
- =?utf-8?B?bjZ6bi9oUU5ueTJuRDMzaWRrUXowblJoNHlNK1FSaWxmM1pzekd4VjlWbW5P?=
- =?utf-8?B?aUVvNlkwaUtSOFlTVWFXMlRsLzh3bi9rbHByWjVUVkY1Z3cwc1c3OWhxZmhl?=
- =?utf-8?B?TWtaNzQ0ME9lUGxnSXZwcTgzTnBUZEg0SndST1JpQkpjTEZBSmsyTnIzZ214?=
- =?utf-8?B?YTlzNzBOQlVtNUgrMy8xZWY1RVUzZ1MwMG1oei9uK3lWUjlMVHFNVmdDa1BY?=
- =?utf-8?B?ek1ZNlNQdWxVVFd3UmlpbHVKMW5iM05QUDJIdnJyRWVqbWtqQSszbVVPM2Q5?=
- =?utf-8?B?d2tlSGowM0lUdmRVOW1MbmYrOWxHL1JuTVhIWTBBZkpMOHMzQjBJNDkvcTdj?=
- =?utf-8?B?eTVsTVBZVjhBQ21LSU5FQUVYSnBJYjA5ZXpLdkVhd2xpNm5HMXhKdTBmeWlF?=
- =?utf-8?B?YzlGSExNSmJ2UjgyUnFrUit1azc3RlVHZnBDMDE1SHdsZWpRWGJNWWttL3dq?=
- =?utf-8?B?QmVJZi82T3R2NWZvTGFwY0hpYjlEYmF2dnNJMS9qVVZFVzRVMGVPWkg1YjRV?=
- =?utf-8?B?Z1Q2ZVRTVlBXeVVJRkV6OHMvQkduN3lWZEJQUkw4YmxZcTJUMVJrRlllQjhV?=
- =?utf-8?B?cnh5dEoySVB4bm5oeXBuZ0xUN0I3MXNpWmcyWWhzODNOY2xiRnVFUWZSUTVl?=
- =?utf-8?Q?ATSfPCxzzxeXMkpQ=3D?=
-X-Exchange-RoutingPolicyChecked:
-	e9R+OkF3PBriXHmQQNCm7ZLGCxdF8prQuqbByNmykjaBokaUhoyYGRuOXzWyACYdFdstYgua+Q2bkyor1Or6Pi/oPWxSTwMFh8zogqFSA3QK1BfdyIgNei2UL2hWFPd+Cn86r4pFyveOiRPiFg2l5RfhsOM/31mRFrgyHbfocUrVLY4d1sBUsyQjvRHD5CP+TqVfJEOg8j8+kzuznX+S6H53lgg1f+Zz9Zp1VM6BVig3dxjmFzt0dHPaTedIiH4IY/5AhryJQJ9nTkWH+uvyhI7IYcMB2W2wgZS6Y0WSWp0KMG40MMs1+3zMTT7dG2KF/pCEUGlDwXp820ydNqfLZw==
-X-OriginatorOrg: nutanix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d4308393-fb3f-46ac-9b8b-08df29f378de
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR02MB7159.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 13:02:59.2927
+	Ac1AS5P+8+9bZI+RZQCBzHipr8mhlSL6JkuL/qMkGmrjy0XD32rnoySIhVCIwjOlOTw3gF2JMrX4dQv4zeAgajtkzh1au91VFxVzk8iQkj8gClFzhKUb8DC14jAw8XMJVKBy81d+bcw6Mp/K8IlDAGMcdxAiFmFYwfdmyUA78lG6ZOF7EC07c0uo00fA8ZkIt9wIlFONSduLMtpjs4YJhBNVm5X1ft1czFk+pCKR8LfBTnEHVAtHkTxE/UUDIX+K60IqLUVffvcQnGnaHw02OH2PFTce+GTsMY9T1a46NGqpEs7OYFtKwtOP2hH8RsIAemvYBqbsZycSeR5L1t0NcHOrOOZYh95PsM+cQu3OCAWbTDfXZRa2uTKa+LBNja3R68Kvm6fwK+oQj+tzaghAFZnO0VW9CJx1DOmjBrCHb70hahGX2FhyHbLg/DOQxqeh
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 13:19:35.0178
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: bb047546-786f-4de1-bd75-24e5b6f79043
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 0RHBt+GOa8Tl6cFGptCPah/OmwUXy5sStUgWsSAMyeqy/je6ZcydZSlodriOIj9mU7foXFPG7bk/6lDIoaCqVNpgEW5IHazT3mWNTsEymZI=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR02MB8990
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA1MSBTYWx0ZWRfX0ytvvr2/isaJ
- 7PZvb0eyPzxqAv3Wjt34MzLpp4KX4gr2SgrvgeXdWwPyHTaoeAGhNhlnDnLoLQ3iACvSeFBEeO5
- XDDD4HB+HZ6LtBAAHDGuHYrMrGxDqe2Qwr7X/gbkfUGxiL7RGYGACirIHXuL2KOFVEWDMPA9qsk
- BYQqtHTUgfTfifRTHYgtwjw5rfCnb9lA6CvmbHMTQZ7MKvo5yLTUZoJchCYihI6jACUOZsLOlUv
- +1BFQCRNhwXmWDGfYHqgCz6d+BI3DhToOgjltAWWuxFRDbF8jwxPn8HEayYs1AvN7khmPhNiC0T
- NmyApAcE3PGEeJ9q1scnX2kSfK9A8p28cq+YrcKfc8E3pduukt2jiCnvEDKEJUTFNKyU4KJ8/j3
- UISoSxQ/EsjCPZkYlpG6hfMVbFKLZA==
-X-Proofpoint-ORIG-GUID: 6aE_isPI4W8_4juOeydGyVoMAkX5V_KX
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA1MSBTYWx0ZWRfX+7TpWsvdhLN7
- WJQoDJZY0vwup4hVoHqjuKICg0DUDX9JzNGMv7UDafNzRN4i76+xrMxUi6wlCmyQbYmUS+TQAna
- e4qO3A+G2RuzE8heaA4dTmUfHWK9u2E=
-X-Proofpoint-GUID: 6aE_isPI4W8_4juOeydGyVoMAkX5V_KX
-X-Authority-Analysis: v=2.4 cv=OIuyTiaB c=1 sm=1 tr=0 ts=6acf7d86 cx=c_pps
- a=qTO11YbfUBYfkhAk4rXMnw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=0kUYKlekyDsA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=VofLwUrZ8Iiv6rRUPXIb:22 a=jxMXjlTPpCISP5mWtjnE:22
- a=ID6ng7r3AAAA:8 a=UXIAUNObAAAA:8 a=64Cc0HZtAAAA:8 a=vTBCZPzhfYM-r4PNrEoA:9
- a=QEXdDO2ut3YA:10 a=AkheI1RvQwOzcTXhi5f4:22 a=a1s67YnXd6TbAZZNj1wK:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
-X-Proofpoint-Spam-Reason: safe
-X-purgate-ID: tlsNG-c1860d/1791982994-D6D4087B-8D61B406/0/0
-X-purgate-type: clean
-X-purgate-size: 3677
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0f6be8fd-1012-49bc-f6eb-08df29f5ca80
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CY4PEPF000392D8.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR12MB6059
+X-purgate-ID: tlsNG-d62444/1791983985-BD87F757-F7F9D34C/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 16834
 
-On 14/10/2026 13:04, Peter Maydell wrote:
 
-> On Wed, 14 Oct 2026 at 12:09, Mark Cave-Ayland
-> <mark.caveayland@nutanix.com> wrote:
->>
->> On 13/10/2026 17:17, Peter Maydell wrote:
->>
->>> On Wed, 16 Sept 2026 at 11:50, Mark Cave-Ayland
->>> <mark.caveayland@nutanix.com> wrote:
->>>> +struct I8259PICState {
->>>> +    DeviceState parent_obj;
->>>> +
->>>> +    qemu_irq pic_out_irq;
->>>> +    qemu_irq pass_irqs[ISA_NUM_IRQS];
->>>> +
->>>> +    ISABus *isabus;
->>>> +    IRQState i8259_primary_out_irq;
->>>> +    I8259CommonState i8259[2];
->>>
->>> This allocates only enough space for the common base class's
->>> instance struct, but later we do an object_initialize_child()
->>> of the child class. If the child class's state struct is
->>> ever bigger than the common class, this will break.
->>
->> That's true. In theory this should be something like I8259State, however
->> I didn't think it was worth adding a specific
->> OBJECT_DECLARE_SIMPLE_TYPE() if there were no extra fields. I did
->> quickly check that if this happens, then the assert() in
->> object_initialize() fires so if this did happen then we'd find out
->> really quickly.
+
+On 13-Oct-26 12:36, Hirokazu Takahashi wrote:
+> Parse the 'cpu-map' node in the Device Tree to extract CPU topology
+> information. If the 'cpu-map' node is absent, simply ignore it.
 > 
-> I think that every QOM class ought to define its own instance
-> struct, even if it doesn't contain anything beyond the base
-> class. This means that when we do need to add a field in future
-> we don't have to go around and find the places which currently
-> use the parent-class struct but really want the leaf-class
-> struct. (There are places where we don't catch mistakes like
-> this -- for instance I think if you don't update the
-> .instance_size in a type then that doesn't get noticed:
-> we've had a bug or too like that).
+> Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
+> Reviewed-by: Jan Beulich <jbeulich@suse.com> # common, acpi
+> ---
+> Changes in v11:
+>  - When parsing the Device Tree, ignore CPU nodes if the corresponding
+>    physical CPU failed to boot, rather than treating it as an error.
+>  - Drop the dependency on UNSUPPORTED for CPU topology support.
+>  - Print an error message if memory allocation fails in init_cpu_topology().
+>  - Fix a compilation error involving cpumask_set_cpu().
+>  - Call map_cpu_to_dt_node() to record the CPU ID to DT node mapping only
+>    when arch_cpu_init() succeeds, or if the CPU is the boot CPU (treated
+>    as successful since the boot CPU is already up and running).
+>  - Use XENLOG_ERR as the log level for error messages emitted when DT CPU
+>    topology parsing fails.
+>  - Add ASSERT(cpu_topology) to acpi_init_cpu_topology() for consistency.
+>  - Code cleanups:
+>    * Use dt_node_name_is_equal() instead of dt_node_cmp().
+>    * Drop redundant "ERROR:" and "WARNING:" prefixes from log messages.
+>    * Move header file includes into #ifdef / #else blocks where they are
+>      actually needed.
+>    * Adjust spacing to comply with the Xen coding style.
 > 
-> We don't write that down in https://urldefense.proofpoint.com/v2/url?u=https-3A__wiki.qemu.org_Documentation_QOMConventions&d=DwIBaQ&c=s883GpUCOChKOHiocYtGcg&r=c23RpsaH4D2MKyD3EPJTDa0BAxz6tV8aUJqVSoytEiY&m=_sMHrUpIgbF65xjh0xd4r-zuudhThxapWCIXp0orT8OH8CbTHKgmaw4SuUcNTpeW&s=9mPS_zIx9x3FD_6cxEpVK-5JyOlynQ3bsBTf44iWLPk&e=
-> but we do have some similar rules about class structs that
-> boil down to "either you're a leaf class and provide none
-> of these things, or else you should provide them all; don't
-> have a halfway-house 'we happen to only need X and Y but
-> not Z right now' setup".
-
-Yes, that's fine with me. I have done it that way previously, however 
-there are some people on-list still advocating for the approach in this 
-series.
-
-If we decide that this is our preferred style then I think it's worth 
-documenting in somewhere in 
-https://qemu.readthedocs.io/en/master/devel/style.html#qemu-object-model-declarations 
-so that we can point people (and LLMs) towards it.
->>>>    static const TypeInfo i8259_type_infos[] = {
->>>>        {
->>>>            .name       = TYPE_I8259,
->>>>            .parent     = TYPE_I8259_COMMON,
->>>>            .class_init = i8259_class_init,
->>>>        },
->>>> +    {
->>>> +        .name          = TYPE_I8259_PIC,
->>>> +        .parent        = TYPE_DEVICE,
->>>
->>> Devices that directly inherit from TYPE_DEVICE are awkward,
->>> because they never get reset. Conviently this device doesn't
->>> currently need a reset method, but still, is this a good idea?
->>
->> In this case I think it's correct, because the PIC device in this case
->> is a container for 2 cascaded i8259s which are connected separately to
->> the ISA bus. Therefore each i8259 will have its reset triggered via a
->> reset of the ISA bus.
->>
->> The container itself can't exist on the ISA bus because it would then
->> appear as a separate device which doesn't make sense in this case.
+>  xen/arch/arm/Kconfig                  |   1 +
+>  xen/arch/arm/setup.c                  |   3 +
+>  xen/arch/arm/smpboot.c                |   6 +
+>  xen/common/Kconfig                    |  22 ++
+>  xen/common/Makefile                   |   1 +
+>  xen/common/cpu-topology.c             |  69 +++++
+>  xen/common/cpu.c                      |   5 +
+>  xen/common/device-tree/Makefile       |   1 +
+>  xen/common/device-tree/cpu-topology.c | 352 ++++++++++++++++++++++++++
+>  xen/drivers/acpi/Makefile             |   1 +
+>  xen/drivers/acpi/topology.c           |  43 ++++
+>  xen/include/xen/acpi.h                |  13 +
+>  xen/include/xen/cpu-topology.h        |  34 +++
+>  xen/include/xen/dt-cpu-topology.h     |  35 +++
+>  14 files changed, 586 insertions(+)
+>  create mode 100644 xen/common/cpu-topology.c
+>  create mode 100644 xen/common/device-tree/cpu-topology.c
+>  create mode 100644 xen/drivers/acpi/topology.c
+>  create mode 100644 xen/include/xen/cpu-topology.h
+>  create mode 100644 xen/include/xen/dt-cpu-topology.h
 > 
-> OK.
+> diff --git a/xen/arch/arm/Kconfig b/xen/arch/arm/Kconfig
+> index b9c5c40678..3d0f689220 100644
+> --- a/xen/arch/arm/Kconfig
+> +++ b/xen/arch/arm/Kconfig
+> @@ -19,6 +19,7 @@ config ARM
+>  	select HAS_ALTERNATIVE if HAS_VMAP
+>  	select HAS_DEVICE_TREE_DISCOVERY
+>  	select HAS_DOM0LESS
+> +	select HAS_GENERIC_CPU_TOPOLOGY
+>  	select HAS_GRANT_CACHE_FLUSH if GRANT_TABLE
+>  	select HAS_SHARED_INFO
+>  	select HAS_STACK_PROTECTOR
+> diff --git a/xen/arch/arm/setup.c b/xen/arch/arm/setup.c
+> index 2cd1c021b5..c1aa06bd31 100644
+> --- a/xen/arch/arm/setup.c
+> +++ b/xen/arch/arm/setup.c
+> @@ -10,6 +10,7 @@
+>  
+>  #include <xen/bootinfo.h>
+>  #include <xen/compile.h>
+> +#include <xen/cpu-topology.h>
+>  #include <xen/device_tree.h>
+>  #include <xen/dom0less-build.h>
+>  #include <xen/domain_page.h>
+> @@ -375,6 +376,8 @@ void asmlinkage __init noreturn start_xen(unsigned long fdt_paddr)
+>      nr_cpu_ids = smp_get_max_cpus();
+>      printk(XENLOG_INFO "SMP: Allowing %u CPUs\n", nr_cpu_ids);
+>  
+> +    init_cpu_topology();
+> +
+>      /*
+>       * Some errata relies on SMCCC version which is detected by psci_init()
+>       * (called from smp_init_cpus()).
+> diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+> index 8c9072f3c1..089c997f38 100644
+> --- a/xen/arch/arm/smpboot.c
+> +++ b/xen/arch/arm/smpboot.c
+> @@ -9,10 +9,12 @@
+>  
+>  #include <xen/acpi.h>
+>  #include <xen/cpu.h>
+> +#include <xen/cpu-topology.h>
+>  #include <xen/cpumask.h>
+>  #include <xen/delay.h>
+>  #include <xen/device_tree.h>
+>  #include <xen/domain_page.h>
+> +#include <xen/dt-cpu-topology.h>
+>  #include <xen/errno.h>
+>  #include <xen/init.h>
+>  #include <xen/mm.h>
+> @@ -245,6 +247,10 @@ static void __init dt_smp_init_cpus(void)
+>          }
+>          else
+>              tmp_map[i] = hwid;
+> +
+> +        if ( (rc >= 0) || (i == 0) )
+Please add a comment explaining the second part i.e. boot CPU may lack enable
+method.
 
-ATB,
+> +            /* Pass the info to dt_init_cpu_topology() */
+> +            map_cpu_to_dt_node(i, cpu);
+>      }
+>  
+>      if ( !bootcpu_valid )
+> diff --git a/xen/common/Kconfig b/xen/common/Kconfig
+> index 5b289e444f..fb42f0aa8b 100644
+> --- a/xen/common/Kconfig
+> +++ b/xen/common/Kconfig
+> @@ -140,6 +140,9 @@ config HAS_EX_TABLE
+>  config HAS_FAST_MULTIPLY
+>  	bool
+>  
+> +config HAS_GENERIC_CPU_TOPOLOGY
+> +	bool
+> +
+>  config HAS_IOPORTS
+>  	bool
+>  
+> @@ -194,6 +197,25 @@ config VM_EVENT
+>  config NEEDS_LIBELF
+>  	bool
+>  
+> +config GENERIC_CPU_TOPOLOGY
+> +	bool
+> +
+> +config DT_CPU_TOPOLOGY
+> +	bool "Device tree based CPU topology support"
+> +	depends on HAS_GENERIC_CPU_TOPOLOGY && DEVICE_TREE_PARSE
+> +	select GENERIC_CPU_TOPOLOGY
+> +	help
+> +	  Retrieve CPU topology information from the device tree to optimize
+> +	  vCPU scheduling.
+> +
+> +config ACPI_CPU_TOPOLOGY
+> +	bool "ACPI based CPU topology support"
+> +	depends on HAS_GENERIC_CPU_TOPOLOGY && ACPI
+> +	select GENERIC_CPU_TOPOLOGY
+> +	help
+> +	  Retrieve CPU topology information from the ACPI PPTT to optimize
+> +	  vCPU scheduling.
+> +
+>  config NUMA
+>  	bool
+>  
+> diff --git a/xen/common/Makefile b/xen/common/Makefile
+> index f69d47d189..d0eb39a633 100644
+> --- a/xen/common/Makefile
+> +++ b/xen/common/Makefile
+> @@ -5,6 +5,7 @@ obj-$(CONFIG_GENERIC_BUG_FRAME) += bug.o
+>  obj-$(CONFIG_HYPFS_CONFIG) += config_data.o
+>  obj-$(CONFIG_CORE_PARKING) += core_parking.o
+>  obj-y += cpu.o
+> +obj-$(CONFIG_GENERIC_CPU_TOPOLOGY) += cpu-topology.init.o
+>  obj-$(CONFIG_DEBUG_TRACE) += debugtrace.o
+>  obj-$(CONFIG_HAS_DEVICE_TREE_DISCOVERY) += device.o
+>  obj-$(filter-out $(CONFIG_X86),$(CONFIG_ACPI)) += device.o
+> diff --git a/xen/common/cpu-topology.c b/xen/common/cpu-topology.c
+> new file mode 100644
+> index 0000000000..ce50408858
+> --- /dev/null
+> +++ b/xen/common/cpu-topology.c
+> @@ -0,0 +1,69 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +
+> +#include <xen/acpi.h>
+> +#include <xen/cpu-topology.h>
+> +#include <xen/cpumask.h>
+> +#include <xen/dt-cpu-topology.h>
+> +#include <xen/init.h>
+> +#include <xen/xvmalloc.h>
+> +
+> +static void __init free_topology_table(void)
+> +{
+> +    unsigned int cpu;
+> +
+> +    for ( cpu = 0; cpu < nr_cpu_ids; cpu++ )
+> +    {
+> +        free_cpumask_var(cpu_topology[cpu].thread_sibling);
+> +        free_cpumask_var(cpu_topology[cpu].core_sibling);
+> +        free_cpumask_var(cpu_topology[cpu].cluster_sibling);
+> +    }
+> +
+> +    XVFREE(cpu_topology);
+> +}
+> +
+> +void __init init_cpu_topology(void)
+> +{
+> +    unsigned int cpu;
+> +    int ret;
+> +
+> +    if ( num_possible_cpus() == 1 )
+> +        return;
+> +
+> +    cpu_topology = xvzalloc_array(struct cpu_topology, nr_cpu_ids);
+> +    if ( !cpu_topology )
+> +    {
+> +        printk(XENLOG_WARNING "CPU topology table allocation failed.\n");
+> +        return;
+> +    }
+> +
+> +    for ( cpu = 0; cpu < nr_cpu_ids; cpu++ )
+> +    {
+> +        if ( !zalloc_cpumask_var(&cpu_topology[cpu].thread_sibling) ||
+> +             !zalloc_cpumask_var(&cpu_topology[cpu].core_sibling) ||
+> +             !zalloc_cpumask_var(&cpu_topology[cpu].cluster_sibling) )
+> +        {
+> +            free_topology_table();
+> +            printk(XENLOG_WARNING "CPU topology table allocation failed.\n");
+> +            return;
+> +        }
+> +    }
+> +
+> +    if ( acpi_disabled )
+> +        ret = dt_init_cpu_topology();
+> +    else
+> +        ret = acpi_init_cpu_topology();
+> +
+> +    /* Free the CPU topology table if initialization fails. */
+> +    if ( ret != 0 )
+> +        free_topology_table();
+In a previous revision I asked to print an error (except for expected errors
+like -EOPNOTSUPP).
 
-Mark.
+> +}
+> +
+> +/*
+> + * Local variables:
+> + * mode: C
+> + * c-file-style: "BSD"
+> + * c-basic-offset: 4
+> + * tab-width: 4
+> + * indent-tabs-mode: nil
+> + * End:
+> + */
+> diff --git a/xen/common/cpu.c b/xen/common/cpu.c
+> index f09af0444b..9591ada60a 100644
+> --- a/xen/common/cpu.c
+> +++ b/xen/common/cpu.c
+> @@ -1,5 +1,6 @@
+>  #include <xen/cpumask.h>
+>  #include <xen/cpu.h>
+> +#include <xen/cpu-topology.h>
+>  #include <xen/event.h>
+>  #include <xen/init.h>
+>  #include <xen/sched.h>
+> @@ -46,6 +47,10 @@ const unsigned long cpu_bit_bitmap[BITS_PER_LONG+1][BITS_TO_LONGS(NR_CPUS)] = {
+>  #undef MASK_DECLARE_2
+>  #undef MASK_DECLARE_1
+>  
+> +#ifdef CONFIG_GENERIC_CPU_TOPOLOGY
+> +struct cpu_topology *__ro_after_init cpu_topology;
+> +#endif /* CONFIG_GENERIC_CPU_TOPOLOGY */
+> +
+>  static DEFINE_RWLOCK(cpu_add_remove_lock);
+>  
+>  bool get_cpu_maps(void)
+> diff --git a/xen/common/device-tree/Makefile b/xen/common/device-tree/Makefile
+> index 9036e455d6..6ee670b5f4 100644
+> --- a/xen/common/device-tree/Makefile
+> +++ b/xen/common/device-tree/Makefile
+> @@ -1,6 +1,7 @@
+>  obj-y += bootfdt.init.o
+>  obj-$(CONFIG_HAS_DEVICE_TREE_DISCOVERY) += bootinfo-fdt.init.o
+>  obj-$(CONFIG_HAS_DEVICE_TREE_DISCOVERY) += bootinfo.init.o
+> +obj-$(CONFIG_DT_CPU_TOPOLOGY) += cpu-topology.init.o
+>  obj-y += device-tree.o
+>  obj-$(CONFIG_DOMAIN_BUILD_HELPERS) += domain-build.init.o
+>  obj-$(filter $(CONFIG_DOM0LESS_BOOT),$(CONFIG_HAS_DEVICE_TREE_DISCOVERY)) += dom0less-build.init.o
+> diff --git a/xen/common/device-tree/cpu-topology.c b/xen/common/device-tree/cpu-topology.c
+> new file mode 100644
+> index 0000000000..a62f65a41d
+> --- /dev/null
+> +++ b/xen/common/device-tree/cpu-topology.c
+> @@ -0,0 +1,352 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +/*
+> + * Derived from Linux kernel 7.0's $drivers/base/arch_topology.c
+> + * Parse cpu topology information.
+> + */
+> +
+> +#include <xen/acpi.h>
+> +#include <xen/cpu-topology.h>
+> +#include <xen/cpumask.h>
+> +#include <xen/device_tree.h>
+> +#include <xen/errno.h>
+> +#include <xen/init.h>
+> +
+> +#define INVALID_TOPO_ID (~0U)
+> +
+> +struct cpu_map {
+> +    unsigned int thread_id;
+> +    unsigned int core_id;
+> +    unsigned int cluster_id;
+> +    unsigned int socket_id;
+> +};
+> +
+> +static struct cpu_map __initdata cpu_map[NR_CPUS] = {
+> +    [0 ... NR_CPUS - 1] = {
+> +        .thread_id = INVALID_TOPO_ID,
+> +        .core_id = INVALID_TOPO_ID,
+> +        .cluster_id = INVALID_TOPO_ID,
+> +        .socket_id = INVALID_TOPO_ID,
+> +    },
+> +};
+> +static struct dt_device_node *__initdata dt_cpu_table[NR_CPUS];
+> +
+> +static void __init setup_siblings_masks(unsigned int target_cpu)
+> +{
+> +    struct cpu_topology *target_topo = &cpu_topology[target_cpu];
+> +    const struct cpu_map *target_map = &cpu_map[target_cpu];
+> +    unsigned int cpu;
+> +
+> +    /* Update cluster, core and thread sibling masks */
+> +    for_each_possible_cpu(cpu)
+> +    {
+> +        struct cpu_topology *cpu_topo = &cpu_topology[cpu];
+> +        const struct cpu_map *map = &cpu_map[cpu];
+> +
+> +        if ( target_cpu > cpu )
+> +            continue;
+> +
+> +        if ( target_map->socket_id != map->socket_id )
+> +            continue;
+> +
+> +        cpumask_set_cpu(target_cpu, cpu_topo->core_sibling);
+> +        cpumask_set_cpu(cpu, target_topo->core_sibling);
+> +
+> +        if ( target_map->cluster_id != map->cluster_id )
+> +            continue;
+> +
+> +        cpumask_set_cpu(target_cpu, cpu_topo->cluster_sibling);
+> +        cpumask_set_cpu(cpu, target_topo->cluster_sibling);
+> +
+> +        if ( target_map->core_id != map->core_id )
+> +            continue;
+> +
+> +        cpumask_set_cpu(target_cpu, cpu_topo->thread_sibling);
+> +        cpumask_set_cpu(cpu, target_topo->thread_sibling);
+> +    }
+> +}
+> +
+> +static const struct dt_device_node *__init dt_find_child_node_by_name(
+> +    const struct dt_device_node *dt,
+> +    const char *name)
+> +{
+> +    const struct dt_device_node *np;
+> +
+> +    dt_for_each_child_node(dt, np)
+> +        if ( np->name && dt_node_name_is_equal(np, name) )
+> +            return np;
+> +
+> +    return NULL;
+> +}
+> +
+> +void __init map_cpu_to_dt_node(unsigned int cpu,
+> +                               struct dt_device_node *cpu_node)
+> +{
+> +    if ( cpu < ARRAY_SIZE(dt_cpu_table) )
+> +        dt_cpu_table[cpu] = cpu_node;
+> +    else
+> +        printk(XENLOG_WARNING
+> +               "cpu %u exceeds the max cpus %zu\n",
+> +               cpu, ARRAY_SIZE(dt_cpu_table));
+> +}
+> +
+> +static unsigned int __init cpu_node_to_id(
+> +    const struct dt_device_node *cpu_node)
+> +{
+> +    unsigned int cpu;
+> +
+> +    for_each_possible_cpu(cpu)
+> +        if ( cpu_node == dt_cpu_table[cpu] )
+> +            return cpu;
+> +
+> +    return INVALID_TOPO_ID;
+> +}
+> +
+> +/*
+> + * This function returns the Xen cpu number of the DT node.
+> + */
+> +static unsigned int __init get_cpu_for_node(
+> +    const struct dt_device_node *dt_node)
+> +{
+> +    const struct dt_device_node *cpu_node =
+> +        dt_parse_phandle(dt_node, "cpu", 0);
+> +
+> +    if ( !cpu_node )
+> +        return INVALID_TOPO_ID;
+> +
+> +    return cpu_node_to_id(cpu_node);
+> +}
+> +
+> +static bool __init is_cpu_map_empty(unsigned int cpu)
+> +{
+> +    return (cpu_map[cpu].socket_id == INVALID_TOPO_ID) &&
+> +           (cpu_map[cpu].cluster_id == INVALID_TOPO_ID) &&
+> +           (cpu_map[cpu].core_id == INVALID_TOPO_ID) &&
+> +           (cpu_map[cpu].thread_id == INVALID_TOPO_ID);
+> +}
+> +
+> +static int __init parse_core(const struct dt_device_node *core,
+> +                             unsigned int socket_id,
+> +                             unsigned int cluster_id,
+> +                             unsigned int core_id)
+> +{
+> +    bool leaf = true;
+> +    unsigned int thread_id;
+> +    unsigned int cpu;
+> +
+> +    for ( thread_id = 0; ; thread_id++ )
+> +    {
+> +        const struct dt_device_node *thread;
+> +        char name[20];
+> +
+> +        snprintf(name, sizeof(name), "thread%u", thread_id);
+> +        thread = dt_find_child_node_by_name(core, name);
+> +
+> +        if ( !thread )
+> +            break;
+> +
+> +        leaf = false;
+> +        cpu = get_cpu_for_node(thread);
+> +
+> +        if ( cpu == INVALID_TOPO_ID )
+get_cpu_for_node can return INVALID_TOPO_ID also on malformed DTs e.g. missing
+phandle which you now accept. Shouldn't we return -EINVAL?
+
+> +        {
+> +            /*
+> +             * Ignore this CPU node definition as the corresponding physical
+> +             * CPU failed to boot.
+> +             */
+> +            printk(XENLOG_INFO
+> +                   "%s: CPU for thread hasn't started\n", dt_node_name(thread));
+CPU topology is initialized before bringing CPU up, so this message is incorrect
+and there are more than one scenarios we may end up with here. Maybe just "CPU
+not used by Xen: ignoring".
+
+> +            return 0;
+This stops parsing other threads which I don't think is the right way to do it.
+We should just continue.
+
+> +        }
+> +
+> +        if ( !is_cpu_map_empty(cpu) )
+> +        {
+> +            printk(XENLOG_ERR
+> +                   "Duplicate CPU definition for CPU%u\n", cpu);
+> +            return -EINVAL;
+> +        }
+> +
+> +        cpu_map[cpu].socket_id = socket_id;
+> +        cpu_map[cpu].cluster_id = cluster_id;
+> +        cpu_map[cpu].core_id = core_id;
+> +        cpu_map[cpu].thread_id = thread_id;
+> +    }
+> +
+> +    cpu = get_cpu_for_node(core);
+> +
+> +    if ( cpu != INVALID_TOPO_ID )
+> +    {
+> +        if ( !leaf )
+> +        {
+> +            printk(XENLOG_ERR "%s: Core has both threads and CPU\n",
+> +                   dt_node_name(core));
+> +            return -EINVAL;
+> +        }
+> +
+> +        if ( !is_cpu_map_empty(cpu) )
+> +        {
+> +            printk(XENLOG_ERR "Duplicate CPU definition for CPU%u\n", cpu);
+> +            return -EINVAL;
+> +        }
+> +
+> +        cpu_map[cpu].socket_id = socket_id;
+> +        cpu_map[cpu].cluster_id = cluster_id;
+> +        cpu_map[cpu].core_id = core_id;
+> +        cpu_map[cpu].thread_id = 0;
+> +    }
+> +    else if ( leaf )
+> +    {
+> +        /*
+> +         * Ignore this CPU node definition as the corresponding physical
+> +         * CPU failed to boot.
+> +         */
+> +        printk(XENLOG_INFO
+> +               "%s: CPU for leaf core hasn't started\n", dt_node_name(core));
+Same wording issue.
+
+~Michal
 
 
