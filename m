@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A7055CC6B1A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 07:01:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448477.1664510 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 2DCA5CC6B24
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 07:15:25 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448486.1664522 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGsyx-0002Tj-Hh; Wed, 14 Oct 2026 07:00:59 +0000
+	id 1xGtCb-00052t-Mw; Wed, 14 Oct 2026 07:15:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448477.1664510; Wed, 14 Oct 2026 07:00:59 +0000
+Received: by outflank-mailman (output) from mailman id 1448486.1664522; Wed, 14 Oct 2026 07:15:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGsyx-0002Tc-EF; Wed, 14 Oct 2026 07:00:59 +0000
-Received: by outflank-mailman (input) for mailman id 1448477;
- Wed, 14 Oct 2026 07:00:58 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGsyw-0002TW-PV
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 07:00:58 +0000
+	id 1xGtCb-00052l-Jo; Wed, 14 Oct 2026 07:15:05 +0000
+Received: by outflank-mailman (input) for mailman id 1448486;
+ Wed, 14 Oct 2026 07:15:04 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGtCa-00052f-Gh
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 07:15:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGsyv-004IBs-SF
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 09:00:57 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xGtCZ-00C7Sb-Ha
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 09:15:03 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acf28a9-8faa-0a2a0a5109dd-0a2a450bb65e-4
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 09:00:57 +0200
-Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6acf2be4-2eae-0a2a0a5409dd-0a2a4501e748-48
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 09:15:03 +0200
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6acf28a9-b7e8-0a2a450b0019-d1558031b597-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 09:00:57 +0200
-Received: by mail-wm1-f49.google.com with SMTP id
- 5b1f17b1804b1-4a180fbeef5so33649355e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:00:57 -0700 (PDT)
+ id 6acf2bf7-5984-0a2a45010019-d155dd31d452-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 09:15:03 +0200
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-48c02782159so2252464f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 00:15:03 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a18bf135fasm373082645e9.5.2026.10.14.00.00.51
+ ffacd0b85a97d-48de72c7e36sm4538867f8f.37.2026.10.14.00.15.02
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Oct 2026 00:00:52 -0700 (PDT)
+ Wed, 14 Oct 2026 00:15:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,57 +54,54 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791961257; x=1792566057; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1791962103; x=1792566903; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=+cHPWvU8QOywGgl3wB33A3xCPcasAradKrbFRfKRYVU=;
-        b=gcyDBgNw7Fc7IUgUZOj8zvx42TYMsTlNF1YFMI7POUAkCk7LA7hmj9vZpNZ4+//pD1
-         QH0QTLGoVHaOdjvaFT5PjNYH8f2i8ZP3bZICnEQzyf3BuGDv8sSOA73lfl/wCnWWfesA
-         HGZAuNnovhSnSTHjXRtIJ7fqAmSWXYjFPLj2zP6zuy247O1hHq1uTRIyxF89OiH4fUgv
-         5wLgMLJsTpCdLj2y/JLP09RYDMJVPw0fDmtJbmURNznFiKqjHsBvYfjeeZaLm1W0PjuA
-         AN9cX8LlKyvOt4EbTFmLQdJ3vI7ojPTQ7qTgyNz4+jTZAJ8U7+RFWPUUOZnHbUphW9Ws
-         gP7Q==
+        bh=bxNzIOA0qyzKYDaLspqJVplnLUKtqE5X6BfHkmcsHtQ=;
+        b=OgZLMl1jMn2bM7RVnwdzsQ9jaH0XvSA+V3M5Hjdy0yTNkD7u05DgF/1+aG9jg78m7v
+         sU8CdPA8IUue18wPtbL1BBESM8tHMDMNLOhh6+Ps2YsuAwBFyssVR3BXxfHWTnt4YeiQ
+         gz5Df5KikZ316PFLshKNMPkgMRMqg3v4L6VJqTUd7f1qectTMNHR2h8EAJPFXVkzYidi
+         eDt25JmZMpSZsS/r12SW3bNELX2syLFUjMmVGF28bHGM++YpUIy1S2BWRsvoWC93+47c
+         vPBDwYXeAppW9dWXGuYeiH4VpH1APKO4cijkIPl+/QJN+FgEkTO6UH9xAV+p7VYKMeiV
+         7RKQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791961257; x=1792566057;
+        d=1e100.net; s=20260707; t=1791962103; x=1792566903;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=+cHPWvU8QOywGgl3wB33A3xCPcasAradKrbFRfKRYVU=;
-        b=cGzfkKtW3xNDfm4yQ5wOiqdXQ7O9vZe6q0XaY6/NiaALIeeZeeC2nkNKqqgOenDvLW
-         qSrI2pI65J12bArASEgAausRbaNNG6MXszj8LZ8P/09EEkz5+WfTfJwQbd5l/IFUHATN
-         ka/TBKRsp7bwKxOUGNNfmLbR2xrqColIHay+30k5Rr8vJt+qzPd5MAz/KWd/n7fwefT/
-         0lVds90AZrutsKGlgOGdFUriAmLYEYnpspe1AELD8f34kyU87lcdMLnrvX4O4Q29OiF/
-         tNgjJBlCAW7TpmzeRiPyhV1WweF+s76DXbG1CzZp8wVdp2ZC64VWmEKfTI5HRGT6DSxw
-         vhrA==
-X-Forwarded-Encrypted: i=1; AKwUvByOHLXAoK/AlSk4uEAE1++fuUKp3XiHn+qdq9B5SEV/HCwh/PM8NltJZyWOTWXSCcYkCA1G7eSNKHk=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKd8a4l+pYiV9ExpKT+brbmaJv6NsLLE0xK3cf8rgkalWaKhtSd
-	Z2xpfhIPNQBPGiLcaph8gs/EO6kCYoEHT69h+/MYfbw/ki54xTol0spj6knx+Aj58g==
-X-Gm-Gg: AYBFou1jfiTrP1e4emfG9zDKfbHeEt3lhqTn4P4sBUw2Rz0pY46jQB+pZii8aWJjTLT
-	XwbUsZd6ac+h3oMjC7dFz3dnFh+qk78In0xnyRh4bVpRV//yW3DyHvtxwu/KoJ2qewnJ9lW3Hc5
-	4J5k1FqVimSuJdt0esOeV9vlrGi0eXE5ReDpVDcFTrlkr4G2Hr2+ofgau4xsPgrinmu9ywdX70K
-	C60S+BaJT3aC4iUN1s8YCOWMTffumnOhDdy/YVzfqrrIHzLhNrb1/V+t78yAd4+MmdNpQLXqMRS
-	rBzYgifus09UBefYeoufpYiZJrx+LKCpVaPYzOHLr35m3vykVutWAoyou3DPJtrmCwhDfkt3+Qj
-	mmRC0J5OrdDQJ+1c0nhFElW6AR5erBMUlDf7phGbNLsoVWnqHgM59vYul6VfeTrjfi3cQeqX5ec
-	aDNjYwQeWYosXY/1jx5djfWVY5N+8xdkjPpG4uX6VK5/m1E5qU7382SirJ6FuuReNMJ3ggt0Y25
-	CTsPEDB6BCloVZg0dZQ6Ma8Hq+v1dleLi6LmxGlonrF9k7SKNevdmVZub6LGg==
-X-Received: by 2002:a05:600c:4fcb:b0:4a1:811c:8083 with SMTP id 5b1f17b1804b1-4a18e4c3600mr292058985e9.33.1791961254025;
-        Wed, 14 Oct 2026 00:00:54 -0700 (PDT)
-Message-ID: <05f2677a-977d-410f-a150-e24981faea32@suse.com>
-Date: Wed, 14 Oct 2026 09:00:51 +0200
+        bh=bxNzIOA0qyzKYDaLspqJVplnLUKtqE5X6BfHkmcsHtQ=;
+        b=2AiVzAw8GYRN2wNTqBQZdmXkdp5HKxBWmNXngXShXaZdNF5/+bG+NsmDQiJ0mj6f4b
+         4k6o4qxzzMsD9+gzjJZSA91w/hGvs4xEHBsgtXONs1ukBKmbPH7TFD5SsLGkiTUWfubH
+         8ks97lq8FO90dsVXdXbyI+IcsfW2hbgPNNiIqk4lkV/NkiCgoF8zhKE9FzyD3xnhu6IP
+         pZFH32YnVDlrlDF8TSy1loOhj0klelGLMPZaGPH+atKq0p1cgMQ1lq00xzcYhhsxErPM
+         CHDDKIAoHEBowtvt400ZxhAGYKvj5YiTxdBcyTAfI8Sdb4yGb4HwHSkXUOj/DzBCnDhY
+         hGTA==
+X-Forwarded-Encrypted: i=1; AKwUvBxucwYu9Qa1msiZqphRmIeW/EtJPgRRN/qbXyBtp/sB9RuxVjxb1isdIWIb2kcFs56vUmn3Lj6BotI=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJJXp18WZaHy8cSnxNxLZTeQAn7SXoqU7UwHuWgDnygWbV4J0fT
+	m9OBTo5EF5Y/Q9+ptywCQuGLJl0GJg5KUXK+nsUKAaKuHQxXHriKp02LPuyjeAlbwQ==
+X-Gm-Gg: AYBFou3PySMUKTlY02ceprH3BO6OPS90L1IhRL+sH5ejeJYxudIWgmB7wDE7mlFH7Sv
+	/VTkNACDluIQa+MbZphNFNREVK8gRGYnOgqNodA6eOa4+jpSEqapzGUvoE2mtBXLaK1uJFGOlQb
+	ZTt+m+kpj7Zq41X2g5fFCwlFgrA0p0F0oJC/URiN0HRNSpC+lFmlXSxkevwnB0Mej8HFJKmD26U
+	QgcrSjmUQPHjN8X05Uh9PM6n7LhmDOBrIKD44nEjSbFzCoLGiqpgHjLAuyIL8u2EF9+HbrzdzpT
+	2S/03ZhmYw8qWUGSvj9VkIymmETOvIfHuU2g18/S9sQViX0uj37WH9D5UMBI5LT+6kr1fl9id71
+	bRzLMxyHOTalXWf1awlH+KR6s8c9BNIhZEg55vMfQ5vitXtEHJ7rCENonzo6yslxJocTfFfLzzI
+	tTWmwWQz1z9ICb7vq4URPzIp0sh2OpXNlYEYch6mEs7qWMH3hI5VgRtRlYv1zOuTchyJ3SMJGNS
+	pBfvTHBe2v/fxUZS/ARw0zmTcI/1d8GKBgCFm+3h140dyahMX3mkkFjY2qxQQ==
+X-Received: by 2002:a5d:5f50:0:b0:48b:50e:5dc6 with SMTP id ffacd0b85a97d-48dbacda8edmr31931882f8f.34.1791962102667;
+        Wed, 14 Oct 2026 00:15:02 -0700 (PDT)
+Message-ID: <2117afc1-dd75-42e2-80d6-f87b06902554@suse.com>
+Date: Wed, 14 Oct 2026 09:15:01 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] drivers/char: Add several newer PCI IDs for Intel LPSS
-To: =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH] x86/hvm: Fix UB on defensive default case in handle_pio()
+To: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20261013190735.365024-1-marmarek@invisiblethingslab.com>
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <20261013164404.361893-1-alejandro.garciavallejo@amd.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,39 +127,21 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261013190735.365024-1-marmarek@invisiblethingslab.com>
+In-Reply-To: <20261013164404.361893-1-alejandro.garciavallejo@amd.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1791961257-1A8D99EA-CDC70FB7/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1791962103-BC95A757-CAFD034D/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1155
+X-purgate-size: 434
 
-On 13.10.2026 21:07, Marek Marczykowski-Górecki wrote:
-> Include PCI IDs of UART ports on Intel RPL - PTL. Based on Linux driver
-> and hwdata, they all share the same parameters.
+On 13.10.2026 18:43, Alejandro Vallejo wrote:
+> There's a potential 32bit left-shift (when size is 4) to a 32bit value,
+> which would trigger UB and tickle UBSAN the wrong way. Shifting right an
+> all-ones mask fixes the issue.
 > 
-> Signed-off-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+> Fixes: 4609fc8eb04e ("x86/hvm: Improve error information in handle_pio()")
+> Signed-off-by: Alejandro Vallejo <alejandro.garciavallejo@amd.com>
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
-albeit imo better with the subject prefix changed to drivers/ns16550 or just
-ns16550.
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-> ---
-> I tested it on MTL, but given Linux driver handles them uniformly, I
-> assume others work too.
-> 
-> The list gets quite long, would it be preferred to have a macro to
-> reduce (at least similar) entries to one-liners? In Linux driver it
-> looks this way:
->     /* MTL-P */
->     { PCI_VDEVICE(INTEL, 0x7e25), .driver_data = (kernel_ulong_t)&bxt_uart_info },
->     { PCI_VDEVICE(INTEL, 0x7e26), .driver_data = (kernel_ulong_t)&bxt_uart_info },
->     ...
-
-Yes, with a bloat like this it may be nice to get volume shrunk down. In a
-follow-on patch, perhaps. I also notice the Linux driver has uses of
-bxt_uart_info beyond the set we have plus what is being added here (not the
-least, considering the identifier, BXT itself).
-
-Jan
 
