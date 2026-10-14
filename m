@@ -4,35 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 51817CC6B1A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 10:04:35 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448667.1664708 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B1311CC6B1D
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 10:52:22 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1448725.1664761 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGvqT-0005TV-4y; Wed, 14 Oct 2026 10:04:25 +0000
+	id 1xGwaX-0006O7-Ei; Wed, 14 Oct 2026 10:52:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448667.1664708; Wed, 14 Oct 2026 10:04:25 +0000
+Received: by outflank-mailman (output) from mailman id 1448725.1664761; Wed, 14 Oct 2026 10:52:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGvqT-0005TN-1W; Wed, 14 Oct 2026 10:04:25 +0000
-Received: by outflank-mailman (input) for mailman id 1448667;
- Wed, 14 Oct 2026 10:04:23 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xGvqR-0005TH-3P
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 10:04:23 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xGvqR-00000004zsg-0hB6
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 10:04:22 +0000
-Received: from mail-lf1-f50.google.com ([209.85.167.50])
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xGvqQ-00000001NCQ-1mjt
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 10:04:22 +0000
-Received: by mail-lf1-f50.google.com with SMTP id
- 2adb3069b0e04-5ba3b1199f6so3519212e87.3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 03:04:22 -0700 (PDT)
+	id 1xGwaX-0006O0-Bn; Wed, 14 Oct 2026 10:52:01 +0000
+Received: by outflank-mailman (input) for mailman id 1448725;
+ Wed, 14 Oct 2026 10:52:00 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xGwaW-0006Nu-1a
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 10:52:00 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xGwaV-000zxu-EX
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 12:51:59 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6acf5ecb-bab6-0a2a0a5309dd-0a2a4508af28-40
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 12:51:59 +0200
+Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6acf5ecf-f659-0a2a45080019-d155dd29e51f-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 12:51:59 +0200
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-48441a2ba1bso202320f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 03:51:59 -0700 (PDT)
+Received: from [172.20.10.5] (public-gprs376522.centertel.pl. [37.47.102.11])
+ by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48de0514ab1sm14639482f8f.0.2026.10.14.03.51.57
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 14 Oct 2026 03:51:58 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,300 +52,208 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
-	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
-	bh=lVXr+Y5h+UxL9oAD7lAjVkU/fK4+zwKXtYToq+b5Ysc=; b=eugLahXt5Tv++s7ohn1yH+e4zF
-	2Q6cLcTpeXG7YsECYc6fd22pVIo4OGrg4m3SX9rWA86wvaRVHhnxqC96foRfZoYBzGLPqyoN9S44B
-	cJuNFmqvXwMTx/2GmPpbBY12yszIbCHxvWoPmpM+keo09yxPEejqNO+bZqg8TvgO3q0U=;
-X-Gm-Message-State: AFq9FYIbU89Mfm7gHzZoS6AHdiCWJuGaKBW0v0nJIzKlwq9BhbTJFU9f
-	JSJ1xoSLpCQT2DiEaE/iT47XPIgQ5B6D1SVLiYXIRw8TOBMp8x2Ste/kOhnGDe3ZLPHPCEZZb9d
-	NLN6ODqlvorOk2NoUL/pAaJivBtlids0=
-X-Received: by 2002:a05:6512:10d3:b0:5b8:99b1:fa26 with SMTP id
- 2adb3069b0e04-5bcde6c08b5mr6248030e87.30.1791972261673; Wed, 14 Oct 2026
- 03:04:21 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1791975119; x=1792579919; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=pJ40mdVF2h3U99L6LSkoNg9S+JOxwfRKomS8IAjHB+w=;
+        b=HNAGVhK6Vc1SEerQUM9v79gRy469quGojFQrLpOEGLZSH23W76HrTbLX7aREcXkyp4
+         eY0moBlRY+97Z8yuiWbuYehDz2R6N6Qd6ak8qRS7iXzZ9Jq1L3/fSquLigKcG7hMshJ1
+         u4QREP9rRr+m9SA13JuksOO/3xeRIoYXF9/208P6l4A6nKXGTYxcFPn+ZZcvZmsTkNFd
+         uVV8mHXy6aHIBr3iya+yhR+CFy/vTZLj0hDJHM+sUkV0GHWu8SWkjXGV0WgGtlDQhsOl
+         VeZiVsugyLTM7cE9N4BUUTg6f+3miKwblv4/5kql6PjKAzsvkvjbSXsaNW3fr6Ben3/0
+         eSHw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1791975119; x=1792579919;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=pJ40mdVF2h3U99L6LSkoNg9S+JOxwfRKomS8IAjHB+w=;
+        b=sDV9XRKidAdFJCzgMNmMUzVlIOfEC83VyvvkLq0jlld26zk5zbgFVAIZ5Alv7z0Ai+
+         YkN6DGHI/WOCBnkn7nfeHW2r5ZLhK7v4+MIMxiN+OmSihOmuBPc4vT4VbuA9tAi1nsbx
+         5TjdtuHgxs2dTzoBe8QgbLBJEK6GIV4zkwY/XlzZQmKLZpTjdmY4P5zds3IRfL9POP6U
+         mYjjWGooLvOK27/BZB+ejWUQaMX2my1cXeBx65DxTscIzsFrWZh9mpRFyKcAi/7DPTxR
+         tcqRacbMc+UQFykJvxfRRyGLx60OHUIgB0bqXUkgDS109PCt/pHgauPv5ZhTuwtN1AkZ
+         1NSA==
+X-Forwarded-Encrypted: i=1; AKwUvBwb43EtF0/wb4F3/ovZqjzKlFElB+FkCYv3YwZHBhF3w9fG9SYd/V+6/6vq2Om3OJJjXN4WF0BPEec=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYK+3i5PLMF0F+LBVxfGB8wDBJvyiyOCoQl+ZJxPtV3JpYhPbtyg
+	l3D2JGKVSM2Mfq3B+oPS84aTVrTFPkZ4lfyaRHpobY5l70/MRIXerWrW
+X-Gm-Gg: AYBFou1zSSFPJHYvO3BLvCcXPC3sNuBIzxvoszx3WyUCqLgHNQJ6FHHr4IYAd9NsPfi
+	fdCvng7Ezj2Grcid3TrCRkJxUtlschpLkNcNRTv4Cz3EiyEFGcSDNLwCVGd+ADbDp1I/is5nRO4
+	puSRR9adrXLnUW15xvJhELMJsQ6Kf3Hp/3wbF+ndZ2+UN20JQ66siJ0YJgCqdYXwBlOquMLEtEI
+	cIvle1Ggyhy7bkX4rK/gIuBh6F2NpdQS/KjAGFIoihuKMaDEOn0Tp3TFcRVSD5h0YHMUebtepoi
+	UgoChTIwtrvzKRu6TUNRvZCM/K/fccQyRSsakQKTIW3HSPvBrqvlMngiJs0KOgEF1MuF0TPOnuA
+	wfgdwPpSEdX2S50061Cfu9pUb7p99wZqS1l3/MLHKomXCbEBOQHo602/eDCARWbCtYNnCumT0rP
+	NCEV4irjI44bYAV59R5C7VkE7rpbS7Cmziq3NZYBPMc7IgDB1i+E3ZTsXe//wUTXwN9e7O6R1Br
+	VaZEy/hPcCj63dTIHBQmW+r+2pJLSTj0/8notc=
+X-Received: by 2002:a5d:6346:0:b0:488:8a3d:b58a with SMTP id ffacd0b85a97d-48dbaaed83fmr22972310f8f.53.1791975118646;
+        Wed, 14 Oct 2026 03:51:58 -0700 (PDT)
+Message-ID: <66fd20a7-4849-48b9-8030-9154c5100301@gmail.com>
+Date: Wed, 14 Oct 2026 12:51:56 +0200
 MIME-Version: 1.0
-References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-14-gwd@xenproject.org>
- <asfapF7EdrW6t5RZ@Mac.lan>
-In-Reply-To: <asfapF7EdrW6t5RZ@Mac.lan>
-From: George Dunlap <gwd@xenproject.org>
-Date: Wed, 14 Oct 2026 11:04:09 +0100
-X-Gmail-Original-Message-ID: <CAFLBxZZvRA-60zreNOcnDvfP+O4a0=9B2mR1egyosu_H=tcN+A@mail.gmail.com>
-X-Gm-Features: AclHuK8jBD1CXRqHTTU1zizhSob1lZUzhYClMG0wecr_hpkWdKahJHqhi3c86JE
-Message-ID: <CAFLBxZZvRA-60zreNOcnDvfP+O4a0=9B2mR1egyosu_H=tcN+A@mail.gmail.com>
-Subject: Re: [PATCH v3 13/18] x86/mm: build and maintain a sparse view of the directmap
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
-	Andrew Cooper <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
-	Julien Grall <julien@xen.org>, Stefano Stabellini <sstabellini@kernel.org>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 06/39] xen/riscv: introduce device-agnostic MMIO
+ emulation dispatch
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Romain Caritey <Romain.Caritey@microchip.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <cafb356d9cc3148d74df846e08c4961da72bea0e.1790779209.git.oleksii.kurochko@gmail.com>
+ <aa82fc34-0074-422a-87da-0cab24bb43c8@suse.com>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <aa82fc34-0074-422a-87da-0cab24bb43c8@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1791975119-CED4087B-BE7263B3/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 4646
 
-On Thu, Oct 8, 2026 at 7:02=E2=80=AFPM Roger Pau Monn=C3=A9 <roger@xenproje=
-ct.org> wrote:
-> >  - xenheap allocations are added, and taken out again before the pages
-> >    are freed.  If that fails the pages stay mapped, and are leaked with
-> >    a warning rather than reused (the same reasoning as in "xen/page_all=
-oc:
-> >    Add a path for xenheap when there is no direct map" of the directmap
-> >    removal series);
->
-> I would probably remove this last sentence, it doesn't add any
-> meaningful information.
 
-I assume you mean the parenthetical referring to the other patch -- I agree=
-.
 
-> >  - memory handed to the heap later (boot modules, .init, memory
-> >    hot-add) is taken out, and is not handed over if that fails;
-> >  - a PV dom0's initrd, assigned to dom0 in place, is taken out;
->
-> I assume dom0 kernel memory is freed, and it doesn't need the same
-> kind of special handling the initrd needs due to it being assigned in
-> place.
+On 10/12/26 5:28 PM, Jan Beulich wrote:
+> On 30.09.2026 18:18, Oleksii Kurochko wrote:
+>> --- a/xen/arch/riscv/include/asm/domain.h
+>> +++ b/xen/arch/riscv/include/asm/domain.h
+>> @@ -9,6 +9,7 @@
+>>   
+>>   #include <asm/cpufeature.h>
+>>   #include <asm/guest-layout.h>
+>> +#include <asm/mmio.h>
+>>   #include <asm/p2m.h>
+>>   #include <asm/vtimer.h>
+>>   
+>> @@ -101,6 +102,8 @@ struct arch_domain {
+>>       const unsigned long *isa;
+>>   
+>>       struct vintc *vintc;
+>> +
+>> +    struct vmmio vmmio;
+> 
+> This is a decent size structure, so I wonder whether this really wants
+> embedding in struct domain. If it was a pointer here (with the struct
+> dynamically allocated), the struct definition itself may not even need
+> exposing in a header.
 
-Yes, that's correct.
+Makes sense. I'll make it a pointer allocated in domain_io_init(), with
+struct vmmio (along with MAX_IO_HANDLER and struct mmio_handler) moved
+into mmio.c (as they then will be used only there), so that 
+<asm/domain.h> doesn't need <asm/mmio.h> anymore.
 
-> > alloc_xenheap_pages() accepts pages still awaiting scrubbing
-> > (MEMF_no_scrub).  That is harmless while the directmap maps all memory
-> > anyway, but the sparse view would make such a page's contents, a dying
-> > domain's data for instance, reachable from every context on it until
-> > overwritten.  With a sparse view configured, arch_xenheap_needs_scrub()
-> > makes xenheap allocations scrub those pages first, as domain heap
-> > allocations do; clean pages need nothing extra.
->
-> There's another possible issue here I think: even when requesting
-> scrubbed pages the allocator can decide to scrub them in-place,
-> mapping them using map_domain_page().  Could this also cause concern,
-> as Xen is mapping possibly sensitive data in a context that's not
-> supposed to access it, even if just for the scrubbing.
+> 
+>> --- /dev/null
+>> +++ b/xen/arch/riscv/mmio.c
+>> @@ -0,0 +1,175 @@
+>> +/* SPDX-License-Identifier: GPL-2.0-or-later */
+>> +
+>> +#include <xen/bsearch.h>
+>> +#include <xen/lib.h>
+>> +#include <xen/rwlock.h>
+>> +#include <xen/sched.h>
+>> +#include <xen/string.h>
+>> +
+>> +#include <asm/current.h>
+>> +#include <asm/mmio.h>
+>> +
+>> +/*
+>> + * bsearch() comparator: @key holds the address to look up in its addr field,
+>> + * @elem is an entry of vmmio->handlers. Relies on the regions not
+>> + * overlapping, which register_mmio_handler() enforces.
+>> + */
+>> +static int cmp_mmio_handler(const void *key, const void *elem)
+>> +{
+>> +    const struct mmio_handler *handler0 = key;
+>> +    const struct mmio_handler *handler1 = elem;
+>> +
+>> +    if ( handler0->addr < handler1->addr )
+>> +        return -1;
+>> +
+>> +    if ( handler0->addr >= (handler1->addr + handler1->size) )
+>> +        return 1;
+>> +
+>> +    return 0;
+>> +}
+>> +
+>> +/*
+>> + * Return a copy of the matching handler rather than a pointer into
+>> + * vmmio->handlers: a concurrent register_mmio_handler() shifts entries
+>> + * up to keep the array sorted, so an escaped pointer could refer to a
+>> + * different (or torn) entry once the lock is dropped. The copy stays
+>> + * valid as the ops structures are never freed.
+>> + */
+>> +static bool find_mmio_handler(struct domain *d, paddr_t gpa,
+> 
+> The first parameter here apparently wants to be named currd, much like ...
 
-But for HVM domains with per-vCPU mappings, it's only mapped on the
-pCPU that's doing the scrubbing, which is in the Xen context; no other
-vCPU of the domain can access it, and by the time we return to the
-guest, it's been scrubbed.
+With having vmmio member of arch_domain struct declared as pointer then 
+here it could be const struct domain *currd.
 
-So this is only a limitation for PV domains with ASI enabled; and the
-real solution there is to give them per-vCPU mapcaches as well.
-Probably is worth noting the limitation somewhere; the only reliable
-solution apart from vcpu_pt would be to scrub on free.
+> 
+>> +                              struct mmio_handler *out)
+>> +{
+>> +    struct vmmio *vmmio = &d->arch.vmmio;
+>> +    struct mmio_handler key = { .addr = gpa };
+>> +    const struct mmio_handler *handler;
+>> +
+>> +    read_lock(&vmmio->lock);
+>> +    handler = bsearch(&key, vmmio->handlers, vmmio->num_entries,
+>> +                      sizeof(*handler), cmp_mmio_handler);
+>> +    if ( handler )
+>> +        *out = *handler;
+>> +    read_unlock(&vmmio->lock);
+>> +
+>> +    return handler != NULL;
+>> +}
+>> +
+>> +static enum io_state try_handle_mmio(mmio_info_t *info)
+>> +{
+>> +    struct vcpu *v = current;
+> 
+> ... this variable wants to be named curr. Unless of course there are
+> plans to not unconditionally use current here.
 
-I'll add a note here.
+Indeed, both always refer to current. I'll rename them to currd and curr
+(and make currd a pointer to const while at it).
 
-> > arch_mfns_in_directmap() says whether an MFN range is reachable through
-> > the directmap; it now answers for every context, so false once a sparse
-> > view is configured.  Its one caller, init_node_heap(), then keeps a NUM=
-A
-> > node's heap metadata in the xenheap instead of carving it out of the
-> > node's memory through the directmap: carved out of a range handed to th=
-e
-> > heap, it would be left out of the sparse view, which every heap
-> > allocation needs it in.
-> >
-> > The sparse view is built only when some guest type is to use it, which
-> > nothing can request yet: this patch changes nothing on its own.
->
-> Is it worth mentioning that modify_xen_mappings_lite() doesn't need
-> adjustment because it only deals with virtual addresses in the
-> XEN_VIRT_{START,END} range, and those are cloned in the sparse
-> directmap view?
+> 
+>> +int register_mmio_handler(struct domain *d,
+>> +                          const struct mmio_handler_ops *ops,
+>> +                          paddr_t addr, paddr_t size)
+>> +{
+>> +    struct vmmio *vmmio = &d->arch.vmmio;
+>> +    struct mmio_handler *handlers = vmmio->handlers;
+>> +    paddr_t end = addr + size;
+>> +    unsigned int i;
+>> +    int rc = 0;
+>> +    bool overlap;
+>> +
+>> +    if ( !ops || !ops->read || !ops->write || end <= addr )
+>> +        return -EINVAL;
+> 
+> I think this checking goes a little too far: It's absurd for some call site
+> to pass NULL into this function. The other three checks are sufficiently
+> plausible, albeit I wonder whether this wouldn't want to be an assertion
+> then.
 
-Yes, I think so; I'll add a sentence to that effect.
+Agreed, NULL ops can be dropped. As the callbacks always come from a
+static ops structure, I'll turn their check into an ASSERT(). I'd keep
+end <= addr as a run-time check though, as the region bounds may be
+computed (e.g. from max_vcpus) rather than being constants, and the
+overlap check below relies on addr + size not wrapping.
 
-> > Assisted-by: Claude Code:claude-opus-5-5
-> > Signed-off-by: George Dunlap <gwd@xenproject.org>
-> > ---
-> > Changes in v3:
-> > - New in this version.
-> > ---
-> >  xen/arch/x86/Kconfig                        |   1 +
-> >  xen/arch/x86/Makefile                       |   1 +
-> >  xen/arch/x86/include/asm/mm.h               |  17 +-
-> >  xen/arch/x86/include/asm/sparse-directmap.h |  63 +++
-> >  xen/arch/x86/mm.c                           | 128 +++++-
-> >  xen/arch/x86/pv/dom0_build.c                |   4 +
-> >  xen/arch/x86/setup.c                        |   4 +
-> >  xen/arch/x86/sparse-directmap.c             | 424 ++++++++++++++++++++
-> >  xen/common/Kconfig                          |  18 +
-> >  xen/common/page_alloc.c                     |  41 +-
-> >  xen/include/xen/mm.h                        |  35 ++
-> >  11 files changed, 722 insertions(+), 14 deletions(-)
-> >  create mode 100644 xen/arch/x86/include/asm/sparse-directmap.h
-> >  create mode 100644 xen/arch/x86/sparse-directmap.c
->
-> I have to admit reviewing this 1K line diff is challenging.  I've
-> tried my best, but it's likely I've missed stuff.
+Thanks.
 
-We could try to break it down, but it's already pretty well broken
-down: That is, there are three logical changes (Introduce hooks and
-their stubs, add mm.c helpers, add sparse-directmap.c with the real
-hooks) , but they're not intermingled.  A series of three patches
-would be basically exactly the same hunks as the single patch, just
-spread out.
-
-I think the main thing that makes this hard to read in patch form is
-having a full file, sparse-directmap.c, introduced:  You're not used
-to reading source code like that with no highlighting and plusses in
-front of it.  Applying the series to a tree and looking at the file in
-your normal editor might make it easier.
-
-But for the same reason, breaking it down into three would be pretty
-easy; let me know if you want me to do that.
-
-> > +bool __ro_after_init opt_sparse_dmap_pv;
-> > +bool __ro_after_init opt_sparse_dmap_hvm;
->
-> Do we need an extra opt_sparse_dmap_dom0?  So that dom0 can opt-out
-> independently of everything else?
-
-Yes; as you noted, this is currently added in patch 18.  I'll add all
-the knobs here.
-
-> > +/* Root of the sparse view: only ever walked and copied from, never lo=
-aded. */
-> > +static l4_pgentry_t __aligned(PAGE_SIZE) sparse_l4[L4_PAGETABLE_ENTRIE=
-S];
-> > +l4_pgentry_t *__ro_after_init sparse_dmap_root;
-> > +
-> > +/*
-> > + * Before the sparse view is built: the MFN ranges handed to the heap,=
- which
-> > + * it leaves out, and the xenheap allocations made meanwhile (heap met=
-adata of
-> > + * NUMA nodes), which it puts back.
->
-> Explicitly mentioning NUMA node metadata is likely to go out of date,
-> as changing that logic will most likely forget to update the comment
-> here.
-
-Yes, this comment has already been cut down for the next version.
-
-> > +static int add_to_sparse_view(l4_pgentry_t *root, unsigned long mfn,
-> > +                              unsigned long nr)
-> > +{
-> > +    unsigned long va =3D (unsigned long)mfn_to_virt(mfn);
-> > +    unsigned long end =3D va + (nr << PAGE_SHIFT);
-> > +
-> > +    while ( va < end )
-> > +    {
-> > +        pte_attr_t flags;
-> > +        unsigned long n;
-> > +        mfn_t m =3D xen_mapping_lookup(idle_pg_table, va, &flags, &n);
-> > +        int rc;
->
-> Since you are fetching the mfn from the idle (non-sparse) page-tables,
-> don't you want to check it matches the mfn passed as the function
-> parameter?
-
-Hmm, if the PTE for mfn_to_virt(mfn) in the full directmap doesn't
-contain mfn, something's gone terribly wrong; definitely not safe to
-continue executing Xen.  We could certainly add an ASSERT(); if it
-actually happened in production, we'd want to BUG(), but that seems so
-unlikely, I'm not sure it's worth the extra conditional.
-
-I'll add an ASSERT() here; it's easy enough to change to a BUG_ON() if
-we decide we want it there.
-
-> > +static int __init cf_check cmp_mfn_range(const void *a, const void *b)
-> > +{
-> > +    const struct mfn_range *l =3D a, *r =3D b;
-> > +
-> > +    return l->s < r->s ? -1 : l->s > r->s;
->
-> The last arm of this ternary operator is doing an implicit conversion
-> from boolean to integer, I think that's not fine MISRA-wise?
-
-Yes, I'll change it to return explicit integers, as cmp_node() does.
-
-> > +    /*
-> > +     * The full directmap, leaf by leaf, minus the ranges added to the
-> > +     * heap.  Leaves come in address order, which is MFN order in the
-> > +     * directmap, so the cursor into the sorted (and disjoint) heap
-> > +     * ranges only moves forward.
-> > +     */
-> > +    for ( va =3D SPARSE_DMAP_START, j =3D 0; va < SPARSE_DMAP_END; )
-> > +    {
-> > +        pte_attr_t flags;
-> > +        unsigned long n, s, e;
-> > +        mfn_t m =3D xen_mapping_lookup(idle_pg_table, va, &flags, &n);
-> > +
-> > +        n =3D min(n, (SPARSE_DMAP_END - va) >> PAGE_SHIFT);
-> > +        if ( mfn_eq(m, INVALID_MFN) )
-> > +        {
-> > +            va +=3D n << PAGE_SHIFT;
-> > +            continue;
-> > +        }
-> > +
-> > +        for ( s =3D mfn_x(m), e =3D s + n; s < e; )
-> > +        {
-> > +            unsigned long upto =3D e;
-> > +
-> > +            while ( j < nr_early_heap && early_heap[j].e <=3D s )
-> > +                j++;
-> > +            if ( j < nr_early_heap && early_heap[j].s <=3D s )
-> > +            {
-> > +                s =3D min(e, early_heap[j].e);
-> > +                continue;
-> > +            }
-> > +            if ( j < nr_early_heap )
-> > +                upto =3D min(e, early_heap[j].s);
-> > +
-> > +            if ( map_pages_in(sparse_l4, va + ((s - mfn_x(m)) << PAGE_=
-SHIFT),
-> > +                              _mfn(s), upto - s, flags) )
->
-> Why use map_pages_in() directly here, instead of add_to_sparse_view()?
-
-Because add_to_sparse_view() does a PT walk to get the flags; but we
-already have the flags.
-
->
-> > +                panic("Sparse directmap: out of memory\n");
-> > +            mapped +=3D upto - s;
-> > +            s =3D upto;
->
-> The above logic is complicated to follow, maybe some simple comments
-> will help.
-
-I didn't comment it because IME this sort of tight algorithmic data
-structure walk isn't really made much better with comments; there's no
-getting around the need to brute-force grok what's happening.  I'll
-see what I can do though.
-
-It's worth saying that 1) this is the *sort* of bug that Claude is
-good at catching, and this patch has had multiple rounds of review 2)
-a bug here has a high probability of causing a crash later, and none
-have been observed.
-
-One thing on the TODO list was to add a sparse-directmap audit debug
-key, to make sure that nothing in the heap (and not the xenheap) is in
-the sparse directmap.
-
-> > +    /*
-> > +     * Now add back in ranges from the heap which were allocated to
-> > +     * the xenheap.
-> > +     */
-> > +    for ( i =3D 0; i < nr_early_xenheap; i++ )
-> > +    {
-> > +        unsigned long nr =3D early_xenheap[i].e - early_xenheap[i].s;
-> > +
-> > +        if ( add_to_sparse_view(sparse_l4, early_xenheap[i].s, nr) )
-> > +            panic("Sparse directmap: out of memory\n");
-> > +        mapped +=3D nr;
-> > +    }
-> > +
-> > +    sparse_dmap_root =3D sparse_l4;
->
-> This logic involves a fair amount of calls to map_pages_in(), I think
-> there will be no flushes in this case, because we are strictly
-> populating the page-tables, and hence the old PTE will always be
-> non-present.  Worth confirming, otherwise we might need some TLB flush
-> avoidance, as doing TLB flushes makes no sense here, the page-tables
-> are not in use.
-
-At this point the other CPUs are not up, so there are no IPIs; at most
-a local flush when a table collapses into a superpage.
-
- -George
+~ Oleksii
 
