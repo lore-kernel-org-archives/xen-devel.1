@@ -4,43 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id F30C0CC6B1D
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 15:12:42 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1449192.1665103 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id ACECACC6B1A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 15:21:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1449215.1665112 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xH0eb-0004eF-7C; Wed, 14 Oct 2026 15:12:29 +0000
+	id 1xH0my-0006xT-V3; Wed, 14 Oct 2026 15:21:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1449192.1665103; Wed, 14 Oct 2026 15:12:29 +0000
+Received: by outflank-mailman (output) from mailman id 1449215.1665112; Wed, 14 Oct 2026 15:21:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xH0eb-0004e7-44; Wed, 14 Oct 2026 15:12:29 +0000
-Received: by outflank-mailman (input) for mailman id 1449192;
- Wed, 14 Oct 2026 15:12:27 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xH0eZ-0004e1-JJ
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 15:12:27 +0000
+	id 1xH0my-0006xM-SH; Wed, 14 Oct 2026 15:21:08 +0000
+Received: by outflank-mailman (input) for mailman id 1449215;
+ Wed, 14 Oct 2026 15:21:07 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13b00ab040008425@swg.vates.tech>)
+ id 1xH0mx-0006xG-7d
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 15:21:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xH0eY-00Dmgc-Vu
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 17:12:27 +0200
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6acf9bcc-e002-0a2a0a5209dd-0a2a450abb18-22
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 17:12:26 +0200
-Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6acf9bd6-f2d2-0a2a450a0019-d155802de0b7-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 17:12:22 +0200
-Received: by mail-wm1-f45.google.com with SMTP id
- 5b1f17b1804b1-4a1635f7c89so11270205e9.2
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 08:12:22 -0700 (PDT)
-Received: from [172.20.10.5] (public-gprs377965.centertel.pl. [37.47.107.174])
- by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1bcf3c382sm11443775e9.11.2026.10.14.08.12.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Oct 2026 08:12:21 -0700 (PDT)
+ id 1xH0mw-0053oM-F0
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 17:21:06 +0200
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13b00ab040008425@swg.vates.tech>)
+ id 6acf9ddb-bab6-0a2a0a5309dd-0a2a4502c3a0-18
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 17:21:06 +0200
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a13b00ab040008425@swg.vates.tech>)
+ id 6acf9de1-6ca4-0a2a45020019-b9ff1c228881-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 17:21:05 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a13b00ab040008425.004 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Wed, 14 Oct 2026 15:21:01 +0000
+Received: from leducb.home (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 34C8581F7E;
+ Wed, 14 Oct 2026 17:21:01 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,150 +58,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1791990742; x=1792595542; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=QRkvS7RKRi+QZMNgLcUHAXcqp4Bttdc3IxZTwLpajWI=;
-        b=T+ynyPMMetwkNO9vOJ7V00ETpGDiqpEcIVWWN9iDoVYWlvqMtFnQnIzWTknW7gtNce
-         IylG1+pb0ne6wuGUwc7uougd0egqBnsI4EAK9GY32JBz9zRuoTSM8PSBdr0YbYW86jqz
-         3/A8iC0Pi0kbYIwTHp0cVFMpkymXdPryP8LNvNh/ZmDxKcOghWp5Vhlf6n6v/UDaVJSu
-         rotCBl579YjPXoEBjWFUYbd2kOCs3Wa0KqJoEf6GZjSZNV3c0ZWIdTXPhr7hQn8SF5KN
-         o6S+N5cPKV6dVeiggE2F7uYxKM4htTtOrKQ7CZl8JGdyefj8c7ATjHM437IAiAq0LYnf
-         95rw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791990742; x=1792595542;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=QRkvS7RKRi+QZMNgLcUHAXcqp4Bttdc3IxZTwLpajWI=;
-        b=KXGndU0/3eDVvgGbNz+vjgIYVgKCd/Fu4DOBerVG4rsliZUo/TGIhwEl9WxtHmBh0a
-         VdLf2hD6+k8egyOwTDfMwL2Al6W1GOw3TS8GvnSMeYBNNUrvtEA0klQCG188K4FvsyUH
-         LFMxeYUln1KzZjlwXl9wbbuchrErqOUYtrinNwQIDbeMYZwpc16mRVKAZXsKS66yMv7l
-         5+vtf9svVmWr8ptAoTzBGadcCy5P7Mf1eAM2JyI4rdWDl/4JcLOQAnnh3P24u+4ze3jW
-         QSaD6Z1wP6fO2/ctEXcZrJ0nu0qGeJYpLPzDHbtOTg33NR1TJrzMv7mg8NvUbOJihtkw
-         F3xA==
-X-Gm-Message-State: AFq9FYJlqVoCVxp4meYOdU/tAUAvaM/tuPxp3g+dCiAA8PH5va872AIG
-	TgOwQyNMtiodCv5/KoHxUjGNv6vEiVm/DNG3m0+Ms4g50ORJzg9+ob0W
-X-Gm-Gg: AYBFou1DZjq+VuULvtWG9diBWjfHYV+RZr4Ruhk+0/KfAv8eNg+RPeoZIa41LqQUlZT
-	yyZBdTsPPNUvtYaAu1unQNluRhyAMEXwoFAP6vVkpgtbyG9DXT8GFC3qfavKDd2FtGcJubvyX5v
-	PEJ5qNFBwooiWZ3pBoO5nsyWHK9101RqyH39IMRq3tWvacL2Yz94VBQE1NGzkMr2Gvhk6XdVDeJ
-	AEB9wvvtJaTZpNcTIqHDNQrFb61QhAvvQi9glFra6yc2SpJWd6N4WVDbmHNk6VNWgXbEyHNut20
-	i2Ll5brgciMGhbN5Vb2tRLhhtbXOOC9ithstYOg+1kUD1Ohm/8yCHH8OSTYR2wI1FEFVQALYn3d
-	8WEWYi6T5BZ9CAiMZXVnrK62yIpFhd9K26x4sPu6J++i2GdJGQpIVuUGQt90cpplNzcDDqb5qYX
-	5GRP/XUKpQ7+vItRCfzukfpdOmtg+TulOgLOAHerIoomtkcvtw9db+yzBqK10rFgCEac+ZOghtx
-	tiDXJ//PFk1vJEMFPLl7+p1u3ZYQILK1VdWQoJ7
-X-Received: by 2002:a05:600c:870e:b0:4a1:6dca:51e3 with SMTP id 5b1f17b1804b1-4a18e4487ccmr321387325e9.3.1791990741438;
-        Wed, 14 Oct 2026 08:12:21 -0700 (PDT)
-Message-ID: <71144753-9c86-457e-a838-c19732c44ab6@gmail.com>
-Date: Wed, 14 Oct 2026 17:12:19 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Transfer-Encoding:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=B4GGVUAtcvymBRSmcXiX7RuyDM8/lS8Cu9lVb56h/rk=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-transfer-encoding:feedback-id;
+ b=aihvHZY/k+i/INLZHXMkzryI7rRGr3yy5e65KABxtUipYViyMYts6A3zJmouTeov3nToTdG+G
+ VjKGYIKGJ6So7J7oWFTUMPT+pxTXE3IngDswEfzTWGNZRg6qBrKOurOLdC5+aSbLtFfQq2B6I4U
+ UnbBXVExtphJRpn7XTjcRsRKCfbWz5k30BcFRjE+cOtlY6WZ7odGV/gCX3UoOOE6+YO/3IBCUsk
+ zIgSpDkZbmbW+Q2ax227robojuSNXm4WuGIV0LLNgX+bQZNms6EaJZI/NmM8derhJtRVr1Uag6C
+ t+WJy/+mIKMpyH5PxhX5hcapk4RXT1cws5Hv6n19Gt+A==
+X-Zone-Loop: 3f2c5525ebd1ae8b9d439a545c3b2be6cfd9f6dd2e46
+x-campaign-type: default
+x-transaction-id: 3977e284-2166-4932-a032-201fdaca1f69
+x-swg-uid: 01-7c506548-2a58-48b3-8e35-7c765836d63c
+X-Mailer: Sweego
+Message-ID:
+ <1791991262.8631fc262581453bbf619ec5b2062170.1a13b00ab040008425@vates.tech>
+x-swg-bid: 1791991262.8631fc262581453bbf619ec5b2062170.1a13b00ab040008425
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: xen-devel@lists.xenproject.org
+Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH 0/1] Add myself as RISC-V reviewer
+Date: Wed, 14 Oct 2026 17:20:56 +0200
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 14/39] xen/riscv: add IMSIC vCPU context switch
- handlers
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org,
- Romain Caritey <Romain.Caritey@microchip.com>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <fec6ee1b53887baf99b47a10125002fdb475ffd3.1790779209.git.oleksii.kurochko@gmail.com>
- <1791453289.8631fc262581453bbf619ec5b2062170.1a11aefddb50003f66@vates.tech>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1791453289.8631fc262581453bbf619ec5b2062170.1a11aefddb50003f66@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1791990742-5A3DCCFC-0DC97B58/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 3399
+Content-Transfer-Encoding: 8bit
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1791991261407
+X-purgate-ID: tlsNG-720697/1791991266-F02992AC-0C0BB2BC/0/0
+X-purgate-type: clean
+X-purgate-size: 370
 
+Hello,
+I am working on Xen RISC-V and already review patches in that area, but
+only see them when I happen to spot them on the list. Being listed gets
+me CCed so that I don't miss any.
 
+Thanks in advance.
+Regards,
+Baptiste Le Duc
+---
 
-On 10/8/26 11:54 AM, Baptiste Le Duc wrote:
->> IMSIC state currently needs to track only which physical CPU owns a vCPU's
->> IMSIC guest interrupt file, as the CPU id is part of the physical address
->> the file is mapped at.
->>
->> Add imsic_ctxt_switch_from() to record that CPU when a vCPU is switched
->> out. A vCPU running on the s/w VS-file has no h/w file bound to a CPU, so
->> there is nothing to record for it. Nothing reads the recorded value yet.
->>
->> imsic_ctxt_switch_to() has nothing to do: switching a vCPU in on the CPU
->> which owns its guest interrupt file needs no IMSIC update. Only a move to
->> another CPU does (a new VGEIN and a remapped file), and that isn't part of
->> the context switch.
-> Nit: I think it could make sense to mention that if a migration happen,
-> it would go anyway in imsic_migrate_vcpu() before
-> imsic_ctxt_switch_to().
+Baptiste Le Duc (1):
+  MAINTAINERS: Add myself as RISC-V reviewer
 
-Probably it would be nice but at this moment imsic_migrate_vcpu() 
-doesn't exist and it what I tried to cover by "Only a move to another 
-CPU does ...". At least, for now I think that this part would be better 
-to keep as it is now.
+ MAINTAINERS | 1 +
+ 1 file changed, 1 insertion(+)
 
->>
->> Install both as the ctxt_switch_{from,to} hooks of struct vintc_ops. MSI
->> delivery is the only mode Xen supports (aplic_init() panics on an APLIC
->> without an "msi-parent" property) and the only one vAPLIC emulates, so the
->> vAPLIC state to save and restore is always the IMSIC one and no
->> vAPLIC-level forwarder is needed. Being indirect call targets, both
->> handlers get cf_check.
->>
->> Co-developed-by: Romain Caritey <Romain.Caritey@microchip.com>
-> Should add Signed-off-by Romain Caritey.
-> Without that, everything is ok from my side
-
-As we discussed here [1] it is fine to go without Signed-off. And it 
-seems like where Xen is different with Linux (where C-o-b should follow 
-by S-o-b).
-
-[1] 
-https://lore.kernel.org/xen-devel/cover.1790779209.git.oleksii.kurochko@gmail.com/T/#m5063a41f8b824f28d3f9a5a976488b8308575d93
-
->> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
->> --- a/xen/arch/riscv/vaplic.c
->> +++ b/xen/arch/riscv/vaplic.c
->> @@ -456,6 +456,12 @@ static const struct mmio_handler_ops vaplic_mmio_ops = {
->>   static const struct vintc_ops vintc_ops = {
->>       .vcpu_init = vcpu_imsic_init,
->>       .vcpu_deinit = vcpu_imsic_deinit,
->> +    /*
->> +     * MSI delivery is the only supported mode, so the vAPLIC state to save
-> Nit: Do we want to always support only MSI delivery? If not, maybe adapt
-> the comment.
-
-At the moment I consider MSI delivery the only mode worth supporting:
-the AIA-capable platforms I'm aware of come with both APLIC and IMSIC,
-and with IMSIC guest interrupt files an interrupt reaches the guest
-without trapping into Xen, which direct delivery mode can't offer.
-
-As for the comment, I think it's fine as is, given how the members right
-below it are initialized:
-
-     .ctxt_switch_from = imsic_ctxt_switch_from,
-     .ctxt_switch_to = imsic_ctxt_switch_to,
-
-The imsic_ prefix makes it explicit that MSI delivery mode is assumed,
-and supporting direct delivery mode would mean changing these
-initializers anyway, so the comment wouldn't be missed then. I'd prefer
-to keep it as it is for now and update it once direct delivery mode
-needs to be supported.
-
-> 
-> Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-
-Thanks!
-
-~ Oleksii
 
