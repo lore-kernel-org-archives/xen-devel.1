@@ -4,41 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 85709CC6B1A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 17:45:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1449411.1665229 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 99E93C3DA7A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 19:28:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1449475.1665238 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xH32H-00059w-Jc; Wed, 14 Oct 2026 17:45:05 +0000
+	id 1xH4dq-00074n-Jw; Wed, 14 Oct 2026 19:27:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1449411.1665229; Wed, 14 Oct 2026 17:45:05 +0000
+Received: by outflank-mailman (output) from mailman id 1449475.1665238; Wed, 14 Oct 2026 19:27:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xH32H-00059p-GV; Wed, 14 Oct 2026 17:45:05 +0000
-Received: by outflank-mailman (input) for mailman id 1449411;
- Wed, 14 Oct 2026 17:45:04 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xH4dq-00074f-GU; Wed, 14 Oct 2026 19:27:58 +0000
+Received: by outflank-mailman (input) for mailman id 1449475;
+ Wed, 14 Oct 2026 19:27:57 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gregkh@linuxfoundation.org>) id 1xH32F-00059j-Je
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 17:45:04 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xH32D-00CzF5-Hy
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 19:45:02 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <gregkh@linuxfoundation.org>)
- id 6acfbf80-2eae-0a2a0a5409dd-0a2a4507c144-42
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 19:44:59 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <gregkh@linuxfoundation.org>)
- id 6acfbf99-b4ea-0a2a45070019-aceafc1fd094-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 19:44:58 +0200
-Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 7156940856;
- Wed, 14 Oct 2026 17:44:56 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 330F01F000C4;
- Wed, 14 Oct 2026 17:44:55 +0000 (UTC)
+ (envelope-from <gwd@xenproject.org>) id 1xH4dp-00073U-MH
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 19:27:57 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xH4dp-00000005AgE-3NwE
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 19:27:57 +0000
+Received: from mail-lj1-f178.google.com ([209.85.208.178])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xH4dp-0000000EUSq-0MJd
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 19:27:57 +0000
+Received: by mail-lj1-f178.google.com with SMTP id
+ 38308e7fff4ca-3a1eb6fa0f4so46560311fa.2
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 12:27:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -50,101 +44,96 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=korg header.d=linuxfoundation.org header.i="@linuxfoundation.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=linuxfoundation.org;
-	s=korg; t=1791999896;
-	bh=sTxxFIiD6mgFs2UdEY1I8MyQnekZZiyPvhQw7RuhHrg=;
-	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=Y/JbqQJUIEWFLFscjenxW9GCe5wNUa4lKG/qtufKEMdVe8I7JjwbgDqX5hbrhnbnk
-	 g11pdaabApMfzBMkfpM3w5n1u6n4ty6P15W2DYuVy6e5rpnrYB4vdZc0i3KcsTyQQY
-	 TKLv1ClTGNe42312p3oiyQs34X3dYVxDiKaB2oxQ=
-Date: Wed, 14 Oct 2026 19:45:00 +0200
-From: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
-To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
-Cc: Kees Cook <kees@kernel.org>, Ian Rogers <irogers@google.com>,
-	"Rafael J . Wysocki" <rafael@kernel.org>,
-	Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
-	Nathan Chancellor <nathan@kernel.org>,
-	Nick Desaulniers <ndesaulniers@google.com>,
-	Bill Wendling <morbo@google.com>,
-	Justin Stitt <justinstitt@google.com>,
-	Jonathan Corbet <corbet@lwn.net>,
-	Madhavan Srinivasan <maddy@linux.ibm.com>,
-	Michael Ellerman <mpe@ellerman.id.au>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Christophe Leroy <chleroy@kernel.org>,
-	Nayna Jain <nayna@linux.ibm.com>,
-	Yoshinori Sato <ysato@users.sourceforge.jp>,
-	Rich Felker <dalias@libc.org>,
-	John Paul Adrian Glaubitz <glaubitz@physik.fu-berlin.de>,
-	Viresh Kumar <viresh.kumar@linaro.org>,
-	David Teigland <teigland@redhat.com>,
-	Alexander Aring <aahringo@redhat.com>,
-	Juergen Gross <jgross@suse.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	Heiko Carstens <hca@linux.ibm.com>,
-	Vasily Gorbik <gor@linux.ibm.com>,
-	Alexander Gordeev <agordeev@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@linux.ibm.com>,
-	Sven Schnelle <svens@linux.ibm.com>,
-	Richard Weinberger <richard@nod.at>,
-	Zhihao Cheng <chengzhihao1@huawei.com>,
-	Felix Kuehling <Felix.Kuehling@amd.com>,
-	Alex Deucher <alexander.deucher@amd.com>,
-	Christian =?iso-8859-1?Q?K=F6nig?= <christian.koenig@amd.com>,
-	driver-core@lists.linux.dev, llvm@lists.linux.dev,
-	linux-hardening@vger.kernel.org, linux-doc@vger.kernel.org,
-	linuxppc-dev@lists.ozlabs.org, linux-sh@vger.kernel.org,
-	linux-pm@vger.kernel.org, linux-acpi@vger.kernel.org,
-	gfs2@lists.linux.dev, xen-devel@lists.xenproject.org,
-	linux-s390@vger.kernel.org, linux-mtd@lists.infradead.org,
-	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
-	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 00/11] kobject: Require explicit initialization of struct
- kobj_type::release
-Message-ID: <2026101434-scam-padding-87a5@gregkh>
-References: <20261013223946.1836757-1-irogers@google.com>
- <2026101425-why-boring-4f2d@gregkh>
- <202610140932.5F9CFCE5@keescook>
- <CANiq72=4WQ1B1oCSW=69u_Z=FFLE56hYCqDwWr+poQdzSTS31A@mail.gmail.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
+	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
+	bh=WnyLEFtt04rxggtuHKr5h2wVuxOKUAWXi2+hZ2wtVEc=; b=y1bp1cxLuSOWf7U7wDtaiWaxYl
+	disFWdk5qUbWTJGSUgpcextShIDkQNWiIWyM88rI2Bs3y2NFzJBkyNKVzoYmZGulMMSdwstQGl7ZM
+	kt1phnQv7tZ9Ijaf7qKySms99tTNbwcK16sRbza8O+ZDKr2fIs1Iz+KTG5XgugpYZ710=;
+X-Gm-Message-State: AFq9FYLWh9xoSXsW886qsbvdwFOFy0ONOBqeJSIh+GJMjygq63bQ4mkU
+	jAQZkoyljZ1PU96HxJv8rq/PQhb976YGFbbmhcx9fGj1MPu4Ay+DpsRMMGzKLB84seT0jFFEEt4
+	s6WZpW+0Cmb2jqMGJ8opejMrubkZP67Q=
+X-Received: by 2002:a05:651c:1542:b0:3a6:3c86:df91 with SMTP id
+ 38308e7fff4ca-3a9c538ca71mr49782711fa.23.1792006076121; Wed, 14 Oct 2026
+ 12:27:56 -0700 (PDT)
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <CANiq72=4WQ1B1oCSW=69u_Z=FFLE56hYCqDwWr+poQdzSTS31A@mail.gmail.com>
-X-purgate-ID: tlsNG-ef75cf/1791999899-A54C3AE4-3C0571F8/0/0
-X-purgate-type: clean
-X-purgate-size: 1328
+References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-17-gwd@xenproject.org>
+ <asfqSiiEE6elURr7@Mac.lan>
+In-Reply-To: <asfqSiiEE6elURr7@Mac.lan>
+From: George Dunlap <gwd@xenproject.org>
+Date: Wed, 14 Oct 2026 20:27:43 +0100
+X-Gmail-Original-Message-ID: <CAFLBxZZwNEEEdm58YAHGU=c84Yo-uJJg=+4ztNoOB6t59J1unw@mail.gmail.com>
+X-Gm-Features: AclHuK8RfH5rg15TXSTm5rPlg_lDnXFTS2LZZuCfoDDOludB99THojswA9Mv0wg
+Message-ID: <CAFLBxZZwNEEEdm58YAHGU=c84Yo-uJJg=+4ztNoOB6t59J1unw@mail.gmail.com>
+Subject: Re: [PATCH v3 16/18] x86/domain_page: keep the maphash's slots, not
+ their mappings
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On Wed, Oct 14, 2026 at 06:44:18PM +0200, Miguel Ojeda wrote:
-> On Wed, Oct 14, 2026 at 6:37 PM Kees Cook <kees@kernel.org> wrote:
+On Thu, Oct 8, 2026 at 8:09=E2=80=AFPM Roger Pau Monn=C3=A9 <roger@xenproje=
+ct.org> wrote:
+>
+> On Wed, Oct 07, 2026 at 11:40:49AM +0100, George Dunlap wrote:
+> > unmap_domain_page() keeps a recently unmapped slot in the vCPU's
+> > maphash (MAPHASH_ENTRIES, 8 per vCPU) for a quick remap of the same
+> > MFN, and leaves its PTE in place until the entry is displaced by a late=
+r
+> > unmap or reclaimed by a full cache.  Until then the page stays mapped,
+> > although nothing refers to the mapping and the mapcache holds no
+> > reference to the page.  A page freed meanwhile and handed to another
+> > domain stays mapped in the previous user's mapcache: in the vCPU's own
+> > area for a domain with per-vCPU page-tables, in the domain-wide area of
+> > a PV domain, where all of its vCPUs can reach it.
 > >
-> > I'd really like to have the attribute available, and I've got at least
-> > one user I can apply today that don't require fix-ups (seq_file), so
-> > if Miguel is okay with it, I'd like to snag patch 1 and send it with
-> > my seq_file "first user" for this coming merge window so it's available
-> > starting with v7.4-rc1, and we don't end up needing to wait 10 weeks for
-> > other subsystems to be able to use it. And the kobj fixups can continue
-> > in parallel. Does that sounds okay?
-> 
-> Of course, please feel free to pick it up (with the small tweak I
-> requested) if you have a user.
-> 
-> And if you don't pick the user, I could still pick the first patch up
-> through the compiler attributes tree if you and other folks want to
-> use it after -rc1.
-> 
-> Greg: adding the attribute itself should be safe and would unblock
-> others that may want to "protect" themselves, without having to wait
-> for every potential user to get fixed (but of course I agree they
-> should get fixed -- we should not forget about them, if that is your
-> concern).
+> > While the full directmap is loaded, that reaches nothing it does not
+> > map anyway.  On the sparse view of the directmap, Xen reaches
+> > domain-heap memory only through mappings made for the purpose, and a
+> > mapping kept in the maphash would leave another domain's page
+> > reachable from a context which has nothing to do with it.
+> >
+> > Keep the slot, not the mapping: unmapping the last reference zaps the
+> > PTE and keeps the hash entry, and a later hit maps the page again in th=
+e
+> > same slot.  The slot has mapped nothing else in between, so that needs
+> > no flush.  Reusing the slot for another page still goes through the
+> > garbage map, or through the replacement of a hash entry when the cache
+> > is full, both of which flush first.  A translation of the zapped PTE
+> > left in a TLB is covered, for owned pages, by the flush the page
+> > allocator arranges before a freed page is reused wherever a sparse view
+> > is configured ("x86/mm: flush owned pages before reuse with the sparse
+> > directmap view").
+>
+> As commented on the previous patch, I'm not convinced that's enough.
+> I do think we need to do a flush here, as it's not so much as the page
+> being used by another domain (or by Xen itself), internally the guest
+> might also have different contexts and we should prevent leaks between
+> them.
 
-I agree, not a problem to add the attribute now as long as it doesn't
-break the build.
+Same answer as 15; this is meant to close one particular hole, not be
+a comprehensive closure of all holes.
 
-thanks,
+> > The cost is one PTE write per unmap into the maphash and per remap from
+> > it.  A second unmap of an entry in the maphash now finds its PTE not
+> > present and is caught by the check unmap_domain_page() has for entries
+> > the first unmap zapped, rather than by the reference count's ASSERT()
+> > in debug builds only.
+> >
+> > The change does not depend on asi=3D or on a sparse view of the directm=
+ap
+> > being configured.  PV vCPUs use the domain-wide mapcache on the default
+> > command line too: in debug builds for every page, in release builds for
+> > pages beyond the reach of the full directmap in their page-tables (5TiB=
+,
+> > 3.5TiB with CONFIG_BIGMEM).
+>
+> There's likely no need to mention again the exact conditions that make
+> the mapcache active for PV domains, that's IMO too verbose and doesn't
+> add anything of value to the reasoning here.
 
-greg k-h
+I'll reword it, thanks.
+
+ -George
 
