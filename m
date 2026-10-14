@@ -4,43 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 46C68CC6B1D
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 13:03:03 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1448999.1664959 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A0345CC6B2A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 13:03:28 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1449005.1664967 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGyd8-0007mR-Nx; Wed, 14 Oct 2026 13:02:50 +0000
+	id 1xGydY-0008GW-VZ; Wed, 14 Oct 2026 13:03:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1448999.1664959; Wed, 14 Oct 2026 13:02:50 +0000
+Received: by outflank-mailman (output) from mailman id 1449005.1664967; Wed, 14 Oct 2026 13:03:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xGyd8-0007mK-Kl; Wed, 14 Oct 2026 13:02:50 +0000
-Received: by outflank-mailman (input) for mailman id 1448999;
- Wed, 14 Oct 2026 13:02:50 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xGyd7-0007m2-W1
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 13:02:50 +0000
+	id 1xGydY-0008GP-Sl; Wed, 14 Oct 2026 13:03:16 +0000
+Received: by outflank-mailman (input) for mailman id 1449005;
+ Wed, 14 Oct 2026 13:03:15 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <mark.caveayland@nutanix.com>) id 1xGydX-0008Fv-BD
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 13:03:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xGyd7-00CFKO-8V
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 15:02:49 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xGydW-00DNFf-OB
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 15:03:14 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acf7d77-2eae-0a2a0a5409dd-0a2a45048820-16
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:02:49 +0200
-Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6acf7d78-b57f-0a2a45040019-d155dd2ae46e-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:02:48 +0200
-Received: by mail-wr1-f42.google.com with SMTP id
- ffacd0b85a97d-48b0ef9c76eso371429f8f.0
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 06:02:48 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48de0ac5265sm12597064f8f.41.2026.10.14.06.02.47
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 14 Oct 2026 06:02:47 -0700 (PDT)
+ (envelope-from <mark.caveayland@nutanix.com>)
+ id 6acf7d8d-e002-0a2a0a5209dd-0a2a4508bac6-22
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:03:14 +0200
+Received: from [148.163.155.12] (helo=mx0b-002c1b01.pphosted.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <mark.caveayland@nutanix.com>)
+ id 6acf7d90-f659-0a2a45080019-94a39b0cff58-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 15:03:13 +0200
+Received: from pps.filterd (m0127841.ppops.net [127.0.0.1])
+ by mx0b-002c1b01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69E8BftW3105948; Wed, 14 Oct 2026 06:03:05 -0700
+Received: from mw6pr02cu001.outbound.protection.outlook.com
+ (mail-westus2azon11022125.outbound.protection.outlook.com [52.101.48.125])
+ by mx0b-002c1b01.pphosted.com (PPS) with ESMTPS id 4h9nym34su-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Wed, 14 Oct 2026 06:03:02 -0700 (PDT)
+Received: from PH0PR02MB7159.namprd02.prod.outlook.com (2603:10b6:510:16::8)
+ by CY5PR02MB8990.namprd02.prod.outlook.com (2603:10b6:930:39::11) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.23; Wed, 14 Oct
+ 2026 13:02:59 +0000
+Received: from PH0PR02MB7159.namprd02.prod.outlook.com
+ ([fe80::8e97:bc32:822c:b250]) by PH0PR02MB7159.namprd02.prod.outlook.com
+ ([fe80::8e97:bc32:822c:b250%4]) with mapi id 15.21.0522.012; Wed, 14 Oct 2026
+ 13:02:59 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,178 +62,233 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1791982968; x=1792587768; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:from:to:cc:subject:date:message-id
-         :reply-to:content-type;
-        bh=2gMm2a7QNwXZYXz1DEn6YS019avxsFmIWcQ9BJGK0Ao=;
-        b=JgpgByf4XX2iTWgRn28KC6AtVRz2fVCJetba/xoBfLDkBc3BePfT+8VUi/Q4dzUKVp
-         PymubaPbK95QftOBY62emHoneBK2TMYhpkRERiq7OZYKLndp8aPqElk8IVHMZIMzSTtn
-         gO58VqCkFXDOagu7nyyK8aSaCBdaEQb5SYCQ4v+DWaghj3eS4qlPeM+ZIQJzBM5f9paz
-         4FqDCePBT4+iTynKD6UXvtY1802Ed0EMvocg326ZZlSnwcXluiEWrou7GTZes45ssfFS
-         7DjZmmMLFfPpZlt59xduuLRgLdijxKreK7tC6XRAYUioyOwitlzRPM07e8WbGcg6LAOd
-         n5LA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1791982968; x=1792587768;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
-         :content-language:references:cc:to:from:subject:user-agent
-         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=2gMm2a7QNwXZYXz1DEn6YS019avxsFmIWcQ9BJGK0Ao=;
-        b=xJfAZb90RzcsOx0iTRC3p2Shra11c9knFIb2LjnQypkF/8kA6PDnW7K+Y9e2SGOYtO
-         csCavz5lmNIQ/2omMyhM0+FfuzxDNyUsJGuDzrqhSv4qLcesCkHUIYhNb/f95B8bc+hT
-         HQRBettOsIajAu49ezd939wWK22eIfExlCWYQ7Hr+o2Zt4R+3b4g0aby2t5XJ+r7nlFo
-         ildfOjbrZtTIEPaEIwbq6BThdYxqq/vEKKhwSqHpsm3jpIkZJ2tFYs3f7N+hXycz3HzD
-         HroDQFXPwF7ZTGWqg1vH2DRXtgL0qXFkt7ClET1vWYoRYVorFX0N1f6XRt+thxXO+OGQ
-         IXsA==
-X-Gm-Message-State: AFq9FYJllsIHHTvFJ+krZYYIO+n9XK4VIQUaEsv+6QgMXOvLvGBSElAK
-	G4hmuONdgmANgKvqa/QvJSSZX3+WYkOvCzYNl1SZyeBFGQU2U3KMLQ8Zkwmw4///aBXXp9RpJ4o
-	RbY/eUQ==
-X-Gm-Gg: AYBFou3tPXBMVGFEAfvwg7Kv1FGkhO54T2lWE3SJzbAkQeyt5P9Ko7Uqr2bU62Kba1P
-	OC0m7TUvgdI8gWfvPP+YjckJuE7YjYmQr4lK+z7N26pyWJhqG7KPbCcxYcIitcGc5pdMHZ9Vyv8
-	mYEQW9OUaVIFPG9/RThjw3aF3ylAg1iIzkqe/ydIdZaKKakxtjkEG1+RLhpGsXBSf1g3xvqfUnD
-	h0DqyqWVpwqSkUnOOjSpvkDQ72XdBXhS5dkAFtzeBkwGmMLg2zihA13vLAxoGSt9ZsIF7hmiJ80
-	BBWEfwszNxcXcDPy4+0+Edsvm5Kn98lChPKpAZTlc2e1WjkMHPHsUVw8vphNXtFepaKHLtXTstj
-	en/otj5ixVXERerban18SiL8VQcpO/1lzhGIdZ5H9um/aNDOLjmCvd0qsWemzleDx226cprEMiq
-	kV/8rX1+IWknAwtorjKgOolV86awYo0rqAy2g/wwo4eVE71fH0+9bUwTK0hxEbXkV0nutrb58yC
-	1yztrFaepQD3VvwTUNakSAcSbX51tEtxchWFHfAcbf6Pipgnr8tg7rrIVtMcGozQy89jsxG8A==
-X-Received: by 2002:a05:6000:4550:b0:48a:fd58:a7dc with SMTP id ffacd0b85a97d-48dba9beee6mr22008962f8f.12.1791982968124;
-        Wed, 14 Oct 2026 06:02:48 -0700 (PDT)
-Message-ID: <6e448cc8-d733-4767-b8a2-563fd6a81350@suse.com>
-Date: Wed, 14 Oct 2026 15:02:47 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=proofpoint20171006 header.d=nutanix.com header.i="@nutanix.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector1 header.d=nutanix.com header.i="@nutanix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	proofpoint20171006; bh=qDGlc4KIzab57tfuuVXGckOObyjamYQELX8K6xpSR
+	Tc=; b=u13z+ITSShFY5YXw19ij7uj3fnF/axBEpukBlCyrJB9/B34H8T4zzV2r9
+	0qbNkiYDFgzJPDUOTJDw5VMVH1HqTQAFess/LnYy/3r0WKEePeRru1DeYDd9WWu0
+	/Bf6vCNVfMN7Tvwq3iOgys7CY++ZcvcCibch+7vts+mqPO7TIQs98FHY1q9VyiWW
+	aJ950BT9gx01DISk4eZgheA1V3eZpBoVCJidBJ9tAz1T1SCzyf0igqi0+CS/zh3N
+	CJfH8j3GYhKENvjiFxogaQIyO5yoS6LSWwC/BnpQnW2VAwojV8OAsD4B3dwUESGe
+	8gL31xOFLPAPTKoA+b4w7Nf0Lk+Ow==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=ySknHBSwSHeRoj4V+l3Ds4EhQmhxPC4aQUzaV2+qr2abKXZtQ0USip7A5KcvZwGAK4wdJFYCM+BcwgS2qthcEKRZtYc4xIsXWdDt+Wjpn5vNzWOW1asna46jBswU6+rtaP3KXiWRul/hWOo8ngK+kQ2v/zPDeiJlfe14jHUy7J5F+PdPP9oth7OV2Ymi3inRkMC9bzNttsDzI3tQ8lWSgubpHanUB4/Mm7qNHgimVup5My2pYqE9MAYfCmga7LuatPu2PgknsEBepCb8jEdLqpdvunswXZ0jLNUILPviy8Qg4XSiMFmMJIbfDcDalmoEnT7zHCf/sG8OO4qK0Nc9xQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=qDGlc4KIzab57tfuuVXGckOObyjamYQELX8K6xpSRTc=;
+ b=vAx1Ehmvxp16uZkxUXz1APg/y+IBcUt+K+1CaMZ89yK76U0zqMz23pfi9uQrox4caxZjVLsvcZPidEYPPYVyLj5u+WxB4vHdxZ5Ohwt/qlXuNpLbbV2I/ft9WQXhuLGnt/KU/7/JQJtZOsGqOOzq4hO0JpGvapxz4RQwdn9hkvUfT0xQ2cGYRo2DH9IoRmN+t2OnlZ8nXKHUpXo1WRUQUHcYS9NgpfvdsK3DIxiD/+IhL0c33JnIPYO+dMwyK9nxG63iRFkYCuBjF7B7J8GBUGDPzrcFylhplCmZSfFA+ymOFnue7yYkbo4Mbx+iK6R0vq//ULdZQhpUs60Yp9wvDg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
+ dkim=pass header.d=nutanix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=qDGlc4KIzab57tfuuVXGckOObyjamYQELX8K6xpSRTc=;
+ b=YXZGSebN/JVJxQe5FUSG7i1JmeeDQLTqAlWS2VlVzlj3tXusbcKU5KfEmKUWW1YEdbV9nIUQruOv10tR6kBvOpx5qlatYjOhEr8ZNccB43A9RitSNWN5lKgPmwl97GiaiVueCEB8zBZUoFL4BI+mRPz+iUn0pGyNnuESENavBALqHYsLpfFA6i1bIBABVTcmKTSlEu+eGHdn2kJ3pfFg1nJfk1kHeFjHOEjHLr9UOZ+9+GvCaLlSwGq7Y7fT70EN8AwE1N86ftUL7VtbsuDAIcoiRa+O+OpIuX6QIuJLSuvG1ADEATADRKJVhxcvdifrJBIprmPxlWF80/YBoltbdQ==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nutanix.com;
+Message-ID: <6ba4cc53-d32b-4b18-af34-f0bcdb8f58a7@nutanix.com>
+Date: Wed, 14 Oct 2026 14:02:54 +0100
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v3 3/3] xhci-dbc: use brk_alloc()
-From: Jan Beulich <jbeulich@suse.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Marek Marczykowski <marmarek@invisiblethingslab.com>
-References: <8ad3beb3-af5a-477b-af97-614edb22631a@suse.com>
+Subject: Re: [PATCH 13/22] i8259.c: introduce TYPE_I8259_PIC device
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com,
+        sstabellini@kernel.org, anthony@xenproject.org,
+        edgar.iglesias@gmail.com, qemu-devel@nongnu.org,
+        xen-devel@lists.xenproject.org
+References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
+ <20260916104435.600211-14-mark.caveayland@nutanix.com>
+ <CAFEAcA-FFiWEs3ZLztVwZ72_TGLuhEBbfKnaZ3NFJJ1W-Wd33A@mail.gmail.com>
+ <c444a8ed-eb83-4a69-87e5-57c71f3a6d01@nutanix.com>
+ <CAFEAcA8v+pcFz+HsgT9M6xb_16qBKK5FOuf8WupP5KuQK+aNcQ@mail.gmail.com>
 Content-Language: en-US
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <8ad3beb3-af5a-477b-af97-614edb22631a@suse.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1791982968-50CDFB50-B42EBD28/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 2953
+From: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+In-Reply-To: <CAFEAcA8v+pcFz+HsgT9M6xb_16qBKK5FOuf8WupP5KuQK+aNcQ@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BY3PR05CA0004.namprd05.prod.outlook.com
+ (2603:10b6:a03:254::9) To PH0PR02MB7159.namprd02.prod.outlook.com
+ (2603:10b6:510:16::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH0PR02MB7159:EE_|CY5PR02MB8990:EE_
+X-MS-Office365-Filtering-Correlation-Id: d4308393-fb3f-46ac-9b8b-08df29f378de
+x-proofpoint-crosstenant: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|1800799024|366016|376014|6133799003|10067099003|22082099003|18002099003|4133799003|4143699003|261009223027099003|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	ZN+RIySVFW8i7GbMof/ZfOWqved2PPoD7wypBQymXTbkaL7604FMcWF+XiZ01yoqP1gFVQ86ty2IyxEK1/7+IZYWtlHMjqhT5GOFmFEksgtUoG4e6JlaJpmTbe5kDGFaSviUNiWZIWJU6/HmgyCebKZGAuYLzNBqnZ47hroHUrAryw7yQA34aVczTSOMBJb4ah+y20ff6TNS9mBWErTmUyO3341TDPF4zPazahfz1rKNjZDAW2LlhL4/r5OYFE90sDMlkAaCw8M2Xv8IAouBF9l2w/HaUGDN4IByuVRt9yJMwkidoFneidR9ZwwKt9pPLzos3hUqqkiKF1SXg9kL26X2+lj/jDA7wc00OjS37/PVJFN/yvSuVzVwVKzuEx3z91gRsgRV44TJP+iyHH6xgdfHukqeiuyMGOboF833YRAGAKTPm5KLi3xzJlbQZAtUFHP9cS9xkJIqUOpgya1GAb97QYLhdmsdRcmUszG4eYEsHD/hT9mEcDb15EulkYh05wsFwRTsYMKjjjZKgI86ZJ6/HYv73bWsUTLGGkKgu5xOWxTAYabJ4Qy3eLrRdSQY+bYzda3FyHjFn7hLhz/aw2BUyGKiBoL10EjJx6/Zm2LQVjFdx4zUkJhq5XgzovBg
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR02MB7159.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(366016)(376014)(6133799003)(10067099003)(22082099003)(18002099003)(4133799003)(4143699003)(261009223027099003)(56012099006);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?REM0bERCQ0VDZXU0NWt5R1BEVFhtRWtySjJIQVNTaU94ckhmZ29aekM5YU9S?=
+ =?utf-8?B?WkJ6MmIxU0JNeDJTSlJTbGNvaFpWWHFITGlyd2ViQVZMOC9MU1JPSGtsbklq?=
+ =?utf-8?B?MHMrc1JqMTB4L0lVRDNEaEdvSDBlYldIRDhJQjE2TmIrNUJVSHVwck1hZWN5?=
+ =?utf-8?B?VWpFT1c5YW5ROWVNSDRoV2dlSmtDR0MyWFh6V0pMTDVqRnI0KzRaSm9uTmhH?=
+ =?utf-8?B?M0xOZWphR2VGYTl6Vmg3RmFIa2xQYjE2R1NPRExlT0NEdzhZN1E2SmhZaGRt?=
+ =?utf-8?B?TTdmd1JYbkY1dXJLQUJFbkFBZXNHQjNpYWlVU1d2VGFYZEVSYjhtMWoxVDQz?=
+ =?utf-8?B?M1ZYTWk0MHZlRWdUV29Iek9VZnVZY0xpUmxleDQ1c2ZUWnlrVU42UEVnbmE0?=
+ =?utf-8?B?SXEwQm5uV2VSVkw5bVNmcWdUWmYzdDlXbnlJb1hZaC9QZkpaT1VEVlBpSFBy?=
+ =?utf-8?B?SWJ2bC9CNG9ncWFFQ25wTnBPMHJQVldoMG1ZdTBrZ0ZPM2JqNXZNUW9NNzJn?=
+ =?utf-8?B?ZVNtRytLS1lVQjMwSWlzSEE0b01OYUtBcXpUbENTZVdLb2VpWFgxUi9GcE4x?=
+ =?utf-8?B?ZjAwT3RtSDVrdDBaUU5ubFJiS3pYRk1MRmVJcVVWUFRUMmFabWE3VUxzRHA5?=
+ =?utf-8?B?dVVDVnd2ME15R09pK2xRZ1lsdVJKVy93OUlheStQN21UK1JXZHBQK3g2bG9X?=
+ =?utf-8?B?Y2U3djdNb2M1R1lUT2FFNkw5L3V2cFpqa3lJMUdLRzhKR0hhc2duTW9JcTV5?=
+ =?utf-8?B?bThNK0VJZlFVR29BNFp6SGlxeDczenB1TG4yUzhWc1h6aUVSQWNIMm5rWjdk?=
+ =?utf-8?B?TGNNWTI5MUpMUUl5dVNJdDZ4YzdwVGc4aDhFWDVSV1paaVVNcjJKa0RYSWpZ?=
+ =?utf-8?B?QjMva3NTeDhDWXJaL211MjdmTHI0TERLZW1kTTJCS2k4V2xYV3Y2RUtnMmFu?=
+ =?utf-8?B?UmtRK3o3ZGtEL1REMTJYNnRhd2xYSGw4czd0aSthbDFqdGhscmtFQTVqY3k4?=
+ =?utf-8?B?L3l6YzUvbU95NlJzamlGVkpvSUUwaytSMGhjNHRySWQ2dkpHV1pubDlOeE0w?=
+ =?utf-8?B?cEV1cER5bUtmSEkrZUo4Tkd1Zzlpb3V5RkpqNHpQbEJFZ1JkZ3NoMjFxMXFN?=
+ =?utf-8?B?WjJSR2ZJbUZNYVN1ditURGpaWVpTYXAxaWcxSVhXaUNaREdpdlRwOU9oN1d5?=
+ =?utf-8?B?VEQzRkpXbHZkRU5aWkFOQlIwdFNUQVNseS9tMHU0SlYxVVU0UmZZc212SDds?=
+ =?utf-8?B?WVNFNHByc2FLQVMzTzMwNnJFU3dLZGVyRS9qMmRNNTRhcnZ6L3NuQ1Q0K2tQ?=
+ =?utf-8?B?ODNwYzRjbDUzN0E5SisyRTBlN3ZTWlZHdzV5SEw1am5obEpPeWdIeWZ6cXhV?=
+ =?utf-8?B?RS9VaEdrWmpSWjVXQ2xJYXJHSDhvMURVVUhDYzlNT1lCNFYySjZiU1dHT3FN?=
+ =?utf-8?B?OVh4V050U0h5Z0lZZDdyV1RKREdZZExYcmlCTXZ2RlVLRzBQZ1gybXZSaHZ3?=
+ =?utf-8?B?R0JQT3BMVEk1eDVYSy83S2NWa1l2Wko0SEZ1VDZGUnJTRE9iZyt3QmVuTE5y?=
+ =?utf-8?B?R294bHJmaElRenRkd0JNS3Q4M1NUMTErY21FN05PN3RQRGtWTzBDbFBRYklm?=
+ =?utf-8?B?V2VrNng4WjNRakxqM0dtWHMxMVhoMWlyZTZNQVdYTzd4MHc3MzFGR3JaczUw?=
+ =?utf-8?B?bjZ6bi9oUU5ueTJuRDMzaWRrUXowblJoNHlNK1FSaWxmM1pzekd4VjlWbW5P?=
+ =?utf-8?B?aUVvNlkwaUtSOFlTVWFXMlRsLzh3bi9rbHByWjVUVkY1Z3cwc1c3OWhxZmhl?=
+ =?utf-8?B?TWtaNzQ0ME9lUGxnSXZwcTgzTnBUZEg0SndST1JpQkpjTEZBSmsyTnIzZ214?=
+ =?utf-8?B?YTlzNzBOQlVtNUgrMy8xZWY1RVUzZ1MwMG1oei9uK3lWUjlMVHFNVmdDa1BY?=
+ =?utf-8?B?ek1ZNlNQdWxVVFd3UmlpbHVKMW5iM05QUDJIdnJyRWVqbWtqQSszbVVPM2Q5?=
+ =?utf-8?B?d2tlSGowM0lUdmRVOW1MbmYrOWxHL1JuTVhIWTBBZkpMOHMzQjBJNDkvcTdj?=
+ =?utf-8?B?eTVsTVBZVjhBQ21LSU5FQUVYSnBJYjA5ZXpLdkVhd2xpNm5HMXhKdTBmeWlF?=
+ =?utf-8?B?YzlGSExNSmJ2UjgyUnFrUit1azc3RlVHZnBDMDE1SHdsZWpRWGJNWWttL3dq?=
+ =?utf-8?B?QmVJZi82T3R2NWZvTGFwY0hpYjlEYmF2dnNJMS9qVVZFVzRVMGVPWkg1YjRV?=
+ =?utf-8?B?Z1Q2ZVRTVlBXeVVJRkV6OHMvQkduN3lWZEJQUkw4YmxZcTJUMVJrRlllQjhV?=
+ =?utf-8?B?cnh5dEoySVB4bm5oeXBuZ0xUN0I3MXNpWmcyWWhzODNOY2xiRnVFUWZSUTVl?=
+ =?utf-8?Q?ATSfPCxzzxeXMkpQ=3D?=
+X-Exchange-RoutingPolicyChecked:
+	e9R+OkF3PBriXHmQQNCm7ZLGCxdF8prQuqbByNmykjaBokaUhoyYGRuOXzWyACYdFdstYgua+Q2bkyor1Or6Pi/oPWxSTwMFh8zogqFSA3QK1BfdyIgNei2UL2hWFPd+Cn86r4pFyveOiRPiFg2l5RfhsOM/31mRFrgyHbfocUrVLY4d1sBUsyQjvRHD5CP+TqVfJEOg8j8+kzuznX+S6H53lgg1f+Zz9Zp1VM6BVig3dxjmFzt0dHPaTedIiH4IY/5AhryJQJ9nTkWH+uvyhI7IYcMB2W2wgZS6Y0WSWp0KMG40MMs1+3zMTT7dG2KF/pCEUGlDwXp820ydNqfLZw==
+X-OriginatorOrg: nutanix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: d4308393-fb3f-46ac-9b8b-08df29f378de
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR02MB7159.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 14 Oct 2026 13:02:59.2927
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: bb047546-786f-4de1-bd75-24e5b6f79043
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: 0RHBt+GOa8Tl6cFGptCPah/OmwUXy5sStUgWsSAMyeqy/je6ZcydZSlodriOIj9mU7foXFPG7bk/6lDIoaCqVNpgEW5IHazT3mWNTsEymZI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY5PR02MB8990
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE0MDA1MSBTYWx0ZWRfX0ytvvr2/isaJ
+ 7PZvb0eyPzxqAv3Wjt34MzLpp4KX4gr2SgrvgeXdWwPyHTaoeAGhNhlnDnLoLQ3iACvSeFBEeO5
+ XDDD4HB+HZ6LtBAAHDGuHYrMrGxDqe2Qwr7X/gbkfUGxiL7RGYGACirIHXuL2KOFVEWDMPA9qsk
+ BYQqtHTUgfTfifRTHYgtwjw5rfCnb9lA6CvmbHMTQZ7MKvo5yLTUZoJchCYihI6jACUOZsLOlUv
+ +1BFQCRNhwXmWDGfYHqgCz6d+BI3DhToOgjltAWWuxFRDbF8jwxPn8HEayYs1AvN7khmPhNiC0T
+ NmyApAcE3PGEeJ9q1scnX2kSfK9A8p28cq+YrcKfc8E3pduukt2jiCnvEDKEJUTFNKyU4KJ8/j3
+ UISoSxQ/EsjCPZkYlpG6hfMVbFKLZA==
+X-Proofpoint-ORIG-GUID: 6aE_isPI4W8_4juOeydGyVoMAkX5V_KX
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE0MDA1MSBTYWx0ZWRfX+7TpWsvdhLN7
+ WJQoDJZY0vwup4hVoHqjuKICg0DUDX9JzNGMv7UDafNzRN4i76+xrMxUi6wlCmyQbYmUS+TQAna
+ e4qO3A+G2RuzE8heaA4dTmUfHWK9u2E=
+X-Proofpoint-GUID: 6aE_isPI4W8_4juOeydGyVoMAkX5V_KX
+X-Authority-Analysis: v=2.4 cv=OIuyTiaB c=1 sm=1 tr=0 ts=6acf7d86 cx=c_pps
+ a=qTO11YbfUBYfkhAk4rXMnw==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=0kUYKlekyDsA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=VofLwUrZ8Iiv6rRUPXIb:22 a=jxMXjlTPpCISP5mWtjnE:22
+ a=ID6ng7r3AAAA:8 a=UXIAUNObAAAA:8 a=64Cc0HZtAAAA:8 a=vTBCZPzhfYM-r4PNrEoA:9
+ a=QEXdDO2ut3YA:10 a=AkheI1RvQwOzcTXhi5f4:22 a=a1s67YnXd6TbAZZNj1wK:22
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-13_01,2026-10-09_01,2025-10-01_01
+X-Proofpoint-Spam-Reason: safe
+X-purgate-ID: tlsNG-c1860d/1791982994-D6D4087B-8D61B406/0/0
+X-purgate-type: clean
+X-purgate-size: 3677
 
-This way the relatively large chunk of DMA buffers can be freed when the
-driver isn't in use.
+On 14/10/2026 13:04, Peter Maydell wrote:
 
-Signed-off-by: Jan Beulich <jbeulich@suse.com>
-Reviewed-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
----
-v3: Re-base over moving of brk.c to common/.
+> On Wed, 14 Oct 2026 at 12:09, Mark Cave-Ayland
+> <mark.caveayland@nutanix.com> wrote:
+>>
+>> On 13/10/2026 17:17, Peter Maydell wrote:
+>>
+>>> On Wed, 16 Sept 2026 at 11:50, Mark Cave-Ayland
+>>> <mark.caveayland@nutanix.com> wrote:
+>>>> +struct I8259PICState {
+>>>> +    DeviceState parent_obj;
+>>>> +
+>>>> +    qemu_irq pic_out_irq;
+>>>> +    qemu_irq pass_irqs[ISA_NUM_IRQS];
+>>>> +
+>>>> +    ISABus *isabus;
+>>>> +    IRQState i8259_primary_out_irq;
+>>>> +    I8259CommonState i8259[2];
+>>>
+>>> This allocates only enough space for the common base class's
+>>> instance struct, but later we do an object_initialize_child()
+>>> of the child class. If the child class's state struct is
+>>> ever bigger than the common class, this will break.
+>>
+>> That's true. In theory this should be something like I8259State, however
+>> I didn't think it was worth adding a specific
+>> OBJECT_DECLARE_SIMPLE_TYPE() if there were no extra fields. I did
+>> quickly check that if this happens, then the assert() in
+>> object_initialize() fires so if this did happen then we'd find out
+>> really quickly.
+> 
+> I think that every QOM class ought to define its own instance
+> struct, even if it doesn't contain anything beyond the base
+> class. This means that when we do need to add a field in future
+> we don't have to go around and find the places which currently
+> use the parent-class struct but really want the leaf-class
+> struct. (There are places where we don't catch mistakes like
+> this -- for instance I think if you don't update the
+> .instance_size in a type then that doesn't get noticed:
+> we've had a bug or too like that).
+> 
+> We don't write that down in https://urldefense.proofpoint.com/v2/url?u=https-3A__wiki.qemu.org_Documentation_QOMConventions&d=DwIBaQ&c=s883GpUCOChKOHiocYtGcg&r=c23RpsaH4D2MKyD3EPJTDa0BAxz6tV8aUJqVSoytEiY&m=_sMHrUpIgbF65xjh0xd4r-zuudhThxapWCIXp0orT8OH8CbTHKgmaw4SuUcNTpeW&s=9mPS_zIx9x3FD_6cxEpVK-5JyOlynQ3bsBTf44iWLPk&e=
+> but we do have some similar rules about class structs that
+> boil down to "either you're a leaf class and provide none
+> of these things, or else you should provide them all; don't
+> have a halfway-house 'we happen to only need X and Y but
+> not Z right now' setup".
 
---- a/xen/drivers/char/xhci-dbc.c
-+++ b/xen/drivers/char/xhci-dbc.c
-@@ -19,6 +19,7 @@
-  * Copyright (c) 2019 Assured Information Security.
-  */
- 
-+#include <xen/brk.h>
- #include <xen/delay.h>
- #include <xen/iommu.h>
- #include <xen/mm.h>
-@@ -27,6 +28,7 @@
- #include <xen/serial.h>
- #include <xen/timer.h>
- #include <xen/types.h>
-+
- #include <asm/fixmap.h>
- #include <asm/io.h>
- #include <asm/string.h>
-@@ -1332,7 +1334,7 @@ static struct uart_driver dbc_uart_drive
- };
- 
- /* Those are accessed via DMA. */
--struct dbc_dma_bufs {
-+struct __aligned(PAGE_SIZE) dbc_dma_bufs {
-     struct xhci_trb evt_trb[DBC_TRB_RING_CAP];
-     struct xhci_trb out_trb[DBC_TRB_RING_CAP];
-     struct xhci_trb in_trb[DBC_TRB_RING_CAP];
-@@ -1346,8 +1348,7 @@ struct dbc_dma_bufs {
-      * DMA-reachable by the USB controller.
-      */
- };
--static struct dbc_dma_bufs __section(".bss.page_aligned") __aligned(PAGE_SIZE)
--    dbc_dma_bufs;
-+DEFINE_BRK(xhci, sizeof(struct dbc_dma_bufs));
- 
- static int __init cf_check xhci_parse_dbgp(const char *opt_dbgp)
- {
-@@ -1424,24 +1425,33 @@ void __init xhci_dbc_uart_init(void)
- {
-     struct dbc_uart *uart = &dbc_uart;
-     struct dbc *dbc = &uart->dbc;
-+    struct dbc_dma_bufs *dma_bufs;
- 
-     if ( !dbc->enable )
-         return;
- 
--    dbc->dbc_ctx = &dbc_dma_bufs.ctx;
--    dbc->dbc_erst = &dbc_dma_bufs.erst;
--    dbc->dbc_ering.trb = dbc_dma_bufs.evt_trb;
--    dbc->dbc_oring.trb = dbc_dma_bufs.out_trb;
--    dbc->dbc_iring.trb = dbc_dma_bufs.in_trb;
--    dbc->dbc_owork.buf = dbc_dma_bufs.out_wrk_buf;
--    dbc->dbc_iwork.buf = dbc_dma_bufs.in_wrk_buf;
--    dbc->dbc_str = dbc_dma_bufs.str_buf;
-+    dma_bufs = brk_alloc(sizeof(*dma_bufs));
-+    if ( !dma_bufs )
-+    {
-+        dbc->enable = false;
-+        printk(XENLOG_ERR "XHCI: not enough BRK space available\n");
-+        return;
-+    }
-+
-+    dbc->dbc_ctx = &dma_bufs->ctx;
-+    dbc->dbc_erst = &dma_bufs->erst;
-+    dbc->dbc_ering.trb = dma_bufs->evt_trb;
-+    dbc->dbc_oring.trb = dma_bufs->out_trb;
-+    dbc->dbc_iring.trb = dma_bufs->in_trb;
-+    dbc->dbc_owork.buf = dma_bufs->out_wrk_buf;
-+    dbc->dbc_iwork.buf = dma_bufs->in_wrk_buf;
-+    dbc->dbc_str = dma_bufs->str_buf;
- 
-     if ( dbc_open(dbc) )
-     {
-         iommu_add_extra_reserved_device_memory(
--                PFN_DOWN(virt_to_maddr(&dbc_dma_bufs)),
--                PFN_UP(sizeof(dbc_dma_bufs)),
-+                PFN_DOWN(virt_to_maddr(dma_bufs)),
-+                PFN_DOWN(sizeof(*dma_bufs)),
-                 uart->dbc.sbdf,
-                 "XHCI console");
-         serial_register_uart(SERHND_XHCI, &dbc_uart_driver, &dbc_uart);
+Yes, that's fine with me. I have done it that way previously, however 
+there are some people on-list still advocating for the approach in this 
+series.
+
+If we decide that this is our preferred style then I think it's worth 
+documenting in somewhere in 
+https://qemu.readthedocs.io/en/master/devel/style.html#qemu-object-model-declarations 
+so that we can point people (and LLMs) towards it.
+>>>>    static const TypeInfo i8259_type_infos[] = {
+>>>>        {
+>>>>            .name       = TYPE_I8259,
+>>>>            .parent     = TYPE_I8259_COMMON,
+>>>>            .class_init = i8259_class_init,
+>>>>        },
+>>>> +    {
+>>>> +        .name          = TYPE_I8259_PIC,
+>>>> +        .parent        = TYPE_DEVICE,
+>>>
+>>> Devices that directly inherit from TYPE_DEVICE are awkward,
+>>> because they never get reset. Conviently this device doesn't
+>>> currently need a reset method, but still, is this a good idea?
+>>
+>> In this case I think it's correct, because the PIC device in this case
+>> is a container for 2 cascaded i8259s which are connected separately to
+>> the ISA bus. Therefore each i8259 will have its reset triggered via a
+>> reset of the ISA bus.
+>>
+>> The container itself can't exist on the ISA bus because it would then
+>> appear as a separate device which doesn't make sense in this case.
+> 
+> OK.
+
+ATB,
+
+Mark.
 
 
