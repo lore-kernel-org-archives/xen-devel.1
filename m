@@ -4,41 +4,41 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B12EFC3DA7A
-	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 16:37:37 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1449314.1665167 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 986BFC3DA7A
+	for <xen-devel@archiver.kernel.org>; Wed, 14 Oct 2026 16:37:55 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1449320.1665175 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xH1ye-0005m4-Gy; Wed, 14 Oct 2026 16:37:16 +0000
+	id 1xH1z9-0006KX-Og; Wed, 14 Oct 2026 16:37:47 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1449314.1665167; Wed, 14 Oct 2026 16:37:16 +0000
+Received: by outflank-mailman (output) from mailman id 1449320.1665175; Wed, 14 Oct 2026 16:37:47 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xH1ye-0005lx-DV; Wed, 14 Oct 2026 16:37:16 +0000
-Received: by outflank-mailman (input) for mailman id 1449314;
- Wed, 14 Oct 2026 16:37:15 +0000
+	id 1xH1z9-0006KQ-LI; Wed, 14 Oct 2026 16:37:47 +0000
+Received: by outflank-mailman (input) for mailman id 1449320;
+ Wed, 14 Oct 2026 16:37:47 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <kees@kernel.org>) id 1xH1yd-0005lr-5V
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 16:37:15 +0000
+ (envelope-from <kees@kernel.org>) id 1xH1z9-0006KK-AJ
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 16:37:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xH1yc-00C7k3-IY
- for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 18:37:14 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xH1z8-00CqyG-NR
+ for xen-devel@lists.xenproject.org; Wed, 14 Oct 2026 18:37:46 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <kees@kernel.org>)
- id 6acfafb8-bab6-0a2a0a5309dd-0a2a4508e31a-6
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 18:37:14 +0200
+ id 6acfafd8-2eae-0a2a0a5409dd-0a2a4506ae08-4
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 18:37:46 +0200
 Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <kees@kernel.org>)
- id 6acfafb8-f659-0a2a45080019-aceafc1fb7fa-3
- for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 18:37:14 +0200
+ id 6acfafd9-195a-0a2a45060019-aceafc1fe1f4-3
+ for <xen-devel@lists.xenproject.org>; Wed, 14 Oct 2026 18:37:46 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 4A7DB4138B;
- Wed, 14 Oct 2026 16:37:12 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 258481F000C4;
- Wed, 14 Oct 2026 16:37:12 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id C9B3E4094A;
+ Wed, 14 Oct 2026 16:37:44 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id A3E201F000C4;
+ Wed, 14 Oct 2026 16:37:44 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,19 +52,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:Cc:Subject:References:In-Reply-To"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1791995832;
-	bh=D0qFplMD3JegnW7i3iVJkwgfMDmyoOPsyHFrtj+nxBA=;
+	s=k20260515; t=1791995864;
+	bh=ovAqcUcR1GnKTtcInlqEnrexmz1gsb8w6q2FfK1T5r4=;
 	h=Date:From:To:Cc:Subject:References:In-Reply-To;
-	b=n9IplbiX+93nceH23XmnKeZ5oYecY++a3sP1FSp8/eoJQHlwosXybufpa8S8KQDs4
-	 JSOYDlE3dW0Tstqig9001fDQnyF55nygDlSOHNkJdYmGR6xIoM+nl1dQhuyjrtkVwj
-	 EuXqe73P+3VZ6BDKW7wiUBDkX32NJU8qFo902yMRcaug/7BAm5oKbDw4gxCh7LxUqC
-	 Y7NxYDYR/y/z28DqpEx8zGTH0dUYz2jKMESyevlBsADLYmloXFD5sbjroBfTPOb1YO
-	 EAaIr8VM2TPJc/hDXYqOW71XwpeyatwvwVWF6WB1T2qG0eJVVmvgIrJgOh3HFB8l/2
-	 2qpSERGwTKhRA==
-Date: Wed, 14 Oct 2026 09:37:11 -0700
+	b=GwrpOxogXrqhTXQ0pfmjgGMR/nhqs689d6d2T2UbxyqwEi+VJ/4ET2F3bxSsa/yCN
+	 EaglIPzBQ4qutHm/Eihe0pPBAWe+NlyY72FoJLC4Rcx8zYnrd+VBcodEifrd7JTzwT
+	 8EqOjY6NHHc/4uGTfqT13dIP1aP05fs1tpq0wWe/LFtLEAv3fcER387/hVuHvXtsuD
+	 UxSDlOug9/2BlYA6zAYEAL+qTg5TM5momYM01f0IFfrqT1XCvpcIhwvzWCD/yfd3Rd
+	 ixvRP2r8X3I5Gfn87O/r4tNbn1q5lLdLD9Jj9tp7JpRRBzFzF6fUQnw/3GazF0kGmz
+	 Z7FdXtLFV/36A==
+Date: Wed, 14 Oct 2026 09:37:44 -0700
 From: Kees Cook <kees@kernel.org>
-To: Greg Kroah-Hartman <gregkh@linuxfoundation.org>
+To: Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>
 Cc: Ian Rogers <irogers@google.com>,
+	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
 	"Rafael J . Wysocki" <rafael@kernel.org>,
 	Danilo Krummrich <dakr@kernel.org>, Miguel Ojeda <ojeda@kernel.org>,
 	Nathan Chancellor <nathan@kernel.org>,
@@ -104,65 +105,49 @@ Cc: Ian Rogers <irogers@google.com>,
 	linux-s390@vger.kernel.org, linux-mtd@lists.infradead.org,
 	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
 	linux-kernel@vger.kernel.org
-Subject: Re: [PATCH 00/11] kobject: Require explicit initialization of struct
- kobj_type::release
-Message-ID: <202610140932.5F9CFCE5@keescook>
+Subject: Re: [PATCH 01/11] Compiler Attributes: Add
+ __require_explicit_initialization macro
+Message-ID: <202610140937.B68C8C9AAC@keescook>
 References: <20261013223946.1836757-1-irogers@google.com>
- <2026101425-why-boring-4f2d@gregkh>
+ <20261013223946.1836757-2-irogers@google.com>
+ <CANiq72mLUh1JB=9e=tqStuL_H3=Ormx5v-uFkCDp-0zZm7tBrQ@mail.gmail.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <2026101425-why-boring-4f2d@gregkh>
-X-purgate-ID: tlsNG-c1860d/1791995834-CF55C87B-2D44C7DA/0/0
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <CANiq72mLUh1JB=9e=tqStuL_H3=Ormx5v-uFkCDp-0zZm7tBrQ@mail.gmail.com>
+X-purgate-ID: tlsNG-16d1c6/1791995866-F627077B-38CF966C/0/0
 X-purgate-type: clean
-X-purgate-size: 2457
+X-purgate-size: 1068
 
-On Wed, Oct 14, 2026 at 07:36:41AM +0200, Greg Kroah-Hartman wrote:
-> On Tue, Oct 13, 2026 at 03:39:35PM -0700, Ian Rogers wrote:
-> > Clang supports the 'require_explicit_initialization' attribute on struct
-> > fields to enforce that the field is explicitly initialized when an
-> > aggregate object is constructed, emitting -Wuninitialized-explicit-init
-> > (enabled by default) if the field is omitted.
-> > 
-> > Following discussion at the Linux Plumbers Conference [1], this series
-> > introduces __require_explicit_initialization in
-> > include/linux/compiler_attributes.h and applies it to
-> > struct kobj_type::release.
+On Wed, Oct 14, 2026 at 01:28:55PM +0200, Miguel Ojeda wrote:
+> On Wed, Oct 14, 2026 at 12:40 AM Ian Rogers <irogers@google.com> wrote:
+> >
+> > +/*
+> > + * Optional: not supported by gcc
+> > + *
+> > + * clang: https://clang.llvm.org/docs/AttributeReference.html#require-explicit-initialization
+> > + */
+> > +#if __has_attribute(__require_explicit_initialization__)
+> > +# define __require_explicit_initialization __attribute__((__require_explicit_initialization__))
+> > +#else
+> > +# define __require_explicit_initialization
+> > +#endif
 > 
-> Cool, sorry I missed that talk.
-
-Yeah, I'm really liking these compile-time checks. :)
-
+> The LPC slides mention Clang 14+, but from a quick test in Compiler
+> Explorer and a `git log --grep` on the LLVM repository to confirm, it
+> seems the attribute was introduced in Clang 20+, no?
 > 
-> > As Documentation/core-api/kobject.rst notes:
-> >   "One important point cannot be overstated: every kobject must have a
-> >   release() method, and the kobject must persist (in a consistent state)
-> >   until that method is called. If these constraints are not met, the code
-> >   is flawed."
-> > 
-> > Annotating struct kobj_type::release caught 30 struct kobj_type
-> > definitions across the tree that omitted .release:
-> > - Patches 2-10 fix 10 struct kobj_type definitions where dynamically
-> >   allocated kobjects, ksets, or enclosing structures were either leaked on
-> >   kobject_put() or freed prematurely before kobject release (risking a
-> >   use-after-free when CONFIG_DEBUG_KOBJECT_RELEASE=y).
-> > - Patch 11 annotates struct kobj_type::release with
-> >   __require_explicit_initialization and explicitly sets .release = NULL
-> >   (with explanatory comments) on the remaining legacy struct kobj_type
-> >   definitions whose kobjects are static, per-CPU, or embedded in devm- or
-> >   parent-managed structures.
+> If that is correct, then it is not available in all LLVM versions we
+> support (LLVM 17+), so we should add:
 > 
-> Sounds great, but let's fix up the users before adding the attribute.
-> Looks like some of these need another version so it might take a bit of
-> time to get them all merged.
+>      * Optional: only supported since clang >= 20.0
+> 
+> With that:
+> 
+> Acked-by: Miguel Ojeda <ojeda@kernel.org>
 
-I'd really like to have the attribute available, and I've got at least
-one user I can apply today that don't require fix-ups (seq_file), so
-if Miguel is okay with it, I'd like to snag patch 1 and send it with
-my seq_file "first user" for this coming merge window so it's available
-starting with v7.4-rc1, and we don't end up needing to wait 10 weeks for
-other subsystems to be able to use it. And the kobj fixups can continue
-in parallel. Does that sounds okay?
+Yup, I can confirm, I only see it with 20+ too.
 
 -- 
 Kees Cook
