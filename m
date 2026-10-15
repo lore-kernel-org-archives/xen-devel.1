@@ -4,46 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30C31CCA464
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 20:26:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1451086.1666289 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D8F57CCA467
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 21:05:50 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1451117.1666298 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHS1o-0003tL-Bq; Thu, 15 Oct 2026 20:26:16 +0000
+	id 1xHSds-0001Xv-4f; Thu, 15 Oct 2026 21:05:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1451086.1666289; Thu, 15 Oct 2026 20:26:16 +0000
+Received: by outflank-mailman (output) from mailman id 1451117.1666298; Thu, 15 Oct 2026 21:05:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHS1o-0003tD-7C; Thu, 15 Oct 2026 20:26:16 +0000
-Received: by outflank-mailman (input) for mailman id 1451086;
- Thu, 15 Oct 2026 20:26:15 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xHSds-0001Xn-26; Thu, 15 Oct 2026 21:05:36 +0000
+Received: by outflank-mailman (input) for mailman id 1451117;
+ Thu, 15 Oct 2026 21:05:35 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Yazen.Ghannam@amd.com>) id 1xHS1n-0003t1-Ob
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 20:26:15 +0000
+ (envelope-from <andrew.cooper3@citrix.com>) id 1xHSdr-0001Xb-Ed
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 21:05:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHS1m-00Glze-RX
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 22:26:14 +0200
+ id 1xHSdq-003e3Q-JU
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 23:05:34 +0200
 Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Yazen.Ghannam@amd.com>)
- id 6ad136dd-8faa-0a2a0a5109dd-0a2a45059ef4-16
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 22:26:14 +0200
-Received: from [52.101.57.68]
- (helo=BN8PR05CU002.outbound.protection.outlook.com)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6ad14007-2eae-0a2a0a5409dd-0a2a4505d1bc-24
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 23:05:34 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
  by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Yazen.Ghannam@amd.com>)
- id 6ad136e5-4cb1-0a2a45050019-34653944e869-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 22:26:14 +0200
-Received: from DM4PR12MB6374.namprd12.prod.outlook.com (2603:10b6:8:a3::18) by
- DS0PR12MB6631.namprd12.prod.outlook.com (2603:10b6:8:d1::14) with
- Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.472.20; Thu, 15 Oct 2026 20:26:05 +0000
-Received: from DM4PR12MB6374.namprd12.prod.outlook.com
- ([fe80::af35:a7a6:6ca:7fcf]) by DM4PR12MB6374.namprd12.prod.outlook.com
- ([fe80::af35:a7a6:6ca:7fcf%5]) with mapi id 15.21.0522.011; Thu, 15 Oct 2026
- 20:26:03 +0000
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6ad1401e-4cb1-0a2a45050019-d155dd2ee9f0-3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 23:05:34 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-48bbb06e746so1199061f8f.3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 14:05:34 -0700 (PDT)
+Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
+ [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48dfd4f8bd9sm501163f8f.35.2026.10.15.14.05.32
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Thu, 15 Oct 2026 14:05:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,206 +53,94 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=fail header.s=selector1 header.d=amd.com header.i="@amd.com"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=T3FT+01/u6bliMTPcErBre6bF0mkEGYGd5FVi+ib6JpmtaPDnfyVfCj0UMu7cKjoOfptDUaXHj1HadDZE+RAGoOHmWnG0X6NASRO8UsWACGF242M46ak6tlAvjNs5cjXkXdo7jGTXQ53MSFUPKEWaan0WK54k2N4tE+t0B3M42eh9TCx1Xurz2jhP8SA6m41ha0KxbNPEnELuyv7+KCjtwP1zjk9BAqIPKhbtHao/QhHSHsLPkkA6zvZ4baNv8WYtcu2WwH9kzWvQP/taTSgXGUhFAMyVKBOSZopC/oQGaBh3TKeW8YZNJrEl2Q2yDe7fck+dP7snthc3TU05I0ukg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=dIhrhRYhWiXVbuVvBbLaM2UZKoe9JP+wgs2TfqwRFiY=;
- b=tgzvhnelzUlGmOGlmH04oVmlXL5zzsmqZCwdIC1Z+0wWatB+ykAyg4gAUlN4NwPY5xOIFXuWAS/ltQa3fZ4eTS3RVNAE7m+qb7dM5Siq/COU5UmjCC6RObR7SyB8ojQtzISbtVxQYK/Obnhl9yGaZzq4KLhiDxTo2M+o0V2sheGBT+BHgJXYSrKoCHjgf5tI80J4VwB7EM/OXjyHMkfT8JxKAHy24KQ0NYs2DWdvrZpAovkriaJSiBGNkSuxmCmGUpZimhEIWkK/i0BmC+Tq9SNdW++yohaQVxNtxmGG759IZJseoPcbByjiKNgpQ/D4gfJGMDREGbeLn39DiTw6xg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=dIhrhRYhWiXVbuVvBbLaM2UZKoe9JP+wgs2TfqwRFiY=;
- b=1XEZfswBtRJsfrFGDbntL3y14D5qm421CEaErP5Wj+Ey213pwy9SYDTjV3veaagb+tlnxXMdn4rUAGmlVLqDHG1cakqumSs4DZrE9xchvmJg9NVtecbu0Jc/MlKYjx2VkU92ht4KW8/EA+ux4dXB2OAWNfzueGMrBaClJpnYJUc=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Date: Thu, 15 Oct 2026 16:25:45 -0400
-From: Yazen Ghannam <yazen.ghannam@amd.com>
-To: Juergen Gross <jgross@suse.com>
-Cc: linux-kernel@vger.kernel.org, x86@kernel.org,
-	linux-perf-users@vger.kernel.org, linux-hyperv@vger.kernel.org,
-	kvm@vger.kernel.org, virtualization@lists.linux.dev,
-	linux-edac@vger.kernel.org, linux-pci@vger.kernel.org,
-	linux-pm@vger.kernel.org, linux-coco@lists.linux.dev,
-	linux-acpi@vger.kernel.org, linux-ide@vger.kernel.org,
-	dri-devel@lists.freedesktop.org, linux-crypto@vger.kernel.org,
-	linux-gpio@vger.kernel.org, linux-hwmon@vger.kernel.org,
-	linux-mtd@lists.infradead.org, platform-driver-x86@vger.kernel.org,
-	linux-fbdev@vger.kernel.org, Thomas Gleixner <tglx@kernel.org>,
-	Ingo Molnar <mingo@redhat.com>, Borislav Petkov <bp@alien8.de>,
-	Dave Hansen <dave.hansen@linux.intel.com>,
-	"H. Peter Anvin" <hpa@zytor.com>,
-	Peter Zijlstra <peterz@infradead.org>,
-	Arnaldo Carvalho de Melo <acme@kernel.org>,
-	Namhyung Kim <namhyung@kernel.org>,
-	Mark Rutland <mark.rutland@arm.com>,
-	Alexander Shishkin <alexander.shishkin@linux.intel.com>,
-	Jiri Olsa <jolsa@kernel.org>, Ian Rogers <irogers@google.com>,
-	Adrian Hunter <adrian.hunter@intel.com>,
-	James Clark <james.clark@linaro.org>,
-	"K. Y. Srinivasan" <kys@microsoft.com>,
-	Haiyang Zhang <haiyangz@microsoft.com>,
-	Wei Liu <wei.liu@kernel.org>, Dexuan Cui <decui@microsoft.com>,
-	Long Li <longli@microsoft.com>,
-	Sean Christopherson <seanjc@google.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Ajay Kaher <ajay.kaher@broadcom.com>,
-	Alexey Makhalov <alexey.makhalov@broadcom.com>,
-	Broadcom internal kernel review list <bcm-kernel-feedback-list@broadcom.com>,
-	Josh Poimboeuf <jpoimboe@kernel.org>,
-	Pawan Gupta <pawan.kumar.gupta@linux.intel.com>,
-	Pu Wen <puwen@hygon.cn>, Tony Luck <tony.luck@intel.com>,
-	Reinette Chatre <reinette.chatre@intel.com>,
-	Dave Martin <Dave.Martin@arm.com>,
-	James Morse <james.morse@arm.com>, Babu Moger <babu.moger@amd.com>,
-	Tony W Wang-oc <TonyWWang-oc@zhaoxin.com>,
-	Vitaly Kuznetsov <vkuznets@redhat.com>,
-	Andy Lutomirski <luto@kernel.org>,
-	Bjorn Helgaas <bhelgaas@google.com>,
-	"Rafael J. Wysocki" <rafael@kernel.org>,
-	Pavel Machek <pavel@kernel.org>, Kiryl Shutsemau <kas@kernel.org>,
-	Rick Edgecombe <rick.p.edgecombe@intel.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Len Brown <lenb@kernel.org>, Damien Le Moal <dlemoal@kernel.org>,
-	Niklas Cassel <cassel@kernel.org>,
-	David Airlie <airlied@redhat.com>,
-	Olivia Mackall <olivia@selenic.com>,
-	Herbert Xu <herbert@gondor.apana.org.au>,
-	Viresh Kumar <viresh.kumar@linaro.org>,
-	Huang Rui <ray.huang@amd.com>,
-	Mario Limonciello <mario.limonciello@amd.com>,
-	Perry Yuan <perry.yuan@amd.com>,
-	K Prateek Nayak <kprateek.nayak@amd.com>,
-	Srinivas Pandruvada <srinivas.pandruvada@linux.intel.com>,
-	Linus Walleij <linusw@kernel.org>,
-	Bartosz Golaszewski <brgl@kernel.org>,
-	Guenter Roeck <linux@roeck-us.net>,
-	Artem Bityutskiy <artem.bityutskiy@linux.intel.com>,
-	Artem Bityutskiy <dedekind1@gmail.com>,
-	Arnd Bergmann <arnd@arndb.de>,
-	Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
-	Miquel Raynal <miquel.raynal@bootlin.com>,
-	Richard Weinberger <richard@nod.at>,
-	Vignesh Raghavendra <vigneshr@ti.com>,
-	Ashok Raj <ashok.raj.linux@gmail.com>,
-	Hans de Goede <hansg@kernel.org>,
-	Ilpo =?iso-8859-1?Q?J=E4rvinen?= <ilpo.jarvinen@linux.intel.com>,
-	Rajneesh Bhardwaj <irenic.rajneesh@gmail.com>,
-	Xi Pardee <xi.pardee@linux.intel.com>,
-	Daniel Lezcano <daniel.lezcano@kernel.org>,
-	Zhang Rui <rui.zhang@intel.com>, Lukasz Luba <lukasz.luba@arm.com>,
-	Helge Deller <deller@gmx.de>, xen-devel@lists.xenproject.org,
-	linux-geode@lists.infradead.org,
-	Michael Kelley <mhklinux@outlook.com>,
-	Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>
-Subject: Re: [PATCH v4 12/13] treewide: convert rdmsrq() from a macro to an
- inline function
-Message-ID: <20261015202545.GA1335@yaz-khff2.amd.com>
-References: <20261008071839.2247074-1-jgross@suse.com>
- <20261008071839.2247074-13-jgross@suse.com>
-Content-Type: text/plain; charset=iso-8859-1
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <20261008071839.2247074-13-jgross@suse.com>
-X-ClientProxiedBy: BLAPR03CA0069.namprd03.prod.outlook.com
- (2603:10b6:208:329::14) To DM4PR12MB6374.namprd12.prod.outlook.com
- (2603:10b6:8:a3::18)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1792098334; x=1792703134; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=1jLDJ1dB+NAtq9SWX+068kA/fTXsIbgXnYxnbgLHBbY=;
+        b=NsAqYFLe5nhSVsAQDAuFkzLljfojpbJRO65jyoMVehc5OW9VVuREdgJ92ZIsaQo+Fj
+         JJj+jwCCPyvDBrAmj8fVTZw3Z+AnLcryEyGOf8Y7hATt2IFWM269ue7tLnKKBG1L079H
+         Kkp3OZ48KLOMqvrTFMWdlC70zOTzz5bnSaCM0=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792098334; x=1792703134;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=1jLDJ1dB+NAtq9SWX+068kA/fTXsIbgXnYxnbgLHBbY=;
+        b=gKiMdaQ7pXV1Xrt55cRobu1OiPDqcuL1Zm/6rJJcNeY8x3DbaVUday0AutR5ZhjLsI
+         mUoi4BX/KKvyV+YkKfAJRC/5WQhaC68Uq7aN7iIstqOScf3XhZwxLK2JK8EhAaq5YzJz
+         UolvvnyTT24dEjBukM7BIaEL0j5SzP+Z0losThjlng3UR0wF94MweWo/MnFSHfArSspA
+         s8Q3IjBqKzc3unQcx06ItZctvWzo6yQ88s+5+P3Nu8y/ZKrcLVFk0dDb7qpYHAW7ySVy
+         1qoAD9rfU7dthBPx9zUHnO7JA2gkapohfvp7E4/4eDaLzTg1CdBdEQ6mv+LviYnHR6mq
+         WG4g==
+X-Gm-Message-State: AFq9FYKYQDofJpjSMwef4LNvJQnyTmkdZQFeKTaYHP7biEZltpFqgm0r
+	NrBLhL7lcgolAlRpO5bWgZCDKQXQt/S5QaNzkFqiWn6YvGUuXUPHa7RZZ6OgWFCa/oUY4PvtboJ
+	cUKk4BiU=
+X-Gm-Gg: AYBFou14hmDdxjW7OyHD7HA8chSDFmIVaDM9BA84K0KnkTWH4FA6p78iYQtEQ0Zk9v4
+	xjKB15nb0U93XZVbdIK+uhwMwVbjXz6zCuliiDQkpopE53vXQvn7ePhww3rTpMGUsGcpIc1GYuD
+	g2uIRDxGyk+3I1gaHpYqRqS0elNuV5OGMssfn87imtKWReZAUXfIXvbAlyYDSzrDedELelyo+Ud
+	gNqKOnbuC9o6K+++WGTQlChVaOTMs48nR9mpp9rrrl8yHdqu6ertBRmv7actx1Wg/Eft2dLx8ua
+	ya2o3J8VZg0QwSYxowDgEciWlbGR7Z6ilHOvypfwEkcWfHcEG99QynRGYW1GH5t81n1TRxRb+2i
+	GnSXLMgY0bgdm73J/wY2vizhqeoBnBxv1PUxp0O9xQqGAx9OqcBBkxO/b56lNw5mQjr3IGG9FR1
+	n8NnbzyQlyHk0JsVvsl9zNugMZFfX9mn/a33aajCPcceUstqRaF/EH3llR0WvmiCPSGSbDdcFgA
+	OnCMDdOQf04ExfdIekrMw22hGw5scJ9ICAOHdUziNe5B6wJmjiMhb+tsTA=
+X-Received: by 2002:a05:600d:82c1:b0:4a1:6a10:4dc8 with SMTP id 5b1f17b1804b1-4a1bd175fa1mr115844435e9.28.1792098333490;
+        Thu, 15 Oct 2026 14:05:33 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH v4 0/5] x86/alternatives: Adjust all insn-relative fields
+Date: Thu, 15 Oct 2026 22:05:25 +0100
+Message-Id: <20261015210530.786604-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: DM4PR12MB6374:EE_|DS0PR12MB6631:EE_
-X-MS-Office365-Filtering-Correlation-Id: a2d1fad7-3215-4308-603c-08df2afa88a8
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|366016|1800799024|23010399003|56012099006|11063799006|4143699003|10067099003|22082099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	9PfaU+CcBdAhpbx/C/NnJ62bGXvju0n9WXba5N2vYW/Bu8MXDfMOwZXmplw0TWe/Xfy9Ue5H/8Vf0eTVqpjapRKvUGEXzvPOAez22EZCKfNUj+KdHstqtOI5QpR+mSJBbcyQps8Zqll4zN8nRwe1HJ94DcT18X92JboGTixnDlCcRU9ssowbjCQ2KXa2plgNFm2pi3WQdvbO02xHhuZ2JTvnuBWrnkG7FtFsUwaZ+oykNG0zjyDQAAN+2Lrw/7auGMjcahOuw/lc5BqDgM1jPPx6ItQv3sOz5IhbK0FNYK/7Kk/CxJgKFLDYvaHdOACx7nP6cPQdkntMLVjoF8qLFcqKWV0K6F5oNaMP++PUFPnUNzUiOc19az/JMRSW4XgADu3veOrqR8ABBdRB/vRR00C765Nt3rjJDHI3NWPM5RsuVkF6lD1AfxSJNtsM4k0KakJxcl1hBJqnACTytU303aKkaKmZep3mk2OkKKYwxlRmvWIAirFvQdEn3grk6XxesUfWNVFmXfhSs+KUPUp0pplmACDruIBXnGcVTAjNLhTaGEh+ZpVT3BBOSI5tP1gsJH2WclliUW8dG/PXBMLV2QDNypOW5tb4RbstTC0+7VGKht/4TndNa+ivB1OsDDqH6E2L9Nve16nMVimFCfUy1u0ZmvIalfkwb0+NwLUdQh8=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DM4PR12MB6374.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(1800799024)(23010399003)(56012099006)(11063799006)(4143699003)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?iso-8859-1?Q?BeRIkSzZ8/fzyvoZWeb8eHGmHpJKuigV4R+vAkaFv49Fn23fQylbI0uNN3?=
- =?iso-8859-1?Q?fpDbggTObTiE5LxUHsG6d8QJh3CcDhsPgn64Dgga5DSrUqZ6dbs8yVEbcy?=
- =?iso-8859-1?Q?ToVhD7HSifFwpcnK0MYPy1IVry4tYn8lZA+J5joSdVH5SLfUDBwBy2eRSL?=
- =?iso-8859-1?Q?K3/cQIWz6AvC/PE6dHLxW2qN9QZkcXl5xRCYGwOOm0nmL4XWqFFwfpqw5s?=
- =?iso-8859-1?Q?OFFJbnp2KGlkbrws4YGlB2KUHjNch7UxIp/F2dS+fcLG5vfxg10ih3stde?=
- =?iso-8859-1?Q?9Rq5vvxfjFzCn80wcuPnc1PPlrxxKWTLXeAd9RoKN3tuOVJjYv8scS+hTZ?=
- =?iso-8859-1?Q?AcHWbhAHu7fcc2s7xp7uv8/nFOIDvqDw3XEyyrCrfu2IqSdL+FjhCUK68G?=
- =?iso-8859-1?Q?thi5VN46zxhXIQ1/KMiOXpU7DNwt3b/piu+Adc3ss93lPVFcKAhsYnRn8y?=
- =?iso-8859-1?Q?uPzLtPD2LKdq8ZqIRzMpaQW7lcK9GkQWBVzet8hs2hXdVIjkFdnmLq2Gny?=
- =?iso-8859-1?Q?UGRXokDl88LB83pnRC4r/sgmi40WAemQKGdfqQSbbfGUHLpiW1U+uycR9B?=
- =?iso-8859-1?Q?fYHure4O+uiw1/yS83SyJy1V8kLEOqJaArZsTyWw4+uxiVZ516EVhYhPJ1?=
- =?iso-8859-1?Q?QXrlO+gWLkVMXswJDkj4yvFLfMdCr6Uiv+T74uBUr2+CpW4w/qTmx01W09?=
- =?iso-8859-1?Q?uUhHaKqUBWWckgGA3s4twzSbkVwY1XW3KoUdOmhyiUIOM4byrb94SqE/+D?=
- =?iso-8859-1?Q?8rKoYkE44C3qslEnt724cf7x5vOEJMrrKtNIOwOuOGYu4xitLUzSWMWhmF?=
- =?iso-8859-1?Q?y7H08UTdyS7NtXNPUQMD5vkoi5GFPXkZk3R8MHkvwf1mOMunuyFb3dfmz0?=
- =?iso-8859-1?Q?/3RWD8iDcN9nSnfX+hqhmvnGY7woHILu1WaeLQtFYthZBcAqExmDQHdcAe?=
- =?iso-8859-1?Q?iGYIwBWVXmZJMY3+OcOJYdDd2Dx1eAZR8hHTkL/AeSjpXIJbtaYHOuuAV/?=
- =?iso-8859-1?Q?ZU1GpbrTW8G4MnZOtmvpaq9Nk4oIHU5b8k1R6X+mKm9d2PGEAcwRmk5B62?=
- =?iso-8859-1?Q?bfKAeoS9/JLRLjPB/We6a9uBmgdTnuqUHA/fm986f+qDBWeKlLaresnAVn?=
- =?iso-8859-1?Q?nVqOCuMGAtfhUIPQ7HDtpSgSR21Pcf/kd9eoeU/4Ptfn6DmmtZtK3hnqU5?=
- =?iso-8859-1?Q?7/pHXY2XbCeaV1TtTjAH86iTgQibYp1oTs+F+oYxlHwqZvRYj9s7SqOQXe?=
- =?iso-8859-1?Q?Wtl/Xf1PQ+3l6TY2YE2ggKOHL2M/tTnlynRy7gp+JyNsfYFZTqcQRSQXkx?=
- =?iso-8859-1?Q?pCow6V0A+3Uy5Cqeqo22bL9lVuvFQf98hqLQ/+bE5JZ5ucE/3KtBdoMpeS?=
- =?iso-8859-1?Q?FeVwfdPdamV6QbZXYQZHGtiReIicPhpwDksBlun1d45pzFgd+Froj1hqna?=
- =?iso-8859-1?Q?cDYR72jzbwcneD9UJ6FUscCJtZeqTzOygeRGZBShzSpySFrMAsEjYu1nOz?=
- =?iso-8859-1?Q?A1rB3vGau4ZoahVFx9LU1uQLzTS7HvLOVvAjaehCF1ji5AktbPY/GSnT3x?=
- =?iso-8859-1?Q?zrCbMeAEp4Q8zg4XraJk5DPwTcMXzl2UVoNmRpWuxsnWq371TSpnr5vu+q?=
- =?iso-8859-1?Q?ypy5jxoGKbUorHrN37EcT51lmFSM82PJ82WFVza/E/UxMEe/JlP7aI1JjK?=
- =?iso-8859-1?Q?2I4dtR0PH5kUuPw/llVJQLtxQ6V4v+94mObLpL75Fe+kyTbXKb1ddeCCsB?=
- =?iso-8859-1?Q?xqy8C6ss8VmSAr7ycWz5vykeg04hgUq2wZX5Ykm2C6bDSO?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: a2d1fad7-3215-4308-603c-08df2afa88a8
-X-MS-Exchange-CrossTenant-AuthSource: DM4PR12MB6374.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2026 20:26:03.4850
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: 1ffK53pvKIyCwXArrXQKNXAfnhDhCV5QTGz8DhqUVx69qv5dR5B5maC+lw5XHl4AfIutq0lizPx9oZqw6dFEMw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR12MB6631
-X-purgate-ID: tlsNG-c201ff/1792095974-F5EA92A1-D1D57535/0/0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1792098334-F56AD2A1-23010FFF/0/0
 X-purgate-type: clean
-X-purgate-size: 1131
+X-purgate-size: 1785
 
-On Thu, Oct 08, 2026 at 09:18:38AM +0200, Juergen Gross wrote:
-> Today rdmsrq() is a macro using its second parameter as the target for
-> storing the read MSR value.
-> 
-> Convert rdmsrq() to an inline function returning the MSR value.
-> 
-> The users have been converted using the following semantic patch:
-> 
->   // Options: --include-headers
-> 
->   virtual patch
->   virtual report
-> 
->   @@
->   expression msr, val;
->   @@
->   (
->   - rdmsrq(msr,val)
->   + val = rdmsrq(msr)
->   )
-> 
-> Signed-off-by: Juergen Gross <jgross@suse.com>
-> Acked-by: Damien Le Moal <dlemoal@kernel.org>      # ATA
-> Reviewed-by: Michael Kelley <mhklinux@outlook.com> # Hyper-V
-> Acked-by: Rafael J. Wysocki (Intel) <rafael@kernel.org> # ACPI, cpufreq, powercap, thermal
-> Acked-by: Sean Christopherson <seanjc@google.com>
-> Acked-by: Reinette Chatre <reinette.chatre@intel.com> # resctrl
-> Reviewed-by: Zhongqiu Han <zhongqiu.han@oss.qualcomm.com> # cpufreq
-> Acked-by: Ilpo Järvinen <ilpo.jarvinen@linux.intel.com>		# pdx86
-> ---
+Alternatives have had a reasonably severe restriction since their
+introduction.  This has been the source of several bugs, and several
+inefficiencies particularly in the speculative safety paths.
 
-Reviewed-by: Yazen Ghannam <yazen.ghannam@amd.com> # mce, amd64_edac
+https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2952556080
 
-Thanks,
-Yazen
+Andrew Cooper (5):
+  x86/emul: Introduce x86_decode_lite()
+  tests/x86: Introduce a userspace test harness for x86_decode_lite()
+  x86/alternative: Walk all replacements during self tests
+  x86/alternative: Relocate all insn-relative fields
+  x86/spec-ctrl: Introduce and use DO_COND_BHB_SEQ
+
+ tools/tests/Makefile                      |   1 +
+ tools/tests/x86-decode-lite/.gitignore    |   1 +
+ tools/tests/x86-decode-lite/Makefile      |  56 ++
+ tools/tests/x86-decode-lite/insns.S       | 711 ++++++++++++++++++++++
+ tools/tests/x86-decode-lite/macro-magic.h |  62 ++
+ tools/tests/x86-decode-lite/main.c        | 113 ++++
+ tools/tests/x86-decode-lite/x86-emulate.h |  29 +
+ xen/arch/x86/alternative.c                | 102 +++-
+ xen/arch/x86/hvm/vmx/entry.S              |  12 +-
+ xen/arch/x86/include/asm/spec_ctrl_asm.h  |  43 +-
+ xen/arch/x86/x86_emulate/Makefile         |   6 +
+ xen/arch/x86/x86_emulate/decode-lite.c    | 331 ++++++++++
+ xen/arch/x86/x86_emulate/x86_emulate.h    |  14 +
+ 13 files changed, 1447 insertions(+), 34 deletions(-)
+ create mode 100644 tools/tests/x86-decode-lite/.gitignore
+ create mode 100644 tools/tests/x86-decode-lite/Makefile
+ create mode 100644 tools/tests/x86-decode-lite/insns.S
+ create mode 100644 tools/tests/x86-decode-lite/macro-magic.h
+ create mode 100644 tools/tests/x86-decode-lite/main.c
+ create mode 100644 tools/tests/x86-decode-lite/x86-emulate.h
+ create mode 100644 xen/arch/x86/x86_emulate/decode-lite.c
+
+-- 
+2.39.5
+
 
