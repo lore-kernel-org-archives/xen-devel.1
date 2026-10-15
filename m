@@ -4,39 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 00119CC6B2E
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 04:41:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1449844.1665401 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 6C82CCC6B2E
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 04:47:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1449851.1665409 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHDGs-0002gj-Oh; Thu, 15 Oct 2026 04:40:50 +0000
+	id 1xHDMf-0003qh-Ah; Thu, 15 Oct 2026 04:46:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1449844.1665401; Thu, 15 Oct 2026 04:40:50 +0000
+Received: by outflank-mailman (output) from mailman id 1449851.1665409; Thu, 15 Oct 2026 04:46:49 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHDGs-0002gc-Kb; Thu, 15 Oct 2026 04:40:50 +0000
-Received: by outflank-mailman (input) for mailman id 1449844;
- Thu, 15 Oct 2026 04:40:49 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xHDMf-0003qZ-7h; Thu, 15 Oct 2026 04:46:49 +0000
+Received: by outflank-mailman (input) for mailman id 1449851;
+ Thu, 15 Oct 2026 04:46:48 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <zhangzheng@iscas.ac.cn>) id 1xHDGr-0002gW-88
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 04:40:49 +0000
+ (envelope-from <zhangzheng@iscas.ac.cn>) id 1xHDMe-0003qT-B4
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 04:46:48 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHDGq-005oSq-LQ
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 06:40:48 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xHDMd-000snF-Bx
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 06:46:47 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6ad0591b-8faa-0a2a0a5109dd-0a2a450ac2bc-42
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 06:40:46 +0200
+ id 6ad05a74-8faa-0a2a0a5109dd-0a2a4502ae30-46
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 06:46:45 +0200
 Received: from [159.226.251.21] (helo=cstnet.cn)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6ad0594c-f2d2-0a2a450a0019-9fe2fb15a460-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 06:40:46 +0200
+ id 6ad05ab3-6ca4-0a2a45020019-9fe2fb15cb70-3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 06:46:45 +0200
 Received: from iscas-ws (unknown [36.110.52.2])
- by APP-01 (Coremail) with SMTP id qwCowAAn__JGWdBqSv7pCg--.2109S2;
- Thu, 15 Oct 2026 12:40:39 +0800 (CST)
+ by APP-01 (Coremail) with SMTP id qwCowABHGOytWtBqDRnqCg--.2406S2;
+ Thu, 15 Oct 2026 12:46:39 +0800 (CST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -49,82 +49,87 @@ Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
-Date: Thu, 15 Oct 2026 12:40:56 +0800
+Date: Thu, 15 Oct 2026 12:46:55 +0800
 From: Zhang Zheng <zhangzheng@iscas.ac.cn>
 To: Jan Beulich <jbeulich@suse.com>
-Cc: Alistair Francis <alistair.francis@wdc.com>, 
-	Connor Davis <connojdavis@gmail.com>, Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+Cc: Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
+	Alistair Francis <alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, 
 	Baptiste Le Duc <baptiste.le-duc@vates.tech>, Andrew Cooper <andrew.cooper3@citrix.com>, 
 	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
 	Julien Grall <julien@xen.org>, Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>, 
 	Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-Subject: Re: [PATCH v2 1/2] xen/ns16550: detect and preserve UART_IER_UUE
-Message-ID: <atBVo8O91QHtxPFI@iscas-ws>
+Subject: Re: [PATCH v2 2/2] xen/ns16550: drain TX before reinitializing
+Message-ID: <atBapx7kJAjjgI4Z@iscas-ws>
 References: <20261010031406.2057735-1-zhangzheng@iscas.ac.cn>
- <20261010031406.2057735-2-zhangzheng@iscas.ac.cn>
- <5bc2e923-4265-484f-9236-25a56560e2c3@suse.com>
+ <20261010031406.2057735-3-zhangzheng@iscas.ac.cn>
+ <ec65306d-ec1d-4c5a-93f8-b37f7dfea8b5@gmail.com>
+ <2415e2b7-3066-450b-9917-d1267a1c2b90@suse.com>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
+Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
-In-Reply-To: <5bc2e923-4265-484f-9236-25a56560e2c3@suse.com>
-X-CM-TRANSID:qwCowAAn__JGWdBqSv7pCg--.2109S2
-X-Coremail-Antispam: 1UD129KBjvJXoWruFyrGr4UuF15JF48Jr15twb_yoW8Jry7p3
-	yxKF1vyrsrt3W8Ca9Iq3WDZF4Sg3Z7X34SkrWfG3yfZF15ArWF9F13JFsIqF1Du3W0yF1U
-	uF4Y9347Jas8Z37anT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUUB0b7Iv0xC_tr1lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <2415e2b7-3066-450b-9917-d1267a1c2b90@suse.com>
+X-CM-TRANSID:qwCowABHGOytWtBqDRnqCg--.2406S2
+X-Coremail-Antispam: 1UD129KBjvJXoW7ZF1UZr43Wr4DCr1DCFy8Krg_yoW8GryUpa
+	18K3Z8JFs7tr4UKwnFva48WFWjgFZag34UCr18X34Ivrs0gFy29rWSgFWY9F90kr48Aw1j
+	kw42gFyfAFnYvrJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
+	9KBjDU0xBIdaVrnRJUUUBYb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
 	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
 	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Gr0_Xr1l84ACjcxK6xII
 	jxv20xvEc7CjxVAFwI0_Gr0_Cr1l84ACjcxK6I8E87Iv67AKxVWxJr0_GcWl84ACjcxK6I
 	8E87Iv6xkF7I0E14v26F4UJVW0owAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
 	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUtVWrXwAv7VCY1x0262k0Y48FwI0_Jr
-	0_Gr1lYx0Ex4A2jsIE14v26F4j6r4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vI
-	r41lFIxGxcIEc7CjxVA2Y2ka0xkIwI1lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64
-	vIr41l4I8I3I0E4IkC6x0Yz7v_Jr0_Gr1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8G
-	jcxK67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2I
-	x0cI8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK
-	8VAvwI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVWUJVW8JwCI42IY6I8E87Iv6xkF7I
-	0E14v26r4j6r4UJbIYCTnIWIevJa73UjIFyTuYvjxU2Vc_DUUUU
+	0_Gr1lYx0Ex4A2jsIE14v26r4UJVWxJr1lOx8S6xCaFVCjc4AY6r1j6r4UM4x0Y48IcVAK
+	I48JM4IIrI8v6xkF7I0E8cxan2IY04v7MxkF7I0En4kS14v26r1q6r43MxAIw28IcxkI7V
+	AKI48JMxC20s026xCaFVCjc4AY6r1j6r4UMI8I3I0E5I8CrVAFwI0_Jr0_Jr4lx2IqxVCj
+	r7xvwVAFwI0_JrI_JrWlx4CE17CEb7AF67AKxVWUtVW8ZwCIc40Y0x0EwIxGrwCI42IY6x
+	IIjxv20xvE14v26r1j6r1xMIIF0xvE2Ix0cI8IcVCY1x0267AKxVW8JVWxJwCI42IY6xAI
+	w20EY4v20xvaj40_Jr0_JF4lIxAIcVC2z280aVAFwI0_Jr0_Gr1lIxAIcVC2z280aVCY1x
+	0267AKxVW8JVW8JrUvcSsGvfC2KfnxnUUI43ZEXa7IU5P-PUUUUUU==
 X-Originating-IP: [36.110.52.2]
 X-CM-SenderInfo: x2kd0wx2kh0w46lvutnvoduhdfq/
-X-purgate-ID: tlsNG-4011c0/1792039246-593C4CFC-7EA99349/0/0
+X-purgate-ID: tlsNG-720697/1792039605-311CF2AC-713ECE3D/0/0
 X-purgate-type: clean
-X-purgate-size: 1369
+X-purgate-size: 1483
 
-On Mon, Oct 12, 2026 at 02:52:06PM +0200, Jan Beulich wrote:
-> On 10.10.2026 05:14, Zhang Zheng wrote:
-> > --- a/xen/drivers/char/ns16550.c
-> > +++ b/xen/drivers/char/ns16550.c
-> > @@ -64,6 +64,7 @@ static struct ns16550 {
-> >      bool intr_works;
-> >      bool force_polling;
-> >      bool dw_usr_bsy;
-> > +    bool xscale;
-> >  #ifdef NS16550_PCI
-> >      /* PCI card parameters. */
-> >      bool pb_bdf_enable;     /* if =1, pb-bdf effective, port behind bridge */
-> > @@ -352,6 +353,14 @@ static void ns16550_setup_preirq(struct ns16550 *uart)
-> >      /* No interrupts. */
-> >      ns_write_reg(uart, UART_IER, 0);
-> >  
-> > +    uart->xscale = false;
-> > +    if ( !(ns_read_reg(uart, UART_IER) & UART_IER_UUE) )
-> > +    {
-> > +        ns_write_reg(uart, UART_IER, UART_IER_UUE);
-> > +        if ( ns_read_reg(uart, UART_IER) & UART_IER_UUE )
-> > +            uart->xscale = true;
-> > +    }
+On Mon, Oct 12, 2026 at 03:00:19PM +0200, Jan Beulich wrote:
+> On 12.10.2026 12:20, Oleksii Kurochko wrote:
+> > On 10/10/26 5:14 AM, Zhang Zheng wrote:
+> >> --- a/xen/drivers/char/ns16550.c
+> >> +++ b/xen/drivers/char/ns16550.c
+> >> @@ -427,6 +427,10 @@ static void __init cf_check ns16550_init_preirq(struct serial_port *port)
+> >>   #endif
+> >>       }
+> >>   
+> >> +    /* Preserve output queued by firmware before taking over the UART. */
+> > я'
+> > Could the comment say why the wait is needed at this point? Something
+> > like:
+> > 
+> >      /*
+> >       * Output written before ns16550 takes over (e.g. by firmware or the
+> >       * early console) may still be in the transmitter. Let it drain before
+> >       * ns16550_setup_preirq() reprograms the line settings and resets the
+> >       * FIFOs.
+> >       */
+> > 
+> >> +    while ( !(ns_read_reg(uart, UART_LSR) & UART_LSR_TEMT) )
+> >> +        cpu_relax();
+> >> +
+> > 
+> > IMO waiting for TEMT rather than THRE is the right choice: besides
+> > resetting the FIFOs, ns16550_setup_preirq() reprograms the divisor and
+> > LCR, which would corrupt a character still being shifted out. (Linux
+> > waits for UART_LSR_BOTH_EMPTY, i.e. THRE | TEMT, but on a 16550 TEMT
+> > already implies THRE.)
 > 
-> Linux'es detection is a little more involved, plus: It doesn't clobber the
-> value originally present in the other 7 bits.
+> Then again we have the .lsr_mask field. Not using it here would then call
+> for justification in the description.
 > 
 > Jan
 
-I noticed that Linux saves the original IER value and clears only UUE:
+I will clarify this distinction in the commit message.
 
-iersave = serial_in(up, UART_IER);
-serial_out(up, UART_IER, iersave & ~UART_IER_UUE);
-
-Xen clears IER immediately before this probe, so I think there is no previous
-IER state to preserve. So I did not add `iersave` here.
+Zhang
 
 
