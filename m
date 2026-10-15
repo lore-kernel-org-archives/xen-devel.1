@@ -4,39 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5619ACC6B39
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 16:22:47 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1450889.1666244 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C257FCC6B39
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 16:32:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1450911.1666252 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHODm-00010w-55; Thu, 15 Oct 2026 16:22:22 +0000
+	id 1xHONN-0004Qz-33; Thu, 15 Oct 2026 16:32:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1450889.1666244; Thu, 15 Oct 2026 16:22:22 +0000
+Received: by outflank-mailman (output) from mailman id 1450911.1666252; Thu, 15 Oct 2026 16:32:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHODm-00010p-1r; Thu, 15 Oct 2026 16:22:22 +0000
-Received: by outflank-mailman (input) for mailman id 1450889;
- Thu, 15 Oct 2026 16:22:20 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xHONM-0004Qs-WF; Thu, 15 Oct 2026 16:32:17 +0000
+Received: by outflank-mailman (input) for mailman id 1450911;
+ Thu, 15 Oct 2026 16:32:16 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <peter.maydell@linaro.org>) id 1xHODk-00010j-AV
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 16:22:20 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHODe-008cAN-ND
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 18:22:19 +0200
-Received: from [10.42.69.8] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <peter.maydell@linaro.org>)
- id 6ad0fda4-e002-0a2a0a5209dd-0a2a4508d1d6-16
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 18:22:14 +0200
-Received: from [209.85.128.172] (helo=mail-yw1-f172.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <peter.maydell@linaro.org>)
- id 6ad0fdb5-f659-0a2a45080019-d15580acc8c7-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 18:22:14 +0200
-Received: by mail-yw1-f172.google.com with SMTP id
- 00721157ae682-8b0a28a720aso39767907b3.2
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 09:22:14 -0700 (PDT)
+ (envelope-from <roger@xenproject.org>) id 1xHONM-0004Qm-HN
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 16:32:16 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <roger@xenproject.org>) id 1xHONM-00000006mrm-2SBx;
+ Thu, 15 Oct 2026 16:32:16 +0000
+Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
+ helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98.2)
+ (envelope-from <roger@xenproject.org>) id 1xHONL-0000000CBzL-2Iip;
+ Thu, 15 Oct 2026 16:32:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,231 +41,334 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1792081333; cv=none;
-        d=google.com; s=arc-20260327;
-        b=F1SgXT0EV7HM4ZukGqn8rOJ5qAzCcA11b1NeZMcQqw6qdmBeHHzYTcdEDQY7IahplP
-         SwsFhpfXc3FpUDDvogGqXJegNRUx+P6AxKGyRqSxed7TnuADrg1zY1rp1Q0oVv1vCuMf
-         N8DDIcnWFG+etHmYjlv02uiOYOJXm4MR0sARjv5Zms5Oz66Jc9GvLqTzPoA/n6FVqn8/
-         2RbL7SQssmCHD9PuMixLcMbAm2xklDHLCcOf0gjnsnqfdcrLna0xQhZuQlJfyK0R4t/U
-         BBbgZazVO4XuD3+gYP/1u8qUCTwNiLMcrWKsKsb81VtyG3lRZu3eUL6dEG/RfP+1Hjxt
-         Y4xQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=cc:to:subject:message-id:date:from:in-reply-to:references
-         :mime-version:dkim-signature;
-        bh=RQCElvh08J2BIDGN/zLgW6mGnyFT83qmeWNSYL2QSEU=;
-        fh=GzccUDtmqNWNivxHxZY4MK4APLJJkH1THRT6PTh85Is=;
-        b=KaIFWVVhYSRU8LJ7MgvnRT3Tz7A1ESmyZ5gRPi87S8W97dOkEv11sakkcQwB8GVUBB
-         5SeIAQ/hUsww5tQHX+5Fk7F3nUQDWbHreycTpfYiiyGfBZOHKY7YnU49qLgSWkm8oexP
-         Ep4eKHz1Az6lx3WTfrV2kyxk3XPkiFDnsl268/e1lF2U5d2Rq4FUrL+S1Gf5uwy6NwOl
-         GvTY5TXv+bjoWvkhKM93+0xKUQ8POmipS0z+JyPEaus5QsPLCo4WnVZ0i0UXmKZeXrsO
-         nL5InK2bO8uqnwzBO39Ov/2qxv1O4IYLFjMSgb780u1e2XDKQOAyNCPJDsNosBuMvX8j
-         ks3A==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=linaro.org; s=google; t=1792081333; x=1792686133; darn=lists.xenproject.org;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=RQCElvh08J2BIDGN/zLgW6mGnyFT83qmeWNSYL2QSEU=;
-        b=UtuzWqn0QMOEWzSsRA6t9rSuKOzBwXlw5jkX7tajFinz9iwMdcsIdmHFk4+ochjYr3
-         pY8Xk1f8rkWB+gUtzpMxQ0iUnLa2zgEJE6Fr24APHcbz/EmWO3p1Bw+knaO3Thk1i4W6
-         Lz2jUTcHeWco8w31jljiCq3ZprRJle2Pb0VQx73MlicTY0ZaSvjJPT9tZUhbyHC3ch01
-         Gx4KPMtn1opVIYdOJqDRtyOnm505HdSjDy3w3Pafot7bF6f21ckvFxnlrfvPFdgfVdXY
-         rXDNqNgURZRaZJKer1KoOsQcSMYEUEacIoq6b1AkPrR1lSsxkI7Vbe5xAOdcAfpIzqyc
-         BHEw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792081333; x=1792686133;
-        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
-         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
-         :subject:date:message-id:reply-to:content-type;
-        bh=RQCElvh08J2BIDGN/zLgW6mGnyFT83qmeWNSYL2QSEU=;
-        b=dDcZC8rCaIvREqRxO5kC2HTi1vCm3EbjQcxugmrwcjqAFh+tNxhsyi3yKYgeGY5PWw
-         qLoVrWtzya9lFuwhLDYOhzs3/Z3zcoimQc4DpPXp2/Q4crnCzc1o8K0mCmzIO41zXzJ7
-         OefkUFwy6IYREX9P8HZ8u7Dffk/YiD+7znihm0O3SoEdVgoCOJg1FlyKydaFFdevBSoD
-         MvnZITqpyywOJUdSrmbrbCoAM4tczUWD8ytA4lfUhGN09Vo7RvWplq7KJUQ2DxUtvwIu
-         DOYDmwhbjBw/jJ4VrBpUY7M58CO1SEuaGd4z9OOZU7DHyPz8lR+45Vy9O9iHsEBeBYf4
-         v9KA==
-X-Forwarded-Encrypted: i=1; AKwUvBzC+7cNayxIrfdUFpMISLwIxdJ3j/wqIXUV6xNTwa6bJfp5/QPfF8L6orYPfcqAl57l7FCfEPWtjSA=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKxbaPsjsVXhVEjiENvhq39bO7NXj6UkoywO8aHXblUOb2q0O/G
-	/8jaRs9G0vn/RjeezWGIU4EgUJvKMZN5HitlB/3AZYgOxDQiSxBN4wSMr5p+QiVSy5GYrjaC+ml
-	L/1H9Df380KfDYyQVYaPjHivWM3RvwtSJNfQyCeS2Nw==
-X-Gm-Gg: AYBFou3WZXAnlGA+z8qFJSyZRokrBbQlrwiThdFKcEzK5276obDReCQxYzsbGLnKBjm
-	6iPHaYs2HmWgxih3IrI8BSZaXou8Zvu0jbVlyU6TIievFbkwGbXQ4FvO2MseTfrviyOkUdlSAx/
-	mxqLr7q2QpJ97Z3uF1fxjxuPdvEf4Zbc8DYYo0X4WIIfltWLeIHnExkpqmKn7NM/pO/agWBsTUW
-	7bLmZS4iRYPmE0lDapm4oRkAlL3AOzx2oE8CqZnIaZAjAQXJ8eV/SgM8z8gIcXCVjqR0BqaCHS+
-	KAGERZZww76OMR+jO+9autbQkcrwMztJTf8CrNTMrBKGy7OZCEba6iUQxluZLmR7eO+C09dKezH
-	yI8ssp1NuUsy8Ws/Bfz2UqId+WWU9/EHsO+Qz4OA=
-X-Received: by 2002:a05:690c:387:b0:8b0:6866:c55f with SMTP id
- 00721157ae682-8b07ee4d12emr67505727b3.46.1792081332932; Thu, 15 Oct 2026
- 09:22:12 -0700 (PDT)
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
+	bh=LnOJC5G478qUscKDL+0IzDiX8X/tbifTtGd4OisH0G4=; b=YqC6qRQF9FSMNZjVMjMyNa1sBR
+	hUdKCwE2FyWbJGZ6A1g6fNjewp/GELaoyoK/RcZrEYlQ8GdyPW+b/9dzjIPFfQ3nbBZJwLDgXjhwj
+	YjAochUlj8POGvY5kqtP/fpPzG4CbmUu3np6dwz0tVd4okA/kcUM4HwPmv42EGrGjMLg=;
+Date: Thu, 15 Oct 2026 18:32:13 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Marek Marczykowski <marmarek@invisiblethingslab.com>
+Subject: Re: [PATCH 11/15] x86/PVH: try to map initrd directly into Dom0
+Message-ID: <atEADbxD4mL_bXy6@Mac.lan>
+References: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
+ <78cd46cc-84ed-46df-96c9-26ce97ed0da0@suse.com>
 MIME-Version: 1.0
-References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
- <20260916104435.600211-6-mark.caveayland@nutanix.com> <CAFEAcA9eucRyzG=PR2tpx8ObHkdK6xUmOjQ+-nNbJ2dVHaptOA@mail.gmail.com>
-In-Reply-To: <CAFEAcA9eucRyzG=PR2tpx8ObHkdK6xUmOjQ+-nNbJ2dVHaptOA@mail.gmail.com>
-From: Peter Maydell <peter.maydell@linaro.org>
-Date: Thu, 15 Oct 2026 17:22:00 +0100
-X-Gm-Features: AclHuK_JzHSeeixZQwFB55O2lE4YIMCEsFBYUzo_EwttzyD7LQh3FodmT7dI1cQ
-Message-ID: <CAFEAcA-voNwJRTb2WQuxnvzk5LwBcXahz8HHrW=Yi3WUKeKgBg@mail.gmail.com>
-Subject: Re: [PATCH 05/22] i8259.c: move parent_realize from PICClass to I8259CommonClass
-To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com, 
-	sstabellini@kernel.org, anthony@xenproject.org, edgar.iglesias@gmail.com, 
-	qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-X-purgate-ID: tlsNG-c1860d/1792081334-D7B5987B-ED14495F/0/0
-X-purgate-type: clean
-X-purgate-size: 7695
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+In-Reply-To: <78cd46cc-84ed-46df-96c9-26ce97ed0da0@suse.com>
 
-On Tue, 13 Oct 2026 at 16:54, Peter Maydell <peter.maydell@linaro.org> wrote:
->
-> On Wed, 16 Sept 2026 at 11:49, Mark Cave-Ayland
-> <mark.caveayland@nutanix.com> wrote:
-> >
-> > Both the emulated and KVM i8259 implementations store a reference to the
-> > parent_realize function in their respective classes. Start by moving
-> > parent_realize from PICClass to I8259CommonClass and removing PICClass since
-> > it is no longer required.
-> >
-> > Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
->
-> This is one of those things where I think we're not 100% consistent
-> about whether we think the parent_realize field should go in the
-> child class struct or the parent class struct. The name "parent_realize"
-> implies it ought to be in the child struct, though, and I think we
-> do that more often than we put it in the parent class.
+On Mon, Oct 12, 2026 at 10:25:11AM +0200, Jan Beulich wrote:
+> Our present handling of initrd is problematic in particular when the
+> initrd is huge, and when at the same time "dom0_mem=" isn't in use to
+> significantly shrink Dom0's memory (from the default). In that case,
+> insufficient memory may exist for pvh_populate_p2m() to succeed (because
+> initrd memory can be freed only after copying).
+> 
+> Make an attempt to map the blob (including headroom) into Dom0 instead,
 
-We do, although it's a bit closer than I thought: about 50 callsites
-put the parent_realize pointer in the child class struct; about 25
-put it in the parent class struct. So I think for new code we should
-prefer to follow the child-class-struct version.
+I would use "dom0 p2m" instead of plain p2m, it's clearer IMO.
 
-in child's class:
+> thus also saving the copying operation. With __start_xen() having arranged
+> for a larger than necessary blob, that mapping can typically be done with
+> superpage mappings.
+> 
+> Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> ---
+> Is there a need to prune (scrub) the headroom space?
 
-hw/arm/smmu-common.c:    device_class_set_parent_realize(dc, smmu_base_realize,
-hw/arm/smmuv3.c:    device_class_set_parent_realize(dc, smmu_realize,
-hw/display/macfb.c:    device_class_set_parent_realize(dc, macfb_nubus_realize,
-hw/i386/kvm/i8254.c:    device_class_set_parent_realize(dc, kvm_pit_realizefn,
-hw/i386/kvm/i8259.c:    device_class_set_parent_realize(dc,
-kvm_pic_realize, &kpc->parent_realize);
-hw/input/adb-kbd.c:    device_class_set_parent_realize(dc, adb_kbd_realizefn,
-hw/input/adb-mouse.c:    device_class_set_parent_realize(dc,
-adb_mouse_realizefn,
-hw/intc/arm_gic.c:    device_class_set_parent_realize(dc,
-arm_gic_realize, &agc->parent_realize);
-hw/intc/arm_gic_kvm.c:    device_class_set_parent_realize(dc,
-kvm_arm_gic_realize,
-hw/intc/arm_gicv3.c:    device_class_set_parent_realize(dc,
-arm_gic_realize, &agc->parent_realize);
-hw/intc/arm_gicv3_hvf.c:    device_class_set_parent_realize(dc,
-hvf_gicv3_realize,
-hw/intc/arm_gicv3_kvm.c:    device_class_set_parent_realize(dc,
-kvm_arm_gicv3_realize,
-hw/intc/arm_gicv3_whpx.c:    device_class_set_parent_realize(dc,
-whpx_gicv3_realize,
-hw/intc/arm_gicv5.c:    device_class_set_parent_realize(dc,
-gicv5_realize, &gc->parent_realize);
-hw/intc/i8259.c:    device_class_set_parent_realize(dc, pic_realize,
-&k->parent_realize);
-hw/intc/loongarch_dintc.c:    device_class_set_parent_realize(dc,
-loongarch_dintc_realize,
-hw/intc/loongarch_extioi.c:    device_class_set_parent_realize(dc,
-loongarch_extioi_realize,
-hw/intc/loongarch_extioi_common.c:
-device_class_set_parent_realize(dc, loongarch_extioi_common_realize,
-hw/intc/loongarch_ipi.c:    device_class_set_parent_realize(dc,
-loongarch_ipi_realize,
-hw/intc/loongarch_pch_pic.c:    device_class_set_parent_realize(dc,
-loongarch_pic_realize,
-hw/intc/loongarch_pic_common.c:    device_class_set_parent_realize(dc,
-loongarch_pic_common_realize,
-hw/intc/loongson_ipi.c:    device_class_set_parent_realize(dc,
-loongson_ipi_realize,
-hw/intc/loongson_ipi_common.c:    device_class_set_parent_realize(dc,
-loongson_ipi_common_realize,
-hw/intc/pnv_xive.c:    device_class_set_parent_realize(dc,
-pnv_xive_realize, &pxc->parent_realize);
-hw/intc/pnv_xive2.c:    device_class_set_parent_realize(dc, pnv_xive2_realize,
-hw/intc/spapr_xive.c:    device_class_set_parent_realize(dc, spapr_xive_realize,
-hw/intc/xics_pnv.c:    device_class_set_parent_realize(dc, pnv_icp_realize,
-hw/intc/s390_flic_kvm.c:    device_class_set_parent_realize(dc,
-kvm_s390_flic_realize,
-hw/nubus/nubus-virtio-mmio.c:    device_class_set_parent_realize(dc,
-nubus_virtio_mmio_realize,
-hw/timer/i8254.c:    device_class_set_parent_realize(dc,
-pit_realizefn, &pc->parent_realize);
-hw/virtio/virtio-pci.c:    device_class_set_parent_realize(dc,
-virtio_pci_dc_realize,
-target/alpha/cpu.c:    device_class_set_parent_realize(dc, alpha_cpu_realizefn,
-target/arm/cpu.c:    device_class_set_parent_realize(dc, arm_cpu_realizefn,
-target/avr/cpu.c:    device_class_set_parent_realize(dc,
-avr_cpu_realizefn, &mcc->parent_realize);
-target/hexagon/cpu.c:    device_class_set_parent_realize(dc,
-hexagon_cpu_realize,
-target/hppa/cpu.c:    device_class_set_parent_realize(dc, hppa_cpu_realizefn,
-target/i386/cpu.c:    device_class_set_parent_realize(dc, x86_cpu_realizefn,
-target/loongarch/cpu.c:    device_class_set_parent_realize(dc,
-loongarch_cpu_realizefn,
-target/m68k/cpu.c:    device_class_set_parent_realize(dc, m68k_cpu_realizefn,
-target/microblaze/cpu.c:    device_class_set_parent_realize(dc,
-mb_cpu_realizefn,
-target/mips/cpu.c:    device_class_set_parent_realize(dc, mips_cpu_realizefn,
-target/or1k/cpu.c:    device_class_set_parent_realize(dc,
-openrisc_cpu_realizefn,
-target/ppc/cpu_init.c:    device_class_set_parent_realize(dc, ppc_cpu_realize,
-target/riscv/cpu.c:    device_class_set_parent_realize(dc, riscv_cpu_realize,
-target/rx/cpu.c:    device_class_set_parent_realize(dc, rx_cpu_realize,
-target/s390x/cpu.c:    device_class_set_parent_realize(dc, s390_cpu_realizefn,
-target/sh4/cpu.c:    device_class_set_parent_realize(dc, superh_cpu_realizefn,
-target/sparc/cpu.c:    device_class_set_parent_realize(dc, sparc_cpu_realizefn,
-target/tricore/cpu.c:    device_class_set_parent_realize(dc,
-tricore_cpu_realizefn,
-target/xtensa/cpu.c:    device_class_set_parent_realize(dc,
-xtensa_cpu_realizefn,
+We already populate the p2m with memory allocated with MEMF_no_scrub,
+so there's no reason to scrub the headroom unless we also remove the
+MEMF_no_scrub for p2m population.
 
-in parent's class:
+> 
+> Why does find_memory() go upwards, while find_kernel_memory() goes
+> downwards? And why do we use the lowest part of the region found by
+> find_memory() rather than the highest part?
 
-hw/input/lasips2.c:    device_class_set_parent_realize(dc,
-lasips2_kbd_port_realize,
-hw/input/lasips2.c:    device_class_set_parent_realize(dc,
-lasips2_mouse_port_realize,
-hw/input/pl050.c:    device_class_set_parent_realize(dc, pl050_kbd_realize,
-hw/input/pl050.c:    device_class_set_parent_realize(dc, pl050_mouse_realize,
-hw/intc/xics_spapr.c:    device_class_set_parent_realize(dc, ics_spapr_realize,
-hw/isa/pc87312.c:    device_class_set_parent_realize(dc, pc87312_realize,
-hw/isa/vt82c686.c:    device_class_set_parent_realize(dc, via_superio_realize,
-hw/pci-bridge/cxl_root_port.c:    device_class_set_parent_realize(dc,
-cxl_rp_realize, &rpc->parent_realize);
-hw/pci-bridge/gen_pcie_root_port.c:
-device_class_set_parent_realize(dc, gen_rp_realize,
-&rpc->parent_realize);
-hw/pci-host/pnv_phb.c:    device_class_set_parent_realize(dc,
-pnv_phb_root_port_realize,
-hw/pci-host/pnv_phb3_msi.c:    device_class_set_parent_realize(dc,
-phb3_msi_realize,
-hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power8_realize,
-hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power9_realize,
-hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power10_realize,
-hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power11_realize,
-hw/ppc/pnv_lpc.c:    device_class_set_parent_realize(dc, pnv_lpc_power8_realize,
-hw/ppc/pnv_lpc.c:    device_class_set_parent_realize(dc, pnv_lpc_power9_realize,
-hw/s390x/tod-kvm.c:
-device_class_set_parent_realize(DEVICE_CLASS(oc),
-kvm_s390_tod_realize,
-hw/virtio/vhost-user-gpio.c:    device_class_set_parent_realize(dc,
-vgpio_realize,
-hw/virtio/vhost-user-i2c.c:    device_class_set_parent_realize(dc, vi2c_realize,
-hw/virtio/vhost-user-input.c:    device_class_set_parent_realize(dc,
-vinput_realize,
-hw/virtio/vhost-user-rng.c:    device_class_set_parent_realize(dc,
-vu_rng_base_realize,
-hw/virtio/vhost-user-rtc.c:    device_class_set_parent_realize(dc,
-vu_rtc_base_realize,
-hw/virtio/vhost-user-snd.c:    device_class_set_parent_realize(dc,
-vu_snd_base_realize,
-hw/virtio/vhost-user-spi.c:    device_class_set_parent_realize(dc, vspi_realize,
+find_memory() should probably start downwards from 4G.
 
-thanks
--- PMM
+> 
+> --- a/xen/arch/x86/hvm/dom0_build.c
+> +++ b/xen/arch/x86/hvm/dom0_build.c
+> @@ -450,7 +450,9 @@ static void __init pvh_init_p2m(struct d
+>  static int __init pvh_populate_p2m(
+>      struct domain *d,
+>      const struct e820entry *e820,
+> -    unsigned int nr_e820)
+> +    unsigned int nr_e820,
+> +    unsigned long initrd_start,
+> +    unsigned long initrd_end)
+
+We already have a rangeset in find_memory() that contains the RAM
+regions, I think it would be better if we propagated that rangeset
+here as it would make the logic easier overall.  We would need to
+initialize it earlier (as find_memory() is used after pvh_init_p2m()),
+but would avoid the extra logic.
+
+>  {
+>      struct vcpu *v = d->vcpu[0];
+>      unsigned int i;
+> @@ -468,7 +470,12 @@ static int __init pvh_populate_p2m(
+>          addr = PFN_DOWN(e820[i].addr);
+>          size = PFN_DOWN(e820[i].size);
+>  
+> -        rc = pvh_populate_memory_range(d, addr, size);
+> +        if ( addr + size <= initrd_start || addr >= initrd_end )
+> +            rc = pvh_populate_memory_range(d, addr, size);
+> +        else
+> +            rc = pvh_populate_memory_range(d, addr, initrd_start - addr)
+> +                 ?: pvh_populate_memory_range(d, initrd_end,
+> +                                              addr + size - initrd_end);
+>          if ( rc )
+>              return rc;
+>  
+> @@ -518,6 +525,43 @@ static int __init pvh_populate_p2m(
+>  #undef MB1_PAGES
+>  }
+>  
+> +static int __init pvh_map_initrd(
+> +    struct domain *d, const struct boot_module *initrd,
+> +    paddr_t initrd_start, unsigned int order)
+> +{
+> +    for ( paddr_t ga = initrd_start, ma = initrd->start;
+> +          ga < initrd_start + initrd->size;
+> +          ga += PAGE_SIZE << order, ma += PAGE_SIZE << order )
+> +    {
+> +        int rc = p2m_add_page(d, gaddr_to_gfn(ga), maddr_to_mfn(ma),
+> +                              order, p2m_ram_rw);
+> +
+> +        if ( rc )
+> +        {
+> +            printk("Failed to map initrd: [%#lx,%#lx): %d\n",
+> +                   PFN_DOWN(ga), PFN_DOWN(ga) + (1UL << order), rc);
+
+I would print the domain prefix.
+
+> +            /*
+> +             * Best effort rollback: The range will be replaced anyway by the
+> +             * subsequent pvh_populate_p2m().
+> +             */
+> +            while ( ga > initrd_start )
+> +            {
+> +                ga -= PAGE_SIZE << order;
+> +                ma -= PAGE_SIZE << order;
+> +                p2m_remove_page(d, gaddr_to_gfn(ga), maddr_to_mfn(ma), order);
+> +                order_stats[order]--;
+> +            }
+> +
+> +            return rc;
+> +        }
+> +
+> +        order_stats[order]++;
+> +    }
+> +
+> +    return 0;
+> +}
+> +
+>  struct mem_info {
+>      size_t size;
+>      paddr_t addr;
+> @@ -538,7 +582,10 @@ static int cf_check __init _find_memory(
+>  }
+>  
+>  static paddr_t __init find_memory(
+> -    const struct domain *d, const struct elf_binary *elf, size_t size)
+> +    const struct domain *d,
+> +    const struct elf_binary *elf,
+> +    const struct hvm_modlist_entry *initrd,
+> +    size_t size)
+>  {
+>      struct rangeset *ram = rangeset_new(NULL, NULL, 0);
+>      struct mem_info info = {
+> @@ -577,6 +624,13 @@ static paddr_t __init find_memory(
+>                                         PAGE_SIZE) - 1) != 0 )
+>          return INVALID_PADDR;
+>  
+> +    /* Remove the mapped initrd range (if any), rounded to page boundaries. */
+> +    if ( initrd->paddr &&
+> +         rangeset_remove_range(ram, initrd->paddr,
+> +                               ROUNDUP(initrd->paddr + initrd->size,
+> +                                       PAGE_SIZE) - 1) != 0 )
+> +        return INVALID_PADDR;
+> +
+>      rangeset_report_ranges(ram, MB(1), -1, _find_memory, &info);
+>  
+>      rangeset_destroy(ram);
+> @@ -689,6 +743,70 @@ static bool __init check_and_adjust_load
+>      return true;
+>  }
+>  
+> +static paddr_t __init find_initrd_memory(
+> +    const struct domain *d,
+> +    const struct elf_binary *elf,
+> +    const struct boot_module *initrd,
+> +    size_t align,
+> +    paddr_t limit)
+> +{
+> +    paddr_t kernel_start = (paddr_t)elf->dest_base & PAGE_MASK;
+> +    paddr_t kernel_end = ROUNDUP((paddr_t)elf->dest_base + elf->dest_size,
+> +                                 PAGE_SIZE);
+> +    unsigned long initrd_size = ROUNDUP(initrd->size, PAGE_SIZE);
+> +    unsigned long initrd_len = initrd_size - initrd->arch.headroom;
+> +
+> +    if ( !IS_ALIGNED(initrd->start | initrd_size, align) )
+> +        return INVALID_PADDR;
+> +
+> +    /*
+> +     * The memory map is sorted.  Search backwards to find the highest
+> +     * suitable address.
+> +     */
+> +    for ( unsigned int i = d->arch.nr_e820; i--; )
+> +    {
+> +        paddr_t start = d->arch.e820[i].addr;
+> +        paddr_t end = start + d->arch.e820[i].size;
+> +
+> +        if ( d->arch.e820[i].type != E820_RAM )
+> +            continue;
+> +
+> +        if ( end > limit )
+> +            continue;
+
+Don't you want to clamp end to limit here, ie:
+
+end = min(end, limit);
+
+Like we clamp start to be above MB(1)?
+
+We possibly want to continue if start > limit, as then there's nothing
+to clamp?
+
+> +
+> +        start = MAX(ROUNDUP(start, align), MB(1));
+
+You need to roundup after the max, ie:
+
+ROUNDUP(MAX(start, MB(1)), align);
+
+Otherwise the result might be unaligned if start > 0 and < MB(1)
+depending on the requested alignment.
+
+> +        end = ROUNDDOWN(end, align);
+> +
+> +        /* Don't use memory below 1MB, as it could overwrite BDA/EBDA/IBFT. */
+> +        if ( end <= MB(1) )
+> +            break;
+> +
+> +        if ( end <= initrd_size )
+> +            break;
+> +
+> +        if ( end - initrd_size <= start )
+
+This should be <, otherwise an exact fit is rejected.
+
+> +            continue;
+> +
+> +        /*
+> +         * NB: Even better would be to use rangesets to determine a suitable
+> +         * range, in particular in case a kernel requests multiple heavily
+> +         * discontiguous regions (which right now we fold all into one big
+> +         * region).
+> +         */
+
+I understand that you switched find_memory() to use a rangeset because
+it will need to deal with two discontinuous region because of the
+initrd plus the kernel.  However the code here could be adjusted to
+possibly use a rangeset from the start?
+
+I think we should find a way to pass a rangeset around with the
+available memory regions for the allocation functions to use.  Maybe
+that way we could even remove the need to add a separate
+find_initrd_memory()?  Which TBH looks like it wants to share its code
+with plain find_memory().
+
+> +        if ( end <= kernel_start || end - initrd_len >= kernel_end )
+> +            return end - initrd_size; /* No overlap. */
+> +
+> +        /* Deal with the kernel already being loaded in the region. */
+> +        if ( kernel_end < end && end - kernel_end >= initrd_len )
+
+The condition in this second branch is never reached, as the if above
+already has the same condition: "end - initrd_len >= kernel_end".
+
+> +            return end - initrd_size;
+> +        if ( kernel_start > start &&
+> +             ROUNDDOWN(kernel_start, align) - start >= initrd_size )
+> +            return ROUNDDOWN(kernel_start, align) - initrd_size;
+> +    }
+> +
+> +    return INVALID_PADDR;
+> +}
+> +
+>  static int __init pvh_place_kernel(
+>      const struct boot_domain *bd,
+>      struct elf_binary *elf,
+> @@ -744,9 +862,93 @@ static int __init pvh_place_kernel(
+>      return 0;
+>  }
+>  
+> +static void __init pvh_place_initrd(
+> +    const struct boot_domain *bd,
+> +    const struct elf_binary *elf,
+> +    struct hvm_modlist_entry *mod,
+> +    paddr_t *blob_start,
+> +    paddr_t *blob_end)
+> +{
+> +    struct domain *d = bd->d;
+> +    struct boot_module *initrd = bd->initrd;
+> +    struct boot_module try = *initrd;
+
+Looking at the line below initrd can be NULL here, and hence this
+should be:
+
+struct boot_module try = initrd ? *initrd : {};
+
+Or possibly only initialize 'try' after the initrd_len check?
+
+> +    unsigned long initrd_len =
+> +        initrd ? initrd->size - initrd->arch.headroom : 0;
+> +    size_t align = 1UL << L3_PAGETABLE_SHIFT;
+> +    int rc;
+> +
+> +    *blob_start = INVALID_PADDR;
+> +    *blob_end   = 0;
+> +
+> +    if ( !initrd_len )
+> +        return;
+> +
+> +    mod->size = initrd_len;
+> +
+> +    /*
+> +     * As we promise to place below 4G whatever fits there, make a first pass
+> +     * limiting permitted addresses.  If we can't fit it there, fall back to
+> +     * placing above 4G.
+> +     */
+> +    for ( paddr_t limit = GB(4); ; )
+> +    {
+> +        paddr_t start;
+> +
+> +        *blob_start = find_initrd_memory(d, elf, &try, align, limit);
+> +        if ( *blob_start != INVALID_PADDR )
+> +            break;
+> +
+> +        if ( align == PAGE_SIZE )
+> +        {
+> +            if ( !(limit + 1) )
+> +                return;
+> +
+> +            limit = -1;
+> +            align = 1UL << L3_PAGETABLE_SHIFT;
+
+Aren't you possibly asking for an alignment better than what's
+required by the actual initrd memory?  Maybe it's using 2M pages yet
+you request 1G alignment here.
+
+Thanks, Roger.
 
