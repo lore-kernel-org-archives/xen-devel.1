@@ -4,46 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 9668CCC6B34
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 14:09:11 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1450633.1666053 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 270DBCC6B3D
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 14:19:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1450678.1666106 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHM8Q-0007fQ-0Q; Thu, 15 Oct 2026 14:08:42 +0000
+	id 1xHMIT-0004Fh-Pd; Thu, 15 Oct 2026 14:19:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1450633.1666053; Thu, 15 Oct 2026 14:08:41 +0000
+Received: by outflank-mailman (output) from mailman id 1450678.1666106; Thu, 15 Oct 2026 14:19:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHM8P-0007ey-S8; Thu, 15 Oct 2026 14:08:41 +0000
-Received: by outflank-mailman (input) for mailman id 1450633;
- Thu, 15 Oct 2026 14:08:41 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xHMIT-0004Fa-Mw; Thu, 15 Oct 2026 14:19:05 +0000
+Received: by outflank-mailman (input) for mailman id 1450678;
+ Thu, 15 Oct 2026 14:19:04 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykyta_Poturai@epam.com>) id 1xHM8O-0007d6-RN
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 14:08:41 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHM8O-002ujh-87
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 16:08:40 +0200
-Received: from [10.42.69.1] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Mykyta_Poturai@epam.com>)
- id 6ad0de59-e002-0a2a0a5209dd-0a2a4501c5d8-32
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 16:08:40 +0200
-Received: from [52.101.65.141]
- (helo=DU2PR03CU002.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Mykyta_Poturai@epam.com>)
- id 6ad0de67-5984-0a2a45010019-3465418d2d13-4
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 16:08:40 +0200
-Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- (2603:10a6:102:30d::12) by ZR6PR03MB911287.eurprd03.prod.outlook.com
- (2603:10a6:910:d7::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.13; Thu, 15 Oct
- 2026 14:08:37 +0000
-Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
- ([fe80::b8c6:f37a:987a:beb%5]) with mapi id 15.21.0522.012; Thu, 15 Oct 2026
- 14:08:37 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xHMIS-0004FS-LH
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 14:19:04 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xHMIS-00000006jj5-3LuF
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 14:19:04 +0000
+Received: from mail-lj1-f178.google.com ([209.85.208.178])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xHMIS-00000008rJY-0Dy6
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 14:19:04 +0000
+Received: by mail-lj1-f178.google.com with SMTP id
+ 38308e7fff4ca-3aaf078704fso13679021fa.1
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 07:19:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,230 +44,194 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=N96rvhnNYDWANp7TT3hsG9AmwjHqO868MEq056rO4nhDUivUbKjtuankdcbI4TR5xsH+8I7LU1yzd0oKqcNbKUU2ZgAbF2Hr34rT9zcncF/WleF47kRfMlHOqLTdSUW5Id907+7AggjSq8l13C0/UCQ4AaPQSUQDMsjc60EdEF1s/WqhzfI/AJgCYzRhRSg54gninzem0ZYa92J+TvndRFZHH2HP3/PF83Iip/gM254UXNMu6vp05dMNtpCJUcvJwd4tDMKPUJUYntkzlA9Y0YVmMK7cjhbn3W+IZqlMEq0PlL5oK8iFD8wSUpEssbE7W5Pi/kdCgbjOZNwPG2wDIQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=b1ca7KajItvwpID/5WS5RgYtGlQHEZ5y83odvhulwBI=;
- b=AR4om7u3n+8fqkqc9YG4kKUIRzXn2Pevu2zHr9S4iz9hj4gUdLCNO2FyOevDe4OWx9lWfl0jt/8dxWu7xBD3EU+ZX05GeFw9ukpCnMq1yb0O2nhrsErxfrSm+7uZmVEKSSbaprcdchmepSobrCNC/QEeSQhe2IQcj9sa3mHZJoa17FXE4THHoeRpdfQWrdgx4P7A/HwT2ZMQxiVfhrUWUvRKGq7C/ZWQimgNxJYJkNGKlPb8U7eQOrm4z8/4bnvLqEIdQYmDZ7WWTEq91rAIs4a78v8T/2UjwZ5Kvft76+Gy5qAPEC8abwuV+c66tmxEgPjn15ZBClpidbA95x0rFQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=b1ca7KajItvwpID/5WS5RgYtGlQHEZ5y83odvhulwBI=;
- b=nJebMS8+lV0ugQwa4jEu90z7rEGTRHWjW7f5fK//QNYDFcUKPOG2kYrgk8fyNsgfBqo+bvZ3xOJ/Zw/xHIYUUL1oEUqkHaEnKEbvrEQklH6kCG/MyizIzekWfxcpFFiEw+c4r5CU5x8GRK/R6CGEr+gzY15iPlAB0uSkse/YO2k9p8/I/9J5KoVvsCn4I68WnbHBsJIv463x31osEMPSJFG1qaPVu6jLvsEWqu6Y9be+SeBDyAybrKh1IclAUeaf0UzNTkAgfk+5bPiVdIsLUH+/ndb3DBXSUOAtZdmjSbdM+0M/FrSuCVDAUtAqlJmNBHwmY/4j57ULL0WjcnWa/w==
-From: Mykyta Poturai <Mykyta_Poturai@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Stewart Hildebrand <stewart.hildebrand@amd.com>,
-	=?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger@xenproject.org>, Mykyta Poturai
-	<Mykyta_Poturai@epam.com>, Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v4 1/5] vpci: Export functions required for SR-IOV support
-Thread-Topic: [PATCH v4 1/5] vpci: Export functions required for SR-IOV
- support
-Thread-Index: AQHdXK6sp1g/PSZvy0KSkitWfzGo4A==
-Date: Thu, 15 Oct 2026 14:08:37 +0000
-Message-ID:
- <5b2721b7213d53232ce912e4f9ce0b4e7b1b39c7.1792072426.git.mykyta_poturai@epam.com>
-References: <cover.1792072426.git.mykyta_poturai@epam.com>
-In-Reply-To: <cover.1792072426.git.mykyta_poturai@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|ZR6PR03MB911287:EE_
-x-ms-office365-filtering-correlation-id: ad4675a4-7848-43dd-eb70-08df2ac5ce8f
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|376014|366016|1800799024|23010399003|38070700021|56012099006|11063799006|261009223027099003|10067099003|22082099003|18002099003;
-x-microsoft-antispam-message-info:
- Dud7XEZucm9JmmUSIG2e8+x6Jo7Gz+2oc+TB4M3FlJNO6c32DnTefbimy/d+7kRJOq15cxdZ0a0ESQl8IokkmdbecpN7kxXB1VLcoggy9fHAGn28r4/Loliy1tW6NDbNod4yfkF9y2fslOo5ugntPTxjRX52oEbpULobe6S7y+nMacP0SEuB3z8+cLtBW+w01E8Q1icMQ4O+9Ll5DfM29UjJnJDUbSRMYAunTdKnKV9xlIrOZF2YsHWy0Mpi0Im5pA8qYvmqlKrEYXFKLlL5iLLuOsyOZYh4mvngEfCr+fe/qTEpy+ovP6lYsQvEWzEZqAbJIdZevAIlMuDPRSyVptK5gdg65Yd17uoysFrI8yQJnkAfASf8lSTC1zStesXp9iRmNJnv4CAySPzvY9iviS6vru7LaOUJOu7/uzwIW/u6hEegGkPvc2q6TGyUt3vUd52wFHCApjTDa8nYjLZT5azszciz4ichzYoQ/jAowPnfIgTXT06ghZ6krVoAQmEUsf54oZJSxlUg94qYI+JGN1B2gNj+WbQbrYzMGbWUFM4KTW1/9tArtDPsDHwbqIgPVbA2qqzoOYP8/KKw96i8yTMWzXyBsxKGXvfjk+UF5byTcxuYlZZeR0y27AmOAiokJCDOq4R86iduepDw/Kt63VpZP4vX8vyvynEPtgcUNAywjvE5AUv3MvPw/Tk+2y+QHtnE2P58CjC4HWjx2nzcUy8R9m97p5meUnjf22DuURk=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(1800799024)(23010399003)(38070700021)(56012099006)(11063799006)(261009223027099003)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?utf-8?B?ak5jbFRkOVFyT0hVWGtqM2drVEVxMFp0NElMNkxjR0VtL3VrVTYybmdSeHpW?=
- =?utf-8?B?SjJhelRCaTgyL3FUNzFMWXlialpKS3QxOXkxYWtUTVV4UGdESWZZb1IwWHhI?=
- =?utf-8?B?bVdQbEl1Ky9XOHMxUk9WWUFYQXMyMUFjeEdOT0ZGOFM3NnYzZ2ZGSU1vc3FE?=
- =?utf-8?B?Z293OEoycmt2OE0ycXd4VGR6VWVha3dNbW5qN2c3dDU0bzNDNmg1T0p2bENT?=
- =?utf-8?B?YklkTCtUYms1SDBXL3Z6bG1JSmxrNFN2citlL2dzbEVlYWNwSWh5RFR4NlZJ?=
- =?utf-8?B?Z2pzU2RDMlhnWGIrWnk2R3kxbnlpVHRUbGVSN3R3WXJvQ283c29wd1M0dnVB?=
- =?utf-8?B?bkJHbFRCczdtZElHMXVLbDBmMFZDK09HNUJOZGNkbWI1bGxubzRMQTBmanpW?=
- =?utf-8?B?SnRiTUQzaUFUU3I3UE1xMktPR05qN2xPb3RuY2ZBN2xVU0dvemNwbktiNUMw?=
- =?utf-8?B?R2lHTkNBYVk2R1VaOGdmL2RzTDl0QmdsK0V1ckVRTkFEMndoNGNlRnBhcW5p?=
- =?utf-8?B?MjVrNnkwN3pFRGU2R2hQQmtmY3Y3ZmtxYkQrSHZna1o4VUZTNU1mcjgrQ1d2?=
- =?utf-8?B?Q0V3SVlhK1FIUVMySmpUMzk2U2lVbElvUnZVWFk2NS94MDNDckN5RkIvYzQz?=
- =?utf-8?B?emRHbFpRdHZ6U1p1U3FzUkQyR011RWx6OWtxRlRJT3hwQlNjSDdZdU9VSzRS?=
- =?utf-8?B?RFFBemcveWxwV1BsdStGK3ZKR2RXZ2ZmUmhSTjRkWVBCVHZLQmx1QS9zWXJS?=
- =?utf-8?B?UkFPMVlUcjAyT0kxQTQyZDB2SmladGhUdXhOVktYNHUvMEFpVG1xQnQ3RVd0?=
- =?utf-8?B?bm4vaDFVYUhPeFRsbFcxQUViNm9wZ1NNREV4eFY5SlNrMnhTc3pwYVdJdjk4?=
- =?utf-8?B?TUNHdlZNdjl1aXlMSTZkdE4wYkJCRTJXNGNQd0M0UkZDbDN2dUMwenQ1WU96?=
- =?utf-8?B?ZW52Tnl1Z1k4bmI5WDYxbGVFL2lUMHd3d05vZHNCckxVVk53Q2sxUlNyV2hk?=
- =?utf-8?B?WjQ3T1ZxM2dVdVVOZk5kaWh2SGZ5ZVNHYmtqRGVjUGNZeFA0L1Y4VG9mVXBX?=
- =?utf-8?B?c0UwR0JhbkVQYTRLb1pvWTBGTUZQRjllQ0FoNlh0SXUxTWVhK294K052MnhK?=
- =?utf-8?B?MExjS1BWaHBja3RPejI5OG05cnBnc0hxM1dDSjRyejQ1ZnMwNHROR0MrQS81?=
- =?utf-8?B?ZTZRdHV5UjF0b09WOEMzSnJYUENERy8zbm5UcGRlRVloUm8vbnczbEwxUjhW?=
- =?utf-8?B?TjhQbjZvQ1hsYk5VN2VFT1NtdG50M3VPcG1OQ1hKZDNjd2kxZUk0Z0Z3UlA0?=
- =?utf-8?B?V2NFcGtwZnJzWHIyYk5yaTZLMlNwblZpYy9tTDU3YS9TVENRL0ZEWW1KMHU1?=
- =?utf-8?B?ZEdlZUdxWWtSbVl5OUh1T2dueUlzMGpRVVFIMzlSM1NsSGFNN2x4RGhmZjE0?=
- =?utf-8?B?bUthMHMzd2tSRHQ1eWxBL2pjNU4rZ0FQWVlCbU4rRDYxTHhHNmVGUnYvdHFt?=
- =?utf-8?B?SC84K0ZCWUlJNWVITmgvdlUyR1RSbzgxR3FmTXF6NXlPei9vSmpNNE1DNlRR?=
- =?utf-8?B?TG53Nm54ZUFRdi9LSFZaN3NwZzZic3dSNVkyTmpYdGZKaTdZaTNpL2wxQ2Vx?=
- =?utf-8?B?SUVRTnBRcXl0dWRtYjQ5M05aVE1wTk1VVXBQdTZWakFKSEkxbVhYK1MyZG9W?=
- =?utf-8?B?NFRpcWVsMlN5OVZkcjJmcEJOR25INzRiL0p0SHlYdjlrenlpRjFYenJ1eUhO?=
- =?utf-8?B?VVdraU1QcGxUMmtPR29EQlo4M2k0dXJTMGtxTFZFWkhnWXpLZnljemFXZ09J?=
- =?utf-8?B?UEJsVXkrbTdnV2VzcUJVZzhnUytycnAyQ0k3Qy9scTRHY0w1bDBqR3ZVQXJP?=
- =?utf-8?B?UXNxWDVNM0JZbW5qMnB4ZHRyRDcwSGhCWEVTb0xsVkpQdC9UOVY0R2E2Vzgz?=
- =?utf-8?B?V2tiQkRpd3VQUmFPR0FXdFQwWXNxOTFETHZ4R3RWNEk3dnhEaC9ub2VYNFUz?=
- =?utf-8?B?NjNQS1kwVWllckZ4WHNra1NrUEdhQWdNZ1pOaVE4Szg4clZZMGdvZ0JyQW1E?=
- =?utf-8?B?eHpsbFFzcW5SUHFzbHB4dmdOM3NVUTAxWXBQSW8xckhVMXh5TDNBTlF0WDFY?=
- =?utf-8?B?TDh3L1l6L3VKY0JKY3l0YkNrZDJXdEZNaG9ySGxQWEpqRmRxUU03cEJNZ1Zu?=
- =?utf-8?B?VXM5NjlvRWtyM2o0RE83WlZzc2tLYiswaUFGTDhZdy85RzhnZWFiVkxtOXNZ?=
- =?utf-8?B?bGkvRk5UaW9ZQWxZUkpuSGY4cHFGK0hIbGlBcVBPMUlEMUNOeS9tWjk3Qi9j?=
- =?utf-8?B?eTRYb1FWNTE1TERFSzNDY3J0c0daRlZraytERXRvT1N2Z0N4OGZveDNMOXdz?=
- =?utf-8?Q?vlH5CB3UX+w5i+kI=3D?=
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: base64
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
+	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
+	bh=EeJYuW89riBIU+1bWeO7R6JZCam/EWqrMuLTRwSHXqU=; b=xGqX1lccZeo+NVU5seEtytfcEf
+	IWCQJk9eRyj2p+UReAatcp5XpeKR2VVR+DIPfPg85r5NKs3+qDEwtPQjDZNAYoEfzxLREvo1XJUcQ
+	TX4s1JWJeZcScnhAlbJOJkEVxZQVlY+DkcmbIG/2w55lsCMBbk0WCnnnDFoUctRVJiRk=;
+X-Gm-Message-State: AFq9FYIsitsIgra6FJprfnjE37FTccsPMmXmOcHPT1XtXmCTNux0TxTk
+	uSjSJpLtVVmLQQY7gDlhjFo6rxp0MR99V/YqW10Erdz3Q1OPkrsivcQqFzGuFePT0fCI69KJwCs
+	JmJxP9PMYyDZrWNdD+l6grgtSXs/JTGk=
+X-Received: by 2002:a2e:bc28:0:b0:3a8:7ed3:fae9 with SMTP id
+ 38308e7fff4ca-3ab147ea7c8mr347941fa.17.1792073943369; Thu, 15 Oct 2026
+ 07:19:03 -0700 (PDT)
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: ad4675a4-7848-43dd-eb70-08df2ac5ce8f
-X-MS-Exchange-CrossTenant-originalarrivaltime: 15 Oct 2026 14:08:37.1472
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: HfBLOtoRBmrRdnpV5/YFbSYoxKcTyuUr7xRWb1cWTtSz6rKodFvdpQyMopnxIIIcHIAndp1vlXsiv7lhzOaYAg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR6PR03MB911287
-X-purgate-ID: tlsNG-d62444/1792073320-1D272757-331BC68F/0/0
-X-purgate-type: clean
-X-purgate-size: 9320
+References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-19-gwd@xenproject.org>
+ <asftTvWSJhGo4iuf@Mac.lan>
+In-Reply-To: <asftTvWSJhGo4iuf@Mac.lan>
+From: George Dunlap <gwd@xenproject.org>
+Date: Thu, 15 Oct 2026 15:18:50 +0100
+X-Gmail-Original-Message-ID: <CAFLBxZaDBzok+Ra+-DCH+M1JHfsJzhfC2fYPfUEVNazCGnZ9cQ@mail.gmail.com>
+X-Gm-Features: AclHuK8iGFfXmV5q0BMKAS24IomRV2HSGaIDuGmS7Lqi_J7m3k3t2tSJE-P_fcg
+Message-ID: <CAFLBxZaDBzok+Ra+-DCH+M1JHfsJzhfC2fYPfUEVNazCGnZ9cQ@mail.gmail.com>
+Subject: Re: [PATCH v3 18/18] x86/spec-ctrl: wire the sparse directmap view
+ into the asi= option
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, Andrew Cooper <andrew.cooper3@citrix.com>, 
+	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
+	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
+	Stefano Stabellini <sstabellini@kernel.org>, Teddy Astie <teddy.astie@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-RnJvbTogU3Rld2FydCBIaWxkZWJyYW5kIDxzdGV3YXJ0LmhpbGRlYnJhbmRAYW1kLmNvbT4NCg0K
-UmVuYW1lIGFuZCBleHBvcnQgdnBjaV9tb2RpZnlfYmFycywgdnBjaV9ndWVzdF9tZW1fYmFyX3ty
-ZWFkLHdyaXRlfQ0KDQpTaWduZWQtb2ZmLWJ5OiBTdGV3YXJ0IEhpbGRlYnJhbmQgPHN0ZXdhcnQu
-aGlsZGVicmFuZEBhbWQuY29tPg0KU2lnbmVkLW9mZi1ieTogTXlreXRhIFBvdHVyYWkgPG15a3l0
-YV9wb3R1cmFpQGVwYW0uY29tPg0KUmV2aWV3ZWQtYnk6IFRlZGR5IEFzdGllIDx0ZWRkeS5hc3Rp
-ZUB2YXRlcy50ZWNoPg0KLS0tDQp2My0+djQ6DQoqIHNxdWFzaCAidnBjaTogcmVuYW1lIGFuZCBl
-eHBvcnQgdnBjaV9ndWVzdF9tZW1fYmFyX3tyZWFkLHdyaXRlfSIgd2l0aA0KICAidnBjaTogcmVu
-YW1lIGFuZCBleHBvcnQgdnBjaV9tb2RpZnlfYmFycyINCnYyLT52MzoNCiogbW92ZSBkZWNsYXJh
-dGlvbiB0byBwcml2YXRlLmgNCnYxLT52Mg0KKiBDb2xsZWN0IFJCcw0KLS0tDQogeGVuL2RyaXZl
-cnMvdnBjaS9oZWFkZXIuYyAgfCAzNiArKysrKysrKysrKysrKysrKysrKy0tLS0tLS0tLS0tLS0t
-LS0NCiB4ZW4vZHJpdmVycy92cGNpL3ByaXZhdGUuaCB8ICA5ICsrKysrKysrKw0KIDIgZmlsZXMg
-Y2hhbmdlZCwgMjkgaW5zZXJ0aW9ucygrKSwgMTYgZGVsZXRpb25zKC0pDQoNCmRpZmYgLS1naXQg
-YS94ZW4vZHJpdmVycy92cGNpL2hlYWRlci5jIGIveGVuL2RyaXZlcnMvdnBjaS9oZWFkZXIuYw0K
-aW5kZXggN2U1ZjRiOGEwMC4uYTRlNTc1YmU0ZSAxMDA2NDQNCi0tLSBhL3hlbi9kcml2ZXJzL3Zw
-Y2kvaGVhZGVyLmMNCisrKyBiL3hlbi9kcml2ZXJzL3ZwY2kvaGVhZGVyLmMNCkBAIC0zMDUsNyAr
-MzA1LDcgQEAgc3RhdGljIHZvaWQgZGVmZXJfbWFwKGNvbnN0IHN0cnVjdCBwY2lfZGV2ICpwZGV2
-LCB1aW50MTZfdCBjbWQsIGJvb2wgcm9tX29ubHkpDQogICAgIHJhaXNlX3NvZnRpcnEoU0NIRURV
-TEVfU09GVElSUSk7DQogfQ0KIA0KLXN0YXRpYyBpbnQgbW9kaWZ5X2JhcnMoY29uc3Qgc3RydWN0
-IHBjaV9kZXYgKnBkZXYsIHVpbnQxNl90IGNtZCwgYm9vbCByb21fb25seSkNCitpbnQgdnBjaV9t
-b2RpZnlfYmFycyhjb25zdCBzdHJ1Y3QgcGNpX2RldiAqcGRldiwgdWludDE2X3QgY21kLCBib29s
-IHJvbV9vbmx5KQ0KIHsNCiAgICAgc3RydWN0IHZwY2lfaGVhZGVyICpoZWFkZXIgPSAmcGRldi0+
-dnBjaS0+aGVhZGVyOw0KICAgICBzdHJ1Y3QgcGNpX2RldiAqdG1wOw0KQEAgLTU0Niw3ICs1NDYs
-NyBAQCBzdGF0aWMgdm9pZCBjZl9jaGVjayBjbWRfd3JpdGUoDQogICAgICAgICAgKiBtZW1vcnkg
-ZGVjb2RpbmcgYml0IGhhcyBub3QgYmVlbiBjaGFuZ2VkLCBzbyBsZWF2ZSBldmVyeXRoaW5nIGFz
-LWlzLA0KICAgICAgICAgICogaG9waW5nIHRoZSBndWVzdCB3aWxsIHJlYWxpemUgYW5kIHRyeSBh
-Z2Fpbi4NCiAgICAgICAgICAqLw0KLSAgICAgICAgbW9kaWZ5X2JhcnMocGRldiwgY21kLCBmYWxz
-ZSk7DQorICAgICAgICB2cGNpX21vZGlmeV9iYXJzKHBkZXYsIGNtZCwgZmFsc2UpOw0KICAgICBl
-bHNlDQogICAgICAgICBwY2lfY29uZl93cml0ZTE2KHBkZXYtPnNiZGYsIHJlZywgY21kKTsNCiB9
-DQpAQCAtNjExLDkgKzYxMSw5IEBAIHN0YXRpYyB2b2lkIGNmX2NoZWNrIGJhcl93cml0ZSgNCiAg
-ICAgcGNpX2NvbmZfd3JpdGUzMihwZGV2LT5zYmRmLCByZWcsIHZhbCk7DQogfQ0KIA0KLXN0YXRp
-YyB2b2lkIGNmX2NoZWNrIGd1ZXN0X21lbV9iYXJfd3JpdGUoY29uc3Qgc3RydWN0IHBjaV9kZXYg
-KnBkZXYsDQotICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB1bnNpZ25l
-ZCBpbnQgcmVnLCB1aW50MzJfdCB2YWwsDQotICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICB2b2lkICpkYXRhKQ0KK3ZvaWQgY2ZfY2hlY2sgdnBjaV9ndWVzdF9tZW1fYmFy
-X3dyaXRlKGNvbnN0IHN0cnVjdCBwY2lfZGV2ICpwZGV2LA0KKyAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgIHVuc2lnbmVkIGludCByZWcsIHVpbnQzMl90IHZhbCwNCisgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB2b2lkICpkYXRhKQ0KIHsNCiAgICAg
-c3RydWN0IHZwY2lfYmFyICpiYXIgPSBkYXRhOw0KICAgICBib29sIGhpID0gZmFsc2U7DQpAQCAt
-NjUzLDggKzY1Myw4IEBAIHN0YXRpYyB2b2lkIGNmX2NoZWNrIGd1ZXN0X21lbV9iYXJfd3JpdGUo
-Y29uc3Qgc3RydWN0IHBjaV9kZXYgKnBkZXYsDQogICAgIGJhci0+Z3Vlc3RfYWRkciA9IGd1ZXN0
-X2FkZHI7DQogfQ0KIA0KLXN0YXRpYyB1aW50MzJfdCBjZl9jaGVjayBndWVzdF9tZW1fYmFyX3Jl
-YWQoY29uc3Qgc3RydWN0IHBjaV9kZXYgKnBkZXYsDQotICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICB1bnNpZ25lZCBpbnQgcmVnLCB2b2lkICpkYXRhKQ0KK3VpbnQz
-Ml90IGNmX2NoZWNrIHZwY2lfZ3Vlc3RfbWVtX2Jhcl9yZWFkKGNvbnN0IHN0cnVjdCBwY2lfZGV2
-ICpwZGV2LA0KKyAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHVuc2ln
-bmVkIGludCByZWcsIHZvaWQgKmRhdGEpDQogew0KICAgICBjb25zdCBzdHJ1Y3QgdnBjaV9iYXIg
-KmJhciA9IGRhdGE7DQogICAgIHVpbnQzMl90IHJlZ192YWw7DQpAQCAtNzE0LDEzICs3MTQsMTUg
-QEAgc3RhdGljIHZvaWQgY2ZfY2hlY2sgcm9tX3dyaXRlKA0KICAgICAgKiBQYXNzIFBDSV9DT01N
-QU5EX01FTU9SWSBvciAwIHRvIHNpZ25hbCBhIG1hcC91bm1hcCByZXF1ZXN0LCBub3RlIHRoYXQN
-CiAgICAgICogdGhpcyBmYWJyaWNhdGVkIGNvbW1hbmQgaXMgbmV2ZXIgZ29pbmcgdG8gYmUgd3Jp
-dHRlbiB0byB0aGUgcmVnaXN0ZXIuDQogICAgICAqLw0KLSAgICBlbHNlIGlmICggbW9kaWZ5X2Jh
-cnMocGRldiwgbmV3X2VuYWJsZWQgPyBQQ0lfQ09NTUFORF9NRU1PUlkgOiAwLCB0cnVlKSApDQor
-ICAgIGVsc2UgaWYgKCB2cGNpX21vZGlmeV9iYXJzKHBkZXYsDQorICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgIG5ld19lbmFibGVkID8gUENJX0NPTU1BTkRfTUVNT1JZIDogMCwNCisgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgdHJ1ZSkgKQ0KICAgICAgICAgLyoNCiAgICAgICAg
-ICAqIE5vIG1lbW9yeSBoYXMgYmVlbiBhZGRlZCBvciByZW1vdmVkIGZyb20gdGhlIHAybSAoYmVj
-YXVzZSB0aGUgYWN0dWFsDQogICAgICAgICAgKiBwMm0gY2hhbmdlcyBhcmUgZGVmZXJyZWQgaW4g
-ZGVmZXJfbWFwKSBhbmQgdGhlIFJPTSBlbmFibGUgYml0IGhhcw0KICAgICAgICAgICogbm90IGJl
-ZW4gY2hhbmdlZCwgc28gbGVhdmUgZXZlcnl0aGluZyBhcy1pcywgaG9waW5nIHRoZSBndWVzdCB3
-aWxsDQogICAgICAgICAgKiByZWFsaXplIGFuZCB0cnkgYWdhaW4uIEl0J3MgaW1wb3J0YW50IHRv
-IG5vdCB1cGRhdGUgcm9tLT5hZGRyIGluIHRoZQ0KLSAgICAgICAgICogdW5tYXAgY2FzZSBpZiBt
-b2RpZnlfYmFycyBoYXMgZmFpbGVkLCBvciBmdXR1cmUgYXR0ZW1wdHMgd291bGQNCisgICAgICAg
-ICAqIHVubWFwIGNhc2UgaWYgdnBjaV9tb2RpZnlfYmFycyBoYXMgZmFpbGVkLCBvciBmdXR1cmUg
-YXR0ZW1wdHMgd291bGQNCiAgICAgICAgICAqIGF0dGVtcHQgdG8gdW5tYXAgdGhlIHdyb25nIGFk
-ZHJlc3MuDQogICAgICAgICAgKi8NCiAgICAgICAgIHJldHVybjsNCkBAIC04MDAsOCArODAyLDgg
-QEAgaW50IHZwY2lfaW5pdF9oZWFkZXIoc3RydWN0IHBjaV9kZXYgKnBkZXYpDQogICAgIC8qDQog
-ICAgICAqIEZvciBEb21VcywgY2xlYXIgUENJX0NPTU1BTkRfe01BU1RFUixNRU1PUlksSU99IGFu
-ZCBvdGhlcg0KICAgICAgKiBEb21VLWNvbnRyb2xsYWJsZSBiaXRzIGluIFBDSV9DT01NQU5ELiBE
-ZXZpY2VzIGFzc2lnbmVkIHRvIERvbVVzIHdpbGwNCi0gICAgICogc3RhcnQgd2l0aCBtZW1vcnkg
-ZGVjb2RpbmcgZGlzYWJsZWQsIGFuZCBtb2RpZnlfYmFycygpIHdpbGwgbm90IGJlIGNhbGxlZA0K
-LSAgICAgKiBhdCB0aGUgZW5kIG9mIHRoaXMgZnVuY3Rpb24uDQorICAgICAqIHN0YXJ0IHdpdGgg
-bWVtb3J5IGRlY29kaW5nIGRpc2FibGVkLCBhbmQgdnBjaV9tb2RpZnlfYmFycygpIHdpbGwgbm90
-IGJlDQorICAgICAqIGNhbGxlZCBhdCB0aGUgZW5kIG9mIHRoaXMgZnVuY3Rpb24uDQogICAgICAq
-Lw0KICAgICBpZiAoICFpc19od2RvbSApDQogICAgICAgICBjbWQgJj0gfihQQ0lfQ09NTUFORF9W
-R0FfUEFMRVRURSB8IFBDSV9DT01NQU5EX0lOVkFMSURBVEUgfA0KQEAgLTgyNCw4ICs4MjYsOSBA
-QCBpbnQgdnBjaV9pbml0X2hlYWRlcihzdHJ1Y3QgcGNpX2RldiAqcGRldikNCiAgICAgICAgICAg
-ICBiYXJzW2ldLnR5cGUgPSBWUENJX0JBUl9NRU02NF9ISTsNCiAgICAgICAgICAgICByYyA9IHZw
-Y2lfYWRkX3JlZ2lzdGVyKHBkZXYtPnZwY2ksDQogICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBpc19od2RvbSA/IHZwY2lfaHdfcmVhZDMyDQotICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICA6IGd1ZXN0X21lbV9iYXJfcmVhZCwNCi0gICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgIGlzX2h3ZG9tID8gYmFyX3dyaXRlIDogZ3Vlc3RfbWVt
-X2Jhcl93cml0ZSwNCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-IDogdnBjaV9ndWVzdF9tZW1fYmFyX3JlYWQsDQorICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICBpc19od2RvbSA/IGJhcl93cml0ZQ0KKyAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgOiB2cGNpX2d1ZXN0X21lbV9iYXJfd3JpdGUsDQogICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICByZWcsIDQsICZiYXJzW2ldKTsNCiAgICAgICAgICAg
-ICBpZiAoIHJjICkNCiAgICAgICAgICAgICAgICAgZ290byBmYWlsOw0KQEAgLTg4Myw4ICs4ODYs
-OSBAQCBpbnQgdnBjaV9pbml0X2hlYWRlcihzdHJ1Y3QgcGNpX2RldiAqcGRldikNCiAgICAgICAg
-IGJhcnNbaV0ucHJlZmV0Y2hhYmxlID0gdmFsICYgUENJX0JBU0VfQUREUkVTU19NRU1fUFJFRkVU
-Q0g7DQogDQogICAgICAgICByYyA9IHZwY2lfYWRkX3JlZ2lzdGVyKHBkZXYtPnZwY2ksDQotICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlzX2h3ZG9tID8gdnBjaV9od19yZWFkMzIgOiBn
-dWVzdF9tZW1fYmFyX3JlYWQsDQotICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGlzX2h3
-ZG9tID8gYmFyX3dyaXRlIDogZ3Vlc3RfbWVtX2Jhcl93cml0ZSwNCisgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgaXNfaHdkb20gPyB2cGNpX2h3X3JlYWQzMg0KKyAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICA6IHZwY2lfZ3Vlc3RfbWVtX2Jhcl9yZWFkLA0KKyAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICBpc19od2RvbSA/IGJhcl93cml0ZSA6IHZwY2lf
-Z3Vlc3RfbWVtX2Jhcl93cml0ZSwNCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmVn
-LCA0LCAmYmFyc1tpXSk7DQogICAgICAgICBpZiAoIHJjICkNCiAgICAgICAgICAgICBnb3RvIGZh
-aWw7DQpAQCAtOTI2LDcgKzkzMCw3IEBAIGludCB2cGNpX2luaXRfaGVhZGVyKHN0cnVjdCBwY2lf
-ZGV2ICpwZGV2KQ0KICAgICAgICAgICAgIGdvdG8gZmFpbDsNCiAgICAgfQ0KIA0KLSAgICByZXR1
-cm4gKGNtZCAmIFBDSV9DT01NQU5EX01FTU9SWSkgPyBtb2RpZnlfYmFycyhwZGV2LCBjbWQsIGZh
-bHNlKSA6IDA7DQorICAgIHJldHVybiAoY21kICYgUENJX0NPTU1BTkRfTUVNT1JZKSA/IHZwY2lf
-bW9kaWZ5X2JhcnMocGRldiwgY21kLCBmYWxzZSkgOiAwOw0KIA0KICBmYWlsOg0KICAgICBwY2lf
-Y29uZl93cml0ZTE2KHBkZXYtPnNiZGYsIFBDSV9DT01NQU5ELCBjbWQpOw0KZGlmZiAtLWdpdCBh
-L3hlbi9kcml2ZXJzL3ZwY2kvcHJpdmF0ZS5oIGIveGVuL2RyaXZlcnMvdnBjaS9wcml2YXRlLmgN
-CmluZGV4IDI5MDdmNmI0MGYuLmYwMTJmZDE2MGQgMTAwNjQ0DQotLS0gYS94ZW4vZHJpdmVycy92
-cGNpL3ByaXZhdGUuaA0KKysrIGIveGVuL2RyaXZlcnMvdnBjaS9wcml2YXRlLmgNCkBAIC0xMzgs
-NiArMTM4LDE1IEBAIHN0YXRpYyBpbmxpbmUgc2l6ZV90IHZtc2l4X3RhYmxlX3NpemUoY29uc3Qg
-c3RydWN0IHZwY2kgKnZwY2ksIHVuc2lnbmVkIGludCBucikNCiAgICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgOCksIDgpOw0KIH0NCiANCisvKiBN
-YXAvdW5tYXAgdGhlIEJBUnMgb2YgYSB2UENJIGRldmljZS4gKi8NCitpbnQgdnBjaV9tb2RpZnlf
-YmFycyhjb25zdCBzdHJ1Y3QgcGNpX2RldiAqcGRldiwgdWludDE2X3QgY21kLCBib29sIHJvbV9v
-bmx5KTsNCisNCit2b2lkIGNmX2NoZWNrIHZwY2lfZ3Vlc3RfbWVtX2Jhcl93cml0ZShjb25zdCBz
-dHJ1Y3QgcGNpX2RldiAqcGRldiwNCisgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
-ICAgICB1bnNpZ25lZCBpbnQgcmVnLCB1aW50MzJfdCB2YWwsDQorICAgICAgICAgICAgICAgICAg
-ICAgICAgICAgICAgICAgICAgICAgdm9pZCAqZGF0YSk7DQorDQordWludDMyX3QgY2ZfY2hlY2sg
-dnBjaV9ndWVzdF9tZW1fYmFyX3JlYWQoY29uc3Qgc3RydWN0IHBjaV9kZXYgKnBkZXYsDQorICAg
-ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgdW5zaWduZWQgaW50IHJlZywg
-dm9pZCAqZGF0YSk7DQogI2VuZGlmIC8qIF9fWEVOX18gKi8NCiANCiAjZW5kaWYgLyogVlBDSV9Q
-UklWQVRFX0ggKi8NCi0tIA0KMi41NS4wDQo=
+On Thu, Oct 8, 2026 at 8:21=E2=80=AFPM Roger Pau Monn=C3=A9 <roger@xenproje=
+ct.org> wrote:
+>
+> On Wed, Oct 07, 2026 at 11:40:51AM +0100, George Dunlap wrote:
+> > Let asi=3D choose which domains run on the sparse view of the directmap=
+,
+> > when the hypervisor is built with CONFIG_SPARSE_DIRECTMAP:
+> >
+> >  * `asi` and `asi=3D<bool>` enable or disable the sparse view, along wi=
+th
+> >    vCPU-PT, for every domain: HVM and PV guests, and the hardware
+> >    domain, PV or PVH.  HVM guests, a PVH hardware domain included, use
+> >    the sparse view together with vCPU-PT, which gives them the mapcache
+> >    it needs; PV guests all have one.  A PV guest on the sparse view
+> >    keeps its domain-wide mapcache and per-domain mappings: the sparse
+> >    view separates it from other domains, not its vCPUs from each other.
+> >
+> >  * `asi=3Dhvm=3D<bool>`, and new `asi=3Dpv=3D<bool>` and `asi=3Ddom0=3D=
+<bool>`, do
+> >    the same for HVM or PV guests other than the hardware domain, or for
+> >    the hardware domain, whatever its type: `asi=3D1,dom0=3D0` leaves th=
+e
+> >    hardware domain out of ASI altogether.
+> >
+> >  * A new `asi=3Ddirectmap=3D<bool>` selects the sparse view for all dom=
+ains,
+> >    as `asi=3Dvcpu-pt=3D<bool>` selects vCPU-PT; `vcpu-pt=3D` alone leav=
+es the
+> >    sparse view off.  On a hypervisor built without
+> >    CONFIG_SPARSE_DIRECTMAP the forms enabling all features leave the
+> >    sparse view off, and `directmap=3D` is ignored with a warning.  A gu=
+est
+> >    type the build lacks is ignored, so that the sparse view is not buil=
+t
+> >    for nothing.
+> >
+> >  * Only one of XPTI and the sparse view are enabled.  Enabled
+> >    explicitly, for dom0, domUs or both, XPTI takes precedence: the PV
+> >    domains it covers keep the full directmap, and the boot log says
+> >    so.  Left to its default, XPTI yields: it is disabled for the PV
+> >    domains using the sparse view, with a boot-log warning where it
+> >    would otherwise be enabled, as the sparse view does not replace it
+> >    yet (it still maps the xenheap and Xen's stacks).  Each domain's
+> >    case is settled at its creation.
+> >
+> > The boot log gains a line with the directmap mode, "sparse" once a
+> > sparse view is configured and "full" otherwise, and the "ASI features
+> > for ..." lines, one for PV guests now among them, say which domains use
+> > the sparse view.
+> >
+> > Assisted-by: Claude Code:claude-opus-5-5
+> > Signed-off-by: George Dunlap <gwd@xenproject.org>
+> > ---
+> > Changes in v3:
+> > - New in this version.
+> > ---
+> >  docs/misc/xen-command-line.pandoc           |  35 +++++-
+> >  xen/arch/x86/include/asm/sparse-directmap.h |  28 ++++-
+> >  xen/arch/x86/sparse-directmap.c             |   4 +-
+> >  xen/arch/x86/spec_ctrl.c                    | 130 ++++++++++++++++++--
+> >  4 files changed, 171 insertions(+), 26 deletions(-)
+> >
+> > diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-=
+line.pandoc
+> > index 785e099c0a..0bbc8ebeff 100644
+> > --- a/docs/misc/xen-command-line.pandoc
+> > +++ b/docs/misc/xen-command-line.pandoc
+> > @@ -203,7 +203,8 @@ to appropriate auditing by Xen.  Argo is disabled b=
+y default.
+> >      buggy or malicious other domain spamming the ring.
+> >
+> >  ### asi (x86)
+> > -> `=3D List of [ <bool>, hvm=3D<bool>, vcpu-pt=3D<bool> | vcpu-pt=3Dhv=
+m=3D<bool> ]`
+> > +> `=3D List of [ <bool>, {pv,hvm,dom0}=3D<bool>, directmap=3D<bool>,
+> > +>              vcpu-pt=3D<bool> | vcpu-pt=3Dhvm=3D<bool> ]`
+> >
+> >  > Default: `false`
+> >
+> > @@ -214,12 +215,16 @@ mitigations for certain speculative related attac=
+ks, at the cost of mapping
+> >  sensitive information on-demand.  It might also offer some protection =
+against
+> >  unmitigated speculation-related attacks.
+> >
+> > -The mechanisms currently implemented apply to HVM guests, including a =
+PVH
+> > -hardware domain.  PV guests, including a PV hardware domain, are unaff=
+ected.
+> > +The mechanisms currently implemented are `vcpu-pt`, for HVM guests inc=
+luding
+> > +a PVH hardware domain, and `directmap`, for all guests including the h=
+ardware
+> > +domain, PV or PVH.  The plain boolean enables or disables both, wherev=
+er they
+> > +apply.
+> >
+> > -* `hvm=3D` enables the features for HVM guests other than the hardware=
+ domain,
+> > -  which follows the whole-feature forms (the plain boolean, or an un-s=
+uffixed
+> > -  `vcpu-pt=3D<bool>`).
+> > +* `pv=3D`, `hvm=3D` and `dom0=3D` enable the features for PV guests or=
+ HVM guests
+> > +  other than the hardware domain, or for the hardware domain, PV or PV=
+H.  The
+> > +  plain boolean does all three: `asi=3D1,dom0=3D0` leaves the hardware=
+ domain
+> > +  out.  The forms naming no guest type (an un-suffixed `vcpu-pt=3D<boo=
+l>`, and
+> > +  `directmap=3D<bool>`) cover the hardware domain too.
+>
+> Shouldn't this generic pv, hvm, dom0 set of values go in at the same
+> time that `hvm=3D` is defined?  That would avoid having to re-write the
+> paragraph that's been added on this same series.
+
+OK.
+
+> > @@ -514,11 +570,29 @@ static int __init cf_check parse_asi(const char *=
+s)
+> >          case 0:
+> >          case 1:
+> >              opt_vcpu_pt_hwdom =3D opt_vcpu_pt_hvm =3D val;
+> > +            set_sparse_dmap(true, true, true, val);
+> >              break;
+> >
+> >          default:
+> > -            if ( (val =3D parse_boolean("hvm", s, ss)) >=3D 0 )
+> > +            if ( (val =3D parse_boolean("pv", s, ss)) >=3D 0 )
+> > +                set_sparse_dmap(true, false, false, val);
+> > +            else if ( (val =3D parse_boolean("hvm", s, ss)) >=3D 0 )
+> > +            {
+> >                  opt_vcpu_pt_hvm =3D val;
+> > +                set_sparse_dmap(false, true, false, val);
+> > +            }
+> > +            else if ( (val =3D parse_boolean("dom0", s, ss)) >=3D 0 )
+> > +            {
+> > +                opt_vcpu_pt_hwdom =3D val;
+> > +                set_sparse_dmap(false, false, true, val);
+> > +            }
+> > +            else if ( (val =3D parse_boolean("directmap", s, ss)) >=3D=
+ 0 )
+> > +            {
+> > +                /* System-wide: every guest type, the hardware domain =
+too. */
+> > +                set_sparse_dmap(true, true, true, val);
+> > +                asi_directmap_ignored =3D val &&
+> > +                                        !IS_ENABLED(CONFIG_SPARSE_DIRE=
+CTMAP);
+>
+> I think we should return error here, rather than print a warning: we
+> don't do this for any other command line option that's not parsed
+> because the required support has been compiled out.
+
+OK.
+
+Everything else I've either taken, or addressed elsewhere, I think.
+
+ -George
 
