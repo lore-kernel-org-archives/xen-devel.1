@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4788ACC6B33
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 09:22:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1450112.1665623 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1120ECC6B33
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 09:34:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1450121.1665633 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHHev-0004wP-6B; Thu, 15 Oct 2026 09:21:57 +0000
+	id 1xHHqj-0007aC-9l; Thu, 15 Oct 2026 09:34:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1450112.1665623; Thu, 15 Oct 2026 09:21:57 +0000
+Received: by outflank-mailman (output) from mailman id 1450121.1665633; Thu, 15 Oct 2026 09:34:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHHev-0004wI-2t; Thu, 15 Oct 2026 09:21:57 +0000
-Received: by outflank-mailman (input) for mailman id 1450112;
- Thu, 15 Oct 2026 09:21:55 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xHHqj-0007a5-78; Thu, 15 Oct 2026 09:34:09 +0000
+Received: by outflank-mailman (input) for mailman id 1450121;
+ Thu, 15 Oct 2026 09:34:07 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <milan_djokic@epam.com>) id 1xHHet-0004wC-8Y
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 09:21:55 +0000
+ (envelope-from <milan_djokic@epam.com>) id 1xHHqh-0007Zz-7K
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 09:34:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHHes-001oyC-LP
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 11:21:54 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xHHqg-007Mcx-5T
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 11:34:06 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <milan_djokic@epam.com>)
- id 6ad09b31-8faa-0a2a0a5109dd-0a2a45029248-4
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 11:21:54 +0200
-Received: from [52.101.69.133]
- (helo=AM0PR83CU005.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad09e0a-2eae-0a2a0a5409dd-0a2a450cb75c-24
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 11:34:06 +0200
+Received: from [52.101.66.88]
+ (helo=DUZPR83CU001.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <milan_djokic@epam.com>)
- id 6ad09b31-6ca4-0a2a45020019-3465458546f3-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 11:21:54 +0200
+ id 6ad09e0d-f479-0a2a450c0019-346542583b48-3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 11:34:05 +0200
 Received: from AS2PR03MB9587.eurprd03.prod.outlook.com (2603:10a6:20b:595::7)
- by ZR6PR03MB752061.eurprd03.prod.outlook.com (2603:10a6:910:e6::23)
+ by VI2PR03MB11003.eurprd03.prod.outlook.com (2603:10a6:800:299::8)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.13; Thu, 15 Oct
- 2026 09:21:52 +0000
+ 2026 09:34:02 +0000
 Received: from AS2PR03MB9587.eurprd03.prod.outlook.com
  ([fe80::daa7:3b97:acb3:67d5]) by AS2PR03MB9587.eurprd03.prod.outlook.com
  ([fe80::daa7:3b97:acb3:67d5%5]) with mapi id 15.21.0496.021; Thu, 15 Oct 2026
- 09:21:52 +0000
+ 09:34:02 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,381 +57,456 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UP1epsXQJsMccEeXHjWYMrV7uzNOH/VNmqyNfny9CndNjWOm+gq+8dGygjR/x7frXa1ns7aIWFGVaB4G/N6vbQ5ZBj3wNgUjEulr2+lMU+gj7gQpU8OvcaXNxgfC69cb1pi+AwPWkrine1r7se7+XWdtFfgj2IUWMV7jpnHMT45l26jJDyDpX8/8WUo6LL4x4DWb4S2a0utnukRV7FhhB6nQPo4L3HcpL+7GPCd+DHvqcYGdZ4LlrzLdVXWE7rVWQEYwodj/c/7BThvaeN//bKi0iynLVn6vgSy0wfsQ9adUq9FwbFyYYUg94Z2RIsZ1qaIFFc8S7kUbBpSmRU78Mw==
+ b=v+nODBM/7bO3poAFFGetnFUAk01sh1PBt+GdQdzmcrW/TN93wXDJB8Xw5rOKu4yCPj2K3B585TESL6r5pmIctXnZtYQZf51sa7C5KlwX6HUinQhE1kfY1CRq46ABERDsBMGWP+sN/LXmNN4QHgzS4D4cDGv6iA3czcVx8y7RxpoVl9w7RIvs3yDLkS6AsK2eoNNVtG0lwQ+L6lNWp+cAtlE5XhYOuYC55awWJwoQcxSsWYhBsFGpGmbw/wzYeTQKrRMzhDN6mnVv9pE95PqlEIlRgG9pUlI36sehAYIiMi1VjHQTw5nZqChmapatsvOGvMii6SWdJfi4GHtN2/FZqg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=IUdGGyGlC1fuQOr5YIhT4OyKseeS87e5fQ3eh2GFAvI=;
- b=jDJN8dWSSOq8xmX4mo5kbPaCeenbEHmg8mhfzN79FTEoVYEiV6mPtZF2lzFd3HS7ypCGjIKor16zhXeiR0+M/ToATF3hTBVxZ6cDlJkhhByBmNYeZ0acDWUa2ZZO3v+YNmtJ2Fob90wi9LH5F0I/fPqBI/6VHZrlQgSxv3QvExExueqbtgy+o+2IryWOEpOYP99UoYb0yhsMPKnawsyu9u07BK4+TlN2aoQjNMC8s1IHQYgwyHTGas/6+AwqsFP4Ky8C16ezdef8vmjcaDkpSOi0GppEZcTuWJTtE0f/Y5Z2Qkj4a3jy/NprXPHu4nP+AuGLZoFws+CjScrtGeb3NQ==
+ bh=s8G+7gP20opyVvGfbc7rYzjyDJjT+pSHAze58KWYd8A=;
+ b=xMjcZaFgYZOyohK6Zd5/sAL2X2+ePpz+AMmZVdOTl4Ge/K/UzzqjYmHkd0mU4tVguYGrPWZVIFSh7Z5ClgM7ImVCJ7WXP8QAnudE/aRU/qOc3JIRmHRhdPWopW+fdVy/rm19akfpfK0x40rAdBTimApaOeVQaAsl2OEnhcLqDq251em0Es/+PIXisvfI9hiCjR8or8jQZjWGJrWYqeS2421H0RkdxxYTdUP286huIi1zE5F62Du5ZVXOUnpkKxses1wpSFvyXt4wKxa827M1q5DQi44bwJJqGKKCQOm5t+Y4hdVzMyn73vhLmFQAOZXlzBOg1sF/tWyo33NKoZ36ew==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=IUdGGyGlC1fuQOr5YIhT4OyKseeS87e5fQ3eh2GFAvI=;
- b=PWKHYb0efXv7lTl6s+hzjNzJlylVUQw6Mi8Fe8Vsl1V6Syf1Fh5YeYZGxKvfn7B1ezNsUiogaKhZ0kFIbMNVECJk2hCk0wliyrqFvyeNuqBVcT9zTg+SBeGcF+qMFvnMWpyptOvfgjgrPyTI1nOnrhL66gwovX6YwKmPuTwaNThroABkL1Kcuo4H1f3PgOenbdFY8s0QeB/wWz24GmCp8W8+1rkSSRyc/VsBn9aV8KOjvEFI2Bf3kJGRQy/YZ+fq+DiZ1pExzorPSqFvpDlcBHNkUGPknCO3N+XZeqoj6HT6DDvkQ8tsb8DO4kcE0S4i/IhmmGXGMk6zoZv5GASYjQ==
+ bh=s8G+7gP20opyVvGfbc7rYzjyDJjT+pSHAze58KWYd8A=;
+ b=asApyFk4mDkCSWQG4B0uBmu8qpzMvUjJiIdWJxfVw7qlrM98GyRMs2JEcA56SDKVltWEuBOcBd3SkAwG9NwrQjrRBkdx49jw7r2mWuKz1qYXbFMdsY5RwsUwyZdLtKrgwx0wudpTBw/dd8xH5KGvadv6v6rYVaR1lZ0AqZc+w94v74eqRPac+ESm3TP0A7tQ6qVjE8FwiMPHVJsRuxXXBd1vjgIJdsXO70Q6Gr8Hmu99ekuLR7cNdhrnoYpS18iBtwt5am29h3FaICI+VTGOETbvnVfSOl7xPOplqkdpB5iOnoLMYJE5Lv3qVzv5/ucha6xGrYJlK+L636rpWCwrBw==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
-Message-ID: <1a922652-0f3e-49f6-9ae8-ae08d65850e6@epam.com>
-Date: Thu, 15 Oct 2026 11:21:50 +0200
+Message-ID: <b7debc79-7828-422b-8507-b5aeaf1b3c0b@epam.com>
+Date: Thu, 15 Oct 2026 11:33:59 +0200
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 02/22] xen/arm: smmuv3: Add support for stage-1 and
- nested stage translation
+Subject: Re: [PATCH v4 04/22] xen/arm: vIOMMU: add generic vIOMMU framework
 To: Oleksandr Tyshchenko <olekstysh@gmail.com>,
  "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Rahul Singh <rahul.singh@arm.com>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
  Stefano Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>,
+ Bertrand Marquis <bertrand.marquis@arm.com>,
  Michal Orzel <michal.orzel@amd.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+ Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+ Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.com>
 References: <cover.1791328190.git.milan_djokic@epam.com>
- <6e45683f154be94e573a4a5e5d25c7efcc29fbe5.1791328190.git.milan_djokic@epam.com>
- <ef146c92-fc46-4ba6-b863-fe7aadf97b59@gmail.com>
+ <6c7570f50af7ebaae8aa709db86959dbd09e1f82.1791328190.git.milan_djokic@epam.com>
+ <144fe444-39ef-456b-9fd4-747c0abc02c5@gmail.com>
 Content-Language: en-US
 From: Milan Djokic <milan_djokic@epam.com>
-In-Reply-To: <ef146c92-fc46-4ba6-b863-fe7aadf97b59@gmail.com>
+In-Reply-To: <144fe444-39ef-456b-9fd4-747c0abc02c5@gmail.com>
 Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: AM0PR02CA0123.eurprd02.prod.outlook.com
- (2603:10a6:20b:28c::20) To AS2PR03MB9587.eurprd03.prod.outlook.com
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: VIUP296CA0088.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:35c::12) To AS2PR03MB9587.eurprd03.prod.outlook.com
  (2603:10a6:20b:595::7)
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AS2PR03MB9587:EE_|ZR6PR03MB752061:EE_
-X-MS-Office365-Filtering-Correlation-Id: 747f364a-8dfe-4974-99bd-08df2a9dbf6e
+X-MS-TrafficTypeDiagnostic: AS2PR03MB9587:EE_|VI2PR03MB11003:EE_
+X-MS-Office365-Filtering-Correlation-Id: b4e2e1c8-1dcf-4b46-df64-08df2a9f7286
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|366016|376014|261009223027099003|10067099003|3023799007|11063799006|4143699003|6133799003|56012099006|18002099003|22082099003;
+	BCL:0;ARA:13230040|1800799024|376014|366016|23010399003|56012099006|11063799006|4143699003|261009223027099003|260925022911599003|18002099003|10067099003|22082099003|6133799003|260925021311599003|260925021911599003;
 X-Microsoft-Antispam-Message-Info:
-	mfRgZTqYs7IsUSsvBTNs1An/zRcoENlAp0+8jQhMdHIsQ5spNaSjOGSduyJrTDEuqkYG91LnD+WTEjNLH6BjPFFCCGxAmsXtGJKTE+LPzs+W514QRdj76NteJn+maaqa09gpOdcse6HvONCLw5hw4Fn72Du05bKbETGqLE8zxAgDJ7WABi9iStKxWlgXhKIKyeYhNXGuUnMbYQfTOTl8NzQbh+D0wyAPx5yqczkaUKlCgtvfiUsSd+I21tcdhcdPGwbNBdDm922Ak3wzoA9FsLlZZVzg9yNBPPtAPin5YpCKMckJNoStCMq7Nk+vII1CdUQkdYXAVjxWu0PVM3fnxm0qPqDtEU9UnMSI0l8rQCRuIgFAfumVVfE+sYKd7wB5uARFu8SXqYWTLoK14H3nL4B5++IVegktNjfFkZIvNrEAXiVOk+IHwQ+EtNQnyrLc48hLdCYO59liuuBIZXx9W/TV1ik9tW6FbvVSqjiRuO8vYXlcF3yeu6nRriUGieoK2j8UGiM9ZXkBjdb6luFbPuD9ps0pWEzDHZBhjVoEplTxxdUFXidnJR4YGnyRt/at8zh/jadEZ2uCKPozMsH/ZtpPY+kZFLBK11dbQfFFnZPox6Maurme2sq7ki71iVTLX+7kYhugFkfRnLmEUlETrQeZUQw20YWTuzLtOCA8SNk=
+	rrWZ3q+QJTbUgnX5rANVqjfSGUBotelbqJk7lhma/4UEwRsAj58D5mtCa9BMNYHx/sd1mEj3e3yWqFmpOoXE59WPSa9SYcP8BMDS38XnzD/gsYy9xtcXSPl0GVJ72XOJ489xYzT0rUEcuwe6lKnki6fwyD1xWS9JDw9sJvCkOGjeKd0+ig9Jzqv7/GvlC8JONkMiBy2gUvaKMIUaMfifh7v0mgr4v6GK8rGHGWNGRDRYu07dz3qGQDud8DDI8vxr+GdtNUOafWb9FqSB/JzOI0Sdx3JS4ESLYIc84SGSqcCPLq28sMg0+zQXaWLCLnibeUjXW/ob9jt7Hj5wAcxxRtis1oJKCvH59cz1CgGhDVs9T23EXuYLE20INlYJpDSE8mxVN/KwC0izRK5Wr0clJrN/UDNLj8s2Q//vvPlobfQdeGUdsRFs8yMBAo35iSDBIcVy1qqLOlKoolO/AQmOibbZHDRJFIz2Apk5nXZ4nS8WMqcyb1NCbKctHEM+uavh1U+bpsY3xiIjpoOFZVP+KMW2yWBYd1P/MyAYUPmf93UJjdKZlAz3dbhHB0kqdpmlyHlEPWqPMBc5kGfSpx+fii8tPuZzP7+0fsa68qtEubv/8X3QfoUGXgWsoeTPEvNjUfCrwNqmN2YQm2blXi0cXgvfRgj8Vbvu/f+QlQVVEAs=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9587.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(366016)(376014)(261009223027099003)(10067099003)(3023799007)(11063799006)(4143699003)(6133799003)(56012099006)(18002099003)(22082099003);DIR:OUT;SFP:1102;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AS2PR03MB9587.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(56012099006)(11063799006)(4143699003)(261009223027099003)(260925022911599003)(18002099003)(10067099003)(22082099003)(6133799003)(260925021311599003)(260925021911599003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?bitFZEQrUHpFR2MvRFR6UnhZWi9zQ3E3a09lc2xrUzdxdE0vZVVIczd2cG1Q?=
- =?utf-8?B?T0pleTczNUd2bUd6Tlg3d21EVmc4TmxNbG4zRXArSThaeUJBakZ4QWdERnNv?=
- =?utf-8?B?UktqOFJRNC9zSW1PMnVnZnhGMjNLWjdNZUpKN0ZBUVJsYkExbHdqWXlxVHRv?=
- =?utf-8?B?d1JkTlJBRUFFUHR0UEx4S1BnWTRSL05JaHdpWkVRTEhESmNCWHFYY3kvL2M1?=
- =?utf-8?B?ZTVpMWZ2eUxoSEJld3FVNUFXNmg3cjJmVklJc0NIaG51V0pWWSs5OU9wZ2dP?=
- =?utf-8?B?R3N5VW0yZy9ReWo5NlNxNndjWmJLL2M4USsrWkM3RFFJRElSczdycFhNY2Y5?=
- =?utf-8?B?Q2V1dVBucStFUmdta3hVMFpCcVRYNlRnajNZbzFBK016cm9uMm9kWWE2MjYr?=
- =?utf-8?B?WjRZaUk0cFN0R2JCdXRYaWZMcmpzUHJaKzEvNnFEMzBjbi8zWHE1czZDaHVM?=
- =?utf-8?B?UUtVSnM4ZGlNTzZBVlU3VUVSL0hqWTJqK0VKeWZBdFJ0QU5yT0h4WDY1dTR4?=
- =?utf-8?B?ZnZmeGJvWjBGcDdjMkcreEYxTFFDWDZwbTl5SFRMMjVRbUNZTVJwQkJXclpl?=
- =?utf-8?B?T1BFQVg0OEt4cVcxcU5OaWMzTTNCZVd3Rkp2L01uaU5rdlBVbFV0NWM4NWNE?=
- =?utf-8?B?MTk5WkN5M0FELytCakIwdzU0RGFhbk5COVJoNWk0Q0lpSURxVXNjK0tUckQ5?=
- =?utf-8?B?QVNTOHJZVDdnMC9MTFZkZ2xnNndHbzJ1UEdZTktvdGlzZHRPbUN3d3IyNUNs?=
- =?utf-8?B?OGozdnFjRU12Nk5UeWwrNmJLb1FlSC9TRFB5T1UrUUVHd05aVmtYdWpJSER5?=
- =?utf-8?B?Yy9LN21WQStQZm8raGFqTU5mYkVQYk0xZzNxQ2JvSzVFOEtWMml5dkpKemZi?=
- =?utf-8?B?RHRpQmFESmcxWUtkYzhSNGN6REE5NVFHQUNUM21NTzBkODAyUXhXTWFnbmZ4?=
- =?utf-8?B?ekpoWldHKytYS3NuZThNWWJQcUIvelhVR3BVc3JOVXB3Uit2ZER4OVhFQ3do?=
- =?utf-8?B?YnBKZkk4dmtqMEhVUDVndFlBYUtwNTJBSUpWdnBrbzVmRUYvVjk0UWVtc1E3?=
- =?utf-8?B?ZHNxcFY0SVVNZXdhK3lKSmxBL01MZVNjbDlkYndtbmk1L0gwODRUQStZWlFH?=
- =?utf-8?B?bDBscStJcTdyY2hGV3RLeDB2aWt0b3c4eXo2UUdmTE51WTdGMG0zbjZud0FI?=
- =?utf-8?B?U0tkU0xaNEoxazNXa3NNc1VNZXE2RlhwU1ZVOVFDMm9DTE9XWFNhQnN3TDNu?=
- =?utf-8?B?eGIyZ2xTYzNGOG54MHRkTkNLdHRnUDl3M04vTjZ6LzBjVlpBZWhmWlhYa2N0?=
- =?utf-8?B?QjVQTTAxbFd2OFdpUkRLT0tiOHBFOTdQVjk0RmpHZVErajZOQXdsbGNhVHB4?=
- =?utf-8?B?ZU13MDRTV3Q0RjgrUWsvUTZ3dGpkSWpwN2V3Z1dYdDFUbzFjMlR6aFhSTyt1?=
- =?utf-8?B?a0hJeGFxSWEzeDhKWE5ZbzJWYWFUUTdIUGdPNkFRdEdHWUkwNTRtTE45bmpT?=
- =?utf-8?B?Z1VFZkU5MGROYWpKNWxHeHlNcURaZkd5SCszUk90aUZET2N0dVhrMW40WHhD?=
- =?utf-8?B?cXBySHNheGYrSEppc2Nlb0RFNlh2c2U0RmFwWUsrZDRDT2JXSHZla2ZKSThj?=
- =?utf-8?B?Rms0MUVxbXNrck8vSndITnN2cWVMZEk0TnN5anJNdnh5Ni9IaGFCRHUvWkpU?=
- =?utf-8?B?OGYyWktsUHk3S2dxKythWFZiaFJTTHo5K1Q1Y1dBa1h0d1NNd3BqZGJORVRB?=
- =?utf-8?B?eTZaVmR2cWd0QnRrOUVVY1VPQmR6UFRhZThZUE5zejhUUGU1K0ZNWlRPRFlo?=
- =?utf-8?B?Q2NSN2dsUDR1QmpINCs5dU92eUNBTXZ4MDF1dzBnZjYybVFiOU5kQlk2ODB3?=
- =?utf-8?B?T2trVnROQkhrQjV4M1Vra0JjMy90Q3cwcUQ5aWpTLzU2cmVNTmVCVlIwbkk1?=
- =?utf-8?B?VHRaQ3ZnTndLNGNsNnc3RWk0ajJ6bEN5Z2ViUWltWVNlNlE2bllZVG9WeXM1?=
- =?utf-8?B?NXg4c2owRkNzSHlqUUJGN240ditxRndtTnRwbVgxbHRHUUtOVFprQjFHdHFS?=
- =?utf-8?B?aW9QdC9WTFE4NnJzR01MVmgva2NyZjFWT1c0LzVxM1NWbnFwWjFLK3BPR3BG?=
- =?utf-8?B?SldCcGZHWVJpbDZGdldRR1J2V1pObWhWRWhWbDlLSjkrRWozNGRxWXAvZVlP?=
- =?utf-8?B?RENHUmg5cDBvb2c5dnpNRkhXV1hHS2cybkgxN3FPcnNvdU5teWxKQTRyKzN1?=
- =?utf-8?B?RWRQRGJiUkw4WW5WZzZvcGwvelhwekovcFNiSTdzSWN6d0FPMWNuTDBaWlUx?=
- =?utf-8?B?S0VaQVR3bFZFekZocTBtN3JqUzM4Y09teGlrMFpBeE1kZzZ5N2JLdz09?=
+	=?utf-8?B?L0htQjNiTm80MDROVEpsY1dmYTNOQWt3alRvMnMxTDA2MHlOZnp5SllXR0NR?=
+ =?utf-8?B?eUtkNjRBRi9vaFRoQXpvaWZ0dFhHakVJYjlDQkw5WDZaSGh1WWRtdW1wL1dX?=
+ =?utf-8?B?aFpGQWRKc1d4SEFYV2RuK3M0aVppVmR5OVp1UmZDNytIUEVILytOSjBEdXpU?=
+ =?utf-8?B?OStJK1NISTRSaUFNSWdjdUU3Si9lT3FQYWJHVTBTY1lWN05TK1dPNFZTdTdS?=
+ =?utf-8?B?ek5VNkU2bncwVWY2MjIrOXgvRm95ZnNCSnVRUitZT0VPVVZVa3c4b3NQdWNw?=
+ =?utf-8?B?TGdMa2swYy9jWCszc1pkN010TXFFcjUzSWxZSHBzSG9lZFAyb0laK2huSG9E?=
+ =?utf-8?B?RDlranp1MVB5dEs2dUdHTjk2dFZXSEp6Z0NkUXYvbEh4VmFQcGhseGdvMENV?=
+ =?utf-8?B?eXpFNGhsbytENHEyUmVPaHBCMERaQ0dxWktCQlB3Sjlld1VvQ2lMUFZ4MDBl?=
+ =?utf-8?B?THF5cnNKWFdvSitGNTZKQm1ZNkxJWGQweERSZStzbXFycWVCUFJrMldFNERi?=
+ =?utf-8?B?eWpDQkpocmt6R0RQZ2R0Z040bHZmUGs0bWYzcy9NU2Zpa2N3dDhMdzJ1dHNN?=
+ =?utf-8?B?U0FsUzUvTWV3VnFBeGRQSjlLaHlFRDN5emQ5cnl3RmVRWU1taFVnN01JNk1o?=
+ =?utf-8?B?WDN6NjRvbHJ3RnB0cHdzM1MvU0xYeTQ1bGRTSUNtNHEyOHZGcWFoWmV0Mit6?=
+ =?utf-8?B?VFJCTDR5UGsvdDF6NjhWY0h0MUxrTzRpZVJMOG8za2ZtYkpqNkxWYTE1a1Ja?=
+ =?utf-8?B?a0VKNGRsNDhKU0c5M1M2M0dDWlJJM1hzTjM4QkZHQks1Nkt6bUw3WW1sUnUv?=
+ =?utf-8?B?eDZOQnJqVE91Q1hrVU4vTzJwd3dndzFIOUE3eGlLOGhRclJ1TTJqczFiMmR3?=
+ =?utf-8?B?NExNS3lXQ1FZQVRiVmVERHZrS1pUVFhiQ0RhZlkrV0VWdjZKWVczOU43cko2?=
+ =?utf-8?B?cmpFMEh2ZWY1Tk42bTE1N3RDekw5SXV4NlJzeDU3M0ZUNGlTY2ovMzRDcEEy?=
+ =?utf-8?B?TStPUUhTc1kyaXhESTIwUk1WQXNsMklRR2kyRE9sR2o2VUpIaTQyRWxJVC9E?=
+ =?utf-8?B?UnA4RndnaFlxdUFMbDcvdEI3Y0xyN2RBN3FyektnK3EzaFJZS2V2aGxodVgw?=
+ =?utf-8?B?dWZPNUwvOUl4d0l1YTErT2FMTTRpNXdNcDZJZitLSmdZQ3pMOVg4UlA1Y2hL?=
+ =?utf-8?B?UUtXcldjWlo3U1F3bjhUZzVrM2FMbytqWmdXL2hZM0MxRndDaGcvRTNLQXRT?=
+ =?utf-8?B?cmY4UVVPMXpXSm82S3VLNW5yam42YTRjazRxZDR0NGNwTjhobnBOZHZVVlBI?=
+ =?utf-8?B?d1d0ZExyTGs2T3lzQms2bnRqMkVseGFWQm82d0hhdHFIMW0wd21JZGtCbDV6?=
+ =?utf-8?B?L0tOVzF5OVRrVlJNODYzM0k3YjAva3ovTElzZFlzT1RmU05lbndtMkxCSGt1?=
+ =?utf-8?B?TUVFTzVLekxnbXAxREJweUFGMFl2S1NZZTBMd3dlQjB5VVhrNC9sL1g2T0Zv?=
+ =?utf-8?B?b2xQbGxGdlRTOEFIT2FZaHZSZ3luenpyWUsyTWk0MDE3d3JHMVg2VklrNTNz?=
+ =?utf-8?B?bXFtREpuN1RYd1FjcFk5MjU5YzA1L3l1UVVXU05vVVlNdmdoaGFGQkZlWkR4?=
+ =?utf-8?B?VFFCaThIYndTRjlLYWN6c0tsR2tIbnFBaGh2aGV1MVpZWXJKS2VWUnhHdzk3?=
+ =?utf-8?B?M2VweUk4bXE3T2RxOEllaVJOR0w0OStpVkx6T0w2WDdwRXltaFBWblNweEdD?=
+ =?utf-8?B?TkRoc2UxbERJNUNlSThucXhXK2hRY1BteXZLZG9aVDh4eFNKNEcxSGVnVUtE?=
+ =?utf-8?B?eDZyM0laVmROR0RFMUdNVlY4SnF2VmMyMCtOQmNZWDlOck1NL01qY1piSzVv?=
+ =?utf-8?B?QWM0SHZEeUlNTzV3SVljNkowWFFmRnB4QVBQVGVWNlZDTG0wb1lBRHdIOTlS?=
+ =?utf-8?B?eHZYNmNSQTlJSm5oUm9YcFY4YlhidmtGcWVXaDhOcVEvMXRkSzcydzNLdXBa?=
+ =?utf-8?B?UXZDM3diVnMyanFKbEFPbTR5Mk9hTWUvSVF6djRiUkRmTVd6SGM3eDlXSXFZ?=
+ =?utf-8?B?YW1pL3lDQW8zTStUdzUwK2V1YXVGVUd0amk5UGZpb1hNZjExeGc3ejYvSVBV?=
+ =?utf-8?B?ZTJuYkNWZlNpWFpUS0Rhb3ZKdzVZSklUYlJkREZDZU8wSVJzS2pOcTRDQ2VD?=
+ =?utf-8?B?MjZBYlZaeU9KNzlWeld1VWpmei9WSVNaVTlZOXA5TWdueUp6MzI1V05jS2p1?=
+ =?utf-8?B?eFZCNlQwbDkvU0NiMXNpRUNRRVRpeVc1bjNyRHdzNkdwbWZhTW4xSVRzS3VE?=
+ =?utf-8?B?cjg4YzZMTWdLNnUyc1paQkRtTVhpaHFuNUhPalRucmZha3IvR1dzQT09?=
 X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 747f364a-8dfe-4974-99bd-08df2a9dbf6e
+X-MS-Exchange-CrossTenant-Network-Message-Id: b4e2e1c8-1dcf-4b46-df64-08df2a9f7286
 X-MS-Exchange-CrossTenant-AuthSource: AS2PR03MB9587.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2026 09:21:52.2082
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2026 09:34:02.0892
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: HN4WSUorQeY5ovNBkg5u2ihwLqLda8wBdaPNmlC6EPKQttNfQI5FhAP0sRwbc8tiieKWIDFRoGcpQlmc5PYiqg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: ZR6PR03MB752061
-X-purgate-ID: tlsNG-720697/1792056114-674BE2AC-A76C23A4/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: +1Tg80XlZFapIDCF21JXUQmI+W8iZ8pCSC2lp81US/yPFmSDb6Skdehy1QFpAoiF9XRd2IOAii/VQrDY2CYFoA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: VI2PR03MB11003
+X-purgate-ID: tlsNG-d25034/1792056846-02CDBA5B-FF87A43F/0/0
 X-purgate-type: clean
-X-purgate-size: 11098
+X-purgate-size: 11534
 
 Hi Oleksandr,
 
-On 10/9/26 19:37, Oleksandr Tyshchenko wrote:
+On 10/9/26 13:41, Oleksandr Tyshchenko wrote:
 > [You don't often get email from olekstysh@gmail.com. Learn why this is important at https://aka.ms/LearnAboutSenderIdentification ]
 > 
 > On 10/7/26 03:06, Milan Djokic wrote:
 > 
 > Hello Milan
 > 
+> 
 >> From: Rahul Singh <rahul.singh@arm.com>
 >>
->> Xen SMMUv3 driver only supports stage-2 translation. Add support for
->> Stage-1 translation that is required to support nested stage
->> translation.
->>
->> In true nested mode, both s1_cfg and s2_cfg will coexist.
->> Let's remove the union. When nested stage translation is setup, both
->> s1_cfg and s2_cfg are valid.
->>
->> We introduce a new smmu_domain abort field that will be set
->> upon guest stage-1 configuration passing. If no guest stage-1
->> config has been attached, it is ignored when writing the STE.
->>
->> arm_smmu_write_strtab_ent() is modified to write both stage
->> fields in the STE and deal with the abort field.
+>> This patch adds basic framework for vIOMMU.
 >>
 >> Signed-off-by: Rahul Singh <rahul.singh@arm.com>
 >> Signed-off-by: Milan Djokic <milan_djokic@epam.com>
 >> ---
->>    xen/drivers/passthrough/arm/smmu-v3.c | 96 +++++++++++++++++++++++----
->>    xen/drivers/passthrough/arm/smmu-v3.h |  9 +++
->>    2 files changed, 93 insertions(+), 12 deletions(-)
+>>    xen/arch/arm/dom0less-build.c        |  2 +
+>>    xen/arch/arm/domain.c                | 31 +++++++++++-
+>>    xen/arch/arm/domain_build.c          |  2 +
+>>    xen/arch/arm/include/asm/viommu.h    | 70 ++++++++++++++++++++++++++++
+>>    xen/drivers/passthrough/Kconfig      |  5 ++
+>>    xen/drivers/passthrough/arm/Makefile |  1 +
+>>    xen/drivers/passthrough/arm/viommu.c | 49 +++++++++++++++++++
+>>    xen/include/public/arch-arm.h        |  6 ++-
+>>    8 files changed, 164 insertions(+), 2 deletions(-)
+>>    create mode 100644 xen/arch/arm/include/asm/viommu.h
+>>    create mode 100644 xen/drivers/passthrough/arm/viommu.c
 >>
->> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
->> index 7162473d62..d3e88d5a55 100644
->> --- a/xen/drivers/passthrough/arm/smmu-v3.c
->> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
->> @@ -683,8 +683,10 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
->>         * 3. Update Config, sync
->>         */
->>        u64 val = le64_to_cpu(dst[0]);
->> -     bool ste_live = false;
->> +     bool s1_live = false, s2_live = false, ste_live = false;
->> +     bool abort, translate = false;
->>        struct arm_smmu_device *smmu = NULL;
->> +     struct arm_smmu_s1_cfg *s1_cfg = NULL;
->>        struct arm_smmu_s2_cfg *s2_cfg = NULL;
->>        struct arm_smmu_domain *smmu_domain = NULL;
->>        struct arm_smmu_cmdq_ent prefetch_cmd = {
->> @@ -699,30 +701,57 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
->>                smmu = master->smmu;
+>> diff --git a/xen/arch/arm/dom0less-build.c b/xen/arch/arm/dom0less-build.c
+>> index 3f48f74226..f87437915e 100644
+>> --- a/xen/arch/arm/dom0less-build.c
+>> +++ b/xen/arch/arm/dom0less-build.c
+>> @@ -23,6 +23,7 @@
+>>    #include <asm/arm64/sve.h>
+>>    #include <asm/domain_build.h>
+>>    #include <asm/firmware/sci.h>
+>> +#include <asm/viommu.h>
+>>    #include <asm/grant_table.h>
+>>    #include <asm/setup.h>
+>>
+>> @@ -369,6 +370,7 @@ int __init arch_parse_dom0less_node(struct dt_device_node *node,
+>>        uint32_t val;
+>>
+>>        d_cfg->arch.gic_version = XEN_DOMCTL_CONFIG_GIC_NATIVE;
+>> +    d_cfg->arch.viommu_type = viommu_get_type();
+>>        d_cfg->flags |= XEN_DOMCTL_CDF_hvm | XEN_DOMCTL_CDF_hap;
+>>
+>>        if ( domu_dt_sci_parse(node, d_cfg) )
+>> diff --git a/xen/arch/arm/domain.c b/xen/arch/arm/domain.c
+>> index a739dd157e..5c411a2310 100644
+>> --- a/xen/arch/arm/domain.c
+>> +++ b/xen/arch/arm/domain.c
+>> @@ -33,6 +33,7 @@
+>>    #include <asm/vgic.h>
+>>    #include <asm/vpci.h>
+>>    #include <asm/vpsci.h>
+>> +#include <asm/viommu.h>
+>>    #include <asm/vtimer.h>
+>>
+>>    #include "vuart.h"
+>> @@ -663,6 +664,21 @@ int arch_sanitise_domain_config(struct xen_domctl_createdomain *config)
+>>            return -EINVAL;
 >>        }
 >>
->> -     if (smmu_domain)
->> -             s2_cfg = &smmu_domain->s2_cfg;
->> +     if (smmu_domain) {
->> +             switch (smmu_domain->stage) {
->> +             case ARM_SMMU_DOMAIN_S1:
->> +                     s1_cfg = &smmu_domain->s1_cfg;
->> +                     break;
->> +             case ARM_SMMU_DOMAIN_NESTED:
->> +                     s1_cfg = &smmu_domain->s1_cfg;
->> +                     fallthrough;
->> +             case ARM_SMMU_DOMAIN_S2:
->> +                     s2_cfg = &smmu_domain->s2_cfg;
->> +                     break;
->> +             default:
->> +                     break;
->> +             }
->> +             translate = s1_cfg || s2_cfg;
->> +     }
->>
->>        if (val & STRTAB_STE_0_V) {
->>                switch (FIELD_GET(STRTAB_STE_0_CFG, val)) {
->>                case STRTAB_STE_0_CFG_BYPASS:
->>                        break;
->> +             case STRTAB_STE_0_CFG_S1_TRANS:
->> +                     s1_live = true;
->> +                     break;
->>                case STRTAB_STE_0_CFG_S2_TRANS:
->> -                     ste_live = true;
->> +                     s2_live = true;
->> +                     break;
->> +             case STRTAB_STE_0_CFG_NESTED:
->> +                     s1_live = true;
->> +                     s2_live = true;
->>                        break;
->>                case STRTAB_STE_0_CFG_ABORT:
->> -                     BUG_ON(!disable_bypass);
->>                        break;
->>                default:
->>                        BUG(); /* STE corruption */
->>                }
->>        }
->>
->> +     ste_live = s1_live || s2_live;
+>> +    if ( !(config->flags & XEN_DOMCTL_CDF_iommu) &&
+>> +         config->arch.viommu_type != XEN_DOMCTL_CONFIG_VIOMMU_NONE )
+>> +    {
+>> +        dprintk(XENLOG_INFO,
+>> +                "vIOMMU requested while iommu not enabled for domain\n");
+>> +        return -EINVAL;
+>> +    }
+> 
+> 
+> I might miss something, but if CONFIG_ARM_VIRTUAL_IOMMU=y and we have
+> SMMUv3 the dom0less domains "without passthrough" will fail to build.
+> 
+> arch_parse_dom0less_node() sets viommu_type for every guest. But
+> CDF_iommu is only set when passthrough = "enabled" or the node has a
+> multiboot DTB. So a plain guest without passthrough is therefore
+> rejected here.
+> 
+
+Good catch. The domain's ``viommu_type`` should be set based on both 
+``CDF_IOMMU`` and the detected vIOMMU. The vIOMMU should be disabled for 
+the domain when passthrough is disabled. I will fix this.
+
+> 
+> 
 >> +
->>        /* Nuke the existing STE_0 value, as we're going to rewrite it */
->>        val = STRTAB_STE_0_V;
->>
->>        /* Bypass/fault */
->> -     if (!smmu_domain || !(s2_cfg)) {
->> -             if (!smmu_domain && disable_bypass)
->> +     if (!smmu_domain)
->> +             abort = disable_bypass;
->> +     else
->> +             abort = smmu_domain->abort;
+>> +    if ( config->arch.viommu_type != XEN_DOMCTL_CONFIG_VIOMMU_NONE )
+>> +    {
+>> +        dprintk(XENLOG_INFO,
+>> +                "vIOMMU type requested not supported by the platform or Xen\n");
+>> +        return -EINVAL;
+>> +    }
 >> +
->> +     if (abort || !translate) {
->> +             if (abort)
->>                        val |= FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_ABORT);
->>                else
->>                        val |= FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_BYPASS);
->> @@ -740,7 +769,32 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
->>                return;
->>        }
+>>        return sci_domain_sanitise_config(config);
+>>    }
 >>
->> +     if (ste_live) {
->> +             /* First invalidate the live STE */
->> +             dst[0] = cpu_to_le64(STRTAB_STE_0_CFG_ABORT);
->> +             arm_smmu_sync_ste_for_sid(smmu, sid);
->> +     }
->> +
->> +     if (s1_cfg) {
->> +             dst[1] = cpu_to_le64(
->> +                      FIELD_PREP(STRTAB_STE_1_S1DSS, STRTAB_STE_1_S1DSS_SSID0) |
->> +                      FIELD_PREP(STRTAB_STE_1_S1CIR, STRTAB_STE_1_S1C_CACHE_WBRA) |
->> +                      FIELD_PREP(STRTAB_STE_1_S1COR, STRTAB_STE_1_S1C_CACHE_WBRA) |
->> +                      FIELD_PREP(STRTAB_STE_1_S1CSH, ARM_SMMU_SH_ISH) |
->> +                      FIELD_PREP(STRTAB_STE_1_STRW, STRTAB_STE_1_STRW_NSEL1));
->> +
->> +             if (smmu->features & ARM_SMMU_FEAT_STALLS &&
->> +                !(smmu->features & ARM_SMMU_FEAT_STALL_FORCE))
->> +                     dst[1] |= cpu_to_le64(STRTAB_STE_1_S1STALLD);
->> +
->> +             val |= (s1_cfg->s1ctxptr & STRTAB_STE_0_S1CTXPTR_MASK) |
->> +                     FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_S1_TRANS) |
->> +                     FIELD_PREP(STRTAB_STE_0_S1CDMAX, s1_cfg->s1cdmax) |
->> +                     FIELD_PREP(STRTAB_STE_0_S1FMT, s1_cfg->s1fmt);
->> +     }
->> +
->>        if (s2_cfg) {
->> +             u64 vttbr = s2_cfg->vttbr & STRTAB_STE_3_S2TTB_MASK;
->>                u64 strtab =
->>                         FIELD_PREP(STRTAB_STE_2_S2VMID, s2_cfg->vmid) |
->>                         FIELD_PREP(STRTAB_STE_2_VTCR, s2_cfg->vtcr) |
->> @@ -750,12 +804,19 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
->>                         STRTAB_STE_2_S2PTW | STRTAB_STE_2_S2AA64 |
->>                         STRTAB_STE_2_S2R;
+>> @@ -762,6 +778,9 @@ int arch_domain_create(struct domain *d,
+>>        if ( (rc = sci_domain_init(d, config)) != 0 )
+>>            goto fail;
 >>
->> -             BUG_ON(ste_live);
->> +             if (s2_live) {
->> +                     u64 s2ttb = le64_to_cpu(dst[3]) & STRTAB_STE_3_S2TTB_MASK;
->> +                     BUG_ON(s2ttb != vttbr);
->> +             }
+>> +    if ( (rc = domain_viommu_init(d, config->arch.viommu_type)) != 0 )
+>> +        goto fail;
 >> +
->>                dst[2] = cpu_to_le64(strtab);
+>>        return 0;
 >>
->> -             dst[3] = cpu_to_le64(s2_cfg->vttbr & STRTAB_STE_3_S2TTB_MASK);
->> +             dst[3] = cpu_to_le64(vttbr);
->>
->>                val |= FIELD_PREP(STRTAB_STE_0_CFG, STRTAB_STE_0_CFG_S2_TRANS);
->> +     } else {
->> +             dst[2] = 0;
->> +             dst[3] = 0;
->>        }
->>
->>        if (master->ats_enabled)
->> @@ -1254,8 +1315,16 @@ static int arm_smmu_domain_finalise(struct iommu_domain *domain,
+>>    fail:
+>> @@ -822,7 +841,8 @@ static void resume_ctx_reset(struct resume_info *ctx)
+>>    void arch_domain_destroy(struct domain *d)
 >>    {
->>        int ret;
->>        struct arm_smmu_domain *smmu_domain = to_smmu_domain(domain);
->> +     struct arm_smmu_device *smmu = smmu_domain->smmu;
+>>        resume_ctx_reset(&d->arch.resume_ctx);
+>> -
+>> +    if ( viommu_relinquish_resources(d) )
+>> +        printk(XENLOG_INFO "%pd: Domain vIOMMU teardown failed\n", d);
+>>        tee_free_domain_ctx(d);
+>>        /* IOMMU page table is shared with P2M, always call
+>>         * iommu_domain_destroy() before p2m_final_teardown().
+>> @@ -1058,6 +1078,7 @@ static int relinquish_memory(struct domain *d, struct page_list_head *list)
+>>     */
+>>    enum {
+>>        PROG_pci = 1,
+>> +    PROG_viommu,
+>>        PROG_sci,
+>>        PROG_tee,
+>>        PROG_xen,
+>> @@ -1105,6 +1126,14 @@ int domain_relinquish_resources(struct domain *d)
+>>            if ( ret )
+>>                return ret;
+>>    #endif
+>> +    /*
+>> +     * PCI devices may rely on the vIOMMU, so its resources
+>> +     * should be relinquished only after the PCI devices are released.
+>> +     */
+>> +    PROGRESS(viommu):
+>> +        ret = viommu_relinquish_resources(d);
+>> +        if (ret )
+>> +            return ret;
+>>
+>>        PROGRESS(sci):
+>>            ret = sci_relinquish_resources(d);
+>> diff --git a/xen/arch/arm/domain_build.c b/xen/arch/arm/domain_build.c
+>> index 72d5316180..cd2e09f005 100644
+>> --- a/xen/arch/arm/domain_build.c
+>> +++ b/xen/arch/arm/domain_build.c
+>> @@ -36,6 +36,7 @@
+>>    #include <asm/arm64/sve.h>
+>>    #include <asm/cpufeature.h>
+>>    #include <asm/domain_build.h>
+>> +#include <asm/viommu.h>
+>>    #include <xen/event.h>
+>>
+>>    #include <xen/irq.h>
+>> @@ -1964,6 +1965,7 @@ void __init create_dom0(void)
+>>        dom0_cfg.arch.nr_spis = vgic_def_nr_spis();
+>>        dom0_cfg.arch.tee_type = tee_get_type();
+>>        dom0_cfg.max_vcpus = dom0_max_vcpus();
+>> +    dom0_cfg.arch.viommu_type = viommu_get_type();
+>>
+>>        if ( iommu_enabled )
+>>            dom0_cfg.flags |= XEN_DOMCTL_CDF_iommu;
+>> diff --git a/xen/arch/arm/include/asm/viommu.h b/xen/arch/arm/include/asm/viommu.h
+>> new file mode 100644
+>> index 0000000000..95f82d9cf5
+>> --- /dev/null
+>> +++ b/xen/arch/arm/include/asm/viommu.h
+>> @@ -0,0 +1,70 @@
+>> +/* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
+>> +#ifndef __ARCH_ARM_VIOMMU_H__
+>> +#define __ARCH_ARM_VIOMMU_H__
 >> +
->> +     if (!(smmu->features & ARM_SMMU_FEAT_TRANS_S2))
->> +             return 0;
-> 
-> 
-> I am not fully confident I understood all the magic here correctly, but
-> it appears the initial state may be broken on SMMUs without stage-2
-> (stage-1-only hosts).
-> 
-> Here we return early without setting a stage, and the zeroed domain has
-> stage-1 (enum value 0). So a new domain is left in a default stage-1
-> state with no real config. The first attach then writes a live S1 STE
-> with s1ctxptr = 0 in arm_smmu_write_strtab_ent(), so the hardware reads
-> a context descriptor from physical address 0. I wonder we should default
-> the domain to abort.
-> 
-> Could you please double-check?
-> 
-
-Yes, this is a valid point. The first STE write shall install the 
-incorrect configuration. I will default the domain to abort when
-stage-2 is not supported.
-
-> Also, it is my understanding that without stage-2 translation the
-> guest’s s1ctxptr and the stage-1 output address are used as host
-> physical addresses. The guest decides where the hardware reads and
-> writes. I wonder whether we should refuse this mode for non-hardware
-> (non-direct-mapped) domains.
-> 
-
-Same here. I'll update the implementation to allow Stage-1-only mode 
-only for direct-mapped domains.
-
-> Apologies if this has already been discussed.
-> 
->>
->> -     /* Restrict the stage to what we can actually support */
->> +     /*
->> +      * Default to stage-2 support and initialize it. Stage-1 will be
->> +      * initialized during guest config attachment, if nested or stage-1
->> +      * mode is required
->> +      */
->>        smmu_domain->stage = ARM_SMMU_DOMAIN_S2;
->>
->>        ret = arm_smmu_domain_finalise_s2(smmu_domain, master);
->> @@ -2398,11 +2467,14 @@ static int arm_smmu_device_hw_probe(struct arm_smmu_device *smmu)
->>                break;
->>        }
->>
->> +     if (reg & IDR0_S1P)
->> +             smmu->features |= ARM_SMMU_FEAT_TRANS_S1;
+>> +#include <xen/lib.h>
+>> +#include <xen/types.h>
+>> +#include <public/xen.h>
 >> +
->>        if (reg & IDR0_S2P)
->>                smmu->features |= ARM_SMMU_FEAT_TRANS_S2;
->>
->> -     if (!(reg & IDR0_S2P)) {
->> -             dev_err(smmu->dev, "no stage-2 translation support!\n");
->> +     if (!(reg & (IDR0_S1P | IDR0_S2P))) {
->> +             dev_err(smmu->dev, "no translation support!\n");
->>                return -ENXIO;
->>        }
->>
->> diff --git a/xen/drivers/passthrough/arm/smmu-v3.h b/xen/drivers/passthrough/arm/smmu-v3.h
->> index ab1f29f6c7..e257de6db9 100644
->> --- a/xen/drivers/passthrough/arm/smmu-v3.h
->> +++ b/xen/drivers/passthrough/arm/smmu-v3.h
->> @@ -197,6 +197,7 @@
->>    #define STRTAB_STE_0_CFG_BYPASS             4
->>    #define STRTAB_STE_0_CFG_S1_TRANS   5
->>    #define STRTAB_STE_0_CFG_S2_TRANS   6
->> +#define STRTAB_STE_0_CFG_NESTED              7
->>
->>    #define STRTAB_STE_0_S1FMT          GENMASK_ULL(5, 4)
->>    #define STRTAB_STE_0_S1FMT_LINEAR   0
->> @@ -549,6 +550,12 @@ struct arm_smmu_strtab_l1_desc {
->>        dma_addr_t                      l2ptr_dma;
->>    };
->>
->> +struct arm_smmu_s1_cfg {
->> +     u64                             s1ctxptr;
->> +     u8                              s1fmt;
->> +     u8                              s1cdmax;
+>> +struct viommu_ops {
+>> +    /*
+>> +     * Called during domain construction if toolstack requests to enable
+>> +     * vIOMMU support.
+>> +     */
+>> +    int (*domain_init)(struct domain *d);
+>> +
+>> +    /*
+>> +     * Called during domain destruction to free resources used by vIOMMU.
+>> +     */
+>> +    int (*relinquish_resources)(struct domain *d);
 >> +};
 >> +
->>    struct arm_smmu_s2_cfg {
->>        u16                             vmid;
->>        u64                             vttbr;
->> @@ -669,6 +676,8 @@ struct arm_smmu_domain {
->>        atomic_t                        nr_ats_masters;
+>> +struct viommu_desc {
+>> +    /* vIOMMU domains init/free operations described above. */
+>> +    const struct viommu_ops *ops;
+>> +
+>> +    /*
+>> +     * ID of vIOMMU. Corresponds to xen_arch_domainconfig.viommu_type.
+>> +     * Should be one of XEN_DOMCTL_CONFIG_VIOMMU_xxx
+>> +     */
+>> +    uint8_t viommu_type;
+>> +};
+>> +
+>> +#ifdef CONFIG_ARM_VIRTUAL_IOMMU
+>> +
+>> +int domain_viommu_init(struct domain *d, uint8_t viommu_type);
+>> +int viommu_relinquish_resources(struct domain *d);
+>> +uint8_t viommu_get_type(void);
+>> +
+>> +#else
+>> +
+>> +static inline uint8_t viommu_get_type(void)
+>> +{
+>> +    return XEN_DOMCTL_CONFIG_VIOMMU_NONE;
+>> +}
+>> +
+>> +static inline int domain_viommu_init(struct domain *d, uint8_t viommu_type)
+>> +{
+>> +    if ( likely(viommu_type == XEN_DOMCTL_CONFIG_VIOMMU_NONE) )
+>> +        return 0;
+>> +
+>> +    return -ENODEV;
+>> +}
+>> +
+>> +static inline int viommu_relinquish_resources(struct domain *d)
+>> +{
+>> +    return 0;
+>> +}
+>> +
+>> +#endif /* CONFIG_ARM_VIRTUAL_IOMMU */
+>> +
+>> +#endif /* __ARCH_ARM_VIOMMU_H__ */
+>> +
+>> +/*
+>> + * Local variables:
+>> + * mode: C
+>> + * c-file-style: "BSD"
+>> + * c-basic-offset: 4
+>> + * indent-tabs-mode: nil
+>> + * End:
+>> + */
+>> diff --git a/xen/drivers/passthrough/Kconfig b/xen/drivers/passthrough/Kconfig
+>> index b413c33a4c..a92cfbea98 100644
+>> --- a/xen/drivers/passthrough/Kconfig
+>> +++ b/xen/drivers/passthrough/Kconfig
+>> @@ -35,6 +35,11 @@ config IPMMU_VMSA
+>>          (H3 ES3.0, M3-W+, etc) or Gen4 SoCs which IPMMU hardware supports stage 2
+>>          translation table format and is able to use CPU's P2M table as is.
 >>
->>        enum arm_smmu_domain_stage      stage;
->> +     bool                    abort;
->> +     struct arm_smmu_s1_cfg  s1_cfg;
->>        struct arm_smmu_s2_cfg  s2_cfg;
+>> +config ARM_VIRTUAL_IOMMU
+>> +     bool "Virtual IOMMU Support (UNSUPPORTED)" if UNSUPPORTED
+>> +     help
+>> +       Support virtual IOMMU infrastructure to implement vIOMMU.
+>> +
+>>    endif
 >>
->>        /* Xen domain associated with this SMMU domain */
+>>    config AMD_IOMMU
+>> diff --git a/xen/drivers/passthrough/arm/Makefile b/xen/drivers/passthrough/arm/Makefile
+>> index c5fb3b58a5..c3783188e3 100644
+>> --- a/xen/drivers/passthrough/arm/Makefile
+>> +++ b/xen/drivers/passthrough/arm/Makefile
+>> @@ -2,3 +2,4 @@ obj-y += iommu.o iommu_helpers.o iommu_fwspec.o
+>>    obj-$(CONFIG_ARM_SMMU) += smmu.o
+>>    obj-$(CONFIG_IPMMU_VMSA) += ipmmu-vmsa.o
+>>    obj-$(CONFIG_ARM_SMMU_V3) += smmu-v3.o
+>> +obj-$(CONFIG_ARM_VIRTUAL_IOMMU) += viommu.o
+>> diff --git a/xen/drivers/passthrough/arm/viommu.c b/xen/drivers/passthrough/arm/viommu.c
+>> new file mode 100644
+>> index 0000000000..0c0efd668e
+>> --- /dev/null
+>> +++ b/xen/drivers/passthrough/arm/viommu.c
+>> @@ -0,0 +1,49 @@
+>> +/* SPDX-License-Identifier: (GPL-2.0-or-later OR BSD-2-Clause) */
+>> +
+>> +#include <xen/errno.h>
+>> +#include <xen/init.h>
+>> +#include <xen/types.h>
+>> +
+>> +#include <asm/viommu.h>
+>> +
+>> +/* Struct to hold the vIOMMU ops and vIOMMU type */
+>> +static const struct viommu_desc __ro_after_init *cur_viommu;
+>> +
+>> +int domain_viommu_init(struct domain *d, uint8_t viommu_type)
+>> +{
+>> +    if ( viommu_type == XEN_DOMCTL_CONFIG_VIOMMU_NONE )
+>> +        return 0;
+>> +
+>> +    if ( !cur_viommu )
+>> +        return -ENODEV;
+>> +
+>> +    if ( cur_viommu->viommu_type != viommu_type )
+>> +        return -EINVAL;
+>> +
+>> +    return cur_viommu->ops->domain_init(d);
+>> +}
+>> +
+>> +int viommu_relinquish_resources(struct domain *d)
+>> +{
+>> +    if ( !cur_viommu )
+>> +        return 0;
+>> +
+>> +    return cur_viommu->ops->relinquish_resources(d);
+>> +}
+>> +
+>> +uint8_t viommu_get_type(void)
+>> +{
+>> +    if ( !cur_viommu )
+>> +        return XEN_DOMCTL_CONFIG_VIOMMU_NONE;
+>> +
+>> +    return cur_viommu->viommu_type;
+>> +}
+>> +
+>> +/*
+>> + * Local variables:
+>> + * mode: C
+>> + * c-file-style: "BSD"
+>> + * c-basic-offset: 4
+>> + * indent-tabs-mode: nil
+>> + * End:
+>> + */
+>> diff --git a/xen/include/public/arch-arm.h b/xen/include/public/arch-arm.h
+>> index 00de30b896..a1491f9cf7 100644
+>> --- a/xen/include/public/arch-arm.h
+>> +++ b/xen/include/public/arch-arm.h
+>> @@ -334,6 +334,8 @@ DEFINE_XEN_GUEST_HANDLE(vcpu_guest_context_t);
+>>    #define XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_PMSA    1
+>>    #define XEN_DOMCTL_CONFIG_ARM_V8R_EL1_MSA_VMSA    2
+>>
+>> +#define XEN_DOMCTL_CONFIG_VIOMMU_NONE   0
+>> +
+>>    struct xen_arch_domainconfig {
+>>        /* IN/OUT */
+>>        uint8_t gic_version;
+>> @@ -361,7 +363,9 @@ struct xen_arch_domainconfig {
+>>        uint8_t arm_sci_type;
+>>        /* IN */
+>>        uint8_t v8r_el1_msa;
+>> -    uint16_t pad;
+>> +    /* IN */
+>> +    uint8_t viommu_type;
+>> +    uint8_t pad;
+>>    };
+>>    #endif /* __XEN__ || __XEN_TOOLS__ */
+>>
 > 
 
 BR,
