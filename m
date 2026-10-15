@@ -4,62 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 1DCE5CC6B39
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 16:05:06 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1450855.1666235 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 5619ACC6B39
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 16:22:47 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1450889.1666244 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHNwu-0004cH-QN; Thu, 15 Oct 2026 16:04:56 +0000
+	id 1xHODm-00010w-55; Thu, 15 Oct 2026 16:22:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1450855.1666235; Thu, 15 Oct 2026 16:04:56 +0000
+Received: by outflank-mailman (output) from mailman id 1450889.1666244; Thu, 15 Oct 2026 16:22:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHNwu-0004cA-NT; Thu, 15 Oct 2026 16:04:56 +0000
-Received: by outflank-mailman (input) for mailman id 1450855;
- Thu, 15 Oct 2026 16:04:55 +0000
+	id 1xHODm-00010p-1r; Thu, 15 Oct 2026 16:22:22 +0000
+Received: by outflank-mailman (input) for mailman id 1450889;
+ Thu, 15 Oct 2026 16:22:20 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Jason.Andryuk@amd.com>) id 1xHNws-0004WS-PZ
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 16:04:55 +0000
+ (envelope-from <peter.maydell@linaro.org>) id 1xHODk-00010j-AV
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 16:22:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHNws-003D8c-6B
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 18:04:54 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xHODe-008cAN-ND
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 18:22:19 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6ad0f993-8faa-0a2a0a5109dd-0a2a4507c7ee-48
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 18:04:53 +0200
-Received: from [40.93.198.37]
- (helo=CY7PR03CU001.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Jason.Andryuk@amd.com>)
- id 6ad0f9a3-b4ea-0a2a45070019-285dc625e33a-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 18:04:53 +0200
-Received: from BN0PR02CA0045.namprd02.prod.outlook.com (2603:10b6:408:e5::20)
- by PH0PR12MB7957.namprd12.prod.outlook.com (2603:10b6:510:281::22)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.24; Thu, 15 Oct
- 2026 16:04:47 +0000
-Received: from BN2PEPF000044A0.namprd02.prod.outlook.com
- (2603:10b6:408:e5:cafe::82) by BN0PR02CA0045.outlook.office365.com
- (2603:10b6:408:e5::20) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.4 via Frontend Transport; Thu, 15
- Oct 2026 16:04:47 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BN2PEPF000044A0.mail.protection.outlook.com (10.167.243.151) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.522.6 via Frontend Transport; Thu, 15 Oct 2026 16:04:47 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Thu, 15 Oct
- 2026 11:04:40 -0500
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Thu, 15 Oct
- 2026 11:04:40 -0500
-Received: from [192.168.19.2] (10.180.168.240) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
- Transport; Thu, 15 Oct 2026 11:04:39 -0500
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6ad0fda4-e002-0a2a0a5209dd-0a2a4508d1d6-16
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 18:22:14 +0200
+Received: from [209.85.128.172] (helo=mail-yw1-f172.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6ad0fdb5-f659-0a2a45080019-d15580acc8c7-3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 18:22:14 +0200
+Received: by mail-yw1-f172.google.com with SMTP id
+ 00721157ae682-8b0a28a720aso39767907b3.2
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 09:22:14 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -71,97 +48,231 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=mpkyoIgagnXO+xx8CbsUT9+VmSWYoccOpF2ZiGG/lgHQnTGl/IZ7JUjS7K0YWeFpmipRra/v9N6+vSqiHVEeqeclkxrItYRdYTSOaA3s320lM5I5pBwWatbepAw3FXXVdTiuG5zlFAdISArD42H/p7hPrR1BhcKRIqd5CZr/fq15PuJBqIBDrrXs3n5nBybuBujW+t6O6OHuAZZ4nr3TxMZzLaI/4/aaqzCI7eBy7p8d8YMQYJ8Qah5G2aJIFuwshguvhFOVhCsR1yEyltu1o3FyTCjF3NLefnGwe4ZwfnN2dHzzIME0RKG393o42NXLhCABmqdf7rYWEQi3msYSlw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=XSTYvoS03r3SaiH65lY16MmrQOMD5bDUHrwKoefGOAU=;
- b=t2RqsX0ehH5AhVneuTjFy3LWgJEKkrYYeHApN+29g7PsZJ3u4goxPfFs1QTXE89XNquQBolJpN46HN0dTtANXAtDnbIT39B8mfLyQgmv34LSMpnSymu5dfT2BYUrk2s75oNdUaDZUAG2bdz/5M5+lBBu+nOtI2dMbB54a2Lp6rs4Gg6gucQEQhyTnVsFtyDMxEo16rv+H5faBquaM6miGZtsT8Ke9GKzrhDCkXWbupoD68j9eJm+cZfQkYerCakpIh+oswx9M4jyU8NpPuaHIzOLSOqbPRDsBiL+gpz1s+flByUoKunszLINMooQPY/CTor2KZuPq8qMAzupOSKpFg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=suse.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=XSTYvoS03r3SaiH65lY16MmrQOMD5bDUHrwKoefGOAU=;
- b=BvFeIg+I5OrwUbkemDvuvp+wPr01+nEGZAbhxQKGWldu5waErE1XBdyNSfkgdHFp39D81eSOg2m7weh4sS36aWyjKfTnV+V1P0W9D2snyca4u58pHxGjUkOQKEf5avWeW906vQqTyjxVYJ8XMDm/xFVvGdbzme48KvIjBM6QF/U=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <960380be-818d-4699-b273-1fd7ebf0d11a@amd.com>
-Date: Thu, 15 Oct 2026 10:33:10 -0400
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1792081333; cv=none;
+        d=google.com; s=arc-20260327;
+        b=F1SgXT0EV7HM4ZukGqn8rOJ5qAzCcA11b1NeZMcQqw6qdmBeHHzYTcdEDQY7IahplP
+         SwsFhpfXc3FpUDDvogGqXJegNRUx+P6AxKGyRqSxed7TnuADrg1zY1rp1Q0oVv1vCuMf
+         N8DDIcnWFG+etHmYjlv02uiOYOJXm4MR0sARjv5Zms5Oz66Jc9GvLqTzPoA/n6FVqn8/
+         2RbL7SQssmCHD9PuMixLcMbAm2xklDHLCcOf0gjnsnqfdcrLna0xQhZuQlJfyK0R4t/U
+         BBbgZazVO4XuD3+gYP/1u8qUCTwNiLMcrWKsKsb81VtyG3lRZu3eUL6dEG/RfP+1Hjxt
+         Y4xQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=RQCElvh08J2BIDGN/zLgW6mGnyFT83qmeWNSYL2QSEU=;
+        fh=GzccUDtmqNWNivxHxZY4MK4APLJJkH1THRT6PTh85Is=;
+        b=KaIFWVVhYSRU8LJ7MgvnRT3Tz7A1ESmyZ5gRPi87S8W97dOkEv11sakkcQwB8GVUBB
+         5SeIAQ/hUsww5tQHX+5Fk7F3nUQDWbHreycTpfYiiyGfBZOHKY7YnU49qLgSWkm8oexP
+         Ep4eKHz1Az6lx3WTfrV2kyxk3XPkiFDnsl268/e1lF2U5d2Rq4FUrL+S1Gf5uwy6NwOl
+         GvTY5TXv+bjoWvkhKM93+0xKUQ8POmipS0z+JyPEaus5QsPLCo4WnVZ0i0UXmKZeXrsO
+         nL5InK2bO8uqnwzBO39Ov/2qxv1O4IYLFjMSgb780u1e2XDKQOAyNCPJDsNosBuMvX8j
+         ks3A==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=linaro.org; s=google; t=1792081333; x=1792686133; darn=lists.xenproject.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=RQCElvh08J2BIDGN/zLgW6mGnyFT83qmeWNSYL2QSEU=;
+        b=UtuzWqn0QMOEWzSsRA6t9rSuKOzBwXlw5jkX7tajFinz9iwMdcsIdmHFk4+ochjYr3
+         pY8Xk1f8rkWB+gUtzpMxQ0iUnLa2zgEJE6Fr24APHcbz/EmWO3p1Bw+knaO3Thk1i4W6
+         Lz2jUTcHeWco8w31jljiCq3ZprRJle2Pb0VQx73MlicTY0ZaSvjJPT9tZUhbyHC3ch01
+         Gx4KPMtn1opVIYdOJqDRtyOnm505HdSjDy3w3Pafot7bF6f21ckvFxnlrfvPFdgfVdXY
+         rXDNqNgURZRaZJKer1KoOsQcSMYEUEacIoq6b1AkPrR1lSsxkI7Vbe5xAOdcAfpIzqyc
+         BHEw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792081333; x=1792686133;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=RQCElvh08J2BIDGN/zLgW6mGnyFT83qmeWNSYL2QSEU=;
+        b=dDcZC8rCaIvREqRxO5kC2HTi1vCm3EbjQcxugmrwcjqAFh+tNxhsyi3yKYgeGY5PWw
+         qLoVrWtzya9lFuwhLDYOhzs3/Z3zcoimQc4DpPXp2/Q4crnCzc1o8K0mCmzIO41zXzJ7
+         OefkUFwy6IYREX9P8HZ8u7Dffk/YiD+7znihm0O3SoEdVgoCOJg1FlyKydaFFdevBSoD
+         MvnZITqpyywOJUdSrmbrbCoAM4tczUWD8ytA4lfUhGN09Vo7RvWplq7KJUQ2DxUtvwIu
+         DOYDmwhbjBw/jJ4VrBpUY7M58CO1SEuaGd4z9OOZU7DHyPz8lR+45Vy9O9iHsEBeBYf4
+         v9KA==
+X-Forwarded-Encrypted: i=1; AKwUvBzC+7cNayxIrfdUFpMISLwIxdJ3j/wqIXUV6xNTwa6bJfp5/QPfF8L6orYPfcqAl57l7FCfEPWtjSA=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKxbaPsjsVXhVEjiENvhq39bO7NXj6UkoywO8aHXblUOb2q0O/G
+	/8jaRs9G0vn/RjeezWGIU4EgUJvKMZN5HitlB/3AZYgOxDQiSxBN4wSMr5p+QiVSy5GYrjaC+ml
+	L/1H9Df380KfDYyQVYaPjHivWM3RvwtSJNfQyCeS2Nw==
+X-Gm-Gg: AYBFou3WZXAnlGA+z8qFJSyZRokrBbQlrwiThdFKcEzK5276obDReCQxYzsbGLnKBjm
+	6iPHaYs2HmWgxih3IrI8BSZaXou8Zvu0jbVlyU6TIievFbkwGbXQ4FvO2MseTfrviyOkUdlSAx/
+	mxqLr7q2QpJ97Z3uF1fxjxuPdvEf4Zbc8DYYo0X4WIIfltWLeIHnExkpqmKn7NM/pO/agWBsTUW
+	7bLmZS4iRYPmE0lDapm4oRkAlL3AOzx2oE8CqZnIaZAjAQXJ8eV/SgM8z8gIcXCVjqR0BqaCHS+
+	KAGERZZww76OMR+jO+9autbQkcrwMztJTf8CrNTMrBKGy7OZCEba6iUQxluZLmR7eO+C09dKezH
+	yI8ssp1NuUsy8Ws/Bfz2UqId+WWU9/EHsO+Qz4OA=
+X-Received: by 2002:a05:690c:387:b0:8b0:6866:c55f with SMTP id
+ 00721157ae682-8b07ee4d12emr67505727b3.46.1792081332932; Thu, 15 Oct 2026
+ 09:22:12 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] SUPPORT.md: State that ATS is unsupported
-To: Jan Beulich <jbeulich@suse.com>
-CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
-	<anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, "Julien
- Grall" <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
-	<roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
-	<xen-devel@lists.xenproject.org>
-References: <20261014135143.34220-1-jason.andryuk@amd.com>
- <20261014135143.34220-3-jason.andryuk@amd.com>
- <d9ae0ea1-912f-4533-b50b-839eda7b5f80@suse.com>
-Content-Language: en-US
-From: Jason Andryuk <jason.andryuk@amd.com>
-In-Reply-To: <d9ae0ea1-912f-4533-b50b-839eda7b5f80@suse.com>
-Content-Type: text/plain; charset="UTF-8"; format=flowed
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF000044A0:EE_|PH0PR12MB7957:EE_
-X-MS-Office365-Filtering-Correlation-Id: 70e4fbb9-3bb5-41c4-dd46-08df2ad608f2
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|36860700016|23010399003|82310400026|1800799024|376014|10067099003|22082099003|18002099003|11063799006|4143699003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	knnllsfMXSCjX7oT9xT0nE4jhYeFr4XFey/3AfRUCDMWhuTQ6dtDfpp9z6OmNJPusMV5oVCbGqmTyOrYGGnhPx6TvOO6BKNymLFmUoj2KqkS5XgAET/16v7cFYFFh70W5uvZBWZM4RlfTZL7FoiuFruB7Sf/pNoKy9xtnkQ0GB6QEWL3x5ttvOVbKRLLCYHYYKSs+Op179pgstaTraCoucZ4XXVGlm48QkZo4kl93bi34ZHWT5yKdKci4mIqCh+ATyA01S6uGJHeyVFO1GfYz/zjZjQGRNgb47juTvJp8VOGKcyPt2hqemlnVClq1j987kQKFLczFWBh/TV0uK/sA05Mq0pIXqAzHcd0SLQp68K3h0jjWDfENZnTm64MW2zaWttmm0Cz/io4MePqq8a7f/N5uPCs+Gp/8mfClIugd/3DvwIvG1rPD8YjvhW+HKAn21FHb0MSqPruouOd1vF6rAqvnJXQrfU0ADmipWusiD/U4gTd6gF7GacxDM8ILt0j2UL0nKaSUSoC0qHd9dKx6lkkz5nT8OYPlQoOcPyfpiqDADscPasA2+9/MFQusihClTB0w8yGAgzOmzqDXyw2oK0JEflfSyzy/TWtalVMako6jmVOh4xssbU1e6vO1AEWIWiybiZjTLKmV/lxhKk1Vzs79lSmrN4poRL77v+ANbL+4kxRk1s1rinpkoj4JjEGQFVwPS99wvkr1h4aUsUDqg==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(36860700016)(23010399003)(82310400026)(1800799024)(376014)(10067099003)(22082099003)(18002099003)(11063799006)(4143699003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	rKKyBa08Ctspcdg6/H4Zy7zI34FbmgYu2gw1IJ7OwV3tzjST9ZsyxfAemjqeVDPpmaDV/JOiopNo0Xk1hXHYxGl9pK8vtCHccI2DHmh25ws9oANNwffZ9pSTVcJkaamhrAfQQL1s+8kb2CymYUQOcFKqU1rDwl6sQn7miY/64Di8oQR7WNP3aEr7Em+BPejxOmUj5cLkVKrtzzdce6bLDZ4VSCuBXtZ+CVYkDIORz0ia/l/ZvL0B7GU5OFKjGMIEYTj9dqWgqsuiH5JPKdxdwxN3xmWaSROuT61GOWOiUQH93yXhXmkgqCqPj8kpx8wYzpzjOMMDWPDQR28uvVkU+tO4k68rhb6lZYIdfj+2CB8Hm1fHjolLdGZtyb1WYdw0v3ASj+nSo0oM4I0+l16kQtq8HR4n2JiySr8rgZL23F+MqEQcXIS47JlaBp8NWwbk
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2026 16:04:47.0989
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 70e4fbb9-3bb5-41c4-dd46-08df2ad608f2
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF000044A0.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR12MB7957
-X-purgate-ID: tlsNG-ef75cf/1792080293-374D3AE4-A1E80954/0/0
+References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
+ <20260916104435.600211-6-mark.caveayland@nutanix.com> <CAFEAcA9eucRyzG=PR2tpx8ObHkdK6xUmOjQ+-nNbJ2dVHaptOA@mail.gmail.com>
+In-Reply-To: <CAFEAcA9eucRyzG=PR2tpx8ObHkdK6xUmOjQ+-nNbJ2dVHaptOA@mail.gmail.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Thu, 15 Oct 2026 17:22:00 +0100
+X-Gm-Features: AclHuK_JzHSeeixZQwFB55O2lE4YIMCEsFBYUzo_EwttzyD7LQh3FodmT7dI1cQ
+Message-ID: <CAFEAcA-voNwJRTb2WQuxnvzk5LwBcXahz8HHrW=Yi3WUKeKgBg@mail.gmail.com>
+Subject: Re: [PATCH 05/22] i8259.c: move parent_realize from PICClass to I8259CommonClass
+To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com, 
+	sstabellini@kernel.org, anthony@xenproject.org, edgar.iglesias@gmail.com, 
+	qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
+X-purgate-ID: tlsNG-c1860d/1792081334-D7B5987B-ED14495F/0/0
 X-purgate-type: clean
-X-purgate-size: 745
+X-purgate-size: 7695
 
-On 2026-10-15 08:33, Jan Beulich wrote:
-> On 14.10.2026 15:51, Jason Andryuk wrote:
->> --- a/SUPPORT.md
->> +++ b/SUPPORT.md
->> @@ -96,6 +96,9 @@ For the Cortex A77 r0p0 - r1p0, see Errata 1508412.
->>       Status, ARM SMMUv3: Tech Preview
->>       Status, Renesas IPMMU-VMSA: Supported, not security supported
->>   
->> +PCI Address Translation Services (ATS), enabled by the ats= command line
->> +option, is not security supported.
->> +
->>   ### ARM/GICv3
->>   
->>   GICv3 is an interrupt controller specification designed by Arm.
-> 
-> Wouldn't this better go in the "x86/PCI Device Passthrough" section?
+On Tue, 13 Oct 2026 at 16:54, Peter Maydell <peter.maydell@linaro.org> wrote:
+>
+> On Wed, 16 Sept 2026 at 11:49, Mark Cave-Ayland
+> <mark.caveayland@nutanix.com> wrote:
+> >
+> > Both the emulated and KVM i8259 implementations store a reference to the
+> > parent_realize function in their respective classes. Start by moving
+> > parent_realize from PICClass to I8259CommonClass and removing PICClass since
+> > it is no longer required.
+> >
+> > Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+>
+> This is one of those things where I think we're not 100% consistent
+> about whether we think the parent_realize field should go in the
+> child class struct or the parent class struct. The name "parent_realize"
+> implies it ought to be in the child struct, though, and I think we
+> do that more often than we put it in the parent class.
 
-I guess I thought of ATS as more of an IOMMU feature, but PCI is in the 
-name.  I'm happy to move it.
+We do, although it's a bit closer than I thought: about 50 callsites
+put the parent_realize pointer in the child class struct; about 25
+put it in the parent class struct. So I think for new code we should
+prefer to follow the child-class-struct version.
 
-Thanks,
-Jason
+in child's class:
+
+hw/arm/smmu-common.c:    device_class_set_parent_realize(dc, smmu_base_realize,
+hw/arm/smmuv3.c:    device_class_set_parent_realize(dc, smmu_realize,
+hw/display/macfb.c:    device_class_set_parent_realize(dc, macfb_nubus_realize,
+hw/i386/kvm/i8254.c:    device_class_set_parent_realize(dc, kvm_pit_realizefn,
+hw/i386/kvm/i8259.c:    device_class_set_parent_realize(dc,
+kvm_pic_realize, &kpc->parent_realize);
+hw/input/adb-kbd.c:    device_class_set_parent_realize(dc, adb_kbd_realizefn,
+hw/input/adb-mouse.c:    device_class_set_parent_realize(dc,
+adb_mouse_realizefn,
+hw/intc/arm_gic.c:    device_class_set_parent_realize(dc,
+arm_gic_realize, &agc->parent_realize);
+hw/intc/arm_gic_kvm.c:    device_class_set_parent_realize(dc,
+kvm_arm_gic_realize,
+hw/intc/arm_gicv3.c:    device_class_set_parent_realize(dc,
+arm_gic_realize, &agc->parent_realize);
+hw/intc/arm_gicv3_hvf.c:    device_class_set_parent_realize(dc,
+hvf_gicv3_realize,
+hw/intc/arm_gicv3_kvm.c:    device_class_set_parent_realize(dc,
+kvm_arm_gicv3_realize,
+hw/intc/arm_gicv3_whpx.c:    device_class_set_parent_realize(dc,
+whpx_gicv3_realize,
+hw/intc/arm_gicv5.c:    device_class_set_parent_realize(dc,
+gicv5_realize, &gc->parent_realize);
+hw/intc/i8259.c:    device_class_set_parent_realize(dc, pic_realize,
+&k->parent_realize);
+hw/intc/loongarch_dintc.c:    device_class_set_parent_realize(dc,
+loongarch_dintc_realize,
+hw/intc/loongarch_extioi.c:    device_class_set_parent_realize(dc,
+loongarch_extioi_realize,
+hw/intc/loongarch_extioi_common.c:
+device_class_set_parent_realize(dc, loongarch_extioi_common_realize,
+hw/intc/loongarch_ipi.c:    device_class_set_parent_realize(dc,
+loongarch_ipi_realize,
+hw/intc/loongarch_pch_pic.c:    device_class_set_parent_realize(dc,
+loongarch_pic_realize,
+hw/intc/loongarch_pic_common.c:    device_class_set_parent_realize(dc,
+loongarch_pic_common_realize,
+hw/intc/loongson_ipi.c:    device_class_set_parent_realize(dc,
+loongson_ipi_realize,
+hw/intc/loongson_ipi_common.c:    device_class_set_parent_realize(dc,
+loongson_ipi_common_realize,
+hw/intc/pnv_xive.c:    device_class_set_parent_realize(dc,
+pnv_xive_realize, &pxc->parent_realize);
+hw/intc/pnv_xive2.c:    device_class_set_parent_realize(dc, pnv_xive2_realize,
+hw/intc/spapr_xive.c:    device_class_set_parent_realize(dc, spapr_xive_realize,
+hw/intc/xics_pnv.c:    device_class_set_parent_realize(dc, pnv_icp_realize,
+hw/intc/s390_flic_kvm.c:    device_class_set_parent_realize(dc,
+kvm_s390_flic_realize,
+hw/nubus/nubus-virtio-mmio.c:    device_class_set_parent_realize(dc,
+nubus_virtio_mmio_realize,
+hw/timer/i8254.c:    device_class_set_parent_realize(dc,
+pit_realizefn, &pc->parent_realize);
+hw/virtio/virtio-pci.c:    device_class_set_parent_realize(dc,
+virtio_pci_dc_realize,
+target/alpha/cpu.c:    device_class_set_parent_realize(dc, alpha_cpu_realizefn,
+target/arm/cpu.c:    device_class_set_parent_realize(dc, arm_cpu_realizefn,
+target/avr/cpu.c:    device_class_set_parent_realize(dc,
+avr_cpu_realizefn, &mcc->parent_realize);
+target/hexagon/cpu.c:    device_class_set_parent_realize(dc,
+hexagon_cpu_realize,
+target/hppa/cpu.c:    device_class_set_parent_realize(dc, hppa_cpu_realizefn,
+target/i386/cpu.c:    device_class_set_parent_realize(dc, x86_cpu_realizefn,
+target/loongarch/cpu.c:    device_class_set_parent_realize(dc,
+loongarch_cpu_realizefn,
+target/m68k/cpu.c:    device_class_set_parent_realize(dc, m68k_cpu_realizefn,
+target/microblaze/cpu.c:    device_class_set_parent_realize(dc,
+mb_cpu_realizefn,
+target/mips/cpu.c:    device_class_set_parent_realize(dc, mips_cpu_realizefn,
+target/or1k/cpu.c:    device_class_set_parent_realize(dc,
+openrisc_cpu_realizefn,
+target/ppc/cpu_init.c:    device_class_set_parent_realize(dc, ppc_cpu_realize,
+target/riscv/cpu.c:    device_class_set_parent_realize(dc, riscv_cpu_realize,
+target/rx/cpu.c:    device_class_set_parent_realize(dc, rx_cpu_realize,
+target/s390x/cpu.c:    device_class_set_parent_realize(dc, s390_cpu_realizefn,
+target/sh4/cpu.c:    device_class_set_parent_realize(dc, superh_cpu_realizefn,
+target/sparc/cpu.c:    device_class_set_parent_realize(dc, sparc_cpu_realizefn,
+target/tricore/cpu.c:    device_class_set_parent_realize(dc,
+tricore_cpu_realizefn,
+target/xtensa/cpu.c:    device_class_set_parent_realize(dc,
+xtensa_cpu_realizefn,
+
+in parent's class:
+
+hw/input/lasips2.c:    device_class_set_parent_realize(dc,
+lasips2_kbd_port_realize,
+hw/input/lasips2.c:    device_class_set_parent_realize(dc,
+lasips2_mouse_port_realize,
+hw/input/pl050.c:    device_class_set_parent_realize(dc, pl050_kbd_realize,
+hw/input/pl050.c:    device_class_set_parent_realize(dc, pl050_mouse_realize,
+hw/intc/xics_spapr.c:    device_class_set_parent_realize(dc, ics_spapr_realize,
+hw/isa/pc87312.c:    device_class_set_parent_realize(dc, pc87312_realize,
+hw/isa/vt82c686.c:    device_class_set_parent_realize(dc, via_superio_realize,
+hw/pci-bridge/cxl_root_port.c:    device_class_set_parent_realize(dc,
+cxl_rp_realize, &rpc->parent_realize);
+hw/pci-bridge/gen_pcie_root_port.c:
+device_class_set_parent_realize(dc, gen_rp_realize,
+&rpc->parent_realize);
+hw/pci-host/pnv_phb.c:    device_class_set_parent_realize(dc,
+pnv_phb_root_port_realize,
+hw/pci-host/pnv_phb3_msi.c:    device_class_set_parent_realize(dc,
+phb3_msi_realize,
+hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power8_realize,
+hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power9_realize,
+hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power10_realize,
+hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power11_realize,
+hw/ppc/pnv_lpc.c:    device_class_set_parent_realize(dc, pnv_lpc_power8_realize,
+hw/ppc/pnv_lpc.c:    device_class_set_parent_realize(dc, pnv_lpc_power9_realize,
+hw/s390x/tod-kvm.c:
+device_class_set_parent_realize(DEVICE_CLASS(oc),
+kvm_s390_tod_realize,
+hw/virtio/vhost-user-gpio.c:    device_class_set_parent_realize(dc,
+vgpio_realize,
+hw/virtio/vhost-user-i2c.c:    device_class_set_parent_realize(dc, vi2c_realize,
+hw/virtio/vhost-user-input.c:    device_class_set_parent_realize(dc,
+vinput_realize,
+hw/virtio/vhost-user-rng.c:    device_class_set_parent_realize(dc,
+vu_rng_base_realize,
+hw/virtio/vhost-user-rtc.c:    device_class_set_parent_realize(dc,
+vu_rtc_base_realize,
+hw/virtio/vhost-user-snd.c:    device_class_set_parent_realize(dc,
+vu_snd_base_realize,
+hw/virtio/vhost-user-spi.c:    device_class_set_parent_realize(dc, vspi_realize,
+
+thanks
+-- PMM
 
