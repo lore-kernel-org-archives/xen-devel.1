@@ -4,39 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 868B8CC6B2F
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 06:49:00 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1449920.1665436 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 616B7CC6B2F
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 07:11:33 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1449931.1665444 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHFGU-0006ti-S3; Thu, 15 Oct 2026 06:48:34 +0000
+	id 1xHFcT-0005Gv-Ke; Thu, 15 Oct 2026 07:11:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1449920.1665436; Thu, 15 Oct 2026 06:48:34 +0000
+Received: by outflank-mailman (output) from mailman id 1449931.1665444; Thu, 15 Oct 2026 07:11:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHFGU-0006ta-NF; Thu, 15 Oct 2026 06:48:34 +0000
-Received: by outflank-mailman (input) for mailman id 1449920;
- Thu, 15 Oct 2026 06:48:32 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <zhangzheng@iscas.ac.cn>) id 1xHFGS-0006sP-IG
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 06:48:32 +0000
+	id 1xHFcT-0005Go-Hi; Thu, 15 Oct 2026 07:11:17 +0000
+Received: by outflank-mailman (input) for mailman id 1449931;
+ Thu, 15 Oct 2026 07:11:16 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xHFcR-0005Gc-SW
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 07:11:16 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHFGR-0069oh-Ne
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 08:48:31 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xHFcR-00EXaL-2D
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 09:11:15 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6ad07726-8faa-0a2a0a5109dd-0a2a4504b5bc-44
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 08:48:29 +0200
-Received: from [159.226.251.25] (helo=cstnet.cn)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <zhangzheng@iscas.ac.cn>)
- id 6ad0773a-b57f-0a2a45040019-9fe2fb19cc26-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 08:48:28 +0200
-Received: from iscas-ws (unknown [36.110.52.2])
- by APP-05 (Coremail) with SMTP id zQCowABXxD41d9BqQ3VxCw--.4124S2;
- Thu, 15 Oct 2026 14:48:22 +0800 (CST)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ad07c7e-e002-0a2a0a5209dd-0a2a4501a3ea-22
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 09:11:14 +0200
+Received: from [209.85.221.42] (helo=mail-wr1-f42.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ad07c92-5984-0a2a45010019-d155dd2ae40f-3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 09:11:14 +0200
+Received: by mail-wr1-f42.google.com with SMTP id
+ ffacd0b85a97d-48df54150dfso163871f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 00:11:14 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48df0f99f0bsm5045190f8f.21.2026.10.15.00.11.12
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 Oct 2026 00:11:13 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -48,94 +52,126 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-Date: Thu, 15 Oct 2026 14:48:40 +0800
-From: Zhang Zheng <zhangzheng@iscas.ac.cn>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, 
-	Alistair Francis <alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, 
-	Baptiste Le Duc <baptiste.le-duc@vates.tech>, Andrew Cooper <andrew.cooper3@citrix.com>, 
-	Anthony PERARD <anthony.perard@vates.tech>, Michal Orzel <michal.orzel@amd.com>, 
-	Jan Beulich <jbeulich@suse.com>, Julien Grall <julien@xen.org>, 
-	Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2 2/2] xen/ns16550: drain TX before reinitializing
-Message-ID: <atB3OZfluh6Ceeni@iscas-ws>
-References: <20261010031406.2057735-1-zhangzheng@iscas.ac.cn>
- <20261010031406.2057735-3-zhangzheng@iscas.ac.cn>
- <ec65306d-ec1d-4c5a-93f8-b37f7dfea8b5@gmail.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1792048274; x=1792653074; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=xE+iqyFAzYCLjuj8rbiRjYNJkTNSStBwiqBAIkW4BTc=;
+        b=F9L30NGUIMbxWNqUJ+WjUieV9ysSBfaQB1Tg0wi233oQut6knyGsOQ0GugadJB86aG
+         HOU4GXaw5TVzsJtdOIrVSY6GhFiPWDH+IwhrFuwMhjAdXyYUTJ5AsEWxlnmSWVAZh/l8
+         3uYnce3HJ252ASgcx9SdhzABlhAJmgTQ1xf85yr+WnD0vUST4Qgw6b1ceUDz0HPdCRPa
+         Le2H2VJgTzrKcbdyyISYfhH5LTOTNIFpIZo/XECyV2IiQtWpH+qLBKSidqi+b8tyOEfu
+         CwEJRA/oC54g+ji+xpu6nVM7gOgpehQq/eBGGBFa8EjJHWYgb473q3WY9odSCWL7VamX
+         L1bw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792048274; x=1792653074;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=xE+iqyFAzYCLjuj8rbiRjYNJkTNSStBwiqBAIkW4BTc=;
+        b=eYaYfX0gSIPttjrSZTnqBjJYfgyndEYJ2zCwvs5LJ2kMZ8aDHCF/Xo78RiLfiaGWhX
+         ZeL3d+97dIhpThYinTDPb4euBWC6riZqxkAPxXYOihepxZSHh8pPfQ7/oImUoNVFp20m
+         RokovWucy+g7QsGsi3VE1BBsCsHQd0eTioPM5/YaIgnzKfF/mLdVDuiQ/BnSSj2eqzh+
+         dGsLMZCB0yj4NMHeLozWQbQ5eKwKdu9XwhIxs6d/bx/WS2V3HrMJhqMO/uMCLbqpBRuv
+         uEHMsLfFGwQDwByy1U8P4m/nE5BBXBVf5ofOxAjDzwn1U6xsc0aQt5LizDWCbKs+9zA8
+         bCCQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwuM6C/pXDz+VKc6vA8/WwcNk4Urh5P5BlT7FFb1xWMzRsJwwWHjrJALj/6Kn7xflpfddye6E+nzJs=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJbuzjuipsLiPpnGReQw3g08iZqBuUGfMkJA9SHKx7oJt5Z7boJ
+	09itKAjeL2pS4V5oj34PL9rw5MfVdEAXRzOmI89s8DD1wa3yBpO11PaAIJvEfeKYQw==
+X-Gm-Gg: AYBFou3gtg6npyLXib18R1xBhxcEVtfwh/hgTCKn57/KCCcfi6bYO+oDeYdbWx0lAzH
+	18I2UtggRfgKfkQTduh/vlMFfIO0Hh/ZhMzbHLZawUKeRbkTqPCJgxPpFFE6Y5LUwZpLZ80KBR/
+	pOtOade8C1BHhWOxhumQUJUUGslXuJLDVFd2ai4LCJfTnSQ841Nz6Ui1KMu2SU9Hqlr8mPBnfP2
+	u2oUbT47+kdms/xsjbPBKttoiN6SB7/zkFilQ6ow/dxQE9ito72b55Y90+cle0XbjeZHmGeT80V
+	+YkHcF+NsoezbaGZ3XylEAvBifKnXF5bEomg+25hx46Pp3cE0UnjLYSI3WKeil6mZgarHgEFBvY
+	0OPujEgA+BOY07woblHVSJGpS81k1v/qEOrvdddTSY0aaDNwFAPtB+NXlcF+AF1ozA08370wTIC
+	ydZIjxsHY7oFg7XWVUnyiUfeuAI4LzxSev1i3xGMau4pjp//tQHE6a+yvgpYk42HxS3YapATSxF
+	OG3cltce6x0bG/zIeu9itVqWbnhYniux2qXhk1DP1i7b+X5QXI/OLmhpbXeyQ==
+X-Received: by 2002:a05:6000:4810:b0:488:7bdc:f7f8 with SMTP id ffacd0b85a97d-48dba9d2c0bmr34400894f8f.29.1792048274319;
+        Thu, 15 Oct 2026 00:11:14 -0700 (PDT)
+Message-ID: <e6cfd958-874a-4d25-9c40-dfe9f1979c2f@suse.com>
+Date: Thu, 15 Oct 2026 09:11:12 +0200
 MIME-Version: 1.0
-Content-Type: text/plain; charset=us-ascii
-Content-Disposition: inline
-In-Reply-To: <ec65306d-ec1d-4c5a-93f8-b37f7dfea8b5@gmail.com>
-X-CM-TRANSID:zQCowABXxD41d9BqQ3VxCw--.4124S2
-X-Coremail-Antispam: 1UD129KBjvJXoW7Kw1rArWxJFWDWF4xAFyDtrb_yoW8WFW8pF
-	WkK395tF4kKr45WwnFq3WxJw47trsxCayUCr1DJa9Fyrs8XrWxCrWfK3yagas0kr1xJw4j
-	yF42gas7AasYvrJanT9S1TB71UUUUU7qnTZGkaVYY2UrUUUUjbIjqfuFe4nvWSU5nxnvy2
-	9KBjDU0xBIdaVrnRJUUU9Eb7Iv0xC_Kw4lb4IE77IF4wAFF20E14v26r4j6ryUM7CY07I2
-	0VC2zVCF04k26cxKx2IYs7xG6rWj6s0DM7CIcVAFz4kK6r1j6r18M28lY4IEw2IIxxk0rw
-	A2F7IY1VAKz4vEj48ve4kI8wA2z4x0Y4vE2Ix0cI8IcVAFwI0_Xr0_Ar1l84ACjcxK6xII
-	jxv20xvEc7CjxVAFwI0_Cr0_Gr1UM28EF7xvwVC2z280aVAFwI0_Cr1j6rxdM28EF7xvwV
-	C2z280aVCY1x0267AKxVW0oVCq3wAS0I0E0xvYzxvE52x082IY62kv0487Mc02F40EFcxC
-	0VAKzVAqx4xG6I80ewAv7VC0I7IYx2IY67AKxVWUtVWrXwAv7VC2z280aVAFwI0_Gr1j6F
-	4UJwAm72CE4IkC6x0Yz7v_Jr0_Gr1lF7xvr2IY64vIr41lFIxGxcIEc7CjxVA2Y2ka0xkI
-	wI1lc7CjxVAaw2AFwI0_Jw0_GFyl42xK82IYc2Ij64vIr41l4I8I3I0E4IkC6x0Yz7v_Jr
-	0_Gr1l4IxYO2xFxVAFwI0_Jrv_JF1lx2IqxVAqx4xG67AKxVWUJVWUGwC20s026x8GjcxK
-	67AKxVWUGVWUWwC2zVAF1VAY17CE14v26r1q6r43MIIYrxkI7VAKI48JMIIF0xvE2Ix0cI
-	8IcVAFwI0_Jr0_JF4lIxAIcVC0I7IYx2IY6xkF7I0E14v26r4j6F4UMIIF0xvE42xK8VAv
-	wI8IcIk0rVWUJVWUCwCI42IY6I8E87Iv67AKxVW8JVWxJwCI42IY6I8E87Iv6xkF7I0E14
-	v26r4UJVWxJrUvcSsGvfC2KfnxnUUI43ZEXa7IU5SXd5UUUUU==
-X-Originating-IP: [36.110.52.2]
-X-CM-SenderInfo: x2kd0wx2kh0w46lvutnvoduhdfq/
-X-purgate-ID: tlsNG-ebf023/1792046909-C20D5B50-606DFD10/0/0
-X-purgate-type: clean
-X-purgate-size: 1767
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH] gnttab: drop bogus check from _cache_flush()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Julien Grall <julien@xen.org>, Stefano Stabellini
+ <sstabellini@kernel.org>, Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <6d0acc68-9d07-4e0a-b27b-0095a51ebe42@suse.com>
+ <8d4f9d39-f80b-43cf-91a1-033a8bca777f@citrix.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <8d4f9d39-f80b-43cf-91a1-033a8bca777f@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-d62444/1792048274-BFA6E757-5819B90D/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1439
 
-On Mon, Oct 12, 2026 at 12:20:50PM +0200, Oleksii Kurochko wrote:
+On 14.10.2026 18:24, Andrew Cooper wrote:
+> On 14/10/2026 1:52 pm, Jan Beulich wrote:
+>> There's no such thing as an alive domain without ->grant_table, and system
+>> domains (on Arm) don't own any pages. The check should also not be left
+>> there "just in case", because if that check could legitimately yield
+>> "false", the page reference obtained would then need dropping on the
+>> subsequent error path (see XSA-520).
+>>
+>> Reported-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> Reported-by: Yehyeong Lee <yhlee@isslab.korea.ac.kr>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+>>
+>> --- a/xen/common/grant_table.c
+>> +++ b/xen/common/grant_table.c
+>> @@ -3637,7 +3637,7 @@ static int _cache_flush(gnttab_cache_flu
+>>  
+>>      page = mfn_to_page(mfn);
+>>      owner = page_get_owner_and_reference(page);
+>> -    if ( !owner || !owner->grant_table )
+>> +    if ( !owner )
+>>      {
+>>          rcu_unlock_domain(d);
+>>          return -EPERM;
 > 
-> 
-> On 10/10/26 5:14 AM, Zhang Zheng wrote:
-> > An SBI console call may return before the UART finishes transmitting.
-> > Wait for UART_LSR_TEMT before ns16550 reprograms the UART and clears its
-> > FIFO, preserving pending early-console output and legacy SBI v0.1 support.
-> 
-> The problem isn't really specific to SBI: anything that wrote to the UART
-> before ns16550 takes over (firmware, a bootloader, or Xen's own early
-> console) can leave data in the TX FIFO or the shift register. I'd
-> describe it in those terms.
-Agreed.
-> Could the comment say why the wait is needed at this point? Something
-> like:
-> 
->     /*
->      * Output written before ns16550 takes over (e.g. by firmware or the
->      * early console) may still be in the transmitter. Let it drain before
->      * ns16550_setup_preirq() reprograms the line settings and resets the
->      * FIFOs.
->      */
-> 
-Thanks, I will use it in next version.
-> > +    while ( !(ns_read_reg(uart, UART_LSR) & UART_LSR_TEMT) )
-> > +        cpu_relax();
-> > +
-> 
-> IMO waiting for TEMT rather than THRE is the right choice: besides
-> resetting the FIFOs, ns16550_setup_preirq() reprograms the divisor and
-> LCR, which would corrupt a character still being shifted out. (Linux
-> waits for UART_LSR_BOTH_EMPTY, i.e. THRE | TEMT, but on a 16550 TEMT
-> already implies THRE.)
-> 
-Yes, I followed the Linux implementation, which waits in an unbounded loop
-and theck UART_LSR_BOTH_EMPTY like you said:
+> Do you remember that I already posted this patch (to the security team),
+> and you already reviewed it?
 
-for (;;) {
-		status = serial8250_early_in(port, UART_LSR);
-		if (uart_lsr_tx_empty(status)) /* checks UART_LSR_BOTH_EMPTY */
-				break;
-		cpu_relax();
-}
+I do. That was after I had made this patch, though.
 
-So I didn't have timeout handling
+> I'm afraid that your commit message is hard to follow, despite knowing
+> the details.  I already have one prepared from 3 weeks ago which I think
+> is rather clearer to follow.
 
-Zhang
+I'm happy for you to post (and commit) yours. I just didn't want this to
+fall between the cracks.
 
+Jan
 
