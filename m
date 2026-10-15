@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id C55D3CC6B2F
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 08:41:45 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1450040.1665542 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7BC5ACC6B34
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 08:45:21 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1450048.1665552 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHH1n-0007N8-CR; Thu, 15 Oct 2026 08:41:31 +0000
+	id 1xHH5A-0008He-Va; Thu, 15 Oct 2026 08:45:00 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1450040.1665542; Thu, 15 Oct 2026 08:41:31 +0000
+Received: by outflank-mailman (output) from mailman id 1450048.1665552; Thu, 15 Oct 2026 08:45:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHH1n-0007N1-9g; Thu, 15 Oct 2026 08:41:31 +0000
-Received: by outflank-mailman (input) for mailman id 1450040;
- Thu, 15 Oct 2026 08:41:30 +0000
+	id 1xHH5A-0008HX-Ry; Thu, 15 Oct 2026 08:45:00 +0000
+Received: by outflank-mailman (input) for mailman id 1450048;
+ Thu, 15 Oct 2026 08:44:59 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xHH1l-0007Mv-SW
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 08:41:29 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xHH59-0008HR-3R
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 08:44:59 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHH1l-006XZQ-4u
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 10:41:29 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xHH58-006YcF-8k
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 10:44:58 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ad091b0-bab6-0a2a0a5309dd-0a2a45019b42-42
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 10:41:28 +0200
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad09289-2eae-0a2a0a5409dd-0a2a4504b5e6-4
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 10:44:58 +0200
+Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ad091b8-5984-0a2a45010019-d1558036bc19-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 10:41:28 +0200
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4a171b677d2so31281085e9.0
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 01:41:28 -0700 (PDT)
+ id 6ad09289-b57f-0a2a45040019-d155dd2dcc61-3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 10:44:58 +0200
+Received: by mail-wr1-f45.google.com with SMTP id
+ ffacd0b85a97d-48df8fe8513so81896f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 01:44:57 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1bd993caesm110515955e9.12.2026.10.15.01.41.27
+ ffacd0b85a97d-48de09693c7sm21677051f8f.4.2026.10.15.01.44.56
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Oct 2026 01:41:27 -0700 (PDT)
+ Thu, 15 Oct 2026 01:44:57 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,52 +52,53 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1792053688; x=1792658488; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=QHnVS1PV+1kITi3vkJHQMq0po9DSd1J20l+xScx9FwM=;
-        b=SIefwWY+VWXpVrd3vG0NSlKwjHXAiuWQA6K3KqITbQ4xCVPcicPoPQp39/txKN87nh
-         scKTcq0+jd9oB4TCJVXbZHOq/j9mbfakL4r6MBrekzQAn5uFJXs/L40ID7CXq4Si3Rcb
-         RO2vyo6MlGot+Q7Tau7e0MpuynEVE04ErVFfsmVvKjvsodneJEg4pjYE1n3VjpCwtuWt
-         aZY6fVs45UaSX86h5aMdBeW7JaRiz5B4qClHifyrNcmjJPSID9YEIGYqf0i3W5/uW5TF
-         9QO5SClz0SbD11V3yCZTg9Nv2NJfcxB6Ci5IUqrMdGIRuo2LbZi3VQl/W4pCePMtApRI
-         5Htg==
+        d=suse.com; s=google; t=1792053897; x=1792658697; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=IYPnqtd+/baPeKbOuz8zkbnyzx2QS60iP2/pLZfCFQM=;
+        b=MEQcpX8P1waYm3Q+368icXk6zqxDOWeAE6H3Lr2x/GZwH6cO0cz2p6KZk7cpB0fgwI
+         h2lIutV9+W8wkcOPmtKbQiwIsqM3j7bmxFJQpd+aEX4+VByLLyk1Xvt58P7h1YUDKGnM
+         vb2b+Gwd6cCWdvbsUEjFHHmF9tn6Rb3mBeXaRiRNiKAvy/riELxQF/7RAh8+Qnml6iuK
+         Qe1S0MFMetvKNFn0sdLs+J8O0NWn0ZCrtJrqpcEzA7Rlfoi32G2aeiANSy9wXOu518Dw
+         8veoDlVDe1w+yzAOZMu1yBzsL+13bkY/SaMQFWi7GvNDz0igZEvRV298/J9xJus69QNZ
+         LjVg==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792053688; x=1792658488;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=QHnVS1PV+1kITi3vkJHQMq0po9DSd1J20l+xScx9FwM=;
-        b=U7OzLKl2LRARhas27H0oraGLHKiFlLBClfMrufaNitE400EBN/b6zX9jQs1hs82LOc
-         rQc0eVUUXFQWnmnd70VbrSAA9GtvPXrCmByPZUdNTi30yLgwJ3mTjK/fatBv1+pwdpRv
-         /wrUmYbhZQ9R7dKBmtUifhct4RMri0ZXOh5MN2QCfEzbQ6FYm9ScYsfS5w5tEIJ5+ZD8
-         oH+E2y3/26DNixZ+QRPnbAt3mfuL2gyxspFHr5e5cwHFduS531WYduCI5UEx4dXjcGx0
-         NilnSNf68UqY3Rakckl0b7LxFn95vseeiSDhFcwA3hpADMBwO9JivwGGVCj9duqFEB3p
-         AGYg==
-X-Forwarded-Encrypted: i=1; AKwUvBxqKOceR2MZgni6dtwCorAp18oTraO4VGVdTxlT2oMo189XwfQ1lp4sDYLtrxl6Ih3GQs0nCNGq7eg=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIOl9d6RuxcMC+ZrxpRtfiSxaTGDZuYCDiZgT4bb/5OTwZp8lkg
-	1iQ9S0pV4dtkztgHYgD25h6NLyVxlcnN5XkwTofeyKf9KU31zxebjphbeOkJqyc9ww==
-X-Gm-Gg: AYBFou3cJFRAKvZMdMit1iLJ6MezgAk2oEVChci/mRMEDRs5K2rDXlXlTSgTWKQSJt+
-	cnlSgwgr+ArUHRlaktxe0vNNfucupc2et6KArLsJhHpHV8RUxYBqYRmKEVlH43SJGiS9lBD3zNv
-	OJlHJv9auL1KSHCfSRefUJR6f2BdLgQw9SW9rTpq7k1QtFFAYR2sbOYQHMNpVPIOGeCxZ+qKH6+
-	d8pHIyUC00UoDckKFDINIxUZbkPgHrKSvQPXg5Crpo1pa0JKHx9g9g3KehefXhzgRBMNkriMg0d
-	xkfKBzU+R1Qd7a369z4GrH7pHAAqOkCbp15PxVDhtFF5XQ0P7XdGwjc6daSlkFe4gj+7m6ev7E6
-	TQ26HJJQiFDjG3iX5U5tE0Fk8/0uEQ37TdT5zrWAGdZ0MnnFe01TUpO1Y3GnAk1EAr795RMS4kI
-	pUlq9n7kaZEQe8E701xWqCnTdcCrqiD8JtVpch5rzD122CvRq3Xrn7LP5g3cmQFlDMT1k5r4TSt
-	4khDC0UcWv1zDG4YDY/IlnKxnIl6QbGbw6InbInZVKYyK5TZUvsHj7Fl0K1Z5Q=
-X-Received: by 2002:a05:600c:4ecc:b0:49c:fa21:e749 with SMTP id 5b1f17b1804b1-4a18e4d55f2mr408060295e9.31.1792053688137;
-        Thu, 15 Oct 2026 01:41:28 -0700 (PDT)
-Message-ID: <7f5da80c-424f-49dc-8ce3-10ca2fae9f55@suse.com>
-Date: Thu, 15 Oct 2026 10:41:27 +0200
+        d=1e100.net; s=20260707; t=1792053897; x=1792658697;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=IYPnqtd+/baPeKbOuz8zkbnyzx2QS60iP2/pLZfCFQM=;
+        b=uYOhk5yHv8BOs+7NQoJE0fEIVQCIP5KhhpkGF4NPXSUM7YaQaui/C+yQ4esO4ARDS0
+         BaUSVBfMaXgTnuMHZVAOyjv3GL7YdF7ez8b6mCPCfS8NB/6F8y1E2OEChBejx+SGgPCX
+         v12s65iGk2ROJoUbsoy4loAb/P9Yf/35wxNCknmP6rq3Rb42JPlmqdzmITRy/WLkgHyJ
+         AIkZD7gz3kNwOoHpCBE1aHkga2Axx1+PPGUbzhl+lgyL25mH7gJFPoBNEIk+D/YHLyoR
+         7stWlEWLMfX6+ji8Kiov8qLsRGEnWZF0ICAYrsdCW7LImH2CaZVIRLQZ8Oi5gT6qKuH2
+         +x8Q==
+X-Forwarded-Encrypted: i=1; AKwUvBzwKHRnQsU3wRlohcVACtDdECcNjkuSnIfajmodlRpeiyzyQrzfnde3sVujXeeRJF3XqneSjwKB8fc=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIB29RWk60Eti+TLWqzYXhik1e2PXwjJCKoxbd8kKTXvaTUQ7/8
+	qeCyfVKBhf14ObL8NXz13A+xVd/xLL0z/3yD/NZ+yD8I1Y+a+f6CXHJdndC6/XIaxg==
+X-Gm-Gg: AYBFou00tnpuAUAEBthas3/DW3Yel5EQNeSTciOAiP2IB+hUW937XXWx6cRD9oWN5HI
+	gnh9WZMQX9Zs3Rl56FMzEgS8Y8aKjMZOsIBDF1yC48qqKDl2mhanklFzaTOVcL1PcFy64VSUub9
+	/HqGkRAgnyngil53scd30jVSfwnEl1dbur9ECKzANFall0WAtRFtdehBpff9p8lk2Lg6ehrctpp
+	AjMF5B/+0Te6OR11mFm8BzvDbnauti+5GDKiie18GTLJu6oahlXqJp1YhJGk2MfqDLJylpNq96q
+	e7IHIjTMm7WxKCyv99VTOfClALvct1IXo59W9So3OHyRQfYoUuWz1GAggmB5gTqVbMu3uZom2OE
+	K7jtA+ri5F544PJAeXfjC+hRN/DebDEHzlMzZ2fgwTSJv1/3QVoZF88wCC0ZBdYDa5iKTMZWnby
+	CKM5xt72Q4pO8NAQxguKIP0V8z7mEBdttIb3BCTpmMuvOAQTPVNdnbA4/VEl0oll+VwKJpENbzJ
+	8sqqRXwqfeyf6IHH1n2edY2diKtS9HlQtYW3sLfC9ytiKmCGh8t8s5mCbJ0aQ==
+X-Received: by 2002:a5d:588e:0:b0:48a:fcf9:acb5 with SMTP id ffacd0b85a97d-48dba787752mr35296898f8f.2.1792053897427;
+        Thu, 15 Oct 2026 01:44:57 -0700 (PDT)
+Message-ID: <e1d27ef8-ecc8-4010-b570-2d2c2af89368@suse.com>
+Date: Thu, 15 Oct 2026 10:44:56 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH v6 1/4] xen/riscv: probe the PTE A/D bits update scheme at
  boot
+From: Jan Beulich <jbeulich@suse.com>
 To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
@@ -118,8 +119,8 @@ References: <1791885904.8631fc262581453bbf619ec5b2062170.1a134b909b40008425@vate
  <1791996314.8631fc262581453bbf619ec5b2062170.1a13b4dc2b50008425@vates.tech>
  <4e914f14-50ff-48a5-9f56-836913e487fb@suse.com>
  <1792052907.8631fc262581453bbf619ec5b2062170.1a13ead4e580008425@vates.tech>
+ <7f5da80c-424f-49dc-8ce3-10ca2fae9f55@suse.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
  hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
@@ -143,90 +144,75 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1792052907.8631fc262581453bbf619ec5b2062170.1a13ead4e580008425@vates.tech>
+In-Reply-To: <7f5da80c-424f-49dc-8ce3-10ca2fae9f55@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d62444/1792053688-C5540757-65C78283/10/78276251493
+X-purgate-ID: tlsNG-ebf023/1792053898-C2CCFB50-57D91A81/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 3457
+X-purgate-size: 2767
 
-On 15.10.2026 10:28, Baptiste Le Duc wrote:
-> On 2026-10-15 09:14 +0200, Jan Beulich wrote:
->> On 14.10.2026 18:45, Baptiste Le Duc wrote:
->>> On 2026-10-14 11:09:58+02:00, Jan Beulich wrote:
->>>> On 14.10.2026 11:00, Baptiste Le Duc wrote:
->>>>
->>>> In which case it would need to be
->>>>
->>>>     if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) ||
->>>>          !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu) )
->>>>         e->pte |= PTE_ACCESSED | PTE_DIRTY;
->>>>
->>>> albeit I have to admit that permitting two contradicting extensions to
->>>> be exposed at the same time is irritating.
->>>>
->>>>> I see two ways to address this:
+On 15.10.2026 10:41, Jan Beulich wrote:
+> On 15.10.2026 10:28, Baptiste Le Duc wrote:
+>> On 2026-10-15 09:14 +0200, Jan Beulich wrote:
+>>> On 14.10.2026 18:45, Baptiste Le Duc wrote:
+>>>> On 2026-10-14 11:09:58+02:00, Jan Beulich wrote:
+>>>>> On 14.10.2026 11:00, Baptiste Le Duc wrote:
 >>>>>
->>>>> 1) Keep checking Svade:
+>>>>> In which case it would need to be
 >>>>>
->>>>>     if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
+>>>>>     if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) ||
+>>>>>          !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu) )
 >>>>>         e->pte |= PTE_ACCESSED | PTE_DIRTY;
 >>>>>
->>>>>     After resolve_ad_scheme(), the Svade bit is set in every case where
->>>>>     software has to preset the A/D bits. The only imprecise case is both
->>>>>     extensions advertised with hardware updating already enabled by
->>>>>     firmware, where presetting A/D is unnecessary but harmless.
+>>>>> albeit I have to admit that permitting two contradicting extensions to
+>>>>> be exposed at the same time is irritating.
 >>>>>
->>>>> 2) Record the probe result in a global, e.g.
+>>>>>> I see two ways to address this:
+>>>>>>
+>>>>>> 1) Keep checking Svade:
+>>>>>>
+>>>>>>     if ( riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) )
+>>>>>>         e->pte |= PTE_ACCESSED | PTE_DIRTY;
+>>>>>>
+>>>>>>     After resolve_ad_scheme(), the Svade bit is set in every case where
+>>>>>>     software has to preset the A/D bits. The only imprecise case is both
+>>>>>>     extensions advertised with hardware updating already enabled by
+>>>>>>     firmware, where presetting A/D is unnecessary but harmless.
+>>>>>>
+>>>>>> 2) Record the probe result in a global, e.g.
+>>>>>>
+>>>>>>     static bool __ro_after_init hw_ad_update;
+>>>>>>
+>>>>>>     and use:
+>>>>>>
+>>>>>>     if ( !hw_ad_update )
+>>>>>>         e->pte |= PTE_ACCESSED | PTE_DIRTY;
+>>>>>>
+>>>>>>     This is exact in all cases, at the cost of a new global that mostly
+>>>>>>     duplicates what resolve_ad_scheme() already records in the ISA bitmap.
+>>>>>>
+>>>>>> I discussed with Oleksii and we are fine with either. What do you prefer?
 >>>>>
->>>>>     static bool __ro_after_init hw_ad_update;
->>>>>
->>>>>     and use:
->>>>>
->>>>>     if ( !hw_ad_update )
->>>>>         e->pte |= PTE_ACCESSED | PTE_DIRTY;
->>>>>
->>>>>     This is exact in all cases, at the cost of a new global that mostly
->>>>>     duplicates what resolve_ad_scheme() already records in the ISA bitmap.
->>>>>
->>>>> I discussed with Oleksii and we are fine with either. What do you prefer?
->>>>
->>>> As to 1), see above. For 2), while maybe okay, I think we're better off
->>> Sorry, I don't fully follow the issue with 1). Compared to what you proposed,
->>> it only differs when neither Svade nor Svadu is recorded, which cannot
->>> happen as resolve_ad_scheme() runs before and always records one of the
->>> two.
+>>>>> As to 1), see above. For 2), while maybe okay, I think we're better off
+>>>> Sorry, I don't fully follow the issue with 1). Compared to what you proposed,
+>>>> it only differs when neither Svade nor Svadu is recorded, which cannot
+>>>> happen as resolve_ad_scheme() runs before and always records one of the
+>>>> two.
+>>>
+>>> Yet previously we said that recording extensions (as such, i.e. later also
+>>> possibly exposing them to guests) when they weren't really advertised may
+>>> not be the right thing to do. I.e. imo the probing may be used to drive
+>> But we also said that platforms (such as the P550) may implement an
+>> extension without advertising it, as a RISC-V spec maintainer
+>> confirmed in [1].
 >>
->> Yet previously we said that recording extensions (as such, i.e. later also
->> possibly exposing them to guests) when they weren't really advertised may
->> not be the right thing to do. I.e. imo the probing may be used to drive
-> But we also said that platforms (such as the P550) may implement an
-> extension without advertising it, as a RISC-V spec maintainer
-> confirmed in [1].
+>> [1] https://github.com/riscv/riscv-isa-manual/issues/3450#issuecomment-6076851535
 > 
-> [1] https://github.com/riscv/riscv-isa-manual/issues/3450#issuecomment-6076851535
+> What Andrew says there suggests to me that the behavior you observe on P550
+> is against the spec.
 
-What Andrew says there suggests to me that the behavior you observe on P550
-is against the spec. That shouldn't really be the case though, as nothing
-was said in the spec at all until Svade and Svadu were actually introduced.
-An update to the spec should imo never invalidate previously conforming
-implementations. I guess I'll comment there.
-
->> Xen's internal behavior, but I'm unconvinced that it should also lead to
->> marking extensions as available.
-> 
-> Therefore, as far as I understood, you're not convinced of this:
-> 
->     /* Neither advertised: trust the probe. */
->     __set_bit(has_hw_update ? RISCV_ISA_EXT_svadu : RISCV_ISA_EXT_svade,
->               riscv_isa);
-> 
-> If so, then, the only solution I have in mind in what I proposed in 2)
-> with the global variable that store the result of the real probe.
-> Am I correct?
-
-Possibly. What I'm missing is some clarification towards the underlying
-principle which we want to follow not just here. 
+Or wait - no, he doesn't. He said this only to the strange combination you had
+indicated.
 
 Jan
 
