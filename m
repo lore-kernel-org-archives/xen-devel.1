@@ -4,46 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 066AFCC6B34
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 07:45:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1449959.1665472 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CD4D9CC6B34
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 07:55:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1449970.1665482 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHG9d-0005oM-G6; Thu, 15 Oct 2026 07:45:33 +0000
+	id 1xHGIp-0000d8-E1; Thu, 15 Oct 2026 07:55:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1449959.1665472; Thu, 15 Oct 2026 07:45:33 +0000
+Received: by outflank-mailman (output) from mailman id 1449970.1665482; Thu, 15 Oct 2026 07:55:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHG9d-0005oF-D7; Thu, 15 Oct 2026 07:45:33 +0000
-Received: by outflank-mailman (input) for mailman id 1449959;
- Thu, 15 Oct 2026 07:45:32 +0000
+	id 1xHGIp-0000d1-AV; Thu, 15 Oct 2026 07:55:03 +0000
+Received: by outflank-mailman (input) for mailman id 1449970;
+ Thu, 15 Oct 2026 07:55:02 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <chunjie.zhu@citrix.com>) id 1xHG9b-0005o7-Su
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 07:45:32 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xHGIo-0000cv-1t
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 07:55:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHG9b-006zO3-86
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 09:45:31 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xHGIn-00710T-7p
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 09:55:01 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <chunjie.zhu@citrix.com>)
- id 6ad08496-8faa-0a2a0a5109dd-0a2a4504c2cc-20
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 09:45:31 +0200
-Received: from [40.93.196.33]
- (helo=SA9PR02CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <chunjie.zhu@citrix.com>)
- id 6ad08499-b57f-0a2a45040019-285dc421bfbb-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 09:45:30 +0200
-Received: from BY5PR03MB5315.namprd03.prod.outlook.com (2603:10b6:a03:229::23)
- by PH0PR03MB5845.namprd03.prod.outlook.com (2603:10b6:510:32::21)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.472.20; Thu, 15 Oct
- 2026 07:45:25 +0000
-Received: from BY5PR03MB5315.namprd03.prod.outlook.com
- ([fe80::f586:75e3:eb6a:9550]) by BY5PR03MB5315.namprd03.prod.outlook.com
- ([fe80::f586:75e3:eb6a:9550%2]) with mapi id 15.21.0522.012; Thu, 15 Oct 2026
- 07:45:25 +0000
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ad086c8-e002-0a2a0a5209dd-0a2a4508d8ae-4
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 09:55:01 +0200
+Received: from [209.85.128.45] (helo=mail-wm1-f45.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6ad086c9-f659-0a2a45080019-d155802dbc76-3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 09:54:49 +0200
+Received: by mail-wm1-f45.google.com with SMTP id
+ 5b1f17b1804b1-4a171b677d2so30956435e9.0
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 00:54:49 -0700 (PDT)
+Received: from [172.20.10.5] (public-gprs367967.centertel.pl. [37.47.68.160])
+ by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a1bd68585csm33483945e9.4.2026.10.15.00.54.46
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Thu, 15 Oct 2026 00:54:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,143 +52,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=Nov+UzQCw3Y1KB1Uhr9ryjnKnufaYEY+P7I3P/bJ69jGph4D/8MJd9Hqha+Jb6W5XQ8QS9/wzkVNe7S9ZEk9Mp2RhcxaiJba8x88Z2GFlXF1tP4SbkWC8r5Le0plxQwTM+w372xxhcBEvy+61/Nj1gHbPi1kpdl0Xc9XPeSnmQQad8Z3ckupC9pmeXN+rfplyvVBvi69EM3o6L1ENeMDA6Vepy287hQnJx4qGKMmKJCyZw8QPj+IbVFw8BLMz+mmaIY1eoHQBsmH7lOQXuXf+SAUT7Ef2vnvibaKN+ccj7CrCAMdEDWZXw1xXzfynpp/PWUizEk/CFzUbQUqIChtFw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=5V+TveEByXy3LtetVMfKqEKKomgPXI/+10CtxBApa5c=;
- b=Jq4rE3Af4r/6RwACOprDikZVWqcdRrgutLCuguDLrH4ajKMzxRRYT3EzRh0DYnF63LRfMG1uJ2HhfmwwksG/CkkkqEe3w+yF0WvlOh9h0n7/SAmduee6khmwO2IEaE1BxHD0XQ83opZ2VmvRldRIDMeVpu3zyw96TYl3k5tsGInZo/z8Z2OI7NYZe8kKh0KZLSgMDPVfv27qQYuhUTffVV0zx7YlRB19E4D8IO2vxm/6Dzg/+QksXJHxlbpmtWURL1qki4+1CcRP+B8P/FBB0U3NHzP+dp2nTT79d20+qnHWOjFBHJtfIQIfT4ngcfXEpYFzL8zVV5f56XCKYL6+Gw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=5V+TveEByXy3LtetVMfKqEKKomgPXI/+10CtxBApa5c=;
- b=mx3taEmcVHl09BCpC8XdV1asEF5baNcIPtWLn4P16ikH32zKPUCis6WrkWvnwC2OMVt9kXr6jUYg6DqvNh85HX4vPW999FJMCzl5aRVNR13TVF9fi7WKZpzpLNEHjLvt0vpwBiH+WOuASt59dnhLu7/eoryZ2U7LBb4qnIQtVJA=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: chunjie.zhu@citrix.com
-To: xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger@xenproject.org,
-	jason.andryuk@amd.com,
-	teddy.astie@vates.tech,
-	Chunjie Zhu <chunjie.zhu@citrix.com>
-Subject: [PATCH v1] x86/nestedsvm: write back V_NMI and V_NMI_MASK on nested #VMEXIT
-Date: Thu, 15 Oct 2026 15:45:12 +0800
-Message-Id: <20261015074512.221777-1-chunjie.zhu@citrix.com>
-X-Mailer: git-send-email 2.34.1
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: KL1PR01CA0152.apcprd01.prod.exchangelabs.com
- (2603:1096:820:149::20) To BY5PR03MB5315.namprd03.prod.outlook.com
- (2603:10b6:a03:229::23)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792050889; x=1792655689; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=2v0VaYa6VgM5i5nyb3FRlwabJ6a/tr5PRWYVlVFU0uI=;
+        b=tL4edTBKNXU1fZ4FizMQjw76OPCCtCVk+RGQ2Hl7Uo9aBX+qf4iyrl/Y4gOzK7vnll
+         FsULb12aR5p3dRD2ax03Bco1l8RoBNP2oafo4S/m/3itYCu9FURKsHTfHwbzrCSuA273
+         IsfDN0v/fPO7p/XmTrSzlDvfHgQ3BokAkVRFcSW/FR5Benj1XKpvqT7paQYSKiAGVohe
+         o7JFuk6PfyJxR5TcxnNC8g00YOM14c7QYTXhGfufHDZY/AcyDvWnAzmZncwIQA3IPejz
+         OQKDx7aL3yY1KWFmnxrJJVToG96THINqMR0Y86R7K+bd1QGxZE7pL0Lb6LTxzzz7IuBr
+         TSIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792050889; x=1792655689;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=2v0VaYa6VgM5i5nyb3FRlwabJ6a/tr5PRWYVlVFU0uI=;
+        b=FlQC6gmRYOE34N4jVoWC2dS7H0V6KSKIY6WoMaAdsi/p54Ky3HHT736qtVnS9TnyBP
+         jJUHhY9OMxgfjORukGu+0ni01ycr2iOq77K53EfKksmzs+zPv44NV+fpSOaQB+lGdw/D
+         gfZKRwRMRcRVelP89H5stmmD5KmXmd3n62k2zngOYCrro/fV5YYNtGX1ONFhliPhut35
+         utlyz3uz3D94rqB/+sA2icXL8lhIPz6lgir1vAlUGU0TAqdzZ2AEEJoZpeKXciv76Zaf
+         62bzh2fDbLB6PjTYd5mGvApxb1L/Pm5kyPoXloQxolmIxUGrybDLcKB8zw4q4/DYHL/4
+         bMPw==
+X-Gm-Message-State: AFq9FYIGThoOkkhxy1JGW7weYQesPexNpFwcmUngm+LvDJacurl99xXi
+	5lbblo+NJWLydmw9n6z7k+EyDjO2hq4iggDaCytoRwFXfgRUeYcU38sq
+X-Gm-Gg: AYBFou2picscnlHrQzCKFJc4BCHpmjv9w61bwhPMtusKdUmvn32LVEOD787Qu/+74Sq
+	Bzgpucpy6HEaHkKRh7oum5ci4Bf/sl0AZ5Fkf5KHU81XsMEB4+G2WTj+l9Cve32Bw0oIAeLdX2R
+	M1QFnO4yR62+olhW3/t+CbZMAcV6r4MAbAcj0N25UQRjeH2tWq0nZumvIWVqqNO66EujFwLWBcy
+	CMN9RZKOz/6jM0kB+WuV0zY4qBXBXy3VrNmaT/poFafc9mVt0N3UZRb8y7FHisFvxS79/A1BUc7
+	R19tIQIlShwkYpWdJuhoHGcphFxYaSSfL/a3GFKHrLitjoEA0VNRsI736gnLvTb3BhHAMhZzPaS
+	v+vjJ7Mbk/jCIWX76Ny8vAP7IZAsy5UVZZWr53pmaRy6WJYrn2EeIbw6FjZqlmut5bPeNK/Ks3T
+	jjTvqpNgIa52YIlX+oZ5jJKwrib5+gvusun63thmHBvTcOMUXJZG0fmOEePJv+RPMgDXd6kzKuv
+	A5cJ0XogBo17I/LOskKWGoGYp6XoS84UiHtVmk=
+X-Received: by 2002:a05:600c:548e:b0:49f:f9d1:e618 with SMTP id 5b1f17b1804b1-4a18e4aa057mr370501985e9.17.1792050889005;
+        Thu, 15 Oct 2026 00:54:49 -0700 (PDT)
+Message-ID: <f7dd6f51-ac42-4487-9f9f-cf0d3ba64455@gmail.com>
+Date: Thu, 15 Oct 2026 09:54:46 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY5PR03MB5315:EE_|PH0PR03MB5845:EE_
-X-MS-Office365-Filtering-Correlation-Id: 5153f625-4351-4119-fd0d-08df2a9045d5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|1800799024|366016|18002099003|11063799006|10067099003|261009223027099003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	zhZS9jG5ksqPTm+k4UdVYSzbAZ8Sg6mXjGPWCk15nN/rtjhvkR6v5fTb87uS7zaGyGSg2vA3Qyqo6DreAPgiUEcy26lAdcnTbVprrsxr18xYPs2X1P2cB/tww3E4N23/yiowL8/zKYixDE6QS7lyxVNcHxW9JELwU8B2Ik7hfBrW4B1JIrqhG7g1k4fphwl59HDk6xhooWiKsrvbcZ/B2Dz7S5Ci0cblTg4DW1Va+lmGtkt93fYBssVbO0Aq0/KbkmSN8ccdpflCk5dZaUbUaSazizbMz41hEFBMUHInEi5mT6pSTRRWCQ6FwknkI8vFVlXkLMdzacux8FqAAiSt4zPD4I9uw3ku+kkFQdkJZLyFhtW3pkYfXgiYqi2gmZcAFP96+GE20+t8jnPAdl4bQ6rr11TX1ZVBnZggt3UXs18c+WbrhTAHS459/xUc+WuNYi34ZrORw+GaEkj6ieiwL6ZVz4QQXxdlslfM7uHlpWHqDM4iJgOA9p7JDdtH89YW5pODxgl+Dp7I0EY0FyOcP6ZI0I5A93MhphbT2RTtAMM56KmMgXfiFAz4AtvkF3N+EO2dfMkawgxZCfh8ARDVFcSe/k049jvZPn5gd9VFL7CoDlk5BwtzMQ3x8/w7XS4DW86rarHrXdBGUsQWrrm7knfgV0e0N+S4IFLynM6HMlE=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BY5PR03MB5315.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(23010399003)(1800799024)(366016)(18002099003)(11063799006)(10067099003)(261009223027099003)(56012099006);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?FDwBm6TDAF0CrmTcsCUlswkkrTT5lyKaLWnI5jFusVSS3DV0fRGnVkXGHLcV?=
- =?us-ascii?Q?hbYd6UHV0kbJ1QudHC4S/iwMzfHWQ6RHHcCtkvplbOgS7PpcWN5DcR+vB0NS?=
- =?us-ascii?Q?hMnhZutNAXVuEKoTKYFiadUWm6d3fQfxdjRYipVwo9U30UjWZqFPyO1yeOpL?=
- =?us-ascii?Q?uNrTpv+YiwKIOvTfMtGKYoPQjo43X/gtVHPKhm+630niVw20YAEXHXe3PIxb?=
- =?us-ascii?Q?dOa3sotU8t04j/wwsS0IlLXTVhDJsnxbfR5eEVft+nmOR0bK9BFG+67XlPb2?=
- =?us-ascii?Q?bDg0X2hhES6PsXf0JZuO1nvGjD5iv7JTp7fH38oHATWT+RUEN6TsznxyW9tI?=
- =?us-ascii?Q?y8noyby74VwyS8rCKLIJcKQWI3uXORJ/Wc5Jph+HzD4rIF5muXJnCj2YC1/a?=
- =?us-ascii?Q?q75aZR88F1ZkTs7SGt+72+RbiQYnanVPhNhvssaZzkoY/ctNzhSVg8CZwxxG?=
- =?us-ascii?Q?K+yCc5ASnf//SPhKoUW5S85APBJuu0pddcLMDfXRny1yiwbecC/4lEYJvg2E?=
- =?us-ascii?Q?PINd3GQlu+ErRdgmf+au5JACchV4mQmHGrYUAMsSbJ+SvRk0TFxHceSRVsVM?=
- =?us-ascii?Q?PG5hullO5wdKDxoi6n5v+S6mV1OaDxYuqR6tDPKqEB90h9aLNT1YcOLngP9/?=
- =?us-ascii?Q?tcbC7hmn/bveBh2E8vr9a17cLfxb9Y0NB8MHr5T5rKBZhwDktIwNAHywCYG9?=
- =?us-ascii?Q?/s8yUUUG/qvBDxESKwTrNl6RpFGaGcTO3eLQswpPX3yEC8M4UB8uCRrzyS9V?=
- =?us-ascii?Q?LA5PrD11HhaCVU92ajeOlnPskXGc8BcyDK8ulet6yCBLQjnHvfgzxssnRA8r?=
- =?us-ascii?Q?ss7m0nIheYoK6gjFLkfqs+iOmUxq7APX+9G8ulVy4WDVyAhNTt5OjFZmKYjn?=
- =?us-ascii?Q?8pfqHLdRWyQSb6CilBpf2A7+7fCvSn/BXa+uoMoTEMk1nZYobeK967cYv4R1?=
- =?us-ascii?Q?lZRwMn7qKgcpJSZP3kbLnR0hfthMGx70iwb1QDRqPle/hHs8UD4zTj59K56e?=
- =?us-ascii?Q?x4WuUjfHVWp3rwKEHxATOuV+HusBVZEDjBaGA7vp+ThJFRhlLmVqQWO23nAF?=
- =?us-ascii?Q?kMNPtzg86UVqyzom3n/xiB2mmVcuE8djYSjsa2cwzHykHZdHAGLbKtOKD1ol?=
- =?us-ascii?Q?BJ+dqt74GiNOtLwSqs+J9YtX6mO1cDuu6V25vy+TmvZdlDgNhfRReU4AA0q6?=
- =?us-ascii?Q?65eBav0aDMX64miSAqvwJM/qtym03ZJ/+JbMkfcbEwN+YnOJRWBLO3umAUE+?=
- =?us-ascii?Q?bd1YpD4ZIwH0CjFHqW4X/xfd/vGap/fv0lwus+QKyLJCtd/uvo9xuSq6njew?=
- =?us-ascii?Q?7LD+6v52TXW4XwZowQvhW2U8ZoDIj/9KQePSsUuWZ/hUD5+JdCMEuJPIBUFH?=
- =?us-ascii?Q?/j9onaSX16ZoQ6/Q8sVWTj47fq3rrQVMjjZ7XDQnzLKKQnlwp2+3mcQ+5dYw?=
- =?us-ascii?Q?8PMHu1p+HXjma3LG34/ruuqAiw5qEVGwsuPliaGCEbiAcWrYLB/oQaaFfmti?=
- =?us-ascii?Q?fWFq6zspSpW1oVWYCwNdlxzZtR8U734/oT5L88sT7uN7Rg4RqYDwkYvfELHx?=
- =?us-ascii?Q?j1Ei1o1lHTRbp8WhscOyCuqW+ljhtAxilwu3aCBdw14bU6wmMrOWC4FevuWP?=
- =?us-ascii?Q?93Pq2HVglRy6CEvTCLGKAWLIqRGpTxpy4CTfdErIBmRcrrPZdFENr+KPMC0T?=
- =?us-ascii?Q?htlROWBP0VJ3Em8TJ9oRObKJIuiCwu4SdAMpL3CaE6qu7K2DKqkM0U1g3oBU?=
- =?us-ascii?Q?9qhtY7Gi/A=3D=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 5153f625-4351-4119-fd0d-08df2a9045d5
-X-MS-Exchange-CrossTenant-AuthSource: BY5PR03MB5315.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Oct 2026 07:45:24.9166
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: FmGkAcnyvhcsTOBGZY6eGO2tTPIG1J5ccagRSr4E5+3uDRWbN/YMHdWw0sUtX7gEU/F1rZ9wEDM2lVhq46WKZg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PH0PR03MB5845
-X-purgate-ID: tlsNG-ebf023/1792050330-508D9B50-98E282DB/0/0
-X-purgate-type: clean
-X-purgate-size: 1864
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 2/2] xen/ns16550: drain TX before reinitializing
+To: Zhang Zheng <zhangzheng@iscas.ac.cn>
+Cc: xen-devel@lists.xenproject.org,
+ Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <20261010031406.2057735-1-zhangzheng@iscas.ac.cn>
+ <20261010031406.2057735-3-zhangzheng@iscas.ac.cn>
+ <ec65306d-ec1d-4c5a-93f8-b37f7dfea8b5@gmail.com> <atB2HqxU_D481PBk@iscas-ws>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <atB2HqxU_D481PBk@iscas-ws>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1792050889-CC57487B-ACC55FD1/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 2074
 
-From: Chunjie Zhu <chunjie.zhu@citrix.com>
 
-With V_NMI_ENABLE set, the processor clears V_NMI and sets V_NMI_MASK when
-it takes the virtual NMI, and writes both back to the VMCB on #VMEXIT
-(APM vol.2 15.21.10).
 
-nsvm_vmcb_prepare4vmexit() only propagated V_TPR, V_IRQ and (conditionally)
-V_GIF from the L2 shadow VMCB into vmcb12. V_NMI and V_NMI_MASK were never
-copied back, so L1 kept seeing whatever it had last written, regardless of
-what happened in L2.
+On 10/15/26 8:44 AM, Zhang Zheng wrote:
+> On Mon, Oct 12, 2026 at 12:20:50PM +0200, Oleksii Kurochko wrote:
+>>> --- a/xen/drivers/char/ns16550.c
+>>> +++ b/xen/drivers/char/ns16550.c
 
-Copy both back when L1 has enabled vNMI for its guest.
+[...]
 
-Signed-off-by: Chunjie Zhu <chunjie.zhu@citrix.com>
----
- xen/arch/x86/hvm/svm/nestedsvm.c | 8 +++++++-
- 1 file changed, 7 insertions(+), 1 deletion(-)
+>>> +    while ( !(ns_read_reg(uart, UART_LSR) & UART_LSR_TEMT) )
+>>> +        cpu_relax();
+>>> +
+>>
+>> IMO waiting for TEMT rather than THRE is the right choice: besides
+>> resetting the FIFOs, ns16550_setup_preirq() reprograms the divisor and
+>> LCR, which would corrupt a character still being shifted out. (Linux
+>> waits for UART_LSR_BOTH_EMPTY, i.e. THRE | TEMT, but on a 16550 TEMT
+>> already implies THRE.)
+>>
+> Yes, I followed the Linux implementation, which waits in an unbounded loop
+> and theck UART_LSR_BOTH_EMPTY like you said:
+> 
+> for (;;) {
+> 		status = serial8250_early_in(port, UART_LSR);
+> 		if (uart_lsr_tx_empty(status)) /* checks UART_LSR_BOTH_EMPTY */
+> 				break;
+> 		cpu_relax();
+> }
+> 
+> So I didn't have timeout handling
+>> The unbounded wait can hang early Xen boot if the UART never reports TEMT
+>> for some reason(?). Bounding the wait would make console initialization more
+>> robust, allowing boot to continue when the UART is unavailable
+>>
+>>      for ( i = 0; i < 50000; i++ )
+>>      {
+>>          if ( ns_read_reg(uart, UART_LSR) & UART_LSR_TEMT )
+>>              break;
+>>          udelay(10);
+>>      }
+>>
+>> would need udelay() on RISC-V, which is still a BUG_ON() stub, so a
+>> separate patch would be needed for that. On x86, udelay() doesn't delay
+>> yet at this point (cpu_khz is only set by early_time_init()), so there
+>> the loop would just be an iteration count. Perhaps someone has a better
+>> idea of how to implement a timeout here.
+>>
+>> ~ Oleksii
+>>
+> Leaving aside the unavailability of udelay() at this point, is a timeout
+> considered necessary here?
 
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index faacfe007832..ecd89eb43f06 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -1027,12 +1027,18 @@ nsvm_vmcb_prepare4vmexit(struct vcpu *v, struct cpu_user_regs *regs)
-     /*
-      * Virtual Interrupts.  #VMEXIT writes back V_TPR and V_IRQ (APM vol.2
-      * 15.6); the remaining fields do not change.  Copy vGIF back only if
--     * enabled in L1.
-+     * enabled in L1.  With vNMI enabled, #VMEXIT also writes back V_NMI and
-+     * V_NMI_MASK (APM vol.2 15.21.10).
-      */
-     ns_vmcb->_vintr.fields.tpr = n2vmcb->_vintr.fields.tpr;
-     ns_vmcb->_vintr.fields.irq = n2vmcb->_vintr.fields.irq;
-     if ( ns_vmcb->_vintr.fields.vgif_enable )
-         ns_vmcb->_vintr.fields.vgif = n2vmcb->_vintr.fields.vgif;
-+    if ( ns_vmcb->_vintr.fields.vnmi_enable )
-+    {
-+        ns_vmcb->_vintr.fields.vnmi_pending = n2vmcb->_vintr.fields.vnmi_pending;
-+        ns_vmcb->_vintr.fields.vnmi_blocking = n2vmcb->_vintr.fields.vnmi_blocking;
-+    }
- 
-     /* Interrupt state */
-     ns_vmcb->int_stat = n2vmcb->int_stat;
--- 
-2.34.1
+In the way Jan B. mentioned here: 
+https://lore.kernel.org/xen-devel/20261010031406.2057735-1-zhangzheng@iscas.ac.cn/T/#meaf24c3bb039dc6aaecffab752d2b107581816e0
 
+I think we still can have timeout check.
+
+~ Oleksii
 
