@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4E4CDCC6B34
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 09:10:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1450088.1665605 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id F1057CC6B34
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 09:11:52 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1450098.1665615 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHHTp-0001Aa-Tu; Thu, 15 Oct 2026 09:10:29 +0000
+	id 1xHHV0-000237-AF; Thu, 15 Oct 2026 09:11:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1450088.1665605; Thu, 15 Oct 2026 09:10:29 +0000
+Received: by outflank-mailman (output) from mailman id 1450098.1665615; Thu, 15 Oct 2026 09:11:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHHTp-0001AT-RI; Thu, 15 Oct 2026 09:10:29 +0000
-Received: by outflank-mailman (input) for mailman id 1450088;
- Thu, 15 Oct 2026 09:10:29 +0000
+	id 1xHHV0-000230-6Y; Thu, 15 Oct 2026 09:11:42 +0000
+Received: by outflank-mailman (input) for mailman id 1450098;
+ Thu, 15 Oct 2026 09:11:41 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xHHTp-0001AL-69
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 09:10:29 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xHHUz-00022u-3k
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 09:11:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHHTo-006fO4-Iw
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 11:10:28 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xHHUy-00GA8m-Gj
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 11:11:40 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ad09882-2eae-0a2a0a5409dd-0a2a4502b82e-12
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 11:10:28 +0200
-Received: from [209.85.221.53] (helo=mail-wr1-f53.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad098c6-bab6-0a2a0a5309dd-0a2a4504edaa-22
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 11:11:40 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ad09884-6ca4-0a2a45020019-d155dd35cc54-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 11:10:28 +0200
-Received: by mail-wr1-f53.google.com with SMTP id
- ffacd0b85a97d-48df8fe8513so109819f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 02:10:28 -0700 (PDT)
+ id 6ad098cc-b57f-0a2a45040019-d155dd2ea4bf-3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 11:11:40 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-48df0fa43c5so653518f8f.0
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 02:11:40 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1bd7319c6sm65192075e9.0.2026.10.15.02.10.24
+ ffacd0b85a97d-48ded185de7sm9011910f8f.31.2026.10.15.02.11.39
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Oct 2026 02:10:24 -0700 (PDT)
+ Thu, 15 Oct 2026 02:11:39 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,50 +54,50 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1792055428; x=1792660228; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1792055500; x=1792660300; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:from:to:cc:subject:date:message-id
          :reply-to:content-type;
-        bh=Pajwugmxj1oAgJF5ydgGa4DsXBBn331IhkZGgrXGYHc=;
-        b=FMw/Y86RfncWzut8AncSoaoBsjhtH3nS+5b3TGRqP2vncDOXW1+am1Xqx0dc1TAtLK
-         vu+ALHufVPDaXGfHcRpMqbCZZJWEA90jq/vWh9XUvcZEFdRmbSz9QGBgV6iJChbPPzpm
-         juBUGoIBKgwIOhP8KmnqMWQE4ZdTYraPRx+vICzqlZTi8qVgggiZ+svPYlyg1rbsmSaq
-         0DR5zKfM/i4erxJMTnY38PrbocnCRv+fh7suPnuNSAIzVyac18TMZ6n/f9ZfuRL6mNBb
-         WxP0rKKUfmBOpknRdBNBOSBOe9CcCOD7qizpJPliPTNdxCTy44WCVKq7WuH+H69JnGFP
-         iv0w==
+        bh=s6zV7zy/jpwXP1/SxtIpDn9sHbXfLtS9AvR38rCCZyw=;
+        b=OzIfdVEVxScS9plilewXEE4j6hNWp+66tpVXK2aB5LBVLH6tsEbqP6w2UcErP0ndeF
+         Q4D0tYJ+IaAGrdCpLFA0OxvfCMFvyMISa2Os3WfJAixF9XV2CDFPgJCN48ZcjvymaVpO
+         4s2Wbav1dQ1IVgEZOAbvBmYlcN+0N05Y+3ZPFo7URojjSl6RmxD42smTKkat8Awirn9g
+         mepv8grbySjD+fK0JPh1y3zvAG8zEVzSCl0QYSYjAA4ePEt29Dp24dfVYw+OkZriIgYJ
+         PcQjlAVNarXy1FAosNpfBNTyXmKa+YXWrsIOSjazbpsfesxl5e51a+u7PYiOCCAPC9e3
+         mnkw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792055428; x=1792660228;
+        d=1e100.net; s=20260707; t=1792055500; x=1792660300;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt
          :content-language:references:cc:to:from:subject:user-agent
          :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
          :subject:date:message-id:reply-to:content-type;
-        bh=Pajwugmxj1oAgJF5ydgGa4DsXBBn331IhkZGgrXGYHc=;
-        b=nfD39YaDdKVsSF0UsEXZLZsCXgTGkWl2MwXBgWGNwapgBSyG6PbXXpp7epmhV73FV8
-         rLE667eZujYxdTkbYDW9LV+NAnHRpjhbl2dSuGx3hRnPLX0HYX/Wo+myL59RCHHq6e2d
-         ZdHZ5fSsjAwH9JElAvi6ED9poKrgS9rA7ld85WN3wVhN+JDdz72HYUbnThmPdhzB1jLN
-         hzdkEvgo3bRojvZOFFcQ/LIx2oTqZRx2UAlNTYr/xL0mTv2QCj/+vzjikDV5qx+tdKS0
-         ijRKISwRE80s6mNZ/m7MJOPJZsTvr2ouqu5Gv2EP6lJAGD3JvMsnvpxK0H9tRiM9n/gm
-         jvVg==
-X-Gm-Message-State: AFq9FYL9Z6tZQAkqCpzE8utD8VMMYV405zUXJ8sQ4/pEE4sxNnvGeSAZ
-	WUd8Y0BXP5g2oETMXgRFvh8K0/NGmqVSAGntY+ElYiY61jlt5RhqlqPmyh28OW4j5xzesTtY7f3
-	TLoP2vg==
-X-Gm-Gg: AYBFou18QUk11LuRL+2WzIjCY/szpgPaqPgZ8crTE+EZZOeSM+71UdzVCaCCT2PHA3d
-	qlrD5Dsdyfz2RYRk7eKmrMg301XqZ6KnW7cGOnvrNAFoATiEUMh8gNbp43lJxijJ0ce2PXIShqK
-	dW5O2U8Y5TvZ9seUPBK/BetPnzAyoEwHzFK/C81DCMhGSCBHgTS1x29ZC86srnfSBFFy6JIxgpO
-	fTUGEbpSsGEGISM4SVwf+oDcMTzCGmbSdO+1p9wTCjsdUqigEQP93g78WnXxTMiIidhqB9GdDxU
-	pJMas5BY1WKHhVlkEHYXX2Ti+ArMvrcqofYQLheHfqBnuUs6CSVkOyQDK4Te3CwiI85NldJk7Rp
-	6+I4c3CqZ5v1umu+ET0MkC+ARms49jERPxgT9KAmLOcHL9obIuIGIshkJoezPxaDc3qZtP1zr7u
-	YkI5NNvz2K0ubMRsjloDSCef/QvPIrK3BW39DFTa7bvJK0+hmsJQuSN/U5dv4Wan3+sbLdET62j
-	cUnOEInZxzPaYI7x2wmTCg3m9uu4XUX+U1hNvr/2zDTWOUg5Up0OAmp6E0HF0k=
-X-Received: by 2002:a05:600c:a112:b0:4a1:9663:7633 with SMTP id 5b1f17b1804b1-4a1966379f7mr258555625e9.11.1792055425863;
-        Thu, 15 Oct 2026 02:10:25 -0700 (PDT)
-Message-ID: <9e48f405-4e99-4258-921e-2948f0d6754d@suse.com>
-Date: Thu, 15 Oct 2026 11:10:24 +0200
+        bh=s6zV7zy/jpwXP1/SxtIpDn9sHbXfLtS9AvR38rCCZyw=;
+        b=pUKD0OsYuMfLembIIgpTjop5wBCf6GT9kq2ZiOytp+Br5XxS6awIZX9vwF3yaR1sb8
+         YpSAEVDJ3dVgX4JWmW//fJnH4GHNbziZ0+menbwhEr/7i11mlIC2CVKClhvV3MRYZK5h
+         6Iv9wGAtg3NKEuH9qVI11WrCK1AiPNt4Fyi3a4DAGnDoZvxpm81ttSiabOw5RF6ZKCqw
+         ZaobduQ8/O204UKlEjRQq6qHV21mdpT/Sime20gCYDFiJ+yU0cFPiJk1jC91C03iIQND
+         llLhIdqr2S1JBUbvAxbKaE6YrmBggUR0Q2A6Aqxhz+fjpYLsaDNDo/i98UJUiZnA57vs
+         I3nQ==
+X-Gm-Message-State: AFq9FYKP74p2NXyiBlnd8SPFO+0vLY0eOHakQWa3ipuGqFY6GTQzQqUD
+	vn2xa6fl/hOS2NfZgJW1EXEKLJMxQYUIWd5qiEPqyjy+NmLvy4Htybh4lZwqQQskXPXkrC7cagu
+	+ikVTLA==
+X-Gm-Gg: AYBFou3FOuJTNPtiO6Otd3giqbPGnkt7gEK5pl0A75Woe6ezpZ4KW7nOcGFUNBYmPEP
+	w9a4+ALoQSuXNe+u5J+y64hwCoUCyrF7R2rsPUSmO8CzjdJ6Ckg6cr7wgqxbUQadTA3x1jf+Gtk
+	JH4FNZHI57yFLig/ajVw+dmqYX/ekm3qz0BFcJ3a1Yv50ASm1ad0/zBtAKVVAWFJcB/OS5DUJIn
+	0RJyxASH9dxJ1N16AVVwjluS45CarHQqgJGyyDcLN2PYRsfPXP/Pe9wbr8IovaFBCpnNQEtxDAk
+	yjqdkYUVttmrybJiMyLg6faSm15KK/kGn3zurQXSSFAZ3EAMmCYR4193WXjh4PPJvpO4aH9Yhwf
+	kUGSHKspa3CAQit5tuiGxs4H1SJvkoex5YPHyiUePKSuBDwOuBQxH2Ra+41HRpaFrcUwirEqgXi
+	1D5MzBiKXfo/WcoOtSz8EpzP/mgX4/Qawm2IFGGMUzX/pvRFy5sa0Yxfq5ssm/Vbl5uZCSxUs2Y
+	eFMnjKRM9aPHLUsYYHKNGk1zlDT2TJnAmOhvPLO8FjAYUw7Wi1Cs84soN8e/O8=
+X-Received: by 2002:a05:6000:240d:b0:48c:55c1:fb7e with SMTP id ffacd0b85a97d-48db94743e8mr38953128f8f.11.1792055499917;
+        Thu, 15 Oct 2026 02:11:39 -0700 (PDT)
+Message-ID: <18b38bd8-bc6b-4925-8880-234c7d2b9497@suse.com>
+Date: Thu, 15 Oct 2026 11:11:39 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: [PATCH v4 2/3] x86: use __builtin_popcountl() for arch_hweightl()
- when available
+Subject: [PATCH v4 3/3] x86: short-circuit certain cpu_has_* when
+ x86-64-v{2,3} are in effect
 From: Jan Beulich <jbeulich@suse.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
@@ -131,35 +131,53 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
 In-Reply-To: <b6ae837e-293a-4c06-aefa-02a5b9cd2c3f@suse.com>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-720697/1792055428-F24B62AC-CC136329/10/78276251493
+X-purgate-ID: tlsNG-ebf023/1792055500-508D9B50-6FC0B8B9/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 764
+X-purgate-size: 2208
 
-Use the respective compiler builtin when available; no need to play any
-alternatives games in such configurations.
+Certain fallback code can be made subject to DCE this way. Note that
+CX16 has no compiler provided manifest constant, so CONFIG_* are used
+there instead. Note also that we don't have cpu_has_movbe nor
+cpu_has_lzcnt (aka cpu_has_abm), and we no longer have
+cpu_has_{popcnt,bmi1,bmi2}.
 
 Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Jason Andryuk <jandryuk@gmail.com>
 ---
-v4: Re-base (re-do).
+Of course we could use IS_ENABLED(CONFIG_X86_64_V<n>) everywhere, but as
+CX16 shows this isn't necessarily better than the #if/#else approach
+based on compiler-provided manifest symbols. While not really intended
+to be used that way, it looks as if we could also use
+IS_ENABLED(__POPCNT__) and alike if we thought this would end up neater
+(because of avoiding the #ifdef).
 
---- a/xen/arch/x86/include/asm/bitops.h
-+++ b/xen/arch/x86/include/asm/bitops.h
-@@ -500,6 +500,9 @@ static always_inline unsigned int arch_f
- 
- unsigned int arch_generic_hweightl(unsigned long x);
- 
-+#ifdef __POPCNT__
-+#define arch_hweightl __builtin_popcountl
-+#else /* !__POPCNT__ */
- static always_inline unsigned int arch_hweightl(unsigned long x)
- {
-     unsigned int r;
-@@ -525,5 +528,6 @@ static always_inline unsigned int arch_h
-     return r;
- }
- #define arch_hweightl arch_hweightl
-+#endif /* __POPCNT__ */
- 
- #endif /* _X86_BITOPS_H */
+We could go further and also short-circuit SSE*, AVX and alike, which we
+don't use outside of the emulator. This then would of course call for
+also having a way to select x86-64-v4.
+---
+v4: Re-base (over dropped cpu_has_{popcnt,bmi1,bmi2}).
+v2: Also cover XSAVE.
+
+--- a/xen/arch/x86/include/asm/cpufeature.h
++++ b/xen/arch/x86/include/asm/cpufeature.h
+@@ -132,11 +132,17 @@ static inline bool boot_cpu_has(unsigned
+ #define cpu_has_monitor         boot_cpu_has(X86_FEATURE_MONITOR)
+ #define cpu_has_vmx             boot_cpu_has(X86_FEATURE_VMX)
+ #define cpu_has_eist            boot_cpu_has(X86_FEATURE_EIST)
+-#define cpu_has_cx16            boot_cpu_has(X86_FEATURE_CX16)
++#define cpu_has_cx16            (IS_ENABLED(CONFIG_X86_64_V2) || \
++                                 IS_ENABLED(CONFIG_X86_64_V3) || \
++                                 boot_cpu_has(X86_FEATURE_CX16))
+ #define cpu_has_pdcm            boot_cpu_has(X86_FEATURE_PDCM)
+ #define cpu_has_pcid            boot_cpu_has(X86_FEATURE_PCID)
+ #define cpu_has_x2apic          boot_cpu_has(X86_FEATURE_X2APIC)
++#ifdef __XSAVE__
++#define cpu_has_xsave           true
++#else
+ #define cpu_has_xsave           boot_cpu_has(X86_FEATURE_XSAVE)
++#endif
+ #define cpu_has_avx             boot_cpu_has(X86_FEATURE_AVX)
+ #define cpu_has_rdrand          boot_cpu_has(X86_FEATURE_RDRAND)
+ #define cpu_has_hypervisor      boot_cpu_has(X86_FEATURE_HYPERVISOR)
 
 
