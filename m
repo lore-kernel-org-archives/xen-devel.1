@@ -4,43 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 50F7ECC6B34
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 15:00:07 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1450763.1666180 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4BC5ACC6B34
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 15:06:01 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1450776.1666191 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHMw2-0005Vj-5d; Thu, 15 Oct 2026 14:59:58 +0000
+	id 1xHN1c-0007KZ-Qb; Thu, 15 Oct 2026 15:05:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1450763.1666180; Thu, 15 Oct 2026 14:59:58 +0000
+Received: by outflank-mailman (output) from mailman id 1450776.1666191; Thu, 15 Oct 2026 15:05:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHMw2-0005Vc-32; Thu, 15 Oct 2026 14:59:58 +0000
-Received: by outflank-mailman (input) for mailman id 1450763;
- Thu, 15 Oct 2026 14:59:56 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xHMw0-0005VU-AJ
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 14:59:56 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHMvz-005PDA-G0
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 16:59:55 +0200
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ad0ea6b-8faa-0a2a0a5109dd-0a2a45069dae-0
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 16:59:55 +0200
-Received: from [209.85.208.51] (helo=mail-ed1-f51.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ad0ea6b-195a-0a2a45060019-d155d033e488-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 16:59:55 +0200
-Received: by mail-ed1-f51.google.com with SMTP id
- 4fb4d7f45d1cf-6b2237b596cso1811187a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 07:59:55 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-67-71.play-internet.pl.
- [109.243.67.71]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6b203863cb0sm2590512a12.17.2026.10.15.07.59.53
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Oct 2026 07:59:54 -0700 (PDT)
+	id 1xHN1c-0007KS-LZ; Thu, 15 Oct 2026 15:05:44 +0000
+Received: by outflank-mailman (input) for mailman id 1450776;
+ Thu, 15 Oct 2026 15:05:43 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <roger@xenproject.org>) id 1xHN1b-0007KM-5F
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 15:05:43 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <roger@xenproject.org>) id 1xHN1a-00000006kpo-46Qa;
+ Thu, 15 Oct 2026 15:05:42 +0000
+Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
+ helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98.2)
+ (envelope-from <roger@xenproject.org>) id 1xHN1Z-0000000ACri-46Jz;
+ Thu, 15 Oct 2026 15:05:42 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,162 +41,101 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792076395; x=1792681195; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=XiC6iKf8InCNIMdR3pbpvRu5cEG3BqEmjDO3duO5XaE=;
-        b=O/FSwEuDy6wwIWqdWvOYID/LMg+RpzmWQQTEYtyd4RH3ZcxNGrUguDQwdzMSpcywXE
-         GkuX0zDHNhBNgcVN5Mc2r6LJ+XHPbwH/T60TC1OFyVS/Lec49yYxCtQX2dGOsoAHeY9f
-         feMczWlNhB9q2TLC6OSC4X3jT1kBYyH431rrpUvVq1UZ5puaey831Xe2k0JtDqOwo8Ld
-         DNVHAsNhZSguq/4ld+rESxs53ugPEX0hAki7EbuxNibyq6VmtxBbShoEtv8kv1HuS2KM
-         F1bmbOLQflW+VBkP1UTVTsvWJkwVH3VYWTGWfJVkLxgvX70VYoHTI/AAFhEEJEPDf6DY
-         INWQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792076395; x=1792681195;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=XiC6iKf8InCNIMdR3pbpvRu5cEG3BqEmjDO3duO5XaE=;
-        b=g+pa80g9PkvWqwLSP8f7tHp0v87HyzZc81BjKrmhNqCSDg8//ziP4WQLZFKLcDyBYp
-         9Cg1lsJFv+VX2wXre4z39P7s7i3RGWwz66GYKjOU52+NXy1DF8ATCylaMS1AQCTHyk9w
-         /u+ZHmSMDa86pomgvJY5ej63gubuLt9On6xkCuqkrWTbhMhhxtuv3LbLWS0ZsyxZXK6w
-         kb0S/IHSzpzuR2Rw40wg2u5mZzbkwYmKG59RE1VI49kSY+dWQmntnYsWB4z3EHoYOgfr
-         Uw7tBMfSfOk8MpEeRD5i3bdhdG9JiWkIIKrkx3C/OVCOUUqVbOdUIaf5co5+nFU9g9yx
-         SgJQ==
-X-Gm-Message-State: AFq9FYI6HV+r57mlwsgwyFSc2HIkfJZlZV8ZTGEhQD8G0Mz5xo704lVG
-	VYh7JfdH6WN8Ikl7+Zx9//JuwJddNNkdrFAL0SLdcMsXcz7t3wwNi4n8Thfv4w==
-X-Gm-Gg: AYBFou22r7rTkIXLmu701rIxFdlcZAvsFCcNDUzEPLP88mnk/p3K/FAxmBEnuOuPV+I
-	KzlOAB2AWg6zZNjcePHzlQcq22vNhHFetQK8FsUH//VkIVV8hZKDmhgkF0wOOlNJj4W5jlkQMc9
-	QEuXcESK1EfTp5rwodiCXyp6RraA9/BU0uxwzJ0OGAqGYFRlrkJasas6vyAl6HNzTAk7QU3Chfg
-	UcIhWzDY6+NuU9KHYW1iSeCDcJ5M/vie9/823jU4XauJ/SZmq1u1gd1/fuIJksBM3WI8hcK7yt6
-	/5zVgMIwIBEBjNRQUctSxYwz1UKHiLk50A8/b8AoO9YeS9BN9oHNLxyOXlJi6+LJLqO2UirLsqa
-	t4tkzgLKymbBU4vhwxTVsV5nVpJnTdireGKXkYp3U0al3mklt8lCK8rjrtkjQ0fIhlkucuYxLWi
-	TC/kS2/u0yes7RwxGF+NSmCC1lu0d5BqWrHNRy4GtiVHzd3I7ckzwMXopUlgaG12ePDDX7oJ5pQ
-	q/6vUk8VbxPpfUr/fYhg05Sz3Nf0PdCUSF0euiLTDlMv5o=
-X-Received: by 2002:a05:6402:a0d6:b0:6ac:b861:dab3 with SMTP id 4fb4d7f45d1cf-6b17c296bf6mr14561014a12.39.1792076394815;
-        Thu, 15 Oct 2026 07:59:54 -0700 (PDT)
-Message-ID: <9943b1f4-1890-4917-ae39-bf9c70fc36c7@gmail.com>
-Date: Thu, 15 Oct 2026 16:59:53 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
+	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
+	bh=ekoeJp+Wvaix5G2pnhGBd8qXUrBUo9EXrfXRdQwy/tM=; b=lvxfBU7NUoF/KANRwWYTZXW0Cb
+	InXoBzm3TvYb21nr5SxcG9KvIaiXPDTaL+Zxz56WJhyn8oJ+A/RSncaAchQsEZISMQPory+KTD0V8
+	cZe75IC9GUklzX8hqKGK3KGZjw0vMSVg1D7h/VCGFXp3FaSxFf9XuKdgVJDa/1ZX0I9Y=;
+Date: Thu, 15 Oct 2026 17:05:36 +0200
+From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
+To: Jan Beulich <jbeulich@suse.com>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: Re: [PATCH 08/15] x86/PVH: split pvh_setup_acpi()
+Message-ID: <atDrwMtd7k6rEd89@Mac.lan>
+References: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
+ <d0f1a88b-66a0-4bf9-9dd2-ea0cc48bc3ae@suse.com>
+ <as5TyD0ZX1HnN578@Mac.lan>
+ <f79d68c4-271b-44a9-950f-a6a85f4ea7ff@suse.com>
+ <as9L5sT6SXfBWlkg@Mac.lan>
+ <791be732-4c7d-417a-8557-4f82ef62d0c0@suse.com>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 24/39] xen/riscv: add guest load emulation for trapped
- MMIO accesses
-To: xen-devel@lists.xenproject.org
-Cc: Romain Caritey <Romain.Caritey@microchip.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Zheng Zhang <zhangzheng@iscas.ac.cn>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <d4304a157181d8a8432b8f65f92019e0ead3bec7.1790779209.git.oleksii.kurochko@gmail.com>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <d4304a157181d8a8432b8f65f92019e0ead3bec7.1790779209.git.oleksii.kurochko@gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset=utf-8
+Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1792076395-1F6C877B-5594F23E/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 3200
+In-Reply-To: <791be732-4c7d-417a-8557-4f82ef62d0c0@suse.com>
 
-
-
-On 9/30/26 6:23 PM, Oleksii Kurochko wrote:
-> Implement emulate_load() on top of the decoding interface introduced by
-> the previous patch: fetch the trapped instruction, decode it, dispatch
-> the access to a registered MMIO handler via do_mmio(), write the result
-> back into the destination register and step over the instruction.
+On Wed, Oct 14, 2026 at 11:42:57AM +0200, Jan Beulich wrote:
+> On 14.10.2026 11:31, Roger Pau Monné wrote:
+> > On Tue, Oct 13, 2026 at 06:04:37PM +0200, Jan Beulich wrote:
+> >> On 13.10.2026 17:52, Roger Pau Monné wrote:
+> >>> On Mon, Oct 12, 2026 at 10:23:16AM +0200, Jan Beulich wrote:
+> >>>> All E820 manipulations want to happen before the initrd is placed, or else
+> >>>> pvh_steal_ram() may steal from the tail part of it. As a second step,
+> >>>> split placing ACPI data from actually populating it.
+> >>>
+> >>> Would it be less intrusive to duplicate the memory map (like it's done
+> >>> in a change ahead of this one), and subtract the kernel and initrd
+> >>> region from that memory map, then use it as the basis for
+> >>> pvh_steal_ram()?
+> >>>
+> >>> We could adjust/replace pvh_add_mem_range() so it allows changing
+> >>> regions from RAM to other types.  That would seem to be less churn
+> >>> overall.  Maybe you did already consider this and found further
+> >>> problem with this approach that I'm failing to see?
+> >>
+> >> No, I didn't try that route. In fact despite the order now this patch
+> >> (and maybe also the VMX one) pre-dates the E820-copying one. The one
+> >> aspect I consider problematic with the suggested alternative is that
+> >> then two E820 maps need updating: The one with kernel (not sure about
+> >> initrd; see below) subtracted out, and the one we actually mean to hand
+> >> to Dom0.
+> >>
+> >> As to overall churn: I'm not sure which one would cause less. Certainly
+> >> the patch here would remain largely unaltered, as the splitting is
+> >> going to be necessary no matter what.
+> > 
+> > I'm possibly missing something, but the splitting won't be strictly
+> > necessary?
+> > 
+> > We could do:
+> > 
+> >  * Populate p2m
+> >  * Place kernel
+> >  * Place ACPI (also VMX metadata)
+> >  * Place initrd
 > 
-> Xen dispatches MMIO synchronously to an in-hypervisor handler, so unlike
-> KVM RISC-V there is no userspace exit/return step and no equivalent of
-> the kvm_io_bus_read() / KVM_EXIT_MMIO / kvm_riscv_vcpu_mmio_return()
-> split; the result is consumed in place.
+> The goal is to directly map the initrd. That direct-mapping (or at least
+> the determination of where it is to go) needs to happen before populating
+> the (rest of) the P2M (as otherwise this would populate the respective
+> part of the P2M). Else we'll continue to see the problem that Marek
+> reported. That is:
+
+Bah, yes, sorry, I keep forgetting we must not populate the initrd
+region because we are directly mapping it.  I find it tedious to have
+to first do all the allocations and then do a second call to actually
+copy the data, but alas, I don't see another way to deal with this.
+
+>  * Place kernel
+>  * Place ACPI (maybe VMX metadata)
+>  * Place initrd (possibly direct-mapping it)
+>  * Populate P2M
+>  * Load kernel and initrd
+>  * Fill ACPI (maybe VMX metadata)
 > 
-> Sign extension is done here rather than in the handlers: a signed load
-> is normalized by a shift pair, so a handler need only report the value
-> it read.
-
-This part of commit message should be updated. Suggestion look below...
-
+> (Of course the order of the latter two items doesn't matter much.)
 > 
-> At the moment vINTC is the only backend registered with the MMIO
-> dispatch, so in practice this only covers vINTC traps. An access which
-> no handler claims currently crashes the domain; injecting an access
-> fault into the guest instead is left for later.
-> 
-> Signed-off-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> ---
+> Even if we didn't direct-map the initrd along with placing it, we'd
+> still need to tell populate_p2m() to skip that region. I.e. the split
+> between placing and loading/filling would remain.
 
-[...]
+Hm, yes, the placement of the initrd blocks populating the p2m, and
+cannot be decided until we have positioned the ACPI stuff.
 
->   static int emulate_load(const struct guest_fault *gf)
->   {
-> -    /* Transient, until the helpers gain their users. */
-> -    (void)advance_pc;
-> -    (void)guest_xlen;
-> -    (void)guest_gpr;
-> -    (void)insn_fetch_faulted;
-> -    (void)decode_ldst_insn;
-> +    struct cpu_user_regs *regs = gf->regs;
-> +    mmio_info_t info = { .is_write = false };
-> +    struct decoded_insn di = {};
-> +    unsigned int shift = 0;
-> +    int rc;
->   
-> -    return -EOPNOTSUPP;
-> +    /* A fault taken re-reading the instruction is redirected to the guest. */
-> +    if ( insn_fetch_faulted(gf, &di) )
-> +        return 0;
-> +
-> +    if ( !decode_ldst_insn(&di, guest_xlen(regs)) || di.is_write )
-> +        return -EOPNOTSUPP;
-> +
-> +    if ( !di.is_unsigned )
-> +        shift = BITS_PER_BYTE * (sizeof(info.data) - di.len);
-> +
-> +#ifdef EMULATE_LOAD_DEBUG
-> +    gdprintk(XENLOG_DEBUG, "pc=%#lx, addr=%#"PRIpaddr", len=%u, shift=%u\n",
-> +             regs->sepc, gf->gpa, di.len, shift);
-> +#endif
-> +
-> +    rc = do_mmio(&info, gf->gpa, di.len);
-> +    if ( rc )
-> +        return rc;
-> +
-> +    /* A load into x0 discards its result. */
-> +    if ( di.reg )
-> +        *guest_gpr(regs, &di) = (long)(info.data << shift) >> shift;
+I would really like to find a way to avoid this split, but I don't
+think it's possible.
 
-It would be more correct to have here:
-
-     shift = BITS_PER_BYTE * (sizeof(info.data) - di.len);
-     ...
-     if ( di.reg )
-         *guest_gpr(regs, &di) = di.is_unsigned
-                                 ? (info.data << shift) >> shift
-                                 : (long)(info.data << shift) >> shift;
-
-and update the commit message part "Sign extension is done here…" to:
-
-Sign and zero extension are done here rather than in the handlers: a
-shift pair drops whatever lies above the access width in the value read
-and, for a signed load, sign-extends it, so a handler need only report
-the value it read.
-
-> +
-> +    advance_pc(regs, di.insn_len);
-> +
-> +    return 0;
->   }
->   
-~ Oleksii
+Thanks, Roger.
 
