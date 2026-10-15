@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 67789CC6B34
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 12:33:23 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1450455.1665921 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id C8179CC6B34
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 12:55:38 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1450488.1665950 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKdy-00051l-RP; Thu, 15 Oct 2026 12:33:10 +0000
+	id 1xHKzK-0002l5-OU; Thu, 15 Oct 2026 12:55:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1450455.1665921; Thu, 15 Oct 2026 12:33:10 +0000
+Received: by outflank-mailman (output) from mailman id 1450488.1665950; Thu, 15 Oct 2026 12:55:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKdy-00051e-Oc; Thu, 15 Oct 2026 12:33:10 +0000
-Received: by outflank-mailman (input) for mailman id 1450455;
- Thu, 15 Oct 2026 12:33:10 +0000
+	id 1xHKzK-0002ky-Ke; Thu, 15 Oct 2026 12:55:14 +0000
+Received: by outflank-mailman (input) for mailman id 1450488;
+ Thu, 15 Oct 2026 12:55:13 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xHKdy-00051Y-Ci
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 12:33:10 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xHKzJ-0002ks-7j
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 12:55:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHKdx-008uJA-Pc
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 14:33:09 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xHKzI-008zPA-KW
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 14:55:12 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ad0c805-bab6-0a2a0a5309dd-0a2a450682dc-2
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 14:33:09 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad0cd2d-bab6-0a2a0a5309dd-0a2a4503978c-14
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 14:55:12 +0200
+Received: from [209.85.128.47] (helo=mail-wm1-f47.google.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ad0c805-195a-0a2a45060019-d1558035e90f-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 14:33:09 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-49ff680331aso22559235e9.3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 05:33:09 -0700 (PDT)
+ id 6ad0cd30-fae8-0a2a45030019-d155802fe96e-3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 14:55:12 +0200
+Received: by mail-wm1-f47.google.com with SMTP id
+ 5b1f17b1804b1-49ff680331aso22866375e9.3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 05:55:12 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48de0ac37acsm18536250f8f.34.2026.10.15.05.33.08
+ ffacd0b85a97d-48de0aaaaebsm18905217f8f.14.2026.10.15.05.55.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Oct 2026 05:33:08 -0700 (PDT)
+ Thu, 15 Oct 2026 05:55:11 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,57 +54,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1792067589; x=1792672389; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1792068912; x=1792673712; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=nvF0af+VuEpF2w4gUxax4o5sROQ0UEvX8+kiusy4yc4=;
-        b=ReMd+vmRBBD/WzFPg+WO+Lp6fS7IDlH5bv+F/M0veom+NkZZwD6mLy71bsadu0Boi0
-         xGzMwUq7FV8HftzKCmqSdjcKq66EbpahzhRfdnA5PYKFywKQwonr/KtY9G74JLE3+I+B
-         3GVKhqKvqEhHHxczLgX031G0QLd3serPAeZX5KQO5+NlH+6AIhuB2JYK25J75L3pccMf
-         B0iYHjn34ULiWo2/9HsEZH5dgUc1UTI8DY+hA3J9QtwAIPmDue29hysINioeKkZ1/J7g
-         zWV28gTKrC3qUsC+GsT/dxYvsYeUfIg5KhqGPtPVWRWybxeWaYwXA3AX/C7bP5jOeTWY
-         82+g==
+        bh=2EKUabh9FMcJ3nXmTIrVl/9Lb0v92hc53ZeYGVJrSt8=;
+        b=XtIUsBVOssKV6tFc/vd4vkk5+3qmbaS9/4W5v479yFSw3loM5722WElFr2NLAuvT5I
+         vIcsQUwVRYM2yCvsKHgHV02OIybRYQUqaztCPQ0FI0MhYaRjIjAM/jYdRbt8G6idLkVZ
+         X6JDKJ7mDfv/VK77ru/xrZZ3iNILVI1B0jju7NR/syCxqvA0KSLIeOqkxeoGnhNN3Mp5
+         oqFDzQgXJ4fFLUZxJltNQsuFjwV5FB25HpS94DAVEpdlcfkooielVkyrMcrG8H6Sc370
+         uByuOBVF926h0aJ2X+vNRMk6nACNK66zbUNyUABtUcmM18Tyts1xp1l3xhtYeESyWU3a
+         ld1w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792067589; x=1792672389;
+        d=1e100.net; s=20260707; t=1792068912; x=1792673712;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=nvF0af+VuEpF2w4gUxax4o5sROQ0UEvX8+kiusy4yc4=;
-        b=OvCn6vLi1wsef3MyWYo+cPmJ/A0L45a88lG8ICSm6S6Oe73Y5I97HJtDTM/LcAdBwE
-         w/pVURBndXltW7RQdlMJNPClUSQH8yxFp7Flnz8wyN3IuoZVD8IYMBOIH1cgpal5/hok
-         B1Yc7DzYXO9e41Ilg3TZC7xDBvzcZHrYMdf5JY+kTY2NnEPrHPlfFjQiPCxf6kmgo3t5
-         vTqdhuv2NQRD+gCdCW6X0klhrtfyIkKoMAoGxESrGgfpQUfFxMEhc6jWN6vTHkUFK8El
-         eLKXHE74h7jASnYqZUVyc9wppEx/CejEAMjUb4iL6QWnLwPoV3vjsqoFUlBMSaST2GEH
-         eKkA==
-X-Forwarded-Encrypted: i=1; AKwUvBwKejE0INitfqJcuPe2yTgucloBkoidjJlJzRWTNrLGa15SxYEMHpsjTxYcTSmzlA+1qrS3MytTUqo=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYImgvMrWllugNhGBj9Cjcca9cbu3s1cp6H9xNlv5oZMxDwaUhYX
-	UEwVzcHAGhuh4v7p2s/kmyp2dDrfcU0ZFbma4F0AWA3Uyj2bqdCag16rgquiq4LDpA==
-X-Gm-Gg: AYBFou0XVtYam64DizTZSggADy0Ez+AZHFQKTUQMXzLxl9gRfXfTmMp8tAACD78HSPD
-	CdJEHtZytgXXmiVkR0qF9LMKEPKsa1PfXYpRYKhTEMxwrA2oOcwxGJei0/e67LrM/OpuUTyp1kM
-	Xvo68ncOhiUYM1N7t3hKilvBOIo+BReyyJlL/gZFLygzTge99yCLvyCpim9mVxCh8Uas9K/+WyD
-	shE7PhwihF7KylrxGhQcEbUsK/qq1wIIgaE0aaf9WE0tifjHN8rTK8OnX1ztLfams3HrUqhepFa
-	9Y76Teha68/dN94HxG1EJ9cq8Wg1LMYDs9OSDWTb7/0eVJpcZBcr85alFNXsQFsmk2DzL98hrLD
-	vntfGdet5Af00c5cdzTT/pGEWxB6sjqMTKjelZp/13jZo4JZZlDx5+jPLv4gUfAE+iKFfXv8ISS
-	fXvpAuYLnopE/gyO6QY7Dif6VHFF9rHY7k99z5tI1ggK/VM1+sx4/5OK6guMIB2GIx+0gYdoHTJ
-	Kbd9rwWkPMRy/muXL9mbcHvX/9uRqVscnlJbfthph/9qy/wMJeig7rnKiSVs+E=
-X-Received: by 2002:a05:600c:8509:b0:4a1:7d9b:d4ae with SMTP id 5b1f17b1804b1-4a18e47a8cdmr359963735e9.5.1792067588776;
-        Thu, 15 Oct 2026 05:33:08 -0700 (PDT)
-Message-ID: <d9ae0ea1-912f-4533-b50b-839eda7b5f80@suse.com>
-Date: Thu, 15 Oct 2026 14:33:07 +0200
+        bh=2EKUabh9FMcJ3nXmTIrVl/9Lb0v92hc53ZeYGVJrSt8=;
+        b=lv3RQ43py68mZcwQKFD5IcQ3fVQJzQs6NZ0kAdn0nxoQ68cPy5Lm48c+MZQwjdaU4Y
+         k04OBPKtgdgeyV9VfOU4iSWSwRJb2hbQyMZmE0xHMtmlK/R3dGmm1LY8qu/FI07c37K1
+         egBvEpVrQE6Sivrov8ZcmjpvQAcvdIiGbKf7P7IUvrMxClJTN1MMVthMrY5AcT2Dj78v
+         GeVehvZyR5oNpGug8lW8M+rIKA3wZQFpMc/Ip6MF8Z7cotQKlPFwF8H45+xAehOS7yHS
+         C5nlo8Hifp2shE74Egvyv5eCV1J9NCUcJGhNmgiwcyVug2UGrvg99WiuDjf44khkIrb/
+         4TmA==
+X-Forwarded-Encrypted: i=1; AKwUvBzJ2pkX4w9lI/49n7gm2OQjhF0XyiHAyl8X2GATJuNpyaGamNZIAr4GmMCL6PyK2vWCsVdCSKqv3iE=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKFSZUarL5U/vVwyVjUqtUJDKrtMehb7jY4WFTDIQ6haby5lg5f
+	40B9n0ytzYk3NxXI2hxut6RXxkTIgNQQarA+6oaJTHDV+E25uGwhHySBJBD8N1vsqg==
+X-Gm-Gg: AYBFou2pX1rSCs7lDRgJ4DrpiRg8qngJKzCNsqsL55ifSUcbrS0r+elkLjTMWCefdPE
+	hcBi+lmHyeP1OCFRVGLTQjQoZI1IJl8I4PJ7ssIFxeLB9asO60a9YL+CI3Fmr25rkK8eEpuYs9k
+	UkrArtaMGWDu3SWniKrQwRbNIZtx8gpeKhEjQv2jw0Bj4loiIoY4+8OokW4pQ3SqekJCDtbI3kf
+	EpxlqtO6uM9x6oEKB42w0g3HU9IPJB1mIntyXritcsTG8Qye2PD+i7mR29n1ONXq7YS4U1v75Ee
+	CJPpcWrRKw4G8gDLsWM5RoCnJKMpWUH6DWB/N3XlP+E6c9BPs3r7rHhl4P9/lyskk+BA6GatFLb
+	AnuEB4OmN0NmZ5DrBiLDbK6PGaE+yT0nprO6qc16yi5+3dqNXD/zJYn65Dv71/H8vPzI5GHKKuk
+	F7PG2Y9+8+0wcYzDJ/TdBaBpwMEJ9pjHaK/Q0uai+Dr8W8A/seFhmN10N1gJDSZzdn4+oPWG/0s
+	xlHDvnU68sZlKuQsqU1TMA8zgfKAj1BoiADBsD/19LAQ39BDzuB053yLF0CMAw=
+X-Received: by 2002:a05:600d:82c1:b0:4a1:6a10:4dc8 with SMTP id 5b1f17b1804b1-4a1bd175fa1mr81604925e9.28.1792068911984;
+        Thu, 15 Oct 2026 05:55:11 -0700 (PDT)
+Message-ID: <3d08be0a-11a3-4152-acc9-8ea66451466d@suse.com>
+Date: Thu, 15 Oct 2026 14:55:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 2/2] SUPPORT.md: State that ATS is unsupported
-To: Jason Andryuk <jason.andryuk@amd.com>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20261014135143.34220-1-jason.andryuk@amd.com>
- <20261014135143.34220-3-jason.andryuk@amd.com>
+Subject: Re: [BUG] libxl: `xl shutdown ""` powers off the host
+To: msd-xenproject.org@msd.im
+Cc: anthony.perard@vates.tech, jgross@suse.com, xen-devel@lists.xenproject.org
+References: <f3903a460fe11aed021d962dcc1d0ac6b30286dd@msd.im>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,28 +125,100 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261014135143.34220-3-jason.andryuk@amd.com>
+In-Reply-To: <f3903a460fe11aed021d962dcc1d0ac6b30286dd@msd.im>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-16d1c6/1792067589-FD40B77B-604E36D5/10/78276251493
+X-purgate-ID: tlsNG-33051d/1792068912-76CF84E9-EAF7357A/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 563
+X-purgate-size: 3002
 
-On 14.10.2026 15:51, Jason Andryuk wrote:
-> --- a/SUPPORT.md
-> +++ b/SUPPORT.md
-> @@ -96,6 +96,9 @@ For the Cortex A77 r0p0 - r1p0, see Errata 1508412.
->      Status, ARM SMMUv3: Tech Preview
->      Status, Renesas IPMMU-VMSA: Supported, not security supported
->  
-> +PCI Address Translation Services (ATS), enabled by the ats= command line
-> +option, is not security supported.
+On 15.10.2026 13:54, msd-xenproject.org@msd.im wrote:
+> Hi,
+> 
+> An empty domain qualifier seems silently resolved to domain 0, 
+> so a command such as :
+> 
+>     xl shutdown ""
+> 
+> does not fail with an error: it shuts down dom0, which powers off the
+> whole host.
+> 
+> Impact
+> ------
+> 
+> We ran `xl shutdown ""` on a Debian host running Xen 4.20. 
+> Instead of printing an "invalid domain identifier" error, xl asked dom0 to shut down, and the
+> physical server powered off, taking every guest down with it.
+> 
+> The same input is easy to produce by accident, for example from a shell
+> script with an unset variable:
+> 
+>     xl shutdown "$VM"     # VM is empty or unset
+
+I agree this isn't good behavior.
+
+> The diagnostic and patch is proposed assisted by Anthropic Claude. 
+> I haven't tested it, it was generated when I was trying to understand if the shutdown behavior is normal.
+> I just hope it will help you understanding faster.
+> 
+> 
+> Cause (Anthropic Claude)
+> ------------------------
+> 
+> In tools/libs/light/libxl_utils.c:
+> 
+>     int libxl_domain_qualifier_to_domid(libxl_ctx *ctx, const char *name,
+>                                         uint32_t *domid)
+>     {
+>         int i, rv;
+>         for (i=0; name[i]; i++) {
+>             if (!CTYPE(isdigit, name[i])) {
+>                 goto nondigit_found;
+>             }
+>         }
+>         *domid = strtoul(name, NULL, 10);
+>         return 0;
+>         ...
+> 
+> With name == "", the loop body never runs, so the string is treated as
+> "all digits". strtoul("", NULL, 10) returns 0 without any error
+> detection, and the function returns success with *domid == 0.
+> find_domain() in tools/xl/xl_utils.c then sees rc == 0 and carries on
+> with domid 0.
+> 
+> Every xl subcommand that resolves its argument through find_domain()
+> (destroy, reboot, pause, ...) is affected in the same way.
+> 
+> 
+> Proposed fix (Anthropic Claude)
+> -------------------------------
+> 
+> Reject the empty string up front, using the same error code as
+> libxl_name_to_domid() already uses for an unknown name.
+> 
+> --- a/tools/libs/light/libxl_utils.c
+> +++ b/tools/libs/light/libxl_utils.c
+> @@ -92,6 +92,10 @@ int libxl_domain_qualifier_to_domid(libxl_ctx *ctx, const char *name,
+>                                      uint32_t *domid)
+>  {
+>      int i, rv;
 > +
->  ### ARM/GICv3
->  
->  GICv3 is an interrupt controller specification designed by Arm.
+> +    if (!name[0])
+> +        return ERROR_INVAL;
+> +
+>      for (i=0; name[i]; i++) {
+>          if (!CTYPE(isdigit, name[i])) {
+>              goto nondigit_found;
 
-Wouldn't this better go in the "x86/PCI Device Passthrough" section?
+Instead of returning a error, this case may better be wired to also invoke
+libxl_name_to_domid(). Unless of course it is well-defined that domain names
+must be of non-zero length.
+
+I'd also suggest to go further and delete the loop. Why would we re-do what
+strtoul() is going to do anyway? All we need to do is pass non-NULL as its
+middle argument, and then look at what we get back.
+
+Care to submit an actual patch?
 
 Jan
 
