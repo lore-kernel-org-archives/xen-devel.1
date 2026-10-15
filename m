@@ -4,43 +4,35 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 39F95CC6B34
-	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 12:23:08 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1450432.1665903 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id CFB6ACC6B34
+	for <xen-devel@archiver.kernel.org>; Thu, 15 Oct 2026 12:30:23 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1450445.1665912 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKTy-0000iy-Oi; Thu, 15 Oct 2026 12:22:50 +0000
+	id 1xHKb0-0003Xx-F5; Thu, 15 Oct 2026 12:30:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1450432.1665903; Thu, 15 Oct 2026 12:22:50 +0000
+Received: by outflank-mailman (output) from mailman id 1450445.1665912; Thu, 15 Oct 2026 12:30:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHKTy-0000ir-LV; Thu, 15 Oct 2026 12:22:50 +0000
-Received: by outflank-mailman (input) for mailman id 1450432;
- Thu, 15 Oct 2026 12:22:48 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xHKTw-0000hg-La
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 12:22:48 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHKTw-007FiC-2M
- for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 14:22:48 +0200
-Received: from [10.42.69.11] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ad0c596-8faa-0a2a0a5109dd-0a2a450bda92-14
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 14:22:47 +0200
-Received: from [209.85.221.45] (helo=mail-wr1-f45.google.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ad0c597-b7e8-0a2a450b0019-d155dd2dd444-3
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 14:22:47 +0200
-Received: by mail-wr1-f45.google.com with SMTP id
- ffacd0b85a97d-48c02782159so3201731f8f.0
- for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 05:22:47 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48dfa9a197csm220358f8f.27.2026.10.15.05.22.46
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 15 Oct 2026 05:22:46 -0700 (PDT)
+	id 1xHKb0-0003Xq-Bs; Thu, 15 Oct 2026 12:30:06 +0000
+Received: by outflank-mailman (input) for mailman id 1450445;
+ Thu, 15 Oct 2026 12:30:04 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <gwd@xenproject.org>) id 1xHKay-0003G9-CN
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 12:30:04 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xHKay-00000006hin-2CXJ
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 12:30:04 +0000
+Received: from mail-lj1-f179.google.com ([209.85.208.179])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xHKax-00000005e0z-3FhW
+ for xen-devel@lists.xenproject.org; Thu, 15 Oct 2026 12:30:04 +0000
+Received: by mail-lj1-f179.google.com with SMTP id
+ 38308e7fff4ca-3a980c01033so15622331fa.3
+ for <xen-devel@lists.xenproject.org>; Thu, 15 Oct 2026 05:30:04 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,145 +44,204 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1792066967; x=1792671767; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=od4CMuCpgRUYLBBFZ1xeREuCkvWHH3KnFW4kQOV6tU8=;
-        b=gkhKMyf//P7GJC82ulc3C+Jm9zEAklPwBXr82CWf0Xz4U4DZ1grwCa5H8lxbHdR7SD
-         3+hZBY1l4/hDK1CMyKgkiS9v0CTKAXUOOYYkDaiYiqyhyh4qvvvqGSxFZO+ohvVuLGb5
-         GrfpX0zE5ASPCAsIJQQE+jj+5x2CvehUpZ+cuw8XU66IVCNDE5brL9Dn1LZr7CthhtCt
-         K2bjVjUwu9NsgBTQ1Vpg9ui11eEZU2Kd5fN5oo4DJHYCdeFfBon/jLUyxd0WgJLnmZhO
-         0HDfXFcic6Zds6rBKZ4HEWjNUZE3OZabToYILkVJEZdtAgzQhpUip/SORwPV47hRkZhb
-         R4kA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792066967; x=1792671767;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=od4CMuCpgRUYLBBFZ1xeREuCkvWHH3KnFW4kQOV6tU8=;
-        b=TY5jlFl9jP9Srd77fY0kkSQnSuYJq/DWFr2PNw253baA2r/NNErlFpeujvSumRP5k/
-         PBD0ySof5GghS8flDBSdN8/cTk/ETNSjY9KtWOK172IbnDnveyNuqMfQcQGGEc4d1I88
-         wBBnytXvIDfg19Cr1gyRzOgaq3nKUZH6+J80fDju7bfYBS78ZHlLyKBcrGEk4sp71HvN
-         tTd73jfh9brhR9HktB3tWnzvJlltkRjomG5xK+Qg11wCJWJa2U7HKJ7G8v3ZK7UXfA+Q
-         o5PGbF0Hcfn9A8KR1lzX+7fSYmozKF3B8Pg2XV6DCtAxJ7NTAvp0CDfB5rImZ31Vvl5j
-         1gOQ==
-X-Forwarded-Encrypted: i=1; AKwUvBzNdg7b2RMcyHZ+UpxeYwxR/Ag235BJEoWj8ccEAuuY8Y97TIQ+/YKuv0BCDaihppCJvijPmKVS4wU=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIgfwaDEeXC6eV3CV+vV57fk6CGetjH8RrnH5JSR0YS/zK7bw8K
-	ut0SlVRYrFZ4oY8EFJm27clONf7N2WEe0pTEDMKaJDFYrumMrY0X4lQonT6m45G8Uw==
-X-Gm-Gg: AYBFou2RYs5i2uBfnomr9wZ8xgs0AZAibTOS3Aj5VqtJoQOV3dPNQLr0xXUv10nH6Rf
-	/w3Zjs/IZ8AWixcxqhyGSRI+32Ewy/billjUgpmS31w1TH5i0V4saoJxRLfm7fzVBd1ty08hjjV
-	rwiSOkEQuBGBhEBgjP2G3MfnQb08m/RJPKPHkksU+oXqqX1eH0lfv0UCIqCfgIIDuaBOB1I4mpy
-	4oWN9mu8qo0DVtXG/b0pphu0Ivm6BSjMqDS6M420wFFPp10ugh5wIUrAg6t9iKyEIpQDd9Yrbgj
-	3sKRb0Oa9KPraXsYT/hceblMQdTjNoWgwhsjYoNYRYCY4p7QcNIKc70cuGfDjGmL1ho+20knbWm
-	vMAC2dlDkMcMSNcKok8Yhiv19IVqrCUavNrmU74jbyhH+4R0fL3Y5ZLCVmyQUriCSvbrTR54FoE
-	3vGob+lQSmj7DXaM27bdpEqvXIyhmstYUaqH5ebcA+LmkYTPM7GTrs6HCoerXTuGfEYq5eVe4t9
-	P0ZrU9sK35DXycAGBFLn8Z8ZaEllJY8yywk0chVMnDahHFB1KtzTd1H0EvjA88=
-X-Received: by 2002:a05:6000:4904:b0:48a:f0cd:8712 with SMTP id ffacd0b85a97d-48dbacf4734mr39643067f8f.50.1792066967357;
-        Thu, 15 Oct 2026 05:22:47 -0700 (PDT)
-Message-ID: <5a4114ad-5c5f-4da8-90ab-1fca04c9afe4@suse.com>
-Date: Thu, 15 Oct 2026 14:22:46 +0200
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
+	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
+	bh=3vBMeMWiS3ioV1NAkGSXr5rYMbTFgaV/MezvaVgnb9c=; b=cQ5uqwtl8Fy3KOG4dwN+bhC52o
+	mst7Sj4ACRRzy/EvWUcpEL4dRfMgX+0RVBMpT/OgtkGEUVtI9izenQUtU8lTRDdzIBlkuGapaQjVS
+	e2UwzX1X9ioxlEMxBZyXQk+sSh1h+f9HD3TDt+AiAOf34FOk7mczSpCkJPKXkIw3sbjU=;
+X-Gm-Message-State: AFq9FYKrWp/NLfo/ikxxSqHfgf896yt347y7fPhOdELoFYwDcYYaN26e
+	w5JJQf/iGff5OT30A9gXRbmmz15gSCXs7qWQfa7nai1G0e4b5awhHGvFa++Jgrf7cPhsjS2S0i7
+	+gI19wa7ZW+hSHN9Au9dVDFvB0k6cI3g=
+X-Received: by 2002:a2e:a9a3:0:b0:3a2:f233:5c6e with SMTP id
+ 38308e7fff4ca-3a9c515d16dmr45999451fa.6.1792067403076; Thu, 15 Oct 2026
+ 05:30:03 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 2/3] x86: use __builtin_popcountl() for arch_hweightl()
- when available
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Teddy Astie <teddy.astie@vates.tech>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Jason Andryuk <jason.andryuk@amd.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <b6ae837e-293a-4c06-aefa-02a5b9cd2c3f@suse.com>
- <9e48f405-4e99-4258-921e-2948f0d6754d@suse.com>
- <716a13d4-9fd8-41bf-b475-08d0747ff442@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <716a13d4-9fd8-41bf-b475-08d0747ff442@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1792066967-1AEDE9EA-F4EA1FBD/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 1627
+References: <20261007104051.48841-1-gwd@xenproject.org> <20261007104051.48841-18-gwd@xenproject.org>
+ <asietfC0LX4Z7xI7@Mac.lan>
+In-Reply-To: <asietfC0LX4Z7xI7@Mac.lan>
+From: George Dunlap <gwd@xenproject.org>
+Date: Thu, 15 Oct 2026 13:29:51 +0100
+X-Gmail-Original-Message-ID: <CAFLBxZZ-=8oHobSn-Dwd-zE_DLstrkxz3cSuu2p9eOPoEFdJ+Q@mail.gmail.com>
+X-Gm-Features: AclHuK_ShVXtfeidRAr9_-zrO0gTonddJQSrHPAbFi4M-kgGKW745GrxRiBLh_o
+Message-ID: <CAFLBxZZ-=8oHobSn-Dwd-zE_DLstrkxz3cSuu2p9eOPoEFdJ+Q@mail.gmail.com>
+Subject: Re: [PATCH v3 17/18] x86/mm: run guest contexts on the sparse
+ directmap view
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
 
-On 15.10.2026 12:37, Andrew Cooper wrote:
-> On 15/10/2026 10:10 am, Jan Beulich wrote:
->> Use the respective compiler builtin when available; no need to play any
->> alternatives games in such configurations.
->>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->> ---
->> v4: Re-base (re-do).
->>
->> --- a/xen/arch/x86/include/asm/bitops.h
->> +++ b/xen/arch/x86/include/asm/bitops.h
->> @@ -500,6 +500,9 @@ static always_inline unsigned int arch_f
->>  
->>  unsigned int arch_generic_hweightl(unsigned long x);
->>  
->> +#ifdef __POPCNT__
->> +#define arch_hweightl __builtin_popcountl
->> +#else /* !__POPCNT__ */
->>  static always_inline unsigned int arch_hweightl(unsigned long x)
->>  {
->>      unsigned int r;
->> @@ -525,5 +528,6 @@ static always_inline unsigned int arch_h
->>      return r;
->>  }
->>  #define arch_hweightl arch_hweightl
->> +#endif /* __POPCNT__ */
->>  
->>  #endif /* _X86_BITOPS_H */
->>
-> 
-> This is needlessly complex.
+On Fri, Oct 9, 2026 at 8:58=E2=80=AFAM Roger Pau Monn=C3=A9 <roger@xenproje=
+ct.org> wrote:
+> On Wed, Oct 07, 2026 at 11:40:50AM +0100, George Dunlap wrote:
+> > In init_xen_l4_slots(), if d->arch.sparse_dmap is set, point the
+> > directmap L3 at the sparse view.
+> >
+> > d->arch.sparse_dmap is decided at domain creation: PV domains all have =
+a
+> > mapcache, HVM domains need per-vCPU page-tables for one.  No option ask=
+s
+> > for the sparse view yet.
+>
+> Is it strictly needed to tie the sparse directmap to having a per-vCPU
+> mapcache on HVM?  AFAICT HVM domains could also use the classic
+> per-domain mapcache.
 
-I don't mind doing it this way. (It's less complex in source then, but more
-complex for the compiler.)
+They could, if it were implemented.  I haven't implemented it, and
+didn't plan to; so until it's implemented, the sparse view needs
+vcpu_pt on HVM domains.
 
-Jan
+> > The sparse view becomes active once dom0 is built, before it first runs=
+:
+> > dom0's construction runs on the full directmap, which it needs, and its
+> > root page-tables so far (a PV dom0's first L4s, a PVH dom0's monitor
+> > tables) are switched over then.  A PV dom0 booted with dom0=3Dshadow is
+> > switched as well: shadow mode is enabled only later, from a tasklet, an=
+d
+> > its shadow L4s then get the sparse view from init_xen_l4_slots(), as fo=
+r
+> > any PV domain entering shadow mode.  Anything built later gets the
+> > sparse view from init_xen_l4_slots().  The sparse view's slots are
+> > marked NX at activation, as the full directmap's slots are.
+>
+> Is NX worth mentioning here?  The expectation is that the sparse dmap
+> slots will use the same attributes as the full dmap, and hence I
+> would focus on the differences (if any).
 
-> --- a/xen/arch/x86/include/asm/bitops.h
-> +++ b/xen/arch/x86/include/asm/bitops.h
-> @@ -504,6 +504,10 @@ static always_inline unsigned int
-> arch_hweightl(unsigned long x)
->  {
->      unsigned int r;
->  
-> +    /* If compiled with a suitable baseline ISA. */
-> +    if ( IS_ENABLED(__POPCNT__) )
-> +        return __builtin_popcountl(x);
-> +
->      /*
->       * arch_generic_hweightl() is written in ASM in order to preserve all
->       * registers, as the compiler can't see the call.
-> 
-> 
-> ~Andrew
+Sure, we can drop that.
 
+> > @@ -1743,6 +1744,10 @@ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t =
+l4mfn,
+> >                 (ROOT_PAGETABLE_FIRST_XEN_SLOT + slots -
+> >                  l4_table_offset(XEN_VIRT_START)) * sizeof(*l4t));
+> >      }
+> > +
+> > +    /* The domain's contexts may run on the sparse view of the directm=
+ap. */
+> > +    if ( sparse_dmap_active && d->arch.sparse_dmap )
+> > +        sparse_dmap_install(l4t, short_directmap);
+>
+> Instead of doing the copy of the full directmap from the idle page
+> tables, and then rewriting, won't it be simpler if the copied
+> directmap was the correct one right away rather than doing a fixup
+> afterwards?
+
+Yes; I'll rewrite this.
+
+> > @@ -437,3 +439,130 @@ void __init sparse_dmap_init(void)
+> >
+> >      printk(XENLOG_INFO "Sparse directmap: %lu pages mapped\n", mapped)=
+;
+> >  }
+> > +
+> > +/*
+> > + * Point the directmap slots of the root page-table @l4t at the sparse=
+ view.
+> > + * Every slot it covers gets its L3, whatever the full directmap has t=
+here,
+> > + * so that memory added later is covered too.  A PV root has guest slo=
+ts
+> > + * above; any other root loses the rest of the directmap, which the sp=
+arse
+> > + * view does not cover.
+> > + *
+> > + * Directmap mappings may be global, in either hierarchy.  Translation=
+s of
+> > + * the full directmap must not remain usable on a root carrying the sp=
+arse
+> > + * view: every CR3 write which can move a CPU from the one to the othe=
+r goes
+> > + * through switch_cr3_cr4(), which flushes what the old root left in t=
+he TLB,
+> > + * global entries included, before it returns.  The other CR3 writes, =
+which
+> > + * may keep global or PCID-tagged entries (_toggle_guest_pt(), XPTI's =
+entry
+> > + * and exit paths), switch between one vCPU's roots, which carry the s=
+ame
+> > + * directmap, or to XPTI's per-CPU root, which maps only this CPU's st=
+ack,
+> > + * IDT and TSS there.  Removals from the sparse view flush all CPUs, g=
+lobal
+> > + * entries included.
+>
+> IMO parts of this comment are likely out of scope here.  It's fine to
+> discuss about the flushing strategy in the commit message, however
+> doing so in a comment here, that's disconnected from the definitions
+> of switch_cr3_cr4() and _toggle_guest_pt() seems out of place.
+>
+> I would also avoid referencing function names in code comments: it's
+> fine to do so in the commit message, but it's likely those references
+> in comments will go stale as functions change names or disappear.
+> Commit messages are otherwise tied to a specific point in time, so the
+> context and the referenced functions are always accurate and it will
+> never go stale in the context is was committed.
+
+Yes, I've done a general pass to trim down comments.
+
+> > + */
+> > +void sparse_dmap_install(l4_pgentry_t *l4t, bool pv)
+> > +{
+> > +    unsigned int i;
+> > +
+> > +    ASSERT(sparse_dmap_root);
+> > +
+> > +    for ( i =3D l4_table_offset(SPARSE_DMAP_START);
+> > +          i < l4_table_offset(SPARSE_DMAP_END); i++ )
+> > +        l4t[i] =3D sparse_dmap_root[i];
+> > +
+> > +    if ( !pv )
+> > +        for ( ; i < l4_table_offset(DIRECTMAP_VIRT_END); i++ )
+> > +            l4t[i] =3D l4e_empty();
+> > +}
+> > +
+> > +static void __init sparse_dmap_install_mfn(mfn_t mfn, bool pv)
+> > +{
+> > +    l4_pgentry_t *l4t =3D map_domain_page(mfn);
+> > +
+> > +    sparse_dmap_install(l4t, pv);
+> > +    unmap_domain_page(l4t);
+> > +}
+> > +
+> > +/*
+> > + * Let guest contexts run on the sparse view.  Root page-tables built =
+from
+> > + * here on carry it (init_xen_l4_slots()); those of the domains built =
+so far
+> > + * (dom0, which has not run yet) are switched over here.  Its construc=
+tion ran
+> > + * on the full directmap, and needed to.
+> > + */
+> > +void __init sparse_dmap_activate(void)
+> > +{
+> > +    struct domain *d;
+> > +    struct vcpu *v;
+> > +    unsigned long va, mapped =3D 0;
+> > +    unsigned int i, switched =3D 0;
+> > +
+> > +    if ( !sparse_dmap_root )
+> > +        return;
+> > +
+> > +    /*
+> > +     * Nothing in the directmap is executed: as subarch_init_memory() =
+does
+> > +     * for the full directmap, mark the sparse view's slots NX, before=
+ any
+> > +     * root page-table takes a copy of them.
+> > +     */
+> > +    if ( cpu_has_nx )
+> > +        for ( i =3D l4_table_offset(SPARSE_DMAP_START);
+> > +              i < l4_table_offset(SPARSE_DMAP_END); i++ )
+> > +            l4e_add_flags(sparse_dmap_root[i], _PAGE_NX_BIT);
+>
+> Shouldn't this be done when the sparse directmap L4 are populated,
+> instead of here?
+
+In the meantime, this function has been removed; NX bit is now set in
+sparse_dmap_init(), and the rest of the code you comment in this
+function has been removed.
+
+ -George
 
