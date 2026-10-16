@@ -4,43 +4,39 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 30B9CCC6B38
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 15:49:31 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1452286.1667109 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 14A6CCCA46C
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 15:55:44 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1452296.1667119 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHkBP-0003kn-T4; Fri, 16 Oct 2026 15:49:23 +0000
+	id 1xHkHH-0006vn-HZ; Fri, 16 Oct 2026 15:55:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1452286.1667109; Fri, 16 Oct 2026 15:49:23 +0000
+Received: by outflank-mailman (output) from mailman id 1452296.1667119; Fri, 16 Oct 2026 15:55:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHkBP-0003kg-QD; Fri, 16 Oct 2026 15:49:23 +0000
-Received: by outflank-mailman (input) for mailman id 1452286;
- Fri, 16 Oct 2026 15:49:22 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xHkBO-0003ka-K6
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 15:49:22 +0000
+	id 1xHkHH-0006vg-Dl; Fri, 16 Oct 2026 15:55:27 +0000
+Received: by outflank-mailman (input) for mailman id 1452296;
+ Fri, 16 Oct 2026 15:55:26 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <peter.maydell@linaro.org>) id 1xHkHG-0006va-Np
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 15:55:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHkBN-006NcC-TV
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 17:49:21 +0200
+ id 1xHkHG-003OzI-4l
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 17:55:26 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ad24770-e002-0a2a0a5209dd-0a2a4504b49e-26
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 17:49:21 +0200
-Received: from [209.85.128.43] (helo=mail-wm1-f43.google.com)
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6ad248ee-e002-0a2a0a5209dd-0a2a4504c7e4-0
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 17:55:26 +0200
+Received: from [209.85.128.177] (helo=mail-yw1-f177.google.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ad24781-b57f-0a2a45040019-d155802bddda-3
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 17:49:21 +0200
-Received: by mail-wm1-f43.google.com with SMTP id
- 5b1f17b1804b1-4a1880e1bf1so1043185e9.1
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 08:49:21 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-67-71.play-internet.pl.
- [109.243.67.71]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48dfd409989sm6256682f8f.0.2026.10.16.08.49.20
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Oct 2026 08:49:20 -0700 (PDT)
+ (envelope-from <peter.maydell@linaro.org>)
+ id 6ad248ed-b57f-0a2a45040019-d15580b1e494-3
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 17:55:25 +0200
+Received: by mail-yw1-f177.google.com with SMTP id
+ 00721157ae682-8b06c0794cfso944527b3.0
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 08:55:25 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,97 +48,92 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=linaro.org header.i="@linaro.org" header.h="Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
+ARC-Seal: i=1; a=rsa-sha256; t=1792166124; cv=none;
+        d=google.com; s=arc-20260327;
+        b=TIiMO5lEN1dmHv0xtD+/ErNewTqPTOrt9/3Uc12JFxhsr41PnPMZqd8TawiLeIVaiR
+         vGhTMOEPrsL8Pl7m5AsGQixphRYApKzxhx3Mk1XQVUbkoJEsSLWagXOVAgwEwexl9ehE
+         eXrITCVEh01MJ4VJtpRFA1sy+FUzZd9qKvWIldRGC2xNH+SADMw04JuREqYhQug90v5e
+         f/r5GT6p0P+Z3Pqs92x1q9SzFRGMeC6JMssbuiSJ31nyMnm1WgpgiXrrQSVtUjNexGi0
+         B+X99dIk80ciXSbAAJ/I0QfQRTGtEEfVzTveTzwVSBgQQhbSJfLevUiBfMO5lgEmBHAY
+         cZ5Q==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=cc:to:subject:message-id:date:from:in-reply-to:references
+         :mime-version:dkim-signature;
+        bh=Z0U9nhI3/BkU5LUuDW+0BzjA0KXxkCMgNCafRerAKsY=;
+        fh=P2rKh5AIgZyvfPXtJpShNPlxk0/V+39xpTtioqp3ivQ=;
+        b=HhPqckBE0y1QVv8WmFiYLJLUfojwu9iQYGs5SlzHlCCpSmf6tRjTI7HTnAy/KWThYk
+         Oncw9ifVE22nInIE9kB4HPn55OFLhnuTTwiaIOn1P6cgGXfQe+hvxs4y5Bpg7DXGLYLl
+         l2UlQgkEDVkB8wSaDvERY1+Uo/Z5t2P4kW0LfKebwW8Q+GkxeoXAK7xZEX86QmE4dip1
+         U9WsmFk2c0KZANE0UyTo2PAuVrLLuOTRRApldmVUrgyz8NjS2E8N9Ss4KKym0qKVqNWj
+         j5vDOdeSh4Txm29xHtlN34EWZCzmCoccCQbZeDS519+som1+kpmUMJ6SPnuSYhYY3EfW
+         2Kpg==;
+        darn=lists.xenproject.org
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792165761; x=1792770561; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+        d=linaro.org; s=google; t=1792166124; x=1792770924; darn=lists.xenproject.org;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=YOUA7dgnOp6ZkpYFCtXmRE5oNWg55i1qEiDZZmT39lQ=;
-        b=MJXX8FOF4998zp+yXUqxctgr9kyofyUxX4K5WaYuJ2EHz9GzVICTe2ip12Lvi0R/+k
-         rae5lRVSNFf06mq27MM8f8rld+H941Gkny1X5JoQLnpVod4j7c9+5IDph9Uh5P0EV591
-         DRIgbAuXkMAWGVOD0aHo78OWHoEagnpejbed4+MJyHkvJ3g9vpjEvyZpLi7H+b/E1m+I
-         Q7z0wF8hDqtiaek6LqjdsVeX7XtYHK912l7hjdLH8XlmmY50eR/KeDm0pQRu4cOjtB8+
-         AB6lHPFMhG2XSxYf6u2WvtKRq/mX/VsPsFbuCZ0LyOZRoEFtH5ELL5jzAUk3QpGaZ/C9
-         4ncw==
+        bh=Z0U9nhI3/BkU5LUuDW+0BzjA0KXxkCMgNCafRerAKsY=;
+        b=PC2G9ePLcBnFaVaS1WgvgaKnG1epUCpjRGOWnznO5Av2tMiuVGeM/nsL2lyOT1BioF
+         j4/px1c1DHcTBS7zSNz6z94Xz8WSLk62/7uEjehVQ/LOdKNK4iQb5WKiMC4BobATtJg1
+         cq+6FdTbpNk+VW9QrAIAgXNsHihPakXYfAiwtYUu374nQGTPEKwjB9AiX0OzLmrXFHpq
+         Sp59yHlUgZNiSF/jAfmKw4YYSrpjy+/NuWOO02jRoFR4ivBgT+UdRHO2lk++duyNmSEz
+         zKEyCjHdfvzRq39qqF2EarUE1GuGTVqXMTFIZHoJkhpnfX3rEDMKqmFoT7pZYNgCuWG9
+         3A6w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792165761; x=1792770561;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=YOUA7dgnOp6ZkpYFCtXmRE5oNWg55i1qEiDZZmT39lQ=;
-        b=TpHecEeDvKdwB8j2OwoOUGOKsbUXN+92l9hd/yDSDfWSeRk548QFiQ5wTgtCnxYMsA
-         BmRnXKB08BnoFT6z9M8tG/EfK/ENZB3Ow9tKUaIvh2ZBOz76RFF5+1IRGsaviNDcoZT5
-         ZF6N3TEGn/BdAtYRpbPT88dqTbhtHRAYvvKERDEexcUyaO8s+oGglrDK8XjD99JByh5S
-         npf2B63p49dF5AibiGCpAttqmpTzi4oGZCHBrbAwbVfkm5I7y/phWbFqrmawQdV68EDi
-         V8UtfmpQ+He3dzlgNEVwwdT97BVAidy5bPhD0E4b/cTL+07MPslbntQ3yjd4AIHhiuI0
-         E7oQ==
-X-Forwarded-Encrypted: i=1; AKwUvBy661O2nV33MAs7s8MQOmUFfOHQc/Gtnqov4x5OnAmsvAkLDNo2mYS6js+da7ehE89O/YfdsR8QR3U=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYL28fU4cJB/mzT0ubJtksMLFDwUu8CVsci0r4LLoxVUC+K+Dpax
-	KElpRqViFmLIAEH2NtFWdOY/QMA0pcVYQN7Fe6xhNTdn9OBL8jvkd0ag
-X-Gm-Gg: AYBFou0NqhxViVDjVNvz3CAMJW9TEnwzwVr0noLJ2tLbT1qNHCk8E2WK/n90bI5CbXh
-	a0fTofm3EdX0cOblcVzR2N8uEaSjDqlP1RHAbZDnbLZXR/pfYomyxdPoKTgx7Wo65APP0k21c0A
-	3Of7LK4aWwe1ZVgQztdwl/NyVzSyLraOfqStu2Bi0zX9+JwpchFI8mEmyIgAUTpMf9j9Hb7dKOQ
-	UXa+IzV8OZe9f7pxKnW0FJ+jfW2IRbWG+0J/DdaMDmHvdBgF5PVAE2+ifXZX/mwjvfXNtmT/wvO
-	7zH5H99aC+FkkAs8whpDR7FfEWmlPoTxVcnmla0dOmNBRMW9F6kz4GPJpAjmcEqS/sbZywZ5bfX
-	e2/TRwyVxIUvUe36Eyzv4Td47KMk3NV1MafuCyf4NlFBIHVkJAVGBBdlQzokEZDO1fPpKQHe9eQ
-	0qQNhb+hX7ccqAclvCgvUkkwB/A6VaPD8gZwy5xXlG4BRLojE9DQZPW7JJi5Owgw0tiXrkFZ42X
-	KLWJFgnH14DSYQufjddWUgX60rtwPhKzqYV3PtcahUEfig=
-X-Received: by 2002:a05:600c:870b:b0:4a1:d0e4:2bc7 with SMTP id 5b1f17b1804b1-4a1d7608614mr4599435e9.15.1792165761231;
-        Fri, 16 Oct 2026 08:49:21 -0700 (PDT)
-Message-ID: <68fac39b-1af7-4790-99e9-673229b1032e@gmail.com>
-Date: Fri, 16 Oct 2026 17:49:19 +0200
+        d=1e100.net; s=20260707; t=1792166124; x=1792770924;
+        h=content-type:cc:to:subject:message-id:date:from:in-reply-to
+         :references:mime-version:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=Z0U9nhI3/BkU5LUuDW+0BzjA0KXxkCMgNCafRerAKsY=;
+        b=H3CpKXMQQMJxgbuNXMXMVZuDS5x9Oh1RBFmfgdpgqCYe/3qAmiDrrXFCJU+8cFtN9C
+         rotSQUIbf4TMGgTGI8LSVydXRfyImV4sWiNYtVuUp7G8rh0CAgIkuNK21as3NdWPyUbd
+         XnF1TTEctVUmxaYO52zGQmErup9/incnpFJhzua8XHmP8lvW4IDmFeyk/CK2yLYkgem1
+         W5ajh1fpRMcUziVuiKQOI1AhXG/+13t3+N3Payi1cr2kSf/6WCXhqBBBhPLrGsXZ00qV
+         qBje4uo6UPW5VNws4gjHZR56I4aVS5rvX+FxX8M17EPlbcynGg5mVBbMLPS+9s9PK7up
+         OjFw==
+X-Forwarded-Encrypted: i=1; AKwUvBxHv+iRsLJGzAkvo1fh/AfsXobAAktxURsXRmjxQWVW+gWtIOl9G5G3MnfknfReb+x042+6XfGKe6M=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKMMt9ZnwXmf1p9B+gyxqk35A89Wo0wVfqHG0JfDKJrjt8AR+oY
+	dbRSgF5yiQJ80E0+DAvbvF/4qgUof1UI7D6F6oMyk1laLbeu6ffXAy4mddzuQCsefxAgCEyfkf/
+	B/WgAmkyuOFf+EMW05rClwOOyPT2aA9K4r6ju4WoGjg==
+X-Gm-Gg: AYBFou2T8AdSrqlTnA/xPT76jPHvRh7J8y+ffZQCDqvwSdRq5cTkZK2YRVPVCrh2HW1
+	ZigpNHAuU7vqy2/5MAJlciRSovH0B8PD5Y6ChDw41AwHrXAfUJOCQ6Cam6MCigA+x6QV3rzAcJx
+	xb+yoTOkvSy7N8Q6BhmGjcD4jZPbQatvxaeVkcjXfq0PTCzD7nMFakJ4BMBXZ/DQAs4aoBqnGOy
+	BAw5O0cyDg/AXtMFCrrekopIfWDfc8+ZlGrwM2NcY3AiAT5/jpZCckH8i73k1i5gsa5crKe1jN4
+	PMO0JY49pcVcTfYzK+eI+NhSh0/p2PgC2GmxTyt3zTElpB3V0gZZBv/gWO9KXu/Qxc4LOvkccrK
+	wofTAvhFe/ptH9EuENNMc0uJsNvyi/9AXmx/ogp+G+a1zt7I2cfY=
+X-Received: by 2002:a05:690c:fd2:b0:8b0:ccc3:27d2 with SMTP id
+ 00721157ae682-8b0f2176552mr1755087b3.29.1792166124207; Fri, 16 Oct 2026
+ 08:55:24 -0700 (PDT)
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v7 1/4] xen/riscv: use pte_is_valid() in pte_is_mapping()
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>,
- Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>, Zheng Zhang <zhangzheng@iscas.ac.cn>
-References: <1792164706.8631fc262581453bbf619ec5b2062170.1a14557373c0008425@vates.tech>
- <1792164866.8631fc262581453bbf619ec5b2062170.1a14559a8f00008425@vates.tech>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1792164866.8631fc262581453bbf619ec5b2062170.1a14559a8f00008425@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-ebf023/1792165761-C10DDB50-DBCDCA32/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 753
+References: <20261016142031.1204281-1-mark.caveayland@nutanix.com> <20261016142031.1204281-6-mark.caveayland@nutanix.com>
+In-Reply-To: <20261016142031.1204281-6-mark.caveayland@nutanix.com>
+From: Peter Maydell <peter.maydell@linaro.org>
+Date: Fri, 16 Oct 2026 16:55:12 +0100
+X-Gm-Features: AclHuK9skk_bQb3K0JVtLihI0jZXbPpRninwyZ9Z8NqEK-mnjl_NGcwhfVRtaZs
+Message-ID: <CAFEAcA-uaJtM6vkkqacrT04CP5WK=78odLu=BHH_z3CuuWPk5A@mail.gmail.com>
+Subject: Re: [PATCH v2 05/27] i8259.c: rename PICClass to I8259Class
+To: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com, 
+	sstabellini@kernel.org, anthony@xenproject.org, edgar.iglesias@gmail.com, 
+	qemu-devel@nongnu.org, xen-devel@lists.xenproject.org
+Content-Type: text/plain; charset="UTF-8"
+X-purgate-ID: tlsNG-ebf023/1792166126-514D3B50-03CDE07D/0/0
+X-purgate-type: clean
+X-purgate-size: 330
 
+On Fri, 16 Oct 2026 at 15:22, Mark Cave-Ayland
+<mark.caveayland@nutanix.com> wrote:
+>
+> This is in preparation for its use within a QOM type presenting a single
+> emulated 8259 PIC.
+>
+> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
 
+Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
 
-On 10/16/26 5:34 PM, Baptiste Le Duc wrote:
-> Use pte_is_valid() instead of open-coding the PTE_VALID check.
-> 
-> No functional change.
-> 
-> Assisted-by: Claude:claude-opus-5
-> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-> Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-> ---
-> Changes since v6:
-> - no changes, already reviewed and waiting to be merged.
-> ---
-> Changes since v5:
-> - no changes, already reviewed and waiting to be merged.
-
-I don't know if it is useful but for such cases I'm using this way ...:
-
- > Changes since v5-6:
- > - no changes, already reviewed and waiting to be merged.
-
-... instead of providing separate changelog items.
-
-It is saving a little bit space.
-
-~ Oleksii
-
+thanks
+-- PMM
 
