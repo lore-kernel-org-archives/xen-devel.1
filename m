@@ -4,53 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 3C8ADCCA490
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 09:06:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1451432.1666501 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 0271FCCA464
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 09:12:51 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1451442.1666508 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHdtb-0006aZ-CA; Fri, 16 Oct 2026 09:06:35 +0000
+	id 1xHdzT-00006i-1g; Fri, 16 Oct 2026 09:12:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1451432.1666501; Fri, 16 Oct 2026 09:06:35 +0000
+Received: by outflank-mailman (output) from mailman id 1451442.1666508; Fri, 16 Oct 2026 09:12:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHdtb-0006aS-8b; Fri, 16 Oct 2026 09:06:35 +0000
-Received: by outflank-mailman (input) for mailman id 1451432;
- Fri, 16 Oct 2026 09:06:34 +0000
+	id 1xHdzS-00006b-VD; Fri, 16 Oct 2026 09:12:38 +0000
+Received: by outflank-mailman (input) for mailman id 1451442;
+ Fri, 16 Oct 2026 09:12:38 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <mark.caveayland@nutanix.com>) id 1xHdta-0006aM-3x
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 09:06:34 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xHdzR-00006V-UE
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 09:12:38 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHdtZ-000BF6-Gf
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 11:06:33 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xHdzR-007oQA-An
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 11:12:37 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <mark.caveayland@nutanix.com>)
- id 6ad1e915-2eae-0a2a0a5409dd-0a2a450cc7ea-22
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 11:06:33 +0200
-Received: from [148.163.151.68] (helo=mx0a-002c1b01.pphosted.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <mark.caveayland@nutanix.com>)
- id 6ad1e917-f479-0a2a450c0019-94a39744d558-3
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 11:06:32 +0200
-Received: from pps.filterd (m0127840.ppops.net [127.0.0.1])
- by mx0a-002c1b01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69FMcKZV1065043; Fri, 16 Oct 2026 02:06:26 -0700
-Received: from bl2pr02cu003.outbound.protection.outlook.com
- (mail-eastusazon11021074.outbound.protection.outlook.com [52.101.52.74])
- by mx0a-002c1b01.pphosted.com (PPS) with ESMTPS id 4hb7t192wn-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Fri, 16 Oct 2026 02:06:26 -0700 (PDT)
-Received: from PH0PR02MB7159.namprd02.prod.outlook.com (2603:10b6:510:16::8)
- by BL0PR02MB6529.namprd02.prod.outlook.com (2603:10b6:208:1c3::18) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.13; Fri, 16 Oct
- 2026 09:06:24 +0000
-Received: from PH0PR02MB7159.namprd02.prod.outlook.com
- ([fe80::8e97:bc32:822c:b250]) by PH0PR02MB7159.namprd02.prod.outlook.com
- ([fe80::8e97:bc32:822c:b250%4]) with mapi id 15.21.0522.016; Fri, 16 Oct 2026
- 09:06:24 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6ad1ea7b-bab6-0a2a0a5309dd-0a2a45059cdc-28
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 11:12:37 +0200
+Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ad1ea85-4cb1-0a2a45050019-d155dd2ced98-3
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 11:12:37 +0200
+Received: by mail-wr1-f44.google.com with SMTP id
+ ffacd0b85a97d-48afcfc4bf5so1114251f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 02:12:37 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48dfd4f9c41sm3991412f8f.38.2026.10.16.02.12.35
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 Oct 2026 02:12:35 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -62,311 +52,122 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=proofpoint20171006 header.d=nutanix.com header.i="@nutanix.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector1 header.d=nutanix.com header.i="@nutanix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=
-	proofpoint20171006; bh=wqZO3ODQIkCMzvMj1tQkSWaVwl48sxLNIhAsc30MO
-	k4=; b=PmfoQ+yKNmBw3lvvgD1e3vu1dOMGs0QKpQCG31TenhzqyI6ZUgQgN71Nl
-	rkBPf8kDKDzC7xshMilb/Klq0KGPk3oi/rY+5BCFOkHOzTXJWutKv3WDSnrLrgoc
-	dTxujI+4kyewOCOIDJ7tBJdaPFBbVv6pKuFJ/Algu1zYoljHeoGm+o9f+3VeIqO4
-	SfJRaSMYy0oqGHNV5ThzyYiykbYqJO5kQgaf9ZBqMHv68tpUvc6FVM0EsZ3H2FVK
-	CL74QQvu+iTDCmFq4bEPIQeugC1sCp6sKEhHpSJXskb57/JmUReRmhJ/NrFM8f7z
-	6b/DnNNLPwvz3u5uds36DPjqH1fkw==
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ph94Y2dKvhqhuaYFuNJ8y/o4j5Rk+BdnB5kTidRLCPmczb/Oq1e6TlkQE1tWJYTnwc26Lc+j8Z3GOrWa3rwzFihatGIXyrynyx/Bu7Q5rIicQqBhiHC5kiIWPiH1EV9Uafi1HZdLrOblg74/4bam04fkkIgtjlAU55habfRGY6ghnZQx+fYQEDJeNOo7f/mlnAhZ87w+f826o/f22O0Rkug4Y9H3EuOvP/3Ka3IQRl7cEntUGbKqVC3KQcwsBDo0STW/Pj8h9kpoadpKq1+FPnFTOImu8cyzYTD5L3JEiLM+XQI7pKdMmDFgCY52mei24tFusq+ZPhwbzrrXNvPGGg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wqZO3ODQIkCMzvMj1tQkSWaVwl48sxLNIhAsc30MOk4=;
- b=wvFQfXx8XV9Mb48dpvk2DP4X5/8LftTCWV7J9ZmEBwZV9d/NSLwKJwNM01q6R0FpvKHJYzPc7iL5PkWnVLYzULEqturZ5TeGB/DponmtI74C259pK8tz9YdQv5aomJGnZKyf8Tw/02UjsHz3RgotuxieVBe4tOql9cJ62KqNY2DzA74D9gj4/KAdU/k0hWuO/9YtzWH8MS9l3baLOh2HaVo70ppFdgNAGJCaB2Hi1tXbe/FHf1p5KIUkZxjzf4rkjuW8IzCcdsYMzDOFjy9cSXQy7nGzGcW/w9B6F4jKSE0FdagF92S7y3sQgBFJNMzFjPjNnpvSeZPhmDIQUatbIg==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
- dkim=pass header.d=nutanix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wqZO3ODQIkCMzvMj1tQkSWaVwl48sxLNIhAsc30MOk4=;
- b=Pf2QUDYY154pecVdknL5awMIspnREapzZ/X8kx8iNeGn+SmAUTC0LRlZhBA35B5dKPNjULgj3nkL8+/7ucHYeGR57ZbiD28KnzVYkd6iJoAeqO8m4LxTguJaBTLe9InfA9qbxVWCEkyw4nbnBQnwWsStwICHOiKtRbFKR+jG/rSRH1X4t7pjL4X7J+H6AYNIZARpHRzaMPqLfWBPW6/5ZByzUsyzvR7wgkAGj9d4iyVoAL9ZazzILpsPUPe19qV+NtcBxc8PsggOSU/iWglqPOD1kPkUhdwz/HMMGYL3i48+iSkT1yLLyrmmD5ZpDSoiLuR0m6uMXU0XxgVsFQoRjw==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=nutanix.com;
-Message-ID: <345aa187-30b6-4726-87ed-ee49f7ce2fea@nutanix.com>
-Date: Fri, 16 Oct 2026 10:06:19 +0100
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 05/22] i8259.c: move parent_realize from PICClass to
- I8259CommonClass
-To: Peter Maydell <peter.maydell@linaro.org>
-Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com,
-        sstabellini@kernel.org, anthony@xenproject.org,
-        edgar.iglesias@gmail.com, qemu-devel@nongnu.org,
-        xen-devel@lists.xenproject.org
-References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
- <20260916104435.600211-6-mark.caveayland@nutanix.com>
- <CAFEAcA9eucRyzG=PR2tpx8ObHkdK6xUmOjQ+-nNbJ2dVHaptOA@mail.gmail.com>
- <CAFEAcA-voNwJRTb2WQuxnvzk5LwBcXahz8HHrW=Yi3WUKeKgBg@mail.gmail.com>
-Content-Language: en-US
-From: Mark Cave-Ayland <mark.caveayland@nutanix.com>
-In-Reply-To: <CAFEAcA-voNwJRTb2WQuxnvzk5LwBcXahz8HHrW=Yi3WUKeKgBg@mail.gmail.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: SJ0PR13CA0171.namprd13.prod.outlook.com
- (2603:10b6:a03:2c7::26) To PH0PR02MB7159.namprd02.prod.outlook.com
- (2603:10b6:510:16::8)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1792141957; x=1792746757; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=f8h6BSo7sSt2Nw41p0ugsO5choButV3zT6uwUEHEcd0=;
+        b=LACCQHTtEaf3WMvkgxjKrRPJqGibMJF6WepfpHo/jHZ1cOJxNznsRwSZiLYoZT4FR1
+         ihkuF5PxiIOZorQHosxSQVn+SwlNBxRnkMbR4Q66PSA16dbTTbNmAXndLN9aY8YsA8oi
+         TS4ilr3MsBJNnjzQwHE7quinExC/miaNB8vC57Cengkrd16NzAIVEvu2ZdTD4LRDRLd8
+         LLRxbap2pF0Blwk1wPWhu+Ni6s9VntClKBUnGdrS46hahBQNeY9L9AWy3WbMi+PN3s7J
+         Tgl0ARJklP7hrg06sbIdzkoanyMvv1v4trPAkutWYzzVuBelvRC4B6Eoz3Ze2dOLd1mB
+         +TLg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792141957; x=1792746757;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=f8h6BSo7sSt2Nw41p0ugsO5choButV3zT6uwUEHEcd0=;
+        b=H8HKb1qCR1z0wj888tWnM6r798p12Mpn+yi3l6c3MvnpTfyeLhUrQYU7wM2gWbqHUl
+         t/+MgWugRpu0vSj1tPphX3Xl7VPLiAW+GmDkCJGXCjBpU1yHYJX1jt4qupBJFUXapOQD
+         T2c4ovmanr/+IwkaMVv6Bg5F62M64WIjwK0ZIjI+amU8e0i0gYGPAEhm21l81/XOUIhD
+         4E/Xh6DO5ppAxg6eNdQa0LaxC5je9VR0K8+CTH3Y9iJHAGXJT2NwfJeCWEEgw74cUfWR
+         I3eT4cO76yTuM7e+m9Bzzxq729RyAn8jwJ4oNrVXpdX1+gU6wPO7+KaAVXsXhVWiTbiU
+         XsuA==
+X-Gm-Message-State: AFq9FYIIB+bU21fkQ9oTqMxzQyrkayKRhPBI4lYEURuJoSqXtAApHmEO
+	4rWqQaFxZH9mZCMgwQrHb6VQ4/jJdZfLG2mf0DMtq+DqlgQd5qyyrCVxz4x+3GqeDA==
+X-Gm-Gg: AYBFou0yJo6xRkgFZF0QOYgAqPyoIH8Is+luG6mdp2E0H03ecUi2sCTRIpnA1amDhrQ
+	UgeVIqgysnptbnbboLTvK7d8sGt0LJnHI9cIA+SNOqRNpzSGHJtIzeZ2JXjpINkGdXieIjWhXt8
+	PEq6vTnMljk7G+Vpb+2F+qo57TjR8hed5JSzvKWrnWlptcPnIDJwoDJCHompszMBAAxp4yT2ORH
+	u8D5auEuzztfPu5BcLcv+5XkfC74dzv3yUgIoyd6MC2YOmmoGDrl3zJ9CglTseTF/EQbYmCGC2F
+	tYLUBDbFdrHAX/3XvMSrepm0M/ib4N5j3hDdFAemInSl9nlC3/jdxmWez4cPPTLdb9Cl/aNHElD
+	Og1r/RD+Fd4gCsWCpKuIV6eFpnTqOQ8RUQRC+WIlKqLhEZ2kuKb05HwTHt4Mhzc49KLOTpIfyq/
+	LBgNGDFKIAZa637/GYdFEO82a/eViMnCqemFU9wccNLEmJRT6a4Ox7aQcW6A0/mOKMcPo37hOYZ
+	pbH6LM6gISott98vddalOU2dMF3Lr1GALP8pzAfq/kKC0/n5DwyA1VasK4Xpg==
+X-Received: by 2002:a05:6000:178f:b0:48e:223:ab06 with SMTP id ffacd0b85a97d-48e0223accemr1014876f8f.31.1792141956691;
+        Fri, 16 Oct 2026 02:12:36 -0700 (PDT)
+Message-ID: <764b7c0b-1a1e-4d0a-bded-28b5e9f9e703@suse.com>
+Date: Fri, 16 Oct 2026 11:12:34 +0200
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: PH0PR02MB7159:EE_|BL0PR02MB6529:EE_
-X-MS-Office365-Filtering-Correlation-Id: 23282ff1-9e36-43a1-bf91-08df2b64c0b7
-x-proofpoint-crosstenant: true
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|366016|23010399003|56012099006|4143699003|261009223027099003|22082099003|18002099003|10067099003;
-X-Microsoft-Antispam-Message-Info:
-	n37ktnaQMxNzYt2CUUjB5+PJK93fHOMj2aK47wM+K8ao+paPmrVePiMPuZkXZTs5U13ncE2DDU2+NPnJW5tvzlVDlM3s8gn32I7WY7CDdzwNnmimIfLde2FYhdPEKnCHC8mxknl/R7lRV/Fodtpbo/i0dSMIhhwGIIS39gfH9L7Mt8m9JaJKaq6mz496QENlqquQkap+q+kygYuFTSd+LWYXznfNvxFh58T8VCcaB8AfOe5nKVXC/ck6vW87lm3nhycxwbPwFIcT2e9qpTaCZy5CGcZmPNztDMW8UAtQ/mJGdFSTO7Q/lbn+xFyiXyyxA1vv++0kH3hb0LJ5fZJONBcijgVmKOn0paEJ9/GeqPpOzFw5LcSgf7i7ud7GCu0jsHCSwdYDxP7E8DXtRQMD4QAxyU9G5vLS6PMx7bGllrjnPjPrYDM2ez5uS8OJvmb5i5OyiQj4uz7Htsbvz4qH7zWu8Zw4b1GgmRrNYqZv94jG58N7IPdrNMLLcfb5MpEITZeis2HxqLydc3aWFzIxYR7ML0bURKS56UL+Uxmz4XoH8lP/fHQRMth/99l+tR5AiyFy5v2oYRupczjq52YTLpFV8V2VYWzP7mYYf4aPevzsOiUKsQ9VpJjolpS2X2mFovv9bltngTKBaVl7bKDm2+rnt1u/aqFL2Jl54j01g1k=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR02MB7159.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(1800799024)(366016)(23010399003)(56012099006)(4143699003)(261009223027099003)(22082099003)(18002099003)(10067099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?a0ZnNEJ4K2FSQURQNDYvcGlKUXBmSEJHdVBkYko3dzJ5Y0JjdTlSSDQwVTlW?=
- =?utf-8?B?SkdiVjh2Y2w1V2NpYjlodmxGLzFUR2YwRUdoTy9nbW1VZzRPcXdnL3ozOEJG?=
- =?utf-8?B?d3U1Um9aV2tUWXZKT3N2dWlzQ2x4ZituUkVKMnVENldxLy95UWpWZ0djbW50?=
- =?utf-8?B?VUNEZEhiclpqbTFjNVBnQm9WdGNoSEZxTWozb1plbitVODFGR0IwWXpYeFkx?=
- =?utf-8?B?Nk1zSGxMc0VlOWhOcVcrUnVVdThuYS9FbnRTSUpJOUVyQVhxMTZpWkUreXdy?=
- =?utf-8?B?aWFvc3JnMytOUkdRRmhnV0dvTVA5TnMzWlRjeTkwTzllcUhpNGFIdldPRFNq?=
- =?utf-8?B?MGRhYjUxMjBEdUNXcUMwTTVMZGdJeHZkQ1hSWE5GVzF6Q0F5VlZlWm9VWm1u?=
- =?utf-8?B?WDQ0b2RPMzZ5S2h5QzNhQnlGRVBSdEhrY1hvMXhqOWdwcFpNaVIzTlBHVmhw?=
- =?utf-8?B?NzdhU3ZEWDZONnJPK3BkNGJWa3VSYmFDVlhFRjlLZlJuWFhBTHVkSFdSK2JU?=
- =?utf-8?B?TGJYemZHVUZITmQ2eUJ4bFRnWlNwVnBPNXh1eStJUWlQbitFc21SelN6OFlS?=
- =?utf-8?B?UUlzV3dKNGNnTE8xR0c3ZnBtRXZRRUxHYmpiNC9sZUFSWnlKMnJwTmNrOXpy?=
- =?utf-8?B?NVAwUHRIQW5sL3czRWZRTFBYVG5lQW9mYXN2a3lZUHcwYnJ2VExaRVpKT0hh?=
- =?utf-8?B?QmxuTUVKTEs0blNPM01DdlRuTFc5U2VMbzYyM2M5blZmT1FjMWNjVVMyRitL?=
- =?utf-8?B?UlNpd3hGNTJvdEFiYUlsS0JzbVZwMG5vOW9WR3VTSmdibldCbGNNV2NvcUVu?=
- =?utf-8?B?dDVXcFovRmIwc3V4L1JMcFBNUm9BZGhYYlR0WnRTSS9PcC9Wb1AzUTJGMEJq?=
- =?utf-8?B?Q1NLWjlIRHNlSUdacVFsL2ZyZjZuRjRvQ0FhMkM5U2RXQjQ4UUVSTlRHT2Fi?=
- =?utf-8?B?MFJwMENJZGtycmp5QVBJc0FHZVAzVzk3UzNrZzgzYVhaZWNzSysvTU5GZlZU?=
- =?utf-8?B?dzdPTzNJV0VUV0ZxU2FsZ1pmamRXUit4Uy9ZVVpoUUNqd1RMRjdGOG1EZFFN?=
- =?utf-8?B?dUYrYkViZ3FUZEpaeERJd3BxYWc4Z2tRRzJWZHBEMmgzZkdkRWJCb2hKTU8v?=
- =?utf-8?B?Vk8ycUNnUThmYnk2d01tK1lUZnFMcFpDRGlIb2dQNTdGKzhkc2padmZCck9Y?=
- =?utf-8?B?NFRYYTNZSzhFNkZ3UXJMMjhFVTR5L3VHS3VubHAzclE0V1NhV2N4VzJReWlH?=
- =?utf-8?B?eEZBa0tIUzN6TnkrcVFtbGp5bXFqOWd3elo2am1vYUd4MTFvS1dxWUErMXNm?=
- =?utf-8?B?dGpNVlNkY2NnYlIzYnF2ZXZqblZxV0FoY1M1S24yWWNwUkxYME5yRjg2VVkx?=
- =?utf-8?B?R2FYSkZ6SFJQc1d1OG5mb1AzV0I1UUJCcEpJNDFaUjU5UVFBTFBmTmZNQnA5?=
- =?utf-8?B?S1RBcFFHUFkvTFJwNFhrVnNwQmNYM29zY2ZnNGltM05aZkFHZXpkTVA4aCs4?=
- =?utf-8?B?VllGZ3FNOEhzNzFFSm50ZlZNVmdlU2x6VkxjK2pRV0NtaU5EblFjYWo3N212?=
- =?utf-8?B?Y2RKYU5TRFVQRHpmeUhYWFRkamo1RCtxMWhuYm1pcDRSMzZkS2V0WkY5YnRm?=
- =?utf-8?B?WWRJYXhidWhHN1pTWG9TUXl4c05ZUkl1ZEZRMG1wang2cUhpMEVoY2g4RXNC?=
- =?utf-8?B?YlZsdEtKLzdSNGpkbjlmaVMzK1hQdHc3RnEwUjMxZUpncXJKTDFteERUMEsw?=
- =?utf-8?B?ek1IbTBDbnIzeGh5em92d1ZaVTlacFY3ZmVBMGw3NDRseXpVWjI0YmZRejRP?=
- =?utf-8?B?RjdpYmFnOU9OWGFzbDJzSkZNdzdnb0xYbTgxb1ptckhONnhJRW94VldaNUNB?=
- =?utf-8?B?S3hjZzUrTW40ZTFoRFR4ODAvS0hVbU5IRjNXR0lwMHZmSG1JdE9LU3NSMmEr?=
- =?utf-8?B?WXMzcWhlVzN0UmN4L3psNnZrZDVmVUNLdGxYckd0NGhUUjc5RVF2VUxpN3Jq?=
- =?utf-8?B?a1U1Vlp4YmUzRXdyZDI3NWdCZ1dBeHZUVHF4Yjk5anlkRU96a2R3UGZDc2pD?=
- =?utf-8?B?bWFlekdnNXlTTDRFVS9lU0ZTaUlCZ1liOSsxaVZaYXhRZWNqVEN5S0RqeERS?=
- =?utf-8?B?Qy9TOTg5TVZIK0pkeEpLTU9KTEhoVjhvVkRBU2JLK21oTHdQQnJ6cHo4QlBx?=
- =?utf-8?B?TWQyVmJhVEhYRGtGM1loQmNNOUkrS3pEelZZVkQxbTdJaE5VTGh2bTJVTlhl?=
- =?utf-8?B?Zk5hTE81MXdadnlDS1JESm5Xb1dHcFRvZE14TzVNRkd5N2U4ekZxUEFDWGhj?=
- =?utf-8?B?eHRmTjUxYXJVYUNsN2pZZHptcWFrekorMHdvL2hJaFBRWVpoWVFSeTQzanNy?=
- =?utf-8?Q?rSQkWE8bejYYQT2o=3D?=
-X-Exchange-RoutingPolicyChecked:
-	JlXi6sZo8HTR23yWqMlrBcCzXQ95HS13zsKvEvkT5j37i29jesFmhQHCb/o8+S3KzM5PmjxMUwqqVxwv4VsZEsmFsZipYwcal9omIZ9L2UV5DUiIAUMlRcrPDfKq4Qnw81Nb6/8V+iI0TZ692e5c27kzmO0txfcUXAqdnHJHvuLtIpI+XvVrNKpi+KG0tRQyjDW9rJn8BEC+t+m+5Sptqhkv2yCk0QUUuurzDKErQuO8tz75cdPAvUpcdV3z5ULak+XCyOQATDMbrLWwq1ifp04vgqeQGef95QA9nz6trGO2/bcBpoYTW1uF+R1JIk+etLdOs3kS/rHZtFNYpCumuQ==
-X-OriginatorOrg: nutanix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 23282ff1-9e36-43a1-bf91-08df2b64c0b7
-X-MS-Exchange-CrossTenant-AuthSource: PH0PR02MB7159.namprd02.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2026 09:06:24.4874
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: bb047546-786f-4de1-bd75-24e5b6f79043
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: VhqSsAaMb4s2sfuAqtFYqDjVLn+RGv/rwTY99O4VvdiEx8trdwJQQWWZHnkWpfeidtgq7xtmfjZbYianE5N96y8ct+YaCxyG9/EU9Ho09vc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BL0PR02MB6529
-X-Authority-Analysis: v=2.4 cv=LsYHWXdc c=1 sm=1 tr=0 ts=6ad1e912 cx=c_pps
- a=b/aSlx19e507fu+kRueGxg==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
- a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
- a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=0kUYKlekyDsA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=VofLwUrZ8Iiv6rRUPXIb:22 a=_-M8LpHI31CeLmyZm6wg:22
- a=KKAkSRfTAAAA:8 a=64Cc0HZtAAAA:8 a=zOK0QRzV0C4MD-MyP_wA:9 a=QEXdDO2ut3YA:10
- a=cvBusfyB2V15izCimMoJ:22
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDAzNiBTYWx0ZWRfXxMDU593979+c
- Ggv1vx9yp6YpZVx/hRQtNkERF0jdqlk93zcck9+xFIBREpbk6W0nMTEZLQ65SGtZnVxkfMb6Rql
- dOtq+oT59pfShJn3Vj9DFzS3M8wFiFw=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDAzNiBTYWx0ZWRfX5Syw7+l02HBX
- j8xq4/CbIgS1SviCzGFPrA99ExOvSFO+oI1zDIsqEznnAvcahCN29ljTfIblSdudScGzOAQeqME
- 4k9c0lMdZ92FZZgeleqoeT3bZvSi6HhmORq7+hDlCVTAKVkDWmOT+FYS+3XRo4MK9MNpot8zC1N
- lUlZQay7qE5JThctQ6NrljBkdJd+d853UuSBIAaAVFWjKTkS2X+VIUfPTrTF1NV/nXHt5A2DjOW
- nAMmIE23lrA9z+l5ekwpR7gxn+EUf9UUIFSZXNm4PuVea1xAOUYN1jjHfOHbxMb7bLky5W7kA2T
- bPhJ2YnEdzXwNPKNLgCO9o0BOyTJF3q4bW98WdC6VMZK0bFvizke7pUbGFbqDCRxH2nmlnBtGBX
- b8SzGCInDa7iYJCSAdK9tAl4zZSbhOYo2l5/2lcpDsKHSuBGfs1z4xU3H56756Khvtyy735PXNu
- NjwmwQCxgsS9BHshTlA==
-X-Proofpoint-ORIG-GUID: oIGeMBYcHoPTLMJDunahfV3X9UJ1p9rm
-X-Proofpoint-GUID: oIGeMBYcHoPTLMJDunahfV3X9UJ1p9rm
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-14_01,2026-10-14_01,2025-10-01_01
-X-Proofpoint-Spam-Reason: safe
-X-purgate-ID: tlsNG-d25034/1792141593-5270FA5B-E01B4D08/0/0
-X-purgate-type: clean
-X-purgate-size: 8326
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 11/15] x86/PVH: try to map initrd directly into Dom0
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Marek Marczykowski <marmarek@invisiblethingslab.com>
+References: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
+ <78cd46cc-84ed-46df-96c9-26ce97ed0da0@suse.com> <atEQPq2zvmxxEgIY@Mac.lan>
+ <acbbec65-3435-4869-ab71-090afd751083@suse.com> <atHn-f8lBH0pfPEn@Mac.lan>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <atHn-f8lBH0pfPEn@Mac.lan>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-c201ff/1792141957-247132A1-9CB8035B/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1547
 
-On 15/10/2026 17:22, Peter Maydell wrote:
-
-> On Tue, 13 Oct 2026 at 16:54, Peter Maydell <peter.maydell@linaro.org> wrote:
->>
->> On Wed, 16 Sept 2026 at 11:49, Mark Cave-Ayland
->> <mark.caveayland@nutanix.com> wrote:
+On 16.10.2026 11:01, Roger Pau Monné wrote:
+> On Fri, Oct 16, 2026 at 10:58:09AM +0200, Jan Beulich wrote:
+>> On 15.10.2026 19:41, Roger Pau Monné wrote:
+>>> On Mon, Oct 12, 2026 at 10:25:11AM +0200, Jan Beulich wrote:
+>>>> @@ -867,7 +1078,7 @@ static int __init pvh_load_kernel(
+>>>>          }
+>>>>          start_info.modlist_paddr = last_addr;
+>>>>          start_info.nr_modules = 1;
+>>>> -        last_addr += sizeof(mod);
+>>>> +        last_addr += sizeof(*mod);
+>>>>      }
+>>>>  
+>>>>      start_info.magic = XEN_HVM_START_MAGIC_VALUE;
 >>>
->>> Both the emulated and KVM i8259 implementations store a reference to the
->>> parent_realize function in their respective classes. Start by moving
->>> parent_realize from PICClass to I8259CommonClass and removing PICClass since
->>> it is no longer required.
->>>
->>> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+>>> Isn't this still not properly ordered, as start_info address must
+>>> strictly be below 4GB (as is passed in a CPU register with the CPU in
+>>> 32bit mode), yet it is allocated last in pvh_load_kernel()?
 >>
->> This is one of those things where I think we're not 100% consistent
->> about whether we think the parent_realize field should go in the
->> child class struct or the parent class struct. The name "parent_realize"
->> implies it ought to be in the child struct, though, and I think we
->> do that more often than we put it in the parent class.
+>> Well. For one, this is pre-existing. With the size of the region that
+>> find_memory() needs to find greatly reduced when the initrd isn't
+>> included there, there's about zero chance that it won't find a suitable
+>> region below 4G. Once we have find_memory() go downwards from 4G, the
+>> remaining little bit of a risk will also go away.
 > 
-> We do, although it's a bit closer than I thought: about 50 callsites
-> put the parent_realize pointer in the child class struct; about 25
-> put it in the parent class struct. So I think for new code we should
-> prefer to follow the child-class-struct version.
-> 
-> in child's class:
-> 
-> hw/arm/smmu-common.c:    device_class_set_parent_realize(dc, smmu_base_realize,
-> hw/arm/smmuv3.c:    device_class_set_parent_realize(dc, smmu_realize,
-> hw/display/macfb.c:    device_class_set_parent_realize(dc, macfb_nubus_realize,
-> hw/i386/kvm/i8254.c:    device_class_set_parent_realize(dc, kvm_pit_realizefn,
-> hw/i386/kvm/i8259.c:    device_class_set_parent_realize(dc,
-> kvm_pic_realize, &kpc->parent_realize);
-> hw/input/adb-kbd.c:    device_class_set_parent_realize(dc, adb_kbd_realizefn,
-> hw/input/adb-mouse.c:    device_class_set_parent_realize(dc,
-> adb_mouse_realizefn,
-> hw/intc/arm_gic.c:    device_class_set_parent_realize(dc,
-> arm_gic_realize, &agc->parent_realize);
-> hw/intc/arm_gic_kvm.c:    device_class_set_parent_realize(dc,
-> kvm_arm_gic_realize,
-> hw/intc/arm_gicv3.c:    device_class_set_parent_realize(dc,
-> arm_gic_realize, &agc->parent_realize);
-> hw/intc/arm_gicv3_hvf.c:    device_class_set_parent_realize(dc,
-> hvf_gicv3_realize,
-> hw/intc/arm_gicv3_kvm.c:    device_class_set_parent_realize(dc,
-> kvm_arm_gicv3_realize,
-> hw/intc/arm_gicv3_whpx.c:    device_class_set_parent_realize(dc,
-> whpx_gicv3_realize,
-> hw/intc/arm_gicv5.c:    device_class_set_parent_realize(dc,
-> gicv5_realize, &gc->parent_realize);
-> hw/intc/i8259.c:    device_class_set_parent_realize(dc, pic_realize,
-> &k->parent_realize);
-> hw/intc/loongarch_dintc.c:    device_class_set_parent_realize(dc,
-> loongarch_dintc_realize,
-> hw/intc/loongarch_extioi.c:    device_class_set_parent_realize(dc,
-> loongarch_extioi_realize,
-> hw/intc/loongarch_extioi_common.c:
-> device_class_set_parent_realize(dc, loongarch_extioi_common_realize,
-> hw/intc/loongarch_ipi.c:    device_class_set_parent_realize(dc,
-> loongarch_ipi_realize,
-> hw/intc/loongarch_pch_pic.c:    device_class_set_parent_realize(dc,
-> loongarch_pic_realize,
-> hw/intc/loongarch_pic_common.c:    device_class_set_parent_realize(dc,
-> loongarch_pic_common_realize,
-> hw/intc/loongson_ipi.c:    device_class_set_parent_realize(dc,
-> loongson_ipi_realize,
-> hw/intc/loongson_ipi_common.c:    device_class_set_parent_realize(dc,
-> loongson_ipi_common_realize,
-> hw/intc/pnv_xive.c:    device_class_set_parent_realize(dc,
-> pnv_xive_realize, &pxc->parent_realize);
-> hw/intc/pnv_xive2.c:    device_class_set_parent_realize(dc, pnv_xive2_realize,
-> hw/intc/spapr_xive.c:    device_class_set_parent_realize(dc, spapr_xive_realize,
-> hw/intc/xics_pnv.c:    device_class_set_parent_realize(dc, pnv_icp_realize,
-> hw/intc/s390_flic_kvm.c:    device_class_set_parent_realize(dc,
-> kvm_s390_flic_realize,
-> hw/nubus/nubus-virtio-mmio.c:    device_class_set_parent_realize(dc,
-> nubus_virtio_mmio_realize,
-> hw/timer/i8254.c:    device_class_set_parent_realize(dc,
-> pit_realizefn, &pc->parent_realize);
-> hw/virtio/virtio-pci.c:    device_class_set_parent_realize(dc,
-> virtio_pci_dc_realize,
-> target/alpha/cpu.c:    device_class_set_parent_realize(dc, alpha_cpu_realizefn,
-> target/arm/cpu.c:    device_class_set_parent_realize(dc, arm_cpu_realizefn,
-> target/avr/cpu.c:    device_class_set_parent_realize(dc,
-> avr_cpu_realizefn, &mcc->parent_realize);
-> target/hexagon/cpu.c:    device_class_set_parent_realize(dc,
-> hexagon_cpu_realize,
-> target/hppa/cpu.c:    device_class_set_parent_realize(dc, hppa_cpu_realizefn,
-> target/i386/cpu.c:    device_class_set_parent_realize(dc, x86_cpu_realizefn,
-> target/loongarch/cpu.c:    device_class_set_parent_realize(dc,
-> loongarch_cpu_realizefn,
-> target/m68k/cpu.c:    device_class_set_parent_realize(dc, m68k_cpu_realizefn,
-> target/microblaze/cpu.c:    device_class_set_parent_realize(dc,
-> mb_cpu_realizefn,
-> target/mips/cpu.c:    device_class_set_parent_realize(dc, mips_cpu_realizefn,
-> target/or1k/cpu.c:    device_class_set_parent_realize(dc,
-> openrisc_cpu_realizefn,
-> target/ppc/cpu_init.c:    device_class_set_parent_realize(dc, ppc_cpu_realize,
-> target/riscv/cpu.c:    device_class_set_parent_realize(dc, riscv_cpu_realize,
-> target/rx/cpu.c:    device_class_set_parent_realize(dc, rx_cpu_realize,
-> target/s390x/cpu.c:    device_class_set_parent_realize(dc, s390_cpu_realizefn,
-> target/sh4/cpu.c:    device_class_set_parent_realize(dc, superh_cpu_realizefn,
-> target/sparc/cpu.c:    device_class_set_parent_realize(dc, sparc_cpu_realizefn,
-> target/tricore/cpu.c:    device_class_set_parent_realize(dc,
-> tricore_cpu_realizefn,
-> target/xtensa/cpu.c:    device_class_set_parent_realize(dc,
-> xtensa_cpu_realizefn,
-> 
-> in parent's class:
-> 
-> hw/input/lasips2.c:    device_class_set_parent_realize(dc,
-> lasips2_kbd_port_realize,
-> hw/input/lasips2.c:    device_class_set_parent_realize(dc,
-> lasips2_mouse_port_realize,
-> hw/input/pl050.c:    device_class_set_parent_realize(dc, pl050_kbd_realize,
-> hw/input/pl050.c:    device_class_set_parent_realize(dc, pl050_mouse_realize,
-> hw/intc/xics_spapr.c:    device_class_set_parent_realize(dc, ics_spapr_realize,
-> hw/isa/pc87312.c:    device_class_set_parent_realize(dc, pc87312_realize,
-> hw/isa/vt82c686.c:    device_class_set_parent_realize(dc, via_superio_realize,
-> hw/pci-bridge/cxl_root_port.c:    device_class_set_parent_realize(dc,
-> cxl_rp_realize, &rpc->parent_realize);
-> hw/pci-bridge/gen_pcie_root_port.c:
-> device_class_set_parent_realize(dc, gen_rp_realize,
-> &rpc->parent_realize);
-> hw/pci-host/pnv_phb.c:    device_class_set_parent_realize(dc,
-> pnv_phb_root_port_realize,
-> hw/pci-host/pnv_phb3_msi.c:    device_class_set_parent_realize(dc,
-> phb3_msi_realize,
-> hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power8_realize,
-> hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power9_realize,
-> hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power10_realize,
-> hw/ppc/pnv.c:    device_class_set_parent_realize(dc, pnv_chip_power11_realize,
-> hw/ppc/pnv_lpc.c:    device_class_set_parent_realize(dc, pnv_lpc_power8_realize,
-> hw/ppc/pnv_lpc.c:    device_class_set_parent_realize(dc, pnv_lpc_power9_realize,
-> hw/s390x/tod-kvm.c:
-> device_class_set_parent_realize(DEVICE_CLASS(oc),
-> kvm_s390_tod_realize,
-> hw/virtio/vhost-user-gpio.c:    device_class_set_parent_realize(dc,
-> vgpio_realize,
-> hw/virtio/vhost-user-i2c.c:    device_class_set_parent_realize(dc, vi2c_realize,
-> hw/virtio/vhost-user-input.c:    device_class_set_parent_realize(dc,
-> vinput_realize,
-> hw/virtio/vhost-user-rng.c:    device_class_set_parent_realize(dc,
-> vu_rng_base_realize,
-> hw/virtio/vhost-user-rtc.c:    device_class_set_parent_realize(dc,
-> vu_rtc_base_realize,
-> hw/virtio/vhost-user-snd.c:    device_class_set_parent_realize(dc,
-> vu_snd_base_realize,
-> hw/virtio/vhost-user-spi.c:    device_class_set_parent_realize(dc, vspi_realize,
-Thanks for the analysis. I agree that it makes sense to put 
-parent_realize in the child class as opposed to the parent class, and 
-I'll make that change to my current series.
+> Might be worth mentioning then, so it doesn't look like an oversight
+> since you adjust the ACPI allocations.  No strong opinion, just
+> noticed it was left behind.
 
-I also realise from this and your previous response that I misunderstood 
-exactly what you mean by storing it in the instance...
+I've added mention of this, but only in the remark of the patch. Really
+pvh_setup_cpus() may want to check for no truncation? Or the parameter
+type may want to change to uint32_t, with the no-truncation check then
+living elsewhere?
 
-
-ATB,
-
-Mark.
-
+Jan
 
