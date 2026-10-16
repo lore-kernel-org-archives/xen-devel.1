@@ -4,49 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 94F6DCCA462
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 09:14:12 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1451447.1666527 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44AFBCCA464
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 09:14:14 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1451446.1666518 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHe0p-0000nR-HG; Fri, 16 Oct 2026 09:14:03 +0000
+	id 1xHe0o-0000az-Bq; Fri, 16 Oct 2026 09:14:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1451447.1666527; Fri, 16 Oct 2026 09:14:03 +0000
+Received: by outflank-mailman (output) from mailman id 1451446.1666518; Fri, 16 Oct 2026 09:14:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHe0p-0000nI-ES; Fri, 16 Oct 2026 09:14:03 +0000
-Received: by outflank-mailman (input) for mailman id 1451447;
- Fri, 16 Oct 2026 09:14:01 +0000
+	id 1xHe0o-0000as-8E; Fri, 16 Oct 2026 09:14:02 +0000
+Received: by outflank-mailman (input) for mailman id 1451446;
+ Fri, 16 Oct 2026 09:14:00 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a143fd43ef0008425@swg.vates.tech>)
- id 1xHe0n-0000al-Ft
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 09:14:01 +0000
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a143fd4e9d0008425@swg.vates.tech>)
+ id 1xHe0m-0000ad-Jj
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 09:14:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHe0m-007orE-SX
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 11:14:00 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xHe0l-007orE-Ss
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 11:13:59 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a143fd43ef0008425@swg.vates.tech>)
- id 6ad1ead5-8faa-0a2a0a5109dd-0a2a4502a888-6
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 11:14:00 +0200
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a143fd4e9d0008425@swg.vates.tech>)
+ id 6ad1ead2-8faa-0a2a0a5109dd-0a2a45078384-22
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 11:13:59 +0200
 Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a143fd43ef0008425@swg.vates.tech>)
- id 6ad1ead7-6ca4-0a2a45020019-b9ff1c22ace5-3
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a143fd4e9d0008425@swg.vates.tech>)
+ id 6ad1ead7-b4ea-0a2a45070019-b9ff1c2290e3-3
  for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 11:13:59 +0200
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
  by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a143fd43ef0008425.002 for <xen-devel@lists.xenproject.org>
+ 1a143fd4e9d0008425.002 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 16 Oct 2026 09:13:53 +0000
+ Fri, 16 Oct 2026 09:13:56 +0000
 Received: from Skynet-1 (lfbn-gre-1-317-75.w90-112.abo.wanadoo.fr
  [90.112.38.75]) (Authenticated sender: olivier.lambert@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id E867381F66;
- Fri, 16 Oct 2026 11:13:52 +0200 (CEST)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 2477481F66;
+ Fri, 16 Oct 2026 11:13:56 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,23 +58,23 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=jhZDJ/uRT58PcuL5wb2FP//FQDMpMS0RNO/OKYNYozc=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
- b=FILaNU+3H4nZoxUQhRtkniwx5UT5WsU6U6QNDz7VcAXF6PTb31BI1AGoz++PEuBj6ESpalNPf
- UVeXMFnjIGRmLzGA3W5QpsMwxS46Voq/Cv6jIgkKXHDB7qwEMnqsnHXtJAMlTd2A+8qjyEfanbq
- 8Tmmf8/JCiyBespiiAilsOzaaWYsD15pgbHRkbxll07g73Pbw9kbo9BfXQE79UYX2fb8ggblJq7
- 5VtC2/AWrFRMmpsVjWfeTMxSmqdtARkjlHaxRLOOaTz8Wj81jb2lU8j5gO5/9bgtkrubJKWnNKL
- 7oOAu+ykd6K5Ps3JR6Apx6ormioN3ZQw9tWautNC6Fyg==
-X-Zone-Loop: caecabbb661e24a69649d9d6dfcd665282f38e1d8702
+ q=dns/txt; s=selector1; bh=sdNcgIdN4H4UbHm09K61vzUgHpaWd/G/2LuMED6huBk=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=OoZPZyl43zg/W+nrzjZXNtWEquJ817wHR52isU1d6QjpSQADU7lofQ+6/2xjNI1fgI8SWyTLP
+ xFvqfqwBQokGMRUsfZ9Xv6xYP0UVx6zlVS15GXnms4MknSlPkRDhWuS3UIb40+PBcgFpYB37Tah
+ kcXCx5l/thWlWei8lvT8DltCJWiyutAVMa5HN4N+LvH5sHoaP4jcYV06c/7TzTJQ2d27k+2Nd6L
+ 0W5nvxTn3uuajvxHAH6TW8+d03AOoyJ3Wsrvzal+QBN30nZu56avBqdZjmKRkC1Q2xfWeS8z+0u
+ kq2yThq3pUOB/hMpxHx2Qis9QZ2uLX3JG9jNeafTB1kQ==
+X-Zone-Loop: 547bb98680937fecdedb2f8742730cac0f7c4e2e647d
 x-campaign-type: default
-x-transaction-id: 60130833-c02c-46b2-b9ec-58b1b7bc260f
-x-swg-uid: 01-0dbc8a69-13ae-4a75-a2a9-efbfa3a74e93
+x-transaction-id: e53da2f4-b329-4410-bdf0-d0d4be742665
+x-swg-uid: 01-92795d43-29ad-4cd0-a59b-e0171df22f1a
 X-Mailer: Sweego
 Message-ID:
- <1792142033.8631fc262581453bbf619ec5b2062170.1a143fd43ef0008425@vates.tech>
-x-swg-bid: 1792142033.8631fc262581453bbf619ec5b2062170.1a143fd43ef0008425
+ <1792142036.8631fc262581453bbf619ec5b2062170.1a143fd4e9d0008425@vates.tech>
+x-swg-bid: 1792142036.8631fc262581453bbf619ec5b2062170.1a143fd4e9d0008425
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
@@ -84,56 +84,59 @@ To: xen-devel@lists.xenproject.org
 Cc: Anthony PERARD <anthony.perard@vates.tech>,
 	Juergen Gross <jgross@suse.com>,
 	Jason Andryuk <jason.andryuk@amd.com>
-Subject: [PATCH 0/3] tools/libxenstat: small fixes in the Linux network collector
-Date: Fri, 16 Oct 2026 09:12:56 +0000
+Subject: [PATCH 1/3] tools/libxenstat: don't crash when /sys/class/net can't be opened
+Date: Fri, 16 Oct 2026 09:12:57 +0000
+In-Reply-To: <20261016091259.1254879-1-olivier.lambert@vates.tech>
+References: <20261016091259.1254879-1-olivier.lambert@vates.tech>
 MIME-Version: 1.0
 X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.2a2.ec0f426ae79c724a.1a143fd408c.3006d1f093e7f4ee=-"
+Content-Type: multipart/alternative; boundary="-=Part.2a3.4299984cb8e203e1.1a143fd4d00.d047e9d82b55c6a9=-"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1792142033040
-X-purgate-ID: tlsNG-720697/1792142039-F26B72AC-178D5F58/0/0
+X-Bm-Transport-Timestamp: 1792142036224
+X-purgate-ID: tlsNG-ef75cf/1792142039-A72DCAE4-B763E3EF/0/0
 X-purgate-type: clean
-X-purgate-size: 2051
+X-purgate-size: 1870
 
----=Part.2a2.ec0f426ae79c724a.1a143fd408c.3006d1f093e7f4ee=-
+---=Part.2a3.4299984cb8e203e1.1a143fd4d00.d047e9d82b55c6a9=-
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
 
-While looking at xenstat_collect_networks() for commit 0c53660c1cf3
-("tools/libxenstat: don't lose all VIFs when dom0 has no Linux bridge"),
-I noticed a few more issues in xenstat_linux=2Ec:
+getBridge() doesn't check the return value of opendir(), so readdir()
+and closedir() are passed a NULL pointer when /sys/class/net can't be
+opened, e=2Eg=2E when sysfs isn't mounted=2E As getBridge() is called on e=
+very
+network collection, the libxenstat user (xentop for instance) crashes
+instead of simply not finding a bridge=2E
 
-- getBridge() dereferences NULL when /sys/class/net can't be opened,
-- after a failed /proc/net/dev header check, the next call skips the
-  check and parses the file anyway,
-- parseNetDevLine() doesn't initialise all of its outputs (cleanup, no
-  functional change intended)=2E
+Return early in that case=2E The caller's buffer is zero-initialised, so
+no bridge is reported, which xenstat_collect_networks() handles since
+commit 0c53660c1cf3 ("tools/libxenstat: don't lose all VIFs when dom0
+has no Linux bridge")=2E
 
-Patches 1 and 2 may be worth backporting=2E If so, patch 1 should go along
-with 0c53660c1cf3: without it, the empty bridge name would make every
-VIF disappear instead=2E
+Fixes: 1fd93d4f8cb8 ("xenstat: Linux dom0 statistics for case we use netwo=
+rk bonding")
+Assisted-by: Claude-Code:claude-opus-5-5
+Signed-off-by: Olivier Lambert <olivier=2Elambert@vates=2Etech>
+---
+ tools/libs/stat/xenstat_linux=2Ec | 3 +++
+ 1 file changed, 3 insertions(+)
 
-Testing: libxenstat builds with the usual tools CFLAGS (including
--Werror)=2E I also tested the series on an XCP-ng 8=2E3 host (Xen 4=2E17=
-=2E7,
-Open vSwitch), applied with 0c53660c1cf3 on top of its libxenstat and
-loaded via LD_LIBRARY_PATH:
-- xentop reports the same networks and counters with and without the
-  series,
-- with /sys/class/net made unavailable in a private mount namespace,
-  xentop no longer segfaults in readdir() called from
-  xenstat_collect_networks(),
-- with an invalid /proc/net/dev bind-mounted over the real one, a second
-  xenstat_get_node() call fails again instead of parsing the file=2E
-
-Olivier Lambert (3):
-  tools/libxenstat: don't crash when /sys/class/net can't be opened
-  tools/libxenstat: don't skip the /proc/net/dev check after a failure
-  tools/libxenstat: fix output initialisation in parseNetDevLine()
-
- tools/libs/stat/xenstat_linux=2Ec | 13 ++++++++++---
- 1 file changed, 10 insertions(+), 3 deletions(-)
-
+diff --git a/tools/libs/stat/xenstat_linux=2Ec b/tools/libs/stat/xenstat_l=
+inux=2Ec
+index 2a7d2f1a96=2E=2Eec627f3ef5 100644
+--- a/tools/libs/stat/xenstat_linux=2Ec
++++ b/tools/libs/stat/xenstat_linux=2Ec
+@@ -75,6 +75,9 @@ static void getBridge(const char *excludeName, char *res=
+ult, size_t resultLen)
+ 	char tmp[512] =3D { 0 };
+=20
+ 	d =3D opendir("/sys/class/net");
++	if (d =3D=3D NULL)
++		return;
++
+ 	while ((de =3D readdir(d)) !=3D NULL) {
+ 		if ((strlen(de->d_name) > 0) && (de->d_name[0] !=3D '=2E')
+ 			&& (strstr(de->d_name, excludeName) =3D=3D NULL)) {
 --=20
 2=2E53=2E0
 
@@ -147,5 +150,5 @@ XCP-ng & Xen Orchestra - Vates solutions
 Book a meeting with me: https://calrs=2Evates=2Etech/u/olivier-lambert
 web:=
  https://vates=2Etech
----=Part.2a2.ec0f426ae79c724a.1a143fd408c.3006d1f093e7f4ee=---
+---=Part.2a3.4299984cb8e203e1.1a143fd4d00.d047e9d82b55c6a9=---
 
