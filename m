@@ -4,32 +4,32 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B10AACC6B38
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 07:24:44 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1451307.1666397 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 08549CCA462
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 07:35:10 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1451323.1666406 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHcIh-0002Iz-O9; Fri, 16 Oct 2026 07:24:23 +0000
+	id 1xHcSq-0004F4-Kz; Fri, 16 Oct 2026 07:34:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1451307.1666397; Fri, 16 Oct 2026 07:24:23 +0000
+Received: by outflank-mailman (output) from mailman id 1451323.1666406; Fri, 16 Oct 2026 07:34:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHcIh-0002Is-L9; Fri, 16 Oct 2026 07:24:23 +0000
-Received: by outflank-mailman (input) for mailman id 1451307;
- Fri, 16 Oct 2026 07:24:21 +0000
+	id 1xHcSq-0004Ew-Fx; Fri, 16 Oct 2026 07:34:52 +0000
+Received: by outflank-mailman (input) for mailman id 1451323;
+ Fri, 16 Oct 2026 07:34:51 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger@xenproject.org>) id 1xHcIf-0002Im-QF
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 07:24:21 +0000
+ (envelope-from <roger@xenproject.org>) id 1xHcSp-0004Eq-1M
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 07:34:51 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <roger@xenproject.org>) id 1xHcIf-00000008GHx-2ATv;
- Fri, 16 Oct 2026 07:24:21 +0000
+ (envelope-from <roger@xenproject.org>) id 1xHcSo-00000008GSU-3uFR;
+ Fri, 16 Oct 2026 07:34:50 +0000
 Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
  helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98.2)
- (envelope-from <roger@xenproject.org>) id 1xHcIe-00000006uLu-2B1v;
- Fri, 16 Oct 2026 07:24:21 +0000
+ (envelope-from <roger@xenproject.org>) id 1xHcSn-00000007F8N-40bs;
+ Fri, 16 Oct 2026 07:34:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -44,83 +44,85 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
 	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
-	bh=zX5vRCFuQdz/w9vGXgrcEsBep9Kj6oCh6lAGjzfOiWo=; b=6U3iDdABInDGKbLGdaBtSVV8GN
-	+rIRTvU/pWEykdSh3AFGjsrfwmkXw0z7X7/sEF5Tz4yupyCMCAB0Pinh+7Iw64OFtipfBSjXS7nQu
-	hPYfpvJKOwUfLK9dU1Ni5Kt1FTgSwoAb94TK1QZLArDDPW4N+vGxdzWCTdgKCNMG5qhE=;
-Date: Fri, 16 Oct 2026 09:24:18 +0200
+	bh=w/6ZAigQZ7rrsmqXLLBcIjrnz1DrizXf/I/CGCUSdew=; b=I+GEwE2J1I6VXTG7WTRocdsEYU
+	kxorK31vpPwBJPnqxTSiTmb9JbEtlkZX97ILNFHdg38eW1JBWlOfurfSrdaC4xWXVyhMo5YXVFZ5s
+	JiZIjcjfIFdMSZEGqggGQuWwraxsxNT3CrMxNJCh6C/vl3JKJ1qWl2Kl807+RJlAOX3Y=;
+Date: Fri, 16 Oct 2026 09:34:47 +0200
 From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
 To: Jan Beulich <jbeulich@suse.com>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: Re: [PATCH 14/15] x86/PVH: log Dom0's E820 map earlier
-Message-ID: <atHRIjktRnqUGEZd@Mac.lan>
+Subject: Re: [PATCH 15/15] x86/PVH: simplify writing of Dom0's RSDP
+Message-ID: <atHTl9du422xaY0v@Mac.lan>
 References: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
- <f5cb5cdc-17b0-4678-aa0b-36a0a8a00cc3@suse.com>
+ <bcf7efcc-2648-42e0-ba0b-7f6e32e65f11@suse.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=utf-8
 Content-Disposition: inline
 Content-Transfer-Encoding: 8bit
-In-Reply-To: <f5cb5cdc-17b0-4678-aa0b-36a0a8a00cc3@suse.com>
+In-Reply-To: <bcf7efcc-2648-42e0-ba0b-7f6e32e65f11@suse.com>
 
-On Mon, Oct 12, 2026 at 10:26:24AM +0200, Jan Beulich wrote:
-> Do this as soon as it's final. For debug builds also mark it final, with
-> assertions put in place to make sure it won't further be altered. (For a
-> release build such further altering isn't the end of the world normally,
-> so the situation is left alone there.)
-> 
-> Switch to using %pd while moving the code up.
+On Mon, Oct 12, 2026 at 10:26:58AM +0200, Jan Beulich wrote:
+> Now that we establish where the RSDP is to live before actually loading
+> the kernel (and writing start-info there) we can simply hand the pointer
+> there, eliminating the need for the (fragile) separate write to the field
+> out of pvh_setup_acpi().
 > 
 > Signed-off-by: Jan Beulich <jbeulich@suse.com>
+
+Acked-by: Roger Pau Monné <roger@xenproject.org>
+
+One nit below.
+
+> ---
+> Alternatively we could move start_info to the top-level function, have
+> pvh_load_kernel() and pvh_setup_acpi() fill what need filling, and do
+> the write from the top-level function. Yet it looks to me as if this was
+> more churn for little extra gain.
 > 
 > --- a/xen/arch/x86/hvm/dom0_build.c
 > +++ b/xen/arch/x86/hvm/dom0_build.c
-> @@ -46,6 +46,9 @@
->   */
->  #define HVM_VM86_TSS_SIZE 265
+> @@ -976,7 +976,8 @@ static int __init pvh_load_kernel(
+>      const struct boot_domain *bd,
+>      struct elf_binary *elf,
+>      struct hvm_modlist_entry *mod,
+> -    paddr_t *start_info_addr)
+> +    paddr_t *start_info_addr,
+> +    paddr_t rsdp)
+>  {
+>      struct domain *d = bd->d;
+>      struct boot_module *initrd = bd->initrd;
+> @@ -1110,6 +1111,7 @@ static int __init pvh_load_kernel(
 >  
-> +/* Marker set once Dom0's E820 isn't supposed to change anymore */
-> +static bool __initdata e820_finalized;
-> +
->  static unsigned int __initdata acpi_intr_overrides;
->  static struct acpi_madt_interrupt_override __initdata *intsrcovr;
->  
-> @@ -195,6 +198,8 @@ static int __init pvh_steal_ram(struct d
->      struct e820entry *good = NULL;
->      unsigned int i = d->arch.nr_e820;
->  
-> +    ASSERT(!e820_finalized);
-> +
->      /*
->       * Alignment 0 should be set to 1, so it doesn't wrap around in the
->       * calculations below.
-> @@ -241,6 +246,8 @@ static int __init pvh_add_mem_range(stru
->      struct e820entry *map;
->      unsigned int i;
->  
-> +    ASSERT(!e820_finalized);
-> +
->      for ( i = 0; i < d->arch.nr_e820; i++ )
+>      start_info.magic = XEN_HVM_START_MAGIC_VALUE;
+>      start_info.flags = SIF_PRIVILEGED | SIF_INITDOMAIN;
+> +    start_info.rsdp_paddr = rsdp;
+>      rc = hvm_copy_to_guest_phys(last_addr, &start_info, sizeof(start_info), v);
+>      if ( rc )
 >      {
->          uint64_t rs = d->arch.e820[i].addr;
-> @@ -1759,6 +1766,13 @@ int __init dom0_construct_pvh(const stru
+> @@ -1587,10 +1589,7 @@ static int __init pvh_place_acpi(
+>      return 0;
+>  }
 >  
->      pvh_place_initrd(bd, &elf, &initrd, &blob_start, &blob_end);
+> -static int __init pvh_setup_acpi(
+> -    struct domain *d,
+> -    struct acpi_info *info,
+> -    paddr_t start_info)
+> +static int __init pvh_setup_acpi(struct domain *d, struct acpi_info *info)
+>  {
+>      int rc;
+>      struct acpi_table_rsdp *native_rsdp, rsdp = {
+> @@ -1642,20 +1641,6 @@ static int __init pvh_setup_acpi(
+>          return rc;
+>      }
 >  
-> +    if ( opt_dom0_verbose )
-> +    {
-> +        printk("%pd memory map:\n", d);
-> +        print_e820_memory_map(d->arch.e820, d->arch.nr_e820);
-> +        e820_finalized = true;
+> -    /* Copy RSDP address to start_info. */
+> -    BUILD_BUG_ON(sizeof(info->rsdp) !=
+> -                 sizeof_field(struct hvm_start_info, rsdp_paddr));
 
-You want to pull setting e820_finalized out of the if body, so it's
-not tied to opt_dom0_verbose being set I think?
-
-The rest LGTM, so:
-
-Acked-by: Roger Pau Monné <roger@xenproject.rog>
-
-With the above change.
+You add this BUILD_BUG_ON() in a previous patch and remove it here.
+Maybe it's not worth adding?
 
 Thanks, Roger.
 
