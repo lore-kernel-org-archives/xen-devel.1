@@ -4,49 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 987A8CCA464
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 08:17:14 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1451366.1666433 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id A4BC1CCA464
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 08:43:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1451385.1666446 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHd7d-0003rx-Cy; Fri, 16 Oct 2026 08:17:01 +0000
+	id 1xHdWy-0000hv-Ft; Fri, 16 Oct 2026 08:43:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1451366.1666433; Fri, 16 Oct 2026 08:17:01 +0000
+Received: by outflank-mailman (output) from mailman id 1451385.1666446; Fri, 16 Oct 2026 08:43:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHd7d-0003rp-8O; Fri, 16 Oct 2026 08:17:01 +0000
-Received: by outflank-mailman (input) for mailman id 1451366;
- Fri, 16 Oct 2026 08:17:00 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a143c90ffa0008425@swg.vates.tech>)
- id 1xHd7b-0003rj-VR
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 08:16:59 +0000
+	id 1xHdWy-0000ho-CJ; Fri, 16 Oct 2026 08:43:12 +0000
+Received: by outflank-mailman (input) for mailman id 1451385;
+ Fri, 16 Oct 2026 08:43:11 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xHdWx-0000hi-9h
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 08:43:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHd7b-000bi1-8C
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 10:16:59 +0200
-Received: from [10.42.69.7] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a143c90ffa0008425@swg.vates.tech>)
- id 6ad1dd77-bab6-0a2a0a5309dd-0a2a45079aa6-10
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 10:16:59 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a143c90ffa0008425@swg.vates.tech>)
- id 6ad1dd7a-b4ea-0a2a45070019-b9ff1c23a7a9-3
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 10:16:58 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a143c90ffa0008425.006 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 16 Oct 2026 08:16:52 +0000
-Received: from julian.home (82-67-211-29.subs.proxad.net [82.67.211.29])
- (Authenticated sender: julian.vetter@vates.tech)
- by mail2.vates.fr (Postfix) with ESMTPSA id AC47E82986;
- Fri, 16 Oct 2026 10:16:51 +0200 (CEST)
+ id 1xHdWw-0025Dk-Mg
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 10:43:10 +0200
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ad1e394-bab6-0a2a0a5309dd-0a2a45029d40-24
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 10:43:10 +0200
+Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ad1e39e-6ca4-0a2a45020019-d1558029b5f7-3
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 10:43:10 +0200
+Received: by mail-wm1-f41.google.com with SMTP id
+ 5b1f17b1804b1-4a180fbeef5so55750725e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 01:43:10 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a1cbedb6f7sm40406185e9.2.2026.10.16.01.43.09
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Fri, 16 Oct 2026 01:43:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,116 +52,121 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=lPA7fuWKSR6byGUoRsVIAsbvFGrN0S2PPt7NfGEmLLc=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=lF6+1ZvUSGtgnb08nMFfS2wd3soAtIwbrrQ8f4aZn7C2/tWr4GoTGTB8xE2WXZzp0+qXWPHGQ
- ELNh1iBeou96ZByBDaDWWVbf2f5WiC4QKBYG6oaJolYza4aoytQIz0xPK7w4BxDmlw0eBJQJBKm
- DfbQZJe3ItQesf/IeMDhEZKHwTTGcbUZU43o0Z3YZtFlGInZGxqbZRyM69eE8JvEIncEvnZw0to
- APXiQah0SNRKF6l0hzTB8/APNLCujOt0tupIZ8NDDi8Z9oEHYyuxlP+ZeTNbU2hni6LyYMGVC5A
- 9QzP+fLcC/NSvBXQ61lFyTZAAjirbrX339epM9J3x7rA==
-X-Zone-Loop: 4452f9c131a50a54aaa10b2a811b47d306e59ab16a16
-x-campaign-type: default
-x-transaction-id: a4e4efd4-0c41-4417-b9b6-aff07a95e354
-x-swg-uid: 01-94f4a56a-9ced-46ff-8760-79218bef2b0f
-X-Mailer: Sweego
-Message-ID:
- <1792138612.8631fc262581453bbf619ec5b2062170.1a143c90ffa0008425@vates.tech>
-x-swg-bid: 1792138612.8631fc262581453bbf619ec5b2062170.1a143c90ffa0008425
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Julian Vetter <julian.vetter@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Julien Grall <julien@xen.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>,
-	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
-	Julian Vetter <julian.vetter@vates.tech>
-Subject: [PATCH 1/1] xen/arm: populate a default P2M pool for new domains
-Date: Fri, 16 Oct 2026 10:16:46 +0200
-In-Reply-To: <1792138386.8631fc262581453bbf619ec5b2062170.1a143c59b630008425@vates.tech>
-References: <1792138386.8631fc262581453bbf619ec5b2062170.1a143c59b630008425@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1792140190; x=1792744990; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=3gTSuV+PJUern7SPamPr3NuSPV+s9DhBdkBjMM8M3C0=;
+        b=S/OE0un/R8P8UITXMBbJElVaeAmZy7wEhe/jy1HO45AYBp08r/qZpY7hHxvJ8zVNAp
+         1K4eJ9Eh0g2yndrH00v9nNilw1qlUi+Cizl4wCitxBYS5cQhqZ5/A3t7IxmMxggPCk4t
+         6sDAuhPsHjSOik+scOvKirlZwIOQxC0KehqW5zee6GdE5PEI1knIqghFWRourrvmXp2+
+         qx2ulj5UmMh3ayBk8hlvl5gaHnoteTrtBs+wXYyWE/7MqwtjTXlVUiSrxCw/waRaX2Ko
+         KRi9tLD2DmjpQ/N7tQJhdgTQ/ABtveSwh3i7q4vVOp86RkJSbNQKs357i6ncRg75xvGr
+         oryw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792140190; x=1792744990;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=3gTSuV+PJUern7SPamPr3NuSPV+s9DhBdkBjMM8M3C0=;
+        b=EYKS8DBYBoAjBnZTgYP9LFEkuOh+VJ97ziwfiZrASYQdYOmlE3fe4T73NXrjWdu226
+         0CArCmIe9u32904DPM5s0djLxuTZAkcMmwP6Qda2Ta2awPeSinZ7WvQ9pW0M8g2mO+h/
+         ISPs1H0XNHVssg4F7vI9bti4fHWy0Lhra7dksQoGVbKrZ7bcGXg7ceFIznh8byKD2IY2
+         FSasvQxWHsu7wU+qnMpemv0ShCjzHuDJIry2VeTxq/R0ohynPqdgx5zcQ9z9L12ok/W+
+         y+h4sIXkFW8lxorX6c31/QQzMI8smAVi7eJqPM4XOdWNT/ZCUBZfL+3gOLxrOUbW7vz2
+         mFeQ==
+X-Gm-Message-State: AFq9FYIdScJlB1yQDoif15456x+vJKtzS3Vd72Eax/i2dJK1F3r7V+UM
+	AkIx+68igJ2Rkf5zuAdy0t3cvwn41vDw4fQBnbr2AbF7LDtZZPaR7yoOxYqmPYD91Q==
+X-Gm-Gg: AYBFou3XiWensjqgj5tXsDMTvzQ+E1Kv0RSYs6vowGHkUAWjhIiucSjNkg7JZzE4ohO
+	CcJ8mk9xj9fr9AZFtSe43Ud/tDQshrgWy7cBmNuq7ZbiXPcPnjhv1mmwRQBM/E+rMju2kRWg8Le
+	ZP3RDWtZAYCCuI5K5240SsmMlxOdbm1hm0J1h65kG/Zna14baa3tllOHUXuNBF5Y1iGm7Rkv7W2
+	o4b28GRcdz9Ffkn2SNw7wa0dblFkuOjrUuohdtJ6tAhAvZcqAiHhTaOsqep+aJloaJsL7Fjjqn+
+	rIkSx+1X+k5GqlXQr7ELWsJNgncYcFrGWmFmupNKlKH1dtqHOvFttHJ9Y+sDLEWK4+ae2Wqcc7H
+	7F5JyBgFT6gUnvClLgTauh2y0KmTip7hRT+qXCoNUKRGjskk0pjXsWIghkyDotvcdTYM9+04Lbt
+	5/KoIYocqZZxtQbYGTlc7ccjflh5lgr9piGy89xejvv9z5ErfsaqObFT2pVtvs+gMqgys+DQnu8
+	ZoYIGMqIVS88o78dyYiAdHsgMIxPgB+E6UDg8hLo1Mfu+PzP7yV+lcmV6bzK34=
+X-Received: by 2002:a05:600c:820d:b0:4a1:65d2:7912 with SMTP id 5b1f17b1804b1-4a18e47b302mr389242125e9.8.1792140190005;
+        Fri, 16 Oct 2026 01:43:10 -0700 (PDT)
+Message-ID: <92148677-e512-4883-b66f-dc340c2915e5@suse.com>
+Date: Fri, 16 Oct 2026 10:43:09 +0200
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.282.7b75de151badd906.1a143c90d8d.9bffdebb0261bc47=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1792138612109
-X-purgate-ID: tlsNG-ef75cf/1792138619-36AD8AE4-4F333B4B/0/0
-X-purgate-type: clean
-X-purgate-size: 2180
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 10/15] x86/PVH: convert find_memory() to using a rangeset
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>
+References: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
+ <c27c214a-da72-419d-ae30-2315b85d0c83@suse.com> <atDvNeMKy__hL2IV@Mac.lan>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <atDvNeMKy__hL2IV@Mac.lan>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-720697/1792140190-66EB32AC-3C9C7CBF/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1222
 
----=Part.282.7b75de151badd906.1a143c90d8d.9bffdebb0261bc47=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 15.10.2026 17:20, Roger Pau Monné wrote:
+> On Mon, Oct 12, 2026 at 10:24:44AM +0200, Jan Beulich wrote:
+>> Subsequently we will need to exclude a 2nd range here. To avoid
+>> complicating the logic when it needs to cover two ranges, follow the
+>> suggestion left in a code comment and convert to using a rangeset.
+>>
+>> Suggested-by: Xenia Ragiadakou <xenia.ragiadakou@amd.com>
+>> Signed-off-by: Jan Beulich <jbeulich@suse.com>
+> 
+> Acked-by: Roger Pau Monné <roger@xenproject.org>
 
-Since commit 9c962e07fb ("xen/arm: Clean-up in p2m_init() and
-p2m_final_teardown()"), ARM domains start with an empty P2M pool=2E So,
-populating the physmap fails, as no page tables can be allocated until
-the pool is sized by, e=2Eg=2E, the toolstack=2E
+Thanks.
 
-Restore the call to add a small default pool of 16 pages in p2m_init()
-again, as before 9c962e07fb=2E The hardware domain is skipped, as it
-doesn't allocate its P2M pages from the page pool=2E Also skip it if LLC
-coloring is enabled=2E The colors are only configured after domain
-creation, so the pool pages would be allocated with the default colors=2E
+>> --- a/xen/arch/x86/hvm/dom0_build.c
+>> +++ b/xen/arch/x86/hvm/dom0_build.c
+>> @@ -518,14 +518,38 @@ static int __init pvh_populate_p2m(
+>>  #undef MB1_PAGES
+>>  }
+>>  
+>> +struct mem_info {
+>> +    size_t size;
+>> +    paddr_t addr;
+>> +};
+>> +
+>> +static int cf_check __init _find_memory(
+> 
+> I don't really like underscore prefixed functions, I would rather name
+> this check_memory_range() or similar.
 
-Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
----
- xen/arch/arm/mmu/p2m=2Ec | 16 ++++++++++++++++
- 1 file changed, 16 insertions(+)
+A single leading underscore followed by a digit or a lower-case letter
+matches what is "always reserved for use as identifiers with file scope
+in both the ordinary and tag name spaces". I.e. I not only see nothing
+wrong with such a use, but I consider it actively encouraged.
 
-diff --git a/xen/arch/arm/mmu/p2m=2Ec b/xen/arch/arm/mmu/p2m=2Ec
-index 2cf35d8a37=2E=2Ede8dd26a72 100644
---- a/xen/arch/arm/mmu/p2m=2Ec
-+++ b/xen/arch/arm/mmu/p2m=2Ec
-@@ -3,6 +3,7 @@
- #include <xen/domain_page=2Eh>
- #include <xen/ioreq=2Eh>
- #include <xen/lib=2Eh>
-+#include <xen/llc-coloring=2Eh>
- #include <xen/sched=2Eh>
- #include <xen/softirq=2Eh>
-=20
-@@ -1541,6 +1542,21 @@ int p2m_init(struct domain *d)
-     if ( rc )
-         return rc;
-=20
-+    /* Populate 16 pages to the P2M pages pool here=2E
-+     *
-+     * Skip the hardware domain, which allocates its P2M pages from the h=
-eap,
-+     * and LLC colored setups, as the domain's colors are only configured=
- after
-+     * domain creation=2E
-+     */
-+    if ( !is_hardware_domain(d) && !llc_coloring_enabled )
-+    {
-+        spin_lock(&d->arch=2Epaging=2Elock);
-+        rc =3D p2m_set_allocation(d, 16, false);
-+        spin_unlock(&d->arch=2Epaging=2Elock);
-+        if ( rc )
-+            return rc;
-+    }
-+
-     return 0;
- }
-=20
---=20
-2=2E53=2E0
-
-
-
--- 
-Julian Vetter | Vates Hypervisor & Kernel Developer
-
-XCP-ng & Xen Orch=
-estra - Vates solutions
-
-web: https://vates=2Etech
----=Part.282.7b75de151badd906.1a143c90d8d.9bffdebb0261bc47=---
+Jan
 
