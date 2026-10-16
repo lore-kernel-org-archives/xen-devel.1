@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id BD403CCA462
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 09:02:17 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1451408.1666474 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 507EDCCA464
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 09:04:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1451419.1666492 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHdox-0004yJ-D5; Fri, 16 Oct 2026 09:01:47 +0000
+	id 1xHdrL-00060I-1X; Fri, 16 Oct 2026 09:04:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1451408.1666474; Fri, 16 Oct 2026 09:01:47 +0000
+Received: by outflank-mailman (output) from mailman id 1451419.1666492; Fri, 16 Oct 2026 09:04:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHdox-0004yC-7o; Fri, 16 Oct 2026 09:01:47 +0000
-Received: by outflank-mailman (input) for mailman id 1451408;
- Fri, 16 Oct 2026 09:01:45 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xHdov-0004y6-Ku
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 09:01:45 +0000
+	id 1xHdrK-00060B-UB; Fri, 16 Oct 2026 09:04:14 +0000
+Received: by outflank-mailman (input) for mailman id 1451419;
+ Fri, 16 Oct 2026 09:04:13 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xHdrJ-000603-PE
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 09:04:13 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHdou-009wen-Qq
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 11:01:44 +0200
+ id 1xHdrJ-00AaeA-2F
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 11:04:13 +0200
 Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ad1e7f3-2eae-0a2a0a5409dd-0a2a450ad11e-12
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 11:01:44 +0200
-Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ id 6ad1e886-e002-0a2a0a5209dd-0a2a450a9f96-38
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 11:04:12 +0200
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
  by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ad1e7f8-f2d2-0a2a450a0019-d155dd2fc47c-3
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 11:01:44 +0200
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-48b060ec084so3997248f8f.0
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 02:01:44 -0700 (PDT)
+ id 6ad1e88c-f2d2-0a2a450a0019-d155802ec56c-3
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 11:04:12 +0200
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-4a172eb31f0so55270575e9.1
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 02:04:12 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1c8de8c58sm42241235e9.15.2026.10.16.02.01.43
+ 5b1f17b1804b1-4a1c8ad6252sm61190715e9.5.2026.10.16.02.04.11
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Oct 2026 02:01:43 -0700 (PDT)
+ Fri, 16 Oct 2026 02:04:12 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,54 +54,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1792141304; x=1792746104; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1792141452; x=1792746252; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=gMy3fFxT0pnvyU53pkFRWNzK567H81OB9IKHouNp6bg=;
-        b=GfYtu9C06xRDTBJES/87JVGFmzTG7Uq6rS0xu9wkHS2NCf+e8Dnsnj0pALx+rNtvDu
-         9qMKbVkN6FWuupndYHavO/ntZUg+Rudjr7ts55xZSFmERyun+XWQIPeF8TiqCdaDQcOp
-         piaTozL47b5KsIsazTr9NYmHb/9HRxTihRz44ckVxjhfAJEvaav9V+6+5ud5b2Ld+qWn
-         g8dqAdx2ThbhRWi5rsDWXUI+Zp/nxQpK1gP05zwj+d/9xmseJBoLmMiOdyNRdHSzz2kV
-         UYPeOv8jHpF08Elt5f69EnVkPEA5LFTArFeDedrg7NIWTcz1aeqgBcLsFm1iN9ME0lc9
-         vzhA==
+        bh=Q6TUpuvrBn9Ib3+d/1jzY2oqfFrVO2WbbWZ2t+xu0Tg=;
+        b=Gs/i+Nu/Y7u5fVJErlxftltFj/OpFz1LI/4XRRAUXCKZ5ZGsYs8gFfB10GYu7VuRVQ
+         4mBjJ4nojMSUDMJSGJz8OXFfh5whXmoCKCgcySMPghGg7e61wV8mNhHP463oZKwmnDW1
+         hRcTwvh2JjCpmRf3dZN2LhjpezvAwFMhaZFfZp5nB0rX8EubXkH9XyzOwNdv6vYoAstp
+         ehmp2kq4TG5E6Dro+EX7lULL9jakwpW0xn00M78QzSKp2HFJbBpbnDkEzCQfIidBrfU8
+         DMoaaMicdtSS2wbiUEcRNt7He35gFzl21QXkvQANZ1Z59Fiq7cdTRy7Y5L74JqQZH49/
+         bHVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792141304; x=1792746104;
+        d=1e100.net; s=20260707; t=1792141452; x=1792746252;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=gMy3fFxT0pnvyU53pkFRWNzK567H81OB9IKHouNp6bg=;
-        b=iOzPwmwxvC+/dfXXdCCT8g7MyYEOrchYikg2tOrUstIsLWq1SwevESQ8790+mluEBc
-         JWM2aHhdE3oFCJ7TDmMLbK3oB+XHl/9o4fjt9Qozin+zJ10x4YQ750b73J8aUhmN7LaQ
-         cezp93O0FAGRmAx/oFJ51PddIWCdwQWcgISn7zQ+6BXhHvwxmFRBt1pWDhXB+212mYz5
-         z/t5Enuv1UuaRYBuxoc5ZMvpBIVWhEMCpILzHGCsKnLLJFp1geuzK7X2UdUQvsLjrUZd
-         Nqqnqc2OO8k73hN2L6nxso/3BkTKZrFfcD13qKfYZmKQZ2SKJJDfaWTht70J38Lr5Q0P
-         hPBQ==
-X-Gm-Message-State: AFq9FYKPcDV+jSjltB4BZ6sKAYvvSLQbjyuZfRrNjfu6W91HD0Ep//Pj
-	QnRNSAIgL4esZYkhQGMwUT7fbD/EMt9qubv/e4ExrKO8X9iS5D8KYHZ9PN6EuGUZ2A==
-X-Gm-Gg: AYBFou0vd18LgG1bP/2VHLdbXylX2rAKlk6b2tpOABHPl7OUc/zRiII5GGlqO17QQKd
-	q2GvKVymOEVO2SUI/myLlEDMbdgJ912ILWB6kwxPDaARKcPZnuYpcL+ZRzdJdjOqAGGbWiBC7v8
-	E/kz9DHizGO9atwch6VU2K6LAE8IKkWIa6KEgdCtaDuN8muoRnrLYbrNa3or82j85HHNXvQYbGc
-	V/XrdN9zQwuuydgaOMH6dU5fUM/nizvgpaPYPgps5iu8msDn5ioeztTu8Zenf91Nq6MIhIY7khy
-	CIhzxGlcpHxtkC8P0Ky36HQjudC09j8dkXp/ltjQxwiS/6eNtnAo123CIiCSlAfvTfLFHQwuo9s
-	/ED7tCsjkR2RrXJez6RF2XNYyRQAsC3sMHtuchamIO6fyV4GZkJz+mFo1p6d9y4NM3mU+3gyM4Z
-	PaVYxPbzPbT6r5AJYrGL788XOaYLphkhTyuw6lx+VzwGd82hciDmN7HNFmozG4B+WMkNbdpgf0n
-	MYLsqFyscUhPINLD3KddxZ3CvCuUABjvKtR34eWnJL8+ITdxVxMY2YdU5hi7VQ=
-X-Received: by 2002:a05:600c:8184:b0:4a0:1c17:4fb2 with SMTP id 5b1f17b1804b1-4a18e4d854cmr419203925e9.31.1792141303958;
-        Fri, 16 Oct 2026 02:01:43 -0700 (PDT)
-Message-ID: <4912ef60-b5e9-4f48-8043-97f51359e7a4@suse.com>
-Date: Fri, 16 Oct 2026 11:01:43 +0200
+        bh=Q6TUpuvrBn9Ib3+d/1jzY2oqfFrVO2WbbWZ2t+xu0Tg=;
+        b=1zpRzTzQgbhxX++WeQNp0eqDpIoyWBfHpnAc5unMEgiOyYuRObLhHIk0jlL3pWKpeF
+         0b0r3ohiQp/OglcSLp9ZdDpJKm+LE6SmOkqjh9/rpxOTd6U69DdweFgXQp23biY31R7S
+         eDBExxRZfqdvIJCWdgKVqbPvCDOPodxTf19J8nN04iJ5NgRShtupZNhhofcpHo4wRJYx
+         nxWuU7/pt1SyWjFg2+QixtGQHDsqDx9zqGe1x9ag5OfWhj6FYIbe83iO9bql7MX2innU
+         SKB+kPj2Dte72f2wIiYRAa0mzob8LKkTOe4zEQgK8WsIywsDM+AhmreOxaHGrdqMTRFu
+         oTyQ==
+X-Gm-Message-State: AFq9FYJFtEMB0AimphQNC3Yc3jzkRRkQA10oiQLXudPrI447slCmftMA
+	d/2LjssKA0iFcOn+E2KI1KZ9k8cWKvmk9KeXtbr5tMU+4JJrzEAZHwCREl1pee3sHPANd9dPIv7
+	/jPgABg==
+X-Gm-Gg: AYBFou1XdNCMkLVRXNPnEWrj0LEFui4c/oeIr+8qoz4bpe46JrpZb+fVd3h0Uw14DTp
+	oDFhg8V4daYpnCNULqeEw/1fdcgqMWrBPFk0LEK433B0U4a228HTRXY/gQqsme4P/BDYH4ILNiu
+	CJNoRxH/QB80I6kKyiwoBrV7KKq+iZNiQRp1a252h9S5JnaWJb7iIYuwNpYDabvHdxjp5tRgeLT
+	9pJgOJFYy+bD/md6npSwGTSQLGJ2pbz650GoMCkgCEybaHcUdR9eV+HpN6v663av19R6tQDaWFz
+	aZRN+H3V/KpkM7Dx+UwSGrLoigwxHBGcsZzyzBMzY1pnj+pIGcAOCrKE0DNWxpb8OcDMTRHd9L7
+	pTLO0G8HWT5SLgN8lu53UiFEvRmRvzZ3Uu8VS4wiY8khSb+dBodFMMDjJ5upzdUAiC+cgTCzSrH
+	ZEvHxzxf2wghkmbfaplxl68BdR/cqsiXwdy9f4nDsj02sdfiCBsTc2lV6dbmks6fBPkH//z5/D4
+	1UK/VF6/lyljrxip2b734SXtlxLE1QYrL7U1WN4o5CdrNZt4MKd2rYOjfj3oA==
+X-Received: by 2002:a05:600c:8b65:b0:49e:6683:d23c with SMTP id 5b1f17b1804b1-4a18e3ef1bdmr414743595e9.0.1792141452422;
+        Fri, 16 Oct 2026 02:04:12 -0700 (PDT)
+Message-ID: <0619015c-04ab-4310-af1d-430e1b028df3@suse.com>
+Date: Fri, 16 Oct 2026 11:04:11 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 14/15] x86/PVH: log Dom0's E820 map earlier
+Subject: Re: [PATCH 15/15] x86/PVH: simplify writing of Dom0's RSDP
 To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
 Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
  Teddy Astie <teddy.astie@vates.tech>
 References: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
- <f5cb5cdc-17b0-4678-aa0b-36a0a8a00cc3@suse.com> <atHRIjktRnqUGEZd@Mac.lan>
+ <bcf7efcc-2648-42e0-ba0b-7f6e32e65f11@suse.com> <atHTl9du422xaY0v@Mac.lan>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -127,76 +128,41 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <atHRIjktRnqUGEZd@Mac.lan>
+In-Reply-To: <atHTl9du422xaY0v@Mac.lan>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1792141304-593C4CFC-7522B6E8/10/78276251493
+X-purgate-ID: tlsNG-4011c0/1792141452-58DC7CFC-5CF778E5/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2144
+X-purgate-size: 1043
 
-On 16.10.2026 09:24, Roger Pau Monné wrote:
-> On Mon, Oct 12, 2026 at 10:26:24AM +0200, Jan Beulich wrote:
->> Do this as soon as it's final. For debug builds also mark it final, with
->> assertions put in place to make sure it won't further be altered. (For a
->> release build such further altering isn't the end of the world normally,
->> so the situation is left alone there.)
->>
->> Switch to using %pd while moving the code up.
+On 16.10.2026 09:34, Roger Pau Monné wrote:
+> On Mon, Oct 12, 2026 at 10:26:58AM +0200, Jan Beulich wrote:
+>> Now that we establish where the RSDP is to live before actually loading
+>> the kernel (and writing start-info there) we can simply hand the pointer
+>> there, eliminating the need for the (fragile) separate write to the field
+>> out of pvh_setup_acpi().
 >>
 >> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->>
->> --- a/xen/arch/x86/hvm/dom0_build.c
->> +++ b/xen/arch/x86/hvm/dom0_build.c
->> @@ -46,6 +46,9 @@
->>   */
->>  #define HVM_VM86_TSS_SIZE 265
->>  
->> +/* Marker set once Dom0's E820 isn't supposed to change anymore */
->> +static bool __initdata e820_finalized;
->> +
->>  static unsigned int __initdata acpi_intr_overrides;
->>  static struct acpi_madt_interrupt_override __initdata *intsrcovr;
->>  
->> @@ -195,6 +198,8 @@ static int __init pvh_steal_ram(struct d
->>      struct e820entry *good = NULL;
->>      unsigned int i = d->arch.nr_e820;
->>  
->> +    ASSERT(!e820_finalized);
->> +
->>      /*
->>       * Alignment 0 should be set to 1, so it doesn't wrap around in the
->>       * calculations below.
->> @@ -241,6 +246,8 @@ static int __init pvh_add_mem_range(stru
->>      struct e820entry *map;
->>      unsigned int i;
->>  
->> +    ASSERT(!e820_finalized);
->> +
->>      for ( i = 0; i < d->arch.nr_e820; i++ )
->>      {
->>          uint64_t rs = d->arch.e820[i].addr;
->> @@ -1759,6 +1766,13 @@ int __init dom0_construct_pvh(const stru
->>  
->>      pvh_place_initrd(bd, &elf, &initrd, &blob_start, &blob_end);
->>  
->> +    if ( opt_dom0_verbose )
->> +    {
->> +        printk("%pd memory map:\n", d);
->> +        print_e820_memory_map(d->arch.e820, d->arch.nr_e820);
->> +        e820_finalized = true;
 > 
-> You want to pull setting e820_finalized out of the if body, so it's
-> not tied to opt_dom0_verbose being set I think?
-
-Hmm, yes - not quite sure what I was thinking.
-
-> The rest LGTM, so:
-> 
-> Acked-by: Roger Pau Monné <roger@xenproject.rog>
-> 
-> With the above change.
+> Acked-by: Roger Pau Monné <roger@xenproject.org>
 
 Thanks.
+
+> One nit below.
+> 
+>> @@ -1642,20 +1641,6 @@ static int __init pvh_setup_acpi(
+>>          return rc;
+>>      }
+>>  
+>> -    /* Copy RSDP address to start_info. */
+>> -    BUILD_BUG_ON(sizeof(info->rsdp) !=
+>> -                 sizeof_field(struct hvm_start_info, rsdp_paddr));
+> 
+> You add this BUILD_BUG_ON() in a previous patch and remove it here.
+> Maybe it's not worth adding?
+
+I can drop it. Imo it should have been there from the start, hence why
+I added it in the earlier patch. I can drop it again from there, sure.
 
 Jan
 
