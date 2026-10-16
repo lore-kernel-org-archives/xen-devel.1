@@ -4,43 +4,53 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B2AE6CCA46C
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 13:01:21 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1451823.1666674 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 12DF1CCA46C
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 13:58:17 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1451930.1666767 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHhYQ-0001az-Dx; Fri, 16 Oct 2026 13:00:58 +0000
+	id 1xHiRM-0002gR-BL; Fri, 16 Oct 2026 13:57:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1451823.1666674; Fri, 16 Oct 2026 13:00:58 +0000
+Received: by outflank-mailman (output) from mailman id 1451930.1666767; Fri, 16 Oct 2026 13:57:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHhYQ-0001as-BE; Fri, 16 Oct 2026 13:00:58 +0000
-Received: by outflank-mailman (input) for mailman id 1451823;
- Fri, 16 Oct 2026 13:00:57 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xHhYP-0001am-Ko
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 13:00:57 +0000
+	id 1xHiRM-0002gK-8Y; Fri, 16 Oct 2026 13:57:44 +0000
+Received: by outflank-mailman (input) for mailman id 1451930;
+ Fri, 16 Oct 2026 13:57:43 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <mark.caveayland@nutanix.com>) id 1xHiRL-0002g9-7N
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 13:57:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHhYP-00BI3v-1G
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 15:00:57 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xHiRK-00AmjV-Jm
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 15:57:42 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ad22008-e002-0a2a0a5209dd-0a2a4503e226-2
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 15:00:56 +0200
-Received: from [209.85.128.44] (helo=mail-wm1-f44.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ad22008-fae8-0a2a45030019-d155802cf0ee-3
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 15:00:56 +0200
-Received: by mail-wm1-f44.google.com with SMTP id
- 5b1f17b1804b1-4a0286c981dso29903355e9.2
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 06:00:56 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1cf05009csm40328065e9.10.2026.10.16.06.00.55
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Oct 2026 06:00:55 -0700 (PDT)
+ (envelope-from <mark.caveayland@nutanix.com>)
+ id 6ad22d2c-2eae-0a2a0a5409dd-0a2a4502c4d6-46
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 15:57:42 +0200
+Received: from [148.163.151.68] (helo=mx0a-002c1b01.pphosted.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <mark.caveayland@nutanix.com>)
+ id 6ad22d54-6ca4-0a2a45020019-94a397447fdc-3
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 15:57:41 +0200
+Received: from pps.filterd (m0127839.ppops.net [127.0.0.1])
+ by mx0a-002c1b01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69GABbps2741207; Fri, 16 Oct 2026 06:57:36 -0700
+Received: from byapr05cu005.outbound.protection.outlook.com
+ (mail-westusazon11020088.outbound.protection.outlook.com [52.101.85.88])
+ by mx0a-002c1b01.pphosted.com (PPS) with ESMTPS id 4haxj936j4-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Fri, 16 Oct 2026 06:57:36 -0700 (PDT)
+Received: from PH0PR02MB7159.namprd02.prod.outlook.com (2603:10b6:510:16::8)
+ by CO6PR02MB8836.namprd02.prod.outlook.com (2603:10b6:303:147::19) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Fri, 16 Oct
+ 2026 13:57:35 +0000
+Received: from PH0PR02MB7159.namprd02.prod.outlook.com
+ ([fe80::8e97:bc32:822c:b250]) by PH0PR02MB7159.namprd02.prod.outlook.com
+ ([fe80::8e97:bc32:822c:b250%4]) with mapi id 15.21.0522.016; Fri, 16 Oct 2026
+ 13:57:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -52,163 +62,205 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1792155656; x=1792760456; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=+VzQasMx3AclanLA//drErojCbGFBcuIocNUtysrGL4=;
-        b=WZ/KqLzC5ROOIOis6e4mTWHlKj+SWUsqZCa7y4II3W5VEmfaloaHpiC53Y4f8luZmi
-         d985irvzkDoQTjfgU+uEWq0WvINe+clbFHmv7L6tbwlsZHLXC73aWvJcatcZ1534RVU+
-         TWTb8PbtBlA/YxE7eij+L89969m/dLA6YesHRO/Vmex929YShcTx6TnMk09f1TFKPVvy
-         pj6MP4ggvj9Oj9K6hmTPxMmnwN2jllYphXm3Q+nx4mCYPUwYiXHTJKIW5qX2ZTPVUEDX
-         MObB4Hp68znK/398rMnzRdWwHnT/qo+Mf9WpoyzXxdvsvId4WBpeFSU8EiftCeBJjJuJ
-         2Szg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792155656; x=1792760456;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=+VzQasMx3AclanLA//drErojCbGFBcuIocNUtysrGL4=;
-        b=HXxMw+yfAKqFu98G8GziPR8A4ayOX7FbMZLq7VvzhEQgCHcIJEnCO5LX0YXonM+9um
-         RNIJW+/U4FY47inVNwdnwxQ8Mt+wLi+xJM6H0w3233/gkD91etb+cU9FLp4007hLLLlK
-         NnSvouzHDO1Rlgf1qYjEqF5P5DSyNEa5qKf7tgFmkHm6auOYHmEE94otnHVpkWQQOGIR
-         5AJywgWUe+l4wKAUlSaa87dpqtHY1Yles72+1RfJWVN5D9EQsLaVZqDY3Q7OWtGysDIv
-         emmMXngo5uJkEW75yGRqFBnaXboXqObswbsHPniv5GqG4T4iACnGSvDleJIOra30tVIP
-         /rGg==
-X-Gm-Message-State: AFq9FYK+oau3jPtrLgrJiloMV+XXcNSqvmQMKlVlOdYZ3xKKDP9rhd3p
-	jQRzZrhIJ31OPDZ3z8B7gMT73WjaMpILSS8GmoVMCC/vHGhqqOfgYSlU2ci103JooQT/m+z1aoy
-	T4MHOaw==
-X-Gm-Gg: AYBFou1gytP/A90N0CZUdakjn2pmTRIKD66VPP6P7TfBOnAmor408nfJDn4uKf43aEK
-	iepUVDgqFTYg+lkXUs4Bgz93Agh9T5+dDb/2OQJ3tqRj1BWJwvEzRJ3S6OXW3+IhkesbYSSc5Xw
-	67ma+PLSgApOqm6s2pRJaPqbKtnajQ8PICsczD0JjYYioRdwuvNreCF5tsK5JTo7WYTe27WsmNQ
-	GTH0uih/GaOC/xCNJf5h4FuQNJTVkDvMV3YJbj1GM0ZYsaq/BR3z5+VLAQG/5+RUNBYV73KyIdY
-	7zGER1KCAoITen7gT98oJ5thxuSYqM+3rzFLRPGOZdnqHRL1TQ41m2LGjMRvRnfUspcFU3kK36P
-	AZV+akqUTmzrI0Lc0rkiMlHYZRA6dr2kMb9YYHLcNW9Mf78pv1botat7NSRrBaZLQhwmcGPSI3z
-	r7+JBM5lSLsw2ucjVkh3w6x3S5/5ulpt57IdqnW2oAlWBobJfubwvZFyGaZOMgcdOqXHvrTq1sN
-	LDI0wpt5qdz8qsErJ4DLrZBtvxLKoQ6Lkry0GC/HnoFiMndZnXZk2IHTYalyA==
-X-Received: by 2002:a05:600c:8518:b0:4a1:7ecc:b23c with SMTP id 5b1f17b1804b1-4a18e49879dmr417473045e9.6.1792155656301;
-        Fri, 16 Oct 2026 06:00:56 -0700 (PDT)
-Message-ID: <37a6531e-0908-4453-acf2-4174966ac4c2@suse.com>
-Date: Fri, 16 Oct 2026 15:00:54 +0200
-MIME-Version: 1.0
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=proofpoint20171006 header.d=nutanix.com header.i="@nutanix.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector1 header.d=nutanix.com header.i="@nutanix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=
+	cc:content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	proofpoint20171006; bh=R2XJd+bzf7a5y0OLUtZYoxG8U9doHLHY9o2PABFAv
+	1Y=; b=z3KyA7uwIiLAyjP2uEh2IfdrRrZBwWFRPkDVEPPPfwTrqjw8X60L9ihr3
+	FbnW/O7jtd5s+Tgu1UxUmRo40KPRV0psOYwzl/HKjADbsTNecOAcm5nR9jzMxOj2
+	uLziYrKOzZTwzvGEEYsx5h0kVLybBn10YYQNfXairg/I/BzdbdVFR4RCWdAowOvi
+	hpIol2WTWMI4J3ePsOoKqqHAPQJl3m6RLWpBwpd14l8TmwEs5PM0GzpwBNqFzCH3
+	9KaM28Q2MLoPLFm5Z48ofuAOX0dyFjqX5/wtPCpWCa+RATiye7ckVDVRDLzx1Ja2
+	0ZQz9+GZSEjICvLCMZBdIJZGilDxQ==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=etR5PrpKRnvjG9jQw9Y0d8ysZsA6rMQFjCx+YXjg5rfcLNxewRlDhwORfoBYJuChLWesQ8qkGu/01mTmQr/u2iAVYnqSpIo8nvJabqqViQpE10qfNM1fIqElR/+t6HmpGPQZoeGuQVAK+pSCYoQ/EYtSY6WxGmoWMtI9Pli1H3R2CF6zV0BQYXWurfdjhjC6yIWCJ4qQNmnqMRo27E8HSPjEagvAwvAHyN8a4I886dpN2pJ/X8w6Q39GF6ULtUNQngiEc2C+vii2MvlDW6TGFUkXca3eJ8a4glVk028ulEIEmTLmDijPlFE8YQX4x3n5DwRYyyMHDL6kO6rok3N7YQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=R2XJd+bzf7a5y0OLUtZYoxG8U9doHLHY9o2PABFAv1Y=;
+ b=xM/13Dm3GnSMqpHCpgPgN3AcsRubIsrbCcAFtmn2dsJdZGZJEU6cmLcnIxZMZpRg6lbqivwUYwhQmv4GmmJKE4v8l6HnGswQrEDWvSGj0/EBivd6wZYoXNW9I6N/NArOHTA325ZhuMxs4g7xXfApYwyJ8KpDuO6gSooUdagCKRkt/ZfmW/SyHZQTb5cVoOgF+glpRL37ezccVNPIp84bNOXDk9KCr0okohfXU55V4BxJ8uJMu4Zwzrpx34rZFwvYZzmAPBfgPuQp+3uOaR5bqBR+R6vK+S7p11VeRH6skXjtlwguFVmiS5ViNvejK1RsqzHsfLWlCDWsAdKG9r7DkQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
+ dkim=pass header.d=nutanix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=R2XJd+bzf7a5y0OLUtZYoxG8U9doHLHY9o2PABFAv1Y=;
+ b=BfJ5ZARezjwi7wk3RDXEpW2FAMG+xWJHSYonvEFwj1nRSQ5xTkH6IqU7gmVg0RD3i2xTjosGxbx3ttQevN3aKqdj2TDBALmHNSxHpz5VpDZdHASAh0puLjk/tF02lI4zwp1k4SY+AW4BijrDDefnB6NK5B/BrdENjyTIafR7ibdisuppQNYuki4zu/RcllC2FOiuYQ/ycn7g2thWvlXe2khBp3F7rXWJE6evJRl3XUwinxZZvposUIjyg2WKt7NTmvysaPE8QSq9IRRpPY+rZKPQ84zaxFTLZjEn9S1trWnSUOANCWtIAsKqkNhK3SCKJNjYAIqRyAE9XCpKJXpqdw==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nutanix.com;
+Message-ID: <c2fa2899-ebc2-4cef-873c-8939f378bf22@nutanix.com>
+Date: Fri, 16 Oct 2026 14:57:29 +0100
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v6 1/4] xen/riscv: probe the PTE A/D bits update scheme at
- boot
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-References: <1791885904.8631fc262581453bbf619ec5b2062170.1a134b909b40008425@vates.tech>
- <21a48f53-385b-4f36-958c-cc82bf390c89@suse.com>
- <1791901979.8631fc262581453bbf619ec5b2062170.1a135ae53690008425@vates.tech>
- <7ed5d117-80d5-4862-af60-c3e0143564ea@suse.com>
- <1791968412.8631fc262581453bbf619ec5b2062170.1a139a403a30008425@vates.tech>
- <db0d448a-ff1f-4549-84f1-c53e3e4a711e@suse.com>
- <1791996314.8631fc262581453bbf619ec5b2062170.1a13b4dc2b50008425@vates.tech>
- <4e914f14-50ff-48a5-9f56-836913e487fb@suse.com>
- <1792052907.8631fc262581453bbf619ec5b2062170.1a13ead4e580008425@vates.tech>
- <7f5da80c-424f-49dc-8ce3-10ca2fae9f55@suse.com>
- <81ad5bb7-2300-4ac2-a999-adbb39270ddf@gmail.com>
- <2f04c46d-f533-4eda-9bd1-8b8e100dff07@suse.com>
- <1792150520.8631fc262581453bbf619ec5b2062170.1a1447ec1cc0008425@vates.tech>
- <25337ffe-67fe-4db9-8407-2f227eebaf32@suse.com>
- <1792155284.8631fc262581453bbf619ec5b2062170.1a144c773b70008425@vates.tech>
+Subject: Re: [PATCH 21/22] i8259_common.c: remove static irq_count and
+ irq_level variables
+To: Peter Maydell <peter.maydell@linaro.org>
+Cc: pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com,
+        sstabellini@kernel.org, anthony@xenproject.org,
+        edgar.iglesias@gmail.com, qemu-devel@nongnu.org,
+        xen-devel@lists.xenproject.org
+References: <20260916104435.600211-1-mark.caveayland@nutanix.com>
+ <20260916104435.600211-22-mark.caveayland@nutanix.com>
+ <CAFEAcA9vm7004bytZqYwXCNj_+VNy1RzKMqG3TDnJkswpNhLUg@mail.gmail.com>
 Content-Language: en-US
-Cc: xen-devel@lists.xenproject.org
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1792155284.8631fc262581453bbf619ec5b2062170.1a144c773b70008425@vates.tech>
-Content-Type: text/plain; charset=UTF-8
+From: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+In-Reply-To: <CAFEAcA9vm7004bytZqYwXCNj_+VNy1RzKMqG3TDnJkswpNhLUg@mail.gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1792155656-6E2D04E9-6721D603/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 3032
+X-ClientProxiedBy: BY3PR05CA0024.namprd05.prod.outlook.com
+ (2603:10b6:a03:254::29) To PH0PR02MB7159.namprd02.prod.outlook.com
+ (2603:10b6:510:16::8)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH0PR02MB7159:EE_|CO6PR02MB8836:EE_
+X-MS-Office365-Filtering-Correlation-Id: 48dd3b05-83e2-497d-f078-08df2b8d6e2a
+x-proofpoint-crosstenant: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|376014|366016|1800799024|56012099006|4143699003|22082099003|10067099003|18002099003|3023799007;
+X-Microsoft-Antispam-Message-Info:
+	6EcYbohtM/CvT2NXVy3C+FBE/h2PloIn7DAJDfmLDi4ijCRKKEMS0+/LXfU+Nd/Ua9JH/SXWTxwCHVaqoJWGxC361ImQEITml1KTYk3vdUbvUxL3sm3N4ZiudRohSbhwnola4D48w5EoElHFJ/A1kUmHQPvaWoZ9BhrJqBEwzJlOUrJ7lPwD9Jra2F8bWggK1tCwf+MLknyx2JBk2x9jNURaKbC8Y8wkRL6x9JwPLteSYmH10Jbkxj2MYWPfzE4buC2hkVe1cffnp8m25DkfQawQlATnjTWJ6ClZSeUsyIfYOyf2UjMRHqUhTIZY7TOe3V/02uTquckYRZZ8M4g962FLtDFCcqy0wiShERH43e7lDpuoqzsbG0mKuzJ344QAmEYNacv4gvfB9TUs0lYMzQUCrxu/PjA6LRwGhZySOKbvfGeb3yDXLeVm8rb7yfmVZjYjALlEHZxKXoNotTAoLWt4Bz3Qpfy2yekrGqj2EUrHa+BWh/efNgoNxn5cF4qtjiaRfGIVkdqYSdZEWWj4zXpPmopzGI9RBKf0R6dlhYcHRO8G/Z9ZWw4INl6u8LKScv5ACeTjpF4JxdE4HnzNrnLpalet5CNFNBQRmicn2wacqlTG0osCxLSsDlOfBW9Mn65+v3ozOqI+BdKW8hFLQEDxh43T16JHYd17/VDvNog=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR02MB7159.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(366016)(1800799024)(56012099006)(4143699003)(22082099003)(10067099003)(18002099003)(3023799007);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?MnJPbGp5UUIvN3FKM0NpaFpoRFh0cUdYZXpDOHN3VXFyN1A2a3J6d0hjc1Fp?=
+ =?utf-8?B?dmVyNWFCUVAxVENCOXdWZnRJVVRBWDZ4WkJiR3dPMFNndlVJTkczQ3UwTEhs?=
+ =?utf-8?B?NFpxT3lhd3RjT0dNQzFPRHpsODRGbzF5Ym5HUkpOV0pMZUp4Y2FNRjZZQ2Fw?=
+ =?utf-8?B?RjkyNS9KZVZEUDNTMTJjS3cxTDhVMXlQOUVDZ3Q1UGJ0cGUyVnh0bjlBaVJ0?=
+ =?utf-8?B?MzNEbmtEQjNldGxrdVFqWkpDc1V4eCtPOUkyVmdodnFvVzFta21CQWpyOTM2?=
+ =?utf-8?B?eXhjRGNLRDc0M3FhZUtCeERMKzEycFVKR1c4bXNIM0hNSHAyK05GeUZSelF2?=
+ =?utf-8?B?dXY3cDFQaEMwZDJHc1VKNUxraGM1VFBTYWNFODRCeUpscU95TThRWFI3YTR0?=
+ =?utf-8?B?QzRDL0xYTUpxUU1DN2RWRlRKaVRnZEJFRXk2Z0QyUmFhbFJqMEVvQ3FBK1dJ?=
+ =?utf-8?B?QmdNaGVWcVFIaEJnTTRaeHQrWndlRExlUGNhL09xeHMxaWxzQXlwUkhrd0lU?=
+ =?utf-8?B?TThKN3pEenFRdmlaY2R1QUZpL0d0UENNUm1FL1BCdjQvTHFwL0xubWczbFF1?=
+ =?utf-8?B?bk92LzlJQW5maTh5SHpUaWk4ZXU5Tzl4Ry9ycE9uVEl6QzY1ekNJVU91anNn?=
+ =?utf-8?B?M3hFb1V2V0tyMnlUdlk4d1RucGFiclhJeG8vQlV2bDhXKzhiN3pDZjEzRHg0?=
+ =?utf-8?B?SEloRHdaemxENk0wVkVQVDY3S3NxZ0RXc3BxeDJvdGV6b1pmUEVSb1d4dkpB?=
+ =?utf-8?B?dlkrZW50ZTBncjhLZG1QV3VoN2pEYWRiU2x5TS9MREJGTUY5eUcrdEQxRmIz?=
+ =?utf-8?B?dlhLbUpLaEVvM1FVRlczZW8xSWJqbHg1MnVReUdBU0lKajQ4T2l1UHBGUHEz?=
+ =?utf-8?B?QWlja253SW15RVBmeVRaakVCTnNCTzliR0VoKzczY3pkSis2UU5yUEtOVjJk?=
+ =?utf-8?B?eUY1R3c1TTRabU5JMXRMYzE2dWVrV3dkckRUVlNoRS84Lys1K3VMTWtIdVJt?=
+ =?utf-8?B?Q2dyVUlCcnNRU2JDMElUVmpVNngybjRCQktidHBiZmtpWXRabXp2NmVlcDk4?=
+ =?utf-8?B?THlIZ3JDcVg5R1dPQmRKMU8wL3pOOVJLcDJYRjdja1VLYS9Ka0w1N0RnNlBr?=
+ =?utf-8?B?MEZVVW9TYWJkdTk1b3JvajJMUWZxSlMvVG9uaDhuYzhITVorVHY1cVlSTVcv?=
+ =?utf-8?B?SkxSQXRkczBVdDRaVFFxL0t3aVRyc1hrVE15a2hXYmxsRWNzRDNNZjBTc2Rj?=
+ =?utf-8?B?d2VLcytsNFlXbk9rSG5CaG9jVlRRc1VkZ0VHVTJnNDB2Q2JVanN5WkFYQW1V?=
+ =?utf-8?B?NXR0MWt6NFNMZXU3MUxKWVYrZEZRcVREeWRSWU41VzFhT01OSFBkYTlPK1FU?=
+ =?utf-8?B?K0xuMGhPQkJpb3RSNGR4alFZeWZxeVYrREFHUXAzSCsyeGh0NUQyc25YSVZX?=
+ =?utf-8?B?VHkrdXo1VWdYbXRTbTVaeUIwNzE3SFRTRTBYV1doaWlpSTFLbW83OTRRQlo4?=
+ =?utf-8?B?djNld0lTSjBEb083bnpUSkJCb3Zmd2E5RVhXc3R6Y0EzdmEvWGpuMWQ1U0NB?=
+ =?utf-8?B?dEdXbXRzRUhaWXFMTUo1KzRBR0ZsRXlXKzRxZklpeXQ5S0hTSStNUTN4TFg1?=
+ =?utf-8?B?Vld4ZENUdEQ0MTNBay9xbFZ2Rm1iZkRnSmxiRi8vRFdKWUorQkZLNGdwVGRu?=
+ =?utf-8?B?Z0wxYWpFZkFYNG43b1dTelowcUdxaTM0MG5PVHRiRzMzT1RmclhNM2hZbDF5?=
+ =?utf-8?B?R3JPUndSaEdKb1dkVDNkQ3lla1B4UER1NlcvQkVPdFFTVzNiSlphNTVQV2ht?=
+ =?utf-8?B?UFNQZDE2T01XM01mRnZ3TkZ6K1Q2aVhLRWVUWWhuWE1vMjBoSU9lTXJzaXd5?=
+ =?utf-8?B?UEs1OWNEVVhvclE4eHRCcFJJeGVlb1JrM0drcWlhVmc0UmZnWS9MdmRjVFFu?=
+ =?utf-8?B?c0xWcURHK0gwSkVIazF1Y0Y0MEF3ckg1bktPSVRGblBSdXgwTVVjYkdWdnU1?=
+ =?utf-8?B?WjVHMWFJM0F1WUlNcnlRalp3U1lvMVBhaU54a1FibDBTanRCSkR4WHlQSnhQ?=
+ =?utf-8?B?dGZmeEhtaDhEVnB0QU5wL0ZhRmJxa2FOcXhBVHZvR2lWOUpVSFF1TEFoaUdr?=
+ =?utf-8?B?TVl1TStyZmF3OGFSbmMvM1RhcTZ2RHZ2eWUvSmxiN3MvVVFxVTBGZ3RvOEpT?=
+ =?utf-8?B?WUpGSkZ1WXhDZnFNc1JyTTBjSHJlTWtCYlVoMnhXMFd5QUVSWDQ2SC9nUWJ5?=
+ =?utf-8?B?SUNtclcrekMwMWJBYUlMcHZFUE1xMmwvTjNRZHQwd0ZBNFdaanVWTDJzOXZP?=
+ =?utf-8?B?R0ltTWFSdnBSRGlSR3hoazVRaHNNSmp4eFdsZHdhMlc4aGZkSGdHbVZaL3h3?=
+ =?utf-8?Q?05HkjsvdifJWkPMg=3D?=
+X-Exchange-RoutingPolicyChecked:
+	yg8R1DXX9MTVvTOYxmm/AEo0TzDu1VjFGWKWSpdgwZ3nqYgB+TrLs1zHXd0KLpZeXHE9CuXqC/Ai81y65nEzwC07kFK5kNuPxGqxKlRcOIB/JkQisjkz11lXJvQE802lQV0pfKY1VyYVxQrehRZjWgr78JlNYNJtEU25XG9OTuX2SB8Km1PsPZJr/ig9be9yQhqYek1dDEaQCZxo/gP+G9dA0XOcfh3uLXNoWGO+8gSUf/niMisu+sPUiwmNaA8ljecxdI0bWLuz6DRCAtD8lGqryQWpfK90S9IslHO+dXiDoA+zc555tqh02n+2qT+PIgV80X/6wJ8TowiycuaIFA==
+X-OriginatorOrg: nutanix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 48dd3b05-83e2-497d-f078-08df2b8d6e2a
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR02MB7159.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2026 13:57:35.1287
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: bb047546-786f-4de1-bd75-24e5b6f79043
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: bAlio+hyug2SBUox72XezNaWf1+edFSp2sjKPEN4Kh6Y+LP1dMz5VtncQoZgn1rmgwtUb0aZ5zIBoMdToDVOOA6atyNx9BdJ39HMkUljiLA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO6PR02MB8836
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDE2MDA1NSBTYWx0ZWRfX9vCOPGsVYIG6
+ MVR5x+2+VHW1wnScfIaUjUK7Zo1dVxQJQqLOPwHDOqx32/QdqNpImeTr0qr/cebbHEi7XnaPbMH
+ HvlVmIOPI5XXFbi+8k06LkdPXYD1JA8=
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDE2MDA1NSBTYWx0ZWRfXwMuhjlDa9OmQ
+ jBnW3YRs1o9Y2/nwetNglb9RFJ8qXoy6Lu7/6dtNmZFBkSJXog5i7X5fB8/nYY4FIhOzucDiKxF
+ Mb2U8ADRIBx6W6B46cMG0l+Awa6537efIAKIBpqMyGCvw/u6XfCx8ZOdpMqJcjp1ySSeuTdHh+p
+ u692G2ZeZyBHjRd6TxlLLz1uz16BiaUWtiIH6alaTIS82BJXeVHqLzbTcBMMb5ZZgjFyHvLX4M4
+ zyNzya4B+wLLkBBhv5Vj6+D1sT3AHR1n5kGOKx5UqktzRrfTew1rJTIKcVFvzqoL+/6AmVjuJY0
+ PIBQyFnGmeZziesBWWvv4+8UlQk0TpIjRrhH+ZLDUsmYv/p4Kv3nvLhaNhv9WERJPXXGJE9yN6l
+ HFHPx8W7YOI600hP2qwOCyH/fEp4fvrUxU+QoaPSbvHh4QS4adc+vaku18oKu91T19fGPKX3pJI
+ kKX3+zX2vQFawpEDD9w==
+X-Proofpoint-ORIG-GUID: 05mp9M7gvJ5PIVviIXvo3bxQESBWuDLa
+X-Authority-Analysis: v=2.4 cv=ItOL47/g c=1 sm=1 tr=0 ts=6ad22d50 cx=c_pps
+ a=RH0axx9bUT6qb0hBLGrbHA==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=0kUYKlekyDsA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=VofLwUrZ8Iiv6rRUPXIb:22 a=y4UcunY2MAxhM4LwGdWI:22
+ a=64Cc0HZtAAAA:8 a=YTpg2wbwm77mjifCQ_kA:9 a=QEXdDO2ut3YA:10
+X-Proofpoint-GUID: 05mp9M7gvJ5PIVviIXvo3bxQESBWuDLa
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
+ definitions=2026-10-16_01,2026-10-14_01,2025-10-01_01
+X-Proofpoint-Spam-Reason: safe
+X-purgate-ID: tlsNG-720697/1792159062-317CA2AC-E0445E73/0/0
+X-purgate-type: clean
+X-purgate-size: 1889
 
-On 16.10.2026 14:54, Baptiste Le Duc wrote:
-> 
-> 
-> On 10/16/26 2:51 PM, Jan Beulich wrote:
->> On 16.10.2026 13:35, Baptiste Le Duc wrote:
->>> On 2026-10-15 18:04 +0200, Jan Beulich wrote:
->>> Based on Andrew's answer to your question on GitHub [1], I see two options
->>> for handling a DT that doesn't advertise the scheme in effect. Please
->>> feel free to choose one.
->>>
->>> 1) Trust the probe and fix up riscv_isa on a mismatch. This avoids having
->>> people edit their DTs, and is safe as, per Andrew, the spec has only ever
->>> allowed these two schemes:
->>>
->>> /*
->>>   * The privileged spec allows exactly two schemes for the PTE A and D bits:
->>>   *  1) hardware sets them on access and on write.
->>>   *  2) accessing a page whose A and/or D bit is clear raises a page fault,
->>>   *     so that software can set them (ratified as Svade).
->>>   *
->>>   * Hence an implementation without Svade uses the hardware scheme (1), and one
->>>   * that faults on clear A/D bits implements Svade, whether or not it says so.
->>>   *
->>>   * Rather than trusting the DTS alone, probe the scheme in effect with a write
->>>   * through a PTE whose A and D bits are clear. If the DTS does not advertise
->>>   * it, replace it by the probed scheme. As the spec has only ever allowed
->>>   * these two schemes, this is safe even on implementations that predate Svade
->>>   * and Svadu.
->>>   */
->>> static void __init check_ad_scheme(void)
->>> {
->>>      bool has_hw_scheme = probe_hw_ad_update();
->>>      const char *scheme_name = has_hw_scheme ? "Svadu" : "Svade";
->>>      enum riscv_isa_ext_id ext = has_hw_scheme ? RISCV_ISA_EXT_svadu
->>>                                                : RISCV_ISA_EXT_svade;
->>>
->>>      /* Fix DTS in case of mismatch */
->>>      if ( !riscv_isa_extension_available(NULL, ext) )
->>>      {
->>>          printk(XENLOG_WARNING
->>>                 "CPU implements %s but the DTS does not advertise it\n",
->>>                 scheme_name);
->>>          __clear_bit(RISCV_ISA_EXT_svade, riscv_isa);
->>>          __clear_bit(RISCV_ISA_EXT_svadu, riscv_isa);
->>>          __set_bit(ext, riscv_isa);
->>>      }
->>>
->>>      printk(XENLOG_DEBUG "CPU is using %s A/D bits scheme\n", scheme_name);
->>> }
+On 13/10/2026 17:29, Peter Maydell wrote:
+
+> On Wed, 16 Sept 2026 at 11:50, Mark Cave-Ayland
+> <mark.caveayland@nutanix.com> wrote:
 >>
->> Yes, if the assumption is that this would be used only when neither extension
->> is advertised, then I agree (taking Andrew's response into account). I'm sorry,
->> this has been quite a bit of back and forth, but hopefully we're now all on the
->> same page.
-> Ok thanks, great to hear. Just to not mistaken, when you said "would be 
-> used only when neither extension is advertised" it would means that in 
-> other cases where there would be a mismatch between what the DTS 
-> advertised and what the CPU actually support we should panic?
+>> Adjust the parameters to i8259_stat_update_irq() to allow passing in pointers
+>> to the irq_count and irq_level arrays, and then move the arrays into the
+>> corresponding i8259 PIC and KVM PIC devices.
+>>
+>> Doing this allows the statistics capture logic in i8259_set_irq() that handles
+>> incoming cascading interrupts to be removed.
+>>
+>> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+> 
+>> diff --git a/hw/i386/kvm/i8259.c b/hw/i386/kvm/i8259.c
+>> index 421c9279cd..ca661afc02 100644
+>> --- a/hw/i386/kvm/i8259.c
+>> +++ b/hw/i386/kvm/i8259.c
+>> @@ -30,6 +30,9 @@ struct KVMI8259PICState {
+>>
+>>       ISABus *isabus;
+>>       I8259CommonState i8259[2];
+>> +
+>> +    int irq_level[ISA_NUM_IRQS];
+>> +    uint64_t irq_count[ISA_NUM_IRQS];
+>>   };
+> 
+> 
+>> diff --git a/hw/intc/i8259.c b/hw/intc/i8259.c
+>> index 3f10777036..ac43995ce4 100644
+>> --- a/hw/intc/i8259.c
+>> +++ b/hw/intc/i8259.c
+>> @@ -49,14 +49,16 @@ struct I8259PICState {
+>>       ISABus *isabus;
+>>       IRQState i8259_primary_out_irq;
+>>       I8259CommonState i8259[2];
+>> +
+>> +    int irq_level[ISA_NUM_IRQS];
+>> +    uint64_t irq_count[ISA_NUM_IRQS];
+>> +#ifdef DEBUG_IRQ_LATENCY
+>> +    int64_t irq_time[ISA_NUM_IRQS];
+>> +#endif
+>>   };
+> 
+> Would it make sense for these two types to have a common base
+> class (where the stats stuff could then live)? AIUI they're
+> both intending to provide the same interface ("pair of i8259
+> devices cascaded together in the way that x86 does it").
+I had a go at this, however it didn't really make sense since the fields 
+shared were minimal and the complexity of introducing another class into 
+the hierarchy didn't seem like a win in this case.
 
-No, what I meant was that likely we shouldn't even probe there. We don't probe
-other extensions; I don't see why we shouldn't trust DT here. The outlier is
-when DT lacks any information.
 
-Jan
+ATB,
+
+Mark.
+
 
