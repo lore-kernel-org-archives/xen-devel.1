@@ -4,49 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 22B43CCA464
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 10:23:33 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1451532.1666580 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 4B4F8CC6B38
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 11:16:27 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1451673.1666588 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHf5t-0007L8-CZ; Fri, 16 Oct 2026 10:23:21 +0000
+	id 1xHfur-0006KV-8C; Fri, 16 Oct 2026 11:16:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1451532.1666580; Fri, 16 Oct 2026 10:23:21 +0000
+Received: by outflank-mailman (output) from mailman id 1451673.1666588; Fri, 16 Oct 2026 11:16:01 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHf5t-0007L1-9k; Fri, 16 Oct 2026 10:23:21 +0000
-Received: by outflank-mailman (input) for mailman id 1451532;
- Fri, 16 Oct 2026 10:23:19 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1443cb7e90008425@swg.vates.tech>)
- id 1xHf5r-0007Ks-2G
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 10:23:19 +0000
+	id 1xHfur-0006KO-5T; Fri, 16 Oct 2026 11:16:01 +0000
+Received: by outflank-mailman (input) for mailman id 1451673;
+ Fri, 16 Oct 2026 11:16:00 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <andrew.cooper@citrix.com>) id 1xHfup-0006KI-TP
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 11:16:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHf5q-005d1v-F0
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 12:23:18 +0200
-Received: from [10.42.69.1] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1443cb7e90008425@swg.vates.tech>)
- id 6ad1fb11-2eae-0a2a0a5409dd-0a2a45019418-30
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 12:23:18 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1443cb7e90008425@swg.vates.tech>)
- id 6ad1fb15-5984-0a2a45010019-b9ff1c239b41-3
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 12:23:17 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a1443cb7e90008425.005 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Fri, 16 Oct 2026 10:23:12 +0000
-Received: from bazzite.gpn.vates.fr (88-188-240-210.subs.proxad.net
- [88.188.240.210]) (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 6691782B33;
- Fri, 16 Oct 2026 12:23:11 +0200 (CEST)
+ id 1xHfup-008Ehb-57
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 13:15:59 +0200
+Received: from [10.42.69.3] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6ad2075d-bab6-0a2a0a5309dd-0a2a4503d292-44
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 13:15:59 +0200
+Received: from [40.93.196.32]
+ (helo=SA9PR02CU001.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6ad2076d-fae8-0a2a45030019-285dc420c098-3
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 13:15:58 +0200
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by MN2PR03MB5310.namprd03.prod.outlook.com (2603:10b6:208:1f1::17)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.496.23; Fri, 16 Oct
+ 2026 11:15:54 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%7]) with mapi id 15.21.0522.013; Fri, 16 Oct 2026
+ 11:15:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -58,301 +55,281 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=EIwNFn27oeeB1Vrvy7FJ5dLaZJdL2NDuWkIdyglqKvU=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
- b=Ig44eVE9pZ+58qo9oYBXPKR18c835lfxgDYEx6+aMFBxPMEqELLnnQNuHoEd7LkkGEryNsimL
- ssuC/tqVnvCJ8yJPVxexZ3EygTmRN99nE4gTA3ZpYgho72HsnKOp/kRF12axmk2e10naJE/FJDa
- jNaA+iaFLEn1VPFhH21LTcZWP7qjQ01EEDeri1gql0C6zePtWtd54Dpa0Ldh7ROrJDKsczboy+p
- CwyDiN/PzSzmP8KcqjjZqiswtF0Ahdob7YWPxo73R8YDSPKefyfphj5GXQ3pHh3Edu1/V5C8AYe
- L0Ejvw3L1ijMUFHw/gCKQRjQ+MJUHL01ylOLqw25opKA==
-X-Zone-Loop: 477319da4ae58a73404ceb02744c273941bdba5e373b
-x-campaign-type: default
-x-transaction-id: b28f0cdd-68a8-467c-9f25-95f76abd61f8
-x-swg-uid: 01-adb76025-8703-475e-908d-c500b6386f73
-X-Mailer: Sweego
-Message-ID:
- <1792146192.8631fc262581453bbf619ec5b2062170.1a1443cb7e90008425@vates.tech>
-x-swg-bid: 1792146192.8631fc262581453bbf619ec5b2062170.1a1443cb7e90008425
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-X-Originating-IP: [37.26.189.201]
-From: Teddy Astie <teddy.astie@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Teddy Astie <teddy.astie@vates.tech>,
-	Juergen Gross <jgross@suse.com>,
-	Boris Ostrovsky <boris.ostrovsky@oracle.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
-	David Woodhouse <dwmw2@infradead.org>,
-	George Dunlap <gwd@xenproject.org>,
-	x86@kernel.org,
-	linux-kernel@vger.kernel.org
-Subject: [PATCH] xen: Use VCPUOP_register_{runstate,vcpu_time}_phys_area when available
-Date: Fri, 16 Oct 2026 12:22:00 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=FocVU8dnxO4ezIfk4nxix62xVgzWhrfHY3Bk1SnueONH5Wp2G8n3liySSOwNd8vc32fnPHnsFvRN7a7Ef0RKgy0A9wMkZ00T9w6/GJdjqvV4ComZKp05UEfHKxJwtskspxO8UbUUuM72Zg9v5/6aswWUxPDyjNeRokQj35nv1E449ja8QVmy9rChjeNg+/21ZVmiiibyRhkS7nzNCAlostdpurCtoeixf1Yc4T8P0o44iQbChUacH3TJZE2nQuc3/U4pr1YjERpqoTeT8YLWZprq6lLzVL7Myrj5jmBoIdECKIQBjE32KrG9/L5dXtIGlwT1rMc22Z/Eb698rCqDPQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=IEQRgVwsP3P3JCBhOFhOC5oNvH97q3sXzg8GqkPu+sM=;
+ b=L+nN3oJkYxzc5UP0xjvUgSIALYNinxyweqav8B3GCKKq5M09mfRssYgD/0iSLSezM7+K2EWuCQ5lJ37UsI7CwRXWPC3cdLu4tYr39zEvBDWmbPiac560rhcOHKe60JHi26nmJlnb01/jFMKTgaHOkzhykkPiGQaAv+RSYggsCKYEoXfKRt4rwP4RP6U1ZUGEkrjnqOFR5ejy4bfRmw2V1f6LgG2aTuDeAaddSSTgz0HeSUSjtCP/mpFLuinDZmjz3OklYpL9MAjp9J0zmxsqToSDLbiUdr5sRqKqilHjxiT3cZ+01aItz8Ac7sPiQu/gu5J4GTgaTTJO9juzJ+Q36g==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=IEQRgVwsP3P3JCBhOFhOC5oNvH97q3sXzg8GqkPu+sM=;
+ b=BuDyusoxSpxShCeG5NBWft+Ql1eZzg/f/ByMJOTizvJyprzx++mmEnLH+NC8YpIiJE7fR+ghrNiKI/ym7Q1+oQ/qbVXOKmsTcC1Nv9aK77+s+OJigezmptuXUskLMHU/aK5WypVnWAubhTsTJPB9MkPecdeW3niVgE6B/2zY0LY=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <9a8b0ae0-ec49-4af0-8e5d-1378319f2857@citrix.com>
+Date: Fri, 16 Oct 2026 12:15:51 +0100
+User-Agent: Mozilla Thunderbird
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Juergen Gross
+ <jgross@suse.com>, Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ David Woodhouse <dwmw2@infradead.org>, George Dunlap <gwd@xenproject.org>,
+ x86@kernel.org, linux-kernel@vger.kernel.org
+Subject: Re: [PATCH] xen: Use VCPUOP_register_{runstate,vcpu_time}_phys_area
+ when available
+To: Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <1792146192.8631fc262581453bbf619ec5b2062170.1a1443cb7e90008425@vates.tech>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <1792146192.8631fc262581453bbf619ec5b2062170.1a1443cb7e90008425@vates.tech>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P265CA0159.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:2c7::9) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
 MIME-Version: 1.0
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.2b5.eea8caf3adaf82ca.1a1443cb515.d621e0f4827f716e=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1792146191643
-X-purgate-ID: tlsNG-d62444/1792146198-C4B45757-AEE1FEF6/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|MN2PR03MB5310:EE_
+X-MS-Office365-Filtering-Correlation-Id: e08e31ee-c612-4b4e-892a-08df2b76d860
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|7416014|6133799003|10067099003|18002099003|22082099003|11063799006|261009223027099003|56012099006;
+X-Microsoft-Antispam-Message-Info:
+	GqqXAPkdwHDQCUX9TO+LTjrw2tddzD77NuAvmzbr26ZRvB79PyeEZT9KxD+g4DzwdGlkPTF8QpDZTXSanjF8b9nksJkRHsVa/yWvdsvzEOJUwZt7yrwdmK/3LNrPRWG6ckvRGoeJ2hCmAT4LELdMF0LMHzq225BoijOr9TpIY4aPMbcMeL6FP0NTA3ojE50j7+l4rT+BChFM85OJoCKuYFeQuoWZa9ebdcH1pdkFoRSSxM/u0xxNL+rXj+NMdi+oUwrbOfpcg7KIrfOkqnJfMaCqbhJNmodYcv4Sb53LHhQ+HjGSSDpS1EVLFb+wEMA4Rs91Kfk2nQsmWzDjEt2nNpuy7T11TI6A8NXx88TDn96HAuRpiqJdM43O8cG1fLYFkq6G5wDBI1KCAB1+3le9Ls4dpRW8UlejIIHOq9SIpWVFy/sKwKyWz/pz5g1lzR2Na5sGhrftD2H+qQNEPVqvIpaNb8EtkBf2dMiy9IA4kWvpPMgd6tZvPCRlVkF5E/wgqYw/HTdKcQw9VQqXQtykESDpY0Jnghft4yJqcyM6XsMVFpDaa9oicYva9QMT9k4VgMOsSKbj9x/QtZE1JjSavaV9lL2Ez5YPVX8ZNxjt/CQgJp3A8fSs8jePWvUB1Kros/UCS0orY6IJw38XjyU2wynLl4uhWvFh9JC8LjeZJL4=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(7416014)(6133799003)(10067099003)(18002099003)(22082099003)(11063799006)(261009223027099003)(56012099006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?Vjl4V3orNDBOM0o2RWJzaHJrSm03c0R0MDlNbXd4THR3UHpzRlhpSUQ0bG5q?=
+ =?utf-8?B?aysxdkh5eDJhb2hVa2M1Qm55RFl0dm5WSXJoeUVkRVJiMXBuNVNYTHd2c285?=
+ =?utf-8?B?NmVob3dVcUprSVBhOVlEYmF2bElJV2h3VHVBdy9LT0VveTBWSTZHbXptdnRt?=
+ =?utf-8?B?VFNJNlE4OWdJdHRjWGI3NVlCYkFhcGlLNnFVTzNVNzc1S0FMa0xTa3pCRTRu?=
+ =?utf-8?B?K0E2YTc0UklOM2NmcDJPZ1dBdmNQbHZSbU9oQW9WeVpOV0VtNUx1dFF5cEI4?=
+ =?utf-8?B?VTByVzh3S0swT285SnhrLy95WWM3aHBoTjFPV0RsdEE0elJjeW9YZDMwWHNG?=
+ =?utf-8?B?L1h0UzZpblBjaTZrMU5kVWdlbEpFcmtubkgwekZlVDJNMUJYeUhVamdGNVFh?=
+ =?utf-8?B?c2lOVDVYdEYxUEhQcjA2U2FaNnhkQ0VEbGVBRjc0T2xsc24wNWVIRkQvT2hJ?=
+ =?utf-8?B?LzMrVldoRyt0MElZOVBzOHRGcVVXVVVFS3p5SWFmY0xaV3pUdVpLTW9YUTJE?=
+ =?utf-8?B?RjdaUlF6blJxNXVWYWdMZWFJTnlBTldNY1Q2cVNVSkl5QUd5VEYwMXlORXB4?=
+ =?utf-8?B?Nms5ZW9WQUtUR1BNdERiM21xL2FWQ3lSUGxxUlkxa1lUWk45Mis1MnBxVUpz?=
+ =?utf-8?B?QUZEZDUwaEkwLy9DdStkOVFRd1lSM0E1NGxVekIvcXdBTVlGdlcvQi9peTZN?=
+ =?utf-8?B?V2F0OGRyWlFtZWZvbGpaN0JPWXNyeDhKUDhpdWVjVkFXcWtTTmg5d1hoRUls?=
+ =?utf-8?B?U1o1eGVnUTIxNUVvQkpBTEVyWktlYXdpbEx4cnRxS0ZGa3A1VVRRRllJbkhl?=
+ =?utf-8?B?ZDFBbytkTGFBY0lYMXBLNnRCd3lteXdQU0NEMURmb3JyNUVVSTNiNHppTnlt?=
+ =?utf-8?B?WWxPM3ZCR21sY0dUM1l2UUZWUmpmWjBwQUJiUFZvYU9PdC9CR2ZhRkM3ZU9E?=
+ =?utf-8?B?MTIzMTNaU0sxdEhZVmdWVGtnYVRVWnFHcVgxbVlCemNvVUw5VkZLT2FXWGZp?=
+ =?utf-8?B?Z3lDRVVOV2FFQ0hBQldJdi9UUXZieVdLeTN6ZG1pVkx5QmEyYVVqSmFiT3M5?=
+ =?utf-8?B?YXdTUnpybEhBV3JOUE5keklCWjVUME85bDI3dy9JY0ExU1gxcjBQcHRlUmJH?=
+ =?utf-8?B?ejA4aDRpV2VLZXM3dzMyb2tqLzB2QUNYUFhwbFBzVGt1TGpqZmh3TkE3ajhw?=
+ =?utf-8?B?dmt3b0dGZHFaaFJRNTRVRWxDK3M5K1NCb2hkYzI3NDNlMGNjNlhBc0k1UWJm?=
+ =?utf-8?B?U3JkZjZHUFRSTGkzRU02V3Y5UnRpZU9IeUh0M2k0YWVlbUZOUGV5WEJOdURl?=
+ =?utf-8?B?T1JjNVJoMHhvZUFCVTltR0dUQVhWd2h0eFgzLzB1YkMyRFlsRU5OMjJUaXVz?=
+ =?utf-8?B?ZXNmQ3JsKytEYVVKRk5JamZwVTRySGR0QWhGU3gxRmgxcG5JcVl3emNHUWEv?=
+ =?utf-8?B?aVFBbGZkWjQ0RmRJWjVWczZTWG5heG8xQUZyWmFrWFNRRUZCQmJLVG81NEJy?=
+ =?utf-8?B?UHpFT2ZmdHI0bkVSWEdWZGhHN0FkejNLQm1OeHY2bFVoTU9rK1p3MTlZbEdD?=
+ =?utf-8?B?MW5oN0ZFbUdaTnBORFZUeWdheWpJZWpSYllJMmxaWE1ZQ3IydnQxNjZ3OTVP?=
+ =?utf-8?B?UUpUdVNMOXdkVlM2WTd6NnloZHlscHdTbElnd1dBZGpVN09MWDVybmZ1TDdQ?=
+ =?utf-8?B?bWNpUDRwc3dLOWorVi9ianJ1eDRQMmRhazE0Z1NSZUdjeml6WlE5empEWVBQ?=
+ =?utf-8?B?anh6YVRQZk1IY1ZRRmx6eXUxZm92dTI5YnVKWnZIc0VYSkVoYVNVbzRDeHRK?=
+ =?utf-8?B?YkM2Smw2MWpMcGJIOEtRaHBRV2RQYzVzczU5NWlCN05tS3N0SjJ3cDhGcVNj?=
+ =?utf-8?B?dWRSeTMyUlhDcWgybnhQem1NdHpLNWYvUURGeTFEVWVGeGNEdnkzNGZOZG8v?=
+ =?utf-8?B?NGhYbnFOOGMrYTRjRFJUWmY0NkVDQW5MWjJEUHNMNktNTmxoV0puK2tCcjFw?=
+ =?utf-8?B?OWlFa3h4dUZvZnZlYS8zb0REb0g5eFlsUDZjamNEOXUyQkwwR3p6T0xHNG1D?=
+ =?utf-8?B?NUt0VmR1YmxNQ3E1aU9va0VVYjZtVFk0QWN1VVFicjhyTUwwN0kwY3Z3YUht?=
+ =?utf-8?B?S21jVmpKcld5RWFHUEI5aEFnZU1kQ0s4QTJYNE9oQ1dXSC92elcvaFp0c0RG?=
+ =?utf-8?B?WFhDR0h2Zk5QRkRwODc2azV5QktJT2FwVHI3bVMzUk90aXFCaElyYnNmazlK?=
+ =?utf-8?B?TDZ2U0VEZzhkMFdYSmZDZnpJeW9oaXgrQVR0aXpjcHJ3QkhTYk51cGZNWW13?=
+ =?utf-8?B?YURaRUc3TnQyYlZoWlZieEJTOGoxeXBpVGRDbWZYVERncDFTTENxZz09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: e08e31ee-c612-4b4e-892a-08df2b76d860
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Oct 2026 11:15:54.8052
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: En2KOPc4A8TOwtME+EdxzmWUvEGHSK8LyHsvKYs4owTyVU4USizObDwB4CvTWJ0hlHYikPm9aubMgnu/JeKKzm5LIQirs/8jpqx1Gn5fwgg=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: MN2PR03MB5310
+X-purgate-ID: tlsNG-33051d/1792149359-776F34E9-40B610A8/0/0
 X-purgate-type: clean
-X-purgate-size: 8222
+X-purgate-size: 4474
 
----=Part.2b5.eea8caf3adaf82ca.1a1443cb515.d621e0f4827f716e=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 16/10/2026 11:22 am, Teddy Astie wrote:
+> Updating these area can be expensive when done through virtual addresses
+> (especially for runstate one), in particular for HVM/PVH guests.
+> Xen 4.18 introduced physical address alternatives to address those
+> short-commings, but they aren't used currently.
+>
+> Fix it by using these alternatives when available (when reported in
+> XENFEAT_{runstate,vcpu_time}_phys_area, but keep the current logic
+> in the PV case.
+>
+> Assisted-by: LLM
+> [guidance and testing]
+> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
+> ---
+> When using phys_area ABI, the struct is not allowed to cross a page
+> boundary anymore, hence we need to be careful with per-cpu struct
+> alignment.
+>
+> I've deliberately put the PV domain (!XENFEAT_auto_translated_physmap)
+> case aside as it profits less from the physical address ABI, and it
+> would make things more complicated as "physical address" doesn't have
+> a obvious meaning there.
 
-Updating these area can be expensive when done through virtual addresses
-(especially for runstate one), in particular for HVM/PVH guests=2E
-Xen 4=2E18 introduced physical address alternatives to address those
-short-commings, but they aren't used currently=2E
+It should always have been a guest physical registration, even for PV
+guests.
 
-Fix it by using these alternatives when available (when reported in
-XENFEAT_{runstate,vcpu_time}_phys_area, but keep the current logic
-in the PV case=2E
+The virtual address registered with Xen doesn't exist in the user
+pagetables, and the way we discover that is taking a pagefault in Xen at
+the point we need to update things.
 
-Assisted-by: LLM
-[guidance and testing]
-Signed-off-by: Teddy Astie <teddy=2Eastie@vates=2Etech>
----
-When using phys_area ABI, the struct is not allowed to cross a page
-boundary anymore, hence we need to be careful with per-cpu struct
-alignment=2E
+> diff --git a/arch/x86/xen/time.c b/arch/x86/xen/time.c
+> index 5c7822254a01..19ace1b78ae4 100644
+> --- a/arch/x86/xen/time.c
+> +++ b/arch/x86/xen/time.c
+> @@ -37,6 +37,22 @@
+>  
+>  static u64 xen_sched_clock_offset __read_mostly;
+>  
+> +static int xen_register_time_area(struct pvclock_vcpu_time_info *pvti)
 
-I've deliberately put the PV domain (!XENFEAT_auto_translated_physmap)
-case aside as it profits less from the physical address ABI, and it
-would make things more complicated as "physical address" doesn't have
-a obvious meaning there=2E
+This needs a comment explaining what's going on (by GPA, falling back to
+VA), including that passing NULL means unregister.
 
-CC: Juergen Gross <jgross@suse=2Ecom>
-CC: Boris Ostrovsky <boris=2Eostrovsky@oracle=2Ecom>
-CC: Stefano Stabellini <sstabellini@kernel=2Eorg>
-CC: Oleksandr Tyshchenko <oleksandr_tyshchenko@epam=2Ecom>
-CC: David Woodhouse <dwmw2@infradead=2Eorg>
-CC: George Dunlap <gwd@xenproject=2Eorg>
-CC: x86@kernel=2Eorg
-CC: linux-kernel@vger=2Ekernel=2Eorg
+> +{
+> +	struct vcpu_register_time_memory_area t;
+> +	bool phys = xen_feature(XENFEAT_vcpu_time_phys_area) &&
+> +		    xen_feature(XENFEAT_auto_translated_physmap);
 
- arch/x86/xen/time=2Ec              | 35 ++++++++++++++++++--------------
- drivers/xen/time=2Ec               | 24 +++++++++++++++++-----
- include/xen/interface/features=2Eh |  9 ++++++++
- include/xen/interface/vcpu=2Eh     | 17 ++++++++++++++++
- 4 files changed, 65 insertions(+), 20 deletions(-)
+Not related to your patch, but the xen_feature() infrastructure is idiotic.
 
-diff --git a/arch/x86/xen/time=2Ec b/arch/x86/xen/time=2Ec
-index 5c7822254a01=2E=2E19ace1b78ae4 100644
---- a/arch/x86/xen/time=2Ec
-+++ b/arch/x86/xen/time=2Ec
-@@ -37,6 +37,22 @@
-=20
- static u64 xen_sched_clock_offset __read_mostly;
-=20
-+static int xen_register_time_area(struct pvclock_vcpu_time_info *pvti)
-+{
-+	struct vcpu_register_time_memory_area t;
-+	bool phys =3D xen_feature(XENFEAT_vcpu_time_phys_area) &&
-+		    xen_feature(XENFEAT_auto_translated_physmap);
-+	int op =3D phys ? VCPUOP_register_vcpu_time_phys_area
-+		      : VCPUOP_register_vcpu_time_memory_area;
-+
-+	if (phys)
-+		t=2Eaddr=2Ep =3D pvti ? virt_to_phys(pvti) : ~0LLU;
-+	else
-+		t=2Eaddr=2Ev =3D pvti;
-+
-+	return HYPERVISOR_vcpu_op(op, 0, &t);
-+}
-+
- /* Get the TSC speed from Xen */
- static unsigned long xen_tsc_khz(void)
- {
-@@ -395,7 +411,6 @@ static u64 xen_clock_value_saved;
-=20
- void xen_save_time_memory_area(void)
- {
--	struct vcpu_register_time_memory_area t;
- 	int ret;
-=20
- 	xen_clock_value_saved =3D xen_clocksource_read() - xen_sched_clock_offse=
-t;
-@@ -403,9 +418,7 @@ void xen_save_time_memory_area(void)
- 	if (!xen_clock)
- 		return;
-=20
--	t=2Eaddr=2Ev =3D NULL;
--
--	ret =3D HYPERVISOR_vcpu_op(VCPUOP_register_vcpu_time_memory_area, 0, &t)=
-;
-+	ret =3D xen_register_time_area(NULL);
- 	if (ret !=3D 0)
- 		pr_notice("Cannot save secondary vcpu_time_info (err %d)",
- 			  ret);
-@@ -415,15 +428,12 @@ void xen_save_time_memory_area(void)
-=20
- void xen_restore_time_memory_area(void)
- {
--	struct vcpu_register_time_memory_area t;
- 	int ret;
-=20
- 	if (!xen_clock)
- 		goto out;
-=20
--	t=2Eaddr=2Ev =3D &xen_clock->pvti;
--
--	ret =3D HYPERVISOR_vcpu_op(VCPUOP_register_vcpu_time_memory_area, 0, &t)=
-;
-+	ret =3D xen_register_time_area(&xen_clock->pvti);
-=20
- 	/*
- 	 * We don't disable VDSO_CLOCKMODE_PVCLOCK entirely if it fails to
-@@ -446,7 +456,6 @@ void xen_restore_time_memory_area(void)
-=20
- static void xen_setup_vsyscall_time_info(void)
- {
--	struct vcpu_register_time_memory_area t;
- 	struct pvclock_vsyscall_time_info *ti;
- 	int ret;
-=20
-@@ -454,9 +463,7 @@ static void xen_setup_vsyscall_time_info(void)
- 	if (!ti)
- 		return;
-=20
--	t=2Eaddr=2Ev =3D &ti->pvti;
--
--	ret =3D HYPERVISOR_vcpu_op(VCPUOP_register_vcpu_time_memory_area, 0, &t)=
-;
-+	ret =3D xen_register_time_area(&ti->pvti);
- 	if (ret) {
- 		pr_notice("xen: VDSO_CLOCKMODE_PVCLOCK not supported (err %d)\n", ret);
- 		free_page((unsigned long)ti);
-@@ -469,9 +476,7 @@ static void xen_setup_vsyscall_time_info(void)
- 	 * still check it in case hypervisor is buggy=2E
- 	 */
- 	if (!(ti->pvti=2Eflags & PVCLOCK_TSC_STABLE_BIT)) {
--		t=2Eaddr=2Ev =3D NULL;
--		ret =3D HYPERVISOR_vcpu_op(VCPUOP_register_vcpu_time_memory_area,
--					 0, &t);
-+		ret =3D xen_register_time_area(NULL);
- 		if (!ret)
- 			free_page((unsigned long)ti);
-=20
-diff --git a/drivers/xen/time=2Ec b/drivers/xen/time=2Ec
-index a2be0a4d45b0=2E=2E6b6ddc7a5822 100644
---- a/drivers/xen/time=2Ec
-+++ b/drivers/xen/time=2Ec
-@@ -19,8 +19,12 @@
- #include <xen/interface/vcpu=2Eh>
- #include <xen/xen-ops=2Eh>
-=20
--/* runstate info updated by Xen */
--static DEFINE_PER_CPU(struct vcpu_runstate_info, xen_runstate);
-+/*
-+ * Runstate info updated by Xen=2E The phys-area ABI doesn't allow it to =
-cross
-+ * a page boundary; the struct is 48 bytes, so 64 is the smallest alignme=
-nt
-+ * that guarantees this=2E
-+ */
-+static DEFINE_PER_CPU(struct vcpu_runstate_info, xen_runstate) __aligned(=
-64);
-=20
- static DEFINE_PER_CPU(u64[4], old_runstate_time);
-=20
-@@ -152,11 +156,21 @@ u64 xen_steal_clock(int cpu)
- void xen_setup_runstate_info(int cpu)
- {
- 	struct vcpu_register_runstate_memory_area area;
-+	unsigned int op;
-=20
--	area=2Eaddr=2Ev =3D &per_cpu(xen_runstate, cpu);
-+	if (xen_feature(XENFEAT_runstate_phys_area) &&
-+	    xen_feature(XENFEAT_auto_translated_physmap))
-+	{
-+		op =3D VCPUOP_register_runstate_phys_area;
-+		area=2Eaddr=2Ep =3D per_cpu_ptr_to_phys(&per_cpu(xen_runstate, cpu));
-+	}
-+	else
-+	{
-+		op =3D VCPUOP_register_runstate_memory_area;
-+		area=2Eaddr=2Ev =3D &per_cpu(xen_runstate, cpu);
-+	}
-=20
--	if (HYPERVISOR_vcpu_op(VCPUOP_register_runstate_memory_area,
--			       xen_vcpu_nr(cpu), &area))
-+	if (HYPERVISOR_vcpu_op(op, xen_vcpu_nr(cpu), &area))
- 		BUG();
- }
-=20
-diff --git a/include/xen/interface/features=2Eh b/include/xen/interface/fe=
-atures=2Eh
-index 53f760378e39=2E=2Ef00144a7c790 100644
---- a/include/xen/interface/features=2Eh
-+++ b/include/xen/interface/features=2Eh
-@@ -97,6 +97,15 @@
- #define XENFEAT_not_direct_mapped         16
- #define XENFEAT_direct_mapped             17
-=20
-+/*
-+ * Signal whether the domain is able to use the following hypercalls:
-+ *
-+ * VCPUOP_register_runstate_phys_area
-+ * VCPUOP_register_vcpu_time_phys_area
-+ */
-+#define XENFEAT_runstate_phys_area        18
-+#define XENFEAT_vcpu_time_phys_area       19
-+
- #define XENFEAT_NR_SUBMAPS 1
-=20
- #endif /* __XEN_PUBLIC_FEATURES_H__ */
-diff --git a/include/xen/interface/vcpu=2Eh b/include/xen/interface/vcpu=
-=2Eh
-index c7cc28ad8d63=2E=2Ed3858233c32f 100644
---- a/include/xen/interface/vcpu=2Eh
-+++ b/include/xen/interface/vcpu=2Eh
-@@ -203,4 +203,21 @@ struct vcpu_register_time_memory_area {
- };
- DEFINE_GUEST_HANDLE_STRUCT(vcpu_register_time_memory_area);
-=20
-+/*
-+ * Like the respective VCPUOP_register_*_memory_area, just using the "add=
-r=2Ep"
-+ * field of the supplied struct as a guest physical address (i=2Ee=2E in =
-GFN space)=2E
-+ * The respective area may not cross a page boundary=2E  Pass ~0 to unreg=
-ister an
-+ * area=2E  Note that as long as an area is registered by physical addres=
-s, the
-+ * linear address based area will not be serviced (updated) by the hyperv=
-isor=2E
-+ *
-+ * Note that the area registered via VCPUOP_register_runstate_phys_area w=
-ill
-+ * be updated in the same manner as the one registered via virtual addres=
-s PLUS
-+ * VMASST_TYPE_runstate_update_flag engaged by the domain=2E
-+ *
-+ * XENFEAT_{runstate,vcpu_time}_phys_area feature bits signal the availab=
-ility
-+ * of these ops=2E
-+ */
-+#define VCPUOP_register_runstate_phys_area      14
-+#define VCPUOP_register_vcpu_time_phys_area     15
-+
- #endif /* __XEN_PUBLIC_VCPU_H__ */
---=20
-2=2E56=2E0
+It takes a bitmap from Xen, and transforms it into a u8 array of 1's or 0's.
 
+It wants storing as a proper Linux bitmap, with xen_feature() being a
+trivial wrapper around test_bit(), at which point the compiler will able
+to collapse expressions such as the one above into a single operation. 
+(except, you need to remove the XENFEAT_auto_translated_physmap aspect
+to include PV guests.)
 
+> +	int op = phys ? VCPUOP_register_vcpu_time_phys_area
+> +		      : VCPUOP_register_vcpu_time_memory_area;
+> +
+> +	if (phys)
+> +		t.addr.p = pvti ? virt_to_phys(pvti) : ~0LLU;
+> +	else
+> +		t.addr.v = pvti;
+> +
+> +	return HYPERVISOR_vcpu_op(op, 0, &t);
+> +}
+> +
+>  /* Get the TSC speed from Xen */
+>  static unsigned long xen_tsc_khz(void)
+>  {
+> @@ -395,7 +411,6 @@ static u64 xen_clock_value_saved;
+>  
+>  void xen_save_time_memory_area(void)
+>  {
+> -	struct vcpu_register_time_memory_area t;
+>  	int ret;
+>  
+>  	xen_clock_value_saved = xen_clocksource_read() - xen_sched_clock_offset;
+> @@ -403,9 +418,7 @@ void xen_save_time_memory_area(void)
+>  	if (!xen_clock)
+>  		return;
+>  
+> -	t.addr.v = NULL;
+> -
+> -	ret = HYPERVISOR_vcpu_op(VCPUOP_register_vcpu_time_memory_area, 0, &t);
+> +	ret = xen_register_time_area(NULL);
+>  	if (ret != 0)
+>  		pr_notice("Cannot save secondary vcpu_time_info (err %d)",
+>  			  ret);
 
--- 
-Teddy Astie | Vates XCP-ng Developer
+How does this work?  Answer is it doesn't, because the print message is
+bogus.  This is a failure to unregister the time area, not a failure to
+save the time value.
 
-XCP-ng & Xen Orchestra - Vates s=
-olutions
+At lest the error message wants fixing, and in a prep patch.
 
-web: https://vates=2Etech
----=Part.2b5.eea8caf3adaf82ca.1a1443cb515.d621e0f4827f716e=---
+> diff --git a/drivers/xen/time.c b/drivers/xen/time.c
+> index a2be0a4d45b0..6b6ddc7a5822 100644
+> --- a/drivers/xen/time.c
+> +++ b/drivers/xen/time.c
+> @@ -152,11 +156,21 @@ u64 xen_steal_clock(int cpu)
+>  void xen_setup_runstate_info(int cpu)
+>  {
+>  	struct vcpu_register_runstate_memory_area area;
+> +	unsigned int op;
+>  
+> -	area.addr.v = &per_cpu(xen_runstate, cpu);
+> +	if (xen_feature(XENFEAT_runstate_phys_area) &&
+> +	    xen_feature(XENFEAT_auto_translated_physmap))
+
+Again, PV guests want to use phys when available.
+
+> +	{
+> +		op = VCPUOP_register_runstate_phys_area;
+> +		area.addr.p = per_cpu_ptr_to_phys(&per_cpu(xen_runstate, cpu));
+> +	}
+> +	else
+> +	{
+> +		op = VCPUOP_register_runstate_memory_area;
+> +		area.addr.v = &per_cpu(xen_runstate, cpu);
+
+I'd suggest factoring out the &per_cpu(xen_runstate, cpu) calculation. 
+It's not free, and can't be hoisted by the compiler.
+
+~Andrew
 
