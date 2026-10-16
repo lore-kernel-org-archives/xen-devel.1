@@ -4,43 +4,43 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 73AD0CCA462
-	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 08:52:27 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1451393.1666455 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 586A4CCA464
+	for <xen-devel@archiver.kernel.org>; Fri, 16 Oct 2026 08:58:30 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1451400.1666463 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHdff-0002b8-9X; Fri, 16 Oct 2026 08:52:11 +0000
+	id 1xHdlU-0003Mb-T8; Fri, 16 Oct 2026 08:58:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1451393.1666455; Fri, 16 Oct 2026 08:52:11 +0000
+Received: by outflank-mailman (output) from mailman id 1451400.1666463; Fri, 16 Oct 2026 08:58:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xHdff-0002b0-6W; Fri, 16 Oct 2026 08:52:11 +0000
-Received: by outflank-mailman (input) for mailman id 1451393;
- Fri, 16 Oct 2026 08:52:10 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xHdfe-0002au-Hh
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 08:52:10 +0000
+	id 1xHdlU-0003MU-QT; Fri, 16 Oct 2026 08:58:12 +0000
+Received: by outflank-mailman (input) for mailman id 1451400;
+ Fri, 16 Oct 2026 08:58:11 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xHdlT-0003MM-Te
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 08:58:11 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xHdfd-00AYAA-QH
- for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 10:52:09 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xHdlT-0057zy-6i
+ for xen-devel@lists.xenproject.org; Fri, 16 Oct 2026 10:58:11 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ad1e5ae-8faa-0a2a0a5109dd-0a2a4502bfdc-30
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 10:52:09 +0200
-Received: from [209.85.128.53] (helo=mail-wm1-f53.google.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad1e719-bab6-0a2a0a5309dd-0a2a4501bb88-44
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 10:58:11 +0200
+Received: from [209.85.221.46] (helo=mail-wr1-f46.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ad1e5b9-6ca4-0a2a45020019-d1558035c930-3
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 10:52:09 +0200
-Received: by mail-wm1-f53.google.com with SMTP id
- 5b1f17b1804b1-4a018dc1f98so49167985e9.3
- for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 01:52:09 -0700 (PDT)
+ id 6ad1e722-5984-0a2a45010019-d155dd2ee524-3
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 10:58:11 +0200
+Received: by mail-wr1-f46.google.com with SMTP id
+ ffacd0b85a97d-48441a2ba1bso1477494f8f.1
+ for <xen-devel@lists.xenproject.org>; Fri, 16 Oct 2026 01:58:11 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a1c8a56233sm35334595e9.0.2026.10.16.01.52.08
+ 5b1f17b1804b1-4a1c8ad6451sm41982045e9.4.2026.10.16.01.58.10
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Fri, 16 Oct 2026 01:52:08 -0700 (PDT)
+ Fri, 16 Oct 2026 01:58:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -54,46 +54,45 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1792140729; x=1792745529; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1792141090; x=1792745890; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=he930oV89eZdh/K36YmmBzdGZKz7JS6dlw7SdepoDME=;
-        b=aRe/ts87hewfrk3YI7q06olR8VPOllZj7vAW2gzcf5eEOjwYGD/7v/9Lp4Y9ZEmBPo
-         wj8yxg2iOWyWNYpWvWKPfzvsFiYzXqBfD7B47TyoqzhI9eLqsXLpmiIQdSWCsuE3ZWfX
-         cDLS+IriWr5eARqGYPDdnYOEt9uLJG20II63e8hjWz1jE4U7XZWtshqdbdBWJSE39dHA
-         1pgjlrQxifljDwxROEQJs4f8YNB0Cu761VRj+W/uW7JDuQhTZvVCuduhs5SQbGz+ynlD
-         hdVwmr13Hkq4frQUs3XjQqFC4vqDpqhzh2K6zsq9DhtggZsC6YaD3EN8ECKSMVrxHbJE
-         2uBw==
+        bh=PR9lRPIG8/Y939BZAaMFoj8bjV2bIjKUE7RFR5/k+GM=;
+        b=ZGPjoTGHYXdMJ5ntSL1spXF02/5F6kwQnLZPE2Rh/dlzVCtJYZ2g+WjoYJUZ2+QSUj
+         izCqX74fddPlPhvGcutzjI4wi2cbmqGRBVhCNVoFwDF0K0WEw+6GScim8Rri3GXkBeRE
+         KIbZ5JAP53e3J23YUFxfAXZvsvswP0osSscUkLo6DbsrMsiLKJIdhuUrrp7NckS4QaTz
+         dTD4NJ9Ft69zbn8FM0bKHc/x4pvPgTSd9aHZ/Y+pfb8yTOo2n0/rQHPWU24JpD3xuL8X
+         n5GQUJZMhj03nyTvwoRY+BZYRboAW5wUSv1Dn4qQG+ndT8zBQ2tFRYPWrHUWHJrCXcBj
+         +qsA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792140729; x=1792745529;
+        d=1e100.net; s=20260707; t=1792141090; x=1792745890;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=he930oV89eZdh/K36YmmBzdGZKz7JS6dlw7SdepoDME=;
-        b=1Rmg3fv9KAEuNgHnCendSwpZ9UEpyQB5Z6DqRa+JVxZvic1xsggQ/W/t7QCdPtbVfD
-         H/zKM/PyUEWqydRReuWoL9o1oylySo65OfHoli6+o/F3Sr9GlAEXsIGCNWNW12Avqi8/
-         osY18y4emLCNNMVCyVGh9e9zIeOb/4hTzqOalSBHFIEaxEbt4LcOxkSurZUlPB7/85re
-         Q9/8cpVhOP8jFjfK2OT+D24wGfI2wHOcyj+9SqIBVia7ONNE0Tv21lR9KZB1Tm6QUJ4N
-         g75S8sfA1AlbbONpyrnkJd1jE/+RMJktdWrtq9lE9GjcX4P3xGi4tzOIJ3cp9zH99oqb
-         0czg==
-X-Gm-Message-State: AFq9FYJaQd+YAU4AFN4Kr1OWActGQa0lP0Az8KiCh6gKLWP9Lp/sFYQz
-	mW4/IHV86RN1gHJ/FygtUUuIFLHsZu3UXdBA56b3khJrLPmG73/P1tKs8BpgfUKCpRgofFLFJyM
-	oW28+AQ==
-X-Gm-Gg: AYBFou3rTz9k1ocXWP69yhbjGn36F6UMLfqzqeKmgW2QehQRMLgoiaKthZoEAlPqPsH
-	Q/Iw+qbiOGrj0gFOkcjFLmAYVfr5kpCk3WpWbQUhAEt3YnIE5sXCXc3GNByv4lg3NL7ZfKyn2bl
-	D4LO063g8x9Wixw/Mz2EOpoAZATMy11wv+mgEU9/uacPwO6xVhonZP07Hmn9VxiPLpYV8hR2u5R
-	TFR37u4sOx6yOhS+JeMW82CW51FAG5uc2FS2rud+GdjmrD94ZV60nvVfP2hlUUMtpqkogHOJhDs
-	qmDcyxZhQuzy0bSAi9JDrODyT0rGFtmfoLNFMiF/XJ5LK/8EyNTN8irPSQP91BUN9LPR3ajraK4
-	ftRT7sZJ/XL94OmN4TdBFy35FWyoU5ObAiaOjVKvhhCEZx9YIdAha8Q8eCY2P48Rsmq24AfOxwn
-	KVXKUy935FjBjFpv2LrCwXx3kIXXHbbqLskuv5OfgHwpu97XvWoYhuKqJaYE4AslBUXPCaq4p5h
-	IulM8crFEPyj6TbsN+aJBZb03KUn5iAjW9jxE6t/rkotG83UERds6vJ3hLziQ==
-X-Received: by 2002:a05:600c:1908:b0:49f:ce73:5e94 with SMTP id 5b1f17b1804b1-4a18e4dd018mr424209225e9.34.1792140729149;
-        Fri, 16 Oct 2026 01:52:09 -0700 (PDT)
-Message-ID: <508b601b-0b95-4edf-a433-8fef03420c9e@suse.com>
-Date: Fri, 16 Oct 2026 10:52:08 +0200
+        bh=PR9lRPIG8/Y939BZAaMFoj8bjV2bIjKUE7RFR5/k+GM=;
+        b=LP6dw467fpjHedesmXSp17NU1jBu/fMbfz6YCr2FmOthF8ByQMMlecd80dps4tv1JC
+         ZK6Kw8153cKzOZ3WyVjQF9+s6+VsEMDf4LcqsfLRB1blt3w/300TMWTHQaCWmNVh19IS
+         17W1slSDhJIIp0mKOHP+7ooVDUSnCqJBCff/6W8PEsDpe7OE+NRMj/reEp9Wd1cBvfVQ
+         j80+JDr/254bCzKNWKbj8RAr7nSqRyjs84tPHoAdawUDukEjKASKWbyk5mqKDJ1wTgbK
+         1V/r88rymmCgSkEngSqNk+fP2XpDUjGMSykLHduRfziMCc9u5z2h85XzgTmste4USgr4
+         E8eg==
+X-Gm-Message-State: AFq9FYIiNvqCg510zxb+w4qft6E3V6FPbGQAyH7U5N1CFfhjzm7eFuyn
+	xo+K/AXPutisum3t73ep8SZRXXXk3gnTKpJuium5GNuSS1eczDTsJYhvwSlQzQlAqA==
+X-Gm-Gg: AYBFou158MZRgYzURyYKAhkL9prc87ixL99bFYIkWvezXjGzznMP4rzFOINWBaD3sKX
+	iycJx3A1HQV+epaPqRMP63Lx/wRQmh/NX5pxpZWnEM1/3KoGLmin5+/GeR5H8+b0sGChZp+s7hz
+	v0faw8A5P3KbNI4APWly5ENiiVZCP5IIq6cNxcAZHkAuXmAxLbT+Nf7SYSQo0dKTxV/nqA7/7V4
+	h2x33H/Pyf/yLw9inDNnH3Ta8nBNUqqrOlbF6Nal3GrsHBa8RQV/ATmt8k7KdKCoMSLgMBcFYyH
+	hytpKIBm+DKdsol2n60JD5YS9iWHjAMTzM8x27IiFZAionyFgBe+2+2g9K2jEu7t48QfvtrgGv9
+	w1zdzgHL8QKjBQjZ8tKhas9KlFzeRs1LWe2FxAWbToMUOLHtu433cK5OOypEU6LpeIhWzwp4ah4
+	3KEQCgV3Eqd7ioIOh8e5mBtXHk43Vry947PinYMcKPR4/DQD07M24aenZtKN7xFX2cuk0Ct3qz5
+	VA8MtdV64N8xKjTSLItF1bRyPGwxh293EluPbLxkLuzkDFBtB+5waD14IrHfoE=
+X-Received: by 2002:a05:600c:8105:b0:4a1:714d:eed with SMTP id 5b1f17b1804b1-4a18e4841c1mr458595375e9.14.1792141090544;
+        Fri, 16 Oct 2026 01:58:10 -0700 (PDT)
+Message-ID: <acbbec65-3435-4869-ab71-090afd751083@suse.com>
+Date: Fri, 16 Oct 2026 10:58:09 +0200
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
 Subject: Re: [PATCH 11/15] x86/PVH: try to map initrd directly into Dom0
@@ -103,7 +102,7 @@ Cc: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
  Teddy Astie <teddy.astie@vates.tech>,
  Marek Marczykowski <marmarek@invisiblethingslab.com>
 References: <1b4c2bb4-118d-497c-8d7d-f3824fd61a73@suse.com>
- <78cd46cc-84ed-46df-96c9-26ce97ed0da0@suse.com> <atEADbxD4mL_bXy6@Mac.lan>
+ <78cd46cc-84ed-46df-96c9-26ce97ed0da0@suse.com> <atEQPq2zvmxxEgIY@Mac.lan>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -129,80 +128,34 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <atEADbxD4mL_bXy6@Mac.lan>
+In-Reply-To: <atEQPq2zvmxxEgIY@Mac.lan>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1792140729-307C22AC-5DA2DC97/10/78276251493
+X-purgate-ID: tlsNG-d62444/1792141091-C4D44757-3E2987BB/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2692
+X-purgate-size: 978
 
-On 15.10.2026 18:32, Roger Pau Monné wrote:
+On 15.10.2026 19:41, Roger Pau Monné wrote:
 > On Mon, Oct 12, 2026 at 10:25:11AM +0200, Jan Beulich wrote:
->> Our present handling of initrd is problematic in particular when the
->> initrd is huge, and when at the same time "dom0_mem=" isn't in use to
->> significantly shrink Dom0's memory (from the default). In that case,
->> insufficient memory may exist for pvh_populate_p2m() to succeed (because
->> initrd memory can be freed only after copying).
->>
->> Make an attempt to map the blob (including headroom) into Dom0 instead,
+>> @@ -867,7 +1078,7 @@ static int __init pvh_load_kernel(
+>>          }
+>>          start_info.modlist_paddr = last_addr;
+>>          start_info.nr_modules = 1;
+>> -        last_addr += sizeof(mod);
+>> +        last_addr += sizeof(*mod);
+>>      }
+>>  
+>>      start_info.magic = XEN_HVM_START_MAGIC_VALUE;
 > 
-> I would use "dom0 p2m" instead of plain p2m, it's clearer IMO.
+> Isn't this still not properly ordered, as start_info address must
+> strictly be below 4GB (as is passed in a CPU register with the CPU in
+> 32bit mode), yet it is allocated last in pvh_load_kernel()?
 
-Can do, sure.
-
->> thus also saving the copying operation. With __start_xen() having arranged
->> for a larger than necessary blob, that mapping can typically be done with
->> superpage mappings.
->>
->> Reported-by: Marek Marczykowski-Górecki <marmarek@invisiblethingslab.com>
->> Signed-off-by: Jan Beulich <jbeulich@suse.com>
->> ---
->> Is there a need to prune (scrub) the headroom space?
-> 
-> We already populate the p2m with memory allocated with MEMF_no_scrub,
-> so there's no reason to scrub the headroom unless we also remove the
-> MEMF_no_scrub for p2m population.
-
-Oh, I hadn't noticed that. Away goes the remark.
-
->> Why does find_memory() go upwards, while find_kernel_memory() goes
->> downwards? And why do we use the lowest part of the region found by
->> find_memory() rather than the highest part?
-> 
-> find_memory() should probably start downwards from 4G.
-
-I've added a todo item; maybe I can get this done in another patch in v2.
-
-(Further remarks will be addressed separately.)
-
->> +    /*
->> +     * As we promise to place below 4G whatever fits there, make a first pass
->> +     * limiting permitted addresses.  If we can't fit it there, fall back to
->> +     * placing above 4G.
->> +     */
->> +    for ( paddr_t limit = GB(4); ; )
->> +    {
->> +        paddr_t start;
->> +
->> +        *blob_start = find_initrd_memory(d, elf, &try, align, limit);
->> +        if ( *blob_start != INVALID_PADDR )
->> +            break;
->> +
->> +        if ( align == PAGE_SIZE )
->> +        {
->> +            if ( !(limit + 1) )
->> +                return;
->> +
->> +            limit = -1;
->> +            align = 1UL << L3_PAGETABLE_SHIFT;
-> 
-> Aren't you possibly asking for an alignment better than what's
-> required by the actual initrd memory?  Maybe it's using 2M pages yet
-> you request 1G alignment here.
-
-Yes and no: I may request too much here, but the very first condition in
-find_initrd_memory() deals with that. When trying different variants of
-coding this up, doing it this way seemed like the best way.
+Well. For one, this is pre-existing. With the size of the region that
+find_memory() needs to find greatly reduced when the initrd isn't
+included there, there's about zero chance that it won't find a suitable
+region below 4G. Once we have find_memory() go downwards from 4G, the
+remaining little bit of a risk will also go away.
 
 Jan
 
