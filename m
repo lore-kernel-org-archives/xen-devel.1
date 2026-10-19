@@ -4,46 +4,80 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id A5EFBCCF2D3
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 08:03:02 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1453986.1667445 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id D260DCCF2D6
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 08:09:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1453993.1667455 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xIiKH-0003Z6-Bz; Mon, 19 Oct 2026 08:02:33 +0000
+	id 1xIiQg-0004Ah-07; Mon, 19 Oct 2026 08:09:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1453986.1667445; Mon, 19 Oct 2026 08:02:33 +0000
+Received: by outflank-mailman (output) from mailman id 1453993.1667455; Mon, 19 Oct 2026 08:09:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xIiKH-0003Yy-90; Mon, 19 Oct 2026 08:02:33 +0000
-Received: by outflank-mailman (input) for mailman id 1453986;
- Mon, 19 Oct 2026 08:02:32 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xIiQf-0004Aa-Tc; Mon, 19 Oct 2026 08:09:09 +0000
+Received: by outflank-mailman (input) for mailman id 1453993;
+ Mon, 19 Oct 2026 08:09:08 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmytro_prokopchuk1@epam.com>) id 1xIiKG-0003Ys-2s
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 08:02:32 +0000
+ (envelope-from <armbru@redhat.com>) id 1xIiQe-0004AU-Ic
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 08:09:08 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xIiKE-002EVY-M3
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 10:02:30 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xIiQd-000Y3j-K8
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 10:09:07 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6ad5ce8a-e002-0a2a0a5209dd-0a2a4504e462-42
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 10:02:30 +0200
-Received: from [40.107.130.81]
- (helo=MRWPR03CU001.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6ad5ce96-b57f-0a2a45040019-286b82513d5e-3
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 10:02:30 +0200
-Received: from AM9SPR01MB0028.eurprd03.prod.outlook.com
- (2603:10a6:20b:410::12) by PA4PR03MB7200.eurprd03.prod.outlook.com
- (2603:10a6:102:100::14) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.19; Mon, 19 Oct
- 2026 08:02:27 +0000
-Received: from AM9SPR01MB0028.eurprd03.prod.outlook.com
- ([fe80::851:da2d:b88a:1b50]) by AM9SPR01MB0028.eurprd03.prod.outlook.com
- ([fe80::851:da2d:b88a:1b50%6]) with mapi id 15.21.0522.017; Mon, 19 Oct 2026
- 08:02:26 +0000
+ (envelope-from <armbru@redhat.com>)
+ id 6ad5d016-2eae-0a2a0a5409dd-0a2a450a81e0-24
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 10:09:07 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <armbru@redhat.com>)
+ id 6ad5d021-f2d2-0a2a450a0019-aa0a817c6aab-3
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 10:09:06 +0200
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-65-F_NLUpEMNv-XFrasoz7gyw-1; Mon,
+ 19 Oct 2026 08:09:03 +0000
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 90A5B1955DAB; Mon, 19 Oct 2026 08:08:54 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.44.22.5])
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9A2781800642; Mon, 19 Oct 2026 08:08:50 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id DC3D421E6A04; Mon, 19 Oct 2026 10:08:47 +0200 (CEST)
+Resent-To: 17746591750@163.com, graf@amazon.com, FangSheng.Huang@amd.com,
+ michael.roth@amd.com, jamin_lin@aspeedtech.com, kane_chen@aspeedtech.com,
+ steven_lee@aspeedtech.com, andrew@codeconstruct.com.au,
+ palmer@dabbelt.com, foss@defmacro.it, sebastian.huber@embedded-brains.de,
+ jiaxun.yang@flygoat.com, lizhijian@fujitsu.com, edgar.iglesias@gmail.com,
+ jasowangio@gmail.com, leetroy@gmail.com, liwei1518@gmail.com,
+ npiggin@gmail.com, zhangckid@gmail.com, titusr@google.com,
+ wuhaotsh@google.com, arei.gonglei@huawei.com, berto@igalia.com,
+ zhao1.liu@intel.com, its@irrelevant.dk, joel@jms.id.au, clg@kaod.org,
+ conor@kernel.org, david@kernel.org, jic23@kernel.org, kbusch@kernel.org,
+ sstabellini@kernel.org, peter.maydell@linaro.org,
+ richard.henderson@linaro.org, lixianglai@loongson.cn,
+ zhiwei_liu@linux.alibaba.com, maobibo@loongson.cn, zhenwei.pi@linux.dev,
+ qemu-arm@nongnu.org, adityag@linux.ibm.com, qemu-block@nongnu.org,
+ amachhiw@linux.ibm.com, qemu-devel@nongnu.org, qemu-ppc@nongnu.org,
+ qemu-riscv@nongnu.org, qemu-s390x@nongnu.org, kfting@nuvoton.com,
+ den@openvz.org, daniel.barboza@oss.qualcomm.com, philmd@oss.qualcomm.com,
+ pierrick.bouvier@oss.qualcomm.com, chao.liu@processmission.com,
+ sam@rfc1149.net, kvm@vger.kernel.org, linux-cxl@vger.kernel.org,
+ alistair.francis@wdc.com, anthony@xenproject.org,
+ borntraeger@linux.ibm.com, brueckner@linux.ibm.com, farman@linux.ibm.com,
+ harshpb@linux.ibm.com, iii@linux.ibm.com, jjherne@linux.ibm.com,
+ milesg@linux.ibm.com, mjrosato@linux.ibm.com, pasic@linux.ibm.com,
+ rathc@linux.ibm.com, xen-devel@lists.xenproject.org, luc@lmichel.fr
+Resent-From: Markus Armbruster <armbru@redhat.com>
+Resent-Date: Mon, 19 Oct 2026 10:08:47 +0200
+Resent-Message-ID: <87v76y159s.fsf@pond.sub.org>
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,166 +89,136 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wZi9tE9eyt6Ww5mQRX/J4uSvX31VACoLOJ9NkJN+b17zDeDHxj0pXHg65q4XL1F49WkFWAi14eDJEnW1eZk3GEnVrBynHRMj85gI1aFCUdJ57/EgnEBlsAq/yr6VV9W8P23ExcoOVw7vKg3jb6jpYUG5MR0a+uI1WzCMTfBrrE5G5B4vWLK6jN8+6BQRPgZyOHpzJ+UASvv33wb3b9d0BZ8Ns/H2f/9KYCg76htn2Tfgyuj76M0D3P3+VSgjatBoDfYVB6tEQcw6XCDRQH463FM1BS14tMZMR7s4k/JcOYMSG5cfdwvOoNAPavqYIALluyFbfpQh+hc+dDqTjEkfIg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=THqUcA+jSlE+cJXyOzAplOpsf2pkcu16YpV0TJNMB/w=;
- b=cHU7kJvdPF/2mmIJRpXw/SY0s/tFqHm49ZCCWZIRXO1UaUC2Ze/JUUWujt/gxBE5bsxPf1M2i33iH5O2mn132AVohDzSxrIMx8Y+CxoW6Fs4PBXeUgw0VAvLn6vXDEhiPxBSJOzFuLXKxfp+i9ALJL8XVs/QBDLpcXXEqucJHa9E5l+aMXWnqKQTiKfNXAa+3XZwTTBxVCCKF404LfQJd66OV3xnYnu6BmuvkfrmxPH0JFco3/jP2VpEnlUgkCYD5ns3hLrASFgGLSKyNAI3DLFUaMFtymF5L6VPH/swNwuKzjZ32+fBv65IteqHof4bauIF7JvgLMqmypGjz9b9Cw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=THqUcA+jSlE+cJXyOzAplOpsf2pkcu16YpV0TJNMB/w=;
- b=vWkbw+XrC75crQtHMnZDyicedjxZORgCs6x9Fk926B1k/rqh1Whd35hC1kNGf6tu0WELyrs6Emdr+fgbc7KyWR6DMws/Vibl8itW/4q7/MtnO4JQb4Ym2rToXmBjf8n5bigGtAU9+8SsqKnGe8ZH7kzPX4AC5BG7v3ExssjOtCiPdodFWrrDOxhJV/oOZHNxhwc9M65X7mpHkl89MqEXLYoGiMrIhrQhanmlmRJz8Vt/wFVzx5Sl/HwQgRi53HeLhD2HJ99qtgexywLWLcFmLz77c5faBRoDHBcL3gYovQfeo3Wm165TVUGe9wgg8z2eC+3M8hGBvdkzppgSw0H3QA==
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-Message-ID: <1aa21183-2bc0-4bd1-8267-6df5c2f0594c@epam.com>
-Date: Mon, 19 Oct 2026 11:02:25 +0300
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3] Eclair: scan the last xen-syms linking pass on Arm
-To: Jan Beulich <jbeulich@suse.com>
-Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <da077c781fe07f776946475521bd06409a9af100.1791836668.git.dmytro_prokopchuk1@epam.com>
- <d10c7b4a-bd83-4a18-810f-50fab37ab841@suse.com>
- <a4b9fc24-35c9-4fcf-9798-3f3afd840d0f@epam.com>
- <171c47db-b916-4f25-8026-16a1a99dea0c@suse.com>
-Content-Language: en-US
-From: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
-In-Reply-To: <171c47db-b916-4f25-8026-16a1a99dea0c@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: AS9PR0301CA0030.eurprd03.prod.outlook.com
- (2603:10a6:20b:468::30) To AM9SPR01MB0028.eurprd03.prod.outlook.com
- (2603:10a6:20b:410::12)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:Resent-To:Resent-From:Resent-Message-ID:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1792397345;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:resent-to:
+	 resent-from:resent-message-id:in-reply-to:in-reply-to:  references:references;
+	bh=ZapaecIeMcbF8m3IzNayfIxAgM/GC5btRJ9Thst8mm4=;
+	b=W/gjaCuR2NYg+raTTNbjHh55j1jRCanrGEBJ8t6EsE5ydA+VLV+VZEbbTatoNmeHBv2hNj
+	TWAHP21IKRk47ZKSPSbF5tN6Uf563Cg5yusHaBJUs1Azf4uDPhbPSg9g114YhYaloIRm9s
+	7gnOmDbI0rlKICV9vFH7oIxf3SPzv/c=
+X-MC-Unique: F_NLUpEMNv-XFrasoz7gyw-1
+X-Mimecast-MFC-AGG-ID: F_NLUpEMNv-XFrasoz7gyw_1792397338
+From: Markus Armbruster <armbru@redhat.com>
+To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
+Cc: qemu-devel@nongnu.org,  Markus Armbruster <armbru@redhat.com>,  Paolo
+ Bonzini <pbonzini@redhat.com>,  Daniel P. =?utf-8?Q?Berrang=C3=A9?=
+ <berrange@redhat.com>,
+  Michael Roth <michael.roth@amd.com>,  Pierrick Bouvier
+ <pierrick.bouvier@oss.qualcomm.com>,  Philippe =?utf-8?Q?Mathieu-Daud?=
+ =?utf-8?Q?=C3=A9?=
+ <philmd@oss.qualcomm.com>,  Amit Machhiwal <amachhiw@linux.ibm.com>,
+  Alexander Graf <graf@amazon.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  "Gonglei (Arei)"
+ <arei.gonglei@huawei.com>,  zhenwei pi <zhenwei.pi@linux.dev>,  David
+ Hildenbrand <david@kernel.org>,  Igor Mammedov <imammedo@redhat.com>,
+  Alberto Garcia <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna
+ Reitz <hreitz@redhat.com>,  "Michael S. Tsirkin" <mst@redhat.com>,  Ani
+ Sinha <anisinha@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,
+  Luc Michel <luc@lmichel.fr>,  Zhao Liu <zhao1.liu@intel.com>,  Jonathan
+ Cameron <jic23@kernel.org>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
+ <clg@kaod.org>,  Steven Lee
+ <steven_lee@aspeedtech.com>,  Troy Lee <leetroy@gmail.com>,  Jamin Lin
+ <jamin_lin@aspeedtech.com>,  Kane Chen <kane_chen@aspeedtech.com>,  Andrew
+ Jeffery <andrew@codeconstruct.com.au>,  Joel Stanley <joel@jms.id.au>,
+  Samuel Tardieu <sam@rfc1149.net>,  Marcelo Tosatti <mtosatti@redhat.com>,
+  John Snow <jsnow@redhat.com>,  "Denis V. Lunev" <den@openvz.org>,  Song
+ Gao <17746591750@163.com>,  Bibo Mao <maobibo@loongson.cn>,  Xianglai Li
+ <lixianglai@loongson.cn>,  Jiaxun Yang <jiaxun.yang@flygoat.com>,
+  FangSheng Huang <FangSheng.Huang@amd.com>,  Tyrone Ting
+ <kfting@nuvoton.com>,  Hao Wu <wuhaotsh@google.com>,  Jason Wang
+ <jasowangio@gmail.com>,  Keith Busch <kbusch@kernel.org>,  Klaus Jensen
+ <its@irrelevant.dk>,  Jesper Devantier <foss@defmacro.it>,  Nicholas
+ Piggin <npiggin@gmail.com>,  Aditya Gupta <adityag@linux.ibm.com>,  Glenn
+ Miles <milesg@linux.ibm.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,
+  Conor Dooley <conor@kernel.org>,  Sebastian Huber
+ <sebastian.huber@embedded-brains.de>,  Palmer Dabbelt
+ <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,
+  Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
+ <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
+  Halil Pasic <pasic@linux.ibm.com>,  Christian Borntraeger
+ <borntraeger@linux.ibm.com>,  Jason Herne <jjherne@linux.ibm.com>,
+  Cornelia Huck <cohuck@redhat.com>,  Eric Farman <farman@linux.ibm.com>,
+  Matthew Rosato <mjrosato@linux.ibm.com>,  Ilya Leoshkevich
+ <iii@linux.ibm.com>,  Titus Rwantare <titusr@google.com>,  Stefano
+ Stabellini <sstabellini@kernel.org>,  Anthony PERARD
+ <anthony@xenproject.org>,  "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+  Zhang Chen <zhangckid@gmail.com>,  Li Zhijian <lizhijian@fujitsu.com>,
+  Peter Xu <peterx@redhat.com>,  Chinmay Rath <rathc@linux.ibm.com>,
+  Hendrik Brueckner <brueckner@linux.ibm.com>,  kvm@vger.kernel.org,
+  qemu-block@nongnu.org,  qemu-arm@nongnu.org,  linux-cxl@vger.kernel.org,
+  qemu-ppc@nongnu.org,  qemu-riscv@nongnu.org,  qemu-s390x@nongnu.org,
+  xen-devel@lists.xenproject.org
+Subject: Re: [PATCH v5 35/62] qom: convert scalar properties to QAPI-aware
+ registration
+In-Reply-To: <20260911-qom-qapi-v5-35-7732a55b7760@redhat.com>
+ (=?utf-8?Q?=22Marc-Andr=C3=A9?=
+	Lureau"'s message of "Fri, 11 Sep 2026 20:35:09 +0400")
+References: <20260911-qom-qapi-v5-0-7732a55b7760@redhat.com>
+	<20260911-qom-qapi-v5-35-7732a55b7760@redhat.com>
+Date: Mon, 19 Oct 2026 09:41:59 +0200
+Message-ID: <87jyne2l2w.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: AM9SPR01MB0028:EE_|PA4PR03MB7200:EE_
-X-MS-Office365-Filtering-Correlation-Id: b7fb8d84-f9a7-4133-ceca-08df2db750bc
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|23010399003|1800799024|376014|18002099003|10067099003|22082099003|4143699003|261009223027099003|5023799004|11063799006|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	gqCkgJfqs3EWalS9YBzIWGz0JFloT0Wzvn2xY964S1onrBVfg8+08yzYfK5zJ0GFGbVCJ6q9UUagmHzqh0QHN4puMcaJyRFvzkVSMUfXz+c9dzOmGE89u7jE/S9Aq5dukd0DZSJzvNsqCV65U8XozkM2MoqNHrvxw4ePKcIySBYe7cgLZ7RGgBbasFiLDKGUA7WsWc2uYdjR5AZ4/e+uwBuBljuayxA3T61hPINtHLLKhgsuCfqSwGyMeSHzVVxddoNgBiDe74MqAhMSm8XXg9qzRZI9eF4/OzYoJMpjTR7F3tLF130JVHh+hLcZOuEDURMJXIxoVLCibHQwtphNrCWFEn8sdFDJTrmZajGxgvUeJq7SMBuH2DWa4jtjkZVEpexTXGqMuz1qa3y5D88Jq8aOqDB7GOrla99fDbp23VXEKGYK8LOVlacjP239gilr03qGMohNOAvZXoq5PNxaE4La1yVWqpCmix0wvYiAL3iZtNk9mJ7Hf4fn79tvupx5ejk1HAfIEZI1PA3Hkb/1m6RaAIy272tIzz2GBiH/wBtmF4aM5vwn4DPDRN1Phn15HHSEwZD8rYlnTQcDFFzNKBmdNi+mFT6dpjPMmStcx0moqEVdUxzzNjovSjJ0MnGmtHxxk9Jhp6s8sPz2OcRv5xUAIr5hfIBzmZMrCixvdW8=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9SPR01MB0028.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(18002099003)(10067099003)(22082099003)(4143699003)(261009223027099003)(5023799004)(11063799006)(56012099006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?M3FuZnNKSUw4aHNWTDN0cFlyYUJpeFZGWnkrTDM1TDVJR2d4Rk5DTXlTK0xi?=
- =?utf-8?B?aDBrcVcvQnp0ZHlJV3h2akJyZGtrdUxRUU5sNU81VkkyV21oeFhUamEzUzhy?=
- =?utf-8?B?Mjc0TGFjSW80Z1ZVRGVLaTN2RGpNSndlS0pJK3JSUnlzZVM1ZlFLZldDZHdZ?=
- =?utf-8?B?NFlUNXNYSkZncWVqMDdPakpFYlRzdDBjNU9XVS8vRnlJWXl2U2dTeHFGZUth?=
- =?utf-8?B?NUVVbzYwT05GUmo1SWc5NzJHNkFxK01POTgyNmEweHE3bldmckNaMndHVTNU?=
- =?utf-8?B?K0o5VEFHZkVET1ZQd2QxVWpTMzE4NFl4NXNGSXlzTEwveFlXWFQySjJhbXlk?=
- =?utf-8?B?cERqRk1pSmpUOGIxcUtSNDBySDZwNEg0bmxpNnhHc0ZnbmdCSUVKTXRkQnUw?=
- =?utf-8?B?Tm1tcUQxRm1rQzNseHZNNFgzUS9XY0ZiM3BZMVl2RXltK0lla0JWaER5UXAx?=
- =?utf-8?B?Nzg1Z0oybHZScmsxeTdLT2JZb01zUlRDZG84SWhkbHVRUkMrTDBqaEtuUk5Z?=
- =?utf-8?B?YzNBejhITU91WFpqckVsTHhId2FZMzlLRGJudEtUbzgraEpwRktYUHFPemM1?=
- =?utf-8?B?NzFNbXBoYll2cmJQYUhlYTBnbW1FWUNDWDd0YkQ5Zy9GanNwRGdRNjRHY1JU?=
- =?utf-8?B?blRtNW42Yjc2T1RaUVJET3Q1MXo3WCtZZTdtUUFHdVJnam9mVENEMklvQmlE?=
- =?utf-8?B?ckpuWWJQT2ZOVXVlNjV1aUUrMWNrSWNuVzdGNFFWUWdxRURkMGJzdm1aWWhQ?=
- =?utf-8?B?SStxMzdCK2RHYUQzRVZYRzJsbkR1QkdCK09GOVdyZlVPUTBkM3o2ZzVvdjhS?=
- =?utf-8?B?Yk53dHNXQThIMVE5RVA2ZHFPY2hLbm01K1BQbElCWlFHL0tJQzBPOWdGdEJZ?=
- =?utf-8?B?Nm9pRTcvbks1RDl6UytKUGpYWjRKcWFHRSt6dHg5ZlRPcU9aVE1DTUF4bmQ5?=
- =?utf-8?B?VjhTQTRkU3VmcnBiOGJkYlJ0Znoydk9TMlpKRk1SUDh2YWxVVGF4cDZNb202?=
- =?utf-8?B?bkRiOU8wcU9jaVVTUGFTQnFaR3RHRXFuRkVOWXVQWEFNU0FWaHdGUnA3R2Nj?=
- =?utf-8?B?MzBiV0JzdFJZYTFtSGlDdVVEb0swa2VZenJvelhLdWN3MmxSSFR2ek5wdlAw?=
- =?utf-8?B?UXVtMStmcmtCWHkwb0ZBK3dqbnBPblE1QWR6bjJaVXVaTnV3bkZwKzRpbVpY?=
- =?utf-8?B?UzN2em1XdVlGQU5kUVhNV1JJNmJNSGlTYUVkNnRBT0F0OFg2aG1pRE9WYWx4?=
- =?utf-8?B?RGEvaTlPRE5NTkZGbGxQMUY4S0wwZGlIblFVcS9sSTIreU9xWWdDN2pqZE1v?=
- =?utf-8?B?THdXb1VEMkJZeGFBTGU3RDJFeXFlOEttSzJiYy9DTUE4SnlaRXBHWVFxTm5k?=
- =?utf-8?B?cXVPTGQ3Nm01S0ZSQ1owQlNEM1c3LzRTcjFkd21mcXp4WFkvVFFzY3U2Y0l2?=
- =?utf-8?B?czBSdFp6OVVibkZneFpWeTh1NVR0VDBhczV6cnN2Rk9JOXNjTW9hYmtmQW1D?=
- =?utf-8?B?NStXQWk2VytiZnVuUEVXcVljMGhKcmlXUG5wZk5nUXhpaEw4dERsMXc0ODVm?=
- =?utf-8?B?Nit6cTdlTjBORlZkTi9EQkl4WGNjUkRqQ2dHendjaUtLcFV4UXM4TEEweHBv?=
- =?utf-8?B?UUpMUDArNFFNM0tmMmw4S0p2eU9nSG5hOTVxRXF3NXhTVEtRQkZ0Qnl3c05R?=
- =?utf-8?B?anVoRDZkOVZZZ0R1cFdkLy83b21KUFNTWmlkMlJrMCtaYUdmeWF4ZFRGODZE?=
- =?utf-8?B?aCtpTWNUYnhCZHp3TkxvbFFJM1J0K1Rsd0pmUmpRSGtPSW44b2ZlVnZXWEl1?=
- =?utf-8?B?Um91aWQwWU03V3FBSFpTV1hobW9FUnpCRElPU3pTOEJMcHZIVUdtZC9Oa0Vr?=
- =?utf-8?B?VEFiTGlRcXhPNTcyNGlzaDYvK3Jsb3U0Vmw3ZWhlc0JuL1V4cFNmR1BiTUow?=
- =?utf-8?B?QmhZcEpIRWZ5S0FwWkNuT2lXYXVtcGNmTDcrU1Z4WGtiNzN6aVQ1OUNsaVBB?=
- =?utf-8?B?dnN2YVYzUjhWOUp2a1A5UnNiUjZuem5xSkFBUWpyNjZEdlV0ZXhDUmFIcVAx?=
- =?utf-8?B?TGJPb2I5YXdZS1NJUlBQZzJjNVJ6RXlHNGFuMHcyTkhSY3VHQzREMndjUUZr?=
- =?utf-8?B?WFpNK0txOHdKTzVNeWJRVFdXeWtoY0hYYWwxdTZtTUJOMmhjUThJSTZNdlpa?=
- =?utf-8?B?Szh2TlNGZDlsZXY4MU44TklaSkhleUtpTm9mZG1IV2xvbW5RS3kzOFlPMnhv?=
- =?utf-8?B?Yk0waDFhMXp4bENweEdvUU1zbjRJNi9YWDYxM1hEaVZITG4rdTdIQ08xcGMx?=
- =?utf-8?B?RlZQSTREZldzbmMraEU0QjEwM3BENEY5UTh0N2FQUkhtVTRsN25MS29TaS9B?=
- =?utf-8?Q?FINlfGQKeK0f2zN4=3D?=
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: b7fb8d84-f9a7-4133-ceca-08df2db750bc
-X-MS-Exchange-CrossTenant-AuthSource: AM9SPR01MB0028.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2026 08:02:26.8535
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: qRla/xYK1saHnTWiHnOfyLqsE8xnYhUbx04tNLkjLlShGRZUwgABAfUJdEaswCvVRpNCQHlVFrKpJGtfW4vVynWFvBn2KGMs/0fhJLywbZU=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: PA4PR03MB7200
-X-purgate-ID: tlsNG-ebf023/1792396950-C3AC0B50-18CC7395/0/0
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-Spam-Score: 0
+X-Mimecast-MFC-PROC-ID: OEBf1xfxTIX4kYDZKg7X_Fu27dAcXbyfqGrBW-JeCms_1792397338
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-4011c0/1792397346-593C4CFC-A20E2AF9/0/0
 X-purgate-type: clean
-X-purgate-size: 2156
+X-purgate-size: 1675
 
+Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
 
+> Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
+> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 
-On 10/13/26 11:14, Jan Beulich wrote:
-> On 13.10.2026 10:02, Dmytro Prokopchuk1 wrote:
->> On 10/13/26 10:52, Jan Beulich wrote:
->>> On 12.10.2026 22:49, Dmytro Prokopchuk1 wrote:
->>>> --- /dev/null
->>>> +++ b/automation/eclair_analysis/ECLAIR/generate-xen-syms-passes.sh
->>>
->>> You neatly use dashes in the new file's name here. Is there a reason ...
->>>
->>>> @@ -0,0 +1,20 @@
->>>> +#!/bin/bash
->>>> +
->>>> +# Hide every xen-syms linking pass except LAST_LINKING_PASS.
->>>> +# The pass list is the foreach in xen/scripts/Makefile.link.
->>>> +
->>>> +set -e
->>>> +
->>>> +cd "$(dirname "$0")"
->>>> +arch=$(echo "${XEN_TARGET_ARCH}" | sed -e 's/x86.*/x86/' -e 's/arm.*/arm/')
->>>> +last=$(sed -n 's/^LAST_LINKING_PASS *:= *\([0-9]\).*/\1/p' \
->>>> +    "../../../xen/arch/${arch}/Makefile" | head -n 1)
->>>> +passes=$(sed -n 's/.*foreach n,\([0-9 ]*\).*/\1/p' \
->>>> +    ../../../xen/scripts/Makefile.link | head -n 1)
->>>> +test -n "${last}"
->>>> +test -n "${passes}"
->>>> +hidden=$(printf '%s' "${passes}" | tr -d " ${last}")
->>>> +
->>>> +printf '%s\n' \
->>>> +    "-file_tag+={xen_syms_tmp, \"^xen/\\\\.xen-syms\\\\.[${hidden}]\$\"}" \
->>>> +    >xen_syms_passes.ecl
->>>
->>> ... underscores are used here?
->>
->> The generated file follows the other .ecl names (e.g.
->> linker_symbols.ecl). The script name follows generate-linker-symbols.sh,
->> which also uses dashes and writes an .ecl file with underscores.
-> 
-> That's not very nice, but otoh not as problematic to warrant an immediate
-> change. At the same time here your use of underscores is not only a style
-> issue (where bad pre-existing instances should never be used as an excuse),
-> but also weakens the connection to xen-syms: The underscore used could in
-> principle be a surrogate for about any non-alnum character, including e.g.
-> a dot.
-> 
-> Jan
+[...]
 
-I agree the underscores make the link to xen-syms less obvious.
+> diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+> index 872920b6482b..4e5d8d9f86e3 100644
+> --- a/hw/arm/virt.c
+> +++ b/hw/arm/virt.c
+> @@ -4258,7 +4258,7 @@ static void virt_machine_class_init(ObjectClass *oc=
+, const void *data)
+>                                            "Set on/off to enable/disable =
+high "
+>                                            "memory region for PCI MMIO");
+> =20
+> -    object_class_property_add(oc, "highmem-mmio-size", "size",
+> +    object_class_property_add_qapi(oc, "highmem-mmio-size", &size_type_i=
+nfo,
+>                                     virt_get_highmem_mmio_size,
+>                                     virt_set_highmem_mmio_size,
+>                                     NULL, NULL);
+> @@ -4266,7 +4266,7 @@ static void virt_machine_class_init(ObjectClass *oc=
+, const void *data)
+>                                            "Set the high memory region si=
+ze "
+>                                            "for PCI MMIO");
+> =20
+> -    object_class_property_add(oc, "virtio-mmio-transports", "uint8",
+> +    object_class_property_add_qapi(oc, "virtio-mmio-transports", &uint8_=
+type_info,
 
-Since you don't see it as blocking, I'd prefer to leave the names as 
-they are for consistency with the existing files. If you'd like to 
-rename it (e.g. xen-syms-passes.ecl), I can do that in a follow-up.
+scripts/checkpatch.pl gripes
 
-BR, Dmytro
+    WARNING: line over 80 characters
+
+Easy enough to avoid.
+
+Many more below.
+
+>                                     virt_get_virtio_transports,
+>                                     virt_set_virtio_transports,
+>                                     NULL, NULL);
+
+[...]
+
 
