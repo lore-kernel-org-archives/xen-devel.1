@@ -4,44 +4,44 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 7B549CCF2E3
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 13:51:15 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1454378.1667953 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 18106CCF2E6
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 13:51:16 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1454375.1667931 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xInlX-0006rD-Pt; Mon, 19 Oct 2026 13:51:03 +0000
+	id 1xInlR-0006SF-Tx; Mon, 19 Oct 2026 13:50:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1454378.1667953; Mon, 19 Oct 2026 13:51:03 +0000
+Received: by outflank-mailman (output) from mailman id 1454375.1667931; Mon, 19 Oct 2026 13:50:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xInlX-0006p5-Ka; Mon, 19 Oct 2026 13:51:03 +0000
-Received: by outflank-mailman (input) for mailman id 1454378;
- Mon, 19 Oct 2026 13:51:02 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xInlR-0006S8-R4; Mon, 19 Oct 2026 13:50:57 +0000
+Received: by outflank-mailman (input) for mailman id 1454375;
+ Mon, 19 Oct 2026 13:50:56 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1xInlW-0006f9-95
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 13:51:02 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1xInlQ-0006Ru-LV
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 13:50:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xInlV-00EZHA-MJ
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 15:51:01 +0200
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xInlP-009usr-2o
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 15:50:55 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6ad62035-bab6-0a2a0a5309dd-0a2a45039eb4-30
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 15:51:01 +0200
-Received: from [209.85.160.174] (helo=mail-qt1-f174.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad62034-8faa-0a2a0a5109dd-0a2a45079456-24
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 15:50:55 +0200
+Received: from [209.85.160.169] (helo=mail-qt1-f169.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6ad62044-fae8-0a2a45030019-d155a0aed1fc-3
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 15:51:01 +0200
-Received: by mail-qt1-f174.google.com with SMTP id
- d75a77b69052e-5363316fa0cso28487541cf.3
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 06:51:01 -0700 (PDT)
+ id 6ad6203d-b4ea-0a2a45070019-d155a0a9a5ed-3
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 15:50:54 +0200
+Received: by mail-qt1-f169.google.com with SMTP id
+ d75a77b69052e-5351d76e1baso27234321cf.1
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 06:50:54 -0700 (PDT)
 Received: from toxicpanda.com ([153.61.196.240])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91bcbb27839sm98396566d6.35.2026.10.19.06.50.59
+ d75a77b69052e-5362a9dbdb5sm99677641cf.22.2026.10.19.06.50.52
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Oct 2026 06:50:59 -0700 (PDT)
+ Mon, 19 Oct 2026 06:50:52 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,55 +53,57 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1792417860; x=1793022660; darn=lists.xenproject.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=DPzcetTQubRCe4lOTpMna5FIDyGXRIDSoyAwtL9E3zo=;
-        b=XsSTGl1K4GYN+PDY3oQjjdJsMv3LQN11FpIdqnYLLdsat1sBjBdmM7c7tChEWyHzTL
-         dA4Wi3ZS2ytcIVnTokQvZGhh0N4nT8y2uA3Xg3r8psqAdp2TT3rfAANFVhBwLTVAAu6s
-         0mqJlNumQBsOL+eiCpRM//X/PuYb0ycdQoedzAZSbRA8TGuBlDmG93VmLqfoQZY5K5+M
-         yLYLN96WRezVqHmFq+/8X6tlBDCIArlD0RbUxsY7mzhEF9T/V7xT+lUzfrfRgCx0lh9B
-         UNXtIvyCmpD7qYLgBYXCQ9y1WBCcmwcAtYtFo67xNmjN1HgsUpKCmm5/S8utyDDQJCMo
-         dFlA==
+        d=toxicpanda.com; s=google; t=1792417853; x=1793022653; darn=lists.xenproject.org;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=5YreDSl4vDqbNAVIITvhajgrdqUJ1n9sK10J0+0ZRYE=;
+        b=SEKrrvlgtI+M7rlK0MHIdqDxufABvaT6yAT6ehTe0KCXb6ZIPDABaHs1HrSwsVrWVJ
+         cNs2hLa1GNX0wfU4tZegPclpHX/dzFCYVZB3RYNi3rsdaAhYJQolXmubQqi+hGkcEv5J
+         YY03Y5D8KAfvnifQ6N0gT58KiCGIP2vn/HKpfEE0aQuK2+00YN1J0BsQFraO7SGcg6iV
+         C3eIfc3c85v6Kd11mGhYZzI+SWWQBqkJcPzvyMa97Xjs9KJZP/NqOsIUYfcbbF1AdWGx
+         LfhUwHIwrODAGobE1MVV1FyIEcYOBWT0MMCydnisSlYz2sl3vvFW+67eWjbezuRn/uX1
+         04MA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792417860; x=1793022660;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=DPzcetTQubRCe4lOTpMna5FIDyGXRIDSoyAwtL9E3zo=;
-        b=yE8Ig18QOmHvLn7JDwL0I9RvgEz4nevdzF715+kufVRPmU23XYBmRGh/XKxR/uG+IV
-         mMB/Nmd9G5L1ugBCJ89R8Ow46xEXizrhotimunOU+zxUmdvxTVxpEK/aR1VjrY7w0PSD
-         EW4nMkaITQxKHt1jH36MlKOAzXrAwPCt5FLoBh3pATc1pX9j0MLHdy1N31gzXffv7817
-         qyzKKPakeSvuJiU1SQYvgL4OqUehBrMCkqG/qScrwVERd77h6CNK6CZZNn5mrM2QtnyC
-         F7+6odwic58GWnazkNftSNtUmNOo10UsImSGebq3w12in/cbNTOjFYU8bUBmhPbiYkkw
-         oQkg==
-X-Forwarded-Encrypted: i=1; AKwUvBwGStJf3RtJsg0+HdYHVvCbwoVNMxCqqUtxZEfvWwY265atHjZfBn1JU1OLqKoIf8d7I37pSaQgMCE=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIfkyvCMDIEJ/7bOmdN9mowdxeqkJHFw3UA007YeJlkSqNSuWUJ
-	3ZCIQ6XwCmxmPRkXrlKA5e3Ht5N3uhkbbk/vAggRLQgT+S2A4w6dbehyUaFnHBKhy7w=
-X-Gm-Gg: AYBFou31hXo0+9wxnswpEoOL84hzAZ4fMhcsrB3zzD2sDiZ8fAId86QxAbEzn+v42Cv
-	Qgyp/UaY/VKOiDUCSFCUfNwtBtqANCwORp5WABRGc8aM7G0KH7L7cYaXiWtfLyHxP+rqvHXaKyr
-	cgY83QCCPdZARobt3nLKZBDZWIowIDpvWLvsPz8uVBBgbWSJ5uKpI1T0ndwLjF0AJPheoOjoHcs
-	0Hb96HQZKhrOjH1tqGOm5kEvh9ddgOXuUKTN/4jAFpvYdmHVSnmiG7+vf6UyhyZi37BSqBKpsvY
-	q4O9D7Gbycq7+I/ebQF0Tj7/+1UGM9pq/l3A3Gi5N5MiSCZnJTgJ/tZuUFYqjWGZ8lSlLGSY+kr
-	T2+HCxPkMfud6MYIoBIfOetIkfLODF99ccgpdMnHvCjgBwU+B59XQTOrBtIKD3HaLr9ahLK2Bzn
-	mds05kHLJ4dpFH6eQvcRL+RAfbVAFB1++3Fr2xj/vgr9Hl5bdSDciepmUFUyvHPVOE5b4nlaW8L
-	bjtEhfidh7DWi4=
-X-Received: by 2002:ac8:5745:0:b0:532:abc9:8f4f with SMTP id d75a77b69052e-53645ff0043mr114359591cf.37.1792417860150;
-        Mon, 19 Oct 2026 06:51:00 -0700 (PDT)
+        d=1e100.net; s=20260707; t=1792417853; x=1793022653;
+        h=cc:to:content-transfer-encoding:content-type:mime-version
+         :message-id:date:subject:from:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=5YreDSl4vDqbNAVIITvhajgrdqUJ1n9sK10J0+0ZRYE=;
+        b=YY5ylFhQt7lqrh/8v1wqx6IBpEwuuFJvCGMIkjYZMbuawU/mYjDzcdPNSzK/YpZtO7
+         dqcvPApHqnUtUcuv4wUWlYya1GjNhugqAW1WqHRs1x7FQVmchIK7aUeLn5BIm/DQ7QNI
+         T9h9h5230/gSAWaFUBTEc0F4bvgML9TdvmzJVFhd5oOzcDRv8ISS7q4VRLcXKxxira5Z
+         n86+mbnwO3aarMN8hJDtwSJFDJYoS00NuVrsggP3HDpU/N1YOdLmOrru8JiyVZvofGzD
+         SrMhl/Zc/GDmsVSg3lC8mgM4gykb9GFg0gnHpKc7yVCpbJFC2Cp+0cWzESoKD9Ukkmlg
+         Y8nw==
+X-Forwarded-Encrypted: i=1; AKwUvByBFBzIXnAPVRhuzeiHfzr6QWlqsTjS4/eu2fOjoRa5n2kJ1jDkDplazOYrY0pC6D1cxW1h3E+02Xw=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYLHXOXXw7NCyysTgHsnGZuDZIowIg1oqlq3iciWWcUtc9NEzLmn
+	k+2mgNMMl78sY+2MZZmFWKeYHfp6PuZ0/ioFsajB6YqxRoH0ywCQWUWoj1Ogj4vrICM=
+X-Gm-Gg: AYBFou3WXF3CcNwqFzNjK0VP/Et6FiWcgbw3+gmTwDQalW20OBHk+Pm5uon34nRj/G6
+	4wJpo5xewMSSqGdVmCEixXS3sAxGXyHWWEitaIKVAJTDhyCl3rgoME65GlH9z/Xvs8mM5yBo/dI
+	apTVUIIlKPXo3MvG9rmcylrQxn331MGpm6bqvVFJ3hSYZMK3Nfrcd3SX22C6xJjU6tvj+63Rvvz
+	cB19Kl9OSE030fgzra3s7LTLV1Wx2QXiBUQWMUiZ3VmDiupytJxfWBjuMg4T8+dAvg+8/fJGCf9
+	5SGvCEOTun7CT5zAw0m2I7dEjv2ltejopPHyQjs5+kc+ChtqYZ0VeT0GDK86IiAxNVIWTqKWycT
+	eSlPuqWjsQPaP7HEp3w01qGjx9lBy/+30CcW7bcavRoVVmqJgId9nP8oz/Cwa35diF/Yq62DY0L
+	5PPULpFJ1RFpUwtIFmzmKKv3UVWUkxuEzVKHEvYntZIIXWZnO81auDz53by6TgHkMRdkzK5zxzc
+	h7NaIcyTHwJjVE=
+X-Received: by 2002:ac8:5d11:0:b0:51c:b98c:f772 with SMTP id d75a77b69052e-53645fedd9emr99044071cf.15.1792417853207;
+        Mon, 19 Oct 2026 06:50:53 -0700 (PDT)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Mon, 19 Oct 2026 13:50:37 +0000
-Subject: [PATCH net-next 03/15] net: skbuff: fail checksum validation when
- the skb can't be checksummed
+Subject: [PATCH net-next 00/15] net: skbuff: follow-ups to the BUG_ON()
+ removal
+Date: Mon, 19 Oct 2026 13:50:34 +0000
+Message-Id: <20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7@toxicpanda.com>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261019-b4-skbuff-bug-on-followups-v1-3-41dbef50b9f7@toxicpanda.com>
-References: <20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7@toxicpanda.com>
-In-Reply-To: <20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7@toxicpanda.com>
+X-B4-Tracking: v=1; b=H4sIACwg1moC/3WNwQqDMBBEf0X23EUjqZT+SukhqxtNK4lkjRXEf
+ 6+x5x7nzfBmA+HoWOBebBB5ceKCP4K6FNAOxveMrjsy1FXdqEo1SBrlTclapNRj8GjDOIZPmgR
+ Np5TpbH27Gg2HYIps3XrKH+B5Rs/rDM9fI4le3M7ZnbdkhJGi8e2Q0TiVpMsT/nmDff8CfBxvY
+ 70AAAA=
+X-Change-ID: 20261016-b4-skbuff-bug-on-followups-ad11adf285a4
 To: "David S. Miller" <davem@davemloft.net>, 
  Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>, 
  Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
@@ -114,93 +116,95 @@ Cc: Juergen Gross <jgross@suse.com>,
  David Laight <david.laight.linux@gmail.com>, netdev@vger.kernel.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1792417848; l=2860;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1792417848; l=4198;
  i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=prj+BQU7C60dBsXDxJX9jL8mklYfFucWwKvpS5MOuJ4=;
+ bh=KIaS3RgzIflnJVbs1aR2xV1e37kN7pyP1TLRgrxxSDg=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
  JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QORYeqwwHo+WYErVqZ8QYEvyduUuJE0wPwwChX6fbXgz7Urjug8C88v1GDgpgDsaWL42fgGzxt7
- mVAv6CTaYGQk=
+ QG9I0MA4oB2pQusLHea7/1MDYYSfacfAuZk3/f5DoGX+4zhJuIDA85OltKcTqezTiJ7GjwQMaYR
+ jFfuEgK6Q9Ag=
 X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
  fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-33051d/1792417861-6F8C54E9-700B187B/0/0
+X-purgate-ID: tlsNG-ef75cf/1792417854-348C9AE4-9F3DAC5C/0/0
 X-purgate-type: clean
-X-purgate-size: 2862
+X-purgate-size: 4200
 
-__skb_checksum_complete() verifies a received packet with
-skb_checksum(), which returns 0 when the range runs into unreadable
-frags or past the end of the skb.  0 is a valid sum, so it's treated as
-one: it adds skb->csum, the pseudo-header sum, and folds the result.
-With a sum of 0 that's csum_fold(skb->csum), which is 0 whenever the
-pseudo-header sum folds to 0xffff, so a packet whose payload was never
-checksummed is accepted, marked csum_valid, and left with a wrong
-CHECKSUM_COMPLETE value in skb->csum.
+Hello,
 
-__skb_checksum_complete_head() passes skb->csum in as the seed, so a
-failure there folds 0 and the packet fails validation, but only because
-skb_checksum() happened to drop the seed.
+Jakub applied v2 of my skbuff BUG_ON() series[1] before I got v3 out, so
+this is what v3 would have changed, as fixes on top of what landed, plus
+the skb_copy_and_csum_bits() patch I'd been sending to net on its own.
 
-Use skb_checksum_full() in both, and report a packet that can't be
-checksummed as having a bad checksum, so callers drop it the way they
-drop any other bad checksum.  Clear csum_valid, and leave skb->csum and
-ip_summed alone, since there's no full packet checksum to store.
+Patch 1 is that patch[2], moved to net-next as Mina suggested, with his
+Reviewed-by.  It makes skb_copy_and_csum_bits() report failure, and the
+rest of the series builds on it.  Please drop the net version.
 
-Found by the Sashiko AI review of the series that made skb_checksum()
-return 0 for a range past the end of the skb.
+Patches 2 through 6 deal with skb_checksum() and skb_crc32c().  My v2
+had them return 0 when they run out of skb, and that turned out not to
+be safe: 0 is a valid checksum, and it can make a packet that was never
+fully checksummed pass verification.  So they get versions that report
+failure, skb_checksum_full() and skb_crc32c_full(), and the core users
+switch to them: checksum validation now rejects a packet it can't
+checksum, skb_segment() and pskb_trim_rcsum() fail instead of using a
+bad sum, and skb_crc32c_csum_help() drops the packet.  skb_checksum()
+and skb_crc32c() stay as wrappers that behave as before, and I'll
+convert the rest of their callers per subsystem in later series.
 
-Fixes: 20ddd0fd2fcd ("net: skbuff: don't BUG() on leftover length in skb_checksum() and friends")
-Link: https://lore.kernel.org/all/20261007-b4-skbuff-bug-on-v2-0-b9a5f732895b@toxicpanda.com/
-Assisted-by: LLM
-Signed-off-by: Josef Bacik <josef@toxicpanda.com>
+Patches 7 through 10 fix problems Sashiko and an LLM review found in
+what was applied.  skb_zerocopy() refuses a zero-length copy that Open
+vSwitch can trigger from a user namespace, skb_try_coalesce() and
+skb_copy_and_csum_bits() can be handed a negative length, and
+skb_headlen() can underflow in skb_copy_and_csum_dev().
+
+Patches 11 and 12 make skb_segment() refuse a nested frag_list, which
+could still oops on a NULL list_skb, and add KUnit cases for the layouts
+it refuses.  Patches 13 and 14 get rid of the same BUG_ON()s in
+xen-netfront's bounce_skb() and tls's __skb_nsg(), and patch 15 updates
+comments that still describe the old BUG_ON()s.
+
+I tested this with the net_core KUnit tests, a test module that drives
+each of these paths under KASAN and fault injection, an Open vSwitch
+reproducer for patch 7, and a stress run over veth with netem.  Thanks,
+
+Josef
+
+[1] https://lore.kernel.org/all/20261007-b4-skbuff-bug-on-v2-0-b9a5f732895b@toxicpanda.com/
+[2] https://lore.kernel.org/all/20261013-b4-skb-segment-nosg-unreadable-v2-1-6c28d8ffa51e@toxicpanda.com/
+
 ---
- net/core/skbuff.c | 21 ++++++++++++++++++---
- 1 file changed, 18 insertions(+), 3 deletions(-)
+Josef Bacik (15):
+      net: skbuff: make skb_copy_and_csum_bits() report unreadable frags
+      net: skbuff: add skb_checksum_full() that reports failure
+      net: skbuff: fail checksum validation when the skb can't be checksummed
+      net: skbuff: fail segmentation when a segment can't be checksummed
+      net: skbuff: fail pskb_trim_rcsum() when it can't checksum the tail
+      net: skbuff: add skb_crc32c_full() that reports failure
+      net: skbuff: let skb_zerocopy() copy a short skb without head_frag
+      net: skbuff: make skb_try_coalesce()'s len unsigned
+      net: skbuff: check csum_start against len in skb_copy_and_csum_dev()
+      net: skbuff: reject a negative length in skb_copy_and_csum_bits()
+      net: skbuff: refuse to segment a nested frag_list
+      net: test the frag_list layouts skb_segment() refuses
+      xen-netfront: don't BUG() when skb_copy_bits() fails in bounce_skb()
+      net/tls: don't BUG() on leftover length in __skb_nsg()
+      net: update comments that still describe the skb BUG_ON()s
 
-diff --git a/net/core/skbuff.c b/net/core/skbuff.c
-index 061c61422a38..40d2dd20d47d 100644
---- a/net/core/skbuff.c
-+++ b/net/core/skbuff.c
-@@ -3860,9 +3860,17 @@ EXPORT_SYMBOL(skb_crc32c);
- 
- __sum16 __skb_checksum_complete_head(struct sk_buff *skb, int len)
- {
-+	__wsum csum = skb->csum;
- 	__sum16 sum;
- 
--	sum = csum_fold(skb_checksum(skb, 0, len, skb->csum));
-+	/* If the data can't be checksummed it can't be valid either. */
-+	if (skb_checksum_full(skb, 0, len, &csum)) {
-+		if (!skb_shared(skb))
-+			skb->csum_valid = 0;
-+		return (__force __sum16)1;
-+	}
-+
-+	sum = csum_fold(csum);
- 	/* See comments in __skb_checksum_complete(). */
- 	if (likely(!sum)) {
- 		if (unlikely(skb->ip_summed == CHECKSUM_COMPLETE) &&
-@@ -3886,10 +3894,17 @@ EXPORT_SYMBOL(__skb_checksum_complete_head);
-  */
- __sum16 __skb_checksum_complete(struct sk_buff *skb)
- {
--	__wsum csum;
-+	__wsum csum = 0;
- 	__sum16 sum;
- 
--	csum = skb_checksum(skb, 0, skb->len, 0);
-+	/* If the data can't be checksummed it can't be valid either.  Leave
-+	 * skb->csum alone, it's not a full packet checksum.
-+	 */
-+	if (skb_checksum_full(skb, 0, skb->len, &csum)) {
-+		if (!skb_shared(skb))
-+			skb->csum_valid = 0;
-+		return (__force __sum16)1;
-+	}
- 
- 	sum = csum_fold(csum_add(skb->csum, csum));
- 	/* This check is inverted, because we already knew the hardware
-
--- 
-2.55.0
+ drivers/net/ethernet/sun/sunvnet_common.c |  10 +-
+ drivers/net/xen-netfront.c                |   7 +-
+ include/linux/skbuff.h                    |   8 +-
+ net/core/dev.c                            |   7 +-
+ net/core/filter.c                         |   6 +-
+ net/core/net_test.c                       |  52 +++++-
+ net/core/skbuff.c                         | 274 +++++++++++++++++++++++-------
+ net/ipv4/icmp.c                           |   9 +-
+ net/ipv4/ip_output.c                      |  11 +-
+ net/ipv6/icmp.c                           |   7 +-
+ net/ipv6/ip6_output.c                     |  11 +-
+ net/sunrpc/socklib.c                      |   9 +-
+ net/tls/tls_sw.c                          |   5 +-
+ 13 files changed, 327 insertions(+), 89 deletions(-)
+---
+base-commit: 6b3e73774815910a39d8ca75b9ad7df963f61d50
+change-id: 20261016-b4-skbuff-bug-on-followups-ad11adf285a4
 
 
