@@ -4,44 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0075CCF2DE
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 13:51:59 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1454411.1668057 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 191ACCCF2E8
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 14:26:05 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1454479.1668076 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xInmB-0002aj-Ar; Mon, 19 Oct 2026 13:51:43 +0000
+	id 1xIoIw-00044N-5O; Mon, 19 Oct 2026 14:25:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1454411.1668057; Mon, 19 Oct 2026 13:51:43 +0000
+Received: by outflank-mailman (output) from mailman id 1454479.1668076; Mon, 19 Oct 2026 14:25:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xInmB-0002ZC-47; Mon, 19 Oct 2026 13:51:43 +0000
-Received: by outflank-mailman (input) for mailman id 1454411;
- Mon, 19 Oct 2026 13:51:41 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xIoIw-00044G-24; Mon, 19 Oct 2026 14:25:34 +0000
+Received: by outflank-mailman (input) for mailman id 1454479;
+ Mon, 19 Oct 2026 14:25:33 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1xInm9-0002EX-Lv
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 13:51:41 +0000
+ (envelope-from <dmytro_prokopchuk1@epam.com>) id 1xIoIv-00044A-Aq
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 14:25:33 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xInm9-00BvR2-2G
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 15:51:41 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xIoIu-00Efeo-9L
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 16:25:32 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6ad6205d-bab6-0a2a0a5309dd-0a2a4505991a-28
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 15:51:41 +0200
-Received: from [209.85.160.172] (helo=mail-qt1-f172.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <josef@toxicpanda.com>)
- id 6ad6206c-4cb1-0a2a45050019-d155a0acc469-3
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 15:51:40 +0200
-Received: by mail-qt1-f172.google.com with SMTP id
- d75a77b69052e-5365d26ccbdso19540811cf.0
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 06:51:40 -0700 (PDT)
-Received: from toxicpanda.com ([153.61.196.249])
- by smtp.gmail.com with ESMTPSA id
- d75a77b69052e-5362a9dbdb5sm99695721cf.22.2026.10.19.06.51.38
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 19 Oct 2026 06:51:38 -0700 (PDT)
+ (envelope-from <dmytro_prokopchuk1@epam.com>)
+ id 6ad62852-2eae-0a2a0a5409dd-0a2a450cd626-36
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 16:25:32 +0200
+Received: from [52.101.84.80]
+ (helo=DB3PR0202CU003.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <dmytro_prokopchuk1@epam.com>)
+ id 6ad6285b-f479-0a2a450c0019-346554506b53-3
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 16:25:32 +0200
+Received: from AM9SPR01MB0028.eurprd03.prod.outlook.com
+ (2603:10a6:20b:410::12) by AS4PR03MB8626.eurprd03.prod.outlook.com
+ (2603:10a6:20b:589::7) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.19; Mon, 19 Oct
+ 2026 14:25:26 +0000
+Received: from AM9SPR01MB0028.eurprd03.prod.outlook.com
+ ([fe80::851:da2d:b88a:1b50]) by AM9SPR01MB0028.eurprd03.prod.outlook.com
+ ([fe80::851:da2d:b88a:1b50%6]) with mapi id 15.21.0522.017; Mon, 19 Oct 2026
+ 14:25:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -53,115 +55,141 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1792417899; x=1793022699; darn=lists.xenproject.org;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=hBRr7gTw0LaEROSfxIaRRGeZueq1UExVdpAZr5NxHXs=;
-        b=fZmjtsX3CVipSeD4msL1iBZbwG7MDQ4DbWGwwvEqELFHiUzWw5NIDeTm71iELlESRl
-         z6lv5bSUnF4Cg6ecz62SZ9XIlhJG58pVKg/qImxaRo18yzWwGCmNMNZXMDIO1vl+8py6
-         BxP0wfPE2tYpB7GmA9VulKJldlNhxsEZuOvpW82dWENkcC9dMQA2DlKNsfUbjeNTvnl+
-         8DpYLga1vC/rjoDS/Q8/wdXvxkTXcJ1ex3jHTuDmtkI8s8t+lTJpUY+M7oqqPM90TZKr
-         WHcqQRwKCg6/6eebXIqWzSRKwEDEr7qVgMmGtqH/iNRgzg6zS+J3oPcONTP2RdinbSlY
-         W+dg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792417899; x=1793022699;
-        h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
-         :content-type:mime-version:subject:date:from:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=hBRr7gTw0LaEROSfxIaRRGeZueq1UExVdpAZr5NxHXs=;
-        b=Tmg6TigEA7Z17CdohTYBe/gtIH7JmOprPFVauBD1W/LgPDjMQWqsAp0p1mJCZ+nmxy
-         GttdHFhkB/cnlFYpmIKZGcGbbb2DPTSsCmLxgGfuOQpa2N9EUJaECu7DkgWMW2wEmV54
-         dl0Qz7R5WngtETZzMQwikkvv56NmdAgt7/6HsDp9TwDZTLM8NTqMmNKB5jH3FtBCNXxt
-         2xuB5JjVm+cixCeL+iC8Jkfz73ckMlTYIZm6VKea02esqkHXKsRXuW2K3WeJWMV0QcKP
-         pM3RJO5fFSlh8A9TCPr5hrwyDyn4RISdWb7YK+daaFQJsmUQ4Haj0ah5JmiHBTohzPQF
-         A3wg==
-X-Forwarded-Encrypted: i=1; AKwUvByjDEUDSZ4Ddf1+/74MDTD7Cq1g3ykR2uK+Iv+LaBGnX0afVo94PBIJLO6zsfpZF8txbKBcXVD11d0=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYLO68mPECVGHLWa+kAc8BK1UdyL7Lm5PUflo+zpT/Lfjwz5rLlm
-	12zxgUL6zS9cUYOUUBz8SfQVjiDi4cA4H6C9ZdDcn58Xvc4AYAseX1/eUEhei4zpx4E=
-X-Gm-Gg: AYBFou1rFcH71aJSHhu/Nu0I8dKtD3t46geBnN87S9ZwoSxccUZwu2ZPcgB2Uq3hnBI
-	+XfEWODGY/vviP56XAfR7uKvpQRDzD2CVRbDaf+oEeaN/nP25uw0POLIEjCGkIN4M5O/fduq3jI
-	e4Hi8KsFI4dYq2C1A2sYQnIgctg0SyeGPO3k5K+lVl54almEo+hTW4qkJZ8DOihRgl3CkM9bkdq
-	MzGxgEGE88UuVw9gjj4OcCrwJpxVKAIJSUz5OuXvvC5B8XCZCSHhgxO6lbN1XHRE1jFECro/sNf
-	NyBod1JBG/UB4QO2GPEsltlQ/qbR2ZmVQrssgGjV3P9ZmwhfLEH9uHhURDcvc4Ny6FHT2v4DlcE
-	AYb49jv7W2OJ2sHZMw5jNVAMYbl339rAeCJMRK7YW/vcCbcsWJvVW3J/pcOcS6i0d3k6QjIMyAC
-	10wfF754Zxt0H9QULX31nW/OUY2GxYIgZRWHAYVCw8kEwmJU3lAkkfnoMiCRZn7Ft/p34xTHZfh
-	GhDLPiwlruYl/8=
-X-Received: by 2002:ac8:5e0c:0:b0:530:1b1:72be with SMTP id d75a77b69052e-53646005c93mr115881901cf.40.1792417899549;
-        Mon, 19 Oct 2026 06:51:39 -0700 (PDT)
-From: Josef Bacik <josef@toxicpanda.com>
-Date: Mon, 19 Oct 2026 13:50:48 +0000
-Subject: [PATCH net-next 14/15] net/tls: don't BUG() on leftover length in
- __skb_nsg()
-MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=F/iKkcrANFmAGMP1Q8OdJ8egMam9x/SyHmh0rkR7TJ+CCmFaZvmr6I6ag2d8RNkhMnzkDmb/r5lFgGId7SMinjsL6ZPRW0iRNdkJhCTdQpE8VyXF36ocY7aDsebN0A8YW66pn+bmoouR6doKLrOf2qAxIF4+h8UkmePbtyz/VaqAFwurK9smqW375nIQhYqA24vAVClBvLwl/E4+Byt0ZcUreHJlvbC+euZaokXCp+MAJijz/heNmGiplL2EIMfzUFcQULQvhJXK0IUApyaM/fXrGhCDVjCKoO/XCXdwLIcP+UiWfUiY+opEIBV/bMcHUBKCzyKE+kxJHqre9cNOhQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=7UGNIoeTDw6IJbM4PFWZhyPIM+ZOv4SYdoDQnE3EWr4=;
+ b=fnagya6yoQkBWWgsILnrryMkB9zcWexrfyjYjoNrCo3a5amWCGOoFgf5zH+CkSRCktaSIlIZzJ2Rx5UbJ+XcVoLmKh6jsQAD7lix/zmkGbFCt5nJQm4rXLyENqEG/yAjfchKgH4ETSF66tbprw/S3guknVmaVp8V/t5SMd0v9CQVSFQ6TP1ZC6M2dg9TSIUtkkOkjjmW17jXBHeKiLgxiurDmKpaG5DHLYNZlUen/F44uwCNsGV34KJz4VOCWK0T3q+o42vdRogv6ySGEz1H9LAvq/fRo/0x40E0XSpjVlgBOVYpLbjmvsWpZjlh7JDr/Lf3pRebrEQwkUiSOOydnQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=7UGNIoeTDw6IJbM4PFWZhyPIM+ZOv4SYdoDQnE3EWr4=;
+ b=omd/rmYUnPuZM+NEOqg6NEFsqRlKQ/LeleCjF3idE1/edjxOKtAjEqTmPZCj2b7JweQ7JubPbW1otyZeh2flD/RWmBY5R4DOrGV55Zm4K6iVRjblambmLpQc0esXqXhbmLNWWklrPXJuAtdMX2M5OoiUk+dGqElG1Ii63t5hY1iHI1D9Qw86SAKVFoZka3uQXxwC2suB2kVMcsMCChnHLDTaUw+jXZC+tY7vzJk4KDkHzO5g02dPvxBbnUwH1D85tocrGEzP8n4gq3LFQgIk5jGE1ZrDRg9mk5F+bSCI1uaJS27tT+QEIwgmKVJZy2BVE8Yg5PUe0DC9mIVhXHtRhw==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+Message-ID: <40b59aac-6bc3-4abd-aa51-7a6822ec8069@epam.com>
+Date: Mon, 19 Oct 2026 17:25:25 +0300
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 0/3] misra: add Rule 5.5 deviations for macro clashes
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+References: <cover.1790661461.git.dmytro_prokopchuk1@epam.com>
+ <79de1bea-7e1a-4d15-b7d2-8390ab5bdef2@suse.com>
+Content-Language: en-US
+From: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+In-Reply-To: <79de1bea-7e1a-4d15-b7d2-8390ab5bdef2@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261019-b4-skbuff-bug-on-followups-v1-14-41dbef50b9f7@toxicpanda.com>
-References: <20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7@toxicpanda.com>
-In-Reply-To: <20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7@toxicpanda.com>
-To: "David S. Miller" <davem@davemloft.net>, 
- Eric Dumazet <edumazet@kernel.org>, Jakub Kicinski <kuba@kernel.org>, 
- Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
- Andrew Lunn <andrew+netdev@lunn.ch>
-Cc: Juergen Gross <jgross@suse.com>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
- Fernando Fernandez Mancera <fmancera@suse.de>, 
- Mina Almasry <almasrymina@google.com>, 
- David Laight <david.laight.linux@gmail.com>, netdev@vger.kernel.org, 
- xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
-X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1792417849; l=1174;
- i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=a5Mq1Y08mQBlSbHPsSgUKJSU0iN0kG1IRQ6Z8TBZzAw=;
- b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
- JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QAaOzcOEyDqIT7ixMNNFAojpV49DkAGaMSTgMMsV3T+Kry+T59Y4cK1hbqIN6aNryN+eDJKEsst
- k24iTK/yjrAM=
-X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
- fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-c201ff/1792417901-2551A2A1-95AE5B7F/0/0
+X-ClientProxiedBy: AS4PR09CA0016.eurprd09.prod.outlook.com
+ (2603:10a6:20b:5d4::8) To AM9SPR01MB0028.eurprd03.prod.outlook.com
+ (2603:10a6:20b:410::12)
+MIME-Version: 1.0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: AM9SPR01MB0028:EE_|AS4PR03MB8626:EE_
+X-MS-Office365-Filtering-Correlation-Id: 68f77cdc-fd45-4663-1e74-08df2decd1cf
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|7416014|56012099006|4143699003|11063799006|18002099003|10067099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	bwVydrDwdKGzqDoJ8XmfbH7QdO7G0y9tYFddn2IlR7DGYV1O8bQD85GKdn8bpad4hE3df1Ci1b5TfIS0zsD4mSvryRnKjulGDty0CCteI90f9TH6D/enu7/lmhWEB3ctMNdHFavAzZqTHPCWBkBPvW5Te0QWqMrFIN09qI9/ih6Pe9V51U3XHWL6YTXeaHoCNLPsxyIMaU7AxXs+9Wn5Nkw9r154SeZF5YG1K8ieTg6c4Uk+ESdfxQzGmeyffhkFsKneXjWgq1LWvIU9E8L6dpmI1QTEXqHD+hJrtA8NWtvspe+DTTMvoe/WYeIzZ418P3B7nFOcI8kW17Rlmlf9hPuSYacthKzIycAZBRFXMt+fBhlt0pNr1O9q2e2M7q2k6ePKWLUM8X6z9Xzsi0Mqhx2sInRDNRS4cF28e/9qrzdL/tj8/3NsHztESgJSKhVaVoqFH0qwAycYci1U+kLhcKl/O5oUiuPuNEOKm2RTBgrsWTd3thhdxNnwiSol5cPrHyBPc9Jf7Xd/+VzC9lDmYNK6Ak29YdjWpYMHHOQkih/uTcedcGCzQ4yHJko/Cbgq1jWN5we+toFAgaNbiFb87yHXRo3vk0HuRiurX4hgcDDgpgX8OlFLjb8Vyh3f1u/R7AzysF5w3SNk9joyMUMqr+mXvO13pj1BCY27t8mluhw=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9SPR01MB0028.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(7416014)(56012099006)(4143699003)(11063799006)(18002099003)(10067099003)(22082099003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?Nkh4NUJGYTNjVVMwSitOQmc1TU1YME5oVGM1cG5DUmhoQWovbCs3OHpXSnVx?=
+ =?utf-8?B?TDJ6T3RpTU5qa2JmaUc5c3prdkplakhhODBHWkxjOVM3L2xUdFhQUk9UdVZY?=
+ =?utf-8?B?NEJkdVg3RGJsbzBSU3RGdmw0cER4U2pkazFGUFRMdlNHMk01VXZBK2I5Q0RF?=
+ =?utf-8?B?aDlOYkpFdXJNUzZOWlNkbW9QTE9PZVNPeTlTaFhMWGthY2RqZGVBdmNmVVVu?=
+ =?utf-8?B?QWN6MWRIbW9yVVVtd2lxQVFaZjlTSHhlTWNyU0hZbUxVMy9MaGdGUE1oSXI4?=
+ =?utf-8?B?ZnNsUzlSNFhHZU5hQmE3OGtBMWRWTVpMejZUQXlaeXdmVWtmZWdUOFdBMW9H?=
+ =?utf-8?B?OHpjbXRtS1BCYjVaMCtCMlBQYzFpeWJDRlRKMTloT1hYSmNjS2oyRFBWWVIx?=
+ =?utf-8?B?Ukx1a3J5ajJCcFZiMzF6a0JxRU54RU5ZWU42UU9DU21YUnlCekNFeW9TWFVt?=
+ =?utf-8?B?Y0puZ3Rsb3QzTmNPTjd3Tk1YTVFodE9DMWtoY0xhcjluN3VONnBOS0d5K2k3?=
+ =?utf-8?B?NGw1Zzk0V05lQStJQzJrK3NjdlpqWFRpMXRTM0JQYXB1Y1VHSGVTY2VMdHkx?=
+ =?utf-8?B?QWUwTGEvb3NrUSt0U2RtTGx0aC9KKzJDRDNwZ0RueUNGOWt4Zk5Uem1WTDhR?=
+ =?utf-8?B?Tk5Cbm1xakMwWndLWnBpUXFPTHpDdm8wSkgrNmUvelpidTlTak1hQThzS3hV?=
+ =?utf-8?B?ZUkrRk5mNmNPbkx6VHRXeGdyN085Smoxb0liclBIVmlmelVwZW5meGRjSkdR?=
+ =?utf-8?B?VnlEVzYraU5WR1pnNERvUUhQa0lPRmJxUkxQZzN6bmQ2TFNPbHFVb2pScHM2?=
+ =?utf-8?B?YTI4VklJblpiR3d3ZkRaOFdieHdPamo5aVNqS0hZZDJTNVpuczNlQ1pDZC9P?=
+ =?utf-8?B?eFIzSzhBUFdKdmdqQ1lhYzdiRndCcGJjZHJQT1hVUDNpeWZWTnRKeEsxZTdV?=
+ =?utf-8?B?YVpSK01ia0Q3c1hTQi8xZWVuSjAxVlZ3YTRjMjFsR1FtN3dYMThVNEs0VlVz?=
+ =?utf-8?B?WjBDdnVpRzlsZmRpTTJNRHFkQmtiZ1VIeXhYOXUwVkV2Lzl4UEQ1UVhENk1k?=
+ =?utf-8?B?NEp6eHJmZ2V4QkI5Ni9pSExZMXdyajlNSU9HVkx3eEZUUityRVg2UFhOOCt3?=
+ =?utf-8?B?MHE3QmVFdE9KaFBiS2JuVTJ6Q0xseWc0MDRKVHZVbE5BcHc4ejAyWE85ajVp?=
+ =?utf-8?B?TDZlVjg1eEU2TXhOdXBQcDVwS0xQN1A5MmpId0Z5eGliaDM3SkxIZklJRGJK?=
+ =?utf-8?B?NkVJd3hFYW15VGE1eXdXaVpJZlBpdlhIb25kSXEyRnBYTDJNamVKbk14L3lk?=
+ =?utf-8?B?Qk1YbnBCV1FrSmJIbGI4dUZ0eFJwOU5oOVF4cXNJS24yTWVyd0lkMUVCeXZD?=
+ =?utf-8?B?M1gyZFhhODNka29sRjNOZlpKSVVaWVhLUmd4cGFtbVJsWjg4d0VLckFXYnFT?=
+ =?utf-8?B?d29FOWNXTC9VSnB4alN3NzJwcmllOVhBN3Y4NDNSUGxVUDMyMG92WVlkTURm?=
+ =?utf-8?B?R29HeEdLWEtuQXE4QkRaZTcxOGtGSHRlbEF1N3B2OFNnVGdiYndvZU85a0lT?=
+ =?utf-8?B?YWViSE9ydWw2TXBaYkx2SFhOczYwcjZTNUZiV3FBUDl6TG40SVhHOXVEbk8r?=
+ =?utf-8?B?cDZKR2c2dGlLV0NRMGt3SWhBQXY3SzJQWFVGdFNJbzFYRjlndGdFUGh1N1lC?=
+ =?utf-8?B?MDFBc0tzeHlLVHpBbUVrNHlQOWpRc0VhL3F1bG5ibjFZS0lBUXpjYU1KYjlG?=
+ =?utf-8?B?ZHAvNkg1ZThsQitMTzlxaDc0ZUVGVDIzTHlaVG9PNE1tenVwR05UaGcrY0U5?=
+ =?utf-8?B?NjNGN1hFTmF0Tm13U2ZRMzNrd0J5UTBBbUZ0dTNKZEVZRWdIYzZyM3MzMXI5?=
+ =?utf-8?B?eE5TY2J1aU10SlZhOUdhS3lBRC9abytjbTNUY1dtYWI4RHFjQmw3VjJJTFQ0?=
+ =?utf-8?B?VjZmR3B3Ykh0TU04a3VoSlVHUlFQdHNoUE8wQWJaSkQrNXBJR0NlV3ZZeU1J?=
+ =?utf-8?B?bFF3cWUvOWlHaWtqdHl0RnV3eTQyR0JxczNVeHZkLytoUVVEeTQxYVRKcE9G?=
+ =?utf-8?B?Wm1zQVcyTGNyZkJyS21KVlFPa3RRd1lEU0xBc1NtVjNicmVxRFJmOG1JSExL?=
+ =?utf-8?B?Q1Q5MktlMjlFSHJza3J1amtLTDc4QUdISjlab2N2T1BjNjJ4dzQ5SktNUTFD?=
+ =?utf-8?B?aTcxV1N6YjQraVM1TWxNa2ZXNWkyWWpwSllJZW5jb2c5dkhOZERxOFpKNmlT?=
+ =?utf-8?B?bzNEdVN1SWo4MVQwVjYxOTc0MU9tK0Rnc2pISnBRcm9BYktzWHFWUUNyY1lR?=
+ =?utf-8?B?cTZKQUZmSitsZlZTYTFuaVpDZFlGL0hwUk9qY0VzTjJEMDNhaFFrdlAwZnNj?=
+ =?utf-8?Q?YAcNBqS/4JApTuaU=3D?=
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 68f77cdc-fd45-4663-1e74-08df2decd1cf
+X-MS-Exchange-CrossTenant-AuthSource: AM9SPR01MB0028.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2026 14:25:26.6757
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: UYKzU3OpNM4iOryFWmfDuWwArbZGz4Qn5GRCuAZPks2LJn1SIwKZMNzGN6HaFmOaC/g9gf6H2ePj4inY7XtTtXOg+p7rYIn5zfsIRNy40n8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR03MB8626
+X-purgate-ID: tlsNG-d25034/1792419932-51339A5B-7AB067B5/0/0
 X-purgate-type: clean
-X-purgate-size: 1176
+X-purgate-size: 963
 
-__skb_nsg() counts the scatterlist entries for a range of an skb with a
-copy of the __skb_to_sgvec() walk, including its BUG_ON(len) when the
-skb runs out before the range does.  tls_decrypt_sg() calls it on the
-same range it then passes to skb_to_sgvec(), so a bad range would BUG()
-here before it got to skb_to_sgvec()'s error return.
+Hi Jan,
 
-__skb_nsg() already returns -EMSGSIZE for a frag_list nested too deep,
-and tls_decrypt_sg() fails the record on any return below 1.  Return
--EINVAL for the leftover length too, with a DEBUG_NET_WARN_ON_ONCE() for
-debug kernels.
+On 9/29/26 09:52, Jan Beulich wrote:
+> On 29.09.2026 08:21, Dmytro Prokopchuk1 wrote:
+>> This series adds deviations for function/macro name clashes where
+>> the macro is used as a wrapper around an existing function name.
+>>
+>> With these three patches all ARM Rules 5.5 became clean.
+>>
+>> Changes in v3:
+>> - update wording with specifying file (constrains)
+>> - add Jan's ack for the first patch in the list
+> 
+> I.e. you took my reply to Bastian's comment as sufficient to address his
+> concern?
+> 
+> Jan
 
-Assisted-by: LLM
-Signed-off-by: Josef Bacik <josef@toxicpanda.com>
----
- net/tls/tls_sw.c | 5 ++++-
- 1 file changed, 4 insertions(+), 1 deletion(-)
+Not entirely. I took your explanation as the rationale, but v3 doesn't 
+record it in the deviation text.
 
-diff --git a/net/tls/tls_sw.c b/net/tls/tls_sw.c
-index 312e51270f29..1c578ea47a1b 100644
---- a/net/tls/tls_sw.c
-+++ b/net/tls/tls_sw.c
-@@ -142,7 +142,10 @@ static int __skb_nsg(struct sk_buff *skb, int offset, int len,
-                         start = end;
-                 }
-         }
--        BUG_ON(len);
-+	if (unlikely(len)) {
-+		DEBUG_NET_WARN_ON_ONCE(1);
-+		return -EINVAL;
-+	}
-         return elt;
- }
- 
+The patch is already committed, so v3 didn't record the rationale you 
+gave for sharing the name. I can send a follow-up patch that adds it to 
+the deviation text and rules.rst: the macro deliberately shares the 
+function's name so that accidental use of the size-based function is 
+less likely.
 
--- 
-2.55.0
-
+BR, Dmytro.
 
