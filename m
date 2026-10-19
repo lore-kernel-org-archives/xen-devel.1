@@ -2,34 +2,64 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8EBB7606A319
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 19:43:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4BAB3606A319
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 19:52:04 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=ZCqMGSir
-Received: from list by lists.xenproject.org with outflank-mailman.1454772.1668342 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=vgYZS1h7
+Received: from list by lists.xenproject.org with outflank-mailman.1454826.1668355 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xItGd-0007S5-NY; Mon, 19 Oct 2026 19:43:31 +0000
+	id 1xItOi-00034a-G2; Mon, 19 Oct 2026 19:51:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1454772.1668342; Mon, 19 Oct 2026 19:43:31 +0000
+Received: by outflank-mailman (output) from mailman id 1454826.1668355; Mon, 19 Oct 2026 19:51:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xItGd-0007Qb-EG; Mon, 19 Oct 2026 19:43:31 +0000
-Received: by outflank-mailman (input) for mailman id 1454772;
- Mon, 19 Oct 2026 19:43:30 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
+	id 1xItOi-00034T-Cy; Mon, 19 Oct 2026 19:51:52 +0000
+Received: by outflank-mailman (input) for mailman id 1454826;
+ Mon, 19 Oct 2026 19:51:51 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xItGc-0007E8-2H
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 19:43:30 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xItGW-000000022kb-3mSS;
- Mon, 19 Oct 2026 19:43:24 +0000
-Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
- by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xItGW-00000001FjN-2i3h;
- Mon, 19 Oct 2026 19:43:24 +0000
+ (envelope-from <Jason.Andryuk@amd.com>) id 1xItOh-00034N-8U
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 19:51:51 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xItOg-00FSEh-Lh
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 21:51:50 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6ad674c3-2eae-0a2a0a5409dd-0a2a450bcb8e-22
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 21:51:50 +0200
+Received: from [52.101.53.3]
+ (helo=BL0PR03CU003.outbound.protection.outlook.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Jason.Andryuk@amd.com>)
+ id 6ad674d3-b7e8-0a2a450b0019-34653503c71d-3
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 21:51:49 +0200
+Received: from BL1PR13CA0356.namprd13.prod.outlook.com (2603:10b6:208:2c6::31)
+ by CY8PR12MB7290.namprd12.prod.outlook.com (2603:10b6:930:55::13)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.19; Mon, 19 Oct
+ 2026 19:51:44 +0000
+Received: from BN2PEPF000044A5.namprd04.prod.outlook.com
+ (2603:10b6:208:2c6:cafe::87) by BL1PR13CA0356.outlook.office365.com
+ (2603:10b6:208:2c6::31) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.6 via Frontend Transport; Mon, 19
+ Oct 2026 19:51:44 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ BN2PEPF000044A5.mail.protection.outlook.com (10.167.243.104) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.522.6 via Frontend Transport; Mon, 19 Oct 2026 19:51:43 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 19 Oct
+ 2026 14:51:44 -0500
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Mon, 19 Oct
+ 2026 14:51:41 -0500
+Received: from [192.168.19.2] (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
+ Transport; Mon, 19 Oct 2026 14:51:40 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -38,362 +68,226 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=djncFJQMGREcvSArGBCTiVkXx4p/IkOBHDslyykTajc=; b=ZCqMGSirfqIGpLddDJiiELm2vo
-	Re+kcmOo6FEaIXtthP/ZGljeW3KoXyVm7bDeKmTFnloD5crNsb1kFzjU1Qs1wfvREuoMOArFLLZSP
-	slWugFnUJTi5I4jvo1oYTU/qy8MVrgf+WnEUIGG50mGJN4AGYNPUu96UR2AYN6x6nmT0=;
-From: George Dunlap <gwd@xenproject.org>
-To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v4 09/30] x86/hvm: introduce per-vCPU L3 page-table
-Date: Mon, 19 Oct 2026 20:42:40 +0100
-Message-ID: <20261019-asi-hvm-v4-9-b68b66652266@xenproject.org>
-X-Mailer: git-send-email 2.55.0
-In-Reply-To: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
-References: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=e+QybuNnvA7vFq5hn6kFzny7AIhJbyh8g2qfnQYcz7k1Hs7Ne75zcuOc160PPTFYk764hdadbIrit6RDuZ3ZPHXIrTQxwF9DGOBh4whn3gM8RPg6PZm61y86knJdgc4nIZZUtPIMw1HQPglUs6maUb3N92zBJFgoJyw1bhAF2PD+FLLczfd9aeVAJkSeLB3OcYesXosclYqOXhOxm5TcJEeHmR7AUBB8AWebjDj0J5dZ6K8NuDO/prQjIlt+XAT4ivFdXyRbqKa0y/Hi5syAB1USavETYiEXXzCsfSSqcLGXG00zLYMnc9H5FCW6HHMgruabp7cDAn0TGty0+uvP/w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=+IOwPRT727iWCjqizbYfYhkYIQvduRkr7SUFrRvv/88=;
+ b=y/zEPdbqPG845sc0hgSdU38WX41VRU6pkc6WRm8GOVx+/lVi0IXn8ajfN6fjvKqE8vdaZXKLQK4K8FWvYe39J5N2LqhDjK+SGXxivqLlik3kQBznyrEU7f/ZNtzuCCxcSWbm+AudD3LVw8eNFqHBN0t/waOznxzni/CnJKmWPI8Qi8T/p0KV78tluYjtJqCSIFhFOkm98v9Bf91RTTF5G88Xk0aLKcTsndD2kBPTtWOhvoR+So2vSI1GSh0Ctw7eNZ0e4bCwLVDJGZSMcHm+0ZyS7SchLBLAbnks7pwIZTgIztsfiApi8712a4FjKC+aCLZLY/v2odVzzjV2A43q6w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
+ (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
+ dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=+IOwPRT727iWCjqizbYfYhkYIQvduRkr7SUFrRvv/88=;
+ b=vgYZS1h74ptYPB1au5+zCseu6vk4VsY+vDGRAnIfh47bz/7SkKs+SQoYWm1EUEFB/YB4XrTigmjuWPsgN0eBRJBA/c0MhIAHjXW0Qv4SUHW3JAEJPTkVGKH9c2eKL7Rec+D1g3axiVEISTsm+syfD2ms3DgOlFNXsSQokI6iu+k=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+Message-ID: <df690201-b95e-4029-9bc0-01069561f893@amd.com>
+Date: Mon, 19 Oct 2026 15:46:32 -0400
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 3/5] vpci: allow queueing of mapping operations
+To: Mykyta Poturai <Mykyta_Poturai@epam.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: Stewart Hildebrand <stewart.hildebrand@amd.com>, Andrew Cooper
+	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, "Julien
+ Grall" <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+	<roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1792072426.git.mykyta_poturai@epam.com>
+ <14cc4abdcf4c3c3d9a620cf4df3ec87e7b11bd13.1792072426.git.mykyta_poturai@epam.com>
+Content-Language: en-US
+From: Jason Andryuk <jason.andryuk@amd.com>
+In-Reply-To: <14cc4abdcf4c3c3d9a620cf4df3ec87e7b11bd13.1792072426.git.mykyta_poturai@epam.com>
+Content-Type: text/plain; charset="UTF-8"; format=flowed
+Content-Transfer-Encoding: 7bit
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN2PEPF000044A5:EE_|CY8PR12MB7290:EE_
+X-MS-Office365-Filtering-Correlation-Id: 34a9e132-6798-4e4b-a815-08df2e1a66ce
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|1800799024|23010399003|36860700016|82310400026|56012099006|11063799006|4143699003|10067099003|22082099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	Q+PXlVX4mQ60OODVp2Ec//9Ia5lKnD7MOn8hEVVKk6ElJLhJ7GMQ5prpZ3LEdX98j+++sTtG75BRBvFBghJrSgf6uNWVZfeV3JcEbo5QRmztzbpyhusHtK/rEwZ0JTwhH4hDWvjzqMTOciCHlrBJmgQW1P3M7LOTF9w7L0mvht5b3HFS3WmtxkYULHoH0MEpvKaBHajfEVAHY0sSUzQXVJTw10AVAYV/eDvioT5AaqyG1GSOwNjIESuxMJC7CEFXbtgiJ2h8u8mmlx7Rtj4MdixCkB5C08/CRmUwobB926uEVFbawDPgeGBaNbO39fm0afl1/KtDOYqiPi9GZodg2iD5IqCGegPAbwKgqrCkDBptT9hE9iBXczjXaNZKGtuMkAcwih6eTeKJZns08clJo9Madn/mK9W+M7cNoPLQzTRHcuQzPMD7lN5k7ldEjcETh53l1onr8cKaII3wI1UXEvWR3+59xV7qEeSNHUuY0CcgcEScv8jrLat9n3v/rFiFQoEcdN7u+5ZNCG+U4os4ZWOzFiboO8iO/TG+HzxvNwjcUTfbpB+ZOqbzdI6lnEDNv7zC2/vC7zttn8y75eF9VynF8lSb56Cs+O1eyKYxG2yzR5Yk+29AiqCMpjfdymQB9kgig54Wnwy6gnfUlJQ0bbexqSlLlIjANBizUqbJDWAkmF+4HSjdfUXg1Kn4uaTlHQKysbTaGGxVeg/4SDNNIQ==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(36860700016)(82310400026)(56012099006)(11063799006)(4143699003)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	v95Dl1cQo5BYfDmhs8p93GdIUdizF2oQdO63HRgRhFpfcq3DAa/LXDOCJtpClO5KzqHpTJ0Eec2DuHT62pSaXOj201ugx7VuU5tkYdJZSMeQ4k9+HrKfvJniEdhGY1D7/1tgzBljww60g7MCOcSt0Yb2qovDddPvXeHHfSv+HwCblZE7GaRmsf15lyiSrCPXNcXBs7dD87WIjxvsORrhN3rrWgFKrha2dLxuSk3Emffq2U07Xg5EoBUeRq3z6XHPEOVO2SYon4zbbt+fiRlE62fSfMMgKM4y0yj92cRZWVJ1XI8yzWrexlBxwW1/ilO93AV94VczVRqu68eeZsgZ6cUyl6bOsHhNX+wQUyZfrggiVEcOA/8fPrWjlA5Z2bjrqkv85BJTKKQnYg8hA4C6EWfM0Fw8DJvAp3cd725F9eCLQmAt3U084U1OdVpD/kMC
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 19 Oct 2026 19:51:43.8312
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 34a9e132-6798-4e4b-a815-08df2e1a66ce
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	BN2PEPF000044A5.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CY8PR12MB7290
+X-purgate-ID: tlsNG-42698a/1792439510-AA8D99EA-E2100490/0/0
+X-purgate-type: clean
+X-purgate-size: 4982
+X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Roger Pau Monné <roger.pau@citrix.com>
+On 2026-10-15 10:08, Mykyta Poturai wrote:
+> From: Stewart Hildebrand <stewart.hildebrand@amd.com>
+> 
+> Introduce vPCI BAR mapping task queue. Store information needed to
+> map/unmap BARs in struct vpci_map_task. Allow queueing of BAR map/unmap
+> operations in a list, thus making it possible to perform multiple p2m
+> operations associated with single PCI config space register access.
+> 
+> The rangesets describing the ranges to be (un)mapped move from struct
+> vpci_bar into the task. They are only live for the duration of the
+> operation, and a single per-device set cannot describe more than one
 
-The per-domain area is currently a single domain-wide structure: one L3,
-referenced from every root page-table associated with the domain, so
-every mapping in it is visible to every vCPU of the domain.  Its
-contents are already laid out in per-vCPU slices (each vCPU's
-COMPAT_ARG_XLAT pages, and for PV each vCPU's GDT/LDT window and
-mapcache entries), but the visibility is domain-wide.  Meanwhile, much
-of the per-vCPU state Xen maintains -- the VMCB, the VMX MSR load/save
-areas, FPU/XSAVE state -- lives in always-mapped memory.
+"per-device rangeset"?
 
-Allow the "per-domain" area to be per-vCPU instead ("VCPU-PT") for HVM
-domains.  HVM monitor tables are already per-vCPU, so this needs nothing
-at context switch: every monitor table carries its vCPU's own L3 from
-creation, and the per-vCPU mappings are isolated from other running
-vCPUs at once.  We will later build on this, adding a per-vCPU mapcache
-and per-vCPU mapped areas, into which we can move the vCPU state
-mentioned above.
+> queued operation. Allocate them along with the task and free them once
+> the task has been processed.
+> 
+> This is preparatory work for further changes that need to perform
+> multiple unmap/map operations before returning to guest.
+> 
+> At the moment, only a single operation will be queued. However, when
+> multiple operations are queued, there is a check in modify_bars() to
+> skip BARs already in the requested state that will no longer be
+> accurate. Remove this check in preparation of upcoming changes.
+> 
+> Amends: 622bdd962822 ("vpci/header: handle p2m range sets per BAR")
+> Message-ID: <20260406191203.97662-3-stewart.hildebrand@amd.com>
+> Signed-off-by: Stewart Hildebrand <stewart.hildebrand@amd.com>
+> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 
-Add pervcpu_l3_pg to the arch_vcpu struct, to correspond to the
-perdomain_l3_pg in the domain struct.  (We retain both so that we can
-switch between per-domain and per-vCPU on a domain-by-domain basis; PV
-domains always use the domain-wide one.)
+> @@ -280,12 +321,48 @@ static int __init apply_map(struct domain *d, const struct pci_dev *pdev,
 
-In {create,destroy}_perdomain_mapping(), if d->arch.asi.vcpu_pt, use
-pervcpu_l3_pg as the per-domain L3 (allocating it for a vCPU if it's
-NULL, just as we allocate for a domain in !vcpu_pt mode); otherwise,
-use perdomain_l3_pg.  Introduce a helper, perdomain_l3(), to
-consistently choose the correct one.
+> -static void defer_map(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
+> +static struct vpci_map_task *alloc_map_task(const struct pci_dev *pdev,
+> +                                            uint16_t cmd, bool rom_only)
+> +{
+> +    struct vpci_map_task *task;
+> +    unsigned int i;
+> +
+> +    task = xvzalloc(struct vpci_map_task);
+> +
 
-Introduce free_pervcpu_mappings() to free this tree, called from
-arch_vcpu_destroy() on normal teardown.  Since the vcpu structure holds
-the only reference to pervcpu_l3_pg, arch_vcpu_create() must also call
-it on its error paths: nothing else records the allocation once the
-vcpu struct is torn down.  The domain-wide free_perdomain_mappings()
-keeps covering non-vCPU-PT domains.
+Nit: No newline needed here.
 
-init_xen_l4_slots() is given the vCPU a table is private to or, for a
-table the domain's vCPUs share, any of them.  Have it install that
-vCPU's perdomain_l3() in slot 260: the tables a domain's vCPUs share are
-PV ones, and a PV domain's vCPUs all use the domain-wide L3.
+> +    if ( !task )
+> +        return NULL;
+> +
+> +    for ( i = 0; i < ARRAY_SIZE(task->bars); i++ )
+> +    {
+> +        if ( !MAPPABLE_BAR(&pdev->vpci->header.bars[i]) )
+> +            continue;
+> +
+> +        task->bars[i].mem = rangeset_new(pdev->domain, NULL,
+> +                                         RANGESETF_no_print);
+> +
 
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-fable-5-1, Claude Code:claude-opus-5-5
-Signed-off-by: George Dunlap <gwd@xenproject.org>
----
-Changes in v4:
-- Rebase over earlier changes
-- d->arch.vcpu_pt is now d->arch.asi.vcpu_pt.
-- init_xen_l4_slots() taking a vCPU in place of the domain, and
-  promote_l4_table() failing while the domain has none, are now patches
-  of their own (Roger, Jan).
-- Drop the fail_early label: every cleanup step after fail: is safe
-  before its setup has run (Roger).
-- free_pervcpu_mappings(): clear the pointer, then free, as XFREE()
-  does (Roger).
-- Likewise in free_perdomain_mappings().
+Nit: Extra newline.
 
-Changes in v3:
-- HVM only: PV domains keep the domain-wide area, so the PV parts go
-  (the single-vCPU limit, the shadow refusals, the XPTI slot install).
-  init_xen_l4_slots() takes the vCPU as an extra, optional argument
-  rather than in place of the domain, so PV guest L4s, which no vCPU
-  owns, are promoted exactly as before.
-- Retitle (was: "x86/mm: introduce per-vCPU L3 page-table").
-- free_compat_arg_xlat()'s comment names free_pervcpu_mappings() as the
-  teardown for a vCPU-PT domain.
+> +        if ( !task->bars[i].mem )
+> +        {
+> +            destroy_map_task(task);
+> +            return NULL;
+> +        }
+> +
+> +        task->bars[i].addr = pdev->vpci->header.bars[i].addr;
+> +        task->bars[i].guest_addr = pdev->vpci->header.bars[i].guest_addr;
+> +    }
+> +
+> +    task->cmd = cmd;
+> +    task->rom_only = rom_only;
+> +    task->pdev = pdev;
+> +
+> +    return task;
+> +}
+> +
+> +static void defer_map(struct vpci_map_task *task)
+>   {
+>       struct vcpu *curr = current;
+>   
 
-Changes in v2:
-- Added to the series
+> @@ -312,11 +388,17 @@ int vpci_modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
+>       struct pci_dev *tmp;
+>       const struct domain *d;
+>       const struct vpci_msix *msix = pdev->vpci->msix;
+> +    struct vpci_map_task *task;
+>       unsigned int i, j;
+>       int rc;
+>   
+>       ASSERT(rw_is_write_locked(&pdev->domain->pci_lock));
+>   
+> +    task = alloc_map_task(pdev, cmd, rom_only);
+> +
 
-Changes since the previously posted version:
-- Expand the commit message with the motivation and the design
-  rationale.
-- Keep domain-wide freeing intact and introduce a vCPU-scoped
-  free_pervcpu_mappings() instead of re-scoping
-  free_perdomain_mappings(); fix the arch_vcpu_create() error-path
-  leaks of a partially built per-vCPU hierarchy.
-- Add a perdomain_l3() helper for the root selection, rather than
-  open-coding the vcpu_pt choice (and testing both root pointers) at
-  each site.
----
- xen/arch/x86/domain.c             |  9 +++--
- xen/arch/x86/include/asm/domain.h |  4 ++
- xen/arch/x86/include/asm/mm.h     |  2 +
- xen/arch/x86/mm.c                 | 66 +++++++++++++++++++++++--------
- 4 files changed, 61 insertions(+), 20 deletions(-)
+Nit: Extra newline
 
-diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
-index 94a1ea904a..7a4da203d4 100644
---- a/xen/arch/x86/domain.c
-+++ b/xen/arch/x86/domain.c
-@@ -513,7 +513,7 @@ int arch_vcpu_create(struct vcpu *v)
- 
-     rc = mapcache_vcpu_init(v);
-     if ( rc )
--        return rc;
-+        goto fail;
- 
-     if ( !is_idle_domain(d) )
-     {
-@@ -523,12 +523,12 @@ int arch_vcpu_create(struct vcpu *v)
-          */
-         rc = create_perdomain_mapping(v, PERDOMAIN_VIRT_START, 0, NULL, NULL);
-         if ( rc )
--            return rc;
-+            goto fail;
- 
-         paging_vcpu_init(v);
- 
-         if ( (rc = vcpu_init_fpu(v)) != 0 )
--            return rc;
-+            goto fail;
- 
-         vmce_init_vcpu(v);
- 
-@@ -576,6 +576,7 @@ int arch_vcpu_create(struct vcpu *v)
-     vcpu_destroy_fpu(v);
-     xfree(v->arch.msrs);
-     v->arch.msrs = NULL;
-+    free_pervcpu_mappings(v);
- 
-     return rc;
- }
-@@ -596,6 +597,8 @@ void arch_vcpu_destroy(struct vcpu *v)
-         pv_vcpu_destroy(v);
-     else
-         ASSERT_UNREACHABLE();
-+
-+    free_pervcpu_mappings(v);
- }
- 
- int arch_sanitise_domain_config(const struct xen_domctl_createdomain *config)
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 12f79feb42..4140a92f15 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -332,6 +332,7 @@ struct monitor_write_data {
- 
- struct arch_domain
- {
-+    /* Domain-wide L3 for the per-domain slot; NULL in a vCPU-PT domain. */
-     struct page_info *perdomain_l3_pg;
- 
-     /* I/O-port admin-specified access capabilities. */
-@@ -688,6 +689,9 @@ struct arch_vcpu
- 
-     struct vcpu_msrs *msrs;
- 
-+    /* Per-vCPU L3 for the per-domain slot; NULL in a non-vCPU-PT domain. */
-+    struct page_info *pervcpu_l3_pg;
-+
-     struct {
-         bool next_interrupt_enabled;
-     } monitor;
-diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index de45a111f3..12d1c06c12 100644
---- a/xen/arch/x86/include/asm/mm.h
-+++ b/xen/arch/x86/include/asm/mm.h
-@@ -369,6 +369,7 @@ int devalidate_page(struct page_info *page, unsigned long type,
-                          int preemptible);
- 
- void init_xen_pae_l2_slots(l2_pgentry_t *l2t, const struct domain *d);
-+struct page_info *perdomain_l3(const struct vcpu *v);
- void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
-                        const struct vcpu *v, mfn_t sl4mfn, bool ro_mpt);
- bool fill_ro_mpt(mfn_t mfn);
-@@ -612,6 +613,7 @@ int create_perdomain_mapping(struct vcpu *v, unsigned long va,
- void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
-                                unsigned int nr);
- void free_perdomain_mappings(struct domain *d);
-+void free_pervcpu_mappings(struct vcpu *v);
- 
- void __iomem *ioremap_wc(paddr_t pa, size_t len);
- 
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index ac074cc62d..362a88a300 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -1681,6 +1681,18 @@ static int promote_l3_table(struct page_info *page)
- }
- #endif /* CONFIG_PV */
- 
-+/*
-+ * The root of the per-domain area in use by @v: the vCPU's own L3 for a
-+ * vCPU-PT domain, the domain-wide one otherwise.
-+ */
-+struct page_info *perdomain_l3(const struct vcpu *v)
-+{
-+    const struct domain *d = v->domain;
-+
-+    return d->arch.asi.vcpu_pt ? v->arch.pervcpu_l3_pg
-+                               : d->arch.perdomain_l3_pg;
-+}
-+
- /*
-  * Fill an L4 with Xen entries.
-  *
-@@ -1693,7 +1705,8 @@ static int promote_l3_table(struct page_info *page)
-  * extended directmap.
-  *
-  * v is the vCPU the table is private to or, for a table the domain's vCPUs
-- * share, any of them.
-+ * share, any of them: slot 260 gets v's per-domain area (perdomain_l3()),
-+ * which in a domain whose vCPUs share tables (PV) is the domain-wide one.
-  */
- void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
-                        const struct vcpu *v, mfn_t sl4mfn, bool ro_mpt)
-@@ -1726,7 +1739,7 @@ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
- 
-     /* Slot 260: Per-domain mappings. */
-     l4t[l4_table_offset(PERDOMAIN_VIRT_START)] =
--        l4e_from_page(d->arch.perdomain_l3_pg, __PAGE_HYPERVISOR_RW);
-+        l4e_from_page(perdomain_l3(v), __PAGE_HYPERVISOR_RW);
- 
-     /* Slot 4: Per-domain mappings mirror. */
-     BUILD_BUG_ON(IS_ENABLED(CONFIG_PV32) &&
-@@ -6249,7 +6262,7 @@ int create_perdomain_mapping(struct vcpu *v, unsigned long va,
-                              struct page_info **ppg)
- {
-     struct domain *d = v->domain;
--    struct page_info *pg;
-+    struct page_info *pg, *l3_pg = perdomain_l3(v);
-     l3_pgentry_t *l3tab;
-     l2_pgentry_t *l2tab;
-     l1_pgentry_t *l1tab;
-@@ -6258,14 +6271,17 @@ int create_perdomain_mapping(struct vcpu *v, unsigned long va,
-     ASSERT(va >= PERDOMAIN_VIRT_START &&
-            va < PERDOMAIN_VIRT_SLOT(PERDOMAIN_SLOTS));
- 
--    if ( !d->arch.perdomain_l3_pg )
-+    if ( !l3_pg )
-     {
-         pg = alloc_domheap_page(d, MEMF_no_owner);
-         if ( !pg )
-             return -ENOMEM;
-         l3tab = __map_domain_page(pg);
-         clear_page(l3tab);
--        d->arch.perdomain_l3_pg = pg;
-+        if ( d->arch.asi.vcpu_pt )
-+            v->arch.pervcpu_l3_pg = pg;
-+        else
-+            d->arch.perdomain_l3_pg = pg;
-         if ( !nr )
-         {
-             unmap_domain_page(l3tab);
-@@ -6275,7 +6291,7 @@ int create_perdomain_mapping(struct vcpu *v, unsigned long va,
-     else if ( !nr )
-         return 0;
-     else
--        l3tab = __map_domain_page(d->arch.perdomain_l3_pg);
-+        l3tab = __map_domain_page(l3_pg);
- 
-     ASSERT(!l3_table_offset(va ^ (va + nr * PAGE_SIZE - 1)));
- 
-@@ -6372,16 +6388,16 @@ void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
-                                unsigned int nr)
- {
-     const l3_pgentry_t *l3tab, *pl3e;
--    const struct domain *d = v->domain;
-+    struct page_info *l3_pg = perdomain_l3(v);
- 
-     ASSERT(va >= PERDOMAIN_VIRT_START &&
-            va < PERDOMAIN_VIRT_SLOT(PERDOMAIN_SLOTS));
-     ASSERT(!nr || !l3_table_offset(va ^ (va + nr * PAGE_SIZE - 1)));
- 
--    if ( !d->arch.perdomain_l3_pg )
-+    if ( !l3_pg )
-         return;
- 
--    l3tab = __map_domain_page(d->arch.perdomain_l3_pg);
-+    l3tab = __map_domain_page(l3_pg);
-     pl3e = l3tab + l3_table_offset(va);
- 
-     if ( l3e_get_flags(*pl3e) & _PAGE_PRESENT )
-@@ -6420,16 +6436,11 @@ void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
-     unmap_domain_page(l3tab);
- }
- 
--void free_perdomain_mappings(struct domain *d)
-+static void free_perdomain_l3(struct page_info *l3pg)
- {
--    l3_pgentry_t *l3tab;
-+    l3_pgentry_t *l3tab = __map_domain_page(l3pg);
-     unsigned int i;
- 
--    if ( !d->arch.perdomain_l3_pg )
--        return;
--
--    l3tab = __map_domain_page(d->arch.perdomain_l3_pg);
--
-     for ( i = 0; i < PERDOMAIN_SLOTS; ++i)
-         if ( l3e_get_flags(l3tab[i]) & _PAGE_PRESENT )
-         {
-@@ -6465,8 +6476,29 @@ void free_perdomain_mappings(struct domain *d)
-         }
- 
-     unmap_domain_page(l3tab);
--    free_domheap_page(d->arch.perdomain_l3_pg);
-+    free_domheap_page(l3pg);
-+}
-+
-+void free_perdomain_mappings(struct domain *d)
-+{
-+    struct page_info *l3pg = d->arch.perdomain_l3_pg;
-+
-+    if ( !l3pg )
-+        return;
-+
-     d->arch.perdomain_l3_pg = NULL;
-+    free_perdomain_l3(l3pg);
-+}
-+
-+void free_pervcpu_mappings(struct vcpu *v)
-+{
-+    struct page_info *l3pg = v->arch.pervcpu_l3_pg;
-+
-+    if ( !l3pg )
-+        return;
-+
-+    v->arch.pervcpu_l3_pg = NULL;
-+    free_perdomain_l3(l3pg);
- }
- 
- static void write_sss_token(unsigned long *ptr)
--- 
-2.55.0
+> +    if ( !task )
+> +        return -ENOMEM;
+> +
+>       /*
+>        * Create a rangeset per BAR that represents the current device memory
+>        * region and compare it against all the currently active BAR memory
 
+> @@ -343,9 +425,7 @@ int vpci_modify_bars(const struct pci_dev *pdev, uint16_t cmd, bool rom_only)
+>   
+>           if ( !MAPPABLE_BAR(bar) ||
+>                (rom_only ? bar->type != VPCI_BAR_ROM
+> -                       : (bar->type == VPCI_BAR_ROM && !header->rom_enabled)) ||
+> -             /* Skip BARs already in the requested state. */
+> -             bar->enabled == !!(cmd & PCI_COMMAND_MEMORY) )
+
+This is the removed check mentioned in the commit message?  And the 
+reason is that a queue of operation 1 unmap, operation 2 map needs to be 
+processed sequentially, but cmd won't be changing?
+
+> +                       : (bar->type == VPCI_BAR_ROM && !header->rom_enabled)) )
+>               continue;
+>   
+>           if ( !pci_check_bar(pdev, _mfn(start), _mfn(end)) )
+
+> @@ -152,14 +153,24 @@ struct vpci {
+>   #endif
+>   };
+>   
+> -struct vpci_vcpu {
+> +#ifdef __XEN__
+> +struct vpci_map_task {
+>       /* Per-vcpu structure to store state while {un}mapping of PCI BARs. */
+> -    const struct pci_dev *pdev;
+> +    struct list_head next;
+> +    struct vpci_bar_map {
+> +        uint64_t addr;
+> +        uint64_t guest_addr;
+> +        struct rangeset *mem;
+> +    } bars[ARRAY_SIZE(((struct vpci_header *)NULL)->bars)];
+>       uint16_t cmd;
+>       bool rom_only : 1;
+> +    const struct pci_dev *pdev;
+
+Is there a reason to move this pointer?  You introduce a hole in the 
+structure before it.
+
+Thanks,
+Jason
 
