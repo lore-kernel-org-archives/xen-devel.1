@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 240C5606A320
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 19:55:30 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34A6B606A31C
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 19:55:32 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=5N/xWK8v
-Received: from list by lists.xenproject.org with outflank-mailman.1454834.1668379 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=jgoFtm5p
+Received: from list by lists.xenproject.org with outflank-mailman.1454845.1668459 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xItS1-0003up-NW; Mon, 19 Oct 2026 19:55:17 +0000
+	id 1xItS8-0005l2-B7; Mon, 19 Oct 2026 19:55:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1454834.1668379; Mon, 19 Oct 2026 19:55:17 +0000
+Received: by outflank-mailman (output) from mailman id 1454845.1668459; Mon, 19 Oct 2026 19:55:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xItS1-0003uH-Jc; Mon, 19 Oct 2026 19:55:17 +0000
-Received: by outflank-mailman (input) for mailman id 1454834;
+	id 1xItS7-0005he-Sl; Mon, 19 Oct 2026 19:55:23 +0000
+Received: by outflank-mailman (input) for mailman id 1454845;
  Mon, 19 Oct 2026 19:55:15 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xItRz-0003h4-GU
+ (envelope-from <gwd@xenproject.org>) id 1xItRz-0003hw-P4
  for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 19:55:15 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xItRz-000000022yY-2Nbo;
+ (envelope-from <gwd@xenproject.org>) id 1xItRz-000000022zl-3YoA;
  Mon, 19 Oct 2026 19:55:15 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xItGo-00000001FjN-0HBF;
- Mon, 19 Oct 2026 19:43:42 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xItGg-00000001FjN-0lcO;
+ Mon, 19 Oct 2026 19:43:34 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,19 +41,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=Mu6k2BaQFLQ9iQqejDHFz+H+XwqcF1BQPCpuR3LOvj4=; b=5N/xWK8vMsxKqNS9s6OwGEgY51
-	MC+3dNN4OKtNXIg8kOVNPuXk36+PnCEYA1CYZibi8pVs/YneAZZoNLCMxZX5RQnU6TE/PNKfwHsBb
-	iJwqjOUfuId4Y2CCvd5Mj6fW2wYbXHGuZ/RmN/WS5rN2sY4jQkBcIM8mojak2DtPXJPg=;
+	bh=dbeZKV9O+bmNdrh0qt89ublfkcV74oImeh0hl17sAps=; b=jgoFtm5p3xGtx39+eoGKrwQ/W9
+	5PsVIafcft7cfDUDsGeu2STkBtHg3nkAD2IxUNQz98NiQnpb50qQp+2QRWtnFcfa4VmlufVd+8Z/1
+	EtD349aaIv1/hXmZxn2mQ6HaIbLCAFlA/C1wqDs3zBhx8EQeQfkwPzDRfAz7dH3iH3e4=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Jason Andryuk <jason.andryuk@amd.com>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v4 25/30] x86/svm: introduce svm_vmcb_map() and svm_vmcb_unmap()
-Date: Mon, 19 Oct 2026 20:42:56 +0100
-Message-ID: <20261019-asi-hvm-v4-25-b68b66652266@xenproject.org>
+Subject: [PATCH v4 18/30] x86/domain_page: clear a mapcache slot at its last unmap
+Date: Mon, 19 Oct 2026 20:42:49 +0100
+Message-ID: <20261019-asi-hvm-v4-18-b68b66652266@xenproject.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
 References: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
@@ -67,570 +66,204 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Some accessors of a vCPU's VMCB can run with that vCPU paused, from
-another vCPU's context: context save/load, the segment and CPL getters,
-PAT/TSC/intercept updates reachable from toolstack operations, vm_event,
-the 'v' debug key, and construct_vmcb() itself, which runs before the
-vCPU ever entered guest context.  svm_nested_features_on_efer_update()
-is among them: it is reachable remotely via hvm_load_cpu_ctxt() ->
-svm_update_guest_efer().
+unmap_domain_page() keeps a recently unmapped slot in the vCPU's
+maphash (MAPHASH_ENTRIES, 8 per vCPU) for a quick remap of the same
+MFN, and leaves its PTE in place until the entry is displaced by a later
+unmap or reclaimed by a full cache.  Until then the page stays mapped,
+although nothing refers to the mapping and the mapcache holds no
+reference to the page.  Where the mapcache clears a slot's PTE, it
+defers the flush: the slot's translation can stay in the TLB of the CPU
+which used it until that CPU next flushes.
 
-Route them through new svm_vmcb_map/unmap helpers; construct_vmcb()
-takes the VMCB from its caller.  svm_set_tsc_offset() needs both VMCBs
-rather than just the active one, so it maps them individually via
-svm_vmcb_map_one().  A vCPU stays in nested guest mode across a
-deschedule or a pause, so this path can run remotely with the L2 VMCB
-active; guest mode does not imply v == current.  Hot vmexit-path
-accesses all have v == current and keep dereferencing svm->vmcb
-directly.
+While the full directmap is loaded, that reaches nothing it does not
+map anyway.  On the sparse view of the directmap, Xen reaches
+domain-heap memory only through mappings made for the purpose.  A
+mapping or a translation left behind keeps the page reachable after its
+last unmap: while Xen serves another of the guest's contexts on the
+same vCPU, and, once the page is freed and handed to another domain,
+from a context which has nothing to do with it.
 
-No functional change: the helpers return the VMCB's existing address.
-They prepare for moving VMCBs off always-mapped memory, where a VMCB's
-mapping is valid only in its own vCPU's context.
+So clear a slot's PTE when its last reference goes, maphash slots
+included: the hash entry keeps the slot, not the mapping, and a later
+hit maps the page again in the same slot.  The slot has mapped nothing
+else in between, so that needs no flush.  Reusing the slot for another
+page still goes through the garbage map, or through the replacement of
+a hash entry when the cache is full, both of which flush first.
 
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-5-5
+In a per-vCPU mapcache, as vCPU-PT domains have, also invalidate the
+slot's translation on the local CPU, right after clearing the PTE.  The
+slot has a second address, in the mirror of the per-domain area that
+every domain but a 64-bit PV one gets for the compat argument
+translation area, and its translation is invalidated too: two INVLPGs.
+That leaves no translation on any CPU, as the vCPU's page-tables are
+loaded on one CPU at a time, and a CPU loading other page-tables
+(switch_cr3_cr4()) flushes non-global translations, the mapcache's
+included.
+
+A PV domain's domain-wide mapcache has its PTEs cleared but no
+INVLPG, as CPUs running the domain's other vCPUs may hold the slot's
+translation too, which a local INVLPG would not reach.  For it, as
+before, builds with PV support flush a page freed by its owner from
+TLBs before the page is handed out again.
+
+The cost is one PTE write per unmap into the maphash and per remap from
+it, and in a per-vCPU mapcache two INVLPGs per slot's last unmap.  A
+second unmap of an entry in the maphash now finds its PTE not present
+and is caught by the check unmap_domain_page() has for entries the
+first unmap zapped, rather than by the reference count's ASSERT() in
+debug builds only.
+
+The change does not depend on asi= or on a sparse view of the directmap
+being configured: PV vCPUs use the domain-wide mapcache on the default
+command line too.  For them it adds the PTE writes above, and leaves up
+to MAPHASH_ENTRIES fewer pages per vCPU mapped in the domain-wide area.
+
+Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v4:
-- New in this version.
----
- xen/arch/x86/hvm/svm/nestedsvm.c |   4 +-
- xen/arch/x86/hvm/svm/svm.c       | 133 +++++++++++++++++++++++--------
- xen/arch/x86/hvm/svm/vmcb.c      |  29 ++++++-
- xen/arch/x86/hvm/svm/vmcb.h      |   9 +++
- 4 files changed, 136 insertions(+), 39 deletions(-)
+- Merge v3's 15/18 ("x86/mm: flush owned pages before reuse with the
+  sparse directmap view") and 16/18 ("x86/domain_page: keep the
+  maphash's slots, not their mappings").  Rather than flush pages freed
+  by their owner before reuse wherever a sparse view is configured,
+  invalidate a per-vCPU mapcache slot's translations on the local CPU
+  right after its PTE is cleared (Roger).
+- Message: don't restate when PV vCPUs use the mapcache (Roger).
 
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index 2b998e26bc..dc853e5f1a 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -1554,7 +1554,7 @@ void svm_vmexit_do_clgi(struct cpu_user_regs *regs, struct vcpu *v)
-  */
- void svm_nested_features_on_efer_update(struct vcpu *v)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
-     struct nestedsvm *svm = &vcpu_nestedsvm(v);
-     u32 general2_intercepts;
-     vintr_t vintr;
-@@ -1612,6 +1612,8 @@ void svm_nested_features_on_efer_update(struct vcpu *v)
-             vmcb_set_general2_intercepts(vmcb, general2_intercepts);
-         }
-     }
-+
-+    svm_vmcb_unmap(v, vmcb);
- }
- 
- void __init start_nested_svm(struct hvm_function_table *hvm_function_table)
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 71e48351f2..241843d8c0 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -107,7 +107,7 @@ static void cf_check svm_cpu_down(void)
- static void cf_check svm_update_guest_cr(
-     struct vcpu *v, unsigned int cr, unsigned int flags)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
-     uint64_t value;
- 
-     switch ( cr )
-@@ -173,11 +173,13 @@ static void cf_check svm_update_guest_cr(
-     default:
-         BUG();
-     }
-+
-+    svm_vmcb_unmap(v, vmcb);
- }
- 
- static void cf_check svm_update_guest_efer(struct vcpu *v)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
-     unsigned long guest_efer = v->arch.hvm.guest_efer,
-         xen_efer = read_efer();
- 
-@@ -204,6 +206,7 @@ static void cf_check svm_update_guest_efer(struct vcpu *v)
-     guest_efer |= EFER_SVME;
- 
-     vmcb_set_efer(vmcb, guest_efer);
-+    svm_vmcb_unmap(v, vmcb);
- 
-     ASSERT(nestedhvm_enabled(v->domain) ||
-            !nsvm_efer_svm_enabled(v));
-@@ -352,7 +355,7 @@ static void svm_restore_dr(struct vcpu *v)
- 
- static int svm_vmcb_save(struct vcpu *v, struct hvm_hw_cpu *c)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
- 
-     if ( vmcb->event_inj.v &&
-          hvm_event_needs_reinjection(vmcb->event_inj.type,
-@@ -362,13 +365,15 @@ static int svm_vmcb_save(struct vcpu *v, struct hvm_hw_cpu *c)
-         c->error_code = vmcb->event_inj.ec;
-     }
- 
-+    svm_vmcb_unmap(v, vmcb);
-+
-     return 1;
- }
- 
- static int svm_vmcb_restore(struct vcpu *v, struct hvm_hw_cpu *c)
- {
-     struct page_info *page = NULL;
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb;
-     struct p2m_domain *p2m = p2m_get_hostp2m(v->domain);
- 
-     if ( c->pending_valid )
-@@ -417,6 +422,8 @@ static int svm_vmcb_restore(struct vcpu *v, struct hvm_hw_cpu *c)
-     svm_update_guest_cr(v, 0, 0);
-     svm_update_guest_cr(v, 4, 0);
- 
-+    vmcb = svm_vmcb_map(v);
-+
-     if ( !paging_mode_shadow(v->domain) )
-     {
-         vmcb_set_np(vmcb, true);
-@@ -436,6 +443,8 @@ static int svm_vmcb_restore(struct vcpu *v, struct hvm_hw_cpu *c)
-         vmcb->event_inj.raw = 0;
- 
-     vmcb->cleanbits.raw = 0;
-+    svm_vmcb_unmap(v, vmcb);
-+
-     paging_update_paging_modes(v);
- 
-     return 0;
-@@ -443,7 +452,7 @@ static int svm_vmcb_restore(struct vcpu *v, struct hvm_hw_cpu *c)
- 
- static void svm_save_cpu_state(struct vcpu *v, struct hvm_hw_cpu *data)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    const struct vmcb_struct *vmcb = svm_vmcb_map(v);
- 
-     data->sysenter_cs      = vmcb->sysenter_cs;
-     data->sysenter_esp     = vmcb->sysenter_esp;
-@@ -453,11 +462,13 @@ static void svm_save_cpu_state(struct vcpu *v, struct hvm_hw_cpu *data)
-     data->msr_star         = vmcb->star;
-     data->msr_cstar        = vmcb->cstar;
-     data->msr_syscall_mask = vmcb->sfmask;
-+
-+    svm_vmcb_unmap(v, vmcb);
- }
- 
- static void svm_load_cpu_state(struct vcpu *v, struct hvm_hw_cpu *data)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
- 
-     vmcb->lstar        = data->msr_lstar;
-     vmcb->star         = data->msr_star;
-@@ -467,6 +478,9 @@ static void svm_load_cpu_state(struct vcpu *v, struct hvm_hw_cpu *data)
-     vmcb->sysenter_cs  = data->sysenter_cs;
-     vmcb->sysenter_esp = data->sysenter_esp;
-     vmcb->sysenter_eip = data->sysenter_eip;
-+
-+    svm_vmcb_unmap(v, vmcb);
-+
-     v->arch.hvm.guest_efer = data->msr_efer;
-     svm_update_guest_efer(v);
- }
-@@ -492,7 +506,7 @@ static int cf_check svm_load_vmcb_ctxt(struct vcpu *v, struct hvm_hw_cpu *ctxt)
- 
- static unsigned cf_check int svm_get_interrupt_shadow(struct vcpu *v)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
-     unsigned int intr_shadow = 0;
- 
-     if ( vmcb->int_stat.intr_shadow )
-@@ -503,13 +517,15 @@ static unsigned cf_check int svm_get_interrupt_shadow(struct vcpu *v)
-          : (vmcb_get_general1_intercepts(vmcb) & GENERAL1_INTERCEPT_IRET) )
-         intr_shadow |= HVM_INTR_SHADOW_NMI;
- 
-+    svm_vmcb_unmap(v, vmcb);
-+
-     return intr_shadow;
- }
- 
- static void cf_check svm_set_interrupt_shadow(
-     struct vcpu *v, unsigned int intr_shadow)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
-     bool block_nmi = intr_shadow & HVM_INTR_SHADOW_NMI;
- 
-     vmcb->int_stat.intr_shadow =
-@@ -527,10 +543,13 @@ static void cf_check svm_set_interrupt_shadow(
- 
-         vmcb_set_general1_intercepts(vmcb, gen1);
-     }
-+
-+    svm_vmcb_unmap(v, vmcb);
- }
- 
- static int cf_check svm_guest_x86_mode(struct vcpu *v)
- {
-+    /* Current only (see guest_cpu_user_regs() below): no mapping needed. */
-     struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
- 
-     if ( unlikely(!(v->arch.hvm.guest_cr[0] & X86_CR0_PE)) )
-@@ -544,8 +563,7 @@ static int cf_check svm_guest_x86_mode(struct vcpu *v)
- 
- static void cf_check svm_cpuid_policy_changed(struct vcpu *v)
- {
--    struct svm_vcpu *svm = &v->arch.hvm.svm;
--    struct vmcb_struct *vmcb = svm->vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
-     const struct cpu_policy *cp = v->domain->arch.cpu_policy;
-     u32 bitmap = vmcb_get_exception_intercepts(vmcb);
- 
-@@ -555,6 +573,7 @@ static void cf_check svm_cpuid_policy_changed(struct vcpu *v)
-         bitmap &= ~(1U << X86_EXC_UD);
- 
-     vmcb_set_exception_intercepts(vmcb, bitmap);
-+    svm_vmcb_unmap(v, vmcb);
- 
-     /* Give access to MSR_SPEC_CTRL if the guest has been told about it. */
-     svm_intercept_msr(v, MSR_SPEC_CTRL,
-@@ -598,13 +617,18 @@ void svm_sync_vmcb(struct vcpu *v, enum vmcb_sync_state new_state)
- 
- static unsigned int cf_check svm_get_cpl(struct vcpu *v)
- {
--    return vmcb_get_cpl(v->arch.hvm.svm.vmcb);
-+    const struct vmcb_struct *vmcb = svm_vmcb_map(v);
-+    unsigned int cpl = vmcb_get_cpl(vmcb);
-+
-+    svm_vmcb_unmap(v, vmcb);
-+
-+    return cpl;
- }
- 
- static void cf_check svm_get_segment_register(
-     struct vcpu *v, enum x86_segment seg, struct segment_register *reg)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
- 
-     ASSERT((v == current) || !vcpu_runnable(v));
- 
-@@ -645,12 +669,14 @@ static void cf_check svm_get_segment_register(
-         *reg = (struct segment_register){};
-         break;
-     }
-+
-+    svm_vmcb_unmap(v, vmcb);
- }
- 
- static void cf_check svm_set_segment_register(
-     struct vcpu *v, enum x86_segment seg, struct segment_register *reg)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
- 
-     ASSERT((v == current) || !vcpu_runnable(v));
- 
-@@ -679,6 +705,7 @@ static void cf_check svm_set_segment_register(
-     default:
-         ASSERT_UNREACHABLE();
-         domain_crash(v->domain);
-+        svm_vmcb_unmap(v, vmcb);
-         return;
-     }
- 
-@@ -716,33 +743,41 @@ static void cf_check svm_set_segment_register(
-         ASSERT_UNREACHABLE();
-         break;
-     }
-+
-+    svm_vmcb_unmap(v, vmcb);
- }
- 
- static int cf_check svm_set_guest_pat(struct vcpu *v, u64 gpat)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb;
- 
-     if ( paging_mode_shadow(v->domain) )
-         return 0;
- 
-+    vmcb = svm_vmcb_map(v);
-     vmcb_set_g_pat(vmcb, gpat);
-+    svm_vmcb_unmap(v, vmcb);
-+
-     return 1;
- }
- 
- static int cf_check svm_get_guest_pat(struct vcpu *v, u64 *gpat)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    const struct vmcb_struct *vmcb;
- 
-     if ( paging_mode_shadow(v->domain) )
-         return 0;
- 
-+    vmcb = svm_vmcb_map(v);
-     *gpat = vmcb_get_g_pat(vmcb);
-+    svm_vmcb_unmap(v, vmcb);
-+
-     return 1;
- }
- 
- static void cf_check svm_set_tsc_offset(struct vcpu *v, uint64_t offset)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
-     struct vmcb_struct *n1vmcb, *n2vmcb;
-     uint64_t n2_tsc_offset = 0;
-     struct domain *d = v->domain;
-@@ -750,25 +785,36 @@ static void cf_check svm_set_tsc_offset(struct vcpu *v, uint64_t offset)
-     if ( !nestedhvm_enabled(d) )
-     {
-         vmcb_set_tsc_offset(vmcb, offset);
-+        svm_vmcb_unmap(v, vmcb);
-         return;
-     }
- 
--    n1vmcb = vcpu_nestedhvm(v).nv_n1vmcx;
--    n2vmcb = vcpu_nestedhvm(v).nv_n2vmcx;
--
-+    /*
-+     * A vCPU stays in nested guest mode across a deschedule or a pause, so
-+     * this can run remotely with the L2 VMCB active: map both explicitly.
-+     */
-     if ( nestedhvm_vcpu_in_guestmode(v) )
-     {
-+        const struct nestedvcpu *nv = &vcpu_nestedhvm(v);
-+
-+        n1vmcb = svm_vmcb_map_one(v, nv->nv_n1vmcx, nv->nv_n1vmcx_pa);
-+        n2vmcb = svm_vmcb_map_one(v, nv->nv_n2vmcx, nv->nv_n2vmcx_pa);
-+
-         n2_tsc_offset = vmcb_get_tsc_offset(n2vmcb) -
-                         vmcb_get_tsc_offset(n1vmcb);
-         vmcb_set_tsc_offset(n1vmcb, offset);
-+
-+        svm_vmcb_unmap(v, n2vmcb);
-+        svm_vmcb_unmap(v, n1vmcb);
-     }
- 
-     vmcb_set_tsc_offset(vmcb, offset + n2_tsc_offset);
-+    svm_vmcb_unmap(v, vmcb);
- }
- 
- static void cf_check svm_set_rdtsc_exiting(struct vcpu *v, bool enable)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
-     u32 general1_intercepts = vmcb_get_general1_intercepts(vmcb);
-     u32 general2_intercepts = vmcb_get_general2_intercepts(vmcb);
- 
-@@ -783,13 +829,14 @@ static void cf_check svm_set_rdtsc_exiting(struct vcpu *v, bool enable)
- 
-     vmcb_set_general1_intercepts(vmcb, general1_intercepts);
-     vmcb_set_general2_intercepts(vmcb, general2_intercepts);
-+    svm_vmcb_unmap(v, vmcb);
- }
- 
- #ifdef CONFIG_VM_EVENT
- static void cf_check svm_set_descriptor_access_exiting(
-     struct vcpu *v, bool enable)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
-     u32 general1_intercepts = vmcb_get_general1_intercepts(vmcb);
-     u32 mask = GENERAL1_INTERCEPT_IDTR_READ | GENERAL1_INTERCEPT_GDTR_READ
-             | GENERAL1_INTERCEPT_LDTR_READ | GENERAL1_INTERCEPT_TR_READ
-@@ -802,6 +849,7 @@ static void cf_check svm_set_descriptor_access_exiting(
-         general1_intercepts &= ~mask;
- 
-     vmcb_set_general1_intercepts(vmcb, general1_intercepts);
-+    svm_vmcb_unmap(v, vmcb);
- }
- #endif /* CONFIG_VM_EVENT */
- 
-@@ -1360,7 +1408,12 @@ static void cf_check svm_inject_event(const struct x86_event *event)
- 
- static bool cf_check svm_event_pending(const struct vcpu *v)
- {
--    return v->arch.hvm.svm.vmcb->event_inj.v;
-+    const struct vmcb_struct *vmcb = svm_vmcb_map(v);
-+    bool pending = vmcb->event_inj.v;
-+
-+    svm_vmcb_unmap(v, vmcb);
-+
-+    return pending;
- }
- 
- static void cf_check svm_cpu_dead(unsigned int cpu)
-@@ -2318,45 +2371,55 @@ static void cf_check svm_invlpg(struct vcpu *v, unsigned long linear)
- static bool cf_check svm_get_pending_event(
-     struct vcpu *v, struct x86_event *info)
- {
--    const struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    const struct vmcb_struct *vmcb = svm_vmcb_map(v);
-+    bool pending = vmcb->event_inj.v;
- 
--    if ( !vmcb->event_inj.v )
--        return false;
-+    if ( pending )
-+    {
-+        info->vector = vmcb->event_inj.vector;
-+        info->type = vmcb->event_inj.type;
-+        info->error_code = vmcb->event_inj.ec;
-+    }
- 
--    info->vector = vmcb->event_inj.vector;
--    info->type = vmcb->event_inj.type;
--    info->error_code = vmcb->event_inj.ec;
-+    svm_vmcb_unmap(v, vmcb);
- 
--    return true;
-+    return pending;
- }
- 
- static uint64_t cf_check svm_get_reg(struct vcpu *v, unsigned int reg)
- {
-     struct vcpu *curr = current;
--    const struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    const struct vmcb_struct *vmcb = svm_vmcb_map(v);
-     struct domain *d = v->domain;
-+    uint64_t val = 0;
- 
-     switch ( reg )
-     {
-     case MSR_SPEC_CTRL:
--        return vmcb->spec_ctrl;
-+        val = vmcb->spec_ctrl;
-+        break;
- 
-     case MSR_SHADOW_GS_BASE:
-         if ( v == curr )
-             svm_sync_vmcb(v, vmcb_in_sync);
--        return vmcb->kerngsbase;
-+        val = vmcb->kerngsbase;
-+        break;
- 
-     default:
-         printk(XENLOG_G_ERR "%s(%pv, 0x%08x) Bad register\n",
-                __func__, v, reg);
-         domain_crash(d);
--        return 0;
-+        break;
-     }
-+
-+    svm_vmcb_unmap(v, vmcb);
-+
-+    return val;
- }
- 
- static void cf_check svm_set_reg(struct vcpu *v, unsigned int reg, uint64_t val)
- {
--    struct vmcb_struct *vmcb = v->arch.hvm.svm.vmcb;
-+    struct vmcb_struct *vmcb = svm_vmcb_map(v);
-     struct domain *d = v->domain;
- 
-     switch ( reg )
-@@ -2371,6 +2434,8 @@ static void cf_check svm_set_reg(struct vcpu *v, unsigned int reg, uint64_t val)
-         domain_crash(d);
-         break;
-     }
-+
-+    svm_vmcb_unmap(v, vmcb);
- }
- 
- static struct hvm_function_table __initdata_cf_clobber svm_function_table = {
-diff --git a/xen/arch/x86/hvm/svm/vmcb.c b/xen/arch/x86/hvm/svm/vmcb.c
-index a6f09672a7..4c48bbc76d 100644
---- a/xen/arch/x86/hvm/svm/vmcb.c
-+++ b/xen/arch/x86/hvm/svm/vmcb.c
-@@ -43,11 +43,25 @@ void free_vmcb(struct vmcb_struct *vmcb)
-     free_xenheap_page(vmcb);
- }
- 
-+struct vmcb_struct *svm_vmcb_map_one(const struct vcpu *v,
-+                                     struct vmcb_struct *va, paddr_t pa)
-+{
-+    return va;
-+}
-+
-+struct vmcb_struct *svm_vmcb_map(const struct vcpu *v)
-+{
-+    return svm_vmcb_map_one(v, v->arch.hvm.svm.vmcb, v->arch.hvm.svm.vmcb_pa);
-+}
-+
-+void svm_vmcb_unmap(const struct vcpu *v, const struct vmcb_struct *vmcb)
-+{
-+}
-+
- /* This function can directly access fields which are covered by clean bits. */
--static int construct_vmcb(struct vcpu *v)
-+static int construct_vmcb(struct vcpu *v, struct vmcb_struct *vmcb)
- {
-     struct svm_vcpu *svm = &v->arch.hvm.svm;
--    struct vmcb_struct *vmcb = svm->vmcb;
- 
-     vmcb->_general1_intercepts =
-         GENERAL1_INTERCEPT_INTR        | GENERAL1_INTERCEPT_NMI         |
-@@ -201,6 +215,7 @@ int svm_create_vmcb(struct vcpu *v)
- {
-     struct nestedvcpu *nv = &vcpu_nestedhvm(v);
-     struct svm_vcpu *svm = &v->arch.hvm.svm;
-+    struct vmcb_struct *vmcb;
-     int rc;
- 
-     if ( (nv->nv_n1vmcx == NULL) &&
-@@ -211,7 +226,10 @@ int svm_create_vmcb(struct vcpu *v)
-     }
- 
-     svm->vmcb = nv->nv_n1vmcx;
--    rc = construct_vmcb(v);
-+
-+    vmcb = svm_vmcb_map(v);
-+    rc = construct_vmcb(v, vmcb);
-+    svm_vmcb_unmap(v, vmcb);
-     if ( rc != 0 )
-     {
-         free_vmcb(nv->nv_n1vmcx);
-@@ -407,6 +425,7 @@ static void cf_check vmcb_dump(unsigned char ch)
- {
-     struct domain *d;
-     struct vcpu *v;
-+    struct vmcb_struct *vmcb;
- 
-     printk("*********** VMCB Areas **************\n");
- 
-@@ -425,7 +444,9 @@ static void cf_check vmcb_dump(unsigned char ch)
-                 continue;
-             }
-             printk("\tVCPU %d\n", v->vcpu_id);
--            svm_vmcb_dump("key_handler", v->arch.hvm.svm.vmcb);
-+            vmcb = svm_vmcb_map(v);
-+            svm_vmcb_dump("key_handler", vmcb);
-+            svm_vmcb_unmap(v, vmcb);
- 
-             process_pending_softirqs();
-         }
-diff --git a/xen/arch/x86/hvm/svm/vmcb.h b/xen/arch/x86/hvm/svm/vmcb.h
-index 28dae325ce..9d61767ec7 100644
---- a/xen/arch/x86/hvm/svm/vmcb.h
-+++ b/xen/arch/x86/hvm/svm/vmcb.h
-@@ -559,6 +559,15 @@ struct vmcb_struct {
- struct vmcb_struct *alloc_vmcb(void);
- void free_vmcb(struct vmcb_struct *vmcb);
+Changes in v3:
+- New in this version.
+
+For reviewers: with a slot cleared and invalidated at its last unmap,
+a per-vCPU mapcache's maphash saves only the search for a free slot,
+and a second slot for a page mapped twice at once.  One page in two
+slots is fine, and already happens when it is not in the maphash.  So
+per-vCPU mapcaches could drop the maphash, and with it their garbage
+map and wrap-time flush.  In v5, or as a follow-up?
+---
+ xen/arch/x86/domain_page.c        | 53 +++++++++++++++++++++++++------
+ xen/arch/x86/include/asm/domain.h |  5 ++-
+ 2 files changed, 48 insertions(+), 10 deletions(-)
+
+diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
+index 6b662706fb..4198ee7c18 100644
+--- a/xen/arch/x86/domain_page.c
++++ b/xen/arch/x86/domain_page.c
+@@ -130,6 +130,26 @@ static void mapcache_exit(struct mapcache_domain *dcache)
+ #define MAPCACHE_L1ENT(idx) \
+     __linear_l1_table[l1_linear_offset(MAPCACHE_VIRT_START + pfn_to_paddr(idx))]
  
 +/*
-+ * Access a VMCB of a vCPU that may not be current.  svm_vmcb_map() takes
-+ * the active VMCB, svm_vmcb_map_one() a specific one.
++ * Clear a slot's PTE.  For a per-vCPU mapcache (HVM domains only), then also
++ * drop the slot's translations from this CPU's TLB, at its address and at its
++ * alias in the per-domain mirror, which every HVM domain has.  No other CPU
++ * can hold them: the vCPU's page-tables are loaded on one CPU at a time, and
++ * loading other page-tables flushes non-global translations.
 + */
-+struct vmcb_struct *svm_vmcb_map_one(const struct vcpu *v,
-+                                     struct vmcb_struct *va, paddr_t pa);
-+struct vmcb_struct *svm_vmcb_map(const struct vcpu *v);
-+void svm_vmcb_unmap(const struct vcpu *v, const struct vmcb_struct *vmcb);
++static void mapcache_zap(const struct mapcache_domain *dcache,
++                         unsigned int idx)
++{
++    unsigned long va = MAPCACHE_VIRT_START + pfn_to_paddr(idx);
 +
- int  svm_create_vmcb(struct vcpu *v);
- void svm_destroy_vmcb(struct vcpu *v);
++    l1e_write(&MAPCACHE_L1ENT(idx), l1e_empty());
++    if ( dcache )
++        return;
++
++    flush_tlb_one_local(va);
++    flush_tlb_one_local(va - PERDOMAIN_VIRT_START + PERDOMAIN_ALT_VIRT_START);
++}
++
+ void *map_domain_page(mfn_t mfn)
+ {
+     unsigned long flags;
+@@ -176,6 +196,14 @@ void *map_domain_page(mfn_t mfn)
+     {
+         idx = hashent->idx;
+         ASSERT(idx < cache->entries);
++        /*
++         * An entry the maphash kept holds on to its slot, not to its mapping
++         * (see unmap_domain_page()): map the page again.  No flush is needed,
++         * as the slot has mapped nothing else since.
++         */
++        if ( !hashent->refcnt )
++            l1e_write(&MAPCACHE_L1ENT(idx),
++                      l1e_from_mfn(mfn, __PAGE_HYPERVISOR_RW));
+         hashent->refcnt++;
+         ASSERT(hashent->refcnt);
+         ASSERT(mfn_eq(l1e_get_mfn(MAPCACHE_L1ENT(idx)), mfn));
+@@ -208,8 +236,8 @@ void *map_domain_page(mfn_t mfn)
+                 if ( hashent->idx != MAPHASHENT_NOTINUSE && !hashent->refcnt )
+                 {
+                     idx = hashent->idx;
+-                    ASSERT(l1e_get_pfn(MAPCACHE_L1ENT(idx)) == hashent->mfn);
+-                    l1e_write(&MAPCACHE_L1ENT(idx), l1e_empty());
++                    ASSERT(!(l1e_get_flags(MAPCACHE_L1ENT(idx)) &
++                             _PAGE_PRESENT));
+                     hashent->idx = MAPHASHENT_NOTINUSE;
+                     hashent->mfn = ~0UL;
+                     break;
+@@ -273,32 +301,39 @@ void unmap_domain_page(const void *ptr)
  
+     local_irq_save(flags);
+ 
++    /*
++     * The maphash keeps a freed slot, not its mapping: the page may change
++     * hands meanwhile.  A domain-wide mapcache's translation left in a TLB
++     * is covered by the flush the allocator makes before reusing an owned
++     * page.
++     */
+     if ( hashent->idx == idx )
+     {
+         ASSERT(hashent->mfn == mfn);
+         ASSERT(hashent->refcnt);
+         hashent->refcnt--;
++        if ( !hashent->refcnt )
++            mapcache_zap(dcache, idx);
+     }
+     else if ( !hashent->refcnt )
+     {
++        /* The entry replaced has no mapping left: mark its slot as garbage. */
+         if ( hashent->idx != MAPHASHENT_NOTINUSE )
+         {
+-            /* /First/, zap the PTE. */
+-            ASSERT(l1e_get_pfn(MAPCACHE_L1ENT(hashent->idx)) ==
+-                   hashent->mfn);
+-            l1e_write(&MAPCACHE_L1ENT(hashent->idx), l1e_empty());
+-            /* /Second/, mark as garbage. */
++            ASSERT(!(l1e_get_flags(MAPCACHE_L1ENT(hashent->idx)) &
++                     _PAGE_PRESENT));
+             set_bit(hashent->idx, cache->garbage);
+         }
+ 
+-        /* Add newly-freed mapping to the maphash. */
++        /* Add the newly-freed slot to the maphash, without its mapping. */
++        mapcache_zap(dcache, idx);
+         hashent->mfn = mfn;
+         hashent->idx = idx;
+     }
+     else
+     {
+         /* /First/, zap the PTE. */
+-        l1e_write(&MAPCACHE_L1ENT(idx), l1e_empty());
++        mapcache_zap(dcache, idx);
+         /* /Second/, mark as garbage. */
+         set_bit(idx, cache->garbage);
+     }
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index f84ac15759..0e405157b4 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -74,7 +74,10 @@ struct mapcache_vcpu {
+     /* Shadow of mapcache_domain.epoch. */
+     unsigned int shadow_epoch;
+ 
+-    /* Lock-free per-VCPU hash of recently-used mappings. */
++    /*
++     * Lock-free per-VCPU hash of recently-used mappings.  An entry without
++     * references keeps its slot but not its mapping (see unmap_domain_page()).
++     */
+     struct vcpu_maphash_entry {
+         unsigned long mfn;
+         uint32_t      idx;
 -- 
 2.55.0
 
