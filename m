@@ -4,46 +4,49 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 434ADCCF2E4
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 08:59:43 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1454008.1667472 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id B0524CCF2D6
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 09:07:03 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1454015.1667486 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xIjDL-0002px-PK; Mon, 19 Oct 2026 08:59:27 +0000
+	id 1xIjKI-0004Rr-GX; Mon, 19 Oct 2026 09:06:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1454008.1667472; Mon, 19 Oct 2026 08:59:27 +0000
+Received: by outflank-mailman (output) from mailman id 1454015.1667486; Mon, 19 Oct 2026 09:06:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xIjDL-0002pq-Mg; Mon, 19 Oct 2026 08:59:27 +0000
-Received: by outflank-mailman (input) for mailman id 1454008;
- Mon, 19 Oct 2026 08:59:27 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Mykyta_Poturai@epam.com>) id 1xIjDL-0002pk-12
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 08:59:27 +0000
+	id 1xIjKI-0004Rk-Dh; Mon, 19 Oct 2026 09:06:38 +0000
+Received: by outflank-mailman (input) for mailman id 1454015;
+ Mon, 19 Oct 2026 09:06:37 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1536999750008425@swg.vates.tech>)
+ id 1xIjKH-0004Re-I6
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 09:06:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xIjDK-00Aw5B-Dm
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 10:59:26 +0200
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Mykyta_Poturai@epam.com>)
- id 6ad5dbdd-bab6-0a2a0a5309dd-0a2a4504d906-46
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 10:59:26 +0200
-Received: from [52.101.69.87]
- (helo=AM0PR83CU005.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Mykyta_Poturai@epam.com>)
- id 6ad5dbee-b57f-0a2a45040019-3465455754ea-3
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 10:59:26 +0200
-Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- (2603:10a6:102:30d::12) by BESPR03MB911498.eurprd03.prod.outlook.com
- (2603:10a6:b10:109::17) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.19; Mon, 19 Oct
- 2026 08:59:23 +0000
-Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
- ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
- ([fe80::b8c6:f37a:987a:beb%5]) with mapi id 15.21.0522.017; Mon, 19 Oct 2026
- 08:59:23 +0000
+ id 1xIjKG-000gA7-D9
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 11:06:36 +0200
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1536999750008425@swg.vates.tech>)
+ id 6ad5dd9b-2eae-0a2a0a5409dd-0a2a450299c8-2
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 11:06:36 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1536999750008425@swg.vates.tech>)
+ id 6ad5dd9b-6ca4-0a2a45020019-b9ff1c128a67-3
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 11:06:36 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1536999750008425.006 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 19 Oct 2026 09:06:31 +0000
+Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
+ (Authenticated sender: teddy.astie)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 1345D80A47;
+ Mon, 19 Oct 2026 11:06:31 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -55,310 +58,197 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Errors-To: xen-devel-bounces@lists.xenproject.org
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=DrMzcHifj+1+vbgJsrbo5ksbtEA4K4D5pSH4G7NNegBQ1eUuYekV0oiF6sMuOo8PgNi5ZkHgq9whLcS35Q/FrJE9cyP41PNqhqMPsWxb3oN0ZBqZyilwaekrdiB8v5MoIIkidmhNMB8bch99jXhQKmzla2cCT4wfhbHAg2HxDh7OV7kLourN2tE4EYzvN26UV+nz/xIYw05dOAdx9bvX2TITr7aiNzMsZU0M1zcWnIBNaRXPyF93aAQLxSJ8mvLohwdA4j8pP8eC6Q1p3vHHsJewcShKCgWIrIBNLijbcUR6fgFIGBTdIpUtTkyO8i0U/dWDG6FOhUwgs7vIjAKpYw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=sH4kTxF+BQMlIy/y9w/d+JkjyjOKGLMjkmkpX/++0R4=;
- b=B7qYRbACh9UnK81kHdgvMcZ2VPJkUbz/0wtx1ah0VuKQra0AnCVjxf/5JAjO6OANc55fTUMLpEmZcyrdq41z2CPXmIoTFLFJN4IoDo/ORzX8/9e4gRNrXxH4lLq1EyP4t/bz52rDcNj76MLYyGtbmJ5X5Y0IV67TjtgU2fD3swQngu2LAYjCeFKUp2X4Kmmi32EWVQhxYKqzOi72iOpXJc7HEEzxBD6UNBe0wb7majUG0TxYXrKYGRrUEa1CFFiEU2yCAy1tkUzRfr/JM5C5QCiuEtRfVxPEKx9qvPRp/bCOdVEe08AetDMwo8h0lXL4GHemsRKMLjGPUPr4mb3qgA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
- dkim=pass header.d=epam.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=sH4kTxF+BQMlIy/y9w/d+JkjyjOKGLMjkmkpX/++0R4=;
- b=g9VO9QMOkJeb0IYkVEi/CoaJdRyr/N7DhWcJWNEZ3RqSwHnYQDIJbY6CQ97UaLWHOkV+asvcn+ewzE+snLxm01TODnk3izPRb6lsgo0K6WjfwVAlHoLpipPE3Sts1rxhZxHArpdJQMBo4EdszltHyYaODwFQNnYJMS9okYmKWkDALjSvarjG0UA3B8LguqEg74s2Y9lwfHXmwNao3oVz7eULKfstOgdNV9Eo+MmjZnojIHRZjljo3kmc7uidwWAbMHQMyo47+D7mpmExWeVhzN7qEqWn6IGtxDZrSfCDpTmEgSov/cNN9qUFGQAKm1t3iHRqb1tgNWuVMzQwExdnOw==
-From: Mykyta Poturai <Mykyta_Poturai@epam.com>
-To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
-	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Rahul Singh <rahul.singh@arm.com>
-Subject: [PATCH v5] xen/arm: smmuv3: Add support for removing devices
-Thread-Topic: [PATCH v5] xen/arm: smmuv3: Add support for removing devices
-Thread-Index: AQHdX6gi8viU2M73vEaKXA5NzGRTmQ==
-Date: Mon, 19 Oct 2026 08:59:23 +0000
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=S9rlU3fumzPMwHOSR+1Y+kPQ1ZexeMRkIPsVGMEgYuk=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=NTOulvxSiSPrStgCiQlK4aAeuJVoYrLAKYL59o8sn4gTcZvQ69cfhDrfbVrRJcoh3QLWbKs3B
+ MgGdUWBhq/Gf2KpyRVLG+sWNc0ZTqheplKCxpB7OJX8f/3WJeZApdX9OYW6pZO1GrBxINGGwSMJ
+ 1UVQtPd/2w8uX9aL5TfM7GZkAnXYEBraC5fXArFXRPeDiOZ0mJY1bMKkYccF5qJuNWq/RYbzT0g
+ jQN6FWyM9D2qFZdttmfCzsjCdnovLrlQe8IPoIFh42G/9n7jtUndPcGukfYHHk1FqAniNsSPZLZ
+ LRi2/YIio1t9qCwWMb1JgYKlwfa0OMWopR3ZyPe2VCYQ==
+X-Zone-Loop: 8da58021f940459d198dd400909f01bba4825d6a085c
+x-campaign-type: default
+x-transaction-id: 60070b06-a0a4-4c27-a9f2-9210e05f645a
+x-swg-uid: 01-a5fc6352-9387-497e-8348-b1c041fdde66
+X-Mailer: Sweego
 Message-ID:
- <5bf81a2b31f182d1339e89fb65e445bc20b1a865.1792400044.git.mykyta_poturai@epam.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=epam.com;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|BESPR03MB911498:EE_
-x-ms-office365-filtering-correlation-id: 8ecbdcfa-f17f-4e5c-4aef-08df2dbf4541
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|38070700021|56012099006|260925021911599003|260925022911599003|11063799006|261009223027099003|260925021311599003|10067099003|18002099003|6133799003;
-x-microsoft-antispam-message-info:
- BNHJhPAzGAG7USU8y1b7/Hg8uj3mUp+UQtsi/SqQG/9VGALwm1SVnSe3R5mUR1XXaaYsN5uE0OgW9NtVJ4Nd+F9ZAPtLOMBxSt5zsu4HW4dL5kqwAHpYDsaeE7+GblY63UnXLOtnIdMYpKU/QD38uNA00fEqMWHz7OlrEnLBz6EqkXMd6drux8SQcFg4mzz5eJm8I83+srYfrcZHZGCatv8ftj0Ld7FxhlvxuAlxsKneNC1CiPRVgyuSrVh7Xd7n40z+UTlK3iM6U1l9lJOHltRVf6aQFFox+mCEyHtxsuN++rkentwBgx+PGwFPvmZoDGW/aZeIrQtud7KNjm9INlQxrMvwNHTMbTEqnkPNofSO5rYD8j0yUdTmM1/TZo7LWJgvu0Y1Jvt+7x70tRgN8vLDwZYS6NN0NkasjfRnqEkmhA2jvIHRriDmdrcZChrCJMfujDequzPnTLAE4BxI3iMInqt4Fxk6HAX7UwRN2yvY1O96OO6lt/elKQv0ePNfxRuIjg7LQRGO7XBDKZ+K5QsFjJL2aSB3xIZa21Bgf7s/4GAS6418zAJQlpwd4wktDcpVMK8TweecGflZhsCa9LjUYxbR/zjvdQV4i+dkk36B8XaH8mowHF8+R9Ak4X76XhER6vRH8NXpTUeZG7b83XQ9K8mccOkKPf8WK1dJ9oc=
-x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(38070700021)(56012099006)(260925021911599003)(260925022911599003)(11063799006)(261009223027099003)(260925021311599003)(10067099003)(18002099003)(6133799003);DIR:OUT;SFP:1102;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?SFtcWMPcUgHq7/7o04ADry/NnF1aK6uXCVa9Z7hPWJnMI+y0+zGCJI6v23?=
- =?iso-8859-1?Q?rRL5DOAaSnqiW96Xfc2AZ0K64nWUau0rIZC4tcwdqCeyIdQt9nCX+JF1fi?=
- =?iso-8859-1?Q?Xeub4eyB/YO8VA8patxu/DmRAbugyot2tarGGic03eo+uTjw7lAoBfvQO1?=
- =?iso-8859-1?Q?oWs8XZCX3DgxPleOq/GbyxLmGjjblZ0xGdUWyjNrimY5AXZv2Lmf1BjWs1?=
- =?iso-8859-1?Q?aH4ILvluq6gGOcmGDh/4UMfPM+imCo6H+NmB0ZBbCF+sEJVUSi0ZT2UBxK?=
- =?iso-8859-1?Q?XluiHCrgYpCpSoXOY5f2ImcnWPy+PLSXEBNAhQTR5TS/TXEPazHyLxgoZZ?=
- =?iso-8859-1?Q?oZfSNtNRMSgpbiqAHJOvUQFZ1+8VW5XUgm+YdDNDvBFWmnxijD2B3PEmSc?=
- =?iso-8859-1?Q?6hGTSH4JZcyB2bMKRJED6sXWggWrrsPIlU1xo9W54HXVgu5iciKj/LA5d2?=
- =?iso-8859-1?Q?5XWa51yLYQWX3vd+ai3ZwD88dyTodu0PO5ZUqCaOzvSvTX6GiTB1OxVu/p?=
- =?iso-8859-1?Q?Wi8FaJ++BEmlc2Hvr6AjjgWx+aqUX74FyCtZ5FvZffhiAQKiiltzMj2FKd?=
- =?iso-8859-1?Q?e6WsYHVLGUOXJbUQhFPiDn3AxdKfkp0VwGd6Cw5t+/nZSqujNB1i2pqDA7?=
- =?iso-8859-1?Q?rQDPmkWnHr5raTPyy4enx4XsYAbXvWlA0Qm6dJH59oPGOZb4q2j1nTIf7Z?=
- =?iso-8859-1?Q?hSa33NILKXsGHwofUvjFtzS05c8ePiDYKwpEQrRnV2TA2VkcpFYzeGLy2h?=
- =?iso-8859-1?Q?BBS0OIXVXmfAHSvO8dRZTm20CHOB4E5CXyFPV4RXpRp63u7lmYQJYzIk7C?=
- =?iso-8859-1?Q?cCEGJWyish9EnizrttXSDjaD2dX9LI8z9aNETBp12JyHKaQ3M5+GIXSTtt?=
- =?iso-8859-1?Q?19qnc2ytwNdQxxo0Uf6ACJlY1+h6L5HsoyaMl9l5zcZW3qRtAuexZNGyw3?=
- =?iso-8859-1?Q?elWI7eMJnABWP6YSNcNROVk6oaGurhnqAzIh59uOezRDIh0wIdUm1eYtGq?=
- =?iso-8859-1?Q?kVgjKIEEWxpmtWZk+E6hLjDVFxmamekgTjwPnqB5SehiiQs7YfYoVF58wX?=
- =?iso-8859-1?Q?E/1fXkDl6FfltKHpQQaq39VJJGm2gSbtqKKoqJw3B2l1clkllQBmEUoWXM?=
- =?iso-8859-1?Q?a0LwtPO/C2tDgIxd940kIYVQkRiU6iEPbUIzl0OiiB+WhfreuU0UHSG9Yn?=
- =?iso-8859-1?Q?8gHk5PuT90Eli+NdKhiaSsk6cyOtALNHPfAaDrnDWJKOkyj3Ft6ckE+Bay?=
- =?iso-8859-1?Q?qc2aElYjYn8ziKXFKkR6QvfmP8S/UzH2eLg5oXk5QgA21+jkeADR6WvoBu?=
- =?iso-8859-1?Q?w8fdJFdEuaVssFN8gJlaLigTYsiJj1NSrISI/NcrYpOZ/Wu+65/kQeuvFh?=
- =?iso-8859-1?Q?JzKX1A3Lf7vHhIMgkxuDdoNFtKAgltAfVV+us6FAcUgRABH/WBJbKbuFPY?=
- =?iso-8859-1?Q?aJAoziquipEtuylvSIOTyARNfVV9XdCn0pHdrEFa66kJa7gbLXnesIK7mt?=
- =?iso-8859-1?Q?w6Zu30WEJ31xFww4KNbaLVRp8A4Vulw2pZQwglMhV/n3cNeo8NMqQbQ2i2?=
- =?iso-8859-1?Q?2oJbtNiPqEejBSqh076osbUL40Hz8mJcVigqMUFqEer6nGljAVRnRsEJnk?=
- =?iso-8859-1?Q?HY68XFViqUe8p6iuK6wQBH0It4dsWgUBcvv/FB9qqsBoBr7yeC6nbg160J?=
- =?iso-8859-1?Q?Fs7PvNJNCkIhClfuAm/xSmlj2VSzFpXZawBu364SsesLWhP+rRY5T5BMc1?=
- =?iso-8859-1?Q?FtIqGtm3BarUnatDI8CAQ+08jHA8PT9Pg7zlTn3V6q2TCHxsbjPd0Oh3v3?=
- =?iso-8859-1?Q?89/pgI63ng=3D=3D?=
-Content-Type: text/plain; charset="iso-8859-1"
-Content-Transfer-Encoding: quoted-printable
+ <1792400791.8631fc262581453bbf619ec5b2062170.1a1536999750008425@vates.tech>
+x-swg-bid: 1792400791.8631fc262581453bbf619ec5b2062170.1a1536999750008425
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+X-Originating-IP: [37.26.189.201]
+Date: Mon, 19 Oct 2026 11:06:30 +0200
 MIME-Version: 1.0
-X-OriginatorOrg: epam.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 8ecbdcfa-f17f-4e5c-4aef-08df2dbf4541
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Oct 2026 08:59:23.3451
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: cKKDDiD33PCxtxLZHU0vKj8qMkf0YwokFsIxtGZHIB2i01rdMH1DRU5MOEQBtYEso8d1FAEbwqqTGgDoFIVavg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BESPR03MB911498
-X-purgate-ID: tlsNG-ebf023/1792400366-538C1B50-84501B9C/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/8] x86/xen/pv: Don't setup runstate area too early
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ David Woodhouse <dwmw2@infradead.org>, x86@kernel.org,
+ linux-kernel@vger.kernel.org
+References: <1792170295.8631fc262581453bbf619ec5b2062170.1a145ac82530008425@vates.tech>
+ <1792170392.8631fc262581453bbf619ec5b2062170.1a145adfbff0008425@vates.tech>
+ <b2c02327-4d77-4ab3-855c-26b5d357f348@citrix.com>
+ <e934ac9c-cf59-446a-9b1f-ddca4c43d1c5@citrix.com>
+Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+Autocrypt: addr=teddy.astie@vates.tech; keydata=
+ xsDNBGn5sK8BDACuzSrrTjpVf4ay06OYB6yY0J1PqKffihoNMtrQRZjAHxoAPC7LTBVHV/XO
+ Zw5HJc+9R71z1JV+iYg6z3jPziGKzX8Fj3ZXlzJPmpf1PuETH3KdbvtJT4ny+OGntnJntUoR
+ KRPhTirr6yNeBk/637O3CQXjtqFUPZnko8OI/o1yawIBhJJAWicutjkkUgd28Bh6HV9EIumH
+ tCBgn5/1A/fpm9624MMgYLsA8qjC4XsoovQvFCaO8HEhvfzrrTZHjn/nPeB9SigxIxXW8YaT
+ VqMdqul07o72m3eA2mf+LMu9a04FX/d4wbxBLtELm+1jIrbtyaFZEMOLv/haSiS/Lj3btJH/
+ EoucejoZ5SH49ksmVAmKOLktOaTQ8b2gEvP7iaKiIiszCCtOSRohr+2GvDsDeLvVZnlR3I+S
+ PhHar7TPKjFz0G3DPNolyjXywNqOAMpomSPi8lSwjAFsxOtQbcck/qRGRSNk4DAmH70pA+89
+ MXfQXZ3qt1Q01B1+sU0I8xsAEQEAAc0kVGVkZHkgQXN0aWUgPHRlZGR5LmFzdGllQHZhdGVz
+ LnRlY2g+wsENBBMBCAA3FiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmn5sK8FCQWjmoACGwME
+ CwkIBwUVCAkKCwUWAgMBAAAKCRBmD6nRAsvP0ID6DACGOktArFbLKHNzuyOVCskwfUZPla6Z
+ pd3GZ8r61SrAKePIr2BnpgPkd0hV3bSRkRLIrgjzR2NRCzfp0x0HfuhcYfAYPR46XHTvjaJE
+ v99sT/vGUG1BZguYDOScSEpgSNaNlYum3RKZbMuROxdK8G+YHccJY8PvWSq2K2yiae2KGiAv
+ 1yjnZxug9/PtDfX8vQFUSg2w1ukRDf50wvDohN1zUQfFtofOP2xCRsDZiHAlQ0pF+aUjXQhP
+ eP3IdpfWc8cyRLXF06Rk46YMYCytweGtGdHcqAfrVthl84129ZPN422k/voW0sm14gjYlGcT
+ UwgnYlFRk2FLq0QeKEDcS0aj3o3EVAQCrayoGzi1pnlIKE3PRGUcUzjGVvzQ/po24gOjwba9
+ Egr/Wmu3MQlx/7A8zT5QBzF/n+RYdLNQ0Eu6YnUwf0Z1uieqNaon+olyIRFiLb/hCZHO6ekN
+ f5vrm2clHUbQAYaPQebknujoKBo6ZLHg0WM1gZS01Gz+aUpKsUfOwM0EafmwsAEMAKiQiZa3
+ yQMmc/h3sDbfVHPSiBA4IMI/NAB7IotzPHq1GzCpsoVILAhF/INbWjxJ3DbVf+en3/FvdVZg
+ 2S38xtnth0njNdlVKpyxm054phKjbdoFDwaknWolS4hrddTmetSG5/52AjtmPFtlXAk0NmLv
+ fJnW3seXVQbgM7sW/MNXPP5UKDpkGnLhnvej+GU0s3109sJeXT5ImVdphFs9cvyZyBT9t1Pb
+ Rowv58EgV0zE4hbAeVkULAbxFV5b/ExTjjGVHoX7CVhWxvCiTqCUoXZRkUE9C3FnkzEFRkKb
+ Yu6NCfiHfEyB3Xyg9hfdrRgjMRq907zCof+nDtWxGz1MSEuvTj1g9GZ049Bennqzjc/Q+0ov
+ XoK4jm+Py0FiUGUaA6yhexficjH+kCR/xDbVnWrMhSLB4AuTBT9HjfZI6gk3uYLhoT8Pig4/
+ eVtR2Q1wZIJsFToR6ofGuyECwFcs+PUXN7fmGRSiPXgjAr/zIUBdW0VWCE3OGPNqtRk2E5s6
+ IQARAQABwsD8BBgBCAAmFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmn5sLAFCQWjmoACGwwA
+ CgkQZg+p0QLLz9DncQwAg76IehTemLIfrB8T9WIBZrI4kUV7G7a4rjiVoUiHYN5QwhnbZnsa
+ JDlt+Ezoqy/510eo2bCSzvW5xXYPgyjcuOPwgQo1Qp764QxyX6rld2f2RcWkDuBHun55ZWXj
+ by8o21ginPRwruBVYY5rVf3DV1iBu4NurUeHtyFk/dS0XTOQi2wVUb17sW/+ybCEokdVacZG
+ zOqP/OmwHrF8ylXlXnhQq6e3r+J+T8fuoGJelm/CJiMwyP6cEWE8sxVqX/iqwjwUYkuOCpE+
+ lOWSvdNHgoEkWR0RXBPQjnGmLKbfTl/QDXLk6NP2/r9uxm2HL6Ei3QJKSEdrp+XZaVnk/Off
+ O485NOTKwGOxyWb006cTMh53xPkAJFQu4Tvdj+odsHz88jqw5wfPG0BYWx0I/FspYj7N9kZR
+ 8ULR9nX0LvpzJ/kB4NgHIUt8YtIL6ZSfM2dbF7fKzvx1UqFfvozJZwFzfEieJLXa4nlGgR6D
+ x9fhaZEsniw8/bYgC3igkk5YJiOa
+In-Reply-To: <e934ac9c-cf59-446a-9b1f-ddca4c43d1c5@citrix.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------R0HTcQ4F0G50aXHnJOfKLM7X"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1792400791261
+X-purgate-ID: tlsNG-720697/1792400796-321D72AC-BE0B2258/0/0
 X-purgate-type: clean
-X-purgate-size: 6382
+X-purgate-size: 6790
 
-Allow for removing devices from SMMUv3. arm_smmu_deassign_dev handles
-most of the work by disabling ATS and zeroing STEs. Additionally, unset
-the dt_device_is_protected flag and free no longer needed smmu_master.
-Free iommu_fwspec for PCI devices only, for DT devices it is handled by
-generic IOMMU layer.
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------R0HTcQ4F0G50aXHnJOfKLM7X
+Content-Type: multipart/mixed; boundary="------------7yW0Wscd23IA2rw5ayHl3NGg";
+ protected-headers="v1"; hp="clear"
+Message-ID: <f15bd0d3-8310-4622-9852-c4cd8adce71e@vates.tech>
+Date: Mon, 19 Oct 2026 11:06:30 +0200
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2 1/8] x86/xen/pv: Don't setup runstate area too early
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xenproject.org
+Cc: Juergen Gross <jgross@suse.com>,
+ Boris Ostrovsky <boris.ostrovsky@oracle.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Oleksandr Tyshchenko <oleksandr_tyshchenko@epam.com>,
+ David Woodhouse <dwmw2@infradead.org>, x86@kernel.org,
+ linux-kernel@vger.kernel.org
+References: <1792170295.8631fc262581453bbf619ec5b2062170.1a145ac82530008425@vates.tech>
+ <1792170392.8631fc262581453bbf619ec5b2062170.1a145adfbff0008425@vates.tech>
+ <b2c02327-4d77-4ab3-855c-26b5d357f348@citrix.com>
+ <e934ac9c-cf59-446a-9b1f-ddca4c43d1c5@citrix.com>
+Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+Autocrypt: addr=teddy.astie@vates.tech; keydata=
+ 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
+ x9fhaZEsniw8/bYgC3igkk5YJiOa
+In-Reply-To: <e934ac9c-cf59-446a-9b1f-ddca4c43d1c5@citrix.com>
 
-Rework dt_device_set_protected to accept a boolean parameter, update
-callsites.
+--------------7yW0Wscd23IA2rw5ayHl3NGg
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
----
+TGUgMTYvMTAvMjAyNiDDoCAyMDowNCwgQW5kcmV3IENvb3BlciBhIMOpY3JpdMKgOg0KPiBP
+biAxNi8xMC8yMDI2IDY6MzMgcG0sIEFuZHJldyBDb29wZXIgd3JvdGU6DQo+PiBPbiAxNi8x
+MC8yMDI2IDY6MDYgcG0sIFRlZGR5IEFzdGllIHdyb3RlOg0KPj4+IFRoaXMgaXMgbm8gbG9u
+Z2VyIHJlcXVpcmVkIHNpbmNlIFsxXS4NCj4+Pg0KPj4+IEF0IHRoaXMgbW9tZW50IG9mIGJv
+b3QsIHBlcl9jcHUgYXJlYXMgYXJlIG5vdCBpbml0aWFsaXplZCwgd2hpY2ggcHJldmVudHMN
+Cj4+PiB1c2luZyBWQ1BVT1BfcmVnaXN0ZXJfcnVuc3RhdGVfcGh5c19hcmVhIGFzIHBlcl9j
+cHVfcHRyX3RvX3BoeXMoKSB3b3VsZA0KPj4+IG1pc2JlaGF2ZSBpbiB0aGlzIGNhc2UuDQo+
+PiBUaGlzIGlzbid0IHJlYWxseSBjb3JyZWN0Lg0KPj4NCj4+IFRoZSBwZXItY3B1IGFyZWEg
+Zm9yIHRoZSBCU1AgaXMgd2l0aGluIHRoZSBtYWluIGltYWdlLCB3aGljaCBpcyB3aHkgdGhl
+DQo+PiBsb2dpYyBmdW5jdGlvbnMgdG9kYXkuwqAgV2hhdCdzIG1pc3NpbmcgaXMgdGhlIGNh
+bGwgdG8NCj4+IHBjcHVfc2V0dXBfZmlyc3RfY2h1bmsoKSB3aGljaCB0ZWxscyBwZXJfY3B1
+X3B0cl90b19waHlzKCkgYWJvdXQgd2hlcmUNCj4+IHRoZSBCU1AgZGF0YSBpcy4NCj4+DQo+
+PiBJIHRoaW5rIHlvdSB3YW50IHRvIHNheToNCj4+DQo+PiAiQSBmdXR1cmUgY2hhbmdlIHdh
+bnRzIHRvIHVzZSBwZXJfY3B1X3B0cl90b19waHlzKCkgaW4NCj4+IHhlbl9zZXR1cF9ydW5z
+dGF0ZV9pbmZvKCksIGJ1dCB0aGlzIGNhbGwgaXMgdG9vIGVhcmx5LsKgIEl0IHR1cm5zIG91
+dCB0bw0KPj4gYmUgbm8gbG9uZ2VyIHJlcXVpcmVkIHNpbmNlIC4uLiINCj4+DQo+Pj4gWzFd
+IDhhMjJiOTk5NmIwMCAoInhlbjogZHJvcCB4ZW5fc2NoZWRfY2xvY2sgaW4gZmF2b3VyIG9m
+IHVzaW5nIHBsYWluIHdhbGxjbG9jayB0aW1lIikNCj4+PiAtLS0NCj4+IE1pc3NpbmcgU29C
+Lg0KPj4NCj4+IH5BbmRyZXcNCj4gDQo+IEJ1dCB0aGlzIGRvZXMgcG9zZSBhbm90aGVyIHF1
+ZXN0aW9uLi4uwqAgwqBMaW51eCBvbmx5IGV2ZXIgcmVnaXN0ZXJzIHRpbWUNCj4gcmVmZXJl
+bmNpbmcgdkNQVSAwLsKgIFdoeSBhcmUgdGhlIHRhcmdldHMgb2YgdGhlIHJlZ2lzdHJhdGlv
+biBpbiB0aGUNCj4gcGVyLWNwdSBhcmVhP8KgIFRoYXQncyBwcmVzdW1hYmx5IHdhc3RlZCBz
+cGFjZSBvbiBhbGwgQVBzLg0KPiANCg0KWWVzIGJ1dCBvbmx5IGZvciB0aGlzIGVhcmx5IFBW
+IGNhc2UsIHRoZXJlIGFyZSBvdGhlciBwbGFjZXMgd2hlcmUgDQp4ZW5fc2V0dXBfcnVuc3Rh
+dGVfaW5mbygpIGlzIGNhbGxlZCBmb3Igb3RoZXIgQVBzLg0KDQpCdXQgbG9va2luZyBhdCBp
+dCwgdGhlcmUgbWF5IGJlIHJlZHVuZGFudCBjYWxscyBvZiANCnhlbl9zZXR1cF9ydW5zdGF0
+ZV9pbmZvKCkuDQoNCj4gfkFuZHJldw0KDQpUZWRkeQ0K
 
-Tested on QEMU with SRIOV series[1] by repeatedly enabling/disabling
-VFs.
+--------------7yW0Wscd23IA2rw5ayHl3NGg--
 
-[1]: https://patchew.org/Xen/cover.1772806036.git.mykyta._5Fpoturai@epam.co=
-m/
+--------------R0HTcQ4F0G50aXHnJOfKLM7X
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-V4->V5:
-* drop dead domain lookup on the DT path
-* remove assert on  arm_smmu_deassign_dev error
-* drop redundant IS_ENABLED(CONFIG_HAS_PCI)
-* fix indentation
+-----BEGIN PGP SIGNATURE-----
 
-V3->V4:
-* s/u8/uint8_t/
-* assert pcidevs_locked
-* assert deassignment is only reachable by PCI
-* fix build error with HAS_PCI=3Dn
+wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmrV3ZYFAwAAAAAACgkQZg+p0QLLz9B3
+KAv/VqZr1kmFNF9miMXIqBNL4H8gEOUgZ9d6YuJj9V5lkFqkFFhKFejHwSfyxc3FJWMCre3Ycwvd
+bThooiv++8jlpo19iQgIaZQOb1M2eXgeug+meXUkgccjx9f5S8xWKT1B4bQOzf0mV07SCyjlKmj5
+EyACl7hvph8PHM0fFiPmw5OOy3EDKvgkw8YSXZMNnHMh3SZ0LRkMg/oK2DzypFlBWpPGdPVZtzFS
+XDEw21CutjknFF1u1JdJniELqMXmhcmua6Qx8F1GiQEJnn6eDR871vJI+nGvykLNn/9mBxQu4w+n
+BjzGXliVJY3Qz5YzUXnFj/aPaXyRlGRnAW5agEqelqvKquWW+0i7gM/+V7LaZPnzzpb628NOuUMI
+SBFmERSE0kWyCtUeExwdyUqasQOOZ7n4Teqzf0la1S1WMneZbeH2t+eZisFRrd/srtlLEAMjdKbu
+k/vOMEZfpGPgPxFq6r5jzm8Fzh/ohF7+emnGiQh1a9l12Do2TNlUOfhslSzy
+=pfB0
+-----END PGP SIGNATURE-----
 
-V2->V3:
-* free fwspec for pci devices
-* remove testing note from commit message
-
-V1->V2:
-* check for phantom functions
-* simplify pci/dt device split
-* improve error handling
-* don't try to free master for unprotected devices
-* rework dt_device_set_protected
----
- xen/drivers/passthrough/arm/ipmmu-vmsa.c |  2 +-
- xen/drivers/passthrough/arm/smmu-v3.c    | 72 +++++++++++++++++++++++-
- xen/drivers/passthrough/arm/smmu.c       |  4 +-
- xen/include/xen/device_tree.h            |  5 +-
- 4 files changed, 77 insertions(+), 6 deletions(-)
-
-diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthr=
-ough/arm/ipmmu-vmsa.c
-index fa9ab9cb13..0648f9b407 100644
---- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-+++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-@@ -1367,7 +1367,7 @@ static int ipmmu_add_device(u8 devfn, struct device *=
-dev)
-         }
-=20
-         /* Let Xen know that the master device is protected by an IOMMU. *=
-/
--        dt_device_set_protected(dev_to_dt(dev));
-+        dt_device_set_protected(dev_to_dt(dev), true);
-     }
- #ifdef CONFIG_HAS_PCI
-     if ( dev_is_pci(dev) )
-diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthroug=
-h/arm/smmu-v3.c
-index bf153227db..e1af615985 100644
---- a/xen/drivers/passthrough/arm/smmu-v3.c
-+++ b/xen/drivers/passthrough/arm/smmu-v3.c
-@@ -1493,6 +1493,75 @@ static int arm_smmu_assign_dev(struct domain *d, u8 =
-devfn, struct device *dev,
- static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn,
- 				 struct device *dev);
-=20
-+static int arm_smmu_remove_device(uint8_t devfn, struct device *dev)
-+{
-+	struct arm_smmu_master *master;
-+	struct iommu_fwspec *fwspec;
-+	struct domain *d =3D NULL;
-+
-+	fwspec =3D dev_iommu_fwspec_get(dev);
-+	if ( !fwspec )
-+		return -ENODEV;
-+
-+	master =3D dev_iommu_priv_get(dev);
-+	if ( !master )
-+		return -ENODEV;
-+
-+#ifdef CONFIG_HAS_PCI
-+	if ( dev_is_pci(dev) )
-+	{
-+		struct pci_dev *pdev =3D dev_to_pci(dev);
-+
-+		/* Ignore calls for phantom functions */
-+		if ( devfn !=3D pdev->devfn )
-+			return 0;
-+
-+		ASSERT(pcidevs_locked());
-+
-+		d =3D pdev->domain;
-+	}
-+	else
-+#endif
-+	{
-+		if ( !dt_device_is_protected(dev_to_dt(dev)) )
-+		{
-+			dev_err(dev, "Not added to SMMUv3\n");
-+			return -ENODEV;
-+		}
-+
-+		dt_device_set_protected(dev_to_dt(dev), false);
-+	}
-+
-+	if ( d )
-+	{
-+		/*
-+		 * For DT devices, iommu_remove_dt_device() returns -EBUSY if the
-+		 * device is still assigned, so d is always NULL on the DT path.
-+		 */
-+		ASSERT(dev_is_pci(dev));
-+
-+		if ( arm_smmu_deassign_dev(d, devfn, dev) )
-+			dev_err(dev, "Removing anyway\n");
-+	}
-+
-+	arm_smmu_disable_pasid(master);
-+
-+	dev_info(dev, "Removed master device (SMMUv3 %s StreamIds %u)\n",
-+		 dev_name(fwspec->iommu_dev), fwspec->num_ids);
-+
-+	xfree(master);
-+	dev_iommu_priv_set(dev, NULL);
-+
-+	/*
-+	 * For DT devices the fwspec is freed by iommu subsystem, but for PCI
-+	 * devices we need to free it here
-+	 */
-+	if ( dev_is_pci(dev) )
-+		iommu_fwspec_free(dev);
-+
-+	return 0;
-+}
-+
- static int arm_smmu_add_device(u8 devfn, struct device *dev)
- {
- 	int i, ret;
-@@ -1571,7 +1640,7 @@ static int arm_smmu_add_device(u8 devfn, struct devic=
-e *dev)
- 		}
-=20
- 		/* Let Xen know that the master device is protected by an IOMMU. */
--		dt_device_set_protected(dev_to_dt(dev));
-+		dt_device_set_protected(dev_to_dt(dev), true);
- 	}
-=20
- 	dev_info(dev, "Added master device (SMMUv3 %s StreamIds %u)\n",
-@@ -2867,6 +2936,7 @@ static const struct iommu_ops arm_smmu_iommu_ops =3D =
-{
- 	.unmap_page		=3D arm_iommu_unmap_page,
- 	.dt_xlate		=3D arm_smmu_dt_xlate,
- 	.add_device		=3D arm_smmu_add_device,
-+	.remove_device		=3D arm_smmu_remove_device,
- };
-=20
- static __init int arm_smmu_dt_init(struct dt_device_node *dev,
-diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/a=
-rm/smmu.c
-index d63c901551..4d2f71f152 100644
---- a/xen/drivers/passthrough/arm/smmu.c
-+++ b/xen/drivers/passthrough/arm/smmu.c
-@@ -825,7 +825,7 @@ static int arm_smmu_dt_add_device_legacy(struct arm_smm=
-u_device *smmu,
- 	if ( !dev_is_pci(dev) )
- 	{
- 		/* Xen: Let Xen know that the device is protected by an SMMU */
--		dt_device_set_protected(dev_node);
-+		dt_device_set_protected(dev_node, true);
- 	}
-=20
- 	for (i =3D 0; i < fwspec->num_ids; ++i) {
-@@ -862,7 +862,7 @@ static int arm_smmu_dt_remove_device_legacy(struct arm_=
-smmu_device *smmu,
-=20
- 	if ( !dev_is_pci(dev) )
- 		/* Protected by dt_host_lock and dtdevs_lock as caller holds these locks=
-. */
--		dev_node->is_protected =3D false;
-+		dt_device_set_protected(dev_node, false);
-=20
- 	kfree(master);
- 	return 0;
-diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
-index 06d7643622..76ae1e674a 100644
---- a/xen/include/xen/device_tree.h
-+++ b/xen/include/xen/device_tree.h
-@@ -300,9 +300,10 @@ static inline domid_t dt_device_used_by(const struct d=
-t_device_node *device)
-     return device->used_by;
- }
-=20
--static inline void dt_device_set_protected(struct dt_device_node *device)
-+static inline void dt_device_set_protected(struct dt_device_node *device,
-+                                           bool protected)
- {
--    device->is_protected =3D true;
-+    device->is_protected =3D protected;
- }
-=20
- static inline bool dt_device_is_protected(const struct dt_device_node *dev=
-ice)
---=20
-2.55.0
+--------------R0HTcQ4F0G50aXHnJOfKLM7X--
 
