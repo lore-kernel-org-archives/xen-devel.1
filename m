@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 97E76606A31D
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 19:55:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3E599606A320
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 19:55:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=1rtHKqxd
-Received: from list by lists.xenproject.org with outflank-mailman.1454836.1668385 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=0hhp481o
+Received: from list by lists.xenproject.org with outflank-mailman.1454835.1668373 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xItS2-00043n-2k; Mon, 19 Oct 2026 19:55:18 +0000
+	id 1xItS1-0003pl-Fs; Mon, 19 Oct 2026 19:55:17 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1454836.1668385; Mon, 19 Oct 2026 19:55:18 +0000
+Received: by outflank-mailman (output) from mailman id 1454835.1668373; Mon, 19 Oct 2026 19:55:17 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xItS1-000411-TQ; Mon, 19 Oct 2026 19:55:17 +0000
-Received: by outflank-mailman (input) for mailman id 1454836;
+	id 1xItS1-0003nu-BK; Mon, 19 Oct 2026 19:55:17 +0000
+Received: by outflank-mailman (input) for mailman id 1454835;
  Mon, 19 Oct 2026 19:55:15 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xItRz-0003h9-Gp
+ (envelope-from <gwd@xenproject.org>) id 1xItRz-0003hI-HX
  for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 19:55:15 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xItRz-000000022yU-29Zu;
+ (envelope-from <gwd@xenproject.org>) id 1xItRz-000000022yg-2eEW;
  Mon, 19 Oct 2026 19:55:15 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xItGh-00000001FjN-0TMy;
- Mon, 19 Oct 2026 19:43:35 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xItGY-00000001FjN-2hyN;
+ Mon, 19 Oct 2026 19:43:26 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -39,25 +39,27 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
-	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=LBUz4QCpPQtpmzUBSklZ+EZWcdBElnumvszUFYusF9k=; b=1rtHKqxdhSBzVicd7dD6yPpiul
-	ELjFZ39fJpxFwN61r3SRdlfEgYrIREVUShAshyHO3gBkIVHIYENnN4NzC2H3IBkOnOfAaw0ULMa03
-	aXhWzl0RZk0U546ZweI0/n0yUYZWXgPE+E5xujFIOtGxhaTvP0FgWiVKYwIvfmgH/nhQ=;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=nYii0FVbr7qWQUooLUKA16mNwNVCccFAiU2dNNQmLGs=; b=0hhp481ohQwC1X8i/yMgQcwHaf
+	hUW3sXG1nbP67YqB6hbAYUV710w6zdV6gDpwkMqjPNVIK5IGt79ADe15n7qmbK2lSncvtyxvvB9iI
+	7LY969cZe+R6r9yTy1DpRAHkpuBTrKSsP29n7ZyzJsF2slLUa0Nfe0haS4cLFpPstzQA=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
+Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v4 19/30] x86/mm: run guest contexts on the sparse directmap view
-Date: Mon, 19 Oct 2026 20:42:50 +0100
-Message-ID: <20261019-asi-hvm-v4-19-b68b66652266@xenproject.org>
+Subject: [PATCH v4 11/30] x86/domain_page: prepare the mapcache for per-vCPU accounting
+Date: Mon, 19 Oct 2026 20:42:42 +0100
+Message-ID: <20261019-asi-hvm-v4-11-b68b66652266@xenproject.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
 References: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -66,184 +68,376 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-In init_xen_l4_slots(), if d->arch.asi.sparse_dmap is set, point the
-directmap slots at the sparse view, copying from idle_pg_table only the
-Xen slots below them.  A root page-table not shared with a PV guest gets
-no extended directmap, which the sparse view does not cover.
+From: Roger Pau Monné <roger.pau@citrix.com>
 
-d->arch.asi.sparse_dmap is decided at domain creation: PV domains all
-have a mapcache, HVM domains need per-vCPU page-tables for one.  No
-option asks for the sparse view yet.
+Currently, only PV domains have a mapcache, which is domain-wide one.
+In preparation for enabling per-vCPU mapcaches for HVM domains, split
+the accounting out into a struct mapcache, embedded in struct
+mapcache_domain.
 
-The sparse view is built before any domain is created, so the root
-page-tables of every domain using it carry it from their creation,
-dom0's included.  Dom0's builders reach dom0's memory only through guest
-virtual addresses and map_domain_page().  In PV shim mode,
-replace_va_mapping() reads the guest's L4 through the directmap; map it
-with map_domain_page() instead, as the lower levels already are.  Shadow
-L4s, dom0=shadow's included, get the sparse view from
-init_xen_l4_slots().
+Introduce has_mapcache(), for whether a vCPU has a mapcache, and
+vcpu_mapcache(), which returns the accounting for a vCPU's mapcache
+and, in *dcache, the domain-wide mapcache whose lock and TLB epoch the
+caller has to take into account.  For now has_mapcache() is
+is_pv_vcpu(), and vcpu_mapcache() always returns the domain's
+accounting.
 
-The two directmaps differ where the sparse view leaves memory out, so no
-translation of the full directmap may remain usable on page-tables
-carrying the sparse view.  Directmap mappings stay global nevertheless:
-every CR3 write which can move a CPU onto the sparse view goes through
-switch_cr3_cr4(), which flushes the old page-tables' translations,
-global entries included, before it returns.  The CR3 writes which keep
-entries -- a PV vCPU's switch between its kernel and user page-tables,
-XPTI's entry and exit -- stay within one vCPU's page-tables, which carry
-the same directmap, or go to XPTI's per-CPU root, which maps only Xen's
-own per-CPU pages there.  Removals from the sparse view are flushed on
-every CPU, global entries included.  PV guests running with global
-pages, a PV dom0 not using the sparse view among them, so keep their
-directmap TLB entries across switches between guest kernel and user
-mode.
+Move map_domain_page()'s handling of the domain-wide lock and TLB epoch
+into three helpers: mapcache_enter() takes the lock and catches up with
+a wrap another vCPU caused, mapcache_new_epoch() starts a new epoch
+after a wrap, and mapcache_exit() drops the lock.  A per-vCPU
+mapcache can then skip them without map_domain_page() being
+re-indented.
 
-Assisted-by: Claude Code:claude-opus-5-5
+struct mapcache_domain keeps its size (40 bytes, x86_64 debug build),
+and so do the structures containing it.
+
+No functional change.
+
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v4:
-- d->arch.vcpu_pt and d->arch.sparse_dmap are now d->arch.asi.vcpu_pt
-  and d->arch.asi.sparse_dmap.
-- Drop sparse_dmap_active and sparse_dmap_activate(): root page-tables
-  carry the sparse view from their creation, dom0's included (Roger).
-- The sparse view's slots are now marked NX in "x86/mm: build and
-  maintain a sparse view of the directmap".
-- PV shim: replace_va_mapping() maps the guest's L4 with
-  map_domain_page().
-- Give sparse_dmap_wanted() its hardware-domain case (Roger).
-- init_xen_l4_slots() takes the directmap slots from the sparse view,
-  rather than copying the full directmap's and overwriting them;
-  sparse_dmap_install() goes (Roger).
-- Message: drop the sentence on NX (Roger).
+- Reword has_mapcache()'s comment (Roger).
+- Move the comment on the domain-wide lock and TLB epoch into the
+  function body (Roger).
+- Rename mapcache_lock() / mapcache_unlock() to mapcache_enter() /
+  mapcache_exit() (Roger).
+- mapcache_new_epoch(): assert that the domain-wide lock is held
+  (Roger).
+- mapcache_vcpu_init(): drop the comment on the early return for a
+  disabled domain-wide mapcache (Jan).
+- mapcache_vcpu_init(): initialise ents and nr at their declarations,
+  as before (Jan).
+- Dropping the redundant is_pv_vcpu() checks in map_domain_page() and
+  unmap_domain_page() is now a patch of its own (Jan).
 
 Changes in v3:
-- New in this version.
+- New in this version, split out of "x86/hvm: introduce per-vCPU
+  mapcache for vCPU-PT domains" for review.
 ---
- xen/arch/x86/include/asm/sparse-directmap.h |  9 +++++++
- xen/arch/x86/mm.c                           | 28 +++++++++++++++++++--
- xen/arch/x86/pv/shim.c                      |  4 ++-
- xen/arch/x86/spec_ctrl.c                    |  7 ++++++
- 4 files changed, 45 insertions(+), 3 deletions(-)
+ xen/arch/x86/domain_page.c        | 137 ++++++++++++++++++++----------
+ xen/arch/x86/include/asm/domain.h |  19 +++--
+ 2 files changed, 102 insertions(+), 54 deletions(-)
 
-diff --git a/xen/arch/x86/include/asm/sparse-directmap.h b/xen/arch/x86/include/asm/sparse-directmap.h
-index ea14d44334..2f8b94f4c1 100644
---- a/xen/arch/x86/include/asm/sparse-directmap.h
-+++ b/xen/arch/x86/include/asm/sparse-directmap.h
-@@ -31,6 +31,14 @@ static inline bool sparse_dmap_configured(void)
-     return opt_sparse_dmap_pv || opt_sparse_dmap_hvm || opt_sparse_dmap_hwdom;
- }
+diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
+index ed68483695..e4ea7a254f 100644
+--- a/xen/arch/x86/domain_page.c
++++ b/xen/arch/x86/domain_page.c
+@@ -18,17 +18,19 @@
+ #include <asm/hardirq.h>
+ #include <asm/setup.h>
  
-+/* Whether a new domain of the given type is to use the sparse view. */
-+static inline bool sparse_dmap_wanted(bool pv, bool hwdom)
++/* Whether the vCPU supports mapcache usage, might not be in use. */
++static bool has_mapcache(const struct vcpu *v)
 +{
-+    return sparse_dmap_root &&
-+           (hwdom ? opt_sparse_dmap_hwdom
-+                  : pv ? opt_sparse_dmap_pv : opt_sparse_dmap_hvm);
++    return is_pv_vcpu(v);
 +}
 +
- void sparse_dmap_init(void);
- int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn, unsigned long nr,
-                            pte_attr_t flags);
-@@ -42,6 +50,7 @@ int sparse_dmap_drop_pagetable(mfn_t mfn);
- #else /* !CONFIG_SPARSE_DIRECTMAP */
- 
- static inline bool sparse_dmap_configured(void) { return false; }
-+static inline bool sparse_dmap_wanted(bool pv, bool hwdom) { return false; }
- static inline void sparse_dmap_init(void) {}
- static inline int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn,
-                                          unsigned long nr, pte_attr_t flags)
-diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index 7e3009251c..7b5a355e6e 100644
---- a/xen/arch/x86/mm.c
-+++ b/xen/arch/x86/mm.c
-@@ -1703,7 +1703,8 @@ struct page_info *perdomain_l3(const struct vcpu *v)
-  * l4t, l4mfn, and v are mandatory, but l4mfn doesn't need to be the mfn under
-  * *l4t.  All other parameters are optional and will either fill or zero the
-  * appropriate slots.  Pagetables not shared with guests will gain the
-- * extended directmap.
-+ * extended directmap, unless the domain runs on the sparse view of the
-+ * directmap, which replaces the directmap slots.
-  *
-  * v is the vCPU the table is private to or, for a table the domain's vCPUs
-  * share, any of them: slot 260 gets v's per-domain area (perdomain_l3()),
-@@ -1715,7 +1716,7 @@ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
-     const struct domain *d = v->domain;
-     /*
-      * PV vcpus need a shortened directmap.  HVM and Idle vcpus get the full
--     * directmap.
-+     * directmap, unless the domain runs on the sparse view (below).
-      */
-     bool short_directmap = !paging_mode_external(d);
- 
-@@ -1750,6 +1751,29 @@ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
-             l4t[l4_table_offset(PERDOMAIN_VIRT_START)];
- 
-     /* Slot 261-: text/data/bss, RW M2P, vmap, frametable, directmap. */
-+#ifdef CONFIG_SPARSE_DIRECTMAP
-+    if ( d->arch.asi.sparse_dmap )
-+    {
-+        unsigned int i = l4_table_offset(SPARSE_DMAP_START);
-+
-+        memcpy(&l4t[l4_table_offset(XEN_VIRT_START)],
-+               &idle_pg_table[l4_table_offset(XEN_VIRT_START)],
-+               (i - l4_table_offset(XEN_VIRT_START)) * sizeof(*l4t));
-+
-+        /*
-+         * Every slot the sparse view covers gets its L3, whatever the full
-+         * directmap has there, so that memory added later is covered too.  A
-+         * PV root has guest slots above; any other root loses the rest of the
-+         * directmap, which the sparse view does not cover.
-+         */
-+        for ( ; i < l4_table_offset(SPARSE_DMAP_END); i++ )
-+            l4t[i] = sparse_dmap_root[i];
-+        if ( !short_directmap )
-+            for ( ; i < l4_table_offset(DIRECTMAP_VIRT_END); i++ )
-+                l4t[i] = l4e_empty();
-+    }
-+    else
-+#endif
- #ifndef NDEBUG
-     if ( short_directmap &&
-          unlikely(root_pgt_pv_xen_slots < ROOT_PAGETABLE_PV_XEN_SLOTS) )
-diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
-index 41000b0523..2a47dbc56c 100644
---- a/xen/arch/x86/pv/shim.c
-+++ b/xen/arch/x86/pv/shim.c
-@@ -148,12 +148,14 @@ const struct platform_bad_page *__init pv_shim_reserved_pages(unsigned int *size
- static void __init replace_va_mapping(struct domain *d, l4_pgentry_t *l4start,
-                                       unsigned long va, mfn_t mfn)
+ static inline struct vcpu *mapcache_current_vcpu(void)
  {
--    l4_pgentry_t l4e = l4start[l4_table_offset(va)];
-+    const l4_pgentry_t *l4t = map_domain_page(virt_to_mfn(l4start));
-+    l4_pgentry_t l4e = l4t[l4_table_offset(va)];
-     l3_pgentry_t l3e = l3e_from_l4e(l4e, l3_table_offset(va));
-     l2_pgentry_t l2e = l2e_from_l3e(l3e, l2_table_offset(va));
-     l1_pgentry_t *pl1e = map_l1t_from_l2e(l2e) + l1_table_offset(va);
-     struct page_info *page = mfn_to_page(l1e_get_mfn(*pl1e));
+     const struct vcpu *v = this_cpu(pgtable_vcpu);
+     const struct vcpu *curr = current;
  
-+    unmap_domain_page(l4t);
-     put_page_and_type(page);
+-    /*
+-     * During early boot pgtable_vcpu is not set, callers must handle NULL.
+-     * Non-PV domains don't have a mapcache, the directmap covers all physical
+-     * address space.
+-     */
+-    if ( !v || !is_pv_vcpu(v) )
++    /* During early boot pgtable_vcpu is not set, callers must handle NULL. */
++    if ( !v || !has_mapcache(v) )
+         return NULL;
  
-     *pl1e = l1e_from_mfn(mfn, (!is_pv_32bit_domain(d) ? L1_PROT
-diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index 66c878212a..32e6ba28a3 100644
---- a/xen/arch/x86/spec_ctrl.c
-+++ b/xen/arch/x86/spec_ctrl.c
-@@ -1943,6 +1943,13 @@ void spec_ctrl_init_domain(struct domain *d)
- 
-     d->arch.asi.vcpu_pt = !pv && (is_hardware_domain(d) ? opt_pvh_vcpu_pt_hwdom
-                                                         : opt_vcpu_pt_hvm);
-+
-+    /*
-+     * The sparse directmap view needs a mapcache: PV domains all have one,
-+     * HVM domains through per-vCPU page-tables.
-+     */
-+    d->arch.asi.sparse_dmap = (pv || d->arch.asi.vcpu_pt) &&
-+                              sparse_dmap_wanted(pv, is_hardware_domain(d));
+     /*
+@@ -54,6 +56,52 @@ static inline struct vcpu *mapcache_current_vcpu(void)
+     return ACCESS_ONCE(this_cpu(pgtable_vcpu));
  }
  
- void __init init_speculation_mitigations(void)
++/*
++ * The accounting for v's mapcache: the domain's, with *dcache set so the
++ * caller takes the domain-wide lock and TLB-epoch machinery into account.
++ */
++static struct mapcache *vcpu_mapcache(struct vcpu *v,
++                                      struct mapcache_domain **dcache)
++{
++    struct domain *d = v->domain;
++
++    *dcache = &d->arch.pv.mapcache;
++    return &(*dcache)->cache;
++}
++
++static void mapcache_enter(struct mapcache_domain *dcache,
++                           struct mapcache_vcpu *vcache)
++{
++    /* The domain's vCPUs share the mapcache's slots. */
++    spin_lock(&dcache->lock);
++
++    /* Has some other CPU caused a wrap? We must flush if so. */
++    if ( unlikely(dcache->epoch != vcache->shadow_epoch) )
++    {
++        vcache->shadow_epoch = dcache->epoch;
++        if ( NEED_FLUSH(this_cpu(tlbflush_time), dcache->tlbflush_timestamp) )
++        {
++            perfc_incr(domain_page_tlb_flush);
++            flush_tlb_local();
++        }
++    }
++}
++
++/* A wrap has just flushed this CPU's TLB: start a new epoch. */
++static void mapcache_new_epoch(struct mapcache_domain *dcache,
++                               struct mapcache_vcpu *vcache)
++{
++    ASSERT(spin_is_locked(&dcache->lock));
++
++    vcache->shadow_epoch = ++dcache->epoch;
++    dcache->tlbflush_timestamp = tlbflush_current_time();
++}
++
++static void mapcache_exit(struct mapcache_domain *dcache)
++{
++    spin_unlock(&dcache->lock);
++}
++
+ #define mapcache_l2_entry(e) ((e) >> PAGETABLE_ORDER)
+ #define MAPCACHE_L2_ENTRIES (mapcache_l2_entry(MAPCACHE_ENTRIES - 1) + 1)
+ #define MAPCACHE_L1ENT(idx) \
+@@ -66,6 +114,7 @@ void *map_domain_page(mfn_t mfn)
+     struct vcpu *v;
+     struct mapcache_domain *dcache;
+     struct mapcache_vcpu *vcache;
++    struct mapcache *cache;
+     struct vcpu_maphash_entry *hashent;
+ 
+ #ifdef NDEBUG
+@@ -77,9 +126,9 @@ void *map_domain_page(mfn_t mfn)
+     if ( !v )
+         return mfn_to_virt(mfn_x(mfn));
+ 
+-    dcache = &v->domain->arch.pv.mapcache;
++    cache = vcpu_mapcache(v, &dcache);
+     vcache = &v->arch.pv.mapcache;
+-    if ( !dcache->inuse )
++    if ( !cache->inuse )
+         return mfn_to_virt(mfn_x(mfn));
+ 
+     perfc_incr(map_domain_page_count);
+@@ -90,41 +139,30 @@ void *map_domain_page(mfn_t mfn)
+     if ( hashent->mfn == mfn_x(mfn) )
+     {
+         idx = hashent->idx;
+-        ASSERT(idx < dcache->entries);
++        ASSERT(idx < cache->entries);
+         hashent->refcnt++;
+         ASSERT(hashent->refcnt);
+         ASSERT(mfn_eq(l1e_get_mfn(MAPCACHE_L1ENT(idx)), mfn));
+         goto out;
+     }
+ 
+-    spin_lock(&dcache->lock);
++    mapcache_enter(dcache, vcache);
+ 
+-    /* Has some other CPU caused a wrap? We must flush if so. */
+-    if ( unlikely(dcache->epoch != vcache->shadow_epoch) )
+-    {
+-        vcache->shadow_epoch = dcache->epoch;
+-        if ( NEED_FLUSH(this_cpu(tlbflush_time), dcache->tlbflush_timestamp) )
+-        {
+-            perfc_incr(domain_page_tlb_flush);
+-            flush_tlb_local();
+-        }
+-    }
+-
+-    idx = find_next_zero_bit(dcache->inuse, dcache->entries, dcache->cursor);
+-    if ( unlikely(idx >= dcache->entries) )
++    idx = find_next_zero_bit(cache->inuse, cache->entries, cache->cursor);
++    if ( unlikely(idx >= cache->entries) )
+     {
+         unsigned long accum = 0, prev = 0;
+ 
+         /* /First/, clean the garbage map and update the inuse list. */
+-        for ( i = 0; i < BITS_TO_LONGS(dcache->entries); i++ )
++        for ( i = 0; i < BITS_TO_LONGS(cache->entries); i++ )
+         {
+             accum |= prev;
+-            dcache->inuse[i] &= ~xchg(&dcache->garbage[i], 0);
+-            prev = ~dcache->inuse[i];
++            cache->inuse[i] &= ~xchg(&cache->garbage[i], 0);
++            prev = ~cache->inuse[i];
+         }
+ 
+-        if ( accum | (prev & BITMAP_LAST_WORD_MASK(dcache->entries)) )
+-            idx = find_first_zero_bit(dcache->inuse, dcache->entries);
++        if ( accum | (prev & BITMAP_LAST_WORD_MASK(cache->entries)) )
++            idx = find_first_zero_bit(cache->inuse, cache->entries);
+         else
+         {
+             /* Replace a hash entry instead. */
+@@ -144,19 +182,18 @@ void *map_domain_page(mfn_t mfn)
+                     i = 0;
+             } while ( i != MAPHASH_HASHFN(mfn_x(mfn)) );
+         }
+-        BUG_ON(idx >= dcache->entries);
++        BUG_ON(idx >= cache->entries);
+ 
+         /* /Second/, flush TLBs. */
+         perfc_incr(domain_page_tlb_flush);
+         flush_tlb_local();
+-        vcache->shadow_epoch = ++dcache->epoch;
+-        dcache->tlbflush_timestamp = tlbflush_current_time();
++        mapcache_new_epoch(dcache, vcache);
+     }
+ 
+-    set_bit(idx, dcache->inuse);
+-    dcache->cursor = idx + 1;
++    set_bit(idx, cache->inuse);
++    cache->cursor = idx + 1;
+ 
+-    spin_unlock(&dcache->lock);
++    mapcache_exit(dcache);
+ 
+     l1e_write(&MAPCACHE_L1ENT(idx), l1e_from_mfn(mfn, __PAGE_HYPERVISOR_RW));
+ 
+@@ -170,6 +207,7 @@ void unmap_domain_page(const void *ptr)
+     unsigned int idx;
+     struct vcpu *v;
+     struct mapcache_domain *dcache;
++    struct mapcache *cache;
+     unsigned long va = (unsigned long)ptr, mfn, flags;
+     struct vcpu_maphash_entry *hashent;
+ 
+@@ -181,8 +219,8 @@ void unmap_domain_page(const void *ptr)
+     v = mapcache_current_vcpu();
+     ASSERT(v);
+ 
+-    dcache = &v->domain->arch.pv.mapcache;
+-    ASSERT(dcache->inuse);
++    cache = vcpu_mapcache(v, &dcache);
++    ASSERT(cache->inuse);
+ 
+     idx = PFN_DOWN(va - MAPCACHE_VIRT_START);
+     mfn = l1e_get_pfn(MAPCACHE_L1ENT(idx));
+@@ -205,7 +243,7 @@ void unmap_domain_page(const void *ptr)
+                    hashent->mfn);
+             l1e_write(&MAPCACHE_L1ENT(hashent->idx), l1e_empty());
+             /* /Second/, mark as garbage. */
+-            set_bit(hashent->idx, dcache->garbage);
++            set_bit(hashent->idx, cache->garbage);
+         }
+ 
+         /* Add newly-freed mapping to the maphash. */
+@@ -217,7 +255,7 @@ void unmap_domain_page(const void *ptr)
+         /* /First/, zap the PTE. */
+         l1e_write(&MAPCACHE_L1ENT(idx), l1e_empty());
+         /* /Second/, mark as garbage. */
+-        set_bit(idx, dcache->garbage);
++        set_bit(idx, cache->garbage);
+     }
+ 
+     local_irq_restore(flags);
+@@ -239,9 +277,9 @@ void mapcache_domain_init(struct domain *d)
+                  2 * PFN_UP(BITS_TO_LONGS(MAPCACHE_ENTRIES) * sizeof(long))) >
+                  MAPCACHE_VIRT_START + (PERDOMAIN_SLOT_MBYTES << 20));
+     bitmap_pages = PFN_UP(BITS_TO_LONGS(MAPCACHE_ENTRIES) * sizeof(long));
+-    dcache->inuse = (void *)MAPCACHE_VIRT_END + PAGE_SIZE;
+-    dcache->garbage = dcache->inuse +
+-                      (bitmap_pages + 1) * PAGE_SIZE / sizeof(long);
++    dcache->cache.inuse = (void *)MAPCACHE_VIRT_END + PAGE_SIZE;
++    dcache->cache.garbage = dcache->cache.inuse +
++                            (bitmap_pages + 1) * PAGE_SIZE / sizeof(long);
+ 
+     spin_lock_init(&dcache->lock);
+ }
+@@ -249,15 +287,20 @@ void mapcache_domain_init(struct domain *d)
+ int mapcache_vcpu_init(struct vcpu *v)
+ {
+     struct domain *d = v->domain;
+-    struct mapcache_domain *dcache = &d->arch.pv.mapcache;
++    struct mapcache_domain *dcache;
++    struct mapcache *cache;
+     unsigned long i;
+     unsigned int ents = d->max_vcpus * MAPCACHE_VCPU_ENTRIES;
+     unsigned int nr = PFN_UP(BITS_TO_LONGS(ents) * sizeof(long));
+ 
+-    if ( !is_pv_vcpu(v) || !dcache->inuse )
++    if ( !has_mapcache(v) )
++        return 0;
++
++    cache = vcpu_mapcache(v, &dcache);
++    if ( !cache->inuse )
+         return 0;
+ 
+-    if ( ents > dcache->entries )
++    if ( ents > cache->entries )
+     {
+         /* Populate page tables. */
+         int rc = create_perdomain_mapping(v, MAPCACHE_VIRT_START, ents,
+@@ -265,16 +308,16 @@ int mapcache_vcpu_init(struct vcpu *v)
+ 
+         /* Populate bit maps. */
+         if ( !rc )
+-            rc = create_perdomain_mapping(v, (unsigned long)dcache->inuse,
++            rc = create_perdomain_mapping(v, (unsigned long)cache->inuse,
+                                           nr, NULL, NIL(struct page_info *));
+         if ( !rc )
+-            rc = create_perdomain_mapping(v, (unsigned long)dcache->garbage,
++            rc = create_perdomain_mapping(v, (unsigned long)cache->garbage,
+                                           nr, NULL, NIL(struct page_info *));
+ 
+         if ( rc )
+             return rc;
+ 
+-        dcache->entries = ents;
++        cache->entries = ents;
+     }
+ 
+     /* Mark all maphash entries as not in use. */
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index 4140a92f15..542c6b5eca 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -57,6 +57,16 @@ struct trap_bounce {
+     unsigned long eip;
+ };
+ 
++struct mapcache {
++    /* The number of array entries, and a cursor into the array. */
++    unsigned int entries;
++    unsigned int cursor;
++
++    /* Which mappings are in use, and which are garbage to reap next epoch? */
++    unsigned long *inuse;
++    unsigned long *garbage;
++};
++
+ #define MAPHASH_ENTRIES 8
+ #define MAPHASH_HASHFN(pfn) ((pfn) & (MAPHASH_ENTRIES-1))
+ #define MAPHASHENT_NOTINUSE ((u32)~0U)
+@@ -73,10 +83,6 @@ struct mapcache_vcpu {
+ };
+ 
+ struct mapcache_domain {
+-    /* The number of array entries, and a cursor into the array. */
+-    unsigned int entries;
+-    unsigned int cursor;
+-
+     /* Protects map_domain_page(). */
+     spinlock_t lock;
+ 
+@@ -84,9 +90,8 @@ struct mapcache_domain {
+     unsigned int epoch;
+     u32 tlbflush_timestamp;
+ 
+-    /* Which mappings are in use, and which are garbage to reap next epoch? */
+-    unsigned long *inuse;
+-    unsigned long *garbage;
++    /* Accounting of the domain-wide mapcache. */
++    struct mapcache cache;
+ };
+ 
+ void mapcache_domain_init(struct domain *d);
 -- 
 2.55.0
 
