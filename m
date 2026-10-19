@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AB589606A31B
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 19:55:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DDF61606A31B
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 19:55:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=ZmsEhrIA
-Received: from list by lists.xenproject.org with outflank-mailman.1454850.1668509 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=w+SqXr/y
+Received: from list by lists.xenproject.org with outflank-mailman.1454849.1668492 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xItSJ-0007cy-0i; Mon, 19 Oct 2026 19:55:35 +0000
+	id 1xItSF-00078H-EW; Mon, 19 Oct 2026 19:55:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1454850.1668509; Mon, 19 Oct 2026 19:55:34 +0000
+Received: by outflank-mailman (output) from mailman id 1454849.1668492; Mon, 19 Oct 2026 19:55:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xItSH-0007W8-5d; Mon, 19 Oct 2026 19:55:33 +0000
-Received: by outflank-mailman (input) for mailman id 1454850;
- Mon, 19 Oct 2026 19:55:21 +0000
+	id 1xItSE-000744-Hq; Mon, 19 Oct 2026 19:55:30 +0000
+Received: by outflank-mailman (input) for mailman id 1454849;
+ Mon, 19 Oct 2026 19:55:20 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xItS4-0004uj-Sc
+ (envelope-from <gwd@xenproject.org>) id 1xItS4-0004sm-L7
  for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 19:55:20 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xItRz-000000022zs-3hwi;
+ (envelope-from <gwd@xenproject.org>) id 1xItRz-000000022yK-1MGT;
  Mon, 19 Oct 2026 19:55:15 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xItGX-00000001FjN-2QLd;
- Mon, 19 Oct 2026 19:43:25 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xItGc-00000001FjN-2gvR;
+ Mon, 19 Oct 2026 19:43:30 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,18 +41,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=eMzms4kJ3QFpMQV91hrT3uRFSRB8DVNpEMsCuiyn6Aw=; b=ZmsEhrIAG33dUiD+l1lP8dUZ1k
-	3oQuYQq/BVvuSK2DZ6UX6oJ7RMQ0bqZo5aPg3SSnZrUuEyiZiIJ1iLCk2wiEBw/tZUvngtN4j517h
-	dSVvxwiClkKUTO7hl+/JYXm5pONe6ykfViJIk5CLveNIY+S/zQZ2p3sI3u1M6UJm9+ms=;
+	bh=+Qh68FKnxSRb1Fv+xxuele9p2cel+WGPjQ8nK81SNtY=; b=w+SqXr/yxkcAUG5++mX4Ydr8jg
+	XfJoRzQzSuZQLv8hOTZ0fucmhRmUy7meK3AMu1y9Ypj9ZgOEesCIdii+yJ03hBqnP563jdYwf5MNx
+	nAY2F/MwB4ZDQl5Wb3o5mT6yva1vRwoHBz7qQ1+WkG+Z4A4aJgEFpUKEs+aQsiQtRdd0=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v4 10/30] x86/domain_page: drop redundant is_pv_vcpu() checks
-Date: Mon, 19 Oct 2026 20:42:41 +0100
-Message-ID: <20261019-asi-hvm-v4-10-b68b66652266@xenproject.org>
+Subject: [PATCH v4 15/30] x86/mm: let Xen's page-table walker operate on a given root
+Date: Mon, 19 Oct 2026 20:42:46 +0100
+Message-ID: <20261019-asi-hvm-v4-15-b68b66652266@xenproject.org>
 X-Mailer: git-send-email 2.55.0
 In-Reply-To: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
 References: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
@@ -66,38 +66,22 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The is_pv_vcpu() checks after mapcache_current_vcpu() never fail: they
-have been redundant since 622c9a5ba95d ("x86/mm: accurately track
-which vCPU page-tables are loaded") made mapcache_current_vcpu() do
-the check itself.  mapcache_current_vcpu() is now guaranteed to return
-a PV vCPU with a caching structure (which is what is needed for the
-subsequent dcache->inuse check): either a scheduled PV vCPU, or this
-CPU's idle vCPU (possibly after finishing a lazy context switch).
-Drop the checks; their speculation barriers (evaluate_nospec()) go
-too.
+map_pages_to_xen() and modify_xen_mappings() maintain Xen's own mappings,
+walking from idle_pg_table, whose Xen slots every other root page-table
+copies.  A later patch introduces a second, sparse directmap hierarchy:
+page tables for the directmap virtual address range that some guest
+contexts use in place of idle_pg_table's.  It needs the same maintenance
+at the same virtual addresses.
 
-mapcache_current_vcpu() returns NULL if this CPU's pgtable_vcpu is not
-yet set (early boot) or is not a PV vCPU.  Otherwise it reads
-pgtable_vcpu again and returns that.  In between, pgtable_vcpu changes
-only when a lazy context switch from a PV vCPU is completed, by
-mapcache_current_vcpu() itself (sync_local_execstate()) or first by an
-interrupt such as a FLUSH_VCPU_STATE IPI; completing it loads the idle
-vCPU's page-tables and sets pgtable_vcpu to the idle vCPU.  No other
-writer of pgtable_vcpu runs in an interrupt that returns to the code it
-interrupted.  During an EFI runtime call pgtable_vcpu is the idle
-vCPU: efi_rs_enter() completes any lazy switch, then loads EFI's
-page-tables, which carry the directmap.  So the vCPU returned is either
-the PV vCPU checked or this CPU's idle vCPU.
+Give virt_to_xen_l{3,2,1}e() the L4 to walk from, and move the bodies of
+map_pages_to_xen() and modify_xen_mappings() into map_pages_in() and
+modify_mappings_in(), which take the root as well.  The public functions
+pass idle_pg_table.  The EFI runtime-services page-tables mirror
+idle_pg_table's L4 entries only, so a newly allocated L3 is propagated
+to them only when the root is idle_pg_table.
 
-The idle vCPU passes is_pv_vcpu(), as the idle domain is created
-without XEN_DOMCTL_CDF_hvm, but its mapcache is never set up:
-domain_create() returns for the idle domain before calling
-arch_domain_create(), which is what calls mapcache_domain_init().  With
-its dcache->inuse NULL, map_domain_page() uses the directmap, and
-unmap_domain_page()'s ASSERT() on dcache->inuse still catches a
-mapcache address unmapped with no mapcache in use.  In builds without
-CONFIG_PV, is_pv_vcpu() is always false and mapcache_current_vcpu()
-always returns NULL.
+TLB flushing is unaffected: flushes are by virtual address and go to
+every online CPU, which covers both hierarchies.
 
 No functional change.
 
@@ -105,38 +89,176 @@ Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v4:
-- New in this version, split out of "x86/domain_page: prepare the
-  mapcache for per-vCPU accounting", with a justification of its own.
+- Message: name the second hierarchy as sparse; flushes reach every CPU
+  (Roger).
 
-NB I've included Claude's complete analysis in the commit message.
-I've reworded the commit message so that the middle two paragraphs can
-be dropped, or reworded more briefly on commit.
+Changes in v3:
+- New in this version.
 ---
- xen/arch/x86/domain_page.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ xen/arch/x86/mm.c | 55 ++++++++++++++++++++++++++++++++++-------------
+ 1 file changed, 40 insertions(+), 15 deletions(-)
 
-diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index f3e65e2d44..ed68483695 100644
---- a/xen/arch/x86/domain_page.c
-+++ b/xen/arch/x86/domain_page.c
-@@ -74,7 +74,7 @@ void *map_domain_page(mfn_t mfn)
- #endif
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 362a88a300..514e121c8b 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -5229,13 +5229,14 @@ static DEFINE_SPINLOCK(map_pgdir_lock);
  
-     v = mapcache_current_vcpu();
--    if ( !v || !is_pv_vcpu(v) )
-+    if ( !v )
-         return mfn_to_virt(mfn_x(mfn));
+ /*
+  * For virt_to_xen_lXe() functions, they take a linear address and return a
+- * pointer to Xen's LX entry. Caller needs to unmap the pointer.
++ * pointer to Xen's LX entry in the page-table hierarchy rooted at @root
++ * (idle_pg_table for Xen's own mappings).  Caller needs to unmap the pointer.
+  */
+-static l3_pgentry_t *virt_to_xen_l3e(unsigned long v)
++static l3_pgentry_t *virt_to_xen_l3e(l4_pgentry_t *root, unsigned long v)
+ {
+     l4_pgentry_t *pl4e;
  
-     dcache = &v->domain->arch.pv.mapcache;
-@@ -179,7 +179,7 @@ void unmap_domain_page(const void *ptr)
-     ASSERT(va >= MAPCACHE_VIRT_START && va < MAPCACHE_VIRT_END);
+-    pl4e = &idle_pg_table[l4_table_offset(v)];
++    pl4e = &root[l4_table_offset(v)];
+     if ( !(l4e_get_flags(*pl4e) & _PAGE_PRESENT) )
+     {
+         bool locking = system_state > SYS_STATE_boot;
+@@ -5251,7 +5252,8 @@ static l3_pgentry_t *virt_to_xen_l3e(unsigned long v)
+             l4_pgentry_t l4e = l4e_from_mfn(l3mfn, __PAGE_HYPERVISOR);
  
-     v = mapcache_current_vcpu();
--    ASSERT(v && is_pv_vcpu(v));
-+    ASSERT(v);
+             l4e_write(pl4e, l4e);
+-            efi_update_l4_pgtable(l4_table_offset(v), l4e);
++            if ( root == idle_pg_table )
++                efi_update_l4_pgtable(l4_table_offset(v), l4e);
+             l3mfn = INVALID_MFN;
+         }
+         if ( locking )
+@@ -5262,11 +5264,11 @@ static l3_pgentry_t *virt_to_xen_l3e(unsigned long v)
+     return map_l3t_from_l4e(*pl4e) + l3_table_offset(v);
+ }
  
-     dcache = &v->domain->arch.pv.mapcache;
-     ASSERT(dcache->inuse);
+-static l2_pgentry_t *virt_to_xen_l2e(unsigned long v)
++static l2_pgentry_t *virt_to_xen_l2e(l4_pgentry_t *root, unsigned long v)
+ {
+     l3_pgentry_t *pl3e, l3e;
+ 
+-    pl3e = virt_to_xen_l3e(v);
++    pl3e = virt_to_xen_l3e(root, v);
+     if ( !pl3e )
+         return NULL;
+ 
+@@ -5300,11 +5302,11 @@ static l2_pgentry_t *virt_to_xen_l2e(unsigned long v)
+     return map_l2t_from_l3e(l3e) + l2_table_offset(v);
+ }
+ 
+-static l1_pgentry_t *virt_to_xen_l1e(unsigned long v)
++static l1_pgentry_t *virt_to_xen_l1e(l4_pgentry_t *root, unsigned long v)
+ {
+     l2_pgentry_t *pl2e, l2e;
+ 
+-    pl2e = virt_to_xen_l2e(v);
++    pl2e = virt_to_xen_l2e(root, v);
+     if ( !pl2e )
+         return NULL;
+ 
+@@ -5380,7 +5382,7 @@ mfn_t xen_map_to_mfn(unsigned long va)
+     bool locking = system_state > SYS_STATE_boot;
+     unsigned int l2_offset = l2_table_offset(va);
+     unsigned int l1_offset = l1_table_offset(va);
+-    const l3_pgentry_t *pl3e = virt_to_xen_l3e(va);
++    const l3_pgentry_t *pl3e = virt_to_xen_l3e(idle_pg_table, va);
+     const l2_pgentry_t *pl2e = NULL;
+     const l1_pgentry_t *pl1e = NULL;
+     struct page_info *l3page;
+@@ -5420,7 +5422,12 @@ mfn_t xen_map_to_mfn(unsigned long va)
+     return ret;
+ }
+ 
+-int map_pages_to_xen(
++/*
++ * map_pages_to_xen() in the hierarchy rooted at @root: idle_pg_table's, or
++ * another hierarchy sharing its virtual addresses.
++ */
++static int map_pages_in(
++    l4_pgentry_t *root,
+     unsigned long virt,
+     mfn_t mfn,
+     unsigned long nr_mfns,
+@@ -5471,7 +5478,7 @@ int map_pages_to_xen(
+         UNMAP_DOMAIN_PAGE(pl3e);
+         UNMAP_DOMAIN_PAGE(pl2e);
+ 
+-        pl3e = virt_to_xen_l3e(virt);
++        pl3e = virt_to_xen_l3e(root, virt);
+         if ( !pl3e )
+             goto out;
+ 
+@@ -5595,7 +5602,7 @@ int map_pages_to_xen(
+             free_xen_pagetable(l2mfn);
+         }
+ 
+-        pl2e = virt_to_xen_l2e(virt);
++        pl2e = virt_to_xen_l2e(root, virt);
+         if ( !pl2e )
+             goto out;
+ 
+@@ -5640,7 +5647,7 @@ int map_pages_to_xen(
+             /* Normal page mapping. */
+             if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
+             {
+-                pl1e = virt_to_xen_l1e(virt);
++                pl1e = virt_to_xen_l1e(root, virt);
+                 if ( pl1e == NULL )
+                     goto out;
+             }
+@@ -5825,6 +5832,15 @@ int map_pages_to_xen(
+     return rc;
+ }
+ 
++int map_pages_to_xen(
++    unsigned long virt,
++    mfn_t mfn,
++    unsigned long nr_mfns,
++    pte_attr_t flags)
++{
++    return map_pages_in(idle_pg_table, virt, mfn, nr_mfns, flags);
++}
++
+ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+ {
+     return map_pages_to_xen(virt, INVALID_MFN, nr_mfns, MAP_SMALL_PAGES);
+@@ -5841,8 +5857,12 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+  * flags are ignored.
+  *
+  * It is an error to call with present flags over an unpopulated range.
++ *
++ * modify_mappings_in() does so in the hierarchy rooted at @root, as
++ * map_pages_in() does.
+  */
+-int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
++static int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
++                              unsigned long e, pte_attr_t nf)
+ {
+     bool locking = system_state > SYS_STATE_boot;
+     l3_pgentry_t *pl3e = NULL;
+@@ -5869,7 +5889,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
+         UNMAP_DOMAIN_PAGE(pl2e);
+         UNMAP_DOMAIN_PAGE(pl3e);
+ 
+-        pl3e = virt_to_xen_l3e(v);
++        pl3e = virt_to_xen_l3e(root, v);
+         if ( !pl3e )
+             goto out;
+ 
+@@ -6120,6 +6140,11 @@ int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
+ 
+ #undef flush_area
+ 
++int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
++{
++    return modify_mappings_in(idle_pg_table, s, e, nf);
++}
++
+ int destroy_xen_mappings(unsigned long s, unsigned long e)
+ {
+     return modify_xen_mappings(s, e, _PAGE_NONE);
 -- 
 2.55.0
 
