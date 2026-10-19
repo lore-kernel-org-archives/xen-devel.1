@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFF17606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 19:43:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 43484606A31A
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 19:43:31 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=OgBgQFpT
-Received: from list by lists.xenproject.org with outflank-mailman.1454761.1668264 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=NKMK8/Ki
+Received: from list by lists.xenproject.org with outflank-mailman.1454765.1668298 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xItGO-0005OV-Dv; Mon, 19 Oct 2026 19:43:16 +0000
+	id 1xItGT-00064h-Jk; Mon, 19 Oct 2026 19:43:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1454761.1668264; Mon, 19 Oct 2026 19:43:16 +0000
+Received: by outflank-mailman (output) from mailman id 1454765.1668298; Mon, 19 Oct 2026 19:43:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xItGO-0005OO-BA; Mon, 19 Oct 2026 19:43:16 +0000
-Received: by outflank-mailman (input) for mailman id 1454761;
- Mon, 19 Oct 2026 19:43:15 +0000
+	id 1xItGT-000641-BK; Mon, 19 Oct 2026 19:43:21 +0000
+Received: by outflank-mailman (input) for mailman id 1454765;
+ Mon, 19 Oct 2026 19:43:20 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xItGN-0005OC-8X
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 19:43:15 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xItGS-0005ur-CS
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 19:43:20 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xItGN-000000022je-1WMX
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 19:43:15 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xItGS-000000022k8-1ErZ;
+ Mon, 19 Oct 2026 19:43:20 +0000
 Received: from [217.155.165.12] (helo=Georges-MacBook-Pro-2.tail87ea19.ts.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xItGN-00000001FjN-0Qpv
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 19:43:15 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xItGS-00000001FjN-09tM;
+ Mon, 19 Oct 2026 19:43:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -40,166 +40,153 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:Message-ID:Date:Subject:To:From;
-	bh=wLsogNPjrZdKtS17lrwteI/YwOL7FRQzUi+W577fu44=; b=OgBgQFpTLw/v8jepk2Mbjig5pz
-	F/SFUvrhRLj45kVWJcuRTE43sJ+vgrBjzrWdo1rATTiR5lIDAOL1ONSWMeLVkEH5/IXnswYQd+LTN
-	wAWV6vjWDyN3S+GwlkgHn2iblqwO90sVd9D6YOnO3yvlVdMNe1rnigieEG30T9EvpC0k=;
+	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=2WAx232e1o23xbVvwluUdMmJZVaoZJGamK8uLinVDPU=; b=NKMK8/Ki0ezCIEAlL7cZwz7gyp
+	L1u3bm3PXbOvQ0ed6wuwklEkss95YOhTORtDceTntsIwdGFHOWnNrzsjVee65HkFrWdU1zKXbZiii
+	T3q0KLx2NkVAVHH23HsPaP8wXRx7H+TW3czd75oZqrCbwv2g4IODQ/E+diO1FL4xnh2E=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Subject: [PATCH v4 00/30] ASI: HVM per-vCPU areas, sparse-view directmap, per-vCPU state area
-Date: Mon, 19 Oct 2026 20:42:31 +0100
-Message-ID: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
+Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH v4 05/30] x86/domain_page: drop redundant create_perdomain_mapping() call
+Date: Mon, 19 Oct 2026 20:42:36 +0100
+Message-ID: <20261019-asi-hvm-v4-5-b68b66652266@xenproject.org>
 X-Mailer: git-send-email 2.55.0
+In-Reply-To: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
+References: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-Spam-Status: No, score=-14.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,INCLUDES_PATCH,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=4.0.1
+X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This is the first part of a series to implement address space
-isolation.
+From: Roger Pau Monné <roger.pau@citrix.com>
 
-The approach is the same as v3: Start by focusing on just getting ASI
-and intra-domain isolation for HVM guests.  PV support is added where
-it's simple to do, and regressions are avoided.
+We want to change per-domain mappings to be per-vCPU mappings.  In
+preparation for that, we want to arrange that
+create_perdomain_mapping() work either with a single perdomain area,
+or with a per-vCPU perdomain area.
 
-The first 20 patches are (sometimes broken-down or extended) versions
-of what was posted in v3; the last 10 patches make a few additional
-improvements to the sparse-view directmap, and then begin moving vCPU
-state out of the xenheap and into a per-vCPU area.
+One of the current calls in a domain context turns out to be
+unnecessary:
 
-To be more detailed:
+mapcache_domain_init() pre-plumbs L1 tables over the whole
+inuse/garbage bitmap range (sized for the full MAPCACHE_ENTRIES
+capacity), without populating any data pages.  The plumbing is
+redundant: mapcache_vcpu_init() installs the bitmap pages the domain
+will actually use with populating calls, which allocate any missing
+page-table structure on demand -- and since d->max_vcpus is fixed
+before any vCPU is created, the range those calls cover never grows.
+The pre-plumbed tail beyond it backs virtual addresses that are never
+populated at all.
 
-01: A fix that should be considered for backport
+In debug builds, and on hosts with memory hotplug or with more memory
+than the PV directmap covers, the call was also what first allocated a
+PV domain's per-domain L3.  Release builds on other hosts already
+allocated it only with the first vCPU.
 
-02-14: Implement per-vCPU perdomain area and per-vCPU mapcaches for
-HVM guests.
+Drop the call; now we always allocate only with the first vCPU.
 
-15-22: Maintain two "views" of the directmap: A full directmap, and a
-sparse directmap.  The full directmap is what we have now; the sparse
-directmap removes non-xenheap heap memory.
+With the only fallible operation gone, mapcache_domain_init() becomes
+void, and arch_domain_create()'s error handling for it goes away.
 
-23-30: Add a vCPU state area to the perdomain area (both for PV and
-HVM).  Move SVM VMCB structures and VMX guest MSR areas into it.
+The per-domain-mapping work in mapcache_vcpu_init() stays where it is
+rather than moving into mapcache_domain_init() along with this change,
+ready for a later patch which introduces per-vCPU mapcaches.
 
-One key thing to get feedback on is 22: It's a not very simple effort
-to mitigate a very rare event.
+Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
+Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
+Signed-off-by: George Dunlap <gwd@xenproject.org>
+Reviewed-by: Roger Pau Monné <roger@xenproject.org>
+---
+Changes in v3:
+- Rebased onto staging without the GDT/LDT conversions (for the
+  HVM-only series); no functional difference.
+- Say why the per-vCPU part stays in mapcache_vcpu_init() (Jan).
+- Say that the call also first allocated a PV domain's per-domain L3 in
+  some builds, which all builds now do with the first vCPU.
 
-Note that at the end of this series, PV guests can be given the sparse
-direct-map; this isolates them from other domains, but doesn't isolate
-vCPUs within a domain.
+Changes in v2:
+- Added to the series (split out of the following patch).
 
-An advantage of this is that it allows us to easily turn the sparse
-directmap off for dom0 (or other system domains).  Some quick tests on
-my local test rig on v3 of the series show that network throughput
-from dom0 to a guest drops 31% when the sparse directmap is enabled
-for dom0 vs not.
+Changes since the previously posted version:
+- Split out of "x86/mm: switch {create,destroy}_perdomain_mapping()
+  domain parameter to vCPU", where the removal was folded into the
+  parameter switch without its own rationale.
+---
+ xen/arch/x86/domain.c             | 3 +--
+ xen/arch/x86/domain_page.c        | 8 ++------
+ xen/arch/x86/include/asm/domain.h | 2 +-
+ 3 files changed, 4 insertions(+), 9 deletions(-)
 
-The rest of the series looks like this:
-
-- Move more things into the vCPU state area: user_regs, FPU/XSAVE
-
-- Hardening for ioreq server state (The ioreq server pages can't be
-moved into per-vCPU areas without a massive refactoring of the ioreq
-server protocol.)
-
-- Implement per-pCPU stacks.  In this mode, per-pCPU stacks would only
-be for HVM guests using the "sparse directmap".  Until we get per-vCPU
-root pagetables for PV guests, it's not practical to prevent a PV
-guest from seeing all the stacks.
-
-- Low-hanging optimizations
-
-A dependency graph of the above functionality can be found here:
-
-https://xenbits.xenproject.org/people/gdunlap/asi-series-deps.html
-
-Extending the intra-domain isolation to PV guests would involve
-implementing per-vCPU root pagetables for PV guests.  There are draft
-implementations of this, but they are quite complicated.
-
-George Dunlap (20):
-  x86/PoD: map one page at a time in p2m_pod_zero_check()
-  x86/mm: refuse to promote an L4 while the domain has no vCPU
-  x86/mm: have init_xen_l4_slots() take a vCPU in place of the domain
-  x86/domain_page: drop redundant is_pv_vcpu() checks
-  x86/domain_page: don't unmap a mapcache entry that is not present
-  x86/mm: let Xen's page-table walker operate on a given root
-  x86/mm: build and maintain a sparse view of the directmap
-  x86/domain_page: key the directmap fast paths on the loaded view
-  x86/domain_page: clear a mapcache slot at its last unmap
-  x86/mm: run guest contexts on the sparse directmap view
-  x86/spec-ctrl: wire the sparse directmap view into the asi= option
-  xen/xmalloc: return an emptied region after dropping the pool lock
-  x86/mm: split a sparse directmap superpage with a page being freed
-  x86/mm: introduce a per-vCPU state window in the perdomain area
-  x86/svm: introduce svm_vmcb_map() and svm_vmcb_unmap()
-  x86/svm: clear the VMCB clean bits in svm_ctxt_switch_from()
-  x86/svm: restore guest debug registers in svm_do_resume()
-  x86/svm: drop svm_vmcb_dump()'s paddr and the unused VCPU_svm_vmcb
-  x86/svm: allocate VMCBs from the domain heap behind the vCPU state
-    window
-  x86/vmx: move the guest MSR load/save list off always-mapped memory
-
-Roger Pau Monné (10):
-  x86/mm: purge unneeded destroy_perdomain_mapping()
-  x86/mm: prepare destroy_perdomain_mapping() for per-vCPU perdomain
-    areas
-  x86/domain_page: drop redundant create_perdomain_mapping() call
-  x86/mm: prepare create_perdomain_mapping() for per-vCPU perdomain
-    areas
-  x86/spec-ctrl: introduce Address Space Isolation command line option
-  x86/hvm: introduce per-vCPU L3 page-table
-  x86/domain_page: prepare the mapcache for per-vCPU accounting
-  x86/domain_page: move struct mapcache_vcpu to struct arch_vcpu
-  x86/hvm: introduce per-vCPU mapcache for vCPU-PT domains
-  x86/mm: introduce populate_perdomain_mapping()
-
- docs/misc/xen-command-line.pandoc           |  49 +++
- xen/arch/x86/Kconfig                        |   1 +
- xen/arch/x86/Makefile                       |   1 +
- xen/arch/x86/domain.c                       |  30 +-
- xen/arch/x86/domain_page.c                  | 302 +++++++++----
- xen/arch/x86/hvm/hvm.c                      |   6 -
- xen/arch/x86/hvm/svm/nestedsvm.c            |  12 +-
- xen/arch/x86/hvm/svm/svm.c                  | 151 +++++--
- xen/arch/x86/hvm/svm/vmcb.c                 |  74 +++-
- xen/arch/x86/hvm/svm/vmcb.h                 |  20 +-
- xen/arch/x86/hvm/vmx/vmcs.c                 | 134 +++++-
- xen/arch/x86/include/asm/config.h           |  23 +-
- xen/arch/x86/include/asm/domain.h           |  51 ++-
- xen/arch/x86/include/asm/hvm/vmx/vmcs.h     |  63 +--
- xen/arch/x86/include/asm/mm.h               |  29 +-
- xen/arch/x86/include/asm/sparse-directmap.h |  83 ++++
- xen/arch/x86/include/asm/spec_ctrl.h        |   2 +
- xen/arch/x86/mm.c                           | 424 +++++++++++++++---
- xen/arch/x86/mm/hap/hap.c                   |   2 +-
- xen/arch/x86/mm/p2m-pod.c                   |  72 ++--
- xen/arch/x86/mm/shadow/hvm.c                |   2 +-
- xen/arch/x86/mm/shadow/multi.c              |   2 +-
- xen/arch/x86/pv/dom0_build.c                |   6 +-
- xen/arch/x86/pv/domain.c                    |  30 +-
- xen/arch/x86/pv/shim.c                      |   4 +-
- xen/arch/x86/setup.c                        |   4 +
- xen/arch/x86/sparse-directmap.c             | 455 ++++++++++++++++++++
- xen/arch/x86/spec_ctrl.c                    | 174 +++++++-
- xen/arch/x86/x86_64/asm-offsets.c           |   1 -
- xen/arch/x86/x86_64/mm.c                    |  14 +-
- xen/common/Kconfig                          |  18 +
- xen/common/page_alloc.c                     |  51 ++-
- xen/common/xmalloc_tlsf.c                   |  12 +-
- xen/include/xen/mm.h                        |  40 ++
- 34 files changed, 1993 insertions(+), 349 deletions(-)
- create mode 100644 xen/arch/x86/include/asm/sparse-directmap.h
- create mode 100644 xen/arch/x86/sparse-directmap.c
-
-
-base-commit: 7e020a4dd6ed30eb6c91a9abe2767034e2bb270a
+diff --git a/xen/arch/x86/domain.c b/xen/arch/x86/domain.c
+index 368e4deff3..8e17fbe6d9 100644
+--- a/xen/arch/x86/domain.c
++++ b/xen/arch/x86/domain.c
+@@ -908,8 +908,7 @@ int arch_domain_create(struct domain *d,
+     }
+     else if ( is_pv_domain(d) )
+     {
+-        if ( (rc = mapcache_domain_init(d)) != 0 )
+-            goto fail;
++        mapcache_domain_init(d);
+ 
+         if ( (rc = pv_domain_initialise(d)) != 0 )
+             goto fail;
+diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
+index 5744754f11..f02be1675b 100644
+--- a/xen/arch/x86/domain_page.c
++++ b/xen/arch/x86/domain_page.c
+@@ -223,7 +223,7 @@ void unmap_domain_page(const void *ptr)
+     local_irq_restore(flags);
+ }
+ 
+-int mapcache_domain_init(struct domain *d)
++void mapcache_domain_init(struct domain *d)
+ {
+     struct mapcache_domain *dcache = &d->arch.pv.mapcache;
+     unsigned int bitmap_pages;
+@@ -232,7 +232,7 @@ int mapcache_domain_init(struct domain *d)
+ 
+ #ifdef NDEBUG
+     if ( !mem_hotplug && max_page <= PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
+-        return 0;
++        return;
+ #endif
+ 
+     BUILD_BUG_ON(MAPCACHE_VIRT_END + PAGE_SIZE * (3 +
+@@ -244,10 +244,6 @@ int mapcache_domain_init(struct domain *d)
+                       (bitmap_pages + 1) * PAGE_SIZE / sizeof(long);
+ 
+     spin_lock_init(&dcache->lock);
+-
+-    return create_perdomain_mapping(d, (unsigned long)dcache->inuse,
+-                                    2 * bitmap_pages + 1,
+-                                    NIL(l1_pgentry_t *), NULL);
+ }
+ 
+ int mapcache_vcpu_init(struct vcpu *v)
+diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
+index 2d0a915410..212daae1f5 100644
+--- a/xen/arch/x86/include/asm/domain.h
++++ b/xen/arch/x86/include/asm/domain.h
+@@ -89,7 +89,7 @@ struct mapcache_domain {
+     unsigned long *garbage;
+ };
+ 
+-int mapcache_domain_init(struct domain *d);
++void mapcache_domain_init(struct domain *d);
+ int mapcache_vcpu_init(struct vcpu *v);
+ 
+ /* x86/64: toggle guest between kernel and user modes. */
 -- 
 2.55.0
 
