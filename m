@@ -4,46 +4,46 @@ X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on
 Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.2 with cipher ECDHE-RSA-AES256-GCM-SHA384 (256/256 bits))
 	(No client certificate requested)
-	by smtp.lore.kernel.org (Postfix) with ESMTPS id 44C79CCF2D6
-	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 08:51:29 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1454001.1667465 (Exim 4.92)
+	by smtp.lore.kernel.org (Postfix) with ESMTPS id 434ADCCF2E4
+	for <xen-devel@archiver.kernel.org>; Mon, 19 Oct 2026 08:59:43 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1454008.1667472 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xIj5M-00026S-V1; Mon, 19 Oct 2026 08:51:12 +0000
+	id 1xIjDL-0002px-PK; Mon, 19 Oct 2026 08:59:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1454001.1667465; Mon, 19 Oct 2026 08:51:12 +0000
+Received: by outflank-mailman (output) from mailman id 1454008.1667472; Mon, 19 Oct 2026 08:59:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xIj5M-00026L-Rh; Mon, 19 Oct 2026 08:51:12 +0000
-Received: by outflank-mailman (input) for mailman id 1454001;
- Mon, 19 Oct 2026 08:51:12 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xIjDL-0002pq-Mg; Mon, 19 Oct 2026 08:59:27 +0000
+Received: by outflank-mailman (input) for mailman id 1454008;
+ Mon, 19 Oct 2026 08:59:27 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <dmytro_prokopchuk1@epam.com>) id 1xIj5M-00026F-DP
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 08:51:12 +0000
+ (envelope-from <Mykyta_Poturai@epam.com>) id 1xIjDL-0002pk-12
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 08:59:27 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xIj5L-002RQL-JD
- for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 10:51:11 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xIjDK-00Aw5B-Dm
+ for xen-devel@lists.xenproject.org; Mon, 19 Oct 2026 10:59:26 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6ad5d9e9-8faa-0a2a0a5109dd-0a2a4501ab78-48
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 10:51:11 +0200
-Received: from [52.101.84.131]
- (helo=DB3PR0202CU003.outbound.protection.outlook.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <dmytro_prokopchuk1@epam.com>)
- id 6ad5d9ff-5984-0a2a45010019-34655483f7ba-3
- for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 10:51:11 +0200
-Received: from AM9SPR01MB0028.eurprd03.prod.outlook.com
- (2603:10a6:20b:410::12) by MA9PR03MB772455.eurprd03.prod.outlook.com
- (2603:10a6:250:10f::11) with Microsoft SMTP Server (version=TLS1_2,
+ (envelope-from <Mykyta_Poturai@epam.com>)
+ id 6ad5dbdd-bab6-0a2a0a5309dd-0a2a4504d906-46
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 10:59:26 +0200
+Received: from [52.101.69.87]
+ (helo=AM0PR83CU005.outbound.protection.outlook.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Mykyta_Poturai@epam.com>)
+ id 6ad5dbee-b57f-0a2a45040019-3465455754ea-3
+ for <xen-devel@lists.xenproject.org>; Mon, 19 Oct 2026 10:59:26 +0200
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ (2603:10a6:102:30d::12) by BESPR03MB911498.eurprd03.prod.outlook.com
+ (2603:10a6:b10:109::17) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.19; Mon, 19 Oct
- 2026 08:51:09 +0000
-Received: from AM9SPR01MB0028.eurprd03.prod.outlook.com
- ([fe80::851:da2d:b88a:1b50]) by AM9SPR01MB0028.eurprd03.prod.outlook.com
- ([fe80::851:da2d:b88a:1b50%6]) with mapi id 15.21.0522.017; Mon, 19 Oct 2026
- 08:51:09 +0000
+ 2026 08:59:23 +0000
+Received: from PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::b8c6:f37a:987a:beb]) by PAVPR03MB10102.eurprd03.prod.outlook.com
+ ([fe80::b8c6:f37a:987a:beb%5]) with mapi id 15.21.0522.017; Mon, 19 Oct 2026
+ 08:59:23 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Unsubscribe: <https://lists.xenproject.org/mailman/options/xen-devel>,
@@ -57,211 +57,308 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=yuGo0YU/tcHSyA1+s957B/hAsO0vGfeRl/adiiMrorPyFnoGMSEaakqDO8ZI6pZ9J19UjfKRAG5gGBglv7zjGRw6lGtZMxIEi/N9oelmf/vDs9VJRDysio4DuiNzwyjIRaJCVy7GlWqm9FGhYIGKZrA+mNP3kveSvGIoIZ5XQutSyDpJpmHKjVikCQQBRqYjMsW0XcB9UoICFLIOYjAeNKQte8iGbXXUnJZdgOITLngOLKv9IWstkYoPkKUPBPBe0Be6LELqoB4NuivSc9hD+2IiuAyEPOLLwGRy3bzaVN9srtJemCcgyGazo8pkzDdkkB308gqQ8cAOr43PTyJxtw==
+ b=DrMzcHifj+1+vbgJsrbo5ksbtEA4K4D5pSH4G7NNegBQ1eUuYekV0oiF6sMuOo8PgNi5ZkHgq9whLcS35Q/FrJE9cyP41PNqhqMPsWxb3oN0ZBqZyilwaekrdiB8v5MoIIkidmhNMB8bch99jXhQKmzla2cCT4wfhbHAg2HxDh7OV7kLourN2tE4EYzvN26UV+nz/xIYw05dOAdx9bvX2TITr7aiNzMsZU0M1zcWnIBNaRXPyF93aAQLxSJ8mvLohwdA4j8pP8eC6Q1p3vHHsJewcShKCgWIrIBNLijbcUR6fgFIGBTdIpUtTkyO8i0U/dWDG6FOhUwgs7vIjAKpYw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Au1W/bV9kIxJexDLUZli5znRmIy8HsNAjkfS8aFPemk=;
- b=eKV20Xv5+rKlnQuewuiuNbWfUMhwCXsIanS/sqR4O1poKH8e+56Lclo99OZS5FXI+7Jm8mOA6P50Yzwo1fivi/cWjZEtJ+yw11Y+5CM0wcRJlJHg9guINBoqwLSfxSbTLRxem0MBUKOjGOjSYDYgHxg8CmTQaK3wG7bnEJxoR1bO52c2lxebGhhYDwTavxwE+TxdJpjeYIgkVy2Freo9QAiQPCI8Arr6JDJY/eYzL4rkmJ6DTOO/LSTkDw12Ln68coTp/5c6mU0RLlqscEdOdA0l5qBE7KOPOkJTfejxZERVt8ChJaBEBwlLjbvRllwbA/CS/VJyh4iEBEX4wKt0Ug==
+ bh=sH4kTxF+BQMlIy/y9w/d+JkjyjOKGLMjkmkpX/++0R4=;
+ b=B7qYRbACh9UnK81kHdgvMcZ2VPJkUbz/0wtx1ah0VuKQra0AnCVjxf/5JAjO6OANc55fTUMLpEmZcyrdq41z2CPXmIoTFLFJN4IoDo/ORzX8/9e4gRNrXxH4lLq1EyP4t/bz52rDcNj76MLYyGtbmJ5X5Y0IV67TjtgU2fD3swQngu2LAYjCeFKUp2X4Kmmi32EWVQhxYKqzOi72iOpXJc7HEEzxBD6UNBe0wb7majUG0TxYXrKYGRrUEa1CFFiEU2yCAy1tkUzRfr/JM5C5QCiuEtRfVxPEKx9qvPRp/bCOdVEe08AetDMwo8h0lXL4GHemsRKMLjGPUPr4mb3qgA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Au1W/bV9kIxJexDLUZli5znRmIy8HsNAjkfS8aFPemk=;
- b=eXOxp4VWUCz0385KQ+/am913dN2gn99W/7ulDGyBwAzSPMZuqfGmyIkysiT9rovC5qIkmB+x5LDbQIxdihIAEtqKBJ1DJ2MXvFPBBZa/iXcMyt1k3LAMunaYhUY7u0BlXkgxxkVvITz4rTKOftQzjTUIvfDw/HcNd4DJBlbhucC/go6RJdhjxz6dKBaU995/lmn3DypnUTkAY3/adObBCM+ZBWJivtR6+RDXbuwXBHjtFNuoiRLyWqjzTmVLOSMniJz3rZzUxOK5CAPAFSQV/G9Og/w+yFS7diLHgSMxNP0pmo7X0xO9L1a0R3PPIrl36fZ9ttGggdijLqx+vzRKKw==
-From: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+ bh=sH4kTxF+BQMlIy/y9w/d+JkjyjOKGLMjkmkpX/++0R4=;
+ b=g9VO9QMOkJeb0IYkVEi/CoaJdRyr/N7DhWcJWNEZ3RqSwHnYQDIJbY6CQ97UaLWHOkV+asvcn+ewzE+snLxm01TODnk3izPRb6lsgo0K6WjfwVAlHoLpipPE3Sts1rxhZxHArpdJQMBo4EdszltHyYaODwFQNnYJMS9okYmKWkDALjSvarjG0UA3B8LguqEg74s2Y9lwfHXmwNao3oVz7eULKfstOgdNV9Eo+MmjZnojIHRZjljo3kmc7uidwWAbMHQMyo47+D7mpmExWeVhzN7qEqWn6IGtxDZrSfCDpTmEgSov/cNN9qUFGQAKm1t3iHRqb1tgNWuVMzQwExdnOw==
+From: Mykyta Poturai <Mykyta_Poturai@epam.com>
 To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-CC: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>, Nicola Vetrini
-	<nicola.vetrini@bugseng.com>, Doug Goldstein <cardoe@cardoe.com>, Stefano
- Stabellini <sstabellini@kernel.org>, Andrew Cooper
-	<andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien
- Grall <julien@xen.org>, =?iso-8859-1?Q?Roger_Pau_Monn=E9?=
-	<roger@xenproject.org>
-Subject: [PATCH v3] automation/eclair: generalize the noreturn
- function-pointer deviation
-Thread-Topic: [PATCH v3] automation/eclair: generalize the noreturn
- function-pointer deviation
-Thread-Index: AQHdX6b80imhcnqS7U2zknLLHn+kXg==
-Date: Mon, 19 Oct 2026 08:51:09 +0000
+CC: Mykyta Poturai <Mykyta_Poturai@epam.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>, Volodymyr
+ Babchuk <Volodymyr_Babchuk@epam.com>, Rahul Singh <rahul.singh@arm.com>
+Subject: [PATCH v5] xen/arm: smmuv3: Add support for removing devices
+Thread-Topic: [PATCH v5] xen/arm: smmuv3: Add support for removing devices
+Thread-Index: AQHdX6gi8viU2M73vEaKXA5NzGRTmQ==
+Date: Mon, 19 Oct 2026 08:59:23 +0000
 Message-ID:
- <d0af5523cf21dc3d8da6cf0e765fb34a664f7f1c.1792399445.git.dmytro_prokopchuk1@epam.com>
-Accept-Language: en-US, uk-UA, ru-RU
+ <5bf81a2b31f182d1339e89fb65e445bc20b1a865.1792400044.git.mykyta_poturai@epam.com>
+Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
 X-MS-TNEF-Correlator:
 authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: AM9SPR01MB0028:EE_|MA9PR03MB772455:EE_
-x-ms-office365-filtering-correlation-id: 396f3e49-a90a-4d55-aabc-08df2dbe1ec4
+x-ms-traffictypediagnostic: PAVPR03MB10102:EE_|BESPR03MB911498:EE_
+x-ms-office365-filtering-correlation-id: 8ecbdcfa-f17f-4e5c-4aef-08df2dbf4541
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|7416014|42112799006|38070700021|56012099006|11063799006|261009223027099003|10067099003|18002099003|3023799007;
+ BCL:0;ARA:13230040|1800799024|366016|23010399003|376014|38070700021|56012099006|260925021911599003|260925022911599003|11063799006|261009223027099003|260925021311599003|10067099003|18002099003|6133799003;
 x-microsoft-antispam-message-info:
- CKTjBLThNb4rd52vVUPww2/p/S59oXwYVFt1xVUdqnWa/bHTlzg62v2nQ3zLC8bb+uozZgM94nJvSDErT8k97XX7XYXzq4geQIU3/qUPFwcpQRkMaOtQkkBejbiQukEca7bYLKbjDntGC79aQ6HIFa1ISAREAoiUh1EV0zpmxNjCFKn+xHTJMVqUhcYcDDGMIaFI1XVIEbJuodqbWL8i9ipuMTF4MvXUe8XlAl4v/+ecUD5DxhlSwXGeMso4g+Ztk41OPbPhBzJOPZkKsCyBBeK/GTr8tQF+lVZ8+jweFCUuaEcwlkhZO8SnOwpJxPWsaDrFjakqyaCwHQ8zH0uuQvBVPYerS94B1pCHUozHec3M9rJfAzQg+h/epr2UBfmMguNhKvqxDIYAlMfVmrII2ejZ8ZfGjsDohHc4rIMzPwXysR3q6AHy6kD0rUiUWUAY4cv7JpEbuwVIuRor2/VDQ9NKWBxHK0GSE4W/ww26HRhNOeMrxcTygLrWhHknN5d0U+1NlpkU7okXb8x8oYbMV031tsYV1vo+ZHT/YpcpBOlyTcA2foL0CZQIrNf9GK1C9yjEH+up++ueoI7cMom/y6MRvzAkMjMwJMyVHy6XYe431Jd3eCeJB0ieKLcTPLc1aiTw4UKK+L2l4jIdEqEDiMYmPaprRj4+uslX9Vk2IhIav05wuSH8Dlq0Ss6C7ppj/l9J8tSMnl/xfFRPKliC7WBExPF8xJKTmrdRAn/kDio=
+ BNHJhPAzGAG7USU8y1b7/Hg8uj3mUp+UQtsi/SqQG/9VGALwm1SVnSe3R5mUR1XXaaYsN5uE0OgW9NtVJ4Nd+F9ZAPtLOMBxSt5zsu4HW4dL5kqwAHpYDsaeE7+GblY63UnXLOtnIdMYpKU/QD38uNA00fEqMWHz7OlrEnLBz6EqkXMd6drux8SQcFg4mzz5eJm8I83+srYfrcZHZGCatv8ftj0Ld7FxhlvxuAlxsKneNC1CiPRVgyuSrVh7Xd7n40z+UTlK3iM6U1l9lJOHltRVf6aQFFox+mCEyHtxsuN++rkentwBgx+PGwFPvmZoDGW/aZeIrQtud7KNjm9INlQxrMvwNHTMbTEqnkPNofSO5rYD8j0yUdTmM1/TZo7LWJgvu0Y1Jvt+7x70tRgN8vLDwZYS6NN0NkasjfRnqEkmhA2jvIHRriDmdrcZChrCJMfujDequzPnTLAE4BxI3iMInqt4Fxk6HAX7UwRN2yvY1O96OO6lt/elKQv0ePNfxRuIjg7LQRGO7XBDKZ+K5QsFjJL2aSB3xIZa21Bgf7s/4GAS6418zAJQlpwd4wktDcpVMK8TweecGflZhsCa9LjUYxbR/zjvdQV4i+dkk36B8XaH8mowHF8+R9Ak4X76XhER6vRH8NXpTUeZG7b83XQ9K8mccOkKPf8WK1dJ9oc=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:AM9SPR01MB0028.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(7416014)(42112799006)(38070700021)(56012099006)(11063799006)(261009223027099003)(10067099003)(18002099003)(3023799007);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PAVPR03MB10102.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(23010399003)(376014)(38070700021)(56012099006)(260925021911599003)(260925022911599003)(11063799006)(261009223027099003)(260925021311599003)(10067099003)(18002099003)(6133799003);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?rEh0WsI5epBPp+OchmEhQF9TZ1+eRofHxGapqvuGqve4N71BFdY92kvQuN?=
- =?iso-8859-1?Q?ydfezsEw76Bdsxhr1AmhkOJm1MsTq1OedQ6jmJMgIm9gk73RLIGcX7zVbf?=
- =?iso-8859-1?Q?u3R5dBlTyMhK9ahCuONkYVIQuP6z0PSLbQ3J7kTdC8vtz0eXm/06ldku0Z?=
- =?iso-8859-1?Q?tIBLdafXp/4Tr4yHkvfjdaMQxH2k3KB0ThlxqkQJuajX9rw5/GezLXnlnq?=
- =?iso-8859-1?Q?qd2iaC7AAon0ySIkgaCqRv/Xo3PDvGF9KtrW7Y9pr4UEJFRf9BeKs8vBY6?=
- =?iso-8859-1?Q?7NoEajtMnFjTuWKLSGHYSNjpWysQbRuP3jOZ/jYEM+7OsvjQqtOr7l3kH4?=
- =?iso-8859-1?Q?Zyi9uut+chIc0nqaVBWceoCdi/0EhRI5aFH0JPJuNcZzYgKoOWMfG/qJvW?=
- =?iso-8859-1?Q?ok1phKjM5pWUS7IOXwKRPnVRPfsONyLnCdSf8fYKsel/5oQW0jRpaLhiqs?=
- =?iso-8859-1?Q?ZAdJVjMvLCp5BcF3NIJsRuySnJiiu869xWVhOZcDfCbous5c6HTStSOXYm?=
- =?iso-8859-1?Q?tPCxOgLHlWES5JJI7snJgywINOGD9873tKzjcbwcNYMBusKs23dFXV6OS2?=
- =?iso-8859-1?Q?LeYyYsQvM42KBJcB1+ArGZYFOcW+d0F9++VHwtnQa8nNYzztxAy+fMknuC?=
- =?iso-8859-1?Q?S9DRzHQ+yoTvPREJAcPkf1bcFNNhiiUON4a7NDhhHJmQSOGIAjDvSDndbc?=
- =?iso-8859-1?Q?RLGVnPbFfyQT0AoLPMtMMcp6LSLG19Z5+HRUZ220UF5AdLsXU0UoD/leQi?=
- =?iso-8859-1?Q?sI5OiNOVBzhdcD5tG7E91igl6BpX65fJep/p10aYPD+Vi2G7IIAv1FBWhb?=
- =?iso-8859-1?Q?ljht8F+wKA4pjiriS+KHMQ7sOPgmVjdzsjSe7lI2XYAaum683zSPn4SFfn?=
- =?iso-8859-1?Q?dce6RJFU6wah+FldHvFzRAZ6h3ZXhpa/8pxfSmh9tr4rux1FcLguzjAXDH?=
- =?iso-8859-1?Q?KTZW/pQTDo5QACmklYqSV7q0eAPyoPehNIJgELcTCgorA/qjD5+xIgVzAi?=
- =?iso-8859-1?Q?egJN5IwEOJWolTbu8NZYPcGbrTQFQub+yIGYDR7hqt7hbRMWCPk6y1IZfD?=
- =?iso-8859-1?Q?epcU8I67XDjlRMLTx2Q5cEvc88NVd4lvvtGhseh9i0w/KuCWkEsQXsVWwp?=
- =?iso-8859-1?Q?OYqjliRfUWFWS4mNZsdx2/qi0pSmfegM1Ub6awrmO5+e555iuHU9EfNj3r?=
- =?iso-8859-1?Q?FedommhGhEjNulXDTF4n9K8YKm8bTxAWGXIdXPcgdMcQKvjbIP6Z0KibVl?=
- =?iso-8859-1?Q?HEeKLDakU43bK7Pm9m/5rpRrrX2vRSfuJEYUlaOTaehxAimlOyXA1RI8Px?=
- =?iso-8859-1?Q?KJBag/PAmeezo3aQvovJ+CY0aophtV0aBcB6F5o6xkW2UNyNWC8gWgu3fC?=
- =?iso-8859-1?Q?q97vTM2hSKWkNvPOrl4QHPTSOENH0O5dQhIfpbmuohraF/6bdvRTlnBF23?=
- =?iso-8859-1?Q?q2scL1oj0GMrZL/pd23i++YW6j6Yejgb4XUyTnOR9Slz/eN7EhdYWaS6du?=
- =?iso-8859-1?Q?wrI6iaRTEZzkoJo2FHklCLikdxy27fvUFf2q1wTjp9QfAJa1+17qOK7gwN?=
- =?iso-8859-1?Q?IEgoWwa7pi99QiOgaN+TCN3i0mzbPRsYD0jdMKkEd9PWJ3I8js4km3XYQ2?=
- =?iso-8859-1?Q?bX7GQs1rT0VLT6PxSCZtVKQ0/qBe3YRbeqOk0adtYHguQuKMoS9E5y2tOs?=
- =?iso-8859-1?Q?VAIj0xfERObbpzVHBk2wn3Ui7znpuUnr71glItq4O5RYsdj//1EW2Oa/Ld?=
- =?iso-8859-1?Q?DlMYhMyJEGYrtKT41VB0/dJFXa7sMQuPeFpqGc0pDLT/eZouXz2JaVBn5C?=
- =?iso-8859-1?Q?JaC+aL0ITnh/1DUYLdUFr20MxpBcIq8=3D?=
+ =?iso-8859-1?Q?SFtcWMPcUgHq7/7o04ADry/NnF1aK6uXCVa9Z7hPWJnMI+y0+zGCJI6v23?=
+ =?iso-8859-1?Q?rRL5DOAaSnqiW96Xfc2AZ0K64nWUau0rIZC4tcwdqCeyIdQt9nCX+JF1fi?=
+ =?iso-8859-1?Q?Xeub4eyB/YO8VA8patxu/DmRAbugyot2tarGGic03eo+uTjw7lAoBfvQO1?=
+ =?iso-8859-1?Q?oWs8XZCX3DgxPleOq/GbyxLmGjjblZ0xGdUWyjNrimY5AXZv2Lmf1BjWs1?=
+ =?iso-8859-1?Q?aH4ILvluq6gGOcmGDh/4UMfPM+imCo6H+NmB0ZBbCF+sEJVUSi0ZT2UBxK?=
+ =?iso-8859-1?Q?XluiHCrgYpCpSoXOY5f2ImcnWPy+PLSXEBNAhQTR5TS/TXEPazHyLxgoZZ?=
+ =?iso-8859-1?Q?oZfSNtNRMSgpbiqAHJOvUQFZ1+8VW5XUgm+YdDNDvBFWmnxijD2B3PEmSc?=
+ =?iso-8859-1?Q?6hGTSH4JZcyB2bMKRJED6sXWggWrrsPIlU1xo9W54HXVgu5iciKj/LA5d2?=
+ =?iso-8859-1?Q?5XWa51yLYQWX3vd+ai3ZwD88dyTodu0PO5ZUqCaOzvSvTX6GiTB1OxVu/p?=
+ =?iso-8859-1?Q?Wi8FaJ++BEmlc2Hvr6AjjgWx+aqUX74FyCtZ5FvZffhiAQKiiltzMj2FKd?=
+ =?iso-8859-1?Q?e6WsYHVLGUOXJbUQhFPiDn3AxdKfkp0VwGd6Cw5t+/nZSqujNB1i2pqDA7?=
+ =?iso-8859-1?Q?rQDPmkWnHr5raTPyy4enx4XsYAbXvWlA0Qm6dJH59oPGOZb4q2j1nTIf7Z?=
+ =?iso-8859-1?Q?hSa33NILKXsGHwofUvjFtzS05c8ePiDYKwpEQrRnV2TA2VkcpFYzeGLy2h?=
+ =?iso-8859-1?Q?BBS0OIXVXmfAHSvO8dRZTm20CHOB4E5CXyFPV4RXpRp63u7lmYQJYzIk7C?=
+ =?iso-8859-1?Q?cCEGJWyish9EnizrttXSDjaD2dX9LI8z9aNETBp12JyHKaQ3M5+GIXSTtt?=
+ =?iso-8859-1?Q?19qnc2ytwNdQxxo0Uf6ACJlY1+h6L5HsoyaMl9l5zcZW3qRtAuexZNGyw3?=
+ =?iso-8859-1?Q?elWI7eMJnABWP6YSNcNROVk6oaGurhnqAzIh59uOezRDIh0wIdUm1eYtGq?=
+ =?iso-8859-1?Q?kVgjKIEEWxpmtWZk+E6hLjDVFxmamekgTjwPnqB5SehiiQs7YfYoVF58wX?=
+ =?iso-8859-1?Q?E/1fXkDl6FfltKHpQQaq39VJJGm2gSbtqKKoqJw3B2l1clkllQBmEUoWXM?=
+ =?iso-8859-1?Q?a0LwtPO/C2tDgIxd940kIYVQkRiU6iEPbUIzl0OiiB+WhfreuU0UHSG9Yn?=
+ =?iso-8859-1?Q?8gHk5PuT90Eli+NdKhiaSsk6cyOtALNHPfAaDrnDWJKOkyj3Ft6ckE+Bay?=
+ =?iso-8859-1?Q?qc2aElYjYn8ziKXFKkR6QvfmP8S/UzH2eLg5oXk5QgA21+jkeADR6WvoBu?=
+ =?iso-8859-1?Q?w8fdJFdEuaVssFN8gJlaLigTYsiJj1NSrISI/NcrYpOZ/Wu+65/kQeuvFh?=
+ =?iso-8859-1?Q?JzKX1A3Lf7vHhIMgkxuDdoNFtKAgltAfVV+us6FAcUgRABH/WBJbKbuFPY?=
+ =?iso-8859-1?Q?aJAoziquipEtuylvSIOTyARNfVV9XdCn0pHdrEFa66kJa7gbLXnesIK7mt?=
+ =?iso-8859-1?Q?w6Zu30WEJ31xFww4KNbaLVRp8A4Vulw2pZQwglMhV/n3cNeo8NMqQbQ2i2?=
+ =?iso-8859-1?Q?2oJbtNiPqEejBSqh076osbUL40Hz8mJcVigqMUFqEer6nGljAVRnRsEJnk?=
+ =?iso-8859-1?Q?HY68XFViqUe8p6iuK6wQBH0It4dsWgUBcvv/FB9qqsBoBr7yeC6nbg160J?=
+ =?iso-8859-1?Q?Fs7PvNJNCkIhClfuAm/xSmlj2VSzFpXZawBu364SsesLWhP+rRY5T5BMc1?=
+ =?iso-8859-1?Q?FtIqGtm3BarUnatDI8CAQ+08jHA8PT9Pg7zlTn3V6q2TCHxsbjPd0Oh3v3?=
+ =?iso-8859-1?Q?89/pgI63ng=3D=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: AM9SPR01MB0028.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 396f3e49-a90a-4d55-aabc-08df2dbe1ec4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Oct 2026 08:51:09.2555
+X-MS-Exchange-CrossTenant-AuthSource: PAVPR03MB10102.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8ecbdcfa-f17f-4e5c-4aef-08df2dbf4541
+X-MS-Exchange-CrossTenant-originalarrivaltime: 19 Oct 2026 08:59:23.3451
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: Dw4tdkoCv+29YXr7G4iHYVEiVx3mGMXtLX2BkNho63k9K3tHXqV9QWHtABqlV0/V3k70G9djm74Mwy7p1xMSiX2D+7KgYcPQ+u2F6DFidTc=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: MA9PR03MB772455
-X-purgate-ID: tlsNG-d62444/1792399871-BE27A757-15DCACE2/0/0
+X-MS-Exchange-CrossTenant-userprincipalname: cKKDDiD33PCxtxLZHU0vKj8qMkf0YwokFsIxtGZHIB2i01rdMH1DRU5MOEQBtYEso8d1FAEbwqqTGgDoFIVavg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BESPR03MB911498
+X-purgate-ID: tlsNG-ebf023/1792400366-538C1B50-84501B9C/0/0
 X-purgate-type: clean
-X-purgate-size: 4926
+X-purgate-size: 6382
 
-The R11.1 safe cast only matched void noreturn (*)(void *). Accept a
-conversion where noreturn is omitted and the signature is otherwise
-compatible. canonical() covers typeof destinations, and
-compatible_deep_unqualified keeps the parameter and return types aligned.
+Allow for removing devices from SMMUv3. arm_smmu_deassign_dev handles
+most of the work by disabling ATS and zeroing STEs. Additionally, unset
+the dt_device_is_protected flag and free no longer needed smmu_master.
+Free iommu_fwspec for PCI devices only, for DT devices it is handled by
+generic IOMMU layer.
 
-Discarding noreturn does not change the calling convention. Code after
-the call is unreachable when every possible callee is noreturn. Leaving
-that code in place is a tolerated Rule 2.1 violation. The full rationale
-is in docs/misra/deviations.rst.
+Rework dt_device_set_protected to accept a boolean parameter, update
+callsites.
 
-Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
+Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 ---
-Changes in v3:
-- Reworded the deviation text per Jan's review: "noreturn omitted but an
-  otherwise compatible signature", "all of the possible callees", and a
-  tolerated Rule 2.1 violation
-- rules.rst: use '(void *)' spelling
 
-Changes in v2:
-- do not claim that discarding noreturn leaves compiler behavior unchanged
-- write that code after the call is unreachable, and that Xen's behavior
-  is the same (whether the compiler deletes that code or leaves it)
+Tested on QEMU with SRIOV series[1] by repeatedly enabling/disabling
+VFs.
+
+[1]: https://patchew.org/Xen/cover.1772806036.git.mykyta._5Fpoturai@epam.co=
+m/
+
+V4->V5:
+* drop dead domain lookup on the DT path
+* remove assert on  arm_smmu_deassign_dev error
+* drop redundant IS_ENABLED(CONFIG_HAS_PCI)
+* fix indentation
+
+V3->V4:
+* s/u8/uint8_t/
+* assert pcidevs_locked
+* assert deassignment is only reachable by PCI
+* fix build error with HAS_PCI=3Dn
+
+V2->V3:
+* free fwspec for pci devices
+* remove testing note from commit message
+
+V1->V2:
+* check for phantom functions
+* simplify pci/dt device split
+* improve error handling
+* don't try to free master for unprotected devices
+* rework dt_device_set_protected
 ---
- automation/eclair_analysis/ECLAIR/deviations.ecl |  9 +++++----
- docs/misra/deviations.rst                        | 12 ++++++++----
- docs/misra/rules.rst                             |  8 +++++---
- 3 files changed, 18 insertions(+), 11 deletions(-)
+ xen/drivers/passthrough/arm/ipmmu-vmsa.c |  2 +-
+ xen/drivers/passthrough/arm/smmu-v3.c    | 72 +++++++++++++++++++++++-
+ xen/drivers/passthrough/arm/smmu.c       |  4 +-
+ xen/include/xen/device_tree.h            |  5 +-
+ 4 files changed, 77 insertions(+), 6 deletions(-)
 
-diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/=
-eclair_analysis/ECLAIR/deviations.ecl
-index 6cdb10a129..c7a800c62f 100644
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -394,11 +394,12 @@ constant expressions are required.\""
+diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthr=
+ough/arm/ipmmu-vmsa.c
+index fa9ab9cb13..0648f9b407 100644
+--- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
++++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
+@@ -1367,7 +1367,7 @@ static int ipmmu_add_device(u8 devfn, struct device *=
+dev)
+         }
+=20
+         /* Let Xen know that the master device is protected by an IOMMU. *=
+/
+-        dt_device_set_protected(dev_to_dt(dev));
++        dt_device_set_protected(dev_to_dt(dev), true);
+     }
+ #ifdef CONFIG_HAS_PCI
+     if ( dev_is_pci(dev) )
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthroug=
+h/arm/smmu-v3.c
+index bf153227db..e1af615985 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -1493,6 +1493,75 @@ static int arm_smmu_assign_dev(struct domain *d, u8 =
+devfn, struct device *dev,
+ static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn,
+ 				 struct device *dev);
+=20
++static int arm_smmu_remove_device(uint8_t devfn, struct device *dev)
++{
++	struct arm_smmu_master *master;
++	struct iommu_fwspec *fwspec;
++	struct domain *d =3D NULL;
++
++	fwspec =3D dev_iommu_fwspec_get(dev);
++	if ( !fwspec )
++		return -ENODEV;
++
++	master =3D dev_iommu_priv_get(dev);
++	if ( !master )
++		return -ENODEV;
++
++#ifdef CONFIG_HAS_PCI
++	if ( dev_is_pci(dev) )
++	{
++		struct pci_dev *pdev =3D dev_to_pci(dev);
++
++		/* Ignore calls for phantom functions */
++		if ( devfn !=3D pdev->devfn )
++			return 0;
++
++		ASSERT(pcidevs_locked());
++
++		d =3D pdev->domain;
++	}
++	else
++#endif
++	{
++		if ( !dt_device_is_protected(dev_to_dt(dev)) )
++		{
++			dev_err(dev, "Not added to SMMUv3\n");
++			return -ENODEV;
++		}
++
++		dt_device_set_protected(dev_to_dt(dev), false);
++	}
++
++	if ( d )
++	{
++		/*
++		 * For DT devices, iommu_remove_dt_device() returns -EBUSY if the
++		 * device is still assigned, so d is always NULL on the DT path.
++		 */
++		ASSERT(dev_is_pci(dev));
++
++		if ( arm_smmu_deassign_dev(d, devfn, dev) )
++			dev_err(dev, "Removing anyway\n");
++	}
++
++	arm_smmu_disable_pasid(master);
++
++	dev_info(dev, "Removed master device (SMMUv3 %s StreamIds %u)\n",
++		 dev_name(fwspec->iommu_dev), fwspec->num_ids);
++
++	xfree(master);
++	dev_iommu_priv_set(dev, NULL);
++
++	/*
++	 * For DT devices the fwspec is freed by iommu subsystem, but for PCI
++	 * devices we need to free it here
++	 */
++	if ( dev_is_pci(dev) )
++		iommu_fwspec_free(dev);
++
++	return 0;
++}
++
+ static int arm_smmu_add_device(u8 devfn, struct device *dev)
+ {
+ 	int i, ret;
+@@ -1571,7 +1640,7 @@ static int arm_smmu_add_device(u8 devfn, struct devic=
+e *dev)
+ 		}
+=20
+ 		/* Let Xen know that the master device is protected by an IOMMU. */
+-		dt_device_set_protected(dev_to_dt(dev));
++		dt_device_set_protected(dev_to_dt(dev), true);
+ 	}
+=20
+ 	dev_info(dev, "Added master device (SMMUv3 %s StreamIds %u)\n",
+@@ -2867,6 +2936,7 @@ static const struct iommu_ops arm_smmu_iommu_ops =3D =
+{
+ 	.unmap_page		=3D arm_iommu_unmap_page,
+ 	.dt_xlate		=3D arm_smmu_dt_xlate,
+ 	.add_device		=3D arm_smmu_add_device,
++	.remove_device		=3D arm_smmu_remove_device,
+ };
+=20
+ static __init int arm_smmu_dt_init(struct dt_device_node *dev,
+diff --git a/xen/drivers/passthrough/arm/smmu.c b/xen/drivers/passthrough/a=
+rm/smmu.c
+index d63c901551..4d2f71f152 100644
+--- a/xen/drivers/passthrough/arm/smmu.c
++++ b/xen/drivers/passthrough/arm/smmu.c
+@@ -825,7 +825,7 @@ static int arm_smmu_dt_add_device_legacy(struct arm_smm=
+u_device *smmu,
+ 	if ( !dev_is_pci(dev) )
+ 	{
+ 		/* Xen: Let Xen know that the device is protected by an SMMU */
+-		dt_device_set_protected(dev_node);
++		dt_device_set_protected(dev_node, true);
+ 	}
+=20
+ 	for (i =3D 0; i < fwspec->num_ids; ++i) {
+@@ -862,7 +862,7 @@ static int arm_smmu_dt_remove_device_legacy(struct arm_=
+smmu_device *smmu,
+=20
+ 	if ( !dev_is_pci(dev) )
+ 		/* Protected by dt_host_lock and dtdevs_lock as caller holds these locks=
+. */
+-		dev_node->is_protected =3D false;
++		dt_device_set_protected(dev_node, false);
+=20
+ 	kfree(master);
+ 	return 0;
+diff --git a/xen/include/xen/device_tree.h b/xen/include/xen/device_tree.h
+index 06d7643622..76ae1e674a 100644
+--- a/xen/include/xen/device_tree.h
++++ b/xen/include/xen/device_tree.h
+@@ -300,9 +300,10 @@ static inline domid_t dt_device_used_by(const struct d=
+t_device_node *device)
+     return device->used_by;
  }
- -doc_end
 =20
---doc_begin=3D"The conversion from 'void noreturn (*)(void *)' to 'void (*)=
-(void *)' is safe
--because the semantics of the 'noreturn' attribute do not alter the calling=
- convention or behavior of the resulting code."
-+-doc_begin=3D"The conversion from a noreturn function pointer to a functio=
-n
-+pointer with noreturn omitted but an otherwise compatible signature does
-+not alter the calling convention."
- -config=3DMC3A2.R11.1,casts+=3D{safe,
--  "kind(bitcast)&&to(type(pointer(inner(return(builtin(void))&&all_param(1=
-, pointer(builtin(void)))))))&&from(expr(skip(!syntactic(),
--   ref(property(noreturn)))))"}=20
-+  "kind(bitcast)&&to(type(canonical(__function_pointer_types)))&&from(expr=
-(skip(!syntactic(),
-+   ref(property(noreturn)))))&&relation(compatible_deep_unqualified)"}
- -doc_end
+-static inline void dt_device_set_protected(struct dt_device_node *device)
++static inline void dt_device_set_protected(struct dt_device_node *device,
++                                           bool protected)
+ {
+-    device->is_protected =3D true;
++    device->is_protected =3D protected;
+ }
 =20
- -doc_begin=3D"The conversion from a pointer to an incomplete type to unsig=
-ned long does not lose any information, provided that the target type has e=
-nough bits to store it."
-diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
-index 6bcc2adf95..76be6b3251 100644
---- a/docs/misra/deviations.rst
-+++ b/docs/misra/deviations.rst
-@@ -392,10 +392,14 @@ Deviations related to MISRA C:2012 Rules:
-      - Tagged as `safe` for ECLAIR.
-=20
-    * - R11.1
--     - The conversion from 'void noreturn (*)(...)' to 'void (*)(...)' is =
-safe
--       because the semantics of the 'noreturn' attribute do not alter the =
-calling
--       convention or behavior of the resulting code, parameters handling r=
-emain
--       consistent.
-+     - The conversion from a noreturn function pointer to a function point=
-er
-+       with noreturn omitted but an otherwise compatible signature does no=
-t
-+       alter the calling convention. The callee does not return, so code
-+       following a call through the resulting pointer is unreachable. The
-+       compiler may delete that unreachable code when it can see that all
-+       of the possible callees are noreturn, or it may leave the code in
-+       place. Xen's behavior is the same in either case. Code left in plac=
-e
-+       is a tolerated violation of Rule 2.1.
-      - Tagged as `safe` for ECLAIR.
-=20
-    * - R11.2
-diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
-index a59cf1782e..5f9fe4c860 100644
---- a/docs/misra/rules.rst
-+++ b/docs/misra/rules.rst
-@@ -435,9 +435,11 @@ maintainers if you want to suggest a change.
-        and any other type
-      - All conversions to integer types are permitted if the destination
-        type has enough bits to hold the entire value. Conversions to bool
--       and void* are permitted. Conversions from 'void noreturn (*)(...)'
--       to 'void (*)(...)' are permitted. Conversions from [unsigned] long
--       or '(void *)' to a function pointer are permitted.
-+       and '(void *)' are permitted. Conversions from a noreturn function
-+       pointer to a function pointer with noreturn omitted but an otherwis=
-e
-+       compatible signature are permitted.
-+       Conversions from [unsigned] long or '(void *)' to a function pointe=
-r
-+       are permitted.
-        Example::
-=20
-            unsigned long func_addr =3D (unsigned long)&some_function;
+ static inline bool dt_device_is_protected(const struct dt_device_node *dev=
+ice)
 --=20
-2.43.0
+2.55.0
 
