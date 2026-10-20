@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82500606A31C
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:21 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1FB8D606A31B
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=RYpTwtrg
-Received: from list by lists.xenproject.org with outflank-mailman.1455288.1668882 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=P2KwWbnS
+Received: from list by lists.xenproject.org with outflank-mailman.1455284.1668871 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vr-0001ai-EB; Tue, 20 Oct 2026 10:56:11 +0000
+	id 1xJ7Vq-0001TB-OF; Tue, 20 Oct 2026 10:56:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455288.1668882; Tue, 20 Oct 2026 10:56:11 +0000
+Received: by outflank-mailman (output) from mailman id 1455284.1668871; Tue, 20 Oct 2026 10:56:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vr-0001YM-6A; Tue, 20 Oct 2026 10:56:11 +0000
-Received: by outflank-mailman (input) for mailman id 1455288;
- Tue, 20 Oct 2026 10:46:44 +0000
+	id 1xJ7Vq-0001Qz-HD; Tue, 20 Oct 2026 10:56:10 +0000
+Received: by outflank-mailman (input) for mailman id 1455284;
+ Tue, 20 Oct 2026 10:46:29 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Mi-0007HN-CJ
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:46:44 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7MT-0007Fw-HK
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:46:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7Mh-002ESM-Oo
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:46:43 +0200
+ id 1xJ7MS-002EHQ-U7
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:46:28 +0200
 Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74680-bab6-0a2a0a5309dd-0a2a4509d282-44
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:43 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ id 6ad74680-bab6-0a2a0a5309dd-0a2a4509d282-10
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:28 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
  by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74692-be1a-0a2a45090019-aa0a857c4f3b-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:43 +0200
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ id 6ad74683-be1a-0a2a45090019-aa0a817c7905-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:28 +0200
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-300-zY61osTGPTaA1pnSKnNHFQ-1; Tue,
- 20 Oct 2026 10:46:38 +0000
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-349-AZuVlQ_mNCWlMBKmGs5kWg-1; Tue,
+ 20 Oct 2026 10:46:23 +0000
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 5CC261955D69; Tue, 20 Oct 2026 10:46:33 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 73F281800D85; Tue, 20 Oct 2026 10:46:18 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 14CBF30000E7; Tue, 20 Oct 2026 10:46:29 +0000 (UTC)
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 9D8411956088; Tue, 20 Oct 2026 10:46:13 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,23 +60,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493202;
+	s=mimecast20190719; t=1792493187;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=W4iwz5jM7eZNLXaBc15ajfHMaIvbcteyV5+hzYG/iP8=;
-	b=RYpTwtrgQV9LDr6PPPWCGIvUefmfFMfa4QnuHfFNKR6T1J7fKes+R3z0I8KtXFn2z8ykPI
-	TZ7/jE9z0T4CMAosoU0dpsH8Uv9STFnF7A4I68YlGjP78SI/xiEZaifjpFv1LL4NUWuaQ4
-	F93txUTVYjzk5Hi8WiKhD6jhIZqNuKo=
-X-MC-Unique: zY61osTGPTaA1pnSKnNHFQ-1
-X-Mimecast-MFC-AGG-ID: zY61osTGPTaA1pnSKnNHFQ_1792493194
+	bh=Wrkputc8/RPpD4nnWHNw9T7RRAU4Kg2aM4nuyIGGs8E=;
+	b=P2KwWbnS9ygGzQ/ZLqIaSEASARp1ANhH7OH8vh9SkqbCeKGzLAOjyDqcjuuzp56faazgvM
+	eVmAUmPzTC4TVEhpvQOPAJ9X0YS6JelQZjBH9HP2Uas5A0/IsLtPfgKkGvQOsX/wNJ5DZv
+	4s4hwEOGelFhvZpAi4BkPo99bXszpBM=
+X-MC-Unique: AZuVlQ_mNCWlMBKmGs5kWg-1
+X-Mimecast-MFC-AGG-ID: AZuVlQ_mNCWlMBKmGs5kWg_1792493179
 From: marcandre.lureau@redhat.com
-Date: Tue, 20 Oct 2026 14:45:21 +0400
-Subject: [PATCH v7 04/65] qapi/introspect: Don't elide types
+Date: Tue, 20 Oct 2026 14:45:19 +0400
+Subject: [PATCH v7 02/65] qapi: Ease access to introspection names
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-4-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-2-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -151,31 +151,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5331;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=7889;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=mh48JZUSGfIpAp1DsQ/GZxfBrxYDTkjYALDPFWkE2w0=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZXTj6BLvZgq0XBaDnDR415+cGHcMUxi/2dk
- ZicZ3/0CO+JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGVwAKCRDa6OEJdZac
- 5cNFEACs0g3nYzOw9mcOrDPnlJXKJuNeci0n6VbAEXZsFCZ1u4JNtS1ifs+0pHvISJaoZta0my6
- lvkGupWdwq079dv7nvmOoT5lGQxsx41FDbzeMAh2AqGRiaoTGIR34hQFf3sOLgmZraxp30Lt33v
- I9FftBFuBgNH1cHh44kywesPPVrmlfX1fGV1hURBsBolTEkpUT+VNW3Si1XrztZk2PXf1zupIB1
- 6v4kYskKQkdj6v95qbfwBDHaMsgyUWRuc4dE9BsDkCCULJcdcOw0jQy+xkShVjgbTzRG/spQtdm
- OJgHTTwkqlLpLSzKkiZiWk130rNvNbU9ZPZZ7pWrSjD87w4sUoVTVlLNx7btfbj6VpkVI/lsNHX
- eXEv52qGqAcZCZptkK8oP/CIE6nCQvMdxcZ31fqe3HxosbVA5tVjhnoeC/tQyiJZuiyExxkFiJ7
- 0ZbpjT/AIjGFffTJ3IYXzUgPfgdB1arCF3YD86a2cQEZgHpGQtJ675JNQAPfC7Gbgpu/znK2Txl
- QskafbOYE8+L5oukgyV+eYRWnqzZsRIXJeUrRhCXcOW2+NOIDZyh5yfQvEaIefITC4ILWuwtEEF
- F1kFYI7xr5ozlv5mmkOq6tEUPt+N9cLcy/vZVW0O4PEQCCt0FJuN5TvgfUPN9YjLObVm6vjQw9L
- JjRCn7EZx7/9Trw==
+ bh=a2pApAt20adFheRFMFL0JhfgD1DBySkAUQki6ne7iLY=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZX47T8N7MhCWr0sH+GZry8k5SuXuUXyZs9e
+ X4b68TesAyJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGVwAKCRDa6OEJdZac
+ 5auAD/4/Ie/cSClFbfq3pLk5G4chwRGPx/IkNYssN2QhE7SuensGeO9N3hAkiwjTWMQUa4RmIV3
+ Ih/ody0cyQZ7ebEGwThhPd/0tDx7xTVJYKJlWKSTE5TWfQGUlgdud9VFnpmx8tSWLwXoFzA3/Hi
+ z84mm5HxX4k1UOcwbKkeDY6EkPEVuH8/N0fn/A7MiLmcS+vrSdBq2tiEnHZ2QEopsTjy7Fg+8Dm
+ trZ5cGqVMRvocoVM8CgiT6O62rCese/7CxN6AiIHPC523itkKI9FAhKp4RCjU92vE34Y4qb3OK7
+ 4nLiR3tXfQKU/YeaXR1MILIVGMiK5nF1dai6meQh2g2gFR5CZaT6gar5YZXLqO6P5vbb/h9A5B1
+ XfERQ+8YYELHMZBHW9/k9O9lzRT4AaVsNM0NRp0v7q2tBK8LXDi/gCQ8p7fmH14kbbMpCNI05fK
+ raCcLlKl6gYu52cO8zN9VqgDnMq9FRZW0+OUXJFULxZ30mbl8FV2VQh7yqS7Pjv7b0zNHWAunEZ
+ wonP/p1G5r2Po5hwZOcexcv5WAK6BbCPlEQLoNz9USS4GnPaglfv0pEsF4RVBhsqmN/mm7S8mbt
+ wlt5AqKpk3Y/XRH4EIFYc+5GuwKmie/wmHA0vfOmbqn2V9JRLHgrJL5pHEdbb6UDEt2kucPZXXU
+ qlf+go84nzQ475Q==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: cP31hDvhxy1B8F7cAdgBeAt6ETRKpUplzKQZrcplQQs_1792493194
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: 2-qu0rH9ZhSFifJT8_LtKB31j1Grb9Zhj9f_IyJFeUg_1792493179
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1792493203-39EC6034-30D853B4/0/0
+X-purgate-ID: tlsNG-bad1c0/1792493188-BF0DD034-D54B9E37/0/0
 X-purgate-type: clean
-X-purgate-size: 5380
+X-purgate-size: 7938
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -186,133 +186,193 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Markus Armbruster <armbru@redhat.com>
 
-query-qmp-schema elides types not reachable from commands and events.
-It currently emits 1251 out of 1385 definitions, and elides 134 types.
-Whether that's worthwhile is debatable.
+query-qmp-schema masks type names, because they are not part of the
+external interface.  Marc-André Lureau would like to also use them
+with qom-list & friends.  Trouble is the masked names are buried deep
+in QAPISchemaGenIntrospectVisitor.  Lift them into schema.py: new
+QAPISchemaDefinition method introspection_name() returns a
+definition's name for use in introspection.
 
-Marc-André Lureau would like to make QOM introspection (qom-list &
-friends) refer to QAPI types.  We additionally need types reachable
-from QOM properties.
-
-Unfortunately, the QAPI generator knows nothing about QOM properties.
-
-We could manually mark the QAPI types to elide, or the QAPI types not
-to elide even though they are not reachable from commands and events.
-Feels very much not worthwhile to me.
-
-We could conservatively approximate "reachable from QOM properties" by
-"available for use with QOM properties".  These are the built-in and
-user-defined types, and their arrays.  With that, we'd elide just 38
-out of 1385 definitions.  Too few to be worthwhile.
-
-Simply emit everything.
-
-Output of query-qmp-schema grows from 247KiB to 274KiB for me.
+This changes the masked names, which is fine.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- docs/devel/qapi-code-gen.rst |  2 --
- scripts/qapi/introspect.py   | 31 ++++---------------------------
- 2 files changed, 4 insertions(+), 29 deletions(-)
+ scripts/qapi/introspect.py | 23 ++++-------------------
+ scripts/qapi/schema.py     | 43 +++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 47 insertions(+), 19 deletions(-)
 
-diff --git a/docs/devel/qapi-code-gen.rst b/docs/devel/qapi-code-gen.rst
-index b1cc5b5f0db1..77f08bb68cac 100644
---- a/docs/devel/qapi-code-gen.rst
-+++ b/docs/devel/qapi-code-gen.rst
-@@ -1250,8 +1250,6 @@ JSON array of strings.
- To examine a type, start with a command or event using it, then follow
- references by name.
- 
--QAPI schema definitions not reachable that way are omitted.
--
- The SchemaInfo for a command has meta-type "command", and variant
- members "arg-type", "ret-type" and "allow-oob".  On the wire, the
- "arguments" member of a client's "execute" command must conform to the
 diff --git a/scripts/qapi/introspect.py b/scripts/qapi/introspect.py
-index 49d1ed2897e8..15302ecf155a 100644
+index 7e28de2279ad..644461560c64 100644
 --- a/scripts/qapi/introspect.py
 +++ b/scripts/qapi/introspect.py
-@@ -28,9 +28,7 @@
- from .schema import (
-     QAPISchema,
+@@ -30,7 +30,6 @@
      QAPISchemaAlternatives,
--    QAPISchemaArrayType,
+     QAPISchemaArrayType,
      QAPISchemaBranches,
--    QAPISchemaEntity,
+-    QAPISchemaBuiltinType,
+     QAPISchemaEntity,
      QAPISchemaEnumMember,
      QAPISchemaFeature,
-     QAPISchemaIfCond,
-@@ -175,7 +173,6 @@ def __init__(self, prefix: str, unmask: bool):
-         self._unmask = unmask
+@@ -177,7 +176,6 @@ def __init__(self, prefix: str, unmask: bool):
          self._schema: Optional[QAPISchema] = None
          self._trees: List[Annotated[SchemaInfo]] = []
--        self._used_types: List[QAPISchemaType] = []
+         self._used_types: List[QAPISchemaType] = []
+-        self._name_map: Dict[str, str] = {}
          self._genc.add(mcgen('''
  #include "qemu/osdep.h"
  #include "%(prefix)sqapi-introspect.h"
-@@ -187,10 +184,6 @@ def visit_begin(self, schema: QAPISchema) -> None:
-         self._schema = schema
- 
-     def visit_end(self) -> None:
--        # visit the types that are actually used
--        for typ in self._used_types:
--            typ.visit(self)
--        # generate C
-         name = c_name(self._prefix, protect=False) + 'qmp_schema_qlit'
-         self._genh.add(mcgen('''
- #include "qobject/qlit.h"
-@@ -205,32 +198,12 @@ def visit_end(self) -> None:
-                              c_string=_tree_to_qlit(self._trees)))
+@@ -208,18 +206,14 @@ def visit_end(self) -> None:
          self._schema = None
          self._trees = []
--        self._used_types = []
--
--    def visit_needed(self, entity: QAPISchemaEntity) -> bool:
--        # Ignore types on first pass; visit_end() will pick up used types
--        return not isinstance(entity, QAPISchemaType)
+         self._used_types = []
+-        self._name_map = {}
+ 
+     def visit_needed(self, entity: QAPISchemaEntity) -> bool:
+         # Ignore types on first pass; visit_end() will pick up used types
+         return not isinstance(entity, QAPISchemaType)
  
      def _name(self, name: str) -> str:
-         assert self._schema
-         return self._schema.definition_introspection_name(name, self._unmask)
+-        if self._unmask:
+-            return name
+-        if name not in self._name_map:
+-            self._name_map[name] = '%d' % len(self._name_map)
+-        return self._name_map[name]
++        assert self._schema
++        return self._schema.definition_introspection_name(name, self._unmask)
  
      def _use_type(self, typ: QAPISchemaType) -> str:
--        assert self._schema is not None
--
--        # Map the various integer types to plain int
--        if typ.json_type() == 'int':
--            type_int = self._schema.lookup_type('int')
--            assert type_int
--            typ = type_int
--        elif (isinstance(typ, QAPISchemaArrayType) and
--              typ.element_type.json_type() == 'int'):
--            type_intlist = self._schema.lookup_type('intList')
--            assert type_intlist
--            typ = type_intlist
--        # Add type to work queue if new
--        if typ not in self._used_types:
--            self._used_types.append(typ)
+         assert self._schema is not None
+@@ -237,13 +231,6 @@ def _use_type(self, typ: QAPISchemaType) -> str:
+         # Add type to work queue if new
+         if typ not in self._used_types:
+             self._used_types.append(typ)
+-        # Clients should examine commands and events, not types.  Hide
+-        # type names as integers to reduce the temptation.  Also, it
+-        # saves a few characters on the wire.
+-        if isinstance(typ, QAPISchemaBuiltinType):
+-            return typ.name
+-        if isinstance(typ, QAPISchemaArrayType):
+-            return '[' + self._use_type(typ.element_type) + ']'
          return self._name(typ.name)
  
      @staticmethod
-@@ -295,6 +268,8 @@ def _gen_variant(self, variant: QAPISchemaVariant
- 
-     def visit_builtin_type(self, name: str, info: Optional[QAPISourceInfo],
-                            json_type: str) -> None:
-+        if json_type == 'int' and name != 'int':
-+            return
-         self._gen_tree(name, 'builtin', {'json-type': json_type})
- 
-     def visit_enum_type(self, name: str, info: Optional[QAPISourceInfo],
-@@ -312,6 +287,8 @@ def visit_enum_type(self, name: str, info: Optional[QAPISourceInfo],
-     def visit_array_type(self, name: str, info: Optional[QAPISourceInfo],
+@@ -271,8 +258,7 @@ def _gen_tree(self, name: str, mtype: str, obj: Dict[str, object],
+                 # Output a comment to make it easy to map masked names
+                 # back to the source when reading the generated output.
+                 comment = f'"{self._name(name)}" = {name}'
+-            name = self._name(name)
+-        obj['name'] = name
++        obj['name'] = self._name(name)
+         obj['meta-type'] = mtype
+         if features:
+             obj['features'] = self._gen_features(features)
+@@ -327,8 +313,7 @@ def visit_array_type(self, name: str, info: Optional[QAPISourceInfo],
                           ifcond: QAPISchemaIfCond,
                           element_type: QAPISchemaType) -> None:
-+        if element_type.json_type() == 'int' and name != 'intList':
-+            return
          element = self._use_type(element_type)
-         self._gen_tree(name, 'array', {'element-type': element}, ifcond)
+-        self._gen_tree('[' + element + ']', 'array', {'element-type': element},
+-                       ifcond)
++        self._gen_tree(name, 'array', {'element-type': element}, ifcond)
  
+     def visit_object_type_flat(self, name: str, info: Optional[QAPISourceInfo],
+                                ifcond: QAPISchemaIfCond,
+diff --git a/scripts/qapi/schema.py b/scripts/qapi/schema.py
+index 9c9e257a8fd5..11f3accec873 100644
+--- a/scripts/qapi/schema.py
++++ b/scripts/qapi/schema.py
+@@ -136,6 +136,13 @@ def __repr__(self) -> str:
+     def c_name(self) -> str:
+         return c_name(self.name)
+ 
++    def set_ordinal(self, ordinal: int) -> None:
++        pass
++
++    # pylint: disable=unused-argument
++    def introspection_name(self, unmask: bool) -> str:
++        return self.name
++
+     def check(self, schema: QAPISchema) -> None:
+         assert not self._checked
+         super().check(schema)
+@@ -323,6 +330,17 @@ def visit(self, visitor: QAPISchemaVisitor) -> None:
+ 
+ 
+ class QAPISchemaType(QAPISchemaDefinition, ABC):
++    def __init__(
++        self,
++        name: str,
++        info: Optional[QAPISourceInfo],
++        doc: Optional[QAPIDoc],
++        ifcond: Optional[QAPISchemaIfCond] = None,
++        features: Optional[List[QAPISchemaFeature]] = None,
++    ):
++        super().__init__(name, info, doc, ifcond, features)
++        self._masked_name: Optional[str] = None
++
+     # Return the C type for common use.
+     # For the types we commonly box, this is a pointer type.
+     @abstractmethod
+@@ -363,6 +381,17 @@ def need_has_if_optional(self) -> bool:
+         # Except for arrays; see QAPISchemaArrayType.need_has_if_optional().
+         return not self.c_type().endswith(POINTER_SUFFIX)
+ 
++    def set_ordinal(self, ordinal: int) -> None:
++        assert not self._masked_name
++        self._masked_name = str(ordinal)
++
++    def introspection_name(self, unmask: bool) -> str:
++        # Type names are not part of the external interface.  Hide
++        # them in introspection.  Also saves a few characters on the
++        # wire.
++        assert self._masked_name
++        return self.name if unmask else self._masked_name
++
+     def check(self, schema: QAPISchema) -> None:
+         super().check(schema)
+         for feat in self.features:
+@@ -402,6 +431,11 @@ def json_type(self) -> str:
+     def doc_type(self) -> str:
+         return self.json_type()
+ 
++    def introspection_name(self, unmask: bool):
++        if self.json_type() == 'int':
++            return 'int'
++        return self.name
++
+     def visit(self, visitor: QAPISchemaVisitor) -> None:
+         super().visit(visitor)
+         visitor.visit_builtin_type(self.name, self.info, self.json_type())
+@@ -503,6 +537,9 @@ def doc_type(self) -> Optional[str]:
+             return None
+         return 'array of ' + elt_doc_type
+ 
++    def introspection_name(self, unmask: bool):
++        return '[' + self.element_type.introspection_name(unmask) + ']'
++
+     def visit(self, visitor: QAPISchemaVisitor) -> None:
+         super().visit(visitor)
+         visitor.visit_array_type(self.name, self.info, self.ifcond,
+@@ -1182,6 +1219,7 @@ def _def_definition(self, defn: QAPISchemaDefinition) -> None:
+                     "'%s' is already defined\n%s" % (defn.name, where))
+             raise QAPISemError(
+                 defn.info, "%s is already defined" % other_defn.describe())
++        defn.set_ordinal(len(self._entity_dict))
+         self._entity_dict[defn.name] = defn
+ 
+     def lookup_defn(self, name: str) -> Optional[QAPISchemaDefinition]:
+@@ -1208,6 +1246,11 @@ def resolve_type(
+                 info, "%s uses unknown type '%s'" % (what, name))
+         return typ
+ 
++    def definition_introspection_name(self, name: str, unmask: bool) -> str:
++        defn = self.lookup_defn(name)
++        assert defn
++        return defn.introspection_name(unmask)
++
+     def _module_name(self, fname: str) -> str:
+         if QAPISchemaModule.is_system_module(fname):
+             return fname
 
 -- 
 2.56.0.116.g6de20f6092dc
