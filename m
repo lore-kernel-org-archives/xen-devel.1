@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF022606A31E
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7793B606A320
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:53 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=M+ZBmkfY
-Received: from list by lists.xenproject.org with outflank-mailman.1455382.1669297 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=XSffY2IV
+Received: from list by lists.xenproject.org with outflank-mailman.1455385.1669304 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7XJ-0003Gz-DU; Tue, 20 Oct 2026 10:57:41 +0000
+	id 1xJ7XK-0003fP-T1; Tue, 20 Oct 2026 10:57:42 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455382.1669297; Tue, 20 Oct 2026 10:57:40 +0000
+Received: by outflank-mailman (output) from mailman id 1455385.1669304; Tue, 20 Oct 2026 10:57:42 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7XH-00038O-RH; Tue, 20 Oct 2026 10:57:39 +0000
-Received: by outflank-mailman (input) for mailman id 1455382;
- Tue, 20 Oct 2026 10:51:28 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xJ7XJ-0003YG-O1; Tue, 20 Oct 2026 10:57:41 +0000
+Received: by outflank-mailman (input) for mailman id 1455385;
+ Tue, 20 Oct 2026 10:51:30 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7RI-0000LC-1t
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:28 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7RK-0000Lp-3A
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:30 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7RH-00Crub-Eu
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:27 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xJ7RJ-00HSQO-G6
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:29 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7479d-2eae-0a2a0a5409dd-0a2a450480cc-44
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:27 +0200
+ id 6ad747b1-bab6-0a2a0a5309dd-0a2a450b8e48-0
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:29 +0200
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74736-b57f-0a2a45040019-aa0a857c9e75-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:49:27 +0200
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ id 6ad74774-b7e8-0a2a450b0019-aa0a857c6d91-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:29 +0200
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-532-AU63UEb8PQ-MadFO--Yndg-1; Tue,
- 20 Oct 2026 10:49:20 +0000
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-142-LEtBYtaXNhep3HOST1h5pg-1; Tue,
+ 20 Oct 2026 06:50:24 -0400
 Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8EE4D1955DE9; Tue, 20 Oct 2026 10:49:16 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id C61F61955DA5; Tue, 20 Oct 2026 10:50:19 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 1701A418; Tue, 20 Oct 2026 10:49:14 +0000 (UTC)
+ id 854725BC; Tue, 20 Oct 2026 10:50:16 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493366;
+	s=mimecast20190719; t=1792493428;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=G0tJqQA4vjH1OewDrlPPbV755lqj6OJV4iLGYLxe1dQ=;
-	b=M+ZBmkfYHDagIKA6a0QK4yLoimrm2zgmjFSPRWk0GK1/K/o4rcn8/QDeza+mlmLq7Oyl0F
-	rtF88j7+w9ll9ohQWO0171oemcXpW2gE4m3dJrQlgVgWJEF4UtHgyC3+0tPt6L+x27h0tv
-	mQRPKrSDYwcXbUlTX2BNYVRx6Z5Z1MA=
-X-MC-Unique: AU63UEb8PQ-MadFO--Yndg-1
-X-Mimecast-MFC-AGG-ID: AU63UEb8PQ-MadFO--Yndg_1792493356
+	bh=cjstbMWmXOAnQJ0vRg4/TV0UxKxkDAMv9/7iDMdvYXk=;
+	b=XSffY2IVRgKgqakC6JFT2BMyHFj54TJXSMa5xU8QBEIRxg5dsbGsaWvi+/pHaj3+eRokW0
+	qn1zCMaRbLDwnuJ94IPUwSpWYP8YhZiu1/RaIzLsTmOvRrL0Qjj7FQBlojsaIcts423yVY
+	cE9YQQJd2SiIeiKrPZB49vwaau/9VhQ=
+X-MC-Unique: LEtBYtaXNhep3HOST1h5pg-1
+X-Mimecast-MFC-AGG-ID: LEtBYtaXNhep3HOST1h5pg_1792493420
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:51 +0400
-Subject: [PATCH v7 34/65] ppc/spapr-caps: convert to QAPI-aware property
- registration
+Date: Tue, 20 Oct 2026 14:46:02 +0400
+Subject: [PATCH v7 45/65] hw/s390-virtio-ccw: convert loadparm property to
+ QAPI-aware registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-34-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-45-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,31 +152,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6963;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1438;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=h0OiLsI4rZp+v/Mhu46aHZ2MeGUSC4RGBbFRwR/fgso=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZafzwZrCef0nnjKmQFgGHI7d1DU4j3tcKg8
- rfJ8YYSxbiJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
- 5ZNiD/9uJkrnfIq0f1AAFb55zRGcmM6E9/bY9PjcQwic7qZwiIF30FoVEyW+LS1V4LBV8lFxJNS
- PQU7j6R+CB6v9HoMI64E1PyApDwdLlnaHAJlXcyEPUzd2BVafhj1hHbaYhLxkEy1FKLnJgXjLkJ
- gdIwysLCQIt8EXWXa5PEr9we5qawBjwypQ0Lag+ls7M/dEH/0Kh1uzOi9w8a2krYIDQZcarZN7i
- E4LtOP390qyqqA6YnMhP59VMT+qvfxHzc/ZQswUOQyZJDTsWt5bsBXzpOFFpbBXuTXpDT9AtofO
- ID8iow8Lpz1Tszo5kP/m/Lm4S8UWRsm6FmK1PFXmwtWWlyXJh+CUFxiKOxoxpS5FTXbRJGSv05O
- ZMYDLHTHu8+gadlaJjYgyFbJVyKlNsrAGTmFvM/RU3rpVkTt06dMhmHo8K8rWEYHAwUYB4Ks35l
- E6S+GJ02O0X284mnQwikHn+fLhcivRrqM+9mynA/bGmrsWZIK4DhT6Cp8zFSPLW47Oshjun/E64
- G1PIDvecXY/KRp7V24XZJYFMStRWq10r6lNpi654+g4kT2EsUxLVHwoqsQTcV+XoNk/+hsNx570
- AStfbHcS7MyUnY6GxM7Pl2zFwIbukx86j8jruO3yrSjE+v6CcaPGGLJ2oigWATENvOZrnqpgn3Y
- yk4mypdVxiZikCA==
+ bh=kUpPGFy4418k+1NoT02grj7G7ylnBF+ugRFLSNuQ/I8=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZbZ381/sBWM1azZ53D7cfjK2vNDIyCM5jiw
+ Xz8ukfeXYKJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWwAKCRDa6OEJdZac
+ 5WE7EACcNb6WUPAXGp4swEqKgOrI7mRkcimuGMJxDQptX6voqKSzXDGgbjpNbOpCSvTsAUBzqkf
+ VmQ+u1XXdOcMUFOXV12h+uVIagNkH/FDk+vj6EhW+7Kv+xUWHQwihzevCBsOe5YRu7AoC5JFL7e
+ 0gnAXgwlHoUc7rofc1b2A696Xi73B0BOxB5zdDwbfJPmC+zNLT3hs1Td4Kz/nHF5mI2tkY38zor
+ J9Gu+Zngb8i7tCVWNN4rxMRTflUnEleoTBaZ/MzpgKLm6BMGvNB/RklxuTW9RaHm5c7Hn2tOkUX
+ BjBeCAlN8BDg+4cPXlsrKBOZG04cS8ma9QO+ZFcTJJ0v6YXzwA+GsHW4fPIoGszFa+UyJOoyFyZ
+ JjxorHFP+v58GJcIr421M6yCPKqLa70RxTrPsVBPMAHrP0TejWLeOs0hIrNkRiE5+2601BD6apI
+ rZkqEk8rXGc2YmuOolkjrs6b6PIw2R6sibjUwbIPFEHNu7HbC/WLZG6sxGdbaHB5xKhjg7Yo0Hf
+ sljEdE+S9n89L1t8za9aF28F5ivQkNlw/vJ2npjoxGF9L6HCdk+EiYF61ps7MRQR9ViFVustynh
+ PdOoORH0IHDSPitjUdZoIvZb6i6CW8KZCeXn1ZUTNMv/w8f9vbbxVroo3zzRSKiilj8k+2MxLjs
+ N6G+newXEeukaug==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
 X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: 1cQZwZqz_9-azft6scwSnN05ejfbyioGzpBabvjSL3k_1792493356
+X-Mimecast-MFC-PROC-ID: vqv6ZsqdlPP53dCUgsK0l7KtoPyI116VmiZcYaluEWk_1792493420
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1792493367-C26CAB50-006B6F29/0/0
+X-purgate-ID: tlsNG-42698a/1792493429-AA8D99EA-6ADA8562/0/0
 X-purgate-type: clean
-X-purgate-size: 6965
+X-purgate-size: 1440
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -185,186 +185,37 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Replace the type string in SpaprCapabilityInfo with a QAPITypeInfo
-pointer and switch spapr_caps_add_properties() from
-object_class_property_add() to object_class_property_add_qapi().
+The QAPI type is actually a string. Here also, if we had typedef support
+we could expose a more specific type.
 
-Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/ppc/spapr_caps.c | 39 ++++++++++++++++++++-------------------
- 1 file changed, 20 insertions(+), 19 deletions(-)
+ hw/s390x/s390-virtio-ccw.c | 4 +++-
+ 1 file changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/hw/ppc/spapr_caps.c b/hw/ppc/spapr_caps.c
-index 103b17364feb..e622c79eb52a 100644
---- a/hw/ppc/spapr_caps.c
-+++ b/hw/ppc/spapr_caps.c
-@@ -24,6 +24,7 @@
- 
- #include "qemu/osdep.h"
- #include "qemu/error-report.h"
+diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
+index fda5ecc9ad3c..3ed425b16c3e 100644
+--- a/hw/s390x/s390-virtio-ccw.c
++++ b/hw/s390x/s390-virtio-ccw.c
+@@ -43,6 +43,7 @@
+ #include "system/hostmem.h"
+ #include "target/s390x/kvm/pv.h"
+ #include "migration/blocker.h"
 +#include "qapi/qapi-builtin-type-infos.h"
- #include "qapi/error.h"
  #include "qapi/visitor.h"
- #include "system/hw_accel.h"
-@@ -59,7 +60,7 @@ typedef struct SpaprCapabilityInfo {
-     /* Getter and Setter Function Pointers */
-     ObjectPropertyAccessor *get;
-     ObjectPropertyAccessor *set;
--    const char *type;
-+    const QAPITypeInfo *type;
-     /* Possible values if this is a custom string type */
-     SpaprCapPossible *possible;
-     /* Make sure the virtual hardware can support this capability */
-@@ -725,7 +726,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_HTM,
-         .get = spapr_cap_get_bool,
-         .set = spapr_cap_set_bool,
--        .type = "bool",
-+        .type = &bool_type_info,
-         .apply = cap_htm_apply,
-     },
-     [SPAPR_CAP_VSX] = {
-@@ -734,7 +735,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_VSX,
-         .get = spapr_cap_get_bool,
-         .set = spapr_cap_set_bool,
--        .type = "bool",
-+        .type = &bool_type_info,
-         .apply = cap_vsx_apply,
-     },
-     [SPAPR_CAP_DFP] = {
-@@ -743,7 +744,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_DFP,
-         .get = spapr_cap_get_bool,
-         .set = spapr_cap_set_bool,
--        .type = "bool",
-+        .type = &bool_type_info,
-         .apply = cap_dfp_apply,
-     },
-     [SPAPR_CAP_CFPC] = {
-@@ -752,7 +753,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_CFPC,
-         .get = spapr_cap_get_string,
-         .set = spapr_cap_set_string,
--        .type = "string",
-+        .type = &str_type_info,
-         .possible = &cap_cfpc_possible,
-         .apply = cap_safe_cache_apply,
-     },
-@@ -762,7 +763,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_SBBC,
-         .get = spapr_cap_get_string,
-         .set = spapr_cap_set_string,
--        .type = "string",
-+        .type = &str_type_info,
-         .possible = &cap_sbbc_possible,
-         .apply = cap_safe_bounds_check_apply,
-     },
-@@ -774,7 +775,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_IBS,
-         .get = spapr_cap_get_string,
-         .set = spapr_cap_set_string,
--        .type = "string",
-+        .type = &str_type_info,
-         .possible = &cap_ibs_possible,
-         .apply = cap_safe_indirect_branch_apply,
-     },
-@@ -784,7 +785,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_HPT_MAXPAGESIZE,
-         .get = spapr_cap_get_pagesize,
-         .set = spapr_cap_set_pagesize,
--        .type = "size",
-+        .type = &size_type_info,
-         .apply = cap_hpt_maxpagesize_apply,
-         .cpu_apply = cap_hpt_maxpagesize_cpu_apply,
-     },
-@@ -794,7 +795,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_NESTED_KVM_HV,
-         .get = spapr_cap_get_bool,
-         .set = spapr_cap_set_bool,
--        .type = "bool",
-+        .type = &bool_type_info,
-         .apply = cap_nested_kvm_hv_apply,
-     },
-     [SPAPR_CAP_NESTED_PAPR] = {
-@@ -803,7 +804,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_NESTED_PAPR,
-         .get = spapr_cap_get_bool,
-         .set = spapr_cap_set_bool,
--        .type = "bool",
-+        .type = &bool_type_info,
-         .apply = cap_nested_papr_apply,
-     },
-     [SPAPR_CAP_LARGE_DECREMENTER] = {
-@@ -812,7 +813,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_LARGE_DECREMENTER,
-         .get = spapr_cap_get_bool,
-         .set = spapr_cap_set_bool,
--        .type = "bool",
-+        .type = &bool_type_info,
-         .apply = cap_large_decr_apply,
-         .cpu_apply = cap_large_decr_cpu_apply,
-     },
-@@ -822,7 +823,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_CCF_ASSIST,
-         .get = spapr_cap_get_bool,
-         .set = spapr_cap_set_bool,
--        .type = "bool",
-+        .type = &bool_type_info,
-         .apply = cap_ccf_assist_apply,
-     },
-     [SPAPR_CAP_FWNMI] = {
-@@ -831,7 +832,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_FWNMI,
-         .get = spapr_cap_get_bool,
-         .set = spapr_cap_set_bool,
--        .type = "bool",
-+        .type = &bool_type_info,
-         .apply = cap_fwnmi_apply,
-     },
-     [SPAPR_CAP_RPT_INVALIDATE] = {
-@@ -840,7 +841,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_RPT_INVALIDATE,
-         .get = spapr_cap_get_bool,
-         .set = spapr_cap_set_bool,
--        .type = "bool",
-+        .type = &bool_type_info,
-         .apply = cap_rpt_invalidate_apply,
-     },
-     [SPAPR_CAP_AIL_MODE_3] = {
-@@ -849,7 +850,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_AIL_MODE_3,
-         .get = spapr_cap_get_bool,
-         .set = spapr_cap_set_bool,
--        .type = "bool",
-+        .type = &bool_type_info,
-         .apply = cap_ail_mode_3_apply,
-     },
-     [SPAPR_CAP_DAWR1] = {
-@@ -858,7 +859,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
-         .index = SPAPR_CAP_DAWR1,
-         .get = spapr_cap_get_bool,
-         .set = spapr_cap_set_bool,
--        .type = "bool",
-+        .type = &bool_type_info,
-         .apply = cap_dawr1_apply,
-     },
- };
-@@ -1069,9 +1070,9 @@ void spapr_caps_add_properties(SpaprMachineClass *smc)
-         g_autofree char *name = g_strdup_printf("cap-%s", cap->name);
-         g_autofree char *desc = g_strdup(cap->description);
+ #include "qapi/qapi-visit-machine-s390x.h"
+ #include "hw/s390x/cpu-topology.h"
+@@ -908,7 +909,8 @@ static void ccw_machine_class_init(ObjectClass *oc, const void *data)
+     object_class_property_set_description(oc, "dea-key-wrap",
+             "enable/disable DEA key wrapping using the CPACF wrapping key");
  
--        object_class_property_add(klass, name, cap->type,
--                                  cap->get, cap->set,
--                                  NULL, cap);
-+        object_class_property_add_qapi(klass, name, cap->type,
-+                                       cap->get, cap->set,
-+                                       NULL, cap);
- 
-         object_class_property_set_description(klass, name, desc);
-     }
+-    object_class_property_add(oc, "loadparm", "loadparm",
++    /* if QAPI learns to typedef str, we could expose a more specific type */
++    object_class_property_add_qapi(oc, "loadparm", &str_type_info,
+                               machine_get_loadparm, machine_set_loadparm,
+                               NULL, NULL);
+     object_class_property_set_description(oc, "loadparm",
 
 -- 
 2.56.0.116.g6de20f6092dc
