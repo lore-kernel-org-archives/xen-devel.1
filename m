@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3680E606A31D
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:58:17 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 66AF9606A319
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 11:11:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=WhsqAkxH
-Received: from list by lists.xenproject.org with outflank-mailman.1455400.1669372 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=HFuZItCj
+Received: from list by lists.xenproject.org with outflank-mailman.1455720.1669430 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7XZ-0006dY-BH; Tue, 20 Oct 2026 10:57:57 +0000
+	id 1xJ7kE-0003D7-L6; Tue, 20 Oct 2026 11:11:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455400.1669372; Tue, 20 Oct 2026 10:57:56 +0000
+Received: by outflank-mailman (output) from mailman id 1455720.1669430; Tue, 20 Oct 2026 11:11:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7XX-0006YW-Um; Tue, 20 Oct 2026 10:57:55 +0000
-Received: by outflank-mailman (input) for mailman id 1455400;
- Tue, 20 Oct 2026 10:52:03 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xJ7kE-0003D0-He; Tue, 20 Oct 2026 11:11:02 +0000
+Received: by outflank-mailman (input) for mailman id 1455720;
+ Tue, 20 Oct 2026 11:02:20 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Rr-0000QK-Oj
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:52:03 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7bn-0008OX-SI
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 11:02:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7Rr-00Cs6S-5Y
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:52:03 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xJ7bm-006PAc-Qe
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 13:02:18 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad747c7-2eae-0a2a0a5409dd-0a2a450aeb62-20
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:52:02 +0200
+ id 6ad74a38-bab6-0a2a0a5309dd-0a2a4501e376-4
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 13:02:18 +0200
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad747d1-f2d2-0a2a450a0019-aa0a857c70d3-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:52:02 +0200
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ id 6ad747a4-5984-0a2a45010019-aa0a857cda4f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:17 +0200
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-328-LUDw3GgDOriOUgUPMvJZCA-1; Tue,
- 20 Oct 2026 10:51:57 +0000
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-330-D7y_ed00OAaymLbt3bjJCQ-1; Tue,
+ 20 Oct 2026 10:51:11 +0000
 Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 55CF01955BD4; Tue, 20 Oct 2026 10:51:53 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id BC19B18011FD; Tue, 20 Oct 2026 10:51:06 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 7054130000E7; Tue, 20 Oct 2026 10:51:50 +0000 (UTC)
+ id D664E30002CD; Tue, 20 Oct 2026 10:51:03 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,23 +60,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493521;
+	s=mimecast20190719; t=1792493476;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=ccOsUIeVtpZ4LAvRKvLPIKBLjfW8xoZv/G7l+9bsArM=;
-	b=WhsqAkxH0SNuRK4xGo4qzxY0VZiHxLB3d15AKr0ers9RqTQDtzZE1r7RFWRA0s4YWS2amp
-	QbHHU0bZYjYKarsjihX0DDeUaQBRV+VfaskQJUHxrE70LSoEI1S1O6jvJRANGKusym9Cxc
-	jYoSaVFOpNqLsW6Xz3meiMc5E4cVhtY=
-X-MC-Unique: LUDw3GgDOriOUgUPMvJZCA-1
-X-Mimecast-MFC-AGG-ID: LUDw3GgDOriOUgUPMvJZCA_1792493513
+	bh=AzOqWKFaDt1dcUvSh5TH4ogfAdXt1H3DxJt5OXlYfGQ=;
+	b=HFuZItCjPMvWDVAA2LRECwoTBqQ2YclwZwTnLUaV/HO96sBrU6Hs4xzTwwbKRTUEWmIhwr
+	MuhW0C7mu0kqJk/cQSSsgsblCZX3NmgfrPHMshpIz4maIzJEhky/j94J4zrP/5UU2DtXyQ
+	XwvXn1YrRPQ5L6oYDQcVU3Bb8VZwQk0=
+X-MC-Unique: D7y_ed00OAaymLbt3bjJCQ-1
+X-Mimecast-MFC-AGG-ID: D7y_ed00OAaymLbt3bjJCQ_1792493466
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:46:20 +0400
-Subject: [PATCH v7 63/65] qom: remove old enum property registration API
+Date: Tue, 20 Oct 2026 14:46:11 +0400
+Subject: [PATCH v7 54/65] qdev: adjust PciDevfn declared type
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-63-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-54-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -151,31 +151,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7342;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1182;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=4DUVOH2Il1uXarwapsGNw4Sqxi5JL+XRDYj5v/DxTXw=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZdSCtnqLwFsuDwikbI6gRflGPZtD05w5lEa
- CvQaDVyJvKJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXQAKCRDa6OEJdZac
- 5VbJEACAn2E9Fh4lFMReVrd4NHuC3naIFHBUIw5ZLoxN7mbcaqivG69WFWxx7ZOrTDRmg/G7yWj
- fDJpczz3Mb0e0IfqafD0Zo52HRprrS3vQqsPJaRNSQkXu2fm6LC1O8aSPWSYAU1eanghk9OhXWy
- YrwTj+hC9ewJZHcH2F93rQKIhbccNRiQPCGgJPy4Lrq/uTwsScJ1VwIlavz58EMOc8D5pLsrqcC
- yq0g6DK4SrNPSK30qRc1DYPDZzDv6UP/6SYl4MOl80b/lEg9HtMa3nOcPYat73Xrz4lJ34zsyq2
- DaiEjhshxRzeWlxSRKFBlCtFXeclBqDgqyY/wXjt1O7g+q+UUKYGqmFXdH3HZHF2a0DzqVUoNpl
- 4FKV2A5wr9Y9wmy+YIR0Lnw3Te8+UkuWx8TJu4UGPD64J7Am8Zdr+5lc4k63v3MIxbJ3V6i3/gx
- xcPgIxzQ2tjUAC413GKGiKMZihOU5ca3wMMcT+SurJ4f6AckLphRseXIw6lV64r07VMlIt2v/on
- t/KCYg7F6sIRLgxf7Q8rsFrDB/0o+lW42EJjrEKIKBVNwdsoxM+4Tc7BWJ7ciCx3ovDWcgc+b9G
- Z8i3KE57kVIhAV2xKZSycVzEGQWVUjJagDqkIlSLS/+8A/FeLV/wYW0PQJQEo9s4t45BXPSFjoI
- Q65g0nQz/0Olqvw==
+ bh=Rc9Kn1ykFR1030A/T3Qsw/MLRtZoT0IcFryuHUpEgHo=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZcBKB9OckTgPDc5ceinUI9Ks8T8mQpbSHjR
+ wt32qduSASJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXAAKCRDa6OEJdZac
+ 5UlxD/0aesvLeJMhDPNK4VKMeyOaPPsCQtFR4qFG7KlCXynT1T2vJymf0cc0GzQxvMuqQi7QkP3
+ Nq+vx1h0wS8aWYock4+0cMRoNcvRyjdcEIEaz+hY9fYszOClGXo+WgnVvXIP/ymzT6wOrtEm8zi
+ KyTeNOPlbml9T8xE5XCRMCuRDYgQQ/C50LkGOdvWZPi4/QPg61NcRcEdwgwyKWGA//4KF53Etv9
+ YF57/ckC+h0DIpVltVP7DozmL6yMRAQhvvbN/k7Wvocf991FXI4FBBQjx3DjWlI02TWx1ZbTHj7
+ Ul0nCa4y4Trxncc4kvuErZYreWkXTb3OM10IrtqT0Cxjebhspuf6b49Tpbr3s/b8iiX9czsUwXA
+ p89Q53jzV6hkwxaqFNslKASETfvPDs+MhV9lykZnoFlxSdUnXT9X0E7aN2lUv3YRzxnc6Jff11W
+ T3pb97gVWEOi/Odv9Mpm+kqrjqMdiRufTDS9y2rm+bzyC4oRVO5awihl+6ojLB1OJGVVwkwc7rQ
+ Zbl0T+Ercm3AhwHa5/RMvPncaAuJqvWSIsEqW1vouhls8x0QJ+F7U8ndzLr4k1Xw79jazen5h9J
+ arXpcL+C7MupGvk2Kx7ddRWgG+DbBn8bd6xO139DIRMT2by8ApQ+rFpyVEq/Uj7YjDAk1NxdvS0
+ GHFEBLCP2lMK0Ow==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
 X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: ZNlu8c_XsVBjatgHBS589vF0V6iHwYWNrGnKpXSs3Gs_1792493513
+X-Mimecast-MFC-PROC-ID: NJ-3ncSn2vE7Prz85pQtfhUlzqAXJomnRWHo0pDlABk_1792493466
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1792493522-589C9CFC-ACD03AEC/0/0
+X-purgate-ID: tlsNG-d62444/1792493477-1D67C757-544D5596/0/0
 X-purgate-type: clean
-X-purgate-size: 7344
+X-purgate-size: 1184
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -184,195 +184,34 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Now that all callers use object_class_property_add_qapi_enum(), remove
-the legacy object_property_add_enum() and object_class_property_add_enum()
-functions along with their EnumProperty struct and property_get_enum /
-property_set_enum helpers.
+PciDevfn is a bit special, since it accepts integer and string as
+setter, but only output integer as getter.
 
-Simplify object_property_get_enum() to assert on qapi_type rather than
-falling back to the old EnumProperty opaque data.
+Unfortunately, we can't declare an alternate str|int QAPI type for it,
+since: branch 'string' can't be distinguished from 'integer'
+
+Rather than declaring it as "str", use the common type instead.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- include/qom/object.h | 45 ++--------------------------
- qom/object.c         | 82 ++--------------------------------------------------
- 2 files changed, 4 insertions(+), 123 deletions(-)
+ hw/core/qdev-properties-system.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
 
-diff --git a/include/qom/object.h b/include/qom/object.h
-index 29cbd84b8d03..a9bbc44cfcc9 100644
---- a/include/qom/object.h
-+++ b/include/qom/object.h
-@@ -1697,12 +1697,12 @@ char *object_get_canonical_path(const Object *obj);
-  *   because it was ambiguous, or %NULL. Set to %false on success.
-  *
-  * There are two types of supported paths--absolute paths and partial paths.
-- * 
-+ *
-  * Absolute paths are derived from the root object and can follow child<> or
-  * link<> properties.  Since they can follow link<> properties, they can be
-  * arbitrarily long.  Absolute paths look like absolute filenames and are
-  * prefixed with a leading slash.
-- * 
-+ *
-  * Partial paths look like relative filenames.  They do not begin with a
-  * prefix.  The matching rules for partial paths are subtle but designed to make
-  * specifying objects easy.  At each level of the composition tree, the partial
-@@ -1986,47 +1986,6 @@ ObjectProperty *object_class_property_add_bool(ObjectClass *klass,
-                                     bool (*get)(Object *, Error **),
-                                     void (*set)(Object *, bool, Error **));
- 
--/**
-- * object_property_add_enum:
-- * @obj: the object to add a property to
-- * @name: the name of the property
-- * @typename: the name of the enum data type
-- * @lookup: enum value namelookup table
-- * @get: the getter or %NULL if the property is write-only.
-- * @set: the setter or %NULL if the property is read-only
-- *
-- * Add an enum property using getters/setters.  This function will add a
-- * property of type '@typename'.
-- *
-- * Returns: The newly added property on success, or %NULL on failure.
-- */
--ObjectProperty *object_property_add_enum(Object *obj, const char *name,
--                              const char *typename,
--                              const QEnumLookup *lookup,
--                              int (*get)(Object *, Error **),
--                              void (*set)(Object *, int, Error **));
--
--/**
-- * object_class_property_add_enum:
-- * @klass: the object class to add a property to
-- * @name: the name of the property
-- * @typename: the name of the enum data type
-- * @lookup: enum value namelookup table
-- * @get: the getter or %NULL if the property is write-only.
-- * @set: the setter or %NULL if the property is read-only
-- *
-- * Add an enum property using getters/setters.  This function will add a
-- * property of type '@typename'.
-- *
-- * Returns: The newly added property on success, or %NULL on failure.
-- */
--ObjectProperty *object_class_property_add_enum(ObjectClass *klass,
--                                    const char *name,
--                                    const char *typename,
--                                    const QEnumLookup *lookup,
--                                    int (*get)(Object *, Error **),
--                                    void (*set)(Object *, int, Error **));
--
- /**
-  * struct QapiEnumProp: Descriptor for a property backed by a QAPI enum type
-  *
-diff --git a/qom/object.c b/qom/object.c
-index cf18880c6c0c..791d981dc689 100644
---- a/qom/object.c
-+++ b/qom/object.c
-@@ -1774,12 +1774,6 @@ uint64_t object_property_get_uint(Object *obj, const char *name,
-     return retval;
+diff --git a/hw/core/qdev-properties-system.c b/hw/core/qdev-properties-system.c
+index 5bfdfe1ab9d9..3381de1144d6 100644
+--- a/hw/core/qdev-properties-system.c
++++ b/hw/core/qdev-properties-system.c
+@@ -904,7 +904,8 @@ static char *print_pci_devfn(Object *obj, const Property *prop)
  }
  
--typedef struct EnumProperty {
--    const QEnumLookup *lookup;
--    int (*get)(Object *, Error **);
--    void (*set)(Object *, int, Error **);
--} EnumProperty;
--
- int object_property_get_enum(Object *obj, const char *name,
-                              const char *typename, Error **errp)
- {
-@@ -1803,12 +1797,8 @@ int object_property_get_enum(Object *obj, const char *name,
-         return -1;
-     }
- 
--    if (prop->qapi_type) {
--        ret = qapi_enum_parse(prop->qapi_type->lookup, str, -1, errp);
--    } else {
--        EnumProperty *enumprop = prop->opaque;
--        ret = qapi_enum_parse(enumprop->lookup, str, -1, errp);
--    }
-+    assert(prop->qapi_type);
-+    ret = qapi_enum_parse(prop->qapi_type->lookup, str, -1, errp);
-     g_free(str);
- 
-     return ret;
-@@ -2543,74 +2533,6 @@ object_class_property_add_bool(ObjectClass *klass, const char *name,
-                                      prop);
- }
- 
--static void property_get_enum(Object *obj, Visitor *v, const char *name,
--                              void *opaque, Error **errp)
--{
--    EnumProperty *prop = opaque;
--    int value;
--    Error *err = NULL;
--
--    value = prop->get(obj, &err);
--    if (err) {
--        error_propagate(errp, err);
--        return;
--    }
--
--    visit_type_enum(v, name, &value, prop->lookup, errp);
--}
--
--static void property_set_enum(Object *obj, Visitor *v, const char *name,
--                              void *opaque, Error **errp)
--{
--    EnumProperty *prop = opaque;
--    int value;
--
--    if (!visit_type_enum(v, name, &value, prop->lookup, errp)) {
--        return;
--    }
--    prop->set(obj, value, errp);
--}
--
--ObjectProperty *
--object_property_add_enum(Object *obj, const char *name,
--                         const char *typename,
--                         const QEnumLookup *lookup,
--                         int (*get)(Object *, Error **),
--                         void (*set)(Object *, int, Error **))
--{
--    EnumProperty *prop = g_malloc(sizeof(*prop));
--
--    prop->lookup = lookup;
--    prop->get = get;
--    prop->set = set;
--
--    return object_property_add(obj, name, typename,
--                               get ? property_get_enum : NULL,
--                               set ? property_set_enum : NULL,
--                               property_release_data,
--                               prop);
--}
--
--ObjectProperty *
--object_class_property_add_enum(ObjectClass *klass, const char *name,
--                                    const char *typename,
--                                    const QEnumLookup *lookup,
--                                    int (*get)(Object *, Error **),
--                                    void (*set)(Object *, int, Error **))
--{
--    EnumProperty *prop = g_malloc(sizeof(*prop));
--
--    prop->lookup = lookup;
--    prop->get = get;
--    prop->set = set;
--
--    return object_class_property_add(klass, name, typename,
--                                     get ? property_get_enum : NULL,
--                                     set ? property_set_enum : NULL,
--                                     NULL,
--                                     prop);
--}
--
- static void get_qapi_enum(Object *obj, Visitor *v, const char *name,
-                           void *opaque, Error **errp)
- {
+ const PropertyInfo qdev_prop_pci_devfn = {
+-    .type  = "str",
++    /* The formatted string accepted by the setter is a CLI convenience. */
++    .type  = "int32",
+     .description = "Slot and optional function number, example: 06.0 or 06",
+     .print = print_pci_devfn,
+     .get   = qdev_propinfo_get_int32,
 
 -- 
 2.56.0.116.g6de20f6092dc
