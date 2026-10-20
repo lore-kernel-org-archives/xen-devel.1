@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A4F75606A326
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:29 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C1450606A319
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=H7ZrEHKd
-Received: from list by lists.xenproject.org with outflank-mailman.1455305.1668953 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=d1t+v8tt
+Received: from list by lists.xenproject.org with outflank-mailman.1455286.1668879 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vx-0003Fn-Tw; Tue, 20 Oct 2026 10:56:17 +0000
+	id 1xJ7Vr-0001W7-6x; Tue, 20 Oct 2026 10:56:11 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455305.1668953; Tue, 20 Oct 2026 10:56:17 +0000
+Received: by outflank-mailman (output) from mailman id 1455286.1668879; Tue, 20 Oct 2026 10:56:11 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vx-0003AJ-9H; Tue, 20 Oct 2026 10:56:17 +0000
-Received: by outflank-mailman (input) for mailman id 1455305;
- Tue, 20 Oct 2026 10:50:38 +0000
+	id 1xJ7Vq-0001Uv-SB; Tue, 20 Oct 2026 10:56:10 +0000
+Received: by outflank-mailman (input) for mailman id 1455286;
+ Tue, 20 Oct 2026 10:46:37 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7QU-0008RA-Kh
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:38 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Mb-0007Gn-BH
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:46:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7QU-00CvYD-1M
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:38 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xJ7Ma-00CukM-OX
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:46:36 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7476d-bab6-0a2a0a5309dd-0a2a450ca39a-30
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:38 +0200
+ id 6ad74680-8faa-0a2a0a5109dd-0a2a4505e44a-18
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:36 +0200
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74740-f479-0a2a450c0019-aa0a857ccd51-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:49:37 +0200
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ id 6ad7468b-4cb1-0a2a45050019-aa0a857ca199-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:36 +0200
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-692-f6pkGtb9O-GKxmFhJLnr0g-1; Tue,
- 20 Oct 2026 10:49:33 +0000
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-266-qJjFWL2MMmO8dr1kA-VMhA-1; Tue,
+ 20 Oct 2026 10:46:31 +0000
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 96BF018011E7; Tue, 20 Oct 2026 10:49:29 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 9A622180133B; Tue, 20 Oct 2026 10:46:26 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 07CCA418; Tue, 20 Oct 2026 10:49:24 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 20B851800643; Tue, 20 Oct 2026 10:46:20 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493376;
+	s=mimecast20190719; t=1792493195;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=0IAJt0UD2BHY2aeJtNI3vxcEoKPgyvku96KOQdFfo40=;
-	b=H7ZrEHKdzz68TWuYsdgHagkcKbQxkCBIwiD7+9bunZJ45w0cUzRT8zVV1c3G9p75AAp7WQ
-	T7bbBL3/PReTdz1tCir39/t5pBGimpjvBDvw1bWV/YW/Wc+AGHVJ1pQAhTwl7ssy/jM9CX
-	X0XYMo3u0biEqJSuQDdCD/slsK3hL5U=
-X-MC-Unique: f6pkGtb9O-GKxmFhJLnr0g-1
-X-Mimecast-MFC-AGG-ID: f6pkGtb9O-GKxmFhJLnr0g_1792493369
-From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:53 +0400
-Subject: [PATCH v7 36/65] net/colo-compare: fix max_queue_size setter
- visitor type
+	bh=Q7myRjnvJN1zs4/WFeao6QDd+ittV+0+bFc6WNm3+3s=;
+	b=d1t+v8tt33knoKaG8jHk/PYClQCNXXITRyYcyO35zumS0xaEug85CT1UctY0/Oiridg6aO
+	pBeHPSZ3cX4e4aTDD8u727Aclf/ISekS2E2sWkIY11/1MMEOCFenh1l923R+BafUwg/nx3
+	eiKc+vp5fXOU71hkAOrYCVyN9Kj24XU=
+X-MC-Unique: qJjFWL2MMmO8dr1kA-VMhA-1
+X-Mimecast-MFC-AGG-ID: qJjFWL2MMmO8dr1kA-VMhA_1792493187
+From: marcandre.lureau@redhat.com
+Date: Tue, 20 Oct 2026 14:45:20 +0400
+Subject: [PATCH v7 03/65] qapi/introspect: Simplify masked name comment
+ emission slighly
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-36-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-3-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,66 +152,75 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1019;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1620;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=2Ht6gW7AXC+9m2hyIj3XjReAS0cmbqbO/nhhR3s10ik=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZaBju/eY1bBbqeZbyaaIna3yDT1YO5S2ZfK
- Dk+TjopPr+JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
- 5dQZD/9+OPsZ+9wdTvZlJAHJ8LdZ+1IrTm8SRc4WfgMoVaUgmxvUmArgHB8hI32zhhT+Ba88j5h
- KVa4ATUp8pq0eFWpUQQliSGEcG8IcvbDzwCdXHlbCyx1nenDacuX0x1Xzy6lOPsZkDaLW4sd1av
- aslU4lzEjPo+woZOS+f31o8bS96Uj4DK9zSO/2jZS60JmsZVWU2RuRFsQ4ynCztQC5WVe561WiF
- Neo8iP9N1N6jRWQ/W9lDjOjhSLPfoogGEELTAUdypajGDPuGgyGOUNHGrXgAoT6RZ9LSPkaXi9M
- YVb+sG/RbGXWjlrdd/CFkcXWKmRvs4HZYOoCxI3XLPjngyKh4mXKogIvBPZkZyD1Mc01f37OWJJ
- Z601T1TKyOwOevdMSa3zjfTSInCHXtBGcfygNJ1EHaIfbfspA5GBA6TYOD34MkYVQ7Xo0EMeDYd
- ZIRp02UPolMQALQO0ANg3mVOP62D3BNsyhxHxlfjumfHsGoGYZ6mHjkjkO/PzHDEye+BfFcPcE1
- op8EVu1uAVHHecAerzTbPZ2xi8hfaVgovOLMJe0DIozxp7l06V9c+bbZegHgr1qr0kr+5Z1dy+b
- cGCIdsvGHbP8dorXb8/DNE5clHvwjDTMX8mVMgxx/XbT5GQClDJRTRj2mTFy/Cr8znwahtft6UL
- 2RCiOOUs4aDYIGg==
+ bh=VT5u6B1qUaxaf9+tLnGedzovD3GH8labF6VNv1guiyM=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZXLImEUkMO1oHPQ87OflvNF4Yi2udXpYkVC
+ bgHxuhfWBSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGVwAKCRDa6OEJdZac
+ 5apPEACW7/JRacnRcMdLuR2wffTHpKlhTnnNttkfa+uxqEFGpUBAVm+QmXcBWiHQepjJYrrnCLX
+ kX+DqErqWmeiNvxzI6JiXnzTLZT+qJhJv8xsO/VJJDrfMn1ueuWzUrj+B6OuHiY8G6sKD5B22r2
+ /VsVx5S39hkt2iAucJYFWX/jCbXr/n7JLfXZhIxEj5BOvCvg5Yi0LL2TqlYsbb8popca2rYP1LR
+ NPoU4LRf51hxD2ywaO+6y/j0N21xE0p2YkndRii6LnkybRIxrfS/5bnqGpLfMNBLgkT78iIM8lt
+ NrBUIcQuB2ZB1X0yNDB2FHzKruZggB1WNpUshItWpvIpDoPoGH3skEwfR/V5fD0qfS/LZSqqyjB
+ 4FJtdTuRRF4YsaCbLtQNFS8/+QQV4/Vdi5fyBJBJkUomWmIJ9Gmo13qCN7QZ48ATUiFB5yMjLX9
+ bstCXnov+XHxOtODxHO4PES/1tyzo8hAqxMSO7jC3lVaeZiXCYHaNmzZGZmg8rw+ACTin7LuEQX
+ oFXd4FeQcXIRzEKbNbs3ma5jEAL5lKpL5YEur2r2ksx/zaX4Ck+aLw4T4c9LwKnL2l82ALZeysf
+ UF3MM5kuOAz2l1KljOxTX1ENX/TZBM0eH+aQiWoC7ma7Ez/O5zz63gJTXWajtX6GQgtJcz+zO1R
+ w+mtvxa/th+1OpQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: t2UDmA5Ri04ASnUKEJ0mPmk-iyUtk1Qg-GnqhxDfmK8_1792493369
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: QRNlgcLSWBwlTWweTePpD6PTYbWtzhRxfevEUnCAFHQ_1792493187
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d25034/1792493377-52331A5B-2042A45C/0/0
+X-purgate-ID: tlsNG-c201ff/1792493196-F4EA12A1-E63C5A86/0/0
 X-purgate-type: clean
-X-purgate-size: 1021
+X-purgate-size: 1669
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The setter was using visit_type_uint64, accepting values wider than
-the uint32_t field. Use visit_type_uint32 to match the getter, field,
-and typename.
+From: Markus Armbruster <armbru@redhat.com>
 
-Fixes: 0c4266ef2690 ("net/colo-compare.c: Fix compare_timeout format issue")
+Instead of emitting the comment for certain meta-types, simply emit it
+when introspection name and name differ.
+
+This additionally emits it for arrays, which is fine.
+
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- net/colo-compare.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ scripts/qapi/introspect.py | 12 ++++++------
+ 1 file changed, 6 insertions(+), 6 deletions(-)
 
-diff --git a/net/colo-compare.c b/net/colo-compare.c
-index 948a2f7f9e4b..a6910de869ff 100644
---- a/net/colo-compare.c
-+++ b/net/colo-compare.c
-@@ -1129,9 +1129,9 @@ static void set_max_queue_size(Object *obj, Visitor *v,
-                                const char *name, void *opaque,
-                                Error **errp)
- {
--    uint64_t value;
-+    uint32_t value;
- 
--    if (!visit_type_uint64(v, name, &value, errp)) {
-+    if (!visit_type_uint32(v, name, &value, errp)) {
-         return;
-     }
-     if (!value) {
+diff --git a/scripts/qapi/introspect.py b/scripts/qapi/introspect.py
+index 644461560c64..49d1ed2897e8 100644
+--- a/scripts/qapi/introspect.py
++++ b/scripts/qapi/introspect.py
+@@ -253,12 +253,12 @@ def _gen_tree(self, name: str, mtype: str, obj: Dict[str, object],
+                          Will be omitted from the output if empty.
+         """
+         comment: Optional[str] = None
+-        if mtype not in ('command', 'event', 'builtin', 'array'):
+-            if not self._unmask:
+-                # Output a comment to make it easy to map masked names
+-                # back to the source when reading the generated output.
+-                comment = f'"{self._name(name)}" = {name}'
+-        obj['name'] = self._name(name)
++        introspection_name = self._name(name)
++        if introspection_name != name:
++            # Output a comment to make it easy to map masked names
++            # back to the source when reading the generated output.
++            comment = f'"{introspection_name}" = {name}'
++        obj['name'] = introspection_name
+         obj['meta-type'] = mtype
+         if features:
+             obj['features'] = self._gen_features(features)
 
 -- 
 2.56.0.116.g6de20f6092dc
