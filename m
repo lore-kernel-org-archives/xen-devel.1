@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0F724606A324
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 032EE606A321
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Lo6QaQrB
-Received: from list by lists.xenproject.org with outflank-mailman.1455303.1668947 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=FA0d2bZn
+Received: from list by lists.xenproject.org with outflank-mailman.1455302.1668939 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vx-00031v-8r; Tue, 20 Oct 2026 10:56:17 +0000
+	id 1xJ7Vw-0002qy-8a; Tue, 20 Oct 2026 10:56:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455303.1668947; Tue, 20 Oct 2026 10:56:16 +0000
+Received: by outflank-mailman (output) from mailman id 1455302.1668939; Tue, 20 Oct 2026 10:56:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vw-0002yu-F6; Tue, 20 Oct 2026 10:56:16 +0000
-Received: by outflank-mailman (input) for mailman id 1455303;
- Tue, 20 Oct 2026 10:50:37 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xJ7Vv-0002ni-LH; Tue, 20 Oct 2026 10:56:15 +0000
+Received: by outflank-mailman (input) for mailman id 1455302;
+ Tue, 20 Oct 2026 10:50:36 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7QT-0008R4-MW
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:37 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7QS-0008Qv-LU
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:36 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7QS-00HRtL-SY
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:36 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xJ7QR-004cyI-Uv
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:35 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7476f-e002-0a2a0a5209dd-0a2a45078784-48
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:36 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad74775-8faa-0a2a0a5109dd-0a2a4506bdee-32
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:35 +0200
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad746c7-b4ea-0a2a45070019-aa0a817c6193-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:36 +0200
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ id 6ad7477a-195a-0a2a45060019-aa0a857c58db-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:35 +0200
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-581-QIWQbiQEOjKXo9XLY2S_-Q-1; Tue,
- 20 Oct 2026 10:47:30 +0000
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-656-Cd5iFrsSPFiy_O9eCidOaQ-1; Tue,
+ 20 Oct 2026 10:50:30 +0000
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id A06391800846; Tue, 20 Oct 2026 10:47:26 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id C16C31955DE8; Tue, 20 Oct 2026 10:50:24 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 26A6630000E7; Tue, 20 Oct 2026 10:47:24 +0000 (UTC)
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 4304D1956095; Tue, 20 Oct 2026 10:50:22 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,23 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493255;
+	s=mimecast20190719; t=1792493434;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=PVXTIIpNbgnr5AJ+/yIbBcdA8eA5b8YMHg0i2cYvT44=;
-	b=Lo6QaQrBtjz7PYtpX0Jon0MPlcgYoiUnh0VDBUBNm6yCJRvf6ecaZZDqPw58pETqiMtDOX
-	/ygMvgf5GECfFwkFUpXYVlmI18kD70dFTkQPC7ezNGzi/stAzDw+IoWSDZAN6Zpyt3yXvJ
-	hOW19em0Ol02fq7s3fJwongnPC/EtXM=
-X-MC-Unique: QIWQbiQEOjKXo9XLY2S_-Q-1
-X-Mimecast-MFC-AGG-ID: QIWQbiQEOjKXo9XLY2S_-Q_1792493246
+	bh=stj/oklFy5XE7Ux6UVzd34CG7YO8zlEFRRZGNs4BwjQ=;
+	b=FA0d2bZnAjmxVWje6jrukFJntl8LiVIkhaR2F4/sYQiFzzxjDZjYwU0+k2L+2hmOh0kOs6
+	NGTCd6tAIogNIkzjpZnuTBTOijskLjMXw/PYFRv5NLwTxBguhSwKPlbmuFabxHk5BLVOvH
+	w6Q9huSBL1rRBYe+t1owfKD78Tazug0=
+X-MC-Unique: Cd5iFrsSPFiy_O9eCidOaQ-1
+X-Mimecast-MFC-AGG-ID: Cd5iFrsSPFiy_O9eCidOaQ_1792493424
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:30 +0400
-Subject: [PATCH v7 13/65] qom/qmp: populate qapi-type in QMP handlers
+Date: Tue, 20 Oct 2026 14:46:03 +0400
+Subject: [PATCH v7 46/65] hw/ppc/spapr_drc: convert fdt property to
+ QAPI-aware registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-13-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-46-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -151,31 +152,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3535;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1126;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=i+4aNg1CWaC9FuQwQPBmrQeBSkYvF4PheLxhenOOFfo=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZYDWzReLBw3m81dGDIXbwzl9a7/x3QA+lLt
- YiL2TIXOxiJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
- 5SUfD/wJNBGKtLromvCCVRWVjPvxR5grgFUIPYxITDg41xmOLrKqK6tkYNGmFOZFpRXvHXGYvRQ
- TdQmUahRaSDpeuJbFcaYT73xbCCqya8tVq8EmWAT5UeRvgtVrubv+XmDarrnryY02yLXvkIPllC
- xD258e/Sa+caea6AEZbydm8puSKag8kjyvK+G/zuYF1znKnI8eJxFrc3NH2jpHB6n9mLR5rzuys
- KpmuOkIz/+997QlgvghfOc9I5oUvG09YZbw98d4FxVxtx5ARqn/Vp/by4sa4tu2Tu0k6JWoMyR2
- FLbIEl5NmPd/Vzzo8e0e2s7lkcsZEaa6+6GDVtgr3zcY0ceNHCAlZDAcuV2JumnHEjgGHaGDC3j
- m73n3AS2hBEShtU728GRRbYOuf5ZVmV0IHuJrD2XWVTkdWBtjjOKsTKqGgmguNhjUQn/iZ1XRs6
- AwFiABH4kHoVozldkVrlbvXe7p5VFD4ze0fzu1PCDur+7/Ays4XczNXKWN1fQ5u2ZNLW5LYbfg+
- ljEVnbaU+fg2V7agpnwf/IswI8Aw7S6ja3o33R2iu3N6LeX5VdqV5qtUy9mRVydHeEJii8A9+vl
- Yd8aU3wBZlxTyloC0tuExCV6B9nUqFz84SN6C4Bl11QPGw0u4G9nKK1ivmRDCOq3WPxaOAUae2j
- TUSTCHbBFtRj1ig==
+ bh=tzAtw2N/GmjCt5f2xymcXMco6tXqwvWNy/tFAoovn48=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZbrmMIXAAgbwi3HHXAfckNSBqoT7PupXMdX
+ jNNL1pkTe6JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWwAKCRDa6OEJdZac
+ 5ZtBD/9HzJq3j9NRTh8cC/IrlGiBUn7R8G3aWpPmmvNkh3x2f+rQGtv+c4/4fZ5SVY8vIMlozLI
+ LUxj6qGBu0GxrQWT8fSd91RvbaYDeiByrDclv6ElUBKkE+tgleBEJUKwQJfK3M0e39H0MbjtzRg
+ dxzN4rNG0OtE8h6qgxhP29CFH3AITnPK6JfYp3BIuQLwbsy/HZwgwge9j97HT9lCQ3XaWTtwWEp
+ mj+SjQmSYNj3MWpB5O71V5XG20mItYobMA5CEVyvnwge7sN5eyuap4ds31caHAW78QyHPlOFVoC
+ mLdbsQcFaIesAIo6kEnisNkqHnb8yVLFTI6dZfqTwCKl2twuRgOyGq3sME35mvXwpXYnk7ngkNm
+ 4Wv7Qk3oqp9AjkpD2TpcMxKOiMI/qMeCTzwBE3Ul8FypE56v856BMn24Tr0BYUM36SttPitGe8O
+ y06nmXFiwC88uT5JL/gPnfbVYmjDD8CwTftjlcRo66wdO/Uj1cC4+wc1ynGvOspelolj6z9kjry
+ bcWiTwBgrkt3gSwktkytTSDlZ5MqNlPDv0mE82BFtszFNBtxOhfX0w97OQzXtVLle5h+YKHfgdn
+ N5d4ugnLs5FJL1SrpPAd+tbg85sl64x/ZW1OdnyMEQL9XhQtUEDzjmQBCxiIyHOFat+aC63mV0H
+ gQWNLU0ZIgJd7oA==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: sHwSZr-HnG559bICcJtoxPQiNr-KN63m3XNF-YRXhHM_1792493246
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-MFC-PROC-ID: _nnVg7BEkDR_5LkQkCG8wdxg9IDhvmWsX7fRsSmZsBA_1792493424
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1792493256-A6CDFAE4-E3FA7228/0/0
+X-purgate-ID: tlsNG-16d1c6/1792493435-FC40377B-124A8830/0/0
 X-purgate-type: clean
-X-purgate-size: 3537
+X-purgate-size: 1128
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -184,100 +185,30 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Wire up the new qapi-type field in all four QMP handlers that return
-ObjectPropertyInfo or ObjectPropertyValue: qom-list, qom-list-get,
-device-list-properties, and qom-list-properties.
+Use object_property_add_qapi() with any_type_info for the "fdt"
+property, since the FDT structure is dynamically shaped at runtime and
+cannot be represented as a static QAPI type.
 
-When an ObjectProperty has a qapi_type set, the masked QAPI type name
-is copied into the response, allowing clients to cross-reference with
-query-qmp-schema.
-
-No property has it yet, the following changes will populate it.
-
-Reviewed-by: Markus Armbruster <armbru@redhat.com>
+Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- qom/qom-qmp-cmds.c | 34 +++++++++++++++++++++-------------
- 1 file changed, 21 insertions(+), 13 deletions(-)
+ hw/ppc/spapr_drc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/qom/qom-qmp-cmds.c b/qom/qom-qmp-cmds.c
-index f17389c7305c..47bf3bf2937a 100644
---- a/qom/qom-qmp-cmds.c
-+++ b/qom/qom-qmp-cmds.c
-@@ -25,9 +25,23 @@
- #include "qapi/qobject-input-visitor.h"
- #include "qapi/qobject-output-visitor.h"
- #include "qemu/cutils.h"
-+#include "qapi/qapi-type-info.h"
- #include "qom/object_interfaces.h"
- #include "qom/qom-qobject.h"
- 
-+static ObjectPropertyInfo *qom_property_info(ObjectProperty *prop)
-+{
-+    ObjectPropertyInfo *info = g_new0(ObjectPropertyInfo, 1);
-+
-+    info->name = g_strdup(prop->name);
-+    info->type = g_strdup(prop->type);
-+    if (prop->qapi_type) {
-+        assert(prop->qapi_type->masked_name);
-+        info->qapi_type = g_strdup(prop->qapi_type->masked_name);
-+    }
-+    return info;
-+}
-+
- static Object *qom_resolve_path(const char *path, Error **errp)
- {
-     bool ambiguous = false;
-@@ -58,12 +72,7 @@ ObjectPropertyInfoList *qmp_qom_list(const char *path, Error **errp)
- 
-     object_property_iter_init(&iter, obj);
-     while ((prop = object_property_iter_next(&iter))) {
--        ObjectPropertyInfo *value = g_new0(ObjectPropertyInfo, 1);
--
--        QAPI_LIST_PREPEND(props, value);
--
--        value->name = g_strdup(prop->name);
--        value->type = g_strdup(prop->type);
-+        QAPI_LIST_PREPEND(props, qom_property_info(prop));
-     }
- 
-     return props;
-@@ -78,6 +87,10 @@ static void qom_list_add_property_value(Object *obj, ObjectProperty *prop,
- 
-     item->name = g_strdup(prop->name);
-     item->type = g_strdup(prop->type);
-+    if (prop->qapi_type) {
-+        assert(prop->qapi_type->masked_name);
-+        item->qapi_type = g_strdup(prop->qapi_type->masked_name);
-+    }
-     item->value = object_property_get_qobject(obj, prop->name, NULL);
+diff --git a/hw/ppc/spapr_drc.c b/hw/ppc/spapr_drc.c
+index 64f9ca29b02e..740149ffdf3e 100644
+--- a/hw/ppc/spapr_drc.c
++++ b/hw/ppc/spapr_drc.c
+@@ -587,7 +587,7 @@ static void spapr_dr_connector_instance_init(Object *obj)
+     object_property_add_uint32_ptr(obj, "id", &drc->id, OBJ_PROP_FLAG_READ);
+     object_property_add_qapi(obj, "index", &uint32_type_info, prop_get_index,
+                         NULL, NULL, NULL);
+-    object_property_add(obj, "fdt", "struct", prop_get_fdt,
++    object_property_add_qapi(obj, "fdt", &any_type_info, prop_get_fdt,
+                         NULL, NULL, NULL);
+     drc->state = drck->empty_state;
  }
- 
-@@ -241,9 +254,7 @@ ObjectPropertyInfoList *qmp_device_list_properties(const char *typename,
-             continue;
-         }
- 
--        info = g_new0(ObjectPropertyInfo, 1);
--        info->name = g_strdup(prop->name);
--        info->type = g_strdup(prop->type);
-+        info = qom_property_info(prop);
-         info->description = g_strdup(prop->description);
-         info->default_value = qobject_ref(prop->defval);
- 
-@@ -284,11 +295,8 @@ ObjectPropertyInfoList *qmp_qom_list_properties(const char *typename,
-         object_property_iter_init(&iter, obj);
-     }
-     while ((prop = object_property_iter_next(&iter))) {
--        ObjectPropertyInfo *info;
-+        ObjectPropertyInfo *info = qom_property_info(prop);
- 
--        info = g_malloc0(sizeof(*info));
--        info->name = g_strdup(prop->name);
--        info->type = g_strdup(prop->type);
-         info->description = g_strdup(prop->description);
-         info->default_value = qobject_ref(prop->defval);
- 
 
 -- 
 2.56.0.116.g6de20f6092dc
