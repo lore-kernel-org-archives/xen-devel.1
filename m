@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 82467606A322
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 15013606A322
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Wi/LmWHg
-Received: from list by lists.xenproject.org with outflank-mailman.1455290.1668891 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=g0MDV1Y6
+Received: from list by lists.xenproject.org with outflank-mailman.1455292.1668899 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vs-0001kc-3x; Tue, 20 Oct 2026 10:56:12 +0000
+	id 1xJ7Vs-0001sj-GA; Tue, 20 Oct 2026 10:56:12 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455290.1668891; Tue, 20 Oct 2026 10:56:11 +0000
+Received: by outflank-mailman (output) from mailman id 1455292.1668899; Tue, 20 Oct 2026 10:56:12 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vr-0001i6-Lu; Tue, 20 Oct 2026 10:56:11 +0000
-Received: by outflank-mailman (input) for mailman id 1455290;
- Tue, 20 Oct 2026 10:46:51 +0000
+	id 1xJ7Vs-0001qz-3U; Tue, 20 Oct 2026 10:56:12 +0000
+Received: by outflank-mailman (input) for mailman id 1455292;
+ Tue, 20 Oct 2026 10:47:21 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Mp-0007Ht-9o
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:46:51 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7NJ-0007Ii-7U
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:47:21 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7Mo-002ESM-Ml
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:46:50 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xJ7NI-002Egh-KT
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:47:20 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7469a-bab6-0a2a0a5309dd-0a2a4502898a-0
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:50 +0200
+ id 6ad746b4-e002-0a2a0a5209dd-0a2a4503cc92-8
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:20 +0200
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74699-6ca4-0a2a45020019-aa0a817c7251-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:50 +0200
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ id 6ad746b7-fae8-0a2a45030019-aa0a817cb311-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:20 +0200
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-681-dv92ItMdM9G_nQvMyXZAiA-1; Tue,
- 20 Oct 2026 10:46:44 +0000
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-91-PGvBjJmAP4aH1aJU5oYqmw-1; Tue,
+ 20 Oct 2026 06:47:14 -0400
+Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0CCE818005B9; Tue, 20 Oct 2026 10:46:40 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 5803E1800476; Tue, 20 Oct 2026 10:47:10 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 26AF11800643; Tue, 20 Oct 2026 10:46:35 +0000 (UTC)
+ by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id B80D41956095; Tue, 20 Oct 2026 10:47:06 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493209;
+	s=mimecast20190719; t=1792493239;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=xG2OGo4lx2YCSH10YJfMac8tHdMtlMp6mBUYGSWviZ4=;
-	b=Wi/LmWHgVQr37I7HM3dRB37hrGFBOQn+POAjUGkCspzb/xs7B/45HyRdqnnjjAqGsoculR
-	Fm0PDKk0n7c/JKrKi9uVpx6BgkLIqXQ90msn/Cyu4HP2SsrypUrJhjFP4XISBKYm9L7B+z
-	ErL74X8unniWmR4TO8fyEFMpBsEj8f8=
-X-MC-Unique: dv92ItMdM9G_nQvMyXZAiA-1
-X-Mimecast-MFC-AGG-ID: dv92ItMdM9G_nQvMyXZAiA_1792493201
-From: marcandre.lureau@redhat.com
-Date: Tue, 20 Oct 2026 14:45:22 +0400
-Subject: [PATCH v7 05/65] qapi: QAPISchemaVisitor.visit_needed() is now
- unused, drop
+	bh=a0eKD3sUSsLDHL5Rbyj5qW1a5Bhls7mo+yQHcVi0dNs=;
+	b=g0MDV1Y6heatGmPCdnglJ6LtHUtco6JyNGxu8LL5QtcZfdhHQQC02ImbX/yFE9nck+hwFj
+	RlMWNGuZmgDOMoCoNb9/wkURw1DMCwMpyHukdggjWPUvcsyyg55CCELMCJifWpy5u5Y27t
+	6XzBFM4FeTKVl5KP6IfsDoMuSFt3YZ8=
+X-MC-Unique: PGvBjJmAP4aH1aJU5oYqmw-1
+X-Mimecast-MFC-AGG-ID: PGvBjJmAP4aH1aJU5oYqmw_1792493230
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Tue, 20 Oct 2026 14:45:27 +0400
+Subject: [PATCH v7 10/65] meson: add qapi-type-infos-*.c/h to build
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-5-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-10-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,31 +151,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1193;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4026;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=yBAs+PsGI+mRRHuSXNI42xoWI9p0TSDsh65vQW8BRrc=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZX3wnVoTG1DT7PkibN0fixZC+3g4HczKxre
- WlR6XwfjdSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGVwAKCRDa6OEJdZac
- 5XW2D/45KfzoQQ844pW9wPBstfoA4zhpxgYbXZdFhd1B3tDYs+gd0ydHZpM8roMnIC6sUz2UZVw
- IXLD2jiHt7yLZuphP/QVxipCVGpGWDePAo2x1ibRtN36V7QF2kYhmxqri0MMwpjy6AJMTGCUuMB
- xpRJlv+RypwgdJZTss3IDeLAh6amwIn5KwnKxa+VhAa1TweG97haA2x1DkLDE1BBaEBWerNMIhY
- XkU4aw+JMmBUEmqAu5AXPH7DXgINM5RHn/JzyiI3T7yLfmL0zAUjrq4eWRwG1HVPMGONTO7JfNE
- 0o0E+ULXqwLnQTgbGmZcyCHeOER/LovvzMIKrdz4xytDwyhERlt04lMyYKta/VQamfyHHL2eqte
- BmWKR4GrxysyQvF6+XvxLYIUbvcW/GEmZ2K3JOVgeh6yRY/mnANaUpqMzl5nZ1WZij3x49QanrG
- auTI+YKu1G7+pXQipQNg7LGtWo8+sBXCM44evsO6d6zedjLoJkpGbTJ2q1EbcCLvk12mjFkkh4A
- KdfC5MVpqO+KN0XR8txFvJs/K3UkRZlxM97ff+6aW7nGxBCmH5iL8yB/dAH2yravcO9bYYO+LQC
- Gs61agHa3hpCya2FC5c0KTXMLzmROHlqfLGqWdmgsZLg8hrozGFp5ahu+m+OGcL5QZ746vJi74E
- ghKphqYO93tyqXA==
+ bh=eVJytPz3KQHyW0Eei+IlbvI0CrYX88Ak+jznKk8pYYM=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZYJt0ke19J4ltackOupI0pq7CK76MV5JKhu
+ L19h61q7CSJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
+ 5bh7D/9o800Zx8Ea1Xfpr7ACGgnyzV8jkcBlp8Hzb7ozpogEKFcTat3oDoryJJsQxlgzgJHhAf4
+ xQT98v3zkCaoHRIbB6dR0HYZBqyvICSDEA2z6dydBWQCfbIPdcVhiGF29ilFln4WSCVMEnObaFP
+ jSBeBazjRdH0T5xfyjCgJrBQSq2TnF577fRbor2DDFXhnjiRkuCteCnjdCRACcbp4bKOu/8aTqC
+ zvMFT7nTq00cMgLWk7O7y/3V/o+NEYmNBrudDZxN2ovKLglKgbEKGZt1CpNg1Us3yGbmp7C/ued
+ 6j8TVzxJBorlnnqcRONbN8vEXcK6fO6P9qZR7nTYal7lYdU6r9TCQoY4kvvQW+uDqXgQEAWmhOi
+ jZqDTnpIgJdgITBb5cP1iuDx4m8zCGYgw4FDJSEPYQuWHaFdqeNvNBw0pdC2xUr2TTibV+OLWUp
+ XXsHgCRssrvOLRavHKOKXE7Escb305j2bbdur64seJPONvFdSWLWSuLMcyK8cwxzTEA9j2xa2Hg
+ HoJL3z3i0vH4SqDy9prxpuF+J3j1IYnps0k+MK+mTLYI4e8iqke/uSs4PUmCOpQMq5J4Otq6DcH
+ MJqQiQREJhxMnpMKZBd9vBvDhmvts3IVzg3hJvzD52nk7JW3EAtQdIwCfqF4JndhviB2CIPR+OA
+ lCJIJFcJtrFbXpg==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: a1wXs17lB3vVykj5tBpI7evB5uSFhglHw9gLgIPbmTg_1792493201
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
+X-Mimecast-MFC-PROC-ID: fw5doU28uotdIqwyk7XxjwZrknzQy4Gct74BT-0D6s8_1792493230
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-720697/1792493210-F0CA22AC-6E2130EF/0/0
+X-purgate-ID: tlsNG-33051d/1792493240-6F6C64E9-C11DE64B/0/0
 X-purgate-type: clean
-X-purgate-size: 1242
+X-purgate-size: 4028
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -185,40 +184,111 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Markus Armbruster <armbru@redhat.com>
+Add the per-module type-infos output files so they are compiled into
+the build.
 
+Reviewed-by: Kostiantyn Kostiuk <kkostiuk@redhat.com>
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- scripts/qapi/schema.py | 8 +-------
- 1 file changed, 1 insertion(+), 7 deletions(-)
+ qapi/meson.build              | 4 ++++
+ qga/meson.build               | 2 ++
+ tests/include/meson.build     | 2 ++
+ tests/meson.build             | 6 ++++++
+ tests/qapi-schema/meson.build | 1 +
+ 5 files changed, 15 insertions(+)
 
-diff --git a/scripts/qapi/schema.py b/scripts/qapi/schema.py
-index 11f3accec873..9e2152fa419b 100644
---- a/scripts/qapi/schema.py
-+++ b/scripts/qapi/schema.py
-@@ -179,11 +179,6 @@ def visit_end(self) -> None:
-     def visit_module(self, name: str) -> None:
-         pass
+diff --git a/qapi/meson.build b/qapi/meson.build
+index a46269b5a0c9..7477953492ad 100644
+--- a/qapi/meson.build
++++ b/qapi/meson.build
+@@ -79,6 +79,7 @@ endif
  
--    def visit_needed(self, entity: QAPISchemaEntity) -> bool:
--        # pylint: disable=unused-argument
--        # Default to visiting everything
--        return True
--
-     def visit_include(self, name: str, info: Optional[QAPISourceInfo]) -> None:
-         pass
+ qapi_nonmodule_outputs = [
+   'qapi-introspect.c', 'qapi-introspect.h',
++  'qapi-type-infos.c', 'qapi-type-infos.h',
+   'qapi-types.c', 'qapi-types.h',
+   'qapi-visit.h', 'qapi-visit.c',
+   'qapi-commands.h', 'qapi-commands.c',
+@@ -88,6 +89,7 @@ qapi_nonmodule_outputs = [
+ ]
  
-@@ -315,8 +310,7 @@ def add_entity(self, ent: QAPISchemaEntity) -> None:
-     def visit(self, visitor: QAPISchemaVisitor) -> None:
-         visitor.visit_module(self.name)
-         for entity in self._entity_list:
--            if visitor.visit_needed(entity):
--                entity.visit(visitor)
-+            entity.visit(visitor)
+ qapi_outputs = qapi_nonmodule_outputs + [
++  'qapi-builtin-type-infos.c', 'qapi-builtin-type-infos.h',
+   'qapi-builtin-types.c', 'qapi-builtin-visit.c',
+   'qapi-builtin-types.h', 'qapi-builtin-visit.h',
+ ]
+@@ -96,6 +98,8 @@ qapi_inputs = []
+ foreach module : qapi_all_modules
+   qapi_inputs += [ files(module + '.json') ]
+   qapi_module_outputs = [
++    'qapi-type-infos-@0@.c'.format(module),
++    'qapi-type-infos-@0@.h'.format(module),
+     'qapi-types-@0@.c'.format(module),
+     'qapi-types-@0@.h'.format(module),
+     'qapi-visit-@0@.c'.format(module),
+diff --git a/qga/meson.build b/qga/meson.build
+index cfa2157efb23..79163b7d8e93 100644
+--- a/qga/meson.build
++++ b/qga/meson.build
+@@ -39,6 +39,8 @@ qga_qapi_outputs = [
+   'qga-qapi-init-commands.h',
+   'qga-qapi-introspect.c',
+   'qga-qapi-introspect.h',
++  'qga-qapi-type-infos.c',
++  'qga-qapi-type-infos.h',
+   'qga-qapi-types.c',
+   'qga-qapi-types.h',
+   'qga-qapi-visit.c',
+diff --git a/tests/include/meson.build b/tests/include/meson.build
+index 8e8d1ec4e692..026480d96851 100644
+--- a/tests/include/meson.build
++++ b/tests/include/meson.build
+@@ -4,6 +4,8 @@ test_qapi_outputs_extra = [
+   'test-qapi-commands-sub-module.h',
+   'test-qapi-events-sub-module.c',
+   'test-qapi-events-sub-module.h',
++  'test-qapi-type-infos-sub-module.c',
++  'test-qapi-type-infos-sub-module.h',
+   'test-qapi-types-sub-module.c',
+   'test-qapi-types-sub-module.h',
+   'test-qapi-visit-sub-module.c',
+diff --git a/tests/meson.build b/tests/meson.build
+index 5877d2f60b12..6769a1e7812f 100644
+--- a/tests/meson.build
++++ b/tests/meson.build
+@@ -2,6 +2,8 @@ subdir('bench')
+ subdir('qemu-iotests')
  
- 
- class QAPISchemaInclude(QAPISchemaEntity):
+ test_qapi_outputs = [
++  'qapi-builtin-type-infos.c',
++  'qapi-builtin-type-infos.h',
+   'qapi-builtin-types.c',
+   'qapi-builtin-types.h',
+   'qapi-builtin-visit.c',
+@@ -22,6 +24,10 @@ test_qapi_outputs = [
+   'test-qapi-init-commands.h',
+   'test-qapi-introspect.c',
+   'test-qapi-introspect.h',
++  'test-qapi-type-infos-sub-sub-module.c',
++  'test-qapi-type-infos-sub-sub-module.h',
++  'test-qapi-type-infos.c',
++  'test-qapi-type-infos.h',
+   'test-qapi-types-sub-sub-module.c',
+   'test-qapi-types-sub-sub-module.h',
+   'test-qapi-types.c',
+diff --git a/tests/qapi-schema/meson.build b/tests/qapi-schema/meson.build
+index debff633ac17..392b59d8dccd 100644
+--- a/tests/qapi-schema/meson.build
++++ b/tests/qapi-schema/meson.build
+@@ -231,6 +231,7 @@ custom_target('QAPI doc',
+                        'doc-good-qapi-events.c', 'doc-good-qapi-events.h',
+                        'doc-good-qapi-init-commands.c', 'doc-good-qapi-init-commands.h',
+                        'doc-good-qapi-introspect.c', 'doc-good-qapi-introspect.h',
++                       'doc-good-qapi-type-infos.c', 'doc-good-qapi-type-infos.h',
+                        'doc-good-qapi-types.c', 'doc-good-qapi-types.h',
+                        'doc-good-qapi-visit.c', 'doc-good-qapi-visit.h' ],
+               input: files('doc-good.json'),
 
 -- 
 2.56.0.116.g6de20f6092dc
