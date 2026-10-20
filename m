@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A25A8606A31E
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 422A6606A31A
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:37 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=SG/6TJhW
-Received: from list by lists.xenproject.org with outflank-mailman.1455298.1668919 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=JnSpf3wk
+Received: from list by lists.xenproject.org with outflank-mailman.1455312.1668991 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vu-0002SS-LA; Tue, 20 Oct 2026 10:56:14 +0000
+	id 1xJ7W4-0004al-S5; Tue, 20 Oct 2026 10:56:24 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455298.1668919; Tue, 20 Oct 2026 10:56:14 +0000
+Received: by outflank-mailman (output) from mailman id 1455312.1668991; Tue, 20 Oct 2026 10:56:24 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vu-0002On-9D; Tue, 20 Oct 2026 10:56:14 +0000
-Received: by outflank-mailman (input) for mailman id 1455298;
- Tue, 20 Oct 2026 10:48:28 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xJ7W3-0004Ui-JT; Tue, 20 Oct 2026 10:56:23 +0000
+Received: by outflank-mailman (input) for mailman id 1455312;
+ Tue, 20 Oct 2026 10:50:42 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7ON-0007MJ-S9
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:48:27 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7QY-0008T3-J6
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7ON-006MOh-1c
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:48:27 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xJ7QY-002FRA-03
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:42 +0200
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad746e4-2eae-0a2a0a5409dd-0a2a45098a72-36
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:48:26 +0200
+ id 6ad74779-bab6-0a2a0a5309dd-0a2a4502e220-30
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:41 +0200
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad746f9-be1a-0a2a45090019-aa0a857c61d7-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:48:26 +0200
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ id 6ad74780-6ca4-0a2a45020019-aa0a857c9cdd-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:41 +0200
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-510-cVbzbvoGOKiXjaCIGIacxQ-1; Tue,
- 20 Oct 2026 10:48:22 +0000
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-694-nPrkmqWhMXen_3R1vU7oZw-1; Tue,
+ 20 Oct 2026 10:50:34 +0000
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id F35FD1956050; Tue, 20 Oct 2026 10:48:17 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 06E3A1805A18; Tue, 20 Oct 2026 10:50:30 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 7FEA65BC; Tue, 20 Oct 2026 10:48:15 +0000 (UTC)
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id D157218005B8; Tue, 20 Oct 2026 10:50:26 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493305;
+	s=mimecast20190719; t=1792493440;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=eMqswUiLM19ojZ+xv5E964KFYfmL1usSS/p/S7HX9Dw=;
-	b=SG/6TJhWYrfN1diSOU9FJeLz7qhcpo+UoKAkb06jB2hbyMG1/pEdeUWTuRpmx+/Li/j53B
-	oZ5k47XXi1o0d6rXzLfDTfFy6OqEFRVNkNcA6cL5Rv9zpnPisVc9oUClARg3U7bH5COsOl
-	U4nZ0sMaFAJQibHpSptXKahla9h44MA=
-X-MC-Unique: cVbzbvoGOKiXjaCIGIacxQ-1
-X-Mimecast-MFC-AGG-ID: cVbzbvoGOKiXjaCIGIacxQ_1792493298
+	bh=wDKqI9lxsJYOWv5oXkIIVMolronNVooZmn3jjB1NaoM=;
+	b=JnSpf3wkoHQHHOIAZ6Y9OpdY5+3qdd/WVTpPWP2/pBk31YNgGDzJLoiiCvAm2aBDxBcbNq
+	wOVT2Vvgn9/FBcozigME5XA3dxwUym/aBfkPuC6Xwb6xUKKZqM9WRiO8Ia889aTJfSIid0
+	VjvCKp7r82Zl8AC+PX7K9F1hSI9pnZk=
+X-MC-Unique: nPrkmqWhMXen_3R1vU7oZw-1
+X-Mimecast-MFC-AGG-ID: nPrkmqWhMXen_3R1vU7oZw_1792493430
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:40 +0400
-Subject: [PATCH v7 23/65] pc: convert OnOffAuto vmport property to
+Date: Tue, 20 Oct 2026 14:46:04 +0400
+Subject: [PATCH v7 47/65] hw/s390x: convert BootCertificatesList to
  QAPI-aware registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-23-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-47-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,105 +152,70 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2552;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1505;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=rT4IlVA3K6hhZkzIFOmf7AHwvtTZzfc1DRg/HWfKdY4=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZZM5/OPYpgkFOCrz7lC/8MWagOdQlNe9HMu
- Ryp6VHtccaJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWQAKCRDa6OEJdZac
- 5SEYD/9QUk3mMyoHypSwCfk0l9cp7LpdZdLAE2EvzjA5uGZIIAqBUxJDWAuzNGzj6S+fvUJlWdC
- EAhsGdZYLWEH7ASWHHvy7QL+I4sYO8Xg73A6bzHJwEOXw/X9WMYP92+xT4V4aCVSuSlgPw0vTW0
- iDGOxiKxLpni8ZM7f9KyKZ7A07apImgWr/PvLmtbAQVMyGBFVMAlRVQNHiAVAYdPfO4SqPGDtEL
- FSBHcAGWwReG+sJQLCw41zKiUg19IRx+HFFvZizprongoFMpDaugaNynZ5796k7gt/kq32gooTW
- K1HtncPs4zo3o0RQhly74rTNpbStacdnJYfkbYDra1gDQX4eyKiFqN0SjV67VE/VvdnJQ8LJ+8E
- Io6ab5QTARFKwxykGzqjoPPlbjW5eZ6GbWMq2hOGAKs7EJU3OZb880jYHppuGtTKMeUpX/uuFJ5
- eN4Qb9D4OSHbiB0FCPwmlld/4ccrph+UXo3QxiUbsq3bq2b/jfEoZkiNrexjwcvm0VgnTwhUzxZ
- 8vLXrwQhyrorPwXLyf2OJODHc3WMrHl2l0U2HAnthI2rPwYhMyYDc0jK0pwPULBUOsnDcOp0HmV
- s84v32DlNvvS1/ARhP+gJq6EJ073Rob14KhIt2ElZfOtp3GUn5BAYDx7P4sYVuaJp2x6H2r0frC
- taKgfMicnsq1l+w==
+ bh=wdbhYWD/vf672j0phUbR1cOU3kwkLl3/cupZ0YaTznU=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZbDkYgPj0HDzsA3Y34WzGHrPrDPeDHvzd0l
+ wPaLOFmX3WJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWwAKCRDa6OEJdZac
+ 5QyFD/0b7xA4ChrYMo5WcQsrtlQZqCXFanjHmndWojPNq6E6DJrh7yNweRlM5B8GO8az5oyA75h
+ sUttRiBWYNvMnlgXQtH/nE8T96ywsGyTT9ZInHttlzN9P5Fh5Kr/SqOcHkuYj6mXh4Qo8l9kpkX
+ 5Ls7K8Ke23byTyibodkbaedkpfdM3EpJ3hzQ5r3Cbp68RrQqxPRAGGe+DEVXyTzCaUIrg/oKuKl
+ ee+1owd49sj/oDWlsbQ8JKwkl9rM61yJQqCHZ/8bYXLsQ8Sy+lP6fJkHm9Ng4C2rM7dDW0wPeZJ
+ /AnxrnFDz+SaS70Z+Q7qSIRHxareyWZJA0rnKOl82n26hwJ2mAFFTibkJxJPdnojLqX+mWBzWUU
+ 61jumL2L/vI6Hbuh3iO7YnsdjYk+RAjIYNyc/LVGHWFYLkgevtNRkvL4bo4c8ILFq/kfEbpOOX9
+ IJctXj/7n79Sx62wNtTjV3Wmenr+zMkYIemOn14uqf9VuXdkB0ih5iiJgO031WJpDUGUW/l3UO0
+ Nt1goAs8YdyzC1w+yD/OBemcsUJMxG2IKhcXMBoyjQtwO1hYYX+0qqyxosT72NLiOrgKTvIWx/C
+ AamF9QKFFgHdWVkuKlqIBCfed1sEkedvwsLa07Bik/rEdPJdSrKHrHCPDZ9x/Q5r3QVwD+zyVVq
+ V10wnjLfSGUrDTg==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: afHXkvdjJaInW29m8ZdwSh07harrZdA3bOoAkmzNXZY_1792493298
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: utdPST58jF8PmTWVmLhvTFx64KcObVXir9opW5y0A2w_1792493430
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1792493306-FD469034-3F158D7D/0/0
+X-purgate-ID: tlsNG-720697/1792493441-676BF2AC-68B38349/0/0
 X-purgate-type: clean
-X-purgate-size: 2554
+X-purgate-size: 1507
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Convert the vmport OnOffAuto property from manual visitor-based
-callbacks to property_add_qapi_enum().
-
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/i386/pc.c | 26 ++++++++++++--------------
- 1 file changed, 12 insertions(+), 14 deletions(-)
+ hw/s390x/s390-virtio-ccw.c | 7 +++++--
+ 1 file changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/hw/i386/pc.c b/hw/i386/pc.c
-index 2d8c87b0e34c..12de020adfbf 100644
---- a/hw/i386/pc.c
-+++ b/hw/i386/pc.c
-@@ -46,6 +46,7 @@
- #include "kvm/kvm_i386.h"
- #include "kvm/tdx.h"
- #include "hw/xen/xen.h"
-+#include "qapi/qapi-type-infos-common.h"
- #include "qobject/qlist.h"
- #include "qemu/error-report.h"
- #include "hw/acpi/acpi.h"
-@@ -1417,21 +1418,16 @@ static const HotplugHandler *pc_get_hotplug_handler(MachineState *machine,
-     return NULL;
- }
+diff --git a/hw/s390x/s390-virtio-ccw.c b/hw/s390x/s390-virtio-ccw.c
+index 3ed425b16c3e..8bc09c179552 100644
+--- a/hw/s390x/s390-virtio-ccw.c
++++ b/hw/s390x/s390-virtio-ccw.c
+@@ -44,6 +44,7 @@
+ #include "target/s390x/kvm/pv.h"
+ #include "migration/blocker.h"
+ #include "qapi/qapi-builtin-type-infos.h"
++#include "qapi/qapi-type-infos-machine-s390x.h"
+ #include "qapi/visitor.h"
+ #include "qapi/qapi-visit-machine-s390x.h"
+ #include "hw/s390x/cpu-topology.h"
+@@ -918,8 +919,10 @@ static void ccw_machine_class_init(ObjectClass *oc, const void *data)
+             " to upper case) to pass to machine loader, boot manager,"
+             " and guest kernel");
  
--static void pc_machine_get_vmport(Object *obj, Visitor *v, const char *name,
--                                  void *opaque, Error **errp)
-+static int pc_machine_get_vmport(Object *obj, Error **errp)
- {
-     PCMachineState *pcms = PC_MACHINE(obj);
--    OnOffAuto vmport = pcms->vmport;
--
--    visit_type_OnOffAuto(v, name, &vmport, errp);
-+    return pcms->vmport;
- }
+-    object_class_property_add(oc, "boot-certs", "BootCertificatesList",
+-                              machine_get_boot_certs, machine_set_boot_certs, NULL, NULL);
++    object_class_property_add_qapi(oc, "boot-certs",
++                                   &BootCertificatesList_type_info,
++                                   machine_get_boot_certs,
++                                   machine_set_boot_certs, NULL, NULL);
+     object_class_property_set_description(oc, "boot-certs",
+             "provide paths to a directory and/or a certificate file for secure boot");
  
--static void pc_machine_set_vmport(Object *obj, Visitor *v, const char *name,
--                                  void *opaque, Error **errp)
-+static void pc_machine_set_vmport(Object *obj, int value, Error **errp)
- {
-     PCMachineState *pcms = PC_MACHINE(obj);
--
--    visit_type_OnOffAuto(v, name, &pcms->vmport, errp);
-+    pcms->vmport = value;
- }
- 
- static bool pc_machine_get_fd_bootchk(Object *obj, Error **errp)
-@@ -1728,11 +1724,13 @@ static void pc_machine_class_init(ObjectClass *oc, const void *data)
-     object_class_property_set_description(oc, PC_MACHINE_MAX_RAM_BELOW_4G,
-         "Maximum ram below the 4G boundary (32bit boundary)");
- 
--    object_class_property_add(oc, PC_MACHINE_VMPORT, "OnOffAuto",
--        pc_machine_get_vmport, pc_machine_set_vmport,
--        NULL, NULL);
--    object_class_property_set_description(oc, PC_MACHINE_VMPORT,
--        "Enable vmport (pc & q35)");
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = PC_MACHINE_VMPORT,
-+        .description = "Enable vmport (pc & q35)",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .get = pc_machine_get_vmport,
-+        .set = pc_machine_set_vmport,
-+    ));
- 
-     object_class_property_add_bool(oc, PC_MACHINE_SMBUS,
-         pc_machine_get_smbus, pc_machine_set_smbus);
 
 -- 
 2.56.0.116.g6de20f6092dc
