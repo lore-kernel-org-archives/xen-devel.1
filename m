@@ -2,38 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D73B6606A319
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A79E3606A319
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=proton.me header.i=@proton.me header.a=rsa-sha256 header.s=lrw5xn6zmrgwjg4x3oteet6dzm.protonmail2 header.b=vQJay5x0
-Received: from list by lists.xenproject.org with outflank-mailman.1455126.1668854 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=evXG8kar
+Received: from list by lists.xenproject.org with outflank-mailman.1455280.1668862 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7VW-0000vY-PC; Tue, 20 Oct 2026 10:55:50 +0000
+	id 1xJ7Vq-0001LO-3D; Tue, 20 Oct 2026 10:56:10 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455126.1668854; Tue, 20 Oct 2026 10:55:50 +0000
+Received: by outflank-mailman (output) from mailman id 1455280.1668862; Tue, 20 Oct 2026 10:56:10 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7VW-0000vP-LY; Tue, 20 Oct 2026 10:55:50 +0000
-Received: by outflank-mailman (input) for mailman id 1455126;
- Tue, 20 Oct 2026 07:28:25 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xJ7Vp-0001LG-WF; Tue, 20 Oct 2026 10:56:10 +0000
+Received: by outflank-mailman (input) for mailman id 1455280;
+ Tue, 20 Oct 2026 10:46:15 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <lluisbessasanz@proton.me>) id 1xJ4Gl-0001KX-M4
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 07:28:25 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7MF-0007FE-2e
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:46:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ4Gk-003d4d-VA
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 09:28:22 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xJ7ME-00CudL-B2
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:46:14 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <lluisbessasanz@proton.me>)
- id 6ad71813-2eae-0a2a0a5409dd-0a2a4505b8c0-32
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 09:28:22 +0200
-Received: from [79.135.106.120] (helo=mail-106120.protonmail.ch)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <lluisbessasanz@proton.me>)
- id 6ad71816-4cb1-0a2a45050019-4f876a78ad7d-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 09:28:22 +0200
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6ad74673-8faa-0a2a0a5109dd-0a2a450be3e4-14
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:13 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <marcandre.lureau@redhat.com>)
+ id 6ad74674-b7e8-0a2a450b0019-aa0a817c4ee3-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:13 +0200
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-661-DKkuKb5XMHGYZ_bW7teTCg-1; Tue,
+ 20 Oct 2026 10:46:08 +0000
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 48DA71800BD0; Tue, 20 Oct 2026 10:46:01 +0000 (UTC)
+Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.116])
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id B0D3A1956089; Tue, 20 Oct 2026 10:45:51 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -42,203 +58,480 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=lrw5xn6zmrgwjg4x3oteet6dzm.protonmail2 header.d=proton.me header.i="@proton.me" header.h="Date:To:From:Subject:Message-ID:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=proton.me;
-	s=lrw5xn6zmrgwjg4x3oteet6dzm.protonmail2; t=1792481301;
-	x=1792740501; bh=ma6dsYAeSOTRStqdIRsDBk+0FnUo+52hhwVoyi+LQ80=;
-	h=Date:To:From:Subject:Message-ID:Feedback-ID:From:To:Cc:Date:
-	 Subject:Reply-To:Feedback-ID:Message-ID:BIMI-Selector;
-	b=vQJay5x0a5nLQVuVxeaZVa8vIjOjYlPShyURML5WmMvkLArc/XvgVTxRF28f0H2m9
-	 AU1xLf/CAO75GOzkcvj86lUav2STLilFsZRwMtGMwWG6w8o0AitfrKp0+eElAHVvXF
-	 SidbHNQgNDBwQWw11XW0MYGLVohkLkxrSGJRblJG99MIRpEAKExFwRtjGGgVUYw1D9
-	 0W9/A5U9jydC4xqAF2sRQJ96fqG18WTbZCboDupNy0hwFya1PIVwo91W9lpLwdSvn4
-	 BgeRfkhTpECKBJFXcS9UXs+mZN1cPUx9s/HKCdWYryZcPlFKiZkM0gbmOWhhjg3r3q
-	 LBSSqS/m2JFqQ==
-Date: Tue, 20 Oct 2026 07:28:17 +0000
-To: evilbootloader@proton.me, xen-devel@lists.xenproject.org
-From: lluisbessasanz <lluisbessasanz@proton.me>
-Subject: [PATCH] x86/altp2m: pause the vCPU before taking the altp2m list lock
-Message-ID: <20261020072806.465449-1-lluisbessasanz@proton.me>
-Feedback-ID: 116934124:user:proton
-X-Pm-Message-ID: 133332cbbfb1a3cd7404c8e14a6732b930984778
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1792493172;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding;
+	bh=MptOf1hVsZ1OcnRpLWGVoNoF31BJAipRXCSmM3yzXJc=;
+	b=evXG8karoU4jRnzSENT1qSvlVMMTbBIleKyqm4d7cJ25MCJZmT5puXE8iQHT3JrCtbrRLc
+	HviFZNhcO9/iC8ZPsH5gwWIiUCCEIsIKmLxDIQHPIVaz25ZjeeGM/v3FdZuvDjLAGW4hVb
+	pFUnpO0lYqrwOT86occK6OWDpq6j+WU=
+X-MC-Unique: DKkuKb5XMHGYZ_bW7teTCg-1
+X-Mimecast-MFC-AGG-ID: DKkuKb5XMHGYZ_bW7teTCg_1792493164
+From: marcandre.lureau@redhat.com
+Subject: [PATCH v7 00/65] Hi
+Date: Tue, 20 Oct 2026 14:45:17 +0400
+Message-Id: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-c201ff/1792481302-730B22A1-1A54319D/0/0
+X-B4-Tracking: v=1; b=H4sIAAAAAAAC/yXMQQqAIBCF4avErBPMqKCrRAu1qSYoTSsC8e5ZL
+ T/43wvg0RF6aLMADi/yZLaEJs9Az3KbkNGQDIKLuuCCs92sbJeWmEbUSgkpy2qElFuHI93fVdf
+ /9qdaUB/vHmJ8AJZKl35sAAAA
+X-Change-ID: 20261020-qom-qapi-ceecbb2aa35f
+To: qemu-devel@nongnu.org
+Cc: Markus Armbruster <armbru@redhat.com>, 
+ Michael Roth <michael.roth@amd.com>, John Snow <jsnow@redhat.com>, 
+ Peter Maydell <peter.maydell@linaro.org>, 
+ Mauro Carvalho Chehab <mchehab+huawei@kernel.org>, 
+ Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>, 
+ Paolo Bonzini <pbonzini@redhat.com>, 
+ =?utf-8?q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>, 
+ Kostiantyn Kostiuk <kkostiuk@redhat.com>, Eric Blake <eblake@redhat.com>, 
+ David Hildenbrand <david@kernel.org>, Igor Mammedov <imammedo@redhat.com>, 
+ "Edgar E. Iglesias" <edgar.iglesias@gmail.com>, 
+ Jason Wang <jasowangio@gmail.com>, Marcelo Tosatti <mtosatti@redhat.com>, 
+ kvm@vger.kernel.org, Alberto Garcia <berto@igalia.com>, 
+ Kevin Wolf <kwolf@redhat.com>, Hanna Reitz <hreitz@redhat.com>, 
+ =?utf-8?q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>, 
+ Zhao Liu <zhao1.liu@intel.com>, Jonathan Cameron <jic23@kernel.org>, 
+ Junjie Cao <junjie.cao@intel.com>, Anisa Su <anisa.su@samsung.com>, 
+ Elena Ufimtseva <elena.ufimtseva@oracle.com>, 
+ Jagannathan Raman <jag.raman@oracle.com>, 
+ John Levon <john.levon@nutanix.com>, 
+ Thanos Makatos <thanos.makatos@nutanix.com>, 
+ =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@redhat.com>, 
+ Cornelia Huck <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>, 
+ Matthew Rosato <mjrosato@linux.ibm.com>, 
+ Richard Henderson <richard.henderson@linaro.org>, 
+ Ilya Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org, 
+ linux-cxl@vger.kernel.org, qemu-s390x@nongnu.org, 
+ "Michael S. Tsirkin" <mst@redhat.com>, Sergio Lopez <slp@redhat.com>, 
+ qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Weiwei Li <liwei1518@gmail.com>, 
+ Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>, 
+ Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, 
+ Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org, 
+ Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>, 
+ Xianglai Li <lixianglai@loongson.cn>, Jiaxun Yang <jiaxun.yang@flygoat.com>, 
+ Pedro Barbuda <pbarbuda@microsoft.com>, 
+ Mohamed Mediouni <mohamed@unpredictable.fr>, 
+ Nicholas Piggin <npiggin@gmail.com>, 
+ Harsh Prateek Bora <harshpb@linux.ibm.com>, 
+ Amit Machhiwal <amachhiw@linux.ibm.com>, qemu-ppc@nongnu.org, 
+ Zhang Chen <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>, 
+ Alistair Francis <alistair@alistair23.me>, Alexander Graf <graf@amazon.com>, 
+ "Gonglei (Arei)" <arei.gonglei@huawei.com>, 
+ zhenwei pi <zhenwei.pi@linux.dev>, Ani Sinha <anisinha@redhat.com>, 
+ Luc Michel <luc@lmichel.fr>, 
+ =?utf-8?q?C=C3=A9dric_Le_Goater?= <clg@kaod.org>, 
+ Jamin Lin <jamin_lin@aspeedtech.com>, Kane Chen <kane_chen@aspeedtech.com>, 
+ Samuel Tardieu <sam@rfc1149.net>, "Denis V. Lunev" <den@openvz.org>, 
+ FangSheng Huang <FangSheng.Huang@amd.com>, Tyrone Ting <kfting@nuvoton.com>, 
+ Hao Wu <wuhaotsh@google.com>, Keith Busch <kbusch@kernel.org>, 
+ Klaus Jensen <its@irrelevant.dk>, Jesper Devantier <foss@defmacro.it>, 
+ Aditya Gupta <adityag@linux.ibm.com>, Glenn Miles <milesg@linux.ibm.com>, 
+ Conor Dooley <conor@kernel.org>, 
+ Sebastian Huber <sebastian.huber@embedded-brains.de>, 
+ Halil Pasic <pasic@linux.ibm.com>, 
+ Christian Borntraeger <borntraeger@linux.ibm.com>, 
+ Jason Herne <jjherne@linux.ibm.com>, Titus Rwantare <titusr@google.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Anthony PERARD <anthony@xenproject.org>, Peter Xu <peterx@redhat.com>, 
+ Chinmay Rath <rathc@linux.ibm.com>, 
+ Hendrik Brueckner <brueckner@linux.ibm.com>, xen-devel@lists.xenproject.org, 
+ Roman Bolshakov <rbolshakov@ddn.com>, 
+ Phil Dennis-Jordan <phil@philjordan.eu>, Fam Zheng <fam@euphon.net>, 
+ Farhan Ali <alifm@linux.ibm.com>, Alex Williamson <alex@shazbot.org>, 
+ Tao Tang <tangtao1634@phytium.com.cn>, 
+ Stefan Berger <stefanb@linux.vnet.ibm.com>, Fabiano Rosas <farosas@suse.de>, 
+ Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>, 
+ Artyom Tarasenko <atar4qemu@gmail.com>, 
+ Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
+ Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
+ Stefan Berger <stefanb@linux.vnet.ibm.com>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=18033;
+ i=marcandre.lureau@redhat.com; h=from:subject:message-id;
+ bh=YQH1wFu02Ce7UI3SJRB7LFwFPSLUsv52xFDWmiRbu9A=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZXhnO81OQ6oQCifSYiCo/KRE9qOY0nNm6UM
+ YRzm0e0Z+eJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGVwAKCRDa6OEJdZac
+ 5eu3EACgBRt96Jmd4w9dAGsxJWUgTeuIC9Q+Gu7gsqjyAwWPz6xsT83ATwr2NrI7URczXKUUzUH
+ SbstTSknWKlqAwFuJjI4N6i+JRmDoxihzJQkOQZvOldkC7brA7szgus5eQ/zmOAg/rePS0H3ifD
+ 4LAgZnm78mR03sDIgOV7HEPf00+9SlWVHwEQ8jkPET0AMorE0iYTfreMTCyOHojmshPxuvEhmzg
+ mfmGIDTA5/DyeM9byxrom2suwhLB+x18H79b+CIfx9Wgvy/9lmjzGiMed8oLBSjlR6JV506TMh5
+ G09N/Qrf99ZBtIk7bSASRkT37x/Ey6efRDBuB9X9E9sr0T2CX+aJnKqpUT2eh2Cg70OnA4yV750
+ c7invSavJvaFnyk3srbbQltdVmoHGmNb8N1EY33+nCMnEQObkb7nNdtPNS7bZzVTQ79lTodfqm/
+ q+OnquwCSNX5O2YSDC0MaV10KSjVUkknfXcHdwlSmjl06/hB1pIDEo4rk8M/wriwL2oiI61pPxN
+ wRijVyD+nW2B5H6F0qjcKswRZRke444dd1hSd/VRjCHO8KoZEUPqaxHoQZUnmcywR2RMQWAxgop
+ 73X1MQY2XKu5YQomKMTluUEPoxA+JML0FtZUdnmOEaU2dSt1RK85qAk2HBA9VJpGrYX4adQ6sdT
+ 275ub/bPzYg5t4Q==
+X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
+ fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: t7HYCdvZlEemWRyuWTbpScHhM9PVK3n3toIxyOOx2Gg_1792493164
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-42698a/1792493173-2C39B9EA-F49440E7/0/0
 X-purgate-type: clean
-X-purgate-size: 6492
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 18035
+X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Llu=C3=ADs Bessa <evilbootloader@proton.me>
+This series connects QOM and qdev properties to the QAPI type system, so
+that management tools can discover the QAPI schema type of each object
+property.
 
-p2m_switch_vcpu_altp2m_by_id() takes the altp2m list lock and then
-updates the vCPU's EPTP. For a vCPU other than current,
-vmx_vcpu_update_eptp() -> vmx_vmcs_enter() pauses it and waits in
-vcpu_sleep_sync() until it is off its pCPU, with the lock still held.
+Today, QOM properties carry a free-form "type" string ("bool", "uint32",
+"OnOffAuto", ..) that has no formal link to the QAPI schema exposed by
+query-qmp-schema. Management tools must maintain ad-hoc mappings or rely
+on naming conventions to figure out how to interpret property values.
 
-A vCPU on its way off its pCPU may need the p2m lock: context_switch()
-updates its runstate area, which for an area registered by guest virtual
-address (VCPUOP_register_runstate_memory_area, as Linux does) is a copy
-to guest memory and needs a p2m lookup. A vCPU handling a log-dirty
-write fault holds the host p2m lock in p2m_change_type_one() and waits
-for the altp2m list lock in p2m_altp2m_propagate_change(). That closes
-a cycle:
+This series adds:
+  - A new QAPITypeInfo struct that pairs a property with its QAPI schema
+    type name, enum lookup table, and list-element type.
 
-  dom0 vCPU, vm_event_resume() -> p2m_altp2m_check():
-    holds the altp2m list lock, waits for vCPU X to be descheduled
-  vCPU X, context_switch() -> update_runstate_area():
-    waits for the host p2m lock
-  vCPU Y, hvm_hap_nested_page_fault() -> p2m_change_type_one():
-    holds the host p2m lock, waits for the altp2m list lock
+  - A QAPI code generator (qapi-type-infos) that emits a QAPITypeInfo
+    instance for every schema-defined type, including the mapping
+    between internal C names and the schema name visible to clients.
 
-A vm_event consumer switching views in its responses
-(VM_EVENT_FLAG_ALTERNATE_P2M) hits it with a Linux HVM guest while QEMU
-tracks dirty VRAM for a VNC client. The dom0 vCPUs involved spin in Xen
-and stop handling interrupts, and dom0 hangs.
+  - A "qapi-type" field in the ObjectPropertyInfo and
+    ObjectPropertyValue QMP structs, populated from the QAPITypeInfo
+    when present giving clients a cross-reference into query-qmp-schema
+    output.
 
-Pause the vCPU before taking the lock, like
-p2m_switch_domain_altp2m_by_id() does with domain_pause_except_self().
-The pause in vmx_vmcs_enter() then finds the vCPU already descheduled.
-Only vm_event_resume() switches another vCPU's view, the other callers
-switch current and are unaffected.
+  - Conversion of all PropertyInfo definitions from the old
+    .type/.enum_table strings to the new .qapi_type pointer.
 
-Signed-off-by: Llu=C3=ADs Bessa <evilbootloader@proton.me>
-Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+  - Replacement of the generic qdev_prop_array with typed per-element
+    array PropertyInfos, removing the arrayinfo/arrayfieldsize
+    indirection from struct Property.
+
+  - Removal of the deprecated PropertyInfo.type and .enum_table fields,
+    and of the old object_property_add_enum/add_tm APIs.
+
+Along the way, a few pre-existing type mismatches in property
+definitions are fixed, the "struct tm" RTC property is replaced with a
+proper QAPI StructTm type etc. Introducing more specific types or a
+"typedef" to QAPI could help provide better associated type informations
+than plain "str" in many cases, for example.
+
+Changes in v7:
+- fixed a few more mis-typed list properties
+- use designated initializers for StructTm fields
+- assert enum get() returns >= or an error
+- a few commit message and code comment tweaks
+- rebased, add r-b trailers
+
+Changes in v6:
+- Rebase, resolve a few conflicts
+- Replace old PATCH 03-04 by new PATCH 01-06, adjust PATCH 09 [old
+  PATCH 05]
+- Fix temporary build breakage: convert PCSouthBridgeOption only when
+  it gets QAPIfied [PATCH 62], delay removal of old interface until
+  after that [PATCH 63].
+- Clean up checkpatch long line warnings, except leave the ones in
+  PATCH 38 for later
+
+Changes in v5:
+- make "masked_name" mandatory, skip QType QAPITypeInfo generation
+- added/split "hw/ppc/spapr_caps: fix property type name" patch
+- added "qapi: select introspectable types directly", simplifying type discovery
+- fixed an include path
+- doc adjustments
+- rebased, collect r-b trailers
+- Link to v4: https://lore.kernel.org/qemu-devel/20260904-qom-qapi-v4-0-a985f168e938@redhat.com
+
+Changes in v4:
+- new patch "qom/qmp: populate description & default-value"
+- added gtk-doc comments for class_property_add_qapi*()
+- correct some property types to reflect the visitor
+- collected rb, rebased
+- Link to v3: https://lore.kernel.org/qemu-devel/20260818-qom-qapi-v3-0-24b8bbbe3d86@redhat.com
+
+Changes in v3:
+- QAPI analysis redesign (replacing the old "expose name map" from
+introspect)
+- all non-implicit QAPI types are now introspectable, including QOM-only
+types
+- QAPITypeInfo.schema_name -> masked_name
+- exposes integer signedness and width through query-qmp-schema
+- various extra property fixes
+- rebase, some patch split or merge
+
+- Link to v2: https://lore.kernel.org/qemu-devel/20260616-qom-qapi-v2-0-cc9396b9c18c@redhat.com
+
+Changes in v2:
+
+- Added kernel-doc documentation for the QAPITypeInfo struct fields.
+- Dropped "qom: drop free-form property typename registration", it's
+  still needed for array of links to provide useful type names.
+- Added qdev_prop_link_list for array-of-links properties, with a
+  create function that generates "link<TYPE>List" type names matching the
+  existing "link<TYPE>" convention.
+- qdev_prop_link now uses &str_type_info instead of "link" (the full
+  "link<TYPE>" type name is set at property-add time)
+- Simplified DEFINE_PROP_LINK_ARRAY to use qdev_prop_link_list, dropping
+  the now-unnecessary _arraytype parameter.
+- rebased
+- Link to v1: https://lore.kernel.org/qemu-devel/20260510-qom-qapi-v1-0-48ba6a1a1fa5@redhat.com
+
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
+Marc-André Lureau (59):
+      qapi: add QAPITypeInfo struct definition
+      qapi/gen: fix _module_basename for multi-dash 'what' parameters
+      qapi: add type-infos generator
+      meson: add qapi-type-infos-*.c/h to build
+      qom: add qapi_type field to ObjectProperty
+      qapi/qom: add qapi-type field to ObjectPropertyInfo
+      qom/qmp: populate qapi-type in QMP handlers
+      qom/qmp: populate description & default-value in qom_property_info()
+      qom: add object_property_set_default_enum()
+      qom: add object_{class_}property_add_qapi
+      qom: add object_{class_}property_add_qapi_enum
+      tests: update check-qom-proplist for QAPI-aware property registration
+      qom: convert QAPI enum properties to QAPI-aware registration
+      qom: convert struct properties to QAPI-aware registration
+      x86: convert OnOffAuto properties to QAPI-aware registration
+      microvm: convert OnOffAuto properties to QAPI-aware registration
+      pc: convert OnOffAuto vmport property to QAPI-aware registration
+      arm/virt: convert OnOffAuto acpi property to QAPI-aware registration
+      riscv/virt: convert OnOffAuto properties to QAPI-aware registration
+      loongarch/virt: convert OnOffAuto properties to QAPI-aware registration
+      hostmem-file: convert OnOffAuto rom property to QAPI-aware registration
+      sev: convert OnOffAuto legacy-vm-type property to QAPI-aware registration
+      whpx: convert OnOffAuto hyperv property to QAPI-aware registration
+      whpx: convert OnOffAuto arch properties to QAPI-aware registration
+      accel/kvm: convert OnOffSplit property to QAPI-aware registration
+      whpx: convert OnOffSplit property to QAPI-aware registration
+      hw/ppc/spapr_caps: fix property type name
+      ppc/spapr-caps: convert to QAPI-aware property registration
+      net/colo-compare: fix compare_timeout setter visitor type
+      net/colo-compare: fix max_queue_size setter visitor type
+      hw/misc/xlnx-versal-trng: add missing getter for fips-fault-events
+      qom: convert scalar properties to QAPI-aware registration
+      i386/cpu: convert strList property to QAPI-aware registration
+      accel/hvf: convert OnOffSplit property to QAPI-aware registration
+      i386/x86: convert SgxEPCList property to QAPI-aware registration
+      virtio-balloon: convert guest-stats property to QAPI type
+      qom: replace object_property_add_tm with StructTm QAPI type
+      hw/nvdimm: convert UUID property to QAPI-aware registration
+      hw/s390-virtio-ccw: convert loadparm property to QAPI-aware registration
+      hw/ppc/spapr_drc: convert fdt property to QAPI-aware registration
+      hw/s390x: convert BootCertificatesList to QAPI-aware registration
+      hw/gpio/pca955x: use QAPI enums for led and pin properties
+      include: add QEMU_REPEAT helper macro
+      hw/gpio/pca955x: convert pin/led property to QAPI-aware enum
+      hw/pci: change the busnr type to uint8
+      qdev: add qapi_type field to PropertyInfo with fallback registration
+      qdev: convert core PropertyInfo definitions to use qapi_type
+      qdev: adjust PciDevfn declared type
+      qdev: convert system PropertyInfo definitions to use qapi_type
+      hw: convert device-local PropertyInfo definitions to use qapi_type
+      target/riscv: convert PropertyInfo definitions to use qapi_type
+      qdev: convert PropertyInfo definitions to use qapi_type
+      qdev: introduce typed array PropertyInfos
+      qdev: simplify DEFINE_PROP_ARRAY and remove generic array PropertyInfo
+      qdev: remove deprecated PropertyInfo.type and .enum_table fields
+      hw/i386: convert PCSouthBridgeOption to QAPI enum
+      qom: remove old enum property registration API
+      qom: use QAPITypeInfo in object_property_get_enum
+      tests/qmp-cmd-test: assert qapi-type resolves in query-qmp-schema
 
-Notes:
-    Seen on Xen 4.20.1 (debug=3Dn), Intel family 6 model 0xb7, PV dom0 (Lin=
-ux
-    6.8, 6 vCPUs pinned), Xen command line:
-      dom0_mem=3D6144M,max:6144M dom0_max_vcpus=3D6 dom0_vcpus_pin=3D1 forc=
-e-ept=3D1
-      ept=3Dad=3D0 hap_1gb=3D0 hap_2mb=3D0 altp2m=3D1 hpet=3Dlegacy-replace=
-ment smt=3D0
-      sched=3Dcredit conring_size=3D4M
-    Guest: HVM, hap=3D1, altp2m=3D2 (external), 3 vCPUs, 8 GiB, vga=3D"stdv=
-ga",
-    vnc=3D1, QEMU 9.1.0. Ubuntu 22.04 with its stock 5.15 kernel, no driver=
-s
-    installed. The trace of CPU12 below shows Xen copying the runstate into
-    guest memory, so the guest kernel registered a runstate area by itself.
-   =20
-    vm_event consumer: a multithreaded DRAKVUF build we are developing,
-    which handles the vm_events of different vCPUs in parallel threads. It
-    traces syscalls with altp2m breakpoints, every breakpoint response sets
-    VM_EVENT_FLAG_ALTERNATE_P2M (fast single step). The same build with
-    single-threaded event handling hangs as well, so one dom0 thread
-    answering events is enough. Upstream DRAKVUF wasn't tested, it sends
-    the same kind of responses.
-   =20
-    With a VNC client attached and the guest screen changing, dom0 hangs
-    within seconds in most runs, with multithreaded and single-threaded
-    event handling: soft lockups in dom0, disk and network I/O stop. Not
-    seen without a VNC client, nor with a Windows guest without Xen PV
-    drivers.
-   =20
-    Debug keys 'q' and 'd' during the hang (trimmed). d1 has pause_count=3D=
-1
-    (QEMU in hap_track_dirty_vram()), but its vCPUs are still running:
-   =20
-      VCPU0: CPU12 [has=3DT] pause_count=3D2
-      VCPU1: CPU14 [has=3DT] pause_count=3D0
-      VCPU2: CPU16 [has=3DT] pause_count=3D0
-   =20
-    CPU2 (d0v1, DRAKVUF answering a breakpoint; our build running with
-    single-threaded event handling):
-      vcpu_sleep_sync+0x32/0x60
-      vmx_vmcs_try_enter.part.0+0x3e/0xe0
-      vmx_vcpu_update_eptp+0x43/0xb0
-      p2m_switch_vcpu_altp2m_by_id+0x14a/0x1d0
-      vm_event_resume.part.0+0x245/0x270
-      evtchn_send+0x28a/0x2e0
-      do_event_channel_op+0x1cc/0x1130
-   =20
-    CPU12 (d1v0, being descheduled):
-      queue_read_lock_slowpath+0x22/0x60
-      p2m_get_page_from_gfn+0x305/0x360
-      hvm_translate_get_page+0x19c/0x1e0
-      __hvm_copy+0xa9/0x460
-      copy_to_user_hvm+0x71/0x90
-      update_runstate_area+0x200/0x3a0
-      _update_runstate_area+0x9/0x40
-      context_switch+0x63/0x940
-      schedule+0x1c4/0x260
-      __do_softirq+0x59/0xa0
-      vmx_asm_do_vmentry+0x2b/0x30
-   =20
-    CPU14 (d1v1, log-dirty write fault on VRAM):
-      _rspin_lock+0x42/0x60
-      p2m_altp2m_propagate_change+0x62/0x2d0
-      ept_set_entry+0x71c/0x7c0
-      p2m_set_entry+0x8e/0x150
-      p2m_change_type_one+0xb5/0x270
-      hvm_hap_nested_page_fault+0x3f6/0x6b0
-      vmx_vmexit_handler+0xe7f/0x17f0
-   =20
-    Also waiting: CPU8 (d0v4, QEMU) in vcpu_sleep_sync() from _domain_pause=
-()
-    in hap_track_dirty_vram(), CPU16 (d1v2) for the p2m write lock in
-    p2m_get_gfn_type_access(), CPU10 (d0v5, netback) for the p2m read lock =
-in
-    gnttab_copy().
-   =20
-    Tested on 4.20.1 with this patch: 9 runs of 15 s with a VNC client
-    attached, 3 with single-threaded and 6 with multithreaded event
-    handling, 390k to 818k traced syscalls each, no hang. A run with a
-    Windows guest works as before. Compile-tested on staging.
+Markus Armbruster (6):
+      qapi/schema: Rename .lookup_entity() and tighten return type
+      qapi: Ease access to introspection names
+      qapi/introspect: Simplify masked name comment emission slighly
+      qapi/introspect: Don't elide types
+      qapi: QAPISchemaVisitor.visit_needed() is now unused, drop
+      qapi/introspect: Tweak integer type masking
 
- xen/arch/x86/mm/altp2m.c | 15 +++++++++++++++
- 1 file changed, 15 insertions(+)
+ accel/hvf/hvf-all.c                      |  29 ++--
+ accel/kvm/kvm-all.c                      |  31 ++--
+ accel/nitro/nitro-accel.c                |   3 +-
+ accel/tcg/tcg-all.c                      |   3 +-
+ accel/whpx/whpx-common.c                 |  58 +++----
+ authz/list.c                             |  14 +-
+ backends/cryptodev.c                     |   7 +-
+ backends/hostmem-file.c                  |  33 ++--
+ backends/hostmem-memfd.c                 |   3 +-
+ backends/hostmem.c                       |  20 +--
+ backends/spdm-socket.c                   |   4 +-
+ backends/tpm/tpm_util.c                  |   3 +-
+ block/throttle-groups.c                  |  10 +-
+ chardev/char-socket.c                    |   3 +-
+ crypto/secret_common.c                   |  12 +-
+ crypto/secret_keyring.c                  |   9 +-
+ crypto/tlscreds.c                        |  12 +-
+ docs/devel/qapi-code-gen.rst             |  92 ++++++++++-
+ docs/interop/virtio-balloon-stats.rst    |  22 +--
+ docs/sphinx/qapidoc.py                   |   2 +-
+ event-loop-base.c                        |   7 +-
+ hw/acpi/ich9.c                           |   1 +
+ hw/acpi/pci.c                            |   7 +-
+ hw/arm/virt.c                            |  31 ++--
+ hw/block/xen-block.c                     |   3 +-
+ hw/core/clock.c                          |   3 +-
+ hw/core/machine-qmp-cmds.c               |   4 +-
+ hw/core/machine.c                        |  13 +-
+ hw/core/qdev-prop-internal.h             |  23 +++
+ hw/core/qdev-properties-system.c         |  97 ++++++------
+ hw/core/qdev-properties.c                | 182 ++++++++++++++-------
+ hw/cpu/core.c                            |  10 +-
+ hw/cxl/cxl-host.c                        |   6 +-
+ hw/display/apple-gfx-mmio.m              |   2 +-
+ hw/display/apple-gfx-pci.m               |   2 +-
+ hw/display/apple-gfx.h                   |   1 +
+ hw/display/apple-gfx.m                   |   7 +-
+ hw/gpio/aspeed_gpio.c                    |   5 +-
+ hw/gpio/aspeed_sgpio.c                   |   3 +-
+ hw/gpio/pca9552.c                        | 261 ++++++++++++-------------------
+ hw/gpio/pca9554.c                        | 157 +++++++------------
+ hw/gpio/stm32l4x5_gpio.c                 |   5 +-
+ hw/i386/microvm.c                        |  80 ++++------
+ hw/i386/pc.c                             |  32 ++--
+ hw/i386/pc_piix.c                        |  61 +++-----
+ hw/i386/sgx-epc.c                        |  10 +-
+ hw/i386/x86.c                            | 113 ++++++-------
+ hw/ide/ide-dev.c                         |   3 +-
+ hw/input/stellaris_gamepad.c             |   2 +-
+ hw/intc/apic_common.c                    |   3 +-
+ hw/intc/arm_gicv3_common.c               |   2 +-
+ hw/intc/arm_gicv5_common.c               |   4 +-
+ hw/intc/rx_icu.c                         |   4 +-
+ hw/loongarch/virt.c                      |  87 +++++------
+ hw/mem/nvdimm.c                          |  11 +-
+ hw/mem/pc-dimm.c                         |   3 +-
+ hw/microblaze/petalogix_s3adsp1800_mmu.c |  19 ++-
+ hw/misc/arm_sysctl.c                     |   4 +-
+ hw/misc/aspeed_lpc.c                     |  73 ++++++---
+ hw/misc/aspeed_sdmc.c                    |   3 +-
+ hw/misc/mps2-scc.c                       |   2 +-
+ hw/misc/npcm7xx_mft.c                    |   3 +-
+ hw/misc/tz-ppc.c                         |  19 +--
+ hw/misc/xlnx-versal-trng.c               |  15 +-
+ hw/net/ne2000-isa.c                      |   3 +-
+ hw/net/rocker/rocker.c                   |   2 +-
+ hw/net/virtio-net.c                      |   2 +-
+ hw/nvme/ctrl.c                           |   3 +-
+ hw/nvme/nguid.c                          |   3 +-
+ hw/nvram/xlnx-bbram.c                    |   3 +-
+ hw/nvram/xlnx-efuse.c                    |   5 +-
+ hw/nvram/xlnx-versal-efuse-ctrl.c        |   2 +-
+ hw/pci-bridge/pci_expander_bridge.c      |   3 +-
+ hw/pci-host/i440fx.c                     |  29 ++--
+ hw/pci-host/pnv_phb3.c                   |   5 +-
+ hw/pci-host/pnv_phb4.c                   |   5 +-
+ hw/pci-host/q35.c                        |   9 +-
+ hw/pci/pci.c                             |   3 +-
+ hw/ppc/spapr_caps.c                      |  39 ++---
+ hw/ppc/spapr_drc.c                       |   5 +-
+ hw/ppc/spapr_rtc.c                       |  24 ++-
+ hw/remote/vfio-user-obj.c                |  22 +--
+ hw/riscv/microchip_pfsoc.c               |   3 +-
+ hw/riscv/riscv_hart.c                    |   6 +-
+ hw/riscv/virt.c                          |  52 +++---
+ hw/rtc/mc146818rtc.c                     |  22 ++-
+ hw/s390x/ccw-device.c                    |   3 +-
+ hw/s390x/css.c                           |   5 +-
+ hw/s390x/s390-pci-bus.c                  |   3 +-
+ hw/s390x/s390-virtio-ccw.c               |  11 +-
+ hw/s390x/sclpcpi.c                       |   8 +-
+ hw/s390x/virtio-ccw-mem.c                |   3 +-
+ hw/sensor/adc128d818.c                   |  16 +-
+ hw/sensor/adm1266.c                      |   3 +-
+ hw/sensor/adm1272.c                      |   9 +-
+ hw/sensor/emc141x.c                      |   9 +-
+ hw/sensor/isl_pmbus_vr.c                 |  19 +--
+ hw/sensor/lsm303dlhc_mag.c               |   9 +-
+ hw/sensor/max34451.c                     |   5 +-
+ hw/sensor/tmp105.c                       |   3 +-
+ hw/sensor/tmp421.c                       |   9 +-
+ hw/usb/dev-storage-classic.c             |   3 +-
+ hw/vfio-user/pci.c                       |   5 +-
+ hw/vfio/pci-quirks.c                     |   3 +-
+ hw/virtio/virtio-balloon.c               |  87 ++++-------
+ hw/virtio/virtio-iommu-pci.c             |   2 +-
+ hw/virtio/virtio-mem-pci.c               |   3 +-
+ hw/virtio/virtio-mem.c                   |  18 ++-
+ hw/xen/xen-pvh-common.c                  |   9 +-
+ include/chardev/char.h                   |   8 -
+ include/hw/block/block.h                 |   2 +-
+ include/hw/core/qdev-properties-system.h |   2 +
+ include/hw/core/qdev-properties.h        |  40 +++--
+ include/hw/cxl/cxl_component.h           |   5 +-
+ include/hw/i386/pc.h                     |   4 +-
+ include/qapi/qapi-type-info.h            |  31 ++++
+ include/qemu/osdep.h                     |  33 ++++
+ include/qemu/uuid.h                      |   4 +
+ include/qom/object.h                     | 186 +++++++++++++++-------
+ iothread.c                               |   9 +-
+ meson.build                              |   1 +
+ migration/options.c                      |   4 +-
+ monitor/qmp.c                            |  12 +-
+ net/colo-compare.c                       |  15 +-
+ net/dump.c                               |   6 +-
+ net/filter-buffer.c                      |   3 +-
+ net/filter.c                             |  10 +-
+ qapi/common.json                         |  28 ++++
+ qapi/machine.json                        | 152 ++++++++++++++++++
+ qapi/meson.build                         |   4 +
+ qapi/pragma.json                         |   1 +
+ qapi/qom.json                            |  10 ++
+ qga/meson.build                          |   2 +
+ qom/object.c                             | 237 +++++++++++++---------------
+ qom/qom-qmp-cmds.c                       |  47 +++---
+ scripts/qapi/backend.py                  |   2 +
+ scripts/qapi/gen.py                      |   2 +-
+ scripts/qapi/introspect.py               |  74 +++------
+ scripts/qapi/schema.py                   |  57 +++++--
+ scripts/qapi/type_infos.py               | 163 +++++++++++++++++++
+ system/bootdevice.c                      |   3 +-
+ system/memory.c                          |   5 +-
+ target/arm/cpu64.c                       |  11 +-
+ target/arm/kvm.c                         |   3 +-
+ target/arm/tcg/cpu64.c                   |  11 +-
+ target/i386/cpu.c                        |  26 +--
+ target/i386/kvm/kvm.c                    |  38 +++--
+ target/i386/kvm/tdx.c                    |   4 +-
+ target/i386/sev.c                        |  31 ++--
+ target/i386/whpx/whpx-all.c              | 101 ++++--------
+ target/ppc/compat.c                      |   3 +-
+ target/riscv/cpu.c                       |  47 +++---
+ target/riscv/kvm/kvm-cpu.c               |   7 +-
+ target/riscv/tcg/tcg-cpu.c               |  13 +-
+ target/s390x/cpu-system.c                |   4 +-
+ target/s390x/cpu_models.c                |   5 +-
+ target/sparc/cpu.c                       |   3 +-
+ tests/include/meson.build                |   2 +
+ tests/meson.build                        |   6 +
+ tests/qapi-schema/meson.build            |   1 +
+ tests/qtest/qmp-cmd-test.c               |  55 ++++++-
+ tests/unit/check-qom-proplist.c          |  99 +++++++++---
+ tests/unit/test-qdev-global-props.c      |  11 +-
+ tests/unit/test-qdev.c                   |   2 +-
+ ui/console-vc.c                          |   8 +-
+ ui/console.c                             |   3 +-
+ ui/dbus.c                                |  18 ++-
+ ui/input-linux.c                         |  11 +-
+ util/thread-context.c                    |   7 +-
+ util/uuid.c                              |   5 +
+ 170 files changed, 2317 insertions(+), 1628 deletions(-)
+---
+base-commit: 8967b2fe1b2aaae3c29e207d85fab901d580a2dc
+change-id: 20261020-qom-qapi-ceecbb2aa35f
 
-diff --git a/xen/arch/x86/mm/altp2m.c b/xen/arch/x86/mm/altp2m.c
-index 0bc9b9a..8c3450c 100644
---- a/xen/arch/x86/mm/altp2m.c
-+++ b/xen/arch/x86/mm/altp2m.c
-@@ -220,6 +220,17 @@ bool p2m_switch_vcpu_altp2m_by_id(struct vcpu *v, unsi=
-gned int idx)
-     if ( idx >=3D d->nr_altp2m )
-         return rc;
-=20
-+    /*
-+     * Updating another vCPU's EPTP (vmx_vmcs_enter()) waits until that vC=
-PU
-+     * is off its pCPU. Wait for it before taking the altp2m list lock: th=
-e
-+     * vCPU may need the p2m lock to get off its pCPU (to update its runst=
-ate
-+     * area in guest memory), while a vCPU handling a log-dirty fault hold=
-s the
-+     * p2m lock and waits for the altp2m list lock in
-+     * p2m_altp2m_propagate_change().
-+     */
-+    if ( v !=3D current )
-+        vcpu_pause(v);
-+
-     altp2m_list_lock(d);
-=20
-     if ( d->arch.altp2m_eptp[idx] !=3D mfn_x(INVALID_MFN) )
-@@ -230,6 +241,10 @@ bool p2m_switch_vcpu_altp2m_by_id(struct vcpu *v, unsi=
-gned int idx)
-     }
-=20
-     altp2m_list_unlock(d);
-+
-+    if ( v !=3D current )
-+        vcpu_unpause(v);
-+
-     return rc;
- }
-=20
---=20
-2.56.0
-
+Best regards,
+--  
+Marc-André Lureau <marcandre.lureau@redhat.com>
 
 
