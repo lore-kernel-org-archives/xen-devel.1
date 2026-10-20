@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 29B97606A31C
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:49 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF022606A31E
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Kaj4KZgT
-Received: from list by lists.xenproject.org with outflank-mailman.1455372.1669248 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=M+ZBmkfY
+Received: from list by lists.xenproject.org with outflank-mailman.1455382.1669297 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7X6-0000OR-CK; Tue, 20 Oct 2026 10:57:28 +0000
+	id 1xJ7XJ-0003Gz-DU; Tue, 20 Oct 2026 10:57:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455372.1669248; Tue, 20 Oct 2026 10:57:27 +0000
+Received: by outflank-mailman (output) from mailman id 1455382.1669297; Tue, 20 Oct 2026 10:57:40 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7X4-0000DQ-Eb; Tue, 20 Oct 2026 10:57:26 +0000
-Received: by outflank-mailman (input) for mailman id 1455372;
- Tue, 20 Oct 2026 10:51:20 +0000
+	id 1xJ7XH-00038O-RH; Tue, 20 Oct 2026 10:57:39 +0000
+Received: by outflank-mailman (input) for mailman id 1455382;
+ Tue, 20 Oct 2026 10:51:28 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7RA-0000IE-Qe
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:20 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7RI-0000LC-1t
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7RA-00CroT-78
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:20 +0200
+ id 1xJ7RH-00Crub-Eu
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:27 +0200
 Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7479d-2eae-0a2a0a5409dd-0a2a450480cc-28
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:20 +0200
+ id 6ad7479d-2eae-0a2a0a5409dd-0a2a450480cc-44
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:27 +0200
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
  by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad746f2-b57f-0a2a45040019-aa0a857cab4d-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:48:19 +0200
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ id 6ad74736-b57f-0a2a45040019-aa0a857c9e75-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:49:27 +0200
+Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-90-lr-fJuH1N7yjYLe80xUfpw-1; Tue,
- 20 Oct 2026 10:48:12 +0000
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-532-AU63UEb8PQ-MadFO--Yndg-1; Tue,
+ 20 Oct 2026 10:49:20 +0000
 Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4EE0619560AD; Tue, 20 Oct 2026 10:48:08 +0000 (UTC)
+ by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 8EE4D1955DE9; Tue, 20 Oct 2026 10:49:16 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 57984418; Tue, 20 Oct 2026 10:48:05 +0000 (UTC)
+ id 1701A418; Tue, 20 Oct 2026 10:49:14 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493298;
+	s=mimecast20190719; t=1792493366;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=6lRxJze+aC9KBEtw6tohukWxBkXDlU7+bxwjduyrfYI=;
-	b=Kaj4KZgTulnr38Z/8Rj4H077L0+4B/alS0DE0BoZiJinx/3/Lqs3JIft1jtX1M/TeurSho
-	IE5p9Y02SRurJ8596UUY5r2k2KzPtbMBZ2825+4jbthoxLttsbWpFVn/jPvZmvfZo4tTHj
-	ArugwBtWK63g7QsV+0I2HJ3y+KnmgoM=
-X-MC-Unique: lr-fJuH1N7yjYLe80xUfpw-1
-X-Mimecast-MFC-AGG-ID: lr-fJuH1N7yjYLe80xUfpw_1792493288
+	bh=G0tJqQA4vjH1OewDrlPPbV755lqj6OJV4iLGYLxe1dQ=;
+	b=M+ZBmkfYHDagIKA6a0QK4yLoimrm2zgmjFSPRWk0GK1/K/o4rcn8/QDeza+mlmLq7Oyl0F
+	rtF88j7+w9ll9ohQWO0171oemcXpW2gE4m3dJrQlgVgWJEF4UtHgyC3+0tPt6L+x27h0tv
+	mQRPKrSDYwcXbUlTX2BNYVRx6Z5Z1MA=
+X-MC-Unique: AU63UEb8PQ-MadFO--Yndg-1
+X-Mimecast-MFC-AGG-ID: AU63UEb8PQ-MadFO--Yndg_1792493356
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:38 +0400
-Subject: [PATCH v7 21/65] x86: convert OnOffAuto properties to QAPI-aware
+Date: Tue, 20 Oct 2026 14:45:51 +0400
+Subject: [PATCH v7 34/65] ppc/spapr-caps: convert to QAPI-aware property
  registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-21-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-34-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,31 +152,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6572;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6963;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=b7fcdLGC+2GPa3Wjcm0RtVCaYcyqYMRaEmGki/G6FxE=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZZL3Tdedh9aQxPbswLDhqZdFL2lbqwZPM3S
- vvP3WGv3QuJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWQAKCRDa6OEJdZac
- 5ZKBEACTX7yzzr/j4WtC3RVqTKIFFKTc4t5cKUo1/m5rQXWpVE294kwdKLk1lDmvrKiKRvWP4EQ
- IXceFiuouMslZldIx6rvaH8qSwjZojuOdcYtS9kFgfcaJK8VG1oplTpXBTZyB+FZ5/Gs3aBsMEB
- t5tdVvlWE3vGgNVKnRHihfelAI1rsOCfCvhEN3PVuOpYZHZKn030ec8DuqYmBLIN4JK4NxVlOEq
- I4l+7RRUjTn+UQESYBdkTzD/7kKYnGyn1sh0NdEggBXI+qh4XVF67TCIe6Ki74Wu524pvWiTdln
- a3Zk5ywcYwrxnmqPHXrSS1L0qdbKMXK4AQgM0zIudWEbOABj6LN4FDyS8jBaTa6vmZ+6wldFjwP
- ORPV5b4B47gEo08l0vCoYvWt7VU6AifaMjSwi+P+U/W7XfjYPyU6XXZsoqfCb+ZS2MhN4qE70/R
- geuTBaQWhAXFMMHFgunyJFt2hCIcqJ0Wwerw6vSBrR6qY7x8Q+Oq5HHVjKdjCf4wdFX8VTMobJX
- f2lLxWx1ceEwmSbW9y3AQIIpTNSfdZx9uwaDx+qUSVHWy4bCIARc+2wjb1w2wN7BzvcSjKSi51x
- /DLhpKPP5A6gaSOHyxMUXd4RmFQntMM0WO6mwAlY2oD0erBahJsrhVsPBr0wSYuH41Bmo80lsiA
- bEw6ebgS3xjIi8A==
+ bh=h0OiLsI4rZp+v/Mhu46aHZ2MeGUSC4RGBbFRwR/fgso=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZafzwZrCef0nnjKmQFgGHI7d1DU4j3tcKg8
+ rfJ8YYSxbiJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
+ 5ZNiD/9uJkrnfIq0f1AAFb55zRGcmM6E9/bY9PjcQwic7qZwiIF30FoVEyW+LS1V4LBV8lFxJNS
+ PQU7j6R+CB6v9HoMI64E1PyApDwdLlnaHAJlXcyEPUzd2BVafhj1hHbaYhLxkEy1FKLnJgXjLkJ
+ gdIwysLCQIt8EXWXa5PEr9we5qawBjwypQ0Lag+ls7M/dEH/0Kh1uzOi9w8a2krYIDQZcarZN7i
+ E4LtOP390qyqqA6YnMhP59VMT+qvfxHzc/ZQswUOQyZJDTsWt5bsBXzpOFFpbBXuTXpDT9AtofO
+ ID8iow8Lpz1Tszo5kP/m/Lm4S8UWRsm6FmK1PFXmwtWWlyXJh+CUFxiKOxoxpS5FTXbRJGSv05O
+ ZMYDLHTHu8+gadlaJjYgyFbJVyKlNsrAGTmFvM/RU3rpVkTt06dMhmHo8K8rWEYHAwUYB4Ks35l
+ E6S+GJ02O0X284mnQwikHn+fLhcivRrqM+9mynA/bGmrsWZIK4DhT6Cp8zFSPLW47Oshjun/E64
+ G1PIDvecXY/KRp7V24XZJYFMStRWq10r6lNpi654+g4kT2EsUxLVHwoqsQTcV+XoNk/+hsNx570
+ AStfbHcS7MyUnY6GxM7Pl2zFwIbukx86j8jruO3yrSjE+v6CcaPGGLJ2oigWATENvOZrnqpgn3Y
+ yk4mypdVxiZikCA==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
 X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: MNXtcdEy5pgq6MSlFeSPSR4DuMYQjPRMzR-gHU3RLAM_1792493288
+X-Mimecast-MFC-PROC-ID: 1cQZwZqz_9-azft6scwSnN05ejfbyioGzpBabvjSL3k_1792493356
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1792493299-C0EDEB50-176E8B82/0/0
+X-purgate-ID: tlsNG-ebf023/1792493367-C26CAB50-006B6F29/0/0
 X-purgate-type: clean
-X-purgate-size: 6574
+X-purgate-size: 6965
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -185,182 +185,186 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Convert the smm, acpi, pit, and pic OnOffAuto properties from
-manual visitor-based callbacks to property_add_qapi_enum().
+Replace the type string in SpaprCapabilityInfo with a QAPITypeInfo
+pointer and switch spapr_caps_add_properties() from
+object_class_property_add() to object_class_property_add_qapi().
 
+Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/i386/x86.c | 104 +++++++++++++++++++++++++---------------------------------
- 1 file changed, 45 insertions(+), 59 deletions(-)
+ hw/ppc/spapr_caps.c | 39 ++++++++++++++++++++-------------------
+ 1 file changed, 20 insertions(+), 19 deletions(-)
 
-diff --git a/hw/i386/x86.c b/hw/i386/x86.c
-index f8ba3244e221..63f297a10532 100644
---- a/hw/i386/x86.c
-+++ b/hw/i386/x86.c
-@@ -24,7 +24,7 @@
+diff --git a/hw/ppc/spapr_caps.c b/hw/ppc/spapr_caps.c
+index 103b17364feb..e622c79eb52a 100644
+--- a/hw/ppc/spapr_caps.c
++++ b/hw/ppc/spapr_caps.c
+@@ -24,6 +24,7 @@
+ 
+ #include "qemu/osdep.h"
  #include "qemu/error-report.h"
- #include "qemu/units.h"
++#include "qapi/qapi-builtin-type-infos.h"
  #include "qapi/error.h"
--#include "qapi/qapi-visit-common.h"
-+#include "qapi/qapi-type-infos-common.h"
- #include "qapi/qapi-visit-machine.h"
  #include "qapi/visitor.h"
- #include "system/qtest.h"
-@@ -188,21 +188,16 @@ bool x86_machine_is_smm_enabled(const X86MachineState *x86ms)
-     return false;
- }
+ #include "system/hw_accel.h"
+@@ -59,7 +60,7 @@ typedef struct SpaprCapabilityInfo {
+     /* Getter and Setter Function Pointers */
+     ObjectPropertyAccessor *get;
+     ObjectPropertyAccessor *set;
+-    const char *type;
++    const QAPITypeInfo *type;
+     /* Possible values if this is a custom string type */
+     SpaprCapPossible *possible;
+     /* Make sure the virtual hardware can support this capability */
+@@ -725,7 +726,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_HTM,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_htm_apply,
+     },
+     [SPAPR_CAP_VSX] = {
+@@ -734,7 +735,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_VSX,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_vsx_apply,
+     },
+     [SPAPR_CAP_DFP] = {
+@@ -743,7 +744,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_DFP,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_dfp_apply,
+     },
+     [SPAPR_CAP_CFPC] = {
+@@ -752,7 +753,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_CFPC,
+         .get = spapr_cap_get_string,
+         .set = spapr_cap_set_string,
+-        .type = "string",
++        .type = &str_type_info,
+         .possible = &cap_cfpc_possible,
+         .apply = cap_safe_cache_apply,
+     },
+@@ -762,7 +763,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_SBBC,
+         .get = spapr_cap_get_string,
+         .set = spapr_cap_set_string,
+-        .type = "string",
++        .type = &str_type_info,
+         .possible = &cap_sbbc_possible,
+         .apply = cap_safe_bounds_check_apply,
+     },
+@@ -774,7 +775,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_IBS,
+         .get = spapr_cap_get_string,
+         .set = spapr_cap_set_string,
+-        .type = "string",
++        .type = &str_type_info,
+         .possible = &cap_ibs_possible,
+         .apply = cap_safe_indirect_branch_apply,
+     },
+@@ -784,7 +785,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_HPT_MAXPAGESIZE,
+         .get = spapr_cap_get_pagesize,
+         .set = spapr_cap_set_pagesize,
+-        .type = "size",
++        .type = &size_type_info,
+         .apply = cap_hpt_maxpagesize_apply,
+         .cpu_apply = cap_hpt_maxpagesize_cpu_apply,
+     },
+@@ -794,7 +795,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_NESTED_KVM_HV,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_nested_kvm_hv_apply,
+     },
+     [SPAPR_CAP_NESTED_PAPR] = {
+@@ -803,7 +804,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_NESTED_PAPR,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_nested_papr_apply,
+     },
+     [SPAPR_CAP_LARGE_DECREMENTER] = {
+@@ -812,7 +813,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_LARGE_DECREMENTER,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_large_decr_apply,
+         .cpu_apply = cap_large_decr_cpu_apply,
+     },
+@@ -822,7 +823,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_CCF_ASSIST,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_ccf_assist_apply,
+     },
+     [SPAPR_CAP_FWNMI] = {
+@@ -831,7 +832,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_FWNMI,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_fwnmi_apply,
+     },
+     [SPAPR_CAP_RPT_INVALIDATE] = {
+@@ -840,7 +841,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_RPT_INVALIDATE,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_rpt_invalidate_apply,
+     },
+     [SPAPR_CAP_AIL_MODE_3] = {
+@@ -849,7 +850,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_AIL_MODE_3,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_ail_mode_3_apply,
+     },
+     [SPAPR_CAP_DAWR1] = {
+@@ -858,7 +859,7 @@ SpaprCapabilityInfo capability_table[SPAPR_CAP_NUM] = {
+         .index = SPAPR_CAP_DAWR1,
+         .get = spapr_cap_get_bool,
+         .set = spapr_cap_set_bool,
+-        .type = "bool",
++        .type = &bool_type_info,
+         .apply = cap_dawr1_apply,
+     },
+ };
+@@ -1069,9 +1070,9 @@ void spapr_caps_add_properties(SpaprMachineClass *smc)
+         g_autofree char *name = g_strdup_printf("cap-%s", cap->name);
+         g_autofree char *desc = g_strdup(cap->description);
  
--static void x86_machine_get_smm(Object *obj, Visitor *v, const char *name,
--                               void *opaque, Error **errp)
-+static int x86_machine_get_smm(Object *obj, Error **errp)
- {
-     X86MachineState *x86ms = X86_MACHINE(obj);
--    OnOffAuto smm = x86ms->smm;
--
--    visit_type_OnOffAuto(v, name, &smm, errp);
-+    return x86ms->smm;
- }
+-        object_class_property_add(klass, name, cap->type,
+-                                  cap->get, cap->set,
+-                                  NULL, cap);
++        object_class_property_add_qapi(klass, name, cap->type,
++                                       cap->get, cap->set,
++                                       NULL, cap);
  
--static void x86_machine_set_smm(Object *obj, Visitor *v, const char *name,
--                               void *opaque, Error **errp)
-+static void x86_machine_set_smm(Object *obj, int value, Error **errp)
- {
-     X86MachineState *x86ms = X86_MACHINE(obj);
--
--    visit_type_OnOffAuto(v, name, &x86ms->smm, errp);
-+    x86ms->smm = value;
- }
- 
- bool x86_machine_is_acpi_enabled(const X86MachineState *x86ms)
-@@ -213,55 +208,40 @@ bool x86_machine_is_acpi_enabled(const X86MachineState *x86ms)
-     return true;
- }
- 
--static void x86_machine_get_acpi(Object *obj, Visitor *v, const char *name,
--                                 void *opaque, Error **errp)
-+static int x86_machine_get_acpi(Object *obj, Error **errp)
- {
-     X86MachineState *x86ms = X86_MACHINE(obj);
--    OnOffAuto acpi = x86ms->acpi;
--
--    visit_type_OnOffAuto(v, name, &acpi, errp);
-+    return x86ms->acpi;
- }
- 
--static void x86_machine_set_acpi(Object *obj, Visitor *v, const char *name,
--                                 void *opaque, Error **errp)
-+static void x86_machine_set_acpi(Object *obj, int value, Error **errp)
- {
-     X86MachineState *x86ms = X86_MACHINE(obj);
--
--    visit_type_OnOffAuto(v, name, &x86ms->acpi, errp);
-+    x86ms->acpi = value;
- }
- 
--static void x86_machine_get_pit(Object *obj, Visitor *v, const char *name,
--                                    void *opaque, Error **errp)
-+static int x86_machine_get_pit(Object *obj, Error **errp)
- {
-     X86MachineState *x86ms = X86_MACHINE(obj);
--    OnOffAuto pit = x86ms->pit;
--
--    visit_type_OnOffAuto(v, name, &pit, errp);
-+    return x86ms->pit;
- }
- 
--static void x86_machine_set_pit(Object *obj, Visitor *v, const char *name,
--                                    void *opaque, Error **errp)
-+static void x86_machine_set_pit(Object *obj, int value, Error **errp)
- {
-     X86MachineState *x86ms = X86_MACHINE(obj);
--
--    visit_type_OnOffAuto(v, name, &x86ms->pit, errp);
-+    x86ms->pit = value;
- }
- 
--static void x86_machine_get_pic(Object *obj, Visitor *v, const char *name,
--                                void *opaque, Error **errp)
-+static int x86_machine_get_pic(Object *obj, Error **errp)
- {
-     X86MachineState *x86ms = X86_MACHINE(obj);
--    OnOffAuto pic = x86ms->pic;
--
--    visit_type_OnOffAuto(v, name, &pic, errp);
-+    return x86ms->pic;
- }
- 
--static void x86_machine_set_pic(Object *obj, Visitor *v, const char *name,
--                                void *opaque, Error **errp)
-+static void x86_machine_set_pic(Object *obj, int value, Error **errp)
- {
-     X86MachineState *x86ms = X86_MACHINE(obj);
--
--    visit_type_OnOffAuto(v, name, &x86ms->pic, errp);
-+    x86ms->pic = value;
- }
- 
- static char *x86_machine_get_oem_id(Object *obj, Error **errp)
-@@ -391,31 +371,37 @@ static void x86_machine_class_init(ObjectClass *oc, const void *data)
-     mc->kvm_type = x86_kvm_type;
-     nc->raise_nmi = x86_nmi;
- 
--    object_class_property_add(oc, X86_MACHINE_SMM, "OnOffAuto",
--        x86_machine_get_smm, x86_machine_set_smm,
--        NULL, NULL);
--    object_class_property_set_description(oc, X86_MACHINE_SMM,
--        "Enable SMM");
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = X86_MACHINE_SMM,
-+        .description = "Enable SMM",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .get = x86_machine_get_smm,
-+        .set = x86_machine_set_smm,
-+    ));
- 
--    object_class_property_add(oc, X86_MACHINE_ACPI, "OnOffAuto",
--        x86_machine_get_acpi, x86_machine_set_acpi,
--        NULL, NULL);
--    object_class_property_set_description(oc, X86_MACHINE_ACPI,
--        "Enable ACPI");
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = X86_MACHINE_ACPI,
-+        .description = "Enable ACPI",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .get = x86_machine_get_acpi,
-+        .set = x86_machine_set_acpi,
-+    ));
- 
--    object_class_property_add(oc, X86_MACHINE_PIT, "OnOffAuto",
--                              x86_machine_get_pit,
--                              x86_machine_set_pit,
--                              NULL, NULL);
--    object_class_property_set_description(oc, X86_MACHINE_PIT,
--        "Enable i8254 PIT");
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = X86_MACHINE_PIT,
-+        .description = "Enable i8254 PIT",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .get = x86_machine_get_pit,
-+        .set = x86_machine_set_pit,
-+    ));
- 
--    object_class_property_add(oc, X86_MACHINE_PIC, "OnOffAuto",
--                              x86_machine_get_pic,
--                              x86_machine_set_pic,
--                              NULL, NULL);
--    object_class_property_set_description(oc, X86_MACHINE_PIC,
--        "Enable i8259 PIC");
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = X86_MACHINE_PIC,
-+        .description = "Enable i8259 PIC",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .get = x86_machine_get_pic,
-+        .set = x86_machine_set_pic,
-+    ));
- 
-     object_class_property_add_str(oc, X86_MACHINE_OEM_ID,
-                                   x86_machine_get_oem_id,
+         object_class_property_set_description(klass, name, desc);
+     }
 
 -- 
 2.56.0.116.g6de20f6092dc
