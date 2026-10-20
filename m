@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 032EE606A321
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2356606A326
 	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=FA0d2bZn
-Received: from list by lists.xenproject.org with outflank-mailman.1455302.1668939 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=ZE+oPup0
+Received: from list by lists.xenproject.org with outflank-mailman.1455306.1668963 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vw-0002qy-8a; Tue, 20 Oct 2026 10:56:16 +0000
+	id 1xJ7Vz-0003bA-EX; Tue, 20 Oct 2026 10:56:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455302.1668939; Tue, 20 Oct 2026 10:56:16 +0000
+Received: by outflank-mailman (output) from mailman id 1455306.1668963; Tue, 20 Oct 2026 10:56:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vv-0002ni-LH; Tue, 20 Oct 2026 10:56:15 +0000
-Received: by outflank-mailman (input) for mailman id 1455302;
- Tue, 20 Oct 2026 10:50:36 +0000
+	id 1xJ7Vy-0003VG-JM; Tue, 20 Oct 2026 10:56:18 +0000
+Received: by outflank-mailman (input) for mailman id 1455306;
+ Tue, 20 Oct 2026 10:50:39 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7QS-0008Qv-LU
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:36 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7QV-0008RM-92
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7QR-004cyI-Uv
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:35 +0200
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xJ7QU-004cyI-Lz
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:38 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74775-8faa-0a2a0a5109dd-0a2a4506bdee-32
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:35 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad74765-8faa-0a2a0a5109dd-0a2a450b8d4a-34
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:38 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7477a-195a-0a2a45060019-aa0a857c58db-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:35 +0200
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ id 6ad74704-b7e8-0a2a450b0019-aa0a817ced0b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:48:38 +0200
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-656-Cd5iFrsSPFiy_O9eCidOaQ-1; Tue,
- 20 Oct 2026 10:50:30 +0000
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-29-uBDd0-1GMx-Pw1Kl9QVEug-1; Tue,
+ 20 Oct 2026 06:48:27 -0400
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C16C31955DE8; Tue, 20 Oct 2026 10:50:24 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 0BFD51955DCB; Tue, 20 Oct 2026 10:48:23 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 4304D1956095; Tue, 20 Oct 2026 10:50:22 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 811011800257; Tue, 20 Oct 2026 10:48:20 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493434;
+	s=mimecast20190719; t=1792493316;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=stj/oklFy5XE7Ux6UVzd34CG7YO8zlEFRRZGNs4BwjQ=;
-	b=FA0d2bZnAjmxVWje6jrukFJntl8LiVIkhaR2F4/sYQiFzzxjDZjYwU0+k2L+2hmOh0kOs6
-	NGTCd6tAIogNIkzjpZnuTBTOijskLjMXw/PYFRv5NLwTxBguhSwKPlbmuFabxHk5BLVOvH
-	w6Q9huSBL1rRBYe+t1owfKD78Tazug0=
-X-MC-Unique: Cd5iFrsSPFiy_O9eCidOaQ-1
-X-Mimecast-MFC-AGG-ID: Cd5iFrsSPFiy_O9eCidOaQ_1792493424
+	bh=oguRv2squZzE4kLuZbCGfVuSLth7nwetzOZz6ya/vQM=;
+	b=ZE+oPup0eNqt85KXkWK0XNRSdRWPZDTjwjJ0B2dNVzEo9yU68sjnvJRKWu38HF7Go5Xi3I
+	WDkodvsp/Lup8IRhRQAxaaY4RoUoCbCIapzlNSX5HMXfERPg7l3F4BAN4gHttXAg5aojFC
+	nd7psqf3OEzphq7jjk9pO1cKsj1R3CY=
+X-MC-Unique: uBDd0-1GMx-Pw1Kl9QVEug-1
+X-Mimecast-MFC-AGG-ID: uBDd0-1GMx-Pw1Kl9QVEug_1792493303
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:46:03 +0400
-Subject: [PATCH v7 46/65] hw/ppc/spapr_drc: convert fdt property to
+Date: Tue, 20 Oct 2026 14:45:41 +0400
+Subject: [PATCH v7 24/65] arm/virt: convert OnOffAuto acpi property to
  QAPI-aware registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-46-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-24-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,31 +152,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1126;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2443;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=tzAtw2N/GmjCt5f2xymcXMco6tXqwvWNy/tFAoovn48=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZbrmMIXAAgbwi3HHXAfckNSBqoT7PupXMdX
- jNNL1pkTe6JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWwAKCRDa6OEJdZac
- 5ZtBD/9HzJq3j9NRTh8cC/IrlGiBUn7R8G3aWpPmmvNkh3x2f+rQGtv+c4/4fZ5SVY8vIMlozLI
- LUxj6qGBu0GxrQWT8fSd91RvbaYDeiByrDclv6ElUBKkE+tgleBEJUKwQJfK3M0e39H0MbjtzRg
- dxzN4rNG0OtE8h6qgxhP29CFH3AITnPK6JfYp3BIuQLwbsy/HZwgwge9j97HT9lCQ3XaWTtwWEp
- mj+SjQmSYNj3MWpB5O71V5XG20mItYobMA5CEVyvnwge7sN5eyuap4ds31caHAW78QyHPlOFVoC
- mLdbsQcFaIesAIo6kEnisNkqHnb8yVLFTI6dZfqTwCKl2twuRgOyGq3sME35mvXwpXYnk7ngkNm
- 4Wv7Qk3oqp9AjkpD2TpcMxKOiMI/qMeCTzwBE3Ul8FypE56v856BMn24Tr0BYUM36SttPitGe8O
- y06nmXFiwC88uT5JL/gPnfbVYmjDD8CwTftjlcRo66wdO/Uj1cC4+wc1ynGvOspelolj6z9kjry
- bcWiTwBgrkt3gSwktkytTSDlZ5MqNlPDv0mE82BFtszFNBtxOhfX0w97OQzXtVLle5h+YKHfgdn
- N5d4ugnLs5FJL1SrpPAd+tbg85sl64x/ZW1OdnyMEQL9XhQtUEDzjmQBCxiIyHOFat+aC63mV0H
- gQWNLU0ZIgJd7oA==
+ bh=WJV9rbWGfyoHPVy5l0gOvkb5+YjNc4EgQxym05N/4z0=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZZD2w11mplFmU1C3uOjRIrgiEXmssGFGVqF
+ U+VXCQyIhmJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWQAKCRDa6OEJdZac
+ 5VV9D/4yHO7gBqYrWIgKINlgaqxweu9J3zPt0Q96BUDUTYP82Ji46aRrDnTKFU/lmiVpB0fAB4e
+ XJamdIf6GysZPW/ts5RuPqmpRgUOHkFyl3w6WSrVcFZiUziA7H7//SozvNb0ksb52BEBDgRfu59
+ 76EmyWmsMmdXm+7NFzf2Yr+0bybSNkLa/MDFeCosMy7O2q3mPK9t3viHrwkYiKodq7f49cF6ULL
+ oQdp5XFWl+UruNu6YzMVat1OiEu+899ewJ0eacPhEublBVLtFTlEyPN76iInq272v6ozbm0j+v4
+ dODiO9YWj3H5tgsJT8uGwdCphesONwj0ehWE8RIOlcUgPq4CG6I5T2hqeBC816s74u8j3SXm1gs
+ UhtJlBc/VY3cXU1/oQ2tjN4SSA6n7oGSwK+LRulGbjdZC6TUoOksZ1YjYPPMnyAOQ5TRVyAAgpc
+ O/JcWDzz2hNjVcm8QKZsT7maPZt2pSxPvzOMz6stvRCSGt8xEj/e2l9kUWyvKNOEIFsGMjCJ4NB
+ pytKX14Dode4YAKX1vRHPXwn7/ugDk+4mt37W8v1DKB3P4UJu9L8YinWg2FGRK8OTzDd+mMm7aT
+ E0xuadOhVSJzsCQlpI4JB5RAmJ9WvMZdP4Mo65KTRR9rVKvDeEboNO+ggGjsDNOsWBeK+S/od4x
+ iQ07BZ5MWxFvlRw==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-MFC-PROC-ID: _nnVg7BEkDR_5LkQkCG8wdxg9IDhvmWsX7fRsSmZsBA_1792493424
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: FAl71IotVJWAVOSEjfipUjAnMp35J6PKHyeAAHri7vM_1792493303
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1792493435-FC40377B-124A8830/0/0
+X-purgate-ID: tlsNG-42698a/1792493318-1B2DC9EA-14E3AB90/0/0
 X-purgate-type: clean
-X-purgate-size: 1128
+X-purgate-size: 2445
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -185,30 +185,73 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Use object_property_add_qapi() with any_type_info for the "fdt"
-property, since the FDT structure is dynamically shaped at runtime and
-cannot be represented as a static QAPI type.
+Convert the acpi OnOffAuto property from manual visitor-based
+callbacks to property_add_qapi_enum().
 
-Reviewed-by: Amit Machhiwal <amachhiw@linux.ibm.com>
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/ppc/spapr_drc.c | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
+ hw/arm/virt.c | 27 ++++++++++++---------------
+ 1 file changed, 12 insertions(+), 15 deletions(-)
 
-diff --git a/hw/ppc/spapr_drc.c b/hw/ppc/spapr_drc.c
-index 64f9ca29b02e..740149ffdf3e 100644
---- a/hw/ppc/spapr_drc.c
-+++ b/hw/ppc/spapr_drc.c
-@@ -587,7 +587,7 @@ static void spapr_dr_connector_instance_init(Object *obj)
-     object_property_add_uint32_ptr(obj, "id", &drc->id, OBJ_PROP_FLAG_READ);
-     object_property_add_qapi(obj, "index", &uint32_type_info, prop_get_index,
-                         NULL, NULL, NULL);
--    object_property_add(obj, "fdt", "struct", prop_get_fdt,
-+    object_property_add_qapi(obj, "fdt", &any_type_info, prop_get_fdt,
-                         NULL, NULL, NULL);
-     drc->state = drck->empty_state;
+diff --git a/hw/arm/virt.c b/hw/arm/virt.c
+index 0d56197dacee..0da10b799cfb 100644
+--- a/hw/arm/virt.c
++++ b/hw/arm/virt.c
+@@ -73,7 +73,7 @@
+ #include "whpx_arm.h"
+ #include "hw/firmware/smbios.h"
+ #include "qapi/visitor.h"
+-#include "qapi/qapi-visit-common.h"
++#include "qapi/qapi-type-infos-common.h"
+ #include "qobject/qlist.h"
+ #include "standard-headers/linux/input.h"
+ #include "hw/arm/smmuv3.h"
+@@ -3565,21 +3565,16 @@ bool virt_is_acpi_enabled(const VirtMachineState *vms)
+     return true;
  }
+ 
+-static void virt_get_acpi(Object *obj, Visitor *v, const char *name,
+-                          void *opaque, Error **errp)
++static int virt_get_acpi(Object *obj, Error **errp)
+ {
+     VirtMachineState *vms = VIRT_MACHINE(obj);
+-    OnOffAuto acpi = vms->acpi;
+-
+-    visit_type_OnOffAuto(v, name, &acpi, errp);
++    return vms->acpi;
+ }
+ 
+-static void virt_set_acpi(Object *obj, Visitor *v, const char *name,
+-                          void *opaque, Error **errp)
++static void virt_set_acpi(Object *obj, int value, Error **errp)
+ {
+     VirtMachineState *vms = VIRT_MACHINE(obj);
+-
+-    visit_type_OnOffAuto(v, name, &vms->acpi, errp);
++    vms->acpi = value;
+ }
+ 
+ static bool virt_get_ras(Object *obj, Error **errp)
+@@ -4207,11 +4202,13 @@ static void virt_machine_class_init(ObjectClass *oc, const void *data)
+     mc->default_ram_id = "mach-virt.ram";
+     mc->default_nic = "virtio-net-pci";
+ 
+-    object_class_property_add(oc, "acpi", "OnOffAuto",
+-        virt_get_acpi, virt_set_acpi,
+-        NULL, NULL);
+-    object_class_property_set_description(oc, "acpi",
+-        "Enable ACPI");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "acpi",
++        .description = "Enable ACPI",
++        .qapi_type = &OnOffAuto_type_info,
++        .get = virt_get_acpi,
++        .set = virt_set_acpi,
++    ));
+     object_class_property_add_bool(oc, "secure", virt_get_secure,
+                                    virt_set_secure);
+     object_class_property_set_description(oc, "secure",
 
 -- 
 2.56.0.116.g6de20f6092dc
