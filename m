@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EFFC8606A326
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3BFF606A321
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:03 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=aRlEL/EK
-Received: from list by lists.xenproject.org with outflank-mailman.1455332.1669090 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=FRnFS5+m
+Received: from list by lists.xenproject.org with outflank-mailman.1455340.1669116 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7WQ-0000ae-Qe; Tue, 20 Oct 2026 10:56:46 +0000
+	id 1xJ7WW-0001tB-PF; Tue, 20 Oct 2026 10:56:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455332.1669090; Tue, 20 Oct 2026 10:56:46 +0000
+Received: by outflank-mailman (output) from mailman id 1455340.1669116; Tue, 20 Oct 2026 10:56:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7WP-0000Rd-9z; Tue, 20 Oct 2026 10:56:45 +0000
-Received: by outflank-mailman (input) for mailman id 1455332;
- Tue, 20 Oct 2026 10:50:58 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xJ7WV-0001oh-Ax; Tue, 20 Oct 2026 10:56:51 +0000
+Received: by outflank-mailman (input) for mailman id 1455340;
+ Tue, 20 Oct 2026 10:51:03 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qo-00006f-MJ
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:58 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qt-00009G-KK
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:03 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7Qo-004d40-3B
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:58 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xJ7Qt-00CrlS-17
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:03 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74790-8faa-0a2a0a5109dd-0a2a450be49e-8
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:58 +0200
+ id 6ad74795-2eae-0a2a0a5409dd-0a2a4504e546-20
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:03 +0200
 Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad746a0-b7e8-0a2a450b0019-aa0a857cb4b9-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:57 +0200
-Received: from mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com
+ id 6ad746e1-b57f-0a2a45040019-aa0a857c95db-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:48:02 +0200
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-66-08VlUpjQOgagH2hPOiBlKQ-1; Tue,
- 20 Oct 2026 06:46:51 -0400
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-624-Yh3hFIQYORWMSyn7dgfYTg-1; Tue,
+ 20 Oct 2026 10:47:56 +0000
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id ACB211956044; Tue, 20 Oct 2026 10:46:46 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 64C7A1955EBF; Tue, 20 Oct 2026 10:47:52 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 8DCE25BC; Tue, 20 Oct 2026 10:46:42 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 7DD3F1803A59; Tue, 20 Oct 2026 10:47:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,23 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493216;
+	s=mimecast20190719; t=1792493281;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=1Mnn0OKxBD8aP9I5qh8TLkmYe32toylT7CmahJ3BKVM=;
-	b=aRlEL/EKjLDgdfRlni9gHnXSERJVF4eZKFHu9aBXnfOuM3xWX4PZsr+d3kWqML647r1KxO
-	vGjgtQTugTAHHMwnqfVUXr2pXshbCWGyg8MfkiRdfrj4vT70rHotICYF+qtNOweKEH2/gv
-	koMWV3El6LV25ip8ifmgDgmSAr+f1xY=
-X-MC-Unique: 08VlUpjQOgagH2hPOiBlKQ-1
-X-Mimecast-MFC-AGG-ID: 08VlUpjQOgagH2hPOiBlKQ_1792493207
-From: marcandre.lureau@redhat.com
-Date: Tue, 20 Oct 2026 14:45:23 +0400
-Subject: [PATCH v7 06/65] qapi/introspect: Tweak integer type masking
+	bh=QCsJ6kicmUEQxvaxmAE24eNtz/CdTOeeNBSuCmDZMU8=;
+	b=FRnFS5+mMpfAa5h+Ky/2Ig9z6W4JQKW/c8vOfqJV7SHaaJa6MCTDVDw8wNU6TNgv48J//Y
+	/mnA9HrMIr+lp8NkFsfburrw6fcOj4rr51GPlLhtrn2cTwSp3IwcRH7GET+M8W+NLElR26
+	ZhIWj2AWpE/nheQJndq7M6Zj118gnqw=
+X-MC-Unique: Yh3hFIQYORWMSyn7dgfYTg-1
+X-Mimecast-MFC-AGG-ID: Yh3hFIQYORWMSyn7dgfYTg_1792493272
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Tue, 20 Oct 2026 14:45:35 +0400
+Subject: [PATCH v7 18/65] tests: update check-qom-proplist for QAPI-aware
+ property registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-6-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-18-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -151,31 +152,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3300;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5424;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=Xp7N7Cw12fT4B5RHyRwaz0UVvBY0Z8fxHr38SNSrB2w=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZY+HBluuWmLicnFhqmNZvedYN8EZPAWD5tz
- upmO1Ga58aJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
- 5XzlD/9HEY5z6oC69wenr9Qv7msxCbEfY7YI+AvbI4TE33VpTsB5TXw0w5hoWWG2I7nT0pxMrC6
- gjxcavbpLfNQuSlpsicTsD9FELzSz+6xM2MwthryKshrqOQ9eRIaSYzYj3XG7snmj5JTIp1NNtv
- uGyxTUY11F5thO0nh78pl5m3FnMgJ6J+bR4QZEixKMGDsWgdCBjFf35n+hs8Zq0TNqPPWdZM4WU
- 57QEO3MxpnUTcn8ZIAlxz7YffgWnpU+luA9bZzFqcMNqPeQ/+RHcjv3I6UUIkEAQsDNF+gvnDrJ
- 0A0Spg+6FzMovmlLnKdyDNOj6AaNgCwSBLwxZYMfMpx3I4QGmDOSrKcbVpOnh6MpSqeem9v3E/A
- s/LAha/LFAADBkXjPbHEKPDdUytOKctZ5gi0Ohky86vcCzQBcxOVOnk4PcWYQrzYFwj9TPpC2xi
- deGrYMAo64/fK+8aRp2ADj0fVj4WgnOQ5R5PVEbkxEjGkosB3xcpxKcWBrP+aSookP2fMF0jWZb
- lKHZmcLSlzz257XcK6F/9t5jcM17+nvcivFb2k3m2Zgtv47ZxI2g3D7m4GndVEQKFcBhq2PLDyJ
- 1YX7I6YK/eWF/FLjTA8Tfv5IJA62HbC6KqrK/8ewzPwZHbkgvIrqnvS4oQ6Mkv3S4l3TDiGWTv8
- 1WOmqtKMlpy+WEQ==
+ bh=PG77OxkKQyF3UcxTgSF0ItIIQR9h6IXM0cn9v6bEm2s=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZZx0j1p4X5AH6xbN8P7cVXiebxN4/NouqlD
+ Bs0dZkcTS6JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWQAKCRDa6OEJdZac
+ 5btyD/sEpsN54WFVkoxy/MA7ND5ExbGYknt3DZedYvvU6rJFWigzxdRqfgu17q4W5zjE+AamjfL
+ BupH4gTHx7+2HfkN3D1gTx/xFdM5Kl6ToEoiDKjNOo862W3jNyyg4ovmX4tTnGNMAz88AfPwhL+
+ 2ZWNFNzjipqIGY0qQX4Bx66aa2+YE4fY3hQ9iiu+WjFc6AbgnPg4TF4XhUyHF70who98clFVOMD
+ yjczx/5tD0aUOR4P15K6+ixi33/auB4tE1Iwmnx/jgl1p3xCy28fffjfyI9wgZwkX2u2stbYLIn
+ lDbgxSH1ReWWj7z4XdgyxwniV2xbBYeYJEkOtCV/y7/dK6+AM+a7Qnq3kI/dzYhJuvhq5wU+HGR
+ RiM76TgllhaUHS8VdrKmAFY/LmMaDcf5u+dyeDe3ragYCi0YRneV87Q3JrrFqhWtzDyLlEBLQBg
+ R2RYEWwbUq91SYc+sy3M2s1dxK/Auw8r9jDxBr9VPRZeaKJzAr1tPm6hnSzp+dkR4vgyuSdKfW2
+ xgnVBc5i1OBtTZMbay85wjtkAfGfPH5jqgFBr3+8p6u1r9UH55oNAmVqy1ev7FnV/EBA4FlmSyX
+ 4Ic6VS1CTDmF2CzubrTp3nVMwtdHRxtTKiFnV+tWJm6wxUGQS0/zDlqzL+ypt2gHRnuRwgDXqHU
+ doz9mjn/aUw3+xw==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: jI1_K7Azoyc5huIZJ8ORYOUgthqX3V6_MK4I88uhwE0_1792493207
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: HGrlm3_L3fIgzhIY14LSxG0_sjx69Xo9rnYaU35XMmM_1792493272
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1792493217-182F49EA-FE0A7697/0/0
+X-purgate-ID: tlsNG-ebf023/1792493282-C34C3B50-F7C8D11F/0/0
 X-purgate-type: clean
-X-purgate-size: 3349
+X-purgate-size: 5426
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -184,80 +185,155 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Markus Armbruster <armbru@redhat.com>
+Migrate the dummy object's string and enum properties from the legacy
+object_class_property_add_str/enum() helpers to the new QAPI-aware
+object_class_property_add_qapi/qapi_enum() registration.
 
-Since introspection maps all integer types to 'int', we need to skip
-all but one of them.  Instead of filtering by hardcoded name, filter
-out duplicates.
+Add test cases verifying that the qapi_type metadata is correctly
+populated on properties registered through the new API, and that it
+remains NULL for properties using the old-style registration.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- scripts/qapi/introspect.py | 18 ++++++++++--------
- 1 file changed, 10 insertions(+), 8 deletions(-)
+ tests/unit/check-qom-proplist.c | 93 ++++++++++++++++++++++++++++++++++-------
+ 1 file changed, 77 insertions(+), 16 deletions(-)
 
-diff --git a/scripts/qapi/introspect.py b/scripts/qapi/introspect.py
-index 15302ecf155a..dc6f70a6fe9e 100644
---- a/scripts/qapi/introspect.py
-+++ b/scripts/qapi/introspect.py
-@@ -172,7 +172,7 @@ def __init__(self, prefix: str, unmask: bool):
-             ' * QAPI/QMP schema introspection', __doc__)
-         self._unmask = unmask
-         self._schema: Optional[QAPISchema] = None
--        self._trees: List[Annotated[SchemaInfo]] = []
-+        self._trees: Dict[str, Annotated[SchemaInfo]] = {}
-         self._genc.add(mcgen('''
- #include "qemu/osdep.h"
- #include "%(prefix)sqapi-introspect.h"
-@@ -191,13 +191,14 @@ def visit_end(self) -> None:
- extern const QLitObject %(c_name)s;
- ''',
-                              c_name=c_name(name)))
-+        trees = list(self._trees.values())
-         self._genc.add(mcgen('''
- const QLitObject %(c_name)s = %(c_string)s;
- ''',
-                              c_name=c_name(name),
--                             c_string=_tree_to_qlit(self._trees)))
-+                             c_string=_tree_to_qlit(trees)))
-         self._schema = None
--        self._trees = []
-+        self._trees = {}
+diff --git a/tests/unit/check-qom-proplist.c b/tests/unit/check-qom-proplist.c
+index 89de92b7d91f..69155e720751 100644
+--- a/tests/unit/check-qom-proplist.c
++++ b/tests/unit/check-qom-proplist.c
+@@ -108,22 +108,21 @@ static int dummy_get_av(Object *obj,
+ }
  
-     def _name(self, name: str) -> str:
-         assert self._schema
-@@ -235,7 +236,12 @@ def _gen_tree(self, name: str, mtype: str, obj: Dict[str, object],
-         obj['meta-type'] = mtype
-         if features:
-             obj['features'] = self._gen_features(features)
--        self._trees.append(Annotated(obj, ifcond, comment))
-+        if introspection_name in self._trees:
-+            # Duplicates are possible because
-+            # QAPISchemaBuiltinType.introspection_name() returns 'int'
-+            # for all integer types.  Ignore them.
-+            return
-+        self._trees[introspection_name] = Annotated(obj, ifcond, comment)
  
-     def _gen_enum_member(self, member: QAPISchemaEnumMember
-                          ) -> Annotated[SchemaInfoEnumMember]:
-@@ -268,8 +274,6 @@ def _gen_variant(self, variant: QAPISchemaVariant
+-static void dummy_set_sv(Object *obj,
+-                         const char *value,
+-                         Error **errp)
++static void dummy_set_sv(Object *obj, Visitor *v, const char *name,
++                         void *opaque, Error **errp)
+ {
+     DummyObject *dobj = DUMMY_OBJECT(obj);
  
-     def visit_builtin_type(self, name: str, info: Optional[QAPISourceInfo],
-                            json_type: str) -> None:
--        if json_type == 'int' and name != 'int':
--            return
-         self._gen_tree(name, 'builtin', {'json-type': json_type})
+-    g_free(dobj->sv);
+-    dobj->sv = g_strdup(value);
++    g_clear_pointer(&dobj->sv, g_free);
++    visit_type_str(v, name, &dobj->sv, errp);
+ }
  
-     def visit_enum_type(self, name: str, info: Optional[QAPISourceInfo],
-@@ -287,8 +291,6 @@ def visit_enum_type(self, name: str, info: Optional[QAPISourceInfo],
-     def visit_array_type(self, name: str, info: Optional[QAPISourceInfo],
-                          ifcond: QAPISchemaIfCond,
-                          element_type: QAPISchemaType) -> None:
--        if element_type.json_type() == 'int' and name != 'intList':
--            return
-         element = self._use_type(element_type)
-         self._gen_tree(name, 'array', {'element-type': element}, ifcond)
+-static char *dummy_get_sv(Object *obj,
+-                          Error **errp)
++static void dummy_get_sv(Object *obj, Visitor *v, const char *name,
++                         void *opaque, Error **errp)
+ {
+     DummyObject *dobj = DUMMY_OBJECT(obj);
  
+-    return g_strdup(dobj->sv);
++    visit_type_str(v, name, &dobj->sv, errp);
+ }
+ 
+ 
+@@ -135,16 +134,28 @@ static void dummy_init(Object *obj)
+ }
+ 
+ 
++static const QAPITypeInfo dummy_animal_qapi_type_info = {
++    .name = "DummyAnimal",
++    .masked_name = "DummyAnimalSchema",
++    .lookup = &dummy_animal_map,
++};
++
++static const QAPITypeInfo dummy_str_qapi_type_info = {
++    .name = "str",
++    .masked_name = "StrSchema",
++};
++
+ static void dummy_class_init(ObjectClass *cls, const void *data)
+ {
+-    object_class_property_add_str(cls, "sv",
+-                                  dummy_get_sv,
+-                                  dummy_set_sv);
+-    object_class_property_add_enum(cls, "av",
+-                                   "DummyAnimal",
+-                                   &dummy_animal_map,
+-                                   dummy_get_av,
+-                                   dummy_set_av);
++    object_class_property_add_qapi(cls, "sv", &dummy_str_qapi_type_info,
++                                   dummy_get_sv, dummy_set_sv,
++                                   NULL, NULL);
++    object_class_property_add_qapi_enum(cls, QAPI_ENUM_PROP(
++        .name = "av",
++        .qapi_type = &dummy_animal_qapi_type_info,
++        .get = dummy_get_av,
++        .set = dummy_set_av,
++    ));
+ }
+ 
+ 
+@@ -703,6 +714,54 @@ static void test_qom_partial_path(void)
+     object_unparent(cont1);
+ }
+ 
++static void test_dummy_qapi_enum(void)
++{
++    ObjectProperty *prop;
++    Object *parent = object_get_objects_root();
++    DummyObject *dobj = DUMMY_OBJECT(
++        object_new_with_props(TYPE_DUMMY,
++                              parent,
++                              "dummy0",
++                              &error_abort,
++                              "av", "platypus",
++                              NULL));
++
++    g_assert(dobj->av == DUMMY_PLATYPUS);
++
++    prop = object_property_find(OBJECT(dobj), "av");
++    g_assert(prop);
++    g_assert(prop->qapi_type == &dummy_animal_qapi_type_info);
++    g_assert_cmpstr(prop->qapi_type->name, ==, "DummyAnimal");
++    g_assert_cmpstr(prop->qapi_type->masked_name, ==, "DummyAnimalSchema");
++    g_assert(prop->qapi_type->lookup == &dummy_animal_map);
++
++    object_unparent(OBJECT(dobj));
++}
++
++static void test_dummy_qapi_prop(void)
++{
++    ObjectProperty *prop;
++    Object *parent = object_get_objects_root();
++    DummyObject *dobj = DUMMY_OBJECT(
++        object_new_with_props(TYPE_DUMMY,
++                              parent,
++                              "dummy0",
++                              &error_abort,
++                              "sv", "hello",
++                              NULL));
++
++    g_assert_cmpstr(dobj->sv, ==, "hello");
++
++    prop = object_property_find(OBJECT(dobj), "sv");
++    g_assert(prop);
++    g_assert(prop->qapi_type == &dummy_str_qapi_type_info);
++    g_assert_cmpstr(prop->qapi_type->name, ==, "str");
++    g_assert_cmpstr(prop->qapi_type->masked_name, ==, "StrSchema");
++    g_assert(prop->qapi_type->lookup == NULL);
++
++    object_unparent(OBJECT(dobj));
++}
++
+ int main(int argc, char **argv)
+ {
+     g_test_init(&argc, &argv, NULL);
+@@ -727,6 +786,8 @@ int main(int argc, char **argv)
+     g_test_add_func("/qom/proplist/iterator", test_dummy_iterator);
+     g_test_add_func("/qom/proplist/class_iterator", test_dummy_class_iterator);
+     g_test_add_func("/qom/proplist/delchild", test_dummy_delchild);
++    g_test_add_func("/qom/proplist/qapi_enum", test_dummy_qapi_enum);
++    g_test_add_func("/qom/proplist/qapi_prop", test_dummy_qapi_prop);
+     g_test_add_func("/qom/resolve/partial", test_qom_partial_path);
+ 
+     return g_test_run();
 
 -- 
 2.56.0.116.g6de20f6092dc
