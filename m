@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 689DE606A319
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:33 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C983A606A31A
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=CqVoWHLh
-Received: from list by lists.xenproject.org with outflank-mailman.1455358.1669200 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=X6XVMan9
+Received: from list by lists.xenproject.org with outflank-mailman.1455364.1669225 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Wt-0006Ht-6k; Tue, 20 Oct 2026 10:57:15 +0000
+	id 1xJ7X0-0007gt-DO; Tue, 20 Oct 2026 10:57:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455358.1669200; Tue, 20 Oct 2026 10:57:14 +0000
+Received: by outflank-mailman (output) from mailman id 1455364.1669225; Tue, 20 Oct 2026 10:57:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Wr-0006AG-Cc; Tue, 20 Oct 2026 10:57:13 +0000
-Received: by outflank-mailman (input) for mailman id 1455358;
- Tue, 20 Oct 2026 10:51:12 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xJ7Wy-0007Z7-NK; Tue, 20 Oct 2026 10:57:20 +0000
+Received: by outflank-mailman (input) for mailman id 1455364;
+ Tue, 20 Oct 2026 10:51:15 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7R2-0000Dh-IT
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:12 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7R5-0000Fe-E2
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:15 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7R1-004dBJ-Vi
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:11 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xJ7R4-002Fd5-Mw
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:14 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7479c-8faa-0a2a0a5109dd-0a2a450bb700-12
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:11 +0200
+ id 6ad74794-bab6-0a2a0a5309dd-0a2a4509e19c-42
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:14 +0200
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7479e-b7e8-0a2a450b0019-aa0a817cb205-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:11 +0200
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ id 6ad747a1-be1a-0a2a45090019-aa0a817c9cfb-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:14 +0200
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-315-plwKHC4NOLSL9hNBtPanxA-1; Tue,
- 20 Oct 2026 10:51:05 +0000
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-317-_02t9xyMOm20feBYezgTrw-1; Tue,
+ 20 Oct 2026 10:50:55 +0000
 Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
  (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id D94121800628; Tue, 20 Oct 2026 10:51:01 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id E195F1954AF3; Tue, 20 Oct 2026 10:50:51 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
  by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 1B6D11956089; Tue, 20 Oct 2026 10:50:59 +0000 (UTC)
+ id 668161956089; Tue, 20 Oct 2026 10:50:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493470;
+	s=mimecast20190719; t=1792493473;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=OxciqWPAoEP3mYi79fT0gwyx/y+Ueu4PihTpFMb+Vro=;
-	b=CqVoWHLhZ84pEkgr5wDmP1CtQuk4fnkA/sNu5kqWFyG9/dspdTTyTqiQuuCtdd8MMfZkX2
-	SmLFvkJz2YFfq+amhUWzz8P2S4jyk+J+GD7oBPIwUYqVMrUjHfw/+tM37LXaSYoL95Zf/0
-	nZEY3p2ceyX8mRg4TWcw6heDNo09TWc=
-X-MC-Unique: plwKHC4NOLSL9hNBtPanxA-1
-X-Mimecast-MFC-AGG-ID: plwKHC4NOLSL9hNBtPanxA_1792493462
+	bh=xYy3oSp+ff1fXLKzAr/ltjneF4aulTjsLHGvoluUofo=;
+	b=X6XVMan97T5ihTg48c2LqhaCkgh+pMdhNbPs4qiNVuGZooyWrOAFFN0/qnf56VddwYvV9f
+	Q5SS6aueFM1ee0mm8zfvrmqmncOJnWzs6aeP2kyhwu9SJHz7eQNJwn5nacKCHpQOTtm9SJ
+	IqXyFpjSR0JdM29wmvi7VhWoZKi/jZ4=
+X-MC-Unique: _02t9xyMOm20feBYezgTrw-1
+X-Mimecast-MFC-AGG-ID: _02t9xyMOm20feBYezgTrw_1792493452
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:46:10 +0400
-Subject: [PATCH v7 53/65] qdev: convert core PropertyInfo definitions to
- use qapi_type
+Date: Tue, 20 Oct 2026 14:46:08 +0400
+Subject: [PATCH v7 51/65] hw/pci: change the busnr type to uint8
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-53-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-51-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,234 +151,61 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=6959;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=676;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=RHtqBiZ1ZpqW16u5ZDKaCCTk7bDqrZ48KqqtmQit3DY=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZctFtIhQr7wjwq0vlVATZsMz0DILvEH+0jv
- hwCsb531JmJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXAAKCRDa6OEJdZac
- 5fUsD/9v7R2O4amiuZ6SP+5w4OuXKDrY8C+/Sc9jWdJC+ykOn3MS1oFd6aG72bZkKifmaaiUg7L
- TYOQ73e/j30Aq8BxvAneXubghaxQasTkvl99rK7tpyVZmrR50QihCvaY/ojpH0CLNYG2XkUUxKL
- y8yd7vUzbbeRmLV9PNMcmwDeruh6TA0cZ9WXnDE587xYeh2mwT4wozR1RpBy/mOaVV6pCsAH5fC
- FJEzUzb0nzAnNGbVueWWQDRGCe73rj4hcn34RKSLYVxJQzQWL2mdCkPZN0RISYsH2pQ7vRwObYz
- NfzpXdVqc2iGmdIhuVCSrT22vQagV3Ver1Mu/8au7kLcxHnm9QFUhImJS4yToAOJk2Lgk2IJuAj
- RKOI0UHd43FbgYRrs5+S+TOkayjmFvlvJQ5ttHfYA95e+Dy55b6P2DbihYrAcl+AabExEmH+ikO
- Z3dzsDiMnsSR4xCGGFtThVh4RJ/4Qw1IGQAl3Lu+8C3d89oEU6hCmPWUiZAWw0a20/UT9N9KyKx
- is8Bnc3h8p0qMcWdiz2wZ7Pb/oOW6ZTqdF94KyeCq1FZS1D/CmS265DPmP+EGKz75jb30ZiRafc
- vpG2mZrXz/I1P9ivzKYIX20Jf3dTEQesxhMn3mUkfIGOcm3wVD1XCjYjkRPs6YUrOSeAgL0EmlP
- kEIkN/dkX0GxvOQ==
+ bh=XgvIxLl/BnhUDwV4Ml62CrnmhSOe02ljvgEL6HF9kIM=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZcsdAOAS0hjUnxh3WDcMl5LulHDaGVEH+/r
+ GrDaZ1+NveJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXAAKCRDa6OEJdZac
+ 5WzUD/4gS8E5fmzaBRANZzmTHi4LMZi0Pnr4ISijVYni9psdGZecJgyELgBiKlkS5moIjcmgfO9
+ LtzEDam7EKKaMjQcN5+qoT9kJDLjDpBykqFrZivQF2+tVHrtUmmPMpE3gd+qdxjg6bjuHJE9nm1
+ y58JRaSIUeY5pv9QUPqHyIIC2MN6AtkJNS6T4D6zslZnqceh+5SUOmjDOh3IoP69Ya4dCoo4eLh
+ /c5wEk48USsos1BczsynxRLqlv372oV7D6FHO+gwf7Umv7Wuuk3wMq7v55VvBk9ClGMFFFHl1Bl
+ K3IymWi5lcpeebgGoY2rJ461Nf1K2sX+de1UruF0XycFGG7zJB0fY0/QCktkFe//ULP8eWVVPxr
+ x4po1soNOkYf6gQEeqjLamK0g8ZJygWnnbTzMGQEwO1n2GefBmYe/bslKuhzlSlv0HKmfN1M7tb
+ byc79SREJ+GyMzX/SS2qzWi9Gn2rDYqKAs9h/RWWJ+yB/ND5yn9/LQ7juXguQ9BRcahIQMeTOiD
+ VEEzjLcJHQbx5RCwpKZQ95j9UiN4WpHPiULZe4dPYsvpFHaoocZ8FKiKm53uryDXr8nXEA4SAUg
+ dfhpm5tVTAMYZqUADL7oer+1PwE0J6AANyAUXX8h59mqI45I6O/T5kqAez+QPc00dcUYloWmkkC
+ 4rA7sxiB57P9E5A==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
 X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: oItgUr_EWg9djf1ysjyX_2vq_zrOc5vUYItMzxhG-TY_1792493462
+X-Mimecast-MFC-PROC-ID: 3-zo0R8hDFTe36sl23F5YEoxm1tPW3954qsxBThSEqo_1792493452
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-42698a/1792493471-198C19EA-9AEC1DC8/0/0
+X-purgate-ID: tlsNG-bad1c0/1792493474-BF2DC034-E1FB13CE/0/0
 X-purgate-type: clean
-X-purgate-size: 6961
+X-purgate-size: 678
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Replace .type string with .qapi_type pointer on all core PropertyInfo
-definitions in qdev-properties.c. Remove .enum_table from enum
-definitions, since the lookup is now accessed through .qapi_type->lookup
-via the qdev_propinfo_enum_lookup() fallback helper.
-
-Note that qdev_prop_usize now reports "uint32" or "uint64" depending on
-the host. If usize is worth preserving, it should be added as a QAPI
-builtin type. Or perhaps we should simply use "size" everywhere (u64)?
-
-It's also strange to use type "size" for both u32 (prop_size32) and u64
-(prop_size).
-
-Link property are actually strings. The "full type name" is set when
-the property is added, as "link<TYPE>".
-
-Array property will be refactored in a subsequent patch.
+It is effectively a u8. The next changes are going to use the
+uint8_type_info for it.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/core/qdev-properties.c | 42 +++++++++++++++++++++++-------------------
- 1 file changed, 23 insertions(+), 19 deletions(-)
+ hw/pci/pci.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
-index ee50fbb9f570..abdb380cb9ec 100644
---- a/hw/core/qdev-properties.c
-+++ b/hw/core/qdev-properties.c
-@@ -12,6 +12,8 @@
- #include "qdev-prop-internal.h"
- #include "qom/compat-properties.h"
- #include "qom/qom-qobject.h"
-+#include "qapi/qapi-builtin-type-infos.h"
-+#include "qapi/qapi-type-infos-common.h"
- 
- void qdev_prop_set_after_realize(DeviceState *dev, const char *name,
-                                   Error **errp)
-@@ -181,7 +183,7 @@ static void set_default_value_bool(ObjectProperty *op, const Property *prop)
+diff --git a/hw/pci/pci.c b/hw/pci/pci.c
+index 0efb4eb4bb03..6edc702776ab 100644
+--- a/hw/pci/pci.c
++++ b/hw/pci/pci.c
+@@ -80,7 +80,7 @@ static void prop_pci_busnr_get(Object *obj, Visitor *v, const char *name,
  }
  
- const PropertyInfo qdev_prop_bit = {
--    .type  = "bool",
-+    .qapi_type = &bool_type_info,
-     .description = "on/off",
-     .get   = prop_get_bit,
-     .set   = prop_set_bit,
-@@ -231,7 +233,7 @@ static void prop_set_bit64(Object *obj, Visitor *v, const char *name,
- }
- 
- const PropertyInfo qdev_prop_bit64 = {
--    .type  = "bool",
-+    .qapi_type = &bool_type_info,
-     .description = "on/off",
-     .get   = prop_get_bit64,
-     .set   = prop_set_bit64,
-@@ -293,9 +295,8 @@ static void prop_set_on_off_auto_bit64(Object *obj, Visitor *v,
- }
- 
- const PropertyInfo qdev_prop_on_off_auto_bit64 = {
--    .type = "OnOffAuto",
-+    .qapi_type = &OnOffAuto_type_info,
-     .description = "on/off/auto",
--    .enum_table = &OnOffAuto_lookup,
-     .get = prop_get_on_off_auto_bit64,
-     .set = prop_set_on_off_auto_bit64,
-     .set_default_value = qdev_propinfo_set_default_value_enum,
-@@ -322,7 +323,7 @@ static void set_bool(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_bool = {
--    .type  = "bool",
-+    .qapi_type = &bool_type_info,
-     .description = "on/off",
-     .get   = get_bool,
-     .set   = set_bool,
-@@ -362,7 +363,7 @@ void qdev_propinfo_set_default_value_uint(ObjectProperty *op,
- }
- 
- const PropertyInfo qdev_prop_uint8 = {
--    .type  = "uint8",
-+    .qapi_type = &uint8_type_info,
-     .get   = get_uint8,
-     .set   = set_uint8,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
-@@ -389,7 +390,7 @@ static void set_uint16(Object *obj, Visitor *v, const char *name,
- }
- 
- const PropertyInfo qdev_prop_uint16 = {
--    .type  = "uint16",
-+    .qapi_type = &uint16_type_info,
-     .get   = get_uint16,
-     .set   = set_uint16,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
-@@ -434,14 +435,14 @@ static void set_int32(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_uint32 = {
--    .type  = "uint32",
-+    .qapi_type = &uint32_type_info,
-     .get   = get_uint32,
-     .set   = set_uint32,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
+ static const PropertyInfo prop_pci_busnr = {
+-    .type = "busnr",
++    .type = "uint8",
+     .get = prop_pci_busnr_get,
  };
  
- const PropertyInfo qdev_prop_int32 = {
--    .type  = "int32",
-+    .qapi_type = &int32_type_info,
-     .get   = qdev_propinfo_get_int32,
-     .set   = set_int32,
-     .set_default_value = qdev_propinfo_set_default_value_int,
-@@ -486,14 +487,14 @@ static void set_int64(Object *obj, Visitor *v, const char *name,
- }
- 
- const PropertyInfo qdev_prop_uint64 = {
--    .type  = "uint64",
-+    .qapi_type = &uint64_type_info,
-     .get   = get_uint64,
-     .set   = set_uint64,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
- };
- 
- const PropertyInfo qdev_prop_int64 = {
--    .type  = "int64",
-+    .qapi_type = &int64_type_info,
-     .get   = get_int64,
-     .set   = set_int64,
-     .set_default_value = qdev_propinfo_set_default_value_int,
-@@ -515,7 +516,7 @@ static void set_uint64_checkmask(Object *obj, Visitor *v, const char *name,
- }
- 
- const PropertyInfo qdev_prop_uint64_checkmask = {
--    .type  = "uint64",
-+    .qapi_type = &uint64_type_info,
-     .get   = get_uint64,
-     .set   = set_uint64_checkmask,
- };
-@@ -551,7 +552,11 @@ static void set_usize(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_usize = {
--    .type  = "usize",
-+#if HOST_LONG_BITS == 32
-+    .qapi_type = &uint32_type_info,
-+#else
-+    .qapi_type = &uint64_type_info,
-+#endif
-     .get   = get_usize,
-     .set   = set_usize,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
-@@ -595,7 +600,7 @@ static void set_string(Object *obj, Visitor *v, const char *name,
- }
- 
- const PropertyInfo qdev_prop_string = {
--    .type  = "str",
-+    .qapi_type = &str_type_info,
-     .release = release_string,
-     .get   = get_string,
-     .set   = set_string,
-@@ -604,9 +609,8 @@ const PropertyInfo qdev_prop_string = {
- /* --- on/off/auto --- */
- 
- const PropertyInfo qdev_prop_on_off_auto = {
--    .type = "OnOffAuto",
-+    .qapi_type = &OnOffAuto_type_info,
-     .description = "on/off/auto",
--    .enum_table = &OnOffAuto_lookup,
-     .get = qdev_propinfo_get_enum,
-     .set = qdev_propinfo_set_enum,
-     .set_default_value = qdev_propinfo_set_default_value_enum,
-@@ -647,7 +651,7 @@ static void set_size32(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_size32 = {
--    .type  = "size",
-+    .qapi_type = &size_type_info,
-     .get = qdev_propinfo_get_size32,
-     .set = set_size32,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
-@@ -1060,7 +1064,7 @@ static void set_size(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_size = {
--    .type  = "size",
-+    .qapi_type = &size_type_info,
-     .get = get_size,
-     .set = set_size,
-     .set_default_value = qdev_propinfo_set_default_value_uint,
-@@ -1142,7 +1146,7 @@ static void set_link(Object *obj, Visitor *v, const char *name, void *opaque,
- }
- 
- const PropertyInfo qdev_prop_link = {
--    .type = "link",
-+    .qapi_type = &str_type_info,
-     .create = create_link_property,
-     /*
-      * Since we have a create method, the get and set are used
 
 -- 
 2.56.0.116.g6de20f6092dc
