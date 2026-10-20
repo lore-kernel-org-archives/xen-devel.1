@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 549D8606A319
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 689DE606A319
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:33 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=H69cYq6F
-Received: from list by lists.xenproject.org with outflank-mailman.1455362.1669216 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=CqVoWHLh
+Received: from list by lists.xenproject.org with outflank-mailman.1455358.1669200 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Wx-0007Cz-Nc; Tue, 20 Oct 2026 10:57:19 +0000
+	id 1xJ7Wt-0006Ht-6k; Tue, 20 Oct 2026 10:57:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455362.1669216; Tue, 20 Oct 2026 10:57:19 +0000
+Received: by outflank-mailman (output) from mailman id 1455358.1669200; Tue, 20 Oct 2026 10:57:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Ww-0007A8-Gx; Tue, 20 Oct 2026 10:57:18 +0000
-Received: by outflank-mailman (input) for mailman id 1455362;
- Tue, 20 Oct 2026 10:51:14 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xJ7Wr-0006AG-Cc; Tue, 20 Oct 2026 10:57:13 +0000
+Received: by outflank-mailman (input) for mailman id 1455358;
+ Tue, 20 Oct 2026 10:51:12 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7R4-0000F8-Kz
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:14 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7R2-0000Dh-IT
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7R4-00CroT-1g
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:14 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xJ7R1-004dBJ-Vi
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:11 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74788-2eae-0a2a0a5409dd-0a2a4501d57a-44
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:14 +0200
+ id 6ad7479c-8faa-0a2a0a5109dd-0a2a450bb700-12
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:11 +0200
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad746b0-5984-0a2a45010019-aa0a817c8889-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:13 +0200
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ id 6ad7479e-b7e8-0a2a450b0019-aa0a817cb205-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:11 +0200
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-413-CaChFFwCP4K-8MY9RuA87Q-1; Tue,
- 20 Oct 2026 10:47:08 +0000
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-315-plwKHC4NOLSL9hNBtPanxA-1; Tue,
+ 20 Oct 2026 10:51:05 +0000
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 4ECE719560BA; Tue, 20 Oct 2026 10:47:04 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id D94121800628; Tue, 20 Oct 2026 10:51:01 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 6FCFD1800643; Tue, 20 Oct 2026 10:47:01 +0000 (UTC)
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 1B6D11956089; Tue, 20 Oct 2026 10:50:59 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,23 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493232;
+	s=mimecast20190719; t=1792493470;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=9fsJslKCeoRdmSlurWERnpkKgveOnsXmWR9P5zsycws=;
-	b=H69cYq6FuKpeO2ENt7EWyJq4cJDN4BNwP+POU9R4QeAhtq1+yBPt24jsOAydLC1+VujDQH
-	MnPZlItPWrzoGxlDFNCN0OCcmhez9a9mKrcfgXO0wOvnaX18Gt5aCXA1kkiN4WqNtYe4ip
-	8TqXKEL0rgT+A92PqOcl8cIsYakVQNA=
-X-MC-Unique: CaChFFwCP4K-8MY9RuA87Q-1
-X-Mimecast-MFC-AGG-ID: CaChFFwCP4K-8MY9RuA87Q_1792493224
+	bh=OxciqWPAoEP3mYi79fT0gwyx/y+Ueu4PihTpFMb+Vro=;
+	b=CqVoWHLhZ84pEkgr5wDmP1CtQuk4fnkA/sNu5kqWFyG9/dspdTTyTqiQuuCtdd8MMfZkX2
+	SmLFvkJz2YFfq+amhUWzz8P2S4jyk+J+GD7oBPIwUYqVMrUjHfw/+tM37LXaSYoL95Zf/0
+	nZEY3p2ceyX8mRg4TWcw6heDNo09TWc=
+X-MC-Unique: plwKHC4NOLSL9hNBtPanxA-1
+X-Mimecast-MFC-AGG-ID: plwKHC4NOLSL9hNBtPanxA_1792493462
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:26 +0400
-Subject: [PATCH v7 09/65] qapi: add type-infos generator
+Date: Tue, 20 Oct 2026 14:46:10 +0400
+Subject: [PATCH v7 53/65] qdev: convert core PropertyInfo definitions to
+ use qapi_type
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-9-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-53-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -151,357 +152,234 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=11937;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6959;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=g11BDsqjD7nTY1JkXgXYml3RSI9xXvonR2GIve0ncmU=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZYJJsN/o3bE8+2FCYnBUPV5NJQM5Nv0DZ+W
- cs66TGPSluJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
- 5X89D/9JRzqpQfKNC9gbQGRY59/nwxgGa32YPoyHyyoM0h2BvDmF7ZbinfNq2T9MVqshAYEoiFR
- xc7ljZ9NoGxlTuLVwS1aNl6HHnsmDhKb5jVgr5AoMWWz4rVqi+xj63l45jNUSseCUXeuy0bCkEg
- yZQBQUFEMFUZf304KtU3Njd18Egs4T0KuLqkFEEw5dkzWV3eZ/b5OhaCAKqoZedcvkQsZW7uvwI
- 6Ae0AjBOYIfxG3WN9Ij9DoZ8/I8X4ziwRqXr89st8Dtr0I2t6e9J2cXetf9OWT4OGfPwxsEliyT
- icKaxTcbiSyEP+QhBnS7Vz3hB/KApZDT+czUQX6T29+2H8KRyPs41CClGk1MQ4rUIz5QDTn98sZ
- SSY/ZdRafGBX/r+hQ8bLdy5WzBHNtnn5vjrxoOalrZQ3lkgmFSB+R3UMIxHTPRzij+vsVtmiGxw
- U5gv0Srb6iZ8qjMjcqiupzChnZtsLekIggh80TZwGRjdhyZdXY7Xn2FoW/Hn7QVfxpGn+9wEUQ3
- bpdpQSG0xXFH+C38NmXfJ72C/QyZIu9PqL8R5H/iyqxdRJd92ojKG3qoIStS+8l19dNilIxa2YR
- eL1VActz/GY+9zR11F3R3dnsROQAhx1070vOdfVrv0WbKEHtXIw+k49jML+OTKNlgawyHNIFBDf
- bKqUQ5KwfG4PxOA==
+ bh=RHtqBiZ1ZpqW16u5ZDKaCCTk7bDqrZ48KqqtmQit3DY=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZctFtIhQr7wjwq0vlVATZsMz0DILvEH+0jv
+ hwCsb531JmJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXAAKCRDa6OEJdZac
+ 5fUsD/9v7R2O4amiuZ6SP+5w4OuXKDrY8C+/Sc9jWdJC+ykOn3MS1oFd6aG72bZkKifmaaiUg7L
+ TYOQ73e/j30Aq8BxvAneXubghaxQasTkvl99rK7tpyVZmrR50QihCvaY/ojpH0CLNYG2XkUUxKL
+ y8yd7vUzbbeRmLV9PNMcmwDeruh6TA0cZ9WXnDE587xYeh2mwT4wozR1RpBy/mOaVV6pCsAH5fC
+ FJEzUzb0nzAnNGbVueWWQDRGCe73rj4hcn34RKSLYVxJQzQWL2mdCkPZN0RISYsH2pQ7vRwObYz
+ NfzpXdVqc2iGmdIhuVCSrT22vQagV3Ver1Mu/8au7kLcxHnm9QFUhImJS4yToAOJk2Lgk2IJuAj
+ RKOI0UHd43FbgYRrs5+S+TOkayjmFvlvJQ5ttHfYA95e+Dy55b6P2DbihYrAcl+AabExEmH+ikO
+ Z3dzsDiMnsSR4xCGGFtThVh4RJ/4Qw1IGQAl3Lu+8C3d89oEU6hCmPWUiZAWw0a20/UT9N9KyKx
+ is8Bnc3h8p0qMcWdiz2wZ7Pb/oOW6ZTqdF94KyeCq1FZS1D/CmS265DPmP+EGKz75jb30ZiRafc
+ vpG2mZrXz/I1P9ivzKYIX20Jf3dTEQesxhMn3mUkfIGOcm3wVD1XCjYjkRPs6YUrOSeAgL0EmlP
+ kEIkN/dkX0GxvOQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: PYnD41ipzsbdZ-2HiYmfib_EgstlHwjn_bdzSJZWj8s_1792493224
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: oItgUr_EWg9djf1ysjyX_2vq_zrOc5vUYItMzxhG-TY_1792493462
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1792493233-1F063757-B1D64FEC/0/0
+X-purgate-ID: tlsNG-42698a/1792493471-198C19EA-9AEC1DC8/0/0
 X-purgate-type: clean
-X-purgate-size: 11939
+X-purgate-size: 6961
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-New QAPISchemaGenTypeInfoVisitor produces per-module
-qapi-type-infos-*.h/c files. Each file declares QAPITypeInfo constants
-pairing the QAPI type name with its masked introspection name.
+Replace .type string with .qapi_type pointer on all core PropertyInfo
+definitions in qdev-properties.c. Remove .enum_table from enum
+definitions, since the lookup is now accessed through .qapi_type->lookup
+via the qdev_propinfo_enum_lookup() fallback helper.
+
+Note that qdev_prop_usize now reports "uint32" or "uint64" depending on
+the host. If usize is worth preserving, it should be added as a QAPI
+builtin type. Or perhaps we should simply use "size" everywhere (u64)?
+
+It's also strange to use type "size" for both u32 (prop_size32) and u64
+(prop_size).
+
+Link property are actually strings. The "full type name" is set when
+the property is added, as "link<TYPE>".
+
+Array property will be refactored in a subsequent patch.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- docs/devel/qapi-code-gen.rst |  92 ++++++++++++++++++++++++
- meson.build                  |   1 +
- scripts/qapi/backend.py      |   2 +
- scripts/qapi/type_infos.py   | 163 +++++++++++++++++++++++++++++++++++++++++++
- 4 files changed, 258 insertions(+)
+ hw/core/qdev-properties.c | 42 +++++++++++++++++++++++-------------------
+ 1 file changed, 23 insertions(+), 19 deletions(-)
 
-diff --git a/docs/devel/qapi-code-gen.rst b/docs/devel/qapi-code-gen.rst
-index 77f08bb68cac..1cc5338a210a 100644
---- a/docs/devel/qapi-code-gen.rst
-+++ b/docs/devel/qapi-code-gen.rst
-@@ -1250,6 +1250,9 @@ JSON array of strings.
- To examine a type, start with a command or event using it, then follow
- references by name.
- 
-+.. TODO document QOM introspection (qom-list, qom-list-properties,
-+   qom-get) and how it relates to QAPI type information.
-+
- The SchemaInfo for a command has meta-type "command", and variant
- members "arg-type", "ret-type" and "allow-oob".  On the wire, the
- "arguments" member of a client's "execute" command must conform to the
-@@ -2099,3 +2102,92 @@ Example::
-     }));
- 
-     [Uninteresting stuff omitted...]
-+
-+
-+Code generated for type information
-+-----------------------------------
-+
-+Type information is generated for user-defined types and their array
-+types.  With option --builtins, it is also generated for the built-in
-+types.
-+
-+The following files are created:
-+
-+ ``$(prefix)qapi-type-infos.c``
-+     A ``QAPITypeInfo`` instance for each type listed above, providing
-+     a mapping between the QAPI type name and the masked name used by
-+     introspection, along with optional enum lookup table and array
-+     type pointers.
-+
-+ ``$(prefix)qapi-type-infos.h``
-+     Declarations for the above type info instances
-+
-+Each ``QAPITypeInfo`` struct has the following fields:
-+
-+``name``
-+    The QAPI type name (e.g. ``"UserDefOne"``).
-+
-+``masked_name``
-+    The masked name used in ``query-qmp-schema`` output.
-+
-+``lookup``
-+    For enum types, a pointer to the corresponding ``QEnumLookup``
-+    table.  ``NULL`` for non-enum types.
-+
-+``list``
-+    For types that have an array variant, a pointer to the array type's
-+    ``QAPITypeInfo``.  ``NULL`` when no array type exists.
-+
-+These type info instances are used by QOM property registration
-+functions (``object_property_add_qapi()``,
-+``object_class_property_add_qapi_enum()``, etc.) to associate each
-+property with its QAPI type.  The ``qom-list`` and
-+``device-list-properties`` QMP commands then expose the ``qapi-type``
-+field, giving management tools a formal type reference they can look
-+up in the introspection schema.
-+
-+Example::
-+
-+    $ cat qapi-generated/example-qapi-type-infos.h
-+    [Uninteresting stuff omitted...]
-+
-+    #ifndef EXAMPLE_QAPI_TYPE_INFOS_H
-+    #define EXAMPLE_QAPI_TYPE_INFOS_H
-+
-+    #include "qapi/qapi-builtin-type-infos.h"
-+
-+    extern const QAPITypeInfo UserDefOne_type_info;
-+
-+    extern const QAPITypeInfo UserDefOneList_type_info;
-+
-+    #endif /* EXAMPLE_QAPI_TYPE_INFOS_H */
-+    $ cat qapi-generated/example-qapi-type-infos.c
-+    [Uninteresting stuff omitted...]
-+
-+    const QAPITypeInfo UserDefOne_type_info = {
-+        .name = "UserDefOne",
-+        .masked_name = "1",
-+        .list = &UserDefOneList_type_info,
-+    };
-+
-+    const QAPITypeInfo UserDefOneList_type_info = {
-+        .name = "UserDefOneList",
-+        .masked_name = "[1]",
-+    };
-+
-+    [Uninteresting stuff omitted...]
-+
-+For a modular QAPI schema (see section `Include directives`_), code for
-+each sub-module SUBDIR/SUBMODULE.json is actually generated into ::
-+
-+ SUBDIR/$(prefix)qapi-type-infos-SUBMODULE.h
-+ SUBDIR/$(prefix)qapi-type-infos-SUBMODULE.c
-+
-+If qapi-gen.py is run with option --builtins, additional files are
-+created:
-+
-+ ``qapi-builtin-type-infos.h``
-+     Type info instances for built-in types
-+
-+ ``qapi-builtin-type-infos.c``
-+     Definitions for the above type info instances
-diff --git a/meson.build b/meson.build
-index bbef9d9c2932..e51fb7a37740 100644
---- a/meson.build
-+++ b/meson.build
-@@ -3510,6 +3510,7 @@ qapi_gen_depends = [ meson.current_source_dir() / 'scripts/qapi/__init__.py',
-                      meson.current_source_dir() / 'scripts/qapi/parser.py',
-                      meson.current_source_dir() / 'scripts/qapi/schema.py',
-                      meson.current_source_dir() / 'scripts/qapi/source.py',
-+                     meson.current_source_dir() / 'scripts/qapi/type_infos.py',
-                      meson.current_source_dir() / 'scripts/qapi/types.py',
-                      meson.current_source_dir() / 'scripts/qapi/visit.py',
-                      meson.current_source_dir() / 'scripts/qapi-gen.py'
-diff --git a/scripts/qapi/backend.py b/scripts/qapi/backend.py
-index 49ae6ecdd33e..508ab2173539 100644
---- a/scripts/qapi/backend.py
-+++ b/scripts/qapi/backend.py
-@@ -8,6 +8,7 @@
- from .features import gen_features
- from .introspect import gen_introspect
- from .schema import QAPISchema
-+from .type_infos import gen_type_infos
- from .types import gen_types
- from .visit import gen_visit
- 
-@@ -63,3 +64,4 @@ def generate(self,
-         gen_commands(schema, output_dir, prefix, gen_tracing)
-         gen_events(schema, output_dir, prefix)
-         gen_introspect(schema, output_dir, prefix, unmask)
-+        gen_type_infos(schema, output_dir, prefix, builtins, unmask)
-diff --git a/scripts/qapi/type_infos.py b/scripts/qapi/type_infos.py
-new file mode 100644
-index 000000000000..b29e31d92640
---- /dev/null
-+++ b/scripts/qapi/type_infos.py
-@@ -0,0 +1,163 @@
-+"""
-+QAPI type info generator
-+
-+SPDX-License-Identifier: GPL-2.0-or-later
-+"""
-+
-+from typing import List, Optional
-+
-+from .common import c_name, mcgen
-+from .gen import QAPISchemaModularCVisitor, ifcontext
-+from .schema import (
-+    QAPISchema,
-+    QAPISchemaAlternatives,
-+    QAPISchemaBranches,
-+    QAPISchemaEnumMember,
-+    QAPISchemaFeature,
-+    QAPISchemaIfCond,
-+    QAPISchemaObjectType,
-+    QAPISchemaObjectTypeMember,
-+    QAPISchemaType,
-+)
-+from .source import QAPISourceInfo
-+
-+
-+class QAPISchemaGenTypeInfoVisitor(QAPISchemaModularCVisitor):
-+
-+    def __init__(self, prefix: str, unmask: bool):
-+        super().__init__(
-+            prefix, 'qapi-type-infos',
-+            ' * Schema-defined QAPI type info',
-+            ' * Built-in QAPI type info', __doc__)
-+        self._unmask = unmask
-+        self._schema: Optional[QAPISchema] = None
-+
-+    def visit_begin(self, schema: QAPISchema) -> None:
-+        super().visit_begin(schema)
-+        self._schema = schema
-+
-+    def _begin_builtin_module(self) -> None:
-+        self._genc.preamble_add(mcgen('''
-+#include "qemu/osdep.h"
-+#include "qapi/qapi-builtin-types.h"
+diff --git a/hw/core/qdev-properties.c b/hw/core/qdev-properties.c
+index ee50fbb9f570..abdb380cb9ec 100644
+--- a/hw/core/qdev-properties.c
++++ b/hw/core/qdev-properties.c
+@@ -12,6 +12,8 @@
+ #include "qdev-prop-internal.h"
+ #include "qom/compat-properties.h"
+ #include "qom/qom-qobject.h"
 +#include "qapi/qapi-builtin-type-infos.h"
-+'''))
-+        self._genh.preamble_add(mcgen('''
-+#include "qapi/qapi-type-info.h"
-+'''))
-+
-+    def _begin_user_module(self, name: str) -> None:
-+        type_infos = self._module_basename('qapi-type-infos', name)
-+        types = self._module_basename('qapi-types', name)
-+        self._genc.preamble_add(mcgen('''
-+#include "qemu/osdep.h"
-+#include "%(types)s.h"
-+#include "%(type_infos)s.h"
-+''',
-+                                      types=types,
-+                                      type_infos=type_infos))
-+        self._genh.preamble_add(mcgen('''
-+#include "qapi/qapi-builtin-type-infos.h"
-+'''))
-+
-+    def _has_list(self, name: str) -> bool:
-+        assert self._schema is not None
-+        return self._schema.lookup_type(name + 'List') is not None
-+
-+    def _masked_name(self, name: str) -> str:
-+        assert self._schema is not None
-+        return self._schema.definition_introspection_name(name, self._unmask)
-+
-+    def _gen_type_info(self, name: str,
-+                       ifcond: Optional[QAPISchemaIfCond] = None,
-+                       with_lookup: bool = False,
-+                       with_list: bool = False) -> None:
-+        c_id = c_name(name + '_type_info')
-+        masked_name_str = '"%s"' % self._masked_name(name)
-+        with ifcontext(ifcond or QAPISchemaIfCond(),
-+                       self._genh, self._genc):
-+            self._genh.add(mcgen('''
-+
-+extern const QAPITypeInfo %(c_id)s;
-+''',
-+                                 c_id=c_id))
-+            self._genc.add(mcgen('''
-+
-+const QAPITypeInfo %(c_id)s = {
-+    .name = "%(name)s",
-+    .masked_name = %(masked_name)s,
-+''',
-+                                 c_id=c_id, name=name,
-+                                 masked_name=masked_name_str))
-+            if with_lookup:
-+                self._genc.add(mcgen('''
-+    .lookup = &%(c_name)s_lookup,
-+''',
-+                                     c_name=c_name(name)))
-+            if with_list:
-+                self._genc.add(mcgen('''
-+    .list = &%(list_id)s,
-+''',
-+                                     list_id=c_name(name + 'List_type_info')))
-+            self._genc.add(mcgen('''
-+};
-+'''))
-+
-+    def visit_builtin_type(self,
-+                           name: str,
-+                           info: Optional[QAPISourceInfo],
-+                           json_type: str) -> None:
-+        self._gen_type_info(name, with_list=self._has_list(name))
-+
-+    def visit_enum_type(self,
-+                        name: str,
-+                        info: Optional[QAPISourceInfo],
-+                        ifcond: QAPISchemaIfCond,
-+                        features: List[QAPISchemaFeature],
-+                        members: List[QAPISchemaEnumMember],
-+                        prefix: Optional[str]) -> None:
-+        self._gen_type_info(name, ifcond,
-+                            with_lookup=True,
-+                            with_list=self._has_list(name))
-+
-+    def visit_array_type(self,
-+                         name: str,
-+                         info: Optional[QAPISourceInfo],
-+                         ifcond: QAPISchemaIfCond,
-+                         element_type: QAPISchemaType) -> None:
-+        self._gen_type_info(name, ifcond)
-+
-+    def visit_object_type(self,
-+                          name: str,
-+                          info: Optional[QAPISourceInfo],
-+                          ifcond: QAPISchemaIfCond,
-+                          features: List[QAPISchemaFeature],
-+                          base: Optional[QAPISchemaObjectType],
-+                          members: List[QAPISchemaObjectTypeMember],
-+                          branches: Optional[QAPISchemaBranches]) -> None:
-+        assert self._schema is not None
-+        typ = self._schema.lookup_type(name)
-+        assert typ
-+        if typ.is_implicit():
-+            return
-+        self._gen_type_info(name, ifcond,
-+                            with_list=self._has_list(name))
-+
-+    def visit_alternate_type(self,
-+                             name: str,
-+                             info: Optional[QAPISourceInfo],
-+                             ifcond: QAPISchemaIfCond,
-+                             features: List[QAPISchemaFeature],
-+                             alternatives: QAPISchemaAlternatives) -> None:
-+        self._gen_type_info(name, ifcond,
-+                            with_list=self._has_list(name))
-+
-+
-+def gen_type_infos(schema: QAPISchema,
-+                   output_dir: str,
-+                   prefix: str,
-+                   opt_builtins: bool,
-+                   opt_unmask: bool) -> None:
-+    vis = QAPISchemaGenTypeInfoVisitor(prefix, opt_unmask)
-+    schema.visit(vis)
-+    vis.write(output_dir, opt_builtins)
++#include "qapi/qapi-type-infos-common.h"
+ 
+ void qdev_prop_set_after_realize(DeviceState *dev, const char *name,
+                                   Error **errp)
+@@ -181,7 +183,7 @@ static void set_default_value_bool(ObjectProperty *op, const Property *prop)
+ }
+ 
+ const PropertyInfo qdev_prop_bit = {
+-    .type  = "bool",
++    .qapi_type = &bool_type_info,
+     .description = "on/off",
+     .get   = prop_get_bit,
+     .set   = prop_set_bit,
+@@ -231,7 +233,7 @@ static void prop_set_bit64(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ const PropertyInfo qdev_prop_bit64 = {
+-    .type  = "bool",
++    .qapi_type = &bool_type_info,
+     .description = "on/off",
+     .get   = prop_get_bit64,
+     .set   = prop_set_bit64,
+@@ -293,9 +295,8 @@ static void prop_set_on_off_auto_bit64(Object *obj, Visitor *v,
+ }
+ 
+ const PropertyInfo qdev_prop_on_off_auto_bit64 = {
+-    .type = "OnOffAuto",
++    .qapi_type = &OnOffAuto_type_info,
+     .description = "on/off/auto",
+-    .enum_table = &OnOffAuto_lookup,
+     .get = prop_get_on_off_auto_bit64,
+     .set = prop_set_on_off_auto_bit64,
+     .set_default_value = qdev_propinfo_set_default_value_enum,
+@@ -322,7 +323,7 @@ static void set_bool(Object *obj, Visitor *v, const char *name, void *opaque,
+ }
+ 
+ const PropertyInfo qdev_prop_bool = {
+-    .type  = "bool",
++    .qapi_type = &bool_type_info,
+     .description = "on/off",
+     .get   = get_bool,
+     .set   = set_bool,
+@@ -362,7 +363,7 @@ void qdev_propinfo_set_default_value_uint(ObjectProperty *op,
+ }
+ 
+ const PropertyInfo qdev_prop_uint8 = {
+-    .type  = "uint8",
++    .qapi_type = &uint8_type_info,
+     .get   = get_uint8,
+     .set   = set_uint8,
+     .set_default_value = qdev_propinfo_set_default_value_uint,
+@@ -389,7 +390,7 @@ static void set_uint16(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ const PropertyInfo qdev_prop_uint16 = {
+-    .type  = "uint16",
++    .qapi_type = &uint16_type_info,
+     .get   = get_uint16,
+     .set   = set_uint16,
+     .set_default_value = qdev_propinfo_set_default_value_uint,
+@@ -434,14 +435,14 @@ static void set_int32(Object *obj, Visitor *v, const char *name, void *opaque,
+ }
+ 
+ const PropertyInfo qdev_prop_uint32 = {
+-    .type  = "uint32",
++    .qapi_type = &uint32_type_info,
+     .get   = get_uint32,
+     .set   = set_uint32,
+     .set_default_value = qdev_propinfo_set_default_value_uint,
+ };
+ 
+ const PropertyInfo qdev_prop_int32 = {
+-    .type  = "int32",
++    .qapi_type = &int32_type_info,
+     .get   = qdev_propinfo_get_int32,
+     .set   = set_int32,
+     .set_default_value = qdev_propinfo_set_default_value_int,
+@@ -486,14 +487,14 @@ static void set_int64(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ const PropertyInfo qdev_prop_uint64 = {
+-    .type  = "uint64",
++    .qapi_type = &uint64_type_info,
+     .get   = get_uint64,
+     .set   = set_uint64,
+     .set_default_value = qdev_propinfo_set_default_value_uint,
+ };
+ 
+ const PropertyInfo qdev_prop_int64 = {
+-    .type  = "int64",
++    .qapi_type = &int64_type_info,
+     .get   = get_int64,
+     .set   = set_int64,
+     .set_default_value = qdev_propinfo_set_default_value_int,
+@@ -515,7 +516,7 @@ static void set_uint64_checkmask(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ const PropertyInfo qdev_prop_uint64_checkmask = {
+-    .type  = "uint64",
++    .qapi_type = &uint64_type_info,
+     .get   = get_uint64,
+     .set   = set_uint64_checkmask,
+ };
+@@ -551,7 +552,11 @@ static void set_usize(Object *obj, Visitor *v, const char *name, void *opaque,
+ }
+ 
+ const PropertyInfo qdev_prop_usize = {
+-    .type  = "usize",
++#if HOST_LONG_BITS == 32
++    .qapi_type = &uint32_type_info,
++#else
++    .qapi_type = &uint64_type_info,
++#endif
+     .get   = get_usize,
+     .set   = set_usize,
+     .set_default_value = qdev_propinfo_set_default_value_uint,
+@@ -595,7 +600,7 @@ static void set_string(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ const PropertyInfo qdev_prop_string = {
+-    .type  = "str",
++    .qapi_type = &str_type_info,
+     .release = release_string,
+     .get   = get_string,
+     .set   = set_string,
+@@ -604,9 +609,8 @@ const PropertyInfo qdev_prop_string = {
+ /* --- on/off/auto --- */
+ 
+ const PropertyInfo qdev_prop_on_off_auto = {
+-    .type = "OnOffAuto",
++    .qapi_type = &OnOffAuto_type_info,
+     .description = "on/off/auto",
+-    .enum_table = &OnOffAuto_lookup,
+     .get = qdev_propinfo_get_enum,
+     .set = qdev_propinfo_set_enum,
+     .set_default_value = qdev_propinfo_set_default_value_enum,
+@@ -647,7 +651,7 @@ static void set_size32(Object *obj, Visitor *v, const char *name, void *opaque,
+ }
+ 
+ const PropertyInfo qdev_prop_size32 = {
+-    .type  = "size",
++    .qapi_type = &size_type_info,
+     .get = qdev_propinfo_get_size32,
+     .set = set_size32,
+     .set_default_value = qdev_propinfo_set_default_value_uint,
+@@ -1060,7 +1064,7 @@ static void set_size(Object *obj, Visitor *v, const char *name, void *opaque,
+ }
+ 
+ const PropertyInfo qdev_prop_size = {
+-    .type  = "size",
++    .qapi_type = &size_type_info,
+     .get = get_size,
+     .set = set_size,
+     .set_default_value = qdev_propinfo_set_default_value_uint,
+@@ -1142,7 +1146,7 @@ static void set_link(Object *obj, Visitor *v, const char *name, void *opaque,
+ }
+ 
+ const PropertyInfo qdev_prop_link = {
+-    .type = "link",
++    .qapi_type = &str_type_info,
+     .create = create_link_property,
+     /*
+      * Since we have a create method, the get and set are used
 
 -- 
 2.56.0.116.g6de20f6092dc
