@@ -2,68 +2,55 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 674C3606A319
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D9438606A31D
 	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2026 10:39:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=ibm.com header.i=@ibm.com header.a=rsa-sha256 header.s=pp1 header.b=gryBQiZp
-Received: from list by lists.xenproject.org with outflank-mailman.1456487.1669955 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=bezrBxu/
+Received: from list by lists.xenproject.org with outflank-mailman.1455829.1669944 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJTj9-0004bJ-6n; Wed, 21 Oct 2026 10:39:23 +0000
+	id 1xJTj8-0004TV-Kr; Wed, 21 Oct 2026 10:39:22 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1456487.1669955; Wed, 21 Oct 2026 10:39:23 +0000
+Received: by outflank-mailman (output) from mailman id 1455829.1669944; Wed, 21 Oct 2026 10:39:22 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJTj9-0004Zx-0L; Wed, 21 Oct 2026 10:39:23 +0000
-Received: by outflank-mailman (input) for mailman id 1456487;
- Tue, 20 Oct 2026 20:30:12 +0000
+	id 1xJTj8-0004TO-HF; Wed, 21 Oct 2026 10:39:22 +0000
+Received: by outflank-mailman (input) for mailman id 1455829;
+ Tue, 20 Oct 2026 13:00:17 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <milesg@linux.ibm.com>) id 1xJGTM-0002LY-GM
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 20:30:12 +0000
+ (envelope-from <armbru@redhat.com>) id 1xJ9Rx-0007bx-G5
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 13:00:17 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJGTL-001E3H-TS
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 22:30:11 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xJ9Rw-000FNz-RV
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 15:00:16 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <milesg@linux.ibm.com>)
- id 6ad7cf50-8faa-0a2a0a5109dd-0a2a4509c7dc-4
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 22:30:11 +0200
-Received: from [148.163.156.1] (helo=mx0a-001b2d01.pphosted.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <milesg@linux.ibm.com>)
- id 6ad7cf51-be1a-0a2a45090019-94a39c016b4c-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 22:30:11 +0200
-Received: from pps.filterd (m0360083.ppops.net [127.0.0.1])
- by mx0a-001b2d01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69KHE4cV3176043; Tue, 20 Oct 2026 20:28:59 GMT
-Received: from ppma21.wdc07v.mail.ibm.com
- (5b.69.3da9.ip4.static.sl-reverse.com [169.61.105.91])
- by mx0a-001b2d01.pphosted.com (PPS) with ESMTPS id 4hdw58n91k-1
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
- Tue, 20 Oct 2026 20:28:59 +0000 (GMT)
-Received: from pps.filterd (ppma21.wdc07v.mail.ibm.com [127.0.0.1])
- by ppma21.wdc07v.mail.ibm.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69KKOc4J1753723; Tue, 20 Oct 2026 20:28:57 GMT
-Received: from smtprelay04.wdc07v.mail.ibm.com ([172.16.1.71])
- by ppma21.wdc07v.mail.ibm.com (PPS) with ESMTPS id 4he7bs2390-1
- (version=TLSv1.2 cipher=ECDHE-RSA-AES256-GCM-SHA384 bits=256 verify=NOT);
- Tue, 20 Oct 2026 20:28:57 +0000 (GMT)
-Received: from smtpav05.wdc07v.mail.ibm.com (smtpav05.wdc07v.mail.ibm.com
- [10.39.53.232])
- by smtprelay04.wdc07v.mail.ibm.com (8.14.9/8.14.9/NCO v10.0) with ESMTP id
- 69KKSu7F26542802
- (version=TLSv1/SSLv3 cipher=DHE-RSA-AES256-GCM-SHA384 bits=256 verify=OK);
- Tue, 20 Oct 2026 20:28:56 GMT
-Received: from smtpav05.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 5AF0B58059;
- Tue, 20 Oct 2026 20:28:56 +0000 (GMT)
-Received: from smtpav05.wdc07v.mail.ibm.com (unknown [127.0.0.1])
- by IMSVA (Postfix) with ESMTP id 39C1758053;
- Tue, 20 Oct 2026 20:28:49 +0000 (GMT)
-Received: from mambor8.rchland.ibm.com (unknown [9.10.239.198])
- by smtpav05.wdc07v.mail.ibm.com (Postfix) with ESMTP;
- Tue, 20 Oct 2026 20:28:49 +0000 (GMT)
+ (envelope-from <armbru@redhat.com>)
+ id 6ad765df-bab6-0a2a0a5309dd-0a2a450be5bc-12
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 15:00:16 +0200
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <armbru@redhat.com>)
+ id 6ad765df-b7e8-0a2a450b0019-aa0a857c64d3-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 15:00:16 +0200
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-394-SCYlsoeCN1mldLXfI2uYiQ-1; Tue,
+ 20 Oct 2026 13:00:08 +0000
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id ABD0219539BD; Tue, 20 Oct 2026 13:00:00 +0000 (UTC)
+Received: from blackfin.pond.sub.org (unknown [10.44.22.5])
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id E085418002B1; Tue, 20 Oct 2026 12:59:56 +0000 (UTC)
+Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
+ id 65E3F21E6A04; Tue, 20 Oct 2026 14:59:54 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -72,615 +59,486 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=pp1 header.d=ibm.com header.i="@ibm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:Mime-Version:References:Reply-To:Subject:To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=ibm.com; h=cc
-	:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:to; s=pp1;
-	 bh=Pbg2OFXa34DEIIHpJyaCulmgUfbxOrfxEkZAKRhMex4=; b=gryBQiZpYaYe
-	+rscbtJOMUMGzJILaO9bxcqwAzLIOX+j60zcXWH7tKvp08o40WoTpUGVyLoqWjGF
-	ZkUPXLwP8RwgFXaLLDWNzTKj3ap3mJdD1BO/1HXfs1dYuHwb9rWeRqt8GowmS644
-	50UL+brNoroymAw4we0HPjTOmE1wcH9sGecmJN6hvUF49OvQ80slVcDAhqxSmPlQ
-	hSAB89mjuxAM4Xy/czGuXpXvp+9ip0/G8lAJ8i3S+uKSjmnkBnAPhxEv9O4Zujz+
-	n5IQ9SrRLVR2AI3cmiOziLyzdt3R0G+SY7SZNguBEHE3h6jlPLu0ojoSEWc6Cwsc
-	weZZ1xQpeA==
-Message-ID: <9623e038a99fbaa32f3b674335b717aaac28a9b7.camel@linux.ibm.com>
-Subject: Re: [PATCH v7 48/65] hw/gpio/pca955x: use QAPI enums for led and
- pin properties
-From: Miles Glenn <milesg@linux.ibm.com>
-Reply-To: milesg@linux.ibm.com
-To: =?ISO-8859-1?Q?Marc-Andr=E9?= Lureau <marcandre.lureau@redhat.com>,
-        qemu-devel@nongnu.org
-Cc: Markus Armbruster <armbru@redhat.com>,
-        Michael Roth
- <michael.roth@amd.com>, John Snow <jsnow@redhat.com>,
-        Peter Maydell
- <peter.maydell@linaro.org>,
-        Mauro Carvalho Chehab
- <mchehab+huawei@kernel.org>,
-        Pierrick Bouvier
- <pierrick.bouvier@oss.qualcomm.com>,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        "Daniel P." =?ISO-8859-1?Q?Berrang=E9?= <berrange@redhat.com>,
-        Kostiantyn
- Kostiuk <kkostiuk@redhat.com>,
-        Eric Blake <eblake@redhat.com>, David
- Hildenbrand <david@kernel.org>,
-        Igor Mammedov <imammedo@redhat.com>,
-        "Edgar
- E. Iglesias" <edgar.iglesias@gmail.com>,
-        Jason Wang <jasowangio@gmail.com>,
-        Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
-        Alberto Garcia
- <berto@igalia.com>, Kevin Wolf <kwolf@redhat.com>,
-        Hanna Reitz
- <hreitz@redhat.com>,
-        Philippe =?ISO-8859-1?Q?Mathieu-Daud=E9?=
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1792501215;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=IdGexhi468SGRjXz9icUeN0PDMP62iaPPGR0zWDcYQ8=;
+	b=bezrBxu/Dm83yO7DO68W7ctUh7FzrtnWEmQwFFyai5kHpOmRvBUil8R/wjOn0u903d/NzG
+	UqE3F4oNkls5MdGzBJqKfbzIA9Bz9N1UeKOqtgIqZkRm2z1SoJkAGzT17I6+q1Mo8pbxZc
+	R0x4846lqG2krxiD9VmqTASfc2CmvmQ=
+X-MC-Unique: SCYlsoeCN1mldLXfI2uYiQ-1
+X-Mimecast-MFC-AGG-ID: SCYlsoeCN1mldLXfI2uYiQ_1792501202
+From: Markus Armbruster <armbru@redhat.com>
+To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
+Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
+ <jsnow@redhat.com>,  Peter Maydell <peter.maydell@linaro.org>,  Mauro
+ Carvalho Chehab <mchehab+huawei@kernel.org>,  Pierrick Bouvier
+ <pierrick.bouvier@oss.qualcomm.com>,  Paolo Bonzini <pbonzini@redhat.com>,
+  Daniel P. =?utf-8?Q?Berrang=C3=A9?= <berrange@redhat.com>,  Kostiantyn
+ Kostiuk
+ <kkostiuk@redhat.com>,  Eric Blake <eblake@redhat.com>,  David Hildenbrand
+ <david@kernel.org>,  Igor Mammedov <imammedo@redhat.com>,  "Edgar E.
+ Iglesias" <edgar.iglesias@gmail.com>,  Jason Wang <jasowangio@gmail.com>,
+  Marcelo Tosatti <mtosatti@redhat.com>,  kvm@vger.kernel.org,  Alberto
+ Garcia <berto@igalia.com>,  Kevin Wolf <kwolf@redhat.com>,  Hanna Reitz
+ <hreitz@redhat.com>,  Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?=
  <philmd@oss.qualcomm.com>,
-        Zhao Liu <zhao1.liu@intel.com>, Jonathan Cameron
- <jic23@kernel.org>,
-        Junjie Cao <junjie.cao@intel.com>, Anisa Su
- <anisa.su@samsung.com>,
-        Elena Ufimtseva <elena.ufimtseva@oracle.com>,
-        Jagannathan Raman <jag.raman@oracle.com>,
-        John Levon
- <john.levon@nutanix.com>,
-        Thanos Makatos <thanos.makatos@nutanix.com>,
-        =?ISO-8859-1?Q?C=E9dric?= Le Goater <clg@redhat.com>,
-        Cornelia Huck
- <cohuck@redhat.com>, Eric Farman <farman@linux.ibm.com>,
-        Matthew Rosato
- <mjrosato@linux.ibm.com>,
-        Richard Henderson <richard.henderson@linaro.org>,
-        Ilya Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org,
-        linux-cxl@vger.kernel.org, qemu-s390x@nongnu.org,
-        "Michael S. Tsirkin"
- <mst@redhat.com>, Sergio Lopez <slp@redhat.com>,
-        qemu-arm@nongnu.org, Palmer Dabbelt <palmer@dabbelt.com>,
-        Alistair Francis
- <alistair.francis@wdc.com>,
-        Weiwei Li <liwei1518@gmail.com>,
-        Daniel
- Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
-        Liu Zhiwei
- <zhiwei_liu@linux.alibaba.com>,
-        Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
-        Song Gao <17746591750@163.com>, Bibo Mao
- <maobibo@loongson.cn>,
-        Xianglai Li <lixianglai@loongson.cn>,
-        Jiaxun Yang
- <jiaxun.yang@flygoat.com>,
-        Pedro Barbuda <pbarbuda@microsoft.com>,
-        Mohamed
- Mediouni <mohamed@unpredictable.fr>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        Harsh Prateek Bora <harshpb@linux.ibm.com>,
-        Amit Machhiwal
- <amachhiw@linux.ibm.com>, qemu-ppc@nongnu.org,
-        Zhang Chen
- <zhangckid@gmail.com>, Li Zhijian <lizhijian@fujitsu.com>,
-        Alistair Francis
- <alistair@alistair23.me>,
-        Alexander Graf <graf@amazon.com>,
-        "Gonglei
- (Arei)" <arei.gonglei@huawei.com>,
-        zhenwei pi <zhenwei.pi@linux.dev>, Ani
- Sinha <anisinha@redhat.com>,
-        Luc Michel <luc@lmichel.fr>,
-        =?ISO-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
-        Jamin Lin
- <jamin_lin@aspeedtech.com>,
-        Kane Chen <kane_chen@aspeedtech.com>,
-        Samuel
- Tardieu <sam@rfc1149.net>, "Denis V. Lunev" <den@openvz.org>,
-        FangSheng
- Huang <FangSheng.Huang@amd.com>,
-        Tyrone Ting <kfting@nuvoton.com>, Hao Wu
- <wuhaotsh@google.com>,
-        Keith Busch <kbusch@kernel.org>, Klaus Jensen
- <its@irrelevant.dk>,
-        Jesper Devantier <foss@defmacro.it>,
-        Aditya Gupta
- <adityag@linux.ibm.com>, Conor Dooley <conor@kernel.org>,
-        Sebastian Huber
- <sebastian.huber@embedded-brains.de>,
-        Halil Pasic <pasic@linux.ibm.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Jason Herne
- <jjherne@linux.ibm.com>,
-        Titus Rwantare <titusr@google.com>,
-        Stefano
- Stabellini <sstabellini@kernel.org>,
-        Anthony PERARD
- <anthony@xenproject.org>, Peter Xu <peterx@redhat.com>,
-        Chinmay Rath
- <rathc@linux.ibm.com>,
-        Hendrik Brueckner <brueckner@linux.ibm.com>,
-        xen-devel@lists.xenproject.org, Roman Bolshakov <rbolshakov@ddn.com>,
-        Phil
- Dennis-Jordan <phil@philjordan.eu>, Fam Zheng <fam@euphon.net>,
-        Farhan Ali
- <alifm@linux.ibm.com>, Alex Williamson <alex@shazbot.org>,
-        Tao Tang
- <tangtao1634@phytium.com.cn>,
-        Stefan Berger <stefanb@linux.vnet.ibm.com>,
-        Fabiano Rosas <farosas@suse.de>,
-        Mark Cave-Ayland
- <mark.cave-ayland@ilande.co.uk>,
-        Artyom Tarasenko <atar4qemu@gmail.com>,
-        Yoshinori Sato <yoshinori.sato@nifty.com>,
-        Jiri Pirko <jiri@resnulli.us>, Eric Auger <eric.auger@redhat.com>,
-        Laurent Vivier <lvivier@redhat.com>
-Date: Tue, 20 Oct 2026 15:28:48 -0500
-In-Reply-To: <20261020-qom-qapi-v7-48-431a86b02b58@redhat.com>
+  Zhao Liu <zhao1.liu@intel.com>,  Jonathan Cameron <jic23@kernel.org>,
+  Junjie Cao <junjie.cao@intel.com>,  Anisa Su <anisa.su@samsung.com>,
+  Elena Ufimtseva <elena.ufimtseva@oracle.com>,  Jagannathan Raman
+ <jag.raman@oracle.com>,  John Levon <john.levon@nutanix.com>,  Thanos
+ Makatos <thanos.makatos@nutanix.com>,  =?utf-8?Q?C=C3=A9dric?= Le Goater
+ <clg@redhat.com>,
+  Cornelia Huck <cohuck@redhat.com>,  Eric Farman <farman@linux.ibm.com>,
+  Matthew Rosato <mjrosato@linux.ibm.com>,  Richard Henderson
+ <richard.henderson@linaro.org>,  Ilya Leoshkevich <iii@linux.ibm.com>,
+  qemu-block@nongnu.org,  linux-cxl@vger.kernel.org,
+  qemu-s390x@nongnu.org,  "Michael S. Tsirkin" <mst@redhat.com>,  Sergio
+ Lopez <slp@redhat.com>,  qemu-arm@nongnu.org,  Palmer Dabbelt
+ <palmer@dabbelt.com>,  Alistair Francis <alistair.francis@wdc.com>,
+  Weiwei Li <liwei1518@gmail.com>,  Daniel Henrique Barboza
+ <daniel.barboza@oss.qualcomm.com>,  Liu Zhiwei
+ <zhiwei_liu@linux.alibaba.com>,  Chao Liu <chao.liu@processmission.com>,
+  qemu-riscv@nongnu.org,  Song Gao <17746591750@163.com>,  Bibo Mao
+ <maobibo@loongson.cn>,  Xianglai Li <lixianglai@loongson.cn>,  Jiaxun Yang
+ <jiaxun.yang@flygoat.com>,  Pedro Barbuda <pbarbuda@microsoft.com>,
+  Mohamed Mediouni <mohamed@unpredictable.fr>,  Nicholas Piggin
+ <npiggin@gmail.com>,  Harsh Prateek Bora <harshpb@linux.ibm.com>,  Amit
+ Machhiwal <amachhiw@linux.ibm.com>,  qemu-ppc@nongnu.org,  Zhang Chen
+ <zhangckid@gmail.com>,  Li Zhijian <lizhijian@fujitsu.com>,  Alistair
+ Francis <alistair@alistair23.me>,  Alexander Graf <graf@amazon.com>,
+  "Gonglei (Arei)" <arei.gonglei@huawei.com>,  zhenwei pi
+ <zhenwei.pi@linux.dev>,  Ani Sinha <anisinha@redhat.com>,  Luc Michel
+ <luc@lmichel.fr>,  =?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,  Jamin
+ Lin
+ <jamin_lin@aspeedtech.com>,  Kane Chen <kane_chen@aspeedtech.com>,  Samuel
+ Tardieu <sam@rfc1149.net>,  "Denis V. Lunev" <den@openvz.org>,  FangSheng
+ Huang <FangSheng.Huang@amd.com>,  Tyrone Ting <kfting@nuvoton.com>,  Hao
+ Wu <wuhaotsh@google.com>,  Keith Busch <kbusch@kernel.org>,  Klaus Jensen
+ <its@irrelevant.dk>,  Jesper Devantier <foss@defmacro.it>,  Aditya Gupta
+ <adityag@linux.ibm.com>,  Glenn Miles <milesg@linux.ibm.com>,  Conor
+ Dooley <conor@kernel.org>,  Sebastian Huber
+ <sebastian.huber@embedded-brains.de>,  Halil Pasic <pasic@linux.ibm.com>,
+  Christian Borntraeger <borntraeger@linux.ibm.com>,  Jason Herne
+ <jjherne@linux.ibm.com>,  Titus Rwantare <titusr@google.com>,  Stefano
+ Stabellini <sstabellini@kernel.org>,  Anthony PERARD
+ <anthony@xenproject.org>,  Peter Xu <peterx@redhat.com>,  Chinmay Rath
+ <rathc@linux.ibm.com>,  Hendrik Brueckner <brueckner@linux.ibm.com>,
+  xen-devel@lists.xenproject.org,  Roman Bolshakov <rbolshakov@ddn.com>,
+  Phil Dennis-Jordan <phil@philjordan.eu>,  Fam Zheng <fam@euphon.net>,
+  Farhan Ali <alifm@linux.ibm.com>,  Alex Williamson <alex@shazbot.org>,
+  Tao Tang <tangtao1634@phytium.com.cn>,  Stefan Berger
+ <stefanb@linux.vnet.ibm.com>,  Fabiano Rosas <farosas@suse.de>,  Mark
+ Cave-Ayland <mark.cave-ayland@ilande.co.uk>,  Artyom Tarasenko
+ <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
+ Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
+ Vivier <lvivier@redhat.com>
+Subject: Re: [PATCH v7 42/65] virtio-balloon: convert guest-stats property
+ to QAPI type
+In-Reply-To: <20261020-qom-qapi-v7-42-431a86b02b58@redhat.com>
+ (=?utf-8?Q?=22Marc-Andr=C3=A9?=
+	Lureau"'s message of "Tue, 20 Oct 2026 14:45:59 +0400")
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
-	 <20261020-qom-qapi-v7-48-431a86b02b58@redhat.com>
-Organization: IBM
-Content-Type: text/plain; charset="UTF-8"
-X-Mailer: Evolution 3.28.5 (3.28.5-27.el8_10) 
+	<20261020-qom-qapi-v7-42-431a86b02b58@redhat.com>
+Date: Tue, 20 Oct 2026 14:59:54 +0200
+Message-ID: <87h5igplx1.fsf@pond.sub.org>
+User-Agent: Gnus/5.13 (Gnus v5.13)
 X-Archived-By: <archiver.kernel.org>
-Mime-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-TM-AS-GCONF: 00
-X-Proofpoint-Reinject: loops=2 maxloops=12
-X-Proofpoint-GUID: zeP-fO0kgTLfU0Y4FkkqqLfDzxwqTXh5
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIwMDA4MCBTYWx0ZWRfX6vfHkSoMpOMs
- YG6m3cwWZurqaQTfQ06m6A87TuTTul77BsxxpqVfk7/ATEX9h6WKuwqRT/72WjhQ8O8yk8Luwp1
- FB5Ay7YFmD1mRNK9GZcgSc8Q0Lx0ZGY=
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIwMDA4MCBTYWx0ZWRfX9kRKfuj7A4SJ
- K9FDhbZFwvRvTu+zu+AUckEi7IUDpkeOkAxQG5EDDCYy1/KE+MjPjypIdZwGcYwvWUSsZlTT3Hs
- OS/5Rckuuyqz0WFf3/DT3VutTV8HYQxhhgX3BRAvLyAfUlSpUSoN46ARWU00weGvTBrTH0QVn6M
- f5BizkR9cgDKb6gs0r9w+CCssIXoozjlupXcpp86spzc+8ttVskw6c2VUWh+BzRhz4U4Mx3VlQ0
- 0Kv86A3V9fDyudePBjJF7gIaUM/dHlXw8Sr2AJP/+jKQ0qqYkQ0g+u/QWWz12lHn/bzpPAxZFjG
- AedC/6g+TSzwYyFxM4iBjOm0qwmLNOCRV3Ez0qRFHApXLqXwg7ZYb21jwawLvarH+Leoidgy90B
- BCb4tUDdKKNkJ1MZHfFMDAApPElWmkq+fGTsOrBRzkbwtym0VD72/vYSvL0af3w6SqxRLV4BY74
- LRLyPLMPa1F6e9MaJTw==
-X-Proofpoint-ORIG-GUID: t2DQFQv3F5Q70YKOMQrzHUpg36aEx9RI
-X-Authority-Analysis: v=2.4 cv=Ob4NnRTY c=1 sm=1 tr=0 ts=6ad7cf0b cx=c_pps
- a=GFwsV6G8L6GxiO2Y/PsHdQ==:117 a=GFwsV6G8L6GxiO2Y/PsHdQ==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=VkNPw1HP01LnGYTKEx00:22
- a=RnoormkPH1_aCDwRdu11:22 a=iQ6ETzBq9ecOQQE5vZCe:22 a=VnNF1IyMAAAA:8
- a=20KFwNOVAAAA:8 a=HV9-su-gHPMe9Pw3G_AA:9 a=3ZKOabzyN94A:10 a=QEXdDO2ut3YA:10
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.134,FMLib:17.12.100.49
- definitions=2026-10-20_03,2026-10-19_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- bulkscore=0 adultscore=0 phishscore=0 spamscore=0 suspectscore=0
- lowpriorityscore=0 clxscore=1011 impostorscore=0 priorityscore=1501
- malwarescore=0 classifier=typeunknown authscore=0 authtc= authcc=
- route=outbound adjust=0 reason=mlx scancount=1 engine=8.22.0-2610190000
- definitions=main-2610200080
-X-purgate-ID: tlsNG-bad1c0/1792528211-FDC6D034-729D452F/0/0
+MIME-Version: 1.0
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: ejCCdj6z0vmq38IcMMCUvFhyUrFTaiVIqncs1WNAsJ0_1792501202
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-42698a/1792501216-A9EC69EA-E1C505C4/0/0
 X-purgate-type: clean
-X-purgate-size: 15981
-X-Spam-Status: No, score=-15.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
-	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_2 autolearn=unavailable
+X-purgate-size: 13560
+X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Reviewed-by: Glenn Miles <milesg@linux.ibm.com>
+Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
 
-Thanks,
-
-Glenn
-
-On Tue, 2026-10-20 at 14:46 +0400, Marc-André Lureau wrote:
-> Replace hand-rolled string lookup tables with QAPI enums
-> Pca9552LedState and Pca955{2,4}PinState for the led%d and pin%d QOM
-> properties. This fixes the incorrect property type ("bool" for LEDs,
-> "str" for pins) and lets QAPI handle string-to-enum conversion in the
-> visitor, removing the manual string matching in the setters.
-> 
-> Add QEMU_BUILD_BUG_ON guards to ensure the QAPI-generated enum values
-> stay in sync with the hardware register encoding.
-> 
-> I kept Pca9552PinState & @Pca9554PinState separate types, because I
-> don't know if they could diverge. We could eventually merge those.
-> 
+> Define VirtioBalloonStats and VirtioBalloonGuestStats QAPI struct types
+> in the schema, replacing the hand-rolled visitor in balloon_stats_get_all=
+()
+> with a generated visit_type_VirtioBalloonGuestStats() call.
+>
+> The wire format is preserved: the JSON output from qom-get is identical
+> to the previous hand-rolled visitor output.
+>
 > Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 > ---
->  hw/gpio/pca9552.c | 82 +++++++++++++++++++++----------------------------------
->  hw/gpio/pca9554.c | 39 ++++++++++----------------
->  qapi/machine.json | 46 +++++++++++++++++++++++++++++++
->  3 files changed, 92 insertions(+), 75 deletions(-)
-> 
-> diff --git a/hw/gpio/pca9552.c b/hw/gpio/pca9552.c
-> index 719149b7174b..16741c22dea3 100644
-> --- a/hw/gpio/pca9552.c
-> +++ b/hw/gpio/pca9552.c
-> @@ -23,7 +23,8 @@
->  #include "hw/core/irq.h"
->  #include "migration/vmstate.h"
+>  docs/interop/virtio-balloon-stats.rst | 22 +--------
+>  hw/virtio/virtio-balloon.c            | 84 ++++++++++++-----------------=
+---
+>  qapi/machine.json                     | 92 +++++++++++++++++++++++++++++=
+++++++
+>  3 files changed, 123 insertions(+), 75 deletions(-)
+>
+> diff --git a/docs/interop/virtio-balloon-stats.rst b/docs/interop/virtio-=
+balloon-stats.rst
+> index b9a6a6edb229..88d3271bbb02 100644
+> --- a/docs/interop/virtio-balloon-stats.rst
+> +++ b/docs/interop/virtio-balloon-stats.rst
+> @@ -22,27 +22,7 @@ polling the guest's balloon driver for new stats in th=
+e specified time
+>  interval.
+> =20
+>  To retrieve those stats, clients have to query the guest-stats property,
+> -which will return a dictionary containing:
+> -
+> -  * A key named 'stats', containing all available stats. If the guest
+> -    doesn't support a particular stat, or if it couldn't be retrieved,
+> -    its value will be -1. Currently, the following stats are supported:
+> -
+> -      - stat-swap-in
+> -      - stat-swap-out
+> -      - stat-major-faults
+> -      - stat-minor-faults
+> -      - stat-free-memory
+> -      - stat-total-memory
+> -      - stat-available-memory
+> -      - stat-disk-caches
+> -      - stat-htlb-pgalloc
+> -      - stat-htlb-pgfail
+
+Missing here:
+
+          - stat-oom-kills
+          - stat-alloc-stalls
+          - stat-async-scans
+          - stat-direct-scans
+          - stat-async-reclaims
+          - stat-direct-reclaims
+
+Review note, not a request for anything.
+
+> -
+> -  * A key named last-update, which contains the last stats update
+> -    timestamp in seconds. Since this timestamp is generated by the host,
+> -    a buggy guest can't influence its value. The value is 0 if the guest
+> -    has not updated the stats (yet).
+> +which will return a VirtioBalloonGuestStats (see QAPI documentation).
+> =20
+>  It's also important to note the following:
+> =20
+> diff --git a/hw/virtio/virtio-balloon.c b/hw/virtio/virtio-balloon.c
+> index 7ffbe48e5134..bfc75f5dfc72 100644
+> --- a/hw/virtio/virtio-balloon.c
+> +++ b/hw/virtio/virtio-balloon.c
+> @@ -29,6 +29,8 @@
 >  #include "qapi/error.h"
-> -#include "qapi/visitor.h"
-> +#include "qapi/qapi-types-machine.h"
-> +#include "qapi/qapi-visit-machine.h"
->  #include "trace.h"
->  #include "qom/object.h"
->  
-> @@ -59,16 +60,15 @@ struct PCA955xClass {
->  /*
->   * Note:  The LED_ON and LED_OFF configuration values for the PCA955X
->   *        chips are the reverse of the PCA953X family of chips.
-> + *
-> + * The QAPI enums must match the hardware register values.
->   */
-> -#define PCA9552_LED_ON   0x0
-> -#define PCA9552_LED_OFF  0x1
-> -#define PCA9552_LED_PWM0 0x2
-> -#define PCA9552_LED_PWM1 0x3
-> -#define PCA9552_PIN_LOW  0x0
-> -#define PCA9552_PIN_HIZ  0x1
-> -
-> -static const char *led_state[] = {"on", "off", "pwm0", "pwm1"};
-> -static const char *pin_state[] = {"low", "high"};
-> +QEMU_BUILD_BUG_ON(PCA9552_LED_STATE_ON != 0x0);
-> +QEMU_BUILD_BUG_ON(PCA9552_LED_STATE_OFF != 0x1);
-> +QEMU_BUILD_BUG_ON(PCA9552_LED_STATE_PWM0 != 0x2);
-> +QEMU_BUILD_BUG_ON(PCA9552_LED_STATE_PWM1 != 0x3);
-> +QEMU_BUILD_BUG_ON(PCA9552_PIN_STATE_LOW != 0x0);
-> +QEMU_BUILD_BUG_ON(PCA9552_PIN_STATE_HIGH != 0x1);
->  
->  static uint8_t pca955x_pin_get_config(PCA955xState *s, int pin)
->  {
-> @@ -142,24 +142,24 @@ static void pca955x_update_pin_input(PCA955xState *s)
->              uint8_t config = pca955x_pin_get_config(s, i);
->  
->              switch (config) {
-> -            case PCA9552_LED_ON:
-> +            case PCA9552_LED_STATE_ON:
->                  /* Pin is set to 0V to turn on LED */
->                  s->regs[input_reg] &= ~bit_mask;
->                  break;
-> -            case PCA9552_LED_OFF:
-> +            case PCA9552_LED_STATE_OFF:
->                  /*
->                   * Pin is set to Hi-Z to turn off LED and
->                   * pullup sets it to a logical 1 unless
->                   * external device drives it low.
->                   */
-> -                if (s->ext_state[i] == PCA9552_PIN_LOW) {
-> +                if (s->ext_state[i] == PCA9552_PIN_STATE_LOW) {
->                      s->regs[input_reg] &= ~bit_mask;
->                  } else {
->                      s->regs[input_reg] |=  bit_mask;
->                  }
->                  break;
-> -            case PCA9552_LED_PWM0:
-> -            case PCA9552_LED_PWM1:
-> +            case PCA9552_LED_STATE_PWM0:
-> +            case PCA9552_LED_STATE_PWM1:
->                  /* TODO */
->              default:
->                  break;
-> @@ -176,7 +176,7 @@ static void pca955x_update_pin_input(PCA955xState *s)
->               */
->              if (s->regs[config_reg] & bit_mask) {
->                  /* Input mode - reflect external state */
-> -                if (s->ext_state[i] == PCA9552_PIN_LOW) {
-> +                if (s->ext_state[i] == PCA9552_PIN_STATE_LOW) {
->                      s->regs[input_reg] &= ~bit_mask;
->                  } else {
->                      s->regs[input_reg] |= bit_mask;
-> @@ -360,7 +360,7 @@ static void pca955x_get_led(Object *obj, Visitor *v, const char *name,
->      PCA955xClass *k = PCA955X_GET_CLASS(obj);
->      PCA955xState *s = PCA955X(obj);
->      int led, rc, reg;
-> -    uint8_t state;
-> +    Pca9552LedState state;
->  
->      rc = sscanf(name, "led%2d", &led);
->      if (rc != 1) {
-> @@ -378,7 +378,7 @@ static void pca955x_get_led(Object *obj, Visitor *v, const char *name,
->       */
->      reg = PCA9552_LS0 + led / 4;
->      state = (pca955x_read(s, reg) >> ((led % 4) * 2)) & 0x3;
-> -    visit_type_str(v, name, (char **)&led_state[state], errp);
-> +    visit_type_Pca9552LedState(v, name, &state, errp);
->  }
->  
->  /*
-> @@ -397,10 +397,9 @@ static void pca955x_set_led(Object *obj, Visitor *v, const char *name,
->      PCA955xClass *k = PCA955X_GET_CLASS(obj);
->      PCA955xState *s = PCA955X(obj);
->      int led, rc, reg, val;
-> -    uint8_t state;
-> -    g_autofree char *state_str = NULL;
-> +    Pca9552LedState state;
->  
-> -    if (!visit_type_str(v, name, &state_str, errp)) {
-> +    if (!visit_type_Pca9552LedState(v, name, &state, errp)) {
->          return;
->      }
->      rc = sscanf(name, "led%2d", &led);
-> @@ -413,16 +412,6 @@ static void pca955x_set_led(Object *obj, Visitor *v, const char *name,
->          return;
->      }
->  
-> -    for (state = 0; state < ARRAY_SIZE(led_state); state++) {
-> -        if (!strcmp(state_str, led_state[state])) {
-> -            break;
-> -        }
-> -    }
-> -    if (state >= ARRAY_SIZE(led_state)) {
-> -        error_setg(errp, "%s invalid led state %s", __func__, state_str);
-> -        return;
-> -    }
-> -
->      reg = PCA9552_LS0 + led / 4;
->      val = pca955x_read(s, reg);
->      val = pca955x_ledsel(val, led % 4, state);
-> @@ -437,7 +426,8 @@ static void pca955x_get_pin(Object *obj, Visitor *v, const char *name,
->      PCA955xClass *k = PCA955X_GET_CLASS(obj);
->      PCA955xState *s = PCA955X(obj);
->      int pin, rc;
-> -    uint8_t input_reg, state;
-> +    uint8_t input_reg;
-> +    Pca9552PinState state;
->  
->      rc = sscanf(name, "pin%2d", &pin);
->      if (rc != 1) {
-> @@ -455,7 +445,7 @@ static void pca955x_get_pin(Object *obj, Visitor *v, const char *name,
->       */
->      input_reg = PCA9535_INPUT0 + (pin / 8);
->      state = (s->regs[input_reg] >> (pin % 8)) & 0x1;
-> -    visit_type_str(v, name, (char **)&pin_state[state], errp);
-> +    visit_type_Pca9552PinState(v, name, &state, errp);
->  }
->  
->  static void pca955x_set_pin(Object *obj, Visitor *v, const char *name,
-> @@ -464,10 +454,10 @@ static void pca955x_set_pin(Object *obj, Visitor *v, const char *name,
->      PCA955xClass *k = PCA955X_GET_CLASS(obj);
->      PCA955xState *s = PCA955X(obj);
->      int pin, rc;
-> -    uint8_t state, config_reg;
-> -    g_autofree char *state_str = NULL;
-> +    Pca9552PinState state;
-> +    uint8_t config_reg;
->  
-> -    if (!visit_type_str(v, name, &state_str, errp)) {
-> +    if (!visit_type_Pca9552PinState(v, name, &state, errp)) {
->          return;
->      }
->      rc = sscanf(name, "pin%2d", &pin);
-> @@ -480,16 +470,6 @@ static void pca955x_set_pin(Object *obj, Visitor *v, const char *name,
->          return;
->      }
->  
-> -    for (state = 0; state < ARRAY_SIZE(pin_state); state++) {
-> -        if (!strcmp(state_str, pin_state[state])) {
-> -            break;
-> -        }
-> -    }
-> -    if (state >= ARRAY_SIZE(pin_state)) {
-> -        error_setg(errp, "%s invalid pin state %s", __func__, state_str);
-> -        return;
-> -    }
-> -
->      /* Only input-configured pins can be driven by an external device. */
->      config_reg = PCA9535_CONFIG0 + (pin / 8);
->      if (!((s->regs[config_reg] >> (pin % 8)) & 0x1)) {
-> @@ -499,7 +479,7 @@ static void pca955x_set_pin(Object *obj, Visitor *v, const char *name,
->          return;
->      }
->  
-> -    pca955x_set_ext_state(s, pin, state != PCA9552_PIN_LOW);
-> +    pca955x_set_ext_state(s, pin, state != PCA9552_PIN_STATE_LOW);
->  }
->  
->  static const VMStateDescription pca9552_vmstate = {
-> @@ -529,7 +509,7 @@ static void pca9552_reset_hold(Object *obj, ResetType type)
->      s->regs[PCA9552_LS2] = 0x55;
->      s->regs[PCA9552_LS3] = 0x55;
->  
-> -    memset(s->ext_state, PCA9552_PIN_HIZ, PCA955X_PIN_COUNT_MAX);
-> +    memset(s->ext_state, PCA9552_PIN_STATE_HIGH, PCA955X_PIN_COUNT_MAX);
->      pca955x_update_pin_input(s);
->  
->      s->pointer = 0xFF;
-> @@ -549,7 +529,7 @@ static void pca9535_reset_hold(Object *obj, ResetType type)
->      s->regs[PCA9535_CONFIG0] = 0xFF;  /* All pins as inputs */
->      s->regs[PCA9535_CONFIG1] = 0xFF;  /* All pins as inputs */
->  
-> -    memset(s->ext_state, PCA9552_PIN_HIZ, PCA955X_PIN_COUNT_MAX);
-> +    memset(s->ext_state, PCA9552_PIN_STATE_HIGH, PCA955X_PIN_COUNT_MAX);
->      pca955x_update_pin_input(s);
->  
->      s->pointer = 0xFF;
-> @@ -567,12 +547,12 @@ static void pca955x_initfn(Object *obj)
->          if (k->has_led_support) {
->              /* LED variant: expose the LED selector state as led%d. */
->              name = g_strdup_printf("led%d", ix);
-> -            object_property_add(obj, name, "bool",
-> +            object_property_add(obj, name, "Pca9552LedState",
->                                  pca955x_get_led, pca955x_set_led, NULL, NULL);
->          } else {
->              /* GPIO variant: expose the pin logic level as pin%d. */
->              name = g_strdup_printf("pin%d", ix);
-> -            object_property_add(obj, name, "str",
-> +            object_property_add(obj, name, "Pca9552PinState",
->                                  pca955x_get_pin, pca955x_set_pin, NULL, NULL);
->          }
->          g_free(name);
-> diff --git a/hw/gpio/pca9554.c b/hw/gpio/pca9554.c
-> index 904698cdce85..e4eddc829ef7 100644
-> --- a/hw/gpio/pca9554.c
-> +++ b/hw/gpio/pca9554.c
-> @@ -16,6 +16,8 @@
->  #include "hw/core/irq.h"
->  #include "migration/vmstate.h"
->  #include "qapi/error.h"
-> +#include "qapi/qapi-types-machine.h"
+>  #include "qapi/qapi-builtin-type-infos.h"
+>  #include "qapi/qapi-events-machine.h"
+> +#include "qapi/qapi-type-infos-machine.h"
 > +#include "qapi/qapi-visit-machine.h"
 >  #include "qapi/visitor.h"
 >  #include "trace.h"
->  #include "qom/object.h"
-> @@ -32,10 +34,8 @@ typedef struct PCA9554Class PCA9554Class;
->  DECLARE_CLASS_CHECKERS(PCA9554Class, PCA9554,
->                         TYPE_PCA9554)
->  
-> -#define PCA9554_PIN_LOW  0x0
-> -#define PCA9554_PIN_HIZ  0x1
-> -
-> -static const char *pin_state[] = {"low", "high"};
-> +QEMU_BUILD_BUG_ON(PCA9554_PIN_STATE_LOW != 0x0);
-> +QEMU_BUILD_BUG_ON(PCA9554_PIN_STATE_HIGH != 0x1);
->  
->  static void pca9554_update_pin_input(PCA9554State *s)
->  {
-> @@ -54,7 +54,7 @@ static void pca9554_update_pin_input(PCA9554State *s)
->               * Input: the pin is Hi-Z with a pull-up, so it reads high
->               * unless an external device drives it low.
->               */
-> -            if (s->ext_state[i] == PCA9554_PIN_LOW) {
-> +            if (s->ext_state[i] == PCA9554_PIN_STATE_LOW) {
->                  s->regs[PCA9554_INPUT] &= ~bit_mask;
->              } else {
->                  s->regs[PCA9554_INPUT] |= bit_mask;
-> @@ -156,7 +156,7 @@ static void pca9554_get_pin(Object *obj, Visitor *v, const char *name,
->  {
->      PCA9554State *s = PCA9554(obj);
->      int pin, rc;
-> -    uint8_t state;
-> +    Pca9554PinState state;
->  
->      rc = sscanf(name, "pin%2d", &pin);
->      if (rc != 1) {
-> @@ -175,7 +175,7 @@ static void pca9554_get_pin(Object *obj, Visitor *v, const char *name,
->       * holds the wire level regardless of the configured direction.
->       */
->      state = (s->regs[PCA9554_INPUT] >> pin) & 0x1;
-> -    visit_type_str(v, name, (char **)&pin_state[state], errp);
-> +    visit_type_Pca9554PinState(v, name, &state, errp);
+>  #include "qemu/error-report.h"
+> @@ -170,33 +172,8 @@ static void balloon_deflate_page(VirtIOBalloon *ball=
+oon,
+>      }
 >  }
->  
->  static void pca9554_set_pin(Object *obj, Visitor *v, const char *name,
-> @@ -183,10 +183,10 @@ static void pca9554_set_pin(Object *obj, Visitor *v, const char *name,
+> =20
+> -/*
+> - * All stats upto VIRTIO_BALLOON_S_NR /must/ have a
+> - * non-NULL name declared here, since these are used
+> - * as keys for populating the QDict with stats
+> - */
+> -static const char *balloon_stat_names[] =3D {
+> -   [VIRTIO_BALLOON_S_SWAP_IN] =3D "stat-swap-in",
+> -   [VIRTIO_BALLOON_S_SWAP_OUT] =3D "stat-swap-out",
+> -   [VIRTIO_BALLOON_S_MAJFLT] =3D "stat-major-faults",
+> -   [VIRTIO_BALLOON_S_MINFLT] =3D "stat-minor-faults",
+> -   [VIRTIO_BALLOON_S_MEMFREE] =3D "stat-free-memory",
+> -
+> -   [VIRTIO_BALLOON_S_MEMTOT] =3D "stat-total-memory",
+> -   [VIRTIO_BALLOON_S_AVAIL] =3D "stat-available-memory",
+> -   [VIRTIO_BALLOON_S_CACHES] =3D "stat-disk-caches",
+> -   [VIRTIO_BALLOON_S_HTLB_PGALLOC] =3D "stat-htlb-pgalloc",
+> -   [VIRTIO_BALLOON_S_HTLB_PGFAIL] =3D "stat-htlb-pgfail",
+> -
+> -   [VIRTIO_BALLOON_S_OOM_KILL] =3D "stat-oom-kills",
+> -   [VIRTIO_BALLOON_S_ALLOC_STALL] =3D "stat-alloc-stalls",
+> -   [VIRTIO_BALLOON_S_ASYNC_SCAN] =3D "stat-async-scans",
+> -   [VIRTIO_BALLOON_S_DIRECT_SCAN] =3D "stat-direct-scans",
+> -   [VIRTIO_BALLOON_S_ASYNC_RECLAIM] =3D "stat-async-reclaims",
+> -
+> -   [VIRTIO_BALLOON_S_DIRECT_RECLAIM] =3D "stat-direct-reclaims",
+
+Not missing here.
+
+> -};
+> -G_STATIC_ASSERT(G_N_ELEMENTS(balloon_stat_names) =3D=3D VIRTIO_BALLOON_S=
+_NR);
+> +/* Update VirtioBalloonStats QAPI type when new stats are added */
+> +G_STATIC_ASSERT(VIRTIO_BALLOON_S_NR =3D=3D 16);
+
+The assertion becomes awkward.
+
+What about ...
+
+> =20
+>  /*
+>   * reset_stats - Mark all items in the stats array as unset
+> @@ -258,33 +235,31 @@ static void balloon_stats_get_all(Object *obj, Visi=
+tor *v, const char *name,
+>                                    void *opaque, Error **errp)
 >  {
->      PCA9554State *s = PCA9554(obj);
->      int pin, rc, val;
-> -    uint8_t state, mask;
-> -    g_autofree char *state_str = NULL;
-> +    uint8_t mask;
-> +    Pca9554PinState state;
->  
-> -    if (!visit_type_str(v, name, &state_str, errp)) {
-> +    if (!visit_type_Pca9554PinState(v, name, &state, errp)) {
->          return;
->      }
->      rc = sscanf(name, "pin%2d", &pin);
-> @@ -199,16 +199,6 @@ static void pca9554_set_pin(Object *obj, Visitor *v, const char *name,
->          return;
->      }
->  
-> -    for (state = 0; state < ARRAY_SIZE(pin_state); state++) {
-> -        if (!strcmp(state_str, pin_state[state])) {
-> -            break;
-> -        }
-> -    }
-> -    if (state >= ARRAY_SIZE(pin_state)) {
-> -        error_setg(errp, "%s invalid pin state %s", __func__, state_str);
+>      VirtIOBalloon *s =3D VIRTIO_BALLOON(obj);
+> -    bool ok =3D false;
+> -    int i;
+> +    VirtioBalloonStats stats =3D {
+> +        .stat_swap_in =3D s->stats[VIRTIO_BALLOON_S_SWAP_IN],
+> +        .stat_swap_out =3D s->stats[VIRTIO_BALLOON_S_SWAP_OUT],
+> +        .stat_major_faults =3D s->stats[VIRTIO_BALLOON_S_MAJFLT],
+> +        .stat_minor_faults =3D s->stats[VIRTIO_BALLOON_S_MINFLT],
+> +        .stat_free_memory =3D s->stats[VIRTIO_BALLOON_S_MEMFREE],
+> +        .stat_total_memory =3D s->stats[VIRTIO_BALLOON_S_MEMTOT],
+> +        .stat_available_memory =3D s->stats[VIRTIO_BALLOON_S_AVAIL],
+> +        .stat_disk_caches =3D s->stats[VIRTIO_BALLOON_S_CACHES],
+> +        .stat_htlb_pgalloc =3D s->stats[VIRTIO_BALLOON_S_HTLB_PGALLOC],
+> +        .stat_htlb_pgfail =3D s->stats[VIRTIO_BALLOON_S_HTLB_PGFAIL],
+> +        .stat_oom_kills =3D s->stats[VIRTIO_BALLOON_S_OOM_KILL],
+> +        .stat_alloc_stalls =3D s->stats[VIRTIO_BALLOON_S_ALLOC_STALL],
+> +        .stat_async_scans =3D s->stats[VIRTIO_BALLOON_S_ASYNC_SCAN],
+> +        .stat_direct_scans =3D s->stats[VIRTIO_BALLOON_S_DIRECT_SCAN],
+> +        .stat_async_reclaims =3D s->stats[VIRTIO_BALLOON_S_ASYNC_RECLAIM=
+],
+> +        .stat_direct_reclaims =3D s->stats[VIRTIO_BALLOON_S_DIRECT_RECLA=
+IM],
+> +    };
+
+... putting it here?  This initializer also needs to be updated when
+stats are added.
+
+Another review note...  The kernel gives us an array of stats with
+well-known indexes.  Since we "improved" on that interface, we need to
+manually convert to struct.  Oh well.
+
+> +    VirtioBalloonGuestStats guest_stats =3D {
+> +        .last_update =3D s->stats_last_update,
+> +        .stats =3D &stats,
+> +    };
+> +    VirtioBalloonGuestStats *argp =3D &guest_stats;
+> =20
+> -    if (!visit_start_struct(v, name, NULL, 0, errp)) {
 > -        return;
 > -    }
+> -    if (!visit_type_int(v, "last-update", &s->stats_last_update, errp)) =
+{
+> -        goto out_end;
+> -    }
 > -
->      if (s->hw_dir) {
->          /* Warn and ignore if the guest has configured this pin as output */
->          if (!((s->regs[PCA9554_CONFIG] >> pin) & 0x1)) {
-> @@ -219,13 +209,13 @@ static void pca9554_set_pin(Object *obj, Visitor *v, const char *name,
->              return;
->          }
->          /* Drive the external input level */
-> -        pca9554_set_ext_state(s, pin, state != PCA9554_PIN_LOW);
-> +        pca9554_set_ext_state(s, pin, state != PCA9554_PIN_STATE_LOW);
->      } else {
->          /* Legacy behavior: force output mode and drive */
->          /* First, modify the output register bit */
->          val = pca9554_read(s, PCA9554_OUTPUT);
->          mask = 0x1 << pin;
-> -        if (state == PCA9554_PIN_LOW) {
-> +        if (state == PCA9554_PIN_STATE_LOW) {
->              val &= ~(mask);
->          } else {
->              val |= mask;
-> @@ -264,7 +254,7 @@ static void pca9554_reset(DeviceState *dev)
->      s->regs[PCA9554_POLARITY] = 0x0; /* No pins are inverted */
->      s->regs[PCA9554_CONFIG] = pin_mask; /* All pins are inputs */
->  
-> -    memset(s->ext_state, PCA9554_PIN_HIZ, pc->pin_count);
-> +    memset(s->ext_state, PCA9554_PIN_STATE_HIGH, pc->pin_count);
->      pca9554_update_pin_input(s);
->  
->      s->pointer = 0x0;
-> @@ -280,7 +270,8 @@ static void pca9554_initfn(Object *obj)
->          char *name;
->  
->          name = g_strdup_printf("pin%d", pin);
-> -        object_property_add(obj, name, "str", pca9554_get_pin, pca9554_set_pin,
-> +        object_property_add(obj, name, "Pca9554PinState",
-> +                            pca9554_get_pin, pca9554_set_pin,
->                              NULL, NULL);
->          g_free(name);
->      }
+> -    if (!visit_start_struct(v, "stats", NULL, 0, errp)) {
+> -        goto out_end;
+> -    }
+> -    for (i =3D 0; i < VIRTIO_BALLOON_S_NR; i++) {
+> -        if (!visit_type_uint64(v, balloon_stat_names[i], &s->stats[i], e=
+rrp)) {
+> -            goto out_nested;
+> -        }
+> -    }
+> -    ok =3D visit_check_struct(v, errp);
+> -out_nested:
+> -    visit_end_struct(v, NULL);
+> -
+> -    if (ok) {
+> -        visit_check_struct(v, errp);
+> -    }
+> -out_end:
+> -    visit_end_struct(v, NULL);
+> +    visit_type_VirtioBalloonGuestStats(v, name, &argp, errp);
+>  }
+> =20
+>  static void balloon_stats_get_poll_interval(Object *obj, Visitor *v,
+> @@ -1037,7 +1012,8 @@ static void virtio_balloon_instance_init(Object *ob=
+j)
+>      s->free_page_hint_cmd_id =3D VIRTIO_BALLOON_FREE_PAGE_HINT_CMD_ID_MI=
+N;
+>      s->free_page_hint_notify.notify =3D virtio_balloon_free_page_hint_no=
+tify;
+> =20
+> -    object_property_add(obj, "guest-stats", "guest statistics",
+> +    object_property_add_qapi(obj, "guest-stats",
+> +                        &VirtioBalloonGuestStats_type_info,
+>                          balloon_stats_get_all, NULL, NULL, NULL);
+
+The @type reported by qom-list & friends changes from "guest statistics"
+to "VirtioBalloonStats".  Such changes can be compatibility breaks.
+
+We accept this one, because:
+
+1. What "guest statistics" might mean was never documented.
+   ObjectPropertyInfo's (flawed) comment covers only "primitive", child
+   and link types, which misleadingly suggests values like this one
+   don't exist.
+
+2. We are not aware of anything relying on it, and we can't quite see
+   why anything would want to rely on it.
+
+3. @type is a bad interface we ought to deprecate in favor of
+   @qapi-type.
+
+All this needs to be noted in the commit message.  Perhaps even in
+release notes.  I guess the latter will be easier if we do deprecate
+@type.
+
+> =20
+>      object_property_add_qapi(obj, "guest-stats-polling-interval", &int_t=
+ype_info,
 > diff --git a/qapi/machine.json b/qapi/machine.json
-> index 34be3156270c..46b6935ab0b8 100644
+> index 9b145c635baf..34be3156270c 100644
 > --- a/qapi/machine.json
 > +++ b/qapi/machine.json
-> @@ -416,6 +416,52 @@
->  { 'enum': 'LostTickPolicy',
->    'data': ['discard', 'delay', 'slew' ] }
->  
+> @@ -1126,6 +1126,98 @@
+>  ##
+>  { 'struct': 'BalloonInfo', 'data': {'actual': 'int' } }
+> =20
 > +##
-> +# @Pca9552LedState:
+> +# @VirtioBalloonStats:
 > +#
-> +# LED state for PCA9552.
+> +# VirtIO balloon device guest memory statistics.
 > +#
-> +# @on: LED on
+> +# If the guest doesn't support a particular stat, or if it couldn't
+> +# be retrieved, its value will be -1.
+
+Please use the revised syntax for introductions:
+
+    ##
+    # @name: introduction, best to keep it brief, but you may continue it
+    #     like this if necessary.  If your text need to refer to arguments
+    #     / members, it's almost certainly not brief introduction anymore.
+    #
+    # Additional text can go here.  But do consider putting it further
+    # down.
+
+I apologize for the inconvenience.  We need this to eliminate certain
+syntactic ambiguities that plagued the doc generator.  We'll need it
+some more for the doc inliner.
+
 > +#
-> +# @off: LED off
+> +# @stat-swap-in: The amount of memory that has been
+> +#     swapped in (in bytes).
+
+Wrap lines at column 70, please.
+
 > +#
-> +# @pwm0: LED controlled by PWM0
+> +# @stat-swap-out: The amount of memory that has been
+> +#     swapped out to disk (in bytes).
 > +#
-> +# @pwm1: LED controlled by PWM1
+> +# @stat-major-faults: The number of major page faults
+> +#     that have occurred.
+> +#
+> +# @stat-minor-faults: The number of minor page faults
+> +#     that have occurred.
+> +#
+> +# @stat-free-memory: The amount of memory not being used
+> +#     for any purpose (in bytes).
+> +#
+> +# @stat-total-memory: The total amount of memory available
+> +#     (in bytes).
+> +#
+> +# @stat-available-memory: An estimate of how much memory is available
+> +#     (in bytes) for starting new applications, without pushing the
+> +#     system to swap.
+> +#
+> +# @stat-disk-caches: The amount of memory, in bytes, that can be
+> +#     quickly reclaimed without additional I/O.  Typically these pages
+> +#     are used for caching files from disk.
+> +#
+> +# @stat-htlb-pgalloc: The number of successful hugetlb page
+> +#     allocations
+> +#
+> +# @stat-htlb-pgfail: The number of failed hugetlb page
+> +#     allocations
+> +#
+> +# @stat-oom-kills: The number of OOM killer invocations
+> +#
+> +# @stat-alloc-stalls: The number of memory allocation stalls
+> +#
+> +# @stat-async-scans: The number of memory scanned asynchronously
+> +#
+> +# @stat-direct-scans: The number of memory scanned directly
+> +#
+> +# @stat-async-reclaims: The number of memory reclaimed asynchronously
+> +#
+> +# @stat-direct-reclaims: The number of memory reclaimed directly
 > +#
 > +# Since: 11.2
+
+The actual interface, namely the device property, is much older (1.4?).
+Do we care?  I'm not sure; this isn't part of QMP proper, it's for use
+with QOM, where documentation has always been rather weak.
+
 > +##
-> +{ 'enum': 'Pca9552LedState',
-> +  'data': ['on', 'off', 'pwm0', 'pwm1'] }
+> +{ 'struct': 'VirtioBalloonStats',
+> +  'data': {
+> +    'stat-swap-in': 'uint64',
+> +    'stat-swap-out': 'uint64',
+> +    'stat-major-faults': 'uint64',
+> +    'stat-minor-faults': 'uint64',
+> +    'stat-free-memory': 'uint64',
+> +    'stat-total-memory': 'uint64',
+> +    'stat-available-memory': 'uint64',
+> +    'stat-disk-caches': 'uint64',
+> +    'stat-htlb-pgalloc': 'uint64',
+> +    'stat-htlb-pgfail': 'uint64',
+> +    'stat-oom-kills': 'uint64',
+> +    'stat-alloc-stalls': 'uint64',
+> +    'stat-async-scans': 'uint64',
+> +    'stat-direct-scans': 'uint64',
+> +    'stat-async-reclaims': 'uint64',
+> +    'stat-direct-reclaims': 'uint64' } }
+
+I don't like the "stat-" prefix, but we can't change that now.
+
 > +
 > +##
-> +# @Pca9552PinState:
+> +# @VirtioBalloonGuestStats:
 > +#
-> +# Pin state for PCA9552.
+> +# Guest statistics from the VirtIO balloon device.
+
+Please use the revised syntax for introductions.
+
 > +#
-> +# @low: Pin low
+> +# @last-update: timestamp in seconds of the last stats
+> +#     update from the guest (since this timestamp is generated
+> +#     by the host, a buggy guest can't influence its value),
+> +#     or 0 if no update has been received yet.
+
+The original text is=20
+
+  * A key named last-update, which contains the last stats update
+    timestamp in seconds. Since this timestamp is generated by the host,
+    a buggy guest can't influence its value. The value is 0 if the guest
+    has not updated the stats (yet).
+
+Threee sentences instead of one with a parenthesis.  I find this easier
+to read.
+
 > +#
-> +# @high: Pin high
+> +# @stats: balloon memory statistics
 > +#
 > +# Since: 11.2
 > +##
-> +{ 'enum': 'Pca9552PinState',
-> +  'data': ['low', 'high'] }
-> +
-> +##
-> +# @Pca9554PinState:
-> +#
-> +# Pin state for PCA9554.
-> +#
-> +# @low: Pin low
-> +#
-> +# @high: Pin high
-> +#
-> +# Since: 11.2
-> +##
-> +{ 'enum': 'Pca9554PinState',
-> +  'data': ['low', 'high'] }
+> +{ 'struct': 'VirtioBalloonGuestStats',
+> +  'data': {
+> +    'last-update': 'int',
+> +    'stats': 'VirtioBalloonStats' } }
 > +
 >  ##
->  # @inject-nmi:
->  #     Injects a Non-Maskable Interrupt (machine specific: for example
-> 
+>  # @query-balloon:
+>  #     Return information about the balloon device.
 
 
