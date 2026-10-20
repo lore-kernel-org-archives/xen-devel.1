@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33D3D606A31C
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:07 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4359B606A319
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:09 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=BOWeipw9
-Received: from list by lists.xenproject.org with outflank-mailman.1455344.1669133 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=R1ZglALc
+Received: from list by lists.xenproject.org with outflank-mailman.1455343.1669125 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Wb-0002qV-CT; Tue, 20 Oct 2026 10:56:57 +0000
+	id 1xJ7WZ-0002QC-Or; Tue, 20 Oct 2026 10:56:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455344.1669133; Tue, 20 Oct 2026 10:56:56 +0000
+Received: by outflank-mailman (output) from mailman id 1455343.1669125; Tue, 20 Oct 2026 10:56:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7WZ-0002l8-Q9; Tue, 20 Oct 2026 10:56:55 +0000
-Received: by outflank-mailman (input) for mailman id 1455344;
- Tue, 20 Oct 2026 10:51:05 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xJ7WX-0002KG-R4; Tue, 20 Oct 2026 10:56:53 +0000
+Received: by outflank-mailman (input) for mailman id 1455343;
+ Tue, 20 Oct 2026 10:51:04 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qv-0000AR-NM
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:05 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qt-00009H-TY
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7Qv-002FXm-47
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:05 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xJ7Qt-004d7w-AO
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:03 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7478f-bab6-0a2a0a5309dd-0a2a4505d420-22
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:05 +0200
+ id 6ad74790-8faa-0a2a0a5109dd-0a2a450be49e-38
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:03 +0200
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7475a-4cb1-0a2a45050019-aa0a817c826f-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:04 +0200
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
+ id 6ad7471d-b7e8-0a2a450b0019-aa0a817c7943-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:49:02 +0200
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-691-X_BZbfi1OoaEw-XuKd7GEA-1; Tue,
- 20 Oct 2026 10:49:57 +0000
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-517-GSbpLDLrPQqHZRQ94vMg0A-1; Tue,
+ 20 Oct 2026 10:48:59 +0000
+Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 382911954B17; Tue, 20 Oct 2026 10:49:53 +0000 (UTC)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 401F418002AD; Tue, 20 Oct 2026 10:48:55 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 89D3D1956089; Tue, 20 Oct 2026 10:49:50 +0000 (UTC)
+ by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 4CB201800257; Tue, 20 Oct 2026 10:48:52 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493402;
+	s=mimecast20190719; t=1792493341;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=zgYXy9wUlwpZwJEXhfhg6ueZe5iP6OdFNQDVMpjhNJA=;
-	b=BOWeipw9WxhEler+SP0WenptoYrcVWFdcYkTTIlvIHnxl7sPdiWMA0oxqEFr945ebzsYo0
-	P17DXAeI97qM2dPjnj28vJc0XJJn7SbsZUJn/8cGp4Uw+pV9DVZs/WsNRIF9vkzpMI9iJN
-	b9KDO5+9/M7+1JFEbjRRPHHGA09SD4M=
-X-MC-Unique: X_BZbfi1OoaEw-XuKd7GEA-1
-X-Mimecast-MFC-AGG-ID: X_BZbfi1OoaEw-XuKd7GEA_1792493393
+	bh=vqRAumP9Q4P45v+BnAaswZB9eyGK4924nboYOJbbp2E=;
+	b=R1ZglALcFIqD4UxGynC9vb3nFq+Jj2YAK6AuSJmSzfD4w2F1iyswNIuVIgjY3HN0yUGVY/
+	kE+GlXWLD9Q8Cl/YT5IjWsv9I8ncIITWrpbeEsMmcuf2B9CNmONYq/aSjwv76U2MnvXsra
+	j5vZ5HMcWF+Fmcc1ks2hSfmwAwvSJhI=
+X-MC-Unique: GSbpLDLrPQqHZRQ94vMg0A-1
+X-Mimecast-MFC-AGG-ID: GSbpLDLrPQqHZRQ94vMg0A_1792493335
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:57 +0400
-Subject: [PATCH v7 40/65] accel/hvf: convert OnOffSplit property to
+Date: Tue, 20 Oct 2026 14:45:47 +0400
+Subject: [PATCH v7 30/65] whpx: convert OnOffAuto arch properties to
  QAPI-aware registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-40-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-30-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,31 +152,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2523;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=6702;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=21V2JPj2rB3XQ9p0Fpt/4Sfi5TlT/INiy3CejR1RcSQ=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10Zbcvmz2dcDonHaGuZ+0JSpCQbdwS1IqolsF
- mrcOSZwsk+JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWwAKCRDa6OEJdZac
- 5fbMD/4oDBa4aRAcuosgqEgTN/lLvXMd4CMMg/8NISFX3WirC2kLfaACPLJXeKGgyRmLFD49aZS
- C90374vVULKD25rkYEUinJNvw+z9cP8i/VTdLPCDvrtC/7kvYoqnDLVLO3J2Q3Wd5nfI6rmQZEk
- BwtAVjR6SSBb0iStYbJyVtP1TklsvdIlQhIhxfshPIqRwse/RgRnOxnAYRNMRVtDhm7Vu0j9+oI
- wQB+bCNaqKS88nEJIGu53wZ2zbS3wyEAQfjpFxwi2bIDLHSRhy3a07Hpo2bHHN003BU8sQAI530
- fQnkPZFCQYFsKo1aZUPu739hgcgJsTtebTEHP7wVhaY5T9oTYjhlHy1h4bcxUIi+sUYQMwDz/B2
- FNBgAkMwUmaom+WrzqUMDHFkmLBUULwbNeGiCgyNquapgGac7N7DQsItMvc5RouXeu8HIEjusQP
- ji/64PxnCl55S40Wr93VNww9w+uHtJ2MYwSRdIxtBvnRYW8k45wZ6f8n/bZ43PwOPLzkIMPhkAB
- AZPh9GndU9GtEDdzZQobzjyi5YtG9aqyHYwsF8IvbkM9hDWBKeSxYQInUbsFVgKYsEzJt9ORvoG
- Xh7xWXHM+nTdrSEW+k93/3Qu2ekkPkSElHFptLpXseE43g35XzS9fsK0+PV6Y6aNivNUO37QrR2
- au4mCAtBZO6aHYg==
+ bh=F8HZ01XPkkBAtzYnAznI+OeIpIRAjOQCT4x6+nWcsZQ=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZaNHtr+AkGnY6QtTL0vsHs6SXFQUQ8MQ6i4
+ S1YABGB6XOJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
+ 5U3+D/0bY0Yw06OplfGaxwkWeRkmM8vGPJ5F9M0cVeicCg/oXCYp+UKgC78TYi76WRGpbyL2C7S
+ 0KxXaqPjOuPoiru3KbrrdebJxsrbKZijDWmhlIsP9jywqVWMuCB+weipCeiSrSWcM8KYKDNl6lh
+ BAGjS+eZuivN40OoVe2PxA7lKt96RrybUNJq39LwnTdm/8Lx0x5A7nOmtMf6p5zUDEy6bO9wTJ9
+ /9cnmG5OgUn4fNab0GmXDPDj2/b7lDQNLOZQiOEE1aPD1CnruklCEcrbKrMXEZIYQc9JkVJVviZ
+ sWu3vDJ9GCWP/JGd6P26BcaZeOw6qiIfSjJgGMcE3CyRguBdSr4ldn+yC83f6n9vVa68VDVU85t
+ PoSwXa0eYL0MCuvzu1v2GPnE/oDcMkqhH7+e/tLdejjt7K9jX7qtbmGTnHtszQGZv3Bn0tfV3RM
+ fJtheu+i9GFuCM5MxESNY85RUBO6acenPHsR1+nmHtqbICIGanSHvfZzCXqJL4WwAH/IRbzic4F
+ sB4SZ4sCdErodKNcNWECfUhDwpvmtfzJ5r4PC9kT3qEABypAk8pdibNyUNuaX6p+KJtOwuuQsnA
+ NP6Npp4aqbXBUyIW3gZUAcetZJhmn/V7jRQ/TFEG2uGqdOa3T2YNGJ9TDknE1CAeWkCjRf+IwA6
+ Z2YAEk2bZvmBjgQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: Z0XUv_bmELUFBRsn_Y3lCCIiU8iMB11Msyq1zWIBHjY_1792493393
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
+X-Mimecast-MFC-PROC-ID: Xuyrt3XswhHI2RK1JKKZM-_NHEB4wC0uqSybdHo9TwU_1792493335
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1792493404-F68B62A1-15046773/0/0
+X-purgate-ID: tlsNG-42698a/1792493342-1B2DC9EA-5FBEBB9C/0/0
 X-purgate-type: clean
-X-purgate-size: 2525
+X-purgate-size: 6704
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -185,54 +185,96 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Convert the OnOffSplit property from manual visitor-based
-callbacks to property_add_qapi_enum().
+Convert the ignore-unknown-msr, intercept-msr-gp, and ssd OnOffAuto
+properties from manual visitor-based callbacks to
+property_add_qapi_enum().
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- accel/hvf/hvf-all.c | 29 +++++++++++------------------
- 1 file changed, 11 insertions(+), 18 deletions(-)
+ target/i386/whpx/whpx-all.c | 101 +++++++++++++++-----------------------------
+ 1 file changed, 34 insertions(+), 67 deletions(-)
 
-diff --git a/accel/hvf/hvf-all.c b/accel/hvf/hvf-all.c
-index 8bd9154a50b6..2fd594ad156f 100644
---- a/accel/hvf/hvf-all.c
-+++ b/accel/hvf/hvf-all.c
-@@ -11,6 +11,7 @@
- #include "qemu/osdep.h"
+diff --git a/target/i386/whpx/whpx-all.c b/target/i386/whpx/whpx-all.c
+index 113f79afb9ab..64fa389a2f93 100644
+--- a/target/i386/whpx/whpx-all.c
++++ b/target/i386/whpx/whpx-all.c
+@@ -30,7 +30,7 @@
  #include "qemu/error-report.h"
  #include "qapi/error.h"
+ #include "qapi/qapi-types-common.h"
+-#include "qapi/qapi-visit-common.h"
 +#include "qapi/qapi-type-infos-common.h"
- #include "qapi/qapi-visit-common.h"
- #include "accel/accel-ops.h"
- #include "exec/cpu-common.h"
-@@ -230,18 +231,12 @@ static int hvf_accel_init(AccelState *as, MachineState *ms)
-     return hvf_arch_init();
+ #include "migration/blocker.h"
+ #include "host-cpu.h"
+ #include "accel/accel-cpu-target.h"
+@@ -1875,6 +1875,7 @@ void whpx_apply_breakpoints(
+     }
  }
  
--static void hvf_set_kernel_irqchip(Object *obj, Visitor *v,
--                                   const char *name, void *opaque,
-+static void hvf_set_kernel_irqchip(Object *obj, int value,
-                                    Error **errp)
++
+ void whpx_arch_destroy_vcpu(CPUState *cpu)
  {
--    OnOffSplit mode;
--
-     hvf_kernel_irqchip_override = true;
--    if (!visit_type_OnOffSplit(v, name, &mode, errp)) {
+     X86CPU *x86cpu = X86_CPU(cpu);
+@@ -1955,7 +1956,7 @@ static int whpx_handle_hyperv_guestidle(CPUState *cpu)
+     return whpx_handle_halt(cpu);
+ }
+ 
+-static void whpx_vcpu_kick_out_of_hlt(CPUState *cpu) 
++static void whpx_vcpu_kick_out_of_hlt(CPUState *cpu)
+ {
+     WHV_REGISTER_VALUE reg;
+     whpx_get_reg(cpu, WHvRegisterInternalActivityState, &reg);
+@@ -2059,7 +2060,7 @@ static void whpx_vcpu_pre_run(CPUState *cpu)
+                 .Vector = irq,
+             };
+             reg_count += 1;
+-            /* 
++            /*
+              * When the Hyper-V APIC is enabled, to get out of HLT we
+              * either have to request an interrupt or manually get it away
+              * from HLT.
+@@ -2359,7 +2360,7 @@ int whpx_vcpu_run(CPUState *cpu)
+             WHV_REGISTER_VALUE reg_values[3] = {0};
+             WHV_REGISTER_NAME reg_names[3];
+             UINT32 reg_count;
+-            bool is_known_msr = 0; 
++            bool is_known_msr = 0;
+             bool raises_gpf = false;
+             uint64_t val;
+ 
+@@ -2911,120 +2912,86 @@ void whpx_cpu_instance_init(CPUState *cs)
+  * Partition support
+  */
+ 
+-static void whpx_set_unknown_msr(Object *obj, Visitor *v,
+-                                   const char *name, void *opaque,
+-                                   Error **errp)
++static void whpx_set_unknown_msr(Object *obj, int value, Error **errp)
+ {
+     struct whpx_state *whpx = &whpx_global;
+-    OnOffAuto mode;
+ 
+-    if (!visit_type_OnOffAuto(v, name, &mode, errp)) {
 -        return;
 -    }
- 
+-
 -    switch (mode) {
 +    switch (value) {
-     case ON_OFF_SPLIT_ON:
- #ifdef HOST_X86_64
-         /* macOS 12 onwards exposes an HVF virtual APIC. */
-@@ -261,11 +256,7 @@ static void hvf_set_kernel_irqchip(Object *obj, Visitor *v,
+     case ON_OFF_AUTO_ON:
+         whpx->ignore_unknown_msr = true;
          break;
- 
+-
+     case ON_OFF_AUTO_OFF:
+         whpx->ignore_unknown_msr = false;
+         break;
+-
+     case ON_OFF_AUTO_AUTO:
+         whpx->ignore_unknown_msr = true;
+         break;
      default:
 -        /*
--         * The value was checked in visit_type_OnOffSplit() above. If
+-         * The value was checked in visit_type_OnOffAuto() above. If
 -         * we get here, then something is wrong in QEMU.
 -         */
 -        abort();
@@ -240,25 +282,117 @@ index 8bd9154a50b6..2fd594ad156f 100644
      }
  }
  
-@@ -277,11 +268,13 @@ static void hvf_accel_class_init(ObjectClass *oc, const void *data)
-     ac->allowed = &hvf_allowed;
-     hvf_kernel_irqchip_override = false;
-     hvf_kernel_irqchip = false;
--    object_class_property_add(oc, "kernel-irqchip", "on|off|split",
--        NULL, hvf_set_kernel_irqchip,
+-static void whpx_set_intercept_msr_gp(Object *obj, Visitor *v,
+-                                   const char *name, void *opaque,
+-                                   Error **errp)
++static void whpx_set_intercept_msr_gp(Object *obj, int value, Error **errp)
+ {
+     struct whpx_state *whpx = &whpx_global;
+-    OnOffAuto mode;
+ 
+-    if (!visit_type_OnOffAuto(v, name, &mode, errp)) {
+-        return;
+-    }
+-
+-    switch (mode) {
++    switch (value) {
+     case ON_OFF_AUTO_ON:
+         whpx->intercept_msr_gp = true;
+         break;
+-
+     case ON_OFF_AUTO_OFF:
+         whpx->intercept_msr_gp = false;
+         break;
+-
+     case ON_OFF_AUTO_AUTO:
+         whpx->intercept_msr_gp = false;
+         break;
+     default:
+-        /*
+-         * The value was checked in visit_type_OnOffAuto() above. If
+-         * we get here, then something is wrong in QEMU.
+-         */
+-        abort();
++        g_assert_not_reached();
+     }
+ }
+ 
+-static void whpx_set_ssd(Object *obj, Visitor *v,
+-                                   const char *name, void *opaque,
+-                                   Error **errp)
++static void whpx_set_ssd(Object *obj, int value, Error **errp)
+ {
+     struct whpx_state *whpx = &whpx_global;
+-    OnOffAuto mode;
+ 
+-    if (!visit_type_OnOffAuto(v, name, &mode, errp)) {
+-        return;
+-    }
+-
+-    switch (mode) {
++    switch (value) {
+     case ON_OFF_AUTO_ON:
+         whpx->separate_security_domain = true;
+         break;
+-
+     case ON_OFF_AUTO_OFF:
+         whpx->separate_security_domain = false;
+         break;
+-
+     case ON_OFF_AUTO_AUTO:
+         whpx->separate_security_domain = true;
+         break;
+     default:
+-        /*
+-         * The value was checked in visit_type_OnOffAuto() above. If
+-         * we get here, then something is wrong in QEMU.
+-         */
+-        abort();
++        g_assert_not_reached();
+     }
+ }
+ 
+ 
+ void whpx_arch_accel_class_init(ObjectClass *oc)
+ {
+-    object_class_property_add(oc, "ignore-unknown-msr", "OnOffAuto",
+-        NULL, whpx_set_unknown_msr,
 -        NULL, NULL);
--    object_class_property_set_description(oc, "kernel-irqchip",
--        "Configure HVF irqchip");
+-    object_class_property_set_description(oc, "ignore-unknown-msr",
+-        "Configure unknown MSR behavior");
+-    object_class_property_add(oc, "intercept-msr-gp", "OnOffAuto",
+-        NULL, whpx_set_intercept_msr_gp,
+-        NULL, NULL);
+-    object_class_property_set_description(oc, "intercept-msr-gp",
+-        "Intercept #GP to log erroring MSR accesses.");
+-    object_class_property_add(oc, "ssd", "OnOffAuto",
+-        NULL, whpx_set_ssd,
+-        NULL, NULL);
+-    object_class_property_set_description(oc, "ssd",
+-        "Separate security domain");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "ignore-unknown-msr",
++        .description = "Configure unknown MSR behavior",
++        .qapi_type = &OnOffAuto_type_info,
++        .set = whpx_set_unknown_msr,
++    ));
 +
 +    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = "kernel-irqchip",
-+        .qapi_type = &OnOffSplit_type_info,
-+        .set = hvf_set_kernel_irqchip,
-+        .description = "Configure HVF irqchip",
++        .name = "intercept-msr-gp",
++        .description = "Intercept #GP to log erroring MSR accesses.",
++        .qapi_type = &OnOffAuto_type_info,
++        .set = whpx_set_intercept_msr_gp,
++    ));
++
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "ssd",
++        .description = "Separate security domain",
++        .qapi_type = &OnOffAuto_type_info,
++        .set = whpx_set_ssd,
 +    ));
  }
  
- static const TypeInfo hvf_accel_type = {
+ int whpx_accel_init(AccelState *as, MachineState *ms)
 
 -- 
 2.56.0.116.g6de20f6092dc
