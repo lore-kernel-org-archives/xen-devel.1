@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08C1F606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20011606A31B
 	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=SS6C7+uE
-Received: from list by lists.xenproject.org with outflank-mailman.1455317.1669008 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=KaWZWAvu
+Received: from list by lists.xenproject.org with outflank-mailman.1455310.1668972 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7W8-0005DX-BG; Tue, 20 Oct 2026 10:56:28 +0000
+	id 1xJ7W0-0003p3-P2; Tue, 20 Oct 2026 10:56:20 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455317.1669008; Tue, 20 Oct 2026 10:56:27 +0000
+Received: by outflank-mailman (output) from mailman id 1455310.1668972; Tue, 20 Oct 2026 10:56:20 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7W7-0005AO-17; Tue, 20 Oct 2026 10:56:27 +0000
-Received: by outflank-mailman (input) for mailman id 1455317;
- Tue, 20 Oct 2026 10:50:47 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xJ7Vz-0003lW-S2; Tue, 20 Oct 2026 10:56:19 +0000
+Received: by outflank-mailman (input) for mailman id 1455310;
+ Tue, 20 Oct 2026 10:50:41 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qd-0008Uf-HD
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:47 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7QX-0008SN-R1
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:41 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7Qc-00Crdk-UE
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:46 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xJ7QX-00HRtL-7a
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:41 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7477c-2eae-0a2a0a5409dd-0a2a4507e786-16
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:46 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad7477b-e002-0a2a0a5209dd-0a2a450ac7d0-18
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:41 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad746d1-b4ea-0a2a45070019-aa0a857c7e31-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:46 +0200
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ id 6ad746cb-f2d2-0a2a450a0019-aa0a817c6749-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:40 +0200
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-98-b50LkXhBNAOr4KDZgzOCJQ-1; Tue,
- 20 Oct 2026 06:47:41 -0400
-Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-635-ofFqrjFmNVuI0_Rhk-bdPQ-1; Tue,
+ 20 Oct 2026 10:47:36 +0000
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 0944C1955F10; Tue, 20 Oct 2026 10:47:37 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id C6E151955F2B; Tue, 20 Oct 2026 10:47:31 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 2487E418; Tue, 20 Oct 2026 10:47:34 +0000 (UTC)
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id B32B31956089; Tue, 20 Oct 2026 10:47:28 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,23 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493265;
+	s=mimecast20190719; t=1792493259;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=+mUlmiLA0IUJrEFhhdtqFL7MoWyX2aJUgEr0fLN0OLI=;
-	b=SS6C7+uEhqtNUXezaeMbtvhstrOQmCgu0s3y+3E+BtHv3tfr0kag5KFKHNhW3JBuYaaMH7
-	Z0y1/boFOo6SErFAGe6fIF0DeEZgXq7994YgT0jVxJTWqGW2UQzXaBnpBZ0xwyE3ennvma
-	CgF8xSLirWR7345uZ+XW1dKTWwHGFUg=
-X-MC-Unique: b50LkXhBNAOr4KDZgzOCJQ-1
-X-Mimecast-MFC-AGG-ID: b50LkXhBNAOr4KDZgzOCJQ_1792493257
+	bh=xIOxZR09tVRL3LoeQ2VRl9bxdzxaCKN+MMqdzDBpGyw=;
+	b=KaWZWAvuU3i6WT/33/tFs0Zu9uqcKTv9JPWvnAzqLH/ekNIQvzzBzbw5/t+WQG6+gszsdW
+	p3fiDEHcxfRw3UiaJpXuYm1AKDQia4yGtBoJ8TP0wPDs+jm2KrbdGz/EVnIhKr2oBIDOL+
+	6n+A7ELc4UxVCpz40noodKo4AtQc7rE=
+X-MC-Unique: ofFqrjFmNVuI0_Rhk-bdPQ-1
+X-Mimecast-MFC-AGG-ID: ofFqrjFmNVuI0_Rhk-bdPQ_1792493252
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:32 +0400
-Subject: [PATCH v7 15/65] qom: add object_property_set_default_enum()
+Date: Tue, 20 Oct 2026 14:45:31 +0400
+Subject: [PATCH v7 14/65] qom/qmp: populate description & default-value in
+ qom_property_info()
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-15-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-14-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -151,88 +152,100 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=1741;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2485;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=bT9PbeYHomyeIGAcVfTDM+lJI5Y2hBOOffhp2f1n7bs=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZY3cZceXMTAsDTPVPQLUPiFXhCtfGOTuUzE
- ex7dEME5rOJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
- 5YB4D/9GPjvfJ9QnS3NS7uzoH3zuMz6cgmZWUWiCGV7tsWnNbbIfmXnGwpWDwpNzL9cRsohPRiM
- Tt8mSTGA/sJmszkK+oQShJ63FCmfW5pbd7ruMCtTStlRVh8rCjUWyx0b9IGf9lj7a1sXuaMjRiZ
- RmIstsYrcvq9fJ0J5SM1RTodk1Qvgn2pQe7pG/U8OW8Myg6fto5tvml4IN5pYuE4YB/AteIWUfl
- cy3Y6JisAPLbkZWEjeehnRqpYjs8lJcEc0jd6jT5Ajm3DFQFLMkmckRPpjNofoDbeN1tQ7K0s98
- vwayy8xoutwUgsV9wX6qCvRBLY1+DpxNBTHm+xV32yF2estcn1ixmHngJQMaNbWwx3sJ0FueH2i
- nHGW2/UH0XkgcegNOKOcSppusTIisYEHOeK2W37dK7A4gv7fgemaMBfKADWuc6jN/xKP4O2sAOs
- EPPKK+R1nyzBdIIsDWdYkhnmUpz08PjAX7t/9zIyQvJy6HeZMYEvqH92Dv9Aqm0tKTwJeHGv8Mx
- G+jFxLb6K1GFyZQ9S6izdwx5JWqfiEfKijUzBP4iLHpB4BirgMYkk/bqayFVYZSlxI7iVj9lGda
- LEl9RmhNncJu8lNAZW9bmWSGo4Vlr/rpl4jKvIuRbcz2N62kMeZEEXIRFPUNBGeJNDW8b+FYyQK
- eIre7G+lNeX5Okw==
+ bh=uHhhGddxQUOPXHn3kN1zjJ5emGyO+zAsacCmEIp7fMU=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZYLHL/+jjl6D3jfhu6YY8r0v/h+oK3dZuqT
+ ezvQZmL6dCJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
+ 5aAaD/48dANrC6kyut3XOROjrQRxjwUIv0i0xWNW1n7ucgCFOO9+fWLOIuRBmElFO8tK1LUW7VK
+ /cncnMEOpfNGGxBqlK4/E7MLLWxcEJ5PONbxrrynUEl5/6iktSG9+p0FbZ+69Ig8sBSWsaKMfX/
+ TjixcX9RrpcR4kM6W9+KDi3doDCw2opXnVXJs1dfbDHber2cptUgcPZg2klCeonD69YCtbh4E9V
+ frLj2F6fhDEwXovHE9dmaAYXrx4MUlWNnWXF7Ghho/OQ4AT803/e68yxS2d9vGvR6oW5buPzIu1
+ mlrM9vteISWAcBit+HYHv2uAYbAEKeadp5Ifyen2Y9sH0dNkfWUPOKHL3vno7uRTfS18hxD4e86
+ 26PatMtqKUJup7iwHq5V9QigizN31NfbU5AoBe12vGQ+E4qUTFiii1meZ1Syaz0HEsBut5DlGZB
+ jKTxA5YXNzKXzh2gMr+EtfsPvTLms/u/oHjnzmZgwDvCIzLlT/lSl87AwFbhpHDBguQjcfTQ0Mg
+ K1VhLdp03W/CZAUX9UALGzwbqu8DJbYjRo9rTfwd+PDdexNm4+dmZiWa48aQpfFwu3KSXV4xnXK
+ BbNdAPMgYnoyiVVLq2Hy2zHqhvba3qJkOIDNjbbdfwMBrbGOpIDzaSUIS939LVbTmE62eCGjZ/p
+ HPrxdrpQOIPKiOQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
-X-Mimecast-MFC-PROC-ID: ZBBJlYuRB8K_9BoZJwGdjr0B2xJ0iydyhq8fqGlVnE4_1792493257
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: FeVsWjfg37di_klvrJYx_7uFtzdaewDopNYqLE3-ttk_1792493252
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1792493266-3C212AE4-4F2B330F/0/0
+X-purgate-ID: tlsNG-4011c0/1792493260-4ACDBCFC-02A7C6A7/0/0
 X-purgate-type: clean
-X-purgate-size: 1743
+X-purgate-size: 2487
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-A simple helper to set the default enum value from the integer value.
+Move description and default_value population from the individual QMP
+handlers into qom_property_info(), so all callers get them.
+
+This also adds description and default-value to qom-list responses,
+which previously only returned name and type. The handler doesn't care.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- include/qom/object.h | 9 +++++++++
- qom/object.c         | 9 +++++++++
- 2 files changed, 18 insertions(+)
+ qom/qom-qmp-cmds.c | 17 ++++-------------
+ 1 file changed, 4 insertions(+), 13 deletions(-)
 
-diff --git a/include/qom/object.h b/include/qom/object.h
-index e9b380462ded..2a5723c555e9 100644
---- a/include/qom/object.h
-+++ b/include/qom/object.h
-@@ -1260,6 +1260,15 @@ void object_property_set_default_bool(ObjectProperty *prop, bool value);
-  */
- void object_property_set_default_str(ObjectProperty *prop, const char *value);
+diff --git a/qom/qom-qmp-cmds.c b/qom/qom-qmp-cmds.c
+index 47bf3bf2937a..84a295905148 100644
+--- a/qom/qom-qmp-cmds.c
++++ b/qom/qom-qmp-cmds.c
+@@ -35,6 +35,8 @@ static ObjectPropertyInfo *qom_property_info(ObjectProperty *prop)
  
-+/**
-+ * object_property_set_default_enum:
-+ * @prop: the property to set
-+ * @value: the value to be written to the property
-+ *
-+ * Set the property default value.
-+ */
-+void object_property_set_default_enum(ObjectProperty *prop, int value);
-+
- /**
-  * object_property_set_default_list:
-  * @prop: the property to set
-diff --git a/qom/object.c b/qom/object.c
-index c34b47312f29..1d09315b328b 100644
---- a/qom/object.c
-+++ b/qom/object.c
-@@ -1719,6 +1719,15 @@ void object_property_set_default_str(ObjectProperty *prop, const char *value)
-     object_property_set_default(prop, QOBJECT(qstring_from_str(value)));
- }
+     info->name = g_strdup(prop->name);
+     info->type = g_strdup(prop->type);
++    info->description = g_strdup(prop->description);
++    info->default_value = qobject_ref(prop->defval);
+     if (prop->qapi_type) {
+         assert(prop->qapi_type->masked_name);
+         info->qapi_type = g_strdup(prop->qapi_type->masked_name);
+@@ -243,8 +245,6 @@ ObjectPropertyInfoList *qmp_device_list_properties(const char *typename,
  
-+void object_property_set_default_enum(ObjectProperty *prop, int value)
-+{
-+    assert(prop && prop->qapi_type && prop->qapi_type->lookup);
-+
-+    object_property_set_default(prop, QOBJECT(qstring_from_str(
-+        qapi_enum_lookup(prop->qapi_type->lookup, value)
-+    )));
-+}
-+
- void object_property_set_default_list(ObjectProperty *prop)
- {
-     object_property_set_default(prop, QOBJECT(qlist_new()));
+     object_property_iter_init(&iter, obj);
+     while ((prop = object_property_iter_next(&iter))) {
+-        ObjectPropertyInfo *info;
+-
+         /* Skip Object and DeviceState properties */
+         if (strcmp(prop->name, "type") == 0 ||
+             strcmp(prop->name, "realized") == 0 ||
+@@ -254,11 +254,7 @@ ObjectPropertyInfoList *qmp_device_list_properties(const char *typename,
+             continue;
+         }
+ 
+-        info = qom_property_info(prop);
+-        info->description = g_strdup(prop->description);
+-        info->default_value = qobject_ref(prop->defval);
+-
+-        QAPI_LIST_PREPEND(prop_list, info);
++        QAPI_LIST_PREPEND(prop_list, qom_property_info(prop));
+     }
+ 
+     object_unref(obj);
+@@ -295,12 +291,7 @@ ObjectPropertyInfoList *qmp_qom_list_properties(const char *typename,
+         object_property_iter_init(&iter, obj);
+     }
+     while ((prop = object_property_iter_next(&iter))) {
+-        ObjectPropertyInfo *info = qom_property_info(prop);
+-
+-        info->description = g_strdup(prop->description);
+-        info->default_value = qobject_ref(prop->defval);
+-
+-        QAPI_LIST_PREPEND(prop_list, info);
++        QAPI_LIST_PREPEND(prop_list, qom_property_info(prop));
+     }
+ 
+     object_unref(obj);
 
 -- 
 2.56.0.116.g6de20f6092dc
