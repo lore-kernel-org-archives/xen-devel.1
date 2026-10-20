@@ -2,39 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3182C606A319
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 20:09:16 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1456397.1669766 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B9158606A322
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 20:09:56 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=Ld63QP+w
+Received: from list by lists.xenproject.org with outflank-mailman.1456423.1669776 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJG8x-0005ZP-So; Tue, 20 Oct 2026 20:09:07 +0000
+	id 1xJG9X-00067W-8y; Tue, 20 Oct 2026 20:09:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1456397.1669766; Tue, 20 Oct 2026 20:09:07 +0000
+Received: by outflank-mailman (output) from mailman id 1456423.1669776; Tue, 20 Oct 2026 20:09:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJG8x-0005ZI-Q1; Tue, 20 Oct 2026 20:09:07 +0000
-Received: by outflank-mailman (input) for mailman id 1456397;
- Tue, 20 Oct 2026 20:09:06 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xJG9X-00067K-5s; Tue, 20 Oct 2026 20:09:43 +0000
+Received: by outflank-mailman (input) for mailman id 1456423;
+ Tue, 20 Oct 2026 20:09:42 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcus.granado@citrix.com>) id 1xJG8w-0005Yy-BH
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 20:09:06 +0000
+ (envelope-from <willemdebruijn.kernel@gmail.com>) id 1xJG9V-00066k-Rq
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 20:09:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJG8v-00GP9w-MT
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 22:09:05 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xJG9U-005ZVS-9r
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 22:09:40 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marcus.granado@citrix.com>)
- id 6ad7ca61-e002-0a2a0a5209dd-0a2a4505b4c0-0
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 22:09:05 +0200
-Received: from [160.101.131.9] (helo=na1pdmzitismtp02.tibco.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marcus.granado@citrix.com>)
- id 6ad7c933-4cb1-0a2a45050019-a0658309e30e-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 22:04:04 +0200
-Received: from mewpvdipd1023.citrite.net (unknown [10.113.40.46])
- by na1pdmzitismtp02.tibco.com (Postfix) with ESMTPS id A843A8424213;
- Tue, 20 Oct 2026 16:03:19 -0400 (EDT)
+ (envelope-from <willemdebruijn.kernel@gmail.com>)
+ id 6ad7ca66-2eae-0a2a0a5409dd-0a2a450781d8-40
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 22:09:40 +0200
+Received: from [209.85.221.177] (helo=mail-vk1-f177.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <willemdebruijn.kernel@gmail.com>)
+ id 6ad7ca83-b4ea-0a2a45070019-d155ddb1bd29-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 22:09:40 +0200
+Received: by mail-vk1-f177.google.com with SMTP id
+ 71dfb90a1353d-5eadf48fb2dso342404e0c.1
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 13:09:39 -0700 (PDT)
+Received: from gmail.com (111.46.245.35.bc.googleusercontent.com.
+ [35.245.46.111]) by smtp.gmail.com with ESMTPSA id
+ 71dfb90a1353d-5eae981d239sm558143e0c.14.2026.10.20.13.09.38
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 20 Oct 2026 13:09:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -43,484 +50,164 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
-From: Marcus Granado <marcus.granado@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Marcus Granado <marcus.granado@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Frediano Ziglio <freddy77@gmail.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	=?UTF-8?q?Marek=20Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v2 3/9] tools/libs/guest: decompress LZ4 PAGE_DATA records on restore
-Date: Tue, 20 Oct 2026 21:02:31 +0100
-Message-ID: <20261020200238.1815766-4-marcus.granado@citrix.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261020200238.1815766-1-marcus.granado@citrix.com>
-References: <20261020200238.1815766-1-marcus.granado@citrix.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:References:In-Reply-To:Message-ID:Cc:To:From:Date"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792526979; x=1793131779; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:subject
+         :references:in-reply-to:message-id:cc:to:from:date:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=a/FHpmQozRyX6PRPz0UuyxMFmwgJ5gMZhHW6lZCR6ao=;
+        b=Ld63QP+wpVX3p6wu7jJgh6l5DU8PF/HGrKdVjwBsMIjMk/IEHRkFEL1RwJ2H9xtIdh
+         hdrHYWyZBRCcCcwoIuSOpiALmlMNnNbTM/nOug78c642ckA1uRKz2+fpUIhsqna9/aq4
+         9+/4ZPNeQ4d4yNsDCpkP8y3Ex/gtdmYT5PmQyQXIMXRHX4jq91UBzJpp9hQphM7YI03c
+         mNPARTu9yhSjzK5ut2i/W2DNDpxJSSQ53/2Ng0fsYbNWHSS99GUd/g314VUcSb2o/xBj
+         HvG2IjVIelMx4VFx3uGlVzB4Rmb2V+k6Y6W/CnmLCccaKyziDi6FViItY+TftP9Eb44C
+         wpLQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1792526979; x=1793131779;
+        h=content-transfer-encoding:content-type:mime-version:subject
+         :references:in-reply-to:message-id:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=a/FHpmQozRyX6PRPz0UuyxMFmwgJ5gMZhHW6lZCR6ao=;
+        b=Ps/SD5I1koKC+7kcNwBJK1jK+QmfwvUqlEHJw1Lzm5IVjbz+kxJeyiNtOOwxnIQmB7
+         7XNI0w24LUwUOKgHzYBUGuWbbVCPk11P6+TmOXcYxyDqOr3Wz1k/gK7y+bVomCrsIwm1
+         cJKtPWpEW4wwkrIAUqqhftURf5K+EyMpq+EtZ1il73h5dCOwRN6atJ4qNF+zU5Veft5J
+         JbgkCYfwrX5YASxvmVb8Lg1/ynVeNQbXMZqCi0te+7+6F41HjLnzJ9bNc01nqT0djoCi
+         vclvfotVrZGMTHZed5+Cg/1iT3IXHWMBcjRPzW+NSmrR5cZYzxqhqtX4qa1KPcTaLT64
+         xhvQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzCefBG+he103LYwLQtg+BG5SLNeolZfGSjwIJOc18CQF71y9NVuqKnwEMybeykRF60P/uSfg1fES4=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIKn1uAnqmzrlsEIK+m07NYJekD7Rw3P0cqgENyGbNxfWqycg9i
+	VDeMDluhPFVf9SRt1OkKJlhGVLtDFKgMt5s8kT1tA/zngGaaKocXrrEg
+X-Gm-Gg: AYBFou1kFkAbGUF4hNOIXuI1EobOIhEDXTbHk6Lu8i2t0uPNLaswXScIKMD2YySWKHw
+	CE/9TqBjit7m8cQz+xD0Ov9/fRGjb1DDeBO4fQwnGwdFC/StmZJ4djlOmGhx5CEE5YiVJr31HYd
+	OuIrMm1GWKCEVPsTh/0wI7hj90NaHm/flKctfLZc6sr5azM9D2Xb8SBRQk6TqWsvrJeSmLOvbD2
+	DQ8cItBqaRjEczvfk59Ce7mHVcGc33tSddAnjXW5zVaHhjQlj8TRs4ZbrQYkfEFqYU8VV7Jtbb/
+	tMelvEa+P/S0nb+0c5+mpl+slihr9niCg3N4L7IzIuBcDYCUjKNoxx7vt/WfJRvE1oXS5vOSeK1
+	WSWGeY0YL40JxQ4aY6acKlM+uVlghNTFAjqQPtK5pxv5kn/fiv61XsCrnPvmmAfgYvvMvfAC4Ll
+	gdPOVdCGLJvMmj4roMWUUdETCtjauRwYw6hGkfgHgD/VnGAkgVFOObxIXOKmG0nHbF6bczMYvm3
+	n2K3ixTVsykyYSpGhp6Uq/8yAG8Pv1AnubjyM30IxHFUBbzPao7tTwxb1cLI/zAqrWpcZrkJBCu
+	1hejPTpqJBnvWj6QzWtsBIkY3vqZ80SbYwD+1w==
+X-Received: by 2002:a05:6122:8616:b0:5c9:a60b:e5c8 with SMTP id 71dfb90a1353d-5eaaa414a8bmr4189894e0c.11.1792526978625;
+        Tue, 20 Oct 2026 13:09:38 -0700 (PDT)
+Date: Tue, 20 Oct 2026 16:09:37 -0400
+From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+To: Josef Bacik <josef@toxicpanda.com>, 
+ "David S. Miller" <davem@davemloft.net>, 
+ Eric Dumazet <edumazet@kernel.org>, 
+ Jakub Kicinski <kuba@kernel.org>, 
+ Paolo Abeni <pabeni@redhat.com>, 
+ Simon Horman <horms@kernel.org>, 
+ Andrew Lunn <andrew+netdev@lunn.ch>
+Cc: Juergen Gross <jgross@suse.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
+ Fernando Fernandez Mancera <fmancera@suse.de>, 
+ Mina Almasry <almasrymina@google.com>, 
+ David Laight <david.laight.linux@gmail.com>, 
+ netdev@vger.kernel.org, 
+ xen-devel@lists.xenproject.org, 
+ Josef Bacik <josef@toxicpanda.com>
+Message-ID: <willemdebruijn.kernel.29f6b224b2d77@gmail.com>
+In-Reply-To: <20261019-b4-skbuff-bug-on-followups-v1-11-41dbef50b9f7@toxicpanda.com>
+References: <20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7@toxicpanda.com>
+ <20261019-b4-skbuff-bug-on-followups-v1-11-41dbef50b9f7@toxicpanda.com>
+Subject: Re: [PATCH net-next 11/15] net: skbuff: refuse to segment a nested
+ frag_list
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1792526644-726B52A1-715D3F49/13/0
+Content-Type: text/plain;
+ charset=utf-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1792526980-37AD0AE4-C1C76924/0/0
 X-purgate-type: clean
-X-purgate-size: 18558
-X-Spam-Status: No, score=-21.8 required=3.0 tests=BAYES_00,
+X-purgate-size: 2825
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-PAGE_DATA records carry page contents uncompressed; algorithm 0x00 is
-the only one assigned in their flags field.  Compressing them would put
-less data on the wire during migration, at a CPU cost on both hosts,
-worth paying where the bottleneck is the link, or encryption of the
-stream by ssh or TLS.
+Josef Bacik wrote:
+> skb_segment() walks head_skb's frag_list, but for each member it only
+> looks at the linear part and frags[], never at the member's own
+> frag_list.  head_skb->len still counts those bytes, so with a nested
+> frag_list the walk runs out of members while it still owes data, sets
+> list_skb to NULL, and dereferences it on the next pass, before any of
+> the layout checks get a chance to catch it.
+> 
+> Nothing in the tree is known to build such an skb; GRO flushes instead
+> of chaining an skb that already has a frag_list.  Check for it up front
+> and fail the segmentation with -EINVAL, with a DEBUG_NET_WARN_ON_ONCE()
+> for debug kernels, like the other frag_list layout checks.
+> 
+> Assisted-by: LLM
+> Signed-off-by: Josef Bacik <josef@toxicpanda.com>
+> ---
+>  net/core/skbuff.c | 21 +++++++++++++++++++++
+>  1 file changed, 21 insertions(+)
+> 
+> diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+> index 56cec58bccb7..b6ada54ecc57 100644
+> --- a/net/core/skbuff.c
+> +++ b/net/core/skbuff.c
+> @@ -4962,6 +4962,17 @@ struct sk_buff *skb_segment_list(struct sk_buff *skb,
+>  }
+>  EXPORT_SYMBOL_GPL(skb_segment_list);
+>  
+> +/* skb_segment() only walks one level of frag_list. */
+> +static bool skb_segment_nested_frag_list(const struct sk_buff *head_skb)
+> +{
+> +	const struct sk_buff *iter;
+> +
+> +	skb_walk_frags(head_skb, iter)
+> +		if (skb_has_frag_list(iter))
+> +			return true;
 
-Assign algorithm 0x01 (PAGE_DATA_ALGO_LZ4) to LZ4, and decode it on
-restore.  page_data is then one LZ4 frame: LZ4 for its speed, and its
-Frame Format because it is specified outside Xen, delimits itself and
-can carry block checksums.  This encoding requires these checksums, as
-without them a corrupted frame can decode into wrong page contents;
-liblz4 accepts a frame without them, so the decoder checks the
-block-checksum flag itself.
+We can probably check the same without adding an extra skb_walk_frags.
 
-The output size comes from the pfn array, and the frame must decode to
-exactly that size and end where the record ends.  Before decoding, the
-record must have no more pages of data than the decoder's buffer holds
-(the most the saver puts in a record), and a payload strictly shorter
-than the uncompressed page data.  The stream specification requires the
-latter for a saver: it makes an older libxenguest which ignores the
-flags field fail its exact length check on these records, rather than
-take the frame for page contents.
+Perhaps
 
-Nothing emits algorithm 0x01 yet, so receivers can be updated first.
-Restore has no option to turn it on or off: any stream may use it.
+@@ -5025,6 +5025,12 @@ struct sk_buff *skb_segment(struct sk_buff *head_skb,
+ 
+                while (pos < offset + len) {
+                        if (i >= nfrags) {
++                               if (unlikely(!list_skb || skb_has_frag_list(list_skb))) {
++                                       DEBUG_NET_WARN_ON_ONCE(1);
++                                       err = -EINVAL;
++                                       goto err;
++                               }
++
 
-The decoder is guarded by XG_SR_LZ4, which xg_sr_common.h defines when
-HAVE_LZ4 is set and liblz4 is 1.8.1 or later, avoiding releases with
-known decoder bugs.  A build without XG_SR_LZ4 rejects
-algorithm 0x01 with an error naming the missing LZ4 support.  configure
-puts -DHAVE_LZ4 and liblz4's CFLAGS in ZLIB_CFLAGS, which only
-xg_dom_bzimageloader.o used: apply it to every libxenguest object, so
-that HAVE_LZ4, and the layout of any structure that depends on it,
-cannot differ between objects.
+> +	return false;
+> +}
+> +
+>  /**
+>   *	skb_segment - Perform protocol segmentation on skb.
+>   *	@head_skb: buffer to segment
+> @@ -5023,6 +5034,16 @@ struct sk_buff *skb_segment(struct sk_buff *head_skb,
+>  	sg = !!(features & NETIF_F_SG);
+>  	csum = !!can_checksum_protocol(features, proto);
+>  
+> +	/* The walk below never looks inside a member's own frag_list, but
+> +	 * head_skb->len counts those bytes, so it would run out of members
+> +	 * and dereference a NULL list_skb.
+> +	 */
+> +	if (unlikely(list_skb && skb_segment_nested_frag_list(head_skb))) {
+> +		DEBUG_NET_WARN_ON_ONCE(1);
+> +		err = -EINVAL;
+> +		goto err;
+> +	}
+> +
+>  	if (sg && csum && !gso_by_frags)  {
+>  		if (!max_segs && !(features & NETIF_F_GSO_PARTIAL)) {
+>  			struct sk_buff *iter;
+> 
+> -- 
+> 2.55.0
+> 
 
-The Python stream validator checks algorithm 0x01's payload length and
-block-checksum flag, and test_page_data_flags gains LZ4 cases.
-
-Suggested-by: Teddy Astie <teddy.astie@vates.tech>
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Marcus Granado <marcus.granado@citrix.com>
----
-
-Notes:
-    Changes in v2:
-    - Was v1 2/6, which decoded per-page LZ4 blocks from a new PAGE_DATA_LZ4
-      record.  Now PAGE_DATA algorithm 0x01: one LZ4 frame per record, as
-      Teddy Astie suggested, with mandatory block checksums.
-    - The uncompressed size asked for by Teddy Astie and Frediano Ziglio
-      comes from the pfn array; the decode buffer has a fixed size.
-
- docs/specs/libxc-migration-stream.pandoc |  24 +++-
- tools/libs/guest/Makefile                |   2 +-
- tools/libs/guest/xg_sr_common.h          |  16 +++
- tools/libs/guest/xg_sr_restore.c         | 141 ++++++++++++++++++++++-
- tools/libs/guest/xg_sr_stream_format.h   |   1 +
- tools/python/xen/migration/libxc.py      |  23 ++++
- tools/python/xen/migration/tests.py      |  31 ++++-
- 7 files changed, 229 insertions(+), 9 deletions(-)
-
-diff --git a/docs/specs/libxc-migration-stream.pandoc b/docs/specs/libxc-migration-stream.pandoc
-index fd44dd6e0a..2d25e70e13 100644
---- a/docs/specs/libxc-migration-stream.pandoc
-+++ b/docs/specs/libxc-migration-stream.pandoc
-@@ -40,8 +40,6 @@ Not Yet Included
- The following features are not yet fully specified and will be
- included in a future draft.
- 
--* Page data compression.
--
- * ARM
- 
- 
-@@ -305,7 +303,24 @@ flags       Bit 7-0:  Algorithm used to encode page_data.
-                       0x00: None.  page_data is page_size octets of
-                             uncompressed contents per present page.
- 
--                      0x01 - 0xFF: Unassigned.
-+                      0x01: LZ4.  page_data is a single LZ4 frame, as
-+                            defined by the LZ4 Frame Format specification[^1],
-+                            whose decompressed content is page_size octets
-+                            for each present page.  A restoring side must
-+                            reject a frame which does not decode to exactly
-+                            that many octets, or which does not end where
-+                            page_data ends.
-+
-+                            The frame must set the block-checksum flag in
-+                            its frame descriptor, and a restoring side must
-+                            reject one which does not.
-+
-+                            A saving side may only use this value when the
-+                            frame is strictly shorter than the uncompressed
-+                            page_data it replaces; otherwise it must send the
-+                            record with algorithm 0x00.
-+
-+                      0x02 - 0xFF: Unassigned.
- 
-                       A restoring side must fail on an algorithm value it
-                       does not implement, rather than attempting to
-@@ -371,6 +386,9 @@ guest's P2M table during a live migration[^2].
- 
- Restoring an image with unrecognised page types shall fail.
- 
-+[^1]: LZ4 Frame Format Description, version 1.6.4:
-+<https://github.com/lz4/lz4/blob/v1.10.0/doc/lz4_Frame_format.md>
-+
- [^2]: In the legacy format, this is the list of unmapped PFNs in the
- tail.
- 
-diff --git a/tools/libs/guest/Makefile b/tools/libs/guest/Makefile
-index 93338a9301..037f1f4de9 100644
---- a/tools/libs/guest/Makefile
-+++ b/tools/libs/guest/Makefile
-@@ -3,7 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
- 
- include Makefile.common
- 
--xg_dom_bzimageloader.o xg_dom_bzimageloader.opic: CFLAGS += $(ZLIB_CFLAGS)
-+CFLAGS += $(ZLIB_CFLAGS)
- 
- $(LIBELF_OBJS:.o=.opic): CFLAGS += -Wno-pointer-sign
- 
-diff --git a/tools/libs/guest/xg_sr_common.h b/tools/libs/guest/xg_sr_common.h
-index c07c6db59e..53647caa30 100644
---- a/tools/libs/guest/xg_sr_common.h
-+++ b/tools/libs/guest/xg_sr_common.h
-@@ -3,6 +3,18 @@
- 
- #include <stdbool.h>
- 
-+#if defined(HAVE_LZ4)
-+#include <lz4.h>
-+/*
-+ * 1.8.1 fixed a memcpy() from NULL in LZ4F_decompress().
-+ * 1.9.0's decoder reads past its input (fixed in 1.9.1).
-+ */
-+#if LZ4_VERSION_NUMBER >= 10801 && LZ4_VERSION_NUMBER != 10900
-+#include <lz4frame.h>
-+#define XG_SR_LZ4
-+#endif
-+#endif
-+
- #include "xg_private.h"
- #include "xg_save_restore.h"
- #include "xg_sr_stream_format.h"
-@@ -277,6 +289,10 @@ struct xc_sr_context
-             /* Whether a STATIC_DATA_END record has been seen/inferred. */
-             bool seen_static_data_end;
- 
-+            /* LZ4 decoder buffer and context, allocated on first use. */
-+            void *lz4_decomp_buf;
-+            void *lz4_dctx;
-+
- /*
-  * With Remus/COLO, we buffer the records sent by the primary at checkpoint,
-  * in case the primary will fail, we can recover from the last
-diff --git a/tools/libs/guest/xg_sr_restore.c b/tools/libs/guest/xg_sr_restore.c
-index 93b020b55f..29a3b13253 100644
---- a/tools/libs/guest/xg_sr_restore.c
-+++ b/tools/libs/guest/xg_sr_restore.c
-@@ -354,6 +354,120 @@ static int process_page_data(struct xc_sr_context *ctx, unsigned int count,
-     return rc;
- }
- 
-+#if defined(XG_SR_LZ4)
-+/*
-+ * Decode the LZ4 frame at src into ctx->restore.lz4_decomp_buf.  The
-+ * decoded size comes from the pfn array.
-+ */
-+static void *decompress_page_data(struct xc_sr_context *ctx, const void *src,
-+                                  size_t src_len, unsigned int nr_pages)
-+{
-+    xc_interface *xch = ctx->xch;
-+    LZ4F_frameInfo_t info;
-+    size_t expected = (size_t)nr_pages * PAGE_SIZE;
-+    size_t out_len = expected, hdr_len = src_len, rest_len, in_len, ret;
-+
-+    /* The buffer is a fixed MAX_BATCH_SIZE pages. */
-+    if ( nr_pages > MAX_BATCH_SIZE )
-+    {
-+        ERROR("Compressed PAGE_DATA record with %u pages exceeds MAX_BATCH_SIZE %u",
-+              nr_pages, MAX_BATCH_SIZE);
-+        return NULL;
-+    }
-+
-+    /* The format requires the frame to be strictly shorter than the pages. */
-+    if ( src_len >= expected )
-+    {
-+        ERROR("LZ4 frame in PAGE_DATA record (%zu bytes) is not shorter than its page data (%zu bytes)",
-+              src_len, expected);
-+        return NULL;
-+    }
-+
-+    if ( !ctx->restore.lz4_dctx )
-+    {
-+        LZ4F_dctx *dctx = NULL;
-+
-+        ret = LZ4F_createDecompressionContext(&dctx, LZ4F_VERSION);
-+        if ( LZ4F_isError(ret) )
-+        {
-+            ERROR("Unable to create LZ4 decompression context");
-+            return NULL;
-+        }
-+        ctx->restore.lz4_dctx = dctx;
-+    }
-+
-+    /* Start each frame at its header (restore stops at any error). */
-+    LZ4F_resetDecompressionContext(ctx->restore.lz4_dctx);
-+
-+    ret = LZ4F_getFrameInfo(ctx->restore.lz4_dctx, &info, src, &hdr_len);
-+    if ( LZ4F_isError(ret) )
-+    {
-+        ERROR("LZ4 frame in PAGE_DATA record has a bad header: %s",
-+              LZ4F_getErrorName(ret));
-+        return NULL;
-+    }
-+
-+    /* liblz4 accepts frames without the block checksums required here. */
-+    if ( info.blockChecksumFlag != LZ4F_blockChecksumEnabled )
-+    {
-+        ERROR("LZ4 frame in PAGE_DATA record has no block checksums");
-+        return NULL;
-+    }
-+
-+    if ( !ctx->restore.lz4_decomp_buf )
-+    {
-+        ctx->restore.lz4_decomp_buf = malloc(MAX_BATCH_SIZE * PAGE_SIZE);
-+        if ( !ctx->restore.lz4_decomp_buf )
-+        {
-+            ERROR("Unable to allocate %lu bytes for decompression",
-+                  (unsigned long)MAX_BATCH_SIZE * PAGE_SIZE);
-+            return NULL;
-+        }
-+    }
-+
-+    /* LZ4F_getFrameInfo() read the header; decode the rest of the frame. */
-+    rest_len = src_len - hdr_len;
-+    in_len = rest_len;
-+
-+    /* NULL options: checksums are verified; liblz4 keeps its own buffers. */
-+    ret = LZ4F_decompress(ctx->restore.lz4_dctx, ctx->restore.lz4_decomp_buf,
-+                          &out_len, (const uint8_t *)src + hdr_len, &in_len,
-+                          NULL);
-+
-+    if ( LZ4F_isError(ret) )
-+    {
-+        ERROR("Failed to decompress PAGE_DATA record: %s",
-+              LZ4F_getErrorName(ret));
-+        return NULL;
-+    }
-+
-+    /* Not an error, but the frame did not end: input or output ran out. */
-+    if ( ret != 0 )
-+    {
-+        ERROR("LZ4 frame in PAGE_DATA record is truncated or decodes to over %zu bytes",
-+              expected);
-+        return NULL;
-+    }
-+
-+    /* in_len and out_len now hold the bytes consumed and produced. */
-+    if ( out_len != expected )
-+    {
-+        ERROR("LZ4 frame in PAGE_DATA record produced %zu bytes, expected %zu",
-+              out_len, expected);
-+        return NULL;
-+    }
-+
-+    if ( in_len != rest_len )
-+    {
-+        ERROR("LZ4 frame in PAGE_DATA record followed by %zu unconsumed bytes",
-+              rest_len - in_len);
-+        return NULL;
-+    }
-+
-+    return ctx->restore.lz4_decomp_buf;
-+}
-+#endif /* XG_SR_LZ4 */
-+
- /*
-  * Validate a PAGE_DATA record from the stream, and pass the results to
-  * process_page_data() to actually perform the legwork.
-@@ -363,6 +477,7 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-     xc_interface *xch = ctx->xch;
-     struct xc_sr_rec_page_data_header *pages = rec->data;
-     unsigned int i, pages_of_data = 0;
-+    void *page_data;
-     int rc = -1;
- 
-     xen_pfn_t *pfns = NULL, pfn;
-@@ -463,6 +578,8 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-         types[i] = type;
-     }
- 
-+    page_data = &pages->pfn[pages->count];
-+
-     switch ( pages->flags & PAGE_DATA_ALGO_MASK )
-     {
-     case PAGE_DATA_ALGO_NONE:
-@@ -478,14 +595,29 @@ static int handle_page_data(struct xc_sr_context *ctx, struct xc_sr_record *rec)
-         }
-         break;
- 
-+    case PAGE_DATA_ALGO_LZ4:
-+#if defined(XG_SR_LZ4)
-+    {
-+        size_t hdrsz = sizeof(*pages) + (sizeof(uint64_t) * pages->count);
-+
-+        page_data = decompress_page_data(ctx, page_data,
-+                                         rec->length - hdrsz, pages_of_data);
-+        if ( !page_data )
-+            goto err;
-+        break;
-+    }
-+#else
-+        ERROR("LZ4 compressed PAGE_DATA record but LZ4 support not compiled in");
-+        goto err;
-+#endif
-+
-     default:
-         ERROR("Unsupported algorithm %u in PAGE_DATA record",
-               (unsigned int)(pages->flags & PAGE_DATA_ALGO_MASK));
-         goto err;
-     }
- 
--    rc = process_page_data(ctx, pages->count, pfns, types,
--                           &pages->pfn[pages->count]);
-+    rc = process_page_data(ctx, pages->count, pfns, types, page_data);
-  err:
-     free(types);
-     free(pfns);
-@@ -822,6 +954,11 @@ static void cleanup(struct xc_sr_context *ctx)
- 
-     free(ctx->restore.buffered_records);
-     free(ctx->restore.populated_pfns);
-+    free(ctx->restore.lz4_decomp_buf);
-+#if defined(XG_SR_LZ4)
-+    if ( ctx->restore.lz4_dctx )
-+        LZ4F_freeDecompressionContext(ctx->restore.lz4_dctx);
-+#endif
- 
-     if ( ctx->restore.ops.cleanup(ctx) )
-         PERROR("Failed to clean up");
-diff --git a/tools/libs/guest/xg_sr_stream_format.h b/tools/libs/guest/xg_sr_stream_format.h
-index f839d874c8..af695ae771 100644
---- a/tools/libs/guest/xg_sr_stream_format.h
-+++ b/tools/libs/guest/xg_sr_stream_format.h
-@@ -92,6 +92,7 @@ struct xc_sr_rec_page_data_header
- #define PAGE_DATA_FLAGS_RESZ_MASK 0xffffff00U
- 
- #define PAGE_DATA_ALGO_NONE       0x00000000U
-+#define PAGE_DATA_ALGO_LZ4        0x00000001U
- 
- #define PAGE_DATA_PFN_MASK      0x000fffffffffffffULL
- #define PAGE_DATA_PFN_RESZ_MASK 0x0ff0000000000000ULL
-diff --git a/tools/python/xen/migration/libxc.py b/tools/python/xen/migration/libxc.py
-index 2906b78d36..10e163e272 100644
---- a/tools/python/xen/migration/libxc.py
-+++ b/tools/python/xen/migration/libxc.py
-@@ -90,6 +90,11 @@ PAGE_DATA_PFN_RESZ_MASK      = ((1 << 60) - 1) & ~((1 << 52) - 1)
- PAGE_DATA_ALGO_MASK          = 0x000000ff
- PAGE_DATA_FLAGS_RESZ_MASK    = 0xffffff00
- PAGE_DATA_ALGO_NONE          = 0x00
-+PAGE_DATA_ALGO_LZ4           = 0x01
-+
-+# LZ4 frame: at least magic, FLG, BD and HC; FLG bit 4 is B.Checksum
-+PAGE_DATA_LZ4_FRAME_MIN      = 7
-+PAGE_DATA_LZ4_FLG_BLOCKSUM   = 0x10
- 
- # flags from xen/public/domctl.h: XEN_DOMCTL_PFINFO_* shifted by 32 bits
- PAGE_DATA_TYPE_SHIFT         = 60
-@@ -305,6 +310,24 @@ class VerifyLibxc(VerifyBase):
-                 raise RecordError("Expected %u + %u + %u, got %u" %
-                                   (minsz, pfnsz, pagesz, len(content)))
- 
-+        elif algo == PAGE_DATA_ALGO_LZ4:
-+
-+            # Without decompressing, check the saver's length rule.
-+            if datasz >= pagesz:
-+                raise RecordError(
-+                    "LZ4 frame in PAGE_DATA record (%u bytes) is not shorter than its page data (%u bytes)"
-+                    % (datasz, pagesz))
-+
-+            frame = content[minsz + pfnsz:]
-+            if len(frame) < PAGE_DATA_LZ4_FRAME_MIN:
-+                raise RecordError(
-+                    "LZ4 frame in PAGE_DATA record too short: %u bytes"
-+                    % (len(frame), ))
-+
-+            if not ord(frame[4:5]) & PAGE_DATA_LZ4_FLG_BLOCKSUM:
-+                raise RecordError(
-+                    "LZ4 frame in PAGE_DATA record has no block checksums")
-+
-         else:
-             raise StreamError(
-                 "Unsupported algorithm %u in PAGE_DATA record" % (algo, ))
-diff --git a/tools/python/xen/migration/tests.py b/tools/python/xen/migration/tests.py
-index 1944ae09b3..9e6d925e51 100644
---- a/tools/python/xen/migration/tests.py
-+++ b/tools/python/xen/migration/tests.py
-@@ -36,19 +36,44 @@ class TestLibxc(unittest.TestCase):
-         v = libxc.VerifyLibxc(lambda *_: None, lambda *_: b"")
-         PAGE = b"\x00" * 4096
-         NOTAB = libxc.PAGE_DATA_TYPE_NOTAB | 0x1   # one normal page, pfn 1
-+        XTAB = libxc.PAGE_DATA_TYPE_XTAB | 0x1     # no page of data, pfn 1
- 
--        def rec(flags, data):
-+        def rec(flags, data, pfn=NOTAB):
-             return pack(libxc.PAGE_DATA_FORMAT, 1, flags) + \
--                   pack("=Q", NOTAB) + data
-+                   pack("=Q", pfn) + data
- 
-         # Uncompressed: exactly one page of data, and nothing else accepted.
-         v.verify_record_page_data(rec(libxc.PAGE_DATA_ALGO_NONE, PAGE))
-         self.assertRaises(libxc.RecordError, v.verify_record_page_data,
-                           rec(libxc.PAGE_DATA_ALGO_NONE, PAGE[:-1]))
- 
-+        # An LZ4 frame header: magic, then FLG with the block-checksum bit.
-+        FRAME = b"\x04\x22\x4d\x18\x70\x70\x72" + b"\x00" * 93
-+
-+        # LZ4: the payload is checked against the saver's length rule,
-+        # 0 < len < the uncompressed size it replaces: one page here, and
-+        # none with an XTAB pfn.  FULL is a valid frame header padded to one
-+        # page, so only the length rule can reject it.
-+        FULL = FRAME + b"\x00" * (4096 - len(FRAME))
-+        v.verify_record_page_data(rec(libxc.PAGE_DATA_ALGO_LZ4, FULL[:-1]))
-+        v.verify_record_page_data(rec(libxc.PAGE_DATA_ALGO_LZ4, FRAME))
-+        self.assertRaises(libxc.RecordError, v.verify_record_page_data,
-+                          rec(libxc.PAGE_DATA_ALGO_LZ4, b""))
-+        self.assertRaises(libxc.RecordError, v.verify_record_page_data,
-+                          rec(libxc.PAGE_DATA_ALGO_LZ4, FULL))
-+        self.assertRaises(libxc.RecordError, v.verify_record_page_data,
-+                          rec(libxc.PAGE_DATA_ALGO_LZ4, FRAME, XTAB))
-+
-+        # ... and against the frame having a whole header with block checksums.
-+        self.assertRaises(libxc.RecordError, v.verify_record_page_data,
-+                          rec(libxc.PAGE_DATA_ALGO_LZ4,
-+                              FRAME[:4] + b"\x60" + FRAME[5:]))
-+        self.assertRaises(libxc.RecordError, v.verify_record_page_data,
-+                          rec(libxc.PAGE_DATA_ALGO_LZ4, FRAME[:6]))
-+
-         # An unimplemented algorithm, and any reserved bit, are refused.
-         self.assertRaises(libxc.StreamError, v.verify_record_page_data,
--                          rec(libxc.PAGE_DATA_ALGO_NONE + 1, PAGE))
-+                          rec(libxc.PAGE_DATA_ALGO_LZ4 + 1, FRAME))
-         for bit in range(8, 32):
-             self.assertRaises(libxc.StreamError, v.verify_record_page_data,
-                               rec(1 << bit, PAGE))
--- 
-2.43.0
 
 
