@@ -2,45 +2,60 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E908C606A31D
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 13:58:02 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D5158606A319
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 14:35:35 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=KsZV4Zhf
-Received: from list by lists.xenproject.org with outflank-mailman.1455912.1669547 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=PKcpFVCw
+Received: from list by lists.xenproject.org with outflank-mailman.1455934.1669555 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJALe-0004tS-FJ; Tue, 20 Oct 2026 13:57:50 +0000
+	id 1xJAvs-00021w-7P; Tue, 20 Oct 2026 14:35:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455912.1669547; Tue, 20 Oct 2026 13:57:50 +0000
+Received: by outflank-mailman (output) from mailman id 1455934.1669555; Tue, 20 Oct 2026 14:35:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJALe-0004tL-Ar; Tue, 20 Oct 2026 13:57:50 +0000
-Received: by outflank-mailman (input) for mailman id 1455912;
- Tue, 20 Oct 2026 13:57:49 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xJAvs-00021p-4l; Tue, 20 Oct 2026 14:35:16 +0000
+Received: by outflank-mailman (input) for mailman id 1455934;
+ Tue, 20 Oct 2026 14:35:14 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <frn1furkan10@gmail.com>) id 1xJALd-0004ry-C0
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 13:57:49 +0000
+ (envelope-from <Michal.Orzel@amd.com>) id 1xJAvq-00021h-Dc
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 14:35:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJALc-002pIB-LS
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 15:57:48 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xJAvp-005O5Y-JN
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 16:35:13 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6ad77350-bab6-0a2a0a5309dd-0a2a45049fc2-22
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 15:57:48 +0200
-Received: from [209.85.221.48] (helo=mail-wr1-f48.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <frn1furkan10@gmail.com>)
- id 6ad7735c-b57f-0a2a45040019-d155dd30adfe-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 15:57:48 +0200
-Received: by mail-wr1-f48.google.com with SMTP id
- ffacd0b85a97d-48e10a70540so1432350f8f.1
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 06:57:48 -0700 (PDT)
-Received: from notebook.. ([88.230.43.46]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e1d8185d2sm6631984f8f.28.2026.10.20.06.57.45
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Tue, 20 Oct 2026 06:57:47 -0700 (PDT)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ad77c1c-2eae-0a2a0a5409dd-0a2a450cd988-18
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 16:35:13 +0200
+Received: from [52.101.52.7]
+ (helo=BL2PR02CU003.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Michal.Orzel@amd.com>)
+ id 6ad77c1f-f479-0a2a450c0019-34653407dc8b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 16:35:12 +0200
+Received: from BY3PR04CA0006.namprd04.prod.outlook.com (2603:10b6:a03:217::11)
+ by SA1PR12MB8096.namprd12.prod.outlook.com (2603:10b6:806:326::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.15; Tue, 20 Oct
+ 2026 14:35:09 +0000
+Received: from SJ1PEPF000037AB.namprd03.prod.outlook.com
+ (2603:10b6:a03:217:cafe::5b) by BY3PR04CA0006.outlook.office365.com
+ (2603:10b6:a03:217::11) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.20 via Frontend Transport; Tue,
+ 20 Oct 2026 14:35:09 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ SJ1PEPF000037AB.mail.protection.outlook.com (10.167.244.185) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.546.15 via Frontend Transport; Tue, 20 Oct 2026 14:35:08 +0000
+Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
+ (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 20 Oct
+ 2026 09:35:06 -0500
+Received: from APPOL-18KY0J4.amd.com (10.180.168.240) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
+ Transport; Tue, 20 Oct 2026 09:35:04 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,194 +64,185 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792504668; x=1793109468; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=XLwEmqG5++2i0BaWFfhfUbwyKohnUHt/d5JgE82jxXk=;
-        b=KsZV4Zhfm7GLoFpGzdCuwh6J/5UTTB2l4gACLgibOkjglyvkJ2+gw2+MDcBNBSgy+H
-         JUQc+twy1efJh8goXBxx0Bvx4ktpe4GofMaHSlxKO96h9zXGYjDVcyUysALAvxIC7FHm
-         xukL4eWc8zHJl78uW4dRJwOKrI7jrkKmqDF3E+WHIGxUKPTZvyV+8/VaXRave+D6bWty
-         l14dnrBtyaXfwCbe1tHWDDpuoWzKduhBlEf3BlOoHAavgo90ry7ztkaXtUfj+6Us+PGz
-         xK5s30/56EXO6fedptQNKTR1zSD5+UDQgju8JRt/T/yjqt8kZjRv+NpbyTTLBBMi6BKs
-         K3Hw==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792504668; x=1793109468;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=XLwEmqG5++2i0BaWFfhfUbwyKohnUHt/d5JgE82jxXk=;
-        b=QZ3jGtmpu02d0ZTzSRTCm8iM+xawaPO+Y0bAtcB4yKWl/xiqsXEGlZRKbFX6ZvJriZ
-         LDk35jF3EI8nReWjz5fIQ7EeV2FxUj5RE9pu8cJEQ0uCfxIujuGhqdSIjeM6yZ9NSnI9
-         Uyhkg+8uIVrVw2ti1VCXYzUs0Gs5G337JWEp13cFU63ptRzSrKcXf2sYGzKGSII2GNcV
-         wyTk3Z6D3bTkeIhmfmPSOnFiBauOKTQn31SxEDZSbOp/bJ/xmsF6JW3IB9mfmafJGq/P
-         O27tCRUJTbdXQGHUjoS522MdbinIumUg2KyG/jgDe913S/5GnDZllKQNXRtYrbdPzPiw
-         LymA==
-X-Gm-Message-State: AFq9FYJSbtdYXV+WLpyhFU/mzWqWM/P+RxPzIRKDQbzNrUr7+nT3sQ1a
-	Ryixn1kBaGxWBRi8eqYSjqLclOc7BIVXFr+wP0ntqX4NSDhnK24RmSejkpw5sQ==
-X-Gm-Gg: AYBFou2XE7TMLW0/Q2auV5m/PnrDZjHOvjkYxdX3rTBCrkX8hpwnO4IrGjwmRe7nkgD
-	2hasyA8OC70/5GLguYUHc2ll+dyxsYENPBZ11+QASa6aukcS6KfXH4/seYcs6xgmAjKQ5p5nHkm
-	fWrPFjVenqsExVoCVTuWamCRl1ldprfF3+p6lNpYcOvhKF7iLmTGqohadlIAee6HyyAdCLu/+9p
-	O6DLbkypCNV7RbsiagrRlhyJiNUegFy7xbE4DWegqZGCaxkJyArT2+lmczz2kIpb/+ZhLtdh/im
-	duCwhYmf6VnIJ0N4NiPZ4Xu5jHQykskM23tB4L6wxKSbo+IMGIGoRKYsltoraga6/YfY739r3ih
-	7w4lp0IU7BVC2SI7KEhNqNMNRIAEwocf2UxaTIWEuNN2KKxJ3X0+hAl3ahYx79nNdW2eI47QsU8
-	K1oLmEEQ/eA53rCcTmLbvgoWUZsBCI3j9jI6f1nlBoCc+BcOzAbdqWo2t99o9ppwobD9K1
-X-Received: by 2002:a05:6000:1050:b0:48d:ecba:3cf8 with SMTP id ffacd0b85a97d-48e07fa82f3mr15741818f8f.43.1792504667708;
-        Tue, 20 Oct 2026 06:57:47 -0700 (PDT)
-From: Furkan Caliskan <frn1furkan10@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: jbeulich@suse.com,
-	andrew.cooper3@citrix.com,
-	roger@xenproject.org,
-	teddy.astie@vates.tech,
-	Furkan Caliskan <frn1furkan10@gmail.com>
-Subject: [PATCH] x86/desc: build boot GDT descriptors with a macro
-Date: Tue, 20 Oct 2026 16:57:22 +0300
-Message-Id: <20261020135722.45714-1-frn1furkan10@gmail.com>
-X-Mailer: git-send-email 2.34.1
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=mEsPRQfvUR6NPzDnLv7lRIxiXR9UgSFlt79+5YKAGzv938lj+dEfeohUZ2dLiGRNuDSLFP6dqJKRTyUdDs3Z2Ulcr02wS/OgjTTw9xKG0UdgGA+jSz5UCck9KjTG21kul71GspF+RJLytuz9Cs0t+4e62E5YyXSqS8yflJcOkTpujfhhFbml9E0TG9uVg8tv2waim3zXwrnCF1Xr9aijNENkZ0DsNNG8NHSsBHHOpUwCOWDXoXLbABJJxks6hwvAQ2wRcLcmTrD3KZ5PPEfle39fhm8loq3yvbm/B1IwRsrbtiQz38H7AxUTMwRxRXKPv2GktF6yGubecczsfw67DA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=fZ3EkhLGGbupSOcpyXTTmgfore2DDfsMhPuaVmmgq0g=;
+ b=TNGK0gLKSQET1EMAx9UnX93tdi5Cn2WVuBGD+otGutzKhsEGwY5KSkE5XHPWR2eKnHGdWZTbwEgIZXpWNGfbaFPq77QF5zle52Mgee+TqRkg0g46yLD/ENxCE9yRYqOdXoyg/l6Z97cfNABgUydwSclGZTGLUFdoOm/QpcJIiDzGe7EHePuisQWhHvzBhbitHGZZT68q5v5aJjmM7p18lJwvTvaZart22pYb2MkSqm02b1FXKYOzpdYNsQrxf79ojGvLI0yKqzef6nGe8ccolAbmyXw7LYDeqfcB+WByFeypnaKsluisYneH1RgQJipS1FGTKNdbgq11DWVsCjz9+Q==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=fZ3EkhLGGbupSOcpyXTTmgfore2DDfsMhPuaVmmgq0g=;
+ b=PKcpFVCw686K2dbsrSVJGT1pkji55Cn0WoH7DiyAWTnENLVKStDWeXBE2tgv51KqObq3wfMAUPiJ0c0NhZjC2eC0YFg6SaKuH14quA8ILoCHM2fmdEC0ZkpBqLqFJor++6ZfbR0YWW+HsFcUvCMVLU5zhU9i55s4RQ/LC8RBRzk=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Michal Orzel <michal.orzel@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Michal Orzel <michal.orzel@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>, Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH] xen/arm: Don't create useless P2M pool for a hardware domain
+Date: Tue, 20 Oct 2026 16:34:58 +0200
+Message-ID: <20261020143458.194784-1-michal.orzel@amd.com>
+X-Mailer: git-send-email 2.43.0
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1792504668-585C7B50-B89637DF/0/0
+Content-Type: text/plain
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: SJ1PEPF000037AB:EE_|SA1PR12MB8096:EE_
+X-MS-Office365-Filtering-Correlation-Id: d6f3cc76-3e4d-47b8-93db-08df2eb75732
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|23010399003|36860700016|82310400026|56012099006|5023799004|11063799006|261009223027099003|10067099003|18002099003;
+X-Microsoft-Antispam-Message-Info:
+	xqRU61ssPLbbmTghZii2CbVifieVb2rQczk3ofLNf6s/dJxL/Pr6VtqknXQIg6OgcPNxfP29vfLQIggyKX/Xv0y1I+WTmxCmHVOtnPsZYF3Tto5OqEjeii6C3z36fzSebDyO8WcWANLW8dYTiF6bTIZRkVQUXZvVwaNova1i7Ipo0QZ/oxudq8et69NP/OKMmv7m1l8e5gOdcZEaYWdazrdBOl5fRPP9Susc9R2GyJ+ajOzyXNkzELUMGquHgvnNVQgrwcs5AXSXkFTHUrEmBEDAxMA6C9iVMd3ITBJSK20nI7YyFCI+U+DQigqm5gy56W1ucRXtONK0H7Z1e1O+7F9dy1t/DYJi0m2z4n7c10oT0A/rS5nolIBFYYgC6LBugLc6Z54lZmGJ+GaVZUvyZ/qD71VxWbYdUbpXiP7t/E8v8ngmoXe3cVBvT3W9OfMq1Mtuxa5jz+qHrUs06NDvDDSz4lPg5P5AjZbbZqX7yak0NnzVoz5kkXKPMDe3OOla6jTJdgcJf3W2d3bIYKu7PLpIWQW23bIlPqroZP2VZ+1qWVqT07McjV7V3E2X9lJCyqePww4h0VQ2RROWDAhuOOUaRwQ3azFYyzL0WDPwsj0e9PAQT2QWhgN66jnbMGTTRj0D9PgVQdUnuJ48kjMK1jFlPAelPQotetD4pwdSSY1283/bMvb+fxklhi8mcImgTu8SijuTfTeDJG9Qp/+Zlg==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(376014)(23010399003)(36860700016)(82310400026)(56012099006)(5023799004)(11063799006)(261009223027099003)(10067099003)(18002099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	RWq3T2Uh8ntOr6YEYtRKeZA29ixL/wCFIzNXF6p/96kdnuqww/oMPXYqeILTkWlJif5E8w78SqNW9A49/01ryX9D8Ar1zX+EgvoD0nmkeoLq/xLKkkUzDQTzoz9gaJ4RRhHNfYHmo51VFe9CUyHpJL4yLVeJ9+JndokR5PNNQXacosqnkXdTZkFiN0lHvSyengGBSKZqchub3ZbdK5VtMGj3SXqJscEf1Tro0NRzIgHRTgEr6viLk/FrcUla9/7ze9mUIdWL/WFa7MGYV9rZmB3ITBAh+nVHmvBp01uETBeq0OQOGOZTnB9qOspo5Vb4iXXXrYO/wEexDF6jYoqzawkoZ1tSeYdyK1xdHFYBrn7N6FrmsmQv2heKzrGtBOf1L+yLJnKQR/e4qVPG0OsXNN9e+7Lwyd+DP7uuug6oV29BYfZqjGdkwuJjIueMNgnl
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 Oct 2026 14:35:08.5456
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: d6f3cc76-3e4d-47b8-93db-08df2eb75732
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	SJ1PEPF000037AB.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SA1PR12MB8096
+X-purgate-ID: tlsNG-d25034/1792506913-014C7A5B-1455352E/0/0
 X-purgate-type: clean
-X-purgate-size: 5396
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 4435
+X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The raw 64-bit constants in boot_gdt[] and boot_compat_gdt[] hide what
-each descriptor actually is.  Replace them with a GDTE() macro, modelled
-on Linux's GDT_ENTRY_INIT(), plus named GDTE_FLAGS_* constants and a
-GDTE_FLAT() helper for flat segments.
+On Arm, the hardware domain does not use the P2M pool. Its P2M pages are
+allocated directly from the heap, without any limit. However, when the
+hardware domain is created using dom0less, we still allocate a P2M pool
+for it, either of the default size or the one given in
+xen,domain-p2m-mem-mb. This memory is never used and is simply wasted.
+The same applies when the pool size is set for the hardware domain using
+XEN_DOMCTL_set_paging_mempool_size.
 
-No functional change.
+Don't create the pool for a hardware domain. Make the get/set paging
+mempool domctls return -EOPNOTSUPP, skip the pool teardown and reject
+xen,domain-p2m-mem-mb for a hardware domain in dom0less.
 
-Signed-off-by: Furkan Caliskan <frn1furkan10@gmail.com>
+The dom0less check is Arm specific, because on RISC-V the hardware domain
+does use the P2M pool.
+
+Signed-off-by: Michal Orzel <michal.orzel@amd.com>
 ---
- xen/arch/x86/desc.c | 61 +++++++++++++++++++++++++++++++++++----------
- 1 file changed, 48 insertions(+), 13 deletions(-)
+ docs/misc/arm/device-tree/booting.txt   |  4 +++-
+ xen/arch/arm/mmu/p2m.c                  | 14 ++++++++++++++
+ xen/common/device-tree/dom0less-build.c | 12 ++++++++++++
+ 3 files changed, 29 insertions(+), 1 deletion(-)
 
-diff --git a/xen/arch/x86/desc.c b/xen/arch/x86/desc.c
-index 9f63928154..647affb6a3 100644
---- a/xen/arch/x86/desc.c
-+++ b/xen/arch/x86/desc.c
-@@ -27,32 +27,67 @@
+diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device-tree/booting.txt
+index 3787d2e2b668..c3705ab7d913 100644
+--- a/docs/misc/arm/device-tree/booting.txt
++++ b/docs/misc/arm/device-tree/booting.txt
+@@ -277,7 +277,9 @@ with the following properties:
+     used for the domain P2M pool. This is in-sync with the shadow_memory
+     option in xl.cfg. Leaving this field empty in device tree will lead to
+     the default size of domain P2M pool, i.e. 1MB per guest vCPU plus 4KB
+-    per MB of guest RAM plus 512KB for guest extended regions.
++    per MB of guest RAM plus 512KB for guest extended regions. On Arm, the
++    hardware domain has no dedicated P2M pool, so specifying this property
++    for it makes the domain fail to build.
  
- #define SEL2GDT(sel) (((sel) >> 3) - FIRST_RESERVED_GDT_ENTRY)
+ - max_grant_version
  
-+/*
-+ * Expands to a brace-enclosed initializer for seg_desc_t; only use it
-+ * inside an initializer list.
-+ *
-+ * flags: bit layout matches its position in the descriptor's high dword
-+ *   bits 0-3   : type
-+ *   bit  4     : s     (0 = system, 1 = code/data)
-+ *   bits 5-6   : dpl
-+ *   bit  7     : p     (present)
-+ *   bit  12    : avl
-+ *   bit  13    : l     (64-bit code segment)
-+ *   bit  14    : d/b
-+ *   bit  15    : g     (granularity: 0 = byte, 1 = 4KiB)
-+ */
-+#define GDTE(flags, base, limit)                                        \
-+    { (((uint64_t)(limit) & 0x0ffffULL)            |                    \
-+       (((uint64_t)(base)  & 0x0ffffffULL)  << 16) |                    \
-+       (((uint64_t)(flags) & 0x0ffULL)      << 40) |                    \
-+       (((uint64_t)(limit) & 0xf0000ULL)    << 32) |                    \
-+       (((uint64_t)(flags) & 0xf000ULL)     << 40) |                    \
-+       (((uint64_t)(base)  & 0xff000000ULL) << 32)) }
-+
-+/* Common flag combinations (same values Linux uses for equivalent segments) */
-+#define GDTE_FLAGS_RING0_CS64   0xa09b   /* P DPL0 S code  RX A, L, G */
-+#define GDTE_FLAGS_RING0_DS32   0xc093   /* P DPL0 S data  RW A,    G */
-+#define GDTE_FLAGS_RING1_CS32   0xc0bb   /* P DPL1 S code  RX A,    G */
-+#define GDTE_FLAGS_RING1_DS32   0xc0b3   /* P DPL1 S data  RW A,    G */
-+#define GDTE_FLAGS_RING3_CS32   0xc0fb   /* P DPL3 S code  RX A,    G */
-+#define GDTE_FLAGS_RING3_DS32   0xc0f3   /* P DPL3 S data  RW A,    G */
-+#define GDTE_FLAGS_RING3_CS64   0xa0fb   /* P DPL3 S code  RX A, L, G */
-+#define GDTE_FLAGS_PERCPU       0x0091   /* P DPL0 S data  RO A       */
-+
-+/* Xen maps every flat segment across all of memory. */
-+#define GDTE_FLAT(flags) GDTE(flags, 0, 0xfffff)
-+
- __section(".data.page_aligned") __aligned(PAGE_SIZE)
- seg_desc_t boot_gdt[PAGE_SIZE / sizeof(seg_desc_t)] =
+diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
+index 2cf35d8a3709..70d7c9fed955 100644
+--- a/xen/arch/arm/mmu/p2m.c
++++ b/xen/arch/arm/mmu/p2m.c
+@@ -61,6 +61,10 @@ static void p2m_free_page(struct domain *d, struct page_info *pg)
+ /* Return the size of the pool, in bytes. */
+ int arch_get_paging_mempool_size(struct domain *d, uint64_t *size)
  {
-     /* 0xe008 - Ring 0 code, 64bit mode */
--    [SEL2GDT(__HYPERVISOR_CS)] =      { 0x00af9b000000ffff },
-+    [SEL2GDT(__HYPERVISOR_CS)] =      GDTE_FLAT(GDTE_FLAGS_RING0_CS64),
- 
-     /* 0xe010 - Ring 0 data */
--    [SEL2GDT(__HYPERVISOR_DS32)] =    { 0x00cf93000000ffff },
-+    [SEL2GDT(__HYPERVISOR_DS32)] =    GDTE_FLAT(GDTE_FLAGS_RING0_DS32),
- 
-     /* 0xe018 - reserved */
- 
-     /* 0xe023 - Ring 3 code, compatibility */
--    [SEL2GDT(FLAT_RING3_CS32)] =      { 0x00cffb000000ffff },
-+    [SEL2GDT(FLAT_RING3_CS32)] =      GDTE_FLAT(GDTE_FLAGS_RING3_CS32),
- 
-     /* 0xe02b - Ring 3 data */
--    [SEL2GDT(FLAT_RING3_DS32)] =      { 0x00cff3000000ffff },
-+    [SEL2GDT(FLAT_RING3_DS32)] =      GDTE_FLAT(GDTE_FLAGS_RING3_DS32),
- 
-     /* 0xe033 - Ring 3 code, 64-bit mode */
--    [SEL2GDT(FLAT_RING3_CS64)] =      { 0x00affb000000ffff },
-+    [SEL2GDT(FLAT_RING3_CS64)] =      GDTE_FLAT(GDTE_FLAGS_RING3_CS64),
- 
-     /* 0xe038 - reserved */
-     /* 0xe040 - TSS */
-     /* 0xe050 - LDT */
- 
-     /* 0xe060 - per-CPU entry (limit == cpu) */
--    [SEL2GDT(PER_CPU_SELECTOR)] =     { 0x0000910000000000 },
-+    [SEL2GDT(PER_CPU_SELECTOR)] =     GDTE(GDTE_FLAGS_PERCPU, 0, 0),
- };
- 
- #ifdef CONFIG_PV32
-@@ -60,29 +95,29 @@ __section(".data.page_aligned") __aligned(PAGE_SIZE)
- seg_desc_t boot_compat_gdt[PAGE_SIZE / sizeof(seg_desc_t)] =
++    /* No dedicated pool (no limit) for a hardware domain */
++    if ( is_hardware_domain(d) )
++        return -EOPNOTSUPP;
++
+     *size = (uint64_t)ACCESS_ONCE(d->arch.paging.p2m_total_pages) << PAGE_SHIFT;
+     return 0;
+ }
+@@ -69,6 +73,8 @@ int p2m_set_allocation(struct domain *d, unsigned long pages, bool can_preempt)
  {
-     /* 0xe008 - Ring 0 code, 64bit mode */
--    [SEL2GDT(__HYPERVISOR_CS)] =      { 0x00af9b000000ffff },
-+    [SEL2GDT(__HYPERVISOR_CS)] =      GDTE_FLAT(GDTE_FLAGS_RING0_CS64),
+     struct page_info *pg;
  
-     /* 0xe010 - Ring 0 data */
--    [SEL2GDT(__HYPERVISOR_DS32)] =    { 0x00cf93000000ffff },
-+    [SEL2GDT(__HYPERVISOR_DS32)] =    GDTE_FLAT(GDTE_FLAGS_RING0_DS32),
++    /* No dedicated pool (no limit) for a hardware domain */
++    ASSERT(!is_hardware_domain(d));
+     ASSERT(spin_is_locked(&d->arch.paging.lock));
  
-     /* 0xe019 - Ring 1 code, compatibility */
--    [SEL2GDT(FLAT_COMPAT_RING1_CS)] = { 0x00cfbb000000ffff },
-+    [SEL2GDT(FLAT_COMPAT_RING1_CS)] = GDTE_FLAT(GDTE_FLAGS_RING1_CS32),
+     for ( ; ; )
+@@ -119,6 +125,10 @@ int arch_set_paging_mempool_size(struct domain *d, uint64_t size)
+     unsigned long pages = size >> PAGE_SHIFT;
+     int rc;
  
-     /* 0xe021 - Ring 1 data */
--    [SEL2GDT(FLAT_COMPAT_RING1_DS)] = { 0x00cfb3000000ffff },
-+    [SEL2GDT(FLAT_COMPAT_RING1_DS)] = GDTE_FLAT(GDTE_FLAGS_RING1_DS32),
++    /* No dedicated pool (no limit) for a hardware domain */
++    if ( is_hardware_domain(d) )
++        return -EOPNOTSUPP;
++
+     if ( (size & ~PAGE_MASK) ||          /* Non page-sized request? */
+          pages != (size >> PAGE_SHIFT) ) /* 32-bit overflow? */
+         return -EINVAL;
+@@ -134,6 +144,10 @@ int p2m_teardown_allocation(struct domain *d)
+ {
+     int ret = 0;
  
-     /* 0xe02b - Ring 3 code, compatibility */
--    [SEL2GDT(FLAT_COMPAT_RING3_CS)] = { 0x00cffb000000ffff },
-+    [SEL2GDT(FLAT_COMPAT_RING3_CS)] = GDTE_FLAT(GDTE_FLAGS_RING3_CS32),
++    /* No dedicated pool - nothing to tear down */
++    if ( is_hardware_domain(d) )
++        return 0;
++
+     spin_lock(&d->arch.paging.lock);
+     if ( d->arch.paging.p2m_total_pages != 0 )
+     {
+diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-tree/dom0less-build.c
+index fcb438c50a04..a877e695ad11 100644
+--- a/xen/common/device-tree/dom0less-build.c
++++ b/xen/common/device-tree/dom0less-build.c
+@@ -757,6 +757,18 @@ static int __init domain_p2m_set_allocation(struct domain *d, uint64_t mem,
+     int rc;
  
-     /* 0xe033 - Ring 3 data */
--    [SEL2GDT(FLAT_COMPAT_RING3_DS)] = { 0x00cff3000000ffff },
-+    [SEL2GDT(FLAT_COMPAT_RING3_DS)] = GDTE_FLAT(GDTE_FLAGS_RING3_DS32),
- 
-     /* 0xe038 - reserved */
-     /* 0xe040 - TSS */
-     /* 0xe050 - LDT */
- 
-     /* 0xe060 - per-CPU entry (limit == cpu) */
--    [SEL2GDT(PER_CPU_SELECTOR)] =     { 0x0000910000000000 },
-+    [SEL2GDT(PER_CPU_SELECTOR)] =     GDTE(GDTE_FLAGS_PERCPU, 0, 0),
- };
- #endif
- 
+     rc = dt_property_read_u32(node, "xen,domain-p2m-mem-mb", &p2m_mem_mb);
++
++    /* No dedicated pool (no limit) for a hardware domain on Arm */
++    if ( IS_ENABLED(CONFIG_ARM) && is_hardware_domain(d) )
++    {
++        if ( !rc )
++            return 0;
++
++        printk(XENLOG_ERR
++               "xen,domain-p2m-mem-mb cannot be specified for a hardware domain\n");
++        return -EINVAL;
++    }
++
+     /* If xen,domain-p2m-mem-mb is not specified, use the default value. */
+     p2m_pages = rc ?
+                 p2m_mem_mb << (20 - PAGE_SHIFT) :
 -- 
-2.34.1
+2.43.0
 
 
