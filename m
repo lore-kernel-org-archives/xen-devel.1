@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B472B606A31A
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBA53606A31A
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:58:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Fpav/KIm
-Received: from list by lists.xenproject.org with outflank-mailman.1455390.1669323 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Pma88dWq
+Received: from list by lists.xenproject.org with outflank-mailman.1455388.1669319 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7XP-0004ca-9V; Tue, 20 Oct 2026 10:57:47 +0000
+	id 1xJ7XO-0004BN-2G; Tue, 20 Oct 2026 10:57:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455390.1669323; Tue, 20 Oct 2026 10:57:46 +0000
+Received: by outflank-mailman (output) from mailman id 1455388.1669319; Tue, 20 Oct 2026 10:57:45 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7XO-0004W5-1Q; Tue, 20 Oct 2026 10:57:46 +0000
-Received: by outflank-mailman (input) for mailman id 1455390;
- Tue, 20 Oct 2026 10:51:38 +0000
+	id 1xJ7XM-00045W-1X; Tue, 20 Oct 2026 10:57:44 +0000
+Received: by outflank-mailman (input) for mailman id 1455388;
+ Tue, 20 Oct 2026 10:51:34 +0000
 Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7RR-0000Nc-Tp
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:38 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7RO-0000N6-4A
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7RR-004dIO-AX
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:37 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xJ7RN-004dIO-HK
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:33 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad747a7-8faa-0a2a0a5109dd-0a2a4508b6ba-38
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:37 +0200
+ id 6ad747a4-8faa-0a2a0a5109dd-0a2a4501b65a-46
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:33 +0200
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad747b8-f659-0a2a45080019-aa0a817c7a21-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:37 +0200
+ id 6ad747b2-5984-0a2a45010019-aa0a817c5cad-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:31 +0200
 Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-15-JRWtrvsmMnafOZ4pe9-J1A-1; Tue,
- 20 Oct 2026 06:51:33 -0400
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-365-se9LWCHqPrS8GDVKoZHxeg-1; Tue,
+ 20 Oct 2026 10:51:26 +0000
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id B4C2E1800BDD; Tue, 20 Oct 2026 10:51:27 +0000 (UTC)
+ id 5E2BF1800878; Tue, 20 Oct 2026 10:51:22 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id CA95D1800677; Tue, 20 Oct 2026 10:51:24 +0000 (UTC)
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 3CCCA18005B3; Tue, 20 Oct 2026 10:51:19 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493495;
+	s=mimecast20190719; t=1792493490;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=VTmJNa8VT5lexLUKxdzeLthZimg97eONPVFzq6wZuao=;
-	b=Fpav/KImTiylw0zAK2W8eDh+L8tFFht93N6roHK6IWBJO4LArQzaeLhR4nfyALmTH/dlYb
-	h8piPumFznDX6Yj/WEnQGXrK8gi5VEyGp7J/4Rxv4nJBA9SyHI3Oinhrs0F0ZwpkAhXlkE
-	XZ1uYfDXTlQvOFBsaySzaYvKwj09tck=
-X-MC-Unique: JRWtrvsmMnafOZ4pe9-J1A-1
-X-Mimecast-MFC-AGG-ID: JRWtrvsmMnafOZ4pe9-J1A_1792493487
+	bh=0exBW/XllTPTbSwFohqKA2w8apHuJMdvUCko9RJ056E=;
+	b=Pma88dWqnTmc4FPmMNkYkgNUTRvQZ2HY3kR7RsYoRLUoQJ0FXkp8KgmATBtb+RTbDvRM9N
+	ZZCVCo/bsC3Uv1XcTFzW+AOuAEAKgb2gt+q+ZXtf5Re27G4KejpIzMnvk+z20sPWf/v5z7
+	wUVcfzqLGrrEepRyA6SU4O6Oq3itDdA=
+X-MC-Unique: se9LWCHqPrS8GDVKoZHxeg-1
+X-Mimecast-MFC-AGG-ID: se9LWCHqPrS8GDVKoZHxeg_1792493482
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:46:15 +0400
-Subject: [PATCH v7 58/65] qdev: convert PropertyInfo definitions to use
- qapi_type
+Date: Tue, 20 Oct 2026 14:46:14 +0400
+Subject: [PATCH v7 57/65] target/riscv: convert PropertyInfo definitions to
+ use qapi_type
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-58-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-57-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -151,144 +151,198 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Artyom Tarasenko <atar4qemu@gmail.com>, 
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
- =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>, 
- Stefan Berger <stefanb@linux.vnet.ibm.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=3664;
+ =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+X-Developer-Signature: v=1; a=openpgp-sha256; l=5488;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=LIT19w6YWiCW19RYxdZdXGqpA2yVHBE+/WdhPO2w+KQ=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZcuI+2h8ZVKhhoVFi3OkRbLhN7DQhHpw2e8
- ZI+IW/5ZPeJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXAAKCRDa6OEJdZac
- 5d+rD/94HsUuS+bA630XGAf6+mNBdx3g5ggb5XrVvKXw9Au65Kows5jbGNX5ExMKeDtXzXsYPQZ
- 7bawMDy/OvYIm6c0sRa+DQhSHoKTRGyrflTzi3akNDBX1iTFKTE4ApPz982Yb2V1+zjv7S6JoKL
- s9x+m0L+aJhxXlji2Ne4h/2GqI65xptxwVMDeF5hdFhM1b/GVOLPZQYUgjk16EE7HtDzi9XcRpU
- qLzkGt0xA8pztXbBxv9kfTMNJvnlKFhUM2FhczGoJMlwLYyrRx/K4ZHzoaT6XiuPZUK7YMxmpkr
- 6kU46qGrWbK2PfH+q/Y8JKYadL6yh8v3kSS3na9fd5DaDkQX0p+Bnx8iLycn9BNcAfY/w7UNwsU
- 1syWcvdD3Zjx91KEjMZBf6XQOUp3zeontuSGuATb4jhC/tPGcmnOMzCZilju6MMinaNxT3lY42y
- HXItgz39UYWffKdBjfxJX3O1XuqYxbblcTGZmheVuso724KYPKlpfJKMUI+l8dYZwzkB21LBjpD
- CypHEsnuhmR2vRevpDVirDYKTs59vv51cttaKCBf0mOGodSLdbRKt66uM3ORmazmTeb/HPU+/oD
- vW8fnePj8pQJmxXFS18zBsuuz75rzcslLcOf/SWSu8i8o5lSfTxYhOhED+/Lizl23J6M6lVvKko
- +KUM9I7WMK1AoZw==
+ bh=XKjrfhJ2Z/vpJVDltF2KXqS9w+wUXXQdOLcco6lHE08=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10Zc82i8KNdsFK3/pKeHfVnxA4m/fOSulmH97
+ UqyLuCWFoWJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXAAKCRDa6OEJdZac
+ 5Z6cD/40rHcZVYX8wDxKQt8xTbOSbGFHhrkGBp+FJMr/D3qXf1CzfRM/zrW7BsamxNoTKamLgia
+ vG/IF1pMis4auL226bPWZSNCw1wM64OiZLp34N3g6ajQDAnS4jfnerIAq7txzCCJUbSjDZABnY+
+ O/X/WwsFuXapBnFcvD2GRf7OtzeasFepDj3L1mQI9qlcIH41qkSHstkXLXEuCxStBNzaQuJ+1nT
+ f8elVasH3Qez1yhQlVLkdcseJ+WxT9culB/RhJzlcYMOY3ijoorNNWBmNMniKWqUHM380+dg4mi
+ s5Xym63nleHU9QrcqKokpmXEO6nqQXGl5BVpG/+GI8J37DOJEBt7FopbJ8Qa/Prf2L0HVZ2F4Ri
+ v52x6jhQ2cVDf52+6cx4EEUH1NulOv3VMoE+O/9QeuJjD6NvDl0kfVkgV83mliwEwc7vahuvnT6
+ MZHRXzDT5gm/k1ueiE/SDcCEv9mGmfnj3XnZ7GWpLcbscFJebhqv5NagTK8eB75QcE5f7Li5RfK
+ wc2VMbA5H3KXsbPLwfv0Bwcz8Ok9gFGyw0cb4nah/uS/gLpuvZSH3RlnyRCw3dHiiNOvmw9ktLa
+ bEN7ShgjTnPCfdQW49hOPBZARpkjinKmx6OFPDecrZiaNqDlQaduXgMnp5B749lfM7OBJ8Ch+S8
+ 7b7viGC9MASEqng==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: XVZsjRwnBRXm8zLizZUGnw0G4VqrBxKTVI9FqQnLtoc_1792493487
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: DA2jTM9ESM5rdDbEhPDzBLagdqfUFOHp66NC6XzKjH4_1792493482
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1792493497-CE14687B-623D1D8E/0/0
+X-purgate-ID: tlsNG-d62444/1792493492-BC95A757-F6AB39A4/0/0
 X-purgate-type: clean
-X-purgate-size: 3666
+X-purgate-size: 5490
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Convert the remaining PropertyInfo definitions outside hw/
-
-After this patch, all PropertyInfo definitions have .qapi_type set,
-except qdev_prop_link (uses .create) and qdev_prop_array (refactored
-in the next patches).
+Mechanical conversion of all local PropertyInfo definitions in
+target/riscv/cpu.c
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Stefan Berger <stefanb@linux.ibm.com>
+Reviewed-by: Alistair Francis <alistair.francis@wdc.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- backends/spdm-socket.c  | 4 ++--
- backends/tpm/tpm_util.c | 3 ++-
- migration/options.c     | 4 +++-
- target/sparc/cpu.c      | 3 ++-
- 4 files changed, 9 insertions(+), 5 deletions(-)
+ target/riscv/cpu.c | 32 ++++++++++++++++----------------
+ 1 file changed, 16 insertions(+), 16 deletions(-)
 
-diff --git a/backends/spdm-socket.c b/backends/spdm-socket.c
-index 826efc276dcd..4a4307975965 100644
---- a/backends/spdm-socket.c
-+++ b/backends/spdm-socket.c
-@@ -17,6 +17,7 @@
- #include "hw/core/qdev-properties.h"
- #include "hw/core/qdev-properties-system.h"
- #include "hw/core/qdev-prop-internal.h"
-+#include "qapi/qapi-type-infos-sockets.h"
- 
- static bool read_bytes(const int socket, uint8_t *buffer,
-                        size_t number_of_bytes)
-@@ -253,9 +254,8 @@ void spdm_socket_close(const int socket, SpdmTransportType transport_type)
+diff --git a/target/riscv/cpu.c b/target/riscv/cpu.c
+index 664c1a767950..28bfcb36ecb7 100644
+--- a/target/riscv/cpu.c
++++ b/target/riscv/cpu.c
+@@ -1704,7 +1704,7 @@ static void prop_pmu_num_get(Object *obj, Visitor *v, const char *name,
  }
  
- const PropertyInfo qdev_prop_spdm_trans = {
--    .type = "SpdmTransportType",
-+    .qapi_type = &SpdmTransportType_type_info,
-     .description = "Spdm Transport, doe/nvme/mctp/scsi/unspecified",
--    .enum_table = &SpdmTransportType_lookup,
-     .get = qdev_propinfo_get_enum,
-     .set = qdev_propinfo_set_enum,
-     .set_default_value = qdev_propinfo_set_default_value_enum,
-diff --git a/backends/tpm/tpm_util.c b/backends/tpm/tpm_util.c
-index 7019f7fd3eb9..dc6d4b211567 100644
---- a/backends/tpm/tpm_util.c
-+++ b/backends/tpm/tpm_util.c
-@@ -30,6 +30,7 @@
- #include "system/tpm_backend.h"
- #include "system/tpm_util.h"
- #include "trace.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- /* tpm backend property */
- 
-@@ -77,7 +78,7 @@ static void release_tpm(Object *obj, const char *name, void *opaque)
+ static const PropertyInfo prop_pmu_num = {
+-    .type = "uint8",
++    .qapi_type = &uint8_type_info,
+     .description = "pmu-num",
+     .get = prop_pmu_num_get,
+     .set = prop_pmu_num_set,
+@@ -1746,7 +1746,7 @@ static void prop_pmu_mask_get(Object *obj, Visitor *v, const char *name,
  }
  
- const PropertyInfo qdev_prop_tpm = {
--    .type  = "str",
+ static const PropertyInfo prop_pmu_mask = {
+-    .type = "uint32",
++    .qapi_type = &uint32_type_info,
+     .description = "pmu-mask",
+     .get = prop_pmu_mask_get,
+     .set = prop_pmu_mask_set,
+@@ -1778,7 +1778,7 @@ static void prop_mmu_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_mmu = {
+-    .type = "bool",
++    .qapi_type = &bool_type_info,
+     .description = "mmu",
+     .get = prop_mmu_get,
+     .set = prop_mmu_set,
+@@ -1811,7 +1811,7 @@ static void prop_pmp_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_pmp = {
+-    .type = "bool",
++    .qapi_type = &bool_type_info,
+     .description = "pmp",
+     .get = prop_pmp_get,
+     .set = prop_pmp_set,
+@@ -1851,7 +1851,7 @@ static void prop_num_pmp_regions_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_num_pmp_regions = {
+-    .type = "uint8",
++    .qapi_type = &uint8_type_info,
+     .description = "num-pmp-regions",
+     .get = prop_num_pmp_regions_get,
+     .set = prop_num_pmp_regions_set,
+@@ -1889,7 +1889,7 @@ static void prop_pmp_granularity_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_pmp_granularity = {
+-    .type = "uint32",
++    .qapi_type = &uint32_type_info,
+     .description = "pmp-granularity",
+     .get = prop_pmp_granularity_get,
+     .set = prop_pmp_granularity_set,
+@@ -1965,7 +1965,7 @@ static void prop_priv_spec_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_priv_spec = {
+-    .type = "str",
 +    .qapi_type = &str_type_info,
-     .description = "ID of a tpm to use as a backend",
-     .get   = get_tpm,
-     .set   = set_tpm,
-diff --git a/migration/options.c b/migration/options.c
-index 46d040fc3f25..029282a1605c 100644
---- a/migration/options.c
-+++ b/migration/options.c
-@@ -37,6 +37,8 @@
- #include "ram.h"
- #include "options.h"
- #include "system/kvm.h"
-+#include "qapi/qapi-builtin-type-infos.h"
-+#include "qapi/qapi-type-infos-common.h"
- 
- /* Maximum migrate downtime set to 2000 seconds */
- #define MAX_MIGRATE_DOWNTIME_SECONDS 2000
-@@ -294,7 +296,7 @@ static void set_default_value_tls_opt(ObjectProperty *op, const Property *prop)
-  * TYPE_MIGRATION's TLS options.
-  */
- const PropertyInfo qdev_prop_StrOrNull = {
--    .type  = "StrOrNull",
-+    .qapi_type = &StrOrNull_type_info,
-     .get = get_StrOrNull,
-     .set = set_StrOrNull,
-     .release = release_StrOrNull,
-diff --git a/target/sparc/cpu.c b/target/sparc/cpu.c
-index ae9bdca9df82..d0354a4d02af 100644
---- a/target/sparc/cpu.c
-+++ b/target/sparc/cpu.c
-@@ -30,6 +30,7 @@
- #include "tcg/tcg.h"
- #include "fpu/softfloat.h"
- #include "target/sparc/translate.h"
-+#include "qapi/qapi-builtin-type-infos.h"
- 
- //#define DEBUG_FEATURES
- 
-@@ -948,7 +949,7 @@ static void sparc_set_nwindows(Object *obj, Visitor *v, const char *name,
+     .description = "priv_spec",
+     /* FIXME enum? */
+     .get = prop_priv_spec_get,
+@@ -1998,7 +1998,7 @@ static void prop_vext_spec_get(Object *obj, Visitor *v, const char *name,
  }
  
- static const PropertyInfo qdev_prop_nwindows = {
--    .type  = "int",
-+    .qapi_type = &int_type_info,
-     .description = "Number of register windows",
-     .get   = sparc_get_nwindows,
-     .set   = sparc_set_nwindows,
+ static const PropertyInfo prop_vext_spec = {
+-    .type = "str",
++    .qapi_type = &str_type_info,
+     .description = "vext_spec",
+     /* FIXME enum? */
+     .get = prop_vext_spec_get,
+@@ -2041,7 +2041,7 @@ static void prop_vlen_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_vlen = {
+-    .type = "uint16",
++    .qapi_type = &uint16_type_info,
+     .description = "vlen",
+     .get = prop_vlen_get,
+     .set = prop_vlen_set,
+@@ -2082,7 +2082,7 @@ static void prop_elen_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_elen = {
+-    .type = "uint16",
++    .qapi_type = &uint16_type_info,
+     .description = "elen",
+     .get = prop_elen_get,
+     .set = prop_elen_set,
+@@ -2118,7 +2118,7 @@ static void prop_cbom_blksize_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_cbom_blksize = {
+-    .type = "uint16",
++    .qapi_type = &uint16_type_info,
+     .description = "cbom_blocksize",
+     .get = prop_cbom_blksize_get,
+     .set = prop_cbom_blksize_set,
+@@ -2154,7 +2154,7 @@ static void prop_cbop_blksize_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_cbop_blksize = {
+-    .type = "uint16",
++    .qapi_type = &uint16_type_info,
+     .description = "cbop_blocksize",
+     .get = prop_cbop_blksize_get,
+     .set = prop_cbop_blksize_set,
+@@ -2190,7 +2190,7 @@ static void prop_cboz_blksize_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_cboz_blksize = {
+-    .type = "uint16",
++    .qapi_type = &uint16_type_info,
+     .description = "cboz_blocksize",
+     .get = prop_cboz_blksize_get,
+     .set = prop_cboz_blksize_set,
+@@ -2226,7 +2226,7 @@ static void prop_mvendorid_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_mvendorid = {
+-    .type = "uint32",
++    .qapi_type = &uint32_type_info,
+     .description = "mvendorid",
+     .get = prop_mvendorid_get,
+     .set = prop_mvendorid_set,
+@@ -2262,7 +2262,7 @@ static void prop_mimpid_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_mimpid = {
+-    .type = "uint64",
++    .qapi_type = &uint64_type_info,
+     .description = "mimpid",
+     .get = prop_mimpid_get,
+     .set = prop_mimpid_set,
+@@ -2319,7 +2319,7 @@ static void prop_marchid_get(Object *obj, Visitor *v, const char *name,
+ }
+ 
+ static const PropertyInfo prop_marchid = {
+-    .type = "uint64",
++    .qapi_type = &uint64_type_info,
+     .description = "marchid",
+     .get = prop_marchid_get,
+     .set = prop_marchid_set,
 
 -- 
 2.56.0.116.g6de20f6092dc
