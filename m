@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3C9C8606A31A
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:40 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 08C1F606A31A
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=BIawTRzG
-Received: from list by lists.xenproject.org with outflank-mailman.1455318.1669018 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=SS6C7+uE
+Received: from list by lists.xenproject.org with outflank-mailman.1455317.1669008 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7W9-0005XL-Il; Tue, 20 Oct 2026 10:56:29 +0000
+	id 1xJ7W8-0005DX-BG; Tue, 20 Oct 2026 10:56:28 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455318.1669018; Tue, 20 Oct 2026 10:56:29 +0000
+Received: by outflank-mailman (output) from mailman id 1455317.1669008; Tue, 20 Oct 2026 10:56:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7W8-0005RV-K8; Tue, 20 Oct 2026 10:56:28 +0000
-Received: by outflank-mailman (input) for mailman id 1455318;
- Tue, 20 Oct 2026 10:50:48 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xJ7W7-0005AO-17; Tue, 20 Oct 2026 10:56:27 +0000
+Received: by outflank-mailman (input) for mailman id 1455317;
+ Tue, 20 Oct 2026 10:50:47 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qe-0008Um-PZ
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:48 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qd-0008Uf-HD
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:47 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7Qe-004d16-67
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:48 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xJ7Qc-00Crdk-UE
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:46 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74781-8faa-0a2a0a5109dd-0a2a4504a994-44
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:48 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad7477c-2eae-0a2a0a5409dd-0a2a4507e786-16
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:46 +0200
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74786-b57f-0a2a45040019-aa0a817c6709-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:47 +0200
+ id 6ad746d1-b4ea-0a2a45070019-aa0a857c7e31-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:46 +0200
 Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-689-7M2NqJufMDOobZCWpwZs9w-1; Tue,
- 20 Oct 2026 10:50:45 +0000
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-98-b50LkXhBNAOr4KDZgzOCJQ-1; Tue,
+ 20 Oct 2026 06:47:41 -0400
+Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 5E3CE1954AF3; Tue, 20 Oct 2026 10:50:41 +0000 (UTC)
+ id 0944C1955F10; Tue, 20 Oct 2026 10:47:37 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 4CA251956095; Tue, 20 Oct 2026 10:50:38 +0000 (UTC)
+ by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 2487E418; Tue, 20 Oct 2026 10:47:34 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,23 +60,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493446;
+	s=mimecast20190719; t=1792493265;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=S8kTexksySb92RkWPQob17KtLeYJq8y0yNIndqLcc+s=;
-	b=BIawTRzGLvx1avtBgI+2CzxYzP7GS/2Kj++TtBPLdzMuo/aypEovwbrGl6TahSumY596Cn
-	071ufiPwswGDnizIZZtkL2Nxd0AW8InkQzGIvUjt9sq3H2RwM+dy6IcFlViWZKvbT9sasm
-	S32jN6KyezERGhoWxUp1dcp9t+R7v+k=
-X-MC-Unique: 7M2NqJufMDOobZCWpwZs9w-1
-X-Mimecast-MFC-AGG-ID: 7M2NqJufMDOobZCWpwZs9w_1792493441
+	bh=+mUlmiLA0IUJrEFhhdtqFL7MoWyX2aJUgEr0fLN0OLI=;
+	b=SS6C7+uEhqtNUXezaeMbtvhstrOQmCgu0s3y+3E+BtHv3tfr0kag5KFKHNhW3JBuYaaMH7
+	Z0y1/boFOo6SErFAGe6fIF0DeEZgXq7994YgT0jVxJTWqGW2UQzXaBnpBZ0xwyE3ennvma
+	CgF8xSLirWR7345uZ+XW1dKTWwHGFUg=
+X-MC-Unique: b50LkXhBNAOr4KDZgzOCJQ-1
+X-Mimecast-MFC-AGG-ID: b50LkXhBNAOr4KDZgzOCJQ_1792493257
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:46:06 +0400
-Subject: [PATCH v7 49/65] include: add QEMU_REPEAT helper macro
+Date: Tue, 20 Oct 2026 14:45:32 +0400
+Subject: [PATCH v7 15/65] qom: add object_property_set_default_enum()
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-49-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-15-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -151,31 +151,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5069;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1741;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=QfToyuYJOLlF7sVISH3TkcbrVSBGm2Ii2KsCu8httjE=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZctD1NQTngqU/jBCkEfMek9xa0vMpb6NJE8
- n3GhucWk+2JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGXAAKCRDa6OEJdZac
- 5Ql3D/wOI62xjJd8gtsu1K015Mj1esGNk3N1OdLVzhvzC8XbQvPEjY9tEjanTvUT/tSDkebzQqp
- wfSbuNHZo2LWhz4d7Wb0804H4k/QbpWXXItKX82506hR5MwcSm8hUjY/X6b3sz99rcdsWT0OYuB
- N2PLFvmXrXrT34rd2lk3l9IEv008VGElWvHn+lGOsyEFdIi/zoDQuQTkGXQNX9r8iwDerholxzT
- +YZ5vO9NOWYzlEcvAPuA1dqTZKv0M9sHG++CE+6rKm7la2iiLolf0dIPC9Lek616L5XTeNy7Con
- EF8tZhpLovhA6XrZr2f/PiaJxHf5yCU0Sq0nNl8Fbybo63RLmGHKN3Eu3hwqRCLDy9l1/5v++ol
- S9hoHIJukwRZWnX0ts9nDy7TeFwjlL2jTa5zYCWg9W7/sdnOtFpaRYdj/lgqkMlTa+D86mUvx9a
- 9InKktX0yyqWi5G5hNKi9NOS0lo8H7z0cS/vAMcv16S106YylJ7/t+pIcH0uo8VsZZRuXZ7h/LE
- P4apvjyFIb53bu2HO5H2KfwPzrSgW8jM6CGO9+0RBtkG7nQ+6OYilLtspSRo2mGJD8ejzD5m8U6
- /mj9N3MBuGZckwN2lJSTywe0n7qy4Ybb5v/f4A7HZtbB78gEulqlZppqsvIUcivzHg3tITYzqlL
- tsVVC+qXxIFzhWg==
+ bh=bT9PbeYHomyeIGAcVfTDM+lJI5Y2hBOOffhp2f1n7bs=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZY3cZceXMTAsDTPVPQLUPiFXhCtfGOTuUzE
+ ex7dEME5rOJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
+ 5YB4D/9GPjvfJ9QnS3NS7uzoH3zuMz6cgmZWUWiCGV7tsWnNbbIfmXnGwpWDwpNzL9cRsohPRiM
+ Tt8mSTGA/sJmszkK+oQShJ63FCmfW5pbd7ruMCtTStlRVh8rCjUWyx0b9IGf9lj7a1sXuaMjRiZ
+ RmIstsYrcvq9fJ0J5SM1RTodk1Qvgn2pQe7pG/U8OW8Myg6fto5tvml4IN5pYuE4YB/AteIWUfl
+ cy3Y6JisAPLbkZWEjeehnRqpYjs8lJcEc0jd6jT5Ajm3DFQFLMkmckRPpjNofoDbeN1tQ7K0s98
+ vwayy8xoutwUgsV9wX6qCvRBLY1+DpxNBTHm+xV32yF2estcn1ixmHngJQMaNbWwx3sJ0FueH2i
+ nHGW2/UH0XkgcegNOKOcSppusTIisYEHOeK2W37dK7A4gv7fgemaMBfKADWuc6jN/xKP4O2sAOs
+ EPPKK+R1nyzBdIIsDWdYkhnmUpz08PjAX7t/9zIyQvJy6HeZMYEvqH92Dv9Aqm0tKTwJeHGv8Mx
+ G+jFxLb6K1GFyZQ9S6izdwx5JWqfiEfKijUzBP4iLHpB4BirgMYkk/bqayFVYZSlxI7iVj9lGda
+ LEl9RmhNncJu8lNAZW9bmWSGo4Vlr/rpl4jKvIuRbcz2N62kMeZEEXIRFPUNBGeJNDW8b+FYyQK
+ eIre7G+lNeX5Okw==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-MFC-PROC-ID: QhIwsYQSFdP_batAZoqWWBKJkzb2S8QHqhw6wpbOyAc_1792493441
+X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+X-Mimecast-MFC-PROC-ID: ZBBJlYuRB8K_9BoZJwGdjr0B2xJ0iydyhq8fqGlVnE4_1792493257
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1792493448-530CDB50-B313043F/0/0
+X-purgate-ID: tlsNG-ef75cf/1792493266-3C212AE4-4F2B330F/0/0
 X-purgate-type: clean
-X-purgate-size: 5071
+X-purgate-size: 1743
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -184,141 +184,55 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Introduce a macro used in following commit, and convert a few existing
-candidates. Inspired by a similar macro in Linux kernel/trace/bpf_trace.c
+A simple helper to set the default enum value from the integer value.
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- hw/misc/tz-ppc.c               | 19 ++-----------------
- hw/remote/vfio-user-obj.c      | 17 +++--------------
- include/hw/cxl/cxl_component.h |  5 +----
- include/qemu/osdep.h           | 33 +++++++++++++++++++++++++++++++++
- 4 files changed, 39 insertions(+), 35 deletions(-)
+ include/qom/object.h | 9 +++++++++
+ qom/object.c         | 9 +++++++++
+ 2 files changed, 18 insertions(+)
 
-diff --git a/hw/misc/tz-ppc.c b/hw/misc/tz-ppc.c
-index 6f820430eed8..5f09ce164c19 100644
---- a/hw/misc/tz-ppc.c
-+++ b/hw/misc/tz-ppc.c
-@@ -303,26 +303,11 @@ static const VMStateDescription tz_ppc_vmstate = {
+diff --git a/include/qom/object.h b/include/qom/object.h
+index e9b380462ded..2a5723c555e9 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -1260,6 +1260,15 @@ void object_property_set_default_bool(ObjectProperty *prop, bool value);
+  */
+ void object_property_set_default_str(ObjectProperty *prop, const char *value);
  
- #define DEFINE_PORT(N)                                          \
-     DEFINE_PROP_LINK("port[" #N "]", TZPPC, port[N].downstream, \
--                     TYPE_MEMORY_REGION, MemoryRegion *)
-+                     TYPE_MEMORY_REGION, MemoryRegion *),
- 
- static const Property tz_ppc_properties[] = {
-     DEFINE_PROP_UINT32("NONSEC_MASK", TZPPC, nonsec_mask, 0),
--    DEFINE_PORT(0),
--    DEFINE_PORT(1),
--    DEFINE_PORT(2),
--    DEFINE_PORT(3),
--    DEFINE_PORT(4),
--    DEFINE_PORT(5),
--    DEFINE_PORT(6),
--    DEFINE_PORT(7),
--    DEFINE_PORT(8),
--    DEFINE_PORT(9),
--    DEFINE_PORT(10),
--    DEFINE_PORT(11),
--    DEFINE_PORT(12),
--    DEFINE_PORT(13),
--    DEFINE_PORT(14),
--    DEFINE_PORT(15),
-+    QEMU_REPEAT(TZ_NUM_PORTS, DEFINE_PORT)
- };
- 
- static void tz_ppc_class_init(ObjectClass *klass, const void *data)
-diff --git a/hw/remote/vfio-user-obj.c b/hw/remote/vfio-user-obj.c
-index 7e6819f670b5..84c3ff05cfb8 100644
---- a/hw/remote/vfio-user-obj.c
-+++ b/hw/remote/vfio-user-obj.c
-@@ -496,22 +496,11 @@ static size_t vfu_object_bar_rw(PCIDevice *pci_dev, int pci_bar,
-                                  buf, count, is_write);                        \
-     }                                                                          \
- 
--VFU_OBJECT_BAR_HANDLER(0)
--VFU_OBJECT_BAR_HANDLER(1)
--VFU_OBJECT_BAR_HANDLER(2)
--VFU_OBJECT_BAR_HANDLER(3)
--VFU_OBJECT_BAR_HANDLER(4)
--VFU_OBJECT_BAR_HANDLER(5)
--VFU_OBJECT_BAR_HANDLER(6)
-+QEMU_REPEAT(PCI_NUM_REGIONS, VFU_OBJECT_BAR_HANDLER)
- 
-+#define VFU_OBJECT_BAR_HANDLER_PTR(BAR_NO) vfu_object_bar##BAR_NO##_handler,
- static vfu_region_access_cb_t *vfu_object_bar_handlers[PCI_NUM_REGIONS] = {
--    &vfu_object_bar0_handler,
--    &vfu_object_bar1_handler,
--    &vfu_object_bar2_handler,
--    &vfu_object_bar3_handler,
--    &vfu_object_bar4_handler,
--    &vfu_object_bar5_handler,
--    &vfu_object_bar6_handler,
-+    QEMU_REPEAT(PCI_NUM_REGIONS, VFU_OBJECT_BAR_HANDLER_PTR)
- };
- 
- /**
-diff --git a/include/hw/cxl/cxl_component.h b/include/hw/cxl/cxl_component.h
-index ffc82202206c..fca8b7055ccd 100644
---- a/include/hw/cxl/cxl_component.h
-+++ b/include/hw/cxl/cxl_component.h
-@@ -186,10 +186,7 @@ REG32(CXL_HDM_DECODER_GLOBAL_CONTROL, CXL_HDM_REGISTERS_OFFSET + 4)
- /* Support 4 decoders at all levels of topology */
- #define CXL_HDM_DECODER_COUNT 4
- 
--HDM_DECODER_INIT(0);
--HDM_DECODER_INIT(1);
--HDM_DECODER_INIT(2);
--HDM_DECODER_INIT(3);
-+QEMU_REPEAT(CXL_HDM_DECODER_COUNT, HDM_DECODER_INIT)
- 
- /*
-  * CXL r3.1 Section 8.2.4.21: CXL Extended Security Capability Structure
-diff --git a/include/qemu/osdep.h b/include/qemu/osdep.h
-index 1ec5b42230be..a5e7ff99cb89 100644
---- a/include/qemu/osdep.h
-+++ b/include/qemu/osdep.h
-@@ -191,6 +191,39 @@ extern "C" {
- 
- #include "qemu/typedefs.h"
- 
-+/*
-+ * QEMU_REPEAT(n, m) - invoke m(0) m(1) ... m(n-1)
++/**
++ * object_property_set_default_enum:
++ * @prop: the property to set
++ * @value: the value to be written to the property
 + *
-+ * Expands to n invocations of m, each with a literal integer argument.
-+ * n must be a compile-time constant in 0..16.
-+ *
-+ * Example - generate 4 per-index function definitions:
-+ *
-+ *   #define DEFINE_GETTER(i) \
-+ *   static int get_##i(void) { return values[i]; }
-+ *
-+ *   QEMU_REPEAT(4, DEFINE_GETTER)
++ * Set the property default value.
 + */
-+#define QEMU_REPEAT_0(m)
-+#define QEMU_REPEAT_1(m)   QEMU_REPEAT_0(m)   m(0)
-+#define QEMU_REPEAT_2(m)   QEMU_REPEAT_1(m)   m(1)
-+#define QEMU_REPEAT_3(m)   QEMU_REPEAT_2(m)   m(2)
-+#define QEMU_REPEAT_4(m)   QEMU_REPEAT_3(m)   m(3)
-+#define QEMU_REPEAT_5(m)   QEMU_REPEAT_4(m)   m(4)
-+#define QEMU_REPEAT_6(m)   QEMU_REPEAT_5(m)   m(5)
-+#define QEMU_REPEAT_7(m)   QEMU_REPEAT_6(m)   m(6)
-+#define QEMU_REPEAT_8(m)   QEMU_REPEAT_7(m)   m(7)
-+#define QEMU_REPEAT_9(m)   QEMU_REPEAT_8(m)   m(8)
-+#define QEMU_REPEAT_10(m)  QEMU_REPEAT_9(m)   m(9)
-+#define QEMU_REPEAT_11(m)  QEMU_REPEAT_10(m)  m(10)
-+#define QEMU_REPEAT_12(m)  QEMU_REPEAT_11(m)  m(11)
-+#define QEMU_REPEAT_13(m)  QEMU_REPEAT_12(m)  m(12)
-+#define QEMU_REPEAT_14(m)  QEMU_REPEAT_13(m)  m(13)
-+#define QEMU_REPEAT_15(m)  QEMU_REPEAT_14(m)  m(14)
-+#define QEMU_REPEAT_16(m)  QEMU_REPEAT_15(m)  m(15)
-+#define QEMU_REPEAT_(n, m) QEMU_REPEAT_##n(m)
-+#define QEMU_REPEAT(n, m)  QEMU_REPEAT_(n, m)
++void object_property_set_default_enum(ObjectProperty *prop, int value);
 +
  /**
-  * Mark a function that executes in coroutine context
-  *
+  * object_property_set_default_list:
+  * @prop: the property to set
+diff --git a/qom/object.c b/qom/object.c
+index c34b47312f29..1d09315b328b 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -1719,6 +1719,15 @@ void object_property_set_default_str(ObjectProperty *prop, const char *value)
+     object_property_set_default(prop, QOBJECT(qstring_from_str(value)));
+ }
+ 
++void object_property_set_default_enum(ObjectProperty *prop, int value)
++{
++    assert(prop && prop->qapi_type && prop->qapi_type->lookup);
++
++    object_property_set_default(prop, QOBJECT(qstring_from_str(
++        qapi_enum_lookup(prop->qapi_type->lookup, value)
++    )));
++}
++
+ void object_property_set_default_list(ObjectProperty *prop)
+ {
+     object_property_set_default(prop, QOBJECT(qlist_new()));
 
 -- 
 2.56.0.116.g6de20f6092dc
