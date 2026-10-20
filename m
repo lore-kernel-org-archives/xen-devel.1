@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 328C9606A31D
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E14E0606A321
 	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=is2p5rs4
-Received: from list by lists.xenproject.org with outflank-mailman.1455331.1669080 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=D+0o74KQ
+Received: from list by lists.xenproject.org with outflank-mailman.1455338.1669099 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7WO-0000Ft-Qt; Tue, 20 Oct 2026 10:56:44 +0000
+	id 1xJ7WT-00013j-2I; Tue, 20 Oct 2026 10:56:49 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455331.1669080; Tue, 20 Oct 2026 10:56:44 +0000
+Received: by outflank-mailman (output) from mailman id 1455338.1669099; Tue, 20 Oct 2026 10:56:48 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7WN-0000AK-Kk; Tue, 20 Oct 2026 10:56:43 +0000
-Received: by outflank-mailman (input) for mailman id 1455331;
- Tue, 20 Oct 2026 10:50:58 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xJ7WR-0000wz-MG; Tue, 20 Oct 2026 10:56:47 +0000
+Received: by outflank-mailman (input) for mailman id 1455338;
+ Tue, 20 Oct 2026 10:51:01 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qo-00006Y-7d
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:58 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qq-00008C-W7
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7Qn-00CrhG-KR
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:57 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xJ7Qq-004d40-Cd
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:00 +0200
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74791-2eae-0a2a0a5409dd-0a2a4508a15a-0
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:57 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad7478b-8faa-0a2a0a5109dd-0a2a4504bc34-40
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:00 +0200
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74718-f659-0a2a45080019-aa0a817c92c1-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:48:57 +0200
+ id 6ad746de-b57f-0a2a45040019-aa0a857c5929-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:59 +0200
 Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-561--SDF1wKINiCajNC4XN8nVg-1; Tue,
- 20 Oct 2026 10:48:53 +0000
-Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-378-qnN94N6QPK2vA93ceMbHjQ-1; Tue,
+ 20 Oct 2026 10:47:46 +0000
+Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C281219560AD; Tue, 20 Oct 2026 10:48:49 +0000 (UTC)
+ id 9161F1955F02; Tue, 20 Oct 2026 10:47:41 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id CC00130000E7; Tue, 20 Oct 2026 10:48:46 +0000 (UTC)
+ by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 15EC75BC; Tue, 20 Oct 2026 10:47:39 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493336;
+	s=mimecast20190719; t=1792493278;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=neSxnRoG/OmCl+kteGebRHQJWP0OZxqFcRCZ8c/QA3c=;
-	b=is2p5rs4M47Kb5I0qVWQ/8KTtLVZw4mr0u4/M0xbmkcNDhobWEdHz26KaB3A9bGpx5OSOu
-	GwPrQVsHXBT6NdUvceRnTjgx236NyOx3OjOQKs4f4ym943i489aC68QjLunJDcydcVWCY7
-	CYhP+St76XYBBSW7eetEHzPNa02hWtE=
-X-MC-Unique: -SDF1wKINiCajNC4XN8nVg-1
-X-Mimecast-MFC-AGG-ID: -SDF1wKINiCajNC4XN8nVg_1792493329
+	bh=w3CoU0QuGNI+p7I3jy6WGQ0mlfEWpp4sXXt2/m2QXAI=;
+	b=D+0o74KQQ/iAzz0i6BCX0iYkV8kwbgbBlC5SeZmlId+ZVB1an4olzwd2sx3Q6iqbAmARQN
+	UPNXlPvjfx2/KNvgib4gZEpJxuSrul+pWwu1U2/WTo+ecqwPMsI55eSxu3/LNsYB9XTHKI
+	HeSSg4nOjGNgaTWd0LT5yOMIJ9Gcfw4=
+X-MC-Unique: qnN94N6QPK2vA93ceMbHjQ-1
+X-Mimecast-MFC-AGG-ID: qnN94N6QPK2vA93ceMbHjQ_1792493261
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:46 +0400
-Subject: [PATCH v7 29/65] whpx: convert OnOffAuto hyperv property to
- QAPI-aware registration
+Date: Tue, 20 Oct 2026 14:45:33 +0400
+Subject: [PATCH v7 16/65] qom: add object_{class_}property_add_qapi
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-29-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-16-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,112 +151,155 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2624;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=4847;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=fGCiDH3DKuAcB7LiCAkFXJHjeu1egNzKD2fVY9nF9O8=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZaOCCAg3rKTDCUl37+MgI4Ayhi8dunIN41j
- jugR4kjAkCJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
- 5b6WEACNN5lLKAUjdYB4zCcQJTY9b/clU3Ul2ZqrNT8WzHUQ+fqxHO7sMKEnV/KpehWqsAYB7Wa
- TcTcGvlU8B+Rp77AddGo/jHP3KiihUrvHM5s2QNpNKBTkpdE/FtNtDGvtY7Rl7BnE0I4ur8xacz
- HXMHNM++tzb2u4VkpDDbgWl8A7MUiCYAu2iAC93LMBoFtVGYq/tjz4PQr2gFfLvNxJ8hh8g+2iu
- smVuhJO5UxVs/qkZoh6kIe0LZ6WvLafLB9/AU4a+YYPl0g7G3gvQV+Pzb64VIcibMzpV8qJ8b8M
- t+/BnO1YoRZPZ11BLDzxA83zKDcZQWNwtNYWZCCxAgLA9Evb3RKKpX3ezykZW625hA11ml8/USP
- Ng9IwZx3DS+SVp66cPB3YD4Vblja8jaJLVCuGSQnNstkM9jWJ41xW1pTt/RQn1TsRK/t7qyBtO1
- kHBG4Xp7bkht89XuKnLvIPrFH/W85g9KGuerywfZYfz/FobiX2GdtR3qPJiq0+oIJa2vLvqAjID
- 3M72ERKY7E2DdWkQ/qN6y7zsbhicNq980YAI7vae2/ht1mYnRZYyo4tF62m7MjopLEjAufj+RHB
- jZQHwA8CL5TVxFAQmJ8wDFE+5CAwj4qru7MbpAYn1njH780Iqg5frmuGfrB2B5bUXeimrR8uppN
- FX/dQnG4r/dU1+A==
+ bh=Kq06N3iO6F8AhEf3w27s03u+jnvcQuJjGRRe4Zmd+Hw=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZYIBdWrkS5tz+9/UTddwYES8EXuUjGwwr7o
+ DY/JyPpfPaJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
+ 5YwTEACxwwoxioLPKJmAISYmT8CzcjaWz6/mg9O/RdNTtr/Qe5SgKfnNgHmYpowIFXzfKxXxVk0
+ B1ORjczYVaJ2+0sEYatt98MR4cL6Hv6jxJmuNPVhuZm/dGP4xT8zjDnqPWrzyhuGDnRW314fM0G
+ cs/+K/C+Nwe2hpLMybC8gw/whDhlPfHu8KTvLEBX5v7tKzgP6D7PedIBYWNwqFSmpuO0PlQuMHR
+ vN33ahh98LvZbfbEhdgO2kdICQMa0DUZEF3ng3OASLe7+t8JVNn+KdmUEBihcL1bJKaAVpj30Xa
+ akndT9MZhwYvZw095fcPoxfNhNpNXbRLhzvdGBMkE2j3b8DxfYnc+JFviLUfeaEL/RnpAHO/io7
+ w903ZGKDrm8kPlKsMwWsMLrWGdPLR5Kc5NsiK0+s+/lExqWl6WXGAKpJ1XWiI9SvSRFr+pT8sRG
+ YQnTqX+5yjvMZjHUf8jZ5kJOLYZxU/73vOGIBhxLDvlVywwQz+b5C3azNqGdFSLYqf+PbAJiruh
+ g7uaTSrEABrr0xm+UN5VZL/yxAJEyP0wzq4K8tg3ZRfb9EeYCKYxoaRTQnBz5hWjPVnJbnUqt4X
+ lIR0HJed6Cwk5m/Qb1NAZshRIkE3JTkSJUbwmlB1M99oPiceyZi0qG1emOPy0nq/lenfk9B+FRX
+ AIGs9zGqOul8NUQ==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
-X-Mimecast-MFC-PROC-ID: GYxlFWTtJOgEk61ITIIlRybRnLBqwAUTgoBs8eeYCz4_1792493329
+X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+X-Mimecast-MFC-PROC-ID: TpKASW0VFf-FnefmHBsslcMz2r6KW0Xvst0dpP9wvGU_1792493261
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c1860d/1792493337-CD54C87B-B4D0087C/0/0
+X-purgate-ID: tlsNG-ebf023/1792493279-C1CD7B50-9FABBD01/0/0
 X-purgate-type: clean
-X-purgate-size: 2626
+X-purgate-size: 4849
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Convert the hyperv OnOffAuto property from manual visitor-based
-callbacks to property_add_qapi_enum().
-
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- accel/whpx/whpx-common.c | 29 ++++++++++-------------------
- 1 file changed, 10 insertions(+), 19 deletions(-)
+ include/qom/object.h | 55 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ qom/object.c         | 32 ++++++++++++++++++++++++++++++
+ 2 files changed, 87 insertions(+)
 
-diff --git a/accel/whpx/whpx-common.c b/accel/whpx/whpx-common.c
-index 247e12db8128..187938c02b51 100644
---- a/accel/whpx/whpx-common.c
-+++ b/accel/whpx/whpx-common.c
-@@ -22,6 +22,7 @@
- #include "qemu/error-report.h"
- #include "qapi/error.h"
- #include "qapi/qapi-types-common.h"
-+#include "qapi/qapi-type-infos-common.h"
- #include "qapi/qapi-visit-common.h"
- #include "migration/blocker.h"
- #include "accel/accel-cpu-target.h"
-@@ -470,18 +471,11 @@ static void whpx_set_kernel_irqchip(Object *obj, Visitor *v,
-     }
+diff --git a/include/qom/object.h b/include/qom/object.h
+index 2a5723c555e9..eb61d8842b80 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -2027,6 +2027,61 @@ ObjectProperty *object_class_property_add_enum(ObjectClass *klass,
+                                     int (*get)(Object *, Error **),
+                                     void (*set)(Object *, int, Error **));
+ 
++/**
++ * object_property_add_qapi:
++ * @obj: the object to add a property to
++ * @name: the name of the property
++ * @qapi_type: QAPI type info descriptor
++ * @get: The getter to be called to read a property.  If this is NULL, then
++ *   the property cannot be read.
++ * @set: the setter to be called to write a property.  If this is NULL,
++ *   then the property cannot be written.
++ * @release: called when the property is removed from the object.  This is
++ *   meant to allow a property to free its opaque upon object
++ *   destruction.  This may be NULL.
++ * @opaque: an opaque pointer to pass to the callbacks for the property
++ *
++ * Add a property with a QAPI type association. The property type name
++ * is derived from @qapi_type->name.
++ *
++ * Returns: The newly added property on success, or %NULL on failure.
++ */
++ObjectProperty *
++object_property_add_qapi(Object *obj, const char *name,
++                         const QAPITypeInfo *qapi_type,
++                         ObjectPropertyAccessor *get,
++                         ObjectPropertyAccessor *set,
++                         ObjectPropertyRelease *release,
++                         void *opaque);
++
++/**
++ * object_class_property_add_qapi:
++ * @klass: the object class to add a property to
++ * @name: the name of the property
++ * @qapi_type: QAPI type info descriptor
++ * @get: The getter to be called to read a property.  If this is NULL, then
++ *   the property cannot be read.
++ * @set: the setter to be called to write a property.  If this is NULL,
++ *   then the property cannot be written.
++ * @release: called when the property is removed from the object.  This is
++ *   meant to allow a property to free its opaque upon object
++ *   destruction.  This may be NULL.
++ * @opaque: an opaque pointer to pass to the callbacks for the property
++ *
++ * Add a property with a QAPI type association. The property type name
++ * is derived from @qapi_type->name.
++ *
++ * Returns: The newly added property on success, or %NULL on failure.
++ */
++ObjectProperty *
++object_class_property_add_qapi(ObjectClass *klass,
++                               const char *name,
++                               const QAPITypeInfo *qapi_type,
++                               ObjectPropertyAccessor *get,
++                               ObjectPropertyAccessor *set,
++                               ObjectPropertyRelease *release,
++                               void *opaque);
++
+ /**
+  * object_property_add_tm:
+  * @obj: the object to add a property to
+diff --git a/qom/object.c b/qom/object.c
+index 1d09315b328b..bebbfc43556d 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -2609,6 +2609,38 @@ object_class_property_add_enum(ObjectClass *klass, const char *name,
+                                      prop);
  }
  
--static void whpx_set_hyperv(Object *obj, Visitor *v,
--                                   const char *name, void *opaque,
--                                   Error **errp)
-+static void whpx_set_hyperv(Object *obj, int value, Error **errp)
- {
-     struct whpx_state *whpx = &whpx_global;
--    OnOffAuto mode;
- 
--    if (!visit_type_OnOffAuto(v, name, &mode, errp)) {
--        return;
--    }
--
--    switch (mode) {
-+    switch (value) {
-     case ON_OFF_AUTO_ON:
-         whpx->hyperv_enlightenments_allowed = true;
-         whpx->hyperv_enlightenments_required = true;
-@@ -497,11 +491,7 @@ static void whpx_set_hyperv(Object *obj, Visitor *v,
-         whpx->hyperv_enlightenments_required = false;
-         break;
-     default:
--        /*
--         * The value was checked in visit_type_OnOffAuto() above. If
--         * we get here, then something is wrong in QEMU.
--         */
--        abort();
-+        g_assert_not_reached();
-     }
- }
- 
-@@ -533,11 +523,12 @@ static void whpx_accel_class_init(ObjectClass *oc, const void *data)
-         NULL, NULL);
-     object_class_property_set_description(oc, "kernel-irqchip",
-         "Configure WHPX in-kernel irqchip");
--    object_class_property_add(oc, "hyperv", "OnOffAuto",
--        NULL, whpx_set_hyperv,
--        NULL, NULL);
--    object_class_property_set_description(oc, "hyperv",
--        "Configure Hyper-V enlightenments");
-+    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
-+        .name = "hyperv",
-+        .description = "Configure Hyper-V enlightenments",
-+        .qapi_type = &OnOffAuto_type_info,
-+        .set = whpx_set_hyperv,
-+    ));
- 
-     whpx_arch_accel_class_init(oc);
- }
++ObjectProperty *
++object_property_add_qapi(Object *obj, const char *name,
++                         const QAPITypeInfo *qapi_type,
++                         ObjectPropertyAccessor *get,
++                         ObjectPropertyAccessor *set,
++                         ObjectPropertyRelease *release,
++                         void *opaque)
++{
++    ObjectProperty *prop;
++
++    prop = object_property_add(obj, name, qapi_type->name,
++                               get, set, release, opaque);
++    prop->qapi_type = qapi_type;
++    return prop;
++}
++
++ObjectProperty *
++object_class_property_add_qapi(ObjectClass *klass, const char *name,
++                               const QAPITypeInfo *qapi_type,
++                               ObjectPropertyAccessor *get,
++                               ObjectPropertyAccessor *set,
++                               ObjectPropertyRelease *release,
++                               void *opaque)
++{
++    ObjectProperty *prop;
++
++    prop = object_class_property_add(klass, name, qapi_type->name,
++                                     get, set, release, opaque);
++    prop->qapi_type = qapi_type;
++    return prop;
++}
++
+ typedef struct TMProperty {
+     void (*get)(Object *, struct tm *, Error **);
+ } TMProperty;
 
 -- 
 2.56.0.116.g6de20f6092dc
