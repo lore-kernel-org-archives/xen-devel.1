@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1FB8D606A31B
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFAA3606A323
 	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=P2KwWbnS
-Received: from list by lists.xenproject.org with outflank-mailman.1455284.1668871 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=g5CiGGuN
+Received: from list by lists.xenproject.org with outflank-mailman.1455296.1668913 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vq-0001TB-OF; Tue, 20 Oct 2026 10:56:10 +0000
+	id 1xJ7Vu-0002EQ-27; Tue, 20 Oct 2026 10:56:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455284.1668871; Tue, 20 Oct 2026 10:56:10 +0000
+Received: by outflank-mailman (output) from mailman id 1455296.1668913; Tue, 20 Oct 2026 10:56:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vq-0001Qz-HD; Tue, 20 Oct 2026 10:56:10 +0000
-Received: by outflank-mailman (input) for mailman id 1455284;
- Tue, 20 Oct 2026 10:46:29 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xJ7Vt-0002CU-FX; Tue, 20 Oct 2026 10:56:13 +0000
+Received: by outflank-mailman (input) for mailman id 1455296;
+ Tue, 20 Oct 2026 10:47:32 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7MT-0007Fw-HK
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:46:29 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7NU-0007JS-4P
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:47:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7MS-002EHQ-U7
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:46:28 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xJ7NT-004cQR-Hc
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:47:31 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74680-bab6-0a2a0a5309dd-0a2a4509d282-10
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:28 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad746bd-8faa-0a2a0a5109dd-0a2a45079988-30
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:31 +0200
+Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74683-be1a-0a2a45090019-aa0a817c7905-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:46:28 +0200
-Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ id 6ad746c2-b4ea-0a2a45070019-aa0a857cbe7b-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:31 +0200
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-349-AZuVlQ_mNCWlMBKmGs5kWg-1; Tue,
- 20 Oct 2026 10:46:23 +0000
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-330---ICFwzSMLyjVd2-rA4_dw-1; Tue,
+ 20 Oct 2026 10:47:26 +0000
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 73F281800D85; Tue, 20 Oct 2026 10:46:18 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id B08BA1955EA9; Tue, 20 Oct 2026 10:47:21 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 9D8411956088; Tue, 20 Oct 2026 10:46:13 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 7AA0630000E7; Tue, 20 Oct 2026 10:47:18 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,23 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493187;
+	s=mimecast20190719; t=1792493250;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Wrkputc8/RPpD4nnWHNw9T7RRAU4Kg2aM4nuyIGGs8E=;
-	b=P2KwWbnS9ygGzQ/ZLqIaSEASARp1ANhH7OH8vh9SkqbCeKGzLAOjyDqcjuuzp56faazgvM
-	eVmAUmPzTC4TVEhpvQOPAJ9X0YS6JelQZjBH9HP2Uas5A0/IsLtPfgKkGvQOsX/wNJ5DZv
-	4s4hwEOGelFhvZpAi4BkPo99bXszpBM=
-X-MC-Unique: AZuVlQ_mNCWlMBKmGs5kWg-1
-X-Mimecast-MFC-AGG-ID: AZuVlQ_mNCWlMBKmGs5kWg_1792493179
-From: marcandre.lureau@redhat.com
-Date: Tue, 20 Oct 2026 14:45:19 +0400
-Subject: [PATCH v7 02/65] qapi: Ease access to introspection names
+	bh=ECa+EP2+GWrANsxj0WvwUZJkCIlcvdWbNsc8NiwNlVo=;
+	b=g5CiGGuNvFD0rgfvjV/dslMMhS8N2Tk2sVawBzi7DbQM0fjPit4aIcWckuDIta3ksgelEp
+	5OmtJONQBOz7bKbSzEseUXQFsTZqVjjWpuE8swVjkr/CYFVvHU15f6ssTOzsWVUtWEZsJ8
+	ocTQ1UmmJF45kUNLVyBF1gpUAo+Z1T0=
+X-MC-Unique: --ICFwzSMLyjVd2-rA4_dw-1
+X-Mimecast-MFC-AGG-ID: --ICFwzSMLyjVd2-rA4_dw_1792493241
+From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
+Date: Tue, 20 Oct 2026 14:45:29 +0400
+Subject: [PATCH v7 12/65] qapi/qom: add qapi-type field to
+ ObjectPropertyInfo
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-2-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-12-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -151,31 +152,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=7889;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1921;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=a2pApAt20adFheRFMFL0JhfgD1DBySkAUQki6ne7iLY=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZX47T8N7MhCWr0sH+GZry8k5SuXuUXyZs9e
- X4b68TesAyJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGVwAKCRDa6OEJdZac
- 5auAD/4/Ie/cSClFbfq3pLk5G4chwRGPx/IkNYssN2QhE7SuensGeO9N3hAkiwjTWMQUa4RmIV3
- Ih/ody0cyQZ7ebEGwThhPd/0tDx7xTVJYKJlWKSTE5TWfQGUlgdud9VFnpmx8tSWLwXoFzA3/Hi
- z84mm5HxX4k1UOcwbKkeDY6EkPEVuH8/N0fn/A7MiLmcS+vrSdBq2tiEnHZ2QEopsTjy7Fg+8Dm
- trZ5cGqVMRvocoVM8CgiT6O62rCese/7CxN6AiIHPC523itkKI9FAhKp4RCjU92vE34Y4qb3OK7
- 4nLiR3tXfQKU/YeaXR1MILIVGMiK5nF1dai6meQh2g2gFR5CZaT6gar5YZXLqO6P5vbb/h9A5B1
- XfERQ+8YYELHMZBHW9/k9O9lzRT4AaVsNM0NRp0v7q2tBK8LXDi/gCQ8p7fmH14kbbMpCNI05fK
- raCcLlKl6gYu52cO8zN9VqgDnMq9FRZW0+OUXJFULxZ30mbl8FV2VQh7yqS7Pjv7b0zNHWAunEZ
- wonP/p1G5r2Po5hwZOcexcv5WAK6BbCPlEQLoNz9USS4GnPaglfv0pEsF4RVBhsqmN/mm7S8mbt
- wlt5AqKpk3Y/XRH4EIFYc+5GuwKmie/wmHA0vfOmbqn2V9JRLHgrJL5pHEdbb6UDEt2kucPZXXU
- qlf+go84nzQ475Q==
+ bh=iKT89ERqmB5xJit6r3j8WUD6ClpE36oEYsgjEEvZ40o=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZYxccp5RLblnwypa/9MUPo5yHCT1xWIDSPC
+ kA8/nPQHZWJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
+ 5e/BD/9TtX0u6H+0rpG8WE+dl2QuQTNqc7I7UQsZIGnhPN3Al/XNQZiAz7mmC9G+NYbkf+JSdfB
+ k5kprVrQhJ3Qwo46Eo+f3qr8ThczDGZA6O4hzHv5kxdvgp6qn1DaCqqyaCoKsR/z+iuGL2HmZsU
+ mDSJqIH3dy3Hb40RluHg7V7GmVv4Rf6FguZ82m5gB7pbbTD2eXnx3z+CnMSeaAmfG4F8BZ0feAi
+ ZZdOtwWw3zJcvLJE4/+UfOCPiGxw4cQtY+ATWlNBSjHmmNXNtzG8MlEvUPCJ2Sjn27mHRxuM7nO
+ WQ6+yJh/lQ0Ghbdq95AVNza5NuB1EVwplpUXCjM1cH+Yy2DOAZFw8NZuDgRazKKFH/AOAYKwO7P
+ fSFGOlRSGjjJuFA4w4sYrs+YXl2zcGOmUVTKNTX3yF2OhQx8UgAnNPV9I4poe0gXiUAgmElaUBX
+ bAH8SeScvuf8ZDHbsiN/1WmUdBrI/V4+IxLJlZYGHkeyF8ysSL5DJ7MeUTFBeBmG5LI9nRNWyhj
+ xgXX8aohw8Oq+7nyejaTJP4C9/B8IRO6jiFJRRUvMsMjnKfTeEn2904ZPwG2JU6Qdo5st5sHmK6
+ GVmZP2Uzs/39Pu485CCHNkrP67konhv+JXIwq2EN4q6gZq+7K1gfG51xtJ2MyHYyCc0BAAGTRD5
+ xkTzLUa6kbRI52Q==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: 2-qu0rH9ZhSFifJT8_LtKB31j1Grb9Zhj9f_IyJFeUg_1792493179
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: TkhLPz90VvreOJxmXBfv2WjtG_xZHSvmirvCRQZqCwI_1792493241
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1792493188-BF0DD034-D54B9E37/0/0
+X-purgate-ID: tlsNG-ef75cf/1792493251-378D1AE4-B244C33E/0/0
 X-purgate-type: clean
-X-purgate-size: 7938
+X-purgate-size: 1923
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -184,195 +185,61 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Markus Armbruster <armbru@redhat.com>
+Add an optional 'qapi-type' field to ObjectPropertyInfo and
+ObjectPropertyValue. When present, it contains the masked type name that
+can be looked up in query-qmp-schema output. Absent for properties
+without a QAPI type association. Always absent for now, populated
+in the following changes.
 
-query-qmp-schema masks type names, because they are not part of the
-external interface.  Marc-André Lureau would like to also use them
-with qom-list & friends.  Trouble is the masked names are buried deep
-in QAPISchemaGenIntrospectVisitor.  Lift them into schema.py: new
-QAPISchemaDefinition method introspection_name() returns a
-definition's name for use in introspection.
-
-This changes the masked names, which is fine.
-
+Reviewed-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
-Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- scripts/qapi/introspect.py | 23 ++++-------------------
- scripts/qapi/schema.py     | 43 +++++++++++++++++++++++++++++++++++++++++++
- 2 files changed, 47 insertions(+), 19 deletions(-)
+ qapi/qom.json | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
 
-diff --git a/scripts/qapi/introspect.py b/scripts/qapi/introspect.py
-index 7e28de2279ad..644461560c64 100644
---- a/scripts/qapi/introspect.py
-+++ b/scripts/qapi/introspect.py
-@@ -30,7 +30,6 @@
-     QAPISchemaAlternatives,
-     QAPISchemaArrayType,
-     QAPISchemaBranches,
--    QAPISchemaBuiltinType,
-     QAPISchemaEntity,
-     QAPISchemaEnumMember,
-     QAPISchemaFeature,
-@@ -177,7 +176,6 @@ def __init__(self, prefix: str, unmask: bool):
-         self._schema: Optional[QAPISchema] = None
-         self._trees: List[Annotated[SchemaInfo]] = []
-         self._used_types: List[QAPISchemaType] = []
--        self._name_map: Dict[str, str] = {}
-         self._genc.add(mcgen('''
- #include "qemu/osdep.h"
- #include "%(prefix)sqapi-introspect.h"
-@@ -208,18 +206,14 @@ def visit_end(self) -> None:
-         self._schema = None
-         self._trees = []
-         self._used_types = []
--        self._name_map = {}
+diff --git a/qapi/qom.json b/qapi/qom.json
+index 49f222796ab4..34be7768135c 100644
+--- a/qapi/qom.json
++++ b/qapi/qom.json
+@@ -35,6 +35,10 @@
+ #        qdev device type name.  Link properties form the device model
+ #        graph.
+ #
++# @qapi-type: the name of the property's type as it appears in the
++#     output of ``query-qmp-schema``.  Absent if the type does not
++#     occur there.  (since 11.2)
++#
+ # @description: if specified, the description of the property.
+ #
+ # @default-value: the default value, if any (since 5.0)
+@@ -44,6 +48,7 @@
+ { 'struct': 'ObjectPropertyInfo',
+   'data': { 'name': 'str',
+             'type': 'str',
++            '*qapi-type': 'str',
+             '*description': 'str',
+             '*default-value': 'any' } }
  
-     def visit_needed(self, entity: QAPISchemaEntity) -> bool:
-         # Ignore types on first pass; visit_end() will pick up used types
-         return not isinstance(entity, QAPISchemaType)
+@@ -55,6 +60,10 @@
+ # @type: the type of the property, as described in
+ #     `ObjectPropertyInfo`.
+ #
++# @qapi-type: the name of the property's type as it appears in the
++#     output of ``query-qmp-schema``.  Absent if the type does not
++#     occur there.  (since 11.2)
++#
+ # @value: the value of the property.  Absent when the property cannot
+ #     be read.
+ #
+@@ -63,6 +72,7 @@
+ { 'struct': 'ObjectPropertyValue',
+   'data': { 'name': 'str',
+             'type': 'str',
++            '*qapi-type': 'str',
+             '*value': 'any' } }
  
-     def _name(self, name: str) -> str:
--        if self._unmask:
--            return name
--        if name not in self._name_map:
--            self._name_map[name] = '%d' % len(self._name_map)
--        return self._name_map[name]
-+        assert self._schema
-+        return self._schema.definition_introspection_name(name, self._unmask)
- 
-     def _use_type(self, typ: QAPISchemaType) -> str:
-         assert self._schema is not None
-@@ -237,13 +231,6 @@ def _use_type(self, typ: QAPISchemaType) -> str:
-         # Add type to work queue if new
-         if typ not in self._used_types:
-             self._used_types.append(typ)
--        # Clients should examine commands and events, not types.  Hide
--        # type names as integers to reduce the temptation.  Also, it
--        # saves a few characters on the wire.
--        if isinstance(typ, QAPISchemaBuiltinType):
--            return typ.name
--        if isinstance(typ, QAPISchemaArrayType):
--            return '[' + self._use_type(typ.element_type) + ']'
-         return self._name(typ.name)
- 
-     @staticmethod
-@@ -271,8 +258,7 @@ def _gen_tree(self, name: str, mtype: str, obj: Dict[str, object],
-                 # Output a comment to make it easy to map masked names
-                 # back to the source when reading the generated output.
-                 comment = f'"{self._name(name)}" = {name}'
--            name = self._name(name)
--        obj['name'] = name
-+        obj['name'] = self._name(name)
-         obj['meta-type'] = mtype
-         if features:
-             obj['features'] = self._gen_features(features)
-@@ -327,8 +313,7 @@ def visit_array_type(self, name: str, info: Optional[QAPISourceInfo],
-                          ifcond: QAPISchemaIfCond,
-                          element_type: QAPISchemaType) -> None:
-         element = self._use_type(element_type)
--        self._gen_tree('[' + element + ']', 'array', {'element-type': element},
--                       ifcond)
-+        self._gen_tree(name, 'array', {'element-type': element}, ifcond)
- 
-     def visit_object_type_flat(self, name: str, info: Optional[QAPISourceInfo],
-                                ifcond: QAPISchemaIfCond,
-diff --git a/scripts/qapi/schema.py b/scripts/qapi/schema.py
-index 9c9e257a8fd5..11f3accec873 100644
---- a/scripts/qapi/schema.py
-+++ b/scripts/qapi/schema.py
-@@ -136,6 +136,13 @@ def __repr__(self) -> str:
-     def c_name(self) -> str:
-         return c_name(self.name)
- 
-+    def set_ordinal(self, ordinal: int) -> None:
-+        pass
-+
-+    # pylint: disable=unused-argument
-+    def introspection_name(self, unmask: bool) -> str:
-+        return self.name
-+
-     def check(self, schema: QAPISchema) -> None:
-         assert not self._checked
-         super().check(schema)
-@@ -323,6 +330,17 @@ def visit(self, visitor: QAPISchemaVisitor) -> None:
- 
- 
- class QAPISchemaType(QAPISchemaDefinition, ABC):
-+    def __init__(
-+        self,
-+        name: str,
-+        info: Optional[QAPISourceInfo],
-+        doc: Optional[QAPIDoc],
-+        ifcond: Optional[QAPISchemaIfCond] = None,
-+        features: Optional[List[QAPISchemaFeature]] = None,
-+    ):
-+        super().__init__(name, info, doc, ifcond, features)
-+        self._masked_name: Optional[str] = None
-+
-     # Return the C type for common use.
-     # For the types we commonly box, this is a pointer type.
-     @abstractmethod
-@@ -363,6 +381,17 @@ def need_has_if_optional(self) -> bool:
-         # Except for arrays; see QAPISchemaArrayType.need_has_if_optional().
-         return not self.c_type().endswith(POINTER_SUFFIX)
- 
-+    def set_ordinal(self, ordinal: int) -> None:
-+        assert not self._masked_name
-+        self._masked_name = str(ordinal)
-+
-+    def introspection_name(self, unmask: bool) -> str:
-+        # Type names are not part of the external interface.  Hide
-+        # them in introspection.  Also saves a few characters on the
-+        # wire.
-+        assert self._masked_name
-+        return self.name if unmask else self._masked_name
-+
-     def check(self, schema: QAPISchema) -> None:
-         super().check(schema)
-         for feat in self.features:
-@@ -402,6 +431,11 @@ def json_type(self) -> str:
-     def doc_type(self) -> str:
-         return self.json_type()
- 
-+    def introspection_name(self, unmask: bool):
-+        if self.json_type() == 'int':
-+            return 'int'
-+        return self.name
-+
-     def visit(self, visitor: QAPISchemaVisitor) -> None:
-         super().visit(visitor)
-         visitor.visit_builtin_type(self.name, self.info, self.json_type())
-@@ -503,6 +537,9 @@ def doc_type(self) -> Optional[str]:
-             return None
-         return 'array of ' + elt_doc_type
- 
-+    def introspection_name(self, unmask: bool):
-+        return '[' + self.element_type.introspection_name(unmask) + ']'
-+
-     def visit(self, visitor: QAPISchemaVisitor) -> None:
-         super().visit(visitor)
-         visitor.visit_array_type(self.name, self.info, self.ifcond,
-@@ -1182,6 +1219,7 @@ def _def_definition(self, defn: QAPISchemaDefinition) -> None:
-                     "'%s' is already defined\n%s" % (defn.name, where))
-             raise QAPISemError(
-                 defn.info, "%s is already defined" % other_defn.describe())
-+        defn.set_ordinal(len(self._entity_dict))
-         self._entity_dict[defn.name] = defn
- 
-     def lookup_defn(self, name: str) -> Optional[QAPISchemaDefinition]:
-@@ -1208,6 +1246,11 @@ def resolve_type(
-                 info, "%s uses unknown type '%s'" % (what, name))
-         return typ
- 
-+    def definition_introspection_name(self, name: str, unmask: bool) -> str:
-+        defn = self.lookup_defn(name)
-+        assert defn
-+        return defn.introspection_name(unmask)
-+
-     def _module_name(self, fname: str) -> str:
-         if QAPISchemaModule.is_system_module(fname):
-             return fname
+ ##
 
 -- 
 2.56.0.116.g6de20f6092dc
