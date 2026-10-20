@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BF2E7606A32A
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31E55606A31E
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:25 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=fDnrM/lx
-Received: from list by lists.xenproject.org with outflank-mailman.1455300.1668927 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Ma1S9WUJ
+Received: from list by lists.xenproject.org with outflank-mailman.1455294.1668904 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vv-0002d4-9q; Tue, 20 Oct 2026 10:56:15 +0000
+	id 1xJ7Vt-00022a-7W; Tue, 20 Oct 2026 10:56:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455300.1668927; Tue, 20 Oct 2026 10:56:15 +0000
+Received: by outflank-mailman (output) from mailman id 1455294.1668904; Tue, 20 Oct 2026 10:56:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vu-0002Z4-Ry; Tue, 20 Oct 2026 10:56:14 +0000
-Received: by outflank-mailman (input) for mailman id 1455300;
- Tue, 20 Oct 2026 10:49:37 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xJ7Vs-00020J-OB; Tue, 20 Oct 2026 10:56:12 +0000
+Received: by outflank-mailman (input) for mailman id 1455294;
+ Tue, 20 Oct 2026 10:47:28 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7PV-0007Pt-Nk
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:49:37 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7NQ-0007JE-6L
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:47:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7PV-002FFo-4b
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:49:37 +0200
+ id 1xJ7NP-00EyXF-CO
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:47:27 +0200
 Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74737-2eae-0a2a0a5409dd-0a2a4509c02e-16
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:49:36 +0200
+ id 6ad746aa-8faa-0a2a0a5109dd-0a2a4509df90-38
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:27 +0200
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
  by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7473f-be1a-0a2a45090019-aa0a817cbbe9-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:49:36 +0200
-Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ id 6ad746be-be1a-0a2a45090019-aa0a817cb8c1-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:27 +0200
+Received: from mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-31-cMjt34M1M1KDozVQqfp4-Q-1; Tue,
- 20 Oct 2026 06:49:25 -0400
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-261-ihbyk2kzMnWd3H-QsJ0KOQ-1; Tue,
+ 20 Oct 2026 10:47:20 +0000
+Received: from mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.93])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 6DEAB18005BC; Tue, 20 Oct 2026 10:49:21 +0000 (UTC)
+ by mx-prod-mc-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id EFDAD18007F6; Tue, 20 Oct 2026 10:47:15 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 88FC91956088; Tue, 20 Oct 2026 10:49:18 +0000 (UTC)
+ by mx-prod-int-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id AC08B1800586; Tue, 20 Oct 2026 10:47:12 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,23 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493375;
+	s=mimecast20190719; t=1792493245;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=563WFmKiLO7dqjDqTC7WMPfEiXr6apTsp1OZACEim0s=;
-	b=fDnrM/lx3VpgORToMAsKRUAnQzsIfHPn6VWSwqt2sh2Qk5QS1cWgeSNS2GqhZHKixfBzVR
-	FVIoiRuOMXiXrpuy2YE2p8Af4L4NEX4pzkwYOJY1a93DrKO9vMU631sxEaQwyvngD7FZ9X
-	zn+hnMqJXeeOUFmaqY4EYYldsES6MLA=
-X-MC-Unique: cMjt34M1M1KDozVQqfp4-Q-1
-X-Mimecast-MFC-AGG-ID: cMjt34M1M1KDozVQqfp4-Q_1792493361
+	bh=T3j8f+7qjazkHlU3ibuflAeMZnSK6eTgFQwyyu7+HY4=;
+	b=Ma1S9WUJwCrl7Z8h//7gJQ6StBDL/nu4R0flBPucFKAY4XaX8e5jH+oo+mf2E0F+vR8wIo
+	/AavSU1Jt93i1O2rk4QEDLGy54TSEqNYVFOlyuGCN0ZHbQtM05f4yKNhzm27UaG/V/CZ3S
+	XWXONaRFLVON5vtm0nDsfP+HISqCpj4=
+X-MC-Unique: ihbyk2kzMnWd3H-QsJ0KOQ-1
+X-Mimecast-MFC-AGG-ID: ihbyk2kzMnWd3H-QsJ0KOQ_1792493236
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:52 +0400
-Subject: [PATCH v7 35/65] net/colo-compare: fix compare_timeout setter
- visitor type
+Date: Tue, 20 Oct 2026 14:45:28 +0400
+Subject: [PATCH v7 11/65] qom: add qapi_type field to ObjectProperty
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-35-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-11-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,31 +151,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=986;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=1530;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=ut4iYtgZkRe9PHyTHqoA5Y4P74BD/xuE+aYJ9SkZgtQ=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZaypTQuRSc2e46naq5h2E43TS8QqJ3WLD4A
- vhN/XcoCWiJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
- 5d7uEACx86dNfBKT5U/pKovqIeXYBLYQ//vmgkwdkrPTI4ndp54y3HdcyZ5HRfCgtKdveLHg+jd
- X+w+YSqBLl5VEUHjm/meu5m+OH+47NHQTNS2OKFtIjrxy/gNQNKipDooyWUZscVjYX1UGThUBNN
- dVl9HT3PRymM5GJv6gQ6PTVcRkeH0Kxu4oI+1CFyViK6e+5yw9DJwVb5QoOpVeThfgWhFpg3pjL
- sceKJT9j8XZXVzHbmihcdoYAT3+D7EKFVk1qo0UyOLGA9/8KZOP1HdXhWDgb2qZfH53dKb7Ko8e
- uEwVXLIXLPEvUgi9lAaQyLh7T+FyJcBCnEEs6xCFzJqne3xq63RvlAKDFKOu/ILq50B/wHxRXFw
- AjBbG/L64r+z+dli7dfrYX/QYWxXTLKaMrudDjRReACkngn9oQQ6QeuvsTH+PK6E0IORyfozZwd
- PZX89gASbZR1oNofjZBZlHjuYS4yeBsThEwa4eD7jAxHw81oB1ubcKmEIPILuJUom2AZbAZfx2j
- +6EZUzt+UOWlN5WSLgBSX4ZnOSrhDJo1RQmsu4JsKh0Pe4hsWUb+I+nUCfKE6aydG/D+MwmW2qS
- ddEbgTIu+25MUoFBllzZJOwwYkCEgScY2rLSf628Aspu5Mgqq5QEpvfYnAis/PeOgKgX88neUhv
- FwqeHEUL+SZt/vA==
+ bh=2OIgxeWqZ6otP2YGCtYtdyJ3HEK4Fvyx/L7bWvHPHdk=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZYjp5Y+KqlnMbXKVbPp8oeCxnUXz1KL4/P8
+ K4p+GJF/R2JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
+ 5TnHEACR1GhcDzcI8DmQKfHIpJvlmkNBtahkon1/NhI0x7islO7obbKLlwPWCy4wQP0LWmjiFde
+ xdHBmPABE8w+GBhIOHh7SA0bED9tVk5Z/KKlUlLW05WmHAclgZP0w/6d5wvOkytAsYlsqG3VRxy
+ pzheoaZub7M/f1Vel44KT2PyTTkmTa/qOXxEwlb0xyleSWHAWJ9YwJZGDMVgrIazoCrrCjuu3I7
+ iTedHPzNeu958dcqBAk2k83xJ9h7d8l/nOwWQBatA7434OZv4mQjeA8o1Ofgcbi65KOPJGxySd/
+ zpF8bho145/tHV1hb2kOE9AJZWK5EagdnYfGHXBmTDKlj+Th/DTIwXSf5tt/sZhF0vRDi1iPq/I
+ LKCOU9KvJA+kSgItubIrwmplrAZNenxsHtooqhUGlhbPvcmEcxvBEYCswzXAevfatbwJoe7DFxw
+ Q+8H0wl+PDfMBiyBB0MAjrQjDNAgi3DiW+nG2xFvGonrsvQbamKdlaKdTC0x/2QCSiZM65jfyJv
+ qZtODKR7Ucan3Z0MVy9Ve7TFMgJLRkBuEHYeUxKnLwFChoZ5UPUii0h9F/SrqgDGCI5+Y7VLkFR
+ PA/35B9aACGPcf7BnkarTv8euSmDQVmF5eXIH82cCmx+dLkD7Y0WERC0r9g9iDHW6Ux3KE0GVqX
+ 9APAXx+LTkI4QMg==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: YSO0PXlRKix1fsUgzX3q9yIM4pvQjWXAtORZY3jpXGs_1792493361
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.93
+X-Mimecast-MFC-PROC-ID: fcVR9DLBUPWUx9Y5p675YT2Bh5H24f709Dr9mNBFClA_1792493236
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1792493376-BC2F4034-FC48F7EC/0/0
+X-purgate-ID: tlsNG-bad1c0/1792493247-BF2DC034-316C5D66/0/0
 X-purgate-type: clean
-X-purgate-size: 988
+X-purgate-size: 1532
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -185,32 +184,50 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-The setter was using visit_type_uint32, truncating the value, while the
-getter and typename use uint64. Use visit_type_uint64 consistently.
+Add a const pointer to QAPITypeInfo in ObjectProperty. NULL for now,
+but future patches will add means to make it non-null. The
+QAPITypeInfo will then be used by QOM introspection to tie the
+property to a QAPI type.
 
-Fixes: 0c4266ef2690 ("net/colo-compare.c: Fix compare_timeout format issue")
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- net/colo-compare.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ include/qom/object.h | 2 ++
+ qom/object.c         | 1 +
+ 2 files changed, 3 insertions(+)
 
-diff --git a/net/colo-compare.c b/net/colo-compare.c
-index 5986fb1e8800..948a2f7f9e4b 100644
---- a/net/colo-compare.c
-+++ b/net/colo-compare.c
-@@ -1075,9 +1075,9 @@ static void compare_set_timeout(Object *obj, Visitor *v,
-                                 Error **errp)
- {
-     CompareState *s = COLO_COMPARE(obj);
--    uint32_t value;
-+    uint64_t value;
+diff --git a/include/qom/object.h b/include/qom/object.h
+index 90c1a34e49aa..e9b380462ded 100644
+--- a/include/qom/object.h
++++ b/include/qom/object.h
+@@ -15,6 +15,7 @@
+ #define QEMU_OBJECT_H
  
--    if (!visit_type_uint32(v, name, &value, errp)) {
-+    if (!visit_type_uint64(v, name, &value, errp)) {
-         return;
+ #include "qapi/qapi-builtin-types.h"
++#include "qapi/qapi-type-info.h"
+ #include "qemu/module.h"
+ 
+ struct TypeImpl;
+@@ -91,6 +92,7 @@ struct ObjectProperty
+     char *name;
+     char *type;
+     char *description;
++    const QAPITypeInfo *qapi_type;
+     ObjectPropertyAccessor *get;
+     ObjectPropertyAccessor *set;
+     ObjectPropertyResolve *resolve;
+diff --git a/qom/object.c b/qom/object.c
+index 96498f3d001c..c34b47312f29 100644
+--- a/qom/object.c
++++ b/qom/object.c
+@@ -3171,6 +3171,7 @@ object_property_add_alias(Object *obj, const char *name,
+                              property_release_alias,
+                              prop);
+     op->resolve = property_resolve_alias;
++    op->qapi_type = target_prop->qapi_type;
+     if (target_prop->defval) {
+         op->defval = qobject_ref(target_prop->defval);
      }
-     if (!value) {
 
 -- 
 2.56.0.116.g6de20f6092dc
