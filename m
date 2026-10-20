@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20011606A31B
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4ADA9606A31E
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:56:45 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=KaWZWAvu
-Received: from list by lists.xenproject.org with outflank-mailman.1455310.1668972 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=Kvj6Uhmx
+Received: from list by lists.xenproject.org with outflank-mailman.1455321.1669027 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7W0-0003p3-P2; Tue, 20 Oct 2026 10:56:20 +0000
+	id 1xJ7WB-0005qq-U8; Tue, 20 Oct 2026 10:56:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455310.1668972; Tue, 20 Oct 2026 10:56:20 +0000
+Received: by outflank-mailman (output) from mailman id 1455321.1669027; Tue, 20 Oct 2026 10:56:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7Vz-0003lW-S2; Tue, 20 Oct 2026 10:56:19 +0000
-Received: by outflank-mailman (input) for mailman id 1455310;
- Tue, 20 Oct 2026 10:50:41 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xJ7WA-0005jq-6N; Tue, 20 Oct 2026 10:56:30 +0000
+Received: by outflank-mailman (input) for mailman id 1455321;
+ Tue, 20 Oct 2026 10:50:49 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7QX-0008SN-R1
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:41 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qf-0008V4-DI
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:50:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7QX-00HRtL-7a
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:41 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xJ7Qe-004d40-QV
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:50:48 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad7477b-e002-0a2a0a5209dd-0a2a450ac7d0-18
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:41 +0200
+ id 6ad74785-8faa-0a2a0a5109dd-0a2a450cd584-16
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:48 +0200
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad746cb-f2d2-0a2a450a0019-aa0a817c6749-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:47:40 +0200
-Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
+ id 6ad7470e-f479-0a2a450c0019-aa0a817c6ed9-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:48:47 +0200
+Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-635-ofFqrjFmNVuI0_Rhk-bdPQ-1; Tue,
- 20 Oct 2026 10:47:36 +0000
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-83--Z5Wuh_zPUyc0JzRRnv_JA-1; Tue,
+ 20 Oct 2026 06:48:42 -0400
+Received: from mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.95])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id C6E151955F2B; Tue, 20 Oct 2026 10:47:31 +0000 (UTC)
+ by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 15B921956076; Tue, 20 Oct 2026 10:48:39 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id B32B31956089; Tue, 20 Oct 2026 10:47:28 +0000 (UTC)
+ by mx-prod-int-10.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 1EFBA418; Tue, 20 Oct 2026 10:48:36 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493259;
+	s=mimecast20190719; t=1792493326;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=xIOxZR09tVRL3LoeQ2VRl9bxdzxaCKN+MMqdzDBpGyw=;
-	b=KaWZWAvuU3i6WT/33/tFs0Zu9uqcKTv9JPWvnAzqLH/ekNIQvzzBzbw5/t+WQG6+gszsdW
-	p3fiDEHcxfRw3UiaJpXuYm1AKDQia4yGtBoJ8TP0wPDs+jm2KrbdGz/EVnIhKr2oBIDOL+
-	6n+A7ELc4UxVCpz40noodKo4AtQc7rE=
-X-MC-Unique: ofFqrjFmNVuI0_Rhk-bdPQ-1
-X-Mimecast-MFC-AGG-ID: ofFqrjFmNVuI0_Rhk-bdPQ_1792493252
+	bh=VsbaU0VdjEFE5/Kdiolu0QHc56Ub04+6AJsyszfha5Q=;
+	b=Kvj6Uhmx0CftacNi8fS11w2+s5+vYOuMOklkfQcL817okxj1BLEXQ5Wx0bxnDrs2S7y03u
+	/igaXAem0RanY67EA4+bRDbOFopm14PF8Is+FUroEJEjxZShXK7zfrGslsQ1kCajOGRwjm
+	flMBuzKO9F2N5mpB94gS69XuGdt0/A0=
+X-MC-Unique: -Z5Wuh_zPUyc0JzRRnv_JA-1
+X-Mimecast-MFC-AGG-ID: -Z5Wuh_zPUyc0JzRRnv_JA_1792493319
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:31 +0400
-Subject: [PATCH v7 14/65] qom/qmp: populate description & default-value in
- qom_property_info()
+Date: Tue, 20 Oct 2026 14:45:44 +0400
+Subject: [PATCH v7 27/65] hostmem-file: convert OnOffAuto rom property to
+ QAPI-aware registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-14-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-27-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,100 +152,115 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=2485;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=3017;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=uHhhGddxQUOPXHn3kN1zjJ5emGyO+zAsacCmEIp7fMU=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZYLHL/+jjl6D3jfhu6YY8r0v/h+oK3dZuqT
- ezvQZmL6dCJAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWAAKCRDa6OEJdZac
- 5aAaD/48dANrC6kyut3XOROjrQRxjwUIv0i0xWNW1n7ucgCFOO9+fWLOIuRBmElFO8tK1LUW7VK
- /cncnMEOpfNGGxBqlK4/E7MLLWxcEJ5PONbxrrynUEl5/6iktSG9+p0FbZ+69Ig8sBSWsaKMfX/
- TjixcX9RrpcR4kM6W9+KDi3doDCw2opXnVXJs1dfbDHber2cptUgcPZg2klCeonD69YCtbh4E9V
- frLj2F6fhDEwXovHE9dmaAYXrx4MUlWNnWXF7Ghho/OQ4AT803/e68yxS2d9vGvR6oW5buPzIu1
- mlrM9vteISWAcBit+HYHv2uAYbAEKeadp5Ifyen2Y9sH0dNkfWUPOKHL3vno7uRTfS18hxD4e86
- 26PatMtqKUJup7iwHq5V9QigizN31NfbU5AoBe12vGQ+E4qUTFiii1meZ1Syaz0HEsBut5DlGZB
- jKTxA5YXNzKXzh2gMr+EtfsPvTLms/u/oHjnzmZgwDvCIzLlT/lSl87AwFbhpHDBguQjcfTQ0Mg
- K1VhLdp03W/CZAUX9UALGzwbqu8DJbYjRo9rTfwd+PDdexNm4+dmZiWa48aQpfFwu3KSXV4xnXK
- BbNdAPMgYnoyiVVLq2Hy2zHqhvba3qJkOIDNjbbdfwMBrbGOpIDzaSUIS939LVbTmE62eCGjZ/p
- HPrxdrpQOIPKiOQ==
+ bh=iZFd9HvderJ8uRReytwVEg9V/BI0/W9et6yTV5n+0HQ=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZaUi0I/HhTBoPEm8cGvUR2Ags/oP63+/IJC
+ B3aPbt5x/6JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWgAKCRDa6OEJdZac
+ 5SbrEACzpT4DA3aDgoPm1mkI7LWP4C1/KmFL4+/JVH+4dvDiHK2lfPUcj6g8+5ZAjiaZ7BNg5vr
+ GU3ywL52hlZ5JZCn41HMfti/ha4z983dNfIctpiaV9RJU+A22EtAvPLpDEcFPF9PfeB/aMB6a1h
+ 0Dpk/O8iKpIR0ww2sHYfJ7HC8jqBpBpc5BTWLONeOzWTk3OnFRU6R0c5BPcI6cENi7juVgxXrtZ
+ ispq5YrtGrp52pLe3Ewh7Z+QrKyA2oKxwo7jhh3PQ9MQf1Bv4H9XMKBZmivwnir/bT4wnDtabCG
+ Z3MBE8QRfPUHzLW7s8idRTcelPr99S0+ZteQGhagDNHrC6CSQMSUQPO7daBJj8bgI/gxraF66d0
+ ceIDBeRODFFyp397ZvOHRafc6G41UZt3Q09G/ONGcgNom+1IxZuqlJKhvb2/lhLdZMQFRPNkGAj
+ +EpBka/x64Ny38YdXyQE79VKzddpZZLDC1bVdR+/jm4r3s6ujtMANYlwZojYhpW6CGtB8RorWmI
+ BzUp4XLCDTQrGR4EZej7rnfAUKzkJ3+sMWrkIk59mZgmLJ5fXSxLqhwExH6OrIEp1ay3QZ15Bhp
+ MS3Wp8RSmuhgaHr6i15QnVDly1vb0u60cJvRjNcpvjIEC40XFnirrOV6Qw6AmT4lgBoJx/CvkS4
+ b2y0JppmjOhRU9g==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: FeVsWjfg37di_klvrJYx_7uFtzdaewDopNYqLE3-ttk_1792493252
+X-Scanned-By: MIMEDefang 3.6 on 10.30.177.95
+X-Mimecast-MFC-PROC-ID: AjAgkOcKgY090WkV1dYEmrwuURwST74AHYyS7yURdok_1792493319
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-4011c0/1792493260-4ACDBCFC-02A7C6A7/0/0
+X-purgate-ID: tlsNG-d25034/1792493328-51936A5B-8B59395A/0/0
 X-purgate-type: clean
-X-purgate-size: 2487
+X-purgate-size: 3019
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
 	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Move description and default_value population from the individual QMP
-handlers into qom_property_info(), so all callers get them.
-
-This also adds description and default-value to qom-list responses,
-which previously only returned name and type. The handler doesn't care.
+Convert the rom OnOffAuto property from manual visitor-based
+callbacks to property_add_qapi_enum().
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- qom/qom-qmp-cmds.c | 17 ++++-------------
- 1 file changed, 4 insertions(+), 13 deletions(-)
+ backends/hostmem-file.c | 29 +++++++++++++----------------
+ 1 file changed, 13 insertions(+), 16 deletions(-)
 
-diff --git a/qom/qom-qmp-cmds.c b/qom/qom-qmp-cmds.c
-index 47bf3bf2937a..84a295905148 100644
---- a/qom/qom-qmp-cmds.c
-+++ b/qom/qom-qmp-cmds.c
-@@ -35,6 +35,8 @@ static ObjectPropertyInfo *qom_property_info(ObjectProperty *prop)
+diff --git a/backends/hostmem-file.c b/backends/hostmem-file.c
+index 7efecf71f565..7d4d52482966 100644
+--- a/backends/hostmem-file.c
++++ b/backends/hostmem-file.c
+@@ -19,7 +19,7 @@
+ #include "qom/object_interfaces.h"
+ #include "qom/object.h"
+ #include "qapi/visitor.h"
+-#include "qapi/qapi-visit-common.h"
++#include "qapi/qapi-type-infos-common.h"
  
-     info->name = g_strdup(prop->name);
-     info->type = g_strdup(prop->type);
-+    info->description = g_strdup(prop->description);
-+    info->default_value = qobject_ref(prop->defval);
-     if (prop->qapi_type) {
-         assert(prop->qapi_type->masked_name);
-         info->qapi_type = g_strdup(prop->qapi_type->masked_name);
-@@ -243,8 +245,6 @@ ObjectPropertyInfoList *qmp_device_list_properties(const char *typename,
+ OBJECT_DECLARE_SIMPLE_TYPE(HostMemoryBackendFile, MEMORY_BACKEND_FILE)
  
-     object_property_iter_init(&iter, obj);
-     while ((prop = object_property_iter_next(&iter))) {
--        ObjectPropertyInfo *info;
+@@ -230,30 +230,24 @@ static void file_memory_backend_set_readonly(Object *obj, bool value,
+     fb->readonly = value;
+ }
+ 
+-static void file_memory_backend_get_rom(Object *obj, Visitor *v,
+-                                        const char *name, void *opaque,
+-                                        Error **errp)
++static int file_memory_backend_get_rom(Object *obj, Error **errp)
+ {
+     HostMemoryBackendFile *fb = MEMORY_BACKEND_FILE(obj);
+-    OnOffAuto rom = fb->rom;
 -
-         /* Skip Object and DeviceState properties */
-         if (strcmp(prop->name, "type") == 0 ||
-             strcmp(prop->name, "realized") == 0 ||
-@@ -254,11 +254,7 @@ ObjectPropertyInfoList *qmp_device_list_properties(const char *typename,
-             continue;
-         }
+-    visit_type_OnOffAuto(v, name, &rom, errp);
++    return fb->rom;
+ }
  
--        info = qom_property_info(prop);
--        info->description = g_strdup(prop->description);
--        info->default_value = qobject_ref(prop->defval);
--
--        QAPI_LIST_PREPEND(prop_list, info);
-+        QAPI_LIST_PREPEND(prop_list, qom_property_info(prop));
+-static void file_memory_backend_set_rom(Object *obj, Visitor *v,
+-                                        const char *name, void *opaque,
+-                                        Error **errp)
++static void file_memory_backend_set_rom(Object *obj, int value, Error **errp)
+ {
+     HostMemoryBackend *backend = MEMORY_BACKEND(obj);
+     HostMemoryBackendFile *fb = MEMORY_BACKEND_FILE(obj);
+ 
+     if (host_memory_backend_mr_inited(backend)) {
+-        error_setg(errp, "cannot change property '%s' of %s.", name,
++        error_setg(errp, "cannot change property 'rom' of %s.",
+                    object_get_typename(obj));
+         return;
      }
  
-     object_unref(obj);
-@@ -295,12 +291,7 @@ ObjectPropertyInfoList *qmp_qom_list_properties(const char *typename,
-         object_property_iter_init(&iter, obj);
-     }
-     while ((prop = object_property_iter_next(&iter))) {
--        ObjectPropertyInfo *info = qom_property_info(prop);
--
--        info->description = g_strdup(prop->description);
--        info->default_value = qobject_ref(prop->defval);
--
--        QAPI_LIST_PREPEND(prop_list, info);
-+        QAPI_LIST_PREPEND(prop_list, qom_property_info(prop));
-     }
+-    visit_type_OnOffAuto(v, name, &fb->rom, errp);
++    fb->rom = value;
+ }
  
-     object_unref(obj);
+ static void file_backend_unparent(Object *obj)
+@@ -298,10 +292,13 @@ file_backend_class_init(ObjectClass *oc, const void *data)
+     object_class_property_add_bool(oc, "readonly",
+         file_memory_backend_get_readonly,
+         file_memory_backend_set_readonly);
+-    object_class_property_add(oc, "rom", "OnOffAuto",
+-        file_memory_backend_get_rom, file_memory_backend_set_rom, NULL, NULL);
+-    object_class_property_set_description(oc, "rom",
+-        "Whether to create Read Only Memory (ROM)");
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "rom",
++        .description = "Whether to create Read Only Memory (ROM)",
++        .qapi_type = &OnOffAuto_type_info,
++        .get = file_memory_backend_get_rom,
++        .set = file_memory_backend_set_rom,
++    ));
+ }
+ 
+ static void file_backend_instance_finalize(Object *o)
 
 -- 
 2.56.0.116.g6de20f6092dc
