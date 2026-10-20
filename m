@@ -2,54 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C3BFF606A321
-	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 33D3D606A31C
+	for <xen-devel@archiver.kernel.org>; Tue, 20 Oct 2026 10:57:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=FRnFS5+m
-Received: from list by lists.xenproject.org with outflank-mailman.1455340.1669116 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=BOWeipw9
+Received: from list by lists.xenproject.org with outflank-mailman.1455344.1669133 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7WW-0001tB-PF; Tue, 20 Oct 2026 10:56:52 +0000
+	id 1xJ7Wb-0002qV-CT; Tue, 20 Oct 2026 10:56:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1455340.1669116; Tue, 20 Oct 2026 10:56:52 +0000
+Received: by outflank-mailman (output) from mailman id 1455344.1669133; Tue, 20 Oct 2026 10:56:56 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJ7WV-0001oh-Ax; Tue, 20 Oct 2026 10:56:51 +0000
-Received: by outflank-mailman (input) for mailman id 1455340;
- Tue, 20 Oct 2026 10:51:03 +0000
+	id 1xJ7WZ-0002l8-Q9; Tue, 20 Oct 2026 10:56:55 +0000
+Received: by outflank-mailman (input) for mailman id 1455344;
+ Tue, 20 Oct 2026 10:51:05 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qt-00009G-KK
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:03 +0000
+ (envelope-from <marcandre.lureau@redhat.com>) id 1xJ7Qv-0000AR-NM
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 10:51:05 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJ7Qt-00CrlS-17
- for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:03 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xJ7Qv-002FXm-47
+ for xen-devel@lists.xenproject.org; Tue, 20 Oct 2026 12:51:05 +0200
+Received: from [10.42.69.5] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad74795-2eae-0a2a0a5409dd-0a2a4504e546-20
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:03 +0200
-Received: from [170.10.133.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad7478f-bab6-0a2a0a5309dd-0a2a4505d420-22
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:51:05 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <marcandre.lureau@redhat.com>)
- id 6ad746e1-b57f-0a2a45040019-aa0a857c95db-3
- for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:48:02 +0200
+ id 6ad7475a-4cb1-0a2a45050019-aa0a817c826f-3
+ for <xen-devel@lists.xenproject.org>; Tue, 20 Oct 2026 12:50:04 +0200
 Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-624-Yh3hFIQYORWMSyn7dgfYTg-1; Tue,
- 20 Oct 2026 10:47:56 +0000
-Received: from mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.111])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-691-X_BZbfi1OoaEw-XuKd7GEA-1; Tue,
+ 20 Oct 2026 10:49:57 +0000
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
  by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 64C7A1955EBF; Tue, 20 Oct 2026 10:47:52 +0000 (UTC)
+ id 382911954B17; Tue, 20 Oct 2026 10:49:53 +0000 (UTC)
 Received: from localhost (headnet04.pony-001.prod.iad2.dc.redhat.com
  [10.2.32.116])
- by mx-prod-int-08.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
- id 7DD3F1803A59; Tue, 20 Oct 2026 10:47:49 +0000 (UTC)
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTP
+ id 89D3D1956089; Tue, 20 Oct 2026 10:49:50 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,24 +60,24 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-Id:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792493281;
+	s=mimecast20190719; t=1792493402;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=QCsJ6kicmUEQxvaxmAE24eNtz/CdTOeeNBSuCmDZMU8=;
-	b=FRnFS5+mMpfAa5h+Ky/2Ig9z6W4JQKW/c8vOfqJV7SHaaJa6MCTDVDw8wNU6TNgv48J//Y
-	/mnA9HrMIr+lp8NkFsfburrw6fcOj4rr51GPlLhtrn2cTwSp3IwcRH7GET+M8W+NLElR26
-	ZhIWj2AWpE/nheQJndq7M6Zj118gnqw=
-X-MC-Unique: Yh3hFIQYORWMSyn7dgfYTg-1
-X-Mimecast-MFC-AGG-ID: Yh3hFIQYORWMSyn7dgfYTg_1792493272
+	bh=zgYXy9wUlwpZwJEXhfhg6ueZe5iP6OdFNQDVMpjhNJA=;
+	b=BOWeipw9WxhEler+SP0WenptoYrcVWFdcYkTTIlvIHnxl7sPdiWMA0oxqEFr945ebzsYo0
+	P17DXAeI97qM2dPjnj28vJc0XJJn7SbsZUJn/8cGp4Uw+pV9DVZs/WsNRIF9vkzpMI9iJN
+	b9KDO5+9/M7+1JFEbjRRPHHGA09SD4M=
+X-MC-Unique: X_BZbfi1OoaEw-XuKd7GEA-1
+X-Mimecast-MFC-AGG-ID: X_BZbfi1OoaEw-XuKd7GEA_1792493393
 From: =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-Date: Tue, 20 Oct 2026 14:45:35 +0400
-Subject: [PATCH v7 18/65] tests: update check-qom-proplist for QAPI-aware
- property registration
+Date: Tue, 20 Oct 2026 14:45:57 +0400
+Subject: [PATCH v7 40/65] accel/hvf: convert OnOffSplit property to
+ QAPI-aware registration
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Message-Id: <20261020-qom-qapi-v7-18-431a86b02b58@redhat.com>
+Message-Id: <20261020-qom-qapi-v7-40-431a86b02b58@redhat.com>
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 In-Reply-To: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
 To: qemu-devel@nongnu.org
@@ -152,31 +152,31 @@ Cc: Markus Armbruster <armbru@redhat.com>,
  Yoshinori Sato <yoshinori.sato@nifty.com>, Jiri Pirko <jiri@resnulli.us>, 
  Eric Auger <eric.auger@redhat.com>, Laurent Vivier <lvivier@redhat.com>, 
  =?utf-8?q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-X-Developer-Signature: v=1; a=openpgp-sha256; l=5424;
+X-Developer-Signature: v=1; a=openpgp-sha256; l=2523;
  i=marcandre.lureau@redhat.com; h=from:subject:message-id;
- bh=PG77OxkKQyF3UcxTgSF0ItIIQR9h6IXM0cn9v6bEm2s=;
- b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10ZZx0j1p4X5AH6xbN8P7cVXiebxN4/NouqlD
- Bs0dZkcTS6JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWQAKCRDa6OEJdZac
- 5btyD/sEpsN54WFVkoxy/MA7ND5ExbGYknt3DZedYvvU6rJFWigzxdRqfgu17q4W5zjE+AamjfL
- BupH4gTHx7+2HfkN3D1gTx/xFdM5Kl6ToEoiDKjNOo862W3jNyyg4ovmX4tTnGNMAz88AfPwhL+
- 2ZWNFNzjipqIGY0qQX4Bx66aa2+YE4fY3hQ9iiu+WjFc6AbgnPg4TF4XhUyHF70who98clFVOMD
- yjczx/5tD0aUOR4P15K6+ixi33/auB4tE1Iwmnx/jgl1p3xCy28fffjfyI9wgZwkX2u2stbYLIn
- lDbgxSH1ReWWj7z4XdgyxwniV2xbBYeYJEkOtCV/y7/dK6+AM+a7Qnq3kI/dzYhJuvhq5wU+HGR
- RiM76TgllhaUHS8VdrKmAFY/LmMaDcf5u+dyeDe3ragYCi0YRneV87Q3JrrFqhWtzDyLlEBLQBg
- R2RYEWwbUq91SYc+sy3M2s1dxK/Auw8r9jDxBr9VPRZeaKJzAr1tPm6hnSzp+dkR4vgyuSdKfW2
- xgnVBc5i1OBtTZMbay85wjtkAfGfPH5jqgFBr3+8p6u1r9UH55oNAmVqy1ev7FnV/EBA4FlmSyX
- 4Ic6VS1CTDmF2CzubrTp3nVMwtdHRxtTKiFnV+tWJm6wxUGQS0/zDlqzL+ypt2gHRnuRwgDXqHU
- doz9mjn/aUw3+xw==
+ bh=21V2JPj2rB3XQ9p0Fpt/4Sfi5TlT/INiy3CejR1RcSQ=;
+ b=owEBbQKS/ZANAwAKAdro4Ql1lpzlAcsmYgBq10Zbcvmz2dcDonHaGuZ+0JSpCQbdwS1IqolsF
+ mrcOSZwsk+JAjMEAAEKAB0WIQSHqb2TP4fGBtJ29i3a6OEJdZac5QUCatdGWwAKCRDa6OEJdZac
+ 5fbMD/4oDBa4aRAcuosgqEgTN/lLvXMd4CMMg/8NISFX3WirC2kLfaACPLJXeKGgyRmLFD49aZS
+ C90374vVULKD25rkYEUinJNvw+z9cP8i/VTdLPCDvrtC/7kvYoqnDLVLO3J2Q3Wd5nfI6rmQZEk
+ BwtAVjR6SSBb0iStYbJyVtP1TklsvdIlQhIhxfshPIqRwse/RgRnOxnAYRNMRVtDhm7Vu0j9+oI
+ wQB+bCNaqKS88nEJIGu53wZ2zbS3wyEAQfjpFxwi2bIDLHSRhy3a07Hpo2bHHN003BU8sQAI530
+ fQnkPZFCQYFsKo1aZUPu739hgcgJsTtebTEHP7wVhaY5T9oTYjhlHy1h4bcxUIi+sUYQMwDz/B2
+ FNBgAkMwUmaom+WrzqUMDHFkmLBUULwbNeGiCgyNquapgGac7N7DQsItMvc5RouXeu8HIEjusQP
+ ji/64PxnCl55S40Wr93VNww9w+uHtJ2MYwSRdIxtBvnRYW8k45wZ6f8n/bZ43PwOPLzkIMPhkAB
+ AZPh9GndU9GtEDdzZQobzjyi5YtG9aqyHYwsF8IvbkM9hDWBKeSxYQInUbsFVgKYsEzJt9ORvoG
+ Xh7xWXHM+nTdrSEW+k93/3Qu2ekkPkSElHFptLpXseE43g35XzS9fsK0+PV6Y6aNivNUO37QrR2
+ au4mCAtBZO6aHYg==
 X-Developer-Key: i=marcandre.lureau@redhat.com; a=openpgp;
  fpr=87A9BD933F87C606D276F62DDAE8E10975969CE5
-X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.111
-X-Mimecast-MFC-PROC-ID: HGrlm3_L3fIgzhIY14LSxG0_sjx69Xo9rnYaU35XMmM_1792493272
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: Z0XUv_bmELUFBRsn_Y3lCCIiU8iMB11Msyq1zWIBHjY_1792493393
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1792493282-C34C3B50-F7C8D11F/0/0
+X-purgate-ID: tlsNG-c201ff/1792493404-F68B62A1-15046773/0/0
 X-purgate-type: clean
-X-purgate-size: 5426
+X-purgate-size: 2525
 X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -185,155 +185,80 @@ X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Migrate the dummy object's string and enum properties from the legacy
-object_class_property_add_str/enum() helpers to the new QAPI-aware
-object_class_property_add_qapi/qapi_enum() registration.
-
-Add test cases verifying that the qapi_type metadata is correctly
-populated on properties registered through the new API, and that it
-remains NULL for properties using the old-style registration.
+Convert the OnOffSplit property from manual visitor-based
+callbacks to property_add_qapi_enum().
 
 Signed-off-by: Markus Armbruster <armbru@redhat.com>
 Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
 ---
- tests/unit/check-qom-proplist.c | 93 ++++++++++++++++++++++++++++++++++-------
- 1 file changed, 77 insertions(+), 16 deletions(-)
+ accel/hvf/hvf-all.c | 29 +++++++++++------------------
+ 1 file changed, 11 insertions(+), 18 deletions(-)
 
-diff --git a/tests/unit/check-qom-proplist.c b/tests/unit/check-qom-proplist.c
-index 89de92b7d91f..69155e720751 100644
---- a/tests/unit/check-qom-proplist.c
-+++ b/tests/unit/check-qom-proplist.c
-@@ -108,22 +108,21 @@ static int dummy_get_av(Object *obj,
+diff --git a/accel/hvf/hvf-all.c b/accel/hvf/hvf-all.c
+index 8bd9154a50b6..2fd594ad156f 100644
+--- a/accel/hvf/hvf-all.c
++++ b/accel/hvf/hvf-all.c
+@@ -11,6 +11,7 @@
+ #include "qemu/osdep.h"
+ #include "qemu/error-report.h"
+ #include "qapi/error.h"
++#include "qapi/qapi-type-infos-common.h"
+ #include "qapi/qapi-visit-common.h"
+ #include "accel/accel-ops.h"
+ #include "exec/cpu-common.h"
+@@ -230,18 +231,12 @@ static int hvf_accel_init(AccelState *as, MachineState *ms)
+     return hvf_arch_init();
  }
  
- 
--static void dummy_set_sv(Object *obj,
--                         const char *value,
--                         Error **errp)
-+static void dummy_set_sv(Object *obj, Visitor *v, const char *name,
-+                         void *opaque, Error **errp)
+-static void hvf_set_kernel_irqchip(Object *obj, Visitor *v,
+-                                   const char *name, void *opaque,
++static void hvf_set_kernel_irqchip(Object *obj, int value,
+                                    Error **errp)
  {
-     DummyObject *dobj = DUMMY_OBJECT(obj);
+-    OnOffSplit mode;
+-
+     hvf_kernel_irqchip_override = true;
+-    if (!visit_type_OnOffSplit(v, name, &mode, errp)) {
+-        return;
+-    }
  
--    g_free(dobj->sv);
--    dobj->sv = g_strdup(value);
-+    g_clear_pointer(&dobj->sv, g_free);
-+    visit_type_str(v, name, &dobj->sv, errp);
+-    switch (mode) {
++    switch (value) {
+     case ON_OFF_SPLIT_ON:
+ #ifdef HOST_X86_64
+         /* macOS 12 onwards exposes an HVF virtual APIC. */
+@@ -261,11 +256,7 @@ static void hvf_set_kernel_irqchip(Object *obj, Visitor *v,
+         break;
+ 
+     default:
+-        /*
+-         * The value was checked in visit_type_OnOffSplit() above. If
+-         * we get here, then something is wrong in QEMU.
+-         */
+-        abort();
++        g_assert_not_reached();
+     }
  }
  
--static char *dummy_get_sv(Object *obj,
--                          Error **errp)
-+static void dummy_get_sv(Object *obj, Visitor *v, const char *name,
-+                         void *opaque, Error **errp)
- {
-     DummyObject *dobj = DUMMY_OBJECT(obj);
- 
--    return g_strdup(dobj->sv);
-+    visit_type_str(v, name, &dobj->sv, errp);
- }
- 
- 
-@@ -135,16 +134,28 @@ static void dummy_init(Object *obj)
- }
- 
- 
-+static const QAPITypeInfo dummy_animal_qapi_type_info = {
-+    .name = "DummyAnimal",
-+    .masked_name = "DummyAnimalSchema",
-+    .lookup = &dummy_animal_map,
-+};
+@@ -277,11 +268,13 @@ static void hvf_accel_class_init(ObjectClass *oc, const void *data)
+     ac->allowed = &hvf_allowed;
+     hvf_kernel_irqchip_override = false;
+     hvf_kernel_irqchip = false;
+-    object_class_property_add(oc, "kernel-irqchip", "on|off|split",
+-        NULL, hvf_set_kernel_irqchip,
+-        NULL, NULL);
+-    object_class_property_set_description(oc, "kernel-irqchip",
+-        "Configure HVF irqchip");
 +
-+static const QAPITypeInfo dummy_str_qapi_type_info = {
-+    .name = "str",
-+    .masked_name = "StrSchema",
-+};
-+
- static void dummy_class_init(ObjectClass *cls, const void *data)
- {
--    object_class_property_add_str(cls, "sv",
--                                  dummy_get_sv,
--                                  dummy_set_sv);
--    object_class_property_add_enum(cls, "av",
--                                   "DummyAnimal",
--                                   &dummy_animal_map,
--                                   dummy_get_av,
--                                   dummy_set_av);
-+    object_class_property_add_qapi(cls, "sv", &dummy_str_qapi_type_info,
-+                                   dummy_get_sv, dummy_set_sv,
-+                                   NULL, NULL);
-+    object_class_property_add_qapi_enum(cls, QAPI_ENUM_PROP(
-+        .name = "av",
-+        .qapi_type = &dummy_animal_qapi_type_info,
-+        .get = dummy_get_av,
-+        .set = dummy_set_av,
++    object_class_property_add_qapi_enum(oc, QAPI_ENUM_PROP(
++        .name = "kernel-irqchip",
++        .qapi_type = &OnOffSplit_type_info,
++        .set = hvf_set_kernel_irqchip,
++        .description = "Configure HVF irqchip",
 +    ));
  }
  
- 
-@@ -703,6 +714,54 @@ static void test_qom_partial_path(void)
-     object_unparent(cont1);
- }
- 
-+static void test_dummy_qapi_enum(void)
-+{
-+    ObjectProperty *prop;
-+    Object *parent = object_get_objects_root();
-+    DummyObject *dobj = DUMMY_OBJECT(
-+        object_new_with_props(TYPE_DUMMY,
-+                              parent,
-+                              "dummy0",
-+                              &error_abort,
-+                              "av", "platypus",
-+                              NULL));
-+
-+    g_assert(dobj->av == DUMMY_PLATYPUS);
-+
-+    prop = object_property_find(OBJECT(dobj), "av");
-+    g_assert(prop);
-+    g_assert(prop->qapi_type == &dummy_animal_qapi_type_info);
-+    g_assert_cmpstr(prop->qapi_type->name, ==, "DummyAnimal");
-+    g_assert_cmpstr(prop->qapi_type->masked_name, ==, "DummyAnimalSchema");
-+    g_assert(prop->qapi_type->lookup == &dummy_animal_map);
-+
-+    object_unparent(OBJECT(dobj));
-+}
-+
-+static void test_dummy_qapi_prop(void)
-+{
-+    ObjectProperty *prop;
-+    Object *parent = object_get_objects_root();
-+    DummyObject *dobj = DUMMY_OBJECT(
-+        object_new_with_props(TYPE_DUMMY,
-+                              parent,
-+                              "dummy0",
-+                              &error_abort,
-+                              "sv", "hello",
-+                              NULL));
-+
-+    g_assert_cmpstr(dobj->sv, ==, "hello");
-+
-+    prop = object_property_find(OBJECT(dobj), "sv");
-+    g_assert(prop);
-+    g_assert(prop->qapi_type == &dummy_str_qapi_type_info);
-+    g_assert_cmpstr(prop->qapi_type->name, ==, "str");
-+    g_assert_cmpstr(prop->qapi_type->masked_name, ==, "StrSchema");
-+    g_assert(prop->qapi_type->lookup == NULL);
-+
-+    object_unparent(OBJECT(dobj));
-+}
-+
- int main(int argc, char **argv)
- {
-     g_test_init(&argc, &argv, NULL);
-@@ -727,6 +786,8 @@ int main(int argc, char **argv)
-     g_test_add_func("/qom/proplist/iterator", test_dummy_iterator);
-     g_test_add_func("/qom/proplist/class_iterator", test_dummy_class_iterator);
-     g_test_add_func("/qom/proplist/delchild", test_dummy_delchild);
-+    g_test_add_func("/qom/proplist/qapi_enum", test_dummy_qapi_enum);
-+    g_test_add_func("/qom/proplist/qapi_prop", test_dummy_qapi_prop);
-     g_test_add_func("/qom/resolve/partial", test_qom_partial_path);
- 
-     return g_test_run();
+ static const TypeInfo hvf_accel_type = {
 
 -- 
 2.56.0.116.g6de20f6092dc
