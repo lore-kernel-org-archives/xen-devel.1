@@ -2,46 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7CBBF60A2629
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2026 13:47:27 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 56506606A332
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2026 13:47:30 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=toxicpanda.com header.i=@toxicpanda.com header.a=rsa-sha256 header.s=google header.b=SwLZpr5v
-Received: from list by lists.xenproject.org with outflank-mailman.1457178.1670082 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=toxicpanda.com header.i=@toxicpanda.com header.a=rsa-sha256 header.s=google header.b=NSXq2rx1
+Received: from list by lists.xenproject.org with outflank-mailman.1457182.1670100 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJWf1-0003bq-4q; Wed, 21 Oct 2026 13:47:19 +0000
+	id 1xJWf3-00045d-OR; Wed, 21 Oct 2026 13:47:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1457178.1670082; Wed, 21 Oct 2026 13:47:19 +0000
+Received: by outflank-mailman (output) from mailman id 1457182.1670100; Wed, 21 Oct 2026 13:47:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJWf1-0003bf-0N; Wed, 21 Oct 2026 13:47:19 +0000
-Received: by outflank-mailman (input) for mailman id 1457178;
- Wed, 21 Oct 2026 13:47:17 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xJWf3-00045R-KQ; Wed, 21 Oct 2026 13:47:21 +0000
+Received: by outflank-mailman (input) for mailman id 1457182;
+ Wed, 21 Oct 2026 13:47:20 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <josef@toxicpanda.com>) id 1xJWez-0003Xq-09
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 13:47:17 +0000
+ (envelope-from <josef@toxicpanda.com>) id 1xJWf2-000436-QB
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 13:47:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJWey-00AIG5-D9
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 15:47:16 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xJWf2-0082fY-6Y
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 15:47:20 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6ad8c261-8faa-0a2a0a5109dd-0a2a45099ac4-8
- for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 15:47:16 +0200
-Received: from [209.85.160.176] (helo=mail-qt1-f176.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ad8c265-bab6-0a2a0a5309dd-0a2a4501bb8a-8
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 15:47:20 +0200
+Received: from [209.85.219.50] (helo=mail-qv1-f50.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <josef@toxicpanda.com>)
- id 6ad8c263-be1a-0a2a45090019-d155a0b0e526-3
- for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 15:47:15 +0200
-Received: by mail-qt1-f176.google.com with SMTP id
- d75a77b69052e-536605c4d8fso4891991cf.1
- for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 06:47:15 -0700 (PDT)
-Received: from toxicpanda.com ([153.61.196.248])
+ id 6ad8c267-5984-0a2a45010019-d155db32ac48-3
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 15:47:20 +0200
+Received: by mail-qv1-f50.google.com with SMTP id
+ 6a1803df08f44-91b834592afso8922016d6.0
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 06:47:19 -0700 (PDT)
+Received: from toxicpanda.com ([153.61.196.249])
  by smtp.gmail.com with ESMTPSA id
- 6a1803df08f44-91c10baeadcsm25487476d6.19.2026.10.21.06.47.13
+ 6a1803df08f44-91c10b736adsm24541966d6.7.2026.10.21.06.47.17
  (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Wed, 21 Oct 2026 06:47:13 -0700 (PDT)
+ Wed, 21 Oct 2026 06:47:17 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,52 +52,52 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=toxicpanda.com header.i="@toxicpanda.com" header.h="Cc:To:In-Reply-To:References:Message-Id:Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:Date:From"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=toxicpanda.com; s=google; t=1792590434; x=1793195234; darn=lists.xenproject.org;
+        d=toxicpanda.com; s=google; t=1792590439; x=1793195239; darn=lists.xenproject.org;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=2aRCuku2oKEDF0Op1/pBMZnZUn6snlu290Nklz94qvM=;
-        b=SwLZpr5vVunA8nTkM8vi7dsk7YhQdaMlviWrKfGeEcJexI/vGEtLkKu5f9pgYoJSfz
-         HiBo/8x+Gh7NPnfoaaAgGtvcmoCOJvp+AmheI56SD1JLI0vakV7ozXhkbp6xOSkr9jyi
-         05MvWh/eS69OYlBjcU1meUWX6leP1fH0V+q36awN4fYxBTU07NsCYHpQo318Ft+ltGX1
-         4sxyFIBKaMHNnrH6DuoN4XM2euzkPwuXQWMHVeiAAR0X2CT4T4W0Uiwq3un2309x+/PS
-         SPX6jxZLIgre4E8cJWgVi/UPI5ZN0CRpFg8hyvD8yYtTbx4GaKJs7ESsz7KnV41tR/VK
-         ELDg==
+        bh=ydoWrUsryFQCXy0qk0+H+VOsHqxoYPyCdAWJE4iSCqQ=;
+        b=NSXq2rx1o+rfp7k4E9hljUPF1uVXW3l+4EH5hntGX96e6bBdb9gmUBUvm1ayDGEuU2
+         3kEW1Dg0D9sZ6G5lq4+QSUiURMaYmP3JDqkvfpx6+yGgxhkXXxUvzCapUxCiEi4TPrFa
+         MwB0EBQGByvSk6Cto7jHO1C3DMEopNf8+BDrzkFdggHg7HJByBtxhI+uUK3qrIgAuSC2
+         jlQN/354OHlXCRUkm49Vi9q9DoJngXRGCTAtiGuCgI/Tf7GDx0fK4Z8traOiOgB6YXtw
+         Q3kfYN6FrkgpXBYbmaB9iV7XUc0jb5EbvsXpnD5qDcC5zO7hl3jYtWJhW5ZwRlx11gAd
+         HCVA==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792590434; x=1793195234;
+        d=1e100.net; s=20260707; t=1792590439; x=1793195239;
         h=cc:to:in-reply-to:references:message-id:content-transfer-encoding
          :content-type:mime-version:subject:date:from:x-gm-gg
          :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=2aRCuku2oKEDF0Op1/pBMZnZUn6snlu290Nklz94qvM=;
-        b=mcz4rWzgRFVbnx+roo81V4+Qk3fB5KMHX9wG+dBTnFg/RrpLYrJlmX988aoEBZRsRj
-         8SC4gW2qtzE6bCPGZrSxplvSWKdhB2n1PrmXebXAJJQ45jdCgrRVAW0b/r7D0mmcSzaI
-         vc7+4Fwz8fDNH1bePIjDHujrqhJjIVyoS3LYza4ZJD2+d1JLnfSEI7Q8BmbXnLjlgskO
-         LMTlwMTy19ZrLdVqeFLYANojy7IozsEBkd+bcbIWButu8yO5wlf3Svv3pCLfYAlh4wvA
-         hZxzAPm+7bLV1RFTV8uvTVW0yYbv/NKMiWXXZ+3HjBcTBVivQKTDnrCPpPrnHf6g+/Li
-         if2A==
-X-Forwarded-Encrypted: i=1; AKwUvBzDJi8MxU5I4lAruD8H6gLYdoXOJiLV3otrP2ES97+omxfzzzvgNVPEIkbyQCmQo+iQwnxlJglSVno=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYL8IqpFXFMpChwxrUYehG1updRkmTgiMP2JCz51p/h/6uRnxrw3
-	cPp5GCBpReJMASFCVI+MlVZYkYDth0H9Ci6dlTznEgfeYgwkZtiHZddWkLftaZj4F8Q=
-X-Gm-Gg: AYBFou2kZId1BxG9JSeskFJVtX3uOIm4WPPSsyrPbsb/ivUJBAcTmsGubZnJEesM5UX
-	ssP7EGmI/xbcG2bZugthqgNyS9A7g5+bmcrR6ykHO8wYbHMwhrD/HapCW/XOEcGLJnyKMecvIOT
-	JJHWda7GdJ05DA7ytbKAMGh/QnEVGjIDccAnzoYXjtXi4Bhiuo7F6Du+2gjXhQvwBcL2YqXz+YO
-	JPiSJAGu1UB72JxC86HwmC9X2oNPpaRhGBNzZiu8xVxBvV3Jz1Qkxb3BO5GXV6aD08XfGYU9QLQ
-	Yh0U0d2zYDceeqanx4qjvOtGwjf45nB3CUqhLsO4YN3m8SJVPQ2+AUKSomCAAzyhLpp8yWd0//B
-	Mfr9BCMsmZ0og0Y6vvzbLM6wdG2VBo7ymyq2pD4TkOvzLieh58B686WtOvF3aAvcfJpAllJy2he
-	KMUyUB/Drruc1/rzEAeMbQ9Wq4Ft0Pu8DblIAIS+qG7ZW8kWYb9nGKQAzMtNkf6eMO8u6w6dO7M
-	qkN/UJDI8uNDQ4OKxFZ1S/NkjLUl5l9KTvltA4TKR63YlF6WR5WLgjfuEy9IGZz/6IJOPCv
-X-Received: by 2002:a05:622a:400c:b0:535:baa:a78d with SMTP id d75a77b69052e-5369b4f46c6mr30150331cf.10.1792590434551;
-        Wed, 21 Oct 2026 06:47:14 -0700 (PDT)
+        bh=ydoWrUsryFQCXy0qk0+H+VOsHqxoYPyCdAWJE4iSCqQ=;
+        b=Bht3GeqvsfZ52rGlLQJGp8mBltH8zGYrlmsf+M1wNmQoxq4dftG3MXOqMBPxG1ICzl
+         Z230zR2pFFr0YPxvzXt6Y2CPVMk2n79CTfxifquP39vBLlnnU65ov56eaDJAXsxcarx1
+         odnKRi88j+NvaF58EBtzx+VLTQVhsmEeFD2pzUCTHz4Ji5vERMfHX1zXwIlvywSBlbZi
+         DSYpcF9NP7LbFd+g3GRwlA7RVcxO8kG9CchXLKEwGAIpWHkvfEQTsvsz8eQwfGoiQs0Z
+         XKKje3hPfyrkWpHMXmFueqvw5sp13+b5oq70R5R32Qmz46Ygaex+XCIT1g6pBC4VOy1f
+         7NFg==
+X-Forwarded-Encrypted: i=1; AKwUvByy1WqzJhZZC+gz9FOWQ3h/s4qOwjIFtdolgzIKFQ/OjNLdQb/xJWS84DA3kGS7UDIPTnj3N/8utlc=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYIpQTR9LJa8XmH65ATYxlbor5fNh+myaF0MDeANXpcqtVNS12tQ
+	mYEnBSI/aCMhP1/mzLbiMW2r82ErMIR072dEMk5zsKmhAKsze//Y2rOjf4bHIbfFSlo=
+X-Gm-Gg: AYBFou0DmKPhkH0Y2F3yuio4y8NkWJSBBF8KA/rDXg896FULdCj2w5eY8PxLfI+HTZJ
+	9MkMje7zWOz7pVxVsRq/Drql9EFqx+zOpwZB+ubw/HMIQkUaoKEziHWjB54rHOIB3SK8KK+ZbUY
+	BH80gTw1l14dFYK8SkUO40NIagbs/ikkaHU+UU8U36wJCwnk9Nlt2pRRBIW2ui5NZ4Gbelrh64h
+	de+7ZgnXsfWYlHecOpfsBY1QJcG6zMy/UQZGZpaDriickv2JSpjP3xD0vkbURMbKX2AWWwCLVD9
+	tWDxLjmcjg0DN9vsRW0O0qlHkZns5V1kaIONgANkhacvLP7EPa6dsRKlPbE30WTokac7pWVLvHH
+	6jWHMu571uVYdyTBcY3q+oA0LyxqaPoEuJQwSuirZAxjL8CRRBRR9Vi3cfCtCWgX5QqwsJ4HVTu
+	a/W0difOXCGLjhY3mZjbLiZauWpo08hvfoBMoXa/4l3u5dj4kZGAzpKizhO1qALaV2Bp0eT1+od
+	o2WX1QpWk81/siOFwB5Dsmit5JsLa2KtUFcptS6nW0LclL5DN+XsDCqrwIHZE+2lrvCI7wA
+X-Received: by 2002:a05:6214:3c8e:b0:914:7df6:ca52 with SMTP id 6a1803df08f44-91c12edf334mr35650786d6.9.1792590438463;
+        Wed, 21 Oct 2026 06:47:18 -0700 (PDT)
 From: Josef Bacik <josef@toxicpanda.com>
-Date: Wed, 21 Oct 2026 13:46:48 +0000
-Subject: [PATCH net-next v2 04/15] net: skbuff: fail segmentation when a
- segment can't be checksummed
+Date: Wed, 21 Oct 2026 13:46:50 +0000
+Subject: [PATCH net-next v2 06/15] net: skbuff: add skb_crc32c_full() that
+ reports failure
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Message-Id: <20261021-b4-skbuff-bug-on-followups-v2-4-2aa780a03524@toxicpanda.com>
+Message-Id: <20261021-b4-skbuff-bug-on-followups-v2-6-2aa780a03524@toxicpanda.com>
 References: <20261021-b4-skbuff-bug-on-followups-v2-0-2aa780a03524@toxicpanda.com>
 In-Reply-To: <20261021-b4-skbuff-bug-on-followups-v2-0-2aa780a03524@toxicpanda.com>
 To: "David S. Miller" <davem@davemloft.net>, 
@@ -112,18 +112,18 @@ Cc: Juergen Gross <jgross@suse.com>,
  David Laight <david.laight.linux@gmail.com>, netdev@vger.kernel.org, 
  xen-devel@lists.xenproject.org, Josef Bacik <josef@toxicpanda.com>
 X-Mailer: b4 0.15.2
-X-Developer-Signature: v=1; a=openssh-sha256; t=1792590422; l=1895;
+X-Developer-Signature: v=1; a=openssh-sha256; t=1792590423; l=5122;
  i=josef@toxicpanda.com; h=from:subject:message-id;
- bh=wii8wzXlG4ePvSd6K5rd8H498XoB8iUyEaQEAS7r5bk=;
+ bh=4gDL1d1n3xZ9vhvHuHh+fxzaWH1kti0hEf02jn3aBlw=;
  b=U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgUBr36M/n0nWN0DNbnxwzIiCZez6MG
  JiruuNaSCI/zXsAAAAGcGF0YXR0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5AAAA
- QFXNkJVl00uSWJUSJGE5ur3ZFVCzw0/41zwWUKiPaUfI51HMPUlDfMqmqTrCEh6QYjM2gM13Our
- wstomOnSWpgM=
+ QGFH6qByESWgbyznzi7Yaz/CoAWhQfAOqIbi/BhB5oBR1rY2fhlWIxIK8c81xGv75bwiI8TG6yn
+ I+0cEu9/8yQc=
 X-Developer-Key: i=josef@toxicpanda.com; a=openssh;
  fpr=SHA256:C8kOX2QUJCMqnCX+KEeoqRAjLo9L+ELOSH2NSAJHqGA
-X-purgate-ID: tlsNG-bad1c0/1792590436-3AAD8034-F8A7646E/0/0
+X-purgate-ID: tlsNG-d62444/1792590440-1F66C757-1EF61EA9/0/0
 X-purgate-type: clean
-X-purgate-size: 1897
+X-purgate-size: 5124
 X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -132,53 +132,161 @@ X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-When the device can't checksum the protocol, skb_segment() computes
-each segment's checksum in software with skb_checksum().  With SG on,
-the segments share the original frags, and a devmem TCP skb keeps its
-whole payload in unreadable frags.  The devmem MSG_ZEROCOPY path never
-sets SKBFL_SHARED_FRAG, so the __skb_linearize() fallback is skipped
-too.  skb_checksum() then warns and returns 0, and tcp_gso_segment()
-writes a TCP checksum that doesn't cover the payload that goes out.
+skb_crc32c() has the same problem as skb_checksum(): when the range runs
+into unreadable frags or past the end of the skb it returns 0, which is
+also a valid CRC.  sctp_compute_cksum() complements it, so a failed
+walk looks like a checksum of 0xffffffff whatever the packet contains,
+and the packet is accepted whenever its checksum field holds that.
 
-That's reachable with tx-checksumming off and SG on: sk_setup_caps()
-still gives TCP SG and HW_CSUM, so the dmabuf send is accepted, and
-harmonize_features() strips the checksum features but keeps SG.
+Add skb_crc32c_full(), which updates *@crcp and returns 0, or returns
+-EFAULT or -EINVAL and leaves *@crcp alone, like skb_checksum_full().
+skb_crc32c() becomes a wrapper that behaves as before for the callers
+that haven't been converted.
 
-Use skb_checksum_full() and fail the segmentation with -EFAULT when it
-can't checksum a segment, as skb_segment() already does when it can't
-copy one.
+Convert skb_crc32c_csum_help(), which already returns an error when it
+can't fill in the CRC, so a transmitted SCTP packet that can't be
+checksummed is dropped instead of going out with a CRC of 0xffffffff.
+The SCTP and other callers will follow with the skb_checksum() callers.
 
-Found by the Sashiko AI review of an earlier fix for the same path with
-SG off.
-
-Link: https://lore.kernel.org/all/20261009-b4-skb-segment-nosg-unreadable-v1-1-7e2334a55fe8@toxicpanda.com/
+Fixes: 20ddd0fd2fcd ("net: skbuff: don't BUG() on leftover length in skb_checksum() and friends")
 Assisted-by: LLM
 Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 ---
- net/core/skbuff.c | 10 +++++++---
- 1 file changed, 7 insertions(+), 3 deletions(-)
+ include/linux/skbuff.h |  2 ++
+ net/core/dev.c         |  7 +++++--
+ net/core/skbuff.c      | 51 ++++++++++++++++++++++++++++++++++++++++++--------
+ 3 files changed, 50 insertions(+), 10 deletions(-)
 
+diff --git a/include/linux/skbuff.h b/include/linux/skbuff.h
+index 969b1c3269ec..327a01a5d6d0 100644
+--- a/include/linux/skbuff.h
++++ b/include/linux/skbuff.h
+@@ -4329,6 +4329,8 @@ static inline int memcpy_to_msg(struct msghdr *msg, void *data, int len)
+ 
+ __wsum skb_checksum(const struct sk_buff *skb, int offset, int len,
+ 		    __wsum csum);
++int __must_check skb_crc32c_full(const struct sk_buff *skb, int offset,
++				 int len, u32 *crcp);
+ u32 skb_crc32c(const struct sk_buff *skb, int offset, int len, u32 crc);
+ 
+ static inline void * __must_check
+diff --git a/net/core/dev.c b/net/core/dev.c
+index 8eb9bf1ff9eb..1d34fa4544a2 100644
+--- a/net/core/dev.c
++++ b/net/core/dev.c
+@@ -3738,8 +3738,11 @@ int skb_crc32c_csum_help(struct sk_buff *skb)
+ 	if (ret)
+ 		goto out;
+ 
+-	crc = ~skb_crc32c(skb, start, skb->len - start, ~0);
+-	*(__le32 *)(skb->data + offset) = cpu_to_le32(crc);
++	crc = ~0;
++	ret = skb_crc32c_full(skb, start, skb->len - start, &crc);
++	if (ret)
++		goto out;
++	*(__le32 *)(skb->data + offset) = cpu_to_le32(~crc);
+ 	skb_reset_csum_not_inet(skb);
+ out:
+ 	return ret;
 diff --git a/net/core/skbuff.c b/net/core/skbuff.c
-index 40d2dd20d47d..88ed2dd99dc0 100644
+index de433d452939..3b2a3747f009 100644
 --- a/net/core/skbuff.c
 +++ b/net/core/skbuff.c
-@@ -5239,9 +5239,13 @@ struct sk_buff *skb_segment(struct sk_buff *head_skb,
+@@ -3788,23 +3788,41 @@ int skb_copy_and_csum_bits(const struct sk_buff *skb, int offset,
+ EXPORT_SYMBOL(skb_copy_and_csum_bits);
  
- 			if (!nskb->remcsum_offload)
- 				nskb->ip_summed = CHECKSUM_NONE;
--			SKB_GSO_CB(nskb)->csum =
--				skb_checksum(nskb, doffset,
--					     nskb->len - doffset, 0);
-+			SKB_GSO_CB(nskb)->csum = 0;
-+			if (skb_checksum_full(nskb, doffset,
-+					      nskb->len - doffset,
-+					      &SKB_GSO_CB(nskb)->csum)) {
-+				err = -EFAULT;
-+				goto err;
-+			}
- 			SKB_GSO_CB(nskb)->csum_start =
- 				skb_headroom(nskb) + doffset;
+ #ifdef CONFIG_NET_CRC32C
+-u32 skb_crc32c(const struct sk_buff *skb, int offset, int len, u32 crc)
++/**
++ *	skb_crc32c_full - CRC32C a range of an skb
++ *	@skb: buffer to read
++ *	@offset: offset in @skb to start at
++ *	@len: number of bytes to include
++ *	@crcp: the CRC to continue from; on success, updated with the range
++ *
++ *	Return: 0 on success, -EINVAL if @len is negative, or -EFAULT if @skb
++ *	has unreadable frags in the range or runs out before @len does.  On
++ *	failure *@crcp is not changed.
++ */
++int skb_crc32c_full(const struct sk_buff *skb, int offset, int len, u32 *crcp)
+ {
+ 	int start = skb_headlen(skb);
+ 	int i, copy = start - offset;
+ 	struct sk_buff *frag_iter;
++	u32 crc = *crcp;
++	int err;
++
++	if (unlikely(len < 0)) {
++		DEBUG_NET_WARN_ON_ONCE(1);
++		return -EINVAL;
++	}
+ 
+ 	if (copy > 0) {
+ 		copy = min(copy, len);
+ 		crc = crc32c(crc, skb->data + offset, copy);
+ 		len -= copy;
+ 		if (len == 0)
+-			return crc;
++			goto out;
+ 		offset += copy;
+ 	}
+ 
+-	if (WARN_ON_ONCE(!skb_frags_readable(skb)))
+-		return 0;
++	if (!skb_frags_readable(skb))
++		return -EFAULT;
+ 
+ 	for (i = 0; i < skb_shinfo(skb)->nr_frags; i++) {
+ 		int end;
+@@ -3829,7 +3847,7 @@ u32 skb_crc32c(const struct sk_buff *skb, int offset, int len, u32 crc)
+ 			}
+ 			len -= copy;
+ 			if (len == 0)
+-				return crc;
++				goto out;
+ 			offset += copy;
  		}
+ 		start = end;
+@@ -3844,19 +3862,36 @@ u32 skb_crc32c(const struct sk_buff *skb, int offset, int len, u32 crc)
+ 		copy = end - offset;
+ 		if (copy > 0) {
+ 			copy = min(copy, len);
+-			crc = skb_crc32c(frag_iter, offset - start, copy, crc);
++			err = skb_crc32c_full(frag_iter, offset - start, copy,
++					      &crc);
++			if (err)
++				return err;
+ 			len -= copy;
+ 			if (len == 0)
+-				return crc;
++				goto out;
+ 			offset += copy;
+ 		}
+ 		start = end;
+ 	}
+ 	if (unlikely(len)) {
+ 		DEBUG_NET_WARN_ON_ONCE(1);
+-		return 0;
++		return -EFAULT;
+ 	}
++out:
++	*crcp = crc;
++	return 0;
++}
++EXPORT_SYMBOL(skb_crc32c_full);
+ 
++/* skb_crc32c() has no way to report failure, so it returns 0, which is a
++ * valid CRC.  Use skb_crc32c_full() in new code.
++ */
++u32 skb_crc32c(const struct sk_buff *skb, int offset, int len, u32 crc)
++{
++	if (unlikely(skb_crc32c_full(skb, offset, len, &crc))) {
++		WARN_ON_ONCE(!skb_frags_readable(skb));
++		return 0;
++	}
+ 	return crc;
+ }
+ EXPORT_SYMBOL(skb_crc32c);
 
 -- 
 2.55.0
