@@ -2,51 +2,57 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 81ADF606A322
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2026 15:29:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 12FCB606A31E
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2026 15:29:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=pJuyfrij
-Received: from list by lists.xenproject.org with outflank-mailman.1457396.1670222 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=nutanix.com header.i=@nutanix.com header.a=rsa-sha256 header.s=proofpoint20171006 header.b=0NlzqJF5;
+	dkim=pass (2048-bit key, unprotected) header.d=nutanix.com header.i=@nutanix.com header.a=rsa-sha256 header.s=selector1 header.b=K0k2dUIK
+Received: from list by lists.xenproject.org with outflank-mailman.1457402.1670231 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJYEw-0002dP-J0; Wed, 21 Oct 2026 15:28:30 +0000
+	id 1xJYFj-00035y-SR; Wed, 21 Oct 2026 15:29:19 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1457396.1670222; Wed, 21 Oct 2026 15:28:30 +0000
+Received: by outflank-mailman (output) from mailman id 1457402.1670231; Wed, 21 Oct 2026 15:29:19 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJYEw-0002dI-F1; Wed, 21 Oct 2026 15:28:30 +0000
-Received: by outflank-mailman (input) for mailman id 1457396;
- Wed, 21 Oct 2026 15:28:28 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a15f13e684000f79f@swg.vates.tech>)
- id 1xJYEu-0002dC-TB
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 15:28:28 +0000
+	id 1xJYFj-00035r-Ne; Wed, 21 Oct 2026 15:29:19 +0000
+Received: by outflank-mailman (input) for mailman id 1457402;
+ Wed, 21 Oct 2026 15:29:18 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <mark.caveayland@nutanix.com>) id 1xJYFi-00035f-AV
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 15:29:18 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJYEu-008K71-6H
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 17:28:28 +0200
-Received: from [10.42.69.1] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a15f13e684000f79f@swg.vates.tech>)
- id 6ad8da18-bab6-0a2a0a5309dd-0a2a4501d296-10
- for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 17:28:28 +0200
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a15f13e684000f79f@swg.vates.tech>)
- id 6ad8da1b-5984-0a2a45010019-b9ff1c2380f9-3
- for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 17:28:28 +0200
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a15f13e684000f79f.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 21 Oct 2026 15:28:22 +0000
-Received: from [10.20.30.14] (96.17.23.93.rev.sfr.net [93.23.17.96])
- (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id F059081B4E;
- Wed, 21 Oct 2026 17:28:20 +0200 (CEST)
+ id 1xJYFh-006Nhs-KH
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 17:29:17 +0200
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <mark.caveayland@nutanix.com>)
+ id 6ad8da41-2eae-0a2a0a5409dd-0a2a450b819a-18
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 17:29:17 +0200
+Received: from [148.163.151.68] (helo=mx0a-002c1b01.pphosted.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <mark.caveayland@nutanix.com>)
+ id 6ad8da4b-b7e8-0a2a450b0019-94a39744aab8-3
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 17:29:16 +0200
+Received: from pps.filterd (m0127837.ppops.net [127.0.0.1])
+ by mx0a-002c1b01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
+ 69LEGuTC2154049; Wed, 21 Oct 2026 08:29:03 -0700
+Received: from sn4pr0501cu005.outbound.protection.outlook.com
+ (mail-southcentralusazon11021116.outbound.protection.outlook.com
+ [40.93.194.116])
+ by mx0a-002c1b01.pphosted.com (PPS) with ESMTPS id 4hdw5rd96g-1
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384 bits=256 verify=NOT);
+ Wed, 21 Oct 2026 08:29:03 -0700 (PDT)
+Received: from PH0PR02MB7159.namprd02.prod.outlook.com (2603:10b6:510:16::8)
+ by DM6PR02MB6810.namprd02.prod.outlook.com (2603:10b6:5:214::24) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.522.12; Wed, 21 Oct
+ 2026 15:28:52 +0000
+Received: from PH0PR02MB7159.namprd02.prod.outlook.com
+ ([fe80::8e97:bc32:822c:b250]) by PH0PR02MB7159.namprd02.prod.outlook.com
+ ([fe80::8e97:bc32:822c:b250%4]) with mapi id 15.21.0546.012; Wed, 21 Oct 2026
+ 15:28:52 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,129 +61,244 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=3+TQ8qKxqQn1nSOE8UMcaep+7BnIWihCjmR34n3eEAA=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=pJuyfrijAeA/p0GEpWeQTjmp/FrU1S5WkdfyCWtWXkppMiC9b5ZyR7w7NlSa9rWcjTQ1G9uO7
- te0KeqTsJGlNR14dd8+kGUNTvcTJfAJ38tw0r/gypBABlTnWK/uMkYLMONIuvGG2jGSGSkWQCls
- SIm5u69sPZ42XX823KZMWvaUnT9OSwkvfSLoI0RL8EUj7QA6Ice3ljokLabDiOAZKZcbIRRsARg
- 6UvfxpRbw6ILWPsPogpERZBE4yn+dxDOTvc23X4yhJvWggva0KkdwNEADyaHP203btuxNBj606D
- vzuzQ598BQdW13DkwwgfL3tCw33nx9gciovsqYSRUFqA==
-X-Zone-Loop: b26f5b197cefdf3e3771f9de9b8a06e0df6a91bfc620
-x-campaign-type: default
-x-transaction-id: bcb8e75c-d0e3-4ae1-abe6-46198fc245ca
-x-swg-uid: 01-226afb13-b523-4413-a320-1ea09d50f5b3
-X-Mailer: Sweego
-Message-ID:
- <1792596502.8631fc262581453bbf619ec5b2062170.1a15f13e684000f79f@vates.tech>
-x-swg-bid: 1792596502.8631fc262581453bbf619ec5b2062170.1a15f13e684000f79f
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=proofpoint20171006 header.d=nutanix.com header.i="@nutanix.com" header.h="Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=selector1 header.d=nutanix.com header.i="@nutanix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com; h=
+	content-transfer-encoding:content-type:date:from:in-reply-to
+	:message-id:mime-version:references:subject:to; s=
+	proofpoint20171006; bh=EyzUt4miw1h9iwxpYHYX+NSr9Iq8fmPl3drzE+roD
+	tE=; b=0NlzqJF5ehxPK1CsCSkDaPmga0YuhTX/KXH53n8GyVzpEYj/kQpfmfezi
+	fQG2PJ2PfMnuy0+r6VFiEV5ET2j9WFN8xenxKkufjRBgJP487X0LJftvC2his1a+
+	dW5S0lWKWcjLMnxlH0MrYvZVY9KFbPAWDHxRk7wMYoyZUQ92jr5UFtt6l0uQtKyn
+	EX+3vFs32RTeLi1leMd2zZhfXIAO4vmUeHMz/heCTtx04lZYOI48K/4dJ0hj+Y6z
+	U+Yvgtn7/XOaYw3uzxtkpQEelig2WEY0P7G0P705Xc7nvJXs5HT80mVLnBWF+A9+
+	PKcdkgEztLBMDBOvIf/6S9Q5rfIiw==
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=tT9g8PfMCFwuvZ09YAElu71QHrCvdHleJLjQkSeJ0E89zb8ElSUoghmyB/JK5779u3D8G/IeGSl9ZGmLo2r/Xgup3d4+GwECCQ79aK7kf/wCN8JGO7VS/IWGcDWMHjP63u5cBxuKqr8Vuxlw5hxSseSBQ6WpVZfUzYibt/ifRjV4w6xPT+YSUfW6phqaAbLHxwZaktW9gNpgjJH4bBl1o4UhxmoHBTdNAoR1qLhmfmUdK1dlC+skiMn6ntEYtnkTYOiBVTkRY9vfuEWGvb2ONs/vzoWEoi+HZgtAuO9P7WogH7sRygrrDSErGlFZfbCXac3ROGf0UtzA2OdNis0vkg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=EyzUt4miw1h9iwxpYHYX+NSr9Iq8fmPl3drzE+roDtE=;
+ b=RySvdUL9oubRV8U7I6MngqIUneb4dEjUU70MBR/vU+hotRtRtDGXAE9bQpljwt7C3zrNdMGjwlmPuPwPevQGhXGO+vgSrv0hHpJdw1T1fBkfGJQeNKYG9wtzvnJUOKsD2cqE81/3ImlzrP7HQmbWeuPcv1d1PciLpDlYJdPA1FWK0XVqkHIqB/6pp8puj1NUTD3OXEDiOyYe9+jnDxw1abIzKTunzpRcxVLQL5wh6Lddy3jLfIgimUPxfFBlfSTWhFwPDwakmlII4HZotVei8ucreEiuQAFbkomzEQlL0WL8XIXXZG7PiTpHxg28rCGAiEADjwUtOOFFeFzJ8C5pUQ==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=nutanix.com; dmarc=pass action=none header.from=nutanix.com;
+ dkim=pass header.d=nutanix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=nutanix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=EyzUt4miw1h9iwxpYHYX+NSr9Iq8fmPl3drzE+roDtE=;
+ b=K0k2dUIKMB38WOFiWeo2+1nDKTqetulQuAAMdl96jNP8WAHVrUwZGS0y2eR0P46uEI3XI/2DeyqsLXq3C6yauqPrNdkLqOKTqZnQPS6h21Os8X6tzzwjKUVV95jDqg+deg5mJ35NWVTl4OCXEH7QCoBkZLPHjyJTqnrDzj4GS+fkfKsUUJZe29vN146Onsr4xyYi+xP7s6dafkBMzIMT0k2IvxYVTRXHLhr9LlRlNloNQ69LlJC/vsQq6E4+V/gHjFVhj5goBFnaTOPJgl+Yxe3ioFNFtxCUh1Ivl2vJKIl43OeR7ToL8gUA+bug8fkTZSEmUgpYsTIhTNlhOA6s9A==
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=nutanix.com;
+Message-ID: <3148a8e1-8f5a-4773-a4d1-4aa5a5465531@nutanix.com>
+Date: Wed, 21 Oct 2026 16:28:47 +0100
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 22/28] xen-hvm.c: rename
+ xen_interrupt_controller_init() to xen_i8259_init()
+To: Bernhard Beschow <shentey@gmail.com>, qemu-devel@nongnu.org,
+        pbonzini@redhat.com, richard.henderson@linaro.org, mst@redhat.com,
+        sstabellini@kernel.org, anthony@xenproject.org,
+        edgar.iglesias@gmail.com, xen-devel@lists.xenproject.org
+References: <20261019120517.1448687-1-mark.caveayland@nutanix.com>
+ <20261019120517.1448687-23-mark.caveayland@nutanix.com>
+ <22FB9414-4D72-4699-9FB4-107D9DF10F28@gmail.com>
+Content-Language: en-US
+From: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+In-Reply-To: <22FB9414-4D72-4699-9FB4-107D9DF10F28@gmail.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-ClientProxiedBy: BY3PR04CA0015.namprd04.prod.outlook.com
+ (2603:10b6:a03:217::20) To PH0PR02MB7159.namprd02.prod.outlook.com
+ (2603:10b6:510:16::8)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v3 22/39] xen/riscv: look up the exception table for
- any trap taken in Xen context
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: xen-devel@lists.xenproject.org, 
- Romain Caritey <Romain.Caritey@microchip.com>, 
- Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- Zheng Zhang <zhangzheng@iscas.ac.cn>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>
-In-Reply-To: <4e2b4e7a99f4d2133ff92559303d19382749de7a.1790779209.git.oleksii.kurochko@gmail.com>
-References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
- <4e2b4e7a99f4d2133ff92559303d19382749de7a.1790779209.git.oleksii.kurochko@gmail.com>
-Date: Wed, 21 Oct 2026 17:28:13 +0200
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792596495; l=2987;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=fFj8o3LS+yiIGjyLnD0AbZNQbRANFSl4YRScMss7Ra0=;
- b=sGlMp1H8yyiTm6053VjnJUvJ5jQSrkUgfdS8BAVQoh3JNpUqWASJGnKd9/pxc42TDLA7PRFeJ
- pa5lzHWpSD3BoFeZnb7B3hjYjZbTZZJ2tESeXSlA23o9BzZxJ+C9UHv
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1792596501500
-X-purgate-ID: tlsNG-d62444/1792596508-C5341757-2ADE4651/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: PH0PR02MB7159:EE_|DM6PR02MB6810:EE_
+X-MS-Office365-Filtering-Correlation-Id: 3631a320-405f-4c14-de7e-08df2f880306
+x-proofpoint-crosstenant: true
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|261009223027099003|56012099006|4143699003|22082099003|18002099003|10067099003|6133799003;
+X-Microsoft-Antispam-Message-Info:
+	QDuAtallgV8IK0HlyXoqwawdrE/5P7AEOqjz9yLFkfzr5DKu+eE/l7+gKW03kAGvs4Pn3PkPmCW7CRlSf838OYKH/CWaK1lhbnTjeUL8Tcj33/m2FGNDivlQ4SDl7W2hYrsecf++rfje0NsrP8Xutgmtia/J3eQxHM4GXxD1y4EiIyvvUW628j3OnuNT1AMwlvsbiORXJyWHpuocCiZhrKzImmpyCSdKNyDVdmVkequLF15JZHEiRGufKq65yh4QM7Vpmfm91l7yERPqXCP/fMZv4Wo8LAf+cHNzXa9j5IN9t0vSl4oZkOaf+XRRK9sc1vHtU31FtfsszWh9PORtCpbrcmDke21jPPj7jtZLv3vM4OMzLjSh6S0ulFUUS9VtGKJ7zyywULou2iuuA84Dnn8ur/zjNWq36jpU+cUsZ/eOqf856o9fAv0r/sBbnup+Zirn0QbSXRQy9if3+PbHBzN6OzZ581GFjFkL/wBb7OTaYazZaTBYHpSVYB17R0pxU6yyR8OACzghG/KPyHDw5pEucZDJZtFObFlympEf2ey/WQf2+rz8Drnip74IVuEDj76srl0BDSjNfeigbd88i449wEq0jDr0M14MHzv+Xv39FE9PehjWLONgQCd0MCwoHC9sD9Lcv7v6nfuzFQEFVqWWmRa48XMZuquuwOG9jXg=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH0PR02MB7159.namprd02.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(261009223027099003)(56012099006)(4143699003)(22082099003)(18002099003)(10067099003)(6133799003);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?d1QrMjJGaHF5Y2dWVlBWYm9kbnUzZUlwQ2l3NzM0MU5yNkVWbng1MWFZeDE2?=
+ =?utf-8?B?K09WT0ZRVW5NOWs0MVMyS2prYm5jcXArZkprVCs5R1VpTi9hQU1kekZLVUVV?=
+ =?utf-8?B?QktmQUM5bll0YXJJOGYxb3RmeUJTMzBhM3M3d1lOb1ViWDMvSXppVWkwL3FU?=
+ =?utf-8?B?Vkp4cGtqbWsrckRwa2pob1RMQjUxUU4xY1dKYXVlNmh3ZU9JSU1ndEh2SHRp?=
+ =?utf-8?B?TDBDcmhYV055cXlQd0p6dENBb2ZOdWNVTjZySllSaXBIZFFnOXNFd3dBSnRs?=
+ =?utf-8?B?S0Y3amg3VFdoS0hWQktBSWxWUHhYMHVZNWg4V3RyWEpzSDJyRDBURmJpNlg4?=
+ =?utf-8?B?dFlteHJjaVpDYkRTbng0a3dlRG5aYTlabUhGZ05UeGZTNGdlR0llSnllRTBX?=
+ =?utf-8?B?NC9QUlBCNUs3RjRKbDg5WlVvRWF5eXMyZlBpS25nRXBMYitmREpnelhBcHJC?=
+ =?utf-8?B?eGtKOFBYTlZxanN5V2dHanJFOWJVZk9tc1dzdlUra0FkS3VZVHVIc3VUdWl2?=
+ =?utf-8?B?dFl1RWh3Y3ZtTTMyM0h0SDVVbUd4anlGcmZQbE5rWlZoMTJTM3A4T3Y3OWVr?=
+ =?utf-8?B?NlQyQ2NST1BFUzk5Tnh2a3ZlMUpsZnpEYW43ekRlR3lKZHVIWmRLUldoMnU2?=
+ =?utf-8?B?L2tHQVJ6Qy90OEhrZ1g3TVk5WHpRVVhMOFNSSWRGemt4b25kdHU5S2RiYkdM?=
+ =?utf-8?B?MEh4MXpWNUJLWWE0QVhmUitvdmpWODdkMWd5MjlXb1ArRHZBQ29STSt3c1hH?=
+ =?utf-8?B?cU5qWUthSXovMjV5N2pCVzUvNjNtdUlMclBodHFJUE5QV3NKZnBIa2tvVDBm?=
+ =?utf-8?B?dVB3cE1DVC9Ca09UdXptbTg1d3FNVnU4aGJoUU54RzZieEdBUlBMc1VrNVZM?=
+ =?utf-8?B?emZwZWVwVXFHcDZZUEpwVlB2RlBRYjI2cWVLRnZOZFpUWUJkTUgrczRnNERF?=
+ =?utf-8?B?bzZ3cDdySjFmZm9VMG0zSE4yVDNHR2ZYRU1hblFpODZPVnV4RW1vcE90SUpk?=
+ =?utf-8?B?azlYS1dmN3lYZzZMV09sa2JqMFZUaTJNekJOYlRZNUpmNU9sZ2EzbUxmMk1H?=
+ =?utf-8?B?T0dTVDJabDh3Kzc4cGlJekEyVkpPUEhSY2lkQkUyaThmK05NTE5UTk1rK3E2?=
+ =?utf-8?B?b0xxS0lpc1RFdzZkVU9MTldrUlBJamg5ejNZNkEvQXp0b1pWSC9ZaThVdnlU?=
+ =?utf-8?B?bllsN0QvTmdiaXhjOWVEaVdnTUJEU0RkMFNQK3c4OEp6eTRMNjg5WTVYK25n?=
+ =?utf-8?B?ZmhkRlBxY2hRaTBmYUlhMXRONkpzSUxmUkJKN1F2QVNqT1FqK2gyMm5hTS9Z?=
+ =?utf-8?B?WnBUV3ljcWxpUHhkWlQ4YWFSMFM2eXFvVElZckVJQXZMWDI4Z1pZSjBPWDI0?=
+ =?utf-8?B?REZKVVM4cy85amhraENlb25DNFN6ZW1wYitKTjd6aGVmUVk0NFd4Mm1hTUlo?=
+ =?utf-8?B?ZkJhdm56RkJnTmR4bFVVempxNU40YTZPalZPVVFBeitqdkxKdC9XeWt1S0ZN?=
+ =?utf-8?B?d3FSRnk4bnV2RkFCMGNRQmNkckhLZlZucFZCVWhTNmFRT3BROHl1NlVoTlBO?=
+ =?utf-8?B?OFVadjRVWVFVRmJLMXBHZkFmakJMWGdmMEkrZ3FnMjd6WXJVVyt5OE12Rksy?=
+ =?utf-8?B?NVZvSDFidWxlK2NwQ0ZkV1FNMVRsWWhiWjIvUnVYZUFyTFBVRGRkdERQbUlj?=
+ =?utf-8?B?VTI3Q3JlU0lSK1YyZlNMOWZja2JFc2dxeEhRQXRVaFNLOWh6SkU4RXhBMGlj?=
+ =?utf-8?B?VXNOMEFybTJRTVdmajl4elQ4SU9OWER0a1lXM08vUzBvMGY1ei9lSUgwZXd1?=
+ =?utf-8?B?dnllaDZNazBzOXFTMHNqRWEvNGIrMTA0dkRxTTdzVHcxempsaXc3Tlovenk1?=
+ =?utf-8?B?bVc5L0k4NGxqT3lRVi92TUhSd3JoS1p2L0VMaTJLZ2tmdjlBRnYrUUllMEh2?=
+ =?utf-8?B?NTJNVGhNWFRTZHdNU080SXBiUXBLcTc5dWdiZkJQZ0Vmbkg2ZUtsV1paYytm?=
+ =?utf-8?B?OVNlTWlaSkY4WXJrTWNVWEdDQ1BnTGRjdHlJUTN5ODNCRGRTMzFrNC9TejVU?=
+ =?utf-8?B?VVdUTzV3cDFNWEVWVGwwTFNTZ1hGb1R1UktLWmVkRHQ1b0pQajZuRDFOS2tu?=
+ =?utf-8?B?VkE5dXZyMW05elVUdzhmQWFHTGNjQnplUU14R2NxeGVDK3BGOHkrbnVuc3BJ?=
+ =?utf-8?B?MjI1TUY1YzhqbEtCZVgvNEhZRHJiMHpyNjZmOGtkNFFyT1FRazJPbVlvaS9U?=
+ =?utf-8?B?NnpUckdQOExEYzVFUU9UZlVULy9tRFBwdHI4UHVuSDVNNmJBdStuSWx4Rzdz?=
+ =?utf-8?B?TFVuZGlqMms1WWtsZ3JOYWtjb3c2bkM5Tk9jbW45R216UlBYa2R1dExEVjRG?=
+ =?utf-8?Q?gaeJdo04MdrTKuME=3D?=
+X-Exchange-RoutingPolicyChecked:
+	dRqtH/O8RXCs6nJjm2T45m5Jnu4crSsQ+B8coVt6XD3F40sMTExgn04zZ2KMNK6xf/grt/bQZFu45WOVdK98w4NMaoZ6IQWi3rfqPXgXGgtd5U5gXKrKqz3kUvy7gFJlJT3CkUFjHEH8+qCnjtq9WcnWNsdl4IPfOUoLZpJZk35jsVjZv0fTKSNvZi4oA7qqLlc2XakrkycNKq2XDzjiJeHseSjfNy5uec7FFZx073MMAPeLxEDAupMiz5V+q3sdrHEvsWu+f11BNflQWvph2NXOP7Hadg2DIIpP9p6gu0ADnyPBNGXw2E14JSd5H5GBQh6OlFckfr/7q3sqmAK1/w==
+X-OriginatorOrg: nutanix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 3631a320-405f-4c14-de7e-08df2f880306
+X-MS-Exchange-CrossTenant-AuthSource: PH0PR02MB7159.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 21 Oct 2026 15:28:52.7588
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: bb047546-786f-4de1-bd75-24e5b6f79043
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jAMVlFxiAvGmuac9xkh9YdllWLQ4DTuiIt1ge1Kthjh3U+2RWMqKw4x5IwMIaT1mpHVO4r1DD5WrFjkxpAEedmlqud8HfmHfZ+j1s8Qq5rI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR02MB6810
+X-Proofpoint-ORIG-GUID: 7TQJyx3FTLsyPtSWNx71hwwAmBNoDsu9
+X-Proofpoint-Spam-Info: AW1haW4tMjYxMDIxMDA2MSBTYWx0ZWRfX90I+hzSomUgY
+ eX5nxWqFNSSWc/+SPhhRX+uSxg5xnq0SdfhqdQ5w06oENBJY0S6TWVqXF0FQCus2IgFD0mEP38H
+ 8Ipu7jHXb9Nw5h7ssdIl1kOeAz6GSkE=
+X-Proofpoint-GUID: 7TQJyx3FTLsyPtSWNx71hwwAmBNoDsu9
+X-Authority-Analysis: v=2.4 cv=At97T+9P c=1 sm=1 tr=0 ts=6ad8da3f cx=c_pps
+ a=U/cWNT7cGANcmDM7K3LxiQ==:117 a=6eWqkTHjU83fiwn7nKZWdM+Sl24=:19
+ a=z/mQ4Ysz8XfWz/Q5cLBRGdckG28=:19 a=lCpzRmAYbLLaTzLvsPZ7Mbvzbb8=:19
+ a=xqWC_Br6kY4A:10 a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=0kUYKlekyDsA:10
+ a=VkNPw1HP01LnGYTKEx00:22 a=VofLwUrZ8Iiv6rRUPXIb:22 a=Ap8k9tRZuQ82DLYWQqG7:22
+ a=64Cc0HZtAAAA:8 a=KKAkSRfTAAAA:8 a=K7m7aL5B5UdGmL8ntpEA:9 a=QEXdDO2ut3YA:10
+ a=cvBusfyB2V15izCimMoJ:22
+X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDIxMDA2MSBTYWx0ZWRfXwGF1EAY1cisG
+ jw8Zr8y+Q4rVTrbsxnTeLqDCmPUOEcqHXqTm5fJ/KgFx7qev3GIL+S4YXz0HWRqqCGlMp6O45tu
+ Icbvsh1IYHVcA8fZGrg8F4n5qw4fc+tdQ9Shl4Pybj/abWsd0Uh6IiXTuiVfzKcYVsTt/+M4iQB
+ f40GdKLuFS816NqoTZj4lqySHe6KIe5XGwea7JWPM+KN+VuWaeI3oGo+8E9jgNv+VCNa5ENkMPM
+ NV7bxAXjl82XRl8gq3gPhMLV0aBK0Hy7kDMtegC/PbU56GprIXKZGVZMQTALf+jU4zut97a38bS
+ OjpSH1KBWQbdRD09nAWUN+Gaz9UBkMmHgJkaxx4ct4MtyA32kGH5kvH+6o9IuUveJlDr1Gq8McG
+ 8Lujlf7Qg6u4QobGSUQHE2W7HgijC2+FKevf+8ObbxzwxTU7se+MH2b3LOaoF04hWidzlnyTugh
+ O4tWtp37SkHa5tvIC6Q==
+X-Proofpoint-Virus-Version: vendor=baseguard
+ engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
+ definitions=2026-10-21_04,2026-10-21_01,2025-10-01_01
+X-Proofpoint-Spam-Reason: safe
+X-purgate-ID: tlsNG-42698a/1792596557-198C19EA-7B68A6E5/0/0
 X-purgate-type: clean
-X-purgate-size: 2987
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 3051
+X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-> do_trap() consulted the exception table only for CAUSE_ILLEGAL_INSTRUCTION,
-> which covers csr_read_safe() but not the hlv/hlvx sequences reading guest
-> memory: those fault with load/store (guest) page fault causes and would
-> reach do_unexpected_trap() instead of their fixup.
+On 20/10/2026 18:39, Bernhard Beschow wrote:
+
+> Am 19. Oktober 2026 12:04:54 UTC schrieb Mark Cave-Ayland <mark.caveayland@nutanix.com>:
+>> This clarifies that the interrupt controller being modelled is an emulated
+>> i8259 implementation, and brings the naming convention in line with the
+>> in-built i8259 and KVM i8259 implementations.
+>>
+>> Signed-off-by: Mark Cave-Ayland <mark.caveayland@nutanix.com>
+>> Reviewed-by: Peter Maydell <peter.maydell@linaro.org>
+>> ---
+>> include/hw/xen/xen.h  | 2 +-
+>> hw/i386/pc.c          | 2 +-
+>> hw/i386/xen/xen-hvm.c | 2 +-
+>> stubs/xen-hw-stub.c   | 2 +-
+>> 4 files changed, 4 insertions(+), 4 deletions(-)
+>>
+>> diff --git a/include/hw/xen/xen.h b/include/hw/xen/xen.h
+>> index e94c6e5a31..ee4ed4f11b 100644
+>> --- a/include/hw/xen/xen.h
+>> +++ b/include/hw/xen/xen.h
+>> @@ -42,7 +42,7 @@ void xen_intx_set_irq(void *opaque, int irq_num, int level);
+>> void xen_hvm_inject_msi(uint64_t addr, uint32_t data);
+>> int xen_is_pirq_msi(uint32_t msi_data);
+>>
+>> -qemu_irq *xen_interrupt_controller_init(void);
+>> +qemu_irq *xen_i8259_init(void);
+>>
+>> void xen_register_framebuffer(struct MemoryRegion *mr);
+>>
+>> diff --git a/hw/i386/pc.c b/hw/i386/pc.c
+>> index 2d8c87b0e3..dbfd55de30 100644
+>> --- a/hw/i386/pc.c
+>> +++ b/hw/i386/pc.c
+>> @@ -1167,7 +1167,7 @@ void pc_i8259_create(ISABus *isa_bus, qemu_irq *i8259_irqs)
+>>      if (kvm_pic_in_kernel()) {
+>>          i8259 = kvm_i8259_init(isa_bus);
+>>      } else if (xen_enabled()) {
+>> -        i8259 = xen_interrupt_controller_init();
+>> +        i8259 = xen_i8259_init();
+>>      } else {
+>>          i8259 = i8259_init(isa_bus, x86_allocate_cpu_irq());
+>>      }
+>> diff --git a/hw/i386/xen/xen-hvm.c b/hw/i386/xen/xen-hvm.c
+>> index d3ce082e07..af3a90987c 100644
+>> --- a/hw/i386/xen/xen-hvm.c
+>> +++ b/hw/i386/xen/xen-hvm.c
+>> @@ -112,7 +112,7 @@ static void xen_set_irq(void *opaque, int irq, int level)
+>>      xen_set_isa_irq_level(xen_domid, irq, level);
+>> }
+>>
+>> -qemu_irq *xen_interrupt_controller_init(void)
+>> +qemu_irq *xen_i8259_init(void)
+>> {
+>>      return qemu_allocate_irqs(xen_set_irq, NULL, 16);
 > 
-> Move the lookup ahead of the cause switch, and gate it on the trap having
-> been taken in Xen context and not being an interrupt:
+> Since this function allocates 16 IRQs, the convention according to this series would be xen_i8259_pic_init(), no?
+
+I've deliberately used the same naming here as KVM does in 
+pc_i8259_create(), i.e. xen_i8259_init() to match kvm_i8259_init(). 
+However ultimately it shouldn't matter as I'm planning to remove those 
+*_i8259_init() functions in a future series.
+
+> Otherwise, much appreciated clarification of the terminology.
+
+Thanks!
+> Best regards,
+> Bernhard
 > 
+>> }
+>> diff --git a/stubs/xen-hw-stub.c b/stubs/xen-hw-stub.c
+>> index 6cf0e9a4c1..b3e27f0292 100644
+>> --- a/stubs/xen-hw-stub.c
+>> +++ b/stubs/xen-hw-stub.c
+>> @@ -29,7 +29,7 @@ int xen_is_pirq_msi(uint32_t msi_data)
+>>      return 0;
+>> }
+>>
+>> -qemu_irq *xen_interrupt_controller_init(void)
+>> +qemu_irq *xen_i8259_init(void)
+>> {
+>>      return NULL;
+>> }
 
-This reads a bit confusingly: the colon makes the bullets look like the
-conditions under which the lookup is done, yet the first one starts with
-"a trap taken from the guest". Maybe state up front that the bullets are
-the excluded cases, e.g.:
-```
-  Move the lookup ahead of the cause switch, and only do it for exceptions
-  taken in Xen context. Both other cases must skip it:
 
-  - Traps taken from the guest: sepc is then a guest address, which the
-    guest can make equal to an address listed in the exception table. ...
+ATB,
 
-  - Interrupts: an interrupt taken at an address listed in the table would
-    be "fixed up" as if the access itself had faulted, ...
-```
-> [ ... 40 lines skipped ... ]
-> @@ -196,11 +196,34 @@ void do_trap(struct cpu_user_regs *cpu_regs)
->      unsigned long cause = csr_read(CSR_SCAUSE);
->      bool from_guest = cpu_regs->hstatus & HSTATUS_SPV;
->  
-> +    /*
-> +     * A synchronous trap taken in Xen context may come from an access done on
-> +     * a vCPU's behalf, e.g. the hlv/hlvx sequences in read_guest(),
-> +     * or from a probing access like csr_read_safe(). Both are covered by
-> +     * exception table entries which record the fault details for the caller
-> +     * and resume execution past the faulting instruction.
-> +     *
-> +     * Traps taken from the guest must never be fixed up: sepc is then a guest
-> +     * address, which the guest could point at an address listed in the
-> +     * exception table, making Xen act on an entry (and, for EX_TYPE_TRAP_INFO,
-> +     * write through a pointer) fully under guest control.
-> +     *
-> +     * Interrupts must be excluded too: one taken at an address which happens
-> +     * to be listed in the exception table would otherwise be "fixed up" as if
-> +     * the access itself had faulted, silently skipping it.
-> +     *
-> +     * Returning early skips check_for_pcpu_work() below, which is correct:
-> +     * that only runs for traps taken from the guest.
-> +     */
-> +    if ( !from_guest && !(cause & CAUSE_IRQ_FLAG) &&
-> +         fixup_exception(cpu_regs, cause) )
-> +        return;
-> +
->      switch ( cause )
->      {
->      case CAUSE_VIRTUAL_SUPERVISOR_ECALL:
->          /* CAUSE_VIRTUAL_SUPERVISOR_ECALL should come from VS-mode */
-> -        BUG_ON(!(cpu_regs->hstatus & HSTATUS_SPV));
-> +        BUG_ON(!from_guest);
-Does this hunk really belong to this patch? It seems it belongs to
-previous patch where you introduced the local `from_guest`.
+Mark.
 
--- 
-Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
