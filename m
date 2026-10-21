@@ -2,34 +2,51 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6990F606A326
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2026 14:03:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 03F31606A319
+	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2026 14:57:20 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=c/agvLJW
-Received: from list by lists.xenproject.org with outflank-mailman.1457283.1670190 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=gZNbX/+X
+Received: from list by lists.xenproject.org with outflank-mailman.1457350.1670199 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJWu2-0005uX-UV; Wed, 21 Oct 2026 14:02:50 +0000
+	id 1xJXkB-0005jv-Sb; Wed, 21 Oct 2026 14:56:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1457283.1670190; Wed, 21 Oct 2026 14:02:50 +0000
+Received: by outflank-mailman (output) from mailman id 1457350.1670199; Wed, 21 Oct 2026 14:56:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJWu2-0005uQ-Rq; Wed, 21 Oct 2026 14:02:50 +0000
-Received: by outflank-mailman (input) for mailman id 1457283;
- Wed, 21 Oct 2026 14:02:49 +0000
-Received: from mail.xenproject.org ([104.130.215.37])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <roger@xenproject.org>) id 1xJWu1-0005uK-Ce
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 14:02:49 +0000
-Received: from xenbits.xenproject.org ([104.239.192.120])
- by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <roger@xenproject.org>) id 1xJWu1-00000005aPq-1UJz;
- Wed, 21 Oct 2026 14:02:49 +0000
-Received: from 224.pool85-54-217.dynamic.orange.es ([85.54.217.224]
- helo=localhost) by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
- TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (Exim 4.98.2)
- (envelope-from <roger@xenproject.org>) id 1xJWu0-00000003eQ5-43fA;
- Wed, 21 Oct 2026 14:02:49 +0000
+	id 1xJXkB-0005jo-PK; Wed, 21 Oct 2026 14:56:43 +0000
+Received: by outflank-mailman (input) for mailman id 1457350;
+ Wed, 21 Oct 2026 14:56:42 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a15ef6d2f2000f79f@swg.vates.tech>)
+ id 1xJXkA-0005jh-1h
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 14:56:42 +0000
+Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
+ id 1xJXk9-008F3n-4D
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 16:56:41 +0200
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a15ef6d2f2000f79f@swg.vates.tech>)
+ id 6ad8d29c-bab6-0a2a0a5309dd-0a2a4508e8dc-28
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 16:56:40 +0200
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a15ef6d2f2000f79f@swg.vates.tech>)
+ id 6ad8d2a8-f659-0a2a45080019-b9ff1c1294ab-3
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 16:56:40 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a15ef6d2f2000f79f.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Wed, 21 Oct 2026 14:56:36 +0000
+Received: from [10.20.30.14] (96.17.23.93.rev.sfr.net [93.23.17.96])
+ (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id F08A981B4E;
+ Wed, 21 Oct 2026 16:56:34 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -38,75 +55,130 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=In-Reply-To:Content-Transfer-Encoding:
-	Content-Type:MIME-Version:References:Message-ID:Subject:Cc:To:From:Date;
-	bh=/paedUJtUfe1GU0V4D9BXctReHAWlvWbxprmJFB3qqQ=; b=c/agvLJWj8W0scKf93UtipV/ij
-	pmZgCw+T4GsqIbF/DlTJmoyRASLe8Dyf5VoaiRt76xCpYEbkvDGR0MkgwNqZ9k7A15Co2T+Qnasbk
-	Pzdz/OuM49At8IGT8l/0ndgIzIkVAOnDTJDQdT8bBtBKnZWvSSXIvS1GYm9DUdy1GZpg=;
-Date: Wed, 21 Oct 2026 16:02:46 +0200
-From: Roger Pau =?utf-8?B?TW9ubsOp?= <roger@xenproject.org>
-To: Ross Lagerwall <ross.lagerwall@citrix.com>
-Cc: Stefano Stabellini <stefano.stabellini@amd.com>,
-	xen-devel@lists.xenproject.org, jbeulich@suse.com,
-	andrew.cooper3@citrix.com, jason.andryuk@amd.com,
-	teddy.astie@vates.tech
-Subject: Re: [PATCH] xen/x86/hvm: Propagate emulated CR2 writes to the VMCB
-Message-ID: <atjGBp1T6UjPfx59@Mac.lan>
-References: <20261020213315.3641133-1-stefano.stabellini@amd.com>
- <ath1oW-R2OlWy60f@Mac.lan>
- <26141f92-f6cf-459d-ae56-e010db9062db@citrix.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=QG7CxMo79XdFLeBVjvq0bf/F7Gbu6SHO6G+wD6sSU/I=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=gZNbX/+XSaRg+0grRQbuDvSRpMPO4nKTvcgcEFcJ+5XP9kchUbdhHe6TphhB05ktVjU7m0xDs
+ AigCnnzO4Fy594luCkV4BHo46Y1METsPwCNKFCqq3eVd4Gd4jb6v6qI+oAyRo2zfxRcggbmSkX0
+ HOAGaH22c5qU6KhZcNu1SgPjmW8k4cnHlpZZDxUTEcLnwIUhMlFewPKvZmFGbl+FmoLpMj9c1Tl
+ dCuTIuBXSHpWjFpfnPZ41Q9CrJIavQVDDLQ8ruzKH6Y9PWcXzaM+v0uYshUpou5vZSza65JObtZ
+ erQgzWw3MjHYvegvT6/9Q/ZJIyH7Gt0B06LWkK96/QUg==
+X-Zone-Loop: db75927cdf7a1d71d08b9ef3862c40865013e82188a6
+x-campaign-type: default
+x-transaction-id: 0372d9b9-e215-4292-995a-48b1e1903084
+x-swg-uid: 01-8571917c-262c-4dea-bdd9-9635a9cbcad2
+X-Mailer: Sweego
+Message-ID:
+ <1792594596.8631fc262581453bbf619ec5b2062170.1a15ef6d2f2000f79f@vates.tech>
+x-swg-bid: 1792594596.8631fc262581453bbf619ec5b2062170.1a15ef6d2f2000f79f
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-In-Reply-To: <26141f92-f6cf-459d-ae56-e010db9062db@citrix.com>
-X-Spam-Status: No, score=-16.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS autolearn=ham
-	autolearn_force=no version=4.0.1
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v3 21/39] xen/riscv: add guest memory read helper
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org, 
+ Romain Caritey <Romain.Caritey@microchip.com>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+ Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <c77408157f7674ad2ffc775d1267470b724fdecf.1790779209.git.oleksii.kurochko@gmail.com>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <c77408157f7674ad2ffc775d1267470b724fdecf.1790779209.git.oleksii.kurochko@gmail.com>
+Date: Wed, 21 Oct 2026 16:56:27 +0200
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792594589; l=2947;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=onPY+Nraq24eEHQYOmZiZkdricPO/2ZbnGcQEqb+qPs=;
+ b=50Jb8nuflVrP/UOgIqIJzW31BV1/OXxizeG28oaQotXkZ2v3s/38Qo3zL0F0KseY8LnlWrLo0
+ S61qaTj5JonD9QI1MEpTVC3W9Z8qMcfTk2qsEXA/yyqnvgpaDPayDtH
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1792594595758
+X-purgate-ID: tlsNG-c1860d/1792594600-D497287B-17F96C4A/0/0
+X-purgate-type: clean
+X-purgate-size: 2947
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Wed, Oct 21, 2026 at 02:11:30PM +0100, Ross Lagerwall wrote:
-> On 10/21/26 9:19 AM, Roger Pau Monné wrote:
-> > On Tue, Oct 20, 2026 at 02:33:15PM -0700, Stefano Stabellini wrote:
-> > > hvmemul_write_cr() updates guest_cr[2] but, unlike every other writer of
-> > > it, doesn't call hvm_update_guest_cr(). On SVM, CR2 is loaded from
-> > > the VMCB, so the emulated write never reaches the guest, and the next
-> > > VMExit overwrites guest_cr[2] with the stale VMCB value.
-> > > 
-> > > Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
-> > 
-> > Acked-by: Roger Pau Monné <roger@xenproject.org>
-> > 
-> > I wonder whether there's more missing here, see below.
-> > 
-> > > ---
-> > >   xen/arch/x86/hvm/emulate.c | 1 +
-> > >   1 file changed, 1 insertion(+)
-> > > 
-> > > diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-> > > index c09ea002ec..cd2831d34b 100644
-> > > --- a/xen/arch/x86/hvm/emulate.c
-> > > +++ b/xen/arch/x86/hvm/emulate.c
-> > > @@ -2350,6 +2350,7 @@ static int cf_check hvmemul_write_cr(
-> > >       case 2:
-> > >           curr->arch.hvm.guest_cr[2] = val;
-> > > +        hvm_update_guest_cr(curr, 2);
-> > 
-> > Looking at hvm_update_cr(), is this possibly also missing a call to
-> > nestedhvm_set_cr()?
-> 
-> AFAIK the values set by nestedhvm_set_cr() are not used at all with nested SVM
-> and from a brief look may only be used for CR0 and CR4 for VVMX. So maybe it is
-> not needed, though for consistency I think it would make sense to replace both
-> lines with a single call to hvm_update_cr().
+> [ ... 75 lines skipped ... ]
+> +/*
+> + * Read machine word from guest memory
+> + *
+> + * @guest_addr: Guest address to read
+> + * @read_insn: Flag representing whether we are reading instruction
+> + * @trap: Output pointer to trap details if something went wrong during read.
+> + *        It must be zero-initialised by the caller: it is written only when
+> + *        an access faults, so trap->scause == 0 on return is what tells the
+> + *        caller that the read succeeded.
+> + *
+> + * The hlv/hlvx instructions translate guest_addr through the live
+> + * vsatp/hgatp CSRs, so the read is only meaningful for the address
+> + * space of the currently running vCPU. It must therefore only be called
+> + * while handling a trap taken from that vCPU, never from a nested trap
+> + * taken in HS-mode, which may have interrupted Xen at a point where
+> + * hstatus, vsatp or hgatp don't belong to the vCPU.
+> + *
+> + * At most two halfwords are fetched when @read_insn is true, i.e. encodings
+> + * wider than 32 bits are not supported. Such an encoding cannot be completed
+> + * by calling this function again at @guest_addr + 4: the length check is
+> + * applied to the first halfword read, which would then be a continuation of
+> + * the instruction rather than its opcode. It is up to the caller to reject
+> + * anything that is neither a 16- nor a 32-bit encoding.
+> + */
+Shouldn't docstring belong to header file?
+> +unsigned long read_guest(unsigned long guest_addr, bool read_insn,
+> +                         struct trap_info *trap)
+> +{
+> +    /*
+> +     * Poison the result: if the very first access faults, the fixup skips
+> +     * over the loads without writing it. Callers must check trap->scause.
+> +     */
+> +    unsigned long val = ~0UL, tmp;
+> +
+> +    /*
+> +     * hlv/hlvx use hstatus.SPVP for the privilege of the access, and the
+> +     * live vsatp/hgatp for the translation. Xen never installs a value of
+> +     * its own in hstatus (it is only saved on trap entry and restored
+> +     * before sret) and it doesn't reschedule before returning to the
+> +     * guest, so all three still belong to the vCPU which trapped.
+> +     */
+> +    if ( read_insn )
+> +    {
+> +        asm volatile ( "\n"
+> +            "1: hlvx.hu %[val], (%[addr])\n"
+> +            ASM_EXTABLE_TRAP_INFO(1b, 3f, %[ti])
+> +            "   andi %[tmp], %[val], 3\n"
+> +            "   addi %[tmp], %[tmp], -3\n"
+> +            "   bnez %[tmp], 3f\n"
+> +            "   addi %[addr], %[addr], 2\n"
+Could you add a short comment explaining that the andi/addi/bnez sequence
+checks the low two bits of the first halfword to tell a compressed
+instruction from a 32-bit one? It is not obvious on first read.
+Something like:
+```
+    /*
+     * bits[1:0] != 0b11: 16-bit (compressed) instruction, nothing more
+     * to read.
+     */
+```
 
-Yes, however at the time being hvm_update_cr() is static to hvm.c.
-It would mean exporting the function, which maybe we should have done
-in the first place instead of exporting hvm_update_guest_cr()?
-
-Thanks, Roger.
+-- 
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
