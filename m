@@ -2,54 +2,56 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D176B606A31A
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DF7F7606A31B
 	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 10:18:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=QngC8xHX
-Received: from list by lists.xenproject.org with outflank-mailman.1459019.1671098 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=FCQQFScA;
+	dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=+oI2jbf8;
+	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=FCQQFScA;
+	dkim=neutral header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=+oI2jbf8
+Received: from list by lists.xenproject.org with outflank-mailman.1457649.1671127 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKCLb-0008Jm-Do; Fri, 23 Oct 2026 10:18:03 +0000
+	id 1xKCLm-0000zx-GO; Fri, 23 Oct 2026 10:18:14 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1459019.1671098; Fri, 23 Oct 2026 10:18:03 +0000
+Received: by outflank-mailman (output) from mailman id 1457649.1671127; Fri, 23 Oct 2026 10:18:14 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKCLb-0008Ha-4M; Fri, 23 Oct 2026 10:18:03 +0000
-Received: by outflank-mailman (input) for mailman id 1459019;
- Fri, 23 Oct 2026 10:05:12 +0000
+	id 1xKCLm-0000yj-7b; Fri, 23 Oct 2026 10:18:14 +0000
+Received: by outflank-mailman (input) for mailman id 1457649;
+ Wed, 21 Oct 2026 22:08:42 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <berrange@redhat.com>) id 1xKC9A-0006T8-0i
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 10:05:12 +0000
+ (envelope-from <fmancera@suse.de>) id 1xJeUD-0000rG-Pa
+ for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 22:08:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xKC98-00CFhy-NN
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 12:05:10 +0200
-Received: from [10.42.69.1] (helo=localhost)
+ id 1xJeUD-007BDz-6g
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 00:08:41 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <berrange@redhat.com>)
- id 6adb3152-bab6-0a2a0a5309dd-0a2a4501a328-30
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 12:05:10 +0200
-Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <berrange@redhat.com>)
- id 6adb3154-5984-0a2a45010019-aa0a817cd649-3
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 12:05:10 +0200
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
- (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
- relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-213-DdROSvANPzCaudLkmMT02A-1; Fri,
- 23 Oct 2026 06:05:04 -0400
-Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ (envelope-from <fmancera@suse.de>)
+ id 6ad937c9-2eae-0a2a0a5409dd-0a2a450beca4-40
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 00:08:41 +0200
+Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <fmancera@suse.de>)
+ id 6ad937e8-b7e8-0a2a450b0019-c387df83de84-3
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 00:08:41 +0200
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 9704D1956057; Fri, 23 Oct 2026 10:04:56 +0000 (UTC)
-Received: from redhat.com (headnet04.pony-001.prod.iad2.dc.redhat.com
- [10.2.32.116])
- by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 18FB21956088; Fri, 23 Oct 2026 10:04:31 +0000 (UTC)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 977F11F896;
+ Wed, 21 Oct 2026 22:08:40 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id A8175134A5;
+ Wed, 21 Oct 2026 22:08:39 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id 6b6qHOc32WqDLgAAD6G6ig
+ (envelope-from <fmancera@suse.de>); Wed, 21 Oct 2026 22:08:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -58,183 +60,265 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Reply-To:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792749908;
-	h=from:from:reply-to:reply-to:subject:subject:date:date:
-	 message-id:message-id:to:to:cc:cc:mime-version:mime-version:
-	 content-type:content-type:
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1792620520; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=Z1/M6fHwVdsOcXm3ypxN6/mMXkslI/t6HGQAVs7BRk8=;
-	b=QngC8xHXH0OPqDivJ1ziVXbqfPysZl6EuqroX4C1Xv60D2iy54LisFw6iHKuWuY02UFdJt
-	KkzbOmuyaoJSFcrN/qcETrsFise05H/oaxb+2wa9afNzphrFOidX7B6+tw65dhPZ9k75Ed
-	qyN/gzwEOHKmQfumhcQi9iia8N5BhkU=
-X-MC-Unique: DdROSvANPzCaudLkmMT02A-1
-X-Mimecast-MFC-AGG-ID: DdROSvANPzCaudLkmMT02A_1792749899
-Date: Fri, 23 Oct 2026 11:04:29 +0100
-From: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
-Cc: qemu-devel@nongnu.org, Markus Armbruster <armbru@redhat.com>,
-	Michael Roth <michael.roth@amd.com>, John Snow <jsnow@redhat.com>,
-	Peter Maydell <peter.maydell@linaro.org>,
-	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
-	Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
-	Paolo Bonzini <pbonzini@redhat.com>,
-	Kostiantyn Kostiuk <kkostiuk@redhat.com>,
-	Eric Blake <eblake@redhat.com>,
-	David Hildenbrand <david@kernel.org>,
-	Igor Mammedov <imammedo@redhat.com>,
-	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-	Jason Wang <jasowangio@gmail.com>,
-	Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
-	Alberto Garcia <berto@igalia.com>, Kevin Wolf <kwolf@redhat.com>,
-	Hanna Reitz <hreitz@redhat.com>,
-	Philippe =?utf-8?Q?Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>,
-	Zhao Liu <zhao1.liu@intel.com>, Jonathan Cameron <jic23@kernel.org>,
-	Junjie Cao <junjie.cao@intel.com>, Anisa Su <anisa.su@samsung.com>,
-	Elena Ufimtseva <elena.ufimtseva@oracle.com>,
-	Jagannathan Raman <jag.raman@oracle.com>,
-	John Levon <john.levon@nutanix.com>,
-	Thanos Makatos <thanos.makatos@nutanix.com>,
-	=?utf-8?Q?C=C3=A9dric?= Le Goater <clg@redhat.com>,
-	Cornelia Huck <cohuck@redhat.com>,
-	Eric Farman <farman@linux.ibm.com>,
-	Matthew Rosato <mjrosato@linux.ibm.com>,
-	Richard Henderson <richard.henderson@linaro.org>,
-	Ilya Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org,
-	linux-cxl@vger.kernel.org, qemu-s390x@nongnu.org,
-	"Michael S. Tsirkin" <mst@redhat.com>,
-	Sergio Lopez <slp@redhat.com>, qemu-arm@nongnu.org,
-	Palmer Dabbelt <palmer@dabbelt.com>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Weiwei Li <liwei1518@gmail.com>,
-	Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
-	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
-	Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
-	Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>,
-	Xianglai Li <lixianglai@loongson.cn>,
-	Jiaxun Yang <jiaxun.yang@flygoat.com>,
-	Pedro Barbuda <pbarbuda@microsoft.com>,
-	Mohamed Mediouni <mohamed@unpredictable.fr>,
-	Nicholas Piggin <npiggin@gmail.com>,
-	Harsh Prateek Bora <harshpb@linux.ibm.com>,
-	Amit Machhiwal <amachhiw@linux.ibm.com>, qemu-ppc@nongnu.org,
-	Zhang Chen <zhangckid@gmail.com>,
-	Li Zhijian <lizhijian@fujitsu.com>,
-	Alistair Francis <alistair@alistair23.me>,
-	Alexander Graf <graf@amazon.com>,
-	"Gonglei (Arei)" <arei.gonglei@huawei.com>,
-	zhenwei pi <zhenwei.pi@linux.dev>, Ani Sinha <anisinha@redhat.com>,
-	Luc Michel <luc@lmichel.fr>,
-	=?utf-8?Q?C=C3=A9dric?= Le Goater <clg@kaod.org>,
-	Jamin Lin <jamin_lin@aspeedtech.com>,
-	Kane Chen <kane_chen@aspeedtech.com>,
-	Samuel Tardieu <sam@rfc1149.net>, "Denis V. Lunev" <den@openvz.org>,
-	FangSheng Huang <FangSheng.Huang@amd.com>,
-	Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
-	Keith Busch <kbusch@kernel.org>, Klaus Jensen <its@irrelevant.dk>,
-	Jesper Devantier <foss@defmacro.it>,
-	Aditya Gupta <adityag@linux.ibm.com>,
-	Glenn Miles <milesg@linux.ibm.com>, Conor Dooley <conor@kernel.org>,
-	Sebastian Huber <sebastian.huber@embedded-brains.de>,
-	Halil Pasic <pasic@linux.ibm.com>,
-	Christian Borntraeger <borntraeger@linux.ibm.com>,
-	Jason Herne <jjherne@linux.ibm.com>,
-	Titus Rwantare <titusr@google.com>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Anthony PERARD <anthony@xenproject.org>,
-	Peter Xu <peterx@redhat.com>, Chinmay Rath <rathc@linux.ibm.com>,
-	Hendrik Brueckner <brueckner@linux.ibm.com>,
-	xen-devel@lists.xenproject.org,
-	Roman Bolshakov <rbolshakov@ddn.com>,
-	Phil Dennis-Jordan <phil@philjordan.eu>, Fam Zheng <fam@euphon.net>,
-	Farhan Ali <alifm@linux.ibm.com>,
-	Alex Williamson <alex@shazbot.org>,
-	Tao Tang <tangtao1634@phytium.com.cn>,
-	Stefan Berger <stefanb@linux.vnet.ibm.com>,
-	Fabiano Rosas <farosas@suse.de>,
-	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
-	Artyom Tarasenko <atar4qemu@gmail.com>,
-	Yoshinori Sato <yoshinori.sato@nifty.com>,
-	Jiri Pirko <jiri@resnulli.us>, Eric Auger <eric.auger@redhat.com>,
-	Laurent Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 54/65] qdev: adjust PciDevfn declared type
-Message-ID: <atsxLV5YZo8dr-8G@redhat.com>
-Reply-To: Daniel =?utf-8?B?UC4gQmVycmFuZ8Op?= <berrange@redhat.com>
-References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
- <20261020-qom-qapi-v7-54-431a86b02b58@redhat.com>
+	bh=Rps3j/Ol+umElVM3i3J1CQ+c26rRYH3c8bCidpO4rlA=;
+	b=FCQQFScAeE3XcQzfVRcAEtYT+0CUb93eoGGcBBOEZ3LkxGCzC5vhHADtH6oINhu4hLZCz0
+	no5fKOb+eGvnpteZZ+UAVS4vPJJulLGUayX7VLwA+o191PRNEXJJr7QwRKzQILuTkMrTg2
+	pqcD6j6ephaIzZ5iEGTTyFDaMhPsM2Y=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1792620520;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Rps3j/Ol+umElVM3i3J1CQ+c26rRYH3c8bCidpO4rlA=;
+	b=+oI2jbf8oH/vyZFWBJqu6X7MmPpT3/1lgMz6u7vhzXJgtuqWdgyaSWGzCdxWKaHVyKi9EO
+	fxrYBMZWu6TIlLDw==
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
+	t=1792620520; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Rps3j/Ol+umElVM3i3J1CQ+c26rRYH3c8bCidpO4rlA=;
+	b=FCQQFScAeE3XcQzfVRcAEtYT+0CUb93eoGGcBBOEZ3LkxGCzC5vhHADtH6oINhu4hLZCz0
+	no5fKOb+eGvnpteZZ+UAVS4vPJJulLGUayX7VLwA+o191PRNEXJJr7QwRKzQILuTkMrTg2
+	pqcD6j6ephaIzZ5iEGTTyFDaMhPsM2Y=
+DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
+	s=susede2_ed25519; t=1792620520;
+	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=Rps3j/Ol+umElVM3i3J1CQ+c26rRYH3c8bCidpO4rlA=;
+	b=+oI2jbf8oH/vyZFWBJqu6X7MmPpT3/1lgMz6u7vhzXJgtuqWdgyaSWGzCdxWKaHVyKi9EO
+	fxrYBMZWu6TIlLDw==
+Message-ID: <bea0f98f-b866-48f7-89d4-69ebb98a9af9@suse.de>
+Date: Thu, 22 Oct 2026 00:08:34 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-In-Reply-To: <20261020-qom-qapi-v7-54-431a86b02b58@redhat.com>
-User-Agent: Mutt/2.4.2 (2026-08-30)
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
-X-Mimecast-MFC-PROC-ID: kcfTzFIk0uLkvAUfT7EwtmRpxYQBNQsRgy_KND10FzY_1792749899
-X-Mimecast-Originator: redhat.com
-Content-Type: text/plain; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-d62444/1792749910-BF262757-797D8A2D/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH net-next v2 02/15] net: skbuff: add skb_checksum_full()
+ that reports failure
+To: Josef Bacik <josef@toxicpanda.com>, "David S. Miller"
+ <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>,
+ Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
+ Simon Horman <horms@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>
+Cc: Juergen Gross <jgross@suse.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
+ Mina Almasry <almasrymina@google.com>,
+ David Laight <david.laight.linux@gmail.com>, netdev@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+References: <20261021-b4-skbuff-bug-on-followups-v2-0-2aa780a03524@toxicpanda.com>
+ <20261021-b4-skbuff-bug-on-followups-v2-2-2aa780a03524@toxicpanda.com>
+Content-Language: en-US
+From: Fernando Fernandez Mancera <fmancera@suse.de>
+In-Reply-To: <20261021-b4-skbuff-bug-on-followups-v2-2-2aa780a03524@toxicpanda.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 7bit
+X-Spamd-Result: default: False [-11.79 / 50.00];
+	SUSE_INTERNAL_BYPASS(-9.00)[];
+	BAYES_HAM(-3.00)[100.00%];
+	SUSPICIOUS_RECIPS(1.50)[];
+	NEURAL_HAM_LONG(-1.00)[-1.000];
+	NEURAL_HAM_SHORT(-0.20)[-1.000];
+	MIME_GOOD(-0.10)[text/plain];
+	XM_UA_NO_VERSION(0.01)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	ARC_NA(0.00)[];
+	MIME_TRACE(0.00)[0:+];
+	TAGGED_RCPT(0.00)[netdev];
+	RCPT_COUNT_TWELVE(0.00)[14];
+	RCVD_TLS_ALL(0.00)[];
+	FREEMAIL_ENVRCPT(0.00)[gmail.com];
+	TO_DN_SOME(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	FREEMAIL_CC(0.00)[suse.com,kernel.org,gmail.com,google.com,vger.kernel.org,lists.xenproject.org];
+	MID_RHS_MATCH_FROM(0.00)[];
+	FROM_EQ_ENVFROM(0.00)[];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[toxicpanda.com:email,suse.de:email,imap1.dmz-prg2.suse.org:helo]
+X-Spam-Score: -11.79
+X-Spam-Level: 
+X-purgate-ID: tlsNG-42698a/1792620521-A9EC69EA-3FACEB8D/0/0
 X-purgate-type: clean
-X-purgate-size: 2026
-X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 6006
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Tue, Oct 20, 2026 at 02:46:11PM +0400, Marc-André Lureau wrote:
-> PciDevfn is a bit special, since it accepts integer and string as
-> setter, but only output integer as getter.
+On 10/21/26 3:46 PM, Josef Bacik wrote:
+> skb_checksum() can't fail.  When the range runs into unreadable frags
+> or past the end of the skb it returns 0, which is also a valid
+> checksum, so its callers can't tell the sum from a failure.  For the
+> receive-side validation helpers that means a packet whose payload was
+> never checksummed can pass, and commit 20ddd0fd2fcd ("net: skbuff:
+> don't BUG() on leftover length in skb_checksum() and friends") made the
+> past-the-end case one of those instead of a BUG().
 > 
-> Unfortunately, we can't declare an alternate str|int QAPI type for it,
-> since: branch 'string' can't be distinguished from 'integer'
+> Add skb_checksum_full(), which adds the range's sum to *@csump and
+> returns 0, or returns -EFAULT for unreadable frags or a range past the
+> end of the skb, and -EINVAL for a negative length, leaving *@csump
+> alone.  It's __must_check so a caller can't ignore the failure, and it
+> recurses into frag_list members through itself so a failure there
+> isn't lost either.
 > 
-> Rather than declaring it as "str", use the common type instead.
+> skb_checksum() becomes a wrapper around it that behaves as before for
+> the callers that haven't been converted: it returns 0 on failure and
+> warns once if that was because of unreadable frags.  The following
+> patches convert the core users, and the rest will follow per subsystem.
 > 
-> Signed-off-by: Markus Armbruster <armbru@redhat.com>
-> Signed-off-by: Marc-André Lureau <marcandre.lureau@redhat.com>
+> Assisted-by: LLM
+> Signed-off-by: Josef Bacik <josef@toxicpanda.com>
+
+Reviewed-by: Fernando Fernandez Mancera <fmancera@suse.de>
+
+nit: AFAIU the new wrapper does not behave the same way as before in all 
+situations. Now inside frag_list recursion a child that hits an error 
+returns 0 and in the old code the parent never checks what the child 
+returned.
+
 > ---
->  hw/core/qdev-properties-system.c | 3 ++-
->  1 file changed, 2 insertions(+), 1 deletion(-)
+>   include/linux/skbuff.h |  2 ++
+>   net/core/skbuff.c      | 56 +++++++++++++++++++++++++++++++++++++++++---------
+>   2 files changed, 48 insertions(+), 10 deletions(-)
 > 
-> diff --git a/hw/core/qdev-properties-system.c b/hw/core/qdev-properties-system.c
-> index 5bfdfe1ab9d9..3381de1144d6 100644
-> --- a/hw/core/qdev-properties-system.c
-> +++ b/hw/core/qdev-properties-system.c
-> @@ -904,7 +904,8 @@ static char *print_pci_devfn(Object *obj, const Property *prop)
->  }
->  
->  const PropertyInfo qdev_prop_pci_devfn = {
-> -    .type  = "str",
-> +    /* The formatted string accepted by the setter is a CLI convenience. */
-
-IIUC, this is not limited to the CLI, it will work anywhere the JSON
-syntax is permitted which is both CLI and QMP.
-
-libvirt uses this string syntax:
-
-  -device '{"driver":"pcie-root-port","port":9,"chassis":2,"id":"pci.2","bus":"pcie.0","multifunction":true,"addr":"0x1.0x1"}' \
-
-> +    .type  = "int32",
->      .description = "Slot and optional function number, example: 06.0 or 06",
-
-
-Changing the type to 'int32', where 99% of usage is input only
-and string based, is pretty unpleasant. Even more so that the
-description doesn't even mention encoding dev+function as an
-integer.
-
->      .print = print_pci_devfn,
->      .get   = qdev_propinfo_get_int32,
-
-With regards,
-Daniel
--- 
-|: https://berrange.com       ~~        https://hachyderm.io/@berrange :|
-|: https://libvirt.org          ~~          https://entangle-photo.org :|
-|: https://pixelfed.art/berrange   ~~    https://fstop138.berrange.com :|
+> diff --git a/include/linux/skbuff.h b/include/linux/skbuff.h
+> index 09db32f70b53..969b1c3269ec 100644
+> --- a/include/linux/skbuff.h
+> +++ b/include/linux/skbuff.h
+> @@ -4279,6 +4279,8 @@ int skb_copy_bits(const struct sk_buff *skb, int offset, void *to, int len);
+>   int skb_store_bits(struct sk_buff *skb, int offset, const void *from, int len);
+>   int __must_check skb_copy_and_csum_bits(const struct sk_buff *skb, int offset,
+>   					u8 *to, int len, __wsum *csum);
+> +int __must_check skb_checksum_full(const struct sk_buff *skb, int offset,
+> +				   int len, __wsum *csump);
+>   int skb_splice_bits(struct sk_buff *skb, struct sock *sk, unsigned int offset,
+>   		    struct pipe_inode_info *pipe, unsigned int len,
+>   		    unsigned int flags);
+> diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+> index a2b52a5a61a9..061c61422a38 100644
+> --- a/net/core/skbuff.c
+> +++ b/net/core/skbuff.c
+> @@ -3545,12 +3545,31 @@ int skb_store_bits(struct sk_buff *skb, int offset, const void *from, int len)
+>   EXPORT_SYMBOL(skb_store_bits);
+>   
+>   /* Checksum skb data. */
+> -__wsum skb_checksum(const struct sk_buff *skb, int offset, int len, __wsum csum)
+> +/**
+> + *	skb_checksum_full - checksum a range of an skb
+> + *	@skb: buffer to checksum
+> + *	@offset: offset in @skb to start at
+> + *	@len: number of bytes to checksum
+> + *	@csump: the sum to add to; on success the range's sum is added to it
+> + *
+> + *	Return: 0 on success, -EINVAL if @len is negative, or -EFAULT if @skb
+> + *	has unreadable frags in the range or runs out before @len does.  On
+> + *	failure *@csump is not changed.
+> + */
+> +int skb_checksum_full(const struct sk_buff *skb, int offset, int len,
+> +		      __wsum *csump)
+>   {
+>   	int start = skb_headlen(skb);
+>   	int i, copy = start - offset;
+>   	struct sk_buff *frag_iter;
+> +	__wsum csum = *csump;
+>   	int pos = 0;
+> +	int err;
+> +
+> +	if (unlikely(len < 0)) {
+> +		DEBUG_NET_WARN_ON_ONCE(1);
+> +		return -EINVAL;
+> +	}
+>   
+>   	/* Checksum header. */
+>   	if (copy > 0) {
+> @@ -3558,13 +3577,13 @@ __wsum skb_checksum(const struct sk_buff *skb, int offset, int len, __wsum csum)
+>   			copy = len;
+>   		csum = csum_partial(skb->data + offset, copy, csum);
+>   		if ((len -= copy) == 0)
+> -			return csum;
+> +			goto out;
+>   		offset += copy;
+>   		pos	= copy;
+>   	}
+>   
+> -	if (WARN_ON_ONCE(!skb_frags_readable(skb)))
+> -		return 0;
+> +	if (!skb_frags_readable(skb))
+> +		return -EFAULT;
+>   
+>   	for (i = 0; i < skb_shinfo(skb)->nr_frags; i++) {
+>   		int end;
+> @@ -3593,7 +3612,7 @@ __wsum skb_checksum(const struct sk_buff *skb, int offset, int len, __wsum csum)
+>   			}
+>   
+>   			if (!(len -= copy))
+> -				return csum;
+> +				goto out;
+>   			offset += copy;
+>   		}
+>   		start = end;
+> @@ -3606,14 +3625,17 @@ __wsum skb_checksum(const struct sk_buff *skb, int offset, int len, __wsum csum)
+>   
+>   		end = start + frag_iter->len;
+>   		if ((copy = end - offset) > 0) {
+> -			__wsum csum2;
+> +			__wsum csum2 = 0;
+> +
+>   			if (copy > len)
+>   				copy = len;
+> -			csum2 = skb_checksum(frag_iter, offset - start, copy,
+> -					     0);
+> +			err = skb_checksum_full(frag_iter, offset - start, copy,
+> +						&csum2);
+> +			if (err)
+> +				return err;
+>   			csum = csum_block_add(csum, csum2, pos);
+>   			if ((len -= copy) == 0)
+> -				return csum;
+> +				goto out;
+>   			offset += copy;
+>   			pos    += copy;
+>   		}
+> @@ -3621,9 +3643,23 @@ __wsum skb_checksum(const struct sk_buff *skb, int offset, int len, __wsum csum)
+>   	}
+>   	if (unlikely(len)) {
+>   		DEBUG_NET_WARN_ON_ONCE(1);
+> -		return 0;
+> +		return -EFAULT;
+>   	}
+> +out:
+> +	*csump = csum;
+> +	return 0;
+> +}
+> +EXPORT_SYMBOL(skb_checksum_full);
+>   
+> +/* skb_checksum() has no way to report failure, so it returns 0, which is a
+> + * valid checksum.  Use skb_checksum_full() in new code.
+> + */
+> +__wsum skb_checksum(const struct sk_buff *skb, int offset, int len, __wsum csum)
+> +{
+> +	if (unlikely(skb_checksum_full(skb, offset, len, &csum))) {
+> +		WARN_ON_ONCE(!skb_frags_readable(skb));
+> +		return 0;
+> +	}
+>   	return csum;
+>   }
+>   EXPORT_SYMBOL(skb_checksum);
+> 
 
 
