@@ -2,45 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9877A606A319
-	for <xen-devel@archiver.kernel.org>; Wed, 21 Oct 2026 21:35:49 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1457629.1670257 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 27B6C606A322
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2026 01:47:48 +0000 (UTC)
+Authentication-Results: smtp.subspace.kernel.org;
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=C8mcvl31
+Received: from list by lists.xenproject.org with outflank-mailman.1457752.1670266 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJdxx-0003ml-Me; Wed, 21 Oct 2026 21:35:21 +0000
+	id 1xJhtp-00055A-9Y; Thu, 22 Oct 2026 01:47:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1457629.1670257; Wed, 21 Oct 2026 21:35:21 +0000
+Received: by outflank-mailman (output) from mailman id 1457752.1670266; Thu, 22 Oct 2026 01:47:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJdxx-0003md-IG; Wed, 21 Oct 2026 21:35:21 +0000
-Received: by outflank-mailman (input) for mailman id 1457629;
- Wed, 21 Oct 2026 21:35:20 +0000
+	id 1xJhtp-000552-50; Thu, 22 Oct 2026 01:47:21 +0000
+Received: by outflank-mailman (input) for mailman id 1457752;
+ Thu, 22 Oct 2026 01:47:19 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <julien.grall.oss@gmail.com>) id 1xJdxw-0003mX-86
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 21:35:20 +0000
+ (envelope-from <willemdebruijn.kernel@gmail.com>) id 1xJhtm-00054w-RG
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 01:47:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJdxv-000RC6-LD
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 23:35:19 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xJhtl-000Ynv-Sz
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 03:47:17 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <julien.grall.oss@gmail.com>)
- id 6ad93017-e002-0a2a0a5209dd-0a2a45098168-0
- for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 23:35:19 +0200
-Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <julien.grall.oss@gmail.com>)
- id 6ad93017-be1a-0a2a45090019-d155dd2fe1ec-3
- for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 23:35:19 +0200
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-48dee593f18so954499f8f.3
- for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 14:35:19 -0700 (PDT)
-Received: from ?IPV6:2a02:8012:3a1:0:e0eb:d807:1db9:ec95?
- ([2a02:8012:3a1:0:e0eb:d807:1db9:ec95])
- by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e254f093asm8390996f8f.4.2026.10.21.14.35.18
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 21 Oct 2026 14:35:18 -0700 (PDT)
+ (envelope-from <willemdebruijn.kernel@gmail.com>)
+ id 6ad96b25-8faa-0a2a0a5109dd-0a2a450b80a8-0
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 03:47:17 +0200
+Received: from [209.85.221.169] (helo=mail-vk1-f169.google.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <willemdebruijn.kernel@gmail.com>)
+ id 6ad96b24-b7e8-0a2a450b0019-d155dda9dcbc-3
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 03:47:17 +0200
+Received: by mail-vk1-f169.google.com with SMTP id
+ 71dfb90a1353d-5eaefe5b523so845886e0c.0
+ for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 18:47:17 -0700 (PDT)
+Received: from gmail.com (111.46.245.35.bc.googleusercontent.com.
+ [35.245.46.111]) by smtp.gmail.com with ESMTPSA id
+ 71dfb90a1353d-5eae980f64esm5275613e0c.13.2026.10.21.18.47.15
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Wed, 21 Oct 2026 18:47:15 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,111 +50,178 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; none
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Subject:References:In-Reply-To:Message-ID:Cc:To:From:Date"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1792633636; x=1793238436; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:subject
+         :references:in-reply-to:message-id:cc:to:from:date:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=jCKRYOUlKmoPJSnDi6pvpqUte660v3ToEOh1Wa/1TdM=;
+        b=C8mcvl316tLOTrxfqr1lFp5qnwJCIaHKuoV9Lr82c58gZORiGIdXAKez5zKdA5/XNa
+         zjZlO3bSikRPXoxij9ti4bBaKKGW9ksxVcHuZcbf99rKKYShJzRb1e0INqZYJo/Hw9ck
+         tESiw2qnkHYSeB/gDlOHSysxgsT6YEUvgSj1+0USpIs8UErA9RUk5YxGuI0N1LJGBbAu
+         NFvEnn2bDvgsTav31O9OEC1bNP9ATSvnPL2BrlAubhQGjJn759EvHH6T9BxtCzEldTTr
+         dLxgHLe0CyPWfO8jH9fGncOYfrCqUmsJ0yrGgBIfHz0yVAZzQEhWrxhdCtnnnuPFOqki
+         rZCw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792618519; x=1793223319;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=vuf4gu+cZK0zwE9Bo0/B6FEPxPMzK24nZpHR8b9+Svo=;
-        b=Av51VF8Hsx17/+T7ufGM4CYiOkPtDxN3wSeYuuJFU5Gq2VvRMc8WxjDdevEp/5xuxW
-         li9UcyqJMyLzYtqc6g0i+K53+piC7OHaYdWEn3SP8QX6Hb7mbNCP6YkfOstFyenYgmTU
-         WN3n8v0iOvGeTXV0810sDJgh8/GZwHC7OmGqofeYxpyB1neDZSu8spkFb8YJYP0wUwd4
-         5eaFnVruZgJXKqU88bazALzr1lalqRjuVtp70ng6ahvUml+dXnk0Nn4Nn3LT2D6DrANy
-         kKD3aKlSVw/Zb/BLmmdXTiOHlhHvDg+Vywp9TprzTkfcDYPc0DdIjEbTWUNS3DOiQSVk
-         0tvg==
-X-Forwarded-Encrypted: i=1; AKwUvByHICuBNpI2iMo51/LFnz3xI1Bnex+SHzZgqvnHJAziV7rxYraQrTGERvIVnhiIAaNLKe1YZNnONes=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYLpxXcQui7YSN3kxquxkIoTiCFq9RKyhl4eh5oYcuuimtXvjtsF
-	bfrTgB42jhk7gpqXLN354pKbBr7uNeHD4kvwun4c500oE1KRE55nA+rD1yOl3w==
-X-Gm-Gg: AYBFou3Gf6JVnTtGx7tIBZGNj9ceYwn44OfNcIvMqOQaVTACEclXF6TLtiVrQvJgV8a
-	YaLDR2Gh4rvq0GXXuVgRyllJHjsh1hhQrtiHCZu5jsE3yQfJ1/JdYyAVqoi7ae/sl/hTNysfmir
-	BFp7BVzkGOf1OKSpSJkq3Vjr1yUXepkXHeaa/CZfNCsdhHP+KuE4z0CplCOvt66YWbNOYgv9ZZi
-	u5z4yyAVscVKAizhbySez5lG/rWYgbAY03cHczHlR+iQ/dmwUdzmqZc3fB2sXvMsk4H/HHZDV82
-	v6ouAql8KJM5RpPYaDbBad2/Kxt6Lb5S/hIpI9jDX3UwcckYYlQdcqT//fFgrT/Yo0bowkHFOjD
-	PwogHMSSL3QPiXMPwRUvKSbbKN+xFaaSfuoy5ymwtgwSOdToYVBJCgKiRRWCD77b/lulwBuTBav
-	T3ZvGMAD3ziTaL++5nts0qWjecgQkYGEyJc8Be+vYZTzCGZeXSj4TlDj4aI5hew07I7CZG8y6w7
-	7b11B99oy/mYE6t55i8b9QnZyWW9z4Wh4T+AyGAxg4CrWovPrdErvL4b21MXSCZEBF8HstSUHjj
-	FnEiCJart+5ENwcHlemyZ0tyxcsu/7/8LLI=
-X-Received: by 2002:a5d:6f04:0:b0:48d:f3a4:610b with SMTP id ffacd0b85a97d-48e264bba16mr7462500f8f.25.1792618518953;
-        Wed, 21 Oct 2026 14:35:18 -0700 (PDT)
-Message-ID: <e887cad0-b637-4d22-8612-64498c2e27f8@xen.org>
-Date: Wed, 21 Oct 2026 22:35:17 +0100
+        d=1e100.net; s=20260707; t=1792633636; x=1793238436;
+        h=content-transfer-encoding:content-type:mime-version:subject
+         :references:in-reply-to:message-id:cc:to:from:date:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=jCKRYOUlKmoPJSnDi6pvpqUte660v3ToEOh1Wa/1TdM=;
+        b=t5LvVIQX2HlAh44S9ftPL7O3lpc5c14AT26Yiezt9LJXn4tLElUYV5VLlvmSM4pQ9O
+         5+C6WTjMxwDXhW9GMQ9qXXZg69q3AUl/9eyDvp9LKvgItITmRHP810wFxEifOMrWwCbS
+         wh6xwIV0rltK+jxvQ10+FEpULHp+8RzyDIvjmBqn5Jb11Dez4xkQ4P3UYD7bXmpS5qxE
+         S9N207ZTHUzfpH6WEabD9dJc+dFgYleOAHnQhy9poPfJcaQdmblqhKLnPlvKnmXO8KJt
+         ZpwWPEIuUGCn8Oe5jH5uiO3i5ChB+oDVvB7rSTx9a0Ks75XayR3sVVkLRlXi00SCDBuu
+         oAJQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzyK42H6GgrU8ICSejRzX/w56vt6hTzAXXLUGOBMUucoXZ0OmgKeTM9kqjQ4NOMQoY8h+aqZ2BlN/A=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKTQBjBSrZFYC3cmaRPijACr3jFePunTKrU7cCXtrvZHeyXjs+i
+	6INgbanhWW535GOtZEXxRdph9L2HDlPoJCaIFBgPy4/VPrH8E0+AJL8U
+X-Gm-Gg: AYBFou19sftBrhHrKHm9v0LXEoUWpZ7srQrHmo7EBY+zN0EsejMF2Cs9pPl2h5aAGTE
+	NNKMotkPDBT218bUQ9hVxKRl+K/0aWJZ3pR2Epvb1Nu0QU3MrwqQgzeqlbh1xDbRmx3BmbW8voO
+	R5cON358Ugxyb2R9jFhaO7xXTG7dK/qAKpxgfF3N+4fMxRnp3bQwd45vFrJYsyqx2nZTfjsmQMw
+	WGAyoLMNgoUXyc2Lc9JGQPiNvNLogzKtZVUwGUnwXB8DVrdtTlvg6Tf31q1umrhLAux90/srdr2
+	YPtVpxPU8297Yk1uC7Fz4cL3ZqL4e5mBxH2oORsXscLGLYneVdn3wcwq/+GAABimYuWz/jxiAqO
+	DPsKzT13JmekKJmPEcncrV8R3MegmAJw08G3DZYF6OHLa5wb8el2fgZsfkpkgCbKIOmkAGuUOB6
+	H8nMeXXvbsdEYo2yXXKuYBJgq23HgehqIUbtuddIw1o8CbjFgkMU6vPQQE96yxX/x0zNGwOBLvW
+	F1fHrzLcTpX4uJipval8Lc6/44tlSEtKGdnMRPCNuq6MG7WYxIilOOk58NlCjmfF6ypKXTR2ZmJ
+	GfsnyNn9zCxn0uSENQWjwmDGKf832Ba131aU0jFpcK5i+Wy78nqRwEQHVX3XtjD2N2VswXobrnQ
+	+vaiEkwHuGWK7q9i3D6U=
+X-Received: by 2002:a05:6122:1d9f:b0:5e6:82ca:c551 with SMTP id 71dfb90a1353d-5eaebef16acmr1695454e0c.22.1792633636272;
+        Wed, 21 Oct 2026 18:47:16 -0700 (PDT)
+Date: Wed, 21 Oct 2026 21:47:15 -0400
+From: Willem de Bruijn <willemdebruijn.kernel@gmail.com>
+To: Josef Bacik <josef@toxicpanda.com>, 
+ "David S. Miller" <davem@davemloft.net>, 
+ Eric Dumazet <edumazet@kernel.org>, 
+ Jakub Kicinski <kuba@kernel.org>, 
+ Paolo Abeni <pabeni@redhat.com>, 
+ Simon Horman <horms@kernel.org>, 
+ Andrew Lunn <andrew+netdev@lunn.ch>
+Cc: Juergen Gross <jgross@suse.com>, 
+ Stefano Stabellini <sstabellini@kernel.org>, 
+ Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
+ Fernando Fernandez Mancera <fmancera@suse.de>, 
+ Mina Almasry <almasrymina@google.com>, 
+ David Laight <david.laight.linux@gmail.com>, 
+ netdev@vger.kernel.org, 
+ xen-devel@lists.xenproject.org, 
+ Willem de Bruijn <willemb@google.com>, 
+ Josef Bacik <josef@toxicpanda.com>
+Message-ID: <willemdebruijn.kernel.11bad1f39601b@gmail.com>
+In-Reply-To: <20261021-b4-skbuff-bug-on-followups-v2-11-2aa780a03524@toxicpanda.com>
+References: <20261021-b4-skbuff-bug-on-followups-v2-0-2aa780a03524@toxicpanda.com>
+ <20261021-b4-skbuff-bug-on-followups-v2-11-2aa780a03524@toxicpanda.com>
+Subject: Re: [PATCH net-next v2 11/15] net: skbuff: refuse to segment a nested
+ frag_list
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/arm: Fix under-mapping in map_range_to_domain()
-To: "Orzel, Michal" <michal.orzel@amd.com>, xen-devel@lists.xenproject.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
- Bertrand Marquis <bertrand.marquis@arm.com>,
- Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-References: <20261007135848.220047-1-michal.orzel@amd.com>
- <055dc887-0cfd-4274-a5f6-e5afdd576746@xen.org>
- <9a4f56d4-4c2e-4d5a-8489-9300170729a3@amd.com>
- <71defbe4-44a1-4b76-8d0a-bcc6ab40515f@xen.org>
- <9d970022-6b08-421c-aca0-589a0b5c2c27@amd.com>
-Content-Language: en-GB
-From: "Grall, Julien" <julien@xen.org>
-In-Reply-To: <9d970022-6b08-421c-aca0-589a0b5c2c27@amd.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain;
+ charset=utf-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1792618519-3BCD7034-94E79509/0/0
+X-purgate-ID: tlsNG-42698a/1792633637-2C59A9EA-756025D2/0/0
 X-purgate-type: clean
-X-purgate-size: 2217
-X-Spam-Status: No, score=-10.3 required=3.0 tests=BAYES_00,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
-	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1
+X-purgate-size: 3373
+X-Spam-Status: No, score=-12.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
 	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Michal,
-
-Sorry for the late reply.
-
-On 12/10/2026 08:32, Orzel, Michal wrote:
->>>
->>> I don't think we can reject unaligned regions in map_range_to_domain()
->>> though, as the host DT is not under our control and hwdom would fail to
->>> boot on platforms with sub-page devices. I asked AI to look at the Linux boards
->>> for Arm and Arm64 (140 boards in total with unaligned regions) and even the
->>> boards we claim to support have nodes that would fail:
->>> - RPI4: hdmi@7ef00700, <0x7ef01f00 0x400>
->>> - IMX8QXP: clock-controller@5b290004, <0x5b290004 0x10000>
->>
->> I am not suggesting to reject unaligned regions when mapped into the
->> hardware domain. I am suggesting to reject it when we want to
->> passthrough to another domain. So we don't end up in a situation two
->> different devices on the same page are passthrough to two different
->> domains (or between Xen and a domain).
->>
->> Codewise, it would mean map_range_to_domain() would enforce the
->> alignment and the caller will be left to decide what to do. We could
->> also decide about the alignment base don whether this is the HW domain
->> or not within the function.
-> For passthrough this is already the case. map_range_to_domain() does
-> not map anything for nodes with xen,passthrough and the domU mapping is done by
-> handle_passthrough_prop(), which rejects mstart, gstart and size that are not
-> page aligned.
+Josef Bacik wrote:
+> skb_segment() walks head_skb's frag_list, but for each member it only
+> looks at the linear part and frags[], never at the member's own
+> frag_list.  head_skb->len still counts those bytes, so with a nested
+> frag_list the walk runs out of members while it still owes data, sets
+> list_skb to NULL, and dereferences it on a later pass, before any of
+> the layout checks get a chance to catch it.  When the member is taken
+> whole with skb_clone(), the pskb_trim() that follows also drops its
+> nested data.
 > 
-> The remaining case is the overlay which can be attached to any 1:1 domain and
-> this goes through handle_device() -> map_range_to_domain() without any alignment
-> check. All the other callers operate on hwdom, so I think we could reject a
-> region that is not page aligned if d is not the hardware domain, before granting
-> the iomem permission in map_range_to_domain().
+> Nothing in the tree is known to build such an skb; GRO flushes instead
+> of chaining an skb that already has a frag_list.  Check each member as
+> the walk takes it, in the GSO_BY_FRAGS, clone and frag paths, and fail
+> the segmentation with -EINVAL if there's no member left or it has its
+> own frag_list, with a DEBUG_NET_WARN_ON_ONCE() for debug kernels, like
+> the other frag_list layout checks.  Without SG the payload is copied
+> with helpers that do recurse into nested frag_lists, so that path is
+> left alone.
 > 
-> Shouldn't we accept this patch as is so that we can backport (overlay is not
-> supported) it as a fix and then add a second one with a rejection mentioned
-> above that will help the overlay (and any future) case?
+> Suggested-by: Willem de Bruijn <willemb@google.com>
+> Assisted-by: LLM
+> Signed-off-by: Josef Bacik <josef@toxicpanda.com>
+> ---
+>  net/core/skbuff.c | 22 ++++++++++++++++++++--
+>  1 file changed, 20 insertions(+), 2 deletions(-)
+> 
+> diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+> index 56cec58bccb7..c5e28a52114b 100644
+> --- a/net/core/skbuff.c
+> +++ b/net/core/skbuff.c
+> @@ -5087,6 +5087,15 @@ struct sk_buff *skb_segment(struct sk_buff *head_skb,
+>  		int size;
+>  
+>  		if (unlikely(gso_by_frags)) {
+> +			/* The walk only goes one level deep: running out of
+> +			 * members, or finding one with its own frag_list, means
+> +			 * a nested frag_list that head_skb->len counts.
+> +			 */
+> +			if (unlikely(!list_skb || skb_has_frag_list(list_skb))) {
+> +				DEBUG_NET_WARN_ON_ONCE(1);
+> +				err = -EINVAL;
+> +				goto err;
+> +			}
 
-Thanks for the input. I didn't realise we would want to backport this 
-patch. If so, I agree the split make sense.
+This patch became quite a bit more complex because of my request.
+More than I anticipated.
 
-Acked-by: Julien Grall <julien@xen.org>
+Are you sure this first block is needed?
 
-Cheers,
 
--- 
-Julien Grall
+>  			len = list_skb->len;
+>  		} else {
+>  			len = head_skb->len - offset;
+> @@ -5096,9 +5105,11 @@ struct sk_buff *skb_segment(struct sk_buff *head_skb,
+>  
+>  		hsize = skb_headlen(head_skb) - offset;
+>  
+> -		if (hsize <= 0 && i >= nfrags && skb_headlen(list_skb) &&
+> +		if (hsize <= 0 && i >= nfrags && list_skb &&
+
+this test for list_skb != NULL is new. Previously this code already
+tested skb_headlen(list_skb) without it. Likely not needed for
+anything new in this patch?
+
+> +		    skb_headlen(list_skb) &&
+>  		    (skb_headlen(list_skb) == len || sg)) {
+> -			if (unlikely(skb_headlen(list_skb) > len)) {
+> +			if (unlikely(skb_headlen(list_skb) > len ||
+> +				     skb_has_frag_list(list_skb))) {
+>  				DEBUG_NET_WARN_ON_ONCE(1);
+>  				err = -EINVAL;
+>  				goto err;
+> @@ -5216,6 +5227,13 @@ struct sk_buff *skb_segment(struct sk_buff *head_skb,
+>  
+>  		while (pos < offset + len) {
+>  			if (i >= nfrags) {
+> +				if (unlikely(!list_skb ||
+> +					     skb_has_frag_list(list_skb))) {
+> +					DEBUG_NET_WARN_ON_ONCE(1);
+> +					err = -EINVAL;
+> +					goto err;
+> +				}
+> +
+>  				if (skb_orphan_frags(list_skb, GFP_ATOMIC) ||
+>  				    skb_zerocopy_clone(nskb, list_skb,
+>  						       GFP_ATOMIC))
+> 
+> -- 
+> 2.55.0
+> 
+
 
 
