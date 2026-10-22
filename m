@@ -2,45 +2,51 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C26C3606A319
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2026 14:02:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 06BCE606A31A
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2026 14:24:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=gvBWFzMj
-Received: from list by lists.xenproject.org with outflank-mailman.1458229.1670628 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=VVyLSrLY
+Received: from list by lists.xenproject.org with outflank-mailman.1458265.1670638 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJtMr-00026p-Id; Thu, 22 Oct 2026 14:02:05 +0000
+	id 1xJti9-0005Wv-AS; Thu, 22 Oct 2026 14:24:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1458229.1670628; Thu, 22 Oct 2026 14:02:05 +0000
+Received: by outflank-mailman (output) from mailman id 1458265.1670638; Thu, 22 Oct 2026 14:24:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJtMr-00026i-Fb; Thu, 22 Oct 2026 14:02:05 +0000
-Received: by outflank-mailman (input) for mailman id 1458229;
- Thu, 22 Oct 2026 14:02:04 +0000
+	id 1xJti9-0005Wo-7X; Thu, 22 Oct 2026 14:24:05 +0000
+Received: by outflank-mailman (input) for mailman id 1458265;
+ Thu, 22 Oct 2026 14:24:04 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xJtMp-00026c-U2
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 14:02:04 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a163ff5306000f79f@swg.vates.tech>)
+ id 1xJti8-0005Wi-AQ
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 14:24:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJtMp-007D7D-Al
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 16:02:03 +0200
-Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ada174e-e002-0a2a0a5209dd-0a2a4503df58-28
- for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 16:02:03 +0200
-Received: from [209.85.208.48] (helo=mail-ed1-f48.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6ada175b-fae8-0a2a45030019-d155d030d469-3
- for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 16:02:03 +0200
-Received: by mail-ed1-f48.google.com with SMTP id
- 4fb4d7f45d1cf-6af9a9451daso2828540a12.0
- for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 07:02:03 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-67-71.play-internet.pl.
- [109.243.67.71]) by smtp.gmail.com with ESMTPSA id
- 4fb4d7f45d1cf-6b402f2c2dfsm1826889a12.1.2026.10.22.07.02.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Thu, 22 Oct 2026 07:02:00 -0700 (PDT)
+ id 1xJti7-007H4r-Na
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 16:24:03 +0200
+Received: from [10.42.69.5] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a163ff5306000f79f@swg.vates.tech>)
+ id 6ada1c83-e002-0a2a0a5209dd-0a2a4505e58e-0
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 16:24:03 +0200
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a163ff5306000f79f@swg.vates.tech>)
+ id 6ada1c82-4cb1-0a2a45050019-b9ff1c23b5bb-3
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 16:24:02 +0200
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a163ff5306000f79f.002 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Thu, 22 Oct 2026 14:23:59 +0000
+Received: from julian.home (82-67-211-29.subs.proxad.net [82.67.211.29])
+ (Authenticated sender: julian.vetter@vates.tech)
+ by mail2.vates.fr (Postfix) with ESMTPSA id AC65882AFC;
+ Thu, 22 Oct 2026 16:23:58 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,325 +55,100 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1792677723; x=1793282523; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=QRNX6rUTXBQF2KsfYxNrV+t0oPnCnyHjH/Lci/dShOg=;
-        b=gvBWFzMjupYix4NPAGF7dtEnx3S+S7X5Rz5unegYMVQuFiviwgxyxL7lFTezqpfFhE
-         0xfR9z5QIsprYvtljI56eML5PTGJqp/Ize554BU7nSvDU9PR0ttRPxK4PrfDKqB/M6i1
-         CUkE1mEUbzq1tm0nAiwiTAgBcknoAtZcIiLmfK/tSt/hubgpaPLLs/7QDmH1CwZq492e
-         EfrWSxUvzq4waCrEm9S+3drSnH5cyZ3IlJwKDHW/zHOD5Bh0Sn1W9/h1XEDQ7f25XnaA
-         UHH3jK9KwM5DS57kRbFi4/d/icRcjEMDitsagOTTsZhMaeIOJpLKGsrPluVDViHvRAHK
-         o6aQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792677723; x=1793282523;
-        h=content-transfer-encoding:content-type:in-reply-to:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=QRNX6rUTXBQF2KsfYxNrV+t0oPnCnyHjH/Lci/dShOg=;
-        b=mhrGLi69haYU2/ShsbOqGA0hnJH2jYk0GESph7VY22IwpL1X1ZOuxoWciLPy3p3zlQ
-         NyVWEKWZJ1kgH6alyhMJctZE9jh/7k5poPyIIoM32WbA8/Xo0aY+NkFel6U0vIiQunDX
-         JUTUKM1wfesbBpbUYyJVlojcD8msobJyt0Tl7Yx8DTl9T3ZXEGEhGLTwxxFcIurMRUOG
-         bHOxx+P418vOE6ry4Wp0Mk373MBRlNATyKpaHY5p0s2bOaOqX23ufBiHBfglUbpzFZKy
-         2qM+yqDb3J2KAwJzRLUJZJm2EUJPvOV0IkBQ0PhU4oUE6cVNkKYdKuabIk/iucfJrg5I
-         dQOw==
-X-Forwarded-Encrypted: i=1; AKwUvBy1fsPzOmY19JV/5rKA6bm5z4tB3LUgv9nYRYl1vmx2k3ugQRLA704cMWMR1RgnQGvuNJbaKo2Z6I4=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKgnVXpTKxJobQiS212aQUD4g3nXtn2DYdlAQ7iE3BuCylPAt/Y
-	9rDtSiFOxEeQcqu5w7VGt0ZvuZb4zFOoJZUezG/HCf3CDzhC0Y/jcBlg
-X-Gm-Gg: AYBFou2lpL6KPtX6dUqmxwmgKT1axk98GIPbv7z/1cdQPXh9hqepknWzL3siNUfdBZs
-	6jPvYSMM+diMISc2DVol0+6RQEMO07a5XQbmVZrCmFqG/2iYfzkMZjozn+DrPnLonJW74a7KocN
-	0/r6qEjKttL2T0qkyJaK3dlnz1nmwwkFLQyEHkxEyTec5bI4+FrammVyx6EwQrx88f+AU6kl37Y
-	f5Q/d1rBNya1JA88D9CVNWqt1yZj+czl3rkrhRtE3fdMyJ1CMX2FcyActUnqE/9vJ1UWn2/a8ug
-	YpBoW84tj1v58Vb5/J9Yo4Mpec0m3Re5UCf/8rZ+wLkGHrm+xr2xpFR5MQuyleYVHVUsXlkCdFN
-	ZRfsFZzYi/SRqGuoXOpnWcpEZI06XfUWLsp+iCI9f7Lt0pesXgKKK3EtWvP0Z6BP1ynaqsP73WL
-	MnvzRBivKaKk8wlkJ99x2RYJI0tjLYXAxJhVqU1OlWlgPDUmHXbVLl1YeBcZstFXw4hQD7AftuQ
-	AL1HS+17H8XZSBgtqzaKp/dxLm0a5cuMyq1m6gTGgfWrq+IL8hDSUZFnDWua2FjgGR5fPMTLO9L
-	LXOpDSgaw3CFwyekPxbtqbAqnf/tlMxLquxjrCXXQlK17Lj/Ww==
-X-Received: by 2002:a05:6402:11cc:b0:6aa:1112:62f2 with SMTP id 4fb4d7f45d1cf-6b408ea1659mr4951533a12.15.1792677721310;
-        Thu, 22 Oct 2026 07:02:01 -0700 (PDT)
-Message-ID: <3fd7584a-786a-4742-9f3a-aee8dfa42e43@gmail.com>
-Date: Thu, 22 Oct 2026 16:01:59 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=vlWKZj/gYCSs7h+Jw/HshG+LXbNuQBcp1pR5RSaWgW0=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:feedback-id;
+ b=VVyLSrLYnNfXKaiaMsX3SJDxQ+r07OmDFOjR7CSd05lmHd6CPmGf0Zp984RkSUWYBZmsPsbxT
+ BtiaFCfNV7isDmiV+JV7aas5Hh8Eoyu697q2DmJdIkw2ib/WiY4C/sekXVmky1+nczhCRS5xQzy
+ TQHcOTpaTUpIWF74hSB9HxL5GP/nonGfSVsTEzP6KzVIIAKhC5vkFYmYXo6K5sxWLlGmijlxzkI
+ hjom4cSjhlug848Mna2WE6lh9AC5+I+Xm5ez/vtgZzA0a6WKG/fuLsVRxVjsWnnhvZMNf6U5AHk
+ Bix/cRN6iKpojQtUuOuQz+wffEBIv9z8vzZaD3Mitddw==
+X-Zone-Loop: f7bd0419009f5549d7deb07481233154afa9fa16117a
+x-campaign-type: default
+x-transaction-id: fe0a471e-dcaa-4907-8f92-b05ee1e232d6
+x-swg-uid: 01-dbd07b85-caf4-4b62-adb5-ad1830cc5431
+X-Mailer: Sweego
+Message-ID:
+ <1792679039.8631fc262581453bbf619ec5b2062170.1a163ff5306000f79f@vates.tech>
+x-swg-bid: 1792679039.8631fc262581453bbf619ec5b2062170.1a163ff5306000f79f
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+From: Julian Vetter <julian.vetter@vates.tech>
+To: xen-devel@lists.xenproject.org
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Andrii Sultanov <andriy.sultanov@vates.tech>,
+	Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Julian Vetter <julian.vetter@vates.tech>
+Subject: [PATCH 0/2] tools/ocaml: bindings needed to build ARM domains
+Date: Thu, 22 Oct 2026 16:23:53 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 2/6] automation/qtb: add jinja2 device trees for
- riscv64 smoke tests
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- xen-devel@lists.xenproject.org
-Cc: Doug Goldstein <cardoe@cardoe.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-References: <1787823334.8631fc262581453bbf619ec5b2062170.1a04293255c000c4f3@vates.tech>
- <1787823788.8631fc262581453bbf619ec5b2062170.1a0429a1050000c4f3@vates.tech>
-Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <1787823788.8631fc262581453bbf619ec5b2062170.1a0429a1050000c4f3@vates.tech>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1792677723-76CF84E9-766C32E8/10/73395122804
-X-purgate-type: spam
-X-purgate-size: 9571
-X-Spam-Status: No, score=-14.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.132.3cf5113902c4bef7.1a163ff503d.9c62f99227416224=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1792679039037
+X-purgate-ID: tlsNG-c201ff/1792679042-243112A1-0B0DF697/0/0
+X-purgate-type: clean
+X-purgate-size: 1859
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+---=Part.132.3cf5113902c4bef7.1a163ff503d.9c62f99227416224=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
+
+Hello,
+this series adds two bindings that are still missing for an OCaml
+toolstack, to create and build ARM domains=2E
+
+Patch 1 exposes the XEN_SYSCTL_PHYSCAP_ARM_GIC_V2/V3 bits of
+XEN_SYSCTL_physinfo in arm_physinfo_caps=2E Since
+XEN_DOMCTL_CONFIG_GIC_NATIVE was removed, the toolstack has to pick a
+concrete GIC version itself=2E The OCaml physinfo stub only reports the
+SVE vector length on ARM, so OCaml toolstacks currently can't select a
+GIC version=2E
+
+Patch 2 adds bindings for XEN_DOMCTL_{get,set}_paging_mempool_size=2E The
+existing shadow_allocation_{get,set} bindings use
+XEN_DOMCTL_SHADOW_OP_{GET,SET}_ALLOCATION, which are x86-only and fail
+with -ENOSYS on ARM, so there is no way to size the P2M pool of an ARM
+domain from OCaml, as libxl does=2E
+
+Even though I'm sending these patches as a series, they are somewhat
+independent from each other=2E But together with the patch I sent earlier
+today "tools/ocaml: implement stub_xc_domain_create() for ARM", they are
+what xenopsd needs to create ARM domains=2E
+
+Signed-off-by: Julian Vetter <julian=2Evetter@vates=2Etech>
+
+Julian Vetter (2):
+  tools/ocaml: expose the supported guest GIC versions in physinfo
+  tools/ocaml: add bindings for the paging mempool size
+
+ tools/ocaml/libs/xc/xenctrl=2Eml      |  7 +++++
+ tools/ocaml/libs/xc/xenctrl=2Emli     |  6 +++++
+ tools/ocaml/libs/xc/xenctrl_stubs=2Ec | 40 ++++++++++++++++++++++++++++-
+ 3 files changed, 52 insertions(+), 1 deletion(-)
+
+--=20
+2=2E53=2E0
 
 
-On 8/27/26 11:42 AM, Baptiste Le Duc wrote:
-> The dom0less RISC-V smoke tests need a host device tree describing the
-> platform (CPUs, APLIC/IMSIC, uart). It varies per machine (hart count, MMU
-> type), so a single static .dts cannot cover the test matrix.
-> 
-> Add dts/qemu-host.dts.j2, a template of the QEMU virt platform in
-> aia=aplic-imsic mode: per-hart cpu/cpu-intc nodes, the M- and S-mode APLIC
-> and IMSIC pairs, CLINT and the ns16550a uart. It takes ncpus, mmu_type and
-> xen_bootargs as arguments.
-> 
-> Values QEMU hardcodes are set as named constants matching their source
-> symbols (QEMU_UART0_IRQ, QEMU_IRQCHIP_NUM_SOURCES, ...) rather than
-> open-coded, so a QEMU-side change is easy to trace.
 
-We want to have more strong position why we need a template for host 
-instead of using what QEMU could provide with --machinedump. Probably we 
-want to double check again if --machinedump isn't enough... But I am 
-okay to proceed with template too.
+-- 
+Julian Vetter | Vates Hypervisor & Kernel Developer
 
-> The template is inert on its own: the generated dtb will be used in next
-> patch.
+XCP-ng & Xen Orch=
+estra - Vates solutions
 
-Please describe what the template is for instead of referring to the
-next patch: the commit message should stand on its own.
-
-> 
-> Assisted-by: Claude:claude-opus-5
-> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-> ---
->   .../scripts/qtb/riscv/dts/qemu-host.dts.j2    | 160 ++++++++++++++++++
->   1 file changed, 160 insertions(+)
->   create mode 100644 automation/scripts/qtb/riscv/dts/qemu-host.dts.j2
-> 
-> diff --git a/automation/scripts/qtb/riscv/dts/qemu-host.dts.j2 b/automation/scripts/qtb/riscv/dts/qemu-host.dts.j2
-> new file mode 100644
-> index 0000000000..13a8e983ce
-> --- /dev/null
-> +++ b/automation/scripts/qtb/riscv/dts/qemu-host.dts.j2
-> @@ -0,0 +1,160 @@
-> +/dts-v1/;
-> +
-> +{#-
-> + * Jinja2 QEMU "virt" platform device tree for Xen RISC-V tests.
-> + *
-> + * Interrupt controller: APLIC in MSI mode + IMSIC
-> + * (QEMU -M virt,aia=aplic-imsic).
-> + *
-> + * Rendered by xen_dt.py.
-> + *
-> + * Variables:
-> + *   ncpus        - number of physical harts                (int, >= 1)
-> + *   mmu_type     - Xen host MMU type, e.g. "sv39"          (string)
-> + *   xen_bootargs - Xen command line                        (string)
-> + *
-> + * Per-hart nodes are labelled cpu<i> / cpu<i>_intc and referenced with &label.
-> + *
-> + * No `aia-guests=N`, so no VS-mode guest files: IMSIC reg size is
-> + * ncpus * page size.
-> +-#}
-> +{#- Values QEMU hardcodes, need to be described to Xen -#}
-> +{%- set QEMU_TIMEBASE_FREQUENCY = 10000000 %}   {#- RISCV_ACLINT_DEFAULT_TIMEBASE_FREQ -#}
-> +{%- set QEMU_IRQCHIP_NUM_SOURCES = 96 %}        {#- VIRT_IRQCHIP_NUM_SOURCES (virt.h) -#}
-
-What if virt.h here?
-
-> +{%- set QEMU_IRQCHIP_NUM_MSIS = 255 %}          {#- VIRT_IRQCHIP_NUM_MSIS -#}
-> +{%- set QEMU_UART_CLOCK_FREQUENCY = 3686400 %}  {#- create_fdt_uart() -#}
-> +{%- set QEMU_UART0_IRQ = 10 %}                  {#- UART0_IRQ -#}
-> +{%- set QEMU_IMSIC_PAGE_SZ = 0x1000 %}          {#- IMSIC_MMIO_PAGE_SZ -#}
-> +
-> +{%- set IRQ_TYPE_LEVEL_HIGH = 4 %}
-> +{%- set APLIC_IRQ_CELLS = 2 %}
-> +
-> +{%- set IRQ_M_SOFT = 3 %}
-> +{%- set IRQ_M_TIMER = 7 %}
-> +{%- set IRQ_S_EXT = 9 %}
-> +{%- set IRQ_M_EXT = 11 %}
-> +
-> +/ {
-> +    #address-cells = <0x02>;
-> +    #size-cells = <0x02>;
-> +    compatible = "riscv-virtio";
-> +    model = "riscv-virtio,qemu";
-> +
-> +    memory@80000000 {
-> +        device_type = "memory";
-> +        reg = <0x00 0x80000000 0x00 0x80000000>;
-> +    };
-> +
-> +    cpus {
-> +        #address-cells = <0x01>;
-> +        #size-cells = <0x00>;
-> +        timebase-frequency = <{{ QEMU_TIMEBASE_FREQUENCY }}>;
-> +{% for i in range(ncpus) %}
-> +        cpu{{ i }}: cpu@{{ i }} {
-> +            device_type = "cpu";
-> +            reg = <0x{{ '%x' % i }}>;
-> +            status = "okay";
-> +            compatible = "riscv";
-> +            riscv,cbop-block-size = <0x40>;
-> +            riscv,cboz-block-size = <0x40>;
-> +            riscv,cbom-block-size = <0x40>;
-> +            riscv,isa = "rv64imafdch_zicntr_zicsr_zifencei_zihintpause_zihpm_zba_zbb_zbs_smstateen_svpbmt_smaia_ssaia";
-
-Probably, it could also make sense to not hard-code isa property as 
-potentiall we could have tests with different set of extensions.
-
-Also, this is a hand-picked subset: Zicbom/Zicboz/Zicbop are missing 
-although their block sizes are set just above. I haven't checked what 
-will be needed in Xen to support this extension (or if we could count 
-them as supported...) until this isn't clarified it seems like it will 
-be better to drop:
-+            riscv,cbop-block-size = <0x40>;
-+            riscv,cboz-block-size = <0x40>;
-+            riscv,cbom-block-size = <0x40>;
-
-> +            mmu-type = "riscv,{{ mmu_type }}";
-
-Xen doesn't read mmu-type from the host CPU nodes: it is parsed only
-from dom0less domain nodes (arch_parse_dom0less_node()). The host
-stage-1 mode is fixed at build time (RV_STAGE1_MODE), and the G-stage
-mode is detected at runtime by probing hgatp. So mmu_type has no effect
-on Xen, and "It varies per machine (hart count, MMU type)" doesn't hold
-for the MMU type.
-
-It also makes the DT inaccurate: per the binding, mmu-type is the
-largest translation mode the hart supports, which is sv57 for QEMU's
-rv64 (that's what QEMU puts there), while the default here is sv48. If
-the intent is to choose a guest's MMU mode, it belongs to the DomU
-node.
-
-> +
-> +            cpu{{ i }}_intc: interrupt-controller@{{ i }} {
-
-The node has a unit address but no reg, which makes dtc warn
-(unit_address_vs_reg). QEMU and the binding use plain
-"interrupt-controller".
-
-It seems like removing of "@{{ i }}" could be enough.
-
-> +                #interrupt-cells = <0x01>;
-> +                interrupt-controller;
-> +                compatible = "riscv,cpu-intc";
-> +            };
-> +        };
-> +{% endfor %}
-> +        cpu-map {
-> +
-> +            cluster0 {
-> +{% for i in range(ncpus) %}
-> +                core{{ i }} {
-> +                    cpu = <&cpu{{ i }}>;
-> +                };
-> +{% endfor %}
-> +            };
-> +        };
-> +    };
-> +
-> +    soc {
-> +        #address-cells = <0x02>;
-> +        #size-cells = <0x02>;
-> +        compatible = "simple-bus";
-> +        ranges;
-> +
-> +        serial@10000000 {
-> +            interrupts = <{{ QEMU_UART0_IRQ }} {{ IRQ_TYPE_LEVEL_HIGH }}>;
-> +            interrupt-parent = <&aplic_s>;
-> +            clock-frequency = <{{ QEMU_UART_CLOCK_FREQUENCY }}>;
-> +            reg = <0x00 0x10000000 0x00 0x100>;
-> +            compatible = "ns16550a";
-> +        };
-> +
-> +        aplic_s: aplic@d000000 {
-> +            riscv,num-sources = <{{ QEMU_IRQCHIP_NUM_SOURCES }}>;
-> +            reg = <0x00 0xd000000 0x00 0x8000>;
-> +            msi-parent = <&imsic_s>;
-> +            interrupt-controller;
-> +            #interrupt-cells = <{{ APLIC_IRQ_CELLS }}>;
-> +            compatible = "riscv,aplic";
-
-The binding requires compatible = "qemu,aplic", "riscv,aplic", which is
-also what QEMU generates. The same applies to both APLICs, and to the
-IMSICs below ("qemu,imsics", "riscv,imsics").
-
-> +        };
-> +
-> +        aplic@c000000 {
-> +            riscv,delegate = <&aplic_s 0x01 {{ QEMU_IRQCHIP_NUM_SOURCES }}>;
-
-The binding names this property riscv,delegation. QEMU emits both
-riscv,delegate and riscv,delegation, while the template has only the
-former.
-
-~ Oleksii
-
-> +            riscv,children = <&aplic_s>;
-> +            riscv,num-sources = <{{ QEMU_IRQCHIP_NUM_SOURCES }}>;
-> +            reg = <0x00 0xc000000 0x00 0x8000>;
-> +            msi-parent = <&imsic_m>;
-> +            interrupt-controller;
-> +            #interrupt-cells = <{{ APLIC_IRQ_CELLS }}>;
-> +            compatible = "riscv,aplic";
-> +        };
-> +
-> +        imsic_s: imsics@28000000 {
-> +            riscv,num-ids = <{{ QEMU_IRQCHIP_NUM_MSIS }}>;
-> +            reg = <0x00 0x28000000 0x00 0x{{ '%x' % (ncpus * QEMU_IMSIC_PAGE_SZ) }}>;
-> +            interrupts-extended = <
-> +                {%- for i in range(ncpus) %}
-> +                    &cpu{{ i }}_intc {{ IRQ_S_EXT }}
-> +                {%- endfor %}
-> +            >;
-> +            msi-controller;
-> +            interrupt-controller;
-> +            #interrupt-cells = <0x00>;
-> +            compatible = "riscv,imsics";
-> +        };
-> +
-> +        imsic_m: imsics@24000000 {
-> +            riscv,num-ids = <{{ QEMU_IRQCHIP_NUM_MSIS }}>;
-> +            reg = <0x00 0x24000000 0x00 0x{{ '%x' % (ncpus * QEMU_IMSIC_PAGE_SZ) }}>;
-> +            interrupts-extended = <
-> +                {%- for i in range(ncpus) %}
-> +                    &cpu{{ i }}_intc {{ IRQ_M_EXT }}
-> +                {%- endfor %}
-> +            >;
-> +            msi-controller;
-> +            interrupt-controller;
-> +            #interrupt-cells = <0x00>;
-> +            compatible = "riscv,imsics";
-> +        };
-> +
-> +        clint@2000000 {
-> +            interrupts-extended = <
-> +                {%- for i in range(ncpus) %}
-> +                    &cpu{{ i }}_intc {{ IRQ_M_SOFT }} &cpu{{ i }}_intc {{ IRQ_M_TIMER }}
-> +                {%- endfor %}
-> +            >;
-> +            reg = <0x00 0x2000000 0x00 0x10000>;
-> +            compatible = "sifive,clint0", "riscv,clint0";
-> +        };
-> +    };
-> +
-> +    chosen {
-> +        stdout-path = "/soc/serial@10000000";
-> +        xen,xen-bootargs = "{{ xen_bootargs }}";
-> +    };
-> +};
-
+web: https://vates=2Etech
+---=Part.132.3cf5113902c4bef7.1a163ff503d.9c62f99227416224=---
 
