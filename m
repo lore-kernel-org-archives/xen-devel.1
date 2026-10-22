@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 88A1F606A31B
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2026 17:09:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 631F8606A319
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2026 18:26:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=fcBMeCk1
-Received: from list by lists.xenproject.org with outflank-mailman.1458457.1670692 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=R/+tTo6Z
+Received: from list by lists.xenproject.org with outflank-mailman.1458523.1670709 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJwHO-0005Mq-KT; Thu, 22 Oct 2026 17:08:38 +0000
+	id 1xJxUO-000732-4Z; Thu, 22 Oct 2026 18:26:08 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1458457.1670692; Thu, 22 Oct 2026 17:08:38 +0000
+Received: by outflank-mailman (output) from mailman id 1458523.1670709; Thu, 22 Oct 2026 18:26:08 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJwHO-0005Mi-Fq; Thu, 22 Oct 2026 17:08:38 +0000
-Received: by outflank-mailman (input) for mailman id 1458457;
- Thu, 22 Oct 2026 17:08:37 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xJxUO-00072v-1m; Thu, 22 Oct 2026 18:26:08 +0000
+Received: by outflank-mailman (input) for mailman id 1458523;
+ Thu, 22 Oct 2026 18:26:07 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <andrew.cooper@citrix.com>) id 1xJwHN-0005Mc-0G
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 17:08:37 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1xJxUM-00072p-W0
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 18:26:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJwHM-00EGEk-5v
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 19:08:36 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xJxUM-003gqZ-CL
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 20:26:06 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <andrew.cooper@citrix.com>)
- id 6ada42c7-2eae-0a2a0a5409dd-0a2a4504bc54-24
- for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 19:08:36 +0200
-Received: from [52.101.85.30]
- (helo=BYAPR05CU005.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ada5521-e002-0a2a0a5209dd-0a2a4506bcbe-20
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 20:26:06 +0200
+Received: from [52.101.52.41]
+ (helo=BL2PR02CU003.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <andrew.cooper@citrix.com>)
- id 6ada4312-b57f-0a2a45040019-3465551e979b-3
- for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 19:08:35 +0200
+ id 6ada553c-195a-0a2a45060019-34653429278a-3
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 20:26:05 +0200
 Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
- by CH2PR03MB5301.namprd03.prod.outlook.com (2603:10b6:610:9d::19)
+ by CO1PR03MB5778.namprd03.prod.outlook.com (2603:10b6:303:6e::22)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.15; Thu, 22 Oct
- 2026 17:08:31 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.14; Thu, 22 Oct
+ 2026 18:26:03 +0000
 Received: from CH8PR03MB8275.namprd03.prod.outlook.com
  ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
  ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0546.016; Thu, 22 Oct 2026
- 17:08:31 +0000
+ 18:26:03 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,34 +54,34 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=ifMDwCHEwRHq13CmiVej6qb1F3hoR+ule+o+kvKDz8NO+4rU6F/qxxumOpjmsEi4ucBU3O4DPCDS5kRS4973IwEvQiaeN/KOuabEDLqJchneUKgeBsCQnhzc+jITvvSRUEAFca9Oi0iS7VZ4JT0r4yrwUaY7gEEp/wUVW29qtpMsg+TG++uCD4aWEWaNZlLPgEwLNoaJCx4FY8ocwAhUUk0APPxgT1KRE0GI2IHtoBKwpu1f/1sbGVXpUbgTYfUtYeS6L22kCJVN17kPkIsFR/yaI0aszo/RKOKn+SGXcYfMfbeQL+CoKpKPJ9lBR9W7gcUpfmM2XKx8M81zNnqBAQ==
+ b=TusHCX6cSTJWYE6VUdFmS3TDqGmnwQtnENfLtDDpnr61K6tBgT/pg9iGGxnSnrPGHysdWtkiwg6ziDKG4V1JsM0D2ctb4vwunW1vVZy7CcFZgapLXJjRzdQX1f/FVtZ2A5k/dJeBU1MRw+d6C9Bnxch1g7c/y9lAvhwnL1F3pZU/h2TWL9wGkPwpL330R+vHt6uvd8KRSPIo8BjJO6LfAOW34mXn0eGEr04nGtcx1Li/sQNZ/gF7wCSNgnMolaPXeD9ujTvAcpbh94V4rYYgnJNKLdX70CkmMu5PjjDyRddcgkBU0nj8pS7VtDXGhabKw+SJroC/w12ewNbgZoLkeA==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=A7LXFtEsWDolrsJFGMGXmMfEF4jyBd86w9aFZXL3WXU=;
- b=woOQcPKKiGccmq5dXWSm/l6NK8P/5LVbqR4wq1ljgImyILal3l9ly5skS+/IXYuyUqObx0LeFF40RL7PCqLJe6Vbf/zjAN17ZXr83zTRWYAqpiee0VOg+C2WU+abVFhXpw+XLlNbv7Mwd9e75uLS278apiqlgceZtKlkdZo/PeJD4sjJnEcGHMtEIRyd47fWsqNGT9pqmdkIi86xdW0SlJ120ULowRMtr+2Ec8OZngNN8e8Wg97cR4m5Ld6GoKnwBMaiRyk/VEPl/GA4sYs4GZvf15Io8p78TVnYJVuhLFKMtjcRwLuu5hp6R8mxsiaV0cDx72CvdDWuffKt4fiiQA==
+ bh=WoWiVcX3/WbsE7kFzD5lGF+CS5uiw3aAqy4e8uoxvGM=;
+ b=vigKiju8bJkdPhMRDMspDFAU04vi8xybs6VoYZ4uNGEDkk0Onovxdivp8cwIfekwoYulz8W13WlEpPR1lcCrXRBk4ettKhOiwk+EfeMCh3okUjt1nRhnCf9D2hYLV7XIhlI1uA+p0yTBpGQvl3RT6LWho85olnCfZ9EjjNAgttDcB5hLkeVuIC4Dv1R7Yyd/8i+xwEiSdyxPknkYxsK3TgYTnDyAr6sgo6j4DeMfQk1cSS1nfQZc6hHFA4YChQZT4z6xgfdS1XQ5lZlTQmoBkCbEYVwEO9vEaSSKfvL1huh3eEo+bz6U5R55uF46RP/LDYDORYGkJ6g3x4uK5Hv1qQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=A7LXFtEsWDolrsJFGMGXmMfEF4jyBd86w9aFZXL3WXU=;
- b=fcBMeCk1jMiuPUqLd8Y5iCIAXjIiVGiWAIDlPjoqnu4k6dI8BSc3mVSYwgYphc6tAkjWE3Ui/D1HgqPXReBChJy9qy8+brE4HjMxFHD3FfqvkmFSXKiArcxaKCUXOiB7LzvQGYHcjYmYEo/0bufYY9oUAVSN+TVB/cG8GCQjTMA=
+ bh=WoWiVcX3/WbsE7kFzD5lGF+CS5uiw3aAqy4e8uoxvGM=;
+ b=R/+tTo6Ziw9u4QSX3xSeFTmwJewpX3M4lhSZUCN2tk0wBjNk1HOIixvHuTuY/VtK+anvsKneX7cNlryJVGJdk1NnrHU0SaFs4eVqyNbdxIJ1Oi7PD271p01axdZ6lXfltDoriogwbfIr/cpfXph4XytSRDVJspz3ANJtXfEBG/8=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
-Message-ID: <192c430b-565b-4b89-957b-01b80ede9049@citrix.com>
-Date: Thu, 22 Oct 2026 18:08:26 +0100
+Message-ID: <b0954424-aaec-4900-96e3-901b051edaa2@citrix.com>
+Date: Thu, 22 Oct 2026 19:25:59 +0100
 User-Agent: Mozilla Thunderbird
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>, jbeulich@suse.com,
- roger@xenproject.org, jason.andryuk@amd.com, teddy.astie@vates.tech
-Subject: Re: [PATCH] xen/x86/svm: Apply the virtual-8086 IOPL check to INT n
- only
-To: Ross Lagerwall <ross.lagerwall@citrix.com>,
- Stefano Stabellini <stefano.stabellini@amd.com>,
- xen-devel@lists.xenproject.org
-References: <20261020224123.3710391-1-stefano.stabellini@amd.com>
- <86d6b7b5-41f2-41b4-8710-7356c78fd15e@citrix.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Andrii Sultanov <andriy.sultanov@vates.tech>,
+ Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>
+Subject: Re: [PATCH 2/2] tools/ocaml: add bindings for the paging mempool size
+To: Julian Vetter <julian.vetter@vates.tech>, xen-devel@lists.xenproject.org
+References: <1792679039.8631fc262581453bbf619ec5b2062170.1a163ff5306000f79f@vates.tech>
+ <20261022142744.338622-1-julian.vetter@vates.tech>
+ <1792679272.8631fc262581453bbf619ec5b2062170.1a16402de81000f79f@vates.tech>
 Content-Language: en-GB
 From: Andrew Cooper <andrew.cooper3@citrix.com>
 Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
@@ -127,80 +127,80 @@ Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
  B8WrhBLXDiYlyJT6zOV2yZFuW47VrLsjYnHwn27hmxTC/7tvG3euCklmkn9Sl9IAKFu29RSo
  d5bD8kMSCYsTqtTfT6W4A3qHGvIDta3ptLYpIAOD2sY3GYq2nf3Bbzx81wZK14JdDDHUX2Rs
  6+ahAA==
-In-Reply-To: <86d6b7b5-41f2-41b4-8710-7356c78fd15e@citrix.com>
+In-Reply-To: <1792679272.8631fc262581453bbf619ec5b2062170.1a16402de81000f79f@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: PR3P191CA0050.EURP191.PROD.OUTLOOK.COM
- (2603:10a6:102:55::25) To CH8PR03MB8275.namprd03.prod.outlook.com
+X-ClientProxiedBy: LO6P123CA0029.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:313::14) To CH8PR03MB8275.namprd03.prod.outlook.com
  (2603:10b6:610:2b9::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|CH2PR03MB5301:EE_
-X-MS-Office365-Filtering-Correlation-Id: 14ad8888-a909-4a99-7927-08df305f18fc
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|CO1PR03MB5778:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0753c98c-1096-436b-a7f5-08df3069edd0
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|376014|366016|23010399003|56012099006|4143699003|11063799006|261021121427099003|261009223027099003|261021123027099003|10067099003|22082099003|18002099003;
+	BCL:0;ARA:13230040|1800799024|366016|376014|23010399003|261009223027099003|261021135927099003|261021121427099003|10067099003|56012099006|261022105027099003|6133799003|261022075727099003|18002099003|22082099003|4143699003|11063799006;
 X-Microsoft-Antispam-Message-Info:
-	vSaW3PJPBIf//IdvaI0aKrV2QxMlknSKHDxV91+mJlSTbsRLIKxHG9C5F+aUtpB2zXXtOXlZRiNSDaOHbWsCqTxB7T7Bam5LR0uxJQxoXI2JoSOmuEjU0dd5KwKm8dz4uhH6LtuI5467Y3pX9APTsSmleXznbFY0RtooIt/aEsZE25BDTfGi+miUiDh6E+vNYXrWH2aAW/2OUdDMvFvAu3Wize9yywv3ALTy4mE0ndv/iT4ZTb9xgq3mOlToLxd6ecV5RNmp5xFk4quH1kwwY3VXy/y+UKqaRsRuEEWRtx8R1GKPK8RTxXlD7pLn3IcNFyMfKRl+SZgqrGe36IL/XSXSpHJ+KxWlbtS9hTF1rZUrHrPobpNplzx4XZ10mPQ6/WcHc8N21XPWxaOG5R6L/xwljGfX7z5D1vAeimiwyXIePCM8e1ChuZRxZ1zxfYMQ2zyGFZRJyu0DcL0kaVBU6akyIRg/Q8H7ugni+Ba9FCLfaTlzHeVPrdGRgOiuIbFpUqFhe5As6pFedsL0lcrpCWd8sP5VHOCa2W+ICf2oUAQB97IQsRHLZNXrykjG8eWjeBdsfNmz0V7uazZtjptHeoCMZs7g6h3xppkOBUHaljukrvrsFyeO11XxOxDSPT+Y2bAnIv0AoDanw2aUE1cD2oHA++j0h+VnG6+MtE4X5qc=
+	U/LNCHIGQvFRs6cfo7/JYovjwSg7OGVh5fwLdAgnYtyJet4eQsMgXPaAViBQE1KGNDNNj5VKICJ8xBAP0FJTw4gS3Nf5FeHCShQ6UFu+jpmAcw/zj1nPkNIHr/NS1p9qe75Vk9AtYXP3k/hxnJMOXDlf51xNyNpsAm8nHV5vmqImP0y9rLnPf1q2DhA6bsZKaOSayBT0D9MADJ+iNJa6DKMSfCfUrRnH1n6PC3XDcjGihA14Wp/ZmhLfW/M7+GHLln9ch21yrOamrqWRBzOjKQYkfZAG8Opws+CedqT59MDde+mZrH6DlnbwwtdWdP2iavCGPCYJlFzKf3qjGv3pVTmJ6JPD8IOIFlW00lsKTBo+Lk/wNbvh5L/Ut7CCFFJTMq9lFDqB8KuIx97s9xtFncOB0B3QymgHQhFSvOWgN4ei9ieepDBTH7xbynrW1ld//dO2q5IsQihF9svRJxLld4GuEhEE6IpwDiGY4+OMPlCKXmrepXH0JoaVwC6eKQKsHJrjKWbXWskh6+94Cnc2iexbXJDh0dqCP6/pjNdwkCLE3Hh8szW49pz+GC3s6+EbJpJUd45/licbeH6Fq4vUUZfWRKIdYjjHtFuEqRhaSKN/Acjib5Xx7ZeZCk6zib26AWCSS6ogT9VObNI/p/5uAOTnzKGfj/vmGZE+0gOwhH4=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(366016)(23010399003)(56012099006)(4143699003)(11063799006)(261021121427099003)(261009223027099003)(261021123027099003)(10067099003)(22082099003)(18002099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(23010399003)(261009223027099003)(261021135927099003)(261021121427099003)(10067099003)(56012099006)(261022105027099003)(6133799003)(261022075727099003)(18002099003)(22082099003)(4143699003)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?cGlsVkVBc2lyS2dxbkxDallYUThXQlBCNmF6ZjVuTWtpYVk5UTRwYWl1Y0lS?=
- =?utf-8?B?cm9ZcmV2MVJoeUNnY3RXSDN2eHpBRXJCRmN2SU95eUdUUDVpRGROTGMvTmxT?=
- =?utf-8?B?ZnRHVnFuSHB6OW9MMC9ENTkrbStPVUwrZ1F6K0NWdUdZc3A4VWREMzdmNlVJ?=
- =?utf-8?B?QzlBWjZmbm1VK1hnUUg2ZmxWU1lwZEx3Qk9HVW0ram5weHJDQUtoRjcvRGxn?=
- =?utf-8?B?bTZpUmxjRHBsMWJ1RVpqNlpEK3JBWmpsbkJvMndkT0hwSWlNUHNIcStJTkZD?=
- =?utf-8?B?eTVUZllXai9MMEw0WG5WWGlyTzRXS1JwQzFWbVNrUVNmY2M0ME00SEh5QTVz?=
- =?utf-8?B?ZmR1ckViNlJLOEdSUDZxeFBaSkxmNFZ0TlF1cG9LbE11VmtWVENRcGM4REt0?=
- =?utf-8?B?Q2Z2c1lxUzQ2aTdFQWZTOE5WUlk5OHRJOEh5Y2VnbFA0QXFEeUp5S1BuV3RB?=
- =?utf-8?B?b29DRW5HbkNOUWVnMVpVM1U2WkJUcWF4SlhETFJDbXhhM0NQUzhDNXU5aHlV?=
- =?utf-8?B?TnZSQmg0WGhSWmg2VEZmcGZlWDI1ZUhUV012WW9lYXVFb3ZYYjlCN3ZTb1Ez?=
- =?utf-8?B?OE9UVW9ZMVJ3Y2ZFN1FvakFpQ0Myb3plbVV1ZTFmV1RmczNPd01tZ1Z0QW1D?=
- =?utf-8?B?RlYxcVl0dmgyamJCS0ovTW9rTWJ6cnh3WE1YQnBwRTZ0bDBYR2VvOFEyM1VF?=
- =?utf-8?B?N2tiYnBFbWV0TmZtcmVEMVFtQVRRSjI0OGdrbE9NQ3o0OGVFR3FmTmVBRWxR?=
- =?utf-8?B?c3o2dlBsV01aN2dCQnpmeVU1Ty9SZlN2MWZHNFdFdkRNcG5pbVh1RThiSjdx?=
- =?utf-8?B?YnVmRy8rV0U1MWd4bDFQM1c0Y1lJeWwzS2RUVGFvbGJxNlhtKzZnMGlNNzVi?=
- =?utf-8?B?WUY3Tkt1M2pCWmk3MkRuVGhUSENjbzFkWTdXNW9mYWhFQW9FVWMzM045QWNS?=
- =?utf-8?B?enNaYyt0bEpXeG1MRHl6TGZ6TFRVYjZodUVjUVF3VDJaeUFibUQzUnQwQUhF?=
- =?utf-8?B?NGdVaG9zQTF4dnRNOUtpcm1nWXp6TjZ5Nm9IeUhtTytQVGl0bjhaOHlzN0Z2?=
- =?utf-8?B?TjNncEdrQWY0M25YOEN6ZTloMFhXYzFVYStVa2ozdkVWWlBNQ3FMVFlvQ3Z1?=
- =?utf-8?B?eWxaajJrdVFWVXRzNlVyVzJ1ZnZjVnh6dWZmc0JBOVJ1SGZxUjRtbXRlSGZa?=
- =?utf-8?B?ckxpSWpOK2tPZWV5YjI1RVkxOGRtNDZsbXo1WjBQbEhnZU9hTGNoQ0lXQ21J?=
- =?utf-8?B?Y3JBSTdieng4dzZiRUhXN3JLVyt1TmRhaTZaVjVhc0N3OXNhS2VvcVFHY3ZF?=
- =?utf-8?B?c2l1WHdTWVRZYlIzS2pRWGtxSVliR1F2RmN6Nk14aHd0OEQwVjk2elBNT2ph?=
- =?utf-8?B?TDd0OHRxekNYMXZlZUdTZ1dwaGdRengxSWlJQ2wrVHpwYjZTcFBDU3NvYnkv?=
- =?utf-8?B?OEt3MkNsVGZzc2hoVHJPbURKUFVGRUdNb0ZvRE8yTUpzdlJnSEYzNmVsZTVq?=
- =?utf-8?B?dDhjbkRQZmZmZEo5QVQxcnY3a1pQZWdDbGFwVDMwZ1pVSzkyRUEzbFhTWEZi?=
- =?utf-8?B?NTlEcHJ6c1Y2L3hZVmRPSGRHVkFBMjhGV2piT0U2SFREMFJqWWRYV1o2ODh0?=
- =?utf-8?B?OVpyT3ZhYTh6bXRtNUJzcnpzRnA3OCtBeitOT3BHWDdyUWs3ckVCckZyQlJn?=
- =?utf-8?B?aE9Ud0o5RVpKU2E3L1RNSnhMVFFLZm9QZGQyd2lGdEVFOGdUbWJqMk5nU2or?=
- =?utf-8?B?Z1k3ZnBtUWxPcUZzcHpGeWp3Q1JhUXZqVmRiMVZhRDdDQW1jdmFIOXFzajRH?=
- =?utf-8?B?dldLMEozNWtUUnpCb0p6NTNaUzlybFJoVjJ1ZFFhRmJFR2hXTTBNRERkS1Y2?=
- =?utf-8?B?anU3b3FMZ1Y1V0FLcnA4Y3drczl1V2phRGRIUVRMcFk4NE84cnU2NTgvKzF2?=
- =?utf-8?B?OTVHaDVWZTdoblZUSDdodFpHUlp3U3lnMTZ2SHRTV3VhYnMrbllCRHhpZDJT?=
- =?utf-8?B?TU1zM1hZZXBrejE3UnQ1T2lMMkdhYVV1OHcrM1ZFblNXNHBaSkQvbmszRFFB?=
- =?utf-8?B?Z3FTNmE0WXZaUlFqVTRUU1k5Q2UxVlo2S0Q0WTZRaGlTQkQzUktpT0hvZi83?=
- =?utf-8?B?STArem1vSUdkaGk3bEk4STA2dmcxeWhranEzdUZJc3hGbWNuRG5JaVpCaEs3?=
- =?utf-8?B?QVErVkNQaG1oaUFhUkRnUlNsaVRmSnAwQzJBR3NWajVYWHZadnFKQkMrdWIy?=
- =?utf-8?B?Ull4d1ZrRmsrSU1vMm13QkhNMUFqSElUaFRLT1lGbEtqY0NEbGNPVS9qallW?=
- =?utf-8?B?RmpDbStiQjNqMWdtR0JkVG1WTzUxZ0NYRU96VUVWbnU1ZktkSW1zZz09?=
+	=?utf-8?B?K05WYXJNQWFWOGdJNnNVZEFweHZNcCtSSERtWW12Y1ZnRzFsOURmTnlpQStm?=
+ =?utf-8?B?SHVuN0hSUHFYeDdsekZ3S0lZdjc2VDFrUytMS3B1SkZmVjZ6T1g5UVVyZFNV?=
+ =?utf-8?B?WGFTSEt6TXF0OGQxWkZ4NEFMWmJHL1grS1BXQkwxTHVlZlJuR0lUTEZyenZM?=
+ =?utf-8?B?dGZGMnRGTmJGTXhwUnN0Tkx3UnN3a0wxNlFuaEY5Y1BTMFFKek5jT01INVZk?=
+ =?utf-8?B?MHRzdDM0WDJOZlZGc01lUDJ3YTNqTUEzVFJ6VFdsS0h3dHczTFgyMDNPRCtt?=
+ =?utf-8?B?NnVKY29xTEovRjFHYXdFWmc2YWxXdWJjUW1JdHFocld1RUJCbDVaTGJmZTFr?=
+ =?utf-8?B?WkxVWWMzZTdEOHBSS29ySkxmRDVzSE1WVGNaZ2tjNXp4WVhIN1IzMEtpdW11?=
+ =?utf-8?B?cXU4WHhjNkt5RU9ab2IwSDNnaGsxSXhVdlBkbjFQMjBDc29ZUW9GWVdFVVA4?=
+ =?utf-8?B?ckE1c2FkRzNzdDhlbWhOZVNQdko2aFRTT2R0RkpKWkRBTnBTOWNhMmhGTnky?=
+ =?utf-8?B?Ukc2QkRTclNXNFdwYS9tSkJWdWpTSllGeEpTamZWV1JEaTMwenpXbmhjcUIw?=
+ =?utf-8?B?Z0RUZ3dYblQxY2RLMVVEYWF0UXY4Wm9JbXgrRXZsTFpNblZFWTZ4R29vZnZC?=
+ =?utf-8?B?b3lMeUU4RnY5L0lkL282MzNKMk53WDhtWHlkQVFmSWtoTlhDWDM1VzVPU3g5?=
+ =?utf-8?B?S3dxUjJreldteGV0ZEZtM1VhNVhHSFhpR3owNnYwcnhhL1BxQ3JYS2dqNVdW?=
+ =?utf-8?B?eG5YRzhIaHZCcjJ5cWxkMEw1ODIrekZhdG9ack03UERzUkhzMVpQYnRQZmI5?=
+ =?utf-8?B?YmMzYVBicWNYbTNWTWRxTzNocEQ2Sm9oMWV1elVkd0J5aUJoWERycjdYRjU4?=
+ =?utf-8?B?dWJvWnQyUHQ4UklzMUVPSE9saG8yVFRtZFZiUEsvMHVSVERGMFRRd21jV0Q1?=
+ =?utf-8?B?dVBaQ0tNRGlIeCsyWHN5blhRT1ZvR2ZLcjVUSCtYQk0zLzU3bVRrend4dnZL?=
+ =?utf-8?B?SlBTZlE1YVQ4NXd1WkQvdERjVDdIWjVNQTM0ckhOYUxlMkhmNWNFSDkwdDFo?=
+ =?utf-8?B?TDNTeVlMWkMzby9HOXY4OVVBUzNQZnR1RXJheWxkanlrZXRlaHlXWENSQ0Fw?=
+ =?utf-8?B?REkzc2VHSXZodGlBN3pGcjlLS1k5WVZNSWdlTTUrODBEWERxK0ZjWUhlZjho?=
+ =?utf-8?B?dGdpdEVYNTV3dkpPV3JOcHpsZmlaRnZUT0NpaHVKVlB4RFdneEdOc0lmS2tU?=
+ =?utf-8?B?dUV6a1VVNXpLa040NmMrRXE2TVNtZzgvbmNteDYwRGRHT0FHbURQU25tTlFG?=
+ =?utf-8?B?VWZqeUxqL21WM0NmcG91a1Z2cjAyN3RpYjArR3Rmc1dlSUY4Z2EzK2xHNExW?=
+ =?utf-8?B?QnUzbXRwNis2Z3ZWZGNWU0h4SEhRVUhtQjhmcUJNei91dmJxYWQ4MXBJb1Nz?=
+ =?utf-8?B?ZVFBcUpvS25jd2FlZ1RZMHZjcC9NRzhNMEVVeTUvanpmVDdDa3MzeElRZURz?=
+ =?utf-8?B?a3A2N29ia24rclp2cnFoWDVKeUFXYTFPTFZ6V1ZNUzNyTExkUFZ3eVVJRTdP?=
+ =?utf-8?B?WmtXWUQwVUJMQVpwTGhnWFJhb1gwZTF0S3JtbVViVHhwcTJnUi9vZDdNVlEx?=
+ =?utf-8?B?NnI0M0JNYlZneFVWNFQ3U0FSbzgrZTN1TElGbkl4UW1LeS8wZzIyaTFwUHVt?=
+ =?utf-8?B?NVplcXl1VUhsaEpSVFMrODErclRTTXZMdUVIYlRyRkJjM2dab1p1T1l1VlYy?=
+ =?utf-8?B?SVBic1dYNHZ6NDN2YjByeCtpQ253M1pXcFk4VUMyZmg4d2N3WWNTL2QyeENW?=
+ =?utf-8?B?clI1SzBueDRuckYxUlJ2UHZObDdzSzdQdFpRNUZ4bStzQ1FFeS8wZFluR1R4?=
+ =?utf-8?B?SUF5bU9YNUdRSndMaXNXZWlsWk05V1h3enZicUFXK25FYTNoNTlROXg5NmV3?=
+ =?utf-8?B?YmZyRnlmdi9ERGRxYStiQlY1NTIyLzJ0Um1GYVdTRUVhOFIwUzJmM2dBdGp6?=
+ =?utf-8?B?UjdYKzBaajcxaWpSUVZRZkYzSjkvWGllRlFjblAvaEZwRHlPTFFNOFEvMElC?=
+ =?utf-8?B?RmkxbWFFU0NvK081eXZ3c0kxcDVZMFBEK2d1U1pLTWh6dU5tcWN5NUVxdGwv?=
+ =?utf-8?B?VHVZT3JpU0hKcmJYbUVXaU9ldUx6cUZPMHRobXM5OUp4MzNIQVVDRUVxOENN?=
+ =?utf-8?B?Skcya2ZFTlplSXFibk1LV2pueTZvdGRDaW1MK3RBV3hwdkwzU1JQeVpYb3Zv?=
+ =?utf-8?B?MjFzUCsxTE9Ua3JiZFJOYzFMRXc0SkpHZ0JianBYaExiVmd1VGs4aEJOem0w?=
+ =?utf-8?B?dFVGTTBmbDFSOVhGOTlSYkQvS25QOFFKK1BjcUwyRlB6UWJ5a3hKQT09?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 14ad8888-a909-4a99-7927-08df305f18fc
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0753c98c-1096-436b-a7f5-08df3069edd0
 X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2026 17:08:31.1047
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 22 Oct 2026 18:26:03.0647
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: AkK5ERK3Q0KtVJDzJ9EGBXzRWD7Glbiz2o00R926yci6CpO/uFnpGM4h2YkT3elSCji6pUlYznHApyovrIoLOqVuy9C0TGNXjHoQ7fqrOws=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH2PR03MB5301
-X-purgate-ID: tlsNG-ebf023/1792688916-C06DAB50-307BA9FF/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: VU0FW/AaQzxfOuML0fSeWDHtxSy7pkmYPMbAT45Bpc67DoIPTa4FzO8DUVhF218ieVjlJmpvurv5NV9BcZrpQJgDCKifwPvDidY4oD1FfkA=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CO1PR03MB5778
+X-purgate-ID: tlsNG-16d1c6/1792693566-F5E0E77B-895F2766/0/0
 X-purgate-type: clean
-X-purgate-size: 3868
+X-purgate-size: 4658
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -209,104 +209,115 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 22/10/2026 2:55 pm, Ross Lagerwall wrote:
-> On 10/20/26 11:41 PM, Stefano Stabellini wrote:
->> In virtual-8086 mode with IOPL < 3, INT n raises #GP(0).  INT1, INT3
->> and INTO are not affected. They are delivered normally.
->>
->> svm_emul_swint_injection() applies the check to all of them, so an ICEBP
->> raises #GP instead of #DB.  It also reports the IDT entry in the #GP
->> error code instead of 0.
->>
->> Limit the check to INT n and use error code 0.
->>
->> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
->> ---
->>   xen/arch/x86/hvm/svm/svm.c | 5 ++++-
->>   1 file changed, 4 insertions(+), 1 deletion(-)
->>
->> diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
->> index 71e48351f2..df74531d1a 100644
->> --- a/xen/arch/x86/hvm/svm/svm.c
->> +++ b/xen/arch/x86/hvm/svm/svm.c
->> @@ -1153,9 +1153,12 @@ static void svm_emul_swint_injection(struct
->> x86_event *event)
->>        * 32bit OS.  Someone with many TUITs can see about reading the
->> TSS
->>        * Software Interrupt Redirection bitmap.
->>        */
->> -    if ( (regs->eflags & X86_EFLAGS_VM) &&
->> +    if ( type == X86_ET_SW_INT && (regs->eflags & X86_EFLAGS_VM) &&
->>            MASK_EXTR(regs->eflags, X86_EFLAGS_IOPL) != 3 )
->> +    {
->> +        ec = 0;
->>           goto raise_exception;
->> +    }
->>         /*
->>        * Read all 8/16 bytes so the idtr limit check is applied
->> properly to
+On 22/10/2026 3:27 pm, Julian Vetter wrote:
+> The OCaml bindings only expose the shadow_allocation_{get,set}
+> functions, which use XEN_DOMCTL_SHADOW_OP_{GET,SET}_ALLOCATION. These
+> are x86-only, on ARM they fail with -ENOSYS. So, an OCaml toolstack has
+> no way to size the P2M pool of an ARM domain, which libxl does via
+> XEN_DOMCTL_set_paging_mempool_size.
 >
-> I think this is correct. The check could perhaps move earlier to avoid
-> needing
-> to reset ec to 0.
+> So, add a pair of functions paging_mempool_size_{get,set}, which just
+> wrap xc_{get,set}_paging_mempool_size().
 >
-> I do wonder though if there are other cases in the function where ec
-> needs to
-> be reset to 0? The pseudocode in the APM seems to have at least one
-> other case.
+> Signed-off-by: Julian Vetter <julian.vetter@vates.tech>
+> ---
+>  tools/ocaml/libs/xc/xenctrl.ml      |  5 +++++
+>  tools/ocaml/libs/xc/xenctrl.mli     |  4 ++++
+>  tools/ocaml/libs/xc/xenctrl_stubs.c | 33 +++++++++++++++++++++++++++++
+>  3 files changed, 42 insertions(+)
+>
+> diff --git a/tools/ocaml/libs/xc/xenctrl.ml b/tools/ocaml/libs/xc/xenctrl.ml
+> index 37e41879bb..55cfc2e9a2 100644
+> --- a/tools/ocaml/libs/xc/xenctrl.ml
+> +++ b/tools/ocaml/libs/xc/xenctrl.ml
+> @@ -283,6 +283,11 @@ external shadow_allocation_set: handle -> domid -> int -> unit
+>  external shadow_allocation_get: handle -> domid -> int
+>    = "stub_shadow_allocation_get"
+>  
+> +external paging_mempool_size_set: handle -> domid -> int64 -> unit
+> +  = "stub_xc_set_paging_mempool_size"
+> +external paging_mempool_size_get: handle -> domid -> int64
+> +  = "stub_xc_get_paging_mempool_size"
+> +
+>  external evtchn_alloc_unbound: handle -> domid -> domid -> int
+>    = "stub_xc_evtchn_alloc_unbound"
+>  external evtchn_reset: handle -> domid -> unit = "stub_xc_evtchn_reset"
+> diff --git a/tools/ocaml/libs/xc/xenctrl.mli b/tools/ocaml/libs/xc/xenctrl.mli
+> index 7a0dd7d8ba..0d5cc94198 100644
+> --- a/tools/ocaml/libs/xc/xenctrl.mli
+> +++ b/tools/ocaml/libs/xc/xenctrl.mli
+> @@ -210,6 +210,10 @@ external shadow_allocation_set : handle -> domid -> int -> unit
+>    = "stub_shadow_allocation_set"
+>  external shadow_allocation_get : handle -> domid -> int
+>    = "stub_shadow_allocation_get"
+> +external paging_mempool_size_set : handle -> domid -> int64 -> unit
+> +  = "stub_xc_set_paging_mempool_size"
+> +external paging_mempool_size_get : handle -> domid -> int64
+> +  = "stub_xc_get_paging_mempool_size"
+>  external evtchn_alloc_unbound : handle -> domid -> domid -> int
+>    = "stub_xc_evtchn_alloc_unbound"
+>  external evtchn_reset : handle -> domid -> unit = "stub_xc_evtchn_reset"
+> diff --git a/tools/ocaml/libs/xc/xenctrl_stubs.c b/tools/ocaml/libs/xc/xenctrl_stubs.c
+> index e0c435e346..ef3d16beaa 100644
+> --- a/tools/ocaml/libs/xc/xenctrl_stubs.c
+> +++ b/tools/ocaml/libs/xc/xenctrl_stubs.c
+> @@ -1259,6 +1259,39 @@ CAMLprim value stub_shadow_allocation_set(value xch_val, value domid,
+>  	CAMLreturn(Val_unit);
+>  }
+>  
+> +CAMLprim value stub_xc_get_paging_mempool_size(value xch_val, value domid)
+> +{
+> +	CAMLparam2(xch_val, domid);
+> +	xc_interface *xch = xch_of_val(xch_val);
+> +	uint64_t c_size;
+> +	int ret;
+> +
+> +	caml_enter_blocking_section();
+> +	ret = xc_get_paging_mempool_size(xch, Int_val(domid), &c_size);
+> +	caml_leave_blocking_section();
+> +	if (ret != 0)
+> +		failwith_xc(xch);
+> +
+> +	CAMLreturn(caml_copy_int64(c_size));
+> +}
+> +
+> +CAMLprim value stub_xc_set_paging_mempool_size(value xch_val, value domid,
+> +					       value size)
+> +{
+> +	CAMLparam3(xch_val, domid, size);
+> +	xc_interface *xch = xch_of_val(xch_val);
+> +	uint64_t c_size = Int64_val(size);
+> +	int ret;
+> +
+> +	caml_enter_blocking_section();
+> +	ret = xc_set_paging_mempool_size(xch, Int_val(domid), c_size);
+> +	caml_leave_blocking_section();
+> +	if (ret != 0)
+> +		failwith_xc(xch);
+> +
+> +	CAMLreturn(Val_unit);
+> +}
 
-I confirmed, and indeed it is #GP[0] not #GP[sel].  Also that
-ICEBP/INT3/INTO are not subject IOPL like this.
-
-I agree with Ross that this wants moving earlier; between the CR0.PE
-check and deciding idte_size.  The comment also wants adjusting, so I
-think it wants to look like this:
-
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index 71e48351f22c..c83b28d29727 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -1140,6 +1140,17 @@ static void svm_emul_swint_injection(struct
-x86_event *event)
-     if ( !(vmcb_get_cr0(vmcb) & X86_CR0_PE) )
-         goto raise_exception; /* TODO: support real-mode injection? */
- 
-+    /*
-+     * In vm86 mode, INT $N is subject to IOPL.
-+     *
-+     * TODO: It is also subject to CR4.VME=1, which would require
-reading the
-+     * TSS Software Interrupt Redirection bitmap.
-+     */
-+    if ( type == X86_ET_SW_INT &&
-+         regs->eflags & X86_EFLAGS_VM &&
-+         MASK_EXTR(regs->eflags, X86_EFLAGS_IOPL) != 3 )
-+        goto raise_exception;
-+
-     idte_size   = lm ? 16 : 8;
-     idte_offset = trap * idte_size;
- 
-@@ -1147,16 +1158,6 @@ static void svm_emul_swint_injection(struct
-x86_event *event)
-     ec = (trap << 3) | X86_XEC_IDT |
-          (type == X86_ET_PRIV_SW_EXC ? X86_XEC_EXT : 0);
- 
--    /*
--     * TODO: This does not cover the v8086 mode with CR4.VME case
--     * correctly, but falls on the safe side from the point of view of a
--     * 32bit OS.  Someone with many TUITs can see about reading the TSS
--     * Software Interrupt Redirection bitmap.
--     */
--    if ( (regs->eflags & X86_EFLAGS_VM) &&
--         MASK_EXTR(regs->eflags, X86_EFLAGS_IOPL) != 3 )
--        goto raise_exception;
--
-     /*
-      * Read all 8/16 bytes so the idtr limit check is applied properly to
-      * this entry, even though we don't look at all the words read.
+I personally would consider these bindings fine.  But if we were to
+accept the code like this, we'd have to make a change in due course.
 
 
-I'm happy to adjust this on commit if you're happy?
+It is not safe to use Int_val() inside a blocking section like this. 
+Well, it is actually safe, but it also triggers ThreadSanitiser and
+therefore the Ocaml devs have declared it to be unsafe.
+
+During the mark/sweep phases, the Ocaml GC writes back every single
+value, even the non-pointer ones (despite not changing value).  And
+instead of fixing this behaviour, it's been declared to be "correct"
+behaviour, forcing every C binding to be edited to avoid the pattern.
+
+So, you need an `uint32_t c_domid = Long_val(domid)` outside of the
+blocking section.  At some point we need to fix this pattern everywhere
+else in our bindings.
+
+Thinking about it further, we also need a truncation check on domid,
+because a 64bit Ocaml could pass 0x100000000 which would get truncated
+to 0 passing through the bindings.
 
 ~Andrew
 
