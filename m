@@ -2,46 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DFFEA606A31B
-	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2026 18:58:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 538FB606A32D
+	for <xen-devel@archiver.kernel.org>; Thu, 22 Oct 2026 20:30:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=invisiblethingslab.com header.i=@invisiblethingslab.com header.a=rsa-sha256 header.s=fm2 header.b=lkKga06Z;
-	dkim=pass (2048-bit key, unprotected) header.d=messagingengine.com header.i=@messagingengine.com header.a=rsa-sha256 header.s=fm2 header.b=qQ3AJEIe
-Received: from list by lists.xenproject.org with outflank-mailman.1458541.1670718 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=O/0RBDlT
+Received: from list by lists.xenproject.org with outflank-mailman.1458577.1670726 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJxzh-0003kr-GU; Thu, 22 Oct 2026 18:58:29 +0000
+	id 1xJzQF-0007L2-PY; Thu, 22 Oct 2026 20:29:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1458541.1670718; Thu, 22 Oct 2026 18:58:29 +0000
+Received: by outflank-mailman (output) from mailman id 1458577.1670726; Thu, 22 Oct 2026 20:29:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xJxzh-0003kk-Ct; Thu, 22 Oct 2026 18:58:29 +0000
-Received: by outflank-mailman (input) for mailman id 1458541;
- Thu, 22 Oct 2026 18:58:28 +0000
+	id 1xJzQF-0007Kv-N3; Thu, 22 Oct 2026 20:29:59 +0000
+Received: by outflank-mailman (input) for mailman id 1458577;
+ Thu, 22 Oct 2026 20:29:58 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <marmarek@invisiblethingslab.com>) id 1xJxzg-0003ke-H9
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 18:58:28 +0000
+ (envelope-from <sstabellini@kernel.org>) id 1xJzQE-0007Kp-Nk
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 20:29:58 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJxzf-007vPs-8z
- for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 20:58:27 +0200
-Received: from [10.42.69.11] (helo=localhost)
+ id 1xJzQE-00868r-4t
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 22:29:58 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6ada5cc9-e002-0a2a0a5209dd-0a2a450b8570-8
- for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 20:58:27 +0200
-Received: from [202.12.124.144] (helo=fout-b1-smtp.messagingengine.com)
- by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <marmarek@invisiblethingslab.com>)
- id 6ada5cd1-b7e8-0a2a450b0019-ca0c7c90c4bd-3
- for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 20:58:26 +0200
-Received: from phl-compute-05.internal (phl-compute-05.internal [10.202.2.45])
- by mailfout.stl.internal (Postfix) with ESMTP id DD2091D001BE
- for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 14:58:24 -0400 (EDT)
-Received: from phl-frontend-03 ([10.202.2.162])
- by phl-compute-05.internal (MEProxy); Thu, 22 Oct 2026 14:58:24 -0400
-Received: by mail.messagingengine.com (Postfix) with ESMTPA; Thu,
- 22 Oct 2026 14:58:23 -0400 (EDT)
+ (envelope-from <sstabellini@kernel.org>)
+ id 6ada720f-bab6-0a2a0a5309dd-0a2a450ce994-22
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 22:29:57 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <sstabellini@kernel.org>)
+ id 6ada7244-f479-0a2a450c0019-aceafc1fa712-3
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 22:29:57 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id AAB66415FA;
+ Thu, 22 Oct 2026 20:29:55 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 6DAE31F01825;
+ Thu, 22 Oct 2026 20:29:54 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -50,156 +47,150 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=fm2 header.d=invisiblethingslab.com header.i="@invisiblethingslab.com" header.h="Cc:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=fm2 header.d=messagingengine.com header.i="@messagingengine.com" header.h="Cc:Content-Type:Date:Feedback-ID:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To:X-ME-Proxy:X-ME-Sender"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	invisiblethingslab.com; h=cc:cc:content-type:content-type:date
-	:date:from:from:in-reply-to:in-reply-to:message-id:mime-version
-	:references:reply-to:subject:subject:to:to; s=fm2; t=1792695504;
-	 x=1792781904; bh=SmpmP6LX2MozVamlzq2gAt0cJuWdWugaPpMNfN4jt7E=; b=
-	lkKga06ZdN3YVHM1hOJaphdmZ5pAn1svkDpCs7dRKMEHGPxQEhthUB91aLxiEjNs
-	gN0o+BdIbRMZ8zcOzmyU14MXtHwRuKXTd0BD30TRJ52oM0+/ZrRzuUWrPNNqifPV
-	aIvwHUAY3drIFiKh+jQBAXkP6pKAPFzFHXr0fWvESFfGJep6QWNm91ZeZHNMXskw
-	Hq9fDNmbvHXdlVdenTVzjAkArGTkmxMdWmlFEH1nxs0aiAZC34SIThyGNG5neDmG
-	P1r15gflRweQ943C/9Wps947ltzZ+I2P21+XQV7MHlJSDl5nbJ8jkZ7Fqsvlqjv/
-	A9Uk1actmqFTWYRki5O5WQ==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=
-	messagingengine.com; h=cc:cc:content-type:content-type:date:date
-	:feedback-id:feedback-id:from:from:in-reply-to:in-reply-to
-	:message-id:mime-version:references:reply-to:subject:subject:to
-	:to:x-me-proxy:x-me-sender:x-me-sender:x-sasl-enc; s=fm2; t=
-	1792695504; x=1792781904; bh=SmpmP6LX2MozVamlzq2gAt0cJuWdWugaPpM
-	NfN4jt7E=; b=qQ3AJEIeTfq934cZSXsRTPYavaVnDvK6KsH4GZO2zmdg88KIB9P
-	nXdwOaDrJv6B46XN8WV7PAr2Pzz8t2B7YtwWa0amdQJrnIdKkm9m+z/VG+aai0GL
-	rHut38ymo+zH5/ulMWoFS6wID2VkB5fNWkimn8J595NpGBj/xG5ckfYiJm/m8Jtx
-	3GX6FpxGP8Xu2C7SrJel2N0kSK8KURtKbpAipiZICqotMSA/BPUMCkN7DQtOb10r
-	hzX6vrxkOipnvE6kDyDU5XkJ0B1Iql27lgh+90YcjH/HGqNjdyX5DvEFBO5RhqcA
-	+FxK1xegkn7WwwfSPvQZVzhvObgugcGC7uQ==
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-07;
-	repo=github.com/dkim2wg/interop; date=2026-10-18; sw=lmtpprox;
-	action=sign d=invisiblethingslab.com a=rsa-sha256;
-DKIM2-Signature: i=1; m=1; t=1792695504; d=invisiblethingslab.com;
-	mf=PG1hcm1hcmVrQGludmlzaWJsZXRoaW5nc2xhYi5jb20+;
-	rt=PHhlbi1kZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZz4=;
-	s=fm2:rsa-sha256:D4ICtQR6eG9t536ECQSSj3T7m/L0UTtks7haXWyuX6Bj6G5
-	HYNx8h3+HJywJzZPrkCzFbH3lzW69LgrHyQcuj4e9+b4BFhg0XtCBtUzKn3PI4Vl
-	mqNIRt5zJlSSg8Dx+z+FbnTBm2YmdBW0M2Oa4zoZue+j+Y2xibWg8Em0G0I7ivAD
-	+6BiD6K+CXnizGUsokwv0+aGi8A9HVkb2PkaD3581M/Ya9MoiLigi4WMt6v/rim+
-	Ztmptq1kW0NMI1G2G/6wl70YzQ9K2RAQMXB6wpOkGpgd/V7ksZMfgfizvKGGRB9T
-	XEct1aYJk7xn8+tWN9upAlSb3/cRKt1n9aHEqTA==;
-X-DKIM2-Info: draft=ietf-dkim-dkim2-spec-07;
-	repo=github.com/dkim2wg/interop; date=2026-10-18; sw=lmtpprox;
-	action=mi-m=1; hc=12;
-	hn=cc,content-disposition,content-type,date,feedback-id,from,
-	in-reply-to,message-id,mime-version,references,subject,to;
-Message-Instance: m=1; h=sha256:MgmAxUXIqr83ScGsGHusOeAfukxu1TjyOF7HMTKZMNg=:CZM9KCNPkYTj9z44sfTuwbf+fq/mLgwt/o3MxzNb5CE=;
-X-ME-Sender: <xms:0FzaauhY5MuXWa5H4YlMbysOApX23UR9X_couaKmhNYKDACv8tbaxg>
-    <xme:0FzaalDqjfZUeBkRpHVFyV7YLyTtpE47NxOgoH2G59rYwtjKIeVsa03eDC6W1oicA
-    DlKFYwDil4J70Xf7h0cSALfI2Vo7sLM94Rs-SMypC9afxmFWA>
-X-ME-Received: <xmr:0Fzaajua-RBAEhknDZKK4cDRWg8vlIr-fxzB8tou6Ax3yQdTcO1qPh3vBwyqSwf-DQfOqZLejdg6Z9-w8vVXtRvboaeZqSRcAFaunMub4J0>
-X-ME-Proxy-Cause: dmFkZTFNl1hVVzhz2dvusx1RozNBkKxbCtfrxfeFl01tThkhsiM19ClTX5RHVDNlY9i3Wm
-    KePn+Y2RLHoNawnlXHcCnUHY7H8MMbleTSDG4W5EnyTIgpeetXgApHj9OLb9xclBMejaM1
-    BfGDTDo4TWB+0FtELhazsFGhzBueDNlIoDL8nvrYkPLHDumy6lSixWE3v9C9uXN0QjRwzq
-    fCyp+1A/aqCoQfVAzJYHVw0fe/U6AumxdaEJ76V4Cf4RPQqbVqvw5CLkqBMNU4diBHvlES
-    azZ1ynTq9tww3p8DYdVbF85QicEEWn/MogNwlAlROpg7LURB3i2PYSKJupDcle0zcDicXF
-    64j7E6jELzUmX+ZO6kVK5YX/JaV5UlHv41tRpcxAN/RnCG8f/vsyII8LJ0nHb2H/TjyNg+
-    YhgP59P/Me+OcNtQIZOSOYCvlwBaqIdR9C6VVXxu3wMSONGeciyq1vCyYzX047Wt1yOSwU
-    G4arFfm9qf/sCHyuG63/PIz9sFPitCFauSPpIBIgStFxmPiGyFKS50hdnr7XY0PUAjD4BC
-    OgXtoZAOtzcgQWLSaHnKuRMrSrpwK6Z4cDAw0OKJw+kw/87QRTCqrz/HYeusZ53DUNgEUA
-    0uf+xLxHXgsaMuwNrY6MAkP4VCtBDGeIgw5VO2AZjbEH3hfS80ir9iWFDcqA
-X-ME-Proxy: <xmx:0Fzaaib2Ffv5sj67ukHEo12egVO6rqe73GOZDrv41KKsS8XKXbJwiw>
-    <xmx:0FzaauVvTmw-EUrgJZ5EtQ1PXDGVKeY0cHrI5oOHz-kz2ie1DyT-2w>
-    <xmx:0Fzaau5NofAPTS_bcS6EACKKXgYW6g203DoRYAWhoyn70S9oy-KcqQ>
-    <xmx:0Fzaahi1rndwB9dOh_048yG-VqfeMMuUigET1vVaK6viFFneRGcMUQ>
-    <xmx:0Fzaaq05DOcpe6h_BBrF2jQJyXk48L-LCgjNrYgo9vhK-pzerw0rerJm>
-Feedback-ID: i1568416f:Fastmail
-Date: Thu, 22 Oct 2026 20:58:21 +0200
-From: Marek =?utf-8?Q?Marczykowski-G=C3=B3recki?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
-Subject: Re: Cannot boot PVH dom0 with big initrd
-Message-ID: <atpczcx_5KIxumIg@mail-itl>
-References: <aY6iVr990vWeO2p5@mail-itl>
- <56cdf5c7-2a2f-4d46-91ed-ba0a361ea649@suse.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Date:From:To:cc:Subject:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792700995;
+	bh=v5+K7DRtyEH4BLjRULC+nucWCN08JsEjn4ywlxNdoPM=;
+	h=Date:From:To:cc:Subject:In-Reply-To:References;
+	b=O/0RBDlTACAEE0ZZdetxJ44VV27g17aAIDGLkw4l6A268+YjlijdyDflHwt4WYK8Z
+	 qhF6H0iQzbZrD5RXk8I1tu+HSgvYjtT+OsXkpuqPHIWrO9GSESd13SkO+YVe+IJTGp
+	 DcRdMd3FoyINPIHYVwsagCeRxDYyiWxopPEfFHUHV/RNVs5zheJE8iJRBkl1UPWsKC
+	 lBQPEanVYvfT4UWp8lsbPg6wDYkXdsrWLp+ND9+0Yaj7i3r9lQn40z0lvpExNxlUyS
+	 egv6zb1jTRk/FC9FNxSqYL09S7lFjZmc1JYaNYDtA6Drgm2mnPyYPsWII9yW64LQxG
+	 cdLLTopoaA+rA==
+Date: Thu, 22 Oct 2026 13:29:50 -0700 (PDT)
+From: Stefano Stabellini <sstabellini@kernel.org>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+cc: Ross Lagerwall <ross.lagerwall@citrix.com>, 
+    Stefano Stabellini <stefano.stabellini@amd.com>, 
+    xen-devel@lists.xenproject.org, jbeulich@suse.com, roger@xenproject.org, 
+    jason.andryuk@amd.com, teddy.astie@vates.tech
+Subject: Re: [PATCH] xen/x86/svm: Apply the virtual-8086 IOPL check to INT
+ n only
+In-Reply-To: <192c430b-565b-4b89-957b-01b80ede9049@citrix.com>
+Message-ID: <2f51c577-86b9-2d20-2032-f9d56b344f47@kernel.org>
+References: <20261020224123.3710391-1-stefano.stabellini@amd.com> <86d6b7b5-41f2-41b4-8710-7356c78fd15e@citrix.com> <192c430b-565b-4b89-957b-01b80ede9049@citrix.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: multipart/signed; micalg=pgp-sha256;
-	protocol="application/pgp-signature"; boundary="FmuGHjoxYaDKyr38"
-Content-Disposition: inline
-In-Reply-To: <56cdf5c7-2a2f-4d46-91ed-ba0a361ea649@suse.com>
-X-purgate-ID: tlsNG-42698a/1792695507-19CC79EA-954BAECD/0/0
+Content-Type: multipart/mixed; boundary="8323329-1519767978-1792700995=:4086347"
+X-purgate-ID: tlsNG-d25034/1792700997-774D7A5B-E4FCEDFB/0/0
 X-purgate-type: clean
-X-purgate-size: 2694
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 4439
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
---FmuGHjoxYaDKyr38
-Content-Type: text/plain; protected-headers=v1; charset=utf-8
-Content-Disposition: inline
-Content-Transfer-Encoding: quoted-printable
-Date: Thu, 22 Oct 2026 20:58:21 +0200
-From: Marek =?utf-8?B?PT91dGYtOD9RP01hcmN6eWtvd3NraS1HPUMzPUIzcmVja2k/PQ==?= <marmarek@invisiblethingslab.com>
-To: Jan Beulich <jbeulich@suse.com>
-Cc: xen-devel <xen-devel@lists.xenproject.org>
-Subject: Re: Cannot boot PVH dom0 with big initrd
+  This message is in MIME format.  The first part should be readable text,
+  while the remaining parts are likely unreadable without MIME-aware tools.
 
-On Mon, Oct 12, 2026 at 10:32:47AM +0200, Jan Beulich wrote:
-> On 13.02.2026 05:02, Marek Marczykowski-G=C3=B3recki wrote:
-> > After fixing the xhci crash, I hit another issue - booting with 236MB
-> > initrd doesn't work, I get:
-> >=20
-> >     (XEN) [    3.151856] *** Building a PVH Dom0 ***
-> >     ...
-> >     (XEN) [    3.593940] Unable to allocate memory with order 0!
-> >     (XEN) [    3.597110] Failed to setup Dom0 physical memory map
-> >     (XEN) [    3.599884]=20
-> >     (XEN) [    3.602482] ****************************************
-> >     (XEN) [    3.605272] Panic on CPU 0:
-> >     (XEN) [    3.607928] Could not construct d0
-> >     (XEN) [    3.610692] ****************************************
-> >     (XEN) [    3.613463]=20
-> >     (XEN) [    3.616035] Reboot in five seconds...
-> >     (XEN) [    8.626565] Resetting with ACPI MEMORY or I/O RESET_REG.
-> >=20
-> > Full console log: https://gist.github.com/marmarek/c9dbc87bf07b76f28997=
-81755762f565
-> >=20
-> > If I skip initrd, then it boots just fine (but dom0 is not happy about
-> > that). 164MB initrd failed too, but 13MB started ok.
-> > Just in case, I tried skipping XHCI console, but it didn't change
-> > anything.
->=20
-> You may want to give [1] a try, minimally up to patch 11 (patches 01
-> and 02 are unrelated, so could be omitted as well).
+--8323329-1519767978-1792700995=:4086347
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8BIT
 
-I've tested with the full series, and yes, it does fix booting PVH dom0
-on this hardware. The console log looks like this now:
-https://gist.github.com/marmarek/7a418274520d66468908a1f1ff56aede
+On Thu, 22 Oct 2026, Andrew Cooper wrote:
+> On 22/10/2026 2:55 pm, Ross Lagerwall wrote:
+> > On 10/20/26 11:41 PM, Stefano Stabellini wrote:
+> >> In virtual-8086 mode with IOPL < 3, INT n raises #GP(0).  INT1, INT3
+> >> and INTO are not affected. They are delivered normally.
+> >>
+> >> svm_emul_swint_injection() applies the check to all of them, so an ICEBP
+> >> raises #GP instead of #DB.  It also reports the IDT entry in the #GP
+> >> error code instead of 0.
+> >>
+> >> Limit the check to INT n and use error code 0.
+> >>
+> >> Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+> >> ---
+> >>   xen/arch/x86/hvm/svm/svm.c | 5 ++++-
+> >>   1 file changed, 4 insertions(+), 1 deletion(-)
+> >>
+> >> diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+> >> index 71e48351f2..df74531d1a 100644
+> >> --- a/xen/arch/x86/hvm/svm/svm.c
+> >> +++ b/xen/arch/x86/hvm/svm/svm.c
+> >> @@ -1153,9 +1153,12 @@ static void svm_emul_swint_injection(struct
+> >> x86_event *event)
+> >>        * 32bit OS.  Someone with many TUITs can see about reading the
+> >> TSS
+> >>        * Software Interrupt Redirection bitmap.
+> >>        */
+> >> -    if ( (regs->eflags & X86_EFLAGS_VM) &&
+> >> +    if ( type == X86_ET_SW_INT && (regs->eflags & X86_EFLAGS_VM) &&
+> >>            MASK_EXTR(regs->eflags, X86_EFLAGS_IOPL) != 3 )
+> >> +    {
+> >> +        ec = 0;
+> >>           goto raise_exception;
+> >> +    }
+> >>         /*
+> >>        * Read all 8/16 bytes so the idtr limit check is applied
+> >> properly to
+> >
+> > I think this is correct. The check could perhaps move earlier to avoid
+> > needing
+> > to reset ec to 0.
+> >
+> > I do wonder though if there are other cases in the function where ec
+> > needs to
+> > be reset to 0? The pseudocode in the APM seems to have at least one
+> > other case.
+> 
+> I confirmed, and indeed it is #GP[0] not #GP[sel].  Also that
+> ICEBP/INT3/INTO are not subject IOPL like this.
+> 
+> I agree with Ross that this wants moving earlier; between the CR0.PE
+> check and deciding idte_size.  The comment also wants adjusting, so I
+> think it wants to look like this:
+> 
+> diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
+> index 71e48351f22c..c83b28d29727 100644
+> --- a/xen/arch/x86/hvm/svm/svm.c
+> +++ b/xen/arch/x86/hvm/svm/svm.c
+> @@ -1140,6 +1140,17 @@ static void svm_emul_swint_injection(struct
+> x86_event *event)
+>      if ( !(vmcb_get_cr0(vmcb) & X86_CR0_PE) )
+>          goto raise_exception; /* TODO: support real-mode injection? */
+>  
+> +    /*
+> +     * In vm86 mode, INT $N is subject to IOPL.
+> +     *
+> +     * TODO: It is also subject to CR4.VME=1, which would require
+> reading the
+> +     * TSS Software Interrupt Redirection bitmap.
+> +     */
+> +    if ( type == X86_ET_SW_INT &&
+> +         regs->eflags & X86_EFLAGS_VM &&
+> +         MASK_EXTR(regs->eflags, X86_EFLAGS_IOPL) != 3 )
+> +        goto raise_exception;
+> +
+>      idte_size   = lm ? 16 : 8;
+>      idte_offset = trap * idte_size;
+>  
+> @@ -1147,16 +1158,6 @@ static void svm_emul_swint_injection(struct
+> x86_event *event)
+>      ec = (trap << 3) | X86_XEC_IDT |
+>           (type == X86_ET_PRIV_SW_EXC ? X86_XEC_EXT : 0);
+>  
+> -    /*
+> -     * TODO: This does not cover the v8086 mode with CR4.VME case
+> -     * correctly, but falls on the safe side from the point of view of a
+> -     * 32bit OS.  Someone with many TUITs can see about reading the TSS
+> -     * Software Interrupt Redirection bitmap.
+> -     */
+> -    if ( (regs->eflags & X86_EFLAGS_VM) &&
+> -         MASK_EXTR(regs->eflags, X86_EFLAGS_IOPL) != 3 )
+> -        goto raise_exception;
+> -
+>      /*
+>       * Read all 8/16 bytes so the idtr limit check is applied properly to
+>       * this entry, even though we don't look at all the words read.
+> 
+> 
+> I'm happy to adjust this on commit if you're happy?
 
-Thanks!
-
---=20
-Best Regards,
-Marek Marczykowski-G=C3=B3recki
-Invisible Things Lab
-
---FmuGHjoxYaDKyr38
-Content-Type: application/pgp-signature; name=signature.asc
-
------BEGIN PGP SIGNATURE-----
-
-iQEzBAEBCAAdFiEEhrpukzGPukRmQqkK24/THMrX1ywFAmraXM0ACgkQ24/THMrX
-1yxJtgf/as9DvGwiuTnKne4yJF4iG8WCNb+JAijs/nlwepmfW4LZaPQEjgzn9RfK
-NibQvfK8p8OzO4IuJiJ+1/86hggeagZW5J9/+OBSGeP48gql52mbwv6LzvpZRaOS
-16blYsSzSg/XReg1jIxLjX7ltmXZd+p7FefMdsf9GY22cdNEBQxji+L+KS+qHGSj
-MB1BJisP0TChPrAUEwrHM9h8w9DIXySPyEXT9u8DT2XyGVdm86GRNQrv3xFthWfz
-a1Ddz73t1U9NPJ5/m69CX17I8HLQszEWlVIePF0M6ohrGAYObchaprwYIwc244dm
-HIdQCfc934j8izmAbYr0IRYZPaXAKg==
-=JhfN
------END PGP SIGNATURE-----
-
---FmuGHjoxYaDKyr38--
+Yes please, thank you!
+--8323329-1519767978-1792700995=:4086347--
 
