@@ -2,60 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7F271606A31A
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 09:27:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9A51F606A31A
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 10:18:18 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=mbLns+HE
-Received: from list by lists.xenproject.org with outflank-mailman.1459009.1671059 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=L/l0KIX/
+Received: from list by lists.xenproject.org with outflank-mailman.1457861.1671084 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKBY0-0001GP-Cp; Fri, 23 Oct 2026 09:26:48 +0000
+	id 1xKCLa-00084C-P2; Fri, 23 Oct 2026 10:18:02 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1459009.1671059; Fri, 23 Oct 2026 09:26:48 +0000
+Received: by outflank-mailman (output) from mailman id 1457861.1671084; Fri, 23 Oct 2026 10:18:02 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKBY0-0001GI-92; Fri, 23 Oct 2026 09:26:48 +0000
-Received: by outflank-mailman (input) for mailman id 1459009;
- Fri, 23 Oct 2026 09:26:47 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xKCLa-000823-IZ; Fri, 23 Oct 2026 10:18:02 +0000
+Received: by outflank-mailman (input) for mailman id 1457861;
+ Thu, 22 Oct 2026 08:30:32 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xKBXz-0001GB-1C
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 09:26:47 +0000
+ (envelope-from <jtomko@redhat.com>) id 1xJoC0-0006uO-Jr
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 08:30:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xKBXx-00C7B4-SC
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 11:26:46 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xJoBz-003upZ-IN
+ for xen-devel@lists.xenproject.org; Thu, 22 Oct 2026 10:30:31 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6adb2845-2eae-0a2a0a5409dd-0a2a450cb25c-44
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 11:26:45 +0200
-Received: from [40.93.201.53]
- (helo=CY3PR05CU001.outbound.protection.outlook.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6adb2853-f479-0a2a450c0019-285dc9354111-3
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 11:26:44 +0200
-Received: from SJ0PR05CA0111.namprd05.prod.outlook.com (2603:10b6:a03:334::26)
- by SJ0PR12MB6927.namprd12.prod.outlook.com (2603:10b6:a03:483::12)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.19; Fri, 23 Oct
- 2026 09:26:38 +0000
-Received: from SJ1PEPF000037A1.namprd04.prod.outlook.com
- (2603:10b6:a03:334:cafe::6d) by SJ0PR05CA0111.outlook.office365.com
- (2603:10b6:a03:334::26) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.569.3 via Frontend Transport; Fri, 23
- Oct 2026 09:26:38 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- SJ1PEPF000037A1.mail.protection.outlook.com (10.167.244.133) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.546.15 via Frontend Transport; Fri, 23 Oct 2026 09:26:38 +0000
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Fri, 23 Oct
- 2026 04:26:37 -0500
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
- Transport; Fri, 23 Oct 2026 04:26:35 -0500
+ (envelope-from <jtomko@redhat.com>)
+ id 6ad9c9a0-bab6-0a2a0a5309dd-0a2a45069cf2-36
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 10:30:31 +0200
+Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jtomko@redhat.com>)
+ id 6ad9c9a5-195a-0a2a45060019-aa0a817c6355-3
+ for <xen-devel@lists.xenproject.org>; Thu, 22 Oct 2026 10:30:30 +0200
+Received: from mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com
+ (ec2-35-165-154-97.us-west-2.compute.amazonaws.com [35.165.154.97]) by
+ relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-353-7m63-_WdN--ms9gOad-qrg-1; Thu,
+ 22 Oct 2026 04:30:24 -0400
+Received: from mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.12])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
+ (No client certificate requested)
+ by mx-prod-mc-06.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 4C984180060C; Thu, 22 Oct 2026 08:30:18 +0000 (UTC)
+Received: from jtomko.csb (headnet04.pony-001.prod.iad2.dc.redhat.com
+ [10.2.32.116])
+ by mx-prod-int-03.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id EC8EA1956088; Thu, 22 Oct 2026 08:29:49 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -64,220 +58,145 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=GMV0OLvgs3+1StzNMrRLuavMqh9rQyyaZZUh5aMouFfJvmCNaiZoUNukXfU/iGyfkIRocQ3WdoZ/FirLr/4cwVPI4C2DbcJcE9QQUxj3onoQSV3Zmqs3g3mp+c0mpFbrP3ldg0eOGP24MeNENkgJYNdVcQTWtSz1xEVe0ArtTDR3sBIT7GuhwnC1XLVfM9BsgcSepVY/qmtP6CwP2KbHQb3kujRu2UPTOF812FJsGDJaMoMJNHduk3PlF7DjQdPyrPDrcXbrDiQxjuC4CxV1afI+sCFSxxpwtYN5RA2CzjuzRmx54H0IEoq/CO3Tngirj/XPaH+dRBz3/1gZqOjpqw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=RJ+d/CHcr9ey5774wLha6b+iwnhehERCqPKf1kXEU9Y=;
- b=goAYM8UeywbuolFf0uBRHTw4Fd5nInOl/IO68Hf4oa8VIsmqQWj4sG1NTdfGzoO7hMPscVyoU1IIig4MsDA+d3Vc4qhcmUCCipSR//gdIZpAf9pr2NdsKyEZ2A8iLD6FnArjYBAKAVNZYycW031u0/7+9pAc3XdUOWuDB8oC6j+QOzv01bMnoneeJbS4Jb+lQgCUxx0DGPTBaKkokq1z2U9YQduCcfcphLb67t4NGUS2asNcoxpg+1uS3H2xOyWD+7W6ZXKhwrKCvcCGuEXcdXFPOGa+BmhiBMW4QbC86m4+Dfq+x77nZe54zLpfPtPrLGnkB7vY9dQ6RkHRiADRYw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=epam.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=RJ+d/CHcr9ey5774wLha6b+iwnhehERCqPKf1kXEU9Y=;
- b=mbLns+HE+9a2w87XkdvmlmXD2Ot3bdEGrqdzLg6+uLnWSmchWyvpt2Xc7qCcRRMga81a0QbnFcJmUT+KrOqYRKdKPVkWvBCNZtHUQ8a2YdV7Nu8Ghzbi5E6p+JLEtlqBjIp68bEv1MRRIoQ4GMoyNC+EHD6/HDztAiezNznZ2ZM=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <b6c61c65-e29a-4bc3-a4e4-0ab1964a5e0d@amd.com>
-Date: Fri, 23 Oct 2026 11:26:35 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
+	s=mimecast20190719; t=1792657829;
+	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
+	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
+	 content-transfer-encoding:content-transfer-encoding:
+	 in-reply-to:in-reply-to:references:references;
+	bh=xexW0rNqv/GKFX03e5NGVfizRBWHHld9j1Z0S71dlRQ=;
+	b=L/l0KIX/GpSI1rYtzQj5Zz8MLfXEfELkU+2GGh0j7S9nmYaLKqjdxOSm70skevOs4b4YQ7
+	+n70T1jEUcdq/1Ot6ie61WSg4Wupq4yF59GSTg5zv/a8t1sPHSBjQrqx+FLZKxbAw0Nm4V
+	FVSGY8nhN7XDEUb9sd4E1tDxYzauFuE=
+X-MC-Unique: 7m63-_WdN--ms9gOad-qrg-1
+X-Mimecast-MFC-AGG-ID: 7m63-_WdN--ms9gOad-qrg_1792657820
+Date: Thu, 22 Oct 2026 10:29:47 +0200
+From: =?iso-8859-1?B?SuFu?= Tomko <jtomko@redhat.com>
+To: Markus Armbruster <armbru@redhat.com>
+Cc: devel@lists.libvirt.org, marcandre.lureau@redhat.com,
+	qemu-devel@nongnu.org, Michael Roth <michael.roth@amd.com>,
+	John Snow <jsnow@redhat.com>,
+	Peter Maydell <peter.maydell@linaro.org>,
+	Mauro Carvalho Chehab <mchehab+huawei@kernel.org>,
+	Pierrick Bouvier <pierrick.bouvier@oss.qualcomm.com>,
+	Paolo Bonzini <pbonzini@redhat.com>,
+	Kostiantyn Kostiuk <kkostiuk@redhat.com>,
+	Eric Blake <eblake@redhat.com>,
+	David Hildenbrand <david@kernel.org>,
+	Igor Mammedov <imammedo@redhat.com>,
+	"Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
+	Jason Wang <jasowangio@gmail.com>,
+	Marcelo Tosatti <mtosatti@redhat.com>, kvm@vger.kernel.org,
+	Alberto Garcia <berto@igalia.com>, Kevin Wolf <kwolf@redhat.com>,
+	Hanna Reitz <hreitz@redhat.com>,
+	Philippe =?iso-8859-1?Q?Mathieu-Daud=E9?= <philmd@oss.qualcomm.com>,
+	Zhao Liu <zhao1.liu@intel.com>, Jonathan Cameron <jic23@kernel.org>,
+	Junjie Cao <junjie.cao@intel.com>, Anisa Su <anisa.su@samsung.com>,
+	Elena Ufimtseva <elena.ufimtseva@oracle.com>,
+	Jagannathan Raman <jag.raman@oracle.com>,
+	John Levon <john.levon@nutanix.com>,
+	Thanos Makatos <thanos.makatos@nutanix.com>,
+	=?iso-8859-1?Q?C=E9dric?= Le Goater <clg@redhat.com>,
+	Cornelia Huck <cohuck@redhat.com>,
+	Matthew Rosato <mjrosato@linux.ibm.com>,
+	Richard Henderson <richard.henderson@linaro.org>,
+	Ilya Leoshkevich <iii@linux.ibm.com>, qemu-block@nongnu.org,
+	linux-cxl@vger.kernel.org, qemu-s390x@nongnu.org,
+	"Michael S. Tsirkin" <mst@redhat.com>,
+	Sergio Lopez <slp@redhat.com>, qemu-arm@nongnu.org,
+	Palmer Dabbelt <palmer@dabbelt.com>,
+	Alistair Francis <alistair.francis@wdc.com>,
+	Weiwei Li <liwei1518@gmail.com>,
+	Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
+	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
+	Chao Liu <chao.liu@processmission.com>, qemu-riscv@nongnu.org,
+	Song Gao <17746591750@163.com>, Bibo Mao <maobibo@loongson.cn>,
+	Xianglai Li <lixianglai@loongson.cn>,
+	Jiaxun Yang <jiaxun.yang@flygoat.com>,
+	Pedro Barbuda <pbarbuda@microsoft.com>,
+	Mohamed Mediouni <mohamed@unpredictable.fr>,
+	Nicholas Piggin <npiggin@gmail.com>,
+	Harsh Prateek Bora <harshpb@linux.ibm.com>,
+	Amit Machhiwal <amachhiw@linux.ibm.com>, qemu-ppc@nongnu.org,
+	Zhang Chen <zhangckid@gmail.com>,
+	Li Zhijian <lizhijian@fujitsu.com>,
+	Alistair Francis <alistair@alistair23.me>,
+	Alexander Graf <graf@amazon.com>,
+	"Gonglei (Arei)" <arei.gonglei@huawei.com>,
+	zhenwei pi <zhenwei.pi@linux.dev>, Ani Sinha <anisinha@redhat.com>,
+	Luc Michel <luc@lmichel.fr>,
+	=?iso-8859-1?Q?C=E9dric?= Le Goater <clg@kaod.org>,
+	Jamin Lin <jamin_lin@aspeedtech.com>,
+	Kane Chen <kane_chen@aspeedtech.com>,
+	Samuel Tardieu <sam@rfc1149.net>, "Denis V. Lunev" <den@openvz.org>,
+	FangSheng Huang <FangSheng.Huang@amd.com>,
+	Tyrone Ting <kfting@nuvoton.com>, Hao Wu <wuhaotsh@google.com>,
+	Keith Busch <kbusch@kernel.org>, Klaus Jensen <its@irrelevant.dk>,
+	Jesper Devantier <foss@defmacro.it>,
+	Aditya Gupta <adityag@linux.ibm.com>,
+	Glenn Miles <milesg@linux.ibm.com>, Conor Dooley <conor@kernel.org>,
+	Sebastian Huber <sebastian.huber@embedded-brains.de>,
+	Halil Pasic <pasic@linux.ibm.com>,
+	Christian Borntraeger <borntraeger@linux.ibm.com>,
+	Jason Herne <jjherne@linux.ibm.com>,
+	Titus Rwantare <titusr@google.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Anthony PERARD <anthony@xenproject.org>,
+	Peter Xu <peterx@redhat.com>, Chinmay Rath <rathc@linux.ibm.com>,
+	Hendrik Brueckner <brueckner@linux.ibm.com>,
+	xen-devel@lists.xenproject.org,
+	Roman Bolshakov <rbolshakov@ddn.com>,
+	Phil Dennis-Jordan <phil@philjordan.eu>, Fam Zheng <fam@euphon.net>,
+	Farhan Ali <alifm@linux.ibm.com>,
+	Alex Williamson <alex@shazbot.org>,
+	Tao Tang <tangtao1634@phytium.com.cn>,
+	Fabiano Rosas <farosas@suse.de>,
+	Mark Cave-Ayland <mark.cave-ayland@ilande.co.uk>,
+	Artyom Tarasenko <atar4qemu@gmail.com>,
+	Yoshinori Sato <yoshinori.sato@nifty.com>,
+	Jiri Pirko <jiri@resnulli.us>, Eric Auger <eric.auger@redhat.com>,
+	Laurent Vivier <lvivier@redhat.com>
+Subject: Re: Property types changed in this series
+Message-ID: <atnJe88B09dFcDr2@jtomko.csb>
+References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
+ <87tsmfkoej.fsf@pond.sub.org>
+ <878q3qkz6f.fsf@pond.sub.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v5] xen/arm: smmuv3: Add support for removing devices
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>, "xen-devel@lists.xenproject.org"
-	<xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, Julien Grall
-	<julien@xen.org>, Bertrand Marquis <bertrand.marquis@arm.com>, Volodymyr
- Babchuk <Volodymyr_Babchuk@epam.com>, Rahul Singh <rahul.singh@arm.com>
-References: <5bf81a2b31f182d1339e89fb65e445bc20b1a865.1792400044.git.mykyta_poturai@epam.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
-Content-Language: en-US
-In-Reply-To: <5bf81a2b31f182d1339e89fb65e445bc20b1a865.1792400044.git.mykyta_poturai@epam.com>
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF000037A1:EE_|SJ0PR12MB6927:EE_
-X-MS-Office365-Filtering-Correlation-Id: 76dae0f3-c092-4247-cd30-08df30e7bd9f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|1800799024|23010399003|82310400026|36860700016|11063799006|56012099006|261022075727099003|261022105027099003|261021121427099003|261021123027099003|261009223027099003|260925022911599003|260925021911599003|260925021311599003|10067099003|18002099003|22082099003|6133799003;
-X-Microsoft-Antispam-Message-Info:
-	m0R+LZ1nXQKN20ifRFCS5aSz94lmWt8hM8UMnRxRZqiwtBCGoPBFZ2U8fNg4RtpQbniovHdd/AcMy6O4BaKGxeu9xpFZMc+om2xo8Dzd5TapZwXJC2Qv03wxGlgkmW3siBUFset6Ap5cnSXz3QNR4wUHaqistwb7M/TqmAQDCWItT1RGNMsuUXz3T5jDqrrlpquSx+WZ2B8lhPhWKq5FqjTD9HfYX3mZBP8Jq9sswGBmNM48kTW1MVRSHF2gfJaErVZLPtCFs2KVIXgPk8SWdpWBrkte2FC6My/8MRvY/Xof9txyr9r50Fb3GELsyNSLI07vEhnvZ1ncIizdRsLqjPVBVFKD848kofrhTK8rYK0upSP1MDlUXj+e/pm5lpBwdQ68SVQ3Ey5FtQqBU1EbLZ9jp5XeGDuzAAWkIGI2Msvgm2xNjX1bZ9M2xctn3S2AlaTpznXQwbRcmnbU/1P0sjHY4j4Pv39b5tLbvN5rW/vMnVNI5MIyYuwEy47gJ5dXCFwKtDf1w4/7nFykRt04V/uqldWCND5s7j+IdxnFT90fCTOvNay7rNl0xgfJW3HW0INtOSSEBxZmGeuT8neGIPblPtGIkgAiBXmLqM2LLxdnQFnQzAZlJu9GomOaJmlDoq6VZ4/6HVja6AWjNgCNpg==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(1800799024)(23010399003)(82310400026)(36860700016)(11063799006)(56012099006)(261022075727099003)(261022105027099003)(261021121427099003)(261021123027099003)(261009223027099003)(260925022911599003)(260925021911599003)(260925021311599003)(10067099003)(18002099003)(22082099003)(6133799003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	zUEmGwsVoHg4MbNNLWbT41hr7euzdTSc2CneR8pLkLU00YMkrIqMawjC4OyEu9PA7FV9WKqMlr06Za6yHdUyU9CFylhh0E5lQABFKTgVNE0J8zWpDAwS6cZMnv+dmJjGP9H9laW0SGj8T0WJNGCgUvSEIjT8sNahMUN5nTNogydF2t0f6wnD7//UHKEXahF8+aQKEOT5peOGLFqg5tP91Hc+7LqZgVQKlXnbpvUtXzgogJN6euwHu7lWFC0sAS1uh80fqer+rmUMpTaCzSiiaPPSdDLYQeM0nhSkKBsaWuTKmfEiKC6UWnzlZuHybnaa4/DQa7eoYmNRF2vdd7DvOw7+4daU3u6WAdQKw+B2Ij1Hs9yrCx1uJxDP/c9GUWtUYhJUrp+2/0vcoJxWePJhrlr5ZGVx/dbiDOELIIcrd8P6OHzZFUIkqoS3CyW2EqMt
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2026 09:26:38.5630
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 76dae0f3-c092-4247-cd30-08df30e7bd9f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF000037A1.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6927
-X-purgate-ID: tlsNG-d25034/1792747605-008CDA5B-FCEF4C82/0/0
+In-Reply-To: <878q3qkz6f.fsf@pond.sub.org>
+X-Scanned-By: MIMEDefang 3.0 on 10.30.177.12
+X-Mimecast-MFC-PROC-ID: IFx0eaVoljhUs-TL2N-vHXORC9Tr31UWu5ZKTX4cTiU_1792657820
+X-Mimecast-Originator: redhat.com
+Content-Type: text/plain; charset=iso-8859-1; format=flowed
+Content-Disposition: inline
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-16d1c6/1792657830-F6C7777B-1BBAC0EA/0/0
 X-purgate-type: clean
-X-purgate-size: 4361
-X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-size: 610
+X-Spam-Status: No, score=-6.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+On a Thursday in 2026, Markus Armbruster via Devel wrote:
+>Libvirt developers: does libvirt use member @type of the reply of
+>qom-list, qom-list-properties, qom-list-get?
+>
 
+The code for getting CPU properties uses qom-list-get for new QEMUs,
+where it checks whether "type" is "bool".
 
-On 19-Oct-26 10:59, Mykyta Poturai wrote:
-> Allow for removing devices from SMMUv3. arm_smmu_deassign_dev handles
-> most of the work by disabling ATS and zeroing STEs. Additionally, unset
-> the dt_device_is_protected flag and free no longer needed smmu_master.
-> Free iommu_fwspec for PCI devices only, for DT devices it is handled by
-> generic IOMMU layer.
-> 
-> Rework dt_device_set_protected to accept a boolean parameter, update
-> callsites.
-> 
-> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
-> ---
-> 
-> Tested on QEMU with SRIOV series[1] by repeatedly enabling/disabling
-> VFs.
-> 
-> [1]: https://patchew.org/Xen/cover.1772806036.git.mykyta._5Fpoturai@epam.com/
-> 
-> V4->V5:
-> * drop dead domain lookup on the DT path
-> * remove assert on  arm_smmu_deassign_dev error
-> * drop redundant IS_ENABLED(CONFIG_HAS_PCI)
-> * fix indentation
-> 
-> V3->V4:
-> * s/u8/uint8_t/
-> * assert pcidevs_locked
-> * assert deassignment is only reachable by PCI
-> * fix build error with HAS_PCI=n
-> 
-> V2->V3:
-> * free fwspec for pci devices
-> * remove testing note from commit message
-> 
-> V1->V2:
-> * check for phantom functions
-> * simplify pci/dt device split
-> * improve error handling
-> * don't try to free master for unprotected devices
-> * rework dt_device_set_protected
-> ---
->  xen/drivers/passthrough/arm/ipmmu-vmsa.c |  2 +-
->  xen/drivers/passthrough/arm/smmu-v3.c    | 72 +++++++++++++++++++++++-
->  xen/drivers/passthrough/arm/smmu.c       |  4 +-
->  xen/include/xen/device_tree.h            |  5 +-
->  4 files changed, 77 insertions(+), 6 deletions(-)
-> 
-> diff --git a/xen/drivers/passthrough/arm/ipmmu-vmsa.c b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> index fa9ab9cb13..0648f9b407 100644
-> --- a/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> +++ b/xen/drivers/passthrough/arm/ipmmu-vmsa.c
-> @@ -1367,7 +1367,7 @@ static int ipmmu_add_device(u8 devfn, struct device *dev)
->          }
->  
->          /* Let Xen know that the master device is protected by an IOMMU. */
-> -        dt_device_set_protected(dev_to_dt(dev));
-> +        dt_device_set_protected(dev_to_dt(dev), true);
->      }
->  #ifdef CONFIG_HAS_PCI
->      if ( dev_is_pci(dev) )
-> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
-> index bf153227db..e1af615985 100644
-> --- a/xen/drivers/passthrough/arm/smmu-v3.c
-> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-> @@ -1493,6 +1493,75 @@ static int arm_smmu_assign_dev(struct domain *d, u8 devfn, struct device *dev,
->  static int arm_smmu_deassign_dev(struct domain *d, uint8_t devfn,
->  				 struct device *dev);
->  
-> +static int arm_smmu_remove_device(uint8_t devfn, struct device *dev)
-> +{
-> +	struct arm_smmu_master *master;
-> +	struct iommu_fwspec *fwspec;
-> +	struct domain *d = NULL;
-> +
-> +	fwspec = dev_iommu_fwspec_get(dev);
-> +	if ( !fwspec )
-> +		return -ENODEV;
-> +
-> +	master = dev_iommu_priv_get(dev);
-> +	if ( !master )
-> +		return -ENODEV;
-> +
-> +#ifdef CONFIG_HAS_PCI
-> +	if ( dev_is_pci(dev) )
-> +	{
-> +		struct pci_dev *pdev = dev_to_pci(dev);
-> +
-> +		/* Ignore calls for phantom functions */
-> +		if ( devfn != pdev->devfn )
-> +			return 0;
-> +
-> +		ASSERT(pcidevs_locked());
-> +
-> +		d = pdev->domain;
-> +	}
-> +	else
-> +#endif
-> +	{
-> +		if ( !dt_device_is_protected(dev_to_dt(dev)) )
-> +		{
-> +			dev_err(dev, "Not added to SMMUv3\n");
-> +			return -ENODEV;
-> +		}
-> +
-> +		dt_device_set_protected(dev_to_dt(dev), false);
-> +	}
-> +
-> +	if ( d )
-> +	{
-> +		/*
-> +		 * For DT devices, iommu_remove_dt_device() returns -EBUSY if the
-> +		 * device is still assigned, so d is always NULL on the DT path.
-> +		 */
-> +		ASSERT(dev_is_pci(dev));
-> +
-> +		if ( arm_smmu_deassign_dev(d, devfn, dev) )
-> +			dev_err(dev, "Removing anyway\n");
-> +	}
-On a DT path d is always NULL. On a PCI path d is always non-NULL. So this
-entire block and ...
+I think that can be easily converted to just check for the JSON type.
 
-> +
-> +	arm_smmu_disable_pasid(master);
-... this call can be moved to dev_is_pci branch.
+Jano
 
-> +
-> +	dev_info(dev, "Removed master device (SMMUv3 %s StreamIds %u)\n",
-> +		 dev_name(fwspec->iommu_dev), fwspec->num_ids);
-> +
-> +	xfree(master);
-> +	dev_iommu_priv_set(dev, NULL);
-No need to call this for PCI device.
-
-With the remarks fixed:
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-
-~Michal
+>I'm asking because Marc-André's work changes many values to add a more
+>useful replacement.  I think we should deprecate @type.  I'd like to
+>find out whether we need to preserve the values for the deprecation
+>grace period.
+>
 
 
