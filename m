@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6EA3E606A321
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 04:52:16 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 37BC2606A321
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 04:52:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=c3jfzhSq
-Received: from list by lists.xenproject.org with outflank-mailman.1458822.1670870 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=MyIzM/Th
+Received: from list by lists.xenproject.org with outflank-mailman.1458821.1670856 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK7G8-0002Gx-Ry; Fri, 23 Oct 2026 04:52:04 +0000
+	id 1xK7G7-0001ty-KR; Fri, 23 Oct 2026 04:52:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1458822.1670870; Fri, 23 Oct 2026 04:52:04 +0000
+Received: by outflank-mailman (output) from mailman id 1458821.1670856; Fri, 23 Oct 2026 04:52:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK7G8-0002Gq-Ou; Fri, 23 Oct 2026 04:52:04 +0000
-Received: by outflank-mailman (input) for mailman id 1458822;
- Fri, 23 Oct 2026 04:52:03 +0000
+	id 1xK7G7-0001tZ-HT; Fri, 23 Oct 2026 04:52:03 +0000
+Received: by outflank-mailman (input) for mailman id 1458821;
+ Fri, 23 Oct 2026 04:52:02 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <netdev-bot+sashiko@kernel.org>) id 1xK7G7-0001rh-K6
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 04:52:03 +0000
+ (envelope-from <netdev-bot+sashiko@kernel.org>) id 1xK7G6-0001rB-9W
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 04:52:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xK7G7-00FSfm-0U
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 06:52:03 +0200
-Received: from [10.42.69.12] (helo=localhost)
+ id 1xK7G5-00FSb5-MN
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 06:52:01 +0200
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <netdev-bot+sashiko@kernel.org>)
- id 6adae7b7-2eae-0a2a0a5409dd-0a2a450ce014-18
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:02 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6adae7b8-e002-0a2a0a5209dd-0a2a4503e38a-48
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:01 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <netdev-bot+sashiko@kernel.org>)
- id 6adae7f1-f479-0a2a450c0019-aceafc1fc176-3
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:02 +0200
+ id 6adae7f0-fae8-0a2a45030019-ac6904feb00a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:01 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id 1CE7440A17;
- Fri, 23 Oct 2026 04:52:01 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EA1BB1F01825;
+ by tor.source.kernel.org (Postfix) with ESMTP id 9D420600E2;
  Fri, 23 Oct 2026 04:51:59 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 956E51F01828;
+ Fri, 23 Oct 2026 04:51:58 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,17 +49,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Subject:From:To:Cc:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792731121;
-	bh=CsbqRFbRE+Tnrux6F3AjM6HXluABeMqzeEaYlLw6WYc=;
+	s=k20260515; t=1792731119;
+	bh=tCmxTkBjLaIflZ6vc/WgmRL/W84MvLgumRnoI+JCkrM=;
 	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=c3jfzhSqbD7sY+a+qNiZLDCDTwkahCRkVX3Bx9J17yBROTQfZ5guxDyoStV2azodH
-	 jNzKVKGtL8ZctkD3SUsnCZBM07+Ahfw8OsR/7puEJ5KFVmOqyuv4Iixi/0q7ut/vxY
-	 02rjvTwFPn0pfopaWIJtCXBRB28d6ANN0H+6tFLi9DcIGAK3Oir4z5mXv5roQYRhlW
-	 b3AlCqQS7vBy00lEDbjkGWE/DpovU2idnTh53CoeiXOPshYz2uvzJPbVzqCTxOHwnb
-	 yU1wahoK+n0SpSm4HHp24AP6vrHv3zYF4RdSWwwK0RKOW2r486ekwy4u92zqPN2Gtv
-	 u1fT9+XDxfNGA==
-Subject: Re: [PATCH net-next 03/15] net: skbuff: fail checksum validation when
- the skb can't be checksummed
+	b=MyIzM/ThgfrEK0Tv/sB4VPSWUI8xCV5TBTMDrtUBNDSPFCoCaOC6dEJHOPtxJOVLf
+	 hPNa0L2Ezix2vvWGnP0u3T2/3ECMTvYm+enl+QExJ5Ek2PipD0e9MNu4D47tv9DsM3
+	 shL/DSZmrOvTfzG69ud2CCLksfL9j5uBXg7sgsO2ZAyvbOBcey5+YdVea9Czs85uBD
+	 Hn71yae9pBxNA51ARczpsKByetm4SF4YMpOSkYPGqtcaF08uVz6lnpIOqme6ZuFetY
+	 kJMyBGyym/gDqIuep5PFtNCvXxm0OqiE9FK2lEGxq/1OvTaf8Vkgq9cwUbOfPpBVNG
+	 MBgowJLkBDbEw==
+Subject: Re: [PATCH net-next 02/15] net: skbuff: add skb_checksum_full() that
+ reports failure
 From: netdev-bot+sashiko@kernel.org
 To: josef@toxicpanda.com
 Cc: davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org,
@@ -67,20 +67,20 @@ Cc: davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org,
  sstabellini@kernel.org, willemdebruijn.kernel@gmail.com, fmancera@suse.de,
  almasrymina@google.com, david.laight.linux@gmail.com, netdev@vger.kernel.org,
  xen-devel@lists.xenproject.org
-Date: Fri, 23 Oct 2026 04:51:59 +0000
-Message-ID: <179273111951.3134.3452028799437573017@kernel.org>
+Date: Fri, 23 Oct 2026 04:51:58 +0000
+Message-ID: <179273111819.3134.1366212706664836361@kernel.org>
 In-Reply-To:
- <20261019-b4-skbuff-bug-on-followups-v1-3-41dbef50b9f7@toxicpanda.com>
+ <20261019-b4-skbuff-bug-on-followups-v1-2-41dbef50b9f7@toxicpanda.com>
 References:
- <20261019-b4-skbuff-bug-on-followups-v1-3-41dbef50b9f7@toxicpanda.com>
-X-sashiko-severity: High
+ <20261019-b4-skbuff-bug-on-followups-v1-2-41dbef50b9f7@toxicpanda.com>
+X-sashiko-severity: Medium
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-purgate-ID: tlsNG-d25034/1792731122-774D7A5B-1A44CD6C/0/0
+X-purgate-ID: tlsNG-33051d/1792731121-77EC24E9-C7059AC1/0/0
 X-purgate-type: clean
-X-purgate-size: 7577
+X-purgate-size: 6723
 X-Spam-Status: No, score=-11.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
@@ -88,10 +88,10 @@ X-Spam-Status: No, score=-11.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Thank you for your contribution! Sashiko AI review found 4 potential
+Thank you for your contribution! Sashiko AI review found 2 potential
 issue(s) to consider.
 
-Critical: 0 · High: 2 · Medium: 1 · Low: 1
+Critical: 0 · High: 0 · Medium: 1 · Low: 1
 
 If you believe none of the issues are legitimate, please reply to each
 issue of Medium severity or higher and explain why the AI is wrong.
@@ -99,195 +99,166 @@ If any of them are legitimate and you plan to respin, please let patchwork
 know by including "pw-bot: cr" as a separate line at the end of your reply
 (one such reply per series is enough).
 
-- [High] The fix does not hold when conntrack checks checksums first.
-- [High] __skb_gro_checksum_complete() (net/core/gro.c:794-813) has the
-  same false-accept defect this commit fixes in…
-- [Medium] The Fixes: tag is incomplete for stable backporting.
-- [Low] The block comment above __skb_checksum_complete()
-  (net/core/skbuff.c:3891-3893) still says 'The new checksum is stored…
+- [Medium] The commit message says the skb_checksum() wrapper
+  (net/core/skbuff.c, lines 3657-3664) "behaves as before for the…
+- [Low] The new kernel-doc for skb_checksum_full() (net/core/skbuff.c,
+  lines 3555-3557) says it returns -EFAULT if "@skb has unreadable frags…
 
 --
 
-net: skbuff: fail checksum validation when the skb can't be checksummed
+net: skbuff: add skb_checksum_full() that reports failure
 
-This commit switches __skb_checksum_complete() and
-__skb_checksum_complete_head() to skb_checksum_full(). When the skb data
-can't be checksummed, they now report a bad checksum. On that failure
-path csum_valid is cleared, and skb->csum and ip_summed are left alone.
-
-Link: https://lore.kernel.org/all/20261007-b4-skbuff-bug-on-v2-0-b9a5f732895b@toxicpanda.com/
-
-> Fixes: 20ddd0fd2fcd ("net: skbuff: don't BUG() on leftover length in skb_checksum() and friends")
-
-[Severity: Medium]
-Is this Fixes: tag complete for stable backports?
-
-The likely remote trigger for __skb_checksum_complete() is unreadable
-devmem frags. skb_checksum() has returned 0 for those since 65249feb6b3d
-("net: add support for skbs with unreadable frags"):
-
-    if (WARN_ON_ONCE(!skb_frags_readable(skb)))
-        return 0;
-
-The 20ddd0fd2fcd commit message also says skb_checksum() returns 0 "as
-they already do for unreadable frags".
-
-__skb_checksum_complete() checksums from offset 0 to skb->len. It can
-only run past the end if the skb lengths are inconsistent.
-
-With only Fixes: 20ddd0fd2fcd, stable trees from 6.12 onward that have
-65249feb6b3d but not 20ddd0fd2fcd would not pick this up. Should
-65249feb6b3d be listed as well?
-
-This patch also depends on the previous patch in the series ("net:
-skbuff: add skb_checksum_full() that reports failure"). Nothing in the
-tags records that dependency.
+This adds skb_checksum_full(). It returns -EFAULT for unreadable frags or a
+range past the end of the skb, and -EINVAL for a negative length, instead
+of returning a 0 checksum. skb_checksum() becomes a wrapper around it and
+keeps the old return-0-on-failure behaviour for callers that have not been
+converted yet.
 
 > diff --git a/net/core/skbuff.c b/net/core/skbuff.c
-> index 061c61422a38..40d2dd20d47d 100644
+> index a2b52a5a61a9..061c61422a38 100644
 > --- a/net/core/skbuff.c
 > +++ b/net/core/skbuff.c
+> @@ -3545,12 +3545,31 @@ int skb_store_bits(struct sk_buff *skb, int offset, const void *from, int len)
+>  EXPORT_SYMBOL(skb_store_bits);
+>  
+>  /* Checksum skb data. */
+> -__wsum skb_checksum(const struct sk_buff *skb, int offset, int len, __wsum csum)
+> +/**
+> + *	skb_checksum_full - checksum a range of an skb
+> + *	@skb: buffer to checksum
+> + *	@offset: offset in @skb to start at
+> + *	@len: number of bytes to checksum
+> + *	@csump: the sum to add to; on success the range's sum is added to it
+> + *
+> + *	Return: 0 on success, -EINVAL if @len is negative, or -EFAULT if @skb
+> + *	has unreadable frags in the range or runs out before @len does.  On
+> + *	failure *@csump is not changed.
+> + */
 
 [ ... ]
 
-> @@ -3886,10 +3894,17 @@ EXPORT_SYMBOL(__skb_checksum_complete_head);
->   */
->  __sum16 __skb_checksum_complete(struct sk_buff *skb)
->  {
-> -	__wsum csum;
-> +	__wsum csum = 0;
->  	__sum16 sum;
+> @@ -3558,13 +3577,13 @@ __wsum skb_checksum(const struct sk_buff *skb, int offset, int len, __wsum csum)
+>  			copy = len;
+>  		csum = csum_partial(skb->data + offset, copy, csum);
+>  		if ((len -= copy) == 0)
+> -			return csum;
+> +			goto out;
+>  		offset += copy;
+>  		pos	= copy;
+>  	}
 >  
-> -	csum = skb_checksum(skb, 0, skb->len, 0);
-> +	/* If the data can't be checksummed it can't be valid either.  Leave
-> +	 * skb->csum alone, it's not a full packet checksum.
-> +	 */
+> -	if (WARN_ON_ONCE(!skb_frags_readable(skb)))
+> -		return 0;
+> +	if (!skb_frags_readable(skb))
+> +		return -EFAULT;
 
 [Severity: Low]
-The block comment above __skb_checksum_complete() still says:
+This isn't a bug, but does the new kernel-doc match this check? The doc
+says -EFAULT is returned when @skb "has unreadable frags in the range".
+skb_frags_readable() only tests the skb-wide skb->unreadable bit, though,
+and this check runs before working out which frags or frag_list members
+the range touches.
 
-    * zero. The new checksum is stored back into skb->csum unless the skb is
-    * shared.
+That leads to two cases:
 
-On the new failure path, skb->csum is not stored back even for unshared
-skbs. That contradicts the new inline comment. skb_remcsum_process()
-ignores the return value of __skb_checksum_complete() and then uses
-skb->csum, so it relies on this post-condition.
+- On an unreadable skb, a zero-length range at offset >= skb_headlen()
+  returns -EFAULT even though no bytes were requested.
 
-The return-value comments for __skb_checksum_validate_complete() and
-__skb_checksum_validate() in include/linux/skbuff.h also say:
+- A range that lies entirely in readable frag_list members, past the head's
+  own unreadable frags, is rejected without those members being visited.
 
-    *   non-zero: value of invalid checksum
+The old skb_checksum() behaved the same way here. None of the callers
+converted later in the series seem to pass such ranges.
 
-The new path returns the constant (__force __sum16)1 rather than a
-computed value. Should both comments be updated?
+Should the kernel-doc describe the skb-wide check? Or should the check move
+so it only applies when a page frag is actually in the range?
 
-> +	if (skb_checksum_full(skb, 0, skb->len, &csum)) {
-> +		if (!skb_shared(skb))
-> +			skb->csum_valid = 0;
-> +		return (__force __sum16)1;
+[ ... ]
+
+> @@ -3606,14 +3625,17 @@ __wsum skb_checksum(const struct sk_buff *skb, int offset, int len, __wsum csum)
+>  
+>  		end = start + frag_iter->len;
+>  		if ((copy = end - offset) > 0) {
+> -			__wsum csum2;
+> +			__wsum csum2 = 0;
+> +
+>  			if (copy > len)
+>  				copy = len;
+> -			csum2 = skb_checksum(frag_iter, offset - start, copy,
+> -					     0);
+> +			err = skb_checksum_full(frag_iter, offset - start, copy,
+> +						&csum2);
+> +			if (err)
+> +				return err;
+
+[ ... ]
+
+> @@ -3621,9 +3643,23 @@ __wsum skb_checksum(const struct sk_buff *skb, int offset, int len, __wsum csum)
+
+[ ... ]
+
+> +/* skb_checksum() has no way to report failure, so it returns 0, which is a
+> + * valid checksum.  Use skb_checksum_full() in new code.
+> + */
+> +__wsum skb_checksum(const struct sk_buff *skb, int offset, int len, __wsum csum)
+> +{
+> +	if (unlikely(skb_checksum_full(skb, offset, len, &csum))) {
+> +		WARN_ON_ONCE(!skb_frags_readable(skb));
+> +		return 0;
 > +	}
 
-[Severity: High]
-Can leaving ip_summed set to CHECKSUM_COMPLETE here let a later validator
-accept the packet anyway?
+[Severity: Medium]
+The commit message says the wrapper "behaves as before for the callers
+that haven't been converted: it returns 0 on failure and warns once if
+that was because of unreadable frags". Does that hold when the unreadable
+frags are in a frag_list member and not in the top-level skb?
 
-Callers have already replaced skb->csum with the pseudo-header sum before
-calling this function. nf_ip_checksum() does this when the hardware
-CHECKSUM_COMPLETE sum fails to validate:
+Before this patch, the frag_list loop recursed through skb_checksum(). An
+unreadable member hit the WARN_ON_ONCE() and returned 0. The parent then
+folded that 0 in with csum_block_add() and returned the partial sum of the
+readable parts.
 
-net/netfilter/utils.c:nf_ip_checksum() {
-    ...
-	case CHECKSUM_NONE:
-		...
-			skb->csum = csum_tcpudp_nofold(iph->saddr, iph->daddr,
-						       skb->len - dataoff,
-						       protocol, 0);
-		csum = __skb_checksum_complete(skb);
-    ...
-}
+Now the member returns -EFAULT from skb_checksum_full() without a warning.
+The frag_list loop passes it straight up, and the wrapper only checks the
+outer skb:
 
-For an skb with unreadable frags, skb_checksum_full() fails. The skb
-then leaves this function with ip_summed == CHECKSUM_COMPLETE and
-skb->csum == psum.
+    WARN_ON_ONCE(!skb_frags_readable(skb));
 
-Conntrack does not drop on a bad checksum:
+If the head is readable and only a member is unreadable, the warning is
+lost. Unconverted callers also get 0 for the whole range instead of the
+old partial sum.
 
-nf_conntrack_in()
-  nf_conntrack_tcp_packet()
-    tcp_error()  -> true
-    return -NF_ACCEPT
-  ret = -ret;    -> NF_ACCEPT
+At this revision __skb_checksum_complete() still does:
 
-The packet then reaches
-tcp_v4_rcv()->skb_checksum_init()->__skb_checksum_validate_complete():
+    csum = skb_checksum(skb, 0, skb->len, 0);
 
-	if (skb->ip_summed == CHECKSUM_COMPLETE) {
-		if (!csum_fold(csum_add(psum, skb->csum))) {
-			skb->csum_valid = 1;
-			return 0;
+    sum = csum_fold(csum_add(skb->csum, csum));
 
-inet_compute_pseudo() produces the same psum, so this computes
-csum_fold(psum + psum). That is 0 exactly when psum folds to 0xffff,
-which is the condition the commit message says it closes. The sender
-controls it through the packet length or source address. Conntrack
-checksumming is on by default (nf_conntrack_checksum = 1).
+Could this pass validation whenever the pseudo-header sum folds to 0xffff,
+and then set skb->csum to 0 and csum_valid to 1?
 
-The commit message says:
+The later patch "net: skbuff: fail checksum validation when the skb can't
+be checksummed" converts that function. Other skb_checksum() callers stay
+unconverted at the end of the series and still see the changed value, for
+example net/netfilter/utils.c, nf_nat_proto.c, ipvs, icmp.c, ipmr.c,
+udp.c, mptcp and some drivers. The wrapper itself also never starts
+warning for nested failures.
 
-    report a packet that can't be checksummed as having a bad checksum,
-    so callers drop it the way they drop any other bad checksum.
+Separately, if the top-level skb is unreadable and the failure is the new
+-EINVAL for a negative @len, won't this WARN_ON_ONCE() blame unreadable
+frags for it?
 
-This caller doesn't drop it. Would it make sense to move ip_summed off
-CHECKSUM_COMPLETE (for example to CHECKSUM_NONE) on this path when the
-skb is not shared? That way later validators can't trust the stale
-pseudo-header sum. The series leaves this code as it is.
+This mixed layout looks structurally possible. skb_gro_receive() links
+skbs onto frag_list without comparing their unreadable flags, and
+tcp_gro_receive() doesn't compare them either. It hasn't been shown to
+happen in practice.
 
->  
->  	sum = csum_fold(csum_add(skb->csum, csum));
->  	/* This check is inverted, because we already knew the hardware
+Should the wrapper warn on nested -EFAULT as well, or should the commit
+message be adjusted to describe the new behaviour?
 
-[Severity: High]
-Should __skb_gro_checksum_complete() in net/core/gro.c be converted too?
-It has the same false-accept pattern, its comment points to the comments
-in __skb_checksum_complete(), and the series doesn't change it:
-
-net/core/gro.c:__skb_gro_checksum_complete() {
-    ...
-	wsum = skb_checksum(skb, skb_gro_offset(skb), skb_gro_len(skb), 0);
-
-	/* NAPI_GRO_CB(skb)->csum holds pseudo checksum */
-	sum = csum_fold(csum_add(NAPI_GRO_CB(skb)->csum, wsum));
-    ...
-	NAPI_GRO_CB(skb)->csum = wsum;
-	NAPI_GRO_CB(skb)->csum_valid = 1;
-    ...
-}
-
-For a devmem skb with unreadable frags, skb_checksum() fires
-WARN_ON_ONCE(!skb_frags_readable(skb)) and returns 0. sum is then
-csum_fold(psum), which is 0 when psum folds to 0xffff.
-
-The path is:
-
-tcp4_gro_receive()
-  skb_gro_checksum_validate()
-    __skb_gro_checksum_validate_complete()
-      __skb_gro_checksum_complete()
-    skb_gro_incr_csum_unnecessary()
-
-For CHECKSUM_NONE skbs this ends in CHECKSUM_UNNECESSARY. For merged
-CHECKSUM_COMPLETE skbs, tcp_gro_complete() sets CHECKSUM_PARTIAL. In both
-cases TCP never validates the payload again, and GRO accepts the packet
-before the helpers changed here ever run.
-
-Every bad-checksum packet on such a queue also hits the WARN_ON_ONCE()
-from softirq context, which a remote sender can trigger. The WARN itself
-comes from 65249feb6b3d.
-
-The previous patch, "net: skbuff: add skb_checksum_full() that reports
-failure", says the following patches convert the core users. This
-net/core user isn't converted anywhere in the series.
+>  	return csum;
+>  }
+>  EXPORT_SYMBOL(skb_checksum);
 
 -- 
 Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7%40toxicpanda.com
