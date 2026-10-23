@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00B6D606A319
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 62B84606A319
 	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 04:52:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=Di3O8UiG
-Received: from list by lists.xenproject.org with outflank-mailman.1458826.1670908 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=LBiOMtrD
+Received: from list by lists.xenproject.org with outflank-mailman.1458830.1670924 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK7GE-0003EB-VE; Fri, 23 Oct 2026 04:52:10 +0000
+	id 1xK7GH-0003lj-N6; Fri, 23 Oct 2026 04:52:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1458826.1670908; Fri, 23 Oct 2026 04:52:10 +0000
+Received: by outflank-mailman (output) from mailman id 1458830.1670924; Fri, 23 Oct 2026 04:52:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK7GE-0003DJ-PK; Fri, 23 Oct 2026 04:52:10 +0000
-Received: by outflank-mailman (input) for mailman id 1458826;
- Fri, 23 Oct 2026 04:52:09 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xK7GH-0003lQ-I6; Fri, 23 Oct 2026 04:52:13 +0000
+Received: by outflank-mailman (input) for mailman id 1458830;
+ Fri, 23 Oct 2026 04:52:12 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <netdev-bot+sashiko@kernel.org>) id 1xK7GD-0002yv-AG
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 04:52:09 +0000
+ (envelope-from <netdev-bot+sashiko@kernel.org>) id 1xK7GG-0003Uy-3A
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 04:52:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xK7GC-00FSfm-NU
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 06:52:08 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xK7GF-006sSq-Ey
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 06:52:11 +0200
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <netdev-bot+sashiko@kernel.org>)
- id 6adae7e7-2eae-0a2a0a5409dd-0a2a4504ad1c-36
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:08 +0200
-Received: from [172.234.252.31] (helo=sea.source.kernel.org)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6adae7b7-bab6-0a2a0a5309dd-0a2a45019376-34
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:11 +0200
+Received: from [172.105.4.254] (helo=tor.source.kernel.org)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <netdev-bot+sashiko@kernel.org>)
- id 6adae7f7-b57f-0a2a45040019-aceafc1f8338-3
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:08 +0200
+ id 6adae7fa-5984-0a2a45010019-ac6904fea64a-3
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:11 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by sea.source.kernel.org (Postfix) with ESMTP id D5111402B0;
- Fri, 23 Oct 2026 04:52:06 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id EBFA51F01825;
- Fri, 23 Oct 2026 04:52:05 +0000 (UTC)
+ by tor.source.kernel.org (Postfix) with ESMTP id D5F536022C;
+ Fri, 23 Oct 2026 04:52:09 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id AC8131F01825;
+ Fri, 23 Oct 2026 04:52:08 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,17 +49,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Subject:From:To:Cc:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792731126;
-	bh=D30nNXRjiP8TsE/AFA9HAZ4TRwgaJqNqJTiotkgZq6k=;
+	s=k20260515; t=1792731129;
+	bh=ALJG1SS2iy0WNzGYJ2ykwPhdXMhJmbb3CoA1YF8ffNc=;
 	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=Di3O8UiGH0C/7ezn1q4ouy3VhjZgorTtXE6VHIt0tgFf73H8bvspJh63fmQxRDkSA
-	 wWw3OMHBeED8MHBM+JVf5kCQU82ByFCHdeGBaboC1k+KtNo4FMSOlgumR0/atS4cui
-	 6Lk5mPggW7ooNY0tDROOnVcwd2d4C6meXPjguASYmztXFEO4Ke9Yt5i2hEOgx83bWm
-	 fQ0y7muPVhmaMwiUpOBPduUB2aCGdHe0J5mE/oS7TYWpL3PcG1otRTek9zISJNsNvV
-	 i4q29w38VtOCrWJN+xCDhjWUVCYz4/2uxbtzkTTxgfRyTkW6yGGH7CFx+oQRtOenp3
-	 YwRd5EnovhgRA==
-Subject: Re: [PATCH net-next 07/15] net: skbuff: let skb_zerocopy() copy a
- short skb without head_frag
+	b=LBiOMtrDWCpmJO/ji86Cm00kxg5nINn6Ygjd5c3AQDkNrnU1kFrfmscNk06E3Pllm
+	 OOf4zfyBdEEeDqjVeUn8Q+eUF71szWkujD/7zYvOuUSd+DzyyeTym8udRVjUdDBmFn
+	 hkja5jzp7viOvPROAMFnWXTePG3v+VngBOu3XUHJSy6M7/nm3pxc5J0/sNgSM9wdhf
+	 i/qQl8vhcojaX76gM2RTVgRT/lL/bDsHtetipEb+ognTO7kEWTZxhxaYVyKZ+jmfJd
+	 K+wurkGehCZVpXLsNjKas5F7UkTKzAqORqvEBQEBKPNpOVLIDLwroUbGm+ZFiaVXHD
+	 FZpL/xAHtvnZg==
+Subject: Re: [PATCH net-next 09/15] net: skbuff: check csum_start against len
+ in skb_copy_and_csum_dev()
 From: netdev-bot+sashiko@kernel.org
 To: josef@toxicpanda.com
 Cc: davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org,
@@ -67,24 +67,24 @@ Cc: davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org,
  sstabellini@kernel.org, willemdebruijn.kernel@gmail.com, fmancera@suse.de,
  almasrymina@google.com, david.laight.linux@gmail.com, netdev@vger.kernel.org,
  xen-devel@lists.xenproject.org
-Date: Fri, 23 Oct 2026 04:52:05 +0000
-Message-ID: <179273112552.3134.3914409238087921235@kernel.org>
+Date: Fri, 23 Oct 2026 04:52:08 +0000
+Message-ID: <179273112823.3134.12241973533522574538@kernel.org>
 In-Reply-To:
- <20261019-b4-skbuff-bug-on-followups-v1-7-41dbef50b9f7@toxicpanda.com>
+ <20261019-b4-skbuff-bug-on-followups-v1-9-41dbef50b9f7@toxicpanda.com>
 References:
- <20261019-b4-skbuff-bug-on-followups-v1-7-41dbef50b9f7@toxicpanda.com>
+ <20261019-b4-skbuff-bug-on-followups-v1-9-41dbef50b9f7@toxicpanda.com>
 X-sashiko-severity: Medium
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-purgate-ID: tlsNG-ebf023/1792731128-534C3B50-18BEDB0E/0/0
+X-purgate-ID: tlsNG-d62444/1792731131-C5341757-FE05F783/0/0
 X-purgate-type: clean
-X-purgate-size: 3422
-X-Spam-Status: No, score=-6.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-size: 2732
+X-Spam-Status: No, score=-11.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
@@ -99,75 +99,54 @@ If any of them are legitimate and you plan to respin, please let patchwork
 know by including "pw-bot: cr" as a separate line at the end of your reply
 (one such reply per series is enough).
 
-- [Medium] The Fixes: tag points at the wrong commit, so stable kernels
-  will not get this fix even though they still have a BUG() that an…
+- [Medium] net: skbuff: incomplete headlen underflow check in
+  skb_copy_and_csum_dev()
 
 --
 
-net: skbuff: let skb_zerocopy() copy a short skb without head_frag
-
-This patch moves the !from->head_frag && !hlen check in skb_zerocopy()
-below the small-payload skb_copy_bits() path. A short copy from an skb
-without a head_frag, including a zero-length one, now succeeds. The
-motivating case is an Open vSwitch OVS_PACKET_CMD_EXECUTE request doing
-POP_ETH followed by USERSPACE, which ends up calling
-skb_zerocopy(user_skb, skb, 0, 0).
-
-Link: https://lore.kernel.org/all/179173804997.434549.4450793967361922984@kernel.org/
-
-> That used to BUG(), and now the
-> upcall fails and the packet is counted as lost, with a WARN on
-> CONFIG_DEBUG_NET kernels.  OVS_PACKET_CMD_EXECUTE only needs
-> CAP_NET_ADMIN in the user namespace that owns the network namespace,
-> so with the openvswitch module loaded any user can do this from their
-> own namespace.
-
-[ ... ]
-
-> Fixes: 433380f5ab8f ("net: skbuff: don't BUG() on a missing head_frag in skb_zerocopy()")
+> diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+> --- a/net/core/skbuff.c
+> +++ b/net/core/skbuff.c
+> @@ -4103,7 +4103,11 @@ void skb_copy_and_csum_dev(const struct sk_buff *skb, u8 *to)
+>  	else
+>  		csstart = skb_headlen(skb);
+>  
+> +	/* skb_headlen() underflows if data_len is bigger than len, so check
+> +	 * csstart against len as well.
+> +	 */
+>  	if (unlikely(csstart < 0 || csstart > skb_headlen(skb) ||
+> +		     csstart > skb->len ||
+>  		     (skb->ip_summed == CHECKSUM_PARTIAL &&
+>  		      csstart + skb->csum_offset + sizeof(__sum16) >
+>  		      skb->len))) {
+>
 
 [Severity: Medium]
-Is this the right commit for the Fixes: tag?
+This only closes the hole for the non-CHECKSUM_PARTIAL case. If
+skb->data_len > skb->len and ip_summed is CHECKSUM_PARTIAL, csstart
+comes from skb_checksum_start_offset() instead of skb_headlen(), so it
+can be anywhere up to skb->len while skb_headlen() has wrapped to
+about 4GB. Both the headlen comparison and the new skb->len comparison
+then pass, the csum_offset check passes too, and we go straight on to
+skb_copy_from_linear_data(skb, to, csstart) with nothing bounding
+csstart by the real linear area.
 
-433380f5ab8f only turned the existing BUG_ON() into an -EFAULT return.
-It went in through net-next as part of the "net: skbuff: replace most
-BUG_ON()s with error returns" series, with no Fixes: or Cc: stable tag,
-so no stable tree has it.
+skb_copy_and_csum_bits() then starts from int start =
+skb_headlen(skb), which is either negative, so the linear part is
+skipped and the frag reads are shifted by data_len - len bytes, or,
+once the difference exceeds INT_MAX, a bogus positive value that lets
+it copy from skb->data past the end of the linear data.
 
-The ordering problem is older than that. Before 433380f5ab8f,
-skb_zerocopy() looked like this:
+The fallback isn't safe either. skb_copy_bits() also begins with
+int start = skb_headlen(skb), so sending such an skb down the existing
+fallback, as the changelog describes, bounds the writes to @to by
+skb->len but not the reads from the skb.
 
-    BUG_ON(!from->head_frag && !hlen);
-
-    /* dont bother with small payloads */
-    if (len <= skb_tailroom(to))
-        return skb_copy_bits(from, 0, skb_put(to, len), len);
-
-The BUG_ON() has been in that spot since af2806f8f90a1 ("net: Export
-skb_zerocopy() to zerocopy from one skb to another") in 2013.
-
-On those kernels, the path in the commit message reaches the BUG_ON():
-
-ovs_packet_cmd_execute()
-  __dev_alloc_skb(NET_IP_ALIGN + len, GFP_KERNEL)   /* head_frag == 0 */
-  ... POP_ETH leaves skb->len == 0 ...
-  ovs_dp_upcall()
-    queue_userspace_packet()
-      skb_zerocopy(user_skb, skb, 0, 0)
-        BUG_ON(!from->head_frag && !hlen)
-
-With the current tag, stable tooling would only pick this up for trees
-that already return -EFAULT. Wouldn't every stable tree without
-433380f5ab8f keep a BUG() that a user can trigger from their own
-namespace?
-
-Should this carry Fixes: af2806f8f90a1 instead, or the OVS Ethernet
-push/pop commit that made an empty-skb upcall reachable? It should also
-probably have Cc: stable and go through net rather than net-next.
-
-A stable backport would also need to move the old BUG_ON() below the
-len <= skb_tailroom(to) return, since those trees don't have the
--EFAULT conversion.
+Since the condition you really want to catch is data_len > len,
+would it be simpler to test that directly before computing csstart,
+and memset() @to rather than calling skb_copy_bits() in that case? Or
+should skb_copy_bits() and skb_copy_and_csum_bits() reject
+data_len > len themselves?
 
 -- 
 Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7%40toxicpanda.com
