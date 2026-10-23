@@ -2,55 +2,55 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DE855606A31A
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 19:28:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1384E606A31B
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 19:28:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=NxybvP/Q
-Received: from list by lists.xenproject.org with outflank-mailman.1459130.1671419 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=redhat.com header.i=@redhat.com header.a=rsa-sha256 header.s=mimecast20190719 header.b=FB6PPRON
+Received: from list by lists.xenproject.org with outflank-mailman.1459308.1671455 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKKvV-0001rf-EF; Fri, 23 Oct 2026 19:27:41 +0000
+	id 1xKKvX-0002fD-FS; Fri, 23 Oct 2026 19:27:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1459130.1671419; Fri, 23 Oct 2026 19:27:41 +0000
+Received: by outflank-mailman (output) from mailman id 1459308.1671455; Fri, 23 Oct 2026 19:27:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKKvV-0001rY-Bb; Fri, 23 Oct 2026 19:27:41 +0000
-Received: by outflank-mailman (input) for mailman id 1459130;
- Fri, 23 Oct 2026 10:54:42 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xKKvX-0002f5-Bl; Fri, 23 Oct 2026 19:27:43 +0000
+Received: by outflank-mailman (input) for mailman id 1459308;
+ Fri, 23 Oct 2026 13:55:01 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <armbru@redhat.com>) id 1xKCv4-0004pQ-3y
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 10:54:42 +0000
+ (envelope-from <armbru@redhat.com>) id 1xKFjZ-0005vH-NV
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 13:55:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xKCv3-005Kpy-Gk
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 12:54:41 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xKFjY-00AMN7-TP
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 15:55:00 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <armbru@redhat.com>)
- id 6adb3ce3-8faa-0a2a0a5109dd-0a2a4507e456-38
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 12:54:41 +0200
+ id 6adb670b-8faa-0a2a0a5109dd-0a2a450c9e54-44
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 15:55:00 +0200
 Received: from [170.10.129.124] (helo=us-smtp-delivery-124.mimecast.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <armbru@redhat.com>)
- id 6adb3cf0-b4ea-0a2a45070019-aa0a817cb833-3
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 12:54:41 +0200
-Received: from mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com
+ id 6adb6733-f479-0a2a450c0019-aa0a817c99f7-3
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 15:55:00 +0200
+Received: from mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com
  (ec2-54-186-198-63.us-west-2.compute.amazonaws.com [54.186.198.63]) by
  relay.mimecast.com with ESMTP with STARTTLS (version=TLSv1.3,
- cipher=TLS_AES_256_GCM_SHA384) id us-mta-599-ANvIGqWqN7OpnJEgondA-w-1; Fri,
- 23 Oct 2026 06:54:35 -0400
-Received: from mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com
- (mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.17])
+ cipher=TLS_AES_256_GCM_SHA384) id us-mta-479-CqSf_XYnNNmtmPh4ytbQ0A-1; Fri,
+ 23 Oct 2026 09:54:53 -0400
+Received: from mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com
+ (mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com [10.30.177.4])
  (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
  key-exchange X25519 server-signature RSA-PSS (2048 bits) server-digest SHA256)
  (No client certificate requested)
- by mx-prod-mc-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 618EC19560B8; Fri, 23 Oct 2026 10:54:28 +0000 (UTC)
+ by mx-prod-mc-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id C62B3195395F; Fri, 23 Oct 2026 13:54:46 +0000 (UTC)
 Received: from blackfin.pond.sub.org (unknown [10.44.22.5])
- by mx-prod-int-05.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
- id 8D153195608C; Fri, 23 Oct 2026 10:54:24 +0000 (UTC)
+ by mx-prod-int-01.mail-002.prod.us-west-2.aws.redhat.com (Postfix) with ESMTPS
+ id 7B7EC3000723; Fri, 23 Oct 2026 13:54:42 +0000 (UTC)
 Received: by blackfin.pond.sub.org (Postfix, from userid 1000)
- id 0B26921E6A04; Fri, 23 Oct 2026 12:54:22 +0200 (CEST)
+ id 0863521E6A04; Fri, 23 Oct 2026 15:54:40 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -61,17 +61,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=mimecast20190719 header.d=redhat.com header.i="@redhat.com" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=redhat.com;
-	s=mimecast20190719; t=1792752880;
+	s=mimecast20190719; t=1792763699;
 	h=from:from:reply-to:subject:subject:date:date:message-id:message-id:
 	 to:to:cc:cc:mime-version:mime-version:content-type:content-type:
 	 content-transfer-encoding:content-transfer-encoding:
 	 in-reply-to:in-reply-to:references:references;
-	bh=X11SR+mruIiBcnKbbutBCQyUMtv+b/6VmMY3ImplTNE=;
-	b=NxybvP/Q/0gjfNFstLBvUjAGnzsdblUZUNy1HKOhTZex3s9Q6YY36sfwWzd8flRaEv9yBV
-	nmh5y7QUbPGyHZAjiUAErvEmO4kzaDDYjmBSnxrng93Gw5i7gzzONVhN+PKWfyeMfpQC5e
-	bcN2JTBnSralgxqpyu68tJtUyaIYgnU=
-X-MC-Unique: ANvIGqWqN7OpnJEgondA-w-1
-X-Mimecast-MFC-AGG-ID: ANvIGqWqN7OpnJEgondA-w_1792752871
+	bh=DjoH8evZxLD/oQi+kI32wJGQ4IzIUrG3x0m38hDozM8=;
+	b=FB6PPRONVNlEGUB/jQq026ZGaiNgN9AqTzseEE5GqsutF8XLJiCE90MFgtFmKLbMj8H0BE
+	4f9I5VO3wk6Ul83t1LhSpYqK85kCC6Z0C1GR/wefyNAPKihIELB/13747m3RX/C1AoTC4b
+	0hPkVdmlitgUUBgEajjamy8Q36Yw7gI=
+X-MC-Unique: CqSf_XYnNNmtmPh4ytbQ0A-1
+X-Mimecast-MFC-AGG-ID: CqSf_XYnNNmtmPh4ytbQ0A_1792763689
 From: Markus Armbruster <armbru@redhat.com>
 To: =?utf-8?Q?Marc-Andr=C3=A9?= Lureau <marcandre.lureau@redhat.com>
 Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
@@ -137,25 +137,25 @@ Cc: qemu-devel@nongnu.org,  Michael Roth <michael.roth@amd.com>,  John Snow
  <atar4qemu@gmail.com>,  Yoshinori Sato <yoshinori.sato@nifty.com>,  Jiri
  Pirko <jiri@resnulli.us>,  Eric Auger <eric.auger@redhat.com>,  Laurent
  Vivier <lvivier@redhat.com>
-Subject: Re: [PATCH v7 10/65] meson: add qapi-type-infos-*.c/h to build
-In-Reply-To: <20261020-qom-qapi-v7-10-431a86b02b58@redhat.com>
+Subject: Re: [PATCH v7 11/65] qom: add qapi_type field to ObjectProperty
+In-Reply-To: <20261020-qom-qapi-v7-11-431a86b02b58@redhat.com>
  (=?utf-8?Q?=22Marc-Andr=C3=A9?=
-	Lureau"'s message of "Tue, 20 Oct 2026 14:45:27 +0400")
+	Lureau"'s message of "Tue, 20 Oct 2026 14:45:28 +0400")
 References: <20261020-qom-qapi-v7-0-431a86b02b58@redhat.com>
-	<20261020-qom-qapi-v7-10-431a86b02b58@redhat.com>
-Date: Fri, 23 Oct 2026 12:54:21 +0200
-Message-ID: <87ik2sg00y.fsf@pond.sub.org>
+	<20261020-qom-qapi-v7-11-431a86b02b58@redhat.com>
+Date: Fri, 23 Oct 2026 15:54:39 +0200
+Message-ID: <87h5ica5eo.fsf@pond.sub.org>
 User-Agent: Gnus/5.13 (Gnus v5.13)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Scanned-By: MIMEDefang 3.0 on 10.30.177.17
-X-Mimecast-MFC-PROC-ID: sFYQakt16P9lTdyDZfUKMEFoIIYxntCfgxAIr0OyFcU_1792752871
+X-Scanned-By: MIMEDefang 3.4.1 on 10.30.177.4
+X-Mimecast-MFC-PROC-ID: IBUX5bZjLuBYdwYSFbqahhtaT7EPK_6zAGHpdAWWKhs_1792763689
 X-Mimecast-Originator: redhat.com
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-ef75cf/1792752881-36CDFAE4-4BF2E4E4/0/0
+X-purgate-ID: tlsNG-d25034/1792763700-50520A5B-D69C33A8/0/0
 X-purgate-type: clean
-X-purgate-size: 579
+X-purgate-size: 478
 X-Spam-Status: No, score=-12.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
@@ -166,17 +166,14 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com> writes:
 
-> Add the per-module type-infos output files so they are compiled into
-> the build.
+> Add a const pointer to QAPITypeInfo in ObjectProperty. NULL for now,
+> but future patches will add means to make it non-null. The
+> QAPITypeInfo will then be used by QOM introspection to tie the
+> property to a QAPI type.
 >
-> Reviewed-by: Kostiantyn Kostiuk <kkostiuk@redhat.com>
 > Signed-off-by: Markus Armbruster <armbru@redhat.com>
 > Signed-off-by: Marc-Andr=C3=A9 Lureau <marcandre.lureau@redhat.com>
 
-I just messed with the previous commit, and nothing got recompiled even
-though I changed scripts/qapi/type_infos.py.  Quite confusing, until I
-remembered that I also need this one for that.
-
-Let's squash it into the previous commit.
+Reviewed-by: Markus Armbruster <armbru@redhat.com>
 
 
