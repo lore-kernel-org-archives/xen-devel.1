@@ -2,56 +2,40 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 725A660A2603
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 10:18:32 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 95D5D606A31B
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 10:19:14 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=hH9mrAs+;
-	dkim=pass header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=9cQhfpLx;
-	dkim=pass (1024-bit key) header.d=suse.de header.i=@suse.de header.a=rsa-sha256 header.s=susede2_rsa header.b=y3Ubh2X8;
-	dkim=neutral header.d=suse.de header.i=@suse.de header.a=ed25519-sha256 header.s=susede2_ed25519 header.b=Ebfsji5B
-Received: from list by lists.xenproject.org with outflank-mailman.1457639.1671122 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=cortex-media.de header.i=@cortex-media.de header.a=rsa-sha256 header.s=20250930 header.b=Hk/jBKr7
+Received: from list by lists.xenproject.org with outflank-mailman.1458964.1671158 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKCLm-0000wn-2r; Fri, 23 Oct 2026 10:18:14 +0000
+	id 1xKCMQ-0003iG-8z; Fri, 23 Oct 2026 10:18:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1457639.1671122; Fri, 23 Oct 2026 10:18:14 +0000
+Received: by outflank-mailman (output) from mailman id 1458964.1671158; Fri, 23 Oct 2026 10:18:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKCLl-0000wW-UH; Fri, 23 Oct 2026 10:18:13 +0000
-Received: by outflank-mailman (input) for mailman id 1457639;
- Wed, 21 Oct 2026 21:48:19 +0000
+	id 1xKCMQ-0003i1-2z; Fri, 23 Oct 2026 10:18:54 +0000
+Received: by outflank-mailman (input) for mailman id 1458964;
+ Fri, 23 Oct 2026 07:32:50 +0000
 Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <fmancera@suse.de>) id 1xJeAU-0005ut-Th
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 21:48:19 +0000
+ (envelope-from <pd@cortex-media.de>) id 1xK9lh-0003YT-8Y
+ for xen-devel@lists.xen.org; Fri, 23 Oct 2026 07:32:49 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xJeAU-004iBK-0E
- for xen-devel@lists.xenproject.org; Wed, 21 Oct 2026 23:48:18 +0200
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xK9lg-009NJy-1t
+ for xen-devel@lists.xen.org; Fri, 23 Oct 2026 09:32:48 +0200
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <fmancera@suse.de>)
- id 6ad932fe-bab6-0a2a0a5309dd-0a2a4504889e-30
- for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 23:48:17 +0200
-Received: from [195.135.223.130] (helo=smtp-out1.suse.de)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <fmancera@suse.de>)
- id 6ad93321-b57f-0a2a45040019-c387df82bc90-3
- for <xen-devel@lists.xenproject.org>; Wed, 21 Oct 2026 23:48:17 +0200
-Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by smtp-out1.suse.de (Postfix) with ESMTPS id 4EC8321EB7;
- Wed, 21 Oct 2026 21:48:16 +0000 (UTC)
-Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
- (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
- key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
- (No client certificate requested)
- by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id 5B295134A5;
- Wed, 21 Oct 2026 21:48:15 +0000 (UTC)
-Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
- by imap1.dmz-prg2.suse.org with ESMTPSA id QC/lCh8z2WpAGgAAD6G6ig
- (envelope-from <fmancera@suse.de>); Wed, 21 Oct 2026 21:48:15 +0000
+ (envelope-from <pd@cortex-media.de>)
+ id 6adb0d9e-bab6-0a2a0a5309dd-0a2a4506bb8c-6
+ for <xen-devel@lists.xen.org>; Fri, 23 Oct 2026 09:32:47 +0200
+Received: from [136.243.217.222] (helo=mail.cortex-media.de)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <pd@cortex-media.de>)
+ id 6adb0d9e-195a-0a2a45060019-88f3d9dea3d8-3
+ for <xen-devel@lists.xen.org>; Fri, 23 Oct 2026 09:32:46 +0200
+Received: by mail.cortex-media.de (Postfix) id 1172638C055
+ for <xen-devel@lists.xen.org>; Fri, 23 Oct 2026 09:32:45 +0200 (CEST)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,476 +44,582 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"; dkim=pass header.s=susede2_rsa header.d=suse.de header.i="@suse.de" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References"; dkim=permerror header.s=susede2_ed25519 header.d=suse.de header.i="@suse.de"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1792619297; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BNmG7yJjoNt8Ptd0MZtdJ7UznCSNc7rDzGQLdC+cy7E=;
-	b=hH9mrAs+lGttPEdAZ+jo0InqkNhclnMv4XuNiMRATQ4PjlVV0zHco/+SzKs//zx21BcZ/K
-	gPu0KLnwEEX1Z4BuUxAoAQ4Hm37+RICdcey1Idy//GkMUwa2rBtB6PKj090lJ5XWPP/9Vx
-	AhQn7VHS4+st9NoJTO/Ib6fBN3g+EAE=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1792619297;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BNmG7yJjoNt8Ptd0MZtdJ7UznCSNc7rDzGQLdC+cy7E=;
-	b=9cQhfpLxrrw1J+mL2fXF7dWeueIKBLqOgVoX8bbG6vEXm+t145ZqklRc9MpcrdGl4VNgyw
-	BMHAlL5HI45kpsCg==
-Authentication-Results: smtp-out1.suse.de;
-	none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.de; s=susede2_rsa;
-	t=1792619296; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BNmG7yJjoNt8Ptd0MZtdJ7UznCSNc7rDzGQLdC+cy7E=;
-	b=y3Ubh2X8v83c46Ug5/Szywg+F1P/GtlKjE0xV5bUMccd2OWhBO7fSpO6+NqCmTeimSumdK
-	hjoleivsMQWnwfKh8yWoMIfLwUHnB44MyISJD52I5zsQ/eAVdBeiML80E5uj5le6+8zWKs
-	j0H8aFzZqWBDyaGYQZ0lLSc2X4HGdlg=
-DKIM-Signature: v=1; a=ed25519-sha256; c=relaxed/relaxed; d=suse.de;
-	s=susede2_ed25519; t=1792619296;
-	h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
-	 mime-version:mime-version:content-type:content-type:
-	 content-transfer-encoding:content-transfer-encoding:
-	 in-reply-to:in-reply-to:references:references;
-	bh=BNmG7yJjoNt8Ptd0MZtdJ7UznCSNc7rDzGQLdC+cy7E=;
-	b=Ebfsji5BJjia+pyQ2jigm735PEtXPc0WOy8PYwae8s9aXHfXlWXQoRYyNXFszm4Wz5Dy8b
-	gIFDiHsVPzn+oFAQ==
-Message-ID: <08f938a3-8315-425e-86f8-3e622f035f3e@suse.de>
-Date: Wed, 21 Oct 2026 23:48:05 +0200
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20250930 header.d=cortex-media.de header.i="@cortex-media.de" header.h="Date:To:From:Subject"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=cortex-media.de;
+	s=20250930; t=1792740766;
+	bh=TvodcSkJBEqhD5iDxG0PyxnTMqS8yb0RTMWWNGDRxto=;
+	h=Date:To:From:Subject:From;
+	b=Hk/jBKr7vO++KYo02b/Al6x/rDMns+OS/n81mJYfMfj21N97QptOoa35eEYhPr4aC
+	 NhXafuiaY4G84yGot2hVAoIb3jH+BcjUmZ34hUwHNA5TVGRJZfOrFvtbQTIaLkZvcv
+	 +G5STEp9kpQPsHLzhAYQnTQlMuDOkrDcOErsGX6UefPjO80uQGthozNS0lgnGXvua8
+	 obsv7Gop/enti4MYIUolLyYjX7sejGuPi0Dld0QG4LSq/gDDHuQ8ONYQ95uv1F2BKz
+	 Q0fIS0sKJV76Xbljoa42JogsPrMWlo3Ycpf8S4lAbkREJNhtfKxsjXc6fz55CdfPcx
+	 qQwWdqXc4XZgA==
+Content-Type: multipart/mixed; boundary="------------PZZxSv6fMb60yOagB00kKeOq"
+Message-ID: <b9a98b3b-d11e-4463-ac80-4145ca991925@cortex-media.de>
+Date: Fri, 23 Oct 2026 09:32:45 +0200
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH net-next v2 01/15] net: skbuff: make
- skb_copy_and_csum_bits() report unreadable frags
-To: Josef Bacik <josef@toxicpanda.com>, "David S. Miller"
- <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>,
- Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>,
- Simon Horman <horms@kernel.org>, Andrew Lunn <andrew+netdev@lunn.ch>
-Cc: Juergen Gross <jgross@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Willem de Bruijn <willemdebruijn.kernel@gmail.com>,
- Mina Almasry <almasrymina@google.com>,
- David Laight <david.laight.linux@gmail.com>, netdev@vger.kernel.org,
- xen-devel@lists.xenproject.org
-References: <20261021-b4-skbuff-bug-on-followups-v2-0-2aa780a03524@toxicpanda.com>
- <20261021-b4-skbuff-bug-on-followups-v2-1-2aa780a03524@toxicpanda.com>
-Content-Language: en-US
-From: Fernando Fernandez Mancera <fmancera@suse.de>
-In-Reply-To: <20261021-b4-skbuff-bug-on-followups-v2-1-2aa780a03524@toxicpanda.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-Spamd-Result: default: False [-11.79 / 50.00];
-	SUSE_INTERNAL_BYPASS(-9.00)[];
-	BAYES_HAM(-3.00)[100.00%];
-	SUSPICIOUS_RECIPS(1.50)[];
-	NEURAL_HAM_LONG(-1.00)[-1.000];
-	NEURAL_HAM_SHORT(-0.20)[-1.000];
-	MIME_GOOD(-0.10)[text/plain];
-	XM_UA_NO_VERSION(0.01)[];
-	RCVD_VIA_SMTP_AUTH(0.00)[];
-	ARC_NA(0.00)[];
-	MIME_TRACE(0.00)[0:+];
-	TAGGED_RCPT(0.00)[netdev];
-	RCPT_COUNT_TWELVE(0.00)[14];
-	RCVD_TLS_ALL(0.00)[];
-	FREEMAIL_ENVRCPT(0.00)[gmail.com];
-	TO_DN_SOME(0.00)[];
-	FROM_HAS_DN(0.00)[];
-	FREEMAIL_CC(0.00)[suse.com,kernel.org,gmail.com,google.com,vger.kernel.org,lists.xenproject.org];
-	MID_RHS_MATCH_FROM(0.00)[];
-	FROM_EQ_ENVFROM(0.00)[];
-	RCVD_COUNT_TWO(0.00)[2];
-	TO_MATCH_ENVRCPT_ALL(0.00)[];
-	DKIM_SIGNED(0.00)[suse.de:s=susede2_rsa,suse.de:s=susede2_ed25519];
-	DBL_BLOCKED_OPENRESOLVER(0.00)[toxicpanda.com:email,imap1.dmz-prg2.suse.org:helo]
-X-Spam-Score: -11.79
-X-Spam-Level: 
-X-purgate-ID: tlsNG-ebf023/1792619297-C2CCFB50-D985695D/0/0
+To: xen-devel@lists.xen.org
+From: Peter Deggendorfer <pd@cortex-media.de>
+Subject: [BUG] Xen BUG at mce_amd.c:100 (mc_ec2type) on Zen 3; host left
+ wedged, no reboot
+X-purgate-ID: tlsNG-16d1c6/1792740766-F5E0E77B-2CB7B020/0/0
 X-purgate-type: clean
-X-purgate-size: 15265
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 37627
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10/21/26 3:46 PM, Josef Bacik wrote:
-> skb_copy_and_csum_bits() has no way to fail.  When it reaches
-> unreadable frags it zero-fills the rest of the buffer and returns 0,
-> and since commit ab9414ed70bd ("net: skbuff: don't leave stale bytes in
-> skb_copy_and_csum_bits()") that 0 is the correct checksum for what's in
-> the buffer.  Its callers can't tell the copy didn't happen.
-> 
-> That matters in the !sg && !csum branch of skb_segment().  A devmem TCP
-> skb keeps its whole payload in unreadable frags, so every segment ends
-> up with a payload of zeroes, tcp_gso_segment() writes a valid TCP
-> checksum over it, and the peer accepts the zeroes as stream data.  This
-> is reachable when both SG and TX checksum offload are turned off on a
-> device used for devmem TX: sk_setup_caps() still gives TCP SG and
-> HW_CSUM, so the dmabuf send is accepted, validate_xmit_unreadable_skb()
-> lets the skb through for a NETMEM_TX_NO_DMA device or a matching
-> binding, and software GSO segments it with neither feature.  Before
-> that commit the segments carried uninitialized memory with a checksum
-> that almost never matched.
-> 
-> This was reproduced with a test module rather than on devmem hardware:
-> skb_segment() on a TCPv4 GSO skb with 3000 bytes of payload in a page
-> frag marked unreadable, with features == 0, returns 3 segments whose
-> payloads are all zeroes, each with a checksum of 0, which is correct for
-> zeroes.  There's no warning or error; the data is silently replaced.
-> With this patch skb_segment() returns -EFAULT.
-> 
-> Make skb_copy_and_csum_bits() return 0 or -EFAULT and hand the checksum
-> back through a pointer, and make it __must_check so a new caller can't
-> ignore the failure.  Running out of skb before @len returns -EFAULT
-> too; commit 417261779eab ("net: skbuff: don't BUG() on leftover length
-> in skb_copy_and_csum_bits()") made that a zero-fill and a checksum of 0.
-> Each caller takes the error path it already has for a failed copy:
-> 
->   - skb_segment() fails the segmentation, as the csum branch already
->     does when skb_copy_bits() fails.
->   - icmp_glue_bits() and icmpv6_getfrag() return the error, so the ICMP
->     error isn't sent.
->   - __ip_append_data() and __ip6_append_data() drop the new skb and
->     return -EFAULT, as they do when getfrag fails.
->   - vnet_skb_shape() fails the same way it does when its skb_copy_bits()
->     call fails.
->   - xdr_skb_read_bits() returns 0 without consuming anything, as it does
->     when skb_copy_bits() fails, so desc.count stays non-zero and
->     csum_partial_copy_to_xdr() fails.  csum_partial_copy_to_xdr() used
->     to checksum the bytes it hadn't copied before checking desc.count.
->     desc.offset and desc.count always add up to skb->len, so that only
->     ran when it was about to fail anyway, and on an unreadable skb
->     skb_checksum() would WARN.  Drop it.
->   - skb_copy_and_csum_dev() can't return an error, so it leaves the
->     checksum alone and the frame goes out with a bad one.  Its callers
->     are drivers that never see unreadable skbs anyway.
-> 
-> The zero-fill stays, so a caller that does send the buffer still
-> doesn't leak anything.
-> 
-> This was found by the Sashiko AI review of that commit, and
-> Mina suggested reporting the error from the helper rather than checking
-> for unreadable frags in skb_segment().
-> 
-> Link: https://lore.kernel.org/all/179148235783.434549.14322374227477832817@kernel.org/
-> Suggested-by: Mina Almasry <almasrymina@google.com>
-> Reviewed-by: Mina Almasry <almasrymina@google.com>
-> Assisted-by: LLM
-> Signed-off-by: Josef Bacik <josef@toxicpanda.com>
+This is a multi-part message in MIME format.
+--------------PZZxSv6fMb60yOagB00kKeOq
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: 8bit
 
-Hm, I do wonder isn't this missing the Fixes tag for ab9414ed70bd and 
-417261779eab? I don't have a strong opinion but since ab9414ed70bd will 
-be backported to stable (quite likely..) it makes sense to me.
+Hey Xen Team,
 
-> ---
->   drivers/net/ethernet/sun/sunvnet_common.c | 10 +++--
->   include/linux/skbuff.h                    |  4 +-
->   net/core/skbuff.c                         | 63 +++++++++++++++++++++----------
->   net/ipv4/icmp.c                           |  9 +++--
->   net/ipv4/ip_output.c                      | 11 ++++--
->   net/ipv6/icmp.c                           |  7 +++-
->   net/ipv6/ip6_output.c                     | 11 ++++--
->   net/sunrpc/socklib.c                      |  9 ++---
->   8 files changed, 83 insertions(+), 41 deletions(-)
-> 
-> diff --git a/drivers/net/ethernet/sun/sunvnet_common.c b/drivers/net/ethernet/sun/sunvnet_common.c
-> index 5cca95869052..4f229fcecc32 100644
-> --- a/drivers/net/ethernet/sun/sunvnet_common.c
-> +++ b/drivers/net/ethernet/sun/sunvnet_common.c
-> @@ -1167,9 +1167,13 @@ static inline struct sk_buff *vnet_skb_shape(struct sk_buff *skb, int ncookies)
->   
->   			/* copy the rest, with csum calculation */
->   			*(__sum16 *)(skb->data + offset) = 0;
-> -			csum = skb_copy_and_csum_bits(skb, start,
-> -						      nskb->data + start,
-> -						      skb->len - start);
-> +			if (skb_copy_and_csum_bits(skb, start,
-> +						   nskb->data + start,
-> +						   skb->len - start, &csum)) {
-> +				dev_kfree_skb(nskb);
-> +				dev_kfree_skb(skb);
-> +				return NULL;
-> +			}
->   
->   			/* add in the header checksums */
->   			if (skb->protocol == htons(ETH_P_IP)) {
-> diff --git a/include/linux/skbuff.h b/include/linux/skbuff.h
-> index af1cbc2799b7..09db32f70b53 100644
-> --- a/include/linux/skbuff.h
-> +++ b/include/linux/skbuff.h
-> @@ -4277,8 +4277,8 @@ void skb_free_datagram(struct sock *sk, struct sk_buff *skb);
->   int skb_kill_datagram(struct sock *sk, struct sk_buff *skb, unsigned int flags);
->   int skb_copy_bits(const struct sk_buff *skb, int offset, void *to, int len);
->   int skb_store_bits(struct sk_buff *skb, int offset, const void *from, int len);
-> -__wsum skb_copy_and_csum_bits(const struct sk_buff *skb, int offset, u8 *to,
-> -			      int len);
-> +int __must_check skb_copy_and_csum_bits(const struct sk_buff *skb, int offset,
-> +					u8 *to, int len, __wsum *csum);
+I'm hitting a reproducible hypervisor panic in the AMD non-fatal MCE
+polling path on a Ryzen 9 5950X (Zen 3). Eight occurrences since
+2026-09-09, between 12 hours and 2 weeks apart, always CPU 2.
 
-For consistency skb_copy_and_csum_bits() should use csump instead of 
-csum in the prototype to match the implementation and kernel-doc 
-parameter name.
+Environment
+-----------
+Xen:   4.20.4-pre (Debian 4.20.3+127-gc42374a105-0+deb13u1), and still
+        present in 4.20.5-pre (Debian 4.20.4+39-gf1e1321c87-0+deb13u1)
+dom0:  Linux 6.12.111+deb13-amd64 (Debian trixie), PV, 32 vCPUs
+CPU:   AMD Family 25 (0x19) Model 33 (0x21) Stepping 2, Ryzen 9 5950X,
+        microcode 0x0a201210
+Cmdline: dom0_mem=4096M,max:4096M ucode=scan console_timestamps=datems
 
->   int skb_splice_bits(struct sk_buff *skb, struct sock *sk, unsigned int offset,
->   		    struct pipe_inode_info *pipe, unsigned int len,
->   		    unsigned int flags);
-> diff --git a/net/core/skbuff.c b/net/core/skbuff.c
-> index 93c2f440b9ec..a2b52a5a61a9 100644
-> --- a/net/core/skbuff.c
-> +++ b/net/core/skbuff.c
-> @@ -3630,14 +3630,27 @@ EXPORT_SYMBOL(skb_checksum);
->   
->   /* Both of above in one bottle. */
->   
+The panic
+---------
+(XEN) [2026-10-19 08:58:18.727] Xen BUG at arch/x86/cpu/mcheck/mce_amd.c:100
+(XEN) CPU:    2
+(XEN) RIP:    e008:[<ffff82d04028a650>] mce_amd.c#mc_ec2type.part.0+0/0x10
+(XEN) rbx: 0000000000000445   r12: 0000000000000011   r15: 0000000000000446
+(XEN) Xen code around <ffff82d04028a650>:
+(XEN)  90 90 90 90 90 90 90 90 <0f> 0b 90 90 90 90 90 90 90 90 90 90 90 90
+(XEN) Xen call trace:
+(XEN)    [<ffff82d04028a650>] R mce_amd.c#mc_ec2type.part.0+0/0x10
+(XEN)    [<ffff82d04028a699>] S mc_amd_recoverable_scan+0x39/0x40
+(XEN)    [<ffff82d04028cfdd>] S mcheck_mca_logout+0x42d/0x840
+(XEN)    [<ffff82d04028a35c>] S amd_nonfatal.c#mce_amd_checkregs+0x1c/0x100
+(XEN)    [<ffff82d040240e8c>] S smp_call_function_interrupt+0x4c/0x90
+(XEN)    [<ffff82d0403123d5>] S do_IRQ+0x2a5/0x650
+(XEN)    [<ffff82d040201915>] S common_interrupt+0x135/0x150
+(XEN)    [<ffff82d0402883ca>] S cpu_idle.c#acpi_idle_do_entry+0x8a/0x140
+(XEN)    [<ffff82d0402887cf>] S cpu_idle.c#acpi_processor_idle+0x1ef/0x650
+(XEN)    [<ffff82d040302cf1>] S domain.c#idle_loop+0xc1/0x130
+(XEN) Panic on CPU 2
 
-I guess we can now remove this comment. I mean the kernel-doc being 
-added here makes it a bit redundant in my opinion.
+The outlined mc_ec2type.part.0 contains nothing but the ud2, so this is
+the "unreachable" default branch of mc_ec2type() -- the extended error
+code matches none of MC_EC_TLB_TYPE, MC_EC_MEM_TYPE, MC_EC_BUS_TYPE.
 
-> -__wsum skb_copy_and_csum_bits(const struct sk_buff *skb, int offset,
-> -				    u8 *to, int len)
-> +/**
-> + *	skb_copy_and_csum_bits - copy data out of an skb and checksum it
-> + *	@skb: source buffer
-> + *	@offset: offset in @skb to start copying from
-> + *	@to: destination buffer
-> + *	@len: number of bytes to copy
-> + *	@csump: where to store the checksum of the copied bytes
-> + *
-> + *	Return: 0 on success, or -EFAULT if @skb has unreadable frags or runs
-> + *	out before @len does.  On failure *@csump is not set and the part of
-> + *	@to that couldn't be filled is zeroed.
-> + */
-> +int skb_copy_and_csum_bits(const struct sk_buff *skb, int offset,
-> +			   u8 *to, int len, __wsum *csump)
->   {
->   	int start = skb_headlen(skb);
->   	int i, copy = start - offset;
->   	struct sk_buff *frag_iter;
->   	int pos = 0;
->   	__wsum csum = 0;
-> +	int err;
->   
->   	/* Copy header. */
->   	if (copy > 0) {
-> @@ -3646,7 +3659,7 @@ __wsum skb_copy_and_csum_bits(const struct sk_buff *skb, int offset,
->   		csum = csum_partial_copy_nocheck(skb->data + offset, to,
->   						 copy);
->   		if ((len -= copy) == 0)
-> -			return csum;
-> +			goto out;
->   		offset += copy;
->   		to     += copy;
->   		pos	= copy;
-> @@ -3656,7 +3669,7 @@ __wsum skb_copy_and_csum_bits(const struct sk_buff *skb, int offset,
->   		/* Don't hand the caller a buffer with stale bytes in it. */
->   		if (len > 0)
->   			memset(to, 0, len);
-> -		return 0;
-> +		return -EFAULT;
->   	}
->   
->   	for (i = 0; i < skb_shinfo(skb)->nr_frags; i++) {
-> @@ -3688,7 +3701,7 @@ __wsum skb_copy_and_csum_bits(const struct sk_buff *skb, int offset,
->   			}
->   
->   			if (!(len -= copy))
-> -				return csum;
-> +				goto out;
->   			offset += copy;
->   			to     += copy;
->   		}
-> @@ -3705,12 +3718,16 @@ __wsum skb_copy_and_csum_bits(const struct sk_buff *skb, int offset,
->   		if ((copy = end - offset) > 0) {
->   			if (copy > len)
->   				copy = len;
-> -			csum2 = skb_copy_and_csum_bits(frag_iter,
-> -						       offset - start,
-> -						       to, copy);
-> +			err = skb_copy_and_csum_bits(frag_iter, offset - start,
-> +						     to, copy, &csum2);
-> +			if (err) {
-> +				/* The child zeroed its part; zero the rest. */
-> +				memset(to + copy, 0, len - copy);
-> +				return err;
-> +			}
->   			csum = csum_block_add(csum, csum2, pos);
->   			if ((len -= copy) == 0)
-> -				return csum;
-> +				goto out;
->   			offset += copy;
->   			to     += copy;
->   			pos    += copy;
-> @@ -3722,9 +3739,11 @@ __wsum skb_copy_and_csum_bits(const struct sk_buff *skb, int offset,
->   		/* Don't hand the caller a buffer with stale bytes in it. */
->   		if (len > 0)
->   			memset(to, 0, len);
-> -		return 0;
-> +		return -EFAULT;
->   	}
-> -	return csum;
-> +out:
-> +	*csump = csum;
-> +	return 0;
->   }
->   EXPORT_SYMBOL(skb_copy_and_csum_bits);
->   
-> @@ -4006,9 +4025,13 @@ void skb_copy_and_csum_dev(const struct sk_buff *skb, u8 *to)
->   	skb_copy_from_linear_data(skb, to, csstart);
->   
->   	csum = 0;
-> -	if (csstart != skb->len)
-> -		csum = skb_copy_and_csum_bits(skb, csstart, to + csstart,
-> -					      skb->len - csstart);
-> +	/* On failure the rest of @to is zeroed; leave the checksum alone so
-> +	 * the frame goes out with a bad one.
-> +	 */
-> +	if (csstart != skb->len &&
-> +	    skb_copy_and_csum_bits(skb, csstart, to + csstart,
-> +				   skb->len - csstart, &csum))
-> +		return;
->   
->   	if (skb->ip_summed == CHECKSUM_PARTIAL) {
->   		long csstuff = csstart + skb->csum_offset;
-> @@ -5057,11 +5080,13 @@ struct sk_buff *skb_segment(struct sk_buff *head_skb,
->   			if (!csum) {
->   				if (!nskb->remcsum_offload)
->   					nskb->ip_summed = CHECKSUM_NONE;
-> -				SKB_GSO_CB(nskb)->csum =
-> -					skb_copy_and_csum_bits(head_skb, offset,
-> -							       skb_put(nskb,
-> -								       len),
-> -							       len);
-> +				if (skb_copy_and_csum_bits(head_skb, offset,
-> +							   skb_put(nskb, len),
-> +							   len,
-> +							   &SKB_GSO_CB(nskb)->csum)) {
-> +					err = -EFAULT;
-> +					goto err;
-> +				}
->   				SKB_GSO_CB(nskb)->csum_start =
->   					skb_headroom(nskb) + doffset;
->   			} else {
-> diff --git a/net/ipv4/icmp.c b/net/ipv4/icmp.c
-> index 90c0e22c29be..35008785e3d2 100644
-> --- a/net/ipv4/icmp.c
-> +++ b/net/ipv4/icmp.c
-> @@ -364,12 +364,15 @@ static int icmp_glue_bits(void *from, char *to, int offset, int len, int odd,
->   	DEFINE_RAW_FLEX(struct icmp_bxm, icmp_param, replyopts.opt.__data,
->   			IP_OPTIONS_DATA_FIXED_SIZE);
->   	__wsum csum;
-> +	int err;
->   
->   	icmp_param = from;
->   
-> -	csum = skb_copy_and_csum_bits(icmp_param->skb,
-> -				      icmp_param->offset + offset,
-> -				      to, len);
-> +	err = skb_copy_and_csum_bits(icmp_param->skb,
-> +				     icmp_param->offset + offset,
-> +				     to, len, &csum);
-> +	if (err)
-> +		return err;
->   
->   	skb->csum = csum_block_add(skb->csum, csum, odd);
->   	if (icmp_param->data.icmph.type <= NR_ICMP_TYPES &&
-> diff --git a/net/ipv4/ip_output.c b/net/ipv4/ip_output.c
-> index 3396f177a18d..f7da4538d05b 100644
-> --- a/net/ipv4/ip_output.c
-> +++ b/net/ipv4/ip_output.c
-> @@ -1162,9 +1162,14 @@ static int __ip_append_data(struct sock *sk,
->   			data += fragheaderlen + exthdrlen;
->   
->   			if (fraggap) {
-> -				skb->csum = skb_copy_and_csum_bits(
-> -					skb_prev, maxfraglen,
-> -					data + transhdrlen, fraggap);
-> +				if (skb_copy_and_csum_bits(skb_prev, maxfraglen,
-> +							   data + transhdrlen,
-> +							   fraggap,
-> +							   &skb->csum)) {
-> +					err = -EFAULT;
-> +					kfree_skb(skb);
-> +					goto error;
-> +				}
->   				skb_prev->csum = csum_sub(skb_prev->csum,
->   							  skb->csum);
->   				data += fraggap;
-> diff --git a/net/ipv6/icmp.c b/net/ipv6/icmp.c
-> index a95b0351824f..31ca3da80b1f 100644
-> --- a/net/ipv6/icmp.c
-> +++ b/net/ipv6/icmp.c
-> @@ -322,9 +322,12 @@ static int icmpv6_getfrag(void *from, char *to, int offset, int len, int odd, st
->   	struct icmpv6_msg *msg = (struct icmpv6_msg *) from;
->   	struct sk_buff *org_skb = msg->skb;
->   	__wsum csum;
-> +	int err;
->   
-> -	csum = skb_copy_and_csum_bits(org_skb, msg->offset + offset,
-> -				      to, len);
-> +	err = skb_copy_and_csum_bits(org_skb, msg->offset + offset,
-> +				     to, len, &csum);
-> +	if (err)
-> +		return err;
->   	skb->csum = csum_block_add(skb->csum, csum, odd);
->   	if (!(msg->type & ICMPV6_INFOMSG_MASK))
->   		nf_ct_attach(skb, org_skb);
-> diff --git a/net/ipv6/ip6_output.c b/net/ipv6/ip6_output.c
-> index 25fe0ba98b1a..d259e7dca8ba 100644
-> --- a/net/ipv6/ip6_output.c
-> +++ b/net/ipv6/ip6_output.c
-> @@ -1724,9 +1724,14 @@ static int __ip6_append_data(struct sock *sk,
->   			skb->transport_header = (skb->network_header +
->   						 fragheaderlen);
->   			if (fraggap) {
-> -				skb->csum = skb_copy_and_csum_bits(
-> -					skb_prev, maxfraglen,
-> -					data + transhdrlen, fraggap);
-> +				if (skb_copy_and_csum_bits(skb_prev, maxfraglen,
-> +							   data + transhdrlen,
-> +							   fraggap,
-> +							   &skb->csum)) {
-> +					err = -EFAULT;
-> +					kfree_skb(skb);
-> +					goto error;
-> +				}
->   				skb_prev->csum = csum_sub(skb_prev->csum,
->   							  skb->csum);
->   				data += fraggap;
-> diff --git a/net/sunrpc/socklib.c b/net/sunrpc/socklib.c
-> index d8d8842c7de5..5d780ad4ae3a 100644
-> --- a/net/sunrpc/socklib.c
-> +++ b/net/sunrpc/socklib.c
-> @@ -49,7 +49,9 @@ xdr_skb_read_bits(struct xdr_skb_reader *desc, void *to, size_t len)
->   	if (desc->need_checksum) {
->   		__wsum csum;
->   
-> -		csum = skb_copy_and_csum_bits(desc->skb, desc->offset, to, len);
-> +		if (unlikely(skb_copy_and_csum_bits(desc->skb, desc->offset,
-> +						    to, len, &csum)))
-> +			return 0;
->   		desc->csum = csum_block_add(desc->csum, csum, desc->offset);
->   	} else {
->   		if (unlikely(skb_copy_bits(desc->skb, desc->offset, to, len)))
-> @@ -142,11 +144,6 @@ int csum_partial_copy_to_xdr(struct xdr_buf *xdr, struct sk_buff *skb)
->   	desc.csum = csum_partial(skb->data, desc.offset, skb->csum);
->   	if (xdr_partial_copy_from_skb(xdr, &desc) < 0)
->   		return -1;
-> -	if (desc.offset != skb->len) {
-> -		__wsum csum2;
-> -		csum2 = skb_checksum(skb, desc.offset, skb->len - desc.offset, 0);
-> -		desc.csum = csum_block_add(desc.csum, csum2, desc.offset);
-> -	}
->   	if (desc.count)
->   		return -1;
->   	if (csum_fold(desc.csum))
-> 
+Across the eight occurrences, r12 appears to be the bank index from the
+loop in mcheck_mca_logout(), with rbx == 0x401 + 4 * r12 (MCi_STATUS)
+and r15 == rbx + 1. Three different banks are involved: 10, 17 and 23.
 
+Not a hardware defect
+---------------------
+- Started within days of upgrading two hosts from Debian bookworm
+   (Xen 4.17) to trixie (Xen 4.20). They had run 3 years on 4.17 with no
+   incident.
+- Three different banks, so not a single failing block.
+- Updating to the current Debian package (4.20.5-pre, built 2026-10-16)
+   changed nothing.
+
+Possibly related: 532988dccc19 ("x86/mcheck: fix mca_allbanks
+updating").
+
+Also possibly related on the Linux side: 0422b07bc4c2 ("x86/mce/amd:
+Filter bogus hardware errors on Zen3 clients"), where bogus MCA values
+on Zen 3 are filtered rather than treated as errors.
+https://ratatoskr.run/stable/2026/04/7143905
+
+Diagnostics / workaround
+------------------------
+mce_verbosity=verbose yields nothing useful.
+max_cstate=1 made no difference. mce=false is the only thing that stops
+it, and it is what I'm running now.
+
+One more thing: the host does not actually reboot after the panic.
+"Reboot in five seconds" is printed, but the ring buffer continues with
+normal activity minutes later and the remaining 31 CPUs keep running.
+CPU 2 stays wedged, and "xl debug-keys t" then hangs. Afterwards dom0
+and guest vCPUs start losing timer interrupts permanently (RCU stalls
+with a frozen timer-softirq count while dynticks keeps advancing), so
+VMs hang silently hours or days later.
+
+
+I've attached the full xl dmesg log of the last crash, and I'm happy
+to provide more if needed. I can also test patches.
+
+Thanks for your work, and thanks in advance for taking a look.
+
+Peter
+
+--------------PZZxSv6fMb60yOagB00kKeOq
+Content-Type: text/plain; charset=UTF-8; name="xl_dmesg.log"
+Content-Disposition: attachment; filename="xl_dmesg.log"
+Content-Transfer-Encoding: base64
+
+KFhFTikgWzAwMDAwMDMxYjk3YjYwOGVdIFhlbiB2ZXJzaW9uIDQuMjAuNS1wcmUgKERlYmlh
+biA0LjIwLjQrMzktZ2YxZTEzMjFjODctMCtkZWIxM3UxKSAocGtnLXhlbi1kZXZlbEBsaXN0
+cy5hbGlvdGguZGViaWFuLm9yZykgKHg4Nl82NC1saW51eC1nbnUtZ2NjIChEZWJpYW4gMTQu
+Mi4wLTE5KSAxNC4yLjApIGRlYnVnPW4gRnJpIE9jdCAxNiAxNDoyODo0NyBVVEMgMjAyNg0K
+KFhFTikgWzAwMDAwMDMxYjk4MTZjYzBdIGJ1aWxkLWlkOiBmNmIyNTg4OGU0MmRkMThlOTUx
+ZjMwOTdiYTg2MWM5OTk2YTViNzRjDQooWEVOKSBbMDAwMDAwMzFiOTgzOGE3ZV0gQ1BVIFZl
+bmRvcjogQU1ELCBGYW1pbHkgMjUgKDB4MTkpLCBNb2RlbCAzMyAoMHgyMSksIFN0ZXBwaW5n
+IDIgKHJhdyAwMGEyMGYxMikNCihYRU4pIFswMDAwMDAzMWI5ODY2Yzg4XSBCU1AgbWljcm9j
+b2RlIHJldmlzaW9uOiAweDBhMjAxMjEwDQooWEVOKSBbMDAwMDAwMzFiOTg4MTcyMF0gV0FS
+TklORzogUGxhdGZvcm0gdnVsbmVyYWJsZSB0byBFbnRyeXNpZ24gKFNCLTcwMzMsIENWRS0y
+MDI0LTM2MzQ3KSAtIGZpcm13YXJlIHVwZGF0ZSByZXF1aXJlZA0KKFhFTikgWzAwMDAwMDMx
+Yjk4Y2Y1OTJdIEJvb3Rsb2FkZXI6IEdSVUIgMi4xMi05K2RlYjEzdTINCihYRU4pIFswMDAw
+MDAzMWI5OGRjZDIwXSBDb21tYW5kIGxpbmU6IHBsYWNlaG9sZGVyIGRvbTBfbWVtPTQwOTZN
+LG1heDo0MDk2TSB1Y29kZT1zY2FuIGNvbnNvbGVfdGltZXN0YW1wcz1kYXRlbXMNCihYRU4p
+IFswMDAwMDAzMWI5OTAzMjMwXSBYZW4gaW1hZ2UgbG9hZCBiYXNlIGFkZHJlc3M6IDB4YmU4
+MDAwMDANCihYRU4pIFswMDAwMDAzMWI5OTIwMTBhXSBWaWRlbyBpbmZvcm1hdGlvbjoNCihY
+RU4pIFswMDAwMDAzMWI5OTMzN2IwXSAgVkdBIGlzIHRleHQgbW9kZSA4MHgyNSwgZm9udCA4
+eDE2DQooWEVOKSBbMDAwMDAwMzFiOTk0ZTI2YV0gIFZCRS9EREMgbWV0aG9kczogbm9uZTsg
+RURJRCB0cmFuc2ZlciB0aW1lOiAxIHNlY29uZHMNCihYRU4pIFswMDAwMDAzMWI5OTcxNjc4
+XSAgRURJRCBpbmZvIG5vdCByZXRyaWV2ZWQgYmVjYXVzZSBubyBEREMgcmV0cmlldmFsIG1l
+dGhvZCBkZXRlY3RlZA0KKFhFTikgWzAwMDAwMDMxYjk5OWExNjJdIERpc2MgaW5mb3JtYXRp
+b246DQooWEVOKSBbMDAwMDAwMzFiOTlhZDBmZV0gIEZvdW5kIDIgTUJSIHNpZ25hdHVyZXMN
+CihYRU4pIFswMDAwMDAzMWI5OWMyYzA4XSAgRm91bmQgMiBFREQgaW5mb3JtYXRpb24gc3Ry
+dWN0dXJlcw0KKFhFTikgWzAwMDAwMDMxYjk5ZGRkY2NdIEVuYWJsaW5nIFN1cGVydmlzb3Ig
+U2hhZG93IFN0YWNrcw0KKFhFTikgWzAwMDAwMDMxYjk5Zjk3MDBdIEZhaWxlZCB0byBjb252
+ZXJ0IEU4MjAgUkFNIGU2Y2MwLWU3M2JkIHRvIFJFU0VSVkVEDQooWEVOKSBbMDAwMDAwMzFi
+OWExOWY3ZV0gRmFpbGVkIHRvIGNvbnZlcnQgRTgyMCBSQU0gZTZjYzAtZTczYmQgdG8gUkVT
+RVJWRUQNCihYRU4pIFswMDAwMDAzMWI5YTNlMDJhXSBYZW4tZTgyMCBSQU0gbWFwOg0KKFhF
+TikgWzAwMDAwMDMxYjlmZGVmOWVdICBbMDAwMDAwMDAwMDAwMDAwMCwgMDAwMDAwMDAwMDA5
+ZWJmZl0gKHVzYWJsZSkNCihYRU4pIFswMDAwMDAzMWJhNTYyMjAyXSAgWzAwMDAwMDAwMDAw
+OWVjMDAsIDAwMDAwMDAwMDAwOWZmZmZdIChyZXNlcnZlZCkNCihYRU4pIFswMDAwMDAzMWJh
+YWY0NTk2XSAgWzAwMDAwMDAwMDAwZTAwMDAsIDAwMDAwMDAwMDAwZmZmZmZdIChyZXNlcnZl
+ZCkNCihYRU4pIFswMDAwMDAzMWJiMDg1NmQ2XSAgWzAwMDAwMDAwMDAxMDAwMDAsIDAwMDAw
+MDAwMDliZmVmZmZdICh1c2FibGUpDQooWEVOKSBbMDAwMDAwMzFiYjYxNmU5OF0gIFswMDAw
+MDAwMDA5YmZmMDAwLCAwMDAwMDAwMDA5ZmZmZmZmXSAocmVzZXJ2ZWQpDQooWEVOKSBbMDAw
+MDAwMzFiYmMwYzdhY10gIFswMDAwMDAwMDBhMDAwMDAwLCAwMDAwMDAwMDBhMWZmZmZmXSAo
+dXNhYmxlKQ0KKFhFTikgWzAwMDAwMDMxYmMxOWM1MDBdICBbMDAwMDAwMDAwYTIwMDAwMCwg
+MDAwMDAwMDAwYTIwZGZmZl0gKEFDUEkgTlZTKQ0KKFhFTikgWzAwMDAwMDMxYmM3MmNlMDRd
+ICBbMDAwMDAwMDAwYTIwZTAwMCwgMDAwMDAwMDAwYWZmZmZmZl0gKHVzYWJsZSkNCihYRU4p
+IFswMDAwMDAzMWJjY2JjYThjXSAgWzAwMDAwMDAwMGIwMDAwMDAsIDAwMDAwMDAwMGIwMWZm
+ZmZdIChyZXNlcnZlZCkNCihYRU4pIFswMDAwMDAzMWJkMjRjOTU2XSAgWzAwMDAwMDAwMGIw
+MjAwMDAsIDAwMDAwMDAwYmIzMGJmZmZdICh1c2FibGUpDQooWEVOKSBbMDAwMDAwMzFiZDdk
+Y2RmOF0gIFswMDAwMDAwMGJiMzBjMDAwLCAwMDAwMDAwMGJjYjBjZmZmXSAocmVzZXJ2ZWQp
+DQooWEVOKSBbMDAwMDAwMzFiZGQ2YzdiNl0gIFswMDAwMDAwMGJjYjBkMDAwLCAwMDAwMDAw
+MGJjYjRiZmZmXSAoQUNQSSBkYXRhKQ0KKFhFTikgWzAwMDAwMDMxYmUyZmU2ODJdICBbMDAw
+MDAwMDBiY2I0YzAwMCwgMDAwMDAwMDBiZDIwM2ZmZl0gKEFDUEkgTlZTKQ0KKFhFTikgWzAw
+MDAwMDMxYmU4OGZiZTBdICBbMDAwMDAwMDBiZDIwNDAwMCwgMDAwMDAwMDBiZTFmZWZmZl0g
+KHJlc2VydmVkKQ0KKFhFTikgWzAwMDAwMDMxYmVlODU3NThdICBbMDAwMDAwMDBiZTFmZjAw
+MCwgMDAwMDAwMDBiZWZmZmZmZl0gKHVzYWJsZSkNCihYRU4pIFswMDAwMDAzMWJmNDE1MGIw
+XSAgWzAwMDAwMDAwYmYwMDAwMDAsIDAwMDAwMDAwYmZmZmZmZmZdIChyZXNlcnZlZCkNCihY
+RU4pIFswMDAwMDAzMWJmOWE2ZTA2XSAgWzAwMDAwMDAwZjAwMDAwMDAsIDAwMDAwMDAwZjdm
+ZmZmZmZdIChyZXNlcnZlZCkNCihYRU4pIFswMDAwMDAzMWJmZjM5MDQ2XSAgWzAwMDAwMDAw
+ZmQyMDAwMDAsIDAwMDAwMDAwZmQyZmZmZmZdIChyZXNlcnZlZCkNCihYRU4pIFswMDAwMDAz
+MWMwNGNhOGY2XSAgWzAwMDAwMDAwZmQ2MDAwMDAsIDAwMDAwMDAwZmQ3ZmZmZmZdIChyZXNl
+cnZlZCkNCihYRU4pIFswMDAwMDAzMWMwYTViNzI4XSAgWzAwMDAwMDAwZmVhMDAwMDAsIDAw
+MDAwMDAwZmVhMGZmZmZdIChyZXNlcnZlZCkNCihYRU4pIFswMDAwMDAzMWMwZmVkODM2XSAg
+WzAwMDAwMDAwZmViODAwMDAsIDAwMDAwMDAwZmVjMDFmZmZdIChyZXNlcnZlZCkNCihYRU4p
+IFswMDAwMDAzMWMxNTdmMjE4XSAgWzAwMDAwMDAwZmVjMTAwMDAsIDAwMDAwMDAwZmVjMTBm
+ZmZdIChyZXNlcnZlZCkNCihYRU4pIFswMDAwMDAzMWMxYjExM2QwXSAgWzAwMDAwMDAwZmVj
+MzAwMDAsIDAwMDAwMDAwZmVjMzBmZmZdIChyZXNlcnZlZCkNCihYRU4pIFswMDAwMDAzMWMy
+MGE1MDVjXSAgWzAwMDAwMDAwZmVkMDAwMDAsIDAwMDAwMDAwZmVkMDBmZmZdIChyZXNlcnZl
+ZCkNCihYRU4pIFswMDAwMDAzMWMyNjliMTAyXSAgWzAwMDAwMDAwZmVkNDAwMDAsIDAwMDAw
+MDAwZmVkNDRmZmZdIChyZXNlcnZlZCkNCihYRU4pIFswMDAwMDAzMWMyYzJjMzMwXSAgWzAw
+MDAwMDAwZmVkODAwMDAsIDAwMDAwMDAwZmVkOGZmZmZdIChyZXNlcnZlZCkNCihYRU4pIFsw
+MDAwMDAzMWMzMWJkMjk0XSAgWzAwMDAwMDAwZmVkYzIwMDAsIDAwMDAwMDAwZmVkY2ZmZmZd
+IChyZXNlcnZlZCkNCihYRU4pIFswMDAwMDAzMWMzNzRmMjRlXSAgWzAwMDAwMDAwZmVkZDQw
+MDAsIDAwMDAwMDAwZmVkZDVmZmZdIChyZXNlcnZlZCkNCihYRU4pIFswMDAwMDAzMWMzY2Ux
+MWM0XSAgWzAwMDAwMDAwZmYwMDAwMDAsIDAwMDAwMDAwZmZmZmZmZmZdIChyZXNlcnZlZCkN
+CihYRU4pIFswMDAwMDAzMWM0MjcyYWI4XSAgWzAwMDAwMDAxMDAwMDAwMDAsIDAwMDAwMDIw
+M2YyZmZmZmZdICh1c2FibGUpDQooWEVOKSBbMDAwMDAwMzFjNDgwMmJhMl0gIFswMDAwMDAy
+MDNmMzAwMDAwLCAwMDAwMDAyMDNmZmZmZmZmXSAocmVzZXJ2ZWQpDQooWEVOKSBbMDAwMDAw
+MzFjODI0NjliY10gQUNQSTogUlNEUCAwMDBGMDVCMCwgMDAyNCAocjIgQUxBU0tBKQ0KKFhF
+TikgWzAwMDAwMDMxYzg3YjRmYjJdIEFDUEk6IFhTRFQgQkQxRUM3MjgsIDAwQ0MgKHIxIEFM
+QVNLQSAgIEEgTSBJICAgMTA3MjAwOSBBTUkgICAxMDAwMDEzKQ0KKFhFTikgWzAwMDAwMDMx
+YzkzMjU4MTRdIEFDUEk6IEZBQ1AgQkNCM0QwMDAsIDAxMTQgKHI2IEFMQVNLQSAgIEEgTSBJ
+ICAgMTA3MjAwOSBBTUkgICAgIDEwMDEzKQ0KKFhFTikgWzAwMDAwMDMxYzllMTc5MTBdIEFD
+UEk6IERTRFQgQkNCMzcwMDAsIDVGNkQgKHIyIEFMQVNLQSAgIEEgTSBJICAgMTA3MjAwOSBJ
+TlRMIDIwMTIwOTEzKQ0KKFhFTikgWzAwMDAwMDMxY2E5MGEwNGFdIEFDUEk6IEZBQ1MgQkQx
+RTcwMDAsIDAwNDANCihYRU4pIFswMDAwMDAzMWNhZTc2MzMwXSBBQ1BJOiBTU0RUIEJDQjQz
+MDAwLCA4Q0U5IChyMiAgICBBTUQgQW1kVGFibGUgICAgICAgIDIgTVNGVCAgNDAwMDAwMCkN
+CihYRU4pIFswMDAwMDAzMWNiOTc2OTAyXSBBQ1BJOiBTU0RUIEJDQjNGMDAwLCAzQjhFIChy
+MiAgICBBTUQgIEFNRCBBT0QgICAgICAgIDEgSU5UTCAyMDEyMDkxMykNCihYRU4pIFswMDAw
+MDAzMWNjNDY5ZjFjXSBBQ1BJOiBTU0RUIEJDQjNFMDAwLCAwM0YxIChyMiBBTEFTS0EgIENQ
+VVNTRFQgIDEwNzIwMDkgQU1JICAgMTA3MjAwOSkNCihYRU4pIFswMDAwMDAzMWNjZmM5YWFl
+XSBBQ1BJOiBGSURUIEJDQjM2MDAwLCAwMDlDIChyMSBBTEFTS0EgICAgQSBNIEkgIDEwNzIw
+MDkgQU1JICAgICAxMDAxMykNCihYRU4pIFswMDAwMDAzMWNkYWJkNWQ0XSBBQ1BJOiBNQ0ZH
+IEJDQjM1MDAwLCAwMDNDIChyMSBBTEFTS0EgICAgQSBNIEkgIDEwNzIwMDkgTVNGVCAgICAx
+MDAxMykNCihYRU4pIFswMDAwMDAzMWNlNWFmOTc4XSBBQ1BJOiBBQUZUIEJDQjM0MDAwLCAw
+MDY4IChyMSBBTEFTS0EgT0VNQUFGVCAgIDEwNzIwMDkgTVNGVCAgICAgICA5NykNCihYRU4p
+IFswMDAwMDAzMWNmMGEzNTI2XSBBQ1BJOiBIUEVUIEJDQjMzMDAwLCAwMDM4IChyMSBBTEFT
+S0EgICAgQSBNIEkgIDEwNzIwMDkgQU1JICAgICAgICAgNSkNCihYRU4pIFswMDAwMDAzMWNm
+YmZkOTU0XSBBQ1BJOiBJVlJTIEJDQjMyMDAwLCAwMEQwIChyMiAgQU1EICAgQW1kVGFibGUg
+ICAgICAgIDEgQU1EICAgICAgICAgMSkNCihYRU4pIFswMDAwMDAzMWQwNmVlNmE4XSBBQ1BJ
+OiBGUERUIEJDQjMxMDAwLCAwMDQ0IChyMSBBTEFTS0EgICBBIE0gSSAgIDEwNzIwMDkgQU1J
+ICAgMTAwMDAxMykNCihYRU4pIFswMDAwMDAzMWQxMWUxMjIyXSBBQ1BJOiBQQ0NUIEJDQjMw
+MDAwLCAwMDZFIChyMiAgICBBTUQgQW1kVGFibGUgICAgICAgIDEgQU1EICAgICAgICAgMSkN
+CihYRU4pIFswMDAwMDAzMWQxY2QzZTAyXSBBQ1BJOiBTU0RUIEJDQjI3MDAwLCA4MjEzIChy
+MiAgICBBTUQgQW1kVGFibGUgICAgICAgIDEgQU1EICAgICAgICAgMSkNCihYRU4pIFswMDAw
+MDAzMWQyN2M2MzNlXSBBQ1BJOiBDUkFUIEJDQjI1MDAwLCAxNzEwIChyMSAgICBBTUQgQW1k
+VGFibGUgICAgICAgIDEgQU1EICAgICAgICAgMSkNCihYRU4pIFswMDAwMDAzMWQzMzFmMTYw
+XSBBQ1BJOiBDRElUIEJDQjI0MDAwLCAwMDI5IChyMSAgICBBTUQgQW1kVGFibGUgICAgICAg
+IDEgQU1EICAgICAgICAgMSkNCihYRU4pIFswMDAwMDAzMWQzZTExYjg2XSBBQ1BJOiBTU0RU
+IEJDQjIzMDAwLCAwNTJDIChyMiAgICBBTUQgQXJ0aWNOT0kgICAgICAgIDEgSU5UTCAyMDEy
+MDkxMykNCihYRU4pIFswMDAwMDAzMWQ0OTA2OTg4XSBBQ1BJOiBTU0RUIEJDQjFGMDAwLCAz
+N0RDIChyMiAgICBBTUQgICBBcnRpY04gICAgICAgIDEgSU5UTCAyMDEyMDkxMykNCihYRU4p
+IFswMDAwMDAzMWQ1M2ZiZTBjXSBBQ1BJOiBXU01UIEJDQjFFMDAwLCAwMDI4IChyMSBBTEFT
+S0EgICBBIE0gSSAgIDEwNzIwMDkgQU1JICAgICAxMDAxMykNCihYRU4pIFswMDAwMDAzMWQ1
+ZWYyMGU4XSBBQ1BJOiBBUElDIEJDQjFEMDAwLCAwMTVFIChyNCBBTEFTS0EgICBBIE0gSSAg
+IDEwNzIwMDkgQU1JICAgICAxMDAxMykNCihYRU4pIFswMDAwMDAzMWQ2YTQ5MzI2XSBBQ1BJ
+OiBTU0RUIEJDQjFDMDAwLCAwMDdEIChyMiAgICBBTUQgQXJ0aWNESVMgICAgICAgIDEgSU5U
+TCAyMDEyMDkxMykNCihYRU4pIFswMDAwMDAzMWQ3NTNkYzFjXSBBQ1BJOiBTU0RUIEJDQjFB
+MDAwLCAxMEFGIChyMiAgICBBTUQgICBBcnRpY0MgICAgICAgIDEgSU5UTCAyMDEyMDkxMykN
+CihYRU4pIFswMDAwMDAzMWQ4MDJmZjM4XSBBQ1BJOiBTU0RUIEJDQjE5MDAwLCAwMEJGIChy
+MSAgICBBTUQgQW1kVGFibGUgICAgIDEwMDAgSU5UTCAyMDEyMDkxMykNCihYRU4pIFswMDAw
+MDAzMWQ4YjVmMWQ2XSBTeXN0ZW0gUkFNOiAxMzA5OTFNQiAoMTM0MTM1Mjgwa0IpDQooWEVO
+KSBbMDAwMDAwMzFlMzU1OGFlOF0gTm8gTlVNQSBjb25maWd1cmF0aW9uIGZvdW5kDQooWEVO
+KSBbMDAwMDAwMzFlM2FjMTUzYV0gRmFraW5nIGEgbm9kZSBhdCAwMDAwMDAwMDAwMDAwMDAw
+LTAwMDAwMDIwM2YzMDAwMDANCihYRU4pIFswMDAwMDAzMWY2MjJlOTEwXSBEb21haW4gaGVh
+cCBpbml0aWFsaXNlZA0KKFhFTikgWzAwMDAwMDMxZmQxYWRjNDBdIFNNQklPUyAzLjMgcHJl
+c2VudC4NCihYRU4pIFswMDAwMDAzMWZkNzI1NjkwXSBQQ0k6IE1DRkcgY29uZmlndXJhdGlv
+biAwOiBiYXNlIGYwMDAwMDAwIHNlZ21lbnQgMDAwMCBidXNlcyAwMCAtIDdmDQooWEVOKSBb
+MDAwMDAwMzFmZTIxMjlmY10gUENJOiBNQ0ZHIGFyZWEgYXQgZjAwMDAwMDAgcmVzZXJ2ZWQg
+aW4gRTgyMA0KKFhFTikgWzAwMDAwMDMxZmU3OGQxZGFdIFBDSTogVXNpbmcgTUNGRyBmb3Ig
+c2VnbWVudCAwMDAwIGJ1cyAwMC03Zg0KKFhFTikgWzAwMDAwMDMxZmVkYzc2MTZdIFVzaW5n
+IEFQSUMgZHJpdmVyIGRlZmF1bHQNCihYRU4pIFswMDAwMDAzMWZmMzQ4NTZhXSBBQ1BJOiBQ
+TS1UaW1lciBJTyBQb3J0OiAweDgwOCAoMzIgYml0cykNCihYRU4pIFswMDAwMDAzMWZmOGI3
+ZGI0XSBBQ1BJOiB2NSBTTEVFUCBJTkZPOiBjb250cm9sWzA6MF0sIHN0YXR1c1swOjBdDQoo
+WEVOKSBbMDAwMDAwMzFmZmU0NjBkZV0gQUNQSTogU0xFRVAgSU5GTzogcG0xeF9jbnRbMTo4
+MDQsMTowXSwgcG0xeF9ldnRbMTo4MDAsMTowXQ0KKFhFTikgWzAwMDAwMDMyMDA5NDgxYTZd
+IEFDUEk6IDMyLzY0WCBGQUNTIGFkZHJlc3MgbWlzbWF0Y2ggaW4gRkFEVCAtIGJkMWU3MDAw
+LzAwMDAwMDAwMDAwMDAwMDAsIHVzaW5nIDMyDQooWEVOKSBbMDAwMDAwMzIwMTQzYzNkNl0g
+QUNQSTogICAgICAgICAgICAgd2FrZXVwX3ZlY1tiZDFlNzAwY10sIHZlY19zaXplWzIwXQ0K
+KFhFTikgWzAwMDAwMDMyMDFhYWRkMDBdIE92ZXJyaWRpbmcgQVBJQyBkcml2ZXIgd2l0aCBi
+aWdzbXANCihYRU4pIFswMDAwMDAzMjAyMDQwMjBhXSBBQ1BJOiBJT0FQSUMgKGlkWzB4MjFd
+IGFkZHJlc3NbMHhmZWMwMDAwMF0gZ3NpX2Jhc2VbMF0pDQooWEVOKSBbMDAwMDAwMzIwMjYy
+MDJkZV0gSU9BUElDWzBdOiBhcGljX2lkIDMzLCB2ZXJzaW9uIDMzLCBhZGRyZXNzIDB4ZmVj
+MDAwMDAsIEdTSSAwLTIzDQooWEVOKSBbMDAwMDAwMzIwMzEyN2M4MF0gQUNQSTogSU9BUElD
+IChpZFsweDIyXSBhZGRyZXNzWzB4ZmVjMDEwMDBdIGdzaV9iYXNlWzI0XSkNCihYRU4pIFsw
+MDAwMDAzMjAzYzE2YjZhXSBJT0FQSUNbMV06IGFwaWNfaWQgMzQsIHZlcnNpb24gMzMsIGFk
+ZHJlc3MgMHhmZWMwMTAwMCwgR1NJIDI0LTU1DQooWEVOKSBbMDAwMDAwMzIwNDcyOTUyOF0g
+QUNQSTogSU5UX1NSQ19PVlIgKGJ1cyAwIGJ1c19pcnEgMCBnbG9iYWxfaXJxIDIgZGZsIGRm
+bCkNCihYRU4pIFswMDAwMDAzMjA1MjExNjgwXSBBQ1BJOiBJTlRfU1JDX09WUiAoYnVzIDAg
+YnVzX2lycSA5IGdsb2JhbF9pcnEgOSBsb3cgbGV2ZWwpDQooWEVOKSBbMDAwMDAwMzIwNWQ4
+NjlhOF0gQUNQSTogSFBFVCBpZDogMHgxMDIyODIwMSBiYXNlOiAweGZlZDAwMDAwDQooWEVO
+KSBbMDAwMDAwMzIwNjJmNjA5ZV0gVXNpbmcgQUNQSSAoTUFEVCkgZm9yIFNNUCBjb25maWd1
+cmF0aW9uIGluZm9ybWF0aW9uDQooWEVOKSBbMDAwMDAwMzIwNjg4NTI4Nl0gU01QOiBBbGxv
+d2luZyAzMiBDUFVzICgwIGhvdHBsdWcgQ1BVcykNCihYRU4pIFswMDAwMDAzMjA2ZTFkZDJh
+XSBJUlEgbGltaXRzOiA1NiBHU0ksIDY2MDAgTVNJL01TSS1YDQooWEVOKSBbMDAwMDAwMzIw
+NzU5ZjYzMl0gQU1ELVZpOiBJT01NVSBFeHRlbmRlZCBGZWF0dXJlczoNCihYRU4pIFswMDAw
+MDAzMjA3YjBiMTIwXSAtIFBlcmlwaGVyYWwgUGFnZSBTZXJ2aWNlIFJlcXVlc3QNCihYRU4p
+IFswMDAwMDAzMjA4MDhjYjdhXSAtIE5YIGJpdA0KKFhFTikgWzAwMDAwMDMyMDg2MDM1MzBd
+IC0gSW52YWxpZGF0ZSBBbGwgQ29tbWFuZA0KKFhFTikgWzAwMDAwMDMyMDhiNzdhMWNdIC0g
+UGVyZm9ybWFuY2UgQ291bnRlcnMNCihYRU4pIFswMDAwMDAzMjA5MTU2YmVlXSAtIEhvc3Qg
+QWRkcmVzcyBUcmFuc2xhdGlvbiBTaXplOiAweDINCihYRU4pIFswMDAwMDAzMjA5NmQ3YzUy
+XSAtIEd1ZXN0IEFkZHJlc3MgVHJhbnNsYXRpb24gU2l6ZTogMA0KKFhFTikgWzAwMDAwMDMy
+MDljNWNmYzhdIC0gR3Vlc3QgQ1IzIFJvb3QgVGFibGUgTGV2ZWw6IDB4MQ0KKFhFTikgWzAw
+MDAwMDMyMGExZTFlYmFdIC0gTWF4aW11bSBQQVNJRDogMHhmDQooWEVOKSBbMDAwMDAwMzIw
+YTc1ZGI1MF0gLSBTTUkgRmlsdGVyIFJlZ2lzdGVyOiAweDENCihYRU4pIFswMDAwMDAzMjBh
+Y2Q2ZDIyXSAtIFNNSSBGaWx0ZXIgUmVnaXN0ZXIgQ291bnQ6IDB4Mg0KKFhFTikgWzAwMDAw
+MDMyMGIyNTY5YmNdIC0gR3Vlc3QgVmlydHVhbCBBUElDIE1vZGVzOiAweDENCihYRU4pIFsw
+MDAwMDAzMjBiN2Q3OWRjXSAtIER1YWwgUFBSIExvZzogMHgyDQooWEVOKSBbMDAwMDAwMzIw
+YmQ1MTM4NF0gLSBEdWFsIEV2ZW50IExvZzogMHgyDQooWEVOKSBbMDAwMDAwMzIwYzMyYzUz
+MF0gLSBVc2VyIC8gU3VwZXJ2aXNvciBQYWdlIFByb3RlY3Rpb24NCihYRU4pIFswMDAwMDAz
+MjBjOGFjZDM2XSAtIERldmljZSBUYWJsZSBTZWdtZW50YXRpb246IDB4Mw0KKFhFTikgWzAw
+MDAwMDMyMGNlMzE3ZThdIC0gUFBSIExvZyBPdmVyZmxvdyBFYXJseSBXYXJuaW5nDQooWEVO
+KSBbMDAwMDAwMzIwZDNiNDE0NF0gLSBQUFIgQXV0b21hdGljIFJlc3BvbnNlDQooWEVOKSBb
+MDAwMDAwMzIwZDkzMmRjY10gLSBNZW1vcnkgQWNjZXNzIFJvdXRpbmcgYW5kIENvbnRyb2w6
+IDB4MQ0KKFhFTikgWzAwMDAwMDMyMGRlYjZlODhdIC0gQmxvY2sgU3RvcE1hcmsgTWVzc2Fn
+ZQ0KKFhFTikgWzAwMDAwMDMyMGU0M2E4NWNdIC0gUGVyZm9ybWFuY2UgT3B0aW1pemF0aW9u
+DQooWEVOKSBbMDAwMDAwMzIwZTliNzRjMF0gLSBNU0kgQ2FwYWJpbGl0eSBNTUlPIEFjY2Vz
+cw0KKFhFTikgWzAwMDAwMDMyMGVmMzU1NTRdIC0gR3Vlc3QgSS9PIFByb3RlY3Rpb24NCihY
+RU4pIFswMDAwMDAzMjBmNGIxOGIwXSAtIEhvc3QgQWNjZXNzDQooWEVOKSBbMDAwMDAwMzIw
+ZmE4YWYyMl0gLSBFbmhhbmNlZCBQUFIgSGFuZGxpbmcNCihYRU4pIFswMDAwMDAzMjBmZmZl
+ZTE0XSAtIEF0dHJpYnV0ZSBGb3J3YXJkDQooWEVOKSBbMDAwMDAwMzIxMDU3NmUxYV0gLSBW
+aXJ0dWFsaXplZCBJT01NVQ0KKFhFTikgWzAwMDAwMDMyMTBhZWNhODhdIC0gVk1HdWFyZCBJ
+L08gU3VwcG9ydA0KKFhFTikgWzAwMDAwMDMyMTEwNjNlZGVdIC0gVk0gVGFibGUgU2l6ZTog
+MHgyDQooWEVOKSBbMDAwMDAwMzIxMmUzYjBjMF0gU3dpdGNoZWQgdG8gQVBJQyBkcml2ZXIg
+eDJhcGljX21peGVkDQooWEVOKSBbMDAwMDAwMzIxMzQwZDgwOF0gQ1BVMDogMjIwMCAuLi4g
+MzQwMCBNSHoNCihYRU4pIFswMDAwMDAzMjEzOTczODFlXSB4c3RhdGU6IHNpemU6IDB4OTg4
+IGFuZCBzdGF0ZXM6IDB4MjA3DQooWEVOKSBbMDAwMDAwMzIxM2YxNGZmMF0gQ1BVMDogQU1E
+IEZhbTE5aCBtYWNoaW5lIGNoZWNrIHJlcG9ydGluZyBlbmFibGVkDQooWEVOKSBbMDAwMDAw
+MzIxNDQ4ZGQ4Ml0gU3BlY3VsYXRpdmUgbWl0aWdhdGlvbiBmYWNpbGl0aWVzOg0KKFhFTikg
+WzAwMDAwMDMyMTRhMTU4ZjJdICAgSGFyZHdhcmUgaGludHM6IFNUSUJQX0FMV0FZUyBJQlJT
+X0ZBU1QgSUJSU19TQU1FX01PREUNCihYRU4pIFswMDAwMDAzMjE0ZmE2MjVjXSAgIEhhcmR3
+YXJlIGZlYXR1cmVzOiBJQlBCIElCUlMgU1RJQlAgU1NCRCBQU0ZEDQooWEVOKSBbMDAwMDAw
+MzIxNTUzOGU0ZV0gICBDb21waWxlZC1pbiBzdXBwb3J0OiBJTkRJUkVDVF9USFVOSyBSRVRV
+Uk5fVEhVTksgSEFSREVOX0FSUkFZIEhBUkRFTl9CUkFOQ0ggSEFSREVOX0dVRVNUX0FDQ0VT
+UyBIQVJERU5fTE9DSw0KKFhFTikgWzAwMDAwMDMyMTYwNTlkYWVdICAgWGVuIHNldHRpbmdz
+OiBCVEktVGh1bms6IEpNUCwgU1BFQ19DVFJMOiBJQlJTKyBTVElCUCsgU1NCRC0gUFNGRC0s
+IE90aGVyOiBCUkFOQ0hfSEFSREVODQooWEVOKSBbMDAwMDAwMzIxNmJkNGZhYV0gICBTdXBw
+b3J0IGZvciBIVk0gVk1zOiBNU1JfU1BFQ19DVFJMIE1TUl9WSVJUX1NQRUNfQ1RSTCBSU0Ig
+SUJQQi1lbnRyeQ0KKFhFTikgWzAwMDAwMDMyMTc2Y2ZhZThdICAgU3VwcG9ydCBmb3IgUFYg
+Vk1zOiBJQlBCLWVudHJ5DQooWEVOKSBbMDAwMDAwMzIxN2M0MWNhMl0gICBYUFRJICg2NC1i
+aXQgUFYgb25seSk6IERvbTAgZGlzYWJsZWQsIERvbVUgZGlzYWJsZWQgKHdpdGhvdXQgUENJ
+RCkNCihYRU4pIFswMDAwMDAzMjE4NzQ2MzY2XSAgIFBWIEwxVEYgc2hhZG93aW5nOiBEb20w
+IGRpc2FibGVkLCBEb21VIGRpc2FibGVkDQooWEVOKSBbMDAwMDAwMzIxOGNjMDdhZV0gVXNp
+bmcgc2NoZWR1bGVyOiBTTVAgQ3JlZGl0IFNjaGVkdWxlciByZXYyIChjcmVkaXQyKQ0KKFhF
+TikgWzAwMDAwMDMyMTkyNTI0OWVdIEluaXRpYWxpemluZyBDcmVkaXQyIHNjaGVkdWxlcg0K
+KFhFTikgWzAwMDAwMDMyMTk3ZGUwMTJdICBsb2FkX3ByZWNpc2lvbl9zaGlmdDogMTgNCihY
+RU4pIFswMDAwMDAzMjE5ZGJmYzQyXSAgbG9hZF93aW5kb3dfc2hpZnQ6IDMwDQooWEVOKSBb
+MDAwMDAwMzIxYTMzYTAyNF0gIHVuZGVybG9hZF9iYWxhbmNlX3RvbGVyYW5jZTogMA0KKFhF
+TikgWzAwMDAwMDMyMWE4YjgwMzBdICBvdmVybG9hZF9iYWxhbmNlX3RvbGVyYW5jZTogLTMN
+CihYRU4pIFswMDAwMDAzMjFhZTNhOThjXSAgcnVucXVldWVzIGFycmFuZ2VtZW50OiBzb2Nr
+ZXQNCihYRU4pIFswMDAwMDAzMjFiM2JjMjBhXSAgY2FwIGVuZm9yY2VtZW50IGdyYW51bGFy
+aXR5OiAxMG1zDQooWEVOKSBbMDAwMDAwMzIxYjkzZmYzMF0gbG9hZCB0cmFja2luZyB3aW5k
+b3cgbGVuZ3RoIDEwNzM3NDE4MjQgbnMNCihYRU4pIFswMDAwMDAzMjI2MGM0YjcyXSBQbGF0
+Zm9ybSB0aW1lciBpcyAxNC4zMThNSHogSFBFVA0KKFhFTikgWyAgICAwLjczNTA1NF0gRGV0
+ZWN0ZWQgMzM5My42MDggTUh6IHByb2Nlc3Nvci4NCihYRU4pIFsgICAgMC43MzkyNTZdIEZy
+ZWVkIDEwMjRrQiB1bnVzZWQgQlNTIG1lbW9yeQ0KKFhFTikgWyAgICAwLjc0MDkzMF0gYWx0
+IHRhYmxlIGZmZmY4MmQwNDA0NTMzYjggLT4gZmZmZjgyZDA0MDQ2MmY2NA0KKFhFTikgWyAg
+ICAwLjc1NDgxMF0gQU1ELVZpOiBJT01NVSAwIEVuYWJsZWQuDQooWEVOKSBbICAgIDAuNzU2
+NDc2XSBJL08gdmlydHVhbGlzYXRpb24gZW5hYmxlZA0KKFhFTikgWyAgICAwLjc1ODE2NV0g
+IC0gRG9tMCBtb2RlOiBSZWxheGVkDQooWEVOKSBbICAgIDAuNzU5ODUwXSBJbnRlcnJ1cHQg
+cmVtYXBwaW5nIGVuYWJsZWQNCihYRU4pIFsgICAgMC43NjE1NDFdIEVuYWJsaW5nIEFQSUMg
+bW9kZS4gIFVzaW5nIDIgSS9PIEFQSUNzDQooWEVOKSBbICAgIDAuNzYzOTQ0XSBFTkFCTElO
+RyBJTy1BUElDIElSUXMNCihYRU4pIFsgICAgMC43NjU2MDZdICAtPiBVc2luZyBuZXcgQUNL
+IG1ldGhvZA0KKFhFTikgWyAgICAwLjc2NzQ3M10gLi5USU1FUjogdmVjdG9yPTB4RjAgYXBp
+YzE9MCBwaW4xPTIgYXBpYzI9LTEgcGluMj0tMQ0KKFhFTikgWyAgICAwLjkxOTI1NV0gV2Fs
+bGNsb2NrIHNvdXJjZTogQ01PUyBSVEMNCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjAw
+MF0gRGVmYXVsdGluZyB0byBhbHRlcm5hdGl2ZSBrZXkgaGFuZGxpbmc7IHNlbmQgJ0EnIHRv
+IHN3aXRjaCB0byBub3JtYWwgbW9kZS4NCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjAw
+M10gQWxsb2NhdGVkIGNvbnNvbGUgcmluZyBvZiAxMjggS2lCLg0KKFhFTikgWzIwMjYtMTAt
+MTggMTk6NTc6MzQuMDA1XSBIVk06IEFTSURzIGVuYWJsZWQuDQooWEVOKSBbMjAyNi0xMC0x
+OCAxOTo1NzozNC4wMDZdIFNWTTogU3VwcG9ydGVkIGFkdmFuY2VkIGZlYXR1cmVzOg0KKFhF
+TikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMDA4XSAgLSBOZXN0ZWQgUGFnZSBUYWJsZXMgKE5Q
+VCkNCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjAxMF0gIC0gTGFzdCBCcmFuY2ggUmVj
+b3JkIChMQlIpIFZpcnR1YWxpc2F0aW9uDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4w
+MTJdICAtIE5leHQtUklQIFNhdmVkIG9uICNWTUVYSVQNCihYRU4pIFsyMDI2LTEwLTE4IDE5
+OjU3OjM0LjAxM10gIC0gVk1DQiBDbGVhbiBCaXRzDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1
+NzozNC4wMTVdICAtIFRMQiBmbHVzaCBieSBBU0lEDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1
+NzozNC4wMTddICAtIERlY29kZUFzc2lzdHMNCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0
+LjAxOF0gIC0gVmlydHVhbCBWTUxPQUQvVk1TQVZFDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1
+NzozNC4wMjBdICAtIFZpcnR1YWwgR0lGDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4w
+MjJdICAtIFBhdXNlLUludGVyY2VwdCBGaWx0ZXINCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3
+OjM0LjAyNF0gIC0gUGF1c2UtSW50ZXJjZXB0IEZpbHRlciBUaHJlc2hvbGQNCihYRU4pIFsy
+MDI2LTEwLTE4IDE5OjU3OjM0LjAyNV0gIC0gVFNDIFJhdGUgTVNSDQooWEVOKSBbMjAyNi0x
+MC0xOCAxOTo1NzozNC4wMjddICAtIE5QVCBTdXBlcnZpc29yIFNoYWRvdyBTdGFjaw0KKFhF
+TikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMDI5XSAgLSBNU1JfU1BFQ19DVFJMIHZpcnR1YWxp
+c2F0aW9uDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4wMzBdIEhWTTogU1ZNIGVuYWJs
+ZWQNCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjAzMl0gSFZNOiBIYXJkd2FyZSBBc3Np
+c3RlZCBQYWdpbmcgKEhBUCkgZGV0ZWN0ZWQNCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0
+LjAzNF0gSFZNOiBIQVAgcGFnZSBzaXplczogNGtCLCAyTUIsIDFHQg0KKFhFTikgWzIwMjYt
+MTAtMTggMTk6NTc6MzQuMDM2XSBhbHQgdGFibGUgZmZmZjgyZDA0MDQ1MzNiOCAtPiBmZmZm
+ODJkMDQwNDYyZjY0DQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4wNDJdIEJyb3VnaHQg
+dXAgMzIgQ1BVcw0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMDQ2XSBTY2hlZHVsaW5n
+IGdyYW51bGFyaXR5OiBjcHUsIDEgQ1BVIHBlciBzY2hlZC1yZXNvdXJjZQ0KKFhFTikgWzIw
+MjYtMTAtMTggMTk6NTc6MzQuMDUwXSBJbml0aWFsaXppbmcgQ3JlZGl0MiBzY2hlZHVsZXIN
+CihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjA1Ml0gIGxvYWRfcHJlY2lzaW9uX3NoaWZ0
+OiAxOA0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMDUzXSAgbG9hZF93aW5kb3dfc2hp
+ZnQ6IDMwDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4wNTVdICB1bmRlcmxvYWRfYmFs
+YW5jZV90b2xlcmFuY2U6IDANCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjA1N10gIG92
+ZXJsb2FkX2JhbGFuY2VfdG9sZXJhbmNlOiAtMw0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6
+MzQuMDU5XSAgcnVucXVldWVzIGFycmFuZ2VtZW50OiBzb2NrZXQNCihYRU4pIFsyMDI2LTEw
+LTE4IDE5OjU3OjM0LjA2MF0gIGNhcCBlbmZvcmNlbWVudCBncmFudWxhcml0eTogMTBtcw0K
+KFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMDYyXSBsb2FkIHRyYWNraW5nIHdpbmRvdyBs
+ZW5ndGggMTA3Mzc0MTgyNCBucw0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMDY0XSBB
+ZGRpbmcgY3B1IDAgdG8gcnVucXVldWUgMA0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQu
+MDY1XSAgRmlyc3QgY3B1IG9uIHJ1bnF1ZXVlLCBhY3RpdmF0aW5nDQooWEVOKSBbMjAyNi0x
+MC0xOCAxOTo1NzozNC4wNjddIEFkZGluZyBjcHUgMSB0byBydW5xdWV1ZSAwDQooWEVOKSBb
+MjAyNi0xMC0xOCAxOTo1NzozNC4wNjldIEFkZGluZyBjcHUgMiB0byBydW5xdWV1ZSAwDQoo
+WEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4wNzFdIEFkZGluZyBjcHUgMyB0byBydW5xdWV1
+ZSAwDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4wNzNdIEFkZGluZyBjcHUgNCB0byBy
+dW5xdWV1ZSAwDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4wNzRdIEFkZGluZyBjcHUg
+NSB0byBydW5xdWV1ZSAwDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4wNzZdIEFkZGlu
+ZyBjcHUgNiB0byBydW5xdWV1ZSAwDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4wNzhd
+IEFkZGluZyBjcHUgNyB0byBydW5xdWV1ZSAwDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1Nzoz
+NC4wNzldIEFkZGluZyBjcHUgOCB0byBydW5xdWV1ZSAwDQooWEVOKSBbMjAyNi0xMC0xOCAx
+OTo1NzozNC4wODFdIEFkZGluZyBjcHUgOSB0byBydW5xdWV1ZSAwDQooWEVOKSBbMjAyNi0x
+MC0xOCAxOTo1NzozNC4wODNdIEFkZGluZyBjcHUgMTAgdG8gcnVucXVldWUgMA0KKFhFTikg
+WzIwMjYtMTAtMTggMTk6NTc6MzQuMDg1XSBBZGRpbmcgY3B1IDExIHRvIHJ1bnF1ZXVlIDAN
+CihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjA4N10gQWRkaW5nIGNwdSAxMiB0byBydW5x
+dWV1ZSAwDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4wODhdIEFkZGluZyBjcHUgMTMg
+dG8gcnVucXVldWUgMA0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMDkwXSBBZGRpbmcg
+Y3B1IDE0IHRvIHJ1bnF1ZXVlIDANCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjA5Ml0g
+QWRkaW5nIGNwdSAxNSB0byBydW5xdWV1ZSAwDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1Nzoz
+NC4wOTNdIEFkZGluZyBjcHUgMTYgdG8gcnVucXVldWUgMQ0KKFhFTikgWzIwMjYtMTAtMTgg
+MTk6NTc6MzQuMDk1XSAgRmlyc3QgY3B1IG9uIHJ1bnF1ZXVlLCBhY3RpdmF0aW5nDQooWEVO
+KSBbMjAyNi0xMC0xOCAxOTo1NzozNC4wOTddIEFkZGluZyBjcHUgMTcgdG8gcnVucXVldWUg
+MQ0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMDk5XSBBZGRpbmcgY3B1IDE4IHRvIHJ1
+bnF1ZXVlIDENCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjEwMF0gQWRkaW5nIGNwdSAx
+OSB0byBydW5xdWV1ZSAxDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4xMDJdIEFkZGlu
+ZyBjcHUgMjAgdG8gcnVucXVldWUgMQ0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMTA0
+XSBBZGRpbmcgY3B1IDIxIHRvIHJ1bnF1ZXVlIDENCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3
+OjM0LjEwNl0gQWRkaW5nIGNwdSAyMiB0byBydW5xdWV1ZSAxDQooWEVOKSBbMjAyNi0xMC0x
+OCAxOTo1NzozNC4xMDddIEFkZGluZyBjcHUgMjMgdG8gcnVucXVldWUgMQ0KKFhFTikgWzIw
+MjYtMTAtMTggMTk6NTc6MzQuMTA5XSBBZGRpbmcgY3B1IDI0IHRvIHJ1bnF1ZXVlIDENCihY
+RU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjExMV0gQWRkaW5nIGNwdSAyNSB0byBydW5xdWV1
+ZSAxDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4xMTNdIEFkZGluZyBjcHUgMjYgdG8g
+cnVucXVldWUgMQ0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMTE0XSBBZGRpbmcgY3B1
+IDI3IHRvIHJ1bnF1ZXVlIDENCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjExNl0gQWRk
+aW5nIGNwdSAyOCB0byBydW5xdWV1ZSAxDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4x
+MThdIEFkZGluZyBjcHUgMjkgdG8gcnVucXVldWUgMQ0KKFhFTikgWzIwMjYtMTAtMTggMTk6
+NTc6MzQuMTIwXSBBZGRpbmcgY3B1IDMwIHRvIHJ1bnF1ZXVlIDENCihYRU4pIFsyMDI2LTEw
+LTE4IDE5OjU3OjM0LjEyMl0gQWRkaW5nIGNwdSAzMSB0byBydW5xdWV1ZSAxDQooWEVOKSBb
+MjAyNi0xMC0xOCAxOTo1NzozNC4xMjNdIG1jaGVja19wb2xsOiBNYWNoaW5lIGNoZWNrIHBv
+bGxpbmcgdGltZXIgc3RhcnRlZC4NCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjEyN10g
+bXRycjogeW91ciBDUFVzIGhhZCBpbmNvbnNpc3RlbnQgdmFyaWFibGUgTVRSUiBzZXR0aW5n
+cw0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMTMwXSBtdHJyOiBwcm9iYWJseSB5b3Vy
+IEJJT1MgZG9lcyBub3Qgc2V0dXAgYWxsIENQVXMuDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1
+NzozNC4xMzRdIG10cnI6IGNvcnJlY3RlZCBjb25maWd1cmF0aW9uLg0KKFhFTikgWzIwMjYt
+MTAtMTggMTk6NTc6MzQuMTM2XSBNVFJSIGRlZmF1bHQgdHlwZTogdW5jYWNoYWJsZQ0KKFhF
+TikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMTM3XSBNVFJSIGZpeGVkIHJhbmdlcyBlbmFibGVk
+Og0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMTM5XSAgIDAwMDAwLTlmZmZmIHdyaXRl
+LWJhY2sNCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjE0MV0gICBhMDAwMC1iZmZmZiB3
+cml0ZS10aHJvdWdoDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4xNDJdICAgYzAwMDAt
+ZmZmZmYgd3JpdGUtcHJvdGVjdA0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMTQ0XSBN
+VFJSIHZhcmlhYmxlIHJhbmdlcyBlbmFibGVkOg0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6
+MzQuMTQ2XSAgIDAgYmFzZSAwMDAwMDAwMDAwMCBtYXNrIGZmZmY4MDAwMDAwMCB3cml0ZS1i
+YWNrDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4xNDldICAgMSBiYXNlIDAwMDgwMDAw
+MDAwIG1hc2sgZmZmZmMwMDAwMDAwIHdyaXRlLWJhY2sNCihYRU4pIFsyMDI2LTEwLTE4IDE5
+OjU3OjM0LjE1M10gICAyIGJhc2UgMDAwYmNjYjAwMDAgbWFzayBmZmZmZmZmZjAwMDAgdW5j
+YWNoYWJsZQ0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMTU2XSAgIDMgZGlzYWJsZWQN
+CihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjE1OF0gICA0IGRpc2FibGVkDQooWEVOKSBb
+MjAyNi0xMC0xOCAxOTo1NzozNC4xNjBdICAgNSBkaXNhYmxlZA0KKFhFTikgWzIwMjYtMTAt
+MTggMTk6NTc6MzQuMTYxXSAgIDYgZGlzYWJsZWQNCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3
+OjM0LjE2M10gICA3IGRpc2FibGVkDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4xNjVd
+IFRPTTI6IDAwMjA0MDAwMDAwMCAoV0IpDQooWEVOKSBbMjAyNi0xMC0xOCAxOTo1NzozNC4x
+ODddIE5YIChFeGVjdXRlIERpc2FibGUpIHByb3RlY3Rpb24gYWN0aXZlDQooWEVOKSBbMjAy
+Ni0xMC0xOCAxOTo1NzozNC4xODldIGQwIGhhcyBtYXhpbXVtIDY2NTYgUElSUXMNCihYRU4p
+IFsyMDI2LTEwLTE4IDE5OjU3OjM0LjE5MF0gKioqIEJ1aWxkaW5nIGEgUFYgRG9tMCAqKioN
+CihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjI2MV0gIFhlbiAga2VybmVsOiA2NC1iaXQs
+IGxzYg0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMjYyXSAgRG9tMCBrZXJuZWw6IDY0
+LWJpdCwgbHNiLCBwYWRkciAweDEwMDAwMDAgLT4gMHg0MjAwMDAwDQooWEVOKSBbMjAyNi0x
+MC0xOCAxOTo1NzozNC4yNjZdIFBIWVNJQ0FMIE1FTU9SWSBBUlJBTkdFTUVOVDoNCihYRU4p
+IFsyMDI2LTEwLTE4IDE5OjU3OjM0LjI2OF0gIERvbTAgYWxsb2MuOiAgIDAwMDAwMDFmZDgw
+MDAwMDAtPjAwMDAwMDFmZTAwMDAwMDAgKDEwMDE0NDcgcGFnZXMgdG8gYmUgYWxsb2NhdGVk
+KQ0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMjcxXSAgSW5pdC4gcmFtZGlzazogMDAw
+MDAwMjAzYjllNzAwMC0+MDAwMDAwMjAzZjFmZjVmZA0KKFhFTikgWzIwMjYtMTAtMTggMTk6
+NTc6MzQuMjc1XSBWSVJUVUFMIE1FTU9SWSBBUlJBTkdFTUVOVDoNCihYRU4pIFsyMDI2LTEw
+LTE4IDE5OjU3OjM0LjI3Nl0gIExvYWRlZCBrZXJuZWw6IGZmZmZmZmZmODEwMDAwMDAtPmZm
+ZmZmZmZmODQyMDAwMDANCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjI4MF0gIFBoeXMt
+TWFjaCBtYXA6IDAwMDAwMDgwMDAwMDAwMDAtPjAwMDAwMDgwMDA4MDAwMDANCihYRU4pIFsy
+MDI2LTEwLTE4IDE5OjU3OjM0LjI4M10gIFN0YXJ0IGluZm86ICAgIGZmZmZmZmZmODQyMDAw
+MDAtPmZmZmZmZmZmODQyMDA0YjgNCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjI4N10g
+IFBhZ2UgdGFibGVzOiAgIGZmZmZmZmZmODQyMDEwMDAtPmZmZmZmZmZmODQyMjYwMDANCihY
+RU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjI5MF0gIEJvb3Qgc3RhY2s6ICAgIGZmZmZmZmZm
+ODQyMjYwMDAtPmZmZmZmZmZmODQyMjcwMDANCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0
+LjI5NF0gIFRPVEFMOiAgICAgICAgIGZmZmZmZmZmODAwMDAwMDAtPmZmZmZmZmZmODQ0MDAw
+MDANCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjI5N10gIEVOVFJZIEFERFJFU1M6IGZm
+ZmZmZmZmODMzNjU3YjANCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjI5OV0gRG9tMCBo
+YXMgbWF4aW11bSAzMiBWQ1BVcw0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMzE3XSBJ
+bml0aWFsIGxvdyBtZW1vcnkgdmlycSB0aHJlc2hvbGQgc2V0IGF0IDB4NDAwMCBwYWdlcy4N
+CihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjMyMV0gU2NydWJiaW5nIEZyZWUgUkFNIGlu
+IGJhY2tncm91bmQNCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjMyM10gU3RkLiBMb2ds
+ZXZlbDogRXJyb3JzLCB3YXJuaW5ncyBhbmQgaW5mbw0KKFhFTikgWzIwMjYtMTAtMTggMTk6
+NTc6MzQuMzI0XSBHdWVzdCBMb2dsZXZlbDogTm90aGluZyAoUmF0ZS1saW1pdGVkOiBFcnJv
+cnMgYW5kIHdhcm5pbmdzKQ0KKFhFTikgWzIwMjYtMTAtMTggMTk6NTc6MzQuMzI4XSBYZW4g
+aXMgcmVsaW5xdWlzaGluZyBWR0EgY29uc29sZS4NCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3
+OjM0LjMzMF0gKioqIFNlcmlhbCBpbnB1dCB0byBET00wICh0eXBlICdDVFJMLWEnIHRocmVl
+IHRpbWVzIHRvIHN3aXRjaCBpbnB1dCkNCihYRU4pIFsyMDI2LTEwLTE4IDE5OjU3OjM0LjMz
+MV0gRnJlZWQgNjU2a0IgaW5pdCBtZW1vcnkNCihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4
+LjcyN10gWGVuIEJVRyBhdCBhcmNoL3g4Ni9jcHUvbWNoZWNrL21jZV9hbWQuYzoxMDANCihY
+RU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4LjcyN10gLS0tLVsgWGVuLTQuMjAuNS1wcmUgIHg4
+Nl82NCAgZGVidWc9biAgVGFpbnRlZDogICAgICBTIF0tLS0tDQooWEVOKSBbMjAyNi0xMC0x
+OSAwODo1ODoxOC43MjddIENQVTogICAgMg0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTgu
+NzI3XSBSSVA6ICAgIGUwMDg6WzxmZmZmODJkMDQwMjhhNjUwPl0gYXJjaC94ODYvY3B1L21j
+aGVjay9tY2VfYW1kLmMjbWNfZWMydHlwZS5wYXJ0LjArMC8weDEwDQooWEVOKSBbMjAyNi0x
+MC0xOSAwODo1ODoxOC43MjddIFJGTEFHUzogMDAwMDAwMDAwMDAxMDA0NiAgIENPTlRFWFQ6
+IGh5cGVydmlzb3INCihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4LjcyN10gcmF4OiAwMDAw
+MDAwMDAwMDAwMDAxICAgcmJ4OiAwMDAwMDAwMDAwMDAwNDQ1ICAgcmN4OiAwMDAwMDAwMDAw
+MDAwMDAwDQooWEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43MjddIHJkeDogMDAwMDAwMDAw
+MDAwMDAwMCAgIHJzaTogMDAwMDAwMDAwMDAwMDAwMSAgIHJkaTogMDAwMDAwMDAwMDAwMDAw
+MA0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSByYnA6IDAwMDAwMDAwMDAwMDAw
+MDEgICByc3A6IGZmZmY4MzIwMzZhODdjMzggICByODogIGZmZmY4MmQwNDA1OWFmMDANCihY
+RU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4LjcyN10gcjk6ICAwMDAwMDAwMDAwMDAwMDAwICAg
+cjEwOiBmZmZmODMyMDM2YThiMDAwICAgcjExOiAwMDAwMDAwMDAwMDAwMDAwDQooWEVOKSBb
+MjAyNi0xMC0xOSAwODo1ODoxOC43MjddIHIxMjogMDAwMDAwMDAwMDAwMDAxMSAgIHIxMzog
+ZmZmZjgzMjAzNmEzMzA0OCAgIHIxNDogZmZmZjgzMjAzNmFlYmI3MA0KKFhFTikgWzIwMjYt
+MTAtMTkgMDg6NTg6MTguNzI3XSByMTU6IDAwMDAwMDAwMDAwMDA0NDYgICBjcjA6IDAwMDAw
+MDAwODAwNTAwM2IgICBjcjQ6IDAwMDAwMDAwMDBmNTA2ZTANCihYRU4pIFsyMDI2LTEwLTE5
+IDA4OjU4OjE4LjcyN10gY3IzOiAwMDAwMDAxODZlODQ2MDAwICAgY3IyOiAwMDAwN2YxNjgy
+ZjY3YTA4DQooWEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43MjddIGZzYjogMDAwMDAwMDAw
+MDAwMDAwMCAgIGdzYjogZmZmZjg4ODE3YWEwMDAwMCAgIGdzczogMDAwMDAwMDAwMDAwMDAw
+MA0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSBkczogMDAwMCAgIGVzOiAwMDAw
+ICAgZnM6IDAwMDAgICBnczogMDAwMCAgIHNzOiAwMDAwICAgY3M6IGUwMDgNCihYRU4pIFsy
+MDI2LTEwLTE5IDA4OjU4OjE4LjcyN10gWGVuIGNvZGUgYXJvdW5kIDxmZmZmODJkMDQwMjhh
+NjUwPiAoYXJjaC94ODYvY3B1L21jaGVjay9tY2VfYW1kLmMjbWNfZWMydHlwZS5wYXJ0LjAp
+Og0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSAgOTAgOTAgOTAgOTAgOTAgOTAg
+OTAgOTAgPDBmPiAwYiA5MCA5MCA5MCA5MCA5MCA5MCA5MCA5MCA5MCA5MCA5MCA5MCA5MCA5
+MA0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSBYZW4gc3RhY2sgdHJhY2UgZnJv
+bSByc3A9ZmZmZjgzMjAzNmE4N2MzODoNCihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4Ljcy
+N10gICAgZmZmZjgyZDA0MDI4YTY5OSBmZmZmODJkMDQwMjhjZmRkIGZmZmY4MmQwNDA1ODMy
+ZDAgZmZmZjgzMjAzNmFlMWVhMA0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSAg
+ICAwMDAwMDQ0NTAwMDAwMDAxIDAwMDAwMDAxZWU3MGMwMDEgZmZmZjgzMjAzNmFlYmQ3MCBm
+ZmZmODMyMDM2YWUxZWE4DQooWEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43MjddICAgIDAw
+MDEwMTAxMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAwMDAwIGZmZmY4
+MzIwMzZhODdjZTANCihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4LjcyN10gICAgMDAwMDAw
+MDgwMDAwMDAwMSBmZmZmODMyMDM2YThiMDAwIGZmZmY4MmQwNDA1ODhmODAgMDAwMDAwMDAw
+MDAwMDAwMg0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSAgICAwMDAwMDAwMDAw
+MDAwMGZiIDAwMDAwMDAwMDAwMDAwMDAgZmZmZjgyZDA0MDU4OGY4MCAwMDAwMDAwMDAwMDAw
+MDAwDQooWEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43MjddICAgIGZmZmY4MmQwNDAyOGEz
+NWMgZmZmZjgzMjAzNmE4N2RkNyBmZmZmODJkMDQwMmJmYzQ1IGZmZmY4MmQwNDA1ODhmODAN
+CihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4LjcyN10gICAgZmZmZjgyZDA0MDI0MGU4YyAw
+MDAwMDAwMDAwMDAwMGZiIDAwMDAwMDAwMDAwMDAwMDAgZmZmZjgyZDA0MDMxMjNkNQ0KKFhF
+TikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSAgICBmZmZmODMyMDM2YTg3ZDQwIDAwMDAw
+MDAwMDAwMDAwMDAgODAwMDAwMDAwMDAwMDAwNSBmZmZmODMyMDM2YTg3ZDk4DQooWEVOKSBb
+MjAyNi0xMC0xOSAwODo1ODoxOC43MjddICAgIGZmZmY4MzFmZTY2YmZhYTAgMDAwMDAwMDAw
+MDE3YWEyZiAwMDAwMDAwMDAwMDAwMDAxIDAwMDAwMDAwMDAwMDAwMDANCihYRU4pIFsyMDI2
+LTEwLTE5IDA4OjU4OjE4LjcyN10gICAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAwMDAwMDAw
+MDAwIDAwMDAwMDAwMDAwMDAwMDAgZmZmZjgzMjAzNmE4N2ZmZg0KKFhFTikgWzIwMjYtMTAt
+MTkgMDg6NTg6MTguNzI3XSAgICAwMDAwMDAwMDAwMDAwMDAwIGZmZmY4MmQwNDAyMDE5MTUg
+ZmZmZjgyZDA0MDQ2Njc2MCBmZmZmODJkMDQwNTg4ZjgwDQooWEVOKSBbMjAyNi0xMC0xOSAw
+ODo1ODoxOC43MjddICAgIDAwMDAyYTliNjA5NDc2ZTIgMDAwMDAwMDAwMDAwMDAwMiBmZmZm
+ODMyMDM2YTg4MDEwIGZmZmY4MzIwMzZhODgwNjgNCihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4
+OjE4LjcyN10gICAgZmZmZjgzMTM3NDBkYzAzMCBmZmZmODJkMDQwNTg4ZjgwIDAwMDAwMDAw
+MDAwMDAwMDIgMDAwMDAwMDAwMDAwMDAwMg0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTgu
+NzI3XSAgICAwMDAwMDAwMDAwMDAwMDAwIDAwMDAwMDAwMDAwMDAwNDggMDAwMDAwMDAwMDAw
+MDAwMCBmZmZmODMyMDM2YTg3ZWY4DQooWEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43Mjdd
+ICAgIDAwMDAwMDAwMDAwMDAwNDggMDAwMDAwZmIwMDAwMDAwMCBmZmZmODJkMDQwMjg4M2Nh
+IDAwMDAwMDAwMDAwMGUwMDgNCihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4LjcyN10gICAg
+MDAwMDAwMDAwMDAwMDI0NiBmZmZmODMyMDM2YTg3ZTM4IDAwMDAwMDAwMDAwMDAwMDAgMDAw
+MDJhOWI2MDk0NzZlMg0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSAgICBmZmZm
+ODJkMDQwMjg4N2NmIDAwMDAwMDAwMDAwMDAwMDAgMDAwMDAwMDAwMDAwMDAwMCAwMDAwMDAw
+MDAwMDAwMDAwDQooWEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43MjddICAgIGZmZmY4MmQw
+MDAwMDAwZmYgMDAwMDAwMDAwMDAwMDAwMiBmZmZmODJkMDQwNDY2NzYwIDAwMDAwMDAwMDAw
+MDAwMDINCihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4LjcyN10gICAgMDAwMDAwMDAwMDAw
+MDAwMiBmZmZmODJkMDQwNDZiZGEwIDAwMDAwMDAwMDAwMDdmZmYgZmZmZjgyZDA0MDU4OGY4
+MA0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSAgICBmZmZmODJkMDQwNDY2NzYw
+IGZmZmY4MmQwNDAzMDJjZjEgZmZmZjgyZDA0MDU4OTA4MCBmZmZmODJkMDQwNTgyMjEwDQoo
+WEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43MjddIFhlbiBjYWxsIHRyYWNlOg0KKFhFTikg
+WzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSAgICBbPGZmZmY4MmQwNDAyOGE2NTA+XSBSIGFy
+Y2gveDg2L2NwdS9tY2hlY2svbWNlX2FtZC5jI21jX2VjMnR5cGUucGFydC4wKzAvMHgxMA0K
+KFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSAgICBbPGZmZmY4MmQwNDAyOGE2OTk+
+XSBTIG1jX2FtZF9yZWNvdmVyYWJsZV9zY2FuKzB4MzkvMHg0MA0KKFhFTikgWzIwMjYtMTAt
+MTkgMDg6NTg6MTguNzI3XSAgICBbPGZmZmY4MmQwNDAyOGNmZGQ+XSBTIG1jaGVja19tY2Ff
+bG9nb3V0KzB4NDJkLzB4ODQwDQooWEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43MjddICAg
+IFs8ZmZmZjgyZDA0MDI4YTM1Yz5dIFMgYXJjaC94ODYvY3B1L21jaGVjay9hbWRfbm9uZmF0
+YWwuYyNtY2VfYW1kX2NoZWNrcmVncysweDFjLzB4MTAwDQooWEVOKSBbMjAyNi0xMC0xOSAw
+ODo1ODoxOC43MjddICAgIFs8ZmZmZjgyZDA0MDJiZmM0NT5dIFMgYXJjaC94ODYvaHZtL2h2
+bS5jI19faHZtX2NvcHkrMHgxYTUvMHg0NzANCihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4
+LjcyN10gICAgWzxmZmZmODJkMDQwMjQwZThjPl0gUyBzbXBfY2FsbF9mdW5jdGlvbl9pbnRl
+cnJ1cHQrMHg0Yy8weDkwDQooWEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43MjddICAgIFs8
+ZmZmZjgyZDA0MDMxMjNkNT5dIFMgZG9fSVJRKzB4MmE1LzB4NjUwDQooWEVOKSBbMjAyNi0x
+MC0xOSAwODo1ODoxOC43MjddICAgIFs8ZmZmZjgyZDA0MDIwMTkxNT5dIFMgY29tbW9uX2lu
+dGVycnVwdCsweDEzNS8weDE1MA0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSAg
+ICBbPGZmZmY4MmQwNDAyODgzY2E+XSBTIGFyY2gveDg2L2FjcGkvY3B1X2lkbGUuYyNhY3Bp
+X2lkbGVfZG9fZW50cnkrMHg4YS8weDE0MA0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTgu
+NzI3XSAgICBbPGZmZmY4MmQwNDAyODg3Y2Y+XSBTIGFyY2gveDg2L2FjcGkvY3B1X2lkbGUu
+YyNhY3BpX3Byb2Nlc3Nvcl9pZGxlKzB4MWVmLzB4NjUwDQooWEVOKSBbMjAyNi0xMC0xOSAw
+ODo1ODoxOC43MjddICAgIFs8ZmZmZjgyZDA0MDMwMmNmMT5dIFMgYXJjaC94ODYvZG9tYWlu
+LmMjaWRsZV9sb29wKzB4YzEvMHgxMzANCihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4Ljcy
+N10gICAgWzxmZmZmODJkMDQwMzAyYzMwPl0gUyBhcmNoL3g4Ni9kb21haW4uYyNpZGxlX2xv
+b3ArMC8weDEzMA0KKFhFTikgWzIwMjYtMTAtMTkgMDg6NTg6MTguNzI3XSAgICBbPGZmZmY4
+MmQwNDAzMDRlZGM+XSBTIGNvbnRleHRfc3dpdGNoKzB4MWVjLzB4OTAwDQooWEVOKSBbMjAy
+Ni0xMC0xOSAwODo1ODoxOC43MjddDQooWEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43Mjdd
+DQooWEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43MjddICoqKioqKioqKioqKioqKioqKioq
+KioqKioqKioqKioqKioqKioqKioNCihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4LjcyN10g
+UGFuaWMgb24gQ1BVIDI6DQooWEVOKSBbMjAyNi0xMC0xOSAwODo1ODoxOC43MjddIFhlbiBC
+VUcgYXQgYXJjaC94ODYvY3B1L21jaGVjay9tY2VfYW1kLmM6MTAwDQooWEVOKSBbMjAyNi0x
+MC0xOSAwODo1ODoxOC43MjddICoqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioqKioq
+KioqKioNCihYRU4pIFsyMDI2LTEwLTE5IDA4OjU4OjE4LjcyN10NCihYRU4pIFsyMDI2LTEw
+LTE5IDA4OjU4OjE4LjcyN10gUmVib290IGluIGZpdmUgc2Vjb25kcy4uLg==
+
+--------------PZZxSv6fMb60yOagB00kKeOq--
 
