@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0123E606A319
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 04:58:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0B1FA606A319
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 05:25:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=valinux.co.jp header.i=@valinux.co.jp header.a=rsa-sha256 header.s=selector1 header.b=jGQB/OGf
-Received: from list by lists.xenproject.org with outflank-mailman.1458923.1670997 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=valinux.co.jp header.i=@valinux.co.jp header.a=rsa-sha256 header.s=selector1 header.b=PaM4XOaf
+Received: from list by lists.xenproject.org with outflank-mailman.1458936.1671006 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK7MN-0001XA-3y; Fri, 23 Oct 2026 04:58:31 +0000
+	id 1xK7mY-0000Bc-7e; Fri, 23 Oct 2026 05:25:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1458923.1670997; Fri, 23 Oct 2026 04:58:31 +0000
+Received: by outflank-mailman (output) from mailman id 1458936.1671006; Fri, 23 Oct 2026 05:25:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK7MN-0001X3-19; Fri, 23 Oct 2026 04:58:31 +0000
-Received: by outflank-mailman (input) for mailman id 1458923;
- Fri, 23 Oct 2026 04:58:29 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xK7mY-0000BV-4O; Fri, 23 Oct 2026 05:25:34 +0000
+Received: by outflank-mailman (input) for mailman id 1458936;
+ Fri, 23 Oct 2026 05:25:32 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <takakura@valinux.co.jp>) id 1xK7ML-0001Vg-Ek
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 04:58:29 +0000
+ (envelope-from <taka@valinux.co.jp>) id 1xK7mV-0000BP-Qq
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 05:25:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xK7MK-004lKN-Rm
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 06:58:28 +0200
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xK7mU-006x6O-MS
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 07:25:30 +0200
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <takakura@valinux.co.jp>)
- id 6adae96c-8faa-0a2a0a5109dd-0a2a4507bf10-8
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:58:28 +0200
-Received: from [52.101.228.79]
- (helo=OS0P286CU011.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <takakura@valinux.co.jp>)
- id 6adae972-b4ea-0a2a45070019-3465e44f08f5-3
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:58:28 +0200
-Received: from TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:403:511::19) by TYYP286MB5665.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:405:295::5) with Microsoft SMTP Server (version=TLS1_2,
+ (envelope-from <taka@valinux.co.jp>)
+ id 6adaefb8-bab6-0a2a0a5309dd-0a2a450cba5a-46
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 07:25:30 +0200
+Received: from [52.101.125.96]
+ (helo=TYVP286CU001.outbound.protection.outlook.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <taka@valinux.co.jp>)
+ id 6adaefc7-f479-0a2a450c0019-34657d60cab1-3
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 07:25:29 +0200
+Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM (2603:1096:604:458::18)
+ by TY1P286MB3230.JPNP286.PROD.OUTLOOK.COM (2603:1096:400:2e6::13)
+ with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.18; Fri, 23 Oct
- 2026 04:58:22 +0000
-Received: from TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- ([fe80::5f8d:a6bf:3b84:5a82]) by TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- ([fe80::5f8d:a6bf:3b84:5a82%5]) with mapi id 15.21.0546.016; Fri, 23 Oct 2026
- 04:58:21 +0000
+ 2026 05:25:24 +0000
+Received: from OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c8c9:25cd:8d13:96d6]) by OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+ ([fe80::c8c9:25cd:8d13:96d6%6]) with mapi id 15.21.0546.017; Fri, 23 Oct 2026
+ 05:25:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,397 +52,200 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=E+dj1esqJJFrUPP9yd6LpRA4OnidB04JDaYWQFpTTpLR4pxjxYKKZ6GmOo0TFYalLyfXdMbe8fjXDgwieA/v764r/26517ItxO7NobmlKgBNPjWG5ja7vpjSSaaBbLXougpV7cFmBb6qVwfXzRyHAdl1sAFrYkpOi/DlWX+Tde8AkxPd/7fGYoh7OfUQCPOfBsdUJgCeqwRA/mqsqjjC7SDjhiXYLlQFISzYaeH2SNAtivZROnPBmnenp1+m5d0c1Qk0bm15CjJk04GJfS1JtBsEFPRonZFrokikU7WXrDG6rh8IBlgfGoshZB9GOyXC9/l2Zfb2umTCLKdnfBlbRQ==
+ b=nHlyzNtgnQJmsIJGgNPnHkb11MzfM6KenXOELPuMhDNAWEOwjF0fY4ieLOUGd0RNi5Xqe7ISoBO3jmM7mJi/8y/dL1X2UGa6K5q60CddlGXXrk/2mEJc2yMIneQ8khC9fm8gzD7flSOWJE05azPvxIYfGDgByk+PkP6S6YU2KkJTs7KLu+qTASFTc4bN64Mm8pl16Fq0XwB1gi8Ia0H7L0q1B491dqLyDm3wZe967w6MAQSa5luvHvI7KYoCHDheFmPZo03EWTyTVpzVGQYxzn83GrT1ZvIfPI985hJokR1+UTY38a004SsRH3+myr5M/jZkzEdvISdbqGGrHWMGfw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=ZlKIeSunT1jOHyfhh+rhjOJdcYlWVJgHKK+gdl4jasA=;
- b=cXXVvr4QzT4SqdvSuI7MxlMU9DLQP00OJW2OcRmkfleHL/BpJZmUsVoueFhz/SZ1zFsIkFq/OvL0Xi6lTgk4denuQDONU8e8FID7lNxg+p+l53byenjkJRDNkxrMAd99b8hhU6UKhfQS1kVo2FfqrdowzpzSLVFvyJfLu5DCpbyM7nugYZSAkgPXP+uFjVWQ2F/PqHkmoQekBYjK2oLqCHNUAuWdHqvGSSCSxAUND2duHQLar9t0t/TZLj2hBTwShW4wBl0iFg1hkwDS/MQRtWefTjw1kXKTlO77BDNH3crCo8HDTv5YQhKl8empmB/RC5jTz1WOmI51D7yDH/7VJA==
+ bh=ICqv5QkNvvUXkN0vbU1X7eA7aanhGm/joJd7RjGdd1s=;
+ b=hIFRWmkXeu6GIaduSJwUdCW7x6icByJyXDRkfiNmkn0zjmeDMBylG5mHBeZhj/+HfQ+vKmcYRJ3vd4k0t7GUl4BFlRYnCrEBjZK6qoYPBxaxuk6ObOGDc96EsWne6elBgFX3XXWWBG8BVmZR/tnH7OAvvD0KgEOem7brPP/fC9EDk7uPtM5kAyAHXxRxtVI5/imo02mb9lqnHU7rSimgdIFzjK6l1/5BPww6zCl5bsb49rF2XRu67bv6BleYpzANuSzA4oEQAym6eEgKXFkaQpr/ZB5s3X0lNWV3JnkGMReYQzKJelNTCH74gvZsu5uM+9fZUIVy2biUOvyAqSOTeA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
  header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=ZlKIeSunT1jOHyfhh+rhjOJdcYlWVJgHKK+gdl4jasA=;
- b=jGQB/OGfk0Gvr5sdu1CrAh3VUBxoRFhtO/XBBSydO2rqHoUHwkZ+hw+CIZo3DnRdz9lY7r5F4niEdvSicu7nysMwgvKex3Ogg0jr5Bmx5QPDUWJ91mZSZCWCSuwI3pRnRJT9xkrkB9NZ/PWsIOJLIr02ADbtwpTYR8HZE0/MVVg=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ bh=ICqv5QkNvvUXkN0vbU1X7eA7aanhGm/joJd7RjGdd1s=;
+ b=PaM4XOafe70iaeRLHOnz1IgxuDWuAn/8HCI1jn5qfj74ctdYeUvGPlJAnLqrCUZJ1mZl4wKqqhy8jjxp+3VjO4ekRwev1qULC7CyK83khJnYZ1xbyiB/BN0AgFt2kKK/iDen/2NYTwgDUxakm9KHZTgLFPBtI0iqcQiFhPAEYDY=
+From: Hirokazu Takahashi <taka@valinux.co.jp>
+To: "Orzel, Michal" <michal.orzel@amd.com>, "xen-devel@lists.xenproject.org"
+	<xen-devel@lists.xenproject.org>
+CC: "jbeulich@suse.com" <jbeulich@suse.com>, "Mykyta_Poturai@epam.com"
+	<Mykyta_Poturai@epam.com>, Juergen Gross <jgross@suse.com>, Stefano
+ Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
+ Marquis <bertrand.marquis@arm.com>, Volodymyr Babchuk
+	<Volodymyr_Babchuk@epam.com>, Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	=?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger@xenproject.org>, Timothy Pearson
+	<tpearson@raptorengineering.com>, Alistair Francis
+	<alistair.francis@wdc.com>, Connor Davis <connojdavis@gmail.com>, Oleksii
+ Kurochko <oleksii.kurochko@gmail.com>, Dario Faggioli <dfaggioli@suse.com>,
+	George Dunlap <gwd@xenproject.org>
+Subject: RE: [PATCH v12 2/4] xen/sched: Link CPU topology to scheduler
+Thread-Topic: [PATCH v12 2/4] xen/sched: Link CPU topology to scheduler
+Thread-Index: AQHdX21XXIwRdrvZbEe9C8R0UTfp8LcH/XMAgAKWagA=
+Date: Fri, 23 Oct 2026 05:25:24 +0000
+Message-ID:
+ <OS9P286MB722279F914F32E89CB76058282642@OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM>
+References: <20261019015749.48492-1-taka@valinux.co.jp>
+ <20261019015749.48492-3-taka@valinux.co.jp>
+ <0d758d59-1ac3-4833-aae6-8c181d5ec1e8@amd.com>
+In-Reply-To: <0d758d59-1ac3-4833-aae6-8c181d5ec1e8@amd.com>
+Accept-Language: ja-JP, en-US
+Content-Language: ja-JP
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=valinux.co.jp;
-From: Ryo Takakura <takakura@valinux.co.jp>
-To: xen-devel@lists.xenproject.org
-Cc: roger@xenproject.org,
-	ross.lagerwall@citrix.com,
-	sstabellini@kernel.org,
-	julien@xen.org,
-	bertrand.marquis@arm.com,
-	michal.orzel@amd.com,
-	Volodymyr_Babchuk@epam.com,
-	andrew.cooper3@citrix.com,
-	anthony.perard@vates.tech,
-	jbeulich@suse.com,
-	teddy.astie@vates.tech,
-	Ryo Takakura <takakura@valinux.co.jp>
-Subject: [RFC 5/5] xen/x86: livepatch: enable attaching callbacks
-Date: Fri, 23 Oct 2026 13:58:08 +0900
-Message-Id: <20261023045808.165276-1-takakura@valinux.co.jp>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <20261023044809.162759-1-takakura@valinux.co.jp>
-References: <20261023044809.162759-1-takakura@valinux.co.jp>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TYCP286CA0169.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:400:3c6::12) To TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:403:511::19)
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: OS9P286MB7222:EE_|TY1P286MB3230:EE_
+x-ms-office365-filtering-correlation-id: 613a841e-f2f1-4a5a-ac59-08df30c60a3f
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|7416014|376014|1800799024|23010399003|366016|18002099003|22082099003|4143699003|261009223027099003|261022105027099003|10067099003|38070700021|56012099006;
+x-microsoft-antispam-message-info:
+ kRFe7QkSxnjLM+94fJiUx/RMqZWb+xdCaFWhF/mzzROXNFFv3FBQToWN0xomnEndg9KY3tMHU79Ck+KJPK3DUyNlFpoCwmX+aAgUpOF7pnOCdd4+NdS57y+m6RVpWSnSQlCE4CCZAqDJX9Mdqqw/9H0fWbgvUpfniyklbUVmqi67Ljk0U3JAGTokPogkQPBvF+n9ox0IXLXtomb4tsu6XpVCM1iGpp2BO95fTPj2sLt8U8jwKXYULeiIRzPTVl0RXFqvutWX9wk4tuYu5ykJrpIlktIh+Z1++kRt+nJFy0dfZsRHYNejTdKBc0XvwTzD58YfI0T6Jd7BacEmFY3xwy5tNwyyeY/54KzBWn2uAxtT8DA0Ujlv24a4Idyl8wgas3nAaF6R3/SmZeio4IhsoKNgTPgVpbbpXY36VHqpWF7IMSAdvcwA5c1famt+XN7dR+uBRuk6M6lrruD+gGV+TTD1o4gmAR1YcjzdKQHubAtu1oxHUajE6JvOZd7YlTgkKs6+ceopl1pQZOkoG4sveNJ6Uws0O5FSEZMa26E68tIwaSsqWQnGq2HiTAmoDq+xyF7ijVGhTxDvXfgf74oW9li7jdnXAK8bUBzenIBOdyQ55/uPPrkDvu+LkM21b6QQFYHFYmwt/2hgnO5IsWZA1R1+Mw1kAonBB7z6YT40UrGhCvIFA30memdbvk3GzkapLyiyLcYXJRL0iNcXsTB+xN+tmaYp5IlBCYJep4cEB48=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:ja;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(7416014)(376014)(1800799024)(23010399003)(366016)(18002099003)(22082099003)(4143699003)(261009223027099003)(261022105027099003)(10067099003)(38070700021)(56012099006);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?NFVvYVZzSERzZnpkU052MmsvaEh0Mll0VzB0SGQ4VExBN1BRMCs4ZEEvdGJ0?=
+ =?utf-8?B?VFVRREVyemVtSXcxbm9RbHBlR245SklSRGtqTjU3d3Bqd0hSV0dZZ29uTDJh?=
+ =?utf-8?B?SFZqaHBHaGlma1RPa01IbVNab1drWGdGS0phSy9vRFVFYXZFeFBwd0pva05y?=
+ =?utf-8?B?SGZUektuZHRoSXMrY1ptVVJ1T2hudmd0c1FWZjNRVlVnWnB0TS8wNnM2bm9k?=
+ =?utf-8?B?VVM1VTZFb2pWbU15Y01SZktPbDVVSnZyZXo0OGR1MDdTVFVDTXNlR0FGelpk?=
+ =?utf-8?B?aG1adXluZ2hydjZDSlpoZURMSXNDd2lqbUQ3bkg2Q2VVZUNuMGpnL1N1Sm9i?=
+ =?utf-8?B?enNPNHkwamxzeS9nalhZbjdnamRwRnZqbmptNFdZNjZIanloUld2U2lwMitq?=
+ =?utf-8?B?TE9MdkZxbmpnTzkzYlc5cXhaNElrYmUzTlR3VGdSZDlWOGkvOUhUdEtRMWVD?=
+ =?utf-8?B?eWh3K2JOV2E1ZmRoSFRYN3A0dUhUY3YvN1VWTnRORm1PK1c4WjZYUzNNMzg1?=
+ =?utf-8?B?M2xNU1pTVHJIYzJ6cVBMY1JUUzRTbkRxUGowN0grS1pCTkdROFhWenUweDR2?=
+ =?utf-8?B?eFhRc0txaUNPL25QTHgyUnpxeWZaNmRSdzhiMVRScEM1Y2g1V3M2UVpxZzZO?=
+ =?utf-8?B?OTFhZUtwM3ZhTktXTkJ6UDVEN2szc2dtUFMzVmRtanBycHgvVEdnT29POFo0?=
+ =?utf-8?B?R0MwWVFVR1ZpUmYrbzdzVG9iRGlMbWVCNkFUZHFxaWRmMlpOdlBLVUE4RGVT?=
+ =?utf-8?B?WmpyaDZKcE10cFAwQlh5TDVlUDUxbnlwck9RbUxlb011MjdEcHphdStqV25G?=
+ =?utf-8?B?Y0xiUTlNY2FMdkF3VUd3Mzlvb1ZOS2xXWmtnS3piaEdZWkNGSUhldUNMZ0FS?=
+ =?utf-8?B?YnlUWEpMNktpWWQ0eXBMWW5wTGlmMWxVOWxHSVQ2OWZpa2tuMjlpRHVxNzhR?=
+ =?utf-8?B?MzRVMXNKbVNSbjZJWHpaeWFaSnAyN20yc2w0SE9UMEFNOTBVSS9wQ1lONXZW?=
+ =?utf-8?B?N015b2JKbzIwR1I5TzdZbXJxTTV5Tyt4bGFtRHRrekp6dlJrZUtYM01iUVJT?=
+ =?utf-8?B?a2IyUFFGK1FHNHFKRWVCS2ZpTDJhSUdrVkhxTFFJaUlSMFNQYVNQWDhTOXUw?=
+ =?utf-8?B?RVQzSkUvTmx0eTV3YUtSTk1IRDlmVmhOUDRpbXFnakpBZUhmTisyaGN6WFBC?=
+ =?utf-8?B?b254S3Q0L1NtMnpOQU1KdVI3ZFRSN2ZaT3hIdGE4WnJTdkhZaDg5bWhEa1dL?=
+ =?utf-8?B?UVBhRCt2QkRYOEN5TVRmQ2I3NHMwWmszS0ZvRytVZlY1cll3aVNuMFpaZzUw?=
+ =?utf-8?B?STdoZng5dlpva0s3d2c3eTRvQjUzZlJOdmkxSVlEUFVYNVNaZXdtSUZuRVov?=
+ =?utf-8?B?Q3BKSzlxYnE3clFEMEYyY2Z2cXdqRTRuWEhtNk5xUitWblVDZjRZTXJMcUxW?=
+ =?utf-8?B?RVNUME9ydFowT0xtcFRwKzF0cStRTTd2NFJsdkV3azNpZEMrWERHZEY2Z3Zs?=
+ =?utf-8?B?VzNBQkVGWmVSMlpGaXVDWU5lSEdWM1lmTlFXbTY4bDZGZGVSTitZcU1QU3NH?=
+ =?utf-8?B?V0MyNitGL01XaHJicnRZVWw3S3YwRk5nYUZMcldMYTgyNkNMS2cwV0tKTEd4?=
+ =?utf-8?B?OWhlT1N0SEdGaHYzSlB5VXBlOXI0cEl3S3YwaHA0VFg1T1dGNWp4Q0xVM1BE?=
+ =?utf-8?B?YVFzMS9BZHNMUWUyS09BaGlWc3IzWTlNd0ZmRmRGcDlFeG0zR2kzTG5wdlZL?=
+ =?utf-8?B?SFUya1dLUHd0dHE4dDhIZUN1bkxGNyt1MktvY0xCQ09OL2FSZUNLZSsvWEcx?=
+ =?utf-8?B?cGN5L1BGdU5NUjdrYUg2Y2xvT3NSenlKNGx4Y2NvVDZpNGlwSGNyU1Z5SkFj?=
+ =?utf-8?B?QkQ1WmlOR3drSDJqQjA0eWhZWXBYSW13SThDNEF6WXowZmhIQkhnSFdRRTJJ?=
+ =?utf-8?B?RldUTTZ6bjZyMFg4ZlI0SU55dlFWVFpOSHFkSkhyWFFKeGd2eWJMb0lmVEhy?=
+ =?utf-8?B?NmhWcGRtUGd0dENmVU14NVgyRUdReTRveTQ0Mno5ZTYrMVkzaU1Wa3VYRUhR?=
+ =?utf-8?B?Z2tJalYvdmtDbGNuS29zaFNDcEJzcnhON2p1VTc2WHhDR2tLWEU0ZThuOU1Z?=
+ =?utf-8?B?Y2pGUDVmOVhqR2VFK200RERVelBsMStzWFcwWDU0aVpuc01Qbk56M0lUL1Ns?=
+ =?utf-8?B?bTMvc3B5TkF4WXlNMnA4SEprVEZ4SGtTME9RQ1dkZ2V6WVBLTFQ2QTZiQXVx?=
+ =?utf-8?B?dk1XYWZQa0NYMVNrVnFORXI5djd1MEFxVWRRcTBqYmFUQWRlV0lDNjVORGxS?=
+ =?utf-8?Q?of/bZP59uCM7sfXAeF?=
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: base64
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TY5P286MB319683:EE_|TYYP286MB5665:EE_
-X-MS-Office365-Filtering-Correlation-Id: 487dcbf5-bfa3-4399-7c81-08df30c242e5
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|1800799024|23010399003|366016|6133799003|18002099003|22082099003|3023799007|10067099003|5023799004|261009223027099003|261021123027099003|261022115727099003|261022113327099003|261021135927099003|261021121427099003|261022075727099003|261021133027099003|261021130227099003|261022105027099003|56012099006|260925022911599003|260925021311599003|260925021911599003;
-X-Microsoft-Antispam-Message-Info:
-	QH2In2uHRTEs9GYp84KyKDtTL3lGi9Vqjv4w1EFWZ+s3z+ea77b/y9Yo7qf0ItTwpUiuE7KbF48Ovxggk7C5dBOjvF3NXURDrWqFVT0ZrytO2X3SjtiAWX+LmsonJ7ePgloR5dJKJbE+IIaw+O51EKa29VVgD2vTlIIX4jcoor8L8uIWB19YtuIUQuYASZLncCfWUPCaGh9n8uFAmQSlRgWpdtQDmRkal3bjxq8AgCLoBJkFUiKJojteWelTZ6lffArqx1XpMpJzhGJAQBz6V0paUZ5HkuGwcy3jRXuwFrkv6dmv6u8fmAzzo0XzfZEDItafkQaif1cFKE84Dr3Xj8lYkV0aP2dA+VRBvJUSuuaYD7tEJbnvaDEEVck4/9FgQh9gFILX8f6cRkSbF7oVOuDtZvTUqMq1HYtPHDLla2QdQ7envFu3/FmYh32srl6tFMdLUzJa/tvPxEbqf1KJmLAQRV600n6W/CSCGpZEZptokt2EIvUdM/ZNtY8FVCdAQ6OsdoSvMTdI6BqXe2Xjeim+/tNliOm82NEOEkwZyEf/lIkUzc/zG3H9k/q4J8jpPE9++5KlUm4hWnvND1V58MS7+dKTHRYmPaTZ3Mp7Frc4TpXG0S7MFZ5kSS7Lg2qdsJ2vGncKkpYaWebiRqFUpJOVN4sZUh1Z4dgUdPR5mAs=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(23010399003)(366016)(6133799003)(18002099003)(22082099003)(3023799007)(10067099003)(5023799004)(261009223027099003)(261021123027099003)(261022115727099003)(261022113327099003)(261021135927099003)(261021121427099003)(261022075727099003)(261021133027099003)(261021130227099003)(261022105027099003)(56012099006)(260925022911599003)(260925021311599003)(260925021911599003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?jOKD2MKU1bu7vHg76AmZDNBghNg9I9AZT1XKOmlNieYuPFEaj50+Uy6LTTL5?=
- =?us-ascii?Q?ZyuafUqjbDfK4vk617FYCGlruRZhBPxcUP1GyInlYS+fAZkLd68ZGKnm2nEB?=
- =?us-ascii?Q?ZTVaiy5Sifj3yCfG2DIKiXtXGjJoF4lxVHv0ylcDzsLbaaNjqdyQ1bejg0oe?=
- =?us-ascii?Q?mTualmYczU2N1mxoAi4UDexAbPZDtmgntHKQD8JBFUMNGYDhTIQTFJJtGzOk?=
- =?us-ascii?Q?uPOLccz63jWEUks10023dq5+/x2A0NU2yUULtJUEw0VJ7ml8JPAEUeJ0E4Lx?=
- =?us-ascii?Q?Qf8dbfpBwhQA56AfrpJiR5YWk2YxxLvG6lTXr2VEboXSoX6PEShsibuLFokC?=
- =?us-ascii?Q?AVeczsNFDDs0Ok7wAg+h6K7mduJkoUuhQz1SN1RpUo1cEXxVgd66NHl5uBtN?=
- =?us-ascii?Q?m/l4C2EZWzwAVBqYsftevXTgyixIQRabTsQQwCettXCS/Qr7shNxZQaBMlua?=
- =?us-ascii?Q?Xo4/0iGlWzWBUnPTXHr5d+6l3GWrOH/TRu7TifQiOLYnt6igsxhnDNptggro?=
- =?us-ascii?Q?CJtRie2JLO1z7tmKS3cpck7X28G4NmBJaahSj31LCzTe0T+9HTLDWGItawR8?=
- =?us-ascii?Q?JPsEveSWcwUTEqeKUsx0MFWK2RuVpPeKaavT/V1/dg0bF2ZF0UqIoyXrSr/0?=
- =?us-ascii?Q?I+D91Mw7xQUUZ3tMp5ucx3Rj3QuHB9L8UqyR8/ynjZcm4iHOVZlgBy1hqeUT?=
- =?us-ascii?Q?xXhuJq4Kwmu9/64TKHyjzT69E0MYuv4qTLVpNd+w4TGe83fl2wPEkZy7takI?=
- =?us-ascii?Q?PPHw3g+G0X07exZIwtvV+qO+jSdVw5cPOBWHepO+fHShVb1Yyq51djaW1Mpe?=
- =?us-ascii?Q?AUsU5SP2PdehVAGQaP+FcQvLTx4u2lA022c6pJm/GGGS+DooG50Um6/eKxT/?=
- =?us-ascii?Q?3QAK7Y6ldcZN7VJqOCTCmsMwfjtkutNHD8I93NgZ+oq2a5Z00BjUZ7VzRl5p?=
- =?us-ascii?Q?YZCC0N6XJnqcP7RmVfkLpD9BztTxiUcPM0x2UzKanExv3ollUkN5kbWtu4pq?=
- =?us-ascii?Q?oIGqYJOCcqSSi0Vr6L7fCE4tEJL1SWNh18X2yHDSYqQcfj27VTkBqbgY45dP?=
- =?us-ascii?Q?5ffIwW0n5BuFFRIEfSpJYS3x7uJDz0mHjrv2BCLO83EKYbd5q0PjjYj6Htr9?=
- =?us-ascii?Q?ebd/bD4eHxQIKrUTr1caOok9ZjbLOYOZrd2c6yJoFXuzhhMPzTpuatfw4pcv?=
- =?us-ascii?Q?+1jtBSeqrhIN9lN8JLSJNylzobG+GxZ3v4WQY1C/gLmRWPX5tGORVCu5+H9M?=
- =?us-ascii?Q?6HK9OMTmHfq95mtoKkP2QjNjeClareGJdKZR54w7tJFoQPAUOVIwF4C3olfq?=
- =?us-ascii?Q?66O21MiHI2M62WWcOn7Q2qAkn+Z3Me68mikFfeJvLKtrwYpKemFmjrW0T2//?=
- =?us-ascii?Q?PQ5i+37q5iBGzxzvUjO+3CZ59xyWZgktpC8qDGIHPkCh1nU5/gkrUJd7gKEU?=
- =?us-ascii?Q?ZhwTdWrUdWgnBuu7oqH6PCYApAaQpd58USkJp3/v8/NyDr6wXe3wVCZA69h9?=
- =?us-ascii?Q?qQA2A4xjSwmMCJBj6lzF4PdKzj1g63GfDz4DojNDNAduLTmjhD0e2ZpatGYl?=
- =?us-ascii?Q?KQO4Td4Mg8J4nkbnrwhqZIxMLn13xnC4Pv52pzOc+MS9XmOURmm3QPLxqk8A?=
- =?us-ascii?Q?zoBmFu0+ffs1B5AjsQoaunuMJw21oXvThsh/innS4JMBCAjLNtLfH21z9ZJt?=
- =?us-ascii?Q?U03zG3f4kNaFRBIT1I0hmCJ4Q+CRYf4OJ8EGVBv+iHYBVEFTtk1QOZod3FUL?=
- =?us-ascii?Q?OIxXhVxpCA=3D=3D?=
 X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 487dcbf5-bfa3-4399-7c81-08df30c242e5
-X-MS-Exchange-CrossTenant-AuthSource: TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2026 04:58:21.4674
+X-MS-Exchange-CrossTenant-AuthSource: OS9P286MB7222.JPNP286.PROD.OUTLOOK.COM
+X-MS-Exchange-CrossTenant-Network-Message-Id: 613a841e-f2f1-4a5a-ac59-08df30c60a3f
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Oct 2026 05:25:24.3389
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: k21OgQlIRV8XNNNgPZOfEjxDKF1ZUUXke2HPyAFav/RX7WPy730Qb4+HhMAQL1DuvPb1i2noey+jKbwgn9Eejg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYYP286MB5665
-X-purgate-ID: tlsNG-ef75cf/1792731508-358C1AE4-F122782A/0/0
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: q2bohIwLho4boAjXb7NRQ4uneRbpxP3RaceJkeOhj2SK6zvkMp2jYZf3TmvoXC4SljiB00tEj1B2ogbMwXNnHg==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY1P286MB3230
+X-purgate-ID: tlsNG-d25034/1792733130-02EDAA5B-ED11A0DC/0/0
 X-purgate-type: clean
-X-purgate-size: 9681
-X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-size: 5642
+X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Add x86 support for attaching callbacks following
-the ARM64 implementation.
-
-It reserves function entry(5 NOPs) and replaces them with:
-
-    call    xen_livepatch_trace_caller
-
-xen_livepatch_trace_caller serves as a trampoline for saving
-registers before calling xen_livepatch_trace_dispatcher where
-callbacks are invoked. Callbacks receive:
-
-    ip: Address of the traced function
-    parent_ip: Address where the traced function was called
-
-One can request the feature by specifying the section
-for struct livepatch_func as .livepatch.traces.
-
-This patch will also let x86 use the livepatch tracer.
-
-Signed-off-by: Ryo Takakura <takakura@valinux.co.jp>
----
- xen/arch/arm/arm64/livepatch.c |  5 +++
- xen/arch/x86/Kconfig           | 13 ++++++++
- xen/arch/x86/Makefile          |  1 +
- xen/arch/x86/arch.mk           |  3 ++
- xen/arch/x86/livepatch-asm.S   | 60 ++++++++++++++++++++++++++++++++++
- xen/arch/x86/livepatch.c       | 33 +++++++++++++++++++
- xen/arch/x86/xen.lds.S         |  5 +++
- xen/common/hypfs_trace.c       |  4 ++-
- xen/common/livepatch.c         |  2 +-
- xen/include/xen/livepatch.h    |  1 +
- 10 files changed, 125 insertions(+), 2 deletions(-)
- create mode 100644 xen/arch/x86/livepatch-asm.S
-
-diff --git a/xen/arch/arm/arm64/livepatch.c b/xen/arch/arm/arm64/livepatch.c
-index 17753f4463..b4ae381ef5 100644
---- a/xen/arch/arm/arm64/livepatch.c
-+++ b/xen/arch/arm/arm64/livepatch.c
-@@ -497,6 +497,11 @@ int arch_livepatch_perform_rela(struct livepatch_elf *elf,
- }
- 
- #ifdef CONFIG_ARM64_PATCHABLE_FUNCTION_ENTRY
-+unsigned long arch_livepatch_trace_entry(unsigned long addr)
-+{
-+    return addr;
-+}
-+
- void arch_livepatch_apply_trace(const struct livepatch_func *trace)
- {
-     uint32_t *new_ptr;
-diff --git a/xen/arch/x86/Kconfig b/xen/arch/x86/Kconfig
-index e5535ac484..bfb6a4d78e 100644
---- a/xen/arch/x86/Kconfig
-+++ b/xen/arch/x86/Kconfig
-@@ -355,6 +355,19 @@ config MICROCODE_SCAN_DEFAULT
- 	  Enable if you have a Linux-based dom0 with microcode attached to the
- 	  initramfs.
- 
-+config X86_PATCHABLE_FUNCTION_ENTRY
-+	bool "Reserve five NOPs at function entry for tracing"
-+	depends on LIVEPATCH && $(cc-option,-fpatchable-function-entry=5)
-+	select HAS_LIVEPATCH_TRACE
-+	default n
-+	help
-+	  This option compiles Xen with -fpatchable-function-entry=5, which
-+	  reserves five NOP instructions at the beginning of functions. The NOPs
-+	  will be livepatched with a branch instruction to callback functions
-+	  registered by user.
-+
-+	  Enable this to use livepatch tracing feature.
-+
- endmenu
- 
- source "common/Kconfig"
-diff --git a/xen/arch/x86/Makefile b/xen/arch/x86/Makefile
-index 2be90ea098..06b39b7530 100644
---- a/xen/arch/x86/Makefile
-+++ b/xen/arch/x86/Makefile
-@@ -46,6 +46,7 @@ obj-$(CONFIG_PV) += ioport_emulate.o
- obj-y += io_apic.o
- obj-y += irq.o
- obj-$(CONFIG_LIVEPATCH) += livepatch.o
-+obj-$(CONFIG_X86_PATCHABLE_FUNCTION_ENTRY) += livepatch-asm.o
- obj-$(CONFIG_KEXEC) += machine_kexec.o
- obj-y += mm.o x86_64/mm.o
- obj-$(CONFIG_VM_EVENT) += monitor.o
-diff --git a/xen/arch/x86/arch.mk b/xen/arch/x86/arch.mk
-index cd0602a79a..31af1a15c4 100644
---- a/xen/arch/x86/arch.mk
-+++ b/xen/arch/x86/arch.mk
-@@ -129,6 +129,9 @@ endif
- # Set up the assembler include path properly for older toolchains.
- CFLAGS += -Wa,-I$(objtree)/include -Wa,-I$(srctree)/include
- 
-+# Reserve entries for livepatch tracing
-+CFLAGS-$(CONFIG_X86_PATCHABLE_FUNCTION_ENTRY) += -fpatchable-function-entry=5
-+
- # The GNU assembler will interpret '/' as a comment start marker instead of a
- # divide for some ELF targets.  Pass --divide when when available to signal '/'
- # is always used as an operator in assembly.
-diff --git a/xen/arch/x86/livepatch-asm.S b/xen/arch/x86/livepatch-asm.S
-new file mode 100644
-index 0000000000..005765b476
---- /dev/null
-+++ b/xen/arch/x86/livepatch-asm.S
-@@ -0,0 +1,60 @@
-+/* SPDX-License-Identifier: GPL-2.0-only */
-+#include <asm/asm_defns.h>
-+
-+        .text
-+
-+/*
-+ * xen/arch/x86/livepatch-asm.S
-+ *
-+ * Trampoline for livepatch tracer.
-+ *
-+ * If livepatch tracer is enabled, function entries are placed
-+ * with five NOPs. arch_livepatch_apply_trace() will be livepatching
-+ * those NOPs to:
-+ *
-+ *     CALL      xen_livepatch_trace_caller
-+ *
-+ * 0(%rsp): traced function + 5
-+ * 8(%rsp): return address to the traced function's caller
-+ */
-+FUNC(xen_livepatch_trace_caller)
-+        pushq   %rbp
-+        movq    %rsp, %rbp
-+        pushfq
-+
-+        /* Preserve general-purpose registers. */
-+        pushq   %rax
-+        pushq   %rcx
-+        pushq   %rdx
-+        pushq   %rsi
-+        pushq   %rdi
-+        pushq   %r8
-+        pushq   %r9
-+        pushq   %r10
-+        pushq   %r11
-+
-+        /*
-+         * xen_livepatch_trace_dispatcher(ip, parent_ip)
-+         *
-+         * ip: Address of the traced function.
-+         * parent_ip: Address where the traced function was called.
-+         */
-+        movq    8(%rbp), %rdi
-+        subq    $5, %rdi
-+        movq    16(%rbp), %rsi
-+        call    xen_livepatch_trace_dispatcher
-+
-+        /* Restore the saved state. */
-+        popq    %r11
-+        popq    %r10
-+        popq    %r9
-+        popq    %r8
-+        popq    %rdi
-+        popq    %rsi
-+        popq    %rdx
-+        popq    %rcx
-+        popq    %rax
-+        popfq
-+        popq    %rbp
-+        ret
-+END(xen_livepatch_trace_caller)
-diff --git a/xen/arch/x86/livepatch.c b/xen/arch/x86/livepatch.c
-index 5158e91f7e..1dfcc3e750 100644
---- a/xen/arch/x86/livepatch.c
-+++ b/xen/arch/x86/livepatch.c
-@@ -19,6 +19,10 @@
- #include <asm/nmi.h>
- #include <asm/setup.h>
- 
-+#ifdef CONFIG_X86_PATCHABLE_FUNCTION_ENTRY
-+extern void xen_livepatch_trace_caller(void);
-+#endif
-+
- static bool has_active_waitqueue(const struct vm_event_domain *ved)
- {
-     /* ved may be xzalloc()'d without INIT_LIST_HEAD() yet. */
-@@ -365,6 +369,35 @@ int arch_livepatch_secure(const void *va, unsigned int pages, enum va_type type)
-     return modify_xen_mappings(start, start + pages * PAGE_SIZE, flag);
- }
- 
-+#ifdef CONFIG_X86_PATCHABLE_FUNCTION_ENTRY
-+unsigned long arch_livepatch_trace_entry(unsigned long addr)
-+{
-+    if ( (is_endbr64((const void *)addr) || is_endbr64_poison((const void *)addr)) )
-+        addr += ENDBR64_LEN;
-+
-+    return addr;
-+}
-+
-+void noinline arch_livepatch_apply_trace(const struct livepatch_func *trace)
-+{
-+    void *site = (void *)arch_livepatch_trace_entry((unsigned long)trace->old_addr);
-+    const void *new_addr = xen_livepatch_trace_caller;
-+    uint8_t insn[ARCH_PATCH_INSN_SIZE];
-+    int32_t val = new_addr - (site + ARCH_PATCH_INSN_SIZE);
-+
-+    insn[0] = 0xe8; /* CALL rel32. */
-+    memcpy(&insn[1], &val, sizeof(val));
-+    memcpy(site, insn, sizeof(insn));
-+}
-+
-+void noinline arch_livepatch_revert_trace(const struct livepatch_func *trace)
-+{
-+    void *site = (void *)arch_livepatch_trace_entry((unsigned long)trace->old_addr);
-+
-+    memset(site, 0x90, ARCH_PATCH_INSN_SIZE);
-+}
-+#endif
-+
- void __init arch_livepatch_init(void)
- {
-     void *start, *end;
-diff --git a/xen/arch/x86/xen.lds.S b/xen/arch/x86/xen.lds.S
-index 8f943e11ea..1f7d052c30 100644
---- a/xen/arch/x86/xen.lds.S
-+++ b/xen/arch/x86/xen.lds.S
-@@ -126,6 +126,11 @@ SECTIONS
-        *(.data.rel.ro)
-        *(.data.rel.ro.*)
- 
-+       . = ALIGN(8);
-+       __start_patchable_function_entries = .;
-+       KEEP(*(__patchable_function_entries))
-+       __stop_patchable_function_entries = .;
-+
- #if defined(BUILD_ID) && defined(EFI) && !defined(BUILD_ID_EFI)
- /*
-  * No mechanism to put an PT_NOTE in the EFI file - so put
-diff --git a/xen/common/hypfs_trace.c b/xen/common/hypfs_trace.c
-index d9e06e092e..314cce09bc 100644
---- a/xen/common/hypfs_trace.c
-+++ b/xen/common/hypfs_trace.c
-@@ -141,7 +141,7 @@ void trace_dispatch_callbacks(unsigned long ip, unsigned long parent_ip)
-     if ( !global_trace_func.old_addr )
-         return;
- 
--    if ( (unsigned long)global_trace_func.old_addr != ip )
-+    if ( arch_livepatch_trace_entry((unsigned long)global_trace_func.old_addr) != ip )
-         return;
- 
-     callback = global_trace_func.new_addr;
-@@ -194,6 +194,8 @@ static bool is_patchable_function_entry(unsigned long addr)
- {
-     const unsigned long *p;
- 
-+    addr = arch_livepatch_trace_entry(addr);
-+
-     for ( p = __start_patchable_function_entries;
-           p < __stop_patchable_function_entries; p++ )
-     {
-diff --git a/xen/common/livepatch.c b/xen/common/livepatch.c
-index 352a2df62c..295a3ebd57 100644
---- a/xen/common/livepatch.c
-+++ b/xen/common/livepatch.c
-@@ -224,7 +224,7 @@ xen_livepatch_trace_dispatcher(unsigned long ip, unsigned long parent_ip)
-         {
-             f = &data->funcs[i];
- 
--            if ( (unsigned long)f->old_addr != ip )
-+            if ( arch_livepatch_trace_entry((unsigned long)f->old_addr) != ip )
-                 continue;
- 
-             ASSERT(f->new_addr);
-diff --git a/xen/include/xen/livepatch.h b/xen/include/xen/livepatch.h
-index 1b927af8ee..0e5af5fdc5 100644
---- a/xen/include/xen/livepatch.h
-+++ b/xen/include/xen/livepatch.h
-@@ -130,6 +130,7 @@ void arch_livepatch_apply_trace(const struct livepatch_func *trace);
- void arch_livepatch_revert(const struct livepatch_func *func,
-                            struct livepatch_fstate *state);
- void arch_livepatch_revert_trace(const struct livepatch_func *trace);
-+unsigned long arch_livepatch_trace_entry(unsigned long addr);
- void arch_livepatch_post_action(void);
- 
- void arch_livepatch_mask(void);
--- 
-2.34.1
-
+SGkgTWljaGFsLA0KDQpUaGFuayB5b3UgZm9yIHRoZSByZXZpZXcuDQoNCj4gPiBkaWZmIC0tZ2l0
+IGEveGVuL2FyY2gvYXJtL3NtcGJvb3QuYyBiL3hlbi9hcmNoL2FybS9zbXBib290LmMNCj4gPiBp
+bmRleCBkMzQzOTZmOWIxLi5jZjQ4NThlYjM3IDEwMDY0NA0KPiA+IC0tLSBhL3hlbi9hcmNoL2Fy
+bS9zbXBib290LmMNCj4gPiArKysgYi94ZW4vYXJjaC9hcm0vc21wYm9vdC5jDQo+ID4gQEAgLTkz
+LDEzICs5Myw3IEBAIHN0YXRpYyBpbnQgc2V0dXBfY3B1X3NpYmxpbmdfbWFwKGludCBjcHUpDQo+
+ID4gICAgICAgICAgICF6YWxsb2NfY3B1bWFza192YXIoJnBlcl9jcHUoY3B1X2NvcmVfbWFzaywg
+Y3B1KSkgKQ0KPiA+ICAgICAgICAgIHJldHVybiAtRU5PTUVNOw0KPiA+DQo+ID4gLSAgICAvKg0K
+PiA+IC0gICAgICogQ3VycmVudGx5IHdlIGFzc3VtZSB0aGVyZSBpcyBubyBtdWx0aXRocmVhZCBh
+bmQgTlVNQSwgc28NCj4gPiAtICAgICAqIGEgQ1BVIGlzIGEgc2libGluZyB3aXRoIGl0c2VsZiwg
+YW5kIHRoZSBhbGwgcG9zc2libGUgQ1BVcw0KPiA+IC0gICAgICogYXJlIHN1cHBvc2VkIHRvIGJl
+bG9uZyB0byB0aGUgc2FtZSBzb2NrZXQgKE5VTUEgbm9kZSkuDQo+ID4gLSAgICAgKi8NCj4gPiAt
+ICAgIGNwdW1hc2tfc2V0X2NwdShjcHUsIHBlcl9jcHUoY3B1X3NpYmxpbmdfbWFzaywgY3B1KSk7
+DQo+ID4gLSAgICBjcHVtYXNrX2NvcHkocGVyX2NwdShjcHVfY29yZV9tYXNrLCBjcHUpLCAmY3B1
+X3Bvc3NpYmxlX21hcCk7DQo+ID4gKyAgICBpbml0X2NwdV9zaWJsaW5nX21hcChjcHUpOw0KPiBU
+aGUgY29tbWVudCBhYm92ZSB0aGUgY3B1X3NpYmxpbmdfbWFzayBkZWZpbml0aW9uIGlzIG5vdyBz
+dGFsZS4NCg0KWWVzLiBUaGlzIHBhdGNoIHJlbW92ZXMgdGhlIGNvbW1lbnQuDQoNCg0KPiA+ICsg
+ICAgZm9yX2VhY2hfcG9zc2libGVfY3B1KGNwdSkNCj4gPiArICAgIHsNCj4gPiArICAgICAgICB1
+bnNpZ25lZCBpbnQgZmlyc3RfY3B1Ow0KPiA+ICsgICAgICAgIHN0cnVjdCBjcHVfdG9wb2xvZ3kg
+KnRvcG8gPSAmY3B1X3RvcG9sb2d5W2NwdV07DQo+ID4gKw0KPiA+ICsgICAgICAgIGZpcnN0X2Nw
+dSA9IGNwdW1hc2tfZmlyc3QodG9wby0+dGhyZWFkX3NpYmxpbmcpOw0KPiA+ICsgICAgICAgIEFT
+U0VSVChmaXJzdF9jcHUgPCBucl9jcHVfaWRzKTsNCj4gPiArDQo+ID4gKyAgICAgICAgaWYgKCBm
+aXJzdF9jcHUgPT0gY3B1ICkNCj4gPiArICAgICAgICB7DQo+ID4gKyAgICAgICAgICAgIHRvcG8t
+PnBoeXNfY29yZV9pZCA9IG5leHRfY29yZV9pZDsNCj4gPiArICAgICAgICAgICAgbmV4dF9jb3Jl
+X2lkKys7DQo+ID4gKyAgICAgICAgfQ0KPiA+ICsgICAgICAgIGVsc2UNCj4gPiArICAgICAgICB7
+DQo+ID4gKyAgICAgICAgICAgIHRvcG8tPnBoeXNfY29yZV9pZCA9IGNwdV90b3BvbG9neVtmaXJz
+dF9jcHVdLnBoeXNfY29yZV9pZDsNCj4gPiArICAgICAgICB9DQo+IE5vIGJyYWNlcyBmb3Igc2lu
+Z2xlIGxpbmUgc3RhdGVtZW50cy4NCg0KT2theS4NCg0KPiA+ICsNCj4gPiArICAgICAgICBmaXJz
+dF9jcHUgPSBjcHVtYXNrX2ZpcnN0KHRvcG8tPmNsdXN0ZXJfc2libGluZyk7DQo+ID4gKyAgICAg
+ICAgaWYgKCBmaXJzdF9jcHUgPj0gbnJfY3B1X2lkcyApDQo+ID4gKyAgICAgICAgew0KPiA+ICsg
+ICAgICAgICAgICAvKiBDbHVzdGVyaW5nIGlzIG5vdCBzdXBwb3J0ZWQgKi8NCj4gPiArICAgICAg
+ICAgICAgdG9wby0+cGh5c19jbHVzdGVyX2lkID0gMDsNCj4gPiArICAgICAgICB9DQo+ID4gKyAg
+ICAgICAgZWxzZQ0KPiA+ICsgICAgICAgIHsNCj4gPiArICAgICAgICAgICAgaWYgKCBmaXJzdF9j
+cHUgPT0gY3B1ICkNCj4gPiArICAgICAgICAgICAgew0KPiA+ICsgICAgICAgICAgICAgICAgdG9w
+by0+cGh5c19jbHVzdGVyX2lkID0gbmV4dF9jbHVzdGVyX2lkOw0KPiA+ICsgICAgICAgICAgICAg
+ICAgbmV4dF9jbHVzdGVyX2lkKys7DQo+ID4gKyAgICAgICAgICAgIH0NCj4gPiArICAgICAgICAg
+ICAgZWxzZQ0KPiA+ICsgICAgICAgICAgICB7DQo+ID4gKyAgICAgICAgICAgICAgICB0b3BvLT5w
+aHlzX2NsdXN0ZXJfaWQgPSBjcHVfdG9wb2xvZ3lbZmlyc3RfY3B1XS5waHlzX2NsdXN0ZXJfaWQ7
+DQo+ID4gKyAgICAgICAgICAgIH0NCj4gTm8gYnJhY2VzIGZvciBzaW5nbGUgbGluZSBzdGF0ZW1l
+bnRzLg0KDQpPa2F5Lg0KDQo+ID4gKyAgICAgICAgfQ0KPiA+ICsNCj4gPiArICAgICAgICBmaXJz
+dF9jcHUgPSBjcHVtYXNrX2ZpcnN0KHRvcG8tPmNvcmVfc2libGluZyk7DQo+ID4gKyAgICAgICAg
+QVNTRVJUKGZpcnN0X2NwdSA8IG5yX2NwdV9pZHMpOw0KPiA+ICsNCj4gPiArICAgICAgICBpZiAo
+IGZpcnN0X2NwdSA9PSBjcHUgKQ0KPiA+ICsgICAgICAgIHsNCj4gPiArICAgICAgICAgICAgdG9w
+by0+cGh5c19zb2NrZXRfaWQgPSBuZXh0X3NvY2tldF9pZDsNCj4gPiArICAgICAgICAgICAgbmV4
+dF9zb2NrZXRfaWQrKzsNCj4gPiArICAgICAgICB9DQo+ID4gKyAgICAgICAgZWxzZQ0KPiA+ICsg
+ICAgICAgIHsNCj4gPiArICAgICAgICAgICAgdG9wby0+cGh5c19zb2NrZXRfaWQgPSBjcHVfdG9w
+b2xvZ3lbZmlyc3RfY3B1XS5waHlzX3NvY2tldF9pZDsNCj4gPiArICAgICAgICB9DQo+IE5vIGJy
+YWNlcyBmb3Igc2luZ2xlIGxpbmUgc3RhdGVtZW50cy4NCg0KT2theS4NCg0KPiA+ICBzdHJ1Y3Qg
+Y3B1X3RvcG9sb2d5IHsNCj4gPiAgICAgIGNwdW1hc2tfdmFyX3QgdGhyZWFkX3NpYmxpbmc7DQo+
+ID4gICAgICBjcHVtYXNrX3Zhcl90IGNvcmVfc2libGluZzsNCj4gPiAgICAgIGNwdW1hc2tfdmFy
+X3QgY2x1c3Rlcl9zaWJsaW5nOw0KPiA+ICsgICAgdW5zaWduZWQgaW50IHBoeXNfY29yZV9pZDsN
+Cj4gPiArICAgIHVuc2lnbmVkIGludCBwaHlzX2NsdXN0ZXJfaWQ7DQo+IHBoeXNfY2x1c3Rlcl9p
+ZCBhbmQgY2x1c3Rlcl9zaWJsaW5nIGFyZSBvbmx5IHVzZWQgdG8gY29tcHV0ZSBlYWNoIG90aGVy
+LiBBcmUNCj4gdGhleSByZWFsbHkgbmVlZGVkPw0KDQpJIGtlcHQgdGhlbSBiZWNhdXNlIEkgcGxh
+biB0byBtYWtlIGl0IHBvc3NpYmxlIHRvIHNwZWNpZnkgImNsdXN0ZXIiIGZvciB0aGUNCmNyZWRp
+dDJfcnVucXVldWUgcGFyYW1ldGVyLg0KDQoNCj4gPiArICAgIHVuc2lnbmVkIGludCBwaHlzX3Nv
+Y2tldF9pZDsNCj4gPiArICAgIHVuc2lnbmVkIGludCBudW1fc2libGluZ3M7DQo+ID4gIH07DQo+
+ID4NCj4gPiAgZXh0ZXJuIHN0cnVjdCBjcHVfdG9wb2xvZ3kgKmNwdV90b3BvbG9neTsNCj4gPiAr
+DQo+ID4gK3N0YXRpYyBpbmxpbmUgdm9pZCBpbml0X2NwdV9zaWJsaW5nX21hcCh1bnNpZ25lZCBp
+bnQgY3B1KQ0KPiA+ICt7DQo+ID4gKyAgICBpZiAoIElTX0VOQUJMRUQoQ09ORklHX0dFTkVSSUNf
+Q1BVX1RPUE9MT0dZKSAmJiBjcHVfdG9wb2xvZ3kgKQ0KPiA+ICsgICAgew0KPiA+ICsgICAgICAg
+IGNwdW1hc2tfY29weShwZXJfY3B1KGNwdV9zaWJsaW5nX21hc2ssIGNwdSksDQo+ID4gKyAgICAg
+ICAgICAgICAgICAgICAgIGNwdV90b3BvbG9neVtjcHVdLnRocmVhZF9zaWJsaW5nKTsNCj4gPiAr
+ICAgICAgICBjcHVtYXNrX2NvcHkocGVyX2NwdShjcHVfY29yZV9tYXNrLCBjcHUpLA0KPiA+ICsg
+ICAgICAgICAgICAgICAgICAgICBjcHVfdG9wb2xvZ3lbY3B1XS5jb3JlX3NpYmxpbmcpOw0KPiBj
+cHVfdG9wb2xvZ3lbXSBpcyBidWlsdCBmcm9tIGFsbCBDUFVzLCBzbyBhIENQVSB0aGF0IHRoZW4g
+ZmFpbHMgdG8gYm9vdA0KPiBzdGF5cyBpbiBpdHMgc2libGluZ3MgbWFza3MuIEkgdGhpbmsgYSBD
+UFUgc2hvdWxkIGJlIGFkZGVkIHRvIHRoZXNlIG1hc2tzIG9ubHkNCj4gb25jZSBpdCBpcyBvbmxp
+bmUuDQoNClRoZSBvcmlnaW5hbCBjb2RlIHByaW9yIHRvIHRoaXMgcGF0Y2ggaW5pdGlhbGl6ZWQg
+dGhlIENQVSBzaWJsaW5nIG1hcCBpbiB0aGUgQ1BVX1VQX1BSRVBBUkUNCk5vdGlmaWVyIGJlZm9y
+ZSBicmluZ2luZyB1cCBhIHNlY29uZGFyeSBjb3JlLiBJIGFncmVlIHRoYXQgaXQgaXMgYXBwcm9w
+cmlhdGUgdG8gaW5pdGlhbGl6ZSBpdCBhZnRlcg0KdGhlIGNvcmUgaXMgYWN0dWFsbHkgYnJvdWdo
+dCB1cCwgc2ltaWxhciB0byBob3cgeDg2IFhlbiBkb2VzIGl0Lg0KDQpUaGFuayB5b3UsDQpIaXJv
+a2F6dSBUYWthaGFzaGkNCg==
 
