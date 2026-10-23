@@ -2,41 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BB65E606A31A
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 14:37:55 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C685606A31A
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 15:47:26 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=google.com header.i=@google.com header.a=rsa-sha256 header.s=20251104 header.b=YJdEIuzH
-Received: from list by lists.xenproject.org with outflank-mailman.1459377.1671320 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=va6Z2fz9
+Received: from list by lists.xenproject.org with outflank-mailman.1459471.1671375 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKGOo-0004lK-OM; Fri, 23 Oct 2026 14:37:38 +0000
+	id 1xKHTp-0006Fe-PV; Fri, 23 Oct 2026 15:46:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1459377.1671320; Fri, 23 Oct 2026 14:37:38 +0000
+Received: by outflank-mailman (output) from mailman id 1459471.1671375; Fri, 23 Oct 2026 15:46:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKGOo-0004lD-Lc; Fri, 23 Oct 2026 14:37:38 +0000
-Received: by outflank-mailman (input) for mailman id 1459377;
- Fri, 23 Oct 2026 14:37:36 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xKHTp-0006FX-Mi; Fri, 23 Oct 2026 15:46:53 +0000
+Received: by outflank-mailman (input) for mailman id 1459471;
+ Fri, 23 Oct 2026 15:46:53 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <almasrymina@google.com>) id 1xKGOm-0004l7-R2
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 14:37:36 +0000
+ (envelope-from <andrew.cooper@citrix.com>) id 1xKHTp-0006FR-1O
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 15:46:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xKGOm-005xL1-7v
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 16:37:36 +0200
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xKHTo-00Ffvh-EJ
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 17:46:52 +0200
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <almasrymina@google.com>)
- id 6adb7128-2eae-0a2a0a5409dd-0a2a450a9a5c-8
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 16:37:36 +0200
-Received: from [209.85.208.46] (helo=mail-ed1-f46.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <almasrymina@google.com>)
- id 6adb7130-f2d2-0a2a450a0019-d155d02e8ce6-3
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 16:37:36 +0200
-Received: by mail-ed1-f46.google.com with SMTP id
- 4fb4d7f45d1cf-6b1b12de661so12175a12.0
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 07:37:36 -0700 (PDT)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6adb813d-bab6-0a2a0a5309dd-0a2a450b94da-42
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 17:46:52 +0200
+Received: from [52.101.193.4]
+ (helo=CH1PR05CU001.outbound.protection.outlook.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6adb816b-b7e8-0a2a450b0019-3465c104d2b9-3
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 17:46:52 +0200
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by SJ0PR03MB5663.namprd03.prod.outlook.com (2603:10b6:a03:27b::15)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.19; Fri, 23 Oct
+ 2026 15:46:48 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0546.017; Fri, 23 Oct 2026
+ 15:46:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -45,188 +52,240 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=google.com header.i="@google.com" header.h="Content-Transfer-Encoding:Content-Type:Cc:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version"
-ARC-Seal: i=1; a=rsa-sha256; t=1792766256; cv=none;
-        d=google.com; s=arc-20260327;
-        b=OfuFDZHYGvbNtbmpUaGLSHkKkWvAROh4hlZFivW9w+O/ZnYEq1DtgvrzlbRxxtmVlc
-         oXmEAV4a2f47yEuwdPJQMYuHmGu5XYlf0Fi0DWTLYtllOzXW1NyOHgP5aCG79IMr2ZX+
-         jq3jJmabGErAhLbRWXkIwrReDpQegJOiDQ16Ezw4xo9JO3qWIu0mHGqqnGjTsU9LX2JK
-         Xcc7bw5qmFS0jSarTXKgpimyxHKMa7/aqyPElI2pdDGZ6uzfxoh1xaol3i0mB6rZB10r
-         RCgjZka+q3oCRIZXvRPMWcnL1+wCSQsDGQsFOWyfj56VW6Z14ZuOhG0esjYtSkM5JHDH
-         ofdA==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
-        h=content-transfer-encoding:cc:to:subject:message-id:date:from
-         :in-reply-to:references:mime-version:dkim-signature;
-        bh=TbyyQ/cVBjURwEkpwzvfBfCIIo+L2tVbdO6SgJnUJTQ=;
-        fh=SW+8ZejeTBE2+9JuXfQboCoaPlVZgeA720cesd9C3AE=;
-        b=Xz7nm5S94qyjf3r5XXyK8uCJhNLZS1k5rRgF5TtjG8Syamo8PkVAmBQKvkj9J7ucGI
-         Hww1K8bE649duhf97M9TYgmgO0p2XwAkw8KOZp8CfxwX92FWyMTtmZ270fvPeKiC0zKr
-         qovE1QCGvCi93rfbJPxywUf38d/T+KGjyb5pRFcl23mKb77xd5bcNS/QZvJuJk4tWR0I
-         rkgmzponD1kSOLYfz95qvuNlcgJurQXqtSap9vZ5JfuYG3qXkKqzXDtPxf9q7GaolxMc
-         pG/nxWoRMLW3cqjo26iO0T5zio+/PiauVjgcJ7xRIVzTciuar4dIdOGwV55ZiSzruvFs
-         5zxA==;
-        darn=lists.xenproject.org
-ARC-Authentication-Results: i=1; mx.google.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=google.com; s=20251104; t=1792766256; x=1793371056; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:from:to:cc:subject
-         :date:message-id:reply-to:content-type;
-        bh=TbyyQ/cVBjURwEkpwzvfBfCIIo+L2tVbdO6SgJnUJTQ=;
-        b=YJdEIuzHXkpSMr754Gj/KLggzDhY9/AwTPVGt9k8SVu9qlTrv6PrTj+soLxCpoo599
-         Z53QyDQ9DpPXJsuk6ER+fyz6b0pjipa1EedDoEWVQP/K+nK76sHSrSYX11CWfq8j5zin
-         vrXY5H6SojVSSur0McTGmhHLQ6YL8iluWEESQN5B4DCYq/008VhJ40PjX2Jcv9a7R0dp
-         CCel1Zl4jsVAf4cM+RTnXIxi3MXBr+vzv0n49FdL3rveRJblEWnsqn19p7sH1bJNQvpZ
-         our1t4iaKLHmkv7rIrZRnCASjSmXsB74ih4xqfwcTGWAmNkYX+K9SJoE7TtRduY3ZqQH
-         P5Kg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1792766256; x=1793371056;
-        h=content-transfer-encoding:content-type:cc:to:subject:message-id
-         :date:from:in-reply-to:references:mime-version:x-gm-gg
-         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=TbyyQ/cVBjURwEkpwzvfBfCIIo+L2tVbdO6SgJnUJTQ=;
-        b=s0mid5p3ffAEzKomn9qUz8+pYcxXy7Y5OkhwQ8eroXwu//+z/dFO4/SXXZY5lOc00m
-         m1qVk4vKXBWdbg6KTYSSYcoLaGYG742Xq6UwB0sWehxrsigwbackU16zeSBVJ/4tC5j4
-         uo5KQ6ptpK7SMlNJvTH8UJ3Pnq5BPQxHyrVw/HPdQ+OoyDZCDPiQDke9A6Uzfli5iLmv
-         VPTYPIP54Eb/BQhxjLiM5jiwMBFlPdJN3YTuDxPYR9FQ6pVgMIeqa3y/Op6FwLlVOvux
-         ecT2916hf16pZX+9LXJTPUBiTRNl1Rx1E0wR5Y1GWnnA1zjGq8hTj7ryyIehjNudwM2p
-         wf4w==
-X-Forwarded-Encrypted: i=1; AKwUvBxNzTlPGIQlN23TUm3qWbrbJwpFKFRNbMsJpd2rTxXGVp5t1iXaPE1MxfeQzTVBsm+S/4i43P8Yr4M=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKBUNVzbnmRG5HzPsxso57bXgeTl4JB+1lrMheqPwNyL1dAklWw
-	ESc/bjSXbuEMeed/ou4Q5qLnwIzXNaqygvSQKLhdjGXyM4gdsJaYbX1zLml2lZQ5QcGsdw/f/hJ
-	Kn/8+/8UbKLzhZersNqOLWLv0jxqXV1qzVa9Sc0D+
-X-Gm-Gg: AYBFou3MWXZo6hRABmcrga96Y7JghG/XjAFp/k7N4BBI6iFDJSGrY/ykMXBgApW3p9q
-	/k45fVQ7KxfM10w0l4hN2rOhnWNDht5YzqGSHuyKN0uRdYHOpKI3xxyWZcQAjYAynt9Ciq2xo9Y
-	xnNgPyJR5hhdygPjeLL3cpgBfp9949oa2DPls/rXnrE6AB7XZ9wiWnkdMzgrBb9jIfhAHqkjHoE
-	afTR3ZAqY5t+PodUObO9rA2BmYY/MIvCKGFf6FIrkmgGWvh9ejmVmQ+6mQgKpoIUtPlZY66PAQ3
-	8WEy/mnOU0TsBq22yRQpUs3Hmd4vmyFqP5eROMSsHGQ/iNRspKM3WBa9AXFOcMxnR43P34/y6Pm
-	++VUHLWsXy0nOV2P0M/l8HiAdGvAu18iOJzPLUUbtnA4bmZ39Y0+L9m5NXk4I2oBXEiU=
-X-Received: by 2002:aa7:d74a:0:b0:6a6:7385:3eac with SMTP id
- 4fb4d7f45d1cf-6b43503ae79mr48860a12.11.1792766255144; Fri, 23 Oct 2026
- 07:37:35 -0700 (PDT)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=KKSOnl+7sN4Jbpwys2XVMAy0rFGOxL/AK50oJYTWyoS8mJFt/rP4fpQu/BJTufgRP4cknLCmis6mMRefmyWUyObQKX1cDDqPN38iZT+JJtd2aUjcHiLR5LsS5spzJYcnyIAxFttX40FUrop0av0HKnL+fPF4V8lVCZ9709to6baZITEhq/wTF0bNUEGcx9CaXHuvql40IjB3/N1Xzp6uEyUmZc/5FF+Q0OspKoP/q3ST1qX8u7qw6S/VlaTSmr8uyqbP8cj2b+vRwkKO3UvrA7F3xm67ByhV47TYYFuVaM9PPJ5bFx6/CmTRX0l5jdWSylb4zP0OEHJYHBWF/YVKUA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=Sbn44joTs0DGvlSdbu8SyIdJZJ22F2VeNJN6Amc+Vog=;
+ b=FFc6Uoba2/m4R4PAJ4DXmMwsV5YmClUkWuNlNTvQ0CK9/deVpJrhb2e5SZiR1kOc+zrhQngFBKkxZ1CUmnVXGeoipV/CpXh/DAWyLgMmEtUVnhgnycvaEDw7zAuB+1bjkBhHFW8T75UFJ739q0M9Q7VnOs9W9C92FoXwtb4mkPiDKv82hN4RFFeh+RvDcG2jbVMyAZCFLiNkNUqBLyERFO0Mu2WoW+Lay42yavbSHlKATTYIymUmX0ApyYZDXi5gZGe6Y9SmShFiumKb6yXwnZfKLRiq3aPIajULupJ/R7lmZZZURdVDdTYrxJkDGBTYRQm7VtWbU4NIH9yZnZkRww==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=Sbn44joTs0DGvlSdbu8SyIdJZJ22F2VeNJN6Amc+Vog=;
+ b=va6Z2fz9uhl/5VZJYDQiONdcn/CewZIE6hdRAL5YulSD2o3AY63vlOelJoYoWk8lC0jUv2rFZPAmluUE4cV+mUjNYiQYDxjf80nj9030DSayM5PZfj7LzkZehpDV2DV0Q8kA8R62Dar1661uv5fZhpy5duVNBxANHXgbf04+cTQ=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <f9ec6214-8c1e-4418-af5d-86d64e940f9e@citrix.com>
+Date: Fri, 23 Oct 2026 16:46:42 +0100
+User-Agent: Mozilla Thunderbird
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>, Jan Beulich
+ <jbeulich@suse.com>, Teddy Astie <teddy.astie@vates.tech>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ Stefano Stabellini <sstabellini@kernel.org>
+Subject: Re: [PATCH] xen/vcpu: ensure no write when runstate handler is NULL
+To: Roger Pau Monne <roger@xenproject.org>, xen-devel@lists.xenproject.org
+References: <20261023133316.64204-1-roger@xenproject.org>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <20261023133316.64204-1-roger@xenproject.org>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P123CA0325.GBRP123.PROD.OUTLOOK.COM
+ (2603:10a6:600:18c::6) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-References: <20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7@toxicpanda.com>
- <20261019-b4-skbuff-bug-on-followups-v1-3-41dbef50b9f7@toxicpanda.com>
-In-Reply-To: <20261019-b4-skbuff-bug-on-followups-v1-3-41dbef50b9f7@toxicpanda.com>
-From: Mina Almasry <almasrymina@google.com>
-Date: Fri, 23 Oct 2026 07:37:23 -0700
-X-Gm-Features: AclHuK955ZVILJAXSd5ooCPOgIzdBikAhRIkvruYzZknz6V5xNQiHJHo5To2igs
-Message-ID: <CAHS8izOEYnqfNz_57u-JNiEC4OCB8MT5Gvuhi52rXkN6aQ18OQ@mail.gmail.com>
-Subject: Re: [PATCH net-next 03/15] net: skbuff: fail checksum validation when
- the skb can't be checksummed
-To: Josef Bacik <josef@toxicpanda.com>
-Cc: "David S. Miller" <davem@davemloft.net>, Eric Dumazet <edumazet@kernel.org>, 
-	Jakub Kicinski <kuba@kernel.org>, Paolo Abeni <pabeni@redhat.com>, Simon Horman <horms@kernel.org>, 
-	Andrew Lunn <andrew+netdev@lunn.ch>, Juergen Gross <jgross@suse.com>, 
-	Stefano Stabellini <sstabellini@kernel.org>, Willem de Bruijn <willemdebruijn.kernel@gmail.com>, 
-	Fernando Fernandez Mancera <fmancera@suse.de>, David Laight <david.laight.linux@gmail.com>, netdev@vger.kernel.org, 
-	xen-devel@lists.xenproject.org
-Content-Type: text/plain; charset="UTF-8"
-Content-Transfer-Encoding: quoted-printable
-X-purgate-ID: tlsNG-4011c0/1792766256-512C8CFC-46F06BE9/0/0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|SJ0PR03MB5663:EE_
+X-MS-Office365-Filtering-Correlation-Id: 94e848e3-12d5-4984-ef9d-08df311cd829
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|366016|23010399003|1800799024|261013131602099003|261009223027099003|261022105027099003|261022075727099003|261021121427099003|10067099003|56012099006|18002099003|22082099003|11063799006;
+X-Microsoft-Antispam-Message-Info:
+	rl8MD/WZf9V++InM+LVK+hRfntnX0KesRlsfdYBmK9usHqwYMmrq512wDfIKHIHWMzBzw2eZNq/YyXrVvH5VedS41MSywhp1UmcWh5N8iMskhbNpNWmVAL6xsjUQGKU1+My+lnX02xnZn8yJB7fAZrD0woL+D1JGY1z4RKMTAGM1V/CVssPXUjxAXemWH5dTctIEq0IGJelBP7e93sZBjclCVlagbnnp1kBYlCplZz7vaocanhC4HmSnETtAhGD0JbP0PSiqFA3SzKBKqGe5G9qSAwc3aW06XA11hJ4+FeTPPGbleg+mamJH4jWzwhamCkOD7Y67GYrFHRm1G82hv4DNOsb8dK9fGcwKETpPwRm65B/IoTJk2lJXqxKVI2re9YIQ5e5CCcY8m/0Qoa4UsCxyVJXHbBfDqVesVAocLyfDJyl4G0mEc7xhHb8/UeVDWBJNpwjvyeXp2q86C0a+OBC+NfLQcWjIH/rwcChiDDmaXKUP/04wlZxj915R/iryHW7jf5fF7x1phjCAJErfuhOk58ECbZlViJ1DBDxcUe10WQPm8Rbg+oke1Krq54pUc66EnPBgmv5EIQlQsAFEUWm7VJP1nhMKXBOwW0YF17TjJNS90FMSnFrwgEGnkBiCjaVFmMrBWL0ZyIogsB6fRYCsM/hHgpRQofknPBZfArA=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(23010399003)(1800799024)(261013131602099003)(261009223027099003)(261022105027099003)(261022075727099003)(261021121427099003)(10067099003)(56012099006)(18002099003)(22082099003)(11063799006);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?UENsL1RGUGtnVDIyWTZwallLY01wakxTTkN6QVFUSFMzMGFjdy8xa3dFRmhI?=
+ =?utf-8?B?K0Qyd25iNkF0dWk0RlMwVktIdFpHaUxkdVl5UzJHQXBaY3hOcTZncDhXVy84?=
+ =?utf-8?B?SWUzNFJCZ3ZjSzJIYkNaRGlZWTZjT3ZJWklQSlYxcjRxeXRTbFVQYXVobnV0?=
+ =?utf-8?B?ZUZhRkoxcnVZRzhmTFRaVHBKakJseWxZVkFzeC9mL01lUDhQcExZbk01bE1E?=
+ =?utf-8?B?NHo4M3Ywc2pDTEVSY3lIckk3VGJYWnJZM1V1RWhvbUVIQ1hrVEVvWmZSSUVX?=
+ =?utf-8?B?OFlRbjBhektaWnJyNmNsdEJtN0U3OXNCZjNsMjhVUitjUjlEejAwaUlYS2Q5?=
+ =?utf-8?B?Qjg4aklqY2pLS0paUHdCY0p3SWhSRHNvU3hRRjZISk9TM1djZHZQSnFlWjlo?=
+ =?utf-8?B?bEhncm5vOWExcDZSb0Z4SGN3cmdVME5vUW5RMGZkOGt4b2x3eWh2NTFJWnE2?=
+ =?utf-8?B?QnR2ek9QTkMxbEF0SW9hZ0dFYmcvVWMrbU92Z0hWdUpnOE8rN1BqU01ockhz?=
+ =?utf-8?B?bjVDNlJCY3N1dlJRVjhoZloxclRWdlE0YTZueFUvYWpvZnBlQUFtWTBmaEM3?=
+ =?utf-8?B?NlkxWWY5UC9Bb25VbnhaaStpSWw1bE9QeXFRSkFmVlVKQVJXOTR6QWk5Q1d6?=
+ =?utf-8?B?MHhlVnJ2QVBCYVY3SU1TN0dCS3lBNkZuUXhjSUh2Rzh1Q3VIUXpRb2h3dHJy?=
+ =?utf-8?B?Si9QcWlqTTQ0cTI5bjBIa1A2Um45VGpPQjZHeC83WERlVm0yeXBYcS9vWjM0?=
+ =?utf-8?B?WUNFN3UxYzhXMXRZTi9tYWNXQXhWYVBPUnA0MmJuVjFidDNWVUVsUTVCQ0w1?=
+ =?utf-8?B?TGd1ZDJyb2Z6UElpVTY0WWY2ZVFuZzJIVndOMStEbHo2bFlLK1hCT2dZMnNk?=
+ =?utf-8?B?Skh5ZDVNY29aNm9TdWZmU0kyYlQyMnRvRWhVTHorOGJ5V1Byajh1cEV2QzU3?=
+ =?utf-8?B?RVRDSGVRSS9BNzdZWWpQb3R3QmFoMy9VUXhXajVocE42L0RNSHhWVlRvMHd2?=
+ =?utf-8?B?MHZBOUVtTm9ObXVVZDdOQnFiVytHRGJoaUxmc2JyVG5vYndYSXVKdDB6QmRM?=
+ =?utf-8?B?c2psZEhIK0NNMkRwdzJMa3pTRFVlNERGS21CanpUL3pSK2Qxdit6cHJlbkxU?=
+ =?utf-8?B?TFhQbDR2VzhuWXRZekZvZG1XK0lCRWFBallLamJIRzFKODdXVUtHMUNVY0gy?=
+ =?utf-8?B?TGhNTjIwcjlRRnd3a000Mm01Y3VnT1doZFBiVFdRcjlUU2tHYmJvRHhEZHF6?=
+ =?utf-8?B?anVkS2JZU2FUcUQvUzlFT3crNHpEZHlKa1VRWmJwaDg2dWpTaUVaQ1A2OWU5?=
+ =?utf-8?B?V0xYL2V3NHhuYm91c3NzUlJ2Y0hxN2tMSTROUEVuUjNIYTVoeHlYVEJEaEsr?=
+ =?utf-8?B?MHc4ZUZ5aStpVDliT25hdkFHQmZBa2dkYmwyNUhrZ1F3L0wwWll6dUR5bGc4?=
+ =?utf-8?B?TzBYams2elRLc0hKMzZDUWVGWXFRSUphazNQNWlSQ3hERCt4U3hrQkZ4eDlo?=
+ =?utf-8?B?TEhsdkl1TVhHOW5DT0lid3lEOVFUSHVhdUVhREdrdXJ6T2FOVUhjVnRiV0Fu?=
+ =?utf-8?B?MERJK0FjbUdObW83SG9CRGxjWURmRFBuVHZONjhqaHRSQnQ0U253QkZLZWdj?=
+ =?utf-8?B?VlRSeWp6MHpTZHZWT01XWTBZUjl1a2VZcVRxNGwwbXRweUdrTmdQNXFBbjNt?=
+ =?utf-8?B?Q3FES0xBOUpRaGZDbWRKajI0UXo0WlY0WHJkSDYreGM4eUIwclMvL2wwamJQ?=
+ =?utf-8?B?QVFwT21LZGo2a2pNTXNHWDk1UWVFZjMrWWRPYURwY2wrMW5aNjFzQStISlF4?=
+ =?utf-8?B?TmRyYTlSK1lTZVcyN3B4TzdRY0QraGdnb2FkUlBvUytyNEcyOER4RXdJQldx?=
+ =?utf-8?B?Z2lwd1FxSlBmRzQ2NVVxMXIrMkI2Wi9Bb0x5M0ZDL3F3YTFaRXYzK0hJZ0V6?=
+ =?utf-8?B?NUsxNXlJMm5LUExBQURtWnpGM3E2MHJ1dk1pdUswNjFERytKU2hmTVFWUHc5?=
+ =?utf-8?B?WFJ0dmQwT2tONlozRHd5N0tIOU12OHhMUmtlWGU1SkllR2FZbXYxdzVMaGRk?=
+ =?utf-8?B?cUhVc2NtR252VHpLUkhIRWVmbXM0TFVGZ1JXOSs1SGx6NDhtS0RINloxYnhQ?=
+ =?utf-8?B?Q2tKL0VsK1MxeTVmaDlHYnJFenRST3RkYXVFTHpPeFBCVFlLREF6QmNvK3cv?=
+ =?utf-8?B?NThKQXZZZVVNT2QwOW1SSzUzMWluMXBlYmpRQXJVK0lhbkZIVllObDFTQXZ3?=
+ =?utf-8?B?UFQyek5hNnI5UERYeDk0ZVlsOG90V2MxS3Y5MTVvZktTNlVrRnVXOGNWWHRi?=
+ =?utf-8?B?ZjhuWktPcWF5dG5NaVdpZ3h3M2Q3TlFiTDZQclZKcWtYUkJ4Z2JtcTRsTzli?=
+ =?utf-8?Q?9Q2cmswuSZz6vKUs=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 94e848e3-12d5-4984-ef9d-08df311cd829
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2026 15:46:46.7203
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: WgZTYgV6Cjd6rTzOLh0AlydO3lVELTe+T726kz+t2Umywe21g+YzrCayFihMLwDSKLVLhWvIXvXBNuTJJBJ8OhclSijhtXtZXMgchvO0JgI=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5663
+X-purgate-ID: tlsNG-42698a/1792770412-AA4DB9EA-27E964D3/0/0
 X-purgate-type: clean
-X-purgate-size: 3641
-X-Spam-Status: No, score=-23.3 required=3.0 tests=BAYES_00,DKIMWL_WL_MED,
+X-purgate-size: 3210
+X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_IN_DEF_DKIM_WL autolearn=ham
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On Mon, Oct 19, 2026 at 6:51=E2=80=AFAM Josef Bacik <josef@toxicpanda.com> =
-wrote:
+On 23/10/2026 2:33 pm, Roger Pau Monne wrote:
+> Both the normal and the compat versions of
+> VCPUOP_register_runstate_memory_area allow registering a NULL handler as a
+> way to signal deregistration of the previous area, and
+> update_runstate_area() will skip the update when the handler is NULL.
 >
-> __skb_checksum_complete() verifies a received packet with
-> skb_checksum(), which returns 0 when the range runs into unreadable
-> frags or past the end of the skb.  0 is a valid sum, so it's treated as
-> one: it adds skb->csum, the pseudo-header sum, and folds the result.
-> With a sum of 0 that's csum_fold(skb->csum), which is 0 whenever the
-> pseudo-header sum folds to 0xffff, so a packet whose payload was never
-> checksummed is accepted, marked csum_valid, and left with a wrong
-> CHECKSUM_COMPLETE value in skb->csum.
+> However when handling the VCPUOP_register_runstate_memory_area hypercall
+> itself there's an unconditional attempt to update the newly registered
+> runstate area, without taking into account whether it points to NULL.  Skip
+> such update if the user-provided handle is NULL.
 >
-> __skb_checksum_complete_head() passes skb->csum in as the seed, so a
-> failure there folds 0 and the packet fails validation, but only because
-> skb_checksum() happened to drop the seed.
->
-> Use skb_checksum_full() in both, and report a packet that can't be
-> checksummed as having a bad checksum, so callers drop it the way they
-> drop any other bad checksum.  Clear csum_valid, and leave skb->csum and
-> ip_summed alone, since there's no full packet checksum to store.
->
-> Found by the Sashiko AI review of the series that made skb_checksum()
-> return 0 for a range past the end of the skb.
->
-> Fixes: 20ddd0fd2fcd ("net: skbuff: don't BUG() on leftover length in skb_=
-checksum() and friends")
-> Link: https://lore.kernel.org/all/20261007-b4-skbuff-bug-on-v2-0-b9a5f732=
-895b@toxicpanda.com/
-> Assisted-by: LLM
-> Signed-off-by: Josef Bacik <josef@toxicpanda.com>
+> Signed-off-by: Roger Pau Monné <roger@xenproject.org>
 > ---
->  net/core/skbuff.c | 21 ++++++++++++++++++---
->  1 file changed, 18 insertions(+), 3 deletions(-)
+>  xen/arch/x86/x86_64/domain.c | 4 ++++
+>  xen/common/domain.c          | 4 ++++
+>  2 files changed, 8 insertions(+)
 >
-> diff --git a/net/core/skbuff.c b/net/core/skbuff.c
-> index 061c61422a38..40d2dd20d47d 100644
-> --- a/net/core/skbuff.c
-> +++ b/net/core/skbuff.c
-> @@ -3860,9 +3860,17 @@ EXPORT_SYMBOL(skb_crc32c);
->
->  __sum16 __skb_checksum_complete_head(struct sk_buff *skb, int len)
->  {
-> +       __wsum csum =3D skb->csum;
->         __sum16 sum;
->
-> -       sum =3D csum_fold(skb_checksum(skb, 0, len, skb->csum));
-> +       /* If the data can't be checksummed it can't be valid either. */
-> +       if (skb_checksum_full(skb, 0, len, &csum)) {
-> +               if (!skb_shared(skb))
-> +                       skb->csum_valid =3D 0;
-> +               return (__force __sum16)1;
-> +       }
+> diff --git a/xen/arch/x86/x86_64/domain.c b/xen/arch/x86/x86_64/domain.c
+> index a02d4f569ee5..e4d49cbbfeb6 100644
+> --- a/xen/arch/x86/x86_64/domain.c
+> +++ b/xen/arch/x86/x86_64/domain.c
+> @@ -58,6 +58,10 @@ compat_vcpu_op(int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg)
+>          rc = 0;
+>          guest_from_compat_handle(v->runstate_guest.compat, area.addr.h);
+>  
+> +        /* NULL handle is deregistering the address. */
+> +        if ( compat_handle_is_null(area.addr.h) )
+> +            break;
 > +
-> +       sum =3D csum_fold(csum);
->         /* See comments in __skb_checksum_complete(). */
->         if (likely(!sum)) {
->                 if (unlikely(skb->ip_summed =3D=3D CHECKSUM_COMPLETE) &&
-> @@ -3886,10 +3894,17 @@ EXPORT_SYMBOL(__skb_checksum_complete_head);
->   */
->  __sum16 __skb_checksum_complete(struct sk_buff *skb)
->  {
-> -       __wsum csum;
-> +       __wsum csum =3D 0;
->         __sum16 sum;
->
-> -       csum =3D skb_checksum(skb, 0, skb->len, 0);
-> +       /* If the data can't be checksummed it can't be valid either.  Le=
-ave
-> +        * skb->csum alone, it's not a full packet checksum.
-> +        */
-> +       if (skb_checksum_full(skb, 0, skb->len, &csum)) {
-> +               if (!skb_shared(skb))
-> +                       skb->csum_valid =3D 0;
-> +               return (__force __sum16)1;
-> +       }
+>          if ( v == current )
+>          {
+>              XLAT_vcpu_runstate_info(&info, &v->runstate);
+> diff --git a/xen/common/domain.c b/xen/common/domain.c
+> index 6b52713518da..30a17b8b7edb 100644
+> --- a/xen/common/domain.c
+> +++ b/xen/common/domain.c
+> @@ -2330,6 +2330,10 @@ long common_vcpu_op(int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
+>          rc = 0;
+>          runstate_guest(v) = area.addr.h;
+>  
+> +        /* NULL handle is deregistering the address. */
+> +        if ( guest_handle_is_null(area.addr.h) )
+> +            break;
+> +
+>          if ( v == current )
+>          {
+>              __copy_to_guest(runstate_guest(v), &v->runstate, 1);
 
-I think maybe we need to be careful here which are all the skb flags
-that we need to touch to indicate that the checksum failed.
+This is all horrible.
 
-My LLM is recommending:
+I think you ought to add /* Update the newly-registered runstate area,
+best-effort */ to both of these hunks.
 
-        if (!skb_shared(skb)) {
-            skb->ip_summed =3D CHECKSUM_NONE;
-            skb->csum_complete_sw =3D 0;
-            skb->csum_valid =3D 0;
-        }
+I also think it would be easier to follow with the commit message
+structured in a different order.  I suggest:
 
-Seems ip_summed =3D *_NONE was caught elsewhere, but also maybe
-csum_complete_sw=3D0 makes sense.
+--8<--
+The VCPUOP_register_runstate_memory_area hypercall tries to update the
+newly registered area, even when NULL is being registered.  If the guest
+happens to have memory mapped at 0 in the address space, this write will
+succeed.
 
---=20
-Thanks,
-Mina
+Ever since it's introduction in Xen 3.0, NULL is the initial state of
+the pointer, and guards the update of the runstate area in
+context_switch().  NULL has also been accepted as an input to the hypercall.
+
+It is unclear whether de-registration of the area was considered at the
+time, but the behaviour of the hypercall has always supported. 
+De-registering using NULL is a common pattern for other hypercalls, so
+formally make this the case for VCPUOP_register_runstate_memory_area by
+skipping the update if the area has been de-registered.
+--8<--
+
+I think you also want an adjustment to the public header file to say
+that NULL can be used to de-register.
+
+Thoughts?
+
+~Andrew
 
