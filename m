@@ -2,43 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D4BA3606A31B
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 04:52:23 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0A905606A31F
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 04:52:24 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=FTvdEGT0
-Received: from list by lists.xenproject.org with outflank-mailman.1458828.1670913 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=nFTbwa1U
+Received: from list by lists.xenproject.org with outflank-mailman.1458825.1670898 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK7GF-0003Iv-E3; Fri, 23 Oct 2026 04:52:11 +0000
+	id 1xK7GD-0002zr-Lj; Fri, 23 Oct 2026 04:52:09 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1458828.1670913; Fri, 23 Oct 2026 04:52:11 +0000
+Received: by outflank-mailman (output) from mailman id 1458825.1670898; Fri, 23 Oct 2026 04:52:09 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK7GF-0003I1-5V; Fri, 23 Oct 2026 04:52:11 +0000
-Received: by outflank-mailman (input) for mailman id 1458828;
- Fri, 23 Oct 2026 04:52:10 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xK7GD-0002zg-H4; Fri, 23 Oct 2026 04:52:09 +0000
+Received: by outflank-mailman (input) for mailman id 1458825;
+ Fri, 23 Oct 2026 04:52:07 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <netdev-bot+sashiko@kernel.org>) id 1xK7GE-00037i-CW
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 04:52:10 +0000
+ (envelope-from <netdev-bot+sashiko@kernel.org>) id 1xK7GB-0002ok-U8
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 04:52:07 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xK7GD-00FSfm-Pi
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 06:52:09 +0200
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xK7GB-008liq-Ar
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 06:52:07 +0200
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <netdev-bot+sashiko@kernel.org>)
- id 6adae7e1-2eae-0a2a0a5409dd-0a2a4508cb7e-26
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:09 +0200
-Received: from [172.105.4.254] (helo=tor.source.kernel.org)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6adae7df-8faa-0a2a0a5109dd-0a2a4509e050-26
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:07 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <netdev-bot+sashiko@kernel.org>)
- id 6adae7f8-f659-0a2a45080019-ac6904feabf6-3
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:09 +0200
+ id 6adae7f5-be1a-0a2a45090019-aceafc1fd5e8-3
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:07 +0200
 Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
- by tor.source.kernel.org (Postfix) with ESMTP id 3CF3860233;
- Fri, 23 Oct 2026 04:52:08 +0000 (UTC)
-Received: by smtp.kernel.org (Postfix) with ESMTPSA id 533F41F031E1;
- Fri, 23 Oct 2026 04:52:07 +0000 (UTC)
+ by sea.source.kernel.org (Postfix) with ESMTP id 74513436D5;
+ Fri, 23 Oct 2026 04:52:05 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 9A37D1F031E0;
+ Fri, 23 Oct 2026 04:52:04 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,17 +49,17 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Subject:From:To:Cc:Date:In-Reply-To:References"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
-	s=k20260515; t=1792731128;
-	bh=m4eUhHLp14jEKzi8uHnH2gScUY1iDl3d/EjgImmk3go=;
+	s=k20260515; t=1792731125;
+	bh=Qv0jgGSSzQcSOMwhms6D75hZ9LTOezwa31oORyt9eG8=;
 	h=Subject:From:To:Cc:Date:In-Reply-To:References;
-	b=FTvdEGT0Wxsyij7WdwX3FaVHnPOWCyIiEujPXH8IHq8o2B9pQfwgTdK/NqLRVSwGy
-	 6xl9sgCPeh3sDT42Jd5Cye+yN3RquBnykOVo4418+K2jHCYfLz48/p+OI7ElNdMYem
-	 9F2nmCE9xUALydd23c5SeQXqyDkc5RL6ndhQFp6c2KPTJtFO2sDorBRB9Z+CwHAWC2
-	 60XKTi0L8s4jcjD+jfnj8CeUVsy8S58WWc1hWxNNH+w1hsTzV77vM5qKxDQ31wA830
-	 TmUg45gOWhwyMRxHJVJwKpvZf6kzS1J7GUdszwqdRcAFMSTtvn//dxwAV8UClBBQFR
-	 Vl0dNkv3k/v8w==
-Subject: Re: [PATCH net-next 08/15] net: skbuff: make skb_try_coalesce()'s len
- unsigned
+	b=nFTbwa1UCVR6+1/TZhGahifx1EcAxAH7crNt6EWCgyjm/P4MwnTSAF1vJJEjYTY7c
+	 /qEU/aZte7oJ7YXIdQHKeEPzdN31vzLP6tckm1Aj3qZ+CcUuhDEiyH12H4smFGnl+W
+	 JNcpDCV2FCm4/0Qdy/YkjoZvwRue39W5lqTDUC+oFhCC4EScDxzvox5UD0qB65os6H
+	 TOGdqljus19TsLQQrz/TbVAswKSX3BtUkGS1pwqeOVYUZ6rTS+S6JVuO8LDAhkBrUL
+	 pKC5tDq19fXaSnxFVhq5Dj3aKjDqgscVrxve8w5aoPn7NcdYbxruoNlGYxyJp4r/TL
+	 DA2YJwSkr40DA==
+Subject: Re: [PATCH net-next 06/15] net: skbuff: add skb_crc32c_full() that
+ reports failure
 From: netdev-bot+sashiko@kernel.org
 To: josef@toxicpanda.com
 Cc: davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org,
@@ -67,24 +67,24 @@ Cc: davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org,
  sstabellini@kernel.org, willemdebruijn.kernel@gmail.com, fmancera@suse.de,
  almasrymina@google.com, david.laight.linux@gmail.com, netdev@vger.kernel.org,
  xen-devel@lists.xenproject.org
-Date: Fri, 23 Oct 2026 04:52:06 +0000
-Message-ID: <179273112692.3134.1759491419702666549@kernel.org>
+Date: Fri, 23 Oct 2026 04:52:04 +0000
+Message-ID: <179273112422.3134.14612188940817308301@kernel.org>
 In-Reply-To:
- <20261019-b4-skbuff-bug-on-followups-v1-8-41dbef50b9f7@toxicpanda.com>
+ <20261019-b4-skbuff-bug-on-followups-v1-6-41dbef50b9f7@toxicpanda.com>
 References:
- <20261019-b4-skbuff-bug-on-followups-v1-8-41dbef50b9f7@toxicpanda.com>
+ <20261019-b4-skbuff-bug-on-followups-v1-6-41dbef50b9f7@toxicpanda.com>
 X-sashiko-severity: Low
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-purgate-ID: tlsNG-c1860d/1792731129-D775B87B-70DC75C0/0/0
+X-purgate-ID: tlsNG-bad1c0/1792731127-3B6D2034-FB0D8599/0/0
 X-purgate-type: clean
-X-purgate-size: 2645
-X-Spam-Status: No, score=-6.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+X-purgate-size: 5113
+X-Spam-Status: No, score=-11.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
@@ -94,64 +94,137 @@ you want to address the nit picks below when you respin.
 
 Low priority / nit picks for your consideration:
 
-- [Low] The commit message gets the bug's history wrong, so the single
-  Fixes: tag (279877d86c82) is incomplete.
+- [Low] The new kernel-doc for skb_crc32c_full() (net/core/skbuff.c,
+  above line 3810) says it returns -EFAULT when "@skb has unreadable…
+- [Low] The commit message says skb_crc32c() 'becomes a wrapper that
+  behaves as before', but its unreadable-frags WARN now covers less.
 
 --
 
-net: skbuff: make skb_try_coalesce()'s len unsigned
+net: skbuff: add skb_crc32c_full() that reports failure
 
-This changes the local len in skb_try_coalesce() from int to unsigned int,
-so a from->len above INT_MAX can no longer pass the skb_tailroom() check.
-It also adds an explicit delta < 0 test to the truesize WARN_ON_ONCE(),
-since that comparison is now unsigned.
+This commit adds skb_crc32c_full(). When the walk runs into unreadable
+frags or past the end of the skb, it returns an error instead of a CRC
+of 0. skb_crc32c() becomes a wrapper around it, and
+skb_crc32c_csum_help() is converted, so SCTP packets that can't be
+checksummed are dropped instead of being sent with a bogus CRC.
 
-Link: https://lore.kernel.org/all/20261007-b4-skbuff-bug-on-v2-0-b9a5f732895b@toxicpanda.com/
+> diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+> index de433d452939..3b2a3747f009 100644
+> --- a/net/core/skbuff.c
+> +++ b/net/core/skbuff.c
+> @@ -3788,23 +3788,41 @@ int skb_copy_and_csum_bits(const struct sk_buff *skb, int offset,
+>  EXPORT_SYMBOL(skb_copy_and_csum_bits);
+>  
+>  #ifdef CONFIG_NET_CRC32C
+> -u32 skb_crc32c(const struct sk_buff *skb, int offset, int len, u32 crc)
+> +/**
+> + *	skb_crc32c_full - CRC32C a range of an skb
+> + *	@skb: buffer to read
+> + *	@offset: offset in @skb to start at
+> + *	@len: number of bytes to include
+> + *	@crcp: the CRC to continue from; on success, updated with the range
+> + *
+> + *	Return: 0 on success, -EINVAL if @len is negative, or -EFAULT if @skb
+> + *	has unreadable frags in the range or runs out before @len does.  On
+> + *	failure *@crcp is not changed.
+> + */
+> +int skb_crc32c_full(const struct sk_buff *skb, int offset, int len, u32 *crcp)
+>  {
 
-> Before that commit skb_put() ran first,
-> and its overflow check caught such a length before anything was
-> copied.
+[ ... ]
+
+>  	if (copy > 0) {
+>  		copy = min(copy, len);
+>  		crc = crc32c(crc, skb->data + offset, copy);
+>  		len -= copy;
+>  		if (len == 0)
+> -			return crc;
+> +			goto out;
+>  		offset += copy;
+>  	}
+>  
+> -	if (WARN_ON_ONCE(!skb_frags_readable(skb)))
+> -		return 0;
+> +	if (!skb_frags_readable(skb))
+> +		return -EFAULT;
 
 [Severity: Low]
+The kernel-doc above says -EFAULT means "@skb has unreadable frags in
+the range". Does this check actually look at the range?
 
-Is this accurate on all configurations? Before 279877d86c82,
-skb_try_coalesce() looked like this:
+skb_frags_readable() only tests the flag for the whole skb:
 
-	if (len <= skb_tailroom(to) && skb_frags_readable(from)) {
-		if (len)
-			BUG_ON(skb_copy_bits(from, 0, skb_put(to, len), len));
+include/linux/skbuff.h:skb_frags_readable() {
+	return !skb->unreadable;
+}
 
-len was already a signed int at that point. A from->len above INT_MAX
-passed the tailroom check then, the same way it does now.
+Take len == 0 with offset >= skb_headlen(skb). A readable skb walks
+zero bytes and returns 0, but an unreadable skb returns -EFAULT here.
 
-skb_put() then does:
+Now take a range that lies entirely in readable frag_list children of
+an skb whose own frags are unreadable. That also fails here, before the
+frag_list loop runs.
 
-	skb->tail += len;
-	skb->len  += len;
-	if (unlikely(skb->tail > skb->end))
-		skb_over_panic(skb, len, __builtin_return_address(0));
+No current caller seems to hit this. skb_crc32c_csum_help() always
+starts inside the linear head and passes a positive len.
 
-On 32-bit, sk_buff_data_t is unsigned char *. A lowmem tail at or above
-0x80000000 plus a len at or above 0x80000000 wraps below end, so
-skb_over_panic() is never called. skb_put() returns the old tail, and
-skb_copy_bits() runs with the negative len. That is the same large write
-past @to that the commit message attributes to 279877d86c82.
+Could the kernel-doc be reworded? Alternatively, this check could apply
+only when the remaining range reaches frags[]. skb_checksum_full(),
+added earlier in the series, has the same mismatch.
 
-On 64-bit, tail and end are u32 offsets. A from->len in the range
-[2^32 - tail, 2^32) also wraps tail below end and gets past the check.
-279877d86c82 seems to have widened this window on 64-bit, but it did not
-open it.
+[ ... ]
 
-git blame shows that the signed len goes back to the introduction of the
-function:
+> @@ -3844,19 +3862,36 @@ u32 skb_crc32c(const struct sk_buff *skb, int offset, int len, u32 crc)
+>  		copy = end - offset;
+>  		if (copy > 0) {
+>  			copy = min(copy, len);
+> -			crc = skb_crc32c(frag_iter, offset - start, copy, crc);
+> +			err = skb_crc32c_full(frag_iter, offset - start, copy,
+> +					      &crc);
+> +			if (err)
+> +				return err;
 
-  bad43ca8325f4 ("net: introduce skb_try_coalesce()")
+[ ... ]
 
-Could the commit message be corrected? Should a Fixes: tag for
-bad43ca8325f4 also be added? Without it, stable trees that don't contain
-279877d86c82, including their 32-bit builds, may not get this fix.
+> +/* skb_crc32c() has no way to report failure, so it returns 0, which is a
+> + * valid CRC.  Use skb_crc32c_full() in new code.
+> + */
+> +u32 skb_crc32c(const struct sk_buff *skb, int offset, int len, u32 crc)
+> +{
+> +	if (unlikely(skb_crc32c_full(skb, offset, len, &crc))) {
+> +		WARN_ON_ONCE(!skb_frags_readable(skb));
 
-> Fixes: 279877d86c82 ("net: skbuff: don't BUG() when skb_copy_bits() fails in copy helpers")
+[Severity: Low]
+The commit message says skb_crc32c() "becomes a wrapper that behaves as
+before". Does the unreadable-frags warning still fire for frag_list
+children?
+
+Before this patch, the frag_list loop recursed through
+skb_crc32c(frag_iter, ...). An unreadable child therefore hit
+WARN_ON_ONCE(!skb_frags_readable(skb)) at the child level.
+
+Now the recursion goes through skb_crc32c_full(frag_iter, ...). The
+child returns -EFAULT without a warning, and this WARN_ON_ONCE() only
+tests the outer skb.
+
+So a readable parent with an unreadable frag_list child now returns 0
+to sctp_compute_cksum(), siw_crc_skb() or batadv_bla_check_duplist()
+without warning. Before the patch it warned once.
+
+The return value is 0 either way, so only the diagnostic changes.
+skb_gro_receive() doesn't seem to check readability when it merges into
+frag_list, so this layout looks possible, but that hasn't been confirmed
+end to end.
+
+The skb_checksum() wrapper from earlier in the series has the same
+pattern.
+
+> +		return 0;
+> +	}
+>  	return crc;
+>  }
+>  EXPORT_SYMBOL(skb_crc32c);
 
 -- 
 Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7%40toxicpanda.com
