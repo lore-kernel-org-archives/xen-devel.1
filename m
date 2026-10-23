@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 72A5C606A31A
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 01:02:46 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 77CE6606A319
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 01:06:05 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=vQcnFqd6
-Received: from list by lists.xenproject.org with outflank-mailman.1458710.1670772 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=NT6ME5EY
+Received: from list by lists.xenproject.org with outflank-mailman.1458723.1670781 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK3fv-0002dL-Rd; Fri, 23 Oct 2026 01:02:27 +0000
+	id 1xK3jH-0003Cz-DC; Fri, 23 Oct 2026 01:05:55 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1458710.1670772; Fri, 23 Oct 2026 01:02:27 +0000
+Received: by outflank-mailman (output) from mailman id 1458723.1670781; Fri, 23 Oct 2026 01:05:55 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK3fv-0002dE-P0; Fri, 23 Oct 2026 01:02:27 +0000
-Received: by outflank-mailman (input) for mailman id 1458710;
- Fri, 23 Oct 2026 01:02:26 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xK3jH-0003Cs-AQ; Fri, 23 Oct 2026 01:05:55 +0000
+Received: by outflank-mailman (input) for mailman id 1458723;
+ Fri, 23 Oct 2026 01:05:54 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Volodymyr_Babchuk@epam.com>) id 1xK3fu-0002d8-Cr
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 01:02:26 +0000
+ (envelope-from <Volodymyr_Babchuk@epam.com>) id 1xK3jF-0003Cl-Qu
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 01:05:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xK3ft-004Ny7-NS
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 03:02:25 +0200
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xK3jF-00DSjn-3w
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 03:05:53 +0200
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6adab217-e002-0a2a0a5209dd-0a2a4505c30c-18
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 03:02:25 +0200
-Received: from [52.101.83.104]
- (helo=GVXPR05CU001.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6adab2e3-8faa-0a2a0a5109dd-0a2a450a8e4c-40
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 03:05:52 +0200
+Received: from [40.107.159.96]
+ (helo=OSPPR02CU001.outbound.protection.outlook.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6adab221-4cb1-0a2a45050019-34655368d3b0-3
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 03:02:25 +0200
+ id 6adab2f0-f2d2-0a2a450a0019-286b9f6037bb-3
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 03:05:52 +0200
 Received: from VE1PR03MB6078.eurprd03.prod.outlook.com (2603:10a6:803:113::29)
  by AM7PR03MB6611.eurprd03.prod.outlook.com (2603:10a6:20b:1bf::22)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.18; Fri, 23 Oct
- 2026 01:02:23 +0000
+ 2026 01:05:50 +0000
 Received: from VE1PR03MB6078.eurprd03.prod.outlook.com
  ([fe80::4722:b91:9b24:ee48]) by VE1PR03MB6078.eurprd03.prod.outlook.com
  ([fe80::4722:b91:9b24:ee48%4]) with mapi id 15.21.0546.012; Fri, 23 Oct 2026
- 01:02:22 +0000
+ 01:05:50 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,34 +54,36 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=g8YoPAkW5hTCNElKCVXycfM/irzhOtCtAV8rqnjXsNjW8XLc9a+fGoGbEeERlzwTXoY6wzc/Cx8JaS6J1KZyiqt+cffurAgnsiX7CBPsCHZoNjOhsBhHIJh/P+yE+eDa29mz1xE1dx94E4u3n+pYH5aR64k+VMUugdhXpijkPjEoCIxthNSMhebq0tooMUT5vbzqI2b5C8PT5HiRNsxr/shQgjqfjkbheKQgmr9cfQYN4AQmkgk+nKdpZTLeDOJRTdncyflnKnDF6cXsmg7JfZC1to+gWzT9RcQFOqloN6h/DGWEMGzIPJaC7974WO1h8A0m6MLxmp4OYiz/9O90Og==
+ b=chdNeMXwAJRLilKC1tackzLIUp7TCmogkKdwPBd0a+dW3BzF9Vq1depPJP4Nv3YFpsnMntG7uG3MJ1HbEbEM7OcAnCqXSGPSLnpbnD1dDTfdQjAYrZqWwAyIENLtgx8FJpOmj5savBoGRDWAuQlKT8/Ui3ibLvTMOhFDUpSb1EVt6zHegbQ0AWRlNEzlpqINrKAAYd8fbNIkLpxXuGYv/o1KKhhpoAeUbaan+PH8UL9RbwHVD9naTI4RZeR5E/mAsLmU1a2RxrTJt6qOkCI1f98gcOPjw7cJnVZ3tcDM37bhetfqRwIa8k13E6zQU2cYdAFlbFkVe4OKYq9LRfRPBQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=0Cr95uzyJTQ2SIOyr27a+bJf+FmBkG286w2Ct4/NhK4=;
- b=SS4S7+p0g/bdKUkUop7OueIbsXTHCjVQEOTOshX2Z78c4zxZJ47v6vgKyneP4fo69ey+fQOWedaOc3vinsrXSPCv9cvyCFxXMViy2N460O8hiiPuXa+TuzbUSrVx8HKVPrySnKk3GoNK/LKVmWdxozfU+d34fFQvPTF1qFaVvxmjHO4DfwSZZySHQ9ZnyEz+7Zq86W204iYQONphnbEjH4GHAKYK+6JpHtblc9X78Cgp0ywB1yX5pdhkucc/SqbRja3JIMyMlaRXGmLXELL00zfia15ocljnBgbosArPhyavinEn8pKMY4ysmIJkbXvMWLTqqM4W/zitpCoJCmkqPg==
+ bh=/Rtz+fASszqVVsZR66/MhDDBBqFxZVLmOlGsqIYpI+8=;
+ b=lNhpzcBsZXNdWsd9rD1p/N7NUlU3DKN3fcy4hRsPVldDnlx1qLV0iFAybKuPHt9Y24OZmSBvX8POaGQpwwAcxnuRWSxCBOhLaD7Q5p6TQ1JtqczxeSJKfe/bvABUF7ykKjljNe7x+Uyl2LVzMGuQfZnbKACNgPxm1UaUhw5aYDnuu3b+52T+46FS3QS8qVtYQBtgGGZ7MVwZXkdBxQTttgW48nR3UV9WealZ5ox260MsfLvstYHDudsqDzOQFyDlcSrznf0ydfhWixL3vlo93t5D6aokmfuvCeiuhn1EAKrbgdETNBeFk/ABzNNF6CmotWZn+JRycn7VVcAdmlq4gA==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=0Cr95uzyJTQ2SIOyr27a+bJf+FmBkG286w2Ct4/NhK4=;
- b=vQcnFqd6Zg96KHTr8jsLjfVA1+LZSnLqqXHdOGhE+TF8O15oDkGLxdyLwJyKI/2+/gwRF95zj9ilp1Gndug/gE3M7EENVplwAReQ32TjVrm0gEvShEmdVGiSyngWS19rEYvvYlUrj4zCu5ZMoR9sarYzHCc7Icby2COmTbmcYASeYzgjH67A6jLvcivqUj8yvMw5fHkp4EyD2H+ik+4EShNhOdDypoMIRPY+eCThC+lEcvBqWYCay/OqVSnWFUx7IxWU/1mD3YjgpQpDT/EXUzPix/b9BgTQy022G4pplAyUxBhjUOW+IlD7g/Qxqp98t4i1UUhB9geuOgHR2IChHQ==
+ bh=/Rtz+fASszqVVsZR66/MhDDBBqFxZVLmOlGsqIYpI+8=;
+ b=NT6ME5EYw/+BmufWSwcvtdNvgZgo/H8geXOO5tknU307J5GKP5Lwj3fbmuX51+1Rze9k1+MwLX1c+qP7qxz0xTxa/9/DdskRdViO3XVyMTVNJrg9vvShWhYG8F3qWkzzi0zboiqwgsU/Ue52lDQt1Zt9EastkqHohAMS55s0XW/+ird3P69xJgFB1j9qCcC9uuq2TzQBTWLUVUd59PsFwsdDv3hf8HD6oB3ZNsiE50iIJYMrYdwllumCVKAbu0OH4K1SU4RYIr45vTvP36Q/aeVWI3arE6yCt9GwwbNBxI1Gr1njznHRNA0iRlG1vGIuiZu2DMkb61W8MD6T4W1wsw==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-To: Michal Orzel <michal.orzel@amd.com>
+To: Mykyta Poturai <Mykyta_Poturai@epam.com>
 CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, Stefano
  Stabellini <sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand
- Marquis <bertrand.marquis@arm.com>
-Subject: Re: [PATCH] xen/arm: Don't create useless P2M pool for a hardware
- domain
-Thread-Topic: [PATCH] xen/arm: Don't create useless P2M pool for a hardware
- domain
-Thread-Index: AQHdYKA5Y9iGAf1wvEqPStYCLfy4lg==
-Date: Fri, 23 Oct 2026 01:02:22 +0000
-Message-ID: <87fqxxut42.fsf@epam.com>
-References: <20261020143458.194784-1-michal.orzel@amd.com>
-In-Reply-To: <20261020143458.194784-1-michal.orzel@amd.com> (Michal Orzel's
-	message of "Tue, 20 Oct 2026 16:34:58 +0200")
+ Marquis <bertrand.marquis@arm.com>, Michal Orzel <michal.orzel@amd.com>
+Subject: Re: [PATCH v10 2/6] arm/irq: Migrate IRQs during CPU up/down
+ operations
+Thread-Topic: [PATCH v10 2/6] arm/irq: Migrate IRQs during CPU up/down
+ operations
+Thread-Index: AQHdYHbuWxOoSM3qDECYUmtGRYf7WA==
+Date: Fri, 23 Oct 2026 01:05:50 +0000
+Message-ID: <877bj9usy9.fsf@epam.com>
+References: <cover.1792480416.git.mykyta_poturai@epam.com>
+	<3a880578d558388ab6d033ccc1f89aa4efecdc81.1792480416.git.mykyta_poturai@epam.com>
+In-Reply-To:
+ <3a880578d558388ab6d033ccc1f89aa4efecdc81.1792480416.git.mykyta_poturai@epam.com>
+	(Mykyta Poturai's message of "Tue, 20 Oct 2026 09:39:30 +0000")
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -91,48 +93,48 @@ authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
 x-ms-traffictypediagnostic: VE1PR03MB6078:EE_|AM7PR03MB6611:EE_
-x-ms-office365-filtering-correlation-id: 7d2d7417-668e-40b4-f9c0-08df30a14ba4
+x-ms-office365-filtering-correlation-id: c98b170d-8044-4454-3b99-08df30a1c7b3
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|42112799006|261009223027099003|261022105027099003|261021121427099003|261021123027099003|10067099003|56012099006|18002099003|22082099003|11063799006|5023799004|38070700021;
+ BCL:0;ARA:13230040|23010399003|376014|1800799024|366016|42112799006|261009223027099003|261022105027099003|261021121427099003|261022075727099003|10067099003|56012099006|18002099003|22082099003|11063799006|4143699003|38070700021;
 x-microsoft-antispam-message-info:
- rkxEU1wlXCDf72/gKMW6ZIAHNIaikbhFiavUL4n5k61/Ll3KvjpG470EvIXXpDXNrZt/B43TQcRMhmmA7LxDrXEyjZ/FeJ1Y5TqFmdVlyRtWDwxqEeN4X1HYe+lEU3EM3KQMMcqAEeIuiktca7BpLdDPl1Mye+qu4WpFahKfyOc8D5CJ8hn/OCE5kJhiXbFEQQuzi0s9QB2DBXcBTMpjHRa0f6n5Vm3yJyTb4IT6S65QoCapsDIBgWaeysM05wtslVD79SEOEXkTcjz/CK5Co/JKhJNtJBKvJsb9URqBMn1W/sgt5xsNXLXMgwf1sZlc75KHlP0NqbDPc2hU4YP27YLB+xTVrAIQAcFxBBCtNXd0Ky5wpKN6YesAOlcECp5AE/H64qM+iQ8ovXa1xkWiwc/WgG2kcyi8PVj4OHIMnx4CV0+QKvLwHSUIJA4HLjpNKoVct9on/nlYWPAV0RQW9Ymzn6lNgONUvPPqYP53scP7k1XlE0hewPwS/p/gxbzvlmQRaGqRRZ3o098oxExHj2wrhQIMp+daYvP72sINKLfntD0Wz3N7kS5nO8mnPP3Fu4KoB3GSnc9IVKfp9R8IB2Bmo5Cj5QCuivemBmaSw11rzqSib/vAEP3YyLwLSvZ8x6vtk6es9HS+o2aKI060eZE8d2girOUE7AuBQGzyh7Q1yNzNKGBqoBye+wA/yR1290Mlq2WYPK/crak3sANXzi+xGUmS48hdgNAI0OyvliQ=
+ M2Tt/sd0/oxag6PKJR8tjQdENKdZ/i7r/3x8niJ/IZ/41m3mfiZDDikwLtsr4uGCvN/O3rHfpsDWXcOpVE2MQk/3x3lN9dLnCY+OGzCoiqeh+BBmbXg9Z3DW3Ulo7dI7WYUcW8eZ7f/LMZINDuwdypQtCh979PE+i7YG8Glhee8XQb3WIsFPOEaNZWzbnmYGs90RKJ6lL/azwg9PPFVrGYSiZwwns5d/jgXy2/9IvvMC1kfKo8e35MndNsF9PyfMZkmx3mhfCBrZh+exPAvtF+bmXE+nwQh5218Ie4LnHxdWywsO1FY7oUbnjiLCOd7TUECHhoDCkV4O1NF++cxs5BygPmmngH6L7mnkRiIyVkvQPh63jgzK5XZVT+qu7pSAvGWEUd3kVGOnbsWVwIVNVyinKQcwvJ4MyJ9xk/6GCsGEKjk3HGUYop4kmFqkjFVMNAIqBGe7+I7pZKlArEKb0E6rBNRDwb7EDnH35SWL9SCsnAhk1sn+BT/F8DnMEuZGD/VS4PIyvdem1cOVV1H5uXyu7PR8x2mCLYF6Yc8V4eaqsK0u1kns0UDrsr2n1svjUMAxJT4RlUvgbc5QnmCfgr3zeNTmWFuWHvmOrF8cPH5hiD3BxJT4pBaOIT6hQyB1iQ9TJUgCR3JT3CwIE1lgx7EtW7HEdLIzQ0c9C/+qmFmYau6c+KL50L6ufjtIpLXM2ehI5h1cniEZVCMbak1qlsukYBdkCqdK3yk4w/u1qB0=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR03MB6078.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(42112799006)(261009223027099003)(261022105027099003)(261021121427099003)(261021123027099003)(10067099003)(56012099006)(18002099003)(22082099003)(11063799006)(5023799004)(38070700021);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR03MB6078.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(1800799024)(366016)(42112799006)(261009223027099003)(261022105027099003)(261021121427099003)(261022075727099003)(10067099003)(56012099006)(18002099003)(22082099003)(11063799006)(4143699003)(38070700021);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?ZLXuSC95I9djXIOmM5aL13UfWGRlBMKquZRLRBn/5KBIejgU3zgpnr+TIM?=
- =?iso-8859-1?Q?49D+bARA5LBTwru8Xdu03XakjEnqRnfveajP/zfj31MEk3mAfn0MtwOJbG?=
- =?iso-8859-1?Q?6R/vKOQS3oafHO9MArE+0dHC5IZMt46lZDYUP87tZVVClrryI577nRFGI7?=
- =?iso-8859-1?Q?CIfQVAHS1zKXcBAkcnIVuX8Ebuz7CF2iKat1LhF1MwoRQgha3y/gSDe+F3?=
- =?iso-8859-1?Q?dNQi8Jm0gc20nf3YK0/mwPIXAGBRCC+JN6mvqiWmmBV3odwIOnUzWT525n?=
- =?iso-8859-1?Q?Frzdm6hG7BVqvgbVfms4ZxOZl2nOqv24tvVBBdOeG2s0AmUlCyxCENTHie?=
- =?iso-8859-1?Q?FrQgW7GVlDId7R5jnXSBn/ZxVb6M0tC/xjC07KdyiqvA7wY2D+fmbpzLrN?=
- =?iso-8859-1?Q?CPZ8MCURoHObx6txawIhAy4kvKL9NFleoARSf3zNVk4WgjR8HjQx3pJFU7?=
- =?iso-8859-1?Q?1gwPOmciY+ocfePLW8j02fWxGJZkFkPT0RLw1cK0xBbjMYH84ExhQwmAHn?=
- =?iso-8859-1?Q?A5LuvuLWZn3h1sLwR+GTkR0c1YuRWU1uc2Rj57XyJOUeSaw56VUD7P72eX?=
- =?iso-8859-1?Q?iDNr6kMhP58wjQlPEbzuQUdZF70Cfli1mKYo6g4+uPLyT4U12J+1HSvKB8?=
- =?iso-8859-1?Q?fcrlAhu7fpxFjp8BQepUhB+nvul9CudfgWen0tQfDTQimC10x3BqFXUgbc?=
- =?iso-8859-1?Q?ovbzve2g5U7EFiw564WEAjKnLae8Pqvgg4n7Ri4ftrMmSqONb/Xvx1LNc+?=
- =?iso-8859-1?Q?3CSwlJzWL4+dom8E4ie9xZHzAN8qfAdI/4QPBk7iL3t/uAGfQ+xcGOv4Vo?=
- =?iso-8859-1?Q?UAiTBZ2Na0iRGZPOfKI6QIEYYKPaJ0Xy0Nzoclzzek6aMBLRlgoYeOV29O?=
- =?iso-8859-1?Q?RCIvEqsiGVarxALxq9MsJ0hJ6Ts98DiL87MhKgM0XSosJBkSdUQtascQhL?=
- =?iso-8859-1?Q?GmgjmCrsitdSdfgij623UtoyCGlao5ptK5xLpgpHe2GVXElRZ7YbzHkqkY?=
- =?iso-8859-1?Q?KCQa4hiN6TiCJaLyDuW77q849VnvzCAkK77np8z/3awA3RtrRoxT85L94N?=
- =?iso-8859-1?Q?PEFwrdKUuKKF73GnTTK1Z3U6IHgHXZAFB4S2xHOZrJCUXtnKvkbAXGVKc1?=
- =?iso-8859-1?Q?o1PSripny/y+0j7mQEc+dSK8lpsXaHvZ+ntJSxGUB0qRWUZWOFawzU14UK?=
- =?iso-8859-1?Q?iQP1eeTlrbIbo0PzJ9SvS6CWyALmwf+TOqZO3pr5L29nUYmJtN138wnOMa?=
- =?iso-8859-1?Q?UW8dhodLyVabgXFTd69YGFCg64XgSvPfuNRXMGlQF0j/rrFu8C4lN4UscN?=
- =?iso-8859-1?Q?ruhTIZF0AoTBe8Vf++DxvuJkcCViD/fr0/b48i8W7NIvKusSkIMTvpT5Ft?=
- =?iso-8859-1?Q?94Ejz4Ke7Kw1YtR3FpE3qyI7cg5PlJkZj2chLu8mjp9kE3Pe7qH4gy1InH?=
- =?iso-8859-1?Q?eH73pKIOiP9VkJ489Kn+5SgvTVl1FPHiDE21eU/5ZabgNxicaVXd1ZH+xk?=
- =?iso-8859-1?Q?i7KtMrdT1qL4VegBhKaIiUVO2oLKQL/8GEbOXr58mlWPXiU0TBv0Ex+bJ9?=
- =?iso-8859-1?Q?u9CsMYHc5LxfUg7fnArL91JjEedFHppXR/oqkLdDxxBPOzqLHhQUk8s52m?=
- =?iso-8859-1?Q?Ov1APfQ3krNt34p/1gn7V5wx84E03LUj4nTGZiFte02aUtkql5Gm2vzxgU?=
- =?iso-8859-1?Q?8vgAjuWKfpgVuWr8TojCcx8TGYA+bd1KIpW68oFXM6P5p0zhiUOLfZ8ld9?=
- =?iso-8859-1?Q?8QjfmA3aFs/Ge+AIlCT4hl7ZyuUz1naMfEg0Qt0mqCv0K+7fUpO08/rzIN?=
- =?iso-8859-1?Q?UeQb1muaPX3/h8gYysHXYBs0pD8rx4E=3D?=
+ =?iso-8859-1?Q?gaJQ/AXo2GBUrJF7dogSJPff6PU/uHv/EA+OmpVMNXDIaZER83IebZxvPb?=
+ =?iso-8859-1?Q?LgizeFupksEpDIhWYYntj2gaxOjg8xjbZ5plC+gUqoG4FxKXVc4pvfki9q?=
+ =?iso-8859-1?Q?3arU3lGn3hknAJNOjAAhBtQ4DbEkukmudOTDAK88W9w70fgxKB3HYE81rp?=
+ =?iso-8859-1?Q?wAjQo1/dOu8D4Y7G+65rRLPBcWJQ222uWkUhOUeIe9Kis0yN3zlgsEtbdc?=
+ =?iso-8859-1?Q?0qwfKYtC6NOTmIs9j0eUtBxZxbPXnshZr8G4lsshHOX7qgHBoef3LmZrB4?=
+ =?iso-8859-1?Q?BaisBFABcpnu2jXru89UVgs9UDA0xR6fzcWU+g9YvhY5yloQSdHugT3oku?=
+ =?iso-8859-1?Q?hHEWCzzmLs0rzMgLIAANOcS/l2KmbbPb6dlmhRzBO1Tc4zrOnsT6Z6P+Pw?=
+ =?iso-8859-1?Q?btindlVWEuiY1m58emMrTQl7oYVN0gt7R+wgToBKqo6RYdZ/QLDepyv9qs?=
+ =?iso-8859-1?Q?3Ylx1P+0tcrq/q9eFK5OtxM33p97Dcn8M3FyoQIlBd+QHIBJsMUV68Xhr6?=
+ =?iso-8859-1?Q?rqJCce0J8W4mWgOsDejdu0Yy/UkWRACejpYZWOtSJ82OwMg9hSIS/qdzaW?=
+ =?iso-8859-1?Q?Grsm1KRzcBXnoEo99U2a0N3HyH4ddoKL76D6HW1RqzDyeR+iRlnIbHfN8q?=
+ =?iso-8859-1?Q?tnWCSkca1pQ2Oj87Q3+KfK8AZC5dVD1eBYNg+51re8u2Iwt+ygphUzTj0K?=
+ =?iso-8859-1?Q?ET4/PJwZ6UgG/3R9vOoa754GZ6Tfi1+gSOWd5TALobNBiPpweici0cgfdB?=
+ =?iso-8859-1?Q?kfr5xEmFj9jHUBRJit3ErFELKO9xKE1O6ADFwQVGV95WRC4G5n2BIkWEO9?=
+ =?iso-8859-1?Q?ahLaRwpIKg0UukxptD4u/M0T8BwK9xpEr4INcZrlrUdGSTY9VX4kCwd9rD?=
+ =?iso-8859-1?Q?2UJjqWhZZr6jdlsVUhNUFNNO9mQ/B9q04FHuYsTxR/+ly3n5j9Pfu1EVgb?=
+ =?iso-8859-1?Q?KckQFJxMJ+Bol55ak68Pk5XsgmCVyb5mzE/HuYhTJGbdhuAzolkmjZXxA8?=
+ =?iso-8859-1?Q?e7UYJ98eY5ONNZl+FgXxGuJwLt6MlxJbjtTKm9P+ntCVfO9GEaivFIvyoW?=
+ =?iso-8859-1?Q?KX+a1+FTsGnGe6kb6TzBndtYf2zp2C+LZhx7EAqXZ7L8zFLkjGbAfZb9d3?=
+ =?iso-8859-1?Q?3D0+sf66oQvljyutu+BpVAe2lKOVhUitv+T3o2lDWQIGrag7nA1k7tAVor?=
+ =?iso-8859-1?Q?UNM2dQ30Kwi6ueQPAMMETwcn4eaBt/OOvOwBRfJa6BIXuIK2PvaymXqMoi?=
+ =?iso-8859-1?Q?wjhDkY+R53uUU+T6M7P9lC58Qsdtv8tdh2Hc1aZUi1lIG4DluAu4niuYv2?=
+ =?iso-8859-1?Q?JDA2QD760eZv7OnbkWRk4BpRjXJI1AGCsNay18/Vc9Q59h8iE6bgk+Kkzp?=
+ =?iso-8859-1?Q?LMmKesTgY+IU6qWvB4o66uFkm/lVAm2DLP45sGi6IPyW5vr/9Zynpx1F2k?=
+ =?iso-8859-1?Q?VGx0NuQ6tb/Q17P0+Y/ZdT7PNIjFoOq9OwzXhAfSbLmY/fNrOgb7E2+kLK?=
+ =?iso-8859-1?Q?ij1n/HtK5yI1csT/bK1xgCE/c7awjBGzry/YUTcaJsNh5tVSpCle/x/GnB?=
+ =?iso-8859-1?Q?4tUFA1l220vx6hO4ScdMY4/OyrNh/z/P+Rybf6/+4p+A5gw1Wd1mhEXcM6?=
+ =?iso-8859-1?Q?/LfaXvgB6RVolprm3TfFrfGiWYj61b4nawajrkDxoyoNL3BYUaTHrX3ckQ?=
+ =?iso-8859-1?Q?4wAbZ2kMehiqUB009DCCzw+mr4jXItCxl6H5VcXgmGk8XQ/TujrvzpLhar?=
+ =?iso-8859-1?Q?9SCU+rUBJDj5yvclIZu+Gu2Q03yMUzz0DxmFq/GWsPZM/ZBNThuMD3gNNN?=
+ =?iso-8859-1?Q?omwnW4rfL00HwNFnKoqQUGY3U+Zf1GE=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 X-Archived-By: <archiver.kernel.org>
@@ -140,17 +142,17 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR03MB6078.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7d2d7417-668e-40b4-f9c0-08df30a14ba4
-X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Oct 2026 01:02:22.6838
+X-MS-Exchange-CrossTenant-Network-Message-Id: c98b170d-8044-4454-3b99-08df30a1c7b3
+X-MS-Exchange-CrossTenant-originalarrivaltime: 23 Oct 2026 01:05:50.7418
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 1yUY3EPzmERnjmOn+yCDjkQ6D2iuxxzpZzj3nMXmPaIrhRPNQx1v2j7CVQucW0qobVUUMsOtThMVEBurXEqq3FOWV333mz4Ru5i3DUPy/5I=
+X-MS-Exchange-CrossTenant-userprincipalname: EbhkLEocECdogF5TpK6v6fRouRkK+0j7qUxpiO1RgN0G8Cl1pgItiKnWrs6936DO0zFlxsTmqa3sQqUc2JmTZBhYjqai4V4mVP90+tQAcds=
 X-MS-Exchange-Transport-CrossTenantHeadersStamped: AM7PR03MB6611
-X-purgate-ID: tlsNG-c201ff/1792717345-738BE2A1-44A20BA1/0/0
+X-purgate-ID: tlsNG-4011c0/1792717552-59BC0CFC-80772C39/0/0
 X-purgate-type: clean
-X-purgate-size: 4850
+X-purgate-size: 4245
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -159,133 +161,144 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Michal,
+Hi Mykyta,
 
-Michal Orzel <michal.orzel@amd.com> writes:
+Mykyta Poturai <Mykyta_Poturai@epam.com> writes:
 
-> On Arm, the hardware domain does not use the P2M pool. Its P2M pages are
-> allocated directly from the heap, without any limit. However, when the
-> hardware domain is created using dom0less, we still allocate a P2M pool
-> for it, either of the default size or the one given in
-> xen,domain-p2m-mem-mb. This memory is never used and is simply wasted.
-> The same applies when the pool size is set for the hardware domain using
-> XEN_DOMCTL_set_paging_mempool_size.
+> Move IRQs from dying CPU to the online ones when a CPU is getting
+> offlined. When onlining, rebalance all IRQs in a round-robin fashion.
+> Guest-bound IRQs are already handled by scheduler in the process of
+> moving vCPUs to active pCPUs, so we only need to handle IRQs used by Xen
+> itself.
 >
-> Don't create the pool for a hardware domain. Make the get/set paging
-> mempool domctls return -EOPNOTSUPP, skip the pool teardown and reject
-> xen,domain-p2m-mem-mb for a hardware domain in dom0less.
->
-> The dom0less check is Arm specific, because on RISC-V the hardware domain
-> does use the P2M pool.
->
-> Signed-off-by: Michal Orzel <michal.orzel@amd.com>
+> Signed-off-by: Mykyta Poturai <mykyta_poturai@epam.com>
 
 Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
 
 > ---
->  docs/misc/arm/device-tree/booting.txt   |  4 +++-
->  xen/arch/arm/mmu/p2m.c                  | 14 ++++++++++++++
->  xen/common/device-tree/dom0less-build.c | 12 ++++++++++++
->  3 files changed, 29 insertions(+), 1 deletion(-)
+> v9->v10:
+> * make cpu_next static to balance_irq
+> * move the offline path to the CPU_DEAD notifier
+> * make rebalance_irqs static
 >
-> diff --git a/docs/misc/arm/device-tree/booting.txt b/docs/misc/arm/device=
--tree/booting.txt
-> index 3787d2e2b668..c3705ab7d913 100644
-> --- a/docs/misc/arm/device-tree/booting.txt
-> +++ b/docs/misc/arm/device-tree/booting.txt
-> @@ -277,7 +277,9 @@ with the following properties:
->      used for the domain P2M pool. This is in-sync with the shadow_memory
->      option in xl.cfg. Leaving this field empty in device tree will lead =
-to
->      the default size of domain P2M pool, i.e. 1MB per guest vCPU plus 4K=
-B
-> -    per MB of guest RAM plus 512KB for guest extended regions.
-> +    per MB of guest RAM plus 512KB for guest extended regions. On Arm, t=
-he
-> +    hardware domain has no dedicated P2M pool, so specifying this proper=
-ty
-> +    for it makes the domain fail to build.
-> =20
->  - max_grant_version
-> =20
-> diff --git a/xen/arch/arm/mmu/p2m.c b/xen/arch/arm/mmu/p2m.c
-> index 2cf35d8a3709..70d7c9fed955 100644
-> --- a/xen/arch/arm/mmu/p2m.c
-> +++ b/xen/arch/arm/mmu/p2m.c
-> @@ -61,6 +61,10 @@ static void p2m_free_page(struct domain *d, struct pag=
-e_info *pg)
->  /* Return the size of the pool, in bytes. */
->  int arch_get_paging_mempool_size(struct domain *d, uint64_t *size)
->  {
-> +    /* No dedicated pool (no limit) for a hardware domain */
-> +    if ( is_hardware_domain(d) )
-> +        return -EOPNOTSUPP;
-> +
->      *size =3D (uint64_t)ACCESS_ONCE(d->arch.paging.p2m_total_pages) << P=
-AGE_SHIFT;
+> v8->v9:
+> * replace CONFIG_CPU_HOTPLUG with CONFIG_CPU_ONLINE_OFFLINE
+>
+> v7->v8:
+> * check only existings ESPIs
+>
+> v6->v7:
+> * replace ifdef with IS_ENABLED
+>
+> v5->v6:
+> * don't do any balancing on boot
+> * only do balancing when cpu hotplug is enabled
+>
+> v4->v5:
+> * handle CPU onlining as well
+> * more comments
+> * fix crash when ESPI is disabled
+> * don't assume CPU 0 is a boot CPU
+> * use insigned int for irq number
+> * remove assumption that all irqs a bound to CPU 0 by default from the
+>   commit message
+>
+> v3->v4:
+> * patch introduced
+> ---
+>  xen/arch/arm/irq.c | 61 ++++++++++++++++++++++++++++++++++++++++++++++
+>  1 file changed, 61 insertions(+)
+>
+> diff --git a/xen/arch/arm/irq.c b/xen/arch/arm/irq.c
+> index 594aaedd22..d5145a4723 100644
+> --- a/xen/arch/arm/irq.c
+> +++ b/xen/arch/arm/irq.c
+> @@ -166,6 +166,58 @@ static int init_local_irq_data(unsigned int cpu)
 >      return 0;
 >  }
-> @@ -69,6 +73,8 @@ int p2m_set_allocation(struct domain *d, unsigned long =
-pages, bool can_preempt)
+> =20
+> +static void balance_irq(int irq, unsigned int from, bool up)
+> +{
+> +    static int cpu_next;
+> +    struct irq_desc *desc =3D irq_to_desc(irq);
+> +    unsigned long flags;
+> +
+> +    ASSERT(!cpumask_empty(&cpu_online_map));
+> +
+> +    spin_lock_irqsave(&desc->lock, flags);
+> +    if ( likely(!desc->action) )
+> +        goto out;
+> +
+> +    if ( likely(test_bit(_IRQ_GUEST, &desc->status) ||
+> +                test_bit(_IRQ_MOVE_PENDING, &desc->status)) )
+> +        goto out;
+> +
+> +    /*
+> +     * Setting affinity to a mask of multiple CPUs causes the GIC driver=
+s to
+> +     * select one CPU from that mask. If the dying CPU was included in t=
+he IRQ's
+> +     * affinity mask, we cannot determine exactly which CPU the interrup=
+t is
+> +     * currently routed to, as GIC drivers lack a concrete get_affinity =
+API. So
+> +     * to be safe we must reroute it to a new, definitely online, CPU. I=
+n the
+> +     * case of CPU going down, we move only the interrupt that could res=
+ide on
+> +     * it. Otherwise, we rearrange all interrupts in a round-robin fashi=
+on.
+> +     */
+> +    if ( !up && !cpumask_test_cpu(from, desc->affinity) )
+> +        goto out;
+> +
+> +    cpu_next =3D cpumask_cycle(cpu_next, &cpu_online_map);
+> +    irq_set_affinity(desc, cpumask_of(cpu_next));
+> +
+> +out:
+> +    spin_unlock_irqrestore(&desc->lock, flags);
+> +}
+> +
+> +static void rebalance_irqs(unsigned int from, bool up)
+> +{
+> +    int irq;
+> +
+> +    if ( cpumask_empty(&cpu_online_map) )
+> +        return;
+> +
+> +    for ( irq =3D NR_LOCAL_IRQS; irq < NR_IRQS; irq++ )
+> +        balance_irq(irq, from, up);
+> +
+> +#ifdef CONFIG_GICV3_ESPI
+> +    for ( irq =3D ESPI_BASE_INTID; irq < ESPI_BASE_INTID + gic_number_es=
+pis();
+> +          irq++ )
+> +        balance_irq(irq, from, up);
+> +#endif
+> +}
+> +
+>  static int cpu_callback(struct notifier_block *nfb, unsigned long action=
+,
+>                          void *hcpu)
 >  {
->      struct page_info *pg;
+> @@ -180,6 +232,15 @@ static int cpu_callback(struct notifier_block *nfb, =
+unsigned long action,
+>              printk(XENLOG_ERR "Unable to allocate local IRQ for CPU%u\n"=
+,
+>                     cpu);
+>          break;
+> +    case CPU_ONLINE:
+> +        if ( IS_ENABLED(CONFIG_CPU_ONLINE_OFFLINE) &&
+> +             system_state >=3D SYS_STATE_active )
+> +            rebalance_irqs(cpu, true);
+> +        break;
+> +    case CPU_DEAD:
+> +        if ( IS_ENABLED(CONFIG_CPU_ONLINE_OFFLINE) )
+> +            rebalance_irqs(cpu, false);
+> +        break;
+>      }
 > =20
-> +    /* No dedicated pool (no limit) for a hardware domain */
-> +    ASSERT(!is_hardware_domain(d));
->      ASSERT(spin_is_locked(&d->arch.paging.lock));
-> =20
->      for ( ; ; )
-> @@ -119,6 +125,10 @@ int arch_set_paging_mempool_size(struct domain *d, u=
-int64_t size)
->      unsigned long pages =3D size >> PAGE_SHIFT;
->      int rc;
-> =20
-> +    /* No dedicated pool (no limit) for a hardware domain */
-> +    if ( is_hardware_domain(d) )
-> +        return -EOPNOTSUPP;
-> +
->      if ( (size & ~PAGE_MASK) ||          /* Non page-sized request? */
->           pages !=3D (size >> PAGE_SHIFT) ) /* 32-bit overflow? */
->          return -EINVAL;
-> @@ -134,6 +144,10 @@ int p2m_teardown_allocation(struct domain *d)
->  {
->      int ret =3D 0;
-> =20
-> +    /* No dedicated pool - nothing to tear down */
-> +    if ( is_hardware_domain(d) )
-> +        return 0;
-> +
->      spin_lock(&d->arch.paging.lock);
->      if ( d->arch.paging.p2m_total_pages !=3D 0 )
->      {
-> diff --git a/xen/common/device-tree/dom0less-build.c b/xen/common/device-=
-tree/dom0less-build.c
-> index fcb438c50a04..a877e695ad11 100644
-> --- a/xen/common/device-tree/dom0less-build.c
-> +++ b/xen/common/device-tree/dom0less-build.c
-> @@ -757,6 +757,18 @@ static int __init domain_p2m_set_allocation(struct d=
-omain *d, uint64_t mem,
->      int rc;
-> =20
->      rc =3D dt_property_read_u32(node, "xen,domain-p2m-mem-mb", &p2m_mem_=
-mb);
-> +
-> +    /* No dedicated pool (no limit) for a hardware domain on Arm */
-> +    if ( IS_ENABLED(CONFIG_ARM) && is_hardware_domain(d) )
-> +    {
-> +        if ( !rc )
-> +            return 0;
-> +
-> +        printk(XENLOG_ERR
-> +               "xen,domain-p2m-mem-mb cannot be specified for a hardware=
- domain\n");
-> +        return -EINVAL;
-> +    }
-> +
->      /* If xen,domain-p2m-mem-mb is not specified, use the default value.=
- */
->      p2m_pages =3D rc ?
->                  p2m_mem_mb << (20 - PAGE_SHIFT) :
+>      return notifier_from_errno(rc);
 
 --=20
 WBR, Volodymyr=
