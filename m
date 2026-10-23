@@ -2,48 +2,43 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59F56606A319
-	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 04:49:06 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id A48C6606A335
+	for <xen-devel@archiver.kernel.org>; Fri, 23 Oct 2026 04:52:13 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=valinux.co.jp header.i=@valinux.co.jp header.a=rsa-sha256 header.s=selector1 header.b=vjKR1YCn
-Received: from list by lists.xenproject.org with outflank-mailman.1458812.1670845 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=g9IF7uFF
+Received: from list by lists.xenproject.org with outflank-mailman.1458820.1670853 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK7Cj-0008Uq-Vc; Fri, 23 Oct 2026 04:48:33 +0000
+	id 1xK7G7-0001rb-EZ; Fri, 23 Oct 2026 04:52:03 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1458812.1670845; Fri, 23 Oct 2026 04:48:33 +0000
+Received: by outflank-mailman (output) from mailman id 1458820.1670853; Fri, 23 Oct 2026 04:52:03 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xK7Cj-0008Uj-R7; Fri, 23 Oct 2026 04:48:33 +0000
-Received: by outflank-mailman (input) for mailman id 1458812;
- Fri, 23 Oct 2026 04:48:32 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xK7G7-0001rU-Bz; Fri, 23 Oct 2026 04:52:03 +0000
+Received: by outflank-mailman (input) for mailman id 1458820;
+ Fri, 23 Oct 2026 04:52:01 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <takakura@valinux.co.jp>) id 1xK7Ch-0008T6-UN
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 04:48:32 +0000
+ (envelope-from <netdev-bot+sashiko@kernel.org>) id 1xK7G5-0001r3-Ht
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 04:52:01 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xK7Ch-006ryP-0R
- for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 06:48:31 +0200
+ id 1xK7G4-00FSb5-Ij
+ for xen-devel@lists.xenproject.org; Fri, 23 Oct 2026 06:52:00 +0200
 Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <takakura@valinux.co.jp>)
- id 6adae6fb-8faa-0a2a0a5109dd-0a2a4506a352-38
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:48:30 +0200
-Received: from [40.107.74.107]
- (helo=OS0P286CU010.outbound.protection.outlook.com)
+ (envelope-from <netdev-bot+sashiko@kernel.org>)
+ id 6adae7e7-e002-0a2a0a5209dd-0a2a4506e104-10
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:00 +0200
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
  by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <takakura@valinux.co.jp>)
- id 6adae71b-195a-0a2a45060019-286b4a6b5a71-3
- for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:48:29 +0200
-Received: from TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:403:511::19) by TYRP286MB5946.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:405:2f0::9) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.15; Fri, 23 Oct
- 2026 04:48:25 +0000
-Received: from TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- ([fe80::5f8d:a6bf:3b84:5a82]) by TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- ([fe80::5f8d:a6bf:3b84:5a82%5]) with mapi id 15.21.0546.016; Fri, 23 Oct 2026
- 04:48:25 +0000
+ (envelope-from <netdev-bot+sashiko@kernel.org>)
+ id 6adae7ee-195a-0a2a45060019-aceafc1fa0c6-3
+ for <xen-devel@lists.xenproject.org>; Fri, 23 Oct 2026 06:52:00 +0200
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id 2411840A17;
+ Fri, 23 Oct 2026 04:51:58 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id 48EF11F01825;
+ Fri, 23 Oct 2026 04:51:57 +0000 (UTC)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,228 +47,179 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=nwuKZQ01gcMAnezMGltDUUaqrnwtnoz0R/cawn/hLIcGlkmOOEr7WFnqqLd7C+T+fcgGuSK6jkGCFMC8IwHs0THiV3BHA7oVCw2MvWxKytY1DLKOW6HZUpRq3SdwyzH4565OGssaJqlQuB6n/CBZocWFCvTsjp6giHLm6lItDyWF8N9pJxyvHugbmE+GwonLMC6mOhKdRPYusPXoZagFSMgxG2Awfq13asD0uL/WqcPal6yLbCx28d/XFJ+EhkLWX7fBmq5GqBdssK3A5ybPMsz8xa0xjpNKEEFmRHdPm/ROGmHVNTzyoroI1JmOj6mDBxS9B5YXZMYVp6AHl9UJdw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=KwHOlk5cGD/ygVVQmfIA8/k+P+ZJhK+XztwkDguMums=;
- b=KWzlNkNDmYPvQ5omI8Jtnr7eVNI9y89Nxdjbl0KiKJQ5uSBhasyaO+yYpJh7nWyBa9oGBNPWzUHOM3n8TUma431Ji+cS27UoI1q13vri5cEWl5I5Qk/gL528ubWIGle2hZuYzqNPNZ3Vgt1GoVMzyRrxkKqqkNtyQsCTLlx1x1bTaziLZhawNk6ueqZmaN9x80KmrSJr9uLhZKxY80hoi4dx1yx+XjFuDLVgKIChiEkkAWfgup3KwnSqJ3WSpeHbJ16C6qlt3XKS8CRBXBzyl5A8Pxq9tVm6MmlMshmv9Legh0HbvrpweXOirmBmxA8qChm55/DE8U3PVjrGs2tawA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
- header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=KwHOlk5cGD/ygVVQmfIA8/k+P+ZJhK+XztwkDguMums=;
- b=vjKR1YCnVWE2A1OIQfnx38Sl23zm66kfWnG3pCARSjfXxxDxKu03Rpqnr2LwUEAWdGIidv4PKaDHNimjDkcbqWCNObCa+vLTZ+UD2rbVK1FbiBe3wo0o5UK2mL8on+Dz/ZznwKfu4ioowJQLOYiU5i4wOrKNxUQfoqovAZ3kbEg=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=valinux.co.jp;
-From: Ryo Takakura <takakura@valinux.co.jp>
-To: xen-devel@lists.xenproject.org
-Cc: Ryo Takakura <takakura@valinux.co.jp>
-Subject: [RFC 0/5] Introduce dynamic tracer using Livepatch
-Date: Fri, 23 Oct 2026 13:48:09 +0900
-Message-Id: <20261023044809.162759-1-takakura@valinux.co.jp>
-X-Mailer: git-send-email 2.34.1
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="Subject:From:To:Cc:Date:In-Reply-To:References"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1792731118;
+	bh=l5UCn3s3YyxcyE6vweegr4A1rPRcjt6h9F7KPsMd5KY=;
+	h=Subject:From:To:Cc:Date:In-Reply-To:References;
+	b=g9IF7uFF9+WPeewAagqf7C9jK+UL4Yc9xwbzrV2wTgTEZHIsI3StVz8RYNbRqLD1y
+	 ZT/z/gtLR8fmAUx8n1LLfM+C9U2C0s0iAoOqTE2eIrLCwS710pc4j+WCR7k6JpEXBi
+	 jybOBH0KSK6ReliEUHAaEcrL7hDF2YXHjUI3b52ci6q/qjWqiykJtkMTiqDnBskIDo
+	 tq1A+WGsMnhTQ3RmAr3ikdjzDWGycUSMt0zu3QzuiWBdQVfcurM1AuhUjja3xFQAFw
+	 abrc4XwH6LfzBGCKAbUY92A1FlhoYh3+SzUJX5SgFL6HeeykSWmDYZpB25LXRyy0ae
+	 vW8LVJ3g00YTg==
+Subject: Re: [PATCH net-next 01/15] net: skbuff: make skb_copy_and_csum_bits()
+ report unreadable frags
+From: netdev-bot+sashiko@kernel.org
+To: josef@toxicpanda.com
+Cc: davem@davemloft.net, edumazet@kernel.org, kuba@kernel.org,
+ pabeni@redhat.com, horms@kernel.org, andrew+netdev@lunn.ch, jgross@suse.com,
+ sstabellini@kernel.org, willemdebruijn.kernel@gmail.com, fmancera@suse.de,
+ almasrymina@google.com, david.laight.linux@gmail.com, netdev@vger.kernel.org,
+ xen-devel@lists.xenproject.org
+Date: Fri, 23 Oct 2026 04:51:56 +0000
+Message-ID: <179273111683.3134.7255247218847744918@kernel.org>
+In-Reply-To:
+ <20261019-b4-skbuff-bug-on-followups-v1-1-41dbef50b9f7@toxicpanda.com>
+References:
+ <20261019-b4-skbuff-bug-on-followups-v1-1-41dbef50b9f7@toxicpanda.com>
+X-sashiko-severity: Medium
+Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TY4PR01CA0068.jpnprd01.prod.outlook.com
- (2603:1096:405:370::10) To TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:403:511::19)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TY5P286MB319683:EE_|TYRP286MB5946:EE_
-X-MS-Office365-Filtering-Correlation-Id: 3edbfa9e-d947-4e17-ad4f-08df30c0df87
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|376014|23010399003|1800799024|6133799003|10067099003|18002099003|261021123027099003|261022105027099003|3023799007|261022075727099003|261021121427099003|261009223027099003|56012099006;
-X-Microsoft-Antispam-Message-Info:
-	gyV0CWdoCMsv81PC48jaxe021P1D2ZtdGCK1SJyF4odDebZeafsF0B74yKPLfRgy+6FXfoK+bGy2Z6hhdVLW8cnlbP4VX9qDzrfaFaMhKb6vEZgWYJK1kJrsyl7BOlW70uiJ3vadRjXhybOHjDJVOUiJlH+LUu4JusvkcbLbO1ZppqwQ+SyUjJNstsvnxV13uvRN3w0JeLnMDaz0oJymVivTisGmwpiRjEG2tdClOYq8ItPAQG2TmWYjaOAkDph8MkKlvMPxoHD1Gg5tdsUfTwzPWBAXfGJzYogesfUjQUe2Mvoph0hH3hnlVRqlXYgJkUIfTGMk33zOh8Ob6OP9s91mZ+1VsajtMQbxZqKgfaKoXRgxMplr5kE+hvl5DgE3x0ZUh4051pDC4fnxrcgz5PTIcjCVkASyjnWRHGD+hFGNPlkQDv4eR3gFiOjv8r63mW7mwqDpykkFUoKpDs8dG625DPysAPoRYJr4CfIPvUklNuaWcz1nUuaDlAY0XPy/9/I742YMJaTkadxKIZS6p5bEDSTMxo7HDCV7ZQ4HUMo1wVrz5t4OTRhbfoPI++E22oS6W56Zc+07fu3xOzTjsimscVEiDTdEH5qBYI+KMqj3xbmPPwt4kVpw2DkdCqow
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(23010399003)(1800799024)(6133799003)(10067099003)(18002099003)(261021123027099003)(261022105027099003)(3023799007)(261022075727099003)(261021121427099003)(261009223027099003)(56012099006);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?DWW1XaStJuupxgC8rTlF60SuSDxpQ5D0vErjV8LIInafP3W0o0X0e9PmTsVY?=
- =?us-ascii?Q?w5EJgp4FeaqBUOSia1H0hT2FpBU9TNrgobE2bcB706rFg2rhboSO8h+T86Ki?=
- =?us-ascii?Q?agDcysgZMPzM/kHje3esdG71kNFvDqZk05qPly0wsaeNprVv53gz7Cm6c+dR?=
- =?us-ascii?Q?qpr0IJVZBSMFZvwxP53Qu4Ji0SldOunJBca4M6V481feKp3+E938dqOwb7LS?=
- =?us-ascii?Q?h3uhv1IKl5RMKoywvf161AxCEJvPtjfa1b4K/pXATzIV34D9E9OEukrzXLGP?=
- =?us-ascii?Q?ZmmHhoK/NDIbuhXomG8D8ytG1as6IMabSiDflN8gvr8rETSsbOAlx7zX7gzM?=
- =?us-ascii?Q?9A6+uhmbMpxeyoPNAV1Fsw3v2GQV8tby0JdXuEWKU9fqbCjxOrZON5ANpOvu?=
- =?us-ascii?Q?p+3ViPeQtr9QRGvAjEQ+UOjzwXtYFsi7QPhuMg9TnIThxkHJyZNyha84+ZX6?=
- =?us-ascii?Q?zePLnjue2zA0j8/evdtxTryhr01nvJOTgyIY5hbeJl+LLXJbw0phn4bIi5tk?=
- =?us-ascii?Q?9oEMJmLNeMNBF1v+M/nPAppQKeAJEd+dXlBdrsW4/AabXb6DU8rins2K8Tn9?=
- =?us-ascii?Q?cET39mAEG/S98GBW0pxK7NEaEbyXLyeXLhe8ntIdodJ/YyJQT22Bb098QyGr?=
- =?us-ascii?Q?FiPD3+HB+JcGbZwXa+1XsEr1OhA3QRWuMOfrgij6WxK1QESOVOr08KVbd4b9?=
- =?us-ascii?Q?N9MqlLpZKwx7rL8Md3UP+PEc+y+Jo8rlnOqdV9LY8MkCqKSXeNO9olwJeaKd?=
- =?us-ascii?Q?gLICD7EqCRu72aAHmMHxYuUZc8ynP37s4fQSyMC8SvNCIAN7u36txSkjzwK8?=
- =?us-ascii?Q?YiFHudM3/dxnt8LD0qpNQSa1k5/vyb+hur7XMpXOVRVj9MiKrZyJxQQN7mOk?=
- =?us-ascii?Q?FJb5LH6JzXTTariyvbGLs5/YeWw4DWXKZ6jDVrSPK7xGgSI+MQTj7F0x4Ls5?=
- =?us-ascii?Q?StIhv7xN/bNj9aTcTn/TTW88UYJeSqCqsCFskBzmI8fcHpzsIpv0/4mosIq6?=
- =?us-ascii?Q?07wKhwHM0nVaPRaXEqxiHfs9Tzj743WwKPP+I2WjV0JI8y8zPmnK35bgnXVc?=
- =?us-ascii?Q?6iiKmE332gEZdje5+gdWG70lLuXhCDtgOKquHHcbWFCstX7RBpzlZUrxWAwh?=
- =?us-ascii?Q?mu5tw483RatEKfuyIwvaz+9fc0NzZ/Bmc9pCfsN1WxPkVEza8A73ZmeOCcTc?=
- =?us-ascii?Q?CZDLWxygfsgbunR7q0fGSHC+zBY/9pTFI3EEUWI5/tlHgGMrIVqw/xKEW0oc?=
- =?us-ascii?Q?zHUdmZlHlJ066akduLp696ippTCtHzerKbTXUjQb16Gls87QfUxUvvUN3oiv?=
- =?us-ascii?Q?Y4cP9XHyP0HLMH6wZFwtdhNlF/Un/nvpjndigrck1dqgPsQtIjLfpO04D2DV?=
- =?us-ascii?Q?1OXSCxdLAgn0aBFkfOIS1hK2ceuHEhfs/ohvqusUMJVtLvhdvpLQblN1HJiP?=
- =?us-ascii?Q?Y5ajbQjBIS6ndW7Li1aFoslLjbqkPfxIU6T2Qj1g5oE0nAARujBPz9nCfoMr?=
- =?us-ascii?Q?ZBAel1r3ZAuIeerexRHmiWDW9AQLgp+EZ1P1/uiy4f2bVGijdEZDZIsBlwMO?=
- =?us-ascii?Q?A/8T99i+6ploaSEFHW1YRs/Lu+8oRGiU+gw/EVnbFIP+3/wVzx71HCdimZ9W?=
- =?us-ascii?Q?Rwtk1S6V4KsFrctBTkkbH1XQfI9gCX0RJim86T2EAlhAJ/b2iiue40isVqR4?=
- =?us-ascii?Q?pF+/gbK6U7e+k9SJ0sjhJ5O89q3x4hV16hcVjpjAyn3Ct4r1ZIBz8H+Dc9GF?=
- =?us-ascii?Q?vhsHise6JA=3D=3D?=
-X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 3edbfa9e-d947-4e17-ad4f-08df30c0df87
-X-MS-Exchange-CrossTenant-AuthSource: TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 23 Oct 2026 04:48:25.2532
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: hcAo/ASza4GwFCsyq7Ny2D5Z1i0A6sBbVsvYt1DEFMVbobvXSjRLJWRjQrJ71UFchnSXhlyQsaOxN0AovDKWBg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TYRP286MB5946
-X-purgate-ID: tlsNG-16d1c6/1792730910-F540B77B-3976F16E/0/0
+X-purgate-ID: tlsNG-16d1c6/1792731120-F7ACA77B-1AF79BD9/0/0
 X-purgate-type: clean
-X-purgate-size: 4817
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 5299
+X-Spam-Status: No, score=-16.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hello!
+Thank you for your contribution! Sashiko AI review found 2 potential
+issue(s) to consider.
 
-This RFC introduces a dynamic function tracing feature
-which I proposed at Xen Summit in September:
-https://xensummit2026.sched.com/event/2RDr8/improving-xen-traceability-more-than-just-livepatching
+Critical: 0 · High: 0 · Medium: 1 · Low: 1
 
-The goal is to improve debugging/tracing by making Xen possible to attach
-callbacks to its functions. This series implements the infrastructure for
-attaching callbacks using Livepatch on x86 and arm64, as well as
-HypFS interface for controlling tracers. It is inspired by Linux ftrace:
-https://docs.kernel.org/trace/ftrace.html
+If you believe none of the issues are legitimate, please reply to each
+issue of Medium severity or higher and explain why the AI is wrong.
+If any of them are legitimate and you plan to respin, please let patchwork
+know by including "pw-bot: cr" as a separate line at the end of your reply
+(one such reply per series is enough).
 
-I appreciate any feedback on the implementation, as well as
-your experience trying it out. Thanks!
+- [Medium] Missing Fixes: and Cc: stable tags on a data-integrity fix.
+- [Low] The new comment in skb_copy_and_csum_dev() reads: "On failure the
+  rest of @to is zeroed; leave the checksum alone so the frame goes out…
 
-# Implementation
-The implementation follows Linux ftrace's approach of reserving
-function entries that can be later patched for tracing at runtime.
-Those entries get patched with a branch instruction to a trampoline,
-which preserves registers before calling function callbacks.
+--
 
-Livepatch is used for patching those reserved function entries.
-Since Livepatch operates on struct payload, it prepares a dedicated
-payload which can be used by tracers for requesting livepatch of the
-target function. Please see patch 2 and 3 for the detail.
+net: skbuff: make skb_copy_and_csum_bits() report unreadable frags
 
-New tracers can be added by defining a struct tracer and
-registering it during Xen initialization. Each tracer can provide
-a function callback for tracing and optional callbacks for managing
-its state and output through the HypFS interface under /tracing.
-Please see patch 4 for an example implementation.
+skb_copy_and_csum_bits() now returns 0 or -EFAULT, hands the checksum
+back through a pointer, and is marked __must_check. On error, the callers
+in skb_segment(), the ICMP code, the IP append paths, sunvnet and sunrpc
+take the failure paths they already have. skb_copy_and_csum_dev() returns
+early without storing a checksum. With this change, software GSO of a
+devmem TCP skb fails instead of silently replacing the payload with
+zeroes.
 
-# Configuration
-In addition to Livepatch and HypFS:
+Link: https://lore.kernel.org/all/179148235783.434549.14322374227477832817@kernel.org/
 
-CONFIG_LIVEPATCH=y
-CONFIG_HYPFS=y
+> Link: https://lore.kernel.org/all/179148235783.434549.14322374227477832817@kernel.org/
+> Suggested-by: Mina Almasry <almasrymina@google.com>
+> Reviewed-by: Mina Almasry <almasrymina@google.com>
+> Assisted-by: LLM
+> Signed-off-by: Josef Bacik <josef@toxicpanda.com>
 
-Enable the following configs:
+[Severity: Medium]
+This fixes the silent payload replacement in the !sg && !csum branch of
+skb_segment(), but there is no Fixes: or Cc: stable tag.
 
-CONFIG_ARM64_PATCHABLE_FUNCTION_ENTRY=y
-or
-CONFIG_X86_PATCHABLE_FUNCTION_ENTRY=y
+The commit message says commit ab9414ed70bd ("net: skbuff: don't leave
+stale bytes in skb_copy_and_csum_bits()") is what made the replacement
+silent. That commit carries:
 
-CONFIG_LIVEPATCH_TRACER=y
+    Fixes: 65249feb6b3d ("net: add support for skbs with unreadable frags")
+    Cc: stable@vger.kernel.org
 
-# Usage
-The interface is exposed HypFS /tracing directory.
-It follows the naming and usage of Linux ftrace:
-https://www.kernel.org/doc/html/latest/trace/ftrace.html#the-file-system
+Could stable trees take ab9414ed70bd without this patch? Devmem TX would
+then send a zeroed payload under a valid TCP checksum, and the peer would
+accept it.
 
-available_tracers     List registered tracers.
-current_tracer        Read or select the active tracer.
-available_functions   List functions available for tracing.
-set_function_filter   Read, select, or clear the target function.
-tracing_on            Enable or disable recording.
-trace                 Read or clear recorded output.
+Other patches in this series carry Fixes: tags, for example "net: skbuff:
+reject a negative length in skb_copy_and_csum_bits()" and "net: skbuff:
+check csum_start against len in skb_copy_and_csum_dev()".
 
-## Example
-// List the tracable functions.
-xenhypfs cat /tracing/available_functions
+Should this one also name ab9414ed70bd (or 65249feb6b3d) in a Fixes: tag
+and Cc stable, so that both changes are backported together?
 
-// List the available tracers. Currently "nop" and "function" tracers are available.
-xenhypfs cat /tracing/available_tracers
+> diff --git a/net/core/skbuff.c b/net/core/skbuff.c
+> index 93c2f440b9ec..a2b52a5a61a9 100644
+> --- a/net/core/skbuff.c
+> +++ b/net/core/skbuff.c
 
-// Select the function to trace.
-xenhypfs write /tracing/set_function_filter xen_extra_version
+[ ... ]
 
-// Select the tracer.
-xenhypfs write /tracing/current_tracer function
+> @@ -4006,9 +4025,13 @@ void skb_copy_and_csum_dev(const struct sk_buff *skb, u8 *to)
+>  	skb_copy_from_linear_data(skb, to, csstart);
+>  
+>  	csum = 0;
+> -	if (csstart != skb->len)
+> -		csum = skb_copy_and_csum_bits(skb, csstart, to + csstart,
+> -					      skb->len - csstart);
+> +	/* On failure the rest of @to is zeroed; leave the checksum alone so
+> +	 * the frame goes out with a bad one.
+> +	 */
+> +	if (csstart != skb->len &&
+> +	    skb_copy_and_csum_bits(skb, csstart, to + csstart,
+> +				   skb->len - csstart, &csum))
+> +		return;
 
-// Record calls to the selected function.
-xenhypfs write /tracing/tracing_on 1
+[Severity: Low]
+Does this early return actually make the frame go out with a bad
+checksum?
 
-// Call xen_extra_version().
-cat /sys/hypervisor/version/extra
+It skips the csum_fold() store, but nothing marks the checksum as invalid.
+The sanity check earlier in skb_copy_and_csum_dev() only bounds csstart
+by skb_headlen():
 
-// Stop recording and read the output.
-xenhypfs write /tracing/tracing_on 0
-xenhypfs cat /tracing/trace
+	if (unlikely(csstart < 0 || csstart > skb_headlen(skb) ||
+		     (skb->ip_summed == CHECKSUM_PARTIAL &&
+		      csstart + skb->csum_offset + sizeof(__sum16) >
+		      skb->len))) {
 
-// Reset.
-xenhypfs write /tracing/set_function_filter ""
-xenhypfs write /tracing/current_tracer nop
-xenhypfs write /tracing/trace ""
+For CHECKSUM_PARTIAL, the field at csstart + csum_offset can therefore sit
+past the linear area. That puts it inside the region that
+skb_copy_and_csum_bits() zero-fills on failure:
 
-Sincerely,
-Ryo Takakura
+	if (!skb_frags_readable(skb)) {
+		/* Don't hand the caller a buffer with stale bytes in it. */
+		if (len > 0)
+			memset(to, 0, len);
+		return -EFAULT;
+	}
 
-Ryo Takakura (5):
-  xen/arm64: livepatch: enable attaching callbacks
-  xen/livepatch: Allow tracers to schedule livepatch
-  xen/tracing: prepare a livepatch payload and its controling interface
-  xen/tracing: Add a function tracer
-  xen/x86: livepatch: enable attaching callbacks
+For UDP over IPv4, a checksum of 0x0000 means "no checksum". Wouldn't the
+receiver then accept the zeroed payload?
 
- xen/arch/arm/Kconfig                  |  13 +
- xen/arch/arm/arch.mk                  |   3 +
- xen/arch/arm/arm64/Makefile           |   1 +
- xen/arch/arm/arm64/insn.c             |   5 +
- xen/arch/arm/arm64/livepatch-asm.S    |  68 +++
- xen/arch/arm/arm64/livepatch.c        |  39 ++
- xen/arch/arm/include/asm/arm64/insn.h |   1 +
- xen/arch/arm/xen.lds.S                |   5 +
- xen/arch/x86/Kconfig                  |  13 +
- xen/arch/x86/Makefile                 |   1 +
- xen/arch/x86/arch.mk                  |   3 +
- xen/arch/x86/livepatch-asm.S          |  60 +++
- xen/arch/x86/livepatch.c              |  33 ++
- xen/arch/x86/xen.lds.S                |   5 +
- xen/common/Kconfig                    |  12 +
- xen/common/Makefile                   |   6 +
- xen/common/function_trace.c           | 274 ++++++++++
- xen/common/hypfs_trace.c              | 743 ++++++++++++++++++++++++++
- xen/common/livepatch.c                | 137 ++++-
- xen/include/xen/hypfs_trace.h         |  42 ++
- xen/include/xen/livepatch.h           |  14 +
- xen/include/xen/livepatch_payload.h   |   7 +-
- 22 files changed, 1478 insertions(+), 7 deletions(-)
- create mode 100644 xen/arch/arm/arm64/livepatch-asm.S
- create mode 100644 xen/arch/x86/livepatch-asm.S
- create mode 100644 xen/common/function_trace.c
- create mode 100644 xen/common/hypfs_trace.c
- create mode 100644 xen/include/xen/hypfs_trace.h
+The same applies to a CHECKSUM_NONE UDP skb sent without a checksum. The
+headers are copied intact, only the payload is zeroed, and nothing marks
+the frame as bad.
+
+The commit message makes the same claim:
+
+    skb_copy_and_csum_dev() can't return an error, so it leaves the
+    checksum alone and the frame goes out with a bad one.
+
+None of the current callers (ep93xx_eth, ec_bhf, ksz884x, 8139too,
+sc92031, via-rhine) sets netmem_tx. validate_xmit_unreadable_skb()
+therefore drops unreadable skbs before they reach these drivers, and the
+remaining failure case needs an skb whose lengths are inconsistent.
+
+Should the comment and the commit message be narrowed? Alternatively,
+this path could store a non-zero value at csstuff that is known not to
+match, for CHECKSUM_PARTIAL. The code is unchanged at the end of the
+series.
+
+>  
+>  	if (skb->ip_summed == CHECKSUM_PARTIAL) {
+>  		long csstuff = csstart + skb->csum_offset;
+
+[ ... ]
 
 -- 
-2.34.1
-
+Sashiko AI review · https://netdev-ai.bots.linux.dev/sashiko/#/patchset/20261019-b4-skbuff-bug-on-followups-v1-0-41dbef50b9f7%40toxicpanda.com
 
