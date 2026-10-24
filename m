@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 20F4E606A31A
-	for <xen-devel@archiver.kernel.org>; Sat, 24 Oct 2026 14:14:26 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FFCD606A31A
+	for <xen-devel@archiver.kernel.org>; Sat, 24 Oct 2026 14:24:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=oXFIs/8C
-Received: from list by lists.xenproject.org with outflank-mailman.1460074.1671540 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=kq4UfABF
+Received: from list by lists.xenproject.org with outflank-mailman.1460091.1671550 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKcVf-0005bA-2j; Sat, 24 Oct 2026 14:14:11 +0000
+	id 1xKcfi-0007K9-3R; Sat, 24 Oct 2026 14:24:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1460074.1671540; Sat, 24 Oct 2026 14:14:11 +0000
+Received: by outflank-mailman (output) from mailman id 1460091.1671550; Sat, 24 Oct 2026 14:24:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKcVe-0005b3-WD; Sat, 24 Oct 2026 14:14:11 +0000
-Received: by outflank-mailman (input) for mailman id 1460074;
- Sat, 24 Oct 2026 14:14:10 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xKcfh-0007K2-Vd; Sat, 24 Oct 2026 14:24:33 +0000
+Received: by outflank-mailman (input) for mailman id 1460091;
+ Sat, 24 Oct 2026 14:24:32 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bernhard.kaindl@citrix.com>) id 1xKcVd-0005ax-Sh
- for xen-devel@lists.xenproject.org; Sat, 24 Oct 2026 14:14:10 +0000
+ (envelope-from <bernhard.kaindl@citrix.com>) id 1xKcfg-0007Jw-Aj
+ for xen-devel@lists.xenproject.org; Sat, 24 Oct 2026 14:24:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xKcVd-00CpPD-9e
- for xen-devel@lists.xenproject.org; Sat, 24 Oct 2026 16:14:09 +0200
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xKcff-00FXqa-Gq
+ for xen-devel@lists.xenproject.org; Sat, 24 Oct 2026 16:24:31 +0200
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <bernhard.kaindl@citrix.com>)
- id 6adcbd24-e002-0a2a0a5209dd-0a2a45099204-8
- for <xen-devel@lists.xenproject.org>; Sat, 24 Oct 2026 16:14:09 +0200
-Received: from [52.101.193.22]
- (helo=CH1PR05CU001.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6adcbf94-8faa-0a2a0a5109dd-0a2a4508acde-12
+ for <xen-devel@lists.xenproject.org>; Sat, 24 Oct 2026 16:24:31 +0200
+Received: from [52.101.56.47]
+ (helo=BN1PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <bernhard.kaindl@citrix.com>)
- id 6adcbd2f-be1a-0a2a45090019-3465c1165ccb-3
- for <xen-devel@lists.xenproject.org>; Sat, 24 Oct 2026 16:14:08 +0200
+ id 6adcbf9e-f659-0a2a45080019-3465382fc428-3
+ for <xen-devel@lists.xenproject.org>; Sat, 24 Oct 2026 16:24:31 +0200
 Received: from LV3PR03MB7707.namprd03.prod.outlook.com (2603:10b6:408:28b::21)
- by CH5PR03MB7888.namprd03.prod.outlook.com (2603:10b6:610:210::12)
+ by SJ0PR03MB998646.namprd03.prod.outlook.com (2603:10b6:a03:40c::11)
  with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.20; Sat, 24 Oct
- 2026 14:14:05 +0000
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.16; Sat, 24 Oct
+ 2026 14:24:27 +0000
 Received: from LV3PR03MB7707.namprd03.prod.outlook.com
  ([fe80::97e8:ef9c:9031:e2bf]) by LV3PR03MB7707.namprd03.prod.outlook.com
  ([fe80::97e8:ef9c:9031:e2bf%4]) with mapi id 15.21.0546.021; Sat, 24 Oct 2026
- 14:14:05 +0000
+ 14:24:25 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,117 +54,115 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=cXvkzzTgiP+PIJ/hqNMVRNo0U+o/K6E20eB62hd+/OKs4HJj61K1sAob6FHjhwNQyTZk12PSQaNiAbqOZAw+35iiVFTQ80Nu6xyq8M71p6ZdAU3FrEb/FqCJZez692+r0q3KFLR5QaF9Rg5xFOR7HLgR5K+PWfYKG1VzzEfwY+QHKBU9LWe+iNwJiV90xFbDoq6ftUN3aumjmZQB52Qh7CzD6ZTA/pFwolO+6a6FJo5nnIkycLDRgN+2vmXOcSmGPoraXxq3AOOGOkQsxjzI5oaelxN4LlXUZbrfwuLsy3npr2hMEKInXgEV2LxZDa1zcozhRi8nlIbQuy6jFEjc3g==
+ b=HjgcKdEGmBatM2Lo4lTwC4Losfue4ua5MaEZezs7ZUjhjecqoYiX+TCrwL0mXkqjY/AfYgPTi4dHa5cedz4hSos0CGVDUYj94gA6LTD/jAm9Hl0kudZ6mii4W785vHGJRpB/PecoemRbN6fQobYbBj7Dx/eVOZbtNyjEFB75EkhpITo4WGpZJhQTgu8k8jAnxTdaKWQ18DmabhR36D/YaQJHUD06mlwLpfYrJV0WZTDV0P7qSz3jg4tpbmw7tPW2hiioyPC62U/O4qy+dqEhv75+ZM4qf68sObCJ8pdgn1q4BUM79ciQYCPBL/HmqtVjO18v+ihS877PHbJRoSeg4g==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=wGktxpiLJd+By9hMcQEkWdxSfmT0yiUXOtnLuesASFM=;
- b=avsfWq115dyHTK4nSCnmlDCnovZmHdGPa8+CWGBHsVLWc5HrXVJehkAL3j0XvXFoT6Mg7lkKSvpxJcuvHbi7GZFFQ+/0FaUj+xTKECCXpT2i9g1KDPetxqzWLScY+fIHyXYZOTS0t3agpZj3GxgS8ZYI3MccPF7TSrktaAgkijYwVPJ23OI+1KkZ6USEKzzm52Sm9Bg9IyXr/0ZAYSvA997DMylTguvwgFAC82reasI7Lueml93p7oV651bIFTtw+3MXIPqa4hoRNf9hMqg6sDgmrvD4aqo68kisgajoftK2KDmwzxt/Aqq2M1R2iawEceUKTH2wh1XcilJn7TT2Vg==
+ bh=i5GSCA2pJvjcuIIR1ofLXFbv/S35L8a2Th1hWUXAMl4=;
+ b=TibvX/i2/FxWWgScxA6F5sC2skv9vjr/65Xr/wwJWDLIR66iMyXQ+Au9iPOvJ51bnpla1pGXv+gPWNFIX/3C4K+S/Osmk8d2QDWHlLXLavZJXTGtZMxmmYWo0iPxxCrtv3jsOX2UBpYW+1JMpMznXBtioseH806MiuGGYzqYTtE0GJNf/AlBmjVjU61UOh2X6kHWjBoJCGtFOO6tu4Cf5ypVqddaynwZDMChIimOvEUJ5bSI+bpninDJH+XiN/0msEPhsDe4m+QTxsQgQWUcNM5tGS/opJBYrpofcNScRGAU7cZRcQOdh/Bw41xUfb1pSuQPB7S5HC4w4sJ5PltQng==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=wGktxpiLJd+By9hMcQEkWdxSfmT0yiUXOtnLuesASFM=;
- b=oXFIs/8CO02S9tY191R9xRbc1uypo2Hkug7wYhNP3wV53qaB7rURSV9GSgKmrqP0+yr9bOynG4elb/8rwsLqdmNvf/SIODJeF4Wd/y8zRUOYS5G7S4kS5KDAy+OaBkK07P5rAZC/EvAIjAaktEiR7DAAWG0Nzwgar65WxnTDa3I=
+ bh=i5GSCA2pJvjcuIIR1ofLXFbv/S35L8a2Th1hWUXAMl4=;
+ b=kq4UfABF3imyNXdpSnhlQDF5E5OkQXmGMpR8uSVQQ9sWBsOlhpvzpO3+zDQpu3ewJSlsZINvFjVczSerxNAx1+wLFfj1Reyh4Bhyyr38pLmpZDS6l9AtjevM2u1j7rZgqjc08mM+eaFG1MUSwBzueU892P+cnKmTq1iTKJrhOQM=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [RFC 3/5] xen/tracing: prepare a livepatch payload and its
- controling interface
+Subject: Re: [RFC 4/5] xen/tracing: Add a function tracer
 From: Bernhard Kaindl <bernhard.kaindl@citrix.com>
 To: Ryo Takakura <takakura@valinux.co.jp>
-Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, julien@xen.org, 
- bertrand.marquis@arm.com, michal.orzel@amd.com, Volodymyr_Babchuk@epam.com, 
- andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, 
- roger@xenproject.org, ross.lagerwall@citrix.com, jgross@suse.com
-In-Reply-To: <20261023045543.164658-1-takakura@valinux.co.jp>
+Cc: xen-devel@lists.xenproject.org, andrew.cooper3@citrix.com, 
+ anthony.perard@vates.tech, michal.orzel@amd.com, jbeulich@suse.com, 
+ julien@xen.org, roger@xenproject.org, sstabellini@kernel.org
+In-Reply-To: <20261023045655.164966-1-takakura@valinux.co.jp>
 References: <20261023044809.162759-1-takakura@valinux.co.jp>
- <20261023045543.164658-1-takakura@valinux.co.jp>
-Date: Sat, 24 Oct 2026 16:13:58 +0200
-Message-Id: <179285123800.1706038.4978498781229199186.b4-review@b4>
+ <20261023045655.164966-1-takakura@valinux.co.jp>
+Date: Sat, 24 Oct 2026 16:24:17 +0200
+Message-Id: <179285185778.1706038.7602957469449476344.b4-review@b4>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792851239; l=8586;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792851860; l=5662;
  i=bernhard.kaindl@citrix.com; s=20261024; h=from:subject:message-id;
- bh=TI0wo2frgW/d7qpZB28q/IUgZL2lkOPX8H2yk99frYI=;
- b=AzkqG+bEXeyBiI6Yq9SPfz8khXQxJAHI1IZB8bq449dLMvj4VbtmPcWvpoNnONPMlKFqFCoik
- 1DMj3HUeInlBG4x5M5jt/KZ68qXHQArtjRbLE9dwWwckoulUpj26CFC
+ bh=xK0gvg963YEcqBC2gZWFWbFM25fn0Hffi90fEOnOreE=;
+ b=f+CInI2hMOm1/I3pfjZRQvcovX8r9UtCD1zyqsWLoQvT55ZeFkUAFlVhl0DkuNUhx2FXLP8nE
+ GxW2+vr76GyBWPl0cII/rHkCttVO7n4OLQcDazy0FUaI6ENh2r25O5P
 X-Developer-Key: i=bernhard.kaindl@citrix.com; a=ed25519;
  pk=oIjnI/us0Uh5d/WP18V5IQq/FrLPUp+W0JAhJ9QCQIs=
-X-ClientProxiedBy: VIZP296CA0024.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:800:2a8::12) To LV3PR03MB7707.namprd03.prod.outlook.com
+X-ClientProxiedBy: VIVP296CA0032.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:800:356::9) To LV3PR03MB7707.namprd03.prod.outlook.com
  (2603:10b6:408:28b::21)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV3PR03MB7707:EE_|CH5PR03MB7888:EE_
-X-MS-Office365-Filtering-Correlation-Id: 1ae1dec5-9629-4b5d-323d-08df31d90fa1
+X-MS-TrafficTypeDiagnostic: LV3PR03MB7707:EE_|SJ0PR03MB998646:EE_
+X-MS-Office365-Filtering-Correlation-Id: e7f14402-267e-4e03-6234-08df31da8190
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|1800799024|376014|7416014|366016|18002099003|22082099003|6133799003|10067099003|3023799007|56012099006|11063799006|4143699003|261022115727099003|261009223027099003|261022105027099003|261022075727099003|261021121427099003;
+	BCL:0;ARA:13230040|366016|376014|1800799024|23010399003|261009223027099003|56012099006|4143699003|11063799006|10067099003|261021121427099003|18002099003|22082099003|3023799007|261022105027099003|261022075727099003;
 X-Microsoft-Antispam-Message-Info:
-	+JW5eO2HdrfhIO/T25AO9X6FLoN33WjT7jQR2Iga+sU2RClzmAqAaQFJBSs90OlOc7Xp9MIcZqa18ckV//b0UDAbLDTVYDeuU7HGZZwW+zwo/bGiROUm2Rl/Ji3Tw07ATjWVu/CQz3ZGKsQWSPMMmp9Zdkn4Zl0rMOhuQM0q9YbgXvM5GIDm90MMY3q1dYUEUdKlf9U2ud7XYclGtQt0n6d+dzSdiqV9zryCY1uWyxDHoAZNVsCUSJLFYR1LDLJ+o6KsScBTd5XNW24tUqMx/SRotcILqkBJis4Ug2Jk+Xv5oyTd76wzss3nquTSXceDBPUzWEVgr9r9XLdwQhmTflo7ubH3IIrIkLobgTskL61kmhQcIYBMH6SUHnOMi1eU4iy99ivRDrzEwhkIHFw77XYxWq0C+wSt6LnwuL833FTRu5sLSJpRHDn6S/oCq4dfBFck1rSFuj6aK0dlNy4oUxVo9ypn8GYo7+sYsyjXAXVyCntN0Wg9jbvlyMPal7P7bhqy9cRgXRvSxcMod/ffV05ft17s25EXgLCDnUgEKuB0wFBbdznuVDc8havSb5XA/eEdI20ebEQgfFCRppQ24kyUkuWRc8yQA95dNmjQWLaI1U1kdQGghMT1jtMDJJnpwtj4OI64E05HMEcaBP0ibf3RX0bzeVIgwjOBP/dEbv8=
+	Wylc5ICTrtSR9CSy/LBpTcqnCUu9iHn9L2OLWkmi+cWUZvwim+LXlQ7aa8ohIOXHeY7sI9M5fTxDmcq6ySR9IQvW4IG7Xp5lJYsLHRHWH8XZic4oiD5jsAl6ZI0f67yUPg6mLRCEUekRnZF72b/uLuM+1SLeNvxkdKXoM1Shb0+z0rCzgFyEqqS/6R/biPtCYn1TFrK+OLwF8g9nLkGPKEXQUsJ//LVjdBL0ZsNJqFqSe/kVx66O0S6CSmV2PW4Rk/N1Xq1E2hZ7yEJFHI9MLduNoW7R3qHWNoq7H/Qo9+e+GVhiaJoafrqkfIWV2F3vydw0AL1Q0mGKxo221LyyBAIrboRbjZ3noGmGOVcsQJ4sl++of7iS7lyTCriOaBWi/CAeQ5rNkUOdRnDRyQrufWhGfLNKUWkNx8VRmqtDupkqB/QP2UB4wmnjBdTgQ4M/gDNAs+fBnc+zVNh8EWN3gebBPTZtAeb0ReO+nyD2tlHfpZhsaeU+SrUgWmpSqEU4jrC1ZG9z1NdY4+GoQWesvTvFFEOn1SApnpD3OYDIBqRYSdz9orFA8AmE6vWGmLOLTMeQXt6DvcO8SqFKPj5vhHXX5MNLzDDQc9PkcdPmlvW5ylcSTrirXxG3E/sdpAj85EevibdJTMbiwqYOC46q+PUTwThpUCY1tJOpGPSFb/4=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR03MB7707.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(7416014)(366016)(18002099003)(22082099003)(6133799003)(10067099003)(3023799007)(56012099006)(11063799006)(4143699003)(261022115727099003)(261009223027099003)(261022105027099003)(261022075727099003)(261021121427099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR03MB7707.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(376014)(1800799024)(23010399003)(261009223027099003)(56012099006)(4143699003)(11063799006)(10067099003)(261021121427099003)(18002099003)(22082099003)(3023799007)(261022105027099003)(261022075727099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?ZHZrTWFTMFd4czVYWEh6Q2FyNU5PSENzVnkxelk3bzIzQSsrRDRVVTJoYWdO?=
- =?utf-8?B?b0VxcVR6UzZXOUpGZUR4WnRKdkNXYzcraDlnbW95TUhNM1dkbStTVTVxRnBW?=
- =?utf-8?B?QUVtNVdMd1ZZazNlTWZJWXQ4bmVubkd3ZmoxN21zVXBxMHBjMjdMaXdkTGxm?=
- =?utf-8?B?RThtZ2RrUHhaZmJtWUlCejB4VVVVVkpVeGlhdUJ1VEUvYlB4MWwzWkJPWHls?=
- =?utf-8?B?NTBlaFV5R3ZJbjZ1WTZtSkl6bUk5SHd0WTFCSTJCL01xaHhUcDZEU3pxajBU?=
- =?utf-8?B?NkV6QlFrK1JNL21RWFZWWWczVVJUa1Y4aVpjREpWb3NCc1dxQzVoNUl4TFRv?=
- =?utf-8?B?cm82ZHhRZk54UmVNZFRhbnNoM3lqWXk5RmFiM0QydjRqVTcySVgzTThNS0l1?=
- =?utf-8?B?dHRaK2c1TTJpcjZFNTBWNFd5OFd5TGljcXdQQXRUdUZ0ODBKOCtPeUZvRWxG?=
- =?utf-8?B?K0lYSnpZcDh3NTd5ODdldHA5UGZqVWRuampaRm9wRFZtd2JWNXcyT2Y4Q2hX?=
- =?utf-8?B?MVhTRkFLTytFdW81L2xWeHNpRGFaSEpYdkgwNXdxc1dsd0VvN0g4Z293enk3?=
- =?utf-8?B?cWs4RGxHZDdHWWF5MVRUa2o1VzdvK3BVVThHUGJGcElwandPdnhBNmE0RG1U?=
- =?utf-8?B?L3N4cjV0eFV1bGh1ZFN0MFJtTCtTUGxpVndzT3B3RjRuemtzZVo1Uy9YREd1?=
- =?utf-8?B?RWVKOGNsb1AvbStXdjdYVXlIeE1wbytscWhBU3h1TmZGVUR0RG1qSFk1dXd6?=
- =?utf-8?B?T0JuS3VibkRvSU83cFd2K1VuRkM4MUtxbUgxWDhteHByK013cFN0M1Rrb21R?=
- =?utf-8?B?QkYvUnkzN3R3c1pTN1Fja0RpUUJUbXdFcmRPZzMzTUdMQVNIZFNuc0xyWkZq?=
- =?utf-8?B?Zis1QUxkTXhGSlBRK3NHNXdscjlMQS9ldTFnR0w3elZ5dUlDaE91VklMeFpJ?=
- =?utf-8?B?ejdVTk05UWhaL29RSlNrZjRNMktpanl3clo3UGU1SXVFb0pQZDNocGNSd3pO?=
- =?utf-8?B?TjJES2RodGtqVGFMV210OWhyOWlTOWlnV0pNb2g5cDNSMGUzRk9TV05OTGlO?=
- =?utf-8?B?YWd4RWVYTmVYMEFxSnd0eGxYanE4SFZMR0k1VnRmNEEwaEZzUGU5d0JzWTVs?=
- =?utf-8?B?Y3l4ZDRFd09vTW5QUjhIMUNPWjhHSkVNN24xc1ZOaTBwRVY4ZC91QjJBd3No?=
- =?utf-8?B?RWFPLzRIblVmeldEZERFbTR4U3Q1Zkt5OWVxaGtOWlVYRGVUUm45ZnVOUTlh?=
- =?utf-8?B?eENaT2ZrNC9Lb0p6VVcxK21qcmVWWkFwdVIzQ3hPVlIxSXh3Z2VtQ29EQTFq?=
- =?utf-8?B?S2ZpVXB2SHJyQ0xLQ21yZVk1WnlSSWRQOTJtZkJyZzBHempsSnhBb3M4L2pV?=
- =?utf-8?B?YzAyVnQzcFhiUkVBcTNzZG9teWlKZ3E2SUJpbXVSVjBtV1BJNHZlemRzN1Uz?=
- =?utf-8?B?WG1uUFRlbi9JS082TEovN1Jpajg0ZU9yZVZDQ1BrbUJ2V0dLc3d6R1JHcVNs?=
- =?utf-8?B?N280RU1YSEJocCtWbEFZOTRwZUxZK29sQWZBNDRER2o3YmhjOXp6NmRYd05v?=
- =?utf-8?B?RExMRDlCeGVDYy8wZ1JGK2xCdHZsRWlNUnJONEpKRWRySElEcnlzQTJsd1N3?=
- =?utf-8?B?YU5KNjdpQmhPdzFCSmk2UFc3c2oyRU1nbndhcHM5Qmxyd041UG04L1JRZDI4?=
- =?utf-8?B?bWl0RTIrODZkOU5zajhpczkrWEhud2xDTjNqK09YVUMycit5Sk1UNTZuR01S?=
- =?utf-8?B?aE9HS1lNbFNIblpzdzBEQkc1OWIxOTRBZHFvK3BHdlhrbVFGZ2ZTU2luOExH?=
- =?utf-8?B?dkxwQTltai9hUi83N29qcVdxYllvR29HS0NHK3kvRy9GT01kdzlQMHdaSFE4?=
- =?utf-8?B?VC9ubVhoUk55NjM1a3I4L0Z6QWNieGdkeWY4K0dWejJrRmpjTzY4QmZkQ1Rz?=
- =?utf-8?B?VGNuOW9HZHN2T05MUFZ0WDNKOCtKelc4QktFOXlXWUZmSk9ycUx4cEJwSW9a?=
- =?utf-8?B?aEVva1pzbzBGempoZ2tDaTVQMGxZYnM4b3Y4WWthRFNweitoQUlxcSszVnVI?=
- =?utf-8?B?U0VXL01TdEI1aE1odjEzSGFXaTJLU2NMZ2xaNXJZNm83cU45RytheTk5K2Zh?=
- =?utf-8?B?cjhsWUd6VFVFa3JRRFdKdStzcHREOVZleGIxNHdLcXd2dkZ0UkJiNGFyQS9u?=
- =?utf-8?B?L09pOHFoaFpxSDl6cTB4em9lelNVUFN3VUplS0tvaXNVa2l5QUk0ekMxWXV3?=
- =?utf-8?B?Um4zbXc3N2RFT0s1cGNkQy9TOTBPdVV3MFdZQkVidUlMZWF0UmdjakJNY2lP?=
- =?utf-8?B?RTJSeklxeDhoaGg4VkRvZlhCQjdmM1M1bDE4OU9LOEhCa2Q4d1ZkVjM2dFVi?=
- =?utf-8?Q?tzqecWJVStIUZbXw=3D?=
+	=?utf-8?B?RW5UR1dNcnRiVDJocTIxT3ZMN3lLR1NWK3RrWVc1bjVscWs5bHVxTWJEci9R?=
+ =?utf-8?B?bngzcHZuTStSaTVUQmNiWG95OGR4OGFUa2VlT0NKWCtxMGdPeHpyeWlQRHRq?=
+ =?utf-8?B?Q3hYUTVQR29ZSU5sWDJsbGhtUE9SL3BsUXhtbUhKeHZaY0pkV09GdDNCWTlZ?=
+ =?utf-8?B?Qk84alF1enBpempjcm5uMWtlMnhGYnBIWXJvR0ZtRWRtQjdyYzlEZU9nZWpD?=
+ =?utf-8?B?NzhTb3RKbGI4dXJSRWZKdmpVUzIyL3NoRHdER2xhNnBqT1RQTkJ2M0d2Q0Nm?=
+ =?utf-8?B?RlpPVys0OFI0emUrb2ZqN0lBV2tqczhSVXJVSGdsVHhrcGs0SG13UDU2ZGZr?=
+ =?utf-8?B?YVNTRHRCWHRHYnprNFNSenlIRnRWOGcwcEZNSTFncHV1TzE3ODFRd203T0dI?=
+ =?utf-8?B?SXJrQ00zcm1Dc0E0eWtINVJmTW1KQm9tNSt5TFBoS3k5a0s1QnVSZUpxT1pj?=
+ =?utf-8?B?RmxGdVUwcXB1ZC9idlVjVzExeHdwaW5OdnpPZnFzQVlaOGJxTlFncmJKLzFu?=
+ =?utf-8?B?TmZTOTJkQWJlSWtBcUJxUVQzaVoyaTd1NHZRajdpaGlWbTd0dnV0WkxLVDhh?=
+ =?utf-8?B?K1BSZ3V6SmVTdHZrdjVVUndpd29mSzZ6a2pVYUx1UHh1L2xHZnd5NUZLNm1Z?=
+ =?utf-8?B?Nk1CK1ZwRGllUmVGajNkRjR5czFGUEhiNE1DZG9kK3c4dDdVSndXbHRURG12?=
+ =?utf-8?B?RkJINng0U05sc2Z4L0U0aXhlclhta0FXWElXaVhINTc2bWdwbGVwU1JSYkxv?=
+ =?utf-8?B?NHhDbzBDeVV6YnVoanBMNG13RDRaS2psS3NNNHlzbXgzRjVSL01qRU1sSGVK?=
+ =?utf-8?B?RForTmxzU2V1ZHNVR1o3bElvQ2poZmQwdnJPajFUN0ppaEFzTzZjQURCRWtj?=
+ =?utf-8?B?dXRCYnQ1OFp6MHBRSjAveGkwM3lUSlBFZ1dkT2NodEpyalBGWitSL0FuTTBC?=
+ =?utf-8?B?aTBXRVdIMXY0UXpWMjFxMk5kY2RiZ3BRZnZGYjVjL0d4RzNkN3dGdVBhMFMx?=
+ =?utf-8?B?bUdXOGVlYWJTbEFqcHhSY25BcnFaK2xheXQ5eDRocDNFUVhzYVJQbE5xS2lJ?=
+ =?utf-8?B?UzVEYk90K2xxbnBVTndxRlE0OGVweFlteEgxRzlrcFB0Q3NPS2lkRUtucWR6?=
+ =?utf-8?B?c3BxSjBGZUtyb3ZaV0JuTlFNZVlVTGs5T1J2a3I1OTBvclBIWVZaYXgxZjQx?=
+ =?utf-8?B?Q3F1UkRFUkRXYjVYNDg4V0dlZ2V6M25pcVQxMUl5YlRJa0NVaFptYnNQbGxx?=
+ =?utf-8?B?dnRFU1RZQzZhVGlDbjFnbnVIR1lkQ1RZMjc3Q0R0N1JTNHRjVjRvZlNYNWdz?=
+ =?utf-8?B?TGdwZHZMUU9GaDVIZU5SVWtjRnhPcE9WT2FzRUNxalNSMitkdW84ZFVURnox?=
+ =?utf-8?B?alFPY1NvSmFKbkRjaEV0M041UytmWnJ3V3FjMDZicjN0VlZ3aFJoZThveXVN?=
+ =?utf-8?B?Z3VJMGF6MnJGYjJkZEtyODMzc3BkRE53UGZEZWVOdjd5TkoxVzBWbWVudW1w?=
+ =?utf-8?B?SjVHVExtaFV1MWx4WDE0cXZPbWVyaSt6bVNrbkV3ZGx4YWlkTzR1WnFMOGdR?=
+ =?utf-8?B?WU5iUEdtaUhseE54bEFIRGVQMmFmdFhqVVgvSlZ0clRTbHpMa0hVdW5wd1Fx?=
+ =?utf-8?B?eTQwYWlEQTJrNVpWNmttYlc3NnJQNHNIY0hPVDlsaCs1YlJGOTNUTWNSQjBh?=
+ =?utf-8?B?RzNKdkN2NHhaK0t5UjZZb0oxZDdsU29zR2JDMWZjc2laTWF6Q3BFZGZiQ0Rl?=
+ =?utf-8?B?TmROM25IYTFJbzVDYmlrMUZKWkh2QmxqZlJJRnh0T0xvYU9ZRVdoUHFTV2pp?=
+ =?utf-8?B?UVkva0Q3K09GZ2dWMjZiK1ZBZ3I3YStsWkNOS1RmS0JKNmdZbTZwVGRHQ3Nk?=
+ =?utf-8?B?b1dybTkxaTZVTDMvcEpNNk5ubENkT3BYdVBZZHdQdUdsRmpTd3JpZ20vT2NO?=
+ =?utf-8?B?SVQ3dENMelpaeit0K0k1NmlvNU5PQzY4V0FyOHFjSTdKUlB5Ykl2T2VxdnAw?=
+ =?utf-8?B?UUpSSFVjQTlmOU9oNzNSVEFHdk1Wdmt0WVNZeXRvcGE1ckdvVDhueXFaZ1Fm?=
+ =?utf-8?B?MDdZaXhIcFZwOVVtTlNjT1FwUndlTW0vNEYrYitQdDNOZ0hBLzl3UTNYVWV0?=
+ =?utf-8?B?NmtWeDgxb3VXb283RUFxOEJydUVWYkFoekZaWkJGN1BDSXBCNHYySTVuOGdl?=
+ =?utf-8?B?cnVtcExuR0NPUHYxL2tHSkl2T0tUY04zaW1JVE5ZTTB4OHdLc1dmamRVcUEv?=
+ =?utf-8?B?cERkNTNsbkl2SUNnakI4TndZM3JxQ0RRWldQSjhLVnIwaHk2d3pZWitjUGlB?=
+ =?utf-8?B?WGVicEptU0cyalNkMUFxWDgxa21RTURSeEwrazBWOWFMRHc1OXlsS2ZXU3Vy?=
+ =?utf-8?Q?gPARVuubax//oOXw=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 1ae1dec5-9629-4b5d-323d-08df31d90fa1
+X-MS-Exchange-CrossTenant-Network-Message-Id: e7f14402-267e-4e03-6234-08df31da8190
 X-MS-Exchange-CrossTenant-AuthSource: LV3PR03MB7707.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2026 14:14:05.1024
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2026 14:24:25.8158
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: NT2cUvCB1k08zdfNOMbRVHdsdN4RyrZHq8ELWnNS5hiAdlgZ3ZldHytRyNk8YI/YQF8GT+xEopP0TReqfQ5Fn283MnDY5dgydL73ypxCkPo=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH5PR03MB7888
-X-purgate-ID: tlsNG-bad1c0/1792851248-FD668034-06512BC5/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: PHzzg4H7YABFApDp+DvVLpWYFQOz3sw7gDqdYiUz5p1/GriWhGdq8tWNSC8/pdBvuvtcIpuUWzIFSBD6MMAFzuS7CmIqWlFAtCOEmXZdlcc=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB998646
+X-purgate-ID: tlsNG-c1860d/1792851871-CF15E87B-38CFF08C/0/0
 X-purgate-type: clean
-X-purgate-size: 8586
+X-purgate-size: 5662
 X-Spam-Status: No, score=-14.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
@@ -175,241 +173,155 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 Hi Ryo,
 
-Thanks for making the tracing controls available through HypFS. I'd like
-to help review this part too, although I'm still getting familiar with
-it and have used LLM assistance. I may have overlooked an existing
-synchronization rule; could you help me check these cases?
+Thanks for including a function tracer to try with the new interface.
+I'd like to help check the buffer handling, with LLM assistance as I'm
+still getting familiar with this area. I may have missed a guarantee
+around stopping recording; could you help me check the following?
 
 > --- /dev/null
-> +++ b/xen/common/hypfs_trace.c
-> @@ -0,0 +1,741 @@
-> +void trace_dispatch_callbacks(unsigned long ip, unsigned long parent_ip)
+> +++ b/xen/common/function_trace.c
+> @@ -0,0 +1,274 @@
+> +    if ( this_cpu(function_trace_recursing) )
+> +        return;
+> +
+> +    this_cpu(function_trace_recursing) = true;
+> +
+> +    buf = &this_cpu(function_trace_buffer);
+> +    rec = &buf->records[buf->head];
+> [...]
+> +    buf->head = (buf->head + 1) % FUNCTION_TRACE_BUFSIZE;
+> +    buf->written++;
+> +
+> +    this_cpu(function_trace_recursing) = false;
+
+What ensures that a callback which has already passed the dispatcher's
+tracing_on check has finished before another CPU reads or clears its
+buffer? The tracer registration does not appear to provide a stop hook:
+
+> --- /dev/null
+> +++ b/xen/common/function_trace.c
+> @@ -0,0 +1,274 @@
+> +static struct tracer function_tracer = {
+> +    .name = "function",
+> +    .init = function_tracer_init,
+> +    .reset = function_tracer_reset,
+> +    .clear_trace = function_tracer_clear,
+> +    .get_trace_size = function_tracer_get_trace_size,
+> +    .print_trace = function_tracer_print_trace,
+> +};
+
+For reference, tracing_set_on() in xen/common/hypfs_trace.c, introduced
+by the preceding patch, disables recording with:
+
+>         if ( tracer->stop )
+>             rc = tracer->stop(&global_trace);
+>     }
+>
+>     if ( !rc )
+>         global_trace.tracing_on = on;
+
+Could an already admitted callback still hold a record slot when this
+clear resets its CPU's counters?
+
+> --- /dev/null
+> +++ b/xen/common/function_trace.c
+> @@ -0,0 +1,274 @@
+> +static int cf_check function_tracer_clear(struct trace_context *tr)
 > +{
-> +    livepatch_trace_func_t callback;
+> +    struct function_trace_cpu_buffer *buf;
+> +    unsigned int cpu;
 > +
-> +    if ( !tracing_is_on() )
-> +        return;
-> +
-> +    if ( !trace_callback_registered )
-> +        return;
-> +
-> +    if ( !global_trace_func.old_addr )
-> +        return;
-> +
-> +    if ( (unsigned long)global_trace_func.old_addr != ip )
-> +        return;
-> +
-> +    callback = global_trace_func.new_addr;
-> +    callback((unsigned long)global_trace_func.old_addr, parent_ip);
-> +}
+> +    for_each_online_cpu ( cpu )
+> +    {
+> +        buf = &per_cpu(function_trace_buffer, cpu);
+> +        buf->head = 0;
+> +        buf->written = 0;
+> +    }
 
-What synchronizes this reader with callback removal on another CPU?
-The corresponding part of trace_unregister_callback() is:
+If that callback then finishes writing its old slot and updates head
+and written, could the reset counters describe a different slot from
+the one just filled? Could the print path likewise observe a partially
+written record? The per-CPU recursion flag seems useful for nesting,
+but wouldn't it leave these remote accesses unsynchronized?
+
+Would a stop-and-drain protocol shared with callback removal let read,
+clear, and reset operate only once the buffers are stable?
+
+There also seems to be a size-check consequence of a late writer:
 
 > --- /dev/null
-> +++ b/xen/common/hypfs_trace.c
-> @@ -0,0 +1,741 @@
-> +int trace_unregister_callback(void)
-> +{
-> +    int rc = 0;
-> +
-> +    spin_lock(&trace_callback_lock);
+> +++ b/xen/common/function_trace.c
+> @@ -0,0 +1,274 @@
+> +    for_each_online_cpu ( cpu )
+> +    {
+> +        buf = &per_cpu(function_trace_buffer, cpu);
+> +        count = min(buf->written, (uint64_t)FUNCTION_TRACE_BUFSIZE);
+> +        size += count * FUNCTION_TRACE_RECORD_TEXT_SIZE;
+> +    }
+
+The existing hypfs_read() in xen/common/hypfs.c calculates the size and
+checks the guest-provided length before calling the reader:
+
+>     unsigned int size = entry->funcs->getsize(entry);
 > [...]
-> +    trace_callback_registered = false;
-> +    global_trace_func.new_addr = NULL;
-> +
-> +out_unlock:
-> +    spin_unlock(&trace_callback_lock);
+>     ret = -ENOBUFS;
+>     if ( ulen < size + sizeof(e) )
+>         goto out;
+>
+>     guest_handle_add_offset(uaddr, sizeof(e));
+>
+>     ret = entry->funcs->read(entry, uaddr);
 
-Could CPU A pass the enabled and registered tests, then CPU B clear
-new_addr, before CPU A loads and calls it? Would that permit a NULL
-indirect call despite the writer's lock, since the reader does not
-take that lock?
+The trace_read() callback in xen/common/hypfs_trace.c then samples the
+tracer size again, allocates that size, and later copies that amount:
 
-I wondered whether the existing payload RCU region might cover this,
-but the new dispatch appears after its unlock:
-
-> --- a/xen/common/livepatch.c
-> +++ b/xen/common/livepatch.c
-> @@ -232,6 +236,11 @@ xen_livepatch_trace_dispatcher(unsigned long ip, unsigned long parent_ip)
->  out:
->      rcu_read_unlock(&rcu_payload_lock);
-> +
-> +#ifdef CONFIG_LIVEPATCH_TRACER
-> +    /* Call tracer callbacks. */
-> +    trace_dispatch_callbacks(ip, parent_ip);
-> +#endif
-
-Would an ordered publication and reader-lifetime protocol help here,
-including draining callbacks before unregister/reset completes? Could
-it cover registration as well, where the registered flag is currently
-set before the callback pointer? Merely checking the pointer for NULL
-would not seem to protect callback state already being used elsewhere.
-
-Separately, could a pending filter apply survive a successful clear?
-
-> --- /dev/null
-> +++ b/xen/common/hypfs_trace.c
-> @@ -0,0 +1,741 @@
-> +    /* Schedule removal of the current patch. */
-> +    if ( global_trace_fstate.applied == LIVEPATCH_FUNC_APPLIED )
+>     size = tracer->get_trace_size(&global_trace);
 > [...]
-> +    /* Clear the filter if no target function was requested. */
-> +    if ( !ip )
-> +    {
-> +        /*
-> +         * Keep global_trace_func.old_addr since livepatching
-> +         * might be in flight. Only clear global_trace.filter_name
-> +         * which will effectively update /tracing/set_function_filter.
-> +         */
-> +        global_trace.filter_name[0] = '\0';
-> +        return 0;
-> +    }
-
-If I select a function and then clear the filter before the trace-on
-worker runs, wouldn't applied still be LIVEPATCH_FUNC_NOT_APPLIED?
-Could the clear therefore return success without canceling or removing
-anything, followed by the queued worker installing the original target
-while set_function_filter reports an empty filter?
-
-Would it make sense to track pending work explicitly and either return
-busy or arrange a safe cancellation/removal before accepting the clear?
-
-There seems to be a related completion-status question at the end of
-trace_set_filter():
-
-> --- /dev/null
-> +++ b/xen/common/hypfs_trace.c
-> @@ -0,0 +1,741 @@
-> +    rc = livepatch_schedule_trace_on(payload, global_trace.func, ip);
-> +    if ( rc )
-> +        return rc;
-> +
-> +    strlcpy(global_trace.filter_name, name, sizeof(global_trace.filter_name));
-
-Am I missing a place where the controls consume payload->rc after the
-worker finishes? The existing livepatch worker can fail during CPU
-rendezvous or application after submission has succeeded. Could the
-displayed name then describe a target that was never installed? The
-removal path clears the name before completion, which seems to allow
-the converse if removal fails.
-
-Could requested and installed state be kept separate until completion,
-with a way for the user to see the eventual result?
-
-What is the intended contract for changing current_tracer while
-tracing_on is still set?
-
-> --- /dev/null
-> +++ b/xen/common/hypfs_trace.c
-> @@ -0,0 +1,741 @@
-> +    if ( prev->reset )
-> +    {
-> +        rc = prev->reset(&global_trace);
-> +        if ( rc )
-> +            return rc;
-> +    }
-> +
-> +    global_trace.current_trace = &nop_tracer;
-> +
-> +    if ( new->init )
-> +    {
-> +        rc = new->init(&global_trace);
-> +        if ( rc )
-> +            return rc;
-> +    }
-> +
-> +    global_trace.current_trace = new;
-
-Could a tracer change either be rejected while recording, or perform
-a stop-and-drain transition before reset and initialization? For a
-tracer using the optional start/stop hooks, wouldn't the present path
-leave recording reported as enabled without stopping the old tracer
-or starting the new one? What should tracing_on report if the new
-initialization fails and nop remains selected?
-
-One more target-validation question: what excludes discarded init
-functions from filter selection after boot?
-
-> --- /dev/null
-> +++ b/xen/common/hypfs_trace.c
-> @@ -0,0 +1,741 @@
-> +    if ( len )
-> +    {
-> +        ip = symbols_lookup_by_name(name);
-> +        if ( !ip || !is_patchable_function_entry(ip) )
-> +            return -EINVAL;
-> +    }
-
-The new linker table appears to retain the compiler-generated entries
-without filtering out init functions:
-
-> --- a/xen/arch/arm/xen.lds.S
-> +++ b/xen/arch/arm/xen.lds.S
-> @@ -61,6 +61,11 @@ SECTIONS
-> +       . = ALIGN(8);
-> +       __start_patchable_function_entries = .;
-> +       KEEP(*(__patchable_function_entries))
-> +       __stop_patchable_function_entries = .;
-
-For reference, the existing symbol_valid() in xen/tools/symbols.c
-retains symbols in init text too, and symbols_lookup_by_name() in
-xen/common/symbols.c returns matching addresses without an active-text
-check. Its non-FAST_SYMBOL_LOOKUP branch contains:
-
->         if ( !strcmp(name, symname) )
->             return addr;
-
-Meanwhile free_init_memory() in xen/arch/arm/mmu/setup.c removes the
-init mapping and returns those pages to the heap when appropriate:
-
->     rc = destroy_xen_mappings((unsigned long)__init_begin,
->                               (unsigned long)__init_end);
+>     buf = xzalloc_array(char, size);
 > [...]
->     if ( !using_static_heap )
->     {
->         init_domheap_pages(pa, pa + len);
+>     if ( copy_to_guest(uaddr, buf, size) )
+>         rc = -EFAULT;
 
-Could an init function's name and compiler entry therefore still pass
-this selection check after its code has been discarded? Since the Arm
-patcher writes through an alias of the original image's physical pages,
-could that write into memory which has already been reused?
+If a final callback increases written between these two size samples,
+while the ring is not yet full, could the second size exceed the length
+already checked for the request? Would an owned snapshot, or a shared
+stable-size protocol, keep the checked length and copy consistent?
 
-Would checking active text before accepting the target address rule out
-this case? To illustrate, I think this could be addressed with a small
-change like:
+Could the snapshot also use a stable CPU set? The sizing, clearing, and
+iterator construction each traverse for_each_online_cpu(), and the
+iterator retains buffer pointers while producing the output:
 
---- a/xen/common/hypfs_trace.c
-+++ b/xen/common/hypfs_trace.c
-@@ -3,6 +3,7 @@
- #include <xen/init.h>
- #include <xen/hypfs.h>
- #include <xen/hypfs_trace.h>
-+#include <xen/kernel.h>
- #include <xen/livepatch_payload.h>
- #include <xen/symbols.h>
- #include <xen/string.h>
-@@ -266,7 +267,8 @@ static int trace_set_filter(const char *name)
-     if ( len )
-     {
-         ip = symbols_lookup_by_name(name);
--        if ( !ip || !is_patchable_function_entry(ip) )
-+        if ( !ip || !is_active_kernel_text(ip) ||
-+             !is_patchable_function_entry(ip) )
-             return -EINVAL;
-     }
- 
+xen/common/function_trace.c:
+> @@ -0,0 +1,274 @@
+> +    for_each_online_cpu ( cpu )
+> +    {
+> +        const struct function_trace_cpu_buffer *cbuf = &per_cpu(function_trace_buffer, cpu);
+> +        struct buffer_iterator *iter = &iters[nr_iters++];
+> +
+> +        iter->buffer = cbuf;
+> +        iter->count = min(cbuf->written, (uint64_t)FUNCTION_TRACE_BUFSIZE);
+> +        iter->start = cbuf->written >= FUNCTION_TRACE_BUFSIZE ? cbuf->head : 0;
 
-Would this reject discarded init text before either scheduling path,
-using the same text-region safeguard as address-based symbols_lookup()?
-This only checks whether the target is currently active text. It does
-not validate reserved instruction bytes, reject overlapping livepatches,
-or establish the lifetime of a dynamically removable target. The pending
-operation and callback-lifetime questions above would still need their
-own solution.
+For reference, get_cpu_maps() in xen/common/cpu.c uses the CPU-hotplug
+lock rather than the HypFS lock:
 
-Thanks for looking through these questions. Is there a lifecycle,
-completion, or target-lifetime guarantee elsewhere that I have missed?
+> bool get_cpu_maps(void)
+> {
+>     return read_trylock(&cpu_add_remove_lock);
+> }
+
+Would it make sense to pin the relevant CPU set while taking a snapshot,
+and use that same snapshot for sizing and rendering? What should happen
+to records on a parked offline CPU? Could clearing only online buffers
+allow its old records to reappear when that CPU comes online again?
+
+It looks like there is a design question of the stop-and-snapshot contract
+to drain callbacks safely in their permitted contexts and preserve
+one snapshot across HypFS's size check and copy. Locking each traversal
+separately would still leave the gap between the two size samples.
+
+Thanks for checking these interactions. Is there an existing mechanism
+that already keeps the buffers and CPU set stable across these steps?
 
 cu, Bernhard
 
