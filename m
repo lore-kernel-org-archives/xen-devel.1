@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7306A606A31A
-	for <xen-devel@archiver.kernel.org>; Sat, 24 Oct 2026 12:48:53 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61B81606A31A
+	for <xen-devel@archiver.kernel.org>; Sat, 24 Oct 2026 14:10:22 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=g8om6opu
-Received: from list by lists.xenproject.org with outflank-mailman.1460024.1671522 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=tB7e+rf5
+Received: from list by lists.xenproject.org with outflank-mailman.1460066.1671530 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKbAb-0002nQ-W0; Sat, 24 Oct 2026 12:48:21 +0000
+	id 1xKcRW-00045V-JN; Sat, 24 Oct 2026 14:09:54 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1460024.1671522; Sat, 24 Oct 2026 12:48:21 +0000
+Received: by outflank-mailman (output) from mailman id 1460066.1671530; Sat, 24 Oct 2026 14:09:54 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKbAb-0002nI-Sz; Sat, 24 Oct 2026 12:48:21 +0000
-Received: by outflank-mailman (input) for mailman id 1460024;
- Sat, 24 Oct 2026 12:48:20 +0000
+	id 1xKcRW-00045O-Gc; Sat, 24 Oct 2026 14:09:54 +0000
+Received: by outflank-mailman (input) for mailman id 1460066;
+ Sat, 24 Oct 2026 14:09:53 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <bernhard.kaindl@citrix.com>) id 1xKbAZ-0002nC-RY
- for xen-devel@lists.xenproject.org; Sat, 24 Oct 2026 12:48:20 +0000
+ (envelope-from <bernhard.kaindl@citrix.com>) id 1xKcRV-00045I-MI
+ for xen-devel@lists.xenproject.org; Sat, 24 Oct 2026 14:09:53 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xKbAZ-008kNd-4l
- for xen-devel@lists.xenproject.org; Sat, 24 Oct 2026 14:48:19 +0200
-Received: from [10.42.69.2] (helo=localhost)
+ id 1xKcRU-00FVbf-V8
+ for xen-devel@lists.xenproject.org; Sat, 24 Oct 2026 16:09:52 +0200
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <bernhard.kaindl@citrix.com>)
- id 6adca8f6-e002-0a2a0a5209dd-0a2a4502aa4c-14
- for <xen-devel@lists.xenproject.org>; Sat, 24 Oct 2026 14:48:18 +0200
-Received: from [40.93.196.7]
- (helo=SA9PR02CU001.outbound.protection.outlook.com)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6adcbba6-bab6-0a2a0a5309dd-0a2a4507c48c-34
+ for <xen-devel@lists.xenproject.org>; Sat, 24 Oct 2026 16:09:52 +0200
+Received: from [40.107.209.0]
+ (helo=PH8PR06CU001.outbound.protection.outlook.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <bernhard.kaindl@citrix.com>)
- id 6adca911-6ca4-0a2a45020019-285dc4076f99-3
- for <xen-devel@lists.xenproject.org>; Sat, 24 Oct 2026 14:48:18 +0200
+ id 6adcbc2d-b4ea-0a2a45070019-286bd100dc8a-3
+ for <xen-devel@lists.xenproject.org>; Sat, 24 Oct 2026 16:09:50 +0200
 Received: from LV3PR03MB7707.namprd03.prod.outlook.com (2603:10b6:408:28b::21)
- by EA8PPF2F8D191B6.namprd03.prod.outlook.com
- (2603:10b6:30f:fff5::848) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.21; Sat, 24 Oct
- 2026 12:48:14 +0000
+ by CH5PR03MB7888.namprd03.prod.outlook.com (2603:10b6:610:210::12)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.20; Sat, 24 Oct
+ 2026 14:09:46 +0000
 Received: from LV3PR03MB7707.namprd03.prod.outlook.com
  ([fe80::97e8:ef9c:9031:e2bf]) by LV3PR03MB7707.namprd03.prod.outlook.com
  ([fe80::97e8:ef9c:9031:e2bf%4]) with mapi id 15.21.0546.021; Sat, 24 Oct 2026
- 12:48:13 +0000
+ 14:09:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,116 +54,114 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=wqhawciZI3ZsvoDJBmqQ6Eec2uSI6x/1q0rPivZWkyCNXIJlcAPf9+LZ8xwI5dWJ/71E85QQdtZT+tiUGcN/8T1FGeQhN5kAsp5tV3+amE880K34hDjMN5+Y2ONWxqctTdOzt5notmquXVagfzfnSeHyQtHupTqkJs/iAMGrlf8WXCmWQKaOeVExOh0/uR64p3PT7VbNREMBtRfyznAgadoN/xWQdLHZ2vNw5tR6vXSHNHAWQAJOPpyTufAtSCEQ4k2NC9vJWoIc+OJm3k1ZiZ48Zp2+Ix3xYzTScynCsNqxzwkFgOdCNqtanyuq5zDEnxo9QDm1VFkq6HigzlQLkQ==
+ b=kHQ40X6P2qMfEveaH9K0r+kTlrvi39JuH4Ts2IX9zghHghD9knxUebuDv2hGeOKM5+RbcDJjdQ8HcbQRy0n+amvv6y2tvBiEiag6KxXWQlPyYTCfOYnZPVQHta+ry4pCzsoEMC+4coWBo0x5KZaW7ncxhan2SBNjNp6uJEg7TAMv6R7eKxNPNfmdlDwqOnxNVL0uRoV9JQ+HtNHcKRkzUgjJYwqPr6B2rDqKRW6xbr3hlruvs2xl22dlAJFksvE3/2y8oDXKTdqpR74fg6DL5h8E7v1U6btTNPKWsdyhNLIkpNJPfOsItYwqKrFo3NhXWLEldkBVXZqeiSGs5BrDSg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=+6wJ5dhBAOBZQ2mx4yeO1L485WwM/LUvOP+swld0xVY=;
- b=wovNfzh+sjuVKQFyT4SYefoVAuEwmgqwGE5BL8VPPFmx3T/WVUqbYURm3yygsHu4tV39TD1Z8zp7PejGPiIkTI1w92i3J/hdVBrtLfmBjCTGx8gV/k2UcW9M2h0qgGZPrt8/6xlUArYGwO6yPjzXWMLm7WUbwUpI7CzvtFuAVIVFBCeVtOGSRzDRZ3qvLuUWThd7pzqKftkdVktfeVjW21neMBmIg8dJq+ZMd9VCR/rFT9A0DfoKl8RTSsfsPdAqSuX2xDd/ZktWNisFGXIvZZqHXj2R0Dn9zF8FGE8fjzHEUNi7MOQwLfoV/boiScorS2lmG9q/ckGAheYXMrqVZg==
+ bh=KlELAyw88BPv+kxDeeyrgZ+PSMWomOIQZ9nCxcMKp4Q=;
+ b=VtLTw0ho476qH+Pue6t+lNFv/AS7qEmxoEpk/u0eZYxELC51LtQCKVUCTgsK/z5S1Ia2f3WvBjr8xmVCPK9aoluRjj2PZP2wmnAToz5pkIifAmaJ/y7jMEIhcoFyGV+UNiOcxaA4X3yfvVzzyVTK6SftcNNg6FPpBQtX6u14kTy9ism2HMkdNaJjlvQEpRAsmvQCw+HM7zWXmCnd+/pWzbeKCHFVUw4T9TtpV8UfDocCrI6qtMUA7pAXTsrOcJIc7rxVmhitqExJ4wZHIRzbVer7ETaH49wynnB5YNPI6YxIbZOoXlofXo1Ch4NN67PHNg6H7md+PEdEUwgivWFF4Q==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=+6wJ5dhBAOBZQ2mx4yeO1L485WwM/LUvOP+swld0xVY=;
- b=g8om6opuJ6VNRPXNsZWlL4ZxWwO1cxMJXQR7srMMpuPGDIcnOnNgdLa1xca/hVeb+l+VaW/7k7Bfe+KiwwxD+YNmeN189V2NKVRMLxrZv5I9ZI1pcqTlRNh2vS+DdRvkBN5I/XE2+mFlOAJ90eqPJUSNcdZ4grZ8eXKqh8fLGOA=
+ bh=KlELAyw88BPv+kxDeeyrgZ+PSMWomOIQZ9nCxcMKp4Q=;
+ b=tB7e+rf5qedCXD/PD1kr70IeU2BzGRECXa9jf6h2EwURDAeqTfhB085bPPK9cVXpRzJDDav+ZEWLuNK6fC1kWi/j+aGFYDwlwLDY3sdhv3k1YgV9YklKYkqrKa1+0ti5S/9ohNQ079f3uNENdQ8r7k5CmKAQ/2KY+3vPHLTSwYs=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 7bit
-Subject: Re: [RFC 1/5] xen/arm64: livepatch: enable attaching callbacks
+Subject: Re: [RFC 2/5] xen/livepatch: Allow tracers to schedule livepatch
 From: Bernhard Kaindl <bernhard.kaindl@citrix.com>
 To: Ryo Takakura <takakura@valinux.co.jp>
-Cc: xen-devel@lists.xenproject.org, sstabellini@kernel.org, julien@xen.org, 
- bertrand.marquis@arm.com, michal.orzel@amd.com, Volodymyr_Babchuk@epam.com, 
- andrew.cooper3@citrix.com, anthony.perard@vates.tech, jbeulich@suse.com, 
- roger@xenproject.org, ross.lagerwall@citrix.com
-In-Reply-To: <20261023045222.163817-1-takakura@valinux.co.jp>
+Cc: xen-devel@lists.xenproject.org, roger@xenproject.org, 
+ ross.lagerwall@citrix.com
+In-Reply-To: <20261023045346.164171-1-takakura@valinux.co.jp>
 References: <20261023044809.162759-1-takakura@valinux.co.jp>
- <20261023045222.163817-1-takakura@valinux.co.jp>
-Date: Sat, 24 Oct 2026 14:48:05 +0200
-Message-Id: <179284608595.1706038.12585790247811677658.b4-review@b4>
+ <20261023045346.164171-1-takakura@valinux.co.jp>
+Date: Sat, 24 Oct 2026 16:09:36 +0200
+Message-Id: <179285097671.1706038.6114522060925613675.b4-review@b4>
 X-Mailer: b4 0.16.0
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1792846088; l=2648;
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792850982; l=3785;
  i=bernhard.kaindl@citrix.com; s=20261024; h=from:subject:message-id;
- bh=rBQud2JZ54Lq/cnkK0AnIqqHQp8XMGEULCraHcKIzTE=;
- b=un4nxlIp9DHNDyJbgR0yFEWYRAHxZnGpgdbG9Ag0JS4rf6weMAGNrpWSZAZlKKDpd36OdtE5f
- TEppv0lNHnWAPvWYXa1uJNZaxq8UQu0k4VKCdkfdsTLWm0PedWCynln
+ bh=NXsTzMUMfmR9IJQcdF8B/7/pZcg/Lnr/xNwou/wIkZY=;
+ b=I4q/H2cvOVA9eSOZatnVoA+stOpS8yGuXgVvBc/4iK/BpP4mEAcdiVZHWp3rJ0bld+TEErvvu
+ fnlgw9ayVfUAEEkmGSV/p2clh8OxIPNb4fmN+k8Q/POw0bNeQSnbV8U
 X-Developer-Key: i=bernhard.kaindl@citrix.com; a=ed25519;
  pk=oIjnI/us0Uh5d/WP18V5IQq/FrLPUp+W0JAhJ9QCQIs=
-X-ClientProxiedBy: VI5PEPF0000092B.AUTP296.PROD.OUTLOOK.COM
- (2603:10a6:808:1::836) To LV3PR03MB7707.namprd03.prod.outlook.com
+X-ClientProxiedBy: VI5PEPF00000976.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:808:1::816) To LV3PR03MB7707.namprd03.prod.outlook.com
  (2603:10b6:408:28b::21)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LV3PR03MB7707:EE_|EA8PPF2F8D191B6:EE_
-X-MS-Office365-Filtering-Correlation-Id: 7f445a44-86a0-4b9f-698f-08df31cd10be
+X-MS-TrafficTypeDiagnostic: LV3PR03MB7707:EE_|CH5PR03MB7888:EE_
+X-MS-Office365-Filtering-Correlation-Id: 0c8f5a78-7a08-4a04-93fb-08df31d87580
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|7416014|376014|366016|23010399003|4143699003|56012099006|5023799004|11063799006|261009223027099003|261021135927099003|261021133027099003|261021130227099003|261021123027099003|261021121427099003|261022113327099003|261022105027099003|261022075727099003|261022115727099003|10067099003|18002099003|22082099003|3023799007;
+	BCL:0;ARA:13230040|23010399003|1800799024|376014|366016|18002099003|22082099003|10067099003|56012099006|11063799006|4143699003|261009223027099003|261022105027099003|261022075727099003;
 X-Microsoft-Antispam-Message-Info:
-	tiWNweHh4bWL9xlcHX8HNTUomzY3dQK5F6c6EVs/6IDxpg2xuunsqvnpBE9q6cw3/5E7Ff8Y5rWX8c11iwpvrlfLrC7/UhJE1U/rGyA3zwEQRgjmH5ukDpklxTtkkK/TlExrfhU/sx5TyeiyXpv5IXQjUtAWON1AsvNyzSjRhf66d2JWXusM+FG8gJFqxt5+jFleqXHt1/T+x8WD+RdTyzcQzsRFgY1OVdT2W37SIJlLt3+eyEHRfqHkK3eK8YNuQ1gT5HajgYbbIQswS68hR0i3aeUqzNoFjXFZcGBfUuafh4RO717NP6kD4My9XylyIouWQsNeb3JxC4VmpNhypwWbJNXFDOL3r/jhL2kAgB4fnR7jiWQTJ/P4r3gXS6I1MGsqoD9yqA1eW5Y4VhQbaX8Vm/hCi0vYoIavZyBrM1aRGbMC0garTRMPEd8+H9ij/PdVWddexWZgCIanc9BYC8Pksh9THDQwpmEiSsN22CXOhHVbemQWsJsZ4sfgR6c0nD7jJ0iI728lBmOQeZXxyvBU9347FVNXdagSOkw/8M/W49MGwD72McuXcubGe61zk8Pmrqb19eoLOxl5wSJfFoaC7wFBNMz2F+90t9s5EfVoJHTOUAgBgdj5wM+8ZrAjgSoZo+qn0+r6tzUgWFE84qNHfRPnMwK2ZJxgrL4Oj04=
+	cQ4AH0YS6JcYsOdCK2MWpO6iOgoLETMnqwmP5vDIHKnV/dpp57MjSLtZNFi//BC70AoffZxNIckXU7LSKU69vfq9iKD8lbBB/Wynj8LHb0KfqQ+1OTDkA1hNoKSm7/8gE7PeseSaxuR5F91IVPmCRBMgL1MuWLgP6GENXMMPHp+ExcWFmUwN9h4F+DUugFFixncJz22C6KZzVYDh76RikIurTK5vbw1sfHRYUCqW1Kh212u/bn5xxp5ijNbMy/5usQInap+dtSit/LecsGp7IXrMPuwxgjdQ647UKrd82k7kj2jH/czvZmHd6I3ApbsdidYLC/TiWG/aZrnWNNjp3EANk2Y7cssV+JW4gTG6di9uIGMZ0rRjJ9LoHIJLe7zZZ9jv+29PL1Vf7JMp86PNyTKjL8EcUKqgYCSUCZzbLHnTCm01mEqaqN577+UsRZRf7RSxGcsWRDXXkv5/d4S8qYeImEP3j8/rzDkUJEaVKFvxHTqJqY0I23x46O7QDV5uzJG04sg7rg093o0a5yIy2VvJX+Jt6/HHF5BNYt4NrZEfJzlxd71BPgCj4RbRKoztTEEktdMnND51ftSP9eXRnIzcLfZhVUxMU7V6PeCgUaANAu6gXvZcGlB78XjPZIGFZKkEgQGyQrJyAvk8p5xd03ciEpB3KQ/Dj8r+UwDalNk=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR03MB7707.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(7416014)(376014)(366016)(23010399003)(4143699003)(56012099006)(5023799004)(11063799006)(261009223027099003)(261021135927099003)(261021133027099003)(261021130227099003)(261021123027099003)(261021121427099003)(261022113327099003)(261022105027099003)(261022075727099003)(261022115727099003)(10067099003)(18002099003)(22082099003)(3023799007);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR03MB7707.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(1800799024)(376014)(366016)(18002099003)(22082099003)(10067099003)(56012099006)(11063799006)(4143699003)(261009223027099003)(261022105027099003)(261022075727099003);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?U1JLaStab1pZQnFCV1pIdEhrdUllNFljQkxYTlJ4OWVrV3V6QUEzZ2lQbWE4?=
- =?utf-8?B?RUl2Ly9xMTd0V0gzOUtBU3g1VHZwM0tLd0hBcnVRa21sWjk4UGdxenBWZ085?=
- =?utf-8?B?Q2QwdmNteHUweXFVSi82SUdKUE1LSmpNck5tVXFqTW9aWHBuWFhZcmNqZk5G?=
- =?utf-8?B?OWlnMU1uTTNXZjM0ZTc1am5NMHh6TUQ3aEN2YmFBekF1cEVNVndCdGFWOWlv?=
- =?utf-8?B?QW5uSFRyK0pKOWFMb0RBc0VWYVJvUHlkMWJ2UlNJZ2gwZkd6YXZNa01STEpC?=
- =?utf-8?B?V05qTFdFTzk3bjh5dTVpdTUxNjRrcmhDZkcrVWlBQXpibEE4RXdzeXd6b01x?=
- =?utf-8?B?T1pnR0R5eUxuMlJFVXhxWHEyMnRrQnphMkZYUXFHTjJRMzFiNFNxYmczSjBR?=
- =?utf-8?B?NEZMZHV3OGtzallMeE4wbEtlNFRRTmI3bDZRZmVXYjNnSUd1YUE5NmV1L2RE?=
- =?utf-8?B?UWozbng2Mm03OGdMb3RUSkhySmRDMG1kL0NuYTBNWHppSFRkSitTYXBPRVpp?=
- =?utf-8?B?aXl5UFg0ZVZ3aTAxVE1VL0FoR1h5UlVsREgyM1RyMkZUYVB4NFJwNk9UdGhC?=
- =?utf-8?B?TUZDYmdhRXkwMndZdHR6TkpUd3Y3RTBkNEtMUk02UHAyMStSZjMxbWFkcVJo?=
- =?utf-8?B?bWFTelBJSURKMFZtNktFTWtpRGtuWjhPcVJYMU9YbmVQRFVKQzZhZytDUkxX?=
- =?utf-8?B?QTZMbEVUaFZGMEpFdFZhY25Ld3BkRWtXSG5pWDMvRE12TXBLT0YvNE0rOEJz?=
- =?utf-8?B?MEU0ZTJZQzBmWEc4b05JbThPRHM1NTdpNi8vY1FLSE82ZEtUSjRUZmRBNFI4?=
- =?utf-8?B?djZKRDBjYVY0TzR5RHRwMzdSWjBRLzVSVDNtak42ZGtGaUE4MVlJT1Y2L0Va?=
- =?utf-8?B?dGpDNmRjNEZmSHZvK0M0TGJZOWpXTzZYbHZoeGpPSjlvZjF3b0RyOHpJN1Vn?=
- =?utf-8?B?UGk5eUVjMDNaaTFVYXYwSHU5dEpzcEJubEdWa0tUbkpGaU1DdjdKaDhhQ29o?=
- =?utf-8?B?cGh0UWFuUUMwU1ZOZVNvc29FNmdYRXA3b3FJai9VQThKaWppNytlSWFOL29P?=
- =?utf-8?B?OEJrZ3RIU01DRVI4NCtKc1VLOUdYSHZLVWlRZ2Y1QUtDSlRuV3BudVkyVUFv?=
- =?utf-8?B?UFczTzhSWXJYUjFydnlBRnJobWtjci9YWVBHSjdNeWNsZlZpUjA1cGpXejVM?=
- =?utf-8?B?Zi9SK3hDaDh5ZGNzeXRiRjJMUnhOdTZrSWp5Q3ZPRVAvV3FTM2ZwTFg3YzIr?=
- =?utf-8?B?NkFpNnlDcmxHU1U2ckh5VTM1aGZTTjF3Lzg0S25RYmFuQ2JMUHZNZm5YQ2wv?=
- =?utf-8?B?Rk9kOHZDSVU0WHlkdi9yd3NBY05kTkF0c3A5Y2xuZS9vRU1ML2xacTZpOHAw?=
- =?utf-8?B?YVdLYk5BN0s4ekxjVUIvREFmMzJTNDlkSVhqMld3WHN4Q0V1eUVNdmVkZU9i?=
- =?utf-8?B?TEV2cVNDR3BOMTNDMFNxR2FERWR3UmtEK0hmWHEzcGRhRlR5T3FFREdXcHhX?=
- =?utf-8?B?OERNYjNqRjNCSklodXRmY3VGVkpCZHlPUDJ0OU03MTdYOU5VNFROK3NmSXdy?=
- =?utf-8?B?LytRME5yNEh3SWZJWnpRWkFhdVN2T29QUHBNYzVWUm92MGx6S3lpZW81UGpu?=
- =?utf-8?B?NGN4Mjd3MWhwMGtaRHIyT2NRY1dEV05XK1IwY3FJYUx1Ykp1ZENxVWVxa2Y4?=
- =?utf-8?B?WTJXcWFpcUVQZ2JiYWZYZjBYQmNrbWUveC9seHc1eXpydWRxL210ZE5FT0w3?=
- =?utf-8?B?cWVmNVVFUjQzeXo0MHRlUUVBTG84eUcvdnB5ODVqTVc5NU9tY29ZNmkvTmww?=
- =?utf-8?B?d3Z3NUNoNzM2Tms3bmh6Q0p5NGdsaDVwRzc3aHUwSXBZaDZTeG5uVHpWWG1y?=
- =?utf-8?B?QzdjeUNLUHFyWGk5eGcxak1VaUNRNU5wVmUwb1F5aUdCQ0pxUE84dG1zQ1lk?=
- =?utf-8?B?ZXFEY0pISjc1THJoVm1zZWFkTExyaU1uME5XTmxoalE1ajRvSU11UGp2VHVk?=
- =?utf-8?B?MjdTejhldFZOTkxjeXp1cFVvWHo0aGxDV0RpazVlcEVPWmNDYW5iNnpwbWU0?=
- =?utf-8?B?MDd6ZDdWSGhnWUxaRTFlbWVwQ2t5NEFyanhMWmVKVjkvYlBpdm5POTlPMDEx?=
- =?utf-8?B?V3NxU3pEV2txcjkySUFWV2FLU3U0YmVES3pqeFpLbXZZSm1YMXlpU09JdWFU?=
- =?utf-8?B?cUhSMHBFTmIyVVRjUUFxcTg1VXcxNldpRUtFaG84emEwV1JnNTQ1OTliSXly?=
- =?utf-8?B?bHI5S0NvUitsK0lqWTc5TExacitkZDB4UTYzd2Z0cWxZd1M3a0JEcjBzdW5T?=
- =?utf-8?B?NGUwSlV6U1BSNnMvZzdzdWxiN1djVUo5NEhibUxZczVURG5QTUxpZC9Ea0Va?=
- =?utf-8?Q?Y4woxH7BdPZQdXXc=3D?=
+	=?utf-8?B?Zk1WZVdZcjdqT2lLckR5THhWTmRzRGZsNXdUSEZFbytlR2VZdUovalNIVy8z?=
+ =?utf-8?B?MnVHK2x6OXZOMFkrT3E0Qzh2WVcxTTV1ZWNhTTJIbUE3bTRzQkVmMVBMblVB?=
+ =?utf-8?B?dndoVlVLbHB2Y0ZueGFqaVdOUEtXVGFJVTNBblFqdjdYb2lFNTFNMTZhYnRY?=
+ =?utf-8?B?V2hhSUhrc21ZeUlOMWwxcndZdjdsNGRSQ1dLNmFPUkxpTVB6ZXNOcnR3ZmNy?=
+ =?utf-8?B?Z2tRSTlNalJmUFVDdndTZEVjZ2tpeGVmalBtY3REQnJJdlBETU1yMHczUURa?=
+ =?utf-8?B?NXFDRmdLY0Z3a0RNM1RnODFvaGZzVmowQ3dubGZaNjkwcW91aUNjaDJpRlRO?=
+ =?utf-8?B?T04xS3NFbHRCc2pEMVJYakxJRTQ3ZktoUUZBYTNtYjFsS3hQeEZHd2Q1L2tx?=
+ =?utf-8?B?MFh2ZCtnYlQrVTBjVDdCcHVibDlwbGxNWkg3UE1PZitKT2wzMUJFQUVrZHow?=
+ =?utf-8?B?MjBkbTJhTTlXS0JSZ2tuOWlXeE5lbHZTbktWM2NsaDh5OTBjZ1FXOXYzcmtE?=
+ =?utf-8?B?cHZPc1hNZDRiRXNOdEtTK1diVU1PLzBQWThUS205OThzRE13cW9QVW1SZzFD?=
+ =?utf-8?B?K2N6bWwyNXNiR1lFUHVuOEg0WFJuWTJVaFlLaWYxaldWVDRHc0F2WVVYZTZv?=
+ =?utf-8?B?RjZaaE5oOVJhOTBaZkFFUWx5ODd5Vy9IY29pZS9HYjNIYVE5WCtDSERSOVhk?=
+ =?utf-8?B?NCtQMGpIMFhVRncvdUw2OVY2a1JRVWlLKzRrUlkxdWprTTlIT3U4L3hHK1VU?=
+ =?utf-8?B?dmsrM05nZ3QwcnhoUnNkUjg0bU5rRXVnZzhwWW1idEY3L2kxbnF6MDVyeFN5?=
+ =?utf-8?B?NkdjYWxnZ2xWK3kzTVFIR1hEaXlOVVZjMEpqZUNYUS9SMms2TDZDOVp3Vjh0?=
+ =?utf-8?B?aGhRbytZaUdEM2FKV2lHNk5vY2Y3ZHV6TFpRMGxqd0NkZUNLUFM0VHFINnEw?=
+ =?utf-8?B?eDVmUGsxWTN5VEQ1Y0FKNWFKOGRhMDMzSzFLMjBaMWpyRUNYQ3FhTjZNSHpB?=
+ =?utf-8?B?L0d2NTF5UldZOFczbnY1ZWZlTXpDMEtSTW1zTlBTV3BqYjdxZWNRMFNyYmVH?=
+ =?utf-8?B?Uno0ZWR5RCtiak1wbnUrb2NLNHhhWjJQb3Q0blVHdFpIbkptbFNKQUlIMWVL?=
+ =?utf-8?B?eTVVcmMzMTNrUkM0eVkzY1cxS3Q3Ky9WT0Y2YWNWVzNoclorUlpvbXFzUllY?=
+ =?utf-8?B?Ym4veVU0QnU3YVI2MS9DK2dGY25qaUx4ZVhuOVhIbC84cytCZS9hQld4VTRO?=
+ =?utf-8?B?eklmTEVKWmd4Wk0xV0hDVm03L2QzeDhHRjI5TkQ5WEQ2cUJrTi9heGpoVThN?=
+ =?utf-8?B?Und4ZmVmT3J0dTF0WVpWZk5sbmVjaS9ScGtYdG5wczZTYU5Dc1MrNFRwSjI3?=
+ =?utf-8?B?aTd2dWNmWFhOM1h4R282Y2ZRajJ3YmtpM1F3RXY1MHhqTVJlNXRTZkkxNVFH?=
+ =?utf-8?B?SERWdzE2c1Y3dldFdVliaFRxM0ROcFZNQmNoUmt1ZFdHTkdaYWpETEZZcE53?=
+ =?utf-8?B?TkdDYlNqZUYwSGxHdGxBNGhTT0V2aUVUaDJ5UGZVeGJFa1VBdnlrNGsrVGV2?=
+ =?utf-8?B?LzJEcmp0OXp3MnM4dEtVeXpUSlV6aXUwSStEcjhFdFJYZkd6UHlmaVJKQlIy?=
+ =?utf-8?B?T2U0Zmt5Q3FNVVZBZEtBdFRxN0xycnh5enBoS28yYkI3ejl5UG15VEpTYy9t?=
+ =?utf-8?B?MkhCU28zV0F3dElsS3YzNmErYzFSQzFTbjdKRE9OdVBxRGIvNldTRTBXbFRL?=
+ =?utf-8?B?dU1GTFhjblJSdC9DckcxR211ZUVpNUJiU1hqUWFzVjgwUXFKNVFuUmZsaVh0?=
+ =?utf-8?B?bDFZN3FISEZXMUVhWThWcUo2T1plajNLT1JyYnh5elJTYUJiK2Z4aThlSGIx?=
+ =?utf-8?B?Rys3cm9pNkRCZlUzNUUyZjhTbG9zdVlBTUNyYk9zb3o4cXcxYjZFREdZc1Z0?=
+ =?utf-8?B?emtsaFQ0akpGWnNiTjY4M1RvdU9xSmVUem4rNS93MURlei9VZUVoNkExQ3Rm?=
+ =?utf-8?B?ZE13VHZ1amQwNFNjOGJxRXRQQzc3MXk0Zm1WV1pWai9zUi83elc3eTVSVkhD?=
+ =?utf-8?B?WTZSV2MzNHNhK3hTWEpLQXhSU2Fidll0cUMvQW9oeFlRWVdiTUpHL3FoVmdn?=
+ =?utf-8?B?NDdnQ2ZnSUw5amdEZFVURjk1L2pLMTZZbCs4YWNCbEdVSmZtMTQwMmFER01r?=
+ =?utf-8?B?MVd1SHFxbXpvbTE3YjBrOXJoNk1rclFQUmNDS1g5WGZQemthVXhVOEhLRzJY?=
+ =?utf-8?B?Z1c0NU9iMDFDUFFFZ0E5TGFMZUhpUGV1SVJxQjBxdkd5NnhHYnNJR2R4VXh0?=
+ =?utf-8?B?MlpLLzBGYXp0RWtMclhHTmNReGFRLzFodFdjd0tlOFp5WE9Tc2VUNFhGOG1u?=
+ =?utf-8?Q?0PjS7kcni2r1IFq4=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 7f445a44-86a0-4b9f-698f-08df31cd10be
+X-MS-Exchange-CrossTenant-Network-Message-Id: 0c8f5a78-7a08-4a04-93fb-08df31d87580
 X-MS-Exchange-CrossTenant-AuthSource: LV3PR03MB7707.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2026 12:48:13.2051
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 24 Oct 2026 14:09:46.6399
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Bg6l+B657HQxUqNiLON6YOpc5KpDLsdWs7EfOwbGs7P83NA2MBcCV8XCCUAldC/9hEZfp/xFvdMJ8N4fjwsGlv6+jlpwELWQ5z6gTjeYayE=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: EA8PPF2F8D191B6
-X-purgate-ID: tlsNG-720697/1792846098-F26B72AC-093BA4FC/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: hEto7aDT1eICdjAKcvJDYRb7ybYpYmwyGHMjIxM3iXFZHpFPynZq2jLTuM3SLyKAfKUUjHbQB3GuojhAu3xiBEtvWYPhtJdJuOzRvfRvqOo=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH5PR03MB7888
+X-purgate-ID: tlsNG-ef75cf/1792850991-3C411AE4-6BD14133/0/0
 X-purgate-type: clean
-X-purgate-size: 2648
+X-purgate-size: 3785
 X-Spam-Status: No, score=-14.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
@@ -174,66 +172,109 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 Hi Ryo,
 
-Thanks for posting this RFC. Having dynamic function tracing in Xen
-looks useful, and I'd like to help with reviews. I'm not yet deeply
-familiar with this part of the code, so I've used LLM assistance to
-help investigate it. I may have missed a check elsewhere;
-could you help me confirm whether the following concerns apply?
+Thanks for adding this interface for tracers. I'd like to help with the
+review, although I'm still getting familiar with this code and have used
+LLM assistance. I may have missed part of the result-handling contract;
+could you help me check the following failure path?
 
---- a/xen/arch/arm/arm64/livepatch.c
-+++ b/xen/arch/arm/arm64/livepatch.c
-@@ -492,6 +496,36 @@
-> +#ifdef CONFIG_ARM64_PATCHABLE_FUNCTION_ENTRY
-> +void arch_livepatch_apply_trace(const struct livepatch_func *trace)
+> --- a/xen/common/livepatch.c
+> +++ b/xen/common/livepatch.c
+> @@ -1823,6 +1834,51 @@ static int schedule_work(struct payload *data, uint32_t cmd, uint32_t timeout)
+> +int livepatch_schedule_trace_on(struct payload *payload, struct livepatch_func *func, unsigned long ip)
 > +{
-> +    uint32_t *new_ptr;
-> +    uint32_t insns[2];
+> +    void *old_addr;
+> +    int rc;
 > +
-> +    new_ptr = trace->old_addr - (void *)_start + vmap_of_xen_text;
+> +    spin_lock(&payload_lock);
+> +    if ( is_work_scheduled(payload) )
+> +    {
+> +        rc = -EBUSY;
+> +        goto out;
+> +    }
+> +
+> +    old_addr = func->old_addr;
+> +    func->old_addr = (void *)ip;
+> +
+> +    payload->rc = -EAGAIN;
+> +    rc = schedule_work(payload, LIVEPATCH_TRACE_ON, 0);
+> +    if ( rc )
+> +        func->old_addr = old_addr;
+
+Am I right that is_work_scheduled(payload) only detects work for this
+particular payload, rather than any work using the shared worker?
+
+For reference, the existing is_work_scheduled() in the same file ends
+with this check, which is not added by this patch:
+
+>     return livepatch_work.do_work && livepatch_work.data == data;
+
+The existing schedule_work() instead has this global busy check:
+
+>     /* Fail if an operation is already scheduled. */
+>     if ( livepatch_work.do_work )
+>         return -EBUSY;
+
+Could a request therefore pass the first check while another payload
+has work pending, set its own result to -EAGAIN, and then be rejected
+by schedule_work()? Failure to acquire the CPU-map lock seems to offer
+another path to the same outcome.
+
+The caller does receive the immediate submission error, but wouldn't
+payload->rc still suggest that an operation is pending, with no queued
+worker for this payload to complete it?
+
+The off helper appears to have the same result-handling question:
+
+> --- a/xen/common/livepatch.c
+> +++ b/xen/common/livepatch.c
+> @@ -1823,6 +1834,51 @@ static int schedule_work(struct payload *data, uint32_t cmd, uint32_t timeout)
+> +int livepatch_schedule_trace_off(struct payload *payload)
+> +{
 > [...]
-> +    memcpy(new_ptr, insns, sizeof(insns));
+> +    payload->rc = -EAGAIN;
+> +    rc = schedule_work(payload, LIVEPATCH_TRACE_OFF, 0);
+> +
+> +    spin_unlock(&payload_lock);
+> +
+> +    return rc;
+> +}
 
-This copies eight bytes from the two-element instruction array, while
-uploaded trace descriptors still use the ordinary Arm livepatch verifier?
+Would publishing the submission error in payload->rc keep these rejected
+requests distinct from work that is still pending?
 
-For reference, the existing arch_livepatch_verify_func() in
-xen/arch/arm/livepatch.c contains this size check (not added by this patch):
+To illustrate, I think this could be addressed with a small change like:
 
->     if ( func->old_size < ARCH_PATCH_INSN_SIZE )
->         return -EINVAL;
->
->     return 0;
+--- a/xen/common/livepatch.c
++++ b/xen/common/livepatch.c
+@@ -1861,7 +1861,10 @@ int livepatch_schedule_trace_on(struct payload *payload, struct livepatch_func *func, unsigned long ip)
+     payload->rc = -EAGAIN;
+     rc = schedule_work(payload, LIVEPATCH_TRACE_ON, 0);
+     if ( rc )
++    {
+         func->old_addr = old_addr;
++        payload->rc = rc;
++    }
+ 
+ out:
+     spin_unlock(&payload_lock);
+@@ -1882,6 +1885,8 @@ int livepatch_schedule_trace_off(struct payload *payload)
+ 
+     payload->rc = -EAGAIN;
+     rc = schedule_work(payload, LIVEPATCH_TRACE_OFF, 0);
++    if ( rc )
++        payload->rc = rc;
+ 
+     spin_unlock(&payload_lock);
+ 
 
-With ARCH_PATCH_INSN_SIZE equal to four bytes, doesn't this accept a
-four-byte function without establishing that two reserved tracing NOPs
-are present? Is there another check on this path that I have overlooked?
+Would this preserve the pending assignment before successful queuing,
+while leaving a terminal error when no operation was accepted? This
+only handles immediate submission failure; it would not reconcile the
+filter or target state with a later worker failure or make retargeting
+an applied payload safe.
 
-Could an assembly entry or another uninstrumented function consequently
-have executable instructions overwritten? If reverting then installs
-two NOPs, could that lose the original instructions rather than restore
-them?
-
-Would it make sense to validate the complete reserved tracing entry,
-including the actual branch destination and any conflicting livepatch,
-before allowing the write? Could the expected entry also be checked at
-application time, so that a modification after upload is not missed?
-
-Separately, could a callback or one of its helpers call the traced
-function again before the first callback returns?
-
-> +  ASSERT(f->new_addr);
-> +  ((livepatch_trace_func_t)f->new_addr)((unsigned long)f->old_addr, parent_ip);
-
-What would contain a recursion before Xen runs out of stack? Would a
-guard covering the pre-callback dispatcher work as well as the callback
-itself help, or is there an existing restriction on callback targets
-that would rule this out?
-
-I think marking the dispatcher itself non-patchable does not protect
-its callees or the callback's callees, so they should be protected too?
-
-Thanks for taking a look, and apologies if I have missed an existing
-safeguard.
+Thanks for taking a look; is there an intended status convention that
+would make this harmless?
 
 cu, Bernhard
 
