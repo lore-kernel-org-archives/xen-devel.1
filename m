@@ -2,57 +2,40 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CFD3C606A31A
-	for <xen-devel@archiver.kernel.org>; Sun, 25 Oct 2026 06:37:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC8FA606A31B
+	for <xen-devel@archiver.kernel.org>; Sun, 25 Oct 2026 12:33:28 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=d8WzNrgh
-Received: from list by lists.xenproject.org with outflank-mailman.1460430.1671568 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=cortex-media.de header.i=@cortex-media.de header.a=rsa-sha256 header.s=20250930 header.b=W7Rim4vV
+Received: from list by lists.xenproject.org with outflank-mailman.1460516.1671576 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKrqe-0003A7-BM; Sun, 25 Oct 2026 06:36:52 +0000
+	id 1xKxPF-00037q-SU; Sun, 25 Oct 2026 12:32:57 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1460430.1671568; Sun, 25 Oct 2026 06:36:52 +0000
+Received: by outflank-mailman (output) from mailman id 1460516.1671576; Sun, 25 Oct 2026 12:32:57 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKrqe-00039x-5R; Sun, 25 Oct 2026 06:36:52 +0000
-Received: by outflank-mailman (input) for mailman id 1460430;
- Sun, 25 Oct 2026 06:36:51 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
+	id 1xKxPF-00037i-OG; Sun, 25 Oct 2026 12:32:57 +0000
+Received: by outflank-mailman (input) for mailman id 1460516;
+ Sun, 25 Oct 2026 12:32:56 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Shuaidong.Chen@amd.com>) id 1xKrqc-00039r-Rn
- for xen-devel@lists.xenproject.org; Sun, 25 Oct 2026 06:36:51 +0000
+ (envelope-from <pd@cortex-media.de>) id 1xKxPD-00037c-Ke
+ for xen-devel@lists.xen.org; Sun, 25 Oct 2026 12:32:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xKrqb-00CqCQ-QS
- for xen-devel@lists.xenproject.org; Sun, 25 Oct 2026 07:36:49 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xKxPC-0005LN-NQ
+ for xen-devel@lists.xen.org; Sun, 25 Oct 2026 13:32:54 +0100
+Received: from [10.42.69.9] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Shuaidong.Chen@amd.com>)
- id 6adda339-bab6-0a2a0a5309dd-0a2a4503d954-14
- for <xen-devel@lists.xenproject.org>; Sun, 25 Oct 2026 07:36:49 +0100
-Received: from [40.93.196.45]
- (helo=SA9PR02CU001.outbound.protection.outlook.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Shuaidong.Chen@amd.com>)
- id 6adda37f-fae8-0a2a45030019-285dc42df94a-3
- for <xen-devel@lists.xenproject.org>; Sun, 25 Oct 2026 07:36:49 +0100
-Received: from BY5PR03CA0027.namprd03.prod.outlook.com (2603:10b6:a03:1e0::37)
- by AT6PR12MB026081.namprd12.prod.outlook.com (2603:10b6:170:113::9)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.21; Sun, 25 Oct
- 2026 06:35:01 +0000
-Received: from BY1PEPF00026957.namprd05.prod.outlook.com
- (2603:10b6:a03:1e0:cafe::4e) by BY5PR03CA0027.outlook.office365.com
- (2603:10b6:a03:1e0::37) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.522.4 via Frontend Transport; Sun, 25
- Oct 2026 06:35:01 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- BY1PEPF00026957.mail.protection.outlook.com (10.167.244.167) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.569.4 via Frontend Transport; Sun, 25 Oct 2026 06:35:00 +0000
-Received: from jim-System-Product-Name.amd.com (10.180.168.240) by
- satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.2.2562.53; Sun, 25 Oct 2026 01:34:56 -0500
+ (envelope-from <pd@cortex-media.de>)
+ id 6addf6e2-bab6-0a2a0a5309dd-0a2a45098400-6
+ for <xen-devel@lists.xen.org>; Sun, 25 Oct 2026 13:32:54 +0100
+Received: from [136.243.217.222] (helo=mail.cortex-media.de)
+ by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <pd@cortex-media.de>)
+ id 6addf6f6-be1a-0a2a45090019-88f3d9dece68-3
+ for <xen-devel@lists.xen.org>; Sun, 25 Oct 2026 13:32:54 +0100
+Received: by mail.cortex-media.de (Postfix) id C2EF638C02F;
+ Sun, 25 Oct 2026 13:32:53 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -61,149 +44,242 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=p4F0MHAOjqmYqJT5vh+kaJKzl5zXhu5EmskLsAmWzkERj3BN4w4MZXrNkKqAWihu0ve6eq3+NJKZgCHY3AB5z5g894ZoLfI/cRLHOe2Berv4Vr5EJQAhgS0nPsoey0F1Noaj/NHM2/h8Aqv7CLnNSdOrh1XSWgVBLoqiDYYR0aZ4K2GK4vWWGoxDWVkEPgRCfoNlKkxw2GESdd5JNhXdzLDdup/TEjmKg2anPtYWT6vIzoC3DGy8+DL6cnE1Z0c9+Bxr3rY0OPstCqeIeWhq/q/hGW5DBwwurtMzOQjGtvIPC4mzWpgjyMMt3kBdItZUyQfRv8K8jPx439/cRsk1aQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=9GijEse6hff60BEqBgFxft9+bDZ0t5yGKOBH3CY1qHc=;
- b=qsJzjSOFMlNRffqJzS3l9r23qQoKiaBgsbHhRJFIDoXLOQXT55l5sEXqxNuiGSOrBeWbBLPBwDA3m2ANAWZH6NaFxtvmeopG5q3ZQYOUHTvAQmbk3H06l8RsvD9hJLxH4qWBzJAWr6N+Rbb32956qorXrteHsGB4/ajLAtTig0/nmejOvCWBt2Jux/H9sK8r8T/Cjsvz/Itgiojwak1E5I+Ho39hXzszpANUxp9gbRzsItunScMTIQKocyAeMK/tcfioiaXBFHNSJQeEhT0YIGnXA94ZWVCffTVjc/YkpULSo08OcJLKMSJKGltj6PtoExUvsq5IQmPdP16mEyCe8w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=9GijEse6hff60BEqBgFxft9+bDZ0t5yGKOBH3CY1qHc=;
- b=d8WzNrgh8glFSoRvjPtCLSjgZuPyMN59tL/EoJyAMj2xiL5lRRewio14RH845LLo5iARGSIRWLKtM58D9Nw8GWsj5BfUJz6bJBTAG76jfQu3FRfBp/5Fo5WnZiT/QXtzP0gNZMHHRtKEGpoOe1YFbvG/1wL9frJfbW3YGF5xSRI=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Shuaidong Chen <shuaidong.chen@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Nicola Vetrini <nicola.vetrini@bugseng.com>, Stefano Stabellini
-	<sstabellini@kernel.org>, Michal Orzel <michal.orzel@amd.com>, Jan Beulich
-	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "Anthony
- PERARD" <anthony.perard@vates.tech>, Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Doug Goldstein
-	<cardoe@cardoe.com>, Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
-	Grygorii Strashko <grygorii_strashko@epam.com>, Penny Zheng
-	<penny.zheng@amd.com>, Ray Huang <Ray.Huang@amd.com>, Shuaidong Chen
-	<shuaidong.chen@amd.com>
-Subject: [XEN PATCH] automation/eclair: merge the two R14.3 invariant-condition deviations
-Date: Sun, 25 Oct 2026 14:34:43 +0800
-Message-ID: <20261025063443.2489592-1-shuaidong.chen@amd.com>
-X-Mailer: git-send-email 2.34.1
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20250930 header.d=cortex-media.de header.i="@cortex-media.de" header.h="Date:Subject:From:To:Cc:References:In-Reply-To"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=cortex-media.de;
+	s=20250930; t=1792931574;
+	bh=uxAYr7ITl+SPfggh3Gr9Eutbb0xY03icun1Q16xWkFA=;
+	h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
+	b=W7Rim4vVBgyb0hdCoF5Zr0Xwb/GDPtT6vPRRoLshE9uCxST4J1gtU480sXD8O3nM0
+	 DY/99FcNS2z6Oz5gt0k63y74gdp0OKoHRtQswf1zMIJma74bnbvJ9uGukXG2DUTijq
+	 XttDunXZa0eMOdrRD8oW5/1dJ9bzEEvlikmzE0RdqddobauBS1zgd0x1593Ug5nUEV
+	 lzdnZD9D8U9QPJyEcqMQFmVKE6Az9LVidffTNPdXFo2Sv/JeXxSUxIbxdBvjkTG3pO
+	 LNJpxu2z7YiaCzgY9joTz/MUF/OLe0QcKWVRtkNWumKHfDsYNnwjW1JOKHRN70Z7ly
+	 4sskrdM/LNLyg==
+Message-ID: <eff24ce3-bb48-4d2b-993c-65974d3af00e@cortex-media.de>
+Date: Sun, 25 Oct 2026 13:32:53 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [BUG] Xen BUG at mce_amd.c:100 (mc_ec2type) on Zen 3; host left
+ wedged, no reboot
+From: Peter Deggendorfer <pd@cortex-media.de>
+To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
+Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>,
+ Jason Andryuk <jason.andryuk@amd.com>,
+ Soham Dandapat <soham.dandapat@amd.com>
+References: <b9a98b3b-d11e-4463-ac80-4145ca991925@cortex-media.de>
+ <e32a3056-c025-4d89-a494-ad7e8b6e2580@citrix.com>
+ <b35c6a2f-753c-4691-aa9f-f67f2f7f37ef@cortex-media.de>
+In-Reply-To: <b35c6a2f-753c-4691-aa9f-f67f2f7f37ef@cortex-media.de>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: satlexmb07.amd.com (10.181.42.216) To satlexmb07.amd.com
- (10.181.42.216)
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BY1PEPF00026957:EE_|AT6PR12MB026081:EE_
-X-MS-Office365-Filtering-Correlation-Id: 85aeca3e-fea7-4a9f-4573-08df32621849
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|23010399003|82310400026|1800799024|7416014|36860700016|5023799004|11063799006|56012099006|261021123027099003|261021121427099003|261022113327099003|261022105027099003|261022075727099003|261009223027099003|261009221227099003|10067099003|18002099003;
-X-Microsoft-Antispam-Message-Info:
-	/UbQ3HmVc9DHScvY9NANC7W9TppRtvReIPlwXsCFvSFgJg/vQlT0hcaXcsVVEW4D4y6U9gafOJBQs8WdW7sAznta8Pe4mdGt/mxOi8KY9mSMOTpxSSYhPq22czrGXgf7T3ByGqNPIGZQI/pnDUWy5+6DUkispXlkchQ33r7RRpgDn0Y4c8nfrM508/AiO4NveJ0GeVK+AOMSjABZckURP8gvmGxkKI/LlG5hroJO0nUQYyLlzj9OwRjQlfUqz1gL/LSoYgJeS/+pPWni8aUtwSo6K8GwW02FZpAFEXiFHIyIWw6Zvwet5xdyY7juNANqrKxD0AlVD5il8eD3LgSY/LpzzxykFpvocJeDVTejfmtuz53Iq3HGY8eCjIlW1yWAZMkL1ZsMjrvXj7KFcdTb5fCBlBVF8Af8QdVzg+byXhtg8spvTdmmcpVCv+DVOg4Ob5l65pvezZzTXhjarCjzi/qXL+Xi1kraYei6CEk1vDg7clI0H45XW0UVf3EPjRwPZ2Ad2Am6TCPxIo4NC++tnegpwmlIInhul2ETsKVH241fmeptEAkTD05kjIRLAVC/iyxF5uDi7YR62btLikcAfOf4G3NAS7yW5rs0X6xIWgM8WIoCzt0lyCP7+VdGFyVml4wGq+NRNbWE/OEJQp30vz/mNr28v9EZj4iiabI8l42LSCac+tK5NAIqPUa9todMlE4tsD7fNOXGnZP/j3hccw==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(23010399003)(82310400026)(1800799024)(7416014)(36860700016)(5023799004)(11063799006)(56012099006)(261021123027099003)(261021121427099003)(261022113327099003)(261022105027099003)(261022075727099003)(261009223027099003)(261009221227099003)(10067099003)(18002099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	dz6Hs+WSrlVuDD6RagnzN+lmE8O6mRYYmSdn2m6VQbu7XRSfMCwS/e1vaUfpX4O2QGCzDbDWqyRNiwowQrX9hse51PuFxdFg8NZ0PGW9TXzu1ZTllOow1VZ01Pa4ckuBxn6VOgyzGWAuo1xzL3iAH/GV9/qQ5ZVOlOvKz/Yzc/KOzDGXz091CzbZZdqtioNoULerqhNhAXn7Ri901OBVd5SqXN1T8AI3kaFqpn3HMs6DJESnkoDrRMsBZry9cSi6LUeSxU4TWpjlB1KhqLbvY7aMXHIYB61J0jTGyxk5ZsEDOlXixSe/gJ+CALpNfjNTgqp38FixzOscCLfu+AoZhexZU7iKxrOnnvSHwnIVdAJSbiQ5vWL88Srb5OJfTkXT9re+bLqW9F7wtlfRNSUvAF+STbkzIf7RSfe97e+8pphOqc3xl1lo38DZO09quUhd
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2026 06:35:00.4264
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 85aeca3e-fea7-4a9f-4573-08df32621849
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BY1PEPF00026957.namprd05.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AT6PR12MB026081
-X-purgate-ID: tlsNG-33051d/1792910209-7448C4E9-A2B9A6BC/0/0
+X-purgate-ID: tlsNG-bad1c0/1792931574-3AAD8034-4C9CDC7F/0/0
 X-purgate-type: clean
-X-purgate-size: 3275
-X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
-	autolearn_force=no version=4.0.1
+X-purgate-size: 8211
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-MC3A2.R14.3 ("Controlling expressions shall not be invariant") is
-deviated by two separate entries.  One covers 'if' statements and
-conditional operators and places no restriction on where the invariant
-condition comes from.  The other covers 'switch' statements, but only
-when the controlling expression is a 'sizeof' operator.
 
-The rationale recorded for the two is the same: the condition is
-deliberate.  Nothing about a 'switch' makes an invariant condition less
-deliberate than the same condition in an 'if', so the 'sizeof'
-restriction reads as an artefact of that entry having been added for
-read_atomic() and friends in arch/x86/include/asm/atomic.h rather than
-as a considered limit.
+> Hi Andrew,
+>
+> Thanks a lot for the quick response.
+>
+>
+>> On 23/10/2026 8:32 am, Peter Deggendorfer wrote:
+>>> Hey Xen Team,
+>>>
+>>> I'm hitting a reproducible hypervisor panic in the AMD non-fatal MCE
+>>> polling path on a Ryzen 9 5950X (Zen 3). Eight occurrences since
+>>> 2026-09-09, between 12 hours and 2 weeks apart, always CPU 2.
+>>>
+>>> Environment
+>>> -----------
+>>> Xen:   4.20.4-pre (Debian 4.20.3+127-gc42374a105-0+deb13u1), and still
+>>>         present in 4.20.5-pre (Debian 4.20.4+39-gf1e1321c87-0+deb13u1)
+>>> dom0:  Linux 6.12.111+deb13-amd64 (Debian trixie), PV, 32 vCPUs
+>>> CPU:   AMD Family 25 (0x19) Model 33 (0x21) Stepping 2, Ryzen 9 5950X,
+>>>         microcode 0x0a201210
+>>> Cmdline: dom0_mem=4096M,max:4096M ucode=scan console_timestamps=datems
+>>>
+>>> The panic
+>>> ---------
+>>> (XEN) [2026-10-19 08:58:18.727] Xen BUG at
+>>> arch/x86/cpu/mcheck/mce_amd.c:100
+>>> (XEN) CPU:    2
+>>> (XEN) RIP:    e008:[<ffff82d04028a650>]
+>>> mce_amd.c#mc_ec2type.part.0+0/0x10
+>>> (XEN) rbx: 0000000000000445   r12: 0000000000000011   r15:
+>>> 0000000000000446
+>>> (XEN) Xen code around <ffff82d04028a650>:
+>>> (XEN)  90 90 90 90 90 90 90 90 <0f> 0b 90 90 90 90 90 90 90 90 90 90
+>>> 90 90
+>>> (XEN) Xen call trace:
+>>> (XEN)    [<ffff82d04028a650>] R mce_amd.c#mc_ec2type.part.0+0/0x10
+>>> (XEN)    [<ffff82d04028a699>] S mc_amd_recoverable_scan+0x39/0x40
+>>> (XEN)    [<ffff82d04028cfdd>] S mcheck_mca_logout+0x42d/0x840
+>>> (XEN)    [<ffff82d04028a35c>] S
+>>> amd_nonfatal.c#mce_amd_checkregs+0x1c/0x100
+>>> (XEN)    [<ffff82d040240e8c>] S smp_call_function_interrupt+0x4c/0x90
+>>> (XEN)    [<ffff82d0403123d5>] S do_IRQ+0x2a5/0x650
+>>> (XEN)    [<ffff82d040201915>] S common_interrupt+0x135/0x150
+>>> (XEN)    [<ffff82d0402883ca>] S 
+>>> cpu_idle.c#acpi_idle_do_entry+0x8a/0x140
+>>> (XEN)    [<ffff82d0402887cf>] S
+>>> cpu_idle.c#acpi_processor_idle+0x1ef/0x650
+>>> (XEN)    [<ffff82d040302cf1>] S domain.c#idle_loop+0xc1/0x130
+>>> (XEN) Panic on CPU 2
+>>>
+>>> The outlined mc_ec2type.part.0 contains nothing but the ud2, so this is
+>>> the "unreachable" default branch of mc_ec2type() -- the extended error
+>>> code matches none of MC_EC_TLB_TYPE, MC_EC_MEM_TYPE, MC_EC_BUS_TYPE.
+>> I think it's safe to just drop the BUG().
+>>
+>> That code is literally worse than useless, because if nothing else it's
+>> just hiding the diagnostics.
+>>
+>> I guess it means AMD have added new statuses.
+>>
+>>> Across the eight occurrences, r12 appears to be the bank index from the
+>>> loop in mcheck_mca_logout(), with rbx == 0x401 + 4 * r12 (MCi_STATUS)
+>>> and r15 == rbx + 1. Three different banks are involved: 10, 17 and 23.
+>>>
+>>> Not a hardware defect
+>>> ---------------------
+>>> - Started within days of upgrading two hosts from Debian bookworm
+>>>    (Xen 4.17) to trixie (Xen 4.20). They had run 3 years on 4.17 
+>>> with no
+>>>    incident.
+>>> - Three different banks, so not a single failing block.
+>>> - Updating to the current Debian package (4.20.5-pre, built 2026-10-16)
+>>>    changed nothing.
+>>>
+>>> Possibly related: 532988dccc19 ("x86/mcheck: fix mca_allbanks
+>>> updating").
+>>>
+>>> Also possibly related on the Linux side: 0422b07bc4c2 ("x86/mce/amd:
+>>> Filter bogus hardware errors on Zen3 clients"), where bogus MCA values
+>>> on Zen 3 are filtered rather than treated as errors.
+>>> https://ratatoskr.run/stable/2026/04/7143905
+>>  From above, you're on a Vermeer, not a Cezanne, so I don't think that
+>> Linux patch is relevant.
+>>
+>> However, your observation about "fix mca_allbanks updating" quite
+>> possibly is.  That was backported into Xen 4.20.1 as 247b708b1400a, and
+>> Debian has 4.20.3
+>>
+>> Are you able to experiment with that patch reverted?
+>>
+>> Alternatively, are you able to experiment with the BUG() removed?
+>
+> I went with dropping the BUG() rather than the revert.
+> Reverting 247b708b1400a should stop any bank from being read at
+> all, which is effectively what mce=false already does here, so I don't
+> expect it to tell us anything new. I'll run it too if you'd like.
+>
+> I'm not familiar with the Xen codebase, but I've built a package with
+> mc_ec2type() changed to:
+>
+>     if ( errorcode & MC_EC_TLB_TYPE )
+>         return MC_EC_TLB_TYPE;
+>
+>     printk(XENLOG_WARNING "MCE: unknown AMD error code %#x\n", 
+> errorcode);
+>
+>     return 0;
+>
+>
+> Crashes have been 12 hours to 2 weeks apart, so it may take a while
+> before I can report back.
 
-Fold switch_stmt into the general entry and drop the 'sizeof'-restricted
-one, which the general predicate now subsumes.  Invariant 'switch'
-conditions that are not a 'sizeof' become deliberate as a result; that
-is the intent.
+After ~31 hours of uptime:
 
-Signed-off-by: Shuaidong Chen <shuaidong.chen@amd.com>
----
- automation/eclair_analysis/ECLAIR/deviations.ecl | 8 ++------
- docs/misra/deviations.rst                        | 8 ++------
- 2 files changed, 4 insertions(+), 12 deletions(-)
+(XEN) [2026-10-25 04:06:27.260] MCE: unknown AMD error code 0
 
-diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
-index 7f3fd35a33d..08a88ddfa62 100644
---- a/automation/eclair_analysis/ECLAIR/deviations.ecl
-+++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-@@ -472,12 +472,8 @@ activity."
- -config=MC3A2.R14.2,reports+={disapplied,"any()"}
- -doc_end
- 
---doc_begin="The XEN team relies on the fact that invariant conditions of 'if' statements and conditional operators are deliberate"
---config=MC3A2.R14.3,statements+={deliberate, "wrapped(any(),node(if_stmt||conditional_operator||binary_conditional_operator))" }
---doc_end
--
---doc_begin="Switches having a 'sizeof' operator as the condition are deliberate and have limited scope."
---config=MC3A2.R14.3,statements+={deliberate, "wrapped(any(),node(switch_stmt)&&child(cond, operator(sizeof)))" }
-+-doc_begin="The XEN team relies on the fact that invariant conditions of 'if' statements, conditional operators and 'switch' statements are deliberate"
-+-config=MC3A2.R14.3,statements+={deliberate, "wrapped(any(),node(if_stmt||conditional_operator||binary_conditional_operator||switch_stmt))" }
- -doc_end
- 
- -doc_begin="The use of an invariant size argument in {put,get}_unsafe_size and array_access_ok, as defined in arch/x86(_64)?/include/asm/uaccess.h is deliberate and is deemed safe."
-diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
-index 32713172067..99a1b2332c2 100644
---- a/docs/misra/deviations.rst
-+++ b/docs/misra/deviations.rst
-@@ -458,12 +458,8 @@ Deviations related to MISRA C:2012 Rules:
- 
-    * - R14.3
-      - The Xen team relies on the fact that invariant conditions of 'if'
--       statements and conditional operators are deliberate.
--     - Tagged as `deliberate` for ECLAIR.
--
--   * - R14.3
--     - Switches having a 'sizeof' operator as the condition are deliberate and
--       have limited scope.
-+       statements, conditional operators and 'switch' statements are
-+       deliberate.
-      - Tagged as `deliberate` for ECLAIR.
- 
-    * - R14.3
--- 
-2.34.1
+No panic, no wedged CPU, no RCU stalls, no hung guests. Host and all
+VMs running normally.
+
+
+I also dumped /dev/mcelog in dom0 and got the following records:
+
+00000000: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000010: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000020: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000030: 0000 0000 0000 0000 0200 0000 0000 0000  ................
+00000040: 0010 0201 0200 0000 0000 0000 0200 0000  ................
+00000050: 1c01 0000 0000 0000 0000 0000 0000 0000  ................
+00000060: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000070: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000080: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+00000090: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+000000a0: 0000 0000 0000 0000 0200 0000 0000 0000  ................
+000000b0: 0017 0201 0200 0000 0000 0000 0200 0000  ................
+000000c0: 1c01 0000 0000 0000 0000 0000 0000 0000  ................
+000000d0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+
+
+>
+>
+>>> Diagnostics / workaround
+>>> ------------------------
+>>> mce_verbosity=verbose yields nothing useful.
+>>> max_cstate=1 made no difference. mce=false is the only thing that stops
+>>> it, and it is what I'm running now.
+>> The fact that mce=false isn't causing machine resets means it's clearly
+>> something the hardware thinks isn't fatal.
+>>
+>> But, I am concerned by the fact it's always on CPU 2, and multiple
+>> banks.  Is this true for both systems?
+>
+> To clarify one thing from my report: it is actually a single host whose
+> complete hardware (board, CPU, RAM) was replaced on
+> 2026-10-07, keeping only the disks and thus the installation. The
+> crashes happened both before and after that swap. 10 more hosts
+> with same hardware still run on bookworm (xen 4.17) for years now
+> without any incidents.
+>
+> So yes, always CPU 2. The bank index varies: on the current hardware
+> I have seen banks 23, 17 and 10 across four crashes, and banks 23 and
+> 17 on the previous hardware.
+
+Regarding the output of /dev/mcelog: if my decoding is right, three
+things stand out. MCi_STATUS is zero, i.e. these banks are reporting
+nothing at all -- no error, no garbage value. Both records are again
+from CPU 2, and bank 23 is one of the banks that appeared in the
+panics, bank 16 is new.
+
+
+>
+>>> One more thing: the host does not actually reboot after the panic.
+>>> "Reboot in five seconds" is printed, but the ring buffer continues with
+>>> normal activity minutes later and the remaining 31 CPUs keep running.
+>>> CPU 2 stays wedged, and "xl debug-keys t" then hangs. Afterwards dom0
+>>> and guest vCPUs start losing timer interrupts permanently (RCU stalls
+>>> with a frozen timer-softirq count while dynticks keeps advancing), so
+>>> VMs hang silently hours or days later.
+>> I've recently noticed that crashing with interrupts off doesn't reboot
+>> any more.  I thought it was something local to my development, but
+>> apparently not if you're seeing the same.
+>>
+>>>
+>>> I've attached the full xl dmesg log of the last crash, and I'm happy
+>>> to provide more if needed. I can also test patches.
+>>>
+>>> Thanks for your work, and thanks in advance for taking a look.
+>>>
+>>> Peter
+>> Thankyou,
+>>
+>> ~Andrew
+>
+> I have full xl dmesg logs for almost all crashes. Happy to send any of
+> them.
+>
+> Peter
+>
 
 
