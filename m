@@ -2,40 +2,47 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AC8FA606A31B
-	for <xen-devel@archiver.kernel.org>; Sun, 25 Oct 2026 12:33:28 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7DBDC606A31A
+	for <xen-devel@archiver.kernel.org>; Sun, 25 Oct 2026 14:23:08 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=cortex-media.de header.i=@cortex-media.de header.a=rsa-sha256 header.s=20250930 header.b=W7Rim4vV
-Received: from list by lists.xenproject.org with outflank-mailman.1460516.1671576 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=T5lCxlXY
+Received: from list by lists.xenproject.org with outflank-mailman.1460554.1671585 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKxPF-00037q-SU; Sun, 25 Oct 2026 12:32:57 +0000
+	id 1xKz7R-00080f-5y; Sun, 25 Oct 2026 14:22:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1460516.1671576; Sun, 25 Oct 2026 12:32:57 +0000
+Received: by outflank-mailman (output) from mailman id 1460554.1671585; Sun, 25 Oct 2026 14:22:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xKxPF-00037i-OG; Sun, 25 Oct 2026 12:32:57 +0000
-Received: by outflank-mailman (input) for mailman id 1460516;
- Sun, 25 Oct 2026 12:32:56 +0000
+	id 1xKz7R-00080Y-3K; Sun, 25 Oct 2026 14:22:41 +0000
+Received: by outflank-mailman (input) for mailman id 1460554;
+ Sun, 25 Oct 2026 14:22:40 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <pd@cortex-media.de>) id 1xKxPD-00037c-Ke
- for xen-devel@lists.xen.org; Sun, 25 Oct 2026 12:32:56 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xKz7Q-00080S-7j
+ for xen-devel@lists.xenproject.org; Sun, 25 Oct 2026 14:22:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xKxPC-0005LN-NQ
- for xen-devel@lists.xen.org; Sun, 25 Oct 2026 13:32:54 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xKz7P-00BCHi-46
+ for xen-devel@lists.xenproject.org; Sun, 25 Oct 2026 15:22:39 +0100
+Received: from [10.42.69.11] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <pd@cortex-media.de>)
- id 6addf6e2-bab6-0a2a0a5309dd-0a2a45098400-6
- for <xen-devel@lists.xen.org>; Sun, 25 Oct 2026 13:32:54 +0100
-Received: from [136.243.217.222] (helo=mail.cortex-media.de)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <pd@cortex-media.de>)
- id 6addf6f6-be1a-0a2a45090019-88f3d9dece68-3
- for <xen-devel@lists.xen.org>; Sun, 25 Oct 2026 13:32:54 +0100
-Received: by mail.cortex-media.de (Postfix) id C2EF638C02F;
- Sun, 25 Oct 2026 13:32:53 +0100 (CET)
+ (envelope-from <bernhard.kaindl@citrix.com>)
+ id 6ade109c-e002-0a2a0a5209dd-0a2a450bcb94-14
+ for <xen-devel@lists.xenproject.org>; Sun, 25 Oct 2026 15:22:38 +0100
+Received: from [52.101.53.15]
+ (helo=BL0PR03CU003.outbound.protection.outlook.com)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <bernhard.kaindl@citrix.com>)
+ id 6ade10ad-b7e8-0a2a450b0019-3465350f114a-3
+ for <xen-devel@lists.xenproject.org>; Sun, 25 Oct 2026 15:22:38 +0100
+Received: from LV3PR03MB7707.namprd03.prod.outlook.com (2603:10b6:408:28b::21)
+ by SJ0PR03MB5535.namprd03.prod.outlook.com (2603:10b6:a03:288::14)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Sun, 25 Oct
+ 2026 14:22:35 +0000
+Received: from LV3PR03MB7707.namprd03.prod.outlook.com
+ ([fe80::97e8:ef9c:9031:e2bf]) by LV3PR03MB7707.namprd03.prod.outlook.com
+ ([fe80::97e8:ef9c:9031:e2bf%4]) with mapi id 15.21.0546.021; Sun, 25 Oct 2026
+ 14:22:35 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -44,242 +51,261 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20250930 header.d=cortex-media.de header.i="@cortex-media.de" header.h="Date:Subject:From:To:Cc:References:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=cortex-media.de;
-	s=20250930; t=1792931574;
-	bh=uxAYr7ITl+SPfggh3Gr9Eutbb0xY03icun1Q16xWkFA=;
-	h=Date:Subject:From:To:Cc:References:In-Reply-To:From;
-	b=W7Rim4vVBgyb0hdCoF5Zr0Xwb/GDPtT6vPRRoLshE9uCxST4J1gtU480sXD8O3nM0
-	 DY/99FcNS2z6Oz5gt0k63y74gdp0OKoHRtQswf1zMIJma74bnbvJ9uGukXG2DUTijq
-	 XttDunXZa0eMOdrRD8oW5/1dJ9bzEEvlikmzE0RdqddobauBS1zgd0x1593Ug5nUEV
-	 lzdnZD9D8U9QPJyEcqMQFmVKE6Az9LVidffTNPdXFo2Sv/JeXxSUxIbxdBvjkTG3pO
-	 LNJpxu2z7YiaCzgY9joTz/MUF/OLe0QcKWVRtkNWumKHfDsYNnwjW1JOKHRN70Z7ly
-	 4sskrdM/LNLyg==
-Message-ID: <eff24ce3-bb48-4d2b-993c-65974d3af00e@cortex-media.de>
-Date: Sun, 25 Oct 2026 13:32:53 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=lqpf0u8TAf+OG36PVIFMCmj7jFCRHVUDlPWO2j7/2ZvD2bZmtD7TtuG9Wng1oquwsoJvoiZubGbMlyyiyzc4oReAUAXtNkwgqk+4/2NaHKwZDenlpZ7qWe8QWqCB3uI41ULofjSlA6MDpeSWGrfKKrXFzfBIaWHDg8ZPvOSmzqJ+NXE4UWw/ZYVz89v+T9YTU5vllrfPCJpKvJShY+I5Z4NEjKkOamEziGuHjJwHve5tsZrI7OCEi6+ADJ713AyMG0ra1KrJc2sgidwPLQsPeWRULN7Lwy8RBSl+0Ut0npurGBbQ4kjbkhhw/avoZ54JRel2atz8kUtb32eYd3ysWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SJhgT4pCosswqxRtTGk+FOFKILZPh5Dm5CBivDPSDfo=;
+ b=m2bWYUsGDtbSI2eWedi5xCUbJVSTaWcnOgGTQziN6u9gUmFL3HuacLL7Ma+gDSVgNHLdWZXyrXSHQhnPddZfrgRzix6OjwseSO7WCT/AI3/Qe/Vj6Qc5JiHUOwi5tvw62ThyrQW80UdkxWTLMLIoxJ2JZGszOXCQquuc0vyIUM4w04p4+5BbyvUAHK6YE7SJGohCLyJIi4ER7A3QidSzvY3Z2ozGamUQtONBgYqL+6vkOfN91uZrZw5dcBgGYjwk113gQL9He43f2UF/+Mv1hhoXCvjlHiQl0rmWdaenJ/WH4OcwPZBATfqXTmPhW5D2mx8ExH2d3vnXQoC5WtI9Hg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SJhgT4pCosswqxRtTGk+FOFKILZPh5Dm5CBivDPSDfo=;
+ b=T5lCxlXYyMKdq/SRLXzdUJBYUyvuiPu9CqcvpI9WaSCjVYuR5i8/kBGRoMEkswP6hrxl+qGC780AsiUgdcScvF8tAYlGn3kZKCH6lPba3NzM55XxjtDBTCNotqG2LzPF5aEcN1k0ujvRiRMKhFlfUhRc6QxtsRcmjpfS1tLqx5c=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH 2/6] x86/vlapic: Fix hardware virtualized APIC state
+ after reset
+From: Bernhard Kaindl <bernhard.kaindl@citrix.com>
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Denis Mukhin <dmukhin@xen.org>
+In-Reply-To: <1792504425.8631fc262581453bbf619ec5b2062170.1a15996ec68000f79f@vates.tech>
+References: <1792504313.8631fc262581453bbf619ec5b2062170.1a1599536d8000f79f@vates.tech>
+ <20261020135333.38064-2-teddy.astie@vates.tech>
+ <1792504425.8631fc262581453bbf619ec5b2062170.1a15996ec68000f79f@vates.tech>
+Date: Sun, 25 Oct 2026 15:22:24 +0100
+Message-Id: <179293814412.1810895.12737475203049581172.b4-review@b4>
+X-Mailer: b4 0.16.0
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1792938149; l=5816;
+ i=bernhard.kaindl@citrix.com; s=20261024; h=from:subject:message-id;
+ bh=c0VYfaDAnCiIQ8J3/Mc4cnTCOhrWQQTko1/1oSQq+4Q=;
+ b=+hyaS3ovnljiJkAYoyRQkHGKQ2QkhyKadCXPZBtz1nFciY+C3QmUKDqNRypgVR8r0pN5ukIYf
+ rGPkadLcBN4DrOypIg4nk3BHIP8fLdX7PfufV0kBu68+KRs8+h8FC2o
+X-Developer-Key: i=bernhard.kaindl@citrix.com; a=ed25519;
+ pk=oIjnI/us0Uh5d/WP18V5IQq/FrLPUp+W0JAhJ9QCQIs=
+X-ClientProxiedBy: VI6PEPF000001F7.AUTP296.PROD.OUTLOOK.COM
+ (2603:10a6:808:1::905) To LV3PR03MB7707.namprd03.prod.outlook.com
+ (2603:10b6:408:28b::21)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] Xen BUG at mce_amd.c:100 (mc_ec2type) on Zen 3; host left
- wedged, no reboot
-From: Peter Deggendorfer <pd@cortex-media.de>
-To: Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
-Cc: Jan Beulich <jbeulich@suse.com>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Teddy Astie <teddy.astie@vates.tech>,
- Jason Andryuk <jason.andryuk@amd.com>,
- Soham Dandapat <soham.dandapat@amd.com>
-References: <b9a98b3b-d11e-4463-ac80-4145ca991925@cortex-media.de>
- <e32a3056-c025-4d89-a494-ad7e8b6e2580@citrix.com>
- <b35c6a2f-753c-4691-aa9f-f67f2f7f37ef@cortex-media.de>
-In-Reply-To: <b35c6a2f-753c-4691-aa9f-f67f2f7f37ef@cortex-media.de>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1792931574-3AAD8034-4C9CDC7F/0/0
-X-purgate-type: clean
-X-purgate-size: 8211
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV3PR03MB7707:EE_|SJ0PR03MB5535:EE_
+X-MS-Office365-Filtering-Correlation-Id: 4a42b6dc-63a3-4121-f880-08df32a369e3
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|1800799024|376014|23010399003|366016|4143699003|11063799006|56012099006|261021123027099003|261022113327099003|261022105027099003|261022075727099003|261009223027099003|260925022911599003|260925021911599003|260925021311599003|10067099003|18002099003|22082099003;
+X-Microsoft-Antispam-Message-Info:
+	DkD8gSbvc2c7/39xIz6Gudlc4wZBB09IgSAt8UPGMJ+HK/x7DxPXUBBkDpxN1YxLrk7KxrNhMnIK3pIww6rzSzi59RsMzWV4BQRz6Zmq6GoUKi4fCVzyPpcivMPSRwX5etsuvji4H4/7uUlAN0Tzvjx0G81xC9i9KH9R9j0pRnkaABkYRKmiIwjDvZ2kR+vsg4Dn2Ez338vaCJKt0sMk6KEL7/nUDx5uh4NiKOso+coJam2zuu83cAiop1SH4TONWnieqrA/jY/dm7kTMnNP7G5Rkej2/GxrGapvPVqkZ0recbidOCeoTEkcgz18bnpxfbV+TvbsjH2cW2jd+pTlqWmHUCSDNihJ1mnLA95bKIdUxhcWXgXrccxWLf7OKpyDEq6tN2GDIJEx3V/n20e6W59ciRc6dnv7DnvFOnEm8vipLXOVYKMWTJbUgf2qoue8PqgJznHYuxrhZoXSUmwqOuwVWeW3YzoOlD80tazYHFLEElkvlGXhKUXgxm2LagFE7nfSFKbwpVPWLPzrSmd7okB8A4dkVGQSsdxTEVTIm9Om9f2eLOVVCuuWrSnIGTAjIbjdthh5es7yPb3Ew3NMEIR02TqCC/YsXgADPrR8eb/JixeEkVTGgfMb/f5bhAVmdb/f7xyTLmCfU08Pr3ACeItTouGGwiH42d4ZEVTrQ9M=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LV3PR03MB7707.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(376014)(23010399003)(366016)(4143699003)(11063799006)(56012099006)(261021123027099003)(261022113327099003)(261022105027099003)(261022075727099003)(261009223027099003)(260925022911599003)(260925021911599003)(260925021311599003)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?cmNaMmk4SWZPY0xIT2xKL0kydUMyakFobHdjMmZNd1NieXlrMWY4T3RtbkRi?=
+ =?utf-8?B?NFpKWmFTbFl4WjJkTEN0NDFEVk9uY1FRVFZub3hsTThkb1FsaWNzUmlXb0xF?=
+ =?utf-8?B?TkRZWUc4LzZZeWJJUDMxbVdyWGdEZ1RqR2VvbkV0SXlTSnAyaWU0NFlQZVdP?=
+ =?utf-8?B?dXVuZ2lWZkp6NmtyVG9VbVQ0c015TmlFSE01NHBYR1ZwRUJoR0sxYkFTY1Rr?=
+ =?utf-8?B?dEJ5TGhpamJaRkpMTHQwMDl3cnA0RWZURGlVZ3VNa3o2ZmFUTlYzY1pxcmV1?=
+ =?utf-8?B?MkM3MlRJdTd5OFVqcHNDR3FENmkrdUR5K1FhanpWcFZpdEU1QWp2ZUJFRzBL?=
+ =?utf-8?B?ZG54WGV1c1ZUc1grbzJZM2xuN3ZUTGdoTVJady8waURhNjBhVExHaUZaendm?=
+ =?utf-8?B?dEkycG9GSzhJQ3J6R2NXUGllbHhEZTdlVzNWeUxvZW9RLzFyNXN6MFlQWVFh?=
+ =?utf-8?B?RTFrbk95ajhoS2JXVkJSU0p4RHozaW01K3RtQjFHWWhwb3ZidkhtQ2xEajln?=
+ =?utf-8?B?U0REeUFhZHR6endBc3Z0OHl3MUMwWEoyWE5KVDJkUVBhaDUyQm9lK2piWFdm?=
+ =?utf-8?B?aXlUVmdzdGpGWUExaDQ3UGR6aTZoQ0J2K09INTd4NjdYRGU5UE5oS2k2SGR3?=
+ =?utf-8?B?VVZuSW5KS3RVTUsrRHFHNS9kdGJ4T2p4QVoxR2YwYWVGR3RZWklUdUpteEZR?=
+ =?utf-8?B?cVJ3N2xOSXFkbVBKZE5oSENBZ2ZSOUJzUk1oSjcvUzdrakk3NUQ2bkZyV0FB?=
+ =?utf-8?B?WFVPRjVYMzk3VmtmUlJ0TzR2TEJNbXhDdDJOZVBPZlo3MGtNT2IzdjBwS3ZV?=
+ =?utf-8?B?RkxQM2k0MWNWTVpaeTJYTnRxVkc2VzJ6aG1zNHFjeUxwZWYrUDJqbzBYRWFV?=
+ =?utf-8?B?VW9wdnFFOXMzaUJGWGI2b2hzMStYbDVQSTErUmdoSUVXdjZHUE5WZ1FhSFNO?=
+ =?utf-8?B?Wkt4VVFZNTR0clNHeXh6QmZsZjhicGxheVhnWmZyN2FMQXRobHB1TXF3Y1Rx?=
+ =?utf-8?B?bWNuRnFNb3NRaXBXMkFvOEtpRDB1V1d4eTFpTThLQzhWakdDdDdzUVptZkEw?=
+ =?utf-8?B?SVhFamNyU21pOTlHUjdDVmFaelFvVWd6M3praG54cTB2bStHei9GVE5mRXN5?=
+ =?utf-8?B?UmE4V3BscThIV0dlMU5IdndhakhsZWxGTnMvOEY3OTgvYlBZVk0zUjA4WVFh?=
+ =?utf-8?B?N0tVdjloWHova2ZodTF2ZkE3MkNLaGErQnM1RDJZMEswem9kOHRnT0pydklu?=
+ =?utf-8?B?dnA5NWlKOHFGZnpLUXRzSGI3NVdrWjAwblEwcWJWTWJvdkZaL2szMzFKOUJz?=
+ =?utf-8?B?NzhDd1p5ZHJ2R1VIM3NzajlPYS95OEh6WlJlc2lnT2xwVFRkTzUvd0hxWjZk?=
+ =?utf-8?B?QWx4blhZYU1TblI0VmtwcE4yaE15NkhucC9UNVoyYnlhU3pETlAzbExQMk12?=
+ =?utf-8?B?OE1RUUpsbEhMZ3ZYb3VlQjR5cVc1c1BROCtJYjI4a1ZjZXFkRElnb0YrQUJF?=
+ =?utf-8?B?TTBOYTBKQ1ZTZGROalZTNC9JNU1Xc2htU0V3MGdEOHJvNWtvUnNwdVlRRHFT?=
+ =?utf-8?B?aGx1SkpMU0s0VldabEVzZ1VQQ05HQVllTmg3QjliMmxHeDU1cVR3VnM3cVlU?=
+ =?utf-8?B?Z0J2RVBCZVdROGU5TGgxYStFZDQxaUFZNXdyaDY1Wk1lanZzVnNMOTBvbGRh?=
+ =?utf-8?B?RC9uRlZtUlJnYUpwTjVSdnZKZ2djblJJQnp4a2hNZTNaM0liclJOd21hSHFj?=
+ =?utf-8?B?TmprYlNuQXN3c2E5czRLN21ZQXBPTHprMmJaUVZnaktpZnNiOWpJNWVKcExm?=
+ =?utf-8?B?NVZrVHREWDI3UTdQVmRyeW01SGlkcnAxVDl3WkUrdkRwcy84amYrSUhUSHMx?=
+ =?utf-8?B?WDFjUWlMeG43WGxVQ1R3TFI4T1dLZTBmL0JxbHNWZ1M0N3MrMDFoaFdhOFV2?=
+ =?utf-8?B?RjNWU0drK092WGtlVzR3ckdiRDlnT1FjRlVmeXlES01VdWZnaFQ1NGhvMXB4?=
+ =?utf-8?B?UWRmYk5GMms1SGp6WHRoQ21Gam5wWE9oblE1KzF0TDU5eTllOTE2WkJIK0kz?=
+ =?utf-8?B?VXNhVzhYZ2ZwWXVXMkw5Ry9ZK3ZDNncvbVROU3I1MGdXZkRZclI2VEFnQWQy?=
+ =?utf-8?B?M01iVXhZbnd6OEppdGQrb29mRDU4RVRFa1AzQXZRVGp1cnlRU2RGaktNZmxh?=
+ =?utf-8?B?d240bXJqYkZ6MVNmSmdrS2ROUkM1R1I2ai9mbnp0OHBZcUxuNGhlWFFmOEk1?=
+ =?utf-8?B?bm4wTnpwaXRaUlVqRk9QeEp1NXc4WStsc0tVUXhtRkRVREc2TmtJd3NtVzFr?=
+ =?utf-8?B?N0hIZHI3eGNGSjVNa3oyOFBpN1JvTTJIVlJtUWV6eGNqZzdDcmFvWUNKSTlw?=
+ =?utf-8?Q?qRWU670xC07G5FyM=3D?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 4a42b6dc-63a3-4121-f880-08df32a369e3
+X-MS-Exchange-CrossTenant-AuthSource: LV3PR03MB7707.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 25 Oct 2026 14:22:35.0121
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: jynlsqdZyqb3xQJLDjf6Ttz9p0jMGbk4KM+5geeNtvEt9jlglgqX5lmt2BpYTQMsxw59YoEgC9+abpZ2z2t0LBC1H2Hc+gNxZEAwvoLVeUQ=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR03MB5535
+X-purgate-ID: tlsNG-42698a/1792938158-184CB9EA-F0933306/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 5816
+X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>, roger@xenproject.org,
+ Denis Mukhin <dmukhin@xen.org>
+Subject: Re: [PATCH 2/6] x86/vlapic: Fix hardware virtualized APIC state after reset
+In-Reply-To: <1792504425.8631fc262581453bbf619ec5b2062170.1a15996ec68000f79f@vates.tech>
+References: <1792504313.8631fc262581453bbf619ec5b2062170.1a1599536d8000f79f@vates.tech>
+ <20261020135333.38064-2-teddy.astie@vates.tech>
+ <1792504425.8631fc262581453bbf619ec5b2062170.1a15996ec68000f79f@vates.tech>
 
-> Hi Andrew,
->
-> Thanks a lot for the quick response.
->
->
->> On 23/10/2026 8:32 am, Peter Deggendorfer wrote:
->>> Hey Xen Team,
->>>
->>> I'm hitting a reproducible hypervisor panic in the AMD non-fatal MCE
->>> polling path on a Ryzen 9 5950X (Zen 3). Eight occurrences since
->>> 2026-09-09, between 12 hours and 2 weeks apart, always CPU 2.
->>>
->>> Environment
->>> -----------
->>> Xen:   4.20.4-pre (Debian 4.20.3+127-gc42374a105-0+deb13u1), and still
->>>         present in 4.20.5-pre (Debian 4.20.4+39-gf1e1321c87-0+deb13u1)
->>> dom0:  Linux 6.12.111+deb13-amd64 (Debian trixie), PV, 32 vCPUs
->>> CPU:   AMD Family 25 (0x19) Model 33 (0x21) Stepping 2, Ryzen 9 5950X,
->>>         microcode 0x0a201210
->>> Cmdline: dom0_mem=4096M,max:4096M ucode=scan console_timestamps=datems
->>>
->>> The panic
->>> ---------
->>> (XEN) [2026-10-19 08:58:18.727] Xen BUG at
->>> arch/x86/cpu/mcheck/mce_amd.c:100
->>> (XEN) CPU:    2
->>> (XEN) RIP:    e008:[<ffff82d04028a650>]
->>> mce_amd.c#mc_ec2type.part.0+0/0x10
->>> (XEN) rbx: 0000000000000445   r12: 0000000000000011   r15:
->>> 0000000000000446
->>> (XEN) Xen code around <ffff82d04028a650>:
->>> (XEN)  90 90 90 90 90 90 90 90 <0f> 0b 90 90 90 90 90 90 90 90 90 90
->>> 90 90
->>> (XEN) Xen call trace:
->>> (XEN)    [<ffff82d04028a650>] R mce_amd.c#mc_ec2type.part.0+0/0x10
->>> (XEN)    [<ffff82d04028a699>] S mc_amd_recoverable_scan+0x39/0x40
->>> (XEN)    [<ffff82d04028cfdd>] S mcheck_mca_logout+0x42d/0x840
->>> (XEN)    [<ffff82d04028a35c>] S
->>> amd_nonfatal.c#mce_amd_checkregs+0x1c/0x100
->>> (XEN)    [<ffff82d040240e8c>] S smp_call_function_interrupt+0x4c/0x90
->>> (XEN)    [<ffff82d0403123d5>] S do_IRQ+0x2a5/0x650
->>> (XEN)    [<ffff82d040201915>] S common_interrupt+0x135/0x150
->>> (XEN)    [<ffff82d0402883ca>] S 
->>> cpu_idle.c#acpi_idle_do_entry+0x8a/0x140
->>> (XEN)    [<ffff82d0402887cf>] S
->>> cpu_idle.c#acpi_processor_idle+0x1ef/0x650
->>> (XEN)    [<ffff82d040302cf1>] S domain.c#idle_loop+0xc1/0x130
->>> (XEN) Panic on CPU 2
->>>
->>> The outlined mc_ec2type.part.0 contains nothing but the ud2, so this is
->>> the "unreachable" default branch of mc_ec2type() -- the extended error
->>> code matches none of MC_EC_TLB_TYPE, MC_EC_MEM_TYPE, MC_EC_BUS_TYPE.
->> I think it's safe to just drop the BUG().
->>
->> That code is literally worse than useless, because if nothing else it's
->> just hiding the diagnostics.
->>
->> I guess it means AMD have added new statuses.
->>
->>> Across the eight occurrences, r12 appears to be the bank index from the
->>> loop in mcheck_mca_logout(), with rbx == 0x401 + 4 * r12 (MCi_STATUS)
->>> and r15 == rbx + 1. Three different banks are involved: 10, 17 and 23.
->>>
->>> Not a hardware defect
->>> ---------------------
->>> - Started within days of upgrading two hosts from Debian bookworm
->>>    (Xen 4.17) to trixie (Xen 4.20). They had run 3 years on 4.17 
->>> with no
->>>    incident.
->>> - Three different banks, so not a single failing block.
->>> - Updating to the current Debian package (4.20.5-pre, built 2026-10-16)
->>>    changed nothing.
->>>
->>> Possibly related: 532988dccc19 ("x86/mcheck: fix mca_allbanks
->>> updating").
->>>
->>> Also possibly related on the Linux side: 0422b07bc4c2 ("x86/mce/amd:
->>> Filter bogus hardware errors on Zen3 clients"), where bogus MCA values
->>> on Zen 3 are filtered rather than treated as errors.
->>> https://ratatoskr.run/stable/2026/04/7143905
->>  From above, you're on a Vermeer, not a Cezanne, so I don't think that
->> Linux patch is relevant.
->>
->> However, your observation about "fix mca_allbanks updating" quite
->> possibly is.  That was backported into Xen 4.20.1 as 247b708b1400a, and
->> Debian has 4.20.3
->>
->> Are you able to experiment with that patch reverted?
->>
->> Alternatively, are you able to experiment with the BUG() removed?
->
-> I went with dropping the BUG() rather than the revert.
-> Reverting 247b708b1400a should stop any bank from being read at
-> all, which is effectively what mce=false already does here, so I don't
-> expect it to tell us anything new. I'll run it too if you'd like.
->
-> I'm not familiar with the Xen codebase, but I've built a package with
-> mc_ec2type() changed to:
->
->     if ( errorcode & MC_EC_TLB_TYPE )
->         return MC_EC_TLB_TYPE;
->
->     printk(XENLOG_WARNING "MCE: unknown AMD error code %#x\n", 
-> errorcode);
->
->     return 0;
->
->
-> Crashes have been 12 hours to 2 weeks apart, so it may take a while
-> before I can report back.
+Hi Teddy,
 
-After ~31 hours of uptime:
+Thanks for the reset improvements. Could the new reset-time sync
+call use a dedicated discard operation instead? That would also cover
+suppressed postings without changing ordinary pending-interrupt queries.
 
-(XEN) [2026-10-25 04:06:27.260] MCE: unknown AMD error code 0
+xen/arch/x86/hvm/vlapic.c:
+@@ -1429,6 +1432,13 @@ static void vlapic_do_init(struct vlapic *vlapic)
+> +    /*
+> +     * Drain the posted interrupt descriptor (and clear its ON bit) before
+> +     * zeroing the IRR, so that vectors posted before the reset don't get
+> +     * merged into the fresh IRR by a later sync.
+> +     */
+> +    hvm_sync_pir_to_irr(vlapic_vcpu(vlapic));
 
-No panic, no wedged CPU, no RCU stalls, no hung guests. Host and all
-VMs running normally.
+PIR (Posted Interrupt Request) records pending vectors. ON means
+Outstanding Notification, while SN (Suppress Notification) suppresses
+non-urgent notifications, not the recording of interrupts. The
+switch-out hook sets SN for a non-blocked target. An IOMMU posting can
+then leave PIR nonempty with ON=0 before reset starts.
 
+The existing vmx_sync_pir_to_irr() in xen/arch/x86/hvm/vmx/vmx.c returns
+before touching PIR in that state:
 
-I also dumped /dev/mcelog in dom0 and got the following records:
+>     if ( !pi_test_on(desc) )
+>         return;
 
-00000000: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-00000010: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-00000020: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-00000030: 0000 0000 0000 0000 0200 0000 0000 0000  ................
-00000040: 0010 0201 0200 0000 0000 0000 0200 0000  ................
-00000050: 1c01 0000 0000 0000 0000 0000 0000 0000  ................
-00000060: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-00000070: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-00000080: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-00000090: 0000 0000 0000 0000 0000 0000 0000 0000  ................
-000000a0: 0000 0000 0000 0000 0200 0000 0000 0000  ................
-000000b0: 0017 0201 0200 0000 0000 0000 0200 0000  ................
-000000c0: 1c01 0000 0000 0000 0000 0000 0000 0000  ................
-000000d0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
+Consequently the new call can leave an old vector in PIR while reset
+clears IRR (Interrupt Request Register). It can later be transferred
+into the fresh IRR. This is a pre-existing reset gap, not a new
+regression introduced by this patch.
 
+Checking PIR as well as ON in vmx_sync_pir_to_irr() would add reads
+to ordinary pending queries, including hvm_vcpu_has_pending_irq().
+Reset instead wants to discard the bits regardless of ON.
 
->
->
->>> Diagnostics / workaround
->>> ------------------------
->>> mce_verbosity=verbose yields nothing useful.
->>> max_cstate=1 made no difference. mce=false is the only thing that stops
->>> it, and it is what I'm running now.
->> The fact that mce=false isn't causing machine resets means it's clearly
->> something the hardware thinks isn't fatal.
->>
->> But, I am concerned by the fact it's always on CPU 2, and multiple
->> banks.  Is this true for both systems?
->
-> To clarify one thing from my report: it is actually a single host whose
-> complete hardware (board, CPU, RAM) was replaced on
-> 2026-10-07, keeping only the disks and thus the installation. The
-> crashes happened both before and after that swap. 10 more hosts
-> with same hardware still run on bookworm (xen 4.17) for years now
-> without any incidents.
->
-> So yes, always CPU 2. The bank index varies: on the current hardware
-> I have seen banks 23, 17 and 10 across four crashes, and banks 23 and
-> 17 on the previous hardware.
+What do you think? Would replacing the new call with this optional
+backend hook fit this patch better?
 
-Regarding the output of /dev/mcelog: if my decoding is right, three
-things stand out. MCi_STATUS is zero, i.e. these banks are reporting
-nothing at all -- no error, no garbage value. Both records are again
-from CPU 2, and bank 23 is one of the banks that appeared in the
-panics, bank 16 is new.
+diff --git a/xen/arch/x86/hvm/vlapic.c b/xen/arch/x86/hvm/vlapic.c
+--- a/xen/arch/x86/hvm/vlapic.c
++++ b/xen/arch/x86/hvm/vlapic.c
+@@ -1433,11 +1433,11 @@ static void vlapic_do_init(struct vlapic *vlapic)
+         return;
+ 
+     /*
+-     * Drain the posted interrupt descriptor (and clear its ON bit) before
+-     * zeroing the IRR, so that vectors posted before the reset don't get
+-     * merged into the fresh IRR by a later sync.
++     * Discard posted interrupts before resetting the APIC registers,
++     * including suppressed postings which have not set ON.
+      */
+-    hvm_sync_pir_to_irr(vlapic_vcpu(vlapic));
++    if ( hvm_funcs.reset_pir )
++        alternative_vcall(hvm_funcs.reset_pir, vlapic_vcpu(vlapic));
+ 
+     vlapic_set_reg(vlapic, APIC_LVR, VLAPIC_VERSION);
+ 
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -2437,6 +2437,17 @@ static void cf_check vmx_sync_pir_to_irr(struct vcpu *v)
+     }
+ }
+ 
++/* Discard posted interrupts without depending on notification state. */
++static void cf_check vmx_reset_pir(struct vcpu *v)
++{
++    struct pi_desc *desc = &v->arch.hvm.vmx.pi_desc;
++
++    (void)pi_test_and_clear_on(desc);
++
++    for ( unsigned int i = 0; i < ARRAY_SIZE(desc->pir); ++i )
++        (void)xchg(&desc->pir[i], 0);
++}
++
+ static bool cf_check vmx_test_pir(const struct vcpu *v, uint8_t vec)
+ {
+     return pi_test_pir(vec, &v->arch.hvm.vmx.pi_desc);
+@@ -3176,6 +3187,7 @@ const struct hvm_function_table * __init start_vmx(void)
+ 
+         vmx_function_table.deliver_posted_intr = vmx_deliver_posted_intr;
+         vmx_function_table.sync_pir_to_irr     = vmx_sync_pir_to_irr;
++        vmx_function_table.reset_pir           = vmx_reset_pir;
+         vmx_function_table.test_pir            = vmx_test_pir;
+     }
+ 
+@@ -3212,6 +3224,7 @@ void __init vmx_fill_funcs(void)
+ 
+     vmx_function_table.deliver_posted_intr = vmx_deliver_posted_intr;
+     vmx_function_table.sync_pir_to_irr     = vmx_sync_pir_to_irr;
++    vmx_function_table.reset_pir           = vmx_reset_pir;
+     vmx_function_table.test_pir            = vmx_test_pir;
+ }
+ 
+diff --git a/xen/arch/x86/include/asm/hvm/hvm.h b/xen/arch/x86/include/asm/hvm/hvm.h
+--- a/xen/arch/x86/include/asm/hvm/hvm.h
++++ b/xen/arch/x86/include/asm/hvm/hvm.h
+@@ -218,6 +218,8 @@ struct hvm_function_table {
+     void (*process_isr)(int isr, struct vcpu *v);
+     void (*deliver_posted_intr)(struct vcpu *v, u8 vector);
+     void (*sync_pir_to_irr)(struct vcpu *v);
++    /* Discard pending posted interrupts and notification state on reset. */
++    void (*reset_pir)(struct vcpu *v);
+     bool (*test_pir)(const struct vcpu *v, uint8_t vector);
+     void (*handle_eoi)(uint8_t vector, int isr);
+     int (*pi_update_irte)(const struct vcpu *v, const struct pirq *pirq);
 
+The ON clear is before clearing PIR, preserving the required
+clear-ON-before-draining-PIR ordering (see vmx_sync_pir_to_irr()).
 
->
->>> One more thing: the host does not actually reboot after the panic.
->>> "Reboot in five seconds" is printed, but the ring buffer continues with
->>> normal activity minutes later and the remaining 31 CPUs keep running.
->>> CPU 2 stays wedged, and "xl debug-keys t" then hangs. Afterwards dom0
->>> and guest vCPUs start losing timer interrupts permanently (RCU stalls
->>> with a frozen timer-softirq count while dynticks keeps advancing), so
->>> VMs hang silently hours or days later.
->> I've recently noticed that crashing with interrupts off doesn't reboot
->> any more.  I thought it was something local to my development, but
->> apparently not if you're seeing the same.
->>
->>>
->>> I've attached the full xl dmesg log of the last crash, and I'm happy
->>> to provide more if needed. I can also test patches.
->>>
->>> Thanks for your work, and thanks in advance for taking a look.
->>>
->>> Peter
->> Thankyou,
->>
->> ~Andrew
->
-> I have full xl dmesg logs for almost all crashes. Happy to send any of
-> them.
->
-> Peter
->
+The helper needs only the inline descriptor, so initial LAPIC setup
+can call it before VMCS creation. The hook is optional and installed
+for VMX posted-interrupt support, including the vmx_fill_funcs() entry.
 
+For the series as posted, and also with the suggested change above
+incorporated:
+
+Assisted-by: Copilot:gpt-6-astra-high, Copilot:gpt-6.1-sol-high-xhigh-max # review
+Reviewed-by: Bernhard Kaindl <bernhard.kaindl@citrix.com>
+
+cu, Bernhard
+
+-- 
+Bernhard Kaindl <bernhard.kaindl@citrix.com>
 
