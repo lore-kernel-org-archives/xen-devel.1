@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CA3C9606A31F
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 11:45:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3044A606A32D
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 11:52:27 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=YUCzyx3I
-Received: from list by lists.xenproject.org with outflank-mailman.1461160.1672121 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=IrO+cZ5R
+Received: from list by lists.xenproject.org with outflank-mailman.1461170.1672130 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLJ8m-00078a-Ob; Mon, 26 Oct 2026 11:45:24 +0000
+	id 1xLJFP-0000w9-H1; Mon, 26 Oct 2026 11:52:15 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461160.1672121; Mon, 26 Oct 2026 11:45:24 +0000
+Received: by outflank-mailman (output) from mailman id 1461170.1672130; Mon, 26 Oct 2026 11:52:15 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLJ8m-00078T-Ks; Mon, 26 Oct 2026 11:45:24 +0000
-Received: by outflank-mailman (input) for mailman id 1461160;
- Mon, 26 Oct 2026 11:45:23 +0000
+	id 1xLJFP-0000w0-Di; Mon, 26 Oct 2026 11:52:15 +0000
+Received: by outflank-mailman (input) for mailman id 1461170;
+ Mon, 26 Oct 2026 11:52:14 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xLJ8l-00078N-8d
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 11:45:23 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLJFO-0000vu-5D
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 11:52:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLJ8k-002yeP-LU
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 12:45:22 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xLJFN-002zsk-Hl
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 12:52:13 +0100
+Received: from [10.42.69.1] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6adf3d4a-e002-0a2a0a5209dd-0a2a45068d2a-16
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 12:45:22 +0100
-Received: from [209.85.221.54] (helo=mail-wr1-f54.google.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6adf3ee7-bab6-0a2a0a5309dd-0a2a4501b7d2-8
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 12:52:09 +0100
+Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6adf3d4f-195a-0a2a45060019-d155dd36e958-3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 12:45:19 +0100
-Received: by mail-wr1-f54.google.com with SMTP id
- ffacd0b85a97d-48bbb06e746so1461297f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 04:45:19 -0700 (PDT)
+ id 6adf3ee8-5984-0a2a45010019-d155dd2fe4bf-3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 12:52:09 +0100
+Received: by mail-wr1-f47.google.com with SMTP id
+ ffacd0b85a97d-48df54150dfso1547662f8f.0
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 04:52:09 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ece5e4asm15746738f8f.59.2026.10.26.04.45.18
+ 5b1f17b1804b1-4a35a2c0458sm188873725e9.11.2026.10.26.04.52.07
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Oct 2026 04:45:18 -0700 (PDT)
+ Mon, 26 Oct 2026 04:52:08 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,62 +49,61 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Cc:Content-Language:References:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793015119; x=1793619919; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793015528; x=1793620328; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=32CklU4osfQOyiDdLtBdvFTw2mbtForZG4idG0fPPjk=;
-        b=YUCzyx3IzsOxnx0/g15k8Ag1u7K/Qcp7Y/NjJn/WfCNlJWvMEXNkt0ATQVkeDHcILx
-         boCduWoPOPKRaqvGMeAsVxNoAvfdwts3EH4uBPat/ZXfowT92Vx88xO4dMimgDEyRxGh
-         Ic7camErTOq8V6qGJxHh+YTgn2uU8n9EU0f6yHIgqWpNXPg6OzAlMBwGJnKktD4aGrnL
-         2SINDaS3sdNv5kN6jr2WKdwRVtJFx+BV/PYwlT0vCLKFAh22XeDej3bl9dgieBf4uofO
-         LCzudjbM3beUDpUcFD7nHDeo8fXLJdWQULnsjS3R7b+lLARAFA96albsOsDeeIFxeuTl
-         xYBQ==
+        bh=W3lWXWhlqI6TLAxn555Tg9OnJIpaUZQVPl1obFcjvBU=;
+        b=IrO+cZ5RiXHFXcibN6wYlzyjaOqe3KBvcuCfYTYYgXyLHwi4y1a/vTF1RLvJAQgBGF
+         FJDHyHD7eqb8xSLrHOutwG8986ibVN6cy59ubKxRwA17RGmb17nGrM2riw7iPmWLVGAJ
+         0H7ynPnqRy5ATzqO4rbgnSG0v6jNv2ex+S0k3jU83SOQElUdRwsrlb/SuvTDQmLZAJRF
+         OATqlnNxIzwvLn/aUNm5v4ma0NimgAU0wV8DIVv3G8qPvEMeye6ky9DsVQcK93a0gR/m
+         KrDr4DmYufs13IHwTfawaR90ZexJflM6yTAQNen0PAyEubXXqQCx7l9pkhrj3Eab24s1
+         30xw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793015119; x=1793619919;
+        d=1e100.net; s=20260707; t=1793015528; x=1793620328;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :cc:content-language:references:to:subject:user-agent:mime-version
+         :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=32CklU4osfQOyiDdLtBdvFTw2mbtForZG4idG0fPPjk=;
-        b=JuGCxJIMtA501UvKMosnrgwpuBSMmank6LpTidQueClA/JI/zJmJ9tuA5A0ygZz2Rk
-         4LVuadgCq1/G/uIHACopJ3D26HFJbfyqF+xw2dhsykMz1bBCCWf5/fXcRc/SmMRxKig4
-         b1Z6ivCiOo44a0AsZBbb5DyGnENLRIzpo8gcl9jMAQ8msGXe6ggVLlZB04IbaUYAToCU
-         P/tfu3CHNCeaqnhxkuNeJkm4MzJhWqDRexZLyl+h85N3GVA2yz28GZ77Bmucpm+M6pwu
-         lf4nPOCk6257e4g44Ey3IG/vA/gkZpul9ANwQyyKhvGgvuJnh/yWuLKV4jieAo6VzT4B
-         Sq6Q==
-X-Forwarded-Encrypted: i=1; AKwUvBwwl/V1nIFD+Klyl8fh1Xy+RgYFO2bu0cJPmsgcrZOa5/eEgmfxZeAOQTpWrESCXX3Ux5xRFuOnK2E=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKTEaaDAkzhAD6+fy/Be/Fb4v6NOaPjAlus3vhzYjx4hknUnso+
-	W6LMZG0idswqxpzU7cvN/9qraT9jqvKQaHc6l2XM2tgr8OwSUFyxNy8tlArPUe9fpCFB2UUJn+D
-	IyBb4xA==
-X-Gm-Gg: AYBFou15tLS3AhORi58c4fR55rwHAt+78N7egkenNws7xaA+zth6RjeLnhOmis65Lfc
-	GA79bZ8YpHBtBH+VrpiLOFZF2crg/K2/RWI2Aj8gMx74nq8QeUK23U63mwlz3FRtgsevs8SF0IN
-	dKeHZ4Ka3oRB7awBzj/hOOKDEG/Zzta9CYG52lnvTzsVqd0mz9OWkePROyDKtTpLbL/wObZwMP4
-	1ka45TgxbYlxZzavFcYPUnnqJ6hHISHx0pjcaHc9Xz4FU+J1MVCNPURTRTJDF1V4lWVXfGE0LL/
-	UZusVAZQyDBgpmmnJB9+6xr1PESnyPZ+Al4p28tWg654fKJGK7OEoJEFvposiREIhE0hQ+eJpsQ
-	l6mLYENxlnJhyd8V8SWAMrSTrhKZ0xL7T7/8W5hnudd/1wdpuVNDRMWHAuMQWn3rK2kIvUx1i6c
-	w4AGD0F0TJCMNminRyP17BzkicuRI6qyw3DNOMiL83bnI4s5Bcf2KSBX9VBMq3v2+dMgy2j5Z39
-	87qrqLeJl7jKb30YGVB3B+V29L7xAsugl9rUawJHoJlwnf73ROOaFl/ME23nfylhjVKPJr21LHW
-	zxxyTzMUO7Byyc0+Tvt+sACYRioTvIrYUMjLuEpiCECt
-X-Received: by 2002:a05:6000:4809:b0:48b:11df:c496 with SMTP id ffacd0b85a97d-48e3eb8ecb2mr12085181f8f.28.1793015119054;
-        Mon, 26 Oct 2026 04:45:19 -0700 (PDT)
-Message-ID: <c64bc3bb-962d-447e-af38-9c897e7675e3@suse.com>
-Date: Mon, 26 Oct 2026 12:45:17 +0100
+        bh=W3lWXWhlqI6TLAxn555Tg9OnJIpaUZQVPl1obFcjvBU=;
+        b=dpGUu9V0SjFDyV2gIPrH9XnG0qPILjRj/i51YtzteKTjTnyFillzv23sm/HJeJxhcr
+         VcN3t4XZJjVyfRM2t3MZzrXj34IOJWEkBqWNUzsVjGCQP14pqoJqnwB9PBRPBwOFDYc1
+         CSI7vauxU2v/DI7dkv2R/zCf5Yqlqc99AIdWxtuvvjiZDcZW3B5sHXfbysjDhLnXtSzA
+         w52xzd8qFu8NEeUJy8SWzAuq92PoyfPB3iGTAGeAhAlUWVl/nAa2eUNbcGQDTE43GrY6
+         uC3AsIX4AIVWcfl9iXYNSaWowgAX3BgVEhyBt1Dpm6W0eh/Zt2dD5lsixCZSXCk78IbG
+         ky1g==
+X-Forwarded-Encrypted: i=1; AKwUvBz8RkSKy7Elvxy1iai6sWqUj3nJNU26wIrIe6uuLi1c+/7D89+d6ItKwbKFIVZrbTocTd5Jt0dJVlU=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJ8emJoIj9fEBzBvzs6wHVWl+/qatpIxZyWGpqcl2MPiA3VJNoO
+	eFtq+WCWlaaBQFI3aj4ugMVDP7LtNOLBOXq1ZbSwO2OMVgh5q0SMF1x3mlBTSzmDBA==
+X-Gm-Gg: AYBFou2DQbL0u4hqVisUKJzgzd7n8CBAGILpdOXdvmAQPLZR6Qz9fpVffonfvB3/LpY
+	71im9EX8u3eS2Xfa6H1WvFrPaSoXHLU2lylftlgPunidK4ZB/EQ9C7yBUJzkMWRKaPKfDjr1QlU
+	V0etcAKgeNIoj+dLBBlhDRW5T4zPKTwpGyX5cJ3w/tgLxcBLjqUDOpLfod7gxRnSMqXhonYMRRl
+	iBVg9V9zU+G9nH0a1zBKUGF8cjYBjhvdh4lnjUIl6GS989gWz3fy98hBEA3HkpfvMGstZydFtJj
+	EqJ+VTKdQ0xLywvYVIty6t49vAOz61tTcAdjWfU5OJv3YRnUJk9lltR531coQqdboHhJeOferxO
+	jBOslsdqmu6bCbDypaNmAVNt8ahqfOOhBA8PDw+3QRLcG/V4HiPCP9vvw7LGArEdbMo3tCaiCXY
+	qOx2SalM/6gSmDYaeModwLpMhuNJW34bu84B3OmqiuHonAeXXQsh+boMI0V8dZr6iyjtNA4HjmV
+	hDetRrT1iknLXlhppORxc7DxZfYqXd/PPB3zkzrNc9uMjkNSwjMT4XKinmlSk0xpbR7615lgWOa
+	KCl1OEkUqoFHkSxHhsgFc8oLrhbI/eKolMADwNVmeMDy
+X-Received: by 2002:a05:600c:1c0b:b0:4a1:d10c:7170 with SMTP id 5b1f17b1804b1-4a35acbf94amr164558055e9.31.1793015528555;
+        Mon, 26 Oct 2026 04:52:08 -0700 (PDT)
+Message-ID: <ba1b6345-880f-4b84-8a29-d5197f5f4082@suse.com>
+Date: Mon, 26 Oct 2026 12:52:07 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/altp2m: pause the vCPU before taking the altp2m list
- lock
-To: lluisbessasanz <lluisbessasanz@proton.me>
-References: <20261020072806.465449-1-lluisbessasanz@proton.me>
-Content-Language: en-US
-Cc: evilbootloader@proton.me, xen-devel@lists.xenproject.org,
+Subject: Re: [PATCH v2] x86/np2m: flush the np2m on an SVM nested TLB flush
+To: Stephen Cheng <stephen.cheng@citrix.com>
+Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
  Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Tamas K Lengyel <tamas@tklengyel.com>
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <7757cb6d-78d2-4d73-bfee-f9d5db8f15a1@citrix.com>
+ <20261021021028.123867-1-stephen.cheng@citrix.com>
+Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
  xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
@@ -129,100 +128,49 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261020072806.465449-1-lluisbessasanz@proton.me>
+In-Reply-To: <20261021021028.123867-1-stephen.cheng@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-16d1c6/1793015119-FEC7777B-224265F8/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-d62444/1793015529-C4B45757-6E2FBA08/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 3536
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-purgate-size: 1512
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 20.10.2026 09:28, lluisbessasanz wrote:
-> From: Lluís Bessa <evilbootloader@proton.me>
+On 21.10.2026 04:10, Stephen Cheng wrote:
+> On SVM, L1 flushes what is cached from its nested page tables by setting
+> TLB_CONTROL or using a new ASID on VMRUN.  Either sets nv_flushp2m, which
+> p2m_get_nestedp2m_locked() handles by only dropping nv_p2m.  Since np2ms
+> are shared between vCPUs, the lookup then finds the np2m for the same
+> N_CR3 and reuses it as is, so L2 keeps the mappings from before L1 changed
+> its NPT.
 > 
-> p2m_switch_vcpu_altp2m_by_id() takes the altp2m list lock and then
-> updates the vCPU's EPTP. For a vCPU other than current,
-> vmx_vcpu_update_eptp() -> vmx_vmcs_enter() pauses it and waits in
-> vcpu_sleep_sync() until it is off its pCPU, with the lock still held.
+> The obvious fix, flushing nv_p2m (the np2m this vCPU used last) before
+> dropping it, is not enough.  It covers a vCPU re-entering the same N_CR3,
+> but not one entering an N_CR3 whose np2m another vCPU filled: on its
+> first VMRUN (nv_p2m is NULL), with an ASID new to it, or when switching
+> N_CR3.
 > 
-> A vCPU on its way off its pCPU may need the p2m lock: context_switch()
-> updates its runstate area, which for an area registered by guest virtual
-> address (VCPUOP_register_runstate_memory_area, as Linux does) is a copy
-> to guest memory and needs a p2m lookup. A vCPU handling a log-dirty
-> write fault holds the host p2m lock in p2m_change_type_one() and waits
-> for the altp2m list lock in p2m_altp2m_propagate_change(). That closes
-> a cycle:
+> Instead, flush the np2m for the incoming N_CR3 before reusing it, as
+> nested VMX does via np2m_flush_base() on INVEPT.
 > 
->   dom0 vCPU, vm_event_resume() -> p2m_altp2m_check():
->     holds the altp2m list lock, waits for vCPU X to be descheduled
->   vCPU X, context_switch() -> update_runstate_area():
->     waits for the host p2m lock
->   vCPU Y, hvm_hap_nested_page_fault() -> p2m_change_type_one():
->     holds the host p2m lock, waits for the altp2m list lock
-> 
-> A vm_event consumer switching views in its responses
-> (VM_EVENT_FLAG_ALTERNATE_P2M) hits it with a Linux HVM guest while QEMU
-> tracks dirty VRAM for a VNC client. The dom0 vCPUs involved spin in Xen
-> and stop handling interrupts, and dom0 hangs.
-> 
-> Pause the vCPU before taking the lock, like
-> p2m_switch_domain_altp2m_by_id() does with domain_pause_except_self().
-> The pause in vmx_vmcs_enter() then finds the vCPU already descheduled.
-> Only vm_event_resume() switches another vCPU's view, the other callers
-> switch current and are unaffected.
-> 
-> Signed-off-by: Lluís Bessa <evilbootloader@proton.me>
-> Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+> Fixes: 6df4b481b0c5 ("x86/np2m: implement sharing of np2m between vCPUs")
+> Signed-off-by: Stephen Cheng <stephen.cheng@citrix.com>
+> Assisted-by: Claude:claude-opus-5-5
+> Reviewed-by: Ross Lagerwall <ross.lagerwall@citrix.com>
 
-The code change itself looks good to me, but as to the tags: The latter
-one wants to be Assisted-by: and move ahead of your S-o-b (tags want to
-be chronologically ordered). And then there's the issue of sender and
-(last) S-o-b not agreeing. Yes, the "real" names are pretty similar, yet
-even if they were identical that still wouldn't mean it's one and the
-same person. Is there a reason you can't use an S-o-b matching the email
-address you send from?
+Tags want ordering differently: For one, it wasn't Ross who indicated that
+he used Claude for the review. See docs/process/sending-patched.pandoc. And
+then tags want sorting chronologically anyway: You can't possibly sign-off
+on a patch before having finished making use of AI assistance.
 
-You also would have wanted to Cc maintainers plus perhaps Tamas. Added
-now, and hence retaining full patch contents below.
+With that adjusted (can be done while committing):
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
 Jan
-
-> --- a/xen/arch/x86/mm/altp2m.c
-> +++ b/xen/arch/x86/mm/altp2m.c
-> @@ -220,6 +220,17 @@ bool p2m_switch_vcpu_altp2m_by_id(struct vcpu *v, unsigned int idx)
->      if ( idx >= d->nr_altp2m )
->          return rc;
->  
-> +    /*
-> +     * Updating another vCPU's EPTP (vmx_vmcs_enter()) waits until that vCPU
-> +     * is off its pCPU. Wait for it before taking the altp2m list lock: the
-> +     * vCPU may need the p2m lock to get off its pCPU (to update its runstate
-> +     * area in guest memory), while a vCPU handling a log-dirty fault holds the
-> +     * p2m lock and waits for the altp2m list lock in
-> +     * p2m_altp2m_propagate_change().
-> +     */
-> +    if ( v != current )
-> +        vcpu_pause(v);
-> +
->      altp2m_list_lock(d);
->  
->      if ( d->arch.altp2m_eptp[idx] != mfn_x(INVALID_MFN) )
-> @@ -230,6 +241,10 @@ bool p2m_switch_vcpu_altp2m_by_id(struct vcpu *v, unsigned int idx)
->      }
->  
->      altp2m_list_unlock(d);
-> +
-> +    if ( v != current )
-> +        vcpu_unpause(v);
-> +
->      return rc;
->  }
->  
-
 
