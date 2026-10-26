@@ -2,51 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7FEDF606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 15:45:36 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3B258606A330
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 15:58:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=FdsCSts1
-Received: from list by lists.xenproject.org with outflank-mailman.1461563.1672603 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=dVlZPLdJ
+Received: from list by lists.xenproject.org with outflank-mailman.1461569.1672611 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLMt5-0007Jb-RS; Mon, 26 Oct 2026 15:45:27 +0000
+	id 1xLN55-0001HP-Rq; Mon, 26 Oct 2026 15:57:51 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461563.1672603; Mon, 26 Oct 2026 15:45:27 +0000
+Received: by outflank-mailman (output) from mailman id 1461569.1672611; Mon, 26 Oct 2026 15:57:51 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLMt5-0007JU-Oi; Mon, 26 Oct 2026 15:45:27 +0000
-Received: by outflank-mailman (input) for mailman id 1461563;
- Mon, 26 Oct 2026 15:45:26 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a178e3435d000f79f@swg.vates.tech>)
- id 1xLMt4-0007JO-QR
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 15:45:26 +0000
+	id 1xLN55-0001HI-PH; Mon, 26 Oct 2026 15:57:51 +0000
+Received: by outflank-mailman (input) for mailman id 1461569;
+ Mon, 26 Oct 2026 15:57:50 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLN54-0001HC-QN
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 15:57:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLMt4-001FRc-6h
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 16:45:26 +0100
-Received: from [10.42.69.1] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a178e3435d000f79f@swg.vates.tech>)
- id 6adf758b-bab6-0a2a0a5309dd-0a2a45019bd4-14
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 16:45:26 +0100
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-d62444.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a178e3435d000f79f@swg.vates.tech>)
- id 6adf7595-5984-0a2a45010019-b9ff1c238c8b-3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 16:45:26 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a178e3435d000f79f.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 26 Oct 2026 15:45:22 +0000
-Received: from [192.168.1.52] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
- [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 8B48282DF1;
- Mon, 26 Oct 2026 16:45:21 +0100 (CET)
+ id 1xLN53-00DoXa-SP
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 16:57:49 +0100
+Received: from [10.42.69.8] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6adf787c-bab6-0a2a0a5309dd-0a2a450882ba-8
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 16:57:49 +0100
+Received: from [209.85.221.52] (helo=mail-wr1-f52.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <oleksii.kurochko@gmail.com>)
+ id 6adf787d-f659-0a2a45080019-d155dd34c92b-3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 16:57:49 +0100
+Received: by mail-wr1-f52.google.com with SMTP id
+ ffacd0b85a97d-48df4e9d2d4so1904597f8f.3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 08:57:49 -0700 (PDT)
+Received: from [192.168.1.6] (user-109-243-67-71.play-internet.pl.
+ [109.243.67.71]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e3ebc3cfasm17406383f8f.17.2026.10.26.08.57.48
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Oct 2026 08:57:48 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,111 +49,196 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=3iTpoL8EcMZ4L6Ryf3agD04fX5xoZ/qbbHE9UjQiYj0=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=FdsCSts1p6trT95a7xdNiC7vcQtVRkneTGMRNThLQSmhR2bTzn7rCQzIIZOyUslwm2I2gUlZi
- JZ12lveeFRMCipRt139hEH9TQ2yWjszXX63QBezdM1EszvLuwD9o6GzihpNAf/k5Y78Yw7enN0g
- OWoYLPnP97qn9VqD5qiTg8kZtPQj7uNeSUOl/ewprx6ah1tJPZJqFzKFMO0pTqSa7CxCMaN5/Dl
- v24jp7uGwopf6uiepZQ8WGsWS3diPUIZ0+4GEREjh/Wd1d5Joqw+l9hvTyUqqemoe1oodMjBM6D
- gZYekzajlW39HukHpn/c6lM/C8KK68FY+rfb1Q3NBeeA==
-X-Zone-Loop: 2b38d39917260e345895130d6d7d5b60655f269e6d48
-x-campaign-type: default
-x-transaction-id: f0212e72-3b36-4ee9-bf9b-50bd82370a21
-x-swg-uid: 01-89386fc9-5936-45e4-b249-1ceef817d0d8
-X-Mailer: Sweego
-Message-ID:
- <1793029522.8631fc262581453bbf619ec5b2062170.1a178e3435d000f79f@vates.tech>
-x-swg-bid: 1793029522.8631fc262581453bbf619ec5b2062170.1a178e3435d000f79f
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=gmail.com; s=20251104; t=1793030269; x=1793635069; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=JFhhu5ovKUBIg9TAMhLW10LefbdjfH3YcvGTaCA2Ej4=;
+        b=dVlZPLdJCnsJ+uCczB/wCksFsTZPW/ExwUJ/Ujxxvcd6tiz8gfrFnUJv85UkeG7qvX
+         WAkBQ71CbDXWuu0Mm2r/pDMNV1ZkPxCV7F9E5ojyMfQl1LOUbiGiPzy0eBVv3Y8vn2Db
+         G8dTKkJyqttIxe7TDMqWHtEQnEy5mmXsI0o/W0ykmxXGMhgT2MVuEjYklHs+Wxkb1OeZ
+         rw0VFvxdOAHc0bSYrcYcF4wiDCCc2nFjCSQQuLB+W4ZnX8bdCpYvu+dp7THWwWbRsEBz
+         s5PcAHpMBIU5BiVKRYg+aD3GSqYlqTc7S3M5BxUuGG8R4V+Y5BDZSmVhzhwpZhdjQubS
+         eYIw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793030269; x=1793635069;
+        h=content-transfer-encoding:content-type:in-reply-to:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=JFhhu5ovKUBIg9TAMhLW10LefbdjfH3YcvGTaCA2Ej4=;
+        b=HoDmWGufk/lFo3K2ZVxxq9zwo4CnRh4bP5uyOhVatYWMchSZEnPWtFPjjc937JyebN
+         YY/mM+IF8ma2qAvH8KSzDhs5e6Ptgb+StjeFvQ3uGAVBXj3kAAATRy5JhUrBIl71bPLf
+         MK90mM2vj6RrVqxkHWPRvqkZKQCd0q23Xf201w6wFL7vUuCoHv+s2TzXE5tKJKLO1EsQ
+         ZHnkO2NejM6E0qH8+pTIwK7D6GeQjl9G1qHnn+z3DzW7BvAFEpTuVy+dJcpgGDNTUBie
+         uPkH3dg7TeuNqpC8NDlFmtT3pFo+qta09oDW17lDC8H8/S8ZvutWzcQ3GIAWPsHt/VJ2
+         oOlQ==
+X-Forwarded-Encrypted: i=1; AKwUvBz1Fyj285kK7fCWo7/4Y5CNzJypll5gmEMMiR8Ytv5ScKILbaDv/Q30pguCqfvgwS49PeaME6Xg+KE=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYL2MgPR6ax1h/ezjKtmHBRgRRuv7zPiYSvVfFc7/xbHZib4X20f
+	5r4upxvZ+OJM0ywwj7thREUB8RGnxOgqp+1ygedyK7JeD/WNogjnevoi
+X-Gm-Gg: AYBFou3A447x1Ppx4vz3oXipxCj/jBMOtvXjuF1LZJKEFjioAVtvzzrg/dE6qKj8qA/
+	cL1fiN+TN1taatXrb5RZbV8rUHdJhz7KuEWcm8U/pHH1AsXRuyTXT/qsd21zozdf03ak2iHC+9h
+	49mPTyxT1rB1ZyOz4gLhEjr7Jcj6DH42q+uexDtaFVQgiRDpuJKVl/hfFvfTMODyoG4mUcuqtHm
+	vayGRpbHp9jaxwoEJfv816wzczbDP0CEq3R1/j/lHlLYAIkbBprJfJ1v2s1c/LHfbJD8R48du2t
+	kmQR/oRV7l9PlpEpEUJqirSfFacrmIh7/c+RhjKyfW4ocsfpzPWR6APgwQffooTaaXUqi7DpE8L
+	3LpY5pjJ2NYpn97KEUYpv1tNYOV7lKm1+w42jJhct+FkUeXsxbnInS//0J18zrs11DrX8gmp3SS
+	KLrhF5Z0lcQZwY3tbw8e7n4KFv/i6ryH2Th4jfC1t/NfG+y/4ky889w0jRcD+SsB+IykBAxQ9nF
+	sAscFFGwsjjwFTnR2ZDoJGgCkqMjHnWVinda3osULz5Mx0/SeINKPxyocpWN59SKj6fC1sc0+MQ
+	2kjMLjdx+tYGX2l2++Oxto1DdtBz
+X-Received: by 2002:a5d:5d10:0:b0:48d:f485:5f34 with SMTP id ffacd0b85a97d-48e3eba1377mr13336006f8f.45.1793030269118;
+        Mon, 26 Oct 2026 08:57:49 -0700 (PDT)
+Message-ID: <812f1dac-216f-4fef-8213-1b7c8caeb2c7@gmail.com>
+Date: Mon, 26 Oct 2026 16:57:47 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v3 1/2] xen/ns16550: identify XScale UARTs from device
+ tree
+To: Zhang Zheng <zhangzheng@iscas.ac.cn>, xen-devel@lists.xenproject.org
+Cc: Alistair Francis <alistair.francis@wdc.com>,
+ Connor Davis <connojdavis@gmail.com>,
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
+ Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
+References: <cover.1792467713.git.zhangzheng@iscas.ac.cn>
+ <3e8fac86f88d9d3d002b86469b87c20aea53fcef.1792467713.git.zhangzheng@iscas.ac.cn>
+Content-Language: en-US
+From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+In-Reply-To: <3e8fac86f88d9d3d002b86469b87c20aea53fcef.1792467713.git.zhangzheng@iscas.ac.cn>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-Subject: Re: [PATCH v8 4/5] xen/riscv: probe the A/D update scheme if the
- DT advertises neither
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- xen-devel@lists.xenproject.org, Andrew Cooper <andrew.cooper3@citrix.com>, 
- Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, Zheng Zhang <zhangzheng@iscas.ac.cn>
-In-Reply-To: <9986e03e-bf09-46b6-9d2a-82a1864a59b5@gmail.com>
-References: <1793027589.8631fc262581453bbf619ec5b2062170.1a178c5c430000f79f@vates.tech>
- <1793027685.8631fc262581453bbf619ec5b2062170.1a178c73a5d000f79f@vates.tech>
- <9986e03e-bf09-46b6-9d2a-82a1864a59b5@gmail.com>
-Date: Mon, 26 Oct 2026 16:45:16 +0100
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793029516; l=1759;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=JZk+aPlATWEyKnEQluI9lZT6R5vUUhJ41ClUJtJF5cc=;
- b=V3PfGUG9r7rUnsCizTJOdZDry9AfUoVnyWm5YQ1xJfxjxsEn1pZppatxzAC8Yfm5UlnlsovdW
- 1JV6PVMPurMCVXBp+i5Y7aB+ymaPGGmIjX0QjDft65A7orE/OAEUWY+
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1793029521759
-X-purgate-ID: tlsNG-d62444/1793029526-C5146757-CB8363EF/0/0
-X-purgate-type: clean
-X-purgate-size: 1759
-X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=no autolearn_force=no version=4.0.1
+X-purgate-ID: tlsNG-c1860d/1793030269-CC57487B-E4830916/10/73395122804
+X-purgate-type: spam
+X-purgate-size: 4299
+X-Spam-Status: No, score=-13.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FORGED_GMAIL_RCVD,FREEMAIL_FORGED_FROMDOMAIN,
+	FREEMAIL_FROM,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,
+	INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 2026-10-26 16:35:44+01:00, Oleksii Kurochko wrote:
-> On 10/26/26 4:14 PM, Baptiste Le Duc wrote:
-> 
-> > +/*
-> > + * Probe whether hardware updates the PTE A/D bits by writing to a local
-> > + * variable through an alias mapping whose A and D bits are clear.
-> > + *
-> > + * Check the D bit rather than the A bit, as the A bit may be set
-> > + * speculatively while the D bit can't.
-> > + *
-> > + * Under Svade, the store raises a page fault instead, so use the extable to
-> > + * handle it.
-> > + */
-> > +static bool __init probe_hw_ad_update(void)
-> > +{
-> > +    unsigned int probe_target;
-> > +    vaddr_t va = FIXMAP_ADDR(FIX_MISC) + PAGE_OFFSET(&probe_target);
-> > +    pte_t *entry = &xen_fixmap[FIX_MISC];
-> > +    bool d_set = false;
-> > +
-> > +    ASSERT(!pte_is_valid(*entry));
-> > +
-> > +    /*
-> > +     * Any page in use will do, so alias the stack page this code runs on,
-> > +     * with A and D clear. Store to a variable of its own, so that nothing
-> > +     * the compiler relies on gets overwritten.
-> > +     */
-> > +    write_pte(entry, pte_from_mfn(maddr_to_mfn(virt_to_maddr(&probe_target)),
-> > +                                  PTE_VALID | PTE_READABLE | PTE_WRITABLE));
-> > +    flush_tlb_one_local(va);
-> > +
-> > +    asm_inline goto (
-> 
-> I think that generally this code should be wrapped by "#ifdef 
-> CONFIG_CC_HAS_ASM_GOTO_OUTPUT" but we can keep it as is here as we don't 
-> use output operands.
->
-Yes I didn't see any sense to use it as, from my understanding, its
-aimed to be use when we want to have label as output operand which is
-not our case here.
-> [ ... 81 lines skipped ... ]
-> Generally, looks good to me:
-Thanks!
 
--- 
-Baptiste Le Duc <baptiste.le-duc@vates.tech>
+
+On 10/20/26 5:45 AM, Zhang Zheng wrote:
+> Identify XScale UARTs using intel,xscale-uart, since IER bit 6 has other
+> meanings on some UART variants. Keep UUE set when writing IER so the
+> UART stays enabled when switching to polling, and enable RTOIE along
+> with receive interrupts.
+> 
+> Signed-off-by: Zhang Zheng <zhangzheng@iscas.ac.cn>
+> ---
+>   xen/drivers/char/ns16550.c  | 29 +++++++++++++++++++++--------
+>   xen/include/xen/8250-uart.h |  2 ++
+>   2 files changed, 23 insertions(+), 8 deletions(-)
+> 
+> diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
+> index be388c8e65..1f54155d67 100644
+> --- a/xen/drivers/char/ns16550.c
+> +++ b/xen/drivers/char/ns16550.c
+> @@ -64,6 +64,7 @@ static struct ns16550 {
+>       bool intr_works;
+>       bool force_polling;
+>       bool dw_usr_bsy;
+> +    bool xscale;
+>   #ifdef NS16550_PCI
+>       /* PCI card parameters. */
+>       bool pb_bdf_enable;     /* if =1, pb-bdf effective, port behind bridge */
+> @@ -168,6 +169,14 @@ static void ns_write_reg(const struct ns16550 *uart, unsigned int reg, u8 c)
+>       }
+>   }
+>   
+> +static void ns_write_ier(const struct ns16550 *uart, u8 ier)
+
+Nit: please use uint8_t in new code.
+
+> +{
+> +    if ( uart->xscale )
+> +        ier |= UART_IER_UUE;
+> +
+> +    ns_write_reg(uart, UART_IER, ier);
+> +}
+> +
+
+[...]
+
+>   
+>   #ifdef CONFIG_ARM
+> @@ -749,16 +759,16 @@ static int __init check_existence(struct ns16550 *uart)
+>        * there's no point trying anything else.
+>        */
+>       scratch = ns_read_reg(uart, UART_IER);
+> -    ns_write_reg(uart, UART_IER, 0);
+> +    ns_write_ier(uart, 0);
+>   
+>       /*
+>        * Mask out IER[7:4] bits for test as some UARTs (e.g. TL
+>        * 16C754B) allow only to modify them if an EFR bit is set.
+>        */
+>       scratch2 = ns_read_reg(uart, UART_IER) & 0x0f;
+> -    ns_write_reg(uart,UART_IER, 0x0F);
+> +    ns_write_ier(uart, 0x0f);
+>       scratch3 = ns_read_reg(uart, UART_IER) & 0x0f;
+> -    ns_write_reg(uart, UART_IER, scratch);
+> +    ns_write_ier(uart, scratch);
+>       if ( (scratch2 != 0) || (scratch3 != 0x0F) )
+>           return 0;
+
+check_existence() is only reached from ns16550_parse_port_config()
+(i.e. never for a DT-described UART), and for MMIO UARTs it returns
+early anyway, so uart->xscale is always false here. I don't mind the
+conversion for consistency, but then please mention it in the
+description, together with the 0x0F -> 0x0f / missing blank style
+changes.
+
+
+>   
+> @@ -2034,6 +2044,8 @@ static int __init ns16550_uart_dt_init(struct dt_device_node *dev,
+>   
+>       uart->dw_usr_bsy = dt_device_is_compatible(dev, "snps,dw-apb-uart");
+>   
+> +    uart->xscale = dt_device_is_compatible(dev, "intel,xscale-uart");
+> +
+>   #ifdef CONFIG_ARM
+>       uart->vuart.base_addr = uart->io_base;
+>       uart->vuart.size = uart->io_size;
+> @@ -2055,6 +2067,7 @@ static const struct dt_device_match ns16550_dt_match[] __initconst =
+>       DT_MATCH_COMPATIBLE("ns16550"),
+>       DT_MATCH_COMPATIBLE("ns16550a"),
+>       DT_MATCH_COMPATIBLE("snps,dw-apb-uart"),
+> +    DT_MATCH_COMPATIBLE("intel,xscale-uart"),
+>       DT_MATCH_COMPATIBLE("brcm,bcm2835-aux-uart"),
+>       { /* sentinel */ },
+>   };
+> diff --git a/xen/include/xen/8250-uart.h b/xen/include/xen/8250-uart.h
+> index d13352940c..5709a6c91b 100644
+> --- a/xen/include/xen/8250-uart.h
+> +++ b/xen/include/xen/8250-uart.h
+> @@ -42,6 +42,8 @@
+>   #define UART_IER_ETHREI   0x02    /* tx reg. empty        */
+>   #define UART_IER_ELSI     0x04    /* rx line status       */
+>   #define UART_IER_EMSI     0x08    /* MODEM status         */
+> +#define UART_IER_RTOIE    0x10    /* Receive timeout interrupt enable (XScale) */
+
+This line is 81 characters long. Perhaps something like
+"/* rx timeout (XScale)  */" to also match the style of the
+surrounding comments?
+
+> +#define UART_IER_UUE      0x40    /* UART unit enable (XScale) */
+
+A side question, not for this patch: Linux uses a 32-byte
+FIFO for PORT_XSCALE 
+(https://elixir.bootlin.com/linux/v7.3/source/drivers/tty/serial/8250/8250_port.c#L147), 
+while here fifo_size will end up being detected as 16. Is that intentional?
+
+The code change itself looks fine to me.
+
+~ Oleksii
 
