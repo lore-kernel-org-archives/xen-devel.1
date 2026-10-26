@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 486B1606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 16:46:45 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2FD75606A31A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 16:47:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=XemL/NC1
-Received: from list by lists.xenproject.org with outflank-mailman.1461600.1672649 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Al5cAL/H
+Received: from list by lists.xenproject.org with outflank-mailman.1461608.1672656 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLNq3-0002U9-4L; Mon, 26 Oct 2026 16:46:23 +0000
+	id 1xLNrJ-0002zd-Bf; Mon, 26 Oct 2026 16:47:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461600.1672649; Mon, 26 Oct 2026 16:46:23 +0000
+Received: by outflank-mailman (output) from mailman id 1461608.1672656; Mon, 26 Oct 2026 16:47:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLNq3-0002U1-07; Mon, 26 Oct 2026 16:46:23 +0000
-Received: by outflank-mailman (input) for mailman id 1461600;
- Mon, 26 Oct 2026 16:46:21 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xLNq1-0002Tv-Fd
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 16:46:21 +0000
+	id 1xLNrJ-0002zW-93; Mon, 26 Oct 2026 16:47:41 +0000
+Received: by outflank-mailman (input) for mailman id 1461608;
+ Mon, 26 Oct 2026 16:47:40 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLNrI-0002zQ-Ia
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 16:47:40 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLNq0-0058YT-7c
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 17:46:20 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xLNrH-007lt5-VN
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 17:47:39 +0100
+Received: from [10.42.69.7] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6adf83d1-8faa-0a2a0a5109dd-0a2a4503dc86-16
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 17:46:20 +0100
-Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <oleksii.kurochko@gmail.com>)
- id 6adf83dc-fae8-0a2a45030019-d155dd2fc854-3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 17:46:20 +0100
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-48c4d870d54so1917725f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 09:46:20 -0700 (PDT)
-Received: from [192.168.1.6] (user-109-243-67-71.play-internet.pl.
- [109.243.67.71]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ece13aasm16238676f8f.58.2026.10.26.09.46.18
+ (envelope-from <jbeulich@suse.com>)
+ id 6adf8419-e002-0a2a0a5209dd-0a2a4507d02e-26
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 17:47:39 +0100
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6adf842b-b4ea-0a2a45070019-d155dd31c890-3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 17:47:39 +0100
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-48c4d870d54so1918546f8f.2
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 09:47:39 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e3ebcb902sm18257927f8f.24.2026.10.26.09.47.38
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Oct 2026 09:46:19 -0700 (PDT)
+ Mon, 26 Oct 2026 09:47:38 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,160 +49,104 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793033180; x=1793637980; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=suse.com; s=google; t=1793033259; x=1793638059; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=OVqijri3Coex1U/Y+HLIuqBZhqmkYm1Dyejt+PNag44=;
-        b=XemL/NC1vKv9u+PPFGSEUsNRGUkk9AGEa1YhOFhSgjzk0TBXLKRE1tM+jfmWb+PlVA
-         yrZzkJHRU8SqPKMCLooDDqWhaODTpBsR6fILBL6hSY2aFt8eW+6BQjb2yO+QPo1LtZUl
-         A8/wj6i0zFE6ItC4cyY129gRheUNamNOpuopjpZlU+WBUFAHVEJtpRfO17EzppbmcKlu
-         /zkm8qeh1QkyPNwU4I0yfWEjHZcUKOfpDEgEJK3EzQlhU8Ifk1WsGlJ38qX0QTd2iYTd
-         9jRF+XVkkYgBUfdkAl0CaWa5/qaddf1Oegysyxp2KHB1xJL3sTfmMAO4dOsVOdwBMmPK
-         Dv4Q==
+        bh=iAf5uxPV3dqLf1y5npVN1ioosjLkGMccQTf7bTfhxSI=;
+        b=Al5cAL/H+XiVnYWAs5XxiwuawgX5QG7gMmeFSD505ptcJl+uXJ8QF7lthSfKwGFDQf
+         TDtCVqaszyLtWxk8aVO8O7Ws+ySgVeFAPW0NW8rYS6xp02CpGQkQoghkzKlqiuDJca68
+         DMYvs3qhl3GcPYoOjfXPDdbvDwvuled5UA/cVEQlSHX68ltrvcNRdDFY+gvo/HL6kdKW
+         YzoZoIXgApOK+SsTLgRAwGbywRmpBOHBKKhMMtXqGC6o1Mr7JRn+DAa3FB0w8S3DeY4X
+         yKueV0/K0YMtL9/fWjWHWPp/RujnjsgV0LqRbqAX2VdU/OLRO7pW/oRwY7xRSiDIhjqI
+         ry5w==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793033180; x=1793637980;
-        h=content-transfer-encoding:content-type:in-reply-to:from
+        d=1e100.net; s=20260707; t=1793033259; x=1793638059;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=OVqijri3Coex1U/Y+HLIuqBZhqmkYm1Dyejt+PNag44=;
-        b=D82UEsgW6g/XdoQG74SFEwI7up3GdscqUzh3IxH3fJDIPd2l4/Hx4dPQIjX5EMd+aL
-         I8dP2v/ArwckivtJ4QWALHbXs6aJpt4TSHshBshKLLOOzv78VCtJdP/o38G5HLZYtr49
-         06L0kT81DIDUH+S5T3F2X0qo6/RN3eZZNwg8YxJrY8XiDOLVjpugFqPf2GZ0+DoNup6a
-         5qEaTUtmCvBCs/a23/Se8+YiuaRZZ29xOnyjJtCA48qJoS0OqBCZo4BCJEzSzg22jWwq
-         soCt5IO0uAjupw/neuRv5bWlxtd8TImcoWvDL0k/4YDvgvbHBCR2XAyqcAzBoaplTkv/
-         FmlQ==
-X-Forwarded-Encrypted: i=1; AKwUvByHCsEqQpL163ynjP7JriH0Op5YS627QQgkMpzdRFyXzNepmImq6FOXYFx4zN32syeArieKrN7sX+w=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYK2C9BG6neb61G0pAqiUnq5m2yRzVA0D8rIb/7g5GGEEFkDmEH4
-	hUDlznmOQDlh4U+9ac2kJot0sCIdMhZahm/y3VTziQP+Bd1SjdrJCZQo
-X-Gm-Gg: AYBFou1gV31btqIrRwLKtDUoa/AN8d9tA5T5bnfid2ksXiYSrmUmhJzlIDjn+JaT10b
-	r6fBJbXOSeRo8/H59AvFV4dAtaZmSzkXUx/Wwlcb84rkH5e61vAW3s+AiCXc1WeJ9RvhNOemLJc
-	rlUFdSWRAjWE/cUsEARoOK8xze38KRIBbj3t2qZ6pXnUkMaCZ4E6cpbB53lh/u0znZgGTMqo6b/
-	PsCfiQUJvVVElB64SYtAX/b3DJiBVZeLo+GOoBXd0Y/20uAfEzy//SEvtLn83TvCdCJPXSmmynO
-	IQ/IvgUc3h3gPROSyBrQMbVTD7Xlvuu6ka/KvNNDP7b0XDroUCvkpDJ1XT9n7IR3KhOU1NiMnzK
-	M++h6kWyTgA/jQdhSWUdxusrZdGcC+SCGW8WLQAtApS/DWATmgAXBXKJSyCXDkh7K6qfPzsOzyh
-	Xur8gHIvt4z+t6mbsF+RKY+ltSXFjYrVkF9y0OUi9wlWGBmIvad8T0FLa+z9NbA++XSGQfVx4BS
-	OLMIBDPQ3SH2wHYHi7A11vGUcKAXyjo6NSZWPmIR4ObWCbYkhNuhequgBhYBRRWGLtD9LkmB98B
-	NPBCyH7yAS8WtAT+/Rqe4l5Iviqq
-X-Received: by 2002:a05:6000:2410:b0:48e:44c7:bf0f with SMTP id ffacd0b85a97d-48e44c7bfeemr12077412f8f.25.1793033179324;
-        Mon, 26 Oct 2026 09:46:19 -0700 (PDT)
-Message-ID: <9bd50f03-721f-4750-915f-e7ea7553cc92@gmail.com>
-Date: Mon, 26 Oct 2026 17:46:18 +0100
+        bh=iAf5uxPV3dqLf1y5npVN1ioosjLkGMccQTf7bTfhxSI=;
+        b=XLe/0B3uMEEEd8AOLh6UmXvimvY+nKKQojB5/fl/KrSi/9FSRt9HX/rqBOtoYvpiTO
+         1TVJcc8Gr+WJnDlp+kpOMpJolSHpTTgeHMfNFsO5QJYsuf1+iS2gdyWzYdkkH1D1Px0y
+         2aa5PElCawKSq32zWfgmN2hYjl9ysm7FdOLfdncL1A39nb+1J2TsePuJehE6hUBOAAZE
+         l9NKlLz9LPqd27YDcEhmmnipIc4xL63Vz74oH29a2wbBIyUmD/AcOPUTD7uIWHrhuB7L
+         dxZZJjRLHIpNJ2Yf+HXPsy/SjqwqJZrrPQAViUWXurWmv6bslt5rDUhb4sXogYV1hla+
+         XKdw==
+X-Forwarded-Encrypted: i=1; AKwUvBzd2oge9XLAss/Wmdz6/lWj6I/4GqyE0En3yq2bDZPuUZsROksJbGW1jxck6zoYSNI0yeALUXv+png=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYK03kaM7xDszfwy3lGoXD5QkL6XV11SbhsnWph03O7DclTtjwqK
+	sLUC+4RfHeWcIf0co6iTR3s3SjMOk9F42HkBCzxSMgTk8hNVhgOVuIFBY+AxLPW17JXdLOUXF0k
+	FNzqfsg==
+X-Gm-Gg: AYBFou39kncfBmr7WGqdRO4Slvs/A6nPXyjA99XRan75ATujyDZkgjDMkY/Trj8xBBW
+	T60C4iiPJr3i+1WMOhl37nRB9Kt8tqD3d+al7xkIYl4OhuWydNB5izKtxaUwiWJd3SpDlVsAssd
+	okpylO63Y0UaVU7TtWKAy3jBHQXqVQPLVGdDUQ9M+yALHTbREmxGdkxOjW4stnIPSB35xLKXt0Z
+	u1+UUuuqVTD7SCz5Vq+ks9JxpI8u3CJHU3KaWBYQz3Mn/3BP84zzCJFBOya3eTmefTLtSZ+Mgf1
+	7hiALV/F3qGUKaTj70dA7yVp3CQhrB4TUyQ/eP/abe0pbG3JpeM0AGO5Dd+0KmZVzyeKnivLDs8
+	JsliW9RkQ7JmPrt8kSYtTxSX44qnEcwusRUyeglefbnm6pKuSeIeEmbdTS5FoocrYstyucZh4zT
+	ZlbICQqOsVR5uwJcyNfFB8jrw1tjJkoEBe5fj7i/yMwBRQH/6GlIQud6pBrFdCJyIero69gYmqD
+	h7CZ8ucgpjptNWgnww3FUvCjoIXgffoixHspe068ohl5APAxZvhJ1eAWxarcIbyR2r0c83vpOzo
+	2q69wF8eX5udKeo/LYbeUHNJuGGwHLvrlvSPre07A4w=
+X-Received: by 2002:a05:6000:612:b0:48d:b650:69aa with SMTP id ffacd0b85a97d-48e3eba5700mr13927070f8f.50.1793033259069;
+        Mon, 26 Oct 2026 09:47:39 -0700 (PDT)
+Message-ID: <21702cbe-7506-4b2c-a0e9-80d9fabb33c8@suse.com>
+Date: Mon, 26 Oct 2026 17:47:37 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v3 2/2] xen/ns16550: drain TX before reinitializing the
- UART
-To: Zhang Zheng <zhangzheng@iscas.ac.cn>, xen-devel@lists.xenproject.org
-Cc: Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>,
- Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>,
- Julien Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
- <roger@xenproject.org>, Stefano Stabellini <sstabellini@kernel.org>
-References: <cover.1792467713.git.zhangzheng@iscas.ac.cn>
- <938aadfc32c531f934291fdff3763cdefd5849e6.1792467713.git.zhangzheng@iscas.ac.cn>
+Subject: Re: [PATCH v2] x86/nestedhvm: Inline nestedhvm_vcpu_in_guestmode()
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ xen-devel@lists.xenproject.org
+References: <1793029157.8631fc262581453bbf619ec5b2062170.1a178ddb234000f79f@vates.tech>
 Content-Language: en-US
-From: Oleksii Kurochko <oleksii.kurochko@gmail.com>
-In-Reply-To: <938aadfc32c531f934291fdff3763cdefd5849e6.1792467713.git.zhangzheng@iscas.ac.cn>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <1793029157.8631fc262581453bbf619ec5b2062170.1a178ddb234000f79f@vates.tech>
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1793033180-778F24E9-9E076842/10/73395122804
+X-purgate-ID: tlsNG-ef75cf/1793033259-A5CC7AE4-363BC314/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 3119
-X-Spam-Status: No, score=-14.2 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 259
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-
-
-On 10/20/26 5:45 AM, Zhang Zheng wrote:
-> Drain pending output before resetting FIFOs. Bound the wait to avoid
-> hanging boot if the UART never reports empty.
+On 26.10.2026 16:38, Teddy Astie wrote:
+> This function just returns vcpu_nestedhvm(v).nv_guestmode and would
+> be better inlined to improve codegen.
 > 
-> Wait for TEMT (which already implies THRE on a 16550) to ensure
-> transmission has finished before reconfiguration. uart->lsr_mask normally
-> checks only THRE, which indicates room for more output.
-> 
-> Signed-off-by: Zhang Zheng <zhangzheng@iscas.ac.cn>
-> ---
->   xen/drivers/char/ns16550.c | 15 +++++++++++++++
->   1 file changed, 15 insertions(+)
-> 
-> diff --git a/xen/drivers/char/ns16550.c b/xen/drivers/char/ns16550.c
-> index 1f54155d67..29f784280e 100644
-> --- a/xen/drivers/char/ns16550.c
-> +++ b/xen/drivers/char/ns16550.c
-> @@ -410,6 +410,12 @@ static void ns16550_setup_preirq(struct ns16550 *uart)
->   static void __init cf_check ns16550_init_preirq(struct serial_port *port)
->   {
->       struct ns16550 *uart = port->uart;
-> +    cycles_t start;
-> +    /*
-> +     * Too early for proper time calibration, assume a 5GHz CPU and let it wait
-> +     * about 1s, with still reasonable timeout on a slower CPU.
-> +     */
-> +    cycles_t timeout_ticks = 5UL * 1000 * 1000 * 1000;
+> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 
-Shouldn't we use here ULL? 5UL * 1000 * 1000 * 1000 > MAX_unsingned_long 
-on 32-bit platforms, at least, for arm33 and riscv32 unsigned long is 
-4-byte type?
-
-Also, I think that the comment should be updated as get_cycles() doesn't 
-count CPU cycles:
-  - on RISC-V it reads the time CSR, which ticks at the timebase
-    frequency. E.g. on SpacemiT K1 that's 24MHz, so the "about 1s"
-    becomes ~208s; with QEMU virt's 10MHz it's ~500s.
-  - on Arm it reads CNTPCT, again typically in the tens of MHz range,
-    with similar results.
-
-So it won't be 1s for that arch-s.
-
-Also for Arm and RISC-V preinit_xen_time() runs before 
-console_init_preirq(), so time is already usable at this point if I am 
-not mistaken something so "Too early for proper time calibration" sounds 
-incorrect.
-
->   
->   #ifdef CONFIG_HAS_IOPORTS
->       /* I/O ports are distinguished by their size (16 bits). */
-> @@ -427,6 +433,15 @@ static void __init cf_check ns16550_init_preirq(struct serial_port *port)
->   #endif
->       }
->   
-> +    /*
-> +     * Drain firmware/early-console output before changing line settings or
-> +     * resetting FIFOs. Wait for TEMT so the shift register is empty too.
-> +     */
-> +    start = get_cycles();
-> +    while ( !(ns_read_reg(uart, UART_LSR) & UART_LSR_TEMT) &&
-
-This is done before pci_serial_early_init() (called from
-ns16550_setup_preirq()), so for a PCI UART (specified via
-<port-bdf> / <bridge-bdf> or found via "pci") whose decoding hasn't
-been enabled by firmware, the LSR read may still return all ones.
-With TEMT set in that value, the wait is then simply skipped. That's
-harmless, but perhaps worth a word in the description or a code
-comment.
-
-
-> +            get_cycles() - start < timeout_ticks )
-> +        cpu_relax();
-> +
->       ns16550_setup_preirq(uart);
->   
->       /* Check this really is a 16550+. Otherwise we have no FIFOs. */
-
-~ Oleksii
+Acked-by: Jan Beulich <jbeulich@suse.com>
 
 
