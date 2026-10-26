@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 73707606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 07:18:41 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ACEDB606A31F
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 07:18:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=uIT0i8Mv
-Received: from list by lists.xenproject.org with outflank-mailman.1460785.1671634 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=aBtMg1Nm
+Received: from list by lists.xenproject.org with outflank-mailman.1460787.1671643 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLEyJ-0003ia-Jy; Mon, 26 Oct 2026 07:18:19 +0000
+	id 1xLEyQ-00040X-28; Mon, 26 Oct 2026 07:18:26 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1460785.1671634; Mon, 26 Oct 2026 07:18:19 +0000
+Received: by outflank-mailman (output) from mailman id 1460787.1671643; Mon, 26 Oct 2026 07:18:26 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLEyJ-0003iT-H1; Mon, 26 Oct 2026 07:18:19 +0000
-Received: by outflank-mailman (input) for mailman id 1460785;
- Mon, 26 Oct 2026 07:18:18 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xLEyP-00040L-Uo; Mon, 26 Oct 2026 07:18:25 +0000
+Received: by outflank-mailman (input) for mailman id 1460787;
+ Mon, 26 Oct 2026 07:18:24 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <chunjie.zhu@citrix.com>) id 1xLEyI-0003i1-2w
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 07:18:18 +0000
+ (envelope-from <chunjie.zhu@citrix.com>) id 1xLEyO-0003yO-PM
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 07:18:24 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLEyH-003Mc1-Fm
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 08:18:17 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xLEyO-00FYxb-6K
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 08:18:24 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <chunjie.zhu@citrix.com>)
- id 6adefeb3-bab6-0a2a0a5309dd-0a2a4505e26e-30
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 08:18:17 +0100
-Received: from [40.107.201.53]
- (helo=CH4PR04CU002.outbound.protection.outlook.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6adefebc-e002-0a2a0a5209dd-0a2a4502d00a-12
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 08:18:24 +0100
+Received: from [52.101.43.53]
+ (helo=SJ2PR03CU001.outbound.protection.outlook.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <chunjie.zhu@citrix.com>)
- id 6adefeb8-4cb1-0a2a45050019-286bc93529fb-3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 08:18:17 +0100
+ id 6adefebe-6ca4-0a2a45020019-34652b35a76c-3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 08:18:23 +0100
 Received: from LVXPR03MB989161.namprd03.prod.outlook.com
- (2603:10b6:408:37e::6) by DS6PR03MB235817.namprd03.prod.outlook.com
- (2603:10b6:8:418::17) with Microsoft SMTP Server (version=TLS1_2,
+ (2603:10b6:408:37e::6) by DS0PR03MB989640.namprd03.prod.outlook.com
+ (2603:10b6:8:42d::18) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Mon, 26 Oct
- 2026 07:18:14 +0000
+ 2026 07:18:20 +0000
 Received: from LVXPR03MB989161.namprd03.prod.outlook.com
  ([fe80::f728:f8a9:4e0c:d902]) by LVXPR03MB989161.namprd03.prod.outlook.com
  ([fe80::f728:f8a9:4e0c:d902%5]) with mapi id 15.21.0546.021; Mon, 26 Oct 2026
- 07:18:13 +0000
+ 07:18:20 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,20 +54,20 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=LRz+n1fV4FdueZ28Yy0I71M0wplELay1oFsFAdUYtKm9e8s4ZJG92gvBjQzs8Ldt3fERlX1+kFpGu/p9TWNa/1XZ5F0OpnsSXxgXJzYajfdACkJB2OoXJ7kH4sgbKL4qcVcR5lASvr9X8lh/cYiJ1H9+cNIiY1YTTqWjtDHZDvy0/HuzHGyVK2vm8DOoce/S+EZSPZo3ztirlOquBvqF42qRs34N3oEL28l19TW4xucFSAo9k9uG+oBjkxwxTYXSdQd+PnGYqqXPt6mmo/mHv1HsIGbOJxt+QiHxBmKituhrhd8PnjBBp/GN9v1McT51+dE/0MIS0Yoir36Q1HJf5g==
+ b=WuHMNDm5VMzhCRxFnceL8RVGBbzdWssoqJ1W+/vI6BxYTfbnI16EO0W7+ainvBToOlRYXY6++t1TvnLBFLZUV2aa215BdTQ+5d9wZjWV43mM7uAHFUYb98+g5rRcOIwkuSBzQ4E9rlkqcs0lvxJ29AZqmw/v5keuSqIW8CZltilw+TxxjH9XfXT0J03s0p2iWKNgPF/kCPOY5BRl4oVJYI6CjaYgj4hwWDXQDXkRmJRommviWpxh8+mxaIk38yPW0Y6AURTa2ohJqOFcsXtlFTqPVwU8GYkNMUqdjBUqNlU5F/aHeWdCTYNZ5aDl1fP3SbGkKZzrLPvtBBfHrCoTBw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=uOROdr3Lsj2WWcWL/9pNfOId1Ctpk0JV6ASZ1lvZtqo=;
- b=q8cSowPU6HZvURRCNWe3aIV+Rtj8Ih5TnB1UqtAEAMuhmkPYvuMiaHs96E6p1gdrZhQBlsa8A0fA8K4SImML+VPJBEFEPA8C9WUGDWgEwlP9Ubukuzt0TkyYI25BvhNFSiINzoZKaKhnBtah4UZEo0Rdw6WTwDCw/ReF2rBGHN4rhJbeBmYMDRpJLRbzMY8EUQzDLuXUNmuMxOiLslL90RTAlucPnWfXf+1uvMpoxdTHrCVFRGDeTdXJYtSmwc2V8K4zndNV2rKE5B/aJHbKGsVGzIFuqdMNnSQoXJr1yCcx11KHljqcnA1h1J74i86RJ6q7q6a7XqKHPSEIA9vX0w==
+ bh=LIpvwqXiW4c9cb/0X0lfQu2ZpnfZOAOIuulOf744hT4=;
+ b=xoL+3sPtGTubXWhHy+PsJytlTQ9HUMM5hROSzGpywhyQFhPrEoQ9Gwh71kMaBC9/xDx+pQFFot7Fh/8FG1hE4/WBSXyWqzNeZsk1jrLtg7TOr9v8zaGXPvp7NJuLume+PkgGvGYSFciemxYNvNvwymBaJExY68lj6u8VrEFl84Nb2glYsZIw+OBI0nkFCjYA4oQkX1jYV1vtBGWRHNHY7p0g9nvSfJs8CMYIGqtZIvVysDa296EsqcpQnLyLjDdcqyAblnKRzUHIkIH0TWDSDR2PE//XQ6AcAL4ZZC6xaH8Lu1xhlshM8CPUpQfARc+anVgJTsHHxhm/VBbIXL6T7g==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
  dkim=pass header.d=citrix.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
  s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=uOROdr3Lsj2WWcWL/9pNfOId1Ctpk0JV6ASZ1lvZtqo=;
- b=uIT0i8MvSbEIQF12wpvg/bbHYtNpGTyPErsfqdv0kNJz+NDtXGPTVYOklWtF5+m/lA1abAQcSmzXVsmZbzd+tqNtW5+VUSoeGRT+EnMY59zCKrDBSi0dU0VFfJBwxoRKW9vJRfHj2XEJuFTaR0P6rs6jBsKalIfZnC8tAt52E4c=
+ bh=LIpvwqXiW4c9cb/0X0lfQu2ZpnfZOAOIuulOf744hT4=;
+ b=aBtMg1NmYZ+VbaBXpbUaK14rUhhiJ+V6Dxr4WZbd2vAvSkbxKlvVeHznL7+NTYW8M2phoNppH2j0TWU0hO3McjS0WScCTV3zHU0/ge9RxsbJaJxOhV0vV5dl/wT/FkY893qPf9a9BVt2exxIaUW0cJaa64LrjRmbljSs4baoR3I=
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=citrix.com;
 From: chunjie.zhu@citrix.com
@@ -81,76 +81,76 @@ Cc: andrew.cooper3@citrix.com,
 	sstabellini@kernel.org,
 	dpsmith@apertussolutions.com,
 	Chunjie Zhu <chunjie.zhu@citrix.com>
-Subject: [PATCH V1 1/8] x86/nestedvmx: Preserve hardware access bits in reflected EPT violations
-Date: Mon, 26 Oct 2026 15:17:47 +0800
-Message-Id: <50dc000032bd10afa369f9ce83fcfa237aba957a.1792997742.git.chunjie.zhu@citrix.com>
+Subject: [PATCH V1 2/8] x86/nestedvmx: Implement nhvm_hap_walk_L1_p2m2
+Date: Mon, 26 Oct 2026 15:17:48 +0800
+Message-Id: <aa37a7931dfe62cf81c0ee3ed3b9cdfe3d5abb28.1792997742.git.chunjie.zhu@citrix.com>
 X-Mailer: git-send-email 2.34.1
 In-Reply-To: <cover.1792997742.git.chunjie.zhu@citrix.com>
 References: <cover.1792997742.git.chunjie.zhu@citrix.com>
 Content-Transfer-Encoding: 8bit
 Content-Type: text/plain
-X-ClientProxiedBy: FR2P281CA0186.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:9f::20) To LVXPR03MB989161.namprd03.prod.outlook.com
+X-ClientProxiedBy: SI3PR03CA0002.apcprd03.prod.outlook.com
+ (2603:1096:4:297::9) To LVXPR03MB989161.namprd03.prod.outlook.com
  (2603:10b6:408:37e::6)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: LVXPR03MB989161:EE_|DS6PR03MB235817:EE_
-X-MS-Office365-Filtering-Correlation-Id: bef12410-81c7-4a15-325d-08df33314c20
+X-MS-TrafficTypeDiagnostic: LVXPR03MB989161:EE_|DS0PR03MB989640:EE_
+X-MS-Office365-Filtering-Correlation-Id: 72eacd58-1b4b-48aa-befd-08df33315037
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|23010399003|1800799024|376014|261009223027099003|261022105027099003|261021121427099003|261021123027099003|10067099003|56012099006|3023799007|22082099003|18002099003|11063799006;
+	BCL:0;ARA:13230040|366016|23010399003|1800799024|376014|261009223027099003|261021135927099003|261021121427099003|261021123027099003|261022105027099003|10067099003|56012099006|22082099003|18002099003|11063799006;
 X-Microsoft-Antispam-Message-Info:
-	5n9jwZcN62MZ6FjMkC5Is4C3FldMWDH0ZSb9E0bwGLjcmNHrkSNjlFZkhB50+wqFJkav7+gN2wUjPi6DlMG0chT/wxSSHUKi64grbQu77dhCoGHxHHRUn7ojMFQL4oE91mdYexY5qpJgVPVoHAtQziIHoE0W7f8bbobdLzdSdq2DAZ6jx616fuI7pXg1XZex2Amhq/VBMKBa6/3ZqbZLyMylGktAPXgIA1Z1ulHAg/qO6rR43cvIrXE/clnunZT6JHD4rURsOGX1ncIvWQOij3kAVkBWtTpKZBF2kzNNliJA4VTbdN+elhowjJM/lOsRGL8A/4je8gQjC23GM9CvTHLz+9CzLX7F6goQiu0gqx1Fu6NaHgFSvu6vfpy2KU4mRLzct0Qk11//qJ0iEi9X5rSoS7k0yRqZYhdZnas2L5x30GkNHgRrmKKovHaJrCVV3DoqudKDchcuG2D/h2hJhSIHqAerjXfNB1j9QvytuI1Z35W56wsu6mN/nsGBQo9SqRC+lMGAkFuW27AKwb2OzhE/3ay9YbKsay44zeJxJDz3YnhcTtXW0njBOtiSS5JimOSzF/InvMW+dT6eFiLyqkAHo0GLIxX96AJMqzpxJqR5q2TFfxrrRY1Sg88Z5jyr/nSFGaSZmLlUezRJmu0ejmKLB+2FPD3M/PXog758K9A=
+	IMmS1zqpvXCL6jeaM4Fykn/HW215Uon9JJ4cE/vqk75IKPbagGkk3VY/5IVyJbXtBaWLvDLOQgzuPACKVQ3m1TmjeeXb+EcJ4AoPr8oBZrJOs3tLyf+hFYG1yCDxUSBVO25nsVANmLMr3GTJLclHxuMM6M6OK47B0ff3DtEmmBLcwGPKCBD0gAen8NdjzF9XkBcKTp8K4GP1XacfaoBgJZ/jPvYcJUMxWsi+Sve9A09lsBBRNjUqOyj0rBuw0+5zj+GmIj1Mi/BPVzENZeMgcAyLO4/tZVsTg/pFRjpoKA3M4dAGmxXU9S9mKR87egaAgBJ0gtUvkipqL7UMlZtxr9joMnNgkiC0tdCsF22PynlD9FYibnyncvfciPnRMH47qGOCInGaQdsMfUKflt0dlFsibBjDx5HrUxux//HReupr3SncZ0Z/04SmkB0ppfOgLJCTRqsAIH0gb/t9W3thB39ltF86Aep0eZdJBvuIa7l/g2UpOWQEvBYKoyfIanO1pCcNgtYyB0S7hXQCnDpqtWPnV4dJSoYT8QZRzo2TWWT23+JZiEyJBmBELh0ncR8oQNByoyhMpB3FioKwWNWemAOH2BSQ9LDLOJaoHz7h0EhwBHptjgWtMWGh133uEq09AuQfaJFAZbu5JVVEguPQVSfFZ1a/KQJp1ElGmmZSteg=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LVXPR03MB989161.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(261009223027099003)(261022105027099003)(261021121427099003)(261021123027099003)(10067099003)(56012099006)(3023799007)(22082099003)(18002099003)(11063799006);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:LVXPR03MB989161.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(261009223027099003)(261021135927099003)(261021121427099003)(261021123027099003)(261022105027099003)(10067099003)(56012099006)(22082099003)(18002099003)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?l9w5yx8ga3VUqt1QFZ4CLLl8pmAkmvcfOtVU+8YLUS9kUyCNNsdzYIIYT+M7?=
- =?us-ascii?Q?PcRdgbJL2ArAXL62U7UVCFbRopbrKCaC27fMv4KeNHgum8/qWMNaQmsrMVMq?=
- =?us-ascii?Q?Qd87EF34ImaWlMrXWUJeIsTlkTgAq7zHVurLC7w9tSy8xbdO93binsVcUF+N?=
- =?us-ascii?Q?+76qq/V0/zJ/R2wLK01mIr6C+KhH5mG0A9lmckzVRdWJVMmXV5hf6kuNf0Wt?=
- =?us-ascii?Q?qbTtKZdjm9h7cfALH7ZqigjEnGU6G4c+NQMfIXAJfWbiDJ3ZIo+lI1GJ7vya?=
- =?us-ascii?Q?U9EXXzJt85+GmXSrWi72FrBeauVhtkJ4NCAqM3mkTwD+XheW4TWWsl1gpy+p?=
- =?us-ascii?Q?Vleqdix74Vr9tJtcAJzQcIemqkQKpMKqJhg68G4WhVeI7fvf4bUEHLOf8AN2?=
- =?us-ascii?Q?vJutDBtseXpChp7JlCB36wFM5p3edpehkzRhKXWuy31Mqz1H3G94EcTk8D8G?=
- =?us-ascii?Q?rmBkFC/OORoOULB633iZuA8LP77rfBUqfSEe2c0f/9Q5e/Gb23iwBoW2U//y?=
- =?us-ascii?Q?yP1ZkX/eonSP1oso05zGesXgHGO8TqQNjVx7cozlMQJ3XIk0WV0rZzEPtWSK?=
- =?us-ascii?Q?KvmSw0Ur38agbsbz3VYKToFmXVRgVA52YjXdpPVtxd6Hex686wCp4FbMgSV+?=
- =?us-ascii?Q?MgVd0tRj1YggvrLrVDeSllCGWiYQAwq0aj1X44dt4vVd++yo5OApDmgwjnci?=
- =?us-ascii?Q?migrrYC3lRLcNqy5ZCfrCdXBKzSY+RwQDYnfIaAtE85OufDBXeZRV9RVb34k?=
- =?us-ascii?Q?L/0bbq6dP56o1PovRa3kJvx6/C0CndroLux2UAFWnD+q+8Sj1Bj5tipeIoFy?=
- =?us-ascii?Q?ZwtCO9rktpZ7cmFyx9P6rG9LpeOtTwva++UlAW6Od2PkYqQoeieVWecCR+qR?=
- =?us-ascii?Q?nBKKX3cI1jUOAs693HiwPp9C6aST3Nj9S/AplvlYCqOOZ7/6RrlRMZWVppsy?=
- =?us-ascii?Q?TmfvwtSmLYNxaSEHImiujfHkf6a4W8co/uV0AjzofAwZRZJ9rh/NhUCdRDll?=
- =?us-ascii?Q?W5zb+ZM/nUxDQO2stmO5VDA3QchWONVAfQgXKoCwXo9k7zKSSdAfVAEkg3ui?=
- =?us-ascii?Q?CWQeSTNDPKY5IhXkzx61Z04gDONhKQyLhECGOw7iLOm/J3spfDAYKcQqg9WP?=
- =?us-ascii?Q?2XMJebG6TXwdwoRlnM/H6iX+rY70EMpwaZ7VoTJObxWcgPTSH3MasN7Pf0VJ?=
- =?us-ascii?Q?7F9YSm4TCnX3t5mjSU/cPCsUwrBraDkw6RsGNHtPrewVHkPRGBeM2vmsPBhV?=
- =?us-ascii?Q?5MWERJuQBVS0IZoVw3sWvd/nLsEthOZcgefgxlNWq/vUE1YRwgBs7ct6hxeK?=
- =?us-ascii?Q?vYzceaBRtdsEXbtKpRNYiZ7vTzo+Q0dxmvtnJc7somiIxyHfRLwmcFw7wuYl?=
- =?us-ascii?Q?TwqJynZyNG6S3oxMwIBFBO0Ts7S72MFW2ioo5Z8REHHcEmMfpAH3alchMSoy?=
- =?us-ascii?Q?ZC6DwNSqLp5Ewatigk4m7e8UbDV7FqNtk8Z65tPQBag36VtS2k9YOAQ2tuOD?=
- =?us-ascii?Q?i4gOoFEgbgPwTzj7gg5xRPnZZbCavj6VULR/Hj78dnxWdv3nL7i2g8YlGhKp?=
- =?us-ascii?Q?rHVbQGKhzubOBehRAevtIjbxk2LT7urGNcifB+/GfH9kwSirEfQP49Ua/YE/?=
- =?us-ascii?Q?cDDEkBXVnCzHPSWnYZk9XzERaTGNl7wv9970EwEoyXKGaY3YOHZWeF6x7Qs3?=
- =?us-ascii?Q?QZX3+mHf0P/vrB8FlY9anU/zJNU38Ht3dMZWCqkSzuuwIgd1/5vttdU4tRg+?=
- =?us-ascii?Q?KZBUJ78Gmw=3D=3D?=
+	=?us-ascii?Q?rwZzSgFPeG/+02WFwZV8LXE9Ism3A0GqAglV9rOoh8WimAUf8xgFQ5acJ0bF?=
+ =?us-ascii?Q?qwrHNvDHVasPQ1HQt9TkFpjK/Uf4Yc5UirGn+atppujxajiATxku9k2QyUo7?=
+ =?us-ascii?Q?axaTHua3ruk0p72Rr2uphrKD1hF7iLlxYu3KnQTYqf9U/0DtFAW2jTGoCUd4?=
+ =?us-ascii?Q?ZhUaUl3rnHLh5INnt20TPCEw8EQnzkouWq1yWPqhvSY/2Eg6pR8p8UHcYwu5?=
+ =?us-ascii?Q?lVWGLahsI3o+8qgeDOv4wVjkkfV5ZGMqyvm7/UOS6Gkcb0ph/VOxPAXNPgLH?=
+ =?us-ascii?Q?LuzOLnyz+TF4ZiJ/nnhkGIOleoFIdUNyaba2HTF4C+YSFt2YOy3OhUoIzR6V?=
+ =?us-ascii?Q?SrpadXTWmZ6S403fJHL8ezSxwcabUuAAuxGWO8Cong+xsv8l3JrixNPryxwm?=
+ =?us-ascii?Q?N3ekz+YO2p+8JMQlCJG6cqYaHHC2CuOKlTmmGB5vYESBitI+hD7xyb+spFPR?=
+ =?us-ascii?Q?X/R7Graln0Zhe2kodvFQVLvTJU4yoMk4sDN/hP6pfEBzgKrFfyV7QTk7Q5A3?=
+ =?us-ascii?Q?zf8NaMqM5TI5dCmGNfcxOBRCS90MeQ6jWC/6OwMDQPYRiEa9+pjLeXh9/ZUD?=
+ =?us-ascii?Q?Sj4IfTLf2QzEcfiYW/0vZoC90pJ+O9z8xmSKGDavDxjz0E4hZRHvdzkYSaFc?=
+ =?us-ascii?Q?3GjcqdosAty0h4Iqdcs9Yjl+gXS6BY9pSKe5tpMLKDGpyjIi4sIDSnPxDBLo?=
+ =?us-ascii?Q?QB3/Y6CfJtVQKtVgnBP4MYbD1TONOQ6xAalnqiAZHs3Ox2YQisdKGCuChdwv?=
+ =?us-ascii?Q?Igo8xxyJ02+j60UXG/Hbna+lrALiWnJ2Qu9qAfgnz0rmGFn8HN5ygajq0LGk?=
+ =?us-ascii?Q?YIGq+8wUr1SIBwvSXp3ttSSIS/pr2oglVYQAQLPPxxw3rtTCHALmpjST4bVV?=
+ =?us-ascii?Q?Sq8V8uCCFKiCRwULpB7sVeqHlN4kRj02D1Hz1mO8Xl34ZQjF8hqT49ii5jJh?=
+ =?us-ascii?Q?1Rj9y2kX2F3LwquBkj21XvZMHm1XdmgIchJ+WuAqZtBZIYn1s/ZgDngUzIHO?=
+ =?us-ascii?Q?o1CYwfVu0TYkTNd1nL6S8omGP4NueQT8lpK+293bJIOqQfj7oeJzY7oFRXSz?=
+ =?us-ascii?Q?MEHsBgcygUv+mqQLOVyj8w4WA7m/KeZNkak2voW+r56GZlQFpxk49RcPSt3t?=
+ =?us-ascii?Q?L70APQOGppq33DG3uLa8AIjxZs3iC8GPZQyIslYvV0xLK+D9MkPtn2L6iTaJ?=
+ =?us-ascii?Q?oQ6dDgAwfhX+5mg/quEax4EBzAY3P7UbAW0KMtvNrOzq9fIm4MgSTxikK0cO?=
+ =?us-ascii?Q?06tmJc3Vpl8Is9BL/yaGwXylgbaOArIBb6mkNk3Jd/rXqHH2oAAphMgi7ckU?=
+ =?us-ascii?Q?A78ZLQddhc2AaEBOLbNWjjHVEt+cERi7rhD3phBE6bQTXC20yLnZg1Wvrctz?=
+ =?us-ascii?Q?t8EEd7XJBrTD0ONfRpN9mMsZ5uh9FD2g8D2jp2D5T0LGwCWQctvYCKSj+pSZ?=
+ =?us-ascii?Q?SardVjKpET2dhKz5HiWSFi3WVvU3dar8WZwWHOxqmGHitEYA6g1/IepyJ7qO?=
+ =?us-ascii?Q?ca7BZjG/s+6c36hmnpWJ7fIbUFUIKVtAsePWct11w8jCDgl5G+PIbrqP0z21?=
+ =?us-ascii?Q?FS7JZc3JWJ0AP/tNv4jlMc1Shlp2EYDmWsg2PbBmX/bgnfcCCbrNeJQx3QRj?=
+ =?us-ascii?Q?ER1KkEBqa88oM78uvdiAnptQCwqBSwjkqkh0b2l8ji5i2yMET8l6mVSmAR98?=
+ =?us-ascii?Q?YEGgO2ziIpl6TlrVR8mHvciqRCdYLizvRj6MTH5cR9KxLS7tWbUVHQzRnhlt?=
+ =?us-ascii?Q?t9FbOE6p7g=3D=3D?=
 X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: bef12410-81c7-4a15-325d-08df33314c20
+X-MS-Exchange-CrossTenant-Network-Message-Id: 72eacd58-1b4b-48aa-befd-08df33315037
 X-MS-Exchange-CrossTenant-AuthSource: LVXPR03MB989161.namprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2026 07:18:13.6269
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2026 07:18:20.3278
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
 X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: AUE350QmjjjI15w5XZlCZomHfnlDqpyiB76rHbEoagehlyowHRdg7QSnH7qVjvkEE8a2aUkhN2WQVsDecuF4ew==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS6PR03MB235817
-X-purgate-ID: tlsNG-c201ff/1792999097-F60AA2A1-7D3E4CEB/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: NM0fBY+OfaFgpbhhsXThDdv6eegvl11uEDR28VHlk3EgNM36kh0M7CIIGMs0+XknQQcOKi7Mcs1FejQODiJ8AA==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR03MB989640
+X-purgate-ID: tlsNG-720697/1792999103-F3EBB2AC-C4237FCF/0/0
 X-purgate-type: clean
-X-purgate-size: 1909
+X-purgate-size: 6545
 X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -161,44 +161,169 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Chunjie Zhu <chunjie.zhu@citrix.com>
 
-nept_translate_l2ga() rebuilds the exit qualification handed to L1 from
-rwx_acc, which is derived from the npfec set up by ept_handle_violation().
-That function deliberately treats every write violation as a read as well
-(read_access = q.read || q.write), because the SDM leaves bit 0 undefined
-for read-modify-write accesses.
+p2m_get_page_from_gfn() on a nested p2m calls
+nestedhvm_hap_nested_page_fault2(), which walks L1's paging structures via
+hvm_funcs.nhvm_hap_walk_L1_p2m2.  Only SVM provides this hook.  On VMX it
+is NULL, so the alternative_call() ends up as a #UD in L0 and the host
+panics.
 
-As a result, a plain write by L2 that violates L1's EPT is reflected to L1
-with bits 0 and 1 both set, whereas bare metal reports only bit 1 (data
-write).  The widened access bits are an L0 implementation detail for its
-own permission checks and should not leak into L1's view.
+It is reachable from an L2 guest.  An EPT violation on MMIO makes L0
+emulate the access, and the emulator walks L2's pagetables through the
+nested p2m.
 
-Keep bits 0-2 of the qualification as reported by hardware, and only
-replace the GPA permission bits (3-5) with those from L1's EPT entries.
-rwx_acc is still used for the permission check itself.
+    nhvm_hap_walk_L1_p2m2
+    nestedhvm_hap_nested_page_fault2
+    p2m_get_page_from_gfn
+    hap_p2m_ga_to_gfn_4_levels
+    paging_gva_to_gfn
+    hvmemul_map_linear_addr
+    hvmemul_write
+    hvm_hap_nested_page_fault
 
 Signed-off-by: Chunjie Zhu <chunjie.zhu@citrix.com>
 ---
- xen/arch/x86/mm/hap/nested_ept.c | 7 ++++++-
- 1 file changed, 6 insertions(+), 1 deletion(-)
+ xen/arch/x86/hvm/vmx/vmx.c              |  1 +
+ xen/arch/x86/hvm/vmx/vvmx.c             | 39 ++++++++++++++++++++++++-
+ xen/arch/x86/include/asm/hvm/vmx/vvmx.h |  7 ++++-
+ xen/arch/x86/mm/hap/nested_ept.c        | 10 +++----
+ 4 files changed, 50 insertions(+), 7 deletions(-)
 
+diff --git a/xen/arch/x86/hvm/vmx/vmx.c b/xen/arch/x86/hvm/vmx/vmx.c
+index 3c7374a9ff42..ed4ff56e7797 100644
+--- a/xen/arch/x86/hvm/vmx/vmx.c
++++ b/xen/arch/x86/hvm/vmx/vmx.c
+@@ -2892,6 +2892,7 @@ static struct hvm_function_table __initdata_cf_clobber vmx_function_table = {
+     .nhvm_domain_relinquish_resources = nvmx_domain_relinquish_resources,
+     .update_vlapic_mode = vmx_vlapic_msr_changed,
+     .nhvm_hap_walk_L1_p2m = nvmx_hap_walk_L1_p2m,
++    .nhvm_hap_walk_L1_p2m2 = nvmx_hap_walk_L1_p2m2,
+ #ifdef CONFIG_VM_EVENT
+     .enable_msr_interception = vmx_enable_msr_interception,
+ #endif
+diff --git a/xen/arch/x86/hvm/vmx/vvmx.c b/xen/arch/x86/hvm/vmx/vvmx.c
+index 29e48387a110..8d6e0c66f38e 100644
+--- a/xen/arch/x86/hvm/vmx/vvmx.c
++++ b/xen/arch/x86/hvm/vmx/vvmx.c
+@@ -2355,7 +2355,8 @@ int cf_check nvmx_hap_walk_L1_p2m(
+     vmx_vmcs_enter(v);
+ 
+     __vmread(EXIT_QUALIFICATION, &exit_qual);
+-    rc = nept_translate_l2ga(v, L2_gpa, page_order, rwx_rights, &gfn, p2m_acc,
++    rc = nept_translate_l2ga(v->domain, nhvm_vcpu_p2m_base(v), L2_gpa,
++                             page_order, rwx_rights, &gfn, p2m_acc,
+                              &exit_qual, &exit_reason);
+     switch ( rc )
+     {
+@@ -2383,6 +2384,42 @@ int cf_check nvmx_hap_walk_L1_p2m(
+     return rc;
+ }
+ 
++/*
++ * As nvmx_hap_walk_L1_p2m(), for a walk of a specific nested p2m that is not
++ * tied to a VM exit (e.g. L0 emulation reading L2's pagetables).  There is
++ * no EPT violation to reflect to L1, so only the result is reported.
++ */
++int cf_check nvmx_hap_walk_L1_p2m2(
++    struct p2m_domain *nested_p2m, paddr_t L2_gpa, paddr_t *L1_gpa,
++    unsigned int *page_order, uint8_t *p2m_acc, struct npfec npfec)
++{
++    unsigned long gfn;
++    uint64_t exit_qual = 0;
++    uint32_t exit_reason;
++    uint32_t rwx_rights =
++        (npfec.insn_fetch << 2) | (npfec.write_access << 1) | npfec.read_access;
++
++    switch ( nept_translate_l2ga(nested_p2m->domain, nested_p2m->np2m_base,
++                                 L2_gpa, page_order, rwx_rights, &gfn,
++                                 p2m_acc, &exit_qual, &exit_reason) )
++    {
++    case EPT_TRANSLATE_SUCCEED:
++        *L1_gpa = (gfn << PAGE_SHIFT) + (L2_gpa & ~PAGE_MASK);
++        return NESTEDHVM_PAGEFAULT_DONE;
++
++    case EPT_TRANSLATE_VIOLATION:
++    case EPT_TRANSLATE_MISCONFIG:
++        return NESTEDHVM_PAGEFAULT_INJECT;
++
++    case EPT_TRANSLATE_RETRY:
++        return NESTEDHVM_PAGEFAULT_RETRY;
++
++    default:
++        gdprintk(XENLOG_ERR, "GUEST EPT translation error!\n");
++        BUG();
++    }
++}
++
+ void nvmx_idtv_handling(void)
+ {
+     struct vcpu *v = current;
+diff --git a/xen/arch/x86/include/asm/hvm/vmx/vvmx.h b/xen/arch/x86/include/asm/hvm/vmx/vvmx.h
+index da10d3fa9617..2e0ac5798d5d 100644
+--- a/xen/arch/x86/include/asm/hvm/vmx/vvmx.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vvmx.h
+@@ -89,9 +89,14 @@ bool cf_check nvmx_ept_enabled(struct vcpu *v);
+ #define EPT_TRANSLATE_MISCONFIG     2
+ #define EPT_TRANSLATE_RETRY         3
+ 
++struct p2m_domain;
++
+ int cf_check nvmx_hap_walk_L1_p2m(
+     struct vcpu *v, paddr_t L2_gpa, paddr_t *L1_gpa, unsigned int *page_order,
+     uint8_t *p2m_acc, struct npfec npfec);
++int cf_check nvmx_hap_walk_L1_p2m2(
++    struct p2m_domain *nested_p2m, paddr_t L2_gpa, paddr_t *L1_gpa,
++    unsigned int *page_order, uint8_t *p2m_acc, struct npfec npfec);
+ 
+ /*
+  * Virtual VMCS layout
+@@ -193,7 +198,7 @@ void nvmx_set_cr_read_shadow(struct vcpu *v, unsigned int cr);
+ 
+ uint64_t nept_get_ept_vpid_cap(void);
+ 
+-int nept_translate_l2ga(struct vcpu *v, paddr_t l2ga,
++int nept_translate_l2ga(struct domain *d, uint64_t eptp_base, paddr_t l2ga,
+                         unsigned int *page_order, uint32_t rwx_acc,
+                         unsigned long *l1gfn, uint8_t *p2m_acc,
+                         uint64_t *exit_qual, uint32_t *exit_reason);
 diff --git a/xen/arch/x86/mm/hap/nested_ept.c b/xen/arch/x86/mm/hap/nested_ept.c
-index d88d677825f1..e116d8254824 100644
+index e116d8254824..f8563156b6d0 100644
 --- a/xen/arch/x86/mm/hap/nested_ept.c
 +++ b/xen/arch/x86/mm/hap/nested_ept.c
-@@ -255,7 +255,12 @@ int nept_translate_l2ga(struct vcpu *v, paddr_t l2ga,
-         rc = EPT_TRANSLATE_VIOLATION;
-     /* Fall through to EPT violation if permission check fails. */
-     case EPT_TRANSLATE_VIOLATION:
--        *exit_qual = (*exit_qual & 0xffffffc0) | (rwx_bits << 3) | rwx_acc;
-+        /*
-+         * Keep the access bits (0-2) as the hardware reported them.  rwx_acc
-+         * treats every write as a read too, which is not what L1 would see
-+         * on bare metal for a plain write.
-+         */
-+        *exit_qual = (*exit_qual & 0xffffffc7) | (rwx_bits << 3);
-         *exit_reason = EXIT_REASON_EPT_VIOLATION;
-         break;
+@@ -136,13 +136,13 @@ static int ept_lvl_table_offset(unsigned long gpa, int lvl)
+ }
  
+ static uint32_t
+-nept_walk_tables(struct vcpu *v, unsigned long l2ga, ept_walk_t *gw)
++nept_walk_tables(struct domain *d, uint64_t eptp_base, unsigned long l2ga,
++                 ept_walk_t *gw)
+ {
+     int lvl;
+     uint32_t rc = 0, ret = 0, gflags;
+-    struct domain *d = v->domain;
+     struct p2m_domain *p2m = d->arch.p2m;
+-    gfn_t base_gfn = _gfn(nhvm_vcpu_p2m_base(v) >> PAGE_SHIFT);
++    gfn_t base_gfn = _gfn(eptp_base >> PAGE_SHIFT);
+     mfn_t lxmfn;
+     ept_entry_t *lxp = NULL;
+ 
+@@ -209,7 +209,7 @@ out:
+ 
+ /* Translate a L2 guest address to L1 gpa via L1 EPT paging structure */
+ 
+-int nept_translate_l2ga(struct vcpu *v, paddr_t l2ga,
++int nept_translate_l2ga(struct domain *d, uint64_t eptp_base, paddr_t l2ga,
+                         unsigned int *page_order, uint32_t rwx_acc,
+                         unsigned long *l1gfn, uint8_t *p2m_acc,
+                         uint64_t *exit_qual, uint32_t *exit_reason)
+@@ -220,7 +220,7 @@ int nept_translate_l2ga(struct vcpu *v, paddr_t l2ga,
+ 
+     *l1gfn = gfn_x(INVALID_GFN);
+ 
+-    rc = nept_walk_tables(v, l2ga, &gw);
++    rc = nept_walk_tables(d, eptp_base, l2ga, &gw);
+     switch ( rc )
+     {
+     case EPT_TRANSLATE_SUCCEED:
 -- 
 2.34.1
 
