@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B7AB0606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 16:59:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2B303606A31A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 17:00:34 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=c2ln4F2J
-Received: from list by lists.xenproject.org with outflank-mailman.1461629.1672684 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=FUy7rUMd
+Received: from list by lists.xenproject.org with outflank-mailman.1461635.1672693 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLO2c-0006hU-Sy; Mon, 26 Oct 2026 16:59:22 +0000
+	id 1xLO3Z-0008EC-5U; Mon, 26 Oct 2026 17:00:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461629.1672684; Mon, 26 Oct 2026 16:59:22 +0000
+Received: by outflank-mailman (output) from mailman id 1461635.1672693; Mon, 26 Oct 2026 17:00:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLO2c-0006hN-Pg; Mon, 26 Oct 2026 16:59:22 +0000
-Received: by outflank-mailman (input) for mailman id 1461629;
- Mon, 26 Oct 2026 16:59:21 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xLO2b-0006hH-Mg
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 16:59:21 +0000
+	id 1xLO3Z-0008E5-2E; Mon, 26 Oct 2026 17:00:21 +0000
+Received: by outflank-mailman (input) for mailman id 1461635;
+ Mon, 26 Oct 2026 17:00:19 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLO3X-0008Dv-Jx
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 17:00:19 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLO2a-005AQQ-IO
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 17:59:20 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xLO3W-00HVgU-Pv
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 18:00:18 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6adf86d5-e002-0a2a0a5209dd-0a2a4505a7a4-40
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 17:59:15 +0100
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6adf8721-e002-0a2a0a5209dd-0a2a4508cf70-8
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 18:00:18 +0100
+Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6adf86e3-4cb1-0a2a45050019-d155dd33f1ce-3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 17:59:15 +0100
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-48c4649b35bso3329665f8f.3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 09:59:15 -0700 (PDT)
+ id 6adf8721-f659-0a2a45080019-d155dd29b97c-3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 18:00:17 +0100
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-48e0d885929so2144085f8f.3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 10:00:17 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ebc39b3sm18064083f8f.10.2026.10.26.09.59.13
+ ffacd0b85a97d-48e3ebcb9cesm18300319f8f.27.2026.10.26.10.00.15
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Oct 2026 09:59:14 -0700 (PDT)
+ Mon, 26 Oct 2026 10:00:16 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,65 +51,64 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793033955; x=1793638755; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793034017; x=1793638817; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=GMQ+7WlzWIwRlrJ4BmOSjoJg3SFkTQUxLpOzCWcGRxo=;
-        b=c2ln4F2J6YpDBdoOcgcX4Y5wgD9qzdQKdUTbVz1MMBnMfaBjdeGo7js05QXakmhRAn
-         YXffTbed5VhC3mTpcw7/AV1qXkl7Y8jJPZQ86St4CJtLsytNQG/BcslmUaB/BX7kxbF3
-         JqB/lbbzDGflm/5PMrRnDw5InRiZ3sn6oWc7M4dWrts+xmkuzbWniaq9eqd7MzF862er
-         ER4ouamqXB5hgE+ANxx0OSVvQ1kTevpdlYyhmYzAMUzaLJO+w3K4IMEPBMTzUT791145
-         svPi5qDvfKPEQVViSFLUqRAiA3pa12uq2tZUyuDKbDstJKhGGJQKmaxemEsZjXzEt3Kx
-         8shA==
+        bh=EU9qzBj3Qx+LtSG4rL+zWiwoGCFOX1fxvjpbTQiQ6VQ=;
+        b=FUy7rUMdMgiRbdBbgd+dItPhoMJbFP10mzFqhnJEE6v9Kq8DhWD1gOooImQpaJ1PUF
+         cuqBWJoN7ut9rj7mYxuNgY2FZWGWxI9fGP0n+8LW7nZF0ODiZNkIiGkmiflOmKyU3AKb
+         fy58XgZX/l/4U8oKdcMioLXqP5e0PQwDzUGruA7UqbV1rEUGSv7i4IRnj0JRfyrJw4m+
+         Wk3PKVHL1wApdx/2h08tRa6DcNFPPSXiKSSXhThZegmo62PsIE2ZEEdzSCszTyIhCnW6
+         3kEf2J8OueMa1brqxbITsgHRpdK2ikY2DpEMbCXS1mlanQlURnJh+qFLlKTzjcJ1zyRL
+         KLlQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793033955; x=1793638755;
+        d=1e100.net; s=20260707; t=1793034017; x=1793638817;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=GMQ+7WlzWIwRlrJ4BmOSjoJg3SFkTQUxLpOzCWcGRxo=;
-        b=zRUtocncY+9NF/dWYFIcAsiPuz0Pm0RcUQ5quaJKkLgYJOW9WPv3RqsHKpd0eW6i5L
-         lebldazJ9Oly7Rm/C/kO41YPgeNUm2P98FnTEdWua3zfYlHG/S7QnLqAnGMdNS0XneCo
-         YOUhZ7v/oz0mYorszdTiDj2H5iUykynPS5iatvCsUHNHLtXaBBisPbF31HqLsxNwkEdO
-         V81UUWq/Bbzg53puWhL6X/tfFX6a3IisbQhzbZUn58ykeSYHptPoZpl6YMbs/Avmnh+f
-         TwWDF93g92CtxiDgnZb7Beu6Q2gs2HnauS3eGpvLywePJb0h8TH6e/3VIGRWSW9LgAc5
-         FiNw==
-X-Forwarded-Encrypted: i=1; AKwUvBw7Ug0eaEPa3TgYF95JBbQEDLZ2k29lf265tmkem0vA844PcWoOxvNoAYiWj3cdEGoyhwH7Q9aTpF0=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKnmet3O7VTx0tYTNj8oRXGlrexekXnfQpIP7Na06/5+LCr8b9E
-	nz5322usvmpLycgH5B00SWwimWyLjBcH8LVGzKShPy1Tv84XznWMcfggZ8KSZKMVHQ==
-X-Gm-Gg: AYBFou3I9EDJoU3NTwP4ynx3ExTiGI6F3/uG13KmCKqGf5b51CU7jyJlN0dSBuqdnLd
-	Yqkwi80vMZqpTEacT5jYDG9eiRCr1ErE5lL8Ep7D7Pl0wcpAUaluEpka6teGaP+XAenkNqTPqoh
-	Ryc6TfuDtAfB59Y2NrTvs6XMbSl8hHX8fE6FACi7jooe+zW2V26/iaBB3ASl8mpvIq/PHXDkOzL
-	t+sR707GyEo0BpO51MGARJx0DMQbx8I6huM92lIiQ7khOFB3Y5Zid7vc/e1WA7PBY/64nsxxs9P
-	4BmhUCXN/t7YerSg85hhM6qJdHxRLm4pAaxf+fmZtEzOAclIxib79u0rTdVxvk8wjqDlD7Oftf5
-	cs1khLHnoxIZ+waJa/oyLJs9+KBMw93mHEd4svWpBprluaz8w/JvNHsXEOW9yt1cCyiodog5MDO
-	tB44PFAZ86ApMdJVQhR2Ukdo2DIMTx9TTtlK3GZHHJ1jNC2c7c/aMHCsIxvmXEUpbRfVSKl8voE
-	1yHqd2u4+Yhq4f8nuykwvhD98+QMFaTxYNWQz6FSCPBIMqoKnKzn6oem99zq3eLenOnQdXgq7WS
-	B9FFNRHA+Fydqn3WJBjzQbz/A2jtHSjQsgwR1Ftox4o=
-X-Received: by 2002:adf:e193:0:b0:48e:3ebc:d242 with SMTP id ffacd0b85a97d-48e3ebcd6c3mr13437490f8f.37.1793033954814;
-        Mon, 26 Oct 2026 09:59:14 -0700 (PDT)
-Message-ID: <462a149d-9a4a-49c7-8db4-96e99463a47b@suse.com>
-Date: Mon, 26 Oct 2026 17:59:13 +0100
+        bh=EU9qzBj3Qx+LtSG4rL+zWiwoGCFOX1fxvjpbTQiQ6VQ=;
+        b=G05ddPnfAGDgekgIai91frZXisJbgNTx2ld1mS73b0/nt2SSLSw0jhlRNJDgln19x1
+         NKPnaSm9w2b0aa0uyhiATyl5jKq6WOt9kfF17mN/CXwSKctQ9KXyMoKrLMFCTYPbmaUx
+         tZRMw5SkHiFRGAmW5l4JaPs7h2ooktXNOG0iqzYCWJ17j8GIZ5nNEPZ2w8BbUI8se6Ug
+         uqSun3y2o7ph3q+OsufBQMX0srBeyYOWH3wyVgMluY5quvtAChn+hztxF5EzsDuHTAQC
+         f+78zAAXpUiJVaeZ/Y8O/RqGh51cGP40Pv1xQx50e7m/FcpB+/BTMPMrPHui4/TyVoYO
+         fqTQ==
+X-Forwarded-Encrypted: i=1; AKwUvByRjIREjLEexJVkWHBcCF4+aa03CexfOWJc80amq6RlpoospZncsr6GA18RN5XaOXXbS7V6h0WIYWc=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKEwpbPqIbSPC7YFk+5yg4asqcTecqKAX3NAfvl3a+GKeWS/RNc
+	qkYUS+oKsH9u98rsWDQupkXqJL4CQjIr91i+XAdi9QEsZxRD4vXp+94CbWUoLDhrpA==
+X-Gm-Gg: AYBFou3HvmCubCjK7wfaEGGOoz60thAYF/NDHxSOeAj0dmfu5xmMgx5VMQinXtvCXIp
+	8NZmyQcAxyZvRIoHhdJTm087fBj0bNUDFnXjndD11PUKHGk7xSavQGLMYNdQT5Lp2Ow1tcEO5BN
+	JcbNwr/eIppS1qARpki1MuUxpPyj5gexavymiPqH97dAs1HqkpiK2VmkyGDkd/VovnfckvOclj6
+	QYNlWLoESQCKaV6xZ+GDTBnFusVx3yO0jnk2ac0TsAeKIIkYjPaYaBZMMQsAUi8TZSPkhuEZhWM
+	3iY2FAzCUNKflUsN35ckjy8KA2PFZERGXHxLxOdyRiWYXz6y5DWYDdGuG+RZsrlrWNRQ32h2szJ
+	o/VylMt1/QvV5P7xIHpNYpjmG3TZz9izAFcPsERljX0/clnuLn1DKzPQu8XbXfnqW3+Ne/Z3STo
+	1dGB6ihd8gcFz79dcC+kXTPzldrxI8qHOyEj8fBOazDXqAwV1TfqTNRcp2jjGpdIj1PI7NX79EO
+	SgGmRGyy6wVt/g0PSVsmHZWDRtB56C6WLhExCw9BRgB45eh4IZFe8IAGDlsogSyO1tUUkX/gOlG
+	AlV9op8Lsl/IJQNv/NoBi+ZE37Redp2hoD3Z55wbEfrm
+X-Received: by 2002:a05:6000:27c9:10b0:48e:d88:55e5 with SMTP id ffacd0b85a97d-48e3eb457f9mr10319124f8f.6.1793034017023;
+        Mon, 26 Oct 2026 10:00:17 -0700 (PDT)
+Message-ID: <fb7c9336-10ca-4395-bc1f-1b99d6c113cf@suse.com>
+Date: Mon, 26 Oct 2026 18:00:15 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v8 4/5] xen/riscv: probe the A/D update scheme if the DT
- advertises neither
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Subject: Re: [PATCH v8 5/5] xen/riscv: rework the A/D bits comment in
+ p2m_set_pte_flags()
+To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
  Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
  Alistair Francis <alistair.francis@wdc.com>,
- Connor Davis <connojdavis@gmail.com>, Zheng Zhang <zhangzheng@iscas.ac.cn>,
- xen-devel@lists.xenproject.org
+ Connor Davis <connojdavis@gmail.com>,
+ Oleksii Kurochko <oleksii.kurochko@gmail.com>,
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, xen-devel@lists.xenproject.org
 References: <1793027589.8631fc262581453bbf619ec5b2062170.1a178c5c430000f79f@vates.tech>
- <1793027685.8631fc262581453bbf619ec5b2062170.1a178c73a5d000f79f@vates.tech>
- <9986e03e-bf09-46b6-9d2a-82a1864a59b5@gmail.com>
+ <1793027685.8631fc262581453bbf619ec5b2062170.1a178c73b94000f79f@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -135,12 +134,12 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <9986e03e-bf09-46b6-9d2a-82a1864a59b5@gmail.com>
+In-Reply-To: <1793027685.8631fc262581453bbf619ec5b2062170.1a178c73b94000f79f@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c201ff/1793033955-71CA82A1-83F4F3D1/10/78276251493
+X-purgate-ID: tlsNG-c1860d/1793034017-CCB7187B-8D8C9AC8/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1109
+X-purgate-size: 1084
 X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
@@ -149,31 +148,28 @@ X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 26.10.2026 16:35, Oleksii Kurochko wrote:
-> On 10/26/26 4:14 PM, Baptiste Le Duc wrote:
->> +/*
->> + * Probe whether hardware updates the PTE A/D bits by writing to a local
->> + * variable through an alias mapping whose A and D bits are clear.
->> + *
->> + * Check the D bit rather than the A bit, as the A bit may be set
->> + * speculatively while the D bit can't.
-
-Following Andrew's clarification, I don't think this is relevant anymore
-(but I also don't mind it to stay the way it is): If we observed the A
-bit set (and no fault), we can still deduce Svadu, no matter whether the
-update was due to an architectural or a speculative access. Svade would
-implicitly disallow speculative updates of A, as exceptions may only be
-raised for architectural accesses (unless there are provisions in the
-spec that I'm unaware of).
-
-Both of you: Please clarify whether you want this change to go in as-is,
-or whether this wants updating again.
-
-> Generally, looks good to me:
+On 26.10.2026 16:14, Baptiste Le Duc wrote:
+> The comment in p2m_set_pte_flags() quotes the spec at length to describe
+> the two A/D bits schemes, and its TODO mixes two things: why A/D are preset
+> today (OpenSBI delegates the resulting page faults to a lower privilege
+> mode, so Xen would take them with no handler) and what remains to be done.
 > 
+> Summarize the two schemes as a short list. The reason for presetting A/D is
+> not future work, so move it out of the TODO, next to the schemes. The TODO
+> now keeps only the later work, handling these page faults instead of
+> presetting A/D, which only concerns Svade as A/D page faults cannot happen
+> otherwise.
+> 
+> Also note that presetting the A/D bits is harmless when the device
+> tree advertises both Svade and Svadu and the platform uses hardware
+> A/D updating.
+> 
+> No functional change.
+> 
+> Assisted-by: Claude:claude-opus-5-5
+> Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 > Reviewed-by: Oleksii Kurochko <oleksii.kurochko@gmail.com>
 
 Acked-by: Jan Beulich <jbeulich@suse.com>
 
-Jan
 
