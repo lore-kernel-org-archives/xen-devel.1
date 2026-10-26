@@ -2,48 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8C7BD606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 07:31:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 442CA606A31A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 09:02:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=valinux.co.jp header.i=@valinux.co.jp header.a=rsa-sha256 header.s=selector1 header.b=I2NwlvB8
-Received: from list by lists.xenproject.org with outflank-mailman.1460845.1671707 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=KeA1fNoJ
+Received: from list by lists.xenproject.org with outflank-mailman.1460889.1671759 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLFAs-0003Dr-RM; Mon, 26 Oct 2026 07:31:18 +0000
+	id 1xLGai-0002iC-5h; Mon, 26 Oct 2026 09:02:04 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1460845.1671707; Mon, 26 Oct 2026 07:31:18 +0000
+Received: by outflank-mailman (output) from mailman id 1460889.1671759; Mon, 26 Oct 2026 09:02:04 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLFAs-0003Dk-N6; Mon, 26 Oct 2026 07:31:18 +0000
-Received: by outflank-mailman (input) for mailman id 1460845;
- Mon, 26 Oct 2026 07:31:17 +0000
+	id 1xLGai-0002i5-2a; Mon, 26 Oct 2026 09:02:04 +0000
+Received: by outflank-mailman (input) for mailman id 1460889;
+ Mon, 26 Oct 2026 09:02:02 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <takakura@valinux.co.jp>) id 1xLFAr-0003Db-8n
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 07:31:17 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLGag-0002hz-P2
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 09:02:02 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLFAp-00C9Yk-7t
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 08:31:15 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xLGaf-00DHMm-Ma
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 10:02:01 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <takakura@valinux.co.jp>)
- id 6adf01ba-2eae-0a2a0a5409dd-0a2a4507dd16-26
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 08:31:14 +0100
-Received: from [52.101.229.86]
- (helo=TY3P286CU002.outbound.protection.outlook.com)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <takakura@valinux.co.jp>)
- id 6adf01b6-b4ea-0a2a45070019-3465e5564c31-3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 08:31:05 +0100
-Received: from TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:403:511::19) by TY7P286MB7251.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:405:363::15) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Mon, 26 Oct
- 2026 07:31:00 +0000
-Received: from TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- ([fe80::5f8d:a6bf:3b84:5a82]) by TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- ([fe80::5f8d:a6bf:3b84:5a82%5]) with mapi id 15.21.0546.021; Mon, 26 Oct 2026
- 07:31:00 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6adf1702-2eae-0a2a0a5409dd-0a2a45088264-16
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 10:02:01 +0100
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6adf1709-f659-0a2a45080019-d1558031cdd2-3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 10:02:01 +0100
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4a20bdaf39cso27875975e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 02:02:01 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e3ecd39a9sm15397193f8f.46.2026.10.26.02.02.00
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Mon, 26 Oct 2026 02:02:00 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,261 +49,112 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=valinux.co.jp header.i="@valinux.co.jp" header.h="From:Date:Subject:Message-Id:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=UM0EvOJZZk0cWyC9VQDYYZDx2nrTmaCw7p/gOaKveUN7kPQcYIOupbsAMTJmbHrcWGQ8Pe8mNKV8bzcAzRyZyD4orgdRl0j0UaTYZiExDUCsEU3t4rH2SQh/2ERqBq53mUpZa+tOt/UGjnWi59/3NN6DEDyWzg80DjXjC2Tgpslf5+eOuYaiaau96YSFS5/E3jWvmEoyEegbwgf1ueY4cwpm9Vabxiy2h6p18lNqE8s3C+kQetHkwmCju8STc1+U4HWQhwT95rHVuMVxga1EMcwXRMKMXsY/1c58tT/Tn+hQdKOEZ98oLpfkowuSv/LTHHfJ4OF1rZcnvZ+94OfjDQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=m0fqivY6ZI1eL/B17AbOGNjXYhEJdhi/nBwLdhFJg9M=;
- b=vRcjbhpveX2ibalUjnYjhqa3l5+vBeY4cEOjBmMClNtWcWPD0PPmZ6b/623qvB9IxW2Dlilvi2xegsARJLY2ZIKqENtVkIAAe3zRo5d+hb6zgevuLCKWkFJJ1q3DyGRbJnyjSP9YoKu0ETjShBo8fCNekrJF4nkGkQVnuRWsjcSPkHx7A5xw43wR3nxai3+afVP7aYII+ce4mB7zerqBCpXBosEfXU0q8f4LC3+14VBIPXGp1zH5v4x9+XVE1YM6nEVYxdX5/4soE4NsRv6dtxDUefPj1KGXkx8mNXAMtNhkWa9iWvSnr/XTUNaLf/30h0OyBxw6S9prJJ++DyvV1w==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=valinux.co.jp; dmarc=pass action=none
- header.from=valinux.co.jp; dkim=pass header.d=valinux.co.jp; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=valinux.co.jp;
- s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=m0fqivY6ZI1eL/B17AbOGNjXYhEJdhi/nBwLdhFJg9M=;
- b=I2NwlvB8VcRJAVazRER0Zzve6Im4neCGQ2EsUCyp6xnjLNAsNCIUhdRTq+Dg3V9kX/W8y2AoilBI/AplU9NMx9GHHm34pYtMuB2UIbA41Mtnb1iOdWIiFv7fnjb2AYk3Khk5h8GV4eRGSkGyphx+iJrOjRRDQLpJEBXoghqc32U=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=valinux.co.jp;
-From: Ryo Takakura <takakura@valinux.co.jp>
-To: bernhard.kaindl@citrix.com
-Cc: xen-devel@lists.xenproject.org,
-	sstabellini@kernel.org,
-	julien@xen.org,
-	bertrand.marquis@arm.com,
-	michal.orzel@amd.com,
-	Volodymyr_Babchuk@epam.com,
-	andrew.cooper3@citrix.com,
-	anthony.perard@vates.tech,
-	jbeulich@suse.com,
-	roger@xenproject.org,
-	ross.lagerwall@citrix.com
-Subject: Re: [RFC 1/5] xen/arm64: livepatch: enable attaching callbacks
-Date: Mon, 26 Oct 2026 16:30:22 +0900
-Message-Id: <20261026073022.110170-1-takakura@valinux.co.jp>
-X-Mailer: git-send-email 2.34.1
-In-Reply-To: <179284608595.1706038.12585790247811677658.b4-review@b4>
-References: <179284608595.1706038.12585790247811677658.b4-review@b4>
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: TY6P301CA0021.JPNP301.PROD.OUTLOOK.COM
- (2603:1096:405:3bf::11) To TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
- (2603:1096:403:511::19)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1793005321; x=1793610121; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=Oi5FAnr/gjjQLIwAVs9y0r51/dbuSsrtiocWI+nOvN0=;
+        b=KeA1fNoJ0e9pRnDaiUr62AhdzqM8XsiN8e8go0OwsZY3NQa6glZAhWxmTHdzM4r3Vn
+         qQXGI4CdomkbxN4t1D/znxgt6CqtZRWmYavlEfbamhJMMDhWwbbsDyhzifpLtSbDx3lB
+         OU0AliAeT4LOHIpuF2qPxj8INEwe0XjdR9UMiARKuvb6unp1849pgNYxr5hYHZukli+K
+         PHXnp4xtwIwMgoOKrxZgJWINPJuimaZgebwniJaZlKzh4T3g5zpxT0sIxnOhddIiRKY8
+         cLfPdhBYinIR5zWSiNmcQQcuvxPPokl06jwrnhtnPqYqIPL88yBiojgtW2I9vojFpxF9
+         tMhw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793005321; x=1793610121;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=Oi5FAnr/gjjQLIwAVs9y0r51/dbuSsrtiocWI+nOvN0=;
+        b=BztQ3L7M7CMYIfX6AEKvj1eNkxjKlgzJMxDnl7AF1E7gHTJufHxfcZghAMOZsvH5p4
+         YScj2UvJEevPy90WWlYdmShufxuM+hXpfssHNww/Aj54uiMwiloUznOiMx8li02GTCbr
+         pDHdmXGyi6qXD9nZx6sYOthiFgE0Dgc/bfD1iqKOyKeDpOZre5vBFxX/kE41RpSXZP4M
+         odTXEGPs8UqeLkU5KALrW7PpAO/V08qaP0fVmARD40YHoQUXSnTUDP24QAty1noMcxgq
+         vbkuDaDwByh+Uq9YuzKlQ/eBf9pbfGxNMPaAYHnF/3MFtYgoy9KVOIPHZKcJB75bmGWg
+         KyFg==
+X-Forwarded-Encrypted: i=1; AKwUvByF3+QPBHHYjs0qNt8f0I+CIeS5Ov1NtB845QXNBBBTfAbH0ass51chO68N+XUB+SD7T68Z+K7FbwY=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYI9WICOpWcLbqU/Bfhnx+zM2f3PH8iNLt+BLkQCVyw8+U22PJF6
+	30bqAgVxPa0snNaaL+W1EJHjPxdyvUlUELimGHsxpdieDR5pgg8NcZoofEtQPtLx8g==
+X-Gm-Gg: AYBFou3kChX1ZsPhipJflQ2dsf/IlAiVvyOgr2cwHQs0r382h4j38+QyCzQLtYEDHOl
+	kw5sK5ds0A+QOOBvMRcLrR+hmJruL/xAgHdMbVeh3uaereAbdqKc9BK/z8LqVaVNm6PUuesaFK3
+	r1SP3IaSgPSHshpLjTe+HCt+pTCXcDucDRkswDTxH/g9BqVe/iSru4RRNcs+aGzqVrWzOA4n8xs
+	2l1+p0NeQjbh9iTdt148PtJ6ZhRzYga+O0X8Ic/xo+7UOhaiz3D5YH/P41c2kdScPExqYVB630H
+	etc5DzgZPLOfhLReLr9OogiPc7FIid0kPRjPpYZoR5hZXe4G0JunUxWCljZJrULXr4b+zpVNIc5
+	Rmao8qMAtLpjZbbFggU1H69vfRQpDamCKqzqj3/0FTmfQZR85rMFKYfI3vEMIGk4HKw2hJjj5lB
+	kbOWIphTsYFVs+FprOdjsYWmJ7wYlKeZL0Ao5D1CaMy9TQART5tn0ljjXrqKTCKJE9ShYkoDwj3
+	63Sjlx9mjTcPtnfhGJ2jlBU3HfrnDwDaK70OLWIRMir8Ceplioby3wTYeRghquBuc9ENbpcfQcN
+	8KdGUezRVsn/N2AVGra7lCEN/lm/IqjziURFlsKBorGN
+X-Received: by 2002:a05:600c:83c7:b0:4a1:e92b:ae4a with SMTP id 5b1f17b1804b1-4a35aca5824mr105924985e9.21.1793005320840;
+        Mon, 26 Oct 2026 02:02:00 -0700 (PDT)
+Message-ID: <a7d5134b-aa9a-4f30-a58c-939f5cb7443b@suse.com>
+Date: Mon, 26 Oct 2026 10:01:59 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: TY5P286MB319683:EE_|TY7P286MB7251:EE_
-X-MS-Office365-Filtering-Correlation-Id: 815b5655-5853-4487-d7b1-08df3333157c
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|376014|7416014|1800799024|366016|18002099003|6133799003|22082099003|3023799007|56012099006|5023799004|261021123027099003|10067099003|261009223027099003|261022105027099003|261021133027099003|261021135927099003|261021130227099003|261022113327099003|261021121427099003|261022075727099003|261022115727099003;
-X-Microsoft-Antispam-Message-Info:
-	X6LDRQryRinXZrPjfpsHHudEqkIToMc3JWiQnAMqqyH8P6ueptfx+5807CISfbrNAZyZXESG3WoDJTpwcbOVlyLYXyPVJM5iWCpcXkFgvzc6MCDHHjVzeTcHYFs3J7OXMcjVbPTPDCyyX+r6Gb9QKyHQ1NkgCNrnz0egZjDg8Wlkgb64AESm2SktyJ/k7AmN9XAcPSFTv5F4pCe1gOaNqDonKmIM6XRrsaFFNuGix/UUs+LurYMY+hO/OuhbrbfSQBbZS42xCU7i8mLvfQfmzCuS6tVfzg9UZSkRMCqSGuV+hZFUm8kuFsyHp0gL7q5ZPxzAsuyGtHJZS3Zy1b7GQxmHrUAs2jWG4UzM0vC18eJF1e7aHA4B1XCsEfQ9vh9GK9El9b2+lcO1YgXVTgbzxLaGgs+Thabt6Tsg8dtotXyEHzWzgeLLrZl/nkexqNdBUgauzc9JcfPLolix7B0Z0KWWXx6c/q9ymTyGWULIUPZfeqb/8VESVW/W21CamEz4wF3yRtHGafjVQWCm1OcrNoLFELAOBsjE1vf1JkIYlZnKN5WO3Pe83yHZZ1jp5NQyOCMfrmOaGpmuGHvSJEK0DWt6Si6qd6l9AaOoKj0kTQ457QJy3q4W9RF2K/VFRzZ8Up2Ofx0gIfTagOTpU91tITDEyaYRVi4gZrH8x9rNPXs=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(376014)(7416014)(1800799024)(366016)(18002099003)(6133799003)(22082099003)(3023799007)(56012099006)(5023799004)(261021123027099003)(10067099003)(261009223027099003)(261022105027099003)(261021133027099003)(261021135927099003)(261021130227099003)(261022113327099003)(261021121427099003)(261022075727099003)(261022115727099003);DIR:OUT;SFP:1102;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?64KnRX2lfNrqRDqQE6VeoY5SiupiJOTdSCnitcj6lpPD2komZ+HW3ouBKz0N?=
- =?us-ascii?Q?l0LRaKT23Thxzuw4jys4kUqbfpqdOm/sbECj2OcclnfLi4siB+7jNvDQUfKO?=
- =?us-ascii?Q?RWv2n1qvC26oa2u4FoE+b5bapRd7FEGS5eC2Ml0f5eCxJakiCmJDob85bpTb?=
- =?us-ascii?Q?+tmDuwdidLpoiP1Qkwo/MNFiNTqb5ezW3t7mjGa63PX5ptc6msPMv+hmheV+?=
- =?us-ascii?Q?zRWgQmH5CHUwAxTpRHpt6H3s8SIHybHT0VokTiWdmcRCBFptNw55ZgcBjA81?=
- =?us-ascii?Q?S0bdYYQIejjF5ho/3Emc+NSrvoMHETtTqk8TffA1NdKyHDc8hRebu/ulIOio?=
- =?us-ascii?Q?hIMdzh3tMPx+h1dLcsMW2g7lq755EotL50g4us0yMl8kxGMZfnLHhqff4HxM?=
- =?us-ascii?Q?tMZBk+Z9VFiFQvtgpW4hGad3gAn8rX5hYDXcNxddOET03b00iSnulE1YDHCy?=
- =?us-ascii?Q?HhuiLW2jGZ7knkdUlQG94tWc7TWVaXedBFq9istIaAxeP1Gy4cPhRqrr/oGL?=
- =?us-ascii?Q?b3u1oql5jYcoQLYzp2/Z5K5yCRQUiZCto2udUQPrWCbrZiTrTn5rZ1m28Anl?=
- =?us-ascii?Q?RqnN3IQSYJAgvB4aEB4TvKHNtLQaxU+cDR3EbkYgaCuH0gTgWpadffhnHO55?=
- =?us-ascii?Q?iVGMocfcUVr/O4lwqV44Vq0IxJAT/Ple09QaGc2kfS3t7zSAUTnDVY8ADeMd?=
- =?us-ascii?Q?nsAspHds87SS4m4j+uHISCMXcQkjJyAFX97qVkhPlYVqG+RwYq9wbtCjUpiW?=
- =?us-ascii?Q?qzsziQ4sOIrqO7U09BhxwsWgujzdOVF2USbJ8jsBJGvwWDv1Mxjj+oqC4RdT?=
- =?us-ascii?Q?zbDeQ8pfgU9Z/N0QZvkWoyUtufgJECJlJlJYwNfnzL2z3vmWFqFxoeN6pRlt?=
- =?us-ascii?Q?f7ea2gigHZTIzVi0mtGCP0fJnFPGnowpVpRdR7Zk1djZ4k+PdRq2giR7T2HU?=
- =?us-ascii?Q?y/IzTEz0vnfQXLB31n/obS6Ks0pHzSXVFe29EzfZw/Tqr+IP+uuiupO5emGG?=
- =?us-ascii?Q?AGJQ427bVSlAfDuVipVFsn0Q7mTvBz7LNrJA9naFMbv4gonPPHY6JYh/mU/h?=
- =?us-ascii?Q?pyhTYhQ6DmGSPz+0+CQVs3RmnAtsU8EVMh9VAilGqEvG8bCWOHVQ48qdXjfo?=
- =?us-ascii?Q?1VeYxDyVi2P1EY1QRsV4SLycP5L+/raduDOVOY7pLMdj9YENqJVEo0YgC4UE?=
- =?us-ascii?Q?2GCYmiuBXK0QQiLSwjbjShptupzHA2Q+AcqcU4g09Y9LpdjtRgG+l/rRCf8E?=
- =?us-ascii?Q?YUqE7rxjZj7f9jnyQAdB1eKTNCwIirXdynDW7nM5+mXi/HnP+A8f+ezG5ncj?=
- =?us-ascii?Q?IZWrRVJHk+/kDKWF7m2q5JsjeyI4LHv/FkOw6eCW0N1XWlHmwJFy5pRRKYEE?=
- =?us-ascii?Q?Ap+ZqlA5sjT6ssDjVjAsbSGWVwfdpcvnjBpXgS7ThvT7ckA0mvWVZKaDmrKP?=
- =?us-ascii?Q?ADU3pUxwHIJoZGJak8XbgZWmvtv8Uw+MjgjryCAbAhLVxL7OezajgdAGE5lE?=
- =?us-ascii?Q?opg9eRjiaCdzHCMvxS8jJjUqXzau0U/r36tBadlGEX1yfio7afN4J0ACpKQQ?=
- =?us-ascii?Q?mY7MAvdiLhJxt7likPrpXjcqfIy9Q+ig7Y0SrQulT1pfxuMNEz2vLWwP2uDC?=
- =?us-ascii?Q?cpCxAgQKAw/crziZM72h4BqYRN60/J8VQM/Hp8+WiUVybcSGFt4nOSpq1YD+?=
- =?us-ascii?Q?3mL2P5oz2+vi5zcTi/g8vGMOAuARBLLOM1yQas4BiZLaR5NZUgiCwAEOm6wG?=
- =?us-ascii?Q?e7qDSXi7ag=3D=3D?=
-X-OriginatorOrg: valinux.co.jp
-X-MS-Exchange-CrossTenant-Network-Message-Id: 815b5655-5853-4487-d7b1-08df3333157c
-X-MS-Exchange-CrossTenant-AuthSource: TY5P286MB319683.JPNP286.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2026 07:31:00.7571
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 7a57bee8-f73d-4c5f-a4f7-d72c91c8c111
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: aLe7+bgSH64Ed6EUnmEhrAFF4tJtngztJqAUY3gcVzryu5iJSj1Dx+ihHnJOC8tN9inlBIesTbtRbRjlPrWHaw==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: TY7P286MB7251
-X-purgate-ID: tlsNG-ef75cf/1792999870-A66DAAE4-197AA972/0/0
-X-purgate-type: clean
-X-purgate-size: 5037
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 1/5] make: add use of $(realpath ) in top and main
+ Rules.mk files
+To: Elliott Mitchell <ehem+xen@m5p.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
+References: <cover.1792436534.git.ehem+xen@m5p.com>
+ <0b38e7ba64831575c2f2533c69e00da79c4bc958.1792436534.git.ehem+xen@m5p.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <0b38e7ba64831575c2f2533c69e00da79c4bc958.1792436534.git.ehem+xen@m5p.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c1860d/1793005321-CF55C87B-789035C8/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 350
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Bernhard!
+On 19.10.2026 21:02, Elliott Mitchell wrote:
+> Date: Sat, 17 Oct 2026 12:25:36 -0700
+> 
+> Without this "/.." tend to accumulate in $(XEN_ROOT) and eventually
+> things start breaking.
 
-Thank you for your feedback. I'm still going through your comments on
-the other patches. I'll reply as I work through them.
+"breaking" as in what exactly happening?
 
-On Sat, 24 Oct 2026 14:48:05 +0200 Bernhard Kaindl wrote:
->--- a/xen/arch/arm/arm64/livepatch.c
->+++ b/xen/arch/arm/arm64/livepatch.c
->@@ -492,6 +496,36 @@
->> +#ifdef CONFIG_ARM64_PATCHABLE_FUNCTION_ENTRY
->> +void arch_livepatch_apply_trace(const struct livepatch_func *trace)
->> +{
->> +    uint32_t *new_ptr;
->> +    uint32_t insns[2];
->> +
->> +    new_ptr = trace->old_addr - (void *)_start + vmap_of_xen_text;
->> [...]
->> +    memcpy(new_ptr, insns, sizeof(insns));
->
->This copies eight bytes from the two-element instruction array, while
->uploaded trace descriptors still use the ordinary Arm livepatch verifier?
->
->For reference, the existing arch_livepatch_verify_func() in
->xen/arch/arm/livepatch.c contains this size check (not added by this patch):
->
->>     if ( func->old_size < ARCH_PATCH_INSN_SIZE )
->>         return -EINVAL;
->>
->>     return 0;
+Jan
 
-Thank you for pointing this out.
-Yes, the check is insufficient.
-
->With ARCH_PATCH_INSN_SIZE equal to four bytes, doesn't this accept a
->four-byte function without establishing that two reserved tracing NOPs
->are present? Is there another check on this path that I have overlooked?
-
-No, I didn't add any other check.
-
->Could an assembly entry or another uninstrumented function consequently
->have executable instructions overwritten? If reverting then installs
->two NOPs, could that lose the original instructions rather than restore
->them?
-
-Yes, I think both could happen.
-
->Would it make sense to validate the complete reserved tracing entry,
->including the actual branch destination and any conflicting livepatch,
->before allowing the write? Could the expected entry also be checked at
->application time, so that a modification after upload is not missed?
-
-Thanks you for the suggestion.
-
-How about adding a helper on the upload/apply/revert paths
-that checks if the function's entry is in the expected state?
-
----- BEGIN IDEA ----
-/*
- * Make sure the patch site is in the expected state.
- *
- * patched = false: expect NOP + NOP.
- * patched = true:  expect MOV + BL.
- */
-static int arch_livepatch_verify_entry(unsigned long addr,
-                                            bool patched)
-{
-    const uint32_t *entry = (const uint32_t *)addr;
-    uint32_t expected[2];
-    uint32_t branch;
-
-    /*
-     * Assembly functions and C functions excluded from instrumentation
-     * lack reserved NOPs.
-     */
-    if ( !is_patchable_function_entry(addr) )
-        return -EINVAL;
-
-    /*
-     * Generate the expected BL instruction with its destination
-     * set to the trampoline.
-     */
-    branch = aarch64_insn_gen_branch_imm(addr + ARCH_PATCH_INSN_SIZE,
-                                         (unsigned long)xen_livepatch_trace_caller,
-                                         AARCH64_INSN_BRANCH_LINK);
-
-    /* Make sure the destination is within the branch range */
-    if ( branch == AARCH64_BREAK_FAULT )
-        return -EINVAL;
-
-    if ( patched )
-    {
-        /*
-         * Before reverting, make sure the site is as we patched:
-         *  mov x9, lr
-         *  bl  xen_livepatch_trace_caller
-         */
-        expected[0] = aarch64_insn_gen_move_reg(9, 30);
-        expected[1] = branch;
-    }
-    else
-    {
-        /*
-         * Before applying, make sure the site is as we reserved:
-         *  nop
-         *  nop
-         */
-        expected[0] = aarch64_insn_gen_nop();
-        expected[1] = aarch64_insn_gen_nop();
-    }
-
-    /* Reject the (un)patching if the site is not as we expected */
-    if ( entry[0] != expected[0] || entry[1] != expected[1] )
-        return -EINVAL;
-
-    return 0;
-}
----- END IDEA ----
-
-Note that is_patchable_function_entry() was introduced in patch 3/5
-for checking whether the function at the given address is traceable.
-I'll move the function to this patch.
-
->Separately, could a callback or one of its helpers call the traced
->function again before the first callback returns?
->
->> +  ASSERT(f->new_addr);
->> +  ((livepatch_trace_func_t)f->new_addr)((unsigned long)f->old_addr, 
->> parent_ip);
->
->What would contain a recursion before Xen runs out of stack? Would a
->guard covering the pre-callback dispatcher work as well as the callback
->itself help, or is there an existing restriction on callback targets
->that would rule this out?
-
-There is no restriction preventing the recursion right now.
-
->I think marking the dispatcher itself non-patchable does not protect
->its callees or the callback's callees, so they should be protected too?
-
-I see that marking the dispatcher alone is insufficient.
-I'll add a guard that covers the dispatcher and callback following your suggestion.
-
->Thanks for taking a look, and apologies if I have missed an existing
->safeguard.
-
-Thank you for pointing this out as well.
-
-Sincerely,
-Ryo Takakura
+>  Address this before something subtlely breaks.
+> 
+> Signed-off-by: Elliott Mitchell <ehem+xen@m5p.com>
 
