@@ -2,40 +2,47 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 23211606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 14:49:10 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 16CDD606A31B
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 14:52:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=cortex-media.de header.i=@cortex-media.de header.a=rsa-sha256 header.s=20250930 header.b=kN+4z15I
-Received: from list by lists.xenproject.org with outflank-mailman.1461442.1672449 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=t1WD087j
+Received: from list by lists.xenproject.org with outflank-mailman.1461450.1672458 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLM0F-000740-2B; Mon, 26 Oct 2026 14:48:47 +0000
+	id 1xLM3q-0000Ct-Hp; Mon, 26 Oct 2026 14:52:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461442.1672449; Mon, 26 Oct 2026 14:48:47 +0000
+Received: by outflank-mailman (output) from mailman id 1461450.1672458; Mon, 26 Oct 2026 14:52:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLM0E-00073t-Vo; Mon, 26 Oct 2026 14:48:46 +0000
-Received: by outflank-mailman (input) for mailman id 1461442;
- Mon, 26 Oct 2026 14:48:45 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <pd@cortex-media.de>) id 1xLM0C-00073n-LH
- for xen-devel@lists.xen.org; Mon, 26 Oct 2026 14:48:45 +0000
+	id 1xLM3q-0000Cm-F6; Mon, 26 Oct 2026 14:52:30 +0000
+Received: by outflank-mailman (input) for mailman id 1461450;
+ Mon, 26 Oct 2026 14:52:28 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLM3o-0000Cd-6p
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 14:52:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLM0B-0065Za-ME
- for xen-devel@lists.xen.org; Mon, 26 Oct 2026 15:48:43 +0100
-Received: from [10.42.69.7] (helo=localhost)
+ id 1xLM3n-00EOqz-Cu
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 15:52:27 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <pd@cortex-media.de>)
- id 6adf6846-e002-0a2a0a5209dd-0a2a4507ed84-22
- for <xen-devel@lists.xen.org>; Mon, 26 Oct 2026 15:48:43 +0100
-Received: from [136.243.217.222] (helo=mail.cortex-media.de)
- by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <pd@cortex-media.de>)
- id 6adf684b-b4ea-0a2a45070019-88f3d9deb668-3
- for <xen-devel@lists.xen.org>; Mon, 26 Oct 2026 15:48:43 +0100
-Received: by mail.cortex-media.de (Postfix) id 21D7838C02F;
- Mon, 26 Oct 2026 15:48:42 +0100 (CET)
+ (envelope-from <Oleksii_Moisieiev@epam.com>)
+ id 6adf6921-2eae-0a2a0a5409dd-0a2a4506974c-16
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 15:52:27 +0100
+Received: from [52.101.83.80]
+ (helo=GVXPR05CU001.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Oleksii_Moisieiev@epam.com>)
+ id 6adf6925-195a-0a2a45060019-34655350084f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 15:52:21 +0100
+Received: from GVXPR03MB11113.eurprd03.prod.outlook.com
+ (2603:10a6:150:2a9::22) by DBAPR03MB6632.eurprd03.prod.outlook.com
+ (2603:10a6:10:17d::8) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Mon, 26 Oct
+ 2026 14:52:19 +0000
+Received: from GVXPR03MB11113.eurprd03.prod.outlook.com
+ ([fe80::13a1:97f6:9d2b:f8cf]) by GVXPR03MB11113.eurprd03.prod.outlook.com
+ ([fe80::13a1:97f6:9d2b:f8cf%6]) with mapi id 15.21.0546.021; Mon, 26 Oct 2026
+ 14:52:19 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -44,267 +51,263 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20250930 header.d=cortex-media.de header.i="@cortex-media.de" header.h="Date:Subject:To:Cc:References:From:In-Reply-To"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=cortex-media.de;
-	s=20250930; t=1793026123;
-	bh=9x1YqTvOf8CN380pGUIOysGSQJKE8dA8qzqMb1mNDME=;
-	h=Date:Subject:To:Cc:References:From:In-Reply-To:From;
-	b=kN+4z15I5D0acYTxmpmmWd/ENm4spU8+1ES4MvL7bQySEEqkPx2PqL430KeK8viC2
-	 On23cql3WRq5eDOY/ie1aJCePy3g7n9MfVBsKBp8IxZEo+gbqKVlkPtj8QdT6l5NkY
-	 ZCm92F024Yk+g51wQP4qm4E5v/bm5Dm4DcgfnreZ3m2P1XuYCS6Mmt3LyQ2FZozyPb
-	 MfvrPZjmcK5bQLs30xNbwYf9HMUe1s9yKq0VjcEG94fcomxPFd8mdvtlj/D4cscXPW
-	 Jj5FxX1izDbO3a3SI2O97UhnFWyHXrvx35Dp8M3o2DI4cM36I2LjdS7S6bKvB8TG86
-	 kXJdU3k0QQj3w==
-Message-ID: <8138ed44-727f-45bc-9673-9684e922595b@cortex-media.de>
-Date: Mon, 26 Oct 2026 15:48:41 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=Dhd9DDzNDVKC24mYO0j7DRhf9uZ1H59FUBvf1Wca4TvMjqaD77iIu+NCtYVYXF5ItEBpxRx7lLAE++xuccyYgE2WCWo3qYyzRFkspGdxw/Gn0yoyLWMMEmYnggv8ImJOYI0kqJy4FFPm5SB/ZtNSuZkTlNosK+fpRExWheNdFbFF/l1z+2bnJx9+qan1Dz0c94b520lYh5+YMmnloFzMt27z8qHFgQBm75TW7vDMEh/JE2YCpy/oQLaoLDadJ0e/p7c2yeWuoqz4cSsHN0VOM/CqFVclBxengRC5ABTnTexcT8Rqabd6H6EJv3IISWtmRs9bcVA8BuMNWmmmZ1fuzg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=9gEhsmRvSo80Zf+IiN3sJZpaqxO6q14tB6eJa/JTniU=;
+ b=WGpotDPZEit9jIGIXcmQb8bchZW/DMs6sNn3Ycj9y+w7Tg9CUOUW8ktUg5Qm6YsqzCK6aI71pGoZEdU3LF/SJvEba/+iDfpMhZueLFndaqP3CQspvupyaUlCSbSO39o8IBU4eOqURQ3xnrxdY176PSgOPkpaOQwP4nUaHGWp6khJBnRd5bxiv1Ij89GKTnk6GJ42XZg0xn5xfMR/mYWlDdN8ll66LlvxslTUjirkSCEjuL6JLu3HZqbbtiD9fH261YvCQd2BqVPBhYTlC3EYg2j3y+4CFBl5FtkPBNVZXyfWCKAbypN7ybMAmU09VlavbZ47d9ax3fWzrZ3iJDuTHA==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=9gEhsmRvSo80Zf+IiN3sJZpaqxO6q14tB6eJa/JTniU=;
+ b=t1WD087jTScJmhohw7sEb9HrLjNUoqjIHjIuBOiUsJtsmY0dpZMingtKSlR0v5CMyCoIBcBiowEAjv31n7uG+3HXBbP7W0Sd3HjB4AShgzV+sS+DA9m8hiyYz1+ezT5vC4vqU0x5khShxCWQrta2KWNBvI+Bjs6UxYLgalXSxvl6YAN+3VjCTODGkUq5e//AB8McLEVN0kxW0ID0T8qS9aDOMVxeq2l1OZtDC+iXdmlsQ1uVDgi0dN4M0aIgLLHm1gJn+xoI4CrUv+PHTSqLz53ZDPbi9tO32a8tUPk3JeqNxdTxwfao32sCyKtsWaGTQsxvHUquFllAL5i2bGpplg==
+From: Oleksii Moisieiev <Oleksii_Moisieiev@epam.com>
+To: Jan Beulich <jbeulich@suse.com>, Oleksii Kurochko
+	<oleksii.kurochko@gmail.com>
+CC: Andrew Cooper <andrew.cooper3@citrix.com>, Anthony PERARD
+	<anthony.perard@vates.tech>, Bertrand Marquis <bertrand.marquis@arm.com>,
+	Julien Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>,
+	=?utf-8?B?Um9nZXIgUGF1IE1vbm7DqQ==?= <roger@xenproject.org>, Stefano
+ Stabellini <sstabellini@kernel.org>, Teddy Astie <teddy.astie@vates.tech>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>,
+	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH v5] xen/arm, xen/common: Add Kconfig option to control
+ Dom0 boot
+Thread-Topic: [PATCH v5] xen/arm, xen/common: Add Kconfig option to control
+ Dom0 boot
+Thread-Index: AQHdUnGcfnmLH64VckKy7OjAkXrKMLbuqNIAgCFle4A=
+Date: Mon, 26 Oct 2026 14:52:19 +0000
+Message-ID: <fb0e223c-44e2-4c28-ab24-50ce5a726185@epam.com>
+References:
+ <41d073a1c07e10f0d86da4a31e7a91b7ffadd8d3.1790947567.git.oleksii_moisieiev@epam.com>
+ <abf320fd-daa0-4057-a6c4-b56c4e336ee6@suse.com>
+In-Reply-To: <abf320fd-daa0-4057-a6c4-b56c4e336ee6@suse.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+x-ms-publictraffictype: Email
+x-ms-traffictypediagnostic: GVXPR03MB11113:EE_|DBAPR03MB6632:EE_
+x-ms-office365-filtering-correlation-id: 97a0c159-6d49-46de-04a2-08df3370bbf1
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+x-microsoft-antispam:
+ BCL:0;ARA:13230040|7416014|23010399003|376014|1800799024|366016|261026140227099002|261026121527099002|38070700021|4143699003|11063799006|56012099006|261009223027099003|261021135927099003|261022105027099003|261021121427099003|261022075727099003|10067099003|18002099003|22082099003|6133799003;
+x-microsoft-antispam-message-info:
+ jWXm3kG/KqU9mOJ+jZmSP3xVxndLiJGJbHBYFGPOpG/KNeQNhX8q/DbDN8LtZZn10LJnTbVS8ebXd8nIPSC5EM1X4JxNwjTs0Hdq7T5n3ghFWFVUsM7+/TGjDPi+4bTR6DWhyoH9rJURanrXye6j+shzW1NFOQW2/tQjoI/qx8j5Wr8mBcgLa+1+UPEE2QhABCQgVwN7B63LwzEG7Pt5C3/F7L5zW2iOXY7rk6bEPR4gAzg+8lIIPTpv+A8U7c48fQOLtpRNdk13Mgp9Tl73PXZlclyZ2vWCY2zqcauFZgDj5+TGGl5hMbn++yPOkkkMChqazxXE95+DRjzuqnMUMhCy15D3ZFay+I8c1SWFKd0lcV7ShEfhHby8a72/hM4ubg3DyCqwJ9Zn7KVESntYnFyRON1B0OHv0/48NMHXfQaJazcI3w86GSxzP9L0LZXJ/VSAJ8+K7o7RKHs4w8vT+qQP93TOWqxz1+VTlcL77uLCtxOs5TDlsRJf+fRoLMyvLVnnjqDwJrnMSVxvAZC/FxLyFfoujKq05iqg1PGa0vYGF/EQREwkFayMAB+TMP1jYrLCpt4hBKHYCFCOy5gMiVCGUvWxNdq6gWLM0yRrBP7cv6sjlsSjcpQVqmTmZeIk7VgcX2Hg3rFfs6acwQ1X9967YZB6KzwcjznQljs86uhD+rmreQk1N4bh/hJmOfF+Cman1l7g0ca0ZNWj4+QEtVTs3qcJYGScQiTnfyxDcGk=
+x-forefront-antispam-report:
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:GVXPR03MB11113.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(7416014)(23010399003)(376014)(1800799024)(366016)(261026140227099002)(261026121527099002)(38070700021)(4143699003)(11063799006)(56012099006)(261009223027099003)(261021135927099003)(261022105027099003)(261021121427099003)(261022075727099003)(10067099003)(18002099003)(22082099003)(6133799003);DIR:OUT;SFP:1102;
+x-ms-exchange-antispam-messagedata-chunkcount: 1
+x-ms-exchange-antispam-messagedata-0:
+ =?utf-8?B?amIvNlQzT2JXTDFCWDFoSVVBNVhIWTRBUmVVYjB4c25HMEFzd3plc0dRUmRO?=
+ =?utf-8?B?M1JtaEdjbnMxbCtWd3JQRU1YUkRtZFhzb1Q1VkNxWFdzakxTMW45Z3BQYzhh?=
+ =?utf-8?B?ZjloNzhPbXNjSGo3bGFhZ0hEY09tcHRKZUl2QlQ4ZzVLanVjOFVkQXhuc0lp?=
+ =?utf-8?B?bHo5eGw1aUJzalk1QjZsL2hMc3h4blFVbGR2OXVzRGtIL2lnS2FRNTdmY2VY?=
+ =?utf-8?B?V25qUWt0VENNVktmK0NQaDU5WnBPZUtQZDFneWVuayt3UjlmMXZlOEc2dVMx?=
+ =?utf-8?B?QVZPbE1uYWdFWGVxOVNCQ2w2MzZzY3BPL0NFN0U3R1N4WW1Ra3REdG9FTkJi?=
+ =?utf-8?B?dlBONGpDazQ4NWJvL3VUSXRmNy9iRmJKdWFpVzM5ZW1udjVyem5iMzB4eU5j?=
+ =?utf-8?B?LytuOVZHTXM2cHNTTklzQkZZRDZmanJMam4wcEo4ejJ3NkZ3M2tvQkt5YXNw?=
+ =?utf-8?B?T2ZXVlp1QVU0RFVLU0ZTd1FVdHBvSGJQYXdIRXJobExaOE9HbUJuQ2ptT2R4?=
+ =?utf-8?B?dWZ5ejFKblZyOTVjVUdEYXY0TFZXa3FZWE50R1hzdmM0ZlBWcWpGV3R4a1Nj?=
+ =?utf-8?B?U01KY3VpMnp3VkxmZmJ5aFdRSjRGR0FUcVJFa1htSEp4ZjJsZmlOVU1NWEds?=
+ =?utf-8?B?VExJRkNLenEyM1JhVkF5RUNVRVFtMkNtdjd3RTFzalJMa2FzdzkvUE5paUMx?=
+ =?utf-8?B?S2o3VlJ1U3RxYXEzM2pXcm11TmFoeEJ5VVpxd0paWFk2SFBqWVFEcTNNMDM3?=
+ =?utf-8?B?c3IvRlF1MWhpNWtPc0hBSy9FaU0xVEV1c1lCR0RRNlZxczNUbmlTZDd4Z21T?=
+ =?utf-8?B?U2l4VjF3eUh0a1A3K0ptekdPcmNqNnhFWVlGaTRBL1JhZ2U0RXlCWkVxRUtV?=
+ =?utf-8?B?OGF5L3Fza3pJUEhSNlBQVEJIZmxPRXNrRVd1UG1MYy9PYlNxaFZZM3p5UUFZ?=
+ =?utf-8?B?TTlZcEFJcERLeHNFQ2FxTGpOL2VTNFh6dHFLQ3pjOTNSVjRlNFVNay8ya0l0?=
+ =?utf-8?B?Q2pEMEVWZFEwc2trN3FzbHlGNVVOc2VQWGJndXpjV0F2cXEyaTcvbGN5UnJw?=
+ =?utf-8?B?R0R3T1VqUkpNQUF6UmcrdWZQL0czK1g5UzhQZjFCeUxPbWpGV0FUa055dmhq?=
+ =?utf-8?B?NVh0TzcrRlczcmhtMlYrNG0xcnFnWUMzek4zWXF2cElDdWZHZ1BzN3E4KzJm?=
+ =?utf-8?B?U21IdjZUdVNIeGNFaTkzTFJ3RHZwQ3hQVkdZa2ZzTzR2RmZVTTgwMlhjVXZs?=
+ =?utf-8?B?N2EwN2dZTCtMNEFGMTNMN0QrYUV4eVJ5U1haWlFlRm14QnRRSlVNM0NOaWtO?=
+ =?utf-8?B?VGViRUoya05hV1lIVG1vN1cyTDZqMHNnM0RLb1R6aURlQW5maS9ERDJRUmdS?=
+ =?utf-8?B?RG9lRlN5Vm9lakd6SDg0SjF1YVlsM2ZvTUc1cXRpSFZWdjdGMVpuQy80cHda?=
+ =?utf-8?B?T2xoNC9DZ0NrclhMcHJmS1llTHdLS21zWjF2dEVuQ085REhoM0RLZlhLK1c0?=
+ =?utf-8?B?dWhtb1JQMTlPV0FTZFh3RUlLemwxb3IyMmEyRFgrZmFLdkJ1Z2xFQzN0QURq?=
+ =?utf-8?B?R005aUlhQUFsa1l3cjBadXI3VjRLMk1tT1kvRlhMS1liMFc0Q0l6dVdKcGw4?=
+ =?utf-8?B?VTFnMWFhL095VWQzTklTYnZNdlBHZmFWUnYzY2RhOFdzYlRra3FxVHAyZUwz?=
+ =?utf-8?B?SGVLbW44b0hnaVYySUlsT1hvRU1mRll0WGwvWFNzaTFjSHQyTk5zK3pNdy81?=
+ =?utf-8?B?T0ZYWjBKRmhaeW5NcWp2NVRIZm9Ib0lYdmhGRTU5UlFWWDRDT1FaNmt0eXdT?=
+ =?utf-8?B?c0IvUk9TRG9RekY4MDkvZ0d6MldyZ2huRmQ1WDFTUm9US2hteXZ3a2s3ZjhP?=
+ =?utf-8?B?VUVnekIrTHZuVGphbTZ6Q3ZVYmNDTUcxZjR6UDFOWGxxMDgzN1o5SXYvSzNi?=
+ =?utf-8?B?b0VYTzBDVHMrQjRIdEdqbTZWdlJQSGVYcWJrMER0VFRSc1JGNlhSb1pISzZN?=
+ =?utf-8?B?N2hEV05zRnJ0clloZ2R5UkpvZlFoZXRZSlpLNW05Y0pFVzVMeE5BN1pRTDE3?=
+ =?utf-8?B?ejMveG9XQ09XcFRwR1N0MFo0empoRXk0TFkrYVhUbzBpbTBtSWhCMW9DblB3?=
+ =?utf-8?B?UlQ3VHNkVVI5c1FRR0lZWFRyV0FEM1d0djZDUFAxREFBUzdrZFZvUWNJQnJt?=
+ =?utf-8?B?RCtWNko2WkFPaFlnOVlqV1FvUkRuSzRPSmpPZWN2eURRYTJMRHR4TVFxVUhY?=
+ =?utf-8?B?Y2laSkpyc0s2cEJqdnRmak9tazVCQVFZaUhlWStXN1Q5UVRSc2J6SkVxQThN?=
+ =?utf-8?B?VEhDTDJtUmdRZ0FTcGwyODZZOVZtdHBqNkpyWTI4Y0Q2NURWWmw1YTR3UzQ2?=
+ =?utf-8?Q?l6S3pwtErjossE6E=3D?=
+Content-Type: text/plain; charset="utf-8"
+Content-ID: <7E4AF48006B2A9489BCF8D2B2FA012C6@eurprd03.prod.outlook.com>
+Content-Transfer-Encoding: base64
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [BUG] Xen BUG at mce_amd.c:100 (mc_ec2type) on Zen 3; host left
- wedged, no reboot
-To: Jan Beulich <jbeulich@suse.com>
-Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, Jason Andryuk <jason.andryuk@amd.com>,
- Soham Dandapat <soham.dandapat@amd.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>, xen-devel@lists.xen.org
-References: <b9a98b3b-d11e-4463-ac80-4145ca991925@cortex-media.de>
- <e32a3056-c025-4d89-a494-ad7e8b6e2580@citrix.com>
- <b35c6a2f-753c-4691-aa9f-f67f2f7f37ef@cortex-media.de>
- <eff24ce3-bb48-4d2b-993c-65974d3af00e@cortex-media.de>
- <ad48ac1c-176d-407f-87e1-ae303e8eb195@suse.com>
-From: Peter Deggendorfer <pd@cortex-media.de>
-In-Reply-To: <ad48ac1c-176d-407f-87e1-ae303e8eb195@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ef75cf/1793026123-370DDAE4-07F399A8/0/0
-X-purgate-type: clean
-X-purgate-size: 10091
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-AuthSource: GVXPR03MB11113.eurprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 97a0c159-6d49-46de-04a2-08df3370bbf1
+X-MS-Exchange-CrossTenant-originalarrivaltime: 26 Oct 2026 14:52:19.1891
+ (UTC)
+X-MS-Exchange-CrossTenant-fromentityheader: Hosted
+X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
+X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
+X-MS-Exchange-CrossTenant-userprincipalname: eHJyLHdyjes8pTAYw3GdKLch5GhKtDuPs9YlRW2Kg5BX+mgEdp5uuccsnzEjtTYXcTIm7gByBypvLkCWyjFU8AKhCQmHH/EB7hmoxlnXK7o=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DBAPR03MB6632
+X-purgate-ID: tlsNG-16d1c6/1793026341-1F8CB77B-370629D5/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 10682
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Am 26.10.2026 um 11:53 schrieb Jan Beulich:
-> On 25.10.2026 13:32, Peter Deggendorfer wrote:
->>> Hi Andrew,
->>>
->>> Thanks a lot for the quick response.
->>>
->>>
->>>> On 23/10/2026 8:32 am, Peter Deggendorfer wrote:
->>>>> Hey Xen Team,
->>>>>
->>>>> I'm hitting a reproducible hypervisor panic in the AMD non-fatal MCE
->>>>> polling path on a Ryzen 9 5950X (Zen 3). Eight occurrences since
->>>>> 2026-09-09, between 12 hours and 2 weeks apart, always CPU 2.
->>>>>
->>>>> Environment
->>>>> -----------
->>>>> Xen:   4.20.4-pre (Debian 4.20.3+127-gc42374a105-0+deb13u1), and still
->>>>>          present in 4.20.5-pre (Debian 4.20.4+39-gf1e1321c87-0+deb13u1)
->>>>> dom0:  Linux 6.12.111+deb13-amd64 (Debian trixie), PV, 32 vCPUs
->>>>> CPU:   AMD Family 25 (0x19) Model 33 (0x21) Stepping 2, Ryzen 9 5950X,
->>>>>          microcode 0x0a201210
->>>>> Cmdline: dom0_mem=4096M,max:4096M ucode=scan console_timestamps=datems
->>>>>
->>>>> The panic
->>>>> ---------
->>>>> (XEN) [2026-10-19 08:58:18.727] Xen BUG at
->>>>> arch/x86/cpu/mcheck/mce_amd.c:100
->>>>> (XEN) CPU:    2
->>>>> (XEN) RIP:    e008:[<ffff82d04028a650>]
->>>>> mce_amd.c#mc_ec2type.part.0+0/0x10
->>>>> (XEN) rbx: 0000000000000445   r12: 0000000000000011   r15:
->>>>> 0000000000000446
->>>>> (XEN) Xen code around <ffff82d04028a650>:
->>>>> (XEN)  90 90 90 90 90 90 90 90 <0f> 0b 90 90 90 90 90 90 90 90 90 90
->>>>> 90 90
->>>>> (XEN) Xen call trace:
->>>>> (XEN)    [<ffff82d04028a650>] R mce_amd.c#mc_ec2type.part.0+0/0x10
->>>>> (XEN)    [<ffff82d04028a699>] S mc_amd_recoverable_scan+0x39/0x40
->>>>> (XEN)    [<ffff82d04028cfdd>] S mcheck_mca_logout+0x42d/0x840
->>>>> (XEN)    [<ffff82d04028a35c>] S
->>>>> amd_nonfatal.c#mce_amd_checkregs+0x1c/0x100
->>>>> (XEN)    [<ffff82d040240e8c>] S smp_call_function_interrupt+0x4c/0x90
->>>>> (XEN)    [<ffff82d0403123d5>] S do_IRQ+0x2a5/0x650
->>>>> (XEN)    [<ffff82d040201915>] S common_interrupt+0x135/0x150
->>>>> (XEN)    [<ffff82d0402883ca>] S
->>>>> cpu_idle.c#acpi_idle_do_entry+0x8a/0x140
->>>>> (XEN)    [<ffff82d0402887cf>] S
->>>>> cpu_idle.c#acpi_processor_idle+0x1ef/0x650
->>>>> (XEN)    [<ffff82d040302cf1>] S domain.c#idle_loop+0xc1/0x130
->>>>> (XEN) Panic on CPU 2
->>>>>
->>>>> The outlined mc_ec2type.part.0 contains nothing but the ud2, so this is
->>>>> the "unreachable" default branch of mc_ec2type() -- the extended error
->>>>> code matches none of MC_EC_TLB_TYPE, MC_EC_MEM_TYPE, MC_EC_BUS_TYPE.
->>>> I think it's safe to just drop the BUG().
->>>>
->>>> That code is literally worse than useless, because if nothing else it's
->>>> just hiding the diagnostics.
->>>>
->>>> I guess it means AMD have added new statuses.
->>>>
->>>>> Across the eight occurrences, r12 appears to be the bank index from the
->>>>> loop in mcheck_mca_logout(), with rbx == 0x401 + 4 * r12 (MCi_STATUS)
->>>>> and r15 == rbx + 1. Three different banks are involved: 10, 17 and 23.
->>>>>
->>>>> Not a hardware defect
->>>>> ---------------------
->>>>> - Started within days of upgrading two hosts from Debian bookworm
->>>>>     (Xen 4.17) to trixie (Xen 4.20). They had run 3 years on 4.17
->>>>> with no
->>>>>     incident.
->>>>> - Three different banks, so not a single failing block.
->>>>> - Updating to the current Debian package (4.20.5-pre, built 2026-10-16)
->>>>>     changed nothing.
->>>>>
->>>>> Possibly related: 532988dccc19 ("x86/mcheck: fix mca_allbanks
->>>>> updating").
->>>>>
->>>>> Also possibly related on the Linux side: 0422b07bc4c2 ("x86/mce/amd:
->>>>> Filter bogus hardware errors on Zen3 clients"), where bogus MCA values
->>>>> on Zen 3 are filtered rather than treated as errors.
->>>>> https://ratatoskr.run/stable/2026/04/7143905
->>>>   From above, you're on a Vermeer, not a Cezanne, so I don't think that
->>>> Linux patch is relevant.
->>>>
->>>> However, your observation about "fix mca_allbanks updating" quite
->>>> possibly is.  That was backported into Xen 4.20.1 as 247b708b1400a, and
->>>> Debian has 4.20.3
->>>>
->>>> Are you able to experiment with that patch reverted?
->>>>
->>>> Alternatively, are you able to experiment with the BUG() removed?
->>> I went with dropping the BUG() rather than the revert.
->>> Reverting 247b708b1400a should stop any bank from being read at
->>> all, which is effectively what mce=false already does here, so I don't
->>> expect it to tell us anything new. I'll run it too if you'd like.
->>>
->>> I'm not familiar with the Xen codebase, but I've built a package with
->>> mc_ec2type() changed to:
->>>
->>>      if ( errorcode & MC_EC_TLB_TYPE )
->>>          return MC_EC_TLB_TYPE;
->>>
->>>      printk(XENLOG_WARNING "MCE: unknown AMD error code %#x\n",
->>> errorcode);
->>>
->>>      return 0;
->>>
->>>
->>> Crashes have been 12 hours to 2 weeks apart, so it may take a while
->>> before I can report back.
->> After ~31 hours of uptime:
->>
->> (XEN) [2026-10-25 04:06:27.260] MCE: unknown AMD error code 0
->>
->> No panic, no wedged CPU, no RCU stalls, no hung guests. Host and all
->> VMs running normally.
->>
->>
->> I also dumped /dev/mcelog in dom0 and got the following records:
->>
->> 00000000: 0000 0000 0000 0000 0000 0000 0000 0000  ................
->> 00000010: 0000 0000 0000 0000 0000 0000 0000 0000  ................
->> 00000020: 0000 0000 0000 0000 0000 0000 0000 0000  ................
->> 00000030: 0000 0000 0000 0000 0200 0000 0000 0000  ................
->> 00000040: 0010 0201 0200 0000 0000 0000 0200 0000  ................
->> 00000050: 1c01 0000 0000 0000 0000 0000 0000 0000  ................
->> 00000060: 0000 0000 0000 0000 0000 0000 0000 0000  ................
->> 00000070: 0000 0000 0000 0000 0000 0000 0000 0000  ................
->> 00000080: 0000 0000 0000 0000 0000 0000 0000 0000  ................
->> 00000090: 0000 0000 0000 0000 0000 0000 0000 0000  ................
->> 000000a0: 0000 0000 0000 0000 0200 0000 0000 0000  ................
->> 000000b0: 0017 0201 0200 0000 0000 0000 0200 0000  ................
->> 000000c0: 1c01 0000 0000 0000 0000 0000 0000 0000  ................
->> 000000d0: 0000 0000 0000 0000 0000 0000 0000 0000  ................
->>
->>
->>>
->>>>> Diagnostics / workaround
->>>>> ------------------------
->>>>> mce_verbosity=verbose yields nothing useful.
->>>>> max_cstate=1 made no difference. mce=false is the only thing that stops
->>>>> it, and it is what I'm running now.
->>>> The fact that mce=false isn't causing machine resets means it's clearly
->>>> something the hardware thinks isn't fatal.
->>>>
->>>> But, I am concerned by the fact it's always on CPU 2, and multiple
->>>> banks.  Is this true for both systems?
->>> To clarify one thing from my report: it is actually a single host whose
->>> complete hardware (board, CPU, RAM) was replaced on
->>> 2026-10-07, keeping only the disks and thus the installation. The
->>> crashes happened both before and after that swap. 10 more hosts
->>> with same hardware still run on bookworm (xen 4.17) for years now
->>> without any incidents.
->>>
->>> So yes, always CPU 2. The bank index varies: on the current hardware
->>> I have seen banks 23, 17 and 10 across four crashes, and banks 23 and
->>> 17 on the previous hardware.
->> Regarding the output of /dev/mcelog: if my decoding is right, three
->> things stand out. MCi_STATUS is zero, i.e. these banks are reporting
->> nothing at all -- no error, no garbage value.
-> Well, things can't quite be that way: If MCi_STATUS was zero, the first
-> check in mc_amd_recoverable_scan() would prevent mc_ec2type() from
-> being reached in the first place. Its caller also checks MCi_STATUS_VAL
-> to be set.
->
-> What I find puzzling is this:
->
->      errorcode = status & (MCi_STATUS_MCA | MCi_STATUS_MSEC);
->      ectype = mc_ec2type(errorcode);
->
-> With errorcode (and mc_ec2type()'s parameter type) being uint16_t, what
-> use is it to include MCi_STATUS_MSEC in the mask? (Yet that's likely
-> unrelated to the issue at hand.) Considering how mc_ec2type() works, I
-> see no reason why status couldn't be passed to it directly (with the
-> parameter type widened to uint32_t). Then the BUG() there could perhaps
-> become BUG_ON(errorcode).
-
-You're right, my conclusion was wrong.
-
-One more data point, from an hour ago:
-
-(XEN) [2026-10-26 13:13:42.050] MCE: unknown AMD error code 0x1000
-
-So it isn't always 0. The uint16_t truncation might explain the first
-(MSEC bits dropped), but 0x1000 is a non-zero code that still matches
-none of MC_EC_BUS_TYPE / MC_EC_MEM_TYPE / MC_EC_TLB_TYPE.
-
-/dev/mcelog right afterwards showed three records, banks 17, 14 and 16,
-all CPU 2 (status zero, as above). Banks seen so far across panics and
-log lines: 10, 14, 16, 17, 23.
-
-With the BUG() dropped, the host has now logged this twice with no
-panic, no wedged CPU and no hung guests. Everything is running
-normally.
-
-Regarding passing status as uint32_t and BUG_ON(errorcode): with
-today's 0x1000, bits 0-31 are non-zero but none of the type bits is
-set, so that BUG_ON would still trigger. So unless 0x1000 is a known
-type that mc_ec2type() should handle, I think the poller shouldn't BUG
-on an unclassifiable code at all.
-
-
->> Both records are again
->> from CPU 2, and bank 23 is one of the banks that appeared in the
->> panics, bank 16 is new.
-> Isn't it possible that the lack of 532988dccc19 ("x86/mcheck: fix
-> mca_allbanks updating") simply hid the issue previously?
-
-That is exactly what I suspect. This host, and 10 more with identical
-hardware, ran for years on Xen 4.17 without a single incident. The
-first panic came within days of upgrading this one to 4.20; the others
-are still on 4.17 and still fine. If no bank was being collected
-before, nothing could have reached mc_ec2type() -- so the condition
-may well have been there the whole time, just never looked at.
-
-Would it help if I logged the full MCi_STATUS of the first read, i.e.
-in mcheck_mca_logout() right after the MCi_STATUS_VAL check, together
-with CPU and bank number?
-
-Peter
+DQpIaSBKYW4sDQoNClRoYW5rcyBmb3IgdGhlIHJldmlldy4gSSdtIHByZXBhcmluZyB2NiByaWdo
+dCBub3cuIE15IHBsYW5zIGZvciB0aGUgDQpjaGFuZ2VzIGFyZSBvdXRsaW5lZCBiZWxvdy4NCg0K
+T24gMDUvMTAvMjAyNiAxMTo1MiwgSmFuIEJldWxpY2ggd3JvdGU6DQo+IE9uIDAyLjEwLjIwMjYg
+MTU6MjYsIE9sZWtzaWkgTW9pc2llaWV2IHdyb3RlOg0KPj4gVGhpcyBjb21taXQgaW50cm9kdWNl
+cyBhIG5ldyBLY29uZmlnIG9wdGlvbiwgYENPTkZJR19ET00wX0JPT1RgLCB0bw0KPj4gYWxsb3cg
+Zm9yIGJ1aWxkaW5nIFhlbiB3aXRob3V0IHN1cHBvcnQgZm9yIGJvb3RpbmcgYSByZWd1bGFyIGRv
+bWFpbiAoRG9tMCkuDQo+PiBUaGlzIGZ1bmN0aW9uYWxpdHkgaXMgcHJpbWFyaWx5IGludGVuZGVk
+IGZvciB0aGUgQVJNIGFyY2hpdGVjdHVyZS4NCj4gSSAoc3RpbGwpIHdvbmRlciB3aHkgdGhpcyB3
+b3VsZCBiZSwgYnV0IHdlbGwgLi4uDQpGb3IgdjYsIEknbSBnb2luZyB0byBkZXNjcmliZSB0aGlz
+IGFzIGEgY29tbW9uIG9wdGlvbiBmb3IgbGVnYWN5IERvbTANCmJvb3QsIHdpdGggQXJtIGltcGxl
+bWVudGluZyB0aGUgY29kZSBleGNsdXNpb24gaW5pdGlhbGx5LiBNeSBpbW1lZGlhdGUNCnVzZSBj
+YXNlIGlzIGFuIEFybSBkZXBsb3ltZW50IHdoZXJlIGd1ZXN0cyBhcmUgbGF1bmNoZWQgdGhyb3Vn
+aA0KZG9tMGxlc3MgYW5kIGxlZ2FjeSBEb20wIGJvb3QgaXMgbm90IG5lZWRlZC4gSSdtIGdvaW5n
+IHRvIGNsYXJpZnkgdGhhdA0KdGhpcyB1c2UgY2FzZSBtb3RpdmF0ZXMgdGhlIGluaXRpYWwgQXJt
+IGltcGxlbWVudGF0aW9uLCByYXRoZXIgdGhhbg0KbWFrZSB0aGUgaW50ZXJmYWNlIEFybS1zcGVj
+aWZpYy4gSXMgdGhhdCBzY29wZSBPSz8NCj4+IEEgbmV3IEtjb25maWcgc3ltYm9sLCBgSEFTX0RP
+TTBgLCBoYXMgYmVlbiBhZGRlZCBhbmQgaXMgc2VsZWN0ZWQgYnkNCj4+IGRlZmF1bHQgZm9yIEFS
+TSBhbmQgWDg2IGFyY2hpdGVjdHVyZS4gVGhpcyBzeW1ib2wgc2lnbmlmaWVzIHRoYXQgYW4NCj4+
+IGFyY2hpdGVjdHVyZSBoYXMgdGhlIGNhcGFiaWxpdHkgdG8gc3VwcG9ydCBhIERvbTAuDQo+IE9s
+ZWtzaWkgLSB3aGF0J3MgeW91ciB0YWtlIHRvd2FyZHMgUklTQy1WIGhlcmU/IFNob3VsZCBpdCBz
+ZWxlY3QgdGhlIG5ldw0KPiBzeW1ib2wgcmlnaHQgYXdheSBhcyB3ZWxsPw0KSW4gdGhlIHN0YWdp
+bmcgYnJhbmNoIFJJU0MtVidzIHN0YXJ0X3hlbigpIGRvZXMgbm90IGhhdmUgYSBsZWdhY3kgRG9t
+MCANCmNvbnN0cnVjdGlvbiBwYXRoLg0KSSdtIHRoZXJlZm9yZSBnb2luZyB0byBsZWF2ZSBIQVNf
+RE9NMCB1bnNlbGVjdGVkIG9uIFJJU0MtViBhbmQgZXhwbGFpbg0KdGhhdCBzZWxlY3Rpb24gc2hv
+dWxkIGFjY29tcGFueSBpbXBsZW1lbnRhdGlvbiBvZiBsZWdhY3kgRG9tMCBib290Lg0KSXRzIGV4
+aXN0aW5nIEhBU19ET00wTEVTUyBzZWxlY3Rpb24gZG9lcyBub3QgcHJvdmlkZSB0aGF0IHBhdGgu
+DQpEb2VzIGl0IHNvdW5kcyBvayB0byB5b3U/DQo+PiBUaGUgYERPTTBfQk9PVGAgb3B0aW9uIGRl
+cGVuZHMgb24gYEhBU19ET00wYCBhbmQgZGVmYXVsdHMgdG8gJ3knLiBGb3INCj4+IGV4cGVydCB1
+c2VycywgdGhpcyBvcHRpb24gY2FuIGJlIGRpc2FibGVkIChgQ09ORklHX0VYUEVSVD15YCBhbmQg
+bm8NCj4+IGBDT05GSUdfRE9NMF9CT09UYCBpbiB0aGUgY29uZmlnKSwgd2hpY2ggd2lsbCBjb21w
+aWxlIG91dCB0aGUgRG9tMA0KPj4gY3JlYXRpb24gY29kZSBvbiBBUk0uIFRoaXMgaXMgdXNlZnVs
+IGZvciBlbWJlZGRlZCBvciBkb20wbGVzcy1vbmx5DQo+PiBzY2VuYXJpb3MgdG8gcmVkdWNlIGJp
+bmFyeSBzaXplIGFuZCBjb21wbGV4aXR5Lg0KPj4NCj4+IFRoZSBBUk0gYm9vdCBwYXRoIGhhcyBi
+ZWVuIHVwZGF0ZWQgdG8gcGFuaWMgaWYgaXQgZGV0ZWN0cyBhIG5vbi1kb20wbGVzcw0KPj4gY29u
+ZmlndXJhdGlvbiB3aGlsZSBgQ09ORklHX0RPTTBfQk9PVGAgaXMgZGlzYWJsZWQsIHByZXZlbnRp
+bmcgYW4gaW52YWxpZA0KPj4gYm9vdC4NCj4+DQo+PiBTaWduZWQtb2ZmLWJ5OiBPbGVrc2lpIE1v
+aXNpZWlldiA8b2xla3NpaV9tb2lzaWVpZXZAZXBhbS5jb20+DQo+PiBBY2tlZC1ieTogSmFuIEJl
+dWxpY2ggPGpiZXVsaWNoQHN1c2UuY29tPg0KPiBOb3R3aXRoc3RhbmRpbmcgdGhlIGFjaywgYSBm
+ZXcgZnVydGhlciBjb21tZW50cy4NClRoYW5rcyBmb3IgdGFraW5nIGFub3RoZXIgbG9vay4gU2lu
+Y2UgdjYgd2lsbCBjaGFuZ2UgdGhlIHg4NiBwcm9tcHQgYW5kDQp0aGUgaGFuZGxpbmcgb2YgdGhl
+IGNvbW1vbiBEb20wIG9wdGlvbnMsIEknbSBnb2luZyB0byBsZWF2ZSB0aGUgZWFybGllcg0KQWNr
+ZWQtYnkgb3V0IHBlbmRpbmcgY29uZmlybWF0aW9uIHRoYXQgaXQgc3RpbGwgYXBwbGllcy4NCj4+
+IC0tLSBhL3hlbi9hcmNoL2FybS9kb21haW5fYnVpbGQuYw0KPj4gKysrIGIveGVuL2FyY2gvYXJt
+L2RvbWFpbl9idWlsZC5jDQo+PiBAQCAtNDMsOCArNDMsMTAgQEANCj4+ICAgI2luY2x1ZGUgPGFz
+bS9ncmFudF90YWJsZS5oPg0KPj4gICAjaW5jbHVkZSA8eGVuL3NlcmlhbC5oPg0KPj4gICANCj4+
+ICsjaWZkZWYgQ09ORklHX0RPTTBfQk9PVA0KPj4gICBzdGF0aWMgdW5zaWduZWQgaW50IF9faW5p
+dGRhdGEgb3B0X2RvbTBfbWF4X3ZjcHVzOw0KPj4gICBpbnRlZ2VyX3BhcmFtKCJkb20wX21heF92
+Y3B1cyIsIG9wdF9kb20wX21heF92Y3B1cyk7DQo+PiArI2VuZGlmDQo+PiAgIA0KPj4gICAvKg0K
+Pj4gICAgKiBJZiB0cnVlLCB0aGUgZXh0ZW5kZWQgcmVnaW9ucyBzdXBwb3J0IGlzIGVuYWJsZWQg
+Zm9yIGRvbTAgYW5kDQo+PiBAQCAtMTIzLDYgKzEyNSw3IEBAIHBhZGRyX3QgX19pbml0IGh3ZG9t
+X2dldF9mZHRfYWxsb2Nfc2l6ZSh2b2lkKQ0KPj4gICAgICAgcmV0dXJuIEFDUElfRE9NMF9GRFRf
+TUlOX1NJWkU7DQo+PiAgIH0NCj4+ICAgDQo+PiArI2lmZGVmIENPTkZJR19ET00wX0JPT1QNCj4+
+ICAgdW5zaWduZWQgaW50IF9faW5pdCBkb20wX21heF92Y3B1cyh2b2lkKQ0KPj4gICB7DQo+PiAg
+ICAgICBpZiAoIG9wdF9kb20wX21heF92Y3B1cyA9PSAwICkNCj4+IEBAIC0xMzUsNiArMTM4LDcg
+QEAgdW5zaWduZWQgaW50IF9faW5pdCBkb20wX21heF92Y3B1cyh2b2lkKQ0KPj4gICANCj4+ICAg
+ICAgIHJldHVybiBvcHRfZG9tMF9tYXhfdmNwdXM7DQo+PiAgIH0NCj4+ICsjZW5kaWYNCj4+ICAg
+DQo+PiAgIC8qDQo+PiAgICAqIEluc2VydCB0aGUgZ2l2ZW4gcGFnZXMgaW50byBhIG1lbW9yeSBi
+YW5rLCBiYW5rcyBhcmUgb3JkZXJlZCBieSBhZGRyZXNzLg0KPj4gQEAgLTE4NjIsNiArMTg2Niw3
+IEBAIGludCBfX2luaXQgY29uc3RydWN0X2RvbWFpbihzdHJ1Y3QgZG9tYWluICpkLCBzdHJ1Y3Qg
+a2VybmVsX2luZm8gKmtpbmZvKQ0KPj4gICAgICAgcmV0dXJuIDA7DQo+PiAgIH0NCj4+ICAgDQo+
+PiArI2lmZGVmIENPTkZJR19ET00wX0JPT1QNCj4+ICAgc3RhdGljIGludCBfX2luaXQgY29uc3Ry
+dWN0X2RvbTAoc3RydWN0IGRvbWFpbiAqZCkNCj4+ICAgew0KPj4gICAgICAgc3RydWN0IGtlcm5l
+bF9pbmZvIGtpbmZvID0gS0VSTkVMX0lORk9fSU5JVDsNCj4+IEBAIC0xODkzLDYgKzE4OTgsNyBA
+QCBzdGF0aWMgaW50IF9faW5pdCBjb25zdHJ1Y3RfZG9tMChzdHJ1Y3QgZG9tYWluICpkKQ0KPj4g
+ICANCj4+ICAgICAgIHJldHVybiBjb25zdHJ1Y3RfaHdkb20oJmtpbmZvLCBOVUxMKTsNCj4+ICAg
+fQ0KPj4gKyNlbmRpZg0KPj4gICANCj4+ICAgaW50IF9faW5pdCBjb25zdHJ1Y3RfaHdkb20oc3Ry
+dWN0IGtlcm5lbF9pbmZvICpraW5mbywNCj4+ICAgICAgICAgICAgICAgICAgICAgICAgICAgICAg
+Y29uc3Qgc3RydWN0IGR0X2RldmljZV9ub2RlICpub2RlKQ0KPj4gQEAgLTE5NDQsNiArMTk1MCw3
+IEBAIGludCBfX2luaXQgY29uc3RydWN0X2h3ZG9tKHN0cnVjdCBrZXJuZWxfaW5mbyAqa2luZm8s
+DQo+PiAgICAgICByZXR1cm4gY29uc3RydWN0X2RvbWFpbihkLCBraW5mbyk7DQo+PiAgIH0NCj4+
+ICAgDQo+PiArI2lmZGVmIENPTkZJR19ET00wX0JPT1QNCj4+ICAgdm9pZCBfX2luaXQgY3JlYXRl
+X2RvbTAodm9pZCkNCj4+ICAgew0KPj4gICAgICAgc3RydWN0IGRvbWFpbiAqZG9tMDsNCj4+IEBA
+IC0yMDAxLDYgKzIwMDgsNyBAQCB2b2lkIF9faW5pdCBjcmVhdGVfZG9tMCh2b2lkKQ0KPj4gICAN
+Cj4+ICAgICAgIHNldF94c19kb21haW4oZG9tMCk7DQo+PiAgIH0NCj4+ICsjZW5kaWYgLyogQ09O
+RklHX0RPTTBfQk9PVCAqLw0KPiBJdCdzIG5vdCByZWFsbHkgYSBsb3Qgb2YgY29kZSB3aGljaCBp
+cyBiZWluZyByZW1vdmVkLCB3aGljaCBtYXkgc3VnZ2VzdCB0aGlzDQo+IGlzIGdldHRpbmcgdG9v
+IGZpbmUtZ3JhaW5lZC4gKFByaW1hcmlseSwgZm9yIG5vdykgQXJtIG1haW50YWluZXJzIHdpbGwg
+bmVlZA0KPiB0byBqdWRnZS4NCg0KSSdtIGdvaW5nIHRvIGxpbWl0IHRoZSBzY29wZSB0byBleGNs
+dWRpbmcgbGVnYWN5IERvbTAgY29uc3RydWN0aW9uIGFuZA0KaXRzIHByaXZhdGUgYm9vdCBvcHRp
+b25zLiBJJ20gYWxzbyBnb2luZyB0byBleGNsdWRlIHRoZSBhZGRpdGlvbmFsDQpEb20wLW9ubHkg
+bWVtb3J5LCBTVkUgYW5kIGNhY2hlLWNvbG9yaW5nIGNvZGUgaWRlbnRpZmllZCBieSBNaWNoYWws
+IGFuZA0KbWFrZSBBcm0gQUNQSSBkZXBlbmQgb24gRE9NMF9CT09ULiBTaGFyZWQgZG9tYWluIGNv
+bnN0cnVjdGlvbiB3aWxsDQpyZW1haW4sIHNpbmNlIGRvbTBsZXNzIGhhcmR3YXJlIGRvbWFpbnMg
+YWxzbyB1c2UgaXQuIEknbSBnb2luZyB0byByZW1vdmUNCnRoZSBjbGFpbSB0aGF0IHRoaXMgZWxp
+bWluYXRlcyBhbGwgdW5yZWFjaGFibGUgY29kZSBvciBlc3RhYmxpc2hlcw0KTUlTUkEgY29tcGxp
+YW5jZS4NCg0KPg0KPiBJIGZ1cnRoZXIgd29uZGVyIGhvdyBtdWNoIHVucmVhY2hhYmxlIGNvZGUg
+aXMgbmV3bHkgaW50cm9kdWNlZCBieSB0aGlzLCB3aGVuDQo+IHRoZSBuZXcgb3B0aW9uIGlzIGVu
+YWJsZWQuIHNldF94c19kb21haW4oKSAodmlzaWJsZSBpbiBwYXRjaCBjb250ZXh0IGFib3ZlKQ0K
+PiBpcyBwb3NzaWJseSBvbmx5IHRoZSBmaXJzdCBleGFtcGxlLg0KDQpJIGNoZWNrZWQgdGhlIGNh
+c2Ugd2l0aCBET00wX0JPT1Q9bi4gY3JlYXRlX2RvbVVzKCkgc3RpbGwgY2FsbHMNCnNldF94c19k
+b21haW4oKSBmb3IgYSBkb20wbGVzcyBkb21haW4gd2l0aCBYRU5fRE9NQ1RMX0NERl94c19kb21h
+aW4gc2V0Lg0KU2ltaWxhcmx5LCBjb25zdHJ1Y3RfZG9tVSgpIGNhbGxzIGNvbnN0cnVjdF9od2Rv
+bSgpIGZvciBhIGhhcmR3YXJlDQpkb21haW4uDQo+PiAtLS0gYS94ZW4vYXJjaC9hcm0vc2V0dXAu
+Yw0KPj4gKysrIGIveGVuL2FyY2gvYXJtL3NldHVwLmMNCj4+IEBAIC00OTEsMTEgKzQ5MSwxOCBA
+QCB2b2lkIGFzbWxpbmthZ2UgX19pbml0IG5vcmV0dXJuIHN0YXJ0X3hlbih1bnNpZ25lZCBsb25n
+IGZkdF9wYWRkcikNCj4+ICAgDQo+PiAgICAgICBkb19pbml0X2Jvb3R0ZXN0cygpOw0KPj4gICAN
+Cj4+IC0gICAgLyogQ3JlYXRlIGluaXRpYWwgZG9tYWluIDAuICovDQo+PiAtICAgIGlmICggIWlz
+X2RvbTBsZXNzX21vZGUoKSApDQo+PiArICAgIGlmICggSVNfRU5BQkxFRChDT05GSUdfRE9NMF9C
+T09UKSAmJiAhaXNfZG9tMGxlc3NfbW9kZSgpICkNCj4+ICsgICAgew0KPj4gKyAgICAgICAgLyog
+Q3JlYXRlIGluaXRpYWwgZG9tYWluIDAuICovDQo+PiAgICAgICAgICAgY3JlYXRlX2RvbTAoKTsN
+Cj4+ICsgICAgfQ0KPj4gICAgICAgZWxzZQ0KPj4gLSAgICAgICAgcHJpbnRrKFhFTkxPR19JTkZP
+ICJYZW4gZG9tMGxlc3MgbW9kZSBkZXRlY3RlZFxuIik7DQo+PiArICAgIHsNCj4+ICsgICAgICAg
+IGlmICggaXNfZG9tMGxlc3NfbW9kZSgpKQ0KPj4gKyAgICAgICAgICAgIHByaW50ayhYRU5MT0df
+SU5GTyAiWGVuIGRvbTBsZXNzIG1vZGUgZGV0ZWN0ZWRcbiIpOw0KPj4gKyAgICAgICAgZWxzZQ0K
+Pj4gKyAgICAgICAgICAgIHBhbmljKCJOZWl0aGVyIGRvbTAgbm9yIGRvbTBsZXNzIG1vZGUgd2Fz
+IGRldGVjdGVkLCBhYm9ydGluZ1xuIik7DQo+PiArICAgIH0NCj4gSWYgSSB3YXMgbWFpbnRhaW5l
+ciBvZiB0aGlzIGNvZGUsIEkgd291bGQgYXNrIGZvciB0aGUgZmlndXJlIGJyYWNlcyB0byBiZQ0K
+PiBvbWl0dGVkIC0gdGhlIGlubmVyIGlmKCkgY2FuIGVhc2lseSBiZSAiZWxzZSBpZiIuDQpJJ20g
+Z29pbmcgdG8gdXNlIE1pY2hhbCdzIHByb3Bvc2VkIHNlcXVlbmNlOiBjaGVjayBpc19kb20wbGVz
+c19tb2RlKCkNCm9uY2UsIG90aGVyd2lzZSBjcmVhdGUgRG9tMCBpZiBET00wX0JPT1QgaXMgZW5h
+YmxlZCwgb3RoZXJ3aXNlIHBhbmljLg0KVGhpcyByZW1vdmVzIHRoZSBleHRyYSBicmFjZXMgYW5k
+IHRoZSByZXBlYXRlZCBkZXRlY3Rpb24uDQo+PiAtLS0gYS94ZW4vY29tbW9uL0tjb25maWcNCj4+
+ICsrKyBiL3hlbi9jb21tb24vS2NvbmZpZw0KPj4gQEAgLTI2LDYgKzI2LDE1IEBAIGNvbmZpZyBE
+T00wTEVTU19CT09UDQo+PiAgIAkgIFhlbiBib290IHdpdGhvdXQgdGhlIG5lZWQgb2YgYSBjb250
+cm9sIGRvbWFpbiAoRG9tMCksIHdoaWNoIGNvdWxkIGJlDQo+PiAgIAkgIHByZXNlbnQgYW55d2F5
+Lg0KPj4gICANCj4+ICtjb25maWcgRE9NMF9CT09UDQo+PiArCWJvb2wgIkRvbTAgYm9vdCBzdXBw
+b3J0IiBpZiBFWFBFUlQgJiYgIVg4Ng0KPiBMaWtlIGFscmVhZHkgaW5kaWNhdGVkIGluIHJlcGx5
+IHRvIHYzIEknbSBpcnJpdGF0ZWQgYnkgdGhpczogV2hhdCB1c2UgaXMNCj4gdGhlIHNlbGVjdCBv
+ZiBIQVNfRE9NMCBvbiB4ODYgd2hlbiB0aGVuIHlvdSBleGNsdWRlIHg4NiBoZXJlPyBJIHRoaW5r
+IGl0DQo+IG5lZWRzIHRvIGJlIGNsYXJpZmllZCB3aGV0aGVyLCBhcyB0aGUgY29tbWl0IG1lc3Nh
+Z2Ugc2F5cywgdGhpcyBpcyBnb2luZw0KPiB0byBiZSBBcm0tb25seSBvciBvZiBicm9hZGVyIHVz
+ZS4gSW4gdGhlIGxhdHRlciBjYXNlIHRoZSAhWDg2IGhlcmUgd291bGQNCj4gd2FudCBsZWF2aW5n
+IG91dDsgdGhlIGRlc2NyaXB0aW9uIHRoZW4gd291bGQgd2FudCB0byBjbGFyaWZ5IHRoYXQgbWFr
+aW5nDQo+IHg4NiByZXNwZWN0IHRoZSBvcHRpb24gaXMgYSBUT0RPIGl0ZW0gKHBvc3NpYmx5IHBh
+cnQgb2YgdGhlIGh5cGVybGF1bmNoDQo+IGVmZm9ydCkuDQo+DQo+IEluIHRoZSBmb3JtZXIgY2Fz
+ZSBtb3JlIHF1ZXN0aW9ucyBhcmlzZSwgbGlrZSB3aHkgdGhpcyB3YW50cyB0byBiZSBhDQo+IGNv
+bW1vbiBvcHRpb24gaW4gdGhlIGZpcnN0IHBsYWNlLiAoQnV0IHNpbmNlIGZyb20gYW4gYWJzdHJh
+Y3QgcG92IHRoaXMgaXMNCj4gYSBjb21tb24gY2hvaWNlLCB0aGlzIGNhc2UgbGlrZWx5IGRvZXNu
+J3Qgd2FudCBwdXJzdWluZyBhbnl3YXkuKQ0KDQoNCkknbSBnb2luZyB0byBrZWVwIHRoZSBvcHRp
+b24gaW4gY29tbW9uIEtjb25maWcsIHdpdGggQXJtIGFuZCB4ODYNCnNlbGVjdGluZyBIQVNfRE9N
+MCwgYW5kIHJlbW92ZSAhWDg2IGZyb20gdGhlIGV4cGVydCBwcm9tcHQuIEknbSBhbHNvDQpnb2lu
+ZyB0byBleHBsYWluIGluIHRoZSBoZWxwIHRleHQgYW5kIGNvbW1pdCBtZXNzYWdlIHRoYXQgaW1w
+bGVtZW50aW5nDQp0aGUgb3B0aW9uIG9uIHg4NiByZW1haW5zIGEgVE9ETywgcG90ZW50aWFsbHkg
+YXMgcGFydCBvZiBIeXBlcmxhdW5jaC4NCg0KV2l0aCB0aGlzIHJldmlzaW9uLCB4ODYgd2lsbCBz
+dGlsbCBidWlsZCBhbmQgYm9vdCBsZWdhY3kgRG9tMCBldmVuIHdoZW4NCkRPTTBfQk9PVD1uLiBJ
+J20gZ29pbmcgdG8gcHJlc2VydmUgaXRzIERPTTBfTUVNIHNldHRpbmcgYW5kIGRvbTANCmNvbW1h
+bmQtbGluZSBwYXJzZXIgd2hpbGUgdGhhdCByZW1haW5zIHRoZSBjYXNlLg0KDQo+IEphbg==
 
