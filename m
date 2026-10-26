@@ -2,45 +2,37 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B2948606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 10:20:56 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0491B606A31A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 10:29:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=X5iByLTn
-Received: from list by lists.xenproject.org with outflank-mailman.1461060.1672001 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=QlrXhYgz
+Received: from list by lists.xenproject.org with outflank-mailman.1461071.1672015 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLHon-0003qK-7Z; Mon, 26 Oct 2026 10:20:41 +0000
+	id 1xLHwa-0005J9-65; Mon, 26 Oct 2026 10:28:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461060.1672001; Mon, 26 Oct 2026 10:20:41 +0000
+Received: by outflank-mailman (output) from mailman id 1461071.1672015; Mon, 26 Oct 2026 10:28:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLHon-0003qD-4i; Mon, 26 Oct 2026 10:20:41 +0000
-Received: by outflank-mailman (input) for mailman id 1461060;
- Mon, 26 Oct 2026 10:20:39 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xLHol-0003q7-Iq
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 10:20:39 +0000
-Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLHok-003yqv-QS
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 11:20:38 +0100
-Received: from [10.42.69.10] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6adf296f-e002-0a2a0a5209dd-0a2a450a8378-14
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 11:20:38 +0100
-Received: from [209.85.221.44] (helo=mail-wr1-f44.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6adf2973-f2d2-0a2a450a0019-d155dd2cf031-3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 11:20:35 +0100
-Received: by mail-wr1-f44.google.com with SMTP id
- ffacd0b85a97d-48e04773687so838556f8f.2
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 03:20:35 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ecdfd8dsm14757039f8f.56.2026.10.26.03.20.33
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Oct 2026 03:20:34 -0700 (PDT)
+	id 1xLHwa-0005J2-2y; Mon, 26 Oct 2026 10:28:44 +0000
+Received: by outflank-mailman (input) for mailman id 1461071;
+ Mon, 26 Oct 2026 10:28:42 +0000
+Received: from mail.xenproject.org ([104.130.215.37])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <gwd@xenproject.org>) id 1xLHwY-0005Iu-KV
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 10:28:42 +0000
+Received: from xenbits.xenproject.org ([104.239.192.120])
+ by mail.xenproject.org with esmtp (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xLHwY-0000000EZ3z-3Bqj
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 10:28:42 +0000
+Received: from mail-lj1-f169.google.com ([209.85.208.169])
+ by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
+ TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (Exim 4.98.2)
+ (envelope-from <gwd@xenproject.org>) id 1xLHwY-00000001srr-2v9J
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 10:28:42 +0000
+Received: by mail-lj1-f169.google.com with SMTP id
+ 38308e7fff4ca-3ab28f3e4dcso31510091fa.0
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 03:28:42 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,107 +41,80 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793010034; x=1793614834; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=npRG4y4emhj6KoE99osvHlRJ2HugQIzycJNLMCGEoAk=;
-        b=X5iByLTngZgrP6dY57bpyP8ULiIp8bHBLp6BVmmSHny3nC+Tic2P+OJatAoLs7PC2X
-         Oeh1v3+V0f9KlGYYKDPG1c+QZ0yzFv5D653BZPzi3fqKr3eSN+4vwJUwePvT7ULtZd3g
-         CxxXUfvwnAb+jgsVd+avJkBjuNzwotoao3crDu8+xAj6QvU4LGkvZBDpoeI6mEHa7MpK
-         Qi2SD/9r6ST3xgy1JzjXAm9qTcPSStJx1V+4gz7rm04JWf+IXvk1S3395/HEi4xzoDfR
-         iX5H8VmY1le+c3hQMb5yqzk9l6hMAu6G5uG7u53vDhKAnMagbjmk/JWpKpLKQ0V1oDqe
-         piPA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793010034; x=1793614834;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=npRG4y4emhj6KoE99osvHlRJ2HugQIzycJNLMCGEoAk=;
-        b=mWdX6lZgG6Z8G+1+eG1zqFn7vkbwvBxgXl403WCGzqoribNyxriIoybfsVWxOFio97
-         dzSPLMAhjuTeqzlGV2G3dnU2Q0DFBqqRPtQ4m3fn6NbgMzup9+9cLHRI47X0C+lK6RyZ
-         4WPWgM+s6XIdiWvWSpC7wdXEZZFNBJffUGxw1+xjDT++tCSBdThJ3zKOD/VrNG6kyP2j
-         tJ3uKKr+i8y1kwQ41GhIGJOeMfSACgvnkswgmSabM6bIGEldED/JTxvTljKSFYy0o/gp
-         atSjhYc6Kk0uUmUcXPtG0AulYpEO8RWLgPBBVsrADqQycbJdGotV7TrbJ+ZMneW7zVch
-         5HPw==
-X-Forwarded-Encrypted: i=1; AKwUvBwXB2YftJY/d1NzP85Iab2YIMj4QDrg0/zmnJzw9DXctDRzUWep3WtEX8bnIyM9HGqe3TiFVyw/iHo=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKqwPIpIDIxKBSqDbD8mxMbEJZNcU8Wn3AawcP2wR9H4e6T47qY
-	1mVO2nfW9Xqt5gQHYveQGiyjYGlbpObASJ9hjXhO3De0oaJkI/Vq2x0cn6pOWI3ePg==
-X-Gm-Gg: AYBFou0lRIuKFV6F8MyXMJwkadNqqu/1EQSgxl5xlfuZL2YbKrTLT4U0fY9FO6ofZvc
-	9VI31IPf7z5PUZaoaiIlKpXU4LL4fT37Z+AF4OP1h3+tkI0sLM8aar3ZyD8QDssS93mzWeaJhk+
-	IlQCA9ocGblnC/ne+GgVOdSQ4581cpsm5mlWxRbmkxz7XUwbfGV5Q0GLSTjmTV14rzlNrlN0ps6
-	60cvj9cBOBV/Dn996wFM0GF2hC5EaMUoMhYNxfMlGDmkHaEB/q/l4eYwc61jnJIPgrwSDWk7iDt
-	7ygu5fSp7EsUD6O4mg3Kc348Z0aUZnq4EeJQ3UEzB1OdQJHSvvxbNvx74hMBXxYj6zHDngaSCJx
-	YZtMB5kXXOurnvEfzCeprTpTqN7vep2ftOFNzyfnlH2FZl0b4aDSnotGMXjEie+a0jGjZXNjkcF
-	DFsTwhtKoUBXXto2kkY/xukjejhceSK4vAiT806QMPhUYFYonqYl3J8YddIoLhhfIZqhNU09QOJ
-	zaxHmpj3D1P0O9LZvg9lXQK33gpwXoR2DpC3GQXGeZ4q2y4/IGkwnq4ivjRcx5JVcgoN+1AKomm
-	tpJRAl7vGSq4lLzCncZ4hpo64GgOmi5mGBymAORn+7f/
-X-Received: by 2002:a05:600c:8b62:b0:4a2:150f:1610 with SMTP id 5b1f17b1804b1-4a35acd5f91mr100881745e9.23.1793010034559;
-        Mon, 26 Oct 2026 03:20:34 -0700 (PDT)
-Message-ID: <572b2fb5-1cee-442f-a81f-9a667adb5c4b@suse.com>
-Date: Mon, 26 Oct 2026 11:20:33 +0100
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:Cc
+	:To:Subject:Message-ID:Date:From:In-Reply-To:References:MIME-Version;
+	bh=dkW7G0VtuBqBdkVDSE4JuBU6fPDgpB58bfQi0jx+Tq8=; b=QlrXhYgz6mT7n3t9eAR7tPPGbU
+	1G67lVIrX12UhF2X6C5+S2IyINFBBg9rU9OjVClQ1yhL/NxeZhoFRf5Cly0clJyng86f885IN90Zx
+	YuOgarr/zDZnPW7Ka3dtlkAv8BQfmZCf2UYpSnmhDwfE2BD/iF+3yD8Gp9UHrLqKZYfo=;
+X-Gm-Message-State: AFq9FYKWM58O/Ct2I/9kdru5tpZ3q4GVCAFXf2cs/JPVqLipzdrRVfoo
+	FgI5y1TnoW37bNl4NTID+o9TV/9nV2li7wtHxa/pWVC491MkA7OldKhDPCzzJJ48fWKFfdeDOFZ
+	qyU/yqR7OX4a2t5+kXSDetCGCB65tgyw=
+X-Received: by 2002:a05:651c:1613:b0:3a9:89aa:618a with SMTP id
+ 38308e7fff4ca-3ac6fd095c8mr15239661fa.12.1793010521438; Mon, 26 Oct 2026
+ 03:28:41 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/nSVM: Ignore bits 11:0 of L1's MSRPM base address
-To: Stephen Cheng <stephen.cheng@citrix.com>
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Jason Andryuk <jason.andryuk@amd.com>, Teddy Astie <teddy.astie@vates.tech>,
- xen-devel@lists.xenproject.org
-References: <20261026023821.301182-1-stephen.cheng@citrix.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261026023821.301182-1-stephen.cheng@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1793010035-538D5CFC-1CA41B4C/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 383
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+References: <20261019-asi-hvm-v4-0-b68b66652266@xenproject.org>
+ <20261019-asi-hvm-v4-2-b68b66652266@xenproject.org> <atsHU5ywFeNb0TlZ@Mac.lan>
+In-Reply-To: <atsHU5ywFeNb0TlZ@Mac.lan>
+From: George Dunlap <gwd@xenproject.org>
+Date: Mon, 26 Oct 2026 10:28:29 +0000
+X-Gmail-Original-Message-ID: <CAFLBxZbHj1wLeTUE8U4n5UXr74KK6DBndbgZ6cXT_af8AXJA3A@mail.gmail.com>
+X-Gm-Features: AclHuK9gSrJt3oJl87YE5AYr1LbY7_3e_CNfbqbvI9lC1JYPM_mWEjaxWkI5AaA
+Message-ID: <CAFLBxZbHj1wLeTUE8U4n5UXr74KK6DBndbgZ6cXT_af8AXJA3A@mail.gmail.com>
+Subject: Re: [PATCH v4 02/30] x86/mm: refuse to promote an L4 while the domain
+ has no vCPU
+To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>, 
+	Andrew Cooper <andrew.cooper3@citrix.com>, Teddy Astie <teddy.astie@vates.tech>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-Spam-Status: No, score=-6.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 26.10.2026 03:38, Stephen Cheng wrote:
-> VMRUN ignores bits 11:0 of MSRPM_BASE_PA (APM volume 2, 24593 Rev. 3.44,
-> section 15.11),
+On Fri, Oct 23, 2026 at 8:06=E2=80=AFAM Roger Pau Monn=C3=A9 <roger@xenproj=
+ect.org> wrote:
+>
+> On Mon, Oct 19, 2026 at 08:42:33PM +0100, George Dunlap wrote:
+> > init_xen_l4_slots() puts the domain's per-domain L3 in slot 260 of the
+> > L4s it fills.  Since fcf91ce9de66 ("x86/pv: don't populate the GDT/LDT
+> > L3 slot at domain creation") a PV domain gets that L3 with its first
+> > vCPU (pv_create_gdt_ldt_l1tab()).  Only mapcache_domain_init() makes it
+> > earlier, with the domain, and release builds skip that unless memory
+> > hotplug is enabled or the host's memory reaches past the part of the
+> > directmap PV guests can see.  So in release builds on most hosts, an L4
+> > promoted before XEN_DOMCTL_max_vcpus has created the domain's vCPUs get=
+s
+> > a slot 260 entry made from a NULL page (0x803e900000000063), pointing
+> > far beyond the host's memory.
+>
+> Won't it be more reliable long term to instead return an error from
+> init_xen_l4_slots() when the per-domain L3 page is not present?
+>
+> It does seem like PV vCPU creation could change yet again in a way
+> that the per-domain L3 is not allocated there, and then the check
+> added in this patch will be moot.  If we need the per-domain
+> page-table to be allocated by this point, let's test for that, not
+> indirectly testing whether vCPU 0 has been created.
+>
+> I also wonder, this is for PV only, but I assume for correctness
+> purposes we should do the same check for HVM monitor tables also?
 
-As before - section titles please alongside (or in place or) section numbers.
-I'm looking at 3.45, and it is mere luck that section numbers didn't change
-there. Then, on top of Ross'es R-b:
-Acked-by: Jan Beulich <jbeulich@suse.com>
+Eventually we modify init_xen_l4_slots to take a `struct vcpu*`; if
+there are no vcpus, we can't pass it anything.  For vcpu_pt domains,
+that would technically be fine, I think, since the L3 is written in on
+context switch anyway.  But we would still need some sort of fall-back
+if d->vcpus[0] =3D=3D NULL but d->arch.perdomain_l3_pg !=3D NULL.  Is it
+worth trying to figure out how to handle that case, just to save us
+time in case we change the vCPU creation again?
 
-Jan
+We could change this patch to check `d->arch.perdomain_l3_pg` instead;
+if we end up backporting this it certainly does make the check more
+robust.  But we'd still have to add the vcpu check later.
+
+ -George
 
