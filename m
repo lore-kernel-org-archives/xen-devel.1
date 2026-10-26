@@ -2,48 +2,57 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1CA1C606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 02:39:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 34553606A31A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 03:03:50 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=bfR0v2lj
-Received: from list by lists.xenproject.org with outflank-mailman.1460719.1671595 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=kRnhhCrL
+Received: from list by lists.xenproject.org with outflank-mailman.1460730.1671603 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLAbf-00053F-FJ; Mon, 26 Oct 2026 02:38:39 +0000
+	id 1xLAzo-00015M-BX; Mon, 26 Oct 2026 03:03:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1460719.1671595; Mon, 26 Oct 2026 02:38:39 +0000
+Received: by outflank-mailman (output) from mailman id 1460730.1671603; Mon, 26 Oct 2026 03:03:36 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLAbf-000537-8P; Mon, 26 Oct 2026 02:38:39 +0000
-Received: by outflank-mailman (input) for mailman id 1460719;
- Mon, 26 Oct 2026 02:38:37 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
+	id 1xLAzo-00015E-8W; Mon, 26 Oct 2026 03:03:36 +0000
+Received: by outflank-mailman (input) for mailman id 1460730;
+ Mon, 26 Oct 2026 03:03:35 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <stephen.cheng@citrix.com>) id 1xLAbd-000531-CL
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 02:38:37 +0000
+ (envelope-from <Shuaidong.Chen@amd.com>) id 1xLAzn-000158-GB
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 03:03:35 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLAbc-002ols-Ao
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 03:38:36 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xLAzm-00CPQu-EJ
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 04:03:34 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <stephen.cheng@citrix.com>)
- id 6adebc96-bab6-0a2a0a5309dd-0a2a45098dac-38
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 03:38:36 +0100
-Received: from [40.93.198.43]
- (helo=CY7PR03CU001.outbound.protection.outlook.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <stephen.cheng@citrix.com>)
- id 6adebd2a-be1a-0a2a45090019-285dc62b1a11-3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 03:38:35 +0100
-Received: from CO1PR03MB7889.namprd03.prod.outlook.com (2603:10b6:303:275::14)
- by DS6PR03MB023887.namprd03.prod.outlook.com (2603:10b6:8:521::10)
- with Microsoft SMTP Server (version=TLS1_2,
+ (envelope-from <Shuaidong.Chen@amd.com>)
+ id 6adec2e7-2eae-0a2a0a5409dd-0a2a45039aae-16
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 04:03:33 +0100
+Received: from [52.101.85.30]
+ (helo=BYAPR05CU005.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Shuaidong.Chen@amd.com>)
+ id 6adec303-fae8-0a2a45030019-3465551ec0e3-3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 04:03:33 +0100
+Received: from DS1PR06CA0027.namprd06.prod.outlook.com (2603:10b6:8:23e::19)
+ by SN7PR12MB8172.namprd12.prod.outlook.com (2603:10b6:806:352::20) with
+ Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Mon, 26 Oct
- 2026 02:38:32 +0000
-Received: from CO1PR03MB7889.namprd03.prod.outlook.com
- ([fe80::2d02:5605:87a2:6767]) by CO1PR03MB7889.namprd03.prod.outlook.com
- ([fe80::2d02:5605:87a2:6767%4]) with mapi id 15.21.0546.021; Mon, 26 Oct 2026
- 02:38:32 +0000
+ 2026 03:03:28 +0000
+Received: from CH7PEPF00000018.namprd21.prod.outlook.com
+ (2603:10b6:8:23e:cafe::41) by DS1PR06CA0027.outlook.office365.com
+ (2603:10b6:8:23e::19) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.451.18 via Frontend Transport; Mon,
+ 26 Oct 2026 03:03:28 +0000
+Received: from satlexmb07.amd.com (165.204.84.17) by
+ CH7PEPF00000018.mail.protection.outlook.com (10.167.244.167) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.569.0 via Frontend Transport; Mon, 26 Oct 2026 03:03:27 +0000
+Received: from jim-System-Product-Name.amd.com (10.180.168.240) by
+ satlexmb07.amd.com (10.181.42.216) with Microsoft SMTP Server
+ (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.2.2562.53; Sun, 25 Oct 2026 22:03:24 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,101 +61,78 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=tEg+TWHNEfcXw/j5f1wVltcggL5FBXnRO9oOZweXBMHw9XjySwijt1S8QcPdZ4xtrOSonSpT5/XfI7FSn0K7m5mIF+7AnVfAC0FemsxiJ7QPRz0xU2AXQmylkWhFAt6qVA/5sQ1HXYJeNSHOga+/kpZiOjiCZgRUo5P6AAfADaSuqn/mD1M1BHdG5aXVTNzJkVDw0wn+JTGKpBmog4k/uHJQn6jzhuGrplMmxU5OYhuMV9gGxQQLfzbBi2E8Fsgu1Z8V0hQBbCiqraLTnmxJVoyviqiDYeP73kg/7+HUC2fmwjYVJBZr8YG1O0kdo4XIJy/KQ6PJSlIh+yS1fh9uGA==
+ b=ASDKMIqi6o8V7hMwuWJhFwXzE8jBxeuk2x1ndRPCBorlCCgiYSg8KsiujrMFZCet0NjvHmRq5l/PCAk6ZIanbxTbGdQ/U61N6mJACHm/a9WgLB0iqBvOoIWS5BSAnZkx5RTL3py300FOOCugrkYYdpPyO3T1XQe8n2f+O3ENSym3P0/JriLkEJb4d+eqkmRxg5At9VKDP15eX9AmTwCvqutQwtwKA9GJ1b2ohGHWVRTbK4nLUYLJ2yJ0XNO9eQ+n2KIKCESyzh8YNgnFW3p3jbHEhfE9rjFjSIG5A4tPQyhHEB0BCTSVOZ37w3kFoieJw1l+evlHk+Fx9iTMKwYAzg==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=bo91kQ2+mIRGrhIWDBqPnGbh+YLfBhzhw+LXoFKZmiE=;
- b=WFjz0yfrmON7cFFLIEr6fLu3htzbrxFIdiS9bxrn8Ybp5MJBu/YewakMcQqsjjTCGUJ6ZgenZLa//RKsan+s+1+V+QxbjePZEaEOy73gsu2T1jZsHoDetacyDt89dM4Wk8S9fbc2pQS1krZxm6umKGGfYO92ICfdb5fehHSD+rVonargwKRwvnoZyo1QRmc9QK31c8x2VTNHTpjpIjfeMwuNXAzYEuaJ82sfVaKadytOnYo+gO9UQSJwZ8f1Yf0jc0VDlht1BJMT4PFQyRp3ncUEEanbCgv1qkz7GXbdnNyDiQaJ3kEY/WgI2IB3pWitlw+RQQt8KO/rr9NGlXl4bA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
- dkim=pass header.d=citrix.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
- s=selector1;
+ bh=9GijEse6hff60BEqBgFxft9+bDZ0t5yGKOBH3CY1qHc=;
+ b=jX51cplIU/1bvb1IwtwhKH9XPMjeMOt/kIubIp5YWWo9VloldsGzbkKw7ju7PraoR1HXN45C008MeO8NGs0hPDC8NjSBYDSZOfELa7WbQORM0MqVVFTc+bNqeRGJG9Jd9vTnCJOoPPlwNrhA6T3cva1lQljpyrhyTptsKGNxk4Yyz2214B9BQ0N7Rk+FSs1TNVQMwTzXw40Be3jz8Dz8ohmwYNWyeVmArcZ5DPDtPBFiMAAp6nNTGz2J9ZDMBsxmH8tsiu/BPxf4VXdKooEx536XsMDCOV6uFeL6j6x2dh/2xINDYix6pbNaCJ7iOfsa0wEnUyw00ETEw411JbMiZg==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=bo91kQ2+mIRGrhIWDBqPnGbh+YLfBhzhw+LXoFKZmiE=;
- b=bfR0v2ljhswAz6m8IE6lbdAiqTBDy6BkGrra17FIX3d4WMlCRsWoJD4HmiO2EClDlLn3krWE5QRH6/mJGqiKI/xp70QYWbAn6T6XFNSuLg76LvvlcVanTPe6guI0B+apgY+utnaz5pv+rUc/qqPqzzDNN9UuNGR0EOKKx2bMlKY=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=citrix.com;
-From: Stephen Cheng <stephen.cheng@citrix.com>
-To: xen-devel@lists.xenproject.org
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Stephen Cheng <stephen.cheng@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Jason Andryuk <jason.andryuk@amd.com>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH] x86/nSVM: Ignore bits 11:0 of L1's MSRPM base address
-Date: Mon, 26 Oct 2026 10:38:21 +0800
-Message-ID: <20261026023821.301182-1-stephen.cheng@citrix.com>
-X-Mailer: git-send-email 2.49.0
-Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-ClientProxiedBy: SI2PR01CA0034.apcprd01.prod.exchangelabs.com
- (2603:1096:4:192::9) To CO1PR03MB7889.namprd03.prod.outlook.com
- (2603:10b6:303:275::14)
+ bh=9GijEse6hff60BEqBgFxft9+bDZ0t5yGKOBH3CY1qHc=;
+ b=kRnhhCrLFwZlNMUMMUpU+63LIJdTrAgUQsf5d2hcUkfnbPaAYCf1/iG+sdmWORzQRoSZx2iXA/4YPzzAh9Qn/KjrH9H5Musfis/5Lg5b+U1fGKOb31TG+l4oxv+27hXuu4rOXOBTEdWSmIM5GI51vRsL/mQ/vzxx8NzBLkLXZpc=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
+From: Shuaidong Chen <shuaidong.chen@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Nicola Vetrini <nicola.vetrini@bugseng.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Michal Orzel <michal.orzel@amd.com>, Jan Beulich
+	<jbeulich@suse.com>, Andrew Cooper <andrew.cooper3@citrix.com>, "Anthony
+ PERARD" <anthony.perard@vates.tech>, Julien Grall <julien@xen.org>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>, Doug Goldstein
+	<cardoe@cardoe.com>, Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
+	Grygorii Strashko <grygorii_strashko@epam.com>, Penny Zheng
+	<penny.zheng@amd.com>, Ray Huang <Ray.Huang@amd.com>, Shuaidong Chen
+	<shuaidong.chen@amd.com>
+Subject: [XEN PATCH] misra: merge the two R14.3 invariant-condition deviations
+Date: Mon, 26 Oct 2026 11:03:09 +0800
+Message-ID: <20261026030309.2507461-1-shuaidong.chen@amd.com>
+X-Mailer: git-send-email 2.34.1
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: satlexmb08.amd.com (10.181.42.217) To satlexmb07.amd.com
+ (10.181.42.216)
+X-EOPAttributedMessage: 0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: CO1PR03MB7889:EE_|DS6PR03MB023887:EE_
-X-MS-Office365-Filtering-Correlation-Id: 9f0f7bef-07f0-4892-4b30-08df330a3991
+X-MS-TrafficTypeDiagnostic: CH7PEPF00000018:EE_|SN7PR12MB8172:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8373a895-ae89-45ba-41ee-08df330db55a
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|366016|23010399003|1800799024|376014|261009223027099003|261022075727099003|261021121427099003|261021123027099003|10067099003|56012099006|18002099003|11063799006|5023799004;
+	BCL:0;ARA:13230040|7416014|376014|23010399003|1800799024|82310400026|36860700016|261009223027099003|261009221227099003|261022113327099003|261022105027099003|261022075727099003|261021121427099003|261021123027099003|10067099003|56012099006|18002099003|5023799004|11063799006;
 X-Microsoft-Antispam-Message-Info:
-	3X09mXYZlsJqhwiG/U54p/0+ZCm45Hk+kpFWt0E31U0IeZH50ujnzCmmZYSR0znNVPWV4hBv9AYGFoppRZq6VOtM/bTSqHBgzUISiPsubc2fUVmO+1c3VnvDdl//77I+DE9et9fg9dBx7bYT91a4/V36lJStdGPQ0GlGQQspeRBwVeos11BIPA2NYY2kuBcK5Ofglo0WNYhakAYrD9pnSLnExH41RkrVvCuzVj1Yy+0rTuSEBDbwrgVZdymko5MNvimvDbdx6b+dAEsA55dLRs5y84Us6UbSYzJcHweKfvVm5qgdLACCMk9LDQHXxgILp3Jxmsa1htmGSdh1vovhcIIca5t4duCcCmvAvXfu9x1Lkxsr+y6ZFL3OadKD/YzKaXS0U7bHvJ4e6GbT1mHzTjV5gzMMdFf62I4F0PP0iYCdxYFQxtnqI9zUPfgeq6FDz63EaQhm2IrcM+dU8vyvymAETEXVQfuULE64FPWSQVfbMKdy5TGYeWtr8+sR8WtW42N9CckBsfmf5NvmUWjb9MVhNkrZtO7KyMimrM111UQ4v5Mo8ua+fciWbY0/zxQCzlfzzMxNlB7XXEcSaS7soCE4hDFNxkFKbMUtek0UPJoj9qH7TWZK16N0b3c18qNslUdKVlxE75/z8yDFfBSmg3lfIUDUhE8J7RV3WG7Fk4s=
+	eKJT5L2LFE87U8/n1kYLjUjmRfrhqZKwFtqwVfeG5+hw/CNHBeyH2thazhMFuHiehuHYZA9H7NvtGLQoXrbyp+YSyZctYgVmsmFB22SoC+zzb0RCL0MnfXXH/3rUJY7K3lSaydX751AMYvN2v/lcNUdMvr3oiMwCxoT/ay/XEoyvU2d/u5jJzBI/YIbpN2laGKrPXiSPhweHNzi1KQe9wLkdGAt0UhJpOyjYptj3aEwxGWBFgUA+cwILkALF3QePCk8Dz8zOxMhrizbhoJIaSXu4i1/Db/25Y2yLwAiEvtHAzffD+I9EfcnyXMsOqrggIavjeliN3KhtHugbozU9MDZturzeXzHBCz5hdtTx/PtSnooG8yNG9t8Gc/HQRkYwjtWijsFjD8HC5Msy8bG1WCPeibFReRK79fH1BK6a+9TY0zljRevOcVZwkAEE7BZAzIXV1l7PrnzF75WrlnQnas+QkXuNygJprcUV2JpvNcjmuGHwnem1b5NvrAbKeypK1el1MEFrciXwrIIXHILgXVDM0rSUxO2AlB6fsnmXKp7aZ42moyal1zXyhpur/j/rinUehkzU/VFnxHsowclP7ZlO6glJ2sc9KljjTXaa5hKIjOYPrZpND8XPTTZuWtq7/poXm8lxEQuhDyn0LIztKSJs3sUE6iUMtEHGBGaGDD6gQy3I0mgguBkZ6Ba5LqYlmh4hMJ00rn8P+rWtfHlu5Q==
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CO1PR03MB7889.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(23010399003)(1800799024)(376014)(261009223027099003)(261022075727099003)(261021121427099003)(261021123027099003)(10067099003)(56012099006)(18002099003)(11063799006)(5023799004);DIR:OUT;SFP:1101;
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(7416014)(376014)(23010399003)(1800799024)(82310400026)(36860700016)(261009223027099003)(261009221227099003)(261022113327099003)(261022105027099003)(261022075727099003)(261021121427099003)(261021123027099003)(10067099003)(56012099006)(18002099003)(5023799004)(11063799006);DIR:OUT;SFP:1101;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?us-ascii?Q?CTVG2DYkRbuosTfWgLZ6Tu7X8Lj3ImObpPTs77WMqKkxEGTOiWyxhDk3BJdw?=
- =?us-ascii?Q?KKTx3r0tNs+B30KltkPaTX+6aA5CceWXyjrRb890f9DdJ9Ueu+0+hUt/vz9U?=
- =?us-ascii?Q?bvBuEUrXAYwT9QduwCXVS28r8ZCojogNqPCEZphdC6QnpfPv+sBeBn55vti5?=
- =?us-ascii?Q?xOKx+k4J+qPCmtyotp1BVQ5FPKH2ViBCBVZUtDHshqo/tmbm65UUqrP7iV4F?=
- =?us-ascii?Q?knViYkvljIsTgMt/XPU+Dz/654N2w1RQIryXo3QNNboW6Spb3FGhVy2esZaT?=
- =?us-ascii?Q?lsMGtZx7HQqYw0EM9B9U4K4o5Xno5ExJ4Kfd+lJEbsqOyuUQ6UJ3mY/hpLCH?=
- =?us-ascii?Q?PShW/jqXiHcu1Vz55B6pPHW16740kZZH1U8rg892AtlHtmt1i6k/h3kuHv6t?=
- =?us-ascii?Q?yiwvuEgyVIOeC31JIil5SkGP5XhhwC50OyCpJkuuRf6wGFSwtHnFawZM6Lf2?=
- =?us-ascii?Q?pkNGtQcGlNVUwxfyif/vJehQYT78OZolgxQcLQQyV318c524CkeSeHJczAtg?=
- =?us-ascii?Q?1uawipSLlgLRrGug0MqaOhiL8tMfhLvVteou/BcFQxkwcKKGTMfijtPzqJix?=
- =?us-ascii?Q?Q4ZoZ8185N6RHsIPOUt+fKtg2LTMa0yMVPHpkQz7tXcw+ReB8YsR6FQES85u?=
- =?us-ascii?Q?Gi0u4JoDfZM8mkoi3esyFLeRHx+4xzQ5HOebH166i5opmiG/3HiEaV45sJ2d?=
- =?us-ascii?Q?MkQhjdJKXAyDlCnolt3kGLrnPoPma9o76di8RPTYU5CqCONQINiMo/Bny5zQ?=
- =?us-ascii?Q?8d66zuO8h5lnB7PQIfIVAQAEBK0+qPoSkJYXUXE7gR27lTdnYwRFWtocz4jf?=
- =?us-ascii?Q?iXaH6n4DzW2z9KC66PGIeJzjqLy6ciLrw+56+H5EmOIaHTwjRtu4K6JsyEY8?=
- =?us-ascii?Q?7lCYh5IK4x1b6f8i4ZiWme7uYCZAWZYIvWhVzI/0T8862TevzoCRWkLKsS8H?=
- =?us-ascii?Q?AaclPZHO76Lf7afr5OTB54LilKoB+8Pxa7OBIU+fVyAxWwy6AcHC8kgQXCSj?=
- =?us-ascii?Q?Y61nxY/FgsxthEXMFsFW3NqNpjz8L9HDT6Qj9HvZvmHAqNXCXrXEVYedaciF?=
- =?us-ascii?Q?QSoRDGaQkjyuccakaoFVHG5JvypZYucXOGyc6wdMUwtIwB8LtKlQa96FUAtX?=
- =?us-ascii?Q?YEHw5Je0OyC7rb7xh21BmnPWU2vRU3SPoFuYqPiRokIhklesP3LP2eNk3odT?=
- =?us-ascii?Q?G1hMkLZDniPfjarpUY9furm0IRHS6ByCOgRedbofWcqAexYgHq04008tG48o?=
- =?us-ascii?Q?diG0ZSE9JB0nJKkw5fhj8jSbDauPotjBxoWjbaWRPjpcxvUK6Ewq5Z/U04qz?=
- =?us-ascii?Q?6EJm4paODn24nSTjrFtlKR3uHH0R7EikO+vyGHkhH9hkEt/YOFvfrp/4OVke?=
- =?us-ascii?Q?5wL9jiOLj+Sn1o1R+RVnZ/PxY0AEAz3upd9dONRqqZmzsgGojKGabDJ9peRq?=
- =?us-ascii?Q?orEw43dMG2OUHX+3Is2+7VcvfdIWwD2WaI5FUIa3zYNnoguK0SrSzCOmswfF?=
- =?us-ascii?Q?1URiTlD9xHvyEAShrFxWqtH2X09EoBLhjo+DoseTJkp/47RMLV+j/5aE4gDH?=
- =?us-ascii?Q?WGJT/Fqe1jaWEJ+qKXVHepYfjUjQh9M7nXcc35npqN/MkZkPle/ctTJQExlm?=
- =?us-ascii?Q?be11lQFMl7N3VntDXMnvMBPJbMd1V/lGBdgPesTIdD85fPDaT2e03ougEy8L?=
- =?us-ascii?Q?cCGGCJsg493eVj5eQLCiPz2kZsiJd+Ib0hRp5yWlncLKSHp5+/SDDuUhSicT?=
- =?us-ascii?Q?zpoRWN3AUw=3D=3D?=
-X-OriginatorOrg: citrix.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 9f0f7bef-07f0-4892-4b30-08df330a3991
-X-MS-Exchange-CrossTenant-AuthSource: CO1PR03MB7889.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2026 02:38:32.1154
+	UVjEwvfgvZWu/zxekXA/2h5Nf9PQsLcCr8WS4yCGK2AWawjKPBRt1ufzT0fI+Vb5ohgp6mb3V41jTBRlTRegL15BE56N2+gozRzqr2rr70kVsFkvjQYeH+eeBkvep1jWUQfzO6Bdj4aWm7OMmaJYDYll9/dOOGLFMvJFXQhhpU389nKaSjmhn4umZml5xnjNouPBb2sTeBqXXtLg9MyM6b0Y6e5orYVjWKRBOIE6lsAECfD8t4KRgqiUDDX6UHAwznHGThDVjAH5oMI/NuSKXwrAvX84Mkt7UfKFuvG8g6pHFyOLr/GeTjta8hZSHs0vhWbrSlKiI+q7uCJjfrg2sRjGqaMjeh53FjYfirJssHrT9/gfsQs/IkPuuFdwcMCdK2HLHQUpB5ZUyPH5JsTNDwrbPaDz0p0MPUBqJ/IC5VBc9pXlIVIAE7YiX6c+1Kop
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 26 Oct 2026 03:03:27.9768
  (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Q7kT7PubIGD3aZR4o38YU8yuwj94HabX+SBZMB4VnUEdKQQ8hk6vCl7esvU8fQN/lAMdrEH3i+iSVRTztrlu3fGtrgYxCaA44iU/dPhwdv4=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS6PR03MB023887
-X-purgate-ID: tlsNG-bad1c0/1792982316-39AC0034-CAF4B8EE/0/0
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8373a895-ae89-45ba-41ee-08df330db55a
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	CH7PEPF00000018.namprd21.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN7PR12MB8172
+X-purgate-ID: tlsNG-33051d/1792983813-778C54E9-64D34F87/0/0
 X-purgate-type: clean
-X-purgate-size: 2063
+X-purgate-size: 3275
 X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -155,52 +141,69 @@ X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-VMRUN ignores bits 11:0 of MSRPM_BASE_PA (APM volume 2, 24593 Rev. 3.44,
-section 15.11), but nsvm_vmrun_permissionmap() copies L1's MSR permission
-map from the address exactly as L1 wrote it.  With any of those bits set,
-the copy starts at the wrong offset, so both the merged map and the
-intercept check on #VMEXIT use the wrong bits: L1 can miss intercepts it
-set or see ones it didn't, and the copy may run into the following page,
-giving a spurious VMEXIT_INVALID if that isn't RAM.
+MC3A2.R14.3 ("Controlling expressions shall not be invariant") is
+deviated by two separate entries.  One covers 'if' statements and
+conditional operators and places no restriction on where the invariant
+condition comes from.  The other covers 'switch' statements, but only
+when the controlling expression is a 'sizeof' operator.
 
-Mask the address before copying.
+The rationale recorded for the two is the same: the condition is
+deliberate.  Nothing about a 'switch' makes an invariant condition less
+deliberate than the same condition in an 'if', so the 'sizeof'
+restriction reads as an artefact of that entry having been added for
+read_atomic() and friends in arch/x86/include/asm/atomic.h rather than
+as a considered limit.
 
-Fixes: 9a779e4fc161 ("Implement SVM specific part for Nested Virtualization")
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Stephen Cheng <stephen.cheng@citrix.com>
+Fold switch_stmt into the general entry and drop the 'sizeof'-restricted
+one, which the general predicate now subsumes.  Invariant 'switch'
+conditions that are not a 'sizeof' become deliberate as a result; that
+is the intent.
+
+Signed-off-by: Shuaidong Chen <shuaidong.chen@amd.com>
 ---
+ automation/eclair_analysis/ECLAIR/deviations.ecl | 8 ++------
+ docs/misra/deviations.rst                        | 8 ++------
+ 2 files changed, 4 insertions(+), 12 deletions(-)
 
-Notes:
-    To reproduce, in L1: set MSR_PROT, set only FS_BASE's read bit in a
-    page-aligned MSRPM, point MSRPM_BASE_PA at the map + 0x800, and run L2
-    doing RDMSR of FS_BASE.  L1 should get VMEXIT_MSR; without this patch the
-    RDMSR completes in L2 instead.
-    
-    The IOPM base, handled in the same function, doesn't need the same fix:
-    all of its users convert it to a frame number first.
-
- xen/arch/x86/hvm/svm/nestedsvm.c | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
-
-diff --git a/xen/arch/x86/hvm/svm/nestedsvm.c b/xen/arch/x86/hvm/svm/nestedsvm.c
-index 2b998e26bc..56d0f0fa4d 100644
---- a/xen/arch/x86/hvm/svm/nestedsvm.c
-+++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-@@ -309,8 +309,10 @@ static int nsvm_vmrun_permissionmap(struct vcpu *v)
+diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl b/automation/eclair_analysis/ECLAIR/deviations.ecl
+index 7f3fd35a33d..08a88ddfa62 100644
+--- a/automation/eclair_analysis/ECLAIR/deviations.ecl
++++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+@@ -472,12 +472,8 @@ activity."
+ -config=MC3A2.R14.2,reports+={disapplied,"any()"}
+ -doc_end
  
-     ns_msrpm_ptr = (unsigned long *)svm->ns_cached_msrpm;
+--doc_begin="The XEN team relies on the fact that invariant conditions of 'if' statements and conditional operators are deliberate"
+--config=MC3A2.R14.3,statements+={deliberate, "wrapped(any(),node(if_stmt||conditional_operator||binary_conditional_operator))" }
+--doc_end
+-
+--doc_begin="Switches having a 'sizeof' operator as the condition are deliberate and have limited scope."
+--config=MC3A2.R14.3,statements+={deliberate, "wrapped(any(),node(switch_stmt)&&child(cond, operator(sizeof)))" }
++-doc_begin="The XEN team relies on the fact that invariant conditions of 'if' statements, conditional operators and 'switch' statements are deliberate"
++-config=MC3A2.R14.3,statements+={deliberate, "wrapped(any(),node(if_stmt||conditional_operator||binary_conditional_operator||switch_stmt))" }
+ -doc_end
  
-+    /* VMRUN ignores bits 11:0 of MSRPM_BASE_PA. */
-     ret = hvm_copy_from_guest_phys(svm->ns_cached_msrpm,
--                                   ns_vmcb->_msrpm_base_pa, MSRPM_SIZE);
-+                                   ns_vmcb->_msrpm_base_pa & PAGE_MASK,
-+                                   MSRPM_SIZE);
-     if ( ret != HVMTRANS_okay )
-     {
-         gdprintk(XENLOG_ERR, "hvm_copy_from_guest_phys msrpm %u\n", ret);
-
-base-commit: 4e3c0eeac5761c505f8229e82d265eb29957ca5c
+ -doc_begin="The use of an invariant size argument in {put,get}_unsafe_size and array_access_ok, as defined in arch/x86(_64)?/include/asm/uaccess.h is deliberate and is deemed safe."
+diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
+index 32713172067..99a1b2332c2 100644
+--- a/docs/misra/deviations.rst
++++ b/docs/misra/deviations.rst
+@@ -458,12 +458,8 @@ Deviations related to MISRA C:2012 Rules:
+ 
+    * - R14.3
+      - The Xen team relies on the fact that invariant conditions of 'if'
+-       statements and conditional operators are deliberate.
+-     - Tagged as `deliberate` for ECLAIR.
+-
+-   * - R14.3
+-     - Switches having a 'sizeof' operator as the condition are deliberate and
+-       have limited scope.
++       statements, conditional operators and 'switch' statements are
++       deliberate.
+      - Tagged as `deliberate` for ECLAIR.
+ 
+    * - R14.3
 -- 
-2.49.0
+2.34.1
 
 
