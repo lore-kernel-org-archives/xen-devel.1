@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 01C62606A320
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 11:57:22 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94948606A32A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 12:15:38 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=bWot1zx/
-Received: from list by lists.xenproject.org with outflank-mailman.1461175.1672140 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=WunRt3ss
+Received: from list by lists.xenproject.org with outflank-mailman.1461188.1672148 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLJK6-0001eg-2B; Mon, 26 Oct 2026 11:57:06 +0000
+	id 1xLJbg-0005u5-Jk; Mon, 26 Oct 2026 12:15:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461175.1672140; Mon, 26 Oct 2026 11:57:06 +0000
+Received: by outflank-mailman (output) from mailman id 1461188.1672148; Mon, 26 Oct 2026 12:15:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLJK5-0001eZ-UX; Mon, 26 Oct 2026 11:57:05 +0000
-Received: by outflank-mailman (input) for mailman id 1461175;
- Mon, 26 Oct 2026 11:57:05 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xLJK4-0001eT-Tx
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 11:57:05 +0000
+	id 1xLJbg-0005ty-GT; Mon, 26 Oct 2026 12:15:16 +0000
+Received: by outflank-mailman (input) for mailman id 1461188;
+ Mon, 26 Oct 2026 12:15:14 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLJbe-0005sn-JH
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 12:15:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLJK1-00D3sv-RX
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 12:57:01 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xLJbd-000bdn-Hj
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 13:15:13 +0100
+Received: from [10.42.69.2] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6adf3ff4-bab6-0a2a0a5309dd-0a2a4505dee0-42
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 12:56:58 +0100
-Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6adf444d-bab6-0a2a0a5309dd-0a2a4502a08c-2
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 13:15:10 +0100
+Received: from [209.85.128.42] (helo=mail-wm1-f42.google.com)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6adf400a-4cb1-0a2a45050019-d155802eb9f8-3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 12:56:58 +0100
-Received: by mail-wm1-f46.google.com with SMTP id
- 5b1f17b1804b1-4a208d93758so33589475e9.3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 04:56:58 -0700 (PDT)
+ id 6adf444e-6ca4-0a2a45020019-d155802aadf2-3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 13:15:10 +0100
+Received: by mail-wm1-f42.google.com with SMTP id
+ 5b1f17b1804b1-4a2d6cf958bso9669905e9.1
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 05:15:10 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a35a0aa097sm209436265e9.3.2026.10.26.04.56.57
+ 5b1f17b1804b1-4a5ea0df763sm101543055e9.3.2026.10.26.05.15.08
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Oct 2026 04:56:57 -0700 (PDT)
+ Mon, 26 Oct 2026 05:15:09 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,60 +51,55 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793015818; x=1793620618; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793016910; x=1793621710; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=CnLmwNwP/O4q7mGg8UAOdyNk5IZGlVFRmJBWjhG0gWk=;
-        b=bWot1zx/OCBCR2W+QCNn1B2qBByGCzX9eAo2sNU6jl/dc45OnpcLCgUuq+paC/MKgx
-         9onK0CmcMg44hXSdilgkDPeqJVFnMqXs+Y7Bji/zADSrZ5lU3y0VQbKjperCnbBuK1eC
-         wL29o4JCnIwu+I8Ya523KROrKsrmq62iiBUWHsTZTSHdZ+m2yrz+osKP4jAlBH3qaZuy
-         ReqPclrXw4ZZglts7op8B5IR1iuFxEb4cVe12c8IxzuWm+HCRShVBBGsxmRU/DroY1rK
-         +Hf94Q6kwFn/d/Wx5NvfMftlRfABbKsifxBKGXhBqEZTvz9+8W8LSIHFFjkF1ky5e6cw
-         tzAA==
+        bh=LalU7iE11Nk9uJ1lkqiCjCv4odKPqiVHYWjeF26cbIA=;
+        b=WunRt3ss2XhB08VweH7XOhHN9WOlq+fRjrMlTDLJhxT68jVTOh3ovJgozOznX7UaNM
+         TParFHjxV8WudN4PMYLasprfO/T8ymwxTtkwGxoOyVBG4lX1iBRWc3hFlVq95AYSQp24
+         Nj/j8yvRoTur/ctv9t6pfr/vQoN7UJqa5DC46rdldnfE4WLcriDh8do+sfrvogkxn40t
+         p6kPIW5rM6SvepbDUSqK1P7fs1jN03TTS8Q6vcukshIK3VSR+QNXwSXb9V/xQCzq9zvr
+         A30SdR2JnUIZx5dm4lTFkRStsFhTyTZ0gFycAZSlXQhsjr31FeoeHN8XiOM75nLhgpFI
+         B7mQ==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793015818; x=1793620618;
+        d=1e100.net; s=20260707; t=1793016910; x=1793621710;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=CnLmwNwP/O4q7mGg8UAOdyNk5IZGlVFRmJBWjhG0gWk=;
-        b=LpV91PqefAW9MQT29pOdkkAHH45how7aoUSmjOqE4ghoZ7udgY5O06Xhslhwa/Ckqz
-         wPaLPOWcllJ5Kpz+mlis0LU6pMVJsqmfeUkHJlF7wRUwtfSp6JEi0DEe62vru9YJW9hJ
-         uo5bE884jCIG0YzdvK8Sh/xvzY2Yx9il0fFjOuIRAphIMQiAdBpCfWE6Qk4mSqU2omF7
-         PZZRoWRPZwjFKuO1do93VJc+CJiCNY9kb6z/i42/fTu8L1HCVLFk0+YPg9FppgULEme5
-         LoAcIilp6wFb6r2gcbm3pupHdfXwc2iS5XYvLsefU4KJPkeGT1twvYWqtZ930gMxUvya
-         cZfA==
-X-Forwarded-Encrypted: i=1; AKwUvByrbWa5+1F2bTvwHo5lX/9pqzEzB+FmYuHgJlBLdNqB343pA9N376XOti3i1STvzy2sbVNl8HtUyxY=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYLFwrIwZnLkIX+up70pMZkPuiPkCpX59rn1MgXkWp1jEtl0hU7z
-	EeJWk+41h74NsSpvtmbXb4oju2SO92HwhJhvOnsmNTKc9iGZ7ECKxexgeZBt7wNlHA==
-X-Gm-Gg: AYBFou0PlAE9E0H0t75CHSt5J413LdRy5At4l0pUBHPaY13aL+ABp6JdRRDNQ4Z6gDW
-	NhOhBGiCXnOectwi5nbpTTrkWmOTod5iGXLWE41Az1JbTByCd8KOXOFZ5Rh78r6JL1L6o6en3dF
-	uYtozLCgLWTIDuLe3cQMQ90Tn2GisFEaKnhghnHpkWSSq+icYlsK87eAJFCrSiXo1Yf94dqFZEw
-	H5DWMpLafyKkEJMLO1UEqZAFBWxfe0+xJSLyUG8cMzbeZKHZuLtkR21XiYmt3vwlEdMEw4OS/0i
-	nA/6v4vGvJ8NV4VOq0//RBXo0j8IAwoWQyItcQHjvxMo/WrBh9/9Y9AvtT3GupBRVOZ7E9zgp9b
-	dzlyW8eu47Irt8zXRw9M+/ISN0Bzt80eze9g3t6G7qad9C4pTBxOmJ5D+cX83eE+SSWBEtdjAJQ
-	DZltZiudyJmsdKSvgS17GJRFekIiEHCOOGRqsVUe36GcfZmrRTNepwdH4asBIVZjTbJPs/QOcAE
-	qjycwNH2iE2UIymk1ODw6AdP7gvo+4BbeQixWh8CO266uNs6wGPgMIDSDiul1WLoJ9CnymaCsI0
-	SmoyqDA9pq7KotTGmfmJ71zc65WKyGKG8eK484SjxBonQndcPngas0Zcs1TuZRebNw==
-X-Received: by 2002:a05:600c:19d4:b0:4a3:59c9:a750 with SMTP id 5b1f17b1804b1-4a35ac90dcemr106254855e9.9.1793015818075;
-        Mon, 26 Oct 2026 04:56:58 -0700 (PDT)
-Message-ID: <00f95d00-3d43-4e85-92e9-0b1cba4f0c4f@suse.com>
-Date: Mon, 26 Oct 2026 12:56:56 +0100
+        bh=LalU7iE11Nk9uJ1lkqiCjCv4odKPqiVHYWjeF26cbIA=;
+        b=0m2Tuj9Wnx7wo+8lzLH4UBdJrCtmK2Zu3uMvLlCDAr/WtB91nnfR+Y08oyRpBImBol
+         F2S2xXUzSXEPlzbUVMCC3tbqhtxFmCVJvzvgS0m/gF5lOUBuw2jsK4tTEimquoBfxl33
+         Uz2f7P5OVyI6YKDFZd1dFjT/5rbGGeJSf7z5lr0+Ol9sa0HevpPouYu5H7+SxJL+Wlnr
+         p7yFGGWdJ7JwOTAgUL/U2mPkQcFTR7XHVneAcEvO9yF6Xv8LGu+OQ2oRqHUv30y1efmr
+         ZOyDngng1oqbJunRqF9u0cmzh6vjrDGFGiDeJwQSsmnxIRruFyu8YtWLKtdakOX2w9jf
+         o6Mg==
+X-Forwarded-Encrypted: i=1; AKwUvByRmED/bMC06JnqF/a9PLlhno9eTsNl+pwkdo5QSr032yPkMD5qswnllJYzTqcLK4JC/5yCafiw12g=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYK0eohLsiUuGyIwe+F90ySByuQznp1Z3plQWu/q5O6Pg5u6XT1U
+	ppJQGAuearbgPZU4bQhNeDq0lLvJoy22oZ0B1DshmOU6Tm9eT/C5RuL1MoATfvM2Lw==
+X-Gm-Gg: AYBFou1y7JaCs45dEr6NAvxTKSU3HUeAfCKsufE0uSMqzllTqjNsEtfM+xi3sxh/NzN
+	YQCvfzsgjpGe5zIfGoZ1FcwDWZ1/PW2pMlkrqLRoWy0Njdsv9XxIKRvR4L6l5A0+zG4ZcFClalE
+	2+XjWK3FyYgJLfWZNesdzt0S0vbPPtC/dy2xKtxSnGkamMs6Q+HtwmlNX/C8AXAebJj3HzwT8ws
+	yW3giClZa1ce7K95QoUhtF0Tv+e52Ztu+ceiDJKC868IWkEZ3T6HAngempfBWpjhn6JfS0Kxx3k
+	QrtB+Ta1NBfSnKsZmP9Ii8WM/deD7xNAtWyKEw3QSJhE+WNFik7sjK221qsy1Kp1rCwU6zt3CTY
+	2LncTa8yH+Wf5rdyddWhQySAYXHGcinBE7qAKU470athQaBhDAL/7jODp9bB/gL0cJqt9AMQBIM
+	mxJvgOxKsJyN+r4yANlVmaRC5KmpZea17qTJgvmbBa/E/b+U2MchMfIcPLk9byjHnd67rgFFyiH
+	oCMCdViZzeOLJ47a69gS/GPiN87LtcRNt6IE2U+wkPsChI42fvVaYaNpBIXZw9lPuJK/ajspsdd
+	c7/hkyu+0hnbzTyk33Cbl8xCELhiT9062LVaGD7MFpsm
+X-Received: by 2002:a05:600c:524d:b0:4a3:59c2:b41e with SMTP id 5b1f17b1804b1-4a7444042ecmr15246445e9.4.1793016909457;
+        Mon, 26 Oct 2026 05:15:09 -0700 (PDT)
+Message-ID: <84fee7e4-ee15-4e56-8db3-f5d2db5ec2e2@suse.com>
+Date: Mon, 26 Oct 2026 13:15:07 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [RFC 5/5] xen/x86: livepatch: enable attaching callbacks
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Ryo Takakura <takakura@valinux.co.jp>
-Cc: roger@xenproject.org, ross.lagerwall@citrix.com, sstabellini@kernel.org,
- julien@xen.org, bertrand.marquis@arm.com, michal.orzel@amd.com,
- Volodymyr_Babchuk@epam.com, anthony.perard@vates.tech,
- teddy.astie@vates.tech, xen-devel@lists.xenproject.org
-References: <20261023044809.162759-1-takakura@valinux.co.jp>
- <20261023045808.165276-1-takakura@valinux.co.jp>
- <97d772f1-322f-43f6-a793-fdbba16c7f04@citrix.com>
+Subject: Re: [PATCH] x86/desc: build boot GDT descriptors with a macro
+To: Furkan Caliskan <frn1furkan10@gmail.com>
+Cc: andrew.cooper3@citrix.com, roger@xenproject.org, teddy.astie@vates.tech,
+ xen-devel@lists.xenproject.org
+References: <20261020135722.45714-1-frn1furkan10@gmail.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -130,76 +125,82 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <97d772f1-322f-43f6-a793-fdbba16c7f04@citrix.com>
+In-Reply-To: <20261020135722.45714-1-frn1furkan10@gmail.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-c201ff/1793015818-F429B2A1-0F197BA6/10/78276251493
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-720697/1793016910-319CB2AC-3275584F/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 1846
-X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 3076
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
 	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 26.10.2026 12:42, Andrew Cooper wrote:
-> On 23/10/2026 5:58 am, Ryo Takakura wrote:
->> +FUNC(xen_livepatch_trace_caller)
->> +        pushq   %rbp
->> +        movq    %rsp, %rbp
->> +        pushfq
->> +
->> +        /* Preserve general-purpose registers. */
->> +        pushq   %rax
->> +        pushq   %rcx
->> +        pushq   %rdx
->> +        pushq   %rsi
->> +        pushq   %rdi
->> +        pushq   %r8
->> +        pushq   %r9
->> +        pushq   %r10
->> +        pushq   %r11
->> +
->> +        /*
->> +         * xen_livepatch_trace_dispatcher(ip, parent_ip)
->> +         *
->> +         * ip: Address of the traced function.
->> +         * parent_ip: Address where the traced function was called.
->> +         */
->> +        movq    8(%rbp), %rdi
->> +        subq    $5, %rdi
->> +        movq    16(%rbp), %rsi
->> +        call    xen_livepatch_trace_dispatcher
->> +
->> +        /* Restore the saved state. */
->> +        popq    %r11
->> +        popq    %r10
->> +        popq    %r9
->> +        popq    %r8
->> +        popq    %rdi
->> +        popq    %rsi
->> +        popq    %rdx
->> +        popq    %rcx
->> +        popq    %rax
->> +        popfq
->> +        popq    %rbp
->> +        ret
->> +END(xen_livepatch_trace_caller)
+On 20.10.2026 15:57, Furkan Caliskan wrote:
+> The raw 64-bit constants in boot_gdt[] and boot_compat_gdt[] hide what
+> each descriptor actually is.  Replace them with a GDTE() macro, modelled
+> on Linux's GDT_ENTRY_INIT(), plus named GDTE_FLAGS_* constants and a
+> GDTE_FLAT() helper for flat segments.
 > 
-> Just in case there's a problem doing this all in C...
-> 
-> No need for pushf or popf at all.  Flags are undefined at function
-> boundaries.
-> 
-> Please drop the q suffixes; they're all unnecessary here.
-> 
-> The ret needs to be RET for speculative mitigations.  (It's emitted as
-> JMP which will be turned back into a RET on safe system.)
+> No functional change.
 
-Just for completeness: "will" as in "will eventually"; see my still
-pending "x86: re-inline RET used in assembly code" (with me doing C side
-work still pending feedback for that initial, smaller change).
+Can this be "upgraded" to "No change in generated code" or some such? Else:
+Are there changes in generated code?
+
+> --- a/xen/arch/x86/desc.c
+> +++ b/xen/arch/x86/desc.c
+> @@ -27,32 +27,67 @@
+>  
+>  #define SEL2GDT(sel) (((sel) >> 3) - FIRST_RESERVED_GDT_ENTRY)
+>  
+> +/*
+> + * Expands to a brace-enclosed initializer for seg_desc_t; only use it
+> + * inside an initializer list.
+> + *
+> + * flags: bit layout matches its position in the descriptor's high dword
+> + *   bits 0-3   : type
+> + *   bit  4     : s     (0 = system, 1 = code/data)
+> + *   bits 5-6   : dpl
+> + *   bit  7     : p     (present)
+> + *   bit  12    : avl
+> + *   bit  13    : l     (64-bit code segment)
+> + *   bit  14    : d/b
+> + *   bit  15    : g     (granularity: 0 = byte, 1 = 4KiB)
+> + */
+> +#define GDTE(flags, base, limit)                                        \
+> +    { (((uint64_t)(limit) & 0x0ffffULL)            |                    \
+> +       (((uint64_t)(base)  & 0x0ffffffULL)  << 16) |                    \
+> +       (((uint64_t)(flags) & 0x0ffULL)      << 40) |                    \
+> +       (((uint64_t)(limit) & 0xf0000ULL)    << 32) |                    \
+> +       (((uint64_t)(flags) & 0xf000ULL)     << 40) |                    \
+> +       (((uint64_t)(base)  & 0xff000000ULL) << 32)) }
+
+As you only ever use this for GDTs, the macro name here is okay. However, ...
+
+> +/* Common flag combinations (same values Linux uses for equivalent segments) */
+> +#define GDTE_FLAGS_RING0_CS64   0xa09b   /* P DPL0 S code  RX A, L, G */
+> +#define GDTE_FLAGS_RING0_DS32   0xc093   /* P DPL0 S data  RW A,    G */
+> +#define GDTE_FLAGS_RING1_CS32   0xc0bb   /* P DPL1 S code  RX A,    G */
+> +#define GDTE_FLAGS_RING1_DS32   0xc0b3   /* P DPL1 S data  RW A,    G */
+> +#define GDTE_FLAGS_RING3_CS32   0xc0fb   /* P DPL3 S code  RX A,    G */
+> +#define GDTE_FLAGS_RING3_DS32   0xc0f3   /* P DPL3 S data  RW A,    G */
+> +#define GDTE_FLAGS_RING3_CS64   0xa0fb   /* P DPL3 S code  RX A, L, G */
+> +#define GDTE_FLAGS_PERCPU       0x0091   /* P DPL0 S data  RO A       */
+> +
+> +/* Xen maps every flat segment across all of memory. */
+> +#define GDTE_FLAT(flags) GDTE(flags, 0, 0xfffff)
+
+... nothing in any of these constants is GDT-specific, and the FLAGS infix
+isn't very useful there either (albeit I probably also wouldn't outright
+insist on its dropping).
+
+As to the GDTE_FLAGS_* constants' comments: The P and S bits (which are only
+ever set) are mentioned, while the D/B bit (which varies) isn't. For the
+constants themselves, there's clearly redundancy with asm/desc.h's _SEGMENT_*
+constants. Possibly those could be used here, perhaps eliminating the need
+for those comments.
 
 Jan
 
