@@ -2,52 +2,49 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0622E606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 16:27:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 00ED9606A31A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 16:28:40 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=k0JIbbz6
-Received: from list by lists.xenproject.org with outflank-mailman.1461585.1672629 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=kjMrrcf4
+Received: from list by lists.xenproject.org with outflank-mailman.1461592.1672639 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLNX3-00078I-7b; Mon, 26 Oct 2026 16:26:45 +0000
+	id 1xLNYl-0007q5-IA; Mon, 26 Oct 2026 16:28:31 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461585.1672629; Mon, 26 Oct 2026 16:26:45 +0000
+Received: by outflank-mailman (output) from mailman id 1461592.1672639; Mon, 26 Oct 2026 16:28:31 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLNX3-00078B-4z; Mon, 26 Oct 2026 16:26:45 +0000
-Received: by outflank-mailman (input) for mailman id 1461585;
- Mon, 26 Oct 2026 16:26:43 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1790908d4000f79f@swg.vates.tech>)
- id 1xLNX1-000785-Pm
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 16:26:43 +0000
+	id 1xLNYl-0007py-F0; Mon, 26 Oct 2026 16:28:31 +0000
+Received: by outflank-mailman (input) for mailman id 1461592;
+ Mon, 26 Oct 2026 16:28:29 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLNYj-0007ps-Ki
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 16:28:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLNX0-007iNI-VF
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 17:26:42 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xLNYj-00Dtzl-19
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 17:28:29 +0100
+Received: from [10.42.69.8] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1790908d4000f79f@swg.vates.tech>)
- id 6adf7f1a-8faa-0a2a0a5109dd-0a2a45038550-40
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 17:26:42 +0100
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1790aac26000f79f@swg.vates.tech>)
+ id 6adf7f99-e002-0a2a0a5209dd-0a2a4508b5e4-32
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 17:28:28 +0100
+Received: from [185.255.28.34] (helo=prod-mta-13-01.swg-srv.net)
+ by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1790908d4000f79f@swg.vates.tech>)
- id 6adf7f42-fae8-0a2a45030019-b9ff1c12b64f-3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 17:26:42 +0100
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1790aac26000f79f@swg.vates.tech>)
+ id 6adf7fac-f659-0a2a45080019-b9ff1c22a0e7-3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 17:28:28 +0100
 Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
  (Authenticated sender:
  8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a1790908d4000f79f.002 for <xen-devel@lists.xenproject.org>
+ by prod-mta-13-01.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1790aac26000f79f.003 for <xen-devel@lists.xenproject.org>
  (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Mon, 26 Oct 2026 16:26:37 +0000
-Received: from [192.168.0.158]
- (cpc92322-cmbg19-2-0-cust1759.5-4.cable.virginm.net [86.26.38.224])
- (Authenticated sender: andriy.sultanov)
- by mail2.vates.fr (Postfix) with ESMTPSA id C09C981D36;
- Mon, 26 Oct 2026 17:26:36 +0100 (CET)
+ Mon, 26 Oct 2026 16:28:24 +0000
+Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
+ (Authenticated sender: teddy.astie)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 0518382E36;
+ Mon, 26 Oct 2026 17:28:24 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -56,186 +53,302 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=R6I2EqCiYHw5uUSgZETXcCUbfXX6QPtH9rUWpXBi6pc=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=k0JIbbz6KzlgAm1+ip7f59vGvmRXu1aah1v2TnRuyTSXNgaBLG/nsycuMWvTrXS3BdNe3VDYi
- U6EL6l+TxEkwG1mwx5wO9g8F6KdU6FHJ/3ytMkDiNjirG1hisUGIT3dFzzMIBXSaIGe3/IoRjSq
- VEJs+Ip0AvHuO29u95CLJmpKMfUCJ1VO7TqayOKUS2pFc+HwmWC8wV721wnlscE0Pcyw6wl/r45
- ZKASuEH8/o8dS9Dr+2PJEsCMsDdnChqKk+16xb4UyvNxbWcd00Npv1lu1tAwuZarCR0kfOWMrAX
- 8BpCE0nceOSFGRm9oAIVs5+py8QELlcoYf1H0HLC8zsw==
-X-Zone-Loop: 44b07b4f2a695872c0b6b30c7a2a6d30ce3900b319f0
+ q=dns/txt; s=selector1; bh=cL/zlKoI2SbWUiMKOLPEqgrJA1LEZBSaQyK3Tjf77j4=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=kjMrrcf4oAFB0fuGq+EPDI4Yrsaf4mfn2TrFW1zT2Rx0ukEQKYlQEVOkkxuGlWV5E6A8NjV2K
+ DNjDxBUSUn3cYR5W6kmFNABbS2ZYhtHZwfU60LtkZMGycbKvJJrv6hDOpIOL0w7qMYBgV/1kH/6
+ KKriVC8yGN93mmXI80ZLcrL3Bfn9tm2okcT3vjh1/NPs97ffq5k9LhdzCyvDlSHCx2Gg1vBE2j0
+ r7IQ+iX8lCmP1U7ft5G78sQ4PArw1d2PDc+9dwkmeruYFOPVBjx2isiMFuZI/QY5lwo7of+7O2l
+ COZlWEpUb+PubfMJ8M9UZTNXCDeGaEvHAmK4W7zqOpDQ==
+X-Zone-Loop: 24e3090cd211466bc203b827b0f0c8dfbb707bb693a8
 x-campaign-type: default
-x-transaction-id: b2e3c8f8-498e-4ce3-9485-7f934734110e
-x-swg-uid: 01-e30dbad8-0ad2-46de-bb7d-9a628a4a6f70
+x-transaction-id: 6ca10939-989f-4ca7-ab0c-e001082a4d40
+x-swg-uid: 01-7f22080c-3dbf-487b-aa30-e3d5efb8f886
 X-Mailer: Sweego
 Message-ID:
- <1793031997.8631fc262581453bbf619ec5b2062170.1a1790908d4000f79f@vates.tech>
-x-swg-bid: 1793031997.8631fc262581453bbf619ec5b2062170.1a1790908d4000f79f
+ <1793032105.8631fc262581453bbf619ec5b2062170.1a1790aac26000f79f@vates.tech>
+x-swg-bid: 1793032105.8631fc262581453bbf619ec5b2062170.1a1790aac26000f79f
 Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
 x-campaign-id: default
 x-client-id: 8631fc262581453bbf619ec5b2062170
-Date: Mon, 26 Oct 2026 16:26:36 +0000
+Date: Mon, 26 Oct 2026 17:28:23 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] tools/ocaml: Gitlab CI test for bindings
-To: Andrew Cooper <andrew.cooper3@citrix.com>,
- Xen-devel <xen-devel@lists.xenproject.org>
-Cc: Guillaume Thouvenin <guillaume.thouvenin@vates.tech>,
- Julian Vetter <julian.vetter@vates.tech>
-References: <20261026162039.1188760-1-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH 2/6] x86/vlapic: Fix hardware virtualized APIC state after
+ reset
+To: Bernhard Kaindl <bernhard.kaindl@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Denis Mukhin <dmukhin@xen.org>
+References: <1792504313.8631fc262581453bbf619ec5b2062170.1a1599536d8000f79f@vates.tech>
+ <20261020135333.38064-2-teddy.astie@vates.tech>
+ <1792504425.8631fc262581453bbf619ec5b2062170.1a15996ec68000f79f@vates.tech>
+ <179293814412.1810895.12737475203049581172.b4-review@b4>
 Content-Language: en-US
-From: Andrii Sultanov <andriy.sultanov@vates.tech>
-In-Reply-To: <20261026162039.1188760-1-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
+From: Teddy Astie <teddy.astie@vates.tech>
+Autocrypt: addr=teddy.astie@vates.tech; keydata=
+ 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
+ x9fhaZEsniw8/bYgC3igkk5YJiOa
+In-Reply-To: <179293814412.1810895.12737475203049581172.b4-review@b4>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------9BsBj9Td2zo0ekrIU7xai3qA"
 X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1793031996978
-X-purgate-ID: tlsNG-33051d/1793032002-77AF14E9-3A7BB412/0/0
-X-purgate-type: clean
-X-purgate-size: 4803
-X-Spam-Status: No, score=-19.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+X-Bm-Transport-Timestamp: 1793032104185
+X-purgate-ID: tlsNG-c1860d/1793032108-CF75B87B-E7FA3B53/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 14118
+X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 10/26/26 16:20, Andrew Cooper wrote:
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------9BsBj9Td2zo0ekrIU7xai3qA
+Content-Type: multipart/mixed; boundary="------------P09eaBqWh67iXQKJFFAcbuwv";
+ protected-headers="v1"; hp="clear"
+Message-ID: <c443a3c5-9f2a-4643-9467-16c3d002d38e@vates.tech>
+Date: Mon, 26 Oct 2026 17:28:23 +0100
+MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH 2/6] x86/vlapic: Fix hardware virtualized APIC state after
+ reset
+To: Bernhard Kaindl <bernhard.kaindl@citrix.com>
+Cc: xen-devel@lists.xenproject.org, Jan Beulich <jbeulich@suse.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Denis Mukhin <dmukhin@xen.org>
+References: <1792504313.8631fc262581453bbf619ec5b2062170.1a1599536d8000f79f@vates.tech>
+ <20261020135333.38064-2-teddy.astie@vates.tech>
+ <1792504425.8631fc262581453bbf619ec5b2062170.1a15996ec68000f79f@vates.tech>
+ <179293814412.1810895.12737475203049581172.b4-review@b4>
+Content-Language: en-US
+From: Teddy Astie <teddy.astie@vates.tech>
+Autocrypt: addr=teddy.astie@vates.tech; keydata=
+ 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
+ x9fhaZEsniw8/bYgC3igkk5YJiOa
+In-Reply-To: <179293814412.1810895.12737475203049581172.b4-review@b4>
 
-> ... as building and interpreting Ocaml objects in C is rather fragile.
->
-> For C producing objects for Ocaml to consume, one trick to check validity is
-> Gc.compact() which forces a major sweep, walking all objects.  If this doesn't
-> segfault, then we at least got the pointer <-> integer aspect right.
->
-> For now, start with a very simple version call.  (Re)introduce
-> tools/ocaml/tests and add test-ocaml-bindings which is installed into
-> $(DESTDIR)$(LIBEXEC)/tests to be picked up automatically with the other dom0
-> tests.
->
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
-> ---
-> CC: Andrii Sultanov <andriy.sultanov@vates.tech>
-> CC: Guillaume Thouvenin <guillaume.thouvenin@vates.tech>
-> CC: Julian Vetter <julian.vetter@vates.tech>
->
-> https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2990559670/test_report
-> ---
->   tools/ocaml/Makefile                  |  1 +
->   tools/ocaml/tests/Makefile            |  8 +++++++
->   tools/ocaml/tests/bindings/.gitignore |  1 +
->   tools/ocaml/tests/bindings/Makefile   | 34 +++++++++++++++++++++++++++
->   tools/ocaml/tests/bindings/main.ml    | 19 +++++++++++++++
->   5 files changed, 63 insertions(+)
->   create mode 100644 tools/ocaml/tests/Makefile
->   create mode 100644 tools/ocaml/tests/bindings/.gitignore
->   create mode 100644 tools/ocaml/tests/bindings/Makefile
->   create mode 100644 tools/ocaml/tests/bindings/main.ml
->
-> diff --git a/tools/ocaml/Makefile b/tools/ocaml/Makefile
-> index 7252eb23d798..e570e30a6e8d 100644
-> --- a/tools/ocaml/Makefile
-> +++ b/tools/ocaml/Makefile
-> @@ -3,6 +3,7 @@ include $(XEN_ROOT)/tools/Rules.mk
->   
->   SUBDIRS := libs
->   SUBDIRS += xenstored
-> +SUBDIRS += tests
->   
->   .NOTPARALLEL:
->   # targets here must be run in order, otherwise we can try
-> diff --git a/tools/ocaml/tests/Makefile b/tools/ocaml/tests/Makefile
-> new file mode 100644
-> index 000000000000..e9f3557f1219
-> --- /dev/null
-> +++ b/tools/ocaml/tests/Makefile
-> @@ -0,0 +1,8 @@
-> +XEN_ROOT = $(CURDIR)/../../..
-> +include $(XEN_ROOT)/tools/Rules.mk
-> +
-> +SUBDIRS-y :=
-> +SUBDIRS-y += bindings
-> +
-> +.PHONY: all clean install distclean uninstall
-> +all clean distclean install uninstall: %: subdirs-%
-> diff --git a/tools/ocaml/tests/bindings/.gitignore b/tools/ocaml/tests/bindings/.gitignore
-> new file mode 100644
-> index 000000000000..6e9a7f429b49
-> --- /dev/null
-> +++ b/tools/ocaml/tests/bindings/.gitignore
-> @@ -0,0 +1 @@
-> +test-ocaml-bindings
-> diff --git a/tools/ocaml/tests/bindings/Makefile b/tools/ocaml/tests/bindings/Makefile
-> new file mode 100644
-> index 000000000000..75f8babbafca
-> --- /dev/null
-> +++ b/tools/ocaml/tests/bindings/Makefile
-> @@ -0,0 +1,34 @@
-> +XEN_ROOT = $(CURDIR)/../../../..
-> +OCAML_TOPLEVEL = $(CURDIR)/../..
-> +include $(OCAML_TOPLEVEL)/common.make
-> +
-> +OBJS = main
-> +
-> +OCAMLINCLUDE += \
-> +	-I $(OCAML_TOPLEVEL)/libs/xb \
-> +	-I $(OCAML_TOPLEVEL)/libs/mmap \
-> +	-I $(OCAML_TOPLEVEL)/libs/xc \
-> +	-I $(OCAML_TOPLEVEL)/libs/eventchn
-> +
-> +LIBS = \
-> +	unix.cmxa \
-> +	-ccopt -L -ccopt $(OCAML_TOPLEVEL)/libs/mmap $(OCAML_TOPLEVEL)/libs/mmap/xenmmap.cmxa \
-> +	-ccopt -L -ccopt $(OCAML_TOPLEVEL)/libs/eventchn $(OCAML_TOPLEVEL)/libs/eventchn/xeneventchn.cmxa \
-> +	-ccopt -L -ccopt $(OCAML_TOPLEVEL)/libs/xc $(OCAML_TOPLEVEL)/libs/xc/xenctrl.cmxa \
-> +	-ccopt -L -ccopt $(OCAML_TOPLEVEL)/libs/xb $(OCAML_TOPLEVEL)/libs/xb/xenbus.cmxa \
-> +	-ccopt -L -ccopt $(XEN_ROOT)/tools/libs/ctrl
-> +
-> +PROGRAMS = test-ocaml-bindings
-> +OCAML_PROGRAM = test-ocaml-bindings
-> +
-> +test-ocaml-bindings_LIBS = $(LIBS)
-> +test-ocaml-bindings_MLSORTED = $(shell $(OCAMLDEP) -sort $(OBJS:=.ml))
-> +test-ocaml-bindings_OBJS = $(test-ocaml-bindings_MLSORTED:.ml=)
-> +
-> +all: test-ocaml-bindings
-> +
-> +install: all
-> +	$(INSTALL_DIR) $(DESTDIR)$(LIBEXEC)/tests
-> +	$(INSTALL_PROG) test-ocaml-bindings $(DESTDIR)$(LIBEXEC)/tests
-> +
-> +include $(OCAML_TOPLEVEL)/Makefile.rules
-> diff --git a/tools/ocaml/tests/bindings/main.ml b/tools/ocaml/tests/bindings/main.ml
-> new file mode 100644
-> index 000000000000..785837e270ad
-> --- /dev/null
-> +++ b/tools/ocaml/tests/bindings/main.ml
-> @@ -0,0 +1,19 @@
-> +open Printf
-> +
-> +let xch = Xenctrl.interface_open ()
-> +
-> +let test_xenversion () =
-> +  let ver = Xenctrl.version xch in
-> +  printf "Xen version: %d.%d%s\n" ver.major ver.minor ver.extra
-> +
-> +
-> +let () =
-> +  printf "Test Ocaml Bindings\n%!";
-> +
-> +  test_xenversion ();
-> +
-> +  printf "Starting GC.compact()\n%!";
-> +  Gc.compact ();
-> +  printf "GC done\n";
-> +
-> +  ()
->
-> base-commit: 46678752be2d97f61317d793408a59927a429847
-Acked-by: Andrii Sultanov <andriy.sultanov@vates.tech>
+--------------P09eaBqWh67iXQKJFFAcbuwv
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
+
+TGUgMjUvMTAvMjAyNiDDoCAxNToyNywgQmVybmhhcmQgS2FpbmRsIGEgw6ljcml0wqA6DQo+
+IFRvOiBUZWRkeSBBc3RpZSA8dGVkZHkuYXN0aWVAdmF0ZXMudGVjaD4NCj4gQ2M6IHhlbi1k
+ZXZlbEBsaXN0cy54ZW5wcm9qZWN0Lm9yZywgSmFuIEJldWxpY2ggPGpiZXVsaWNoQHN1c2Uu
+Y29tPiwNCj4gICBBbmRyZXcgQ29vcGVyIDxhbmRyZXcuY29vcGVyM0BjaXRyaXguY29tPiwg
+cm9nZXJAeGVucHJvamVjdC5vcmcsDQo+ICAgRGVuaXMgTXVraGluIDxkbXVraGluQHhlbi5v
+cmc+DQo+IFN1YmplY3Q6IFJlOiBbUEFUQ0ggMi82XSB4ODYvdmxhcGljOiBGaXggaGFyZHdh
+cmUgdmlydHVhbGl6ZWQgQVBJQyBzdGF0ZSBhZnRlciByZXNldA0KPiBJbi1SZXBseS1Ubzog
+PDE3OTI1MDQ0MjUuODYzMWZjMjYyNTgxNDUzYmJmNjE5ZWM1YjIwNjIxNzAuMWExNTk5NmVj
+NjgwMDBmNzlmQHZhdGVzLnRlY2g+DQo+IFJlZmVyZW5jZXM6IDwxNzkyNTA0MzEzLjg2MzFm
+YzI2MjU4MTQ1M2JiZjYxOWVjNWIyMDYyMTcwLjFhMTU5OTUzNmQ4MDAwZjc5ZkB2YXRlcy50
+ZWNoPg0KPiAgIDwyMDI2MTAyMDEzNTMzMy4zODA2NC0yLXRlZGR5LmFzdGllQHZhdGVzLnRl
+Y2g+DQo+ICAgPDE3OTI1MDQ0MjUuODYzMWZjMjYyNTgxNDUzYmJmNjE5ZWM1YjIwNjIxNzAu
+MWExNTk5NmVjNjgwMDBmNzlmQHZhdGVzLnRlY2g+DQo+IA0KPiBIaSBUZWRkeSwNCj4gDQo+
+IFRoYW5rcyBmb3IgdGhlIHJlc2V0IGltcHJvdmVtZW50cy4gQ291bGQgdGhlIG5ldyByZXNl
+dC10aW1lIHN5bmMNCj4gY2FsbCB1c2UgYSBkZWRpY2F0ZWQgZGlzY2FyZCBvcGVyYXRpb24g
+aW5zdGVhZD8gVGhhdCB3b3VsZCBhbHNvIGNvdmVyDQo+IHN1cHByZXNzZWQgcG9zdGluZ3Mg
+d2l0aG91dCBjaGFuZ2luZyBvcmRpbmFyeSBwZW5kaW5nLWludGVycnVwdCBxdWVyaWVzLg0K
+PiANCj4geGVuL2FyY2gveDg2L2h2bS92bGFwaWMuYzoNCj4gQEAgLTE0MjksNiArMTQzMiwx
+MyBAQCBzdGF0aWMgdm9pZCB2bGFwaWNfZG9faW5pdChzdHJ1Y3QgdmxhcGljICp2bGFwaWMp
+DQo+PiArICAgIC8qDQo+PiArICAgICAqIERyYWluIHRoZSBwb3N0ZWQgaW50ZXJydXB0IGRl
+c2NyaXB0b3IgKGFuZCBjbGVhciBpdHMgT04gYml0KSBiZWZvcmUNCj4+ICsgICAgICogemVy
+b2luZyB0aGUgSVJSLCBzbyB0aGF0IHZlY3RvcnMgcG9zdGVkIGJlZm9yZSB0aGUgcmVzZXQg
+ZG9uJ3QgZ2V0DQo+PiArICAgICAqIG1lcmdlZCBpbnRvIHRoZSBmcmVzaCBJUlIgYnkgYSBs
+YXRlciBzeW5jLg0KPj4gKyAgICAgKi8NCj4+ICsgICAgaHZtX3N5bmNfcGlyX3RvX2lycih2
+bGFwaWNfdmNwdSh2bGFwaWMpKTsNCj4gDQo+IFBJUiAoUG9zdGVkIEludGVycnVwdCBSZXF1
+ZXN0KSByZWNvcmRzIHBlbmRpbmcgdmVjdG9ycy4gT04gbWVhbnMNCj4gT3V0c3RhbmRpbmcg
+Tm90aWZpY2F0aW9uLCB3aGlsZSBTTiAoU3VwcHJlc3MgTm90aWZpY2F0aW9uKSBzdXBwcmVz
+c2VzDQo+IG5vbi11cmdlbnQgbm90aWZpY2F0aW9ucywgbm90IHRoZSByZWNvcmRpbmcgb2Yg
+aW50ZXJydXB0cy4gVGhlDQo+IHN3aXRjaC1vdXQgaG9vayBzZXRzIFNOIGZvciBhIG5vbi1i
+bG9ja2VkIHRhcmdldC4gQW4gSU9NTVUgcG9zdGluZyBjYW4NCj4gdGhlbiBsZWF2ZSBQSVIg
+bm9uZW1wdHkgd2l0aCBPTj0wIGJlZm9yZSByZXNldCBzdGFydHMuDQo+IA0KPiBUaGUgZXhp
+c3Rpbmcgdm14X3N5bmNfcGlyX3RvX2lycigpIGluIHhlbi9hcmNoL3g4Ni9odm0vdm14L3Zt
+eC5jIHJldHVybnMNCj4gYmVmb3JlIHRvdWNoaW5nIFBJUiBpbiB0aGF0IHN0YXRlOg0KPiAN
+Cj4+ICAgICAgaWYgKCAhcGlfdGVzdF9vbihkZXNjKSApDQo+PiAgICAgICAgICByZXR1cm47
+DQo+IA0KPiBDb25zZXF1ZW50bHkgdGhlIG5ldyBjYWxsIGNhbiBsZWF2ZSBhbiBvbGQgdmVj
+dG9yIGluIFBJUiB3aGlsZSByZXNldA0KPiBjbGVhcnMgSVJSIChJbnRlcnJ1cHQgUmVxdWVz
+dCBSZWdpc3RlcikuIEl0IGNhbiBsYXRlciBiZSB0cmFuc2ZlcnJlZA0KPiBpbnRvIHRoZSBm
+cmVzaCBJUlIuIFRoaXMgaXMgYSBwcmUtZXhpc3RpbmcgcmVzZXQgZ2FwLCBub3QgYSBuZXcN
+Cj4gcmVncmVzc2lvbiBpbnRyb2R1Y2VkIGJ5IHRoaXMgcGF0Y2guDQo+IA0KPiBDaGVja2lu
+ZyBQSVIgYXMgd2VsbCBhcyBPTiBpbiB2bXhfc3luY19waXJfdG9faXJyKCkgd291bGQgYWRk
+IHJlYWRzDQo+IHRvIG9yZGluYXJ5IHBlbmRpbmcgcXVlcmllcywgaW5jbHVkaW5nIGh2bV92
+Y3B1X2hhc19wZW5kaW5nX2lycSgpLg0KPiBSZXNldCBpbnN0ZWFkIHdhbnRzIHRvIGRpc2Nh
+cmQgdGhlIGJpdHMgcmVnYXJkbGVzcyBvZiBPTi4NCj4gDQo+IFdoYXQgZG8geW91IHRoaW5r
+PyBXb3VsZCByZXBsYWNpbmcgdGhlIG5ldyBjYWxsIHdpdGggdGhpcyBvcHRpb25hbA0KPiBi
+YWNrZW5kIGhvb2sgZml0IHRoaXMgcGF0Y2ggYmV0dGVyPw0KPiANCg0KTG9va3MgZ29vZCB0
+byBtZSwganVzdCBhIHNsaWdodCBhZGp1c3RtZW50IEkgd291bGQgYWRkLg0KDQo+IGRpZmYg
+LS1naXQgYS94ZW4vYXJjaC94ODYvaHZtL3ZsYXBpYy5jIGIveGVuL2FyY2gveDg2L2h2bS92
+bGFwaWMuYw0KPiAtLS0gYS94ZW4vYXJjaC94ODYvaHZtL3ZsYXBpYy5jDQo+ICsrKyBiL3hl
+bi9hcmNoL3g4Ni9odm0vdmxhcGljLmMNCj4gQEAgLTE0MzMsMTEgKzE0MzMsMTEgQEAgc3Rh
+dGljIHZvaWQgdmxhcGljX2RvX2luaXQoc3RydWN0IHZsYXBpYyAqdmxhcGljKQ0KPiAgICAg
+ICAgICAgcmV0dXJuOw0KPiAgIA0KPiAgICAgICAvKg0KPiAtICAgICAqIERyYWluIHRoZSBw
+b3N0ZWQgaW50ZXJydXB0IGRlc2NyaXB0b3IgKGFuZCBjbGVhciBpdHMgT04gYml0KSBiZWZv
+cmUNCj4gLSAgICAgKiB6ZXJvaW5nIHRoZSBJUlIsIHNvIHRoYXQgdmVjdG9ycyBwb3N0ZWQg
+YmVmb3JlIHRoZSByZXNldCBkb24ndCBnZXQNCj4gLSAgICAgKiBtZXJnZWQgaW50byB0aGUg
+ZnJlc2ggSVJSIGJ5IGEgbGF0ZXIgc3luYy4NCj4gKyAgICAgKiBEaXNjYXJkIHBvc3RlZCBp
+bnRlcnJ1cHRzIGJlZm9yZSByZXNldHRpbmcgdGhlIEFQSUMgcmVnaXN0ZXJzLA0KPiArICAg
+ICAqIGluY2x1ZGluZyBzdXBwcmVzc2VkIHBvc3RpbmdzIHdoaWNoIGhhdmUgbm90IHNldCBP
+Ti4NCj4gICAgICAgICovDQo+IC0gICAgaHZtX3N5bmNfcGlyX3RvX2lycih2bGFwaWNfdmNw
+dSh2bGFwaWMpKTsNCj4gKyAgICBpZiAoIGh2bV9mdW5jcy5yZXNldF9waXIgKQ0KPiArICAg
+ICAgICBhbHRlcm5hdGl2ZV92Y2FsbChodm1fZnVuY3MucmVzZXRfcGlyLCB2bGFwaWNfdmNw
+dSh2bGFwaWMpKTsNCj4gICANCj4gICAgICAgdmxhcGljX3NldF9yZWcodmxhcGljLCBBUElD
+X0xWUiwgVkxBUElDX1ZFUlNJT04pOw0KPiAgIA0KPiBkaWZmIC0tZ2l0IGEveGVuL2FyY2gv
+eDg2L2h2bS92bXgvdm14LmMgYi94ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYw0KPiAtLS0g
+YS94ZW4vYXJjaC94ODYvaHZtL3ZteC92bXguYw0KPiArKysgYi94ZW4vYXJjaC94ODYvaHZt
+L3ZteC92bXguYw0KPiBAQCAtMjQzNyw2ICsyNDM3LDE3IEBAIHN0YXRpYyB2b2lkIGNmX2No
+ZWNrIHZteF9zeW5jX3Bpcl90b19pcnIoc3RydWN0IHZjcHUgKnYpDQo+ICAgICAgIH0NCj4g
+ICB9DQo+ICAgDQo+ICsvKiBEaXNjYXJkIHBvc3RlZCBpbnRlcnJ1cHRzIHdpdGhvdXQgZGVw
+ZW5kaW5nIG9uIG5vdGlmaWNhdGlvbiBzdGF0ZS4gKi8NCj4gK3N0YXRpYyB2b2lkIGNmX2No
+ZWNrIHZteF9yZXNldF9waXIoc3RydWN0IHZjcHUgKnYpDQo+ICt7DQo+ICsgICAgc3RydWN0
+IHBpX2Rlc2MgKmRlc2MgPSAmdi0+YXJjaC5odm0udm14LnBpX2Rlc2M7DQo+ICsNCj4gKyAg
+ICAodm9pZClwaV90ZXN0X2FuZF9jbGVhcl9vbihkZXNjKTsNCj4gKw0KPiArICAgIGZvciAo
+IHVuc2lnbmVkIGludCBpID0gMDsgaSA8IEFSUkFZX1NJWkUoZGVzYy0+cGlyKTsgKytpICkN
+Cj4gKyAgICAgICAgKHZvaWQpeGNoZygmZGVzYy0+cGlyW2ldLCAwKTsNCj4gK30NCj4gKw0K
+DQpJIHdvdWxkIHJhdGhlciBpbnRyb2R1Y2UgcGlfY2xlYXJfb24oKQ0KDQpzdGF0aWMgaW5s
+aW5lIHZvaWQgcGlfY2xlYXJfb24oc3RydWN0IHBpX2Rlc2MgKnBpX2Rlc2MpDQp7DQogICAg
+IGNsZWFyX2JpdChQT1NURURfSU5UUl9PTiwgJnBpX2Rlc2MtPmNvbnRyb2wpOw0KfQ0KDQpB
+bmQgd3JpdGUgdm14X3Jlc2V0X3BpcigpIGFzIDoNCg0KLyogRGlzY2FyZCBwb3N0ZWQgaW50
+ZXJydXB0cyB3aXRob3V0IGRlcGVuZGluZyBvbiBub3RpZmljYXRpb24gc3RhdGUuICovDQpz
+dGF0aWMgdm9pZCBjZl9jaGVjayB2bXhfcmVzZXRfcGlyKHN0cnVjdCB2Y3B1ICp2KQ0Kew0K
+ICAgICBzdHJ1Y3QgcGlfZGVzYyAqZGVzYyA9ICZ2LT5hcmNoLmh2bS52bXgucGlfZGVzYzsN
+Cg0KICAgICBwaV9jbGVhcl9vbihkZXNjKTsNCg0KICAgICBmb3IgKCB1bnNpZ25lZCBpbnQg
+aSA9IDA7IGkgPCBBUlJBWV9TSVpFKGRlc2MtPnBpcik7ICsraSApDQogICAgICAgICB3cml0
+ZV9hdG9taWMoJmRlc2MtPnBpcltpXSwgMCk7DQp9DQoNCg0KTm90IHN1cmUgd2hpY2ggaXMg
+YmVzdCBoZXJlIGJldHdlZW4gd3JpdGVfYXRvbWljIChtb3ZxKSBhbmQgeGNoZy4NCkFsdGVy
+bmF0aXZlbHksIHdlIGNhbiBhbHNvIHVzZSBgQUNDRVNTX09OQ0UoZGVzYy0+cGlyW2ldKSA9
+IDA7YC4NCg0KPiAgIHN0YXRpYyBib29sIGNmX2NoZWNrIHZteF90ZXN0X3Bpcihjb25zdCBz
+dHJ1Y3QgdmNwdSAqdiwgdWludDhfdCB2ZWMpDQo+ICAgew0KPiAgICAgICByZXR1cm4gcGlf
+dGVzdF9waXIodmVjLCAmdi0+YXJjaC5odm0udm14LnBpX2Rlc2MpOw0KPiBAQCAtMzE3Niw2
+ICszMTg3LDcgQEAgY29uc3Qgc3RydWN0IGh2bV9mdW5jdGlvbl90YWJsZSAqIF9faW5pdCBz
+dGFydF92bXgodm9pZCkNCj4gICANCj4gICAgICAgICAgIHZteF9mdW5jdGlvbl90YWJsZS5k
+ZWxpdmVyX3Bvc3RlZF9pbnRyID0gdm14X2RlbGl2ZXJfcG9zdGVkX2ludHI7DQo+ICAgICAg
+ICAgICB2bXhfZnVuY3Rpb25fdGFibGUuc3luY19waXJfdG9faXJyICAgICA9IHZteF9zeW5j
+X3Bpcl90b19pcnI7DQo+ICsgICAgICAgIHZteF9mdW5jdGlvbl90YWJsZS5yZXNldF9waXIg
+ICAgICAgICAgID0gdm14X3Jlc2V0X3BpcjsNCj4gICAgICAgICAgIHZteF9mdW5jdGlvbl90
+YWJsZS50ZXN0X3BpciAgICAgICAgICAgID0gdm14X3Rlc3RfcGlyOw0KPiAgICAgICB9DQo+
+ICAgDQo+IEBAIC0zMjEyLDYgKzMyMjQsNyBAQCB2b2lkIF9faW5pdCB2bXhfZmlsbF9mdW5j
+cyh2b2lkKQ0KPiAgIA0KPiAgICAgICB2bXhfZnVuY3Rpb25fdGFibGUuZGVsaXZlcl9wb3N0
+ZWRfaW50ciA9IHZteF9kZWxpdmVyX3Bvc3RlZF9pbnRyOw0KPiAgICAgICB2bXhfZnVuY3Rp
+b25fdGFibGUuc3luY19waXJfdG9faXJyICAgICA9IHZteF9zeW5jX3Bpcl90b19pcnI7DQo+
+ICsgICAgdm14X2Z1bmN0aW9uX3RhYmxlLnJlc2V0X3BpciAgICAgICAgICAgPSB2bXhfcmVz
+ZXRfcGlyOw0KPiAgICAgICB2bXhfZnVuY3Rpb25fdGFibGUudGVzdF9waXIgICAgICAgICAg
+ICA9IHZteF90ZXN0X3BpcjsNCj4gICB9DQo+ICAgDQo+IGRpZmYgLS1naXQgYS94ZW4vYXJj
+aC94ODYvaW5jbHVkZS9hc20vaHZtL2h2bS5oIGIveGVuL2FyY2gveDg2L2luY2x1ZGUvYXNt
+L2h2bS9odm0uaA0KPiAtLS0gYS94ZW4vYXJjaC94ODYvaW5jbHVkZS9hc20vaHZtL2h2bS5o
+DQo+ICsrKyBiL3hlbi9hcmNoL3g4Ni9pbmNsdWRlL2FzbS9odm0vaHZtLmgNCj4gQEAgLTIx
+OCw2ICsyMTgsOCBAQCBzdHJ1Y3QgaHZtX2Z1bmN0aW9uX3RhYmxlIHsNCj4gICAgICAgdm9p
+ZCAoKnByb2Nlc3NfaXNyKShpbnQgaXNyLCBzdHJ1Y3QgdmNwdSAqdik7DQo+ICAgICAgIHZv
+aWQgKCpkZWxpdmVyX3Bvc3RlZF9pbnRyKShzdHJ1Y3QgdmNwdSAqdiwgdTggdmVjdG9yKTsN
+Cj4gICAgICAgdm9pZCAoKnN5bmNfcGlyX3RvX2lycikoc3RydWN0IHZjcHUgKnYpOw0KPiAr
+ICAgIC8qIERpc2NhcmQgcGVuZGluZyBwb3N0ZWQgaW50ZXJydXB0cyBhbmQgbm90aWZpY2F0
+aW9uIHN0YXRlIG9uIHJlc2V0LiAqLw0KPiArICAgIHZvaWQgKCpyZXNldF9waXIpKHN0cnVj
+dCB2Y3B1ICp2KTsNCj4gICAgICAgYm9vbCAoKnRlc3RfcGlyKShjb25zdCBzdHJ1Y3QgdmNw
+dSAqdiwgdWludDhfdCB2ZWN0b3IpOw0KPiAgICAgICB2b2lkICgqaGFuZGxlX2VvaSkodWlu
+dDhfdCB2ZWN0b3IsIGludCBpc3IpOw0KPiAgICAgICBpbnQgKCpwaV91cGRhdGVfaXJ0ZSko
+Y29uc3Qgc3RydWN0IHZjcHUgKnYsIGNvbnN0IHN0cnVjdCBwaXJxICpwaXJxKTsNCj4gDQo+
+IFRoZSBPTiBjbGVhciBpcyBiZWZvcmUgY2xlYXJpbmcgUElSLCBwcmVzZXJ2aW5nIHRoZSBy
+ZXF1aXJlZA0KPiBjbGVhci1PTi1iZWZvcmUtZHJhaW5pbmctUElSIG9yZGVyaW5nIChzZWUg
+dm14X3N5bmNfcGlyX3RvX2lycigpKS4NCj4gDQo+IFRoZSBoZWxwZXIgbmVlZHMgb25seSB0
+aGUgaW5saW5lIGRlc2NyaXB0b3IsIHNvIGluaXRpYWwgTEFQSUMgc2V0dXANCj4gY2FuIGNh
+bGwgaXQgYmVmb3JlIFZNQ1MgY3JlYXRpb24uIFRoZSBob29rIGlzIG9wdGlvbmFsIGFuZCBp
+bnN0YWxsZWQNCj4gZm9yIFZNWCBwb3N0ZWQtaW50ZXJydXB0IHN1cHBvcnQsIGluY2x1ZGlu
+ZyB0aGUgdm14X2ZpbGxfZnVuY3MoKSBlbnRyeS4NCj4gDQo+IEZvciB0aGUgc2VyaWVzIGFz
+IHBvc3RlZCwgYW5kIGFsc28gd2l0aCB0aGUgc3VnZ2VzdGVkIGNoYW5nZSBhYm92ZQ0KPiBp
+bmNvcnBvcmF0ZWQ6DQo+IA0KPiBBc3Npc3RlZC1ieTogQ29waWxvdDpncHQtNi1hc3RyYS1o
+aWdoLCBDb3BpbG90OmdwdC02LjEtc29sLWhpZ2gteGhpZ2gtbWF4ICMgcmV2aWV3DQo+IFJl
+dmlld2VkLWJ5OiBCZXJuaGFyZCBLYWluZGwgPGJlcm5oYXJkLmthaW5kbEBjaXRyaXguY29t
+Pg0KPiANCj4gY3UsIEJlcm5oYXJkDQo+IA0KDQpUZWRkeQ0K
+
+--------------P09eaBqWh67iXQKJFFAcbuwv--
+
+--------------9BsBj9Td2zo0ekrIU7xai3qA
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+
+-----BEGIN PGP SIGNATURE-----
+
+wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmrff6cFAwAAAAAACgkQZg+p0QLLz9DT
+1Qv/ZOll3NOBtBPdtmrIrsYknX/XxQKLIypyLZXXqMKvNUrPHtNyM2FI+729j6C0I5C6UdvzFdZv
+fHHriFvr+f8op7KfVkmuEpxR9fO0+hLiGoWrauYyd8kr+cdiWWg76IVNP9PP5NwRQxG4dtESlC3H
+baIgx3n/XhLsh2afPv2rvZ3zWPa5/TN0m9JmKtHXSkt58ML2rIZE2iu9YYiDCEl8ln/vGhVdC3bL
+BFijs7xTIpIvXcghIc9rBwurft+GMElftllG10r8YQHZqJBfaLZkYvgTEWpDDBhBa7kMJdE/zvqY
+nFTMe7xOrPFFf4o2RAWofLX1jBqGnAJWZfuhdMaH/7m4Jhab0iznVmkNGP+zdlWARBnyFr/YlHM/
+tzFbnd8hADuAW4CTx4Bv+KVk37BcBiiK0Extk4Qrlr47KUhHYuvoOA5OC2KkirFNleBSqiLQj2Pz
+NXVkAOSfVJjrDi7gyEciHgNRMKdtk0KDR8r+MsWmxSnMwNnjlXCYt6oQox4C
+=3id0
+-----END PGP SIGNATURE-----
+
+--------------9BsBj9Td2zo0ekrIU7xai3qA--
 
