@@ -2,45 +2,51 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 8D42B606A31A
-	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 14:05:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 59B9F606A31A
+	for <xen-devel@archiver.kernel.org>; Mon, 26 Oct 2026 14:06:58 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Msgd/lja
-Received: from list by lists.xenproject.org with outflank-mailman.1461405.1672411 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=AdGqESOl
+Received: from list by lists.xenproject.org with outflank-mailman.1461412.1672419 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLLK2-0005i3-7n; Mon, 26 Oct 2026 14:05:10 +0000
+	id 1xLLLY-0006GZ-Fj; Mon, 26 Oct 2026 14:06:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461405.1672411; Mon, 26 Oct 2026 14:05:10 +0000
+Received: by outflank-mailman (output) from mailman id 1461412.1672419; Mon, 26 Oct 2026 14:06:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLLK2-0005hv-2i; Mon, 26 Oct 2026 14:05:10 +0000
-Received: by outflank-mailman (input) for mailman id 1461405;
- Mon, 26 Oct 2026 14:05:08 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xLLK0-0005fW-P6
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 14:05:08 +0000
+	id 1xLLLY-0006GS-D3; Mon, 26 Oct 2026 14:06:44 +0000
+Received: by outflank-mailman (input) for mailman id 1461412;
+ Mon, 26 Oct 2026 14:06:42 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a17888e252000f79f@swg.vates.tech>)
+ id 1xLLLW-0006GM-Ov
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 14:06:42 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLLK0-005wRu-62
- for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 15:05:08 +0100
-Received: from [10.42.69.4] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6adf5e0c-8faa-0a2a0a5109dd-0a2a450484c8-18
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 15:05:08 +0100
-Received: from [209.85.128.41] (helo=mail-wm1-f41.google.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6adf5e13-b57f-0a2a45040019-d1558029b4d4-3
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 15:05:08 +0100
-Received: by mail-wm1-f41.google.com with SMTP id
- 5b1f17b1804b1-4a4dc547987so6009905e9.0
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 07:05:08 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a35a0a476bsm136413335e9.3.2026.10.26.07.05.06
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Mon, 26 Oct 2026 07:05:07 -0700 (PDT)
+ id 1xLLLW-000c5A-5V
+ for xen-devel@lists.xenproject.org; Mon, 26 Oct 2026 15:06:42 +0100
+Received: from [10.42.69.11] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a17888e252000f79f@swg.vates.tech>)
+ id 6adf5e71-e002-0a2a0a5209dd-0a2a450be02a-4
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 15:06:42 +0100
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-42698a.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a17888e252000f79f@swg.vates.tech>)
+ id 6adf5e71-b7e8-0a2a450b0019-b9ff1c12a95f-3
+ for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 15:06:42 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a17888e252000f79f.007 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Mon, 26 Oct 2026 14:06:39 +0000
+Received: from [192.168.1.52] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 5500982EC5;
+ Mon, 26 Oct 2026 15:06:38 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,173 +55,142 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793023507; x=1793628307; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=S/QgXP0DzeKLRuvqaHQS5LxEJxYqR60Yay7rdZ3OGD0=;
-        b=Msgd/ljaNTiGIqOU1M60sZ27ayR8m17H7JnHj1q6n7Qqa78KSQSbKGUelkgMSUs/xs
-         i47tdZdhZz2S2M4da7PRiRf4GF5Q+edpb5cBQzWcDNJU70I1KswODRdLjGlTrQiPkGOa
-         6B9JRW8V1VBMFbwQ0Z22OnOzIQwhlgkd8y3G7LAMADMn8iHAsFouMET4ENFlU41p9ocT
-         Nur4VepSgeU0L1lkFOlcT4Ga2Yb8eKs+71TjndJ7OwG70ShBO3qVKZLT4mXleY6oimP9
-         xgTyrdrXXNzousdRtGeZ3Gp0jT+4cI1ZGkzFodb5DlTzEC4VANAPnXpUbrVul8uc5ivs
-         Zi/g==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793023507; x=1793628307;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=S/QgXP0DzeKLRuvqaHQS5LxEJxYqR60Yay7rdZ3OGD0=;
-        b=BsY/F57BplQwH9HVekEQEhRuh17aTxhogzMKSQC9spzsDOcD1lUSkV1e8Y9AOmm68a
-         gQgC1By6ok1L7GInUsm4lTFv6I9g8eIHEcspTpyjBQVPmeBTZnXroPlWhr13vxeST91h
-         DVfC3W2aiBQ3oiJ9xlyQaVDWW7J446KumKwtEzKcDbb65fuO4peFXSbDbVl8pqVuEFYQ
-         wtmhcKW+5rNw+QM8e+1XCX44gD9dd04jJYkD+bcp2UIcdYw1xxn5SyJ08/sP2LmCiLHj
-         rbrPCVdRgJU863i3VbN/1KwCBUAETNt6cC1xXPlNf7nnid9p6cCBnx365FMrkR5gUlqi
-         zHUw==
-X-Forwarded-Encrypted: i=1; AKwUvBzIcxuYIO/tUGskpSIdJ+dnq+5U9+fL3yL4uZuQmvDJRuFuC7EejFpyip3GB36DetpJ18w8WRVUMm0=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYItw/BOiHi0jufHK0n1IYU0HPv7699tDyrEGy6fkWSeok6OR38J
-	m/R+xnGovEDNazBbT35VXb862suHvkfcNErhGCYNexsMywcuVD2Z6puIjHSGaGTZCA==
-X-Gm-Gg: AYBFou1FbRZtoz+WRv/ZZMlaprW0MujJVcRsPFlC+DtwQa3IxvrWB5kQw8EI0OvYQsL
-	eqa7t+EGPghKLLCJrC6KtkRCaHIwYpuW6/TVbkJFMQsrVjd2z9hhQliEfdlYutMZiVu/Xe62EkW
-	kLQuerAMJFhp4OKI6lSq+GwvzaIPf2E5jGO9KTksmw1V7pJFoRl4YTc7fB4qQz581qTjitGDziz
-	Yzo5k3DT1BE/vLjSQ7JcbPyqNzCEgs9r4hv4XgQsLNnPaFRERIgQS0cgIDIpIHxuD4BT5LXM14w
-	XTwGfqO6wUGbgEhmbusfKvg7wCreXrvOqWrc7bN7v0KcGCxLJIlyprbdu8V16s5HA7hJddKrdpU
-	KfE2j2gpK7vNQt0eA4Ha5Pp3ba9XDCtUeWK6Y80QtHseCcCuhY9Wm05fIVkAU4gfEcFjnRCeyYs
-	Xu0llV824b0+e7VTjE6GceNBu2fGgwigY1NF4cvAyoP0mxsHav3saoQ+EA+WULoJKcBJVw0knP/
-	gNum8+karPRvhnf77Qqm7zM37hIsv3RrvN1xziWdEu6NSoZZSOHIIvCqx/OyFR3UEiwk48sbyFd
-	p4F+ooyvaBECFEwL/HBrlkvFoQijT3omfZ+LhqOVRHA=
-X-Received: by 2002:a05:600c:c056:b0:4a4:4d57:8462 with SMTP id 5b1f17b1804b1-4a44d578602mr82347305e9.24.1793023507391;
-        Mon, 26 Oct 2026 07:05:07 -0700 (PDT)
-Message-ID: <535e56a1-c9ad-4866-ac11-ebf9fe0115bc@suse.com>
-Date: Mon, 26 Oct 2026 15:05:05 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=djw2QxPds94pGLugen6+El3ECWShTp8nUm5eIsTN8/4=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=AdGqESOlKnjJrDXEiRb7GJWB6D3XTs12bHKr5RVjKZ2utnUNhWdK/v8JJrIyJ6+rhkfSSwhaa
+ XIZIpjdtZ8TDOaUaXnSi6N9tMoIIW8gOQ8scMQ3+ys4LXfodrtdmztS24aM/8k5bb2PeKXMGqFI
+ B5kReBQTvRyjVvdEYiM/+sUKkAsy0T6HjBEwS5mHP0qCbrMCIBKFjoiziSmA0kHCn1BR0wYNqHz
+ MyPxTLyjWPEFXQPwPTa7j0mxKth2N0hWb4P7LS0tLW6WrGY0clyGLYrrzODUqnN6FKAf+0E9ZhT
+ 1KfEpCC3ZIHtMLr+tac1ONMD4/LoMjeI4u+TCEtN4ApQ==
+X-Zone-Loop: 443a7e1da17fe878ed71ad2153ebae0473ca668f1620
+x-campaign-type: default
+x-transaction-id: e0ba788d-5ff4-4b3e-9ae2-69e890530320
+x-swg-uid: 01-42c11d37-ede3-4281-bb04-111bbc591ecf
+X-Mailer: Sweego
+Message-ID:
+ <1793023599.8631fc262581453bbf619ec5b2062170.1a17888e252000f79f@vates.tech>
+x-swg-bid: 1793023599.8631fc262581453bbf619ec5b2062170.1a17888e252000f79f
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] xen/vcpu: ensure no write when runstate handler is
- NULL
-To: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- Teddy Astie <teddy.astie@vates.tech>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <20261023161742.67329-1-roger@xenproject.org>
- <47d6f426-6751-4a32-a187-2fb8a5347091@suse.com> <at9cgI2cIaS6nMAp@Mac.lan>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <at9cgI2cIaS6nMAp@Mac.lan>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-ebf023/1793023508-524CBB50-8EEB535D/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 2725
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+Subject: Re: [PATCH v3 31/39] xen/riscv: remap interrupts to new IMSIC
+ VS-file
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+To: Oleksii Kurochko <oleksii.kurochko@gmail.com>
+Cc: xen-devel@lists.xenproject.org, 
+ Romain Caritey <Romain.Caritey@microchip.com>, 
+ Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
+ Zheng Zhang <zhangzheng@iscas.ac.cn>, 
+ Alistair Francis <alistair.francis@wdc.com>, 
+ Connor Davis <connojdavis@gmail.com>, 
+ Andrew Cooper <andrew.cooper3@citrix.com>, 
+ Anthony PERARD <anthony.perard@vates.tech>, 
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
+ Julien Grall <julien@xen.org>, 
+ =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
+ Stefano Stabellini <sstabellini@kernel.org>
+In-Reply-To: <45011daea86267b8f4b707bc7de6357b0712fb08.1790779209.git.oleksii.kurochko@gmail.com>
+References: <cover.1790779209.git.oleksii.kurochko@gmail.com>
+ <45011daea86267b8f4b707bc7de6357b0712fb08.1790779209.git.oleksii.kurochko@gmail.com>
+Date: Mon, 26 Oct 2026 15:06:29 +0100
+X-Developer-Signature: v=1; a=ed25519-sha256; t=1793023593; l=3944;
+ i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
+ bh=viqPS50PsFoz/TkblGzIMI54ljn0gloQUKzoXBVka3c=;
+ b=Sp+u2rPvy7J5VqE/tF3imPcnwhnGayedeMzC8yUVnLSqb3Ol21wwX7PFnrReYYkuq2u0q7KjT
+ e0mzpOVwzGQB8UiFf3qIVBsDiXzw/exETyGybwDOTSHDJqphiCoUbpI
+X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
+ pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1793023598552
+X-purgate-ID: tlsNG-42698a/1793023602-A94C39EA-5AB75359/0/0
+X-purgate-type: clean
+X-purgate-size: 3944
+X-Spam-Status: No, score=-5.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 26.10.2026 14:58, Roger Pau Monné wrote:
-> On Mon, Oct 26, 2026 at 02:06:48PM +0100, Jan Beulich wrote:
->> On 23.10.2026 18:17, Roger Pau Monne wrote:
->>> --- a/xen/arch/x86/x86_64/domain.c
->>> +++ b/xen/arch/x86/x86_64/domain.c
->>> @@ -58,6 +58,11 @@ compat_vcpu_op(int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg)
->>>          rc = 0;
->>>          guest_from_compat_handle(v->runstate_guest.compat, area.addr.h);
->>>  
->>> +        /* NULL handle is deregistering the address. */
->>> +        if ( compat_handle_is_null(area.addr.h) )
->>> +            break;
->>> +
->>> +        /* Update the newly-registered runstate area, best-effort. */
->>>          if ( v == current )
->>>          {
->>>              XLAT_vcpu_runstate_info(&info, &v->runstate);
->>
->> While likely unnecessary in this x86-only handling, ...
->>
->>> --- a/xen/common/domain.c
->>> +++ b/xen/common/domain.c
->>> @@ -2330,6 +2330,11 @@ long common_vcpu_op(int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
->>>          rc = 0;
->>>          runstate_guest(v) = area.addr.h;
->>>  
->>> +        /* NULL handle is deregistering the address. */
->>> +        if ( guest_handle_is_null(area.addr.h) )
->>> +            break;
->>> +
->>> +        /* Update the newly-registered runstate area, best-effort. */
->>>          if ( v == current )
->>>          {
->>>              __copy_to_guest(runstate_guest(v), &v->runstate, 1);
->>
->> ... if we make null an official "de-register", then imo the earlier
->> guest_handle_okay() also wants bypassing in the null case. An arch
->> could - in principle - reject a null handle.
+> Once the new IMSIC VS-file has been zeroed out, it has to be mapped into
+> the guest's G-stage in place of the old one. Also, if any interrupts at an
+> APLIC are forwarded by MSIs to the old interrupt file, reconfigure the
+> APLIC to send them to the new interrupt file.
 > 
-> Yes, it could en theory be possible, albeit I think it's very unlikely
-> we gain anything similar to x86 PV elsewhere.  Would you be OK with:
+> Taking a h/w guest interrupt file (assigning it, zeroing it out, mapping
+> it into G-stage and recording it in the vCPU's IMSIC state) is factored
+> out into imsic_vsfile_acquire().
+> 
+> The relevant translation tables at all IOMMUs would also have to be
+> updated so that MSIs for this virtual interrupt file are sent to the new
+> physical interrupt file, but that is skipped for now as there is no IOMMU
+> support for RISC-V.
+> 
+> Synchronize with the APLIC to ensure that no straggler MSIs will arrive at
+> the old interrupt file by running imsic_aplic_sync() on the pCPU which owns
+> that file.
+> 
+> If the new file can't be mapped into the guest, release the guest
+> external interrupt number imsic_vsfile_acquire() took for it instead of
+> leaking it. vgein_release() takes the pCPU explicitly instead of relying
+> on v->processor, as on migration v->processor already refers to the new
+> pCPU while the number to be released may belong to the old one.
+> 
+> Keep BUG_ON("unimplemented") placeholder in imsic_migrate_vcpu() to guard
+> against silent incorrect behaviour or unexpected panics in guest VMs until
+> the function is fully implemented.
+> 
+> Implement imsic_update_state(), which records the vCPU's guest
+> interrupt file id together with the pCPU owning the file. The two are
+> read as a pair, e.g. by imsic_migrate_vcpu() and the IMSIC context
+> switch hooks, so they are updated under vsfile_lock as a single unit.
+> 
+> imsic_map_guest_file() and vgein_release() are stubs for now.
 
-Yes, this is fine with me:
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+I have the feeling this patch does more than its subject says: besides
+retargeting the APLIC and adding the sync, it introduces
+imsic_vsfile_acquire() (assign + clear + G-stage map + state update),
+imsic_update_state() and the error path, which relies on two stubs,
+imsic_map_guest_file() and vgein_release(). At this point vgein_assign()
+is still BUG_ON("unimplemented") too, so none of the new code can
+actually run, and the error path can't be reviewed against the real
+vgein_release().
 
-Jan
+Also, until "introduce IMSIC h/w interrupt file attaching to vcpu", no
+vCPU ever owns a h/w file, so imsic_migrate_vcpu() can only hit the
+CPU_NONE check.
 
-> --- a/xen/common/domain.c
-> +++ b/xen/common/domain.c
-> @@ -2324,12 +2324,21 @@ long common_vcpu_op(int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
->          if ( copy_from_guest(&area, arg, 1) )
->              break;
-> 
-> +        /* NULL handle is deregistering the address. */
-> +        if ( guest_handle_is_null(area.addr.h) )
-> +        {
-> +            runstate_guest(v) = area.addr.h;
-> +            rc = 0;
-> +            break;
-> +        }
-> +
->          if ( !guest_handle_okay(area.addr.h, 1) )
->              break;
-> 
->          rc = 0;
->          runstate_guest(v) = area.addr.h;
-> 
-> +        /* Update the newly-registered runstate area, best-effort. */
->          if ( v == current )
->          {
->              __copy_to_guest(runstate_guest(v), &v->runstate, 1);
-> 
-> Thanks, Roger.
+Wouldn't it be simpler to move the two already-acked patches and the
+attach first, so that no stubs are needed and each migration step is
+written against its real callees when it lands:
+- Add basic VGEIN management for AIA guests (real vgein_assign() and
+  vgein_release(); the reason for the explicit cpu argument of
+  vgein_release() would then have to go into this commit message)
+- Map IMSIC interrupt file for vCPUs (real imsic_map_guest_file())
+- Implement continue_new_vcpu() and set hstatus.VSXL
+- Attach a h/w interrupt file to a vCPU on its first run, introducing
+  imsic_vsfile_acquire() and imsic_update_state() with their first user
+  (acquire, vaplic_reconfigure_target(), set hstatus.VGEIN)
+- Prepare new IMSIC VS-file (on top of imsic_vsfile_acquire())
+- Implement APLIC-IMSIC-hart sync barrier for vCPU migration
+- Remap interrupts to the new IMSIC VS-file (APLIC retarget + sync)
+- Save/clear old VS-file, restore, SGEI wake-up as today
 
+A side benefit: attach no longer has to be squeezed into the finished
+migration code, so imsic_vsfile_move() with its first_attach argument
+and the goto set_vgein go away. Attach stays a plain sequence, and
+imsic_migrate_vcpu() simply reuses imsic_vsfile_acquire().
+
+Migrating a vCPU which has already run would still hit the trailing
+BUG_ON("unimplemented") until the restore patch, but that is no worse
+than the panic() it hits today.
+
+-- 
+Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
