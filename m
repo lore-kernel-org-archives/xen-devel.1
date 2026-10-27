@@ -2,64 +2,49 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 5E77D606A31D
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 13:28:09 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ABA10606A9D3
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 13:30:54 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=Dq3mWjBc
-Received: from list by lists.xenproject.org with outflank-mailman.1462165.1673215 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=uIiQiJnF
+Received: from list by lists.xenproject.org with outflank-mailman.1462174.1673226 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLhDb-0003Ae-21; Tue, 27 Oct 2026 13:27:59 +0000
+	id 1xLhGA-0004vx-Hz; Tue, 27 Oct 2026 13:30:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1462165.1673215; Tue, 27 Oct 2026 13:27:59 +0000
+Received: by outflank-mailman (output) from mailman id 1462174.1673226; Tue, 27 Oct 2026 13:30:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLhDa-0003AX-VF; Tue, 27 Oct 2026 13:27:58 +0000
-Received: by outflank-mailman (input) for mailman id 1462165;
- Tue, 27 Oct 2026 13:27:56 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Michal.Orzel@amd.com>) id 1xLhDY-0003AR-Cy
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 13:27:56 +0000
+	id 1xLhGA-0004vq-Eb; Tue, 27 Oct 2026 13:30:38 +0000
+Received: by outflank-mailman (input) for mailman id 1462174;
+ Tue, 27 Oct 2026 13:30:37 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLhG9-0004vb-7B
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 13:30:37 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLhDX-007vXg-Q3
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 14:27:55 +0100
-Received: from [10.42.69.6] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ae0a6cb-bab6-0a2a0a5309dd-0a2a4506a696-46
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 14:27:55 +0100
-Received: from [52.101.62.67]
- (helo=DM5PR21CU001.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Michal.Orzel@amd.com>)
- id 6ae0a6d7-195a-0a2a45060019-34653e43b451-3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 14:27:54 +0100
-Received: from BN9PR03CA0740.namprd03.prod.outlook.com (2603:10b6:408:110::25)
- by SJ0PR12MB6941.namprd12.prod.outlook.com (2603:10b6:a03:448::10)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Tue, 27 Oct
- 2026 13:27:27 +0000
-Received: from BN2PEPF0000A88F.namprd04.prod.outlook.com
- (2603:10b6:408:110:cafe::58) by BN9PR03CA0740.outlook.office365.com
- (2603:10b6:408:110::25) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.496.5 via Frontend Transport; Tue, 27
- Oct 2026 13:27:26 +0000
-Received: from satlexmb08.amd.com (165.204.84.17) by
- BN2PEPF0000A88F.mail.protection.outlook.com (10.167.248.181) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.569.4 via Frontend Transport; Tue, 27 Oct 2026 13:27:25 +0000
-Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
- (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 27 Oct
- 2026 08:27:25 -0500
-Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
- (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 27 Oct
- 2026 08:27:25 -0500
-Received: from [192.168.31.141] (10.180.168.240) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server id 15.2.2562.53 via Frontend
- Transport; Tue, 27 Oct 2026 08:27:23 -0500
+ id 1xLhG8-006mZs-Gc
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 14:30:36 +0100
+Received: from [10.42.69.2] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a17d8e2a00000f79f@swg.vates.tech>)
+ id 6ae0a776-e002-0a2a0a5209dd-0a2a45029e88-32
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 14:30:36 +0100
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
+ by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a17d8e2a00000f79f@swg.vates.tech>)
+ id 6ae0a77c-6ca4-0a2a45020019-b9ff1c12b587-3
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 14:30:36 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a17d8e2a00000f79f.001 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Tue, 27 Oct 2026 13:30:31 +0000
+Received: from [192.168.1.52] (areims-651-1-80-194.w90-18.abo.wanadoo.fr
+ [90.18.187.194]) (Authenticated sender: baptiste.le-duc)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 5E55381AE5
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 14:30:30 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -68,126 +53,128 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=l93f7Ky9MhjiYbNIItbBhRYmEC5WRa1fT5MU9ee/1Cn9kpn20KBlZYozqeEefBJu/tKp5iH/kldL0HwcEaoIjai/lViqvG+KuEY2ANyjfyZL3BNgqXXseSYWGxUhGnvQe1ybSnSJ7O6PG3k2G1qhPcuJ2QKmAw+VOkEY+S2bUNC/twnOit1Ra6I3LHzBAj83eSS1HWw/6RlDCZaleSrX7DweyGUBd0R8C/IY8SqHNM2zIt0c2+K7oUHxTyrDMoCw3J5tqL4DOI60LWjeS+u2jDjTZIdYNtuNjvbi+sO7WbtkuNWmYaTRuwxJaS1ct8e5Q0tlHE3MsHLS9fgoMGs+eg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=/nY8jl+8X9fgjGf++R0V+RqjAbDRWNwf395vyKfYKDI=;
- b=nmVJp1Ry5Wt3z3sN4ZkWnfkdQtRz2x7LNY6FsZCg5KxlHyl7QdE+iVWDLMzca4yVYrvUBaE3S3lL06UnRyujgnBjBw2oZXlqcxTlHcTcdblzS36ktKxaiD0tnA8aA9ae0CV9n1qs7SRKls5/Z7CkS7lE2YE+nPy4/5i1xLkA+ZoH39EvAQQuCVhKAXt8XGcifYaH7RTYvlUif+2QGMbp6EM9T7LPYkasehXETjwSXJoFx+8WFpNeVN+WchLyxDtuLYsFfdUccHK3sjNLUxGZ0H3I4ykMBJ8u0GExx8nlPj436xftQj1cIEzIdO83QiBdDwfUVo3uC0fxeVLaTFStGA==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=gmail.com smtp.mailfrom=amd.com; dmarc=pass
- (p=quarantine sp=quarantine pct=100) action=none header.from=amd.com;
- dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=/nY8jl+8X9fgjGf++R0V+RqjAbDRWNwf395vyKfYKDI=;
- b=Dq3mWjBcH4pSFp9AS4l4SudXHwnElVqSlGBNaP6t48IM3wEfuZ3Fe7MQLWZSiJojD/Ju6iuvs67N/hD5ySTQl7wXMJgpFy38nu+KT2nX6jm6TNLvykEgTQPBOhZZg9EnM6ADkBOZjWqQtHU8kyan7/vw2DYXpkF8HK0L6ukinaQ=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
-Message-ID: <75922cc3-907f-4de4-b330-bfd76e0b097d@amd.com>
-Date: Tue, 27 Oct 2026 14:27:23 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=coJyJBawLVcNXq76/JPzGF/XDQABCkKh8rlZBfRYcMM=;
+ h=from:subject:date:message-id:to:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
+ b=uIiQiJnFJ9Q1jJcykYzZ99Yn8TVOKqFvY86IhuPY7M6te3UXtP27cXngj/XqED8/WEE/Rk/Pq
+ /Qo4dn8wxN+ABGvOa4+iSe3n0hZ5WfDG8GLSydDdryhEBi0ksPaouZn7CwnpTtNkl7rqUqXkGrw
+ Ib2idZh6E2cVzNzCpqnHhcL0kMC+W3xXJUnwvcdESk7gk8O8jX4s0dwCmUIBFQiaxn8RrAvWV/6
+ LxIpIGYmcLGYNF1q8cha16zjJ0yhlP13wNDfP3PAOGuOyaXTmu5yWMb+/5yo96S2tIQNVSrlTwM
+ zYAfPDYd1dVoIug3ehIBJg1uVOtxgYqQclusv+PVh5qg==
+X-Zone-Loop: b835981ab4889636448c5d56c810a0f110a547c7fcf0
+x-campaign-type: default
+x-transaction-id: edbd1323-add0-4bcd-b627-f4f94b27200f
+x-swg-uid: 01-4370e3ba-196d-48a3-905b-a792114768c4
+X-Mailer: Sweego
+Message-ID:
+ <1793107831.8631fc262581453bbf619ec5b2062170.1a17d8e2a00000f79f@vates.tech>
+x-swg-bid: 1793107831.8631fc262581453bbf619ec5b2062170.1a17d8e2a00000f79f
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+Date: Tue, 27 Oct 2026 14:30:30 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/dt: Only parse direct child nodes of /reserved-memory
-To: Kuan-Wei Chiu <visitorckw@gmail.com>, <xen-devel@lists.xenproject.org>
-CC: <sstabellini@kernel.org>, <julien@xen.org>, <bertrand.marquis@arm.com>,
-	<marscheng@google.com>, <jserv@ccns.ncku.edu.tw>, <eleanor15x@gmail.com>
-References: <20261027031855.2671912-1-visitorckw@gmail.com>
-From: "Orzel, Michal" <michal.orzel@amd.com>
+Subject: Re: [PATCH] x86/MCE: purge mce_amd.h
+To: xen-devel@lists.xenproject.org
+References: <fc12c368-d74e-483f-a17b-8503b3039c17@suse.com>
 Content-Language: en-US
-In-Reply-To: <20261027031855.2671912-1-visitorckw@gmail.com>
-Content-Type: text/plain; charset="UTF-8"
+From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
+Autocrypt: addr=baptiste.le-duc@vates.tech; keydata=
+ xsBNBGoPSX8BCADSuTikqW3FD4mscQugY1thRaKlIhcJ2G9YCWYXAlp+xosvTlzfIftOZZim
+ 750MLvyKtLPkQzB6TZtFZBiexSraaF/MdDKRTT5DcVa3r7ZnHgqMclWlPa4ioysS4yFcJanL
+ cyNOT7HUFvIdirMMqiViedfYtS0GORPBBPVISD6ClMz3ecHIxqllfq9CHYQn4amKEfHmh6tm
+ Rufo4Gjl6x8cUFZZlRQf+aCmUzdSPA0P5u3sueYH1uEz4w/jbD53MlKqzCvxUeOsfS2swTQA
+ 6mS9jIgOjNadpUTOzKfDHMgFirtG+HFpm45Nwp6KQizxgDVOfTnOfVHm5Gwqm3ETl9y5ABEB
+ AAHNPEJhcHRpc3RlIExlIER1YyAoVmF0ZXMgWXViaWtleSkgPGJhcHRpc3RlLmxlLWR1Y0B2
+ YXRlcy50ZWNoPsLAjgQTAQoAOBYhBGiSJ6HgW88MgT/gfu2Cu2XL9M6QBQJqD0l/AhsDBQsJ
+ CAcCBhUKCQgLAgQWAgMBAh4BAheAAAoJEO2Cu2XL9M6QuMcH/ihiy/Nrxp919AmY0ENnc0NK
+ r/2LDvW/hrX4FfbpxAmrGmQ7MU1aQTk0JDbfcsG8OYH6wO5sqnXb1gz50YrEdpfVSbHz5YTZ
+ EhDIxE4g7NrvJZh3Qc0m0CAyjYTNHen7J6olVaCMjrOH7uRHUYZ7Pl3am9mZosfLmez/aWJO
+ a6ihQxBXHI75brlk1teIURkep2kP7P0Flmfl4cA//saREoTF7GXCtjOSQk/xg8PP0Sswqp5G
+ TdJptn3FQn6lAzfz0eFSYqkaoX2c2k1MDa7o+UX9cfGPL8ybMKnYkasLxck6eOWGJWf+YTrm
+ ga/r0kBaftmqNDgt5nI2jNTDwZcT9g3OwE0Eag9JfwEIAM6IWbuBSvz+erv27oGDDpo8M6Fp
+ dGUvft7v+WceHUfxiXpYFx9qgIU6XGy6y+3lJMAvNcltS8DuhioqMlfKRSYGKZlpliY65dNP
+ 557IuM4ctVJ+I9CVclvv9eahARQKgF5auLJAAlvGSmU+ufNvlwTUmLIRcrPviTmB6X5jJYc+
+ fiNeyI0HcsgcN21C0r62tUCypuZ+vgEJXw2bx1V8mVGZKxdGJPh58QF6kRK+xmd4kEComLGV
+ BeM6BcVOtEjDcGNC0tLhXb0p9g1Ys55iA8sd6s4WacyolW2J6rwmcOkjiWexWw1caYgIWAV1
+ 004M3gwUaOz0dGq2i7HQ0AiVfVkAEQEAAcLAdgQYAQoAIBYhBGiSJ6HgW88MgT/gfu2Cu2XL
+ 9M6QBQJqD0l/AhsMAAoJEO2Cu2XL9M6QovYH/RjstyL5o/V5K74ylBtz0j5t3pLX5JKbwApi
+ 656rGgDdqElImyvvZppNMl/mgHNzvxmfFAhJXnSX9f1fqVEQKOGEhLUastnl/ssBiE5x7btM
+ V0GAffxXbXJZbVv4b/DI+gVrOPc2YXlVwruapvTZNtD3hqPrkjrmq5WTtGR2loIVSe62hmh0
+ BGD2Fy79b/hYWyBqhayPBEjwGW75u4/yn+Yqy1PgG3hIcvg7GSuT3akhHZSB2Mbguzcoyf9Q
+ DJl6t33JxPRkkNrEdkPPmRlQCTSiUkVjKqMDF3jlINWsJ5t4jKFsNF91ksdw7aQgiX+tQIpE
+ ugMC1NuNi5dDGip66bw=
+In-Reply-To: <fc12c368-d74e-483f-a17b-8503b3039c17@suse.com>
+Content-Type: text/plain; charset=UTF-8; format=flowed
 Content-Transfer-Encoding: 7bit
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN2PEPF0000A88F:EE_|SJ0PR12MB6941:EE_
-X-MS-Office365-Filtering-Correlation-Id: 2d067f9c-bae5-492b-68be-08df342e0a7f
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|36860700016|82310400026|1800799024|23010399003|18002099003|22082099003|10067099003|56012099006|11063799006|261021123027099003|261009223027099003|261021121427099003|261022105027099003|261021135927099003|261026140227099003;
-X-Microsoft-Antispam-Message-Info:
-	SvhfBkYgql70mDJKUTyXlmhgqsbAKQCqtvBglcnEGQIGKcAgaE8FSfHhLpGD6Ka/XOZqt2Irn23S70HBEsrH4RdpujtHnvp++KcgvbNSRvHIejVhfPV+KIdXU8QVHdrc87nBHvGC0ZtTzFbn/hX5xY4154fgKk5ZO8MFrxsA+oI9EdVEwChHcyOE36IurrnfYQa6hUA7KmA5oXRewGnr1vSnfGGqsEIAED/UIkscvZUCoMZk3bScVVXvZg61GlaTs8X92wkTE9txjON62/iGJrUwLTVoqOxv+SoAZw6jL2Obi8JidSD5DWOlynE+l9gA3mcF+s2d27JjKxUua7SV0mslWdSbelDA0fhirOVdGLzMC4cUmknlXhCvpbOVYDW5PADqsgTIcQ1UR1S3kq+jRvcDpcUg7LOdSunvcv4yYQJYzy3jyWdlP/rxqm71Yj6sRydwC6m7wkNnjPiLsqN3LRLbXgejAwBneBQ6/4LsOgW+HJhvtstY4FHbyAoKvQTV6rfoqcyRh2JAnnfq+1240MouA8oAQdfiP1eOGJ7Z1kwixkRCAxfod5Ds6hB8ycbaI++qhU/mIc0ylzJdwOvhyIwAvCmwVf7pwIdmWywqxFfmUg5VjyKT6hCgo7cnNubatOmofYNhHH9tn+67NWfXR0PObOAequ1nc/Z/E+5WE5nGTRWDM+oRbNW7HDa7W+c4mOMflGDL0ppsHGfYZyzl0g==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(36860700016)(82310400026)(1800799024)(23010399003)(18002099003)(22082099003)(10067099003)(56012099006)(11063799006)(261021123027099003)(261009223027099003)(261021121427099003)(261022105027099003)(261021135927099003)(261026140227099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	avTog1gqGs0khZC8mFjxJfUNWyi53v35+Z8v6CYmTovQHU33Sq7qOgekCvYEaja4LQQUsbftqCr5wJSMnonCVj3lDFlNLIJiVM5wbHUWzK22veNgIUd4iiLda0vpghdv9770nolmCgbCBMal8TKwo3E28aNscEGpU3Avw3OFEgXPuJr78Nr5kPb1hf88emf9e2DYJ4KqIYaIeQYq9XbGqjtKrAlLQ9h/qNOCLZKhVI5Oz/ECxNk8o2yg05qnbiIT7nN6HbQpyQAjsIfqQqLJBqxbeua9PA1IJ2bcSSFzjCGwBi0OAfW3MO5VBIl2EcamvTJ6K1DsX/ysUxiDEnf1z8ZSeYqmU8zZw0nqzG0Z8Ui90zKswpHJCvHz5RiGK3X8lChFZV62G+u+OphwMFcNWHB/a7Ehs4bbvlD0QS7CBALvGJpR+kdy0DtkcMXFZ1+C
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2026 13:27:25.8732
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: 2d067f9c-bae5-492b-68be-08df342e0a7f
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	BN2PEPF0000A88F.namprd04.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: SJ0PR12MB6941
-X-purgate-ID: tlsNG-16d1c6/1793107674-F7ECC77B-9F538EE7/0/0
-X-purgate-type: clean
-X-purgate-size: 1994
-X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1793107830427
+X-purgate-ID: tlsNG-720697/1793107836-672B12AC-4BCB21E8/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 1734
+X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+LGTM:
+Reviewed-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
 
-
-On 27-Oct-26 04:18, Kuan-Wei Chiu wrote:
-> process_reserved_memory() uses device_tree_for_each_node(), which walks
-> all descendants of /reserved-memory rather than just its direct children.
-> However, a child node such as nvmem-rmem can contain nvmem-layout and
-> cell subnodes whose reg properties specify internal offsets rather than
-> physical memory addresses. Parsing these subnodes records invalid
-> reserved memory regions and fails the overlap check when bitfield cells
-> share the same offset.
+On 10/27/26 2:28 PM, Jan Beulich wrote:
+> The sole two declarations there aren't needed, as the functions aren't
+> reference from outside of mce_amd.c. (This also addresses two Misra rule
+> 8.7 violations, just that we apparently didn't accept that rule for some
+> reason.)
 > 
-> Ignore nodes with depth != 1 in process_reserved_memory_node().
-> 
-> Fixes: d96594eef39a ("xen/arm: keep track of reserved-memory regions")
-> Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
+> Signed-off-by: Jan Beulich <jbeulich@suse.com>
 > ---
->  xen/common/device-tree/bootinfo-fdt.c | 9 +++++++--
->  1 file changed, 7 insertions(+), 2 deletions(-)
+> If it wouldn't result in more churn, I would have been inclined to also
+> drop at least the mc_ prefixes of both functions.
 > 
-> diff --git a/xen/common/device-tree/bootinfo-fdt.c b/xen/common/device-tree/bootinfo-fdt.c
-> index ca64daf4cd..eea35325f7 100644
-> --- a/xen/common/device-tree/bootinfo-fdt.c
-> +++ b/xen/common/device-tree/bootinfo-fdt.c
-> @@ -185,8 +185,13 @@ static int __init process_reserved_memory_node(const void *fdt, int node,
->                                                 u32 size_cells,
->                                                 void *data)
->  {
-> -    int rc = process_memory_node(fdt, node, name, depth, address_cells,
-> -                                 size_cells, data);
-> +    int rc;
-> +
-It would be easier to understand with the comment like:
-/* Only direct children of /reserved-memory describe memory regions */
-
-> +    if ( depth != 1 )
-> +        return 0;
-> +
-> +    rc = process_memory_node(fdt, node, name, depth, address_cells,
-> +                             size_cells, data);
->  
->      if ( rc == -ENOSPC )
->          panic("Max number of supported reserved-memory regions reached.\n");
-
-I will change on commit. Thanks for the submission.
-Reviewed-by: Michal Orzel <michal.orzel@amd.com>
-
-~Michal
+> --- a/xen/arch/x86/cpu/mcheck/mce_amd.c
+> +++ b/xen/arch/x86/cpu/mcheck/mce_amd.c
+> @@ -56,7 +56,6 @@
+>   
+>   #include "mce.h"
+>   #include "x86_mca.h"
+> -#include "mce_amd.h"
+>   #include "mcaction.h"
+>   #include "vmce.h"
+>   
+> @@ -101,7 +100,7 @@ mc_ec2type(uint16_t errorcode)
+>       return 0;
+>   }
+>   
+> -bool cf_check mc_amd_recoverable_scan(uint64_t status)
+> +static bool cf_check mc_amd_recoverable_scan(uint64_t status)
+>   {
+>       bool ret = false;
+>       enum mc_ec_type ectype;
+> @@ -131,7 +130,8 @@ bool cf_check mc_amd_recoverable_scan(ui
+>       return ret;
+>   }
+>   
+> -bool cf_check mc_amd_addrcheck(uint64_t status, uint64_t misc, int addrtype)
+> +static bool cf_check mc_amd_addrcheck(uint64_t status, uint64_t misc,
+> +                                      int addrtype)
+>   {
+>       enum mc_ec_type ectype;
+>       uint16_t errorcode;
+> --- a/xen/arch/x86/cpu/mcheck/mce_amd.h
+> +++ /dev/null
+> @@ -1,7 +0,0 @@
+> -#ifndef _MCHECK_AMD_H
+> -#define _MCHECK_AMD_H
+> -
+> -bool cf_check mc_amd_recoverable_scan(uint64_t status);
+> -bool cf_check mc_amd_addrcheck(uint64_t status, uint64_t misc, int addrtype);
+> -
+> -#endif
 
 
