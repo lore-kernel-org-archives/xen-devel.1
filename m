@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BFCF060A2606
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 23:16:24 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 94CF6606A31A
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 23:54:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=Gt/46kow
-Received: from list by lists.xenproject.org with outflank-mailman.1462759.1673762 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=Qh0YDb3H
+Received: from list by lists.xenproject.org with outflank-mailman.1462771.1673771 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLqOg-0003un-ID; Tue, 27 Oct 2026 23:16:02 +0000
+	id 1xLqzI-00031k-Ao; Tue, 27 Oct 2026 23:53:52 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1462759.1673762; Tue, 27 Oct 2026 23:16:02 +0000
+Received: by outflank-mailman (output) from mailman id 1462771.1673771; Tue, 27 Oct 2026 23:53:52 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLqOg-0003ug-Ez; Tue, 27 Oct 2026 23:16:02 +0000
-Received: by outflank-mailman (input) for mailman id 1462759;
- Tue, 27 Oct 2026 23:16:01 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
+	id 1xLqzI-00031d-7h; Tue, 27 Oct 2026 23:53:52 +0000
+Received: by outflank-mailman (input) for mailman id 1462771;
+ Tue, 27 Oct 2026 23:53:50 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Felix.Kuehling@amd.com>) id 1xLqOe-0003uR-Rr
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 23:16:01 +0000
+ (envelope-from <Mykola_Kvach@epam.com>) id 1xLqzG-00031X-Gz
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 23:53:50 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLqOc-0018HZ-Bg
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 00:15:58 +0100
-Received: from [10.42.69.6] (helo=localhost)
+ id 1xLqzE-009EGn-QQ
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 00:53:48 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Felix.Kuehling@amd.com>)
- id 6ae13089-8faa-0a2a0a5109dd-0a2a45068be8-14
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 00:15:57 +0100
-Received: from [52.101.57.37]
- (helo=BN8PR05CU002.outbound.protection.outlook.com)
- by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Felix.Kuehling@amd.com>)
- id 6ae130ac-195a-0a2a45060019-346539258b33-3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 00:15:57 +0100
-Received: from BN7PPF5F16C5C9C.namprd12.prod.outlook.com
- (2603:10b6:40f:fc02::607) by DM6PR12MB4186.namprd12.prod.outlook.com
- (2603:10b6:5:21b::11) with Microsoft SMTP Server (version=TLS1_2,
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6ae13982-2eae-0a2a0a5409dd-0a2a45038b0c-2
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 00:53:48 +0100
+Received: from [52.101.72.103]
+ (helo=AM0PR02CU008.outbound.protection.outlook.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <Mykola_Kvach@epam.com>)
+ id 6ae1398c-fae8-0a2a45030019-346548678a98-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 00:53:48 +0100
+Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
+ (2603:10a6:10:430::13) by BESPR03MB255357.eurprd03.prod.outlook.com
+ (2603:10a6:b10:12a::14) with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Tue, 27 Oct
- 2026 23:15:52 +0000
-Received: from BN7PPF5F16C5C9C.namprd12.prod.outlook.com
- ([fe80::67a7:9feb:71ef:964a]) by BN7PPF5F16C5C9C.namprd12.prod.outlook.com
- ([fe80::67a7:9feb:71ef:964a%8]) with mapi id 15.21.0546.021; Tue, 27 Oct 2026
- 23:15:52 +0000
+ 2026 23:53:45 +0000
+Received: from DB3PR0302MB9208.eurprd03.prod.outlook.com
+ ([fe80::f257:38e:c0af:df28]) by DB3PR0302MB9208.eurprd03.prod.outlook.com
+ ([fe80::f257:38e:c0af:df28%5]) with mapi id 15.21.0546.021; Tue, 27 Oct 2026
+ 23:53:45 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,216 +52,201 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=SQ0rtxs2yHtePTZKSKD03j2Lp/EMu3QXDUf/w94nK9S+l9CYSX+7Cr9paPIDE4/M19m4Ca8X79C0uz89dK22pQ72n+cDOzmWDU3wG0TK0yKs4K0jp/3oIuLOfP+nbdP0y8i3vmhQd6gwRl02mrcu4ByiN+RZ8GhgbCqALGUlndhuhHv5OsXsAxiLkHufzubfHg7vmeVMkxluO80yGDKOOnS0fKbHULE0sAh1LIqaFZh7Oc+5k5hucReBYuB1hA4t0UzQYIJe2FEpnsVIbRa9NCcLN7pveLT71fbGYNPKuH2nmC/bxE/gcjOhOCp6OTi2iVqnf3pdkgdpQpEn7LUOPQ==
+ b=PKdSEMFnBzO5OoVsZAr7NjGW5OD2qUOpDhtHmLaRFKffETwupQxHCRouuvYHE39Q/aJzRpk3XXjjFhCi6b5pPXTAbXNHoz+GSdWb6InHCyN2FUC368cWwgHZUqJK8mGp4dCM4oKbfOA67nUw/GBXAjHJMQUrYzYPpdMx7Lndu3nAKlT2w/zujy9x2Do4HDSRPKn3L19aot5lX3SHYCrI5UkhM4wj43fEUp6+Tx6haf8ek4HYccbbdQGUvs7sjfG4zqneib11aAAs2ZUQserCLF/NwS9DV6K0fQ36mTlh7BF7vFFWhXoLead5B4g7u9uvedrK40dYqgAE1Ki/sx4gSw==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=7ISyHKlVAcM0/DZJiGCw/9XLIFyiBD/SzVNJUBpkA0g=;
- b=b0JQW2AEqPk0iP8a9Zub+egPaFvQ3Dhf84zHirwe+SMZ7cbPs0/46tOcyBL2VHwrITCNhqMvFDlSoVfjuzHpvUShZ2rRyprTXr+2xJHEoJtCrTCq/qSxBvu1X+whIr0SBZqudOvFV+Hk0pqnT9+l0aBVaqR9sTE4zuLh7oD9DA/M4D0Ueo2m9Y8cv2Gf98xBykKP/uu4UIBVJHmiEFpJmW4xFNhe6B0hlBOktB/K8r+61T/36+0AhC60Iv3KqqvTCz8hoMyjiY36xf8h5RBGR+GrDYg27t4fE/Kc+iK6EFaxySSCcUo3nJ6cU/d5ZkkJsU5IyxzbTYJgerhci1O+lg==
+ bh=byJ9sFmz24t4mtqdkmgsDp+GwT4BJiF9LkfjFfCoY0U=;
+ b=vIZevLxj1kC9OX2a+z+j4mfrdMRDNF0TJsejHBwypw0wlPeYzwGHhMVIMgBvOWhakL1AAZarlqhIP4Xz1tuw8AwJcYwWPFBG6tflsF2iDIYLq9vPqEVMFxagQfaEhxteXFU0XSQjQDIAaFtaESHi85h1S+2qcYYtDD5JSyMBqqtJXMDXvw1+INDt2NYT7SQxhucsS92X6fXG/VO/mKo/qO2Qpadc5G5e+GsDSKhCEys6TUR9/xUqj7QzHEU8h/QJ/4bw0UJEA0guffXAA1VTksddTshOhhc9uHlpEWsfrP+e5h3bs7J26MpSGGZ+qtj/l5G9RkI7BoI5/lpjhpfEig==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
+ dkim=pass header.d=epam.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=7ISyHKlVAcM0/DZJiGCw/9XLIFyiBD/SzVNJUBpkA0g=;
- b=Gt/46kowYNiZfGLkAVE6OaDkSSnYpqckrOor/qJPeSdsHwKMTjjCglaYc28asPRHN0TIJ5YbjWWz+FYDCNfl7LBI4K+P4kmPsVpQwcgoeixgHICmsdDLcX6F6xw3v88rW98z6lgDsR4c0TCgFyOXraesRF/6osIb1OZDO9j2J/Y=
+ bh=byJ9sFmz24t4mtqdkmgsDp+GwT4BJiF9LkfjFfCoY0U=;
+ b=Qh0YDb3HbUjkQndFsA6HcZMbZe4qJJpkSlJGvTQV9J2bdm4tK6K24zZStIABwTtcDQl9gHHqE0IqLic+dQh75qUD6fV5qVXOVIR7jhCeFWRDV3s5k2KJBevFkn/Ie7J1hcFSYh5Uh69WWGoGXv9bXyAl7lc6lF86lDlZlSmzKus3pBKGiCsBxAzEJW6uNyhm62QEfE4epGAwK3mstDJu0X1pRLm3G/cLXw/VHwIOwi0mLgS3DvYMpNt0wKoK/ra6w2QCEKWAALD4Ka0xJZhJhe7fpGjVJSWpO/3pAdtuEu2FzsblawHpgkDkZjmbBFcZqURztf8wNrYLHrFUxsC4Qg==
 Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Message-ID: <34272fe1-e5cb-490e-9053-a2fa72f29a10@amd.com>
-Date: Tue, 27 Oct 2026 19:15:49 -0400
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 8/9] drm/amdkfd: Free queue in procfs_queue_type
- kobject release callback
-To: Ian Rogers <irogers@google.com>, Kees Cook <kees@kernel.org>,
- Greg Kroah-Hartman <gregkh@linuxfoundation.org>,
- Miguel Ojeda <ojeda@kernel.org>, "Rafael J . Wysocki" <rafael@kernel.org>,
- Danilo Krummrich <dakr@kernel.org>
-Cc: Nathan Chancellor <nathan@kernel.org>,
- Nick Desaulniers <ndesaulniers@google.com>,
- Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>,
- =?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>,
- Zhihao Cheng <chengzhihao1@huawei.com>,
- Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>,
- Sumanth Korikkar <sumanthk@linux.ibm.com>, Bill Wendling <morbo@google.com>,
- Justin Stitt <justinstitt@google.com>, driver-core@lists.linux.dev,
- llvm@lists.linux.dev, linux-hardening@vger.kernel.org,
- linux-fsdevel@vger.kernel.org, linux-doc@vger.kernel.org,
- linux-acpi@vger.kernel.org, linux-pm@vger.kernel.org,
- linuxppc-dev@lists.ozlabs.org, linux-sh@vger.kernel.org,
- linux-s390@vger.kernel.org, gfs2@lists.linux.dev,
- xen-devel@lists.xenproject.org, linux-mtd@lists.infradead.org,
- amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org,
- linux-kernel@vger.kernel.org, Alex Deucher <alexander.deucher@amd.com>,
- David Airlie <airlied@gmail.com>, Simona Vetter <simona@ffwll.ch>,
- Amber Lin <Amber.Lin@amd.com>
-References: <20261027223847.652884-1-irogers@google.com>
- <20261027223847.652884-9-irogers@google.com>
-Content-Language: en-US
-From: Felix Kuehling <felix.kuehling@amd.com>
-Organization: AMD Inc.
-In-Reply-To: <20261027223847.652884-9-irogers@google.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 7bit
-X-ClientProxiedBy: YT1PR01CA0099.CANPRD01.PROD.OUTLOOK.COM
- (2603:10b6:b01:2c::8) To BN7PPF5F16C5C9C.namprd12.prod.outlook.com
- (2603:10b6:40f:fc02::607)
+ header.d=none;dmarc=none action=none header.from=epam.com;
+From: Mykola Kvach <mykola_kvach@epam.com>
+To: xen-devel@lists.xenproject.org
+Cc: Bertrand Marquis <bertrand.marquis@arm.com>,
+	Rahul Singh <rahul.singh@arm.com>,
+	Stefano Stabellini <sstabellini@kernel.org>,
+	Julien Grall <julien@xen.org>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
+Subject: [PATCH] arm/smmuv3: clean stream tables for non-coherent hardware
+Date: Wed, 28 Oct 2026 01:53:35 +0200
+Message-ID: <d54203457d68a3c6f8f311035a8e66468bb3a96b.1793138347.git.mykola_kvach@epam.com>
+X-Mailer: git-send-email 2.53.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain
+X-ClientProxiedBy: AM9P250CA0018.EURP250.PROD.OUTLOOK.COM
+ (2603:10a6:20b:21c::23) To DB3PR0302MB9208.eurprd03.prod.outlook.com
+ (2603:10a6:10:430::13)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BN7PPF5F16C5C9C:EE_|DM6PR12MB4186:EE_
-X-MS-Office365-Filtering-Correlation-Id: c4a9363e-e46d-4dba-1360-08df34803e8c
+X-MS-TrafficTypeDiagnostic: DB3PR0302MB9208:EE_|BESPR03MB255357:EE_
+X-MS-Office365-Filtering-Correlation-Id: bce4e7fa-7d9d-4e55-79e1-08df3485898b
 X-MS-Exchange-SenderADCheck: 1
 X-MS-Exchange-AntiSpam-Relay: 0
 X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|23010399003|366016|1800799024|7416014|376014|261009223027099003|261022105027099003|261021121427099003|261021123027099003|10067099003|56012099006|22082099003|18002099003|4143699003|11063799006|261026140227099003;
+	BCL:0;ARA:13230040|376014|366016|23010399003|1800799024|6133799003|18002099003|56012099006|261022075727099003|11063799006|10067099003|261009223027099003|261021123027099003|261021121427099003|261022105027099003|261026140227099003;
 X-Microsoft-Antispam-Message-Info:
-	DSmAC/LXxQNwDa5i5URmYnYa+8b0/OwMVhNeh3ZW0NuqAJafHKuOnQaOV0lIwiLh4xwlaBNevUZsjqmNUxBpst2EwayM/QPsvWOCH0nAQ7Ouwlh2Xxrx5NbkBIBXKIT1DqRqeULra7VgJq+BY7jk8uBLBM6q/X4zWFfSe30Dw2M/22y2CzhhaNFeBZwxvLStpgYWP5LPHl1fSHxHXphIwW6FLRkZPM1oiOpWa5Wj5GAr1qWDL/VJ6Yng12EqO5soAG290Xaytsxguy25IQ9zDRdFrF/+qqV9RT8gSDSTnNOwV7ERKIKIi1G8Z/ivMVfMoFHiCrIRR1Y9VYfRwMRW/wCp68FhBilOa8m3tW1zyUagPjSy31NY1yS9ChLCORD1FtVrn3A0xQ85Nr4kZcDm9WQU9kYFKhzppGECZlJ9g7Mx8fmoN/Yqfclcu37pAXmQFyVLWlMAEXHqFTLhtC7gh35ILFxRPgDh2HcGtsCQYl9Jx4qErnS7ttXoPClfclYDED+WsPGOSE7/5NzeoleF2c47cTgMdb/WC+R/4X/WTPFkvm7W18xysyPN656LB5laecoHSmWC61nJF0Rj9CpKopp67Fn+6SIj542SLGThROjCygcddKDvn4sWrWAafoxmVK8LL3yRIU6av/Rat8GCaOFUQAtOq09LPlAM5nOv2Fk=
+	rX7FS6fctSbEZaOIS5Aw/+oTWcQeHlrd7DYmLF3pj3gqJ9a9E3JMZVZDqGJkIZ0TsIRojP78XmFyfcRNKNR5ucQOAi/Y20q/9WWuUcr51CS5aTzP/D2xP+tluj/CEQAA/mA/dKX0ucglP/Reuw+1PVylwcb2IFHbBXSXWJ56kYt463zgZl48i/cpOvKINGU8J2M7fQIJS9UXY18EWCzs+shDZwg9iKz8ZYbc7EJByOEogojwPSzTjJEewjQ9XXgtNql0ABFoYpDiE+Pjxy4kqCtU6r0XZp61bi9kSpiOPZXQN+cCRB73RrWZ4Crnk2kPNjXx76BSI1Lv67flV1PKS9VxME2IfxeYrWwbEuR07Two17U7B8GxhcepjNIXz3ggYaa1/e/KswdM+j7ycghC0Y7k6pVEsALJ0d/2l6H5hg/DkPufXi2xRw3yVFOKh7kqO0FbmyInhmGTSp2QVAip3yfoBt4fq2UuANpD/9CbjS5pkLgNn8I5HZ0CrfGL6uI09GyByTCGp+P85pBvvdg8fHV7cT9DJOw8GgbLv/MXwme/0G5RraipkKb5oqE5ZJ0PueuUXhueJiI19wBwXmTNHk9Q5VKZTlRXd97QFwotHLwuOeU9iKQYG/pgQ5AxESL4I3fpJW/mtqlRJ5tR1YLBGSqdICuoywff2LgqpqjsVi8=
 X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BN7PPF5F16C5C9C.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(23010399003)(366016)(1800799024)(7416014)(376014)(261009223027099003)(261022105027099003)(261021121427099003)(261021123027099003)(10067099003)(56012099006)(22082099003)(18002099003)(4143699003)(11063799006)(261026140227099003);DIR:OUT;SFP:1101;
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:DB3PR0302MB9208.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(366016)(23010399003)(1800799024)(6133799003)(18002099003)(56012099006)(261022075727099003)(11063799006)(10067099003)(261009223027099003)(261021123027099003)(261021121427099003)(261022105027099003)(261026140227099003);DIR:OUT;SFP:1102;
 X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
 X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?empiQldXdGliaGFsc1JwOFdmQWViK0VFMlV5Vi80MnI1WW9tc1ZiSmNVN0VZ?=
- =?utf-8?B?VVlhOHVzVFliZ0NScEx0OUxNVm13eUppMm9OU25NRGNUcWRrWFYwaVl4dDg2?=
- =?utf-8?B?RUU3S2dPSk1taGxzbU1LV3lRQUhDK0FOcFZrdTBtQ29YeW43cnB2RnQyV0F2?=
- =?utf-8?B?SlVET3F3d0V6aU42S3dwSXIzaGdLOFo2THJwTEx4YXRDVHdWR1pzcjN5TUtF?=
- =?utf-8?B?Y1pEKytxd3QyaUJQQmtkRWVNWG91eFcycWlvKzBldjhGZk82em0xQ09sV0VC?=
- =?utf-8?B?R0VFZW90dUpLeDF4TVI1U2tLN0kycXlpRnplRlR3SzFPRDlqcjdoS3hKbks4?=
- =?utf-8?B?RXBIK1d1cDIrbjJjUWc0RVdKZGltKzdPNFBlVUx5MTRTSmZER2g3NTlLNUFn?=
- =?utf-8?B?WU5DOU84OG82cE8zc2ZBUVJYT3dxQ0JtemUxODk2QXpUb2xESG1RUzdid1B5?=
- =?utf-8?B?ZnZneE03VHk1S1BhRzhtNE1XQmxQOVRPb05IOUhaeUhqblVtVExxR2ovOUdC?=
- =?utf-8?B?NjNIbE91c2JwcXJtYktKN2ZDaDAzeVZ1YkErT2Q2RVJDc3Q4bDc0aHFhZVNX?=
- =?utf-8?B?V1hMUWZKU0t2R01HVEhaTEVKamFqMUZXd1luS2NaM0ozKzV1dldwUDlaMkRk?=
- =?utf-8?B?YTljQlN1SXVJQlM0UjNrSWdieVpMWFdESEI1STNQVHJUK3k5eW1rYWRLbXA0?=
- =?utf-8?B?V0g0bmYwSlBLcksrNUZ5NlJyUGM3bWw3TDlCR2Izc2U5STNpRGxKUEthN2cv?=
- =?utf-8?B?TjhyYStvUDhVTjFIYVNDenJJVHFSZ2JpTmVHK0VEYVZKSlByVC9QS0pFcVJ0?=
- =?utf-8?B?emI2ekJBVFpXNXozYnVLRXdTUURLb2VDeldlOFE3MERLVlZYWnVzSGhkVDlt?=
- =?utf-8?B?YW94OTFabFhWem5pdEhQWlRDMFZNMldkUmJ3dXdjdnE2R0FudUdXZzdLM2lG?=
- =?utf-8?B?Q1JkWXh5NVpGRFFOdGtNS2oxUnZ2M1JwbjBtV0s2Y1BIT1NuZ0JWTCs0Q01J?=
- =?utf-8?B?ZUJINmtIY1ZlRjdUVmNESENuSUNQV25pdTBaaXNHVEs3K1FYSU4xYlcvN09m?=
- =?utf-8?B?SllmR0NqRkxFcUh4ZEJYekJpOGpHdDAxRGFJNUJUQ3RjODQzZUN2aVlVOWNw?=
- =?utf-8?B?TEM0SFZrcE0yR1A0bFNoK1lHK2VOZXE2dENJcXZQanBRckJKUTh5elVKOU9O?=
- =?utf-8?B?RVFmTjhrTkZnTHN0RzFDTEkxR2hMUW9zYTBJNnBTbnRhMWVEUmphanFmT1E4?=
- =?utf-8?B?YVBKeE9FdUNNZEtZUm5lZGp6NGVRUnRudGhSWGROd2E5OEE3blArVVFvTmI5?=
- =?utf-8?B?cHpEZm1TUGpYZVNjSzZFeHBTeGNFYm1FUTIwbmVGazh3NmM3MHZtSkREZjBh?=
- =?utf-8?B?d1pndkJnUEJaR0ZMUUJyb2greDJ3OHJRRE8xTy93SVpuamNaakVtNVhOc0pL?=
- =?utf-8?B?WG5KZDdhcGRzZG9zTCtpOGJqZFY2dmswVjBmMjR6aDYyc2JjK2s3MDJ5M1R0?=
- =?utf-8?B?bHNNSk9mN0FPUjhCcWRKUW5mQnBqUStZU1pobllGSGdUa0h6WjBld203OE8w?=
- =?utf-8?B?TytZc1ZpekF3cTJxakZvQU94dUdLT2hHTVIxKzRaMldRQk9HTTVRcS9hNm45?=
- =?utf-8?B?WDJIK0h4TUJyUVNqSkk1RTJRTGYwY3dvSWdrNW45MnErY3FlS3BFc280SFE0?=
- =?utf-8?B?MXNNM203SnA4VGMzMnMycVpSdjdlWENnSEQ4dlNzSHF1ckV0RzBiZ0xLKzcw?=
- =?utf-8?B?anJZS01PZUpOTVJIa2h3VXFRTzd0YlBySVIwN2NqQ3UyNnM1d09Bc0YrVEVj?=
- =?utf-8?B?VTk2d0ZINllJWWh0bmtXdmw3dlhyTVEyL1B2a2gwSFY1dEM5c3NYWUFLTmp5?=
- =?utf-8?B?cVUvM3ZWRkwxTnQyQ3UyeUUwWS96QVgvamo0c21UVTYzOFlaZWRmVWxQTU92?=
- =?utf-8?B?ZzhEZmtYVkVkTm9ldER3RDMrS3ZqMDBZZEp1Y1ZxVnhDS2lFOTRoR1F3OWVi?=
- =?utf-8?B?NmFocUZqT2pIakJlT2FnY2ZGdFZNL0Q5aDhGOWNxT3dmbk1tOHpxZGk4TzZO?=
- =?utf-8?B?c3pucmhJT2ZqZFpvSDRTN0dqYW5ITzFtQVBBQlhKUi8zcEtsdlJKOUFEd2k3?=
- =?utf-8?B?KzVzS3ZWZ1FDODJnYlQ3YzBGL0ZDaVJNOUJQdGJEVHhCdjZoWGZ5SEs0T1JT?=
- =?utf-8?B?UXJBeWZBVWRpaEJKU2ViQldVbEN3T3pKb1AxdlNTdkZOTGVUU1d0VmdjYWNj?=
- =?utf-8?B?T0Y0a3FYcFRwTzdqLzFhNjRGd0Z0VTZaR0dhaWFBNmhqVDdWd3gvdDFJbGpR?=
- =?utf-8?B?dm0weUVFNDI4VVNXWVZIbVp0L1g4ODlKOWREaE00SjRFSjJ0M0liZz09?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: c4a9363e-e46d-4dba-1360-08df34803e8c
-X-MS-Exchange-CrossTenant-AuthSource: BN7PPF5F16C5C9C.namprd12.prod.outlook.com
+	=?us-ascii?Q?HXy27RQ0VNoF6Vm5thfiXv3J9U8V274oMrgCLHTC+lMhAXY5Xve4VVxYh/w7?=
+ =?us-ascii?Q?go9YbC4Wwh/o/kpd8tc5dy0Z6oS4Uy728hhhgSQQTgXxWjyqt4a/A5JFcRaE?=
+ =?us-ascii?Q?PduSxHfV07ZfM/oqYNpmj0eYNnlp2oVaqM7BaQbTKhJulSpfxUQ1PsKTRPej?=
+ =?us-ascii?Q?7L0N9Xx6D+ZgQlHzfC0a02udvqbMmd1rKT27IicB+RFQ6+hxOjioHoRPXmm7?=
+ =?us-ascii?Q?QgVIjkyEuJN+7aS2SP8rkjpKgVPGK8lbE7efYX2LeSbHTvbj68nKm6j+thS2?=
+ =?us-ascii?Q?68zfrlvpfk1MFDdUvpKBfpW7p1ZV80ynP07fjD7Vds5K7sFzhGGyHkqMuj5j?=
+ =?us-ascii?Q?bRuAiOe4wxviFDX3CAl8Yp3QRZwSwR8DgwzF8vfmrgXf+P7K3beNAMTs29Gx?=
+ =?us-ascii?Q?cmCCLV12i5de4mU36/wBbWRFkw2NpLyLR9eEFCXov+uHIkhVDMto8BtKGf+J?=
+ =?us-ascii?Q?JMc1EkRPIYVxZEnWVo04KDSdAt0aboF+GMs9S1rb+x1wOek5d2DT94YseAsj?=
+ =?us-ascii?Q?o5gzxX5fztqKM//63Htxpl9Qw/8UYuuXqdnubg3YRNCfuEaV0gf1iReAWchw?=
+ =?us-ascii?Q?emNY0faqMePqbilWuRl/fb2F0/zMk8ylMGQQIuHnojV0MaLfRscitmlQ5u1V?=
+ =?us-ascii?Q?4aKZk6XlZxBwZZ47TF+mcLkqFHs9G2WGBEW0Xd7P3vLz/D8opqMPJfr3szt3?=
+ =?us-ascii?Q?h7uC89Nl21TwraGSlA3OLQGo5qwj4XyLe9ecZaNEY8Ju5/4ePKqxDcytPGuT?=
+ =?us-ascii?Q?61YB2ZGd48cCCHucdop88a9CMlA1AX8duzaNvU7GLUC+giQj0qZyAK9+qpZx?=
+ =?us-ascii?Q?wWBBJfyA1B4FgCUFldRFJY+Gdn+kejcUIOt30O8Ht2ivZRLBzhC4lYPs/Brb?=
+ =?us-ascii?Q?gMb2puDmOX0PVvqN7hq5ujv9kg9cEgNtjb49qzM41c7UqJf+FXBZVnyeBhTT?=
+ =?us-ascii?Q?L/O0DY7dKPb0j2hXpJkSbMTDAHQgnVefzGuBuHxCb7BPDa7lSrV5tG3W09nt?=
+ =?us-ascii?Q?PzFE8wQapmTqiQ/qidmLMfRmHZS+HZku7ZKT/UZmg/FFz7Vg3ZkbMlCYKVRV?=
+ =?us-ascii?Q?agiXqif0b/C6MDiBrIfwBZLHsU5FmMyJEs+Zs7hWbR8gDOtJ2sRuO3uk7jil?=
+ =?us-ascii?Q?LG7+997aUiMTkUgY8BOKIQcHckxR+yGrI1Rr97oglaqEwE3hswAxGY9kwnZD?=
+ =?us-ascii?Q?EN5cR+lcebU7F03EXBZ6C8Cxji+z5EUmLXNGaQccnA9rRM8lj38EqwTyYpR2?=
+ =?us-ascii?Q?DR9kRP5jghQR0vu+KDM13vXKY34/eFivv8iH1b7k2kE9Fkurk6VKGkQvzwhX?=
+ =?us-ascii?Q?K8AA6Gwu/4gIcNr8zkQzlVZ5YbcbMmg6Szb0PZELFyiOY3uPhGrIjXD2w0If?=
+ =?us-ascii?Q?Jxxu6zAMcwp4eQc9o/00sVMLhHtSRjgjMZpiu6STz1ba04OQ/WvzWe+ejMY0?=
+ =?us-ascii?Q?Ns1tE1ob56eXQTfxCDWIZaAQ8f2ByPBkNqRQlvee2P2SR35iAhkhcoa+4z7g?=
+ =?us-ascii?Q?6E01Aqmd9N0js36ClXcePxZVbBlyTFQ6273AYQ4SpK+ilHP4H59tDpn4jSC+?=
+ =?us-ascii?Q?GcHAOUTGuH1LmL9Qpw9rFlDceAjkgUCh8D3MQtA0QqWRPlNRFK3zIoDYvhsi?=
+ =?us-ascii?Q?VqJr8EuCeXD4AiAmq/mumKKcgU2DbS1mBOv65kmA/gso4oa0vB4UxrLbbuu7?=
+ =?us-ascii?Q?IxCH7E+HV060AeW98udH1s6gbNNmIksGIy4Jm2ptBB4lDEqRswAvGaUe+oKJ?=
+ =?us-ascii?Q?iJMjqMgNCA=3D=3D?=
+X-OriginatorOrg: epam.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: bce4e7fa-7d9d-4e55-79e1-08df3485898b
+X-MS-Exchange-CrossTenant-AuthSource: DB3PR0302MB9208.eurprd03.prod.outlook.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2026 23:15:52.0995
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2026 23:53:45.3923
  (UTC)
 X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-Id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: Ob+TKLRgRvAPv0Q9NjDGMWPP+1+Q+RZGLPVUAzRJKfxvNbAWmbA/GcQ++WN0aIUSZde9N19st+by1XpDYPKkRg==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM6PR12MB4186
-X-purgate-ID: tlsNG-16d1c6/1793142957-F647377B-426437BA/0/0
+X-MS-Exchange-CrossTenant-UserPrincipalName: MJl75ssYTh04tHa4m1BxbXj1RwfENaB2OoNOeCWmDLHraHFO0tdjC7x9kU42q0LuBi81makFsk5nqXp1Slopog==
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BESPR03MB255357
+X-purgate-ID: tlsNG-33051d/1793145228-75C804E9-BF27B8CF/0/0
 X-purgate-type: clean
-X-purgate-size: 2994
-X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 3445
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=unavailable
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 2026-10-27 18:38, Ian Rogers wrote:
-> struct queue embeds a struct kobject (q->kobj) for procfs entries, but
-> procfs_queue_type had no .release callback and uninit_queue() freed q
-> immediately after kfd_procfs_del_queue() called kobject_put(&q->kobj).
-> With CONFIG_DEBUG_KOBJECT_RELEASE=y, this causes a use-after-free.
->
-> Add kfd_procfs_queue_release() to free struct queue from the kobject
-> release callback, change kfd_procfs_del_queue() to only remove the
-> kobject from sysfs via kobject_del(), and drop the final reference in
-> uninit_queue() via kobject_put(). Check q->kobj.state_in_sysfs before
-> calling kobject_del() in kfd_procfs_del_queue() to avoid warnings if
-> sysfs creation previously failed.
->
-> Fixes: 6d220a7e7971 ("drm/amdkfd: Add queue information to sysfs")
-> Signed-off-by: Ian Rogers <irogers@google.com>
+Xen's dmam_alloc_coherent() returns cacheable memory. A non-coherent
+SMMU cannot see writes that remain in the CPU cache.
 
-Reviewed-by: Felix Kuehling <felix.kuehling@amd.com>
+On Orange Pi 5 (RK3588S), NVMe initialization failed with C_BAD_STREAMID
+for SID 0x4100 while the CPU saw a populated L1 descriptor.
 
+Clean new stream tables before use and updated STEs before the existing
+configuration invalidations. Clean the L2 table before writing its L1
+pointer, then clean the pointer. Skip these cache operations on coherent
+SMMUs.
 
-> ---
->   drivers/gpu/drm/amd/amdkfd/kfd_process.c | 12 +++++++++---
->   drivers/gpu/drm/amd/amdkfd/kfd_queue.c   |  5 ++++-
->   2 files changed, 13 insertions(+), 4 deletions(-)
->
-> diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_process.c b/drivers/gpu/drm/amd/amdkfd/kfd_process.c
-> index 226f52626e84..8e6136d52a50 100644
-> --- a/drivers/gpu/drm/amd/amdkfd/kfd_process.c
-> +++ b/drivers/gpu/drm/amd/amdkfd/kfd_process.c
-> @@ -512,7 +512,15 @@ static const struct sysfs_ops procfs_queue_ops = {
->   	.show = kfd_procfs_queue_show,
->   };
->   
-> +static void kfd_procfs_queue_release(struct kobject *kobj)
-> +{
-> +	struct queue *q = container_of(kobj, struct queue, kobj);
-> +
-> +	kfree(q);
-> +}
-> +
->   static const struct kobj_type procfs_queue_type = {
-> +	.release = kfd_procfs_queue_release,
->   	.sysfs_ops = &procfs_queue_ops,
->   	.default_groups = procfs_queue_groups,
->   };
-> @@ -552,7 +560,6 @@ int kfd_procfs_add_queue(struct queue *q)
->   	if (ret < 0) {
->   		pr_warn("Creating proc/<pid>/queues/%u failed",
->   			q->properties.queue_id);
-> -		kobject_put(&q->kobj);
->   		return ret;
->   	}
->   
-> @@ -697,11 +704,10 @@ static void kfd_procfs_add_sysfs_files(struct kfd_process *p)
->   
->   void kfd_procfs_del_queue(struct queue *q)
->   {
-> -	if (!q || !q->process->kobj)
-> +	if (!q || !q->process || !q->process->kobj || !q->kobj.state_in_sysfs)
->   		return;
->   
->   	kobject_del(&q->kobj);
-> -	kobject_put(&q->kobj);
->   }
->   
->   int kfd_process_create_wq(void)
-> diff --git a/drivers/gpu/drm/amd/amdkfd/kfd_queue.c b/drivers/gpu/drm/amd/amdkfd/kfd_queue.c
-> index ae3e7c54014a..4666110aebe0 100644
-> --- a/drivers/gpu/drm/amd/amdkfd/kfd_queue.c
-> +++ b/drivers/gpu/drm/amd/amdkfd/kfd_queue.c
-> @@ -83,7 +83,10 @@ int init_queue(struct queue **q, const struct queue_properties *properties)
->   
->   void uninit_queue(struct queue *q)
->   {
-> -	kfree(q);
-> +	if (q && q->kobj.state_initialized)
-> +		kobject_put(&q->kobj);
-> +	else
-> +		kfree(q);
->   }
->   
->   #if IS_ENABLED(CONFIG_HSA_AMD_SVM)
+See Arm IHI 0070G.b, sections 3.15 and 3.21.3.1.
+
+Fixes: 452ddbe3592b ("xen/arm: smmuv3: Add support for SMMUv3 driver")
+Assisted-by: Codex:GPT-6.1
+Signed-off-by: Mykola Kvach <mykola_kvach@epam.com>
+---
+ xen/drivers/passthrough/arm/smmu-v3.c | 23 ++++++++++++++++++++++-
+ 1 file changed, 22 insertions(+), 1 deletion(-)
+
+diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthrough/arm/smmu-v3.c
+index bf153227db..a396e2b9e0 100644
+--- a/xen/drivers/passthrough/arm/smmu-v3.c
++++ b/xen/drivers/passthrough/arm/smmu-v3.c
+@@ -637,6 +637,14 @@ static int arm_smmu_cmdq_issue_sync(struct arm_smmu_device *smmu)
+ }
+ 
+ /* Stream table manipulation functions */
++static void arm_smmu_clean_strtab(struct arm_smmu_device *smmu,
++				const void *ptr, size_t size)
++{
++	/* Xen's dmam_alloc_coherent() returns cacheable memory. */
++	if (!(smmu->features & ARM_SMMU_FEAT_COHERENCY))
++		(void)clean_dcache_va_range(ptr, size);
++}
++
+ static void
+ arm_smmu_write_strtab_l1_desc(__le64 *dst, struct arm_smmu_strtab_l1_desc *desc)
+ {
+@@ -735,8 +743,11 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
+ 		 * The SMMU can perform negative caching, so we must sync
+ 		 * the STE regardless of whether the old value was live.
+ 		 */
+-		if (smmu)
++		if (smmu) {
++			arm_smmu_clean_strtab(smmu, dst,
++					      STRTAB_STE_DWORDS * sizeof(*dst));
+ 			arm_smmu_sync_ste_for_sid(smmu, sid);
++		}
+ 		return;
+ 	}
+ 
+@@ -762,8 +773,10 @@ static void arm_smmu_write_strtab_ent(struct arm_smmu_master *master, u32 sid,
+ 		dst[1] |= cpu_to_le64(FIELD_PREP(STRTAB_STE_1_EATS,
+ 						 STRTAB_STE_1_EATS_TRANS));
+ 
++	arm_smmu_clean_strtab(smmu, dst, STRTAB_STE_DWORDS * sizeof(*dst));
+ 	arm_smmu_sync_ste_for_sid(smmu, sid);
+ 	write_atomic(&dst[0], cpu_to_le64(val));
++	arm_smmu_clean_strtab(smmu, dst, sizeof(*dst));
+ 	arm_smmu_sync_ste_for_sid(smmu, sid);
+ 
+ 	/* It's likely that we'll want to use the new STE soon */
+@@ -805,7 +818,11 @@ static int arm_smmu_init_l2_strtab(struct arm_smmu_device *smmu, u32 sid)
+ 	}
+ 
+ 	arm_smmu_init_bypass_stes(desc->l2ptr, 1 << STRTAB_SPLIT);
++	/* Clean the L2 table before writing the L1 pointer. */
++	arm_smmu_clean_strtab(smmu, desc->l2ptr, size);
+ 	arm_smmu_write_strtab_l1_desc(strtab, desc);
++	arm_smmu_clean_strtab(smmu, strtab,
++			      STRTAB_L1_DESC_DWORDS * sizeof(__le64));
+ 	return 0;
+ }
+ 
+@@ -1700,6 +1717,9 @@ static int arm_smmu_init_l1_strtab(struct arm_smmu_device *smmu)
+ 		strtab += STRTAB_L1_DESC_DWORDS << 3;
+ 	}
+ 
++	arm_smmu_clean_strtab(smmu, cfg->strtab,
++		cfg->num_l1_ents * STRTAB_L1_DESC_DWORDS * sizeof(__le64));
++
+ 	return 0;
+ }
+ 
+@@ -1766,6 +1786,7 @@ static int arm_smmu_init_strtab_linear(struct arm_smmu_device *smmu)
+ 	cfg->strtab_base_cfg = reg;
+ 
+ 	arm_smmu_init_bypass_stes(strtab, cfg->num_l1_ents);
++	arm_smmu_clean_strtab(smmu, strtab, size);
+ 	return 0;
+ }
+ 
+-- 
+2.53.0
+
 
