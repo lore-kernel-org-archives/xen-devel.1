@@ -2,45 +2,40 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 332D1606A31A
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 07:16:27 +0000 (UTC)
-Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=BxptJ1uJ
-Received: from list by lists.xenproject.org with outflank-mailman.1461854.1672859 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0541D606A323
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 07:27:32 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1461861.1672868 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLbPm-0008Cv-4H; Tue, 27 Oct 2026 07:16:10 +0000
+	id 1xLbaH-0001aE-11; Tue, 27 Oct 2026 07:27:01 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461854.1672859; Tue, 27 Oct 2026 07:16:10 +0000
+Received: by outflank-mailman (output) from mailman id 1461861.1672868; Tue, 27 Oct 2026 07:27:00 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLbPm-0008Co-1I; Tue, 27 Oct 2026 07:16:10 +0000
-Received: by outflank-mailman (input) for mailman id 1461854;
- Tue, 27 Oct 2026 07:16:08 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xLbPk-0008Ci-Ot
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 07:16:08 +0000
+	id 1xLbaG-0001a7-Ua; Tue, 27 Oct 2026 07:27:00 +0000
+Received: by outflank-mailman (input) for mailman id 1461861;
+ Tue, 27 Oct 2026 07:27:00 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1xLbaG-0001a1-4D
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 07:27:00 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLbPj-009JWF-Tl
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 08:16:07 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xLbaD-005Uww-MX
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 08:26:57 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae04f9a-bab6-0a2a0a5309dd-0a2a4509c80e-34
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 08:16:07 +0100
-Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae04fb1-be1a-0a2a45090019-d1558030d848-3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 08:16:01 +0100
-Received: by mail-wm1-f48.google.com with SMTP id
- 5b1f17b1804b1-4a210470b49so30719305e9.2
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 00:16:01 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a35a2d9280sm243047375e9.13.2026.10.27.00.16.00
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 00:16:00 -0700 (PDT)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6ae05228-e002-0a2a0a5209dd-0a2a45038950-36
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 08:26:57 +0100
+Received: from [162.55.131.47] (helo=support.bugseng.com)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <nicola.vetrini@bugseng.com>)
+ id 6ae05241-fae8-0a2a45030019-a237832feae4-3
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 08:26:57 +0100
+Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
+ (Authenticated sender: nicola)
+ by support.bugseng.com (Postfix) with ESMTPA id 6C1BB4EE022E;
+ Tue, 27 Oct 2026 08:26:56 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,120 +44,199 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793085361; x=1793690161; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Uewbo8Z2JjHZoFIUBtycp8zjmlIrt0H3keDQ45XzbCo=;
-        b=BxptJ1uJH8QFABpkJJeQIXtbMSGTUznXubZp5i1jur8NlhEPoWCc/l/SdYiags8Cjj
-         w1vl/l/lbhlXOfchkVA32xTiNMaOwq3SFAsX19KmuJEQZIhzQLOhVnXom5otbfu4jhh/
-         DG435RL7h9tjPTecvSQalELy18XRgfLIQTRFpG4GM71jFRN3zwef4XwVUVHpvDz9rjya
-         5CLaRDCs+Y/6w6jWFMx0h2NRMHDAexfLRXvfX5V5L3ExrFJ4AOZ12aZT8XUCNULQrIyd
-         2rFH1TJi6di5+aIqH1rBd/gzUKkANHuI6adE08+snr5mb4C+8CHZZ0N841gJSbt/2Fbf
-         f3kA==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793085361; x=1793690161;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Uewbo8Z2JjHZoFIUBtycp8zjmlIrt0H3keDQ45XzbCo=;
-        b=i+CM2FdepYgnRq0Pdpr5NkFxngr1e0FgChiMZ3gfUptScsI6vRmMxglnlrtYGjuGpk
-         9qaVf5oOpZMKpClWZtHYOicyVuzYfR1ssUWs68P55KWn+77fAX3Oi6Dus8GWX+/lbLAs
-         wMEZRD96sGWFXSUlKLyQdggchanmCdOuyTl7rTxNBtDf0ckVCOb5xcAibUg4pIfWAhm7
-         kPHYONkB7+J8vpO6l5caR+90FkyQDLHDnW3w/mv+lngd+zaa5u0AFcWdvrRsC0drD8jO
-         343qSgMzGstjfBp9MJHl1RdVUhaxL5JmXdDkd9mKPCcmeg1C2SHMCVrgV40BErLb7qgj
-         vOeQ==
-X-Forwarded-Encrypted: i=1; AKwUvBxyI+LCR8x6r4MBBvPxqBfMlfQE3/gdbvqsTKYpJsk2CPXeTdkK51+gwCITPsIBp2Ec86+qE9jE5kQ=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIQ70jgH1vsd85DwfJGmtgOHZAVZinye0iI5ft+RCQaGLsulN0X
-	KVH326ulyo9kmzcFbsXAdASZ6WwWIUdFJGNBiQI37wf4m18laarB8vx5Nd/MS/kN1w==
-X-Gm-Gg: AYBFou00HY84u2u180eMozUc/dwNVB7XKwQwmxykaHroSCezQUevD9MV14LecmMtF71
-	6UN+QV2hAv/HY+kEDnX6AUfZx7WRY/YAxBpBSIhf3SiQDwemq2zzUSzClscThgbKw3gIC5CV6W3
-	/nNyQ7TOmHXpiyC580oaJqOfClc4tq2BmmC/sf9Lt19VeCYHkOQrOJ6zTTrhaqgsyLh2l0yzRyj
-	Ep8W+X1WkARw1N+QKKI10HPYYDoGGckVj/e+i7GJvIitI1T9CYQxNaYmUhGQ3tfwpkEmB6YkBGj
-	Zd/hTcKwdm/xv9KOqlDTXddXLyt2F8hcQMvjIrZKXh6k0cH1pCYQWzRqj5OytMBSRwgVtP0qHkO
-	Kj/rWzXOT92MnguS1PP3//ixp5sxv25qEXu/d0S0DZt8u1M/Bz75Mt+N8cUgWlafS9S81KUWAPT
-	bGT3mv59Y8aEkoDe5+z7V/gJQ7fQG9RXRkmiDo0PSGG9RdsoUcD+RftAEZcX9RlzJMgVsg/GJNE
-	tS51jPFcwrsYtooF5bt4wNuw6SJyj6GaWkcx2+kdWdjkUOF/oD7kgDnK02uq/GdRSfnEhzuHl+Z
-	1BwrcpVpMOkB4vpB78GHez4aKbO64RpZCFBcfFIZygk=
-X-Received: by 2002:a05:600c:4f55:b0:4a2:a9:ed5a with SMTP id 5b1f17b1804b1-4a35ac9a6d5mr185685095e9.8.1793085361241;
-        Tue, 27 Oct 2026 00:16:01 -0700 (PDT)
-Message-ID: <9c9bf7aa-1c8b-42ab-85c7-ad87464d3cb4@suse.com>
-Date: Tue, 27 Oct 2026 08:16:00 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; none
+Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1793086017;
+	b=g5f7x+TBNmTgFgY4bdNTIW4kYjto59SPZXdvH9j+ZeWTAym4n1GU2vNmmnwZI4G8uFd+
+	 rSAMAKLslnmk5IY49s4XTKYghOY09c49zD/S4qP+XfiV1WLmxrqa4TDC/Sq10hF49sO9G
+	 MNO6eaKS2TPAworOHwOymUigr7mdxQTy9GhI2wZISOK+3x3XpHlNI7IRRrZaARpWGaJnm
+	 WRqn4pEkknuRzgomFkA8Jmk9iFqYcY63h5SwOCav0T03xHufRU4/U5pXQpCU2jHudyKCc
+	 vvh0RxJwdaxNFEv/x/7zW3BSfvQLZR8Tq33ZW0Ja3gFwMG7mae2zy3PSrir0x+oGGJdt3
+	 wFko8by6N74vvBuEMsTAuoAHTyrTZK8798nCIvtOCdkxS15E9W2LNKLfeJfq0XLZDz0HH
+	 Ux5Mu80WT5Z7l8HO4xcbb8klbmDyXM8tfJpavPtQgVaZFjkfmo59JaYl0eoEBbzchecsi
+	 l//M/afnpCn5A384ZTpWXhDY+Rn1QJVlYrBXWXbKSjFhneTymINx864k0oC1f/8gWSo2f
+	 4CKx0N6DpWhcqPZuQkfL4lQxWeu9YL5mhRemJv7PynZYzGXt66vFMx3hHU0TkA5MOldfs
+	 XJePDQs2fnBekeQR3sYoVY2GtxTlM+X6Tys2/iqKumORrxEI+FbLvgbVwEtfSH8=
+ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
+	c=relaxed/relaxed; t=1793086017;
+	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
+	 Message-ID:X-Sender:Organization:Content-Type:
+	 Content-Transfer-Encoding;
+	bh=nE5ezc6sMX5qgETh/sc+Htd7hJpEx+RLXPTxbs7ktBI=;
+	b=4LjDyEkhSvoZtSyd3E+VKdu5dMPLcXRfEnfUa9re3cnQ2mJcmyMN1vl0xsWkmuyxV625
+	 l36I+FyjsljuKSTYwoq71T6LHsJseH9nrGUB2rpTltAhJceDouuL2rOzCG1NwHq83z1PB
+	 f8hJvR2MHyCjV+wgxbJ2soF7YYpHsF87OHlPWC1mUlQXwEmIViINVZiF0A1KEIXub9y9u
+	 HYdGi9OaMui/njdn7NR87XrFH8wuvPSncZhxHL3eWuDOdUIrKfnNa+lE3gNXW+OqRaBd6
+	 FLP8v2d21juTKky1/swptzqCbthV+zyhtoeOdxVdTDvV3Dah44ZMJC5z9RhmqgEAtg6vJ
+	 5fujOUj2KJsAdjjbvxY7xUY2ekUWgrWcSNsBBFJdmalTpjUUjyaeeKiwLT9nbshUd6PfZ
+	 CZFeaya5y+bYy6xBtDwI7DsD6eCdjuqslYxPL6JsGYdIrMk2IvX9SKdffDpBF+1AYXkcj
+	 u+SXKahxDmNYIodvNEOLb/XkW+J75z6WGOf7HNAcSsU/VU2vxmmrRBTrXKPTtZcoRa+Ay
+	 LozEAq1VAZ1QZt+fy1xxVI22Q6AUwL/Z8vtPQ+ebVtmGJdN7eA7ORdP8AtF0rjM2VVGS3
+	 lZWM9dbJBiU56xJKOv8lZFcEPUtxcG6ytu1WYQ5APZ9pin9Roi7UJ1Ovz32/3oU=
+ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH v2] xen/page_alloc: scrub each page in
- unprepare_staticmem_pages
-To: peter kang <peter.kang@boeing.com>
-Cc: anderson.choi@boeing.com, matthew.l.weber3@boeing.com,
- joshua.c.whitehead@boeing.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <d58a2eb5897a14d7312629b59fdb6b4bd2e48a64.1793074467.git.peter.kang@boeing.com>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <d58a2eb5897a14d7312629b59fdb6b4bd2e48a64.1793074467.git.peter.kang@boeing.com>
-Content-Type: text/plain; charset=UTF-8
+Date: Tue, 27 Oct 2026 08:26:56 +0100
+From: Nicola Vetrini <nicola.vetrini@bugseng.com>
+To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
+Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
+ Stefano Stabellini <sstabellini@kernel.org>, Andrew Cooper
+ <andrew.cooper3@citrix.com>, Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien
+ Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>
+Subject: Re: [PATCH v3] automation/eclair: generalize the noreturn
+ function-pointer deviation
+In-Reply-To: <d0af5523cf21dc3d8da6cf0e765fb34a664f7f1c.1792399445.git.dmytro_prokopchuk1@epam.com>
+References: <d0af5523cf21dc3d8da6cf0e765fb34a664f7f1c.1792399445.git.dmytro_prokopchuk1@epam.com>
+Message-ID: <e23ab1b67b60df32ad262a321da71e93@bugseng.com>
+X-Sender: nicola.vetrini@bugseng.com
+Organization: BUGSENG s.r.l.
+Content-Type: text/plain; charset=US-ASCII;
+ format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1793085361-BDCC7034-421FE9BF/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 901
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-ID: tlsNG-33051d/1793086017-6CEDA4E9-4B343F01/0/0
+X-purgate-type: clean
+X-purgate-size: 5428
+X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 27.10.2026 05:25, peter kang wrote:
-> From: Peter Kang <peter.kang@boeing.com>
+On 2026-10-19 10:51, Dmytro Prokopchuk1 wrote:
+> The R11.1 safe cast only matched void noreturn (*)(void *). Accept a
+> conversion where noreturn is omitted and the signature is otherwise
+> compatible. canonical() covers typeof destinations, and
+> compatible_deep_unqualified keeps the parameter and return types 
+> aligned.
 > 
-> unprepare_staticmem_pages() can unprepare multiple pages in a static
-> memory range. When need_scrub is true, each page must be scrubbed
-> before it is marked static.
+> Discarding noreturn does not change the calling convention. Code after
+> the call is unreachable when every possible callee is noreturn. Leaving
+> that code in place is a tolerated Rule 2.1 violation. The full 
+> rationale
+> is in docs/misra/deviations.rst.
 > 
-> The loop currently passes the base pointer pg to scrub_one_page() on
-> every iteration. For a multi-page range, this repeatedly scrubs page 0
-> and leaves the remaining pages unscrubbed, so a guest can later read
-> stale data from pages 1..nr_mfns-1 of a static or static-shared bank.
-> 
-> Pass &pg[i] to scrub_one_page() so each iteration scrubs the page it
-> is processing. This ensures every page in the range is scrubbed before
-> it is marked static.
-> 
-> Fixes: 4a9e73e6e53e ("xen/arm: static memory initialization")
-> Signed-off-by: Peter Kang <peter.kang@boeing.com>
+> Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
 
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
+Acked-by: Nicola Vetrini <nicola.vetrini@bugseng.com> # 
+automation/eclair_analysis/.*
 
+> ---
+> Changes in v3:
+> - Reworded the deviation text per Jan's review: "noreturn omitted but 
+> an
+>   otherwise compatible signature", "all of the possible callees", and a
+>   tolerated Rule 2.1 violation
+> - rules.rst: use '(void *)' spelling
+> 
+> Changes in v2:
+> - do not claim that discarding noreturn leaves compiler behavior 
+> unchanged
+> - write that code after the call is unreachable, and that Xen's 
+> behavior
+>   is the same (whether the compiler deletes that code or leaves it)
+> ---
+>  automation/eclair_analysis/ECLAIR/deviations.ecl |  9 +++++----
+>  docs/misra/deviations.rst                        | 12 ++++++++----
+>  docs/misra/rules.rst                             |  8 +++++---
+>  3 files changed, 18 insertions(+), 11 deletions(-)
+> 
+> diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl 
+> b/automation/eclair_analysis/ECLAIR/deviations.ecl
+> index 6cdb10a129..c7a800c62f 100644
+> --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
+> +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
+> @@ -394,11 +394,12 @@ constant expressions are required.\""
+>  }
+>  -doc_end
+> 
+> --doc_begin="The conversion from 'void noreturn (*)(void *)' to 'void 
+> (*)(void *)' is safe
+> -because the semantics of the 'noreturn' attribute do not alter the 
+> calling convention or behavior of the resulting code."
+> +-doc_begin="The conversion from a noreturn function pointer to a 
+> function
+> +pointer with noreturn omitted but an otherwise compatible signature 
+> does
+> +not alter the calling convention."
+>  -config=MC3A2.R11.1,casts+={safe,
+> -  
+> "kind(bitcast)&&to(type(pointer(inner(return(builtin(void))&&all_param(1, 
+> pointer(builtin(void)))))))&&from(expr(skip(!syntactic(),
+> -   ref(property(noreturn)))))"}
+> +  
+> "kind(bitcast)&&to(type(canonical(__function_pointer_types)))&&from(expr(skip(!syntactic(),
+> +   ref(property(noreturn)))))&&relation(compatible_deep_unqualified)"}
+>  -doc_end
+> 
+>  -doc_begin="The conversion from a pointer to an incomplete type to 
+> unsigned long does not lose any information, provided that the target 
+> type has enough bits to store it."
+> diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
+> index 6bcc2adf95..76be6b3251 100644
+> --- a/docs/misra/deviations.rst
+> +++ b/docs/misra/deviations.rst
+> @@ -392,10 +392,14 @@ Deviations related to MISRA C:2012 Rules:
+>       - Tagged as `safe` for ECLAIR.
+> 
+>     * - R11.1
+> -     - The conversion from 'void noreturn (*)(...)' to 'void (*)(...)' 
+> is safe
+> -       because the semantics of the 'noreturn' attribute do not alter 
+> the calling
+> -       convention or behavior of the resulting code, parameters 
+> handling remain
+> -       consistent.
+> +     - The conversion from a noreturn function pointer to a function 
+> pointer
+> +       with noreturn omitted but an otherwise compatible signature 
+> does not
+> +       alter the calling convention. The callee does not return, so 
+> code
+> +       following a call through the resulting pointer is unreachable. 
+> The
+> +       compiler may delete that unreachable code when it can see that 
+> all
+> +       of the possible callees are noreturn, or it may leave the code 
+> in
+> +       place. Xen's behavior is the same in either case. Code left in 
+> place
+> +       is a tolerated violation of Rule 2.1.
+>       - Tagged as `safe` for ECLAIR.
+> 
+>     * - R11.2
+> diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
+> index a59cf1782e..5f9fe4c860 100644
+> --- a/docs/misra/rules.rst
+> +++ b/docs/misra/rules.rst
+> @@ -435,9 +435,11 @@ maintainers if you want to suggest a change.
+>         and any other type
+>       - All conversions to integer types are permitted if the 
+> destination
+>         type has enough bits to hold the entire value. Conversions to 
+> bool
+> -       and void* are permitted. Conversions from 'void noreturn 
+> (*)(...)'
+> -       to 'void (*)(...)' are permitted. Conversions from [unsigned] 
+> long
+> -       or '(void *)' to a function pointer are permitted.
+> +       and '(void *)' are permitted. Conversions from a noreturn 
+> function
+> +       pointer to a function pointer with noreturn omitted but an 
+> otherwise
+> +       compatible signature are permitted.
+> +       Conversions from [unsigned] long or '(void *)' to a function 
+> pointer
+> +       are permitted.
+>         Example::
+> 
+>             unsigned long func_addr = (unsigned long)&some_function;
+
+-- 
+Nicola Vetrini, B.Sc.
+Software Engineer
+BUGSENG (https://bugseng.com)
+LinkedIn: https://www.linkedin.com/in/nicola-vetrini-a42471253
 
