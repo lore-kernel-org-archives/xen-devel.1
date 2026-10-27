@@ -2,60 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3481C606A323
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 20:15:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 31F0F606A31A
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 20:18:17 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=a86l1vgB
-Received: from list by lists.xenproject.org with outflank-mailman.1462551.1673511 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=google header.b=TAW9OJWl
+Received: from list by lists.xenproject.org with outflank-mailman.1462558.1673520 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLnZ8-0004z4-1r; Tue, 27 Oct 2026 20:14:38 +0000
+	id 1xLncN-0005f3-F0; Tue, 27 Oct 2026 20:17:59 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1462551.1673511; Tue, 27 Oct 2026 20:14:38 +0000
+Received: by outflank-mailman (output) from mailman id 1462558.1673520; Tue, 27 Oct 2026 20:17:59 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLnZ7-0004yx-VN; Tue, 27 Oct 2026 20:14:37 +0000
-Received: by outflank-mailman (input) for mailman id 1462551;
- Tue, 27 Oct 2026 20:14:37 +0000
-Received: from mx.expurgate.net ([194.145.224.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <stefano.stabellini@amd.com>) id 1xLnZ7-0004yr-1c
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 20:14:37 +0000
+	id 1xLncN-0005ew-CK; Tue, 27 Oct 2026 20:17:59 +0000
+Received: by outflank-mailman (input) for mailman id 1462558;
+ Tue, 27 Oct 2026 20:17:58 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLncL-0005eq-UD
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 20:17:57 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLnZ5-003j01-Ca
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 21:14:35 +0100
-Received: from [10.42.69.4] (helo=localhost)
+ id 1xLncL-007nwe-B7
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 21:17:57 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <stefano.stabellini@amd.com>)
- id 6ae10606-e002-0a2a0a5209dd-0a2a4504deba-34
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 21:14:34 +0100
-Received: from [52.101.46.62]
- (helo=CO1PR03CU002.outbound.protection.outlook.com)
- by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <stefano.stabellini@amd.com>)
- id 6ae10629-b57f-0a2a45040019-34652e3ed0d2-3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 21:14:34 +0100
-Received: from MW4PR04CA0372.namprd04.prod.outlook.com (2603:10b6:303:81::17)
- by LV2PR12MB5846.namprd12.prod.outlook.com (2603:10b6:408:175::6)
- with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Tue, 27 Oct
- 2026 20:14:29 +0000
-Received: from SJ1PEPF00002315.namprd03.prod.outlook.com
- (2603:10b6:303:81:cafe::63) by MW4PR04CA0372.outlook.office365.com
- (2603:10b6:303:81::17) with Microsoft SMTP Server (version=TLS1_3,
- cipher=TLS_AES_256_GCM_SHA384) id 15.21.546.22 via Frontend Transport; Tue,
- 27 Oct 2026 20:14:28 +0000
-Received: from satlexmb07.amd.com (165.204.84.17) by
- SJ1PEPF00002315.mail.protection.outlook.com (10.167.242.169) with Microsoft
- SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
- 15.21.569.4 via Frontend Transport; Tue, 27 Oct 2026 20:14:28 +0000
-Received: from satlexmb08.amd.com (10.181.42.217) by satlexmb07.amd.com
- (10.181.42.216) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 27 Oct
- 2026 15:14:26 -0500
-Received: from amd.com (10.180.168.240) by satlexmb08.amd.com (10.181.42.217)
- with Microsoft SMTP Server id 15.2.2562.53 via Frontend Transport;
- Tue, 27 Oct 2026 15:14:26 -0500
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6ae106d6-2eae-0a2a0a5409dd-0a2a450cb3fe-16
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 21:17:57 +0100
+Received: from [209.85.128.46] (helo=mail-wm1-f46.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <andrew.cooper3@citrix.com>)
+ id 6ae106f5-f479-0a2a450c0019-d155802ee02e-3
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 21:17:57 +0100
+Received: by mail-wm1-f46.google.com with SMTP id
+ 5b1f17b1804b1-4a3517554f7so2253095e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 13:17:57 -0700 (PDT)
+Received: from localhost.localdomain (host-78-146-248-75.as13285.net.
+ [78.146.248.75]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e3ebcb958sm24982630f8f.21.2026.10.27.13.17.55
+ (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+ Tue, 27 Oct 2026 13:17:55 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -64,72 +49,59 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=a8n0aVYRVvPprDEU6pzhAsBtH+MSQMKwl7w9ps9fLm9nCFXKDGnL0VNun9c9nkV0NDY0fzF8C9zf9kwRIffLFWrgC0uExS4LzT0kUrFkbIWs6OLC39m+6w7SUGK2RxORc4lE23NFm7l9HlQjKVpO7bvQgWCY5z4U+t1cZkI241FUnZpwPNZlnMWLi873Y1ugLDXU0BYaKx2bjbj28BrfdUVZ420fF8081OmmJokCWSVLYSjzvVUb+KcsCdU5bBrzXef96bDXzGXNxihO4xTJlYSgRmIDED9mPOLPNCbzBr/0eBk3GD/Jp1NsUg2tZO3R0wedzrjvTRl+/gDUe1oWsg==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=tc0VsvVfm6WuHGRWbAbKWgEuDSYq25/YDozURZfCBg8=;
- b=BdC/fMDnpQuMOUcIqdmn6GdwEMzBAyTszl8sepv4SdnVwHj3JHb+FxgZYJF58OYbhdLlHX1K0CxWoclnpoHyJwjUWFSHgYMM/T31X45IlJ/y6JIBzjlkwKdB4E9xSQ2JlBeFnD8zu6PJ8dWpbTtyrX9qg+FYE2VkMyC+gWCro43qVdrXnlJG//bK2l4PFlYF+QHulV3t2BGcJr/xtzVZqRp3hH7RcmoOVAsci+Gyp1mBgEZNC5nCSlkzRXCe5u+22HbFeq+NnsSpLD2/p/LIUV23Pw3r/fjr7KxHHMP09hq2CnoaYrmjFYTzcHrv2aBcQo6eMupx5fpVNdS1NTB4QQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
- 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
- dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
- header.from=amd.com; dkim=none (message not signed); arc=none (0)
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=tc0VsvVfm6WuHGRWbAbKWgEuDSYq25/YDozURZfCBg8=;
- b=a86l1vgB0VcRMm1FSdkGZ6/17NrdXZBlK0FiMaMHEEaiMtRGoQmVqYJQhXuafAAtpJQZbJJOd9Fl/VD7DeUaTFJ/NEiBExy2+zLuRjuUxnpEGzaY71oRG8N2I7CgtUuJlY49/LhWKhJHITCajEfu/8tbk9T6njec6X/eo3RW94I=
-X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
- is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
- header.d=none;dmarc=pass action=none header.from=amd.com;
-Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
- 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
- client-ip=165.204.84.17; helo=satlexmb07.amd.com; pr=C
-From: Stefano Stabellini <stefano.stabellini@amd.com>
-To: <xen-devel@lists.xenproject.org>
-CC: Stefano Stabellini <stefano.stabellini@amd.com>, <jbeulich@suse.com>,
-	<andrew.cooper3@citrix.com>, <roger@xenproject.org>, <jason.andryuk@amd.com>,
-	<teddy.astie@vates.tech>
-Subject: [PATCH v3] xen/amd/iommu: record the IOMMU and device flags for alias DeviceIDs
-Date: Tue, 27 Oct 2026 13:14:25 -0700
-Message-ID: <20261027201425.2405102-1-stefano.stabellini@amd.com>
-X-Mailer: git-send-email 2.43.0
-In-Reply-To: <20261026235926.2105578-1-stefano.stabellini@amd.com>
-References: <20261026235926.2105578-1-stefano.stabellini@amd.com>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=citrix.com header.i="@citrix.com" header.h="Content-Transfer-Encoding:Content-Type:MIME-Version:Message-Id:Date:Subject:Cc:To:From"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=citrix.com; s=google; t=1793132277; x=1793737077; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=ATh9wI+eZXV8F4DwxJkBeu2dfkL4E8a3k8cFUhbqXxI=;
+        b=TAW9OJWl+YLYK/efPqym3JPt+6EvddtSLre9nvHl626YxbU/pEds3HcFkh1rGtgL0Z
+         dvGZtKuA6MTLELMWzb/8TlAh3v07W7cn/VaH4DmuSu4pNZnrVhGOYEPs9//2HYoPwyLw
+         OT5RzoaVd1OpzaWyrFECrbboTKvQ+pbtWKsVM=
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793132277; x=1793737077;
+        h=content-transfer-encoding:content-type:mime-version:message-id:date
+         :subject:cc:to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject
+         :date:message-id:reply-to:content-type;
+        bh=ATh9wI+eZXV8F4DwxJkBeu2dfkL4E8a3k8cFUhbqXxI=;
+        b=1IiSPWYSF0N4bx0vQn83GcZSpWM2Y8Fo3EPWR7c0ojNOYfhFQ7P2+MTDQn8BAeFYqb
+         VJ1O2kmdbJLiNrgvuKY42c2sRJCFaIgx4aRwl0wBYyucHQ3wr8jvf+WbscA5WeY8q4/O
+         M31HrI9wnnGjcid2R0DEg2z1b1MSD0LNKanQUw+0vGuMeluY018K4Vb2HjEqcw9DvfQA
+         mTJbBMKAapWNQNSsw/TJV9l/1Jbt/Kz8AQgzR2w7ugeaWeHmGb8q6C7Py7fjy9bcXyYT
+         bm/0Jx23mjFLYHGeAYsCrgCdjrfcyPbZDe1r182MLW3RK3y3IZ0Aa7RTvvCWznmbzDaY
+         eZNg==
+X-Gm-Message-State: AFq9FYItmycbxKKwArh8r/pvApQ5k6bwJSjsqC0DTbqDvnNxEk/YIohz
+	OUuoI1Gtyi5oJTiYtkemwbSrEiER2y68g9mkXTPKZA84q9cqluG1LGIFqu6eHKTMRC1iOUf9dFx
+	reMK9
+X-Gm-Gg: AYBFou1tuQe289PoKgFBWxfCeJ6zz5larQux5Ey8auItMIAMibAYMCtJtDXkMVTWV+W
+	0DNyCDlT+uAHU9XskESrZWCqqUUinBdrR6VsKh1f+b8o+R0t/HkTT2d26yyqAFngq6X8gxkhHu6
+	L7imQRY4NkHoFZdhMxfGePhUiNFsRYwZf28F47zXZMkmR7gpTmfDnjClwfOt/BX5er0qxyIPeTp
+	w9gOeNV53X9Q9MKcIyZpBn8Bx/xT2uwMS43z3Hy7FGD6bDahTRlJa2bQIyiemAlNUfK6yaSGWSE
+	BsWoGQoZXy4eMghxoM/XeX4SyNeVYvfT6USZaaK5TLYrDyPGp+k0XADlL/LrNxcarj3+38JlRDH
+	mSl06udS6eqljlJ0Ppn5v30tKondKHSb72BDnOKybTgXMhfLadtfcou2pe7LRXCONY1DxIbF5md
+	5d3982jA64kFh88n2YJpthEPJm6YgaXcwmLjv8eIK7xfYv5fslVhtaGmDiiPrp2wSw0Gcvm4Lu3
+	bNV5Yd8csafKpXzUjKronitqo3z3JPGq6c3Pbac5FzTphWDJZdBiSOkMcZx/FeGkbhiIQ9PcJYE
+	lolMA224r3sXih+gbCtY3NkN0AT2Xg==
+X-Received: by 2002:a05:600c:4705:b0:4a1:7c56:d4e2 with SMTP id 5b1f17b1804b1-4a966587157mr804115e9.16.1793132276137;
+        Tue, 27 Oct 2026 13:17:56 -0700 (PDT)
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+To: Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH] xen/vcpu: Improve code generation for VCPUOP_register_runstate_memory_area
+Date: Tue, 27 Oct 2026 20:17:54 +0000
+Message-Id: <20261027201754.1307173-1-andrew.cooper3@citrix.com>
+X-Mailer: git-send-email 2.39.5
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-Content-Type: text/plain
-X-EOPAttributedMessage: 0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: SJ1PEPF00002315:EE_|LV2PR12MB5846:EE_
-X-MS-Office365-Filtering-Correlation-Id: dfe0eb05-0ec3-4c68-4316-08df3466e759
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|1800799024|36860700016|23010399003|376014|82310400026|261026121527099003|11063799006|5023799004|56012099006|261021121427099003|261022105027099003|261009223027099003|10067099003|22082099003|18002099003|3023799007|261026140227099003;
-X-Microsoft-Antispam-Message-Info:
-	1v/8oGrmocFKO0ZNts583Whtl++0FvQWwzInPZq1xwgOpbfFPVx0rRX6UYhPzlkvZoIRCs6JXbiI2DYRYWYZTgexExhPNSd2W7VMKUJb+RBDQgXp/Dfln7spT4U4OGdjHbIh87uQegg9DlpiWYREIOsdgRooHKzgNmk13rXpXJ4DlsDK89Nmq/216dxt2Lm+qaBILRPSH1919q71m/AQ/aQi4MC9tCiI4trL4ELBfRMGWGyVhLa9VF/OKCnfyVNhm7aHpQJbcEUUUdH/ziiZH87n66EVA7jmjoCRbgHCaDrXW8feCou0kurP6gAlN1FvwxxB/RJDGF/aULdUzUvCsngwLSgSVL5sITsXtDKrcvkNpMUJJRpXy/hBggV+52V+Rkokd3yZi1FiP3Sq7yxccSjWE99F21i9qfe+NavHqm3RAZGR2+Ohq3a2Vo9mZuM7kc0RwMbQNqR8w+sVGoa1y6Vf8JIF61gZfNB4NfcJLDlWprGflJOuNLc8HwYWp3dUlpiJGfKTEyHeEICZsw2zWiuWjbcKDMMw8S2x/cuLcE+V3y2oaAKLYBdSAyTY2MmXoL6sTk3r1Zh2Vu86woWxba3FzPQcMSiu0YpbRZnmsFeFNor5PaBsTI2bdzYQH5OXIOxFgcwcRuW/7ensRV6kJ5zfw2Bh+GjOQsmk6ojly0tj4xmlKx7/DrNKdlx0cInbJMOGUSY/O4XGNBblSihRCQ==
-X-Forefront-Antispam-Report:
-	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb07.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(1800799024)(36860700016)(23010399003)(376014)(82310400026)(261026121527099003)(11063799006)(5023799004)(56012099006)(261021121427099003)(261022105027099003)(261009223027099003)(10067099003)(22082099003)(18002099003)(3023799007)(261026140227099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	ow7mL4yN0uYzW1AO2s1AbXTMLYbmjjRs5F1+8RzTUTCoqZwTp7m5BJCKFxDVfW3GpX4AqDgKl/PTrevPhtiDem5G3K12uWd9T3mjdLBkAQ2qXgLS76Ftf6/mYON3AMTuZU1lLrCrpfBA5Yoks4d0SOCjhy/E2Q5eDAYgPpGkca8+HsyI+lxlA6gt8eXRY0UsIzBABEp/yvM1PFl7/5rqp9FuA+Wiu4Wih2HfZlsQ1spWFZ/6NRSBMSz06IT/MP506dqcT7TWrptYNnScV5mCan5Z7YuK8tdguvG7KeLqUbnjFPLf5OiV9ahCC6VQ3zIhf1Hk+RXIaLivmdAlZ3zOsB678h4V4oBHO1sS9M9tZWak/ZptBBmsW/gtp8gCgKb//xG4YuF+U12Q5ouCAj0YasPDIUDOk6JdTv0ppFEdc/x3rQ+QsHXw5nIp6bPZlJtQ
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2026 20:14:28.1314
- (UTC)
-X-MS-Exchange-CrossTenant-Network-Message-Id: dfe0eb05-0ec3-4c68-4316-08df3466e759
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb07.amd.com]
-X-MS-Exchange-CrossTenant-AuthSource:
-	SJ1PEPF00002315.namprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Anonymous
-X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: LV2PR12MB5846
-X-purgate-ID: tlsNG-ebf023/1793132074-C08D9B50-08C6F774/0/0
-X-purgate-type: clean
-X-purgate-size: 3091
+X-purgate-ID: tlsNG-d25034/1793132277-768DDA5B-9F666EBE/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 3367
 X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -138,78 +110,102 @@ X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-add_ivrs_mapping_entry() marks an alias DeviceID valid and may give it
-an interrupt remapping table, but records the IOMMU and the IVHD device
-flags only for the device using the alias.  If no IVHD entry names the
-alias DeviceID itself, amd_iommu_setup_device_table() passes a NULL
-IOMMU to amd_iommu_set_intremap_table(), which dereferences it at boot,
-and the alias's DTE, the one applying to requests using the alias, is
-set up without the device's pass-through and SysMgt settings.
+Both XLAT_vcpu_runstate_info() and __copy_to_guest() are common paths in their
+respective cases, but the optimiser can't/doesn't merge them.
 
-Give the alias the IOMMU and the device flags too, as was done before
-the interrupt remapping rework, and as Linux does.
+Rearrange the code to do so explicitly.
 
-Fixes: a3713b97e8e1 ("AMD IOMMU: Rework of interrupt remapping")
-Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+No functional change.
+
+Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
 ---
-On v2, Jan asked about:
+CC: Jan Beulich <jbeulich@suse.com>
+CC: Roger Pau Monné <roger@xenproject.org>
+CC: Teddy Astie <teddy.astie@vates.tech>
 
-- amd_iommu_alloc_intremap_table(): not reached for the alias, which
-  already has a table when interrupt remapping is on.  When it's off,
-  amd_iommu_set_intremap_table() doesn't use the IOMMU.
+Bloat-o-meter reports:
 
-- find_iommu_for_device(): before, an unnamed alias crashed at boot
-  with interrupt remapping on.  With it off, a device at the alias
-  failed to be added (-ENODEV), or got function 0's entry copied over
-  the alias's, losing its unity maps.  It now returns the alias's
-  IOMMU, and an IVMD naming the alias is applied instead of ignored.
+  add/remove: 0/0 grow/shrink: 0/2 up/down: 0/-110 (-110)
+  Function                                     old     new   delta
+  common_vcpu_op                              1943    1902     -41
+  compat_vcpu_op                               967     898     -69
 
-- amd_iommu_get_reserved_device_memory(): the alias is no longer
-  skipped.  For XENMEM_RDM_ALL its ranges are reported once under it,
-  not once per device using it.
-
-- Earlier vs later entries: later entries still win, so an alias entry
-  can now override the device flags of an earlier entry for the alias
-  itself.  The alias's IOMMU is asserted to match, as suggested.
-
-- Other fields: device_flags is now set for the alias.  The rest are
-  either the alias's own or already recorded for it; block_ats is
-  never set by alias entries, so using the alias's is OK.
-
-Changes in v3:
-- record the alias's IOMMU unconditionally, asserting that one recorded
-  earlier matches
-- also record the device flags for the alias
-
-Changes in v2:
-- describe the crash precisely, and why nothing relies on the alias
-  entry's IOMMU being NULL
-- add a Fixes tag
+and the size of the stack frame doesn't change at all.
 ---
- xen/drivers/passthrough/amd/iommu_acpi.c | 9 +++++++++
- 1 file changed, 9 insertions(+)
+ xen/arch/x86/x86_64/domain.c | 13 ++++++-------
+ xen/common/domain.c          | 11 +++++------
+ 2 files changed, 11 insertions(+), 13 deletions(-)
 
-diff --git a/xen/drivers/passthrough/amd/iommu_acpi.c b/xen/drivers/passthrough/amd/iommu_acpi.c
-index d118b36d80..e60dd675d7 100644
---- a/xen/drivers/passthrough/amd/iommu_acpi.c
-+++ b/xen/drivers/passthrough/amd/iommu_acpi.c
-@@ -104,6 +104,15 @@ static void __init add_ivrs_mapping_entry(
+diff --git a/xen/arch/x86/x86_64/domain.c b/xen/arch/x86/x86_64/domain.c
+index 533b0b21a00e..1510d593b18c 100644
+--- a/xen/arch/x86/x86_64/domain.c
++++ b/xen/arch/x86/x86_64/domain.c
+@@ -44,6 +44,7 @@ compat_vcpu_op(int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg)
+     {
+         struct compat_vcpu_register_runstate_memory_area area;
+         struct compat_vcpu_runstate_info info;
++        struct vcpu_runstate_info runstate, *rs;
  
-     /* Assign IOMMU hardware. */
-     ivrs_mappings[bdf].iommu = iommu;
+         area.addr.p = 0;
+ 
+@@ -64,16 +65,14 @@ compat_vcpu_op(int cmd, unsigned int vcpuid, XEN_GUEST_HANDLE_PARAM(void) arg)
+ 
+         /* Update the newly-registered runstate area, best-effort. */
+         if ( v == current )
+-        {
+-            XLAT_vcpu_runstate_info(&info, &v->runstate);
+-        }
++            rs = &v->runstate;
+         else
+         {
+-            struct vcpu_runstate_info runstate;
+-
+-            vcpu_runstate_get(v, &runstate);
+-            XLAT_vcpu_runstate_info(&info, &runstate);
++            rs = &runstate;
++            vcpu_runstate_get(v, rs);
+         }
 +
-+    /*
-+     * Requests using the alias go through the same IOMMU, and the alias's
-+     * DTE is the one applying to them.
-+     */
-+    if ( ivrs_mappings[alias_id].iommu )
-+        ASSERT(ivrs_mappings[alias_id].iommu == iommu);
-+    ivrs_mappings[alias_id].iommu = iommu;
-+    ivrs_mappings[alias_id].device_flags = flags;
- }
++        XLAT_vcpu_runstate_info(&info, rs);
+         __copy_to_guest(v->runstate_guest.compat, &info, 1);
  
- static struct amd_iommu * __init find_iommu_from_bdf_cap(
+         break;
+diff --git a/xen/common/domain.c b/xen/common/domain.c
+index b41be89cd0b9..2e6a1f9b98f7 100644
+--- a/xen/common/domain.c
++++ b/xen/common/domain.c
+@@ -2318,7 +2318,7 @@ long common_vcpu_op(int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
+     case VCPUOP_register_runstate_memory_area:
+     {
+         struct vcpu_register_runstate_memory_area area;
+-        struct vcpu_runstate_info runstate;
++        struct vcpu_runstate_info runstate, *rs;
+ 
+         rc = -EFAULT;
+         if ( copy_from_guest(&area, arg, 1) )
+@@ -2340,15 +2340,14 @@ long common_vcpu_op(int cmd, struct vcpu *v, XEN_GUEST_HANDLE_PARAM(void) arg)
+ 
+         /* Update the newly-registered runstate area, best-effort. */
+         if ( v == current )
+-        {
+-            __copy_to_guest(runstate_guest(v), &v->runstate, 1);
+-        }
++            rs = &v->runstate;
+         else
+         {
+-            vcpu_runstate_get(v, &runstate);
+-            __copy_to_guest(runstate_guest(v), &runstate, 1);
++            rs = &runstate;
++            vcpu_runstate_get(v, rs);
+         }
+ 
++        __copy_to_guest(runstate_guest(v), rs, 1);
+         break;
+     }
+ 
+
+base-commit: 8b0a70ddd29dec2f86a49c21e3664a21e281e859
 -- 
-2.47.3
+2.39.5
 
 
