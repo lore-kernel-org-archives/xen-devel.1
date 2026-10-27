@@ -2,48 +2,54 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 61CF5606A31A
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 08:19:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9C00C606A31A
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 08:53:19 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=XuKe75Pq
-Received: from list by lists.xenproject.org with outflank-mailman.1461928.1672939 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=bYvTEXQM;
+	dkim=pass (1024-bit key) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=susede1 header.b=D7sG0OyJ
+Received: from list by lists.xenproject.org with outflank-mailman.1461935.1672948 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLcOP-00058z-Q4; Tue, 27 Oct 2026 08:18:49 +0000
+	id 1xLcvG-0002sJ-9i; Tue, 27 Oct 2026 08:52:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461928.1672939; Tue, 27 Oct 2026 08:18:49 +0000
+Received: by outflank-mailman (output) from mailman id 1461935.1672948; Tue, 27 Oct 2026 08:52:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLcOP-00058s-NH; Tue, 27 Oct 2026 08:18:49 +0000
-Received: by outflank-mailman (input) for mailman id 1461928;
- Tue, 27 Oct 2026 08:18:48 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xLcvG-0002sC-6g; Tue, 27 Oct 2026 08:52:46 +0000
+Received: by outflank-mailman (input) for mailman id 1461935;
+ Tue, 27 Oct 2026 08:52:45 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Shuaidong.Chen@amd.com>) id 1xLcOO-00058m-8G
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 08:18:48 +0000
+ (envelope-from <jgross@suse.com>) id 1xLcvF-0002s6-50
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 08:52:45 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLcON-003Bhv-GT
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 09:18:47 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xLcvD-0071Lk-Mp
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 09:52:43 +0100
+Received: from [10.42.69.3] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <Shuaidong.Chen@amd.com>)
- id 6ae05e5a-e002-0a2a0a5209dd-0a2a4508bf94-40
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 09:18:46 +0100
-Received: from [40.93.195.10]
- (helo=SN4PR2101CU001.outbound.protection.outlook.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <Shuaidong.Chen@amd.com>)
- id 6ae05e64-f659-0a2a45080019-285dc30a2600-3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 09:18:46 +0100
-Received: from BL0PR12MB4754.namprd12.prod.outlook.com (2603:10b6:208:8e::26)
- by DM3PR12MB9351.namprd12.prod.outlook.com (2603:10b6:8:1ac::9) with
- Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Tue, 27 Oct
- 2026 08:18:41 +0000
-Received: from BL0PR12MB4754.namprd12.prod.outlook.com
- ([fe80::ebe5:87e:6d95:580c]) by BL0PR12MB4754.namprd12.prod.outlook.com
- ([fe80::ebe5:87e:6d95:580c%4]) with mapi id 15.21.0546.021; Tue, 27 Oct 2026
- 08:18:41 +0000
+ (envelope-from <jgross@suse.com>)
+ id 6ae06642-e002-0a2a0a5209dd-0a2a450399e4-36
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 09:52:43 +0100
+Received: from [195.135.223.131] (helo=smtp-out2.suse.de)
+ by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jgross@suse.com>)
+ id 6ae0665b-fae8-0a2a45030019-c387df8399b6-3
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 09:52:43 +0100
+Received: from imap1.dmz-prg2.suse.org (unknown [10.150.64.97])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by smtp-out2.suse.de (Postfix) with ESMTPS id 288521F7E6;
+ Tue, 27 Oct 2026 08:52:42 +0000 (UTC)
+Received: from imap1.dmz-prg2.suse.org (localhost [127.0.0.1])
+ (using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
+ key-exchange X25519 server-signature RSA-PSS (4096 bits) server-digest SHA256)
+ (No client certificate requested)
+ by imap1.dmz-prg2.suse.org (Postfix) with ESMTPS id D38AE13319;
+ Tue, 27 Oct 2026 08:52:41 +0000 (UTC)
+Received: from dovecot-director2.suse.de ([2a07:de40:b281:106:10:150:64:167])
+ by imap1.dmz-prg2.suse.org with ESMTPSA id COoeLFlm4GpaKwAAD6G6ig
+ (envelope-from <jgross@suse.com>); Tue, 27 Oct 2026 08:52:41 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -52,218 +58,248 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=emHTi+Iuor0GtPzEY/WCIHjfwaJHPTaW/w18Ad2rGTeovXqLmI4kZ80876kymiOb0RNfQxWHgtLM+gBldziKa9j9GMJBj0mbvWz/uAsl5OJXrwta6puiatuEATrvRJ70xovvi9Xgz3U+3U01UK9hUuLA/hdQ34lMFcIt1eMRXCAc2OqX4c063kpWYnXAmc3NvNhJNjddbXD7TQU9s+9WIUwTuBF2OQfRhQHP+oyZbYydM3j8quZ+TRp89eMnf/DRJ4DpThogNQxGLwLdDerTZdcgrBtNGIgiwrA2KDlGybx8j4mpnV3Rq/tmk1a2ExurMgrVvxRmEtTdJn16UztLpQ==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=Nr1TFgrkX5oNNpNc1S5p8yeuodf6f8dd0a+oIT7WHgs=;
- b=VrkOWjH/zMk8aYNECL8LdjD/Euck6kpDh3uUWmuYTlW1vMbVA/y1ea+Ba5NSBM0FXrGF0OMuL14MAc5qpcdkkMbL+7G28N8QeIyOEv8vh1klJ6bAiHfUOMRrkWiMdo1SQxpeZJifEKKSYfzBPOCalEh0gLOYXg7JpVs/391wycUjqOxlS6+Y2kpgIf1dvklzkaAwH/EcyElWt97lgZlJoIao5iLhIUFp66PS3KceKLLAml62RAUgx/cEtR8LJU2woeZQbYjhO5hc0UElIRmeCbVgDLJG7prU80Www2Yb3sVJl8yEsTAuQ4evtONhfqTpdThMiKmRtdW1yZCVn5VLXw==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amd.com; dmarc=pass action=none header.from=amd.com; dkim=pass
- header.d=amd.com; arc=none
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=Nr1TFgrkX5oNNpNc1S5p8yeuodf6f8dd0a+oIT7WHgs=;
- b=XuKe75Pqf+VMiTBzv1Dx6z3waxmKklzGgOtEq+NlJ2VZNACDr1jrrhaNT5lxbgw1DPRTBZgbSdCwErAJIVzwg5wOMsMdubu/u54rUV0+/CB47YsUS6HdjYg3Yj6HG6lTe4v7GKySfH5SwWJkIrhwy6TwAviy+e5jRnn5evpBrlk=
-Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amd.com;
-Message-ID: <321e7082-5cd2-4a41-9c49-ff091d9ceade@amd.com>
-Date: Tue, 27 Oct 2026 16:18:32 +0800
-User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH] misra: merge the two R14.3 invariant-condition
- deviations
-To: Jan Beulich <jbeulich@suse.com>,
- Stefano Stabellini <sstabellini@kernel.org>
-Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
- Michal Orzel <michal.orzel@amd.com>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Doug Goldstein <cardoe@cardoe.com>,
- Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
- Grygorii Strashko <grygorii_strashko@epam.com>,
- Penny Zheng <penny.zheng@amd.com>, Ray Huang <Ray.Huang@amd.com>,
- xen-devel@lists.xenproject.org
-References: <20261026030309.2507461-1-shuaidong.chen@amd.com>
- <67e298cd-3b84-4476-9dd3-607e505effe6@suse.com>
-Content-Language: en-US
-From: "Chen, Shuaidong" <Shuaidong.Chen@amd.com>
-In-Reply-To: <67e298cd-3b84-4476-9dd3-607e505effe6@suse.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: 8bit
-X-ClientProxiedBy: TP0P295CA0003.TWNP295.PROD.OUTLOOK.COM (2603:1096:910:2::9)
- To BL0PR12MB4754.namprd12.prod.outlook.com (2603:10b6:208:8e::26)
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"; dkim=pass header.s=susede1 header.d=suse.com header.i="@suse.com" header.h="From:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Autocrypt"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1793091163; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=3NxTD9fOBgAuMUX3NOVUDP3OcV9V5L8vJVjDS3OLevI=;
+	b=bYvTEXQMiXO7f8dUvdWJY4ZcU6Cdxw/MEppPWMu7dyfeTP4XGaq1ZHZ5A57zIXArkKb+4a
+	w8vws9pdDRArWwjAxwCIpEX8mxIo8N4cXjc7waIOa5z70NK+T1dFmeJiMZimPFetxKl4f6
+	AGSAGIroKLCFSrABMTrse/cHqbZl7RI=
+Authentication-Results: smtp-out2.suse.de;
+	none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=suse.com; s=susede1;
+	t=1793091162; h=from:from:reply-to:date:date:message-id:message-id:to:to:cc:cc:
+	 mime-version:mime-version:content-type:content-type:
+	 in-reply-to:in-reply-to:references:references:autocrypt:autocrypt;
+	bh=3NxTD9fOBgAuMUX3NOVUDP3OcV9V5L8vJVjDS3OLevI=;
+	b=D7sG0OyJKieQDx3Ey0amykMrjgkaj7gtWblEG5/kD9YPr475dmq2G3/FsVekqu1xUGktSR
+	sfZmBw62yFG4PXD7msaPczJLS2f/eJJLs3RdaK1Xzqdn+q6nw7KJwtgsAwTLX/YMV1rXaz
+	HfSmItjztiYg5pL6G5FYiX0PICHvl6g=
+Message-ID: <d162cea0-e682-4df9-b13a-82ccdd3a2c5b@suse.com>
+Date: Tue, 27 Oct 2026 09:52:41 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-MS-PublicTrafficType: Email
-X-MS-TrafficTypeDiagnostic: BL0PR12MB4754:EE_|DM3PR12MB9351:EE_
-X-MS-Office365-Filtering-Correlation-Id: d59ebb2c-da6d-44fb-5f8d-08df3402e8ed
-X-MS-Exchange-SenderADCheck: 1
-X-MS-Exchange-AntiSpam-Relay: 0
-X-Microsoft-Antispam:
-	BCL:0;ARA:13230040|376014|7416014|1800799024|23010399003|366016|6133799003|18002099003|261026121527099003|22082099003|10067099003|5023799004|56012099006|11063799006|4143699003|261009223027099003|261021121427099003|261022075727099003|261021123027099003|261022105027099003|261021135927099003|261026140227099003;
-X-Microsoft-Antispam-Message-Info:
-	ecsWPfzxvHTVFJ+v+p8TTtBdOiN70iOryVDZ7fhdcW5iQns0HXHfkUWS+9SJf5kSkAMSEPMbLYCxHluDc7ojxaYYRpuuR2Tn6FTZs6bGAJHILcFKMIjeEEB3VpSHaxAE9ESsigGCdnDh6UgI0sLFFWOHXWfcpy6nJIECxs0v+ayjXNjkmDl8hmeV5mQs3Tg2VoFEMxYED+jdg96E/Wg8teFmjloRtYE7EFBx/TC0H3p2EiygkQVx+nfnvMYV4dWw44rQUwu9q5bvsps0HYSrmhOR4orUhWaCMapjYPBzslBotdcqikbNV2HPlRXJaEwhL+PmrvLYrYl0Ka83P3Rnch74Nc3y2KLoKdqZaVEgKmneB7Y1W+a1HJny1yDMh4OQ+yvMcx/O3VPak2u3XmLkwlvyMmHdRaYLXB8a5WTXK+jxt9lWSobY+aqclpWtnptk6Hno59BqPaubSjcZ2nGok3HCBfRJjpx6RJOWu+ggjvUzhPf7Js7g8PH6pgQdrJ+1jDuJj458DUk4s2eirAwEDEaI++F8CFIq4CbPjJ8k0ucab+sJxk40U1dcXVS+JGktckUhmuZsYHehH1e4bLOUEDiIIPDyO4tov6KVNcWt2z4DEaE6ZTuQjygZ5XPaT0c4bbmbio92r1XaNoghOU4Z6NFQKWVfOpISURCwygu+flc=
-X-Forefront-Antispam-Report:
-	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:BL0PR12MB4754.namprd12.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(1800799024)(23010399003)(366016)(6133799003)(18002099003)(261026121527099003)(22082099003)(10067099003)(5023799004)(56012099006)(11063799006)(4143699003)(261009223027099003)(261021121427099003)(261022075727099003)(261021123027099003)(261022105027099003)(261021135927099003)(261026140227099003);DIR:OUT;SFP:1101;
-X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
-X-MS-Exchange-AntiSpam-MessageData-0:
-	=?utf-8?B?b0hVQVpwZHdUb0JGMllsTENvSUF6TGhyQm5TQmhhaW15ZTAxa2pTbWc1cXFL?=
- =?utf-8?B?WkkzY1JubUZrdkpoU1FBaVA0OE9wbG5heTYwUnNvKzBPV1I0YUdlbmNYSUcy?=
- =?utf-8?B?dXlaaXBiMjJvVVdjQmFMR09vZnBVMkgrTkxvLzcxWWs2UGRCK2ZneWIrVkk5?=
- =?utf-8?B?aytUQlBTYU1hRCtWL1FxT3RuMHdpamlEdENQOGpxS1FFK3c2cE5XU0QzVzdB?=
- =?utf-8?B?alRMTWxzS2IyZTJwS1I0UUo4QW9ISVlaeWxWMFpTbXh3a0VidzZSSnpkbndt?=
- =?utf-8?B?Um5QNFMvamJqbjNUL2h6bE1Rekt3dk1aSmJCTlplaTNvbmlINzhJa1JHY2Zt?=
- =?utf-8?B?RUQvUDBiekQwZlp0TDEyanhWRzYwVTZHeStrVXNJZmo5a1YwK3B6a21JT0xZ?=
- =?utf-8?B?cVI5LzcrQ2tLZDhUenREREllSmE3bEFHZDVwQm02ZHlsRmUwZmlkS0xlZ1hO?=
- =?utf-8?B?VUVjRysvaWQvV2Vtdk40dmYwMTRyeU9IdURhcUEyMDE5clQ5VlZwRWo0aWVm?=
- =?utf-8?B?M0tVTkZWanc0cEgwUEp6blErNkp1SlVHdkcyQytVTFdSZk9GeW9oT0RMWmJG?=
- =?utf-8?B?Q0pwV2ZRMlVTOFhhUzRyNGdteGI3akwzRnlKTmRtc1daTnFaWjR0Q0dOVDJa?=
- =?utf-8?B?TVFHUlU5eTBrWDlsL1BtbzFrb1FQM1ptQkF4Q0VJenVaQ29vT01yTUEyQnBC?=
- =?utf-8?B?TVdJQWtJR0RqSjlJQnJ1ekxGd3RHbFhWYmg0Nk84YjlwRE9iOS96ZVFHWXNl?=
- =?utf-8?B?T2xrTm83aWpscjVlNko4RG4yZlJWSCtEeFdBRjJHV3d3OXJ0SVpWOGMrTDVk?=
- =?utf-8?B?S0U2UzcwY2dZSmpiaGZmU2FXRFZNbEFsL1h3V21LT0R1eUxOVG5EaEpqVUhD?=
- =?utf-8?B?eEhTbkVoNjhTUDFROXRQMnBsWGdWL0YzVWFTZm9ycnJNM0plYWd2WXdMbGRs?=
- =?utf-8?B?OFpyS3dSOGJiSmd4cWlkQjVEZ0lhMUxsRG84ZUlDQVhUZE5GVTVaaEUyRTJq?=
- =?utf-8?B?a091NUJUZnpyWUVBaHRiZkRsV2Z4clpnQU9WUVdpVTdsSlRoU1dGZU9BYnJ5?=
- =?utf-8?B?YmEvaVZkNFpyTTdhRDJPUjh0Q3I5M1NiM3JsL2hOYTRtOUJ3UGJ6aEhjUHJk?=
- =?utf-8?B?cGxITEJyRnNEYm1tR01ZSWMrMjhnOFhmL2Q2RzJXajlVT1U1RnJsb2YxRGRR?=
- =?utf-8?B?MWtQY0V4LzBxdkU1R2VBZnExczgraHB0TGZ3YVk4Z3pDazBjOFBmdG1DT2xk?=
- =?utf-8?B?Y1pzeE13YzRLQWN1MWNGVVUyKzBzWXlNdzF5ckszYm9IMkdKZFh3b0VQbUdR?=
- =?utf-8?B?d2szR3pzK3ZSNk5STVIwZ2FnVHZuanJCNnZvQnNlNkxlZG5QMU5BSkpua3Rk?=
- =?utf-8?B?ZHpDTWdwR1dDeU9VS2VUbHg4cmJiQlJscDVUTlFYVFgyQ2ViNWFiakl3UDVV?=
- =?utf-8?B?RW12bDVGNndhQVgvcmhMck1ZSnBQQTl2KytYUm1VTklSQXM1dVhIZVZNUkND?=
- =?utf-8?B?TXFUWk44b3d2ZEl2U2VFU0ltdFhBNDg0NzROZUZZQTdlUm42Q1hhNEV6aVhi?=
- =?utf-8?B?MUJZVk5SdkRoZlEra2d3Vmtkc1h2a0J4aG9TYi9nOHFVanc5OGpVT1BsbmFo?=
- =?utf-8?B?aklueHQ4MWIwN0NKRGhmSjY3bStxNTZKdzFkYjZRT01NZUYzTlgvNTNUZWd4?=
- =?utf-8?B?MnZmTHBCWlk4MGo0bWdWNTBQd0hBNmhMeHZrb3Jyb1VhaUkwV1JJTzFWbzN1?=
- =?utf-8?B?RzN3SzRoajExRzFtOU5QcVM2TW4wZmlML2o5VS9Na091MG1aKzNmSkFaSlRs?=
- =?utf-8?B?blJzUDgxWTV0Szk0WXpVUU5OVnRObEZ3RUNHOVIzcm9hUm8zTDNPNmxmMk9w?=
- =?utf-8?B?a1FZV2hlWTBoTGFpeW55MVVObGJ6RFNjM2RyRHVwbWxsaE5XMnpzWWMvZjRI?=
- =?utf-8?B?bm5Cc2JZZ0FZbTJYQkVZOHlkU3M5MkRoRVFnTG4xL0prSk5KdlRlUlVDdDBP?=
- =?utf-8?B?Zi82bEdNKzFTZG5LMncxTVR0Y25rZmtuU1BGZk5VRFB1ZWNCUDV6aFpqaEdH?=
- =?utf-8?B?dXRtMkhsZVZZT29KNEZMMkQ0bzNBRERzYm9teTdhOXpuTzN1MkJrSkEyTUV1?=
- =?utf-8?B?T2lURWVSdEUxYVZ1Y3A3NGtjMCtOTnI0Vlp6SlRXTGV1ODZzL093ZFpMR3lz?=
- =?utf-8?B?T2NTMXBOTGEyT2F2UHo5Mm0xbURNU0FwWVhjOW9EQU4vbTB2SjZZS29pakU1?=
- =?utf-8?B?aktzc1lXOUc0aEliYVlDSUFCSEhESnB1cTBxTjh0YWhFK2hycEJaWWs3TFpW?=
- =?utf-8?Q?aAM7HvNBDq6xJ0eRyA?=
-X-OriginatorOrg: amd.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: d59ebb2c-da6d-44fb-5f8d-08df3402e8ed
-X-MS-Exchange-CrossTenant-AuthSource: BL0PR12MB4754.namprd12.prod.outlook.com
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2026 08:18:41.5911
- (UTC)
-X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
-X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
-X-MS-Exchange-CrossTenant-MailboxType: HOSTED
-X-MS-Exchange-CrossTenant-UserPrincipalName: kWJf85ThKSSYSCBlq8tbUTK5FJIn9lSgnypMjYbLO0fqbpOWRyQ776ZEWZYUvSEjhhWRuuWD7xL39DfYY7qAog==
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: DM3PR12MB9351
-X-purgate-ID: tlsNG-c1860d/1793089126-CEF5F87B-5C80A99E/0/0
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] xen/sched: Fix the sorted insertion in
+ sched_domain_insert_unit()
+To: Stefano Stabellini <stefano.stabellini@amd.com>,
+ xen-devel@lists.xenproject.org
+Cc: dfaggioli@suse.com, gwd@xenproject.org, jbeulich@suse.com
+References: <20261020223534.3703199-1-stefano.stabellini@amd.com>
+ <20261026233936.1330117-1-stefano.stabellini@amd.com>
+Content-Language: en-US
+From: Juergen Gross <jgross@suse.com>
+Autocrypt: addr=jgross@suse.com; keydata=
+ xsBNBFOMcBYBCACgGjqjoGvbEouQZw/ToiBg9W98AlM2QHV+iNHsEs7kxWhKMjrioyspZKOB
+ ycWxw3ie3j9uvg9EOB3aN4xiTv4qbnGiTr3oJhkB1gsb6ToJQZ8uxGq2kaV2KL9650I1SJve
+ dYm8Of8Zd621lSmoKOwlNClALZNew72NjJLEzTalU1OdT7/i1TXkH09XSSI8mEQ/ouNcMvIJ
+ NwQpd369y9bfIhWUiVXEK7MlRgUG6MvIj6Y3Am/BBLUVbDa4+gmzDC9ezlZkTZG2t14zWPvx
+ XP3FAp2pkW0xqG7/377qptDmrk42GlSKN4z76ELnLxussxc7I2hx18NUcbP8+uty4bMxABEB
+ AAHNH0p1ZXJnZW4gR3Jvc3MgPGpncm9zc0BzdXNlLmNvbT7CwHkEEwECACMFAlOMcK8CGwMH
+ CwkIBwMCAQYVCAIJCgsEFgIDAQIeAQIXgAAKCRCw3p3WKL8TL8eZB/9G0juS/kDY9LhEXseh
+ mE9U+iA1VsLhgDqVbsOtZ/S14LRFHczNd/Lqkn7souCSoyWsBs3/wO+OjPvxf7m+Ef+sMtr0
+ G5lCWEWa9wa0IXx5HRPW/ScL+e4AVUbL7rurYMfwCzco+7TfjhMEOkC+va5gzi1KrErgNRHH
+ kg3PhlnRY0Udyqx++UYkAsN4TQuEhNN32MvN0Np3WlBJOgKcuXpIElmMM5f1BBzJSKBkW0Jc
+ Wy3h2Wy912vHKpPV/Xv7ZwVJ27v7KcuZcErtptDevAljxJtE7aJG6WiBzm+v9EswyWxwMCIO
+ RoVBYuiocc51872tRGywc03xaQydB+9R7BHPzsBNBFOMcBYBCADLMfoA44MwGOB9YT1V4KCy
+ vAfd7E0BTfaAurbG+Olacciz3yd09QOmejFZC6AnoykydyvTFLAWYcSCdISMr88COmmCbJzn
+ sHAogjexXiif6ANUUlHpjxlHCCcELmZUzomNDnEOTxZFeWMTFF9Rf2k2F0Tl4E5kmsNGgtSa
+ aMO0rNZoOEiD/7UfPP3dfh8JCQ1VtUUsQtT1sxos8Eb/HmriJhnaTZ7Hp3jtgTVkV0ybpgFg
+ w6WMaRkrBh17mV0z2ajjmabB7SJxcouSkR0hcpNl4oM74d2/VqoW4BxxxOD1FcNCObCELfIS
+ auZx+XT6s+CE7Qi/c44ibBMR7hyjdzWbABEBAAHCwF8EGAECAAkFAlOMcBYCGwwACgkQsN6d
+ 1ii/Ey9D+Af/WFr3q+bg/8v5tCknCtn92d5lyYTBNt7xgWzDZX8G6/pngzKyWfedArllp0Pn
+ fgIXtMNV+3t8Li1Tg843EXkP7+2+CQ98MB8XvvPLYAfW8nNDV85TyVgWlldNcgdv7nn1Sq8g
+ HwB2BHdIAkYce3hEoDQXt/mKlgEGsLpzJcnLKimtPXQQy9TxUaLBe9PInPd+Ohix0XOlY+Uk
+ QFEx50Ki3rSDl2Zt2tnkNYKUCvTJq7jvOlaPd6d/W0tZqpyy7KVay+K4aMobDsodB3dvEAs6
+ ScCnh03dDAFgIq5nsB11j3KPKdVoPlfucX2c7kGNH+LUMbzqV6beIENfNexkOfxHfw==
+In-Reply-To: <20261026233936.1330117-1-stefano.stabellini@amd.com>
+Content-Type: multipart/signed; micalg=pgp-sha256;
+ protocol="application/pgp-signature";
+ boundary="------------Dc9wEcxUdbZ3pyLSgEnr0b0c"
+X-Spam-Level: 
+X-Spamd-Result: default: False [-9.69 / 50.00];
+	SUSE_INTERNAL_BYPASS(-9.00)[];
+	NEURAL_SPAM_LONG(3.50)[0.999];
+	BAYES_HAM(-3.00)[100.00%];
+	SIGNED_PGP(-2.00)[];
+	MIME_BASE64_TEXT_BOGUS(1.00)[];
+	MIME_GOOD(-0.20)[multipart/signed,multipart/mixed,text/plain];
+	NEURAL_HAM_SHORT(-0.20)[-0.999];
+	MIME_BASE64_TEXT(0.10)[];
+	MIME_UNKNOWN(0.10)[application/pgp-keys];
+	XM_UA_NO_VERSION(0.01)[];
+	TO_DN_SOME(0.00)[];
+	RCVD_VIA_SMTP_AUTH(0.00)[];
+	MIME_TRACE(0.00)[0:+,1:+,2:+,3:+,4:~,5:~];
+	ARC_NA(0.00)[];
+	MID_RHS_MATCH_FROM(0.00)[];
+	RCVD_TLS_ALL(0.00)[];
+	RCPT_COUNT_FIVE(0.00)[5];
+	FROM_EQ_ENVFROM(0.00)[];
+	FROM_HAS_DN(0.00)[];
+	DKIM_SIGNED(0.00)[suse.com:s=susede1];
+	RCVD_COUNT_TWO(0.00)[2];
+	TO_MATCH_ENVRCPT_ALL(0.00)[];
+	DBL_BLOCKED_OPENRESOLVER(0.00)[imap1.dmz-prg2.suse.org:helo,suse.com:email,amd.com:email];
+	HAS_ATTACHMENT(0.00)[]
+X-Spam-Score: -9.69
+X-purgate-ID: tlsNG-33051d/1793091163-770F64E9-E8517DA5/35/110847
 X-purgate-type: clean
-X-purgate-size: 4215
-X-Spam-Status: No, score=-17.6 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,
-	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1
-	autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-size: 8518
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
+This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
+--------------Dc9wEcxUdbZ3pyLSgEnr0b0c
+Content-Type: multipart/mixed; boundary="------------RlbGuVpJ031jMbXc7NDv2vJB";
+ protected-headers="v1"
+From: Juergen Gross <jgross@suse.com>
+To: Stefano Stabellini <stefano.stabellini@amd.com>,
+ xen-devel@lists.xenproject.org
+Cc: dfaggioli@suse.com, gwd@xenproject.org, jbeulich@suse.com
+Message-ID: <d162cea0-e682-4df9-b13a-82ccdd3a2c5b@suse.com>
+Subject: Re: [PATCH v2] xen/sched: Fix the sorted insertion in
+ sched_domain_insert_unit()
+References: <20261020223534.3703199-1-stefano.stabellini@amd.com>
+ <20261026233936.1330117-1-stefano.stabellini@amd.com>
+In-Reply-To: <20261026233936.1330117-1-stefano.stabellini@amd.com>
+Autocrypt-Gossip: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJ3BBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AAIQkQoDSui/t3IH4WIQQ+pJkfkcoLMCa4X6CgNK6L+3cgfgn7AJ9DmMd0SMJE
+ ePbc7/m22D2v04iu7ACffXTdZQhNl557tJuDXZSBxDmW/tLOwU0EWTecRBAIAIK5OMKMU5R2
+ Lk2bbjgX7vyQuCFFyKf9rC/4itNwhYWFSlKzVj3WJBDsoi2KvPm7AI+XB6NIkNAkshL5C0kd
+ pcNd5Xo0jRR5/WE/bT7LyrJ0OJWS/qUit5eNNvsO+SxGAk28KRa1ieVLeZi9D03NL0+HIAtZ
+ tecfqwgl3Y72UpLUyt+r7LQhcI/XR5IUUaD4C/chB4Vq2QkDKO7Q8+2HJOrFIjiVli4lU+Sf
+ OBp64m//Y1xys++Z4ODoKh7tkh5DxiO3QBHG7bHK0CSQsJ6XUvPVYubAuy1XfSDzSeSBl//C
+ v78Fclb+gi9GWidSTG/4hsEzd1fY5XwCZG/XJJY9M/sAAwUH/09Ar9W2U1Qm+DwZeP2ii3Ou
+ 14Z9VlVVPhcEmR/AFykL9dw/OV2O/7cdi52+l00reUu6Nd4Dl8s4f5n8b1YFzmkVVIyhwjvU
+ jxtPyUgDOt6DRa+RaDlXZZmxQyWcMv2anAgYWGVszeB8Myzsw8y7xhBEVV1S+1KloCzw4V8Z
+ DSJrcsZlyMDoiTb7FyqxwQnM0f6qHxWbmOOnbzJmBqpNpFuDcz/4xNsymJylm6oXiucHQBAP
+ Xb/cE1YNHpuaH4SRhIxwQilCYEznWowQphNAbJtEKOmcocY7EbSt8VjXTzmYENkIfkrHRyXQ
+ dUm5AoL51XZljkCqNwrADGkTvkwsWSvCSQQYEQIACQUCWTecRAIbDAAKCRCgNK6L+3cgfuef
+ AJ9wlZQNQUp0KwEf8Tl37RmcxCL4bQCcC5alCSMzUBJ5DBIcR4BY+CyQFAs=
 
-On 10/26/2026 9:14 PM, Jan Beulich wrote:
-> On 26.10.2026 04:03, Shuaidong Chen wrote:
->> MC3A2.R14.3 ("Controlling expressions shall not be invariant") is
->> deviated by two separate entries.  One covers 'if' statements and
->> conditional operators and places no restriction on where the invariant
->> condition comes from.  The other covers 'switch' statements, but only
->> when the controlling expression is a 'sizeof' operator.
->>
->> The rationale recorded for the two is the same: the condition is
->> deliberate.  Nothing about a 'switch' makes an invariant condition less
->> deliberate than the same condition in an 'if', so the 'sizeof'
->> restriction reads as an artefact of that entry having been added for
->> read_atomic() and friends in arch/x86/include/asm/atomic.h rather than
->> as a considered limit.
-> Well,
->
->      if ( 1 )
->
-> can make sense, especially when 1 is the expansion of e.g. IS_ENABLED().
-> Otoh
->
->      switch ( 1 )
->
-> doesn't make a lot of sense, even when it's as a result of the expanding
-> IS_ENABLED(). I agree that limiting to just sizeof() is unnecessarily
-> strict; alignof(), for example, should about always be usable where
-> sizeof() is. Yet making if() and switch() equal is imo going too far. I
-> realize though that it may be difficult to find a suitable boundary.
-> Stefano - do you possibly still have notes from the discussions long ago?
->
->> Fold switch_stmt into the general entry and drop the 'sizeof'-restricted
->> one, which the general predicate now subsumes.  Invariant 'switch'
->> conditions that are not a 'sizeof' become deliberate as a result; that
->> is the intent.
->>
->> Signed-off-by: Shuaidong Chen <shuaidong.chen@amd.com>
-> What you don't say at all: Does this help with any remaining violations?
->
-> Jan
-Yes, and let me give the full context, since the motivation comes from
-downstream safety work rather than from the upstream analysis.
+--------------RlbGuVpJ031jMbXc7NDv2vJB
+Content-Type: multipart/mixed; boundary="------------u4xyw1YSnap0ZaX3W6h2Ob1f"
 
-On safety branch one of the techniques we rely on there is to pin build-time
-configuration to compile-time constants, so that the code which the
-intended configuration can never reach is removed by the compiler
-rather than merely left untested.  That matters for us in two ways:
-code eliminated at compile time does not enter the coverage
-denominator, and - more importantly - it is not in the binary at all,
-so it does not have to be carried through the whole qualification
-chain.
+--------------u4xyw1YSnap0ZaX3W6h2Ob1f
+Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Transfer-Encoding: base64
 
-Two examples:
+T24gMjcuMTAuMjYgMDA6MzksIFN0ZWZhbm8gU3RhYmVsbGluaSB3cm90ZToNCj4gVGhlIGxv
+b3AgbGlua3MgdGhlIG5ldyB1bml0IGluIGZyb250IG9mIHRoZSB1bml0IHdob3NlIHN1Y2Nl
+c3NvciBoYXMgYQ0KPiBoaWdoZXIgdW5pdF9pZCwgcmF0aGVyIHRoYW4gYWZ0ZXIgaXQ6IGlu
+c2VydGluZyAxIGludG8gezAsIDJ9IGdpdmVzDQo+IHsxLCAwLCAyfS4gU3RvcCBhdCB0aGUg
+Zmlyc3QgdW5pdCB3aXRoIGEgaGlnaGVyIHVuaXRfaWQgaW5zdGVhZC4NCj4gDQo+IFRoaXMg
+Z29lcyB1bm5vdGljZWQgYXMgbG9uZyBhcyB1bml0cyBhcmUgaW5zZXJ0ZWQgaW4gdW5pdF9p
+ZCBvcmRlciwgYXMNCj4gZ3Vlc3QgdkNQVXMgdHlwaWNhbGx5IGFyZS4NCj4gDQo+IEFsc28g
+cmVuYW1lIHByZXZfdW5pdCB0byBuZXh0X3VuaXQ6IHRoZSBuZXcgdW5pdCBpcyBsaW5rZWQg
+aW4gZnJvbnQgb2YNCj4gKm5leHRfdW5pdCwgbm90IGFmdGVyIGl0Lg0KPiANCj4gRml4ZXM6
+IDE0MWRiN2ZkNGQyZCAoInhlbi9zY2hlZDogYnVpbGQgYSBsaW5rZWQgbGlzdCBvZiBzdHJ1
+Y3Qgc2NoZWRfdW5pdCIpDQo+IFNpZ25lZC1vZmYtYnk6IFN0ZWZhbm8gU3RhYmVsbGluaSA8
+c3RlZmFuby5zdGFiZWxsaW5pQGFtZC5jb20+DQoNClJldmlld2VkLWJ5OiBKdWVyZ2VuIEdy
+b3NzIDxqZ3Jvc3NAc3VzZS5jb20+DQoNCg0KSnVlcmdlbg0K
+--------------u4xyw1YSnap0ZaX3W6h2Ob1f
+Content-Type: application/pgp-keys; name="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Disposition: attachment; filename="OpenPGP_0xB0DE9DD628BF132F.asc"
+Content-Description: OpenPGP public key
+Content-Transfer-Encoding: quoted-printable
 
-https://gitlab.com/amd-xen-safety/xen/-/commit/160dac43f554733a68d83c38cc1d0e73b3b7bff0
-https://gitlab.com/amd-xen-safety/xen/-/commit/e0eccfa7184b7acee23916cd5cb2a3b5afa101f2
+-----BEGIN PGP PUBLIC KEY BLOCK-----
 
-A side effect of this is that some of those constants end up as the
-controlling expression of an switch statement, which then
-trips R14.3.
+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
+kt+z4drzFUyEjLM1vVvIMjkUoJs=3D
+=3DeeAB
+-----END PGP PUBLIC KEY BLOCK-----
 
- > Otoh switch ( 1 ) doesn't make a lot of sense
+--------------u4xyw1YSnap0ZaX3W6h2Ob1f--
 
-Agreed in the abstract, and I would push back on anyone writing that
-by hand.  But that is not what happens here.  The sources still read
+--------------RlbGuVpJ031jMbXc7NDv2vJB--
 
-   switch ( gt->gt_version )
-   switch ( opt_bootscrub )
+--------------Dc9wEcxUdbZ3pyLSgEnr0b0c
+Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
+Content-Description: OpenPGP digital signature
+Content-Disposition: attachment; filename="OpenPGP_signature.asc"
 
-exactly as upstream wrote them, against what upstream intends as a
-runtime-variable value.  The constant only appears after a build
-configuration specialises that value.  So the construct is not a
-pointless switch on a literal; it is ordinary upstream code that a
-particular configuration has made invariant - which is precisely the
-situation the existing 'deliberate' deviation for if statements and
+-----BEGIN PGP SIGNATURE-----
 
-conditional operators already covers.
+wsB5BAABCAAjFiEEhRJncuj2BJSl0Jf3sN6d1ii/Ey8FAmrgZlkFAwAAAAAACgkQsN6d1ii/Ey83
+9Qf/VmGyvkR7a2lImubpWGHWEI6vAemdcSllT8VosCrkGvGM7FMYhTlpzToMcQYJSFGQBpHyQKF4
+C/TuXbWMGBICohWngCme2tdkNTJu776An3m45R4jr49JZmgTo/ie/4ZBFnXi+qChpMh36JvWNbSg
+fwknlgpcTvGzoFV8dKiV8j6e6oc2kDbHNgi90E4Rfw7v5qWSgj6Pbty/+FL/PidlhU5Jphkubp8y
+Usnesv+H8oQtLHpWqsKLhSqdAKC3bNK1MF+3SXc0fjmqHp5+D5AmWNSCBmG/aFCBoY93YK1Qu2oo
+d5vwEwwmxn1Q5pwcIWV9TJLs4PMpPtT5tAM+sV1a9Q==
+=ykd/
+-----END PGP SIGNATURE-----
 
-Of course the other alternative: rewrite those switches as
-if/else chains, which the existing deviation would already cover it, and 
-the violations gone. Technically that works.
-
-The reason I would rather not is that it is churn in common code for no 
-functional
-reason, carried indefinitely as a delta against upstream, and it makes
-every subsequent rebase of the safety branch more expensive.
-
-Having seen that a deviation for switch already exists - restricted to
-sizeof - extending it to switch in general seemed the smaller and more
-honest change: it states that an invariant switch condition is
-deliberate, just as the project already states for if and for the
-conditional operators.
-
--Shuaidong
-
+--------------Dc9wEcxUdbZ3pyLSgEnr0b0c--
 
