@@ -2,56 +2,64 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EA9BE606A31A
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 18:26:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 85E2F606A31A
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 19:20:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=qualcomm.com header.i=@qualcomm.com header.a=rsa-sha256 header.s=qcppdkim1 header.b=mhWx35R6;
-	dkim=pass (2048-bit key, unprotected) header.d=oss.qualcomm.com header.i=@oss.qualcomm.com header.a=rsa-sha256 header.s=google header.b=HzQKgl7I
-Received: from list by lists.xenproject.org with outflank-mailman.1462451.1673468 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=amd.com header.i=@amd.com header.a=rsa-sha256 header.s=selector1 header.b=A2+hv2fw
+Received: from list by lists.xenproject.org with outflank-mailman.1462525.1673492 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLlsb-0000Iw-PW; Tue, 27 Oct 2026 18:26:37 +0000
+	id 1xLmi0-0003Y0-Td; Tue, 27 Oct 2026 19:19:44 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1462451.1673468; Tue, 27 Oct 2026 18:26:37 +0000
+Received: by outflank-mailman (output) from mailman id 1462525.1673492; Tue, 27 Oct 2026 19:19:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLlsb-0000Ip-Ma; Tue, 27 Oct 2026 18:26:37 +0000
-Received: by outflank-mailman (input) for mailman id 1462451;
- Tue, 27 Oct 2026 18:26:36 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
+	id 1xLmi0-0003Xt-Qv; Tue, 27 Oct 2026 19:19:44 +0000
+Received: by outflank-mailman (input) for mailman id 1462525;
+ Tue, 27 Oct 2026 19:19:43 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <philmd@oss.qualcomm.com>) id 1xLlsa-0000Hl-BL
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 18:26:36 +0000
+ (envelope-from <stefano.stabellini@amd.com>) id 1xLmhz-0003Xn-3D
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 19:19:43 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLlsZ-0057Jy-O7
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 19:26:35 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xLmhy-00A8cT-GL
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 20:19:42 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <philmd@oss.qualcomm.com>)
- id 6ae0eccc-2eae-0a2a0a5409dd-0a2a4503cfc4-8
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 19:26:35 +0100
-Received: from [205.220.180.131] (helo=mx0b-0031df01.pphosted.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <philmd@oss.qualcomm.com>)
- id 6ae0ecda-fae8-0a2a45030019-cddcb4834744-3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 19:26:35 +0100
-Received: from pps.filterd (m0279868.ppops.net [127.0.0.1])
- by mx0a-0031df01.pphosted.com (8.18.1.11/8.18.1.11) with ESMTP id
- 69RIHRZx2639301
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 18:26:34 GMT
-Received: from mail-qk1-f200.google.com (mail-qk1-f200.google.com
- [209.85.222.200])
- by mx0a-0031df01.pphosted.com (PPS) with ESMTPS id 4hjqf5tt5t-1
- (version=TLSv1.3 cipher=TLS_AES_128_GCM_SHA256 bits=128 verify=NOT)
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 18:26:33 +0000 (GMT)
-Received: by mail-qk1-f200.google.com with SMTP id
- af79cd13be357-93f322ef7d3so17564685a.0
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 11:26:33 -0700 (PDT)
-Received: from [192.168.69.229] (82-67-153-177.subs.proxad.net.
- [82.67.153.177]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a94e6b8656sm23975e9.10.2026.10.27.11.26.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 11:26:31 -0700 (PDT)
+ (envelope-from <stefano.stabellini@amd.com>)
+ id 6ae0f924-2eae-0a2a0a5409dd-0a2a4506811a-38
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 20:19:41 +0100
+Received: from [40.107.201.34]
+ (helo=CH4PR04CU002.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <stefano.stabellini@amd.com>)
+ id 6ae0f94c-195a-0a2a45060019-286bc922ea2c-4
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 20:19:41 +0100
+Received: from CH5PR04CA0012.namprd04.prod.outlook.com (2603:10b6:610:1f4::28)
+ by IA1PR12MB8312.namprd12.prod.outlook.com (2603:10b6:208:3fc::16)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Tue, 27 Oct
+ 2026 19:19:32 +0000
+Received: from LV8PEPF0000005F.namprd02.prod.outlook.com
+ (2603:10b6:610:1f4:cafe::6d) by CH5PR04CA0012.outlook.office365.com
+ (2603:10b6:610:1f4::28) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.546.22 via Frontend Transport; Tue,
+ 27 Oct 2026 19:19:31 +0000
+Received: from satlexmb08.amd.com (165.204.84.17) by
+ LV8PEPF0000005F.mail.protection.outlook.com (10.167.245.137) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.569.4 via Frontend Transport; Tue, 27 Oct 2026 19:19:31 +0000
+Received: from satlexmb10.amd.com (10.181.42.219) by satlexmb08.amd.com
+ (10.181.42.217) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 27 Oct
+ 2026 14:19:31 -0500
+Received: from satlexmb07.amd.com (10.181.42.216) by satlexmb10.amd.com
+ (10.181.42.219) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.2.2562.53; Tue, 27 Oct
+ 2026 14:19:31 -0500
+Received: from amd.com (10.180.168.240) by satlexmb07.amd.com (10.181.42.216)
+ with Microsoft SMTP Server id 15.2.2562.53 via Frontend Transport;
+ Tue, 27 Oct 2026 14:19:30 -0500
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -60,149 +68,118 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=qcppdkim1 header.d=qualcomm.com header.i="@qualcomm.com" header.h="Cc:Content-Transfer-Encoding:Content-Type:Date:From:In-Reply-To:Message-ID:MIME-Version:References:Subject:To"; dkim=pass header.s=google header.d=oss.qualcomm.com header.i="@oss.qualcomm.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:From:References:Cc:To:Content-Language:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=qualcomm.com; h=
-	cc:content-transfer-encoding:content-type:date:from:in-reply-to
-	:message-id:mime-version:references:subject:to; s=qcppdkim1; bh=
-	5gtNOSL9DkqGrvLv5HiCmciZ411PQzVsYtj0F/yuWWM=; b=mhWx35R6EzRfQjVN
-	1xH7p7SD7YTepkSQKvJRjnJdAwgY3XESWxBjR4e7n6msb3JPozQgoQDg0IxUxvi9
-	hh1y0NovGCLazoZMOvJYn2VAHMfRpp6z5/xUwqSWFKtr/SwyQiyWAJkZ36GJbrcZ
-	tjsFwvJyI61eqNejUo0z1ji7yPaKzlLipLt9pj3r4nEbWVn/Fzz09FJXK9JSFAbZ
-	ZzwCiBOs6tcDrhMUPVudgOC8nrmUw8KJgoNXP6ql2E1i1/5zSNRRCklwLpyCRxdA
-	XYxo2Z62g5QP2nNWOWLa+A6cCrxb3JWGzPLY6TIq1iZnyMlyQiHezOf0cPJEU92M
-	nJptmg==
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=oss.qualcomm.com; s=google; t=1793125593; x=1793730393; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=5gtNOSL9DkqGrvLv5HiCmciZ411PQzVsYtj0F/yuWWM=;
-        b=HzQKgl7IL0bLB1kNurWRrKRG6ENY4OZxmGOWOaC6GTaU3LGh8oUi4ME3ypKsZIkTOQ
-         2UtJv83rAd5V1dPzxtYsiVLREJCW3NzkrNhabsMo7NFlpuQLOpTyuuHetiBBBKlkMAVU
-         ddF53yOIQD3+Ou6FDh3yl7oZe3JuW6rcuexbiDbONDfFxNDXaWe1WJ7wXNH4xIsSHuQL
-         4MEqek8j8U3FdK+NR/cYRFhu5RaBq36x2dRyT/PhJ/ra1NJL9norsJvOz1CFK5LGqFWT
-         kWPP6ZBc03Qife4ojO0YQJ9I4NfQwvBT9pbHNIHf/gejPQfrdzXsC4tkc1eNVuLPF618
-         Md6A==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793125593; x=1793730393;
-        h=content-transfer-encoding:content-type:in-reply-to:from:references
-         :cc:to:content-language:subject:user-agent:mime-version:date
-         :message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=5gtNOSL9DkqGrvLv5HiCmciZ411PQzVsYtj0F/yuWWM=;
-        b=OaK4j3mgGiURMbgihFfhiiPDbXDCcq/ne6B926pI+7NmNhyfLAo0FBg7GA+bcJMrPk
-         KIPjG3F9HnKO5MenGPZj+QPdZ6DA1DH4oSK39H5ZgjVJtKrGk8K6uNRecKJM0M62BEa8
-         5sHajERTFStBz1cpaSr5yhTbYIjjMEVSMB2ZXxvf4bbnxH+37Mi2zx2+0YX6a8Lotose
-         BQhEpj99uJMJXxZniGicfHyabW4z9pZE2pcrWTccnfBVPGw+dzGJN/whiYM59ukmm+vt
-         6ObD1mvI/dtL4lWYrD0Il8Reh1yH2kfqlJlWGs3qUxN37I0xFbwLaSLpoMCM9B54R61v
-         mPfA==
-X-Forwarded-Encrypted: i=1; AKwUvBwNBuM/pNn4vUjlqW5w9F7Bt5ZxLUzCnGPENTGlFohJm8zZwZ1uWBQhgbHQTq6KZcG2eQUYJXdFaxI=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYIaXCzFqJJJWU11p8VGJmoeEtuuHM3xM3BrwcXD8/pR9wOBG9+w
-	es10K/WVY2lXr4BT2pOTEloUARXBl+IVb7cf0D5iidrWcr7hchGvCsyv+hDN6+jcYoZX600aXfM
-	zxeNihOqhzC03YLuE3PWDaI5P2fJXP7Ne6BrHOhYfRbSOYO6+9g2fTk1jlDpz0hGt+T1gxw==
-X-Gm-Gg: AYBFou1Ern0A2f8kx3QQbpR62F9vFne1QmJpUl/ofkiUMfFl4X4H7J+qCPYiIBvars1
-	Av2XNPrYpjsV6d4+lJcTnaZfkVI+07TgOMKamc0DPbuO9hMEnqH40m54ZXVdNeWLL9xqvpaBVld
-	eCS7itbYvtXTmEimQDw2avULGKAg0eWKmkjm2WE7TdTOHL2GOUjvKFhLiKO93tDfXeJqgvm99fa
-	OH0tB2CYzEs1gJKLXrqlN1w8nOrN7VHKZ5fzISL/bZBdF5v/BY4AGnQuExFuQlDRcYt5lZ+6qoV
-	fK4Kz/a4ICHkozk4wwkrDTFrSaVNICCYJN94o5Jpt/ZTLhQnmiTt82n6ns5QFG1BNFn+85c7ky3
-	vEXMSP2Vm8xNXmuA01oABVqUYKQSf9OoN9V3UdE15OeBSNQ69TQ==
-X-Received: by 2002:a05:620a:2b4e:b0:93f:24c5:f561 with SMTP id af79cd13be357-940ef9457cbmr1583431785a.33.1793125592760;
-        Tue, 27 Oct 2026 11:26:32 -0700 (PDT)
-X-Received: by 2002:a05:620a:2b4e:b0:93f:24c5:f561 with SMTP id af79cd13be357-940ef9457cbmr1583427885a.33.1793125592323;
-        Tue, 27 Oct 2026 11:26:32 -0700 (PDT)
-Message-ID: <5ca7722a-cd6d-47eb-b8ec-4c93ef4d4699@oss.qualcomm.com>
-Date: Tue, 27 Oct 2026 19:26:29 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=amd.com header.i="@amd.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=EVfF/vXqg1FUTwiaHYL6nYQXsL4vFljioTQ5XHYK1J1c1ibKoKCu7AZGhhFlyf0WPfrhtM1ODn0P8myeEcxv/eHQhUVSrHRxns4Gu0rm2Lmz+fdsOW8bt9AqrXqZkTJDxsW8SxjMRjEmSEzYANbt6p9ZeR/Ox3QxYUBYig1W2oIyIx2ltklrXIq3M2B8Z5pqqQ9pAcB8vlpyoRgU77faTMIpQrNdRcpDT5CQ1WOsco4uC/vbyjbmbS6l16gJDXTswygzhWaj6epFu45gpTMzcZrGWE04T3SHnDiqfu01uMGBKMKtM2FQbpiYdt63jFzJWKBchv6yHKItLpmqoIsD7w==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xgLw99O5rK3mJ3/D1pRGmjU8Ajn00l6hs94fnBFb4cY=;
+ b=AXrQK8ZNP9BheFIxWzfZaFlcD7qrVKyxw0zJNXtzehkPG6O6UON1ogBiLHc40JlPUpSeZkjnnUqEWS+cK4ffrEPnD5j5vA5yThc7JAVIlMtSMq8syCN0WrRateMlqjIMZpN8DBqylcS378wzW6HpB9V6hEk+Ik5DSV1M915sHlyhE3DmQcew7yY5BnPh+c6W4dJcweBJtSlCPbCAB6AeIONmoCadnPPK+cldc1/7xKkL6ELlFG2dBwYiW3ztoyUJh9LFMwqD4XqS8EAFvbcqeo6ZqXadSZ8kYZfYjI2eb1N+eROSO9XX36A70i9vrQJ047zkMAuVt3deJ39+JB7R1w==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass (sender ip is
+ 165.204.84.17) smtp.rcpttodomain=lists.xenproject.org smtp.mailfrom=amd.com;
+ dmarc=pass (p=quarantine sp=quarantine pct=100) action=none
+ header.from=amd.com; dkim=none (message not signed); arc=none (0)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=amd.com; s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xgLw99O5rK3mJ3/D1pRGmjU8Ajn00l6hs94fnBFb4cY=;
+ b=A2+hv2fwXcZLjcs+yw90nfEHwvhJZ2WMp3xJw04XD5GDyIh21BxV8ojlomkmA0z7qC2+zc1igmWjnfclSH+ERCQXAvf3JHzLm3Ycvj5aIud7PaULUzKERp6yrcCgq1NY5ZiyvYkbJqihc1BI9AiDrNC/z0Ju/157P46BVPG2Scc=
+X-MS-Exchange-Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP
+ is 165.204.84.17) smtp.mailfrom=amd.com; dkim=none (message not signed)
+ header.d=none;dmarc=pass action=none header.from=amd.com;
+Received-SPF: Pass (protection.outlook.com: domain of amd.com designates
+ 165.204.84.17 as permitted sender) receiver=protection.outlook.com;
+ client-ip=165.204.84.17; helo=satlexmb08.amd.com; pr=C
+From: Stefano Stabellini <stefano.stabellini@amd.com>
+To: <xen-devel@lists.xenproject.org>
+CC: Stefano Stabellini <stefano.stabellini@amd.com>, <jbeulich@suse.com>,
+	<andrew.cooper3@citrix.com>, <roger@xenproject.org>,
+	<teddy.astie@vates.tech>, <jason.andryuk@amd.com>, <roger.pau@amd.com>
+Subject: [PATCH v2] x86/mcheck: keep the banks past the end of the CMCI map polled
+Date: Tue, 27 Oct 2026 12:19:24 -0700
+Message-ID: <20261027191924.1844282-1-stefano.stabellini@amd.com>
+X-Mailer: git-send-email 2.43.0
+In-Reply-To: <20261027001315.2614976-1-stefano.stabellini@amd.com>
+References: <20261027001315.2614976-1-stefano.stabellini@amd.com>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH 09/11] accel/kvm: mark kvm accelerator as secure
-Content-Language: en-US
-To: =?UTF-8?Q?Daniel_P=2E_Berrang=C3=A9?= <berrange@redhat.com>,
-        qemu-devel@nongnu.org
-Cc: Stefano Stabellini <sstabellini@kernel.org>,
-        "Michael S. Tsirkin" <mst@redhat.com>,
-        David Hildenbrand <david@kernel.org>,
-        Anthony PERARD <anthony@xenproject.org>,
-        Peter Maydell <peter.maydell@linaro.org>, qemu-riscv@nongnu.org,
-        Paolo Bonzini <pbonzini@redhat.com>,
-        Alistair Francis <alistair.francis@wdc.com>,
-        Weiwei Li
- <liwei1518@gmail.com>,
-        Richard Henderson <richard.henderson@linaro.org>,
-        Nicholas Piggin <npiggin@gmail.com>,
-        "Edgar E. Iglesias" <edgar.iglesias@gmail.com>,
-        Jiaxun Yang <jiaxun.yang@flygoat.com>,
-        Chao Liu
- <chao.liu@processmission.com>,
-        Harsh Prateek Bora <harshpb@linux.ibm.com>,
-        Liu Zhiwei <zhiwei_liu@linux.alibaba.com>,
-        Christian Borntraeger <borntraeger@linux.ibm.com>,
-        Daniel Henrique Barboza <daniel.barboza@oss.qualcomm.com>,
-        Amit Machhiwal <amachhiw@linux.ibm.com>,
-        xen-devel@lists.xenproject.org, Sergio Lopez <slp@redhat.com>,
-        qemu-arm@nongnu.org, qemu-ppc@nongnu.org,
-        Bibo Mao <maobibo@loongson.cn>, Ilya Leoshkevich <iii@linux.ibm.com>,
-        Halil Pasic <pasic@linux.ibm.com>,
-        Xianglai Li <lixianglai@loongson.cn>,
-        Palmer Dabbelt <palmer@dabbelt.com>, qemu-s390x@nongnu.org,
-        kvm@vger.kernel.org, Alexander Graf <graf@amazon.com>,
-        Song Gao <17746591750@163.com>, Eric Farman <farman@linux.ibm.com>,
-        Cornelia Huck <cohuck@redhat.com>,
-        Matthew Rosato <mjrosato@linux.ibm.com>,
-        =?UTF-8?Q?Marc-Andr=C3=A9_Lureau?= <marcandre.lureau@redhat.com>
-References: <20261027181400.1752951-1-berrange@redhat.com>
- <20261027181400.1752951-10-berrange@redhat.com>
-From: =?UTF-8?Q?Philippe_Mathieu-Daud=C3=A9?= <philmd@oss.qualcomm.com>
-In-Reply-To: <20261027181400.1752951-10-berrange@redhat.com>
-Content-Type: text/plain; charset=UTF-8; format=flowed
+Content-Type: text/plain; charset="UTF-8"
 Content-Transfer-Encoding: 8bit
-X-Proofpoint-Spam-Info: AW1haW4tMjYxMDI3MDA3MyBTYWx0ZWRfX55QNVfX78GiZ
- Xrx/yMNT781snm4NwEv0oH/GmXaJMBYn0RuEdihFi3GU6rBjZszRyQo8omsrbJojDZrHjpNo8Gv
- EzsqmDydapDAWJwLsVEFDec15+ubWho=
-X-Proofpoint-ORIG-GUID: Z_hKpElPpi61y3DTO9m2mXsKRqDDwO5B
-X-Proofpoint-GUID: Z_hKpElPpi61y3DTO9m2mXsKRqDDwO5B
-X-Proofpoint-Spam-Details-Enc: AW1haW4tMjYxMDI3MDA3MyBTYWx0ZWRfX7K5cakEiReow
- LSl99XZKqjqr0vh8UFtNZGGe/onFfcsBeM/vRLmZTlpFxZKnaP6Kbf6XwVJn4VoA90V76COmu3v
- 01CsSOsD4g2sea1EduSUDNLKZtKRGc05QRJu5A5FzaeNuTwXeRN+wp1aEG++EeQxpwi9KIdmXJ3
- /sjV6T427E45RvppjknbgT08AyIvAGP1HpJJlkF+85/khh9KGa+x/ddiGq80j+FMmUG+c9c9yeJ
- v3AV7e/kjFGSdNmp0vN2kEzsqtcZekHVfnAurmU2R++SLtNB5cwAtNVZxVtrHkGt0Mvl+dQxtGg
- 44zUv32oR41zzglGH8Rwkg6C/NsqUFfaa7REqHbqs9gF28N4FPEEbouuWPLxmbFISc2z9KDfHOU
- vzAsW/SYCvAN92+ReVCIWyWnNosxiLFbIJ9m8ZgWx6GHjTP650mNpIxcGOpA9KtOvA9n5IK+x9K
- aieS3iOCgeRWcFngrvQ==
-X-Authority-Analysis: v=2.4 cv=UOFIjyfy c=1 sm=1 tr=0 ts=6ae0ecd9 cx=c_pps
- a=hnmNkyzTK/kJ09Xio7VxxA==:117 a=nz36NW0qrpeEijYxj/H2Ew==:17
- a=IkcTkHD0fZMA:10 a=660iZSQnnn4A:10 a=M51BFTxLslgA:10 a=s4-Qcg_JpJYA:10
- a=VkNPw1HP01LnGYTKEx00:22 a=u7WPNUs3qKkmUXheDGA7:22 a=ZpdpYltYx_vBUK5n70dp:22
- a=20KFwNOVAAAA:8 a=EUspDBNiAAAA:8 a=R0rOnUjNbK5cqpqgS9oA:9 a=3ZKOabzyN94A:10
- a=QEXdDO2ut3YA:10 a=ZXulRonScM0A:10 a=PEH46H7Ffwr30OY-TuGO:22
-X-Proofpoint-Virus-Version: vendor=baseguard
- engine=ICAP:2.0.293,Aquarius:18.0.1176,Hydra:6.1.138,FMLib:17.12.100.49
- definitions=2026-10-27_05,2026-10-21_02,2025-10-01_01
-X-Proofpoint-Spam-Details: rule=outbound_notspam policy=outbound score=0
- priorityscore=1501 suspectscore=0 adultscore=0 clxscore=1015 impostorscore=0
- spamscore=0 phishscore=0 malwarescore=0 bulkscore=0 lowpriorityscore=0
- classifier=typeunknown authscore=0 authtc= authcc= route=outbound adjust=0
- reason=mlx scancount=1 engine=8.22.0-2610190000 definitions=main-2610270073
-X-purgate-ID: tlsNG-33051d/1793125595-6F4C74E9-63965E81/0/0
+X-EOPAttributedMessage: 0
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: LV8PEPF0000005F:EE_|IA1PR12MB8312:EE_
+X-MS-Office365-Filtering-Correlation-Id: c7df3a36-25fd-4f66-ea55-08df345f3a68
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|376014|82310400026|36860700016|23010399003|1800799024|11063799006|56012099006|261021121427099003|261022105027099003|261021123027099003|261009223027099003|10067099003|22082099003|18002099003|261026140227099003;
+X-Microsoft-Antispam-Message-Info:
+	QgO8qOF4/H71ZgNjWPA0ltVR5jcSv/UUbF4tCFcoNidIIcUDgLWZ4GeCN+4bPN/y5QpCxaAFj2DMTWJ9DUDUQ7brlZw6eULbXusthhqWBfRQ3yL4A+PsJ2rRThstIxIwAQerL1vQ+/09Yp5rk3DPLeRRSOIKAeyRq9EbtqPIJ6yefuWCYb6RmAbYOnPsGE7Ptj6Whq0+6zp9Q4ZKw1NMdsWVf2Yg9qd+AXmilhm6FV3t0sxs/omWrw2LKUafRSqeBDrVl0TKERxRE5mnuwb2spqR361rvWnmmzKRlK4uPgzMpaiy7j39+1H+bK7SXIMD3xw8HqjvHJ8MaJKz7kuMhk9HVJoY4JAR1e1AtGJS6tCmAp1dQmzW0C+bI6EkZXR0CMKm7rW8BX+JptV7r5/ZMuxXQhvsmmQFIillJviKeWDXMaKxuJ4/RNi/VE0hr8MYMcTMZofNpZP9NJhprsd0a/H295pFLPr4lI2lpK46WaqW7Qr1PTJhqxb/+vI2X78Gbh+HfoUZo0zwTOf+687WYG7KDWrX/ed9dbBAV5yT8puj+UA2KYvaUJQdwFSH6uMZfC4HZ23C25nxmYaJ8pvpMu6KzKdaiylmSqkh0/nd9XEq4oKXV9x4sFHy4fL6JagbL1Ok9VjdCzo9AXxpqy/vunLBbK73wo9tnVnP9j6eTI+nyTgOl5DhMEQlzsDrs4VQ7J7/e0ViqEzndSdoa9f/+Q==
+X-Forefront-Antispam-Report:
+	CIP:165.204.84.17;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:satlexmb08.amd.com;PTR:InfoDomainNonexistent;CAT:NONE;SFS:(13230040)(376014)(82310400026)(36860700016)(23010399003)(1800799024)(11063799006)(56012099006)(261021121427099003)(261022105027099003)(261021123027099003)(261009223027099003)(10067099003)(22082099003)(18002099003)(261026140227099003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	vo1E8RZ6/kL56FLQq3E9/1F7cElWua84OJcMHpjNgt5wJBPoIhhkvjrCxe23oh3r6HfIs4BTZsA95/Nzbz5tFK/XhbtmJXEB9S+OcncedAfiRGDGzwCcsa9nX75F/v54ZiovkVw/B2Y1DPlKkWAbwh8W060MCKfPmxXbDe2cy88hOabIoPeVGEK2WihosqxxYVLt7frtMHhX5Ymsl2jkD7pwRka02K026UBb8mey31VHcYTbqcr1lmrfcPRPBOB1cXZgCgWCYbvrwD71UnIArBeGr82YT53E78oA/kYmawaFiCpxSvprDcgGY8WQFBOAyiHsXvL79qN1qYkW41MPsY/wz3p8Uk2+Srzpykrhflz7S8E8Mgqicy2oYCOc9YKp02E3IWqGzTdVSgSnR+mvcvdPplZ7dsgVAiWvNrdrKx2xKY8MS8Is++lWPvvWSSLH
+X-OriginatorOrg: amd.com
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 27 Oct 2026 19:19:31.5869
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: c7df3a36-25fd-4f66-ea55-08df345f3a68
+X-MS-Exchange-CrossTenant-Id: 3dd8961f-e488-4e60-8e11-a82d994e183d
+X-MS-Exchange-CrossTenant-OriginalAttributedTenantConnectingIp: TenantId=3dd8961f-e488-4e60-8e11-a82d994e183d;Ip=[165.204.84.17];Helo=[satlexmb08.amd.com]
+X-MS-Exchange-CrossTenant-AuthSource:
+	LV8PEPF0000005F.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: HybridOnPrem
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR12MB8312
+X-purgate-ID: tlsNG-16d1c6/1793128781-F7ACA77B-ED7B0BEB/0/0
 X-purgate-type: clean
-X-purgate-size: 419
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+X-purgate-size: 1565
+X-Spam-Status: No, score=-19.1 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_GIT autolearn=ham
 	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 27/10/26 19:13, Daniel P. BerrangÃ© wrote:
-> KVM is servicing virtualization use cases which must provide security
-> and actively maintained.
-> 
-> Reviewed-by: Marc-André Lureau <marcandre.lureau@redhat.com>
-> Signed-off-by: Daniel P. Berrangé <berrange@redhat.com>
-> ---
->   accel/kvm/kvm-all.c | 1 +
->   1 file changed, 1 insertion(+)
+bitmap_copy() copies whole words, so in set_poll_bankmask() it may clear
+banks past the end of the CMCI map that bitmap_fill() may just have set,
+leaving them neither polled nor reported by CMCI.  Set those bits after
+the copy instead.
 
-Reviewed-by: Philippe Mathieu-Daudé <philmd@oss.qualcomm.com>
+Fixes: 560cf418c845 ("x86/mcheck: allow varying bank counts per CPU")
+Signed-off-by: Stefano Stabellini <stefano.stabellini@amd.com>
+Reviewed-by: Jason Andryuk <jason.andryuk@amd.com>
+Acked-by: Roger Pau Monné <roger.pau@amd.com>
+---
+v2:
+- reword the commit message as suggested by Jan
+---
+ xen/arch/x86/cpu/mcheck/mce.c | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/xen/arch/x86/cpu/mcheck/mce.c b/xen/arch/x86/cpu/mcheck/mce.c
+index 1888f22d15..f9a1389516 100644
+--- a/xen/arch/x86/cpu/mcheck/mce.c
++++ b/xen/arch/x86/cpu/mcheck/mce.c
+@@ -621,9 +621,14 @@ static void set_poll_bankmask(struct cpuinfo_x86 *c)
+     {
+         const struct mca_banks *cmci = per_cpu(no_cmci_banks, cpu);
+ 
+-        if ( unlikely(cmci->num < mb->num) )
+-            bitmap_fill(mb->bank_map, mb->num);
+         bitmap_copy(mb->bank_map, cmci->bank_map, min(mb->num, cmci->num));
++        /*
++         * Banks past the end of the CMCI map are not reported by CMCI
++         * either, so they need polling.  Set them after the copy, which
++         * works in whole words and would otherwise clear them again.
++         */
++        if ( unlikely(cmci->num < mb->num) )
++            bitmap_set(mb->bank_map, cmci->num, mb->num - cmci->num);
+     }
+     else
+     {
+-- 
+2.47.3
+
 
