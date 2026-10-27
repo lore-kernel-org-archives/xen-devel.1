@@ -2,52 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B280F606A31A
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 11:05:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9D0E8606A31A
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 11:36:07 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=Hl56DOax
-Received: from list by lists.xenproject.org with outflank-mailman.1462061.1673110 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=SY1dW+jd
+Received: from list by lists.xenproject.org with outflank-mailman.1462080.1673120 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLezp-0004yA-Ku; Tue, 27 Oct 2026 11:05:37 +0000
+	id 1xLfSt-0001Wo-Vp; Tue, 27 Oct 2026 11:35:39 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1462061.1673110; Tue, 27 Oct 2026 11:05:37 +0000
+Received: by outflank-mailman (output) from mailman id 1462080.1673120; Tue, 27 Oct 2026 11:35:39 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLezp-0004y3-IG; Tue, 27 Oct 2026 11:05:37 +0000
-Received: by outflank-mailman (input) for mailman id 1462061;
- Tue, 27 Oct 2026 11:05:36 +0000
+	id 1xLfSt-0001Wh-SC; Tue, 27 Oct 2026 11:35:39 +0000
+Received: by outflank-mailman (input) for mailman id 1462080;
+ Tue, 27 Oct 2026 11:35:39 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a17d0971ae000f79f@swg.vates.tech>)
- id 1xLezo-0004xu-Cf
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 11:05:36 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLfSs-0001Wb-Um
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 11:35:39 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLezn-003Juk-Hs
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 12:05:35 +0100
-Received: from [10.42.69.5] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a17d0971ae000f79f@swg.vates.tech>)
- id 6ae08575-e002-0a2a0a5209dd-0a2a4505c590-40
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 12:05:35 +0100
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a17d0971ae000f79f@swg.vates.tech>)
- id 6ae0857f-4cb1-0a2a45050019-b9ff1c128f69-3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 12:05:35 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a17d0971ae000f79f.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Tue, 27 Oct 2026 11:05:33 +0000
-Received: from leducb.tail4c4a28.ts.net
- (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr [90.112.87.96])
- (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id 3430D820E6;
- Tue, 27 Oct 2026 12:05:32 +0100 (CET)
+ id 1xLfSs-003QG7-4T
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 12:35:38 +0100
+Received: from [10.42.69.7] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae08c7f-2eae-0a2a0a5409dd-0a2a4507e4ea-48
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 12:35:37 +0100
+Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
+ by tlsNG-ef75cf.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae08c89-b4ea-0a2a45070019-d155dd33cd13-3
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 12:35:37 +0100
+Received: by mail-wr1-f51.google.com with SMTP id
+ ffacd0b85a97d-48dfc0421d9so3406197f8f.1
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 04:35:37 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e3ebc3c5bsm22992317f8f.9.2026.10.27.04.35.36
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 Oct 2026 04:35:36 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -56,251 +49,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=PT15VaLPQa1+M2sgojHYFV8k1ZQ3KNrlXSntnylr0co=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=Hl56DOaxPaLsHEs2901dQzl3LrJz2zOAEqXpVUxMcjGKtnSqcncCj8hFA2tw8vbttUIGTGQG+
- PkYdd8tISwkoz0xpLE8SU1v9zE3uIyAypebgoCc5y2AcY+MgNPX1nKpSqfFo2rr4qbY9LfCToeH
- 6OuuYPeum/loLNis3eGzkJNr0/oPdhd1DX7rv0ACOlBPLOmSlWjxhnTDD3XiAp6uBTxSpCcbMek
- X1PH77dMOrhEGOq4CZg6+p69+06wjQYp4mymsNUjdl7zUWsZIU5oZK3/xAtyqMP5nf5+s08sJpk
- WKdoHW6R/G+UhQUGgG/osIMW5Li52COuJy96Ol6UBIvw==
-X-Zone-Loop: 3fa9f7167ab24b9b29b2dc641988fc4d8670c5d0c408
-x-campaign-type: default
-x-transaction-id: 02f24144-540c-4a34-93d2-fc3e9f2336b8
-x-swg-uid: 01-3cdc8bb9-c379-4ea0-98cb-6f380d6796df
-X-Mailer: Sweego
-Message-ID:
- <1793099133.8631fc262581453bbf619ec5b2062170.1a17d0971ae000f79f@vates.tech>
-x-swg-bid: 1793099133.8631fc262581453bbf619ec5b2062170.1a17d0971ae000f79f
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: xen-devel@lists.xenproject.org
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
-	=?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Alistair Francis <alistair.francis@wdc.com>,
-	Connor Davis <connojdavis@gmail.com>,
-	Oleksii Kurochko <oleksii.kurochko@gmail.com>,
-	Zheng Zhang <zhangzheng@iscas.ac.cn>
-Subject: [PATCH v9 1/1] xen/riscv: probe the A/D update scheme if the DT advertises neither
-Date: Tue, 27 Oct 2026 12:05:23 +0100
-In-Reply-To: <1793098984.8631fc262581453bbf619ec5b2062170.1a17d072ce5000f79f@vates.tech>
-References: <1793098984.8631fc262581453bbf619ec5b2062170.1a17d072ce5000f79f@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1793100937; x=1793705737; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=IcCI4frMu7p5QnsKC66MEafUJj1B+BfRNflTPN5BE34=;
+        b=SY1dW+jd6ePHLEzXAsRl7IwPh1lzPvRRvD5GWy0DbIAy0r4dLWNyq8um2YCApaeGtI
+         1mSmk7c27zOQiaJLPYSXwEJWIPBp8MXpwGe7g3iDwt9HcPbywRhW8j+kecy0Wi64IYIm
+         c38CBCTT5BvJMB+pPJTG0nVaUlmPXQ9RSMo1Ge8wPPi5PBmHGD31Kdk5ZrJaFnioDQZG
+         ONABbjZZUgIHD4bjzAiWGp0XQMq79/hv/w6cCukUuMG7mWqrvEEvvyVgXAaEyJ5jAfj4
+         cG+PHgjrLNiJXmOQFkU9eCuIRPkS3KyGk1hgAUzTxAST8vzf5Pm5QilhMiDTWjqNw72M
+         913g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793100937; x=1793705737;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=IcCI4frMu7p5QnsKC66MEafUJj1B+BfRNflTPN5BE34=;
+        b=UzG6n8AajmLNJLU1SYx7EeYod1rB4GpU/NIplEK2REjv10jKiYY314llZY8VPJorGf
+         fh9XyIlgLQpvcNJwg58kskTiDE25433y6HILfMp5l2SACJuNBDSnXV0zfha99ythrjy+
+         dG8l7DKkhRAV26h478RepINCjygqbnYodxCzDIzftKlxL07hmdoowwIdrnzDvAb4dxDd
+         eaYJX0gw3ase8pY12Zl9j40HhUSkO++nc2JXXKWks18ZTgrBxguC7fKGACqndYNNF/ct
+         30L45/uQE36LrOtVAbS5LzlnWx0rMEi6RjXHbtqnWXs1vz5sZSYa5JXWFmzmLsD9N6Vo
+         al+A==
+X-Forwarded-Encrypted: i=1; AKwUvBxI4BoIG8G76CqhwAaltK9+va2XkKdRnaUu411VkRuviVrEM1JcQ5tnJ9XyBuNgd5mnONIeA2wrUk0=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJPdsjgEZ4+aDxZ3RVly2Aa3IWcYdODqWu1w7CfwGXAiFqjinpi
+	u0ZreFhN+AALMn4XEDddeKM61djOdyURzwrAKCMssrNkkkxTK2/Oam0oKjwkmlwWPg==
+X-Gm-Gg: AYBFou0tSSCC6A3iOGgLJAxKpWr8O6sNKlXi54wOP5/Ag2ogKRvCWRTDu8ja20lAekJ
+	5UxR161wY8PjAU7/0PzN+L69vE/jsBnYqQ9bZ2KSk0WLT8y3mOIx4d2HSLYLeC3L3ivSTDVPrEu
+	Gfthel/1xGEEan+JywNrK9pkT7EejspwKTnPC8kZj96rfPrEl2bQFrWBZJRPjj2Hc0mdKpL6sq5
+	r6HA3UYCIqX90ZolRO5f6lM7/DSJmseWeHiAafuZFcV8MXHoxEwmEbXpGNRtK+1bpMGgnxKNqwN
+	9nFdrJiMyS+RD2yJFgDTmTdP1PIwQuC7imAOJk50rK020JUnX1+3+Kjld6s3PMu6v+6DNeDImFy
+	Wq5uRT9Epx3Hue4Sbq7EWljTB4UX55uc0QSlXZig+Nst4Z7+mTlzxPyRn4Hkh3JrVsW69bFbXXC
+	bW5eWXlQbz6G0xVfHricwcBjS1qzJ769/BKMflrXAzrxxEo8eOirPvRz6FPeJ8Hd5gHhl2iutfa
+	uMkuLMGPgo2bjb3i+PlpbIKBKrDBUkjZkH/GhuL2hndL1PmWytQpcC0a3b+WloULjk02rwx9xvC
+	ZCgYyO8neJY9FtgECBgmmiIl564kX8VNoY8SLw6SiM0=
+X-Received: by 2002:a05:6000:26c7:b0:48e:824:f0b9 with SMTP id ffacd0b85a97d-48e3eb945b1mr20069682f8f.45.1793100937013;
+        Tue, 27 Oct 2026 04:35:37 -0700 (PDT)
+Message-ID: <79b56256-3df6-40b6-9827-d23347b9c6ed@suse.com>
+Date: Tue, 27 Oct 2026 12:35:35 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793098626; l=7517; i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id; bh=3rZ1dIdVPL3WhgcAMJzO96FO9XwGlFTCRP5G1QD7gkI=; b=DymiJQfxJ1dOhupSWIT8D5CQ7jK4bhwZsekri3dkcDWFXp6vI5wcK3E2Au5+RTDWghmkqGwYg YKeyHqcapngCQ6xGnMu6LdbFwpRo1m493+00+GAU9sX4BCr3lq/M4LY
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519; pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-Content-Transfer-Encoding: 8bit
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1793099132416
-X-purgate-ID: tlsNG-c201ff/1793099135-F4EA12A1-1882050B/0/0
-X-purgate-type: clean
-X-purgate-size: 7519
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY autolearn=ham autolearn_force=no
-	version=4.0.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v2] xen/amd/iommu: record the IOMMU for alias DeviceIDs
+To: Stefano Stabellini <stefano.stabellini@amd.com>
+Cc: andrew.cooper3@citrix.com, roger@xenproject.org, jason.andryuk@amd.com,
+ teddy.astie@vates.tech, xen-devel@lists.xenproject.org
+References: <20261020221214.3683476-1-stefano.stabellini@amd.com>
+ <20261026235926.2105578-1-stefano.stabellini@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261026235926.2105578-1-stefano.stabellini@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-ef75cf/1793100937-A4ECEAE4-81484B34/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2825
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-p2m_set_pte_flags() presets the A/D bits of G-stage PTEs only when
-RISCV_ISA_EXT_svade is set, which is correct only if the device tree is.
+On 27.10.2026 00:59, Stefano Stabellini wrote:
+> add_ivrs_mapping_entry() marks an alias DeviceID valid and may give it
+> an interrupt remapping table, but records the IOMMU only for the device
+> using the alias.  If no IVHD entry names the alias DeviceID itself,
+> amd_iommu_setup_device_table() passes a NULL IOMMU to
+> amd_iommu_set_intremap_table(), which dereferences it at boot.
 
-The privileged spec allows exactly two schemes for updating the PTE A and D
-bits: hardware sets them on access and on write, or accessing a page whose
-A and/or D bit is clear raises a page fault so that software can set them
-(ratified as Svade). Every implementation uses one of them, but platforms
-designed before Svade and Svadu were ratified, such as the HiFive Premier
-P550, may advertise neither.
+Also possibly amd_iommu_alloc_intremap_table(), as it looks.
 
-Trust the device tree when it advertises Svade and/or Svadu, as for any
-other extension. When it advertises neither, probe the scheme in effect
-and record the matching extension in riscv_isa, so that such device trees
-can be used as-is, and warn naming the extension to add to "riscv,isa".
+> Record the IOMMU for the alias too, as was done before the interrupt
+> remapping rework.  Nothing relies on it being NULL: the alias is then
+> handled like any other DeviceID.  Its remapping table is freed on
+> cleanup and dumped by the 'V' key, a device at the alias DeviceID can
+> be added instead of failing with -ENODEV, and reserved ranges, already
+> recorded for the alias as well, are reported once under it.  A NULL
+> check at the crash site instead would leave the alias device table
+> entry without interrupt remapping.
 
-Introduce probe_hw_ad_update(): alias the first page of the Xen image
-read-only through the FIX_MISC fixmap slot with its A and D bits clear,
-then load from it under an exception table fixup. Hardware updating is in
-effect if the load completes and the A bit is then set. The probe fails
-otherwise, whether the load faults or completes leaving the A bit clear.
-The A bit being set by a speculative access still implies Svadu, as Svade
-only allows A to be set by software.
+What about find_iommu_for_device(), for example? That does check .iommu
+to be non-NULL, and hence behavior there is being altered by the change.
+Maybe to the better, but that's not obvious to me.
+amd_iommu_get_reserved_device_memory() has a similar, related check.
 
-Add Svadu to the known ISA extensions so it can be told apart from Svade.
-The comment above the enum asks for new extensions to go at the bottom to
-avoid shuffling, a leftover from Linux where the IDs were macros with
-explicit values. Nothing depends on the enum values, so have the comment
-say that multi-letter extensions follow the order of riscv_isa_ext[].
+> --- a/xen/drivers/passthrough/amd/iommu_acpi.c
+> +++ b/xen/drivers/passthrough/amd/iommu_acpi.c
+> @@ -104,6 +104,10 @@ static void __init add_ivrs_mapping_entry(
+>  
+>      /* Assign IOMMU hardware. */
+>      ivrs_mappings[bdf].iommu = iommu;
+> +
+> +    /* Requests using the alias go through the same IOMMU. */
+> +    if ( !ivrs_mappings[alias_id].iommu )
+> +        ivrs_mappings[alias_id].iommu = iommu;
 
-Assisted-by: Claude:claude-opus-5-5
-Signed-off-by: Baptiste Le Duc <baptiste.le-duc@vates.tech>
----
-Changes since v8:
-- probe through a read-only alias of the Xen image and check the A bit,
-  as A being set by a speculative access still implies Svadu.
----
-Changes since v7:
-- probe the A/D update scheme when the device tree advertises neither
-  Svade nor Svadu and record the probed extension, instead of panicking.
-- drop Suggested-by.
-- update the patch's title/body accordingly.
----
-Changes since v6:
-- drop the probe and trust the device tree, only panic when it advertises
-  neither Svade nor Svadu.
-- update the patch's title/body accordingly.
-- put svadu between svade and svpbmt in riscv_isa_ext_id.
-- rewrite the enum riscv_isa_ext_id comment.
----
-Changes since v5:
-- new patch, probe the A/D bits update scheme instead of trusting the
-  device tree alone.
----
- xen/arch/riscv/cpufeature.c             | 65 +++++++++++++++++++++++++++++++++
- xen/arch/riscv/include/asm/cpufeature.h | 13 ++++---
- 2 files changed, 72 insertions(+), 6 deletions(-)
+Comment and code are out of sync as long as the assignment is conditional.
+Question is which way this needs adjusting, and hence why you added the
+conditional in the first place. Which extends to other aspects of this
+function, when called with an alias_id (or bdf) which was previously seen:
+Should we reject such (early in the function)? Should later data override
+earlier one?
 
-diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
-index 3d5bbd2228..a19244493a 100644
---- a/xen/arch/riscv/cpufeature.c
-+++ b/xen/arch/riscv/cpufeature.c
-@@ -20,6 +20,7 @@
- 
- #include <asm/cpufeature.h>
- #include <asm/csr.h>
-+#include <asm/fixmap.h>
- 
- #ifdef CONFIG_ACPI
- # error "cpufeature.c functions should be updated to support ACPI"
-@@ -200,6 +201,7 @@ static const struct riscv_isa_ext_entry __initconstrel riscv_isa_ext[] = {
-     RISCV_ISA_EXT_ENTRY(ssaia,          ANY),
-     RISCV_ISA_EXT_ENTRY(sstc,           NONE),
-     RISCV_ISA_EXT_ENTRY(svade,          NONE),
-+    RISCV_ISA_EXT_ENTRY(svadu,          NONE),
-     RISCV_ISA_EXT_ENTRY(svpbmt,         NONE),
- };
- 
-@@ -630,6 +632,47 @@ const char *get_guest_isa_str(void)
-     return guest_isa_str;
- }
- 
-+/*
-+ * Probe whether hardware updates the PTE A/D bits by reading through an alias
-+ * mapping whose A and D bits are clear. Observing A set, even by a speculative
-+ * access, implies Svadu, as Svade only allows A to be set by software.
-+ *
-+ * Under Svade, the read raises a page fault instead, so use the extable to
-+ * handle it.
-+ */
-+static bool __init probe_hw_ad_update(void)
-+{
-+    vaddr_t va = FIXMAP_ADDR(FIX_MISC);
-+    pte_t *entry = &xen_fixmap[FIX_MISC];
-+    bool a_set = false;
-+
-+    ASSERT(!pte_is_valid(*entry));
-+
-+    /*
-+     * Any mapped page will do, as the alias is read-only, so alias the first
-+     * page of the Xen image, with A and D clear.
-+     */
-+    write_pte(entry, pte_from_mfn(maddr_to_mfn(virt_to_maddr(_start)),
-+                                  PTE_VALID | PTE_READABLE));
-+    flush_tlb_one_local(va);
-+
-+    asm_inline goto (
-+        "1: lw zero, 0(%[va])\n"
-+        ASM_EXTABLE(1b, %l[out])
-+        :
-+        : [va] "r" (va)
-+        : "memory"
-+        : out );
-+
-+    a_set = read_pte(entry).pte & PTE_ACCESSED;
-+
-+ out:
-+    write_pte(entry, (pte_t){});
-+    flush_tlb_one_local(va);
-+
-+    return a_set;
-+}
-+
- void __init riscv_fill_hwcap(void)
- {
-     unsigned int i;
-@@ -674,6 +717,28 @@ void __init riscv_fill_hwcap(void)
-                "Zihintpause unavailable: cpu_relax() gives the CPU no hint; "
-                "wire up this platform's pause equivalent in cpu_relax()\n");
- 
-+    /*
-+     * The privileged spec allows exactly two schemes for updating the PTE A
-+     * and D bits:
-+     *  1) hardware sets them on access and on write;
-+     *  2) accessing a page whose A and/or D bit is clear raises a page fault,
-+     *     so that software can set them (ratified as Svade).
-+     *
-+     * Every implementation uses one of them, but may predate the extensions
-+     * and advertise neither. In that case, trust the hardware probe.
-+     */
-+    if ( !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) &&
-+         !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu) )
-+    {
-+        bool hw_update = probe_hw_ad_update();
-+
-+        __set_bit(hw_update ? RISCV_ISA_EXT_svadu : RISCV_ISA_EXT_svade,
-+                  riscv_isa);
-+        printk(XENLOG_WARNING
-+               "Device tree advertises neither Svade nor Svadu, probed %s: add it to \"riscv,isa\"\n",
-+               hw_update ? "svadu" : "svade");
-+    }
-+
-     for ( i = 0; i < req_extns_amount; i++ )
-     {
-         const struct riscv_isa_ext_data ext = required_extensions[i];
-diff --git a/xen/arch/riscv/include/asm/cpufeature.h b/xen/arch/riscv/include/asm/cpufeature.h
-index 2973eb13a5..b0a23be18e 100644
---- a/xen/arch/riscv/include/asm/cpufeature.h
-+++ b/xen/arch/riscv/include/asm/cpufeature.h
-@@ -8,13 +8,13 @@
- #include <xen/types.h>
- 
- /*
-- * These macros represent the logical IDs of each multi-letter RISC-V ISA
-- * extension and are used in the ISA bitmap. The logical IDs start from
-- * RISCV_ISA_EXT_BASE, which allows the 0-25 range to be reserved for single
-- * letter extensions and are used in enum riscv_isa_ext_id.
-+ * Logical IDs of RISC-V ISA extensions, used as bit positions in the ISA
-+ * bitmap.
-  *
-- * New extensions should just be added to the bottom, rather than added
-- * alphabetically, in order to avoid unnecessary shuffling.
-+ * Single-letter extensions use IDs below RISCV_ISA_EXT_BASE and are sorted
-+ * alphabetically. Multi-letter extensions start from RISCV_ISA_EXT_BASE and
-+ * follow the same order as riscv_isa_ext[] (see the ordering rules described
-+ * above it).
-  */
- #define RISCV_ISA_EXT_BASE  26
- 
-@@ -41,6 +41,7 @@ enum riscv_isa_ext_id {
-     RISCV_ISA_EXT_ssaia,
-     RISCV_ISA_EXT_sstc,
-     RISCV_ISA_EXT_svade,
-+    RISCV_ISA_EXT_svadu,
-     RISCV_ISA_EXT_svpbmt,
-     RISCV_ISA_EXT_MAX
- };
+Perhaps what we want here is
 
--- 
-2.56.0
+    /* Requests using the alias go through the same IOMMU. */
+    if ( ivrs_mappings[alias_id].iommu )
+        ASSERT(ivrs_mappings[alias_id].iommu == iommu);
+    ivrs_mappings[alias_id].iommu = iommu;
 
+?
+
+Furthermore, if there's an issue with .iommu, why would there not be the
+same issue with the other fields set by this function? (Else if some of
+the fields can be relied upon only when
+ivrs_mappings[n].dte_requestor_id == n, then I think this would need
+writing down somewhere.) See e.g. amd_iommu_setup_domain_device(): It
+uses get_dma_requestor_id() to determine DTE and ivrs_dev, and passes
+that ivrs_dev to use_ats(). If this is an alias, ivrs_dev->block_ats
+won't be properly set.
+
+Jan
 
