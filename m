@@ -2,45 +2,51 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EF9E2606A329
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 08:10:48 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9EC2C606A31B
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 08:14:41 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=Fsqcw4Eo
-Received: from list by lists.xenproject.org with outflank-mailman.1461913.1672921 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=I12N7Fs5
+Received: from list by lists.xenproject.org with outflank-mailman.1461920.1672930 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLcGR-0003gb-OF; Tue, 27 Oct 2026 08:10:35 +0000
+	id 1xLcK5-0004H0-9c; Tue, 27 Oct 2026 08:14:21 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461913.1672921; Tue, 27 Oct 2026 08:10:35 +0000
+Received: by outflank-mailman (output) from mailman id 1461920.1672930; Tue, 27 Oct 2026 08:14:21 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLcGR-0003gU-LY; Tue, 27 Oct 2026 08:10:35 +0000
-Received: by outflank-mailman (input) for mailman id 1461913;
- Tue, 27 Oct 2026 08:10:34 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xLcGQ-0003gO-CJ
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 08:10:34 +0000
+	id 1xLcK5-0004Gt-6r; Tue, 27 Oct 2026 08:14:21 +0000
+Received: by outflank-mailman (input) for mailman id 1461920;
+ Tue, 27 Oct 2026 08:14:20 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a17c6c9c7f000f79f@swg.vates.tech>)
+ id 1xLcK3-0004Gn-H5
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 08:14:20 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLcGP-005daN-IZ
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 09:10:33 +0100
-Received: from [10.42.69.12] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae05c72-2eae-0a2a0a5409dd-0a2a450c862c-38
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 09:10:33 +0100
-Received: from [209.85.221.51] (helo=mail-wr1-f51.google.com)
- by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae05c79-f479-0a2a450c0019-d155dd33b1c2-3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 09:10:33 +0100
-Received: by mail-wr1-f51.google.com with SMTP id
- ffacd0b85a97d-48afbd2c386so2312915f8f.3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 01:10:33 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e412cc164sm19938128f8f.7.2026.10.27.01.10.31
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Tue, 27 Oct 2026 01:10:32 -0700 (PDT)
+ id 1xLcK2-003Alg-D0
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 09:14:18 +0100
+Received: from [10.42.69.10] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a17c6c9c7f000f79f@swg.vates.tech>)
+ id 6ae05d53-bab6-0a2a0a5309dd-0a2a450ab8ec-12
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 09:14:17 +0100
+Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a17c6c9c7f000f79f@swg.vates.tech>)
+ id 6ae05d59-f2d2-0a2a450a0019-b9ff1c2389a9-3
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 09:14:17 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a17c6c9c7f000f79f.002 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Tue, 27 Oct 2026 08:14:15 +0000
+Received: from [192.168.1.97] (82-67-211-29.subs.proxad.net [82.67.211.29])
+ (Authenticated sender: julian.vetter)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 5F665829D8;
+ Tue, 27 Oct 2026 09:14:14 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,117 +55,86 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793088633; x=1793693433; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=ivyUnSuwG8PYayePp1Zdplo99Wd3rzPbyajl18yj4W8=;
-        b=Fsqcw4EoVT0dky/i/hfFgOLdfeQ6LW5oN9NaMzF2kkso/lEnr2RnmzSkr9rQm2flwQ
-         AwdWt4U6Ts6HHfzAJSpz10Auoh/Q1Z0c2vM+LdQ/KTBMysxPuAhcBHs1Rk36yoPgJjN0
-         /Apb1DxuuXAZutzNH4Sk/r+BGvkM1YsDChQqzNvwo4EW9eA0qyhM5DS5/xLRLZGAifdI
-         JidurtRKiuH6nV2gyfxZDB2Td+uzw9vnXwy8m66VUY3qEUKxAACneXfpv9486lutr7mF
-         P4CCu7rxhtF0WOsXHATtY6PZteXAmPV1Gb5Of8zz4Bo+85c6GrjmJIOeheBFk5m3V3jl
-         CPNg==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793088633; x=1793693433;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=ivyUnSuwG8PYayePp1Zdplo99Wd3rzPbyajl18yj4W8=;
-        b=SL46i7Kl6WaYPdiJMg73MyOQVoEPOEuWpZFxPAgHGNwnDiBLZ7XoSV/5YAj5Tiyeuc
-         ZTYjr4OEGNMPifV4OAd8BjfN7uQgKZ9LEJer6YiCUuXgjkXwswtWJ3pBLklnJWlZ1Ykn
-         pRuuu+a9La2oiclFABHF0BDt6f0q5BcB61hGc9MiNkSCcyP56SlkHEzwK9c0m0xcA2c0
-         z1XxW0zD+UlKLWjZ+RLz/6G9bGwDda67XbB7rOh0M+OZi1jlknLCUAuWaDPw1pYAFvfG
-         fbi95r2YAg2R5NdkPk+OlcLEoXM2sveNgGymamJrsEUwWOO8GQGjzPshTkAAutOMlheD
-         2Cew==
-X-Forwarded-Encrypted: i=1; AKwUvBxJZNhy1E4eIWGSDy3D1ksRDKsKa++33kw2i0mr5qpuR4ghNqY7sMJBAHVoyRtkDznK/6jj6CFl0Vw=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKnL1erT2PaOxUPGcBXVdbV/mE5JwCLy5+8CABUki//csV6wM9Y
-	q+Ynv6gGHg/e0a7SU9kn+X8f10s2EB4W+GGSCvGTUsnn2NpTZ2tMwhrgwWLEFkjJYg==
-X-Gm-Gg: AYBFou2fcn1usXKQ48K6Z+5iwpxmAxxgVNBYKyhmb7PAi3fBiq5Zia/VhM5+7/QcWqX
-	nk9EWdnUcLjcSb7pYoTwFNMgYCTWWSiXYoFYTDX0tkiW0y6FnJ/dppEd62TILpio8q+4X3h0CwB
-	hEfKygjbuJiuvvJByYIwGoprKxoAAMVA54kx2pZNHcQz3zh3fWPXB+xl4cIzkTxKGwLQtPdUMc5
-	Yqp2LadM1UvXrkFRnc9qtsIm1aUA7jMPNW0ak5iLNkeD6LNWGkGUL9TSSDBphQqazy38V0nZRex
-	eDBf216HnZ2NB03nHF4atAfh7MwbfsbjnFyvjXmr5SMbp39E2oKteED8gkulgODERN94n76z42z
-	iV3wMo8pQAslgVXghOSJ+cQtIolfypaWd5kWUwesQWWwuiR+fc576tR6R8ssvXPxytIUsU1Qd7U
-	PsY9GfOLibZkzArBLDguVxMjBNsEhpyq0Wh232NTPeBUgA/lfX5w8vz6lVRuLMzSPOaNnkf6VGk
-	u4gy3QFfn3ug/SiQBECbyMTo1b+wFiAfOHk0v4XiPhwpELfStkRdE/3jZYdA3PB3Ddw8CdCHQFo
-	0DUebhCvK5oDbie5FH8FG7Nn0UoymrwogYbTLSnKiQok
-X-Received: by 2002:a5d:5e8d:0:b0:48e:6f:19b9 with SMTP id ffacd0b85a97d-48e3eb83497mr14619789f8f.23.1793088632628;
-        Tue, 27 Oct 2026 01:10:32 -0700 (PDT)
-Message-ID: <6ba22489-5cca-47e1-b1fb-f0b5c2f18b16@suse.com>
-Date: Tue, 27 Oct 2026 09:10:31 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=mP1E4f/D/4/Sg6JJ6IW5yxH/NtEy4J0g69BwIujVRoM=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=I12N7Fs5HAwmWeLcUN90mf++k3QjHxUVD12XVzQnRUsTZBByw52xyKTd/XjRII7Xm9Uh1S7zY
+ YutBIUx0rqYVgKHI5YJRhutVFOYznW6siaoJSSqiihMQ7kXV7y7hpAWCMDV6zvpyNL0UNXTlcXH
+ OOlWUTkiatB2OZceV68v9F4jiNDtWzgqRIzVGOVGkiJ1+luG1hOEfmnmhZCNF4yvtYd9LDGAUKB
+ RNP9g8VHiwxV5n50SkPJSVCpcVH77ZdSaxgN7oNKd2uFLXecePgPIjw912EQrekHo2oZ7s8satl
+ /MB2+p6yGUfR7gnsufdFSwRExwVen8o8eVuDwFDrdaRg==
+X-Zone-Loop: 18d3fa0d6c09877fa4b2405245f58df04b8f3328bdb1
+x-campaign-type: default
+x-transaction-id: 681e509e-e1a3-4f59-9a3a-255811de0d37
+x-swg-uid: 01-5373029a-9905-403a-b339-dd407479fd19
+X-Mailer: Sweego
+Message-ID:
+ <1793088855.8631fc262581453bbf619ec5b2062170.1a17c6c9c7f000f79f@vates.tech>
+x-swg-bid: 1793088855.8631fc262581453bbf619ec5b2062170.1a17c6c9c7f000f79f
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+Date: Tue, 27 Oct 2026 09:14:13 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [XEN PATCH v2] xen/page_alloc: scrub each page in
- unprepare_staticmem_pages
-To: peter kang <peter.kang@boeing.com>
-Cc: anderson.choi@boeing.com, matthew.l.weber3@boeing.com,
- joshua.c.whitehead@boeing.com, Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>, xen-devel@lists.xenproject.org
-References: <d58a2eb5897a14d7312629b59fdb6b4bd2e48a64.1793074467.git.peter.kang@boeing.com>
+Subject: Re: [PATCH] tools/ocaml: Gitlab CI test for bindings
+To: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Cc: Andrii Sultanov <andriy.sultanov@vates.tech>,
+ Guillaume Thouvenin <guillaume.thouvenin@vates.tech>
+References: <20261026162039.1188760-1-andrew.cooper3@citrix.com>
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <d58a2eb5897a14d7312629b59fdb6b4bd2e48a64.1793074467.git.peter.kang@boeing.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-d25034/1793088633-50B3DA5B-E0B4D414/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 759
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+From: Julian Vetter <julian.vetter@vates.tech>
+In-Reply-To: <20261026162039.1188760-1-andrew.cooper3@citrix.com>
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.21e.76e20aae512521d0.1a17c6c99f1.ebcbb46c7156d688=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1793088854513
+X-purgate-ID: tlsNG-4011c0/1793088857-5A5DBCFC-FF5BEFF7/0/0
+X-purgate-type: clean
+X-purgate-size: 826
+X-Spam-Status: No, score=-9.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,
+	SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1
+	autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 27.10.2026 05:25, peter kang wrote:
-> --- a/xen/common/page_alloc.c
-> +++ b/xen/common/page_alloc.c
-> @@ -2941,7 +2941,7 @@ void unprepare_staticmem_pages(struct page_info *pg, unsigned long nr_mfns,
->          if ( need_scrub )
->          {
->              /* TODO: asynchronous scrubbing for pages of static memory. */
-> -            scrub_one_page(pg);
-> +            scrub_one_page(&pg[i]);
->          }
->  
->          pg[i].count_info |= PGC_static;
+---=Part.21e.76e20aae512521d0.1a17c6c99f1.ebcbb46c7156d688=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-I had to re-base this change over commit 6ff0cfbfd4f7 ("mm: allow page
-scrubbing routine(s) to be arch controlled"), dating back to July last
-year. Please can you make sure to submit patches against the tip of
-staging, and in particular not against any older (release) branch?
 
-Jan
+> +  printf "Xen version: %d=2E%d%s\n" ver=2Emajor ver=2Eminor ver=2Eextra
+> +
+> +
+> +let () =3D
+> +  printf "Test Ocaml Bindings\n%!";
+> +
+> +  test_xenversion ();
+> +
+> +  printf "Starting GC=2Ecompact()\n%!";
+> +  Gc=2Ecompact ();
+> +  printf "GC done\n";
+> +
+> +  ()
+>=20
+> base-commit: 46678752be2d97f61317d793408a59927a429847
+
+Thank you Andrew, I will add the other test next to this one=2E
+
+Acked-by: Julian Vetter <julian=2Evetter@vates=2Etech>
+
+
+-- 
+Julian Vetter | Vates Hypervisor & Kernel Developer
+
+XCP-ng & Xen Orch=
+estra - Vates solutions
+
+web: https://vates=2Etech
+---=Part.21e.76e20aae512521d0.1a17c6c99f1.ebcbb46c7156d688=---
 
