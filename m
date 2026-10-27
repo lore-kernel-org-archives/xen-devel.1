@@ -2,47 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E5631606A31B
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 06:17:34 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id AD716606A31A
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 07:07:15 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=gmail.com header.i=@gmail.com header.a=rsa-sha256 header.s=20251104 header.b=b3Fy06ht
-Received: from list by lists.xenproject.org with outflank-mailman.1461804.1672840 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=LQ6E8snB
+Received: from list by lists.xenproject.org with outflank-mailman.1461847.1672850 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLaUY-0007ud-Og; Tue, 27 Oct 2026 06:17:02 +0000
+	id 1xLbGs-0006T2-Ad; Tue, 27 Oct 2026 07:06:58 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461804.1672840; Tue, 27 Oct 2026 06:17:02 +0000
+Received: by outflank-mailman (output) from mailman id 1461847.1672850; Tue, 27 Oct 2026 07:06:58 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLaUY-0007uW-Lc; Tue, 27 Oct 2026 06:17:02 +0000
-Received: by outflank-mailman (input) for mailman id 1461804;
- Tue, 27 Oct 2026 03:19:13 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <visitorckw@gmail.com>) id 1xLXiT-0007I4-2h
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 03:19:13 +0000
+	id 1xLbGs-0006Sv-7h; Tue, 27 Oct 2026 07:06:58 +0000
+Received: by outflank-mailman (input) for mailman id 1461847;
+ Tue, 27 Oct 2026 07:06:56 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLbGq-0006Sp-LM
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 07:06:56 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLXiS-004yKJ-1r
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 04:19:12 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xLbGp-002xYi-NX
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 08:06:55 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <visitorckw@gmail.com>)
- id 6ae017c0-e002-0a2a0a5209dd-0a2a4509b8d8-46
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 04:19:12 +0100
-Received: from [209.85.214.173] (helo=mail-pl1-f173.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <visitorckw@gmail.com>)
- id 6ae0182e-be1a-0a2a45090019-d155d6adc4a8-3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 04:19:11 +0100
-Received: by mail-pl1-f173.google.com with SMTP id
- d9443c01a7336-2e5fb79ce82so23269635ad.0
- for <xen-devel@lists.xenproject.org>; Mon, 26 Oct 2026 20:19:11 -0700 (PDT)
-Received: from visitorckw-work01.c.googlers.com.com
- (55.11.81.34.bc.googleusercontent.com. [34.81.11.55])
- by smtp.gmail.com with ESMTPSA id
- d9443c01a7336-2eae6c3b67bsm2337455ad.52.2026.10.26.20.19.06
- (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
- Mon, 26 Oct 2026 20:19:08 -0700 (PDT)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae04d8c-8faa-0a2a0a5109dd-0a2a450cda1a-18
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 08:06:55 +0100
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae04d8f-f479-0a2a450c0019-d1558036d88a-3
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 08:06:55 +0100
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-4a210470b49so30660725e9.2
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 00:06:55 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e3ebc3cfasm21004237f8f.17.2026.10.27.00.06.54
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Tue, 27 Oct 2026 00:06:54 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,108 +49,151 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=20251104 header.d=gmail.com header.i="@gmail.com" header.h="Content-Transfer-Encoding:MIME-Version:Message-ID:Date:Subject:Cc:To:From"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:Autocrypt:Subject:From:Cc:To:Content-Language:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=gmail.com; s=20251104; t=1793071150; x=1793675950; darn=lists.xenproject.org;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:from:to:cc:subject:date:message-id:reply-to:content-type;
-        bh=S5gJzH23fh/nKBiSObpCi+vZMP2u0y30tbWtykkO/f4=;
-        b=b3Fy06htmGpGrQJTOO14irawXGNSrHV159EiSegHgpzICpeja8Okc5+oa5+WMUlTRY
-         hty6IDCGfmmSiUGg81rE1Q91oIUIX9cOle9ypJNPGpegyrEN/ytZj0WzLUdIQK0hlYb3
-         1F8Mq866dP9TAAi2wPTrDpin5lWuhayai6M7AjiIBsOm6BrAS6agW+qnnOvSGOHpEBfT
-         mIjoPBLUCYL3wFqO26S8pkKWhNr6wM//MONZ9hcQvu8UcWzHWWpVdJgclSxYsw9l9LWI
-         GRbKspbs2DwwD6LfYkgBAuuR3FT0V8utALW7VcwmTYGpM8fOQ6DJJzEQ6fagd0Qzw9T2
-         7mPg==
+        d=suse.com; s=google; t=1793084815; x=1793689615; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=UBRrLU2xKYMZIrbRSHA32mAmR8fDYQPg/bOWs1ci48w=;
+        b=LQ6E8snBx6Z/YGh5TlAeEPrWrrWHJS1mHu99l9IuxDJ1c6I+dqjyrfUdclM8JoifHk
+         XHXDS32XCxVFwXz+z8RwXFsXSsc0skZXLMPtsvI7mwbCE174/G2bwKqi6AzQCx1SKpDE
+         QSZQ9dewQHXKkYyMFTP/wUsOhF3Jt5wJCAVAccI6YucVbYJ26ayhydii3xUP8t/Dq413
+         nqx4ih5yZNsuQ4LdQyaBPPueQAg3qKNhNYGhMtxn/lGq19+87gFslztEB9CXn1CSkhps
+         7t0XZaZaoVCwm61YPh5jOaRLr4yBqn4TO5jbKQ3rbCOMmHY8GVm2adaE+oHHFVYgG0T/
+         Pp5g==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793071150; x=1793675950;
-        h=content-transfer-encoding:mime-version:message-id:date:subject:cc
-         :to:from:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=S5gJzH23fh/nKBiSObpCi+vZMP2u0y30tbWtykkO/f4=;
-        b=kK8WTpQRiZdtQzdVm4xted+77NhgUNFok4IrELfeqK+wzKiLEcTpbhuMPHvK47j4Em
-         rTJZiuDMYCWVXIipRPqTcdyvo7hloi6kNYiGbxs5QwL1dhTJtMcXwmRHmYJAM4xUtxu3
-         wC5om6QmDGDP8oDIOcnRVZ/o3g7H+Hxe4YuN798zr6pplYO0y/Cjf+8U45cyr5iTgkoo
-         o9sxysL6/u2aPKsWDM+l5YLn85L1cuCWsaZ6dVkTrRpKUCkl2AEOOeFDI+dLncqByHkS
-         nTL+gvXH4Ae+urUPuro9cxm6/lo/uxjtvmM78ba/5ACkAKBWXT9G032O78MhG0pO6Xep
-         vK7A==
-X-Gm-Message-State: AFq9FYI8Tb42sFROM2q+xK+zyJUYOk457rlC4gFbnILrTaTCL5lHT0CP
-	FWUD/EswKcmqnJlESgHkUeoL4VjVUMTHIzM4OA24+o1G4HqCBxIeCQX7tOnzR6+a
-X-Gm-Gg: AYBFou36ZftvcRamp25pya1uILMx8XdMVfG7aLKz8HZC3oJIjB94GGqFO9uJ8SJFkit
-	fqxczMcttsZoo4p6I8yY7tsZ0IeAdOll4O5wVVFqgqjwPHam60dCDvmeQUxvbp+WCVWbFlHw/5U
-	kLty53R/8IaFWTSqzmxUwqTYx0CXoMWMnhZBDApjJb7vitiFj2d4viSWq7w9flxFad8W2xE8jlA
-	UNXNYFHxO2naedKODnuCRUEPHzofeR1P1oKL/DO3TpxyMmetgczrKxIFFYldwHjPkS6/qMebg8W
-	oBSkfg5XecZ+x4sJYpbnpS66MNjxbZKTaDuWQp4v2kkSyJ3sYPjc5WYZ2h4VQjYt9EX3Zb8VUAx
-	BCg3cHMfj3omwQf0SLeE7Qf3f43fYXZG7XqiwoEeMRkdd4tIvY7IFnmDEBRRhAqgqAyXD58Z1xH
-	NqyYkbB7FdNyclwFAyuVT0AnHtNIVDQHlmF3P8j7AreJlIVusFXTaPef3bHt8e0yGEJ5uaVTLrY
-	5JtRs9DVFYrWJkrDbAjjB2hywRXSxMv137hin2q4nHaXP7yW85Ui335xbkwYzQW3D0FplGn4Oyy
-	ixBP+1A/OXizj+jsr5iafXyU2VLFxaZFky5agVInTk3NAmlIkg==
-X-Received: by 2002:a17:902:da85:b0:2ea:71a7:7f21 with SMTP id d9443c01a7336-2ea9c6c245fmr67368925ad.13.1793071149905;
-        Mon, 26 Oct 2026 20:19:09 -0700 (PDT)
-From: Kuan-Wei Chiu <visitorckw@gmail.com>
-To: xen-devel@lists.xenproject.org
-Cc: sstabellini@kernel.org,
-	julien@xen.org,
-	bertrand.marquis@arm.com,
-	michal.orzel@amd.com,
-	marscheng@google.com,
-	jserv@ccns.ncku.edu.tw,
-	eleanor15x@gmail.com,
-	Kuan-Wei Chiu <visitorckw@gmail.com>
-Subject: [PATCH] xen/dt: Only parse direct child nodes of /reserved-memory
-Date: Tue, 27 Oct 2026 03:18:55 +0000
-Message-ID: <20261027031855.2671912-1-visitorckw@gmail.com>
-X-Mailer: git-send-email 2.56.0.307.g5fe7bd680c-goog
+        d=1e100.net; s=20260707; t=1793084815; x=1793689615;
+        h=content-transfer-encoding:content-type:autocrypt:subject:from:cc:to
+         :content-language:user-agent:mime-version:date:message-id:x-gm-gg
+         :x-gm-message-state:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=UBRrLU2xKYMZIrbRSHA32mAmR8fDYQPg/bOWs1ci48w=;
+        b=pBxXHph+tEKsVDx9qfBziijJ28AlOLe+wrLct1EIYNlSfzxRs4pE4RLzUdT5xo6lb3
+         H+iizAgtiCaSWrv04RxTjvu05EPBMqYl1idTYB3E6oDi3i3tPWVdOiYiaQtDNjxehRvm
+         bu9UHDiEUZj54RIObOscHtAr5qOLjs4P34SUodDJSd9ceoMabSW0PLQdUeLD69FavKSs
+         WmM7zLcLpiWPK4bW71lne/IA1oOion/Pnz0Xv1Iwg4PzhFy3q4ZMihCVHJku36NuIyV7
+         ubn/pIG/yC+Y/mUeRWIZM5M4NZMDpC0U4VFAgZbwT0yufaqXsiansM3GOf0ES/0DYMZ9
+         n7ug==
+X-Gm-Message-State: AFq9FYJrPwWhJQ+T/ANIs/WK9NnHX2+xY0Y4VINeJ0/RMHajJsaGnLwg
+	TMx1IJek4XIB/QAOcr5AwKDjvV4E3yl7+GJgPLf1CDSM9swUfbkH7UVCmH6YpXZjer+CNeQ+G/V
+	ZC0pvUA==
+X-Gm-Gg: AYBFou12xD5qP3/PXKsE60b0FVdyOeNUskXhuR48eYAuWoIyVGloqEGSyiZVZSB+n7Z
+	P5XMphRqw2woyvTTuKX1gH0PogyQvrf9lQ3sCbYXlFaH31pjOENoHQEgDKuHchLcWC62ae7LeWc
+	L7/5+FSmcMdCXyQW3vEDAFyzkgUuzbo9kwxkdV40Vv8eiqJ9L0GCi/b1edJbRV7raTSw4dQ99vQ
+	jQqzfmAaCtWZLawXG0LJLTrGPf5lYgXmfvExMPLvAPHLdzqNCc4/Qc7y3vObBHrLVBgGVl0+kxc
+	m7yv1F6H3hjnFCnfimqPEOd6vyXdLq6osWGBsU3b7t/PnnFRLExbvBNVU4Au2NeyYNxA8OARapH
+	IZ4OxKvCqH1jN6ewQAVP7q5cTqi55YgRyxsnZS852YIENiG3jw7Ahb/BL1fQ8dwVp96ElaYG2wv
+	NHkWizdxQEATMrFUNImIOGjymzzpgMOdWt3jVSNsZ9e3UFolEccOwS7zDCgu9+A8lify8dh5aD5
+	ANUAvMDIfioPXIzT8p617QianC1J+yTdY0Eg1GYRsGr9f+9nVLim6qWUY8Jr79Hkrb4AAcdWaHN
+	fwyk6hTe9es3rTmL2wXYNSGnYcetFJIW/XZrj1Fs5jVzsEVPlwo71hBJ/WN+IvemQQ==
+X-Received: by 2002:a05:600d:14:b0:4a4:6fdb:cc42 with SMTP id 5b1f17b1804b1-4a46fdbcc53mr113293195e9.11.1793084814989;
+        Tue, 27 Oct 2026 00:06:54 -0700 (PDT)
+Message-ID: <3dd54a18-a731-4c08-b848-8de6d620e406@suse.com>
+Date: Tue, 27 Oct 2026 08:06:53 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
+User-Agent: Mozilla Thunderbird
+Content-Language: en-US
+To: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Teddy Astie <teddy.astie@vates.tech>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
+ <roger@xenproject.org>, Yehyeong Lee <yhlee@isslab.korea.ac.kr>
+From: Jan Beulich <jbeulich@suse.com>
+Subject: [PATCH] x86/mm: special-case IOMMU (un)mapping failure path in
+ _get_page_type()
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
-X-purgate-ID: tlsNG-bad1c0/1793071152-3A4DB034-815C6872/0/0
-X-purgate-type: clean
-X-purgate-size: 1663
-X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FREEMAIL_FORGED_FROMDOMAIN,FREEMAIL_FROM,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_GIT autolearn=ham autolearn_force=no version=4.0.1
+X-purgate-ID: tlsNG-d25034/1793084815-02ADCA5B-4D12D225/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2727
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-process_reserved_memory() uses device_tree_for_each_node(), which walks
-all descendants of /reserved-memory rather than just its direct children.
-However, a child node such as nvmem-rmem can contain nvmem-layout and
-cell subnodes whose reg properties specify internal offsets rather than
-physical memory addresses. Parsing these subnodes records invalid
-reserved memory regions and fails the overlap check when bitfield cells
-share the same offset.
+The error path put in place to address XSA-291 was broken by the re-work
+done for XSA-299: With PTF_partial_set not passed in (since PGT_partial is
+clear for a page undergoing a type change) and the page not having
+PGT_validated set just yet, _put_page_type() would fail its consistency
+check for non-dying domains. Introduce yet another flag to indicate use of
+the function from _get_page_type()'s recovery path.
 
-Ignore nodes with depth != 1 in process_reserved_memory_node().
+Fixes: c40b33d72630 ("x86/mm: Don't drop a type ref unless you held a ref to begin with")
+Reported-by: Yehyeong Lee <yhlee@isslab.korea.ac.kr>
+Signed-off-by: Jan Beulich <jbeulich@suse.com>
+Reviewed-by: Roger Pau Monné <roger@xenproject.org>
 
-Fixes: d96594eef39a ("xen/arm: keep track of reserved-memory regions")
-Signed-off-by: Kuan-Wei Chiu <visitorckw@gmail.com>
----
- xen/common/device-tree/bootinfo-fdt.c | 9 +++++++--
- 1 file changed, 7 insertions(+), 2 deletions(-)
-
-diff --git a/xen/common/device-tree/bootinfo-fdt.c b/xen/common/device-tree/bootinfo-fdt.c
-index ca64daf4cd..eea35325f7 100644
---- a/xen/common/device-tree/bootinfo-fdt.c
-+++ b/xen/common/device-tree/bootinfo-fdt.c
-@@ -185,8 +185,13 @@ static int __init process_reserved_memory_node(const void *fdt, int node,
-                                                u32 size_cells,
-                                                void *data)
- {
--    int rc = process_memory_node(fdt, node, name, depth, address_cells,
--                                 size_cells, data);
-+    int rc;
-+
-+    if ( depth != 1 )
-+        return 0;
-+
-+    rc = process_memory_node(fdt, node, name, depth, address_cells,
-+                             size_cells, data);
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -1088,6 +1088,7 @@ get_page_from_l1e(
+  * more information.
+  */
+ #define PTF_partial_set           (1 << 0)
++#define PTF_recovery              (1 << 1)
+ #define PTF_preemptible           (1 << 2)
+ #define PTF_defer                 (1 << 3)
+ #define PTF_retain_ref_on_restart (1 << 4)
+@@ -2812,15 +2813,21 @@ static int _put_page_type(struct page_in
+          * *not* fully validated, continuing would almost certainly
+          * open up a security hole.  An exception to this is during
+          * domain destruction, where PGT_validated can be dropped
+-         * without dropping a type ref.
++         * without dropping a type ref.  Another exception is on error
++         * paths from _get_page_type(), where the type ref was already
++         * put in place, but PGT_validated isn't set yet (page
++         * validation still pending).
+          *
+-         * If the latter, do nothing unless type PGT_partial is set.
+-         * If it is set, the type count must be 1.
++         * In the domain destruction case, do nothing unless PGT_partial
++         * is set.  If it is set, the type count must be 1.
++         *
++         * In the _get_page_type() error path case operate normally,
++         * again also including the type count sanity check.
+          */
+-        if ( !(flags & PTF_partial_set) )
++        if ( !(flags & (PTF_partial_set | PTF_recovery)) )
+             BUG_ON((x & PGT_partial) ||
+                    !((x & PGT_validated) || page_get_owner(page)->is_dying));
+-        else if ( !(x & PGT_partial) )
++        else if ( (flags & PTF_partial_set) && !(x & PGT_partial) )
+             return 0;
+         else
+             BUG_ON((x & PGT_count_mask) != 1);
+@@ -3097,7 +3104,7 @@ static int _get_page_type(struct page_in
  
-     if ( rc == -ENOSPC )
-         panic("Max number of supported reserved-memory regions reached.\n");
--- 
-2.56.0.307.g5fe7bd680c-goog
-
+             if ( unlikely(rc) )
+             {
+-                _put_page_type(page, 0, NULL);
++                _put_page_type(page, PTF_recovery, NULL);
+                 goto out;
+             }
+         }
 
