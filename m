@@ -2,40 +2,40 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0541D606A323
-	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 07:27:32 +0000 (UTC)
-Received: from list by lists.xenproject.org with outflank-mailman.1461861.1672868 (Exim 4.92)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3E89606A322
+	for <xen-devel@archiver.kernel.org>; Tue, 27 Oct 2026 07:29:24 +0000 (UTC)
+Received: from list by lists.xenproject.org with outflank-mailman.1461870.1672876 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLbaH-0001aE-11; Tue, 27 Oct 2026 07:27:01 +0000
+	id 1xLbcP-0002M2-E2; Tue, 27 Oct 2026 07:29:13 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1461861.1672868; Tue, 27 Oct 2026 07:27:00 +0000
+Received: by outflank-mailman (output) from mailman id 1461870.1672876; Tue, 27 Oct 2026 07:29:13 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLbaG-0001a7-Ua; Tue, 27 Oct 2026 07:27:00 +0000
-Received: by outflank-mailman (input) for mailman id 1461861;
- Tue, 27 Oct 2026 07:27:00 +0000
+	id 1xLbcP-0002Lv-BR; Tue, 27 Oct 2026 07:29:13 +0000
+Received: by outflank-mailman (input) for mailman id 1461870;
+ Tue, 27 Oct 2026 07:29:12 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <nicola.vetrini@bugseng.com>) id 1xLbaG-0001a1-4D
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 07:27:00 +0000
+ (envelope-from <nicola.vetrini@bugseng.com>) id 1xLbcO-0002Lp-8v
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 07:29:12 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLbaD-005Uww-MX
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 08:26:57 +0100
-Received: from [10.42.69.3] (helo=localhost)
+ id 1xLbcN-005VVl-MB
+ for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 08:29:11 +0100
+Received: from [10.42.69.12] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <nicola.vetrini@bugseng.com>)
- id 6ae05228-e002-0a2a0a5209dd-0a2a45038950-36
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 08:26:57 +0100
+ id 6ae052ae-8faa-0a2a0a5109dd-0a2a450c8304-46
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 08:29:11 +0100
 Received: from [162.55.131.47] (helo=support.bugseng.com)
- by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ by tlsNG-d25034.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <nicola.vetrini@bugseng.com>)
- id 6ae05241-fae8-0a2a45030019-a237832feae4-3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 08:26:57 +0100
+ id 6ae052c7-f479-0a2a450c0019-a237832fe184-3
+ for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 08:29:11 +0100
 Received: from support.bugseng.com (support.bugseng.com [162.55.131.47])
  (Authenticated sender: nicola)
- by support.bugseng.com (Postfix) with ESMTPA id 6C1BB4EE022E;
- Tue, 27 Oct 2026 08:26:56 +0100 (CET)
+ by support.bugseng.com (Postfix) with ESMTPA id 49EB94EE022E;
+ Tue, 27 Oct 2026 08:29:11 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -46,37 +46,37 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; none
 Authentication-Results: bugseng.com; arc=none smtp.remote-ip=162.55.131.47
-ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1793086017;
-	b=g5f7x+TBNmTgFgY4bdNTIW4kYjto59SPZXdvH9j+ZeWTAym4n1GU2vNmmnwZI4G8uFd+
-	 rSAMAKLslnmk5IY49s4XTKYghOY09c49zD/S4qP+XfiV1WLmxrqa4TDC/Sq10hF49sO9G
-	 MNO6eaKS2TPAworOHwOymUigr7mdxQTy9GhI2wZISOK+3x3XpHlNI7IRRrZaARpWGaJnm
-	 WRqn4pEkknuRzgomFkA8Jmk9iFqYcY63h5SwOCav0T03xHufRU4/U5pXQpCU2jHudyKCc
-	 vvh0RxJwdaxNFEv/x/7zW3BSfvQLZR8Tq33ZW0Ja3gFwMG7mae2zy3PSrir0x+oGGJdt3
-	 wFko8by6N74vvBuEMsTAuoAHTyrTZK8798nCIvtOCdkxS15E9W2LNKLfeJfq0XLZDz0HH
-	 Ux5Mu80WT5Z7l8HO4xcbb8klbmDyXM8tfJpavPtQgVaZFjkfmo59JaYl0eoEBbzchecsi
-	 l//M/afnpCn5A384ZTpWXhDY+Rn1QJVlYrBXWXbKSjFhneTymINx864k0oC1f/8gWSo2f
-	 4CKx0N6DpWhcqPZuQkfL4lQxWeu9YL5mhRemJv7PynZYzGXt66vFMx3hHU0TkA5MOldfs
-	 XJePDQs2fnBekeQR3sYoVY2GtxTlM+X6Tys2/iqKumORrxEI+FbLvgbVwEtfSH8=
+ARC-Seal: i=1; d=bugseng.com; s=openarc; a=rsa-sha256; cv=none; t=1793086151;
+	b=CaYBndRMeLUfa1FbjkCb3WF6y1GMPB4SM5NqR9hl3XlGph1HD7fL06BrJMYiZsFRbmdr
+	 ZVgwRJxG9BCpLZNERxopJdigqHnIMZA2sMOHLubwW2ysOKsMluWGiI2pgzbUZmrPfIIG2
+	 ADmUbg8cwfzu5htjXlBUB8j4sdFG4Qe/blPXxMKXXe1fZ3G2tMCs46962MEU819OFYL1p
+	 q5miXR5bN0aXxzizTvjmULksDcqGtc+KiCs7P+9sZncJX9phNce698+aKEqduP+SShC4q
+	 +STwW/OcYtxA0VEN1mGbh7IMDHWgb+aJv6wAvRlNbTLOYcclXqwOhzZyDRCCNdpMUpA+/
+	 DcvNkkwvTqf8VJtz18GF0cOj2ix3rJtCF88ISpyFFp3FfPzw7+FjXiiM3Az84SqGfyI/n
+	 Iq+u24lyZ6UfPrl+EigKdl8OaL1VycdrPKtGD8Rrer5bqKrWfiquYvTCRGqPDLVmRoDTV
+	 VnBAdSCiQJYcmA7ty2dHqFPAEBgmmFE8n2UfqOnPvYw1C5VF8rw75MCxHcBts2T/sw6WE
+	 EDmzzhzk0VgxQ0pz/UCvagGUaih4/zHQOUpBRNTFUTy9ClDYnyTwRFzsgg+e3Pq1h+gFD
+	 wrMWqm192zFIMRyKpolZSESShAHFdJ9DCaoVsBvVALWioUUlcF+60hopm50bHvE=
 ARC-Message-Signature: i=1; d=bugseng.com; s=openarc; a=rsa-sha256;
-	c=relaxed/relaxed; t=1793086017;
+	c=relaxed/relaxed; t=1793086151;
 	h=MIME-Version:Date:From:To:Cc:Subject:In-Reply-To:References:
 	 Message-ID:X-Sender:Organization:Content-Type:
 	 Content-Transfer-Encoding;
-	bh=nE5ezc6sMX5qgETh/sc+Htd7hJpEx+RLXPTxbs7ktBI=;
-	b=4LjDyEkhSvoZtSyd3E+VKdu5dMPLcXRfEnfUa9re3cnQ2mJcmyMN1vl0xsWkmuyxV625
-	 l36I+FyjsljuKSTYwoq71T6LHsJseH9nrGUB2rpTltAhJceDouuL2rOzCG1NwHq83z1PB
-	 f8hJvR2MHyCjV+wgxbJ2soF7YYpHsF87OHlPWC1mUlQXwEmIViINVZiF0A1KEIXub9y9u
-	 HYdGi9OaMui/njdn7NR87XrFH8wuvPSncZhxHL3eWuDOdUIrKfnNa+lE3gNXW+OqRaBd6
-	 FLP8v2d21juTKky1/swptzqCbthV+zyhtoeOdxVdTDvV3Dah44ZMJC5z9RhmqgEAtg6vJ
-	 5fujOUj2KJsAdjjbvxY7xUY2ekUWgrWcSNsBBFJdmalTpjUUjyaeeKiwLT9nbshUd6PfZ
-	 CZFeaya5y+bYy6xBtDwI7DsD6eCdjuqslYxPL6JsGYdIrMk2IvX9SKdffDpBF+1AYXkcj
-	 u+SXKahxDmNYIodvNEOLb/XkW+J75z6WGOf7HNAcSsU/VU2vxmmrRBTrXKPTtZcoRa+Ay
-	 LozEAq1VAZ1QZt+fy1xxVI22Q6AUwL/Z8vtPQ+ebVtmGJdN7eA7ORdP8AtF0rjM2VVGS3
-	 lZWM9dbJBiU56xJKOv8lZFcEPUtxcG6ytu1WYQ5APZ9pin9Roi7UJ1Ovz32/3oU=
+	bh=JD64DCt70R+8twG03cuSbjIAx9xyVL3Bb+Ti/daCYPE=;
+	b=0um4HkNhIcplWVRaj20+CtHD+8eTYF+zV8qf+SnyXPo+fGKCmh6hz3kchYOgfbj5dur5
+	 JO89QE/tf5lxDwUvSHddrgp5lyZyrgZElsyaHCkOfgoC+8IxlyTzZvDz5oT0PVtitpfwI
+	 3mXSpDSRZSvxX4WzIZBnNCXiLuySA7mUCfYZBn4mzqKF4L5NV05YTAYijkCN9jCerf690
+	 NUjQntwR9FAWKaJveizNwqDUNsvLdKgvn3ECdmkvoXHj4WRMzTLzyjeW+aIRvuinGUdwE
+	 aVkRjzoG/irCMpY16KcZA2kwWtU7sFWTzFgqlkmYN1lHn7Y8fhOtw0a0AWLfVylM6dIXW
+	 l+r/+Q68vHsdRxpmQGMMNujjYUfG3JqZMCnPkVtF77OF956D2v/QTTvkSSikHPRt6uuX1
+	 31PGxP9di6lsng7xpZm6nKeLUCdOCJcZ02ZTFz6MdXzVmpvKwEqr9EnGhHY5kfet7Zkt8
+	 fSu9cTWaO/OyHWmJsTl6QYNIz6MSYVZZRo4sima+GiJ0N7iekJZMtvo42fANwVbfQBtNy
+	 dlZyXUd5k/ibPp7WHoMvsmO5D1L2i+eehbCaEkqwAvQ5zPlJAWZmTQifMsyOGX8eJMb0i
+	 VCOlDv5jzrx9jT3KtT4gfe7RwRP8GEJbLDcxmdoEgRvZKuowXWFCoKXStdILQoo=
 ARC-Authentication-Results: i=1; bugseng.com; arc=none smtp.remote-ip=162.55.131.47
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Date: Tue, 27 Oct 2026 08:26:56 +0100
+Date: Tue, 27 Oct 2026 08:29:11 +0100
 From: Nicola Vetrini <nicola.vetrini@bugseng.com>
 To: Dmytro Prokopchuk1 <dmytro_prokopchuk1@epam.com>
 Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
@@ -85,154 +85,136 @@ Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
  Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, Julien
  Grall <julien@xen.org>, =?UTF-8?Q?Roger_Pau_Monn=C3=A9?=
  <roger@xenproject.org>
-Subject: Re: [PATCH v3] automation/eclair: generalize the noreturn
- function-pointer deviation
-In-Reply-To: <d0af5523cf21dc3d8da6cf0e765fb34a664f7f1c.1792399445.git.dmytro_prokopchuk1@epam.com>
-References: <d0af5523cf21dc3d8da6cf0e765fb34a664f7f1c.1792399445.git.dmytro_prokopchuk1@epam.com>
-Message-ID: <e23ab1b67b60df32ad262a321da71e93@bugseng.com>
+Subject: Re: [PATCH v2] misra: deviate C library-style functions from Misra
+ C:2012 rule 11.8
+In-Reply-To: <cab890c77bfbb016e79f847d6dfddac993079f40.1792406297.git.dmytro_prokopchuk1@epam.com>
+References: <cab890c77bfbb016e79f847d6dfddac993079f40.1792406297.git.dmytro_prokopchuk1@epam.com>
+Message-ID: <9cef9d25d9c1dc136db0e356db4e98c3@bugseng.com>
 X-Sender: nicola.vetrini@bugseng.com
 Organization: BUGSENG s.r.l.
 Content-Type: text/plain; charset=US-ASCII;
  format=flowed
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1793086017-6CEDA4E9-4B343F01/0/0
+X-purgate-ID: tlsNG-d25034/1793086151-776D6A5B-B0FD8E9D/0/0
 X-purgate-type: clean
-X-purgate-size: 5428
-X-Spam-Status: No, score=-13.8 required=3.0 tests=BAYES_00,
+X-purgate-size: 4844
+X-Spam-Status: No, score=-18.8 required=3.0 tests=BAYES_00,
 	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=ham autolearn_force=no version=4.0.1
+	MAILING_LIST_MULTI,MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,
+	UNPARSEABLE_RELAY autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 2026-10-19 10:51, Dmytro Prokopchuk1 wrote:
-> The R11.1 safe cast only matched void noreturn (*)(void *). Accept a
-> conversion where noreturn is omitted and the signature is otherwise
-> compatible. canonical() covers typeof destinations, and
-> compatible_deep_unqualified keeps the parameter and return types 
-> aligned.
+On 2026-10-19 12:41, Dmytro Prokopchuk1 wrote:
+> bsearch(), memchr(), strchr(), strpbrk(), strrchr() and strstr() all
+> accept a const pointer/object but return a non-const pointer to the
+> matched element or byte, matching their standard C library interfaces.
+> The casts in these implementations strip const so that callers 
+> searching
+> a non-const object get back a mutable pointer. Fixing this would 
+> require
+> changing the public API, so document these uses as deviations instead.
 > 
-> Discarding noreturn does not change the calling convention. Code after
-> the call is unreachable when every possible callee is noreturn. Leaving
-> that code in place is a tolerated Rule 2.1 violation. The full 
-> rationale
-> is in docs/misra/deviations.rst.
+> Update docs/misra/rules.rst to note that this class of double-use
+> library functions is deviated on a per-function basis.
 > 
 > Signed-off-by: Dmytro Prokopchuk <dmytro_prokopchuk1@epam.com>
 
-Acked-by: Nicola Vetrini <nicola.vetrini@bugseng.com> # 
+Reviewed-by: Nicola Vetrini <nicola.vetrini@bugseng.com> # 
 automation/eclair_analysis/.*
 
 > ---
-> Changes in v3:
-> - Reworded the deviation text per Jan's review: "noreturn omitted but 
-> an
->   otherwise compatible signature", "all of the possible callees", and a
->   tolerated Rule 2.1 violation
-> - rules.rst: use '(void *)' spelling
-> 
 > Changes in v2:
-> - do not claim that discarding noreturn leaves compiler behavior 
-> unchanged
-> - write that code after the call is unreachable, and that Xen's 
-> behavior
->   is the same (whether the compiler deletes that code or leaves it)
+> - dropped memchr_inv() from the deviation (not a standard function)
+> - anchored the file patterns and grouped the xen/lib files, as
+>   suggested by Nicola
+> - narrowed the justification to the casts in the function bodies
+> 
+> Link to v1:
+> https://patchew.org/Xen/4abcb11ef287170ced74935cbee60c90058c1307.1790671787.git.dmytro._5Fprokopchuk1@epam.com/
 > ---
->  automation/eclair_analysis/ECLAIR/deviations.ecl |  9 +++++----
->  docs/misra/deviations.rst                        | 12 ++++++++----
->  docs/misra/rules.rst                             |  8 +++++---
->  3 files changed, 18 insertions(+), 11 deletions(-)
+>  automation/eclair_analysis/ECLAIR/deviations.ecl | 8 ++++++++
+>  docs/misra/deviations.rst                        | 9 +++++++++
+>  docs/misra/rules.rst                             | 6 +++++-
+>  3 files changed, 22 insertions(+), 1 deletion(-)
 > 
 > diff --git a/automation/eclair_analysis/ECLAIR/deviations.ecl 
 > b/automation/eclair_analysis/ECLAIR/deviations.ecl
-> index 6cdb10a129..c7a800c62f 100644
+> index 6cdb10a129..ed8bad0cb0 100644
 > --- a/automation/eclair_analysis/ECLAIR/deviations.ecl
 > +++ b/automation/eclair_analysis/ECLAIR/deviations.ecl
-> @@ -394,11 +394,12 @@ constant expressions are required.\""
+> @@ -450,6 +450,14 @@ write or not"
+>  
+> -config=MC3A2.R11.8,reports+={safe,"any_area(any_loc(file(hvm_guestcopy)&&text(^.*__hvm_copy.*HVMCOPY_to_guest 
+> doesn't modify.*$)))"}
+>  -doc_end
+> 
+> +-doc_begin="Functions bsearch(), memchr(), strchr(), strpbrk(), 
+> strrchr() and
+> +strstr() accept a const pointer/object and return a non-const pointer 
+> to the
+> +matched element or byte, matching their standard C library interfaces. 
+> The
+> +casts in these implementations strip const so that a search of a 
+> non-const
+> +object yields a mutable pointer. This use is deemed safe."
+> +-config=MC3A2.R11.8,reports+={safe,"any_area(any_loc(file(^xen/include/xen/bsearch\\.h$||^xen/lib/(memchr|strchr|strpbrk|strrchr|strstr)\\.c$)))"}
+> +-doc_end
+> +
+>  -doc_begin="This construct is used to check if the type is scalar, and 
+> for this purpose the use of 0 as a null pointer constant is 
+> deliberate."
+>  -config=MC3A2.R11.9,reports+={deliberate, 
+> "any_area(any_loc(any_exp(macro(^__ACCESS_ONCE$))))"
 >  }
->  -doc_end
-> 
-> --doc_begin="The conversion from 'void noreturn (*)(void *)' to 'void 
-> (*)(void *)' is safe
-> -because the semantics of the 'noreturn' attribute do not alter the 
-> calling convention or behavior of the resulting code."
-> +-doc_begin="The conversion from a noreturn function pointer to a 
-> function
-> +pointer with noreturn omitted but an otherwise compatible signature 
-> does
-> +not alter the calling convention."
->  -config=MC3A2.R11.1,casts+={safe,
-> -  
-> "kind(bitcast)&&to(type(pointer(inner(return(builtin(void))&&all_param(1, 
-> pointer(builtin(void)))))))&&from(expr(skip(!syntactic(),
-> -   ref(property(noreturn)))))"}
-> +  
-> "kind(bitcast)&&to(type(canonical(__function_pointer_types)))&&from(expr(skip(!syntactic(),
-> +   ref(property(noreturn)))))&&relation(compatible_deep_unqualified)"}
->  -doc_end
-> 
->  -doc_begin="The conversion from a pointer to an incomplete type to 
-> unsigned long does not lose any information, provided that the target 
-> type has enough bits to store it."
 > diff --git a/docs/misra/deviations.rst b/docs/misra/deviations.rst
-> index 6bcc2adf95..76be6b3251 100644
+> index 6bcc2adf95..68de2d8dd1 100644
 > --- a/docs/misra/deviations.rst
 > +++ b/docs/misra/deviations.rst
-> @@ -392,10 +392,14 @@ Deviations related to MISRA C:2012 Rules:
+> @@ -436,6 +436,15 @@ Deviations related to MISRA C:2012 Rules:
+>         readability.
 >       - Tagged as `safe` for ECLAIR.
 > 
->     * - R11.1
-> -     - The conversion from 'void noreturn (*)(...)' to 'void (*)(...)' 
-> is safe
-> -       because the semantics of the 'noreturn' attribute do not alter 
-> the calling
-> -       convention or behavior of the resulting code, parameters 
-> handling remain
-> -       consistent.
-> +     - The conversion from a noreturn function pointer to a function 
+> +   * - R11.8
+> +     - Functions bsearch(), memchr(), strchr(), strpbrk(), strrchr() 
+> and
+> +       strstr() accept a const pointer/object and return a non-const 
 > pointer
-> +       with noreturn omitted but an otherwise compatible signature 
-> does not
-> +       alter the calling convention. The callee does not return, so 
-> code
-> +       following a call through the resulting pointer is unreachable. 
-> The
-> +       compiler may delete that unreachable code when it can see that 
-> all
-> +       of the possible callees are noreturn, or it may leave the code 
-> in
-> +       place. Xen's behavior is the same in either case. Code left in 
-> place
-> +       is a tolerated violation of Rule 2.1.
->       - Tagged as `safe` for ECLAIR.
-> 
->     * - R11.2
+> +       to the matched element or byte, matching their standard C 
+> library
+> +       interfaces. The casts in these implementations strip const so 
+> that a
+> +       search of a non-const object yields a mutable pointer. This use 
+> is
+> +       deemed safe.
+> +     - Tagged as `safe` for ECLAIR.
+> +
+>     * - R11.9
+>       - __ACCESS_ONCE uses an integer, which happens to be zero, as a
+>         compile time check. The typecheck uses a cast. The usage of 
+> zero or other
 > diff --git a/docs/misra/rules.rst b/docs/misra/rules.rst
-> index a59cf1782e..5f9fe4c860 100644
+> index a59cf1782e..00378c474e 100644
 > --- a/docs/misra/rules.rst
 > +++ b/docs/misra/rules.rst
-> @@ -435,9 +435,11 @@ maintainers if you want to suggest a change.
->         and any other type
->       - All conversions to integer types are permitted if the 
-> destination
->         type has enough bits to hold the entire value. Conversions to 
-> bool
-> -       and void* are permitted. Conversions from 'void noreturn 
-> (*)(...)'
-> -       to 'void (*)(...)' are permitted. Conversions from [unsigned] 
-> long
-> -       or '(void *)' to a function pointer are permitted.
-> +       and '(void *)' are permitted. Conversions from a noreturn 
-> function
-> +       pointer to a function pointer with noreturn omitted but an 
-> otherwise
-> +       compatible signature are permitted.
-> +       Conversions from [unsigned] long or '(void *)' to a function 
-> pointer
-> +       are permitted.
->         Example::
+> @@ -473,7 +473,11 @@ maintainers if you want to suggest a change.
+>     * - `Rule 11.8 
+> <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_11_08.c>`_
+>       - Required
+>       - A cast shall not remove any const or volatile qualification 
+> from the type pointed to by a pointer
+> -     -
+> +     - Some standard C library-style functions are inherently 
+> double-use,
+> +       accepting a const argument and returning a non-const pointer 
+> into
+> +       it so that callers searching a non-const object get back a
+> +       mutable pointer. The casts that implement this are deviated per
+> +       function.
 > 
->             unsigned long func_addr = (unsigned long)&some_function;
+>     * - `Rule 11.9 
+> <https://gitlab.com/MISRA/MISRA-C/MISRA-C-2012/Example-Suite/-/blob/master/R_11_09.c>`_
+>       - Required
 
 -- 
 Nicola Vetrini, B.Sc.
