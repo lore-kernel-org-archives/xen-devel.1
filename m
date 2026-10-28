@@ -2,51 +2,47 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CBF18606A31C
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 17:25:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 078CD606A31E
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 18:07:47 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=YuYUk+sk
-Received: from list by lists.xenproject.org with outflank-mailman.1463518.1674402 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=citrix.com header.i=@citrix.com header.a=rsa-sha256 header.s=selector1 header.b=nBeHHkng
+Received: from list by lists.xenproject.org with outflank-mailman.1463551.1674412 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM7Oy-0006oB-Ce; Wed, 28 Oct 2026 17:25:28 +0000
+	id 1xM83Z-0005Ui-Fq; Wed, 28 Oct 2026 18:07:25 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463518.1674402; Wed, 28 Oct 2026 17:25:28 +0000
+Received: by outflank-mailman (output) from mailman id 1463551.1674412; Wed, 28 Oct 2026 18:07:25 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM7Oy-0006o4-9W; Wed, 28 Oct 2026 17:25:28 +0000
-Received: by outflank-mailman (input) for mailman id 1463518;
- Wed, 28 Oct 2026 17:25:27 +0000
+	id 1xM83Z-0005Ub-BD; Wed, 28 Oct 2026 18:07:25 +0000
+Received: by outflank-mailman (input) for mailman id 1463551;
+ Wed, 28 Oct 2026 18:07:23 +0000
 Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1838b89ef000f79f@swg.vates.tech>)
- id 1xM7Ow-0006nd-Up
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 17:25:27 +0000
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xM83X-0005UV-If
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 18:07:23 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xM7Ow-00379L-Bm
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 18:25:26 +0100
+ id 1xM83R-003s52-VQ
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 19:07:22 +0100
 Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1838b89ef000f79f@swg.vates.tech>)
- id 6ae23006-2eae-0a2a0a5409dd-0a2a4502b82a-2
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 18:25:26 +0100
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6ae239bf-bab6-0a2a0a5309dd-0a2a4502a19a-26
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 19:07:17 +0100
+Received: from [40.107.200.5]
+ (helo=CH5PR02CU005.outbound.protection.outlook.com)
  by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1838b89ef000f79f@swg.vates.tech>)
- id 6ae23005-6ca4-0a2a45020019-b9ff1c23b11f-3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 18:25:26 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a1838b89ef000f79f.007 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 28 Oct 2026 17:25:22 +0000
-Received: from [192.168.1.37] (lfbn-gre-1-371-96.w90-112.abo.wanadoo.fr
- [90.112.87.96]) (Authenticated sender: baptiste.le-duc)
- by mail2.vates.fr (Postfix) with ESMTPSA id B3D91805F9;
- Wed, 28 Oct 2026 18:25:21 +0100 (CET)
+ (envelope-from <andrew.cooper@citrix.com>)
+ id 6ae239d4-6ca4-0a2a45020019-286bc805b133-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 19:07:17 +0100
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com (2603:10b6:610:2b9::7)
+ by CH5PR03MB7981.namprd03.prod.outlook.com (2603:10b6:610:20f::22)
+ with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.569.8; Wed, 28 Oct
+ 2026 18:07:14 +0000
+Received: from CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37]) by CH8PR03MB8275.namprd03.prod.outlook.com
+ ([fe80::a70d:dc32:bba8:ce37%4]) with mapi id 15.21.0569.007; Wed, 28 Oct 2026
+ 18:07:14 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,226 +51,243 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:Content-Transfer-Encoding:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=sB4Of0MUQGjCyjXcJc7KE46pacPRIuyqQ8KXG8IOShE=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:content-transfer-encoding:in-reply-to:references:feedback-id;
- b=YuYUk+skgAuCnam0bsTX76gZgntJNU91Jr+Uf8U40gD7LPLr2zzdKKMtLuY5pi5YZ42b+/58t
- FISKF19eWZ4FymS5iq/tQtIGQ7Di5J4Q9LyrC+n+KTxP3/0OkdzW1xRylcyEeFa8lt4zw0kbqGH
- IUU4uO013G29dL/zw1EF4O582+lgjHcpy6097BwzdkqLaSkSPhTiriGunjc6UdAOfycDWeXRJvW
- wnyh+Zfa17ImBqPweuTJlKS/+rUbbvseBKSHsW04K3aqGj8CdP5uBEqZZuPAaxNa9NVmBTlErxl
- +e/RZhWffEsXCxsJYdyG3kVTTv2+fkk07+l6v5UKPC0g==
-X-Zone-Loop: ff594859417a5ed8bb58a98d07930a10bcd16976d26b
-x-campaign-type: default
-x-transaction-id: 138f977f-de93-48c8-9f3e-85d4e8df8ed7
-x-swg-uid: 01-88285f22-b3db-4527-b758-7f0be3368d89
-X-Mailer: Sweego
-Message-ID:
- <1793208322.8631fc262581453bbf619ec5b2062170.1a1838b89ef000f79f@vates.tech>
-x-swg-bid: 1793208322.8631fc262581453bbf619ec5b2062170.1a1838b89ef000f79f
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=citrix.com header.i="@citrix.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck"
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=l4S/BeO9cjtJiRygEQ9KFnkrBX6FQ8x+U1R4lXdUF3pjBh+oOgSC3qXV4roXntQANUHZ+gVwTNROMu8X0i8Vt1d4JCA8b7rHR7Na6IywqkWrQh1lutXzNNYhe0G5E4HOjFHoR1mjgjy7FXa1XCYvHJImhtmDC4PvItuCNspD1RLzouK4ouTnODgIiewXtYHBiESkhyLUssv9v8LaI7yzg+VQHxGuGNE3f3DgwZgWHZQcXRjGxIPPFPWrtJ5TRSn0yYQWQ+VW6SqsMv1xuJiwDEQGZr2TqVUjXcPM1Mx7HjGKolFrcTB5qR0HvNY/eWMTQp/4rl98lvtsfownt8IlMQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=SCQjdIPg/E+subNw9B1h4jEB9D2tYCtlMQx/vMOTdSk=;
+ b=udkwfEbsiK+2Lms92nJbfDc2jbu4Qgwg5jE9K5Go7X6tvrE2nJcWgXsAbxOxyrsb+9iJecMCcIc2kwSgM8W7lh6vyAsTOyCm1uB1BLx/fYAxXGmqmgHMqvTYfCwJNL14N5OH/KoX350gA6t/K2g3mkeC0xMqDdUPNWBdaBG712jXBYpCg13k3IXE9rebApj5qXKlDSxo4dJ6twZXoxIKv0u+pEMGYHhAuhy8bXMHJlXTP8GW3JTqSnt9ZHUiffzGTb/V2PrwEbDZEcLe45I6ZUItEA/PvQ2oTk4LmuQA7CSoFIvBN33m/3f/qd4zDU9Me0a3nC2WGihM7PzWjeTJig==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=citrix.com; dmarc=pass action=none header.from=citrix.com;
+ dkim=pass header.d=citrix.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=citrix.com;
+ s=selector1;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=SCQjdIPg/E+subNw9B1h4jEB9D2tYCtlMQx/vMOTdSk=;
+ b=nBeHHkng6GjapPPsKLqZDayI0aNuC1id+AxwC//N6+7vM8oaXpia6g94kkl60Jtipb4aWYF1d2d06XawuOM4dVwynICZTpvlrT/RPWtZ7qLNvc5x2kMJnonaUehYUvtKY785O9QCtrX05W2zsQYQ9BU9yjb6CDXKTHl2Gi4apGg=
+Authentication-Results: mx.microsoft.com 1; dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=citrix.com;
+Message-ID: <78279123-37d2-4acd-85b0-2bfe1fdf61d0@citrix.com>
+Date: Wed, 28 Oct 2026 18:07:11 +0000
+User-Agent: Mozilla Thunderbird
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>,
+ Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+Subject: Re: [PATCH] xen/mm: Remove loops in get_order_from_{pages,bytes}()
+To: Jan Beulich <jbeulich@suse.com>
+References: <20261028124104.1564435-1-andrew.cooper3@citrix.com>
+ <7128c617-9432-4571-9b7a-22d6f6e8d884@suse.com>
+Content-Language: en-GB
+From: Andrew Cooper <andrew.cooper3@citrix.com>
+Autocrypt: addr=andrew.cooper3@citrix.com; keydata=
+ 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
+ 6+ahAA==
+In-Reply-To: <7128c617-9432-4571-9b7a-22d6f6e8d884@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+X-ClientProxiedBy: LO4P265CA0255.GBRP265.PROD.OUTLOOK.COM
+ (2603:10a6:600:37c::20) To CH8PR03MB8275.namprd03.prod.outlook.com
+ (2603:10b6:610:2b9::7)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset="utf-8"
-Content-Transfer-Encoding: 8bit
-Subject: Re: [PATCH v10 1/1] xen/riscv: probe the A/D update scheme if the
- DT advertises neither
-From: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Baptiste Le Duc <baptiste.le-duc@vates.tech>, 
- xen-devel@lists.xenproject.org, Anthony PERARD <anthony.perard@vates.tech>, 
- Michal Orzel <michal.orzel@amd.com>, Jan Beulich <jbeulich@suse.com>, 
- Julien Grall <julien@xen.org>, 
- =?utf-8?q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>, 
- Stefano Stabellini <sstabellini@kernel.org>, 
- Alistair Francis <alistair.francis@wdc.com>, 
- Connor Davis <connojdavis@gmail.com>, 
- Oleksii Kurochko <oleksii.kurochko@gmail.com>, 
- Zheng Zhang <zhangzheng@iscas.ac.cn>
-In-Reply-To: <35fa29d5-fafc-43da-a5a5-72df8f367e3c@citrix.com>
-References: <1793192679.8631fc262581453bbf619ec5b2062170.1a1829cd6d5000f79f@vates.tech>
- <1793192757.8631fc262581453bbf619ec5b2062170.1a1829e0a63000f79f@vates.tech>
- <35fa29d5-fafc-43da-a5a5-72df8f367e3c@citrix.com>
-Date: Wed, 28 Oct 2026 18:25:16 +0100
-X-Developer-Signature: v=1; a=ed25519-sha256; t=1793208316; l=5839;
- i=baptiste.le-duc@vates.tech; s=20260810; h=from:subject:message-id;
- bh=1BinobBn/f1f9ULsMCPNN+bhYZDJFVHU6GJQjxxDJYQ=;
- b=9k9/UbrSt/gVOEBGfGfogF/hIIcvcwGX2duefQ9j8+aDwcQZReRdpdDhDR7EzGX6d9V3MF2M/
- GD46gkqSuJmDV46O/SiORSorVFLL2SS8nSN0Fe9xcLoGUXwJ5saNDlI
-X-Developer-Key: i=baptiste.le-duc@vates.tech; a=ed25519;
- pk=N+BbdvMXRzrCuX/ieh4RWodiAKcLNvI+KjflcZ0oXCo=
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1793208321930
-X-purgate-ID: tlsNG-720697/1793208326-30DC12AC-745F2266/0/0
-X-purgate-type: clean
-X-purgate-size: 5839
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=ham autolearn_force=no version=4.0.1
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CH8PR03MB8275:EE_|CH5PR03MB7981:EE_
+X-MS-Office365-Filtering-Correlation-Id: 28c3d9ad-3902-4928-5d30-08df351e4b91
+X-MS-Exchange-SenderADCheck: 1
+X-MS-Exchange-AntiSpam-Relay: 0
+X-Microsoft-Antispam:
+	BCL:0;ARA:13230040|366016|1800799024|23010399003|376014|260925021311599003|260925022911599003|260925021911599003|261021121427099003|56012099006|4143699003|5023799004|11063799006|261009223027099003|261026121527099003|261021135927099003|10067099003|22082099003|18002099003|6133799003;
+X-Microsoft-Antispam-Message-Info:
+	uEPxAGudSP6050Co0Kb7pwaBorZ1zuMo6dCwcu7YuVvSkhWBfZQTEzmKRlyu3Z4VL/necB/wZI4OKbrehY6IDIpSfqNfa9yeCNJ/tVbYpIV6UlwMcV6/c9br7CiZuIj4YA9WlONXewrRFEXe7yzbXm7SvlwnWnM3HQh8DP8nuct9Of9DJUKjEwxKYND6HBh3HufTmQH9zia9cj1TnjTbUsFIphuz7ho9aSJKkDE+QwcY/wbgBMM6a+yrDnncNRQpMMa4osq5jkwSHT0KrGyTKc210gN8csWrauQW+j4whBOWtSTwv26P7mCr+m7jN3AU9fCAFNDRumECPwGR0vV3AnxhuJ8JGZzQnPZdjRikyf43HOk4/sxEDqCVXclblCr73bFfOE22UZGKr4nRZK2ZfppDtS70ClajzGE2II5Aa0SDZuSqWsjHCIDc01JWVSeLJmfiz9l+ueYiQo+1IAv8JUSnGqTb3INv607C2R6Z/1ToSZv7aoUkBlKo9nOUP6XyD9vSVMXrMTLIQ2HwkP44POpjDkaPr4AeeEeTr9+a02jBw5PR+9yhVmZntRs87tRvLL1PPhmRrz3gcumjtOn4loRUTeMqLp23O0TcxFjs/FDc5u9N65xotrIVgywNYB1e1+9eK8lgX5x+mNPv43FgKiS9IisG3z/46KP1uYhcizU=
+X-Forefront-Antispam-Report:
+	CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:CH8PR03MB8275.namprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(366016)(1800799024)(23010399003)(376014)(260925021311599003)(260925022911599003)(260925021911599003)(261021121427099003)(56012099006)(4143699003)(5023799004)(11063799006)(261009223027099003)(261026121527099003)(261021135927099003)(10067099003)(22082099003)(18002099003)(6133799003);DIR:OUT;SFP:1101;
+X-MS-Exchange-AntiSpam-MessageData-ChunkCount: 1
+X-MS-Exchange-AntiSpam-MessageData-0:
+	=?utf-8?B?bVVhb3FqcVBRYjdyUDY3b0ZLdDNUdXRwUU9jVGRySTZIVVBkZVNDUlJQYmc0?=
+ =?utf-8?B?LzFVM0tDVGFadklHcWdBUlQ4Njk0ZjFCMEhQZTEybUlCNFRSS0pSS01SV1RT?=
+ =?utf-8?B?Yi9UNmVPTHVGcjI5bW04eXluRkJZL0h6aU5aVURnb3JIRndNTmsrSFBLd0FE?=
+ =?utf-8?B?TEYramZCaTBaSTVJUlVQNXpCRkFXcFcvdVllZzNyRVJGTHhhQlVRYXZXbHN4?=
+ =?utf-8?B?amV5N3JqWmFjM3ZFUWFOaDBUN0d2eHRZZEc4Wk5rZTRTMWxkeXZSdVVLQnNi?=
+ =?utf-8?B?QVNTNjZEVXQzWDBldzBjdm1nMWFnNEtOeFZIQW13OWdTdXQwU2lrb3kwTU9E?=
+ =?utf-8?B?ZlVBbUR3bzlqZFBOVHZHR2tMUmdYWTdNbEI4TVlmZUhqNjhYSThVT0pGKzJy?=
+ =?utf-8?B?b3BubTRWV1h4bnU1VFdKeDhBekZjaWFzU2RTMjd2SEpIQXJOeSt4cEtRLzlw?=
+ =?utf-8?B?dDdQUFZwU0prS21HcjZ6UW5qZmFLUkFQMjg0V0daRFM3cnMvNHVrTmkwbjRo?=
+ =?utf-8?B?Wk02Y1VGNEdBWFFsVXhxellnakhxZ1Bua3o3a1ArUENoSXZzd1E3VnMwOTJO?=
+ =?utf-8?B?NklrZ25jcm5EeXFiY1BmT3EyL2wzb0xBZUtOZzRaNm9BUnFKcFZySjRoNTRE?=
+ =?utf-8?B?Y0VJTmx3bklTaXpnV2lBWDFZcUdjWjNOR0k3cWFJaHRUWHZITk9BV0tLZEVC?=
+ =?utf-8?B?RGVBUFpvTHJCcmwzOE1SR1hpUkRzMmdoTmJHVVJyUllVVWZPSTBmTDMrL2Jl?=
+ =?utf-8?B?ZnFjM0lwTTUyRnc5dUU1QmlWTjJNOThaeTNZRnp3WmtyOWd3d1d4QVFZT0hF?=
+ =?utf-8?B?REFldjd0SU1LODk2ZG9XaWpTVzJSM3MyNmZlTmxJbE1yL21rdGFJUlBTYlpq?=
+ =?utf-8?B?T1M4M2N3cFA3Mno4ZDZ0VldhaitLUjBZRE9rOHVhay95TzNUZm5aTkk3V0Zo?=
+ =?utf-8?B?V0J4NTFIMlhNajFaZFdDTGhhVlRxSU9QOUkwdVNvQ09xbHpQTGVWMnMzVk8x?=
+ =?utf-8?B?dXg5MG9Jd0RoNDB5THhQY3VHVitRVmdSSDRoZlRZaTA4emdwRndtQlVhalRq?=
+ =?utf-8?B?YUFPcUVWQnBOTzB1SUkrbVpsdEFyeXJYTExHQVlNcWFoT2w2WjNXTGJsRTZO?=
+ =?utf-8?B?S1h5azhZWTRyMjhxZkJzdG94bU45MG8vUkVNZlFIYmU4N2Y4SHJPUmZ0THlj?=
+ =?utf-8?B?YWJCazdNZTM3Nk9mamh6Z1VjbTRJRGFlM1cvejN0bThJOExWVDFOaU05WXE1?=
+ =?utf-8?B?SEpITTdZOUJxcHpaSURwV2oxMFlUK0hLdUpleG9sa29YMmRBRmt1VnduSVBn?=
+ =?utf-8?B?dFJJVUduTnJUUTJFcUxrMUNwbXFlajdNTzR6Uit3cFhnckFvWnBYMHhzYXhY?=
+ =?utf-8?B?dTN4VWYxcDh4c25RK283U3MrZ292Q0ZsNDJQVjgyck85azc5WVVxOWI0SWdD?=
+ =?utf-8?B?TC9OMXl1WnNaT0FiS3k3TEZ0eXdpNEZHZUFBemVnVUM2QzU4NjRLWTlJWUpT?=
+ =?utf-8?B?MUxzbFE5ekw0NkpUbU5CeXdWNk05TnJ3MU9xRmd6RkN3SjBvdnhmbWNiOTl3?=
+ =?utf-8?B?VnpuMDFEcUdjUFBBd2hFdTN3bzRZemU5bDNpU2N0K1BUNUZYWmRmLzFwY3JT?=
+ =?utf-8?B?ZXdwaEQxMFZhb2lCVVY5blpSSDdzT2hUMjRNSndVY25qb1FBeU1ua0twYTNZ?=
+ =?utf-8?B?L29ZTVhkQlZoNENHMUtoTmNwaC81cmpuTjVMVVlzR0FwZWtsdE81aEh3am9i?=
+ =?utf-8?B?Z0c3SEU5TWZpWHFqcUh1MUxtdVlwanFIWllpcHRWSUZndVNoalNRMnB0M2F4?=
+ =?utf-8?B?RFVWMXNmc2N0YTl0L3Y3eGl4TUZ6OWEvV3d0SUtnZFd3Y0ZWWkRjOWJjeWpD?=
+ =?utf-8?B?QmdQYTIvZktBcDN5b0F3bDF3eStaYWEyM2lTY3R0dnRuRk9Bd1hhQUZFcWRr?=
+ =?utf-8?B?aGdhbTNTT3FMZFlyVG0rdllTREhBUnF1Z2s2TDg5MU9ySy9WRk5kOTIySU04?=
+ =?utf-8?B?VE9TazV1dHJtWU9MYytlME1KVVhKam1IdVVXdXJ2cEs5bnExdDRVK2c4b2sy?=
+ =?utf-8?B?NTVDOVBqYlBlV2N2OHFid1hhZUFTdFd6QzlHZml4TExpOGRhOC81Y1lORjQw?=
+ =?utf-8?B?RDNzMW1rUTVuU3A5Y05FWVBVN3dBSnlkMmVSd0R5aVZJZkRpa0hCSU9zSEY0?=
+ =?utf-8?B?c0taSEdjZmZtQnJJNnV1U1hnL3RoQm1FWUhpcUtteDNrUWc5Zkt0Sk9WSzVB?=
+ =?utf-8?B?QjlacVFIK3p5VVI2clVtSlVDSTRVNStrbkJjVWVXMjloTlAxMjI0SnhJVHNp?=
+ =?utf-8?B?NXFzNjBEVlAvU1RQSHpZRExTRCtQQWhNUWozdDlIMllWSmxSQUNidz09?=
+X-OriginatorOrg: citrix.com
+X-MS-Exchange-CrossTenant-Network-Message-Id: 28c3d9ad-3902-4928-5d30-08df351e4b91
+X-MS-Exchange-CrossTenant-AuthSource: CH8PR03MB8275.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Internal
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 28 Oct 2026 18:07:14.4722
+ (UTC)
+X-MS-Exchange-CrossTenant-FromEntityHeader: Hosted
+X-MS-Exchange-CrossTenant-Id: 335836de-42ef-43a2-b145-348c2ee9ca5b
+X-MS-Exchange-CrossTenant-MailboxType: HOSTED
+X-MS-Exchange-CrossTenant-UserPrincipalName: L6DxS8lfzOnYFOHAvHULBdLWcrNgl7Vcy2/dYRwC79AG3pW8OJ6v2T5AEVmBDlgLFMaE+PV7oo8wMaVJzdqCNdAJskUs6rqaBRickMFw6z4=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: CH5PR03MB7981
+X-purgate-ID: tlsNG-720697/1793210837-662A92AC-37A8BFC6/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2881
+X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 2026-10-28 14:24 +0000, Andrew Cooper wrote:
-> On 28/10/2026 1:05 pm, Baptiste Le Duc wrote:
-> > diff --git a/xen/arch/riscv/cpufeature.c b/xen/arch/riscv/cpufeature.c
-> > index 3d5bbd2228..83d3bc5ddc 100644
-> > --- a/xen/arch/riscv/cpufeature.c
-> > +++ b/xen/arch/riscv/cpufeature.c
-> > @@ -630,6 +632,53 @@ const char *get_guest_isa_str(void)
-> >      return guest_isa_str;
-> >  }
-> >  
-> > +/*
-> > + * Probe whether hardware updates the PTE A/D bits by reading through an alias
-> > + * mapping whose A and D bits are clear. Observing A set, even by a speculative
-> > + * access, implies Svadu, as Svade only allows A to be set by software.
-> > + *
-> > + * Under Svade, the read raises a page fault instead, so use the extable to
-> > + * handle it.
-> 
-> This is an internal detail, which can be covered by an internal comment.
-> 
-> > + */
-> > +static bool __init probe_hw_ad_update(void)
-> > +{
-> > +    vaddr_t va = FIXMAP_ADDR(FIX_MISC);
-> > +    pte_t *entry = &xen_fixmap[FIX_MISC];
-> > +    bool a_set = false;
-> > +
-> > +    ASSERT(!pte_is_valid(*entry));
-> > +
-> > +    /*
-> > +     * set_fixmap() can't be used, as pt_update_entry() always sets A and D.
-> > +     *
-> > +     * A and D belong to the PTE, not to the page, so a new PTE with A and D
-> > +     * clear can point to any RAM page, whatever its other mappings. Use the
-> > +     * first page of the Xen image, and map it read-only so that Xen can't be
-> > +     * corrupted through this alias.
-> 
-> The function comment is mostly ok, but this one is misleading, not least
-> because it talks about corruption despite this being a read operation. 
-> All you need to say here is:
-> 
-> /* Opencode set_fixmap() to intentionally leave A/D clear. */
-> 
-> 
-> > +     */
-> > +    write_pte(entry, pte_from_mfn(maddr_to_mfn(virt_to_maddr(_start)),
-> 
-> pte_from_mfn(virt_to_mfn(_start))
-I didn't use that, as it would require adding
-```
-    /* Override macros from asm/page.h to make them work with mfn_t */
-    #undef virt_to_mfn
-    #define virt_to_mfn(v) _mfn(__virt_to_mfn(v))
-```
-as other archs do. But if you think it's worth it for a single usage, then
-I could do it.
+On 28/10/2026 2:15 pm, Jan Beulich wrote:
+> On 28.10.2026 13:41, Andrew Cooper wrote:
+>> These two functions are just fls() expressions in disguise.  Furthermore,
+>> GCC-12 at least won't const-propagate get_order_from_pages() with an input of
+>> 3 or above, which covers most of the cases it gets used for.
+>>
+>> Rewrite them, and provide some self testing.
+>>
+>> Interesting, unless they are always_inline, GCC has a habit of out-of-lining
+>> them even when inlining would have been a win.  I expect this is to do with
+>> the fls() functions being superficially more complex.
+>>
+>> No functional change.
+>>
+>> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+>> ---
+>> CC: Anthony PERARD <anthony.perard@vates.tech>
+>> CC: Michal Orzel <michal.orzel@amd.com>
+>> CC: Jan Beulich <jbeulich@suse.com>
+>> CC: Julien Grall <julien@xen.org>
+>> CC: Roger Pau Monné <roger@xenproject.org>
+>> CC: Stefano Stabellini <sstabellini@kernel.org>
+>>
+>> https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2999078934
+>>
+>> I think paddr_t is the wrong type to be using in get_order_from_bytes(), and
+>> so really is fls64().
+> What other parameter type would you suggest? size_t is suitable only to express
+> virtual address region extents.
 
-> 
-> > +                                  PTE_VALID | PTE_READABLE));
-> > +    flush_tlb_one_local(va);
-> > +
-> 
-> /* Read from the alias, handling pagefault */
-Will apply that in v11.
-> 
-> > +    asm_inline goto (
-> > +        "1: lw zero, 0(%[va])\n"
-> > +        ASM_EXTABLE(1b, %l[out])
-> > +        :
-> > +        : [va] "r" (va)
-> > +        : "memory"
-> > +        : out );
-> > +
-> > +    /* Order the load, and so its A bit update, before reading the PTE */
-> 
-> /* Check to see if hardware set A. */
-It doesn't explain the fence, but mine doesn't either. If you think it
-doesn't matter, then I will use what you propose in v11.
-> 
-> > +    RISCV_FENCE(r, r);
-> > +    a_set = read_pte(entry).pte & PTE_ACCESSED;
-> > +
-> > + out:
-> 
-> It's better to name this label 'fault' because that's what happened to
-> use it.
-> 
-> What happens if you neither fault, and A doesn't get set?  Right now
-> you'll report Svade despite there being no fault.
-I don't know if such a case is allowed by the spec, but afaiu, and we
-talked a lot about that with Jan B and Oleksii, if we don't fault then
-we should report Svade.
-> 
-> You might or might not care to cover this case; that's up to the RISC-V
-> maintainers as to how likely it is to encounter in real life.
-I'm waiting for Jan B's and Oleksii's opinion on that point.
-> 
-> But, if you do want to handle it, then you want something like
-> 
->     asm goto (...);
-> 
->     if ( 0 )
->     {
->     fault:
->         got_fault = true;
->     }
-> 
->     ...
-> 
->     if ( !got_fault && !a_set )
->         panic("Neither Svade nor Svadu !?!\n");
-> 
-> 
-> The if (0) is a bit ugly but it's the only way to avoid needing a second
-> label.  
-> 
-> > +    write_pte(entry, (pte_t){});
-> > +    flush_tlb_one_local(va);
-> > +
-> > +    return a_set;
-> > +}
-> > +
-> >  void __init riscv_fill_hwcap(void)
-> >  {
-> >      unsigned int i;
-> > @@ -674,6 +723,28 @@ void __init riscv_fill_hwcap(void)
-> >                 "Zihintpause unavailable: cpu_relax() gives the CPU no hint; "
-> >                 "wire up this platform's pause equivalent in cpu_relax()\n");
-> >  
-> > +    /*
-> > +     * The privileged spec allows exactly two schemes for updating the PTE A
-> > +     * and D bits:
-> > +     *  1) hardware sets them on access and on write;
-> > +     *  2) accessing a page whose A and/or D bit is clear raises a page fault,
-> > +     *     so that software can set them (ratified as Svade).
-> > +     *
-> > +     * Every implementation uses one of them, but may predate the extensions
-> > +     * and advertise neither. In that case, trust the hardware probe.
-> > +     */
-> > +    if ( !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svade) &&
-> > +         !riscv_isa_extension_available(NULL, RISCV_ISA_EXT_svadu) )
-> > +    {
-> > +        bool hw_update = probe_hw_ad_update();
-> > +
-> > +        __set_bit(hw_update ? RISCV_ISA_EXT_svadu : RISCV_ISA_EXT_svade,
-> > +                  riscv_isa);
-> > +        printk(XENLOG_WARNING
-> > +               "Device tree advertises neither Svade nor Svadu, probed %s: add it to \"riscv,isa\"\n",
-> > +               hw_update ? "svadu" : "svade");
-> 
-> This is overly verbose, including details that absolutely shouldn't be
-> the boot log.
-> 
-> "Neither Svade nor Svadu in Device Tree - probed as %s\n"
-I agree with Jan on the point that it doesn't give any hint to the user.
-What do you think of this shorter version:
-"Svade/Svadu missing from \"riscv,isa\" - probed as %s\n"
+uint64_t directly.
 
--- 
-Baptiste Le Duc <baptiste.le-duc@vates.tech>
+>
+>>  I could add fls_g() which would be slightly nicer on
+>> builds where paddr_t != uint64_t.
+> We have ffs_g(), so adding fls_g() would only seem natural. But see also below.
+> Either form:
+> Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+Thanks.
+
+>
+>> --- a/xen/include/xen/mm.h
+>> +++ b/xen/include/xen/mm.h
+>> @@ -530,26 +530,16 @@ page_list_splice(struct page_list_head *list, struct page_list_head *head)
+>>      list_for_each_entry_safe_reverse(pos, tmp, head, list)
+>>  #endif
+>>  
+>> -static inline unsigned int get_order_from_bytes(paddr_t size)
+>> +static always_inline unsigned int get_order_from_bytes(paddr_t size)
+>>  {
+>> -    unsigned int order;
+>> -
+>>      size = (size - 1) >> PAGE_SHIFT;
+>> -    for ( order = 0; size; order++ )
+>> -        size >>= 1;
+>>  
+>> -    return order;
+>> +    return fls64(size);
+>>  }
+> Along the lines of what you do below, perhaps simply
+>
+>     return fls_g(PFN_DOWN(size - 1));
+>
+> (and nothing else in the function body)? And then even
+>
+>     return flsl(PFN_DOWN(size - 1));
+>
+> (eliminating the immediate need for fls_g())?
+
+Neither of these are quite correct.  fls64() can't be downgraded to
+flsl(), as it would truncate the input on 32bit builds of Xen.
+
+If using fls_g(), you need to modify size absent of type promotion,
+which is why I left the expression broken out in that way.  (I did
+actually do fls_g() first, then remove it to shrink the patch.)
+
+I think for now I'll go for the patch as-is.  Any change along these
+lines want to be separate anyway.
+
+~Andrew
 
