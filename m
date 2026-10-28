@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E73F4606A320
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:31:00 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 6E978606A31A
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:31:02 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=yM+K2gDh
-Received: from list by lists.xenproject.org with outflank-mailman.1463800.1674646 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=R1Kya5KS
+Received: from list by lists.xenproject.org with outflank-mailman.1463792.1674613 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD6U-0006HG-Kd; Wed, 28 Oct 2026 23:30:46 +0000
+	id 1xMD6R-0005Pu-G1; Wed, 28 Oct 2026 23:30:43 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463800.1674646; Wed, 28 Oct 2026 23:30:46 +0000
+Received: by outflank-mailman (output) from mailman id 1463792.1674613; Wed, 28 Oct 2026 23:30:43 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD6T-0006En-Vk; Wed, 28 Oct 2026 23:30:45 +0000
-Received: by outflank-mailman (input) for mailman id 1463800;
- Wed, 28 Oct 2026 23:30:37 +0000
+	id 1xMD6Q-0005NJ-Qs; Wed, 28 Oct 2026 23:30:42 +0000
+Received: by outflank-mailman (input) for mailman id 1463792;
+ Wed, 28 Oct 2026 23:30:36 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xMD6L-00049I-4t
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:30:37 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMD6K-00048M-Rj
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:30:36 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMD6L-00000000pQN-15gm;
- Wed, 28 Oct 2026 23:30:37 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMD6K-00000000pP8-41Eh;
+ Wed, 28 Oct 2026 23:30:36 +0000
 Received: from [217.155.165.12] (helo=Mac.fritz.box.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMCjl-00000001KpM-0PPR;
- Wed, 28 Oct 2026 23:07:17 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCjL-00000001KpM-1nmm;
+ Wed, 28 Oct 2026 23:06:51 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,19 +41,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=FlX8i68BurZZbddP5JFg/suxuQm3LKHJ87QfUKq0fho=; b=yM+K2gDhBTn33JbARZDS88dTNx
-	/5uNKqrJ5BPkZtu6t+I8TYTpKDkJaCPVrU9PC7xKEb9T7e3rJ+n/GozNMw7juvP6RtjJU8LCWlK3e
-	teSax+YVOY2/wI3pK7he0+Ea2otncKOX0Rhdrt48l8HF/1QqU3iijr1Wdotkq1BrmI3Y=;
+	bh=nAVXITYKBWjP/mczkyb/Slf4KhG5mPyW4p/IRHHh7AM=; b=R1Kya5KSrFacKoY00DDWtzx7bW
+	tAmkAY/EoompgfcR81/oNuur1sy93tUAFg1v9rtTX2ICqqCAZ/obLR+ZAcAb3L/YGwVUf8hzKUG2J
+	rgHAJZq9Csw7I7IxpT4smNVAuHkk9kmTWW2i3ZJshS84nXrLoloW4t6W7bra2spvmbaI=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Alejandro Vallejo <alejandro.vallejo@cloud.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v5 39/45] x86/emulator: Refactor FXSAVE_AREA to use wrappers
-Date: Wed, 28 Oct 2026 23:05:53 +0000
-Message-ID: <20261028-asi-hvm-v5-39-13b908e0df0b@xenproject.org>
+Subject: [PATCH v5 15/45] x86/mm: let Xen's page-table walker operate on a given root
+Date: Wed, 28 Oct 2026 23:05:29 +0000
+Message-ID: <20261028-asi-hvm-v5-15-13b908e0df0b@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
 References: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
@@ -67,140 +66,275 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Alejandro Vallejo <alejandro.vallejo@cloud.com>
+map_pages_to_xen() and modify_xen_mappings() maintain Xen's own
+mappings, walking from idle_pg_table, whose Xen slots every other root
+page-table copies.  A later patch introduces a second, sparse directmap
+hierarchy: page tables for the directmap virtual address range that some
+guest contexts use in place of idle_pg_table's.  It needs the same
+maintenance at the same virtual addresses.
 
-The FXSAVE/FXRSTOR emulation scratch buffer is the calling vCPU's own
-XSAVE area, reached today through a raw pointer dereference.  Route it
-through the VCPU_MAP_XSAVE_AREA()/VCPU_UNMAP_XSAVE_AREA() seam
-instead, so the buffer keeps working when guest XSAVE areas move
-behind per-vCPU mappings.  This path always operates on `current`, for
-which the map has a fastpath; the unmap is a no-op outside Xen builds.
+Give virt_to_xen_l{3,2,1}e() the L4 to walk from, and move the bodies of
+map_pages_to_xen() and modify_xen_mappings() into map_pages_in() and
+modify_mappings_in(), which take the root as well.  The public functions
+pass idle_pg_table.  The EFI runtime-services page-tables mirror
+idle_pg_table's L4 entries only, so a newly allocated L3 is propagated
+to them only when the root is idle_pg_table.
 
-The macro pair is named MAP_FXSAVE_AREA()/UNMAP_FXSAVE_AREA() rather
-than keeping the bare FXSAVE_AREA name, so that the mapping operation
-is visible at the use sites.
+map_pages_in() and modify_mappings_in() free page-table pages through
+free_pagetable_in(), which takes the root too and for now only calls
+free_xen_pagetable().
 
-blk_fxsave() saves directly into the caller's buffer when it is large
-enough, so it needs a second variable: the save destination and the
-mapped area are not the same pointer, and only the latter may be
-handed to the unmap.
+TLB flushing is unaffected: flushes are by virtual address and go to
+every online CPU, which covers both hierarchies.
 
-Signed-off-by: Alejandro Vallejo <alejandro.vallejo@cloud.com>
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-5-5
+No functional change.
+
+Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
-
 ---
-Revived from "x86: Address Space Isolation FPU preparations" v3 patch
-08/12 (<20250110132823.24348-9-alejandro.vallejo@cloud.com>, Acked-by
-Jan Beulich modulo the rename below; no v4 was ever posted).
-
 Changes in v5:
+- Free page-table pages through free_pagetable_in(), for now a plain
+  wrapper, split out of "x86/mm: build and maintain a sparse view of the
+  directmap".
+
+Changes in v4:
+- Message: name the second hierarchy as sparse; flushes reach every CPU
+  (Roger).
+
+Changes in v3:
 - New in this version.
-
-Changes since the previously posted version:
- - Renamed FXSAVE_AREA to MAP_FXSAVE_AREA(), as requested by Jan
-   Beulich on the original thread ("the existing macro better would be
-   adjusted to become MAP_FXSAVE_AREA()"), making the map operation
-   visible at the use sites.
- - Introduced the separate save-destination variable in blk_fxsave().
-   The original unmapped `fxsr` after that variable had been
-   repointed at the caller's buffer, so the unmap received a pointer
-   that was never mapped.  Harmless while the unmap was a stub, but a
-   latent bug, and exactly the class of mistake Jan predicted in the
-   message quoted above when he objected to the mapping being
-   invisible at the use sites.
- - Reworded the commit message.
- - Unmap before raising #GP for a reserved MXCSR bit in blk_fxrstor:
-   generate_exception_if() leaves through the done: label, past the
-   unmap.
 ---
- xen/arch/x86/x86_emulate/blk.c | 36 +++++++++++++++++++++++-----------
- 1 file changed, 25 insertions(+), 11 deletions(-)
+ xen/arch/x86/mm.c | 78 ++++++++++++++++++++++++++++++++++-------------
+ 1 file changed, 56 insertions(+), 22 deletions(-)
 
-diff --git a/xen/arch/x86/x86_emulate/blk.c b/xen/arch/x86/x86_emulate/blk.c
-index 9fddf649ee..b3055c8084 100644
---- a/xen/arch/x86/x86_emulate/blk.c
-+++ b/xen/arch/x86/x86_emulate/blk.c
-@@ -11,9 +11,12 @@
-     !defined(X86EMUL_NO_SIMD)
- # ifdef __XEN__
- #  include <asm/xstate.h>
--#  define FXSAVE_AREA ((void *)&current->arch.xsave_area->fpu_sse)
-+/* Has a fastpath for `current`, so there's no actual map */
-+#  define MAP_FXSAVE_AREA() ((void *)VCPU_MAP_XSAVE_AREA(current))
-+#  define UNMAP_FXSAVE_AREA(x) VCPU_UNMAP_XSAVE_AREA(current, x)
- # else
--#  define FXSAVE_AREA get_fpu_save_area()
-+#  define MAP_FXSAVE_AREA() get_fpu_save_area()
-+#  define UNMAP_FXSAVE_AREA(x) ((void)(x))
- # endif
- #endif
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 6e3b1c4c7d..4bfb690017 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -5230,13 +5230,14 @@ static DEFINE_SPINLOCK(map_pgdir_lock);
  
-@@ -254,7 +257,7 @@ int x86_emul_blk(
+ /*
+  * For virt_to_xen_lXe() functions, they take a linear address and return a
+- * pointer to Xen's LX entry. Caller needs to unmap the pointer.
++ * pointer to Xen's LX entry in the page-table hierarchy rooted at @root
++ * (idle_pg_table for Xen's own mappings).  Caller needs to unmap the pointer.
+  */
+-static l3_pgentry_t *virt_to_xen_l3e(unsigned long v)
++static l3_pgentry_t *virt_to_xen_l3e(l4_pgentry_t *root, unsigned long v)
+ {
+     l4_pgentry_t *pl4e;
  
-     case blk_fxrstor:
+-    pl4e = &idle_pg_table[l4_table_offset(v)];
++    pl4e = &root[l4_table_offset(v)];
+     if ( !(l4e_get_flags(*pl4e) & _PAGE_PRESENT) )
      {
--        struct x86_fxsr *fxsr = FXSAVE_AREA;
-+        struct x86_fxsr *fxsr = MAP_FXSAVE_AREA();
+         bool locking = system_state > SYS_STATE_boot;
+@@ -5252,7 +5253,8 @@ static l3_pgentry_t *virt_to_xen_l3e(unsigned long v)
+             l4_pgentry_t l4e = l4e_from_mfn(l3mfn, __PAGE_HYPERVISOR);
  
-         ASSERT(!data);
-         ASSERT(bytes == sizeof(*fxsr));
-@@ -277,18 +280,26 @@ int x86_emul_blk(
-                               (unsigned int)offsetof(struct x86_fxsr, rsvd)));
-         memset(fxsr->rsvd, 0, sizeof(*fxsr) - offsetof(struct x86_fxsr, rsvd));
+             l4e_write(pl4e, l4e);
+-            efi_update_l4_pgtable(l4_table_offset(v), l4e);
++            if ( root == idle_pg_table )
++                efi_update_l4_pgtable(l4_table_offset(v), l4e);
+             l3mfn = INVALID_MFN;
+         }
+         if ( locking )
+@@ -5263,11 +5265,11 @@ static l3_pgentry_t *virt_to_xen_l3e(unsigned long v)
+     return map_l3t_from_l4e(*pl4e) + l3_table_offset(v);
+ }
  
--        generate_exception_if(fxsr->mxcsr & ~mxcsr_mask, X86_EXC_GP, 0);
-+        if ( fxsr->mxcsr & ~mxcsr_mask )
-+        {
-+            UNMAP_FXSAVE_AREA(fxsr);
-+            generate_exception(X86_EXC_GP, 0);
-+        }
+-static l2_pgentry_t *virt_to_xen_l2e(unsigned long v)
++static l2_pgentry_t *virt_to_xen_l2e(l4_pgentry_t *root, unsigned long v)
+ {
+     l3_pgentry_t *pl3e, l3e;
  
-         if ( s->rex_prefix & REX_W )
-             asm volatile ( "fxrstorq %0" :: "m" (*fxsr) );
-         else
-             asm volatile ( "fxrstor %0" :: "m" (*fxsr) );
+-    pl3e = virt_to_xen_l3e(v);
++    pl3e = virt_to_xen_l3e(root, v);
+     if ( !pl3e )
+         return NULL;
+ 
+@@ -5301,11 +5303,11 @@ static l2_pgentry_t *virt_to_xen_l2e(unsigned long v)
+     return map_l2t_from_l3e(l3e) + l2_table_offset(v);
+ }
+ 
+-static l1_pgentry_t *virt_to_xen_l1e(unsigned long v)
++static l1_pgentry_t *virt_to_xen_l1e(l4_pgentry_t *root, unsigned long v)
+ {
+     l2_pgentry_t *pl2e, l2e;
+ 
+-    pl2e = virt_to_xen_l2e(v);
++    pl2e = virt_to_xen_l2e(root, v);
+     if ( !pl2e )
+         return NULL;
+ 
+@@ -5381,7 +5383,7 @@ mfn_t xen_map_to_mfn(unsigned long va)
+     bool locking = system_state > SYS_STATE_boot;
+     unsigned int l2_offset = l2_table_offset(va);
+     unsigned int l1_offset = l1_table_offset(va);
+-    const l3_pgentry_t *pl3e = virt_to_xen_l3e(va);
++    const l3_pgentry_t *pl3e = virt_to_xen_l3e(idle_pg_table, va);
+     const l2_pgentry_t *pl2e = NULL;
+     const l1_pgentry_t *pl1e = NULL;
+     struct page_info *l3page;
+@@ -5421,7 +5423,21 @@ mfn_t xen_map_to_mfn(unsigned long va)
+     return ret;
+ }
+ 
+-int map_pages_to_xen(
++/*
++ * Free a page-table page that the hierarchy rooted at @root has stopped
++ * using.
++ */
++static void free_pagetable_in(const l4_pgentry_t *root, mfn_t mfn)
++{
++    free_xen_pagetable(mfn);
++}
 +
-+        UNMAP_FXSAVE_AREA(fxsr);
++/*
++ * map_pages_to_xen() in the hierarchy rooted at @root: idle_pg_table's, or
++ * another hierarchy sharing its virtual addresses.
++ */
++static int map_pages_in(
++    l4_pgentry_t *root,
+     unsigned long virt,
+     mfn_t mfn,
+     unsigned long nr_mfns,
+@@ -5472,7 +5488,7 @@ int map_pages_to_xen(
+         UNMAP_DOMAIN_PAGE(pl3e);
+         UNMAP_DOMAIN_PAGE(pl2e);
+ 
+-        pl3e = virt_to_xen_l3e(virt);
++        pl3e = virt_to_xen_l3e(root, virt);
+         if ( !pl3e )
+             goto out;
+ 
+@@ -5525,10 +5541,10 @@ int map_pages_to_xen(
+                         ol2e = l2t[i];
+                         if ( (l2e_get_flags(ol2e) & _PAGE_PRESENT) &&
+                              !(l2e_get_flags(ol2e) & _PAGE_PSE) )
+-                            free_xen_pagetable(l2e_get_mfn(ol2e));
++                            free_pagetable_in(root, l2e_get_mfn(ol2e));
+                     }
+                     unmap_domain_page(l2t);
+-                    free_xen_pagetable(l3e_get_mfn(ol3e));
++                    free_pagetable_in(root, l3e_get_mfn(ol3e));
+                 }
+             }
+ 
+@@ -5596,7 +5612,7 @@ int map_pages_to_xen(
+             free_xen_pagetable(l2mfn);
+         }
+ 
+-        pl2e = virt_to_xen_l2e(virt);
++        pl2e = virt_to_xen_l2e(root, virt);
+         if ( !pl2e )
+             goto out;
+ 
+@@ -5626,7 +5642,7 @@ int map_pages_to_xen(
+                         flush_flags(l1e_get_flags(l1t[i]));
+                     flush_area(virt, flush_flags);
+                     unmap_domain_page(l1t);
+-                    free_xen_pagetable(l2e_get_mfn(ol2e));
++                    free_pagetable_in(root, l2e_get_mfn(ol2e));
+                 }
+             }
+ 
+@@ -5641,7 +5657,7 @@ int map_pages_to_xen(
+             /* Normal page mapping. */
+             if ( !(l2e_get_flags(*pl2e) & _PAGE_PRESENT) )
+             {
+-                pl1e = virt_to_xen_l1e(virt);
++                pl1e = virt_to_xen_l1e(root, virt);
+                 if ( pl1e == NULL )
+                     goto out;
+             }
+@@ -5758,7 +5774,7 @@ int map_pages_to_xen(
+                     flush_area(virt - PAGE_SIZE,
+                                FLUSH_TLB_GLOBAL |
+                                FLUSH_ORDER(PAGETABLE_ORDER));
+-                    free_xen_pagetable(l2e_get_mfn(ol2e));
++                    free_pagetable_in(root, l2e_get_mfn(ol2e));
+                 }
+                 else if ( locking )
+                     spin_unlock(&map_pgdir_lock);
+@@ -5805,7 +5821,7 @@ int map_pages_to_xen(
+                 flush_area(virt - PAGE_SIZE,
+                            FLUSH_TLB_GLOBAL |
+                            FLUSH_ORDER(2*PAGETABLE_ORDER));
+-                free_xen_pagetable(l3e_get_mfn(ol3e));
++                free_pagetable_in(root, l3e_get_mfn(ol3e));
+             }
+             else if ( locking )
+                 spin_unlock(&map_pgdir_lock);
+@@ -5826,6 +5842,15 @@ int map_pages_to_xen(
+     return rc;
+ }
+ 
++int map_pages_to_xen(
++    unsigned long virt,
++    mfn_t mfn,
++    unsigned long nr_mfns,
++    pte_attr_t flags)
++{
++    return map_pages_in(idle_pg_table, virt, mfn, nr_mfns, flags);
++}
 +
-         break;
-     }
+ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+ {
+     return map_pages_to_xen(virt, INVALID_MFN, nr_mfns, MAP_SMALL_PAGES);
+@@ -5842,8 +5867,12 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+  * flags are ignored.
+  *
+  * It is an error to call with present flags over an unpopulated range.
++ *
++ * modify_mappings_in() does so in the hierarchy rooted at @root, as
++ * map_pages_in() does.
+  */
+-int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
++static int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
++                              unsigned long e, pte_attr_t nf)
+ {
+     bool locking = system_state > SYS_STATE_boot;
+     l3_pgentry_t *pl3e = NULL;
+@@ -5870,7 +5899,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
+         UNMAP_DOMAIN_PAGE(pl2e);
+         UNMAP_DOMAIN_PAGE(pl3e);
  
-     case blk_fxsave:
-     {
--        struct x86_fxsr *fxsr = FXSAVE_AREA;
-+        struct x86_fxsr *fxsr = MAP_FXSAVE_AREA();
-+        struct x86_fxsr *dst = fxsr;
+-        pl3e = virt_to_xen_l3e(v);
++        pl3e = virt_to_xen_l3e(root, v);
+         if ( !pl3e )
+             goto out;
  
-         ASSERT(!data);
-         ASSERT(bytes == sizeof(*fxsr));
-@@ -296,17 +307,20 @@ int x86_emul_blk(
+@@ -6053,7 +6082,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
+                 if ( locking )
+                     spin_unlock(&map_pgdir_lock);
+                 flush_area(NULL, FLUSH_TLB_GLOBAL); /* flush before free */
+-                free_xen_pagetable(l1mfn);
++                free_pagetable_in(root, l1mfn);
+             }
+             else if ( locking )
+                 spin_unlock(&map_pgdir_lock);
+@@ -6097,7 +6126,7 @@ int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
+                 if ( locking )
+                     spin_unlock(&map_pgdir_lock);
+                 flush_area(NULL, FLUSH_TLB_GLOBAL); /* flush before free */
+-                free_xen_pagetable(l2mfn);
++                free_pagetable_in(root, l2mfn);
+             }
+             else if ( locking )
+                 spin_unlock(&map_pgdir_lock);
+@@ -6121,6 +6150,11 @@ int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
  
-         if ( s->op_bytes < sizeof(*fxsr) )
-             /* Don't chance consuming uninitialized data. */
--            memset(fxsr, 0, s->op_bytes);
-+            memset(dst, 0, s->op_bytes);
-         else
--            fxsr = ptr;
-+            dst = ptr;
+ #undef flush_area
  
-         if ( s->rex_prefix & REX_W )
--            asm volatile ( "fxsaveq %0" : "=m" (*fxsr) );
-+            asm volatile ( "fxsaveq %0" : "=m" (*dst) );
-         else
--            asm volatile ( "fxsave %0" : "=m" (*fxsr) );
-+            asm volatile ( "fxsave %0" : "=m" (*dst) );
++int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
++{
++    return modify_mappings_in(idle_pg_table, s, e, nf);
++}
 +
-+        if ( dst != ptr ) /* i.e. s->op_bytes < sizeof(*fxsr) */
-+            memcpy(ptr, dst, s->op_bytes);
-+
-+        UNMAP_FXSAVE_AREA(fxsr);
- 
--        if ( fxsr != ptr ) /* i.e. s->op_bytes < sizeof(*fxsr) */
--            memcpy(ptr, fxsr, s->op_bytes);
-         break;
-     }
- 
+ int destroy_xen_mappings(unsigned long s, unsigned long e)
+ {
+     return modify_xen_mappings(s, e, _PAGE_NONE);
 -- 
 2.56.0
 
