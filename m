@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E31D6606A31C
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:07:05 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1EA6B606A31D
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:07:06 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=IICBVG0E
-Received: from list by lists.xenproject.org with outflank-mailman.1463717.1674519 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=1CrRkHxt
+Received: from list by lists.xenproject.org with outflank-mailman.1463713.1674482 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMCjG-0003rA-0z; Wed, 28 Oct 2026 23:06:46 +0000
+	id 1xMCjB-0002y9-1k; Wed, 28 Oct 2026 23:06:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463717.1674519; Wed, 28 Oct 2026 23:06:45 +0000
+Received: by outflank-mailman (output) from mailman id 1463713.1674482; Wed, 28 Oct 2026 23:06:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMCjF-0003qy-TW; Wed, 28 Oct 2026 23:06:45 +0000
-Received: by outflank-mailman (input) for mailman id 1463717;
- Wed, 28 Oct 2026 23:06:44 +0000
+	id 1xMCjA-0002y2-V2; Wed, 28 Oct 2026 23:06:40 +0000
+Received: by outflank-mailman (input) for mailman id 1463713;
+ Wed, 28 Oct 2026 23:06:40 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xMCjE-0003YN-7j
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:06:44 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCj9-0002cZ-SX
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:06:39 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMCjE-00000000oza-07SU;
- Wed, 28 Oct 2026 23:06:43 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCj9-00000000oz4-24kV;
+ Wed, 28 Oct 2026 23:06:39 +0000
 Received: from [217.155.165.12] (helo=Mac.fritz.box.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMCjD-00000001KpM-2WG6;
- Wed, 28 Oct 2026 23:06:43 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCj9-00000001KpM-0CAZ;
+ Wed, 28 Oct 2026 23:06:39 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,23 +41,19 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
 	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=GsQusdW8CwK9lWg0WTbN8UcrqKWkfEhBlrYNLpqfu3M=; b=IICBVG0ELKSsBb4MGMM8L7pwAH
-	QDGax6zM1fGBZf/ZrnaZLuWLNYwRromMQr3L4BLXFe6KgSAStx5ea25KYB/7pP6l6s1oHJpbQdRSZ
-	Zm25VH/VOjOqzpW8On5GkP6SRc5x6RGEypw+97Gl/PCWfpHWtjlGPlxwxi/eZxMoSXrs=;
+	bh=o3zz2HkxCeoJz+EVitDmyu1O+pr0HXQj+R59SjSZJuI=; b=1CrRkHxtlC5db9Y6Jp/CQLQF6p
+	Pb/EgFEv33QLhw4VjN/tUrbo9aoHtGOlU4zZa9zf5iui5bXdXXxLowdFabshcU6gUY/cLE2VYJdDj
+	j1gRli7cGJUCRRhIGeCCE54ivb4G+2nPPwZi2JnvcPL3cFcX0ToBQq5NQ4xndIcGldVM=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
 	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v5 07/45] x86/spec-ctrl: introduce Address Space Isolation command line option
-Date: Wed, 28 Oct 2026 23:05:21 +0000
-Message-ID: <20261028-asi-hvm-v5-7-13b908e0df0b@xenproject.org>
+Subject: [PATCH v5 03/45] x86/mm: purge unneeded destroy_perdomain_mapping()
+Date: Wed, 28 Oct 2026 23:05:17 +0000
+Message-ID: <20261028-asi-hvm-v5-3-13b908e0df0b@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
 References: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
@@ -74,270 +70,117 @@ X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 
 From: Roger Pau Monné <roger.pau@citrix.com>
 
-Introduce the `asi=` command line option, and the opt_vcpu_pt_hvm and
-opt_vcpu_pt_hwdom knobs plus the per-domain d->arch.asi.vcpu_pt setting
-they control.  The option is introduced ahead of the functionality it
-enables, so that the newly added code can be keyed on it from the start;
-all knobs currently default to off, and any use of the option, `asi=0`
-included, adds a boot-time warning that the feature is not functional
-and is meant for development only.
+We want to change per-domain mappings to be per-vCPU mappings.  In
+preparation for that, we want to arrange that
+destroy_perdomain_mapping() work either with a single perdomain area,
+or with a per-vCPU perdomain area.
 
-The mechanisms this option controls apply to HVM domains: an HVM vCPU
-already runs on its own monitor table, so giving each vCPU its own
-per-domain area needs no work at context switch.  d->arch.asi.vcpu_pt
-is therefore only ever set for HVM domains, a PVH hardware domain
-included; PV domains, a PV hardware domain included, are unaffected.
+There are two calls made from domain-scoped contexts; both calls turn
+out to be unnecessary:
 
-Besides the plain boolean, `pv=`, `hvm=` and `dom0=` select the features
-for PV domains or HVM domains other than the hardware domain, or for the
-hardware domain, PV or PVH.  None of the features applies to PV domains,
-so `pv=` has no effect beyond a boot-log line saying it is ignored, and
-`dom0=` acts on a PVH hardware domain only.
+- destroy_perdomain_mapping() is not logically the undo of
+  create_perdomain_mapping(), as the name and its use in
+  hvm_domain_initialise() suggest.  create_ allocates a per-domain L3,
+  but destroy_ tears down mappings without freeing it; and since the
+  call here passes nr == 0, it tears down nothing at all.  The
+  per-domain L3 page is actually freed by free_perdomain_mappings(),
+  which hvm_domain_initialise()'s caller, arch_domain_create(),
+  already invokes on its failure path.
 
-The boot log gains "ASI features for ..." lines for Dom0 and HVM
-domains, so hardware-domain-only configurations remain visible.
+- The call in pv_domain_destroy() is redundant at both of its call
+  sites.  arch_domain_destroy() unconditionally calls
+  free_perdomain_mappings(), which tears down the same entries and
+  additionally frees the page-table structures; and the other caller,
+  the error path of pv_domain_initialise(), returns into
+  arch_domain_create()'s failure path, which invokes
+  free_perdomain_mappings() as well.
 
-Further per-mechanism tokens arrive with their mechanisms in later
-patches.
+One vCPU-scoped caller, pv_destroy_gdt_ldt_l1tab(), is covered the
+same way: a vCPU is only ever destroyed together with its domain, or
+on the failure path of creating it, and both routes end in
+free_perdomain_mappings(); the GDT/LDT slots hold no area-owned pages,
+so there is nothing else for the call to do.  While we're getting rid
+of unnecessary callers, drop this one too.
+
+Note that free_compat_arg_xlat() keeps its explicit teardown:
+switch_compat() calls it on the failure path.  While in practice most
+toolstacks will immediately destroy the domain, in theory a toolstack
+could let it live on as a 64-bit guest.  Release the resources
+immediately rather than waiting for domain destruction.
 
 Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
+Assisted-by: Claude Code:claude-fable-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 ---
-Changes in v5:
-- Rename opt_pvh_vcpu_pt_hwdom back to opt_vcpu_pt_hwdom: that it acts
-  on a PVH hardware domain only is a limitation of the implementation,
-  not of the design (Roger).
-- pv= logs that it is ignored (Roger).
-- parse_asi() adds the development warning, so any use of asi= gives
-  it and later sub-options need not extend a condition (Roger).
-- print_details(): IS_ENABLED(CONFIG_HVM) rather than #ifdef (Roger).
-
 Changes in v4:
-- Docs: "domains" throughout, not "guests" (Roger).
-- Group the per-domain settings as one-bit fields of d->arch.asi
-  (Roger).
-- Rename opt_vcpu_pt_hwdom to opt_pvh_vcpu_pt_hwdom: it acts on a PVH
-  hardware domain only (Jan).
-- parse_asi(): break in the success branch and fall through to
-  default:, rather than a default: label after an else (MISRA C:2012
-  Rule 16.2; Jan).
-- Message: enabling a knob adds a boot-time warning; it does not taint
-  (Roger).
-- Add the pv= and dom0= sub-options here, beside hvm= (Roger).
+- Remove an unnecessary comment (Jan).
 
 Changes in v3:
-- HVM only: drop the PV knob and its interaction with XPTI.  vCPU-PT
-  applies to HVM domains and to a PVH hardware domain; the Dom0 boot
-  log line says None for a PV one.
+- Note that pv_domain_destroy()'s other call site, the error path of
+  pv_domain_initialise(), is covered the same way (Jan).
+- Also drop pv_destroy_gdt_ldt_l1tab(), the per-vCPU teardown call
+  (Jan), and comment on why free_compat_arg_xlat() keeps its own.  The
+  Reviewed-by tags given for the previous form are dropped.
 
 Changes in v2:
 - Added to the series
 
 Changes since the previously posted version:
-- Include the hardware domain in the development warning and the boot
-   log summary.
-- Make the opt_vcpu_pt_* knobs plain booleans preinitialised to false,
-   dropping the late -1 resolution.
-- Documentation: mention possible protection against unmitigated
-   attacks, and state that hvm= does not affect the hardware domain.
-- Rewrite the commit message.
+- Reworked the commit message to make it more clear how it fits in
+  with the larger series.  No functional change.
 ---
- docs/misc/xen-command-line.pandoc    | 29 ++++++++++
- xen/arch/x86/include/asm/domain.h    |  6 ++
- xen/arch/x86/include/asm/spec_ctrl.h |  2 +
- xen/arch/x86/spec_ctrl.c             | 87 ++++++++++++++++++++++++++++
- 4 files changed, 124 insertions(+)
+ xen/arch/x86/hvm/hvm.c   |  1 -
+ xen/arch/x86/pv/domain.c | 10 ----------
+ 2 files changed, 11 deletions(-)
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index a6f08463d1..839d06da26 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -202,6 +202,35 @@ to appropriate auditing by Xen.  Argo is disabled by default.
-     This option is disabled by default, to protect domains from a DoS by a
-     buggy or malicious other domain spamming the ring.
+diff --git a/xen/arch/x86/hvm/hvm.c b/xen/arch/x86/hvm/hvm.c
+index ef9c7cd057..6aefe91e02 100644
+--- a/xen/arch/x86/hvm/hvm.c
++++ b/xen/arch/x86/hvm/hvm.c
+@@ -730,7 +730,6 @@ int hvm_domain_initialise(struct domain *d,
+     XFREE(d->arch.hvm.irq);
+  fail0:
+     hvm_destroy_cacheattr_region_list(d);
+-    destroy_perdomain_mapping(d, PERDOMAIN_VIRT_START, 0);
+  fail:
+     hvm_domain_relinquish_resources(d);
+     XFREE(d->arch.hvm.io_handler);
+diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
+index 0c42ae58aa..28ea0742ab 100644
+--- a/xen/arch/x86/pv/domain.c
++++ b/xen/arch/x86/pv/domain.c
+@@ -319,12 +319,6 @@ static int pv_create_gdt_ldt_l1tab(struct vcpu *v)
+                                     NULL);
+ }
  
-+### asi (x86)
-+> `= List of [ <bool>, {pv,hvm,dom0}=<bool>,
-+>              vcpu-pt=<bool> | vcpu-pt=hvm=<bool> ]`
-+
-+> Default: `false`
-+
-+Offers control over whether the hypervisor will engage in Address Space
-+Isolation, by not having potentially sensitive information permanently mapped
-+in the VMM page-tables.  Using this option might avoid the need to apply
-+mitigations for certain speculative related attacks, at the cost of mapping
-+sensitive information on-demand.  It might also offer some protection against
-+unmitigated speculation-related attacks.
-+
-+The mechanisms currently implemented apply to HVM domains, including a PVH
-+hardware domain.  PV domains, including a PV hardware domain, are unaffected.
-+
-+* `pv=`, `hvm=` and `dom0=` enable the features for PV domains or HVM domains
-+  other than the hardware domain, or for the hardware domain, PV or PVH.  The
-+  plain boolean does all three: `asi=1,dom0=0` leaves the hardware domain
-+  out.  The forms naming no domain type (an un-suffixed `vcpu-pt=<bool>`)
-+  cover the hardware domain too.
-+
-+**WARNING: manual de-selection of enabled options will invalidate any
-+protection offered by the feature.  The fine grained options provided below
-+are meant to be used for debugging purposes only.**
-+
-+* `vcpu-pt` gives each vCPU its own per-domain area: the per-domain slot of
-+  each vCPU's monitor table maps a region private to that vCPU.
-+
- ### asid (x86)
- > `= <boolean>`
- 
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 212daae1f5..12f79feb42 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -474,6 +474,12 @@ struct arch_domain
-     /* Don't unconditionally inject #GP for unhandled MSRs. */
-     bool msr_relaxed;
- 
-+    /* Fine grained ASI related options. */
-+    struct {
-+        /* Give each vCPU its own per-domain area (HVM only). */
-+        bool vcpu_pt:1;
-+    } asi;
-+
-     /* Emulated devices enabled bitmap. */
-     uint32_t emulation_flags;
- } __cacheline_aligned;
-diff --git a/xen/arch/x86/include/asm/spec_ctrl.h b/xen/arch/x86/include/asm/spec_ctrl.h
-index 8f82533c41..b62229ab5d 100644
---- a/xen/arch/x86/include/asm/spec_ctrl.h
-+++ b/xen/arch/x86/include/asm/spec_ctrl.h
-@@ -87,6 +87,8 @@ extern uint8_t default_scf;
- 
- extern int8_t opt_xpti_hwdom, opt_xpti_domu;
- 
-+extern bool opt_vcpu_pt_hwdom, opt_vcpu_pt_hvm;
-+
- extern bool cpu_has_bug_l1tf;
- extern int8_t opt_pv_l1tf_hwdom, opt_pv_l1tf_domu;
- extern bool opt_bp_spec_reduce;
-diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index bc8538a56f..8797523a62 100644
---- a/xen/arch/x86/spec_ctrl.c
-+++ b/xen/arch/x86/spec_ctrl.c
-@@ -86,6 +86,10 @@ bool __ro_after_init opt_bp_spec_reduce = true;
- 
- static bool __initdata opt_ibpb_alt;
- 
-+/* Give each vCPU of an HVM domain its own per-domain area (vCPU-PT). */
-+bool __ro_after_init opt_vcpu_pt_hvm;
-+bool __ro_after_init opt_vcpu_pt_hwdom;
-+
- static int __init cf_check parse_spec_ctrl(const char *s)
+-static void pv_destroy_gdt_ldt_l1tab(struct vcpu *v)
+-{
+-    destroy_perdomain_mapping(v->domain, GDT_VIRT_START(v),
+-                              1U << GDT_LDT_VCPU_SHIFT);
+-}
+-
+ void pv_vcpu_destroy(struct vcpu *v)
  {
-     const char *ss;
-@@ -487,6 +491,80 @@ static int __init cf_check parse_pv_l1tf(const char *s)
- }
- custom_param("pv-l1tf", parse_pv_l1tf);
+     if ( is_pv_32bit_vcpu(v) )
+@@ -333,7 +327,6 @@ void pv_vcpu_destroy(struct vcpu *v)
+         release_compat_l4(v);
+     }
  
-+static int __init cf_check parse_asi(const char *s)
-+{
-+    static bool __initdata warned;
-+    const char *ss;
-+    int val, rc = 0;
-+
-+    if ( !warned )
-+    {
-+        warned = true;
-+        warning_add(
-+            "Address Space Isolation is not functional, this option is\n"
-+            "intended to be used only for development purposes.\n");
-+    }
-+
-+    /* Interpret 'asi' alone in its positive boolean form. */
-+    if ( *s == '\0' )
-+        opt_vcpu_pt_hwdom = opt_vcpu_pt_hvm = true;
-+
-+    do {
-+        ss = strchr(s, ',');
-+        if ( !ss )
-+            ss = strchr(s, '\0');
-+
-+        val = parse_bool(s, ss);
-+        switch ( val )
-+        {
-+        case 0:
-+        case 1:
-+            opt_vcpu_pt_hwdom = opt_vcpu_pt_hvm = val;
-+            break;
-+
-+        default:
-+            if ( (val = parse_boolean("pv", s, ss)) >= 0 )
-+                printk(XENLOG_WARNING
-+                       "No ASI feature applies to PV domains - ignoring 'asi=%.*s' setting\n",
-+                       (int)(ss - s), s);
-+            else if ( (val = parse_boolean("hvm", s, ss)) >= 0 )
-+                opt_vcpu_pt_hvm = val;
-+            else if ( (val = parse_boolean("dom0", s, ss)) >= 0 )
-+                opt_vcpu_pt_hwdom = val;
-+            else if ( (val = parse_boolean("vcpu-pt", s, ss)) != -1 )
-+            {
-+                switch ( val )
-+                {
-+                case 1:
-+                case 0:
-+                    opt_vcpu_pt_hwdom = opt_vcpu_pt_hvm = val;
-+                    break;
-+
-+                case -2:
-+                    s += strlen("vcpu-pt=");
-+                    if ( (val = parse_boolean("hvm", s, ss)) >= 0 )
-+                    {
-+                        opt_vcpu_pt_hvm = val;
-+                        break;
-+                    }
-+                    fallthrough;
-+                default:
-+                    rc = -EINVAL;
-+                    break;
-+                }
-+            }
-+            else if ( *s )
-+                rc = -EINVAL;
-+            break;
-+        }
-+
-+        s = ss + 1;
-+    } while ( *ss );
-+
-+    return rc;
-+}
-+custom_param("asi", parse_asi);
-+
- static void __init print_details(enum ind_thunk thunk)
+-    pv_destroy_gdt_ldt_l1tab(v);
+     XFREE(v->arch.pv.trap_ctxt);
+ }
+ 
+@@ -381,9 +374,6 @@ void pv_domain_destroy(struct domain *d)
  {
-     unsigned int _7d0 = 0, _7d2 = 0, e8b = 0, e21a = 0, e21c = 0, max = 0, tmp;
-@@ -680,6 +758,12 @@ static void __init print_details(enum ind_thunk thunk)
-            opt_pv_l1tf_hwdom ? "enabled"  : "disabled",
-            opt_pv_l1tf_domu  ? "enabled"  : "disabled");
- #endif
-+
-+    printk("  ASI features for Dom0:%s\n",
-+           opt_dom0_pvh && opt_vcpu_pt_hwdom ? " vCPU-PT" : " None");
-+    if ( IS_ENABLED(CONFIG_HVM) )
-+        printk("  ASI features for HVM VMs:%s\n",
-+               opt_vcpu_pt_hvm               ? " vCPU-PT" : " None");
- }
+     pv_l1tf_domain_destroy(d);
  
- static bool __init check_smt_enabled(void)
-@@ -1866,6 +1950,9 @@ void spec_ctrl_init_domain(struct domain *d)
-     if ( pv )
-         d->arch.pv.xpti = is_hardware_domain(d) ? opt_xpti_hwdom
-                                                 : opt_xpti_domu;
-+
-+    d->arch.asi.vcpu_pt = !pv && (is_hardware_domain(d) ? opt_vcpu_pt_hwdom
-+                                                        : opt_vcpu_pt_hvm);
- }
+-    destroy_perdomain_mapping(d, GDT_LDT_VIRT_START,
+-                              GDT_LDT_MBYTES << (20 - PAGE_SHIFT));
+-
+     XFREE(d->arch.pv.cpuidmasks);
  
- void __init init_speculation_mitigations(void)
+     FREE_XENHEAP_PAGE(d->arch.pv.gdt_ldt_l1tab);
 -- 
 2.56.0
 
