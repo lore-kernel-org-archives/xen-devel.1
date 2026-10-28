@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id BBE62606A31A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:31:37 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 36C7E606A31A
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:31:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=c7xLgDl+
-Received: from list by lists.xenproject.org with outflank-mailman.1463814.1674807 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=SDTvLHjW
+Received: from list by lists.xenproject.org with outflank-mailman.1463815.1674836 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD74-0005Gr-6N; Wed, 28 Oct 2026 23:31:22 +0000
+	id 1xMD7G-0007nL-2i; Wed, 28 Oct 2026 23:31:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463814.1674807; Wed, 28 Oct 2026 23:31:21 +0000
+Received: by outflank-mailman (output) from mailman id 1463815.1674836; Wed, 28 Oct 2026 23:31:33 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD72-0005As-9t; Wed, 28 Oct 2026 23:31:20 +0000
-Received: by outflank-mailman (input) for mailman id 1463814;
- Wed, 28 Oct 2026 23:30:37 +0000
+	id 1xMD7E-0007gm-Qp; Wed, 28 Oct 2026 23:31:32 +0000
+Received: by outflank-mailman (input) for mailman id 1463815;
+ Wed, 28 Oct 2026 23:30:42 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xMD6L-0004Ah-Oq
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:30:37 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMD6P-00055U-NC
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:30:41 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMD6L-00000000pRT-2Io0;
- Wed, 28 Oct 2026 23:30:37 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMD6K-00000000pOJ-36qj;
+ Wed, 28 Oct 2026 23:30:36 +0000
 Received: from [217.155.165.12] (helo=Mac.fritz.box.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMCjT-00000001KpM-1LPV;
- Wed, 28 Oct 2026 23:06:59 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCjN-00000001KpM-3zh4;
+ Wed, 28 Oct 2026 23:06:54 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,22 +41,22 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=Wl4nV3ZTDHnsWL9MvyITa+VNEqVOjsoYMCNqs+DR/ME=; b=c7xLgDl+sXuJFaYr/hVcrRc9ia
-	423oZM0vKVoqJgyGIbCV1Lw+P1wSXkgTRgl59PlM/DlmTQCT3fqBUWdQ/ZwClz9tmYk+Cz2raKDMG
-	qXDzb3QlXtIc1PHVGW9kE+wrWMWNFyyHUo5E90Fo1IHIQ7M41PmsdG9zWt/InvMD88Ds=;
+	bh=5bWt48oVbFgfls5ydUXDK8NsiQisFqKXCpJUHopfOnc=; b=SDTvLHjW/YSxnSJ3a96OEGrNH8
+	56YaEkp6Ix9pie1XPnaoAu/WYXDehwNiRzrU5VfXWm7Pxan/VdCBgJ1hmMAFdHQbpPCV+zUNN8Q6R
+	PCqqQhldGWeP9z3XhJwYSG4XMKWXIufzsZX3kPOLTGgq5Y6b8t6jAp0+z6U38ZDgInaQ=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
 	Anthony PERARD <anthony.perard@vates.tech>,
 	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
 	Julien Grall <julien@xen.org>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v5 22/45] x86/spec-ctrl: wire the sparse directmap view into the asi= option
-Date: Wed, 28 Oct 2026 23:05:36 +0000
-Message-ID: <20261028-asi-hvm-v5-22-13b908e0df0b@xenproject.org>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v5 17/45] x86/mm: add hooks for a sparse view of the directmap
+Date: Wed, 28 Oct 2026 23:05:31 +0000
+Message-ID: <20261028-asi-hvm-v5-17-13b908e0df0b@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
 References: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
@@ -70,372 +70,406 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Let asi= choose which domains run on the sparse view of the directmap,
-when the hypervisor is built with CONFIG_SPARSE_DIRECTMAP:
+The directmap maps all of RAM, and every root page-table carries it,
+so while any guest context runs, all guest memory is reachable from
+Xen's address space.  For ASI, guest contexts are to run on a sparse
+view of the directmap which maps only what Xen must reach through it
+at all times, leaving guest memory to transient mappings
+(map_domain_page()).
 
- * `asi` and `asi=<bool>` enable or disable the sparse view, along with
-   vCPU-PT, for every domain including the hardware domain, PV or PVH.
-   HVM domains, a PVH hardware domain included, use the sparse view
-   together with vCPU-PT, which gives them the mapcache it needs; PV
-   domains all have one.  A PV domain on the sparse view keeps its
-   domain-wide mapcache and per-domain mappings: the sparse view
-   separates it from other domains, not its vCPUs from each other.
+A later patch builds such a sparse view alongside the full directmap,
+once the boot allocator has handed its memory to the heap.  It is then
+kept in step:
 
- * `asi=hvm=<bool>`, `asi=pv=<bool>` and `asi=dom0=<bool>` do the same
-   for HVM or PV domains other than the hardware domain, or for the
-   hardware domain, whatever its type: `asi=1,dom0=0` leaves the
-   hardware domain out of ASI altogether.
+ - xenheap allocations are added, and taken out again before the pages
+   are freed.  If that fails the pages stay mapped, and are leaked with
+   a warning rather than reused;
+ - memory handed to the heap later (boot modules, .init) is taken out,
+   and is not handed over if that fails;
+ - a PV dom0's initrd, assigned to dom0 in place, is taken out;
+ - page-tables from the boot allocator, which the sparse view maps with
+   every other boot-time allocation, are taken out when idle_pg_table's
+   hierarchy frees them, and are not freed if that fails, so that the
+   sparse view never keeps a page the heap may hand out;
+ - changes to the full directmap through map_pages_to_xen() and
+   modify_xen_mappings() are mirrored.  After boot, map_pages_to_xen()
+   maps into the directmap only memory Xen keeps (stack guard and shadow
+   stack pages, firmware tables); memory hot-add maps the new range into
+   the full directmap only, so that the sparse view never needs
+   page-table pages for it.
 
- * A new `asi=directmap=<bool>` selects the sparse view for all domains,
-   as `asi=vcpu-pt=<bool>` selects vCPU-PT; `vcpu-pt=` alone leaves the
-   sparse view off.  On a hypervisor built without
-   CONFIG_SPARSE_DIRECTMAP the forms enabling all features leave the
-   sparse view off, and `directmap=` is rejected as invalid, as
-   compiled-out `spec-ctrl=` sub-options are.  A domain type the build
-   lacks is ignored, so that the sparse view is not built for nothing.
+Add a hook at each of these points, and one where the view is to be
+built; x86's are stubs in a new asm/sparse-directmap.h.  map_pages_in()
+and modify_mappings_in() are no longer static: memory hot-add calls
+map_pages_in() on idle_pg_table, and the sparse view will use both.
 
- * For now, a PV domain uses one of XPTI and the sparse view, not both.
-   Enabled explicitly, for dom0, domUs or both, XPTI takes precedence:
-   the PV domains it covers keep the full directmap, and the boot log
-   says so.  Left to its default, XPTI yields: it is disabled for the PV
-   domains using the sparse view, with a boot-log warning where it would
-   otherwise be enabled, as the sparse view does not replace it yet (it
-   still maps the xenheap and Xen's stacks).  Each domain's case is
-   settled at its creation, and again if it becomes 32-bit, which XPTI
-   does not cover: switch_compat() then puts a domain that XPTI kept off
-   the sparse view on it, with the domain-wide mapcache, which release
-   builds may not have set up for it.
+Common code gains four hooks for this, arch_heap_pages_init(),
+arch_xenheap_needs_scrub() and arch_xenheap_pages_{alloc,free}(), no-ops
+until an architecture implements them.  A failed
+arch_xenheap_pages_alloc() may have mapped part of the pages:
+alloc_xenheap_pages() then takes them out through
+arch_xenheap_pages_free(), as a free would, before freeing them, and
+leaks them if that fails too.
 
-The boot log gains a line with the directmap mode, "sparse" once a
-sparse view is configured and "full" otherwise, and the "ASI features
-for ..." lines, one for PV domUs now among them, say which domains use
-the sparse view.
+alloc_xenheap_pages() accepts pages still awaiting scrubbing
+(MEMF_no_scrub).  That is harmless while the directmap maps all memory
+anyway, but the sparse view would make such a page's contents, a dying
+domain's data for instance, reachable from every context on it until
+overwritten.  With a sparse view configured, arch_xenheap_needs_scrub()
+makes xenheap allocations scrub those pages first, as domain heap
+allocations do; clean pages need nothing extra.
+
+arch_mfns_in_directmap() says whether an MFN range is reachable through
+the directmap; it now answers for every context, so false once a sparse
+view is configured.  Its one caller, init_node_heap(), then keeps a NUMA
+node's heap metadata in the xenheap instead of carving it out of the
+node's memory through the directmap: carved out of a range handed to the
+heap, it would be left out of the sparse view, which every heap
+allocation needs it in.
+
+The hooks for now are just stubs.  No functional change.
 
 Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v5:
-- Follow "x86/spec-ctrl: introduce Address Space Isolation command line
-  option": opt_vcpu_pt_hwdom's name, the development warning in
-  parse_asi(), IS_ENABLED() in the boot log; pv= now replaces the line
-  saying it is ignored.
-
-Changes in v4:
-- Docs, comments and message: "domains" throughout, not "guests"
-  (Roger).
-- Follow the rename of opt_vcpu_pt_hwdom to opt_pvh_vcpu_pt_hwdom and
-  the move of the per-domain settings into d->arch.asi.
-- pv= and dom0= move to the patch introducing asi=, beside hvm=;
-  opt_sparse_dmap_hwdom and sparse_dmap_wanted()'s hardware-domain case
-  to the patches that add the other knobs and sparse_dmap_wanted()
-  (Roger).
-- directmap= on a build without CONFIG_SPARSE_DIRECTMAP is rejected as
-  invalid, as compiled-out spec-ctrl= sub-options are, rather than
-  ignored with a warning (Roger).
-- A PV domain that XPTI kept off the sparse view goes on it when it
-  becomes 32-bit, which ends XPTI; it used to end up with neither.
-
-Changes in v3:
-- New in this version.
+- New in this version, split out of "x86/mm: build and maintain a sparse
+  view of the directmap".
 ---
- docs/misc/xen-command-line.pandoc           |  30 +++++-
- xen/arch/x86/include/asm/sparse-directmap.h |   7 ++
- xen/arch/x86/pv/domain.c                    |  16 +++
- xen/arch/x86/spec_ctrl.c                    | 102 +++++++++++++++++---
- 4 files changed, 138 insertions(+), 17 deletions(-)
+ xen/arch/x86/include/asm/mm.h               | 12 +++++-
+ xen/arch/x86/include/asm/sparse-directmap.h | 30 +++++++++++++++
+ xen/arch/x86/mm.c                           | 30 ++++++++++++---
+ xen/arch/x86/pv/dom0_build.c                |  4 ++
+ xen/arch/x86/setup.c                        |  4 ++
+ xen/arch/x86/x86_64/mm.c                    | 10 ++++-
+ xen/common/page_alloc.c                     | 41 ++++++++++++++++++++-
+ xen/include/xen/mm.h                        | 21 +++++++++++
+ 8 files changed, 142 insertions(+), 10 deletions(-)
+ create mode 100644 xen/arch/x86/include/asm/sparse-directmap.h
 
-diff --git a/docs/misc/xen-command-line.pandoc b/docs/misc/xen-command-line.pandoc
-index 839d06da26..092c858f34 100644
---- a/docs/misc/xen-command-line.pandoc
-+++ b/docs/misc/xen-command-line.pandoc
-@@ -203,7 +203,7 @@ to appropriate auditing by Xen.  Argo is disabled by default.
-     buggy or malicious other domain spamming the ring.
+diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
+index 12d1c06c12..6264f67af4 100644
+--- a/xen/arch/x86/include/asm/mm.h
++++ b/xen/arch/x86/include/asm/mm.h
+@@ -7,6 +7,7 @@
+ #include <xen/rwlock.h>
+ #include <asm/io.h>
+ #include <asm/page.h>
++#include <asm/sparse-directmap.h>
+ #include <asm/uaccess.h>
  
- ### asi (x86)
--> `= List of [ <bool>, {pv,hvm,dom0}=<bool>,
-+> `= List of [ <bool>, {pv,hvm,dom0}=<bool>, directmap=<bool>,
- >              vcpu-pt=<bool> | vcpu-pt=hvm=<bool> ]`
+ /*
+@@ -597,6 +598,11 @@ mfn_t alloc_xen_pagetable(void);
+ void free_xen_pagetable(mfn_t mfn);
+ void *alloc_mapped_pagetable(mfn_t *pmfn);
  
- > Default: `false`
-@@ -215,14 +215,16 @@ mitigations for certain speculative related attacks, at the cost of mapping
- sensitive information on-demand.  It might also offer some protection against
- unmitigated speculation-related attacks.
- 
--The mechanisms currently implemented apply to HVM domains, including a PVH
--hardware domain.  PV domains, including a PV hardware domain, are unaffected.
-+The mechanisms currently implemented are `vcpu-pt`, for HVM domains including
-+a PVH hardware domain, and `directmap`, for all domains including the hardware
-+domain, PV or PVH.  The plain boolean enables or disables both, wherever they
-+apply.
- 
- * `pv=`, `hvm=` and `dom0=` enable the features for PV domains or HVM domains
-   other than the hardware domain, or for the hardware domain, PV or PVH.  The
-   plain boolean does all three: `asi=1,dom0=0` leaves the hardware domain
--  out.  The forms naming no domain type (an un-suffixed `vcpu-pt=<bool>`)
--  cover the hardware domain too.
-+  out.  The forms naming no domain type (an un-suffixed `vcpu-pt=<bool>`, and
-+  `directmap=<bool>`) cover the hardware domain too.
- 
- **WARNING: manual de-selection of enabled options will invalidate any
- protection offered by the feature.  The fine grained options provided below
-@@ -231,6 +233,18 @@ are meant to be used for debugging purposes only.**
- * `vcpu-pt` gives each vCPU its own per-domain area: the per-domain slot of
-   each vCPU's monitor table maps a region private to that vCPU.
- 
-+* `directmap` (only available when Xen is built with
-+  `CONFIG_SPARSE_DIRECTMAP`) runs guest contexts on a sparse view of the
-+  directmap, which maps the memory Xen needs to reach at all times (the Xen
-+  heap, Xen's own image, firmware tables), while guest memory is mapped
-+  transiently.  This selection is system-wide; `pv=`, `hvm=` and `dom0=`
-+  make it for one domain type, along with the other features.  HVM domains use
-+  the sparse view only together with `vcpu-pt`, and PV domains only without
-+  XPTI, which yields to the sparse view unless enabled explicitly (see
-+  `xpti`).  The whole-feature forms (`asi`, `asi=<bool>`, and `pv=`, `hvm=`
-+  and `dom0=`) set this too, on builds that support it; on other builds they
-+  leave it off.
++int map_pages_in(l4_pgentry_t *root, unsigned long virt, mfn_t mfn,
++                 unsigned long nr_mfns, pte_attr_t flags);
++int modify_mappings_in(l4_pgentry_t *root, unsigned long s, unsigned long e,
++                       pte_attr_t nf);
 +
- ### asid (x86)
- > `= <boolean>`
+ int __sync_local_execstate(void);
  
-@@ -3132,6 +3146,12 @@ Meltdown for all domains.
- With `dom0` and `domu` it is possible to control page table isolation
- for dom0 or guest domains only.
+ /* Arch-specific portion of memory_op hypercall. */
+@@ -657,12 +663,16 @@ void write_32bit_pse_identmap(uint32_t *l2);
  
-+With `asi`, XPTI and the sparse directmap view (`asi=directmap`) exclude each
-+other for a PV domain.  Enabled explicitly, as a whole or with `dom0` or
-+`domu`, XPTI keeps the PV domains it covers off the sparse view, and the boot
-+log says so.  Left to its default, XPTI is disabled for the PV domains using
-+the sparse view, with a boot-log warning where it would otherwise be enabled.
+ /*
+  * x86 maps part of physical memory via the directmap region.
+- * Return whether the range of MFN falls in the directmap region.
++ * Return whether the range of MFN falls in the directmap region in every
++ * context: never, with a sparse directmap view configured.
+  */
+ static inline bool arch_mfns_in_directmap(unsigned long mfn, unsigned long nr)
+ {
+     unsigned long eva = min(DIRECTMAP_VIRT_END, HYPERVISOR_VIRT_END);
+ 
++    if ( sparse_dmap_configured() )
++        return false;
 +
- ### xsave (x86)
- > `= <boolean>`
+     return (mfn + nr) <= (virt_to_mfn(eva - 1) + 1);
+ }
  
 diff --git a/xen/arch/x86/include/asm/sparse-directmap.h b/xen/arch/x86/include/asm/sparse-directmap.h
-index 2f8b94f4c1..db4df82215 100644
---- a/xen/arch/x86/include/asm/sparse-directmap.h
+new file mode 100644
+index 0000000000..53747a98ad
+--- /dev/null
 +++ b/xen/arch/x86/include/asm/sparse-directmap.h
-@@ -31,6 +31,10 @@ static inline bool sparse_dmap_configured(void)
-     return opt_sparse_dmap_pv || opt_sparse_dmap_hvm || opt_sparse_dmap_hwdom;
- }
- 
-+static inline bool sparse_dmap_pv(void)    { return opt_sparse_dmap_pv; }
-+static inline bool sparse_dmap_hvm(void)   { return opt_sparse_dmap_hvm; }
-+static inline bool sparse_dmap_hwdom(void) { return opt_sparse_dmap_hwdom; }
+@@ -0,0 +1,30 @@
++/* SPDX-License-Identifier: GPL-2.0-only */
++#ifndef X86_SPARSE_DIRECTMAP_H
++#define X86_SPARSE_DIRECTMAP_H
 +
- /* Whether a new domain of the given type is to use the sparse view. */
- static inline bool sparse_dmap_wanted(bool pv, bool hwdom)
- {
-@@ -51,6 +55,9 @@ int sparse_dmap_drop_pagetable(mfn_t mfn);
- 
- static inline bool sparse_dmap_configured(void) { return false; }
- static inline bool sparse_dmap_wanted(bool pv, bool hwdom) { return false; }
-+static inline bool sparse_dmap_pv(void)    { return false; }
-+static inline bool sparse_dmap_hvm(void)   { return false; }
-+static inline bool sparse_dmap_hwdom(void) { return false; }
- static inline void sparse_dmap_init(void) {}
- static inline int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn,
-                                          unsigned long nr, pte_attr_t flags)
-diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
-index f139d8f83c..579d6133f5 100644
---- a/xen/arch/x86/pv/domain.c
-+++ b/xen/arch/x86/pv/domain.c
-@@ -248,6 +248,20 @@ int switch_compat(struct domain *d)
-     d->arch.has_32bit_shinfo = 1;
-     d->arch.pv.is_32bit = true;
- 
-+    /*
-+     * XPTI, cleared below, is for 64-bit domains.  A domain it kept off the
-+     * sparse directmap view goes on it now if wanted, and the domain-wide
-+     * mapcache the view needs is set up for the domain and its vCPUs.
-+     */
-+    if ( d->arch.pv.xpti && sparse_dmap_wanted(true, is_hardware_domain(d)) )
-+    {
-+        d->arch.asi.sparse_dmap = true;
-+        mapcache_domain_init(d);
-+        for_each_vcpu ( d, v )
-+            if ( (rc = mapcache_vcpu_init(v)) )
-+                goto undo_and_fail;
-+    }
++#include <xen/mm-frame.h>
++#include <xen/mm-types.h>
++#include <asm/page.h>
 +
-     /*
-      * For 32bit PV guests the shared_info machine address must fit in a 32-bit
-      * field within the guest's start_info structure.  We might need to free
-@@ -301,6 +315,8 @@ int switch_compat(struct domain *d)
- 
-  undo_and_fail:
-     d->arch.pv.is_32bit = d->arch.has_32bit_shinfo = false;
-+    if ( d->arch.pv.xpti )
-+        d->arch.asi.sparse_dmap = false;
-     for_each_vcpu( d, v )
-     {
-         free_compat_arg_xlat(v);
-diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
-index bcdcdf0476..c86f5ff886 100644
---- a/xen/arch/x86/spec_ctrl.c
-+++ b/xen/arch/x86/spec_ctrl.c
-@@ -387,6 +387,19 @@ int8_t __ro_after_init opt_xpti_domu = -1;
- 
- static __init void xpti_init_default(void)
- {
-+    /*
-+     * XPTI and the sparse directmap view exclude each other for a PV domain
-+     * (see spec_ctrl_init_domain()).  Enabled explicitly, XPTI takes
-+     * precedence: the PV domains it covers stay off the sparse view.  Left to
-+     * its default, it yields: it is off where the sparse view is asked for.
-+     */
-+    if ( !opt_dom0_pvh && opt_xpti_hwdom == 1 && sparse_dmap_hwdom() )
-+        printk(XENLOG_ERR
-+               "XPTI enabled, disabling Dom0 sparse-directmap\n");
-+    if ( opt_xpti_domu == 1 && sparse_dmap_pv() )
-+        printk(XENLOG_ERR
-+               "XPTI enabled, disabling PV DomU sparse-directmap\n");
-+
-     if ( (boot_cpu_data.vendor & (X86_VENDOR_AMD | X86_VENDOR_HYGON)) ||
-          cpu_has_rdcl_no )
-     {
-@@ -397,10 +410,21 @@ static __init void xpti_init_default(void)
-     }
-     else
-     {
-+        bool yield_hwdom = opt_xpti_hwdom < 0 && !opt_dom0_pvh &&
-+                           sparse_dmap_hwdom();
-+        bool yield_domu = opt_xpti_domu < 0 && sparse_dmap_pv();
-+
-+        /* The default would be on here: say where it yields. */
-+        if ( yield_hwdom || yield_domu )
-+            printk(XENLOG_WARNING
-+                   "XPTI defaults off for PV %s on the sparse directmap\n",
-+                   yield_hwdom ? (yield_domu ? "Dom0 and DomU" : "Dom0")
-+                               : "DomU");
-+
-         if ( opt_xpti_hwdom < 0 )
--            opt_xpti_hwdom = 1;
-+            opt_xpti_hwdom = !sparse_dmap_hwdom();
-         if ( opt_xpti_domu < 0 )
--            opt_xpti_domu = 1;
-+            opt_xpti_domu = !sparse_dmap_pv();
-     }
- }
- 
-@@ -491,6 +515,23 @@ static int __init cf_check parse_pv_l1tf(const char *s)
- }
- custom_param("pv-l1tf", parse_pv_l1tf);
- 
-+/*
-+ * Set the sparse directmap view's knob for each domain type given.  A type
-+ * the build lacks stays off, so that no view is built for it, and without
-+ * CONFIG_SPARSE_DIRECTMAP all stay off.
-+ */
-+static void __init set_sparse_dmap(bool pv, bool hvm, bool hwdom, bool val)
++static inline bool sparse_dmap_configured(void) { return false; }
++static inline void sparse_dmap_init(void) {}
++static inline int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn,
++                                         unsigned long nr, pte_attr_t flags)
 +{
-+#ifdef CONFIG_SPARSE_DIRECTMAP
-+    if ( pv && IS_ENABLED(CONFIG_PV) )
-+        opt_sparse_dmap_pv = val;
-+    if ( hvm && IS_ENABLED(CONFIG_HVM) )
-+        opt_sparse_dmap_hvm = val;
-+    if ( hwdom )
-+        opt_sparse_dmap_hwdom = val;
-+#endif
++    return 0;
++}
++static inline int sparse_dmap_mirror_modify(unsigned long s, unsigned long e,
++                                            pte_attr_t nf)
++{
++    return 0;
++}
++static inline int sparse_dmap_remove(mfn_t mfn, unsigned long nr)
++{
++    return 0;
++}
++static inline int sparse_dmap_drop_pagetable(mfn_t mfn)
++{
++    return 0;
 +}
 +
- static int __init cf_check parse_asi(const char *s)
++#endif /* X86_SPARSE_DIRECTMAP_H */
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 4bfb690017..6028408b82 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -127,6 +127,7 @@
+ #include <asm/setup.h>
+ #include <asm/shadow.h>
+ #include <asm/shared.h>
++#include <asm/sparse-directmap.h>
+ #include <asm/trampoline.h>
+ #include <asm/traps.h>
+ #include <asm/x86_emulate.h>
+@@ -5425,10 +5426,17 @@ mfn_t xen_map_to_mfn(unsigned long va)
+ 
+ /*
+  * Free a page-table page that the hierarchy rooted at @root has stopped
+- * using.
++ * using.  One of idle_pg_table's may be in the sparse directmap view: it is
++ * taken out first, under the sparse view's L3 lock inside an L3 lock of
++ * idle_pg_table's hierarchy (the only order in which the two nest), and
++ * kept if that fails.  The sparse view's own page-tables are not in it, and
++ * are freed directly: the caller may hold the sparse view's L3 lock.
+  */
+ static void free_pagetable_in(const l4_pgentry_t *root, mfn_t mfn)
  {
-     static bool __initdata warned;
-@@ -507,7 +548,10 @@ static int __init cf_check parse_asi(const char *s)
- 
-     /* Interpret 'asi' alone in its positive boolean form. */
-     if ( *s == '\0' )
-+    {
-         opt_vcpu_pt_hwdom = opt_vcpu_pt_hvm = true;
-+        set_sparse_dmap(true, true, true, true);
-+    }
- 
-     do {
-         ss = strchr(s, ',');
-@@ -520,17 +564,33 @@ static int __init cf_check parse_asi(const char *s)
-         case 0:
-         case 1:
-             opt_vcpu_pt_hwdom = opt_vcpu_pt_hvm = val;
-+            set_sparse_dmap(true, true, true, val);
-             break;
- 
-         default:
-             if ( (val = parse_boolean("pv", s, ss)) >= 0 )
--                printk(XENLOG_WARNING
--                       "No ASI feature applies to PV domains - ignoring 'asi=%.*s' setting\n",
--                       (int)(ss - s), s);
-+                set_sparse_dmap(true, false, false, val);
-             else if ( (val = parse_boolean("hvm", s, ss)) >= 0 )
-+            {
-                 opt_vcpu_pt_hvm = val;
-+                set_sparse_dmap(false, true, false, val);
-+            }
-             else if ( (val = parse_boolean("dom0", s, ss)) >= 0 )
-+            {
-                 opt_vcpu_pt_hwdom = val;
-+                set_sparse_dmap(false, false, true, val);
-+            }
-+            else if ( (val = parse_boolean("directmap", s, ss)) >= 0 )
-+            {
-+                /* System-wide: every domain type, the hardware domain too. */
-+                if ( IS_ENABLED(CONFIG_SPARSE_DIRECTMAP) )
-+                    set_sparse_dmap(true, true, true, val);
-+                else
-+                {
-+                    no_config_param("SPARSE_DIRECTMAP", "asi", s, ss);
-+                    rc = -EINVAL;
-+                }
-+            }
-             else if ( (val = parse_boolean("vcpu-pt", s, ss)) != -1 )
-             {
-                 switch ( val )
-@@ -759,11 +819,28 @@ static void __init print_details(enum ind_thunk thunk)
-            opt_pv_l1tf_domu  ? "enabled"  : "disabled");
- #endif
- 
--    printk("  ASI features for Dom0:%s\n",
--           opt_dom0_pvh && opt_vcpu_pt_hwdom ? " vCPU-PT" : " None");
--    if ( IS_ENABLED(CONFIG_HVM) )
--        printk("  ASI features for HVM VMs:%s\n",
--               opt_vcpu_pt_hvm               ? " vCPU-PT" : " None");
-+    {
-+        bool hwdom_pt = opt_dom0_pvh && opt_vcpu_pt_hwdom;
-+        bool hwdom_sd = sparse_dmap_hwdom() &&
-+                        (opt_dom0_pvh ? hwdom_pt : !opt_xpti_hwdom);
++    if ( root == idle_pg_table && sparse_dmap_drop_pagetable(mfn) )
++        return;
 +
-+        printk("  ASI directmap mode: %s\n",
-+               sparse_dmap_configured()   ? "sparse"            : "full");
-+        printk("  ASI features for Dom0:%s%s%s\n",
-+               hwdom_pt || hwdom_sd       ? ""                  : " None",
-+               hwdom_pt                   ? " vCPU-PT"          : "",
-+               hwdom_sd                   ? " sparse-directmap" : "");
-+        if ( IS_ENABLED(CONFIG_HVM) )
-+            printk("  ASI features for HVM VMs:%s%s%s\n",
-+                   opt_vcpu_pt_hvm        ? ""                  : " None",
-+                   opt_vcpu_pt_hvm        ? " vCPU-PT"          : "",
-+                   opt_vcpu_pt_hvm && sparse_dmap_hvm()
-+                                          ? " sparse-directmap" : "");
-+        if ( IS_ENABLED(CONFIG_PV) )
-+            printk("  ASI features for PV VMs:%s\n",
-+                   sparse_dmap_pv() && !opt_xpti_domu
-+                                          ? " sparse-directmap" : " None");
-+    }
+     free_xen_pagetable(mfn);
  }
  
- static bool __init check_smt_enabled(void)
-@@ -1956,9 +2033,10 @@ void spec_ctrl_init_domain(struct domain *d)
+@@ -5436,7 +5444,7 @@ static void free_pagetable_in(const l4_pgentry_t *root, mfn_t mfn)
+  * map_pages_to_xen() in the hierarchy rooted at @root: idle_pg_table's, or
+  * another hierarchy sharing its virtual addresses.
+  */
+-static int map_pages_in(
++int map_pages_in(
+     l4_pgentry_t *root,
+     unsigned long virt,
+     mfn_t mfn,
+@@ -5848,7 +5856,12 @@ int map_pages_to_xen(
+     unsigned long nr_mfns,
+     pte_attr_t flags)
+ {
+-    return map_pages_in(idle_pg_table, virt, mfn, nr_mfns, flags);
++    int rc = map_pages_in(idle_pg_table, virt, mfn, nr_mfns, flags);
++
++    if ( !rc )
++        rc = sparse_dmap_mirror_map(virt, mfn, nr_mfns, flags);
++
++    return rc;
+ }
  
+ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+@@ -5871,8 +5884,8 @@ int __init populate_pt_range(unsigned long virt, unsigned long nr_mfns)
+  * modify_mappings_in() does so in the hierarchy rooted at @root, as
+  * map_pages_in() does.
+  */
+-static int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
+-                              unsigned long e, pte_attr_t nf)
++int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
++                       unsigned long e, pte_attr_t nf)
+ {
+     bool locking = system_state > SYS_STATE_boot;
+     l3_pgentry_t *pl3e = NULL;
+@@ -6152,7 +6165,12 @@ static int modify_mappings_in(l4_pgentry_t *root, unsigned long s,
+ 
+ int modify_xen_mappings(unsigned long s, unsigned long e, pte_attr_t nf)
+ {
+-    return modify_mappings_in(idle_pg_table, s, e, nf);
++    int rc = modify_mappings_in(idle_pg_table, s, e, nf);
++
++    if ( !rc )
++        rc = sparse_dmap_mirror_modify(s, e, nf);
++
++    return rc;
+ }
+ 
+ int destroy_xen_mappings(unsigned long s, unsigned long e)
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index dcb1d407ec..f18959f3b4 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -22,6 +22,7 @@
+ #include <asm/pv/mm.h>
+ #include <asm/setup.h>
+ #include <asm/shadow.h>
++#include <asm/sparse-directmap.h>
+ 
+ /* Allow ring-3 access in long mode as guest cannot use ring 1 ... */
+ #define BASE_PROT (_PAGE_PRESENT|_PAGE_RW|_PAGE_ACCESSED|_PAGE_USER)
+@@ -650,6 +651,9 @@ static int __init dom0_construct(const struct boot_domain *bd)
+         {
+             if ( assign_pages(mfn_to_page(_mfn(initrd_mfn)), count, d, 0) )
+                 BUG();
++            /* The initrd is dom0's now: out of the sparse directmap. */
++            if ( sparse_dmap_remove(_mfn(initrd_mfn), PFN_UP(initrd_len)) )
++                panic("Cannot unmap dom0's initrd\n");
+             /*
+              * We have mapped the initrd directly into dom0, and assigned the
+              * pages. Tell the boot_module handling that we've freed it, so the
+diff --git a/xen/arch/x86/setup.c b/xen/arch/x86/setup.c
+index 446cd81276..bdc43dfe58 100644
+--- a/xen/arch/x86/setup.c
++++ b/xen/arch/x86/setup.c
+@@ -54,6 +54,7 @@
+ #include <asm/spec_ctrl.h>
+ #include <asm/stubs.h>
+ #include <asm/tboot.h>
++#include <asm/sparse-directmap.h>
+ #include <asm/trampoline.h>
+ #include <asm/traps.h>
+ 
+@@ -1949,6 +1950,9 @@ void asmlinkage __init noreturn __start_xen(void)
+ 
+     system_state = SYS_STATE_boot;
+ 
++    /* The heap now has all memory: page-tables come from it from here on. */
++    sparse_dmap_init();
++
+     bsp_stack = cpu_alloc_stack(0); /* Needs to know IDT vs FRED */
+     if ( !bsp_stack )
+         panic("No memory for BSP stack\n");
+diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
+index 7b04537066..c5d9dd64a3 100644
+--- a/xen/arch/x86/x86_64/mm.c
++++ b/xen/arch/x86/x86_64/mm.c
+@@ -1231,8 +1231,14 @@ int memory_add(unsigned long spfn, unsigned long epfn, unsigned int pxm)
+     i = virt_to_mfn(HYPERVISOR_VIRT_END - 1) + 1;
+     if ( spfn < i )
+     {
+-        ret = map_pages_to_xen((unsigned long)mfn_to_virt(spfn), _mfn(spfn),
+-                               min(epfn, i) - spfn, PAGE_HYPERVISOR);
++        /*
++         * Into the full directmap only, not a sparse directmap view: the
++         * frame table and M2P carved from the start of the range are
++         * reached through their own mappings, and the rest goes to the
++         * heap, which the sparse view leaves out.
++         */
++        ret = map_pages_in(idle_pg_table, (unsigned long)mfn_to_virt(spfn),
++                           _mfn(spfn), min(epfn, i) - spfn, PAGE_HYPERVISOR);
+         if ( ret )
+             goto destroy_directmap;
+     }
+diff --git a/xen/common/page_alloc.c b/xen/common/page_alloc.c
+index 5243dba29f..2150dcbd5e 100644
+--- a/xen/common/page_alloc.c
++++ b/xen/common/page_alloc.c
+@@ -1971,6 +1971,9 @@ static void init_heap_pages(
+     unsigned long i;
+     bool need_scrub = scrub_debug;
+ 
++    if ( !arch_heap_pages_init(page_to_mfn(pg), nr_pages) )
++        return;
++
      /*
-      * The sparse directmap view needs a mapcache: PV domains all have one,
--     * HVM domains through per-vCPU page-tables.
-+     * HVM domains through per-vCPU page-tables.  A PV domain using XPTI
-+     * stays on the full directmap.
-      */
--    d->arch.asi.sparse_dmap = (pv || d->arch.asi.vcpu_pt) &&
-+    d->arch.asi.sparse_dmap = (pv ? !d->arch.pv.xpti : d->arch.asi.vcpu_pt) &&
-                               sparse_dmap_wanted(pv, is_hardware_domain(d));
- }
+      * Keep MFN 0 away from the buddy allocator to avoid crossing zone
+      * boundary when merging two buddies.
+@@ -2540,10 +2543,33 @@ void *alloc_xenheap_pages(unsigned int order, unsigned int memflags)
+     if ( !(memflags >> _MEMF_bits) )
+         memflags |= MEMF_bits(xenheap_bits);
  
+-    pg = alloc_domheap_pages(NULL, order, memflags | MEMF_no_scrub);
++    /*
++     * Pages still awaiting scrubbing may do as xenheap pages: the directmap
++     * maps them anyway.  Not so if an arch's sparse directmap view makes them
++     * reachable where the rest of the heap's memory is not.
++     */
++    if ( !arch_xenheap_needs_scrub() )
++        memflags |= MEMF_no_scrub;
++
++    pg = alloc_domheap_pages(NULL, order, memflags);
+     if ( unlikely(pg == NULL) )
+         return NULL;
+ 
++    if ( arch_xenheap_pages_alloc(page_to_mfn(pg), order) )
++    {
++        /*
++         * The hook may have mapped part of the pages before failing: take
++         * them out again as a free would, and leak them if that fails too.
++         */
++        if ( arch_xenheap_pages_free(page_to_mfn(pg), order) )
++            printk(XENLOG_WARNING
++                   "Leaking xenheap pages %"PRI_mfn"+%u: still mapped\n",
++                   mfn_x(page_to_mfn(pg)), 1U << order);
++        else
++            free_domheap_pages(pg, order);
++        return NULL;
++    }
++
+     for ( i = 0; i < (1u << order); i++ )
+         pg[i].count_info |= PGC_xen_heap;
+ 
+@@ -2562,6 +2588,19 @@ void free_xenheap_pages(void *v, unsigned int order)
+ 
+     pg = virt_to_page(v);
+ 
++    /*
++     * If the pages cannot be taken out of an arch's sparse directmap view,
++     * they may remain reachable through it: leak them rather than hand them
++     * out.
++     */
++    if ( arch_xenheap_pages_free(page_to_mfn(pg), order) )
++    {
++        printk(XENLOG_WARNING
++               "Leaking xenheap pages %"PRI_mfn"+%u: still mapped\n",
++               mfn_x(page_to_mfn(pg)), 1U << order);
++        return;
++    }
++
+     for ( i = 0; i < (1u << order); i++ )
+         pg[i].count_info &= ~PGC_xen_heap;
+ 
+diff --git a/xen/include/xen/mm.h b/xen/include/xen/mm.h
+index 153c57f5dd..e8f9993286 100644
+--- a/xen/include/xen/mm.h
++++ b/xen/include/xen/mm.h
+@@ -94,6 +94,27 @@ bool scrub_free_pages(void);
+ #define alloc_xenheap_page() (alloc_xenheap_pages(0,0))
+ #define free_xenheap_page(v) (free_xenheap_pages(v,0))
+ 
++/*
++ * Hooks for an architecture keeping a second, sparse view of its directmap,
++ * which maps the xenheap but not the rest of the heap's memory.
++ */
++static inline bool arch_heap_pages_init(mfn_t mfn, unsigned long nr)
++{
++    return true;
++}
++static inline bool arch_xenheap_needs_scrub(void)
++{
++    return false;
++}
++static inline int arch_xenheap_pages_alloc(mfn_t mfn, unsigned int order)
++{
++    return 0;
++}
++static inline int arch_xenheap_pages_free(mfn_t mfn, unsigned int order)
++{
++    return 0;
++}
++
+ /* Free an allocation, and zero the pointer to it. */
+ #define FREE_XENHEAP_PAGES(p, o) do { \
+     void *_ptr_ = (p);                \
 -- 
 2.56.0
 
