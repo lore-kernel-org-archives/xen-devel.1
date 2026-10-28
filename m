@@ -2,45 +2,46 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7737F606A31C
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 11:31:50 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 4E3D3606A31A
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 11:39:29 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=ebvj5YMJ
-Received: from list by lists.xenproject.org with outflank-mailman.1463127.1674092 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=kernel.org header.i=@kernel.org header.a=rsa-sha256 header.s=k20260515 header.b=V3aBNqqF
+Received: from list by lists.xenproject.org with outflank-mailman.1463137.1674103 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM1sI-0004YY-Dc; Wed, 28 Oct 2026 11:31:22 +0000
+	id 1xM1zw-0005Br-6Y; Wed, 28 Oct 2026 11:39:16 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463127.1674092; Wed, 28 Oct 2026 11:31:22 +0000
+Received: by outflank-mailman (output) from mailman id 1463137.1674103; Wed, 28 Oct 2026 11:39:16 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM1sI-0004YR-B4; Wed, 28 Oct 2026 11:31:22 +0000
-Received: by outflank-mailman (input) for mailman id 1463127;
- Wed, 28 Oct 2026 11:31:21 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xM1sH-0004Y5-4R
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 11:31:21 +0000
+	id 1xM1zw-0005Bk-1b; Wed, 28 Oct 2026 11:39:16 +0000
+Received: by outflank-mailman (input) for mailman id 1463137;
+ Wed, 28 Oct 2026 11:39:14 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92)
+ (envelope-from <rafael@kernel.org>) id 1xM1zu-0005Be-Dl
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 11:39:14 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xM1sG-00DVe6-A2
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 12:31:20 +0100
-Received: from [10.42.69.8] (helo=localhost)
+ id 1xM1zt-009qdP-Bn
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 12:39:13 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae1dd02-e002-0a2a0a5209dd-0a2a450883a0-20
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:31:17 +0100
-Received: from [209.85.128.50] (helo=mail-wm1-f50.google.com)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae1dd05-f659-0a2a45080019-d1558032ecb4-3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:31:17 +0100
-Received: by mail-wm1-f50.google.com with SMTP id
- 5b1f17b1804b1-4a2d6d01ecbso5580455e9.0
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 04:31:17 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a97c9f150fsm36523685e9.10.2026.10.28.04.31.16
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Oct 2026 04:31:16 -0700 (PDT)
+ (envelope-from <rafael@kernel.org>)
+ id 6ae1ded0-bab6-0a2a0a5309dd-0a2a450a9846-36
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:39:13 +0100
+Received: from [172.234.252.31] (helo=sea.source.kernel.org)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <rafael@kernel.org>)
+ id 6ae1dedf-f2d2-0a2a450a0019-aceafc1fb248-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:39:12 +0100
+Received: from smtp.kernel.org (quasi.space.kernel.org [100.103.45.18])
+ by sea.source.kernel.org (Postfix) with ESMTP id E8802435E7
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 11:39:10 +0000 (UTC)
+Received: by smtp.kernel.org (Postfix) with ESMTPSA id CF95E1F031E9
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 11:39:10 +0000 (UTC)
+Received: by mail-lf1-f42.google.com with SMTP id
+ 2adb3069b0e04-5be4c78e8caso903751e87.1
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 04:39:10 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,142 +50,172 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793187077; x=1793791877; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=Nhxjzuv6QyYAU5FPVLgD5/fgE70sNx8tufTqa7+vrLM=;
-        b=ebvj5YMJng0iMTJPs6DuEbQYRCyTrxOge39l/N5AheOwQvqjISVypt8BjDwKzNuTdi
-         7uwE3MAM9/crwucbMPX4T5HuuAOy93vKiVCZ9qUoCjkRQkSGgmFwwK73kVfcJ88POMHd
-         n/pvV+4HcO62edShE6B7OgLiUk6iEwqv1xsewUscdhszpGlMQC2EPAJdrnPoRvtDGdTw
-         EpZBdA0orPDEHx3CVmqRliQlTSz1BPiF44EO7T2/7LcmjqDF6yrkO3bYvKM8DXg2v9Vv
-         N3m8/5tyMmG92qnuYBVtBMjpZORgJnFIQwoQoDQprABYOEUIWAzkSmztqJpOLcNsX9vW
-         uuLQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793187077; x=1793791877;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=Nhxjzuv6QyYAU5FPVLgD5/fgE70sNx8tufTqa7+vrLM=;
-        b=Ne1abDlfl1nuvqM+g+4brqNMXWxOrM9rsoa/AKmGQ4ucbl2PAM5wzCENqiDkwyWVIo
-         4OsrSMKmTrR3aCUUE/+PURWXuR4y8iJGYrOngmJik9Bi6AXpOy80TqTik9BqKa9KSzsd
-         /w/aoUO4JJREzf+BwJz2iPqvJBtLF2wG05qU8BWz9MR/ufUhY9Hj75QCTY3laKrRqAer
-         6u4Go0kVyniMbMR+PJe90ZajzGo7TJO2CiCik8AkCHs6h7TQ7YZvt+CGjrXGF5Vj5X0N
-         PkoAyT4/2ysEr88KEGL3LzXFk7V3Knu1rRss59b1KfHxL/EGhoUdap+gQ7nhV8GdP/lG
-         SAgw==
-X-Forwarded-Encrypted: i=1; AKwUvBwjuIIYtUSI6FsUT7sgziiOoJsgN/RqNs4hrUBqJKzSjuVkjsXkaAopIAFQhUppIwj5o6LJlb4yusk=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYL3Yg9TEjH/G+mIEYm14e9Txs7I/kzRaI53+ufQp6ToKhBjWbTc
-	FqYfND81A4xxwmuhPlyLixXmNngijy0yzXFSr06/931N1x5K9TCRE27+EgHg77Kj+Q==
-X-Gm-Gg: AYBFou2hFVLKfd9TobVRq0XUAVmvWdHj1PPEotaf06cMLCIZeC6BDvDj77Rh1c2YBoE
-	o/EHCkBy49wVcUu+oJU/ArqgABc2POiNRTQVWd/SVkiLiCBXECy/YCI0GENX122QA98foi+XrfN
-	jDSpZ023WmONQmsfVTMhWIj2NMqxYT5O6RfVeHZTpH2kql+dodWdWRpUT2SlyaqHTUPdSPSiky/
-	KIYddeTT11/fHjs2EmZvvXNzh/DtB4AWRLnnwEYtTc1HmaQVxzhD7QMVH5LVdh8ij0Wgd2Hkayv
-	quz6x2Msssjqmrj/JFj0BxjbcKZYDI0ddDha/3T5KLOJOt+uBEiH0wtYNmc0d00p8bVonN2pGj5
-	22Ikp65AwXmwwrJx7QA6pxUyLb20oztKhvAEdVmlf7DcDRMiHd2b53gtIRRwk3GLIjdpaSVav9e
-	96EYaOYb4bWuawvfQ/X4CIIpMoPhNGe8sdMoWmTkcqrOqEAzJQrJiWHuvSoJkHj0go/FQ6fVtM9
-	yERtfi/F5wv5OuQ48doRgyOiPxAn6kBadV7NjE9ASVM7rBRzCjoX1jQw7X/37Q6hGMWABqdQQtf
-	WkDo+8Je0c6I/33+Rj5Ud7ucsJC2SVwAuMxg/aQ7OoYRn12r4cnnj664WaEqgsmpc53ggme381y
-	Qq8xSbcOCU/O1x096tw==
-X-Received: by 2002:a05:600c:4f4a:b0:4a3:5c67:55ed with SMTP id 5b1f17b1804b1-4a966c40261mr38463915e9.12.1793187076637;
-        Wed, 28 Oct 2026 04:31:16 -0700 (PDT)
-Message-ID: <f4aa49b0-985b-43b2-ad1f-8ddf073fdb61@suse.com>
-Date: Wed, 28 Oct 2026 12:31:15 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=k20260515 header.d=kernel.org header.i="@kernel.org" header.h="References:In-Reply-To:From:Date:Subject:To:Cc"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=kernel.org;
+	s=k20260515; t=1793187550;
+	bh=sOScShlNJOoFQgumDsqaC2sVgmpV4+y6Yzg+EW5P6X4=;
+	h=References:In-Reply-To:From:Date:Subject:To:Cc;
+	b=V3aBNqqFFHK8/iCpvfjUC4nqv71d4gzLapwxCef4YXC24PEvK5vHB+xdOeL7szLll
+	 P+FI7kOVX15iyVgW6L5BqB5j66cUsU58EFNBVc4ed1gRumoqiCbC4e+4/fMtoPPsBi
+	 389uKh3znOcDxhFOO4xeIVuJHUWRavRXaxLHJn2UManYPCHBMECjV9wAGJYHfg7uRm
+	 oE9BZ712DtB2yvqohWmRmnKolH9LeojudIZ3GAkE5g2bjpf6/E/ujmhxw0Acr5Ue7J
+	 /SryS8fSPLV7LahdfJR0nny8tZNZQ0l6lyXB4kclXqeLy9UOpL1SeAi4UciWGJrnY9
+	 J8Z5+YeM8O4VQ==
+X-Forwarded-Encrypted: i=1; AKwUvBxNb7Yn7JLdTOacQATJUQ+3BaZZhJOdPZPljutt4X1e5hMk4NnNWvl9LDJQPl1ppgqcqWyQ/nbLzrU=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYLqJkhJyOGYtxTiGfzsAGkv113AblbdCRtstfyLg1BiHwn3viwS
+	h5tZ1+B2mKySJ4mFL93e1BlpOtieWIPuhD0Yl3z79jRBSB+try2TuZydu6N1//DWLbHPaqUwhKA
+	OkyYpr/L6aD5wqbhJDEnWHqVc1ESPIRo=
+X-Received: by 2002:a05:6512:1111:b0:5b9:6603:d451 with SMTP id
+ 2adb3069b0e04-5bfcad31c8emr697328e87.3.1793187548999; Wed, 28 Oct 2026
+ 04:39:08 -0700 (PDT)
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] x86/vpt: Validate timer object with generation number
-To: Tu Dinh <ngoc-tu.dinh@vates.tech>
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
-References: <1792717952.8631fc262581453bbf619ec5b2062170.1a166511467000f79f@vates.tech>
-Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <1792717952.8631fc262581453bbf619ec5b2062170.1a166511467000f79f@vates.tech>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-c1860d/1793187077-D674387B-96AB6577/10/78276251493
-X-purgate-type: spam
-X-purgate-size: 1920
-X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+References: <20261027223847.652884-1-irogers@google.com> <20261027223847.652884-5-irogers@google.com>
+In-Reply-To: <20261027223847.652884-5-irogers@google.com>
+From: "Rafael J. Wysocki (Intel)" <rafael@kernel.org>
+Date: Wed, 28 Oct 2026 12:38:56 +0100
+X-Gmail-Original-Message-ID: <CAJZ5v0juvZ2ZVRBkY6FxBM=NhPt9vMA3+yRugXc5u=U1jO9AXg@mail.gmail.com>
+X-Gm-Features: AclHuK-NXF3tWCMDzaNjIN417c7ZMuQGYjVHoQ_x6BSITeW_KdKoI_jbnClXt6k
+Message-ID: <CAJZ5v0juvZ2ZVRBkY6FxBM=NhPt9vMA3+yRugXc5u=U1jO9AXg@mail.gmail.com>
+Subject: Re: [PATCH v2 4/9] cpufreq: governor: Initialize kobj_type release
+ callback statically
+To: Ian Rogers <irogers@google.com>
+Cc: Kees Cook <kees@kernel.org>, Greg Kroah-Hartman <gregkh@linuxfoundation.org>, 
+	Miguel Ojeda <ojeda@kernel.org>, "Rafael J . Wysocki" <rafael@kernel.org>, Danilo Krummrich <dakr@kernel.org>, 
+	Nathan Chancellor <nathan@kernel.org>, Nick Desaulniers <ndesaulniers@google.com>, 
+	Miguel Ojeda <miguel.ojeda.sandonis@gmail.com>, 
+	=?UTF-8?Q?Christian_K=C3=B6nig?= <christian.koenig@amd.com>, 
+	Zhihao Cheng <chengzhihao1@huawei.com>, Zhongqiu Han <zhongqiu.han@oss.qualcomm.com>, 
+	Sumanth Korikkar <sumanthk@linux.ibm.com>, Bill Wendling <morbo@google.com>, 
+	Justin Stitt <justinstitt@google.com>, driver-core@lists.linux.dev, llvm@lists.linux.dev, 
+	linux-hardening@vger.kernel.org, linux-fsdevel@vger.kernel.org, 
+	linux-doc@vger.kernel.org, linux-acpi@vger.kernel.org, 
+	linux-pm@vger.kernel.org, linuxppc-dev@lists.ozlabs.org, 
+	linux-sh@vger.kernel.org, linux-s390@vger.kernel.org, gfs2@lists.linux.dev, 
+	xen-devel@lists.xenproject.org, linux-mtd@lists.infradead.org, 
+	amd-gfx@lists.freedesktop.org, dri-devel@lists.freedesktop.org, 
+	linux-kernel@vger.kernel.org, Viresh Kumar <viresh.kumar@linaro.org>
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+X-purgate-ID: tlsNG-4011c0/1793187553-50ECACFC-8C95BE01/0/0
+X-purgate-type: clean
+X-purgate-size: 4424
+X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
+	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
-	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
-	autolearn_force=no version=4.0.1
+	SPF_PASS,UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
+	version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 23.10.2026 03:12, Tu Dinh wrote:
-> The remote completion path of pt_update_irq removes timers from tm_list
-> by checking that their addresses match the previous iteration. However,
-> if the guest rearms a timer during the gap between two list iterations,
-> the resulting timer object is no longer the same, even if their
-> addresses match. Removing the timer from the list will then lose the
-> armed timer object.
-> 
-> Record a generation number in each timer object upon arming, and check
-> that the generation number matches before removing it from the list.
+On Tue, Oct 27, 2026 at 11:39=E2=80=AFPM Ian Rogers <irogers@google.com> wr=
+ote:
+>
+> Export cpufreq_dbs_data_release() and set .kobj_type.release statically
+> in the ondemand and conservative governors so their gov_attr_set
+> kobjects have a valid release callback statically initialized, matching
+> cpufreq_governor_dbs. Remove the redundant runtime assignment in
+> cpufreq_dbs_governor_init().
+>
+> This prepares for annotating struct kobj_type::release with
+> __must_init.
+>
+> Signed-off-by: Ian Rogers <irogers@google.com>
 
-Fixes: 0bcbc971feaa ("x86/vpt: add support for level interrupts")
+Do you want stuff to be picked up by maintainers, or do you want to
+route it yourself?
 
-> Signed-off-by: Tu Dinh <ngoc-tu.dinh@vates.tech>
-
-Reviewed-by: Jan Beulich <jbeulich@suse.com>
-preferably with ...
-
-> --- a/xen/arch/x86/hvm/vpt.c
-> +++ b/xen/arch/x86/hvm/vpt.c
-> @@ -318,6 +318,7 @@ int pt_update_irq(struct vcpu *v)
->      struct list_head *head = &v->arch.hvm.tm_list;
->      struct periodic_time *pt, *temp, *earliest_pt;
->      uint64_t max_lag;
-> +    uint64_t generation;
-
-... this folded with the earlier line.
-
-> --- a/xen/arch/x86/include/asm/hvm/vpt.h
-> +++ b/xen/arch/x86/include/asm/hvm/vpt.h
-> @@ -34,6 +34,7 @@ struct periodic_time {
->      u8 irq;
->      struct vcpu *vcpu;          /* vcpu timer interrupt delivers to */
->      u32 pending_intr_nr;        /* pending timer interrupts */
-> +    u64 generation;             /* distinguish two armings of the same timer */
->      u64 period;                 /* frequency in ns */
->      s_time_t scheduled;         /* scheduled timer interrupt */
->      u64 last_plt_gtime;         /* platform time when last IRQ is injected */
-
-Also, no matter that adjacent lines use u<N>, it wants to be uint<N>_t for
-new fields. Otherwise we will never get rid of the remaining u<N>.
-
-I can make these adjustments while committing, no need to send a v2 just for
-that.
-
-Jan
+> ---
+>  drivers/cpufreq/cpufreq_conservative.c | 5 ++++-
+>  drivers/cpufreq/cpufreq_governor.c     | 4 ++--
+>  drivers/cpufreq/cpufreq_governor.h     | 1 +
+>  drivers/cpufreq/cpufreq_ondemand.c     | 5 ++++-
+>  4 files changed, 11 insertions(+), 4 deletions(-)
+>
+> diff --git a/drivers/cpufreq/cpufreq_conservative.c b/drivers/cpufreq/cpu=
+freq_conservative.c
+> index 02bfd46543e9..146a2353b1a2 100644
+> --- a/drivers/cpufreq/cpufreq_conservative.c
+> +++ b/drivers/cpufreq/cpufreq_conservative.c
+> @@ -318,7 +318,10 @@ static void cs_limits(struct cpufreq_policy *policy)
+>
+>  static struct dbs_governor cs_governor =3D {
+>         .gov =3D CPUFREQ_DBS_GOVERNOR_INITIALIZER("conservative"),
+> -       .kobj_type =3D { .default_groups =3D cs_groups },
+> +       .kobj_type =3D {
+> +               .release =3D cpufreq_dbs_data_release,
+> +               .default_groups =3D cs_groups,
+> +       },
+>         .gov_dbs_update =3D cs_dbs_update,
+>         .alloc =3D cs_alloc,
+>         .free =3D cs_free,
+> diff --git a/drivers/cpufreq/cpufreq_governor.c b/drivers/cpufreq/cpufreq=
+_governor.c
+> index f3bd3dbe7c41..f8b5aca09b6b 100644
+> --- a/drivers/cpufreq/cpufreq_governor.c
+> +++ b/drivers/cpufreq/cpufreq_governor.c
+> @@ -419,7 +419,7 @@ static void free_policy_dbs_info(struct policy_dbs_in=
+fo *policy_dbs,
+>         gov->free(policy_dbs);
+>  }
+>
+> -static void cpufreq_dbs_data_release(struct kobject *kobj)
+> +void cpufreq_dbs_data_release(struct kobject *kobj)
+>  {
+>         struct dbs_data *dbs_data =3D to_dbs_data(to_gov_attr_set(kobj));
+>         struct dbs_governor *gov =3D dbs_data->gov;
+> @@ -427,6 +427,7 @@ static void cpufreq_dbs_data_release(struct kobject *=
+kobj)
+>         gov->exit(dbs_data);
+>         kfree(dbs_data);
+>  }
+> +EXPORT_SYMBOL_GPL(cpufreq_dbs_data_release);
+>
+>  int cpufreq_dbs_governor_init(struct cpufreq_policy *policy)
+>  {
+> @@ -488,7 +489,6 @@ int cpufreq_dbs_governor_init(struct cpufreq_policy *=
+policy)
+>         policy->governor_data =3D policy_dbs;
+>
+>         gov->kobj_type.sysfs_ops =3D &governor_sysfs_ops;
+> -       gov->kobj_type.release =3D cpufreq_dbs_data_release;
+>         ret =3D kobject_init_and_add(&dbs_data->attr_set.kobj, &gov->kobj=
+_type,
+>                                    get_governor_parent_kobj(policy),
+>                                    "%s", gov->gov.name);
+> diff --git a/drivers/cpufreq/cpufreq_governor.h b/drivers/cpufreq/cpufreq=
+_governor.h
+> index 806d8fb4dff1..1026712bb79b 100644
+> --- a/drivers/cpufreq/cpufreq_governor.h
+> +++ b/drivers/cpufreq/cpufreq_governor.h
+> @@ -150,6 +150,7 @@ static inline struct dbs_governor *dbs_governor_of(st=
+ruct cpufreq_policy *policy
+>  }
+>
+>  /* Governor callback routines */
+> +void cpufreq_dbs_data_release(struct kobject *kobj);
+>  int cpufreq_dbs_governor_init(struct cpufreq_policy *policy);
+>  void cpufreq_dbs_governor_exit(struct cpufreq_policy *policy);
+>  int cpufreq_dbs_governor_start(struct cpufreq_policy *policy);
+> diff --git a/drivers/cpufreq/cpufreq_ondemand.c b/drivers/cpufreq/cpufreq=
+_ondemand.c
+> index 9942dbb38dae..7386d043c665 100644
+> --- a/drivers/cpufreq/cpufreq_ondemand.c
+> +++ b/drivers/cpufreq/cpufreq_ondemand.c
+> @@ -374,7 +374,10 @@ static struct od_ops od_ops =3D {
+>
+>  static struct dbs_governor od_dbs_gov =3D {
+>         .gov =3D CPUFREQ_DBS_GOVERNOR_INITIALIZER("ondemand"),
+> -       .kobj_type =3D { .default_groups =3D od_groups },
+> +       .kobj_type =3D {
+> +               .release =3D cpufreq_dbs_data_release,
+> +               .default_groups =3D od_groups,
+> +       },
+>         .gov_dbs_update =3D od_dbs_update,
+>         .alloc =3D od_alloc,
+>         .free =3D od_free,
+> --
+> 2.56.0.313.g2479322e68-goog
+>
+>
 
