@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1590E606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id CE292606A31E
 	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:30:55 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=O2Q3282E
-Received: from list by lists.xenproject.org with outflank-mailman.1463794.1674641 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=xJLqG+NQ
+Received: from list by lists.xenproject.org with outflank-mailman.1463789.1674599 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD6T-00067X-S9; Wed, 28 Oct 2026 23:30:45 +0000
+	id 1xMD6P-00055G-U9; Wed, 28 Oct 2026 23:30:41 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463794.1674641; Wed, 28 Oct 2026 23:30:45 +0000
+Received: by outflank-mailman (output) from mailman id 1463789.1674599; Wed, 28 Oct 2026 23:30:41 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD6T-00062B-8w; Wed, 28 Oct 2026 23:30:45 +0000
-Received: by outflank-mailman (input) for mailman id 1463794;
- Wed, 28 Oct 2026 23:30:37 +0000
+	id 1xMD6P-00053u-GR; Wed, 28 Oct 2026 23:30:41 +0000
+Received: by outflank-mailman (input) for mailman id 1463789;
+ Wed, 28 Oct 2026 23:30:36 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xMD6K-00048e-TQ
+ (envelope-from <gwd@xenproject.org>) id 1xMD6K-00048A-PU
  for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:30:36 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMD6K-00000000pOL-3Fm0;
+ (envelope-from <gwd@xenproject.org>) id 1xMD6K-00000000pOB-2eJT;
  Wed, 28 Oct 2026 23:30:36 +0000
 Received: from [217.155.165.12] (helo=Mac.fritz.box.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMCjj-00000001KpM-0l8o;
- Wed, 28 Oct 2026 23:07:15 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCjU-00000001KpM-2Fc5;
+ Wed, 28 Oct 2026 23:07:00 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,19 +41,21 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=nCu/9nxrMBPoeFP8cJd8ihmMLFkJzdeaGH0E1Itmh5E=; b=O2Q3282EztO4L2CnaV6spNMaBP
-	WK9w3R5TXea6P47EnChPL0SWcCvAWIgHbE411pIA+2T8/9PiLTQNehBh/RGa7AtHDe6CfhcLApza/
-	LLUpMHWtm7lPCWuA4722lzHL9z37tqmDPNhDLrPxGLh9XGFZhxHbvM87oP+TPjZmbR3Y=;
+	bh=lmWRg/5OLo0R/NPywMyA45Uq6cr7VvMb3O4KA5pNTBc=; b=xJLqG+NQsVQlg75Q/gRxv+Cgef
+	G32BlLOkITvDfZt5cXWYoXatY0hNWu+oMoYPoALLeifhi6J2Cx+iNDPdtM48nP1FgGWNaDHT2HQMf
+	nhOK9Q8uXTPb1zSt7bvDlqUi+zWxah1BBsvj8yOScuoU1EAfWVbEtt2BE00w6l9F8Rh4=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Jan Beulich <jbeulich@suse.com>,
-	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Tim Deegan <tim@xen.org>,
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+	Anthony PERARD <anthony.perard@vates.tech>,
+	Michal Orzel <michal.orzel@amd.com>,
+	Jan Beulich <jbeulich@suse.com>,
+	Julien Grall <julien@xen.org>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v5 37/45] x86/shadow: use map_domain_pages() for cross-page emulated writes
-Date: Wed, 28 Oct 2026 23:05:51 +0000
-Message-ID: <20261028-asi-hvm-v5-37-13b908e0df0b@xenproject.org>
+	Stefano Stabellini <sstabellini@kernel.org>
+Subject: [PATCH v5 23/45] xen/xmalloc: return an emptied region after dropping the pool lock
+Date: Wed, 28 Oct 2026 23:05:37 +0000
+Message-ID: <20261028-asi-hvm-v5-23-13b908e0df0b@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
 References: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
@@ -67,51 +69,66 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-sh_emulate_map_dest() picks its mapping method purely on whether the
-write straddles a page boundary: a single page goes through
-map_domain_page(), two pages through vmap() -- mapping the destination
-in every context for the duration, those of domains on the sparse
-directmap view included, whatever the guest's own configuration.
-map_domain_pages() maps it only in the page tables of the guest's own
-domain; use it for the two-page case.
+When a free leaves a whole region of an xmalloc pool empty,
+xmem_pool_free() hands the region back through pool->put_mem() with
+pool->lock still held.  For the xenheap pool that is
+free_xenheap_pages(), which takes the heap lock inside the pool lock
+and runs arch_xenheap_pages_free().  On x86 with a sparse directmap
+view configured, the latter takes the page out of the sparse view,
+at the cost of one to three rounds of TLB-flush IPIs to every CPU,
+while every other CPU's sub-page xmalloc() and xfree() waits on the
+pool lock.
 
-The NULL return handling is unchanged: the primitive can fail only for
-want of a free slot, and the emulation then bails out as unhandleable
-exactly as before.
+By then the region is on no free list and no longer counted in the
+pool, so nothing else can reach it.  Drop the lock first and return the
+region afterwards, as xmem_pool_alloc() already does when it calls
+pool->get_mem(), and say at both callbacks that they are called without
+the pool lock, so that they keep not relying on it.
 
-This is one of the two in-tree consumers of the primitive.
-
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-5-5
+Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
-Changes in v5:
-- New in this version.
----
- xen/arch/x86/mm/shadow/hvm.c | 4 ++--
- 1 file changed, 2 insertions(+), 2 deletions(-)
+ xen/common/xmalloc_tlsf.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
 
-diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
-index 0b23326214..b1c3d5e637 100644
---- a/xen/arch/x86/mm/shadow/hvm.c
-+++ b/xen/arch/x86/mm/shadow/hvm.c
-@@ -506,7 +506,7 @@ static void *sh_emulate_map_dest(struct vcpu *v, unsigned long vaddr,
-         /* Cross-page writes mean probably not a pagetable. */
-         sh_remove_shadows(d, sh_ctxt->mfn[1], 0, 0 /* Slow, can fail. */ );
+diff --git a/xen/common/xmalloc_tlsf.c b/xen/common/xmalloc_tlsf.c
+index b43219b4af..caf33f1a04 100644
+--- a/xen/common/xmalloc_tlsf.c
++++ b/xen/common/xmalloc_tlsf.c
+@@ -106,7 +106,10 @@ struct xmem_pool {
+     unsigned long used_size;
+     unsigned long num_regions;
  
--        map = vmap(sh_ctxt->mfn, 2);
-+        map = map_domain_pages(sh_ctxt->mfn, 2);
-         if ( !map )
-         {
-             put_page(mfn_to_page(sh_ctxt->mfn[0]));
-@@ -670,7 +670,7 @@ static void sh_emulate_unmap_dest(struct vcpu *v, void *addr,
-     if ( unlikely(mfn_valid(sh_ctxt->mfn[1])) )
+-    /* User provided functions for expanding/shrinking pool */
++    /*
++     * User provided functions for expanding/shrinking pool.  They are
++     * called without the pool lock held, and must not rely on it.
++     */
+     xmem_pool_get_memory *get_mem;
+     xmem_pool_put_memory *put_mem;
+ 
+@@ -488,17 +491,18 @@ void xmem_pool_free(void *ptr, struct xmem_pool *pool)
+ 
+     if ( (b->prev_hdr == NULL) && ((tmp_b->size & BLOCK_SIZE_MASK) == 0) )
      {
-         put_page(mfn_to_page(sh_ctxt->mfn[1]));
--        vunmap((void *)((unsigned long)addr & PAGE_MASK));
-+        unmap_domain_pages(addr, 2);
+-        pool->put_mem(b);
+         pool->num_regions--;
+         pool->used_size -= BHDR_OVERHEAD; /* sentinel block header */
+-        goto out;
++        spin_unlock(&pool->lock);
++        pool->put_mem(b);
++        return;
      }
-     else
-         unmap_domain_page(addr);
+ 
+     INSERT_BLOCK(b, pool, fl, sl);
+ 
+     tmp_b->size |= PREV_FREE;
+     tmp_b->prev_hdr = b;
+- out:
++
+     spin_unlock(&pool->lock);
+ }
+ 
 -- 
 2.56.0
 
