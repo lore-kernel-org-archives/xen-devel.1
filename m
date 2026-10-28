@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B8243606A31C
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 11:07:11 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 53531606A31A
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 11:14:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=fjrroI+r
-Received: from list by lists.xenproject.org with outflank-mailman.1463090.1674057 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=DiwFEGhl
+Received: from list by lists.xenproject.org with outflank-mailman.1463099.1674066 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM1UX-0007Bl-VG; Wed, 28 Oct 2026 11:06:49 +0000
+	id 1xM1bx-0000e3-L7; Wed, 28 Oct 2026 11:14:29 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463090.1674057; Wed, 28 Oct 2026 11:06:49 +0000
+Received: by outflank-mailman (output) from mailman id 1463099.1674066; Wed, 28 Oct 2026 11:14:29 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM1UX-0007Be-SE; Wed, 28 Oct 2026 11:06:49 +0000
-Received: by outflank-mailman (input) for mailman id 1463090;
- Wed, 28 Oct 2026 11:06:49 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xM1UW-0007BY-WD
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 11:06:49 +0000
+	id 1xM1bx-0000dw-IP; Wed, 28 Oct 2026 11:14:29 +0000
+Received: by outflank-mailman (input) for mailman id 1463099;
+ Wed, 28 Oct 2026 11:14:28 +0000
+Received: from mx.expurgate.net ([195.190.135.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xM1bw-0000dm-IE
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 11:14:28 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xM1UW-009lDq-29
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 12:06:48 +0100
-Received: from [10.42.69.9] (helo=localhost)
+ id 1xM1bv-00DSkH-K8
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 12:14:27 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ae1d747-e002-0a2a0a5209dd-0a2a4509b05e-0
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:06:47 +0100
-Received: from [209.85.218.51] (helo=mail-ej1-f51.google.com)
- by tlsNG-bad1c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae1d90f-bab6-0a2a0a5309dd-0a2a45049a10-24
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:14:27 +0100
+Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ae1d747-be1a-0a2a45090019-d155da33e09b-3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:06:47 +0100
-Received: by mail-ej1-f51.google.com with SMTP id
- a640c23a62f3a-c46822eefb6so98641766b.2
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 04:06:47 -0700 (PDT)
+ id 6ae1d913-b57f-0a2a45040019-d1558036dcd6-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:14:27 +0100
+Received: by mail-wm1-f54.google.com with SMTP id
+ 5b1f17b1804b1-4a60f9474c4so10182905e9.0
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 04:14:27 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ebc39a8sm28989042f8f.11.2026.10.28.04.06.46
+ 5b1f17b1804b1-4a97c42ca77sm36695365e9.8.2026.10.28.04.14.26
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Oct 2026 04:06:47 -0700 (PDT)
+ Wed, 28 Oct 2026 04:14:26 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,58 +51,57 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793185607; x=1793790407; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793186067; x=1793790867; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=oeV+agtu0OoQTdFIxx3hW2Px70NutSPsDtlt7O2PwKM=;
-        b=fjrroI+rlpNcjONCefx/yWzbj+XW7hceI2HgIJBlJMoCPRNB+ljWVt4WfJGP3d3g/T
-         4vt47fKT0K52zI7LI5/1Rgez0kzyzWkQh0igT2SToKr/wOKZSw59MWVJ4DeZg4W6nrED
-         IzHHVinANnMndM1qsNC17CYzGH56F3whqYHw70tYEXGtRZlwPcdBtZ/BLOFJ8ZwEFNsV
-         Vt10oacHhiuBMjT+0Th4MyxR8CMGvhhO2grr56G/B6ByaluMFPVdLxKxwGnMHd9Vovfr
-         hGydqj56Tf4d4/pokor3hbysHEaAZKvEcL+cYDKoAozNSe/686Y82Iwphp6jnZuUXZrN
-         BQwQ==
+        bh=tfR/aykflLpWF1mmF8c66vclT6jnA1r42KisfCY3QFw=;
+        b=DiwFEGhlmz1qmi1+VVUm7WAyDgcpeaU2vi22L53sznRTu8x10Wtmsg8eRe5lpbvzb6
+         0Q1gILprBFtCyXOhzQ+jomJeEMxcLecnEf1JEkcTTo/uOZTey2gfS0zgKYDk/g+3Z6Y/
+         WCmy6RGXhP+95uGHtxPQ4VbPFxRM8hiBiWxyb+qLkIUtCAhIcu347irXZ9ttig6WHblQ
+         eCGBePTb+saQETVGh7RhbQH8xZkLnYwVQYf4tHK3AI97jG/L5+htTa02NSWuzygLQnSO
+         1eVSzp5oGcYAOLz4M5/aXAPgmfepp56eL5JFKlRILQOn5IB1+YRSf2jZoTe5zmIaTMu4
+         ynVw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793185607; x=1793790407;
+        d=1e100.net; s=20260707; t=1793186067; x=1793790867;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=oeV+agtu0OoQTdFIxx3hW2Px70NutSPsDtlt7O2PwKM=;
-        b=SNmaDrnGvjDHLkc2IEv7HsMn3aPn7btM081hGGgFTuvd5oFuHS4CRHjTrzGpc2TGfk
-         itD0xMtNzhAiGloqscAw8KFAYbQtydBBZbSKg53oFDqqHwmH45iV5YOsl7iR0EXcxd1z
-         UGTJKqePm1OLj8WbIDwaR5fFE/vSCysUBMuqCW2luPFhgUDzG+X6u15JToBu5KSVOxNy
-         zgYxEdsCa2FbNtW6zXv3b2c/+6k+rr7FHgnhzdK/UxXcYtf5ttW0Mv1LsgeqEwMaSHHU
-         w7B67nqVn1OOkG1iTSuLDVQldTCwtYWj8doU5d+r4TqIYxA32u0QE2pd6vZVOuvE5UQT
-         tsEg==
-X-Forwarded-Encrypted: i=1; AKwUvBxVGRNa52WgSvR4wz/vnddDREyGeB28lcE280e9302evZc10jgQVslHWFQcDNqcpsi+o4XkGYoLRZE=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYJ4bkgGbzJkwMM/G1KDhYX1dBs0z3V9U2eV+0t5qgcl/OyeI6Ix
-	YK9bdGRekTjMv5cFfd17gVwqrIAUeyyzmDb+NgCfqV6mNy2E0l38eyMyD9vOicV+CA==
-X-Gm-Gg: AYBFou2106KC2UHJh9NHR4dfdOMWjxk4B4Hlnts1Vadn/cjhSN6akMnVRzTB34mmk9e
-	K2jj0CWs2uD1lDRx+7Q3S1xfiT5BUR1PTnrp22eoV82Wbkf8pkfGnkz2WZoieXRqvwpBpQGxX6+
-	TAAxad7INYgFLFogmrSZxoo9YyqY19WEg8dYhimOdbA3qfOalCh+hDOn3iANU2cxL2wPJS+mDWa
-	oOWnw4slmNHWD7zXuwQGNbAqV3NfLfH+AKyEVW0VTMTz/+wLc7zjvH9KUhtTcZBLuWUxTETlvPA
-	VLLW4tNRQsD3M0VKF8TjZ0GnThx7GNl18Wt3BtE3UfUljt2t9Q7Evcx3LJvPByiC6cRS0d5y+Lq
-	XkfPW5sQaWg4/lB+Dg2PYV+EPW+8VhMJJA2gVTqiipILQEf0+jPVKRwDq+CX/to5n6R3zreeAew
-	5PKy/Na11/p2A2e8E2GohFFUj0XJcb416F8Tf4+dPR7GKyb9PyL0tB/hnyfduJjnOS3usCiHM2d
-	yNipk0uDzygh7rdzMdoFEybttCljCtFNQQmhnp5vqypghSl+ywSqWAy7VBOFCvFXq1IUejbjqNU
-	zz5NMIrsaKDs7kTlKDk3WEwJwIrw+6rDGW1+zM1tBFWSH4W1B4HPGsr7CofPBm/JPL2h3Y6f/bz
-	QWbbRlGVRLxgQIf4Z
-X-Received: by 2002:a17:906:c143:b0:c40:91fb:b76 with SMTP id a640c23a62f3a-c49bdf898e4mr144992966b.33.1793185607316;
-        Wed, 28 Oct 2026 04:06:47 -0700 (PDT)
-Message-ID: <d00441c4-6ef6-4f40-bc32-1d4c267a6687@suse.com>
-Date: Wed, 28 Oct 2026 12:06:45 +0100
+        bh=tfR/aykflLpWF1mmF8c66vclT6jnA1r42KisfCY3QFw=;
+        b=X3T6FJNT+giP2FqTWJlLZf+Tg0OlPFdHtf0+7F0/R1pgCsgM72q5vWjDKxS1RtlULO
+         jSqDe9+HWnMelMmM0mTsLYiSrlEYb8PdApgr2deBNMuemThMpjTrrIpd7RlItoacU5sj
+         r13Z6xs53QZAw3l2aso48IJaXScqlKx/dIzfqz8z4DBPo2KpEN69sd8c8Cp7gccOe0ne
+         TyaqDXxrOH/8T7XUPe/qFVeH4vF0i469NO2FonEKNLM6cSv5KHe2WCn6fThnV3n32fB1
+         M5yMtLHKtZH4ObXJh50MCUCXxrcWs23J8DmZ94EL9sOjpgd2DSDvpULSxwvoriz2vfUm
+         K2DQ==
+X-Forwarded-Encrypted: i=1; AKwUvBw28w0gCI2hyLPrwfX1TsNZWDITv3TlnamxmtzrgXHXJiLRJDG6ayurL5bKoVgbCv5WM44kw5Jcycg=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYLYZOtxl9vmxAjClnHymeHPZOfG51O+KG8uiyPvtpNoDMfJVJG5
+	JTiusXUy04hyfDNEnUKJITWLNZv3Hsw6LyYieMqIIvF72yqcgICsw71y91Ni/N5//Q==
+X-Gm-Gg: AYBFou0Ly11I2LVfqov4576U10CZMDHxEa1ZTuN7OnprThJ11y2/KHieckBc5WiVheF
+	J4g0tEd9GLSOMRN2Ae5cGRJw00Ln8zP0Cqi3sQ9TTxU6eXW6ln2XJId6HxQPkpmC7RTzE56DOw/
+	9Pwowlfgbss/BxOhNXHcb3VRN9FxmhZl6yUavbaB9gO1+077Ed2cG7bOtGQlB2FwGIlmWCBBgTn
+	u9Hsjhck1PadDc5xNCBV/B3Yv3eywB56r/dVbL61WKHE17Lh1XoRhuYeXAzkNscWikoH578qH1h
+	M5TbgwKf0VWkGKxDoqTWnRhxBOgzbuFc8qAYMfHWqhNDJdUeAy97mNXvAyn5c5c+KIz4t+zpM7O
+	DfYIUu7xHxuF5hC+dETpA3SwJGyzwgBv5nEvVvE/SBwCs3EIUkdQZ0/3/utYJ0S0VKrYkQ8bm4d
+	C55JgXVU9eGd+lz8x+CM7oTkF0Wl9CxgHhcZhmWtJHheH2n+BxcegKBuugbcxLRyJJGinT8OIRk
+	/+fjxn0CDce4mlxBK5IKQCij7PhNaOZT0veO4vKbuRA0HuI+KIfkozb23UgEDeF4/x2EyaXA31K
+	dRjo1cBxvtpELj0s8BU16Wn9/AsdeVoj95PCxfcLoIJmMvy1CLT0giF2WG0usZVg9LvK0cUE5U8
+	KkStdLOjYXddLlq8VUg==
+X-Received: by 2002:a05:600c:1387:b0:4a1:777b:8a12 with SMTP id 5b1f17b1804b1-4a966586ff2mr41884585e9.14.1793186066783;
+        Wed, 28 Oct 2026 04:14:26 -0700 (PDT)
+Message-ID: <a1099c1c-8ceb-4275-b7ef-b6c541624c8a@suse.com>
+Date: Wed, 28 Oct 2026 12:14:25 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2] x86/nestedsvm: remove dead code for shadow-paging L1
- hosts
-To: chunjie.zhu@citrix.com
-Cc: andrew.cooper3@citrix.com, jason.andryuk@amd.com, roger@xenproject.org,
- teddy.astie@vates.tech, xen-devel@lists.xenproject.org
-References: <c7cfb94a-1424-4ed8-bd3f-0216edb2c799@suse.com>
- <20261027073711.30963-1-chunjie.zhu@citrix.com>
+Subject: Re: [PATCH v2] x86/vlapic: Don't change ICR on x2APIC SELF_IPI write
+To: Teddy Astie <teddy.astie@vates.tech>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ xen-devel@lists.xenproject.org
+References: <1793023450.8631fc262581453bbf619ec5b2062170.1a178869cb4000f79f@vates.tech>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -128,12 +127,12 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261027073711.30963-1-chunjie.zhu@citrix.com>
+In-Reply-To: <1793023450.8631fc262581453bbf619ec5b2062170.1a178869cb4000f79f@vates.tech>
 Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-bad1c0/1793185607-FCC15034-0248F30A/10/78276251493
+X-purgate-ID: tlsNG-ebf023/1793186067-50AD8B50-4EB3B187/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 2112
+X-purgate-size: 2673
 X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -142,56 +141,85 @@ X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 27.10.2026 08:37, chunjie.zhu@citrix.com wrote:
-> --- a/xen/arch/x86/hvm/svm/nestedsvm.c
-> +++ b/xen/arch/x86/hvm/svm/nestedsvm.c
-> @@ -237,27 +237,10 @@ static int nsvm_vcpu_hostrestore(struct vcpu *v, struct cpu_user_regs *regs)
->      hvm_update_guest_cr(v, 2);
->  
->      /* CR3 */
-> -    /* Nested paging mode */
-> -    if ( nestedhvm_paging_mode_hap(v) )
-> -    {
-> -        /* host nested paging + guest nested paging. */
-> -        /* hvm_set_cr3() below sets v->arch.hvm.guest_cr[3] for us. */
-> -    }
-> -    else if ( !paging_mode_shadow(v->domain) )
-> -    {
-> -        /* host nested paging + guest shadow paging. */
-> -        /* hvm_set_cr3() below sets v->arch.hvm.guest_cr[3] for us. */
-> -    }
-> -    else
-> -    {
-> -        /* host shadow paging + guest shadow paging. */
-> +    /* Nested virt requires HAP, so the host is never in shadow mode. */
-> +    BUG_ON(paging_mode_shadow(v->domain));
+On 26.10.2026 15:03, Teddy Astie wrote:
+> The Intel SDM (Vol 3A-13.12.11, June 2026) says
+> 
+>> The semantics of sending a self-IPI via the SELF IPI register
+>> are identical to sending a self targeted edge triggered fixed
+>> interrupt with the specified vector.
+> 
+> However, this doesn't require altering the ICR register.
+> On most Intel processors (at least Core/P-Core), it does alter ICR,
+> but it's not the case on AMD and Atom/E-Core ones, and APICv Self-IPI
+> appears to follow a similar behavior.
+> 
+> For consistency, adjust the Xen behavior to send the Self-IPI
+> directly instead of emulating it by modifying ICR register.
+> 
+> It also clarify the logic.
+> 
+> Assisted-by: Claude Fable 5.1
+> Signed-off-by: Teddy Astie <teddy.astie@vates.tech>
 
-See below as to the use of "host" in the comment.
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
 
-> @@ -517,10 +500,13 @@ static int nsvm_vmcb_prepare4vmrun(struct vcpu *v, struct cpu_user_regs *regs)
->      v->arch.hvm.guest_cr[2] = ns_vmcb->_cr2;
->      hvm_update_guest_cr(v, 2);
+However, ...
+
+> --- a/xen/arch/x86/hvm/vlapic.c
+> +++ b/xen/arch/x86/hvm/vlapic.c
+> @@ -970,11 +970,13 @@ int vlapic_apicv_write(struct vcpu *v, unsigned int offset)
 >  
-> +    /* Nested virt requires HAP, so the host is never in shadow mode. */
-> +    BUG_ON(paging_mode_shadow(v->domain));
-> +
->      /* Nested paging mode */
->      if ( nestedhvm_paging_mode_hap(v) )
+>      if ( vlapic_x2apic_mode(vlapic) )
 >      {
-> -        /* host nested paging + guest nested paging. */
-> +        /* Guest uses nested paging. */
->          vmcb_set_np(n2vmcb, true);
+> -        if ( offset != APIC_SELF_IPI )
+> -            return X86EMUL_UNHANDLEABLE;
 
-"Guest" alone ends up ambiguous. The "host" / "guest" terminology used before
-wasn't quite clear either, but at least there was some distinction. Easiest
-may be to drop "Guest uses" here (and below). Else, to be unambiguous, it may
-need to be something like "L1 runs L2 under nested paging".
+... why the extra churn here? The overall hunk here ...
 
-If you agree with dropping "Guest uses" and replacing "host" by "L1", I can
-make these adjustments while committing, implying
-Acked-by: Jan Beulich <jbeulich@suse.com>
-in that shape. Otherwise please submit a v3 with adjustments you consider
-suitable.
+> +        if ( offset == APIC_SELF_IPI )
+> +        {
+> +            vlapic_ipi(vlapic, APIC_DEST_SELF | (val & APIC_VECTOR_MASK), 0);
+> +            return X86EMUL_OKAY;
+> +        }
+>  
+> -        offset = APIC_ICR;
+> -        val = APIC_DEST_SELF | (val & APIC_VECTOR_MASK);
+> +        return X86EMUL_UNHANDLEABLE;
+>      }
+>  
+>      vlapic_reg_write(v, offset, val);
+
+... could be
+
+@@ -973,8 +973,8 @@ int vlapic_apicv_write(struct vcpu *v, unsigned int offset)
+         if ( offset != APIC_SELF_IPI )
+             return X86EMUL_UNHANDLEABLE;
+ 
+-        offset = APIC_ICR;
+-        val = APIC_DEST_SELF | (val & APIC_VECTOR_MASK);
++        vlapic_ipi(vlapic, APIC_DEST_SELF | (val & APIC_VECTOR_MASK), 0);
++        return X86EMUL_OKAY;
+     }
+ 
+     vlapic_reg_write(v, offset, val);
+
+Much closer to ...
+
+> @@ -1050,9 +1052,8 @@ int guest_wrmsr_x2apic(struct vcpu *v, uint32_t msr, uint64_t val)
+>      case APIC_SELF_IPI:
+>          if ( val & ~APIC_VECTOR_MASK )
+>              return X86EMUL_EXCEPTION;
+> -        offset = APIC_ICR;
+> -        val = APIC_DEST_SELF | (val & APIC_VECTOR_MASK);
+> -        break;
+> +        vlapic_ipi(vlapic, APIC_DEST_SELF | (val & APIC_VECTOR_MASK), 0);
+> +        return X86EMUL_OKAY;
+>  
+>      case APIC_EOI:
+>      case APIC_ESR:
+
+... this hunk then. (I may take the liberty of making that adjustment while
+committing, unless you provide a reason for the bigger change.)
 
 Jan
 
