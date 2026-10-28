@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 07074606A31A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:31:12 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id D1689606A31A
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:31:16 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=E2C824RU
-Received: from list by lists.xenproject.org with outflank-mailman.1463805.1674722 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=bQqAc85o
+Received: from list by lists.xenproject.org with outflank-mailman.1463807.1674738 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD6j-0000b6-V4; Wed, 28 Oct 2026 23:31:01 +0000
+	id 1xMD6o-0001ZD-LE; Wed, 28 Oct 2026 23:31:06 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463805.1674722; Wed, 28 Oct 2026 23:31:01 +0000
+Received: by outflank-mailman (output) from mailman id 1463807.1674738; Wed, 28 Oct 2026 23:31:06 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD6h-0000QG-CZ; Wed, 28 Oct 2026 23:30:59 +0000
-Received: by outflank-mailman (input) for mailman id 1463805;
+	id 1xMD6n-0001Tf-27; Wed, 28 Oct 2026 23:31:05 +0000
+Received: by outflank-mailman (input) for mailman id 1463807;
  Wed, 28 Oct 2026 23:30:37 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xMD6L-00049Z-7f
+ (envelope-from <gwd@xenproject.org>) id 1xMD6L-00049u-CH
  for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:30:37 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMD6L-00000000pQj-1RDH;
+ (envelope-from <gwd@xenproject.org>) id 1xMD6L-00000000pRA-1sep;
  Wed, 28 Oct 2026 23:30:37 +0000
 Received: from [217.155.165.12] (helo=Mac.fritz.box.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMCjQ-00000001KpM-0mv0;
- Wed, 28 Oct 2026 23:06:56 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCjd-00000001KpM-0j5A;
+ Wed, 28 Oct 2026 23:07:09 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,18 +41,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=RVROnRhnJ2CS9YJZ5lc9Ti4SNS+seTPBJxsek/UlS70=; b=E2C824RUvzOBqrkoMBWaYPnIuv
-	Z8bIlRD1Hs75E+rVQ0QoWelMblBRMVOnJ30G4DhrlqJsNqN2U0GMUmf5RGFN8djfzfuhSbOjiTibs
-	l2ALy13d3Ar7XutefkhiHGNeYAY8BQX5N1GKyUtel/zp39KkYAgMJ2N4Nexcp2fxtQQQ=;
+	bh=0lX6CHwDNVccQVi6T81X3E5uhExKP3Yedzo3WsWaf6A=; b=bQqAc85oOR3S5KGZydKsY0Ybrv
+	7KVwE8AEPEs9azELoBWt/EhoUMefEjbxQj9d9zqBMXRBMRjmlzjoHcdGkrB8SXuDghAYgsbIrDSZU
+	yBU4JM3cE0KsjZ9KA/QrXTaIAIqfjKYELc42JlZR/mJYAXC8zvrhYqjHkkDejeQgzDcQ=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v5 19/45] x86/domain_page: key the directmap fast paths on the loaded view
-Date: Wed, 28 Oct 2026 23:05:33 +0000
-Message-ID: <20261028-asi-hvm-v5-19-13b908e0df0b@xenproject.org>
+Subject: [PATCH v5 31/45] x86/vmx: move the guest MSR load/save list off always-mapped memory
+Date: Wed, 28 Oct 2026 23:05:45 +0000
+Message-ID: <20261028-asi-hvm-v5-31-13b908e0df0b@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
 References: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
@@ -66,143 +66,384 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-map_domain_page() returns directmap addresses whenever it can: for any
-MFN the directmap covers in release builds, and for vCPUs without a
-mapcache.  Once guest contexts may run on the sparse view of the
-directmap, modify this to take the fast path returning the directmap
-address only when the full directmap is loaded.
+The guest MSR load/save list holds guest MSR values (SPEC_CTRL, LBR,
+PT, vPMU global control, and EFER on hardware without dedicated
+controls), but lives on the xenheap, where it stays reachable from
+every context.  Move the page to the domain heap and map it at its
+fixed slot in the owning vCPU's state window, so that under Address
+Space Isolation it is only mapped while that vCPU's page tables are
+loaded.  Hardware is unaffected: the VMCS MSR-area pointers hold the
+physical address, now derived from the page rather than from
+virt_to_maddr() on a directmap VA.
 
-The release-build shortcut ahead of the vCPU lookup looks at the vCPU
-whose page-tables are loaded, without completing a lazy context
-switch: if that vCPU is not on the sparse view, its page-tables map
-the page through the directmap, and completing the switch would only
-move the CPU to the idle vCPU's page-tables, which map it too.
+The host MSR load list is left on the xenheap: it holds Xen's own
+exit-time values, not guest data, so relocating it would serve no
+isolation purpose.
 
-A vCPU on the sparse view always has a mapcache: HVM ones through
-per-vCPU page-tables, PV ones through the domain-wide mapcache, which
-mapcache_domain_init() now sets up for a domain using the sparse view in
-release builds too, rather than only when the directmap does not cover
-all memory.
+The window VA is only valid in the owning vCPU's context.  Almost all
+accesses have v == current and keep going through vmx->msr_area
+unchanged (the vmentry-path LBR fixups, the failed-vmentry dump, vPMU,
+and the MSR intercepts).  The remote accessors -- vmx_add_msr() /
+vmx_del_msr() from vCPU construction, policy updates and context
+load, and single-entry reads/writes from the HVM context save/load
+and get/set-reg paths, all of which already require the target vCPU
+to be paused -- dispatch through a transient mapping of the page,
+dropped with unmap_vcpu_state_page(), which also drops this CPU's
+translations of it:
 
-map_domain_page_global() mappings must be valid in every context: use
-vmap() for all of them once a sparse view is configured, as
-arch_mfns_in_directmap() then says.
+ * vmx_add_msr() and vmx_del_msr() map internally around their
+   search/insert/remove.
 
-Add d->arch.asi.sparse_dmap for this; nothing sets it yet.
+ * vmx_read_guest_msr(), vmx_read_guest_loadonly_msr() and
+   vmx_write_guest_msr() move out of line and do the same, via
+   vmx_find_msr_in(), the existing lookup parameterised on the mapped
+   area.  vmx_find_msr() itself is unchanged for its remaining
+   callers, which all run in current context and dereference the
+   returned pointer through the window.
 
-No functional change.
+vmx_destroy_vmcs() takes the page out of the window before freeing it,
+with unmap_vcpu_state(): without per-vCPU page tables the window is in
+the per-domain area that all its domain's vCPUs share, which outlives
+a vCPU whose creation fails.
 
-Assisted-by: Claude Code:claude-opus-5-5
+The new page pointer goes with the existing page_info pointers after
+pi_desc rather than next to msr_area: struct pi_desc is 64-byte
+aligned, so inserting eight bytes ahead of it would have added 56
+bytes of padding, growing struct vmx_vcpu from 448 to 512 bytes and,
+via the union in struct arch_vcpu, every struct vcpu by 64 bytes
+(x86_64 defconfig).
+
+Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
-Changes in v4:
-- d->arch.sparse_dmap is now a one-bit field of d->arch.asi, beside
-  vcpu_pt.
-- Wrap a line that reached 80 columns.
-- Drop sparse_dmap_active: d->arch.asi.sparse_dmap alone says whether a
-  domain's root page-tables carry the sparse view (Roger).  Builds
-  without CONFIG_SPARSE_DIRECTMAP compile the test out, as before.
-- Drop the second directmap check after the vCPU lookup: the
-  !cache->inuse case covers it.
+Changes in v5:
+- Map and unmap through VMX_MAP_MSR_AREA() and VMX_UNMAP_MSR_AREA(),
+  which clears the pointer (George).
 
-Changes in v3:
+Changes in v4:
 - New in this version.
 ---
- xen/arch/x86/domain_page.c        | 34 ++++++++++++++++++++++++++++---
- xen/arch/x86/include/asm/domain.h |  3 +++
- 2 files changed, 34 insertions(+), 3 deletions(-)
+ xen/arch/x86/hvm/vmx/vmcs.c             | 142 ++++++++++++++++++++++--
+ xen/arch/x86/include/asm/hvm/vmx/vmcs.h |  63 +++--------
+ 2 files changed, 147 insertions(+), 58 deletions(-)
 
-diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
-index 770fee80a4..6b662706fb 100644
---- a/xen/arch/x86/domain_page.c
-+++ b/xen/arch/x86/domain_page.c
-@@ -56,6 +56,13 @@ static inline struct vcpu *mapcache_current_vcpu(void)
-     return ACCESS_ONCE(this_cpu(pgtable_vcpu));
+diff --git a/xen/arch/x86/hvm/vmx/vmcs.c b/xen/arch/x86/hvm/vmx/vmcs.c
+index 8ec7ae7403..592722f1ca 100644
+--- a/xen/arch/x86/hvm/vmx/vmcs.c
++++ b/xen/arch/x86/hvm/vmx/vmcs.c
+@@ -1416,8 +1416,11 @@ static struct vmx_msr_entry *locate_msr_entry(
+     return start;
  }
  
-+/* Whether @v's page-tables carry the sparse view of the directmap. */
-+static bool on_sparse_dmap(const struct vcpu *v)
+-struct vmx_msr_entry *vmx_find_msr(const struct vcpu *v, uint32_t msr,
+-                                   enum vmx_msr_list_type type)
++/* As vmx_find_msr(), but reaching the guest MSR area through @area. */
++static struct vmx_msr_entry *vmx_find_msr_in(const struct vcpu *v,
++                                             struct vmx_msr_entry *area,
++                                             uint32_t msr,
++                                             enum vmx_msr_list_type type)
+ {
+     const struct vmx_vcpu *vmx = &v->arch.hvm.vmx;
+     struct vmx_msr_entry *start = NULL, *ent, *end;
+@@ -1435,11 +1438,11 @@ struct vmx_msr_entry *vmx_find_msr(const struct vcpu *v, uint32_t msr,
+         break;
+ 
+     case VMX_MSR_GUEST:
+-        start    = vmx->msr_area;
++        start    = area;
+         break;
+ 
+     case VMX_MSR_GUEST_LOADONLY:
+-        start    = vmx->msr_area;
++        start    = area;
+         substart = subend;
+         subend   = total;
+         break;
+@@ -1458,6 +1461,77 @@ struct vmx_msr_entry *vmx_find_msr(const struct vcpu *v, uint32_t msr,
+     return ((ent < end) && (ent->index == msr)) ? ent : NULL;
+ }
+ 
++struct vmx_msr_entry *vmx_find_msr(const struct vcpu *v, uint32_t msr,
++                                   enum vmx_msr_list_type type)
 +{
-+    return IS_ENABLED(CONFIG_SPARSE_DIRECTMAP) &&
-+           v->domain->arch.asi.sparse_dmap;
++    ASSERT(v == current || type == VMX_MSR_HOST);
++
++    return vmx_find_msr_in(v, v->arch.hvm.vmx.msr_area, msr, type);
 +}
 +
- /*
-  * The accounting for v's mapcache: its own for a vCPU-PT domain, the domain's
-  * otherwise, in which case *dcache is set so the caller takes the domain-wide
-@@ -135,9 +142,19 @@ void *map_domain_page(mfn_t mfn)
- 
- #ifdef NDEBUG
-     if ( mfn_x(mfn) <= PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
--        return mfn_to_virt(mfn_x(mfn));
-+    {
-+        const struct vcpu *pt_vcpu = this_cpu(pgtable_vcpu);
++static struct vmx_msr_entry *vmx_msr_area_map(const struct vcpu *v)
++{
++    const struct vmx_vcpu *vmx = &v->arch.hvm.vmx;
 +
-+        /*
-+         * The page-tables loaded map @mfn through the directmap, unless they
-+         * carry the sparse view.
-+         */
-+        if ( !pt_vcpu || !on_sparse_dmap(pt_vcpu) )
-+            return mfn_to_virt(mfn_x(mfn));
-+    }
- #endif
- 
-+    /* No vCPU (early boot), or no mapcache: the full directmap is loaded. */
-     v = mapcache_current_vcpu();
-     if ( !v )
-         return mfn_to_virt(mfn_x(mfn));
-@@ -145,7 +162,10 @@ void *map_domain_page(mfn_t mfn)
-     cache = vcpu_mapcache(v, &dcache);
-     vcache = &v->arch.mapcache;
-     if ( !cache->inuse )
-+    {
-+        ASSERT(!on_sparse_dmap(v));
-         return mfn_to_virt(mfn_x(mfn));
-+    }
- 
-     perfc_incr(map_domain_page_count);
- 
-@@ -294,7 +314,11 @@ void mapcache_domain_init(struct domain *d)
-     ASSERT(is_pv_domain(d));
- 
- #ifdef NDEBUG
--    if ( !mem_hotplug && max_page <= PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
-+    /*
-+     * Not needed when the directmap loaded for the domain covers everything.
-+     */
-+    if ( !d->arch.asi.sparse_dmap && !mem_hotplug &&
-+         max_page <= PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
-         return;
- #endif
- 
-@@ -378,8 +402,12 @@ void *map_domain_page_global(mfn_t mfn)
-              system_state < SYS_STATE_active) ||
-             local_irq_is_enabled()));
- 
-+    /*
-+     * Global mappings must hold in every context: a sparse view of the
-+     * directmap rules the directmap out.
-+     */
- #ifdef NDEBUG
--    if ( mfn_x(mfn) <= PFN_DOWN(__pa(HYPERVISOR_VIRT_END - 1)) )
-+    if ( arch_mfns_in_directmap(mfn_x(mfn), 1) )
-         return mfn_to_virt(mfn_x(mfn));
- #endif
- 
-diff --git a/xen/arch/x86/include/asm/domain.h b/xen/arch/x86/include/asm/domain.h
-index 7076e38848..f84ac15759 100644
---- a/xen/arch/x86/include/asm/domain.h
-+++ b/xen/arch/x86/include/asm/domain.h
-@@ -490,6 +490,9 @@ struct arch_domain
-     struct {
-         /* Give each vCPU its own per-domain area (HVM only). */
-         bool vcpu_pt:1;
++    if ( v == current || !vmx->msr_area )
++        return vmx->msr_area;
 +
-+        /* The domain's root page-tables carry the sparse directmap view. */
-+        bool sparse_dmap:1;
-     } asi;
++    return map_domain_page(page_to_mfn(vmx->msr_area_pg));
++}
++
++static void vmx_msr_area_unmap(const struct vcpu *v,
++                               const struct vmx_msr_entry *area)
++{
++    if ( v != current && area )
++        unmap_vcpu_state_page(area);
++}
++
++#define VMX_MAP_MSR_AREA(v) vmx_msr_area_map(v)
++
++/* Drops the mapping of a guest MSR area and nullifies its pointer. */
++#define VMX_UNMAP_MSR_AREA(v, area) do {  \
++    vmx_msr_area_unmap(v, area);          \
++    (area) = NULL;                        \
++} while ( false )
++
++int vmx_read_guest_msr(const struct vcpu *v, uint32_t msr, uint64_t *val)
++{
++    struct vmx_msr_entry *area = VMX_MAP_MSR_AREA(v);
++    const struct vmx_msr_entry *ent =
++        area ? vmx_find_msr_in(v, area, msr, VMX_MSR_GUEST) : NULL;
++
++    *val = ent ? ent->data : 0;
++    VMX_UNMAP_MSR_AREA(v, area);
++
++    return ent ? 0 : -ESRCH;
++}
++
++int vmx_read_guest_loadonly_msr(const struct vcpu *v, uint32_t msr,
++                                uint64_t *val)
++{
++    struct vmx_msr_entry *area = VMX_MAP_MSR_AREA(v);
++    const struct vmx_msr_entry *ent =
++        area ? vmx_find_msr_in(v, area, msr, VMX_MSR_GUEST_LOADONLY) : NULL;
++
++    *val = ent ? ent->data : 0;
++    VMX_UNMAP_MSR_AREA(v, area);
++
++    return ent ? 0 : -ESRCH;
++}
++
++int vmx_write_guest_msr(struct vcpu *v, uint32_t msr, uint64_t val)
++{
++    struct vmx_msr_entry *area = VMX_MAP_MSR_AREA(v);
++    struct vmx_msr_entry *ent =
++        area ? vmx_find_msr_in(v, area, msr, VMX_MSR_GUEST) : NULL;
++
++    if ( ent )
++        ent->data = val;
++    VMX_UNMAP_MSR_AREA(v, area);
++
++    return ent ? 0 : -ESRCH;
++}
++
+ int vmx_add_msr(struct vcpu *v, uint32_t msr, uint64_t val,
+                 enum vmx_msr_list_type type)
+ {
+@@ -1503,13 +1577,38 @@ int vmx_add_msr(struct vcpu *v, uint32_t msr, uint64_t val,
+     {
+         paddr_t addr;
  
-     /* Emulated devices enabled bitmap. */
+-        if ( (*ptr = alloc_xenheap_page()) == NULL )
++        if ( type == VMX_MSR_HOST )
+         {
+-            rc = -ENOMEM;
+-            goto out;
++            if ( (*ptr = alloc_xenheap_page()) == NULL )
++            {
++                rc = -ENOMEM;
++                goto out;
++            }
++
++            addr = virt_to_maddr(*ptr);
+         }
++        else
++        {
++            struct page_info *pg = alloc_domheap_page(v->domain,
++                                                      MEMF_no_owner);
++            mfn_t mfn;
+ 
+-        addr = virt_to_maddr(*ptr);
++            if ( pg == NULL )
++            {
++                rc = -ENOMEM;
++                goto out;
++            }
++
++            mfn = page_to_mfn(pg);
++            clear_domain_page(mfn);
++            populate_perdomain_mapping(v,
++                                       VCPU_STATE_ADDR(v,
++                                                       VCPU_STATE_IDX_VMX_MSR),
++                                       &mfn, 1, __PAGE_HYPERVISOR_RW);
++            vmx->msr_area_pg = pg;
++            *ptr = (void *)VCPU_STATE_ADDR(v, VCPU_STATE_IDX_VMX_MSR);
++            addr = mfn_to_maddr(mfn);
++        }
+ 
+         switch ( type )
+         {
+@@ -1525,7 +1624,7 @@ int vmx_add_msr(struct vcpu *v, uint32_t msr, uint64_t val,
+         }
+     }
+ 
+-    start = *ptr;
++    start = type == VMX_MSR_HOST ? *ptr : VMX_MAP_MSR_AREA(v);
+     end   = start + total;
+     ent   = locate_msr_entry(start + substart, start + subend, msr);
+ 
+@@ -1565,6 +1664,8 @@ int vmx_add_msr(struct vcpu *v, uint32_t msr, uint64_t val,
+     rc = 0;
+ 
+  out:
++    if ( type != VMX_MSR_HOST )
++        VMX_UNMAP_MSR_AREA(v, start);
+     vmx_vmcs_exit(v);
+ 
+     return rc;
+@@ -1576,6 +1677,7 @@ int vmx_del_msr(struct vcpu *v, uint32_t msr, enum vmx_msr_list_type type)
+     struct vmx_msr_entry *start = NULL, *ent, *end;
+     unsigned int substart = 0, subend = vmx->msr_save_count;
+     unsigned int total = vmx->msr_load_count;
++    int rc = 0;
+ 
+     ASSERT(v == current || !vcpu_runnable(v));
+ 
+@@ -1605,11 +1707,17 @@ int vmx_del_msr(struct vcpu *v, uint32_t msr, enum vmx_msr_list_type type)
+     if ( !start )
+         return -ESRCH;
+ 
++    if ( type != VMX_MSR_HOST )
++        start = VMX_MAP_MSR_AREA(v);
++
+     end = start + total;
+     ent = locate_msr_entry(start + substart, start + subend, msr);
+ 
+     if ( (ent == end) || (ent->index != msr) )
+-        return -ESRCH;
++    {
++        rc = -ESRCH;
++        goto out;
++    }
+ 
+     memmove(ent, ent + 1, sizeof(*ent) * (end - ent - 1));
+ 
+@@ -1632,7 +1740,11 @@ int vmx_del_msr(struct vcpu *v, uint32_t msr, enum vmx_msr_list_type type)
+ 
+     vmx_vmcs_exit(v);
+ 
+-    return 0;
++ out:
++    if ( type != VMX_MSR_HOST )
++        VMX_UNMAP_MSR_AREA(v, start);
++
++    return rc;
+ }
+ 
+ void vmx_set_eoi_exit_bitmap(struct vcpu *v, u8 vector)
+@@ -1829,7 +1941,13 @@ void vmx_destroy_vmcs(struct vcpu *v)
+     vmx_free_vmcs(vmx->vmcs_pa);
+ 
+     free_xenheap_page(v->arch.hvm.vmx.host_msr_area);
+-    free_xenheap_page(v->arch.hvm.vmx.msr_area);
++    if ( v->arch.hvm.vmx.msr_area_pg )
++    {
++        unmap_vcpu_state(v, VCPU_STATE_IDX_VMX_MSR, 1);
++        free_domheap_page(v->arch.hvm.vmx.msr_area_pg);
++        v->arch.hvm.vmx.msr_area_pg = NULL;
++        v->arch.hvm.vmx.msr_area = NULL;
++    }
+     free_xenheap_page(v->arch.hvm.vmx.msr_bitmap);
+ }
+ 
+diff --git a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
+index d0716e97d2..e5730780e2 100644
+--- a/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
++++ b/xen/arch/x86/include/asm/hvm/vmx/vmcs.h
+@@ -140,6 +140,10 @@ struct vmx_vcpu {
+      * context.  However, the data can be modified by toolstack/migration
+      * actions.  Remote access is only permitted for paused vcpus, and is
+      * protected under the domctl lock.
++     *
++     * The guest list is a domain-heap page (msr_area_pg, below) mapped at a
++     * fixed slot in the owning vCPU's state window: msr_area holds that
++     * window VA, which is only valid in the owning vCPU's context.
+      */
+     struct vmx_msr_entry *msr_area;
+     struct vmx_msr_entry *host_msr_area;
+@@ -185,6 +189,9 @@ struct vmx_vcpu {
+ 
+     struct page_info     *pml_pg;
+ 
++    /* Backing page of msr_area; see the comment there. */
++    struct page_info     *msr_area_pg;
++
+     /* Bitmask of trapped CR4 bits. */
+     unsigned long        cr4_host_mask;
+ 
+@@ -669,55 +676,19 @@ static inline int vmx_add_host_load_msr(struct vcpu *v, uint32_t msr,
+     return vmx_add_msr(v, msr, val, VMX_MSR_HOST);
+ }
+ 
++/*
++ * Look an MSR up in the guest or host list of @v.  The returned pointer
++ * reaches the guest lists through the vCPU state window, so for those it
++ * is only valid (and the call only permitted) in current context; the
++ * single-entry accessors below handle paused remote vCPUs.
++ */
+ struct vmx_msr_entry *vmx_find_msr(const struct vcpu *v, uint32_t msr,
+                                    enum vmx_msr_list_type type);
+ 
+-static inline int vmx_read_guest_msr(const struct vcpu *v, uint32_t msr,
+-                                     uint64_t *val)
+-{
+-    const struct vmx_msr_entry *ent = vmx_find_msr(v, msr, VMX_MSR_GUEST);
+-
+-    if ( !ent )
+-    {
+-        *val = 0;
+-        return -ESRCH;
+-    }
+-
+-    *val = ent->data;
+-
+-    return 0;
+-}
+-
+-static inline int vmx_read_guest_loadonly_msr(
+-    const struct vcpu *v, uint32_t msr, uint64_t *val)
+-{
+-    const struct vmx_msr_entry *ent =
+-        vmx_find_msr(v, msr, VMX_MSR_GUEST_LOADONLY);
+-
+-    if ( !ent )
+-    {
+-        *val = 0;
+-        return -ESRCH;
+-    }
+-
+-    *val = ent->data;
+-
+-    return 0;
+-}
+-
+-static inline int vmx_write_guest_msr(struct vcpu *v, uint32_t msr,
+-                                      uint64_t val)
+-{
+-    struct vmx_msr_entry *ent = vmx_find_msr(v, msr, VMX_MSR_GUEST);
+-
+-    if ( !ent )
+-        return -ESRCH;
+-
+-    ent->data = val;
+-
+-    return 0;
+-}
+-
++int vmx_read_guest_msr(const struct vcpu *v, uint32_t msr, uint64_t *val);
++int vmx_read_guest_loadonly_msr(const struct vcpu *v, uint32_t msr,
++                                uint64_t *val);
++int vmx_write_guest_msr(struct vcpu *v, uint32_t msr, uint64_t val);
+ 
+ /* MSR intercept bitmap infrastructure. */
+ enum vmx_msr_intercept_type {
 -- 
 2.56.0
 
