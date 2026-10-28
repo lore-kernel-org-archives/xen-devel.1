@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 84017606A31A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:06:58 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 0846A606A31C
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:07:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=XECs9kUd
-Received: from list by lists.xenproject.org with outflank-mailman.1463714.1674492 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=TUTKAFoL
+Received: from list by lists.xenproject.org with outflank-mailman.1463718.1674525 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMCjC-0003BI-B5; Wed, 28 Oct 2026 23:06:42 +0000
+	id 1xMCjG-0003xl-L0; Wed, 28 Oct 2026 23:06:46 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463714.1674492; Wed, 28 Oct 2026 23:06:42 +0000
+Received: by outflank-mailman (output) from mailman id 1463718.1674525; Wed, 28 Oct 2026 23:06:46 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMCjC-0003B5-7W; Wed, 28 Oct 2026 23:06:42 +0000
-Received: by outflank-mailman (input) for mailman id 1463714;
- Wed, 28 Oct 2026 23:06:40 +0000
+	id 1xMCjG-0003wk-E6; Wed, 28 Oct 2026 23:06:46 +0000
+Received: by outflank-mailman (input) for mailman id 1463718;
+ Wed, 28 Oct 2026 23:06:45 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xMCjA-0002wF-Nh
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:06:40 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCjF-0003m1-Da
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:06:45 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMCjA-00000000ozC-2IXQ;
- Wed, 28 Oct 2026 23:06:40 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCjF-00000000ozi-0Tjz;
+ Wed, 28 Oct 2026 23:06:44 +0000
 Received: from [217.155.165.12] (helo=Mac.fritz.box.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMCjA-00000001KpM-0Z4w;
- Wed, 28 Oct 2026 23:06:40 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCjE-00000001KpM-2exR;
+ Wed, 28 Oct 2026 23:06:44 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -39,27 +39,26 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
-	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:Content-Type:
-	MIME-Version:References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=w50GWZ48VtZLTYVd8SCuQUF/rxoF1HYBp06a7RaN7SI=; b=XECs9kUdwfm+idqZTNzkmlBkT/
-	bxSVdPiglppi2owsP220vs09Fc8F1dg5kAQd1A0cpHW/HWhC2pwEoOZ+JcYC1UGPTppP2f0TOqUWc
-	adhURgql79xNbPRnmEOZE49eH4oTplXSEZSz+qXY7GW55Y9pff6h/mbaDObitd92GJ7U=;
+	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
+	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
+	bh=MLibhM8wWl0/HCQDzONzRs5XUt2IjOuQT9Me0vQau9k=; b=TUTKAFoLmXdsPbV6b3gwgBpyOn
+	m0MBzZGkNb7CzpuRxQvqpCiskjG+OLk0YwoQ5QPZztr6iHRWSTO9F4sSQUoY8cl3VGzRQ40Rq77Ia
+	j7DYIDd8CHFxitpdnBU3dUTxn+kINQrwtVm+vymDDzGMgNgtkoxtZqg3YkmJbcWtXFx8=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: =?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger.pau@citrix.com>,
-	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
-	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v5 04/45] x86/mm: prepare destroy_perdomain_mapping() for per-vCPU perdomain areas
-Date: Wed, 28 Oct 2026 23:05:18 +0000
-Message-ID: <20261028-asi-hvm-v5-4-13b908e0df0b@xenproject.org>
+	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
+	Teddy Astie <teddy.astie@vates.tech>,
+	Tim Deegan <tim@xen.org>
+Subject: [PATCH v5 08/45] x86/mm: have init_xen_l4_slots() take a vCPU in place of the domain
+Date: Wed, 28 Oct 2026 23:05:22 +0000
+Message-ID: <20261028-asi-hvm-v5-8-13b908e0df0b@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
 References: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Type: text/plain; charset=UTF-8
 Content-Transfer-Encoding: 8bit
 X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
@@ -68,91 +67,182 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-From: Roger Pau Monné <roger.pau@citrix.com>
+A later change gives the vCPUs of some domains per-domain areas of their
+own, and slot 260 of a table private to one vCPU must then hold that
+vCPU's L3.  init_xen_l4_slots(), which fills slot 260, needs the vCPU
+for that.
 
-We want to change per-domain mappings to be per-vCPU mappings.  In
-preparation for that, we want to arrange that
-destroy_perdomain_mapping() work either with a single perdomain area,
-or with a per-vCPU perdomain area.
+Have it take a vCPU in place of the domain.  A table private to one vCPU
+passes that vCPU; tables that the domain's vCPUs share -- promoted PV
+guest L4s, PV shadow L4s, and the PV dom0 L4 under construction -- pass
+any of them.  promote_l4_table() passes vCPU 0, so it now also refuses
+an L4 while the domain has no vCPU 0, as it already does while the
+domain has no per-domain L3; its call is reflowed.
 
-The one remaining caller, free_compat_arg_xlat(), is already in a vCPU
-context, so we just need to change the parameter from a domain pointer
-to a vCPU pointer.
+Otherwise no functional change: slot 260 still gets the domain's
+per-domain L3.
 
-No functional change.
-
-Signed-off-by: Roger Pau Monné <roger.pau@citrix.com>
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-4-8, Claude Code:claude-opus-5-5
+Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
-Reviewed-by: Roger Pau Monné <roger@xenproject.org>
 ---
+Changes in v5:
+- promote_l4_table() checks for vCPU 0 itself, now that "x86/mm: refuse
+  to promote an L4 while the domain has no per-domain L3" tests for the
+  L3 instead.
+
 Changes in v4:
-- Say "No functional change." (Roger).
-
-Changes in v3:
-- Rebased onto staging without the GDT/LDT conversions (for the
-  HVM-only series): free_compat_arg_xlat() is the only caller left.
-- Drop the linear-page-table fast path altogether (Jan): its only user
-  would have been guest-driven LDT teardown, and without it the
-  function does not depend on the linear mapping being available.
-
-Changes in v2:
-- Added to the series
-
-Changes since the previously posted version:
-- The fast path is gone (v3), and with it the previously posted
-  version's sync_local_execstate() call.
-- Reword and retitle for clarity (was: "x86/mm: switch
-  destroy_perdomain_mapping() parameter from domain to vCPU").
+- New in this version, split out of "x86/hvm: introduce per-vCPU L3
+  page-table": init_xen_l4_slots() takes a vCPU in place of the domain
+  (Roger, Jan).
+- Reflow promote_l4_table()'s call to init_xen_l4_slots() (Jan).
 ---
- xen/arch/x86/include/asm/mm.h | 2 +-
- xen/arch/x86/mm.c             | 3 ++-
- xen/arch/x86/x86_64/mm.c      | 2 +-
- 3 files changed, 4 insertions(+), 3 deletions(-)
+ xen/arch/x86/include/asm/mm.h  |  2 +-
+ xen/arch/x86/mm.c              | 21 ++++++++++++++-------
+ xen/arch/x86/mm/hap/hap.c      |  2 +-
+ xen/arch/x86/mm/shadow/hvm.c   |  2 +-
+ xen/arch/x86/mm/shadow/multi.c |  2 +-
+ xen/arch/x86/pv/dom0_build.c   |  2 +-
+ xen/arch/x86/pv/domain.c       |  2 +-
+ 7 files changed, 20 insertions(+), 13 deletions(-)
 
 diff --git a/xen/arch/x86/include/asm/mm.h b/xen/arch/x86/include/asm/mm.h
-index aa515efbee..20a1d27cd0 100644
+index c9085214fd..de45a111f3 100644
 --- a/xen/arch/x86/include/asm/mm.h
 +++ b/xen/arch/x86/include/asm/mm.h
-@@ -609,7 +609,7 @@ int compat_arch_memory_op(unsigned long cmd, XEN_GUEST_HANDLE_PARAM(void) arg);
- int create_perdomain_mapping(struct domain *d, unsigned long va,
-                              unsigned int nr, l1_pgentry_t **pl1tab,
-                              struct page_info **ppg);
--void destroy_perdomain_mapping(struct domain *d, unsigned long va,
-+void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
-                                unsigned int nr);
- void free_perdomain_mappings(struct domain *d);
+@@ -370,7 +370,7 @@ int devalidate_page(struct page_info *page, unsigned long type,
+ 
+ void init_xen_pae_l2_slots(l2_pgentry_t *l2t, const struct domain *d);
+ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
+-                       const struct domain *d, mfn_t sl4mfn, bool ro_mpt);
++                       const struct vcpu *v, mfn_t sl4mfn, bool ro_mpt);
+ bool fill_ro_mpt(mfn_t mfn);
+ void zap_ro_mpt(mfn_t mfn);
  
 diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
-index f00f0b831d..72c1865e7e 100644
+index 8153683a0c..f2122a68ce 100644
 --- a/xen/arch/x86/mm.c
 +++ b/xen/arch/x86/mm.c
-@@ -6361,10 +6361,11 @@ int create_perdomain_mapping(struct domain *d, unsigned long va,
-     return rc;
- }
- 
--void destroy_perdomain_mapping(struct domain *d, unsigned long va,
-+void destroy_perdomain_mapping(const struct vcpu *v, unsigned long va,
-                                unsigned int nr)
+@@ -1687,14 +1687,18 @@ static int promote_l3_table(struct page_info *page)
+  * This function must write all ROOT_PAGETABLE_PV_XEN_SLOTS, to clobber any
+  * values a guest may have left there from promote_l4_table().
+  *
+- * l4t, l4mfn, and d are mandatory, but l4mfn doesn't need to be the mfn under
++ * l4t, l4mfn, and v are mandatory, but l4mfn doesn't need to be the mfn under
+  * *l4t.  All other parameters are optional and will either fill or zero the
+  * appropriate slots.  Pagetables not shared with guests will gain the
+  * extended directmap.
++ *
++ * v is the vCPU the table is private to or, for a table the domain's vCPUs
++ * share, any of them.
+  */
+ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
+-                       const struct domain *d, mfn_t sl4mfn, bool ro_mpt)
++                       const struct vcpu *v, mfn_t sl4mfn, bool ro_mpt)
  {
-     const l3_pgentry_t *l3tab, *pl3e;
 +    const struct domain *d = v->domain;
- 
-     ASSERT(va >= PERDOMAIN_VIRT_START &&
-            va < PERDOMAIN_VIRT_SLOT(PERDOMAIN_SLOTS));
-diff --git a/xen/arch/x86/x86_64/mm.c b/xen/arch/x86/x86_64/mm.c
-index 8eadab7933..f467ed426b 100644
---- a/xen/arch/x86/x86_64/mm.c
-+++ b/xen/arch/x86/x86_64/mm.c
-@@ -739,7 +739,7 @@ int setup_compat_arg_xlat(struct vcpu *v)
- 
- void free_compat_arg_xlat(struct vcpu *v)
+     /*
+      * PV vcpus need a shortened directmap.  HVM and Idle vcpus get the full
+      * directmap.
+@@ -1798,6 +1802,8 @@ void zap_ro_mpt(mfn_t mfn)
+ static int promote_l4_table(struct page_info *page)
  {
--    destroy_perdomain_mapping(v->domain, ARG_XLAT_START(v),
-+    destroy_perdomain_mapping(v, ARG_XLAT_START(v),
-                               PFN_UP(COMPAT_ARG_XLAT_SIZE));
- }
+     struct domain *d = page_get_owner(page);
++    /* Any vCPU will do: a PV domain's vCPUs all use the domain-wide L3. */
++    const struct vcpu *v = domain_vcpu(d, 0);
+     mfn_t          l4mfn = page_to_mfn(page);
+     l4_pgentry_t  *pl4e;
+     unsigned int   i;
+@@ -1805,10 +1811,11 @@ static int promote_l4_table(struct page_info *page)
+     unsigned int   partial_flags = page->partial_flags;
  
+     /*
+-     * init_xen_l4_slots() puts the domain's per-domain L3 in slot 260, and a
+-     * PV domain may get that only with its first vCPU.
++     * init_xen_l4_slots() needs a vCPU, and puts the domain's per-domain L3
++     * in slot 260.  A PV domain has no vCPUs before XEN_DOMCTL_max_vcpus,
++     * and may get the L3 only with its first vCPU.
+      */
+-    if ( !d->arch.perdomain_l3_pg )
++    if ( !v || !d->arch.perdomain_l3_pg )
+         return -EINVAL;
+ 
+     pl4e = map_domain_page(l4mfn);
+@@ -1887,8 +1894,8 @@ static int promote_l4_table(struct page_info *page)
+ 
+     if ( !rc )
+     {
+-        init_xen_l4_slots(pl4e, l4mfn,
+-                          d, INVALID_MFN, VM_ASSIST(d, m2p_strict));
++        init_xen_l4_slots(pl4e, l4mfn, v, INVALID_MFN,
++                          VM_ASSIST(d, m2p_strict));
+         atomic_inc(&d->arch.pv.nr_l4_pages);
+     }
+     unmap_domain_page(pl4e);
+diff --git a/xen/arch/x86/mm/hap/hap.c b/xen/arch/x86/mm/hap/hap.c
+index 0ede4181a0..aba4f77df9 100644
+--- a/xen/arch/x86/mm/hap/hap.c
++++ b/xen/arch/x86/mm/hap/hap.c
+@@ -407,7 +407,7 @@ static mfn_t hap_make_monitor_table(struct vcpu *v)
+     m4mfn = page_to_mfn(pg);
+     l4e = map_domain_page(m4mfn);
+ 
+-    init_xen_l4_slots(l4e, m4mfn, d, INVALID_MFN, false);
++    init_xen_l4_slots(l4e, m4mfn, v, INVALID_MFN, false);
+     unmap_domain_page(l4e);
+ 
+     return m4mfn;
+diff --git a/xen/arch/x86/mm/shadow/hvm.c b/xen/arch/x86/mm/shadow/hvm.c
+index e6fb97c4b6..0b23326214 100644
+--- a/xen/arch/x86/mm/shadow/hvm.c
++++ b/xen/arch/x86/mm/shadow/hvm.c
+@@ -760,7 +760,7 @@ mfn_t sh_make_monitor_table(const struct vcpu *v, unsigned int shadow_levels)
+      * shadow-linear mapping will either be inserted below when creating
+      * lower level monitor tables, or later in sh_update_cr3().
+      */
+-    init_xen_l4_slots(l4e, m4mfn, d, INVALID_MFN, false);
++    init_xen_l4_slots(l4e, m4mfn, v, INVALID_MFN, false);
+ 
+     if ( shadow_levels < 4 )
+     {
+diff --git a/xen/arch/x86/mm/shadow/multi.c b/xen/arch/x86/mm/shadow/multi.c
+index 7f72b4b7b2..ebbf4a12ce 100644
+--- a/xen/arch/x86/mm/shadow/multi.c
++++ b/xen/arch/x86/mm/shadow/multi.c
+@@ -974,7 +974,7 @@ sh_make_shadow(struct vcpu *v, mfn_t gmfn, u32 shadow_type)
+ 
+             BUILD_BUG_ON(sizeof(l4_pgentry_t) != sizeof(shadow_l4e_t));
+ 
+-            init_xen_l4_slots(l4t, gmfn, d, smfn, (!is_pv_32bit_domain(d) &&
++            init_xen_l4_slots(l4t, gmfn, v, smfn, (!is_pv_32bit_domain(d) &&
+                                                    VM_ASSIST(d, m2p_strict)));
+             unmap_domain_page(l4t);
+         }
+diff --git a/xen/arch/x86/pv/dom0_build.c b/xen/arch/x86/pv/dom0_build.c
+index 24f2fa0b7f..dcb1d407ec 100644
+--- a/xen/arch/x86/pv/dom0_build.c
++++ b/xen/arch/x86/pv/dom0_build.c
+@@ -725,7 +725,7 @@ static int __init dom0_construct(const struct boot_domain *bd)
+         l4start = l4tab = __va(mpt_alloc); mpt_alloc += PAGE_SIZE;
+         clear_page(l4tab);
+         init_xen_l4_slots(l4tab, _mfn(virt_to_mfn(l4start)),
+-                          d, INVALID_MFN, true);
++                          v, INVALID_MFN, true);
+         v->arch.guest_table = pagetable_from_paddr(__pa(l4start));
+     }
+     else
+diff --git a/xen/arch/x86/pv/domain.c b/xen/arch/x86/pv/domain.c
+index f3c711b85b..f139d8f83c 100644
+--- a/xen/arch/x86/pv/domain.c
++++ b/xen/arch/x86/pv/domain.c
+@@ -127,7 +127,7 @@ static int setup_compat_l4(struct vcpu *v)
+     mfn = page_to_mfn(pg);
+     l4tab = map_domain_page(mfn);
+     clear_page(l4tab);
+-    init_xen_l4_slots(l4tab, mfn, v->domain, INVALID_MFN, false);
++    init_xen_l4_slots(l4tab, mfn, v, INVALID_MFN, false);
+     unmap_domain_page(l4tab);
+ 
+     /* This page needs to look like a pagetable so that it can be shadowed */
 -- 
 2.56.0
 
