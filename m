@@ -2,45 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 552F5606A31A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 13:49:47 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 7C6FA606A31C
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 14:15:44 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=OoaU4jvz
-Received: from list by lists.xenproject.org with outflank-mailman.1463303.1674201 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=VNZw1mbE
+Received: from list by lists.xenproject.org with outflank-mailman.1463324.1674211 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM41o-0005Q1-K3; Wed, 28 Oct 2026 13:49:20 +0000
+	id 1xM4R8-0001mn-GG; Wed, 28 Oct 2026 14:15:30 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463303.1674201; Wed, 28 Oct 2026 13:49:20 +0000
+Received: by outflank-mailman (output) from mailman id 1463324.1674211; Wed, 28 Oct 2026 14:15:30 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM41o-0005Pu-Gl; Wed, 28 Oct 2026 13:49:20 +0000
-Received: by outflank-mailman (input) for mailman id 1463303;
- Wed, 28 Oct 2026 13:49:19 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xM41n-0005Pk-4K
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 13:49:19 +0000
+	id 1xM4R8-0001mf-CS; Wed, 28 Oct 2026 14:15:30 +0000
+Received: by outflank-mailman (input) for mailman id 1463324;
+ Wed, 28 Oct 2026 14:15:29 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xM4R7-0001mZ-2g
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 14:15:29 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xM41m-007prh-A6
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 14:49:18 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xM4R6-00CqWv-BV
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 15:15:28 +0100
+Received: from [10.42.69.4] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ae1fd4f-2eae-0a2a0a5409dd-0a2a450ae396-42
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 14:49:18 +0100
-Received: from [209.85.128.54] (helo=mail-wm1-f54.google.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae2037e-bab6-0a2a0a5309dd-0a2a45049af6-18
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 15:15:28 +0100
+Received: from [209.85.128.48] (helo=mail-wm1-f48.google.com)
+ by tlsNG-ebf023.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <jbeulich@suse.com>)
- id 6ae1fd5e-f2d2-0a2a450a0019-d1558036cd2c-3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 14:49:18 +0100
-Received: by mail-wm1-f54.google.com with SMTP id
- 5b1f17b1804b1-4a20bdaf39cso10530525e9.1
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 06:49:18 -0700 (PDT)
+ id 6ae20380-b57f-0a2a45040019-d1558030c058-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 15:15:28 +0100
+Received: by mail-wm1-f48.google.com with SMTP id
+ 5b1f17b1804b1-4a5b2be99a8so8915215e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 07:15:28 -0700 (PDT)
 Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
  [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- 5b1f17b1804b1-4a930a63eb3sm45969645e9.1.2026.10.28.06.49.14
+ 5b1f17b1804b1-4a978795f4dsm42087895e9.9.2026.10.28.07.15.27
  (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Oct 2026 06:49:15 -0700 (PDT)
+ Wed, 28 Oct 2026 07:15:27 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -51,65 +51,59 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793195358; x=1793800158; darn=lists.xenproject.org;
+        d=suse.com; s=google; t=1793196928; x=1793801728; darn=lists.xenproject.org;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:from:to:cc:subject:date:message-id:reply-to
          :content-type;
-        bh=ljkTtUVemMOjlfxR572ftOnuoHHDJnk02lUk1Wt/Idw=;
-        b=OoaU4jvzhHF/GGXhWo7JBpUD60jkdJ4y061MNs8fG+8O02rLgIizsSKaPGGc3zsVSn
-         ts1D73BM9YvRAr+W5SfX06fzGsESMfCBKNe2pkujtF1/wDnF1RME0KmqjtDyxFXFjqac
-         O7gfJ6xdT54MQoV6Bn1kSaVFyrqAN5FhUPOPFZHzBzmLJ6ePkxAA0E3QSu6BAmw47iki
-         v+6OoIOGM9JFUuqY+wVP+Pi0hahkVyxPU2SK3tjVO16NB2qGiSCS2t0pstLFIlmgj0JT
-         Pndlas05r2X8MhzOPubu1rqo+3pEYaLYOrZB8We4DcSloV7dsei0Sv6sbTNtPkPAX/Yl
-         lpJQ==
+        bh=mlEJ3PnBF22KBmNuKmc5iG0oPTUVfRLAWE+gciNaRd0=;
+        b=VNZw1mbEkZ5CmO3sLm5AZHQcJo5f8v85qLVOhslCp4CHQIqH0WzHVbIx8Dpw7FMArM
+         0qjjTk8HI9xQ8aEQLH+ji3fDQbZ867KwE/YzV9rTSjfCoLCxWeLFZ/qJYinprbjwofMJ
+         Xo/MFL6zyUwQapKaScdoetwe/YGN1e+BlOBqYwyH+fAdOx2tVnhEDgHzl3i9rB8BDxtm
+         hoLgI4Wb20AKpCY60vmsDqg9JEHY3POxSI3iXl7zdU6e1pjwkdgAGrgQFIwhDq6mnYo9
+         7dBPWaLb8ElmRR82Ya04tn+OfUtGXTBOPkMnRBtXOa0qMH0ev3TbSFU6ZtaDJAZGmo78
+         22Qw==
 X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793195358; x=1793800158;
+        d=1e100.net; s=20260707; t=1793196928; x=1793801728;
         h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
          :content-language:references:cc:to:subject:user-agent:mime-version
          :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
          :message-id:reply-to:content-type;
-        bh=ljkTtUVemMOjlfxR572ftOnuoHHDJnk02lUk1Wt/Idw=;
-        b=N+iut1D0DrBSc3Ifyo3wrcsYH3lVnJDBCp+WRjHWgMw0Fm7GIhmCI1i+sAaDYGuvYD
-         E3zA1DVbGvZO2g9Y4jw40iDzUSO5is2VjEJNAdMH50tbmtHww5WI3sTE9713V8LEE6Q5
-         6xDt0PPVto1+vvw9JLpDXLnR8LrY09YJe1QZ48zvvgLjmCn2OXQ6vbxTA5U7ymI/hDJP
-         RI9mcXiw/TUs6o4ROT3SqtwMGbf7Ka+sYLROeFEfj978haQWsLDdZcy/Q3+g6AVkB4L2
-         vIhKQm+Jb6WcFBmiyyaYxY6yLQlPqsjXDYfryvcl569fNh61d662GzfDq92kpBsame4w
-         kf2A==
-X-Forwarded-Encrypted: i=1; AKwUvBzxrtaHiiE4vWJ5Ve8LPnQ3y7adAuhhmLv4KPcHPd1g9Ps0U4YhTOwWi9nkiDoc2Dp1ufKKQoaduBo=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYJYVrQVOX6EWo/OdHnQC54jMAC3OFoV5Cl/UA6uhp9Su2DsGjzv
-	8u43651M77zyq1NvFWQT8DQYKSJ9aNWg5HbcEE6UF1NmeLZe0L0FGLs6tmH567yeKQ==
-X-Gm-Gg: AYBFou3Um45ZTQN7bAvuo6wVa5BTfBtkAhl8dACNhlwbjREUhWyan5oKTd0lTFnPcjz
-	IeH4BKvQsQcqBCYO5njLjCxrrJiZnu9tW0h3sVxIlHYJYZgNb4VMbg6FxTWh6Z1KLnqe7fwcmFU
-	ybiKo3AU5vtOjgF1UiHe3fVHn8zyxaBeOJNc+npSgHOKeWxtsNJlxn/ZFPLmBOMkwjTN5Ba+cq5
-	VT4z/imD34482DGdbaglPqEBFPn2AemdqAfiq2Gx3xmMTjWGp9vFYnUbVpRvWg9TS6I6TtP3Cf4
-	esBmBoe2T0Whsm4kSX8dskJPvvDLZYsPLKAO/mQXZjALkhV7IW+Eo6SmgQhGX/ioEIWYlkngsYA
-	QR29SMZzwhKFtJX7Q/Q6a1OTuv22RQWaDCy8/sgQYo8irLby2EbUkTESOYoa7RVSCQjo6h0i3ZS
-	71YVO/lJ21B9uQCU2uj/Zy6Ue5iz/JixhvEYs2lrALqFl/NKCYds3CsbsaQtELig/P3SYUfJQLW
-	aujmVpFIG7yZu/nVZPh4uzTwo7OYcetMGf1iynQmUsWAVNauEWpMcGT1imZwB2ixPrTF86mIdwH
-	nacVZEL+l0s17K70+hABsUwKfe1jo4vr15knd6y42HU54ZB0GCfUKEjjTmcPiIClS7b+3SX9s/q
-	81o0F53RRTfExEId5fw==
-X-Received: by 2002:a05:600c:354a:b0:4a1:fba8:b13d with SMTP id 5b1f17b1804b1-4a9662a0c02mr50170645e9.9.1793195357433;
-        Wed, 28 Oct 2026 06:49:17 -0700 (PDT)
-Message-ID: <fe02f3ef-a215-4c81-be64-e2a5a30ae3e8@suse.com>
-Date: Wed, 28 Oct 2026 14:49:14 +0100
+        bh=mlEJ3PnBF22KBmNuKmc5iG0oPTUVfRLAWE+gciNaRd0=;
+        b=o2Z0yo6ZntBtroN/Q6xoLfj832gQc7EK1LfKQYtvvEnt/z+tjU7SS4ajEQ76dDyftr
+         +RbqhntblBo2+CHj6/Gj5jiK50bLL3pyCY2HdTh+if609xtROMUX3ieP56A5pxoN1clH
+         B6kMGLSX+KmvLYuFjKnb/bA0O8TiZOeyMnHm4GKp9F6pUzmmUF3f6U9DwLLwmBcLYRGu
+         aS50jX2bela6FXvOnjJTzfoIZ+8QVFXJOixdbSoIcfC05v8ytsmjqGTL2qFa0GG484dD
+         d6s3Y8NpIX2jbCyItGFNCMuHCTfd1WS2jETR0BazCupac4o+yl63sUkEM7lyzQn2qn87
+         CwKg==
+X-Forwarded-Encrypted: i=1; AKwUvBwOnReL1haXaGBjvlDvZhBd992ZQ5MKJUf1ZPF/ryPoHieh1QXitxGJJ0L6Inck2inUQZfSkBOp3E4=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYJX5O0LuFWsRjLcCI5jJLSq//DCEmSt2RPrZ6lQxAbuTDI+vh+b
+	YSweGWfh7NFB9EpyFK/UNEqFdmMm0NpGjIIZK46VJBTKTQQ1aWBHMU7o1pex81bNuQ==
+X-Gm-Gg: AYBFou0dJIahq/aun4f7U15hE3gZzCA1/vlaA9fX3xC28jvuD74abP4ooIMz1mS7sNX
+	QIpqDwLor9IBDzJvf0qdBaXzhC/Tz6rvFKU3xIlIQwRH4iNGC04iW6SRqzQdVn3aWs7eSoFJuDu
+	6gdEwixpby0UGcfM4KPWQQUOXO5Oz50slf50i5r7w1nWpXlm8hz/yPvEbbZEMZ/3r2uhDY9HnCk
+	zNfzTpuUJsE1CjZkzhg+2c+/fo/+PaIxaAR6Ys23ehXl/F2c7vnM8/RBLh3h+g17uUE4etUMfHd
+	P52VGXuTRQmirN9ZZfthLxYgp02DijSndxJqvCDxrcQaHKRusDN+pI48pKwFSVzSvivcV/1FY2B
+	kBLWeZuepQdTxQq4Iv6YCV7GLxYwv8o61OGpkW0gxUWsZthhsfkJUBNrpGk0XmvY847ncIc1VSX
+	e4bZDuS7yg+tov2vld8rUIFIJVMr2GEQKuYrkiUrcpvbsk/KBHwZev8wvew4oej6V1Qst6XXlny
+	RT2qbfDfuKH0uY160FVMCLGH9PBvCQ0AXI3re1Swu8IDnp6710bgVuDv+Ksyo9r8311bXvqgKKv
+	uRkU1INqbbdaRBQD0pgu9bfTsZYc6BmHjvkxQ0lBbItmccuzOwlKYLE6BSS42vVJ+3U/WvgRUZ3
+	uW3LezlaAomPz58nq
+X-Received: by 2002:a05:600c:154a:b0:4a0:1efa:c74a with SMTP id 5b1f17b1804b1-4a9678c26dfmr51155745e9.20.1793196927665;
+        Wed, 28 Oct 2026 07:15:27 -0700 (PDT)
+Message-ID: <7128c617-9432-4571-9b7a-22d6f6e8d884@suse.com>
+Date: Wed, 28 Oct 2026 15:15:25 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v4 4/5] vpci: add SR-IOV support for PVH Dom0
-To: Mykyta Poturai <Mykyta_Poturai@epam.com>
-Cc: Stewart Hildebrand <stewart.hildebrand@amd.com>,
- Oleksii Kurochko <oleksii.kurochko@gmail.com>,
- Community Manager <community.manager@xenproject.org>,
- Andrew Cooper <andrew.cooper3@citrix.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
+Subject: Re: [PATCH] xen/mm: Remove loops in get_order_from_{pages,bytes}()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: Anthony PERARD <anthony.perard@vates.tech>,
  Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
  =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
  Stefano Stabellini <sstabellini@kernel.org>,
- "Daniel P. Smith" <dpsmith@apertussolutions.com>,
- "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>
-References: <cover.1792072426.git.mykyta_poturai@epam.com>
- <103b10d012cc291906025045a2da1ce728f0bffd.1792072426.git.mykyta_poturai@epam.com>
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20261028124104.1564435-1-andrew.cooper3@citrix.com>
 Content-Language: en-US
 From: Jan Beulich <jbeulich@suse.com>
 Autocrypt: addr=jbeulich@suse.com; keydata=
@@ -135,397 +129,101 @@ Autocrypt: addr=jbeulich@suse.com; keydata=
  EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
  wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
  nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <103b10d012cc291906025045a2da1ce728f0bffd.1792072426.git.mykyta_poturai@epam.com>
+In-Reply-To: <20261028124104.1564435-1-andrew.cooper3@citrix.com>
 Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-4011c0/1793195358-59BC0CFC-1CD4216B/10/78276251493
+Content-Transfer-Encoding: 8bit
+X-purgate-ID: tlsNG-ebf023/1793196928-520D5B50-939FBEF8/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 12874
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+X-purgate-size: 2687
+X-Spam-Status: No, score=-22.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,
+	MENTIONS_GIT_HOSTING,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
 	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 15.10.2026 16:08, Mykyta Poturai wrote:
-> --- a/CHANGELOG.md
-> +++ b/CHANGELOG.md
-> @@ -16,6 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/)
->       afterwards.
+On 28.10.2026 13:41, Andrew Cooper wrote:
+> These two functions are just fls() expressions in disguise.  Furthermore,
+> GCC-12 at least won't const-propagate get_order_from_pages() with an input of
+> 3 or above, which covers most of the cases it gets used for.
+> 
+> Rewrite them, and provide some self testing.
+> 
+> Interesting, unless they are always_inline, GCC has a habit of out-of-lining
+> them even when inlining would have been a win.  I expect this is to do with
+> the fls() functions being superficially more complex.
+> 
+> No functional change.
+> 
+> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+> ---
+> CC: Anthony PERARD <anthony.perard@vates.tech>
+> CC: Michal Orzel <michal.orzel@amd.com>
+> CC: Jan Beulich <jbeulich@suse.com>
+> CC: Julien Grall <julien@xen.org>
+> CC: Roger Pau Monné <roger@xenproject.org>
+> CC: Stefano Stabellini <sstabellini@kernel.org>
+> 
+> https://gitlab.com/xen-project/hardware/xen-staging/-/pipelines/2999078934
+> 
+> I think paddr_t is the wrong type to be using in get_order_from_bytes(), and
+> so really is fls64().
+
+What other parameter type would you suggest? size_t is suitable only to express
+virtual address region extents.
+
+>  I could add fls_g() which would be slightly nicer on
+> builds where paddr_t != uint64_t.
+
+We have ffs_g(), so adding fls_g() would only seem natural. But see also below.
+Either form:
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+> --- a/xen/include/xen/mm.h
+> +++ b/xen/include/xen/mm.h
+> @@ -530,26 +530,16 @@ page_list_splice(struct page_list_head *list, struct page_list_head *head)
+>      list_for_each_entry_safe_reverse(pos, tmp, head, list)
+>  #endif
 >  
->  ### Added
-> + - PCI SR-IOV is supported for PVH dom0.
-
-Isn't this x86-only right now?
-
-> --- a/xen/drivers/passthrough/pci.c
-> +++ b/xen/drivers/passthrough/pci.c
-> @@ -32,6 +32,7 @@
->  #include <xen/softirq.h>
->  #include <xen/tasklet.h>
->  #include <xen/vpci.h>
-> +#include <xen/xvmalloc.h>
->  #include <xen/msi.h>
->  #include <xsm/xsm.h>
->  #include "ats.h"
-> @@ -40,6 +41,8 @@ struct pci_seg {
->      struct list_head alldevs_list;
->      u16 nr;
->      unsigned long *ro_map;
-> +    /* BDFs of VFs which have been enabled but which Xen has not added yet. */
-> +    unsigned long *vf_setup_map;
->      /* bus2bridge_lock protects bus2bridge array */
->      spinlock_t bus2bridge_lock;
->  #define MAX_BUSES 256
-> @@ -139,6 +142,47 @@ const unsigned long *pci_get_ro_map(u16 seg)
->      return pseg ? pseg->ro_map : NULL;
+> -static inline unsigned int get_order_from_bytes(paddr_t size)
+> +static always_inline unsigned int get_order_from_bytes(paddr_t size)
+>  {
+> -    unsigned int order;
+> -
+>      size = (size - 1) >> PAGE_SHIFT;
+> -    for ( order = 0; size; order++ )
+> -        size >>= 1;
+>  
+> -    return order;
+> +    return fls64(size);
 >  }
->  
-> +/*
-> + * Marking is serialised by the hardware domain's pci_lock, which the SR-IOV
-> + * control register write handler holds; unmarking only clears a bit.
-> + */
 
-What about pci_vf_setup_pending()? How's that (to be) serialized again marking
-and unmarking?
+Along the lines of what you do below, perhaps simply
 
-> --- a/xen/drivers/vpci/Makefile
-> +++ b/xen/drivers/vpci/Makefile
-> @@ -1,3 +1,4 @@
->  obj-y += cap.o
-> +obj-y += sriov.o
->  obj-y += vpci.o header.o rebar.o
->  obj-$(CONFIG_HAS_PCI_MSI) += msi.o msix.o
+    return fls_g(PFN_DOWN(size - 1));
 
-When I added cap.o on a separate line, the intention was that new files would
-follow suite, including the respecting of sorting. Imo sriov.o wants to go
-after msi{,x}.o. Seeing how the latter are conditionally included - wouldn't
-SR-IOV also want to have a HAS_SRIOV control?
+(and nothing else in the function body)? And then even
 
-> +/*
-> + * Accesses to a marked BDF are terminated until 100ms after VF Enable; the
-> + * first one past that adds the VF, which control_write() cannot do itself.
-> + */
-> +static pci_sbdf_t vf_sbdf(const struct pci_dev *pf_pdev, unsigned int idx)
-> +{
-> +    const struct vpci_sriov *sriov = pf_pdev->vpci->sriov;
-> +    pci_sbdf_t sbdf = pf_pdev->sbdf;
-> +
-> +    sbdf.bdf += sriov->offset + sriov->stride * idx;
-> +
-> +    return sbdf;
-> +}
+    return flsl(PFN_DOWN(size - 1));
 
-The comment ahead of the function doesn't appear to be related to it. Does
-it belong elsewhere?
-
-> +static void mark_vfs(const struct pci_dev *pf_pdev)
-> +{
-> +    struct vpci_sriov *sriov = pf_pdev->vpci->sriov;
-> +    unsigned int i;
-> +
-> +    /* VF Offset and VF Stride are only valid while VF Enable is set. */
-> +    sriov->offset = pci_conf_read16(pf_pdev->sbdf,
-> +                                    sriov->pos + PCI_SRIOV_VF_OFFSET);
-> +    sriov->stride = pci_conf_read16(pf_pdev->sbdf,
-> +                                    sriov->pos + PCI_SRIOV_VF_STRIDE);
-
-What if we end up reading 0 here, yet ->num_vfs is greater than 1? Or put
-differently, ...
-
-> +    sriov->vfs_ready = NOW() + MILLISECS(100);
-> +
-> +    for ( i = 0; i < sriov->num_vfs; i++ )
-> +    {
-> +        pci_sbdf_t sbdf = vf_sbdf(pf_pdev, i);
-> +        int rc = pci_vf_setup_begin(sbdf);
-> +
-> +        if ( rc )
-> +            gprintk(XENLOG_WARNING, "%pp: cannot set up VF %pp: %d\n",
-> +                    &pf_pdev->sbdf, &sbdf, rc);
-
-... wouldn't pci_vf_setup_begin() better indicate to its caller when the
-BDF was already marked prior to the call? Also, if you didn't end up
-setting the bit here, shouldn't ...
-
-> +    }
-> +}
-> +
-> +static void unmark_vfs(const struct pci_dev *pf_pdev)
-> +{
-> +    struct vpci_sriov *sriov = pf_pdev->vpci->sriov;
-> +    unsigned int i;
-> +
-> +    if ( !sriov->vfs_ready )
-> +        return;
-> +
-> +    for ( i = 0; i < sriov->num_vfs; i++ )
-> +        pci_vf_setup_end(vf_sbdf(pf_pdev, i));
-
-... its clearing better also be avoided?
-
-> +    sriov->vfs_ready = 0;
-
-Might this better be done ahead of the loop?
-
-> +}
-> +
-> +/* Find the PF which has enabled @sbdf, if that VF is ready to be added. */
-> +static const struct pci_dev *ready_pf(const struct domain *d, pci_sbdf_t sbdf)
-> +{
-> +    struct pci_dev *pdev;
-
-You return pointer-to-const, and nothing in the function alters *pdev.
-
-> +    ASSERT(rw_is_locked(&d->pci_lock));
-> +
-> +    for_each_pdev ( d, pdev )
-> +    {
-> +        const struct vpci_sriov *sriov = pdev->vpci ? pdev->vpci->sriov : NULL;
-> +        unsigned int i;
-> +
-> +        if ( !sriov || !sriov->vfs_ready || NOW() < sriov->vfs_ready )
-> +            continue;
-> +
-> +        for ( i = 0; i < sriov->num_vfs; i++ )
-> +            if ( vf_sbdf(pdev, i).sbdf == sbdf.sbdf )
-> +                return pdev;
-> +    }
-
-This loop can easily have hundreds of iterations, when the number of SR-IOV
-PFs in a system is likely relatively small. I wonder whether there shouldn't
-be a separate list of "PDEVs with VFs under construction".
-
-> +void vpci_sriov_drop_vfs(void)
-> +{
-> +    struct vcpu *curr = current;
-> +    pci_sbdf_t pf_sbdf = curr->vpci.drop_vfs_pf;
-> +    struct pci_dev *pf, *vf, *tmp;
-> +
-> +    if ( likely(pf_sbdf.sbdf == ~0U) )
-> +        return;
-> +
-> +    curr->vpci.drop_vfs_pf.sbdf = ~0U;
-
-The call site has a comment that the call here happens after all locks
-were dropped. To prevent two calls here racing, the check-and-update
-here needs to be atomic imo.
-
-> +    /*
-> +     * The unmapping queued by control_write() still references the VF pdevs,
-> +     * so it has to complete before they are freed.
-> +     */
-> +    while ( vpci_process_pending(curr) )
-> +        process_pending_softirqs();
-
-This isn't very nice, yet I also don't have any better suggestion.
-
-> +    pcidevs_lock();
-> +    pf = pci_get_pdev(NULL, pf_sbdf);
-
-Why is this a global lookup?
-
-> +static void cf_check control_write(const struct pci_dev *pdev, unsigned int reg,
-> +                                   uint32_t val, void *data)
-> +{
-> +    unsigned int sriov_pos = reg - PCI_SRIOV_CTRL;
-> +    struct vpci_sriov *sriov = pdev->vpci->sriov;
-> +    uint16_t control = pci_conf_read16(pdev->sbdf, reg);
-> +    bool enabled = control & PCI_SRIOV_CTRL_VFE;
-> +    bool new_enabled = val & PCI_SRIOV_CTRL_VFE;
-> +    /* VF BARs decode only while both VF Enable and VF MSE are set. */
-> +    bool decoding = enabled && (control & PCI_SRIOV_CTRL_MSE);
-> +    bool new_decoding = new_enabled && (val & PCI_SRIOV_CTRL_MSE);
-> +    int rc;
-> +
-> +    ASSERT(!pdev->info.is_virtfn);
-> +
-> +    if ( new_enabled == enabled && new_decoding == decoding )
-> +    {
-> +        pci_conf_write16(pdev->sbdf, reg, val);
-> +        return;
-> +    }
-> +
-> +    /* Unmap while the VF pdevs are still around for vpci_modify_bars(). */
-> +    if ( decoding && !new_decoding )
-> +        map_vfs(pdev, 0);
-> +
-> +    if ( enabled && !new_enabled )
-> +    {
-> +        unmark_vfs(pdev);
-> +
-> +        /* The VFs cease to exist below, so Xen has to remove them. */
-> +        if ( !list_empty(&pdev->vf_list) )
-> +            current->vpci.drop_vfs_pf = pdev->sbdf;
-
-Minimally an assertion may be wanted here, to check that drop_vfs_pf isn't
-already in use.
-
-> +static int cf_check init_sriov(struct pci_dev *pdev)
-> +{
-> +    unsigned int pos;
-> +
-> +    if ( pdev->info.is_virtfn )
-> +        return -EINVAL;
-
-Can this happen? I.e. doesn't this want to be an assertion, much like ...
-
-> +    pos = pci_find_ext_capability(pdev, PCI_EXT_CAP_ID_SRIOV);
-> +
-> +    ASSERT(pos);
-
-... this one?
-
-> +    if ( xsm_resource_setup_pci(XSM_PRIV, pdev->sbdf.bdf) )
-> +    {
-> +        printk(XENLOG_ERR
-> +               "%pp: SR-IOV configuration unsupported for unpriv %pd\n",
-> +               &pdev->sbdf, pdev->domain);
-> +        return -EACCES;
-> +    }
-
-In addition to Jason's remark (which may require Daniel's input): Why "unpriv"
-in the log message? That's fine when dummy or SILO are in use, but that may
-be entirely off under Flask.
-
-> +    pdev->vpci->sriov = xvzalloc(struct vpci_sriov);
-> +    if ( !pdev->vpci->sriov )
-> +        return -ENOMEM;
-> +
-> +    pdev->vpci->sriov->pos = pos;
-> +
-> +    /*
-> +     * We need to modify vf_rlen in control_write but we can't do it cleanly
-> +     * from pdev because write callback only accepts const pdev. Moving vf_rlen
-> +     * inside of struct vpci_sriov is also not possible because it is used
-> +     * before vpci init. So pass it here as additional data to not require
-> +     * dropping const in control_write.
-> +     */
-> +    return vpci_add_register(pdev->vpci, vpci_hw_read16, control_write,
-> +                             pos + PCI_SRIOV_CTRL, 2, &pdev->physfn.vf_rlen);
-> +}
-
-This kind of comment is at risk of going stale without anyone noticing. It's
-anyway written more like something belonging in a commit message.
-
-> +static int cf_check cleanup_sriov(const struct pci_dev *pdev, bool hide)
-> +{
-> +    unsigned int pos;
-> +    int rc;
-> +
-> +    if ( !pdev->vpci->sriov )
-> +        return 0;
-> +
-> +    ASSERT(!pdev->info.is_virtfn);
-> +
-> +    unmark_vfs(pdev);
-> +
-> +    if ( !list_empty(&pdev->vf_list) )
-> +    {
-> +        struct pci_dev *vf_pdev, *temp;
-> +
-> +        printk(XENLOG_WARNING 
-> +               "Attempting to remove SR-IOV PF %pp with VFs still present, VFs will be forcefully removed first\n",
-> +               &pdev->sbdf);
-
-What would be lost if "with VFs still present" was dropped from the log message?
-
-> +        map_vfs(pdev, 0);
-> +        list_for_each_entry_safe_reverse(vf_pdev, temp, &pdev->vf_list, vf_list)
-> +        {
-> +            pci_remove_device(vf_pdev->sbdf.seg, vf_pdev->sbdf.bus,
-> +                              vf_pdev->sbdf.devfn);
-> +        }
-
-Nit: No need for figure braces here.
-
-> +    }
-> +
-> +    pos = pdev->vpci->sriov->pos;
-> +    if ( !hide )
-> +    {
-> +        XVFREE(pdev->vpci->sriov);
-> +        return 0;
-> +    }
-> +
-> +    rc = vpci_remove_registers(pdev->vpci, pos + PCI_SRIOV_CTRL, 2);
-> +    if ( rc )
-> +    {
-> +        printk(XENLOG_ERR "%pd %pp: fail to remove SRIOV handlers rc=%d\n",
-> +                pdev->domain, &pdev->sbdf, rc);
-> +        ASSERT_UNREACHABLE();
-> +        return rc;
-> +    }
-> +    XVFREE(pdev->vpci->sriov);
-> +
-> +    /*
-> +     * Unprivileged domains have a deny by default register access policy, no
-> +     * need to add any further handlers for them.
-> +     */
-> +    if ( !is_hardware_domain(pdev->domain) )
-> +        return 0;
-> +
-> +    rc = vpci_add_register(pdev->vpci, vpci_hw_read16, NULL,
-> +                           pos + PCI_SRIOV_CTRL, 2, NULL);
-> +    if ( rc )
-> +        printk(XENLOG_ERR "%pd %pp: fail to add SRIOV ctrl handler rc=%d\n",
-> +               pdev->domain, &pdev->sbdf, rc);
-
-I'm inclined to suggest "re-add", so it's clear from just seeing the message in
-a log that this isn't about init of the device.
-
-> @@ -486,6 +487,11 @@ uint32_t vpci_read(pci_sbdf_t sbdf, unsigned int reg, unsigned int size)
->          return data;
->      }
->  
-> +    /* Ahead of any lock being taken, as adding a device acquires them. */
-> +    if ( unlikely(is_hardware_domain(d) && pci_vf_setup_pending(sbdf)) &&
-> +         !vpci_sriov_add_vf(sbdf) )
-> +        return data & (0xffffffffU >> (32 - 8 * size));
-
-Is there a reason you can't simply "return data" here, like is done in the
-first conditional of the function?
-
-> @@ -145,6 +145,22 @@ struct vpci {
->          unsigned int nbars:3;
->      } rebar;
->  
-> +    struct vpci_sriov {
-> +        /* PF only */
-> +        struct vpci_bar vf_bars[PCI_SRIOV_NUM_BARS];
-> +        /*
-> +         * When the VFs which are enabled but not added to Xen yet are
-> +         * guaranteed to respond to config space accesses.  Zero if there are
-> +         * none.
-> +         */
-> +        s_time_t vfs_ready;
-> +        /* Routing ID offset of the first VF, and stride between VFs. */
-> +        uint16_t offset;
-> +        uint16_t stride;
-> +        uint16_t num_vfs;
-> +        unsigned int pos;
-> +    } *sriov;
-> +
->  #ifdef CONFIG_HAS_VPCI_GUEST_SUPPORT
->      /* Guest SBDF of the device. */
->  #define INVALID_GUEST_SBDF ((pci_sbdf_t){ .sbdf = ~0U })
-
-While for guests we have control over the range of valid SBDF values, ...
-
-> @@ -169,6 +185,12 @@ struct vpci_map_task {
->  
->  struct vpci_vcpu {
->      struct list_head task_queue;
-> +    /*
-> +     * PF whose VFs have been disabled by the config space write in progress,
-> +     * and which Xen has to remove once the PCI locks have been dropped.  All
-> +     * ones when there is none.
-> +     */
-> +    pci_sbdf_t drop_vfs_pf;
-
-... I don't see what would guarantee an all-ones pci_sbdf_t to not represent
-a real device.
+(eliminating the immediate need for fls_g())?
 
 Jan
+
+> -static inline unsigned int get_order_from_pages(unsigned long nr_pages)
+> +static always_inline unsigned int get_order_from_pages(unsigned long nr_pages)
+>  {
+> -    unsigned int order;
+> -
+> -    nr_pages--;
+> -    for ( order = 0; nr_pages; order++ )
+> -        nr_pages >>= 1;
+> -
+> -    return order;
+> +    return flsl(nr_pages - 1);
+>  }
+>  
+>  #ifndef arch_free_heap_page
+
 
