@@ -2,51 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id F34BD606A31A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 09:38:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B94C1606A31C
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 09:48:21 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=TWbpOjnr
-Received: from list by lists.xenproject.org with outflank-mailman.1462984.1673958 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=VSk1ZZmK
+Received: from list by lists.xenproject.org with outflank-mailman.1462992.1673968 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM07B-0006B1-GL; Wed, 28 Oct 2026 09:38:37 +0000
+	id 1xM0GL-0007wB-AT; Wed, 28 Oct 2026 09:48:05 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1462984.1673958; Wed, 28 Oct 2026 09:38:37 +0000
+Received: by outflank-mailman (output) from mailman id 1462992.1673968; Wed, 28 Oct 2026 09:48:05 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM07B-0006As-De; Wed, 28 Oct 2026 09:38:37 +0000
-Received: by outflank-mailman (input) for mailman id 1462984;
- Wed, 28 Oct 2026 09:38:35 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a181e021b2000f79f@swg.vates.tech>)
- id 1xM078-00069U-WD
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 09:38:35 +0000
+	id 1xM0GL-0007w4-7z; Wed, 28 Oct 2026 09:48:05 +0000
+Received: by outflank-mailman (input) for mailman id 1462992;
+ Wed, 28 Oct 2026 09:48:04 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xM0GK-0007vl-84
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 09:48:04 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xM078-009Tts-4w
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 10:38:34 +0100
-Received: from [10.42.69.2] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a181e021b2000f79f@swg.vates.tech>)
- id 6ae1c28e-bab6-0a2a0a5309dd-0a2a4502bc08-42
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 10:38:33 +0100
-Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
- by tlsNG-720697.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a181e021b2000f79f@swg.vates.tech>)
- id 6ae1c299-6ca4-0a2a45020019-b9ff1c128959-3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 10:38:33 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a181e021b2000f79f.005 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 28 Oct 2026 09:38:31 +0000
-Received: from [192.168.1.18] (88-188-240-210.subs.proxad.net [88.188.240.210])
- (Authenticated sender: teddy.astie)
- by mail2.vates.fr (Postfix) with ESMTPSA id 0CB6F81D19;
- Wed, 28 Oct 2026 10:38:31 +0100 (CET)
+ id 1xM0GJ-006O23-HW
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 10:48:03 +0100
+Received: from [10.42.69.5] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae1c4c9-e002-0a2a0a5209dd-0a2a4505ecc8-26
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 10:48:03 +0100
+Received: from [209.85.221.49] (helo=mail-wr1-f49.google.com)
+ by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae1c4d3-4cb1-0a2a45050019-d155dd31ddfc-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 10:48:03 +0100
+Received: by mail-wr1-f49.google.com with SMTP id
+ ffacd0b85a97d-48e20edd106so569580f8f.1
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 02:48:03 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e3ebd48e0sm27944912f8f.38.2026.10.28.02.48.01
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 28 Oct 2026 02:48:02 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,206 +49,295 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=PPf7A+aEfn7JkqvA4t57I1tJGRIJz2np38/i7rFYbAE=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=TWbpOjnrwmr+3HWV3x4/mdvf+44vwYudnwrplhEqHJ7wDiHqks/13pUvsSg52+qd1IZXItfVm
- 39dyf/1vrTFEu4Xx8xzPW8vcTb2IqCS4XK00YXgvuR0O/vVCi98nF6/x65KYno9msxnqXvmxZlk
- 27Ja/xWjXBIhgFWsgVlsPOGMLytrzPeUggScmiaDfoyYDmC66ijfF5BnFWuA1FemV/ql+NxV7Uq
- i1FmHqi7dxSxaP+DujdTPiNYlt0X69PxWCZUeE/rmSLSowLilHmxv3U0Cx13/YDjMKhDej4Cw0Y
- HQqMHu/A1ZazP0R1Dfe2eBDTT4lrxuJaOpOXkEkd9H5g==
-X-Zone-Loop: e3d3afb166c0a788c4c5aa3dabd53eed17e7a8e02680
-x-campaign-type: default
-x-transaction-id: 20c83a94-96c5-49cc-9797-b55f11fd46a9
-x-swg-uid: 01-bd4ac6f4-ec93-4c31-afb6-0db54a37726e
-X-Mailer: Sweego
-Message-ID:
- <1793180312.8631fc262581453bbf619ec5b2062170.1a181e021b2000f79f@vates.tech>
-x-swg-bid: 1793180312.8631fc262581453bbf619ec5b2062170.1a181e021b2000f79f
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-Date: Wed, 28 Oct 2026 10:38:30 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1793180883; x=1793785683; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=MIRvX8cIau+XDlHLuogFp15o/j+RYWBpn/8pySM2qvI=;
+        b=VSk1ZZmKtf05X5K6PkkDqNBYc8uMXZvy5+anaOlpRqJ4hg3NJX/FHbK0xnJziGta4H
+         eWeA8/+DpWhogvutGQ7w/Rkc36fZEEH7iyLcfGz5KM9s+V3V6Ebb3he92dSf2b3Q7cKa
+         mxANwEiX1fnft/Q2C4ml/ERbtItLcaeiv0JIRHyEQZKh6MwFulKr5Mw/QlVjFDYfV4G0
+         +717/zs7N9xtIidhbla4Feb1NYvb7Mm1tzXEuN1QX3JaEP7d84hHTx6/4sKKzzTMu6Ax
+         LR7NJY9xmK65F9eLgMu/t25lpJX/2QUcWOmrBOCUSXLEv/RmYwR+SNPjNk3UJoCu2c66
+         kB7g==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793180883; x=1793785683;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=MIRvX8cIau+XDlHLuogFp15o/j+RYWBpn/8pySM2qvI=;
+        b=nVhcgp2EFyNxSAt9ze9K6eOspwYxelSJExlyC27FitKU9rf/DoA0pmeuE7a3pNr5g3
+         myDjiURYFcZgH73nd+XmaPPIauRQWNyq7sky5Y0XIYGvzOQs1k7NkkIe5SqzmAjzlvNG
+         wqg5ny2kkr94ZyLwsuWmzH0psJ69I3aOEymJHOEE1N58cgLJ7jSSgYxNoY/qqJ9WbDQ0
+         XdQo7UmqcjIABmEABOC2LI5SiXhRhLBQ3LXI2c7Bk2Z3jmlD+u3y8uxc4CtdFAGa5P0q
+         0Jwkn9p6Yo2zfRVBl2hQOma7RN6bxo0tEIer6zd4WEsKf4uqCQ1cTpoUOX6tnDvPozoX
+         5iQg==
+X-Forwarded-Encrypted: i=1; AKwUvBwq/wpQobAoy8KyqJ441HH2a1iHEulNkzMV7R5rNCuxdN61n6fScj+LAx+NJ4UnHcUVnylPHzDbFzk=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYKzX6/VQ51xZO9jEK4hZQcyAQwEJQrmf0CCsbNfTtiYHI3IxOR5
+	kgDGD7n2NlCkLtOtA8rx65I+nieBz3W7nsxn38JtFlF2dEG9bqEx/wJqVQX8wJhEFQ==
+X-Gm-Gg: AYBFou2cDJHhkzq7GWufjH0iblDiLLool+Jb8UoEAdYBcUEOiBQJ/NwxzsvlGeRzQBL
+	e1m6bhJHB/r7lR0qrmsWpzCEuM/BoxkXtE3yIfTMfOLyARGOpLFc9P659NwY5TbHa26S2ibafqQ
+	yRR/sZLE4jl9jG1DY6vpKId2M5XqT6/KJR3H12SWh3eVFDzX9Jy9oUqpb4J5WASPyuClne3jdUS
+	1gySaIDY/EAAV+hPlNIGv+dgCQ0E0WPEV84uGOVyiG51QZOhxTuXc6KPciNCt+I1yfTpQhADKOB
+	jC0dIjVm7mIxLsHR35WmR3C8K2jrdVsG7dSdogx+iRsN0WjT+wva+pp6kmfref7x1iwmFmJSCGf
+	94eEuyvNhrx/F1iBabSAMs3mNa3qJT8KjRqzjAIfFLHUry4DBiO3D0RhRb/VKWMf0DH06LdJlg8
+	SAkgdjDBc38OnnYfAMGUAo1mz80v5NycKVJpOyIIvgD4QA4CQ+BKulAXYHogPj00XKt+qUhLDvI
+	UoDB9Ul/lkD9AuzICG3WytFPsV8YuVKdn655EPI7ejAw+29BxF7oPG6V9z29iqakLIt5Y/UdnW1
+	z3Y3TacSOO9yyOFfB1pPS3XCtuEFj9yzVhKSYRpqJjoUSuNC0JM1HhaRKbmITcIXr3Sh9Dvkvng
+	LFqmzNUfPkQTFuYLVmya/E3Y6wU+IB9fdYDH3xg==
+X-Received: by 2002:a05:6000:2086:b0:48b:118e:7454 with SMTP id ffacd0b85a97d-48e5d5a45e2mr4074342f8f.31.1793180882489;
+        Wed, 28 Oct 2026 02:48:02 -0700 (PDT)
+Message-ID: <998b084e-1a3f-4b51-bad3-4b175e6027a0@suse.com>
+Date: Wed, 28 Oct 2026 10:48:01 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/9] tools/libs/guest: reject non-zero reserved fields
- in PAGE_DATA
-To: Marcus Granado <marcus.granado@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Frediano Ziglio <freddy77@gmail.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>, Jan Beulich <jbeulich@suse.com>
-References: <20261020200238.1815766-1-marcus.granado@citrix.com>
- <20261020200238.1815766-2-marcus.granado@citrix.com>
+Subject: Re: [PATCH v4 1/5] x86/emul: Introduce x86_decode_lite()
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20261015210530.786604-1-andrew.cooper3@citrix.com>
+ <20261015210530.786604-2-andrew.cooper3@citrix.com>
 Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20261020200238.1815766-2-marcus.granado@citrix.com>
-Content-Type: multipart/signed; micalg=pgp-sha256;
- protocol="application/pgp-signature";
- boundary="------------Pc66tAo0acgYaobCTayKz733"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1793180311224
-X-purgate-ID: tlsNG-720697/1793180313-317CA2AC-22D868B3/0/0
-X-purgate-type: clean
-X-purgate-size: 6952
-X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
-	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
-	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261015210530.786604-2-andrew.cooper3@citrix.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-c201ff/1793180883-24D1E2A1-3CD65039/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 9126
+X-Spam-Status: No, score=-17.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
+	SPF_PASS,UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham
+	autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-This is an OpenPGP/MIME signed message (RFC 4880 and 3156)
---------------Pc66tAo0acgYaobCTayKz733
-Content-Type: multipart/mixed; boundary="------------iRnwqgWgIP7gj3fLJW03EYqX";
- protected-headers="v1"; hp="clear"
-Message-ID: <1cf0078f-e343-4bbb-b0f1-f6a317c48983@vates.tech>
-Date: Wed, 28 Oct 2026 10:38:30 +0100
-MIME-Version: 1.0
-User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH v2 1/9] tools/libs/guest: reject non-zero reserved fields
- in PAGE_DATA
-To: Marcus Granado <marcus.granado@citrix.com>, xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Frediano Ziglio <freddy77@gmail.com>,
- Anthony PERARD <anthony.perard@vates.tech>,
- =?UTF-8?Q?Marek_Marczykowski-G=C3=B3recki?=
- <marmarek@invisiblethingslab.com>, Jan Beulich <jbeulich@suse.com>
-References: <20261020200238.1815766-1-marcus.granado@citrix.com>
- <20261020200238.1815766-2-marcus.granado@citrix.com>
-Content-Language: en-US
-From: Teddy Astie <teddy.astie@vates.tech>
-Autocrypt: addr=teddy.astie@vates.tech; keydata=
- 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
- x9fhaZEsniw8/bYgC3igkk5YJiOa
-In-Reply-To: <20261020200238.1815766-2-marcus.granado@citrix.com>
+On 15.10.2026 23:05, Andrew Cooper wrote:
+> In order to relocate all IP-relative fields in an alternative replacement
+> block, we need to decode the instructions enough to obtain their length and
+> any relative fields.
+> 
+> Full x86_decode() is far too heavyweight, so introduce a minimal form which
+> can make several simplifying assumptions.
+> 
+> This a mostly-complete decoder for integer instruction in the onebyte and
+> twobyte maps.  Some instructions are intentionally unrecognised, as finding
+> them in an alternative is more likely to be a bug than intentional.  Some
+> instruction groups and prefixes are unimplemented to reduce decode complexity,
+> as this will be a fasthpath during patching.
 
---------------iRnwqgWgIP7gj3fLJW03EYqX
-Content-Type: text/plain; charset=UTF-8; format=flowed
-Content-Transfer-Encoding: base64
+Just that patching isn't really something where performance matters very much.
+It's done during boot (or livepatch load), and then not anymore. (I still
+agree that reduction of complexity is a worthwhile goal, or course.)
 
-TGUgMjAvMTAvMjAyNiDDoCAyMjowNSwgTWFyY3VzIEdyYW5hZG8gYSDDqWNyaXTCoDoNCj4g
-QSBQQUdFX0RBVEEgcmVjb3JkIGhhcyB0d28gcmVzZXJ2ZWQgZmllbGRzOiB0aGUgMzItYml0
-IGZpZWxkIGFmdGVyDQo+IGNvdW50LCBhbmQgYml0cyA1OS01MiBvZiBlYWNoIHBmbiBlbnRy
-eS4gIGxpYnhlbmd1ZXN0IGlnbm9yZXMgYm90aCBvbg0KPiByZXN0b3JlLCBhcyB0aGUgc3Bl
-Y2lmaWNhdGlvbidzIGdlbmVyYWwgcnVsZSBmb3IgcmVzZXJ2ZWQgZmllbGRzDQo+IHJlcXVp
-cmVzLCB3aGlsZSB0aGUgUHl0aG9uIHN0cmVhbSB2YWxpZGF0b3INCj4gKHRvb2xzL3B5dGhv
-bi94ZW4vbWlncmF0aW9uL2xpYnhjLnB5KSByZWplY3RzIGJvdGguDQo+IA0KPiBBIHJlY2Vp
-dmVyIHdoaWNoIGlnbm9yZXMgZWl0aGVyIGZpZWxkIGNhbiBzaWxlbnRseSBtaXNyZWFkIGEg
-cmVjb3JkDQo+IHdoaWNoIHVzZXMgaXQgdG8gY2hhbmdlIGhvdyB0aGUgcmVjb3JkJ3MgY29u
-dGVudHMgYXJlIG9yZ2FuaXNlZC4NCj4gDQo+IFJlamVjdCBhIFBBR0VfREFUQSByZWNvcmQg
-d2l0aCBlaXRoZXIgZmllbGQgbm9uLXplcm8uICBRdWFsaWZ5IHRoZQ0KPiBzcGVjaWZpY2F0
-aW9uJ3MgZ2VuZXJhbCBydWxlIHNvIHRoYXQgYSByZWNvcmQgY2FuIG92ZXJyaWRlIGl0LCBy
-ZXF1aXJlDQo+IHJlamVjdGlvbiBvZiBib3RoIHJlc2VydmVkIGZpZWxkcywgYW5kIGJ1bXAg
-dGhlIHNwZWNpZmljYXRpb24ncw0KPiByZXZpc2lvbi4NCj4gDQo+IFRoaXMgZGVsaWJlcmF0
-ZWx5IHRpZ2h0ZW5zIHJlc3RvcmUuICBFdmVyeSBsaWJ4ZW5ndWVzdCBzaW5jZSBYZW4gNC42
-LA0KPiBhbmQgY29udmVydC1sZWdhY3ktc3RyZWFtLCB3cml0ZXMgYm90aCBmaWVsZHMgYXMg
-emVybywgc28gbm8gc3RyZWFtDQo+IHRoZXkgcHJvZHVjZSBpcyByZWplY3RlZC4NCj4gDQo+
-IEJhY2twb3J0OiA0LjE3Kw0KPiBSZXBvcnRlZC1ieTogVGVkZHkgQXN0aWUgPHRlZGR5LmFz
-dGllQHZhdGVzLnRlY2g+DQo+IEFzc2lzdGVkLWJ5OiBDbGF1ZGU6Y2xhdWRlLW9wdXMtNS01
-DQo+IFNpZ25lZC1vZmYtYnk6IE1hcmN1cyBHcmFuYWRvIDxtYXJjdXMuZ3JhbmFkb0BjaXRy
-aXguY29tPg0KPiAtLS0NCj4gDQo+IE5vdGVzOg0KPiAgICAgIENoYW5nZXMgaW4gdjI6DQo+
-ICAgICAgLSBOZXcgcGF0Y2gsIGFmdGVyIFRlZGR5IEFzdGllIHBvaW50ZWQgb3V0IG9uIHYx
-IHRoYXQgaWdub3JpbmcgcmVzZXJ2ZWQNCj4gICAgICAgIGZpZWxkcyBkb2VzIG5vdCBoZWxw
-IGEgZnV0dXJlIGZpZWxkIHdoaWNoIGNoYW5nZXMgaG93IHRoZSByZWNvcmQncw0KPiAgICAg
-ICAgY29udGVudHMgYXJlIG9yZ2FuaXNlZC4NCj4gDQo+ICAgZG9jcy9zcGVjcy9saWJ4Yy1t
-aWdyYXRpb24tc3RyZWFtLnBhbmRvYyB8IDExICsrKysrKysrLS0tDQo+ICAgdG9vbHMvbGli
-cy9ndWVzdC94Z19zcl9yZXN0b3JlLmMgICAgICAgICB8IDE1ICsrKysrKysrKysrKysrKw0K
-PiAgIHRvb2xzL2xpYnMvZ3Vlc3QveGdfc3Jfc3RyZWFtX2Zvcm1hdC5oICAgfCAgNSArKyst
-LQ0KPiAgIDMgZmlsZXMgY2hhbmdlZCwgMjYgaW5zZXJ0aW9ucygrKSwgNSBkZWxldGlvbnMo
-LSkNCj4gDQpSZXZpZXdlZC1ieTogVGVkZHkgQXN0aWUgPHRlZGR5LmFzdGllQHZhdGVzLnRl
-Y2g+DQo=
+> --- /dev/null
+> +++ b/xen/arch/x86/x86_emulate/decode-lite.c
+> @@ -0,0 +1,331 @@
+> +/* SPDX-License-Identifier: GPL-2.0-only */
+> +
+> +#ifdef __XEN__
+> +# include <xen/init.h>
+> +#endif
+> +
+> +#include "private.h"
+> +
+> +#undef ModRM
+> +
+> +/*
+> + * Bare minimum x86 instruction decoder to parse the alternative replacement
+> + * instructions and locate the IP-relative references that may need updating.
+> + *
+> + * These are:
+> + *  - disp8/32 from near direct branches
+> + *  - RIP-relative memory references
+> + *
+> + * The following simplifications are used:
+> + *  - All code is 64bit, the instruction stream is well formed and safe to
+> + *    read.
+> + *  - Instruction groups and prefixes not used by Xen's current alternatives
+> + *    are not implemented in order to reduce the decode complexity.
+> + *  - Certain instructions are intentionally not recognised, when it is more
+> + *    likely for their presence to be an error than intentional.
+> + *
+> + * Inputs:
+> + *  @ip  The position to start decoding from.
+> + *  @end End of the code block.  Exceeding this is considered an error.
+> + *
+> + * Returns: x86_decode_lite_t
+> + *  - On failure, length of 0.
+> + *  - On success, length > 0.  For rel_sz > 0, rel points at the relative
+> + *    field in the instruction stream.
+> + */
+> +x86_decode_lite_t init_or_livepatch x86_decode_lite(void *ip, const void *end)
+> +{
+> +#define Imm8   (1 << 0)
+> +#define Imm    (1 << 1)
+> +#define Moffs  (1 << 2)
+> +#define Branch (1 << 5) /* Near direct branches, which have a displacement */
+> +#define ModRM  (1 << 6)
+> +#define Known  (1 << 7)
+> +
+> +    static const uint8_t init_or_livepatch_const onebyte[256] = {
+> +
+> +#define ALU_OPS(x)                              \
+> +        [(x) + 0] = (Known|ModRM),              \
+> +        [(x) + 1] = (Known|ModRM),              \
+> +        [(x) + 2] = (Known|ModRM),              \
+> +        [(x) + 3] = (Known|ModRM),              \
+> +        [(x) + 4] = (Known|Imm8),               \
+> +        [(x) + 5] = (Known|Imm)
+> +
+> +        ALU_OPS(0x00) /* ADD */, ALU_OPS(0x08) /* OR  */,
+> +        ALU_OPS(0x10) /* ADC */, ALU_OPS(0x18) /* SBB */,
+> +        ALU_OPS(0x20) /* AND */, ALU_OPS(0x28) /* SUB */,
+> +        ALU_OPS(0x30) /* XOR */, ALU_OPS(0x38) /* CMP */,
+> +
+> +#undef ALU_OPS
+> +
+> +        [0x50 ... 0x5f] = (Known),             /* PUSH/POP %reg */
+> +
+> +        [0x62]          = 0,                   /* BOUND, but also EVEX prefix, not implemented. */
 
---------------iRnwqgWgIP7gj3fLJW03EYqX--
+Given the purpose, BOUND isn't relevant here at all: We don't mean to use
+this decoder on 32- or 16-bit code. Hence I'd suggest to put emphasis on
+EVEX, and name BOUND secondarily. See how ...
 
---------------Pc66tAo0acgYaobCTayKz733
-Content-Type: application/pgp-signature; name="OpenPGP_signature.asc"
-Content-Description: OpenPGP digital signature
-Content-Disposition: attachment; filename="OpenPGP_signature.asc"
+> +        [0x63]          = (Known|ModRM),       /* MOVSxd */
 
------BEGIN PGP SIGNATURE-----
+... here you don't mention ARPL at all. (Also - why xd in lower case?)
 
-wsD5BAABCAAjFiEEGAIew9LzHY3pdrqtZg+p0QLLz9AFAmrhwpYFAwAAAAAACgkQZg+p0QLLz9C8
-tgv+NxU21ESexyupIIDBcalitRb7HJdb/EPUmSf64VLSPHWiX4yVirQ43FDRjMn8FDHRvrbPhW69
-sacnHqj/yCJaf2+oTBSvbcu1StxJoHACBurfWhXEk8O2//gHLU+rqZsRmZi7tGwYTGbtFnq1pQaB
-Nwrs0AKsTBVPOGWNg+nusQKiIp8lwtt2L0xxqSyfrYarmyMLYBbP79s8ocSyh20a4mB6FK8KpZUk
-1tUL6PRfcfXCsRN0BtsjXXr0hQnwBH6Bto2GeGuuIJHxmvMdkvsa8bARdTUAoHKKQ2fKhTvoUhtE
-YRZUx8DeYrHwQ647G5rVyt5isZgasSM2gW/hvZ0HBX7MoaU081MwXUCEGf76wTHEAsqdJs+zTjb5
-f7CcyKjE6/9Rhu/Z0sMb688JC25O/6dX2KFDI5Cbq9ydxfRHfvIniGMAQEFtVw8wTLu/hBlfalrR
-nfbz3/GdD8frRnit8XqGcSYMNHbUDrUXIv0KMfzJSYCjUZdJHQKxAVrFtK9u
-=N53G
------END PGP SIGNATURE-----
+> +        [0x68]          = (Known|Imm),         /* PUSH $imm */
+> +        [0x69]          = (Known|ModRM|Imm),   /* IMUL $imm */
+> +        [0x6a]          = (Known|Imm8),        /* PUSH $imm8 */
+> +        [0x6b]          = (Known|ModRM|Imm8),  /* PUSH $imm8 */
+> +        [0x6c ... 0x6f] = (Known),             /* INS/OUTS */
+> +        [0x70 ... 0x7f] = (Known|Branch|Imm8), /* Jcc disp8 */
+> +        [0x80]          = (Known|ModRM|Imm8),  /* Grp1 */
+> +        [0x81]          = (Known|ModRM|Imm),   /* Grp1 */
+> +
+> +        [0x83]          = (Known|ModRM|Imm8),  /* Grp1 */
+> +        [0x84 ... 0x8e] = (Known|ModRM),       /* TEST/XCHG/MOV/MOV-SREG/LEA */
+> +        [0x8f]          = 0,                   /* Grp1A - POP but also XOP prefix, not implemented. */
 
---------------Pc66tAo0acgYaobCTayKz733--
+I continue thinking that the asymmetry between PUSH r/m and POP r/m being
+deliberate wants at least mentioning in the description.
+
+> +        [0x90 ... 0x99] = (Known),             /* NOP/XCHG %rAX/CLTQ/CQTO */
+> +
+> +        [0x9b ... 0x9f] = (Known),             /* FWAIT/PUSHF/POPF/SAHF/LAHF */
+> +        [0xa0 ... 0xa3] = (Known|Moffs),       /* MOVABS */
+> +        [0xa4 ... 0xa7] = (Known),             /* MOVS/CMPS */
+> +        [0xa8]          = (Known|Imm8),        /* TEST %al */
+> +        [0xa9]          = (Known|Imm),         /* TEST %rAX */
+> +        [0xaa ... 0xaf] = (Known),             /* STOS/LODS/SCAS */
+> +        [0xb0 ... 0xb7] = (Known|Imm8),        /* MOV $imm8, %reg */
+> +        [0xb8 ... 0xbf] = (Known|Imm),         /* MOV $imm{16,32,64}, %reg */
+> +        [0xc0 ... 0xc1] = (Known|ModRM|Imm8),  /* Grp2 (ROL..SAR $imm8, %reg) */
+> +
+> +        [0xc3]          = (Known),             /* RET */
+> +        [0xc4 ... 0xc5] = 0,                   /* LES/LDS but also VEX prefixes, not implemented. */
+> +        [0xc6]          = (Known|ModRM|Imm8),  /* Grp11, Further ModRM decode */
+> +        [0xc7]          = (Known|ModRM|Imm),   /* Grp11, Further ModRM decode */
+> +
+> +        [0xcb ... 0xcc] = (Known),             /* LRET/INT3 */
+
+Here and for RET above: I think it's fine to entirely omit entries for
+opcodes not defined in 64-bit mode (e.g. 9A, EA), and for SIMD ones. At
+the same time I think we'd be better off having explicit (zero) entries
+for (integer) opcodes we deliberately mean to not support (RET/LRET with
+imm16, ENTER, LEAVE; more further down).
+
+> +        [0xcd]          = (Known|Imm8),        /* INT $imm8 */
+> +
+> +        [0xd0 ... 0xd3] = (Known|ModRM),       /* Grp2 (ROL..SAR {$1,%cl}, %reg) */
+> +
+> +        [0xd6]          = (Known),             /* UDB */
+> +
+> +        [0xe4 ... 0xe7] = (Known|Imm8),        /* IN/OUT $imm8 */
+> +        [0xe8 ... 0xe9] = (Known|Branch|Imm),  /* CALL/JMP disp32 */
+> +
+> +        [0xeb]          = (Known|Branch|Imm8), /* JMP disp8 */
+> +        [0xec ... 0xef] = (Known),             /* IN/OUT %dx */
+> +
+> +        [0xf1]          = (Known),             /* ICEBP */
+> +
+> +        [0xf4]          = (Known),             /* HLT */
+> +        [0xf5]          = (Known),             /* CMC */
+> +        [0xf6 ... 0xf7] = (Known|ModRM),       /* Grp3, Further ModRM decode */
+> +        [0xf8 ... 0xfd] = (Known),             /* CLC ... STD */
+> +        [0xfe ... 0xff] = (Known|ModRM),       /* Grp4 */
+> +    };
+> +    static const uint8_t init_or_livepatch_const twobyte[256] = {
+> +        [0x00 ... 0x03] = (Known|ModRM),       /* Grp6/Grp7/LAR/LSL */
+> +
+> +        [0x0b]          = (Known),             /* UD2 */
+> +
+> +        [0x18 ... 0x1f] = (Known|ModRM),       /* Grp16 (Hint Nop) */
+> +        [0x20 ... 0x23] = (Known|ModRM),       /* MOV %cr/%dr */
+> +
+> +        [0x30 ... 0x33] = (Known),             /* WRMSR/RDTSC/RDMSR/RDPMC */
+> +
+> +        [0x40 ... 0x4f] = (Known|ModRM),       /* CMOVcc */
+> +
+> +        [0x80 ... 0x8f] = (Known|Branch|Imm),  /* Jcc disp32 */
+> +        [0x90 ... 0x9f] = (Known|ModRM),       /* SETcc */
+> +
+> +        [0xa0 ... 0xa2] = (Known),             /* PUSH/POP %fs/CPUID */
+> +        [0xa3]          = (Known|ModRM),       /* BT */
+> +        [0xa4]          = (Known|ModRM|Imm8),  /* SHLD $imm8 */
+> +        [0xa5]          = (Known|ModRM),       /* SHLD %cl */
+> +
+> +        [0xa8 ... 0xa9] = (Known),             /* PUSH/POP %gs */
+> +
+> +        [0xab]          = (Known|ModRM),       /* BTS */
+> +        [0xac]          = (Known|ModRM|Imm8),  /* SHRD $imm8 */
+> +        [0xad ... 0xaf] = (Known|ModRM),       /* SHRD %cl/Grp15/IMUL */
+> +
+> +        [0xb0 ... 0xb9] = (Known|ModRM),       /* CMPXCHG/LSS/BTR/LFS/LGS/MOVZxx/POPCNT/UD1 */
+> +        [0xba]          = (Known|ModRM|Imm8),  /* Grp8 */
+> +        [0xbb ... 0xbf] = (Known|ModRM),       /* BTC/BSF/BSR/MOVSX */
+
+With it being MOVSX here, perhaps MOVZX above? Or the other way around,
+MOVSxx here?
+
+> +        [0xc0 ... 0xc1] = (Known|ModRM),       /* XADD */
+
+Is there a reason to permit XADD but not CMPXCHG?
+
+Preferably with the above addressed (but explicitly also with some / all
+left as is, yet then with the expectation that I may send an adjustment
+patch on top, which I'd then expect to not be outright refused/ignored):
+Reviewed-by: Jan Beulich <jbeulich@suse.com>
+
+Jan
 
