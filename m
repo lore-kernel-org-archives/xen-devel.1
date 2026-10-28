@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B59C8606A31D
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:30:59 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id E3A0F606A31F
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:31:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=XH5Tx6p9
-Received: from list by lists.xenproject.org with outflank-mailman.1463799.1674669 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=e3zXAQjV
+Received: from list by lists.xenproject.org with outflank-mailman.1463782.1674545 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD6X-0006me-6a; Wed, 28 Oct 2026 23:30:49 +0000
+	id 1xMD6M-0004B0-Nn; Wed, 28 Oct 2026 23:30:38 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463799.1674669; Wed, 28 Oct 2026 23:30:48 +0000
+Received: by outflank-mailman (output) from mailman id 1463782.1674545; Wed, 28 Oct 2026 23:30:38 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD6W-0006gy-9q; Wed, 28 Oct 2026 23:30:48 +0000
-Received: by outflank-mailman (input) for mailman id 1463799;
- Wed, 28 Oct 2026 23:30:37 +0000
+	id 1xMD6M-0004At-Jf; Wed, 28 Oct 2026 23:30:38 +0000
+Received: by outflank-mailman (input) for mailman id 1463782;
+ Wed, 28 Oct 2026 23:30:36 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xMD6L-000495-1V
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:30:37 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMD6K-00046Y-Eg
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:30:36 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMD6K-00000000pPD-4BuO;
+ (envelope-from <gwd@xenproject.org>) id 1xMD6K-00000000pNv-1aho;
  Wed, 28 Oct 2026 23:30:36 +0000
 Received: from [217.155.165.12] (helo=Mac.fritz.box.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMCjg-00000001KpM-3TaO;
- Wed, 28 Oct 2026 23:07:13 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCjR-00000001KpM-4Bnp;
+ Wed, 28 Oct 2026 23:06:58 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,18 +41,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=xMTLrvxxwpwmKfoWs2RiIcYg6g+Liai9ytC5nmpdgLQ=; b=XH5Tx6p9ugn8sbuh8vww2TnW6E
-	oCo46K90NkNypjKIpjZlVOPErWCJ5JESLk1ouKZN8DdDl4ZpxZ9cUpNwriqfODh3i3HI4EqhPEEwq
-	8Gl3HRtVnWyHkcpe/LEmNOfH0mOdVWVGRsGJp40jWc6ExUVlaav2DCOXZhrZJHpB10rQ=;
+	bh=uF5AU0TsOGRUZl40feFge0+rlPH5GGpTVMZm9buYkhM=; b=e3zXAQjVC1raYjeb6Wvj8+/uUV
+	TdOdzzQj1zYT0S4dIjx8FI2HSgBZ4r+Ijqe+TD/BpVGb/uKHYRSdSotdEZH5ZcysW1l0MaLwCVEsF
+	6kXBabGgSwrG1DkkrQ+yQAAd8FBm4p9pkK8ghA3r9oIXrLOdBlcaRGGDWON+RF5k+YIY=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
 Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v5 35/45] x86/hvm: clear the vCPU's copy of an emulated I/O request once consumed
-Date: Wed, 28 Oct 2026 23:05:49 +0000
-Message-ID: <20261028-asi-hvm-v5-35-13b908e0df0b@xenproject.org>
+Subject: [PATCH v5 21/45] x86/mm: run guest contexts on the sparse directmap view
+Date: Wed, 28 Oct 2026 23:05:35 +0000
+Message-ID: <20261028-asi-hvm-v5-21-13b908e0df0b@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
 References: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
@@ -66,143 +66,184 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-hvmemul_do_io() keeps the request it is emulating in the vCPU's struct
-vcpu_io: the data written, or the response once a device model has
-supplied it, with the address and repeat count.  Once the access is done
-only the state is set back to STATE_IOREQ_NONE, so the operand stays in
-struct vcpu, a xenheap page mapped in every context, until the next
-emulated I/O overwrites it.
+In init_xen_l4_slots(), if d->arch.asi.sparse_dmap is set, point the
+directmap slots at the sparse view, copying from idle_pg_table only the
+Xen slots below them.  A root page-table not shared with a PV guest gets
+no extended directmap, which the sparse view does not cover.
 
-Drop the copy wherever it is done with: when the response has been taken
-into hvmemul_do_io()'s local copy on the instruction's re-execution,
-when Xen's own handlers have completed the access, when the request is
-retried, suspended or not sent, and in hvmemul_cancel().  A request sent
-to a device model stays while it is in flight: the re-execution checks
-it, and the port-I/O completion reads its address and size before
-re-issuing it.  One which needs no completion -- a port write, or a
-request whose data is a guest buffer's address -- loses its address,
-data and count as soon as it is sent: the device model has its own copy,
-and the completion path reads only the state, type, direction and
-data_is_ptr.  Nothing reads the copy after STATE_IOREQ_NONE.
+d->arch.asi.sparse_dmap is decided at domain creation: PV domains all
+have a mapcache, HVM domains need per-vCPU page-tables for one.  No
+option asks for the sparse view yet.
 
-Only the x86 emulator changes.  struct vcpu_io is common code, and Arm's
-MMIO completion reads the response from it.  Moving the in-flight copy
-out of struct vcpu belongs with narrowing the ioreq server pages, which
-carry the same operand while a device model handles it.
+The sparse view is built before any domain is created, so the root
+page-tables of every domain using it carry it from their creation,
+dom0's included.  Dom0's builders reach dom0's memory only through guest
+virtual addresses and map_domain_page().  In PV shim mode,
+replace_va_mapping() reads the guest's L4 through the directmap; map it
+with map_domain_page() instead, as the lower levels already are.  Shadow
+L4s, dom0=shadow's included, get the sparse view from
+init_xen_l4_slots().
+
+The two directmaps differ where the sparse view leaves memory out, so no
+translation of the full directmap may remain usable on page-tables
+carrying the sparse view.  Directmap mappings stay global nevertheless:
+every CR3 write which can move a CPU onto the sparse view goes through
+switch_cr3_cr4(), which flushes the old page-tables' translations,
+global entries included, before it returns.  The CR3 writes which keep
+entries -- a PV vCPU's switch between its kernel and user page-tables,
+XPTI's entry and exit -- stay within one vCPU's page-tables, which carry
+the same directmap, or go to XPTI's per-CPU root, which maps only Xen's
+own per-CPU pages there.  Removals from the sparse view are flushed on
+every CPU, global entries included.  PV guests that run with global
+pages, among them a PV dom0 not using the sparse view, therefore keep
+their directmap TLB entries across switches between guest kernel and
+user mode.
 
 Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
-Changes in v5:
+Changes in v4:
+- d->arch.vcpu_pt and d->arch.sparse_dmap are now d->arch.asi.vcpu_pt
+  and d->arch.asi.sparse_dmap.
+- Drop sparse_dmap_active and sparse_dmap_activate(): root page-tables
+  carry the sparse view from their creation, dom0's included (Roger).
+- The sparse view's slots are now marked NX in "x86/mm: build and
+  maintain a sparse view of the directmap".
+- PV shim: replace_va_mapping() maps the guest's L4 with
+  map_domain_page().
+- Give sparse_dmap_wanted() its hardware-domain case (Roger).
+- init_xen_l4_slots() takes the directmap slots from the sparse view,
+  rather than copying the full directmap's and overwriting them;
+  sparse_dmap_install() goes (Roger).
+- Message: drop the sentence on NX (Roger).
+
+Changes in v3:
 - New in this version.
 ---
- xen/arch/x86/hvm/emulate.c | 36 ++++++++++++++++++++++++++++--------
- 1 file changed, 28 insertions(+), 8 deletions(-)
+ xen/arch/x86/include/asm/sparse-directmap.h |  9 +++++++
+ xen/arch/x86/mm.c                           | 28 +++++++++++++++++++--
+ xen/arch/x86/pv/shim.c                      |  4 ++-
+ xen/arch/x86/spec_ctrl.c                    |  7 ++++++
+ 4 files changed, 45 insertions(+), 3 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
-index e2cf982c25..da7c08b5d9 100644
---- a/xen/arch/x86/hvm/emulate.c
-+++ b/xen/arch/x86/hvm/emulate.c
-@@ -167,6 +167,16 @@ static const struct hvm_io_handler ioreq_server_handler = {
-     .ops = &ioreq_server_ops
- };
+diff --git a/xen/arch/x86/include/asm/sparse-directmap.h b/xen/arch/x86/include/asm/sparse-directmap.h
+index ea14d44334..2f8b94f4c1 100644
+--- a/xen/arch/x86/include/asm/sparse-directmap.h
++++ b/xen/arch/x86/include/asm/sparse-directmap.h
+@@ -31,6 +31,14 @@ static inline bool sparse_dmap_configured(void)
+     return opt_sparse_dmap_pv || opt_sparse_dmap_hvm || opt_sparse_dmap_hwdom;
+ }
  
-+/*
-+ * The vCPU's copy of an emulated I/O request is done with: nothing reads it
-+ * before the next request overwrites it.  Clear it all, so that the operand
-+ * and the address do not stay in struct vcpu.
-+ */
-+static void ioreq_done(struct vcpu_io *vio)
++/* Whether a new domain of the given type is to use the sparse view. */
++static inline bool sparse_dmap_wanted(bool pv, bool hwdom)
 +{
-+    vio->req = (ioreq_t){ .state = STATE_IOREQ_NONE };
++    return sparse_dmap_root &&
++           (hwdom ? opt_sparse_dmap_hwdom
++                  : pv ? opt_sparse_dmap_pv : opt_sparse_dmap_hvm);
 +}
 +
- /*
-  * Drop all records of in-flight emulation. This is needed whenever a vCPU's
-  * register state may have changed behind the emulator's back.
-@@ -175,7 +185,7 @@ void hvmemul_cancel(struct vcpu *v)
+ void sparse_dmap_init(void);
+ int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn, unsigned long nr,
+                            pte_attr_t flags);
+@@ -42,6 +50,7 @@ int sparse_dmap_drop_pagetable(mfn_t mfn);
+ #else /* !CONFIG_SPARSE_DIRECTMAP */
+ 
+ static inline bool sparse_dmap_configured(void) { return false; }
++static inline bool sparse_dmap_wanted(bool pv, bool hwdom) { return false; }
+ static inline void sparse_dmap_init(void) {}
+ static inline int sparse_dmap_mirror_map(unsigned long virt, mfn_t mfn,
+                                          unsigned long nr, pte_attr_t flags)
+diff --git a/xen/arch/x86/mm.c b/xen/arch/x86/mm.c
+index 964f9e6a41..e25af043bc 100644
+--- a/xen/arch/x86/mm.c
++++ b/xen/arch/x86/mm.c
+@@ -1703,7 +1703,8 @@ struct page_info *perdomain_l3(const struct vcpu *v)
+  * l4t, l4mfn, and v are mandatory, but l4mfn doesn't need to be the mfn under
+  * *l4t.  All other parameters are optional and will either fill or zero the
+  * appropriate slots.  Pagetables not shared with guests will gain the
+- * extended directmap.
++ * extended directmap, unless the domain runs on the sparse view of the
++ * directmap, which replaces the directmap slots.
+  *
+  * v is the vCPU the table is private to or, for a table the domain's vCPUs
+  * share, any of them: slot 260 gets perdomain_l3(v), which in a domain
+@@ -1715,7 +1716,7 @@ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
+     const struct domain *d = v->domain;
+     /*
+      * PV vcpus need a shortened directmap.  HVM and Idle vcpus get the full
+-     * directmap.
++     * directmap, unless the domain runs on the sparse view (below).
+      */
+     bool short_directmap = !paging_mode_external(d);
+ 
+@@ -1751,6 +1752,29 @@ void init_xen_l4_slots(l4_pgentry_t *l4t, mfn_t l4mfn,
+             l4t[l4_table_offset(PERDOMAIN_VIRT_START)];
+ 
+     /* Slot 261-: text/data/bss, RW M2P, vmap, frametable, directmap. */
++#ifdef CONFIG_SPARSE_DIRECTMAP
++    if ( d->arch.asi.sparse_dmap )
++    {
++        unsigned int i = l4_table_offset(SPARSE_DMAP_START);
++
++        memcpy(&l4t[l4_table_offset(XEN_VIRT_START)],
++               &idle_pg_table[l4_table_offset(XEN_VIRT_START)],
++               (i - l4_table_offset(XEN_VIRT_START)) * sizeof(*l4t));
++
++        /*
++         * Every slot the sparse view covers gets its L3, whatever the full
++         * directmap has there, so that memory added later is covered too.  A
++         * PV root has guest slots above; any other root loses the rest of the
++         * directmap, which the sparse view does not cover.
++         */
++        for ( ; i < l4_table_offset(SPARSE_DMAP_END); i++ )
++            l4t[i] = sparse_dmap_root[i];
++        if ( !short_directmap )
++            for ( ; i < l4_table_offset(DIRECTMAP_VIRT_END); i++ )
++                l4t[i] = l4e_empty();
++    }
++    else
++#endif
+ #ifndef NDEBUG
+     if ( short_directmap &&
+          unlikely(root_pgt_pv_xen_slots < ROOT_PAGETABLE_PV_XEN_SLOTS) )
+diff --git a/xen/arch/x86/pv/shim.c b/xen/arch/x86/pv/shim.c
+index 41000b0523..2a47dbc56c 100644
+--- a/xen/arch/x86/pv/shim.c
++++ b/xen/arch/x86/pv/shim.c
+@@ -148,12 +148,14 @@ const struct platform_bad_page *__init pv_shim_reserved_pages(unsigned int *size
+ static void __init replace_va_mapping(struct domain *d, l4_pgentry_t *l4start,
+                                       unsigned long va, mfn_t mfn)
  {
-     struct hvm_vcpu_io *hvio = &v->arch.hvm.hvm_io;
+-    l4_pgentry_t l4e = l4start[l4_table_offset(va)];
++    const l4_pgentry_t *l4t = map_domain_page(virt_to_mfn(l4start));
++    l4_pgentry_t l4e = l4t[l4_table_offset(va)];
+     l3_pgentry_t l3e = l3e_from_l4e(l4e, l3_table_offset(va));
+     l2_pgentry_t l2e = l2e_from_l3e(l3e, l2_table_offset(va));
+     l1_pgentry_t *pl1e = map_l1t_from_l2e(l2e) + l1_table_offset(va);
+     struct page_info *page = mfn_to_page(l1e_get_mfn(*pl1e));
  
--    v->io.req.state = STATE_IOREQ_NONE;
-+    ioreq_done(&v->io);
-     v->io.completion = VIO_no_completion;
-     hvio->mmio_cache_count = 0;
-     hvio->mmio_insn_bytes = 0;
-@@ -265,8 +275,9 @@ static int hvmemul_do_io(
-     case STATE_IOREQ_NONE:
-         break;
-     case STATE_IORESP_READY:
--        vio->req.state = STATE_IOREQ_NONE;
-+        /* The local copy carries the response from here. */
-         p = vio->req;
-+        ioreq_done(vio);
++    unmap_domain_page(l4t);
+     put_page_and_type(page);
  
-         /* Verify the emulation request has been correctly re-issued */
-         if ( (p.type != (is_mmio ? IOREQ_TYPE_COPY : IOREQ_TYPE_PIO)) ||
-@@ -330,7 +341,7 @@ static int hvmemul_do_io(
-     {
-     case X86EMUL_OKAY:
-     case X86EMUL_RETRY:
--        vio->req.state = STATE_IOREQ_NONE;
-+        ioreq_done(vio);
-         break;
-     case X86EMUL_UNHANDLEABLE:
-     {
-@@ -383,7 +394,7 @@ static int hvmemul_do_io(
-                 if ( s == NULL )
-                 {
-                     rc = X86EMUL_RETRY;
--                    vio->req.state = STATE_IOREQ_NONE;
-+                    ioreq_done(vio);
-                     break;
-                 }
+     *pl1e = l1e_from_mfn(mfn, (!is_pv_32bit_domain(d) ? L1_PROT
+diff --git a/xen/arch/x86/spec_ctrl.c b/xen/arch/x86/spec_ctrl.c
+index 8797523a62..bcdcdf0476 100644
+--- a/xen/arch/x86/spec_ctrl.c
++++ b/xen/arch/x86/spec_ctrl.c
+@@ -1953,6 +1953,13 @@ void spec_ctrl_init_domain(struct domain *d)
  
-@@ -394,7 +405,7 @@ static int hvmemul_do_io(
-                 if ( dir == IOREQ_READ )
-                 {
-                     rc = hvm_process_io_intercept(&ioreq_server_handler, &p);
--                    vio->req.state = STATE_IOREQ_NONE;
-+                    ioreq_done(vio);
-                     break;
-                 }
-             }
-@@ -440,7 +451,7 @@ static int hvmemul_do_io(
-                                     paddr_to_pfn(addr));
+     d->arch.asi.vcpu_pt = !pv && (is_hardware_domain(d) ? opt_vcpu_pt_hwdom
+                                                         : opt_vcpu_pt_hvm);
++
++    /*
++     * The sparse directmap view needs a mapcache: PV domains all have one,
++     * HVM domains through per-vCPU page-tables.
++     */
++    d->arch.asi.sparse_dmap = (pv || d->arch.asi.vcpu_pt) &&
++                              sparse_dmap_wanted(pv, is_hardware_domain(d));
+ }
  
-                         rc = X86EMUL_RETRY;
--                        vio->req.state = STATE_IOREQ_NONE;
-+                        ioreq_done(vio);
-                         break;
-                     }
- 
-@@ -455,15 +466,24 @@ static int hvmemul_do_io(
-                              dir ? "read from" : "write to", addr, size);
-             }
-             rc = hvm_process_io_intercept(&null_handler, &p);
--            vio->req.state = STATE_IOREQ_NONE;
-+            ioreq_done(vio);
-         }
-         else
-         {
-             rc = ioreq_send(s, &p, 0);
-             if ( rc != X86EMUL_RETRY || vio->suspended )
--                vio->req.state = STATE_IOREQ_NONE;
-+                ioreq_done(vio);
-             else if ( !ioreq_needs_completion(&vio->req) )
-+            {
-+                /*
-+                 * Nothing comes back, and the device model has its own copy
-+                 * of the request: keep only what completion checks.
-+                 */
-+                vio->req.addr = 0;
-+                vio->req.data = 0;
-+                vio->req.count = 0;
-                 rc = X86EMUL_OKAY;
-+            }
-         }
-         break;
-     }
+ void __init init_speculation_mitigations(void)
 -- 
 2.56.0
 
