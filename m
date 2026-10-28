@@ -2,51 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C4D13606A31A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 10:08:03 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 1796F606A31A
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 10:15:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=NTT5m8qQ
-Received: from list by lists.xenproject.org with outflank-mailman.1463017.1673994 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=VOWBXE3S
+Received: from list by lists.xenproject.org with outflank-mailman.1463028.1674005 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM0ZL-0003mE-AB; Wed, 28 Oct 2026 10:07:43 +0000
+	id 1xM0gy-0005d8-0D; Wed, 28 Oct 2026 10:15:36 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463017.1673994; Wed, 28 Oct 2026 10:07:43 +0000
+Received: by outflank-mailman (output) from mailman id 1463028.1674005; Wed, 28 Oct 2026 10:15:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM0ZL-0003m7-7R; Wed, 28 Oct 2026 10:07:43 +0000
-Received: by outflank-mailman (input) for mailman id 1463017;
- Wed, 28 Oct 2026 10:07:42 +0000
-Received: from mx.expurgate.net ([195.190.135.20])
- by lists.xenproject.org with esmtp (Exim 4.92) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a181fac390000f79f@swg.vates.tech>)
- id 1xM0ZK-0003lv-3G
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 10:07:42 +0000
+	id 1xM0gx-0005d0-Sr; Wed, 28 Oct 2026 10:15:35 +0000
+Received: by outflank-mailman (input) for mailman id 1463028;
+ Wed, 28 Oct 2026 10:15:34 +0000
+Received: from mx.expurgate.net ([195.190.135.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xM0gw-0005cu-M3
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 10:15:34 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xM0ZJ-00DDzV-CZ
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 11:07:41 +0100
-Received: from [10.42.69.8] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a181fac390000f79f@swg.vates.tech>)
- id 6ae1c969-2eae-0a2a0a5409dd-0a2a4508e85e-22
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 11:07:41 +0100
-Received: from [185.255.28.35] (helo=prod-mta-13-02.swg-srv.net)
- by tlsNG-c1860d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from
- <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a181fac390000f79f@swg.vates.tech>)
- id 6ae1c96c-f659-0a2a45080019-b9ff1c23b649-3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 11:07:41 +0100
-Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
- (Authenticated sender:
- 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
- by prod-mta-13-02.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
- 1a181fac390000f79f.003 for <xen-devel@lists.xenproject.org>
- (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
- Wed, 28 Oct 2026 10:07:37 +0000
-Received: from l14 (areims-651-1-80-194.w90-18.abo.wanadoo.fr [90.18.187.194])
- (Authenticated sender: anthony.perard)
- by mail2.vates.fr (Postfix) with ESMTPSA id 9FA5880CA5;
- Wed, 28 Oct 2026 11:07:36 +0100 (CET)
+ id 1xM0gw-002UmB-2x
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 11:15:34 +0100
+Received: from [10.42.69.6] (helo=localhost)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae1cb40-bab6-0a2a0a5309dd-0a2a450691ca-16
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 11:15:34 +0100
+Received: from [209.85.221.41] (helo=mail-wr1-f41.google.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae1cb45-195a-0a2a45060019-d155dd29ac37-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 11:15:33 +0100
+Received: by mail-wr1-f41.google.com with SMTP id
+ ffacd0b85a97d-48e3b22e971so381516f8f.0
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 03:15:33 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ ffacd0b85a97d-48e3ebcb8e0sm26833867f8f.29.2026.10.28.03.15.32
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 28 Oct 2026 03:15:32 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -55,143 +49,114 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
- q=dns/txt; s=selector1; bh=aXZ0OgsGv+lyuglQvC4NwIKQ1iGFp8a8FzIYFVBSUcI=;
- h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
- b=NTT5m8qQsOWngTI4SrDdTBwufXMxjkUuSSeGgx7Cp+GbVh1+/X5AD7vBCHVLCahc3UI+6kRg8
- IOZTJAT423nPT/qfge7QygTq76vbtGKIen7wFsSmxO8xEaVn7ImP+IZ8N093sNWBWe6RanOzoWo
- L88XfVpZSnnfr9YAC8H6LHYUbWzVKsZ5rsbGSvCQe5siYcDY6v2Ct8sxM//6YCnEb9Nc+yNENgM
- zMpBqfn0FtGq0He6La8zUS/Lg7uAkeV9KGFDCWw7T4cfjnLm3mXBHjxSPqkk327M7vXFUCDBrbB
- UrIQGn1IIlKeAV6JVF9ywAsV+oxiSvsJa0H/aI/KrvYQ==
-X-Zone-Loop: d042846dfc815170d969b11751446ae6fe4b25dd575a
-x-campaign-type: default
-x-transaction-id: 41327007-6b19-4134-bc02-83aba752dbbe
-x-swg-uid: 01-4a285e68-9181-459a-977a-3c1cca42c17f
-X-Mailer: Sweego
-Message-ID:
- <1793182057.8631fc262581453bbf619ec5b2062170.1a181fac390000f79f@vates.tech>
-x-swg-bid: 1793182057.8631fc262581453bbf619ec5b2062170.1a181fac390000f79f
-Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
-x-campaign-id: default
-x-client-id: 8631fc262581453bbf619ec5b2062170
-Date: Wed, 28 Oct 2026 11:07:36 +0100
-From: Anthony PERARD <anthony.perard@vates.tech>
-To: Baptiste Le Duc <baptiste.le-duc@vates.tech>
-Cc: xen-devel@lists.xenproject.org, Doug Goldstein <cardoe@cardoe.com>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: Re: [PATCH v2 6/6] CI: run the riscv64 smoke test via QTB framework
- console-test
-References: <1787823334.8631fc262581453bbf619ec5b2062170.1a04293255c000c4f3@vates.tech>
- <1787823789.8631fc262581453bbf619ec5b2062170.1a0429a155d000c4f3@vates.tech>
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:Content-Language:References:Cc:To:From:Subject:User-Agent:MIME-Version:Date:Message-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=suse.com; s=google; t=1793182533; x=1793787333; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=PARG7RTdpcAvp0WAx9UWs1TwTbbFjToKTRZ6/XeP2w4=;
+        b=VOWBXE3S0xbYg5G7AjgbCo0m8+b60K1BmP16Vl9PT+FF1bNfne1iw23w/6uueWmrxU
+         F+2G9gN8Pdo1Ak7UXmMSmeEby1uwCo4ngXSto0xF7gKrmp2fFXAmqVJ3LTjE3OQmBumm
+         BmGKahQIEyy/ELWio/ToKR1cG/RnffEXzqCVA+I56BGXUMQSONVDeVKuJZFKSwcr8qUc
+         j8pia0+oM/rvLun3uqHkwZLDGferLnxV1v42X11fSyQGNqYjNVbivQVTSkFsWSDcZGEK
+         3k9WL6bogsBKTNuGaFScAbmtZdGMtcfbFPxGb0OZdewRViB3OvA68/O1Wif/x2bTMVcC
+         bJXg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793182533; x=1793787333;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt
+         :content-language:references:cc:to:from:subject:user-agent
+         :mime-version:date:message-id:x-gm-gg:x-gm-message-state:from:to:cc
+         :subject:date:message-id:reply-to:content-type;
+        bh=PARG7RTdpcAvp0WAx9UWs1TwTbbFjToKTRZ6/XeP2w4=;
+        b=innJN/9FkVlMErAxSusCH/0c56J8/cg/i1j70u150F8e0DXknWypf6m11vaYe11pyd
+         yRED/w2zSQYbmNtzCejdvqRigljhwrjPdjWYRKmSnzbZT24MpN+NYVMbofMPTDXUFJ8+
+         ci6YHaqnuTu7lyI+P+nI7A6fsVMIugS/bdDSwkSt/bVpSS+pe7RSjykwv6gLiFD8GYh3
+         WU13rUcoDmaYnMeEIqyVV3s5SOdpZiM3zWJ86jKc06Mj02INSYExSyNYtywLh2/dZHRv
+         69kMeOd7Qo04tuTQIqK379GyZbQbb7DaeUT8EjI8fncUPSJEmMRaxs7FQLSCIs23k5I3
+         /XGQ==
+X-Forwarded-Encrypted: i=1; AKwUvBzjSpgLjN807yYkNd5bpUb4GwpbMQSzRQne/rMBPve5D8SNe39w+HmIUjqH5TS3zoYM8jCIH3D7Jy4=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYLu4bZLiD7islrkRyjTptHAB7amcqO/CWlmC8mLvrQxgbpaxjUP
+	VNnRTSrSKwVav1OBSiLr7TifF38U3FDI5PpR1FggjtVWX+yTqlLrkYcDuO4B5DJOqg==
+X-Gm-Gg: AYBFou2mIOjd5XP5QHilkk8P9nMtoQn0I35gWg3zeoHm7MNUHdBxWd21NnGOIC83Oyc
+	OCp5es7oNAmnYxPUrlaAw3RnABL9dLzEO2im+phOE7OFf09NFv33fanevcI/QP/C92MY1LFhqso
+	gAaP/AgTYOglM1PNSL73tfSBK9n51YTmNphid5jZg4XrKPQ0dsiOafdaGG4LJN6+mQf+kqTiIP0
+	84ElYelWBMX5qm00M3S+e2fbtleziibu3JelaAvuefujARJcTTe56DoPcq6BEgIB+rzJf39i6Nz
+	bpf+DIm+EH3C64s9sRd/z3saDfVLR3wL9gd0RvkCGLYOVNLG8c6qekONaa67iQArvaOjAvHd7RS
+	+Em0R5mVz0lv4QCTqGmaHViwSn0fGkYaljnPmA2COaCNQivkYXRow6vw1QtSgrsaySKUQlcIPo+
+	3YkXDIsdaMwzOlBzKCllepJg1s8ZScPaWYmwp4vGZY5Y/M5VqTHZFsPj6NYBoDCcTv2Uj8brJEr
+	mPedGKJL53R0MKSJHrJlv2eopAyR/lesMXCQ7HguAnNR81ckckw0lYlNhmzp6XrK+fZxxIbbQFF
+	ti0g64g6ETmUJ2pwTyDJAockldEehDxzFKTUiW8580zhMCV4OsYIRNwgIO8F9m4SfhuAJmy6pd9
+	VpVhQipcbOiT8Svlj
+X-Received: by 2002:a05:6000:240d:b0:48b:a7:6396 with SMTP id ffacd0b85a97d-48e5d5d137cmr4946584f8f.41.1793182533104;
+        Wed, 28 Oct 2026 03:15:33 -0700 (PDT)
+Message-ID: <f6cd7e8c-c7c1-4f53-9a29-20ef171ac7b5@suse.com>
+Date: Wed, 28 Oct 2026 11:15:31 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-Content-Disposition: inline
-In-Reply-To: <1787823789.8631fc262581453bbf619ec5b2062170.1a0429a155d000c4f3@vates.tech>
-X-BM-Disclaimer: Yes
-Content-Type: multipart/alternative; boundary="-=Part.27d.dda3b12fb4b579bc.1a181fac121.942cc93773c8d460=-"
-X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
-X-Bm-Transport-Timestamp: 1793182056737
-X-purgate-ID: tlsNG-c1860d/1793182061-CE34587B-9CCD96F9/0/0
-X-purgate-type: clean
-X-purgate-size: 2542
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
-	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY
-	autolearn=ham autolearn_force=no version=4.0.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [PATCH v4 1/5] x86/emul: Introduce x86_decode_lite()
+From: Jan Beulich <jbeulich@suse.com>
+To: Andrew Cooper <andrew.cooper3@citrix.com>
+Cc: =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>,
+ Xen-devel <xen-devel@lists.xenproject.org>
+References: <20261015210530.786604-1-andrew.cooper3@citrix.com>
+ <20261015210530.786604-2-andrew.cooper3@citrix.com>
+ <998b084e-1a3f-4b51-bad3-4b175e6027a0@suse.com>
+Content-Language: en-US
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <998b084e-1a3f-4b51-bad3-4b175e6027a0@suse.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-16d1c6/1793182533-F7ACA77B-0A80CA61/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 639
+X-Spam-Status: No, score=-7.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=no autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
----=Part.27d.dda3b12fb4b579bc.1a181fac121.942cc93773c8d460=-
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: quoted-printable
+On 28.10.2026 10:48, Jan Beulich wrote:
+> On 15.10.2026 23:05, Andrew Cooper wrote:
+>> +        [0xb0 ... 0xb9] = (Known|ModRM),       /* CMPXCHG/LSS/BTR/LFS/LGS/MOVZxx/POPCNT/UD1 */
+>> +        [0xba]          = (Known|ModRM|Imm8),  /* Grp8 */
+>> +        [0xbb ... 0xbf] = (Known|ModRM),       /* BTC/BSF/BSR/MOVSX */
+> 
+> With it being MOVSX here, perhaps MOVZX above? Or the other way around,
+> MOVSxx here?
+> 
+>> +        [0xc0 ... 0xc1] = (Known|ModRM),       /* XADD */
+> 
+> Is there a reason to permit XADD but not CMPXCHG?
 
-On Thu, Aug 27, 2026 at 11:42:52AM +0200, Baptiste Le Duc wrote:
-> diff --git a/automation/gitlab-ci/test=2Eyaml b/automation/gitlab-ci/tes=
-t=2Eyaml
-> index 61adc1baff=2E=2Ee9dd147380 100644
-> --- a/automation/gitlab-ci/test=2Eyaml
-> +++ b/automation/gitlab-ci/test=2Eyaml
-> @@ -72,14 +72,21 @@
->      TEST_TIMEOUT_OVERRIDE: 120
-> =20
->  =2Eqemu-riscv64:
+Oh, I'm sorry - CMPXCHG is there, just that I overlooked it in the longish
+comment.
 
-Could you rename that template? The name should contain "qtb" since that
-the tool used by the test template=2E
-
-> +  image: ${ARTIFACTS_REGISTRY}/${CONTAINER}
->    extends: =2Etest-jobs-common
->    variables:
-> -    CONTAINER: debian:13-riscv64
-> -    LOGFILE: qemu-smoke-riscv64=2Elog
-> +    CONTAINER: debian:13-qtb-riscv64
-> +    QTB_LOG_DIR: qtb-logs
-> +    QTB_BINARIES_DIR: ${CI_PROJECT_DIR}/binaries
-
-Instead of an envvar, this could be a parameter to the main script, like
---log-dir is=2E
-
-> +  script:
-> +    - =2E/automation/scripts/qemu_smoke_riscv64=2Epy
-> +      ${QTB_TEST_TYPE}
-> +      run
-> +      ${QTB_TEST}
-> +      --log-dir ${QTB_LOG_DIR}
->    artifacts:
->      paths:
-> -      - smoke=2Eserial
-> -      - '*=2Elog'
-> +      - ${QTB_LOG_DIR}
->      when: always
->    tags:
->      - x86_64
-> @@ -779,8 +786,9 @@ qemu-xtf-argo-x86_64-gcc-debug:
-> =20
->  qemu-smoke-riscv64-gcc:
-
-Same here=2E
-
-> diff --git a/automation/scripts/qemu-smoke-riscv64=2Esh b/automation/scr=
-ipts/qemu-smoke-riscv64=2Esh
-> deleted file mode 100755
-> index c0b1082a08=2E=2E0000000000
-> --- a/automation/scripts/qemu-smoke-riscv64=2Esh
-> +++ /dev/null
-> @@ -1,19 +0,0 @@
-> -#!/bin/bash
-> -
-> -set -ex -o pipefail
-> -
-> -# Run the test
-> -rm -f smoke=2Eserial
-> -
-> -export TEST_CMD=3D"qemu-system-riscv64 \
-> -    -M virt,aia=3Daplic-imsic \
-> -    -cpu rv64,svpbmt=3Don \
-> -    -smp 1 \
-> -    -nographic \
-> -    -m 2g \
-> -    -kernel binaries/xen"
-> -
-> -export TEST_LOG=3D"smoke=2Eserial"
-> -export PASSED=3D"All set up"
-> -
-> -=2E/automation/scripts/console=2Eexp |& sed 's/\r\+$//'
-
-I you want to remove the exiting riscv test, can you do so in a
-separated patch? Then we can decide separatly if the new test is indeed
-a replacement of the current one=2E
-
-Thanks,
-
-
--- 
-Anthony Perard | Vates XCP-ng Developer
-
-XCP-ng & Xen Orchestra - Vate=
-s solutions
-
-web: https://vates=2Etech
----=Part.27d.dda3b12fb4b579bc.1a181fac121.942cc93773c8d460=---
+Jan
 
