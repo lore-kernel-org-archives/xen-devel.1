@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id DCFE6606A31A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:31:44 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 735F5606A31A
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:31:51 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=08tEDeZZ
-Received: from list by lists.xenproject.org with outflank-mailman.1463817.1674850 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=HAoM4VTI
+Received: from list by lists.xenproject.org with outflank-mailman.1463816.1674841 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD7J-0008TZ-Ps; Wed, 28 Oct 2026 23:31:37 +0000
+	id 1xMD7H-000820-Hu; Wed, 28 Oct 2026 23:31:35 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463817.1674850; Wed, 28 Oct 2026 23:31:37 +0000
+Received: by outflank-mailman (output) from mailman id 1463816.1674841; Wed, 28 Oct 2026 23:31:35 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD7I-0008Nh-Do; Wed, 28 Oct 2026 23:31:36 +0000
-Received: by outflank-mailman (input) for mailman id 1463817;
+	id 1xMD7G-0007xU-4k; Wed, 28 Oct 2026 23:31:34 +0000
+Received: by outflank-mailman (input) for mailman id 1463816;
  Wed, 28 Oct 2026 23:30:42 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xMD6P-00058X-UV
+ (envelope-from <gwd@xenproject.org>) id 1xMD6P-00057D-Ri
  for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:30:41 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMD6K-00000000pOr-3k4q;
+ (envelope-from <gwd@xenproject.org>) id 1xMD6K-00000000pOx-3sUs;
  Wed, 28 Oct 2026 23:30:36 +0000
 Received: from [217.155.165.12] (helo=Mac.fritz.box.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMCja-00000001KpM-08NZ;
- Wed, 28 Oct 2026 23:07:06 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCjG-00000001KpM-2LLI;
+ Wed, 28 Oct 2026 23:06:46 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,20 +41,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=xyRRTvzAZ1uxBpB7gEOaI29dfhB9uSJD02k1XOtgRUc=; b=08tEDeZZW4jtuHB4xtir14VyHK
-	0eFQya78XTo9pKuaUFhRQkScUouJ/GSmcIae+vHBwODJZDIcvWpj2KeiwVCgAR/xEgq19kUsSD5CA
-	FvyPcaBbz3/Gt0Cctx2rcfbjmpD1gnqTsakD8iCFDhWMt7gwre67j4HAT5Z7W8RdDNNs=;
+	bh=S/tsd9lGldh/FCRRWK8hPBso1PhupuXumoKhOFQc+oM=; b=HAoM4VTIuk0P/qFlRzRVuu3Lxj
+	kZBmbtn9lr/JysfKrqtOYHXU56RnOvi+s4Ws8MFtChLDJJ7BrOPuCBbtwXOVU5iQaqaiWKIMa7Ylf
+	JTruZEz9dfnCppcB2yZssb/irHA1P1eGNKpo8AzQ88OCQLMF06W+wYu+13j+W6Ysbf0k=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Ross Lagerwall <ross.lagerwall@citrix.com>,
-	Jan Beulich <jbeulich@suse.com>,
+Cc: Jan Beulich <jbeulich@suse.com>,
 	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Jason Andryuk <jason.andryuk@amd.com>,
 	Teddy Astie <teddy.astie@vates.tech>
-Subject: [PATCH v5 28/45] x86/svm: restore guest debug registers in svm_do_resume()
-Date: Wed, 28 Oct 2026 23:05:42 +0000
-Message-ID: <20261028-asi-hvm-v5-28-13b908e0df0b@xenproject.org>
+Subject: [PATCH v5 10/45] x86/domain_page: drop redundant is_pv_vcpu() checks
+Date: Wed, 28 Oct 2026 23:05:24 +0000
+Message-ID: <20261028-asi-hvm-v5-10-13b908e0df0b@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
 References: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
@@ -68,56 +66,77 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-svm_ctxt_switch_to() restores the guest's debug registers when its DR7
-enables any of them, which also updates the VMCB.  Do it in
-svm_do_resume() instead, which follows it whenever the vCPU is
-scheduled in.
+The is_pv_vcpu() checks after mapcache_current_vcpu() never fail: they
+have been redundant since 622c9a5ba95d ("x86/mm: accurately track
+which vCPU page-tables are loaded") made mapcache_current_vcpu() do
+the check itself.  mapcache_current_vcpu() is now guaranteed to return
+a PV vCPU with a caching structure (which is what is needed for the
+subsequent dcache->inuse check): either a scheduled PV vCPU, or this
+CPU's idle vCPU (possibly after finishing a lazy context switch).
+Drop the checks; their speculation barriers (evaluate_nospec()) go
+too.
 
-svm_do_resume() also runs when a vCPU keeps running on its pCPU
-(continue_running()), without svm_ctxt_switch_to().  Where the guest's
-debug registers are already loaded, the restore does nothing:
-flag_dr_dirty records that they are, and only svm_save_dr() clears it,
-from svm_ctxt_switch_from().
+mapcache_current_vcpu() returns NULL if this CPU's pgtable_vcpu is not
+yet set (early boot) or is not a PV vCPU.  Otherwise it reads
+pgtable_vcpu again and returns that.  In between, pgtable_vcpu changes
+only when a lazy context switch from a PV vCPU is completed, by
+mapcache_current_vcpu() itself (sync_local_execstate()) or first by an
+interrupt such as a FLUSH_VCPU_STATE IPI; completing it loads the idle
+vCPU's page-tables and sets pgtable_vcpu to the idle vCPU.  No other
+writer of pgtable_vcpu runs in an interrupt that returns to the code it
+interrupted.  During an EFI runtime call pgtable_vcpu is the idle
+vCPU: efi_rs_enter() completes any lazy switch, then loads EFI's
+page-tables, which carry the directmap.  So the vCPU returned is either
+the PV vCPU checked or this CPU's idle vCPU.
 
-This prepares for moving VMCBs off always-mapped memory:
-svm_ctxt_switch_to() runs before write_ptbase(), where the incoming
-vCPU's VMCB will not be mapped.
+The idle vCPU passes is_pv_vcpu(), as the idle domain is created
+without XEN_DOMCTL_CDF_hvm, but its mapcache is never set up:
+domain_create() returns for the idle domain before calling
+arch_domain_create(), which is what calls mapcache_domain_init().  With
+its dcache->inuse NULL, map_domain_page() uses the directmap, and
+unmap_domain_page()'s ASSERT() on dcache->inuse still catches a
+mapcache address unmapped with no mapcache in use.  In builds without
+CONFIG_PV, is_pv_vcpu() is always false and mapcache_current_vcpu()
+always returns NULL.
 
-Not yet run with a guest using debug registers.
+No functional change.
 
-Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-5-5
+Assisted-by: Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
-CC: Ross Lagerwall <ross.lagerwall@citrix.com>
-
 Changes in v4:
-- New in this version.
+- New in this version, split out of "x86/domain_page: prepare the
+  mapcache for per-vCPU accounting", with a justification of its own.
+
+NB I've included Claude's complete analysis in the commit message.
+I've reworded the commit message so that the middle two paragraphs can
+be dropped, or reworded more briefly on commit.
 ---
- xen/arch/x86/hvm/svm/svm.c | 4 ++--
+ xen/arch/x86/domain_page.c | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
-diff --git a/xen/arch/x86/hvm/svm/svm.c b/xen/arch/x86/hvm/svm/svm.c
-index b539406f0c..df56245311 100644
---- a/xen/arch/x86/hvm/svm/svm.c
-+++ b/xen/arch/x86/hvm/svm/svm.c
-@@ -953,8 +953,6 @@ static void cf_check svm_ctxt_switch_to(struct vcpu *v)
-      */
-     disable_each_ist(per_cpu(idt, cpu));
+diff --git a/xen/arch/x86/domain_page.c b/xen/arch/x86/domain_page.c
+index f3e65e2d44..ed68483695 100644
+--- a/xen/arch/x86/domain_page.c
++++ b/xen/arch/x86/domain_page.c
+@@ -74,7 +74,7 @@ void *map_domain_page(mfn_t mfn)
+ #endif
  
--    svm_restore_dr(v);
--
-     svm_tsc_ratio_load(v);
+     v = mapcache_current_vcpu();
+-    if ( !v || !is_pv_vcpu(v) )
++    if ( !v )
+         return mfn_to_virt(mfn_x(mfn));
  
-     if ( cpu_has_msr_tsc_aux )
-@@ -978,6 +976,8 @@ static void noreturn cf_check svm_do_resume(void)
-     bool vcpu_guestmode = false;
-     struct vlapic *vlapic = vcpu_vlapic(v);
+     dcache = &v->domain->arch.pv.mapcache;
+@@ -179,7 +179,7 @@ void unmap_domain_page(const void *ptr)
+     ASSERT(va >= MAPCACHE_VIRT_START && va < MAPCACHE_VIRT_END);
  
-+    svm_restore_dr(v);
-+
-     if ( nestedhvm_enabled(v->domain) && nestedhvm_vcpu_in_guestmode(v) )
-         vcpu_guestmode = 1;
+     v = mapcache_current_vcpu();
+-    ASSERT(v && is_pv_vcpu(v));
++    ASSERT(v);
  
+     dcache = &v->domain->arch.pv.mapcache;
+     ASSERT(dcache->inuse);
 -- 
 2.56.0
 
