@@ -2,45 +2,49 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 02331606A31C
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 11:46:51 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id ED4DF606A323
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 11:47:01 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=a0XnvcMg
-Received: from list by lists.xenproject.org with outflank-mailman.1463151.1674119 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=vates.tech header.i=@vates.tech header.a=rsa-sha256 header.s=selector1 header.b=rQS0QNsZ
+Received: from list by lists.xenproject.org with outflank-mailman.1463153.1674129 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM270-0007OL-1o; Wed, 28 Oct 2026 11:46:34 +0000
+	id 1xM27J-0007iH-Cm; Wed, 28 Oct 2026 11:46:53 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463151.1674119; Wed, 28 Oct 2026 11:46:34 +0000
+Received: by outflank-mailman (output) from mailman id 1463153.1674129; Wed, 28 Oct 2026 11:46:53 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xM26z-0007OE-VL; Wed, 28 Oct 2026 11:46:33 +0000
-Received: by outflank-mailman (input) for mailman id 1463151;
- Wed, 28 Oct 2026 11:46:32 +0000
-Received: from mx.expurgate.net ([195.190.135.10])
- by lists.xenproject.org with esmtp (Exim 4.92) id 1xM26y-0007O8-Jh
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 11:46:32 +0000
+	id 1xM27J-0007iA-9A; Wed, 28 Oct 2026 11:46:53 +0000
+Received: by outflank-mailman (input) for mailman id 1463153;
+ Wed, 28 Oct 2026 11:46:52 +0000
+Received: from mx.expurgate.net ([194.145.224.20])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xM27I-0007hk-1O
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 11:46:52 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xM26x-0024iR-TJ
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 12:46:31 +0100
+ id 1xM27H-00Aufp-A7
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 12:46:51 +0100
 Received: from [10.42.69.3] (helo=localhost)
- by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae1e095-e002-0a2a0a5209dd-0a2a4503d5c0-8
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:46:31 +0100
-Received: from [209.85.221.47] (helo=mail-wr1-f47.google.com)
+ by localhost with ESMTP (eXpurgate MTA 0.9.1) (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1825590b6000f79f@swg.vates.tech>)
+ id 6ae1e0a2-8faa-0a2a0a5109dd-0a2a45039dc8-34
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:46:51 +0100
+Received: from [185.255.28.18] (helo=prod-mta-13.swg-srv.net)
  by tlsNG-33051d.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <jbeulich@suse.com>)
- id 6ae1e097-fae8-0a2a45030019-d155dd2fa589-3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:46:31 +0100
-Received: by mail-wr1-f47.google.com with SMTP id
- ffacd0b85a97d-48e0d1da913so690353f8f.1
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 04:46:31 -0700 (PDT)
-Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
- [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
- ffacd0b85a97d-48e3ebd48fasm27816771f8f.31.2026.10.28.04.46.30
- (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
- Wed, 28 Oct 2026 04:46:30 -0700 (PDT)
+ (envelope-from
+ <prod-mta-13.8631fc262581453bbf619ec5b2062170.1a1825590b6000f79f@swg.vates.tech>)
+ id 6ae1e0aa-fae8-0a2a45030019-b9ff1c1293f7-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 12:46:51 +0100
+Received: from mail2.vates.fr ([37.26.189.201] mail2.vates.fr)
+ (Authenticated sender:
+ 8631fc262581453bbf619ec5b2062170/smtp/7773de5a-2839-4720-82ee-e06722ae1d3e)
+ by prod-mta-13.swg-srv.net (ZoneMTA - prod-mta-13) with ESMTPSA id
+ 1a1825590b6000f79f.002 for <xen-devel@lists.xenproject.org>
+ (version=TLSv1.3 cipher=TLS_AES_256_GCM_SHA384);
+ Wed, 28 Oct 2026 11:46:48 +0000
+Received: from [192.168.1.61] (142.220.66.37.rev.sfr.net [37.66.220.142])
+ (Authenticated sender: ngoc-tu.dinh@vates.tech)
+ by mail2.vates.fr (Postfix) with ESMTPSA id 5E55582C62;
+ Wed, 28 Oct 2026 12:46:47 +0100 (CET)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -49,106 +53,127 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=suse.com; s=google; t=1793187991; x=1793792791; darn=lists.xenproject.org;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:from:to:cc:subject:date:message-id:reply-to
-         :content-type;
-        bh=K0bOMVZPXAm5IU2Mgv8WQH5ASwOH3yLkWTr+Ua5rv5I=;
-        b=a0XnvcMgjI94MfBeZiYMLsNkfSql8akzETUISQYqBprjEmVTRpSU6+225kqDu3X9Zo
-         v/mRFJOmKqsPTwUxVI3y9kxNevTd3mAKmEgrsXcXYoMqWSIOhjb5aBOwkr7zD410Ru3z
-         NOvjc9rR7OaRVJVMuEGEXIQc6ds+ddT1ZelbBFDervlJNwlPSDEeN4VPl2zpkWiYu7Em
-         8RcZs+iyjC8VCg8pUZVzpxjFj0s4/At1nqInGjqenJHvuijb/CYxHAe5GYOWWmvSQrxG
-         PPe1mjDUAllvy1uJXtvxkxO8FMKgodG7p000/Q0MCHpUBvnVVIM2wkwB+RLckRKnd7Bc
-         tCoQ==
-X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-        d=1e100.net; s=20260707; t=1793187991; x=1793792791;
-        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
-         :content-language:references:cc:to:subject:user-agent:mime-version
-         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
-         :message-id:reply-to:content-type;
-        bh=K0bOMVZPXAm5IU2Mgv8WQH5ASwOH3yLkWTr+Ua5rv5I=;
-        b=ZjUng5JyDBt4P9fqo/6wDkNP4blwv1aas2Ww9+NOomNQ7d9Hp0uFmIhBCvEIpnY4zX
-         TVn//4hqiBP05VGdSq8ueBDFzeGF1c9le+sdQrf88h8HaqTLu+lD4FFVHBhC8LtxwsOm
-         qWuJFnsJUxcOsp7HAPlO3XXP2KXv6B8ZWxaKbqIhxGL0LX49srfD8h1FOd95W0lSlBFz
-         vt2LxuzB2bPClbqOGztfGmAGKjK75HsiEmZHeLOFxkcy0fKH1vCsGu/FCn+wt5X3/KVj
-         f+tsIoO74B4wMyKPFo6lV5RjpYSEzx1urKXodjzmAXFrvuhbMO1xyuDA8IJkGeQEVsfq
-         yisg==
-X-Forwarded-Encrypted: i=1; AKwUvBxiXZHBzib1j7EdAmKiaeEf28AR8gGOYc3evlYMrkH0S0GW2PeGxLrKoXWvFV5OQjvLYZAFkGA3/Mk=@lists.xenproject.org
-X-Gm-Message-State: AFq9FYKYAeU5/inbsEtUqe4Mtiuu2UEJ2yhmeIVk7Qof1vNwXD1Q9hZD
-	2oVXh3or3uVob+T+cdeVn4kdfODUrR7J+qbu1eg9RHx2HONFrfXJgeeitNVT10H84Q==
-X-Gm-Gg: AYBFou2Q4yiI8Gd5mnOzvcAR7M2oQ1mFZpvZbIBrLpb5ixMUJGtrYcY2N5VWvIEFcdd
-	zmQMV9NDwLqdqWYy2mxp6zASKGPhnLODG/ompVxgdxtGQm60NVadFWkT1xfjz/FOpJqOuLkPp90
-	eTG6Z3GW4KgvnXAbWgADX99G9QmVh4kmv5INTbS4DJEXUkQ/HHdW3JMfiT1njwKGJaLHAMJcSLz
-	nQ4lK8nwnA1vBh9B7gBosaHJ1jkp9ArsLNFOxlq2yQDw5Bs5PC58Tdl5AmLaL85pUNlqDQ45D90
-	RFTYqRSMg0a8L7HO5w6h62NDtOutGB8oLQgCt2Bj+PQY/aqPVGBIvd6prS/IjQiv5LP20A3+X/u
-	qLj6AH80ObPPKIILKa5m1J6ogJqMt0CXu2FgGDqooe/zbQWhu/fMdu8JyV0uYhCHkOkW3MEdnDS
-	k62YdKESZRUibp8fb7i/ITg9o3umiwSRtjq96iIl0odbRalJjfLckT6Xh3ZY/BnWRURuFy9L7SD
-	dXqmO8CGl2hhQLBiYPgAGPQ/PeWSoy6Zx1iMCJ2yE5VmzReJlwsC1VMKbtR5CcxHzhX7IiNJVEt
-	xGy6ge+JaErO5cJE2fJ1G1uHOxVu3oqDqLHWLSBe/KLP/jcQn/jEl7f11Zb6z/DEFF6thsUfvs7
-	UHSDZBUf8cM8r5H3jUQ==
-X-Received: by 2002:a05:6000:490b:b0:48e:850:c0b7 with SMTP id ffacd0b85a97d-48e601eb154mr2919581f8f.1.1793187991186;
-        Wed, 28 Oct 2026 04:46:31 -0700 (PDT)
-Message-ID: <8ee013ce-e6ff-48be-8d55-9870ad14e26e@suse.com>
-Date: Wed, 28 Oct 2026 12:46:30 +0100
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=vates.tech header.i="@vates.tech" header.h="From:Subject:Date:Message-ID:To:Cc:MIME-Version:Content-Type:In-Reply-To:References:Feedback-ID"
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=vates.tech;
+ q=dns/txt; s=selector1; bh=8LhirgX8r53rafbUvtgDISlH8AXpATTq32fwJlc4G2Y=;
+ h=from:subject:date:message-id:to:cc:mime-version:content-type:in-reply-to:references:feedback-id;
+ b=rQS0QNsZ6DTcBQ3EQ8JUCjv29sbb9kqKoZRogElPqbWy1fn/6Xs2VEACVTheA92PvGjWGnUv/
+ EpsR3G7GWOplB7vJI3zQh3qfoeL4yheK75k+GgHipIhUnZvADqn5tzk9kquzFPgaUCjoz+s0mBp
+ lKe10X2w/XHFy3du1sYrc3qjBDJ6Jox2wY45qDz/Z4HE1NIBLVr9Lhga6vAsi3cj1jP6xw5MY28
+ hVjgpx3K1z5EG8FZR3U1TgDK3a2c8GgH2KArtULE3SUydRx0b4uxXOIu/ONAuDn9n+oBJUWsOVB
+ Nny7N62Y2NwrlJWZNHtlfoz3D7rk29Y0sHJiPj90KNEw==
+X-Zone-Loop: f7550b081fbb518ca708cfed0b706b83324fc4f54f13
+x-campaign-type: default
+x-transaction-id: 58914819-cdbc-4c1b-8480-2d44f4b35178
+x-swg-uid: 01-cddde208-5d85-411e-9ab1-787f1201e6d9
+X-Mailer: Sweego
+Message-ID:
+ <1793188008.8631fc262581453bbf619ec5b2062170.1a1825590b6000f79f@vates.tech>
+x-swg-bid: 1793188008.8631fc262581453bbf619ec5b2062170.1a1825590b6000f79f
+Feedback-ID: default:8631fc262581453bbf619ec5b2062170:Sweego
+x-campaign-id: default
+x-client-id: 8631fc262581453bbf619ec5b2062170
+Date: Wed, 28 Oct 2026 12:46:47 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
 User-Agent: Mozilla Thunderbird
-Subject: Re: [PATCH] xen/bitops: Remove unused get_bitmask_order()
-To: Andrew Cooper <andrew.cooper3@citrix.com>
-Cc: Anthony PERARD <anthony.perard@vates.tech>,
- Michal Orzel <michal.orzel@amd.com>, Julien Grall <julien@xen.org>,
- =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
- Stefano Stabellini <sstabellini@kernel.org>,
- Xen-devel <xen-devel@lists.xenproject.org>
-References: <20261028114328.1514337-1-andrew.cooper3@citrix.com>
+Subject: Re: [PATCH] x86/vpt: Validate timer object with generation number
 Content-Language: en-US
-From: Jan Beulich <jbeulich@suse.com>
-Autocrypt: addr=jbeulich@suse.com; keydata=
- xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
- hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
- 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
- /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
- O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
- MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
- nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
- 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
- Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
- AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
- e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
- hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
- IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
- FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
- t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
- AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
- HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
- mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
- m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
- EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
- wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
- nAuWpQkjM1ASeQwSHEeAWPgskBQL
-In-Reply-To: <20261028114328.1514337-1-andrew.cooper3@citrix.com>
-Content-Type: text/plain; charset=UTF-8
-Content-Transfer-Encoding: 7bit
-X-purgate-ID: tlsNG-33051d/1793187991-6C6DE4E9-C389CC59/10/78276251493
+To: Jan Beulich <jbeulich@suse.com>
+Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Teddy Astie <teddy.astie@vates.tech>, xen-devel@lists.xenproject.org
+References: <1792717952.8631fc262581453bbf619ec5b2062170.1a166511467000f79f@vates.tech>
+ <f4aa49b0-985b-43b2-ad1f-8ddf073fdb61@suse.com>
+From: Tu Dinh <ngoc-tu.dinh@vates.tech>
+In-Reply-To: <f4aa49b0-985b-43b2-ad1f-8ddf073fdb61@suse.com>
+X-BM-Disclaimer: Yes
+Content-Type: multipart/alternative; boundary="-=Part.289.d38e611745819b3.1a182558e2c.8ee8a2f71509cc74=-"
+X-Bm-Milter-Handled: 4ffbd6c1-ee69-4e1b-aabd-f977039bd3e2
+X-Bm-Transport-Timestamp: 1793188007468
+X-purgate-ID: tlsNG-33051d/1793188011-6D8D54E9-CE0E3308/10/78276251493
 X-purgate-type: spam
-X-purgate-size: 290
-X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
-	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY,USER_AGENT_SANE_1 autolearn=ham autolearn_force=no
-	version=4.0.1
+X-purgate-size: 2557
+X-Spam-Status: No, score=-14.9 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,FORGED_MUA_MOZILLA,
+	HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_CR_TRAILER,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-On 28.10.2026 12:43, Andrew Cooper wrote:
-> This is a wrapper around fls() with an incorrect comment about the output
-> range of the function.  It's also unused, so remove it.
-> 
-> Signed-off-by: Andrew Cooper <andrew.cooper3@citrix.com>
+---=Part.289.d38e611745819b3.1a182558e2c.8ee8a2f71509cc74=-
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: quoted-printable
 
-Acked-by: Jan Beulich <jbeulich@suse.com>
+On 28/10/2026 12:31, Jan Beulich wrote:
+> On 23=2E10=2E2026 03:12, Tu Dinh wrote:
+>> The remote completion path of pt_update_irq removes timers from tm_list
+>> by checking that their addresses match the previous iteration=2E Howeve=
+r,
+>> if the guest rearms a timer during the gap between two list iterations,
+>> the resulting timer object is no longer the same, even if their
+>> addresses match=2E Removing the timer from the list will then lose the
+>> armed timer object=2E
+>>
+>> Record a generation number in each timer object upon arming, and check
+>> that the generation number matches before removing it from the list=2E
+>=20
+> Fixes: 0bcbc971feaa ("x86/vpt: add support for level interrupts")
+>=20
+>> Signed-off-by: Tu Dinh <ngoc-tu=2Edinh@vates=2Etech>
+>=20
+> Reviewed-by: Jan Beulich <jbeulich@suse=2Ecom>
 
+Thank you very much for the review=2E
+
+> preferably with =2E=2E=2E
+>=20
+>> --- a/xen/arch/x86/hvm/vpt=2Ec
+>> +++ b/xen/arch/x86/hvm/vpt=2Ec
+>> @@ -318,6 +318,7 @@ int pt_update_irq(struct vcpu *v)
+>>       struct list_head *head =3D &v->arch=2Ehvm=2Etm_list;
+>>       struct periodic_time *pt, *temp, *earliest_pt;
+>>       uint64_t max_lag;
+>> +    uint64_t generation;
+>=20
+> =2E=2E=2E this folded with the earlier line=2E
+>=20
+>> --- a/xen/arch/x86/include/asm/hvm/vpt=2Eh
+>> +++ b/xen/arch/x86/include/asm/hvm/vpt=2Eh
+>> @@ -34,6 +34,7 @@ struct periodic_time {
+>>       u8 irq;
+>>       struct vcpu *vcpu;          /* vcpu timer interrupt delivers to *=
+/
+>>       u32 pending_intr_nr;        /* pending timer interrupts */
+>> +    u64 generation;             /* distinguish two armings of the same=
+ timer */
+>>       u64 period;                 /* frequency in ns */
+>>       s_time_t scheduled;         /* scheduled timer interrupt */
+>>       u64 last_plt_gtime;         /* platform time when last IRQ is inj=
+ected */
+>=20
+> Also, no matter that adjacent lines use u<N>, it wants to be uint<N>_t f=
+or
+> new fields=2E Otherwise we will never get rid of the remaining u<N>=2E
+>=20
+> I can make these adjustments while committing, no need to send a v2 just=
+ for
+> that=2E
+>=20
+
+Yes, please go ahead and make the adjustments=2E
+
+> Jan
+
+
+
+-- 
+Ngoc Tu Dinh | Vates XCP-ng Developer
+
+XCP-ng & Xen Orchestra - Vates =
+solutions
+
+web: https://vates=2Etech
+---=Part.289.d38e611745819b3.1a182558e2c.8ee8a2f71509cc74=---
 
