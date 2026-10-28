@@ -2,34 +2,34 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 3A81B606A31C
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id C2979606A31C
 	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 23:31:00 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=l3z8l0yG
-Received: from list by lists.xenproject.org with outflank-mailman.1463788.1674582 (Exim 4.92)
+	dkim=pass (1024-bit key, unprotected) header.d=xenproject.org header.i=@xenproject.org header.a=rsa-sha256 header.s=20200302mail header.b=nb0aCLFu
+Received: from list by lists.xenproject.org with outflank-mailman.1463795.1674632 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD6O-0004kp-Nq; Wed, 28 Oct 2026 23:30:40 +0000
+	id 1xMD6T-0005u9-1Y; Wed, 28 Oct 2026 23:30:45 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1463788.1674582; Wed, 28 Oct 2026 23:30:40 +0000
+Received: by outflank-mailman (output) from mailman id 1463795.1674632; Wed, 28 Oct 2026 23:30:44 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xMD6O-0004i3-Cy; Wed, 28 Oct 2026 23:30:40 +0000
-Received: by outflank-mailman (input) for mailman id 1463788;
- Wed, 28 Oct 2026 23:30:36 +0000
+	id 1xMD6S-0005rq-Jp; Wed, 28 Oct 2026 23:30:44 +0000
+Received: by outflank-mailman (input) for mailman id 1463795;
+ Wed, 28 Oct 2026 23:30:37 +0000
 Received: from mail.xenproject.org ([104.130.215.37])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <gwd@xenproject.org>) id 1xMD6K-000488-OV
+ (envelope-from <gwd@xenproject.org>) id 1xMD6K-00048q-VT
  for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 23:30:36 +0000
 Received: from xenbits.xenproject.org ([104.239.192.120])
  by mail.xenproject.org with esmtp (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMD6K-00000000pOf-3YQ3;
+ (envelope-from <gwd@xenproject.org>) id 1xMD6L-00000000pPi-0K1I;
  Wed, 28 Oct 2026 23:30:36 +0000
 Received: from [217.155.165.12] (helo=Mac.fritz.box.net)
  by xenbits.xenproject.org with esmtpsa (TLS1.3) tls
  TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (Exim 4.98.2)
- (envelope-from <gwd@xenproject.org>) id 1xMCjM-00000001KpM-2iMG;
- Wed, 28 Oct 2026 23:06:52 +0000
+ (envelope-from <gwd@xenproject.org>) id 1xMCjk-00000001KpM-0LHD;
+ Wed, 28 Oct 2026 23:07:16 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -41,21 +41,18 @@ Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed;
 	d=xenproject.org; s=20200302mail; h=Content-Transfer-Encoding:MIME-Version:
 	References:In-Reply-To:Message-ID:Date:Subject:Cc:To:From;
-	bh=Lb7F1xsyX+9AldokNzH9xX+s7w05jag/1Hr7PjUMcMQ=; b=l3z8l0yGmyqfmyFdtycjVXedq4
-	iCQ//Nnas7iBBxKw4PiF6OSB7UIGbld8sxVMjF1UF6qmZGRDO9M6BuRxpLY4sH6lX+wLvQRksId+y
-	CL4GqqpqszWlR/GXnqRXXK2zUXVoBKY4NWivOmnDjYH7blTzFjhJefdGxJ73fk+VaZWQ=;
+	bh=tI8rWUCKpztUW6i1B6fFTfydag4KVKVQaRj7AWM+f08=; b=nb0aCLFuk9b0R9BU+VzVuq1vZz
+	vQxTWvEvEzAlTsV8rxb+tZZLxd+cF4WaZvTxChtyx47Uwf6ySmRqC8Ntu6AlwYb6ceYnlp3bRVkk9
+	OMSiS51GzPoL0WsdmVhsnEHIQljPu0AnBxZ66vmQwe7zax8QL5Ljx1iGJ0z1ccparer8=;
 From: George Dunlap <gwd@xenproject.org>
 To: xen-devel@lists.xenproject.org
-Cc: Andrew Cooper <andrew.cooper3@citrix.com>,
-	Anthony PERARD <anthony.perard@vates.tech>,
-	Michal Orzel <michal.orzel@amd.com>,
-	Jan Beulich <jbeulich@suse.com>,
-	Julien Grall <julien@xen.org>,
+Cc: Jan Beulich <jbeulich@suse.com>,
+	Andrew Cooper <andrew.cooper3@citrix.com>,
 	=?UTF-8?q?Roger=20Pau=20Monn=C3=A9?= <roger@xenproject.org>,
-	Stefano Stabellini <sstabellini@kernel.org>
-Subject: [PATCH v5 16/45] xen/gunzip: process pending softirqs once per deflate block
-Date: Wed, 28 Oct 2026 23:05:30 +0000
-Message-ID: <20261028-asi-hvm-v5-16-13b908e0df0b@xenproject.org>
+	Teddy Astie <teddy.astie@vates.tech>
+Subject: [PATCH v5 38/45] x86/hvm: use map_domain_pages() for multi-frame emulated accesses
+Date: Wed, 28 Oct 2026 23:05:52 +0000
+Message-ID: <20261028-asi-hvm-v5-38-13b908e0df0b@xenproject.org>
 X-Mailer: git-send-email 2.56.0
 In-Reply-To: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
 References: <20261028-asi-hvm-v5-0-13b908e0df0b@xenproject.org>
@@ -69,65 +66,66 @@ X-Spam-Status: No, score=-19.0 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Nothing in the gzip decompressor lets the CPU run softirqs.  The NMI
-watchdog treats a CPU as stuck once its timer softirq has not run for
-the watchdog's timeout, 5s by default, so a decompression that runs
-that long panics the host.
+hvmemul_map_linear_addr() picks its mapping method purely on the frame
+count: one frame goes through map_domain_page(), more through vmap() --
+mapping the guest data in every context for the duration, those of
+domains on the sparse directmap view included, whatever the guest's own
+configuration.  map_domain_pages() maps them only in the page tables of
+the guest's own domain; use it for the multi-frame case.
 
-Decompression is normally quick, but it need not be.  Every compressed
-deflate block builds its Huffman tables with xmalloc() and frees them
-with xfree(), and those calls reach the xenheap whenever a request is a
-page or more, or a free empties an xmalloc pool page.  A subsequent
-change can make every xenheap free end in a TLB flush on all online
-CPUs.  With it in effect, decompressing the PV dom0 kernel and reading
-its ELF headers on a 480-CPU host took 5.2s instead of 0.5s; with
-cpufreq=xen:performance max_cstate=1,0 dom0_nodes=0,relaxed added to
-the command line as well, the watchdog fired before decompression had
-finished, on each of eight boots.
+The NULL return handling is unchanged: the primitive can fail only for
+want of a free slot, and the access then bails out as unhandleable
+exactly as before.
 
-Process pending softirqs after each deflate block, as libelf does for
-each ELF note since c5089fae0f6f ("x86: avoid tripping watchdog when
-constructing dom0"), and as the PV and PVH dom0 builders do in their
-long loops.  Every caller of perform_gunzip() runs during domain
-construction at boot, on the boot CPU with interrupts enabled and no
-lock held: x86's PV and PVH dom0 builders, which call
-process_pending_softirqs() themselves, and kernel_decompress(), which
-Arm uses for dom0 and for dom0less domains.
+This is one of the two in-tree consumers of the primitive.  Other
+long-lived global mappings of guest pages (the ioreq server pages among
+them) remain in the vmap area.
 
-Assisted-by: Claude Code:claude-opus-5-5
+Assisted-by: Claude Code:claude-fable-5, Claude Code:claude-opus-5-5
 Signed-off-by: George Dunlap <gwd@xenproject.org>
 ---
 Changes in v5:
 - New in this version.
 ---
- xen/common/gzip/gunzip.c  | 1 +
- xen/common/gzip/inflate.c | 1 +
- 2 files changed, 2 insertions(+)
+ xen/arch/x86/hvm/emulate.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
 
-diff --git a/xen/common/gzip/gunzip.c b/xen/common/gzip/gunzip.c
-index 89f45d4050..9551d470aa 100644
---- a/xen/common/gzip/gunzip.c
-+++ b/xen/common/gzip/gunzip.c
-@@ -3,6 +3,7 @@
- #include <xen/init.h>
- #include <xen/lib.h>
- #include <xen/mm.h>
-+#include <xen/softirq.h>
+diff --git a/xen/arch/x86/hvm/emulate.c b/xen/arch/x86/hvm/emulate.c
+index da7c08b5d9..7e7beccb93 100644
+--- a/xen/arch/x86/hvm/emulate.c
++++ b/xen/arch/x86/hvm/emulate.c
+@@ -735,7 +735,8 @@ static void *hvmemul_map_linear_addr(
  
- #define WSIZE           0x80000000U
+     /*
+      * The maximum access size depends on the number of adjacent mfns[] which
+-     * can be vmap()'d, accouting for possible misalignment within the region.
++     * can be mapped together, accounting for possible misalignment within
++     * the region.
+      * The higher level emulation callers are responsible for ensuring that
+      * mfns[] is large enough for the requested access size.
+      */
+@@ -824,9 +825,9 @@ static void *hvmemul_map_linear_addr(
+     /* Entire access within a single frame? */
+     if ( nr_frames == 1 )
+         mapping = map_domain_page(hvmemul_ctxt->mfn[0]);
+-    /* Multiple frames? Need to vmap(). */
+-    else if ( (mapping = vmap(hvmemul_ctxt->mfn,
+-                              nr_frames)) == NULL )
++    /* Multiple frames? Need a multi-page mapping. */
++    else if ( (mapping = map_domain_pages(hvmemul_ctxt->mfn,
++                                          nr_frames)) == NULL )
+         goto unhandleable;
  
-diff --git a/xen/common/gzip/inflate.c b/xen/common/gzip/inflate.c
-index cb146555c8..737aff505e 100644
---- a/xen/common/gzip/inflate.c
-+++ b/xen/common/gzip/inflate.c
-@@ -1018,6 +1018,7 @@ static int __init inflate(struct gunzip_state *s)
-         r = inflate_block(s, &e);
-         if (r)
-             return r;
-+        process_pending_softirqs();
-     } while (!e);
+ #ifndef NDEBUG /* Poision unused mfn[]s with INVALID_MFN. */
+@@ -867,7 +868,7 @@ static void hvmemul_unmap_linear_addr(
+     if ( nr_frames == 1 )
+         unmap_domain_page(mapping);
+     else
+-        vunmap(mapping);
++        unmap_domain_pages(mapping, nr_frames);
  
-     /* Undo too much lookahead. The next read will be byte aligned so we
+     for ( i = 0; i < nr_frames; i++ )
+     {
 -- 
 2.56.0
 
