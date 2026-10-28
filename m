@@ -2,69 +2,45 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 9F9AA606A31A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 07:33:08 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id B1C05606A31A
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 07:42:42 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=amazon.de header.i=@amazon.de header.a=rsa-sha256 header.s=amazoncorp2 header.b=pdA+yjEV
-Received: from list by lists.xenproject.org with outflank-mailman.1462683.1673866 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=suse.com header.i=@suse.com header.a=rsa-sha256 header.s=google header.b=No1NM6h5
+Received: from list by lists.xenproject.org with outflank-mailman.1462905.1673896 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLy9T-0000li-GG; Wed, 28 Oct 2026 07:32:51 +0000
+	id 1xLyIl-0003kD-SP; Wed, 28 Oct 2026 07:42:27 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1462683.1673866; Wed, 28 Oct 2026 07:32:51 +0000
+Received: by outflank-mailman (output) from mailman id 1462905.1673896; Wed, 28 Oct 2026 07:42:27 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLy9T-0000kr-Az; Wed, 28 Oct 2026 07:32:51 +0000
-Received: by outflank-mailman (input) for mailman id 1462683;
- Tue, 27 Oct 2026 22:33:05 +0000
-Received: from mx.expurgate.net ([194.145.224.20])
- by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <prvs=75389f537=graf@amazon.de>) id 1xLpj6-0000JX-Tg
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 22:33:05 +0000
+	id 1xLyIl-0003k6-Pm; Wed, 28 Oct 2026 07:42:27 +0000
+Received: by outflank-mailman (input) for mailman id 1462905;
+ Wed, 28 Oct 2026 07:42:26 +0000
+Received: from mx.expurgate.net ([194.145.224.10])
+ by lists.xenproject.org with esmtp (Exim 4.92) id 1xLyIk-0003k0-BG
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 07:42:26 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLpj6-0096cf-39
- for xen-devel@lists.xenproject.org; Tue, 27 Oct 2026 23:33:04 +0100
-Received: from [10.42.69.5] (helo=localhost)
+ id 1xLyIj-00BTTw-9H
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 08:42:25 +0100
+Received: from [10.42.69.10] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
- (envelope-from <prvs=75389f537=graf@amazon.de>)
- id 6ae12693-8faa-0a2a0a5109dd-0a2a4505e70e-22
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 23:33:04 +0100
-Received: from [52.57.120.243]
- (helo=fra-out-012.esa.eu-central-1.outbound.mail-perimeter.amazon.com)
- by tlsNG-c201ff.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
- (envelope-from <prvs=75389f537=graf@amazon.de>)
- id 6ae1269f-4cb1-0a2a45050019-343978f3bf91-3
- for <xen-devel@lists.xenproject.org>; Tue, 27 Oct 2026 23:33:04 +0100
-Received: from ip-10-6-6-97.eu-central-1.compute.internal (HELO
- smtpout.naws.eu-central-1.prod.farcaster.email.amazon.dev) ([10.6.6.97])
- by internal-fra-out-012.esa.eu-central-1.outbound.mail-perimeter.amazon.com
- with ESMTP/TLS/ECDHE-RSA-AES256-GCM-SHA384; 27 Oct 2026 22:32:57 +0000
-Received: from EX19MTAEUA001.ant.amazon.com [54.240.197.233:12547]
- by smtpin.naws.eu-central-1.prod.farcaster.email.amazon.dev [10.0.44.90:2525]
- with esmtp (Farcaster)
- id 09484581-dfa9-4b4c-a117-a67a540b1263; Tue, 27 Oct 2026 22:32:56 +0000 (UTC)
-Received: from EX19EXOEUC001.ant.amazon.com (10.252.51.133) by
- EX19MTAEUA001.ant.amazon.com (10.252.50.223) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.56;
- Tue, 27 Oct 2026 22:32:56 +0000
-Received: from EX19EXOEUC001.ant.amazon.com (10.252.51.133) by
- EX19EXOEUC001.ant.amazon.com (10.252.51.133) with Microsoft SMTP Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.56;
- Tue, 27 Oct 2026 22:32:56 +0000
-Received: from BEUP281CU002.outbound.protection.outlook.com (10.252.51.199) by
- EX19EXOEUC001.ant.amazon.com (10.252.51.133) with Microsoft SMTP
- Server
- (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA) id 15.2.2562.56
- via Frontend Transport; Tue, 27 Oct 2026 22:32:55 +0000
-Received: from FRVP281MB744463.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:d10:20d::13) by BE3P281MB6226.DEUP281.PROD.OUTLOOK.COM
- (2603:10a6:b10:104::16) with Microsoft SMTP Server (version=TLS1_2,
- cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Tue, 27 Oct
- 2026 22:32:46 +0000
-Received: from FRVP281MB744463.DEUP281.PROD.OUTLOOK.COM
- ([fe80::7b1c:7a5d:c405:6c4d]) by FRVP281MB744463.DEUP281.PROD.OUTLOOK.COM
- ([fe80::7b1c:7a5d:c405:6c4d%5]) with mapi id 15.21.0546.021; Tue, 27 Oct 2026
- 22:32:46 +0000
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae1a75a-8faa-0a2a0a5109dd-0a2a450a98d2-20
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 08:42:25 +0100
+Received: from [209.85.128.49] (helo=mail-wm1-f49.google.com)
+ by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ (envelope-from <jbeulich@suse.com>)
+ id 6ae1a760-f2d2-0a2a450a0019-d1558031f088-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 08:42:25 +0100
+Received: by mail-wm1-f49.google.com with SMTP id
+ 5b1f17b1804b1-4a35d5d4a20so6599965e9.2
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 00:42:24 -0700 (PDT)
+Received: from [10.156.60.236] (ip-037-024-206-209.um08.pools.vodafone-ip.de.
+ [37.24.206.209]) by smtp.gmail.com with ESMTPSA id
+ 5b1f17b1804b1-4a94f05f168sm19545015e9.4.2026.10.28.00.42.23
+ (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+ Wed, 28 Oct 2026 00:42:24 -0700 (PDT)
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -73,154 +49,154 @@ List-Subscribe: <https://lists.xenproject.org/mailman/listinfo/xen-devel>,
  <mailto:xen-devel-request@lists.xenproject.org?subject=subscribe>
 Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
-Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=amazoncorp2 header.d=amazon.de header.i="@amazon.de" header.h="From:To:CC:Subject:Date:Message-ID:References:In-Reply-To:Content-ID:Content-Transfer-Encoding:MIME-Version"
+Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=google header.d=suse.com header.i="@suse.com" header.h="Content-Transfer-Encoding:Content-Type:In-Reply-To:Autocrypt:From:Content-Language:References:Cc:To:Subject:User-Agent:MIME-Version:Date:Message-ID"
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
-  d=amazon.de; i=@amazon.de; q=dns/txt; s=amazoncorp2;
-  t=1793140384; x=1824676384;
-  h=from:to:cc:subject:date:message-id:references:
-   in-reply-to:content-id:content-transfer-encoding:
-   mime-version;
-  bh=GWEbN3/mwk69KDD6DP1aJIFo59Q4n3h4QilYTdK6KJ8=;
-  b=pdA+yjEVu6CSgBC0MEfAKTQBsK3mXbYKLQMBQRsOfTpJv/rLMuwq9jbN
-   nDPfy/EdICXBN8oeoExICotu8iwnuODACTwqw884xMotZoAvww2tYjVKw
-   tZ3klU5JrN4cSMwLhrq+HSZwpeXtHIv7s7Fbnoxvjz1D1WySbWcXAHinA
-   suBcdyBTSYQR/4i/h6weFizQN4KHatZGehJXWCz07iTb+q1npo6ePk+Wz
-   28i1QEoNQKh7S1OyE6w6EPI+/hkU+GN9tdDYgOw45A4KP/r9eWf3w4HP9
-   CgsZ32cb+NxLQ+qkw2vmA2vYVSUDKXYVEUxxSKKMNrDqviA5UoumKQ7fQ
-   g==;
-X-CSE-ConnectionGUID: EB+pMZTETUW8U34DPIYAZQ==
-X-CSE-MsgGUID: P4uhTOAcSjGDhFl9mhH+Ng==
-X-IronPort-AV: E=Sophos;i="6.27,181,1787011200"; 
-   d="scan'208";a="21795587"
-X-Farcaster-Flow-ID: 09484581-dfa9-4b4c-a117-a67a540b1263
-ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=FjW0TusRwVgpu/dt/5IeXj1IYuJqqkyM+NuJ8Acc+tpKNHCSXiWFLcabDdPnjHXU9C7oKu+rmji1Dmai3xmKZsvFmsMNcVWEUQe0LK1wTFZqktid1R0sG8S2zL7k+oiBqLbNy+vurkw0cb7ehn/WjlXuEkvb+77YJy7TmslRDdXZOot0zI/mkfXOBLcOJBJcG/vmolw2flzx3y/kQFZFhGYhvgzpXyRc6J+hWyPsm82cz2uvC/wKTpz1Y6NhdJtCK0UUfn1NNk8xIXCabAWlPBcV044MeW0YTFEC12390pGl/FbAazy50YswNWliKVxscevCWLpz7flwULH5XpKfSw==
-ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
- s=arcselector10001;
- h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=GWEbN3/mwk69KDD6DP1aJIFo59Q4n3h4QilYTdK6KJ8=;
- b=xekt8P6ucGj2j4PfYBIY5ywxLYRvjymEb3eBlKJEreaOjSU+ww7R5ftFoxO0CC1t+wIFH6ZCsvvs7im9J4THPHjGGBs1umuslA9EYGrc+Gjq4YM5eyNiI258/YkHx7tEWW9Tdtk1u5bkX5gjQad4FD21Vk3CBTEtpV9+I1DFEHNVc0xD2BCWLs3n/efzYnt7BualwNeG3ZP2rx65w2iys/iqvoXVWGXrTD7Yp76Aas2QcOhmfJPpurhV1RZJMY5smCU/Zh3i/fjd/mJmUSGjeu8vhfefGnTC9B7wp5lUnY/HN4XvtfaUTBnkR2g7QBMGOPEsMkfwsI94RGAFw6hKZQ==
-ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
- smtp.mailfrom=amazon.de; dmarc=pass action=none header.from=amazon.de;
- dkim=pass header.d=amazon.de; arc=none
-From: "Graf (AWS), Alexander" <graf@amazon.de>
-To: =?utf-8?B?RGFuaWVsIFAuIEJlcnJhbmfDqQ==?= <berrange@redhat.com>,
-	"qemu-devel@nongnu.org" <qemu-devel@nongnu.org>
-CC: Stefano Stabellini <sstabellini@kernel.org>, "Michael S. Tsirkin"
-	<mst@redhat.com>, David Hildenbrand <david@kernel.org>, Anthony PERARD
-	<anthony@xenproject.org>, Peter Maydell <peter.maydell@linaro.org>,
-	"qemu-riscv@nongnu.org" <qemu-riscv@nongnu.org>, Paolo Bonzini
-	<pbonzini@redhat.com>, Alistair Francis <alistair.francis@wdc.com>, Weiwei Li
-	<liwei1518@gmail.com>, Richard Henderson <richard.henderson@linaro.org>,
-	Nicholas Piggin <npiggin@gmail.com>, "Edgar E. Iglesias"
-	<edgar.iglesias@gmail.com>, Jiaxun Yang <jiaxun.yang@flygoat.com>, Chao Liu
-	<chao.liu@processmission.com>, Harsh Prateek Bora <harshpb@linux.ibm.com>,
-	Liu Zhiwei <zhiwei_liu@linux.alibaba.com>, Christian Borntraeger
-	<borntraeger@linux.ibm.com>, Daniel Henrique Barboza
-	<daniel.barboza@oss.qualcomm.com>, Amit Machhiwal <amachhiw@linux.ibm.com>,
-	"xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>, "Sergio
- Lopez" <slp@redhat.com>, "qemu-arm@nongnu.org" <qemu-arm@nongnu.org>,
-	"qemu-ppc@nongnu.org" <qemu-ppc@nongnu.org>, Bibo Mao <maobibo@loongson.cn>,
-	Ilya Leoshkevich <iii@linux.ibm.com>, Halil Pasic <pasic@linux.ibm.com>,
-	Xianglai Li <lixianglai@loongson.cn>, Palmer Dabbelt <palmer@dabbelt.com>,
-	"qemu-s390x@nongnu.org" <qemu-s390x@nongnu.org>, "kvm@vger.kernel.org"
-	<kvm@vger.kernel.org>, Song Gao <17746591750@163.com>, Eric Farman
-	<farman@linux.ibm.com>, Cornelia Huck <cohuck@redhat.com>, Matthew Rosato
-	<mjrosato@linux.ibm.com>
-Subject: Re: [PATCH 08/11] hw/nitro: mark 'nitro' machine as secure
-Thread-Topic: [PATCH 08/11] hw/nitro: mark 'nitro' machine as secure
-Thread-Index: AQHdZmMX3joabFtXaUWVQ1RiPsBvJw==
-Date: Tue, 27 Oct 2026 22:32:46 +0000
-Message-ID: <b5adb841-9f14-4eb1-a69f-7e7b443e9f23@amazon.com>
-References: <20261027181400.1752951-1-berrange@redhat.com>
- <20261027181400.1752951-9-berrange@redhat.com>
-In-Reply-To: <20261027181400.1752951-9-berrange@redhat.com>
-Accept-Language: en-US
-Content-Language: en-US
-X-MS-Has-Attach:
-X-MS-TNEF-Correlator:
-authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
- header.d=none;dmarc=none action=none header.from=amazon.de;
-x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: FRVP281MB744463:EE_|BE3P281MB6226:EE_
-x-ms-office365-filtering-correlation-id: 18fac4b7-fdbf-4656-7e07-08df347a39be
-x-ms-exchange-senderadcheck: 1
-x-ms-exchange-antispam-relay: 0
-x-microsoft-antispam: BCL:0;ARA:13230040|376014|7416014|366016|23010399003|1800799024|38070700021|11063799006|4143699003|56012099006|10067099003|18002099003|22082099003;
-x-microsoft-antispam-message-info: cyC+3f1YHm6wUu9JacJXPts7iepG6XLMm2+IHmQTOXCcxWFNMrsfdGc7fSLrEFGkhiw2kmpW8Pd7nfSuJljKT1XsbfvEbqfSpWGp45UFfVym6fg9UQyjF0S3v6VGhegdPMuTe1g7Ij4hfS33F7+9jXqptbq5U5T2oaUDrSsvydT4ztFEjNZp9ft2bCNUkh8crKcfiWiPVOn0lTkzvWdsFjv29NLndxrvG0fuEpIGEahTbKFfdulhFOUyvF7I6/aUUuqMvbzLv/nOkhIiScvZPajy+75HmaGE/qJQHrLtA/7GuHKZ8XjC2zRmDjlobE0yiQ82t/MZfPZdSUQsu9sOiJ2qgykfuJITJm/R7QtoFcaiDPdYg4FHcFHNGKviJHPoe6YLdECpZyfBQzcliTmAnQcu4stAPfIs1PPUJd43yTjH4hYt6hugIn3Q8TPghu7CYKA7z4Ke1tf6GnCu5IEbHCAuELO4NunYt6Eou3qLVIuiFiyl5hYwc8eQew15A7rMCq6K+lGhyieDrAQ7lYzDkuhCCjOXL6Fv58PnjYZjcj8IXvFs5iu5fg/VqVnGmFIUV3Y3i9H4D3A4Sfl11isjksscHslU2+fwqrHGcV9uKKTor2bIuzSdnAXCn5BqUG8cbpXF+cOIncTwO0jwlcrEqxL+dpLVuzusX7TuUVkzrHZINkbKGaeYKukYH9MwiNDBqP87oH0jml4IiOFCMrvRWbvIpuS+kqo1ZxsBCDeGNyw=
-x-forefront-antispam-report: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:FRVP281MB744463.DEUP281.PROD.OUTLOOK.COM;PTR:;CAT:NONE;SFS:(13230040)(376014)(7416014)(366016)(23010399003)(1800799024)(38070700021)(11063799006)(4143699003)(56012099006)(10067099003)(18002099003)(22082099003);DIR:OUT;SFP:1101;
-x-ms-exchange-antispam-messagedata-chunkcount: 1
-x-ms-exchange-antispam-messagedata-0: =?utf-8?B?emFQd0puMmo1aFJKaCtxdmp4Sjg1QkdJZy8xL1FSMlcxaUw1bHZyb2NQWjB1?=
- =?utf-8?B?V0lUR2tqdnIxcW1MK3FrOSt3RUNhMUJyTlU2QVl1VTBmay80Rkk3Q2dKaG9t?=
- =?utf-8?B?ZHd5eFQ3My9kNE00MmRmbWI3MzZ1TFhxcjFEa3JqaE53ZDZLaGdsZVJaMkZN?=
- =?utf-8?B?QmZNaS9XSktBV3dMT1FQYlpqd1R4MERNMmtmZUJjT2g1Yy9nNFord1VRYnFp?=
- =?utf-8?B?RGNTb0xtRG9PaEdtRWZReElwdXlNNnhwNnNDRjREVHRnMlJFZCtwSWdJZGFW?=
- =?utf-8?B?UjVwRWhlZ3UrOUppTjZQRWROeFAyUldQemtheS9zeDhHU1h2US8rS0d2aDN4?=
- =?utf-8?B?bWJacEVzVjRuMXRFaU13VnFRZFZpT1ZMbUhMbzgvUms3TzVJQjRHVXd3ckY5?=
- =?utf-8?B?Z0RUSnVOV0dQUmlyN2hVUjg5RG1wYjdWaExKa2tHSGQwWVZnM1hUenljbEhI?=
- =?utf-8?B?WGZtYUNmd0hQd3JwMjI3NmlpakxxMm15S3U2eFRCUEFqL2M0dDEwWGdsU01a?=
- =?utf-8?B?UHk4MFJkcGVIalA1UVk4NUdUM2lxTXpIQTQ4TElaUEdtK3k5clVMWjBNQjVv?=
- =?utf-8?B?QTQ3SFhVaVMzbU9rT001NGVnTSs5RWtNNmdDK25YRldVQ0tKVVZrUDFwdFZ2?=
- =?utf-8?B?STNiQ1dFZzdGQXg1S0NKNnR5RGZvVG44QjFINyt1UGxjUThhZFppOGxxT29m?=
- =?utf-8?B?ZENHQWM5UllMK05tUENkVVpUWTJVZVBGdlhYYVRwQURMYmFudzRMS2V0bUVS?=
- =?utf-8?B?aHh5N2NOOEkvQkZiZjlWbkRLVjhMY0dudlIrSi9wR3UvYXFueHpObXpDa01j?=
- =?utf-8?B?L3J2dlVtZFQ1UThHSEo4bjc2VWZTUDcyblo4NStaclpwNVR2WlkyTzA3RGo3?=
- =?utf-8?B?MjkvTmdpSmRsS2pKVHVvNld5OGZBbTUzbnhZcHV3bk1ZelUxY0VLaVlmWVR3?=
- =?utf-8?B?WTFyTVR1MkJOTkNqZjRzZUhzUTFuNDdNU1hXWUZYR282a0hnV1B4alU1U3JS?=
- =?utf-8?B?OUVCcFhwSU9jWFhKTitoUXllQ1lDYnA4WnZQV3BaVTRUQW0wZVhGRjMxNmx3?=
- =?utf-8?B?TzJZQmZzbmtGSzJ4NFZDRXdmKzUzcERtanpodHBubFhZcXhsd2R2U1MxMjYy?=
- =?utf-8?B?eXRuN0VMc1F2TmdGT3hmc2tzZEJIbkxKNS9GdGJtSXppQVV3WU90cGVQRUNC?=
- =?utf-8?B?TUhxT2ZNQjA3NzR1TXJwNldCVzJrRTZxRjhxNWlVbThZKzdicTg0alFNeGhY?=
- =?utf-8?B?QllYcjhWQkdFa2RwT2xIZ1dJMk02VVVlNG5IK0N4QlQ0YUZpQ0ZlOGFsbTBN?=
- =?utf-8?B?cTJQLzhOemp2TmdFeVpSK1dBZFlLUStKWVA0YnVYdmpCYVo2TjN1T05rUTVk?=
- =?utf-8?B?czZvUlRMZmFFNm9wK3ZEVTBhU2F5SWVFbGJSL01WUGtTK2JpRy9QbUtDdUpz?=
- =?utf-8?B?WGttd1dzRjk2WGhEZ3NyZXpVbFhoOVJ2bXBZN3N6MXZwczF5QkIxMHlwZW5N?=
- =?utf-8?B?SXpUcDJZR054NUVlbE5HQVRwSFVqSGw5TFdzclk2azRkYlZ4VW1teVk3MGRu?=
- =?utf-8?B?NWo1MFU3SDAzMHA1WEdNeEl5d2VKOWJzZW8wUmRtTE44bVVTYUd6UlRJbU9n?=
- =?utf-8?B?U01TRXZMUndZVHU4dElTUUhoZG1KQWxBOXI4TC8zYkwrRmdIUFJTMi9VODhZ?=
- =?utf-8?B?NWN4MkJ5VXNKY1VzSTVCOWU3dEVSRHZiK0o1TDhXVVVrMDRkS2xjM1FZVTQr?=
- =?utf-8?B?K3p2a3RZSzFKTTdTQUlkd1lUazVqYzAxN1JvbEI0WWJFK3o4UW9wZzR0Z21i?=
- =?utf-8?B?YUpzeVZIMml6YWh2NjRGOVp1QllYNFFnOFBNUEQ4V0Rtc2kyQ2VSUGZiZjZG?=
- =?utf-8?B?VERoUjlOM0RLRHdjWUhWU1hmZkpOQkxRK0Mva2dwUzdXOTlIZWRPS29CdDRT?=
- =?utf-8?B?RHRHOE5mTFl5V3I4T2lpYk9SMGRrNnU2RDdMUU1YL2l1MndrQTdIMFNpR3N0?=
- =?utf-8?B?OW5KbFFDam9QbllndzJaWVhCVGwrZEtUQ0VjTUd5dUkzNExRNDZIMzgxeWhE?=
- =?utf-8?B?Tjd2U0RCaFRxUFRxOFBiWnF1WklNaTNPK29WQlJGOHdPUEdRQU1WcElpaUl0?=
- =?utf-8?B?WjA4MGwvR2xVd25QOFBxRlgwbFpLN21uTnBURGdETGRTQWExa3N2Y3NRWVZ5?=
- =?utf-8?B?Q21KOVdySGlRaThzeFpUQ0swOUxTWWpxK0ZCcUpiV1hEdlhPZzZMOE1uN2cy?=
- =?utf-8?B?WS9UdE5UTGFVU0tYRzFMaDByazlaRC9qREtQU0tKMUZCU3ZjRUQrY2EzRTd6?=
- =?utf-8?Q?/6lkPpd4HClXTVIakb?=
-Content-Type: text/plain; charset="utf-8"
-Content-ID: <FF1BC35AFB46F5468A8F8B74BD81FDD6@DEUP281.PROD.OUTLOOK.COM>
-Content-Transfer-Encoding: base64
+        d=suse.com; s=google; t=1793173344; x=1793778144; darn=lists.xenproject.org;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:from:to:cc:subject:date:message-id:reply-to
+         :content-type;
+        bh=huVGI+W8+BLSycLdp3E+/uCIzL8hvWrKPFeZuCWM91M=;
+        b=No1NM6h5Dq3azIp1eVrgW/KzEN/p53T8LV4MORg14sgOErnNAJO15Oz2UvyfUx1fLv
+         j10sddJHp5ljurHAm5slEh99m0mM/SqDMXgTg+YvGZQAVSrPsIPhOMLdUlyqsRtokAT3
+         rQMl8LFcU4AzOGZ9sbG2AW7Qs2Kc4ZyeLGeeawiWg8Dfr9Xp01/H3us05Y5yFuKBpVxk
+         CfW4D/qnUlkZcUz4U6KO6EINxrAUS6Lzjf9Gflh162FsAC3BpORXsjmn7HLAshcJPFv+
+         ADhEFseH+Z9rWWWgMtxcgKZFwEzNYpnvcO7RnTqfwex1T7plCdwMQzJIH8pBWjupUxeU
+         +6Lw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20260707; t=1793173344; x=1793778144;
+        h=content-transfer-encoding:content-type:in-reply-to:autocrypt:from
+         :content-language:references:cc:to:subject:user-agent:mime-version
+         :date:message-id:x-gm-gg:x-gm-message-state:from:to:cc:subject:date
+         :message-id:reply-to:content-type;
+        bh=huVGI+W8+BLSycLdp3E+/uCIzL8hvWrKPFeZuCWM91M=;
+        b=hD1lEOAXjpG85a90P6mWB7DpzaAs76NccoT+RxEZkwDZbFlKGYLZ3gHHLRmw0KFKfe
+         n8BL5M3i5Zo1cNbl+Jx1Mp7eGWjtywOv3JApqrNwlqbKYoM/NF7ynO+bDd9/BmjjrfmA
+         Qmgf5trwdg7C3OiSMxpXoTTxEYh19DadeYtlG6bN/NAqNwj1arBuTYXWv7WbtHs6yUSI
+         B/WLDlAA+JHI7B6aPCEFN2+julo52UCBtsIhEf6EgFmwYQExz5HQEqUGcBYdCB80nTjM
+         p+yfDxU3avJ36cOTIyQlXni1Glo/n5jr0YMoX/+Txop8fmF+uiV6rBazLI09bpK5+NYM
+         zPCQ==
+X-Forwarded-Encrypted: i=1; AKwUvBwmp/trbAcRYi5k88aT+HbJLc013gWySCRxjJtw42uc2maf/t/YTh/lRqC39aMLX7E33YPBsCjE8YI=@lists.xenproject.org
+X-Gm-Message-State: AFq9FYLtfQ5JjPPqdWanyqZBJfGXaz7aBPtwHqxYRGbojX4pOLKn0iW9
+	pX91CT8tROwrnrzj6VzuCyhMp8TXh5QIN4+ske7sKw0PPyY9p6D5ms+Qs+dW2jqI6w==
+X-Gm-Gg: AYBFou2ntwBVu5ChpYtEHaXbwWLYYvnC8dyhhMqXnkoXiPGjikZNbYV0aWEgcOwxUX2
+	6YuEArefNmwl6u3SIcB5US4NNXl3VBCEewbPbw/2niInE1yEvffri8OcWn9iqj/9UGbp6ctxx5L
+	q+/uEaijtaxaTOXKWEAQyXGzZjNYCvXB7cVhHa6F5IuRsVL7SQ/2LkOfxUsdcAdNs6DxTC5HRVm
+	i9YQmp6bk5jL5g3qUyiKKQmlUuKblz0zPHt7iaZCYu1VG5Oq5iRSuSAAed+tGV7OBiuNhVwCtfX
+	6rMQbr6Wk+UIttlDg0M07nm/tIcKQa8ASjp4evdzHq/JOQ1vazbFcULQl3xWuNAR/GhI1Gf+d4z
+	Sd6r2zf13PVA34ar+uc282mMgYXYYFsS7qF2IcvDgZDJgg1oOVTTkgkj77O55HvVX7Qr7DAouv/
+	MwptBmOgR1n+2yiPIvQQZuTt0YTzsCm9E03zThR4e3RgwWTJII0ql9IH7xqi0Bq+P19IlAybDzM
+	dN/cTn1Q5P549eHgaXH9H3TY5cZ2GK4bla6vAFlIG5WtEx5mdY01vN9tmruC3lzrqzZcvpGdVK7
+	X+b5TPbAe6GEd/gk84Z5nHtkj3n+i/0IMBg8UYo9klMf81V/9M+iU7STwBug1DATuRLwfa1HVBu
+	+a5oQN5DeGOkzMU3TOg==
+X-Received: by 2002:a05:600c:6089:b0:49f:e772:6ddf with SMTP id 5b1f17b1804b1-4a967ca24ecmr27060255e9.32.1793173344477;
+        Wed, 28 Oct 2026 00:42:24 -0700 (PDT)
+Message-ID: <0af0a00b-4f9a-4584-ac5b-554ae00e692e@suse.com>
+Date: Wed, 28 Oct 2026 08:42:23 +0100
 X-Archived-By: <archiver.kernel.org>
 MIME-Version: 1.0
-X-Exchange-RoutingPolicyChecked: NBDV8OtVjbURIZoZ+dl98PYqYeRz1lRrtKBzL5beaGAPyDsJluvOcBDPVB0kK/YMAN3e1KAxp8RayZuGGNacM+D9mabe8M1EBLsbWCWEBCPLkTRgU+RVjA90iT1I7M3KFxJBB8nRQqrayLrsdYrC6RYtlhrnKjAmaOKKf3qV957Qy+sH4KipLsMLtxTgqpMsnt/67mFbiWVDR6lfHCcTHbQewN/XSN4S1DN1rpGohxWN5S/uXv/Vu1EZ4pde1hJaEDCQiWGERNPF+7e7X4rNucFFYEnE+SR26l7D5J/F5L0ov1O6ybolDTkkH/rkkxR2nuGO26Eqv+L41IxXWdzhHA==
-X-MS-Exchange-CrossTenant-AuthAs: Internal
-X-MS-Exchange-CrossTenant-AuthSource: FRVP281MB744463.DEUP281.PROD.OUTLOOK.COM
-X-MS-Exchange-CrossTenant-Network-Message-Id: 18fac4b7-fdbf-4656-7e07-08df347a39be
-X-MS-Exchange-CrossTenant-originalarrivaltime: 27 Oct 2026 22:32:46.8788
- (UTC)
-X-MS-Exchange-CrossTenant-fromentityheader: Hosted
-X-MS-Exchange-CrossTenant-id: 5280104a-472d-4538-9ccf-1e1d0efe8b1b
-X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: a6Re2qSIFeVXf8vTz5LrzKCNGp/bvqL5QF4oEG2KmYKwrlJ5jIA2qbjZ43RYxsBM
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: BE3P281MB6226
-X-OriginatorOrg: amazon.de
-X-purgate-ID: tlsNG-c201ff/1793140384-73CB82A1-2CAFAB79/9/66687
-X-purgate-type: clean
-X-purgate-size: 460
-X-Spam-Status: No, score=-10.8 required=3.0 tests=BAYES_00,DKIMWL_WL_HIGH,
-	DKIM_SIGNED,DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
-	INCLUDES_CR_TRAILER,MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,
-	UNPARSEABLE_RELAY autolearn=unavailable autolearn_force=no
-	version=4.0.1
+User-Agent: Mozilla Thunderbird
+Subject: Re: [XEN PATCH] xen/typesafe: don't brace-initialize a scalar
+ TYPE_SAFE value
+To: Shuaidong Chen <shuaidong.chen@amd.com>
+Cc: Nicola Vetrini <nicola.vetrini@bugseng.com>,
+ Stefano Stabellini <sstabellini@kernel.org>,
+ Michal Orzel <michal.orzel@amd.com>,
+ Andrew Cooper <andrew.cooper3@citrix.com>,
+ Anthony PERARD <anthony.perard@vates.tech>, Julien Grall <julien@xen.org>,
+ =?UTF-8?Q?Roger_Pau_Monn=C3=A9?= <roger@xenproject.org>,
+ Doug Goldstein <cardoe@cardoe.com>,
+ Alejandro Vallejo <alejandro.garciavallejo@amd.com>,
+ Grygorii Strashko <grygorii_strashko@epam.com>,
+ Penny Zheng <penny.zheng@amd.com>, Ray Huang <Ray.Huang@amd.com>,
+ xen-devel@lists.xenproject.org
+References: <20261028050336.2549325-1-shuaidong.chen@amd.com>
+Content-Language: en-US
+From: Jan Beulich <jbeulich@suse.com>
+Autocrypt: addr=jbeulich@suse.com; keydata=
+ xsDiBFk3nEQRBADAEaSw6zC/EJkiwGPXbWtPxl2xCdSoeepS07jW8UgcHNurfHvUzogEq5xk
+ hu507c3BarVjyWCJOylMNR98Yd8VqD9UfmX0Hb8/BrA+Hl6/DB/eqGptrf4BSRwcZQM32aZK
+ 7Pj2XbGWIUrZrd70x1eAP9QE3P79Y2oLrsCgbZJfEwCgvz9JjGmQqQkRiTVzlZVCJYcyGGsD
+ /0tbFCzD2h20ahe8rC1gbb3K3qk+LpBtvjBu1RY9drYk0NymiGbJWZgab6t1jM7sk2vuf0Py
+ O9Hf9XBmK0uE9IgMaiCpc32XV9oASz6UJebwkX+zF2jG5I1BfnO9g7KlotcA/v5ClMjgo6Gl
+ MDY4HxoSRu3i1cqqSDtVlt+AOVBJBACrZcnHAUSuCXBPy0jOlBhxPqRWv6ND4c9PH1xjQ3NP
+ nxJuMBS8rnNg22uyfAgmBKNLpLgAGVRMZGaGoJObGf72s6TeIqKJo/LtggAS9qAUiuKVnygo
+ 3wjfkS9A3DRO+SpU7JqWdsveeIQyeyEJ/8PTowmSQLakF+3fote9ybzd880fSmFuIEJldWxp
+ Y2ggPGpiZXVsaWNoQHN1c2UuY29tPsJgBBMRAgAgBQJZN5xEAhsDBgsJCAcDAgQVAggDBBYC
+ AwECHgECF4AACgkQoDSui/t3IH4J+wCfQ5jHdEjCRHj23O/5ttg9r9OIruwAn3103WUITZee
+ e7Sbg12UgcQ5lv7SzsFNBFk3nEQQCACCuTjCjFOUdi5Nm244F+78kLghRcin/awv+IrTcIWF
+ hUpSs1Y91iQQ7KItirz5uwCPlwejSJDQJLIS+QtJHaXDXeV6NI0Uef1hP20+y8qydDiVkv6l
+ IreXjTb7DvksRgJNvCkWtYnlS3mYvQ9NzS9PhyALWbXnH6sIJd2O9lKS1Mrfq+y0IXCP10eS
+ FFGg+Av3IQeFatkJAyju0PPthyTqxSI4lZYuJVPknzgaeuJv/2NccrPvmeDg6Coe7ZIeQ8Yj
+ t0ARxu2xytAkkLCel1Lz1WLmwLstV30g80nkgZf/wr+/BXJW/oIvRlonUkxv+IbBM3dX2OV8
+ AmRv1ySWPTP7AAMFB/9PQK/VtlNUJvg8GXj9ootzrteGfVZVVT4XBJkfwBcpC/XcPzldjv+3
+ HYudvpdNK3lLujXeA5fLOH+Z/G9WBc5pFVSMocI71I8bT8lIAzreg0WvkWg5V2WZsUMlnDL9
+ mpwIGFhlbM3gfDMs7MPMu8YQRFVdUvtSpaAs8OFfGQ0ia3LGZcjA6Ik2+xcqscEJzNH+qh8V
+ m5jjp28yZgaqTaRbg3M/+MTbMpicpZuqF4rnB0AQD12/3BNWDR6bmh+EkYSMcEIpQmBM51qM
+ EKYTQGybRCjpnKHGOxG0rfFY1085mBDZCH5Kx0cl0HVJuQKC+dV2ZY5AqjcKwAxpE75MLFkr
+ wkkEGBECAAkFAlk3nEQCGwwACgkQoDSui/t3IH7nnwCfcJWUDUFKdCsBH/E5d+0ZnMQi+G0A
+ nAuWpQkjM1ASeQwSHEeAWPgskBQL
+In-Reply-To: <20261028050336.2549325-1-shuaidong.chen@amd.com>
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-purgate-ID: tlsNG-4011c0/1793173345-4B8D5CFC-CD2DBD63/10/78276251493
+X-purgate-type: spam
+X-purgate-size: 2328
+X-Spam-Status: No, score=-12.3 required=3.0 tests=BAYES_00,DKIM_SIGNED,
+	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,INCLUDES_PATCH,
+	MAILING_LIST_MULTI,SPF_HELO_PASS,SPF_PASS,UNPARSEABLE_RELAY,
+	USER_AGENT_SANE_1 autolearn=ham autolearn_force=no version=4.0.1
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-DQpPbiAyNy4xMC4yNiAxOToxMywgRGFuaWVsIFAuIEJlcnJhbmfDqSB3cm90ZToNCj4gVW5saWtl
-IHRoZSAnbml0cm8tZW5jbGF2ZScgbWFjaGluZSB3aGljaCBwcm92aWRlcyBlbXVsYXRpb24sIHRo
-ZQ0KPiAnbml0cm8nIG1hY2hpbmUgaXMgdXNlZCB3aXRoIGEgcmVhbCBBV1MgZGVwbG95bWVudCBh
-bmQgdGh1cyBpcw0KPiBjb25zaWRlcmVkIHRvIGJlIHNlY3VyZS4NCj4NCj4gU2lnbmVkLW9mZi1i
-eTogRGFuaWVsIFAuIEJlcnJhbmfDqSA8YmVycmFuZ2VAcmVkaGF0LmNvbT4NCg0KDQpSZXZpZXdl
-ZC1ieTogQWxleGFuZGVyIEdyYWYgPGdyYWZAYW1hem9uLmNvbT4NCg0KDQpBbGV4DQo=
+On 28.10.2026 06:03, Shuaidong Chen wrote:
+> TYPE_SAFE() degrades to a plain typedef in non-debug builds (NDEBUG), so
+> mfn_t is then `unsigned long' rather than a one-member struct.
+> INVALID_MFN_INITIALIZER and INVALID_GFN_INITIALIZER, however, always
+> expand to `{ ... }', which leaves
+> 
+>     mfn_t first_valid_mfn = { ~0UL };
+> 
+> initializing a scalar from a braced list.  That is valid C, but MISRA
+> C:2012 Rule 9.2 (required) - "The initializer for an aggregate or union
+> shall be enclosed in braces" - is reported against it, twice in the
+> x86_64 build: common/page_alloc.c and arch/x86/efi/runtime.h.
+Wait - the rule says the opposite; it says nothing about initializers of
+scalars. The rule is clean in all analysis jobs we do. On staging we only
+ever have debug builds analyzed, but on release branches *-allcode have
+DEBUG=n. No 9.2 violation shows up there. You also don't point at Eclair
+output supporting your claim, so I wonder what is going on here.
+
+Further, "That is valid C" contradicts ...
+
+> --- a/xen/include/xen/typesafe.h
+> +++ b/xen/include/xen/typesafe.h
+> @@ -9,12 +9,17 @@
+>   *  * _$FOO()  which boxes a $TYPE as a $FOO_t
+>   *  * $FOO_x() which unboxes a $FOO_t to $TYPE
+>   *
+> + * TYPE_SAFE_INIT($VAL) spells a constant initializer for a $FOO_t, for use
+> + * where _$FOO() cannot be (an object of static storage duration).
+> + *
+>   * This makes a $FOO_t and a $BAR_t incompatible even when the box the same
+>   * $TYPE.
+>   *
+>   * It does have some performance cost because the types now have a different
+>   * storage attribute, so type safety is only enforced in a debug build.
+> - * Non-debug builds degrade to a simple typedef and noops for the functions.
+> + * Non-debug builds degrade to a simple typedef and noops for the functions,
+> + * and with it TYPE_SAFE_INIT() loses its braces: a scalar must not be
+> + * brace-initialized.
+>   */
+
+... the new wording used here.
+
+Also, in the earlier insertion above, isn't there "used" missing? Possibly, to
+avoid the double use of "use", with the earlier "use" replaced by "cases"? Yet
+maybe this is legal grammar anyway, and it merely feels odd to me as a non-
+native speaker. A native speaker may want consulting.
+
+I also wonder why you CC-ed Roger with his old Citrix address.
+
+Jan
 
