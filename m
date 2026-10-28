@@ -2,48 +2,48 @@ Received: from lists.xenproject.org (lists.xenproject.org [192.237.175.120])
 	(using TLSv1.3 with cipher TLS_AES_256_GCM_SHA384 (256/256 bits)
 	 key-exchange ECDHE (prime256v1) server-signature ECDSA (prime256v1) server-digest SHA256)
 	(No client certificate requested)
-	by smtp.subspace.kernel.org (Postfix) with ESMTPS id EC7EA606A31A
-	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 01:56:13 +0000 (UTC)
+	by smtp.subspace.kernel.org (Postfix) with ESMTPS id 2E24F606A31A
+	for <xen-devel@archiver.kernel.org>; Wed, 28 Oct 2026 02:13:57 +0000 (UTC)
 Authentication-Results: smtp.subspace.kernel.org;
-	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=hrYxa9o6
-Received: from list by lists.xenproject.org with outflank-mailman.1462795.1673789 (Exim 4.92)
+	dkim=pass (2048-bit key, unprotected) header.d=epam.com header.i=@epam.com header.a=rsa-sha256 header.s=selector1 header.b=kJbuYGmY
+Received: from list by lists.xenproject.org with outflank-mailman.1462805.1673797 (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLstN-0003tj-Jx; Wed, 28 Oct 2026 01:55:53 +0000
+	id 1xLtAU-0007LW-2v; Wed, 28 Oct 2026 02:13:34 +0000
 X-Outflank-Mailman: Message body and most headers restored to incoming version
-Received: by outflank-mailman (output) from mailman id 1462795.1673789; Wed, 28 Oct 2026 01:55:53 +0000
+Received: by outflank-mailman (output) from mailman id 1462805.1673797; Wed, 28 Oct 2026 02:13:34 +0000
 Received: from localhost ([127.0.0.1] helo=lists.xenproject.org)
 	by lists.xenproject.org with esmtp (Exim 4.92)
 	(envelope-from <xen-devel-bounces@lists.xenproject.org>)
-	id 1xLstN-0003tc-Gm; Wed, 28 Oct 2026 01:55:53 +0000
-Received: by outflank-mailman (input) for mailman id 1462795;
- Wed, 28 Oct 2026 01:55:52 +0000
+	id 1xLtAU-0007LP-0N; Wed, 28 Oct 2026 02:13:34 +0000
+Received: by outflank-mailman (input) for mailman id 1462805;
+ Wed, 28 Oct 2026 02:13:32 +0000
 Received: from mx.expurgate.net ([194.145.224.20])
  by lists.xenproject.org with esmtp (Exim 4.92)
- (envelope-from <Volodymyr_Babchuk@epam.com>) id 1xLstM-0003tW-Or
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 01:55:52 +0000
+ (envelope-from <Volodymyr_Babchuk@epam.com>) id 1xLtAS-0007KX-BQ
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 02:13:32 +0000
 Received: from mx.expurgate.net (helo=localhost) by mx.expurgate.net with esmtp
- id 1xLstL-009Pkh-ER
- for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 02:55:51 +0100
-Received: from [10.42.69.10] (helo=localhost)
+ id 1xLtAR-009RZ5-Nx
+ for xen-devel@lists.xenproject.org; Wed, 28 Oct 2026 03:13:31 +0100
+Received: from [10.42.69.6] (helo=localhost)
  by localhost with ESMTP (eXpurgate MTA 0.9.1)
  (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6ae155fa-bab6-0a2a0a5309dd-0a2a450a8f9a-34
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 02:55:51 +0100
-Received: from [40.107.159.78]
- (helo=OSPPR02CU001.outbound.protection.outlook.com)
- by tlsNG-4011c0.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
+ id 6ae159d1-8faa-0a2a0a5109dd-0a2a450686be-28
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 03:13:31 +0100
+Received: from [52.101.83.102]
+ (helo=GVXPR05CU001.outbound.protection.outlook.com)
+ by tlsNG-16d1c6.mxtls.expurgate.net with ESMTPS (eXpurgate 4.57.1)
  (envelope-from <Volodymyr_Babchuk@epam.com>)
- id 6ae15627-f2d2-0a2a450a0019-286b9f4e9a1b-3
- for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 02:55:51 +0100
+ id 6ae15a4b-195a-0a2a45060019-34655366fe3f-3
+ for <xen-devel@lists.xenproject.org>; Wed, 28 Oct 2026 03:13:31 +0100
 Received: from VE1PR03MB6078.eurprd03.prod.outlook.com (2603:10a6:803:113::29)
- by AS4PR03MB8207.eurprd03.prod.outlook.com (2603:10a6:20b:4fa::19)
+ by DU2PR03MB7925.eurprd03.prod.outlook.com (2603:10a6:10:2d8::15)
  with Microsoft SMTP Server (version=TLS1_2,
  cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.546.22; Wed, 28 Oct
- 2026 01:55:48 +0000
+ 2026 02:13:25 +0000
 Received: from VE1PR03MB6078.eurprd03.prod.outlook.com
  ([fe80::4722:b91:9b24:ee48]) by VE1PR03MB6078.eurprd03.prod.outlook.com
  ([fe80::4722:b91:9b24:ee48%4]) with mapi id 15.21.0546.021; Wed, 28 Oct 2026
- 01:55:48 +0000
+ 02:13:24 +0000
 X-BeenThere: xen-devel@lists.xenproject.org
 List-Id: Xen developer discussion <xen-devel.lists.xenproject.org>
 List-Post: <mailto:xen-devel@lists.xenproject.org>
@@ -54,35 +54,35 @@ Precedence: list
 Sender: "Xen-devel" <xen-devel-bounces@lists.xenproject.org>
 Authentication-Results: eu.smtp.expurgate.cloud; dkim=pass header.s=selector1 header.d=epam.com header.i="@epam.com" header.h="From:Date:Subject:Message-ID:Content-Type:MIME-Version:x-ms-exchange-senderadcheck"
 ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
- b=fhZlJNUqVCSP5sPpEhetILpxiUPuD7GG5drBfJ4mJvMBMySNCxfzK6YXqdAqlet8jDFRfwOhaFl+UGtaSRFk/U515F8JGPx/X1hVj3ULTUxjui20PlYK8AT7DvFL8V16+BI0JH9wDMHSOh0OW8cwY0zACcnn0guDvlcg+CNMOjsPQ9rL4UeNjILFfj0cDOR6xrgDaNwzNGMgTDsL8jh3U4uN5lWJQ+lxgr3UUjY5NTPJHw0/NnQdsxYtr7tEvjtyj0DYC+8j6HZ7x7NJLezdtwsLHvI1RAw4kQbw36ZFcnEaYzFYB9UAlmD19vO6XG2ZvsxOQ0m6HF6DypV+A9P13g==
+ b=Lx51lV0MEEyKDLPK8qVSOIekN1A/sWMUs5ijCrhMhDkK6KTWVI/lpYOddHk3GXEOP1N9oXh8kot20Sw0ohaT7TSh/xRxhfM1u+cqJQSlMGx8ZZcdS50oDSPK+S4yfstgOfO+0jXx0PYJxeSLc1oZIC+Ho81oYE+WZRFbjRay1L3rDgfoPxasFZhYZdsVqRJy/+imoa6R6bRZmxbHEtbYgq8aYQR/fKI25VoAxwlJ80zf+0dgkJVaWATyZ/p1V0XhfOtgUaKf9lgHMNk2mR+OCaKK4ORGLXSR/5dkNwcK/MeHwT3ouq/F9vrpKurjtEYlxuoe+2PolktBWxsHD+02NQ==
 ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
  s=arcselector10001;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
- bh=8JEB4TcI6rY9PoEiqupKaYUkobSukx5mh2G5+XgiwyQ=;
- b=TVOygFARYnPs8xmAQT5f1M8Pe2cW4dM0VWRLPnEpeAsDLE1En6TEhu5bsAHCZ4LY0g/aXvwDywIMYECafqVbmIAmraRq1Qiycj4QwO9c/oKOJQiKQmA9iW0zWcCB1uFbKilC55/aVR/cesLxBzm4hs7LGmFJo3t8hsUZbspZYoBf9eEa7VkUAPSjjP4dGUQpaedbe9ZGRNCOamJkOz+J+Wf1RZyQA+qzgNVNkfnT8KDCqsY+dySC4GNY/BT8agJINxNDAGzXDMuHy0vTHKVwRdrAnA1euW4RP2zqjFZ4GeOhim58JVypgKz6o+nP7nGaDdRBm7R//LEVmboc8eW/RQ==
+ bh=+Az+cdNp2WiBJsttHXvgElp2UNrxJ/fVqIx1E4Ip5fk=;
+ b=zUsFQax1qOrWxwIeNK0iXKvUp0aOu+f3us/R0YVQTVmF6ogr4qgB9eIDFJXUwgq7dTQ1XJ3DFROCYeYevRLhiYTYHxFREpOAVZbmGrzhcmheu7y+FEjP23krldfPZNGnnCxseUDiVVGexZO5r45paP7Seqc83YuS4X8IzofjJHzccjxfZGV8YbJS+TC8Dy8NhzVYeJtE/tmlawLoaFA+EH1lOx4MQpy5B3gvJu6eG9UfRTwakxTx/ZAh1ZL3uvq892PSB4Jv+P37bEsdlCMHTXtbAHwsghTgPZRX06m7zFrBHG9jDLENuPCpcAClh8JNg/3+t/YpHpqpAsHwvzmcuQ==
 ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
  smtp.mailfrom=epam.com; dmarc=pass action=none header.from=epam.com;
  dkim=pass header.d=epam.com; arc=none
 DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=epam.com; s=selector1;
  h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
- bh=8JEB4TcI6rY9PoEiqupKaYUkobSukx5mh2G5+XgiwyQ=;
- b=hrYxa9o6pdy9qlqmHpGDkjYtGdKb9Zxf036sW7CPCa9/xZGJAbQAU3gpmNQibLwu2pRA4i6UH1onNHMk6MejzMxprFjFt/54JPESjnBhvsBs5o4kcUj1sbbqMVyPOx0RKE55udyoBlLQc/KZIu5Nc6HFdF9Tg/QyAqahcpn0Cu1szTUcYUvWFmmx7JNYNxkvrsp7Iz2A56xSosHVxTmYoRGJiR0Hy0Ni8oR9GxjuKjcHwxXMODO2EEifubsxmUEmbYNi5npwNtkBHZjYv8lDyL3zkLMNuQY8RtVupsQKcWvS4WekbZj9qarTnx0GVbwx/jL8c4IAvYUFG+lVFCUcTQ==
+ bh=+Az+cdNp2WiBJsttHXvgElp2UNrxJ/fVqIx1E4Ip5fk=;
+ b=kJbuYGmYZmHX5nP1MkWqwzkFXRzK7qYXGZgT1M2Pz/dJujJOnlipC3/hD9swUq2U9ZxNHOBmcgsCoouPGyPbndqLxRdh4pGy64AQk/Yt2pFCr8n2lvTtbQkCyBlkbprhxSK5/NJZNJjkNqS3zIUfPwlpE+4JLS0A0CaoxqrkmkI43LcE7BCGhLkHt/d5eUFj9h5051Mqg7EVzz4bal9ouXeaJeIoaNKtGneWXMWzBlzV370JLcJ2b/Jw8zAmoPRJtrZMVDoU88apL0iBR1KwnprQ2eojRGZ2+IT0vujzwzhjMceRg+H7X3R1TvrcbF0zSIZ407+0sjNYf/hy2wxyGg==
 From: Volodymyr Babchuk <Volodymyr_Babchuk@epam.com>
-To: Leonid Komarianskyi <Leonid_Komarianskyi@epam.com>
+To: Hirokazu Takahashi <taka@valinux.co.jp>
 CC: "xen-devel@lists.xenproject.org" <xen-devel@lists.xenproject.org>,
-	Bertrand Marquis <bertrand.marquis@arm.com>, Rahul Singh
-	<rahul.singh@arm.com>, Stefano Stabellini <sstabellini@kernel.org>, Julien
- Grall <julien@xen.org>, Michal Orzel <michal.orzel@amd.com>
-Subject: Re: [PATCH] xen/arm: smmuv3: invalidate TLB when freeing a VMID
-Thread-Topic: [PATCH] xen/arm: smmuv3: invalidate TLB when freeing a VMID
-Thread-Index: AQHdZU2CvV133olROUKhJSegs8l4mg==
-Date: Wed, 28 Oct 2026 01:55:48 +0000
-Message-ID: <87v76mr3ks.fsf@epam.com>
-References:
- <c8cd6a9046d553f984bb80c69a35b9bb43a11418.1793002976.git.leonid_komarianskyi@epam.com>
-In-Reply-To:
- <c8cd6a9046d553f984bb80c69a35b9bb43a11418.1793002976.git.leonid_komarianskyi@epam.com>
-	(Leonid Komarianskyi's message of "Mon, 26 Oct 2026 13:25:47 +0000")
+	"michal.orzel@amd.com" <michal.orzel@amd.com>, Stefano Stabellini
+	<sstabellini@kernel.org>, Julien Grall <julien@xen.org>, Bertrand Marquis
+	<bertrand.marquis@arm.com>
+Subject: Re: [PATCH] xen/arm: Fix sibling mask setup to only include online
+ CPUs
+Thread-Topic: [PATCH] xen/arm: Fix sibling mask setup to only include online
+ CPUs
+Thread-Index: AQHdYt8baAARnjXwY0WMOCpcDnsQgA==
+Date: Wed, 28 Oct 2026 02:13:24 +0000
+Message-ID: <87h5i6r2rg.fsf@epam.com>
+References: <20261023110925.128195-1-taka@valinux.co.jp>
+In-Reply-To: <20261023110925.128195-1-taka@valinux.co.jp> (Hirokazu
+	Takahashi's message of "Fri, 23 Oct 2026 20:09:25 +0900")
 Accept-Language: en-US
 Content-Language: en-US
 X-MS-Has-Attach:
@@ -91,49 +91,49 @@ user-agent: mu4e 1.14.3; emacs 30.2
 authentication-results: mx.microsoft.com 1; dkim=none (message not signed)
  header.d=none;dmarc=none action=none header.from=epam.com;
 x-ms-publictraffictype: Email
-x-ms-traffictypediagnostic: VE1PR03MB6078:EE_|AS4PR03MB8207:EE_
-x-ms-office365-filtering-correlation-id: 15ab847a-1b05-42b0-8575-08df3496966d
+x-ms-traffictypediagnostic: VE1PR03MB6078:EE_|DU2PR03MB7925:EE_
+x-ms-office365-filtering-correlation-id: d7b37322-cc37-452d-e2d3-08df34990c0e
 x-ms-exchange-senderadcheck: 1
 x-ms-exchange-antispam-relay: 0
 x-microsoft-antispam:
- BCL:0;ARA:13230040|42112799006|366016|23010399003|1800799024|376014|22082099003|18002099003|11063799006|56012099006|5023799004|261026121527099003|261021121427099003|261026140227099003|10067099003|261009223027099003|261022105027099003|261021123027099003|261022075727099003|38070700021;
+ BCL:0;ARA:13230040|1800799024|366016|376014|42112799006|23010399003|261026140227099003|38070700021|11063799006|261021123027099003|56012099006|261021135927099003|261021121427099003|261022105027099003|10067099003|261022075727099003|261026121527099003|18002099003|22082099003;
 x-microsoft-antispam-message-info:
- 3GEFluEBpAlfhy2Lf5yTFkdBQHEOCzZAU7AY85qx2f93tfApPLNLoj83HAaT7/E7fvgdNWN/fW/PyIWqdHVvj+udn3JBySXZc6wn2asmawR6TWpSuFUIZktDN1r3kJkpkbwofDGRHk79k5bZ1z9z/ggWqm93yNSKvL0+gzznJcQLMB3rUR6PqEeXbMgXDykT0buqtzs5PalRJIdMRf1Wmxk0iLtP2uq1kjbhJ0pW+rweyA2E0vqW3Xt5rKztZNOts/NDhb9Vi+kdjIJQ7berUkq3u8aaltswn1m8MaTXaf8OD4FaFDf+MyV5NGMzTOgup2o8qsUWHawc5ASUHZpZJLjJBxoJiCE6VSXbZTfIFd7P8tvXtjO56yedxe73+p1v4ldV4aBnAGWKnXi7dD+4lFpH+24GECbBj68Nz1TfFmu6wAyyP8m0/uFFA+sBcljTSOZeEBX40gso3XxUM0kzNvGT7Zv2OalYOuLw+Q17w+ZLcLQJnrSmMATdMYq3IkPdIe4YRmBJXZMfnrq8900fIfdxpUoCeOnlkJwBz9+iLpNGwYwvtUYKZXwPpJJ6lWa38bZ+sUPlNWxHnSH6kI6gMGFZnO/ZGdh+4Z5F/bre+2PM35arlXrtuKxCFjlsb+61n9EZm4kHahgsOVWwmt0xeGNsPB1YaHxaUz3VfnVMYV9PikkmAVOkP0nPLhiIvPQLvemWxAAETYGDjAjx3APRbUn3slbQQuOmjzQT46a/H/Q=
+ 628zd70WbszS7/pXW7mca9T8V+/betGg5QaDFccQ+WmJOdKzztOYcoA+i8XUAbn9+OvUudkVtsjxHvSBCTVNV+nWB5DfdQJBvzHmZA9SyWYdNDwoiC2w9YQlIW3Ttmn9w7di8EDNn8sRYtrdKlmrKW1XC73hgUpXrou5D1yl4tco46NOTm8We355UNbHeckZz7Tlpvy4I7lmzHsDOxIxIWU18XaG7zLEq396M7Ztdf+c0D3VjBmrvXpQhSMAWbMBx/uG5g8bg1jfW6R0XCivV014L/N/N07oF/l1PlaBaQNWVgBfOEUE4U9xeIdbfju1GwaNRG1Y03ZAp+n4tg9qHnbI7P/3VhzbPJZpmDxgxpK3oe96tL5ic4Aac+8o+pgLJLM+S5APATDk1VbHmXTKx/jrECFjA2D/mwIc/pib89zEF3TRpa6p4Nh0MEo3g6T5DoJ0nyFTnXGLo393gLlP/gcKzCl6e9BXNF3HD1e8aDYCRLmsBDvrbOxeAXJV/0en01nQHcfe66f1xH5yK8q4F9hG3xAReU763UxJEh53+dm45FU30/Fhn7/wSDtUo6b5E+oAlR2Oy4W69F1311tfypLz3TkdF2ryZo7rFgvoBM0Qfgz68tRksqYLJFIlwVUi3WSxKXAJSU4iFq2TBSIyn1Y67XNGERZ6574Psjwb4YR79w4PEtrb/g1rw38yCef+pBfJN6tq2BoEmxKNfu2F4X7hgSS7sxAIfmhcnQLuvNw=
 x-forefront-antispam-report:
- CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR03MB6078.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(42112799006)(366016)(23010399003)(1800799024)(376014)(22082099003)(18002099003)(11063799006)(56012099006)(5023799004)(261026121527099003)(261021121427099003)(261026140227099003)(10067099003)(261009223027099003)(261022105027099003)(261021123027099003)(261022075727099003)(38070700021);DIR:OUT;SFP:1102;
+ CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:VE1PR03MB6078.eurprd03.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(366016)(376014)(42112799006)(23010399003)(261026140227099003)(38070700021)(11063799006)(261021123027099003)(56012099006)(261021135927099003)(261021121427099003)(261022105027099003)(10067099003)(261022075727099003)(261026121527099003)(18002099003)(22082099003);DIR:OUT;SFP:1102;
 x-ms-exchange-antispam-messagedata-chunkcount: 1
 x-ms-exchange-antispam-messagedata-0:
- =?iso-8859-1?Q?WFN95zwXeYS/dAkUA9PFoZN+l+wo9+zKxDXfNIaCs79ntmrQOo2lODhY5m?=
- =?iso-8859-1?Q?gFR0PFGja+tFuqM5+mgH3EscGqYwozf0vJLfMWsl/3mpjJ0d/++kd0tKde?=
- =?iso-8859-1?Q?ND/STo8CXlBbH1nTdTcbTxKbn1Ge4yI7HY2/3t5tctRRvihG+0L+Di/Yzo?=
- =?iso-8859-1?Q?QS8dKe5CX9lu0GX8b1b1/QR4rGHLrroNW4IbO0zVpVwT5SLzGRxy5j9W45?=
- =?iso-8859-1?Q?QKy/TeaO7oNpVl0jnTNlzkbcE8dge0KQOlpKi9tdx1yHSpIWudc42uiE9p?=
- =?iso-8859-1?Q?Qw/kHih6UeYsgVG08OtsEseKSDZkRaDdhVIEbAeechsYSjI2IyI64ZnFNj?=
- =?iso-8859-1?Q?rY45825CFaz38RO1I64eLvsqce4flwjOXu7Uvyhta3iKzgt/QahPb/rTNR?=
- =?iso-8859-1?Q?HZ2voMUaCnqEcUOiccHQ/W63CSjVr2mK3T+E6/yQQOihJd0cCfCkbXrumg?=
- =?iso-8859-1?Q?tDrW2MOTigtShYH4FG64sDQBwaX8TC/nnOAQ2MAWdl2SPrPcwThZtYSxFE?=
- =?iso-8859-1?Q?fzv0StRQCZjwylrj1L9xrVBgUg83uduszFw0/wqeneNQIB15K8M/1iwonz?=
- =?iso-8859-1?Q?Lsky2YRvmJ1WskQIBzqNXrR9BBPEdqSyqo80JpI62aF6MbZfIPZMb11txI?=
- =?iso-8859-1?Q?StbaoJBl65BNZz+TMZfbjEUl54gQCi0O6HJ1IZBtrIwmrS2KqrnR4Ni4Pp?=
- =?iso-8859-1?Q?Q12jZuiY/QAbzQXSTDJ97f3m6QxvACJl4KgIQxMGGBBsDCvtO+cJ/NbH5T?=
- =?iso-8859-1?Q?5gWjF7YsVlHqZ+FaJP072VGXGhBTnLd1L0bYk0pJ2w5e4C37gF0X2MN83N?=
- =?iso-8859-1?Q?MqLM0qrgGbt3BF1zDFOR+uDfEMCVITdQAaPBzzrgqRcsAa8ZgSxiGPNIkr?=
- =?iso-8859-1?Q?5KbKs94He4LX596gN4zE78M28zTXo3TnEvU9PKyjRbRI6gBi/vXriZqUCp?=
- =?iso-8859-1?Q?8q2muC8PEcrdgUhB2CxLZ42wBoeMx7wZZ1qk7I5h4ks6gYNxMfDGl1YXNF?=
- =?iso-8859-1?Q?vBerS7rds0Ago0ryxGQWzotrfVwsOvoBOTazt9w42bHaef6xCus4ii8Bds?=
- =?iso-8859-1?Q?WgPiMZquARmPfFn7TuOkrQpst83ME9BWPyzaISF3l4C8WLAkH5GJ+u7M54?=
- =?iso-8859-1?Q?NZ0uu0fdWbZUQF4VBTUwMP6ibPvJadWNZir8tc0EzH56q+/XuRK0BLop8K?=
- =?iso-8859-1?Q?fSQtDe0TDZGxZzmAejQDI5Trwo8+c3PJWb92XwcdEWg3F0pibvWR9+uush?=
- =?iso-8859-1?Q?7guHdIcKmGm+Fr6xtnlIxBFyvvtCxPrWNa/J31/R+x4kYYFEghvR2JSNIF?=
- =?iso-8859-1?Q?KwRfYDOQDdVNPB2q8rhys2YtNySJ1iK4uhhyb5F3MFD5QwCLM6WP/54V3A?=
- =?iso-8859-1?Q?nvW3t0RkD131NR6LWH01YMVeO+ob6G1N2Z1t+G8oAtXfzWVoo94woGq6H4?=
- =?iso-8859-1?Q?hqt4OV0zb0/ETy3Fob1CstbqtKElvRNz7zqxfhYg/pTbVkS+cgqRXu5pdV?=
- =?iso-8859-1?Q?Goq5NB1jQ3VLbIXtxONAc67ACPkNYkcWJ7bfwRpop+/04FTAOZIC7d7HvH?=
- =?iso-8859-1?Q?PJMHfn+Yr5gUgfIlBYgCMl/9Onf/vKHk24yG33YVY9QJwFga6hFuooq3VE?=
- =?iso-8859-1?Q?tIpdnllq8r6iJ4IWaFAaqwla3JOY9LiErF6XGKe7vYeKijNF7LV5pM/Lxw?=
- =?iso-8859-1?Q?Oet9Gvd9xnh1zLL7gIhw6lW8+Bc3bhzoOjPIzZe5pWnqxLh0Hmly6lCrAY?=
- =?iso-8859-1?Q?wgvZn8I48nCDx6buIogWPDsnz0h/fT4/R6q0yKvfU7L52LCgxR07EeKVVB?=
- =?iso-8859-1?Q?MNRXkmeS9hQ/LhiopkBSlxoX0L5lP5Q=3D?=
+ =?iso-8859-1?Q?dM1jVwK8ZmwKNre0Dl1mV3R7PBEtgHUkyJc9bNiWyn/kDrcOruV0fyF0VX?=
+ =?iso-8859-1?Q?XCrtwowgCiQ9j7vPQ61vJLUg4cYkl2/PBR7DMOUHpH43QSLp6Maxt9jTkF?=
+ =?iso-8859-1?Q?stk05itTQoFpQ9A3otf4wiOu3j+GLKg+70r0OYHZsSNRnNDhhxh3bFDWSs?=
+ =?iso-8859-1?Q?Jfq5kE+v4HiaBw8iDRCfG36sveOUx0a+Wm75dMYStABp1s4EUvnzS9K01w?=
+ =?iso-8859-1?Q?3BjIgldLt7K6ZOQTTcZULvIU8+OgRmiLuy7JZa0LoMmsqwfzBaRDsvqBMD?=
+ =?iso-8859-1?Q?ElSfEZlcLGIr4AkMFTO+gP/KpGulGIoQQxvNseiy0N4yOaJuAQ4JOWbMuR?=
+ =?iso-8859-1?Q?s4A4oKPahqQDscaqmGUPBD1AmijD7bsDMYA6b+9iVsS8Lzo4ZztjqhCcmK?=
+ =?iso-8859-1?Q?pyl3U95eNk87rm2/jvP9VnDLpSEaWl00fmPbd+XADp7Msrz3rzGH/YfCX8?=
+ =?iso-8859-1?Q?q3FRt3pfgh/ftmd3M66t/5JozDpdpk8VM/iUN5AIaevW0o1vvQgNS3YMmx?=
+ =?iso-8859-1?Q?12fK8psa1zyFqSU41nD+HcS9KHEGTOP5NAvvDwAf0juw4bWbsn7uiJ0+sy?=
+ =?iso-8859-1?Q?/L3SLnX3MmoQ+tWthy8QsKmZZxYj44jJ6i5YzQxNA/G5UF+qM3+LLHq0AL?=
+ =?iso-8859-1?Q?K0QJ5rQ6cJLCPkrQ1QjNzWofS5hbIp4C/ouHAKI5PsFuMXjMIs5WYkBtz7?=
+ =?iso-8859-1?Q?rqIZlcTcXuZokFb7DWku9wmUEQxnZF/dRCdxLg52nt8ZJQvqXELvXgzd/d?=
+ =?iso-8859-1?Q?UJAMFIqMcRorYICtaUTKRjQjFfmM2JmCT92IlKiWoZkytEqC9BID4muqoc?=
+ =?iso-8859-1?Q?BL1lyGqTvK6623kioMQRIew7L/1dsqjPhwdR67YhmeFx9Y3UMKGSR4d29Y?=
+ =?iso-8859-1?Q?8yKkjP6p36lTkVAdEZVXWkomAe/qzHLLBQcAg9QoiT8K4+R9L0rXiokOx3?=
+ =?iso-8859-1?Q?4gWNsYgFodEXkNsKFhIL++Zvgxf8JVuL1kNQhZirreqAicKm3clRHXca11?=
+ =?iso-8859-1?Q?LGyAKfjWG4rgB01MwxcbBS0iqF2Zr79Eu6r1BcXDOJIUf8MYaZjoCxWA5e?=
+ =?iso-8859-1?Q?tAn0TC5Fvzeq4VeXS66l1DsPVMPDoem0uCRkHGtnRnySdBPgJCXWCU7IJI?=
+ =?iso-8859-1?Q?NxUP0UMgSzdGeBitd67tiRKSfIHJAMHFbNb1Z78/teiqwBnTzu/CgF2vUn?=
+ =?iso-8859-1?Q?wsWKxpEKNt93+bFq7FcslKeIXjMJvdp2O92IN1qyRApkp6Gn2c5X7AmfkB?=
+ =?iso-8859-1?Q?/bLwHMafymaCehp3T29SFCe/wkajQhWsa8i9F9Puk7jiOtHfkVYjT8TDDD?=
+ =?iso-8859-1?Q?kHkKZjEBU4gKpYz/vGgWhqZQg/ITY0em+AVE2zo9cq0C1gt72syl41Tl4B?=
+ =?iso-8859-1?Q?7GLY+CCkHdImZcpoeuX6vxkECDyXACU4BbHXNg8UKzpLGwWmFoG9dVQbRH?=
+ =?iso-8859-1?Q?8wPod83Nz+FOQwHQFOzZT5akMaKC6rAukEMCBwPFKAe+LMj7k6FPXfHhuC?=
+ =?iso-8859-1?Q?5+zpDRPq7G1SOMc/XHhRki82A4UZCXFVgFA86WDE8J6cUueg92SHoxr6qP?=
+ =?iso-8859-1?Q?6thdpajzwhFKZZro2aKydOZtZA/la5K/6qpFmZThIWfEORkaR5PciMAeDu?=
+ =?iso-8859-1?Q?/1MuQsvofc48OnW3GFUE9lBsXIydbIyK/ZR3bd8NajOQ86zoMI1YarV48y?=
+ =?iso-8859-1?Q?CE7qUls0l0rBwDFTLlcGIvvYnvIUdDgtvZpE/BtE3lUh9z6YzFOibpTv/E?=
+ =?iso-8859-1?Q?aQ/tWwRTHYhrY+jd5Rthz0c60cRusHTOGIM3VVWlz/wl04CnqyGvOKxrez?=
+ =?iso-8859-1?Q?wpywg4gjvbTDjRmOa5mh9Vx+M4Kk57c=3D?=
 Content-Type: text/plain; charset="iso-8859-1"
 Content-Transfer-Encoding: quoted-printable
 X-Archived-By: <archiver.kernel.org>
@@ -141,17 +141,17 @@ MIME-Version: 1.0
 X-OriginatorOrg: epam.com
 X-MS-Exchange-CrossTenant-AuthAs: Internal
 X-MS-Exchange-CrossTenant-AuthSource: VE1PR03MB6078.eurprd03.prod.outlook.com
-X-MS-Exchange-CrossTenant-Network-Message-Id: 15ab847a-1b05-42b0-8575-08df3496966d
-X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Oct 2026 01:55:48.3046
+X-MS-Exchange-CrossTenant-Network-Message-Id: d7b37322-cc37-452d-e2d3-08df34990c0e
+X-MS-Exchange-CrossTenant-originalarrivaltime: 28 Oct 2026 02:13:24.6475
  (UTC)
 X-MS-Exchange-CrossTenant-fromentityheader: Hosted
 X-MS-Exchange-CrossTenant-id: b41b72d0-4e9f-4c26-8a69-f949f367c91d
 X-MS-Exchange-CrossTenant-mailboxtype: HOSTED
-X-MS-Exchange-CrossTenant-userprincipalname: 3QklfXAKextq9lh+FZ1/6iSfsgoEHqDuIQnI+b7RpGKEnBuFWHFk2geigGwoztmiQ/Ycvyoz9AMpe11Xsyp+JtItCQQzlShodZPq+O+Eo6c=
-X-MS-Exchange-Transport-CrossTenantHeadersStamped: AS4PR03MB8207
-X-purgate-ID: tlsNG-4011c0/1793152551-5A5DBCFC-ECE06759/0/0
+X-MS-Exchange-CrossTenant-userprincipalname: 4jthMAdr78GO8UYLv++u6FugW8WcJxdsqQvM5xLIU/rpQVVRiMPqwqJ4FazdfPcVPjydLFZCwPVMIJfy0MvpjyzNyZd388As6yKdUfs2tP8=
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DU2PR03MB7925
+X-purgate-ID: tlsNG-16d1c6/1793153611-FEA7477B-25A09298/0/0
 X-purgate-type: clean
-X-purgate-size: 2539
+X-purgate-size: 2663
 X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 	DKIM_VALID,DKIM_VALID_AU,HEADER_FROM_DIFFERENT_DOMAINS,
 	INCLUDES_CR_TRAILER,INCLUDES_PATCH,MAILING_LIST_MULTI,SPF_HELO_PASS,
@@ -160,66 +160,79 @@ X-Spam-Status: No, score=-15.8 required=3.0 tests=BAYES_00,DKIM_SIGNED,
 X-Spam-Checker-Version: SpamAssassin 4.0.1 (2024-03-26) on
 	aws-us-west-2-korg-listserv-alma10-1
 
-Hi Leonid,
+Hello Hirokazu-san,
 
-Leonid Komarianskyi <Leonid_Komarianskyi@epam.com> writes:
+Hirokazu Takahashi <taka@valinux.co.jp> writes:
 
-> arm_smmu_domain_free() releases the VMID without invalidating the SMMU
-> TLB entries tagged with it. The VMID allocator (arm_smmu_bitmap_alloc)
-> always returns the first free VMID, so a new domain usually gets the
-> same VMID as the domain that was just destroyed. As a result, DMA from
-> a device assigned to the new domain can use stale TLB entries and access
-> memory of the old domain, which may already be in use by Xen or by
-> another domain.
->
-> In Linux, this invalidation is done by free_io_pgtable_ops(), which
-> calls the tlb_flush_all callback (arm_smmu_tlb_inv_context()) before
-> the VMID is released. The call was dropped when the io-pgtable code
-> was removed during the port to Xen, and nothing replaced it.
->
-> Linux guests that modify their P2M early in boot (e.g. by mapping
-> shared_info in the xen_guest_init initcall) hide the problem, because
-> the resulting IOTLB flush clears the stale entries. However, guests
-> without Xen support (e.g. Linux with CONFIG_XEN disabled) do not modify
-> the P2M early in boot, so the device keeps using stale SMMU TLB entries.
-> This was observed as GPU rendering corruption after "xl destroy" and "xl
-> create" of the same guest with CONFIG_XEN disabled.
->
-> To fix the problem, issue a TLB invalidation for the VMID before
-> releasing it.
->
-> Fixes: b3be6ffb009c ("xen/arm: smmuv3: Remove Linux specific code that is=
- not usable in XEN")
-> Signed-off-by: Leonid Komarianskyi <leonid_komarianskyi@epam.com>
+> Populate the CPU sibling map only with CPUs that are brought
+> online. Currently, all CPUs in cpu_possible_map are added,
+> which leaves CPUs that failed to boot in the sibling masks and
+> may lead the scheduler to make incorrect decisions.
 
-Reviewed-by: Volodymyr Babchuk <volodymyr_babchuk@epam.com>
+I think that this is a scheduler issue then. A CPU has siblings
+regardless of if they are running or not. Also, your change will affect
+CPU Hotplug functionality, as with your patch sibling mask will change
+in runtime. But partially - only in cpu_up, but not on cpu_down. I am
+not sure that schedulers can handle updates to siblings mask in runtime.
 
+Could you please elaborate how it affects scheduler behaviour right now?
+
+>
+> Fixes: 701190abb3d5 ("xen/arm: Set correct per-cpu cpu_core_mask")
+> Signed-off-by: Hirokazu Takahashi <taka@valinux.co.jp>
 > ---
->  xen/drivers/passthrough/arm/smmu-v3.c | 8 +++++++-
->  1 file changed, 7 insertions(+), 1 deletion(-)
+>  xen/arch/arm/smpboot.c | 18 +++++++++++++++---
+>  1 file changed, 15 insertions(+), 3 deletions(-)
 >
-> diff --git a/xen/drivers/passthrough/arm/smmu-v3.c b/xen/drivers/passthro=
-ugh/arm/smmu-v3.c
-> index bf153227dbd..93176e2fb21 100644
-> --- a/xen/drivers/passthrough/arm/smmu-v3.c
-> +++ b/xen/drivers/passthrough/arm/smmu-v3.c
-> @@ -1153,8 +1153,14 @@ static void arm_smmu_domain_free(struct iommu_doma=
-in *domain)
->  	struct arm_smmu_device *smmu =3D smmu_domain->smmu;
->  	struct arm_smmu_s2_cfg *cfg =3D &smmu_domain->s2_cfg;
+> diff --git a/xen/arch/arm/smpboot.c b/xen/arch/arm/smpboot.c
+> index 8c9072f3c1..2d01896cf0 100644
+> --- a/xen/arch/arm/smpboot.c
+> +++ b/xen/arch/arm/smpboot.c
+> @@ -91,15 +91,24 @@ static int setup_cpu_sibling_map(int cpu)
+>           !zalloc_cpumask_var(&per_cpu(cpu_core_mask, cpu)) )
+>          return -ENOMEM;
 > =20
-> -	if (cfg->vmid)
-> +	if (cfg->vmid) {
-> +		/*
-> +		 * Invalidate all entries tagged with this VMID
-> +		 * before it can be handed to another domain.
-> +		 */
-> +		arm_smmu_tlb_inv_context(smmu_domain);
->  		arm_smmu_bitmap_free(smmu->vmid_map, cfg->vmid);
-> +	}
+> +    return 0;
+> +}
+> +
+> +static void init_cpu_sibling_map(int cpu)
+> +{
+> +    unsigned int sibling;
+> +
+>      /*
+>       * Currently we assume there is no multithread and NUMA, so
+>       * a CPU is a sibling with itself, and the all possible CPUs
+> -     * are supposed to belong to the same socket (NUMA node).
+> +     * are supposed to belong to the same socket.
+>       */
+>      cpumask_set_cpu(cpu, per_cpu(cpu_sibling_mask, cpu));
+> -    cpumask_copy(per_cpu(cpu_core_mask, cpu), &cpu_possible_map);
+> +    cpumask_copy(per_cpu(cpu_core_mask, cpu), &cpu_online_map);
+> +    cpumask_set_cpu(cpu, per_cpu(cpu_core_mask, cpu));
 > =20
->  	xfree(smmu_domain);
+> -    return 0;
+> +    for_each_online_cpu(sibling)
+> +        cpumask_set_cpu(cpu, per_cpu(cpu_core_mask, sibling));
 >  }
+> =20
+>  static void remove_cpu_sibling_map(int cpu)
+> @@ -314,6 +323,7 @@ smp_prepare_cpus(void)
+>      if ( rc )
+>          panic("Unable to allocate CPU sibling/core maps\n");
+> =20
+> +    init_cpu_sibling_map(0);
+>  }
+> =20
+>  /* Boot the current CPU */
+> @@ -385,6 +395,8 @@ void asmlinkage noreturn start_secondary(void)
+> =20
+>      set_current(idle_vcpu[cpuid]);
+> =20
+> +    init_cpu_sibling_map(cpuid);
+> +
+>      /* Run local notifiers */
+>      notify_cpu_starting(cpuid);
+>      /*
 
 --=20
 WBR, Volodymyr=
